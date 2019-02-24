@@ -298,7 +298,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                            value="<?php echo htmlspecialchars($og_image); ?>"
                            style="cursor: pointer" /> <a href="#"
                            onclick="$('#og_image').val('');
-                                   return false;"
+                                       return false;"
                            class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?></a>
 
                 </div>
@@ -407,10 +407,10 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                             echo 'selected';
                         }
                         ?>><?php echo $col; ?></option>
-                    <?php } ?>
+                            <?php } ?>
                 </select> <br /> <br /> <strong><?php
-                translate("order_direction");
-                ?>
+                    translate("order_direction");
+                    ?>
                 </strong> <select name="list_order_direction">
                     <option value="asc"><?php translate("asc"); ?></option>
                     <option value="desc"><?php translate("desc"); ?></option>
@@ -432,7 +432,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                     <option value="null">[<?php translate("none"); ?>]</option>
                     <?php foreach (ModuleHelper::getAllEmbedModules() as $module) { ?>
                         <option value="<?php echo $module; ?>"><?php echo $module; ?></option>
-    <?php } ?>
+                    <?php } ?>
                 </select>
             </div>
 
@@ -446,7 +446,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                     <option value="">[<?php translate("none"); ?>]</option>
                     <?php while ($row = Database::fetchObject($videos)) { ?>
                         <option value="<?php echo $row->id; ?>"><?php Template::escape($row->name); ?> (ID: <?php echo $row->id; ?>)</option>
-    <?php } ?>
+                    <?php } ?>
                 </select>
             </div>
 
@@ -460,7 +460,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                     <option value="">[<?php translate("none"); ?>]</option>
                     <?php while ($row = Database::fetchObject($audios)) { ?>
                         <option value="<?php echo $row->id; ?>"><?php Template::escape($row->name); ?> (ID: <?php echo $row->id; ?>)</option>
-    <?php } ?>
+                    <?php } ?>
                 </select>
             </div>
 
@@ -475,8 +475,8 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                        value="" style="cursor: pointer" /> <a href="#"
                        onclick="$('#menu_image').val('');return false;"
                        class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php
-    translate("clear");
-    ?>
+                           translate("clear");
+                           ?>
                 </a>
             </div>
         </div>
@@ -516,18 +516,20 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                        readonly="readonly" onclick="openArticleImageSelectWindow(this)"
                        value="" style="cursor: pointer" maxlength="255" /> <a href="#"
                        onclick="$('#article_image').val('');
-                               return false;"
+                                   return false;"
                        class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?></a>
             </div>
         </div>
-        <h2 class="accordion-header"><?php translate("comments"); ?></h2>
-        <div class="accordion-content">
-            <strong><?php translate("comments_enabled"); ?></strong> <br /> <select
-                name="comments_enabled">
-                <option value="null" selected>[<?php translate("standard"); ?>]</option>
-                <option value="1"><?php translate("yes"); ?></option>
-                <option value="0"><?php translate("no"); ?></option>
-            </select>
+        <div class="typedep" id="tab-comments">
+            <h2 class="accordion-header"><?php translate("comments"); ?></h2>
+            <div class="accordion-content">
+                <strong><?php translate("comments_enabled"); ?></strong> <br /> <select
+                    name="comments_enabled">
+                    <option value="null" selected>[<?php translate("standard"); ?>]</option>
+                    <option value="1"><?php translate("yes"); ?></option>
+                    <option value="0"><?php translate("no"); ?></option>
+                </select>
+            </div>
         </div>
 
         <h2 class="accordion-header"><?php translate("other"); ?></h2>
@@ -545,18 +547,18 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                     name="theme" size=1>
                     <option value="">
                         [
-                    <?php translate("standard"); ?>
+                        <?php translate("standard"); ?>
                         ]
                     </option>
                     <?php
                     foreach ($allThemes as $th) {
                         ?>
                         <option value="<?php
-                                    echo $th;
-                                    ?>">
-                            <?php
                         echo $th;
-                        ?></option>
+                        ?>">
+                                    <?php
+                                    echo $th;
+                                    ?></option>
                         <?php
                     }
                     ?>
@@ -584,7 +586,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
 
             <div class="typedep" id="custom_data_json">
 
-    <?php do_event("before_custom_data_json"); ?>
+                <?php do_event("before_custom_data_json"); ?>
                 <strong><?php translate("custom_data_json"); ?></strong>
                 <textarea name="custom_data" style="width: 100%; height: 200px;"
                           cols=80 rows=10
@@ -614,14 +616,14 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                 var editor = CKEDITOR.replace('page_content',
                         {
                             skin: '<?php
-            echo Settings::get("ckeditor_skin");
-            ?>'
+        echo Settings::get("ckeditor_skin");
+        ?>'
                         });
                 var editor2 = CKEDITOR.replace('excerpt',
                         {
                             skin: '<?php
-            echo Settings::get("ckeditor_skin");
-            ?>'
+        echo Settings::get("ckeditor_skin");
+        ?>'
                         });
 
 
