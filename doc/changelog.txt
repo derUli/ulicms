@@ -6,6 +6,7 @@ Neue Features:
 * Update von jQuery auf Version 3.3.1
 * Update von Bootstrap auf Version 3.4.1
 * MOTD Formular nutzt jetzt AJAX zum Speichern
+* Das Feld "Custom Data (JSON)" wird nun validiert
 
 Neue API-Methoden:
 * Response::sendHttpStatusCodeResultIfAjax($status = HTTPStatusCode::OK, $redirect = null, $redirectStatus = HttpStatusCode::MOVED_TEMPORARILY)

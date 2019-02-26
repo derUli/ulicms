@@ -27,7 +27,7 @@ if (!file_exists($select2TranslationFile)) {
         $styles = array();
         ?>
         <?php
-        $enq = array("scripts/php.js/strip_tags.js",
+        $scripts = array("scripts/php.js/strip_tags.js",
             "scripts/php.js/htmlspecialchars.js",
             "../node_modules/jquery/dist/jquery.min.js",
             "../node_modules/js-url/url.min.js",
@@ -53,11 +53,11 @@ if (!file_exists($select2TranslationFile)) {
         );
 
         if (is_logged_in()) {
-            $enq[] = "scripts/cookie.js";
+            $scripts[] = "scripts/cookie.js";
         }
         ?>
         <?php
-        foreach ($enq as $script) {
+        foreach ($scripts as $script) {
             enqueueScriptFile($script);
         }
         ?>

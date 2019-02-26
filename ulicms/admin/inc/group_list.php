@@ -72,7 +72,7 @@ if (count($groups) > 0) {
 			</td>
 				<td><a
 					href="<?php echo ModuleHelper::buildActionURL("admins", "admins_filter_group=".$id)?>"><img
-						src="gfx/preview.gif" title="<?php translate("show_users");?>"
+						src="gfx/preview.png" title="<?php translate("show_users");?>"
 						alt="<?php translate("show_users");?>"></a></td>
 				<td><a
 					href="?action=groups&edit=<?php

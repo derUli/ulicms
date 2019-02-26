@@ -896,7 +896,7 @@ if ($permissionChecker->hasPermission("pages")) {
                             <?php do_event("before_custom_data_json"); ?>
                             <strong><?php translate("custom_data_json"); ?></strong><br />
                             <textarea name="custom_data" style="width: 100%; height: 200px;"
-                                      class="codemirror" data-mimetype="application/json"
+                                      class="codemirror" data-mimetype="application/json" data-validate="json"
                                       cols=80 rows=10><?php
                                           echo htmlspecialchars($row->custom_data);
                                           ?></textarea>
