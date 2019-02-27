@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    $.ajaxSetup({cache: false});
 
     // It seems like the autocomplete html attribute
     // is broken in some modern browsers (Chrome)
@@ -7,7 +8,6 @@ $(document).ready(function () {
     setTimeout(function () {
         $("form input[autocomplete], form[autocomplete] input").prop("disabled", false);
     }, 800);
-    $.ajaxSetup({cache: false});
 });
 
 $(function () {
