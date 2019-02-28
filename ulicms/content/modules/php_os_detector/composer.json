@@ -1,0 +1,5 @@
+{
+	"require": {
+		"tivie/php-os-detector": "*"
+	}
+}

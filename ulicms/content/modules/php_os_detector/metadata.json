@@ -1,0 +1,11 @@
+{
+	"version": "1.1.0",
+	"source": "extend",
+	"embed": false,
+	"shy": false,
+	"objects": {
+		"PhpOsDetector" : "vendor/autoload.php"
+	},
+	"manufacturer_name": "Estevão Soares dos Santos",
+	"manufacturer_url": "https://github.com/tivie/php-os-detector"
+}
