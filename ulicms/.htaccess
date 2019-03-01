@@ -51,6 +51,17 @@
 	deny from all
 </files>
 
+# Deny access to composer executable file
+<files composer.json>
+	order allow,deny
+	deny from all
+</files>
+
+# Deny access to composer executable file
+<files package.json>
+	order allow,deny
+	deny from all
+</files>
 
 # Deny access to metadata.json file
 <files metadata.json>
