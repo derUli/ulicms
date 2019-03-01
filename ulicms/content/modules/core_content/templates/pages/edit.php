@@ -163,7 +163,7 @@ if ($permissionChecker->hasPermission("pages")) {
 
                         <div class="typedep menu-stuff">
                             <strong><?php translate("menu"); ?> </strong> <span
-                                style="cursor: help;" onclick="$('div#menu_help').slideToggle()">[?]</span><br />
+                                style="cursor: help;" onclick="$('div#menu_help').slideToggle()"><i class="fa fa-question-circle text-info" aria-hidden="true"></i></span><br />
                             <select name="menu" size=1>
                                 <?php
                                 foreach (getAllMenus() as $menu) {
@@ -190,7 +190,7 @@ if ($permissionChecker->hasPermission("pages")) {
                             </div>
                             <br /> <br /> <strong><?php translate("position"); ?> </strong> <span
                                 style="cursor: help;"
-                                onclick="$('div#position_help').slideToggle()">[?]</span><br /> <input
+                                onclick="$('div#position_help').slideToggle()"><i class="fa fa-question-circle text-info" aria-hidden="true"></i></span><br /> <input
                                 type="number" name="position" required="required" min="0" step="1"
                                 value="<?php
                                 echo $row->position;
@@ -434,7 +434,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                        ?>"
                                        style="cursor: pointer" /> <a href="#"
                                        onclick="$('#og_image').val('');
-                                               return false;"
+                                                           return false;"
                                        class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?>
                                 </a>
                                 <?php
@@ -666,7 +666,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                    value="<?php Template::escape($row->image_url); ?>"
                                    style="cursor: pointer" /> <a href="#"
                                    onclick="$('#menu_image').val('');
-                                           return false;"
+                                                       return false;"
                                    class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?>
                             </a>
                         </div>
@@ -718,7 +718,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                    value="<?php echo real_htmlspecialchars($row->article_image); ?>"
                                    style="cursor: pointer" maxlength="255" /> <a href="#"
                                    onclick="$('#article_image').val('');
-                                           return false;"
+                                                       return false;"
                                    class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?></a>
                         </div>
                     </div>

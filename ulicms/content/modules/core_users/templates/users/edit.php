@@ -164,7 +164,9 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
                 ?>> <label for="admin"><?php
                                          translate("is_admin");
                                          ?> </label> <span style="cursor: help;"
-                               onclick="$('div#is_admin').slideToggle()">[?]</span>
+                               onclick="$('div#is_admin').slideToggle()">
+                    <i class="fa fa-question-circle text-info" aria-hidden="true"></i>
+                </span>
                 <div id="is_admin" class="help" style="display: none">
                     <?php
                     echo nl2br(get_translation("HELP_IS_ADMIN"));

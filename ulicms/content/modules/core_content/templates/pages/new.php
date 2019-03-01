@@ -96,7 +96,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
             <div class="typedep menu-stuff">
                 <strong><?php translate("menu"); ?>
                 </strong> <span style="cursor: help;"
-                                onclick="$('div#menu_help').slideToggle()">[?]</span><br /> <select
+                                onclick="$('div#menu_help').slideToggle()"><i class="fa fa-question-circle text-info" aria-hidden="true"></i></span><br /> <select
                                 name="menu" size=1>
                                     <?php
                                     foreach (getAllMenus() as $menu) {
@@ -113,7 +113,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                 </div>
                 <br /> <br /> <strong><?php translate("position"); ?>
                 </strong> <span style="cursor: help;"
-                                onclick="$('div#position_help').slideToggle()">[?]</span><br /> <input
+                                onclick="$('div#position_help').slideToggle()"><i class="fa fa-question-circle text-info" aria-hidden="true"></i></span><br /> <input
                                 type="number" required="required" name="position" value="0" min="0"
                                 step="1">
                 <div id="position_help" class="help" style="display: none">
