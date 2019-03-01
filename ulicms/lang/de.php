@@ -79,9 +79,6 @@ add_translation("NEW_PASSWORD", "Neues Passwort");
 add_translation("USERGROUP", "Benutzergruppe");
 
 add_translation("ONLY_JPEG", "Nur JPEG-Grafiken werden akzeptiert.");
-add_translation("NOTIFY_ON_LOGIN", "Benachrichtige mich per E-Mail,<br/>
-wenn sich jemand mit meinem Benutzerkonto<br/>
-anmeldet");
 
 add_translation("ABOUT_ME", "Über Mich");
 

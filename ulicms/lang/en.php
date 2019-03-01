@@ -78,8 +78,6 @@ add_translation("NEW_PASSWORD", "New Password");
 add_translation("USERGROUP", "Usergroup");
 
 add_translation("ONLY_JPEG", "Only JPEG images accepted.");
-add_translation("NOTIFY_ON_LOGIN", "Notify me by E-Mail,<br/>
-if somebody login to my account");
 
 add_translation("ABOUT_ME", "About me");
 

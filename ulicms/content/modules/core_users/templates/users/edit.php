@@ -45,13 +45,13 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
                    ?>"> <br /> <strong><?php translate("firstname"); ?></strong><br />
             <input type="text" name="admin_firstname"
                    value="<?php
-           echo real_htmlspecialchars($row->firstname);
+                   echo real_htmlspecialchars($row->firstname);
                    ?>"
                    required="required"><br /> <strong><?php translate("email"); ?></strong><br />
             <input type="email" name="admin_email"
                    value="<?php
-           echo real_htmlspecialchars($row->email);
-           ?>"><br /> <strong><?php translate("last_login"); ?></strong><br />
+                   echo real_htmlspecialchars($row->email);
+                   ?>"><br /> <strong><?php translate("last_login"); ?></strong><br />
                    <?php
                    if (is_null($row->last_login)) {
                        translate("never");
@@ -63,36 +63,36 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
                    value="" autocomplete="off"><br /> <strong><?php translate("password_repeat"); ?></strong><br />
             <input type="password" name="admin_password_repeat"
                    id="admin_password_repeat" value="" autocomplete="off"> <br />
-        <?php
-        $permissionChecker = new ACL();
-        if ($permissionChecker->hasPermission("users")) {
-            $allGroups = $permissionChecker->getAllGroups();
-            asort($allGroups);
-            ?> <strong><?php translate("primary_group"); ?></strong> <br />
+                   <?php
+                   $permissionChecker = new ACL();
+                   if ($permissionChecker->hasPermission("users")) {
+                       $allGroups = $permissionChecker->getAllGroups();
+                       asort($allGroups);
+                       ?> <strong><?php translate("primary_group"); ?></strong> <br />
                 <select name="group_id">
                     <option value="-"
-                       <?php
-                if ($row->group_id === null) {
-                    echo "selected";
-                }
-                ?>>[<?php translate("none"); ?>]</option>
                     <?php
-                    foreach ($allGroups as $key => $value) {
-                        ?>
+                    if ($row->group_id === null) {
+                        echo "selected";
+                    }
+                    ?>>[<?php translate("none"); ?>]</option>
+                            <?php
+                            foreach ($allGroups as $key => $value) {
+                                ?>
                         <option
                             value="<?php
-                                echo $key;
-                                ?>"
-                                <?php
-                                if (intval($row->group_id) == $key) {
-                                    echo "selected";
-                                }
-                                ?>>
-                            <?php echo real_htmlspecialchars($value) ?>
-                        </option>
+                            echo $key;
+                            ?>"
                             <?php
-                        }
-                        ?>
+                            if (intval($row->group_id) == $key) {
+                                echo "selected";
+                            }
+                            ?>>
+                                <?php echo real_htmlspecialchars($value) ?>
+                        </option>
+                        <?php
+                    }
+                    ?>
                 </select> <br /> <br /> <strong><?php translate("secondary_groups"); ?></strong>
                 <br /> <select name="secondary_groups[]" multiple>
 
@@ -101,112 +101,105 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
                         ?>
                         <option
                             value="<?php
-                echo $key;
-                ?>"
-                        <?php
-                        echo in_array($key, $secondaryGroupIds) ? "selected" : "";
-                        ?>>
-                        <?php echo real_htmlspecialchars($value) ?>
-                        </option>
+                            echo $key;
+                            ?>"
                             <?php
-                        }
-                        ?>
+                            echo in_array($key, $secondaryGroupIds) ? "selected" : "";
+                            ?>>
+                                <?php echo real_htmlspecialchars($value) ?>
+                        </option>
+                        <?php
+                    }
+                    ?>
                 </select> <br /> <br />
                 <!-- Legacy Rechtesystem -->
                 <input type="hidden" name="admin_rechte"
                        value="<?php
-                        echo $row->group;
-                        ?>">
-                            <?php
-                        } else {
-                            ?>
+                       echo $row->group;
+                       ?>">
+                       <?php
+                   } else {
+                       ?>
                 <input type="hidden" name="admin_rechte"
                        value="<?php echo $row->group ?>"> <input type="hidden"
                        name="group_id"
                        value="<?php
-            if (!$_SESSION["group_id"]) {
-                echo "-";
-            } else {
-                echo $_SESSION["group_id"];
-            }
-                            ?>">
+                       if (!$_SESSION["group_id"]) {
+                           echo "-";
+                       } else {
+                           echo $_SESSION["group_id"];
+                       }
+                       ?>">
                        <?php
                    }
                    ?>
             <strong><?php
-                   translate("homepage");
-                   ?></strong> <br /> <input type="url" name="homepage"
+                translate("homepage");
+                ?></strong> <br /> <input type="url" name="homepage"
                                     value="<?php echo real_htmlspecialchars($row->homepage); ?>"> <br />
             <strong><?php translate("html_editor"); ?></strong> <br /> <select
                 name="html_editor">
                 <option value="ckeditor"
-                   <?php if (!$row->html_editor or $row->html_editor == "ckeditor") echo "selected" ?>>CKEditor</option>
+                        <?php if (!$row->html_editor or $row->html_editor == "ckeditor") echo "selected" ?>>CKEditor</option>
                 <option value="codemirror"
-                   <?php if ($row->html_editor == "codemirror") echo "selected" ?>>CodeMirror</option>
-            </select> <br /> <br /> <input type="checkbox" id="notify_on_login"
-                                           name="notify_on_login"
-                <?php
-                if ($row->notify_on_login) {
-                    echo "checked='checked'";
-                }
-                ?>><strong> <label for="notify_on_login"><?php translate("NOTIFY_ON_LOGIN"); ?></label>
-            </strong> <br /> <br /> <input type="checkbox" value="1"
-        <?php
-        if ($row->require_password_change) {
-            echo "checked";
-        }
-        ?>
+                        <?php if ($row->html_editor == "codemirror") echo "selected" ?>>CodeMirror</option>
+            </select> <br /> <br /> <input type="checkbox" value="1"
+            <?php
+            if ($row->require_password_change) {
+                echo "checked";
+            }
+            ?>
                                            name="require_password_change" id="require_password_change"> <label
                                            for="require_password_change"><?php
-                                           translate("REQUIRE_PASSWORD_CHANGE_ON_NEXT_LOGIN");
-                                           ?> </label>
-                                           <?php
-                                           if ($permissionChecker->hasPermission("users")) {
-                                               ?>
+                                               translate("REQUIRE_PASSWORD_CHANGE_ON_NEXT_LOGIN");
+                                               ?> </label>
+            <?php
+            if ($permissionChecker->hasPermission("users")) {
+                ?>
                 <br /> <br /> <input type="checkbox" value="1" name="admin" id="admin"
                 <?php
                 if ($row->admin) {
                     echo "checked";
                 }
                 ?>> <label for="admin"><?php
-                translate("is_admin");
-                ?> </label> <span style="cursor: help;"
+                                         translate("is_admin");
+                                         ?> </label> <span style="cursor: help;"
                                onclick="$('div#is_admin').slideToggle()">[?]</span>
                 <div id="is_admin" class="help" style="display: none">
-                                                   <?php
+                    <?php
                     echo nl2br(get_translation("HELP_IS_ADMIN"));
                     ?>
                 </div>
 
                 <br /> <br /> <input type="checkbox" value="1" name="locked"
                                      id="locked"
+                                     <?php
+                                     if ($row->locked) {
+                                         echo "checked";
+                                     }
+                                     ?>> <label for="locked"><?php
+                                         translate("locked");
+                                         ?> </label>
                 <?php
+            } else {
+                echo '<input type="hidden" name="admin" value="' . $row->admin . '">';
                 if ($row->locked) {
-                    echo "checked";
+                    echo '<input type="hidden" name="locked" value="' . $row->locked . '">';
                 }
-                ?>> <label for="locked"><?php
-                                     translate("locked");
-                                     ?> </label>
-                                         <?php
-                } else {
-                    echo '<input type="hidden" name="admin" value="' . $row->admin . '">';
-                    if ($row->locked) {
-                        echo '<input type="hidden" name="locked" value="' . $row->locked . '">';
-                    }
-                }
-                ?>
+            }
+            ?>
             <br /> <br /> <strong><?php translate("default_language"); ?></strong><br />
             <select name="default_language">
                 <option value="" <?php if (!$row->default_language) echo " selected"; ?>>[<?php translate("standard"); ?>]</option>
-                                 <?php
-                                 for ($i = 0; $i < count($languages); $i ++) {
-                                     if ($row->default_language == $languages[$i]) {
-                                         echo '<option value="' . $languages[$i] . '" selected>' . getLanguageNameByCode($languages[$i]) . '</option>';
-                                     } else {
-                                         echo '<option value="' . $languages[$i] . '">' . getLanguageNameByCode($languages[$i]) . '</option>';
-                                     }
-                                 }
-                                 ?>
+                <?php
+                for ($i = 0; $i < count($languages); $i ++) {
+                    if ($row->default_language == $languages[$i]) {
+                        echo '<option value="' . $languages[$i] . '" selected>' . getLanguageNameByCode($languages[$i]) . '</option>';
+                    } else {
+                        echo '<option value="' . $languages[$i] . '">' . getLanguageNameByCode($languages[$i]) . '</option>';
+                    }
+                }
+                ?>
             </select> <br /> <br /> <strong><?php translate("about_me"); ?></strong><br />
             <textarea rows=10 cols=50 name="about_me"><?php echo htmlspecialchars($row->about_me) ?></textarea>
             <br />
@@ -214,11 +207,11 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
                 <i class="fa fa-save"></i> <?php translate("OK"); ?></button>
         </form>
 
-            <?php
-            break;
-        }
-        ?>
-            <?php
-        } else {
-            noPerms();
-        }
+        <?php
+        break;
+    }
+    ?>
+    <?php
+} else {
+    noPerms();
+}

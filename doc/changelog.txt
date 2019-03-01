@@ -32,6 +32,9 @@ Entfernte Features:
   * XSS-Schutz
   Es ist geplant, für die Anwender, die diese Einstellungen benötigen, ein optionales Modul zu veröffentlichen, welches die entfernten Optionen wieder zum System hinzufügt.
 * Social Media Felder aus den Userprofilen entfernt
+* Die User-bezogene Option "Benachrichtige mich per E-Mail,
+wenn sich jemand mit meinem Benutzerkonto
+anmeldet" wurde entfernt
 
 ===== Neues in UliCMS 2019.2 =====
 

@@ -16,7 +16,6 @@ class User {
     private $group_id = null;
     private $secondary_groups = array();
     private $group = null;
-    private $notify_on_login = false;
     private $html_editor = "ckeditor";
     private $require_password_change = false;
     private $admin = false;
@@ -81,9 +80,9 @@ class User {
 
     protected function insert() {
         $sql = "insert into {prefix}users (username, lastname, firstname, email, password,
-				old_encryption, about_me, group_id, notify_on_login, html_editor,
+				old_encryption, about_me, group_id, html_editor,
 				require_password_change, admin, password_changed, locked, last_login,
-				homepage, default_language) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				homepage, default_language) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         $args = array(
             $this->username,
             $this->lastname,
@@ -93,7 +92,6 @@ class User {
             $this->old_encryption,
             $this->about_me,
             $this->group_id,
-            $this->notify_on_login,
             $this->html_editor,
             $this->require_password_change,
             $this->admin,
@@ -109,7 +107,7 @@ class User {
 
     protected function update() {
         $sql = "update {prefix}users set username = ?, lastname = ?, firstname = ?, email = ?, password = ?,
-				old_encryption = ?, about_me = ?, group_id = ?, notify_on_login = ?, html_editor = ?,
+				old_encryption = ?, about_me = ?, group_id = ?, html_editor = ?,
 				require_password_change = ?, admin = ?, password_changed = ?, locked = ?, last_login = ?,
 				homepage = ?, default_language = ? where id = ?";
         $args = array(
@@ -121,7 +119,6 @@ class User {
             $this->old_encryption,
             $this->about_me,
             $this->group_id,
-            $this->notify_on_login,
             $this->html_editor,
             $this->require_password_change,
             $this->admin,
@@ -288,14 +285,6 @@ class User {
 
     public function setGroup($group) {
         $this->setPrimaryGroup($group);
-    }
-
-    public function getNotifyOnLogin() {
-        return boolval($this->notify_on_login);
-    }
-
-    public function setNotifyOnLogin($val) {
-        $this->notify_on_login = boolval($val);
     }
 
     public function getHTMLEditor() {
