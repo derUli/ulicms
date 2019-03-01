@@ -1,6 +1,7 @@
 ===== Neues in UliCMS 2019.2.1 =====
 Neue Features:
 * Performance Verbesserungen im Backend durchgeführt
+* Checkboxen werden nun mit Switchery dargestellt
 * minify_html ist nun per default eingeschalten.
 * Das Feld "Menü als Grafik" wird nun ausgeblendet, wenn man "Nicht im Menü" auswählt.
 * Update von jQuery auf Version 3.3.1
