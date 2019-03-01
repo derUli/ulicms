@@ -31,6 +31,7 @@ Entfernte Features:
   * Erlauben diese Webseite in andere Sites einzubinden
   * XSS-Schutz
   Es ist geplant, für die Anwender, die diese Einstellungen benötigen, ein optionales Modul zu veröffentlichen, welches die entfernten Optionen wieder zum System hinzufügt.
+* Social Media Felder aus den Userprofilen entfernt
 
 ===== Neues in UliCMS 2019.2 =====
 

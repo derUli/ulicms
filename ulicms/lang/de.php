@@ -1,4 +1,5 @@
 <?php
+
 // Dashboard (Willkommen)
 define("LOADED_LANGUAGE_FILE", "de");
 add_translation("MOTD", "Nachricht des Tages");
@@ -76,7 +77,7 @@ add_translation("FIRSTNAME", "Vorname");
 add_translation("EMAIL", "E-Mail");
 add_translation("NEW_PASSWORD", "Neues Passwort");
 add_translation("USERGROUP", "Benutzergruppe");
-add_translation("SKYPE", "Skype");
+
 add_translation("ONLY_JPEG", "Nur JPEG-Grafiken werden akzeptiert.");
 add_translation("NOTIFY_ON_LOGIN", "Benachrichtige mich per E-Mail,<br/>
 wenn sich jemand mit meinem Benutzerkonto<br/>
@@ -385,7 +386,6 @@ add_translation("INSTALL_PATCHES", "Patches installieren");
 add_translation("THERE_ARE_PATCHES_AVAILABLE", "Patches sind verfügbar");
 
 // Hilfetexte
-
 // Videos
 add_translation("VIDEOS", "Videos");
 add_translation("UPLOAD_VIDEO", "Video hochladen");
@@ -573,7 +573,6 @@ add_translation("VISIBILITY", "Sichtbarkeit");
 add_translation("PAGE", "Seite");
 
 // Neue Profilfelder
-add_translation("TWITTER_PROFILE", "Twitter Profil (twitter.com/<u>xxx</u>)");
 add_translation("HOMEPAGE", "Homepage");
 
 add_translation("CLONE", "Klonen");

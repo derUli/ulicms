@@ -1,63 +1,38 @@
 <?php
+
 use UliCMS\Exceptions\NotImplementedException;
 use UliCMS\Security\PermissionChecker;
 
-class User
-{
+class User {
 
     private $id = null;
-
     private $username = null;
-
     private $lastname = "";
-
     private $firstname = "";
-
     private $email = "";
-
     private $password = "";
-
     private $old_encryption = false;
-
-    private $skype_id = "";
-
     private $about_me = "";
-
     private $group_id = null;
-
     private $secondary_groups = array();
-
     private $group = null;
-
     private $notify_on_login = false;
-
     private $html_editor = "ckeditor";
-
     private $require_password_change = false;
-
     private $admin = false;
-
     private $password_changed = null;
-
     private $locked = false;
-
     private $last_login = null;
-
-    private $twitter = "";
-
     private $homepage = "";
-
     private $default_language = null;
 
-    public function __construct($id = null)
-    {
+    public function __construct($id = null) {
         if ($id) {
             $this->loadById($id);
         }
     }
 
-    public function loadById($id)
-    {
+    public function loadById($id) {
         $sql = "select * from {prefix}users where id = ?";
         $args = array(
             intval($id)
@@ -66,8 +41,7 @@ class User
         $this->fillVars($query);
     }
 
-    public function loadByUsername($name)
-    {
+    public function loadByUsername($name) {
         $sql = "select * from {prefix}users where username = ?";
         $args = array(
             strval($name)
@@ -76,8 +50,7 @@ class User
         $this->fillVars($query);
     }
 
-    public function save()
-    {
+    public function save() {
         if ($this->id) {
             $this->update();
         } else {
@@ -86,8 +59,7 @@ class User
         $this->saveGroups();
     }
 
-    public function fillVars($query)
-    {
+    public function fillVars($query) {
         if (Database::any($query)) {
             $result = Database::fetchAssoc($query);
             foreach ($result as $key => $value) {
@@ -95,7 +67,7 @@ class User
                     $this->$key = $value;
                 }
             }
-            if (! is_null($this->group_id)) {
+            if (!is_null($this->group_id)) {
                 $this->group = new Group($this->group_id);
             } else {
                 $this->group = null;
@@ -107,12 +79,11 @@ class User
         }
     }
 
-    protected function insert()
-    {
+    protected function insert() {
         $sql = "insert into {prefix}users (username, lastname, firstname, email, password,
-				old_encryption, skype_id, about_me, group_id, notify_on_login, html_editor, 
-				require_password_change, admin, password_changed, locked, last_login, 
-				twitter, homepage, default_language) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				old_encryption, about_me, group_id, notify_on_login, html_editor,
+				require_password_change, admin, password_changed, locked, last_login,
+				homepage, default_language) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         $args = array(
             $this->username,
             $this->lastname,
@@ -120,7 +91,6 @@ class User
             $this->email,
             $this->password,
             $this->old_encryption,
-            $this->skype_id,
             $this->about_me,
             $this->group_id,
             $this->notify_on_login,
@@ -130,7 +100,6 @@ class User
             $this->password_changed,
             $this->locked,
             $this->last_login,
-            $this->twitter,
             $this->homepage,
             $this->default_language
         );
@@ -138,12 +107,11 @@ class User
         $this->id = Database::getLastInsertID();
     }
 
-    protected function update()
-    {
+    protected function update() {
         $sql = "update {prefix}users set username = ?, lastname = ?, firstname = ?, email = ?, password = ?,
-				old_encryption = ?, skype_id = ?, about_me = ?, group_id = ?, notify_on_login = ?, html_editor = ?,
+				old_encryption = ?, about_me = ?, group_id = ?, notify_on_login = ?, html_editor = ?,
 				require_password_change = ?, admin = ?, password_changed = ?, locked = ?, last_login = ?,
-				twitter = ?, homepage = ?, default_language = ? where id = ?";
+				homepage = ?, default_language = ? where id = ?";
         $args = array(
             $this->username,
             $this->lastname,
@@ -151,7 +119,6 @@ class User
             $this->email,
             $this->password,
             $this->old_encryption,
-            $this->skype_id,
             $this->about_me,
             $this->group_id,
             $this->notify_on_login,
@@ -161,7 +128,6 @@ class User
             $this->password_changed,
             $this->locked,
             $this->last_login,
-            $this->twitter,
             $this->homepage,
             $this->default_language,
             $this->id
@@ -169,58 +135,47 @@ class User
         Database::pQuery($sql, $args, true) or die(Database::getError());
     }
 
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
-    public function setId($id)
-    {
-        $this->id = ! is_null($id) ? intval($id) : null;
+    public function setId($id) {
+        $this->id = !is_null($id) ? intval($id) : null;
     }
 
-    public function getUsername()
-    {
+    public function getUsername() {
         return $this->username;
     }
 
-    public function setUsername($username)
-    {
-        $this->username = ! is_null($username) ? strval($username) : null;
+    public function setUsername($username) {
+        $this->username = !is_null($username) ? strval($username) : null;
     }
 
-    public function getLastname()
-    {
+    public function getLastname() {
         return $this->lastname;
     }
 
-    public function setLastname($lastname)
-    {
-        $this->lastname = ! is_null($lastname) ? strval($lastname) : null;
+    public function setLastname($lastname) {
+        $this->lastname = !is_null($lastname) ? strval($lastname) : null;
     }
 
-    public function getFirstname()
-    {
+    public function getFirstname() {
         return $this->firstname;
     }
 
-    public function setFirstname($firstname)
-    {
-        $this->firstname = ! is_null($firstname) ? strval($firstname) : null;
+    public function setFirstname($firstname) {
+        $this->firstname = !is_null($firstname) ? strval($firstname) : null;
     }
 
-    public function getEmail()
-    {
+    public function getEmail() {
         return $this->email;
     }
 
-    public function setEmail($email)
-    {
-        $this->email = ! is_null($email) ? strval($email) : null;
+    public function setEmail($email) {
+        $this->email = !is_null($email) ? strval($email) : null;
     }
 
-    public function delete()
-    {
+    public function delete() {
         if (is_null($this->id)) {
             return false;
         }
@@ -235,65 +190,46 @@ class User
         return $result;
     }
 
-    public function getPassword()
-    {
+    public function getPassword() {
         return $this->password;
     }
 
-    public function setPassword($password)
-    {
+    public function setPassword($password) {
         $this->password = Encryption::hashPassword($password);
         $this->old_encryption = false;
         $this->password_changed = date("Y-m-d H:i:s");
     }
 
-    public function getPasswordChanged()
-    {
+    public function getPasswordChanged() {
         return $this->password_changed;
     }
 
-    public function resetPassword()
-    {
+    public function resetPassword() {
         $passwordReset = new PasswordReset();
         $token = $passwordReset->addToken($this->getId());
         $passwordReset->sendMail($token, $this->getEmail(), "xxx.xxx.xxx.xxx", $this->getFirstname(), $this->getLastname());
     }
 
-    public function getOldEncryption()
-    {
+    public function getOldEncryption() {
         return $this->old_encryption;
     }
 
-    public function setOldEncryption($value)
-    {
+    public function setOldEncryption($value) {
         $this->old_encryption = boolval($value);
     }
 
-    public function getSkypeId()
-    {
-        return $this->skype_id;
-    }
-
-    public function setSkypeId($skype_id)
-    {
-        $this->skype_id = ! is_null($skype_id) ? strval($skype_id) : null;
-    }
-
-    public function getAboutMe()
-    {
+    public function getAboutMe() {
         return $this->about_me;
     }
 
-    public function setAboutMe($text)
-    {
-        $this->about_me = ! is_null($text) ? strval($text) : null;
+    public function setAboutMe($text) {
+        $this->about_me = !is_null($text) ? strval($text) : null;
     }
 
-    public function getLastAction()
-    {
+    public function getLastAction() {
         $result = 0;
-        if (! is_null($this->id)) {
-            
+        if (!is_null($this->id)) {
+
             $sql = "select last_action from {prefix}users where id = ?";
             $args = array(
                 $this->id
@@ -307,8 +243,7 @@ class User
         return $result;
     }
 
-    public function setLastAction($time)
-    {
+    public function setLastAction($time) {
         if (is_null($this->id)) {
             return;
         }
@@ -321,120 +256,99 @@ class User
         Database::pQuery($sql, $args, true);
     }
 
-    public function getGroupId()
-    {
+    public function getGroupId() {
         return $this->getPrimaryGroupId();
     }
 
-    public function getPrimaryGroupId()
-    {
+    public function getPrimaryGroupId() {
         return $this->group_id;
     }
 
-    public function setPrimaryGroupId($gid)
-    {
-        $this->group_id = ! is_null($gid) ? $gid : null;
-        $this->group = ! is_null($gid) ? new Group($gid) : null;
+    public function setPrimaryGroupId($gid) {
+        $this->group_id = !is_null($gid) ? $gid : null;
+        $this->group = !is_null($gid) ? new Group($gid) : null;
     }
 
-    public function setGroupid($gid)
-    {
+    public function setGroupid($gid) {
         $this->setPrimaryGroupId($gid);
     }
 
-    public function getPrimaryGroup()
-    {
+    public function getPrimaryGroup() {
         return $this->group;
     }
 
-    public function getGroup()
-    {
+    public function getGroup() {
         return $this->getPrimaryGroup();
     }
 
-    public function setPrimaryGroup($group)
-    {
+    public function setPrimaryGroup($group) {
         $this->group = $group;
-        $this->group_id = ! is_null($group) ? $group->getId() : null;
+        $this->group_id = !is_null($group) ? $group->getId() : null;
     }
 
-    public function setGroup($group)
-    {
+    public function setGroup($group) {
         $this->setPrimaryGroup($group);
     }
 
-    public function getNotifyOnLogin()
-    {
+    public function getNotifyOnLogin() {
         return boolval($this->notify_on_login);
     }
 
-    public function setNotifyOnLogin($val)
-    {
+    public function setNotifyOnLogin($val) {
         $this->notify_on_login = boolval($val);
     }
 
-    public function getHTMLEditor()
-    {
+    public function getHTMLEditor() {
         return $this->html_editor;
     }
 
-    public function setHTMLEditor($editor)
-    {
+    public function setHTMLEditor($editor) {
         $allowedEditors = array(
             "ckeditor",
             "codemirror"
         );
-        if (! faster_in_array($editor, $allowedEditors)) {
+        if (!faster_in_array($editor, $allowedEditors)) {
             $editor = "ckeditor";
         }
         $this->html_editor = $editor;
     }
 
-    public function getRequirePasswordChange()
-    {
+    public function getRequirePasswordChange() {
         return boolval($this->require_password_change);
     }
 
-    public function setRequirePasswordChange($val)
-    {
+    public function setRequirePasswordChange($val) {
         $this->require_password_change = boolval($val);
     }
 
-    public function getAdmin()
-    {
+    public function getAdmin() {
         return boolval($this->admin);
     }
 
-    public function setAdmin($val)
-    {
+    public function setAdmin($val) {
         $this->admin = boolval($val);
     }
 
-    public function getLocked()
-    {
+    public function getLocked() {
         return boolval($this->locked);
     }
 
-    public function setLocked($val)
-    {
+    public function setLocked($val) {
         $this->locked = boolval($val);
     }
 
-    public function getLastLogin()
-    {
+    public function getLastLogin() {
         return $this->last_login;
     }
 
-    public function setLastLogin($val)
-    {
-        $this->last_login = ! is_null($val) ? intval($val) : null;
+    public function setLastLogin($val) {
+        $this->last_login = !is_null($val) ? intval($val) : null;
     }
 
-    public function getFailedLogins()
-    {
+    public function getFailedLogins() {
         $result = 0;
-        if (! is_null($this->id)) {
-            
+        if (!is_null($this->id)) {
+
             $sql = "select failed_logins from {prefix}users where id = ?";
             $args = array(
                 $this->id
@@ -448,8 +362,7 @@ class User
         return $result;
     }
 
-    public function increaseFailedLogins()
-    {
+    public function increaseFailedLogins() {
         if (is_null($this->id)) {
             return;
         }
@@ -461,8 +374,7 @@ class User
         Database::pQuery($sql, $args, true);
     }
 
-    public function resetFailedLogins()
-    {
+    public function resetFailedLogins() {
         if (is_null($this->id)) {
             return;
         }
@@ -475,8 +387,7 @@ class User
         Database::pQuery($sql, $args, true);
     }
 
-    public function setFailedLogins($amount)
-    {
+    public function setFailedLogins($amount) {
         if (is_null($this->id)) {
             return;
         }
@@ -489,63 +400,43 @@ class User
         Database::pQuery($sql, $args, true);
     }
 
-    public function getTwitter()
-    {
-        return $this->twitter;
-    }
-
-    public function setTwitter($val)
-    {
-        $this->twitter = strval($val);
-    }
-
-    public function getHomepage()
-    {
+    public function getHomepage() {
         return $this->homepage;
     }
 
-    public function setHomepage($val)
-    {
+    public function setHomepage($val) {
         $this->homepage = strval($val);
     }
 
-    public function getDefaultLanguage()
-    {
+    public function getDefaultLanguage() {
         return $this->default_language;
     }
 
-    public function setDefaultLanguage($val)
-    {
+    public function setDefaultLanguage($val) {
         $this->default_language = StringHelper::isNotNullOrWhitespace($val) ? strval($val) : null;
     }
 
-    public function getAvatar()
-    {
+    public function getAvatar() {
         return ModuleHelper::getBaseUrl("/admin/gfx/no_avatar.png");
     }
 
-    public function setAvatar()
-    {
+    public function setAvatar() {
         throw new NotImplementedException("Avatar feature is not implemented yet.");
     }
 
-    public function getSecondaryGroups()
-    {
+    public function getSecondaryGroups() {
         return $this->secondary_groups;
     }
 
-    public function setSecondaryGroups($val)
-    {
+    public function setSecondaryGroups($val) {
         $this->secondary_groups = $val;
     }
 
-    public function addSecondaryGroup($val)
-    {
+    public function addSecondaryGroup($val) {
         $this->secondary_groups[] = $val;
     }
 
-    public function removeSecondaryGroup($val)
-    {
+    public function removeSecondaryGroup($val) {
         $filtered = array();
         foreach ($this->secondary_groups as $group) {
             if ($group->getID() != $val->getID()) {
@@ -555,18 +446,15 @@ class User
         return $filtered;
     }
 
-    public function getPermissionChecker()
-    {
+    public function getPermissionChecker() {
         return new PermissionChecker($this->getId());
     }
 
-    public function hasPermission($permission)
-    {
+    public function hasPermission($permission) {
         return $this->getPermissionChecker()->hasPermission($permission);
     }
 
-    private function loadGroups($user_id)
-    {
+    private function loadGroups($user_id) {
         $groups = array();
         $sql = "select `group_id` from `{prefix}user_groups` where user_id = ?";
         $args = array(
@@ -579,19 +467,19 @@ class User
         $this->setSecondaryGroups($groups);
     }
 
-    private function saveGroups()
-    {
+    private function saveGroups() {
         Database::pQuery("delete from {prefix}user_groups where user_id = ?", array(
             $this->getId()
-        ), true);
+                ), true);
         foreach ($this->secondary_groups as $group) {
-            Database::pQuery("insert into {prefix}user_groups 
+            Database::pQuery("insert into {prefix}user_groups
                               (user_id, group_id)
                               VALUES
                               (?,?)", array(
                 $this->getID(),
                 $group->getID()
-            ), true);
+                    ), true);
         }
     }
+
 }

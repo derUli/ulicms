@@ -1,4 +1,5 @@
 <?php
+
 define("LOADED_LANGUAGE_FILE", "en");
 // Dashboard (Willkommen)
 add_translation("MOTD", "Message of the Day");
@@ -75,7 +76,7 @@ add_translation("FIRSTNAME", "First Name");
 add_translation("EMAIL", "E-Mail");
 add_translation("NEW_PASSWORD", "New Password");
 add_translation("USERGROUP", "Usergroup");
-add_translation("SKYPE", "Skype");
+
 add_translation("ONLY_JPEG", "Only JPEG images accepted.");
 add_translation("NOTIFY_ON_LOGIN", "Notify me by E-Mail,<br/>
 if somebody login to my account");
@@ -576,7 +577,6 @@ add_translation("VISIBILITY", "Visibility");
 add_translation("PAGE", "Page");
 
 // Neue Profilfelder
-add_translation("TWITTER_PROFILE", "Twitter Profile (twitter.com/<u>xxx</u>)");
 add_translation("HOMEPAGE", "Homepage");
 
 add_translation("CLONE", "Clone");
