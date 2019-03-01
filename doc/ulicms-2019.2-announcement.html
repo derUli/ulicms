@@ -1,90 +1,89 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>UliCMS 2019.2 with improved User Interface</title>
-    <style type="text/css">
-      body {
-        background-color: white;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI Emoji",
-          "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue",
-          sans-serif;
-        font-size: medium;
-        color: rgb(50, 50, 50);
-        margin: 0;
-        padding: 20px;
-      }
+    <head>
+        <meta charset="UTF-8" />
+        <title>UliCMS 2019.2 with improved User Interface</title>
+        <style type="text/css">
+            body {
+                background-color: white;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI Emoji",
+                    "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue",
+                    sans-serif;
+                font-size: medium;
+                color: rgb(50, 50, 50);
+                margin: 0;
+                padding: 20px;
+            }
 
-      li {
-        margin-bottom: 20px;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>UliCMS 2019.2 with improved User Interface</h1>
-    <p>
-      The second quarter of 2019 UliCMS release focuses on usability and
-      security improvements. An additional new value for developers is the new
-      *.scss compiler which is fully integrated into the stylesheet queue API.
-    </p>
-    <h2>Look and Feel & Usability</h2>
-    <p>
-      Backend buttons nove have icons. Menus were added to backend pages with
-      subpages (e.g. on all subpages of "Contents".
-    </p>
-    <p>Users and groups were grouped under one menu item.</p>
-    <p>
-      The "packages" backend page got a full redesign. Die neugestaltete
-      Paketverwaltung enthält die selben Features wie das alte User Interface.
-      Zusätzlich ist es nun möglich Module im Backend zu aktivieren und zu
-      deaktivieren. Zusätzlich können Module nun aktiviert und deaktiviert
-      werden. Dies war vorher nur mit dem Modul
-      <a href="https://extend.ulicms.de/cleanup.html">cleanup</a> oder direkt in
-      der Datenbank möglich. Es ist in diesem Release möglich, auf die alte
-      Ansicht der "Pakete" Seite zu wechseln. Die alte Ansicht wird in einem
-      zukünftigen Release entfernt werden.
-    </p>
-    <p>
-      The option "hide logo" is now located at the "Logo" settings page. In
-      previous releases that option was located at the "General Settings" page.
-    </p>
-    <p>
-      If a user is not permitted to use the user interface of a module, the
-      button is now disabled and a lock icon is shown right to the button with
-      the menu name.
-    </p>
+            li {
+                margin-bottom: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>UliCMS 2019.2 with improved User Interface</h1>
+        <p>
+            The second quarter of 2019 UliCMS release focuses on usability and
+            security improvements. An additional new value for developers is the new
+            *.scss compiler which is fully integrated into the stylesheet queue API.
+        </p>
+        <h2>Look and Feel & Usability</h2>
+        <p>
+            Backend buttons nove have icons. Menus were added to backend pages with
+            subpages (e.g. on all subpages of "Contents".
+        </p>
+        <p>Users and groups were grouped under one menu item.</p>
+        <p>
+            The "packages" backend page got a full redesign. The redesigned UI has all
+            features of the previous UI.
+            Additionally there is a button to enable and disable modules.
+            Dies war vorher nur mit dem Modul
+            <a href="https://extend.ulicms.de/cleanup.html">cleanup</a> oder direkt in
+            der Datenbank möglich. Es ist in diesem Release möglich, auf die alte
+            Ansicht der "Pakete" Seite zu wechseln. Die alte Ansicht wird in einem
+            zukünftigen Release entfernt werden.
+        </p>
+        <p>
+            The option "hide logo" is now located at the "Logo" settings page. In
+            previous releases that option was located at the "General Settings" page.
+        </p>
+        <p>
+            If a user is not permitted to use the user interface of a module, the
+            button is now disabled and a lock icon is shown right to the button with
+            the menu name.
+        </p>
 
-    <h2>New Security and Antispam Features</h2>
-    <p>
-      Die Optionen "XSS-Schutz" und "Erlauben diese Webseite in andere Sites
-      einzubinden" zur Steuerung von sicherheitsrelevanten HTTP-Headern wurden
-      hinzugefügt.
-    </p>
-    <p>
-      The option "Disallow RTL-Languages" were added to the anti-spam settings.
-      If this option is enabled comments which are containing arabic, persian or
-      hebrew chars are rejected.
-    </p>
+        <h2>New Security and Antispam Features</h2>
+        <p>
+            Die Optionen "XSS-Schutz" und "Erlauben diese Webseite in andere Sites
+            einzubinden" zur Steuerung von sicherheitsrelevanten HTTP-Headern wurden
+            hinzugefügt.
+        </p>
+        <p>
+            The option "Disallow RTL-Languages" were added to the anti-spam settings.
+            If this option is enabled comments which are containing arabic, persian or
+            hebrew chars are rejected.
+        </p>
 
-    <h2>Developer Features</h2>
-    <p>
-      A <a href="http://leafo.github.io/scssphp/">SCSS compiler</a> was added to
-      the core. The stylesheet queue now supports *.scss files.
-    </p>
-    <p>
-      The textarea "Custom Data (JSON)" now uses the CodeMirror code editor.
-    </p>
-    <h2>Additional New Features</h2>
-    <p></p>
-    <p>
-      UliCMS now supports multiple configuration environments. The configuration
-      environment can be switched by setting the ULICMS_ENVIRONMENT environment
-      var. The default value for ULICMS_ENVIRONMENT is "default".
-    </p>
-    <p>You can now enable and disable forms and advertisement banners.</p>
-    <p>
-      The period in which an advertisement banner is displayed can now be
-      limited.
-    </p>
-  </body>
+        <h2>Developer Features</h2>
+        <p>
+            A <a href="http://leafo.github.io/scssphp/">SCSS compiler</a> was added to
+            the core. The stylesheet queue now supports *.scss files.
+        </p>
+        <p>
+            The textarea "Custom Data (JSON)" now uses the CodeMirror code editor.
+        </p>
+        <h2>Additional New Features</h2>
+        <p></p>
+        <p>
+            UliCMS now supports multiple configuration environments. The configuration
+            environment can be switched by setting the ULICMS_ENVIRONMENT environment
+            var. The default value for ULICMS_ENVIRONMENT is "default".
+        </p>
+        <p>You can now enable and disable forms and advertisement banners.</p>
+        <p>
+            The period in which an advertisement banner is displayed can now be
+            limited.
+        </p>
+    </body>
 </html>
