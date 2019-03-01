@@ -1,4 +1,5 @@
 <?php
+
 namespace UliCMS\Data\Content;
 
 use Database;
@@ -12,31 +13,22 @@ use UliCMS\Security\SpamChecker\SpamFilterConfiguration;
 use UliCMS\Security\SpamChecker\CommentSpamChecker;
 
 // TODO: Comment public static functions
-class Comment extends Model
-{
+class Comment extends Model {
 
     private $content_id;
-
     private $author_name;
-
     private $author_email;
-
     private $author_url;
-
     private $date;
-
     private $text;
-
     private $status = CommentStatus::DEFAULT_STATUS;
-
     private $ip;
-
     private $useragent;
+    private $read = false;
 
     const TABLE_NAME = "comments";
 
-    public function loadByID($id)
-    {
+    public function loadByID($id) {
         $query = Database::selectAll("comments", array(), "id=" . intval($id));
         if ($query == null or ! Database::any($query)) {
             throw new FileNotFoundException("no comment with id " . intval($id));
@@ -44,8 +36,7 @@ class Comment extends Model
         $this->fillVars($query);
     }
 
-    public function fillVars($query = null)
-    {
+    public function fillVars($query = null) {
         $data = Database::fetchObject($query);
         $this->setID($data->id);
         $this->setContentId($data->content_id);
@@ -57,31 +48,34 @@ class Comment extends Model
         $this->setStatus($data->status);
         $this->setIp($data->ip);
         $this->setUserAgent($data->useragent);
+        $this->setRead($data->read);
     }
 
-    protected function insert()
-    {
-        if (! $this->getDate()) {
+    protected function insert() {
+        if (!$this->getDate()) {
             $this->date = time();
         }
-        Database::pQuery("INSERT INTO `{prefix}comments` 
-            (`content_id`, 
-             `author_name`, 
-             `author_email`, 
-             `author_url`, 
-             `date`, 
-             `text`, 
-             `status`, 
-             `ip`, 
-             `useragent`) 
-VALUES      ( ?, 
-              ?, 
-              ?, 
-              ?, 
-              FROM_UNIXTIME(?), 
-              ?, 
-              ?, 
-              ?, 
+        Database::pQuery("INSERT INTO `{prefix}comments`
+            (`content_id`,
+             `author_name`,
+             `author_email`,
+             `author_url`,
+             `date`,
+             `text`,
+             `status`,
+             `ip`,
+             `useragent`,
+             `read`
+             )
+VALUES      ( ?,
+              ?,
+              ?,
+              ?,
+              FROM_UNIXTIME(?),
+              ?,
+              ?,
+              ?,
+              ?,
               ?) ", array(
             $this->getContentId(),
             $this->getAuthorName(),
@@ -91,14 +85,14 @@ VALUES      ( ?,
             $this->getText(),
             $this->getStatus(),
             $this->getIp(),
-            $this->getUseragent()
-        ), true);
+            $this->getUseragent(),
+            $this->isRead()
+                ), true);
         $this->setID(Database::getLastInsertID());
     }
 
-    protected function update()
-    {
-        if (! $this->getDate()) {
+    protected function update() {
+        if (!$this->getDate()) {
             $this->date = time();
         }
         Database::pQuery("UPDATE `{prefix}comments` set
@@ -110,7 +104,8 @@ VALUES      ( ?,
                          `text` = ?,
                          `status` = ?,
                          `ip` = ?,
-                         `useragent` = ?
+                         `useragent` = ?,
+                         `read` = ?
                           where id = ?", array(
             $this->getContentId(),
             $this->getAuthorName(),
@@ -121,12 +116,12 @@ VALUES      ( ?,
             $this->getStatus(),
             $this->getIp(),
             $this->getUseragent(),
+            $this->isRead(),
             $this->getID()
-        ), true);
+                ), true);
     }
 
-    public function delete()
-    {
+    public function delete() {
         Database::deleteFrom("comments", "id = " . $this->getID());
         $this->setID(null);
     }
@@ -136,8 +131,7 @@ VALUES      ( ?,
     // of SpamDetectionResults
     // if the comment contains no spam the function
     // returns null
-    public function isSpam()
-    {
+    public function isSpam() {
         $configuration = SpamFilterConfiguration::fromSettings();
         $checker = new CommentSpamChecker($this, $configuration);
         $result = null;
@@ -147,125 +141,104 @@ VALUES      ( ?,
         return $result;
     }
 
-    public function getContentId()
-    {
+    public function getContentId() {
         return $this->content_id;
     }
 
-    public function setContentId($val)
-    {
-        if (! is_numeric($val)) {
+    public function setContentId($val) {
+        if (!is_numeric($val)) {
             throw new InvalidArgumentException("$val is not a number");
         }
         $this->content_id = intval($val);
     }
 
-    public function getAuthorName()
-    {
+    public function getAuthorName() {
         return $this->author_name;
     }
 
-    public function setAuthorName($val)
-    {
-        if (! is_string($val)) {
+    public function setAuthorName($val) {
+        if (!is_string($val)) {
             throw new InvalidArgumentException("$val is not a string");
         }
         $this->author_name = StringHelper::isNotNullOrWhitespace($val) ? strval($val) : null;
     }
 
-    public function getAuthorEmail()
-    {
+    public function getAuthorEmail() {
         return $this->author_email;
     }
 
-    public function setAuthorEmail($val)
-    {
+    public function setAuthorEmail($val) {
         $this->author_email = StringHelper::isNotNullOrWhitespace($val) ? strval($val) : null;
     }
 
-    public function getAuthorUrl()
-    {
+    public function getAuthorUrl() {
         return $this->author_url;
     }
 
-    public function setAuthorUrl($val)
-    {
+    public function setAuthorUrl($val) {
         $this->author_url = is_url($val) ? strval($val) : null;
     }
 
-    public function getDate()
-    {
+    public function getDate() {
         return $this->date;
     }
 
-    public function setDate($val)
-    {
+    public function setDate($val) {
         if (is_string($val)) {
             $val = strtotime($val);
-        } else if (! is_numeric($val)) {
+        } else if (!is_numeric($val)) {
             throw new InvalidArgumentException("$val is not an integer timestamp");
         }
         $this->date = intval($val);
     }
 
-    public function getText()
-    {
+    public function getText() {
         return $this->text;
     }
 
-    public function setText($val)
-    {
+    public function setText($val) {
         $this->text = StringHelper::isNotNullOrWhitespace($val) ? strval($val) : null;
     }
 
-    public function getStatus()
-    {
+    public function getStatus() {
         return $this->status;
     }
 
-    public function setStatus($val)
-    {
-        if (! is_string($val)) {
+    public function setStatus($val) {
+        if (!is_string($val)) {
             throw new InvalidArgumentException("$val is not a status string");
         }
         $this->status = $val;
     }
 
-    public function getIp()
-    {
+    public function getIp() {
         return $this->ip;
     }
 
-    public function setIp($val)
-    {
+    public function setIp($val) {
         $this->ip = StringHelper::isNotNullOrWhitespace($val) ? strval($val) : null;
     }
 
-    public function getUserAgent()
-    {
+    public function getUserAgent() {
         return $this->useragent;
     }
 
-    public function setUserAgent($val)
-    {
+    public function setUserAgent($val) {
         $this->useragent = StringHelper::isNotNullOrWhitespace($val) ? strval($val) : null;
     }
 
-    public function getContent()
-    {
-        if (! $this->getContentId()) {
+    public function getContent() {
+        if (!$this->getContentId()) {
             return null;
         }
         return ContentFactory::getByID($this->getContentId());
     }
 
-    public static function getAllByContentId($content_id, $order_by = "date desc")
-    {
+    public static function getAllByContentId($content_id, $order_by = "date desc") {
         return self::getAllDatasets(self::TABLE_NAME, self::class, $order_by, "content_id = " . intval($content_id));
     }
 
-    public static function getAllByStatus($status, $content_id = null, $order = "date desc")
-    {
+    public static function getAllByStatus($status, $content_id = null, $order = "date desc") {
         $where = "status = '" . Database::escapeValue($status) . "'";
         if ($content_id) {
             $where .= " and content_id = " . intval($content_id);
@@ -273,13 +246,18 @@ VALUES      ( ?,
         return self::getAllDatasets(self::TABLE_NAME, self::class, $order, $where);
     }
 
-    public static function getAll($order = "id desc")
-    {
+    public static function getAll($order = "id desc") {
         return self::getAllDatasets(self::TABLE_NAME, self::class, $order);
     }
 
-    public static function deleteIpsAfter48Hours($keepSpamIps = false)
-    {
+    public static function getUnreadCount() {
+        $query = Database::pQuery("select count(id) as amount from {prefix}comments where `read` = ?",
+                        array(false), true);
+        $result = Database::fetchObject($query);
+        return $result->amount;
+    }
+
+    public static function deleteIpsAfter48Hours($keepSpamIps = false) {
         $sql = "update {prefix}comments set ip = null WHERE date < FROM_UNIXTIME(UNIX_TIMESTAMP(NOW() - INTERVAL 2 DAY)) and ip is not null";
         if ($keepSpamIps) {
             $sql .= " and status <> 'spam'";
@@ -288,8 +266,7 @@ VALUES      ( ?,
         return Database::getAffectedRows();
     }
 
-    public static function checkIfCommentWithIpExists($ip, $status = CommentStatus::SPAM)
-    {
+    public static function checkIfCommentWithIpExists($ip, $status = CommentStatus::SPAM) {
         $sql = "select ip from {prefix}comments where ip = ?";
         $args = array(
             strval($ip)
@@ -301,4 +278,13 @@ VALUES      ( ?,
         $query = Database::pQuery($sql, $args, true);
         return Database::any($query);
     }
+
+    public function isRead() {
+        return boolval($this->read);
+    }
+
+    public function setRead($val) {
+        $this->read = boolval($val);
+    }
+
 }
