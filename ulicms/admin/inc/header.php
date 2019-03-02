@@ -45,6 +45,7 @@ if (!file_exists($select2TranslationFile)) {
             "scripts/global.js",
             "../node_modules/bootstrap/dist/js/bootstrap.min.js",
             "../node_modules/select2/dist/js/select2.min.js",
+            "../node_modules/switchery/standalone/switchery.js",
             "../node_modules/bootbox/bootbox.min.js",
             $select2TranslationFile,
             "scripts/datatables/datatables.min.js",
@@ -73,6 +74,8 @@ if (!file_exists($select2TranslationFile)) {
         $styles[] = "../node_modules/codemirror-minified/lib/codemirror.css";
         $styles[] = "css/modern.scss";
         $styles[] = "../node_modules/select2/dist/css/select2.min.css";
+        $styles[] = "../node_modules/switchery/standalone/switchery.css";
+
         $styles[] = "../node_modules/jquery-datetimepicker/build/jquery.datetimepicker.min.css";
 
         foreach ($styles as $style) {
