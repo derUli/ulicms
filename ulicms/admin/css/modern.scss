@@ -596,6 +596,12 @@ h2.accordion-header {
 }
 #menu-clear-cache {
     cursor: pointer;
+    display: inline-block;
+    width: 37.5px;
+}
+#menu-clear-cache-loading{
+    display: inline-block;
+    width: 37.5px;
 }
 h1 {
     margin-bottom: 20px;
@@ -898,7 +904,7 @@ pre {
         color: white;
         z-index:2;
         border-radius: 5px;
-        padding:0px 5px;
-        font-size:0.4em;
+        padding: 0 6px;
+        font-size: 0.35em;
     }
 }

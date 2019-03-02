@@ -138,10 +138,7 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
                         <div class="row pull-right top-right-icons">
                             <div class="col-xs-4">
                                 <a href="#" id="menu-clear-cache"
-                                   data-url="<?php echo ModuleHelper::buildMethodCallUrl("PerformanceSettingsController", "clearCache", "clear_cache=1"); ?>">
-                                    <i class="fas fa-broom"></i>
-                                </a> <a href="#" id="menu-clear-cache-loading"
-                                        style="display: none;"><i class="fa fa-spinner fa-spin"></i></a>
+                                   data-url="<?php echo ModuleHelper::buildMethodCallUrl("PerformanceSettingsController", "clearCache", "clear_cache=1"); ?>"><i class="fas fa-broom"></i></a><a href="#" id="menu-clear-cache-loading" style="display: none;"><i class="fa fa-spinner fa-spin"></i></a>
                             </div>
                             <?php
                             if ($permissionChecker->hasPermission("comments_manage")) {
