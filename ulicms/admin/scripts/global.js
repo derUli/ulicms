@@ -13,7 +13,7 @@ $(document).ready(function () {
 
 $(function () {
 
-    var Switchery = require('switchery');
+    /* var Switchery = require('switchery'); */
     var language = $("html").data("select2-language");
 
     // toggle hamburger menu
@@ -72,12 +72,14 @@ $(function () {
         width: '100%',
         language: $("html").data("select2-language")
     });
+	/* 
     $("input[type=checkbox]").each(function (i, element) {
         new Switchery(element,
                 {
                     color: '#335599'
                 });
-    });
+    }); 
+	*/
     $.datetimepicker.setLocale(language);
 
     $(".datepicker").datetimepicker({
