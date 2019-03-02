@@ -12,6 +12,7 @@ wenn man "Nicht im Menü" auswählt
 
 Neue API-Methoden:
 * Response::sendHttpStatusCodeResultIfAjax($status = HTTPStatusCode::OK, $redirect = null, $redirectStatus = HttpStatusCode::MOVED_TEMPORARILY)
+* Response::redirectToAction($action, $controller = null, $status = HttpStatusCode::MOVED_TEMPORARILY)
 
 Verbesserungen:
 * Die Funktion "Neues Logo hochladen" befindet sich nun in den Design-Einstellungen
