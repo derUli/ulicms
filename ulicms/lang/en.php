@@ -734,4 +734,7 @@ add_translation("required_php_extensions", "Required php extensions");
 
 add_translation("secondary_groups", "Secondary Groups");
 
+add_translation("on", "On");
+add_translation("off", "Off");
+
 do_event("lang_en");

@@ -12,7 +12,7 @@ $(document).ready(function () {
 });
 
 $(function () {
-
+    var language = $("html").data("select2-language")
     // toggle hamburger menu
     $("#menu-toggle").click(function () {
         $(".mainmenu").slideToggle();
@@ -67,7 +67,11 @@ $(function () {
     // prettier select-boxes
     $("select").select2({
         width: '100%',
-        language: $("html").data("select2-language")
+        language: language
+    });
+    $('input[type=checkbox]').bootstrapToggle({
+        on: MenuTranslation.On,
+        off: MenuTranslation.Off
     });
 
     $.datetimepicker.setLocale(language);
