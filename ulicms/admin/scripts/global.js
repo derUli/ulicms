@@ -40,7 +40,11 @@ $(function () {
     $(".tablesorter").DataTable({
         language: {
             url: $("body").data("datatables-translation")
-        }
+        },
+        columnDefs: [
+            {targets: 'no-sort', orderable: false}
+        ]
+
     });
     $(".coming-soon").click(function (event) {
         event.preventDefault();

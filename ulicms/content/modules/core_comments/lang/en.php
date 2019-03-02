@@ -1,4 +1,5 @@
 <?php
+
 add_translation("comment_contains_badword", "The field \"%field%\" contains the not allowed word \"%word%\".");
 add_translation("comment_text", "Comment Text");
 add_translation("useragent", "User Agent");
@@ -34,3 +35,6 @@ add_translation("publish", "Publish");
 add_translation("unpublish", "Unpublish");
 
 add_translation("do_action", "Do Action");
+
+add_translation("mark_as_read", "Mark as read");
+add_translation("mark_as_unread", "Mark as unread");

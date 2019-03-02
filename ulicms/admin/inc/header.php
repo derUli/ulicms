@@ -1,4 +1,7 @@
 <?php
+
+use UliCMS\Data\Content\Comment;
+
 $admin_logo = Settings::get("admin_logo");
 if (!$admin_logo) {
     $admin_logo = "gfx/logo.png";
@@ -11,6 +14,8 @@ if (!file_exists($select2TranslationFile)) {
     $select2TranslationFile = "../node_modules/select2/dist/js/i18n/en.js";
     $select2Language = "en";
 }
+
+$permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
 ?>
 <!DOCTYPE html>
 <html data-select2-language="<?php esc($select2Language) ?>">
@@ -65,33 +70,32 @@ if (!file_exists($select2TranslationFile)) {
         <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
 
         <?php combinedScriptHtml(); ?>
-        <link rel="stylesheet" type="text/css"
-              href="scripts/vallenato/vallenato.css" />
 
         <?php include "inc/touch_icons.php"; ?>
-        <?php
-        $styles[] = "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-        $styles[] = "../node_modules/codemirror-minified/lib/codemirror.css";
-        $styles[] = "css/modern.scss";
-        $styles[] = "../node_modules/select2/dist/css/select2.min.css";
-        $styles[] = "../node_modules/switchery/standalone/switchery.css";
-
-        $styles[] = "../node_modules/jquery-datetimepicker/build/jquery.datetimepicker.min.css";
-
-        foreach ($styles as $style) {
-            enqueueStylesheet($style);
-        }
-
-        combinedStylesheetHtml();
-        ?>
-        <?php
-        do_event("admin_head");
-        ?>
+        <link rel="stylesheet" type="text/css"
+              href="scripts/vallenato/vallenato.css" />
 
         <link rel="stylesheet" type="text/css"
               href="scripts/datatables/datatables.min.css" />
         <link rel="stylesheet"
               href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" />
+              <?php
+              $styles[] = "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+              $styles[] = "../node_modules/codemirror-minified/lib/codemirror.css";
+              $styles[] = "css/modern.scss";
+              $styles[] = "../node_modules/select2/dist/css/select2.min.css";
+              $styles[] = "../node_modules/jquery-datetimepicker/build/jquery.datetimepicker.min.css";
+
+              foreach ($styles as $style) {
+                  enqueueStylesheet($style);
+              }
+
+              combinedStylesheetHtml();
+              ?>
+              <?php
+              do_event("admin_head");
+              ?>
+
     </head>
     <?php
     do_event("before_backend_header");
@@ -123,24 +127,38 @@ if (!file_exists($select2TranslationFile)) {
             ?>">
 
             <div class="row">
-                <div class="col-xs-8">
+                <div class="col-xs-7">
                     <a href="../" title="<?php translate("goto_frontend"); ?>"><img
                             src="<?php Template::escape($admin_logo); ?>" alt="UliCMS"
                             class="ulicms-logo"></a>
                 </div>
-                <div class="col-xs-4 menu-container">
+                <div class="col-xs-5 menu-container">
                     <?php
                     if (is_logged_in()) {
                         ?>
                         <div class="row pull-right top-right-icons">
-                            <div class="col-xs-6">
+                            <div class="col-xs-4">
                                 <a href="#" id="menu-clear-cache"
-                                   data-url="<?php echo ModuleHelper::buildMethodCallUrl("PerformanceSettingsController", "clearCache", "clear_cache=1"); ?>">
-                                    <i class="fas fa-broom"></i>
-                                </a> <a href="#" id="menu-clear-cache-loading"
-                                        style="display: none;"><i class="fa fa-spinner fa-spin"></i></a>
+                                   data-url="<?php echo ModuleHelper::buildMethodCallUrl("PerformanceSettingsController", "clearCache", "clear_cache=1"); ?>"><i class="fas fa-broom"></i></a><a href="#" id="menu-clear-cache-loading" style="display: none;"><i class="fa fa-spinner fa-spin"></i></a>
                             </div>
-                            <div class="col-xs-6">
+                            <?php
+                            if ($permissionChecker->hasPermission("comments_manage")) {
+                                $count = Comment::getUnreadCount();
+                                ?>
+                                <div class="col-xs-4">
+                                    <div class="comment-counter">
+                                        <a href="<?php echo ModuleHelper::buildActionURL("comments_manage"); ?>"><i class="fa fa-comments"></i>
+                                            <?php
+                                            if ($count) {
+                                                ?>
+                                                <div class = "count" data-count = "<?php echo $count ?>">
+                                                    <?php echo $count; ?>
+                                                </div>
+                                            <?php } ?></a>
+                                    </div>
+                                </div>
+                            <?php } ?>
+                            <div class="col-xs-4">
                                 <a id="menu-toggle"><i class="fa fa-bars"></i> </a>
                             </div>
                         </div>

@@ -18,6 +18,13 @@ class Response {
         exit();
     }
 
+    public static function redirectToAction($action, $controller = null, $status = HttpStatusCode::MOVED_TEMPORARILY) {
+        if (is_null($controller)) {
+            Response::redirect(ModuleHelper::buildActionURL($action), $status);
+        }
+        Response::redirect(ModuleHelper::buildMethodCallUrl($controller, $action), $status);
+    }
+
     public static function javascriptRedirect($url = "http://www.ulicms.de") {
         echo "<script type=\"text/javascript\">location.replace(\"$url\");</script>";
         echo "<noscript><p>" . get_translation("jsredirect_noscript", array(

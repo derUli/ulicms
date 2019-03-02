@@ -3,7 +3,9 @@ Neue Features:
 * Performance Verbesserungen im Backend durchgeführt
 * Checkboxen werden nun mit Switchery dargestellt
 * minify_html ist nun per default eingeschalten.
-* Das Feld "Menü als Grafik" wird nun ausgeblendet, wenn man "Nicht im Menü" auswählt.
+* Das Feld "Menü als Grafik" wird nun ausgeblendet,
+wenn man "Nicht im Menü" auswählt
+* Kommentar Icon mit Anzahl der neuen Kommentare hinzugefügt
 * Update von jQuery auf Version 3.3.1
 * Update von Bootstrap auf Version 3.4.1
 * MOTD Formular nutzt jetzt AJAX zum Speichern
@@ -11,6 +13,7 @@ Neue Features:
 
 Neue API-Methoden:
 * Response::sendHttpStatusCodeResultIfAjax($status = HTTPStatusCode::OK, $redirect = null, $redirectStatus = HttpStatusCode::MOVED_TEMPORARILY)
+* Response::redirectToAction($action, $controller = null, $status = HttpStatusCode::MOVED_TEMPORARILY)
 
 Verbesserungen:
 * Die Funktion "Neues Logo hochladen" befindet sich nun in den Design-Einstellungen

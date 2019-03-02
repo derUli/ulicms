@@ -1,30 +1,27 @@
 <?php
 
-class ActionRegistry
-{
+use UliCMS\Exceptions\FileNotFoundException;
+
+class ActionRegistry {
 
     private static $assignedControllers = array();
-
     private static $defaultCoreActions = array(
-        "groups" => "inc/groups.php",        "available_modules" => "inc/available_modules.php",
+        "groups" => "inc/groups.php", "available_modules" => "inc/available_modules.php",
         "module_settings" => "inc/module_settings.php"
     );
-
     private static $actionPermissions = array();
 
-    public static function getDefaultCoreActions()
-    {
+    public static function getDefaultCoreActions() {
         return self::$defaultCoreActions;
     }
 
-    public static function loadModuleActions()
-    {
-        if (! defined("KCFINDER_PAGE")) {
+    public static function loadModuleActions() {
+        if (!defined("KCFINDER_PAGE")) {
             global $actions;
             $coreActions = self::getDefaultCoreActions();
             foreach ($coreActions as $action => $file) {
                 $path = $file;
-                if (! endsWith($path, ".php")) {
+                if (!endsWith($path, ".php")) {
                     $path .= ".php";
                 }
                 if (is_file($path)) {
@@ -41,12 +38,14 @@ class ActionRegistry
                 if ($cActions) {
                     foreach ($cActions as $key => $value) {
                         $path = getModulePath($module, true) . trim($value, "/");
-                        if (! endsWith($path, ".php")) {
+                        if (!endsWith($path, ".php")) {
                             $path .= ".php";
                         }
-                        
+
                         if (is_file($path)) {
                             $actions[$key] = $path;
+                        } else {
+                            throw new FileNotFoundException("Module {$module}: File '{$path}' not found.");
                         }
                     }
                 }
@@ -56,8 +55,7 @@ class ActionRegistry
         }
     }
 
-    private static function loadActionPermissions()
-    {
+    private static function loadActionPermissions() {
         $modules = getAllModules();
         $disabledModules = Vars::get("disabledModules");
         foreach ($modules as $module) {
@@ -73,8 +71,7 @@ class ActionRegistry
         }
     }
 
-    public static function getActionPermission($action)
-    {
+    public static function getActionPermission($action) {
         $permission = null;
         if (isset(self::$actionPermissions[$action]) and is_string(self::$actionPermissions[$action])) {
             $permission = self::$actionPermissions[$action];
@@ -82,8 +79,7 @@ class ActionRegistry
         return $permission;
     }
 
-    public static function loadModuleActionAssignment()
-    {
+    public static function loadModuleActionAssignment() {
         $modules = getAllModules();
         foreach ($modules as $module) {
             $action_controllers = getModuleMeta($module, "action_controllers");
@@ -95,13 +91,11 @@ class ActionRegistry
         }
     }
 
-    public static function assignControllerToAction($action, $controller)
-    {
+    public static function assignControllerToAction($action, $controller) {
         self::$assignedControllers[$action] = $controller;
     }
 
-    public static function getController()
-    {
+    public static function getController() {
         $action = get_action();
         if ($action and isset(self::$assignedControllers[$action])) {
             return ControllerRegistry::get(self::$assignedControllers[$action]);
@@ -109,4 +103,5 @@ class ActionRegistry
             return null;
         }
     }
+
 }
