@@ -1,15 +1,14 @@
 <?php
 
-class ControllerRegistry
-{
+use UliCMS\Exceptions\FileNotFoundException;
+
+class ControllerRegistry {
 
     private static $controllers = array();
-
     private static $controller_function_permissions = array();
 
-    public static function loadModuleControllers()
-    {
-        if (! defined("KCFINDER_PAGE")) {
+    public static function loadModuleControllers() {
+        if (!defined("KCFINDER_PAGE")) {
             $controllerRegistry = array();
             $modules = getAllModules();
             $disabledModules = Vars::get("disabledModules");
@@ -21,13 +20,13 @@ class ControllerRegistry
                 if ($controllers) {
                     foreach ($controllers as $key => $value) {
                         $path = getModulePath($module, true) . trim($value, "/");
-                        if (! endsWith($path, ".php")) {
+                        if (!endsWith($path, ".php")) {
                             $path .= ".php";
                         }
                         $controllerRegistry[$key] = $path;
                     }
                 }
-                
+
                 $controller_function_permissions = getModuleMeta($module, "controller_function_permissions");
                 if ($controller_function_permissions) {
                     foreach ($controller_function_permissions as $key => $value) {
@@ -36,7 +35,11 @@ class ControllerRegistry
                 }
             }
             foreach ($controllerRegistry as $key => $value) {
-                include $value;
+                if (file_exists($value)) {
+                    include $value;
+                } else {
+                    throw new FileNotFoundException("Module {$module}: File '{$path}' not found.");
+                }
                 if (class_exists($key)) {
                     $classInstance = new $key();
                     if ($classInstance instanceof Controller) {
@@ -47,22 +50,20 @@ class ControllerRegistry
         }
     }
 
-    public static function runMethods()
-    {
+    public static function runMethods() {
         if (isset($_REQUEST["sClass"]) and StringHelper::isNotNullOrEmpty($_REQUEST["sClass"])) {
             if (self::get($_REQUEST["sClass"])) {
                 $sClass = $_REQUEST["sClass"];
                 self::get($sClass)->runCommand();
             } else {
-                
+
                 $sClass = $_REQUEST["sClass"];
                 throw new BadMethodCallException("class " . htmlspecialchars($sClass) . " not found");
             }
         }
     }
 
-    public static function get($class = null)
-    {
+    public static function get($class = null) {
         if ($class == null and get_action()) {
             return ActionRegistry::getController();
         } else if (isset(self::$controllers[$class])) {
@@ -73,8 +74,7 @@ class ControllerRegistry
     }
 
     // check if user is permitted to call controller method $sMethod in Class $sClass
-    public static function userCanCall($sClass, $sMethod)
-    {
+    public static function userCanCall($sClass, $sMethod) {
         $allowed = true;
         $acl = new ACL();
         if (isset(self::$controller_function_permissions[$sClass . "::" . $sMethod]) and StringHelper::isNotNullOrWhitespace(self::$controller_function_permissions[$sClass . "::" . $sMethod])) {
@@ -82,4 +82,5 @@ class ControllerRegistry
         }
         return $allowed;
     }
+
 }
