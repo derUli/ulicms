@@ -126,12 +126,12 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
             ?>">
 
             <div class="row">
-                <div class="col-xs-8">
+                <div class="col-xs-7">
                     <a href="../" title="<?php translate("goto_frontend"); ?>"><img
                             src="<?php Template::escape($admin_logo); ?>" alt="UliCMS"
                             class="ulicms-logo"></a>
                 </div>
-                <div class="col-xs-4 menu-container">
+                <div class="col-xs-5 menu-container">
                     <?php
                     if (is_logged_in()) {
                         ?>
