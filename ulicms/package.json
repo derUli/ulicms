@@ -10,8 +10,7 @@
         "jquery-form": "4.x",
         "js-url": "^2.3.0",
         "jscolor-picker": "2.x",
-        "select2": "^4.0.6-rc.1",
-        "switchery": "0.0.2"
+        "select2": "^4.0.6-rc.1"
     },
     "license": "The BSD License",
     "private": true
