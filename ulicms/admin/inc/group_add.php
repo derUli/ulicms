@@ -38,10 +38,11 @@ $languages = Language::getAllLanguages();
 
         <?php foreach ($languages as $lang) { ?>
             <div class="checkbox">
-                <input type="checkbox" name="restrict_edit_access_language[]"
-                       value="<?php echo $lang->getID(); ?>"
-                       id="lang-<?php echo $lang->getID(); ?>">
-                <?php Template::escape($lang->getName()); ?></label>
+                <label>
+                    <input type="checkbox" name="restrict_edit_access_language[]"
+                           value="<?php echo $lang->getID(); ?>"
+                           id="lang-<?php echo $lang->getID(); ?>">
+                    <?php Template::escape($lang->getName()); ?></label>
             </div>
         <?php } ?>
     </fieldset>
@@ -54,10 +55,6 @@ $languages = Language::getAllLanguages();
             <i class="fa fa-save"></i> <?php translate("create_group"); ?></button>
     </p>
 </form>
-<script type="text/javascript">
-    $(function () {
-        $('.checkall').on('click', function () {
-            $(this).closest('fieldset').find(':checkbox').prop('checked', this.checked);
-        });
-    });
-</script>
+<?php
+enqueueScriptFile("scripts/group.js");
+combinedScriptHtml();

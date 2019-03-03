@@ -644,6 +644,16 @@ input[type="reset"] {
 input[type="image"] {
     cursor: pointer;
 }
+
+.nomargin{
+    margin:0 !important;
+}
+
+.minimal-margin-bottom{
+    margin-top:0;
+    margin-bottom:5px;
+}
+
 .voffset {
     margin-top: 2px;
 }

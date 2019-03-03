@@ -31,11 +31,11 @@ if (!$permissionChecker->hasPermission("groups")) {
                 <strong><?php translate("name"); ?>*</strong> <input type="text"
                                                                      required="required" name="name" value="<?php echo $groupName; ?>">
             </p>
-            <h3><?php translate("permissions"); ?></h3>
+            <h3 class="minimal-margin-bottom"><?php translate("permissions"); ?></h3>
             <fieldset>
-                <div class="checkbox"
-                     <label>
-                        <input id="select-all" type="checkbox" class="select-all">
+                <div class="checkbox">
+                    <label>
+                        <input id="select-all" type="checkbox" class="checkall">
                         <?php translate("select_all"); ?>
                     </label>
                 </div>
@@ -43,11 +43,11 @@ if (!$permissionChecker->hasPermission("groups")) {
                     <?php
                     foreach ($all_permissions as $key => $value) {
                         ?>
-                        <div class="checkbox"
-                             <label>
+                        <div class="checkbox">
+                            <label>
                                 <input type="checkbox" id="<?php esc($key); ?>"
                                        name="user_permissons[]" value="<?php esc($key); ?>"
-                                       data-select-all-checkbox="#checkall"
+                                       data-select-all-checkbox="#select-all"
                                        data-checkbox-group=".permission-checkbox"
                                        class="permission-checkbox" <?php if ($value) echo "checked"; ?>>
                                        <?php
@@ -59,10 +59,9 @@ if (!$permissionChecker->hasPermission("groups")) {
                     ?>
                 </div>
             </fieldset>
-            <h4><?php translate("languages"); ?></h4>
+            <h4 class="minimal-margin-bottom"><?php translate("languages"); ?></h4>
             <fieldset>
-                <p>
-                    <?php foreach ($languages as $lang) { ?>
+                <?php foreach ($languages as $lang) { ?>
                     <div class="checkbox">
                         <label>
                             <input type="checkbox" name="restrict_edit_access_language[]"
@@ -73,25 +72,23 @@ if (!$permissionChecker->hasPermission("groups")) {
                                    }
                                    ?>
                                    id="lang-<?php echo $lang->getID(); ?>">
-                            <?php Template::escape($lang->getName()); ?></label>
+                                   <?php Template::escape($lang->getName()); ?>
+                        </label>
                     </div>
-
-                <?php } ?></p>
+                <?php } ?>
             </fieldset>
-            <h4><?php translate("allowable_tags"); ?></h4>
-            <input type="text" name="allowable_tags"
-                   value="<?php Template::escape($group->getAllowableTags()); ?>"><br /> <small><?php translate("allowable_tags_help"); ?></small>
-            <br /> <br />
-            <button name="edit_group" type="submit" class="btn btn-primary">
-                <i class="fa fa-save"></i> <?php translate("save_changes"); ?></button>
+            <h4 class="minimal-margin-bottom"><?php translate("allowable_tags"); ?></h4>
+            <fieldset>
+                <input type="text" name="allowable_tags"
+                       value="<?php Template::escape($group->getAllowableTags()); ?>">
+                <small><?php translate("allowable_tags_help"); ?></small>
+            </fieldset>
+            <div class="form-group voffset2">
+                <button name="edit_group" type="submit" class="btn btn-primary">
+                    <i class="fa fa-save"></i> <?php translate("save_changes"); ?></button>
+            </div>
         </form>
-        <script type="text/javascript">
-            $(function () {
-                $('.checkall').on('click', function () {
-                    $(this).closest('fieldset').find(':checkbox').prop('checked', this.checked);
-                });
-            });
-        </script>
+
         <?php
     } else {
         ?>
@@ -99,3 +96,5 @@ if (!$permissionChecker->hasPermission("groups")) {
         <?php
     }
 }
+enqueueScriptFile("scripts/group.js");
+combinedScriptHtml();
