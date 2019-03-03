@@ -127,17 +127,18 @@ if (!$permissionChecker->hasPermission("other")) {
             <div class="inputWrapper">
                 <input type="checkbox" id="twofactor_authentication"
                        name="twofactor_authentication"
+                       class="js-switch"
                        <?php
                        if ($twofactor_authentication) {
                            echo "checked ";
                        }
                        ?>>
             </div>
-            <p>
+            <div class="voffset2">
                 <img src="<?php echo $qrCodeUrl; ?>"
                      alt="QR-Codemit Google Authenticator scannen"
                      title="QR-Code mit Google Authenticator scannen" />
-            </p>
+            </div>
             <p>
                 <a href="https://support.google.com/accounts/answer/1066447"
                    target="_blank" class="btn btn-info"><i
@@ -230,7 +231,10 @@ if (!$permissionChecker->hasPermission("other")) {
                 <div class="inputWrapper">
                     <p>
                         <input type="checkbox" id="smtp_no_verify_certificate"
+
+                               class="js-switch"
                                name="smtp_no_verify_certificate"
+
                                <?php
                                if ($smtp_no_verify_certificate) {
                                    echo ' checked="checked"';
@@ -246,11 +250,13 @@ if (!$permissionChecker->hasPermission("other")) {
                 </div>
                 <div class="inputWrapper">
                     <input type="checkbox" id="smtp_auth" name="smtp_auth"
-                    <?php
-                    if ($smtp_auth) {
-                        echo ' checked="checked"';
-                    }
-                    ?>
+
+                           class="js-switch"
+                           <?php
+                           if ($smtp_auth) {
+                               echo ' checked="checked"';
+                           }
+                           ?>
                            value="auth">
                 </div>
 

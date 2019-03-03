@@ -68,6 +68,7 @@ if ($permissionChecker->hasPermission("dashboard")) {
                 <form action="#" class="checkbox">
                     <label>
                         <input name="show_positions" id="show_positions" type="checkbox"
+                               class="js-switch"
                                data-url="index.php?ajax_cmd=toggle_show_positions" value="1"
                                <?php if (Settings::get("user/" . get_user_id() . "/show_positions")) echo "checked"; ?>>
                         <?php translate("show_positions_in_menus"); ?></label>
