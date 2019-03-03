@@ -49,6 +49,7 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
             "scripts/users.js",
             "scripts/global.js",
             "../node_modules/bootstrap/dist/js/bootstrap.min.js",
+            "../node_modules/bootstrap-toggle/js/bootstrap-toggle.min.js",
             "../node_modules/select2/dist/js/select2.min.js",
             "../node_modules/bootbox/bootbox.min.js",
             $select2TranslationFile,
@@ -82,6 +83,7 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
               $styles[] = "../node_modules/bootstrap/dist/css/bootstrap.min.css";
               $styles[] = "../node_modules/codemirror-minified/lib/codemirror.css";
               $styles[] = "css/modern.scss";
+              $styles[] = "../node_modules/bootstrap-toggle/css/bootstrap-toggle.min.css";
               $styles[] = "../node_modules/select2/dist/css/select2.min.css";
               $styles[] = "../node_modules/jquery-datetimepicker/build/jquery.datetimepicker.min.css";
 

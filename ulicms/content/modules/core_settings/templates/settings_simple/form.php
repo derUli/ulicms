@@ -60,6 +60,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
 	<tr>
 		<td><strong><?php translate("MAINTENANCE_MODE_ENABLED");?></strong></td>
 		<td><input type="checkbox" name="maintenance_mode"
+		class="js-switch"
 			<?php
     if (strtolower($settings["maintenance_mode"] == "on") || $settings["maintenance_mode"] == "1" || strtolower($settings["maintenance_mode"]) == "true") {
         echo " checked";
@@ -70,6 +71,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
 	<tr>
 		<td><strong><?php translate("GUEST_MAY_REGISTER");?></strong></td>
 		<td><input type="checkbox" name="visitors_can_register"
+		class="js-switch"
 			<?php
     if (strtolower($settings["visitors_can_register"] == "on") || $settings["visitors_can_register"] == "1" || strtolower($settings["visitors_can_register"]) == "true") {
         echo " checked";
@@ -84,6 +86,8 @@ if ($permissionChecker->hasPermission("settings_simple")) {
 		
 		<td><input type="checkbox" name="disable_password_reset"
 			value="enable"
+					class="js-switch"
+
 			<?php if(!isset($settings["disable_password_reset"])) echo " checked"?>>
 		</td>
 	</tr>

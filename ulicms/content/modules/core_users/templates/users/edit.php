@@ -143,45 +143,55 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
                         <?php if (!$row->html_editor or $row->html_editor == "ckeditor") echo "selected" ?>>CKEditor</option>
                 <option value="codemirror"
                         <?php if ($row->html_editor == "codemirror") echo "selected" ?>>CodeMirror</option>
-            </select> <br /> <br /> <input type="checkbox" value="1"
-            <?php
-            if ($row->require_password_change) {
-                echo "checked";
-            }
-            ?>
-                                           name="require_password_change" id="require_password_change"> <label
-                                           for="require_password_change"><?php
-                                               translate("REQUIRE_PASSWORD_CHANGE_ON_NEXT_LOGIN");
-                                               ?> </label>
+            </select>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" value="1"
+                           class="js-switch"
+                           <?php
+                           if ($row->require_password_change) {
+                               echo "checked";
+                           }
+                           ?>
+                           name="require_password_change" id="require_password_change"><?php
+                           translate("REQUIRE_PASSWORD_CHANGE_ON_NEXT_LOGIN");
+                           ?> </label>
+            </div>
             <?php
             if ($permissionChecker->hasPermission("users")) {
                 ?>
-                <br /> <br /> <input type="checkbox" value="1" name="admin" id="admin"
-                <?php
-                if ($row->admin) {
-                    echo "checked";
-                }
-                ?>> <label for="admin"><?php
-                                         translate("is_admin");
-                                         ?> </label> <span style="cursor: help;"
-                               onclick="$('div#is_admin').slideToggle()">
-                    <i class="fa fa-question-circle text-info" aria-hidden="true"></i>
-                </span>
+                <div class="voffset2">
+                    <div class="checkbox">
+                        <label> <input type="checkbox" value="1" name="admin" id="admin"
+                                       class="js-switch"
+                                       <?php
+                                       if ($row->admin) {
+                                           echo "checked";
+                                       }
+                                       ?>> <?php translate("is_admin"); ?></label> <span style="cursor: help;"
+                                                                        onclick="$('div#is_admin').slideToggle()">
+                            <i class="fa fa-question-circle text-info" aria-hidden="true"></i>
+
+                        </span>
+                    </div>
+                </div>
                 <div id="is_admin" class="help" style="display: none">
                     <?php
                     echo nl2br(get_translation("HELP_IS_ADMIN"));
                     ?>
                 </div>
-
-                <br /> <br /> <input type="checkbox" value="1" name="locked"
-                                     id="locked"
-                                     <?php
-                                     if ($row->locked) {
-                                         echo "checked";
-                                     }
-                                     ?>> <label for="locked"><?php
-                                         translate("locked");
-                                         ?> </label>
+                <div class="checkbox">
+                    <label> <input type="checkbox" value="1" name="locked"
+                                   id="locked"
+                                   class="js-switch"
+                                   <?php
+                                   if ($row->locked) {
+                                       echo "checked";
+                                   }
+                                   ?>> <?php
+                                   translate("locked");
+                                   ?> </label>
+                </div>
                 <?php
             } else {
                 echo '<input type="hidden" name="admin" value="' . $row->admin . '">';

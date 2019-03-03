@@ -730,4 +730,7 @@ add_translation("required_php_extensions", "Benötigte PHP-Erweiterungen");
 
 add_translation("secondary_groups", "Sekundäre Gruppen");
 
+add_translation("on", "An");
+add_translation("off", "Aus");
+
 do_event("lang_de");

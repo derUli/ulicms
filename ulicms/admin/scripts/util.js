@@ -83,14 +83,13 @@ function checkSelectAllIfAllChecked(item, group) {
             + "']:checked").length == $("input[type=checkbox][data-checkbox-group='"
             + group + "']").length;
     // check the "Select All" Checkbox, else uncheck it
-    $(item).prop("checked", allSelected);
+    $(item).prop("checked", allSelected).change();
 }
 
 function selectAllChecked(event) {
     var selectAllCheckbox = $(event.target);
     var target = $(selectAllCheckbox).data("target");
-    console.log(target);
-    $(target).prop("checked", $(selectAllCheckbox).is(":checked"));
+    $(target).prop("checked", $(selectAllCheckbox).is(":checked")).change();
 }
 
 function setWaitCursor() {

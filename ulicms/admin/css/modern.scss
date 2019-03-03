@@ -33,6 +33,8 @@ body {
     -ms-overflow-style: scrollbar;
 }
 
+
+
 // For some reasons Bootbox adds padding-right as inline when opening a modal.
 // This causes the page content to shift to the left while the modal is open.
 body.modal-open {
@@ -67,6 +69,9 @@ fieldset[disabled] {
     .btn {
         min-width: 58px;
     }
+}
+.block{
+    display:block;
 }
 .inline-block {
     display: inline-block;
@@ -429,7 +434,7 @@ div.help {
     background-color: $background_color_3;
     border: solid rgb(200, 200, 200);
     padding: 20px;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 label {
     font-weight: bold;
@@ -639,6 +644,16 @@ input[type="reset"] {
 input[type="image"] {
     cursor: pointer;
 }
+
+.nomargin{
+    margin:0 !important;
+}
+
+.minimal-margin-bottom{
+    margin-top:0;
+    margin-bottom:5px;
+}
+
 .voffset {
     margin-top: 2px;
 }
