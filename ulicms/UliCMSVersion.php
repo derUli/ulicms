@@ -1,12 +1,11 @@
 <?php
-if (! class_exists("UliCMSVersion")) {
 
-    class UliCMSVersion
-    {
+if (!class_exists("UliCMSVersion")) {
 
-        function __construct()
-        {
-            $this->version = "Colourful Chameleon";
+    class UliCMSVersion {
+
+        function __construct() {
+            $this->version = "Dancing parrot";
             $this->releaseYear = 2019;
             $this->buildDate = 0; // {InsertBuildDate}
             $this->internalVersion = Array(
@@ -18,49 +17,43 @@ if (! class_exists("UliCMSVersion")) {
             $this->developmentVersion = false;
         }
 
-        public function getReleaseYear()
-        {
+        public function getReleaseYear() {
             return strval($this->releaseYear);
         }
 
         // Gibt den Codenamen der UliCMS Version zurück (z.B. 2013R2)
-        public function getVersion()
-        {
+        public function getVersion() {
             return $this->version;
         }
 
-        public function getUpdate()
-        {
+        public function getUpdate() {
             return $this->update;
         }
 
-        public function getDevelopmentVersion()
-        {
+        public function getDevelopmentVersion() {
             return $this->developmentVersion;
         }
 
         // Gibt die interne Versionsnummer als Array mit Integer-Datentyp zurück
-        public function getInternalVersion()
-        {
+        public function getInternalVersion() {
             return $this->internalVersion;
         }
 
         // Gibt die interne Versionsnummer als String mit Integer-Datentyp zurück
-        public function getInternalVersionAsString()
-        {
+        public function getInternalVersionAsString() {
             return implode(".", $this->internalVersion);
         }
 
-        public function getBuildTimestamp()
-        {
+        public function getBuildTimestamp() {
             return $this->buildDate;
         }
 
-        public function getBuildDate()
-        {
+        public function getBuildDate() {
             return strftime("%x %X", $this->getBuildTimestamp());
         }
+
     }
+
 }
 
 // For backwards compatiblity

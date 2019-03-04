@@ -162,6 +162,7 @@ add_translation("VISIBLE_FOR", "visible for");
 add_translation("CREATE_GROUP", "Create group");
 add_translation("MAKE_GROUP_DEFAULT", "Make group %name% default for new users?");
 add_translation("GROUP_DELETED", "Die Gruppe wurde erfolgreich gelöscht.");
+add_translation("group_x_created", "The group \"%name%\" was successfully created.");
 
 // Medien
 add_translation("PLEASE_SELECT_FILETYPE", "Plese select a file type");

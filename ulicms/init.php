@@ -1,8 +1,9 @@
 <?php
+
 use UliCMS\Exceptions\AccessDeniedException;
 
 // root directory of UliCMS
-if (! defined("ULICMS_ROOT")) {
+if (!defined("ULICMS_ROOT")) {
     define("ULICMS_ROOT", dirname(__file__));
 }
 
@@ -12,7 +13,6 @@ define("DIRECTORY_SEPERATOR", DIRECTORY_SEPARATOR);
 // however it's unnecessary to use these constansts
 // since PHP normalizes all paths
 // So just always use a forward slash
-
 // Shortcut, but should not be used anymore
 // Just use /
 define("DIRSEP", DIRECTORY_SEPARATOR);
@@ -122,19 +122,19 @@ if (is_file($mobile_detect_as_module)) {
     include_once $mobile_detect_as_module;
 }
 
-function exception_handler($exception)
-{
-    if (! defined("EXCEPTION_OCCURRED")) {
+function exception_handler($exception) {
+    if (!defined("EXCEPTION_OCCURRED")) {
         define("EXCEPTION_OCCURRED", true);
     }
     $error = nl2br(htmlspecialchars($exception));
-    
+
     // FIXME: what if there is no config class?
     $cfg = class_exists("CMSConfig") ? new CMSConfig() : null;
+
     // TODO: useful error message if $debug is disabled
     // Log exception into a text file
-    $message = is_true($cfg->debug) ? $exception : "An error occurred! See exception_log for details. 😞";
-    
+    $message = !is_null($cfg) && is_true($cfg->debug) ? $exception : "An error occurred! See exception_log for details. 😞";
+
     $logger = LoggerRegistry::get("exception_log");
     if ($logger) {
         $logger->error($exception);
@@ -178,7 +178,7 @@ $config = new CMSConfig();
 
 // IF ULICMS_DEBUG is defined then display all errors except E_NOTICE,
 // else use default error_reporting from php.ini
-if ((defined("ULICMS_DEBUG") and ULICMS_DEBUG) or (isset($config->debug) and $config->debug)) {
+if ((defined("ULICMS_DEBUG") and ULICMS_DEBUG) or ( isset($config->debug) and $config->debug)) {
     error_reporting(E_ALL ^ E_NOTICE);
 } else {
     error_reporting(0);
@@ -202,37 +202,37 @@ if (isset($config->data_storage_url) and ! is_null($config->data_storage_url)) {
 
 include_once dirname(__file__) . "/classes/creators/load.php";
 
-if (! defined("ULICMS_TMP")) {
+if (!defined("ULICMS_TMP")) {
     define("ULICMS_TMP", ULICMS_DATA_STORAGE_ROOT . "/content/tmp/");
 }
 
-if (! is_dir(ULICMS_TMP)) {
+if (!is_dir(ULICMS_TMP)) {
     mkdir(ULICMS_TMP);
 }
 
-if (! defined("ULICMS_CACHE")) {
+if (!defined("ULICMS_CACHE")) {
     define("ULICMS_CACHE", ULICMS_DATA_STORAGE_ROOT . "/content/cache/");
 }
-if (! defined("ULICMS_LOG")) {
+if (!defined("ULICMS_LOG")) {
     define("ULICMS_LOG", ULICMS_DATA_STORAGE_ROOT . "/content/log/");
 }
-if (! defined("ULICMS_CONTENT")) {
+if (!defined("ULICMS_CONTENT")) {
     define("ULICMS_CONTENT", ULICMS_DATA_STORAGE_ROOT . "/content/");
 }
 
-if (! defined("ULICMS_CONFIGURATIONS")) {
+if (!defined("ULICMS_CONFIGURATIONS")) {
     define("ULICMS_CONFIGURATIONS", ULICMS_CONTENT . "/configurations/");
 }
-if (! is_dir(ULICMS_CACHE)) {
+if (!is_dir(ULICMS_CACHE)) {
     mkdir(ULICMS_CACHE);
 }
-if (! is_dir(ULICMS_LOG)) {
+if (!is_dir(ULICMS_LOG)) {
     mkdir(ULICMS_LOG);
 }
 
 $htaccessForLogFolderSource = ULICMS_ROOT . "/lib/htaccess-deny-all.txt";
 $htaccessLogFolderTarget = ULICMS_LOG . "/.htaccess";
-if (! is_file($htaccessLogFolderTarget)) {
+if (!is_file($htaccessLogFolderTarget)) {
     copy($htaccessForLogFolderSource, $htaccessLogFolderTarget);
 }
 
@@ -256,7 +256,7 @@ Translation::init();
 
 if (class_exists("Path")) {
     LoggerRegistry::register("exception_log", new Logger(Path::resolve("ULICMS_LOG/exception_log")));
-    
+
     if (is_true($config->query_logging)) {
         LoggerRegistry::register("sql_log", new Logger(Path::resolve("ULICMS_LOG/sql_log")));
     }
@@ -279,8 +279,7 @@ define("ONE_DAY_IN_SECONDS", 60 * 60 * 24);
 global $actions;
 $actions = array();
 
-function noPerms()
-{
+function noPerms() {
     echo "<p class=\"ulicms_error\">" . get_translation("no_permissions") . "</p>";
     $logger = LoggerRegistry::get("audit_log");
     if ($logger) {
@@ -296,8 +295,7 @@ function noPerms()
     return false;
 }
 
-function is_in_include_path($find)
-{
+function is_in_include_path($find) {
     $paths = explode(PATH_SEPARATOR, get_include_path());
     $found = false;
     foreach ($paths as $p) {
@@ -326,7 +324,7 @@ $path_to_installer = dirname(__file__) . "/installer/installer.php";
 
 $select = Database::select($config->db_database);
 
-if (! $select) {
+if (!$select) {
     throw new Exception("<h1>Database " . $config->db_database . " doesn't exist.</h1>");
 }
 
@@ -334,7 +332,7 @@ if (is_true($cfg->preload_all_settings)) {
     Settings::preloadAll();
 }
 
-if (! Settings::get("session_name")) {
+if (!Settings::get("session_name")) {
     Settings::set("session_name", uniqid() . "_SESSION");
 }
 
@@ -350,7 +348,7 @@ if ($useragent) {
 
 @ini_set('user_agent', ULICMS_USERAGENT);
 
-if (! Settings::get("hide_meta_generator")) {
+if (!Settings::get("hide_meta_generator")) {
     @header('X-Powered-By: UliCMS Release ' . cms_version());
 }
 
@@ -404,13 +402,12 @@ if (isset($_SESSION["session_begin"])) {
     }
 }
 
-function shutdown_function()
-{
+function shutdown_function() {
     // don't execute shutdown hook on kcfinder page (media)
     // since the "Path" class has a naming conflict with the same named
     // class of KCFinder
     do_event("shutdown");
-    
+
     $cfg = new CMSConfig();
     if (is_true($cfg->show_render_time) and ! Request::isAjaxRequest()) {
         echo "\n\n<!--" . (microtime(true) - START_TIME) . "-->";
@@ -421,7 +418,7 @@ register_shutdown_function("shutdown_function");
 
 $enforce_https = Settings::get("enforce_https");
 
-if (! is_ssl() and $enforce_https !== false) {
+if (!is_ssl() and $enforce_https !== false) {
     header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
     exit();
 }
@@ -441,7 +438,7 @@ do_event("init");
 do_event("after_init");
 
 $version = new UliCMSVersion();
-if (! defined("UPDATE_CHECK_URL")) {
+if (!defined("UPDATE_CHECK_URL")) {
     define("UPDATE_CHECK_URL", "https://update.ulicms.de/?v=" . urlencode(implode(".", $version->getInternalVersion())) . "&update=" . urlencode($version->getUpdate()));
 }
 
@@ -449,7 +446,7 @@ $pkg = new PackageManager();
 $installed_patches = $pkg->getInstalledPatchNames();
 $installed_patches = implode(";", $installed_patches);
 
-if (! defined("PATCH_CHECK_URL")) {
+if (!defined("PATCH_CHECK_URL")) {
     define("PATCH_CHECK_URL", "https://patches.ulicms.de/?v=" . urlencode(implode(".", $version->getInternalVersion())) . "&installed_patches=" . urlencode($installed_patches));
 }
 

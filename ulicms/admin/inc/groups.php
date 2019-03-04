@@ -1,14 +1,14 @@
 <?php
 $permissionChecker = new ACL();
-if (! $permissionChecker->hasPermission("groups")) {
+if (!$permissionChecker->hasPermission("groups")) {
     noPerms();
 } else {
     $logger = LoggerRegistry::get("audit_log");
-    
+
     $modified = false;
     $created = false;
     $removed = false;
-    
+
     if (isset($_POST["add_group"])) {
         $permissionChecker = new ACL();
         $all_permissions = $permissionChecker->getDefaultACL(false, true);
@@ -17,9 +17,9 @@ if (! $permissionChecker->hasPermission("groups")) {
                 $all_permissions[$permission_name] = true;
             }
         }
-        
+
         $name = trim($_POST["name"]);
-        if (! empty($name)) {
+        if (!empty($name)) {
             $id = $permissionChecker->createGroup($name, $all_permissions);
             $group = new Group($id);
             $languages = array();
@@ -56,9 +56,9 @@ if (! $permissionChecker->hasPermission("groups")) {
     } else if (isset($_POST["edit_group"])) {
         $permissionChecker = new ACL();
         $all_permissions = $permissionChecker->getDefaultACL(false, true);
-        
+
         $id = $_POST["id"];
-        
+
         $group = new Group();
         $group->loadById($id);
         $allowed_tags = StringHelper::isNotNullOrWhitespace($_POST["allowable_tags"]) ? strval($_POST["allowable_tags"]) : null;
@@ -71,21 +71,21 @@ if (! $permissionChecker->hasPermission("groups")) {
         }
         $group->setLanguages($languages);
         $group->save();
-        
+
         if (isset($_POST["user_permissons"]) and count($_POST["user_permissons"]) > 0) {
             foreach ($_POST["user_permissons"] as $permission_name) {
                 $all_permissions[$permission_name] = true;
             }
         }
-        
+
         $name = trim($_POST["name"]);
         $json_permissions = json_encode($all_permissions);
-        if (! empty($name)) {
+        if (!empty($name)) {
             $permissionChecker->updateGroup($id, $name, $json_permissions);
             $modified = true;
             $name = real_htmlspecialchars($name);
         }
-        
+
         if ($logger) {
             $user = getUserById(get_user_id());
             $userName = isset($user["username"]) ? $user["username"] : AuditLog::UNKNOWN;
@@ -96,41 +96,33 @@ if (! $permissionChecker->hasPermission("groups")) {
         }
     }
     ?>
-    <?php echo Template::executeModuleTemplate("core_users", "icons.php");?>
-<h2><?php translation("groups");?></h2>
-<?php
+    <?php echo Template::executeModuleTemplate("core_users", "icons.php"); ?>
+    <h2><?php translation("groups"); ?></h2>
+    <?php
     if ($created) {
-        // @FIXME: Das hier lokalisieren
         ?>
-<p style='color: green;'>
-	Die Gruppe "
-	<?php
-        
-        echo $name;
-        ?>
-	" wurde erfolgreich angelegt.
-</p>
-<?php
+        <div class="alert alert-success">
+            <?php translate("group_x_created", array("%name%" => $name)); ?>
+        </div>
+        <?php
     }
-    ?>
-<?php
     if ($modified) {
         ?>
-<p style='color: green;'>
-<?php translate("changes_was_saved");?>
-</p>
-<?php
+        <div class="alert alert-success">
+            <?php translate("changes_was_saved"); ?>
+        </div>
+        <?php
     }
-    ?>
-<?php
     if ($removed) {
         ?>
-<p style='color: green;'><?php translate("group_was_deleted")?></p>
-<?php
+        <div class="alert alert-success">
+            <?php translate("group_was_deleted") ?>
+        </div>
+        <?php
     }
     ?>
-<?php
-    if (! isset($_GET["add"]) and ! isset($_GET["edit"])) {
+    <?php
+    if (!isset($_GET["add"]) and ! isset($_GET["edit"])) {
         include "inc/group_list.php";
     } else if (isset($_GET["add"])) {
         if ($permissionChecker->hasPermission("groups_create")) {
@@ -146,6 +138,6 @@ if (! $permissionChecker->hasPermission("groups")) {
         }
     }
     ?>
-<?php
+    <?php
 }
 ?>

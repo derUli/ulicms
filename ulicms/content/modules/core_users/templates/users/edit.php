@@ -88,7 +88,7 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
                                 echo "selected";
                             }
                             ?>>
-                                <?php echo real_htmlspecialchars($value) ?>
+                                <?php esc($value) ?>
                         </option>
                         <?php
                     }
@@ -112,26 +112,9 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
                     }
                     ?>
                 </select> <br /> <br />
-                <!-- Legacy Rechtesystem -->
-                <input type="hidden" name="admin_rechte"
-                       value="<?php
-                       echo $row->group;
-                       ?>">
+               
                        <?php
-                   } else {
-                       ?>
-                <input type="hidden" name="admin_rechte"
-                       value="<?php echo $row->group ?>"> <input type="hidden"
-                       name="group_id"
-                       value="<?php
-                       if (!$_SESSION["group_id"]) {
-                           echo "-";
-                       } else {
-                           echo $_SESSION["group_id"];
-                       }
-                       ?>">
-                       <?php
-                   }
+                   } 
                    ?>
             <strong><?php
                 translate("homepage");
@@ -200,7 +183,7 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
                 }
             }
             ?>
-            <br /> <br /> <strong><?php translate("default_language"); ?></strong><br />
+            <strong><?php translate("default_language"); ?></strong><br />
             <select name="default_language">
                 <option value="" <?php if (!$row->default_language) echo " selected"; ?>>[<?php translate("standard"); ?>]</option>
                 <?php

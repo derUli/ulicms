@@ -65,9 +65,9 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
                 <?php
             }
             ?>
-        </select> <br /> <br />
+        </select>
 
-        <div class="voffset2">
+        <div class="voffset3">
             <div class="checkbox">
                 <label>
                     <input type="checkbox" value="1"

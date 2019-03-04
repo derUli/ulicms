@@ -3,8 +3,8 @@
 // this class contains functions for managing user accounts
 function getUsers() {
     $query = Database::query("SELECT id, username FROM " . tbname("users") . " ORDER by username");
-    $users = Array();
-    while ($row = db_fetch_object($query)) {
+    $users = array();
+    while ($row = db_fetch_assoc($query)) {
         array_push($users, $row);
     }
 
@@ -31,7 +31,7 @@ function changePassword($password, $id) {
 }
 
 function getUserByName($name) {
-    $query = Database::query("SELECT * FROM " . tbname("users") . " WHERE username='" . db_escape($name) . "'");
+    $query = Database::query("SELECT * FROM " . tbname("users") . " WHERE username='" . Database::escapeValue($name, DB_TYPE_STRING) . "'");
     if (db_num_rows($query) > 0) {
         return db_fetch_assoc($query);
     } else {
