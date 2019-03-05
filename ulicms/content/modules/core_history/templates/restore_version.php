@@ -1,7 +1,6 @@
 <?php
 // @FIXME: Diese beiden Includes nach core_history verschieben.
 include_once ULICMS_ROOT . "/classes/3rdparty/finediff.php";
-include_once ULICMS_ROOT . "/classes/objects/content/VCS.php";
 
 $permissionChecker = new ACL ();
 if ($permissionChecker->hasPermission("pages")) {

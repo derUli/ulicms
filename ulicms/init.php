@@ -55,6 +55,7 @@ include_once dirname(__file__) . "/classes/objects/backend/load.php";
 include_once dirname(__file__) . "/classes/objects/settings/load.php";
 include_once dirname(__file__) . "/classes/objects/web/load.php";
 include_once dirname(__file__) . "/classes/objects/content/Categories.php";
+include_once dirname(__file__) . "/classes/objects/content/VCS.php";
 include_once dirname(__file__) . "/classes/objects/content/types/ContentType.php";
 include_once dirname(__file__) . "/classes/objects/content/types/DefaultContentTypes.php";
 include_once dirname(__file__) . "/classes/objects/content/types/fields/CustomField.php";

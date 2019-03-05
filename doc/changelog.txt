@@ -10,6 +10,7 @@ wenn man "Nicht im Menü" auswählt
 * Update von Bootstrap auf Version 3.4.1
 * MOTD Formular nutzt jetzt AJAX zum Speichern
 * Das Feld "Custom Data (JSON)" wird nun validiert
+* Die Tastenkombination ctrl+c (PC) bzw. cmd+c (Mac) löst nun das Absenden eines Formulars aus
 
 Neue API-Methoden:
 * Response::sendHttpStatusCodeResultIfAjax($status = HTTPStatusCode::OK, $redirect = null, $redirectStatus = HttpStatusCode::MOVED_TEMPORARILY)
