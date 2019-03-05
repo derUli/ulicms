@@ -131,11 +131,15 @@ about_me = '$about_me', html_editor='$html_editor', require_password_change='$re
     }
 
     public function deletePost() {
-        $admin = intval($_GET["admin"]);
+        $id = intval($_GET["id"]);
 
         do_event("before_admin_delete");
-        $query = db_query("DELETE FROM " . tbname("users") . " WHERE id='$admin'", $connection);
+
+        $user = new User($id);
+        $user->delete();
+
         do_event("after_admin_delete");
+
         if ($this->logger) {
             $user = getUserById(get_user_id());
             $name = isset($user["username"]) ? $user["username"] : AuditLog::UNKNOWN;

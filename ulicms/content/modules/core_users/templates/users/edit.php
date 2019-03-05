@@ -1,17 +1,15 @@
 <?php
 $permissionChecker = new ACL();
 if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermission("users_edit")) or ( $_GET["admin"] == $_SESSION["login_id"])) {
-    $admin = intval($_GET["admin"]);
+    $id = intval($_GET["id"]);
     $languages = getAvailableBackendLanguages();
-    $query = db_query("SELECT * FROM " . tbname("users") . " WHERE id='$admin'");
+    $query = db_query("SELECT * FROM " . tbname("users") . " WHERE id='$id'");
     $user = new User($admin);
     $secondaryGroups = $user->getSecondaryGroups();
     $secondaryGroupIds = array();
     foreach ($secondaryGroups as $group) {
         $secondaryGroupIds[] = $group->getID();
     }
-    $ref = _esc(Request::getVar("ref", "home"));
-
     while ($row = db_fetch_object($query)) {
         ?>
         <p>
@@ -112,10 +110,10 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
                     }
                     ?>
                 </select> <br /> <br />
-               
-                       <?php
-                   } 
-                   ?>
+
+                <?php
+            }
+            ?>
             <strong><?php
                 translate("homepage");
                 ?></strong> <br /> <input type="url" name="homepage"
@@ -201,7 +199,6 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
             <button type="submit" class="btn btn-primary">
                 <i class="fa fa-save"></i> <?php translate("OK"); ?></button>
         </form>
-
         <?php
         break;
     }

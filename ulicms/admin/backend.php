@@ -1,8 +1,10 @@
 <?php
+
 // required because my local XAMPP is sometimes in wrong folder, so includes will fail
 chdir(dirname(__FILE__));
 
 require_once "../init.php";
+
 use UliCMS\Backend\BackendPageRenderer;
 
 @session_start();
@@ -34,7 +36,7 @@ do_event("after_custom_lang");
 
 // Cross-Site-Request-Forgery Protection
 if (logged_in() and $_SERVER["REQUEST_METHOD"] == "POST" and ! isset($_REQUEST["ajax_cmd"]) and ! defined("NO_ANTI_CSRF")) {
-    if (! check_csrf_token()) {
+    if (!check_csrf_token()) {
         die("This is probably a CSRF attack!");
     }
 }
@@ -50,7 +52,6 @@ if (isset($cfg->ip_whitelist) and is_array($cfg->ip_whitelist) and count($cfg->i
     translate("login_from_ip_not_allowed");
     die();
 }
-require_once "inc/queries.php";
 
 if (is_logged_in()) {
     db_query("UPDATE " . tbname("users") . " SET last_action = " . time() . " WHERE id = " . get_user_id());
