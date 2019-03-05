@@ -1,4 +1,5 @@
 <?php
+
 add_translation("INSTALLATION", "Installation");
 add_translation("TITLE_STEP_1", "Sprache auswählen");
 add_translation("TITLE_STEP_2", "Lizenzbedingungen akzeptieren");
@@ -38,8 +39,8 @@ add_translation("INSTALL_X_OF_Y", "Installiere Datei %x% von %y%");
 add_translation("BUILD_DATABASE", "Datenbank aufbauen");
 add_translation("CREATE_CMS_CONFIG_PHP", "Erstelle CMSConfig.php");
 add_translation("WRITE_CMS_CONFIG_FAILED", "Speichern der CMSConfig.php fehlgeschlagen.<br/>" . "Bitte erstellen Sie die Datei CMSConfig.php und fügen Sie den folgenden Code darin ein.");
-add_translation("LAST_STEP", "Dies ist der letzte Schritt der Installation. Bitte löschen Sie den \"installer\" Ordner von ihrem Server.<br/>
-		Danach können Sie sich in UliCMS ausloggen..<br/><br/>
+add_translation("LAST_STEP", "Dies ist der letzte Schritt der Installation.<br/>Bitte löschen Sie den \"installer\" Ordner von ihrem Server.<br/>
+		Danach können Sie sich in UliCMS einloggen.<br/><br/>
 		<a href=\"index.php?submit_form=LoginToBackend\" class=\"btn btn-primary\">Gehe zur Anmeldung</a>");
 add_translation("ADD_FK", "Fremdschlüssel hinzufügen");
 add_translation("ACCEPT_LICNSE", "Lizenz akzeptieren");
