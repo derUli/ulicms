@@ -1,12 +1,11 @@
 <?php
+
 use UliCMS\Exceptions\NotImplementedException;
 use PHPMailer\PHPMailer\PHPMailer;
 
-class Mailer
-{
+class Mailer {
 
-    public static function splitHeaders($headers)
-    {
+    public static function splitHeaders($headers) {
         $header_array = array();
         $lines = normalizeLN($headers, "\n");
         $lines = explode("\n", $lines);
@@ -21,33 +20,28 @@ class Mailer
         return $header_array;
     }
 
-    public static function send($to, $subject, $message, $headers = "")
-    {
+    public static function send($to, $subject, $message, $headers = "") {
         $mode = Settings::get("email_mode") ? Settings::get("email_mode") : EmailModes::INTERNAL;
-        
+
         // UliCMS speichert seit UliCMS 9.0.1 E-Mails, die das System versendet hat
         // in der Datenbank
         $insert_sql = "INSERT INTO " . tbname("mails") . " (headers, `to`, subject, body) VALUES ('" . db_escape($headers) . "', '" . db_escape($to) . "', '" . db_escape($subject) . "', '" . db_escape($message) . "')";
         db_query($insert_sql);
-        
-        // TODO: Hieraus einen Switch machen
+
         switch ($mode) {
             case EmailModes::INTERNAL:
             case EmailModes::PHPMAILER:
                 return self::sendWithPHPMailer($to, $subject, $message, $headers, $mode);
                 break;
-                break;
             default:
                 throw new NotImplementedException("E-Mail Mode \"$mode\" not implemented.");
-                break;
         }
     }
 
-    public static function getPHPMailer($mode = EmailModes::INTERNAL)
-    {
+    public static function getPHPMailer($mode = EmailModes::INTERNAL) {
         $mailer = new PHPMailer();
         $mailer->SMTPDebug = 3;
-        
+
         $mailer->Debugoutput = function ($str, $level) {
             $logger = LoggerRegistry::get("phpmailer_log");
             if ($logger) {
@@ -58,7 +52,7 @@ class Mailer
         // else PHPMailer will use the mail() function of PHP.
         if ($mode == EmailModes::PHPMAILER) {
             $mailer->SMTPSecure = Settings::get("smtp_encryption");
-            
+
             // disable verification of ssl certificates
             // this option makes the mail transfer insecure
             // use this only if it's unavoidable
@@ -71,7 +65,7 @@ class Mailer
                     )
                 );
             }
-            
+
             if (Settings::get("smtp_host")) {
                 $mailer->isSMTP();
                 $mailer->Host = Settings::get("smtp_host");
@@ -87,34 +81,34 @@ class Mailer
         }
         $mailer->XMailer = Settings::get("show_meta_generator") ? "UliCMS" : "";
         $mailer->CharSet = "UTF-8";
-		$mailer->Encoding = "base64"; 
-        
+        $mailer->Encoding = "base64";
+
         $mailer = apply_filter($mailer, "php_mailer_instance");
         return $mailer;
     }
 
-    public static function sendWithPHPMailer($to, $subject, $message, $headers = "", $mode = EmailModes::INTERNAL)
-    {
+    public static function sendWithPHPMailer($to, $subject, $message, $headers = "", $mode = EmailModes::INTERNAL) {
         $headers = self::splitHeaders($headers);
         $headersLower = array_change_key_case($headers, CASE_LOWER);
-        
+
         $mailer = self::getPHPMailer($mode);
-        
+
         if (isset($headersLower["x-mailer"])) {
             $mailer->XMailer = $headersLower["x-mailer"];
         }
         $mailer->setFrom(StringHelper::isNotNullOrWhitespace($headers["From"]) ? $headers["From"] : Settings::get("email"));
-        
+
         if (isset($headersLower["reply-to"])) {
-            
+
             $mailer->addReplyTo($headersLower["reply-to"]);
         }
         $mailer->addAddress($to);
         $mailer->Subject = $subject;
         $mailer->isHTML(isset($headersLower["content-type"]) and startsWith($headersLower["content-type"], "text/html"));
         $mailer->Body = $message;
-        
+
         $mailer = apply_filter($mailer, "php_mailer_send");
         return $mailer->send();
     }
+
 }
