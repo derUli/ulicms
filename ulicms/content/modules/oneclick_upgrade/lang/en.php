@@ -8,7 +8,6 @@ add_translation("DO_CORE_UPGRADE", "Upgrade");
 add_translation("RELEASE_NOTES", "Release Notes");
 add_translation("AN_UPGRADE_IS_AVAILABLE", "New version %version% is available.");
 add_translation("SHOW_MORE", "Read More");
-add_translation("SKIP_KCFINDER", "skip kcfinder");
 add_translation("CHANNEL", "Channel");
 add_translation("FAST", "Fast");
 add_translation("SLOW", "Slow");
