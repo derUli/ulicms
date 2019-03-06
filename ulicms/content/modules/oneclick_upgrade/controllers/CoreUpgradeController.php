@@ -1,26 +1,22 @@
 <?php
+
 use UliCMS\Exceptions\CorruptDownloadException;
 
-class CoreUpgradeController extends Controller
-{
+class CoreUpgradeController extends Controller {
 
-    public function getCheckURL()
-    {
+    public function getCheckURL() {
         return "http://channels.ulicms.de/" . Settings::get("oneclick_upgrade_channel") . ".json";
     }
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->checkURL = $this->getCheckURL();
     }
 
-    public function setCheckURL($url)
-    {
+    public function setCheckURL($url) {
         $this->checkURL = $url;
     }
 
-    public function getJSON()
-    {
+    public function getJSON() {
         $data = file_get_contents_wrapper($this->getCheckURL(), true);
         if (!$data) {
             return null;
@@ -29,8 +25,7 @@ class CoreUpgradeController extends Controller
         return $data;
     }
 
-    public function checkForUpgrades()
-    {
+    public function checkForUpgrades() {
         $data = $this->getJSON();
         if (!$data) {
             return null;
@@ -44,12 +39,11 @@ class CoreUpgradeController extends Controller
         return null;
     }
 
-    public function runUpgrade($skipPermissions = false)
-    {
+    public function runUpgrade($skipPermissions = false) {
         @set_time_limit(0);
         @ignore_user_abort(1);
         $acl = new ACL();
-        if ((!$skipPermissions and (!$acl->hasPermission("update_system")) or !$this->checkForUpgrades() or get_request_method() != "post")) {
+        if ((!$skipPermissions and ( !$acl->hasPermission("update_system")) or ! $this->checkForUpgrades() or get_request_method() != "post")) {
             return false;
         }
 
@@ -96,4 +90,5 @@ class CoreUpgradeController extends Controller
             return false;
         }
     }
+
 }

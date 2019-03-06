@@ -1,4 +1,5 @@
 <?php
+
 add_translation("ONECLICK_UPGRADE", "1Click Upgrade");
 add_translation("NO_NEW_VERSION_AVAILABLE", "No new version available.");
 add_translation("INSTALLED_VERSION", "Installed version");

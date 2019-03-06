@@ -55,10 +55,10 @@ if ($permissionChecker->hasPermission("update_system")) {
 	<div class="row">
 		<div class="col-xs-6 text-left">
 		<?php if ($announcement) {?>
-			<a href="<?php esc($announcement);?>" class="btn btn-info"
+		<a href="<?php esc($announcement);?>" class="btn btn-info"
 			target="_blank">
 			<i class="fas fa-info-circle"></i>
- <?php translate("whats_new");?></a>
+ 			<?php translate("whats_new");?></a>
 			<?php }?>
 		</div>
 		<div class="col-xs-6 text-right">
