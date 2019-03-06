@@ -95,6 +95,29 @@ class PermissionCheckerTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($permissionChecker->hasPermission("design"));
     }
 
+    public function testUserHasPermissionWithUserReturnsTrue()
+    {
+        $this->assertTrue($this->testUser->hasPermission("info"));
+        $this->assertTrue($this->testUser->hasPermission("pages"));
+        $this->assertTrue($this->testUser->hasPermission("images"));
+        $this->assertTrue($this->testUser->hasPermission("design"));
+    }
+
+    public function testUserHasPermissionWithUserReturnsFalse()
+    {
+        $this->assertFalse($this->testUser->hasPermission("settings_simple"));
+        $this->assertFalse($this->testUser->hasPermission("other"));
+        $this->assertFalse($this->testUser->hasPermission("audio"));
+        $this->assertFalse($this->testUser->hasPermission("non_eixsting_permission"));
+    }
+
+    public function testUserGetPermissionCheckerInstanceOfPermissionChecker()
+    {
+        $this->assertInstanceOf(PermissionChecker::class, $this->testUser->getPermissionChecker());
+        $this->assertEquals($this->testUser->getId(), $this->testUser->getPermissionChecker()
+            ->getUserId());
+    }
+
     public function testHasPermissionWithUserReturnsFalse()
     {
         $permissionChecker = new PermissionChecker($this->testUser->getId());

@@ -1,0 +1,1 @@
+delete from `{prefix}settings` where name = 'x_frame_options'

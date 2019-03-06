@@ -47,7 +47,8 @@ foreach ($all_permissions as $key => $value) {
 		value="<?php Template::escape(HTML5_ALLOWED_TAGS);?>"><br /> <small><?php translate("allowable_tags_help");?></small>
 	<br /> <br />
 	<p>
-		<button name="add_group" type="submit" class="btn btn-primary"><?php translate("create_group");?></button>
+		<button name="add_group" type="submit" class="btn btn-primary">
+			<i class="fa fa-save"></i> <?php translate("create_group");?></button>
 	</p>
 </form>
 <script type="text/javascript">

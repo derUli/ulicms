@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>UliCMS 2019.2 mit verbessertem User Interface</title>
+        <style type="text/css">
+            body {
+                background-color: white;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI Emoji",
+                    "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue",
+                    sans-serif;
+                font-size: medium;
+                color: rgb(50, 50, 50);
+                margin: 0;
+                padding: 20px;
+            }
+
+            li {
+                margin-bottom: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>UliCMS 2019.2 mit verbessertem User Interface</h1>
+        <p>
+            Das 2019 Quartal 2 Release von UliCMS legt den Fokus vor allem auf Usability
+            und Sicherheit. Für Entwickler ist zusätzlich der neue SCSS Compiler
+            interessant.
+        </p>
+        <h2>Look and Feel & Usability</h2>
+        <p>
+            Alle Buttons im Backend sind nun mit Icons versehen. Zu Unterseiten im
+            Backend wurden Menüs hinzugefügt. z.B. auf allen Unterseiten von "Inhalte"
+            und "Medien".
+        </p>
+        <p>Benutzer & Gruppen wurden unter einen Obermenüpunkt zusammengefasst.</p>
+        <p>
+            Die "Pakete" Seite im Backend wurde komplett neu gestaltet. Die
+            neugestaltete Paketverwaltung enthält die selben Features wie das alte
+            User Interface. Zusätzlich ist es nun möglich Module im Backend zu
+            aktivieren und zu deaktivieren. Dies war vorher nur mit dem Modul
+            <a href="https://extend.ulicms.de/cleanup.html">cleanup</a> oder direkt in
+            der Datenbank möglich. Es ist in diesem Release möglich, auf die alte
+            Ansicht der "Pakete" Seite zu wechseln. Die alte Ansicht wird in einem
+            zukünftigen Release entfernt werden.
+        </p>
+        <p>
+            Die Option "Logo ausblenden" wurde auf die "Logo" Einstellungsseite
+            verschoben. Zuvor befand sich diese Option in den Grundeinstellungen.
+        </p>
+        <p>
+            Wenn der Benutzer nicht über die notwendige Berechtigug um auf die
+            Einstellungen eines Moduls zuzugreifen, ist nun der Button nicht mehr
+            klickbar und ein Schloß Icon wird angezeigt.
+        </p>
+        <h2>Neue Sicherheits- und Antispam-Features</h2>
+        <p>
+            Die Optionen "XSS-Schutz" und "Erlauben diese Webseite in andere Sites
+            einzubinden" zur Steuerung von sicherheitsrelevanten HTTP-Headern wurden
+            hinzugefügt.
+        </p>
+        <p>
+            Die Option "RTL-Sprachen verbieten" wurde zu den Spamfilter-Einstellungen
+            hinzugefügt. Wenn diese Option aktiviert ist, werde Nachrichten und
+            Kommentare welche Buchstaben in Right-To-Left Sprachen (z.B. arabisch) enthalten
+            abgelehnt.
+        </p>
+        <h2>Entwickler Features</h2>
+        <p>
+            Ein <a href="http://leafo.github.io/scssphp/">SCSS Compiler</a> wurde
+            hinzugefügt. Die StyleSheet Queue unterstützt nun *.scss Dateien.
+        </p>
+        <p>
+            Das Feld "Benutzerdefinierte Daten (JSON)" wendet nun den CodeMirror
+            Code-Editor an.
+        </p>
+        <h2>Weite Features</h2>
+        <p>
+        <p>Es werden nun mehrere Konfigurationsumgebungen (Konfigurationsdateien)
+            unterstützt. Die Konfigurationsumgebung kann über die Umgebungsvariable
+            ULICMS_ENVIRONMENT festgelegt werden.
+        </p>
+        <p>Formulare und Banner können nun aktiviert und deaktiviert werden.</p>
+        <p>Die Anzeige eines Werbebanners kann nun zeitlich beschränkt werden.</p>
+    </body>
+</html>

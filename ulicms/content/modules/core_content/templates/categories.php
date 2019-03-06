@@ -20,14 +20,13 @@ if (! is_admin() and ! $permissionChecker->hasPermission("categories")) {
 <?php
     if (! isset($_GET["add"]) and ! isset($_GET["edit"]) and $permissionChecker->hasPermission("categories_create")) {
         ?>
-<p>
-	<a href="<?php echo ModuleHelper::buildActionURL("contents");?>"
-		class="btn btn-default btn-back"><?php translate("back")?></a>
-</p>
+<?php echo Template::executeModuleTemplate("core_content", "icons.php");?>
+
 <h2><?php translate("categories");?></h2>
 <p><?php translate("categories_infotext");?></p>
 <p>
-	<a href="?action=categories&add" class="btn btn-default"><?php translate("create_category");?></a>
+	<a href="?action=categories&add" class="btn btn-default"><i
+		class="fa fa-plus"></i> <?php translate("create_category");?></a>
 </p>
 <p><?php BackendHelper::formatDatasetCount(count($categories));?></p>
 <?php
@@ -135,7 +134,7 @@ if (! is_admin() and ! $permissionChecker->hasPermission("categories")) {
             ?>
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("categories");?>"
-		class="btn btn-default btn-back"><?php translate("back")?></a>
+		class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back")?></a>
 </p>
 <h2><?php translate("create_category");?></h2>
 <?php echo ModuleHelper::buildMethodCallForm("CategoryController", "create");?>
@@ -150,7 +149,8 @@ if (! is_admin() and ! $permissionChecker->hasPermission("categories")) {
 	<textarea cols="50" name="description" rows="5" maxlength="255"></textarea>
 </p>
 <p>
-	<button type="submit" name="create" class="btn btn-primary"><?php translate("create");?></button>
+	<button type="submit" name="create" class="btn btn-primary">
+		<i class="fa fa-save"></i> <?php translate("create");?></button>
 </p>
 <?php echo ModuleHelper::endForm();?><?php
         } else {
@@ -160,7 +160,7 @@ if (! is_admin() and ! $permissionChecker->hasPermission("categories")) {
         if ($permissionChecker->hasPermission("categories_edit")) {
             ?><p>
 	<a href="<?php echo ModuleHelper::buildActionURL("categories");?>"
-		class="btn btn-default btn-back"><?php translate("back")?></a>
+		class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back")?></a>
 </p>
 <h2><?php translate("edit_category");?></h2>
 <?php echo ModuleHelper::buildMethodCallForm("CategoryController", "update");?>
@@ -182,7 +182,8 @@ if (! is_admin() and ! $permissionChecker->hasPermission("categories")) {
             ?></textarea>
 </p>
 <p>
-	<button type="submit" name="update" class="btn btn-primary"><?php
+	<button type="submit" name="update" class="btn btn-primary">
+		<i class="fa fa-save"></i> <?php
             translate("save");
             ?></button>
 </p>

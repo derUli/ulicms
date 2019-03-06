@@ -15,13 +15,16 @@ if ($permissionChecker->hasPermission("users")) {
     }
     $groups = Group::getAll();
     ?>
+    
+<?php echo Template::executeModuleTemplate("core_users", "icons.php");?>
+
 <h2><?php translate("users");?></h2>
 
 <?php if($permissionChecker->hasPermission("users_create")){?>
 <p>
 <?php translate("users_infotext");?>
 	<br /> <br /> <a href="index.php?action=admin_new&ref=admins"
-		class="btn btn-default"><?php translate("create_user");?></a><br />
+		class="btn btn-default"><i class="fa fa-plus"></i> <?php translate("create_user");?></a><br />
 </p>
 <?php }?>
 <strong><?php translate("primary_group");?></strong>

@@ -137,11 +137,11 @@ class Page extends Content
 
     public function loadByID($id)
     {
-        $query = DB::pQuery("SELECT * FROM `{prefix}content` where id = ?", array(
+        $query = Database::pQuery("SELECT * FROM `{prefix}content` where id = ?", array(
             intval($id)
         ), true);
-        if (DB::getNumRows($query) > 0) {
-            $result = DB::fetchObject($query);
+        if (Database::getNumRows($query) > 0) {
+            $result = Database::fetchObject($query);
             $this->fillVarsByResult($result);
         } else {
             throw new Exception("No content with id $id");
@@ -150,11 +150,11 @@ class Page extends Content
 
     public function loadBySystemnameAndLanguage($name, $language)
     {
-        $name = DB::escapeValue($name);
-        $language = DB::escapeValue($language);
-        $query = DB::query("SELECT * FROM `" . tbname("content") . "` where `systemname` = '$name' and `language` = '$language'");
-        if (DB::getNumRows($query) > 0) {
-            $result = DB::fetchObject($query);
+        $name = Database::escapeValue($name);
+        $language = Database::escapeValue($language);
+        $query = Database::query("SELECT * FROM `" . tbname("content") . "` where `systemname` = '$name' and `language` = '$language'");
+        if (Database::getNumRows($query) > 0) {
+            $result = Database::fetchObject($query);
             $this->fillVarsByResult($result);
         } else {
             throw new Exception("No such page");
@@ -179,18 +179,18 @@ class Page extends Content
 				`group_id`, lastchangeby, views, menu, position, parent, access, meta_description, meta_keywords, deleted_at,
 				theme, custom_data, `type`, og_title, og_type, og_image, og_description, cache_control, hidden, comments_enabled) VALUES (";
         
-        $sql .= "'" . DB::escapeValue($this->systemname) . "',";
-        $sql .= "'" . DB::escapeValue($this->title) . "',";
-        $sql .= "'" . DB::escapeValue($this->alternate_title) . "',";
-        $sql .= "'" . DB::escapeValue($this->target) . "',";
+        $sql .= "'" . Database::escapeValue($this->systemname) . "',";
+        $sql .= "'" . Database::escapeValue($this->title) . "',";
+        $sql .= "'" . Database::escapeValue($this->alternate_title) . "',";
+        $sql .= "'" . Database::escapeValue($this->target) . "',";
         $sql .= intval($this->category) . ",";
-        $sql .= "'" . DB::escapeValue($this->content) . "',";
-        $sql .= "'" . DB::escapeValue($this->language) . "',";
+        $sql .= "'" . Database::escapeValue($this->content) . "',";
+        $sql .= "'" . Database::escapeValue($this->language) . "',";
         
         if ($this->menu_image === null) {
             $sql .= " NULL ,";
         } else {
-            $sql .= "'" . DB::escapeValue($this->menu_image) . "',";
+            $sql .= "'" . Database::escapeValue($this->menu_image) . "',";
         }
         
         $sql .= intval($this->active) . ",";
@@ -204,7 +204,7 @@ class Page extends Content
         // Views
         $sql .= "0,";
         
-        $sql .= "'" . DB::escapeValue($this->menu) . "',";
+        $sql .= "'" . Database::escapeValue($this->menu) . "',";
         $sql .= intval($this->position) . ",";
         if ($this->parent === null) {
             $sql .= " NULL ,";
@@ -212,9 +212,9 @@ class Page extends Content
             $sql .= intval($this->parent) . ",";
         }
         
-        $sql .= "'" . DB::escapeValue($this->access) . "',";
-        $sql .= "'" . DB::escapeValue($this->meta_description) . "',";
-        $sql .= "'" . DB::escapeValue($this->meta_keywords) . "',";
+        $sql .= "'" . Database::escapeValue($this->access) . "',";
+        $sql .= "'" . Database::escapeValue($this->meta_description) . "',";
+        $sql .= "'" . Database::escapeValue($this->meta_keywords) . "',";
         
         if ($this->deleted_at === null) {
             $sql .= " NULL ,";
@@ -225,7 +225,7 @@ class Page extends Content
         if ($this->theme === null) {
             $sql .= " NULL ,";
         } else {
-            $sql .= "'" . DB::escapeValue($this->theme) . "',";
+            $sql .= "'" . Database::escapeValue($this->theme) . "',";
         }
         
         if ($this->custom_data === null) {
@@ -234,21 +234,21 @@ class Page extends Content
         
         $json = json_encode($this->custom_data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_FORCE_OBJECT);
         
-        $sql .= "'" . DB::escapeValue($json) . "',";
+        $sql .= "'" . Database::escapeValue($json) . "',";
         
-        $sql .= "'" . DB::escapeValue($this->type) . "',";
+        $sql .= "'" . Database::escapeValue($this->type) . "',";
         
-        $sql .= "'" . DB::escapeValue($this->og_title) . "',";
-        $sql .= "'" . DB::escapeValue($this->og_type) . "',";
-        $sql .= "'" . DB::escapeValue($this->og_image) . "',";
-        $sql .= "'" . DB::escapeValue($this->og_description) . "', ";
-        $sql .= "'" . DB::escapeValue($this->cache_control) . "', ";
-        $sql .= DB::escapeValue($this->hidden) . ", ";
-        $sql .= DB::escapeValue($this->comments_enabled);
+        $sql .= "'" . Database::escapeValue($this->og_title) . "',";
+        $sql .= "'" . Database::escapeValue($this->og_type) . "',";
+        $sql .= "'" . Database::escapeValue($this->og_image) . "',";
+        $sql .= "'" . Database::escapeValue($this->og_description) . "', ";
+        $sql .= "'" . Database::escapeValue($this->cache_control) . "', ";
+        $sql .= Database::escapeValue($this->hidden) . ", ";
+        $sql .= Database::escapeValue($this->comments_enabled);
         $sql .= ")";
         
-        $result = DB::query($sql) or die(DB::error());
-        $this->id = DB::getLastInsertID();
+        $result = Database::query($sql) or die(Database::error());
+        $this->id = Database::getLastInsertID();
         $this->permissions->save($this->id);
         return $result;
     }
@@ -268,18 +268,18 @@ class Page extends Content
         
         $sql = "UPDATE " . tbname("content") . " ";
         
-        $sql .= "set systemname='" . DB::escapeValue($this->systemname) . "',";
-        $sql .= "title='" . DB::escapeValue($this->title) . "',";
-        $sql .= "alternate_title='" . DB::escapeValue($this->alternate_title) . "',";
-        $sql .= "target='" . DB::escapeValue($this->target) . "',";
+        $sql .= "set systemname='" . Database::escapeValue($this->systemname) . "',";
+        $sql .= "title='" . Database::escapeValue($this->title) . "',";
+        $sql .= "alternate_title='" . Database::escapeValue($this->alternate_title) . "',";
+        $sql .= "target='" . Database::escapeValue($this->target) . "',";
         $sql .= "category = " . intval($this->category) . ",";
-        $sql .= "content='" . DB::escapeValue($this->content) . "',";
-        $sql .= "language='" . DB::escapeValue($this->language) . "',";
+        $sql .= "content='" . Database::escapeValue($this->content) . "',";
+        $sql .= "language='" . Database::escapeValue($this->language) . "',";
         
         if ($this->menu_image === null) {
             $sql .= "menu_image = NULL ,";
         } else {
-            $sql .= "menu_image =  '" . DB::escapeValue($this->menu_image) . "',";
+            $sql .= "menu_image =  '" . Database::escapeValue($this->menu_image) . "',";
         }
         
         $sql .= "active=" . intval($this->active) . ",";
@@ -288,7 +288,7 @@ class Page extends Content
         $sql .= "`group_id`=" . intval($this->group_id) . ",";
         $sql .= "lastchangeby=" . intval($this->lastchangeby) . ",";
         
-        $sql .= "menu='" . DB::escapeValue($this->menu) . "',";
+        $sql .= "menu='" . Database::escapeValue($this->menu) . "',";
         $sql .= "position=" . intval($this->position) . ",";
         if ($this->parent === null) {
             $sql .= "parent = NULL ,";
@@ -296,9 +296,9 @@ class Page extends Content
             $sql .= "parent=" . intval($this->parent) . ",";
         }
         
-        $sql .= "access='" . DB::escapeValue($this->access) . "',";
-        $sql .= "meta_description='" . DB::escapeValue($this->meta_description) . "',";
-        $sql .= "meta_keywords='" . DB::escapeValue($this->meta_keywords) . "',";
+        $sql .= "access='" . Database::escapeValue($this->access) . "',";
+        $sql .= "meta_description='" . Database::escapeValue($this->meta_description) . "',";
+        $sql .= "meta_keywords='" . Database::escapeValue($this->meta_keywords) . "',";
         
         if ($this->deleted_at === null) {
             $sql .= "deleted_at=NULL ,";
@@ -309,7 +309,7 @@ class Page extends Content
         if ($this->theme === null) {
             $sql .= "theme=NULL ,";
         } else {
-            $sql .= "theme='" . DB::escapeValue($this->theme) . "',";
+            $sql .= "theme='" . Database::escapeValue($this->theme) . "',";
         }
         
         if ($this->custom_data === null) {
@@ -318,21 +318,21 @@ class Page extends Content
         
         $json = json_encode($this->custom_data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
         
-        $sql .= "custom_data='" . DB::escapeValue($json) . "',";
+        $sql .= "custom_data='" . Database::escapeValue($json) . "',";
         
-        $sql .= "type='" . DB::escapeValue($this->type) . "',";
+        $sql .= "type='" . Database::escapeValue($this->type) . "',";
         
-        $sql .= "og_title='" . DB::escapeValue($this->og_title) . "',";
-        $sql .= "og_type='" . DB::escapeValue($this->og_type) . "',";
-        $sql .= "og_image='" . DB::escapeValue($this->og_image) . "',";
-        $sql .= "og_description='" . DB::escapeValue($this->og_description) . "', ";
-        $sql .= "hidden='" . DB::escapeValue($this->hidden) . "', ";
-        $sql .= "comments_enabled=" . DB::escapeValue($this->comments_enabled) . ", ";
-        $sql .= "cache_control='" . DB::escapeValue($this->cache_control) . "' ";
+        $sql .= "og_title='" . Database::escapeValue($this->og_title) . "',";
+        $sql .= "og_type='" . Database::escapeValue($this->og_type) . "',";
+        $sql .= "og_image='" . Database::escapeValue($this->og_image) . "',";
+        $sql .= "og_description='" . Database::escapeValue($this->og_description) . "', ";
+        $sql .= "hidden='" . Database::escapeValue($this->hidden) . "', ";
+        $sql .= "comments_enabled=" . Database::escapeValue($this->comments_enabled) . ", ";
+        $sql .= "cache_control='" . Database::escapeValue($this->cache_control) . "' ";
         
         $sql .= " WHERE id = " . $this->id;
         
-        $result = DB::query($sql) or die(DB::getLastError());
+        $result = Database::query($sql) or die(Database::getLastError());
         
         $this->permissions->save($this->id);
         
@@ -422,8 +422,13 @@ class Page extends Content
     }
 
     // this returns an array of all comments of this content
-    public function getComments()
+    public function getComments($order_by = "date desc")
     {
-        return Comment::getAllByContentId($this->id);
+    return Comment::getAllByContentId($this->id, $order_by);
+}
+
+    public function getUrl($suffix = null)
+    {
+        return ModuleHelper::getFullPageURLByID($this->id, $suffix);
     }
 }

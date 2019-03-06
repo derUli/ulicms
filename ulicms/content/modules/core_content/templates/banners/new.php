@@ -3,11 +3,17 @@ $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("banners") and $permissionChecker->hasPermission("banners_create")) {
     ?>
 
-<?php echo ModuleHelper::buildMethodCallForm("BannerController", "create");?>
+<?php
+    
+    echo ModuleHelper::buildMethodCallForm("BannerController", "create", array(), RequestMethod::POST, array(
+        "autocomplete" => "off"
+    ));
+    ?>
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("banner");?>"
-		class="btn btn-default btn-back"><?php translate("back")?></a>
+		class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back")?></a>
 </p>
+
 <p>
 	<input type="radio" checked="checked" id="radio_gif" name="type"
 		value="gif"
@@ -36,6 +42,21 @@ if ($permissionChecker->hasPermission("banners") and $permissionChecker->hasPerm
 	<textarea name="html" rows="10" cols="40"></textarea>
 </fieldset>
 <p>
+	<strong><?php translate("enabled");?></strong><br /> <select
+		name="enabled">
+		<option value="1" selected><?php translate("yes");?></option>
+		<option value="0"><?php translate("no");?></option>
+	</select>
+</p>
+<p>
+	<strong><?php translate("date_from");?></strong><br /> <input
+		type="text" class="datepicker" name="date_from" value="">
+</p>
+<p>
+	<strong><?php translate("date_to");?></strong><br /> <input type="text"
+		class="datepicker" name="date_to" value="">
+</p>
+<p>
 	<strong><?php translate("language");?>
 	</strong> <br /> <select name="language">
 	<?php
@@ -55,9 +76,10 @@ if ($permissionChecker->hasPermission("banners") and $permissionChecker->hasPerm
 </p>
 <br />
 <p>
-	<button type="submit" class="btn btn-primary"><?php translate("add_banner");?></button>
+	<button type="submit" class="btn btn-primary">
+		<i class="fa fa-save"></i> <?php translate("add_banner");?></button>
 </p>
-</form>
+<?php echo ModuleHelper::endForm();?>
 <?php
 } else {
     noPerms();

@@ -16,7 +16,7 @@ if ($permissionChecker->hasPermission("privacy_settings")) {
 	<p>
 		<a
 			href="<?php echo ModuleHelper::buildActionURL("settings_categories");?>"
-			class="btn btn-default btn-back"><?php translate("back")?></a>
+			class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back")?></a>
 	</p>	<?php
     if (Request::getVar("save")) {
         ?>
@@ -135,7 +135,8 @@ if ($permissionChecker->hasPermission("privacy_settings")) {
 	</div>
 </div>
 <p>
-	<button type="submit" class="btn btn-primary voffset2"><?php translate("save_changes");?></button>
+	<button type="submit" class="btn btn-primary voffset2">
+		<i class="fas fa-save"></i> <?php translate("save_changes");?></button>
 </p>
 <?php
     enqueueScriptFile("scripts/privacy.js");

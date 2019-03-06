@@ -19,6 +19,8 @@ class SpamFilterConfiguration
 
     private $disallowCyrillicChars = false;
 
+    private $disallowRtlChars = false;
+
     private $rejectRequestsFromBots = false;
 
     private $checkMxOfMailAddress = false;
@@ -34,6 +36,7 @@ class SpamFilterConfiguration
         
         $settings->setDisallowChineseChars(Settings::get("disallow_chinese_chars"));
         $settings->setDisallowCyrillicChars(Settings::get("disallow_cyrillic_chars"));
+        $settings->setDisallowRtlChars(Settings::get("disallow_rtl_chars"));
         
         $settings->setRejectRequestsFromBots(Settings::get("reject_requests_from_bots"));
         $settings->setCheckMxOfMailAddress(Settings::get("check_mx_of_mail_address"));
@@ -111,6 +114,16 @@ class SpamFilterConfiguration
     public function setDisallowCyrillicChars($val)
     {
         $this->disallowCyrillicChars = boolval($val);
+    }
+
+    public function getDisallowRtlChars()
+    {
+        return $this->disallowRtlChars;
+    }
+
+    public function setDisallowRtlChars($val)
+    {
+        $this->disallowRtlChars = boolval($val);
     }
 
     public function getRejectRequestsFromBots()

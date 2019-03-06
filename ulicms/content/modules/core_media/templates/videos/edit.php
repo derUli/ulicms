@@ -1,13 +1,13 @@
 <?php
-$permissionChecker = new ACL ();
-if ($permissionChecker->hasPermission ( "videos" ) and $permissionChecker->hasPermission ( "videos_edit" )) {
-	$id = intval ( $_REQUEST ["id"] );
-	$query = db_query ( "SELECT * FROM " . tbname ( "videos" ) . " WHERE id = $id" );
-	if (db_num_rows ( $query ) > 0) {
-		$result = db_fetch_object ( $query );
-		?><p>
+$permissionChecker = new ACL();
+if ($permissionChecker->hasPermission("videos") and $permissionChecker->hasPermission("videos_edit")) {
+    $id = intval($_REQUEST["id"]);
+    $query = db_query("SELECT * FROM " . tbname("videos") . " WHERE id = $id");
+    if (db_num_rows($query) > 0) {
+        $result = db_fetch_object($query);
+        ?><p>
 	<a href="<?php echo ModuleHelper::buildActionURL("videos");?>"
-		class="btn btn-default btn-back"><?php translate("back")?></a>
+		class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back")?></a>
 </p>
 <h1><?php translate ( "UPLOAD_VIDEO" );?></h1>
 <form action="index.php?sClass=VideoController&sMethod=update"
@@ -24,9 +24,9 @@ if ($permissionChecker->hasPermission ( "videos" ) and $permissionChecker->hasPe
 	<br /> <br /> <strong><?php translate ( "video_ogg" );?>
 	</strong><br /> <input name="ogg_file" type="text"
 		value="<?php echo htmlspecialchars ( $result->ogg_file );?>"><br /> <strong><?php
-		
-		translate ( "video_webm" );
-		?></strong><br /> <input name="webm_file" type="text"
+        
+        translate("video_webm");
+        ?></strong><br /> <input name="webm_file" type="text"
 		value="<?php echo htmlspecialchars ( $result->webm_file );?>"><br /> <strong><?php echo translate ( "video_mp4" );?>
 	</strong><br /> <input name="mp4_file" type="text"
 		value="<?php echo htmlspecialchars ( $result->mp4_file );?>"><br /> <strong><?php translate ( "width" );?>
@@ -37,14 +37,15 @@ if ($permissionChecker->hasPermission ( "videos" ) and $permissionChecker->hasPe
 	</strong><br /> <input type="text" name="code"
 		value="[video id=<?php echo $result->id;?>]"
 		onclick="this.focus();this.select();" readonly> <br />
-	<button type="submit" class="btn btn-primary"><?php translate ( "save_changes" );?></button>
+	<button type="submit" class="btn btn-primary">
+		<i class="fa fa-save"></i> <?php translate ( "save_changes" );?></button>
 
 
 </form>
 <?php
-	} else {
-		translate ( "video_not_found" );
-	}
+    } else {
+        translate("video_not_found");
+    }
 } else {
-	noPerms ();
+    noPerms();
 }

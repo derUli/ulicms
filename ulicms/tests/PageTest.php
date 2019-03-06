@@ -1,5 +1,4 @@
 <?php
-use UliCMS\Exceptions\NotImplementedException;
 use UliCMS\Data\Content\Comment;
 
 class PageTest extends \PHPUnit\Framework\TestCase
@@ -22,6 +21,8 @@ class PageTest extends \PHPUnit\Framework\TestCase
         $this->commentsInitialEnabled = Settings::get("comments_enabled");
         $this->initialCommentableContentTypes = Settings::get("commentable_content_types");
         
+        $_SERVER['HTTP_HOST'] = "company.com";
+        
         $this->cleanUp();
     }
 
@@ -29,6 +30,8 @@ class PageTest extends \PHPUnit\Framework\TestCase
     {
         @session_destroy();
         $this->cleanUp();
+        
+        unset($_SERVER['HTTP_HOST']);
         
         if ($this->commentsInitialEnabled) {
             Settings::set("comments_enabled", "1");
@@ -407,8 +410,8 @@ class PageTest extends \PHPUnit\Framework\TestCase
         $comment->save();
         
         $this->assertCount(2, $page->getComments());
-        $this->assertEquals("Kommentar 1", $page->getComments()[0]->getText());
-        $this->assertEquals("Kommentar 2", $page->getComments()[1]->getText());
+        $this->assertEquals("Kommentar 1", $page->getComments("date asc")[0]->getText());
+        $this->assertEquals("Kommentar 2", $page->getComments("date asc")[1]->getText());
         
         $this->cleanUp();
     }
@@ -426,6 +429,49 @@ class PageTest extends \PHPUnit\Framework\TestCase
         $page->save();
         
         $this->assertCount(0, $page->getComments());
+        
+        $this->cleanUp();
+    }
+
+    public function testGetUrlWithSuffix()
+    {
+        $page = new Page();
+        $page->title = 'Unit Test ' . time();
+        $page->systemname = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "Some Text";
+        $page->comments_enabled = false;
+        $page->autor = 1;
+        $page->group_id = 1;
+        $page->save();
+        
+        $url = $page->getUrl("foo=bar&hello=world");
+        $this->assertStringStartsWith("http", $url);
+        $this->assertStringContainsString("//company.com", $url);
+        
+        $this->assertStringContainsString("{$page->systemname}.html", $url);
+        $this->assertStringEndsWith("foo=bar&hello=world", $url);
+        
+        $this->cleanUp();
+    }
+
+    public function testGetUrlWithoutSuffix()
+    {
+        $page = new Page();
+        $page->title = 'Unit Test ' . time();
+        $page->systemname = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "Some Text";
+        $page->comments_enabled = false;
+        $page->autor = 1;
+        $page->group_id = 1;
+        $page->save();
+        
+        $url = $page->getUrl();
+        $this->assertStringStartsWith("http", $url);
+        $this->assertStringContainsString("//company.com", $url);
+        
+        $this->assertStringContainsString("{$page->systemname}.html", $url);
         
         $this->cleanUp();
     }

@@ -1,6 +1,6 @@
 <?php
 
-class AntiSpamHelper
+class AntiSpamHelper extends Helper
 {
 
     // checking if this Country is blocked by spamfilter

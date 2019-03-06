@@ -268,9 +268,13 @@ class CommentTest extends \PHPUnit\Framework\TestCase
         $comment->setUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36");
         $comment->setText("Unit Test 5");
         
+        $time = time();
+        $comment->setDate($time);
+        
         $comment->save();
         
         $comment = new Comment();
+        
         $comment->setContentId($last->id);
         $comment->setAuthorName("John Doe");
         $comment->setAuthorEmail("john@doe.de");
@@ -286,19 +290,20 @@ class CommentTest extends \PHPUnit\Framework\TestCase
         
         $comment->save();
         
-        $comments = Comment::getAllByContentId($last->id);
+        $comments = Comment::getAllByContentId($last->id, "id desc");
         
         $this->assertGreaterThanOrEqual(3, count($comments));
         
-        $comment = array_pop($comments);
+        $comment = array_shift($comments);
+        
         $this->assertNotNull($comment->getID());
         $this->assertEquals("Unit Test 6", $comment->getText());
         
-        $comment = array_pop($comments);
+        $comment = array_shift($comments);
         $this->assertNotNull($comment->getID());
         $this->assertEquals("Unit Test 5", $comment->getText());
         
-        $comment = array_pop($comments);
+        $comment = array_shift($comments);
         $this->assertNotNull($comment->getID());
         $this->assertEquals("Unit Test 4", $comment->getText());
     }
@@ -404,12 +409,11 @@ class CommentTest extends \PHPUnit\Framework\TestCase
 
     public function testCheckIfCommentWithIpExistsTrue()
     {
-		
         $content = ContentFactory::getAll();
         $first = $content[0];
-		
+        
         $comment = new Comment();
-		$comment->setContentId($first->id);
+        $comment->setContentId($first->id);
         $comment->setAuthorName("John Doe");
         $comment->setAuthorEmail("john@doe.de");
         $comment->setAuthorUrl("http://john-doe.de");

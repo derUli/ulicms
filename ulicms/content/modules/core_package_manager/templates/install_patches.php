@@ -9,7 +9,7 @@ if ($permissionChecker->hasPermission("update_system")) {
 <p>
 	<a
 		href="<?php echo ModuleHelper::buildActionURL("available_patches");?>"
-		class="btn btn-default btn-back"><?php translate("back")?></a>
+		class="btn btn-default btn-back"><i class="fa fa-arrow-left" aria-hidden="true"></i> <?php translate("back")?></a>
 </p>
 <h1><?php translate ( "install_patches" );?></h1>
 <?php

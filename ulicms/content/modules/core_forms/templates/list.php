@@ -5,14 +5,13 @@ if (! $permissionChecker->hasPermission("forms")) {
 } else {
     $forms = Forms::getAllForms();
     ?>
-<p>
-	<a href="<?php echo ModuleHelper::buildActionURL("contents");?>"
-		class="btn btn-default btn-back"><?php translate("back")?></a>
-</p>
+<?php echo Template::executeModuleTemplate("core_content", "icons.php");?>
+
 <h1><?php translate("forms"); ?></h1>
 <?php if($permissionChecker->hasPermission ( "forms_create" )){ ?>
 <p>
-	<a href="index.php?action=forms_new" class="btn btn-default"><?php translate("create_form");?></a>
+	<a href="index.php?action=forms_new" class="btn btn-default"><i
+		class="fa fa-plus"></i> <?php translate("create_form");?></a>
 </p>
 <?php }?>
 <p><?php BackendHelper::formatDatasetCount(count($forms));?></p>

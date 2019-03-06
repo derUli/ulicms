@@ -110,10 +110,9 @@ if ($permissionChecker->hasPermission("pages")) {
     $sql .= " order by a.title";
     $parents = db_query($sql);
     ?>
-<p>
-	<a href="<?php echo ModuleHelper::buildActionURL("contents");?>"
-		class="btn btn-default btn-back"><?php translate("back")?></a>
-</p>
+
+<?php echo Template::executeModuleTemplate("core_content", "icons.php");?>
+
 <h2><?php translate("pages");?></h2>
 
 <p><?php translate ( "pages_infotext" );?></p>
@@ -130,13 +129,15 @@ if ($permissionChecker->hasPermission("pages")) {
 	</form>
 	<div class="row">
 		<div class="col-xs-6">
-			<a href="index.php?action=pages_new" class="btn btn-default"><?php translate("create_page");?></a>
+			<a href="index.php?action=pages_new" class="btn btn-default"><i
+				class="fa fa-plus"></i> <?php translate("create_page");?></a>
 		</div>
 		<div class="col-xs-6 text-right">
 			<div class="page-list-filters" style="<?php if(!$show_filters) echo "display:none";?>">
 				<a
 					href="<?php echo ModuleHelper::buildMethodCallUrl("PageController", "resetFilters");?>"
-					class="btn btn-default" id="btn-reset-filters"><?php translate("reset_filters")?></a>
+					class="btn btn-default" id="btn-reset-filters"><i
+					class="fas fa-undo"></i> <?php translate("reset_filters")?></a>
 			</div>
 		</div>
 	</div>
@@ -373,7 +374,7 @@ if ($permissionChecker->hasPermission("pages")) {
 
 <a
 		href="<?php echo ModuleHelper::buildMethodCallUrl("PageController", "emptyTrash");?>"
-		onclick="return ajaxEmptyTrash(this.href);"><?php translate("empty_recycle_bin");?></a>
+		onclick="return ajaxEmptyTrash(this.href);" class="btn btn-warning"><?php translate("empty_recycle_bin");?></a>
 <?php
     }
     ?>

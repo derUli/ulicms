@@ -1,6 +1,6 @@
 <?php
 
-class StringHelper
+class StringHelper extends Helper
 {
 
     public static function isNullOrEmpty($variable)
@@ -226,7 +226,7 @@ class StringHelper
         return $lines;
     }
 
-    public static function trimLines($str, $newline = "\r\n")
+    public static function trimLines($str, $newline = PHP_EOL)
     {
         $str = StringHelper::linesFromString($str, true, true, false);
         $str = implode($newline, $str);

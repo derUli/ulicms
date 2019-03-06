@@ -779,10 +779,10 @@ function clearCache()
 // DEPRECATED:
 // This function may be removed in future releases of UliCMS
 // Use do_event()
-function add_hook($name)
+function add_hook($name, $runs = ModuleEventConstants::RUNS_ONCE)
 {
     trigger_error("add_hook() is deprecated. Please use do_event().", E_USER_DEPRECATED);
-    do_event($name);
+    do_event($name, $runs);
 }
 
 function do_event($name, $runs = ModuleEventConstants::RUNS_ONCE)
@@ -1602,6 +1602,11 @@ function is_tablet()
     $detect = new Mobile_Detect();
     $result = $detect->isTablet();
     return $result;
+}
+
+function is_desktop()
+{
+    return ! is_mobile();
 }
 
 // 21. Februar 2015

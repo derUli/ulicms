@@ -83,7 +83,8 @@ if ($twofactor_authentication) {
 		<tr>
 		<td></td>
 		<td style="padding-top: 10px; text-align: center;">
-			<button type="submit" class="btn btn-primary"><?php translate("login");?></button>
+			<button type="submit" class="btn btn-primary">
+				<i class="fas fa-sign-in-alt"></i> <?php translate("login");?></button>
 		</td>
 	</tr>
 </table>
@@ -123,7 +124,7 @@ if (isset($_REQUEST["error"]) and ! empty($_REQUEST["error"])) {
             echo "go=" . real_htmlspecialchars($_REQUEST["go"]);
         }
         ?>"
-	class="btn btn-default"><?php
+	class="btn btn-default voffset2"><i class="fas fa-user-plus"></i> <?php
         
         translate("register");
         ?></a>
@@ -134,7 +135,8 @@ if (isset($_REQUEST["error"]) and ! empty($_REQUEST["error"])) {
     
     if (! Settings::get("disable_password_reset")) {
         ?>
-<a href="?reset_password" class="btn btn-default pull-right"><?php
+<a href="?reset_password" class="btn btn-default pull-right voffset2"><i
+	class="fa fa-lock"></i> <?php
         
         translate("reset_password");
         ?></a>

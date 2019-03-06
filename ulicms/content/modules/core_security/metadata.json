@@ -1,0 +1,9 @@
+{
+	"source": "core",
+	"version": "2019.1.4",
+	"embed": false,
+	"controllers": {
+		"CoreSecurityController": "controllers/CoreSecurityController.php"
+	},
+	"main_class": "CoreSecurityController"
+}

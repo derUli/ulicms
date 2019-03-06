@@ -6,7 +6,7 @@ if ($permissionChecker->hasPermission("languages")) {
 <p>
 	<a
 		href="<?php echo ModuleHelper::buildActionURL("settings_categories");?>"
-		class="btn btn-default btn-back"><?php translate("back")?></a>
+		class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back")?></a>
 </p>
 <h2><?php translate("languages");?></h2>
 <?php echo ModuleHelper::buildMethodCallForm("LanguageController", "create");?>
@@ -21,7 +21,8 @@ if ($permissionChecker->hasPermission("languages")) {
 			<td><input type="text" name="name" maxlength="100" required></td>
 		</tr>
 	</table>
-	<button type="submit" class="btn btn-primary voffset2"><?php translate("add_language");?></button>
+	<button type="submit" class="btn btn-primary voffset2">
+		<i class="fa fa-plus"></i> <?php translate("add_language");?></button>
 </div>
 <?php echo ModuleHelper::endForm();?>
 <br>

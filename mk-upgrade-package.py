@@ -36,7 +36,8 @@ def main():
               "modules", "templates", "contents.css",
               "config.js", "comments", "*~", ".settings", ".project", ".buildpath",
               "tests", "run-tests.sh", "run-tests.bat",
-              "run-tests.xampp.mac.sh", ".pydevproject", "CMSConfig.php", "log")
+              "run-tests.xampp.mac.sh", ".pydevproject", "CMSConfig.php", "log",
+              "configurations", ".phpunit.result.cache")
 
     IGNORE_PATTERNS = shutil.ignore_patterns(*ignore)
     if args.delete and os.path.exists(target):
@@ -97,8 +98,16 @@ def main():
 
     main_dir = os.path.join(target, "ulicms")
 
-    # Composer packages zu Deploy hinzufügen
+    # Install all non-dev composer packages
     os.system("php ulicms/composer install --working-dir=" + main_dir + "/ --no-dev")
+
+    old_cwd = os.getcwd()
+
+    # Install npm packages
+    # TODO: is there are a way to specify a working dir like used for composer (code above)?
+    os.chdir("ulicms")
+    os.system("npm install")
+    os.chdir(old_cwd)
 
     if args.zip:
         print("zipping folder...")

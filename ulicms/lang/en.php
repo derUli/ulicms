@@ -215,10 +215,12 @@ define("TRANSLATION_TITLE_FORMAT", "Page title format");
 
 // Spamfilter Einstellungen
 define("TRANSLATION_SPAMFILTER_ENABLED", "Spamfilter enabled");
-define("TRANSLATION_BLACKLIST", "Black list");
+define("TRANSLATION_BLACKLIST", "Forbidden Words");
 define("TRANSLATION_SPAM_COUNTRIES", "Users from the following countries may <strong>not</strong> write comments.");
 define("TRANSLATION_DISALLOW_CHINESE_CHARS", "Disallow chinese chars");
 define("TRANSLATION_DISALLOW_CYRILLIC_CHARS", "Disallow cyrillic chars");
+define("TRANSLATION_DISALLOW_RTL_CHARS", "Disallow RTL-Languages (Arabic, Hebrew, Persian)");
+
 // Cache
 define("TRANSLATION_CACHE_TEXT1", "<p>Um die Performance der Website zu verbessern,
 bietet das UliCMS eine Cache-Funktion.<br/>
@@ -544,7 +546,7 @@ define("TRANSLATION_MAIL_FROM_FIELD", "Field, which contains the sender e-mail a
 define("TRANSLATION_TARGET_PAGE_ID", "Target Page");
 
 // Patch upload
-define("TRANSLATION_INSTALL_PATCH_FROM_FILE", "Install patch from file");
+define("TRANSLATION_INSTALL_PATCH_FROM_FILE", "Upload patch");
 define("TRANSLATION_INSTALL_PATCH", "Install patch");
 
 // 2-Faktor Authentifizierung

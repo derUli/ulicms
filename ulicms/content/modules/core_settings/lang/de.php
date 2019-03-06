@@ -38,3 +38,14 @@ add_translation("comments_must_be_approved", "Kommentare müssen genehmigt werde
 add_translation("commentable_content_types", "Kommentierbare Inhaltstypen");
 
 add_translation("keep_spam_ips", "IP-Adressen von Spamkommentaren nicht löschen");
+
+add_translation("min_time_to_fill_form_help", "Ein Wort je Zeile. Auch Teile einer Zeichenkette werden erkannt.");
+
+add_translation("http_headers", "HTTP Header");
+add_translation("x_frame_options", "Erlauben diese Webseite in andere Sites einzubinden");
+add_translation("deny", "Verbieten");
+add_translation("allow", "Erlauben");
+add_translation("sameorigin", "Nur innerhalb der selben Domain");
+
+add_translation("x_xss_protection", "XSS-Schutz");
+add_translation("on_block", "An (Block Modus)");

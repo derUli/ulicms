@@ -29,7 +29,7 @@ class CacheUtil
             $driver = "sqlite";
         }
         
-        self::$adapter = new phpFastCache\Helper\Psr16Adapter($driver, $cacheConfig);
+        self::$adapter = new Psr16Adapter($driver, $cacheConfig);
         
         return self::$adapter;
     }
@@ -74,6 +74,6 @@ class CacheUtil
 
     public static function getCurrentUid()
     {
-        return md5(get_request_uri() . getCurrentLanguage() . boolval(is_mobile()));
+        return md5(get_request_uri() . getCurrentLanguage() . strbool(is_mobile()) . strbool(is_crawler()) . strbool(is_tablet()));
     }
 }

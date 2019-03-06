@@ -13,7 +13,7 @@ class CoreForms extends Controller
     public function beforeHttpHeader()
     {
         if (StringHelper::isNotNullOrWhitespace(Request::getVar("submit-cms-form")) and Request::isPost()) {
-            // apply spam filter if disabled
+            // apply spam filter if enabled
             if (Settings::get("spamfilter_enabled") == "yes") {
                 // check if honeypot field is filled
                 if (! empty($_POST["my_homepage_url"])) {
@@ -27,7 +27,11 @@ class CoreForms extends Controller
                     }
                     if (Settings::get("disallow_cyrillic_chars") and AntiSpamHelper::isCyrillic($_POST[$key])) {
                         $this->incSpamCount();
-                        HTMLResult(get_translation("cyrillic_charts_not_allowed"), 403);
+                        HTMLResult(get_translation("cyrillic_chars_not_allowed"), 403);
+                    }
+                    if (Settings::get("disallow_rtl_chars") and AntiSpamHelper::isRtl($_POST[$key])) {
+                        $this->incSpamCount();
+                        HTMLResult(get_translation("rtl_chars_not_allowed"), 403);
                     }
                     
                     $badwordsCheck = AntiSpamHelper::containsBadwords($_POST[$key]);
@@ -47,6 +51,7 @@ class CoreForms extends Controller
                     )), 403);
                 }
                 if (Settings::get("reject_requests_from_bots") and AntiSpamHelper::checkForBot(get_useragent())) {
+                    $this->incSpamCount();
                     HTMLResult(get_translation("bots_are_not_allowed", array(
                         "%hostname%" => $hostname
                     )), 403);

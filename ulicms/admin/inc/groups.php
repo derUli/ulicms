@@ -96,9 +96,8 @@ if (! $permissionChecker->hasPermission("groups")) {
         }
     }
     ?>
-<h1>
-<?php translation("groups");?>
-</h1>
+    <?php echo Template::executeModuleTemplate("core_users", "icons.php");?>
+<h2><?php translation("groups");?></h2>
 <?php
     if ($created) {
         // @FIXME: Das hier lokalisieren

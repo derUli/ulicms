@@ -9,10 +9,10 @@ class MetaKeywordsController extends Controller
         for ($i = 0; $i < count($languages); $i ++) {
             $lang = $languages[$i];
             if (isset($_POST["meta_keywords_" . $lang])) {
-                $page = db_escape($_POST["meta_keywords_" . $lang]);
-                setconfig("meta_keywords_" . $lang, $page);
+                $page = $_POST["meta_keywords_" . $lang];
+                Settings::set("meta_keywords_" . $lang, $page);
                 if ($lang == Settings::get("default_language")) {
-                    setconfig("meta_keywords", $page);
+                    Settings::set("meta_keywords", $page);
                 }
             }
         }

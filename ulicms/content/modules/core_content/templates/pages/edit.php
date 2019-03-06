@@ -67,10 +67,10 @@ if ($permissionChecker->hasPermission("pages")) {
 <div class="pageform" style="display: none">
 	<div class="top-bar">
 		<a href="<?php echo ModuleHelper::buildActionURL("pages");?>"
-			class="btn btn-default btn-back"><?php translate("back")?></a>
+			class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back")?></a>
 <?php
             
-            echo ModuleHelper::buildMethodCallButton("PageController", "delete", get_translation("delete"), array(
+            echo ModuleHelper::buildMethodCallButton("PageController", "delete", '<i class="fas fa-trash"></i> ' . get_translation("delete"), array(
                 "class" => "btn btn-danger",
                 "type" => "submit"
             ), array(
@@ -334,7 +334,8 @@ function openMenuImageSelectWindow(field) {
             echo $row->menu_image;
             ?>"
 				style="cursor: pointer" /> <a href="#"
-				onclick="$('#menu_image').val('');return false;"><?php translate("clear");?> </a>
+				onclick="$('#menu_image').val('');return false;"
+				class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear");?> </a>
 
 		</div>
 		<div class="typedep" id="tab-link">
@@ -447,7 +448,8 @@ function openMenuImageSelectWindow(field) {
             echo htmlspecialchars($row->og_image);
             ?>"
 						style="cursor: pointer" /> <a href="#"
-						onclick="$('#og_image').val('');return false;"><?php translate("clear");?>
+						onclick="$('#og_image').val('');return false;"
+						class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear");?>
 		</a>
 		<?php
             if (! empty($row->og_image)) {
@@ -694,7 +696,8 @@ function openMenuImageSelectWindow(field) {
 					readonly="readonly" onclick="openMenuImageSelectWindow(this)"
 					value="<?php Template::escape($row->image_url);?>"
 					style="cursor: pointer" /> <a href="#"
-					onclick="$('#menu_image').val('');return false;"><?php translate ( "clear" );?>
+					onclick="$('#menu_image').val('');return false;"
+					class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate ( "clear" );?>
 		</a>
 			</div>
 		</div>
@@ -744,7 +747,8 @@ function openArticleImageSelectWindow(field) {
 					readonly="readonly" onclick="openArticleImageSelectWindow(this)"
 					value="<?php echo real_htmlspecialchars($row->article_image);?>"
 					style="cursor: pointer" maxlength="255" /> <a href="#"
-					onclick="$('#article_image').val('');return false;"><?php translate("clear");?></a>
+					onclick="$('#article_image').val('');return false;"
+					class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear");?></a>
 			</div>
 		</div>
 		<div style="<?php echo !$permissionChecker->hasPermission("pages_edit_permissions") ? "display:none" : ""?>">
@@ -819,7 +823,7 @@ function openArticleImageSelectWindow(field) {
 				<p>
 					<a
 						href="<?php esc(ModuleHelper::buildMethodCallUrl(CommentsController::class, "filterComments", "content_id={$row->id}"));?>"
-						class="btn btn-default" target="_blank"><?php translate("comments_manage");?></a>
+						class="btn btn-default" target="_blank"><i class="fa fa-comments"></i> <?php translate("comments_manage");?></a>
 				</p>
                 <?php
             }
@@ -929,7 +933,8 @@ function openArticleImageSelectWindow(field) {
 			<div class="typedep" id="custom_data_json">
 		<?php do_event("before_custom_data_json");?>
 		<strong><?php translate("custom_data_json");?></strong><br />
-				<textarea name="custom_data" style="width: 100%; height: 200px;"
+				<textarea name="custom_data" style="width: 100%; height: 200px;" 
+				class="codemirror" data-mimetype="application/json"
 					cols=80 rows=10><?php
             
             echo htmlspecialchars($row->custom_data);
@@ -1053,7 +1058,7 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
 		<p>
 			<a
 				href="index.php?action=restore_version&content_id=<?php echo $row->id;?>"
-				class="btn btn-warning"><?php translate("restore_older_version");?></a>
+				class="btn btn-warning"><i class="fas fa-undo"></i> <?php translate("restore_older_version");?></a>
 		</p>
 		<?php }?>	</div>
 	<div class="inPageMessage">
@@ -1062,12 +1067,14 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
 	</div>
 	<div class="row">
 		<div class="col-xs-6">
-			<button type="submit" class="btn btn-primary"><?php translate("save_changes");?></button>
+			<button type="submit" class="btn btn-primary">
+				<i class="far fa-save"></i> <?php translate("save_changes");?></button>
 
 		</div>
 
 		<div class="col-xs-6 text-right">
-			<button class="typedep btn btn-info" type="button" id="btn-view-page"><?php translate("view");?></button>
+			<button class="typedep btn btn-info" type="button" id="btn-view-page">
+				<i class="fas fa-eye"></i> <?php translate("view");?></button>
 		</div>
 	</div>
 <?php

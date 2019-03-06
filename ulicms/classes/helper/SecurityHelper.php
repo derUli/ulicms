@@ -1,6 +1,6 @@
 <?php
 
-class SecurityHelper
+class SecurityHelper extends Helper
 {
 
     public static function securePath($path)

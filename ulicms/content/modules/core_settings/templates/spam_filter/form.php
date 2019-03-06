@@ -1,7 +1,7 @@
 <p>
 	<a
 		href="<?php echo ModuleHelper::buildActionURL("settings_categories");?>"
-		class="btn btn-default btn-back"><?php translate("back")?></a>
+		class="btn btn-default btn-back"><i class="fas fa-arrow-left"></i> <?php translate("back")?></a>
 </p>
 <h1><?php translate("spamfilter");?></h1>
 <?php
@@ -44,12 +44,15 @@ function spamFilterEnabledcheckboxChanged(checked){
         echo " style='display:none;'";
     }
     ?>>
-		<label for="spamfilter_words_blacklist"><?php translate("blacklist");?></label><br />
-		<textarea name="spamfilter_words_blacklist"
-			id="spamfilter_words_blacklist" rows=10 cols=40><?php
+		<p>
+			<label for="spamfilter_words_blacklist"><?php translate("blacklist");?></label><br />
+			<textarea name="spamfilter_words_blacklist"
+				id="spamfilter_words_blacklist" rows=10 cols=40><?php
     echo htmlspecialchars(Settings::get("spamfilter_words_blacklist"), ENT_QUOTES, "UTF-8");
     ?></textarea>
-		<br /> <label for="country_blacklist"><?php translate("spam_countries");?></label>
+			<small><?php translate("min_time_to_fill_form_help");?></small>
+		</p>
+		<label for="country_blacklist"><?php translate("spam_countries");?></label>
 		<input type="text" name="country_blacklist" id="country_blacklist"
 			value="<?php
     
@@ -74,6 +77,16 @@ function spamFilterEnabledcheckboxChanged(checked){
         echo " checked=\"checked\"";
     }
     ?>> <?php translate("disallow_cyrillic_chars");?>
+		</label>
+		</div>
+		<div class="checkbox">
+			<label for="disallow_rtl_chars"> <input type="checkbox"
+				name="disallow_rtl_chars" id="disallow_rtl_chars"
+				<?php
+    if (Settings::get("disallow_rtl_chars")) {
+        echo " checked=\"checked\"";
+    }
+    ?>> <?php translate("disallow_rtl_chars");?>
 		</label>
 		</div>
 		<div class="checkbox">
@@ -105,9 +118,10 @@ function spamFilterEnabledcheckboxChanged(checked){
     ?>">
 		</p>
 	</div>
-	<p>
+	<p class="voffset2">
 		<button type="submit" name="submit_spamfilter_settings"
-			class="btn btn-primary voffset3"><?php
+			class="btn btn-primary">
+			<i class="fas fa-save"></i> <?php
     
     translate("save_changes");
     ?></button>

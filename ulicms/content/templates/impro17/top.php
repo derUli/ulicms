@@ -50,6 +50,10 @@ echo getconfig("header-background-color");
 ?>;
 }
 </style>
+<?php
+enqueueStylesheet(getTemplateDirPath("impro17") . "style.scss");
+combinedStylesheetHtml();
+?>
 </head>
 <body class="<?php body_classes();?>">
 	<div class="container" id="root">

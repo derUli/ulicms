@@ -2,10 +2,7 @@
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission($_GET["action"])) {
     ?>
-<p>
-	<a href="<?php echo ModuleHelper::buildActionURL("media");?>"
-		class="btn btn-default btn-back"><?php translate("back")?></a>
-</p>
+<?php echo Template::executeModuleTemplate("core_media", "icons.php");?>
 <h2>
 <?php translate("media"); ?>
 </h2>

@@ -1,3 +1,103 @@
+===== Neues in UliCMS 2019.2 =====
+
+Neue Features:
+* Alle Features von UliCMS 2019.1.1 bis 2019.1.5
+* SCSS Compiler
+* CodeMirror auf Version 5.43.0 geupdated
+* Das Feld "Benutzerdefinierte Werte (JSON)" verwendet nun den CodeMirror Editor
+
+Neue API-Funktionen:
+* setSCSSImportPaths($importPaths = null)
+* getSCSSImportPaths()
+* unsetSCSSImportPaths()
+
+Bugfixes:
+* Der optionale Parameter $type bei der Funktionen Result() wurde nicht korrekt ausgegeben.
+* Falsches Icon für "Seiten" in Icon Toolbar korrigiert
+
+===== Neues in UliCMS 2019.1.5 =====
+
+Neue Features:
+* Sicherheitsoption "XSS-Schutz" hinzugefügt
+* Wenn ein User die admin_permission eines Moduls nicht besitzt, ist der Button mit dem Namen des Moduls deaktiviert und 
+  ein Schloss-Icon wird angezeigt.
+* Weitere Seiten mit Icons versehen (core_media)
+
+Bugfixes:
+* Unter bestimmten Bedingungen wurde eine falsche Version einer Seite aus dem Cache ausgegeben.
+
+Verbesserungen:
+* Wende Bootstrap Styling auf Eingabeelemente von dataTables an
+
+Neue API-Funktionen:
+* UliCMS\HTML\Input::File($name, $multiple = false, $accept = null, $htmlAttributes = array())
+
+Entfernte API-Funktionen:
+* is_chinese($str)
+* isCountryBlocked()
+
+===== Neues in UliCMS 2019.1.4 =====
+
+Neue Features:
+* Weitere Buttons mit Icons versehen
+* Neue Sicherheitsoption "Erlauben diese Webseite in andere Sites einzubinden"
+
+Verbesserungen:
+* Option "Logo ausblenden" auf die "Logo" Seite verschoben
+* Automatische Übersetzungsfunktion des Google Chrome Browsers im Backend deaktiviert
+
+Neue API-Funktionen:
+* is_desktop()
+* User->getPermissionChecker()
+* User->hasPermission($permission)
+
+Neue Filter:
+* before_content
+* after_content
+
+===== Neues in UliCMS 2019.1.3 =====
+
+Neue Features:
+* Icon-Bar auf Medienseiten hinzugefügt
+* Icons zu allen Buttons hinzugefügt
+
+Bugfixes:
+* Die Icons werden nun auch angezeigt, wenn das System nicht alle Emojis unterstützt.
+* Aufruf der Informationen über ein Modul schlagen nicht mehr manchmal fehl
+* Die Registrierung von Berechtigungen über das custom_acl Event funktionierte nicht
+
+Sonstige Änderungen:
+* Die vertikale Scrollbar im Backend wird nun immer angezeigt
+
+===== Neues in UliCMS 2019.1.2 =====
+
+Neue Features:
+* "Pakete" Backend-Seite neu gestaltet
+
+Bugfixes:
+* Die "Bearbeiten" Buttons im Frontend funktionieren wieder
+
+===== Neues in UliCMS 2019.1.1 =====
+
+Neue Features:
+* Option "Verbiete RTL-Sprachen (Arabisch, Hebräisch, Persisch)" zum Spamfilter hinzugefügt
+* Unterstützung für mehrere Konfigurationsumgebungen
+* Formulare und Banner können nun deaktiviert werden
+* Banner können nun zeitlich begrenzt werden
+
+Neue API-Funktionen:
+* stringOrNull($val)
+* Konstanten-Klasse RequestMethods
+
+Verbesserungen
+* Benachrichtigung wenn neue Patches verfügbar sind umformuliert
+* In-Page "Bearbeiten" Buttons werden nun mit Bootstrap formatiert
+* "Schwarze Liste" umbenannt in "Verbotene Wörter"
+* "Papierkorb leeren" als Button formatiert
+
+Sonstige Änderungen:
+* CSS-Klasse "ulicms_edit" umbenannt in "ulicms-edit"
+
 ===== Neues in UliCMS 2019.1 =====
 
 Neue Features:

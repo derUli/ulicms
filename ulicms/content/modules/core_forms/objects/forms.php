@@ -20,9 +20,10 @@ class Forms
         return db_query("DELETE FROM " . tbname("forms") . " WHERE id = $id");
     }
 
-    public static function createForm($name, $email_to, $subject, $category_id, $fields, $required_fields, $mail_from_field, $target_page_id)
+    public static function createForm($name, $email_to, $subject, $category_id, $fields, $required_fields, $mail_from_field, $target_page_id, $enabled)
     {
         $name = db_escape($name);
+        $enabled = intval($enabled);
         $email_to = db_escape($email_to);
         $subject = db_escape($subject);
         $category_id = intval($category_id);
@@ -33,15 +34,18 @@ class Forms
         $created = time();
         $updated = time();
         
-        return db_query("INSERT INTO `" . tbname("forms") . "` (name, email_to, subject, category_id, `fields`, `required_fields`,
-									 mail_from_field, target_page_id, `created`, `updated`) values ('$name', '$email_to', '$subject', $category_id, '$fields',
+        return Database::query("INSERT INTO `" . tbname("forms") . "` (name, email_to, subject, category_id, `fields`, `required_fields`,
+									 mail_from_field, target_page_id, `created`, `updated`, `enabled`)
+                                     values
+                                    ('$name', '$email_to', '$subject', $category_id, '$fields',
                                      '$required_fields',
-									 '$mail_from_field', $target_page_id, $created, $updated)");
+									 '$mail_from_field', $target_page_id, $created, $updated, $enabled)", false) or die(Database::error());
     }
 
-    public static function editForm($id, $name, $email_to, $subject, $category_id, $fields, $required_fields, $mail_from_field, $target_page_id)
+    public static function editForm($id, $name, $email_to, $subject, $category_id, $fields, $required_fields, $mail_from_field, $target_page_id, $enabled)
     {
         $name = db_escape($name);
+        $enabled = intval($enabled);
         $email_to = db_escape($email_to);
         $subject = db_escape($subject);
         $category_id = intval($category_id);
@@ -53,7 +57,7 @@ class Forms
         $id = intval($id);
         
         return db_query("UPDATE `" . tbname("forms") . "` set name='$name', email_to = '$email_to', subject = '$subject', category_id = $category_id,
-									 fields = '$fields', required_fields = '$required_fields', mail_from_field = '$mail_from_field', target_page_id = $target_page_id, `updated` = $updated WHERE id = $id");
+									 fields = '$fields', required_fields = '$required_fields', mail_from_field = '$mail_from_field', target_page_id = $target_page_id, `updated` = $updated, enabled = $enabled WHERE id = $id");
     }
 
     public static function getAllForms()
@@ -87,13 +91,23 @@ class Forms
                     HTMLResult($html, HttpStatusCode::BAD_REQUEST);
                 }
             }
-            
-            $data = array();
+            $html = "<!DOCTYPE html>";
+            $html .= "<html>";
+            $html .= "<head>";
+            $html .= '<meta http-equiv="content-type" content="text/html; charset=utf-8">';
+            $html .= '<meta charset="utf-8">';
+            $html .= "</head>";
+            $html .= "<body>";
+            $html .= "<table border=\"1\"";
             foreach ($fields as $name => $label) {
-                $data[$label] = $_POST[$name];
+                $html .= "<tr>";
+                $html .= "<td><strong>" . _esc($label) . "</strong></td>";
+                $html .= "<td>" . nl2br(_esc($_POST[$name])) . "</td>";
+                $html .= "</tr>";
             }
-            ViewBag::set("data", $data);
-            $html = Template::executeModuleTemplate("core_forms", "mails/message.php");
+            $html .= "</table>";
+            $html .= "</body>";
+            $html .= "</html>";
             
             $email_to = $form["email_to"];
             $subject = $form["subject"];
@@ -101,9 +115,9 @@ class Forms
             $target_page_systemname = getPageSystemnameByID($target_page_id);
             $redirect_url = buildSEOUrl($target_page_systemname);
             
-            $headers = "Content-Type: text/html; charset=UTF-8";
-            
             $mail_from_field = $form["mail_from_field"];
+            $email_from = $_POST[$mail_from_field];
+            
             $email_from = $_POST[$mail_from_field];
             
             // if dns mx check is enabled check the mail domain
@@ -115,12 +129,10 @@ class Forms
             ) : array(
                 Settings::get("email")
             );
-            // remove newlines and nullbytes from mail address to prevent
-            // header injection
             sanitize($mail_from);
-            $headers .= "\n";
-            $headers .= "From: " . $mail_from[0] . "\n";
-            $headers .= "Content-Type: text/html";
+            
+            $headers = "From: " . $mail_from[0] . "\n";
+            $headers .= "Content-Type: text/html; charset=utf-8";
             
             if (Mailer::send($email_to, $subject, $html, $headers)) {
                 Request::redirect($redirect_url);

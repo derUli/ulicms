@@ -96,4 +96,32 @@ class HTMLInputTest extends \PHPUnit\Framework\TestCase
             "mac"
         ), $options));
     }
+
+    public function testFileWithoutAnything()
+    {
+        $this->assertEquals('<input type="file" name="my_file" value="">', Input::File("my_file"));
+    }
+
+    public function testFileWithMultiple()
+    {
+        $this->assertEquals('<input type="file" name="my_file" value="" multiple="multiple">', Input::File("my_file", true));
+    }
+
+    public function testFileWithAcceptAsArray()
+    {
+        $this->assertEquals('<input type="file" name="my_file" value="" accept="image/jpeg, image/png">', Input::File("my_file", false, array(
+            "image/jpeg",
+            "image/png"
+        )));
+    }
+
+    public function testFileWithAcceptAsString()
+    {
+        $this->assertEquals('<input type="file" name="my_file" value="" accept="application/pdf">', Input::File("my_file", false, "application/pdf"));
+    }
+
+    public function testFileWithAcceptAsStringAndMultiple()
+    {
+        $this->assertEquals('<input type="file" name="my_file" value="" accept="application/pdf" multiple="multiple">', Input::File("my_file", true, "application/pdf"));
+    }
 }

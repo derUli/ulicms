@@ -32,21 +32,25 @@ function oneclick_upgrade_admin()
 		<label><input type="checkbox" name="oneclick_upgrade_skip_kcfinder"
 			value="1" <?php if($oneclick_upgrade_skip_kcfinder) echo "checked"?>><?php translate("skip_kcfinder");?></label>
 	</div>
+	<p>
+	
+	
 	<div>
-		<p>
-			<label for="oneclick_upgrade_channel"><?php translate("channel")?></label><br />
-			<select name="oneclick_upgrade_channel" size=1>
+		<label for="oneclick_upgrade_channel"><?php translate("channel")?></label><br />
+		<select name="oneclick_upgrade_channel" size=1>
 			<?php for($i=0; $i< count($channels); $i++){?>
 			<option value="<?php Template::escape($channels[$i])?>"
-					<?php if($oneclick_upgrade_channel == $channels[$i]) echo " selected";?>><?php Template::escape(get_translation($channels[$i]))?></option>
+				<?php if($oneclick_upgrade_channel == $channels[$i]) echo " selected";?>><?php Template::escape(get_translation($channels[$i]))?></option>
 			<?php }?>
 		
 		</select>
-		</p>
+
+
 	</div>
-	<p>
-		<button type="submit" class="btn btn-default"><?php translate("save");?></button>
-	</p>
+
+
+	<button type="submit" class="btn btn-primary voffset3">
+		<i class="fa fa-save"></i> <?php translate("save");?></button>
 </form>
 <?php
 }

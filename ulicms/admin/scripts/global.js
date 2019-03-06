@@ -1,4 +1,6 @@
 $(function() {
+	var language = $("html").data("select2-language");
+
 	// toggle hamburger menu
 	$("#menu-toggle").click(function() {
 		$(".mainmenu").slideToggle();
@@ -14,10 +16,29 @@ $(function() {
 		});
 	});
 
+	// Add bootstrap css class to tablesorter
+	$.extend($.fn.dataTableExt.oStdClasses, {
+		"sFilterInput" : "form-control",
+		"sLengthSelect" : "form-control"
+	});
+
 	$(".tablesorter").DataTable({
 		language : {
 			url : $("body").data("datatables-translation")
 		}
+	});
+	$(".coming-soon").click(function(event) {
+		event.preventDefault();
+		bootbox.alert("Coming Soon!");
+	});
+	$(".remote-alert").click(function(event) {
+		event.preventDefault();
+		setWaitCursor();
+		var url = $(this).data("url");
+		$.get(url, function(result) {
+			setDefaultCursor();
+			bootbox.alert(result);
+		});
 	});
 
 	// dynamically add class form-control to all form elements to
@@ -31,6 +52,12 @@ $(function() {
 	$("select").select2({
 		width : '100%',
 		language : $("html").data("select2-language")
+	});
+	$.datetimepicker.setLocale(language);
+
+	$(".datepicker").datetimepicker({
+		format : 'Y-m-d',
+		timepicker : false
 	});
 	$("a.backend-menu-item-logout").click(function(event) {
 		if (!window.confirm(MenuTranslation.Logout + "?")) {

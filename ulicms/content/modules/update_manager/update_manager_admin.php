@@ -42,7 +42,7 @@ function update_manager_admin()
         
         ?>
 	<p>
-		<button type="submit" class="btn btn-warning"><?php translate("install_updates");?></button>
+		<button type="submit" class="btn btn-warning"><i class="fas fa-sync"></i> <?php translate("install_updates");?></button>
 	</p>
 	<?php
     } else {

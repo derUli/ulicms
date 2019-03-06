@@ -9,7 +9,7 @@ if ($permissionChecker->hasPermission("default_access_restrictions_edit")) {
 
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("other_settings");?>"
-		class="btn btn-default btn-back"><?php translate("back")?></a>
+		class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back")?></a>
 </p>
 <h1><?php translate("DEFAULT_ACCESS_RESTRICTIONS");?></h1>
 <?= ModuleHelper::buildMethodCallForm("DefaultAccessRestrictionsController", "save");?>
@@ -32,8 +32,12 @@ if ($permissionChecker->hasPermission("default_access_restrictions_edit")) {
 	id="only_others_can_edit" value="1"
 	<?php if($only_others_can_edit) echo "checked";?>>
 <label for="only_others_can_edit"><?php translate("others");?></label>
-
-<button type="submit" name="submit_form" class="btn btn-primary"><?php translate("save_changes");?></button>
+<br />
+<br />
+<p>
+	<button type="submit" name="submit_form" class="btn btn-primary">
+		<i class="fa fa-save"></i> <?php translate("save_changes");?></button>
+</p>
 <?php
     if (Request::getVar("submit_form")) {
         ?>

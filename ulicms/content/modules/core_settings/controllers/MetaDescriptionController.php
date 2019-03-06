@@ -9,10 +9,10 @@ class MetaDescriptionController extends Controller
         for ($i = 0; $i < count($languages); $i ++) {
             $lang = $languages[$i];
             if (isset($_POST["meta_description_" . $lang])) {
-                $page = db_escape($_POST["meta_description_" . $lang]);
-                setconfig("meta_description_" . $lang, $page);
+                $page = $_POST["meta_description_" . $lang];
+                Settings::set("meta_description_" . $lang, $page);
                 if ($lang == Settings::get("default_language")) {
-                    setconfig("meta_description", $page);
+                    Settings::set("meta_description", $page);
                 }
             }
         }

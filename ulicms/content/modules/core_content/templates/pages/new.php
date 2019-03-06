@@ -29,7 +29,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
     ?>
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("pages");?>"
-		class="btn btn-default btn-back"><?php translate("back")?></a>
+		class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back")?></a>
 </p>
 <input type="hidden" name="add" value="add">
 
@@ -217,7 +217,9 @@ function openMenuImageSelectWindow(field) {
 		<input type="text" id="menu_image" name="menu_image"
 			readonly="readonly" onclick="openMenuImageSelectWindow(this)"
 			value="" style="cursor: pointer" /> <a href="#"
-			onclick="$('#menu_image').val('');return false;"><?php translate("clear");?>
+			onclick="$('#menu_image').val('');return false;"
+			class="btn btn-default voffset2" class="btn btn-default"><i
+			class="fa fa-eraser"></i> <?php translate("clear");?>
 		</a>
 	</div>
 	<div class="typedep" id="tab-link" style="display: none;">
@@ -300,7 +302,8 @@ function openMenuImageSelectWindow(field) {
 					onclick="openMenuImageSelectWindow(this)"
 					value="<?php echo htmlspecialchars($og_image);?>"
 					style="cursor: pointer" /> <a href="#"
-					onclick="$('#og_image').val('');return false;"><?php translate("clear");?></a>
+					onclick="$('#og_image').val('');return false;"
+					class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear");?></a>
 
 			</div>
 		</div>
@@ -481,7 +484,8 @@ function openMenuImageSelectWindow(field) {
 			<input type="text" id="image_url" name="image_url"
 				readonly="readonly" onclick="openMenuImageSelectWindow(this)"
 				value="" style="cursor: pointer" /> <a href="#"
-				onclick="$('#menu_image').val('');return false;"><?php
+				onclick="$('#menu_image').val('');return false;"
+				class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php
     
     translate("clear");
     ?>
@@ -523,7 +527,8 @@ function openArticleImageSelectWindow(field) {
 			<input type="text" id="article_image" name="article_image"
 				readonly="readonly" onclick="openArticleImageSelectWindow(this)"
 				value="" style="cursor: pointer" maxlength="255" /> <a href="#"
-				onclick="$('#article_image').val('');return false;"><?php translate("clear");?></a>
+				onclick="$('#article_image').val('');return false;"
+				class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear");?></a>
 		</div>
 	</div>
 	<h2 class="accordion-header"><?php translate("comments");?></h2>
@@ -597,7 +602,8 @@ function openArticleImageSelectWindow(field) {
 		<?php do_event("before_custom_data_json");?>
 		<strong><?php translate("custom_data_json");?></strong>
 			<textarea name="custom_data" style="width: 100%; height: 200px;"
-				cols=80 rows=10><?php esc(CustomData::getDefaultJSON());?></textarea>
+				cols=80 rows=10
+				class="codemirror" data-mimetype="application/json"><?php esc(CustomData::getDefaultJSON());?></textarea>
 
 		</div>
 	</div>
@@ -708,7 +714,8 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
 </div>
 <div class="inPageMessage"></div>
 <input type="hidden" name="add_page" value="add_page">
-<button type="submit" class="btn btn-primary"><?php translate("save");?></button>
+<button type="submit" class="btn btn-primary">
+	<i class="far fa-save"></i> <?php translate("save");?></button>
 <?php
     $translation = new JSTranslation(array(), "PageTranslation");
     $translation->addKey("confirm_exit_without_save");

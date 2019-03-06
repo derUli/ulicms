@@ -166,6 +166,30 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("Cyrillic chars are not allowed!", $error1->message);
     }
 
+    public function testSpamWithRtlChars()
+    {
+        $configuration = new SpamFilterConfiguration();
+        $configuration->setDisallowRtlChars(true);
+        
+        $comment = new Comment();
+        $comment->setAuthorName("نیک ایران");
+        $comment->setText("היהודים הם מענים לילדים");
+        $checker = new CommentSpamChecker($comment, $configuration);
+        $this->assertTrue($checker->doSpamCheck());
+        
+        $errors = $checker->getErrors();
+        $this->assertCount(2, $errors);
+        
+        $error0 = $errors[0];
+        $error1 = $errors[1];
+        
+        $this->assertEquals('Author Name', $error0->field);
+        $this->assertEquals('Comment Text', $error1->field);
+        
+        $this->assertEquals("Right-To-Left languages are not allowed!", $error0->message);
+        $this->assertEquals("Right-To-Left languages are not allowed!", $error1->message);
+    }
+
     public function testWithBlockedCountries()
     {
         $configuration = new SpamFilterConfiguration();

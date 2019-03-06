@@ -1,6 +1,6 @@
 <?php
 
-class DataTablesHelper
+class DataTablesHelper extends Helper
 {
 
     public static function getLanguageFileURL($lang)

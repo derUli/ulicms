@@ -10,7 +10,7 @@ if ($permissionChecker->hasPermission("open_graph")) {
     ?>
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("settings_simple");?>"
-		class="btn btn-default btn-back"><?php translate("back")?></a>
+		class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back")?></a>
 </p>
 <h1><?php translate("open_graph");?></h1>
 <p><?php translate("og_defaults_help");?></p>
@@ -36,18 +36,24 @@ if ($permissionChecker->hasPermission("open_graph")) {
 					src="<?php echo htmlspecialchars($og_url);?>" />
 			</div>
 <?php }?>
-		<input type="text" id="og_image" name="og_image" readonly="readonly"
-			onclick="openMenuImageSelectWindow(this)"
-			value="<?php echo htmlspecialchars($og_image);?>"
-			style="cursor: pointer" /><br /> <a href="#"
-			onclick="$('#og_image').val('');return false;"><?php translate("clear");?>
+		<p>
+				<input type="text" id="og_image" name="og_image" readonly="readonly"
+					onclick="openMenuImageSelectWindow(this)"
+					value="<?php echo htmlspecialchars($og_image);?>"
+					style="cursor: pointer" />
+			</p>
+			<p>
+				<a href="#" onclick="$('#og_image').val('');return false;"
+					class="btn btn-default"><i class="fa fa-eraser"></i> <?php translate("clear");?>
 		</a>
+			</p>
 		</td>
 	</tr>
 	<tr>
 		<td></td>
 		<td style="text-align: center">
-			<button type="submit" name="submit" class="btn btn-primary"><?php translate ( "save_changes" );?></button>
+			<button type="submit" name="submit" class="btn btn-primary">
+				<i class="fa fa-save"></i> <?php translate ( "save_changes" );?></button>
 		</td>
 	</tr>
 </table>

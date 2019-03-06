@@ -7,13 +7,20 @@ if (! $permissionChecker->hasPermission("forms") or ! $permissionChecker->hasPer
     $pages = getAllPages();
     ?><p>
 	<a href="<?php echo ModuleHelper::buildActionURL("forms");?>"
-		class="btn btn-default btn-back"><?php translate("back")?></a>
+		class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back")?></a>
 </p>
 <h1><?php translate("create_form");?></h1>
 <?php echo ModuleHelper::buildMethodCallForm("FormController", "create");?>
 <p>
 	<strong><?php translate("name");?>*</strong><br /> <input type="text"
 		value="" name="name" required />
+</p>
+<p>
+	<strong><?php translate("enabled");?></strong><br /> <select
+		name="enabled">
+		<option value="1" selected><?php translate("yes");?></option>
+		<option value="0"><?php translate("no");?></option>
+	</select>
 </p>
 
 <p>
@@ -57,7 +64,8 @@ if (! $permissionChecker->hasPermission("forms") or ! $permissionChecker->hasPer
 		</select>
 </p>
 <p>
-	<button name="create_form" type="submit" class="btn btn-primary"><?php translate("create");?></button>
+	<button name="create_form" type="submit" class="btn btn-primary">
+		<i class="fas fa-save"></i> <?php translate("create");?></button>
 </p>
 <?php echo ModuleHelper::endForm();?>
 <?php

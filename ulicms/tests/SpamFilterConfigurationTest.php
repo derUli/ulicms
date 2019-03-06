@@ -63,6 +63,18 @@ class SpamFilterConfigurationTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($configuration->getDisallowCyrillicChars());
     }
 
+    public function testSetDisallowRtlChars()
+    {
+        $configuration = new SpamFilterConfiguration();
+        $this->assertFalse($configuration->getDisallowRtlChars());
+        
+        $configuration->setDisallowRtlChars(true);
+        $this->assertTrue($configuration->getDisallowRtlChars());
+        
+        $configuration->setDisallowRtlChars(false);
+        $this->assertFalse($configuration->getDisallowRtlChars());
+    }
+
     public function testSetBlockedCountriesWithString()
     {
         $configuration = new SpamFilterConfiguration();
@@ -121,12 +133,10 @@ class SpamFilterConfigurationTest extends \PHPUnit\Framework\TestCase
         $this->assertContains("bastard", $configuration->getBadwords());
     }
 
-    public function testFromString()
+    public function testFromSettings()
     {
         $configuration = SpamFilterConfiguration::fromSettings();
         $this->assertInstanceOf(SpamFilterConfiguration::class, $configuration);
         // TODO: Weitere Asserts durchführen
     }
-    
-    // TODO: Weitere Tests für Setter und für fromSettings erstellen
 }

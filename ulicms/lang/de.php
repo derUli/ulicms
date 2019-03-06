@@ -217,10 +217,11 @@ define("TRANSLATION_TITLE_FORMAT", "Seitentitel Format");
 
 // Spamfilter Einstellungen
 define("TRANSLATION_SPAMFILTER_ENABLED", "Spamfilter aktivieren");
-define("TRANSLATION_BLACKLIST", "Schwarze Liste");
+define("TRANSLATION_BLACKLIST", "Verbotene Wörter");
 define("TRANSLATION_SPAM_COUNTRIES", "Besucher aus folgenden Ländern dürfen <strong>nicht</strong> kommentieren");
 define("TRANSLATION_DISALLOW_CHINESE_CHARS", "Chinesische Schriftzeichen verbieten");
 define("TRANSLATION_DISALLOW_CYRILLIC_CHARS", "Kyrillische Schriftzeichen verbieten");
+define("TRANSLATION_DISALLOW_RTL_CHARS", "Verbiete RTL-Sprachen (Arabisch, Hebräisch, Persisch)");
 
 // Cache
 define("TRANSLATION_CACHE_TEXT1", "<p>Um die Performance der Website zu verbessern,
@@ -542,7 +543,7 @@ define("TRANSLATION_MAIL_FROM_FIELD", "Feld, welches den Absender enthält");
 define("TRANSLATION_TARGET_PAGE_ID", "Erfolgsseite");
 
 // Patch hochladen
-define("TRANSLATION_INSTALL_PATCH_FROM_FILE", "Patch aus Datei installieren");
+define("TRANSLATION_INSTALL_PATCH_FROM_FILE", "Patch hochladen");
 define("TRANSLATION_INSTALL_PATCH", "Patch installieren");
 
 // 2-Faktor Authentifizierung

@@ -1,13 +1,26 @@
 <?php
 use UliCMS\Exceptions\FileNotFoundException;
 use UliCMS\HTML\Script;
+use UliCMS\Security\PermissionChecker;
 
 class Template
 {
 
     public static function randomBanner()
     {
-        $query = db_query("SELECT name, link_url, image_url, `type`, html FROM " . tbname("banner") . " WHERE language IS NULL OR language='" . db_escape($_SESSION["language"]) . "'ORDER BY RAND() LIMIT 1");
+        $query = db_query("SELECT name, link_url, image_url, `type`, html FROM " . tbname("banner") . " 
+WHERE enabled = 1 and 
+(language IS NULL OR language='" . db_escape($_SESSION["language"]) . "') and 
+(
+(date_from is not null and date_to is not null and CURRENT_DATE() >= date_from and CURRENT_DATE() <= date_to)
+or 
+(date_from is not null and date_to is null and CURRENT_DATE() >= date_from ) 
+or
+(date_from is null and date_to is not null and CURRENT_DATE() <= date_to)
+or
+(date_from is null and date_to is null)
+)
+ORDER BY RAND() LIMIT 1") or die(Database::getError());
         if (db_num_rows($query) > 0) {
             while ($row = db_fetch_object($query)) {
                 $type = "gif";
@@ -32,6 +45,7 @@ class Template
     {
         $type = get_type();
         $output = "";
+        
         switch ($type) {
             case "list":
                 $output = Template::executeDefaultOrOwnTemplate("list");
@@ -59,7 +73,10 @@ class Template
                 }
                 break;
         }
+        
+        $output = apply_filter($output, "before_content");
         $output = apply_filter($output, "content");
+        $output = apply_filter($output, "after_content");
         echo $output;
     }
 
@@ -336,13 +353,15 @@ class Template
         $min_style_file_realpath = getTemplateDirPath(get_theme(), true) . "style.min.css";
         $style_file = getTemplateDirPath(get_theme()) . "style.css";
         $style_file_realpath = getTemplateDirPath(get_theme(), true) . "style.css";
-        $style_file .= "?time=" . File::getLastChanged($style_file_realpath);
-        if (is_file($min_style_file_realpath)) {
-            echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"$min_style_file\"/>";
-        } else if (is_file($style_file_realpath)) {
-            echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"$style_file\"/>";
+        if (is_file($style_file_realpath)) {
+            $style_file .= "?time=" . File::getLastChanged($style_file_realpath);
+            if (is_file($min_style_file_realpath)) {
+                echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"$min_style_file\"/>";
+            } else if (is_file($style_file_realpath)) {
+                echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"$style_file\"/>";
+            }
+            echo "\r\n";
         }
-        echo "\r\n";
         $keywords = get_meta_keywords();
         if (! $keywords) {
             $keywords = Settings::get("meta_keywords");
@@ -493,5 +512,30 @@ color:" . Settings::get("body-text-color") . ";
     public static function comments()
     {
         echo self::getComments();
+    }
+
+    public static function getEditButton()
+    {
+        $html = "";
+        if (is_logged_in()) {
+            $acl = new PermissionChecker(get_user_id());
+            if ($acl->hasPermission("pages") and Flags::getNoCache() && is_200()) {
+                $id = get_ID();
+                $page = ContentFactory::getById($id);
+                if (in_array($page->language, getAllLanguages(true))) {
+                    $html .= '<div class="ulicms-edit">';
+                    $html .= UliCMS\HTML\Link::ActionLink("pages_edit", get_translation("edit"), "page={$id}", array(
+                        "class" => "btn btn-warning btn-edit"
+                    ));
+                    $html .= "</div>";
+                }
+            }
+        }
+        return $html;
+    }
+
+    public static function editButton()
+    {
+        echo self::getEditButton();
     }
 }

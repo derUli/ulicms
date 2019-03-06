@@ -16,7 +16,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
     ?>
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("settings_simple");?>"
-		class="btn btn-default btn-back"><?php translate("back")?></a>
+		class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back")?></a>
 </p>
 <h1>
 <?php translate("frontpage");?>
@@ -68,7 +68,8 @@ if ($permissionChecker->hasPermission("settings_simple")) {
 	<tr>
 		<td></td>
 		<td style="text-align: center">
-			<button type="submit" name="submit" class="btn btn-primary"><?php translate("save_changes");?></button>
+			<button type="submit" name="submit" class="btn btn-primary">
+				<i class="fa fa-save"></i> <?php translate("save_changes");?></button>
 		</td>
 	</tr>
 </table>

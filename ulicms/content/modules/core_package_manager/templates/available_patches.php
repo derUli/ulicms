@@ -6,11 +6,14 @@ $runningInGoogleCloud = class_exists("GoogleCloudHelper") ? GoogleCloudHelper::i
 if ($permissionChecker->hasPermission("update_system") and ! $runningInGoogleCloud) {
     $patches = file_get_contents_wrapper(PATCH_CHECK_URL, true);
     ?>
+
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("home");?>"
-		class="btn btn-default btn-back"><?php translate("back")?></a>
+		class="btn btn-default btn-back"><i class="fa fa-arrow-left" aria-hidden="true"></i> <?php translate("back")?></a>
 </p>
 <h1><?php translate ( "available_patches" );?></h1>
+<div class="alert alert-info"><?php translate("patches_will_fix_errors");?></div>
+
 <?php
     if (! $patches or empty($patches)) {
         echo "<p class='ulicms_error'>" . get_translation("no_patches_available") . "</p>";
@@ -35,10 +38,10 @@ if ($permissionChecker->hasPermission("update_system") and ! $runningInGoogleClo
             }
         }
         ?>
-	<button type="submit" class="btn btn-warning"><?php translate ( "install_selected_patches" );?></button>
+	<button type="submit" class="btn btn-warning"><i class="fas fa-sync"></i> <?php translate ( "install_selected_patches" );?></button>
 	<button type="button"
 		onclick="window.open('?action=help&help=patch_install');"
-		class="btn btn-info"><?php translate ( "help" );?></button>
+		class="btn btn-info"><i class="fa fa-question-circle" aria-hidden="true"></i> <?php translate ( "help" );?></button>
 </form>
 <?php
     }

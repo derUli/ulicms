@@ -7,7 +7,7 @@ if ($permissionChecker->hasPermission("motd")) {
 	<p>
 		<a
 			href="<?php echo ModuleHelper::buildActionURL("settings_categories");?>"
-			class="btn btn-default btn-back"><?php translate("back")?></a>
+			class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back")?></a>
 	</p>
 	<h2><?php translate ( "motd" );?></h2>
 	<?php
@@ -50,7 +50,8 @@ if ($permissionChecker->hasPermission("motd")) {
 	</p>
 
 	<button type="submit" name="motd_submit"
-		class="btn btn-primary voffset2"><?php translate("save_changes");?></button>
+		class="btn btn-primary voffset2">
+		<i class="fa fa-save"></i> <?php translate("save_changes");?></button>
 	<?php
     enqueueScriptFile("scripts/motd.js");
     combinedScriptHtml();

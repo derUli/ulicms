@@ -3,6 +3,7 @@ $classes = array(
     "AuditLog",
     "EmailModes",
     "CommentStatus",
+    "RequestMethod",
     "ModuleEventConstants"
 );
 foreach ($classes as $class) {
