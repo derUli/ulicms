@@ -18,7 +18,7 @@ if ($permissionChecker->hasPermission("dashboard")) {
         ?> </p>
     <p>
         <a
-            href="?action=admin_edit&admin=<?php echo $_SESSION["login_id"] ?>&ref=home"
+            href="?action=admin_edit&id=<?php echo $_SESSION["login_id"] ?>&ref=home"
             class="btn btn-default"><i class="fas fa-user"></i> <?php translate("edit_profile"); ?></a>
     </p>
     <div id="accordion-container">
