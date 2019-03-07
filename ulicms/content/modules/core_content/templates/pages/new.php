@@ -606,72 +606,6 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
         <textarea name="page_content" id="page_content" cols=60 rows=20
                   class="<?php esc($editor); ?>" data-mimetype="text/html"></textarea>
 
-        <?php
-        if ($editor === "ckeditor") {
-            ?>
-            <script type="text/javascript">
-                var editor = CKEDITOR.replace('page_content',
-                        {
-                            skin: '<?php
-        echo Settings::get("ckeditor_skin");
-        ?>'
-                        });
-                var editor2 = CKEDITOR.replace('excerpt',
-                        {
-                            skin: '<?php
-        echo Settings::get("ckeditor_skin");
-        ?>'
-                        });
-
-
-                editor.on("instanceReady", function ()
-                {
-                    this.document.on("keyup", CKCHANGED);
-                    this.document.on("paste", CKCHANGED);
-                }
-
-                );
-                editor2.on("instanceReady", function ()
-                {
-                    this.document.on("keyup", CKCHANGED);
-                    this.document.on("paste", CKCHANGED);
-                }
-
-                );
-                function CKCHANGED() {
-                    formchanged = 1;
-                }
-
-                var formchanged = 0;
-                var submitted = 0;
-
-                $(document).ready(function () {
-                    $('form').each(function (i, n) {
-                        $('input', n).change(function () {
-                            formchanged = 1
-                        });
-                        $('textarea', n).change(function () {
-                            formchanged = 1
-                        });
-                        $('select', n).change(function () {
-                            formchanged = 1
-                        });
-                        $(n).submit(function () {
-                            submitted = 1
-                        });
-                    });
-                });
-
-                window.onbeforeunload = confirmExit;
-                function confirmExit()
-                {
-                    if (typeof formchanged !== "undefined" && formchanged === 1 && submitted === 0)
-                        return PageTranslation.ConfirmExitWithoutSave;
-                    else
-                        return;
-                }
-            </script>
-        <?php } ?>
     </div>
     <div class="inPageMessage"></div>
     <input type="hidden" name="add_page" value="add_page">
@@ -683,6 +617,10 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
     $translation->render();
 
     enqueueScriptFile("scripts/page.js");
+    if ($editor == "ckeditor") {
+        enqueueScriptFile(ModuleHelper::buildRessourcePath("core_content", "js/pages/init-ckeditor.js"));
+    }
+
     combinedScriptHtml();
     ?>
     <?php echo ModuleHelper::endForm(); ?>

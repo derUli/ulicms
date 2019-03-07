@@ -91,9 +91,7 @@ if ($permissionChecker->hasPermission("pages")) {
                     value="<?php echo $row->id ?>">
 
                 <div id="accordion-container">
-
                     <h2 class="accordion-header"><?php translate("title_and_headline"); ?></h2>
-
                     <div class="accordion-content">
                         <strong><?php translate("permalink"); ?>*</strong><br /> <input
                             type="text" required="required" name="systemname"
@@ -129,7 +127,6 @@ if ($permissionChecker->hasPermission("pages")) {
                         </div>
                     </div>
                     <h2 class="accordion-header"><?php translate("type"); ?></h2>
-
                     <div class="accordion-content">
                         <?php foreach ($types as $type) { ?>
                             <input type="radio" name="type" id="type_<?php echo $type; ?>"
@@ -140,7 +137,6 @@ if ($permissionChecker->hasPermission("pages")) {
 
                     </div>
                     <h2 class="accordion-header"><?php translate("menu_entry"); ?></h2>
-
                     <div class="accordion-content">
                         <strong><?php translate("language"); ?></strong> <br /> <select
                             name="language">
@@ -160,7 +156,6 @@ if ($permissionChecker->hasPermission("pages")) {
                                 $pages = getAllPages($page_language, "title", false);
                                 ?>
                         </select> <br /> <br />
-
                         <div class="typedep menu-stuff">
                             <strong><?php translate("menu"); ?> </strong> <span
                                 style="cursor: help;" onclick="$('div#menu_help').slideToggle()"><i class="fa fa-question-circle text-info" aria-hidden="true"></i></span><br />
@@ -195,13 +190,11 @@ if ($permissionChecker->hasPermission("pages")) {
                                 value="<?php
                                 echo $row->position;
                                 ?>">
-
                             <div id="position_help" class="help" style="display: none">
                                 <?php
                                 echo nl2br(get_translation("help_position"));
                                 ?>
                             </div>
-
                             <br />
                             <div class="typedep" id="parent-div">
                                 <strong><?php translate("parent"); ?> </strong><br /> <select
@@ -258,7 +251,6 @@ if ($permissionChecker->hasPermission("pages")) {
                                         <?php translate("disabled"); ?>
                             </option>
                         </select> <br /> <br />
-
                         <div class="typedep" id="tab-target">
                             <strong><?php translate("open_in"); ?></strong><br /> <select
                                 name="target" size=1>
@@ -280,7 +272,6 @@ if ($permissionChecker->hasPermission("pages")) {
                                     <?php translate("target_blank"); ?></option>
                             </select> <br /> <br />
                         </div>
-
                         <div class="typedep" id="hidden-attrib">
                             <strong><?php translate("hidden"); ?>
                             </strong><br /> <select name="hidden" size="1"><option value="1"
@@ -294,7 +285,6 @@ if ($permissionChecker->hasPermission("pages")) {
                         </div>
                         <strong><?php translate("category"); ?> </strong><br />
                         <?php echo Categories::getHTMLSelect($row->category); ?>
-
                         <div id="menu_image_div" class="voffset3">
                             <strong><?php translate("menu_image"); ?> </strong><br />
                             <script type="text/javascript">
@@ -355,7 +345,6 @@ if ($permissionChecker->hasPermission("pages")) {
                             </select>
                         </div>
                     </div>
-
                     <div class="typedep" id="tab-metadata" style="display: none">
                         <h2 class="accordion-header"><?php translate("metadata"); ?></h2>
 
@@ -397,8 +386,6 @@ if ($permissionChecker->hasPermission("pages")) {
                             </div>
                             <div class="typedep" id="tab-og" style="display: none">
                                 <h3><?php translate("open_graph"); ?></h3>
-
-
                                 <p><?php translate("og_help"); ?></p>
                                 <strong><?php translate("title"); ?>
                                 </strong><br /> <input type="text" name="og_title"
@@ -450,9 +437,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                 <?php } ?>
                             </div>
                         </div>
-
                     </div>
-
                     <div class="typedep" id="custom_fields_container">
                         <?php
                         foreach (DefaultContentTypes::getAll() as $name => $type) {
@@ -611,7 +596,6 @@ if ($permissionChecker->hasPermission("pages")) {
                     </div>
                     <div class="typedep" id="tab-module" style="display: none;">
                         <h2 class="accordion-header"><?php translate("module"); ?></h2>
-
                         <div class="accordion-content">
                             <strong><?php translate("module"); ?></strong><br /> <select
                                 name="module">
@@ -655,7 +639,6 @@ if ($permissionChecker->hasPermission("pages")) {
                                         <?php } ?>
                             </select>
                         </div>
-
                     </div>
                     <div class="typedep" id="tab-image" style="display: none;">
                         <h2 class="accordion-header"><?php translate("image"); ?></h2>
@@ -910,78 +893,6 @@ if ($permissionChecker->hasPermission("pages")) {
                         <textarea name="page_content" id="page_content" cols=60 rows=20 class="<?php esc($editor); ?>" data-mimetype="text/html"><?php
                             echo htmlspecialchars($row->content);
                             ?></textarea>
-                        <?php
-                        if ($editor === "ckeditor") {
-                            ?>
-                            <script type="text/javascript">
-                                var editor = CKEDITOR.replace('page_content',
-                                        {
-                                            skin: '<?php
-                echo Settings::get("ckeditor_skin");
-                ?>'
-                                        });
-
-
-                                var editor2 = CKEDITOR.replace('excerpt',
-                                        {
-                                            skin: '<?php
-                echo Settings::get("ckeditor_skin");
-                ?>'
-                                        });
-
-                                editor.on("instanceReady", function ()
-                                {
-                                    this.document.on("keyup", CKCHANGED);
-                                    this.document.on("paste", CKCHANGED);
-                                }
-                                );
-
-
-                                editor2.on("instanceReady", function ()
-                                {
-                                    this.document.on("keyup", CKCHANGED);
-                                    this.document.on("paste", CKCHANGED);
-                                }
-
-                                );
-
-                                function CKCHANGED() {
-                                    formchanged = 1;
-                                }
-
-                                var formchanged = 0;
-                                var submitted = 0;
-
-                                $(document).ready(function () {
-                                    $("#extra_options").hide();
-                                    $('form').each(function (i, n) {
-                                        $('input', n).change(function () {
-                                            formchanged = 1
-                                        });
-                                        $('textarea', n).change(function () {
-                                            formchanged = 1
-                                        });
-                                        $('select', n).change(function () {
-                                            formchanged = 1
-                                        });
-                                        $(n).submit(function () {
-                                            submitted = 1
-                                        });
-                                    });
-                                });
-
-                                window.onbeforeunload = confirmExit;
-                                function confirmExit()
-                                {
-                                    if (typeof formchanged !== "undefined" && formchanged === 1 && submitted === 0)
-                                        return PageTranslation.ConfirmExitWithoutSave;
-                                    else
-                                        return;
-                                }
-                            </script>
-                            <?php
-                        }
-                        ?>
                     </p>
                     <?php
                     $rev = vcs::getRevisionsByContentID($row->id);
@@ -1019,6 +930,9 @@ if ($permissionChecker->hasPermission("pages")) {
                 $translation->render();
 
                 enqueueScriptFile("scripts/page.js");
+                if ($editor == "ckeditor") {
+                    enqueueScriptFile(ModuleHelper::buildRessourcePath("core_content", "js/pages/init-ckeditor.js"));
+                }
                 combinedScriptHtml();
                 echo ModuleHelper::endForm();
                 ?>
