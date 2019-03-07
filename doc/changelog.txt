@@ -11,10 +11,13 @@ wenn man "Nicht im Menü" auswählt
 * MOTD Formular nutzt jetzt AJAX zum Speichern
 * Das Feld "Custom Data (JSON)" wird nun validiert
 * Die Tastenkombination ctrl+c (PC) bzw. cmd+c (Mac) löst nun das Absenden eines Formulars aus
+* Script und Style Helper fügen den nun einen Timestamp an den Pfad an um
+ungewünschtes Caching zu verhindern
 
 Neue API-Methoden:
 * Response::sendHttpStatusCodeResultIfAjax($status = HTTPStatusCode::OK, $redirect = null, $redirectStatus = HttpStatusCode::MOVED_TEMPORARILY)
 * Response::redirectToAction($action, $controller = null, $status = HttpStatusCode::MOVED_TEMPORARILY)
+* File::existsLocally($path)
 
 Verbesserungen:
 * Die Funktion "Neues Logo hochladen" befindet sich nun in den Design-Einstellungen

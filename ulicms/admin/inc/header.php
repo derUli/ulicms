@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Data\Content\Comment;
+use UliCMS\HTML\Script;
 
 $admin_logo = Settings::get("admin_logo");
 if (!$admin_logo) {
@@ -66,10 +67,11 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
         foreach ($scripts as $script) {
             enqueueScriptFile($script);
         }
-        ?>
-        <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
 
-        <?php combinedScriptHtml(); ?>
+        echo Script::FromFile("ckeditor/ckeditor.js");
+
+        combinedScriptHtml();
+        ?>
 
         <?php include "inc/touch_icons.php"; ?>
         <link rel="stylesheet" type="text/css"

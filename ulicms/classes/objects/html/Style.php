@@ -1,13 +1,13 @@
 <?php
+
 namespace UliCMS\HTML;
 
 use ModuleHelper;
+use File;
 
-class Style
-{
+class Style {
 
-    public static function FromExternalFile($href, $media = null, $htmlAttributes = array())
-    {
+    public static function FromExternalFile($href, $media = null, $htmlAttributes = array()) {
         $attributes = array(
             "rel" => "stylesheet",
             "href" => $href,
@@ -16,16 +16,18 @@ class Style
         if ($media) {
             $attributes["media"] = $media;
         }
+        if (!parse_url($href, PHP_URL_SCHEME) && is_file($href)) {
+            $attributes["href"] .= "?time=" . File::getLastChanged($href);
+        }
         foreach ($htmlAttributes as $key => $value) {
             $attributes[$key] = $value;
         }
         $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);
-        
+
         return "<link {$attribHTML}/>";
     }
 
-    public static function FromString($code, $media = null, $htmlAttributes = array())
-    {
+    public static function FromString($code, $media = null, $htmlAttributes = array()) {
         $attributes = array(
             "type" => "text/css"
         );
@@ -36,8 +38,8 @@ class Style
             $attributes[$key] = $value;
         }
         $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);
-        
+
         return "<style $attribHTML>" . $code . "</style>";
     }
-}
 
+}
