@@ -97,10 +97,10 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                 <strong><?php translate("menu"); ?>
                 </strong> <span style="cursor: help;"
                                 onclick="$('div#menu_help').slideToggle()"><i class="fa fa-question-circle text-info" aria-hidden="true"></i></span><br /> <select
-                                name="menu" size=1>
-                                    <?php
-                                    foreach (getAllMenus() as $menu) {
-                                        ?>
+                    name="menu" size=1>
+                        <?php
+                        foreach (getAllMenus() as $menu) {
+                            ?>
                         <option value="<?php echo $menu ?>"
                                 <?php if ($menu == "top") echo "selected"; ?>>
                             <?php translate($menu); ?></option>
@@ -114,8 +114,8 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                 <br /> <br /> <strong><?php translate("position"); ?>
                 </strong> <span style="cursor: help;"
                                 onclick="$('div#position_help').slideToggle()"><i class="fa fa-question-circle text-info" aria-hidden="true"></i></span><br /> <input
-                                type="number" required="required" name="position" value="0" min="0"
-                                step="1">
+                    type="number" required="required" name="position" value="0" min="0"
+                    step="1">
                 <div id="position_help" class="help" style="display: none">
                     <?php echo nl2br(get_translation("help_position")); ?>
                 </div>
@@ -298,7 +298,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                            value="<?php echo htmlspecialchars($og_image); ?>"
                            style="cursor: pointer" /> <a href="#"
                            onclick="$('#og_image').val('');
-                                       return false;"
+                                   return false;"
                            class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?></a>
 
                 </div>
@@ -516,7 +516,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                        readonly="readonly" onclick="openArticleImageSelectWindow(this)"
                        value="" style="cursor: pointer" maxlength="255" /> <a href="#"
                        onclick="$('#article_image').val('');
-                                   return false;"
+                               return false;"
                        class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?></a>
             </div>
         </div>
