@@ -12,6 +12,7 @@ if ($permissionChecker->hasPermission("pages")) {
 
     $allThemes = getThemesList();
 
+    $editor = get_html_editor();
     $cols = Database::getColumnNames("content");
 
     $sql = "SELECT id, name FROM " . tbname("videos");
@@ -392,7 +393,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                     }
                                     ?>"
                                     step=any> <br /> <br /> <strong><?php translate("excerpt"); ?></strong>
-                                <textarea name="excerpt" id="excerpt" rows="5" cols="80"><?php echo real_htmlspecialchars($row->excerpt); ?></textarea>
+                                <textarea name="excerpt" id="excerpt" rows="5" cols="80" class="<?php esc($editor); ?>" data-mimetype="text/html" ><?php echo real_htmlspecialchars($row->excerpt); ?></textarea>
                             </div>
                             <div class="typedep" id="tab-og" style="display: none">
                                 <h3><?php translate("open_graph"); ?></h3>
@@ -875,8 +876,6 @@ if ($permissionChecker->hasPermission("pages")) {
                             }
                             ?>>
                                 <?php translate("registered_users"); ?></option>
-
-
                             <option value="mobile"
                                     <?php if (faster_in_array("mobile", $access)) echo " selected" ?>><?php translate("mobile_devices"); ?></option>
                             <option value="desktop"
@@ -899,7 +898,6 @@ if ($permissionChecker->hasPermission("pages")) {
                                       cols=80 rows=10><?php
                                           echo htmlspecialchars($row->custom_data);
                                           ?></textarea>
-
                         </div>
                     </div>
                 </div>
@@ -907,15 +905,12 @@ if ($permissionChecker->hasPermission("pages")) {
                 <?php
                 do_event("page_option");
                 ?>
-
-
                 <div class="typedep" id="content-editor">
                     <p>
-                        <textarea name="page_content" id="page_content" cols=60 rows=20><?php
+                        <textarea name="page_content" id="page_content" cols=60 rows=20 class="<?php esc($editor); ?>" data-mimetype="text/html"><?php
                             echo htmlspecialchars($row->content);
                             ?></textarea>
                         <?php
-                        $editor = get_html_editor();
                         if ($editor === "ckeditor") {
                             ?>
                             <script type="text/javascript">
@@ -978,39 +973,15 @@ if ($permissionChecker->hasPermission("pages")) {
                                 window.onbeforeunload = confirmExit;
                                 function confirmExit()
                                 {
-                                    if (formchanged == 1 && submitted == 0)
+                                    if (typeof formchanged !== "undefined" && formchanged === 1 && submitted === 0)
                                         return PageTranslation.ConfirmExitWithoutSave;
                                     else
                                         return;
                                 }
                             </script>
                             <?php
-                        } else if ($editor == "codemirror") {
-                            ?>
-                            <script type="text/javascript">
-                                var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("page_content"),
-                                        {lineNumbers: true,
-                                            matchBrackets: true,
-                                            mode: "text/html",
-
-                                            indentUnit: 0,
-                                            indentWithTabs: false,
-                                            enterMode: "keep",
-                                            tabMode: "shift"});
-
-
-                                var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
-                                        {lineNumbers: true,
-                                            matchBrackets: true,
-                                            mode: "text/html",
-
-                                            indentUnit: 0,
-                                            indentWithTabs: false,
-                                            enterMode: "keep",
-                                            tabMode: "shift"});
-                            </script>
-                        <?php } ?>
-
+                        }
+                        ?>
                     </p>
                     <?php
                     $rev = vcs::getRevisionsByContentID($row->id);

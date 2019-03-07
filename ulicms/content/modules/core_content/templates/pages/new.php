@@ -3,6 +3,8 @@ $permissionChecker = new ACL();
 $groups = db_query("SELECT id, name from " . tbname("groups"));
 if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermission("pages_create")) {
 
+    $editor = get_html_editor();
+
     $allThemes = getThemesList();
     $cols = Database::getColumnNames("content");
     $sql = "SELECT id, name FROM " . tbname("videos");
@@ -267,7 +269,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                     <strong><?php translate("article_date"); ?></strong><br /> <input
                         name="article_date" type="datetime-local"
                         value="<?php echo date("Y-m-d\TH:i:s"); ?>" step="any"> <br /> <strong><?php translate("excerpt"); ?></strong>
-                    <textarea name="excerpt" id="excerpt" rows="5" cols="80"></textarea>
+                    <textarea name="excerpt" id="excerpt" rows="5" cols="80" class="<?php esc($editor); ?>" data-mimetype="text/html"></textarea>
                 </div>
                 <div class="typedep" id="tab-og" style="display: none;">
                     <h3><?php translate("open_graph"); ?></h3>
@@ -591,23 +593,18 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                 <textarea name="custom_data" style="width: 100%; height: 200px;"
                           cols=80 rows=10
                           class="codemirror" data-mimetype="application/json" data-validate="json"><?php esc(CustomData::getDefaultJSON()); ?></textarea>
-
             </div>
         </div>
     </div>
     <br />
     <br />
-
-
     <?php
     do_event("page_option");
     ?>
 
     <div class="typedep" id="content-editor">
-        <textarea name="page_content" id="page_content" cols=60 rows=20></textarea>
-        <?php
-        $editor = get_html_editor();
-        ?>
+        <textarea name="page_content" id="page_content" cols=60 rows=20
+                  class="<?php esc($editor); ?>" data-mimetype="text/html"></textarea>
 
         <?php
         if ($editor === "ckeditor") {
@@ -668,39 +665,13 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                 window.onbeforeunload = confirmExit;
                 function confirmExit()
                 {
-                    if (formchanged == 1 && submitted == 0)
+                    if (typeof formchanged !== "undefined" && formchanged === 1 && submitted === 0)
                         return PageTranslation.ConfirmExitWithoutSave;
                     else
                         return;
                 }
             </script>
-            <?php
-        } else if ($editor == "codemirror") {
-            ?>
-            <script type="text/javascript">
-                var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("page_content"),
-                        {lineNumbers: true,
-                            matchBrackets: true,
-                            mode: "text/html",
-
-                            indentUnit: 0,
-                            indentWithTabs: false,
-                            enterMode: "keep",
-                            tabMode: "shift"});
-
-                var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
-                        {lineNumbers: true,
-                            matchBrackets: true,
-                            mode: "text/html",
-
-                            indentUnit: 0,
-                            indentWithTabs: false,
-                            enterMode: "keep",
-                            tabMode: "shift"});
-            </script>
-            <?php
-        }
-        ?>
+        <?php } ?>
     </div>
     <div class="inPageMessage"></div>
     <input type="hidden" name="add_page" value="add_page">
