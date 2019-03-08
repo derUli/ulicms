@@ -486,6 +486,11 @@ div#google-fonts {
     width: auto !important;
     word-wrap: break-word;
     padding: 15px;
+
+    .checkbox, .radio{
+        margin-top: 0;
+        margin-bottom: 0;
+    }
 }
 .accordion-header {
     width: auto !important;
