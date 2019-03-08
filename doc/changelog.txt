@@ -11,7 +11,7 @@ wenn man "Nicht im Menü" auswählt
 * Update von CKEditor auf Version 4.11.3
 * MOTD Formular nutzt jetzt AJAX zum Speichern
 * Das Feld "Custom Data (JSON)" wird nun validiert
-* Die Tastenkombination ctrl+c (PC) bzw. cmd+c (Mac) löst nun das Absenden eines Formulars aus
+* Die Tastenkombination ctrl+s (PC) bzw. cmd+s (Mac) löst nun das Absenden eines Formulars aus
 * Script und Style Helper fügen den nun einen Timestamp an den Pfad an um
 ungewünschtes Caching zu verhindern
 
