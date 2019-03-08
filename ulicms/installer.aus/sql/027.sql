@@ -1,1 +1,0 @@
-alter table `{prefix}content` add column `excerpt` text default '';

@@ -1,1 +1,0 @@
-ALTER TABLE `{prefix}content` ADD COLUMN `hidden` tinyint(1) NOT NULL DEFAULT '0'

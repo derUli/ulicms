@@ -1,1 +1,0 @@
-ALTER TABLE `{prefix}users` ADD `default_language` varchar(10) NULL DEFAULT NULL;

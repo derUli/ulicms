@@ -1,1 +1,0 @@
-ALTER TABLE `{prefix}content` ADD `comment_homepage` VARCHAR(255) NULL DEFAULT NULL ;
