@@ -33,11 +33,8 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
            class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
     </p>
     <input type="hidden" name="add" value="add">
-
     <div id="accordion-container">
-
         <h2 class="accordion-header"><?php translate("title_and_headline"); ?></h2>
-
         <div class="accordion-content">
             <strong><?php
                 translate("permalink");
@@ -59,9 +56,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
             </div>
         </div>
         <h2 class="accordion-header"><?php translate("type"); ?></h2>
-
         <div class="accordion-content">
-
             <?php foreach ($types as $type) { ?>
                 <input type="radio" name="type" id="type_<?php echo $type; ?>"
                        value="<?php echo $type; ?>"
@@ -70,9 +65,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                    <?php } ?>
 
         </div>
-
         <h2 class="accordion-header"><?php translate("menu_entry"); ?></h2>
-
         <div class="accordion-content">
             <strong><?php translate("language"); ?>
             </strong> <br /> <select name="language">
@@ -151,9 +144,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                     </select> <br /> <br />
                 </div>
             </div>
-
             <div class="typedep" id="tab-target">
-
                 <strong><?php
                     translate("open_in");
                     ?>
@@ -166,7 +157,6 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                     </option>
                 </select><br /> <br />
             </div>
-
             <strong><?php translate("activated"); ?>
             </strong><br /> <select name="activated" size=1
                                     <?php if (!$pages_activate_own) echo "disabled"; ?>>
@@ -186,16 +176,13 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                         <?php translate("no"); ?>
                     </option>
                 </select> <br /> <br />
-
             </div>
             <strong><?php translate("category"); ?>
             </strong><br />
             <?php echo Categories :: getHTMLSelect(); ?>
-
             <div id="menu_image_div" class="voffset3">
                 <strong><?php translate("menu_image"); ?>
                 </strong><br />
-
                 <script type="text/javascript">
                     function openMenuImageSelectWindow(field) {
                         window.KCFinder = {
@@ -221,7 +208,6 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
         </div>
         <div class="typedep" id="tab-link" style="display: none;">
             <h2 class="accordion-header"><?php translate("link_url"); ?></h2>
-
             <div class="accordion-content">
                 <strong><?php translate("link_url"); ?>
                 </strong><br /> <input type="text" name="redirection" value="">
@@ -229,7 +215,6 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
         </div>
         <div class="typedep" id="tab-language-link" style="display: none;">
             <h2 class="accordion-header"><?php translate("language_link"); ?></h2>
-
             <div class="accordion-content">
                 <strong><?php translate("language_link"); ?>
                 </strong><br />
@@ -243,12 +228,9 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                     <?php } ?>
                 </select>
             </div>
-
         </div>
         <div class="typedep" id="tab-metadata">
-
             <h2 class="accordion-header"><?php translate("metadata"); ?></h2>
-
             <div class="accordion-content">
                 <strong><?php translate("meta_description"); ?>
                 </strong><br /> <input type="text" name="meta_description" value=''
@@ -265,7 +247,6 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                             type="url" name="comment_homepage" value="" maxlength="255"> <br />
                         <br />
                     </div>
-
                     <strong><?php translate("article_date"); ?></strong><br /> <input
                         name="article_date" type="datetime-local"
                         value="<?php echo date("Y-m-d\TH:i:s"); ?>" step="any"> <br /> <strong><?php translate("excerpt"); ?></strong>
@@ -273,7 +254,6 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                 </div>
                 <div class="typedep" id="tab-og" style="display: none;">
                     <h3><?php translate("open_graph"); ?></h3>
-
                     <p><?php translate("og_help"); ?></p>
                     <strong><?php translate("title"); ?>
                     </strong><br /> <input type="text" name="og_title" value=""> <br /> <strong><?php translate("description"); ?>
@@ -302,7 +282,6 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                            onclick="$('#og_image').val('');
                                    return false;"
                            class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?></a>
-
                 </div>
             </div>
         </div>
@@ -314,7 +293,6 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                     ?>
                     <div class="custom-field-tab" data-type="<?php echo $name; ?>">
                         <h2 class="accordion-header"><?php translate($type->customFieldTabTitle ? $type->customFieldTabTitle : $name); ?></h2>
-
                         <div class="accordion-content">
                             <?php
                             foreach ($fields as $field) {
@@ -324,16 +302,15 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                             <?php } ?>
                         </div>
                     </div>
-                <?php } ?>
-
-            <?php } ?>
+                    <?php
+                }
+            }
+            ?>
         </div>
         <div class="typedep" id="tab-list" style="display: none">
             <h2 class="accordion-header"><?php translate("list_properties"); ?></h2>
-
             <div class="accordion-content">
                 <strong><?php translate("type") ?></strong> <br />
-
                 <?php $types = get_available_post_types(); ?>
                 <select name="list_type">
                     <option value="null" selected>[<?php translate("every") ?>]
@@ -427,7 +404,6 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
         </div>
         <div class="typedep" id="tab-module" style="display: none;">
             <h2 class="accordion-header"><?php translate("module"); ?></h2>
-
             <div class="accordion-content">
                 <strong><?php translate("module"); ?></strong><br /> <select
                     name="module">
@@ -437,11 +413,9 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                     <?php } ?>
                 </select>
             </div>
-
         </div>
         <div class="typedep" id="tab-video" style="display: none;">
             <h2 class="accordion-header"><?php translate("video"); ?></h2>
-
             <div class="accordion-content">
                 <strong><?php translate("video"); ?></strong><br /> <select
                     name="video">
@@ -451,11 +425,9 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                     <?php } ?>
                 </select>
             </div>
-
         </div>
         <div class="typedep" id="tab-audio" style="display: none;">
             <h2 class="accordion-header"><?php translate("audio"); ?></h2>
-
             <div class="accordion-content">
                 <strong><?php translate("audio"); ?></strong><br /> <select
                     name="audio">
@@ -465,12 +437,9 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                     <?php } ?>
                 </select>
             </div>
-
         </div>
-
         <div class="typedep" id="tab-image" style="display: none;">
             <h2 class="accordion-header"><?php translate("image"); ?></h2>
-
             <div class="accordion-content">
                 <input type="text" id="image_url" name="image_url"
                        readonly="readonly" onclick="openMenuImageSelectWindow(this)"
@@ -490,12 +459,10 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                     <option value="before"><?php translate("description_before_content") ?></option>
                     <option value="after"><?php translate("description_after_content") ?></option>
                 </select>
-
             </div>
         </div>
         <div class="typedep" id="article-image">
             <h2 class="accordion-header"><?php translate("article_image"); ?></h2>
-
             <div class="accordion-content">
                 <strong><?php translate("article_image"); ?>
                 </strong><br />
@@ -533,7 +500,6 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                 </select>
             </div>
         </div>
-
         <h2 class="accordion-header"><?php translate("other"); ?></h2>
         <div class="accordion-content">
             <div class="typedep" id="tab-cache-control" style="display: none;">
@@ -583,11 +549,8 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                     echo '<option value="' . $row->id . '">' . real_htmlspecialchars($row->name) . '</option>';
                 }
                 ?>
-
             </select> <br /> <br />
-
             <div class="typedep" id="custom_data_json">
-
                 <?php do_event("before_custom_data_json"); ?>
                 <strong><?php translate("custom_data_json"); ?></strong>
                 <textarea name="custom_data" style="width: 100%; height: 200px;"
@@ -601,7 +564,6 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
     <?php
     do_event("page_option");
     ?>
-
     <div class="typedep" id="content-editor">
         <textarea name="page_content" id="page_content" cols=60 rows=20
                   class="<?php esc($editor); ?>" data-mimetype="text/html"></textarea>

@@ -1,4 +1,3 @@
-
 function CKCHANGED() {
     formchanged = 1;
 }
@@ -35,7 +34,6 @@ $(document).ready(function () {
             submitted = 1
         });
     });
-
 });
 
 window.onbeforeunload = confirmExit;

@@ -25,9 +25,7 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
               content="width=device-width, user-scalable=yes, initial-scale=1" />
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <meta name="google" content="notranslate" />
-
         <title>[<?php Template::escape(Settings::get("homepage_title")); ?>] - UliCMS</title>
-
         <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
         <?php
         $styles = array();
@@ -98,7 +96,6 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
               <?php
               do_event("admin_head");
               ?>
-
     </head>
     <?php
     do_event("before_backend_header");
@@ -116,7 +113,6 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
         $cssClasses .= "no-action";
     }
     ?>
-
     <body class="<?php esc($cssClasses); ?>"
           data-datatables-translation="<?php echo DataTablesHelper::getLanguageFileURL(getSystemLanguage()); ?>"
           data-ckeditor-skin="<?php esc(Settings::get("ckeditor_skin")); ?>">
@@ -129,7 +125,6 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
                 echo 'action-' . Template::getEscape(get_action());
             }
             ?>">
-
             <div class="row">
                 <div class="col-xs-7">
                     <a href="../" title="<?php translate("goto_frontend"); ?>"><img
