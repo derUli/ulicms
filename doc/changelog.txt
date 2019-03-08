@@ -1,4 +1,5 @@
 ===== Neues in UliCMS 2019.2.1 =====
+
 Neue Features:
 * Performance Verbesserungen im Backend durchgeführt
 * minify_html ist nun per default eingeschalten.
