@@ -1,1 +1,0 @@
-ALTER TABLE `{prefix}groups` ADD `allowable_tags` TEXT NULL DEFAULT NULL;

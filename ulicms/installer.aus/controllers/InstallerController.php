@@ -117,21 +117,20 @@ class InstallerController {
 
     public static function submitInstall() {
 
-        @set_time_limit(60 * 10); // 3 Minuten
+        @set_time_limit(60 * 10); // 10 Minuten
 
         if (!isset($_SESSION["install_index"])) {
             $_SESSION["install_index"] = 0;
         }
         $files = array();
-        foreach (glob("sql/*.sql") as $file) {
+        foreach (glob("../lib/migrations/up/*.sql") as $file) {
             $files[] = $file;
         }
         if (!empty($_SESSION["install_demodata"])) {
-            $files[] = "sql/opt/democontent.full.sql";
+            $files[] = "../lib/migrations/up/opt/democontent.full.sql";
         } else {
-            $files[] = "sql/opt/democontent.min.sql";
+            $files[] = "../lib/migrations/up/opt/democontent.min.sql";
         }
-
 
         $onefile = 100 / floatval(count($files));
         $currentPercent = floatval($_SESSION["install_index"]) * $onefile;

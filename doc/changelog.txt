@@ -14,6 +14,7 @@ wenn man "Nicht im Menü" auswählt
 * Die Tastenkombination ctrl+s (PC) bzw. cmd+s (Mac) löst nun das Absenden eines Formulars aus
 * Script und Style Helper fügen den nun einen Timestamp an den Pfad an um
 ungewünschtes Caching zu verhindern
+* SQL Migrations von Installer und Updates vereint
 
 Neue API-Methoden:
 * Response::sendHttpStatusCodeResultIfAjax($status = HTTPStatusCode::OK, $redirect = null, $redirectStatus = HttpStatusCode::MOVED_TEMPORARILY)
