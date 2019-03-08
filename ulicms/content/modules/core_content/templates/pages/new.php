@@ -183,22 +183,8 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
             <div id="menu_image_div" class="voffset3">
                 <strong><?php translate("menu_image"); ?>
                 </strong><br />
-                <script type="text/javascript">
-                    function openMenuImageSelectWindow(field) {
-                        window.KCFinder = {
-                            callBack: function (url) {
-                                field.value = url;
-                                window.KCFinder = null;
-                            }
-                        };
-                        window.open('kcfinder/browse.php?type=images&dir=images&lang=<?php echo htmlspecialchars(getSystemLanguage()); ?>', 'menu_image',
-                                'status=0, toolbar=0, location=0, menubar=0, directories=0, ' +
-                                'resizable=1, scrollbars=0, width=800, height=600'
-                                );
-                    }
-                </script>
                 <input type="text" id="menu_image" name="menu_image"
-                       readonly="readonly" onclick="openMenuImageSelectWindow(this)"
+                       readonly="readonly" class="kcfinder"
                        value="" style="cursor: pointer" /> <a href="#"
                        onclick="$('#menu_image').val('');return false;"
                        class="btn btn-default voffset2" class="btn btn-default"><i
@@ -261,22 +247,8 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                     <strong><?php translate("type"); ?>
                     </strong><br /> <input type="text" name="og_type" value=""> <br /> <strong><?php translate("image"); ?></strong>
                     <br />
-                    <script type="text/javascript">
-                        function openMenuImageSelectWindow(field) {
-                            window.KCFinder = {
-                                callBack: function (url) {
-                                    field.value = url;
-                                    window.KCFinder = null;
-                                }
-                            };
-                            window.open('kcfinder/browse.php?type=images&dir=images&lang=<?php echo htmlspecialchars(getSystemLanguage()); ?>', 'og_image',
-                                    'status=0, toolbar=0, location=0, menubar=0, directories=0, ' +
-                                    'resizable=1, scrollbars=0, width=800, height=600'
-                                    );
-                        }
-                    </script>
                     <input type="text" id="og_image" name="og_image" readonly="readonly"
-                           onclick="openMenuImageSelectWindow(this)"
+                           class="kcfinder"
                            value="<?php echo htmlspecialchars($og_image); ?>"
                            style="cursor: pointer" /> <a href="#"
                            onclick="$('#og_image').val('');
@@ -442,7 +414,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
             <h2 class="accordion-header"><?php translate("image"); ?></h2>
             <div class="accordion-content">
                 <input type="text" id="image_url" name="image_url"
-                       readonly="readonly" onclick="openMenuImageSelectWindow(this)"
+                       readonly="readonly" class="kcfinder"
                        value="" style="cursor: pointer" /> <a href="#"
                        onclick="$('#menu_image').val('');return false;"
                        class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php
@@ -466,23 +438,8 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
             <div class="accordion-content">
                 <strong><?php translate("article_image"); ?>
                 </strong><br />
-
-                <script type="text/javascript">
-                    function openArticleImageSelectWindow(field) {
-                        window.KCFinder = {
-                            callBack: function (url) {
-                                field.value = url;
-                                window.KCFinder = null;
-                            }
-                        };
-                        window.open('kcfinder/browse.php?type=images&dir=images&lang=<?php echo htmlspecialchars(getSystemLanguage()); ?>', 'article_image',
-                                'status=0, toolbar=0, location=0, menubar=0, directories=0, ' +
-                                'resizable=1, scrollbars=0, width=800, height=600'
-                                );
-                    }
-                </script>
                 <input type="text" id="article_image" name="article_image"
-                       readonly="readonly" onclick="openArticleImageSelectWindow(this)"
+                       readonly="readonly" class="kcfinder"
                        value="" style="cursor: pointer" maxlength="255" /> <a href="#"
                        onclick="$('#article_image').val('');
                                return false;"

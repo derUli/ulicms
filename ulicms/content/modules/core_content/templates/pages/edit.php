@@ -285,26 +285,16 @@ if ($permissionChecker->hasPermission("pages")) {
                     <div id="menu_image_div" class="voffset3">
                         <strong><?php translate("menu_image"); ?> </strong><br />
                         <script type="text/javascript">
-                            function openMenuImageSelectWindow(field) {
-                                window.KCFinder = {
-                                    callBack: function (url) {
-                                        field.value = url;
-                                        window.KCFinder = null;
-                                    }
-                                };
-                                window.open('kcfinder/browse.php?type=images&dir=images&lang=<?php echo htmlspecialchars(getSystemLanguage()); ?>', 'menu_image',
-                                        'status=0, toolbar=0, location=0, menubar=0, directories=0, ' +
-                                        'resizable=1, scrollbars=0, width=800, height=600'
-                                        );
-                            }
+
                         </script>
                         <input type="text" id="menu_image" name="menu_image"
-                               readonly="readonly" onclick="openMenuImageSelectWindow(this)"
+                               readonly="readonly" class="kcfinder"
                                value="<?php
                                echo $row->menu_image;
                                ?>"
                                style="cursor: pointer" /> <a href="#"
-                               onclick="$('#menu_image').val('');return false;"
+                               onclick="$('#menu_image').val('');
+                                       return false;"
                                class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?> </a>
                     </div></div>
                 <div class="typedep" id="tab-link">
@@ -393,22 +383,9 @@ if ($permissionChecker->hasPermission("pages")) {
                                                    value="<?php
                                                    echo htmlspecialchars($row->og_type);
                                                    ?>"> <br /> <strong><?php translate("image"); ?></strong> <br />
-                            <script type="text/javascript">
-                                function openMenuImageSelectWindow(field) {
-                                    window.KCFinder = {
-                                        callBack: function (url) {
-                                            field.value = url;
-                                            window.KCFinder = null;
-                                        }
-                                    };
-                                    window.open('kcfinder/browse.php?type=images&dir=images&lang=<?php echo htmlspecialchars(getSystemLanguage()); ?>', 'og_image',
-                                            'status=0, toolbar=0, location=0, menubar=0, directories=0, ' +
-                                            'resizable=1, scrollbars=0, width=800, height=600'
-                                            );
-                                }
-                            </script>
+
                             <input type="text" id="og_image" name="og_image"
-                                   readonly="readonly" onclick="openMenuImageSelectWindow(this)"
+                                   readonly="readonly" class="kcfinder"
                                    value="<?php
                                    echo htmlspecialchars($row->og_image);
                                    ?>"
@@ -449,7 +426,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                     <?php } ?>
                                 </div>
                             </div>
-                        <?php
+                            <?php
                         }
                     }
                     ?>
@@ -458,7 +435,7 @@ if ($permissionChecker->hasPermission("pages")) {
                     <h2 class="accordion-header"><?php translate("list_properties"); ?></h2>
                     <div class="accordion-content">
                         <strong><?php translate("type") ?></strong> <br />
-            <?php $types = get_available_post_types(); ?>
+                        <?php $types = get_available_post_types(); ?>
                         <select name="list_type">
                             <option value="null"
                             <?php
@@ -505,7 +482,7 @@ if ($permissionChecker->hasPermission("pages")) {
                         if ($lcat === null)
                             $lcat = - 1;
                         ?>
-                            <?php echo Categories :: getHTMLSelect($lcat, true, "list_category") ?>
+                        <?php echo Categories :: getHTMLSelect($lcat, true, "list_category") ?>
                         <br /> <br /> <strong><?php
                             translate("menu");
                             ?>
@@ -515,10 +492,10 @@ if ($permissionChecker->hasPermission("pages")) {
                             foreach (getAllMenus() as $menu) {
                                 ?>
                                 <option value="<?php echo $menu ?>"
-                                            <?php if ($menu == $list_data->menu) echo "selected" ?>>
+                                        <?php if ($menu == $list_data->menu) echo "selected" ?>>
                                             <?php
-                                    translate($menu);
-                                    ?></option>
+                                            translate($menu);
+                                            ?></option>
                                 <?php
                             }
                             ?>
@@ -565,17 +542,17 @@ if ($permissionChecker->hasPermission("pages")) {
                             translate("order_by");
                             ?>
                         </strong> <br /> <select name="list_order_by">
-                                    <?php foreach ($cols as $col) { ?>
+                            <?php foreach ($cols as $col) { ?>
                                 <option value="<?php echo $col; ?>"
                                         <?php if ($col == $list_data->order_by) echo 'selected'; ?>><?php echo $col; ?></option>
-                            <?php } ?>
+                                    <?php } ?>
                         </select> <br /> <br /> <strong><?php
                             translate("order_direction");
                             ?>
                         </strong> <select name="list_order_direction">
                             <option value="asc"><?php translate("asc"); ?></option>
                             <option value="desc"
-            <?php if ($list_data->order_direction === "desc") echo ' selected'; ?>><?php translate("desc"); ?></option>
+                                    <?php if ($list_data->order_direction === "desc") echo ' selected'; ?>><?php translate("desc"); ?></option>
                         </select> <br /> <br /> <strong><?php translate("limit"); ?></strong>
                         <input type="number" name="limit" min="0" step="1"
                                value="<?php echo intval($list_data->limit); ?>"> <br /> <strong><?php translate("use_pagination"); ?></strong><br />
@@ -583,7 +560,7 @@ if ($permissionChecker->hasPermission("pages")) {
                             <option value="1"
                                     <?php if ($list_data->use_pagination) echo "selected"; ?>><?php translate("yes") ?></option>
                             <option value="0"
-            <?php if (!$list_data->use_pagination) echo "selected"; ?>><?php translate("no") ?></option>
+                                    <?php if (!$list_data->use_pagination) echo "selected"; ?>><?php translate("no") ?></option>
                         </select>
                     </div>
                 </div>
@@ -597,7 +574,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                     <?php foreach (ModuleHelper::getAllEmbedModules() as $module) { ?>
                                 <option value="<?php echo $module; ?>"
                                         <?php if ($module == $row->module) echo " selected"; ?>><?php echo $module; ?></option>
-            <?php } ?>
+                                    <?php } ?>
                         </select>
                     </div>
                 </div>
@@ -611,7 +588,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                     <?php while ($row5 = Database::fetchObject($videos)) { ?>
                                 <option value="<?php echo $row5->id; ?>"
                                         <?php if ($row5->id == $row->video) echo " selected"; ?>><?php Template::escape($row5->name); ?> (ID: <?php echo $row5->id; ?>)</option>
-            <?php } ?>
+                                    <?php } ?>
                         </select>
                     </div>
                 </div>
@@ -625,7 +602,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                     <?php while ($row5 = Database::fetchObject($audios)) { ?>
                                 <option value="<?php echo $row5->id; ?>"
                                         <?php if ($row5->id == $row->audio) echo " selected"; ?>><?php Template::escape($row5->name); ?> (ID: <?php echo $row5->id; ?>)</option>
-            <?php } ?>
+                                    <?php } ?>
                         </select>
                     </div>
                 </div>
@@ -633,7 +610,8 @@ if ($permissionChecker->hasPermission("pages")) {
                     <h2 class="accordion-header"><?php translate("image"); ?></h2>
                     <div class="accordion-content">
                         <input type="text" id="image_url" name="image_url"
-                               readonly="readonly" onclick="openMenuImageSelectWindow(this)"
+                               readonly="readonly"
+                               class="kcfinder"
                                value="<?php Template::escape($row->image_url); ?>"
                                style="cursor: pointer" /> <a href="#"
                                onclick="$('#menu_image').val('');
@@ -666,24 +644,9 @@ if ($permissionChecker->hasPermission("pages")) {
                     <h2 class="accordion-header"><?php translate("article_image"); ?></h2>
                     <div class="accordion-content">
                         <strong><?php translate("article_image"); ?>
-                        </strong><br />
-
-                        <script type="text/javascript">
-                            function openArticleImageSelectWindow(field) {
-                                window.KCFinder = {
-                                    callBack: function (url) {
-                                        field.value = url;
-                                        window.KCFinder = null;
-                                    }
-                                };
-                                window.open('kcfinder/browse.php?type=images&dir=images&lang=<?php echo htmlspecialchars(getSystemLanguage()); ?>', 'article_image',
-                                        'status=0, toolbar=0, location=0, menubar=0, directories=0, ' +
-                                        'resizable=1, scrollbars=0, width=800, height=600'
-                                        );
-                            }
-                        </script>
+                        </strong>
                         <input type="text" id="article_image" name="article_image"
-                               readonly="readonly" onclick="openArticleImageSelectWindow(this)"
+                               readonly="readonly" class="kcfinder"
                                value="<?php echo real_htmlspecialchars($row->article_image); ?>"
                                style="cursor: pointer" maxlength="255" /> <a href="#"
                                onclick="$('#article_image').val('');
@@ -706,7 +669,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                         ?>
                                 <option value="<?php Template::escape($user->id); ?>"
                                         <?php if ($user->id == $row->autor) echo "selected"; ?>><?php Template::escape($user->username); ?></option>
-            <?php } ?>
+                                    <?php } ?>
                         </select> <br /> <br /> <strong><?php translate("owner"); ?> <?php translate("group"); ?></strong>
                         <select name="group_id"
                         <?php
@@ -719,23 +682,23 @@ if ($permissionChecker->hasPermission("pages")) {
                                         ?>
                                 <option value="<?php Template::escape($group->getId()); ?>"
                                         <?php if ($group->getId() == $row->group_id) echo "selected"; ?>><?php Template::escape($group->getName()); ?></option>
-            <?php } ?>
+                                    <?php } ?>
                         </select> <br /> <br /> <strong><?php translate("restrict_edit_access"); ?></strong><br />
                         <input type="checkbox" name="only_admins_can_edit"
                                id="only_admins_can_edit" value="1"
-            <?php if ($row->only_admins_can_edit) echo "checked"; ?>> <label
+                               <?php if ($row->only_admins_can_edit) echo "checked"; ?>> <label
                                for="only_admins_can_edit"><?php translate("admins"); ?></label> <br />
                         <input type="checkbox" name="only_group_can_edit"
                                id="only_group_can_edit" value="1"
-            <?php if ($row->only_group_can_edit) echo "checked"; ?>> <label
+                               <?php if ($row->only_group_can_edit) echo "checked"; ?>> <label
                                for="only_group_can_edit"><?php translate("group"); ?></label> <br />
                         <input type="checkbox" name="only_owner_can_edit"
                                id="only_owner_can_edit" value="1"
-            <?php if ($row->only_owner_can_edit) echo "checked"; ?>> <label
+                               <?php if ($row->only_owner_can_edit) echo "checked"; ?>> <label
                                for="only_owner_can_edit"><?php translate("owner"); ?></label> <br />
                         <input type="checkbox" name="only_others_can_edit"
                                id="only_others_can_edit" value="1"
-            <?php if ($row->only_others_can_edit) echo "checked"; ?>> <label
+                               <?php if ($row->only_others_can_edit) echo "checked"; ?>> <label
                                for="only_others_can_edit"><?php translate("others"); ?></label>
                     </div>
                 </div>
@@ -750,8 +713,8 @@ if ($permissionChecker->hasPermission("pages")) {
                                 <option value="1"
                                         <?php echo $row->comments_enabled === "1" ? "selected" : ""; ?>><?php translate("yes"); ?></option>
                                 <option value="0"
-                                    <?php echo $row->comments_enabled === "0" ? "selected" : ""; ?>>
-            <?php translate("no"); ?></option>
+                                        <?php echo $row->comments_enabled === "0" ? "selected" : ""; ?>>
+                                    <?php translate("no"); ?></option>
                             </select>
                         </div>
                         <?php
@@ -798,7 +761,7 @@ if ($permissionChecker->hasPermission("pages")) {
                             name="theme" size=1>
                             <option value="">
                                 [
-            <?php translate("standard"); ?>
+                                <?php translate("standard"); ?>
                                 ]
                             </option>
                             <?php
@@ -832,14 +795,14 @@ if ($permissionChecker->hasPermission("pages")) {
                             echo " selected";
                         }
                         ?>>
-                        <?php translate("everyone"); ?></option>
+                            <?php translate("everyone"); ?></option>
                         <option value="registered"
                         <?php
                         if (faster_in_array("registered", $access)) {
                             echo " selected";
                         }
                         ?>>
-                                <?php translate("registered_users"); ?></option>
+                            <?php translate("registered_users"); ?></option>
                         <option value="mobile"
                                 <?php if (faster_in_array("mobile", $access)) echo " selected" ?>><?php translate("mobile_devices"); ?></option>
                         <option value="desktop"
@@ -855,13 +818,13 @@ if ($permissionChecker->hasPermission("pages")) {
                                 ?>
                     </select> <br /> <br />
                     <div class="typedep" id="custom_data_json">
-            <?php do_event("before_custom_data_json"); ?>
+                        <?php do_event("before_custom_data_json"); ?>
                         <strong><?php translate("custom_data_json"); ?></strong><br />
                         <textarea name="custom_data" style="width: 100%; height: 200px;"
                                   class="codemirror" data-mimetype="application/json" data-validate="json"
                                   cols=80 rows=10><?php
-                            echo htmlspecialchars($row->custom_data);
-                            ?></textarea>
+                                      echo htmlspecialchars($row->custom_data);
+                                      ?></textarea>
                     </div>
                 </div>
             </div>
@@ -884,7 +847,7 @@ if ($permissionChecker->hasPermission("pages")) {
                             href="index.php?action=restore_version&content_id=<?php echo $row->id; ?>"
                             class="btn btn-warning"><i class="fas fa-undo"></i> <?php translate("restore_older_version"); ?></a>
                     </p>
-            <?php } ?>	</div>
+                <?php } ?>	</div>
             <div class="inPageMessage">
                 <div id="message_page_edit" class="inPageMessage"></div>
                 <img class="loading" src="gfx/loading.gif" alt="Wird gespeichert...">

@@ -34,7 +34,25 @@ $(document).ready(function () {
             submitted = 1
         });
     });
+    $(".kcfinder").each(function (index, element) {
+        element.click(function (event) {
+            openKCFinder(event.target);
+        })
+    });
 });
+
+function openKCFinder(field) {
+    window.KCFinder = {
+        callBack: function (url) {
+            field.value = url;
+            window.KCFinder = null;
+        }
+    };
+    window.open('kcfinder/browse.php?type=images&dir=images&lang=<?php echo htmlspecialchars(getSystemLanguage()); ?>', 'menu_image',
+            'status=0, toolbar=0, location=0, menubar=0, directories=0, ' +
+            'resizable=1, scrollbars=0, width=800, height=600'
+            );
+}
 
 window.onbeforeunload = confirmExit;
 function confirmExit()
