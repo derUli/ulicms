@@ -1,3 +1,5 @@
 INSERT INTO `{prefix}content` (`id`, `systemname`, `title`, `target`, `content`, `language`, `active`, `created`, `lastmodified`, `autor`, `category`, `lastchangeby`, `views`, `redirection`, `menu`, `position`, `parent`, `access`, `meta_description`, `meta_keywords`, `deleted_at`) VALUES
 (1, 'willkommen', 'Willkommen', '_self', '<p>Willkommen auf einer neuen Website die mit UliCMS betrieben wird.</p>\r\n', 'de', 1, 1364242679, 1364242833, 1, 1, 1, 19, '', 'top', 10, NULL, 'all', '', '', NULL),
 (2, 'welcome', 'Welcome', '_self', '<p>Welcome to a new website running with UliCMS.</p>\r\n', 'en', 1, 1364242890, 1364242944, 1, 1, 1, 2, '', 'top', 10, NULL, 'all', '', '', NULL);
+
+update `{prefix}content` c set `group_id` = (select `group_id` from `{prefix}users` where id = c.autor ) where c.`group_id` is null;
