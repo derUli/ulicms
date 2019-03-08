@@ -667,8 +667,8 @@ if ($permissionChecker->hasPermission("pages")) {
                                     <?php
                                     foreach ($users as $user) {
                                         ?>
-                                <option value="<?php Template::escape($user->id); ?>"
-                                        <?php if ($user->id == $row->autor) echo "selected"; ?>><?php Template::escape($user->username); ?></option>
+                                <option value="<?php Template::escape($user["id"]); ?>"
+                                        <?php if ($user["id"] == $row->autor) echo "selected"; ?>><?php Template::escape($user["username"]); ?></option>
                                     <?php } ?>
                         </select> <br /> <br /> <strong><?php translate("owner"); ?> <?php translate("group"); ?></strong>
                         <select name="group_id"
