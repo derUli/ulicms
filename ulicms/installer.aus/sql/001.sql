@@ -1,7 +1,5 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 SET time_zone = "+00:00";
-START TRANSACTION;
 
 CREATE TABLE `{prefix}audio` (
   `id` int(11) NOT NULL,
@@ -533,5 +531,3 @@ ALTER TABLE `{prefix}user_groups`
 
 ALTER TABLE `{prefix}videos`
   ADD CONSTRAINT `fk_video_category` FOREIGN KEY (`category_id`) REFERENCES `{prefix}categories` (`id`) ON DELETE SET NULL;
-
-Commit;

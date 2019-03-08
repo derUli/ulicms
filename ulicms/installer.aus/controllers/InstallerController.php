@@ -192,11 +192,14 @@ class InstallerController {
             $script = str_ireplace("{time}", time(), $script);
 
             mysqli_multi_query($connection, $script);
-            do {
-                if ($result = mysqli_store_result($connection)) { // record set was generated for this query
-                    mysqli_free_result($result);
-                }
-            } while (mysqli_more_results($connection) && mysqli_next_result($connection));
+            while (mysqli_more_results($connection)) {
+                mysqli_next_result($connection);
+            }
+
+            $sqlFileName = mysqli_real_escape_string($connection, basename($sql_file));
+
+            mysqli_query($connection, "INSERT INTO {$prefix}dbtrack (component, name) values ('core', '$sqlFileName')");
+
             echo '<!--ok--><div style="background-color:green;height:50px; width:' . intval($currentPercent) . '%"></div>';
             echo "<div class='info-text-progress'>" . $str . "</div>";
 
