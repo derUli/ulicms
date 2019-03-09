@@ -375,9 +375,13 @@ class PageController extends Controller {
     public function undeletePost() {
         $page = Request::getVar("page");
         do_event("before_undelete_page");
-        db_query("UPDATE " . tbname("content") . " SET `deleted_at` = NULL" . " WHERE id=$page");
+        $content = ContentFactory::getByID($page);
+        if ($content->id === null) {
+            ExceptionResult(get_translation("not_found"));
+        }
+        $content->undelete();
         do_event("after_undelete_page");
-        Request::redirect(ModuleHelper::buildActionURL("pages"));
+        Response::sendHttpStatusCodeResultIfAjax(HTTPStatusCode::OK, ModuleHelper::buildActionURL("pages"));
     }
 
     public function deletePost() {
@@ -390,12 +394,12 @@ class PageController extends Controller {
         $content->delete();
 
         do_event("after_delete_page");
-        Request::redirect(ModuleHelper::buildActionURL("pages"));
+        Response::sendHttpStatusCodeResultIfAjax(HTTPStatusCode::OK, ModuleHelper::buildActionURL("pages"));
     }
 
     public function emptyTrash() {
         do_event("before_empty_trash");
-        db_query("DELETE FROM " . tbname("content") . " WHERE deleted_at IS NOT NULL");
+        Content::emptyTrash();
         do_event("after_empty_trash");
         Request::redirect(ModuleHelper::buildActionURL("pages"));
     }

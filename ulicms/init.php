@@ -323,7 +323,14 @@ if ($connection === false) {
 
 $path_to_installer = dirname(__file__) . "/installer/installer.php";
 
-$select = Database::select($config->db_database);
+
+if (is_true($config->dbmigrator_auto_migrate)) {
+    $additionalSql = is_array($config->dbmigrator_initial_sql_files) ? $config->dbmigrator_initial_sql_files : array();
+    $select = Database::setupSchemaAndSelect($config->db_database, $additionalSql);
+} else {
+    $select = Database::select($config->db_database);
+}
+
 
 if (!$select) {
     throw new Exception("<h1>Database " . $config->db_database . " doesn't exist.</h1>");
