@@ -35,7 +35,7 @@ $(document).ready(function () {
         });
     });
     $(".kcfinder").each(function (index, element) {
-        element.click(function (event) {
+        $(element).click(function (event) {
             openKCFinder(event.target);
         })
     });
