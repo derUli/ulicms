@@ -125,7 +125,7 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
                 <option value="codemirror"
                         <?php if ($row->html_editor == "codemirror") echo "selected" ?>>CodeMirror</option>
             </select>
-            <div class="checkbox block voffset3">
+            <div class="checkbox block voffset3-5">
                 <label>
                     <input type="checkbox" value="1"
                            class="js-switch"
@@ -141,7 +141,7 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
             <?php
             if ($permissionChecker->hasPermission("users")) {
                 ?>
-                <div class="checkbox block voffset3">
+                <div class="checkbox block voffset3-5">
                     <label> <input type="checkbox" value="1" name="admin" id="admin"
                                    class="js-switch"
                                    <?php
@@ -158,7 +158,7 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
                     echo nl2br(get_translation("HELP_IS_ADMIN"));
                     ?>
                 </div>
-                <div class="checkbox block voffset3">
+                <div class="checkbox block voffset3-5">
                     <label> <input type="checkbox" value="1" name="locked"
                                    id="locked"
                                    class="js-switch"

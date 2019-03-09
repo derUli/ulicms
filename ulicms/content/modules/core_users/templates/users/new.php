@@ -67,7 +67,7 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
             ?>
         </select>
 
-        <div class="checkbox block voffset3">
+        <div class="checkbox block voffset3-5">
             <label>
                 <input type="checkbox" value="1"
                        name="require_password_change"
@@ -75,13 +75,13 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
                        class="js-switch"><?php translate("REQUIRE_PASSWORD_CHANGE_ON_NEXT_LOGIN"); ?> </label>
         </div>
 
-        <div class="checkbox block voffset3">
+        <div class="checkbox block voffset3-5">
             <label><input type="checkbox" id="send_mail" name="send_mail"
                           value="sendmail"
                           class="js-switch">
                 <?php translate("SEND_LOGINDATA_BY_MAIL"); ?></label>
         </div>
-        <div class="checkbox block voffset3">
+        <div class="checkbox block voffset3-5">
             <label><input type="checkbox" value="1" name="admin" id="admin"
                           class="js-switch">
 
@@ -98,7 +98,7 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
             ?>
         </div>
 
-        <div class="checkbox block voffset3">
+        <div class="checkbox block voffset3-5">
             <label><input type="checkbox" value="1" name="locked" id="locked"
                           class="js-switch">
                 <?php translate("locked"); ?> </label>
