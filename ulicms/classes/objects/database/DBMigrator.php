@@ -52,7 +52,7 @@ class DBMigrator
                     while (mysqli_more_results(Database::getConnection())) {
                         mysqli_next_result(Database::getConnection());
                     }
-                    if ($success or ! $this->strictMode) {
+                    if ($success) {
                         $sql = "INSERT INTO {prefix}dbtrack (component, name) values (?,?)";
                         Database::pQuery($sql, $args, true);
                     } else if ($this->strictMode) {
