@@ -18,7 +18,7 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
         </p>
         <form action="index.php?sClass=UserController&sMethod=update"
               name="userdata_form" method="post" enctype="multipart/form-data"
-              id="edit_user" autocomplete="off">
+              id="edit_user" class="voffset3-5" autocomplete="off">
                   <?php csrf_token_html(); ?>
             <img
                 src="<?php
