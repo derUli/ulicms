@@ -37,24 +37,12 @@ $(document).ready(function () {
 
 });
 
-function openKCFinder(field) {
-    window.KCFinder = {
-        callBack: function (url) {
-            field.value = url;
-            window.KCFinder = null;
-        }
-    };
-    window.open('kcfinder/browse.php?type=images&dir=images&lang=' + $("html").data("select2-language"), 'menu_image',
-            'status=0, toolbar=0, location=0, menubar=0, directories=0, ' +
-            'resizable=1, scrollbars=0, width=800, height=600'
-            );
-}
-
 window.onbeforeunload = confirmExit;
 function confirmExit()
 {
-    if (typeof formchanged !== "undefined" && formchanged === 1 && submitted === 0)
+    if (typeof formchanged !== "undefined" && formchanged === 1 && submitted === 0) {
         return PageTranslation.ConfirmExitWithoutSave;
-    else
+    } else {
         return;
+    }
 }
