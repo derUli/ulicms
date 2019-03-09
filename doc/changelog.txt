@@ -15,13 +15,15 @@ Neue Features:
 * Script und Style Helper fügen den nun einen Timestamp an den Pfad an um
 ungewünschtes Caching zu verhindern
 * SQL Migrations von Installer und Updates vereint
-* Über eine Option in der Konfigurationsdatei kann die Datenbank nun automatisch erstellt und migriert werden.
+* Neue Optionen in der Konfigurationsdatei
 
 Neue API-Methoden:
 * Response::sendHttpStatusCodeResultIfAjax($status = HTTPStatusCode::OK, $redirect = null, $redirectStatus = HttpStatusCode::MOVED_TEMPORARILY)
 * Response::redirectToAction($action, $controller = null, $status = HttpStatusCode::MOVED_TEMPORARILY)
 * File::existsLocally($path)
 * Content::emptyTrash()
+* Database::setupSchemaAndSelect($schemaName, $otherScripts = array())
+* Database::dropSchema($schema)
 
 Verbesserungen:
 * Die Funktion "Neues Logo hochladen" befindet sich nun in den Design-Einstellungen

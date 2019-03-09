@@ -420,6 +420,9 @@ function shutdown_function() {
     if (is_true($cfg->show_render_time) and ! Request::isAjaxRequest()) {
         echo "\n\n<!--" . (microtime(true) - START_TIME) . "-->";
     }
+    if (is_true($cfg->dbmigrator_drop_database_on_shutdown)) {
+        Database::dropSchema($cfg->db_database);
+    }
 }
 
 register_shutdown_function("shutdown_function");

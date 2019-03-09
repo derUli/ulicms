@@ -127,6 +127,11 @@ class Database {
         return self::query("DROP TABLE $table");
     }
 
+    public static function dropSchema($schema) {
+        $schema = self::escapeName($schema);
+        return self::query("DROP SCHEMA $schema");
+    }
+
     public static function selectAVG($table, $column, $where = "", $prefix = true) {
         if ($prefix) {
             $table = tbname($table);
