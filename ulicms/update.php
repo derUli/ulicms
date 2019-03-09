@@ -41,7 +41,6 @@ copy(Path::resolve("ULICMS_ROOT/lib/CMSConfigSample.php"), Path::resolve("ULICMS
 
 // Run SQL Migration Scripts
 $migrator = new DBMigrator("core", "lib/migrations/up");
-$migrator->disableStrictMode();
 $migrator->migrate();
 
 // Enable HTML Minifying
