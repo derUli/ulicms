@@ -1,4 +1,3 @@
-DELIMITER $$
 
 CREATE PROCEDURE prepareDbFor2019_2()
 	BEGIN
@@ -18,9 +17,7 @@ CREATE PROCEDURE prepareDbFor2019_2()
 			ALTER TABLE `{prefix}comments` add COLUMN `read` tinyint(1) NOT NULL DEFAULT '0';
 		END IF;
 
-END $$
-
-DELIMITER ;
+END;
 
 CALL prepareDbFor2019_2;
 
