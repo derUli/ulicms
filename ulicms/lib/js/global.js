@@ -42,9 +42,9 @@ $(function () {
                 var wrapper = $(editor.getWrapperElement());
                 validateCodeMirrorJson(cmEditor, wrapper);
             });
-        }
 
-        validateCodeMirrorJson(editor, $(editor.getWrapperElement()));
+            validateCodeMirrorJson(editor, $(editor.getWrapperElement()));
+        }
     });
 });
 
