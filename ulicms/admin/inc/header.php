@@ -134,17 +134,19 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
                 <div class="col-xs-5 menu-container">
                     <?php
                     if (is_logged_in()) {
+                        $colClass = $permissionChecker->hasPermission("comments_manage") ? "col-xs-4" : "col-xs-6";
                         ?>
+
                         <div class="row pull-right top-right-icons">
-                            <div class="col-xs-4">
-                                <a href="#" id="menu-clear-cache"
-                                   data-url="<?php echo ModuleHelper::buildMethodCallUrl("PerformanceSettingsController", "clearCache", "clear_cache=1"); ?>"><i class="fas fa-broom"></i></a><a href="#" id="menu-clear-cache-loading" style="display: none;"><i class="fa fa-spinner fa-spin"></i></a>
+                            <div class="<?php esc($colClass); ?>">
+                                <a href = "#" id = "menu-clear-cache"
+                                   data-url = "<?php echo ModuleHelper::buildMethodCallUrl("PerformanceSettingsController", "clearCache", "clear_cache = 1"); ?>"><i class = "fas fa-broom"></i></a><a href = "#" id = "menu-clear-cache-loading" style = "display: none;"><i class = "fa fa-spinner fa-spin"></i></a>
                             </div>
                             <?php
                             if ($permissionChecker->hasPermission("comments_manage")) {
                                 $count = Comment::getUnreadCount();
                                 ?>
-                                <div class="col-xs-4">
+                                <div class="<?php esc($colClass); ?>">
                                     <div class="comment-counter">
                                         <a href="<?php echo ModuleHelper::buildActionURL("comments_manage"); ?>"><i class="fa fa-comments"></i>
                                             <?php
@@ -157,7 +159,7 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
                                     </div>
                                 </div>
                             <?php } ?>
-                            <div class="col-xs-4">
+                            <div class="<?php esc($colClass); ?>">
                                 <a id="menu-toggle"><i class="fa fa-bars"></i> </a>
                             </div>
                         </div>

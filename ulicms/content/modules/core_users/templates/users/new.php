@@ -14,20 +14,40 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
               <?php csrf_token_html(); ?>
         <input type="hidden" name="add_admin" value="add_admin"> <strong><?php translate("username"); ?>*</strong><br />
         <input type="text" required="required" name="admin_username" value="">
-        <br /> <strong><?php translate("lastname"); ?></strong><br /> <input
-            type="text" name="admin_lastname" value=""> <br /> <strong><?php translate("firstname"); ?></strong><br />
-        <input type="text" name="admin_firstname" value=""><br /> <strong><?php translate("email"); ?></strong><br />
-        <input type="email" name="admin_email" value=""><br /> <strong><?php translate("password"); ?>*</strong><br />
-        <input type="password" required="required" name="admin_password"
-               id="admin_password" value="" autocomplete="off"> <br /> <strong><?php translate("password_repeat"); ?>*</strong><br />
-        <input type="password" required="required" name="admin_password_repeat"
-               id="admin_password_repeat" value="" autocomplete="off">
-               <?php
-               $permissionChecker = new ACL();
-               $allGroups = $permissionChecker->getAllGroups();
-               asort($allGroups);
-               ?>
-        <br /> <strong><?php translate("primary_group"); ?></strong> <br /> <select
+        <br />
+
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <strong><?php translate("firstname"); ?></strong><br />
+                <input type="text" name="admin_firstname" value=""><br />
+            </div>
+
+            <div class="col-xs-12 col-md-6">
+                <strong><?php translate("lastname"); ?></strong><br /> <input
+                    type="text" name="admin_lastname" value=""> <br />
+            </div>
+        </div>
+        <strong><?php translate("email"); ?></strong><br />
+        <input type="email" name="admin_email" value=""><br />
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <strong><?php translate("password"); ?>*</strong><br />
+                <input type="password" required="required" name="admin_password"
+                       id="admin_password" value="" autocomplete="off"> <br />
+            </div>
+
+            <div class="col-xs-12 col-md-6">
+                <strong><?php translate("password_repeat"); ?>*</strong><br />
+                <input type="password" required="required" name="admin_password_repeat"
+                       id="admin_password_repeat" value="" autocomplete="off">
+            </div>
+        </div>
+        <?php
+        $permissionChecker = new ACL();
+        $allGroups = $permissionChecker->getAllGroups();
+        asort($allGroups);
+        ?>
+        <strong><?php translate("primary_group"); ?></strong> <br /> <select
             name="group_id">
             <option value="-"
             <?php
