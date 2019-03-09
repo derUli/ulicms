@@ -1,9 +1,7 @@
 #!/usr/bin/env php
 <?php
-error_reporting(E_ALL);
 
-function usage()
-{
+function usage() {
     echo "dg_migrator - Apply database migrations\n";
     echo "UliCMS Version " . cms_version() . "\n";
     echo "Copyright (C) 2018 by Ulrich Schmidt";
@@ -50,7 +48,7 @@ if ($command == "reset") {
     exit();
 }
 if ($command == "up") {
-    if (! $component or ! $directory) {
+    if (!$component or ! $directory) {
         usage();
     }
     $folder = Path::resolve($directory . "/up");
@@ -64,7 +62,7 @@ if ($command == "up") {
 }
 
 if ($command == "down") {
-    if (! $component or ! $directory) {
+    if (!$component or ! $directory) {
         usage();
     }
     $folder = Path::resolve($directory . "/down");
