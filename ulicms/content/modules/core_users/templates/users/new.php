@@ -67,56 +67,53 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
             ?>
         </select>
 
-        <div class="voffset3">
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" value="1"
-                           name="require_password_change"
-                           id="require_password_change"
-                           class="js-switch"><?php translate("REQUIRE_PASSWORD_CHANGE_ON_NEXT_LOGIN"); ?> </label>
-            </div>
+        <div class="checkbox block voffset3">
+            <label>
+                <input type="checkbox" value="1"
+                       name="require_password_change"
+                       id="require_password_change"
+                       class="js-switch"><?php translate("REQUIRE_PASSWORD_CHANGE_ON_NEXT_LOGIN"); ?> </label>
         </div>
 
-        <div class="voffset2">
-            <div class="checkbox">
-                <label><input type="checkbox" id="send_mail" name="send_mail"
-                              value="sendmail"
-                              class="js-switch">
-                    <?php translate("SEND_LOGINDATA_BY_MAIL"); ?></label>
-            </div>
+        <div class="checkbox block voffset3">
+            <label><input type="checkbox" id="send_mail" name="send_mail"
+                          value="sendmail"
+                          class="js-switch">
+                <?php translate("SEND_LOGINDATA_BY_MAIL"); ?></label>
         </div>
+        <div class="checkbox block voffset3">
+            <label><input type="checkbox" value="1" name="admin" id="admin"
+                          class="js-switch">
 
-        <div class="voffset2">
-            <div class="checkbox">
-                <label><input type="checkbox" value="1" name="admin" id="admin"
-                              class="js-switch">
+                <?php translate("is_admin"); ?> </label>
 
-                    <?php translate("is_admin"); ?> </label>
-
-                <span
-                    style="cursor: help;" onclick="$('div#is_admin').slideToggle()">
-                    <i class="fa fa-question-circle text-info" aria-hidden="true"></i>
-                </span>
-            </div></div>
+            <span
+                style="cursor: help;" onclick="$('div#is_admin').slideToggle()">
+                <i class="fa fa-question-circle text-info" aria-hidden="true"></i>
+            </span>
+        </div>
         <div id="is_admin" class="help" style="display: none">
             <?php
             echo nl2br(get_translation("HELP_IS_ADMIN"));
             ?>
         </div>
 
-        <div class="checkbox">
+        <div class="checkbox block voffset3">
             <label><input type="checkbox" value="1" name="locked" id="locked"
                           class="js-switch">
                 <?php translate("locked"); ?> </label>
-        </div> <strong><?php translate("default_language"); ?></strong><br />
-        <select name="default_language">
-            <option value="" selected>[<?php translate("standard"); ?>]</option>
-            <?php
-            for ($i = 0; $i < count($languages); $i ++) {
-                echo '<option value="' . $languages[$i] . '">' . getLanguageNameByCode($languages[$i]) . '</option>';
-            }
-            ?>
-        </select><br /> <br />
+        </div>
+
+        <div class="voffset3">
+            <strong><?php translate("default_language"); ?></strong><br />
+            <select name="default_language">
+                <option value="" selected>[<?php translate("standard"); ?>]</option>
+                <?php
+                for ($i = 0; $i < count($languages); $i ++) {
+                    echo '<option value="' . $languages[$i] . '">' . getLanguageNameByCode($languages[$i]) . '</option>';
+                }
+                ?>
+            </select></div><br />
         <button type="submit" class="btn btn-primary">
             <i class="fa fa-save"></i> <?php translate("create_user"); ?></button>
     </form>

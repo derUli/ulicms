@@ -125,7 +125,7 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
                 <option value="codemirror"
                         <?php if ($row->html_editor == "codemirror") echo "selected" ?>>CodeMirror</option>
             </select>
-            <div class="checkbox">
+            <div class="checkbox block voffset3">
                 <label>
                     <input type="checkbox" value="1"
                            class="js-switch"
@@ -141,27 +141,24 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
             <?php
             if ($permissionChecker->hasPermission("users")) {
                 ?>
-                <div class="voffset2">
-                    <div class="checkbox">
-                        <label> <input type="checkbox" value="1" name="admin" id="admin"
-                                       class="js-switch"
-                                       <?php
-                                       if ($row->admin) {
-                                           echo "checked";
-                                       }
-                                       ?>> <?php translate("is_admin"); ?></label> <span style="cursor: help;"
-                                                                        onclick="$('div#is_admin').slideToggle()">
-                            <i class="fa fa-question-circle text-info" aria-hidden="true"></i>
-
-                        </span>
-                    </div>
+                <div class="checkbox block voffset3">
+                    <label> <input type="checkbox" value="1" name="admin" id="admin"
+                                   class="js-switch"
+                                   <?php
+                                   if ($row->admin) {
+                                       echo "checked";
+                                   }
+                                   ?>> <?php translate("is_admin"); ?></label> <span style="cursor: help;"
+                                                                    onclick="$('div#is_admin').slideToggle()">
+                        <i class="fa fa-question-circle text-info" aria-hidden="true"></i>
+                    </span>
                 </div>
                 <div id="is_admin" class="help" style="display: none">
                     <?php
                     echo nl2br(get_translation("HELP_IS_ADMIN"));
                     ?>
                 </div>
-                <div class="checkbox">
+                <div class="checkbox block voffset3">
                     <label> <input type="checkbox" value="1" name="locked"
                                    id="locked"
                                    class="js-switch"
@@ -181,19 +178,20 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
                 }
             }
             ?>
-            <strong><?php translate("default_language"); ?></strong><br />
-            <select name="default_language">
-                <option value="" <?php if (!$row->default_language) echo " selected"; ?>>[<?php translate("standard"); ?>]</option>
-                <?php
-                for ($i = 0; $i < count($languages); $i ++) {
-                    if ($row->default_language == $languages[$i]) {
-                        echo '<option value="' . $languages[$i] . '" selected>' . getLanguageNameByCode($languages[$i]) . '</option>';
-                    } else {
-                        echo '<option value="' . $languages[$i] . '">' . getLanguageNameByCode($languages[$i]) . '</option>';
+            <div class="voffset3">
+                <strong><?php translate("default_language"); ?></strong><br />
+                <select name="default_language">
+                    <option value="" <?php if (!$row->default_language) echo " selected"; ?>>[<?php translate("standard"); ?>]</option>
+                    <?php
+                    for ($i = 0; $i < count($languages); $i ++) {
+                        if ($row->default_language == $languages[$i]) {
+                            echo '<option value="' . $languages[$i] . '" selected>' . getLanguageNameByCode($languages[$i]) . '</option>';
+                        } else {
+                            echo '<option value="' . $languages[$i] . '">' . getLanguageNameByCode($languages[$i]) . '</option>';
+                        }
                     }
-                }
-                ?>
-            </select> <br /> <br /> <strong><?php translate("about_me"); ?></strong><br />
+                    ?>
+                </select></div> <br /> <strong><?php translate("about_me"); ?></strong><br />
             <textarea rows=10 cols=50 name="about_me"><?php echo htmlspecialchars($row->about_me) ?></textarea>
             <br />
             <button type="submit" class="btn btn-primary">
