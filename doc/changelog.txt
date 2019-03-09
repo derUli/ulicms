@@ -25,6 +25,9 @@ Neue API-Methoden:
 * Database::setupSchemaAndSelect($schemaName, $otherScripts = array())
 * Database::dropSchema($schema)
 
+Entfernte API-Methoden:
+* is_in_include_path($find)
+
 Verbesserungen:
 * Die Funktion "Neues Logo hochladen" befindet sich nun in den Design-Einstellungen
 
