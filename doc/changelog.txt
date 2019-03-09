@@ -3,8 +3,7 @@
 Neue Features:
 * Performance Verbesserungen im Backend durchgeführt
 * minify_html ist nun per default eingeschalten.
-* Das Feld "Menü als Grafik" wird nun ausgeblendet,
-wenn man "Nicht im Menü" auswählt
+* Das Feld "Menü als Grafik" wird nun ausgeblendet, wenn man "Nicht im Menü" auswählt
 * Checkboxen werden nun als Schalter dargestellt
 * Kommentar Icon mit Anzahl der neuen Kommentare hinzugefügt
 * Update von jQuery auf Version 3.3.1

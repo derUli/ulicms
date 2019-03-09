@@ -34,11 +34,7 @@ $(document).ready(function () {
             submitted = 1
         });
     });
-    $(".kcfinder").each(function (index, element) {
-        $(element).click(function (event) {
-            openKCFinder(event.target);
-        });
-    });
+
 });
 
 function openKCFinder(field) {
