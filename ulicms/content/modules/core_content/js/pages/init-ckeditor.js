@@ -37,7 +37,7 @@ $(document).ready(function () {
     $(".kcfinder").each(function (index, element) {
         $(element).click(function (event) {
             openKCFinder(event.target);
-        })
+        });
     });
 });
 
@@ -48,7 +48,7 @@ function openKCFinder(field) {
             window.KCFinder = null;
         }
     };
-    window.open('kcfinder/browse.php?type=images&dir=images&lang=<?php echo htmlspecialchars(getSystemLanguage()); ?>', 'menu_image',
+    window.open('kcfinder/browse.php?type=images&dir=images&lang=' + $("html").data("select2-language"), 'menu_image',
             'status=0, toolbar=0, location=0, menubar=0, directories=0, ' +
             'resizable=1, scrollbars=0, width=800, height=600'
             );
