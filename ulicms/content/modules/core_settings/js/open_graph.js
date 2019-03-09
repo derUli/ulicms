@@ -23,6 +23,7 @@ $(function () {
                         },
                         success: function (e) {
                             $("#loading").hide();
+                            // FIXME: localize this string
                             $("#message")
                                     .html(
                                             "<span style=\"color:green;\">Die Einstellungen wurden gespeichert.</span>");
