@@ -15,7 +15,7 @@ Neue Features:
 * Script und Style Helper fügen den nun einen Timestamp an den Pfad an um
 ungewünschtes Caching zu verhindern
 * SQL Migrations von Installer und Updates vereint
-* Neue Optionen in der Konfigurationsdatei
+* Neue Optionen in der Konfigurationsdatei unterstützt
 
 Neue API-Methoden:
 * Response::sendHttpStatusCodeResultIfAjax($status = HTTPStatusCode::OK, $redirect = null, $redirectStatus = HttpStatusCode::MOVED_TEMPORARILY)
