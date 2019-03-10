@@ -4,6 +4,8 @@
     "embed": false,
     "shy": false,
     "main_class": "GitClient",
+    "manufacturer_name": "Ulrich Schmidt",
+    "manufacturer_url": "https://www.ulicms.de",
     "controllers":
             {
                 "GitClient": "controllers/GitClient.php"
