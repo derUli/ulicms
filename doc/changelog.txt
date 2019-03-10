@@ -25,6 +25,7 @@ Neue API-Methoden:
 * Content::emptyTrash()
 * Database::setupSchemaAndSelect($schemaName, $otherScripts = array())
 * Database::dropSchema($schema)
+* HTTPStatusCode::UNPROCESSABLE_ENTITY (Konstante für HTTP Status 422)
 
 Entfernte API-Methoden:
 * is_in_include_path($find)

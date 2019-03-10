@@ -41,4 +41,15 @@ class GitClient extends Controller {
         return new Cz\Git\GitRepository(ULICMS_ROOT);
     }
 
+    public function commitAndPush() {
+        $message = Request::getVar("message");
+        if (!$message) {
+            ExceptionResult(get_translation("fill_all_fields"), HTTPStatusCode::UNPROCESSABLE_ENTITY);
+        }
+        $this->getGitRepository()->addAllChanges();
+        $this->getGitRepository()->commit($message);
+        $this->getGitRepository()->push();
+        Response::redirect(ModuleHelper::buildAdminURL(self::MODULE_NAME));
+    }
+
 }

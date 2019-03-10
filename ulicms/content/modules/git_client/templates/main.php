@@ -12,10 +12,17 @@
     <?php
 }
 ?>
-<a href="#" data-url="<?php echo ModuleHelper::buildMethodCallUrl(GitClient::class, "pull"); ?>" class="btn btn-primary remote-alert">
-    <i class="fas fa-arrow-down"></i>
-    <?php translate("git_pull"); ?></a>
-
+<div class="form-group"><a href="#" data-url="<?php echo ModuleHelper::buildMethodCallUrl(GitClient::class, "pull"); ?>" class="btn btn-default remote-alert">
+        <i class="fas fa-arrow-down"></i>
+        <?php translate("git_pull"); ?></a>
+</div>
+<?php echo ModuleHelper::buildMethodCallForm(GitClient::class, "commitAndPush"); ?>
+<div class="form-group">
+    <?php echo UliCMS\HTML\Input::TextArea("message", "", 3, 80); ?>
+</div>
+<button type="submit" class="btn btn-primary"><i class="fas fa-arrow-up"></i>
+    <?php translate("git_commit_and_push"); ?></button>
+<?php echo ModuleHelper::endForm(); ?>
 <?php
 enqueueScriptFile(ModuleHelper::buildRessourcePath(GitClient::MODULE_NAME, " js/main.js"));
 combinedScriptHtml();
