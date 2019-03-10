@@ -50,7 +50,7 @@ function showMergeModal(event) {
         });
     });
 
-    bootbox.prompt({
+    var dialog = bootbox.prompt({
         title: Translation.MergeBranch,
         buttons: {
             confirm: {
@@ -88,5 +88,13 @@ function showMergeModal(event) {
                 });
             }
         }
+    });
+    dialog.on('shown.bs.modal', function (event) {
+        var language = $("html").data("select2-language");
+        $(event.target).removeAttr('tabindex');
+        $(event.target).find("select").select2({
+            width: "100%",
+            language: language
+        });
     });
 }
