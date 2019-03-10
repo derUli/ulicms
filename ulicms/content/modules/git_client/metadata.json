@@ -15,6 +15,7 @@
     "admin_permission": "git_client",
     "controller_function_permissions": {
         "GitClient::pull": "git_client",
-        "GitClient::commitAndPush": "git_client"
+        "GitClient::commitAndPush": "git_client",
+        "GitClient::checkForChanges": "git_client"
     }
 }

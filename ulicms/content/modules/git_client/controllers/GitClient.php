@@ -64,6 +64,10 @@ class GitClient extends Controller {
         return new Cz\Git\GitRepository(ULICMS_ROOT);
     }
 
+    public function checkForChanges() {
+        JSONResult($this->getGitRepository()->hasChanges());
+    }
+
     public function commitAndPush() {
         $message = Request::getVar("message");
         if (!$message) {
