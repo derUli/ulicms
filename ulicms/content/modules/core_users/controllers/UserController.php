@@ -16,18 +16,26 @@ class UserController extends Controller {
         $email = $_POST["admin_email"];
         $default_language = StringHelper::isNotNullOrWhitespace($_POST["default_language"]) ? $_POST["default_language"] : null;
         $sendMail = isset($_POST["send_mail"]);
-        $admin = intval(isset($_POST["admin"]));
-        $locked = intval(isset($_POST["locked"]));
+        $admin = boolval(isset($_POST["admin"]));
+        $locked = boolval(isset($_POST["locked"]));
         $group_id = is_numeric($_POST["group_id"]) ? intval($_POST["group_id"]) : null;
         if ($group_id <= 0) {
             $group_id = null;
         }
         $require_password_change = intval(isset($_POST["require_password_change"]));
-        adduser($username, $lastname, $firstname, $email, $password, $sendMail, $group_id, $require_password_change, $admin, $locked, $default_language);
 
         // save secondary groups
         $user = new User();
-        $user->loadByUsername($username);
+        $user->setUsername($username);
+        $user->setLastname($lastname);
+        $user->setFirstname($firstname);
+        $user->setPassword($password);
+        $user->setEmail($email);
+        $user->setDefaultLanguage($default_language);
+        $user->setAdmin($admin);
+        $user->setLocked($locked);
+        $user->setGroupid($group_id);
+        $user->setRequirePasswordChange($require_password_change);
         $secondary_groups = $_POST["secondary_groups"];
 
         $user->setSecondaryGroups(array());
@@ -36,8 +44,11 @@ class UserController extends Controller {
                 $user->addSecondaryGroup(new Group($group));
             }
         }
-
-        $user->save();
+        if ($sendMail) {
+            $user->saveAndSendMail();
+        } else {
+            $user->save();
+        }
 
         if ($this->logger) {
             $user = getUserById(get_user_id());

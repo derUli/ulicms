@@ -58,6 +58,11 @@ class User {
         $this->saveGroups();
     }
 
+    public function saveAndSendMail() {
+        $this->save();
+        // TODO: Send Mail to new user
+    }
+
     public function fillVars($query) {
         if (Database::any($query)) {
             $result = Database::fetchAssoc($query);

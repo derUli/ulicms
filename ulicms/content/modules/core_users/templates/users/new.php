@@ -40,6 +40,7 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
                 <strong><?php translate("password_repeat"); ?>*</strong><br />
                 <input type="password" required="required" name="admin_password_repeat"
                        id="admin_password_repeat" value="" autocomplete="off">
+                <br />
             </div>
         </div>
         <?php
