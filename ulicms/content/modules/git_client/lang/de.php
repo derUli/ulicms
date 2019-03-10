@@ -1,6 +1,6 @@
 <?php
 
-add_translation("git_client_headline", "Git Client [%branch%]");
+add_translation("git_client_headline", "Git Client");
 add_translation("commit", "Commit");
 add_translation("message", "Nachricht");
 add_translation("git_pull", "Entfernte Änderungen herunterladen");

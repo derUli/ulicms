@@ -14,6 +14,22 @@
     <?php
 }
 ?>
+<?php echo ModuleHelper::buildMethodCallForm(GitClient::class, "checkoutBranch"); ?>
+<div class="form-group">
+    <div class="row">
+        <div class="col-xs-7 col-md-9 col-lg-10">
+            <?php
+            echo UliCMS\HTML\Input::SingleSelect("name", ViewBag::get("branch"), ViewBag::get("branches"));
+            ?>
+        </div>
+        <div class="col-xs-5 col-md-3 text-right col-lg-2">
+            <button type="submit" class="btn btn-default"><i class="fas fa-code-branch"></i> <?php translate("checkout_branch");
+            ?></button>
+        </div>
+    </div>
+</div>
+
+<?php echo ModuleHelper::endForm(); ?>
 <div class="form-group"><a href="#" data-url="<?php echo ModuleHelper::buildMethodCallUrl(GitClient::class, "pull"); ?>" class="btn btn-default remote-alert">
         <i class="fas fa-arrow-down"></i>
         <?php translate("git_pull"); ?></a>
@@ -39,14 +55,14 @@
         ?></button>
 </div>
 <?php echo ModuleHelper::endForm(); ?>
-
 <?php echo ModuleHelper::buildMethodCallForm(GitClient::class, "createBranch"); ?>
 <div class="form-group">
     <div class="row">
         <div class="col-xs-7 col-md-9 col-lg-10">
             <?php
             echo UliCMS\HTML\Input::TextBox("name", "", "text", array(
-                "placeholder" => get_translation("branch_name")
+                "placeholder" => get_translation("branch_name"),
+                "required" => "required"
             ));
             ?>
         </div>

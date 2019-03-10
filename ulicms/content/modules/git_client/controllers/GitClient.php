@@ -10,6 +10,13 @@ class GitClient extends Controller {
     public function settings() {
         try {
             ViewBag::set("has_changes", $this->getGitRepository()->hasChanges());
+            ViewBag::set("branch", $this->getGitRepository()->getCurrentBranchName());
+            $branches = $this->getGitRepository()->getBranches();
+            $options = array();
+            foreach ($branches as $branch) {
+                $options[] = new UliCMS\HTML\ListItem($branch, $branch);
+            }
+            ViewBag::set("branches", $options);
         } catch (Cz\Git\GitException $e) {
             // this is required because git-repository changes the cwd
             // and when an exception happens it doesn't change back to admin dir
@@ -48,13 +55,7 @@ class GitClient extends Controller {
     }
 
     public function getSettingsHeadline() {
-        try {
-            // shows "Git Client [Branch Name] as title"
-            return get_translation("git_client_headline", array("%branch%" => $this->getCurrentBranch()));
-        } catch (Cz\Git\GitException $e) {
-            chdir(Path::resolve("ULICMS_ROOT/admin"));
-            return $e->getMessage();
-        }
+        return get_translation("git_client_headline");
     }
 
     public function getCurrentBranch() {
@@ -92,6 +93,20 @@ class GitClient extends Controller {
         }
         try {
             $this->getGitRepository()->createBranch($name, true);
+            Response::redirect(ModuleHelper::buildAdminURL(self::MODULE_NAME));
+        } catch (Cz\Git\GitException $e) {
+            chdir(Path::resolve("ULICMS_ROOT/admin"));
+            ExceptionResult($e->getMessage());
+        }
+    }
+
+    public function checkoutBranch() {
+        $name = Request::getVar("name");
+        if (!$name) {
+            ExceptionResult(get_translation("fill_all_fields"), HTTPStatusCode::UNPROCESSABLE_ENTITY);
+        }
+        try {
+            $this->getGitRepository()->checkout($name);
             Response::redirect(ModuleHelper::buildAdminURL(self::MODULE_NAME));
         } catch (Cz\Git\GitException $e) {
             chdir(Path::resolve("ULICMS_ROOT/admin"));
