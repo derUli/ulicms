@@ -14,3 +14,7 @@ add_translation("branch_name", "Name des Zweigs");
 add_translation("checkout_branch", "Zweig wechseln");
 add_translation("git_fetch", "Anfordern");
 add_translation("current_branch", "Ausgecheckt");
+add_translation("git_merge", "Vereinigen");
+add_translation("merge_branch", "Zweig Vereinigen");
+add_translation("select_branch", "[Zweig auswählen]");
+add_translation("cancel", "Abbrechen");

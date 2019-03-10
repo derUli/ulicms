@@ -114,6 +114,21 @@ class GitClient extends Controller {
         }
     }
 
+    public function mergeBranch() {
+        $name = Request::getVar("name");
+        if (!$name) {
+            TextResult(get_translation("fill_all_fields"), HTTPStatusCode::UNPROCESSABLE_ENTITY);
+        }
+
+        try {
+            $this->getGitRepository()->merge($name);
+            HTTPStatusCodeResult(HttpStatusCode::OK);
+        } catch (Cz\Git\GitException $e) {
+            chdir(Path::resolve("ULICMS_ROOT/admin"));
+            TextResult($e->getMessage(), HttpStatusCode::INTERNAL_SERVER_ERROR);
+        }
+    }
+
     public function checkoutBranch() {
         $name = Request::getVar("name");
         if (!$name) {

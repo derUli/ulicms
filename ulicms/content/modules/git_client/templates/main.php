@@ -41,9 +41,9 @@ echo ModuleHelper::buildMethodCallForm(GitClient::class, "checkoutBranch",
     <a href="<?php echo ModuleHelper::buildMethodCallUrl(GitClient::class, "fetch"); ?>" class="btn btn-default">
         <i class="fas fa-arrow-right"></i>
         <?php translate("git_fetch"); ?></a>
-		
-	<a data-url="<?php echo ModuleHelper::buildMethodCallUrl(GitClient::class, "merge"); ?>" id="btn-merge" class="btn btn-default">
-       <i class="fas fa-code-branch"></i>
+
+    <a data-url="<?php echo ModuleHelper::buildMethodCallUrl(GitClient::class, "mergeBranch"); ?>" id="btn-merge" class="btn btn-default">
+        <i class="fas fa-code-branch"></i>
         <?php translate("git_merge"); ?></a>
 
 </div>
@@ -85,7 +85,17 @@ echo ModuleHelper::buildMethodCallForm(GitClient::class, "checkoutBranch",
         </div>
     </div>
 </div>
-<?php echo ModuleHelper::endForm(); ?>
 <?php
+echo ModuleHelper::endForm();
+?>
+
+<?php
+$translation = new JSTranslation();
+$translation->addKey("git_merge");
+$translation->addKey("merge_branch");
+$translation->addKey("select_branch");
+$translation->addKey("cancel");
+$translation->render();
+
 enqueueScriptFile(ModuleHelper::buildRessourcePath(GitClient::MODULE_NAME, "js/main.js"));
 combinedScriptHtml();

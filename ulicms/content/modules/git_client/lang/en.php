@@ -14,3 +14,7 @@ add_translation("branch_name", "Branch Name");
 add_translation("checkout_branch", "Checkout Branch");
 add_translation("git_fetch", "Fetch");
 add_translation("current_branch", "Current");
+add_translation("git_merge", "Merge");
+add_translation("merge_branch", "Merge Branch");
+add_translation("select_branch", "[Select Branch]");
+add_translation("cancel", "Cancel");
