@@ -36,10 +36,10 @@ echo ModuleHelper::buildMethodCallForm(GitClient::class, "checkoutBranch",
 <div class="btn-group form-group">
 
     <a href="#" data-url="<?php echo ModuleHelper::buildMethodCallUrl(GitClient::class, "pull"); ?>" class="btn btn-default remote-alert">
-        <i class="fas fa-arrow-right"></i>
+        <i class="fas fa-arrow-down"></i>
         <?php translate("git_pull"); ?></a>
     <a href="<?php echo ModuleHelper::buildMethodCallUrl(GitClient::class, "fetch"); ?>" class="btn btn-default">
-        <i class="fas fa-arrow-left"></i>
+        <i class="fas fa-arrow-right"></i>
         <?php translate("git_fetch"); ?></a>
 </div>
 <?php echo ModuleHelper::buildMethodCallForm(GitClient::class, "commitAndPush"); ?>
