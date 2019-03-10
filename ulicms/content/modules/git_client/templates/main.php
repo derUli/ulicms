@@ -18,7 +18,16 @@
 </div>
 <?php echo ModuleHelper::buildMethodCallForm(GitClient::class, "commitAndPush"); ?>
 <div class="form-group">
-    <?php echo UliCMS\HTML\Input::TextArea("message", "", 3, 80); ?>
+    <label for="comment"><?php
+        translate("commit_message");
+        ?>
+    </label>
+
+    <?php
+    echo UliCMS\HTML\Input::TextArea("message", "", 3, 80, array(
+        "required" => "required"
+    ));
+    ?>
 </div>
 <button type="submit" class="btn btn-primary"><i class="fas fa-arrow-up"></i>
     <?php translate("git_commit_and_push"); ?></button>
