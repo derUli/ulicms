@@ -67,7 +67,11 @@ class GitClient extends Controller {
     }
 
     public function checkForChanges() {
-        JSONResult($this->getGitRepository()->hasChanges());
+        $result = array();
+        $result["hasChanges"] = $this->getGitRepository()->hasChanges();
+        $result["branch"] = $this->getGitRepository()->getCurrentBranchName();
+
+        JSONResult($result);
     }
 
     public function commitAndPush() {

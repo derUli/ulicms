@@ -11,3 +11,4 @@ add_translation("no_changes", "There are no local changes");
 add_translation("commit_message", "Commit Message");
 add_translation("git_new_branch", "New Branch");
 add_translation("branch_name", "Branch Name");
+add_translation("checkout_branch", "Checkout Branch");

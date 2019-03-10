@@ -11,3 +11,4 @@ add_translation("no_changes", "Es sind keine lokalen Änderungen vorhanden.");
 add_translation("commit_message", "Commit Nachricht");
 add_translation("git_new_branch", "Neuen Zweig erstellen");
 add_translation("branch_name", "Name des Zweigs");
+add_translation("checkout_branch", "Zweig wechseln");

@@ -14,7 +14,10 @@
     <?php
 }
 ?>
-<?php echo ModuleHelper::buildMethodCallForm(GitClient::class, "checkoutBranch"); ?>
+<?php
+echo ModuleHelper::buildMethodCallForm(GitClient::class, "checkoutBranch",
+        array(), RequestMethod::POST, array("id" => "checkout_branch_form"));
+?>
 <div class="form-group">
     <div class="row">
         <div class="col-xs-7 col-md-9 col-lg-10">
@@ -32,7 +35,7 @@
 <?php echo ModuleHelper::endForm(); ?>
 <div class="form-group"><a href="#" data-url="<?php echo ModuleHelper::buildMethodCallUrl(GitClient::class, "pull"); ?>" class="btn btn-default remote-alert">
         <i class="fas fa-arrow-down"></i>
-        <?php translate("git_pull"); ?></a>
+<?php translate("git_pull"); ?></a>
 </div>
 <?php echo ModuleHelper::buildMethodCallForm(GitClient::class, "commitAndPush"); ?>
 <div class="form-group">

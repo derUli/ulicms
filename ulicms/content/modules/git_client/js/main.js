@@ -13,11 +13,12 @@ function checkForChanges() {
     var alertMessage = $("#alert-changes");
     var url = alertMessage.data("url");
     var hasChanges = alertMessage.data("has-changes");
+    var branch = $("#checkout_branch_form select").val();
     $.ajax({
         type: 'GET',
         url: url,
         success: function (result) {
-            if (hasChanges !== result) {
+            if (hasChanges !== result["hasChanges"] || result["branch"] !== branch) {
                 location.replace(location.href);
                 return;
             }
