@@ -18,6 +18,7 @@
         "GitClient::commitAndPush": "git_client",
         "GitClient::checkForChanges": "git_client",
         "GitClient::createBranch": "git_client",
-        "GitClient::checkoutBranch": "git_client"
+        "GitClient::checkoutBranch": "git_client",
+        "GitClient::fetch": "git_client"
     }
 }

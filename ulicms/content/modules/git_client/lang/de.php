@@ -12,3 +12,5 @@ add_translation("commit_message", "Commit Nachricht");
 add_translation("git_new_branch", "Neuen Zweig erstellen");
 add_translation("branch_name", "Name des Zweigs");
 add_translation("checkout_branch", "Zweig wechseln");
+add_translation("git_fetch", "Anfordern");
+add_translation("current_branch", "Ausgecheckt");

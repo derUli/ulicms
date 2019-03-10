@@ -14,7 +14,8 @@ class GitClient extends Controller {
             $branches = $this->getGitRepository()->getBranches();
             $options = array();
             foreach ($branches as $branch) {
-                $options[] = new UliCMS\HTML\ListItem($branch, $branch);
+                $displayName = $branch == ViewBag::get("branch") ? "$branch [" . get_translation("current_branch") . "]" : $branch;
+                $options[] = new UliCMS\HTML\ListItem($branch, $displayName);
             }
             ViewBag::set("branches", $options);
         } catch (Cz\Git\GitException $e) {
@@ -52,6 +53,18 @@ class GitClient extends Controller {
         }
 
         HTMLResult($message);
+    }
+
+    public function fetch() {
+        try {
+            $this->getGitRepository()->fetch();
+            Response::redirect(ModuleHelper::buildAdminURL(self::MODULE_NAME));
+        } catch (Cz\Git\GitException $e) {
+            // this is required because git-repository changes the cwd
+            // and when an exception happens it doesn't change back to admin dir
+            chdir(Path::resolve("ULICMS_ROOT/admin"));
+            HtmlResult(UliCMS\HTML\text($e->getMessage()));
+        }
     }
 
     public function getSettingsHeadline() {
