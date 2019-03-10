@@ -1,12 +1,14 @@
-GIT_CHECK_INTERVAL = 10 * 1000 // Any 10 Seconds
+GIT_CHECK_INTERVAL = 10 * 1000; // Any 10 Seconds
 
 $(function () {
     setTimeout(function () {
         checkForChanges();
     }, GIT_CHECK_INTERVAL);
+});
 
-})
 
+// This method polls in a regular interval for changes
+// and reloads the page if there are any
 function checkForChanges() {
     var alertMessage = $("#alert-changes");
     var url = alertMessage.data("url");

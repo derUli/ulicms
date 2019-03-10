@@ -49,6 +49,7 @@ class GitClient extends Controller {
 
     public function getSettingsHeadline() {
         try {
+            // shows "Git Client [Branch Name] as title"
             return get_translation("git_client_headline", array("%branch%" => $this->getCurrentBranch()));
         } catch (Cz\Git\GitException $e) {
             chdir(Path::resolve("ULICMS_ROOT/admin"));
