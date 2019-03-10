@@ -12,7 +12,9 @@
     <?php
 }
 ?>
-<a href="#" data-url="<?php echo ModuleHelper::buildMethodCallUrl(GitClient::class, "pull"); ?>" class="btn btn-primary remote-alert"><?php translate("git_pull"); ?></a>
+<a href="#" data-url="<?php echo ModuleHelper::buildMethodCallUrl(GitClient::class, "pull"); ?>" class="btn btn-primary remote-alert">
+    <i class="fas fa-arrow-down"></i>
+    <?php translate("git_pull"); ?></a>
 
 <?php
 enqueueScriptFile(ModuleHelper::buildRessourcePath(GitClient::MODULE_NAME, " js/main.js"));
