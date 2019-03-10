@@ -29,10 +29,8 @@
     ));
     ?>
 </div>
-<button type="submit" class="btn btn-primary"><i class="fas fa-arrow-up"></i>
-    <?php translate("git_commit_and_push"); ?></button>
+<button type="submit" class="btn btn-primary" <?php if (!ViewBag::get("has_changes")) echo "disabled"; ?>>
+    <i class="fas fa-arrow-up"></i>
+    <?php translate("git_commit_and_push");
+    ?></button>
 <?php echo ModuleHelper::endForm(); ?>
-<?php
-enqueueScriptFile(ModuleHelper::buildRessourcePath(GitClient::MODULE_NAME, " js/main.js"));
-combinedScriptHtml();
-?>
