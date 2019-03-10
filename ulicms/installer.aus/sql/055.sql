@@ -1,1 +1,0 @@
-ALTER TABLE `{prefix}content` ADD `link_to_language` int(11) NULL DEFAULT NULL;

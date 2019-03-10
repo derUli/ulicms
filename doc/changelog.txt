@@ -1,20 +1,32 @@
 ===== Neues in UliCMS 2019.2.1 =====
+
 Neue Features:
 * Performance Verbesserungen im Backend durchgeführt
 * minify_html ist nun per default eingeschalten.
-* Das Feld "Menü als Grafik" wird nun ausgeblendet,
-wenn man "Nicht im Menü" auswählt
+* Das Feld "Menü als Grafik" wird nun ausgeblendet, wenn man "Nicht im Menü" auswählt
 * Checkboxen werden nun als Schalter dargestellt
 * Kommentar Icon mit Anzahl der neuen Kommentare hinzugefügt
 * Update von jQuery auf Version 3.3.1
 * Update von Bootstrap auf Version 3.4.1
+* Update von CKEditor auf Version 4.11.3
 * MOTD Formular nutzt jetzt AJAX zum Speichern
 * Das Feld "Custom Data (JSON)" wird nun validiert
-* Die Tastenkombination ctrl+c (PC) bzw. cmd+c (Mac) löst nun das Absenden eines Formulars aus
+* Die Tastenkombination ctrl+s (PC) bzw. cmd+s (Mac) löst nun das Absenden eines Formulars aus
+* Script und Style Helper fügen den nun einen Timestamp an den Pfad an um
+ungewünschtes Caching zu verhindern
+* SQL Migrations von Installer und Updates vereint
+* Neue Optionen in der Konfigurationsdatei unterstützt
 
 Neue API-Methoden:
 * Response::sendHttpStatusCodeResultIfAjax($status = HTTPStatusCode::OK, $redirect = null, $redirectStatus = HttpStatusCode::MOVED_TEMPORARILY)
 * Response::redirectToAction($action, $controller = null, $status = HttpStatusCode::MOVED_TEMPORARILY)
+* File::existsLocally($path)
+* Content::emptyTrash()
+* Database::setupSchemaAndSelect($schemaName, $otherScripts = array())
+* Database::dropSchema($schema)
+
+Entfernte API-Methoden:
+* is_in_include_path($find)
 
 Verbesserungen:
 * Die Funktion "Neues Logo hochladen" befindet sich nun in den Design-Einstellungen
@@ -27,6 +39,7 @@ Fehlerkorrekturen:
 * Die Deaktivierung der Auto-Vervollständigung für Formulare funktioniert
   in einigen modernen Browsern (z.B. Google Chrome) nicht mehr.
 * Wenn ein Bootbox geöffnet wird, verschiebt sich der Inhalt der Seite nach Links.
+* Bei den Demodaten war nach einer Neuinstallation die group_id Spalte nicht gefüllt
 
 Entfernte Features:
 * Alte Ansicht von "Pakete" entfernt

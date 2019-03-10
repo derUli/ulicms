@@ -45,3 +45,4 @@ add_translation("LAST_STEP", "This is the last step of the installation.<br/>Now
 add_translation("ADD_FK", "Add Foreign Keys");
 add_translation("ACCEPT_LICNSE", "Accept License");
 add_translation("NEXT", "Next");
+add_translation("THIS_PROCEDUDRE_WILL_TAKE_SOME_MINUTES", "This procedure will take some minutes.");

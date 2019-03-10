@@ -9,6 +9,7 @@ if (!defined("ULICMS_ROOT")) {
 
 // this is kept for compatiblity reasons
 define("DIRECTORY_SEPERATOR", DIRECTORY_SEPARATOR);
+
 // shortcut for DIRECTORY_SEPARATOR
 // however it's unnecessary to use these constansts
 // since PHP normalizes all paths
@@ -36,9 +37,6 @@ if (is_file($composerAutoloadFile)) {
     throw new Exception("autoload.php not found. Please run \"./composer install\" to install dependecies.");
 }
 
-$classes_dir = ULICMS_ROOT . "/" . "classes";
-@set_include_path(get_include_path() . PATH_SEPARATOR . $classes_dir);
-
 // todo reorganize includes
 include_once dirname(__file__) . "/lib/constants.php";
 include_once dirname(__file__) . "/classes/objects/privacy/load.php";
@@ -46,7 +44,6 @@ include_once dirname(__file__) . "/lib/users_api.php";
 include_once dirname(__file__) . "/lib/string_functions.php";
 include_once dirname(__file__) . "/lib/network.php";
 include_once dirname(__file__) . "/lib/settings.php";
-
 include_once dirname(__file__) . "/classes/objects/abstract/load.php";
 include_once dirname(__file__) . "/classes/objects/constants/load.php";
 include_once dirname(__file__) . "/classes/objects/storages/load.php";
@@ -77,7 +74,6 @@ include_once dirname(__file__) . "/classes/exceptions/load.php";
 include_once dirname(__file__) . "/classes/objects/registry/load.php";
 include_once dirname(__file__) . "/classes/objects/logging/load.php";
 include_once dirname(__file__) . "/classes/objects/html/load.php";
-include_once dirname(__file__) . "/classes/objects/SpellChecker.php";
 include_once dirname(__file__) . "/classes/objects/content/TypeMapper.php";
 include_once dirname(__file__) . "/lib/db_functions.php";
 include_once dirname(__file__) . "/lib/files.php";
@@ -117,6 +113,7 @@ include_once dirname(__file__) . "/classes/objects/content/CustomFields.php";
 include_once dirname(__file__) . "/classes/objects/content/Results.php";
 include_once dirname(__file__) . "/classes/objects/media/load.php";
 include_once dirname(__file__) . "/UliCMSVersion.php";
+include_once dirname(__file__) . "/lib/minify.php";
 
 $mobile_detect_as_module = dirname(__file__) . "/content/modules/Mobile_Detect/Mobile_Detect.php";
 if (is_file($mobile_detect_as_module)) {
@@ -195,13 +192,15 @@ if (isset($config->data_storage_root) and ! is_null($config->data_storage_root))
     define("ULICMS_DATA_STORAGE_ROOT", ULICMS_ROOT);
 }
 
+
+include_once dirname(__file__) . "/classes/creators/load.php";
+
 // this enables us to set an base url for statis ressources such as images
 // stored in ULICMS_DATA_STORAGE_ROOT
 if (isset($config->data_storage_url) and ! is_null($config->data_storage_url)) {
     define("ULICMS_DATA_STORAGE_URL", $config->data_storage_url);
 }
 
-include_once dirname(__file__) . "/classes/creators/load.php";
 
 if (!defined("ULICMS_TMP")) {
     define("ULICMS_TMP", ULICMS_DATA_STORAGE_ROOT . "/content/tmp/");
@@ -268,7 +267,6 @@ if (class_exists("Path")) {
         LoggerRegistry::register("audit_log", new Logger(Path::resolve("ULICMS_LOG/audit_log")));
     }
 }
-include_once dirname(__file__) . "/lib/minify.php";
 
 // define Constants
 define('CR', "\r"); // carriage return; Mac
@@ -296,21 +294,6 @@ function noPerms() {
     return false;
 }
 
-function is_in_include_path($find) {
-    $paths = explode(PATH_SEPARATOR, get_include_path());
-    $found = false;
-    foreach ($paths as $p) {
-        $fullname = $p . DIRECTORY_SEPARATOR . $find;
-        if (is_file($fullname)) {
-            $found = $fullname;
-            break;
-        }
-    }
-}
-
-global $config;
-$config = new CMSConfig();
-
 $db_socket = isset($config->db_socket) ? $config->db_socket : ini_get("mysqli.default_socket");
 
 $db_port = isset($config->db_port) ? $config->db_port : ini_get("mysqli.default_port");
@@ -323,7 +306,12 @@ if ($connection === false) {
 
 $path_to_installer = dirname(__file__) . "/installer/installer.php";
 
-$select = Database::select($config->db_database);
+if (is_true($config->dbmigrator_auto_migrate)) {
+    $additionalSql = is_array($config->dbmigrator_initial_sql_files) ? $config->dbmigrator_initial_sql_files : array();
+    $select = Database::setupSchemaAndSelect($config->db_database, $additionalSql);
+} else {
+    $select = Database::select($config->db_database);
+}
 
 if (!$select) {
     throw new Exception("<h1>Database " . $config->db_database . " doesn't exist.</h1>");
@@ -413,6 +401,9 @@ function shutdown_function() {
     if (is_true($cfg->show_render_time) and ! Request::isAjaxRequest()) {
         echo "\n\n<!--" . (microtime(true) - START_TIME) . "-->";
     }
+    if (is_true($cfg->dbmigrator_drop_database_on_shutdown)) {
+        Database::dropSchema($cfg->db_database);
+    }
 }
 
 register_shutdown_function("shutdown_function");
@@ -450,5 +441,3 @@ $installed_patches = implode(";", $installed_patches);
 if (!defined("PATCH_CHECK_URL")) {
     define("PATCH_CHECK_URL", "https://patches.ulicms.de/?v=" . urlencode(implode(".", $version->getInternalVersion())) . "&installed_patches=" . urlencode($installed_patches));
 }
-
-

@@ -27,9 +27,9 @@ if ($permissionChecker->hasPermission("users")) {
                              class="btn btn-default"><i class="fa fa-plus"></i> <?php translate("create_user"); ?></a><br />
         </p>
     <?php } ?>
-    <strong><?php translate("primary_group"); ?></strong>
-    <br />
-    <form action="index.php" method="get">
+
+    <form action="index.php" method="get" class="voffset3-5">    <strong><?php translate("primary_group"); ?></strong>
+        <br />
         <input type="hidden" name="action" value="admins"> <select
             name="admins_filter_group" size="1"
             onchange="$(this).closest('form').submit();">

@@ -3,6 +3,8 @@ $permissionChecker = new ACL();
 $groups = db_query("SELECT id, name from " . tbname("groups"));
 if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermission("pages_create")) {
 
+    $editor = get_html_editor();
+
     $allThemes = getThemesList();
     $cols = Database::getColumnNames("content");
     $sql = "SELECT id, name FROM " . tbname("videos");
@@ -31,11 +33,8 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
            class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
     </p>
     <input type="hidden" name="add" value="add">
-
     <div id="accordion-container">
-
         <h2 class="accordion-header"><?php translate("title_and_headline"); ?></h2>
-
         <div class="accordion-content">
             <strong><?php
                 translate("permalink");
@@ -57,9 +56,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
             </div>
         </div>
         <h2 class="accordion-header"><?php translate("type"); ?></h2>
-
         <div class="accordion-content">
-
             <?php foreach ($types as $type) { ?>
                 <input type="radio" name="type" id="type_<?php echo $type; ?>"
                        value="<?php echo $type; ?>"
@@ -68,9 +65,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                    <?php } ?>
 
         </div>
-
         <h2 class="accordion-header"><?php translate("menu_entry"); ?></h2>
-
         <div class="accordion-content">
             <strong><?php translate("language"); ?>
             </strong> <br /> <select name="language">
@@ -97,10 +92,10 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                 <strong><?php translate("menu"); ?>
                 </strong> <span style="cursor: help;"
                                 onclick="$('div#menu_help').slideToggle()"><i class="fa fa-question-circle text-info" aria-hidden="true"></i></span><br /> <select
-                                name="menu" size=1>
-                                    <?php
-                                    foreach (getAllMenus() as $menu) {
-                                        ?>
+                    name="menu" size=1>
+                        <?php
+                        foreach (getAllMenus() as $menu) {
+                            ?>
                         <option value="<?php echo $menu ?>"
                                 <?php if ($menu == "top") echo "selected"; ?>>
                             <?php translate($menu); ?></option>
@@ -114,8 +109,8 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                 <br /> <br /> <strong><?php translate("position"); ?>
                 </strong> <span style="cursor: help;"
                                 onclick="$('div#position_help').slideToggle()"><i class="fa fa-question-circle text-info" aria-hidden="true"></i></span><br /> <input
-                                type="number" required="required" name="position" value="0" min="0"
-                                step="1">
+                    type="number" required="required" name="position" value="0" min="0"
+                    step="1">
                 <div id="position_help" class="help" style="display: none">
                     <?php echo nl2br(get_translation("help_position")); ?>
                 </div>
@@ -149,9 +144,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                     </select> <br /> <br />
                 </div>
             </div>
-
             <div class="typedep" id="tab-target">
-
                 <strong><?php
                     translate("open_in");
                     ?>
@@ -164,7 +157,6 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                     </option>
                 </select><br /> <br />
             </div>
-
             <strong><?php translate("activated"); ?>
             </strong><br /> <select name="activated" size=1
                                     <?php if (!$pages_activate_own) echo "disabled"; ?>>
@@ -184,32 +176,15 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                         <?php translate("no"); ?>
                     </option>
                 </select> <br /> <br />
-
             </div>
             <strong><?php translate("category"); ?>
             </strong><br />
             <?php echo Categories :: getHTMLSelect(); ?>
-
             <div id="menu_image_div" class="voffset3">
                 <strong><?php translate("menu_image"); ?>
                 </strong><br />
-
-                <script type="text/javascript">
-                    function openMenuImageSelectWindow(field) {
-                        window.KCFinder = {
-                            callBack: function (url) {
-                                field.value = url;
-                                window.KCFinder = null;
-                            }
-                        };
-                        window.open('kcfinder/browse.php?type=images&dir=images&lang=<?php echo htmlspecialchars(getSystemLanguage()); ?>', 'menu_image',
-                                'status=0, toolbar=0, location=0, menubar=0, directories=0, ' +
-                                'resizable=1, scrollbars=0, width=800, height=600'
-                                );
-                    }
-                </script>
                 <input type="text" id="menu_image" name="menu_image"
-                       readonly="readonly" onclick="openMenuImageSelectWindow(this)"
+                       readonly="readonly" class="kcfinder"
                        value="" style="cursor: pointer" /> <a href="#"
                        onclick="$('#menu_image').val('');return false;"
                        class="btn btn-default voffset2" class="btn btn-default"><i
@@ -219,7 +194,6 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
         </div>
         <div class="typedep" id="tab-link" style="display: none;">
             <h2 class="accordion-header"><?php translate("link_url"); ?></h2>
-
             <div class="accordion-content">
                 <strong><?php translate("link_url"); ?>
                 </strong><br /> <input type="text" name="redirection" value="">
@@ -227,7 +201,6 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
         </div>
         <div class="typedep" id="tab-language-link" style="display: none;">
             <h2 class="accordion-header"><?php translate("language_link"); ?></h2>
-
             <div class="accordion-content">
                 <strong><?php translate("language_link"); ?>
                 </strong><br />
@@ -241,12 +214,9 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                     <?php } ?>
                 </select>
             </div>
-
         </div>
         <div class="typedep" id="tab-metadata">
-
             <h2 class="accordion-header"><?php translate("metadata"); ?></h2>
-
             <div class="accordion-content">
                 <strong><?php translate("meta_description"); ?>
                 </strong><br /> <input type="text" name="meta_description" value=''
@@ -263,15 +233,13 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                             type="url" name="comment_homepage" value="" maxlength="255"> <br />
                         <br />
                     </div>
-
                     <strong><?php translate("article_date"); ?></strong><br /> <input
                         name="article_date" type="datetime-local"
                         value="<?php echo date("Y-m-d\TH:i:s"); ?>" step="any"> <br /> <strong><?php translate("excerpt"); ?></strong>
-                    <textarea name="excerpt" id="excerpt" rows="5" cols="80"></textarea>
+                    <textarea name="excerpt" id="excerpt" rows="5" cols="80" class="<?php esc($editor); ?>" data-mimetype="text/html"></textarea>
                 </div>
                 <div class="typedep" id="tab-og" style="display: none;">
                     <h3><?php translate("open_graph"); ?></h3>
-
                     <p><?php translate("og_help"); ?></p>
                     <strong><?php translate("title"); ?>
                     </strong><br /> <input type="text" name="og_title" value=""> <br /> <strong><?php translate("description"); ?>
@@ -279,28 +247,13 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                     <strong><?php translate("type"); ?>
                     </strong><br /> <input type="text" name="og_type" value=""> <br /> <strong><?php translate("image"); ?></strong>
                     <br />
-                    <script type="text/javascript">
-                        function openMenuImageSelectWindow(field) {
-                            window.KCFinder = {
-                                callBack: function (url) {
-                                    field.value = url;
-                                    window.KCFinder = null;
-                                }
-                            };
-                            window.open('kcfinder/browse.php?type=images&dir=images&lang=<?php echo htmlspecialchars(getSystemLanguage()); ?>', 'og_image',
-                                    'status=0, toolbar=0, location=0, menubar=0, directories=0, ' +
-                                    'resizable=1, scrollbars=0, width=800, height=600'
-                                    );
-                        }
-                    </script>
                     <input type="text" id="og_image" name="og_image" readonly="readonly"
-                           onclick="openMenuImageSelectWindow(this)"
+                           class="kcfinder"
                            value="<?php echo htmlspecialchars($og_image); ?>"
                            style="cursor: pointer" /> <a href="#"
                            onclick="$('#og_image').val('');
-                                       return false;"
+                                   return false;"
                            class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?></a>
-
                 </div>
             </div>
         </div>
@@ -312,7 +265,6 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                     ?>
                     <div class="custom-field-tab" data-type="<?php echo $name; ?>">
                         <h2 class="accordion-header"><?php translate($type->customFieldTabTitle ? $type->customFieldTabTitle : $name); ?></h2>
-
                         <div class="accordion-content">
                             <?php
                             foreach ($fields as $field) {
@@ -322,16 +274,15 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                             <?php } ?>
                         </div>
                     </div>
-                <?php } ?>
-
-            <?php } ?>
+                    <?php
+                }
+            }
+            ?>
         </div>
         <div class="typedep" id="tab-list" style="display: none">
             <h2 class="accordion-header"><?php translate("list_properties"); ?></h2>
-
             <div class="accordion-content">
                 <strong><?php translate("type") ?></strong> <br />
-
                 <?php $types = get_available_post_types(); ?>
                 <select name="list_type">
                     <option value="null" selected>[<?php translate("every") ?>]
@@ -425,7 +376,6 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
         </div>
         <div class="typedep" id="tab-module" style="display: none;">
             <h2 class="accordion-header"><?php translate("module"); ?></h2>
-
             <div class="accordion-content">
                 <strong><?php translate("module"); ?></strong><br /> <select
                     name="module">
@@ -435,11 +385,9 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                     <?php } ?>
                 </select>
             </div>
-
         </div>
         <div class="typedep" id="tab-video" style="display: none;">
             <h2 class="accordion-header"><?php translate("video"); ?></h2>
-
             <div class="accordion-content">
                 <strong><?php translate("video"); ?></strong><br /> <select
                     name="video">
@@ -449,11 +397,9 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                     <?php } ?>
                 </select>
             </div>
-
         </div>
         <div class="typedep" id="tab-audio" style="display: none;">
             <h2 class="accordion-header"><?php translate("audio"); ?></h2>
-
             <div class="accordion-content">
                 <strong><?php translate("audio"); ?></strong><br /> <select
                     name="audio">
@@ -463,15 +409,12 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                     <?php } ?>
                 </select>
             </div>
-
         </div>
-
         <div class="typedep" id="tab-image" style="display: none;">
             <h2 class="accordion-header"><?php translate("image"); ?></h2>
-
             <div class="accordion-content">
                 <input type="text" id="image_url" name="image_url"
-                       readonly="readonly" onclick="openMenuImageSelectWindow(this)"
+                       readonly="readonly" class="kcfinder"
                        value="" style="cursor: pointer" /> <a href="#"
                        onclick="$('#menu_image').val('');return false;"
                        class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php
@@ -488,35 +431,18 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                     <option value="before"><?php translate("description_before_content") ?></option>
                     <option value="after"><?php translate("description_after_content") ?></option>
                 </select>
-
             </div>
         </div>
         <div class="typedep" id="article-image">
             <h2 class="accordion-header"><?php translate("article_image"); ?></h2>
-
             <div class="accordion-content">
                 <strong><?php translate("article_image"); ?>
                 </strong><br />
-
-                <script type="text/javascript">
-                    function openArticleImageSelectWindow(field) {
-                        window.KCFinder = {
-                            callBack: function (url) {
-                                field.value = url;
-                                window.KCFinder = null;
-                            }
-                        };
-                        window.open('kcfinder/browse.php?type=images&dir=images&lang=<?php echo htmlspecialchars(getSystemLanguage()); ?>', 'article_image',
-                                'status=0, toolbar=0, location=0, menubar=0, directories=0, ' +
-                                'resizable=1, scrollbars=0, width=800, height=600'
-                                );
-                    }
-                </script>
                 <input type="text" id="article_image" name="article_image"
-                       readonly="readonly" onclick="openArticleImageSelectWindow(this)"
+                       readonly="readonly" class="kcfinder"
                        value="" style="cursor: pointer" maxlength="255" /> <a href="#"
                        onclick="$('#article_image').val('');
-                                   return false;"
+                               return false;"
                        class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?></a>
             </div>
         </div>
@@ -531,7 +457,6 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                 </select>
             </div>
         </div>
-
         <h2 class="accordion-header"><?php translate("other"); ?></h2>
         <div class="accordion-content">
             <div class="typedep" id="tab-cache-control" style="display: none;">
@@ -581,126 +506,25 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                     echo '<option value="' . $row->id . '">' . real_htmlspecialchars($row->name) . '</option>';
                 }
                 ?>
-
             </select> <br /> <br />
-
             <div class="typedep" id="custom_data_json">
-
                 <?php do_event("before_custom_data_json"); ?>
                 <strong><?php translate("custom_data_json"); ?></strong>
                 <textarea name="custom_data" style="width: 100%; height: 200px;"
                           cols=80 rows=10
                           class="codemirror" data-mimetype="application/json" data-validate="json"><?php esc(CustomData::getDefaultJSON()); ?></textarea>
-
             </div>
         </div>
     </div>
     <br />
     <br />
-
-
     <?php
     do_event("page_option");
     ?>
-
     <div class="typedep" id="content-editor">
-        <textarea name="page_content" id="page_content" cols=60 rows=20></textarea>
-        <?php
-        $editor = get_html_editor();
-        ?>
+        <textarea name="page_content" id="page_content" cols=60 rows=20
+                  class="<?php esc($editor); ?>" data-mimetype="text/html"></textarea>
 
-        <?php
-        if ($editor === "ckeditor") {
-            ?>
-            <script type="text/javascript">
-                var editor = CKEDITOR.replace('page_content',
-                        {
-                            skin: '<?php
-        echo Settings::get("ckeditor_skin");
-        ?>'
-                        });
-                var editor2 = CKEDITOR.replace('excerpt',
-                        {
-                            skin: '<?php
-        echo Settings::get("ckeditor_skin");
-        ?>'
-                        });
-
-
-                editor.on("instanceReady", function ()
-                {
-                    this.document.on("keyup", CKCHANGED);
-                    this.document.on("paste", CKCHANGED);
-                }
-
-                );
-                editor2.on("instanceReady", function ()
-                {
-                    this.document.on("keyup", CKCHANGED);
-                    this.document.on("paste", CKCHANGED);
-                }
-
-                );
-                function CKCHANGED() {
-                    formchanged = 1;
-                }
-
-                var formchanged = 0;
-                var submitted = 0;
-
-                $(document).ready(function () {
-                    $('form').each(function (i, n) {
-                        $('input', n).change(function () {
-                            formchanged = 1
-                        });
-                        $('textarea', n).change(function () {
-                            formchanged = 1
-                        });
-                        $('select', n).change(function () {
-                            formchanged = 1
-                        });
-                        $(n).submit(function () {
-                            submitted = 1
-                        });
-                    });
-                });
-
-                window.onbeforeunload = confirmExit;
-                function confirmExit()
-                {
-                    if (formchanged == 1 && submitted == 0)
-                        return PageTranslation.ConfirmExitWithoutSave;
-                    else
-                        return;
-                }
-            </script>
-            <?php
-        } else if ($editor == "codemirror") {
-            ?>
-            <script type="text/javascript">
-                var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("page_content"),
-                        {lineNumbers: true,
-                            matchBrackets: true,
-                            mode: "text/html",
-
-                            indentUnit: 0,
-                            indentWithTabs: false,
-                            enterMode: "keep",
-                            tabMode: "shift"});
-
-                var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
-                        {lineNumbers: true,
-                            matchBrackets: true,
-                            mode: "text/html",
-
-                            indentUnit: 0,
-                            indentWithTabs: false,
-                            enterMode: "keep",
-                            tabMode: "shift"});
-            </script>
-            <?php
-        }
-        ?>
     </div>
     <div class="inPageMessage"></div>
     <input type="hidden" name="add_page" value="add_page">
@@ -712,6 +536,10 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
     $translation->render();
 
     enqueueScriptFile("scripts/page.js");
+    if ($editor == "ckeditor") {
+        enqueueScriptFile(ModuleHelper::buildRessourcePath("core_content", "js/pages/init-ckeditor.js"));
+    }
+
     combinedScriptHtml();
     ?>
     <?php echo ModuleHelper::endForm(); ?>

@@ -25,4 +25,14 @@ class FilesTest extends \PHPUnit\Framework\TestCase {
         $this->assertNotContains("init.php", $allFiles);
     }
 
+    public function testExistsLocallyExpectTrue() {
+        $this->assertTrue(File::existsLocally("init.php"));
+        $this->assertTrue(File::existsLocally(__FILE__));
+    }
+
+    public function testExistsLocallyExpectFalse() {
+        $this->assertFalse(File::existsLocally("https://www.example.org"));
+        $this->assertFalse(File::existsLocally("ftp://ftp.example.org"));
+    }
+
 }

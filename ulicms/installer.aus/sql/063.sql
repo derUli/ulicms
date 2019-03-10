@@ -1,1 +1,0 @@
-insert into `{prefix}settings` (`name`, `value`) values('min_time_to_fill_form', '0');

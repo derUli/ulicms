@@ -1,1 +1,0 @@
-insert into `{prefix}settings` (name, `value`) values ('registered_user_default_level', '10');

@@ -1,1 +1,0 @@
-ALTER TABLE `{prefix}content` ADD COLUMN `only_group_can_edit` tinyint(1) NOT NULL DEFAULT '0'

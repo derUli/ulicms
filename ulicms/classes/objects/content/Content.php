@@ -1,12 +1,10 @@
 <?php
 
-abstract class Content extends Model
-{
+abstract class Content extends Model {
 
     abstract protected function loadBySystemnameAndLanguage($name, $language);
 
-    public function getShowHeadline()
-    {
+    public function getShowHeadline() {
         $retval = true;
         $query = Database::query("SELECT `show_headline` FROM " . tbname("content") . " where id =" . intval($this->id));
         if ($query) {
@@ -15,4 +13,9 @@ abstract class Content extends Model
         }
         return $retval;
     }
+
+    public static function emptyTrash() {
+        Database::query("DELETE FROM {prefix}content WHERE deleted_at IS NOT NULL", true);
+    }
+
 }

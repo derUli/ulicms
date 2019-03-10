@@ -355,10 +355,12 @@ if ($permissionChecker->hasPermission("pages")) {
 
             <a
                 href="<?php echo ModuleHelper::buildMethodCallUrl("PageController", "emptyTrash"); ?>"
-                onclick="return ajaxEmptyTrash(this.href);" class="btn btn-warning"><?php translate("empty_recycle_bin"); ?></a>
-                <?php
-            }
-            ?>
+                onclick="return ajaxEmptyTrash(this.href);" class="btn btn-warning">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+                <?php translate("empty_recycle_bin"); ?></a>
+            <?php
+        }
+        ?>
 
         <?php
         if (faster_in_array($_GET["order"], array(
@@ -469,8 +471,8 @@ if ($permissionChecker->hasPermission("pages")) {
                         <?php
                         if ($permissionChecker->hasPermission("pages_create")) {
                             ?>
-                        <td style="text-align: center"><?php translate("clone"); ?>
-                        </td> -->
+                            <td style="text-align: center"><?php translate("clone"); ?>
+                            </td> -->
                         <?php } ?>
                         <td style="text-align: center"><?php translate("edit"); ?>
                         </td>

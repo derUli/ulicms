@@ -149,7 +149,10 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetjQueryScript() {
-        $this->assertEquals('<script src="node_modules/jquery/dist/jquery.min.js" type="text/javascript"></script>', Template::getjQueryScript());
+        $file = "node_modules/jquery/dist/jquery.min.js";
+        $time = File::getLastChanged($file);
+        $expected = '<script src="' . $file . '?time=' . $time . '" type="text/javascript"></script>';
+        $this->assertEquals($expected, Template::getjQueryScript());
     }
 
     public function testGetContent() {

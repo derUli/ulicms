@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Data\Content\Comment;
+use UliCMS\HTML\Script;
 
 $admin_logo = Settings::get("admin_logo");
 if (!$admin_logo) {
@@ -24,9 +25,7 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
               content="width=device-width, user-scalable=yes, initial-scale=1" />
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <meta name="google" content="notranslate" />
-
         <title>[<?php Template::escape(Settings::get("homepage_title")); ?>] - UliCMS</title>
-
         <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
         <?php
         $styles = array();
@@ -66,10 +65,11 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
         foreach ($scripts as $script) {
             enqueueScriptFile($script);
         }
-        ?>
-        <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
 
-        <?php combinedScriptHtml(); ?>
+        echo Script::FromFile("ckeditor/ckeditor.js");
+
+        combinedScriptHtml();
+        ?>
 
         <?php include "inc/touch_icons.php"; ?>
         <link rel="stylesheet" type="text/css"
@@ -96,7 +96,6 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
               <?php
               do_event("admin_head");
               ?>
-
     </head>
     <?php
     do_event("before_backend_header");
@@ -114,9 +113,9 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
         $cssClasses .= "no-action";
     }
     ?>
-
     <body class="<?php esc($cssClasses); ?>"
-          data-datatables-translation="<?php echo DataTablesHelper::getLanguageFileURL(getSystemLanguage()); ?>">
+          data-datatables-translation="<?php echo DataTablesHelper::getLanguageFileURL(getSystemLanguage()); ?>"
+          data-ckeditor-skin="<?php esc(Settings::get("ckeditor_skin")); ?>">
               <?php
               do_event("after_backend_header");
               ?>
@@ -126,7 +125,6 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
                 echo 'action-' . Template::getEscape(get_action());
             }
             ?>">
-
             <div class="row">
                 <div class="col-xs-7">
                     <a href="../" title="<?php translate("goto_frontend"); ?>"><img
@@ -136,17 +134,19 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
                 <div class="col-xs-5 menu-container">
                     <?php
                     if (is_logged_in()) {
+                        $colClass = $permissionChecker->hasPermission("comments_manage") ? "col-xs-4" : "col-xs-6";
                         ?>
+
                         <div class="row pull-right top-right-icons">
-                            <div class="col-xs-4">
-                                <a href="#" id="menu-clear-cache"
-                                   data-url="<?php echo ModuleHelper::buildMethodCallUrl("PerformanceSettingsController", "clearCache", "clear_cache=1"); ?>"><i class="fas fa-broom"></i></a><a href="#" id="menu-clear-cache-loading" style="display: none;"><i class="fa fa-spinner fa-spin"></i></a>
+                            <div class="<?php esc($colClass); ?>">
+                                <a href = "#" id = "menu-clear-cache"
+                                   data-url = "<?php echo ModuleHelper::buildMethodCallUrl("PerformanceSettingsController", "clearCache", "clear_cache = 1"); ?>"><i class = "fas fa-broom"></i></a><a href = "#" id = "menu-clear-cache-loading" style = "display: none;"><i class = "fa fa-spinner fa-spin"></i></a>
                             </div>
                             <?php
                             if ($permissionChecker->hasPermission("comments_manage")) {
                                 $count = Comment::getUnreadCount();
                                 ?>
-                                <div class="col-xs-4">
+                                <div class="<?php esc($colClass); ?>">
                                     <div class="comment-counter">
                                         <a href="<?php echo ModuleHelper::buildActionURL("comments_manage"); ?>"><i class="fa fa-comments"></i>
                                             <?php
@@ -159,7 +159,7 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
                                     </div>
                                 </div>
                             <?php } ?>
-                            <div class="col-xs-4">
+                            <div class="<?php esc($colClass); ?>">
                                 <a id="menu-toggle"><i class="fa fa-bars"></i> </a>
                             </div>
                         </div>

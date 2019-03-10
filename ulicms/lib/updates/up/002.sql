@@ -1,1 +1,0 @@
-ALTER TABLE `{prefix}users` add unique (username);

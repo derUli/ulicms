@@ -136,7 +136,7 @@ function bindEvents() {
                         };
                         window
                                 .open(
-                                        'kcfinder/browse.php?type=' + type,
+                                        'kcfinder/browse.php?type=' + type + "&langCode=" + $("html").data("select2-language"),
                                         name,
                                         'status=0, toolbar=0, location=0, menubar=0, directories=0, '
                                         + 'resizable=1, scrollbars=0, width=800, height=600');
