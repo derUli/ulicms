@@ -1,0 +1,16 @@
+{
+    "version": "0.0.1",
+    "source": "extend",
+    "embed": false,
+    "shy": false,
+    "main_class": "GitClient",
+    "controllers":
+            {
+                "GitClient": "controllers/GitClient.php"
+            },
+    "objects": {
+        "git_repository": "vendor/autoload.php"
+    },
+    "custom_acl": ["git_client"],
+    "admin_permission": "git_client"
+}
