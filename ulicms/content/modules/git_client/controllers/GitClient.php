@@ -22,7 +22,7 @@ class GitClient extends Controller {
         foreach ($commitData as $key => $value) {
             if ($value !== null) {
                 $translatedKey = get_translation($key);
-                $message .= UliCMS\HTML\text("$translatedKey: $value\n");
+                $message .= "<strong>$translatedKey:</strong> " . UliCMS\HTML\text("$value\n");
             }
         }
 
