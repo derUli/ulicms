@@ -8,15 +8,33 @@ class GitClient extends Controller {
     const MODULE_NAME = "git_client";
 
     public function settings() {
-        ViewBag::set("current_branch", $this->getCurrentBranch());
-        ViewBag::set("has_changes", $this->getGitRepository()->hasChanges());
+        try {
+            ViewBag::set("has_changes", $this->getGitRepository()->hasChanges());
+        } catch (Cz\Git\GitException $e) {
+            // this is required because git-repository changes the cwd
+            // and when an exception happens it doesn't change back to admin dir
+            chdir(Path::resolve("ULICMS_ROOT/admin"));
+            return $this->showError($e->getMessage());
+        }
         return Template::executeModuleTemplate(self::MODULE_NAME, "main.php");
     }
 
+    private function showError($message) {
+        ViewBag::set("error", $message);
+        return Template::executeModuleTemplate(self::MODULE_NAME, "error.php");
+    }
+
     public function pull() {
-        $this->getGitRepository()->pull();
-        $lastCommitId = $this->getGitRepository()->getLastCommitId();
-        $commitData = $this->getGitRepository()->getCommitData($lastCommitId);
+        try {
+            $this->getGitRepository()->pull();
+            $lastCommitId = $this->getGitRepository()->getLastCommitId();
+            $commitData = $this->getGitRepository()->getCommitData($lastCommitId);
+        } catch (Cz\Git\GitException $e) {
+            // this is required because git-repository changes the cwd
+            // and when an exception happens it doesn't change back to admin dir
+            chdir(Path::resolve("ULICMS_ROOT/admin"));
+            HtmlResult(UliCMS\HTML\text($e->getMessage()));
+        }
 
         $message = "<strong>" . get_translation("latest_commit_is_now") . "</strong><br/>";
         foreach ($commitData as $key => $value) {
@@ -30,7 +48,12 @@ class GitClient extends Controller {
     }
 
     public function getSettingsHeadline() {
-        return get_translation("git_client_headline", array("%branch%" => $this->getCurrentBranch()));
+        try {
+            return get_translation("git_client_headline", array("%branch%" => $this->getCurrentBranch()));
+        } catch (Cz\Git\GitException $e) {
+            chdir(Path::resolve("ULICMS_ROOT/admin"));
+            return $e->getMessage();
+        }
     }
 
     public function getCurrentBranch() {
@@ -46,9 +69,14 @@ class GitClient extends Controller {
         if (!$message) {
             ExceptionResult(get_translation("fill_all_fields"), HTTPStatusCode::UNPROCESSABLE_ENTITY);
         }
-        $this->getGitRepository()->addAllChanges();
-        $this->getGitRepository()->commit($message);
-        $this->getGitRepository()->push();
+        try {
+            $this->getGitRepository()->addAllChanges();
+            $this->getGitRepository()->commit($message);
+            $this->getGitRepository()->push();
+        } catch (Cz\Git\GitException $e) {
+            chdir(Path::resolve("ULICMS_ROOT/admin"));
+            ExceptionResult($e->getMessage());
+        }
         Response::redirect(ModuleHelper::buildAdminURL(self::MODULE_NAME));
     }
 
