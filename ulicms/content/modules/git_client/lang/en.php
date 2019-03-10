@@ -9,3 +9,5 @@ add_translation("latest_commit_is_now", "The current commit is now");
 add_translation("there_are_local_changes", "There are local changes.");
 add_translation("no_changes", "There are no local changes");
 add_translation("commit_message", "Commit Message");
+add_translation("git_new_branch", "New Branch");
+add_translation("branch_name", "Branch Name");

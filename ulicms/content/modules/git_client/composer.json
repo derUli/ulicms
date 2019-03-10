@@ -1,5 +1,5 @@
 {
     "require": {
-        "czproject/git-php": "^3.17"
+        "czproject/git-php": "^3.17" 
     }
 }

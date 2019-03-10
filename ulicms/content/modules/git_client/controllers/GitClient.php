@@ -85,4 +85,18 @@ class GitClient extends Controller {
         Response::redirect(ModuleHelper::buildAdminURL(self::MODULE_NAME));
     }
 
+    public function createBranch() {
+        $name = Request::getVar("name");
+        if (!$name) {
+            ExceptionResult(get_translation("fill_all_fields"), HTTPStatusCode::UNPROCESSABLE_ENTITY);
+        }
+        try {
+            $this->getGitRepository()->createBranch($name, true);
+            Response::redirect(ModuleHelper::buildAdminURL(self::MODULE_NAME));
+        } catch (Cz\Git\GitException $e) {
+            chdir(Path::resolve("ULICMS_ROOT/admin"));
+            ExceptionResult($e->getMessage());
+        }
+    }
+
 }

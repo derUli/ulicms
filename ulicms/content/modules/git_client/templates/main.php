@@ -27,14 +27,35 @@
 
     <?php
     echo UliCMS\HTML\Input::TextArea("message", "", 3, 80, array(
-        "required" => "required"
+        "required" => "required",
+        "placeholder" => get_translation("commit_message")
     ));
     ?>
 </div>
-<button type="submit" class="btn btn-primary" <?php if (!ViewBag::get("has_changes")) echo "disabled"; ?>>
-    <i class="fas fa-arrow-up"></i>
-    <?php translate("git_commit_and_push");
-    ?></button>
+<div class="form-group">
+    <button type="submit" class="btn btn-primary" <?php if (!ViewBag::get("has_changes")) echo "disabled"; ?>>
+        <i class="fas fa-arrow-up"></i>
+        <?php translate("git_commit_and_push");
+        ?></button>
+</div>
+<?php echo ModuleHelper::endForm(); ?>
+
+<?php echo ModuleHelper::buildMethodCallForm(GitClient::class, "createBranch"); ?>
+<div class="form-group">
+    <div class="row">
+        <div class="col-xs-7 col-md-9 col-lg-10">
+            <?php
+            echo UliCMS\HTML\Input::TextBox("name", "", "text", array(
+                "placeholder" => get_translation("branch_name")
+            ));
+            ?>
+        </div>
+        <div class="col-xs-5 col-md-3 text-right col-lg-2">
+            <button type="submit" class="btn btn-default"><i class="fas fa-code-branch"></i> <?php translate("git_new_branch");
+            ?></button>
+        </div>
+    </div>
+</div>
 <?php echo ModuleHelper::endForm(); ?>
 <?php
 enqueueScriptFile(ModuleHelper::buildRessourcePath(GitClient::MODULE_NAME, "js/main.js"));
