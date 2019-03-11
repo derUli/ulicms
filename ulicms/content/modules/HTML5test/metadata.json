@@ -1,0 +1,14 @@
+{
+    "version": "1.0",
+    "source": "extend",
+    "embed": false,
+    "shy": false,
+    "main_class": "HTML5Test",
+    "manufacturer_name": "Niels Leenheer",
+    "manufacturer_url": "https://nielsleenheer.com/",
+    "controllers":
+            {
+                "HTML5Test": "controllers/HTML5Test.php"
+            },
+    "admin_permission": "info"
+}

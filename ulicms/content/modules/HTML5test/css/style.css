@@ -1,0 +1,12 @@
+/* set Iframe */
+
+iframe#html5test{
+    width: 100%;
+    height: 70vh;
+    border: 1px solid #359;
+}
+
+/* Hide the title*/
+.main-content h1:first-of-type{
+    display:none !important;
+}
