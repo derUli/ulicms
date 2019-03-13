@@ -3,8 +3,8 @@
 // check if password field and password repeat are equal
 // then colorize the inputs
 function validatePasswords(event) {
-	var field1 = $("#admin_password");
-	var field2 = $("#admin_password_repeat");
+	var field1 = $("#password");
+	var field2 = $("#password_repeat");
 
 	var val1 = $(field1).val();
 	var val2 = $(field2).val();
@@ -34,16 +34,16 @@ function validatePasswords(event) {
 function submitPasswordForm(event) {
 	event.preventDefault();
 	validatePasswords(event);
-	if ($("#admin_password").css("background-color") != "red") {
+	if ($("#password").css("background-color") != "red") {
 		$("form#edit_user").off("submit");
 		$("form#edit_user").submit();
 	} else {
-		$("#admin_password").focus();
+		$("#password").focus();
 	}
 }
 
 $(function() {
-	$("#admin_password").keyup(validatePasswords);
-	$("#admin_password_repeat").keyup(validatePasswords);
+	$("#password").keyup(validatePasswords);
+	$("#password_repeat").keyup(validatePasswords);
 	$("form#edit_user").on("submit", submitPasswordForm);
 });

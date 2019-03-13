@@ -450,9 +450,10 @@ class User {
 
     private function loadGroups($user_id) {
         $groups = array();
+
         $sql = "select `group_id` from `{prefix}user_groups` where user_id = ?";
         $args = array(
-            $user_id
+            intval($user_id)
         );
         $query = Database::pQuery($sql, $args, true);
         while ($row = Database::fetchObject($query)) {

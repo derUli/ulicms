@@ -9,11 +9,11 @@ class UserController extends Controller {
     }
 
     public function createPost() {
-        $username = $_POST["admin_username"];
-        $lastname = $_POST["admin_lastname"];
-        $firstname = $_POST["admin_firstname"];
-        $password = $_POST["admin_password"];
-        $email = $_POST["admin_email"];
+        $username = $_POST["username"];
+        $lastname = $_POST["lastname"];
+        $firstname = $_POST["firstname"];
+        $password = $_POST["password"];
+        $email = $_POST["email"];
         $default_language = StringHelper::isNotNullOrWhitespace($_POST["default_language"]) ? $_POST["default_language"] : null;
         $sendMail = isset($_POST["send_mail"]);
         $admin = boolval(isset($_POST["admin"]));
@@ -58,15 +58,26 @@ class UserController extends Controller {
         Request::redirect(ModuleHelper::buildActionURL("admins"));
     }
 
+    /*
+      public function updatePost() {
+      $id = intval($_POST["id"]);
+      $user = new User($id);
+      if (!$user->getId() == $id) {
+      ExceptionResult(get_translation("not_found"), HttpStatusCode::NOT_FOUND);
+      }
+      }
+
+     */
+
     public function updatePost() {
         $acl = new ACL();
         if ($acl->hasPermission("users_edit") or $_POST["id"] == $_SESSION["login_id"]) {
             $id = intval($_POST["id"]);
-            $username = db_escape($_POST["admin_username"]);
-            $lastname = db_escape($_POST["admin_lastname"]);
-            $firstname = db_escape($_POST["admin_firstname"]);
-            $email = db_escape($_POST["admin_email"]);
-            $password = $_POST["admin_password"];
+            $username = db_escape($_POST["username"]);
+            $lastname = db_escape($_POST["lastname"]);
+            $firstname = db_escape($_POST["firstname"]);
+            $email = db_escape($_POST["email"]);
+            $password = $_POST["password"];
             // User mit eingeschränkten Rechten darf sich nicht selbst zum Admin machen können
             if ($acl->hasPermission("users")) {
                 $admin = intval(isset($_POST["admin"]));
@@ -99,8 +110,8 @@ class UserController extends Controller {
 
             do_event("before_edit_user");
             $sql = "UPDATE " . tbname("users") . " SET username = '$username', `group_id` = " . $group_id . ", `admin` = $admin, firstname='$firstname',
-lastname='$lastname', email='$email',
-about_me = '$about_me', html_editor='$html_editor', require_password_change='$require_password_change', `locked`='$locked', `homepage` = '$homepage' , `default_language` = $default_language WHERE id=$id";
+      lastname='$lastname', email='$email',
+      about_me = '$about_me', html_editor='$html_editor', require_password_change='$require_password_change', `locked`='$locked', `homepage` = '$homepage' , `default_language` = $default_language WHERE id=$id";
 
             db_query($sql);
 

@@ -10,15 +10,15 @@ if (Settings::get("visitors_can_register") == "off" or ! Settings::get("visitors
     if (isset($_POST["register_user"])) {
         if ($checkbox->isEnabled() and ! $checkbox->isChecked()) {
             echo "<p style='color:red;'>" . get_translation("please_accept_privacy_conditions") . "</p>";
-        } else if (empty($_POST["admin_username"]) or empty($_POST["admin_password"]) or empty($_POST["admin_firstname"]) or empty($_POST["admin_lastname"])) {
+        } else if (empty($_POST["username"]) or empty($_POST["password"]) or empty($_POST["firstname"]) or empty($_POST["lastname"])) {
             echo "<p style='color:red;'>" . get_translation("FILL_ALL_FIELDS") . "</p>";
-        } else if (user_exists($_POST["admin_username"])) {
+        } else if (user_exists($_POST["username"])) {
             echo "<p style='color:red;'>" . get_translation("USERNAME_ALREADY_EXISTS") . "</p>";
-        } else if ($_POST["admin_password"] != $_POST["admin_password_repeat"]) {
+        } else if ($_POST["password"] != $_POST["password_repeat"]) {
             echo "<p style='color:red;'>" . get_translation("PASSWORD_REPEAT_IS_WRONG") . "</p>";
         } else {
             do_event("before_user_registration");
-            adduser($_POST["admin_username"], $_POST["admin_lastname"], $_POST["admin_firstname"], $_POST["admin_email"], $_POST["admin_password"], false);
+            adduser($_POST["username"], $_POST["lastname"], $_POST["firstname"], $_POST["email"], $_POST["password"], false);
             do_event("after_user_registration");
             
             echo "<p style='color:green;'>" . get_translation("REGISTRATION_SUCCESSFUL") . "</p>";
@@ -68,17 +68,17 @@ if (Settings::get("visitors_can_register") == "off" or ! Settings::get("visitors
     ?>
 	<strong><?php translate("username");?>
 	</strong><br /> <input type="text" required="required"
-		name="admin_username" value=""> <br /> <strong><?php translate("lastname")?>
+		name="username" value=""> <br /> <strong><?php translate("lastname")?>
 	</strong><br /> <input type="text" required="required"
-		name="admin_lastname" value=""> <br /> <strong><?php translate("firstname");?>
+		name="lastname" value=""> <br /> <strong><?php translate("firstname");?>
 	</strong><br /> <input type="text" required="required"
-		name="admin_firstname" value=""><br /> <strong><?php translate("email");?>
+		name="firstname" value=""><br /> <strong><?php translate("email");?>
 	</strong><br /> <input type="email" required="required"
-		name="admin_email" value=""><br /> <strong><?php translate("password");?>
+		name="email" value=""><br /> <strong><?php translate("password");?>
 	</strong><br /> <input type="password" required="required"
-		name="admin_password" value=""><br /> <strong><?php translate("password_repeat");?>
+		name="password" value=""><br /> <strong><?php translate("password_repeat");?>
 	</strong><br /> <input type="password" required="required"
-		name="admin_password_repeat" value="">
+		name="password_repeat" value="">
 		<?php do_event ( "register_form_field" );?>
 		<div class="privacy-checkbox">
 		<?php

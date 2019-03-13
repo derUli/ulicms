@@ -4,12 +4,13 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
     $id = intval($_GET["id"]);
     $languages = getAvailableBackendLanguages();
     $query = db_query("SELECT * FROM " . tbname("users") . " WHERE id='$id'");
-    $user = new User($admin);
+    $user = new User($id);
     $secondaryGroups = $user->getSecondaryGroups();
     $secondaryGroupIds = array();
     foreach ($secondaryGroups as $group) {
         $secondaryGroupIds[] = $group->getID();
     }
+
     while ($row = db_fetch_object($query)) {
         ?>
         <p>
@@ -29,7 +30,7 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
                 value="<?php
                 echo $row->id;
                 ?>"> <br /> <strong><?php translate("username"); ?>*</strong><br />
-            <input type="text" name="admin_username"
+            <input type="text" name="username"
                    value="<?php echo real_htmlspecialchars($row->username); ?>" required
                    <?php
                    if (!$permissionChecker->hasPermission("users")) {
@@ -41,19 +42,19 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
                 <div class="col-xs-12 col-md-6">
                     <strong><?php translate("firstname"); ?></strong><br />
 
-                    <input type="text" name="admin_firstname"
+                    <input type="text" name="firstname"
                            value="<?php
                            echo real_htmlspecialchars($row->firstname);
                            ?>"
                            required="required"><br />
                 </div>
                 <div class="col-xs-12 col-md-6"> <strong><?php translate("lastname"); ?></strong><br />
-                    <input type="text" name="admin_lastname"
+                    <input type="text" name="lastname"
                            value="<?php
                            echo real_htmlspecialchars($row->lastname);
                            ?>"><br/>
                 </div> </div> <strong><?php translate("email"); ?></strong><br />
-            <input type="email" name="admin_email"
+            <input type="email" name="email"
                    value="<?php
                    echo real_htmlspecialchars($row->email);
                    ?>"><br /> <strong><?php translate("last_login"); ?></strong><br />
@@ -68,13 +69,13 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
             <div class="row">
                 <div class="col-xs-12 col-md-6">
                     <strong><?php translate("new_password"); ?></strong><br />
-                    <input type="password" name="admin_password" id="admin_password"
+                    <input type="password" name="password" id="password"
                            value="" autocomplete="off"><br /> </div>
 
                 <div class="col-xs-12 col-md-6">
                     <strong><?php translate("password_repeat"); ?></strong><br />
-                    <input type="password" name="admin_password_repeat"
-                           id="admin_password_repeat" value="" autocomplete="off"> <br />
+                    <input type="password" name="password_repeat"
+                           id="password_repeat" value="" autocomplete="off"> <br />
                 </div></div>
             <?php
             $permissionChecker = new ACL();
