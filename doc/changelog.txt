@@ -60,6 +60,7 @@ Bekannte Probleme:
 * Die Option "Die Zugangsdaten per E-Mail senden" beim Anlegen eines Users hat keinen Effekt.
 * Wenn die Option db_migrator_auto_migrate aktiviert ist,
   erfolgt auf der Kommandozeile kein Logging während der Ausführung der Migrations
+  Es sieht so aus, als würde nichts passieren, bis die Ausführung der Unit Tests beginnt.
 
 ===== Neues in UliCMS 2019.2 =====
 
