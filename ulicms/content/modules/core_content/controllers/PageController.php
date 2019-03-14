@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\CoreContent\Models\ViewModels\DiffViewModel;
+
 class PageController extends Controller {
 
     // @FIXME: Content-Model statt SQL verwenden
@@ -419,6 +421,28 @@ class PageController extends Controller {
         $json = json_encode(DefaultContentTypes::getAll(), JSON_UNESCAPED_SLASHES);
 
         RawJSONResult($json);
+    }
+
+    public function diffContents($history_id = null, $content_id = null) {
+        $history_id = !$history_id ? $_GET ["history_id"] : $history_id;
+        $content_id = !$content_id ? $_GET ["content_id"] : $content_id;
+
+        $current_version = getPageByID($content_id);
+        $old_version = VCS::getRevisionByID($history_id);
+
+        $from_text = $current_version->content;
+        $to_text = $old_version->content;
+
+        $current_version_date = date("Y-m-d H:i:s", $current_version->lastmodified);
+        $old_version_date = $old_version->date;
+
+        $from_text = mb_convert_encoding($from_text, 'HTML-ENTITIES', 'UTF-8');
+        $to_text = mb_convert_encoding($to_text, 'HTML-ENTITIES', 'UTF-8');
+        $opcodes = FineDiff::getDiffOpcodes($from_text, $to_text, FineDiff::$wordGranularity);
+
+        $html = FineDiff::renderDiffToHTMLFromOpcodes($from_text, $opcodes);
+
+        return new DiffViewModel($html, $current_version_date, $old_version_date, $content_id, $history_id);
     }
 
 }

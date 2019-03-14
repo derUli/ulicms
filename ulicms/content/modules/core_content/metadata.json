@@ -1,32 +1,36 @@
 {
-	"source": "core",
-	"version": "2019.3",
-	"embed": false,
-	"actions": {
-		"contents": "templates/contents.php",
-		"pages": "templates/pages/list.php",
-		"pages_new": "templates/pages/new.php",
-		"pages_edit": "templates/pages/edit.php",
-		"categories": "templates/categories.php",
-		"banner": "templates/banners/list.php",
-		"banner_new": "templates/banners/new.php",
-		"banner_edit": "templates/banners/edit.php"
-	},
-	"controllers": {
-		"PageController": "controllers/PageController.php",
-		"CategoryController": "controllers/CategoryController.php",
-		"BannerController": "controllers/BannerController.php"
-	},
-	"controller_function_permissions": {
-		"PageController::createPost": "pages_create",
-		"PageController::editPost": "pages",
-		"PageController::undeletePost": "pages",
-		"PageController::empyTrash": "pages",
-		"CategoryController::createPost": "categories_create",
-		"CategoryController::updatePost": "categories_edit",
-		"CategoryController::deletePost": "categories",
-		"BannerController::deletePost": "banners",
-		"BannerController::createPost": "banners",
-		"BannerController::updatePost": "banners"
-	}
+    "source": "core",
+    "version": "2019.3",
+    "embed": false,
+    "actions": {
+        "contents": "templates/contents.php",
+        "pages": "templates/pages/list.php",
+        "pages_new": "templates/pages/new.php",
+        "pages_edit": "templates/pages/edit.php",
+        "categories": "templates/categories.php",
+        "banner": "templates/banners/list.php",
+        "banner_new": "templates/banners/new.php",
+        "banner_edit": "templates/banners/edit.php"
+    },
+    "controllers": {
+        "PageController": "controllers/PageController.php",
+        "CategoryController": "controllers/CategoryController.php",
+        "BannerController": "controllers/BannerController.php"
+    },
+    "objects": {
+        "UliCMS\\CoreContent\\Models\\ViewModels\\DiffViewModel": "models/DiffViewModel.php"
+    },
+
+    "controller_function_permissions": {
+        "PageController::createPost": "pages_create",
+        "PageController::editPost": "pages",
+        "PageController::undeletePost": "pages",
+        "PageController::empyTrash": "pages",
+        "CategoryController::createPost": "categories_create",
+        "CategoryController::updatePost": "categories_edit",
+        "CategoryController::deletePost": "categories",
+        "BannerController::deletePost": "banners",
+        "BannerController::createPost": "banners",
+        "BannerController::updatePost": "banners"
+    }
 }
