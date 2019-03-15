@@ -17,6 +17,7 @@ ungewünschtes Caching zu verhindern
 * SQL Migrations von Installer und Updates vereint
 * Neue Optionen in der Konfigurationsdatei unterstützt
 * Design Optimierungen an der Userverwaltung durchgeführt
+* Zeige eine Warnung im Backend, wenn eine veraltetete PHP Version verwendet wird.
 
 Neue API-Methoden:
 * Response::sendHttpStatusCodeResultIfAjax($status = HTTPStatusCode::OK, $redirect = null, $redirectStatus = HttpStatusCode::MOVED_TEMPORARILY)

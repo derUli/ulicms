@@ -738,4 +738,9 @@ add_translation("secondary_groups", "Secondary Groups");
 add_translation("on", "On");
 add_translation("off", "Off");
 
+add_translation("php_upgrade_notice", "You're using an outdated PHP version.\n".
+        "You should use at least PHP 7.1.\n".
+        "Please ask your system administrator or provider for an upgrade of the PHP version.");
+
+
 do_event("lang_en");
