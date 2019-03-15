@@ -13,11 +13,11 @@ Neue Features:
 * Das Feld "Custom Data (JSON)" wird nun validiert
 * Die Tastenkombination ctrl+s (PC) bzw. cmd+s (Mac) löst nun das Absenden eines Formulars aus
 * Script und Style Helper fügen den nun einen Timestamp an den Pfad an um
-ungewünschtes Caching zu verhindern
+ungewünschtes Caching zu verhindern7
 * SQL Migrations von Installer und Updates vereint
 * Neue Optionen in der Konfigurationsdatei unterstützt
 * Design Optimierungen an der Userverwaltung durchgeführt
-* Zeige eine Warnung im Backend, wenn eine veraltetete PHP Version verwendet wird.
+* Zeige eine Warnung im Backend, wenn eine veraltete PHP Version verwendet wird.
 
 Neue API-Methoden:
 * Response::sendHttpStatusCodeResultIfAjax($status = HTTPStatusCode::OK, $redirect = null, $redirectStatus = HttpStatusCode::MOVED_TEMPORARILY)
