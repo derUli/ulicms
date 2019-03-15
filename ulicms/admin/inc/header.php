@@ -45,7 +45,6 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
             "../node_modules/codemirror-minified/mode/clike/clike.js",
             "../node_modules/codemirror-minified/mode/css/css.js",
             "scripts/util.js",
-            "scripts/users.js",
             "scripts/global.js",
             "../node_modules/bootstrap/dist/js/bootstrap.min.js",
             "../node_modules/bootstrap-toggle/js/bootstrap-toggle.min.js",
@@ -58,6 +57,7 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
         );
 
         if (is_logged_in()) {
+            $scripts[] = "scripts/users.js";
             $scripts[] = "scripts/cookie.js";
         }
         ?>
