@@ -46,7 +46,7 @@ Fehlerkorrekturen:
 
 Entfernte Features:
 * Alte Ansicht von "Pakete" entfernt
-* Folge Optionen wurden aus dem Einstellungen entfernt.
+* Folgende Optionen wurden aus dem Einstellungen entfernt:
   * Gebe "generator" Meta-Tag aus
   * cron.php nicht automatisch ausführen
   * Erlauben diese Webseite in andere Sites einzubinden
