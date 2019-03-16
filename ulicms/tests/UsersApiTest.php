@@ -168,13 +168,13 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(user_exists("testuser2"));
 
         // adduser returns the saved user
-        $user = addUser("testuser2", "Kolumna", "Karla", "karla.kolumna@presse.de", "oldpassword", false);
+        $user = @addUser("testuser2", "Kolumna", "Karla", "karla.kolumna@presse.de", "oldpassword", false);
         $this->assertInstanceOf(User::class, $user);
         $this->assertEquals("testuser2", $user->getUsername());
         $this->assertNotNull($user->getId());
 
         // adduser return null if the user already exists
-        $this->assertNull(addUser("testuser2", "Kolumna", "Karla", "karla.kolumna@presse.de", "oldpassword", false));
+        $this->assertNull(@addUser("testuser2", "Kolumna", "Karla", "karla.kolumna@presse.de", "oldpassword", false));
     }
 
     public function testChangePassword() {
