@@ -21,6 +21,6 @@
     timeoutForLargeTests="60"
     verbose="false">
     <php>
-        <env name="ULICMS_ENVIRONMENT" value="test"/>
+        <env name="ULICMS_ENVIRONMENT" value="test" force="true"/>
     </php>
 </phpunit>
