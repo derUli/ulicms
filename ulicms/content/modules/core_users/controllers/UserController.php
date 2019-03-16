@@ -47,7 +47,7 @@ class UserController extends Controller {
             }
         }
         if ($sendMail) {
-            $user->saveAndSendMail();
+            $user->saveAndSendMail($password);
         } else {
             $user->save();
         }
