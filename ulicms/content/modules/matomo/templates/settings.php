@@ -26,7 +26,7 @@ if (Request::isPost()) {
             type="number" step="1" name="matomo_site_id"
             value="<?php Template::escape($matomo_site_id); ?>">
     </p>
-    <p class="voffset2">
+    <p class="voffset3">
         <button type="submit" class="btn btn-default"><i class="fa fa-save"></i> <?php translate("save"); ?></button>
     </p>
 </form>
