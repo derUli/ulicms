@@ -1,27 +1,24 @@
 <?php
+
 use UliCMS\HTML\Style;
 use UliCMS\HTML\Script;
 use UliCMS\Exceptions\SCSSCompileException;
 use Leafo\ScssPhp\Compiler;
 
 // FIXME: don't modify $_SERVER use the Vars class as replacement
-
 // Javascript Minify Funktionen
-function resetScriptQueue()
-{
+function resetScriptQueue() {
     $_SERVER["script_queue"] = array();
 }
 
-function enqueueScriptFile($path)
-{
-    if (! isset($_SERVER["script_queue"])) {
+function enqueueScriptFile($path) {
+    if (!isset($_SERVER["script_queue"])) {
         $_SERVER["script_queue"] = array();
     }
     $_SERVER["script_queue"][] = $path;
 }
 
-function setSCSSImportPaths($importPaths = null)
-{
+function setSCSSImportPaths($importPaths = null) {
     if ($importPaths == null) {
         $importPaths = array(
             Path::resolve("ULICMS_ROOT")
@@ -30,22 +27,19 @@ function setSCSSImportPaths($importPaths = null)
     $_SERVER["css_include_paths"] = $importPaths;
 }
 
-function getSCSSImportPaths()
-{
+function getSCSSImportPaths() {
     return is_array($_SERVER["css_include_paths"]) ? $_SERVER["css_include_paths"] : null;
 }
 
-function unsetSCSSImportPaths()
-{
+function unsetSCSSImportPaths() {
     if (isset($_SERVER["css_include_paths"])) {
         unset($_SERVER["css_include_paths"]);
     }
 }
 
-function getCombinedScripts()
-{
+function getCombinedScripts() {
     $lastmod = intval($_GET["time"]);
-    
+
     $output = "";
     if (isset($_GET["output_scripts"])) {
         $scripts = explode(";", $_GET["output_scripts"]);
@@ -64,7 +58,7 @@ function getCombinedScripts()
                             $content = normalizeLN($content, "\n");
                             $content = trim($content);
                             $content = \JShrink\Minifier::minify($content, array(
-                                'flaggedComments' => false
+                                        'flaggedComments' => false
                             ));
                             $lines = StringHelper::linesFromString($content, true, true, false);
                             $content = implode("\n", $lines);
@@ -80,9 +74,9 @@ function getCombinedScripts()
             $adapter->set($cacheId, $output);
         }
     }
-    
+
     $output = trim($output);
-    
+
     header("Content-Type: text/javascript");
     $len = mb_strlen($output, 'binary');
     header("Content-Length: " . $len);
@@ -91,19 +85,16 @@ function getCombinedScripts()
     exit();
 }
 
-function combinedScriptHtml()
-{
+function combinedScriptHtml() {
     echo getCombinedScriptHtml();
 }
 
-function combined_script_html()
-{
+function combined_script_html() {
     trigger_error("combined_script_html is deprecated", E_USER_DEPRECATED);
     echo getCombinedScriptHtml();
 }
 
-function getCombinedScriptHtml()
-{
+function getCombinedScriptHtml() {
     $html = "";
     $cfg = new CMSConfig();
     if (is_true($cfg->no_minify)) {
@@ -113,7 +104,7 @@ function getCombinedScriptHtml()
         resetScriptQueue();
         return $html;
     }
-    
+
     if (isset($_SERVER["script_queue"]) and is_array($_SERVER["script_queue"]) and count($_SERVER["script_queue"]) > 0) {
         $html = Script::fromFile(getCombinedScriptURL());
     }
@@ -121,56 +112,51 @@ function getCombinedScriptHtml()
     return $html;
 }
 
-function get_combined_script_html()
-{
+function get_combined_script_html() {
     trigger_error("combined_script_html is deprecated", E_USER_DEPRECATED);
     return getCombinedScriptHtml();
 }
 
-function getCombinedScriptURL()
-{
+function getCombinedScriptURL() {
     $output = "";
-    
+
     $lastmod = 0;
     foreach ($_SERVER["script_queue"] as $file) {
         if (is_file($file) and endsWith($file, ".js", $needle) and filemtime($file) > $lastmod) {
             $lastmod = filemtime($file);
         }
     }
-    
+
     if (isset($_SERVER["script_queue"]) and is_array($_SERVER["script_queue"])) {
         $files = implode(";", $_SERVER["script_queue"]);
         $url = "?output_scripts=" . $files;
     } else {
         $url = "index.php?scripts=";
     }
-    
+
     $url .= "&time=" . $lastmod;
-    
+
     return $url;
 }
 
 // Ab hier Stylesheet Funktionen
-function resetStylesheetQueue()
-{
+function resetStylesheetQueue() {
     $_SERVER["stylesheet_queue"] = array();
 }
 
-function enqueueStylesheet($path)
-{
-    if (! isset($_SERVER["stylesheet_queue"])) {
+function enqueueStylesheet($path) {
+    if (!isset($_SERVER["stylesheet_queue"])) {
         $_SERVER["stylesheet_queue"] = array();
     }
     $_SERVER["stylesheet_queue"][] = $path;
 }
 
 // FIXME: Seperate getter and output methods
-function getCombinedStylesheets($doReturn = false)
-{
+function getCombinedStylesheets($doReturn = false) {
     $output = "";
-    
+
     $lastmod = intval($_GET["time"]);
-    
+
     if (isset($_GET["output_stylesheets"])) {
         $stylesheets = explode(";", $_GET["output_stylesheets"]);
         $adapter = CacheUtil::getAdapter(true);
@@ -201,7 +187,7 @@ function getCombinedStylesheets($doReturn = false)
                                     throw new SCSSCompileException("Compilation of $stylesheet failed: {$e->getMessage()}");
                                 }
                             }
-                            
+
                             $content = minifyCss($content);
                             $output .= $content;
                             $output .= "\r\n";
@@ -216,9 +202,9 @@ function getCombinedStylesheets($doReturn = false)
             $adapter->set($cacheId, $output);
         }
     }
-    
+
     $output = trim($output);
-    
+
     // Remove comments
     $output = preg_replace('!/\*[^*]*\*+([^/][^*]*\*+)*/!', '', $output);
     // Remove space after colons
@@ -232,15 +218,15 @@ function getCombinedStylesheets($doReturn = false)
         '  ',
         '    ',
         '    '
-    ), '', $output);
-    
-    if (! $doReturn) {
+            ), '', $output);
+
+    if (!$doReturn) {
         header("Content-Type: text/css");
         $len = mb_strlen($output, 'binary');
         header("Content-Length: " . $len);
-        
+
         set_eTagHeaders($_GET["output_stylesheets"], $lastmod);
-        
+
         echo $output;
         exit();
     }
@@ -256,8 +242,7 @@ function getCombinedStylesheets($doReturn = false)
  * @return string compressed css content
  * @author Steffen Becker
  */
-function minifyCss($css)
-{
+function minifyCss($css) {
     // some of the following functions to minimize the css-output are directly taken
     // from the awesome CSS JS Booster: https://github.com/Schepp/CSS-JS-Booster
     // all credits to Christian Schaefer: http://twitter.com/derSchepp
@@ -289,7 +274,7 @@ function minifyCss($css)
         "\r\n",
         "\r",
         "\n"
-    ), '', $css);
+            ), '', $css);
     // Restore backupped values within single or double quotes
     for ($i = 0; $i < count($hit[1]); $i ++) {
         $css = str_replace('##########' . $i . '##########', $hit[1][$i], $css);
@@ -297,21 +282,18 @@ function minifyCss($css)
     return $css;
 }
 
-function combinedStylesheetHtml()
-{
+function combinedStylesheetHtml() {
     echo getCombinedStylesheetHtml();
 }
 
-function combined_stylesheet_html()
-{
+function combined_stylesheet_html() {
     trigger_error("combined_stylesheel_html is deprecated", E_USER_DEPRECATED);
     echo combinedStylesheetHtml();
 }
 
-function getCombinedStylesheetHtml()
-{
+function getCombinedStylesheetHtml() {
     $html = "";
-    
+
     $cfg = new CMSConfig();
     if (is_true($cfg->no_minify)) {
         foreach ($_SERVER["stylesheet_queue"] as $stylesheet) {
@@ -320,7 +302,7 @@ function getCombinedStylesheetHtml()
         resetStylesheetQueue();
         return $html;
     }
-    
+
     if (isset($_SERVER["stylesheet_queue"]) and is_array($_SERVER["stylesheet_queue"]) and count($_SERVER["stylesheet_queue"]) > 0) {
         $html = Style::FromExternalFile(getCombinedStylesheetURL());
     }
@@ -328,22 +310,21 @@ function getCombinedStylesheetHtml()
     return $html;
 }
 
-function get_combined_stylesheet_html()
-{
+function get_combined_stylesheet_html() {
     trigger_error("get_combined_stylesheet_html is deprecated", E_USER_DEPRECATED);
     return getCombinedStylesheetHtml();
 }
 
-function getCombinedStylesheetURL()
-{
+function getCombinedStylesheetURL() {
     $lastmod = 0;
-    foreach ($_SERVER["stylesheet_queue"] as $file) {
-        if (is_file($file) and (endsWith($file, ".css", $needle) or endsWith($file, ".scss", $needle)) and filemtime($file) > $lastmod) {
-            $lastmod = filemtime($file);
+    if (is_array($_SERVER["stylesheet_queue"])) {
+        foreach ($_SERVER["stylesheet_queue"] as $file) {
+            if (is_file($file) and ( endsWith($file, ".css", $needle) or endsWith($file, ".scss", $needle)) and filemtime($file) > $lastmod) {
+                $lastmod = filemtime($file);
+            }
         }
     }
-    
-    $output = "";
+
     if (isset($_SERVER["stylesheet_queue"]) and is_array($_SERVER["stylesheet_queue"])) {
         $files = implode(";", $_SERVER["stylesheet_queue"]);
         $url = "?output_stylesheets=" . $files;

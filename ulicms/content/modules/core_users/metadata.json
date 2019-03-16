@@ -9,7 +9,8 @@
     },
     "controllers": {
         "UserController": "controllers/UserController.php",
-        "SessionManager": "controllers/SessionManager.php"
+        "SessionManager": "controllers/SessionManager.php",
+        "RegistrationController": "controllers/RegistrationController.php"
     },
     "controllers_function_permissions": {
         "UserController::deletePost": "users",

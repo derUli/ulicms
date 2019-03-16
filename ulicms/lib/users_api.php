@@ -48,49 +48,28 @@ function getUserById($id) {
     }
 }
 
-// TODO: Remove all usages of adduser() and deprecate the method
-// Developers should use the User model class to create a new user
-function adduser($username, $lastname, $firstname, $email, $password, $sendMessage = true, $acl_group = null, $require_password_change = 0, $admin = 0, $locked = 0, $default_language = null) {
-    $username = db_escape($username);
-    $lastname = db_escape($lastname);
-    $firstname = db_escape($firstname);
-    $email = db_escape($email);
-    $admin = intval($admin);
-    $locked = intval($locked);
-    $password = $password;
-    $require_password_change = intval($require_password_change);
-    // Default ACL Group
-    if (!$acl_group) {
-        $acl_group = Settings::get("default_acl_group");
+function addUser($username, $lastname, $firstname, $email, $password, $sendMessage = true, $acl_group = null, $require_password_change = 0, $admin = 0, $locked = 0, $default_language = null) {
+    trigger_error("addUser is deprecated. Please use the User class directly instead.", E_USER_DEPRECATED);
+    if (user_exists($username)) {
+        return null;
     }
-    if (!$acl_group) {
-        $acl_group = "NULL";
+    $user = new User();
+    $user->setUsername($username);
+    $user->setLastname($lastname);
+    $user->setFirstname($firstname);
+    $user->setEmail($email);
+    $user->setPassword($password);
+    if ($acl_group) {
+        $user->setPrimaryGroupId($acl_group);
+    } else if (Settings::get("default_acl_group")) {
+        $user->setPrimaryGroupId(Settings::get("default_acl_group"));
     }
-
-    if (is_null($acl_group)) {
-        $acl_group = "NULL";
-    }
-
-    do_event("before_create_user");
-
-    if (StringHelper::isNullOrWhitespace($default_language)) {
-        $default_language = "NULL";
-    } else {
-        $default_language = "'" . Database::escapeValue($default_language) . "'";
-    }
-
-    Database::query("INSERT INTO " . tbname("users") . "
-(username,lastname, firstname, email, password, `group_id`, `require_password_change`, `password_changed`, `admin`, `locked`, `default_language`)
-			VALUES ('$username', '$lastname','$firstname','$email','" . db_escape(Encryption::hashPassword($password)) . "', " . $acl_group . ", $require_password_change, NOW(), $admin, $locked,
-			$default_language)") or die(db_error());
-    $message = "Hallo $firstname,\n\n" . "Ein Administrator hat auf http://" . $_SERVER["SERVER_NAME"] . " für dich ein neues Benutzerkonto angelegt.\n\n" . "Die Zugangsdaten lauten:\n\n" . "Benutzername: $username\n" . "Passwort: $password\n";
-    $header = "From: " . Settings::get("email") . "\n" . "Content-type: text/plain; charset=utf-8";
-
-    if ($sendMessage) {
-        @Mailer::send($email, "Dein Benutzer-Account bei " . $_SERVER["SERVER_NAME"], $message, $header);
-    }
-
-    do_event("after_create_user");
+    $user->setRequirePasswordChange($require_password_change);
+    $user->setAdmin($admin);
+    $user->setLocked($locked);
+    $user->setDefaultLanguage($default_language);
+    $user->save();
+    return $user;
 }
 
 function get_user_id() {
