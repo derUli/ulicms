@@ -18,6 +18,8 @@ ungewünschtes Caching zu verhindern7
 * Neue Optionen in der Konfigurationsdatei unterstützt
 * Design Optimierungen an der Userverwaltung durchgeführt
 * Zeige eine Warnung im Backend, wenn eine veraltete PHP Version verwendet wird.
+* Die E-Mail mit den Zugangsdaten, welche man optional beim anlegen von Usern versenden kann,
+  kann nun per Default Template angepasst werden.
 
 Neue API-Methoden:
 * Response::sendHttpStatusCodeResultIfAjax($status = HTTPStatusCode::OK, $redirect = null, $redirectStatus = HttpStatusCode::MOVED_TEMPORARILY)
@@ -58,7 +60,6 @@ wenn sich jemand mit meinem Benutzerkonto
 anmeldet" wurde entfernt
 
 Bekannte Probleme:
-* Die Option "Die Zugangsdaten per E-Mail senden" beim Anlegen eines Users hat keinen Effekt.
 * Wenn die Option db_migrator_auto_migrate aktiviert ist,
   erfolgt auf der Kommandozeile kein Logging während der Ausführung der Migrations
   Es sieht so aus, als würde nichts passieren, bis die Ausführung der Unit Tests beginnt.
