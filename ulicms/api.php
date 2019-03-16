@@ -1135,13 +1135,15 @@ function replaceShortcodesWithModules($string, $replaceOther = true) {
         preg_match_all("/\[include=([0-9]+)]/i", $string, $match);
 
         if (count($match) > 0) {
-            // @FIXME: Potenzial zur Endlosschleife (Seite die sich selbst einbindet)
             for ($i = 0; $i < count($match[0]); $i ++) {
                 $placeholder = $match[0][$i];
                 $id = unhtmlspecialchars($match[1][$i]);
                 $id = intval($id);
+
                 $page = ContentFactory::getByID($id);
-                if ($page) {
+                // a page should not include itself
+                // because that would cause an endless loop
+                if ($page and $id != get_ID()) {
                     $content = "";
                     if ($page->active and checkAccess($page->access)) {
                         $content = $page->content;
