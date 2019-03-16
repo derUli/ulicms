@@ -48,6 +48,8 @@ function getUserById($id) {
     }
 }
 
+// TODO: Remove all usages of adduser() and deprecate the method
+// Developers should use the User model class to create a new user
 function adduser($username, $lastname, $firstname, $email, $password, $sendMessage = true, $acl_group = null, $require_password_change = 0, $admin = 0, $locked = 0, $default_language = null) {
     $username = db_escape($username);
     $lastname = db_escape($lastname);

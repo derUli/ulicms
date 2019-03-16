@@ -742,5 +742,7 @@ add_translation("php_upgrade_notice", "You're using an outdated PHP version.\n".
         "You should use at least PHP 7.1.\n".
         "Please ask your system administrator or provider for an upgrade of the PHP version.");
 
+add_translation("hello_x", "Hallo %x%");
+add_translation("admin_created_an_account", "An administrator created a user account for you at the website %url%. Here are your credentials:");
 
 do_event("lang_en");

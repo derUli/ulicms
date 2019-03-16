@@ -1,0 +1,8 @@
+{
+    "version": "2019.3",
+    "source": "core",
+    "embed": false,
+    "controllers": {
+        "RegistrationController": "controllers/RegistrationController.php"
+    }
+}
