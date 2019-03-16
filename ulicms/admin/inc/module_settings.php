@@ -21,9 +21,9 @@ if ((! is_file ( $admin_file_path ) and ! is_file ( $admin_file_path2 ) and ! ($
 			define ( "MODULE_ADMIN_HEADLINE", $controller->getSettingsHeadline () );
 		}
 	} else if (is_file ( $admin_file_path2 )) {
-		include $admin_file_path2;
+		require $admin_file_path2;
 	} else {
-		include $admin_file_path;
+		require $admin_file_path;
 	}
 	
 	if (defined ( "MODULE_ADMIN_HEADLINE" )) {

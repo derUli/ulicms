@@ -71,7 +71,7 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
         combinedScriptHtml();
         ?>
 
-        <?php include "inc/touch_icons.php"; ?>
+        <?php require "inc/touch_icons.php"; ?>
         <link rel="stylesheet" type="text/css"
               href="scripts/vallenato/vallenato.css" />
 
@@ -170,6 +170,6 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
                 <div class="col-xs-12">
                     <?php 
                     if (is_logged_in() and version_compare(phpversion(), '7.1', '<')) {
-                        include_once "inc/php_upgrade.php";
+                        require_once "inc/php_upgrade.php";
                     }
 

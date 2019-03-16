@@ -159,7 +159,7 @@ if (is_file($path_to_config)) {
     header("Location: installer/");
     exit();
 } else {
-    die("Can't include CMSConfig.php. Starting installer failed, too.");
+    die("Can't require CMSConfig.php. Starting installer failed, too.");
 }
 
 if (php_sapi_name() != "cli") {

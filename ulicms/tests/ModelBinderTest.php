@@ -1,5 +1,5 @@
 <?php
-include_once dirname(__file__) . "/ModelBinderExample.php";
+require_once dirname(__file__) . "/ModelBinderExample.php";
 
 class ModelBinderTest extends \PHPUnit\Framework\TestCase
 {

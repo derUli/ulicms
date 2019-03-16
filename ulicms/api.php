@@ -373,7 +373,7 @@ function isCLI() {
  * @param bool $img
  *            True to return a complete IMG tag False for just the URL
  * @param array $atts
- *            Optional, additional key/value attributes to include in the IMG tag
+ *            Optional, additional key/value attributes to require in the IMG tag
  * @return String containing either just a URL or a complete image tag
  *         @source http://gravatar.com/site/implement/images/php/
  */
@@ -591,7 +591,7 @@ function getModuleName($module) {
     if (!is_file($name_file)) {
         return $module;
     }
-    include_once $name_file;
+    require_once $name_file;
     $name_function = $module . "_name";
     if (function_exists($name_function)) {
         return call_user_func($name_function);
@@ -760,16 +760,16 @@ function do_event($name, $runs = ModuleEventConstants::RUNS_ONCE) {
             echo $controller->$escapedName();
         } else if (is_file($file1)) {
             if ($runs === ModuleEventConstants::RUNS_MULTIPLE) {
-                include $file1;
+                require $file1;
             } else {
-                include_once $file1;
+                require_once $file1;
             }
         } else if (is_file($file2)) {
 
             if ($runs === ModuleEventConstants::RUNS_MULTIPLE) {
-                include $file1;
+                require $file1;
             } else {
-                include_once $file2;
+                require_once $file2;
             }
         }
     }
@@ -1471,9 +1471,9 @@ function uninstall_module($name, $type = "module") {
             if ($mainController and method_exists($mainController, "uninstall")) {
                 $mainController->uninstall();
             } else if (is_file($uninstall_script)) {
-                include $uninstall_script;
+                require $uninstall_script;
             } else if (is_file($uninstall_script2)) {
-                include $uninstall_script2;
+                require $uninstall_script2;
             }
             sureRemoveDir($moduleDir, true);
             clearCache();

@@ -1,5 +1,5 @@
 <?php
-include_once 'init.php';
+require_once 'init.php';
 $tmpDir = Path::resolve("ULICMS_TMP/upgrade");
 $tmpArchive = Path::resolve("$tmpDir/upgrade.zip");
 $jsonURL = "https://www.ulicms.de/current_version.json";
@@ -25,4 +25,4 @@ recurse_copy($upgradeCodeDir, ULICMS_ROOT);
 
 sureRemoveDir($upgradeCodeDir, true);
 
-include_once Path::resolve("ULICMS_ROOT/update.php");
+require_once Path::resolve("ULICMS_ROOT/update.php");

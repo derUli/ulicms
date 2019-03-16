@@ -1,5 +1,5 @@
 <?php
-include_once "init.php";
+require_once "init.php";
 function enforce_www($doit = true) {
 	if ($doit) {
 		$domain = get_domain ();

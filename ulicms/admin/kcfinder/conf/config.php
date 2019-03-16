@@ -21,7 +21,7 @@
 
 // define constant to prevent code from running which has a class naming conflict with "Path" class of KCFinder
 define("KCFINDER_PAGE", true);
-include_once "../../init.php";
+require_once "../../init.php";
 
 $_CONFIG = array(
     
