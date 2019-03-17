@@ -36,7 +36,7 @@ class ControllerRegistry {
             }
             foreach ($controllerRegistry as $key => $value) {
                 if (file_exists($value)) {
-                    include $value;
+                    require $value;
                 } else {
                     throw new FileNotFoundException("Module {$module}: File '{$path}' not found.");
                 }

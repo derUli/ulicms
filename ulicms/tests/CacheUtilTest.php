@@ -1,5 +1,5 @@
 <?php
-include_once Path::Resolve("ULICMS_ROOT/templating.php");
+require_once Path::Resolve("ULICMS_ROOT/templating.php");
 
 use phpFastCache\Helper\Psr16Adapter;
 

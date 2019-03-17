@@ -12,7 +12,7 @@ if (is_file("cms-config.php") and ! is_file($configFile)) {
     rename("cms-config.php", $configFile);
 }
 
-include_once "init.php";
+require_once "init.php";
 
 // "var" is old and should not be used in PHP >= 5
 // if the config file is writable replace "var" with "public"

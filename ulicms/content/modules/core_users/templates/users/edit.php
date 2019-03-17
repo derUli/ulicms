@@ -11,10 +11,12 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
         $secondaryGroupIds[] = $group->getID();
     }
 
+    $backUrl = $permissionChecker->hasPermission("users_edit") ? ModuleHelper::buildActionURL("admins") : ModuleHelper::buildActionURL("home");
+
     while ($row = db_fetch_object($query)) {
         ?>
         <p>
-            <a href="<?php echo ModuleHelper::buildActionURL("admins"); ?>"
+            <a href="<?php echo $backUrl; ?>"
                class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
         </p>
         <form action="index.php?sClass=UserController&sMethod=update"

@@ -5,7 +5,7 @@ class NumberFormatHelperTest extends \PHPUnit\Framework\TestCase
 
     public function setUp()
     {
-        include_once getLanguageFilePath("en");
+        require_once getLanguageFilePath("en");
     }
 
     public function testFormatSizeUnitsGB()

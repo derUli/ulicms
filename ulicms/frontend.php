@@ -26,9 +26,9 @@ if (! isset($_SESSION["language"])) {
 setLocaleByLanguage();
 
 if (faster_in_array($_SESSION["language"], $languages) && is_file(getLanguageFilePath($_SESSION["language"]))) {
-    include_once getLanguageFilePath($_SESSION["language"]);
+    require_once getLanguageFilePath($_SESSION["language"]);
 } else if (is_file(getLanguageFilePath("en"))) {
-    include getLanguageFilePath("en");
+    require getLanguageFilePath("en");
 }
 
 Translation::loadAllModuleLanguageFiles($_SESSION["language"]);
@@ -142,7 +142,7 @@ if (! is_dir(getTemplateDirPath($theme, true))) {
 do_event("before_functions");
 
 if (is_file(getTemplateDirPath($theme, true) . "functions.php")) {
-    include getTemplateDirPath($theme, true) . "functions.php";
+    require getTemplateDirPath($theme, true) . "functions.php";
 }
 
 do_event("after_functions");
@@ -184,7 +184,7 @@ if ($cacheAdapter and $cacheAdapter->get($uid)) {
     }
     
     do_event("before_cron");
-    @include 'cron.php';
+    @require 'cron.php';
     do_event("after_cron");
     die();
 }
@@ -268,7 +268,7 @@ if (Settings::get("no_auto_cron")) {
     die();
 }
 do_event("before_cron");
-@include 'cron.php';
+@require 'cron.php';
 do_event("after_cron");
 die();
 

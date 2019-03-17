@@ -6,7 +6,7 @@ if ($permissionChecker->hasPermission("update_system")) {
 <?php
     $postinstall = ULICMS_DATA_STORAGE_ROOT . "/post-install.php";
     if (is_file($postinstall)) {
-        include $postinstall;
+        require $postinstall;
         unlink($postinstall);
         ?>
 		<?php if(!is_file($postinstall)){?>

@@ -17,10 +17,10 @@ if (php_sapi_name() != "cli") {
 }
 
 $parent_path = dirname(__file__) . "/../";
-include $parent_path . "init.php";
+require $parent_path . "init.php";
 array_shift($argv);
 
-include getLanguageFilePath($language);
+require getLanguageFilePath($language);
 
 // No time limit
 @set_time_limit(0);

@@ -1,5 +1,5 @@
 <?php
-include_once getTemplateDirPath(get_theme()) . "/top.php";
+require_once getTemplateDirPath(get_theme()) . "/top.php";
 $meta = get_article_meta();
 $page = get_page();
 $lastmodified = $page["lastmodified"];

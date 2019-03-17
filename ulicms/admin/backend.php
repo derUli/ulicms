@@ -19,9 +19,9 @@ do_event("after_set_language_by_domain");
 
 $syslang = getSystemLanguage();
 if (is_file(getLanguageFilePath($syslang))) {
-    include_once getLanguageFilePath($syslang);
+    require_once getLanguageFilePath($syslang);
 } else if (is_file(getLanguageFilePath("en"))) {
-    include_once getLanguageFilePath("en");
+    require_once getLanguageFilePath("en");
 }
 Translation::loadAllModuleLanguageFiles($syslang);
 
@@ -62,7 +62,7 @@ header("Content-Type: text/html; charset=UTF-8");
 do_event("before_ajax_handler");
 
 if (isset($_REQUEST["ajax_cmd"])) {
-    include_once "inc/ajax_handler.php";
+    require_once "inc/ajax_handler.php";
     exit();
 }
 do_event("after_ajax_handler");

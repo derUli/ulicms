@@ -25,9 +25,9 @@ if (! defined("LOADED_LANGUAGE_FILE")) {
     setLocaleByLanguage();
     
     if (faster_in_array($_SESSION["language"], $languages) && is_file(getLanguageFilePath($_SESSION["language"]))) {
-        include_once getLanguageFilePath($_SESSION["language"]);
+        require_once getLanguageFilePath($_SESSION["language"]);
     } else if (is_file(getLanguageFilePath("en"))) {
-        include getLanguageFilePath("en");
+        require getLanguageFilePath("en");
     }
     
     Translation::loadAllModuleLanguageFiles($_SESSION["language"]);

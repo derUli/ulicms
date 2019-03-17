@@ -1,5 +1,5 @@
 <?php
-include_once getModulePath("update_manager", true) . "/objects/update_manager.php";
+require_once getModulePath("update_manager", true) . "/objects/update_manager.php";
 define("MODULE_ADMIN_HEADLINE", get_translation("update_manager"));
 define("MODULE_ADMIN_REQUIRED_PERMISSION", "install_packages");
 

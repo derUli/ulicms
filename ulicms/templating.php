@@ -682,12 +682,12 @@ function apply_filter($text, $type)
         if ($controller and method_exists($controller, $escapedName)) {
             $text = $controller->$escapedName($text);
         } else if (is_file($module_content_filter_file1)) {
-            include_once $module_content_filter_file1;
+            require_once $module_content_filter_file1;
             if (function_exists($modules[$i] . "_" . $type . "_filter")) {
                 $text = call_user_func($modules[$i] . "_" . $type . "_filter", $text);
             }
         } else if (is_file($module_content_filter_file2)) {
-            include_once $module_content_filter_file2;
+            require_once $module_content_filter_file2;
             if (function_exists($modules[$i] . "_" . $type . "_filter")) {
                 $text = call_user_func($modules[$i] . "_" . $type . "_filter", $text);
             }

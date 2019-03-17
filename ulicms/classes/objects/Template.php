@@ -111,9 +111,9 @@ ORDER BY RAND() LIMIT 1") or die(Database::getError());
         }
         ob_start();
         if (is_file($ownTemplatePath)) {
-            include $ownTemplatePath;
+            require $ownTemplatePath;
         } else if (is_file($originalTemplatePath)) {
-            include $originalTemplatePath;
+            require $originalTemplatePath;
         } else {
             $retval = ob_get_clean();
             throw new Exception("Template " . $module . "/" . $template . " not found!");
@@ -193,9 +193,9 @@ ORDER BY RAND() LIMIT 1") or die(Database::getError());
         
         ob_start();
         if (is_file($ownTemplatePath)) {
-            include $ownTemplatePath;
+            require $ownTemplatePath;
         } else if (is_file($originalTemplatePath)) {
-            include $originalTemplatePath;
+            require $originalTemplatePath;
         } else {
             $retval = ob_get_clean();
             throw new FileNotFoundException("Template " . $template . " not found!");
@@ -262,7 +262,7 @@ ORDER BY RAND() LIMIT 1") or die(Database::getError());
             throw new FileNotFoundException("Partial Template {$template} of Theme {$theme} not found.");
         }
         ob_start();
-        include $file;
+        require $file;
         $result = trim(ob_get_clean());
         return $result;
     }
@@ -442,7 +442,7 @@ color:" . Settings::get("body-text-color") . ";
         if ($status == '404 Not Found') {
             if (is_file(getTemplateDirPath($theme) . "404.php")) {
                 $theme = Settings::get("theme");
-                include getTemplateDirPath($theme) . "404.php";
+                require getTemplateDirPath($theme) . "404.php";
             } else {
                 translate('PAGE_NOT_FOUND_CONTENT');
             }
@@ -451,7 +451,7 @@ color:" . Settings::get("body-text-color") . ";
             
             $theme = Settings::get("theme");
             if (is_file(getTemplateDirPath($theme) . '403.php')) {
-                include getTemplateDirPath($theme) . '403.php';
+                require getTemplateDirPath($theme) . '403.php';
             } else {
                 translate('FORBIDDEN_COTENT');
             }

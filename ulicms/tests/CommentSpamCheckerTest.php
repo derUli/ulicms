@@ -8,9 +8,9 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase
 
     public function setUp()
     {
-        include_once getLanguageFilePath("en");
-        include_once ModuleHelper::buildModuleRessourcePath("core_comments", "lang/en.php");
-        include_once ModuleHelper::buildModuleRessourcePath("core_forms", "lang/en.php");
+        require_once getLanguageFilePath("en");
+        require_once ModuleHelper::buildModuleRessourcePath("core_comments", "lang/en.php");
+        require_once ModuleHelper::buildModuleRessourcePath("core_forms", "lang/en.php");
     }
 
     public function tearDown()

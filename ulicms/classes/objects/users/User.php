@@ -58,9 +58,25 @@ class User {
         $this->saveGroups();
     }
 
-    public function saveAndSendMail() {
-        $this->save();
-        // TODO: Send Mail to new user
+    public function saveAndSendMail($password) {
+       $this->save();
+       $this->sendWelcomeMail($password);
+    }
+    
+    public function sendWelcomeMail($password){
+        $subject = get_translation("new_user_account_at_site", 
+                array("%domain%" => get_domain()));
+        $mailBody = $this->getWelcomeMailText($password);
+        $headers = "From: ".Settings::get("email");
+        
+        Mailer::send($this->getEmail(), $subject, $mailBody, $headers);
+    }
+    
+    public function getWelcomeMailText($password){
+        ViewBag::set("user", $this);
+        ViewBag::set("url", ModuleHelper::getBaseUrl());
+        ViewBag::set("password", $password);
+        return Template::executeDefaultOrOwnTemplate("email/user_welcome.php");
     }
 
     public function fillVars($query) {

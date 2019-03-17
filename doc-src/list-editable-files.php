@@ -1,6 +1,6 @@
 <?php
-include_once 'init.php';
-include_once ULICMS_ROOT."/classes/objects/path.php";
+require_once 'init.php';
+require_once ULICMS_ROOT."/classes/objects/path.php";
 
 $contentFolder = Path::resolve("ULICMS_ROOT/content");
 $files = find_all_files($contentFolder);

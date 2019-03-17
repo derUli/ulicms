@@ -36,7 +36,7 @@
 /**
  * Usage (simplest):
  *
- * include 'finediff.php';
+ * require 'finediff.php';
  *
  * // for the stock stack, granularity values are:
  * // FineDiff::$paragraphGranularity = paragraph/line level
@@ -50,7 +50,7 @@
  * ...
  *
  * // restore $to_text from $from_text + $opcodes
- * include 'finediff.php';
+ * require 'finediff.php';
  * $to_text = FineDiff::renderToTextFromOpcodes($from_text, $opcodes);
  *
  * ...

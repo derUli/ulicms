@@ -37,7 +37,7 @@ class Translation
     {
         $file = ULICMS_ROOT . "/lang/custom/" . basename($lang) . ".php";
         if (is_file($file)) {
-            include_once $file;
+            require_once $file;
         }
     }
 
@@ -48,12 +48,12 @@ class Translation
             $file = getModulePath($module, true) . "/lang/" . $lang . ".php";
             
             if (is_file($file)) {
-                include_once $file;
+                require_once $file;
             } else {
                 $file = getModulePath($module, true) . "/lang/en.php";
                 
                 if (is_file($file)) {
-                    include_once $file;
+                    require_once $file;
                 }
             }
         }
@@ -64,11 +64,11 @@ class Translation
         $modules = getAllModules();
         $file = getTemplateDirPath(get_theme(), true) . "/lang/" . $lang . ".php";
         if (is_file($file)) {
-            include_once $file;
+            require_once $file;
         } else {
             $file = getTemplateDirPath(get_theme(), true) . "/lang/en.php";
             if (is_file($file)) {
-                include_once $file;
+                require_once $file;
             }
         }
     }

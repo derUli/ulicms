@@ -1,6 +1,6 @@
 <?php
 $permissionChecker = new ACL();
-include_once ULICMS_ROOT . "/lib/formatter.php";
+require_once ULICMS_ROOT . "/lib/formatter.php";
 
 $controller = ControllerRegistry::get();
 $model = $controller->getModel();

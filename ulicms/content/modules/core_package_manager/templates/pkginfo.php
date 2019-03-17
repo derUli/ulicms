@@ -1,5 +1,5 @@
 <?php
-include_once Path::resolve("ULICMS_ROOT/lib/formatter.php");
+require_once Path::resolve("ULICMS_ROOT/lib/formatter.php");
 $permissionChecker = new ACL();
 if (! $permissionChecker->hasPermission("install_packages")) {
     noPerms();

@@ -1,6 +1,6 @@
 <?php
 
-include_once Path::Resolve("ULICMS_ROOT/templating.php");
+require_once Path::Resolve("ULICMS_ROOT/templating.php");
 
 class ApiTest extends \PHPUnit\Framework\TestCase {
 
