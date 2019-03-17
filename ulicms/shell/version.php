@@ -5,5 +5,5 @@ if (php_sapi_name() != "cli") {
 }
 
 $parent_path = dirname(__file__) . "/../";
-include $parent_path . "init.php";
+require $parent_path . "init.php";
 echo "UliCMS Release " . cms_version() . "\n";

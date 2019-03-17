@@ -25,6 +25,7 @@ class Mailer {
 
         // UliCMS speichert seit UliCMS 9.0.1 E-Mails, die das System versendet hat
         // in der Datenbank
+        // TODO: Make a method for this sql statement
         $insert_sql = "INSERT INTO " . tbname("mails") . " (headers, `to`, subject, body) VALUES ('" . db_escape($headers) . "', '" . db_escape($to) . "', '" . db_escape($subject) . "', '" . db_escape($message) . "')";
         db_query($insert_sql);
 
@@ -32,7 +33,6 @@ class Mailer {
             case EmailModes::INTERNAL:
             case EmailModes::PHPMAILER:
                 return self::sendWithPHPMailer($to, $subject, $message, $headers, $mode);
-                break;
             default:
                 throw new NotImplementedException("E-Mail Mode \"$mode\" not implemented.");
         }

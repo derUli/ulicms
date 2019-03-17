@@ -15,4 +15,4 @@ if (! is_file($file)) {
     exit();
 }
 
-include_once $file;
+require_once $file;

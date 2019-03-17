@@ -22,7 +22,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         }
         $this->setMotto();
 
-        include_once getLanguageFilePath("en");
+        require_once getLanguageFilePath("en");
     }
 
     public function tearDown() {

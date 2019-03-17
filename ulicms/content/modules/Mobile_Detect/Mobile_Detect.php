@@ -331,7 +331,7 @@ class Mobile_Detect
         // http://www.pyleaudio.com/Products.aspx?%2fproducts%2fPersonal-Electronics%2fTablets
         'PyleAudioTablet'   => '\b(PTBL10CEU|PTBL10C|PTBL72BC|PTBL72BCEU|PTBL7CEU|PTBL7C|PTBL92BC|PTBL92BCEU|PTBL9CEU|PTBL9CUK|PTBL9C)\b',
         // http://www.advandigital.com/index.php?link=content-product&jns=JP001
-        // because of the short codenames we have to include whitespaces to reduce the possible conflicts.
+        // because of the short codenames we have to require whitespaces to reduce the possible conflicts.
         'AdvanTablet'       => 'Android.* \b(E3A|T3X|T5C|T5B|T3E|T3C|T3B|T1J|T1F|T2A|T1H|T1i|E1C|T1-E|T5-A|T4|E1-B|T2Ci|T1-B|T1-D|O1-A|E1-A|T1-A|T3A|T4i)\b ',
         // http://www.danytech.com/category/tablet-pc
         'DanyTechTablet' => 'Genius Tab G3|Genius Tab S2|Genius Tab Q3|Genius Tab G4|Genius Tab Q4|Genius Tab G-II|Genius TAB GII|Genius TAB GIII|Genius Tab S1',
@@ -568,7 +568,7 @@ class Mobile_Detect
         'DesktopMode' => 'WPDesktop',
         'TV'          => 'SonyDTV|HbbTV', // experimental
         'WebKit'      => '(webkit)[ /]([\w.]+)',
-        // @todo: Include JXD consoles.
+        // @todo: require JXD consoles.
         'Console'     => '\b(Nintendo|Nintendo WiiU|Nintendo 3DS|Nintendo Switch|PLAYSTATION|Xbox)\b',
         'Watch'       => 'SM-V700',
     );

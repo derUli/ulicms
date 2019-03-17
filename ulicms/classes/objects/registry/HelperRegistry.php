@@ -29,7 +29,7 @@ class HelperRegistry {
                 }
             }
             foreach ($helperRegistry as $key => $value) {
-                include $value;
+                require $value;
                 if (class_exists($key)) {
                     $classInstance = new $key();
                     if ($classInstance instanceof Helper) {

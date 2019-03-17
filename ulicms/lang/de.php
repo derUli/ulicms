@@ -738,4 +738,9 @@ add_translation("php_upgrade_notice", "Sie benutzen eine veraltete PHP Version, 
         . "Sie sollten PHP 7.1 oder eine neuere Version verwenden.\n"
         . "Bitte kontaktieren Sie ihren Administrator oder Provider.");
 
+add_translation("hello_x", "Hallo %x%");
+add_translation("admin_created_an_account", "Ein Administrator auf der Webseite %url% hat für dich einen Account angelegt.");
+add_translation("here_are_your_credentials", "Im folgenden deine Zugangsdaten:");
+add_translation("new_user_account_at_site", "Neuer User-Account für %domain%");
+
 do_event("lang_de");

@@ -1,6 +1,6 @@
 <?php
 
-include_once ULICMS_ROOT . "/api.php";
+require_once ULICMS_ROOT . "/api.php";
 
 use UliCMS\Exceptions\SCSSCompileException;
 

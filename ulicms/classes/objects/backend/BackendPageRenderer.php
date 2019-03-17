@@ -46,7 +46,7 @@ class BackendPageRenderer {
             ob_start();
         }
 
-        include "inc/header.php";
+        require "inc/header.php";
 
         if (!is_logged_in()) {
             if (isset($_GET["register"])) {
@@ -77,7 +77,7 @@ class BackendPageRenderer {
             } else if (isset($actions[$this->getAction()])) {
                 $requiredPermission = ActionRegistry::getActionPermission($this->getAction());
                 if (!$requiredPermission or ( $requiredPermission and $permissionChecker->hasPermission($requiredPermission))) {
-                    include_once $actions[$this->getAction()];
+                    require_once $actions[$this->getAction()];
                 } else {
                     noPerms();
                 }

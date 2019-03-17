@@ -123,16 +123,16 @@ if (!$permissionChecker->hasPermission("groups")) {
     ?>
     <?php
     if (!isset($_GET["add"]) and ! isset($_GET["edit"])) {
-        include "inc/group_list.php";
+        require "inc/group_list.php";
     } else if (isset($_GET["add"])) {
         if ($permissionChecker->hasPermission("groups_create")) {
-            include "inc/group_add.php";
+            require "inc/group_add.php";
         } else {
             noPerms();
         }
     } else if (isset($_GET["edit"])) {
         if ($permissionChecker->hasPermission("groups_edit")) {
-            include "inc/group_edit.php";
+            require "inc/group_edit.php";
         } else {
             noPerms();
         }

@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Exceptions\NotImplementedException;
+
 class UserTest extends \PHPUnit\Framework\TestCase {
 
     private $otherGroup;
@@ -89,6 +91,20 @@ class UserTest extends \PHPUnit\Framework\TestCase {
 
         $user = new User();
         $this->assertNull($user->getId());
+    }
+
+    public function testGetWelcomeMailText() {
+        $user = new User();
+        $user->setUsername("john.doe");
+        $user->setLastname("Doe");
+        $user->setFirstname("John");
+        $user->setPassword("secret");
+
+        $message = $user->getWelcomeMailText("secret");
+        $this->assertStringContainsString("An administrator created a user account for you", $message);
+        $this->assertStringContainsString("Hello John", $message);
+        $this->assertStringContainsString("Username: john.doe", $message);
+        $this->assertStringContainsString("Password: secret", $message);
     }
 
 }

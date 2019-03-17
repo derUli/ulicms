@@ -133,10 +133,10 @@ class PackageManager
             // post_install_script ausführen und anschließend
             // entfernen, sofern vorhanden;
             if (is_file($post_install_script1)) {
-                include_once $post_install_script1;
+                require_once $post_install_script1;
                 unlink($post_install_script1);
             } else if (is_file($post_install_script2)) {
-                include_once $post_install_script2;
+                require_once $post_install_script2;
                 unlink($post_install_script2);
             }
             if ($clear_cache) {
