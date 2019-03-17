@@ -81,7 +81,7 @@ class Mailer {
         }
         $mailer->XMailer = Settings::get("show_meta_generator") ? "UliCMS" : "";
         $mailer->CharSet = "UTF-8";
-        $mailer->Encoding = "base64";
+        $mailer->Encoding = "quoted-printable";
 
         $mailer = apply_filter($mailer, "php_mailer_instance");
         return $mailer;
