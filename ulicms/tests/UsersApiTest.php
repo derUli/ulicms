@@ -167,7 +167,7 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase {
     public function testAddUser() {
         $this->assertFalse(user_exists("testuser2"));
 
-        adduser("testuser2", "Kolumna", "Karla", "karla.kolumna@presse.de", "oldpassword", false);
+        addUser("testuser2", "Kolumna", "Karla", "karla.kolumna@presse.de", "oldpassword", false);
         $this->assertTrue(user_exists("testuser2"));
     }
 

@@ -28,6 +28,9 @@ Neue API-Methoden:
 * Database::dropSchema($schema)
 * HTTPStatusCode::UNPROCESSABLE_ENTITY (Konstante für HTTP Status 422)
 
+veraltete API-Methoden:
+* adduser($username, $lastname, $firstname, $email, $password, $sendMessage = true, $acl_group = null, $require_password_change = 0, $admin = 0, $locked = 0, $default_language = null) 
+
 Entfernte API-Methoden:
 * is_in_include_path($find)
 

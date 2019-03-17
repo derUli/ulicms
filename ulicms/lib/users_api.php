@@ -48,7 +48,7 @@ function getUserById($id) {
     }
 }
 
-function adduser($username, $lastname, $firstname, $email, $password, $sendMessage = true, $acl_group = null, $require_password_change = 0, $admin = 0, $locked = 0, $default_language = null) {
+function addUser($username, $lastname, $firstname, $email, $password, $sendMessage = true, $acl_group = null, $require_password_change = 0, $admin = 0, $locked = 0, $default_language = null) {
     $username = db_escape($username);
     $lastname = db_escape($lastname);
     $firstname = db_escape($firstname);
