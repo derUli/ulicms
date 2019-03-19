@@ -8,14 +8,17 @@ use Leafo\ScssPhp\Compiler;
 // FIXME: don't modify $_SERVER use the Vars class as replacement
 // Javascript Minify Funktionen
 function resetScriptQueue() {
-    $_SERVER["script_queue"] = array();
+    Vars::set("script_queue", array());
 }
 
 function enqueueScriptFile($path) {
-    if (!isset($_SERVER["script_queue"])) {
-        $_SERVER["script_queue"] = array();
+    if (!Vars::get("script_queue")) {
+        resetScriptQueue();
     }
-    $_SERVER["script_queue"][] = $path;
+    $script_queue = Vars::get("script_queue");
+    $script_queue[] = $path;
+
+    Vars::set("script_queue", $script_queue);
 }
 
 function setSCSSImportPaths($importPaths = null) {
@@ -98,14 +101,14 @@ function getCombinedScriptHtml() {
     $html = "";
     $cfg = new CMSConfig();
     if (is_true($cfg->no_minify)) {
-        foreach ($_SERVER["script_queue"] as $script) {
+        foreach (Vars::get("script_queue") as $script) {
             $html .= Script::fromFile($script);
         }
         resetScriptQueue();
         return $html;
     }
 
-    if (isset($_SERVER["script_queue"]) and is_array($_SERVER["script_queue"]) and count($_SERVER["script_queue"]) > 0) {
+    if (Vars::get("script_queue") and count(Vars::get("script_queue")) > 0) {
         $html = Script::fromFile(getCombinedScriptURL());
     }
     resetScriptQueue();
@@ -121,14 +124,14 @@ function getCombinedScriptURL() {
     $output = "";
 
     $lastmod = 0;
-    foreach ($_SERVER["script_queue"] as $file) {
-        if (is_file($file) and endsWith($file, ".js", $needle) and filemtime($file) > $lastmod) {
+    foreach (Vars::get("script_queue") as $file) {
+        if (is_file($file) and endsWith($file, ".js") and filemtime($file) > $lastmod) {
             $lastmod = filemtime($file);
         }
     }
 
-    if (isset($_SERVER["script_queue"]) and is_array($_SERVER["script_queue"])) {
-        $files = implode(";", $_SERVER["script_queue"]);
+    if (Vars::get("script_queue")) {
+        $files = implode(";", Vars::get("script_queue"));
         $url = "?output_scripts=" . $files;
     } else {
         $url = "index.php?scripts=";
