@@ -27,17 +27,15 @@ function setSCSSImportPaths($importPaths = null) {
             Path::resolve("ULICMS_ROOT")
         );
     }
-    $_SERVER["css_include_paths"] = $importPaths;
+    Vars::set("css_include_paths", $importPaths);
 }
 
 function getSCSSImportPaths() {
-    return is_array($_SERVER["css_include_paths"]) ? $_SERVER["css_include_paths"] : null;
+    return Vars::get("css_include_paths");
 }
 
 function unsetSCSSImportPaths() {
-    if (isset($_SERVER["css_include_paths"])) {
-        unset($_SERVER["css_include_paths"]);
-    }
+    Vars::delete("css_include_paths");
 }
 
 function getCombinedScripts() {
