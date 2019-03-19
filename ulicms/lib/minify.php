@@ -5,7 +5,6 @@ use UliCMS\HTML\Script;
 use UliCMS\Exceptions\SCSSCompileException;
 use Leafo\ScssPhp\Compiler;
 
-// FIXME: don't modify $_SERVER use the Vars class as replacement
 // Javascript Minify Funktionen
 function resetScriptQueue() {
     Vars::set("script_queue", array());
@@ -142,14 +141,17 @@ function getCombinedScriptURL() {
 
 // Ab hier Stylesheet Funktionen
 function resetStylesheetQueue() {
-    $_SERVER["stylesheet_queue"] = array();
+    Vars::set("stylesheet_queue", array());
 }
 
 function enqueueStylesheet($path) {
-    if (!isset($_SERVER["stylesheet_queue"])) {
-        $_SERVER["stylesheet_queue"] = array();
+    if (!Vars::get("stylesheet_queue")) {
+        resetStylesheetQueue();
     }
-    $_SERVER["stylesheet_queue"][] = $path;
+    $stylesheet_queue = Vars::get("stylesheet_queue");
+    $stylesheet_queue[] = $path;
+
+    Vars::set("stylesheet_queue", $stylesheet_queue);
 }
 
 // FIXME: Seperate getter and output methods
@@ -297,14 +299,14 @@ function getCombinedStylesheetHtml() {
 
     $cfg = new CMSConfig();
     if (is_true($cfg->no_minify)) {
-        foreach ($_SERVER["stylesheet_queue"] as $stylesheet) {
+        foreach (Vars::get("stylesheet_queue") as $stylesheet) {
             $html .= Style::FromExternalFile($stylesheet);
         }
         resetStylesheetQueue();
         return $html;
     }
 
-    if (isset($_SERVER["stylesheet_queue"]) and is_array($_SERVER["stylesheet_queue"]) and count($_SERVER["stylesheet_queue"]) > 0) {
+    if (Vars::get("stylesheet_queue") and count(Vars::get("stylesheet_queue")) > 0) {
         $html = Style::FromExternalFile(getCombinedStylesheetURL());
     }
     resetStylesheetQueue();
@@ -318,16 +320,16 @@ function get_combined_stylesheet_html() {
 
 function getCombinedStylesheetURL() {
     $lastmod = 0;
-    if (is_array($_SERVER["stylesheet_queue"])) {
-        foreach ($_SERVER["stylesheet_queue"] as $file) {
+    if (Vars::get("stylesheet_queue")) {
+        foreach (Vars::get("stylesheet_queue") as $file) {
             if (is_file($file) and ( endsWith($file, ".css", $needle) or endsWith($file, ".scss", $needle)) and filemtime($file) > $lastmod) {
                 $lastmod = filemtime($file);
             }
         }
     }
 
-    if (isset($_SERVER["stylesheet_queue"]) and is_array($_SERVER["stylesheet_queue"])) {
-        $files = implode(";", $_SERVER["stylesheet_queue"]);
+    if (Vars::get("stylesheet_queue")) {
+        $files = implode(";", Vars::get("stylesheet_queue"));
         $url = "?output_stylesheets=" . $files;
     } else {
         $url = "index.php?stylesheets=";

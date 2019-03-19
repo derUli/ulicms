@@ -48,19 +48,19 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
                 $filemtime = filemtime($file);
             }
         }
-        $this->assertCount(4, $_SERVER["stylesheet_queue"]);
-        $this->assertEquals("node_modules/bootstrap/dist/css/bootstrap.css", $_SERVER["stylesheet_queue"][1]);
-        $this->assertEquals("node_modules/bootstrap/dist/css/bootstrap-theme.css", $_SERVER["stylesheet_queue"][2]);
+        $this->assertCount(4, Vars::get("stylesheet_queue"));
+        $this->assertEquals("node_modules/bootstrap/dist/css/bootstrap.css", Vars::get("stylesheet_queue")[1]);
+        $this->assertEquals("node_modules/bootstrap/dist/css/bootstrap-theme.css", Vars::get("stylesheet_queue")[2]);
 
         resetStylesheetQueue();
-        $this->assertCount(0, $_SERVER["stylesheet_queue"]);
+        $this->assertCount(0, Vars::get("stylesheet_queue"));
 
         foreach ($files as $file) {
             enqueueStylesheet($file);
         }
 
         $this->assertEquals('<link rel="stylesheet" href="?output_stylesheets=core.css;node_modules/bootstrap/dist/css/bootstrap.css;node_modules/bootstrap/dist/css/bootstrap-theme.css;admin/css/modern.scss&amp;time=' . $filemtime . '" type="text/css"/>', getCombinedStylesheetHtml());
-        $this->assertCount(0, $_SERVER["stylesheet_queue"]);
+        $this->assertCount(0, Vars::get("stylesheet_queue"));
     }
 
     public function testMinifySCSSExpectCSS() {
