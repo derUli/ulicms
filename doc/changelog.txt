@@ -51,6 +51,7 @@ Fehlerkorrekturen:
 * Bei den Demodaten war nach einer Neuinstallation die group_id Spalte nicht gefüllt
 * Ein Icon unter "Installierte Patches" wird nicht angezeigt
 * Nach dem installieren von Patches werden die temporären Dateien nicht gelöscht.
+* "Neuigkeiten in UliCMS" wird nicht geladen, wenn allow_url_fopen=Off ist.
 
 Entfernte Features:
 * Alte Ansicht von "Pakete" entfernt
