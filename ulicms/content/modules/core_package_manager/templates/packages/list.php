@@ -218,7 +218,7 @@ if ($permissionChecker->hasPermission("list_packages")) {
                             <td>
                                 <?php if (StringHelper::isNotNullOrWhitespace($data->url)) { ?>
                                     <a href="<?php esc($data->url) ?>" target="_blank"
-                                       class="btn btn-info icon"><i class="fa fa-download"></i></a>
+                                       class="btn btn-info icon" title="<?php translate("download_patch"); ?>"><i class="fa fa-download"></i></a>
                                     <?php } ?>
                             </td>
                         </tr>
