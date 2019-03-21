@@ -78,7 +78,7 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
         <link rel="stylesheet" type="text/css"
               href="scripts/datatables/datatables.min.css" />
         <link rel="stylesheet"
-              href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" />
+              href="../node_modules/@fortawesome/fontawesome-free/css/all.min.css" />
               <?php
               $styles[] = "../node_modules/bootstrap/dist/css/bootstrap.min.css";
               $styles[] = "../node_modules/codemirror-minified/lib/codemirror.css";
@@ -168,7 +168,7 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
             </div>
             <div class="row main-content">
                 <div class="col-xs-12">
-                    <?php 
+                    <?php
                     if (is_logged_in() and version_compare(phpversion(), '7.1', '<')) {
                         require_once "inc/php_upgrade.php";
                     }
