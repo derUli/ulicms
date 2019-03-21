@@ -31,7 +31,7 @@ Neue API-Methoden:
 * HTTPStatusCode::UNPROCESSABLE_ENTITY (Konstante für HTTP Status 422)
 
 veraltete API-Methoden:
-* adduser($username, $lastname, $firstname, $email, $password, $sendMessage = true, $acl_group = null, $require_password_change = 0, $admin = 0, $locked = 0, $default_language = null) 
+* adduser($username, $lastname, $firstname, $email, $password, $sendMessage = true, $acl_group = null, $require_password_change = 0, $admin = 0, $locked = 0, $default_language = null)
 
 Entfernte API-Methoden:
 * is_in_include_path($find)
@@ -49,6 +49,8 @@ Fehlerkorrekturen:
   in einigen modernen Browsern (z.B. Google Chrome) nicht mehr.
 * Wenn ein Bootbox geöffnet wird, verschiebt sich der Inhalt der Seite nach Links.
 * Bei den Demodaten war nach einer Neuinstallation die group_id Spalte nicht gefüllt
+* Ein Icon unter "Installierte Patches" wird nicht angezeigt
+* Nach dem installieren von Patches werden die temporären Dateien nicht gelöscht.
 
 Entfernte Features:
 * Alte Ansicht von "Pakete" entfernt

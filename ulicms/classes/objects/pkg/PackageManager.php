@@ -1,27 +1,24 @@
 <?php
 
-class PackageManager
-{
+class PackageManager {
 
     private $package_source;
 
-    public function __construct()
-    {
+    public function __construct() {
         $cfg = new CMSConfig();
         $this->package_source = Settings::get("pkg_src");
         $this->package_source = $this->replacePlaceHolders($this->package_source);
     }
 
-    public function checkForNewerVersionOfPackage($package)
-    {
+    public function checkForNewerVersionOfPackage($package) {
         $result = null;
-        
+
         if (Settings::get("disable_package_update_check")) {
             return $result;
         }
         $url = $this->package_source . "newest_version.php";
         $url .= "?q=" . urlencode($package);
-        
+
         $response = @file_get_contents_wrapper($url, false);
         if ($response and ! empty($response)) {
             $result = $response;
@@ -29,8 +26,7 @@ class PackageManager
         return $result;
     }
 
-    public function splitPackageName($name)
-    {
+    public function splitPackageName($name) {
         $name = str_ireplace(".tar.gz", "", $name);
         $name = str_ireplace(".zip", "", $name);
         $splitted = explode("-", $name);
@@ -42,8 +38,7 @@ class PackageManager
         );
     }
 
-    public function getInstalledPatchNames()
-    {
+    public function getInstalledPatchNames() {
         $query = db_query("SELECT name from " . tbname("installed_patches"));
         $retval = array();
         while ($row = db_fetch_object($query)) {
@@ -52,31 +47,29 @@ class PackageManager
         return $retval;
     }
 
-    public function truncateInstalledPatches()
-    {
+    public function truncateInstalledPatches() {
         return db_query("TRUNCATE TABLE " . tbname("installed_patches"));
     }
 
-    // @FIXME : Delete temporary files after install a patch
-    public function installPatch($name, $description, $url, $clear_cache = true, $checksum = null)
-    {
+    public function installPatch($name, $description, $url, $clear_cache = true, $checksum = null) {
         @set_time_limit(0);
         $test = $this->getInstalledPatchNames();
         if (faster_in_array($name, $test)) {
             return false;
         }
-        
+
         $tmp_dir = ULICMS_TMP . "/" . uniqid() . "/";
-        if (! is_dir($tmp_dir)) {
+        if (!is_dir($tmp_dir)) {
             mkdir($tmp_dir);
         }
         $download = file_get_contents_wrapper($url, true, $checksum);
-        
+
         $download_tmp = $tmp_dir . "patch.zip";
-        
-        if (! $download)
+
+        if (!$download) {
             return false;
-        
+        }
+
         file_put_contents($download_tmp, $download);
         $zip = new ZipArchive();
         if ($zip->open($download_tmp) === TRUE) {
@@ -89,23 +82,22 @@ class PackageManager
                 $description = db_escape($description);
                 $url = db_escape($url);
                 db_query("INSERT INTO " . tbname("installed_patches") . " (name, description, url, date) VALUES ('$name', '$description', '$url', NOW())");
-                
+
+                SureRemoveDir($tmp_dir, true);
                 if ($clear_cache) {
-                    SureRemoveDir($tmp_dir, true);
                     clearCache();
                 }
                 return true;
             }
         }
+        SureRemoveDir($tmp_dir, true);
         if ($clear_cache) {
             clearCache();
-            SureRemoveDir($tmp_dir, true);
         }
         return false;
     }
 
-    public function getInstalledPatches()
-    {
+    public function getInstalledPatches() {
         $query = db_query("SELECT * from " . tbname("installed_patches"));
         $retval = array();
         while ($row = db_fetch_object($query)) {
@@ -114,22 +106,21 @@ class PackageManager
         return $retval;
     }
 
-    public function installPackage($file, $clear_cache = true)
-    {
+    public function installPackage($file, $clear_cache = true) {
         @set_time_limit(0);
         try {
             // Paket entpacken
             $phar = new PharData($file);
             $phar->extractTo(ULICMS_DATA_STORAGE_ROOT, null, true);
-            
+
             // make asset files of the package public
             if (startsWith(ULICMS_DATA_STORAGE_ROOT, "gs://") and class_exists("GoogleCloudHelper")) {
                 GoogleCloudHelper::makeFilesPublic(ULICMS_DATA_STORAGE_ROOT);
             }
-            
+
             $post_install_script1 = ULICMS_DATA_STORAGE_ROOT . DIRECTORY_SEPARATOR . "post-install.php";
             $post_install_script2 = ULICMS_TMP . DIRECTORY_SEPARATOR . "post-install.php";
-            
+
             // post_install_script ausführen und anschließend
             // entfernen, sofern vorhanden;
             if (is_file($post_install_script1)) {
@@ -151,8 +142,7 @@ class PackageManager
         }
     }
 
-    private function replacePlaceHolders($url)
-    {
+    private function replacePlaceHolders($url) {
         $cfg = new CMSConfig();
         $version = new UliCMSVersion();
         $internalVersion = $version->getInternalVersion();
@@ -161,13 +151,12 @@ class PackageManager
         return $url;
     }
 
-    public function getInstalledModules()
-    {
+    public function getInstalledModules() {
         $module_folder = Path::resolve("ULICMS_DATA_STORAGE_ROOT/content/modules") . "/";
-        
+
         $available_modules = array();
         $directory_content = scandir($module_folder);
-        
+
         natcasesort($directory_content);
         for ($i = 0; $i < count($directory_content); $i ++) {
             if (is_dir($module_folder . $directory_content[$i])) {
@@ -187,11 +176,10 @@ class PackageManager
         return $available_modules;
     }
 
-    public function getInstalledThemes()
-    {
+    public function getInstalledThemes() {
         $themes = Array();
         $templateDir = Path::resolve("ULICMS_DATA_STORAGE_ROOT/content/templates") . "/";
-        
+
         $folders = scanDir($templateDir);
         natcasesort($folders);
         for ($i = 0; $i < count($folders); $i ++) {
@@ -200,14 +188,13 @@ class PackageManager
                 array_push($themes, $folders[$i]);
             }
         }
-        
+
         natcasesort($themes);
-        
+
         return $themes;
     }
 
-    public function getInstalledPackages($type = 'modules')
-    {
+    public function getInstalledPackages($type = 'modules') {
         if ($type === 'modules') {
             return $this->getInstalledModules();
         } else if ($type === 'themes') {
@@ -217,13 +204,12 @@ class PackageManager
         }
     }
 
-    public function getPackageSource()
-    {
+    public function getPackageSource() {
         return $this->package_source;
     }
 
-    public function setPackageSource($url)
-    {
+    public function setPackageSource($url) {
         $this->package_source = $url;
     }
+
 }
