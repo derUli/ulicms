@@ -1,11 +1,17 @@
+$default-vertical-margin: 10px;
+
 /* Space out content a bit */
 body {
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: $default-vertical-margin;
+    padding-bottom: $default-vertical-margin;
 }
 
 #search-form-head input[type="search"] {
-    margin-top: 10px;
+    margin-top: $default-vertical-margin;
+}
+
+.search-form{
+    margin-bottom: $default-vertical-margin;
 }
 
 .rss-icon a {
@@ -78,7 +84,7 @@ html {
 }
 
 .article-list-row {
-    padding: 10px;
+    padding: $default-vertical-margin;
     padding-bottom: 30px;
     margin-bottom: 30px;
     background-color: rgb(248, 248, 248);
@@ -96,7 +102,7 @@ html {
 /* Custom page header */
 .header {
     border-bottom: 1px solid #e5e5e5;
-    padding-bottom: 10px;
+    padding-bottom: $default-vertical-margin;
 }
 /* Make the masthead heading the same height as the navigation */
 .header h3 {
@@ -108,7 +114,7 @@ html {
 
 /* Custom page footer */
 .footer {
-    padding-top: 10px;
+    padding-top: $default-vertical-margin;
     color: #777;
     border-top: 1px solid #e5e5e5;
     text-align: center;
@@ -132,7 +138,7 @@ html {
 /* Supporting marketing content */
 .marketing {
     margin: 0;
-    margin-bottom: 10px;
+    margin-bottom: $default-vertical-margin;
 }
 
 .marketing p + h4 {
@@ -181,7 +187,7 @@ nav ul ul {
 }
 
 nav ul ul li a {
-    padding: 10px 15px;
+    padding: $default-vertical-margin 15px;
 }
 
 .jumbotron {
@@ -210,9 +216,9 @@ code {
 
 blockquote {
     background: #f9f9f9;
-    border-left: 10px solid #ccc;
-    margin: 1.5em 10px;
-    padding: 0.5em 10px;
+    border-left: $default-vertical-margin solid #ccc;
+    margin: 1.5em $default-vertical-margin;
+    padding: 0.5em $default-vertical-margin;
     quotes: "\201C""\201D""\2018""\2019";
 }
 
