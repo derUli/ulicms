@@ -51,7 +51,7 @@ if ($permissionChecker->hasPermission("expert_settings")) {
                                     ?>
                                 </td><?php } ?>
                         </tr>
-        <?php } ?>
+                    <?php } ?>
                 </tbody>
             </table>
         </div>
