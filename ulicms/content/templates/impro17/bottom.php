@@ -5,12 +5,7 @@
 </main>
 </div>
 <footer class="footer">
-    <p>&copy;
-        <?php if (date("Y") > 2016) { ?>
-            2016 -
-        <?php } ?>
-        <?php year(); ?> by <?php homepage_owner(); ?>
-    </p>
+    <?php Template::footerText(); ?>
 </footer>
 <?php Template::footer(); ?>
 </div>

@@ -1132,6 +1132,9 @@ function replaceShortcodesWithModules($string, $replaceOther = true) {
         $string = preg_replace('/\[tel\]([^\[\]]+)\[\/tel\]/i', '<a href="tel:$1" class="tel">$1</a>', $string);
         $string = preg_replace('/\[skype\]([^\[\]]+)\[\/skype\]/i', '<a href="skye:$1?call" class="skype">$1</a>', $string);
 
+        $string = str_ireplace("[year]", Template::getYear(), $string);
+        $string = str_ireplace("[homepage_owner]", Template::getHomepageOwner(), $string);
+
         preg_match_all("/\[include=([0-9]+)]/i", $string, $match);
 
         if (count($match) > 0) {
