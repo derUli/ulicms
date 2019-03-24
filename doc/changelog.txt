@@ -1,3 +1,8 @@
+===== Neues in UliCMS 2019.2.2 =====
+
+Neue Features
+* Footer Text bearbeiten
+
 ===== Neues in UliCMS 2019.2.1 =====
 
 Neue Features:
