@@ -1,12 +1,11 @@
 /* Space out content a bit */
 body {
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 #search-form-head input[type="search"] {
-    margin-top: 8px;
-    margin-left: 15px;
+    margin-top: 10px;
 }
 
 .rss-icon a {
@@ -29,10 +28,14 @@ body {
 }
 
 .advertisement {
-    margin-top: 40px;
+    margin-top: 20px;
     margin-bottom: 20px;
     text-align: center;
     clear: both;
+
+    a {
+        display: inline-block;
+    }
 }
 
 .thumbs-container {
@@ -90,18 +93,10 @@ html {
     border-radius: 0px;
 }
 
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
-.footer {
-    padding-right: 15px;
-    padding-left: 15px;
-}
-
 /* Custom page header */
 .header {
-    padding-bottom: 10px;
     border-bottom: 1px solid #e5e5e5;
+    padding-bottom: 10px;
 }
 /* Make the masthead heading the same height as the navigation */
 .header h3 {
@@ -146,17 +141,7 @@ html {
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
-    /* Remove the padding we set earlier */
-    .header,
-    .marketing,
-    .footer {
-        padding-right: 0;
-        padding-left: 0;
-    }
-    /* Space out the masthead */
-    .header {
-        margin-bottom: 30px;
-    }
+
     /* Remove the bottom border on the jumbotron for visual effect */
     .jumbotron {
         border-bottom: 0;
@@ -217,7 +202,6 @@ code {
     border: 1px dotted blue;
     font-size: 0.7em;
     word-wrap: break-word;
-    /* Internet Explorer 5.5+ */
     font-family: Pragmata, Menlo, "DejaVu LGC Sans Mono", "DejaVu Sans Mono",
         Consolas, "Everson Mono", "Lucida Console", "Andale Mono", "Nimbus Mono L",
         "Liberation Mono", FreeMono, "Osaka Monospaced", Courier, "New Courier",
