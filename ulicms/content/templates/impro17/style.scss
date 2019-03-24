@@ -7,7 +7,8 @@ body {
 }
 
 #search-form-head input[type="search"] {
-    margin-top: $default-vertical-margin;
+    margin-top: 8px;
+    display: inline-block;
 }
 
 .search-form{
@@ -286,11 +287,16 @@ nav ul li:hover ul {
     nav ul {
         display: none;
     }
-    .header h3 {
-        float: left;
-        margin-bottom: 8px;
-        width: 70%;
-        margin-top: 8px;
+    .header{
+        padding-bottom: 0;
+
+        h3 {
+            float: left;
+            margin-bottom: 0;
+            width: 70%;
+            margin-top: 8px;
+            margin-right: 0;
+        }
     }
     .slicknav_btn,
     .slicknav_nav {
@@ -323,9 +329,8 @@ nav ul li:hover ul {
     #search-form-head input[type="search"] {
         width: 100%;
         display: block;
-        margin-top: 20px;
-        margin-bottom: 20px;
-        margin-left: 0px;
+        margin-top: $default-vertical-margin;
+        margin-bottom: $default-vertical-margin;
     }
 }
 
@@ -364,6 +369,7 @@ iframe {
 
 .header h3 {
     width: inherit;
+    margin-right: 10px
 }
 
 .thumbs-container {
