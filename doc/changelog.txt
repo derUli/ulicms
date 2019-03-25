@@ -23,12 +23,12 @@ Neue Features:
 * Das Feld "Custom Data (JSON)" wird nun validiert
 * Die Tastenkombination ctrl+s (PC) bzw. cmd+s (Mac) löst nun das Absenden eines Formulars aus
 * Script und Style Helper fügen den nun einen Timestamp an den Pfad an um
-ungewünschtes Caching zu verhindern7
+ungewünschtes Caching zu verhindern
 * SQL Migrations von Installer und Updates vereint
 * Neue Optionen in der Konfigurationsdatei unterstützt
 * Design Optimierungen an der Userverwaltung durchgeführt
 * Zeige eine Warnung im Backend, wenn eine veraltete PHP Version verwendet wird.
-* Die E-Mail mit den Zugangsdaten, welche man optional beim anlegen von Usern versenden kann,
+* Die E-Mail mit den Zugangsdaten, welche man optional beim Anlegen von Usern versenden kann,
   kann nun per Default Template angepasst werden.
 
 Neue API-Methoden:
@@ -45,7 +45,6 @@ veraltete API-Methoden:
 
 Entfernte API-Methoden:
 * is_in_include_path($find)
-* adduser($username, $lastname, $firstname, $email, $password, $sendMessage = true, $acl_group = null, $require_password_change = 0, $admin = 0, $locked = 0, $default_language = null)
 
 Verbesserungen:
 * Die Funktion "Neues Logo hochladen" befindet sich nun in den Design-Einstellungen
