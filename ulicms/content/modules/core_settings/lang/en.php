@@ -40,3 +40,6 @@ add_translation("commentable_content_types", "Commentable Content Types");
 add_translation("keep_spam_ips", "Keep ip addresses of spam comments");
 
 add_translation("min_time_to_fill_form_help", "One word per line. Parts of a string are also detected.");
+
+add_translation("footer", "Footer");
+add_translation("edit_footer_text", "Edit Footer Text");

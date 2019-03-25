@@ -1,17 +1,14 @@
 <?php
 
-class Settings
-{
+class Settings {
 
-    public static function register($key, $value, $type = 'str')
-    {
+    public static function register($key, $value, $type = 'str') {
         self::init($key, $value, $type);
     }
 
-    public static function init($key, $value, $type = 'str')
-    {
+    public static function init($key, $value, $type = 'str') {
         $retval = false;
-        if (! self::get($key)) {
+        if (!self::get($key)) {
             self::set($key, $value, $type);
             $retval = true;
             SettingsCache::set($key, $value);
@@ -19,8 +16,7 @@ class Settings
         return $retval;
     }
 
-    public static function preloadAll()
-    {
+    public static function preloadAll() {
         $query = db_query("SELECT name, value FROM " . tbname("settings"));
         while ($result = Database::fetchObject($query)) {
             SettingsCache::set($result->name, $result->value);
@@ -28,9 +24,8 @@ class Settings
     }
 
     // get a config variable
-    public static function get($key, $type = 'str')
-    {
-        if (! is_null(SettingsCache::get($key))) {
+    public static function get($key, $type = 'str') {
+        if (!is_null(SettingsCache::get($key))) {
             return SettingsCache::get($key);
         }
         $key = db_escape($key);
@@ -47,24 +42,21 @@ class Settings
         }
     }
 
-    public static function output($key, $type = 'str')
-    {
+    public static function output($key, $type = 'str') {
         $value = self::get($key, $type);
         if ($value) {
             echo $value;
         }
     }
 
-    public static function outputEscaped($key, $type = 'str')
-    {
+    public static function outputEscaped($key, $type = 'str') {
         $value = self::get($key, $type);
         if ($value) {
             echo htmlspecialchars($value, ENT_QUOTES, "UTF-8");
         }
     }
 
-    public static function getLang($name, $lang, $type = 'str')
-    {
+    public static function getLang($name, $lang, $type = 'str') {
         $retval = false;
         $config = self::get($name . "_" . $lang, $type);
         if ($config) {
@@ -76,8 +68,7 @@ class Settings
     }
 
     // Set a configuration Variable;
-    public static function set($key, $value, $type = 'str')
-    {
+    public static function set($key, $value, $type = 'str') {
         $key = db_escape($key);
         $originalValue = self::convertVar($value, $type);
         $value = db_escape($originalValue);
@@ -87,7 +78,7 @@ class Settings
         } else {
             db_query("INSERT INTO " . tbname("settings") . " (name, value) VALUES('$key', '$value')");
         }
-        
+
         $logger = LoggerRegistry::get("audit_log");
         $userId = get_user_id();
         if ($logger) {
@@ -104,16 +95,14 @@ class Settings
     }
 
     // Remove an configuration variable
-    public static function delete($key)
-    {
+    public static function delete($key) {
         $key = db_escape($key);
         db_query("DELETE FROM " . tbname("settings") . " WHERE name='$key'");
         SettingsCache::set($key, null);
         return db_affected_rows() > 0;
     }
 
-    public static function convertVar($value, $type)
-    {
+    public static function convertVar($value, $type) {
         switch ($type) {
             case 'str':
                 $value = strval($value);
@@ -131,16 +120,16 @@ class Settings
         return $value;
     }
 
-    public static function getAll($order = "name")
-    {
+    public static function getAll($order = "name") {
         $result = array();
         $query = Database::query("SELECT * FROM `{prefix}settings` order by $order", true);
-        while ($result[] = Database::fetchObject($query)) {}
+        while ($dataset = Database::fetchObject($query)) {
+            $result[] = $dataset;
+        }
         return $result;
     }
 
-    public static function mappingStringToArray($str)
-    {
+    public static function mappingStringToArray($str) {
         $str = trim($str);
         $str = normalizeLN($str, "\n");
         $lines = explode("\n", $str);
@@ -160,4 +149,5 @@ class Settings
         }
         return $result;
     }
+
 }

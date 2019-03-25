@@ -46,26 +46,26 @@ if (!$searchPage) {
             ?>;
         }
     </style>
-<?php
-enqueueStylesheet(getTemplateDirPath("impro17") . "style.scss");
-combinedStylesheetHtml();
-?>
+    <?php
+    enqueueStylesheet(getTemplateDirPath("impro17") . "style.scss");
+    combinedStylesheetHtml();
+    ?>
 </head>
 <body class="<?php body_classes(); ?>">
     <div class="container" id="root">
         <div class="header clearfix">
             <nav>
-<?= jumbotron_get_menu("top"); ?>
+                <?= jumbotron_get_menu("top"); ?>
             </nav>
             <h3 class="text-muted">
                 <a href="/">
-<?php homepage_title(); ?></a>
+                    <?php homepage_title(); ?></a>
             </h3>
 
             <div id="mobile-nav"></div>
-<?php
-if ((!containsModule(null, "extended_search") and ! containsModule(null, "search")) and $hasSearch and $searchPage) {
-    ?>
+            <?php
+            if ((!containsModule(null, "extended_search") and ! containsModule(null, "search")) and $hasSearch and $searchPage) {
+                ?>
                 <form id="search-form-head" method="get"
                       action="<?php Template::escape(buildSEOURL($searchPage->systemname)); ?>">
                     <input type="search" required="required" name="q"
@@ -73,26 +73,26 @@ if ((!containsModule(null, "extended_search") and ! containsModule(null, "search
                            autosave="<?php echo md5($_SERVER ["SERVER_NAME"]); ?>"
                            placeholder="<?php translate("search"); ?>...">
                 </form>
-<?php } ?>
+            <?php } ?>
         </div>
-            <?php if (is_frontpage()) { ?>
+        <?php if (is_frontpage()) { ?>
             <div class="jumbotron">
-            <?php
-            if (getconfig("logo_disabled") == "no") {
-                logo();
-            }
-            ?>
+                <?php
+                if (getconfig("logo_disabled") == "no") {
+                    logo();
+                }
+                ?>
                 <p class="lead"><?php echo Settings::get("motd"); ?></p>
                 <p>
                     <a class="btn btn-lg btn-success" href="admin/" role="button"><?php translate("login") ?></a>
                 </p>
             </div>
-<?php } ?>
+        <?php } ?>
 
         <div class="row marketing">
-        <?php if ($motto) { ?>
+            <?php if ($motto) { ?>
                 <blockquote>
-                <?php Template::escape($motto); ?></blockquote>
+                    <?php Template::escape($motto); ?></blockquote>
             <?php } ?>
             <main>
                 <?php Template::headline(); ?>

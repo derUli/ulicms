@@ -7,7 +7,7 @@ class Response {
             HTTPStatusCodeResult($status);
         }
         if ($redirect) {
-            Response::redirect($url, $redirectStatus);
+            Response::redirect($redirect, $redirectStatus);
         }
     }
 
