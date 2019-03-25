@@ -21,15 +21,17 @@ class HelperRegistry {
                         $path = getModulePath($module, true) . trim($value, "/");
                         if (!endsWith($path, ".php")) {
                             $path .= ".php";
-                        } else {
-                            throw new FileNotFoundException("Module {$module}: File '{$path}' not found.");
                         }
                         $helperRegistry[$key] = $path;
                     }
                 }
             }
             foreach ($helperRegistry as $key => $value) {
-                require $value;
+                if (is_file($value)) {
+                    require $value;
+                } else {
+                    throw new FileNotFoundException("Module {$module}: File '{$path}' not found.");
+                }
                 if (class_exists($key)) {
                     $classInstance = new $key();
                     if ($classInstance instanceof Helper) {

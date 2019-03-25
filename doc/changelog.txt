@@ -5,6 +5,8 @@ Neue Features
 
 Fehlerkorrekturen:
 * In den Experteneinstellungen wird ein leerer Datensatz angezeigt
+* Wenn die metadata.json eines Moduls eine "helpers" Sektion enthält,
+  verursacht das einen fatalen Fehler (FileNotFoundException)
 
 ===== Neues in UliCMS 2019.2.1 =====
 
