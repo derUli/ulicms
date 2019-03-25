@@ -1,9 +1,9 @@
 $default-vertical-margin: 10px;
 
 /* Space out content a bit */
-body {
-    padding-top: $default-vertical-margin;
-    padding-bottom: $default-vertical-margin;
+#root {
+    margin-top: $default-vertical-margin;
+    margin-bottom: $default-vertical-margin;
 }
 
 #search-form-head input[type="search"] {
