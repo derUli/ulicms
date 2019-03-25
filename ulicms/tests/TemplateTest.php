@@ -15,7 +15,8 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
             "motto_de",
             "motto_en",
             "motto_fr",
-            "homepage_owner"
+            "homepage_owner",
+            "footer_text"
         );
         foreach ($settings as $setting) {
             $this->savedSettings[$setting] = Settings::get($setting);
@@ -30,7 +31,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $this->cleanUp();
 
         foreach ($this->savedSettings as $key => $value) {
-            Settings::set($key, $this->savedSettings[$key]);
+            Settings::set($key, $value);
         }
     }
 
@@ -183,6 +184,14 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
     public function testGetHomepageOwner() {
         Settings::set("homepage_owner", "John Doe");
         $this->assertEquals("John Doe", Template::getHomepageOwner());
+    }
+
+    public function testGetFooterText() {
+        Settings::set("footer_text", "&copy; (C) [year] by John Doe");
+
+        $year = date("Y");
+
+        $this->assertEquals("&copy; (C) {$year} by John Doe", Template::getFooterText());
     }
 
 }

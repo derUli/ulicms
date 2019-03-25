@@ -503,7 +503,7 @@ color:" . Settings::get("body-text-color") . ";
     }
 
     public static function getFooterText() {
-        return replaceShortcodesWithModules(Settings::getLang("footer_text", getCurrentLanguage()));
+        return replaceShortcodesWithModules(Settings::get("footer_text"));
     }
 
     public static function footerText() {
