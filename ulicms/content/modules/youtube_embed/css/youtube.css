@@ -1,0 +1,17 @@
+.yt-iframe-container {
+	position: relative;
+	margin-bottom: 30px;
+	padding-bottom: 56.25%;
+	padding-top: 25px;
+	height: 0;
+	max-width: 100%;
+}
+
+.yt-iframe-container iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border: none;
+}
