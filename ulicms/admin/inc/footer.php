@@ -10,7 +10,8 @@ $translation->render();
     <br />
 </div>
 </div>
-<p id="footer">
+</div>
+<div id="footer">
 
     <?php do_event("admin_copyright_footer_left"); ?>
     &copy; 2011 - <?php cms_release_year(); ?> by <a
@@ -18,7 +19,6 @@ $translation->render();
 
     <?php do_event("admin_copyright_footer_right"); ?>
 </p>
-</div>
 </div>
 </div>
 <?php do_event("backend_footer"); ?>

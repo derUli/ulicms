@@ -120,7 +120,7 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
               do_event("after_backend_header");
               ?>
         <div
-            class="container-fluid main <?php
+            class="container main <?php
             if (get_action()) {
                 echo 'action-' . Template::getEscape(get_action());
             }

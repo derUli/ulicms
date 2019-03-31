@@ -263,9 +263,9 @@ a {
         text-decoration: underline;
     }
 }
-p#footer {
+div#footer {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 table {
     width: 100%;
@@ -523,9 +523,8 @@ div#login-welcome-text {
     }
 }
 .main {
-    margin-top: 20px;
-    margin-left: 5px;
-    margin-right: 5px;
+    margin-top: 10px;
+    width:98%;
 }
 .ulicms-logo {
     max-width: 100%;
@@ -898,6 +897,9 @@ pre {
     }
 }
 @media (max-width: 1200px) {
+    .main{
+        width:100%;
+    }
     table.tablesorter {
         .header {
             background-image: none !important;
