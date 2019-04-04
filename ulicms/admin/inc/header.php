@@ -66,7 +66,7 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
             enqueueScriptFile($script);
         }
 
-        echo Script::FromFile("ckeditor/ckeditor.js");
+        echo Script::FromFile("../node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js");
 
         combinedScriptHtml();
         ?>

@@ -15,8 +15,8 @@ $(document).ready(function () {
     }, 800);
 });
 
+// TODO: Das hier in kleinere Blöcke zerhacken
 $(function () {
-
     var language = $("html").data("select2-language");
     // toggle hamburger menu
     $("#menu-toggle").click(function () {
@@ -45,6 +45,19 @@ $(function () {
         },
         columnDefs: [{targets: "no-sort", orderable: false}]
     });
+
+    var editors = $(".ckeditor");
+    editors.each(function (index, element) {
+        ClassicEditor
+                .create(element)
+                .then(editor => {
+                    window.editor = editor;
+                })
+                .catch(err => {
+                    console.error(err.stack);
+                });
+    });
+
     $(".coming-soon").click(function (event) {
         event.preventDefault();
         bootbox.alert("Coming Soon!");
