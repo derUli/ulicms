@@ -34,7 +34,7 @@ CKEDITOR.editorConfig = function (config) {
     // to make it possible to select text in editor
     if (isTouchDevice()) {
         console.log("CKEditor: This is a touchscreen device. Disable Context Menu")
-        config.removePlugins += ",contextmenu";
+        config.removePlugins += ',colordialog,liststyle,tabletools,contextmenu,';
     } else
     {
         console.log("CKEditor: Can't touch this");
