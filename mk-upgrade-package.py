@@ -24,20 +24,24 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-z", "--zip", help="Compress with zip", action="store_true")
     parser.add_argument("-d", "--delete", help="empty folder if exists", action="store_true")
+    parser.add_argument("-c", "--with-config-js", help="include config.js", action="store_true")
     parser.add_argument('-t', '--target', action="store", dest="target", required=True, help="Target directory")
+
     args = parser.parse_args()
     target = os.path.expanduser(args.target)
     target = os.path.abspath(args.target)
     source_dir = os.path.dirname(__file__)
 
-    ignore = ('.git', "doc-src", "press", "phpCB-1.0.1-linux", "*.py", "*.pyc",
+    ignore = ['.git', "doc-src", "press", "phpCB-1.0.1-linux", "*.py", "*.pyc",
                        "Releases", "cms-config.php", "content", "services",
                        ".gitignore", ".htaccess", "installer.aus", "installer",
               "modules", "templates", "contents.css",
-              "config.js", "comments", "*~", ".settings", ".project", ".buildpath",
+              "comments", "*~", ".settings", ".project", ".buildpath",
               "tests", "run-tests.sh", "run-tests.bat",
               "run-tests.xampp.mac.sh", ".pydevproject", "CMSConfig.php", "log",
-              "configurations", ".phpunit.result.cache", "nbproject")
+              "configurations", ".phpunit.result.cache", "nbproject"]
+    if not args.with_config_js:
+        ignore.append("config.js")
 
     IGNORE_PATTERNS = shutil.ignore_patterns(*ignore)
     if args.delete and os.path.exists(target):
@@ -93,7 +97,7 @@ def main():
                     line = "            $this->buildDate = " + timestamp + "; // {InsertBuildDate}\r\n"
                 print(line)
                 f.write(line)
-    
+
     archive_name = os.path.join(target, "..", os.path.basename(target) + ".zip")
 
     main_dir = os.path.join(target, "ulicms")
