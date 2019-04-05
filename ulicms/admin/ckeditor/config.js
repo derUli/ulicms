@@ -5,8 +5,8 @@
  */
 
 CKEDITOR.editorConfig = function (config) {
-    // config.language = 'de';
-    // Bootstrap soll eingebunden werden
+// config.language = 'de';
+// Bootstrap soll eingebunden werden
     config.contentsCss = [CKEDITOR.basePath + 'contents.css',
         '//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css']
     config.ShiftEnterMode = 'p';
@@ -28,7 +28,17 @@ CKEDITOR.editorConfig = function (config) {
     }
     config.entities_latin = false;
     config.uiColor = '#d1d8d0';
+
     config.removePlugins = "link,newpage,templates,preview,print,save,language,autoembed";
+    // disable contextmenu on touchy things
+    // to make it possible to select text in editor
+    if (isTouchDevice()) {
+        console.log("CKEditor: This is a touchscreen device. Disable Context Menu")
+        config.removePlugins += ",contextmenu";
+    } else
+    {
+        console.log("CKEditor: Can't touch this");
+    }
     config.autoGrow_onStartup = false;
     config.extraPlugins = 'adv_link,font';
 };

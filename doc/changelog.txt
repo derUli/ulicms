@@ -1,5 +1,10 @@
 ===== Neues in UliCMS 2019.2.2 =====
 
+Neue Features:
+* Kontextmenü-Plugin von CKEditor ist auf Geräten mit Touchscreen nun deaktiviert
+
+===== Neues in UliCMS 2019.2.2 =====
+
 Neue Features
 * Footer Text bearbeiten
 
