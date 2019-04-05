@@ -15,7 +15,8 @@
     "controllers": {
         "PageController": "controllers/PageController.php",
         "CategoryController": "controllers/CategoryController.php",
-        "BannerController": "controllers/BannerController.php"
+        "BannerController": "controllers/BannerController.php",
+        "FileUploadController": "controllers/FileUploadController.php"
     },
     "objects": {
         "UliCMS\\CoreContent\\Models\\ViewModels\\DiffViewModel": "models/DiffViewModel.php"
@@ -31,6 +32,7 @@
         "CategoryController::deletePost": "categories",
         "BannerController::deletePost": "banners",
         "BannerController::createPost": "banners",
-        "BannerController::updatePost": "banners"
+        "BannerController::updatePost": "banners",
+        "FileUploadController::uploadImage": "images"
     }
 }

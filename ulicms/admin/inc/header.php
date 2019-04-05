@@ -115,7 +115,8 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
     ?>
     <body class="<?php esc($cssClasses); ?>"
           data-datatables-translation="<?php echo DataTablesHelper::getLanguageFileURL(getSystemLanguage()); ?>"
-          data-ckeditor-skin="<?php esc(Settings::get("ckeditor_skin")); ?>">
+          data-ckeditor-skin="<?php esc(Settings::get("ckeditor_skin")); ?>"
+          data-upload-url="<?php esc(ModuleHelper::buildMethodCallUrl("FileUploadController", "uploadImage", "csrf_token=" . get_csrf_token())); ?>">
               <?php
               do_event("after_backend_header");
               ?>

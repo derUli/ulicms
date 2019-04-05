@@ -49,7 +49,11 @@ $(function () {
     var editors = $(".ckeditor");
     editors.each(function (index, element) {
         ClassicEditor
-                .create(element)
+                .create(element, {
+                    ckfinder: {
+                        uploadUrl: $("body").data("upload-url")
+                    }
+                })
                 .then(editor => {
                     window.editor = editor;
                 })
