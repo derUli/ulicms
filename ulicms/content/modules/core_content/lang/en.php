@@ -1,4 +1,5 @@
 <?php
+
 add_translation("EMPTY_RECYCLE_BIN", "Empty Recycle Bin");
 add_translation("WANNA_EMPTY_TRASH", "Would you like to empty the recycle bin?");
 
@@ -13,3 +14,6 @@ add_translation("confirm_exit_without_save", "If you leave this page unsaved cha
 add_translation("date_to", "Date to");
 
 add_translation("banner", get_translation("advertisements"));
+
+add_translation("upload_failed", "File upload failed.");
+add_translation("no_files_uploaded", "No File was uploaded.");

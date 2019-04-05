@@ -7,7 +7,6 @@ class FileUploadController extends Controller {
 
         $success = false;
 
-
         if (isset($_FILES["upload"])) {
             $file = $_FILES["upload"];
             $originalFilename = basename($file["name"]);
@@ -20,11 +19,9 @@ class FileUploadController extends Controller {
                 mkdir($uploadDir, umask(), true);
             }
 
-            // FIXME: Append timestamp to filename
-            // to prevent accidentally overwriting files
             $fileNameWithTimestamp = time() . "-" . $originalFilename;
-            $uploadFile = "$uploadDir/$fileNameWithTimestamp";
 
+            $uploadFile = "$uploadDir/$fileNameWithTimestamp";
             $uploadUrl = ModuleHelper::getBaseUrl(apply_filter("/content/images/ckeditor-uploads/$fileNameWithTimestamp", "ckeditor_upload_url"));
 
             if (startsWith($type, "image") and move_uploaded_file($tempFileName, $uploadFile)) {
