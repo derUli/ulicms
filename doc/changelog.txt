@@ -1,4 +1,4 @@
-===== Neues in UliCMS 2019.2.2 =====
+===== Neues in UliCMS 2019.2.3 =====
 
 Neue Features:
 * Kontextmenü-Plugin von CKEditor ist auf Geräten mit Touchscreen nun deaktiviert
