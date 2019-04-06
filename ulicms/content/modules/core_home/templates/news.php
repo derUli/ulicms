@@ -1,18 +1,22 @@
 <?php
-if (! Settings::get("disable_ulicms_newsfeed")) {
+
+if (!Settings::get("disable_ulicms_newsfeed")) {
     @session_start();
     $rss = new DOMDocument();
     $feeds = array();
-    $feeds["de"] = "http://www.ulicms.de/blog_rss.php?s=aktuelles&lang=de";
-    $feeds["en"] = "http://en.ulicms.de/blog_rss.php?s=aktuelles&lang=en";
-    
+    $feeds["de"] = "https://www.ulicms.de/blog_rss.php?s=aktuelles&lang=de";
+    $feeds["en"] = "https://en.ulicms.de/blog_rss.php?s=aktuelles&lang=en";
+
     if (isset($feeds[$_SESSION["system_language"]])) {
         $feed_url = $feeds[$_SESSION["system_language"]];
     } else {
         $feed_url = $feeds["en"];
     }
-    
-    $rss->load($feed_url);
+
+    $xml = file_get_contents_wrapper($feed_url, true);
+
+    $rss->loadXML($xml);
+
     $feed = array();
     foreach ($rss->getElementsByTagName('item') as $node) {
         $item = array(
@@ -23,9 +27,9 @@ if (! Settings::get("disable_ulicms_newsfeed")) {
         );
         array_push($feed, $item);
     }
-    
+
     $limit = 5;
-    
+
     header("Content-Type: text/html; charset=UTF-8");
     for ($x = 0; $x < $limit; $x ++) {
         $title = str_replace(' & ', ' &amp; ', $feed[$x]['title']);
