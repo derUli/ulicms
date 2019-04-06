@@ -19,6 +19,7 @@ if (!$_SESSION["require_password_change"]) {
         <p><?php translate("require_password_change_notice"); ?></p>
         <strong><?php translate("password"); ?></strong> <input
             name="password" id="password" type="password"
+            class="password-security-check"
             autocomplete="new-password"> <br /> <br /> <strong><?php translate("password_repeat"); ?> </strong>
         <input name="password_repeat" id="password_repeat" type="password"
                autocomplete="new-password"> <br /></br>

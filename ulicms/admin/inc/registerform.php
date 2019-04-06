@@ -79,7 +79,8 @@ if (Settings::get("visitors_can_register") == "off" or ! Settings::get("visitors
         </strong><br /> <input type="email" required="required"
                                name="email" value=""><br /> <strong><?php translate("password"); ?>
         </strong><br /> <input type="password" required="required"
-                               name="password" value="" autocomplete="new-password"><br /> <strong><?php translate("password_repeat"); ?>
+                               name="password" value="" autocomplete="new-password"
+                               class="password-security-check"><br /> <strong><?php translate("password_repeat"); ?>
         </strong><br /> <input type="password" required="required"
                                name="password_repeat" value="" autocomplete="new-password">
                                <?php do_event("register_form_field"); ?>

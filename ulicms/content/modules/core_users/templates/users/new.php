@@ -33,6 +33,7 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
             <div class="col-xs-12 col-md-6">
                 <strong><?php translate("password"); ?>*</strong><br />
                 <input type="password" required="required" name="password"
+                       class="password-security-check"
                        id="password" value="" autocomplete="new-password"> <br />
             </div>
 
