@@ -34,12 +34,12 @@ $(function () {
     });
 
     $('.password-security-check').password({
-        shortPass: 'The password is too short',
-        badPass: 'Weak; try combining letters & numbers',
-        goodPass: 'Medium; try using special charecters',
-        strongPass: 'Strong password',
-        containsUsername: 'The password contains the username',
-        enterPass: 'Type your password',
+        shortPass: PasswordSecurityTranslation.ShortPass,
+        badPass: PasswordSecurityTranslation.BadPass,
+        goodPass: PasswordSecurityTranslation.GoodPass,
+        strongPass: PasswordSecurityTranslation.StrongPass,
+        containsUsername: PasswordSecurityTranslation.ContainsUsername,
+        enterPass: PasswordSecurityTranslation.EnterPass,
         showPercent: false,
         showText: true, // shows the text tips
         animate: true, // whether or not to animate the progress bar on input blur/focus
