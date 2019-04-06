@@ -15,6 +15,7 @@ if (!$_SESSION["require_password_change"]) {
     ?>
     <form id="change_password_form" action="index.php" method="post">
         <?php csrf_token_html(); ?>
+		<input name="username" type="hidden" value="<?php esc( $_SESSION["ulicms_login"]);?>">
         <h1><?php translate("change_password"); ?></h1>
         <p><?php translate("require_password_change_notice"); ?></p>
         <strong><?php translate("password"); ?></strong> <input
