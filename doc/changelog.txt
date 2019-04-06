@@ -1,3 +1,8 @@
+===== Neues in UliCMS 2019.2.4 =====
+
+Fehlerkorrekturen:
+* Auto-Completion für Passwortfelder korrigiert
+
 ===== Neues in UliCMS 2019.2.3 =====
 
 Neue Features:

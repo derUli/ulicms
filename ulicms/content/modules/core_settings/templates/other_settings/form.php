@@ -269,8 +269,7 @@ if (!$permissionChecker->hasPermission("other")) {
                         <input type="text" name="smtp_user"
                                value="<?php
                                echo real_htmlspecialchars($smtp_user);
-                               ?>"
-                               autocomplete="off">
+                               ?>">
                     </div>
 
                     <div class="label">
@@ -281,7 +280,7 @@ if (!$permissionChecker->hasPermission("other")) {
                                value="<?php
                                echo real_htmlspecialchars($smtp_password);
                                ?>"
-                               autocomplete="off">
+                               autocomplete="new-password">
                     </div>
                 </div>
             </div>
