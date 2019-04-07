@@ -747,5 +747,11 @@ add_translation("admin_created_an_account", "An administrator created a user acc
 add_translation("here_are_your_credentials", "Here are your credentials:");
 add_translation("new_user_account_at_site", "New User Account for %domain%");
 
+add_translation("short_pass", "The password is too short");
+add_translation("bad_pass", "Weak; try combining letters & numbers");
+add_translation("good_pass", "Medium; try using special charecters");
+add_translation("strong_pass", "Strong password");
+add_translation("contains_username", "The password contains the username");
+add_translation("enter_pass", "Type your password");
 
 do_event("lang_en");

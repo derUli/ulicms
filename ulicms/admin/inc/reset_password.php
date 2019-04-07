@@ -3,7 +3,7 @@ if (Settings::get("disable_password_reset")) {
     translate("function_is_disabled");
 } else {
     ?>
-<?php
+    <?php
     $messame = null;
     if (isset($_POST["username"]) and ! empty($_POST["username"])) {
         $username = $_POST["username"];
@@ -18,43 +18,41 @@ if (Settings::get("disable_password_reset")) {
         }
     }
     ?>
-<p>
-	<a href="./" class="btn btn-default btn-back"><i
-		class="fa fa-arrow-left"></i> <?php
-    
-    translate("back_to_login");
-    ?></a>
-</p>
-<h1>
-<?php translate("reset_password");?>
-</h1>
-<form action="index.php?reset_password" method="post">
-<?php
-    csrf_token_html();
-    ?><p>
-		<strong><?php
-    
+    <p>
+        <a href="./" class="btn btn-default btn-back"><i
+                class="fa fa-arrow-left"></i> <?php
+                translate("back_to_login");
+                ?></a>
+    </p>
+    <h1>
+        <?php translate("reset_password"); ?>
+    </h1>
+    <form action="index.php?reset_password" method="post">
+        <?php
+        csrf_token_html();
+        ?><p>
+            <strong><?php
     translate("username");
-    ?>
-	</strong> <br /> <input type="text" name="username" value="" required>
-	</p>
-	<p>
-		<button type="submit" class="btn btn-warning"><i class="fa fa-lock"></i> <?php
-    translate("reset_password");
-    ?></button>
-	</p>
-		<?php
-    if ($message) {
         ?>
-	<p class="ulicms_error">
-	<?php
-        echo htmlspecialchars($message);
-        ?>
-	</p>
+            </strong> <br /> <input type="text" name="username" value="" required>
+        </p>
+        <p>
+            <button type="submit" class="btn btn-warning"><i class="fa fa-lock"></i> <?php
+            translate("reset_password");
+            ?></button>
+        </p>
+                <?php
+                if ($message) {
+                    ?>
+            <p class="ulicms_error">
+            <?php
+            echo htmlspecialchars($message);
+            ?>
+            </p>
 
-	<?php
+        <?php
     }
     ?>
-</form>
-<?php
-} 
+    </form>
+        <?php
+    }

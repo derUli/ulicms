@@ -10,7 +10,7 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
            class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
     </p>
     <form action="index.php?sClass=UserController&sMethod=create"
-          method="post" autocomplete="off" id="edit_user" class="voffset3-5">
+          method="post" id="edit_user" class="voffset3-5">
               <?php csrf_token_html(); ?>
         <input type="hidden" name="add_admin" value="add_admin"> <strong><?php translate("username"); ?>*</strong><br />
         <input type="text" required="required" name="username" value="">
@@ -33,13 +33,14 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
             <div class="col-xs-12 col-md-6">
                 <strong><?php translate("password"); ?>*</strong><br />
                 <input type="password" required="required" name="password"
-                       id="password" value="" autocomplete="off"> <br />
+                       class="password-security-check"
+                       id="password" value="" autocomplete="new-password"> <br />
             </div>
 
             <div class="col-xs-12 col-md-6">
                 <strong><?php translate("password_repeat"); ?>*</strong><br />
                 <input type="password" required="required" name="password_repeat"
-                       id="password_repeat" value="" autocomplete="off">
+                       id="password_repeat" value="" autocomplete="new-password">
                 <br />
             </div>
         </div>

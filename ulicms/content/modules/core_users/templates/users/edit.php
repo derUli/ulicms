@@ -21,7 +21,7 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
         </p>
         <form action="index.php?sClass=UserController&sMethod=update"
               name="userdata_form" method="post" enctype="multipart/form-data"
-              id="edit_user" class="voffset3-5" autocomplete="off">
+              id="edit_user" class="voffset3-5">
                   <?php csrf_token_html(); ?>
             <img
                 src="<?php
@@ -72,12 +72,13 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
                 <div class="col-xs-12 col-md-6">
                     <strong><?php translate("new_password"); ?></strong><br />
                     <input type="password" name="password" id="password"
-                           value="" autocomplete="off"><br /> </div>
+                           class="password-security-check"
+                           value="" autocomplete="new-password"><br /> </div>
 
                 <div class="col-xs-12 col-md-6">
                     <strong><?php translate("password_repeat"); ?></strong><br />
                     <input type="password" name="password_repeat"
-                           id="password_repeat" value="" autocomplete="off"> <br />
+                           id="password_repeat" value="" autocomplete="new-password"> <br />
                 </div></div>
             <?php
             $permissionChecker = new ACL();

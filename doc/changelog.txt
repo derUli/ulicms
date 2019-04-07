@@ -1,3 +1,16 @@
+===== Neues in UliCMS 2019.2.4 =====
+
+Neue Features:
+* Anzeige der Passwortsicherheit
+
+Fehlerkorrekturen:
+* Auto-Completion für Passwortfelder korrigiert
+
+===== Neues in UliCMS 2019.2.3 =====
+
+Neue Features:
+* Kontextmenü-Plugin von CKEditor ist auf Geräten mit Touchscreen nun deaktiviert
+
 ===== Neues in UliCMS 2019.2.2 =====
 
 Neue Features
