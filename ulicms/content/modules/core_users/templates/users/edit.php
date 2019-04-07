@@ -72,6 +72,7 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
                 <div class="col-xs-12 col-md-6">
                     <strong><?php translate("new_password"); ?></strong><br />
                     <input type="password" name="password" id="password"
+                           class="password-security-check"
                            value="" autocomplete="new-password"><br /> </div>
 
                 <div class="col-xs-12 col-md-6">

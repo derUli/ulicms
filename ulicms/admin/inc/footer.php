@@ -1,6 +1,20 @@
 <?php
-$translation = new JsTranslation(array("logout", "on", "off"), "MenuTranslation");
-$translation->render();
+$menuTranslation = new JsTranslation(
+        array("logout", "on", "off"), "MenuTranslation");
+$menuTranslation->render();
+
+$passwordSecurityTranslation = new JSTranslation(
+        array
+    (
+    "short_pass",
+    "bad_pass",
+    "good_pass",
+    "strong_pass",
+    "contains_username",
+    "enter_pass"
+        ),
+        "PasswordSecurityTranslation");
+$passwordSecurityTranslation->render();
 ?>
 <div id="msgcontainer">
     <img id="loading" src="gfx/loading.gif" alt="Bitte warten..."
