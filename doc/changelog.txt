@@ -3,6 +3,9 @@
 Neue Features:
 * Anzeige der Passwortsicherheit
 
+Verbesserungen:
+* Logout-Bestätigung wird nun als bootbox angezeigt
+
 Fehlerkorrekturen:
 * Auto-Completion für Passwortfelder korrigiert
 

@@ -3,8 +3,11 @@ $(document).ready(function () {
 });
 
 $(function () {
-
     var language = $("html").data("select2-language");
+
+    bootbox.setDefaults({
+        locale: $("html").data("select2-language")
+    });
     // toggle hamburger menu
     $("#menu-toggle").click(function () {
         $(".mainmenu").slideToggle();
@@ -26,6 +29,7 @@ $(function () {
         sLengthSelect: "form-control"
     });
 
+    // Sortable and searchable tables
     $(".tablesorter").DataTable({
         language: {
             url: $("body").data("datatables-translation")
@@ -33,7 +37,8 @@ $(function () {
         columnDefs: [{targets: "no-sort", orderable: false}]
     });
 
-    $('.password-security-check').password({
+    // password security check, powered by zxcvbn
+    $(".password-security-check").password({
         shortPass: PasswordSecurityTranslation.ShortPass,
         badPass: PasswordSecurityTranslation.BadPass,
         goodPass: PasswordSecurityTranslation.GoodPass,
@@ -43,15 +48,18 @@ $(function () {
         showPercent: false,
         showText: true, // shows the text tips
         animate: true, // whether or not to animate the progress bar on input blur/focus
-        animateSpeed: 'fast', // the above animation speed
+        animateSpeed: "fast", // the above animation speed
         username: $("[name=username]").length ? $("[name=username]") : false, // select the username field (selector or jQuery instance) for better password checks
         usernamePartialMatch: true, // whether to check for username partials
         minimumLength: 4 // minimum password length (below this threshold, the score is 0)
     });
+    // Links to upcoming features
+
     $(".coming-soon").click(function (event) {
         event.preventDefault();
         bootbox.alert("Coming Soon!");
     });
+    // Showing a link in an alert box
     $(".remote-alert").click(function (event) {
         event.preventDefault();
         setWaitCursor();
@@ -73,16 +81,24 @@ $(function () {
             .not("input[type=image]")
             .addClass("form-control");
 
-    // override save shor
-    // tcut to trigger submit button
+    // override save shortcut to trigger submit button
     if ($("form button[type=submit], form input[type=submit]").length) {
-        document.addEventListener("keydown", function (e) {
-            if ((window.navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey) && e.keyCode == 83) {
-                e.preventDefault();
-                $("form button[type=submit], form input[type=submit]").last().click();
-                // Process the event here (such as click on submit button)
-            }
-        }, false);
+        document.addEventListener(
+                "keydown",
+                function (e) {
+                    if (
+                            (window.navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey) &&
+                            e.keyCode == 83
+                            ) {
+                        e.preventDefault();
+                        $("form button[type=submit], form input[type=submit]")
+                                .last()
+                                .click();
+                        // Process the event here (such as click on submit button)
+                    }
+                },
+                false
+                );
     }
 
     // prettier select-boxes
@@ -90,6 +106,8 @@ $(function () {
         width: "100%",
         language: language
     });
+
+    // Toggle switches for some checkboxes
     $(".js-switch").bootstrapToggle({
         on: MenuTranslation.On,
         off: MenuTranslation.Off
@@ -102,9 +120,14 @@ $(function () {
         timepicker: false
     });
 
+    // User has to confirm logout
     $("a.backend-menu-item-logout").click(function (event) {
-        if (!window.confirm(MenuTranslation.Logout + "?")) {
-            event.preventDefault();
-        }
+        event.preventDefault();
+        var url = $(event.target).attr("href");
+        bootbox.confirm(MenuTranslation.Logout + "?", function (result) {
+            if (result) {
+                location.href = url;
+            }
+        });
     });
 });
