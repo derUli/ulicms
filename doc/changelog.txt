@@ -2,6 +2,8 @@
 
 Neue Features:
 * Anzeige der Passwortsicherheit
+* ContentPermissionCheckerPasswortsicherheit->canRead($contentId) Methode implementiert.
+  zuvor gab diese immer true zurück
 
 Verbesserungen:
 * Logout-Bestätigung wird nun als bootbox angezeigt
