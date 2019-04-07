@@ -2,9 +2,12 @@ $(document).ready(function() {
   $.ajaxSetup({ cache: false });
 });
 
-// TODO: Das hier in kleinere Blöcke zerhacken
 $(function() {
   var language = $("html").data("select2-language");
+
+  bootbox.setDefaults({
+    locale: $("html").data("select2-language")
+  });
   // toggle hamburger menu
   $("#menu-toggle").click(function() {
     $(".mainmenu").slideToggle();
@@ -126,9 +129,14 @@ $(function() {
     timepicker: false
   });
 
+  // User has to confirm logout
   $("a.backend-menu-item-logout").click(function(event) {
-    if (!window.confirm(MenuTranslation.Logout + "?")) {
-      event.preventDefault();
-    }
+    event.preventDefault();
+    var url = $(event.target).attr("href");
+    bootbox.confirm(MenuTranslation.Logout + "?", function(result) {
+      if (result) {
+        location.href = url;
+      }
+    });
   });
 });

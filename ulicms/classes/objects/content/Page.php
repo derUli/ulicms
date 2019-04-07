@@ -382,4 +382,8 @@ class Page extends Content {
         return ModuleHelper::getFullPageURLByID($this->id, $suffix);
     }
 
+    public function checkAccess() {
+        return checkAccess($this->access);
+    }
+
 }
