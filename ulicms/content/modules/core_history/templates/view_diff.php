@@ -1,7 +1,4 @@
 <?php
-
-use UliCMS\CoreContent\Models\ViewModels\DiffViewModel;
-
 $permissionChecker = new ACL ();
 if ($permissionChecker->hasPermission("pages")) {
     $diff = ControllerRegistry::get("PageController")->diffContents();
