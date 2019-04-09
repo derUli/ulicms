@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "e8426a00737e4ac45a1eeca36a2e2621",
+    "content-hash": "8885332750a86be084c23aff2493bf5d",
     "packages": [
         {
             "name": "chrisjean/php-ico",
@@ -204,6 +204,46 @@
                 "stylesheet"
             ],
             "time": "2018-07-22T01:22:08+00:00"
+        },
+        {
+            "name": "ozdemir/datatables",
+            "version": "2.1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/n1crack/datatables.git",
+                "reference": "80cfe6a9190602d39c5ae601115e0f2792b7cca5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/n1crack/datatables/zipball/80cfe6a9190602d39c5ae601115e0f2792b7cca5",
+                "reference": "80cfe6a9190602d39c5ae601115e0f2792b7cca5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.3"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "^4.0",
+                "phpunit/phpunit": "^7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ozdemir\\Datatables\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Yusuf Özdemir",
+                    "email": "yusuf@ozdemir.be"
+                }
+            ],
+            "description": "PHP Library to handle server-side processing for Datatables, in a fast and simple way.",
+            "time": "2019-01-20T09:25:03+00:00"
         },
         {
             "name": "phpfastcache/phpfastcache",
