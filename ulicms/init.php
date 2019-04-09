@@ -112,6 +112,8 @@ require_once dirname(__file__) . "/classes/objects/content/ContentFactory.php";
 require_once dirname(__file__) . "/classes/objects/content/CustomFields.php";
 require_once dirname(__file__) . "/classes/objects/content/Results.php";
 require_once dirname(__file__) . "/classes/objects/media/load.php";
+require_once dirname(__file__) . "/classes/3rdparty/finediff.php";
+
 require_once dirname(__file__) . "/UliCMSVersion.php";
 require_once dirname(__file__) . "/lib/minify.php";
 

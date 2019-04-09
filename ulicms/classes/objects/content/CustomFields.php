@@ -1,10 +1,8 @@
 <?php
 
-class CustomFields
-{
+class CustomFields {
 
-    public static function set($name, $value, $content_id = null, $addPrefix = false)
-    {
+    public static function set($name, $value, $content_id = null, $addPrefix = false) {
         if (is_null($content_id)) {
             $content_id = get_ID();
         }
@@ -16,7 +14,7 @@ class CustomFields
         if (is_array($value)) {
             $value = join("\0\0", $value);
         }
-        
+
         $content_id = intval($content_id);
         $args = array(
             $content_id,
@@ -52,23 +50,22 @@ class CustomFields
         }
     }
 
-    public static function getAll($content_id = null, $removePrefix = true)
-    {
+    public static function getAll($content_id = null, $removePrefix = true) {
         $fields = array();
         if (is_null($content_id)) {
             $content_id = get_ID();
         }
-        
+
         $content_id = intval($content_id);
         $args = array(
             $content_id
         );
         $sql = "Select name, value from {prefix}custom_fields where content_id = ?";
         $query = Database::pQuery($sql, $args, true);
-        
+
         while ($row = Database::fetchObject($query)) {
             $name = $row->name;
-            
+
             if ($removePrefix) {
                 $page = ContentFactory::getByID($content_id);
                 $prefix = "{$page->type}_";
@@ -79,8 +76,7 @@ class CustomFields
         return $fields;
     }
 
-    public static function get($name, $content_id = null, $addPrefix = true)
-    {
+    public static function get($name, $content_id = null, $addPrefix = true) {
         if (is_null($content_id)) {
             $content_id = get_ID();
         }
@@ -108,4 +104,5 @@ class CustomFields
             return null;
         }
     }
+
 }

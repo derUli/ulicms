@@ -2,8 +2,6 @@
 
 use UliCMS\CoreContent\Models\ViewModels\DiffViewModel;
 
-// @FIXME: Das hier in core_history auslagern.
-require_once ULICMS_ROOT . "/classes/3rdparty/finediff.php";
 $permissionChecker = new ACL ();
 if ($permissionChecker->hasPermission("pages")) {
     $diff = ControllerRegistry::get("PageController")->diffContents();

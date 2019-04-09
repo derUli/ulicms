@@ -1,7 +1,4 @@
 <?php
-// @FIXME: Diese beiden Includes nach core_history verschieben.
-require_once ULICMS_ROOT . "/classes/3rdparty/finediff.php";
-
 $permissionChecker = new ACL ();
 if ($permissionChecker->hasPermission("pages")) {
     $content_id = intval($_GET ["content_id"]);
