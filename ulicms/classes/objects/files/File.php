@@ -64,6 +64,17 @@ if (!defined("KCFINDER_PAGE")) {
             return ( preg_match('~^(\w+:)?//~', $path) === 0 and is_file($path));
         }
 
+        public static function toDataUri($file, $mime = null) {
+            $url = null;
+            if (is_file($file)) {
+                $mime = is_null($mime) ? get_mime($file) : $mime;
+                $data = file_get_contents($file);
+                $base64_data = base64_encode($data);
+                $url = "data:{$mime};base64,{$base64_data}";
+            }
+            return $url;
+        }
+
     }
 
 }

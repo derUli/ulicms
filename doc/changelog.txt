@@ -1,3 +1,10 @@
+===== Neues in UliCMS 2019.2.5 =====
+
+Neue API-Methoden:
+* UliCMS\HTML\imageTag($file, $htmlAttributes = array())
+* UliCMS\HTML\imageTagInline($file, $htmlAttributes = array())
+* File::toDataUri($file, $mime = null)
+
 ===== Neues in UliCMS 2019.2.4 =====
 
 Neue Features:

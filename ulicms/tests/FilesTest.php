@@ -35,4 +35,15 @@ class FilesTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(File::existsLocally("ftp://ftp.example.org"));
     }
 
+    public function testToDataUri() {
+        $this->assertNull(File::toDataUri("gibtsnicht.txt"));
+
+        $expected1 = file_get_contents(dirname(__file__) . "/fixtures/logo-data-url.txt");
+        $this->assertEquals($expected1, File::toDataUri(Path::resolve("ULICMS_ROOT/admin/gfx/logo.png")));
+
+        $expected2 = file_get_contents(dirname(__file__) . "/fixtures/hello-base64.txt");
+        $this->assertEquals($expected2,
+                File::toDataUri(Path::resolve(dirname(__file__) . "/fixtures/hello-original.txt"), "application/inf"));
+    }
+
 }
