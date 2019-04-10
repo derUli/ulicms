@@ -1,5 +1,8 @@
 ===== Neues in UliCMS 2019.2.5 =====
 
+Verbesserungen:
+* Das Löschen-Icon beim eigenen Benutzer wird nicht mehr angezeigt.
+
 Neue API-Methoden:
 * UliCMS\HTML\imageTag($file, $htmlAttributes = array())
 * UliCMS\HTML\imageTagInline($file, $htmlAttributes = array())
@@ -7,7 +10,6 @@ Neue API-Methoden:
 * Group::getCurrentGroupId()
 * Group::getDefaultPrimaryGroupId()
 * Group::getDefaultPrimaryGroup()
-
 
 Geänderte API-Methoden:
 * Group::getCurrentGroup() ist nun statisch
