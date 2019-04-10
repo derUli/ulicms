@@ -431,8 +431,8 @@ if ($permissionChecker->hasPermission("pages")) {
             $filter_sql .= "AND (title LIKE '" . db_escape($_SESSION["filter_title"]) . "%' or title LIKE '%" . db_escape($_SESSION["filter_title"]) . "' or title LIKE '%" . db_escape($_SESSION["filter_title"]) . "%' or title LIKE '" . db_escape($_SESSION["filter_title"]) . "' ) ";
         }
 
-        $group = new Group();
-        $group->getCurrentGroup();
+
+        $group = Group::getCurrentGroup();
         $userLanguage = $permissionChecker->getLanguages();
         $joined = "";
         foreach ($userLanguage as $lang) {
@@ -471,8 +471,8 @@ if ($permissionChecker->hasPermission("pages")) {
                         <?php
                         if ($permissionChecker->hasPermission("pages_create")) {
                             ?>
-                            <td style="text-align: center"><?php translate("clone"); ?>
-                            </td> -->
+                                <td style="text-align: center"><?php translate("clone"); ?>
+                                </td> -->
                         <?php } ?>
                         <td style="text-align: center"><?php translate("edit"); ?>
                         </td>

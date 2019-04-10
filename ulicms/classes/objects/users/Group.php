@@ -1,36 +1,44 @@
 <?php
 
-class Group
-{
+class Group {
 
     private $id = null;
-
     private $name = "";
-
     private $permissions = array();
-
     private $languages = array();
-
     private $allowable_tags = null;
 
-    public function __construct($id = null)
-    {
+    public function __construct($id = null) {
         $acl = new ACL();
         $this->permissions = $acl->getDefaultACLAsJSON(false, true);
-        if (! is_null($id)) {
+        if (!is_null($id)) {
             $this->loadById($id);
         }
     }
 
-    public function getCurrentGroup()
-    {
-        if (isset($_SESSION["group_id"])) {
-            $this->loadById($_SESSION["group_id"]);
-        }
+    public static function getCurrentGroupId() {
+        return isset($_SESSION["group_id"]) ? intval($_SESSION["group_id"]) : null;
     }
 
-    public static function getAll()
-    {
+    public static function getCurrentGroup() {
+        if (self::getCurrentGroupId()) {
+            return new self(self::getCurrentGroupId());
+        }
+        return null;
+    }
+
+    public static function getDefaultPrimaryGroupId() {
+        return Settings::get("default_acl_group") ? intval(Settings::get("default_acl_group")) : null;
+    }
+
+    public static function getDefaultPrimaryGroup() {
+        if (self::getDefaultPrimaryGroupId()) {
+            return new self(self::getDefaultPrimaryGroupId());
+        }
+        return null;
+    }
+
+    public static function getAll() {
         $sql = "select id from `{prefix}groups` order by id";
         $query = Database::query($sql, true);
         $data = array();
@@ -40,8 +48,7 @@ class Group
         return $data;
     }
 
-    public function loadById($id)
-    {
+    public function loadById($id) {
         $sql = "select * from `{prefix}groups` where id = ?";
         $args = array(
             intval($id)
@@ -56,7 +63,7 @@ class Group
             $acl = new ACL();
             $allPermissions = $acl->getDefaultACLAsJSON(false, true);
             foreach ($allPermissions as $name => $value) {
-                if (! isset($this->permissions[$name])) {
+                if (!isset($this->permissions[$name])) {
                     $this->addPermission($name, $value);
                 }
             }
@@ -70,14 +77,13 @@ class Group
         while ($row = Database::fetchobject($query)) {
             $lang = new Language();
             $lang->loadById($row->language_id);
-            if (! is_null($lang->getID())) {
+            if (!is_null($lang->getID())) {
                 $this->languages[] = $lang;
             }
         }
     }
 
-    public function save()
-    {
+    public function save() {
         if ($this->id) {
             $this->update();
         } else {
@@ -85,8 +91,7 @@ class Group
         }
     }
 
-    protected Function saveLanguages()
-    {
+    protected Function saveLanguages() {
         $sql = "delete from `{prefix}group_languages` where `group_id` = ?";
         $args = array(
             $this->getId()
@@ -103,8 +108,7 @@ class Group
         }
     }
 
-    protected function insert()
-    {
+    protected function insert() {
         $sql = "insert into `{prefix}groups` (name, permissions, allowable_tags) values (?,?,?)";
         $args = array(
             $this->getName(),
@@ -119,8 +123,7 @@ class Group
         }
     }
 
-    protected function update()
-    {
+    protected function update() {
         $sql = "update `{prefix}groups` set name = ?, permissions = ?, allowable_tags = ? where id = ?";
         $args = array(
             $this->getName(),
@@ -133,8 +136,7 @@ class Group
         return $retval;
     }
 
-    public function delete()
-    {
+    public function delete() {
         if (is_null($this->id)) {
             return false;
         }
@@ -149,76 +151,63 @@ class Group
         return $query;
     }
 
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
-    public function setId($id)
-    {
-        $this->id = ! is_null($id) ? $id : null;
+    public function setId($id) {
+        $this->id = !is_null($id) ? $id : null;
     }
 
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
-    public function setName($name)
-    {
-        $this->name = ! is_null($name) ? strval($name) : null;
+    public function setName($name) {
+        $this->name = !is_null($name) ? strval($name) : null;
     }
 
-    public function getPermissions()
-    {
+    public function getPermissions() {
         return $this->permissions;
     }
 
-    public function setPermissions($permissions)
-    {
+    public function setPermissions($permissions) {
         $this->permissions = $permissions;
     }
 
-    public function addPermission($name, $value = false)
-    {
+    public function addPermission($name, $value = false) {
         $this->permissions[$name] = $value;
     }
 
-    public function hasPermission($name)
-    {
+    public function hasPermission($name) {
         return (in_array($name, $this->permissions) and $this->permissions[$name]);
     }
 
-    public function removePermission($name)
-    {
+    public function removePermission($name) {
         if (isset($this->permissions[$name])) {
             unset($this->permissions[$name]);
         }
     }
 
-    public function getLanguages()
-    {
+    public function getLanguages() {
         return $this->languages;
     }
 
-    public function setLanguages($val)
-    {
+    public function setLanguages($val) {
         $this->languages = $val;
     }
 
-    public function getAllowableTags()
-    {
+    public function getAllowableTags() {
         return $this->allowable_tags;
     }
 
-    public function setAllowableTags($val)
-    {
+    public function setAllowableTags($val) {
         $this->allowable_tags = Stringhelper::isNotNullOrWhitespace($val) ? strval($val) : null;
     }
 
-    public function getUsers($order = "id")
-    {
+    public function getUsers($order = "id") {
         $manager = new UserManager();
         return $manager->getUsersByGroupId($this->getId(), $order);
     }
+
 }

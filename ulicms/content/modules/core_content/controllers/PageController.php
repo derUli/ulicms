@@ -14,8 +14,7 @@ class PageController extends Controller {
             $activated = intval($_POST["activated"]);
             $hidden = intval($_POST["hidden"]);
             $page_content = $_POST["page_content"];
-            $group = new Group();
-            $group->getCurrentGroup();
+            $group = Group::getCurrentGroup();
             if (Stringhelper::isNotNullOrWhitespace($group->getAllowableTags())) {
                 $page_content = strip_tags($page_content, $group->getAllowableTags());
             }
@@ -200,8 +199,7 @@ class PageController extends Controller {
         $activated = intval($_POST["activated"]);
         $unescaped_content = $_POST["page_content"];
         $page_content = $_POST["page_content"];
-        $group = new Group();
-        $group->getCurrentGroup();
+        $group = Group::getCurrentGroup();
         if (Stringhelper::isNotNullOrWhitespace($group->getAllowableTags())) {
             $page_content = strip_tags($page_content, $group->getAllowableTags());
         }
