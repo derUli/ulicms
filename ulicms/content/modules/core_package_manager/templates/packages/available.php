@@ -19,17 +19,18 @@ if (!$permissionChecker->hasPermission("install_packages")) {
             <?php translate("loading_data"); ?>
         </div>
     </div>
-    <div id="pkglist"></div>
+    <div id="pkglist" data-url="<?php echo ModuleHelper::buildMethodCallUrl(PackageController::class, "availablePackages"); ?>"></div>
     <script type="text/javascript">
 
         // TODO: Move this to external js file
         $(function () {
             $("div#loadpkg").slideDown();
-            $.get("index.php?ajax_cmd=available_modules", function (result) {
+            var container = $("div#pkglist");
+            $.get(container.data("url"), function (result) {
                 $("div#loadpkg").slideUp();
-                $("div#pkglist").html(result);
-                $("div#pkglist").slideDown();
-                $("div#pkglist .tablesorter").DataTable({
+                $(container).html(result);
+                $(container).slideDown();
+                $(container).find(".tablesorter").DataTable({
                     language: {
                         url: $("body").data("datatables-translation")
                     },

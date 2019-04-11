@@ -54,9 +54,6 @@ switch ($ajax_cmd) {
             echo "yes";
         }
         break;
-    case "available_modules":
-        require_once "inc/ajax_available_modules.php";
-        break;
     case "getPageListByLang":
         ajaxOnChangeLanguage($_REQUEST["mlang"], $_REQUEST["mmenu"], $_REQUEST["mparent"]);
         break;

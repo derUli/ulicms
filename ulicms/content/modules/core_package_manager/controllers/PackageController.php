@@ -62,7 +62,7 @@ class PackageController extends MainClass {
         } else {
             $errorMessage = get_translation("removing_package_failed", array(
                 "%name%" => $name
-                    ));
+            ));
             ExceptionResult($errorMessage, HttpStatusCode::INTERNAL_SERVER_ERROR);
         }
     }
@@ -76,7 +76,7 @@ class PackageController extends MainClass {
         } else {
             $errorMessage = get_translation("removing_package_failed", array(
                 "%name%" => $name
-                    ));
+            ));
             ExceptionResult($errorMessage, HttpStatusCode::INTERNAL_SERVER_ERROR);
         }
     }
@@ -104,6 +104,11 @@ class PackageController extends MainClass {
     public function truncatedInstalledPatches() {
         Database::truncateTable("installed_patches");
         TextResult("ok", HttpStatusCode::OK);
+    }
+
+    public function availablePackages() {
+        $html = Template::executeModuleTemplate(self::MODULE_NAME, "packages/available_list.php");
+        HtmlResult($html);
     }
 
 }
