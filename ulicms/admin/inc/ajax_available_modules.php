@@ -80,8 +80,7 @@ if (!$pkg_src) {
                         ?>
                         <tr>
                             <td><?php esc($nameWithoutVersion); ?></td>
-                            <td><?php esc($version); ?>
-                            </td>
+                            <td><?php esc($version); ?></td>
                             <td><?php
                                 if (StringHelper::isNullOrWhitespace($description)) {
                                     translate("no_description_available");
