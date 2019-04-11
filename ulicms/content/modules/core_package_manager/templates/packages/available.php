@@ -13,11 +13,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
     </p>
     <h1><?php translate("available_packages") ?></h1>
     <div id="loadpkg">
-        <img style="margin-right: 15px; float: left;" src="gfx/loading.gif"
-             alt="Bitte warten...">
-        <div style="padding-top: 3px;">
-            <?php translate("loading_data"); ?>
-        </div>
+        <?php require "inc/loadspinner.php"; ?>
     </div>
     <div id="pkglist" data-url="<?php echo ModuleHelper::buildMethodCallUrl(PackageController::class, "availablePackages"); ?>"></div>
     <script type="text/javascript">

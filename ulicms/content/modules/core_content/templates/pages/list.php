@@ -130,7 +130,7 @@ if ($permissionChecker->hasPermission("pages")) {
             </form>
             <div class="row">
                 <div class="col-xs-6">
-                    <a href="index.php?action = pages_new" class="btn btn-default"><i
+                    <a href="index.php?action=pages_new" class="btn btn-default"><i
                             class="fa fa-plus"></i> <?php translate("create_page"); ?></a>
                 </div>
                 <div class="col-xs-6 text-right">
@@ -474,8 +474,8 @@ if ($permissionChecker->hasPermission("pages")) {
                         <?php
                         if ($permissionChecker->hasPermission("pages_create")) {
                             ?>
-                                                                <td style="text-align: center"><?php translate("clone"); ?>
-                                                                </td> -->
+                                                                    <td style="text-align: center"><?php translate("clone"); ?>
+                                                                    </td> -->
                         <?php } ?>
                         <td style="text-align: center"><?php translate("edit"); ?>
                         </td>

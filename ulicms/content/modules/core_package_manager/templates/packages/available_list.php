@@ -63,7 +63,7 @@ if (!$pkg_src) {
                         <th><?php translate("package"); ?></th>
                         <th><?php translate("version"); ?></th>
                         <th><?php translate("description"); ?></th>
-                        <td></td>
+                        <th class="no-sort"></td>
                     </tr>
                 </thead>
                 <tbody>

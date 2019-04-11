@@ -289,7 +289,7 @@ add_translation("LOGIN", "Login");
 add_translation("UPLOAD_FILE", "upload file");
 add_translation("FROM_THE_PACKAGE_SOURCE", "from package source");
 add_translation("UPLOAD_PACKAGE", "upload package");
-add_translation("LOADING_DATA", "loading data...");
+add_translation("LOADING_DATA", "Loading data...");
 add_translation("AVAILABLE_PACKAGES", "available packages");
 add_translation("INSTALL", "Install");
 add_translation("ERROR", "Error");
@@ -753,7 +753,5 @@ add_translation("good_pass", "Medium; try using special charecters");
 add_translation("strong_pass", "Strong password");
 add_translation("contains_username", "The password contains the username");
 add_translation("enter_pass", "Type your password");
-
-add_translation("package", "Package");
 
 do_event("lang_en");

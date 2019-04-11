@@ -17,7 +17,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
     $types = get_available_post_types();
     ?>
     <div class="loadspinner">
-        <img src="gfx/loading.gif" alt="Loading...">
+        <?php require "inc/loadspinner.php"; ?>
     </div>
     <?php
     echo ModuleHelper::buildMethodCallForm("PageController", "create", array(), "post", array(

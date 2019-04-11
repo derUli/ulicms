@@ -23,3 +23,5 @@ add_translation("disable_module", "Disable Module");
 add_translation("no_permission", "No Permission");
 
 add_translation("download_patch", "Download Patch");
+
+add_translation("package", "Package");

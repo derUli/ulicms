@@ -59,7 +59,7 @@ if ($permissionChecker->hasPermission("dashboard")) {
                 <?php translate("ulicms_news"); ?></h2>
             <div class="accordion-content" id="ulicms-feed"
                  data-url="<?php echo ModuleHelper::buildMethodCallUrl(HomeController::class, "newsfeed") ?>">
-                <img src="gfx/loading.gif" alt="Feed wird geladen..." />
+                     <?php require "inc/loadspinner.php"; ?>
             </div>
         <?php } ?>
         <?php if ($permissionChecker->hasPermission("pages_show_positions")) { ?>
@@ -70,7 +70,8 @@ if ($permissionChecker->hasPermission("dashboard")) {
                         <input name="show_positions" id="show_positions" type="checkbox"
                                class="js-switch"
                                data-url="<?php esc(ModuleHelper::buildMethodCallUrl(PageController::class, "toggleShowPositions")); ?>" value="1"
-                               <?php if (Settings::get("user/" . get_user_id() . " / show_positions"))
+                               <?php
+                               if (Settings::get("user/" . get_user_id() . " / show_positions"))
                                    echo "checked";
                                ?>>
                         <?php translate("show_positions_in_menus"); ?></label>

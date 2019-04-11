@@ -22,3 +22,5 @@ add_translation("disable_module", "Modul deaktivieren");
 add_translation("no_permission", "Keine Berechtigung");
 
 add_translation("download_patch", "Patch herunterladen");
+
+add_translation("package", "Paket");
