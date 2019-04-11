@@ -754,4 +754,6 @@ add_translation("strong_pass", "Strong password");
 add_translation("contains_username", "The password contains the username");
 add_translation("enter_pass", "Type your password");
 
+add_translation("package", "Package");
+
 do_event("lang_en");

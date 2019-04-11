@@ -1,4 +1,9 @@
 <?php
+// TODO: Refactor Code
+// This file should not contain any business logic.
+// It should only do output
+// Implement a backend action which fetches the index of the package source
+
 $permissionChecker = new ACL ();
 if (!$permissionChecker->hasPermission("install_packages")) {
     noPerms();
@@ -23,6 +28,7 @@ if (!$pkg_src) {
     $internalVersion = implode(".", $version->getInternalVersion());
     $pkg_src = str_replace("{version}", $internalVersion, $pkg_src);
 
+    $pkgManager = new PackageManager();
     $packageListURL = $pkg_src . "list.txt";
 
     $packageList = @file_get_contents_wrapper($packageListURL);
@@ -32,7 +38,7 @@ if (!$pkg_src) {
             "\r\n" => PHP_EOL,
             "\r" => PHP_EOL,
             "\n" => PHP_EOL
-                ));
+        ));
         $packageList = explode(PHP_EOL, $packageList);
     }
 
@@ -49,24 +55,52 @@ if (!$pkg_src) {
         </p>
         <?php
     } else {
-        for ($i = 0; $i < count($packageList); $i ++) {
-            $pkg = trim($packageList [$i]);
-
-            if (!empty($pkg)) {
-                $pkgDescriptionURL = $pkg_src . "descriptions/" . $pkg . ".txt";
-                echo "<p><strong>" . $pkg . "</strong> <a href=\"?action=install_modules&amp;packages=$pkg\" onclick=\"return confirm('" . str_ireplace("%pkg%", $pkg, get_translation("ASK_FOR_INSTALL_PACKAGE")) . "');\"> [" . get_translation("install") . "]</a><br/>";
-
-                $pkgDescription = @file_get_contents_wrapper($pkgDescriptionURL);
-
-                if (!$pkgDescription or strlen($pkgDescription) < 1) {
-                    translate("no_description_available");
-                } else {
-                    echo nl2br($pkgDescription);
-                }
-
-                echo "</p>";
-                fcflush();
             }
-        }
+        ?>
+        <div class="scroll">
+            <table class="tablesorter">
+                <thead>
+                    <tr>
+                        <th><?php translate("package"); ?></th>
+                        <th><?php translate("version"); ?></th>
+                        <th><?php translate("description"); ?></th>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    for ($i = 0; $i < count($packageList); $i ++) {
+                        $name = $packageList [$i];
+                        $splittedName = $pkgManager->splitPackageName($name);
+                        if (count($splittedName) >= 2) {
+                            $nameWithoutVersion = $splittedName[0];
+                            $version = $splittedName[1];
+                        }
+                        $descriptionURL = $pkg_src . "descriptions/" . $name . ".txt";
+                        $description = @file_get_contents_wrapper($descriptionURL);
+                        ?>
+                        <tr>
+                            <td><?php esc($nameWithoutVersion); ?></td>
+                            <td><?php esc($version); ?>
+                            </td>
+                            <td><?php
+                                if (StringHelper::isNullOrWhitespace($description)) {
+                                    translate("no_description_available");
+                                } else {
+                                    echo nl2br($description);
+                                }
+                                ?>
+                            </td>
+                            <td>
+                                <a href="<?php esc(ModuleHelper::buildActionURL("install_modules", "packages={$name}")); ?>" class="btn btn-primary">
+                                    <i class="fas fa-download"></i> <?php translate("install"); ?>
+                                </a>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
+        <?php
     }
 }

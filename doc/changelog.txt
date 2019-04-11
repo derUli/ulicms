@@ -1,5 +1,8 @@
 ===== Neues in UliCMS 2019.2.5 =====
 
+Neue Features
+* "Verfügbare Pakete" neu gestaltet
+
 Verbesserungen:
 * Das Löschen-Icon beim eigenen Benutzer wird nicht mehr angezeigt.
 
@@ -13,6 +16,9 @@ Neue API-Methoden:
 
 Geänderte API-Methoden:
 * Group::getCurrentGroup() ist nun statisch
+
+Fehlerkorrekturen:
+* Einige "Zurück" Buttons in der Paketverwaltung funktionierten nicht.
 
 ===== Neues in UliCMS 2019.2.4 =====
 
