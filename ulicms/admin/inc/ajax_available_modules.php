@@ -55,7 +55,6 @@ if (!$pkg_src) {
         </p>
         <?php
     } else {
-            }
         ?>
         <div class="scroll">
             <table class="tablesorter">
