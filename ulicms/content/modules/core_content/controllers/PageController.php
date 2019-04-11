@@ -443,4 +443,24 @@ class PageController extends Controller {
         return new DiffViewModel($html, $current_version_date, $old_version_date, $content_id, $history_id);
     }
 
+    public function toggleFilters() {
+        $settingsName = "user/" . get_user_id() . "/show_filters";
+        if (Settings::get($settingsName)) {
+            Settings::delete($settingsName);
+        } else {
+            Settings::set($settingsName, "1");
+        }
+        HTTPStatusCodeResult(HttpStatusCode::OK);
+    }
+
+    public function toggleShowPositions() {
+        $settingsName = "user/" . get_user_id() . "/show_positions";
+        if (Settings::get($settingsName)) {
+            Settings::delete($settingsName);
+        } else {
+            Settings::set($settingsName, "1");
+        }
+        HTTPStatusCodeResult(HttpStatusCode::OK);
+    }
+
 }

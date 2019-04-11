@@ -69,8 +69,10 @@ if ($permissionChecker->hasPermission("dashboard")) {
                     <label>
                         <input name="show_positions" id="show_positions" type="checkbox"
                                class="js-switch"
-                               data-url="index.php?ajax_cmd=toggle_show_positions" value="1"
-                               <?php if (Settings::get("user/" . get_user_id() . "/show_positions")) echo "checked"; ?>>
+                               data-url="<?php esc(ModuleHelper::buildMethodCallUrl(PageController::class, "toggleShowPositions")); ?>" value="1"
+                               <?php if (Settings::get("user/" . get_user_id() . " / show_positions"))
+                                   echo "checked";
+                               ?>>
                         <?php translate("show_positions_in_menus"); ?></label>
                     </label>
                 </form>
@@ -145,7 +147,8 @@ if ($permissionChecker->hasPermission("dashboard")) {
         </h2>
         <div class="accordion-content">
             <table>
-                <tr style="font-weight: bold;">
+                <tr style="font-weight: bold;
+                    ">
                     <td><?php translate("title"); ?>
                     </td>
                     <td><?php translate("views"); ?>

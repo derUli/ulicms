@@ -124,17 +124,20 @@ if ($permissionChecker->hasPermission("pages")) {
             <form action="#" method="get">
                 <div class="checkbox">
                     <label><input type="checkbox" class="js-switch" name="show_filters" id="show_filters"
-                                  value="1" data-url="index.php?ajax_cmd=toggle_show_filters"
+                                  value="1" data-url="<?php echo ModuleHelper::buildMethodCallUrl(PageController::class, "toggleFilters"); ?>"
                                   <?php if ($show_filters) echo "checked"; ?>> <?php translate("show_filters"); ?></label>
                 </div>
             </form>
             <div class="row">
                 <div class="col-xs-6">
-                    <a href="index.php?action=pages_new" class="btn btn-default"><i
+                    <a href="index.php?action = pages_new" class="btn btn-default"><i
                             class="fa fa-plus"></i> <?php translate("create_page"); ?></a>
                 </div>
                 <div class="col-xs-6 text-right">
-                    <div class="page-list-filters" style="<?php if (!$show_filters) echo "display:none"; ?>">
+                    <div class="page-list-filters" style="<?php
+                    if (!$show_filters)
+                        echo "display:none";
+                    ?>">
                         <a
                             href="<?php echo ModuleHelper::buildMethodCallUrl("PageController", "resetFilters"); ?>"
                             class="btn btn-default" id="btn-reset-filters"><i
@@ -471,8 +474,8 @@ if ($permissionChecker->hasPermission("pages")) {
                         <?php
                         if ($permissionChecker->hasPermission("pages_create")) {
                             ?>
-                                <td style="text-align: center"><?php translate("clone"); ?>
-                                </td> -->
+                                                                <td style="text-align: center"><?php translate("clone"); ?>
+                                                                </td> -->
                         <?php } ?>
                         <td style="text-align: center"><?php translate("edit"); ?>
                         </td>

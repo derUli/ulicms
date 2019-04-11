@@ -26,6 +26,8 @@
         "PageController::editPost": "pages",
         "PageController::undeletePost": "pages",
         "PageController::empyTrash": "pages",
+        "PageController::toggleFilters": "pages",
+        "PageController::toggleShowPositions": "pages_show_positions",
         "CategoryController::createPost": "categories_create",
         "CategoryController::updatePost": "categories_edit",
         "CategoryController::deletePost": "categories",
