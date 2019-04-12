@@ -1,3 +1,8 @@
+===== Neues in UliCMS 2019.2.6 =====
+
+Verbesserungen:
+* Generierung von Systemnamen unterstützt nun mehr Zeichen
+
 ===== Neues in UliCMS 2019.2.5 =====
 
 Neue Features
