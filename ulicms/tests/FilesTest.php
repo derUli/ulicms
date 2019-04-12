@@ -9,6 +9,19 @@ class FilesTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("myfile", file_extension("myfile"));
     }
 
+    public function testGetMime() {
+        $this->assertEquals("text/plain", File::getMime(Path::resolve("ULICMS_ROOT/.htaccess")));
+        $this->assertEquals("image/gif", File::getMime(Path::resolve("ULICMS_ROOT/admin/gfx/edit.gif")));
+        $this->assertEquals("image/png", File::getMime(Path::resolve("ULICMS_ROOT/admin/gfx/edit.png")));
+    }
+
+    public function testGetExtension() {
+        $this->assertEquals("pdf", File::getExtension("myfile.pdf"));
+        $this->assertEquals("pdf", File::getExtension("myfile.PDF"));
+        $this->assertEquals("txt", File::getExtension("foo.txt"));
+        $this->assertEquals("myfile", File::getExtension("myfile"));
+    }
+
     public function testFindAllFolders() {
         $allFolders = find_all_folders("admin");
         $this->assertContains("admin/inc", $allFolders);

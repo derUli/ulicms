@@ -59,20 +59,20 @@ class User {
     }
 
     public function saveAndSendMail($password) {
-       $this->save();
-       $this->sendWelcomeMail($password);
+        $this->save();
+        $this->sendWelcomeMail($password);
     }
-    
-    public function sendWelcomeMail($password){
-        $subject = get_translation("new_user_account_at_site", 
+
+    public function sendWelcomeMail($password) {
+        $subject = get_translation("new_user_account_at_site",
                 array("%domain%" => get_domain()));
         $mailBody = $this->getWelcomeMailText($password);
-        $headers = "From: ".Settings::get("email");
-        
+        $headers = "From: " . Settings::get("email");
+
         Mailer::send($this->getEmail(), $subject, $mailBody, $headers);
     }
-    
-    public function getWelcomeMailText($password){
+
+    public function getWelcomeMailText($password) {
         ViewBag::set("user", $this);
         ViewBag::set("url", ModuleHelper::getBaseUrl());
         ViewBag::set("password", $password);

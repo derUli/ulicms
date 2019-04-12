@@ -18,7 +18,7 @@ Geänderte API-Methoden:
 * Group::getCurrentGroup() ist nun statisch
 
 Fehlerkorrekturen:
-* Einige "Zurück" Buttons in der Paketverwaltung funktionierten nicht.
+* Einige "Zurück" Buttons in der Paketverwaltung funktionieren nicht
 
 ===== Neues in UliCMS 2019.2.4 =====
 

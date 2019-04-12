@@ -1,8 +1,7 @@
 <?php
 
 // Ordner rekursiv kopieren
-function recurse_copy($src, $dst)
-{
+function recurse_copy($src, $dst) {
     $dir = opendir($src);
     @mkdir($dst);
     while (false !== ($file = readdir($dir))) {
@@ -17,8 +16,7 @@ function recurse_copy($src, $dst)
     closedir($dir);
 }
 
-function find_all_files($dir)
-{
+function find_all_files($dir) {
     $root = scandir($dir);
     $result = array();
     foreach ($root as $value) {
@@ -37,8 +35,7 @@ function find_all_files($dir)
     return $result;
 }
 
-function find_all_folders($dir)
-{
+function find_all_folders($dir) {
     $root = scandir($dir);
     $result = array();
     foreach ($root as $value) {
@@ -54,10 +51,11 @@ function find_all_folders($dir)
     return $result;
 }
 
-function file_extension($filename)
-{
-    $ext = explode(".", $filename);
-    $ext = end($ext);
-    $ext = strtolower($ext);
-    return $ext;
+function file_extension($filename) {
+    return File::getExtension($filename);
+}
+
+// Mimetypen einer Datei ermitteln
+function get_mime($file) {
+    return File::getMime($file);
 }
