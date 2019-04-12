@@ -1,20 +1,5 @@
 <?php
 
-function checkIfSystemnameIsFree($systemname, $language, $id) {
-    if (StringHelper::isNullOrWhitespace($systemname)) {
-        return true;
-    }
-    $systemname = Database::escapeValue($systemname);
-    $language = Database::escapeValue($language);
-    $id = intval($id);
-    $sql = "SELECT id FROM " . tbname("content") . " where systemname='$systemname' and language = '$language' ";
-    if ($id > 0) {
-        $sql .= "and id <> $id";
-    }
-    $result = Database::query($sql);
-    return (Database::getNumRows($result) <= 0);
-}
-
 function ajaxOnChangeLanguage($lang, $menu, $parent) {
     ?>
     <option selected="selected" value="NULL">
@@ -49,11 +34,6 @@ function ajaxOnChangeLanguage($lang, $menu, $parent) {
 $ajax_cmd = $_REQUEST["ajax_cmd"];
 
 switch ($ajax_cmd) {
-    case "check_if_systemname_is_free":
-        if (checkIfSystemnameIsFree($_REQUEST["systemname"], $_REQUEST["language"], intval($_REQUEST["id"]))) {
-            echo "yes";
-        }
-        break;
     case "getPageListByLang":
         ajaxOnChangeLanguage($_REQUEST["mlang"], $_REQUEST["mmenu"], $_REQUEST["mparent"]);
         break;

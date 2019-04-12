@@ -20,12 +20,14 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
         <?php require "inc/loadspinner.php"; ?>
     </div>
     <?php
-    echo ModuleHelper::buildMethodCallForm("PageController", "create", array(), "post", array(
-        "name" => "newpageform",
-        "id" => "pageform",
-        "style" => "display:none",
-        "class" => "pageform main-form",
-        "data-get-content-types-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "getContentTypes")
+    echo ModuleHelper::buildMethodCallForm("PageController", "create", array(), "post",
+            array(
+                "name" => "newpageform",
+                "id" => "pageform",
+                "style" => "display:none",
+                "class" => "pageform main-form",
+                "data-get-content-types-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "getContentTypes"),
+                "data-systemname-free-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "checkSystemNameFree")
     ));
     ?>
     <p>

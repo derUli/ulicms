@@ -463,4 +463,26 @@ class PageController extends Controller {
         HTTPStatusCodeResult(HttpStatusCode::OK);
     }
 
+    public function checkSystemNameFree() {
+        if ($this->checkIfSystemnameIsFree($_REQUEST["systemname"], $_REQUEST["language"], intval($_REQUEST["id"]))) {
+            TextResult("yes");
+        }
+        TextResult("");
+    }
+
+    private function checkIfSystemnameIsFree($systemname, $language, $id) {
+        if (StringHelper::isNullOrWhitespace($systemname)) {
+            return true;
+        }
+        $systemname = Database::escapeValue($systemname);
+        $language = Database::escapeValue($language);
+        $id = intval($id);
+        $sql = "SELECT id FROM " . tbname("content") . " where systemname='$systemname' and language = '$language' ";
+        if ($id > 0) {
+            $sql .= "and id <> $id";
+        }
+        $result = Database::query($sql);
+        return (Database::getNumRows($result) <= 0);
+    }
+
 }

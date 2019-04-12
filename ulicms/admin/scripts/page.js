@@ -192,12 +192,14 @@ function systemnameOrLanguageChanged(item) {
         myid = $(id_field).val();
     }
     var data = {
-        ajax_cmd: "check_if_systemname_is_free",
+        csrf_token: $("input[name=csrf_token]").first().val(),
         systemname: $("input[name='systemname']").val(),
         language: $("select[name='language']").val(),
         id: myid
     };
-    $.post("index.php", data, function (text, status) {
+    var url = $(".main-form").first().data("systemname-free-url");
+
+    $.post(url, data, function (text, status) {
         if (text == "yes") {
             $("input[name='systemname']").removeClass("error-field");
             $("select[name='language']").removeClass("error-field");

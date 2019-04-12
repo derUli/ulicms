@@ -85,7 +85,8 @@ if ($permissionChecker->hasPermission("pages")) {
                 echo ModuleHelper::buildMethodCallForm("PageController", "edit", array(), "post", array(
                     "id" => "pageform-edit",
                     "class" => "main-form",
-                    "data-get-content-types-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "getContentTypes")
+                    "data-get-content-types-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "getContentTypes"),
+                    "data-systemname-free-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "checkSystemNameFree")
                 ));
                 ?>
                 <input type="hidden" name="edit_page" value="edit_page"> <input
@@ -97,22 +98,22 @@ if ($permissionChecker->hasPermission("pages")) {
                         <strong><?php translate("permalink"); ?>*</strong><br /> <input
                             type="text" required="required" name="systemname"
                             value="<?php
-                            echo htmlspecialchars($row->systemname);
-                            ?>"> <br /> <strong><?php translate("page_title"); ?>* </strong><br />
+            echo htmlspecialchars($row->systemname);
+                ?>"> <br /> <strong><?php translate("page_title"); ?>* </strong><br />
                         <input type="text" name="page_title"
                                value="<?php
-                               echo htmlspecialchars($row->title);
-                               ?>"
+                echo htmlspecialchars($row->title);
+                ?>"
                                required>
                         <div class="typedep hide-on-snippet hide-on-non-regular">
                             <br /> <strong><?php
-                                translate("ALTERNATE_TITLE");
-                                ?> </strong><br /> <input type="text" name="alternate_title"
+                   translate("ALTERNATE_TITLE");
+                ?> </strong><br /> <input type="text" name="alternate_title"
                                                    value="<?php
-                                                   echo htmlspecialchars($row->alternate_title);
-                                                   ?>"> <small><?php
-                                                       echo translate("ALTERNATE_TITLE_INFO");
-                                                       ?> </small> <br /> <br /> <strong><?php translate("show_headline"); ?></strong>
+                    echo htmlspecialchars($row->alternate_title);
+                ?>"> <small><?php
+                                                   echo translate("ALTERNATE_TITLE_INFO");
+                                                   ?> </small> <br /> <br /> <strong><?php translate("show_headline"); ?></strong>
                             <br /> <select name="show_headline">
                                 <option value="1"
                                         <?php if ($row->show_headline == 1) echo "selected"; ?>><?php translate("yes"); ?></option>
@@ -188,7 +189,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                 onclick="$('div#position_help').slideToggle()"><i class="fa fa-question-circle text-info" aria-hidden="true"></i></span><br /> <input
                                 type="number" name="position" required="required" min="0" step="1"
                                 value="<?php
-                                echo $row->position;
+                    echo $row->position;
                                 ?>">
                             <div id="position_help" class="help" style="display: none">
                                 <?php
@@ -209,14 +210,14 @@ if ($permissionChecker->hasPermission("pages")) {
                                         ?>
                                         <option
                                             value="<?php
-                                            echo $page["id"];
-                                            ?>"
+                        echo $page["id"];
+                                        ?>"
                                             <?php
                                             if ($page["id"] == $row->parent) {
                                                 echo " selected='selected'";
                                             }
                                             ?>>
-                                                <?php
+                                            <?php
                                                 esc($page["title"]);
                                                 ?>
                                             (ID:
@@ -240,7 +241,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                 echo "selected";
                             }
                             ?>>
-                                        <?php translate("enabled"); ?>
+                                    <?php translate("enabled"); ?>
                             </option>
                             <option value="0"
                             <?php
@@ -248,7 +249,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                 echo "selected";
                             }
                             ?>>
-                                        <?php translate("disabled"); ?>
+                                    <?php translate("disabled"); ?>
                             </option>
                         </select> <br /> <br />
                         <div class="typedep" id="tab-target">
@@ -292,8 +293,8 @@ if ($permissionChecker->hasPermission("pages")) {
                         <input type="text" id="menu_image" name="menu_image"
                                readonly="readonly" class="kcfinder"
                                value="<?php
-                               echo $row->menu_image;
-                               ?>"
+                    echo $row->menu_image;
+                    ?>"
                                style="cursor: pointer" /> <a href="#"
                                onclick="$('#menu_image').val('');
                                        return false;"
@@ -305,8 +306,8 @@ if ($permissionChecker->hasPermission("pages")) {
                         <strong><?php translate("link_url"); ?></strong><br /> <input
                             type="text" name="redirection"
                             value="<?php
-                            echo $row->redirection;
-                            ?>">
+                   echo $row->redirection;
+                    ?>">
                     </div>
                 </div>
                 <div class="typedep" id="tab-language-link" style="display: none;">
@@ -337,13 +338,13 @@ if ($permissionChecker->hasPermission("pages")) {
                         <strong><?php translate("meta_description"); ?></strong><br /> <input
                             type="text" name="meta_description"
                             value="<?php
-                            echo htmlspecialchars($row->meta_description);
-                            ?>"
+                        echo htmlspecialchars($row->meta_description);
+                                    ?>"
                             maxlength="200"> <br /> <strong><?php translate("meta_keywords"); ?></strong><br />
                         <input type="text" name="meta_keywords"
                                value="<?php
-                               echo htmlspecialchars($row->meta_keywords);
-                               ?>"
+                echo htmlspecialchars($row->meta_keywords);
+                                    ?>"
                                maxlength="200">
                         <div class="typedep" id="article-metadata">
                             <br /> <strong><?php translate("author_name"); ?></strong><br /> <input
@@ -362,10 +363,10 @@ if ($permissionChecker->hasPermission("pages")) {
                             <strong><?php translate("article_date"); ?></strong><br /> <input
                                 name="article_date" type="datetime-local"
                                 value="<?php
-                                if (StringHelper::isNotNullOrEmpty($row->article_date)) {
-                                    echo date("Y-m-d\TH:i:s", strtotime($row->article_date));
-                                }
-                                ?>"
+                   if (StringHelper::isNotNullOrEmpty($row->article_date)) {
+                       echo date("Y-m-d\TH:i:s", strtotime($row->article_date));
+                   }
+                                    ?>"
                                 step=any> <br /> <br /> <strong><?php translate("excerpt"); ?></strong>
                             <textarea name="excerpt" id="excerpt" rows="5" cols="80" class="<?php esc($editor); ?>" data-mimetype="text/html" ><?php echo real_htmlspecialchars($row->excerpt); ?></textarea>
                         </div>
@@ -375,22 +376,22 @@ if ($permissionChecker->hasPermission("pages")) {
                             <strong><?php translate("title"); ?>
                             </strong><br /> <input type="text" name="og_title"
                                                    value="<?php
-                                                   echo htmlspecialchars($row->og_title);
-                                                   ?>"> <br /> <strong><?php translate("description"); ?>
+                    echo htmlspecialchars($row->og_title);
+                                    ?>"> <br /> <strong><?php translate("description"); ?>
                             </strong><br /> <input type="text" name="og_description"
                                                    value="<?php
-                                                   echo htmlspecialchars($row->og_description);
-                                                   ?>"> <br /> <strong><?php translate("type"); ?>
+                                       echo htmlspecialchars($row->og_description);
+                                    ?>"> <br /> <strong><?php translate("type"); ?>
                             </strong><br /> <input type="text" name="og_type"
                                                    value="<?php
-                                                   echo htmlspecialchars($row->og_type);
-                                                   ?>"> <br /> <strong><?php translate("image"); ?></strong> <br />
+                                       echo htmlspecialchars($row->og_type);
+                                    ?>"> <br /> <strong><?php translate("image"); ?></strong> <br />
 
                             <input type="text" id="og_image" name="og_image"
                                    readonly="readonly" class="kcfinder"
                                    value="<?php
-                                   echo htmlspecialchars($row->og_image);
-                                   ?>"
+                                       echo htmlspecialchars($row->og_image);
+                                    ?>"
                                    style="cursor: pointer" /> <a href="#"
                                    onclick="$('#og_image').val('');
                                            return false;"
@@ -403,8 +404,8 @@ if ($permissionChecker->hasPermission("pages")) {
                                 <div style="margin-top: 15px;">
                                     <img class="small-preview-image"
                                          src="<?php
-                                         echo htmlspecialchars($og_url);
-                                         ?>" />
+                echo htmlspecialchars($og_url);
+                                ?>" />
                                 </div>
                             <?php } ?>
                         </div>
@@ -476,8 +477,8 @@ if ($permissionChecker->hasPermission("pages")) {
                                     }
                                     ?>
                         </select> <br /> <br /> <strong><?php
-                            translate("category");
-                            ?>
+                        translate("category");
+                                    ?>
                         </strong><br />
                         <?php
                         $lcat = $list_data->category_id;
@@ -486,8 +487,8 @@ if ($permissionChecker->hasPermission("pages")) {
                         ?>
                         <?php echo Categories :: getHTMLSelect($lcat, true, "list_category") ?>
                         <br /> <br /> <strong><?php
-                            translate("menu");
-                            ?>
+            translate("menu");
+                        ?>
                         </strong><br /> <select name="list_menu" size=1>
                             <option value="">[<?php translate("every"); ?>]</option>
                             <?php
@@ -495,10 +496,10 @@ if ($permissionChecker->hasPermission("pages")) {
                                 ?>
                                 <option value="<?php echo $menu ?>"
                                         <?php if ($menu == $list_data->menu) echo "selected" ?>>
-                                            <?php
+                                        <?php
                                             translate($menu);
                                             ?></option>
-                                <?php
+                                    <?php
                             }
                             ?>
                         </select> <br /> <br /> <strong><?php translate("parent"); ?>
@@ -521,14 +522,14 @@ if ($permissionChecker->hasPermission("pages")) {
                                 ?>
                                 <option
                                     value="<?php
-                                    echo $page["id"];
-                                    ?>"
+                echo $page["id"];
+                                ?>"
                                     <?php
                                     if ($list_data->parent_id === $page["id"]) {
                                         echo 'selected="selected"';
                                     }
                                     ?>>
-                                        <?php
+                                    <?php
                                         esc($page["title"]);
                                         ?>
                                     (ID:
@@ -541,7 +542,7 @@ if ($permissionChecker->hasPermission("pages")) {
                             }
                             ?>
                         </select> <br /> <br /> <strong><?php
-                            translate("order_by");
+                translate("order_by");
                             ?>
                         </strong> <br /> <select name="list_order_by">
                             <?php foreach ($cols as $col) { ?>
@@ -549,8 +550,8 @@ if ($permissionChecker->hasPermission("pages")) {
                                         <?php if ($col == $list_data->order_by) echo 'selected'; ?>><?php echo $col; ?></option>
                                     <?php } ?>
                         </select> <br /> <br /> <strong><?php
-                            translate("order_direction");
-                            ?>
+                        translate("order_direction");
+                                    ?>
                         </strong> <select name="list_order_direction">
                             <option value="asc"><?php translate("asc"); ?></option>
                             <option value="desc"
@@ -666,7 +667,7 @@ if ($permissionChecker->hasPermission("pages")) {
                             echo "disabled";
                         }
                         ?>>
-                                    <?php
+                                <?php
                                     foreach ($users as $user) {
                                         ?>
                                 <option value="<?php Template::escape($user["id"]); ?>"
@@ -679,7 +680,7 @@ if ($permissionChecker->hasPermission("pages")) {
                             echo "disabled";
                         }
                         ?>>
-                                    <?php
+                                <?php
                                     foreach ($groups as $group) {
                                         ?>
                                 <option value="<?php Template::escape($group->getId()); ?>"
@@ -716,7 +717,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                         <?php echo $row->comments_enabled === "1" ? "selected" : ""; ?>><?php translate("yes"); ?></option>
                                 <option value="0"
                                         <?php echo $row->comments_enabled === "0" ? "selected" : ""; ?>>
-                                    <?php translate("no"); ?></option>
+                                        <?php translate("no"); ?></option>
                             </select>
                         </div>
                         <?php
@@ -771,13 +772,13 @@ if ($permissionChecker->hasPermission("pages")) {
                                 ?>
                                 <option
                                     value="<?php
-                                    echo $th;
-                                    ?>"
+                echo $th;
+                                ?>"
                                     <?php
                                     if (!is_null($row->theme) and ! empty($row->theme) and $row->theme == $th)
                                         echo "selected";
                                     ?>>
-                                        <?php
+                                    <?php
                                         echo $th;
                                         ?>
                                 </option>
@@ -797,14 +798,14 @@ if ($permissionChecker->hasPermission("pages")) {
                             echo " selected";
                         }
                         ?>>
-                            <?php translate("everyone"); ?></option>
+                                <?php translate("everyone"); ?></option>
                         <option value="registered"
                         <?php
                         if (faster_in_array("registered", $access)) {
                             echo " selected";
                         }
                         ?>>
-                            <?php translate("registered_users"); ?></option>
+                                <?php translate("registered_users"); ?></option>
                         <option value="mobile"
                                 <?php if (faster_in_array("mobile", $access)) echo " selected" ?>><?php translate("mobile_devices"); ?></option>
                         <option value="desktop"
@@ -825,8 +826,8 @@ if ($permissionChecker->hasPermission("pages")) {
                         <textarea name="custom_data" style="width: 100%; height: 200px;"
                                   class="codemirror" data-mimetype="application/json" data-validate="json"
                                   cols=80 rows=10><?php
-                                      echo htmlspecialchars($row->custom_data);
-                                      ?></textarea>
+            echo htmlspecialchars($row->custom_data);
+                        ?></textarea>
                     </div>
                 </div>
             </div>
@@ -837,8 +838,8 @@ if ($permissionChecker->hasPermission("pages")) {
             <div class="typedep" id="content-editor">
                 <p>
                     <textarea name="page_content" id="page_content" cols=60 rows=20 class="<?php esc($editor); ?>" data-mimetype="text/html"><?php
-                        echo htmlspecialchars($row->content);
-                        ?></textarea>
+            echo htmlspecialchars($row->content);
+            ?></textarea>
                 </p>
                 <?php
                 $rev = vcs::getRevisionsByContentID($row->id);
