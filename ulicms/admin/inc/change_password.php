@@ -6,7 +6,9 @@ if (isset($_POST["change_password"])) {
         db_query("UPDATE " . tbname("users") . " SET `require_password_change` = 0 where id = $uid");
         $_SESSION["require_password_change"] = 0;
     } else {
-        echo '<p class="ulicms_error">' . get_translation("passwords_not_equal") . '</p>';
+        ?>
+        <div class="alert alert-danger"><?php translate("passwords_not_equal"); ?></div>
+        <?php
     }
 }
 if (!$_SESSION["require_password_change"]) {
@@ -15,7 +17,7 @@ if (!$_SESSION["require_password_change"]) {
     ?>
     <form id="change_password_form" action="index.php" method="post">
         <?php csrf_token_html(); ?>
-		<input name="username" type="hidden" value="<?php esc( $_SESSION["ulicms_login"]);?>">
+        <input name="username" type="hidden" value="<?php esc($_SESSION["ulicms_login"]); ?>">
         <h1><?php translate("change_password"); ?></h1>
         <p><?php translate("require_password_change_notice"); ?></p>
         <strong><?php translate("password"); ?></strong> <input

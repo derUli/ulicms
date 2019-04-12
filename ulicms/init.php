@@ -280,7 +280,7 @@ global $actions;
 $actions = array();
 
 function noPerms() {
-    echo "<p class=\"ulicms_error\">" . get_translation("no_permissions") . "</p>";
+    echo "<div class=\"alert alert-danger\">" . get_translation("no_permissions") . "</div>";
     $logger = LoggerRegistry::get("audit_log");
     if ($logger) {
         $userId = get_user_id();

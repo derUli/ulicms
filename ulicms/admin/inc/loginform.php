@@ -98,11 +98,11 @@ if (isset($_REQUEST["error"]) and ! empty($_REQUEST["error"])) {
 
         });
     </script>
-    <p class="ulicms_error voffset2">
+    <div class="alert alert-danger voffset2">
         <?php
         echo htmlspecialchars($_REQUEST["error"]);
         ?>
-    </p>
+    </div>
     <?php
 }
 ?>
