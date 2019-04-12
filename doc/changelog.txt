@@ -2,10 +2,11 @@
 
 Verbesserungen:
 * Generierung von Systemnamen unterstützt nun mehr Zeichen
+* Überprüfung der Passwort-Wiederholung verbessert.
 
 ===== Neues in UliCMS 2019.2.5 =====
 
-Neue Features
+Neue Features:
 * "Verfügbare Pakete" neu gestaltet
 
 Verbesserungen:
