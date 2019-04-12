@@ -59,12 +59,8 @@ if (is_logged_in()) {
 
 header("Content-Type: text/html; charset=UTF-8");
 
+// Ajax Handlers are deprcated since 2019.3 and will get removed in 2019.4
 do_event("before_ajax_handler");
-
-if (isset($_REQUEST["ajax_cmd"])) {
-    require_once "inc/ajax_handler.php";
-    exit();
-}
 do_event("after_ajax_handler");
 
 do_event("before_backend_run_methods");

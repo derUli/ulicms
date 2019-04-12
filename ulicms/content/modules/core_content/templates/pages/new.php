@@ -27,7 +27,8 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                 "style" => "display:none",
                 "class" => "pageform main-form",
                 "data-get-content-types-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "getContentTypes"),
-                "data-systemname-free-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "checkSystemNameFree")
+                "data-systemname-free-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "checkSystemNameFree"),
+                "data-parent-pages-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "filterParentPages")
     ));
     ?>
     <p>

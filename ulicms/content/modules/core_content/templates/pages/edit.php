@@ -86,7 +86,8 @@ if ($permissionChecker->hasPermission("pages")) {
                     "id" => "pageform-edit",
                     "class" => "main-form",
                     "data-get-content-types-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "getContentTypes"),
-                    "data-systemname-free-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "checkSystemNameFree")
+                    "data-systemname-free-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "checkSystemNameFree"),
+                    "data-parent-pages-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "filterParentPages")
                 ));
                 ?>
                 <input type="hidden" name="edit_page" value="edit_page"> <input

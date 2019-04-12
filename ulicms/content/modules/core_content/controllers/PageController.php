@@ -485,4 +485,39 @@ class PageController extends Controller {
         return (Database::getNumRows($result) <= 0);
     }
 
+    // FIXME: There should be no html code in controller
+    public function filterParentPages() {
+        $lang = $_REQUEST["mlang"];
+        $menu = $_REQUEST["mmenu"];
+        $parent = $_REQUEST["mparent"];
+        ?>
+        <option selected="selected" value="NULL">
+            [
+            <?php
+            translate("none");
+            ?>
+            ]
+        </option>
+        <?php
+        $pages = getAllPages($lang, "title", false, $menu);
+        foreach ($pages as $key => $page) {
+            ?>
+            <option value="<?php
+            echo $page["id"];
+            ?>"
+                    <?php if ($page["id"] == $parent) echo "selected"; ?>>
+                        <?php
+                        echo esc($page["title"]);
+                        ?>
+                (ID:
+                <?php
+                echo $page["id"];
+                ?>
+                )
+            </option>
+            <?php
+        }
+        exit();
+    }
+
 }

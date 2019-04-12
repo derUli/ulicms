@@ -213,13 +213,15 @@ function systemnameOrLanguageChanged(item) {
 // filter parent pages by selected language and menu
 function filterParentPages() {
     var data = {
-        ajax_cmd: "getPageListByLang",
+        csrf_token: $("input[name=csrf_token]").first().val(),
         mlang: $("select[name='language']").val(),
         mmenu: $("select[name='menu']").val(),
         mparent: $("select[name='parent']").val()
     };
 
-    $.post("index.php", data, function (text, status) {
+    var url = $(".main-form").first().data("parent-pages-url");
+
+    $.post(url, data, function (text, status) {
         $("select[name='parent']").html(text);
     });
 }

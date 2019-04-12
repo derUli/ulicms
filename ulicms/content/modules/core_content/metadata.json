@@ -29,6 +29,7 @@
         "PageController::toggleFilters": "pages",
         "PageController::toggleShowPositions": "pages_show_positions",
         "PageController::checkSystemNameFree": "pages",
+        "PageController::filterParentPages": "pages",
         "CategoryController::createPost": "categories_create",
         "CategoryController::updatePost": "categories_edit",
         "CategoryController::deletePost": "categories",
