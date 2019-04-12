@@ -274,4 +274,11 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertContains("impro17", $themes);
     }
 
+    public function testGetPageSystemnameByID() {
+        $allPages = ContentFactory::getAll();
+        $first = $allPages[0];
+        $this->assertEquals($first->systemname, getPageSystemnameByID($first->id));
+        $this->assertNull(getPageSystemnameByID(PHP_INT_MAX));
+    }
+
 }

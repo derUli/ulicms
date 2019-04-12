@@ -1227,7 +1227,7 @@ function getPageSystemnameByID($id) {
         $row = db_fetch_object($query);
         return $row->systemname;
     } else {
-        return "-";
+        return null;
     }
 }
 
