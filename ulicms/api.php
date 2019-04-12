@@ -1179,7 +1179,6 @@ function replaceShortcodesWithModules($string, $replaceOther = true) {
 
         $main_class = getModuleMeta($thisModule, "main_class");
         $controller = null;
-        $hasRenderMethod = false;
         if ($main_class) {
             $controller = ControllerRegistry::get($main_class);
         }
