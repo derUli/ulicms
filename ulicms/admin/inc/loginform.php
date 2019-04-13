@@ -16,6 +16,9 @@ if (!$admin_logo) {
     $admin_logo = "gfx/logo.png";
 }
 
+$error = $_REQUEST["error"] and ! empty($_REQUEST["error"]) ?
+        $_REQUEST["error"] : null;
+
 $login_welcome_text = get_lang_config("login_welcome_text", $default_language);
 ?>
 <?php
@@ -33,7 +36,8 @@ echo ModuleHelper::buildMethodCallForm("SessionManager", "login",
         array(), RequestMethod::POST,
         array
             (
-            "id" => "login-form"
+            "id" => "login-form",
+            "data-has-error" => !is_null($error)
         )
 )
 ?>
@@ -92,22 +96,12 @@ if (!empty($_REQUEST["go"])) {
     </tr>
 </table>
 <?php echo ModuleHelper::endForm(); ?>
-<script type="text/javascript">
-    $(document).ready(function () {
-        bindTogglePassword("#password", "#view_password")
-    });
-</script>
 <?php
-if (isset($_REQUEST["error"]) and ! empty($_REQUEST["error"])) {
+if ($error) {
     ?>
-    <script type="text/javascript">
-        $(function () {
-            shake("form#login-form");
-        });
-    </script>
     <div class="alert alert-danger voffset2">
         <?php
-        echo htmlspecialchars($_REQUEST["error"]);
+        esc($error);
         ?>
     </div>
     <?php
@@ -118,14 +112,14 @@ if (Settings::get("visitors_can_register") === "on" or Settings::get("visitors_c
     ?>
     <a
         href="?register=register&<?php
-        if (!empty($_REQUEST["go"])) {
-            echo "go=" . real_htmlspecialchars($_REQUEST["go"]);
-        }
-        ?>"
+    if (!empty($_REQUEST["go"])) {
+        echo "go=" . real_htmlspecialchars($_REQUEST["go"]);
+    }
+    ?>"
         class="btn btn-default voffset2"><i class="fas fa-user-plus"></i> <?php
-            translate("register");
-            ?></a>
-    <?php
+    translate("register");
+    ?></a>
+        <?php
 }
 ?>
 <?php
@@ -133,8 +127,12 @@ if (!Settings::get("disable_password_reset")) {
     ?>
     <a href="?reset_password" class="btn btn-default pull-right voffset2"><i
             class="fa fa-lock"></i> <?php
-        translate("reset_password");
-        ?></a>
-    <?php
+    translate("reset_password");
+    ?></a>
+        <?php
 }
+
+enqueueScriptFile("scripts/login.js");
+combinedScriptHtml();
 ?>
+

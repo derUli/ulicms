@@ -63,7 +63,7 @@ function showAndHideFieldsByType() {
     }
 
     $(".custom-field-tab").each(function (index, el) {
-        if ($(el).data("type") == $("input[name='type']:checked").val()) {
+        if ($(el).data("type") === $("input[name='type']:checked").val()) {
             $(el).slideDown();
         } else {
             $(el).slideUp();
@@ -200,7 +200,7 @@ function systemnameOrLanguageChanged(item) {
     var url = $(".main-form").first().data("systemname-free-url");
 
     $.post(url, data, function (text, status) {
-        if (text == "yes") {
+        if (text === "yes") {
             $("input[name='systemname']").removeClass("error-field");
             $("select[name='language']").removeClass("error-field");
         } else {
@@ -252,7 +252,7 @@ $(function () {
         var url = "../?goid=" + $("#page_id").val();
         // if page has unsaved changes open it in new window/tab
         // else open it in the same window/tab
-        if (formchanged && !submitted) {
+        if (formChanged && !submitted) {
             window.open(url);
         } else {
             location.href = url;
@@ -322,7 +322,7 @@ $(function () {
 // XXX: this functions should be binded unobstrusive
 function filterByLanguage(element) {
     var index = element.selectedIndex
-    if (element.options[index].value != "") {
+    if (element.options[index].value !== "") {
         location.replace("index.php?action=pages&filter_language="
                 + element.options[index].value)
     }
@@ -330,7 +330,7 @@ function filterByLanguage(element) {
 
 function filterByType(element) {
     var index = element.selectedIndex
-    if (element.options[index].value != "") {
+    if (element.options[index].value !== "") {
         location.replace("index.php?action=pages&filter_type="
                 + element.options[index].value)
     }
@@ -338,39 +338,39 @@ function filterByType(element) {
 
 function filterByMenu(element) {
     var index = element.selectedIndex
-    if (element.options[index].value != "") {
+    if (element.options[index].value !== "") {
         location.replace("index.php?action=pages&filter_menu="
                 + element.options[index].value)
     }
 }
 
 function filterByActive(element) {
-    var index = element.selectedIndex
-    if (element.options[index].value != "") {
+    var index = element.selectedIndex;
+    if (element.options[index].value !== "") {
         location.replace("index.php?action=pages&filter_active="
                 + element.options[index].value)
     }
 }
 
 function filterByApproved(element) {
-    var index = element.selectedIndex
-    if (element.options[index].value != "") {
+    var index = element.selectedIndex;
+    if (element.options[index].value !== "") {
         location.replace("index.php?action=pages&filter_approved="
                 + element.options[index].value)
     }
 }
 
 function filterByParent(element) {
-    var index = element.selectedIndex
-    if (element.options[index].value != "") {
+    var index = element.selectedIndex;
+    if (element.options[index].value !== "") {
         location.replace("index.php?action=pages&filter_parent="
                 + element.options[index].value)
     }
 }
 
 function filterByStatus(element) {
-    var index = element.selectedIndex
-    if (element.options[index].value != "") {
+    var index = element.selectedIndex;
+    if (element.options[index].value !== "") {
         location.replace("index.php?action=pages&filter_status="
                 + element.options[index].value)
     }

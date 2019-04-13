@@ -1,11 +1,11 @@
 function CKCHANGED(event) {
-    formchanged = 1;
+    formChanged = 1;
     if (event.data.$.keyCode == 17) {
         isCtrl = false;
     }
 }
 
-formchanged = 0;
+formChanged = 0;
 submitted = 0;
 isCtrl = false;
 
@@ -47,13 +47,13 @@ $(document).ready(function () {
     }
     $('form').each(function (i, n) {
         $('input', n).change(function () {
-            formchanged = 1
+            formChanged = 1
         });
         $('textarea', n).change(function () {
-            formchanged = 1
+            formChanged = 1
         });
         $('select', n).change(function () {
-            formchanged = 1
+            formChanged = 1
         });
         $(n).submit(function () {
             submitted = 1
@@ -65,7 +65,7 @@ $(document).ready(function () {
 window.onbeforeunload = confirmExit;
 function confirmExit()
 {
-    if (typeof formchanged !== "undefined" && formchanged === 1 && submitted === 0) {
+    if (typeof formChanged !== "undefined" && formChanged === 1 && submitted === 0) {
         return PageTranslation.ConfirmExitWithoutSave;
     } else {
         return;

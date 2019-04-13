@@ -1,10 +1,8 @@
 <?php
 
-class ModuleHelper extends Helper
-{
+class ModuleHelper extends Helper {
 
-    public static function buildAdminURL($module, $suffix = null)
-    {
+    public static function buildAdminURL($module, $suffix = null) {
         $url = "?action=module_settings&module=" . $module;
         if ($suffix !== null and ! empty($suffix)) {
             $url .= "&" . $suffix;
@@ -13,19 +11,16 @@ class ModuleHelper extends Helper
         return $url;
     }
 
-    public static function buildModuleRessourcePath($module, $path, $absolute = false)
-    {
+    public static function buildModuleRessourcePath($module, $path, $absolute = false) {
         $path = trim($path, "/");
         return getModulePath($module, $absolute) . $path;
     }
 
-    public static function buildRessourcePath($module, $path)
-    {
+    public static function buildRessourcePath($module, $path) {
         return self::buildModuleRessourcePath($module, $path);
     }
 
-    public static function getFirstPageWithModule($module = null, $language = null)
-    {
+    public static function getFirstPageWithModule($module = null, $language = null) {
         if (is_null($language)) {
             $language = getCurrentLanguage();
         }
@@ -38,8 +33,8 @@ class ModuleHelper extends Helper
         while ($dataset = Database::fetchObject($query)) {
             $content = $dataset->content;
             $content = str_replace("&quot;", "\"", $content);
-            if (! is_null($dataset->module) and ! empty($dataset->module) and $dataset->type == "module") {
-                if (! $module or ($module and $dataset->module == $module)) {
+            if (!is_null($dataset->module) and ! empty($dataset->module) and $dataset->type == "module") {
+                if (!$module or ( $module and $dataset->module == $module)) {
                     return $dataset;
                 }
             } else if ($module) {
@@ -55,43 +50,40 @@ class ModuleHelper extends Helper
         return null;
     }
 
-    public static function buildActionURL($action, $suffix = null, $prependSuffixIfRequired = false)
-    {
+    public static function buildActionURL($action, $suffix = null, $prependSuffixIfRequired = false) {
         $url = "?action=" . $action;
         if ($suffix !== null and ! empty($suffix)) {
             $url .= "&" . $suffix;
         }
-        if (! is_admin_dir() and $prependSuffixIfRequired) {
+        if (!is_admin_dir() and $prependSuffixIfRequired) {
             $url = "admin/" . $url;
         }
         $url = rtrim($url, "&");
         return $url;
     }
 
-    public static function getAllEmbedModules()
-    {
+    public static function getAllEmbedModules() {
         $retval = array();
         $modules = getAllModules();
         foreach ($modules as $module) {
             $noembedfile1 = Path::Resolve("ULICMS_DATA_STORAGE_ROOT/content/modules/$module/.noembed");
             $noembedfile2 = Path::Resolve("ULICMS_DATA_STORAGE_ROOT/content/modules/$module/noembed.txt");
-            
+
             $embed_attrib = true;
-            
+
             $meta_attr = getModuleMeta($module, "embed");
             if (is_bool($meta_attr)) {
                 $embed_attrib = $meta_attr;
             }
-            
-            if (! is_file($noembedfile1) and ! is_file($noembedfile2) and $embed_attrib) {
+
+            if (!is_file($noembedfile1) and ! is_file($noembedfile2) and $embed_attrib) {
                 $retval[] = $module;
             }
         }
         return $retval;
     }
 
-    public static function getMainController($module)
-    {
+    public static function getMainController($module) {
         $controller = null;
         $main_class = getModuleMeta($module, "main_class");
         if ($main_class) {
@@ -100,52 +92,49 @@ class ModuleHelper extends Helper
         return $controller;
     }
 
-    public static function isEmbedModule($module)
-    {
+    public static function isEmbedModule($module) {
         $retval = true;
         $noembedfile1 = Path::Resolve("ULICMS_DATA_STORAGE_ROOT/content/modules/$module/.noembed");
         $noembedfile2 = Path::Resolve("ULICMS_DATA_STORAGE_ROOT/content/modules/$module/noembed.txt");
-        
+
         $embed_attrib = true;
-        
+
         $meta_attr = getModuleMeta($module, "embed");
         if (is_bool($meta_attr)) {
             $embed_attrib = $meta_attr;
         }
-        
+
         if (is_file($noembedfile1) or is_file($noembedfile2) or ! $embed_attrib) {
             $retval = false;
         }
         return $retval;
     }
 
-    public static function getBaseUrl($suffix = "/")
-    {
+    public static function getBaseUrl($suffix = "/") {
         $domain = get_http_host();
-        
+
         $dirname = dirname(get_request_uri());
-        
+
         // Replace backslashes with slashes (Windows)
         $dirname = str_replace("\\", "/", $dirname);
-        
+
         if (is_admin_dir()) {
             $dirname = dirname(dirname($dirname . "/.."));
         }
-        
+
         // Replace backslashes with slashes (Windows)
         $dirname = str_replace("\\", "/", $dirname);
-        
+
         $dirname = rtrim($dirname, "/");
-        
+
         return get_site_protocol() . $domain . $dirname . $suffix;
     }
 
-    public static function getFullPageURLByID($page_id = null, $suffix = null)
-    {
-        if (! $page_id) {
+    public static function getFullPageURLByID($page_id = null, $suffix = null) {
+        if (!$page_id) {
             $page_id = get_id();
         }
-        if (! $page_id) {
+        if (!$page_id) {
             return null;
         }
         $page = ContentFactory::getByID($page_id);
@@ -154,42 +143,42 @@ class ModuleHelper extends Helper
         }
         if ($page instanceof Language_Link) {
             $language = new Language($page->link_to_language);
-            if (! is_null($language->getID()) and StringHelper::isNotNullOrWhitespace($language->getLanguageLink()))
+            if (!is_null($language->getID()) and StringHelper::isNotNullOrWhitespace($language->getLanguageLink()))
                 return $language->getLanguageLink();
         }
         $domain = getDomainByLanguage($page->language);
         $dirname = dirname(get_request_uri());
-        
+
         $dirname = str_replace("\\", "/", $dirname);
-        
+
         if (is_admin_dir()) {
             $dirname = dirname(dirname($dirname . "/.."));
         }
-        if (! startsWith($dirname, "/")) {
+        if (!startsWith($dirname, "/")) {
             $dirname = "/" . $dirname;
         }
-        if (! endsWith($dirname, "/")) {
+        if (!endsWith($dirname, "/")) {
             $dirname = $dirname . "/";
         }
-        
+
         // Replace backslashes with slashes (Windows)
         $dirname = str_replace("\\", "/", $dirname);
-        
+
         $currentLanguage = isset($_SESSION["language"]) ? $_SESSION["language"] : Settings::get("default_language");
         if ($domain) {
             $url = get_site_protocol() . $domain . $dirname . $page->systemname . ".html";
-            if (! is_null($suffix)) {
+            if (!is_null($suffix)) {
                 $url .= "?{$suffix}";
             }
         } else {
             if ($page->language != $currentLanguage) {
                 $url = get_protocol_and_domain() . $dirname . $page->systemname . ".html" . "?language=" . $page->language;
-                if (! is_null($suffix)) {
+                if (!is_null($suffix)) {
                     $url .= "&{$suffix}";
                 }
             } else {
                 $url = get_protocol_and_domain() . $dirname . $page->systemname . ".html";
-                if (! is_null($suffix)) {
+                if (!is_null($suffix)) {
                     $url .= "?{$suffix}";
                 }
             }
@@ -202,14 +191,12 @@ class ModuleHelper extends Helper
      *
      * @param {string} $str
      */
-    public static function underscoreToCamel($str)
-    {
+    public static function underscoreToCamel($str) {
         // Remove underscores, capitalize words, squash, lowercase first.
         return lcfirst(str_replace(' ', '', ucwords(str_replace('_', ' ', $str))));
     }
 
-    public static function buildMethodCall($sClass, $sMethod, $suffix = null)
-    {
+    public static function buildMethodCall($sClass, $sMethod, $suffix = null) {
         $result = "sClass=" . urlencode($sClass) . "&sMethod=" . urlencode($sMethod);
         if (StringHelper::isNotNullOrWhitespace($suffix)) {
             $result .= "&" . trim($suffix);
@@ -217,19 +204,16 @@ class ModuleHelper extends Helper
         return $result;
     }
 
-    public static function buildMethodCallUrl($sClass, $sMethod, $suffix = null)
-    {
+    public static function buildMethodCallUrl($sClass, $sMethod, $suffix = null) {
         return "index.php?" . self::buildMethodCall($sClass, $sMethod, $suffix);
     }
 
-    public static function buildMethodCallUploadForm($sClass, $sMethod, $otherVars = array(), $requestMethod = RequestMethod::POST, $htmlAttributes = array())
-    {
+    public static function buildMethodCallUploadForm($sClass, $sMethod, $otherVars = array(), $requestMethod = RequestMethod::POST, $htmlAttributes = array()) {
         $htmlAttributes["enctype"] = "multipart/form-data";
         return self::buildMethodCallForm($sClass, $sMethod, $otherVars, $requestMethod, $htmlAttributes);
     }
 
-    public static function buildMethodCallForm($sClass, $sMethod, $otherVars = array(), $requestMethod = RequestMethod::POST, $htmlAttributes = array())
-    {
+    public static function buildMethodCallForm($sClass, $sMethod, $otherVars = array(), $requestMethod = RequestMethod::POST, $htmlAttributes = array()) {
         $html = "";
         $attribhtml = StringHelper::isNotNullOrWhitespace(self::buildHTMLAttributesFromArray($htmlAttributes)) ? " " . self::buildHTMLAttributesFromArray($htmlAttributes) : "";
         $html .= '<form action="index.php" method="' . $requestMethod . '"' . $attribhtml . '>';
@@ -243,8 +227,7 @@ class ModuleHelper extends Helper
         return $html;
     }
 
-    public static function buildMethodCallButton($sClass, $sMethod, $buttonText, $buttonAttributes = array("class"=>"btn btn-default", "type"=>"submit"), $otherVars = array(), $formAttributes = array(), $requestMethod = RequestMethod::POST)
-    {
+    public static function buildMethodCallButton($sClass, $sMethod, $buttonText, $buttonAttributes = array("class" => "btn btn-default", "type" => "submit"), $otherVars = array(), $formAttributes = array(), $requestMethod = RequestMethod::POST) {
         $html = self::buildMethodCallForm($sClass, $sMethod, $otherVars, $requestMethod, $formAttributes);
         $html .= '<button ' . self::buildHTMLAttributesFromArray($buttonAttributes) . ">";
         $html .= $buttonText . "</button>";
@@ -252,13 +235,12 @@ class ModuleHelper extends Helper
         return $html;
     }
 
-    public static function deleteButton($url, $otherVars = array(), $htmlAttributes = array())
-    {
+    public static function deleteButton($url, $otherVars = array(), $htmlAttributes = array()) {
         $html = "";
         $htmlAttributes["class"] = trim("delete-form " . $htmlAttributes["class"]);
-        
+
         $attribhtml = StringHelper::isNotNullOrWhitespace(self::buildHTMLAttributesFromArray($htmlAttributes)) ? " " . self::buildHTMLAttributesFromArray($htmlAttributes) : "";
-        
+
         $html .= '<form action="' . _esc($url) . '" method="' . RequestMethod::POST . '"' . $attribhtml . '>';
         $html .= get_csrf_token_html();
         foreach ($otherVars as $key => $value) {
@@ -270,24 +252,23 @@ class ModuleHelper extends Helper
         return $html;
     }
 
-    public static function buildHTMLAttributesFromArray($attributes = array())
-    {
+    public static function buildHTMLAttributesFromArray($attributes = array()) {
         $html = "";
         foreach ($attributes as $key => $value) {
-            $html .= Template::getEscape($key) . '="' . Template::getEscape($value) . '" ';
+            $val = is_bool($value) ? strbool($value) : $value;
+            $html .= Template::getEscape($key) . '="' . Template::getEscape($val) . '" ';
         }
         $html = trim($html);
         return $html;
     }
 
-    public static function buildQueryString($data, $forHtml = true)
-    {
+    public static function buildQueryString($data, $forHtml = true) {
         $seperator = $forHtml ? "&amp;" : "&";
         return http_build_query($data, '', $seperator);
     }
 
-    public static function endForm()
-    {
+    public static function endForm() {
         return "</form>";
     }
+
 }

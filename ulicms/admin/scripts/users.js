@@ -29,7 +29,7 @@ function validatePasswords(event) {
 function submitPasswordForm(event) {
     event.preventDefault();
     validatePasswords(event);
-    if ($("#password").css("background-color") != "red") {
+    if ($("#password").css("background-color") !== "red") {
         $("form#edit_user").off("submit");
         $("form#edit_user").submit();
     } else {
