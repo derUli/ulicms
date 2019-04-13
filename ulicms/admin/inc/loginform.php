@@ -113,7 +113,7 @@ if (Settings::get("visitors_can_register") === "on" or Settings::get("visitors_c
     <a
         href="?register=register&<?php
         if (!empty($_REQUEST["go"])) {
-            echo "go=" . real_htmlspecialchars($_REQUEST["go"]);
+            echo "go=" . _esc($_REQUEST["go"]);
         }
         ?>"
         class="btn btn-default voffset2"><i class="fas fa-user-plus"></i> <?php

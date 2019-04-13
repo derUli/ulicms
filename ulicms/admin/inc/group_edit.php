@@ -7,7 +7,7 @@ if (!$permissionChecker->hasPermission("groups")) {
     $id = intval($_REQUEST["edit"]);
     $permissionChecker = new ACL();
     $all_permissions = $permissionChecker->getPermissionQueryResult($id);
-    $groupName = real_htmlspecialchars($all_permissions["name"]);
+    $groupName = _esc($all_permissions["name"]);
     $all_permissions_all = $permissionChecker->getDefaultACL(false, true);
     $all_permissions = json_decode($all_permissions["permissions"], true);
     foreach ($all_permissions_all as $name => $value) {

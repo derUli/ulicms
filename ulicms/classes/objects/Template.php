@@ -80,7 +80,7 @@ ORDER BY RAND() LIMIT 1") or die(Database::getError());
 
     public static function getHomepageOwner() {
         $homepage_title = Settings::getLang("homepage_owner", $_SESSION["language"]);
-        return htmlspecialchars($homepage_title, ENT_QUOTES, "UTF-8");
+        return _esc($homepage_title);
     }
 
     public static function homepageOwner() {
@@ -117,7 +117,7 @@ ORDER BY RAND() LIMIT 1") or die(Database::getError());
     }
 
     public static function escape($value) {
-        echo htmlspecialchars($value, ENT_QUOTES, "UTF-8");
+        echo self::getEscape($value);
     }
 
     public static function getEscape($value) {
@@ -139,7 +139,7 @@ ORDER BY RAND() LIMIT 1") or die(Database::getError());
         $logo_storage_path = ULICMS_DATA_STORAGE_ROOT . "/content/images/" . Settings::get("logo_image");
 
         if (Settings::get("logo_disabled") == "no" and is_file($logo_storage_path)) {
-            echo '<img class="website_logo" src="' . $logo_storage_url . '" alt="' . htmlspecialchars(Settings::get("homepage_title"), ENT_QUOTES, "UTF-8") . '"/>';
+            echo '<img class="website_logo" src="' . $logo_storage_url . '" alt="' . _esc(Settings::get("homepage_title")) . '"/>';
         }
     }
 
@@ -160,7 +160,7 @@ ORDER BY RAND() LIMIT 1") or die(Database::getError());
         if (!$motto) {
             $motto = Settings::get("motto");
         }
-        return htmlspecialchars($motto, ENT_QUOTES, "UTF-8");
+        return _esc($motto);
     }
 
     public static function motto() {
@@ -344,8 +344,8 @@ ORDER BY RAND() LIMIT 1") or die(Database::getError());
         if ($keywords != "" && $keywords != false) {
             if (!Settings::get("hide_meta_keywords")) {
                 $keywords = apply_filter($keywords, "meta_keywords");
-                $keywords = htmlentities($keywords, ENT_QUOTES, "UTF-8");
-                echo '<meta name="keywords" content="' . $keywords . '"/>';
+
+                echo '<meta name="keywords" content="' . _esc($keywords) . '"/>';
                 echo "\r\n";
             }
         }
@@ -355,7 +355,7 @@ ORDER BY RAND() LIMIT 1") or die(Database::getError());
         }
         if ($description != "" && $description != false) {
             $description = apply_filter($description, "meta_description");
-            $$description = htmlentities($description, ENT_QUOTES, "UTF-8");
+            $$description = _esc($description);
             if (!Settings::get("hide_meta_description")) {
                 echo '<meta name="description" content="' . $description . '"/>';
                 echo "\r\n";

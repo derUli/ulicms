@@ -350,15 +350,15 @@ if ($permissionChecker->hasPermission("pages")) {
                         <div class="typedep" id="article-metadata">
                             <br /> <strong><?php translate("author_name"); ?></strong><br /> <input
                                 type="text" name="article_author_name"
-                                value="<?php echo real_htmlspecialchars($row->article_author_name); ?>"
+                                value="<?php echo _esc($row->article_author_name); ?>"
                                 maxlength="80"> <br /> <strong><?php translate("author_email"); ?></strong><br />
                             <input type="email" name="article_author_email"
-                                   value="<?php echo real_htmlspecialchars($row->article_author_email); ?>"
+                                   value="<?php echo _esc($row->article_author_email); ?>"
                                    maxlength="80"> <br />
                             <div id="comment-fields">
                                 <strong><?php translate("homepage"); ?></strong><br /> <input
                                     type="url" name="comment_homepage"
-                                    value="<?php echo real_htmlspecialchars($row->comment_homepage); ?>"
+                                    value="<?php echo _esc($row->comment_homepage); ?>"
                                     maxlength="255"> <br />
                             </div>
                             <strong><?php translate("article_date"); ?></strong><br /> <input
@@ -369,7 +369,7 @@ if ($permissionChecker->hasPermission("pages")) {
                    }
                                     ?>"
                                 step=any> <br /> <br /> <strong><?php translate("excerpt"); ?></strong>
-                            <textarea name="excerpt" id="excerpt" rows="5" cols="80" class="<?php esc($editor); ?>" data-mimetype="text/html" ><?php echo real_htmlspecialchars($row->excerpt); ?></textarea>
+                            <textarea name="excerpt" id="excerpt" rows="5" cols="80" class="<?php esc($editor); ?>" data-mimetype="text/html" ><?php echo _esc($row->excerpt); ?></textarea>
                         </div>
                         <div class="typedep" id="tab-og" style="display: none">
                             <h3><?php translate("open_graph"); ?></h3>
@@ -651,7 +651,7 @@ if ($permissionChecker->hasPermission("pages")) {
                         </strong>
                         <input type="text" id="article_image" name="article_image"
                                readonly="readonly" class="kcfinder"
-                               value="<?php echo real_htmlspecialchars($row->article_image); ?>"
+                               value="<?php echo _esc($row->article_image); ?>"
                                style="cursor: pointer" maxlength="255" /> <a href="#"
                                onclick="$('#article_image').val('');
                                        return false;"
@@ -814,9 +814,9 @@ if ($permissionChecker->hasPermission("pages")) {
                                 <?php
                                 while ($row2 = db_fetch_object($groupsSql)) {
                                     if (faster_in_array(strval($row2->id), $access)) {
-                                        echo '<option value="' . $row2->id . '" selected>' . real_htmlspecialchars($row2->name) . '</option>';
+                                        echo '<option value="' . $row2->id . '" selected>' . _esc($row2->name) . '</option>';
                                     } else {
-                                        echo '<option value="' . $row2->id . '">' . real_htmlspecialchars($row2->name) . '</option>';
+                                        echo '<option value="' . $row2->id . '">' . _esc($row2->name) . '</option>';
                                     }
                                 }
                                 ?>

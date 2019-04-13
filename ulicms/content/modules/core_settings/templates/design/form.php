@@ -15,7 +15,7 @@ if (!$permissionChecker->hasPermission("design")) {
     $mobile_theme = Settings::get("mobile_theme");
     $default_font = Settings::get("default_font");
     $google_font = Settings::get("google-font");
-    $title_format = htmlspecialchars(Settings::get("title_format"), ENT_QUOTES, "UTF-8");
+    $title_format = Settings::get("title_format");
     $font_size = Settings::get("font-size");
     $ckeditor_skin = Settings::get("ckeditor_skin");
     $video_width_100_percent = Settings::get("video_width_100_percent");
@@ -59,7 +59,7 @@ if (!$permissionChecker->hasPermission("design")) {
             <td style="width: 300px;"><strong><?php translate("title_format"); ?> </strong></td>
             <td><input type="text" name="title_format"
                        value="<?php
-                       echo $title_format;
+                       esc($title_format);
                        ?>"></td>
         </tr>
         <tr>
@@ -221,7 +221,7 @@ if (!$permissionChecker->hasPermission("design")) {
             <td><input name="header-background-color"
                        class="jscolor {hash:true,caps:true}"
                        value="<?php
-                       echo real_htmlspecialchars(Settings::get("header-background-color"));
+                       echo _esc(Settings::get("header-background-color"));
                        ?>"></td>
         </tr>
         <tr>
@@ -229,7 +229,7 @@ if (!$permissionChecker->hasPermission("design")) {
             <td><input name="body-text-color"
                        class="jscolor {hash:true,caps:true}"
                        value="<?php
-                       echo real_htmlspecialchars(Settings::get("body-text-color"));
+                       echo _esc(Settings::get("body-text-color"));
                        ?>"></td>
         </tr>
         <tr>
@@ -237,7 +237,7 @@ if (!$permissionChecker->hasPermission("design")) {
             <td><input name="body-background-color"
                        class="jscolor {hash:true,caps:true}"
                        value="<?php
-                       echo real_htmlspecialchars(Settings::get("body-background-color"));
+                       echo _esc(Settings::get("body-background-color"));
                        ?>"></td>
         </tr>
         <?php
@@ -296,7 +296,7 @@ if (!$permissionChecker->hasPermission("design")) {
 
             <td><input type="text" name="additional_menus"
                        value="<?php
-                       echo real_htmlspecialchars($additional_menus);
+                       echo _esc($additional_menus);
                        ?>"></td>
         </tr>
     </table>

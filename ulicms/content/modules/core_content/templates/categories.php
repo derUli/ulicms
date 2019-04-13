@@ -64,7 +64,7 @@ if (!is_admin() and ! $permissionChecker->hasPermission("categories")) {
                                 esc($category["name"]);
                                 ?></td>
                             <td style="padding-right: 20px;" class="hide-on-mobile"><?php
-                                echo nl2br(real_htmlspecialchars($category["description"]));
+                                echo nl2br(_esc($category["description"]));
                                 ?></td>
                                 <?php
                                 if ($permissionChecker->hasPermission("categories_edit")) {

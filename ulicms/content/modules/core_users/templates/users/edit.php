@@ -33,7 +33,7 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
                 echo $row->id;
                 ?>"> <br /> <strong><?php translate("username"); ?>*</strong><br />
             <input type="text" name="username"
-                   value="<?php echo real_htmlspecialchars($row->username); ?>" required
+                   value="<?php echo _esc($row->username); ?>" required
                    <?php
                    if (!$permissionChecker->hasPermission("users")) {
                        ?>
@@ -46,19 +46,19 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
 
                     <input type="text" name="firstname"
                            value="<?php
-                           echo real_htmlspecialchars($row->firstname);
+                           echo _esc($row->firstname);
                            ?>"
                            required="required"><br />
                 </div>
                 <div class="col-xs-12 col-md-6"> <strong><?php translate("lastname"); ?></strong><br />
                     <input type="text" name="lastname"
                            value="<?php
-                           echo real_htmlspecialchars($row->lastname);
+                           echo _esc($row->lastname);
                            ?>"><br/>
                 </div> </div> <strong><?php translate("email"); ?></strong><br />
             <input type="email" name="email"
                    value="<?php
-                   echo real_htmlspecialchars($row->email);
+                   echo _esc($row->email);
                    ?>"><br /> <strong><?php translate("last_login"); ?></strong><br />
                    <?php
                    if (is_null($row->last_login)) {
@@ -123,7 +123,7 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
                             <?php
                             echo in_array($key, $secondaryGroupIds) ? "selected" : "";
                             ?>>
-                                <?php echo real_htmlspecialchars($value) ?>
+                                <?php echo _esc($value) ?>
                         </option>
                         <?php
                     }
@@ -136,7 +136,7 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
             <strong><?php
                 translate("homepage");
                 ?></strong> <br /> <input type="url" name="homepage"
-                                    value="<?php echo real_htmlspecialchars($row->homepage); ?>"> <br />
+                                    value="<?php echo _esc($row->homepage); ?>"> <br />
             <strong><?php translate("html_editor"); ?></strong> <br /> <select
                 name="html_editor">
                 <option value="ckeditor"

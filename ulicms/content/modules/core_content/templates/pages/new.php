@@ -506,7 +506,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                 <option value="desktop"><?php translate("desktop_computers"); ?></option>
                 <?php
                 while ($row = db_fetch_object($groups)) {
-                    echo '<option value="' . $row->id . '">' . real_htmlspecialchars($row->name) . '</option>';
+                    echo '<option value="' . $row->id . '">' . _esc($row->name) . '</option>';
                 }
                 ?>
             </select> <br /> <br />

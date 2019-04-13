@@ -38,7 +38,7 @@ if (!$permissionChecker->hasPermission("groups")) {
                 $userName = isset($user["username"]) ? $user["username"] : AuditLog::UNKNOWN;
                 $logger->debug("User $userName - Created new group ({$name})\nPermissions: " . json_readable_encode($all_permissions));
             }
-            $name = real_htmlspecialchars($name);
+            $name = _esc($name);
         }
     } else if (isset($_GET["delete"]) and get_request_method() == "POST") {
         $id = intval($_GET["delete"]);
@@ -83,7 +83,7 @@ if (!$permissionChecker->hasPermission("groups")) {
         if (!empty($name)) {
             $permissionChecker->updateGroup($id, $name, $json_permissions);
             $modified = true;
-            $name = real_htmlspecialchars($name);
+            $name = _esc($name);
         }
 
         if ($logger) {

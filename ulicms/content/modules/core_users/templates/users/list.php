@@ -74,11 +74,11 @@ if ($permissionChecker->hasPermission("users")) {
                         echo '<tr id="dataset-' . $row->getId() . '">';
                         echo "<td style=\"width:40px;\">" . $row->getId() . "</td>";
                         echo "<td>";
-                        echo '<img src="' . get_gravatar($row->getEmail(), 26) . '" alt="Avatar von ' . real_htmlspecialchars($row->getUsername()) . '" style="width:26px;"> ';
+                        echo '<img src="' . get_gravatar($row->getEmail(), 26) . '" alt="Avatar von ' . _esc($row->getUsername()) . '" style="width:26px;"> ';
                         esc($row->getUsername()) . "</td>";
-                        echo "<td class=\"hide-on-mobile\">" . real_htmlspecialchars($row->getLastName()) . "</td>";
-                        echo "<td class=\"hide-on-mobile\">" . real_htmlspecialchars($row->getFirstname()) . "</td>";
-                        echo "<td class=\"hide-on-mobile\">" . real_htmlspecialchars($row->getEmail()) . "</td>";
+                        echo "<td class=\"hide-on-mobile\">" . _esc($row->getLastName()) . "</td>";
+                        echo "<td class=\"hide-on-mobile\">" . _esc($row->getFirstname()) . "</td>";
+                        echo "<td class=\"hide-on-mobile\">" . _esc($row->getEmail()) . "</td>";
                         echo "<td class=\"hide-on-mobile\">";
                         $id = $row->getGroupId();
                         if ($id and $permissionChecker->hasPermission("groups_edit")) {

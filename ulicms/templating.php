@@ -478,7 +478,7 @@ function get_homepage_title() {
     if (!$homepage_title) {
         $homepage_title = Settings::get("homepage_title");
     }
-    return htmlspecialchars($homepage_title, ENT_QUOTES, "UTF-8");
+    return _esc($homepage_title);
 }
 
 function homepage_title() {
@@ -809,9 +809,9 @@ function get_menu($name = "top", $parent = null, $recursive = true, $order = "po
                 $html .= "<a class='menu_active_link" . rtrim($additional_classes) . "' href='" . $url . "' target='" . $row->target . "'>";
             }
             if (!is_null($row->menu_image) and ! empty($row->menu_image)) {
-                $html .= '<img src="' . $row->menu_image . '" alt="' . htmlentities($title, ENT_QUOTES, "UTF-8") . '"/>';
+                $html .= '<img src="' . $row->menu_image . '" alt="' . _esc($title) . '"/>';
             } else {
-                $html .= htmlentities($title, ENT_QUOTES, "UTF-8");
+                $html .= _esc($title);
             }
             $html .= "</a>\n";
 
