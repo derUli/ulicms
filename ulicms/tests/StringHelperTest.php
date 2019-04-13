@@ -10,7 +10,7 @@ class StringHelperTest extends \PHPUnit\Framework\TestCase {
         $input = file_get_contents(dirname(__FILE__) .
                 "/fixtures/removeEmptyLinesFromString.input.txt");
         $expected = normalizeLN(file_get_contents(dirname(__FILE__) .
-                "/fixtures/removeEmptyLinesFromString.expected.txt"), "\n");
+                        "/fixtures/removeEmptyLinesFromString.expected.txt"), "\n");
 
         $this->assertEquals($expected,
                 StringHelper::removeEmptyLinesFromString($input));
@@ -90,6 +90,13 @@ Noch mehr Text http://www.ulicms.de und so weiter.";
 Noch mehr Text <a href="http://www.ulicms.de" rel="nofollow" target="_blank">http://www.ulicms.de</a> und so weiter.';
 
         $this->assertEquals($expected, StringHelper::makeLinksClickable($input));
+    }
+
+    public function testCleanString() {
+        $this->assertEquals("hello-world", StringHelper::cleanString("Hello World"));
+        $this->assertEquals("hello-world", StringHelper::cleanString("Hello World", "-"));
+        $this->assertEquals("hello_world", StringHelper::cleanString("Hello World", "_"));
+        $this->assertEquals("das-ist-die-grossfraesmaschinenoeffnungstuer", StringHelper::cleanString("Das ist die Großfräsmaschinenöffnungstür."));
     }
 
 }

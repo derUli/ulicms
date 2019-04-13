@@ -130,4 +130,24 @@ class Request {
         return (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
     }
 
+    public static function getDomain() {
+        return $_SERVER['HTTP_HOST'];
+    }
+
+    public static function getReferrer() {
+        $referrer = null;
+        if (isset($_SERVER['HTTP_REFERER'])) {
+            $referrer = $_SERVER['HTTP_REFERER'];
+        }
+        return $referrer;
+    }
+
+    public static function getUserAgent() {
+        return $_SERVER['HTTP_USER_AGENT'];
+    }
+
+    public static function getRequestUri() {
+        return $_SERVER["REQUEST_URI"];
+    }
+
 }

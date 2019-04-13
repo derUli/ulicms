@@ -4,12 +4,16 @@ Verbesserungen:
 * Generierung von Systemnamen unterstützt nun mehr Zeichen
 * Überprüfung der Passwort-Wiederholung optisch verbessert.
 
+Neue API-Methoden:
+* Request::getDomain()
+
 Geänderte API-Methoden:
 * get_prefered_language($priorities, $http_accept_language) gibt nun einen
   String zurück
 
 Fehlerkorrekturen:
 * Shake Animation bei fehlschlagen von Login wird nun wieder angezeigt
+* Drei XSS-Sicherheitslücken geschlossen (gemeldet von Kağan Eğlence)
 
 ===== Neues in UliCMS 2019.2.5 =====
 
