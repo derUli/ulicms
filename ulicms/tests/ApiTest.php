@@ -295,15 +295,11 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetPreferredLanguage() {
-        $acceptLanguageHeader = "Accept-Language: da, en-gb;q=0.8, en;q=0.7, de;q=0.5";
+        $acceptLanguageHeader1 = "Accept-Language: da, en-gb;q=0.8, en;q=0.7, de;q=0.5";
+        $this->assertEquals("en", get_prefered_language(array("de", "en"), $acceptLanguageHeader1));
 
-        $preferredLanguages = get_prefered_language(array("de", "en"), $acceptLanguageHeader);
-        reset($preferredLanguages);
-        $this->assertEquals("en", key($preferredLanguages));
-        $this->assertEquals("0.7", $preferredLanguages["en"]);
-        next($preferredLanguages);
-        $this->assertEquals("de", key($preferredLanguages));
-        $this->assertEquals("0.5", $preferredLanguages["de"]);
+        $acceptLanguageHeader2 = "Accept-Language: da, en-gb;q=0.8, en;q=0.7, de;q=0.9";
+        $this->assertEquals("de", get_prefered_language(array("de", "en"), $acceptLanguageHeader2));
     }
 
     public function testGetHtmlEditorReturnsNull() {
