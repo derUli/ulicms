@@ -28,7 +28,15 @@ if ($login_welcome_text) {
 <h3 id="login-please-headline">
     <?php translate("please_authenticate"); ?>
 </h3>
-<?php echo ModuleHelper::buildMethodCallForm("SessionManager", "login") ?>
+<?php
+echo ModuleHelper::buildMethodCallForm("SessionManager", "login",
+        array(), RequestMethod::POST,
+        array
+            (
+            "id" => "login-form"
+        )
+)
+?>
 <?php
 csrf_token_html();
 ?>
@@ -93,9 +101,8 @@ if (!empty($_REQUEST["go"])) {
 if (isset($_REQUEST["error"]) and ! empty($_REQUEST["error"])) {
     ?>
     <script type="text/javascript">
-        $(window).load(function () {
+        $(function () {
             shake("form#login-form");
-
         });
     </script>
     <div class="alert alert-danger voffset2">
