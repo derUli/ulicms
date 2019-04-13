@@ -12,7 +12,7 @@ if ($permissionChecker->hasPermission("favicon")) {
     if (isset($_GET["error"])) {
         ?>
 <p class="ulicms_error">
-<?php echo translate($_GET["error"]);?>
+<?php translate(_esc($_GET["error"]));?>
 </p>
 <?php } ?>
 

@@ -25,7 +25,7 @@ if (Settings::get("visitors_can_register") == "off" or ! Settings::get("visitors
             
             echo "<p style='color:green;'>" . get_translation("REGISTRATION_SUCCESSFUL") . "</p>";
             if (! empty($_REQUEST["go"])) {
-                $go = htmlspecialchars($_REQUEST["go"]);
+                $go = $_REQUEST["go"];
             } else {
                 $go = "index.php";
             }
@@ -62,8 +62,8 @@ if (Settings::get("visitors_can_register") == "off" or ! Settings::get("visitors
     if (! empty($_REQUEST["go"])) {
         ?>
 	<input type="hidden" name="go"
-		value='<?php
-        echo htmlspecialchars($_REQUEST["go"])?>'>
+		value="<?php
+        esc($_REQUEST["go"])?>">
 	<?php
     }
     ?>
