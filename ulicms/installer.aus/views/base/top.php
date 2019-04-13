@@ -9,7 +9,7 @@
         <link rel="stylesheet" type="text/css" href="media/style.css" />
         <link rel="stylesheet"
               href="../node_modules/@fortawesome/fontawesome-free/css/all.min.css" />
-    </head>
+    </head> 
     <body>
         <div class="container" id="root-container">
             <div class="row">

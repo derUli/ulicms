@@ -112,14 +112,14 @@ if (Settings::get("visitors_can_register") === "on" or Settings::get("visitors_c
     ?>
     <a
         href="?register=register&<?php
-    if (!empty($_REQUEST["go"])) {
-        echo "go=" . real_htmlspecialchars($_REQUEST["go"]);
-    }
-    ?>"
+        if (!empty($_REQUEST["go"])) {
+            echo "go=" . real_htmlspecialchars($_REQUEST["go"]);
+        }
+        ?>"
         class="btn btn-default voffset2"><i class="fas fa-user-plus"></i> <?php
-    translate("register");
-    ?></a>
-        <?php
+            translate("register");
+            ?></a>
+    <?php
 }
 ?>
 <?php
@@ -127,12 +127,10 @@ if (!Settings::get("disable_password_reset")) {
     ?>
     <a href="?reset_password" class="btn btn-default pull-right voffset2"><i
             class="fa fa-lock"></i> <?php
-    translate("reset_password");
-    ?></a>
-        <?php
+        translate("reset_password");
+        ?></a>
+    <?php
 }
-
 enqueueScriptFile("scripts/login.js");
 combinedScriptHtml();
-?>
 

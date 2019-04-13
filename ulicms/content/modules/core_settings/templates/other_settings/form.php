@@ -349,4 +349,3 @@ if (!$permissionChecker->hasPermission("other")) {
     </script>
     <?php
 }
-?>

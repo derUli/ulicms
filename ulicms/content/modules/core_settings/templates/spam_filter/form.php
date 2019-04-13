@@ -21,22 +21,10 @@ if ($permissionChecker->hasPermission("spam_filter")) {
                                                         echo " checked";
                                                     }
                                                     ?>
-                                                    value="yes" onChange="spamFilterEnabledcheckboxChanged(this.checked)">
+                                                    value="yes">
                                                     <?php translate("spamfilter_enabled"); ?>
             </label>
         </div>
-        <script type="text/javascript">
-            function spamFilterEnabledcheckboxChanged(checked) {
-                if (checked) {
-                    $('#country_filter_settings').slideDown()
-
-                } else
-                {
-                    $('#country_filter_settings').slideUp()
-                }
-            }
-        </script>
-
         <div id="country_filter_settings"
         <?php
         if (Settings::get("spamfilter_enabled") != "yes") {
@@ -128,19 +116,13 @@ if ($permissionChecker->hasPermission("spam_filter")) {
                 ?></button>
         </p>
     </form>
-    <script type="text/javascript">
-        $("#spamfilter_settings").ajaxForm({beforeSubmit: function (e) {
-                $("#message").html("");
-                $("#loading").show();
-            },
-            success: function (e) {
-                $("#loading").hide();
-                $("#message").html("<span style=\"color:green;\"><?php translate("changes_was_saved") ?></span>");
-            }
-        });
-    </script>
 
     <?php
+    $jsTranslation = new JSTranslation(array(), "SettingsTranslation");
+    $jsTranslation->addKey("changes_was_saved");
+    $jsTranslation->render();
+    enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/spam_filter.js"));
+    combinedScriptHtml();
 } else {
     noPerms();
 }

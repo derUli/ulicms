@@ -68,4 +68,4 @@ if ((!is_file($admin_file_path) and ! is_file($admin_file_path2) and ! ($control
         echo "<p>" . get_translation("this_module_has_no_settings") . "</p>";
     }
 }
-?>
+

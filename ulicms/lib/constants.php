@@ -1,4 +1,5 @@
 <?php
+
 $allowedTags = array(
     "<menu>",
     "<command>",
@@ -107,4 +108,3 @@ $allowedTags = array(
 natcasesort($allowedTags);
 $allowedTags = implode("", $allowedTags);
 define("HTML5_ALLOWED_TAGS", $allowedTags);
-?>

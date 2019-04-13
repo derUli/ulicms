@@ -52,4 +52,3 @@ if ($permissionChecker->hasPermission("pages")) {
 } else {
     noPerms();
 }
-?>

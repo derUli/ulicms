@@ -72,4 +72,3 @@ if ($permissionChecker->hasPermission("motd")) {
 } else {
     noPerms();
 }
-

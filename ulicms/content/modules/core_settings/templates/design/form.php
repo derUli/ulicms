@@ -312,6 +312,4 @@ if (!$permissionChecker->hasPermission("design")) {
     $translation->render();
     enqueueScriptFile("scripts/design.js");
     combinedScriptHtml();
-    ?>
-    <?php
 }

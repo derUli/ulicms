@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
     bindTogglePassword("#password", "#view_password")
 });

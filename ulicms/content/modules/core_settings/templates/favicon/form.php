@@ -14,8 +14,6 @@ if ($permissionChecker->hasPermission("favicon")) {
             <?php echo translate($_GET["error"]); ?>
         </div>
     <?php } ?>
-
-
     <h1><?php translate("favicon"); ?></h1>
     <p><?php
         translate("favicon_infotext");
@@ -72,4 +70,3 @@ if ($permissionChecker->hasPermission("favicon")) {
 } else {
     noPerms();
 }
-?>

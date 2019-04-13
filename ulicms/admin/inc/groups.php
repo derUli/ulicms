@@ -140,4 +140,3 @@ if (!$permissionChecker->hasPermission("groups")) {
     ?>
     <?php
 }
-?>
