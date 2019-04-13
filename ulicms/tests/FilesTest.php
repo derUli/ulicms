@@ -59,4 +59,58 @@ class FilesTest extends \PHPUnit\Framework\TestCase {
                 File::toDataUri(Path::resolve(dirname(__file__) . "/fixtures/hello-original.txt"), "application/inf"));
     }
 
+    public function testSureRemoveDirIncludingItself() {
+        $dirs = Path::resolve("ULICMS_TMP/foo/bar");
+
+        $baseDir = Path::resolve("ULICMS_TMP/foo");
+
+        mkdir($dirs, 0777, true);
+
+        $this->assertTrue(is_dir($dirs));
+
+        $testFiles = array(
+            "$baseDir/1",
+            "$baseDir/2",
+            "$baseDir/bar/1");
+
+        foreach ($testFiles as $file) {
+            $this->assertFalse(is_file($file));
+            file_put_contents($file, "hallo");
+            $this->assertTrue(is_file($file));
+        }
+
+        sureRemoveDir($baseDir, true);
+
+        $this->assertFalse(is_dir($baseDir));
+    }
+
+    public function testSureRemoveDirWithoutItself() {
+        $dirs = Path::resolve("ULICMS_TMP/foo/bar");
+
+        $baseDir = Path::resolve("ULICMS_TMP/foo");
+
+        mkdir($dirs, 0777, true);
+
+        $this->assertTrue(is_dir($dirs));
+
+        $testFiles = array(
+            "$baseDir/1",
+            "$baseDir/2",
+            "$baseDir/bar/1");
+
+        foreach ($testFiles as $file) {
+            $this->assertFalse(is_file($file));
+            file_put_contents($file, "hallo");
+            $this->assertTrue(is_file($file));
+        }
+
+        sureRemoveDir($baseDir, false);
+
+        $this->assertTrue(is_dir($baseDir));
+
+        $this->assertCount(0, glob("$baseDir/*"));
+
+        sureRemoveDir($baseDir, true);
+    }
+
 }

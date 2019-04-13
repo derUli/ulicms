@@ -154,7 +154,7 @@ if ($permissionChecker->hasPermission("pages")) {
                     <?php translate("title"); ?>
                     <input type="hidden" name="action" value="pages"> <input
                         type="text" name="filter_title"
-                        value="<?php echo htmlspecialchars($_SESSION["filter_title"]); ?>">
+                        value="<?php esc($_SESSION["filter_title"]); ?>">
                 </div>
 
                 <div class="col-xs-6">
@@ -491,7 +491,7 @@ if ($permissionChecker->hasPermission("pages")) {
                             echo '<tr id="dataset-' . $row->id . '">';
                             echo "<td>" . htmlspecialchars($row->title);
                             if (!empty($row->redirection) and ! is_null($row->redirection) and $row->type == "link") {
-                                echo htmlspecialchars(" --> ") . htmlspecialchars($row->redirection);
+                                esc(" --> ") . htmlspecialchars($row->redirection);
                             }
 
                             echo "</td>";

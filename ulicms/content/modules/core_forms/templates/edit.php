@@ -18,7 +18,7 @@ if (!$permissionChecker->hasPermission("forms") or ! $permissionChecker->hasPerm
         <input type="hidden" name="id" value="<?php echo $id; ?>" />
         <p>
             <strong><?php translate("name"); ?>*</strong><br /> <input type="text"
-                                                                      value="<?php echo htmlspecialchars($form["name"]); ?>" name="name"
+                                                                      value="<?php esc($form["name"]); ?>" name="name"
                                                                       required />
         </p>
         <p>
@@ -30,12 +30,12 @@ if (!$permissionChecker->hasPermission("forms") or ! $permissionChecker->hasPerm
         </p>
         <p>
             <strong><?php translate("email_to"); ?>*</strong><br /> <input
-                type="email" value="<?php echo htmlspecialchars($form["email_to"]); ?>"
+                type="email" value="<?php esc($form["email_to"]); ?>"
                 name="email_to" required />
         </p>
         <p>
             <strong><?php translate("subject"); ?>*</strong><br /> <input
-                type="text" value="<?php echo htmlspecialchars($form["subject"]); ?>"
+                type="text" value="<?php esc($form["subject"]); ?>"
                 name="subject" required />
         </p>
         <p>
@@ -46,16 +46,16 @@ if (!$permissionChecker->hasPermission("forms") or ! $permissionChecker->hasPerm
 
         <p>
             <strong><?php translate("fields"); ?></strong><br />
-            <textarea name="fields" rows="10"><?php echo htmlspecialchars($form["fields"]); ?></textarea>
+            <textarea name="fields" rows="10"><?php esc($form["fields"]); ?></textarea>
         </p>
         <p>
             <strong><?php translate("required_fields"); ?></strong><br />
-            <textarea name="required_fields" rows="10"><?php echo htmlspecialchars($form["required_fields"]); ?></textarea>
+            <textarea name="required_fields" rows="10"><?php esc($form["required_fields"]); ?></textarea>
         </p>
         <p>
             <strong><?php translate("mail_from_field"); ?></strong><br /> <input
                 type="text"
-                value="<?php echo htmlspecialchars($form["mail_from_field"]); ?>"
+                value="<?php esc($form["mail_from_field"]); ?>"
                 name="mail_from_field" />
         </p>
         <p>
@@ -65,7 +65,7 @@ if (!$permissionChecker->hasPermission("forms") or ! $permissionChecker->hasPerm
                     <option value="<?php echo $page["id"]; ?>"
                             <?php if ($page["id"] == $form["target_page_id"]) {
                                 echo " selected";
-                            } ?>><?php echo htmlspecialchars($page["title"]); ?></option>
+                            } ?>><?php esc($page["title"]); ?></option>
         <?php } ?>
             </select>
         </p>

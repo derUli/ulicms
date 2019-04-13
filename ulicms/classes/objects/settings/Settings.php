@@ -52,7 +52,7 @@ class Settings {
     public static function outputEscaped($key, $type = 'str') {
         $value = self::get($key, $type);
         if ($value) {
-            echo htmlspecialchars($value, ENT_QUOTES, "UTF-8");
+            esc($value);
         }
     }
 

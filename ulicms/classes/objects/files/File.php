@@ -93,6 +93,25 @@ if (!defined("KCFINDER_PAGE")) {
             return false;
         }
 
+        public static function sureRemoveDir($dir, $DeleteMe = true) {
+            if (!$dh = @opendir($dir)) {
+                return;
+            }
+            while (false !== ($obj = readdir($dh))) {
+                if ($obj == '.' || $obj == '..') {
+                    continue;
+                }
+                if (!@unlink($dir . '/' . $obj)) {
+                    sureRemoveDir($dir . '/' . $obj, true);
+                }
+            }
+
+            closedir($dh);
+            if ($DeleteMe) {
+                @rmdir($dir);
+            }
+        }
+
     }
 
 }

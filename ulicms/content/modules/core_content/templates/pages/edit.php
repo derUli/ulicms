@@ -99,11 +99,11 @@ if ($permissionChecker->hasPermission("pages")) {
                         <strong><?php translate("permalink"); ?>*</strong><br /> <input
                             type="text" required="required" name="systemname"
                             value="<?php
-            echo htmlspecialchars($row->systemname);
+            esc($row->systemname);
                 ?>"> <br /> <strong><?php translate("page_title"); ?>* </strong><br />
                         <input type="text" name="page_title"
                                value="<?php
-                echo htmlspecialchars($row->title);
+                esc($row->title);
                 ?>"
                                required>
                         <div class="typedep hide-on-snippet hide-on-non-regular">
@@ -111,7 +111,7 @@ if ($permissionChecker->hasPermission("pages")) {
                    translate("ALTERNATE_TITLE");
                 ?> </strong><br /> <input type="text" name="alternate_title"
                                                    value="<?php
-                    echo htmlspecialchars($row->alternate_title);
+                    esc($row->alternate_title);
                 ?>"> <small><?php
                                                    echo translate("ALTERNATE_TITLE_INFO");
                                                    ?> </small> <br /> <br /> <strong><?php translate("show_headline"); ?></strong>
@@ -339,12 +339,12 @@ if ($permissionChecker->hasPermission("pages")) {
                         <strong><?php translate("meta_description"); ?></strong><br /> <input
                             type="text" name="meta_description"
                             value="<?php
-                        echo htmlspecialchars($row->meta_description);
+                        esc($row->meta_description);
                                     ?>"
                             maxlength="200"> <br /> <strong><?php translate("meta_keywords"); ?></strong><br />
                         <input type="text" name="meta_keywords"
                                value="<?php
-                echo htmlspecialchars($row->meta_keywords);
+                esc($row->meta_keywords);
                                     ?>"
                                maxlength="200">
                         <div class="typedep" id="article-metadata">
@@ -377,21 +377,21 @@ if ($permissionChecker->hasPermission("pages")) {
                             <strong><?php translate("title"); ?>
                             </strong><br /> <input type="text" name="og_title"
                                                    value="<?php
-                    echo htmlspecialchars($row->og_title);
+                    esc($row->og_title);
                                     ?>"> <br /> <strong><?php translate("description"); ?>
                             </strong><br /> <input type="text" name="og_description"
                                                    value="<?php
-                                       echo htmlspecialchars($row->og_description);
+                                       esc($row->og_description);
                                     ?>"> <br /> <strong><?php translate("type"); ?>
                             </strong><br /> <input type="text" name="og_type"
                                                    value="<?php
-                                       echo htmlspecialchars($row->og_type);
+                                       esc($row->og_type);
                                     ?>"> <br /> <strong><?php translate("image"); ?></strong> <br />
 
                             <input type="text" id="og_image" name="og_image"
                                    readonly="readonly" class="kcfinder"
                                    value="<?php
-                                       echo htmlspecialchars($row->og_image);
+                                       esc($row->og_image);
                                     ?>"
                                    style="cursor: pointer" /> <a href="#"
                                    onclick="$('#og_image').val('');
@@ -405,7 +405,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                 <div style="margin-top: 15px;">
                                     <img class="small-preview-image"
                                          src="<?php
-                echo htmlspecialchars($og_url);
+                esc($og_url);
                                 ?>" />
                                 </div>
                             <?php } ?>
@@ -827,7 +827,7 @@ if ($permissionChecker->hasPermission("pages")) {
                         <textarea name="custom_data" style="width: 100%; height: 200px;"
                                   class="codemirror" data-mimetype="application/json" data-validate="json"
                                   cols=80 rows=10><?php
-            echo htmlspecialchars($row->custom_data);
+            esc($row->custom_data);
                         ?></textarea>
                     </div>
                 </div>
@@ -839,7 +839,7 @@ if ($permissionChecker->hasPermission("pages")) {
             <div class="typedep" id="content-editor">
                 <p>
                     <textarea name="page_content" id="page_content" cols=60 rows=20 class="<?php esc($editor); ?>" data-mimetype="text/html"><?php
-            echo htmlspecialchars($row->content);
+            esc($row->content);
             ?></textarea>
                 </p>
                 <?php

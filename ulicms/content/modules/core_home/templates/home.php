@@ -170,7 +170,7 @@ if ($permissionChecker->hasPermission("dashboard")) {
                             echo $url;
                             ?>"
                                target="_blank"><?php
-                                   echo htmlspecialchars($row->title, ENT_QUOTES, "UTF-8");
+                                   esc($row->title);
                                    ?></a></td>
                         <td align="right"><?php
                             echo $row->views;
@@ -206,7 +206,7 @@ if ($permissionChecker->hasPermission("dashboard")) {
                         <td><a href="<?php
                             echo $url;
                             ?>" target="_blank"><?php
-                                   echo htmlspecialchars($row->title, ENT_QUOTES, "UTF-8");
+                                   esc($row->title);
                                    ?></a></td>
                         <td><?php echo strftime("%x %X", $row->lastmodified) ?></td>
                         <td><?php

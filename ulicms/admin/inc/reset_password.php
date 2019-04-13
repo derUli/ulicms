@@ -46,7 +46,7 @@ if (Settings::get("disable_password_reset")) {
             ?>
             <div class="alert alert-danger">
                 <?php
-                echo htmlspecialchars($message);
+                esc($message);
                 ?>
             </div>
 

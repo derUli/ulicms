@@ -36,7 +36,7 @@ if ($permissionChecker->hasPermission("update_system") and ! $runningInGoogleClo
                     ?>
                     <p>
                         <label> <input name="patches[]" type="checkbox" checked="checked"
-                                       value="<?php echo htmlspecialchars($line); ?>"> <strong><?php echo htmlspecialchars($name); ?></strong><br /> <?php echo htmlspecialchars($description); ?> </label>
+                                       value="<?php esc($line); ?>"> <strong><?php esc($name); ?></strong><br /> <?php esc($description); ?> </label>
                     </p>
                     <?php
                 }

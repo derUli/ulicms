@@ -47,7 +47,7 @@ if ($permissionChecker->hasPermission("languages")) {
         foreach ($languages as $language) {
             ?>
 	<tr id="dataset-<?php echo $language->getID();?>">
-			<td><?php echo htmlspecialchars($language -> getLanguageCode());?></td>
+			<td><?php esc($language -> getLanguageCode());?></td>
 			<td><?php echo htmlspecialchars ( $language->getName () );?></td>
 
 			<td align="center" style="font-weight: bold;"><?php

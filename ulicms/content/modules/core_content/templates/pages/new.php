@@ -252,7 +252,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                     <br />
                     <input type="text" id="og_image" name="og_image" readonly="readonly"
                            class="kcfinder"
-                           value="<?php echo htmlspecialchars($og_image); ?>"
+                           value="<?php esc($og_image); ?>"
                            style="cursor: pointer" /> <a href="#"
                            onclick="$('#og_image').val('');
                                    return false;"

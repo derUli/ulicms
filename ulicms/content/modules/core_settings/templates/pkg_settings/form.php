@@ -59,7 +59,7 @@ if (!$permissionChecker->hasPermission("pkg_settings")) {
         ?>>
             <input type="text" id="pkg_src" name="pkg_src"
                    value="<?php
-        echo htmlspecialchars($pkg_src);
+        esc($pkg_src);
         ?>">
         </div>
 

@@ -1,5 +1,9 @@
 <?php
 
+function sureRemoveDir($dir, $DeleteMe = true) {
+    File::sureRemoveDir($dir, $DeleteMe);
+}
+
 // Ordner rekursiv kopieren
 function recurse_copy($src, $dst) {
     $dir = opendir($src);

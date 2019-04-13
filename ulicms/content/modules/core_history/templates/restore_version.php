@@ -33,7 +33,7 @@ if ($permissionChecker->hasPermission("pages")) {
                         <td><?php
                             $user = getUserById($revision->user_id);
                             if ($user and isset($user ["username"])) {
-                                echo htmlspecialchars($user ["username"]);
+                                esc($user ["username"]);
                             }
                             ?></td>
                         <td><?php echo $revision->date; ?></td>

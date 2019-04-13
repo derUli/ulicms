@@ -94,22 +94,22 @@ if ($permissionChecker->hasPermission("videos")) {
 			</td>
 			<td><?php
         
-        echo htmlspecialchars($row->name);
+        esc($row->name);
         ?>
 			</td>
 			<td class="hide-on-mobile"><?php
         
-        echo htmlspecialchars(basename($row->ogg_file));
+        esc(basename($row->ogg_file));
         ?>
 			</td>
 			<td class="hide-on-mobile"><?php
         
-        echo htmlspecialchars(basename($row->webm_file));
+        esc(basename($row->webm_file));
         ?>
 			</td>
 			<td class="hide-on-mobile"><?php
         
-        echo htmlspecialchars(basename($row->mp4_file));
+        esc(basename($row->mp4_file));
         ?>
 			</td>
 			

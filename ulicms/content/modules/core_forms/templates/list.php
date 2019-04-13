@@ -36,10 +36,10 @@ if (! $permissionChecker->hasPermission("forms")) {
         ?>
 <tr id="dataset-<?php echo $form["id"];?>">
 				<td><?php echo $form["id"];?></td>
-				<td><?php echo htmlspecialchars($form["name"]);?></td>
-				<td class="hide-on-mobile"><?php echo htmlspecialchars($form["email_to"]);?></td>
+				<td><?php esc($form["name"]);?></td>
+				<td class="hide-on-mobile"><?php esc($form["email_to"]);?></td>
 				<td><input class="form-submit-url" type="text" readonly
-					value="<?php echo htmlspecialchars($submit_form_url);?>"
+					value="<?php esc($submit_form_url);?>"
 					onclick="this.select();"></td>
 
 			<?php if($permissionChecker->hasPermission ( "forms_edit" )){ ?>

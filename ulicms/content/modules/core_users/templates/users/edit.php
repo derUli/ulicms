@@ -211,7 +211,7 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
                     }
                     ?>
                 </select></div> <br /> <strong><?php translate("about_me"); ?></strong><br />
-            <textarea rows=10 cols=50 name="about_me"><?php echo htmlspecialchars($row->about_me) ?></textarea>
+            <textarea rows=10 cols=50 name="about_me"><?php esc($row->about_me) ?></textarea>
             <br />
             <button type="submit" class="btn btn-primary">
                 <i class="fa fa-save"></i> <?php translate("OK"); ?></button>

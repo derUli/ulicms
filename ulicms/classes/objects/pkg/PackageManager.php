@@ -83,14 +83,14 @@ class PackageManager {
                 $url = db_escape($url);
                 db_query("INSERT INTO " . tbname("installed_patches") . " (name, description, url, date) VALUES ('$name', '$description', '$url', NOW())");
 
-                SureRemoveDir($tmp_dir, true);
+                sureRemoveDir($tmp_dir, true);
                 if ($clear_cache) {
                     clearCache();
                 }
                 return true;
             }
         }
-        SureRemoveDir($tmp_dir, true);
+        sureRemoveDir($tmp_dir, true);
         if ($clear_cache) {
             clearCache();
         }

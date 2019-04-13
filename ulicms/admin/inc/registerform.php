@@ -65,7 +65,7 @@ if (Settings::get("visitors_can_register") == "off" or ! Settings::get("visitors
         if (!empty($_REQUEST["go"])) {
             ?>
             <input type="hidden" name="go"
-                   value='<?php echo htmlspecialchars($_REQUEST["go"]) ?>'>
+                   value='<?php esc($_REQUEST["go"]) ?>'>
                    <?php
                }
                ?>

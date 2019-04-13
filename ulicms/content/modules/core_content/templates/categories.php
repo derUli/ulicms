@@ -167,7 +167,7 @@ if (!is_admin() and ! $permissionChecker->hasPermission("categories")) {
 
                 <strong><?php translate("description"); ?></strong> <br />
                 <textarea cols="50" name="description" rows="5" maxlength="255"><?php
-            echo htmlspecialchars(Categories::getCategoryDescriptionById(intval($_GET["edit"])));
+            esc(Categories::getCategoryDescriptionById(intval($_GET["edit"])));
             ?></textarea>
             </p>
             <p>

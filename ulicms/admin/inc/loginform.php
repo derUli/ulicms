@@ -48,7 +48,7 @@ csrf_token_html();
 if (!empty($_REQUEST["go"])) {
     ?>
     <input type="hidden" name="go"
-           value='<?php echo htmlspecialchars($_REQUEST["go"]) ?>'>
+           value='<?php esc($_REQUEST["go"]) ?>'>
            <?php
        }
        ?>
