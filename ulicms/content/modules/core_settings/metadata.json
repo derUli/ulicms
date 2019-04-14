@@ -25,19 +25,22 @@
         "spam_filter": "templates/spam_filter/form.php",
         "performance_settings": "templates/performance_settings/form.php",
         "community_settings": "templates/community_settings/form.php",
-        "footer_text": "templates/design/footer_text.php"
+        "footer_text": "templates/design/footer_text.php",
+        "error_pages": "templates/error_pages/form.php"
     },
     "action_permissions": {
         "privacy_settings": "privacy_settings",
         "performance_settings": "performance_settings",
         "community_settings": "community_settings",
-        "footer_text": "footer_text"
+        "footer_text": "footer_text",
+        "error_pages": "error_pages"
     },
     "custom_acl": [
         "privacy_settings",
         "performance_settings",
         "community_settings",
-        "footer_text"
+        "footer_text",
+        "error_pages"
     ],
     "controllers": {
         "SimpleSettingsController": "controllers/SimpleSettingsController",

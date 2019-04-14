@@ -17,6 +17,7 @@ class Page extends Content {
     public $active = 1;
     public $created = 0;
     public $lastmodified = 0;
+    // TODO: Rename this column to author_id to make it fit conventions
     public $autor = null;
     public $group_id = null;
     public $lastchangeby = 1;

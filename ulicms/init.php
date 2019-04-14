@@ -194,6 +194,7 @@ if (isset($config->data_storage_root) and ! is_null($config->data_storage_root))
 }
 
 
+require_once dirname(__file__) . "/templating.php";
 require_once dirname(__file__) . "/classes/creators/load.php";
 
 // this enables us to set an base url for statis ressources such as images
