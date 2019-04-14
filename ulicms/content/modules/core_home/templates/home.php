@@ -214,7 +214,7 @@ if ($permissionChecker->hasPermission("dashboard")) {
                             if (!empty($autorName)) {
 
                             } else {
-                                $autorName = $model->admins[$row->autor];
+                                $autorName = $model->admins[$row->author_id];
                             }
                             echo $autorName;
                             ?></td>

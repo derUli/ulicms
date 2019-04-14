@@ -1,24 +1,21 @@
 <?php
 
-
 use zz\Html\HTMLMinify;
 
-class HomeController extends Controller
-{
+class HomeController extends Controller {
 
-    public function getModel()
-    {
+    public function getModel() {
         $model = new HomeViewModel();
         $query = Database::query("SELECT count(id) as amount FROM `{prefix}content`", true);
         $result = Database::fetchObject($query);
         $model->contentCount = $result->amount;
-        
+
         $topPages = Database::query("SELECT language, systemname, title, `views` FROM " . tbname("content") . " WHERE deleted_at is null and type <> 'node' ORDER BY `views` DESC LIMIT 5", false);
         while ($row = Database::fetchObject($topPages)) {
             $model->topPages[] = $row;
         }
-        
-        $lastModfiedPages = Database::query("SELECT language, systemname, title, lastmodified, case when lastchangeby is not null and lastchangeby > 0 then lastchangeby else autor end as lastchangeby FROM " . tbname("content") . "  WHERE deleted_at is null and type <> 'node'  ORDER BY lastmodified DESC LIMIT 5", false);
+
+        $lastModfiedPages = Database::query("SELECT language, systemname, title, lastmodified, case when lastchangeby is not null and lastchangeby > 0 then lastchangeby else author_id end as lastchangeby FROM " . tbname("content") . "  WHERE deleted_at is null and type <> 'node'  ORDER BY lastmodified DESC LIMIT 5", false);
         while ($row = Database::fetchObject($lastModfiedPages)) {
             $model->lastModfiedPages[] = $row;
         }
@@ -27,7 +24,7 @@ class HomeController extends Controller
             $admins[$row->id] = $row->username;
         }
         $model->admins = $admins;
-        
+
         $pkg = new PackageManager();
         if (in_array("guestbook", getAllModules())) {
             $guestbookEntries = Database::query("SELECT count(id) as amount FROM " . tbname("guestbook_entries"), false);
@@ -37,16 +34,16 @@ class HomeController extends Controller
         return $model;
     }
 
-    public function newsfeed()
-    {
+    public function newsfeed() {
 
-		$html = Template::executeModuleTemplate("core_home", "news.php");
-		$options = array(
+        $html = Template::executeModuleTemplate("core_home", "news.php");
+        $options = array(
             'optimizationLevel' => HTMLMinify::OPTIMIZATION_ADVANCED
         );
         $HTMLMinify = new HTMLMinify($html, $options);
         $html = $HTMLMinify->process();
-		$html = StringHelper::removeEmptyLinesFromString($html);
+        $html = StringHelper::removeEmptyLinesFromString($html);
         HtmlResult($html);
     }
+
 }

@@ -1,38 +1,30 @@
 <?php
 
-class CSVCreator
-{
+class CSVCreator {
 
     public $target_file = null;
-
     public $content = null;
-
     public $title = null;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->title = get_title();
         ob_start();
         content();
         $this->content = ob_get_clean();
     }
 
-    private function httpHeader()
-    {
+    private function httpHeader() {
         header("Content-type: text/csv; charset=UTF-8");
     }
 
-    public function output()
-    {
+    public function output() {
         $uid = CacheUtil::getCurrentUid();
         $adapter = CacheUtil::getAdapter();
         if ($adapter and $adapter->has($uid)) {
             $adapter->get($uid);
         }
-        
-        ob_start();
-        autor();
-        $author = ob_get_clean();
+
+
         $data = array();
         $data[] = array(
             "Title",
@@ -53,7 +45,7 @@ class CSVCreator
         );
         $csv_string = getCSV($data[0]);
         $csv_string .= getCSV($data[1]);
-        
+
         $this->httpHeader();
         echo $csv_string;
         if ($adapter) {
@@ -61,4 +53,5 @@ class CSVCreator
         }
         exit();
     }
+
 }

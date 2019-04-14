@@ -851,43 +851,8 @@ function get_head() {
     return get_base_metas();
 }
 
-function autor() {
-    echo get_autor();
-}
-
-function get_autor() {
-    $seite = $_GET["seite"];
-    if (empty($seite)) {
-        $query = db_query("SELECT systemname FROM " . tbname("content") . " ORDER BY id LIMIT 1");
-        $result = db_fetch_object($query);
-        $seite = $result->systemname;
-    }
-
-    if (check_status() != "200 OK") {
-        return;
-    }
-
-    $query = db_query("SELECT systemname, autor FROM " . tbname("content") . " WHERE systemname='" . db_escape($seite) . "' AND language='" . db_escape($_SESSION["language"]) . "'", $connection);
-    if (db_num_rows($query) < 1) {
-        return;
-    }
-    $result = db_fetch_assoc($query);
-    if ($result["systemname"] == "kontakt" || $result["systemname"] == "impressum" || StartsWith($result["systemname"], "menu_")) {
-        return;
-    }
-    $query2 = db_query("SELECT firstname, lastname, username FROM " . tbname("users") . " WHERE id=" . $result["autor"], $connection);
-    $result2 = db_fetch_array($query2);
-    if (db_num_rows($query2) == 0) {
-        return;
-    }
-    $datum = $result["created"];
-    $out = Settings::get("autor_text");
-    $out = str_replace("Vorname", $result2["firstname"], $out);
-    $out = str_replace("Nachname", $result2["lastname"], $out);
-    $out = str_replace("Username", $result2["username"], $out);
-    if (!is_403() and ! is_404()) {
-        return $out;
-    }
+function author() {
+    echo get_author();
 }
 
 function get_page($systemname = '') {

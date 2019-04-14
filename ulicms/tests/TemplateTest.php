@@ -212,7 +212,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $page->language = "de";
         $page->menu = "not_in_menu";
         $page->content = "<p>Wir schreiben das Jahr [year] des fliegenden Spaghettimonsters</p>";
-        $page->autor = $user_id;
+        $page->author_id = $user_id;
         $page->group_id = $group_id;
         $page->save();
 

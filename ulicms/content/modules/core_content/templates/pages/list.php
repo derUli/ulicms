@@ -474,8 +474,8 @@ if ($permissionChecker->hasPermission("pages")) {
                         <?php
                         if ($permissionChecker->hasPermission("pages_create")) {
                             ?>
-                                                                    <td style="text-align: center"><?php translate("clone"); ?>
-                                                                    </td> -->
+                                                                            <td style="text-align: center"><?php translate("clone"); ?>
+                                                                            </td> -->
                         <?php } ?>
                         <td style="text-align: center"><?php translate("edit"); ?>
                         </td>
@@ -512,10 +512,6 @@ if ($permissionChecker->hasPermission("pages")) {
                                 $url = "../?goid={$row->id}";
                                 echo "<td style='text-align:center'><a href=\"" . $url . "\"><img class=\"mobile-big-image\" src=\"gfx/preview.png\" alt=\"" . get_translation("view") . "\" title=\"" . get_translation("view") . "\"></a></td>";
                             }
-                            // if ($acl->hasPermission("pages_create")) {
-                            // echo "<td style='text-align:center'><a href=\"index.php?action=clone_page&page=" . $row->id . "\"><img class=\"mobile-big-image\" src=\"gfx/clone.png\" alt=\"" . get_translation("clone") . "\" title=\"" . get_translation("clone") . "\"></a></td>";
-                            // }
-                            $autor = $row->autor;
 
                             $checker = new ContentPermissionChecker(get_user_id());
                             $can_edit_this = $checker->canWrite($row->id);
