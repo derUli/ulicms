@@ -194,7 +194,6 @@ if (isset($config->data_storage_root) and ! is_null($config->data_storage_root))
 }
 
 
-require_once dirname(__file__) . "/templating.php";
 require_once dirname(__file__) . "/classes/creators/load.php";
 
 // this enables us to set an base url for statis ressources such as images
@@ -422,10 +421,16 @@ Vars::set("disabledModules", $moduleManager->getDisabledModuleNames());
 // don't load module stuff on kcfinder page (media)
 // since the "Path" class has a naming conflict with the same named
 // class of KCFinder
+
+
+require_once dirname(__file__) . "/templating.php";
+
 ModelRegistry::loadModuleModels();
 TypeMapper::loadMapping();
 HelperRegistry::loadModuleHelpers();
 ControllerRegistry::loadModuleControllers();
+
+
 
 do_event("before_init");
 do_event("init");
@@ -443,3 +448,5 @@ $installed_patches = implode(";", $installed_patches);
 if (!defined("PATCH_CHECK_URL")) {
     define("PATCH_CHECK_URL", "https://patches.ulicms.de/?v=" . urlencode(implode(".", $version->getInternalVersion())) . "&installed_patches=" . urlencode($installed_patches));
 }
+
+
