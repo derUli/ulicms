@@ -546,10 +546,25 @@ function get_title($ipage = null, $headline = false) {
     if (Vars::get($cacheVar)) {
         return Vars::get($cacheVar);
     }
-    $status = check_status();
-    if ($status == "404 Not Found") {
+
+    $errorPage403 = Settings::getLang("error_page_403", getCurrentLanguage());
+    $errorPage404 = Settings::getLang("error_page_404", getCurrentLanguage());
+
+    if (is_404()) {
+        if ($errorPage404) {
+            $content = ContentFactory::getByID($errorPage404);
+            if ($content->id !== null) {
+                return $content->getHeadline();
+            }
+        }
         return get_translation("page_not_found");
-    } else if ($status == "403 Forbidden") {
+    } else if (is_403()) {
+        if ($errorPage403) {
+            $content = ContentFactory::getByID($errorPage403);
+            if ($content->id !== null) {
+                return $content->getHeadline();
+            }
+        }
         return get_translation("forbidden");
     }
 
@@ -584,34 +599,6 @@ function get_headline($ipage = null) {
 
 function headline($ipage = null) {
     echo get_headline($ipage);
-}
-
-function import($ipage) {
-    $ipage = db_escape($ipage);
-    if ($ipage == "") {
-        $query = db_query("SELECT content FROM " . tbname("content") . " WHERE language='" . db_escape($_SESSION["language"]) . "' ORDER BY id LIMIT 1");
-    } else {
-        $query = db_query("SELECT content FROM " . tbname("content") . " WHERE systemname='$ipage' AND language='" . db_escape($_SESSION["language"]) . "'");
-    }
-    if (db_num_rows($query) == 0) {
-        return false;
-    } else {
-        while ($row = db_fetch_object($query)) {
-
-            $row->content = apply_filter($row->content, "before_content");
-
-            $data = CustomData::get();
-            // it's possible to disable shortcodes for a page
-            // define "disable_shortcodes in custom data / json
-            if (is_false($data["disable_shortcodes"])) {
-                $row->content = replaceShortcodesWithModules($row->content);
-                $row->content = apply_filter($row->content, "content");
-            }
-            $row->content = apply_filter($row->content, "after_content");
-            echo $row->content;
-            return true;
-        }
-    }
 }
 
 function apply_filter($text, $type) {

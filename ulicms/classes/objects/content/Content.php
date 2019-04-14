@@ -18,4 +18,8 @@ abstract class Content extends Model {
         Database::query("DELETE FROM {prefix}content WHERE deleted_at IS NOT NULL", true);
     }
 
+    public function getHeadline() {
+        return StringHelper::isNullOrEmpty($this->alternate_title) ? $this->title : $this->alternate_title;
+    }
+
 }

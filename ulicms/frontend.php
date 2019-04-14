@@ -218,8 +218,9 @@ if ($text_position == "after") {
 
 $disable_functions = getThemeMeta(get_theme(), "disable_functions");
 
-if (!(is_array($disable_functions) and faster_in_array("output_content", $disable_functions)))
+if (!(is_array($disable_functions) and faster_in_array("output_content", $disable_functions))) {
     content();
+}
 
 if ($text_position == "before") {
     Template::outputContentElement();

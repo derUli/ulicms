@@ -410,36 +410,54 @@ color:" . Settings::get("body-text-color") . ";
     }
 
     public static function content() {
-        $status = check_status();
-        if ($status == '404 Not Found') {
-            if (is_file(getTemplateDirPath($theme) . "404.php")) {
-                $theme = Settings::get("theme");
-                require getTemplateDirPath($theme) . "404.php";
-            } else {
-                translate('PAGE_NOT_FOUND_CONTENT');
-            }
-            return false;
-        } else if ($status == '403 Forbidden') {
-
-            $theme = Settings::get("theme");
-            if (is_file(getTemplateDirPath($theme) . '403.php')) {
-                require getTemplateDirPath($theme) . '403.php';
-            } else {
-                translate('FORBIDDEN_COTENT');
-            }
-            return false;
-        }
-
-        if (!is_logged_in()) {
-            db_query("UPDATE " . tbname("content") . " SET views = views + 1 WHERE systemname='" . Database::escapeValue($_GET["seite"]) . "' AND language='" . db_escape($_SESSION["language"]) . "'");
-        }
-        return import($_GET["seite"]);
+        echo self::getContent();
     }
 
     public static function getContent() {
-        ob_start();
-        self::content();
-        return ob_get_clean();
+        $theme = get_theme();
+
+        $errorPage403 = Settings::getLang("error_page_403", getCurrentLanguage());
+        $errorPage404 = Settings::getLang("error_page_404", getCurrentLanguage());
+
+        $content = null;
+        if (is_200()) {
+            $content = ContentFactory::getBySystemnameAndLanguage(get_requested_pagename(), getCurrentLanguage());
+
+            if (!is_logged_in()) {
+                db_query("UPDATE " . tbname("content") . " SET views = views + 1 WHERE systemname='" . Database::escapeValue($_GET["seite"]) . "' AND language='" . db_escape($_SESSION["language"]) . "'");
+            }
+        } else if (is_404()) {
+            if ($errorPage404) {
+                $content = ContentFactory::getByID($errorPage404);
+            } else {
+                return get_translation('PAGE_NOT_FOUND_CONTENT');
+            }
+        } else if (is_403()) {
+            $theme = Settings::get("theme");
+            if ($errorPage403) {
+                $content = ContentFactory::getByID($errorPage404);
+            } else {
+                return get_translation('FORBIDDEN_COTENT');
+            }
+            return false;
+        }
+        if ($content->id === null) {
+            return get_translation("no_content");
+        }
+
+        $htmlContent = $content->content;
+        $htmlContent = apply_filter($htmlContent, "before_content");
+
+        $htmlContent = apply_filter($htmlContent, "after_content");
+
+        $data = CustomData::get();
+        // it's possible to disable shortcodes for a page
+        // define "disable_shortcodes in custom data / json
+        if (is_false($data["disable_shortcodes"])) {
+            $htmlContent = replaceShortcodesWithModules($htmlContent);
+            $htmlContent = apply_filter($htmlContent, "content");
+        }
+        return $htmlContent;
     }
 
     public static function languageSelection() {
