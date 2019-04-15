@@ -63,7 +63,8 @@
         "PrivacyController": "controllers/PrivacyController.php",
         "PerformanceSettingsController": "controllers/PerformanceSettingsController.php",
         "CommunitySettingsController": "controllers/CommunitySettingsController.php",
-        "FooterTextController": "controllers/FooterTextController.php"
+        "FooterTextController": "controllers/FooterTextController.php",
+        "ErrorPagesController": "controllers/ErrorPagesController.php"
     },
     "action_controllers": {
         "settings_simple": "SimpleSettingsController",
@@ -98,7 +99,7 @@
         "PrivacyController::savePost": "privacy_settings",
         "PerformanceSettingsController::savePost": "performance_settings",
         "CommunitySettingsController::savePost": "community_settings",
-
-        "FooterTextController::savePost": "footer_text"
+        "FooterTextController::savePost": "footer_text",
+        "ErrorPagesController::savePost": "error_pages"
     }
 }

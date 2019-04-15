@@ -547,8 +547,8 @@ function get_title($ipage = null, $headline = false) {
         return Vars::get($cacheVar);
     }
 
-    $errorPage403 = Settings::getLang("error_page_403", getCurrentLanguage());
-    $errorPage404 = Settings::getLang("error_page_404", getCurrentLanguage());
+    $errorPage403 = Settings::getLanguageSetting("error_page_403", getCurrentLanguage());
+    $errorPage404 = Settings::getLanguageSetting("error_page_404", getCurrentLanguage());
 
     if (is_404()) {
         if ($errorPage404) {

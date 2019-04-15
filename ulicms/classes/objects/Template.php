@@ -79,7 +79,7 @@ ORDER BY RAND() LIMIT 1") or die(Database::getError());
     }
 
     public static function getHomepageOwner() {
-        $homepage_title = Settings::getLang("homepage_owner", $_SESSION["language"]);
+        $homepage_title = Settings::getLanguageSetting("homepage_owner", $_SESSION["language"]);
         return _esc($homepage_title);
     }
 
@@ -416,8 +416,8 @@ color:" . Settings::get("body-text-color") . ";
     public static function getContent() {
         $theme = get_theme();
 
-        $errorPage403 = Settings::getLang("error_page_403", getCurrentLanguage());
-        $errorPage404 = Settings::getLang("error_page_404", getCurrentLanguage());
+        $errorPage403 = Settings::getLanguageSetting("error_page_403", getCurrentLanguage());
+        $errorPage404 = Settings::getLanguageSetting("error_page_404", getCurrentLanguage());
 
         $content = null;
         if (is_200()) {
