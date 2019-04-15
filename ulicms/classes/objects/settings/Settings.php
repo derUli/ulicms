@@ -56,9 +56,11 @@ class Settings {
         }
     }
 
-    public static function getLanguageSetting($name, $lang, $type = 'str') {
+    public static function getLanguageSetting($name, $language = null, $type = 'str') {
         $retval = false;
-        $config = self::get($name . "_" . $lang, $type);
+        $settingsName = $language ? "{$name}_{$language}" : $name;
+
+        $config = self::get($settingsName);
         if ($config) {
             $retval = $config;
         } else {
@@ -67,8 +69,8 @@ class Settings {
         return $config;
     }
 
-    public static function getLang($name, $lang, $type = 'str') {
-        return self::getLanguageSetting($name, $lang, $type);
+    public static function getLang($name, $language = null, $type = 'str') {
+        return self::getLanguageSetting($name, $language, $type);
     }
 
     public static function setLanguageSetting($name, $value, $language = null) {
@@ -81,7 +83,7 @@ class Settings {
         }
     }
 
-// Set a configuration Variable;
+    // Set a configuration Variable;
     public static function set($key, $value, $type = 'str') {
         $key = db_escape($key);
         $originalValue = self::convertVar($value, $type);

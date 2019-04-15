@@ -4,6 +4,13 @@ use UliCMS\Exceptions\NotImplementedException;
 
 class SettingsTest extends \PHPUnit\Framework\TestCase {
 
+    public function tearDown() {
+
+        Settings::delete("my_setting");
+        Settings::delete("my_setting_de");
+        Settings::delete("my_setting_en");
+    }
+
     public function testSettingsOld() {
         deleteconfig("example_setting");
         $this->assertEquals(false, getconfig("example_setting"));
@@ -49,7 +56,14 @@ class SettingsTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetAndSetLanguageSetting() {
-        throw new NotImplementedException("Test not implemented");
+        Settings::setLanguageSetting("my_setting", "Lampukisch");
+        Settings::setLanguageSetting("my_setting", "Germanisch", "de");
+        Settings::setLanguageSetting("my_setting", "Angelsächisch", "en");
+
+        $this->assertEquals("Lampukisch", Settings::getLanguageSetting("my_setting"));
+        $this->assertEquals("Lampukisch", Settings::getLanguageSetting("my_setting", "fr"));
+        $this->assertEquals("Germanisch", Settings::getLanguageSetting("my_setting", "de"));
+        $this->assertEquals("Angelsächisch", Settings::getLanguageSetting("my_setting", "en"));
     }
 
 }
