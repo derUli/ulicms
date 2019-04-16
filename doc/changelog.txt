@@ -13,6 +13,8 @@ Geänderte API-Methoden:
 
 Fehlerkorrekturen:
 * Shake Animation bei fehlschlagen von Login wird nun wieder angezeigt
+
+Sicherheit:
 * Drei XSS-Sicherheitslücken geschlossen (gemeldet von Kağan Eğlence)
 
 ===== Neues in UliCMS 2019.2.5 =====
