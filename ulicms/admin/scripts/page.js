@@ -154,7 +154,7 @@ function unbindEvents() {
 
 AllTypes = {}
 
-$(document).ready(function () {
+$(function () {
     if ($("#page-list").length <= 0) {
         var url = $(".main-form").first().data("get-content-types-url");
 
@@ -408,4 +408,4 @@ var ajaxOptionsDelete = {
         var id = $($form).data("id");
         $($form).closest("tr").fadeOut();
     }
-}
+};

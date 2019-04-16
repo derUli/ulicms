@@ -875,17 +875,18 @@ if ($permissionChecker->hasPermission("pages")) {
             $translation->addKey("ask_for_delete");
             $translation->render();
 
-            enqueueScriptFile("scripts/page.js");
             enqueueScriptFile("../node_modules/slug/slug.js");
-            if ($editor == "ckeditor") {
-                enqueueScriptFile(ModuleHelper::buildRessourcePath("core_content", "js/pages/init-ckeditor.js"));
-            }
+
+            BackendHelper::enqueueEditorScripts();
+
+            enqueueScriptFile("scripts/page.js");
+
+            combinedScriptHtml();
             combinedScriptHtml();
             echo ModuleHelper::endForm();
             ?>
             </div>
             <?php
-            break;
         }
     }
 } else {

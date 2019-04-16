@@ -10,7 +10,7 @@ submitted = 0;
 isCtrl = false;
 
 
-$(document).ready(function () {
+$(function () {
     for (name in CKEDITOR.instances)
     {
         var id = CKEDITOR.instances[name].element.getId();

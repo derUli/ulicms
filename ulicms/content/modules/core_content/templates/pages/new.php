@@ -538,12 +538,11 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
     $translation->addKey("confirm_exit_without_save");
     $translation->render();
 
-    enqueueScriptFile("scripts/page.js");
     enqueueScriptFile("../node_modules/slug/slug.js");
 
-    if ($editor == "ckeditor") {
-        enqueueScriptFile(ModuleHelper::buildRessourcePath("core_content", "js/pages/init-ckeditor.js"));
-    }
+    BackendHelper::enqueueEditorScripts();
+
+    enqueueScriptFile("scripts/page.js");
 
     combinedScriptHtml();
     ?>

@@ -493,4 +493,20 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->cleanUp();
     }
 
+    public function testCustomDataJsonIsObjectByDefault() {
+        $page = new Page();
+        $page->title = 'Unit Test ' . time();
+        $page->systemname = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "Some Text";
+        $page->comments_enabled = false;
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->save();
+        $page->save();
+
+        $raw = Database::fetchFirst(Database::selectAll("content", array("custom_data"), "id = {$page->id}"));
+        $this->assertEquals('{}', $raw->custom_data);
+    }
+
 }

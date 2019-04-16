@@ -13,6 +13,9 @@ Geänderte API-Methoden:
 
 Fehlerkorrekturen:
 * Shake Animation bei fehlschlagen von Login wird nun wieder angezeigt
+* Page->update() ändert den Typ von
+  "Custom Data" von Objekt nach Array
+  Dies sollte immer ein Objekt bleiben
 
 Sicherheit:
 * Drei XSS-Sicherheitslücken geschlossen (gemeldet von Kağan Eğlence)
