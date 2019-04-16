@@ -211,7 +211,6 @@ foreach ($top_files as $file) {
 }
 do_event("before_content");
 $text_position = get_text_position();
-
 if ($text_position == "after") {
     Template::outputContentElement();
 }

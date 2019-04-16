@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Exceptions\FileNotFoundException;
+use UliCMS\Exceptions\NotImplementedException;
 
 class TemplateTest extends \PHPUnit\Framework\TestCase {
 
@@ -220,6 +221,10 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $_SESSION["language"] = $page->language;
         $_GET["REQUEST_URI"] = "/{$page->systemname}.html";
         $this->assertEquals("<p>Wir schreiben das Jahr " . date("Y") . " des fliegenden Spaghettimonsters</p>", Template::getContent());
+    }
+
+    public static function testGetType() {
+        throw new NotImplementedException();
     }
 
 }

@@ -174,25 +174,22 @@ function is_active() {
     return $result;
 }
 
-function get_type() {
+function get_type($systemname = null, $language = null) {
     if (Vars::get("type")) {
         return Vars::get("type");
     }
-    if (!$page) {
-        $page = get_requested_pagename();
+    if (!$systemname) {
+        $systemname = get_requested_pagename();
     }
-    $result = "";
-    $sql = "SELECT `type` FROM " . tbname("content") . " WHERE systemname='" . db_escape($page) . "'  AND language='" . db_escape($_SESSION["language"]) . "'";
-    $query = db_query($sql);
-    if (db_num_rows($query) > 0) {
-        $result = db_fetch_object($query);
-        $result = $result->type;
+
+    if (!$language) {
+        $language = getCurrentLanguage();
     }
-    if (empty($result)) {
-        $result = "page";
-    }
-    $result = apply_filter($result, "get_type");
-    Vars::set("type", $result);
+    $page = ContentFactory::getBySystemnameAndLanguage($systemname, $language);
+    $type = $page->type;
+
+    $result = apply_filter($type, "get_type");
+    Vars::set("type", $type);
     return $result;
 }
 

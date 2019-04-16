@@ -43,7 +43,6 @@ ORDER BY RAND() LIMIT 1") or die(Database::getError());
     public static function outputContentElement() {
         $type = get_type();
         $output = "";
-
         switch ($type) {
             case "list":
                 $output = Template::executeDefaultOrOwnTemplate("list");
@@ -53,6 +52,7 @@ ORDER BY RAND() LIMIT 1") or die(Database::getError());
                 break;
             case "module":
                 $page = get_page();
+
                 if ($page["module"] != null and strlen($page['module']) > 0) {
                     no_cache();
                     $output = replaceShortcodesWithModules("[module=\"" . $page["module"] . "\"]");
