@@ -132,5 +132,6 @@ if (!Settings::get("disable_password_reset")) {
     <?php
 }
 enqueueScriptFile("scripts/login.js");
+enqueueScriptFile("../node_modules/password-strength-meter/dist/password.min.js");
 combinedScriptHtml();
 

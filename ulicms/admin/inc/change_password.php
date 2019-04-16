@@ -29,7 +29,9 @@ if (!$_SESSION["require_password_change"]) {
         <button type="submit" name="change_password" class="btn btn-warning">
             <i class="fa fa-save"></i> <?php translate("save_changes"); ?></button>
     </form>
-    <br />
-    <br />
+    <?php
+    enqueueScriptFile("../node_modules/password-strength-meter/dist/password.min.js");
+    combinedScriptHtml();
+    ?>
     <?php
 }

@@ -298,7 +298,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                ?>"
                                style="cursor: pointer" /> <a href="#"
                                onclick="$('#menu_image').val('');
-                                       return false;"
+                                                   return false;"
                                class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?> </a>
                     </div></div>
                 <div class="typedep" id="tab-link">
@@ -395,7 +395,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                    ?>"
                                    style="cursor: pointer" /> <a href="#"
                                    onclick="$('#og_image').val('');
-                                           return false;"
+                                                       return false;"
                                    class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?>
                             </a>
                             <?php
@@ -619,7 +619,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                value="<?php Template::escape($row->image_url); ?>"
                                style="cursor: pointer" /> <a href="#"
                                onclick="$('#menu_image').val('');
-                                       return false;"
+                                                   return false;"
                                class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?>
                         </a>
                     </div>
@@ -654,7 +654,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                value="<?php echo _esc($row->article_image); ?>"
                                style="cursor: pointer" maxlength="255" /> <a href="#"
                                onclick="$('#article_image').val('');
-                                       return false;"
+                                                   return false;"
                                class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?></a>
                     </div>
                 </div>
@@ -876,6 +876,7 @@ if ($permissionChecker->hasPermission("pages")) {
             $translation->render();
 
             enqueueScriptFile("scripts/page.js");
+            enqueueScriptFile("../node_modules/slug/slug.js");
             if ($editor == "ckeditor") {
                 enqueueScriptFile(ModuleHelper::buildRessourcePath("core_content", "js/pages/init-ckeditor.js"));
             }

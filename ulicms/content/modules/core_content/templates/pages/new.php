@@ -255,7 +255,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                            value="<?php esc($og_image); ?>"
                            style="cursor: pointer" /> <a href="#"
                            onclick="$('#og_image').val('');
-                                   return false;"
+                                       return false;"
                            class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?></a>
                 </div>
             </div>
@@ -445,7 +445,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                        readonly="readonly" class="kcfinder"
                        value="" style="cursor: pointer" maxlength="255" /> <a href="#"
                        onclick="$('#article_image').val('');
-                               return false;"
+                                   return false;"
                        class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?></a>
             </div>
         </div>
@@ -539,6 +539,8 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
     $translation->render();
 
     enqueueScriptFile("scripts/page.js");
+    enqueueScriptFile("../node_modules/slug/slug.js");
+
     if ($editor == "ckeditor") {
         enqueueScriptFile(ModuleHelper::buildRessourcePath("core_content", "js/pages/init-ckeditor.js"));
     }

@@ -63,7 +63,6 @@ function getCombinedScripts() {
                             $lines = StringHelper::linesFromString($content, true, true, false);
                             $content = implode("\n", $lines);
                             $output .= $content;
-                            $output .= "\n";
                             if (filemtime($script) > $lastmod) {
                                 $lastmod = filemtime($script);
                             }
@@ -193,8 +192,6 @@ function getCombinedStylesheets($doReturn = false) {
 
                             $content = minifyCss($content);
                             $output .= $content;
-                            $output .= "\r\n";
-                            $output .= "\r\n";
                             if (filemtime($stylesheet) > $lastmod) {
                                 $lastmod = filemtime($stylesheet);
                             }

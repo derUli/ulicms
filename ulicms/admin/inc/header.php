@@ -34,10 +34,7 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
         $scripts = array(
             "scripts/php.js/strip_tags.js",
             "scripts/php.js/htmlspecialchars.js",
-            "../node_modules/zxcvbn/dist/zxcvbn.js",
-            "../node_modules/slug/slug.js",
             "../node_modules/jquery/dist/jquery.min.js",
-            "../node_modules/password-strength-meter/dist/password.min.js",
             "../node_modules/js-url/url.min.js",
             "../node_modules/jquery-datetimepicker/build/jquery.datetimepicker.full.js",
             "../node_modules/jquery-form/dist/jquery.form.min.js",

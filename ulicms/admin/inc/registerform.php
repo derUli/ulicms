@@ -94,5 +94,9 @@ if (Settings::get("visitors_can_register") == "off" or ! Settings::get("visitors
         </p>
     </form>
     <?php
+    enqueueScriptFile("../node_modules/password-strength-meter/dist/password.min.js");
+    combinedScriptHtml();
+    ?>
+    <?php
     do_event("after_register_form");
 }
