@@ -51,7 +51,7 @@ if ($permissionChecker->hasPermission("motd")) {
     <p>
         <textarea class="<?php esc($editor); ?>" data-mimetype="text/html"
                   name="motd" id="motd" cols=60 rows=15><?php
-                      echo htmlspecialchars(Request::getVar("language") ? Settings::get("motd_" . Request::getVar("language")) : Settings::get("motd"));
+                      esc(Request::getVar("language") ? Settings::get("motd_" . Request::getVar("language")) : Settings::get("motd"));
                       ?></textarea>
     </p>
 
@@ -72,4 +72,3 @@ if ($permissionChecker->hasPermission("motd")) {
 } else {
     noPerms();
 }
-

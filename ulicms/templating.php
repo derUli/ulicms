@@ -478,7 +478,7 @@ function get_homepage_title() {
     if (!$homepage_title) {
         $homepage_title = Settings::get("homepage_title");
     }
-    return htmlspecialchars($homepage_title, ENT_QUOTES, "UTF-8");
+    return _esc($homepage_title);
 }
 
 function homepage_title() {
@@ -546,10 +546,25 @@ function get_title($ipage = null, $headline = false) {
     if (Vars::get($cacheVar)) {
         return Vars::get($cacheVar);
     }
-    $status = check_status();
-    if ($status == "404 Not Found") {
+
+    $errorPage403 = Settings::getLanguageSetting("error_page_403", getCurrentLanguage());
+    $errorPage404 = Settings::getLanguageSetting("error_page_404", getCurrentLanguage());
+
+    if (is_404()) {
+        if ($errorPage404) {
+            $content = ContentFactory::getByID($errorPage404);
+            if ($content->id !== null) {
+                return $content->getHeadline();
+            }
+        }
         return get_translation("page_not_found");
-    } else if ($status == "403 Forbidden") {
+    } else if (is_403()) {
+        if ($errorPage403) {
+            $content = ContentFactory::getByID($errorPage403);
+            if ($content->id !== null) {
+                return $content->getHeadline();
+            }
+        }
         return get_translation("forbidden");
     }
 
@@ -584,34 +599,6 @@ function get_headline($ipage = null) {
 
 function headline($ipage = null) {
     echo get_headline($ipage);
-}
-
-function import($ipage) {
-    $ipage = db_escape($ipage);
-    if ($ipage == "") {
-        $query = db_query("SELECT content FROM " . tbname("content") . " WHERE language='" . db_escape($_SESSION["language"]) . "' ORDER BY id LIMIT 1");
-    } else {
-        $query = db_query("SELECT content FROM " . tbname("content") . " WHERE systemname='$ipage' AND language='" . db_escape($_SESSION["language"]) . "'");
-    }
-    if (db_num_rows($query) == 0) {
-        return false;
-    } else {
-        while ($row = db_fetch_object($query)) {
-
-            $row->content = apply_filter($row->content, "before_content");
-
-            $data = CustomData::get();
-            // it's possible to disable shortcodes for a page
-            // define "disable_shortcodes in custom data / json
-            if (is_false($data["disable_shortcodes"])) {
-                $row->content = replaceShortcodesWithModules($row->content);
-                $row->content = apply_filter($row->content, "content");
-            }
-            $row->content = apply_filter($row->content, "after_content");
-            echo $row->content;
-            return true;
-        }
-    }
 }
 
 function apply_filter($text, $type) {
@@ -809,9 +796,9 @@ function get_menu($name = "top", $parent = null, $recursive = true, $order = "po
                 $html .= "<a class='menu_active_link" . rtrim($additional_classes) . "' href='" . $url . "' target='" . $row->target . "'>";
             }
             if (!is_null($row->menu_image) and ! empty($row->menu_image)) {
-                $html .= '<img src="' . $row->menu_image . '" alt="' . htmlentities($title, ENT_QUOTES, "UTF-8") . '"/>';
+                $html .= '<img src="' . $row->menu_image . '" alt="' . _esc($title) . '"/>';
             } else {
-                $html .= htmlentities($title, ENT_QUOTES, "UTF-8");
+                $html .= _esc($title);
             }
             $html .= "</a>\n";
 
@@ -864,43 +851,8 @@ function get_head() {
     return get_base_metas();
 }
 
-function autor() {
-    echo get_autor();
-}
-
-function get_autor() {
-    $seite = $_GET["seite"];
-    if (empty($seite)) {
-        $query = db_query("SELECT systemname FROM " . tbname("content") . " ORDER BY id LIMIT 1");
-        $result = db_fetch_object($query);
-        $seite = $result->systemname;
-    }
-
-    if (check_status() != "200 OK") {
-        return;
-    }
-
-    $query = db_query("SELECT systemname, autor FROM " . tbname("content") . " WHERE systemname='" . db_escape($seite) . "' AND language='" . db_escape($_SESSION["language"]) . "'", $connection);
-    if (db_num_rows($query) < 1) {
-        return;
-    }
-    $result = db_fetch_assoc($query);
-    if ($result["systemname"] == "kontakt" || $result["systemname"] == "impressum" || StartsWith($result["systemname"], "menu_")) {
-        return;
-    }
-    $query2 = db_query("SELECT firstname, lastname, username FROM " . tbname("users") . " WHERE id=" . $result["autor"], $connection);
-    $result2 = db_fetch_array($query2);
-    if (db_num_rows($query2) == 0) {
-        return;
-    }
-    $datum = $result["created"];
-    $out = Settings::get("autor_text");
-    $out = str_replace("Vorname", $result2["firstname"], $out);
-    $out = str_replace("Nachname", $result2["lastname"], $out);
-    $out = str_replace("Username", $result2["username"], $out);
-    if (!is_403() and ! is_404()) {
-        return $out;
-    }
+function author() {
+    echo get_author();
 }
 
 function get_page($systemname = '') {

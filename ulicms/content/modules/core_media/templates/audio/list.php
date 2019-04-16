@@ -87,17 +87,17 @@ if ($permissionChecker->hasPermission("audio")) {
 			</td>
 				<td><?php
         
-        echo htmlspecialchars($row->name);
+        esc($row->name);
         ?>
 			</td>
 				<td class="hide-on-mobile"><?php
         
-        echo htmlspecialchars(basename($row->ogg_file));
+        esc(basename($row->ogg_file));
         ?>
 			</td>
 				<td class="hide-on-mobile"><?php
         
-        echo htmlspecialchars(basename($row->mp3_file));
+        esc(basename($row->mp3_file));
         ?>
 			</td>
 

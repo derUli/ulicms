@@ -57,7 +57,7 @@ class CacheUtil
             $adapter->clear();
         }
         
-        SureRemoveDir(Path::resolve("ULICMS_CACHE"), false);
+        sureRemoveDir(Path::resolve("ULICMS_CACHE"), false);
         
         // Sync modules table in database with modules folder
         $moduleManager = new ModuleManager();

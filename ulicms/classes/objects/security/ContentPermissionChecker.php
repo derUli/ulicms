@@ -25,7 +25,7 @@ class ContentPermissionChecker implements IDatasetPermissionChecker {
         $content = ContentFactory::getByID($contentId);
         $permissions = $content->getPermissions();
 
-        $contentOwner = $content->autor;
+        $contentOwner = $content->author_id;
         $contentGroup = $content->group_id;
 
         $user = new User($this->user_id);

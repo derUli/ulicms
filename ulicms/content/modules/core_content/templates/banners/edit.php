@@ -100,7 +100,7 @@ if ($permissionChecker->hasPermission("banners") and $permissionChecker->hasPerm
         }
         ?>">
 	<textarea name="html" cols=40 rows=10><?php
-        echo htmlspecialchars($row->html);
+        esc($row->html);
         ?></textarea>
 </fieldset>
 

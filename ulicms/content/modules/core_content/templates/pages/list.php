@@ -124,7 +124,7 @@ if ($permissionChecker->hasPermission("pages")) {
             <form action="#" method="get">
                 <div class="checkbox">
                     <label><input type="checkbox" class="js-switch" name="show_filters" id="show_filters"
-                                  value="1" data-url="index.php?ajax_cmd=toggle_show_filters"
+                                  value="1" data-url="<?php echo ModuleHelper::buildMethodCallUrl(PageController::class, "toggleFilters"); ?>"
                                   <?php if ($show_filters) echo "checked"; ?>> <?php translate("show_filters"); ?></label>
                 </div>
             </form>
@@ -134,7 +134,10 @@ if ($permissionChecker->hasPermission("pages")) {
                             class="fa fa-plus"></i> <?php translate("create_page"); ?></a>
                 </div>
                 <div class="col-xs-6 text-right">
-                    <div class="page-list-filters" style="<?php if (!$show_filters) echo "display:none"; ?>">
+                    <div class="page-list-filters" style="<?php
+                    if (!$show_filters)
+                        echo "display:none";
+                    ?>">
                         <a
                             href="<?php echo ModuleHelper::buildMethodCallUrl("PageController", "resetFilters"); ?>"
                             class="btn btn-default" id="btn-reset-filters"><i
@@ -151,7 +154,7 @@ if ($permissionChecker->hasPermission("pages")) {
                     <?php translate("title"); ?>
                     <input type="hidden" name="action" value="pages"> <input
                         type="text" name="filter_title"
-                        value="<?php echo htmlspecialchars($_SESSION["filter_title"]); ?>">
+                        value="<?php esc($_SESSION["filter_title"]); ?>">
                 </div>
 
                 <div class="col-xs-6">
@@ -431,8 +434,8 @@ if ($permissionChecker->hasPermission("pages")) {
             $filter_sql .= "AND (title LIKE '" . db_escape($_SESSION["filter_title"]) . "%' or title LIKE '%" . db_escape($_SESSION["filter_title"]) . "' or title LIKE '%" . db_escape($_SESSION["filter_title"]) . "%' or title LIKE '" . db_escape($_SESSION["filter_title"]) . "' ) ";
         }
 
-        $group = new Group();
-        $group->getCurrentGroup();
+
+        $group = Group::getCurrentGroup();
         $userLanguage = $permissionChecker->getLanguages();
         $joined = "";
         foreach ($userLanguage as $lang) {
@@ -471,8 +474,8 @@ if ($permissionChecker->hasPermission("pages")) {
                         <?php
                         if ($permissionChecker->hasPermission("pages_create")) {
                             ?>
-                            <td style="text-align: center"><?php translate("clone"); ?>
-                            </td> -->
+                                                                            <td style="text-align: center"><?php translate("clone"); ?>
+                                                                            </td> -->
                         <?php } ?>
                         <td style="text-align: center"><?php translate("edit"); ?>
                         </td>
@@ -488,7 +491,7 @@ if ($permissionChecker->hasPermission("pages")) {
                             echo '<tr id="dataset-' . $row->id . '">';
                             echo "<td>" . htmlspecialchars($row->title);
                             if (!empty($row->redirection) and ! is_null($row->redirection) and $row->type == "link") {
-                                echo htmlspecialchars(" --> ") . htmlspecialchars($row->redirection);
+                                esc(" --> ") . htmlspecialchars($row->redirection);
                             }
 
                             echo "</td>";
@@ -509,10 +512,6 @@ if ($permissionChecker->hasPermission("pages")) {
                                 $url = "../?goid={$row->id}";
                                 echo "<td style='text-align:center'><a href=\"" . $url . "\"><img class=\"mobile-big-image\" src=\"gfx/preview.png\" alt=\"" . get_translation("view") . "\" title=\"" . get_translation("view") . "\"></a></td>";
                             }
-                            // if ($acl->hasPermission("pages_create")) {
-                            // echo "<td style='text-align:center'><a href=\"index.php?action=clone_page&page=" . $row->id . "\"><img class=\"mobile-big-image\" src=\"gfx/clone.png\" alt=\"" . get_translation("clone") . "\" title=\"" . get_translation("clone") . "\"></a></td>";
-                            // }
-                            $autor = $row->autor;
 
                             $checker = new ContentPermissionChecker(get_user_id());
                             $can_edit_this = $checker->canWrite($row->id);

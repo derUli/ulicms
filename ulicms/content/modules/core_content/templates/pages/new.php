@@ -17,15 +17,18 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
     $types = get_available_post_types();
     ?>
     <div class="loadspinner">
-        <img src="gfx/loading.gif" alt="Loading...">
+        <?php require "inc/loadspinner.php"; ?>
     </div>
     <?php
-    echo ModuleHelper::buildMethodCallForm("PageController", "create", array(), "post", array(
-        "name" => "newpageform",
-        "id" => "pageform",
-        "style" => "display:none",
-        "class" => "pageform main-form",
-        "data-get-content-types-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "getContentTypes")
+    echo ModuleHelper::buildMethodCallForm("PageController", "create", array(), "post",
+            array(
+                "name" => "newpageform",
+                "id" => "pageform",
+                "style" => "display:none",
+                "class" => "pageform main-form",
+                "data-get-content-types-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "getContentTypes"),
+                "data-systemname-free-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "checkSystemNameFree"),
+                "data-parent-pages-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "filterParentPages")
     ));
     ?>
     <p>
@@ -249,7 +252,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                     <br />
                     <input type="text" id="og_image" name="og_image" readonly="readonly"
                            class="kcfinder"
-                           value="<?php echo htmlspecialchars($og_image); ?>"
+                           value="<?php esc($og_image); ?>"
                            style="cursor: pointer" /> <a href="#"
                            onclick="$('#og_image').val('');
                                    return false;"
@@ -503,7 +506,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                 <option value="desktop"><?php translate("desktop_computers"); ?></option>
                 <?php
                 while ($row = db_fetch_object($groups)) {
-                    echo '<option value="' . $row->id . '">' . real_htmlspecialchars($row->name) . '</option>';
+                    echo '<option value="' . $row->id . '">' . _esc($row->name) . '</option>';
                 }
                 ?>
             </select> <br /> <br />

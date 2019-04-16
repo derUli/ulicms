@@ -43,3 +43,6 @@ add_translation("min_time_to_fill_form_help", "One word per line. Parts of a str
 
 add_translation("footer", "Footer");
 add_translation("edit_footer_text", "Edit Footer Text");
+
+
+add_translation("error_pages", "Error Pages");

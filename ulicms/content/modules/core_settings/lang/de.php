@@ -42,3 +42,5 @@ add_translation("min_time_to_fill_form_help", "Ein Wort je Zeile. Auch Teile ein
 
 add_translation("footer", "Footer");
 add_translation("edit_footer_text", "Footer Text bearbeiten");
+
+add_translation("error_pages", "Fehlerseiten");

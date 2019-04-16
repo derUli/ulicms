@@ -33,6 +33,8 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         foreach ($this->savedSettings as $key => $value) {
             Settings::set($key, $value);
         }
+
+        Database::query("delete from {prefix}content where systemname like 'test-page-%", true);
     }
 
     private function cleanUp() {
@@ -192,6 +194,32 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $year = date("Y");
 
         $this->assertEquals("&copy; (C) {$year} by John Doe", Template::getFooterText());
+    }
+
+    public function testGetContentWithPlaceholder() {
+        $manager = new UserManager();
+        $users = $manager->getAllUsers();
+        $user = $users[0];
+        $user_id = $user->getId();
+
+        $groups = Group::getAll();
+        $group = $groups[0];
+        $group_id = $group->getId();
+
+        $page = new Page();
+        $page->title = "Test Page " . time();
+        $page->systemname = "test-page-" . time();
+        $page->language = "de";
+        $page->menu = "not_in_menu";
+        $page->content = "<p>Wir schreiben das Jahr [year] des fliegenden Spaghettimonsters</p>";
+        $page->author_id = $user_id;
+        $page->group_id = $group_id;
+        $page->save();
+
+        $_GET["seite"] = $page->systemname;
+        $_SESSION["language"] = $page->language;
+        $_GET["REQUEST_URI"] = "/{$page->systemname}.html";
+        $this->assertEquals("<p>Wir schreiben das Jahr " . date("Y") . " des fliegenden Spaghettimonsters</p>", Template::getContent());
     }
 
 }

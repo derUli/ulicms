@@ -36,9 +36,9 @@ if ($permissionChecker->hasPermission("pages")) {
     while ($row = db_fetch_object($query)) {
         $list_data = new List_Data($row->id);
 
-        $autor = $row->autor;
+        $author_id = $row->author_id;
 
-        $is_owner = $autor == get_user_id();
+        $is_owner = $author_id == get_user_id();
 
         $can_active_this = false;
 
@@ -63,7 +63,7 @@ if ($permissionChecker->hasPermission("pages")) {
         } else {
             ?>
             <div class="loadspinner">
-                <img src="gfx/loading.gif" alt="Loading...">
+                <?php require "inc/loadspinner.php"; ?>
             </div>
             <div class="pageform" style="display: none">
                 <div class="top-bar">
@@ -85,7 +85,9 @@ if ($permissionChecker->hasPermission("pages")) {
                 echo ModuleHelper::buildMethodCallForm("PageController", "edit", array(), "post", array(
                     "id" => "pageform-edit",
                     "class" => "main-form",
-                    "data-get-content-types-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "getContentTypes")
+                    "data-get-content-types-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "getContentTypes"),
+                    "data-systemname-free-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "checkSystemNameFree"),
+                    "data-parent-pages-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "filterParentPages")
                 ));
                 ?>
                 <input type="hidden" name="edit_page" value="edit_page"> <input
@@ -97,11 +99,11 @@ if ($permissionChecker->hasPermission("pages")) {
                         <strong><?php translate("permalink"); ?>*</strong><br /> <input
                             type="text" required="required" name="systemname"
                             value="<?php
-                            echo htmlspecialchars($row->systemname);
+                            esc($row->systemname);
                             ?>"> <br /> <strong><?php translate("page_title"); ?>* </strong><br />
                         <input type="text" name="page_title"
                                value="<?php
-                               echo htmlspecialchars($row->title);
+                               esc($row->title);
                                ?>"
                                required>
                         <div class="typedep hide-on-snippet hide-on-non-regular">
@@ -109,7 +111,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                 translate("ALTERNATE_TITLE");
                                 ?> </strong><br /> <input type="text" name="alternate_title"
                                                    value="<?php
-                                                   echo htmlspecialchars($row->alternate_title);
+                                                   esc($row->alternate_title);
                                                    ?>"> <small><?php
                                                        echo translate("ALTERNATE_TITLE_INFO");
                                                        ?> </small> <br /> <br /> <strong><?php translate("show_headline"); ?></strong>
@@ -296,7 +298,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                ?>"
                                style="cursor: pointer" /> <a href="#"
                                onclick="$('#menu_image').val('');
-                                                   return false;"
+                                       return false;"
                                class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?> </a>
                     </div></div>
                 <div class="typedep" id="tab-link">
@@ -337,26 +339,26 @@ if ($permissionChecker->hasPermission("pages")) {
                         <strong><?php translate("meta_description"); ?></strong><br /> <input
                             type="text" name="meta_description"
                             value="<?php
-                            echo htmlspecialchars($row->meta_description);
+                            esc($row->meta_description);
                             ?>"
                             maxlength="200"> <br /> <strong><?php translate("meta_keywords"); ?></strong><br />
                         <input type="text" name="meta_keywords"
                                value="<?php
-                               echo htmlspecialchars($row->meta_keywords);
+                               esc($row->meta_keywords);
                                ?>"
                                maxlength="200">
                         <div class="typedep" id="article-metadata">
                             <br /> <strong><?php translate("author_name"); ?></strong><br /> <input
                                 type="text" name="article_author_name"
-                                value="<?php echo real_htmlspecialchars($row->article_author_name); ?>"
+                                value="<?php echo _esc($row->article_author_name); ?>"
                                 maxlength="80"> <br /> <strong><?php translate("author_email"); ?></strong><br />
                             <input type="email" name="article_author_email"
-                                   value="<?php echo real_htmlspecialchars($row->article_author_email); ?>"
+                                   value="<?php echo _esc($row->article_author_email); ?>"
                                    maxlength="80"> <br />
                             <div id="comment-fields">
                                 <strong><?php translate("homepage"); ?></strong><br /> <input
                                     type="url" name="comment_homepage"
-                                    value="<?php echo real_htmlspecialchars($row->comment_homepage); ?>"
+                                    value="<?php echo _esc($row->comment_homepage); ?>"
                                     maxlength="255"> <br />
                             </div>
                             <strong><?php translate("article_date"); ?></strong><br /> <input
@@ -367,7 +369,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                 }
                                 ?>"
                                 step=any> <br /> <br /> <strong><?php translate("excerpt"); ?></strong>
-                            <textarea name="excerpt" id="excerpt" rows="5" cols="80" class="<?php esc($editor); ?>" data-mimetype="text/html" ><?php echo real_htmlspecialchars($row->excerpt); ?></textarea>
+                            <textarea name="excerpt" id="excerpt" rows="5" cols="80" class="<?php esc($editor); ?>" data-mimetype="text/html" ><?php echo _esc($row->excerpt); ?></textarea>
                         </div>
                         <div class="typedep" id="tab-og" style="display: none">
                             <h3><?php translate("open_graph"); ?></h3>
@@ -375,25 +377,25 @@ if ($permissionChecker->hasPermission("pages")) {
                             <strong><?php translate("title"); ?>
                             </strong><br /> <input type="text" name="og_title"
                                                    value="<?php
-                                                   echo htmlspecialchars($row->og_title);
+                                                   esc($row->og_title);
                                                    ?>"> <br /> <strong><?php translate("description"); ?>
                             </strong><br /> <input type="text" name="og_description"
                                                    value="<?php
-                                                   echo htmlspecialchars($row->og_description);
+                                                   esc($row->og_description);
                                                    ?>"> <br /> <strong><?php translate("type"); ?>
                             </strong><br /> <input type="text" name="og_type"
                                                    value="<?php
-                                                   echo htmlspecialchars($row->og_type);
+                                                   esc($row->og_type);
                                                    ?>"> <br /> <strong><?php translate("image"); ?></strong> <br />
 
                             <input type="text" id="og_image" name="og_image"
                                    readonly="readonly" class="kcfinder"
                                    value="<?php
-                                   echo htmlspecialchars($row->og_image);
+                                   esc($row->og_image);
                                    ?>"
                                    style="cursor: pointer" /> <a href="#"
                                    onclick="$('#og_image').val('');
-                                                       return false;"
+                                           return false;"
                                    class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?>
                             </a>
                             <?php
@@ -403,7 +405,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                 <div style="margin-top: 15px;">
                                     <img class="small-preview-image"
                                          src="<?php
-                                         echo htmlspecialchars($og_url);
+                                         esc($og_url);
                                          ?>" />
                                 </div>
                             <?php } ?>
@@ -617,7 +619,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                value="<?php Template::escape($row->image_url); ?>"
                                style="cursor: pointer" /> <a href="#"
                                onclick="$('#menu_image').val('');
-                                                   return false;"
+                                       return false;"
                                class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?>
                         </a>
                     </div>
@@ -649,10 +651,10 @@ if ($permissionChecker->hasPermission("pages")) {
                         </strong>
                         <input type="text" id="article_image" name="article_image"
                                readonly="readonly" class="kcfinder"
-                               value="<?php echo real_htmlspecialchars($row->article_image); ?>"
+                               value="<?php echo _esc($row->article_image); ?>"
                                style="cursor: pointer" maxlength="255" /> <a href="#"
                                onclick="$('#article_image').val('');
-                                                   return false;"
+                                       return false;"
                                class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?></a>
                     </div>
                 </div>
@@ -660,7 +662,7 @@ if ($permissionChecker->hasPermission("pages")) {
                     <h2 class="accordion-header"><?php translate("permissions"); ?></h2>
                     <div class="accordion-content">
                         <strong><?php translate("owner"); ?> <?php translate("user"); ?></strong>
-                        <select name="autor"
+                        <select name="author_id"
                         <?php
                         if (!$pages_change_owner) {
                             echo "disabled";
@@ -670,7 +672,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                     foreach ($users as $user) {
                                         ?>
                                 <option value="<?php Template::escape($user["id"]); ?>"
-                                        <?php if ($user["id"] == $row->autor) echo "selected"; ?>><?php Template::escape($user["username"]); ?></option>
+                                        <?php if ($user["id"] == $row->author_id) echo "selected"; ?>><?php Template::escape($user["username"]); ?></option>
                                     <?php } ?>
                         </select> <br /> <br /> <strong><?php translate("owner"); ?> <?php translate("group"); ?></strong>
                         <select name="group_id"
@@ -812,9 +814,9 @@ if ($permissionChecker->hasPermission("pages")) {
                                 <?php
                                 while ($row2 = db_fetch_object($groupsSql)) {
                                     if (faster_in_array(strval($row2->id), $access)) {
-                                        echo '<option value="' . $row2->id . '" selected>' . real_htmlspecialchars($row2->name) . '</option>';
+                                        echo '<option value="' . $row2->id . '" selected>' . _esc($row2->name) . '</option>';
                                     } else {
-                                        echo '<option value="' . $row2->id . '">' . real_htmlspecialchars($row2->name) . '</option>';
+                                        echo '<option value="' . $row2->id . '">' . _esc($row2->name) . '</option>';
                                     }
                                 }
                                 ?>
@@ -825,7 +827,7 @@ if ($permissionChecker->hasPermission("pages")) {
                         <textarea name="custom_data" style="width: 100%; height: 200px;"
                                   class="codemirror" data-mimetype="application/json" data-validate="json"
                                   cols=80 rows=10><?php
-                                      echo htmlspecialchars($row->custom_data);
+                                      esc($row->custom_data);
                                       ?></textarea>
                     </div>
                 </div>
@@ -837,7 +839,7 @@ if ($permissionChecker->hasPermission("pages")) {
             <div class="typedep" id="content-editor">
                 <p>
                     <textarea name="page_content" id="page_content" cols=60 rows=20 class="<?php esc($editor); ?>" data-mimetype="text/html"><?php
-                        echo htmlspecialchars($row->content);
+                        esc($row->content);
                         ?></textarea>
                 </p>
                 <?php

@@ -69,7 +69,7 @@ if ($permissionChecker->hasPermission("privacy_settings")) {
                     <textarea name="privacy_policy_checkbox_text"
                               class="<?php esc($editor); ?>" data-mimetype="text/html"
                               id="privacy_policy_checkbox_text" cols=60 rows=15><?php
-                              echo htmlspecialchars(Settings::get("privacy_policy_checkbox_text_{$currentLanguage}"));
+                              esc(Settings::get("privacy_policy_checkbox_text_{$currentLanguage}"));
                               ?></textarea>
                 </div>
             </div>

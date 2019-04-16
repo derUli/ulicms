@@ -16,7 +16,7 @@ if (!$permissionChecker->hasPermission("performance_settings")) {
 
         <div class="alert alert-success alert-dismissable fade in">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <?php translate("cache_was_cleared"); ?>
+            <?php translate("cache_was_cleared"); ?>
         </div>
     <?php } ?>
     <?php
@@ -25,7 +25,7 @@ if (!$permissionChecker->hasPermission("performance_settings")) {
         <div class="alert alert-success alert-dismissable fade in">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">
                 &times;</a>
-        <?php translate("changes_was_saved"); ?>
+            <?php translate("changes_was_saved"); ?>
         </div>
     <?php } ?>
     <?php ModuleHelper::buildMethodCallForm($sClass, $sMethod); ?>
@@ -61,8 +61,8 @@ if (!$permissionChecker->hasPermission("performance_settings")) {
     <div class="inputWrapper">
         <input type="number" name="cache_period" min="1" max="20160"
                value="<?php
-    echo $cache_period;
-        ?>">
+               echo $cache_period;
+               ?>">
                <?php translate("minutes"); ?>
     </div>
     <p>
@@ -80,6 +80,6 @@ if (!$permissionChecker->hasPermission("performance_settings")) {
             }
         });
     </script>
-    <?php echo ModuleHelper::endForm(); ?>
-<?php
-}?>
+    <?php
+    echo ModuleHelper::endForm();
+}

@@ -5,12 +5,12 @@ class LoggerTest extends \PHPUnit\Framework\TestCase
 
     public function setUp()
     {
-        SureRemoveDir(Path::resolve("ULICMS_LOG/test_log"), true);
+        sureRemoveDir(Path::resolve("ULICMS_LOG/test_log"), true);
     }
 
     public function tearDown()
     {
-        SureRemoveDir(Path::resolve("ULICMS_LOG/test_log"), true);
+        sureRemoveDir(Path::resolve("ULICMS_LOG/test_log"), true);
     }
 
     public function testRegisterAndUnregisterLogger()

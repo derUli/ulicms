@@ -35,6 +35,7 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
             "scripts/php.js/strip_tags.js",
             "scripts/php.js/htmlspecialchars.js",
             "../node_modules/zxcvbn/dist/zxcvbn.js",
+            "../node_modules/slug/slug.js",
             "../node_modules/jquery/dist/jquery.min.js",
             "../node_modules/password-strength-meter/dist/password.min.js",
             "../node_modules/js-url/url.min.js",
@@ -145,8 +146,8 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
 
                         <div class="row pull-right top-right-icons">
                             <div class="<?php esc($colClass); ?>">
-                                <a href = "#" id = "menu-clear-cache"
-                                   data-url = "<?php echo ModuleHelper::buildMethodCallUrl("PerformanceSettingsController", "clearCache", "clear_cache = 1"); ?>"><i class = "fas fa-broom"></i></a><a href = "#" id = "menu-clear-cache-loading" style = "display: none;"><i class = "fa fa-spinner fa-spin"></i></a>
+                                <a href="#" id="menu-clear-cache"
+                                   data-url="<?php echo ModuleHelper::buildMethodCallUrl("PerformanceSettingsController", "clearCache", "clear_cache=1"); ?>"><i class="fas fa-broom"></i></a><a href="#" id="menu-clear-cache-loading" style="display: none;"><i class="fa fa-spinner fa-spin"></i></a>
                             </div>
                             <?php
                             if ($permissionChecker->hasPermission("comments_manage")) {
@@ -158,7 +159,7 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
                                             <?php
                                             if ($count) {
                                                 ?>
-                                                <div class = "count" data-count = "<?php echo $count ?>">
+                                                <div class="count" data-count="<?php echo $count ?>">
                                                     <?php echo $count; ?>
                                                 </div>
                                             <?php } ?></a>

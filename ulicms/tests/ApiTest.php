@@ -11,6 +11,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
 
     public function tearDown() {
         $this->cleanUp();
+        Database::query("delete from {prefix}users where username like 'testuser-%", true);
         @session_destroy();
     }
 
@@ -272,6 +273,71 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
     public function testGetThemesList() {
         $themes = getThemesList();
         $this->assertContains("impro17", $themes);
+    }
+
+    public function testGetPageSystemnameByID() {
+        $this->assertEquals($first->systemname, getPageSystemnameByID($first->id));
+        $this->assertNull(getPageSystemnameByID(PHP_INT_MAX));
+    }
+
+    public function testGetPageIDBySystemname() {
+        $allPages = ContentFactory::getAll();
+        $first = $allPages[0];
+        $this->assertEquals($first->id, getPageIDBySystemname($first->systemname));
+        $this->assertNull(getPageIDBySystemname("ich-existiere-wirklich-nicht"));
+    }
+
+    public function testGetPageTitleByID() {
+        $allPages = ContentFactory::getAll();
+        $first = $allPages[0];
+        $this->assertEquals($first->title, getPageTitleByID($first->id));
+        $this->assertEquals("[" . get_translation("none") . "]", getPageTitleByID(PHP_INT_MAX));
+    }
+
+    public function testGetPreferredLanguage() {
+        $acceptLanguageHeader1 = "Accept-Language: da, en-gb;q=0.8, en;q=0.7, de;q=0.5";
+        $this->assertEquals("en", get_prefered_language(array("de", "en"), $acceptLanguageHeader1));
+
+        $acceptLanguageHeader2 = "Accept-Language: da, en-gb;q=0.8, en;q=0.7, de;q=0.9";
+        $this->assertEquals("de", get_prefered_language(array("de", "en"), $acceptLanguageHeader2));
+    }
+
+    public function testGetHtmlEditorReturnsNull() {
+        if (session_id()) {
+            @session_destroy();
+        }
+        $this->assertNull(get_html_editor());
+    }
+
+    public function testGetHtmlEditorReturnsCKEditor() {
+
+        $user = new User();
+        $user->setUsername("testuser-1");
+        $user->setPassword(rand_string(23));
+        $user->setLastname("Beutlin");
+        $user->setFirstname("Bilbo");
+        $user->setHTMLEditor("ckeditor");
+        $user->save();
+
+        @session_start();
+        register_session(getUserByName(("testuser-1")), false);
+        $this->assertEquals("ckeditor", get_html_editor());
+        @session_destroy();
+    }
+
+    public function testGetHtmlEditorReturnsCodeMirror() {
+        $user = new User();
+        $user->setUsername("testuser-2");
+        $user->setPassword(rand_string(666));
+        $user->setLastname("Beutlin");
+        $user->setFirstname("Bilbo");
+        $user->setHTMLEditor("codemirror");
+        $user->save();
+
+        @session_start();
+        register_session(getUserByName(("testuser-2")), false);
+        $this->assertEquals("codemirror", get_html_editor());
+        @session_destroy();
     }
 
 }

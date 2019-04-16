@@ -81,7 +81,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $page->systemname = 'testdisableshortcodes';
         $page->language = 'de';
         $page->content = "foo [csrf_token_html] bar";
-        $page->autor = 1;
+        $page->author_id = 1;
         $page->group_id = 1;
         $page->custom_data["disable_shortcodes"] = true;
         $page->save();
@@ -104,7 +104,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $page->systemname = 'testdisableshortcodes';
         $page->language = 'de';
         $page->content = "foo [csrf_token_html] bar";
-        $page->autor = 1;
+        $page->author_id = 1;
         $page->group_id = 1;
         $page->custom_data["disable_shortcodes"] = false;
         $page->save();
@@ -127,9 +127,9 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $page->systemname = 'testdisableshortcodes';
         $page->language = 'de';
         $page->content = "foo [csrf_token_html] bar";
-        $page->autor = 1;
+        $page->author_id = 1;
         $page->group_id = 1;
-        $page->autor = 1;
+        $page->author_id = 1;
         $page->group_id = 1;
         $page->save();
 
@@ -151,7 +151,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $page->language = 'de';
         $page->content = "Some Text";
         $page->comments_enabled = true;
-        $page->autor = 1;
+        $page->author_id = 1;
         $page->group_id = 1;
         $page->save();
 
@@ -170,7 +170,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $page->language = 'de';
         $page->content = "Some Text";
         $page->comments_enabled = false;
-        $page->autor = 1;
+        $page->author_id = 1;
         $page->group_id = 1;
         $page->save();
 
@@ -189,7 +189,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $page->language = 'de';
         $page->content = "Some Text";
         $page->comments_enabled = null;
-        $page->autor = 1;
+        $page->author_id = 1;
         $page->group_id = 1;
         $page->save();
 
@@ -207,7 +207,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $page->systemname = 'unit-test-' . time();
         $page->language = 'de';
         $page->content = "Some Text";
-        $page->autor = 1;
+        $page->author_id = 1;
         $page->group_id = 1;
         $page->save();
 
@@ -228,8 +228,8 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $page->systemname = 'unit-test-' . time();
         $page->language = 'de';
         $page->content = "Some Text";
-        $page->autor = $this->user->getId();
-        $page->autor = 1;
+        $page->author_id = $this->user->getId();
+        $page->author_id = 1;
         $page->group_id = 1;
         $page->save();
 
@@ -251,7 +251,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $page->language = 'de';
         $page->content = "Some Text";
         $page->comments_enabled = true;
-        $page->autor = 1;
+        $page->author_id = 1;
         $page->group_id = 1;
         $page->save();
 
@@ -304,7 +304,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $page->language = 'de';
         $page->content = "Some Text";
         $page->comments_enabled = true;
-        $page->autor = 1;
+        $page->author_id = 1;
         $page->group_id = 1;
         $page->save();
 
@@ -345,7 +345,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $page->language = 'de';
         $page->content = "Some Text";
         $page->comments_enabled = true;
-        $page->autor = 1;
+        $page->author_id = 1;
         $page->group_id = 1;
         $page->save();
 
@@ -361,7 +361,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $page->language = 'de';
         $page->content = "Some Text";
         $page->comments_enabled = true;
-        $page->autor = 1;
+        $page->author_id = 1;
         $page->group_id = 1;
         $page->save();
 
@@ -404,7 +404,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $page->language = 'de';
         $page->content = "Some Text";
         $page->comments_enabled = true;
-        $page->autor = 1;
+        $page->author_id = 1;
         $page->group_id = 1;
         $page->save();
 
@@ -420,7 +420,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $page->language = 'de';
         $page->content = "Some Text";
         $page->comments_enabled = false;
-        $page->autor = 1;
+        $page->author_id = 1;
         $page->group_id = 1;
         $page->save();
 
@@ -441,7 +441,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $page->language = 'de';
         $page->content = "Some Text";
         $page->comments_enabled = false;
-        $page->autor = 1;
+        $page->author_id = 1;
         $page->group_id = 1;
         $page->save();
 
@@ -461,7 +461,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $snippet->language = 'de';
         $snippet->content = "even more text";
         $snippet->comments_enabled = false;
-        $snippet->autor = 1;
+        $snippet->author_id = 1;
         $snippet->group_id = 1;
         $snippet->save();
         $shortcode = "This is [include={$snippet->id}]";
@@ -480,7 +480,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $page->language = 'de';
         $page->content = "Some Text";
         $page->comments_enabled = false;
-        $page->autor = 1;
+        $page->author_id = 1;
         $page->group_id = 1;
         $page->save();
 

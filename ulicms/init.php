@@ -112,6 +112,7 @@ require_once dirname(__file__) . "/classes/objects/content/ContentFactory.php";
 require_once dirname(__file__) . "/classes/objects/content/CustomFields.php";
 require_once dirname(__file__) . "/classes/objects/content/Results.php";
 require_once dirname(__file__) . "/classes/objects/media/load.php";
+
 require_once dirname(__file__) . "/UliCMSVersion.php";
 require_once dirname(__file__) . "/lib/minify.php";
 
@@ -279,7 +280,7 @@ global $actions;
 $actions = array();
 
 function noPerms() {
-    echo "<p class=\"ulicms_error\">" . get_translation("no_permissions") . "</p>";
+    echo "<div class=\"alert alert-danger\">" . get_translation("no_permissions") . "</div>";
     $logger = LoggerRegistry::get("audit_log");
     if ($logger) {
         $userId = get_user_id();
@@ -420,10 +421,16 @@ Vars::set("disabledModules", $moduleManager->getDisabledModuleNames());
 // don't load module stuff on kcfinder page (media)
 // since the "Path" class has a naming conflict with the same named
 // class of KCFinder
+
+
+require_once dirname(__file__) . "/templating.php";
+
 ModelRegistry::loadModuleModels();
 TypeMapper::loadMapping();
 HelperRegistry::loadModuleHelpers();
 ControllerRegistry::loadModuleControllers();
+
+
 
 do_event("before_init");
 do_event("init");
@@ -441,3 +448,5 @@ $installed_patches = implode(";", $installed_patches);
 if (!defined("PATCH_CHECK_URL")) {
     define("PATCH_CHECK_URL", "https://patches.ulicms.de/?v=" . urlencode(implode(".", $version->getInternalVersion())) . "&installed_patches=" . urlencode($installed_patches));
 }
+
+

@@ -289,7 +289,7 @@ add_translation("LOGIN", "Login");
 add_translation("UPLOAD_FILE", "upload file");
 add_translation("FROM_THE_PACKAGE_SOURCE", "from package source");
 add_translation("UPLOAD_PACKAGE", "upload package");
-add_translation("LOADING_DATA", "loading data...");
+add_translation("LOADING_DATA", "Loading data...");
 add_translation("AVAILABLE_PACKAGES", "available packages");
 add_translation("INSTALL", "Install");
 add_translation("ERROR", "Error");

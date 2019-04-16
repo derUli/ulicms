@@ -68,7 +68,7 @@ class PagePermissionsTest extends \PHPUnit\Framework\TestCase
         $users = $manager->getAllUsers();
         $firstUser = $users[0];
         
-        $page->autor = $firstUser->getId();
+        $page->author_id = $firstUser->getId();
         $groups = Group::getAll();
         $firstGroup = $groups[0];
         $page->group_id = $firstGroup->getId();

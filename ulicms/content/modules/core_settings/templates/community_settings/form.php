@@ -49,4 +49,5 @@ if ($commentableContentTypeSettings) {
     <button type="submit" class="btn btn-primary">
         <i class="fa fa-save"></i> <?php translate("save"); ?></button>
 </p>
-<?php echo ModuleHelper::endForm(); ?>
+<?php
+echo ModuleHelper::endForm();

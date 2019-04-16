@@ -291,7 +291,7 @@ add_translation("LOGIN", "Login");
 add_translation("UPLOAD_FILE", "Datei hochladen");
 add_translation("FROM_THE_PACKAGE_SOURCE", "Aus der Paketquelle");
 add_translation("UPLOAD_PACKAGE", "Paket hochladen");
-add_translation("LOADING_DATA", "Daten werden geladen.");
+add_translation("LOADING_DATA", "Daten werden geladen...");
 add_translation("AVAILABLE_PACKAGES", "Verfügbare Pakete");
 add_translation("INSTALL", "Installieren");
 add_translation("ERROR", "Fehler");

@@ -1,3 +1,23 @@
+$(function () {
+    $("input[type=checkbox].select-all").change(selectAllChecked);
+    $("input[type=checkbox]").change(checkboxChecked);
+
+    // check "Select All" checkbox if all checkboxes of this group are checked
+    $("input[type=checkbox]").each(function (index, target) {
+        var item = $(target).data("select-all-checkbox");
+        var group = $(target).data("checkbox-group");
+        if (item !== null && group !== null) {
+            checkSelectAllIfAllChecked(item, group);
+        }
+    });
+
+    // scroll to the given anchor
+    var jumpTo = url("?jumpto");
+    if (typeof jumpTo !== "undefined" && jumpTo.length > 0) {
+        location.href = "#" + jumpTo;
+    }
+});
+
 // scrolls to an anchor with animation
 function scrollToAnchor(aid) {
     var aTag = $("a[name='" + aid + "']");
@@ -23,7 +43,7 @@ function shake(div) {
 
     for (var iter = 0; iter < (times + 1); iter++) {
         $(div).animate({
-            left: ((iter % 2 == 0 ? distance : distance * -1))
+            left: ((iter % 2 === 0 ? distance : distance * -1))
         }, interval);
     }// for
 
@@ -47,26 +67,6 @@ function bindTogglePassword(input, checkbox) {
     });
 }
 
-$(function () {
-    $("input[type=checkbox].select-all").change(selectAllChecked);
-    $("input[type=checkbox]").change(checkboxChecked);
-
-    // check "Select All" checkbox if all checkboxes of this group are checked
-    $("input[type=checkbox]").each(function (index, target) {
-        var item = $(target).data("select-all-checkbox");
-        var group = $(target).data("checkbox-group");
-        if (item != null && group != null) {
-            checkSelectAllIfAllChecked(item, group);
-        }
-    });
-
-    // scroll to the given anchor
-    var jumpTo = url("?jumpto");
-    if (typeof jumpTo !== "undefined" && jumpTo.length > 0) {
-        location.href = "#" + jumpTo;
-    }
-});
-
 function checkboxChecked(event) {
     var item = $(event.target).data("select-all-checkbox");
     var group = $(event.target).data("checkbox-group");
@@ -80,7 +80,7 @@ function checkSelectAllIfAllChecked(item, group) {
     // if the count of the checked checkboxes in the group is equal to the count
     // of all checkboxes in this group
     var allSelected = $("input[type=checkbox][data-checkbox-group='" + group
-            + "']:checked").length == $("input[type=checkbox][data-checkbox-group='"
+            + "']:checked").length === $("input[type=checkbox][data-checkbox-group='"
             + group + "']").length;
     // check the "Select All" Checkbox, else uncheck it
     $(item).prop("checked", allSelected).change();

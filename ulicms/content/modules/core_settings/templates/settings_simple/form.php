@@ -43,46 +43,53 @@ if ($permissionChecker->hasPermission("settings_simple")) {
             <td><strong><?php translate("OWNER_MAILADRESS"); ?></strong></td>
             <td><input type="email" name="email"
                        value="<?php
-                   echo $settings["email"];
+                       echo $settings["email"];
                        ?>"></td>
         </tr>
         <tr>
             <td><strong><?php translate("frontpage"); ?></strong></td>
             <td><a href="index.php?action=frontpage_settings"
                    class="btn btn-default"><i class="fa fa-edit"></i> <?php
-                   translate("edit");
-                   ?></a></td>
+                       translate("edit");
+                       ?></a></td>
         </tr>
         <tr>
             <td><strong><?php translate("MAINTENANCE_MODE_ENABLED"); ?></strong></td>
             <td><input type="checkbox" name="maintenance_mode"
                        class="js-switch"
-    <?php
-    if (strtolower($settings["maintenance_mode"] == "on") || $settings["maintenance_mode"] == "1" || strtolower($settings["maintenance_mode"]) == "true") {
-        echo " checked";
-    }
-    ?>></td>
+                       <?php
+                       if (strtolower($settings["maintenance_mode"] == "on") || $settings["maintenance_mode"] == "1" || strtolower($settings["maintenance_mode"]) == "true") {
+                           echo " checked";
+                       }
+                       ?>></td>
         </tr>
         <tr>
             <td><strong><?php translate("GUEST_MAY_REGISTER"); ?></strong></td>
             <td><input type="checkbox" name="visitors_can_register"
                        class="js-switch"
-    <?php
-    if (strtolower($settings["visitors_can_register"] == "on") || $settings["visitors_can_register"] == "1" || strtolower($settings["visitors_can_register"]) == "true") {
-        echo " checked";
-    }
-    ?>></td>
+                       <?php
+                       if (strtolower($settings["visitors_can_register"] == "on") || $settings["visitors_can_register"] == "1" || strtolower($settings["visitors_can_register"]) == "true") {
+                           echo " checked";
+                       }
+                       ?>></td>
+        </tr>
+        <tr>
+            <td><strong><?php translate("error_pages"); ?></strong></td>
+            <td><a href="index.php?action=error_pages"
+                   class="btn btn-default"><i class="fa fa-edit"></i> <?php
+                       translate("edit");
+                       ?></a></td>
         </tr>
         <tr>
             <td><strong><?php
-                       translate("enable_password_reset");
-                       ?></strong>
+                    translate("enable_password_reset");
+                    ?></strong>
 
             <td><input type="checkbox" name="disable_password_reset"
                        value="enable"
                        class="js-switch"
 
-    <?php if (!isset($settings["disable_password_reset"])) echo " checked" ?>>
+                       <?php if (!isset($settings["disable_password_reset"])) echo " checked" ?>>
             </td>
         </tr>
         <tr>
@@ -91,38 +98,38 @@ if ($permissionChecker->hasPermission("settings_simple")) {
         </tr>
         <tr>
             <td><strong><?php
-                   translate("description");
-                   ?></strong></td>
+                    translate("description");
+                    ?></strong></td>
             <td><a href="index.php?action=meta_description"
                    class="btn btn-default"><i class="fa fa-edit"></i> <?php
-                   translate("edit");
-    ?></a></td>
+                       translate("edit");
+                       ?></a></td>
         </tr>
         <tr>
             <td><strong><?php translate("keywords"); ?></strong></td>
             <td><a href="index.php?action=meta_keywords" class="btn btn-default"><i
                         class="fa fa-edit"></i>  <?php
-                       translate("edit");
-                       ?></a></td>
+                        translate("edit");
+                        ?></a></td>
         </tr>
-    <?php
-    if ($permissionChecker->hasPermission("open_graph")) {
-        ?>
+        <?php
+        if ($permissionChecker->hasPermission("open_graph")) {
+            ?>
             <tr>
                 <td><strong><?php translate("open_graph"); ?>
                     </strong></td>
                 <td><a href="index.php?action=open_graph" class="btn btn-default"><i
                             class="fa fa-edit"></i> <?php
-            translate("edit");
-            ?></a></td>
+                            translate("edit");
+                            ?></a></td>
             </tr>
-        <?php
-    }
-    ?>
+            <?php
+        }
+        ?>
         <tr>
             <td><strong><?php translate("timezone"); ?></strong></td>
             <td><select name="timezone" size="1">
-                        <?php
+                    <?php
                     $timezones = $controller->getTimezones();
                     $current_timezone = Settings::get("timezone");
                     $current_timezone = trim($current_timezone);
@@ -148,15 +155,15 @@ if ($permissionChecker->hasPermission("settings_simple")) {
 
                         <option value="index,follow"><?php translate("EARCH_ENGINES_INDEX"); ?></option>
                         <option value="noindex,nofollow" selected><?php
-                translate("SEARCH_ENGINES_NOINDEX");
-                ?></option>
+                            translate("SEARCH_ENGINES_NOINDEX");
+                            ?></option>
 
                         <?php
                     } else {
                         ?>
                         <option value="index,follow" selected><?php
-                translate("SEARCH_ENGINES_INDEX");
-                ?></option>
+                            translate("SEARCH_ENGINES_INDEX");
+                            ?></option>
                         <option value="noindex,nofollow"><?php
                             translate("SEARCH_ENGINES_NOINDEX");
                             ?></option>
@@ -165,9 +172,9 @@ if ($permissionChecker->hasPermission("settings_simple")) {
                     ?>
                 </select></td>
         </tr>
-                        <?php
-                        do_event("settings_simple");
-                        ?>
+        <?php
+        do_event("settings_simple");
+        ?>
         <tr>
             <td>
 
@@ -178,11 +185,11 @@ if ($permissionChecker->hasPermission("settings_simple")) {
         </tr>
     </table>
     <input type="hidden" name="save_settings" value="save_settings">
-        <?php echo ModuleHelper::endForm(); ?>
-        <?php
-        enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/settings_simple.js"));
-        combinedScriptHtml();
-        ?>
+    <?php echo ModuleHelper::endForm(); ?>
+    <?php
+    enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/settings_simple.js"));
+    combinedScriptHtml();
+    ?>
     <?php
 } else {
     noPerms();

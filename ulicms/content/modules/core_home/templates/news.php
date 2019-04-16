@@ -44,3 +44,4 @@ if (!Settings::get("disable_ulicms_newsfeed")) {
         echo '<p>' . $description . '</p>';
     }
 }
+ 

@@ -68,7 +68,7 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
                             echo "selected";
                         }
                         ?>>
-                            <?php echo real_htmlspecialchars($value) ?>
+                            <?php echo _esc($value) ?>
                 </option>
                 <?php
             }
@@ -82,7 +82,7 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
                 <option value="<?php
                 echo $key;
                 ?>">
-                            <?php echo real_htmlspecialchars($value) ?>
+                            <?php echo _esc($value) ?>
                 </option>
                 <?php
             }

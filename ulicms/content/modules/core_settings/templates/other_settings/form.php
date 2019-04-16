@@ -73,7 +73,7 @@ if (!$permissionChecker->hasPermission("other")) {
 
             <p>
                 <textarea name="domain_to_language" rows="10" cols="40"><?php
-                    echo real_htmlspecialchars(Settings::get("domain_to_language"));
+                    echo _esc(Settings::get("domain_to_language"));
                     ?></textarea>
             </p>
         </div>
@@ -205,7 +205,7 @@ if (!$permissionChecker->hasPermission("other")) {
                 <div class="inputWrapper">
                     <input type="text" name="smtp_port"
                            value="<?php
-                           echo real_htmlspecialchars($smtp_port);
+                           echo _esc($smtp_port);
                            ?>">
 
                 </div>
@@ -268,7 +268,7 @@ if (!$permissionChecker->hasPermission("other")) {
                     <div class="inputWrapper">
                         <input type="text" name="smtp_user"
                                value="<?php
-                               echo real_htmlspecialchars($smtp_user);
+                               echo _esc($smtp_user);
                                ?>">
                     </div>
 
@@ -278,7 +278,7 @@ if (!$permissionChecker->hasPermission("other")) {
                     <div class="inputWrapper">
                         <input type="password" name="smtp_password"
                                value="<?php
-                               echo real_htmlspecialchars($smtp_password);
+                               echo _esc($smtp_password);
                                ?>"
                                autocomplete="new-password">
                     </div>
@@ -349,4 +349,3 @@ if (!$permissionChecker->hasPermission("other")) {
     </script>
     <?php
 }
-?>

@@ -74,11 +74,11 @@ if ($permissionChecker->hasPermission("users")) {
                         echo '<tr id="dataset-' . $row->getId() . '">';
                         echo "<td style=\"width:40px;\">" . $row->getId() . "</td>";
                         echo "<td>";
-                        echo '<img src="' . get_gravatar($row->getEmail(), 26) . '" alt="Avatar von ' . real_htmlspecialchars($row->getUsername()) . '" style="width:26px;"> ';
+                        echo '<img src="' . get_gravatar($row->getEmail(), 26) . '" alt="Avatar von ' . _esc($row->getUsername()) . '" style="width:26px;"> ';
                         esc($row->getUsername()) . "</td>";
-                        echo "<td class=\"hide-on-mobile\">" . real_htmlspecialchars($row->getLastName()) . "</td>";
-                        echo "<td class=\"hide-on-mobile\">" . real_htmlspecialchars($row->getFirstname()) . "</td>";
-                        echo "<td class=\"hide-on-mobile\">" . real_htmlspecialchars($row->getEmail()) . "</td>";
+                        echo "<td class=\"hide-on-mobile\">" . _esc($row->getLastName()) . "</td>";
+                        echo "<td class=\"hide-on-mobile\">" . _esc($row->getFirstname()) . "</td>";
+                        echo "<td class=\"hide-on-mobile\">" . _esc($row->getEmail()) . "</td>";
                         echo "<td class=\"hide-on-mobile\">";
                         $id = $row->getGroupId();
                         if ($id and $permissionChecker->hasPermission("groups_edit")) {
@@ -95,7 +95,7 @@ if ($permissionChecker->hasPermission("users")) {
                             echo "<td style='text-align:center;'>" . '<a href="index.php?action=admin_edit&id=' . $row->getId() . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . get_translation("edit") . '" title="' . get_translation("edit") . '"></a></td>';
 
                             if ($row->getId() == $_SESSION["login_id"]) {
-                                echo "<td style='text-align:center;'><a href=\"#\" onclick=\"alert('" . get_translation("CANT_DELETE_ADMIN") . "')\"><img class=\"mobile-big-image\" src=\"gfx/delete.gif\" alt=\"" . get_translation("edit") . "\" title=\"" . get_translation("edit") . "\"></a></td>";
+                                echo "<td style='text-align:center;'></td>";
                             } else {
                                 echo "<td style='text-align:center;'>" . '<form action="index.php?sClass=UserController&sMethod=delete&id=' . $row->getId() . '" method="post" class="delete-form">' . get_csrf_token_html() . '<input type="image" class="mobile-big-image" src="gfx/delete.gif"></form></td>';
                             }
@@ -107,7 +107,6 @@ if ($permissionChecker->hasPermission("users")) {
             </table>
         <?php } ?>
     </div>
-
     <?php
 } else {
     noPerms();

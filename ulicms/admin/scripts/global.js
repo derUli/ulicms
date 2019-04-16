@@ -91,15 +91,14 @@ $(function() {
     .not("input[type=image]")
     .addClass("form-control");
 
-  // override save shor
-  // tcut to trigger submit button
+  // override save shortcut to trigger submit button
   if ($("form button[type=submit], form input[type=submit]").length) {
     document.addEventListener(
       "keydown",
       function(e) {
         if (
           (window.navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey) &&
-          e.keyCode == 83
+          e.keyCode === 83
         ) {
           e.preventDefault();
           $("form button[type=submit], form input[type=submit]")

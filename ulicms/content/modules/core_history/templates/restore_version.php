@@ -1,7 +1,4 @@
 <?php
-// @FIXME: Diese beiden Includes nach core_history verschieben.
-require_once ULICMS_ROOT . "/classes/3rdparty/finediff.php";
-
 $permissionChecker = new ACL ();
 if ($permissionChecker->hasPermission("pages")) {
     $content_id = intval($_GET ["content_id"]);
@@ -36,7 +33,7 @@ if ($permissionChecker->hasPermission("pages")) {
                         <td><?php
                             $user = getUserById($revision->user_id);
                             if ($user and isset($user ["username"])) {
-                                echo htmlspecialchars($user ["username"]);
+                                esc($user ["username"]);
                             }
                             ?></td>
                         <td><?php echo $revision->date; ?></td>
@@ -55,4 +52,3 @@ if ($permissionChecker->hasPermission("pages")) {
 } else {
     noPerms();
 }
-?>

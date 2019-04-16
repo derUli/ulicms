@@ -6,8 +6,8 @@ class ActionRegistry {
 
     private static $assignedControllers = array();
     private static $defaultCoreActions = array(
-        "groups" => "inc/groups.php", "available_modules" => "inc/available_modules.php",
-        "module_settings" => "inc/module_settings.php"
+        "module_settings" => "inc/module_settings.php",
+        "groups" => "inc/groups.php"
     );
     private static $actionPermissions = array();
 

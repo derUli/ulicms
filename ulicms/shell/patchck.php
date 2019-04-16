@@ -1,8 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-function patchck_usage()
-{
+function patchck_usage() {
     echo "patchck - Command Line Patch Management Tool for UliCMS\n";
     echo "UliCMS Version " . cms_version() . "\n";
     echo "Copyright (C) 2015 by Ulrich Schmidt";
@@ -23,8 +22,7 @@ function patchck_usage()
     exit();
 }
 
-function patchck_available()
-{
+function patchck_available() {
     return file_get_contents_wrapper(PATCH_CHECK_URL, true);
 }
 
@@ -44,7 +42,7 @@ if (count($argv) == 0) {
 } else {
     if ($argv[0] == "avail" or $argv[0] == "available") {
         $available = patchck_available();
-        if (! $available)
+        if (!$available)
             $available = "No patches available\n";
         echo $available;
         exit();
@@ -56,7 +54,7 @@ if (count($argv) == 0) {
     } else if ($argv[0] == "install") {
         if (count($argv) > 1) {
             $available = patchck_available();
-            
+
             if ($available and ! empty($available)) {
                 $toinstall = array();
                 for ($i = 1; $i < count($argv); $i ++) {
@@ -67,7 +65,7 @@ if (count($argv) == 0) {
                 $available = explode("\n", $available);
                 foreach ($available as $line) {
                     $line = trim($line);
-                    if (! empty($line)) {
+                    if (!empty($line)) {
                         $splitted = explode("|", $line);
                         if (count($splitted) >= 3) {
                             if (faster_in_array($splitted[0], $toinstall) or faster_in_array("all", $toinstall)) {
@@ -114,5 +112,3 @@ if (count($argv) == 0) {
         patchck_usage();
     }
 }
-
-?>

@@ -23,7 +23,7 @@ if ($permissionChecker->hasPermission("open_graph")) {
 	<tr>
 		<td><strong><?php translate("type");?></strong></td>
 		<td><input type="text" name="og_type"
-			value="<?php echo htmlspecialchars($og_type);?>" /></td>
+			value="<?php esc($og_type);?>" /></td>
 	</tr>
 	<tr>
 		<td><strong><?php translate("image");?></strong></td>
@@ -33,13 +33,13 @@ if ($permissionChecker->hasPermission("open_graph")) {
         ?>
 <div>
 				<img class="small-preview-image"
-					src="<?php echo htmlspecialchars($og_url);?>" />
+					src="<?php esc($og_url);?>" />
 			</div>
 <?php }?>
 		<p>
 				<input type="text" id="og_image" name="og_image" readonly="readonly"
 					onclick="openMenuImageSelectWindow(this)"
-					value="<?php echo htmlspecialchars($og_image);?>"
+					value="<?php esc($og_image);?>"
 					style="cursor: pointer" />
 			</p>
 			<p>

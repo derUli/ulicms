@@ -249,7 +249,7 @@ class InstallerController {
             if ($obj == '.' || $obj == '..')
                 continue;
             if (!@unlink($dir . '/' . $obj))
-                SureRemoveDir($dir . '/' . $obj, true);
+                sureRemoveDir($dir . '/' . $obj, true);
         }
 
         closedir($dh);
@@ -261,7 +261,7 @@ class InstallerController {
     public static function submitLoginToBackend() {
         $installerDir = "../installer";
         if (is_dir($installerDir)) {
-            @SureRemoveDir($installerDir, true);
+            @sureRemoveDir($installerDir, true);
         }
         @session_destroy();
         header("Location: ../admin/");

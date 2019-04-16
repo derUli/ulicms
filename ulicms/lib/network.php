@@ -2,59 +2,53 @@
 
 // returns site protocl
 // http:// or https://
-function get_site_protocol()
-{
+function get_site_protocol() {
     return Request::getProtocol();
 }
 
-function site_protocol()
-{
+function site_protocol() {
     echo get_site_protocol();
 }
 
-function get_protocol_and_domain()
-{
+function get_protocol_and_domain() {
     return get_site_protocol() . get_domain();
 }
 
-function get_domain()
-{
-    return $_SERVER['HTTP_HOST'];
+function get_domain() {
+    return Request::getDomain();
 }
 
 // Die IP-Adresse des Clients zurückgeben
 // Falls ein Proxy genutzt wurde, versuchen, die echte IP statt der
 // des Proxy zu ermitteln
-function get_ip()
-{
+function get_ip() {
     return Request::getIp();
 }
 
-if (! function_exists("get_host")) {
+if (!function_exists("get_host")) {
 
-    function get_host()
-    {
+    function get_host() {
         if ($host = $_SERVER['HTTP_X_FORWARDED_HOST']) {
             $elements = explode(',', $host);
             $host = trim(end($elements));
         } else {
-            if (! $host = $_SERVER['HTTP_HOST']) {
-                if (! $host = $_SERVER['SERVER_NAME']) {
-                    $host = ! empty($_SERVER['SERVER_ADDR']) ? $_SERVER['SERVER_ADDR'] : '';
+            if (!$host = $_SERVER['HTTP_HOST']) {
+                if (!$host = $_SERVER['SERVER_NAME']) {
+                    $host = !empty($_SERVER['SERVER_ADDR']) ? $_SERVER['SERVER_ADDR'] : '';
                 }
             }
         }
-        
+
         // Remove port number from host
         $host = preg_replace('/:\d+$/', '', $host);
-        
+
         return trim($host);
     }
+
 }
 
 // Übersetzung HTTP Status Code => Name
-function getStatusCodeByNumber($nr)
-{
+function getStatusCodeByNumber($nr) {
     $http_codes = array(
         100 => 'Continue',
         101 => 'Switching Protocols',
@@ -112,46 +106,35 @@ function getStatusCodeByNumber($nr)
         509 => 'Bandwidth Limit Exceeded',
         510 => 'Not Extended'
     );
-    
+
     return $nr . " " . $http_codes[$nr];
 }
 
-function get_request_uri()
-{
-    return $_SERVER["REQUEST_URI"];
+function get_request_uri() {
+    return Request::getRequestUri();
 }
 
-function get_http_host()
-{
-    return $_SERVER["HTTP_HOST"];
+function get_http_host() {
+    return get_domain();
 }
 
-function get_referer()
-{
+function get_referer() {
     return get_referrer();
 }
 
-function get_referrer()
-{
-    $referrer = null;
-    if (isset($_SERVER['HTTP_REFERER'])) {
-        $referrer = $_SERVER['HTTP_REFERER'];
-    }
-    return $referrer;
+function get_referrer() {
+    return Request::getReferrer();
 }
 
-function get_useragent()
-{
-    return $_SERVER['HTTP_USER_AGENT'];
+function get_useragent() {
+    return Request::getUserAgent();
 }
 
-function get_request_method()
-{
+function get_request_method() {
     return Request::getMethod();
 }
 
 // Check for Secure HTTP Connection (SSL)
-function is_ssl()
-{
+function is_ssl() {
     return Request::isSSL();
 }

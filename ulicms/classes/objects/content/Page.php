@@ -17,7 +17,8 @@ class Page extends Content {
     public $active = 1;
     public $created = 0;
     public $lastmodified = 0;
-    public $autor = null;
+    // TODO: Rename this column to author_id to make it fit conventions
+    public $author_id = null;
     public $group_id = null;
     public $lastchangeby = 1;
     public $views = 0;
@@ -63,7 +64,7 @@ class Page extends Content {
         $this->active = $result->active;
         $this->created = $result->created;
         $this->lastmodified = $result->lastmodified;
-        $this->autor = $result->autor;
+        $this->author_id = $result->author_id;
         $this->group_id = $result->group_id;
         $this->lastchangeby = $result->lastchangeby;
         $this->views = $result->views;
@@ -136,7 +137,7 @@ class Page extends Content {
 
     public function create() {
         $sql = "INSERT INTO `" . tbname("content") . "` (systemname, title, alternate_title, target, category,
-				content, language, menu_image, active, created, lastmodified, autor,
+				content, language, menu_image, active, created, lastmodified, author_id,
 				`group_id`, lastchangeby, views, menu, position, parent, access, meta_description, meta_keywords, deleted_at,
 				theme, custom_data, `type`, og_title, og_type, og_image, og_description, cache_control, hidden, comments_enabled) VALUES (";
 
@@ -159,7 +160,7 @@ class Page extends Content {
         $this->lastmodified = $this->created;
         $sql .= intval($this->created) . ",";
         $sql .= intval($this->lastmodified) . ",";
-        $sql .= intval($this->autor) . ",";
+        $sql .= intval($this->author_id) . ",";
         $sql .= intval($this->group_id) . ",";
         $sql .= intval($this->lastchangeby) . ",";
         // Views
@@ -244,7 +245,7 @@ class Page extends Content {
 
         $sql .= "active=" . intval($this->active) . ",";
         $sql .= "lastmodified=" . intval($this->lastmodified) . ",";
-        $sql .= "autor=" . intval($this->autor) . ",";
+        $sql .= "author_id=" . intval($this->author_id) . ",";
         $sql .= "`group_id`=" . intval($this->group_id) . ",";
         $sql .= "lastchangeby=" . intval($this->lastchangeby) . ",";
 

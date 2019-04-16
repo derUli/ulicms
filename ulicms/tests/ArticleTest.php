@@ -16,7 +16,7 @@ class ArticleTest extends \PHPUnit\Framework\TestCase
         $article->menu = "none";
         $article->language = "de";
         $article->article_date = 1413821696;
-        $article->autor = 1;
+        $article->author_id = 1;
         $article->group_id = 1;
         $article->save();
         $id = $article->id;

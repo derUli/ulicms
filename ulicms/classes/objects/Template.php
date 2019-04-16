@@ -79,8 +79,8 @@ ORDER BY RAND() LIMIT 1") or die(Database::getError());
     }
 
     public static function getHomepageOwner() {
-        $homepage_title = Settings::getLang("homepage_owner", $_SESSION["language"]);
-        return htmlspecialchars($homepage_title, ENT_QUOTES, "UTF-8");
+        $homepage_title = Settings::getLanguageSetting("homepage_owner", $_SESSION["language"]);
+        return _esc($homepage_title);
     }
 
     public static function homepageOwner() {
@@ -117,7 +117,7 @@ ORDER BY RAND() LIMIT 1") or die(Database::getError());
     }
 
     public static function escape($value) {
-        echo htmlspecialchars($value, ENT_QUOTES, "UTF-8");
+        echo self::getEscape($value);
     }
 
     public static function getEscape($value) {
@@ -139,7 +139,7 @@ ORDER BY RAND() LIMIT 1") or die(Database::getError());
         $logo_storage_path = ULICMS_DATA_STORAGE_ROOT . "/content/images/" . Settings::get("logo_image");
 
         if (Settings::get("logo_disabled") == "no" and is_file($logo_storage_path)) {
-            echo '<img class="website_logo" src="' . $logo_storage_url . '" alt="' . htmlspecialchars(Settings::get("homepage_title"), ENT_QUOTES, "UTF-8") . '"/>';
+            echo '<img class="website_logo" src="' . $logo_storage_url . '" alt="' . _esc(Settings::get("homepage_title")) . '"/>';
         }
     }
 
@@ -160,7 +160,7 @@ ORDER BY RAND() LIMIT 1") or die(Database::getError());
         if (!$motto) {
             $motto = Settings::get("motto");
         }
-        return htmlspecialchars($motto, ENT_QUOTES, "UTF-8");
+        return _esc($motto);
     }
 
     public static function motto() {
@@ -344,8 +344,8 @@ ORDER BY RAND() LIMIT 1") or die(Database::getError());
         if ($keywords != "" && $keywords != false) {
             if (!Settings::get("hide_meta_keywords")) {
                 $keywords = apply_filter($keywords, "meta_keywords");
-                $keywords = htmlentities($keywords, ENT_QUOTES, "UTF-8");
-                echo '<meta name="keywords" content="' . $keywords . '"/>';
+
+                echo '<meta name="keywords" content="' . _esc($keywords) . '"/>';
                 echo "\r\n";
             }
         }
@@ -355,7 +355,7 @@ ORDER BY RAND() LIMIT 1") or die(Database::getError());
         }
         if ($description != "" && $description != false) {
             $description = apply_filter($description, "meta_description");
-            $$description = htmlentities($description, ENT_QUOTES, "UTF-8");
+            $$description = _esc($description);
             if (!Settings::get("hide_meta_description")) {
                 echo '<meta name="description" content="' . $description . '"/>';
                 echo "\r\n";
@@ -410,36 +410,54 @@ color:" . Settings::get("body-text-color") . ";
     }
 
     public static function content() {
-        $status = check_status();
-        if ($status == '404 Not Found') {
-            if (is_file(getTemplateDirPath($theme) . "404.php")) {
-                $theme = Settings::get("theme");
-                require getTemplateDirPath($theme) . "404.php";
-            } else {
-                translate('PAGE_NOT_FOUND_CONTENT');
-            }
-            return false;
-        } else if ($status == '403 Forbidden') {
-
-            $theme = Settings::get("theme");
-            if (is_file(getTemplateDirPath($theme) . '403.php')) {
-                require getTemplateDirPath($theme) . '403.php';
-            } else {
-                translate('FORBIDDEN_COTENT');
-            }
-            return false;
-        }
-
-        if (!is_logged_in()) {
-            db_query("UPDATE " . tbname("content") . " SET views = views + 1 WHERE systemname='" . Database::escapeValue($_GET["seite"]) . "' AND language='" . db_escape($_SESSION["language"]) . "'");
-        }
-        return import($_GET["seite"]);
+        echo self::getContent();
     }
 
     public static function getContent() {
-        ob_start();
-        self::content();
-        return ob_get_clean();
+        $theme = get_theme();
+
+        $errorPage403 = Settings::getLanguageSetting("error_page_403", getCurrentLanguage());
+        $errorPage404 = Settings::getLanguageSetting("error_page_404", getCurrentLanguage());
+
+        $content = null;
+        if (is_200()) {
+            $content = ContentFactory::getBySystemnameAndLanguage(get_requested_pagename(), getCurrentLanguage());
+
+            if (!is_logged_in()) {
+                db_query("UPDATE " . tbname("content") . " SET views = views + 1 WHERE systemname='" . Database::escapeValue($_GET["seite"]) . "' AND language='" . db_escape($_SESSION["language"]) . "'");
+            }
+        } else if (is_404()) {
+            if ($errorPage404) {
+                $content = ContentFactory::getByID($errorPage404);
+            } else {
+                return get_translation('PAGE_NOT_FOUND_CONTENT');
+            }
+        } else if (is_403()) {
+            $theme = Settings::get("theme");
+            if ($errorPage403) {
+                $content = ContentFactory::getByID($errorPage404);
+            } else {
+                return get_translation('FORBIDDEN_COTENT');
+            }
+            return false;
+        }
+        if ($content->id === null) {
+            return get_translation("no_content");
+        }
+
+        $htmlContent = $content->content;
+        $htmlContent = apply_filter($htmlContent, "before_content");
+
+        $htmlContent = apply_filter($htmlContent, "after_content");
+
+        $data = CustomData::get();
+        // it's possible to disable shortcodes for a page
+        // define "disable_shortcodes in custom data / json
+        if (is_false($data["disable_shortcodes"])) {
+            $htmlContent = replaceShortcodesWithModules($htmlContent);
+            $htmlContent = apply_filter($htmlContent, "content");
+        }
+        return $htmlContent;
     }
 
     public static function languageSelection() {

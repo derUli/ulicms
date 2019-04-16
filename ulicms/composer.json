@@ -37,7 +37,9 @@
 		"tedivm/jshrink": "~1.0",
 		"deruli/html-minifier" : "master-dev",
 		"leafo/scssphp": "*",
-		"chrisjean/php-ico": "^1.0"
+		"chrisjean/php-ico": "^1.0",
+		"willdurand/negotiation": "^2.3",
+		"cocur/slugify": "^3.2"
 	},
 	"require-dev" : {
 		"phpunit/phpunit" : "^7.0"

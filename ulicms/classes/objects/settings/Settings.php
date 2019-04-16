@@ -52,19 +52,35 @@ class Settings {
     public static function outputEscaped($key, $type = 'str') {
         $value = self::get($key, $type);
         if ($value) {
-            echo htmlspecialchars($value, ENT_QUOTES, "UTF-8");
+            esc($value);
         }
     }
 
-    public static function getLang($name, $lang, $type = 'str') {
+    public static function getLanguageSetting($name, $language = null, $type = 'str') {
         $retval = false;
-        $config = self::get($name . "_" . $lang, $type);
+        $settingsName = $language ? "{$name}_{$language}" : $name;
+
+        $config = self::get($settingsName);
         if ($config) {
             $retval = $config;
         } else {
             $config = self::get($name, $type);
         }
         return $config;
+    }
+
+    public static function getLang($name, $language = null, $type = 'str') {
+        return self::getLanguageSetting($name, $language, $type);
+    }
+
+    public static function setLanguageSetting($name, $value, $language = null) {
+        $settingsName = $language ? "{$name}_{$language}" : $name;
+
+        if ($value) {
+            Settings::set($settingsName, $value);
+        } else {
+            Settings::delete($settingsName);
+        }
     }
 
     // Set a configuration Variable;
@@ -94,7 +110,7 @@ class Settings {
         SettingsCache::set($key, $originalValue);
     }
 
-    // Remove an configuration variable
+// Remove an configuration variable
     public static function delete($key) {
         $key = db_escape($key);
         db_query("DELETE FROM " . tbname("settings") . " WHERE name='$key'");
@@ -137,7 +153,7 @@ class Settings {
         $lines = array_filter($lines, 'strlen');
         $result = array();
         foreach ($lines as $line) {
-            // if a line starts with a hash skip it (comment)
+// if a line starts with a hash skip it (comment)
             if (startsWith($line, "#")) {
                 continue;
             }

@@ -16,6 +16,9 @@ if (!$admin_logo) {
     $admin_logo = "gfx/logo.png";
 }
 
+$error = $_REQUEST["error"] and ! empty($_REQUEST["error"]) ?
+        $_REQUEST["error"] : null;
+
 $login_welcome_text = get_lang_config("login_welcome_text", $default_language);
 ?>
 <?php
@@ -28,7 +31,16 @@ if ($login_welcome_text) {
 <h3 id="login-please-headline">
     <?php translate("please_authenticate"); ?>
 </h3>
-<?php echo ModuleHelper::buildMethodCallForm("SessionManager", "login") ?>
+<?php
+echo ModuleHelper::buildMethodCallForm("SessionManager", "login",
+        array(), RequestMethod::POST,
+        array
+            (
+            "id" => "login-form",
+            "data-has-error" => !is_null($error)
+        )
+)
+?>
 <?php
 csrf_token_html();
 ?>
@@ -36,7 +48,7 @@ csrf_token_html();
 if (!empty($_REQUEST["go"])) {
     ?>
     <input type="hidden" name="go"
-           value='<?php echo htmlspecialchars($_REQUEST["go"]) ?>'>
+           value='<?php esc($_REQUEST["go"]) ?>'>
            <?php
        }
        ?>
@@ -84,25 +96,14 @@ if (!empty($_REQUEST["go"])) {
     </tr>
 </table>
 <?php echo ModuleHelper::endForm(); ?>
-<script type="text/javascript">
-    $(document).ready(function () {
-        bindTogglePassword("#password", "#view_password")
-    });
-</script>
 <?php
-if (isset($_REQUEST["error"]) and ! empty($_REQUEST["error"])) {
+if ($error) {
     ?>
-    <script type="text/javascript">
-        $(window).load(function () {
-            shake("form#login-form");
-
-        });
-    </script>
-    <p class="ulicms_error voffset2">
+    <div class="alert alert-danger voffset2">
         <?php
-        echo htmlspecialchars($_REQUEST["error"]);
+        esc($error);
         ?>
-    </p>
+    </div>
     <?php
 }
 ?>
@@ -112,7 +113,7 @@ if (Settings::get("visitors_can_register") === "on" or Settings::get("visitors_c
     <a
         href="?register=register&<?php
         if (!empty($_REQUEST["go"])) {
-            echo "go=" . real_htmlspecialchars($_REQUEST["go"]);
+            echo "go=" . _esc($_REQUEST["go"]);
         }
         ?>"
         class="btn btn-default voffset2"><i class="fas fa-user-plus"></i> <?php
@@ -130,4 +131,6 @@ if (!Settings::get("disable_password_reset")) {
         ?></a>
     <?php
 }
-?>
+enqueueScriptFile("scripts/login.js");
+combinedScriptHtml();
+

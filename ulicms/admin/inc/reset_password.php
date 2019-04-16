@@ -32,27 +32,27 @@ if (Settings::get("disable_password_reset")) {
         csrf_token_html();
         ?><p>
             <strong><?php
-    translate("username");
-        ?>
+                translate("username");
+                ?>
             </strong> <br /> <input type="text" name="username" value="" required>
         </p>
         <p>
             <button type="submit" class="btn btn-warning"><i class="fa fa-lock"></i> <?php
-            translate("reset_password");
-            ?></button>
+                translate("reset_password");
+                ?></button>
         </p>
-                <?php
-                if ($message) {
-                    ?>
-            <p class="ulicms_error">
-            <?php
-            echo htmlspecialchars($message);
+        <?php
+        if ($message) {
             ?>
-            </p>
+            <div class="alert alert-danger">
+                <?php
+                esc($message);
+                ?>
+            </div>
 
-        <?php
-    }
-    ?>
+            <?php
+        }
+        ?>
     </form>
-        <?php
-    }
+    <?php
+}

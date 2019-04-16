@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Security\PermissionChecker;
+use Negotiation\LanguageNegotiator;
 
 function startsWith($haystack, $needle, $case = true) {
     if ($case) {
@@ -198,7 +199,7 @@ function getAllUsedLanguages() {
 // prepares a text / code for html output
 // replaces new lines with <br> tags
 function preparePlainTextforHTMLOutput($text) {
-    return nl2br(htmlspecialchars($text));
+    return UliCMS\HTML\text($text);
 }
 
 function get_action() {
@@ -228,31 +229,9 @@ function get_jquery_url() {
     return $url;
 }
 
-function get_prefered_language($available_languages, $http_accept_language) {
-    $available_languages = array_flip($available_languages);
-
-    $langs;
-    preg_match_all('~([\w-]+)(?:[^,\d]+([\d.]+))?~', strtolower($http_accept_language), $matches, PREG_SET_ORDER);
-    foreach ($matches as $match) {
-
-        list ($a, $b) = explode('-', $match[1]) + array(
-            '',
-            ''
-        );
-        $value = isset($match[2]) ? (float) $match[2] : 1.0;
-
-        if (isset($available_languages[$match[1]])) {
-            $langs[$match[1]] = $value;
-            continue;
-        }
-
-        if (isset($available_languages[$a])) {
-            $langs[$a] = $value - 0.1;
-        }
-    }
-    arsort($langs);
-
-    return $langs;
+function get_prefered_language($priorities, $http_accept_language) {
+    $negotiator = new LanguageNegotiator();
+    return $negotiator->getBest($http_accept_language, $priorities)->getType();
 }
 
 function get_all_used_menus() {
@@ -943,22 +922,6 @@ function getCurrentURL() {
     return $protocol . "://" . $_SERVER['SERVER_NAME'] . $port . $_SERVER['REQUEST_URI'];
 }
 
-function SureRemoveDir($dir, $DeleteMe) {
-    if (!$dh = @opendir($dir))
-        return;
-    while (false !== ($obj = readdir($dh))) {
-        if ($obj == '.' || $obj == '..')
-            continue;
-        if (!@unlink($dir . '/' . $obj))
-            SureRemoveDir($dir . '/' . $obj, true);
-    }
-
-    closedir($dh);
-    if ($DeleteMe) {
-        @rmdir($dir);
-    }
-}
-
 /**
  * Generate path to Page
  * Argumente
@@ -1179,7 +1142,6 @@ function replaceShortcodesWithModules($string, $replaceOther = true) {
 
         $main_class = getModuleMeta($thisModule, "main_class");
         $controller = null;
-        $hasRenderMethod = false;
         if ($main_class) {
             $controller = ControllerRegistry::get($main_class);
         }
@@ -1228,7 +1190,7 @@ function getPageSystemnameByID($id) {
         $row = db_fetch_object($query);
         return $row->systemname;
     } else {
-        return "-";
+        return null;
     }
 }
 
@@ -1564,25 +1526,6 @@ function is_admin() {
         return Vars::set("is_admin", db_num_rows($query));
     }
     return $retval;
-}
-
-// Mimetypen einer Datei ermitteln
-function get_mime($file) {
-    if (function_exists("finfo_file")) {
-        $finfo = finfo_open(FILEINFO_MIME_TYPE); // return mime type ala mimetype extension
-        $mime = finfo_file($finfo, $file);
-        finfo_close($finfo);
-        return $mime;
-    } else if (function_exists("mime_content_type")) {
-        return mime_content_type($file);
-    } else if (!stristr(ini_get("disable_functions"), "shell_exec")) {
-        // http://stackoverflow.com/a/134930/1593459
-        $file = escapeshellarg($file);
-        $mime = shell_exec("file -bi " . $file);
-        return $mime;
-    } else {
-        return false;
-    }
 }
 
 function set_eTagHeaders($identifier, $timestamp) {
