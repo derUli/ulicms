@@ -175,9 +175,7 @@ function is_active() {
 }
 
 function get_type($systemname = null, $language = null) {
-    if (Vars::get("type")) {
-        return Vars::get("type");
-    }
+
     if (!$systemname) {
         $systemname = get_requested_pagename();
     }
@@ -185,11 +183,15 @@ function get_type($systemname = null, $language = null) {
     if (!$language) {
         $language = getCurrentLanguage();
     }
+    $varName = "type_{$systemname}_{$language}";
+    if (Vars::get($varName)) {
+        return Vars::get($varName);
+    }
     $page = ContentFactory::getBySystemnameAndLanguage($systemname, $language);
     $type = $page->type;
 
     $result = apply_filter($type, "get_type");
-    Vars::set("type", $type);
+    Vars::set($varName, $type);
     return $result;
 }
 

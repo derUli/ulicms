@@ -1,7 +1,10 @@
 <?php
 
-class TypeMapper
-{
+// TODO: TypeMapper überflüssig machen
+// Die Namen der Modelklassen sollten direkt gespeichert werden in der Tabelle
+// content
+
+class TypeMapper {
 
     private static $mapping = array(
         "page" => "Page",
@@ -17,13 +20,11 @@ class TypeMapper
         "language_link" => "Language_Link"
     );
 
-    public static function getMappings()
-    {
+    public static function getMappings() {
         return self::$mapping;
     }
 
-    public static function loadMapping()
-    {
+    public static function loadMapping() {
         $objectRegistry = array();
         $modules = getAllModules();
         foreach ($modules as $module) {
@@ -39,4 +40,5 @@ class TypeMapper
             }
         }
     }
+
 }

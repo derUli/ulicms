@@ -1,14 +1,11 @@
 <?php
 
-class Language_Link extends Page
-{
+class Language_Link extends Page {
 
     public $link_to_language = null;
+    public $type = "language_link";
 
-    public $type = "link";
-
-    public function save()
-    {
+    public function save() {
         $retval = null;
         if ($this->id === null) {
             $retval = $this->create();
@@ -19,14 +16,12 @@ class Language_Link extends Page
         return $retval;
     }
 
-    protected function fillVarsByResult($result)
-    {
+    protected function fillVarsByResult($result) {
         parent::fillVarsByResult($result);
         $this->link_to_language = $result->link_to_language;
     }
 
-    public function update()
-    {
+    public function update() {
         $result = null;
         if ($this->id === null) {
             return $this->create();
@@ -37,8 +32,9 @@ class Language_Link extends Page
             $this->link_to_language,
             $this->id
         );
-        
+
         $result = Database::pQuery($sql, $args, true);
         return $result;
     }
+
 }
