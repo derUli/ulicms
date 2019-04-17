@@ -3,6 +3,7 @@
 Verbesserungen:
 * Generierung von Systemnamen unterstützt nun mehr Zeichen
 * Überprüfung der Passwort-Wiederholung optisch verbessert.
+* Performance des Abrufs von "Verfügbare Pakete" massiv verbessert
 
 Neue API-Methoden:
 * Request::getDomain()
