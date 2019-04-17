@@ -11,16 +11,15 @@ function resetScriptQueue() {
     Vars::set("script_queue", array());
 }
 
-function processHtmlBeforeOutput($html){
-	
-	if (Settings::get("minify_html")) {
-           $options = array(
-                'optimizationLevel' => HTMLMinify::OPTIMIZATION_SIMPLE
-            );
-            $minifier = new HTMLMinify($html, $options);
-			$html = $minifier->process();
-		}
-		
+function optimizeHtml($html) {
+    if (Settings::get("minify_html")) {
+        $options = array(
+            'optimizationLevel' => HTMLMinify::OPTIMIZATION_SIMPLE
+        );
+        $minifier = new HTMLMinify($html, $options);
+        $html = $minifier->process();
+    }
+
     $html = normalizeLN($html, "\n");
     return $html;
 }

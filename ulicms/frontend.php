@@ -251,7 +251,7 @@ do_event("after_html");
 if ($cacheAdapter or Settings::get("minify_html")) {
     $generatedHtml = ob_get_clean();
     $generatedHtml = normalizeLN($generatedHtml, "\n");
-    $generatedHtml = processHtmlBeforeOutput($generatedHtml);
+    $generatedHtml = optimizeHtml($generatedHtml);
     
     echo $generatedHtml;
 

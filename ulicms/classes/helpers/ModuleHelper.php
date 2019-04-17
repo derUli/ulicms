@@ -249,7 +249,7 @@ class ModuleHelper extends Helper {
         $imgFile = is_admin_dir() ? "gfx/delete.gif" : "admin/gfx/delete.gif";
         $html .= '<input type="image" src="' . $imgFile . '" alt="' . get_translation("delete") . '" title="' . get_translation("delete") . '">';
         $html .= "</form>";
-        return processHtmlBeforeOutput($html);
+        return optimizeHtml($html);
     }
 
     public static function buildHTMLAttributesFromArray($attributes = array()) {

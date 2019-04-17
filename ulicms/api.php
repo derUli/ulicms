@@ -452,7 +452,7 @@ function get_csrf_token_html() {
         $html .= '<input type="hidden" name="form_timestamp" value="' . time() . '">';
     }
 	
-    return processHtmlBeforeOutput($html);
+    return optimizeHtml($html);
 }
 
 function csrf_token_html() {
@@ -753,7 +753,7 @@ function do_event($name, $runs = ModuleEventConstants::RUNS_ONCE) {
                 require_once $file2;
             }
         }
-		echo processHtmlBeforeOutput(ob_get_clean());
+		echo optimizeHtml(ob_get_clean());
     }
 }
 
@@ -1164,7 +1164,7 @@ function replaceShortcodesWithModules($string, $replaceOther = true) {
     $string = replaceVideoTags($string);
     $string = replaceAudioTags($string);
 	
-	$string = processHtmlBeforeOutput($string);
+	$string = optimizeHtml($string);
     return $string;
 }
 

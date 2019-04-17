@@ -75,7 +75,7 @@ ORDER BY RAND() LIMIT 1") or die(Database::getError());
         $output = apply_filter($output, "before_content");
         $output = apply_filter($output, "content");
         $output = apply_filter($output, "after_content");
-        echo processHtmlBeforeOutput($output);
+        echo optimizeHtml($output);
     }
 
     public static function getHomepageOwner() {
@@ -115,7 +115,7 @@ ORDER BY RAND() LIMIT 1") or die(Database::getError());
         }
         $retval = trim(ob_get_clean());
 		
-		return processHtmlBeforeOutput($retval);
+		return optimizeHtml($retval);
     }
 	
 
@@ -190,7 +190,7 @@ ORDER BY RAND() LIMIT 1") or die(Database::getError());
             throw new FileNotFoundException("Template " . $template . " not found!");
         }
         $retval = ob_get_clean();
-        return processHtmlBeforeOutput($retval);
+        return optimizeHtml($retval);
     }
 
     public static function headline($format = "<h1>%title%</h1>") {

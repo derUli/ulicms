@@ -7,7 +7,7 @@ Verbesserungen:
 
 Neue API-Methoden:
 * Request::getDomain()
-* processHtmlBeforeOutput($html)
+* optimizeHtml($html)
 
 Geänderte API-Methoden:
 * get_prefered_language($priorities, $http_accept_language) gibt nun einen

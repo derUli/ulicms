@@ -20,7 +20,7 @@ function RawJSONResult($data, $status = 200) {
 }
 function HTMLResult($data, $status = 200) {
 	Response::sendStatusHeader ( Response::getStatusCodeByNumber ( $status ) );
-	$data = processHtmlBeforeOutput($data);
+	$data = optimizeHtml($data);
 	$size = getStringLengthInBytes ( $data );
 	header ( 'Content-Type: text/html; charset=UTF-8' );
 	header ( "Content-length: $size" );
