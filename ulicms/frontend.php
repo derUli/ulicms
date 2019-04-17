@@ -3,8 +3,6 @@
 require_once "init.php";
 global $connection;
 
-use zz\Html\HTMLMinify;
-
 do_event("before_session_start");
 
 // initialize session
@@ -253,13 +251,8 @@ do_event("after_html");
 if ($cacheAdapter or Settings::get("minify_html")) {
     $generatedHtml = ob_get_clean();
     $generatedHtml = normalizeLN($generatedHtml, "\n");
-    if (Settings::get("minify_html")) {
-        $options = array(
-            'optimizationLevel' => HTMLMinify::OPTIMIZATION_SIMPLE
-        );
-        $HTMLMinify = new HTMLMinify($generatedHtml, $options);
-        $generatedHtml = $HTMLMinify->process();
-    }
+    $generatedHtml = processHtmlBeforeOutput($generatedHtml);
+    
     echo $generatedHtml;
 
     if ($cacheAdapter and ! defined("EXCEPTION_OCCURRED")) {

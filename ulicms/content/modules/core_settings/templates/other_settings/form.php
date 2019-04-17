@@ -134,14 +134,14 @@ if (!$permissionChecker->hasPermission("other")) {
                        }
                        ?>>
             </div>
-            <div class="voffset2">
+            <div class="voffset3">
                 <img src="<?php echo $qrCodeUrl; ?>"
                      alt="QR-Codemit Google Authenticator scannen"
                      title="QR-Code mit Google Authenticator scannen" />
             </div>
             <p>
                 <a href="https://support.google.com/accounts/answer/1066447"
-                   target="_blank" class="btn btn-info"><i
+                   target="_blank" class="btn btn-info voffset3"><i
                         class="fa fa-question-circle" aria-hidden="true"></i>
                     <?php translate("help"); ?></a>
             </p>

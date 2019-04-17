@@ -89,8 +89,8 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $_SESSION["language"] = 'de';
         $_GET["seite"] = "testdisableshortcodes";
 
-        $this->assertFalse(str_contains(get_csrf_token_html(), get_content()));
-        $this->assertTrue(str_contains("[csrf_token_html]", get_content()));
+        $this->assertStringNotContainsString(get_csrf_token_html(), get_content());
+        $this->assertStringContainsString("[csrf_token_html]", get_content());
 
         $this->cleanUp();
 
@@ -112,8 +112,8 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $_SESSION["language"] = 'de';
         $_GET["seite"] = "testdisableshortcodes";
 
-        $this->assertTrue(str_contains(get_csrf_token_html(), get_content()));
-        $this->assertFalse(str_contains("[csrf_token_html]", get_content()));
+        $this->assertStringContainsString(get_csrf_token_html(), get_content());
+        $this->assertStringNotContainsString("[csrf_token_html]", get_content());
 
         $this->cleanUp();
 
@@ -136,8 +136,8 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $_SESSION["language"] = 'de';
         $_GET["seite"] = "testdisableshortcodes";
 
-        $this->assertTrue(str_contains(get_csrf_token_html(), get_content()));
-        $this->assertFalse(str_contains("[csrf_token_html]", get_content()));
+        $this->assertStringContainsString(get_csrf_token_html(), get_content());
+        $this->assertStringNotContainsString("[csrf_token_html]", get_content());
         $this->cleanUp();
 
         unset($_SESSION["language"]);

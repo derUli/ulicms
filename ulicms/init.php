@@ -22,7 +22,8 @@ define("DIRSEP", DIRECTORY_SEPARATOR);
 // of the page load procedure to measure site performance
 define("START_TIME", microtime(true));
 
-require_once dirname(__file__) . "/api.php";
+
+
 
 /*
  * Diese Datei initalisiert das System
@@ -36,6 +37,9 @@ if (is_file($composerAutoloadFile)) {
 } else {
     throw new Exception("autoload.php not found. Please run \"./composer install\" to install dependecies.");
 }
+
+require_once dirname(__file__) . "/lib/minify.php";
+require_once dirname(__file__) . "/api.php";
 
 // todo reorganize includes
 require_once dirname(__file__) . "/lib/constants.php";
@@ -114,7 +118,6 @@ require_once dirname(__file__) . "/classes/objects/content/Results.php";
 require_once dirname(__file__) . "/classes/objects/media/load.php";
 
 require_once dirname(__file__) . "/UliCMSVersion.php";
-require_once dirname(__file__) . "/lib/minify.php";
 
 $mobile_detect_as_module = dirname(__file__) . "/content/modules/Mobile_Detect/Mobile_Detect.php";
 if (is_file($mobile_detect_as_module)) {
