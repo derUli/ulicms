@@ -74,6 +74,10 @@ class Database {
     public static function getConnection() {
         return self::$connection;
     }
+	
+	public static function isConnected() {
+        return boolval(self::$connection);
+    }
 
     public static function setConnection($con) {
         self::$connection = $con;

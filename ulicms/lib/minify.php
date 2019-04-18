@@ -12,7 +12,7 @@ function resetScriptQueue() {
 }
 
 function optimizeHtml($html) {
-    if (Settings::get("minify_html")) {
+    if (Database::isConnected() and Settings::get("minify_html")) {
         $options = array(
             'optimizationLevel' => HTMLMinify::OPTIMIZATION_SIMPLE
         );

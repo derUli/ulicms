@@ -1,6 +1,8 @@
 <?php
 
 use UliCMS\Exceptions\AccessDeniedException;
+use UliCMS\Exceptions\SqlException;
+use UliCMS\Exceptions\FileNotFoundException;
 
 // root directory of UliCMS
 if (!defined("ULICMS_ROOT")) {
@@ -35,12 +37,11 @@ $composerAutoloadFile = dirname(__FILE__) . "/vendor/autoload.php";
 if (is_file($composerAutoloadFile)) {
     require_once $composerAutoloadFile;
 } else {
-    throw new Exception("autoload.php not found. Please run \"./composer install\" to install dependecies.");
+    throw new FileNotFoundException("autoload.php not found. Please run \"./composer install\" to install dependecies.");
 }
 
 require_once dirname(__file__) . "/lib/minify.php";
 require_once dirname(__file__) . "/api.php";
-
 // todo reorganize includes
 require_once dirname(__file__) . "/lib/constants.php";
 require_once dirname(__file__) . "/classes/objects/privacy/load.php";
@@ -135,7 +136,7 @@ function exception_handler($exception) {
 
     // TODO: useful error message if $debug is disabled
     // Log exception into a text file
-    $message = !is_null($cfg) && is_true($cfg->debug) ? $exception : "An error occurred! See exception_log for details. 😞";
+    $message = !is_null($cfg) && is_true($cfg->debug) ? $exception : "An error occurred! See exception_log for details. ðŸ˜ž";
 
     $logger = LoggerRegistry::get("exception_log");
     if ($logger) {
@@ -163,7 +164,7 @@ if (is_file($path_to_config)) {
     header("Location: installer/");
     exit();
 } else {
-    die("Can't require CMSConfig.php. Starting installer failed, too.");
+    throw new ExceptionResult("Can't require CMSConfig.php. Starting installer failed, too.");
 }
 
 if (php_sapi_name() != "cli") {
@@ -241,10 +242,10 @@ if (!is_file($htaccessLogFolderTarget)) {
 }
 
 // umask setzen
-// Die umask legt die Standarddateirechte für neue Dateien auf Unix Systemen fest
+// Die umask legt die Standarddateirechte fÃ¼r neue Dateien auf Unix Systemen fest
 // Die Variable $umask sollte nur gesetzt werden, sofern es zu Berechtigungsproblemen bei durch UliCMS generierten Dateien kommt.
-// umask lässt sich wie folgt berechnen
-// 0777 - X = gewünschte Berechtigung
+// umask lÃ¤sst sich wie folgt berechnen
+// 0777 - X = gewÃ¼nschte Berechtigung
 // X ist die umask
 // Eine umask von 0022 erzeugt z.B. Ordner mit chmod 0755 und Dateien mit chmod 0655
 if (isset($config->umask)) {
@@ -305,7 +306,7 @@ $db_port = isset($config->db_port) ? $config->db_port : ini_get("mysqli.default_
 @$connection = Database::connect($config->db_server, $config->db_user, $config->db_password, $db_port, $db_socket);
 
 if ($connection === false) {
-    throw new Exception("<h1>Can't connect to Database.</h1>");
+    throw new SqlException("Can't connect to Database.</h1>");
 }
 
 $path_to_installer = dirname(__file__) . "/installer/installer.php";
@@ -318,7 +319,7 @@ if (is_true($config->dbmigrator_auto_migrate)) {
 }
 
 if (!$select) {
-    throw new Exception("<h1>Database " . $config->db_database . " doesn't exist.</h1>");
+    throw new SqlException("<h1>Database " . $config->db_database . " doesn't exist.</h1>");
 }
 
 if (is_true($cfg->preload_all_settings)) {
@@ -358,7 +359,7 @@ if (isset($config->log_requests) and $config->log_requests == true) {
 
 $cache_period = Settings::get("cache_period");
 
-// Prüfen ob Cache Gültigkeitsdauer gesetzt ist.
+// PrÃ¼fen ob Cache GÃ¼ltigkeitsdauer gesetzt ist.
 // Ansonsten auf Standardwert setzen
 if ($cache_period === false) {
     setconfig("cache_period", ONE_DAY_IN_SECONDS);
