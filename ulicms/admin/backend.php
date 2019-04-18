@@ -49,7 +49,7 @@ require_once "../templating.php";
 
 $cfg = new CMSConfig();
 if (isset($cfg->ip_whitelist) and is_array($cfg->ip_whitelist) and count($cfg->ip_whitelist) > 0 and ! faster_in_array(get_ip(), $cfg->ip_whitelist)) {
-    translate("login_from_ip_not_allowed");
+    ExceptionResult(get_translation("login_from_ip_not_allowed"));
     die();
 }
 

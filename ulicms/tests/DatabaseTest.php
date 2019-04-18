@@ -8,6 +8,20 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         Settings::delete("foo2");
     }
 
+    public function testIsConnectedReturnsTrue() {
+        $this->assertTrue(Database::isConnected());
+    }
+
+    public function testIsConnectedReturnsFalse() {
+        $oldConnection = Database::getConnection();
+
+        Database::setConnection(null);
+
+        $this->assertFalse(Database::isConnected());
+
+        Database::setConnection($oldConnection);
+    }
+
     public function testGetAllTables() {
         $tables = Database::getAllTables();
         $cfg = new CMSConfig();
@@ -149,8 +163,18 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("`JohnDoe`", Database::escapeName('"JohnDoe"'));
     }
 
-    public function testGetConnection() {
+    public function testGetConnectionReturnsMysqliObject() {
         $this->assertInstanceOf("mysqli", Database::getConnection());
+    }
+
+    public function testIsConnectedReturnsNull() {
+        $oldConnection = Database::getConnection();
+
+        Database::setConnection(null);
+
+        $this->assertNull(Database::getConnection());
+
+        Database::setConnection($oldConnection);
     }
 
     public function testGetLastInsertID() {

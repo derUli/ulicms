@@ -4,10 +4,24 @@ use UliCMS\HTML\Style;
 use UliCMS\HTML\Script;
 use UliCMS\Exceptions\SCSSCompileException;
 use Leafo\ScssPhp\Compiler;
+use zz\Html\HTMLMinify;
 
 // Javascript Minify Funktionen
 function resetScriptQueue() {
     Vars::set("script_queue", array());
+}
+
+function optimizeHtml($html) {
+    if (Database::isConnected() and Settings::get("minify_html")) {
+        $options = array(
+            'optimizationLevel' => HTMLMinify::OPTIMIZATION_SIMPLE
+        );
+        $minifier = new HTMLMinify($html, $options);
+        $html = $minifier->process();
+    }
+
+    $html = normalizeLN($html, "\n");
+    return $html;
 }
 
 function enqueueScriptFile($path) {

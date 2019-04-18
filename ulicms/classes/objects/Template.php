@@ -75,7 +75,7 @@ ORDER BY RAND() LIMIT 1") or die(Database::getError());
         $output = apply_filter($output, "before_content");
         $output = apply_filter($output, "content");
         $output = apply_filter($output, "after_content");
-        echo $output;
+        echo optimizeHtml($output);
     }
 
     public static function getHomepageOwner() {
@@ -95,6 +95,7 @@ ORDER BY RAND() LIMIT 1") or die(Database::getError());
     }
 
     public static function executeModuleTemplate($module, $template) {
+			
         $retval = "";
         $originalTemplatePath = getModulePath($module, true) . "templates/" . $template;
         $ownTemplatePath = getTemplateDirPath(get_theme(), true) . $module . "/" . $template;
@@ -112,9 +113,11 @@ ORDER BY RAND() LIMIT 1") or die(Database::getError());
             $retval = ob_get_clean();
             throw new Exception("Template " . $module . "/" . $template . " not found!");
         }
-        $retval = ob_get_clean();
-        return $retval;
+        $retval = trim(ob_get_clean());
+		
+		return optimizeHtml($retval);
     }
+	
 
     public static function escape($value) {
         echo self::getEscape($value);
@@ -187,7 +190,7 @@ ORDER BY RAND() LIMIT 1") or die(Database::getError());
             throw new FileNotFoundException("Template " . $template . " not found!");
         }
         $retval = ob_get_clean();
-        return $retval;
+        return optimizeHtml($retval);
     }
 
     public static function headline($format = "<h1>%title%</h1>") {

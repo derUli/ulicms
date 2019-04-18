@@ -29,24 +29,17 @@ if (!$pkg_src) {
     $pkg_src = str_replace("{version}", $internalVersion, $pkg_src);
 
     $pkgManager = new PackageManager();
-    $packageListURL = $pkg_src . "list.txt";
-
+	
+	// Proof of Concept: Paketquellen Index in einer einzigen Datei als JSON
+	// TODO: "Vernünftig" implementieren d.H. objektorientiert und mit Unit Tests
+	
+    $packageListURL = $pkg_src . "index.json";
     $packageList = @file_get_contents_wrapper($packageListURL);
-
+	
     if ($packageList) {
-        $packageList = strtr($packageList, array(
-            "\r\n" => PHP_EOL,
-            "\r" => PHP_EOL,
-            "\n" => PHP_EOL
-        ));
-        $packageList = explode(PHP_EOL, $packageList);
+        $packageList = json_decode($packageList);
     }
-
-    if ($packageList) {
-        natcasesort($packageList);
-        $packageList = array_filter($packageList, 'strlen');
-    }
-
+	
     if (!$packageList or count($packageList) === 0) {
         ?>
         <p>
@@ -68,29 +61,19 @@ if (!$pkg_src) {
                 </thead>
                 <tbody>
                     <?php
-                    for ($i = 0; $i < count($packageList); $i ++) {
-                        $name = $packageList [$i];
-                        $splittedName = $pkgManager->splitPackageName($name);
-                        if (count($splittedName) >= 2) {
-                            $nameWithoutVersion = $splittedName[0];
-                            $version = $splittedName[1];
-                        }
-                        $descriptionURL = $pkg_src . "descriptions/" . $name . ".txt";
-                        $description = @file_get_contents_wrapper($descriptionURL);
-                        ?>
+                    foreach($packageList as $package){
+                       ?>
                         <tr>
-                            <td><?php esc($nameWithoutVersion); ?></td>
-                            <td><?php esc($version); ?></td>
+                            <td><?php esc($package->name); ?></td>
+                            <td><?php esc($package->version); ?></td>
                             <td><?php
-                                if (StringHelper::isNullOrWhitespace($description)) {
-                                    translate("no_description_available");
-                                } else {
-                                    echo nl2br($description);
-                                }
+                                echo StringHelper::isNotNullOrWhitespace($package->description) ?
+									nl2br($package->description) :
+                                    get_translation("no_description_available");
                                 ?>
                             </td>
                             <td>
-                                <a href="<?php esc(ModuleHelper::buildActionURL("install_modules", "packages={$name}")); ?>" class="btn btn-primary">
+                                <a href="<?php esc(ModuleHelper::buildActionURL("install_modules", "packages={$package->name}-{$package->version}")); ?>" class="btn btn-primary">
                                     <i class="fas fa-download"></i> <?php translate("install"); ?>
                                 </a>
                             </td>
