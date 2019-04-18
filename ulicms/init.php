@@ -370,9 +370,7 @@ if ($cache_period === false) {
 
 date_default_timezone_set(Settings::get("timezone"));
 
-if (isset($_GET["output_scripts"])) {
-    getCombinedScripts();
-} else if (isset($_GET["output_stylesheets"])) {
+if (isset($_GET["output_stylesheets"])) {
     getCombinedStylesheets();
 }
 

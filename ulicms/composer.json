@@ -38,7 +38,8 @@
 		"leafo/scssphp": "*",
 		"chrisjean/php-ico": "^1.0",
 		"willdurand/negotiation": "^2.3",
-		"cocur/slugify": "^3.2"
+		"cocur/slugify": "^3.2",
+		"matthiasmullie/minify": "^1.3"
 	},
 	"require-dev" : {
 		"phpunit/phpunit" : "^7.0"

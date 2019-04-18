@@ -5,6 +5,7 @@ use UliCMS\HTML\Script;
 use UliCMS\Exceptions\SCSSCompileException;
 use Leafo\ScssPhp\Compiler;
 use zz\Html\HTMLMinify;
+use MatthiasMullie\Minify;
 
 // Javascript Minify Funktionen
 function resetScriptQueue() {
@@ -51,51 +52,48 @@ function unsetSCSSImportPaths() {
     Vars::delete("css_include_paths");
 }
 
-function getCombinedScripts() {
-    $lastmod = intval($_GET["time"]);
+function minifyJs() {
+    $scripts = Vars::get("script_queue");
+    $lastmod = 0;
 
-    $output = "";
-    if (isset($_GET["output_scripts"])) {
-        $scripts = explode(";", $_GET["output_scripts"]);
-        $adapter = CacheUtil::getAdapter(true);
-        $cacheId = md5(get_request_uri());
-        if ($adapter->has($cacheId)) {
-            $output = $adapter->get($cacheId);
-        } else {
-            foreach ($scripts as $script) {
-                $script = ltrim($script, "/");
-                if (is_file($script)) {
-                    $ext = pathinfo($script, PATHINFO_EXTENSION);
-                    if ($ext == "js") {
-                        $content = @file_get_contents($script);
-                        if ($content) {
-                            $content = normalizeLN($content, "\n");
-                            $content = trim($content);
-                            $content = \JShrink\Minifier::minify($content, array(
-                                        'flaggedComments' => false
-                            ));
-                            $lines = StringHelper::linesFromString($content, true, true, false);
-                            $content = implode("\n", $lines);
-                            $output .= $content;
-                            if (filemtime($script) > $lastmod) {
-                                $lastmod = filemtime($script);
-                            }
-                        }
-                    }
-                }
-            }
-            $adapter->set($cacheId, $output);
+    $minifier = new Minify\JS();
+
+    // TODO: Methode erstellen: getLatestMtime()
+    // returns the updated timestamp of the last changed file
+    foreach ($scripts as $script) {
+        $script = ltrim($script, "/");
+        if (is_file($script) and pathinfo($script, PATHINFO_EXTENSION) == "js"
+                and filemtime($script) > $lastmod) {
+            $lastmod = filemtime($script);
         }
     }
 
-    $output = trim($output);
+    $cacheId = md5((implode(";", $scripts)) . $lastmod);
+    $jsDir = Path::resolve("ULICMS_ROOT/content/cache/scripts");
 
-    header("Content-Type: text/javascript");
-    $len = mb_strlen($output, 'binary');
-    header("Content-Length: " . $len);
-    set_eTagHeaders($_GET["output_scripts"], $lastmod);
-    echo $output;
-    exit();
+    if (!is_dir($jsDir)) {
+        mkdir($jsDir, 0777, true);
+    }
+    $jsUrl = !is_admin_dir() ? "content/cache/scripts" : "../content/cache/scripts";
+
+    $bundleFile = "{$jsDir}/{$cacheId}.js";
+    $bundleUrl = "{$jsUrl}/{$cacheId}.js";
+
+    $output = "";
+    if (!is_file($bundleFile)) {
+        foreach ($scripts as $script) {
+            $script = ltrim($script, "/");
+            if (is_file($script) and pathinfo($script, PATHINFO_EXTENSION) == "js") {
+                $minifier->add($script);
+            }
+        }
+
+        $output = $minifier->minify();
+
+        file_put_contents($bundleFile, $output);
+    }
+    resetScriptQueue();
+    return $bundleUrl;
 }
 
 function combinedScriptHtml() {
@@ -108,7 +106,7 @@ function combined_script_html() {
 }
 
 function getCombinedScriptHtml() {
-    $html = "";
+
     $cfg = new CMSConfig();
     if (is_true($cfg->no_minify)) {
         foreach (Vars::get("script_queue") as $script) {
@@ -118,9 +116,8 @@ function getCombinedScriptHtml() {
         return $html;
     }
 
-    if (Vars::get("script_queue") and count(Vars::get("script_queue")) > 0) {
-        $html = Script::fromFile(getCombinedScriptURL());
-    }
+    $html = Script::fromFile(minifyJs());
+
     resetScriptQueue();
     return $html;
 }
@@ -128,28 +125,6 @@ function getCombinedScriptHtml() {
 function get_combined_script_html() {
     trigger_error("combined_script_html is deprecated", E_USER_DEPRECATED);
     return getCombinedScriptHtml();
-}
-
-function getCombinedScriptURL() {
-    $output = "";
-
-    $lastmod = 0;
-    foreach (Vars::get("script_queue") as $file) {
-        if (is_file($file) and endsWith($file, ".js") and filemtime($file) > $lastmod) {
-            $lastmod = filemtime($file);
-        }
-    }
-
-    if (Vars::get("script_queue")) {
-        $files = implode(";", Vars::get("script_queue"));
-        $url = "?output_scripts=" . $files;
-    } else {
-        $url = "index.php?scripts=";
-    }
-
-    $url .= "&time=" . $lastmod;
-
-    return $url;
 }
 
 // Ab hier Stylesheet Funktionen
@@ -181,7 +156,6 @@ function getCombinedStylesheets($doReturn = false) {
             $output = $adapter->get($cacheId);
         } else {
             $scss = new Compiler();
-            ;
             foreach ($stylesheets as $stylesheet) {
                 $stylesheet = ltrim($stylesheet, "/");
                 if (is_file($stylesheet)) {
