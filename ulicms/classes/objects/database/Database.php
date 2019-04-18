@@ -74,8 +74,8 @@ class Database {
     public static function getConnection() {
         return self::$connection;
     }
-	
-	public static function isConnected() {
+
+    public static function isConnected() {
         return boolval(self::$connection);
     }
 
