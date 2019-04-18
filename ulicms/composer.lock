@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "4f7673e6171974d59e2a09f2f4fde7a9",
+    "content-hash": "1e6eb5ccc9061b3255362a1346126c2f",
     "packages": [
         {
             "name": "chrisjean/php-ico",
@@ -2207,8 +2207,7 @@
         "ext-mbstring": "*",
         "ext-openssl": "*",
         "ext-dom": "*",
-        "ext-libxml": "*",
-        "ext-ldap": "*"
+        "ext-libxml": "*"
     },
     "platform-dev": []
 }
