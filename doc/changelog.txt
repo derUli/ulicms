@@ -7,6 +7,11 @@ Neue API-Methoden:
 * File::getNewestMtime($files)
 ... TODO: neue und umbenannte Minify Methoden erwähnen
 
+Fehlerkorrekturen:
+* Wenn man ein Modul welches beim Laden der "Pakete" Übersicht deaktiviert war
+  aktiviert, wird nun der Button zum Aufrufen des Moduls sofort
+  und ohne Neuladen der Seite aktiviert
+
 ===== Neues in UliCMS 2019.2.6 =====
 
 Verbesserungen:

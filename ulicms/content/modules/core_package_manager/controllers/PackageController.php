@@ -1,7 +1,5 @@
 <?php
 
-use UliCMS\Exceptions\NotImplementedException;
-
 class PackageController extends MainClass {
 
     const MODULE_NAME = "core_package_manager";
