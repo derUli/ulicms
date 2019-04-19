@@ -18,6 +18,7 @@ Neue API-Methoden:
 
 Fehlerkorrekturen:
 * Wenn man ein Modul welches beim Laden der "Pakete" Übersicht deaktiviert war aktiviert, wird nun der Button zum Aufrufen des Moduls sofort und ohne Neuladen der Seite aktiviert
+* Bei Links wird nun wieder in der Seitenliste die Ziel-URL angezeigt
 
 ===== Neues in UliCMS 2019.2.6 =====
 

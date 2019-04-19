@@ -35,7 +35,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
             Settings::set($key, $value);
         }
 
-        Database::query("delete from {prefix}content where systemname like 'test-page-%", true);
+        Database::query("delete from {prefix}content where title like 'Test Page %'", true);
     }
 
     private function cleanUp() {

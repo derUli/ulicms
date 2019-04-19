@@ -474,8 +474,8 @@ if ($permissionChecker->hasPermission("pages")) {
                         <?php
                         if ($permissionChecker->hasPermission("pages_create")) {
                             ?>
-                                                                            <td style="text-align: center"><?php translate("clone"); ?>
-                                                                            </td> -->
+                                                                                        <td style="text-align: center"><?php translate("clone"); ?>
+                                                                                        </td> -->
                         <?php } ?>
                         <td style="text-align: center"><?php translate("edit"); ?>
                         </td>
@@ -491,7 +491,8 @@ if ($permissionChecker->hasPermission("pages")) {
                             echo '<tr id="dataset-' . $row->id . '">';
                             echo "<td>" . htmlspecialchars($row->title);
                             if (!empty($row->redirection) and ! is_null($row->redirection) and $row->type == "link") {
-                                esc(" --> ") . htmlspecialchars($row->redirection);
+                                esc(" --> ");
+                                esc($row->redirection);
                             }
 
                             echo "</td>";
