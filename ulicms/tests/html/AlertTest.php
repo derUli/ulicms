@@ -4,6 +4,11 @@ use UliCMS\HTML\Alert;
 
 class AlertTest extends \PHPUnit\Framework\TestCase {
 
+    public function testAlert() {
+        $this->assertEquals("<div class=\"alert foo bar\">&lt;strong&gt;Hello World&lt;/strong&gt;</div>",
+                Alert::alert("<strong>Hello World</strong>", "foo bar", false));
+    }
+
     public function testDanger() {
         $this->assertEquals("<div class=\"alert alert-danger \">&lt;strong&gt;Hello World&lt;/strong&gt;</div>",
                 Alert::danger("<strong>Hello World</strong>", "", false));
@@ -22,6 +27,11 @@ class AlertTest extends \PHPUnit\Framework\TestCase {
     public function testSuccess() {
         $this->assertEquals("<div class=\"alert alert-success \">&lt;strong&gt;Hello World&lt;/strong&gt;</div>",
                 Alert::success("<strong>Hello World</strong>", "", false));
+    }
+
+    public function testAlertAllowHtml() {
+        $this->assertEquals("<div class=\"alert foo bar\"><strong>Hello World</strong></div>",
+                Alert::alert("<strong>Hello World</strong>", "foo bar", true));
     }
 
     public function testDangerAllowHtml() {
