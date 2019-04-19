@@ -132,13 +132,8 @@ function minifyCSS() {
             if (is_file($stylesheet) and $type == "css") {
                 $minifier->add($stylesheet);
             } else if (is_file($stylesheet) and $type == "scss") {
-
-                try {
-                    $scssOutput = compileSCSS($stylesheet);
-                    $minifier->add($scssOutput);
-                } catch (Exception $e) {
-                    throw new SCSSCompileException("Compilation of $stylesheet failed: {$e->getMessage()}");
-                }
+                $scssOutput = compileSCSS($stylesheet);
+                $minifier->add($scssOutput);
             }
         }
 
@@ -160,7 +155,12 @@ function compileSCSS($stylesheet) {
     } else {
         $scss->setImportPaths(dirname($stylesheet));
     }
-    $scssOutput = $scss->compile($scssInput);
+
+    try {
+        $scssOutput = $scss->compile($scssInput);
+    } catch (Exception $e) {
+        throw new SCSSCompileException("Compilation of $stylesheet failed: {$e->getMessage()}");
+    }
     return $scssOutput;
 }
 
@@ -241,7 +241,7 @@ function getCombinedStylesheetHTML() {
                 $html .= Style::FromExternalFile(compileSCSSToFile($stylesheet));
             }
         }
-        resetScriptQueue();
+        resetStylesheetQueue();
         return $html;
     }
 
