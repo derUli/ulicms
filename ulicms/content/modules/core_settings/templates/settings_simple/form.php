@@ -73,13 +73,16 @@ if ($permissionChecker->hasPermission("settings_simple")) {
                        }
                        ?>></td>
         </tr>
-        <tr>
-            <td><strong><?php translate("error_pages"); ?></strong></td>
-            <td><a href="index.php?action=error_pages"
-                   class="btn btn-default"><i class="fa fa-edit"></i> <?php
-                       translate("edit");
-                       ?></a></td>
-        </tr>
+        <?php if ($permissionChecker->hasPermission("error_pages")) {
+            ?>
+            <tr>
+                <td><strong><?php translate("error_pages"); ?></strong></td>
+                <td><a href="index.php?action=error_pages"
+                       class="btn btn-default"><i class="fa fa-edit"></i> <?php
+                           translate("edit");
+                           ?></a></td>
+            </tr>
+        <?php } ?>
         <tr>
             <td><strong><?php
                     translate("enable_password_reset");
@@ -94,7 +97,8 @@ if ($permissionChecker->hasPermission("settings_simple")) {
         </tr>
         <tr>
             <td></td>
-            <td><strong><?php translate("metadata"); ?></strong></strong></td>
+            <td>
+                <strong><?php translate("metadata"); ?></strong></strong></td>
         </tr>
         <tr>
             <td><strong><?php
