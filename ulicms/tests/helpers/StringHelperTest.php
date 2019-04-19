@@ -3,14 +3,14 @@
 class StringHelperTest extends \PHPUnit\Framework\TestCase {
 
     private function getTestFilePath() {
-        return dirname(__FILE__) . "/fixtures/lines.txt";
+        return Path::resolve("ULICMS_ROOT/tests/fixtures/lines.txt");
     }
 
     public function testRemoveEmptyLineFromString() {
-        $input = file_get_contents(dirname(__FILE__) .
-                "/fixtures/removeEmptyLinesFromString.input.txt");
-        $expected = normalizeLN(file_get_contents(dirname(__FILE__) .
-                        "/fixtures/removeEmptyLinesFromString.expected.txt"), "\n");
+        $input = file_get_contents(dirname(ULICMS_ROOT) .
+                "/tests/fixtures/removeEmptyLinesFromString.input.txt");
+        $expected = normalizeLN(file_get_contents(dirname(ULICMS_ROOT) .
+                        "/tests/fixtures/removeEmptyLinesFromString.expected.txt"), "\n");
 
         $this->assertEquals($expected,
                 StringHelper::removeEmptyLinesFromString($input));
@@ -72,8 +72,8 @@ class StringHelperTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testTrimLines() {
-        $inputFile = dirname(__FILE__) . "/fixtures/trimLines.input.txt";
-        $inputExpected = dirname(__FILE__) . "/fixtures/trimLines.expected.txt";
+        $inputFile = dirname(ULICMS_ROOT) . "/tests/fixtures/trimLines.input.txt";
+        $inputExpected = dirname(ULICMS_ROOT) . "/tests/fixtures/trimLines.expected.txt";
 
         $input = file_get_contents($inputFile);
         $expected = file_get_contents($inputExpected);

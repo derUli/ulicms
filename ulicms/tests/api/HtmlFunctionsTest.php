@@ -1,7 +1,5 @@
 <?php
 
-require_once Path::Resolve("ULICMS_ROOT/templating.php");
-
 use function UliCMS\HTML\text;
 use function UliCMS\HTML\imageTag;
 use function UliCMS\HTML\imageTagInline;
@@ -24,14 +22,14 @@ class HtmlFunctionsTest extends \PHPUnit\Framework\TestCase {
 
     public function testImageTagInlineWithoutAnything() {
 
-        $expectedUrl = file_get_contents(dirname(__file__) . "/fixtures/logo-data-url.txt");
+        $expectedUrl = file_get_contents(Path::resolve("ULICMS_ROOT/tests/fixtures/logo-data-url.txt"));
         $imagePath = Path::resolve("ULICMS_ROOT/admin/gfx/logo.png");
 
         $this->assertEquals('<img src="' . $expectedUrl . '">', imageTagInline($imagePath));
     }
 
     public function testImageTagInlineWithHtmlAttributes() {
-        $expectedUrl = file_get_contents(dirname(__file__) . "/fixtures/logo-data-url.txt");
+        $expectedUrl = file_get_contents(Path::resolve("ULICMS_ROOT/tests/fixtures/logo-data-url.txt"));
         $imagePath = Path::resolve("ULICMS_ROOT/admin/gfx/logo.png");
 
         $this->assertEquals('<img class="my-awesome-image" title="Very awesome image" src="' . $expectedUrl . '">', imageTagInline($imagePath,

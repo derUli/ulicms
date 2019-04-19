@@ -39,7 +39,7 @@ class FilesTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testExistsLocallyExpectTrue() {
-        $this->assertTrue(File::existsLocally("init.php"));
+        $this->assertTrue(File::existsLocally(Path::resolve("ULICMS_ROOT/init.php")));
         $this->assertTrue(File::existsLocally(__FILE__));
     }
 
@@ -51,12 +51,12 @@ class FilesTest extends \PHPUnit\Framework\TestCase {
     public function testToDataUri() {
         $this->assertNull(File::toDataUri("gibtsnicht.txt"));
 
-        $expected1 = file_get_contents(dirname(__file__) . "/fixtures/logo-data-url.txt");
+        $expected1 = file_get_contents(Path::resolve("ULICMS_ROOT/tests/fixtures/logo-data-url.txt"));
         $this->assertEquals($expected1, File::toDataUri(Path::resolve("ULICMS_ROOT/admin/gfx/logo.png")));
 
-        $expected2 = file_get_contents(dirname(__file__) . "/fixtures/hello-base64.txt");
+        $expected2 = file_get_contents(Path::resolve("ULICMS_ROOT/tests/fixtures/hello-base64.txt"));
         $this->assertEquals($expected2,
-                File::toDataUri(Path::resolve(dirname(__file__) . "/fixtures/hello-original.txt"), "application/inf"));
+                File::toDataUri(Path::resolve("ULICMS_ROOT/tests/fixtures/hello-original.txt"), "application/inf"));
     }
 
     public function testSureRemoveDirIncludingItself() {
