@@ -58,8 +58,8 @@ function minifyJs() {
 
     $minifier = new Minify\JS();
 
-    // TODO: Methode erstellen: getLatestMtime()
-    // returns the updated timestamp of the last changed file
+// TODO: Methode erstellen: getLatestMtime()
+// returns the updated timestamp of the last changed file
     foreach ($scripts as $script) {
         $script = ltrim($script, "/");
         if (is_file($script) and pathinfo($script, PATHINFO_EXTENSION) == "js"
@@ -93,6 +93,94 @@ function minifyJs() {
         file_put_contents($bundleFile, $output);
     }
     resetScriptQueue();
+    return $bundleUrl;
+}
+
+function minifyCSS() {
+    $stylesheets = Vars::get("stylesheet_queue");
+    $lastmod = 0;
+
+    $minifier = new Minify\CSS();
+
+    // TODO: Methode erstellen: getLatestMtime()
+    // returns the updated timestamp of the last changed file
+    foreach ($stylesheets as $stylesheet) {
+        $stylesheet = ltrim($stylesheet, "/");
+        $type = pathinfo($stylesheet, PATHINFO_EXTENSION);
+        if (is_file($stylesheet) and ( $type == "css" or $type == "scss")
+                and filemtime($stylesheet) > $lastmod) {
+            $lastmod = filemtime($stylesheet);
+        }
+    }
+
+    $cacheId = md5((implode(";", $stylesheets)) . $lastmod);
+    $cssDir = Path::resolve("ULICMS_ROOT/content/cache/stylesheets");
+
+    if (!is_dir($cssDir)) {
+        mkdir($cssDir, 0777, true);
+    }
+    $cssUrl = !is_admin_dir() ? "content/cache/stylesheets" : "../content/cache/stylesheets";
+
+    $bundleFile = "{$cssDir}/{$cacheId}.css";
+    $bundleUrl = "{$cssUrl}/{$cacheId}.css";
+
+    $output = "";
+    if (!is_file($bundleFile)) {
+        foreach ($stylesheets as $stylesheet) {
+            $stylesheet = ltrim($stylesheet, "/");
+            $type = pathinfo($stylesheet, PATHINFO_EXTENSION);
+            if (is_file($stylesheet) and $type == "css") {
+                $minifier->add($stylesheet);
+            } else if (is_file($stylesheet) and $type == "scss") {
+
+                try {
+                    $scssOutput = compileSCSS($stylesheet);
+                    $minifier->add($scssOutput);
+                } catch (Exception $e) {
+                    throw new SCSSCompileException("Compilation of $stylesheet failed: {$e->getMessage()}");
+                }
+            }
+        }
+
+        $output = $minifier->minify();
+
+        file_put_contents($bundleFile, $output);
+    }
+    resetStylesheetQueue();
+    return $bundleUrl;
+}
+
+function compileSCSS($stylesheet) {
+    $scss = new Compiler();
+
+    $importPaths = getSCSSImportPaths();
+    $scssInput = file_get_contents($stylesheet);
+    if (is_array($importPaths)) {
+        $scss->setImportPaths($importPaths);
+    } else {
+        $scss->setImportPaths(dirname($stylesheet));
+    }
+    $scssOutput = $scss->compile($scssInput);
+    return $scssOutput;
+}
+
+function compileSCSSToFile($stylesheet) {
+    $cssDir = Path::resolve("ULICMS_ROOT/content/cache/stylesheets");
+
+    if (!is_dir($cssDir)) {
+        mkdir($cssDir, 0777, true);
+    }
+
+    $output = compileSCSS($stylesheet);
+
+    $cacheId = md5($stylesheet . filemtime($stylesheet)) . ".css";
+
+    $cssUrl = !is_admin_dir() ? "content/cache/stylesheets" : "../content/cache/stylesheets";
+
+    $bundleFile = "{$cssDir}/{$cacheId}.css";
+    $bundleUrl = "{$cssUrl}/{$cacheId}.css";
+
+    file_put_contents($bundleFile, $output);
     return $bundleUrl;
 }
 
@@ -142,183 +230,32 @@ function enqueueStylesheet($path) {
     Vars::set("stylesheet_queue", $stylesheet_queue);
 }
 
-// FIXME: Seperate getter and output methods
-function getCombinedStylesheets($doReturn = false) {
-    $output = "";
-
-    $lastmod = intval($_GET["time"]);
-
-    if (isset($_GET["output_stylesheets"])) {
-        $stylesheets = explode(";", $_GET["output_stylesheets"]);
-        $adapter = CacheUtil::getAdapter(true);
-        $cacheId = md5(get_request_uri());
-        if ($adapter->has($cacheId)) {
-            $output = $adapter->get($cacheId);
-        } else {
-            $scss = new Compiler();
-            foreach ($stylesheets as $stylesheet) {
-                $stylesheet = ltrim($stylesheet, "/");
-                if (is_file($stylesheet)) {
-                    $ext = pathinfo($stylesheet, PATHINFO_EXTENSION);
-                    if ($ext == "css" || $ext == "scss") {
-                        $content = @file_get_contents($stylesheet);
-                        if ($content) {
-                            $content = normalizeLN($content, "\n");
-                            if ($ext == "scss") {
-                                $importPaths = getSCSSImportPaths();
-                                if (is_array($importPaths)) {
-                                    $scss->setImportPaths($importPaths);
-                                } else {
-                                    $scss->setImportPaths(dirname($stylesheet));
-                                }
-                                try {
-                                    $content = $scss->compile($content);
-                                } catch (Exception $e) {
-                                    throw new SCSSCompileException("Compilation of $stylesheet failed: {$e->getMessage()}");
-                                }
-                            }
-
-                            $content = minifyCss($content);
-                            $output .= $content;
-                            if (filemtime($stylesheet) > $lastmod) {
-                                $lastmod = filemtime($stylesheet);
-                            }
-                        }
-                    }
-                }
-            }
-            $adapter->set($cacheId, $output);
-        }
-    }
-
-    $output = trim($output);
-
-    // Remove comments
-    $output = preg_replace('!/\*[^*]*\*+([^/][^*]*\*+)*/!', '', $output);
-    // Remove space after colons
-    $output = str_replace(': ', ':', $output);
-    // Remove whitespace
-    $output = str_replace(array(
-        "\r\n",
-        "\r",
-        "\n",
-        "\t",
-        '  ',
-        '    ',
-        '    '
-            ), '', $output);
-
-    if (!$doReturn) {
-        header("Content-Type: text/css");
-        $len = mb_strlen($output, 'binary');
-        header("Content-Length: " . $len);
-
-        set_eTagHeaders($_GET["output_stylesheets"], $lastmod);
-
-        echo $output;
-        exit();
-    }
-    return $output;
-}
-
-/**
- * This function takes a css-string and compresses it, removing
- * unneccessary whitespace, colons, removing unneccessary px/em
- * declarations etc.
- *
- * @param string $css
- * @return string compressed css content
- * @author Steffen Becker
- */
-function minifyCss($css) {
-    // some of the following functions to minimize the css-output are directly taken
-    // from the awesome CSS JS Booster: https://github.com/Schepp/CSS-JS-Booster
-    // all credits to Christian Schaefer: http://twitter.com/derSchepp
-    // remove comments
-    $css = preg_replace('!/\*[^*]*\*+([^/][^*]*\*+)*/!', '', $css);
-    // backup values within single or double quotes
-    preg_match_all('/(\'[^\']*?\'|"[^"]*?")/ims', $css, $hit, PREG_PATTERN_ORDER);
-    for ($i = 0; $i < count($hit[1]); $i ++) {
-        $css = str_replace($hit[1][$i], '##########' . $i . '##########', $css);
-    }
-    // remove traling semicolon of selector's last property
-    $css = preg_replace('/;[\s\r\n\t]*?}[\s\r\n\t]*/ims', "}\r\n", $css);
-    // remove any whitespace between semicolon and property-name
-    $css = preg_replace('/;[\s\r\n\t]*?([\r\n]?[^\s\r\n\t])/ims', ';$1', $css);
-    // remove any whitespace surrounding property-colon
-    $css = preg_replace('/[\s\r\n\t]*:[\s\r\n\t]*?([^\s\r\n\t])/ims', ':$1', $css);
-    // remove any whitespace surrounding selector-comma
-    $css = preg_replace('/[\s\r\n\t]*,[\s\r\n\t]*?([^\s\r\n\t])/ims', ',$1', $css);
-    // remove any whitespace surrounding opening parenthesis
-    $css = preg_replace('/[\s\r\n\t]*{[\s\r\n\t]*?([^\s\r\n\t])/ims', '{$1', $css);
-    // remove any whitespace between numbers and units
-    $css = preg_replace('/([\d\.]+)[\s\r\n\t]+(px|em|pt|%)/ims', '$1$2', $css);
-    // shorten zero-values
-    $css = preg_replace('/([^\d\.]0)(px|em|pt|%)/ims', '$1', $css);
-    // constrain multiple whitespaces
-    $css = preg_replace('/\p{Zs}+/ims', ' ', $css);
-    // remove newlines
-    $css = str_replace(array(
-        "\r\n",
-        "\r",
-        "\n"
-            ), '', $css);
-    // Restore backupped values within single or double quotes
-    for ($i = 0; $i < count($hit[1]); $i ++) {
-        $css = str_replace('##########' . $i . '##########', $hit[1][$i], $css);
-    }
-    return $css;
-}
-
-function combinedStylesheetHtml() {
-    echo getCombinedStylesheetHtml();
-}
-
-function combined_stylesheet_html() {
-    trigger_error("combined_stylesheel_html is deprecated", E_USER_DEPRECATED);
-    echo combinedStylesheetHtml();
-}
-
-function getCombinedStylesheetHtml() {
-    $html = "";
-
+function getCombinedStylesheetHTML() {
     $cfg = new CMSConfig();
     if (is_true($cfg->no_minify)) {
         foreach (Vars::get("stylesheet_queue") as $stylesheet) {
-            $html .= Style::FromExternalFile($stylesheet);
+            $type = pathinfo($stylesheet, PATHINFO_EXTENSION);
+            if ($type == "css") {
+                $html .= Style::FromExternalFile($stylesheet);
+            } else if ($type == "scss") {
+                $html .= Style::FromExternalFile(compileSCSSToFile($stylesheet));
+            }
         }
-        resetStylesheetQueue();
+        resetScriptQueue();
         return $html;
     }
 
-    if (Vars::get("stylesheet_queue") and count(Vars::get("stylesheet_queue")) > 0) {
-        $html = Style::FromExternalFile(getCombinedStylesheetURL());
-    }
+    $html = Style::FromExternalFile(minifyCSS());
+
     resetStylesheetQueue();
     return $html;
 }
 
-function get_combined_stylesheet_html() {
-    trigger_error("get_combined_stylesheet_html is deprecated", E_USER_DEPRECATED);
-    return getCombinedStylesheetHtml();
+function combinedStylesheetHtml() {
+    echo getCombinedStylesheetHTML();
 }
 
-function getCombinedStylesheetURL() {
-    $lastmod = 0;
-    if (Vars::get("stylesheet_queue")) {
-        foreach (Vars::get("stylesheet_queue") as $file) {
-            if (is_file($file) and ( endsWith($file, ".css", $needle) or endsWith($file, ".scss", $needle)) and filemtime($file) > $lastmod) {
-                $lastmod = filemtime($file);
-            }
-        }
-    }
-
-    if (Vars::get("stylesheet_queue")) {
-        $files = implode(";", Vars::get("stylesheet_queue"));
-        $url = "?output_stylesheets=" . $files;
-    } else {
-        $url = "index.php?stylesheets=";
-    }
-    $url .= "&time=$lastmod";
-    return $url;
+function get_combined_stylesheet_html() {
+    trigger_error("get_combined_stylesheet_html is deprecated", E_USER_DEPRECATED);
+    return getCombinedStylesheetHTML();
 }
