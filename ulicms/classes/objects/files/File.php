@@ -112,6 +112,16 @@ if (!defined("KCFINDER_PAGE")) {
             }
         }
 
+        public static function getNewestMtime($files) {
+            $mtime = 0;
+            foreach ($files as $file) {
+                if (is_file($file) and filemtime($file) > $mtime) {
+                    $mtime = filemtime($file);
+                }
+            }
+            return $mtime;
+        }
+
     }
 
 }

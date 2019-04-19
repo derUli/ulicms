@@ -1,7 +1,5 @@
 <?php
 
-require_once ULICMS_ROOT . "/api.php";
-
 use UliCMS\Exceptions\SCSSCompileException;
 
 class MinifyTest extends \PHPUnit\Framework\TestCase {
@@ -30,7 +28,11 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
             enqueueScriptFile($file);
         }
 
-        $this->assertEquals('<script src="?output_scripts=node_modules/jquery/dist/jquery.js;admin/scripts/global.js;node_modules/js-url/url.min.js&amp;time=' . $filemtime . '" type="text/javascript"></script>', getCombinedScriptHtml());
+        $html = getCombinedScriptHtml();
+        $this->assertStringStartsWith('<script src="content/cache/scripts/', $html);
+        $this->assertContains(".js?time=", $html);
+        $this->assertStringEndsWith('type="text/javascript"></script>', $html);
+
         $this->assertCount(0, Vars::get("script_queue"));
     }
 
@@ -59,41 +61,46 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
             enqueueStylesheet($file);
         }
 
-        $this->assertEquals('<link rel="stylesheet" href="?output_stylesheets=core.css;node_modules/bootstrap/dist/css/bootstrap.css;node_modules/bootstrap/dist/css/bootstrap-theme.css;admin/css/modern.scss&amp;time=' . $filemtime . '" type="text/css"/>', getCombinedStylesheetHtml());
-        $this->assertCount(0, Vars::get("stylesheet_queue"));
+        $html = getCombinedStylesheetHTML();
+        $this->assertStringStartsWith('<link rel="stylesheet" href="', $html);
+        $this->assertContains(".css?time=", $html);
+        $this->assertStringEndsWith('" type="text/css"/>', $html);
+
+        $this->assertCount(0, Vars::get("script_queue"));
     }
 
     public function testMinifySCSSExpectCSS() {
         unsetSCSSImportPaths();
         CacheUtil::getAdapter(true)->clear();
-        $style = array(
+        $styles = array(
             "tests/fixtures/scss/style1.scss",
             "tests/fixtures/scss/style2.scss",
             "core.css"
         );
-        $_GET["output_stylesheets"] = implode(";", $style);
-        $_GET["time"] = time();
-        $_SERVER["REQUEST_URI"] = getCombinedStylesheetURL();
+        foreach ($styles as $style) {
+            enqueueStylesheet($style);
+        }
         $expected = file_get_contents("tests/fixtures/scss/expected.css");
 
-        $real = getCombinedStylesheets(true);
-        $this->assertEquals($real, $expected);
+        $outputFile = minifyCSS();
+        $real = file_get_contents($outputFile);
+        $this->assertEquals($expected, $real);
     }
 
     public function testMinifySCSSThrowsException() {
         unsetSCSSImportPaths();
         CacheUtil::getAdapter(true)->clear();
-        $style = array(
-            "tests/fixtures/scss/fail.scss"
-        );
-        $_GET["output_stylesheets"] = implode(";", $style);
-        $_GET["time"] = time();
-        $_SERVER["REQUEST_URI"] = getCombinedStylesheetURL();
+        $style = "tests/fixtures/scss/fail.scss";
+        enqueueStylesheet($style);
+
         try {
-            getCombinedStylesheets(true);
+            minifyCSS();
             $this->fail("Expected exception not thrown");
         } catch (SCSSCompileException $e) {
-            $this->assertEquals("Compilation of tests/fixtures/scss/fail.scss failed: parse error: failed at `wid012321:56z754654$$` (stdin) on line 5", $e->getMessage());
+            $this->assertStringStartsWith("Compilation of tests/fixtures/scss/fail.scss failed: parse error: failed at", $e->getMessage());
+            $this->assertStringEndsWith("(stdin) on line 5", $e->getMessage());
+        } finally {
+            resetStylesheetQueue();
         }
     }
 
