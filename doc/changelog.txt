@@ -10,12 +10,13 @@ Neue API-Methoden:
 * UliCMS\HTML\warning($text, $cssClasses, $allowHtml = false)
 * UliCMS\HTML\success($text, $cssClasses, $allowHtml = false)
 * UliCMS\HTML\info($text, $cssClasses, $allowHtml = false)
-... TODO: neue und umbenannte Minify Methoden erwähnen
+* minifyJs()
+* minifyCSS()
+* compileSCSS($stylesheet)
+* compileSCSSToFile($stylesheet)
 
 Fehlerkorrekturen:
-* Wenn man ein Modul welches beim Laden der "Pakete" Übersicht deaktiviert war
-  aktiviert, wird nun der Button zum Aufrufen des Moduls sofort
-  und ohne Neuladen der Seite aktiviert
+* Wenn man ein Modul welches beim Laden der "Pakete" Übersicht deaktiviert war aktiviert, wird nun der Button zum Aufrufen des Moduls sofort und ohne Neuladen der Seite aktiviert
 
 ===== Neues in UliCMS 2019.2.6 =====
 
