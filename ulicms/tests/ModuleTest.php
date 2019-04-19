@@ -70,4 +70,20 @@ class ModulesTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull($module->getVersion());
     }
 
+    public function testToggleEnabled() {
+        $module = new Module("fortune2");
+        $module->toggleEnabled();
+        $this->assertFalse($module->isEnabled());
+
+        $module = new Module("fortune2");
+        $this->assertFalse($module->isEnabled());
+
+        $module->toggleEnabled();
+
+        $this->assertTrue($module->isEnabled());
+
+        $module = new Module("fortune2");
+        $this->assertTrue($module->isEnabled());
+    }
+
 }
