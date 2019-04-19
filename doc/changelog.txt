@@ -1,3 +1,12 @@
+===== Neues in UliCMS 2019.2.7 =====
+
+Neue Features:
+* Minifying von Javascript und Stylesheets optimiert
+
+Neue API-Methoden:
+* File::getNewestMtime($files)
+... TODO: neue und umbenannte Minify Methoden erwähnen
+
 ===== Neues in UliCMS 2019.2.6 =====
 
 Verbesserungen:

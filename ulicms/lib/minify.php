@@ -7,7 +7,6 @@ use Leafo\ScssPhp\Compiler;
 use zz\Html\HTMLMinify;
 use MatthiasMullie\Minify;
 
-// Javascript Minify Funktionen
 function resetScriptQueue() {
     Vars::set("script_queue", array());
 }
@@ -58,8 +57,8 @@ function minifyJs() {
 
     $minifier = new Minify\JS();
 
-// TODO: Methode erstellen: getLatestMtime()
-// returns the updated timestamp of the last changed file
+    // TODO: Methode erstellen: getLatestMtime()
+    // returns the updated timestamp of the last changed file
     foreach ($scripts as $script) {
         $script = ltrim($script, "/");
         if (is_file($script) and pathinfo($script, PATHINFO_EXTENSION) == "js"

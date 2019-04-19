@@ -113,4 +113,21 @@ class FilesTest extends \PHPUnit\Framework\TestCase {
         sureRemoveDir($baseDir, true);
     }
 
+    public function testGetNewestMtimeNoFiles() {
+        $this->assertEquals(0, File::getNewestMtime(array()));
+    }
+
+    public function testGetNewestMtimeWithFiles() {
+
+        $files = array(
+            Path::resolve("ULICMS_ROOT/init.php"),
+            Path::resolve("ULICMS_ROOT/composer.json"),
+            Path::resolve("ULICMS_ROOT/core.css")
+        );
+
+        $minimumResult = mktime(0, 0, 0, 1, 1, 2019);
+
+        $this->assertGreaterThanOrEqual($minimumResult, File::getNewestMtime($files));
+    }
+
 }
