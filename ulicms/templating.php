@@ -38,7 +38,7 @@ function get_og_tags($systemname = null) {
         $og_description = $og_data["og_description"];
         $og_url = getCurrentURL();
 
-        // Falls kein og_title für die Seite gesetzt ist, Standardtitel bzw. Headline verwenden
+// Falls kein og_title für die Seite gesetzt ist, Standardtitel bzw. Headline verwenden
         if (is_null($og_title) or empty($og_title)) {
             $og_title = get_headline();
         }
@@ -187,8 +187,12 @@ function get_type($systemname = null, $language = null) {
     if (Vars::get($varName)) {
         return Vars::get($varName);
     }
-    $page = ContentFactory::getBySystemnameAndLanguage($systemname, $language);
-    $type = $page->type;
+    try {
+        $page = ContentFactory::getBySystemnameAndLanguage($systemname, $language);
+        $type = $page->type;
+    } catch (Exception $e) {
+        $type = "page";
+    }
 
     $result = apply_filter($type, "get_type");
     Vars::set($varName, $type);
@@ -369,7 +373,7 @@ function delete_custom_data($var = null, $page = null) {
     if (is_null($data)) {
         $data = array();
     }
-    // Wenn $var gesetzt ist, nur $var aus custom_data löschen
+// Wenn $var gesetzt ist, nur $var aus custom_data löschen
     if ($var) {
         if (isset($data[$var])) {
             unset($data[$var]);
@@ -772,7 +776,7 @@ function get_menu($name = "top", $parent = null, $recursive = true, $order = "po
             }
 
             $title = $row->title;
-            // Show page positions in menu if user has the "pages_show_positions" permission.
+// Show page positions in menu if user has the "pages_show_positions" permission.
             if (is_logged_in()) {
                 $acl = new ACL();
                 if ($acl->hasPermission("pages_show_positions") and Settings::get("user/" . get_user_id() . "/show_positions")) {
@@ -785,7 +789,7 @@ function get_menu($name = "top", $parent = null, $recursive = true, $order = "po
                 $language = new Language($row->link_to_language);
                 $redirection = $language->getLanguageLink();
             }
-            // if content has type link or node url is the target url else build seo url
+// if content has type link or node url is the target url else build seo url
             $url = ($row->type == "link" or $row->type == "node") ? $row->redirection : buildSEOUrl($row->systemname);
             $url = Template::getEscape($url);
 

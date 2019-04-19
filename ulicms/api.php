@@ -451,7 +451,7 @@ function get_csrf_token_html() {
     if (Settings::get("min_time_to_fill_form", "int") > 0) {
         $html .= '<input type="hidden" name="form_timestamp" value="' . time() . '">';
     }
-	
+
     return optimizeHtml($html);
 }
 
@@ -735,7 +735,7 @@ function do_event($name, $runs = ModuleEventConstants::RUNS_ONCE) {
         if ($main_class) {
             $controller = ControllerRegistry::get($main_class);
         }
-		ob_start();
+        ob_start();
         $escapedName = ModuleHelper::underscoreToCamel($name);
         if ($controller and method_exists($controller, $escapedName)) {
             echo $controller->$escapedName();
@@ -753,7 +753,7 @@ function do_event($name, $runs = ModuleEventConstants::RUNS_ONCE) {
                 require_once $file2;
             }
         }
-		echo optimizeHtml(ob_get_clean());
+        echo optimizeHtml(ob_get_clean());
     }
 }
 
@@ -1163,8 +1163,8 @@ function replaceShortcodesWithModules($string, $replaceOther = true) {
     }
     $string = replaceVideoTags($string);
     $string = replaceAudioTags($string);
-	
-	$string = optimizeHtml($string);
+
+    $string = optimizeHtml($string);
     return $string;
 }
 

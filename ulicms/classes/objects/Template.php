@@ -95,7 +95,7 @@ ORDER BY RAND() LIMIT 1") or die(Database::getError());
     }
 
     public static function executeModuleTemplate($module, $template) {
-			
+
         $retval = "";
         $originalTemplatePath = getModulePath($module, true) . "templates/" . $template;
         $ownTemplatePath = getTemplateDirPath(get_theme(), true) . $module . "/" . $template;
@@ -114,10 +114,9 @@ ORDER BY RAND() LIMIT 1") or die(Database::getError());
             throw new Exception("Template " . $module . "/" . $template . " not found!");
         }
         $retval = trim(ob_get_clean());
-		
-		return optimizeHtml($retval);
+
+        return optimizeHtml($retval);
     }
-	
 
     public static function escape($value) {
         echo self::getEscape($value);
@@ -416,6 +415,7 @@ color:" . Settings::get("body-text-color") . ";
         echo self::getContent();
     }
 
+    // TODO: Refactor this method
     public static function getContent() {
         $theme = get_theme();
 
@@ -438,15 +438,15 @@ color:" . Settings::get("body-text-color") . ";
         } else if (is_403()) {
             $theme = Settings::get("theme");
             if ($errorPage403) {
-                $content = ContentFactory::getByID($errorPage404);
+                $content = ContentFactory::getByID($errorPage403);
             } else {
                 return get_translation('FORBIDDEN_COTENT');
             }
-            return false;
         }
         if ($content->id === null) {
             return get_translation("no_content");
         }
+
 
         $htmlContent = $content->content;
         $htmlContent = apply_filter($htmlContent, "before_content");

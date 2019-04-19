@@ -1,17 +1,24 @@
 <?php
 
-class ErrorPagesController {
+class ErrorPagesController extends Controller {
 
     public function savePost() {
-        $language = Request::getVar("language");
-
-        $error403_page = Request::getVar("error404_page");
-        $error404_page = Request::getVar("error404_page");
-
-        Settings::setLanguageSetting($error403_page, $error403_page, $language);
-        Settings::setLanguageSetting($error403_page, $error404_page, $language);
-
-        Response::sendHttpStatusCodeResultIfAjax(HttpStatusCode::OK, ModuleHelper::buildActionURL("error_pages", "save=1"));
+        $errorPages = $_POST["error_page"];
+        if (is_array($errorPages)) {
+            foreach ($errorPages as $code => $languages) {
+                foreach ($languages as $language => $page_id) {
+                    if ($page_id > 0) {
+                        Settings::setLanguageSetting("error_page_{$code}",
+                                $page_id, $language
+                        );
+                    } else {
+                        Settings::delete("error_page_{$code}_{$language}");
+                    }
+                }
+            }
+        }
+        Response::sendHttpStatusCodeResultIfAjax(HttpStatusCode::OK,
+                ModuleHelper::buildActionURL("error_pages"));
     }
 
 }
