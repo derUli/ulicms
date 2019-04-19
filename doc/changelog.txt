@@ -5,6 +5,11 @@ Neue Features:
 
 Neue API-Methoden:
 * File::getNewestMtime($files)
+* UliCMS\HTML\alert($text, $cssClasses, $allowHtml = false)
+* UliCMS\HTML\danger($text, $cssClasses, $allowHtml = false)
+* UliCMS\HTML\warning($text, $cssClasses, $allowHtml = false)
+* UliCMS\HTML\success($text, $cssClasses, $allowHtml = false)
+* UliCMS\HTML\info($text, $cssClasses, $allowHtml = false)
 ... TODO: neue und umbenannte Minify Methoden erwähnen
 
 Fehlerkorrekturen:
