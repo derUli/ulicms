@@ -181,8 +181,7 @@ if ($permissionChecker->hasPermission("dashboard")) {
                 </tr>
             </table>
         </div>
-        <h2 class="accordion-header"><?php translate("last_changes"); ?>
-        </h2>
+        <h2 class="accordion-header"><?php translate("last_changes"); ?></h2>
         <div class="accordion-content">
             <table cellpadding="2">
                 <tr style="font-weight: bold;">
