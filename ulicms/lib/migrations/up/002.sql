@@ -1,4 +1,3 @@
-
 CREATE PROCEDURE prepareDbFor2019_2()
 	BEGIN
 		IF EXISTS ( SELECT * FROM information_schema.columns WHERE table_name = '{prefix}users' AND column_name = 'skype_id' AND table_schema = DATABASE() ) THEN

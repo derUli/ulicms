@@ -151,7 +151,7 @@ if ($permissionChecker->hasPermission("banners") and $permissionChecker->hasPerm
 <strong><?php translate("category");?></strong>
 <br />
 <?php
-        echo Categories::getHTMLSelect($row->category);
+        echo Categories::getHTMLSelect($row->category_id);
         ?>
 <br />
 <br />
