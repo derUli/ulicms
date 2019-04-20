@@ -55,7 +55,7 @@ function HTTPStatusCodeResult($status, $description = null) {
 	exit ();
 }
 function ExceptionResult($message, $status = 500) {
-	ViewBag::set ( "exception", $message );
+	ViewBag::set ( "exception", nl2br ( $message ) );
 	$content = Template::executeDefaultOrOwnTemplate ( "exception.php" );
 	
 	$size = getStringLengthInBytes ( $content );

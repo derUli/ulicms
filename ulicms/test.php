@@ -1,3 +1,4 @@
 <?php
-$string = file_get_contents("http://localhost/ulicms/admin/index.php?output_scripts=scripts/php.js/strip_tags.js;scripts/php.js/htmlspecialchars.js;../node_modules/jquery/dist/jquery.min.js;../node_modules/js-url/url.min.js;../node_modules/jquery-datetimepicker/build/jquery.datetimepicker.full.js;../node_modules/jquery-form/dist/jquery.form.min.js;scripts/vallenato/vallenato.js;scripts/util.js;scripts/global.js;../node_modules/bootstrap/dist/js/bootstrap.min.js;../node_modules/bootstrap-toggle/js/bootstrap-toggle.min.js;../node_modules/select2/dist/js/select2.min.js;../node_modules/bootbox/bootbox.min.js;../node_modules/select2/dist/js/i18n/de.js;scripts/datatables/datatables.min.js;../lib/js/global.js;../node_modules/jscolor-picker/jscolor.min.js;scripts/users.js;scripts/cookie.js&time=".time());
-echo mb_strlen($string, '8bit');
+include_once "init.php";
+throw new Exception("Voll der
+Fehler");

@@ -144,7 +144,7 @@ function exception_handler($exception) {
     }
     $httpStatus = $exception instanceof AccessDeniedException ? HttpStatusCode::FORBIDDEN : HttpStatusCode::INTERNAL_SERVER_ERROR;
     if (function_exists("HTMLResult") and class_exists("Template") and ! headers_sent() and function_exists("get_theme")) {
-        ViewBag::set("exception", $message);
+        ViewBag::set("exception", nl2br($message));
         HTMLResult(Template::executeDefaultOrOwnTemplate("exception.php"), $httpStatus);
     }
     if (function_exists("HTMLResult") and ! headers_sent()) {
@@ -424,15 +424,12 @@ Vars::set("disabledModules", $moduleManager->getDisabledModuleNames());
 // since the "Path" class has a naming conflict with the same named
 // class of KCFinder
 
-
 require_once dirname(__file__) . "/templating.php";
 
 ModelRegistry::loadModuleModels();
 TypeMapper::loadMapping();
 HelperRegistry::loadModuleHelpers();
 ControllerRegistry::loadModuleControllers();
-
-
 
 do_event("before_init");
 do_event("init");
