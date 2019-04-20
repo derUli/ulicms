@@ -50,7 +50,7 @@ class ModelBinderExample extends Model {
         "not_mapped" => "Not mapped"
     );
 
-    public function fillVars() {
+    public function fillVars($data = null) {
         $this->bindValues($this->sampleValuesOK);
     }
 
