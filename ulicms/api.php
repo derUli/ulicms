@@ -1402,43 +1402,45 @@ function uninstall_module($name, $type = "module") {
         return false;
     }
 
-    $name = trim($name);
-    $name = basename($name);
-    $name = trim($name);
+    $name = trim(basename(trim($name)));
 
     // Verhindern, dass der Modulordner oder gar das ganze
     // CMS gelöscht werden kann
     if ($name == "." or $name == ".." or empty($name)) {
         return false;
     }
-    if ($type === "module") {
-        $moduleDir = getModulePath($name, true);
-        // Modul-Ordner entfernen
-        if (is_dir($moduleDir)) {
-            $uninstall_script = getModuleUninstallScriptPath($name, true);
-            $uninstall_script2 = getModuleUninstallScriptPath2($name, true);
-            // Uninstall Script ausführen, sofern vorhanden
-            $mainController = ModuleHelper::getMainController($name);
-            if ($mainController and method_exists($mainController, "uninstall")) {
-                $mainController->uninstall();
-            } else if (is_file($uninstall_script)) {
-                require $uninstall_script;
-            } else if (is_file($uninstall_script2)) {
-                require $uninstall_script2;
+    switch ($type) {
+        case "module":
+            $moduleDir = getModulePath($name, true);
+            // Modul-Ordner entfernen
+            if (is_dir($moduleDir)) {
+                $uninstall_script = getModuleUninstallScriptPath($name, true);
+                $uninstall_script2 = getModuleUninstallScriptPath2($name, true);
+                // Uninstall Script ausführen, sofern vorhanden
+                $mainController = ModuleHelper::getMainController($name);
+                if ($mainController and method_exists($mainController, "uninstall")) {
+                    $mainController->uninstall();
+                } else if (is_file($uninstall_script)) {
+                    require $uninstall_script;
+                } else if (is_file($uninstall_script2)) {
+                    require $uninstall_script2;
+                }
+                sureRemoveDir($moduleDir, true);
+                clearCache();
+                return !is_dir($moduleDir);
             }
-            sureRemoveDir($moduleDir, true);
-            clearCache();
-            return !is_dir($moduleDir);
-        }
-    } else if ($type === "theme") {
-        $cTheme = Settings::get("theme");
-        $allThemes = getThemeList();
-        if (faster_in_array($name, $allThemes) and $cTheme !== $name) {
-            $theme_path = getTemplateDirPath($name, true);
-            sureRemoveDir($theme_path, true);
-            clearCache();
-            return !is_dir($theme_path);
-        }
+            break;
+        case "theme":
+            $cTheme = Settings::get("theme");
+            $allThemes = getThemeList();
+
+            if (faster_in_array($name, $allThemes) and $cTheme !== $name) {
+                $theme_path = getTemplateDirPath($name, true);
+                sureRemoveDir($theme_path, true);
+                clearCache();
+                return !is_dir($theme_path);
+            }
+            break;
     }
 
     return false;

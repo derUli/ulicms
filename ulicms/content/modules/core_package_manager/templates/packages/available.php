@@ -16,24 +16,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
         <?php require "inc/loadspinner.php"; ?>
     </div>
     <div id="pkglist" data-url="<?php echo ModuleHelper::buildMethodCallUrl(PackageController::class, "availablePackages"); ?>"></div>
-    <script type="text/javascript">
-
-        // TODO: Move this to external js file
-        $(function () {
-            $("div#loadpkg").slideDown();
-            var container = $("div#pkglist");
-            $.get(container.data("url"), function (result) {
-                $("div#loadpkg").slideUp();
-                $(container).html(result);
-                $(container).slideDown();
-                $(container).find(".tablesorter").DataTable({
-                    language: {
-                        url: $("body").data("datatables-translation")
-                    },
-                    columnDefs: [{targets: "no-sort", orderable: false}]
-                });
-            });
-        });
-    </script>
     <?php
+    enqueueScriptFile(ModuleHelper::buildRessourcePath("core_package_manager", "js/available.js"));
+    combinedScriptHtml();
 }

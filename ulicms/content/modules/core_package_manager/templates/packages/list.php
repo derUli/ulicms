@@ -64,7 +64,6 @@ if ($permissionChecker->hasPermission("list_packages")) {
                                             class="fas fa-info-circle"></i> </a>
                                         <?php
                                         $canToggleModule = (getModuleMeta($module->getName(), "source") != "core" and $permissionChecker->hasPermission("enable_disable_module"));
-                                        // FIXME: add permission for enabling and disabling modules
                                         echo ModuleHelper::buildMethodCallForm(PackageController::class, "toggleModule", array(
                                             "name" => $module->getName()
                                                 ), RequestMethod::POST, array(
