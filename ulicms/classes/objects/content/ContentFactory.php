@@ -105,7 +105,7 @@ class ContentFactory {
         }
         if ($category_id !== null and $category_id !== 0) {
             $category_id = intval($category_id);
-            $sql .= "category = $category_id and ";
+            $sql .= "category_id = $category_id and ";
         }
         if ($menu !== null and $menu !== "") {
             $menu = Database::escapeValue($menu);
@@ -165,10 +165,10 @@ class ContentFactory {
         return $result;
     }
 
-    public static function filterByCategory($elements, $category = 1) {
+    public static function filterByCategory($elements, $category_id = 1) {
         $result = array();
         foreach ($elements as $element) {
-            if ($element->category == $category) {
+            if ($element->category_id == $category_id) {
                 $result[] = $element;
             }
         }

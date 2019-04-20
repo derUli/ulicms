@@ -10,7 +10,7 @@ class Page extends Content {
     public $title = "";
     public $alternate_title = "";
     public $target = "_self";
-    public $category = 1;
+    public $category_id = 1;
     public $content = "";
     public $language = "de";
     public $menu_image = null;
@@ -57,7 +57,7 @@ class Page extends Content {
         $this->title = $result->title;
         $this->alternate_title = $result->alternate_title;
         $this->target = $result->target;
-        $this->category = $result->category;
+        $this->category_id = $result->category_id;
         $this->content = $result->content;
         $this->language = $result->language;
         $this->menu_image = $result->menu_image;
@@ -136,7 +136,7 @@ class Page extends Content {
     }
 
     public function create() {
-        $sql = "INSERT INTO `" . tbname("content") . "` (systemname, title, alternate_title, target, category,
+        $sql = "INSERT INTO `" . tbname("content") . "` (systemname, title, alternate_title, target, category_id,
 				content, language, menu_image, active, created, lastmodified, author_id,
 				`group_id`, lastchangeby, views, menu, position, parent, access, meta_description, meta_keywords, deleted_at,
 				theme, custom_data, `type`, og_title, og_type, og_image, og_description, cache_control, hidden, comments_enabled) VALUES (";
@@ -145,7 +145,7 @@ class Page extends Content {
         $sql .= "'" . Database::escapeValue($this->title) . "',";
         $sql .= "'" . Database::escapeValue($this->alternate_title) . "',";
         $sql .= "'" . Database::escapeValue($this->target) . "',";
-        $sql .= intval($this->category) . ",";
+        $sql .= intval($this->category_id) . ",";
         $sql .= "'" . Database::escapeValue($this->content) . "',";
         $sql .= "'" . Database::escapeValue($this->language) . "',";
 
@@ -233,7 +233,7 @@ class Page extends Content {
         $sql .= "title='" . Database::escapeValue($this->title) . "',";
         $sql .= "alternate_title='" . Database::escapeValue($this->alternate_title) . "',";
         $sql .= "target='" . Database::escapeValue($this->target) . "',";
-        $sql .= "category = " . intval($this->category) . ",";
+        $sql .= "category_id = " . intval($this->category_id) . ",";
         $sql .= "content='" . Database::escapeValue($this->content) . "',";
         $sql .= "language='" . Database::escapeValue($this->language) . "',";
 

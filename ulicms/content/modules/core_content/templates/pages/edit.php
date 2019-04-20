@@ -285,7 +285,7 @@ if ($permissionChecker->hasPermission("pages")) {
                         </select> <br /> <br />
                     </div>
                     <strong><?php translate("category"); ?> </strong><br />
-                    <?php echo Categories::getHTMLSelect($row->category); ?>
+                    <?php echo Categories::getHTMLSelect($row->category_id); ?>
                     <div id="menu_image_div" class="voffset3">
                         <strong><?php translate("menu_image"); ?> </strong><br />
                         <script type="text/javascript">

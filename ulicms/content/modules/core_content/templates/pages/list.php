@@ -402,7 +402,7 @@ if ($permissionChecker->hasPermission("pages")) {
         }
 
         if ($_SESSION["filter_category"] != 0) {
-            $filter_sql .= "AND category=" . intval($_SESSION["filter_category"]) . " ";
+            $filter_sql .= "AND category_id=" . intval($_SESSION["filter_category"]) . " ";
         }
 
         $filter_sql .= "AND " . $filter_status . " ";

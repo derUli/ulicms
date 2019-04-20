@@ -258,11 +258,11 @@ function get_category_id($page = null) {
         $page = get_requested_pagename();
     }
     $result = null;
-    $sql = "SELECT `category` FROM " . tbname("content") . " WHERE systemname='" . db_escape($page) . "'  AND language='" . db_escape(getCurrentLanguage()) . "'";
+    $sql = "SELECT `category_id` FROM " . tbname("content") . " WHERE systemname='" . db_escape($page) . "'  AND language='" . db_escape(getCurrentLanguage()) . "'";
     $query = db_query($sql);
     if ($query and db_num_rows($query) > 0) {
         $result = db_fetch_object($query);
-        $result = $result->category;
+        $result = $result->category_id;
     }
     return $result;
 }
