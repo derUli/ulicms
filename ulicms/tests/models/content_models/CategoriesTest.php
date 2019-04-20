@@ -1,4 +1,5 @@
 <?php
+
 use UliCMS\Exceptions\NotImplementedException;
 
 class CategoriesTest extends \PHPUnit\Framework\TestCase {
@@ -41,7 +42,27 @@ class CategoriesTest extends \PHPUnit\Framework\TestCase {
 
         $this->assertEquals("Allgemein", $categories[0]->getName());
     }
-public function testGetHTMLSelect(){
-    throw new NotImplementedException();
-}
+
+    public function testGetHTMLSelectWithAllowNullWithoutDefault() {
+        $this->assertStringContainsString(
+                "<option value='0' selected='selected'>[" .
+                get_translation("every") . "]</option>",
+                Categories::getHTMLSelect(0, true));
+    }
+
+    public function testGetHTMLSelectWithAllowNullWithDefault() {
+        $this->assertStringContainsString(
+                "<option value='0'>[" . get_translation("every") .
+                "]</option>",
+                Categories::getHTMLSelect(1, true));
+    }
+
+    public function testGetHTMLSelectWithCustomFieldName() {
+        $this->assertStringContainsString("<select name='my_field_name' id='my_field_name' size='1'>",
+                Categories::getHTMLSelect(1, true, "my_field_name"));
+    }
+    public function testGetHTMLSelectWithoutCustomFieldName() {
+        $this->assertStringContainsString("<select name='category_id' id='category_id' size='1'>",
+                Categories::getHTMLSelect(1, true));
+    }
 }

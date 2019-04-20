@@ -23,7 +23,7 @@ class Categories {
         $html = "<select name='" . $name . "' id='$name' size='1'>";
         if ($allowNull) {
             if (!$default) {
-                $html .= "<option value='0' selected='selected' >[" . get_translation("every") . "]</option>";
+                $html .= "<option value='0' selected='selected'>[" . get_translation("every") . "]</option>";
             } else {
                 $html .= "<option value='0'>[" . get_translation("every") . "]</option>";
             }
