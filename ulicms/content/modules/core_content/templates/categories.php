@@ -56,30 +56,30 @@ if (!is_admin() and ! $permissionChecker->hasPermission("categories")) {
                     <?php
                     foreach ($categories as $category) {
                         ?>
-                        <tr id="dataset-<?php echo $category["id"]; ?>">
+                    <tr id="dataset-<?php echo $category->getID(); ?>">
                             <td><?php
-            echo $category["id"];
+            echo $category->getId();
                         ?></td>
                             <td style="padding-right: 20px;"><?php
-                                esc($category["name"]);
+                                esc($category->getName());
                                 ?></td>
                             <td style="padding-right: 20px;" class="hide-on-mobile"><?php
-                                echo nl2br(_esc($category["description"]));
+                                echo nl2br(_esc($category->getDescription()));
                                 ?></td>
                                 <?php
                                 if ($permissionChecker->hasPermission("categories_edit")) {
                                     ?>
                                 <td style="text-align: center;"><a
-                                        href="?action=categories&edit=<?php echo $category ["id"]; ?>"><img
+                                        href="?action=categories&edit=<?php echo $category->getID(); ?>"><img
                                             src="gfx/edit.png" class="mobile-big-image"
                                             alt="<?php translate("edit"); ?>"
                                             title="<?php translate("edit"); ?>"></a></td>
                 <?php
-                if ($category["id"] != 1) {
+                if ($category->getId() != 1) {
                     ?>
                                     <td style="text-align: center;"><form
                                             action="?sClass=CategoryController&sMethod=delete&del=<?php
-                                        echo $category["id"];
+                                        echo $category->getId();
                                         ?>"
                                             method="post" class="delete-form"><?php csrf_token_html(); ?><input
                                                 type="image" class="mobile-big-image" src="gfx/delete.gif"
