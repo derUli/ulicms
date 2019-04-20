@@ -136,7 +136,7 @@ function exception_handler($exception) {
 
     // TODO: useful error message if $debug is disabled
     // Log exception into a text file
-    $message = !is_null($cfg) && is_true($cfg->debug) ? $exception : "An error occurred! See exception_log for details. ðŸ˜ž";
+    $message = !is_null($cfg) && is_true($cfg->debug) ? $exception : "An error occurred! See exception_log for details. 😞";
 
     $logger = LoggerRegistry::get("exception_log");
     if ($logger) {
@@ -242,10 +242,10 @@ if (!is_file($htaccessLogFolderTarget)) {
 }
 
 // umask setzen
-// Die umask legt die Standarddateirechte fÃ¼r neue Dateien auf Unix Systemen fest
+// Die umask legt die Standarddateirechte für neue Dateien auf Unix Systemen fest
 // Die Variable $umask sollte nur gesetzt werden, sofern es zu Berechtigungsproblemen bei durch UliCMS generierten Dateien kommt.
 // umask lÃ¤sst sich wie folgt berechnen
-// 0777 - X = gewÃ¼nschte Berechtigung
+// 0777 - X = gewünschte Berechtigung
 // X ist die umask
 // Eine umask von 0022 erzeugt z.B. Ordner mit chmod 0755 und Dateien mit chmod 0655
 if (isset($config->umask)) {
@@ -359,7 +359,7 @@ if (isset($config->log_requests) and $config->log_requests == true) {
 
 $cache_period = Settings::get("cache_period");
 
-// PrÃ¼fen ob Cache GÃ¼ltigkeitsdauer gesetzt ist.
+// Prüfen ob Cache Gültigkeitsdauer gesetzt ist.
 // Ansonsten auf Standardwert setzen
 if ($cache_period === false) {
     setconfig("cache_period", ONE_DAY_IN_SECONDS);
