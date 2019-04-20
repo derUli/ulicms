@@ -64,7 +64,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         $content1->title = 'Unit Test ' . uniqid();
         $content1->systemname = 'unit-test-' . uniqid();
         $content1->language = 'de';
-        $content->content = "even more text";
+        $content1->content = "even more text";
         $content1->comments_enabled = false;
         $content1->author_id = 1;
         $content1->group_id = 1;

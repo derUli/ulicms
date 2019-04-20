@@ -1088,7 +1088,7 @@ function replaceShortcodesWithModules($string, $replaceOther = true) {
         ob_start();
         motto();
         $string = str_ireplace('[slogan]', ob_get_clean(), $string);
-        $current_page = get_page();
+
         $string = str_ireplace('[category]', get_category(), $string);
         $token = get_csrf_token_html();
 

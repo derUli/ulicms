@@ -258,9 +258,9 @@ function get_category_id($page = null) {
         $page = get_requested_pagename();
     }
     $result = null;
-    $sql = "SELECT `category` FROM " . tbname("content") . " WHERE systemname='" . db_escape($page) . "'  AND language='" . db_escape($_SESSION["language"]) . "'";
+    $sql = "SELECT `category` FROM " . tbname("content") . " WHERE systemname='" . db_escape($page) . "'  AND language='" . db_escape(getCurrentLanguage()) . "'";
     $query = db_query($sql);
-    if (db_num_rows($query) > 0) {
+    if ($query and db_num_rows($query) > 0) {
         $result = db_fetch_object($query);
         $result = $result->category;
     }
@@ -409,6 +409,9 @@ function language_selection() {
 
 function get_category() {
     $current_page = get_page();
+    if(!$current_page["category"]){
+	return null;
+    }
     return Categories::getCategoryById($current_page["category"]);
 }
 
