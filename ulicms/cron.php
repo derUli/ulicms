@@ -35,8 +35,6 @@ if (! defined("LOADED_LANGUAGE_FILE")) {
 }
 
 if (Settings::get("delete_ips_after_48_hours")) {
-    Database::query("Update " . tbname("log") . " SET ip = NULL WHERE DATEDIFF(NOW(), zeit) >= 2");
-    
     $keep_spam_ips = Settings::get("keep_spam_ips");
     Comment::deleteIpsAfter48Hours($keep_spam_ips);
 }

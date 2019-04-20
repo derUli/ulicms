@@ -412,9 +412,11 @@ add_translation("HTML5_VIDEO_WIDTH_100_PERCENT", "100 % Breite für HTML 5 Video
 
 // Protokoll
 add_translation("LOG", "Protokoll");
-add_translation("LOG_IP_ADDRESSES", "IP-Adressen speichern");
+add_translation("IP_ADDRESSES", "IP-Adressen");
+add_translation("LOG_IP_ADDRESSES", "IP-Adressen von Kommentatoren speichern");
 add_translation("LOG_IP_ADDRESSES_NOTICE", "<strong>Achtung!</strong><br>Dies stellt mitunter einen Verstoß gegen das Datenschutzgesetz dar.");
-add_translation("LOG_IP_INFORMATION", "Das Protokoll wird in der Datenbanktabelle " . tbname("log") . " gespeichert. Sie können es z.B. mit phpMyAdmin oder sql_console anzeigen.");
+add_translation("LOG_IP_INFORMATION", "Diese Einstellungen beziehen sich auf"
+        . "die Daten von Kommentatoren.");
 
 // additional_menus
 add_translation("ADDITIONAL_MENUS", "Zusätzliche Menüs (Semikolon-getrennt)");

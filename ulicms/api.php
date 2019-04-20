@@ -401,27 +401,6 @@ function get_html_editor() {
     }
 }
 
-// Den aktuellen HTTP Request in der `log` Tabelle protokollieren
-function log_request($save_ip = false) {
-    do_event("before_log_request");
-    if ($save_ip) {
-        $ip = get_ip();
-    } else {
-        $ip = "";
-    }
-
-    $ip = db_escape($ip);
-    $request_method = db_escape(get_request_method());
-    $useragent = db_escape(get_useragent());
-    $request_uri = db_escape(get_request_uri());
-    $http_host = db_escape(get_http_host());
-    $referrer = db_escape(get_referrer());
-
-    db_query("INSERT INTO " . tbname("log") . " (ip, request_method, useragent, request_uri, http_host, referrer) VALUES('$ip', '$request_method', '$useragent', '$request_uri','$http_host', '$referrer')");
-
-    do_event("after_log_request");
-}
-
 // Prüfen, ob Anti CSRF Token vorhanden ist
 // Siehe http://de.wikipedia.org/wiki/Cross-Site-Request-Forgery
 function check_csrf_token() {
