@@ -168,7 +168,6 @@ class ACL
         $acl_data["spam_filter"] = null;
         $acl_data["cache"] = null;
         $acl_data["motd"] = null;
-        $acl_data["pkg_settings"] = null;
         $acl_data["languages"] = null;
         $acl_data["logo"] = null;
         $acl_data["favicon"] = null;

@@ -24,6 +24,7 @@ Fehlerkorrekturen:
 
 Entfernte Features:
 * Request Logs
+* Ändern der Paketquelle
 
 ===== Neues in UliCMS 2019.2.6 =====
 

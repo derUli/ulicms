@@ -1,20 +1,13 @@
 <?php
+
 use UliCMS\Services\Connectors\PackageSourceConnector;
 
 class PackageManager {
 
-    private $package_source;
-
-    public function __construct() {
-        $cfg = new CMSConfig();
-        $this->package_source = Settings::get("pkg_src");
-        $this->package_source = $this->replacePlaceHolders($this->package_source);
-    }
-
     public function checkForNewerVersionOfPackage($name) {
-       $connector = new PackageSourceConnector();
-       $connector->fetch(true);
-       return $connector->getVersionOfPackage($name);
+        $connector = new PackageSourceConnector();
+        $connector->fetch(true);
+        return $connector->getVersionOfPackage($name);
     }
 
     public function splitPackageName($name) {
@@ -194,14 +187,6 @@ class PackageManager {
         } else {
             return null;
         }
-    }
-
-    public function getPackageSource() {
-        return $this->package_source;
-    }
-
-    public function setPackageSource($url) {
-        $this->package_source = $url;
     }
 
 }

@@ -28,7 +28,6 @@
         "spam_filter",
         "cache",
         "motd",
-        "pkg_settings",
         "logo",
         "languages",
         "other",
