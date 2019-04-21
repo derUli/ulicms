@@ -4,7 +4,10 @@ use UliCMS\HTML\Input;
 use UliCMS\HTML\ListItem;
 
 $languages = getAllLanguages();
-$errorCodes = array(403, 404);
+$errorCodes = array(
+    403 => get_translation("forbidden"),
+    404 => get_translation("not_found")
+);
 ?>
 <p>
     <a
@@ -18,9 +21,9 @@ $errorCodes = array(403, 404);
 <?php
 echo ModuleHelper::buildMethodCallForm(ErrorPagesController::class, "save");
 ?>
-<?php foreach ($errorCodes as $code) {
+<?php foreach ($errorCodes as $code => $error) {
     ?>
-    <h3><?php esc($code); ?></h3>
+    <h3><?php esc("{$error} (Status {$code})"); ?></h3>
     <table class="tablesorter">
         <thead>
             <tr>
@@ -43,7 +46,8 @@ echo ModuleHelper::buildMethodCallForm(ErrorPagesController::class, "save");
                         <?php esc(getLanguageNameByCode($language)); ?></td>
 
                     <td>
-                        <?php echo Input::SingleSelect("error_page[{$code}][{$language}]", Settings::getLanguageSetting("error_page_{$code}", $language),
+                        <?php
+                        echo Input::SingleSelect("error_page[{$code}][{$language}]", Settings::getLanguageSetting("error_page_{$code}", $language),
                                 $items);
                         ?>
 

@@ -44,3 +44,4 @@ add_translation("footer", "Footer");
 add_translation("edit_footer_text", "Footer Text bearbeiten");
 
 add_translation("error_pages", "Fehlerseiten");
+add_translation("not_found", "Nicht gefunden");

@@ -46,3 +46,4 @@ add_translation("edit_footer_text", "Edit Footer Text");
 
 
 add_translation("error_pages", "Error Pages");
+add_translation("not_found", "Not Found");
