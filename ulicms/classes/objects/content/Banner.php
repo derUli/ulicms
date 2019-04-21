@@ -11,7 +11,7 @@ class Banner
 
     public $image_url = "";
 
-    public $category = 1;
+    public $category_id = 1;
 
     private $type = "gif";
 
@@ -60,7 +60,7 @@ class Banner
         $this->name = $result->name;
         $this->link_url = $result->link_url;
         $this->image_url = $result->image_url;
-        $this->category = $result->category;
+        $this->category_id = $result->category_id;
         $this->type = $result->type;
         $this->html = $result->html;
         $this->language = $result->language;
@@ -105,7 +105,7 @@ class Banner
         if ($this->id != null) {
             return $this->update();
         }
-        $sql = "INSERT INTO " . tbname("banner") . "(name, link_url, image_url, category, type, html, language, date_from, date_to, enabled) values (";
+        $sql = "INSERT INTO " . tbname("banner") . "(name, link_url, image_url, category_id, type, html, language, date_from, date_to, enabled) values (";
         if ($this->name === null) {
             $sql .= "NULL, ";
         } else {
@@ -121,10 +121,10 @@ class Banner
         } else {
             $sql .= "'" . Database::escapeValue($this->image_url) . "',";
         }
-        if ($this->category === null) {
+        if ($this->category_id === null) {
             $sql .= "NULL, ";
         } else {
-            $sql .= "'" . intval($this->category) . "',";
+            $sql .= "'" . intval($this->category_id) . "',";
         }
         if ($this->type === null) {
             $sql .= "NULL, ";
@@ -186,10 +186,10 @@ class Banner
         } else {
             $sql .= "image_url='" . Database::escapeValue($this->image_url) . "',";
         }
-        if ($this->category === null) {
-            $sql .= "category=NULL, ";
+        if ($this->category_id === null) {
+            $sql .= "category_id=NULL, ";
         } else {
-            $sql .= "category='" . intval($this->category) . "',";
+            $sql .= "category_id='" . intval($this->category_id) . "',";
         }
         if ($this->type === null) {
             $sql .= "`type`=NULL, ";

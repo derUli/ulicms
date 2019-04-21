@@ -401,27 +401,6 @@ function get_html_editor() {
     }
 }
 
-// Den aktuellen HTTP Request in der `log` Tabelle protokollieren
-function log_request($save_ip = false) {
-    do_event("before_log_request");
-    if ($save_ip) {
-        $ip = get_ip();
-    } else {
-        $ip = "";
-    }
-
-    $ip = db_escape($ip);
-    $request_method = db_escape(get_request_method());
-    $useragent = db_escape(get_useragent());
-    $request_uri = db_escape(get_request_uri());
-    $http_host = db_escape(get_http_host());
-    $referrer = db_escape(get_referrer());
-
-    db_query("INSERT INTO " . tbname("log") . " (ip, request_method, useragent, request_uri, http_host, referrer) VALUES('$ip', '$request_method', '$useragent', '$request_uri','$http_host', '$referrer')");
-
-    do_event("after_log_request");
-}
-
 // Prüfen, ob Anti CSRF Token vorhanden ist
 // Siehe http://de.wikipedia.org/wiki/Cross-Site-Request-Forgery
 function check_csrf_token() {
@@ -1423,43 +1402,45 @@ function uninstall_module($name, $type = "module") {
         return false;
     }
 
-    $name = trim($name);
-    $name = basename($name);
-    $name = trim($name);
+    $name = trim(basename(trim($name)));
 
     // Verhindern, dass der Modulordner oder gar das ganze
     // CMS gelöscht werden kann
     if ($name == "." or $name == ".." or empty($name)) {
         return false;
     }
-    if ($type === "module") {
-        $moduleDir = getModulePath($name, true);
-        // Modul-Ordner entfernen
-        if (is_dir($moduleDir)) {
-            $uninstall_script = getModuleUninstallScriptPath($name, true);
-            $uninstall_script2 = getModuleUninstallScriptPath2($name, true);
-            // Uninstall Script ausführen, sofern vorhanden
-            $mainController = ModuleHelper::getMainController($name);
-            if ($mainController and method_exists($mainController, "uninstall")) {
-                $mainController->uninstall();
-            } else if (is_file($uninstall_script)) {
-                require $uninstall_script;
-            } else if (is_file($uninstall_script2)) {
-                require $uninstall_script2;
+    switch ($type) {
+        case "module":
+            $moduleDir = getModulePath($name, true);
+            // Modul-Ordner entfernen
+            if (is_dir($moduleDir)) {
+                $uninstall_script = getModuleUninstallScriptPath($name, true);
+                $uninstall_script2 = getModuleUninstallScriptPath2($name, true);
+                // Uninstall Script ausführen, sofern vorhanden
+                $mainController = ModuleHelper::getMainController($name);
+                if ($mainController and method_exists($mainController, "uninstall")) {
+                    $mainController->uninstall();
+                } else if (is_file($uninstall_script)) {
+                    require $uninstall_script;
+                } else if (is_file($uninstall_script2)) {
+                    require $uninstall_script2;
+                }
+                sureRemoveDir($moduleDir, true);
+                clearCache();
+                return !is_dir($moduleDir);
             }
-            sureRemoveDir($moduleDir, true);
-            clearCache();
-            return !is_dir($moduleDir);
-        }
-    } else if ($type === "theme") {
-        $cTheme = Settings::get("theme");
-        $allThemes = getThemeList();
-        if (faster_in_array($name, $allThemes) and $cTheme !== $name) {
-            $theme_path = getTemplateDirPath($name, true);
-            sureRemoveDir($theme_path, true);
-            clearCache();
-            return !is_dir($theme_path);
-        }
+            break;
+        case "theme":
+            $cTheme = Settings::get("theme");
+            $allThemes = getThemeList();
+
+            if (faster_in_array($name, $allThemes) and $cTheme !== $name) {
+                $theme_path = getTemplateDirPath($name, true);
+                sureRemoveDir($theme_path, true);
+                clearCache();
+                return !is_dir($theme_path);
+            }
+            break;
     }
 
     return false;

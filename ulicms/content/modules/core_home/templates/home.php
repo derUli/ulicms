@@ -71,7 +71,7 @@ if ($permissionChecker->hasPermission("dashboard")) {
                                class="js-switch"
                                data-url="<?php esc(ModuleHelper::buildMethodCallUrl(PageController::class, "toggleShowPositions")); ?>" value="1"
                                <?php
-                               if (Settings::get("user/" . get_user_id() . " / show_positions"))
+                               if (Settings::get("user/" . get_user_id() . "/show_positions"))
                                    echo "checked";
                                ?>>
                         <?php translate("show_positions_in_menus"); ?></label>
@@ -181,8 +181,7 @@ if ($permissionChecker->hasPermission("dashboard")) {
                 </tr>
             </table>
         </div>
-        <h2 class="accordion-header"><?php translate("last_changes"); ?>
-        </h2>
+        <h2 class="accordion-header"><?php translate("last_changes"); ?></h2>
         <div class="accordion-content">
             <table cellpadding="2">
                 <tr style="font-weight: bold;">

@@ -31,7 +31,7 @@ body {
     margin: 0;
     padding: 0;
     -ms-overflow-style: scrollbar;
-}
+}  
 
 
 
@@ -79,7 +79,9 @@ fieldset[disabled] {
 .icon {
     font-size: 15px;
 }
-img.responsive-image {
+img.responsive-image,
+#ulicms-feed img
+{
     max-width: 100%;
     height: auto;
 }

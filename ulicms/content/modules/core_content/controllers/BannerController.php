@@ -18,7 +18,7 @@ class BannerController extends Controller
         $banner->name = strval($_POST["banner_name"]);
         $banner->image_url = strval($_POST["image_url"]);
         $banner->link_url = strval($_POST["link_url"]);
-        $banner->category = intval($_POST["category"]);
+        $banner->category_id = intval($_POST["category"]);
         $banner->setType($_POST["type"]);
         $banner->html = strval($_POST["html"]);
         
@@ -64,7 +64,7 @@ class BannerController extends Controller
         $banner->name = strval($_POST["banner_name"]);
         $banner->image_url = strval($_POST["image_url"]);
         $banner->link_url = strval($_POST["link_url"]);
-        $banner->category = intval($_POST["category"]);
+        $banner->category_id = intval($_POST["category"]);
         $banner->setType($_POST["type"]);
         $banner->html = strval($_POST["html"]);
         

@@ -290,10 +290,10 @@ $(function () {
                     });
 
     // filter by category
-    $('#page-list #category').on(
+    $('#page-list #category_id').on(
             'change',
             function (e) {
-                var valueSelected = $('#category').val();
+                var valueSelected = $('#category_id').val();
                 location.replace("index.php?action=pages&filter_category="
                         + valueSelected)
             });

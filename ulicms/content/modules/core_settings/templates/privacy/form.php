@@ -74,15 +74,10 @@ if ($permissionChecker->hasPermission("privacy_settings")) {
                 </div>
             </div>
             <h2 class="accordion-header">
-    <?php translate("log"); ?>
+    <?php translate("IP_ADDRESSES"); ?>
             </h2>
 
             <div class="accordion-content">
-                <p>
-                    <?php
-                    translate("LOG_IP_INFORMATION");
-                    ?>
-                </p>
                 <div class="label">
                     <label for="log_ip"> <?php
                     translate("LOG_IP_ADDRESSES");

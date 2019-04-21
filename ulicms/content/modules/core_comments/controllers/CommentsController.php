@@ -67,7 +67,7 @@ class CommentsController extends MainClass {
 
         $comment->setStatus($status);
 
-        // if ip login is disabled (which is a must in countries of the european union)
+        // if ip login is disabled (which is a legal must in countries of the european union)
         // unset the ip field
         if (!Settings::get("log_ip")) {
             $comment->setIp(null);
