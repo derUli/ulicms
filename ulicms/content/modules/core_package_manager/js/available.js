@@ -14,8 +14,11 @@ $(function () {
         });
         $(container).find(".btn-install").click(function (event) {
             event.preventDefault();
-            var url = $(event.target).attr("href");
-            bootbox.confirm("RLY?", function (confirmed) {
+            const url = $(event.target).attr("href");
+            const name = $(event.target).data("name");
+            const message = AvailablePackageTranslation.AskForInstallPackage.replace
+            ("%pkg%", name);
+            bootbox.confirm(message, function (confirmed) {
                 if (confirmed) {
                     location.replace(url);
                 }

@@ -17,6 +17,10 @@ if (!$permissionChecker->hasPermission("install_packages")) {
     </div>
     <div id="pkglist" data-url="<?php echo ModuleHelper::buildMethodCallUrl(PackageController::class, "availablePackages"); ?>"></div>
     <?php
+    $jsTranslation = new JSTranslation(array(), "AvailablePackageTranslation");
+    $jsTranslation->addKey("ASK_FOR_INSTALL_PACKAGE");
+    $jsTranslation->render();
+    
     enqueueScriptFile(ModuleHelper::buildRessourcePath("core_package_manager", "js/available.js"));
     combinedScriptHtml();
 }

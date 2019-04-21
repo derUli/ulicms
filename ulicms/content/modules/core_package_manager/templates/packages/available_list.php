@@ -65,9 +65,10 @@ if ($permissionChecker->hasPermission("install_packages")) {
                                         <?php translate("license"); ?></a>
                                 </td>
                                 <td>
-                                    <a href="<?php esc(ModuleHelper::buildActionURL("install_modules", "packages={$package->name}-{$package->version}")); ?>" 
+                                    <a href="<?php esc(ModuleHelper::buildActionURL("install_modules", "packages={$package->name}-{$package->version}")); ?>"
+                                       data-name="<?php esc("{$package->name} {$package->version}"); ?>"
                                        class="btn btn-primary btn-install">
-                                        <i class="fas fa-download"></i> <?php translate("install"); ?>
+                                       <i class="fas fa-download"></i> <?php translate("install"); ?>
                                     </a>
                                 </td>
                             </tr>
