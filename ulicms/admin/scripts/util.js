@@ -98,3 +98,15 @@ function setWaitCursor() {
 function setDefaultCursor() {
     $('body').css('cursor', 'auto');
 }
+
+function initRemoteAlerts(rootElement){
+        $(rootElement).find(".remote-alert").click(function (event) {
+        event.preventDefault();
+        setWaitCursor();
+        var url = $(this).data("url");
+        $.get(url, function (result) {
+            setDefaultCursor();
+            bootbox.alert(result);
+        });
+    });
+}

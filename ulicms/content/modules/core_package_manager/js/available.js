@@ -11,5 +11,7 @@ $(function () {
             },
             columnDefs: [{targets: "no-sort", orderable: false}]
         });
+        
+    initRemoteAlerts(container);
     });
 });

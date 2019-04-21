@@ -3,6 +3,7 @@
 Neue Features:
 * Minifying von Javascript und Stylesheets optimiert
 * In einigen Backend-Seiten wird nun der Name von Sprachen statt deren Sprachcode angezeigt
+* Verfügbare Pakete: Lizenzen können nun angezeigt werden
 
 Neue API-Methoden:
 * File::getNewestMtime($files)

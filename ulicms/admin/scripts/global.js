@@ -62,15 +62,7 @@ $(function () {
         bootbox.alert("Coming Soon!");
     });
     // Showing a link in an alert box
-    $(".remote-alert").click(function (event) {
-        event.preventDefault();
-        setWaitCursor();
-        var url = $(this).data("url");
-        $.get(url, function (result) {
-            setDefaultCursor();
-            bootbox.alert(result);
-        });
-    });
+    initRemoteAlerts("body");
 
     // dynamically add class form-control to all form elements to
     // make inputs prettier

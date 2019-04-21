@@ -40,7 +40,8 @@ if ($permissionChecker->hasPermission("install_packages")) {
                             <th><?php translate("package"); ?></th>
                             <th><?php translate("version"); ?></th>
                             <th><?php translate("description"); ?></th>
-                            <th class="no-sort"></td>
+                            <th class="no-sort"></th>
+                            <th class="no-sort"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -55,6 +56,13 @@ if ($permissionChecker->hasPermission("install_packages")) {
                                             nl2br($package->description) :
                                             get_translation("no_description_available");
                                     ?>
+                                </td>
+                                <td>
+                                    <a href="#" class="btn btn-info btn-sm remote-alert icon"
+                                       title="<?php translate("info"); ?>"
+                                       data-url="<?php echo ModuleHelper::buildMethodCallUrl(PackageController::class, "getPackageLicense", "name={$package->name}"); ?>">
+                                        <i class="fas fa-balance-scale"></i>
+                                        <?php translate("license"); ?></a>
                                 </td>
                                 <td>
                                     <a href="<?php esc(ModuleHelper::buildActionURL("install_modules", "packages={$package->name}-{$package->version}")); ?>" class="btn btn-primary">
