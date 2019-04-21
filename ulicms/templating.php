@@ -964,5 +964,4 @@ function check_status() {
     return "403 Forbidden";
 }
 
-// load default content types;
 DefaultContentTypes::initTypes();

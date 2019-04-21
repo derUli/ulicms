@@ -73,9 +73,9 @@ class DefaultContentTypes
         self::$types["audio"] = clone self::$types["page"];
         self::$types["audio"]->show[] = "#tab-audio";
         self::$types["audio"]->show[] = "#tab-text-position";
-        if (function_exists("apply_filter")) {
+      
             self::$types = apply_filter(self::$types, "content_types");
-        }
+        
     }
 
     public static function getAll()

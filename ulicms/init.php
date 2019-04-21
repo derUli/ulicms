@@ -416,16 +416,17 @@ if (!is_ssl() and $enforce_https !== false) {
 
 $moduleManager = new ModuleManager();
 Vars::set("disabledModules", $moduleManager->getDisabledModuleNames());
+
 // don't load module stuff on kcfinder page (media)
 // since the "Path" class has a naming conflict with the same named
 // class of KCFinder
-
-require_once dirname(__file__) . "/templating.php";
 
 ModelRegistry::loadModuleModels();
 TypeMapper::loadMapping();
 HelperRegistry::loadModuleHelpers();
 ControllerRegistry::loadModuleControllers();
+
+require_once dirname(__file__) . "/templating.php";
 
 do_event("before_init");
 do_event("init");
