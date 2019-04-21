@@ -1,4 +1,5 @@
 <?php
+use UliCMS\Services\Connectors\PackageSourceConnector;
 
 class PackageManager {
 
@@ -10,20 +11,10 @@ class PackageManager {
         $this->package_source = $this->replacePlaceHolders($this->package_source);
     }
 
-    public function checkForNewerVersionOfPackage($package) {
-        $result = null;
-
-        if (Settings::get("disable_package_update_check")) {
-            return $result;
-        }
-        $url = $this->package_source . "newest_version.php";
-        $url .= "?q=" . urlencode($package);
-
-        $response = @file_get_contents_wrapper($url, false);
-        if ($response and ! empty($response)) {
-            $result = $response;
-        }
-        return $result;
+    public function checkForNewerVersionOfPackage($name) {
+       $connector = new PackageSourceConnector();
+       $connector->fetch(true);
+       return $connector->getVersionOfPackage($name);
     }
 
     public function splitPackageName($name) {
@@ -106,6 +97,7 @@ class PackageManager {
         return $retval;
     }
 
+    // TODO: Reimplement in PackageSourceconnector
     public function installPackage($file, $clear_cache = true) {
         @set_time_limit(0);
         try {
