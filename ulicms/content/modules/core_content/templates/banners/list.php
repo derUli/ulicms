@@ -54,23 +54,23 @@ if ($permissionChecker->hasPermission("banners")) {
                     foreach ($banners as $banner) {
                         ?>
                         <?php
-                        echo '<tr id="dataset-' . $banner->id . '">';
+                        echo '<tr id="dataset-' . $banner->getId() . '">';
                         if ($banner->getType() == "gif") {
-                            $link_url = Template::getEscape($banner->link_url);
-                            $image_url = Template::getEscape($banner->image_url);
-                            $name = Template::getEscape($banner->name);
+                            $link_url = Template::getEscape($banner->getLinkUrl());
+                            $image_url = Template::getEscape($banner->getImageUrl());
+                            $name = Template::getEscape($banner->getName());
                             echo '<td><a href="' . $link_url . '" target="_blank"><img src="' . $image_url . '" title="' . $name . '" alt="' . $name . '" border=0></a></td>';
                         } else {
-                            echo '<td>' . Template::getEscape($banner->html) . '</td>';
+                            echo '<td>' . Template::getEscape($banner->getHtml()) . '</td>';
                         }
-                        if (!$banner->language) {
+                        if (!$banner->getLanguage()) {
                             echo '<td>' . get_translation("every") . '</td>';
                         } else {
-                            echo '<td>' . getLanguageNameByCode($banner->language) . "</td>";
+                            echo '<td>' . getLanguageNameByCode($banner->getLanguage()) . "</td>";
                         }
                         if ($permissionChecker->hasPermission("banners_edit")) {
-                            echo "<td style='text-align:center;'>" . '<a href="index.php?action=banner_edit&banner=' . $banner->id . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . get_translation("edit") . '" title="' . get_translation("edit") . '"></a></td>';
-                            echo "<td style='text-align:center;'>" . '<form action="index.php?sClass=BannerController&sMethod=delete&banner=' . $banner->id . '" method="post" class="delete-form">' . get_csrf_token_html() . '<input type="image" class="mobile-big-image" src="gfx/delete.gif" title="' . get_translation("delete") . '"></form></td>';
+                            echo "<td style='text-align:center;'>" . '<a href="index.php?action=banner_edit&banner=' . $banner->getId() . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . get_translation("edit") . '" title="' . get_translation("edit") . '"></a></td>';
+                            echo "<td style='text-align:center;'>" . '<form action="index.php?sClass=BannerController&sMethod=delete&banner=' . $banner->getId() . '" method="post" class="delete-form">' . get_csrf_token_html() . '<input type="image" class="mobile-big-image" src="gfx/delete.gif" title="' . get_translation("delete") . '"></form></td>';
                         }
                         echo '</tr>';
                     }
@@ -83,8 +83,7 @@ if ($permissionChecker->hasPermission("banners")) {
     enqueueScriptFile(ModuleHelper::buildRessourcePath("core_content", "js/banners.js"));
     combinedScriptHtml();
     ?>
-    <br />
-    <br />
+
     <?php
 } else {
     noPerms();

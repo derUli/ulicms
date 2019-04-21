@@ -6,6 +6,7 @@ use UliCMS\Security\PermissionChecker;
 
 class Template {
 
+// TODO: Rewrite this using the models
     public static function randomBanner() {
         $query = db_query("SELECT name, link_url, image_url, `type`, html FROM " . tbname("banner") . "
 WHERE enabled = 1 and

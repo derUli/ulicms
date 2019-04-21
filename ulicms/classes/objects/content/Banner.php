@@ -2,15 +2,15 @@
 
 class Banner {
 
-    public $id = null;
-    public $name = "";
-    public $link_url = "";
-    public $image_url = "";
-    public $category_id = 1;
+    private $id = null;
+    private $name = "";
+    private $link_url = "";
+    private $image_url = "";
+    private $category_id = 1;
     private $type = "gif";
-    public $html = "";
-    public $language = null;
-    public $enabled = true;
+    private $html = "";
+    private $language = null;
+    private $enabled = true;
     private $date_from = null;
     private $date_to = null;
 
@@ -52,23 +52,6 @@ class Banner {
         $this->enabled = boolval($result->enabled);
         $this->date_from = $result->date_from;
         $this->date_to = $result->date_to;
-    }
-
-    public function setType($type) {
-        $allowedTypes = array(
-            "gif",
-            "html"
-        );
-        if (faster_in_array($type, $allowedTypes)) {
-            $this->type = $type;
-            return true;
-        }
-
-        return false;
-    }
-
-    public function getType() {
-        return $this->type;
     }
 
     public function save() {
@@ -204,7 +187,7 @@ class Banner {
     }
 
     public function getId() {
-        return $this->getId();
+        return $this->id;
     }
 
     public function setDateFrom($val) {
@@ -225,6 +208,31 @@ class Banner {
         } else {
             throw new InvalidArgumentException("not a date and not a timestamp");
         }
+    }
+
+    public function setType($type) {
+        $allowedTypes = array(
+            "gif",
+            "html"
+        );
+        if (faster_in_array($type, $allowedTypes)) {
+            $this->type = $type;
+            return true;
+        }
+
+        return false;
+    }
+
+    public function getType() {
+        return $this->type;
+    }
+
+    public function getHtml() {
+        return $this->html;
+    }
+
+    public function setHtml($val) {
+        $this->html = !is_null($val) ? strval($val) : null;
     }
 
     public function getDateFrom() {
@@ -249,6 +257,38 @@ class Banner {
 
     public function setLanguage($val) {
         $this->language = !is_null($val) ? strval($val) : null;
+    }
+
+    public function getName() {
+        return $this->name;
+    }
+
+    public function setName($val) {
+        $this->name = !is_null($val) ? strval($val) : null;
+    }
+
+    public function getImageUrl() {
+        return $this->image_url;
+    }
+
+    public function setImageUrl($val) {
+        $this->image_url = !is_null($val) ? strval($val) : null;
+    }
+
+    public function getLinkUrl() {
+        return $this->link_url;
+    }
+
+    public function setLinkUrl($val) {
+        $this->link_url = !is_null($val) ? strval($val) : null;
+    }
+
+    public function getEnabled() {
+        return $this->enabled;
+    }
+
+    public function setEnabled($val) {
+        $this->enabled = boolval($val);
     }
 
     public function delete() {

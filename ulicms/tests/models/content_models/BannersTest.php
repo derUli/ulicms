@@ -11,7 +11,7 @@ class BannersTest extends \PHPUnit\Framework\TestCase {
             self::HTML_TEXT2
                 ), true);
 
-        Database::query("DELETE FROM `{prefix}categoris` where title like 'Testkategorie %'", true);
+        Database::query("DELETE FROM `{prefix}categories` where title like 'Testkategorie %'", true);
     }
 
     public function testGetByCategoryExpectEmptyResult() {
@@ -31,20 +31,20 @@ class BannersTest extends \PHPUnit\Framework\TestCase {
 
         $banner1 = new Banner();
         $banner1->setType("html");
-        $banner1->html = self::HTML_TEXT1;
-        $banner1->category_id = $category1->getID();
+        $banner1->setHtml(self::HTML_TEXT1);
+        $banner1->setCategoryId($category1->getID());
         $banner1->save();
 
         $banner2 = new Banner();
         $banner2->setType("html");
-        $banner2->html = self::HTML_TEXT1;
-        $banner2->category_id = $category1->getID();
+        $banner2->setHtml(self::HTML_TEXT1);
+        $banner2->setCategoryId($category1->getID());
         $banner2->save();
 
         $banner3 = new Banner();
         $banner3->setType("gif");
-        $banner3->html = self::HTML_TEXT1;
-        $banner3->category_id = $category2->getID();
+        $banner3->setHtml(self::HTML_TEXT1);
+        $banner3->setCategoryId($category2->getID());
         $banner3->save();
 
         $result1 = Banners::getByCategory($category1->getID());
@@ -89,16 +89,16 @@ class BannersTest extends \PHPUnit\Framework\TestCase {
 
         $banner1 = new Banner();
         $banner1->setType("html");
-        $banner1->html = self::HTML_TEXT1;
-        $banner1->category_id = $category1->getID();
-        $banner1->language = "en";
+        $banner1->setHtml(self::HTML_TEXT1);
+        $banner1->setCategoryId($category1->getID());
+        $banner1->setLanguage("en");
         $banner1->save();
 
         $banner2 = new Banner();
         $banner2->setType("html");
-        $banner2->html = self::HTML_TEXT1;
-        $banner2->category_id = $category1->getID();
-        $banner2->language = "de";
+        $banner2->setHtml(self::HTML_TEXT1);
+        $banner2->setCategoryId($category1->getID());
+        $banner2->setLanguage("de");
         $banner2->save();
 
         $germanBanners = Banners::getByLanguage("de");
