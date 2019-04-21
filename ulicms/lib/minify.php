@@ -113,6 +113,7 @@ function minifyCSS() {
     }
 
     $cacheId = md5((implode(";", $stylesheets)) . $lastmod);
+    
     $cssDir = Path::resolve("ULICMS_ROOT/content/cache/stylesheets");
 
     if (!is_dir($cssDir)) {

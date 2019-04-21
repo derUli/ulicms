@@ -5,13 +5,21 @@ $(function () {
         $("div#loadpkg").slideUp();
         $(container).html(result);
         $(container).slideDown();
+        initRemoteAlerts(container);
         $(container).find(".tablesorter").DataTable({
             language: {
                 url: $("body").data("datatables-translation")
             },
             columnDefs: [{targets: "no-sort", orderable: false}]
         });
-        
-    initRemoteAlerts(container);
+        $(container).find(".btn-install").click(function (event) {
+            event.preventDefault();
+            var url = $(event.target).attr("href");
+            bootbox.confirm("RLY?", function (confirmed) {
+                if (confirmed) {
+                    location.replace(url);
+                }
+            });
+        });
     });
 });

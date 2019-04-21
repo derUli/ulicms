@@ -82,8 +82,13 @@ if (! $permissionChecker->hasPermission ( "install_packages" )) {
 					}
 				}
 			}
-			
-			clearCache ();
+                        
+                        $manager = new ModuleManager();
+                        $manager->sync();
+                        
+			// Disabled because this caused issues 
+                        // with the stylesheet queue on this page
+			//clearCache ();
 			?>
 <p>
 	<a

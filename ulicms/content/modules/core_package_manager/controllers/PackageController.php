@@ -51,7 +51,7 @@ class PackageController extends MainClass {
     }
 
     public function redirectToPackageView() {
-        return ModuleHelper::buildActionURL("packages");
+        Response::redirect(ModuleHelper::buildActionURL("packages"));
     }
 
     public function uninstallModule() {
