@@ -1,10 +1,8 @@
 <?php
 
-class Banners
-{
+class Banners {
 
-    public static function getAll($order = "id")
-    {
+    public static function getAll($order = "id") {
         $result = array();
         $sql = "SELECT id FROM " . tbname("banner") . " ORDER BY $order";
         $query = DB::query($sql);
@@ -16,9 +14,8 @@ class Banners
         return $result;
     }
 
-    public static function getByLanguage($language, $order = "language")
-    {
-        $language = DB::escapeValue($langauge);
+    public static function getByLanguage($language, $order = "language") {
+        $language = DB::escapeValue($language);
         $result = array();
         $sql = "SELECT id FROM " . tbname("banner") . " WHERE language = '$language' ORDER BY $order";
         $query = DB::query($sql);
@@ -30,11 +27,10 @@ class Banners
         return $result;
     }
 
-    public static function getByCategory($category, $order = "id")
-    {
-        $category = intval($category);
+    public static function getByCategory($category_id, $order = "id") {
+        $category_id = intval($category_id);
         $result = array();
-        $sql = "SELECT id FROM " . tbname("banner") . " WHERE `category` = $category ORDER BY $order";
+        $sql = "SELECT id FROM " . tbname("banner") . " WHERE `category_id` = $category_id ORDER BY $order";
         $query = DB::query($sql);
         while ($row = DB::fetchObject($query)) {
             $banner = new Banner();
@@ -44,8 +40,7 @@ class Banners
         return $result;
     }
 
-    public static function getByType($type = "gif", $order = "language")
-    {
+    public static function getByType($type = "gif", $order = "language") {
         $type = DB::escapeValue($type);
         $result = array();
         $sql = "SELECT id FROM " . tbname("banner") . " WHERE `type` = '$type' ORDER BY $order";
@@ -57,4 +52,5 @@ class Banners
         }
         return $result;
     }
+
 }
