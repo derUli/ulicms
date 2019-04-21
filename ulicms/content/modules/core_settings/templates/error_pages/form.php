@@ -11,8 +11,9 @@ $errorCodes = array(
 ?>
 <p>
     <a
-        href = "<?php echo ModuleHelper::buildActionURL("settings_categories"); ?>"
-        class = "btn btn-default btn-back"><i class = "fa fa-arrow-left"></i> <?php translate("back")
+        href="<?php echo ModuleHelper::buildActionURL("settings_simple"); ?>"
+        class="btn btn-default btn-back"><i class= "fa fa-arrow-left"></i> 
+	<?php translate("back")
 ?></a>
 </p>
 
@@ -61,6 +62,9 @@ echo ModuleHelper::buildMethodCallForm(ErrorPagesController::class, "save");
     <?php
 }
 ?>
-<button type="submit" class="btn btn-primary"><?php translate("save"); ?></button>
+<button type="submit" class="btn btn-primary">
+<i class="fa fa-save"></i>
+ <?php translate("save"); ?>
+</button>
 <?php
 echo ModuleHelper::endForm();
