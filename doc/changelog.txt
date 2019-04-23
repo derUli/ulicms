@@ -5,6 +5,7 @@ Neue Features:
 * In einigen Backend-Seiten wird nun der Name von Sprachen statt deren Sprachcode angezeigt
 * Verfügbare Pakete: Lizenzen können nun angezeigt werden
 * "Sprachen" Einstellungen im Backend optisch überarbeitet
+* DataTables: "X Einträge anzeigen" merkt sich nun die letzte Auswahl
 
 Neue API-Methoden:
 * File::getNewestMtime($files)

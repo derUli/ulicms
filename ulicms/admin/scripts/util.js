@@ -99,8 +99,8 @@ function setDefaultCursor() {
     $('body').css('cursor', 'auto');
 }
 
-function initRemoteAlerts(rootElement){
-        $(rootElement).find(".remote-alert").click(function (event) {
+function initRemoteAlerts(rootElement) {
+    $(rootElement).find(".remote-alert").click(function (event) {
         event.preventDefault();
         setWaitCursor();
         var url = $(this).data("url");
@@ -108,5 +108,21 @@ function initRemoteAlerts(rootElement){
             setDefaultCursor();
             bootbox.alert(result);
         });
+    });
+}
+function initDataTables(rootElement) {
+    if (!localStorage.getItem("datablesLength")) {
+        localStorage.setItem("datablesLength", 10);
+    }
+    // Sortable and searchable tables
+    $(rootElement).find(".tablesorter").DataTable({
+        language: {
+            url: $("body").data("datatables-translation"),
+        },
+        columnDefs: [{targets: "no-sort", orderable: false}],
+        pageLength: localStorage.getItem("datablesLength")
+    });
+    $(rootElement).find(".tablesorter").on('length.dt', function (e, settings, len) {
+        localStorage.setItem("datablesLength", len)
     });
 }

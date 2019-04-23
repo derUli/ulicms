@@ -29,13 +29,7 @@ $(function () {
         sLengthSelect: "form-control"
     });
 
-    // Sortable and searchable tables
-    $(".tablesorter").DataTable({
-        language: {
-            url: $("body").data("datatables-translation")
-        },
-        columnDefs: [{targets: "no-sort", orderable: false}]
-    });
+    initDataTables("body");
 
     // password security check
     if (typeof $(".password-security-check").password !== "undefined") {
