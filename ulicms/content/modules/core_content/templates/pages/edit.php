@@ -129,7 +129,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                 onclick="this.select();"><br /> <small><?php translate("snippet_code_help"); ?></small>
                         </div>
                     </div>
-                    <h2 class="accordion-header"><?php translate("type"); ?></h2>
+                    <h2 class="accordion-header"><?php translate("page_type"); ?></h2>
                     <div class="accordion-content">
                         <?php foreach ($types as $type) { ?>
                             <input type="radio" name="type" id="type_<?php echo $type; ?>"
