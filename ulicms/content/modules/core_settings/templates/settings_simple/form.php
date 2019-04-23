@@ -53,6 +53,16 @@ if ($permissionChecker->hasPermission("settings_simple")) {
                        translate("edit");
                        ?></a></td>
         </tr>
+ 	<?php if ($permissionChecker->hasPermission("error_pages")) {
+            ?>
+            <tr>
+                <td><strong><?php translate("error_pages"); ?></strong></td>
+                <td><a href="index.php?action=error_pages"
+                       class="btn btn-default"><i class="fa fa-edit"></i> <?php
+                           translate("edit");
+                           ?></a></td>
+            </tr>
+        <?php } ?>
         <tr>
             <td><strong><?php translate("MAINTENANCE_MODE_ENABLED"); ?></strong></td>
             <td><input type="checkbox" name="maintenance_mode"
@@ -73,16 +83,6 @@ if ($permissionChecker->hasPermission("settings_simple")) {
                        }
                        ?>></td>
         </tr>
-        <?php if ($permissionChecker->hasPermission("error_pages")) {
-            ?>
-            <tr>
-                <td><strong><?php translate("error_pages"); ?></strong></td>
-                <td><a href="index.php?action=error_pages"
-                       class="btn btn-default"><i class="fa fa-edit"></i> <?php
-                           translate("edit");
-                           ?></a></td>
-            </tr>
-        <?php } ?>
         <tr>
             <td><strong><?php
                     translate("enable_password_reset");

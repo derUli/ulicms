@@ -3,6 +3,8 @@
 Neue Features:
 * Minifying von Javascript und Stylesheets optimiert
 * In einigen Backend-Seiten wird nun der Name von Sprachen statt deren Sprachcode angezeigt
+* Verfügbare Pakete: Lizenzen können nun angezeigt werden
+* "Sprachen" Einstellungen im Backend optisch überarbeitet
 
 Neue API-Methoden:
 * File::getNewestMtime($files)
@@ -17,11 +19,13 @@ Neue API-Methoden:
 * compileSCSSToFile($stylesheet)
 
 Fehlerkorrekturen:
+* Custom Types Feature repariert
 * Wenn man ein Modul welches beim Laden der "Pakete" Übersicht deaktiviert war aktiviert, wird nun der Button zum Aufrufen des Moduls sofort und ohne Neuladen der Seite aktiviert
 * Bei Links wird nun wieder in der Seitenliste die Ziel-URL angezeigt
 
 Entfernte Features:
 * Request Logs
+* Einstellungen der Paketquelle
 
 ===== Neues in UliCMS 2019.2.6 =====
 

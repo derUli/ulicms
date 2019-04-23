@@ -1,5 +1,8 @@
 <?php
 
+use UliCMS\Services\Connectors\PackageSourceConnector;
+use function UliCMS\HTML\text;
+
 class PackageController extends MainClass {
 
     const MODULE_NAME = "core_package_manager";
@@ -48,7 +51,7 @@ class PackageController extends MainClass {
     }
 
     public function redirectToPackageView() {
-        return ModuleHelper::buildActionURL("packages");
+        Response::redirect(ModuleHelper::buildActionURL("packages"));
     }
 
     public function uninstallModule() {
@@ -107,6 +110,19 @@ class PackageController extends MainClass {
     public function availablePackages() {
         $html = Template::executeModuleTemplate(self::MODULE_NAME, "packages/available_list.php");
         HtmlResult($html);
+    }
+
+    public function getPackageLicense() {
+        $name = Request::getVar("name");
+        if (!$name) {
+            HTTPStatusCodeResult(HttpStatusCode::UNPROCESSABLE_ENTITY);
+        }
+        $connector = new PackageSourceConnector();
+        $license = $connector->getLicenseOfPackage($name);
+        if (!$license) {
+            HTTPStatusCodeResult(HttpStatusCode::NOT_FOUND);
+        }
+        HTMLResult(text($license));
     }
 
 }

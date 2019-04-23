@@ -7,6 +7,8 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
 
     $allThemes = getThemesList();
     $cols = Database::getColumnNames("content");
+
+    // FIXME: No SQL in Views
     $sql = "SELECT id, name FROM " . tbname("videos");
     $videos = Database::query($sql);
     $sql = "SELECT id, name FROM " . tbname("audio");
@@ -58,12 +60,16 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                 </select>
             </div>
         </div>
-        <h2 class="accordion-header"><?php translate("type"); ?></h2>
+        <h2 class="accordion-header"><?php translate("page_type"); ?></h2>
         <div class="accordion-content">
             <?php foreach ($types as $type) { ?>
                 <input type="radio" name="type" id="type_<?php echo $type; ?>"
                        value="<?php echo $type; ?>"
-                       <?php if ($type == "page") echo "checked"; ?>> <label
+                       <?php
+                       if ($type == "page") {
+                           echo "checked";
+                       }
+                       ?>> <label
                        for="type_<?php echo $type; ?>"><?php translate($type); ?></label> <br />
                    <?php } ?>
 

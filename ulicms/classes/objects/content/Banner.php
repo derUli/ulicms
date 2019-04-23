@@ -1,39 +1,26 @@
 <?php
 
-class Banner
-{
+class Banner {
 
-    public $id = null;
-
-    public $name = "";
-
-    public $link_url = "";
-
-    public $image_url = "";
-
-    public $category_id = 1;
-
+    private $id = null;
+    private $name = "";
+    private $link_url = "";
+    private $image_url = "";
+    private $category_id = 1;
     private $type = "gif";
-
-    public $html = "";
-
-    public $language = null;
-
-    public $enabled = true;
-
+    private $html = "";
+    private $language = null;
+    private $enabled = true;
     private $date_from = null;
-
     private $date_to = null;
 
-    public function __construct($id = null)
-    {
+    public function __construct($id = null) {
         if ($id) {
             $this->loadByID($id);
         }
     }
 
-    public function loadByID($id)
-    {
+    public function loadByID($id) {
         $id = intval($id);
         $query = Database::query("SELECT * FROM `" . tbname("banner") . "` where id = $id");
         if (Database::getNumRows($query) > 0) {
@@ -44,8 +31,7 @@ class Banner
         }
     }
 
-    public function loadRandom()
-    {
+    public function loadRandom() {
         $id = intval($id);
         $query = Database::query("SELECT * FROM `" . tbname("banner") . "` order by rand() LIMIT 1");
         if (Database::getNumRows($query) > 0) {
@@ -54,8 +40,7 @@ class Banner
         }
     }
 
-    private function fillVarsByResult($result)
-    {
+    private function fillVarsByResult($result) {
         $this->id = $result->id;
         $this->name = $result->name;
         $this->link_url = $result->link_url;
@@ -69,39 +54,17 @@ class Banner
         $this->date_to = $result->date_to;
     }
 
-    public function setType($type)
-    {
-        $allowedTypes = array(
-            "gif",
-            "html"
-        );
-        if (faster_in_array($type, $allowedTypes)) {
-            $this->type = $type;
-            return true;
-        }
-        
-        return false;
-    }
-
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    public function save()
-    {
+    public function save() {
         $retval = false;
         if ($this->id != null) {
             $retval = $this->update();
-        }
-        {
+        } {
             $retval = $this->create();
         }
         return $retval;
     }
 
-    public function create()
-    {
+    public function create() {
         if ($this->id != null) {
             return $this->update();
         }
@@ -141,36 +104,35 @@ class Banner
         } else {
             $sql .= "'" . Database::escapeValue($this->language) . "',";
         }
-        
+
         if ($this->date_from === null) {
             $sql .= "NULL, ";
         } else {
             $sql .= "'" . Database::escapeValue($this->date_from) . "',";
         }
-        
+
         if ($this->date_to === null) {
             $sql .= "NULL, ";
         } else {
             $sql .= "'" . Database::escapeValue($this->date_to) . "',";
         }
-        
+
         $sql .= intval($this->enabled);
-        
+
         $sql .= ")";
-        
+
         $result = Database::query($sql);
         $this->id = Database::getLastInsertID();
-        
+
         return $result;
     }
 
-    public function update()
-    {
+    public function update() {
         if ($this->id === null) {
             return $this->create();
         }
         $sql = "UPDATE " . tbname("banner") . " set ";
-        
+
         if ($this->name === null) {
             $sql .= "name=NULL, ";
         } else {
@@ -206,7 +168,7 @@ class Banner
         } else {
             $sql .= "language='" . Database::escapeValue($this->language) . "', ";
         }
-        
+
         if ($this->date_from === null) {
             $sql .= "date_from=NULL, ";
         } else {
@@ -217,15 +179,18 @@ class Banner
         } else {
             $sql .= "date_to='" . Database::escapeValue($this->date_to) . "', ";
         }
-        
+
         $sql .= "enabled = " . intval($this->enabled);
-        
+
         $sql .= " where id = " . intval($this->id);
         return Database::query($sql);
     }
 
-    public function setDateFrom($val)
-    {
+    public function getId() {
+        return $this->id;
+    }
+
+    public function setDateFrom($val) {
         if (is_null($val) or is_string($val)) {
             $this->date_from = $val;
         } else if (is_numeric($val)) {
@@ -235,8 +200,7 @@ class Banner
         }
     }
 
-    public function setDateTo($val)
-    {
+    public function setDateTo($val) {
         if (is_null($val) or is_string($val)) {
             $this->date_to = $val;
         } else if (is_numeric($val)) {
@@ -246,18 +210,88 @@ class Banner
         }
     }
 
-    public function getDateFrom()
-    {
+    public function setType($type) {
+        $allowedTypes = array(
+            "gif",
+            "html"
+        );
+        if (faster_in_array($type, $allowedTypes)) {
+            $this->type = $type;
+            return true;
+        }
+
+        return false;
+    }
+
+    public function getType() {
+        return $this->type;
+    }
+
+    public function getHtml() {
+        return $this->html;
+    }
+
+    public function setHtml($val) {
+        $this->html = !is_null($val) ? strval($val) : null;
+    }
+
+    public function getDateFrom() {
         return $this->date_from;
     }
 
-    public function getDateTo()
-    {
+    public function getDateTo() {
         return $this->date_to;
     }
 
-    public function delete()
-    {
+    public function getCategoryId() {
+        return $this->category_id;
+    }
+
+    public function setCategoryId($val) {
+        $this->category_id = is_numeric($val) ? intval($val) : null;
+    }
+
+    public function getLanguage() {
+        return $this->language;
+    }
+
+    public function setLanguage($val) {
+        $this->language = !is_null($val) ? strval($val) : null;
+    }
+
+    public function getName() {
+        return $this->name;
+    }
+
+    public function setName($val) {
+        $this->name = !is_null($val) ? strval($val) : null;
+    }
+
+    public function getImageUrl() {
+        return $this->image_url;
+    }
+
+    public function setImageUrl($val) {
+        $this->image_url = !is_null($val) ? strval($val) : null;
+    }
+
+    public function getLinkUrl() {
+        return $this->link_url;
+    }
+
+    public function setLinkUrl($val) {
+        $this->link_url = !is_null($val) ? strval($val) : null;
+    }
+
+    public function getEnabled() {
+        return $this->enabled;
+    }
+
+    public function setEnabled($val) {
+        $this->enabled = boolval($val);
+    }
+
+    public function delete() {
         $retval = false;
         if ($this->id !== null) {
             $sql = "DELETE from " . tbname("banner") . " where id = " . $this->id;
@@ -266,5 +300,5 @@ class Banner
         }
         return $retval;
     }
+
 }
-	
