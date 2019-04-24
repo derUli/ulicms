@@ -46,7 +46,7 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
             "../node_modules/select2/dist/js/select2.min.js",
             "../node_modules/bootbox/bootbox.min.js",
             $select2TranslationFile,
-            "scripts/datatables/datatables.min.js",
+            "../node_modules/datatables/media/js/jquery.dataTables.min.js",
             "../lib/js/global.js",
             "../node_modules/jscolor-picker/jscolor.min.js"
         );
@@ -71,7 +71,7 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
               href="scripts/vallenato/vallenato.css" />
 
         <link rel="stylesheet" type="text/css"
-              href="scripts/datatables/datatables.min.css" />
+              href="../node_modules/datatables/media/css/jquery.dataTables.min.css" />
         <link rel="stylesheet"
               href="../node_modules/@fortawesome/fontawesome-free/css/all.min.css" />
               <?php

@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e397d12fb50288bb912cb96c731ab0b7",
+    "content-hash": "3cd0881dae0f418b7ddc3a6a226ea008",
     "packages": [
         {
             "name": "chrisjean/php-ico",
