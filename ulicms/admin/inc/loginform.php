@@ -89,7 +89,7 @@ if (!empty($_REQUEST["go"])) {
     ?>
     <tr>
         <td></td>
-        <td style="padding-top: 10px; text-align: center;">
+        <td class="text-center">
             <button type="submit" class="btn btn-primary">
                 <i class="fas fa-sign-in-alt"></i> <?php translate("login"); ?></button>
         </td>
