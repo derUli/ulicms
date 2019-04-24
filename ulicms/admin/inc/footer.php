@@ -3,6 +3,12 @@ $menuTranslation = new JsTranslation(
         array("logout", "on", "off"), "MenuTranslation");
 $menuTranslation->render();
 
+$globalTranslation = new JsTranslation(
+        array("all"),
+        "GlobalTranslation"
+);
+$globalTranslation->render();
+
 $passwordSecurityTranslation = new JSTranslation(
         array
     (
@@ -11,7 +17,7 @@ $passwordSecurityTranslation = new JSTranslation(
     "good_pass",
     "strong_pass",
     "contains_username",
-    "enter_pass"
+    "enter_pass",
         ),
         "PasswordSecurityTranslation");
 $passwordSecurityTranslation->render();

@@ -752,4 +752,6 @@ add_translation("strong_pass", "Starkes Passwort");
 add_translation("contains_username", "Das Passwort enthält den Benutzernamen");
 add_translation("enter_pass", "Geben Sie Ihr Passwort ein");
 
+add_translation("all", "Alle");
+
 do_event("lang_de");

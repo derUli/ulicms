@@ -100,7 +100,7 @@ if ($permissionChecker->hasPermission("pages")) {
     $menus = getAllMenus(true);
 
     array_unshift($menus, "null");
-    // FIXME: Das SQL hier in einen Controller auslagern
+// FIXME: Das SQL hier in einen Controller auslagern
     $sql = "select a.id as id, a.title as title from " . tbname("content") . " a inner join " . tbname("content") . " b on a.id = b.parent ";
 
     if (faster_in_array($_SESSION["filter_language"], getAllLanguages(true))) {
@@ -125,7 +125,7 @@ if ($permissionChecker->hasPermission("pages")) {
                 <div class="checkbox">
                     <label><input type="checkbox" class="js-switch" name="show_filters" id="show_filters"
                                   value="1" data-url="<?php echo ModuleHelper::buildMethodCallUrl(PageController::class, "toggleFilters"); ?>"
-                                  <?php if ($show_filters) echo "checked"; ?>> <?php translate("show_filters"); ?></label>
+        <?php if ($show_filters) echo "checked"; ?>> <?php translate("show_filters"); ?></label>
                 </div>
             </form>
             <div class="row">
@@ -146,22 +146,22 @@ if ($permissionChecker->hasPermission("pages")) {
                 </div>
             </div>
 
-        <?php } ?>
+    <?php } ?>
 
         <form method="get" action="index.php" class="page-list-filters" style="<?php if (!$show_filters) echo "display:none"; ?>">
             <div class="row">
                 <div class="col-xs-6">
-                    <?php translate("title"); ?>
+    <?php translate("title"); ?>
                     <input type="hidden" name="action" value="pages"> <input
                         type="text" name="filter_title"
                         value="<?php esc($_SESSION["filter_title"]); ?>">
                 </div>
 
                 <div class="col-xs-6">
-                    <?php translate("filter_by_language"); ?>
+    <?php translate("filter_by_language"); ?>
                     <select name="filter_language" onchange="filterByLanguage(this)">
                         <option value="">
-                            <?php translate("please_select"); ?>
+    <?php translate("please_select"); ?>
 
                         </option>
                         <?php
@@ -213,7 +213,7 @@ if ($permissionChecker->hasPermission("pages")) {
                             echo " selected";
                         }
                         ?>>
-                                    <?php translate("standard"); ?>
+                                <?php translate("standard"); ?>
                         </option>
                         <option value="trash"
                         <?php
@@ -221,7 +221,7 @@ if ($permissionChecker->hasPermission("pages")) {
                             echo " selected";
                         }
                         ?>>
-                                    <?php translate("recycle_bin"); ?>
+                                <?php translate("recycle_bin"); ?>
                         </option>
                     </select>
                 </div>
@@ -328,24 +328,24 @@ if ($permissionChecker->hasPermission("pages")) {
                             }
                             ?>>
                                 [<?php
-                                translate("every");
-                                ?>]</option>
+                        translate("every");
+                            ?>]</option>
                             <option value="1"
                             <?php
                             if (1 === $_SESSION["filter_approved"]) {
                                 echo "selected";
                             }
                             ?>><?php
-                                        translate("yes");
-                                        ?></option>
+                                    translate("yes");
+                                    ?></option>
                             <option value="0"
                             <?php
                             if (0 === $_SESSION["filter_approved"]) {
                                 echo "selected";
                             }
                             ?>><?php
-                                        translate("no");
-                                        ?></option>
+                                    translate("no");
+                                    ?></option>
                         </select>
                     </p>
                 </div>
@@ -361,7 +361,7 @@ if ($permissionChecker->hasPermission("pages")) {
                 onclick="return ajaxEmptyTrash(this.href);" class="btn btn-warning">
                 <i class="fa fa-trash" aria-hidden="true"></i>
                 <?php translate("empty_recycle_bin"); ?></a>
-            <?php
+                <?php
         }
         ?>
 
@@ -468,18 +468,11 @@ if ($permissionChecker->hasPermission("pages")) {
 
                         <th class="hide-on-mobile"><?php translate("activated"); ?>
                         </th>
-                        <td style="text-align: center"><?php translate("view"); ?>
+                        <td class="no-sort text-center"><?php translate("view"); ?>
                         </td>
-                        <!--
-                        <?php
-                        if ($permissionChecker->hasPermission("pages_create")) {
-                            ?>
-                                                                                        <td style="text-align: center"><?php translate("clone"); ?>
-                                                                                        </td> -->
-                        <?php } ?>
-                        <td style="text-align: center"><?php translate("edit"); ?>
+                        <td class="no-sort text-center"><?php translate("edit"); ?>
                         </td>
-                        <td style="text-align: center"><?php translate("delete"); ?>
+                        <td class="no-sort text-center"><?php translate("delete"); ?>
                         </td>
 
                     </tr>
@@ -511,7 +504,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                 echo "<td style='text-align:center'></td>";
                             } else {
                                 $url = "../?goid={$row->id}";
-                                echo "<td style='text-align:center'><a href=\"" . $url . "\"><img class=\"mobile-big-image\" src=\"gfx/preview.png\" alt=\"" . get_translation("view") . "\" title=\"" . get_translation("view") . "\"></a></td>";
+                                echo "<td class='text-center'><a href=\"" . $url . "\"><img class=\"mobile-big-image\" src=\"gfx/preview.png\" alt=\"" . get_translation("view") . "\" title=\"" . get_translation("view") . "\"></a></td>";
                             }
 
                             $checker = new ContentPermissionChecker(get_user_id());
@@ -520,10 +513,10 @@ if ($permissionChecker->hasPermission("pages")) {
                             if (!$can_edit_this) {
                                 echo "<td></td><td></td>";
                             } else {
-                                echo "<td style='text-align:center'>" . '<a href="index.php?action=pages_edit&page=' . $row->id . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . get_translation("edit") . '" title="' . get_translation("edit") . '"></a></td>';
+                                echo "<td class='text-center'>" . '<a href="index.php?action=pages_edit&page=' . $row->id . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . get_translation("edit") . '" title="' . get_translation("edit") . '"></a></td>';
 
                                 if ($_SESSION["filter_status"] == "trash") {
-                                    echo "<td style='text-align:center'>";
+                                    echo "<td class='text-center'>";
                                     echo ModuleHelper::buildMethodCallForm("PageController", "undelete", array(
                                         "page" => $row->id
                                             ), "post", array(
@@ -534,7 +527,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                     get_csrf_token_html();
                                     echo '<input type="image" class="mobile-big-image" src="gfx/undelete.png" alt="' . get_translation("recover") . '" title="' . get_translation("recover") . '"></form></td>';
                                 } else {
-                                    echo "<td style='text-align:center'>";
+                                    echo "<td class='text-center'>";
                                     echo ModuleHelper::deleteButton("index.php", array(
                                         "page" => $row->id,
                                         "sClass" => "PageController",

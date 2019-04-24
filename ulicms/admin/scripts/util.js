@@ -51,7 +51,7 @@ function shake(div) {
         left: 0
     }, interval);
 
-}// shake
+}
 
 // this bind an event to a checkbox to toggle a password field between clear
 // text and stars
