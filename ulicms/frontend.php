@@ -252,7 +252,7 @@ if ($cacheAdapter or Settings::get("minify_html")) {
     $generatedHtml = ob_get_clean();
     $generatedHtml = normalizeLN($generatedHtml, "\n");
     $generatedHtml = optimizeHtml($generatedHtml);
-    
+
     echo $generatedHtml;
 
     if ($cacheAdapter and ! defined("EXCEPTION_OCCURRED")) {

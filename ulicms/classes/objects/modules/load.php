@@ -1,4 +1,5 @@
 <?php
+
 $classes = array(
     "Module",
     "ModuleManager"

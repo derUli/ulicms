@@ -1,25 +1,26 @@
 /** This file is part of KCFinder project
-  *
-  *      @desc Miscellaneous functionality
-  *   @package KCFinder
-  *   @version 3.12
-  *    @author Pavel Tzonkov <sunhater@sunhater.com>
-  * @copyright 2010-2014 KCFinder Project
-  *   @license http://opensource.org/licenses/GPL-3.0 GPLv3
-  *   @license http://opensource.org/licenses/LGPL-3.0 LGPLv3
-  *      @link http://kcfinder.sunhater.com
-  */
+ *
+ *      @desc Miscellaneous functionality
+ *   @package KCFinder
+ *   @version 3.12
+ *    @author Pavel Tzonkov <sunhater@sunhater.com>
+ * @copyright 2010-2014 KCFinder Project
+ *   @license http://opensource.org/licenses/GPL-3.0 GPLv3
+ *   @license http://opensource.org/licenses/LGPL-3.0 LGPLv3
+ *      @link http://kcfinder.sunhater.com
+ */
 
-_.orderFiles = function(callBack, selected) {
+_.orderFiles = function (callBack, selected) {
     var order = $.$.kuki.get('order'),
-        desc = ($.$.kuki.get('orderDesc') == "on"),
-        a1, b1, arr;
+            desc = ($.$.kuki.get('orderDesc') == "on"),
+            a1, b1, arr;
 
     if (!_.files || !_.files.sort)
         _.files = [];
 
-    _.files = _.files.sort(function(a, b) {
-        if (!order) order = "name";
+    _.files = _.files.sort(function (a, b) {
+        if (!order)
+            order = "name";
 
         if (order == "date") {
             a1 = a.mtime;
@@ -36,8 +37,10 @@ _.orderFiles = function(callBack, selected) {
         }
 
         if ((order == "size") || (order == "date")) {
-            if (a1 < b1) return desc ? 1 : -1;
-            if (a1 > b1) return desc ? -1 : 1;
+            if (a1 < b1)
+                return desc ? 1 : -1;
+            if (a1 > b1)
+                return desc ? -1 : 1;
         }
 
         if (a1 == b1) {
@@ -50,7 +53,8 @@ _.orderFiles = function(callBack, selected) {
 
         arr = [a1, b1];
         arr = arr.sort();
-        if (arr[0] == a1) return desc ? 1 : -1;
+        if (arr[0] == a1)
+            return desc ? 1 : -1;
         return desc ? -1 : 1;
     });
 
@@ -58,7 +62,7 @@ _.orderFiles = function(callBack, selected) {
     _.initFiles();
 };
 
-_.humanSize = function(size) {
+_.humanSize = function (size) {
     if (size < 1024) {
         size = size.toString() + " B";
     } else if (size < 1048576) {
@@ -77,7 +81,7 @@ _.humanSize = function(size) {
     return size;
 };
 
-_.getURL = function(act) {
+_.getURL = function (act) {
     var url = "browse.php?type=" + encodeURIComponent(_.type) + "&lng=" + encodeURIComponent(_.lang);
     if (_.opener.name)
         url += "&opener=" + encodeURIComponent(_.opener.name);
@@ -88,30 +92,30 @@ _.getURL = function(act) {
     return url;
 };
 
-_.label = function(index, data) {
+_.label = function (index, data) {
     var label = _.labels[index] ? _.labels[index] : index;
     if (data)
-        $.each(data, function(key, val) {
+        $.each(data, function (key, val) {
             label = label.replace("{" + key + "}", val);
         });
     return label;
 };
 
-_.check4errors = function(data) {
+_.check4errors = function (data) {
     if (!data.error)
         return false;
     var msg = data.error.join
-        ? data.error.join("\n")
-        : data.error;
+            ? data.error.join("\n")
+            : data.error;
     _.alert(msg);
     return true;
 };
 
-_.post = function(url, data) {
+_.post = function (url, data) {
     var html = '<form id="postForm" method="post" action="' + url + '">';
-    $.each(data, function(key, val) {
+    $.each(data, function (key, val) {
         if ($.isArray(val))
-            $.each(val, function(i, aval) {
+            $.each(val, function (i, aval) {
                 html += '<input type="hidden" name="' + $.$.htmlValue(key) + '[]" value="' + $.$.htmlValue(aval) + '" />';
             });
         else
@@ -122,7 +126,7 @@ _.post = function(url, data) {
     $('#postForm').get(0).submit();
 };
 
-_.fadeFiles = function() {
+_.fadeFiles = function () {
     $('#files > div').css({
         opacity: "0.4",
         filter: "alpha(opacity=40)"

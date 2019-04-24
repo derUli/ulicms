@@ -1,10 +1,8 @@
 <?php
 
-class SecurityHelper extends Helper
-{
+class SecurityHelper extends Helper {
 
-    public static function securePath($path)
-    {
+    public static function securePath($path) {
         $securedPath = array();
         $path = explode("/", $path);
         foreach ($path as $key => $value) {
@@ -18,4 +16,5 @@ class SecurityHelper extends Helper
         $securedPath = "/" . implode("/", $securedPath);
         return $securedPath;
     }
+
 }

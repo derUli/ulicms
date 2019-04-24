@@ -20,7 +20,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
     $jsTranslation = new JSTranslation(array(), "AvailablePackageTranslation");
     $jsTranslation->addKey("ASK_FOR_INSTALL_PACKAGE");
     $jsTranslation->render();
-    
+
     enqueueScriptFile(ModuleHelper::buildRessourcePath("core_package_manager", "js/available.js"));
     combinedScriptHtml();
 }

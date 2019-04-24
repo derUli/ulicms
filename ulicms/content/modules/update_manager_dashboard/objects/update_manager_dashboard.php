@@ -1,10 +1,8 @@
 <?php
 
-class UpdateManagerDashboard
-{
+class UpdateManagerDashboard {
 
-    public static function anyUpdateAvailable()
-    {
+    public static function anyUpdateAvailable() {
         $pkg = new PackageManager();
         $modules = getAllModules();
         if (count($modules) > 0) {
@@ -18,7 +16,7 @@ class UpdateManagerDashboard
                 }
             }
         }
-        
+
         $themes = getThemeList();
         if (count($themes) > 0) {
             foreach ($themes as $theme) {
@@ -32,7 +30,8 @@ class UpdateManagerDashboard
                 }
             }
         }
-        
+
         return false;
     }
+
 }

@@ -13,7 +13,7 @@ if (!$permissionChecker->hasPermission("forms") or ! $permissionChecker->hasPerm
     <?php echo ModuleHelper::buildMethodCallForm("FormController", "create"); ?>
     <p>
         <strong><?php translate("name"); ?>*</strong><br /> <input type="text"
-                                                                  value="" name="name" required />
+                                                                   value="" name="name" required />
     </p>
     <p>
         <strong><?php translate("enabled"); ?></strong><br /> <select

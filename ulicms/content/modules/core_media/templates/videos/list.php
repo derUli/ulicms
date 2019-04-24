@@ -2,11 +2,11 @@
 $permissionChecker = new ACL();
 
 $video_folder = ULICMS_DATA_STORAGE_ROOT . "/content/videos";
-if (! is_dir($video_folder)) {
+if (!is_dir($video_folder)) {
     mkdir($video_folder);
 }
 
-if (! isset($_SESSION["filter_category"])) {
+if (!isset($_SESSION["filter_category"])) {
     $_SESSION["filter_category"] = 0;
 }
 
@@ -24,139 +24,121 @@ $all_videos = db_query($sql);
 
 if ($permissionChecker->hasPermission("videos")) {
     ?>
-<?php echo Template::executeModuleTemplate("core_media", "icons.php");?>
+    <?php echo Template::executeModuleTemplate("core_media", "icons.php"); ?>
 
-<h1>
-<?php
-    
-    translate("videos");
-    ?>
-</h1>
-<?php translate("category");?>
-<?php
-    
+    <h1>
+        <?php
+        translate("videos");
+        ?>
+    </h1>
+    <?php translate("category"); ?>
+    <?php
     echo Categories::getHTMLSelect($_SESSION["filter_category"], true);
     ?>
-<br />
-<br />
-<?php if($permissionChecker->hasPermission("videos_create")){?>
-<p>
-	<a href="index.php?action=add_video" class="btn btn-default"> <i
-		class="fas fa-upload"></i> <?php
-        
-        translate("upload_video");
-        ?></a>
-</p>
-<?php }?>
-<table class="tablesorter">
-	<thead>
-		<tr>
-			<th><?php
-    
-    translate("id");
-    ?>
-			</th>
-			<th><?php
-    
-    translate("name");
-    ?>
-			</th>
-			<th class="hide-on-mobile"><?php
-    
-    translate("ogg_file");
-    ?>
-			</th>
-			<th class="hide-on-mobile"><?php
-    
-    translate("webm_file");
-    ?>
-			</th>
-			<th class="hide-on-mobile"><?php
-    
-    translate("mp4_file");
-    ?>
-			</th>
-			<?php if($permissionChecker->hasPermission("videos_edit")){?>
-			<td></td>
-			<td></td>
-			<?php }?>
-		</tr>
-	</thead>
-	<tbody>
-	<?php
-    while ($row = db_fetch_object($all_videos)) {
-        ?>
-		<tr id="dataset-<?php echo $row->id;?>">
-			<td><?php
-        
-        echo $row->id;
-        ?>
-			</td>
-			<td><?php
-        
-        esc($row->name);
-        ?>
-			</td>
-			<td class="hide-on-mobile"><?php
-        
-        esc(basename($row->ogg_file));
-        ?>
-			</td>
-			<td class="hide-on-mobile"><?php
-        
-        esc(basename($row->webm_file));
-        ?>
-			</td>
-			<td class="hide-on-mobile"><?php
-        
-        esc(basename($row->mp4_file));
-        ?>
-			</td>
-			
-			<?php if($permissionChecker->hasPermission("videos_edit")){?>
-			<td><a
-				href="index.php?action=edit_video&id=<?php
-            
-            echo $row->id;
-            ?>"><img src="gfx/edit.png" class="mobile-big-image"
-					alt="<?php
-            
-            translate("edit");
-            ?>"
-					title="<?php
-            
-            translate("edit");
-            ?>"> </a></td>
-			<td><form
-					action="?sClass=VideoController&sMethod=delete&delete=<?php echo $row->id;?>"
-					method="post" class="delete-form"><?php csrf_token_html();?><input
-						type="image" src="gfx/delete.png" class="mobile-big-image"
-						alt="<?php
-            
-            translate("delete");
-            ?>"
-						title="<?php
-            
-            translate("delete");
-            ?>">
-				</form></td>
-				<?php }?>
-		</tr>
-		<?php
-    }
-    ?>
-	</tbody>
-</table>
-<?php
+    <br />
+    <br />
+    <?php if ($permissionChecker->hasPermission("videos_create")) { ?>
+        <p>
+            <a href="index.php?action=add_video" class="btn btn-default"> <i
+                    class="fas fa-upload"></i> <?php
+                    translate("upload_video");
+                    ?></a>
+        </p>
+    <?php } ?>
+    <table class="tablesorter">
+        <thead>
+            <tr>
+                <th><?php
+                    translate("id");
+                    ?>
+                </th>
+                <th><?php
+                    translate("name");
+                    ?>
+                </th>
+                <th class="hide-on-mobile"><?php
+                    translate("ogg_file");
+                    ?>
+                </th>
+                <th class="hide-on-mobile"><?php
+                    translate("webm_file");
+                    ?>
+                </th>
+                <th class="hide-on-mobile"><?php
+                    translate("mp4_file");
+                    ?>
+                </th>
+                <?php if ($permissionChecker->hasPermission("videos_edit")) { ?>
+                    <td></td>
+                    <td></td>
+                <?php } ?>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            while ($row = db_fetch_object($all_videos)) {
+                ?>
+                <tr id="dataset-<?php echo $row->id; ?>">
+                    <td><?php
+                        echo $row->id;
+                        ?>
+                    </td>
+                    <td><?php
+                        esc($row->name);
+                        ?>
+                    </td>
+                    <td class="hide-on-mobile"><?php
+                        esc(basename($row->ogg_file));
+                        ?>
+                    </td>
+                    <td class="hide-on-mobile"><?php
+                        esc(basename($row->webm_file));
+                        ?>
+                    </td>
+                    <td class="hide-on-mobile"><?php
+                        esc(basename($row->mp4_file));
+                        ?>
+                    </td>
+
+                    <?php if ($permissionChecker->hasPermission("videos_edit")) { ?>
+                        <td><a
+                                href="index.php?action=edit_video&id=<?php
+                                echo $row->id;
+                                ?>"><img src="gfx/edit.png" class="mobile-big-image"
+                                   alt="<?php
+                                   translate("edit");
+                                   ?>"
+                                   title="<?php
+                                   translate("edit");
+                                   ?>"> </a></td>
+                        <td><form
+                                action="?sClass=VideoController&sMethod=delete&delete=<?php echo $row->id; ?>"
+                                method="post" class="delete-form"><?php csrf_token_html(); ?><input
+                                    type="image" src="gfx/delete.png" class="mobile-big-image"
+                                    alt="<?php
+                                    translate("delete");
+                                    ?>"
+                                    title="<?php
+                                    translate("delete");
+                                    ?>">
+                            </form></td>
+                    <?php } ?>
+                </tr>
+                <?php
+            }
+            ?>
+        </tbody>
+    </table>
+    <?php
     enqueueScriptFile(ModuleHelper::buildModuleRessourcePath("core_media", "js/video.js"));
     combinedScriptHtml();
     ?>
-<?php
+    <?php
 } else {
     noPerms();
 }
 
 $translation = new JSTranslation(array(
     "ask_for_delete"
-));
+        ));
 $translation->render();

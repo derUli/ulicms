@@ -125,7 +125,7 @@ if ($permissionChecker->hasPermission("pages")) {
                 <div class="checkbox">
                     <label><input type="checkbox" class="js-switch" name="show_filters" id="show_filters"
                                   value="1" data-url="<?php echo ModuleHelper::buildMethodCallUrl(PageController::class, "toggleFilters"); ?>"
-        <?php if ($show_filters) echo "checked"; ?>> <?php translate("show_filters"); ?></label>
+                                  <?php if ($show_filters) echo "checked"; ?>> <?php translate("show_filters"); ?></label>
                 </div>
             </form>
             <div class="row">
@@ -146,22 +146,22 @@ if ($permissionChecker->hasPermission("pages")) {
                 </div>
             </div>
 
-    <?php } ?>
+        <?php } ?>
 
         <form method="get" action="index.php" class="page-list-filters" style="<?php if (!$show_filters) echo "display:none"; ?>">
             <div class="row">
                 <div class="col-xs-6">
-    <?php translate("title"); ?>
+                    <?php translate("title"); ?>
                     <input type="hidden" name="action" value="pages"> <input
                         type="text" name="filter_title"
                         value="<?php esc($_SESSION["filter_title"]); ?>">
                 </div>
 
                 <div class="col-xs-6">
-    <?php translate("filter_by_language"); ?>
+                    <?php translate("filter_by_language"); ?>
                     <select name="filter_language" onchange="filterByLanguage(this)">
                         <option value="">
-    <?php translate("please_select"); ?>
+                            <?php translate("please_select"); ?>
 
                         </option>
                         <?php
@@ -213,7 +213,7 @@ if ($permissionChecker->hasPermission("pages")) {
                             echo " selected";
                         }
                         ?>>
-                                <?php translate("standard"); ?>
+                                    <?php translate("standard"); ?>
                         </option>
                         <option value="trash"
                         <?php
@@ -221,7 +221,7 @@ if ($permissionChecker->hasPermission("pages")) {
                             echo " selected";
                         }
                         ?>>
-                                <?php translate("recycle_bin"); ?>
+                                    <?php translate("recycle_bin"); ?>
                         </option>
                     </select>
                 </div>
@@ -328,24 +328,24 @@ if ($permissionChecker->hasPermission("pages")) {
                             }
                             ?>>
                                 [<?php
-                        translate("every");
-                            ?>]</option>
+                                translate("every");
+                                ?>]</option>
                             <option value="1"
                             <?php
                             if (1 === $_SESSION["filter_approved"]) {
                                 echo "selected";
                             }
                             ?>><?php
-                                    translate("yes");
-                                    ?></option>
+                                        translate("yes");
+                                        ?></option>
                             <option value="0"
                             <?php
                             if (0 === $_SESSION["filter_approved"]) {
                                 echo "selected";
                             }
                             ?>><?php
-                                    translate("no");
-                                    ?></option>
+                                        translate("no");
+                                        ?></option>
                         </select>
                     </p>
                 </div>
@@ -361,7 +361,7 @@ if ($permissionChecker->hasPermission("pages")) {
                 onclick="return ajaxEmptyTrash(this.href);" class="btn btn-warning">
                 <i class="fa fa-trash" aria-hidden="true"></i>
                 <?php translate("empty_recycle_bin"); ?></a>
-                <?php
+            <?php
         }
         ?>
 

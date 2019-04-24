@@ -1,25 +1,22 @@
 <?php
+
 require_once ULICMS_ROOT . "/templating.php";
 
-class CustomDataTest extends \PHPUnit\Framework\TestCase
-{
+class CustomDataTest extends \PHPUnit\Framework\TestCase {
 
-    public function setUp()
-    {
+    public function setUp() {
         $_GET["seite"] = "welcome";
         $_SESSION["language"] = "en";
     }
 
-    public function tearDown()
-    {
+    public function tearDown() {
         Settings::delete("my_value");
         CustomData::delete("my_value");
         unset($_GET["seite"]);
         unset($_SESSION["language"]);
     }
 
-    public function testGetCustomDataOrSetting()
-    {
+    public function testGetCustomDataOrSetting() {
         Settings::set("my_value", "text1");
         $this->assertEquals("text1", CustomData::getCustomDataOrSetting("my_value"));
         CustomData::set("my_value", "text2");
@@ -27,4 +24,5 @@ class CustomDataTest extends \PHPUnit\Framework\TestCase
         CustomData::delete("my_value");
         $this->assertEquals("text1", CustomData::getCustomDataOrSetting("my_value"));
     }
+
 }

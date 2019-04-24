@@ -1,25 +1,21 @@
 <?php
 
-class CommentStatusTest extends \PHPUnit\Framework\TestCase
-{
+class CommentStatusTest extends \PHPUnit\Framework\TestCase {
 
-    public function testDefault()
-    {
+    public function testDefault() {
         $this->assertEquals("pending", CommentStatus::DEFAULT_STATUS);
     }
 
-    public function testPending()
-    {
+    public function testPending() {
         $this->assertEquals("pending", CommentStatus::PENDING);
     }
 
-    public function testPublished()
-    {
+    public function testPublished() {
         $this->assertEquals("published", CommentStatus::PUBLISHED);
     }
 
-    public function testSpam()
-    {
+    public function testSpam() {
         $this->assertEquals("spam", CommentStatus::SPAM);
     }
+
 }

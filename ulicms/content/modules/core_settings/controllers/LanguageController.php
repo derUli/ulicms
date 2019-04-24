@@ -1,10 +1,8 @@
 <?php
 
-class LanguageController extends Controller
-{
+class LanguageController extends Controller {
 
-    public function createPost()
-    {
+    public function createPost() {
         $name = db_escape($_POST["name"]);
         $language_code = db_escape($_POST["language_code"]);
         do_event("before_create_language");
@@ -14,8 +12,7 @@ class LanguageController extends Controller
         Request::redirect(ModuleHelper::buildActionURL("languages"));
     }
 
-    public function setDefaultLanguage()
-    {
+    public function setDefaultLanguage() {
         do_event("before_set_default_language");
         setconfig("default_language", db_escape($_GET["default"]));
         setconfig("system_language", db_escape($_GET["default"]));
@@ -23,11 +20,11 @@ class LanguageController extends Controller
         Request::redirect(ModuleHelper::buildActionURL("languages"));
     }
 
-    public function deletePost()
-    {
+    public function deletePost() {
         do_event("before_delete_language");
         db_query("DELETE FROM " . tbname("languages") . " WHERE id = " . intval($_GET["id"]));
         do_event("after_delete_language");
         Request::redirect(ModuleHelper::buildActionURL("languages"));
     }
+
 }

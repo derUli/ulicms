@@ -50,32 +50,32 @@
         <div>
             <label for="author_email"><?php translate("your_email") ?></label>
             <div>
-    <?php
-    echo UliCMS\HTML\Input::TextBox("author_email", "", "email", array(
-        "class" => "form-control"
-    ));
-    ?>
+                <?php
+                echo UliCMS\HTML\Input::TextBox("author_email", "", "email", array(
+                    "class" => "form-control"
+                ));
+                ?>
             </div>
         </div>
         <label for="author_url"><?php translate("your_website") ?></label>
         <div>
-    <?php
-    echo UliCMS\HTML\Input::TextBox("author_url", "", "url", array(
-        "class" => "form-control"
-    ));
-    ?>
+            <?php
+            echo UliCMS\HTML\Input::TextBox("author_url", "", "url", array(
+                "class" => "form-control"
+            ));
+            ?>
         </div>
         <div>
             <div class="comment-text">
                 <p>
                     <label for="text"><?php translate("text") ?>
                         <span class="text-danger">*</span></label>
-    <?php
-    echo UliCMS\HTML\Input::TextArea("text", "", 10, 80, array(
-        "required" => "required",
-        "class" => "form-control"
-    ))
-    ?>
+                    <?php
+                    echo UliCMS\HTML\Input::TextArea("text", "", 10, 80, array(
+                        "required" => "required",
+                        "class" => "form-control"
+                    ))
+                    ?>
                 </p>
             </div>
         </div>
@@ -92,5 +92,5 @@
         </p>
     </div>
     <?php echo ModuleHelper::endForm(); ?>
-<?php
+    <?php
 }

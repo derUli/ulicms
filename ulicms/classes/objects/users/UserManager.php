@@ -1,10 +1,8 @@
 <?php
 
-class UserManager
-{
+class UserManager {
 
-    public function getUsersByGroupId($gid, $order = "id")
-    {
+    public function getUsersByGroupId($gid, $order = "id") {
         $users = array();
         $sql = "select id from {prefix}users where `group_id` = ? order by $order";
         $args = array(
@@ -17,8 +15,7 @@ class UserManager
         return $users;
     }
 
-    public function getAllUsers($order = "id")
-    {
+    public function getAllUsers($order = "id") {
         $users = array();
         $sql = "select id from {prefix}users order by $order";
         $query = Database::Query($sql, true);
@@ -28,8 +25,7 @@ class UserManager
         return $users;
     }
 
-    public function getLockedUsers($locked = true, $order = "id")
-    {
+    public function getLockedUsers($locked = true, $order = "id") {
         $users = array();
         $sql = "select id from {prefix}users where `locked` = ? order by $order";
         $args = array(
@@ -41,4 +37,5 @@ class UserManager
         }
         return $users;
     }
+
 }

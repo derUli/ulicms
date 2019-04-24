@@ -53,7 +53,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
                        translate("edit");
                        ?></a></td>
         </tr>
- 	<?php if ($permissionChecker->hasPermission("error_pages")) {
+        <?php if ($permissionChecker->hasPermission("error_pages")) {
             ?>
             <tr>
                 <td><strong><?php translate("error_pages"); ?></strong></td>

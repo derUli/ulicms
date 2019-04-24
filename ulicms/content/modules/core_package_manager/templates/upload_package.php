@@ -1,17 +1,17 @@
 <?php
 $permissionChecker = new ACL();
-if (! $permissionChecker->hasPermission("install_packages")) {
+if (!$permissionChecker->hasPermission("install_packages")) {
     noPerms();
 } else {
     ?>
-<p>
-	<a href="<?php echo ModuleHelper::buildActionURL("install_method");?>"
-		class="btn btn-default btn-back"><i class="fa fa-arrow-left" aria-hidden="true"></i>
- <?php translate("back")?></a>
-</p>
-<?php
+    <p>
+        <a href="<?php echo ModuleHelper::buildActionURL("install_method"); ?>"
+           class="btn btn-default btn-back"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+            <?php translate("back") ?></a>
+    </p>
+    <?php
     $temp_folder = ULICMS_DATA_STORAGE_ROOT . DIRECTORY_SEPARATOR . "content" . DIRECTORY_SEPARATOR . "tmp";
-    if (! empty($_POST)) {
+    if (!empty($_POST)) {
         if (count($_FILES) > 0) {
             $file_in_tmp = $temp_folder . DIRECTORY_SEPARATOR . $_FILES['file']['name'];
             if (move_uploaded_file($_FILES['file']['tmp_name'], $file_in_tmp)) {
@@ -38,21 +38,18 @@ if (! $permissionChecker->hasPermission("install_packages")) {
             }
         }
     }
-    
     ?>
-<h1><?php translate("upload_package");?></h1>
-<form action="?action=upload_package" enctype="multipart/form-data"
-	method="post">
-	<?php
-    
-    csrf_token_html();
-    ?>
-	<input type="file" name="file"><br /> <br />
-	<button type="submit" class="btn btn-warning"><i class="fa fa-upload" aria-hidden="true"></i> <?php translate("install_package");?></button>
-</form>
+    <h1><?php translate("upload_package"); ?></h1>
+    <form action="?action=upload_package" enctype="multipart/form-data"
+          method="post">
+              <?php
+              csrf_token_html();
+              ?>
+        <input type="file" name="file"><br /> <br />
+        <button type="submit" class="btn btn-warning"><i class="fa fa-upload" aria-hidden="true"></i> <?php translate("install_package"); ?></button>
+    </form>
 
 
-<?php
+    <?php
 }
-
 ?>

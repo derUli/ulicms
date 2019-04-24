@@ -1,10 +1,8 @@
 <?php
 
-class UpdateManager
-{
+class UpdateManager {
 
-    public static function getAllUpdateablePackages()
-    {
+    public static function getAllUpdateablePackages() {
         $pkg = new PackageManager();
         $retval = array();
         $modules = getAllModules();
@@ -19,7 +17,7 @@ class UpdateManager
                 }
             }
         }
-        
+
         $themes = getThemeList();
         if (count($themes) > 0) {
             foreach ($themes as $theme) {
@@ -33,7 +31,8 @@ class UpdateManager
                 }
             }
         }
-        
+
         return $retval;
     }
+
 }

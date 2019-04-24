@@ -1,58 +1,59 @@
 /** This file is part of KCFinder project
-  *
-  *      @desc File related functionality
-  *   @package KCFinder
-  *   @version 3.12
-  *    @author Pavel Tzonkov <sunhater@sunhater.com>
-  * @copyright 2010-2014 KCFinder Project
-  *   @license http://opensource.org/licenses/GPL-3.0 GPLv3
-  *   @license http://opensource.org/licenses/LGPL-3.0 LGPLv3
-  *      @link http://kcfinder.sunhater.com
-  */
+ *
+ *      @desc File related functionality
+ *   @package KCFinder
+ *   @version 3.12
+ *    @author Pavel Tzonkov <sunhater@sunhater.com>
+ * @copyright 2010-2014 KCFinder Project
+ *   @license http://opensource.org/licenses/GPL-3.0 GPLv3
+ *   @license http://opensource.org/licenses/LGPL-3.0 LGPLv3
+ *      @link http://kcfinder.sunhater.com
+ */
 
-_.initFiles = function() {
-    $(document).unbind('keydown').keydown(function(e) {
+_.initFiles = function () {
+    $(document).unbind('keydown').keydown(function (e) {
         return !_.selectAll(e);
     });
-    $('#files').unbind().scroll(function() {
+    $('#files').unbind().scroll(function () {
         _.menu.hide();
     }).disableTextSelect();
 
-    $('.file').unbind().click(function(e) {
+    $('.file').unbind().click(function (e) {
         _.selectFile($(this), e);
 
-    }).rightClick(function(el, e) {
+    }).rightClick(function (el, e) {
         _.menuFile($(el), e);
-    }).dblclick(function() {
+    }).dblclick(function () {
         _.returnFile($(this));
     });
 
     if ($.mobile)
-        $('.file').on('taphold', function() {
-        _.menuFile($(this), {
-            pageX: $(this).offset().left,
-            pageY: $(this).offset().top + $(this).outerHeight()
+        $('.file').on('taphold', function () {
+            _.menuFile($(this), {
+                pageX: $(this).offset().left,
+                pageY: $(this).offset().top + $(this).outerHeight()
+            });
         });
-    });
 
-    $.each(_.shows, function(i, val) {
+    $.each(_.shows, function (i, val) {
         $('#files .file div.' + val).css('display', ($.$.kuki.get('show' + val) == "off") ? "none" : "block");
     });
     _.statusDir();
 };
 
-_.showFiles = function(callBack, selected) {
+_.showFiles = function (callBack, selected) {
     _.fadeFiles();
-    setTimeout(function() {
+    setTimeout(function () {
         var c = $('<div></div>');
 
-        $.each(_.files, function(i, file) {
+        $.each(_.files, function (i, file) {
             var f, icon,
-                stamp = file.size + "|" + file.mtime;
+                    stamp = file.size + "|" + file.mtime;
 
             // List
             if ($.$.kuki.get('view') == "list") {
-                if (!i) c.html('<table></table>');
+                if (!i)
+                    c.html('<table></table>');
 
                 icon = $.$.getFileExtension(file.name);
                 if (file.thumb)
@@ -64,7 +65,7 @@ _.showFiles = function(callBack, selected) {
                 f = $('<tr class="file"><td class="name thumb"></td><td class="time"></td><td class="size"></td></tr>');
                 f.appendTo(c.find('table'));
 
-            // Thumbnails
+                // Thumbnails
             } else {
                 if (file.thumb)
                     icon = _.getURL('thumb') + "&file=" + encodeURIComponent(file.name) + "&dir=" + encodeURIComponent(_.dir) + "&stamp=" + stamp;
@@ -73,7 +74,8 @@ _.showFiles = function(callBack, selected) {
                     icon = $.$.escapeDirs(icon).replace(/\'/g, "%27");
                 } else {
                     icon = file.bigIcon ? $.$.getFileExtension(file.name) : ".";
-                    if (!icon.length) icon = ".";
+                    if (!icon.length)
+                        icon = ".";
                     icon = "themes/" + _.theme + "/img/files/big/" + icon + ".png";
                 }
                 f = $('<div class="file"><div class="thumb"></div><div class="name"></div><div class="time"></div><div class="size"></div></div>');
@@ -90,15 +92,16 @@ _.showFiles = function(callBack, selected) {
                 f.addClass('selected');
         });
 
-        c.css({opacity:'', filter:''});
+        c.css({opacity: '', filter: ''});
         $('#files').html(c);
 
-        if (callBack) callBack();
+        if (callBack)
+            callBack();
         _.initFiles();
     }, 200);
 };
 
-_.selectFile = function(file, e) {
+_.selectFile = function (file, e) {
 
     // Click with Ctrl, Meta or Shift key
     if (e.ctrlKey || e.metaKey || e.shiftKey) {
@@ -116,11 +119,11 @@ _.selectFile = function(file, e) {
 
         // Update statusbar
         var files = $('.file.selected').get(),
-            size = 0, data;
+                size = 0, data;
         if (!files.length)
             _.statusDir();
         else {
-            $.each(files, function(i, cfile) {
+            $.each(files, function (i, cfile) {
                 size += $(cfile).data('size');
             });
             size = _.humanSize(size);
@@ -132,7 +135,7 @@ _.selectFile = function(file, e) {
             }
         }
 
-    // Normal click
+        // Normal click
     } else {
         data = file.data();
         $('.file').removeClass('selected');
@@ -141,16 +144,16 @@ _.selectFile = function(file, e) {
     }
 };
 
-_.selectAll = function(e) {
+_.selectAll = function (e) {
     if ((!e.ctrlKey && !e.metaKey) || ((e.keyCode != 65) && (e.keyCode != 97))) // Ctrl-A
         return false;
 
     var files = $('.file'),
-        size = 0;
+            size = 0;
 
     if (files.length) {
 
-        files.addClass('selected').each(function() {
+        files.addClass('selected').each(function () {
             size += $(this).data('size');
         });
 
@@ -160,10 +163,10 @@ _.selectAll = function(e) {
     return true;
 };
 
-_.returnFile = function(file) {
+_.returnFile = function (file) {
 
     var button, win, fileURL = file.substr
-        ? file : _.uploadURL + "/" + _.dir + "/" + file.data('name');
+            ? file : _.uploadURL + "/" + _.dir + "/" + file.data('name');
     fileURL = $.$.escapeDirs(fileURL);
 
     if (_.opener.name == "ckeditor") {
@@ -171,14 +174,15 @@ _.returnFile = function(file) {
         window.close();
 
     } else if (_.opener.name == "fckeditor") {
-        window.opener.SetUrl(fileURL) ;
-        window.close() ;
+        window.opener.SetUrl(fileURL);
+        window.close();
 
     } else if (_.opener.name == "tinymce") {
         win = tinyMCEPopup.getWindowArg('window');
         win.document.getElementById(tinyMCEPopup.getWindowArg('input')).value = fileURL;
-        if (win.getImageData) win.getImageData();
-        if (typeof(win.ImageDialog) != "undefined") {
+        if (win.getImageData)
+            win.getImageData();
+        if (typeof (win.ImageDialog) != "undefined") {
             if (win.ImageDialog.getImageData)
                 win.ImageDialog.getImageData();
             if (win.ImageDialog.showPreviewImage)
@@ -221,28 +225,30 @@ _.returnFile = function(file) {
     }
 };
 
-_.returnFiles = function(files) {
+_.returnFiles = function (files) {
     if (_.opener.callBackMultiple && files.length) {
         var rfiles = [];
-        $.each(files, function(i, file) {
+        $.each(files, function (i, file) {
             rfiles[i] = _.uploadURL + "/" + _.dir + "/" + $(file).data('name');
             rfiles[i] = $.$.escapeDirs(rfiles[i]);
         });
         _.opener.callBackMultiple(rfiles);
-        if (window.opener) window.close()
+        if (window.opener)
+            window.close()
     }
 };
 
-_.returnThumbnails = function(files) {
+_.returnThumbnails = function (files) {
     if (_.opener.callBackMultiple) {
         var rfiles = [], j = 0;
-        $.each(files, function(i, file) {
+        $.each(files, function (i, file) {
             if ($(file).data('thumb')) {
                 rfiles[j] = _.thumbsURL + "/" + _.dir + "/" + $(file).data('name');
                 rfiles[j] = $.$.escapeDirs(rfiles[j++]);
             }
         });
         _.opener.callBackMultiple(rfiles);
-        if (window.opener) window.close()
+        if (window.opener)
+            window.close()
     }
 };

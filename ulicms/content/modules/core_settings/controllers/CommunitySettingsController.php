@@ -1,10 +1,8 @@
 <?php
 
-class CommunitySettingsController extends Controller
-{
+class CommunitySettingsController extends Controller {
 
-    public function savePost()
-    {
+    public function savePost() {
         if (Request::getVar("comments_enabled")) {
             Settings::set("comments_enabled", "1");
         } else {
@@ -22,4 +20,5 @@ class CommunitySettingsController extends Controller
         }
         Response::redirect(ModuleHelper::buildActionURL("community_settings", "save=1"));
     }
+
 }

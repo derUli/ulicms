@@ -1,124 +1,112 @@
 <?php
 
-class ArrayHelperTest extends \PHPUnit\Framework\TestCase
-{
+class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
 
-    public function testTake4String()
-    {
+    public function testTake4String() {
         $this->assertEquals("abcd", ArrayHelper::take(4, "abcdefghijklmnopqrstuvwxyz"));
     }
 
-    public function testTake3Array()
-    {
+    public function testTake3Array() {
         $this->assertEquals(array(
             "cat",
             "dog",
             "porcupine"
-        ), ArrayHelper::take(3, array(
-            "cat",
-            "dog",
-            "porcupine",
-            "eagle",
-            "dolphin",
-            "ape"
+                ), ArrayHelper::take(3, array(
+                    "cat",
+                    "dog",
+                    "porcupine",
+                    "eagle",
+                    "dolphin",
+                    "ape"
         )));
     }
 
-    public function testTake3Invalid()
-    {
+    public function testTake3Invalid() {
         $this->assertNull(ArrayHelper::take(4, 2017));
     }
 
-    public function testInsertBefore()
-    {
+    public function testInsertBefore() {
         $input = array(
             "apple",
             "tomato",
             "banana",
             "cucumber"
         );
-        
+
         $this->assertEquals(array(
             "apple",
             "tomato",
             "banana",
             "pineapple",
             "cucumber"
-        ), ArrayHelper::insertBefore($input, 3, "pineapple"));
-        
+                ), ArrayHelper::insertBefore($input, 3, "pineapple"));
+
         $this->assertEquals(array(
             "pineapple",
             "apple",
             "tomato",
             "banana",
             "cucumber"
-        ), ArrayHelper::insertBefore($input, 0, "pineapple"));
+                ), ArrayHelper::insertBefore($input, 0, "pineapple"));
     }
 
-    public function testAfterBefore()
-    {
+    public function testAfterBefore() {
         $input = array(
             "apple",
             "tomato",
             "banana",
             "cucumber"
         );
-        
+
         $this->assertEquals(array(
             "apple",
             "pineapple",
             "tomato",
             "banana",
             "cucumber"
-        ), ArrayHelper::insertAfter($input, 0, "pineapple"));
-        
+                ), ArrayHelper::insertAfter($input, 0, "pineapple"));
+
         $this->assertEquals(array(
             "apple",
             "tomato",
             "banana",
             "cucumber",
             "pineapple"
-        ), ArrayHelper::insertAfter($input, 3, "pineapple"));
+                ), ArrayHelper::insertAfter($input, 3, "pineapple"));
     }
 
-    public function testIsSingleWithEmptyArray()
-    {
+    public function testIsSingleWithEmptyArray() {
         $this->assertFalse(ArrayHelper::isSingle(array()));
     }
 
-    public function testIsSingleWithOneItem()
-    {
+    public function testIsSingleWithOneItem() {
         $this->assertTrue(ArrayHelper::isSingle(array(
-            "foo"
+                    "foo"
         )));
     }
 
-    public function testIsSingleWithTwoItems()
-    {
+    public function testIsSingleWithTwoItems() {
         $this->assertFalse(ArrayHelper::isSingle(array(
-            "foo",
-            "bar"
+                    "foo",
+                    "bar"
         )));
     }
 
-    public function testgetSingleWithEmptyArray()
-    {
+    public function testgetSingleWithEmptyArray() {
         $this->assertNull(ArrayHelper::getSingle(array()));
     }
 
-    public function testgetSingleWithOneItem()
-    {
+    public function testgetSingleWithOneItem() {
         $this->assertEquals("foo", ArrayHelper::getSingle(array(
-            "foo"
+                    "foo"
         )));
     }
 
-    public function testgetSingleWithTwoItems()
-    {
+    public function testgetSingleWithTwoItems() {
         $this->assertNull(ArrayHelper::getSingle(array(
-            "foo",
-            "bar"
+                    "foo",
+                    "bar"
         )));
     }
+
 }
-	

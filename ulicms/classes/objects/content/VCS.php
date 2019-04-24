@@ -1,19 +1,16 @@
 <?php
 
 // Version Control System for pages
-class VCS
-{
+class VCS {
 
-    public static function createRevision($content_id, $content, $user_id)
-    {
+    public static function createRevision($content_id, $content, $user_id) {
         $content_id = intval($content_id);
         $content = db_escape($content);
         $user_id = intval($user_id);
         return db_query("INSERT INTO `" . tbname("history") . "` (content_id, content, user_id) VALUES($content_id, '$content', $user_id)");
     }
 
-    public static function getRevisionByID($history_id)
-    {
+    public static function getRevisionByID($history_id) {
         $history_id = intval($history_id);
         $query = db_query("SELECT * FROM " . tbname("history") . " WHERE id = " . $history_id);
         if (db_num_rows($query) > 0) {
@@ -23,8 +20,7 @@ class VCS
         }
     }
 
-    public static function restoreRevision($history_id)
-    {
+    public static function restoreRevision($history_id) {
         $history_id = intval($history_id);
         $query = db_query("SELECT * FROM " . tbname("history") . " WHERE id = " . $history_id);
         if (db_num_rows($query) > 0) {
@@ -38,8 +34,7 @@ class VCS
         }
     }
 
-    public static function getRevisionsByContentID($content_id, $order = "date DESC")
-    {
+    public static function getRevisionsByContentID($content_id, $order = "date DESC") {
         $content_id = intval($content_id);
         $query = db_query("SELECT * FROM " . tbname("history") . " WHERE content_id = " . $content_id . " ORDER BY " . $order);
         $retval = array();
@@ -48,4 +43,5 @@ class VCS
         }
         return $retval;
     }
+
 }

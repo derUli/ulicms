@@ -1,9 +1,9 @@
 {
-	"source": "core",
-	"version": "2019.2",
-	"embed": false,
-	"actions": {
-		"info": "templates/info.php",
-		"license": "templates/license.php"
-	}
+    "source": "core",
+    "version": "2019.2",
+    "embed": false,
+    "actions": {
+        "info": "templates/info.php",
+        "license": "templates/license.php"
+    }
 }

@@ -3,19 +3,19 @@
 class Categories {
 
     public static function updateCategory($id, $name, $description = '') {
-       $category = new Category($id);
-       $category->setName($name);
-       $category->setDescription($description);
-       $category->save();
-       return $category->getID();
+        $category = new Category($id);
+        $category->setName($name);
+        $category->setDescription($description);
+        $category->save();
+        return $category->getID();
     }
 
     public static function addCategory($name = null, $description = "") {
-       $category = new Category();
-       $category->setName($name);
-       $category->setDescription($description);
-       $category->save();
-       return $category->getID();
+        $category = new Category();
+        $category->setName($name);
+        $category->setDescription($description);
+        $category->save();
+        return $category->getID();
     }
 
     public static function getHTMLSelect($default = 1, $allowNull = false, $name = 'category_id') {
@@ -32,7 +32,7 @@ class Categories {
             if ($cat->getId() == $default) {
                 $html .= "<option value='" . $cat->getId() . "' selected='selected'>" . db_escape($cat->getName()) . "</option>";
             } else {
-                $html .= "<option value='" . $cat->getId(). "'>" . db_escape($cat->getName()) . "</option>";
+                $html .= "<option value='" . $cat->getId() . "'>" . db_escape($cat->getName()) . "</option>";
             }
         }
 

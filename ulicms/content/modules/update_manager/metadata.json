@@ -1,4 +1,4 @@
 {
-	"version": "1.0.7",
-	"admin_permission": "install_packages"
+    "version": "1.0.7",
+    "admin_permission": "install_packages"
 }

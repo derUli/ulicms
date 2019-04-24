@@ -1,35 +1,30 @@
 <?php
+
 use UliCMS\Exceptions\NotImplementedException;
 
-class Model
-{
+class Model {
 
     private static $model = null;
-
     protected $id = null;
 
-    public function __construct($id = null)
-    {
-        if (! is_null($id)) {
+    public function __construct($id = null) {
+        if (!is_null($id)) {
             $this->loadByID($id);
         }
     }
 
-    public function loadByRequestId()
-    {
+    public function loadByRequestId() {
         $id = Request::getVar("id");
         if (is_numeric($id)) {
             $this->loadByID(intval($id));
         }
     }
 
-    public function loadByID($id)
-    {
+    public function loadByID($id) {
         throw new NotImplementedException("load not implemented");
     }
 
-    public function save()
-    {
+    public function save() {
         if (is_null($this->id)) {
             $this->insert();
         } else {
@@ -37,39 +32,32 @@ class Model
         }
     }
 
-    protected function fillVars($query = null)
-    {
+    protected function fillVars($query = null) {
         throw new NotImplementedException("fillVars not implemented");
     }
 
-    protected function insert()
-    {
+    protected function insert() {
         throw new NotImplementedException("insert not implemented");
     }
 
-    protected function update()
-    {
+    protected function update() {
         throw new NotImplementedException("update not implemented");
     }
 
-    public function delete()
-    {
+    public function delete() {
         throw new NotImplementedException("delete not implemented");
     }
 
-    public function setID($id)
-    {
+    public function setID($id) {
         $this->id = is_numeric($id) ? intval($id) : null;
     }
 
-    public function getID()
-    {
+    public function getID() {
         return $this->id;
     }
 
     // bind values from associative array $values to class properties
-    public function bindValues($values = array())
-    {
+    public function bindValues($values = array()) {
         $values = (array) $values;
         foreach ($values as $key => $value) {
             $camelCaseVar = ModuleHelper::underscoreToCamel($key);
@@ -88,8 +76,7 @@ class Model
     }
 
     // check if $value is a variable of $type
-    public static function checkValueType($value, $type, $required = false)
-    {
+    public static function checkValueType($value, $type, $required = false) {
         // if it's required and $value is null throw exception
         if ($required and $value === null) {
             throw new InvalidArgumentException("Required field not filled");
@@ -106,15 +93,15 @@ class Model
         }
     }
 
-    public static function getAllDatasets($tableName, $modelClass, $orderBy = "id", $where = "")
-    {
+    public static function getAllDatasets($tableName, $modelClass, $orderBy = "id", $where = "") {
         $result = array();
         $query = Database::selectAll($tableName, array(
-            "id"
-        ), $where, array(), true, $orderBy);
+                    "id"
+                        ), $where, array(), true, $orderBy);
         while ($row = Database::fetchObject($query)) {
             $result[] = new $modelClass($row->id);
         }
         return $result;
     }
+
 }

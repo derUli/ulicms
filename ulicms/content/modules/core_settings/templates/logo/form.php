@@ -23,17 +23,17 @@ if ($permissionChecker->hasPermission("logo")) {
                 <td><strong><?php translate("your_logo"); ?>
                     </strong></td>
                 <td><?php
-    if (defined("ULICMS_DATA_STORAGE_URL")) {
-        $logo_path = ULICMS_DATA_STORAGE_URL . "/content/images/" . Settings::get("logo_image");
-    } else {
-        $logo_path = "../content/images/" . Settings::get("logo_image");
-    }
-    $logo_storage_path = ULICMS_DATA_STORAGE_ROOT . "/content/images/" . Settings::get("logo_image");
+                    if (defined("ULICMS_DATA_STORAGE_URL")) {
+                        $logo_path = ULICMS_DATA_STORAGE_URL . "/content/images/" . Settings::get("logo_image");
+                    } else {
+                        $logo_path = "../content/images/" . Settings::get("logo_image");
+                    }
+                    $logo_storage_path = ULICMS_DATA_STORAGE_ROOT . "/content/images/" . Settings::get("logo_image");
 
-    if (is_file($logo_storage_path)) {
-        echo '<img class="website_logo" src="' . $logo_path . '" alt="' . Settings::get("homepage_title") . '"/>';
-    }
-        ?>
+                    if (is_file($logo_storage_path)) {
+                        echo '<img class="website_logo" src="' . $logo_path . '" alt="' . Settings::get("homepage_title") . '"/>';
+                    }
+                    ?>
                 </td>
 
 
@@ -41,18 +41,18 @@ if ($permissionChecker->hasPermission("logo")) {
                 <td><strong><?php translate("hide_logo") ?></strong></td>
                 <td><select name="logo_disabled" size=1>
                         <option
-    <?php
-    if (Settings::get("logo_disabled") == "yes") {
-        echo 'selected ';
-    }
-    ?>
+                        <?php
+                        if (Settings::get("logo_disabled") == "yes") {
+                            echo 'selected ';
+                        }
+                        ?>
                             value="yes"><?php translate("yes"); ?></option>
                         <option
-    <?php
-    if (Settings::get("logo_disabled") != "yes") {
-        echo 'selected ';
-    }
-    ?>
+                        <?php
+                        if (Settings::get("logo_disabled") != "yes") {
+                            echo 'selected ';
+                        }
+                        ?>
                             value="no"><?php translate("no"); ?></option>
                     </select></td>
             </tr>

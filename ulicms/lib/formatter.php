@@ -1,12 +1,10 @@
 <?php
 
-function formatTime($seconds)
-{
+function formatTime($seconds) {
     return NumberFormatHelper::formatTime($seconds);
 }
 
 // Snippet from PHP Share: http://www.phpshare.org
-function formatSizeUnits($bytes)
-{
+function formatSizeUnits($bytes) {
     return NumberFormatHelper::formatSizeUnits($bytes);
 }

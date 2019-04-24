@@ -1,11 +1,9 @@
 <?php
 
-class ArrayHelper extends Helper
-{
+class ArrayHelper extends Helper {
 
-    public static function insertBefore($input, $index, $element)
-    {
-        if (! array_key_exists($index, $input)) {
+    public static function insertBefore($input, $index, $element) {
+        if (!array_key_exists($index, $input)) {
             throw new Exception("Index not found");
         }
         $tmpArray = array();
@@ -22,9 +20,8 @@ class ArrayHelper extends Helper
         return $input;
     }
 
-    public static function insertAfter($input, $index, $element)
-    {
-        if (! array_key_exists($index, $input)) {
+    public static function insertAfter($input, $index, $element) {
+        if (!array_key_exists($index, $input)) {
             throw new Exception("Index not found");
         }
         $tmpArray = array();
@@ -41,8 +38,7 @@ class ArrayHelper extends Helper
         return $input;
     }
 
-    public static function take($count, $data)
-    {
+    public static function take($count, $data) {
         if (is_array($data)) {
             return array_slice($data, 0, $count);
         } else if (is_string($data)) {
@@ -51,16 +47,15 @@ class ArrayHelper extends Helper
         return null;
     }
 
-    public static function isSingle($input)
-    {
+    public static function isSingle($input) {
         return count($input) == 1;
     }
 
-    public static function getSingle($input)
-    {
+    public static function getSingle($input) {
         if (self::isSingle($input)) {
             return $input[0];
         }
         return null;
     }
+
 }

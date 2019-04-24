@@ -61,8 +61,10 @@ class CategoriesTest extends \PHPUnit\Framework\TestCase {
         $this->assertStringContainsString("<select name='my_field_name' id='my_field_name' size='1'>",
                 Categories::getHTMLSelect(1, true, "my_field_name"));
     }
+
     public function testGetHTMLSelectWithoutCustomFieldName() {
         $this->assertStringContainsString("<select name='category_id' id='category_id' size='1'>",
                 Categories::getHTMLSelect(1, true));
     }
+
 }

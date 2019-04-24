@@ -46,7 +46,7 @@ if ($permissionChecker->hasPermission("privacy_settings")) {
                                 echo "selected";
                             }
                             ?>><?php Template::escape(getLanguageNameByCode($language)); ?></option>
-    <?php } ?>
+                                <?php } ?>
 
                     </select>
                 </p>
@@ -57,7 +57,7 @@ if ($permissionChecker->hasPermission("privacy_settings")) {
                     <input type="checkbox" id="privacy_policy_checkbox_enable"
                            name="privacy_policy_checkbox_enable" value="1"
                            class="js-switch"
-                <?php if ($privacy_policy_checkbox_enable) echo "checked"; ?>> <label
+                           <?php if ($privacy_policy_checkbox_enable) echo "checked"; ?>> <label
                            for="privacy_policy_checkbox_enable"><?php translate("privacy_policy_checkbox_enable"); ?></label>
                 </p>
                 <?php
@@ -69,19 +69,19 @@ if ($permissionChecker->hasPermission("privacy_settings")) {
                     <textarea name="privacy_policy_checkbox_text"
                               class="<?php esc($editor); ?>" data-mimetype="text/html"
                               id="privacy_policy_checkbox_text" cols=60 rows=15><?php
-                              esc(Settings::get("privacy_policy_checkbox_text_{$currentLanguage}"));
-                              ?></textarea>
+                                  esc(Settings::get("privacy_policy_checkbox_text_{$currentLanguage}"));
+                                  ?></textarea>
                 </div>
             </div>
             <h2 class="accordion-header">
-    <?php translate("IP_ADDRESSES"); ?>
+                <?php translate("IP_ADDRESSES"); ?>
             </h2>
 
             <div class="accordion-content">
                 <div class="label">
                     <label for="log_ip"> <?php
-                    translate("LOG_IP_ADDRESSES");
-                    ?>
+                        translate("LOG_IP_ADDRESSES");
+                        ?>
                     </label>
                 </div>
                 <div class="inputWrapper">
@@ -99,7 +99,7 @@ if ($permissionChecker->hasPermission("privacy_settings")) {
                 <hr />
                 <div class="label">
                     <label for="delete_ips_after_48_hours">
-    <?php translate("DELETE_IPS_AFTER_48_HOURS"); ?>
+                        <?php translate("DELETE_IPS_AFTER_48_HOURS"); ?>
                     </label>
                 </div>
                 <div class="inputWrapper">
@@ -114,7 +114,7 @@ if ($permissionChecker->hasPermission("privacy_settings")) {
                 </div>
                 <div class="label">
                     <label for="keep_spam_ips">
-    <?php translate("keep_spam_ips"); ?>
+                        <?php translate("keep_spam_ips"); ?>
                     </label>
                 </div>
                 <div class="inputWrapper">

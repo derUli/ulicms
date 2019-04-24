@@ -56,72 +56,72 @@ if (!is_admin() and ! $permissionChecker->hasPermission("categories")) {
                     <?php
                     foreach ($categories as $category) {
                         ?>
-                    <tr id="dataset-<?php echo $category->getID(); ?>">
+                        <tr id="dataset-<?php echo $category->getID(); ?>">
                             <td><?php
-            echo $category->getId();
-                        ?></td>
+                                echo $category->getId();
+                                ?></td>
                             <td style="padding-right: 20px;"><?php
                                 esc($category->getName());
                                 ?></td>
                             <td style="padding-right: 20px;" class="hide-on-mobile"><?php
                                 echo nl2br(_esc($category->getDescription()));
                                 ?></td>
-                                <?php
-                                if ($permissionChecker->hasPermission("categories_edit")) {
-                                    ?>
+                            <?php
+                            if ($permissionChecker->hasPermission("categories_edit")) {
+                                ?>
                                 <td style="text-align: center;"><a
                                         href="?action=categories&edit=<?php echo $category->getID(); ?>"><img
                                             src="gfx/edit.png" class="mobile-big-image"
                                             alt="<?php translate("edit"); ?>"
                                             title="<?php translate("edit"); ?>"></a></td>
-                <?php
-                if ($category->getId() != 1) {
-                    ?>
+                                    <?php
+                                    if ($category->getId() != 1) {
+                                        ?>
                                     <td style="text-align: center;"><form
                                             action="?sClass=CategoryController&sMethod=delete&del=<?php
-                                        echo $category->getId();
-                                        ?>"
+                                            echo $category->getId();
+                                            ?>"
                                             method="post" class="delete-form"><?php csrf_token_html(); ?><input
                                                 type="image" class="mobile-big-image" src="gfx/delete.gif"
                                                 alt="<?php
-                                            translate("delete");
-                                            ?>"
+                                                translate("delete");
+                                                ?>"
                                                 title="<?php
-                        translate("delete");
-                        ?>">
+                                                translate("delete");
+                                                ?>">
                                         </form></td>
 
-                                                <?php
-                                            } else {
-                                                ?>
+                                    <?php
+                                } else {
+                                    ?>
                                     <td style="text-align: center;"><a href="#"
                                                                        onclick="alert('<?php translate("CANT_DELETE_CATEGORY_GENERAL"); ?>')"><img
                                                 class="mobile-big-image" src="gfx/delete.gif"
                                                 alt="<?php
-                            translate("delete");
+                                                translate("delete");
                                                 ?>"
                                                 title="<?php
-                                    translate("delete");
-                                    ?>"> </a></td>
-                    <?php
-                }
-                ?>
-                                        <?php } ?>
-                        </tr>
+                                                translate("delete");
+                                                ?>"> </a></td>
                                         <?php
                                     }
                                     ?>
+                                <?php } ?>
+                        </tr>
+                        <?php
+                    }
+                    ?>
                 </tbody>
             </table>
         </div>
-                            <?php
-                            enqueueScriptFile(ModuleHelper::buildRessourcePath("core_content", "js/categories.js"));
-                            combinedScriptHtml();
-                            ?>
-                    <?php
-                } else if (isset($_GET["add"])) {
-                    if ($permissionChecker->hasPermission("categories_create")) {
-                        ?>
+        <?php
+        enqueueScriptFile(ModuleHelper::buildRessourcePath("core_content", "js/categories.js"));
+        combinedScriptHtml();
+        ?>
+        <?php
+    } else if (isset($_GET["add"])) {
+        if ($permissionChecker->hasPermission("categories_create")) {
+            ?>
             <p>
                 <a href="<?php echo ModuleHelper::buildActionURL("categories"); ?>"
                    class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
@@ -130,7 +130,7 @@ if (!is_admin() and ! $permissionChecker->hasPermission("categories")) {
             <?php echo ModuleHelper::buildMethodCallForm("CategoryController", "create"); ?>
             <p>
                 <strong><?php translate("name"); ?>*</strong> <input type="text"
-                                                                    name="name" value="" required>
+                                                                     name="name" value="" required>
 
             </p>
 
@@ -158,35 +158,34 @@ if (!is_admin() and ! $permissionChecker->hasPermission("categories")) {
                    value="<?php echo intval($_GET["edit"]) ?>">
             <p>
                 <strong><?php translate("name"); ?>*</strong> <input type="text"
-                                                                    name="name" required
-                                                                    value="<?php
-            echo Categories::getCategoryById(intval($_GET["edit"]));
-            ?>">
+                                                                     name="name" required
+                                                                     value="<?php
+                                                                     echo Categories::getCategoryById(intval($_GET["edit"]));
+                                                                     ?>">
             </p>
             <p>
 
                 <strong><?php translate("description"); ?></strong> <br />
                 <textarea cols="50" name="description" rows="5" maxlength="255"><?php
-            esc(Categories::getCategoryDescriptionById(intval($_GET["edit"])));
-            ?></textarea>
+                    esc(Categories::getCategoryDescriptionById(intval($_GET["edit"])));
+                    ?></textarea>
             </p>
             <p>
                 <button type="submit" name="update" class="btn btn-primary">
                     <i class="fa fa-save"></i> <?php
-            translate("save");
-            ?></button>
+                    translate("save");
+                    ?></button>
             </p>
             </form>
 
-                    <?php
-                } else {
-                    noPerms();
-                }
-            }
+            <?php
+        } else {
+            noPerms();
         }
+    }
+}
 
-        $translation = new JSTranslation(array(
-            "ask_for_delete"
+$translation = new JSTranslation(array(
+    "ask_for_delete"
         ));
-        $translation->render();
-        
+$translation->render();

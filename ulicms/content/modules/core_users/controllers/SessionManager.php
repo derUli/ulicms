@@ -1,12 +1,10 @@
 <?php
 
-class SessionManager extends Controller
-{
+class SessionManager extends Controller {
 
-    public function login()
-    {
+    public function login() {
         $logger = LoggerRegistry::get("audit_log");
-        
+
         if (StringHelper::isNotNullOrWhitespace($_POST["system_language"])) {
             $_SESSION["system_language"] = basename($_POST["system_language"]);
         } else {
@@ -14,21 +12,21 @@ class SessionManager extends Controller
             $user->loadByUsername($_POST["user"]);
             $_SESSION["system_language"] = $user->getDefaultLanguage() ? $user->getDefaultLanguage() : Settings::get("system_language");
         }
-        
+
         $confirmation_code = null;
         $twofactor_authentication = Settings::get("twofactor_authentication");
-        
+
         if ($twofactor_authentication) {
             $confirmation_code = $_POST["confirmation_code"];
         }
-        
+
         $sessionData = validate_login($_POST["user"], $_POST["password"], $confirmation_code);
         $sessionData = apply_filter($sessionData, "session_data");
-        
+
         // if login successful register session
         if ($sessionData) {
             // sync modules folder with database at first login
-            if (! Settings::get("sys_initialized")) {
+            if (!Settings::get("sys_initialized")) {
                 clearCache();
                 Settings::set("sys_initialized", "true");
             }
@@ -48,10 +46,9 @@ class SessionManager extends Controller
         }
     }
 
-    public function logout()
-    {
+    public function logout() {
         $logger = LoggerRegistry::get("audit_log");
-        
+
         $id = intval($_SESSION["login_id"]);
         if ($logger) {
             $user = getUserById($id);
@@ -68,11 +65,10 @@ class SessionManager extends Controller
         exit();
     }
 
-    public function resetPassword()
-    {
+    public function resetPassword() {
         $logger = LoggerRegistry::get("audit_log");
-        
-        if (! isset($_REQUEST["token"])) {
+
+        if (!isset($_REQUEST["token"])) {
             ExceptionResult("A token is required");
         }
         $reset = new PasswordReset();
@@ -95,4 +91,5 @@ class SessionManager extends Controller
             TextResult(get_translation("invalid_token"), 404);
         }
     }
+
 }

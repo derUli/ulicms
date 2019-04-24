@@ -1,1 +1,1 @@
-new Image().src="themes/dark/img/loading.gif";
+new Image().src = "themes/dark/img/loading.gif";

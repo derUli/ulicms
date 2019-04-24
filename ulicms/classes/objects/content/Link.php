@@ -1,14 +1,11 @@
 <?php
 
-class Link extends Page
-{
+class Link extends Page {
 
     public $redirection = "";
-
     public $type = "link";
 
-    public function save()
-    {
+    public function save() {
         $retval = null;
         if ($this->id === null) {
             $retval = $this->create();
@@ -19,14 +16,12 @@ class Link extends Page
         return $retval;
     }
 
-    protected function fillVarsByResult($result)
-    {
+    protected function fillVarsByResult($result) {
         parent::fillVarsByResult($result);
         $this->redirection = $result->redirection;
     }
 
-    public function update()
-    {
+    public function update() {
         $result = null;
         if ($this->id === null) {
             return $this->create();
@@ -37,8 +32,9 @@ class Link extends Page
             $this->redirection,
             $this->id
         );
-        
+
         $result = Database::pQuery($sql, $args, true);
         return $result;
     }
+
 }

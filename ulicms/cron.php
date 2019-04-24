@@ -1,35 +1,36 @@
 <?php
+
 require_once "init.php";
 fcflush();
 
 use UliCMS\Data\Content\Comment;
 
-if (! defined("LOADED_LANGUAGE_FILE")) {
-    
+if (!defined("LOADED_LANGUAGE_FILE")) {
+
     setLanguageByDomain();
-    
+
     $languages = getAllLanguages();
-    
-    if (! is_array($_SESSION)) {
+
+    if (!is_array($_SESSION)) {
         $_SESSION = array();
     }
-    
-    if (! empty($_GET["language"]) and faster_in_array($_GET["language"], $languages)) {
+
+    if (!empty($_GET["language"]) and faster_in_array($_GET["language"], $languages)) {
         $_SESSION["language"] = Database::escapeValue($_GET["language"], DB_TYPE_STRING);
     }
-    
-    if (! isset($_SESSION["language"])) {
+
+    if (!isset($_SESSION["language"])) {
         $_SESSION["language"] = Settings::get("default_language");
     }
-    
+
     setLocaleByLanguage();
-    
+
     if (faster_in_array($_SESSION["language"], $languages) && is_file(getLanguageFilePath($_SESSION["language"]))) {
         require_once getLanguageFilePath($_SESSION["language"]);
     } else if (is_file(getLanguageFilePath("en"))) {
         require getLanguageFilePath("en");
     }
-    
+
     Translation::loadAllModuleLanguageFiles($_SESSION["language"]);
     Translation::includeCustomLangFile($_SESSION["language"]);
 }

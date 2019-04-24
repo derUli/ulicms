@@ -6,14 +6,14 @@ if (is_null($value)) {
 }
 ?>
 <div class="custom-field"
-	data-field-name="<?php Template::escape($field->name);?>">
-	<p>
-		<strong><?php translate($field->title);?> <?php if($field->required) echo "*";?></strong><br />
-		<textarea name="<?php Template::escape(ViewBag::get("field_name"));?>"
-			<?php if($field->required) echo "required";?>
-			<?php echo ModuleHelper::buildHTMLAttributesFromArray($field->htmlAttributes);?>><?php Template::escape($value);?></textarea>
-		<?php if($field->helpText){?>
-	<br /> <small><?php translate($field->helpText);?></small>
-<?php }?>
-</p>
+     data-field-name="<?php Template::escape($field->name); ?>">
+    <p>
+        <strong><?php translate($field->title); ?> <?php if ($field->required) echo "*"; ?></strong><br />
+        <textarea name="<?php Template::escape(ViewBag::get("field_name")); ?>"
+        <?php if ($field->required) echo "required"; ?>
+                  <?php echo ModuleHelper::buildHTMLAttributesFromArray($field->htmlAttributes); ?>><?php Template::escape($value); ?></textarea>
+                  <?php if ($field->helpText) { ?>
+            <br /> <small><?php translate($field->helpText); ?></small>
+        <?php } ?>
+    </p>
 </div>

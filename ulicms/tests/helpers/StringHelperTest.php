@@ -8,8 +8,8 @@ class StringHelperTest extends \PHPUnit\Framework\TestCase {
 
     public function testRemoveEmptyLineFromString() {
         $input = file_get_contents(
-		Path::resolve("ULICMS_ROOT/tests/fixtures/removeEmptyLinesFromString.input.txt"));
-        $expected = normalizeLN(file_get_contents( Path::resolve("ULICMS_ROOT/tests/fixtures/removeEmptyLinesFromString.expected.txt")), "\n");
+                Path::resolve("ULICMS_ROOT/tests/fixtures/removeEmptyLinesFromString.input.txt"));
+        $expected = normalizeLN(file_get_contents(Path::resolve("ULICMS_ROOT/tests/fixtures/removeEmptyLinesFromString.expected.txt")), "\n");
 
         $this->assertEquals($expected,
                 StringHelper::removeEmptyLinesFromString($input));

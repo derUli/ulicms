@@ -1,8 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-function sremove_usage()
-{
+function sremove_usage() {
     echo "sremove - Remove an UliCMS package\n";
     echo "UliCMS Version " . cms_version() . "\n";
     echo "Copyright (C) 2016 by Ulrich Schmidt";
@@ -36,7 +35,7 @@ $allowedTypes = array(
     "theme"
 );
 
-if (! faster_in_array($type, $allowedTypes)) {
+if (!faster_in_array($type, $allowedTypes)) {
     sremove_usage();
 }
 
@@ -44,7 +43,7 @@ foreach ($packages as $package) {
     if (uninstall_module($package, $type)) {
         echo "Package $package removed\n";
     } else {
-        
+
         echo "Removing  $package failed.\n";
     }
 }

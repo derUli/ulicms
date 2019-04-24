@@ -19,7 +19,7 @@ if ($permissionChecker->hasPermission("pages") or $permissionChecker->hasPermiss
             <a href="?action=comments_manage" class="btn btn-default voffset2"><i
                     class="fa fa-comments" aria-hidden="true"></i>
                 <?php translate("comments"); ?></a><br />
-                <?php
+            <?php
         }
         ?>
         <?php
@@ -29,26 +29,25 @@ if ($permissionChecker->hasPermission("pages") or $permissionChecker->hasPermiss
                     <?php
                     translate("forms");
                     ?></a> <br />
-                    <?php
-            }
-            if ($permissionChecker->hasPermission("banners")) {
-                ?>
+            <?php
+        }
+        if ($permissionChecker->hasPermission("banners")) {
+            ?>
             <a href="index.php?action=banner" class="btn btn-default voffset2"><i
                     class="fas fa-bullhorn"></i> <?php translate("advertisements"); ?></a><br />
 
-        <?php
-    }
-    if ($permissionChecker->hasPermission("categories")) {
-        ?>
+            <?php
+        }
+        if ($permissionChecker->hasPermission("categories")) {
+            ?>
             <a href="index.php?action=categories" class="btn btn-default voffset2"><i
                     class="fa fa-list-alt" aria-hidden="true"></i>
-        <?php translate("categories"); ?></a><br /> <br />
-                <?php
-            }
-            do_event("content_type_list_entry");
-            ?>
+                <?php translate("categories"); ?></a><br /> <br />
+            <?php
+        }
+        do_event("content_type_list_entry");
+        ?>
         <?php
     } else {
         noPerms();
     }
- 

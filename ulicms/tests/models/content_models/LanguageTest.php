@@ -1,28 +1,23 @@
 <?php
 
-class LanguageTest extends \PHPUnit\Framework\TestCase
-{
+class LanguageTest extends \PHPUnit\Framework\TestCase {
 
-    public function setUp()
-    {
+    public function setUp() {
         $this->tearDown();
     }
 
-    public function tearDown()
-    {
+    public function tearDown() {
         $sql = "delete from `{prefix}languages` where language_code <> 'de' and language_code <> 'en'";
         Database::query($sql, true);
         Settings::set("default_language", "de");
     }
 
-    public function testGetAllLanguages()
-    {
+    public function testGetAllLanguages() {
         $list = Language::getAllLanguages();
         $this->assertEquals(2, count($list));
     }
 
-    public function testLoadLanguage()
-    {
+    public function testLoadLanguage() {
         $lang = new Language();
         $this->assertNull($lang->getId());
         $this->assertNull($lang->getName());
@@ -33,8 +28,7 @@ class LanguageTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("Deutsch", $lang->getName());
     }
 
-    public function testCreateLanguage()
-    {
+    public function testCreateLanguage() {
         $lang = new Language();
         $lang->setName("Lampukisch");
         $lang->setLanguageCode("lp");
@@ -62,8 +56,7 @@ class LanguageTest extends \PHPUnit\Framework\TestCase
         $this->assertNull($lang->getID());
     }
 
-    public function testDefaultLanguage()
-    {
+    public function testDefaultLanguage() {
         $lang = new Language();
         $lang->loadByLanguageCode("de");
         $this->assertTrue($lang->isDefaultLanguage());
@@ -72,4 +65,5 @@ class LanguageTest extends \PHPUnit\Framework\TestCase
         $lang->makeDefaultLanguage();
         $this->assertTrue($lang->isDefaultLanguage());
     }
+
 }

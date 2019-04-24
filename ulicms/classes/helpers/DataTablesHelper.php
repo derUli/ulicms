@@ -1,10 +1,8 @@
 <?php
 
-class DataTablesHelper extends Helper
-{
+class DataTablesHelper extends Helper {
 
-    public static function getLanguageFileURL($lang)
-    {
+    public static function getLanguageFileURL($lang) {
         $baseUrl = "scripts/datatables/lang";
         $file = "{$baseUrl}/{$lang}.lang";
         if (file_exists($file)) {
@@ -12,4 +10,5 @@ class DataTablesHelper extends Helper
         }
         return "$baseUrl/en.lang";
     }
+
 }

@@ -1,11 +1,9 @@
 <?php
 
-class AntiSpamHelper extends Helper
-{
+class AntiSpamHelper extends Helper {
 
     // checking if this Country is blocked by spamfilter
-    public static function isCountryBlocked($ip = null, $country_blacklist = null)
-    {
+    public static function isCountryBlocked($ip = null, $country_blacklist = null) {
         if (is_null($ip)) {
             $ip = get_ip();
         }
@@ -18,43 +16,39 @@ class AntiSpamHelper extends Helper
             $country_blacklist = array_map("trim", $country_blacklist);
             $country_blacklist = array_filter($country_blacklist);
         }
-        
+
         @$hostname = gethostbyaddr($ip);
-        
-        if (! $hostname) {
+
+        if (!$hostname) {
             return false;
         }
-        
+
         $hostname = strtolower($hostname);
-        
+
         for ($i = 0; $i < count($country_blacklist); $i ++) {
             $ending = "." . $country_blacklist[$i];
             if (EndsWith($hostname, $ending)) {
                 return true;
             }
         }
-        
+
         return false;
     }
 
-    public static function isChinese($str)
-    {
+    public static function isChinese($str) {
         return (bool) preg_match("/\p{Han}+/u", $str);
     }
 
-    public static function isCyrillic($str)
-    {
+    public static function isCyrillic($str) {
         return (bool) preg_match('/\p{Cyrillic}+/u', $str);
     }
 
-    public static function isRtl($str)
-    {
+    public static function isRtl($str) {
         $rtl_chars_pattern = '/[\x{0590}-\x{05ff}\x{0600}-\x{06ff}]/u';
         return (bool) preg_match($rtl_chars_pattern, $str);
     }
 
-    public static function containsBadwords($str, $words_blacklist = null)
-    {
+    public static function containsBadwords($str, $words_blacklist = null) {
         if (is_null($words_blacklist)) {
             $words_blacklist = Settings::get("spamfilter_words_blacklist");
         }
@@ -67,18 +61,16 @@ class AntiSpamHelper extends Helper
                 return $words_blacklist[$i];
             }
         }
-        
+
         return null;
     }
 
-    public static function isSpamFilterEnabled()
-    {
+    public static function isSpamFilterEnabled() {
         return Settings::get("spamfilter_enabled") == "yes";
     }
 
-    public static function checkForBot($useragent = null)
-    {
-        if (! $useragent) {
+    public static function checkForBot($useragent = null) {
+        if (!$useragent) {
             $useragent = $_SERVER['HTTP_USER_AGENT'];
         }
         $bots = array(
@@ -137,17 +129,17 @@ class AntiSpamHelper extends Helper
     // please note that this function returns also true if
     // you send an email to a nonexisting user on a valid domain.
     // Use this function with care
-    public static function checkMailDomain($email)
-    {
+    public static function checkMailDomain($email) {
         $domain = strstr($email, '@');
         $domain = remove_prefix($domain, "@");
         // In some cases getmxrr() would return a result for an invalid domain if there is no additional dot at the end
-        $domain = ! endsWith($domain, ".") ? $domain . "." : $domain;
+        $domain = !endsWith($domain, ".") ? $domain . "." : $domain;
         $result = array();
-        
+
         // sometimes getmxrr returns true even if the result is empty
         // so check the count of $result
         getmxrr($domain, $result);
         return count($result) > 0;
     }
+
 }

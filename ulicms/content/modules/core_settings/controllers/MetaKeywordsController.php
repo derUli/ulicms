@@ -1,10 +1,8 @@
 <?php
 
-class MetaKeywordsController extends Controller
-{
+class MetaKeywordsController extends Controller {
 
-    public function savePost()
-    {
+    public function savePost() {
         $languages = getAllLanguages();
         for ($i = 0; $i < count($languages); $i ++) {
             $lang = $languages[$i];
@@ -22,4 +20,5 @@ class MetaKeywordsController extends Controller
         }
         Request::redirect(ModuleHelper::buildActionURL("meta_keywords"));
     }
+
 }

@@ -1,6 +1,6 @@
 /**
  * This file is part of KCFinder project
- * 
+ *
  * @desc Upload files using drag and drop
  * @package KCFinder
  * @version 3.12
@@ -13,243 +13,234 @@
 
 DROP_EVENTS_BOUND = false;
 
-_.initDropUpload = function() {
-	if ((typeof XMLHttpRequest == "undefined")
-			|| (typeof document.addEventListener == "undefined")
-			|| (typeof File == "undefined")
-			|| (typeof FileReader == "undefined") || DROP_EVENTS_BOUND)
-		return;
+_.initDropUpload = function () {
+    if ((typeof XMLHttpRequest == "undefined")
+            || (typeof document.addEventListener == "undefined")
+            || (typeof File == "undefined")
+            || (typeof FileReader == "undefined") || DROP_EVENTS_BOUND)
+        return;
 
-	if (!XMLHttpRequest.prototype.sendAsBinary) {
-		XMLHttpRequest.prototype.sendAsBinary = function(datastr) {
-			var ords = Array.prototype.map.call(datastr, function(x) {
-				return x.charCodeAt(0) & 0xff;
-			}), ui8a = new Uint8Array(ords);
-			this.send(ui8a.buffer);
-		}
-	}
+    if (!XMLHttpRequest.prototype.sendAsBinary) {
+        XMLHttpRequest.prototype.sendAsBinary = function (datastr) {
+            var ords = Array.prototype.map.call(datastr, function (x) {
+                return x.charCodeAt(0) & 0xff;
+            }), ui8a = new Uint8Array(ords);
+            this.send(ui8a.buffer);
+        }
+    }
 
-	var uploadQueue = [], uploadInProgress = false, filesCount = 0, errors = [], files = $('#files'), folders = $('div.folder > a'), boundary = "------multipartdropuploadboundary"
-			+ (new Date).getTime(), currentFile,
+    var uploadQueue = [], uploadInProgress = false, filesCount = 0, errors = [], files = $('#files'), folders = $('div.folder > a'), boundary = "------multipartdropuploadboundary"
+            + (new Date).getTime(), currentFile,
+            filesDragOver = function (e) {
+                if (e.preventDefault)
+                    e.preventDefault();
+                $('#files').addClass('drag');
+                return false;
+            },
+            filesDragEnter = function (e) {
+                if (e.preventDefault)
+                    e.preventDefault();
+                return false;
+            },
+            filesDragLeave = function (e) {
+                if (e.preventDefault)
+                    e.preventDefault();
+                $('#files').removeClass('drag');
+                return false;
+            },
+            filesDrop = function (e) {
+                if (e.preventDefault)
+                    e.preventDefault();
+                if (e.stopPropagation)
+                    e.stopPropagation();
+                $('#files').removeClass('drag');
+                if (!$('#folders span.current').first().parent().data('writable')) {
+                    _.alert("Cannot write to upload folder.");
+                    return false;
+                }
+                filesCount += e.dataTransfer.files.length;
+                for (var i = 0; i < e.dataTransfer.files.length; i++) {
+                    var file = e.dataTransfer.files[i];
+                    file.thisTargetDir = _.dir;
+                    uploadQueue.push(file);
+                }
+                processUploadQueue();
+                return false;
+            },
+            folderDrag = function (e) {
+                if (e.preventDefault)
+                    e.preventDefault();
+                return false;
+            },
+            folderDrop = function (e, dir) {
+                if (e.preventDefault)
+                    e.preventDefault();
+                if (e.stopPropagation)
+                    e.stopPropagation();
+                if (!$(dir).data('writable')) {
+                    _.alert(_.label("Cannot write to upload folder."));
+                    return false;
+                }
+                filesCount += e.dataTransfer.files.length;
+                for (var i = 0; i < e.dataTransfer.files.length; i++) {
+                    var file = e.dataTransfer.files[i];
+                    file.thisTargetDir = $(dir).data('path');
+                    uploadQueue.push(file);
+                }
+                processUploadQueue();
+                return false;
+            };
 
-	filesDragOver = function(e) {
-		if (e.preventDefault)
-			e.preventDefault();
-		$('#files').addClass('drag');
-		return false;
-	},
+    files.get(0).removeEventListener('dragover', filesDragOver, false);
+    files.get(0).removeEventListener('dragenter', filesDragEnter, false);
+    files.get(0).removeEventListener('dragleave', filesDragLeave, false);
+    files.get(0).removeEventListener('drop', filesDrop, false);
 
-	filesDragEnter = function(e) {
-		if (e.preventDefault)
-			e.preventDefault();
-		return false;
-	},
+    files.get(0).addEventListener('dragover', filesDragOver, false);
+    files.get(0).addEventListener('dragenter', filesDragEnter, false);
+    files.get(0).addEventListener('dragleave', filesDragLeave, false);
+    files.get(0).addEventListener('drop', filesDrop, false);
 
-	filesDragLeave = function(e) {
-		if (e.preventDefault)
-			e.preventDefault();
-		$('#files').removeClass('drag');
-		return false;
-	},
+    folders.each(function () {
+        var folder = this,
+                dragOver = function (e) {
+                    $(folder).children('span.folder').addClass('context');
+                    return folderDrag(e);
+                },
+                dragLeave = function (e) {
+                    $(folder).children('span.folder').removeClass('context');
+                    return folderDrag(e);
+                },
+                drop = function (e) {
+                    $(folder).children('span.folder').removeClass('context');
+                    return folderDrop(e, folder);
+                };
 
-	filesDrop = function(e) {
-		if (e.preventDefault)
-			e.preventDefault();
-		if (e.stopPropagation)
-			e.stopPropagation();
-		$('#files').removeClass('drag');
-		if (!$('#folders span.current').first().parent().data('writable')) {
-			_.alert("Cannot write to upload folder.");
-			return false;
-		}
-		filesCount += e.dataTransfer.files.length;
-		for (var i = 0; i < e.dataTransfer.files.length; i++) {
-			var file = e.dataTransfer.files[i];
-			file.thisTargetDir = _.dir;
-			uploadQueue.push(file);
-		}
-		processUploadQueue();
-		return false;
-	},
+        this.removeEventListener('dragover', dragOver, false);
+        this.removeEventListener('dragenter', folderDrag, false);
+        this.removeEventListener('dragleave', dragLeave, false);
+        this.removeEventListener('drop', drop, false);
 
-	folderDrag = function(e) {
-		if (e.preventDefault)
-			e.preventDefault();
-		return false;
-	},
+        this.addEventListener('dragover', dragOver, false);
+        this.addEventListener('dragenter', folderDrag, false);
+        this.addEventListener('dragleave', dragLeave, false);
+        this.addEventListener('drop', drop, false);
+    });
 
-	folderDrop = function(e, dir) {
-		if (e.preventDefault)
-			e.preventDefault();
-		if (e.stopPropagation)
-			e.stopPropagation();
-		if (!$(dir).data('writable')) {
-			_.alert(_.label("Cannot write to upload folder."));
-			return false;
-		}
-		filesCount += e.dataTransfer.files.length;
-		for (var i = 0; i < e.dataTransfer.files.length; i++) {
-			var file = e.dataTransfer.files[i];
-			file.thisTargetDir = $(dir).data('path');
-			uploadQueue.push(file);
-		}
-		processUploadQueue();
-		return false;
-	};
+    function updateProgress(evt) {
+        var progress = evt.lengthComputable ? Math.round((evt.loaded * 100)
+                / evt.total)
+                + '%' : Math.round(evt.loaded / 1024) + " KB";
+        $('#loading').html(
+                _.label("Uploading file {number} of {count}... {progress}", {
+                    number: filesCount - uploadQueue.length,
+                    count: filesCount,
+                    progress: progress
+                }));
+    }
 
-	files.get(0).removeEventListener('dragover', filesDragOver, false);
-	files.get(0).removeEventListener('dragenter', filesDragEnter, false);
-	files.get(0).removeEventListener('dragleave', filesDragLeave, false);
-	files.get(0).removeEventListener('drop', filesDrop, false);
+    function processUploadQueue() {
+        if (uploadInProgress)
+            return false;
 
-	files.get(0).addEventListener('dragover', filesDragOver, false);
-	files.get(0).addEventListener('dragenter', filesDragEnter, false);
-	files.get(0).addEventListener('dragleave', filesDragLeave, false);
-	files.get(0).addEventListener('drop', filesDrop, false);
+        if (uploadQueue && uploadQueue.length) {
+            var file = uploadQueue.shift();
+            currentFile = file;
+            $('#loading').html(
+                    _.label("Uploading file {number} of {count}... {progress}",
+                            {
+                                number: filesCount - uploadQueue.length,
+                                count: filesCount,
+                                progress: ""
+                            })).show();
 
-	folders.each(function() {
-		var folder = this,
+            var reader = new FileReader();
+            reader.thisFileName = file.name;
+            reader.thisFileType = file.type;
+            reader.thisFileSize = file.size;
+            reader.thisTargetDir = file.thisTargetDir;
 
-		dragOver = function(e) {
-			$(folder).children('span.folder').addClass('context');
-			return folderDrag(e);
-		},
+            reader.onload = function (evt) {
+                uploadInProgress = true;
 
-		dragLeave = function(e) {
-			$(folder).children('span.folder').removeClass('context');
-			return folderDrag(e);
-		},
+                var postbody = '--' + boundary
+                        + '\r\nContent-Disposition: form-data; name="upload[]"';
+                if (evt.target.thisFileName)
+                    postbody += '; filename="'
+                            + $.$.utf8encode(evt.target.thisFileName) + '"';
+                postbody += '\r\n';
+                if (evt.target.thisFileSize)
+                    postbody += "Content-Length: " + evt.target.thisFileSize
+                            + "\r\n";
+                postbody += "Content-Type: "
+                        + evt.target.thisFileType
+                        + "\r\n\r\n"
+                        + evt.target.result
+                        + "\r\n--"
+                        + boundary
+                        + '\r\nContent-Disposition: form-data; name="dir"\r\n\r\n'
+                        + $.$.utf8encode(evt.target.thisTargetDir) + "\r\n--"
+                        + boundary + "\r\n--" + boundary + "--\r\n";
 
-		drop = function(e) {
-			$(folder).children('span.folder').removeClass('context');
-			return folderDrop(e, folder);
-		};
+                var xhr = new XMLHttpRequest();
+                xhr.thisFileName = evt.target.thisFileName;
 
-		this.removeEventListener('dragover', dragOver, false);
-		this.removeEventListener('dragenter', folderDrag, false);
-		this.removeEventListener('dragleave', dragLeave, false);
-		this.removeEventListener('drop', drop, false);
+                if (xhr.upload) {
+                    xhr.upload.thisFileName = evt.target.thisFileName;
+                    xhr.upload.addEventListener("progress", updateProgress,
+                            false);
+                }
+                xhr.open('post', _.getURL('upload'), true);
+                xhr.setRequestHeader('Content-Type',
+                        "multipart/form-data; boundary=" + boundary);
+                // xhr.setRequestHeader('Content-Length', postbody.length);
 
-		this.addEventListener('dragover', dragOver, false);
-		this.addEventListener('dragenter', folderDrag, false);
-		this.addEventListener('dragleave', dragLeave, false);
-		this.addEventListener('drop', drop, false);
-	});
+                xhr.onload = function (e) {
+                    $('#loading').hide();
+                    if (_.dir == reader.thisTargetDir)
+                        _.fadeFiles();
+                    uploadInProgress = false;
+                    processUploadQueue();
+                    if (xhr.responseText.substr(0, 1) != "/")
+                        errors[errors.length] = xhr.responseText;
+                };
 
-	function updateProgress(evt) {
-		var progress = evt.lengthComputable ? Math.round((evt.loaded * 100)
-				/ evt.total)
-				+ '%' : Math.round(evt.loaded / 1024) + " KB";
-		$('#loading').html(
-				_.label("Uploading file {number} of {count}... {progress}", {
-					number : filesCount - uploadQueue.length,
-					count : filesCount,
-					progress : progress
-				}));
-	}
+                xhr.sendAsBinary(postbody);
+            };
 
-	function processUploadQueue() {
-		if (uploadInProgress)
-			return false;
+            reader.onerror = function (evt) {
+                $('#loading').hide();
+                uploadInProgress = false;
+                processUploadQueue();
+                errors[errors.length] = _.label("Failed to upload {filename}!",
+                        {
+                            filename: evt.target.thisFileName
+                        });
+            };
 
-		if (uploadQueue && uploadQueue.length) {
-			var file = uploadQueue.shift();
-			currentFile = file;
-			$('#loading').html(
-					_.label("Uploading file {number} of {count}... {progress}",
-							{
-								number : filesCount - uploadQueue.length,
-								count : filesCount,
-								progress : ""
-							})).show();
+            reader.readAsBinaryString(file);
 
-			var reader = new FileReader();
-			reader.thisFileName = file.name;
-			reader.thisFileType = file.type;
-			reader.thisFileSize = file.size;
-			reader.thisTargetDir = file.thisTargetDir;
-
-			reader.onload = function(evt) {
-				uploadInProgress = true;
-
-				var postbody = '--' + boundary
-						+ '\r\nContent-Disposition: form-data; name="upload[]"';
-				if (evt.target.thisFileName)
-					postbody += '; filename="'
-							+ $.$.utf8encode(evt.target.thisFileName) + '"';
-				postbody += '\r\n';
-				if (evt.target.thisFileSize)
-					postbody += "Content-Length: " + evt.target.thisFileSize
-							+ "\r\n";
-				postbody += "Content-Type: "
-						+ evt.target.thisFileType
-						+ "\r\n\r\n"
-						+ evt.target.result
-						+ "\r\n--"
-						+ boundary
-						+ '\r\nContent-Disposition: form-data; name="dir"\r\n\r\n'
-						+ $.$.utf8encode(evt.target.thisTargetDir) + "\r\n--"
-						+ boundary + "\r\n--" + boundary + "--\r\n";
-
-				var xhr = new XMLHttpRequest();
-				xhr.thisFileName = evt.target.thisFileName;
-
-				if (xhr.upload) {
-					xhr.upload.thisFileName = evt.target.thisFileName;
-					xhr.upload.addEventListener("progress", updateProgress,
-							false);
-				}
-				xhr.open('post', _.getURL('upload'), true);
-				xhr.setRequestHeader('Content-Type',
-						"multipart/form-data; boundary=" + boundary);
-				// xhr.setRequestHeader('Content-Length', postbody.length);
-
-				xhr.onload = function(e) {
-					$('#loading').hide();
-					if (_.dir == reader.thisTargetDir)
-						_.fadeFiles();
-					uploadInProgress = false;
-					processUploadQueue();
-					if (xhr.responseText.substr(0, 1) != "/")
-						errors[errors.length] = xhr.responseText;
-				};
-
-				xhr.sendAsBinary(postbody);
-			};
-
-			reader.onerror = function(evt) {
-				$('#loading').hide();
-				uploadInProgress = false;
-				processUploadQueue();
-				errors[errors.length] = _.label("Failed to upload {filename}!",
-						{
-							filename : evt.target.thisFileName
-						});
-			};
-
-			reader.readAsBinaryString(file);
-
-		} else {
-			filesCount = 0;
-			var loop = setInterval(
-					function() {
-						if (uploadInProgress)
-							return;
-						boundary = "------multipartdropuploadboundary"
-								+ (new Date).getTime();
-						uploadQueue = [];
-						clearInterval(loop);
-						if (currentFile.thisTargetDir == _.dir)
-							_.refresh();
-						if (errors.length) {
-							errors = errors.join("\n");
-							if (errors.replace(/^\s+/g, "")
-									.replace(/\s+$/g, "").length)
-								_.alert(errors);
-							errors = [];
-						}
-					}, 333);
-		}
-	}
-	DROP_EVENTS_BOUND = true;
+        } else {
+            filesCount = 0;
+            var loop = setInterval(
+                    function () {
+                        if (uploadInProgress)
+                            return;
+                        boundary = "------multipartdropuploadboundary"
+                                + (new Date).getTime();
+                        uploadQueue = [];
+                        clearInterval(loop);
+                        if (currentFile.thisTargetDir == _.dir)
+                            _.refresh();
+                        if (errors.length) {
+                            errors = errors.join("\n");
+                            if (errors.replace(/^\s+/g, "")
+                                    .replace(/\s+$/g, "").length)
+                                _.alert(errors);
+                            errors = [];
+                        }
+                    }, 333);
+        }
+    }
+    DROP_EVENTS_BOUND = true;
 };

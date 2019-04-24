@@ -1,4 +1,5 @@
 <?php
+
 add_translation("FORTUNE", "Fortune Cookie");
 add_translation("MY_SETTINGS_PAGE", "My Settings Page");
 add_translation("HELLO_WORLD", "Hello World!");

@@ -1,10 +1,8 @@
 <?php
 
-class MetaDescriptionController extends Controller
-{
+class MetaDescriptionController extends Controller {
 
-    public function savePost()
-    {
+    public function savePost() {
         $languages = getAllLanguages();
         for ($i = 0; $i < count($languages); $i ++) {
             $lang = $languages[$i];
@@ -22,4 +20,5 @@ class MetaDescriptionController extends Controller
         }
         Request::redirect(ModuleHelper::buildActionURL("meta_description"));
     }
+
 }

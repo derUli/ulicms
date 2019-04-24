@@ -1,26 +1,20 @@
 <?php
 
-class PrivacyCheckboxTest extends \PHPUnit\Framework\TestCase
-{
+class PrivacyCheckboxTest extends \PHPUnit\Framework\TestCase {
 
     private $privacy_policy_checkbox_enable_de;
-
     private $privacy_policy_checkbox_enable_en;
-
     private $privacy_policy_checkbox_text_de;
-
     private $privacy_policy_checkbox_text_en;
 
-    public function setUp()
-    {
+    public function setUp() {
         $this->privacy_policy_checkbox_enable_de = Settings::get("privacy_policy_checkbox_enable_de");
         $this->privacy_policy_checkbox_enable_en = Settings::get("privacy_policy_checkbox_enable_en");
         $this->privacy_policy_checkbox_text_de = Settings::get("privacy_policy_checkbox_text_de");
         $this->privacy_policy_checkbox_text_en = Settings::get("privacy_policy_checkbox_text_en");
     }
 
-    public function tearDown()
-    {
+    public function tearDown() {
         if ($this->privacy_policy_checkbox_enable_de) {
             Settings::set("privacy_policy_checkbox_enable_de", "1");
         } else {
@@ -33,13 +27,12 @@ class PrivacyCheckboxTest extends \PHPUnit\Framework\TestCase
         }
         Settings::set("privacy_policy_checkbox_text_de", $this->privacy_policy_checkbox_text_de);
         Settings::set("privacy_policy_checkbox_text_de", $this->privacy_policy_checkbox_text_en);
-        
+
         unset($_POST[PrivacyCheckbox::CHECKBOX_NAME]);
         unset($_GET[PrivacyCheckbox::CHECKBOX_NAME]);
     }
 
-    public function testIsEnabled()
-    {
+    public function testIsEnabled() {
         $languages = array(
             "de",
             "en"
@@ -53,8 +46,7 @@ class PrivacyCheckboxTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testRender()
-    {
+    public function testRender() {
         $values = array(
             "de" => '<div class="checkbox"><label>[checkbox] Lorem Ipsum</label></div>',
             "en" => '<div class="checkbox"><label>[checkbox] Sit dor amet</label></div>'
@@ -67,17 +59,16 @@ class PrivacyCheckboxTest extends \PHPUnit\Framework\TestCase
             Settings::delete("privacy_policy_checkbox_text_{$language}");
             $checkbox = new PrivacyCheckbox($language);
             $this->assertEmpty($checkbox->render());
-            
+
             Settings::set("privacy_policy_checkbox_enable_{$language}", 1);
             Settings::set("privacy_policy_checkbox_text_{$language}", $html);
-            
+
             $this->assertNotEmpty($checkbox->render());
             $this->assertEquals($expectedResults[$language], $checkbox->render());
         }
     }
 
-    public function testIsCheckboxCheckedPost()
-    {
+    public function testIsCheckboxCheckedPost() {
         $checkbox = new PrivacyCheckbox("en");
         $this->assertFalse($checkbox->isChecked());
         $_POST[PrivacyCheckbox::CHECKBOX_NAME] = "1";
@@ -85,12 +76,12 @@ class PrivacyCheckboxTest extends \PHPUnit\Framework\TestCase
         unset($_POST[PrivacyCheckbox::CHECKBOX_NAME]);
     }
 
-    public function testIsCheckboxCheckedGet()
-    {
+    public function testIsCheckboxCheckedGet() {
         $checkbox = new PrivacyCheckbox("en");
         $this->assertFalse($checkbox->isChecked());
         $_GET[PrivacyCheckbox::CHECKBOX_NAME] = "1";
         $this->assertTrue($checkbox->isChecked());
         unset($_GET[PrivacyCheckbox::CHECKBOX_NAME]);
     }
+
 }

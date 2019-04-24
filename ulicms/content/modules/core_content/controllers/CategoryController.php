@@ -1,20 +1,17 @@
 <?php
 
-class CategoryController extends Controller
-{
+class CategoryController extends Controller {
 
     private $logger;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->logger = LoggerRegistry::get("audit_log");
     }
 
-    public function createPost()
-    {
+    public function createPost() {
         $logger = LoggerRegistry::get("audit_log");
-        
-        if (! empty($_REQUEST["name"])) {
+
+        if (!empty($_REQUEST["name"])) {
             Categories::addCategory($_REQUEST["name"], $_REQUEST["description"]);
             if ($this->logger) {
                 $user = getUserById(get_user_id());
@@ -25,9 +22,8 @@ class CategoryController extends Controller
         Request::redirect(ModuleHelper::buildActionURL("categories"));
     }
 
-    public function updatePost()
-    {
-        if (! empty($_REQUEST["name"]) and ! empty($_REQUEST["id"])) {
+    public function updatePost() {
+        if (!empty($_REQUEST["name"]) and ! empty($_REQUEST["id"])) {
             Categories::updateCategory(intval($_REQUEST["id"]), $_REQUEST["name"], $_REQUEST["description"]);
             if ($this->logger) {
                 $user = getUserById(get_user_id());
@@ -38,8 +34,7 @@ class CategoryController extends Controller
         Request::redirect(ModuleHelper::buildActionURL("categories"));
     }
 
-    public function deletePost()
-    {
+    public function deletePost() {
         $del = intval($_GET["del"]);
         if ($del != 1) {
             Categories::deleteCategory($del);
@@ -51,4 +46,5 @@ class CategoryController extends Controller
         }
         Request::redirect(ModuleHelper::buildActionURL("categories"));
     }
+
 }

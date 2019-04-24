@@ -1,32 +1,25 @@
 <?php
 
-class CategoryTest extends \PHPUnit\Framework\TestCase
-{
+class CategoryTest extends \PHPUnit\Framework\TestCase {
 
     const name1 = "Name 1";
-
     const name2 = "Name 2";
-
     const description1 = "Description 1";
-
     const description2 = "Description 2";
 
-    public function setUp()
-    {
+    public function setUp() {
         Database::pQuery("delete from `{prefix}categories`
 							where name = ? or name = ?", array(
             self::name1,
             self::name2
-        ), true);
+                ), true);
     }
 
-    public function tearDown()
-    {
+    public function tearDown() {
         $this->setUp();
     }
 
-    public function testCreateEditAndDeleteCategory()
-    {
+    public function testCreateEditAndDeleteCategory() {
         $category = new Category();
         $category->setName(self::name1);
         $category->setDescription(self::description1);
@@ -46,7 +39,8 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
         $category->delete();
         $this->assertNull($category->getID());
         $category = new Category($id);
-        
+
         $this->assertNull($category->getID());
     }
+
 }

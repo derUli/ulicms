@@ -26,7 +26,7 @@ if (!$permissionChecker->hasPermission("upload_patches")) {
               <?php csrf_token_html(); ?>
         <p>
             <strong><?php translate("name"); ?></strong> <br /> <input type="text"
-                                                                      name="name" value="" required />
+                                                                       name="name" value="" required />
         </p>
         <p>
             <strong><?php translate("description"); ?></strong> <br /> <input
@@ -35,11 +35,11 @@ if (!$permissionChecker->hasPermission("upload_patches")) {
 
         <p>
             <strong><?php translate("file"); ?></strong> <br /> <input name="file"
-                                                                      type="file" required />
+                                                                       type="file" required />
         </p>
         <p>
             <button type="submit" class="btn btn-warning" name="upload_patch"><?php translate("install_patch"); ?></button>
         </p>
     </form>
-<?php
+    <?php
 }

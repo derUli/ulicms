@@ -1,20 +1,17 @@
 <?php
 
 // get a config variable
-function getconfig($key)
-{
+function getconfig($key) {
     return Settings::get($key);
 }
 
 // Remove an configuration variable
-function deleteconfig($key)
-{
+function deleteconfig($key) {
     return Settings::delete($key);
 }
 
 // Set a configuration Variable;
-function setconfig($key, $value)
-{
+function setconfig($key, $value) {
     $query = db_query("SELECT id FROM " . tbname("settings") . " WHERE name='$key'");
     if (db_num_rows($query) > 0) {
         db_query("UPDATE " . tbname("settings") . " SET value='$value' WHERE name='$key'");
@@ -36,10 +33,9 @@ function setconfig($key, $value)
     SettingsCache::set($key, $value);
 }
 
-function initconfig($key, $value)
-{
+function initconfig($key, $value) {
     $retval = false;
-    if (! Settings::get($key)) {
+    if (!Settings::get($key)) {
         setconfig($key, $value);
         $retval = true;
         SettingsCache::set($key, $value);

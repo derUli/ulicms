@@ -1,8 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-function sinfo_usage()
-{
+function sinfo_usage() {
     echo "sinfo - List installed UliCMS packages\n";
     echo "UliCMS Version " . cms_version() . "\n";
     echo "Copyright (C) 2016 by Ulrich Schmidt";
@@ -11,8 +10,7 @@ function sinfo_usage()
     exit();
 }
 
-function sinfo_list_modules()
-{
+function sinfo_list_modules() {
     $modules = getAllModules();
     if (count($modules) > 0) {
         for ($i = 0; $i < count($modules); $i ++) {
@@ -24,15 +22,14 @@ function sinfo_list_modules()
             echo "\n";
         }
     }
-    
+
     echo "\n";
     echo count($modules) . " modules total\n";
 }
 
-function sinfo_list_themes()
-{
+function sinfo_list_themes() {
     $themes = getThemeList();
-    
+
     if (count($themes) > 0) {
         for ($i = 0; $i < count($themes); $i ++) {
             echo "- " . $themes[$i];
@@ -75,13 +72,13 @@ if (count($argv) > 2) {
         case "themes":
             sinfo_list_themes();
             break;
-        
+
         case "examine":
             if (count($argv) < 2) {
                 sinfo_usage();
             }
             $file = $argv[1];
-            if (! is_file($file)) {
+            if (!is_file($file)) {
                 echo "File " . basename($file) . " not found!\n";
                 exit();
             }

@@ -1,15 +1,13 @@
 <?php
 
-class RequestMethodTest extends \PHPUnit\Framework\TestCase
-{
+class RequestMethodTest extends \PHPUnit\Framework\TestCase {
 
-    public function testPost()
-    {
+    public function testPost() {
         $this->assertEquals("post", RequestMethod::POST);
     }
 
-    public function testGet()
-    {
+    public function testGet() {
         $this->assertEquals("get", RequestMethod::GET);
     }
+
 }

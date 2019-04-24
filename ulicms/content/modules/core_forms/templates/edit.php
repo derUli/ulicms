@@ -18,8 +18,8 @@ if (!$permissionChecker->hasPermission("forms") or ! $permissionChecker->hasPerm
         <input type="hidden" name="id" value="<?php echo $id; ?>" />
         <p>
             <strong><?php translate("name"); ?>*</strong><br /> <input type="text"
-                                                                      value="<?php esc($form["name"]); ?>" name="name"
-                                                                      required />
+                                                                       value="<?php esc($form["name"]); ?>" name="name"
+                                                                       required />
         </p>
         <p>
             <strong><?php translate("enabled"); ?></strong><br /> <select
@@ -63,10 +63,12 @@ if (!$permissionChecker->hasPermission("forms") or ! $permissionChecker->hasPerm
                 name="target_page_id">
                     <?php foreach ($pages as $page) { ?>
                     <option value="<?php echo $page["id"]; ?>"
-                            <?php if ($page["id"] == $form["target_page_id"]) {
-                                echo " selected";
-                            } ?>><?php esc($page["title"]); ?></option>
-        <?php } ?>
+                    <?php
+                    if ($page["id"] == $form["target_page_id"]) {
+                        echo " selected";
+                    }
+                    ?>><?php esc($page["title"]); ?></option>
+                        <?php } ?>
             </select>
         </p>
         <p>

@@ -1,4 +1,5 @@
 <?php
+
 add_translation("UPDATE_MANAGER", "Update Manager");
 add_translation("INSTALL_UPDATES", "Install Updates");
 add_translation("PLEASE_SELECT_PACKAGES", "Please select packages to upgrade.");

@@ -1,11 +1,9 @@
 <?php
 
-class NumberFormatHelper extends Helper
-{
+class NumberFormatHelper extends Helper {
 
     // Snippet from PHP Share: http://www.phpshare.org
-    public static function formatSizeUnits($bytes)
-    {
+    public static function formatSizeUnits($bytes) {
         if ($bytes >= 1073741824) {
             $bytes = number_format($bytes / 1073741824, 2) . ' GB';
         } elseif ($bytes >= 1048576) {
@@ -19,13 +17,13 @@ class NumberFormatHelper extends Helper
         } else {
             $bytes = '0 Bytes';
         }
-        
+
         return $bytes;
     }
 
-    public static function formatTime($seconds)
-    {
+    public static function formatTime($seconds) {
         $seconds = abs($seconds); // Ganzzahlwert bilden
         return sprintf(get_translation("FORMAT_TIME"), $seconds / 60 / 60 / 24, ($seconds / 60 / 60) % 24, ($seconds / 60) % 60, $seconds % 60);
     }
+
 }

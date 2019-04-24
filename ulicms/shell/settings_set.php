@@ -1,8 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-function usage()
-{
+function usage() {
     echo "settings_set - Set a setting\n";
     echo "UliCMS Version " . cms_version() . "\n";
     echo "Copyright (C) 2018 by Ulrich Schmidt";

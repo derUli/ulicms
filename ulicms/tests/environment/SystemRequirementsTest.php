@@ -1,50 +1,41 @@
 <?php
 
-class SystemRequirementsTest extends \PHPUnit\Framework\TestCase
-{
+class SystemRequirementsTest extends \PHPUnit\Framework\TestCase {
 
-    public function testPhpVersion()
-    {
+    public function testPhpVersion() {
         $this->assertTrue(version_compare(phpversion(), "5.6", ">="));
     }
 
-    public function testPhpModuleMySqli()
-    {
+    public function testPhpModuleMySqli() {
         $this->assertTrue(extension_loaded("mysqli"));
     }
 
-    public function testPhpModuleGd()
-    {
+    public function testPhpModuleGd() {
         $this->assertTrue(extension_loaded("gd"));
     }
 
-    public function testPhpModuleJson()
-    {
+    public function testPhpModuleJson() {
         $this->assertTrue(extension_loaded("json"));
     }
 
-    public function testPhpModuleMbString()
-    {
+    public function testPhpModuleMbString() {
         $this->assertTrue(extension_loaded("mbstring"));
     }
 
-    public function testPhpModuleOpenSSL()
-    {
+    public function testPhpModuleOpenSSL() {
         $this->assertTrue(extension_loaded("openssl"));
     }
 
-    public function testPhpModuleDom()
-    {
+    public function testPhpModuleDom() {
         $this->assertTrue(extension_loaded("dom"));
     }
 
-    public function testPhpModuleXml()
-    {
+    public function testPhpModuleXml() {
         $this->assertTrue(extension_loaded("xml"));
     }
 
-    public function testConnectToUliCMSServices()
-    {
+    public function testConnectToUliCMSServices() {
         $this->assertNotFalse(file_get_contents_wrapper("https://www.ulicms.de/", true));
     }
+
 }

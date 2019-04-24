@@ -1,14 +1,11 @@
 <?php
 
-class Domain2LanguageMappingTest extends \PHPUnit\Framework\TestCase
-{
+class Domain2LanguageMappingTest extends \PHPUnit\Framework\TestCase {
 
     private $originalMapping;
-
     private $originalHTTPHost;
 
-    public function setUp()
-    {
+    public function setUp() {
         @session_start();
         $this->originalMapping = Settings::get("domain_to_language");
         $testData = file_get_contents(Path::resolve("ULICMS_ROOT/tests/fixtures/domain2language.txt"));
@@ -16,14 +13,12 @@ class Domain2LanguageMappingTest extends \PHPUnit\Framework\TestCase
         Settings::set("domain_to_language", $testData);
     }
 
-    public function tearDown()
-    {
+    public function tearDown() {
         Settings::set("domain_to_language", $this->originalMapping);
         $_SERVER["HTTP_HOST"] = $this->originalHTTPHost;
     }
 
-    public function testGetLanguageByDomain()
-    {
+    public function testGetLanguageByDomain() {
         $this->assertEquals("de", getLanguageByDomain("www.domain.de"));
         $this->assertEquals("en", getLanguageByDomain("domain.com"));
         $this->assertEquals("fr", getLanguageByDomain("domain.fr"));
@@ -31,8 +26,7 @@ class Domain2LanguageMappingTest extends \PHPUnit\Framework\TestCase
         $this->assertNull(getLanguageByDomain("domain.cn"));
     }
 
-    public function testGetDomainBylanguage()
-    {
+    public function testGetDomainBylanguage() {
         $this->assertEquals("www.domain.de", getDomainByLanguage("de"));
         $this->assertEquals("domain.com", getDomainByLanguage("en"));
         $this->assertEquals("domain.fr", getDomainByLanguage("fr"));
@@ -40,14 +34,14 @@ class Domain2LanguageMappingTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(null, getDomainByLanguage("cn"));
     }
 
-    public function testSetLanguageByDomain()
-    {
+    public function testSetLanguageByDomain() {
         $_SERVER["HTTP_HOST"] = "domain.de";
         setLanguageByDomain();
         $this->assertEquals("de", $_SESSION["language"]);
-        
+
         $_SERVER["HTTP_HOST"] = "domain.com";
         setLanguageByDomain();
         $this->assertEquals("en", $_SESSION["language"]);
     }
+
 }

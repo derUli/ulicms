@@ -1,10 +1,8 @@
 <?php
 
-class Path
-{
+class Path {
 
-    public static function resolve($path)
-    {
+    public static function resolve($path) {
         $path = str_ireplace("ULICMS_ROOT", rtrim(ULICMS_ROOT, "/"), $path);
         $path = str_ireplace("ULICMS_DATA_STORAGE_ROOT", rtrim(ULICMS_DATA_STORAGE_ROOT, "/"), $path);
         $path = str_ireplace("ULICMS_CONFIGURATIONS", ULICMS_CONFIGURATIONS, $path);
@@ -19,16 +17,15 @@ class Path
         return $path;
     }
 
-    public static function removeDir($dir, $DeleteMe)
-    {
-        if (! $dh = @opendir($dir)) {
+    public static function removeDir($dir, $DeleteMe) {
+        if (!$dh = @opendir($dir)) {
             return;
         }
         while (false !== ($obj = readdir($dh))) {
             if ($obj == '.' || $obj == '..') {
                 continue;
             }
-            if (! @unlink($dir . '/' . $obj)) {
+            if (!@unlink($dir . '/' . $obj)) {
                 self::removeDir($dir . '/' . $obj, true);
             }
         }
@@ -37,4 +34,5 @@ class Path
             @rmdir($dir);
         }
     }
+
 }

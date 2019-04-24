@@ -1,23 +1,24 @@
 /** This file is part of KCFinder project
-  *
-  *      @desc Object initializations
-  *   @package KCFinder
-  *   @version 3.12
-  *    @author Pavel Tzonkov <sunhater@sunhater.com>
-  * @copyright 2010-2014 KCFinder Project
-  *   @license http://opensource.org/licenses/GPL-3.0 GPLv3
-  *   @license http://opensource.org/licenses/LGPL-3.0 LGPLv3
-  *      @link http://kcfinder.sunhater.com
-  */
+ *
+ *      @desc Object initializations
+ *   @package KCFinder
+ *   @version 3.12
+ *    @author Pavel Tzonkov <sunhater@sunhater.com>
+ * @copyright 2010-2014 KCFinder Project
+ *   @license http://opensource.org/licenses/GPL-3.0 GPLv3
+ *   @license http://opensource.org/licenses/LGPL-3.0 LGPLv3
+ *      @link http://kcfinder.sunhater.com
+ */
 
-_.init = function() {
-    if (!_.checkAgent()) return;
+_.init = function () {
+    if (!_.checkAgent())
+        return;
 
-    $('body').click(function() {
+    $('body').click(function () {
         _.menu.hide();
     }).rightClick();
 
-    $('#menu').unbind().click(function() {
+    $('#menu').unbind().click(function () {
         return false;
     });
 
@@ -29,18 +30,18 @@ _.init = function() {
     _.initDropUpload();
 
     var div = $('<div></div>')
-        .css({width: 100, height: 100, overflow: 'auto', position: 'absolute', top: -1000, left: -1000})
-        .prependTo('body').append('<div></div>').find('div').css({width: '100%', height: 200});
+            .css({width: 100, height: 100, overflow: 'auto', position: 'absolute', top: -1000, left: -1000})
+            .prependTo('body').append('<div></div>').find('div').css({width: '100%', height: 200});
     _.scrollbarWidth = 100 - div.width();
     div.parent().remove();
 
-    $.each($.agent, function(i) {
+    $.each($.agent, function (i) {
         if (i != "platform")
             $('body').addClass(i)
     });
 
     if ($.agent.platform)
-        $.each($.agent.platform, function(i) {
+        $.each($.agent.platform, function (i) {
             $('body').addClass(i)
         });
 
@@ -48,11 +49,11 @@ _.init = function() {
         $('body').addClass("mobile");
 };
 
-_.checkAgent = function() {
+_.checkAgent = function () {
     if (($.agent.msie && !$.agent.opera && !$.agent.chromeframe && (parseInt($.agent.msie) < 9)) ||
-        ($.agent.opera && (parseInt($.agent.version) < 10)) ||
-        ($.agent.firefox && (parseFloat($.agent.firefox) < 1.8))
-    ) {
+            ($.agent.opera && (parseInt($.agent.version) < 10)) ||
+            ($.agent.firefox && (parseFloat($.agent.firefox) < 1.8))
+            ) {
         var html = '<div style="padding:10px">Your browser is not capable to display KCFinder. Please update your browser or install another one: <a href="http://www.mozilla.com/firefox/" target="_blank">Mozilla Firefox</a>, <a href="http://www.apple.com/safari" target="_blank">Apple Safari</a>, <a href="http://www.google.com/chrome" target="_blank">Google Chrome</a>, <a href="http://www.opera.com/browser" target="_blank">Opera</a>.';
         if ($.agent.msie && !$.agent.opera)
             html += ' You may also install <a href="http://www.google.com/chromeframe" target="_blank">Google Chrome Frame ActiveX plugin</a> to get Internet Explorer 6, 7, 8 working.';
@@ -63,7 +64,7 @@ _.checkAgent = function() {
     return true;
 };
 
-_.initOpeners = function() {
+_.initOpeners = function () {
 
     try {
 
@@ -74,7 +75,7 @@ _.initOpeners = function() {
             else
                 _.opener.callBack = true;
 
-        // TinyMCE 4
+            // TinyMCE 4
         } else if (_.opener.name == "tinymce4")
             _.opener.callBack = true;
 
@@ -88,7 +89,7 @@ _.initOpeners = function() {
             } else
                 _.opener.CKEditor = null;
 
-        // FCKeditor
+            // FCKeditor
         } else if ((!_.opener.name || (_.opener.name == "fckeditor")) && window.opener && window.opener.SetUrl) {
             _.opener.name = "fckeditor";
             _.opener.callBack = true;
@@ -97,31 +98,32 @@ _.initOpeners = function() {
         // Custom callback
         if (!_.opener.callBack) {
             if ((window.opener && window.opener.KCFinder && window.opener.KCFinder.callBack) ||
-                (window.parent && window.parent.KCFinder && window.parent.KCFinder.callBack)
-            )
+                    (window.parent && window.parent.KCFinder && window.parent.KCFinder.callBack)
+                    )
                 _.opener.callBack = window.opener
-                    ? window.opener.KCFinder.callBack
-                    : window.parent.KCFinder.callBack;
+                        ? window.opener.KCFinder.callBack
+                        : window.parent.KCFinder.callBack;
 
             if ((
                     window.opener &&
                     window.opener.KCFinder &&
                     window.opener.KCFinder.callBackMultiple
-                ) || (
+                    ) || (
                     window.parent &&
                     window.parent.KCFinder &&
                     window.parent.KCFinder.callBackMultiple
-                )
-            )
+                    )
+                    )
                 _.opener.callBackMultiple = window.opener
-                    ? window.opener.KCFinder.callBackMultiple
-                    : window.parent.KCFinder.callBackMultiple;
+                        ? window.opener.KCFinder.callBackMultiple
+                        : window.parent.KCFinder.callBackMultiple;
         }
 
-    } catch(e) {}
+    } catch (e) {
+    }
 };
 
-_.initContent = function() {
+_.initContent = function () {
     $('div#folders').html(_.label("Loading folders..."));
     $('div#files').html(_.label("Loading files..."));
     $.ajax({
@@ -129,7 +131,7 @@ _.initContent = function() {
         dataType: "json",
         url: _.getURL("init"),
         async: false,
-        success: function(data) {
+        success: function (data) {
             if (_.check4errors(data))
                 return;
             _.dirWritable = data.dirWritable;
@@ -140,25 +142,25 @@ _.initContent = function() {
             _.files = data.files ? data.files : [];
             _.orderFiles();
         },
-        error: function() {
+        error: function () {
             $('div#folders').html(_.label("Unknown error."));
             $('div#files').html(_.label("Unknown error."));
         }
     });
 };
 
-_.initResizer = function() {
+_.initResizer = function () {
     var cursor = ($.agent.opera) ? 'move' : 'col-resize';
     $('#resizer').css('cursor', cursor).draggable({
         axis: 'x',
-        start: function() {
+        start: function () {
             $(this).css({
                 opacity: "0.4",
                 filter: "alpha(opacity=40)"
             });
             $('#all').css('cursor', cursor);
         },
-        stop: function() {
+        stop: function () {
             $(this).css({
                 opacity: "0",
                 filter: "alpha(opacity=0)"
@@ -166,13 +168,13 @@ _.initResizer = function() {
             $('#all').css('cursor', "");
 
             var jLeft = $('#left'),
-                jRight = $('#right'),
-                jFiles = $('#files'),
-                jFolders = $('#folders'),
-                left = parseInt($(this).css('left')) + parseInt($(this).css('width')),
-                w = 0, r;
+                    jRight = $('#right'),
+                    jFiles = $('#files'),
+                    jFolders = $('#folders'),
+                    left = parseInt($(this).css('left')) + parseInt($(this).css('width')),
+                    w = 0, r;
 
-            $('#toolbar a').each(function() {
+            $('#toolbar a').each(function () {
                 if ($(this).css('display') != "none")
                     w += $(this).outerWidth(true);
             });
@@ -201,14 +203,14 @@ _.initResizer = function() {
     });
 };
 
-_.resize = function() {
+_.resize = function () {
     var jLeft = $('#left'),
-        jRight = $('#right'),
-        jStatus = $('#status'),
-        jFolders = $('#folders'),
-        jFiles = $('#files'),
-        jResizer = $('#resizer'),
-        jWindow = $(window);
+            jRight = $('#right'),
+            jStatus = $('#status'),
+            jFolders = $('#folders'),
+            jFiles = $('#files'),
+            jResizer = $('#resizer'),
+            jWindow = $(window);
 
     jLeft.css({
         width: "25%",
@@ -237,23 +239,23 @@ _.resize = function() {
     });
 };
 
-_.setTitle = function(title) {
+_.setTitle = function (title) {
     document.title = title;
     if (_.opener.name == "tinymce")
         tinyMCEPopup.editor.windowManager.setTitle(window, title);
     else if (_.opener.name == "tinymce4") {
         var ifr = $('iframe[src*="browse.php?opener=tinymce4&"]', window.parent.document),
-            path = ifr.attr('src').split('browse.php?')[0];
+                path = ifr.attr('src').split('browse.php?')[0];
         ifr.parent().parent().find('div.mce-title').html('<span style="padding:0 0 0 28px;margin:-2px 0 -3px -6px;display:block;font-size:1em;font-weight:bold;background:url(' + path + 'themes/default/img/kcf_logo.png) left center no-repeat">' + title + '</span>');
     }
 };
 
-_.fixFilesHeight = function() {
+_.fixFilesHeight = function () {
     var jFiles = $('#files'),
-        jSettings = $('#settings');
+            jSettings = $('#settings');
 
     jFiles.css('height',
-        $('#left').outerHeight() - $('#toolbar').outerHeight() - jFiles.outerVSpace() -
-        ((jSettings.css('display') != "none") ? jSettings.outerHeight() : 0)
-    );
+            $('#left').outerHeight() - $('#toolbar').outerHeight() - jFiles.outerVSpace() -
+            ((jSettings.css('display') != "none") ? jSettings.outerHeight() : 0)
+            );
 };

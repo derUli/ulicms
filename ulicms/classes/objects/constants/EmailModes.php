@@ -1,9 +1,8 @@
 <?php
 
-class EmailModes
-{
+class EmailModes {
 
     const INTERNAL = "internal";
-
     const PHPMAILER = "phpmailer";
+
 }

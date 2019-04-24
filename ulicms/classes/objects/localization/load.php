@@ -1,4 +1,5 @@
 <?php
+
 $classes = array(
     "JSTranslation",
     "Translation"

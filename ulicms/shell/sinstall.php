@@ -2,8 +2,7 @@
 <?php
 $language = "en";
 
-function sinstall_usage()
-{
+function sinstall_usage() {
     echo "sinstall - Install an UliCMS package\n";
     echo "UliCMS Version " . cms_version() . "\n";
     echo "Copyright (C) 2015 - 2018 by Ulrich Schmidt";
@@ -58,7 +57,7 @@ if (count($argv) == 0) {
             echo "\n";
             exit();
         }
-        
+
         if ($result) {
             echo "Package $file was successfully installed.";
         } else {

@@ -14,7 +14,7 @@ class HomepageTitleController extends Controller {
                     Settings::set("homepage_title", $page);
                 }
             }
-        } 
+        }
         // if called by ajax return no content to improve performance
         if (Request::isAjaxRequest()) {
             HTTPStatusCodeResult(HttpStatusCode::OK);

@@ -1,10 +1,8 @@
 <?php
 
-class PasswordReset
-{
+class PasswordReset {
 
-    public function addToken($user_id)
-    {
+    public function addToken($user_id) {
         $token = md5(uniqid() . strval($user_id));
         $user_id = intval($user_id);
         $sql = "INSERT INTO {prefix}password_reset (token, user_id) values (?, ?)";
@@ -16,13 +14,12 @@ class PasswordReset
         return $token;
     }
 
-    public function sendMail($token, $to, $ip, $firstname, $lastname)
-    {
+    public function sendMail($token, $to, $ip, $firstname, $lastname) {
         ViewBag::set("url", $this->getPasswordResetLink($token));
         ViewBag::set("firstname", $firstname);
         ViewBag::set("lastname", $lastname);
         ViewBag::set("ip", $ip);
-        
+
         $message = Template::executeDefaultOrOwnTemplate("email/password_reset");
         $subject = get_translation("reset_password_subject");
         $from = Settings::get("email");
@@ -32,19 +29,17 @@ class PasswordReset
         Mailer::send($to, $subject, $message, $headers);
     }
 
-    public function getPasswordResetLink($token)
-    {
+    public function getPasswordResetLink($token) {
         $url = getBaseFolderURL();
         $url = rtrim($url, "/");
-        if (! is_admin_dir()) {
+        if (!is_admin_dir()) {
             $url .= "/admin";
         }
         $url .= "/" . ModuleHelper::buildMethodCallUrl(SessionManager::class, "resetPassword", "token=$token");
         return $url;
     }
 
-    public function getToken($token)
-    {
+    public function getToken($token) {
         $sql = "select * from {prefix}password_reset where token = ?";
         $args = array(
             strval($token)
@@ -57,12 +52,12 @@ class PasswordReset
         }
     }
 
-    public function deleteToken($token)
-    {
+    public function deleteToken($token) {
         $sql = "delete from {prefix}password_reset where token = ?";
         $args = array(
             strval($token)
         );
         Database::pQuery($sql, $args, true);
     }
+
 }

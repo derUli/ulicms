@@ -2,20 +2,20 @@
 
 /**
  * * This file is part of KCFinder project
- * 
+ *
  * @desc Abstract image driver class
  * @package KCFinder
  * @version 3.12
- * @author Pavel Tzonkov <sunhater@sunhater.com> 
+ * @author Pavel Tzonkov <sunhater@sunhater.com>
  * @copyright 2010-2014 KCFinder Project
  * @license http://opensource.org/licenses/GPL-3.0 GPLv3
  * @license http://opensource.org/licenses/LGPL-3.0 LGPLv3
  * @link http://kcfinder.sunhater.com
  */
+
 namespace kcfinder;
 
-abstract class image
-{
+abstract class image {
 
     const DEFAULT_JPEG_QUALITY = 75;
 
@@ -61,8 +61,7 @@ abstract class image
      * @param string $property
      * @return mixed
      */
-    final public function __get($property)
-    {
+    final public function __get($property) {
         return property_exists($this, $property) ? $this->$property : null;
     }
 
@@ -80,11 +79,10 @@ abstract class image
      * @param mixed $image
      * @param array $options
      */
-    public function __construct($image, array $options = array())
-    {
+    public function __construct($image, array $options = array()) {
         $this->image = $this->width = $this->height = null;
         $imageDetails = $this->buildImage($image);
-        
+
         if ($imageDetails !== false)
             list ($this->image, $this->width, $this->height) = $imageDetails;
         else
@@ -101,8 +99,7 @@ abstract class image
      * @param mixed $image
      * @return object
      */
-    final static function factory($driver, $image, array $options = array())
-    {
+    final static function factory($driver, $image, array $options = array()) {
         $class = __NAMESPACE__ . "\\image_$driver";
         return new $class($image, $options);
     }
@@ -115,10 +112,9 @@ abstract class image
      * @param array $drivers
      * @return string
      */
-    final static function getDriver(array $drivers = array('gd'))
-    {
+    final static function getDriver(array $drivers = array('gd')) {
         foreach ($drivers as $driver) {
-            if (! preg_match('/^[a-z0-9\_]+$/i', $driver))
+            if (!preg_match('/^[a-z0-9\_]+$/i', $driver))
                 continue;
             $class = __NAMESPACE__ . "\\image_$driver";
             if (class_exists($class) && method_exists($class, "available")) {
@@ -138,27 +134,26 @@ abstract class image
      * @param mixed $image
      * @return array
      */
-    final protected function buildImage($image)
-    {
+    final protected function buildImage($image) {
         $class = get_class($this);
-        
+
         if ($image instanceof $class) {
             $width = $image->width;
             $height = $image->height;
             $img = $image->image;
         } elseif (is_array($image)) {
-            
+
             list ($key, $width) = myEach($image);
             list ($key, $height) = myEach($image);
             $img = $this->getBlankImage($width, $height);
         } else
             $img = $this->getImage($image, $width, $height);
-        
+
         return ($img !== false) ? array(
             $img,
             $width,
             $height
-        ) : false;
+                ) : false;
     }
 
     /**
@@ -167,10 +162,9 @@ abstract class image
      * @param integer $resizedHeight
      * @return integer
      */
-    final public function getPropWidth($resizedHeight)
-    {
+    final public function getPropWidth($resizedHeight) {
         $width = round(($this->width * $resizedHeight) / $this->height);
-        if (! $width)
+        if (!$width)
             $width = 1;
         return $width;
     }
@@ -181,10 +175,9 @@ abstract class image
      * @param integer $resizedWidth
      * @return integer
      */
-    final public function getPropHeight($resizedWidth)
-    {
+    final public function getPropHeight($resizedWidth) {
         $height = round(($this->height * $resizedWidth) / $this->width);
-        if (! $height)
+        if (!$height)
             $height = 1;
         return $height;
     }
@@ -197,8 +190,7 @@ abstract class image
      *
      * @return bool
      */
-    static function available()
-    {
+    static function available() {
         return false;
     }
 
@@ -210,8 +202,7 @@ abstract class image
      * @param string $file
      * @return bool
      */
-    static function checkImage($file)
-    {
+    static function checkImage($file) {
         return false;
     }
 

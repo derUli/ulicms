@@ -1,11 +1,10 @@
 <?php
+
 use PHPMailer\PHPMailer\PHPMailer;
 
-class MailerTest extends \PHPUnit\Framework\TestCase
-{
+class MailerTest extends \PHPUnit\Framework\TestCase {
 
-    public function testSplitHeaders()
-    {
+    public function testSplitHeaders() {
         $headers = "";
         $headers .= "From: info@company.com\n";
         $headers .= "Reply-To: reply@company.com\n";
@@ -14,7 +13,7 @@ class MailerTest extends \PHPUnit\Framework\TestCase
         $headers .= "Invalid Column\n";
         $headers .= "Another Invalid Column\r\r\n\n";
         $headers .= "X-Mailer: My Cool Mailer";
-        
+
         $parsed = Mailer::splitHeaders($headers);
         $this->assertEquals(3, count($parsed));
         $this->assertEquals("info@company.com", $parsed["From"]);
@@ -22,8 +21,7 @@ class MailerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("My Cool Mailer", $parsed["X-Mailer"]);
     }
 
-    public function testGetPHPMailer()
-    {
+    public function testGetPHPMailer() {
         $mailer = Mailer::getPHPMailer();
         $this->assertInstanceOf(PHPMailer::class, $mailer);
         $this->assertTrue(in_array($mailer->SMTPSecure, array(
@@ -34,9 +32,9 @@ class MailerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(Settings::get("show_meta_generator") ? "UliCMS" : "", $mailer->XMailer);
     }
 
-    public function testEmailModes()
-    {
+    public function testEmailModes() {
         $this->assertEquals("internal", EmailModes::INTERNAL);
         $this->assertEquals("phpmailer", EmailModes::PHPMAILER);
     }
+
 }
