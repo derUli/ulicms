@@ -70,7 +70,6 @@ class CorePersonalDataResponder implements Responder {
 
     public function deleteData($query) {
 
-        // TODO: block if user is current user;
         Database::pQuery("delete from {prefix}mails where `to` = ? or headers like ?", array(
             trim($query),
             "%" . trim($query) . "%"
@@ -79,8 +78,6 @@ class CorePersonalDataResponder implements Responder {
         $user = new User();
         $user->loadByEmail($query);
         $user->delete();
-
-        // TODO: Show success message
     }
 
     public function searchPerson($query) {

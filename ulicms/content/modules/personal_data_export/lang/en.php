@@ -1,4 +1,5 @@
 <?php
+
 add_translation("personal_data", "Personal Data");
 add_translation("name_or_email_address", "Name or E-Mail Address");
 add_translation("search", "Search");
@@ -13,3 +14,6 @@ add_translation("twitter", "Twitter");
 add_translation("to", "To");
 add_translation("headers", "Headers");
 add_translation("body", "Body");
+add_translation("deleted_personal_data_of_x", "The person related data of %name% were successfuly deleted.");
+add_translation("ok", "OK");
+add_translation("cant_delete_current_user", "Can't delete the current user");

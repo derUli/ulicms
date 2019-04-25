@@ -1,4 +1,5 @@
 <?php
+
 add_translation("personal_data", "Personenbezogene Daten");
 add_translation("name_or_email_address", "Name oder E-Mail Adresse");
 add_translation("search", "Suchen");
@@ -13,3 +14,6 @@ add_translation("twitter", "Twitter");
 add_translation("to", "An");
 add_translation("headers", "Kopfzeilen");
 add_translation("body", "Körper");
+add_translation("deleted_personal_data_of_x", "Die personenbezogenen Daten von %name% wurden erfolgreich gelöscht.");
+add_translation("ok", "OK");
+add_translation("cant_delete_current_user", "Der eigene User kann nicht gelöscht werden.");

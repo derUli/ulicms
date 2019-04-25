@@ -1,27 +1,34 @@
 {
-	"source": "extend",
-	"version": "0.2",
-	"embed": false,
-	"custom_acl": [
-		"personal_data_list",
-		"personal_data_export",
-		"personal_data_delete"
-	],
-	"admin_permission": "personal_data_list",
-	"controllers": {
-		"PersonalDataController": "controllers/PersonalDataController.php"
-	},
-	"controller_function_permissions": {
-		"PersonalDataController::exportData": "personal_data_export",
-		"PersonalDataController::deleteData": "personal_data_delete"
-	},
-	"objects": {
-		"GDPR\\PersonalData\\Query": "objects/GDPR/PersonalData/Query.php",
-		"GDPR\\PersonalData\\Responder": "objects/GDPR/PersonalData/Responder.php",
-		"GDPR\\PersonalData\\CorePersonalDataResponder": "objects/GDPR/PersonalData/CorePersonalDataResponder.php",
-		"GDPR\\PersonalData\\Response\\Person": "objects/GDPR/PersonalData/Response/Person.php",
-		"GDPR\\PersonalData\\Response\\ResponseBlock": "objects/GDPR/PersonalData/Response/ResponseBlock.php"	
-		},
-	"main_class": "PersonalDataController",
-	"personal_data_query_responder": "GDPR\\PersonalData\\CorePersonalDataResponder"
+    "source": "extend",
+    "version": "0.2",
+    "embed": false,
+    "custom_acl": [
+        "personal_data_list",
+        "personal_data_export",
+        "personal_data_delete"
+    ],
+    "admin_permission": "personal_data_list",
+    "controllers": {
+        "PersonalDataController": "controllers/PersonalDataController.php"
+    },
+    "controller_function_permissions": {
+        "PersonalDataController::exportData": "personal_data_export",
+        "PersonalDataController::deleteData": "personal_data_delete"
+    },
+    "objects": {
+        "GDPR\\PersonalData\\Query": "objects/GDPR/PersonalData/Query.php",
+        "GDPR\\PersonalData\\Responder": "objects/GDPR/PersonalData/Responder.php",
+        "GDPR\\PersonalData\\CorePersonalDataResponder": "objects/GDPR/PersonalData/CorePersonalDataResponder.php",
+        "GDPR\\PersonalData\\Response\\Person": "objects/GDPR/PersonalData/Response/Person.php",
+        "GDPR\\PersonalData\\Response\\ResponseBlock": "objects/GDPR/PersonalData/Response/ResponseBlock.php"
+    },
+    "main_class": "PersonalDataController",
+    "personal_data_query_responder": "GDPR\\PersonalData\\CorePersonalDataResponder",
+    "actions": {
+        "personal_data_delete_success": "templates/deleted.php"
+    }
+    ,
+    "action_permissions": {
+        "personal_data_delete_success": "personal_data_delete"
+    }
 }

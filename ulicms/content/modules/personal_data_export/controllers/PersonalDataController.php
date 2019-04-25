@@ -21,9 +21,16 @@ class PersonalDataController extends MainClass {
 
     public function deleteData() {
         $qString = Request::getVar("query", null, "str");
+        $user = new User(get_user_id());
+        if ($user->getEmail() == $qString) {
+            ExceptionResult(get_translation("cant_delete_current_user"), HttpStatusCode::UNPROCESSABLE_ENTITY);
+        }
+
 
         $query = new Query();
         $query->deleteData($qString);
+
+        return ActionResult("personal_data_delete_success", $qString);
     }
 
     public function exportData() {
