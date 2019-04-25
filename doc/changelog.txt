@@ -14,10 +14,12 @@ Neue API-Methoden:
 * UliCMS\HTML\Alert::warning($text, $cssClasses = "", $allowHtml = false)
 * UliCMS\HTML\Alert::success($text, $cssClasses = "", $allowHtml = false)
 * UliCMS\HTML\Alert::info($text, $cssClasses = "", $allowHtml = false)
+* User->loadByEmail($email)
 * minifyJs()
 * minifyCSS()
 * compileSCSS($stylesheet)
 * compileSCSSToFile($stylesheet)
+* is_blank($val)
 
 Fehlerkorrekturen:
 * Custom Types Feature repariert

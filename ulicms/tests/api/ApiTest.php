@@ -338,4 +338,22 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         @session_destroy();
     }
 
+    public function testIsBlankReturnsTrue() {
+        $this->assertTrue(is_blank(""));
+        $this->assertTrue(is_blank("  "));
+        $this->assertTrue(is_blank(false));
+        $this->assertTrue(is_blank(null));
+        $this->assertTrue(is_blank(0));
+        $this->assertTrue(is_blank(array()));
+        $this->assertTrue(is_blank("0"));
+    }
+
+    public function testIsBlankReturnsFalse() {
+        $this->assertFalse(is_blank(" hallo welt "));
+        $this->assertFalse(is_blank(13));
+        $this->assertFalse(is_blank(true));
+        $this->assertFalse(is_blank(array("foo", "bar")));
+        $this->assertFalse(is_blank("13"));
+    }
+
 }

@@ -3,6 +3,12 @@
 use UliCMS\Security\PermissionChecker;
 use Negotiation\LanguageNegotiator;
 
+function is_blank($val) {
+    return (is_string($val) &&
+            StringHelper::isNullOrWhitespace($val)) ||
+            empty($val);
+}
+
 function startsWith($haystack, $needle, $case = true) {
     if ($case) {
         return (strcmp(substr($haystack, 0, strlen($needle)), $needle) === 0);

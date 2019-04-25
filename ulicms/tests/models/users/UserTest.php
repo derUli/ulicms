@@ -7,6 +7,8 @@ class UserTest extends \PHPUnit\Framework\TestCase {
     private $otherGroup;
 
     public function setUp() {
+        require_once getLanguageFilePath("en");
+
         $user = new User();
         $user->loadByUsername("max_muster");
         if (!is_null($user->getId())) {
@@ -105,6 +107,25 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $this->assertStringContainsString("Hello John", $message);
         $this->assertStringContainsString("Username: john.doe", $message);
         $this->assertStringContainsString("Password: secret", $message);
+    }
+
+    public function testLoadByEmail() {
+        $user = new User();
+        $user->setUsername("john-doe");
+        $user->setFirstname("John");
+        $user->setLastname("Doe");
+        $user->setGroupId(1);
+        $user->setPassword("password123");
+        $user->setEmail("john@doe.com");
+        $user->save();
+
+        $loadedUser = new User();
+        $loadedUser->loadByEmail("john@doe.com");
+
+        $this->assertEquals("john@doe.com", $loadedUser->getEmail());
+        $this->assertEquals("john-doe", $loadedUser->getUsername());
+
+        $user->delete();
     }
 
 }
