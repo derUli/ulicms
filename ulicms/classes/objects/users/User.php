@@ -49,6 +49,15 @@ class User {
         $this->fillVars($query);
     }
 
+    public function loadByEmail($email) {
+        $sql = "select * from {prefix}users where email = ?";
+        $args = array(
+            strval($email)
+        );
+        $query = Database::pQuery($sql, $args, true);
+        $this->fillVars($query);
+    }
+
     public function save() {
         if ($this->id) {
             $this->update();
