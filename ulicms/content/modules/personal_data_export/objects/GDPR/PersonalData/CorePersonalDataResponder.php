@@ -79,6 +79,8 @@ class CorePersonalDataResponder implements Responder {
         $user = new User();
         $user->loadByEmail($query);
         $user->delete();
+
+        // TODO: Show success message
     }
 
     public function searchPerson($query) {
