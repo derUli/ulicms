@@ -6,6 +6,7 @@ Neue Features:
 * Verfügbare Pakete: Lizenzen können nun angezeigt werden
 * "Sprachen" Einstellungen im Backend optisch überarbeitet
 * DataTables: "X Einträge anzeigen" merkt sich nun die letzte Auswahl
+* CKEditor: Beim einfügen eines Bilds wird nun "Breite" und "Höhe" nicht mehr automatisch gefüllt
 
 Neue API-Methoden:
 * File::getNewestMtime($files)

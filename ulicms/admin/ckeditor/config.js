@@ -8,9 +8,11 @@ CKEDITOR.editorConfig = function (config) {
 // config.language = 'de';
 // Bootstrap soll eingebunden werden
     config.contentsCss = [CKEDITOR.basePath + 'contents.css',
-        '//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css']
+    '//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css']
     config.ShiftEnterMode = 'p';
     config.height = '300px';
+	config.image_prefillDimensions = false;
+
     if (window.location.href.indexOf("admin/") !== -1) {
         config.filebrowserBrowseUrl = 'kcfinder/browse.php?type=files';
         config.filebrowserImageBrowseUrl = 'kcfinder/browse.php?type=images';

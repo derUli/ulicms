@@ -6,7 +6,7 @@
         "bootbox": "4.x",
         "bootstrap": "3.x",
         "bootstrap-toggle": "^2.2.2",
-        "codemirror-minified": "^5.45.0",
+        "codemirror-minified": "^5.46.0",
         "datatables": "^1.10.18",
         "jquery": "^3.4.0",
         "jquery-datetimepicker": "^2.5.21",
