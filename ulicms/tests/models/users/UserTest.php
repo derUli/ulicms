@@ -1,7 +1,5 @@
 <?php
 
-use UliCMS\Exceptions\NotImplementedException;
-
 class UserTest extends \PHPUnit\Framework\TestCase {
 
     private $otherGroup;
