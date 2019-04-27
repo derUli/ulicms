@@ -6,12 +6,8 @@ $(function () {
         $(container).html(result);
         $(container).slideDown();
         initRemoteAlerts(container);
-        $(container).find(".tablesorter").DataTable({
-            language: {
-                url: $("body").data("datatables-translation")
-            },
-            columnDefs: [{targets: "no-sort", orderable: false}]
-        });
+        initDataTables(".tablesorter");
+
         $(container).find(".btn-install").click(function (event) {
             event.preventDefault();
             const url = $(event.target).attr("href");
