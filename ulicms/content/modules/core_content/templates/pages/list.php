@@ -450,7 +450,7 @@ if ($permissionChecker->hasPermission("pages")) {
 
         $filter_sql .= " ";
 
-        $query = db_query("SELECT * FROM " . tbname("content") . " " . $filter_sql . " ORDER BY $order,position, systemname ASC") or die(db_error());
+        $query = db_query("SELECT * FROM " . tbname("content") . " " . $filter_sql . " ORDER BY $order,position, slug ASC") or die(db_error());
         ?>
         <div class="x-results-found"><?php BackendHelper::formatDatasetCount(Database::getNumRows($query)); ?></div>
         <div class="scroll">

@@ -10,12 +10,12 @@ class HomeController extends Controller {
         $result = Database::fetchObject($query);
         $model->contentCount = $result->amount;
 
-        $topPages = Database::query("SELECT language, systemname, title, `views` FROM " . tbname("content") . " WHERE deleted_at is null and type <> 'node' ORDER BY `views` DESC LIMIT 5", false);
+        $topPages = Database::query("SELECT language, slug, title, `views` FROM " . tbname("content") . " WHERE deleted_at is null and type <> 'node' ORDER BY `views` DESC LIMIT 5", false);
         while ($row = Database::fetchObject($topPages)) {
             $model->topPages[] = $row;
         }
 
-        $lastModfiedPages = Database::query("SELECT language, systemname, title, lastmodified, case when lastchangeby is not null and lastchangeby > 0 then lastchangeby else author_id end as lastchangeby FROM " . tbname("content") . "  WHERE deleted_at is null and type <> 'node'  ORDER BY lastmodified DESC LIMIT 5", false);
+        $lastModfiedPages = Database::query("SELECT language, slug, title, lastmodified, case when lastchangeby is not null and lastchangeby > 0 then lastchangeby else author_id end as lastchangeby FROM " . tbname("content") . "  WHERE deleted_at is null and type <> 'node'  ORDER BY lastmodified DESC LIMIT 5", false);
         while ($row = Database::fetchObject($lastModfiedPages)) {
             $model->lastModfiedPages[] = $row;
         }

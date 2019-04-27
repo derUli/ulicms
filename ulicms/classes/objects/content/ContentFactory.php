@@ -5,7 +5,7 @@ use UliCMS\Exceptions\FileNotFoundException;
 class ContentFactory {
 
     public static function getCurrentPage() {
-        return ContentFactory::getBySystemnameAndLanguage(get_requested_pagename(), getCurrentLanguage(true));
+        return ContentFactory::getBySlugAndLanguage(get_requested_pagename(), getCurrentLanguage(true));
     }
 
     public static function getByID($id) {
@@ -19,10 +19,10 @@ class ContentFactory {
         }
     }
 
-    public static function getBySystemnameAndLanguage($name, $language) {
+    public static function getBySlugAndLanguage($name, $language) {
         $name = Database::escapeValue($name);
         $language = Database::escapeValue($language);
-        $query = Database::query("SELECT id, `type` FROM `" . tbname("content") . "` where `systemname` = '$name' and `language` = '$language'");
+        $query = Database::query("SELECT id, `type` FROM `" . tbname("content") . "` where `slug` = '$name' and `language` = '$language'");
         if (Database::getNumRows($query) > 0) {
             $result = Database::fetchObject($query);
             return self::getContentObjectByID($result);

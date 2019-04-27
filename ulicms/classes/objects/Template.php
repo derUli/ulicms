@@ -425,10 +425,10 @@ color:" . Settings::get("body-text-color") . ";
 
         $content = null;
         if (is_200()) {
-            $content = ContentFactory::getBySystemnameAndLanguage(get_requested_pagename(), getCurrentLanguage());
+            $content = ContentFactory::getBySlugAndLanguage(get_requested_pagename(), getCurrentLanguage());
 
             if (!is_logged_in()) {
-                db_query("UPDATE " . tbname("content") . " SET views = views + 1 WHERE systemname='" . Database::escapeValue($_GET["seite"]) . "' AND language='" . db_escape($_SESSION["language"]) . "'");
+                db_query("UPDATE " . tbname("content") . " SET views = views + 1 WHERE slug='" . Database::escapeValue($_GET["seite"]) . "' AND language='" . db_escape($_SESSION["language"]) . "'");
             }
         } else if (is_404()) {
             if ($errorPage404) {

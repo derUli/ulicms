@@ -177,15 +177,15 @@ $(function () {
     }
 });
 
-// this suggest a systemname which may be used as the url for a page
-function suggestSystemname(text) {
-    var systemname = slug(text);
-    $("#systemname").val(systemname);
+// this suggest a slug which may be used as the url for a page
+function suggestSlug(text) {
+    var pageSlug = slug(text);
+    $("#slug").val(pageSlug);
 }
 
-// this checks if a systemname is free within the selected language
-// the combination of systemname + language must be unique
-function systemnameOrLanguageChanged(item) {
+// this checks if a slug is free within the selected language
+// the combination of slug + language must be unique
+function slugOrLanguageChanged(item) {
     var id_field = $("input[name='page_id']");
     var myid = 0;
     if (id_field) {
@@ -193,18 +193,18 @@ function systemnameOrLanguageChanged(item) {
     }
     var data = {
         csrf_token: $("input[name=csrf_token]").first().val(),
-        systemname: $("input[name='systemname']").val(),
+        slug: $("input[name='slug']").val(),
         language: $("select[name='language']").val(),
         id: myid
     };
-    var url = $(".main-form").first().data("systemname-free-url");
+    var url = $(".main-form").first().data("slug-free-url");
 
     $.post(url, data, function (text, status) {
         if (text === "yes") {
-            $("input[name='systemname']").removeClass("error-field");
+            $("input[name='slug']").removeClass("error-field");
             $("select[name='language']").removeClass("error-field");
         } else {
-            $("input[name='systemname']").addClass("error-field");
+            $("input[name='slug']").addClass("error-field");
             $("select[name='language']").addClass("error-field");
         }
     });
@@ -233,18 +233,18 @@ $(function () {
             e.preventDefault();
         }
     })
-    // check if a systemname is free on changing system title or menu
-    // XXX: this field should be named systemname everywhere in the code
-    $("input[name='systemname']").keyup(function () {
-        systemnameOrLanguageChanged($(this));
+    // check if a slug is free on changing system title or menu
+    // XXX: this field should be named slug everywhere in the code
+    $("input[name='slug']").keyup(function () {
+        slugOrLanguageChanged($(this));
     });
     $("select[name='menu']").change(function () {
         filterParentPages();
     });
 
-    // check if systemname is free and update parent page options
+    // check if slug is free and update parent page options
     $("select[name='language']").change(function () {
-        systemnameOrLanguageChanged($(this));
+        slugOrLanguageChanged($(this));
         filterParentPages();
     });
     // bind event to "View" button at the bottom of page edit form
@@ -259,8 +259,8 @@ $(function () {
         }
     })
 
-    systemnameOrLanguageChanged($("input[name='systemname']"));
-    systemnameOrLanguageChanged($("select[name='language']"));
+    slugOrLanguageChanged($("input[name='slug']"));
+    slugOrLanguageChanged($("select[name='language']"));
 
     filterParentPages();
 

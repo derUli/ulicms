@@ -59,7 +59,7 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function tearDown() {
-        Database::query("delete from `{prefix}content` where systemname like 'testpage%'", true);
+        Database::query("delete from `{prefix}content` where slug like 'testpage%'", true);
 
         Database::query("delete from `{prefix}users` where username like 'testuser%'", true);
         Database::query("delete from `{prefix}groups` where name like 'testgroup%'", true);
@@ -81,7 +81,7 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase {
         $checker = new ContentPermissionChecker($this->testUser1->getId());
 
         $page = new Page();
-        $page->systemname = "testpage1";
+        $page->slug = "testpage1";
         $page->language = "de";
         $page->group_id = $this->testGroup1->getId();
         $page->author_id = $this->testUser2->getId();
@@ -97,7 +97,7 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase {
         $checker = new ContentPermissionChecker($this->testUser1->getId());
 
         $page = new Page();
-        $page->systemname = "testpage2";
+        $page->slug = "testpage2";
         $page->language = "de";
         $page->group_id = $this->testGroup2->getId();
         $page->author_id = $this->testUser1->getId();
@@ -115,7 +115,7 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase {
         $checker = new ContentPermissionChecker($this->testUser1->getId());
 
         $page = new Page();
-        $page->systemname = "testpage3";
+        $page->slug = "testpage3";
         $page->language = "de";
         $page->group_id = $this->testGroup2->getId();
         $page->author_id = $this->testUser2->getId();
@@ -131,7 +131,7 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase {
         $checker = new ContentPermissionChecker($this->testUser1->getId());
 
         $page = new Page();
-        $page->systemname = "testpage2";
+        $page->slug = "testpage2";
         $page->language = "de";
         $page->group_id = $this->testGroup2->getId();
         $page->author_id = $this->testUser1->getId();
@@ -149,7 +149,7 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase {
         $checker = new ContentPermissionChecker($this->testUser1->getId());
 
         $page = new Page();
-        $page->systemname = "testpage3";
+        $page->slug = "testpage3";
         $page->language = "de";
         $page->group_id = $this->testGroup2->getId();
         $page->author_id = $this->testUser2->getId();

@@ -209,7 +209,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
 
         $page = new Page();
         $page->title = "Test Page " . time();
-        $page->systemname = "test-page-" . time();
+        $page->slug = "test-page-" . time();
         $page->language = "de";
         $page->menu = "not_in_menu";
         $page->content = "<p>Wir schreiben das Jahr [year] des fliegenden Spaghettimonsters</p>";
@@ -217,9 +217,9 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $page->group_id = $group_id;
         $page->save();
 
-        $_GET["seite"] = $page->systemname;
+        $_GET["seite"] = $page->slug;
         $_SESSION["language"] = $page->language;
-        $_GET["REQUEST_URI"] = "/{$page->systemname}.html";
+        $_GET["REQUEST_URI"] = "/{$page->slug}.html";
         $this->assertEquals("<p>Wir schreiben das Jahr " . date("Y") . " des fliegenden Spaghettimonsters</p>", Template::getContent());
     }
 

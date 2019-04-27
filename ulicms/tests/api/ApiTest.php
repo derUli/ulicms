@@ -273,16 +273,16 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertContains("impro17", $themes);
     }
 
-    public function testGetPageSystemnameByID() {
-        $this->assertEquals($first->systemname, getPageSystemnameByID($first->id));
-        $this->assertNull(getPageSystemnameByID(PHP_INT_MAX));
+    public function testGetPageSlugByID() {
+        $this->assertEquals($first->slug, getPageSlugByID($first->id));
+        $this->assertNull(getPageSlugByID(PHP_INT_MAX));
     }
 
-    public function testGetPageIDBySystemname() {
+    public function testGetPageIDBySlug() {
         $allPages = ContentFactory::getAll();
         $first = $allPages[0];
-        $this->assertEquals($first->id, getPageIDBySystemname($first->systemname));
-        $this->assertNull(getPageIDBySystemname("ich-existiere-wirklich-nicht"));
+        $this->assertEquals($first->id, getPageIDBySlug($first->slug));
+        $this->assertNull(getPageIDBySlug("ich-existiere-wirklich-nicht"));
     }
 
     public function testGetPageTitleByID() {

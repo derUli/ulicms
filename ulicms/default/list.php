@@ -33,7 +33,7 @@ if ($id !== null) {
                 foreach ($entries as $entry) {
                     ?>
                     <li><a
-                            href="<?php Template::escape(buildSEOUrl($entry->systemname)); ?>"><?php Template::escape($entry->title) ?></a></li>
+                            href="<?php Template::escape(buildSEOUrl($entry->slug)); ?>"><?php Template::escape($entry->title) ?></a></li>
                     <?php } ?>
             </ol>
             <?php if ($use_pagination) { ?>

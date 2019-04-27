@@ -783,7 +783,7 @@ function getCurrentLanguage($current = false) {
         return Vars::get("current_language_" . strbool($current));
     }
     if ($current) {
-        $query = db_query("SELECT language FROM " . tbname("content") . " WHERE systemname='" . get_requested_pagename() . "'");
+        $query = db_query("SELECT language FROM " . tbname("content") . " WHERE slug='" . get_requested_pagename() . "'");
         if (db_num_rows($query) > 0) {
             $fetch = db_fetch_object($query);
             $language = $fetch->language;
@@ -913,7 +913,7 @@ function getCurrentURL() {
 /**
  * Generate path to Page
  * Argumente
- * String $page (Systemname)
+ * String $page (Slug)
  * Rückgabewert String im Format
  * ../seite.html
  * bzw.
@@ -1163,9 +1163,9 @@ function getPageByID($id) {
     }
 }
 
-// get page id by systemname
-function getPageIDBySystemname($systemname) {
-    $query = db_query("SELECT systemname, id FROM `" . tbname("content") . "` where systemname='" . db_escape($systemname) . "'");
+// get page id by slug
+function getPageIDBySlug($slug) {
+    $query = db_query("SELECT slug, id FROM `" . tbname("content") . "` where slug='" . db_escape($slug) . "'");
     if (db_num_rows($query) > 0) {
         $row = db_fetch_object($query);
         return $row->id;
@@ -1174,11 +1174,11 @@ function getPageIDBySystemname($systemname) {
     }
 }
 
-function getPageSystemnameByID($id) {
-    $query = db_query("SELECT systemname, id FROM `" . tbname("content") . "` where id=" . intval($id));
+function getPageSlugByID($id) {
+    $query = db_query("SELECT slug, id FROM `" . tbname("content") . "` where id=" . intval($id));
     if (db_num_rows($query) > 0) {
         $row = db_fetch_object($query);
-        return $row->systemname;
+        return $row->slug;
     } else {
         return null;
     }
@@ -1194,23 +1194,23 @@ function getPageTitleByID($id) {
     }
 }
 
-// Get systemnames of all pages
+// Get slugs of all pages
 function getAllPagesWithTitle() {
-    $query = db_query("SELECT systemname, id, title FROM `" . tbname("content") . "` WHERE `deleted_at` IS NULL ORDER BY systemname");
+    $query = db_query("SELECT slug, id, title FROM `" . tbname("content") . "` WHERE `deleted_at` IS NULL ORDER BY slug");
     $returnvalues = Array();
     while ($row = db_fetch_object($query)) {
         $a = Array(
             $row->title,
-            $row->systemname . ".html"
+            $row->slug . ".html"
         );
         array_push($returnvalues, $a);
-        if (containsModule($row->systemname, "blog")) {
+        if (containsModule($row->slug, "blog")) {
 
             $sql = "select title, seo_shortname from " . tbname("blog") . " ORDER by datum DESC";
             $query_blog = db_query($sql);
             while ($row_blog = db_fetch_object($query_blog)) {
                 $title = $row->title . " -> " . $row_blog->title;
-                $url = $row->systemname . ".html" . "?single=" . $row_blog->seo_shortname;
+                $url = $row->slug . ".html" . "?single=" . $row_blog->seo_shortname;
                 $b = Array(
                     $title,
                     $url
@@ -1223,7 +1223,7 @@ function getAllPagesWithTitle() {
 }
 
 // Get all pages
-function getAllPages($lang = null, $order = "systemname", $exclude_hash_links = true, $menu = null) {
+function getAllPages($lang = null, $order = "slug", $exclude_hash_links = true, $menu = null) {
     if (!$lang) {
         if (!$menu) {
             $query = db_query("SELECT * FROM `" . tbname("content") . "` WHERE `deleted_at` IS NULL ORDER BY $order");
@@ -1247,17 +1247,17 @@ function getAllPages($lang = null, $order = "systemname", $exclude_hash_links = 
     return $returnvalues;
 }
 
-// Get systemnames of all pages
-function getAllSystemNames($lang = null) {
+// Get slugs of all pages
+function getAllSlugs($lang = null) {
     if (!$lang) {
-        $query = db_query("SELECT systemname,id FROM `" . tbname("content") . "` WHERE `deleted_at` IS NULL AND redirection NOT LIKE '#%' ORDER BY systemname");
+        $query = db_query("SELECT slug,id FROM `" . tbname("content") . "` WHERE `deleted_at` IS NULL AND redirection NOT LIKE '#%' ORDER BY slug");
     } else {
 
-        $query = db_query("SELECT systemname,id FROM `" . tbname("content") . "` WHERE `deleted_at` IS NULL  AND redirection NOT LIKE '#%' AND language ='" . db_escape($lang) . "' ORDER BY systemname");
+        $query = db_query("SELECT slug,id FROM `" . tbname("content") . "` WHERE `deleted_at` IS NULL  AND redirection NOT LIKE '#%' AND language ='" . db_escape($lang) . "' ORDER BY slug");
     }
     $returnvalues = Array();
     while ($row = db_fetch_object($query)) {
-        array_push($returnvalues, $row->systemname);
+        array_push($returnvalues, $row->slug);
     }
 
     return $returnvalues;
@@ -1375,7 +1375,7 @@ function containsModule($page = null, $module = false) {
     if (!is_null(Vars::get("page_" . $page . "_contains_" . $module))) {
         return Vars::get("page_" . $page . "_contains_" . $module);
     }
-    $query = db_query("SELECT content, module, `type` FROM " . tbname("content") . " WHERE systemname = '" . db_escape($page) . "'");
+    $query = db_query("SELECT content, module, `type` FROM " . tbname("content") . " WHERE slug = '" . db_escape($page) . "'");
     $dataset = db_fetch_assoc($query);
     $content = $dataset["content"];
     $content = str_replace("&quot;", "\"", $content);

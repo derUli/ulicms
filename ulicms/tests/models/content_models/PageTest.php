@@ -50,7 +50,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
     }
 
     private function cleanUp() {
-        Database::query("delete from {prefix}content where systemname = 'testdisableshortcodes' or title like 'Unit Test%'", true);
+        Database::query("delete from {prefix}content where slug = 'testdisableshortcodes' or title like 'Unit Test%'", true);
 
         Settings::delete("comments_enabled");
         Settings::delete("commentable_content_types");
@@ -78,7 +78,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
     public function testDisableShortcodesTrue() {
         $page = new Page();
         $page->title = 'testDisableShortcodesTrue';
-        $page->systemname = 'testdisableshortcodes';
+        $page->slug = 'testdisableshortcodes';
         $page->language = 'de';
         $page->content = "foo [csrf_token_html] bar";
         $page->author_id = 1;
@@ -101,7 +101,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
     public function testDisableShortcodesFalse() {
         $page = new Page();
         $page->title = 'testDisableShortcodesFalse';
-        $page->systemname = 'testdisableshortcodes';
+        $page->slug = 'testdisableshortcodes';
         $page->language = 'de';
         $page->content = "foo [csrf_token_html] bar";
         $page->author_id = 1;
@@ -124,7 +124,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
     public function testDisableShortcodesNull() {
         $page = new Page();
         $page->title = 'testDisableShortcodesNull';
-        $page->systemname = 'testdisableshortcodes';
+        $page->slug = 'testdisableshortcodes';
         $page->language = 'de';
         $page->content = "foo [csrf_token_html] bar";
         $page->author_id = 1;
@@ -147,7 +147,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
     public function testCreatePageWithCommentsEnabledTrue() {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
-        $page->systemname = 'unit-test-' . time();
+        $page->slug = 'unit-test-' . time();
         $page->language = 'de';
         $page->content = "Some Text";
         $page->comments_enabled = true;
@@ -166,7 +166,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
     public function testCreatePageWithCommentsEnabledFalse() {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
-        $page->systemname = 'unit-test-' . time();
+        $page->slug = 'unit-test-' . time();
         $page->language = 'de';
         $page->content = "Some Text";
         $page->comments_enabled = false;
@@ -185,7 +185,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
     public function testCreatePageWithCommentsEnabledNull() {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
-        $page->systemname = 'unit-test-' . time();
+        $page->slug = 'unit-test-' . time();
         $page->language = 'de';
         $page->content = "Some Text";
         $page->comments_enabled = null;
@@ -204,7 +204,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
     public function testUpdatePageWithCommentsEnabledTrue() {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
-        $page->systemname = 'unit-test-' . time();
+        $page->slug = 'unit-test-' . time();
         $page->language = 'de';
         $page->content = "Some Text";
         $page->author_id = 1;
@@ -225,7 +225,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
     public function testUpdatePageWithCommentsEnabledFalse() {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
-        $page->systemname = 'unit-test-' . time();
+        $page->slug = 'unit-test-' . time();
         $page->language = 'de';
         $page->content = "Some Text";
         $page->author_id = $this->user->getId();
@@ -247,7 +247,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
     public function testUpdatePageWithCommentsEnabledNull() {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
-        $page->systemname = 'unit-test-' . time();
+        $page->slug = 'unit-test-' . time();
         $page->language = 'de';
         $page->content = "Some Text";
         $page->comments_enabled = true;
@@ -300,7 +300,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
     public function testHasCommentsReturnTrue() {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
-        $page->systemname = 'unit-test-' . time();
+        $page->slug = 'unit-test-' . time();
         $page->language = 'de';
         $page->content = "Some Text";
         $page->comments_enabled = true;
@@ -341,7 +341,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
     public function testHasCommentsReturnFalse() {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
-        $page->systemname = 'unit-test-' . time();
+        $page->slug = 'unit-test-' . time();
         $page->language = 'de';
         $page->content = "Some Text";
         $page->comments_enabled = true;
@@ -357,7 +357,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
     public function testGetCommentsReturnsArrayWithResults() {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
-        $page->systemname = 'unit-test-' . time();
+        $page->slug = 'unit-test-' . time();
         $page->language = 'de';
         $page->content = "Some Text";
         $page->comments_enabled = true;
@@ -400,7 +400,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
     public function testGetCommentsReturnsEmptyArray() {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
-        $page->systemname = 'unit-test-' . time();
+        $page->slug = 'unit-test-' . time();
         $page->language = 'de';
         $page->content = "Some Text";
         $page->comments_enabled = true;
@@ -416,7 +416,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
     public function testGetUrlWithSuffix() {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
-        $page->systemname = 'unit-test-' . time();
+        $page->slug = 'unit-test-' . time();
         $page->language = 'de';
         $page->content = "Some Text";
         $page->comments_enabled = false;
@@ -428,7 +428,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertStringStartsWith("http", $url);
         $this->assertStringContainsString("//company.com", $url);
 
-        $this->assertStringContainsString("{$page->systemname}.html", $url);
+        $this->assertStringContainsString("{$page->slug}.html", $url);
         $this->assertStringEndsWith("foo=bar&hello=world", $url);
 
         $this->cleanUp();
@@ -437,7 +437,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
     public function testGetUrlWithoutSuffix() {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
-        $page->systemname = 'unit-test-' . time();
+        $page->slug = 'unit-test-' . time();
         $page->language = 'de';
         $page->content = "Some Text";
         $page->comments_enabled = false;
@@ -449,7 +449,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertStringStartsWith("http", $url);
         $this->assertStringContainsString("//company.com", $url);
 
-        $this->assertStringContainsString("{$page->systemname}.html", $url);
+        $this->assertStringContainsString("{$page->slug}.html", $url);
 
         $this->cleanUp();
     }
@@ -457,7 +457,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
     public function testIncludeShortcodeShouldIncludeOtherPages() {
         $snippet = new Snippet();
         $snippet->title = 'Unit Test ' . time();
-        $snippet->systemname = 'unit-test-' . time();
+        $snippet->slug = 'unit-test-' . time();
         $snippet->language = 'de';
         $snippet->content = "even more text";
         $snippet->comments_enabled = false;
@@ -476,7 +476,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
     public function testIncludeShortcodeShouldNotIncludeItself() {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
-        $page->systemname = 'unit-test-' . time();
+        $page->slug = 'unit-test-' . time();
         $page->language = 'de';
         $page->content = "Some Text";
         $page->comments_enabled = false;
@@ -496,7 +496,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
     public function testCustomDataJsonIsObjectByDefault() {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
-        $page->systemname = 'unit-test-' . time();
+        $page->slug = 'unit-test-' . time();
         $page->language = 'de';
         $page->content = "Some Text";
         $page->comments_enabled = false;

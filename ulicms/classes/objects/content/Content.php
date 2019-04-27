@@ -2,7 +2,7 @@
 
 abstract class Content extends Model {
 
-    abstract protected function loadBySystemnameAndLanguage($name, $language);
+    abstract protected function loadBySlugAndLanguage($name, $language);
 
     public function getShowHeadline() {
         $retval = true;

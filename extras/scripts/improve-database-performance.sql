@@ -1,6 +1,6 @@
 -- Indizes zur Datenbank von UliCMS hinzufügen um die Performance zu verbessern
 
-ALTER TABLE `{prefix}content` ADD INDEX(`systemname`);
+ALTER TABLE `{prefix}content` ADD INDEX(`slug`);
 ALTER TABLE `{prefix}content` ADD INDEX(`language`);
 ALTER TABLE `{prefix}content` ADD INDEX(`menu`);
 ALTER TABLE `{prefix}content` ADD INDEX(`parent`);

@@ -39,7 +39,7 @@ class List_Data extends Content {
         $this->content_id = $id;
     }
 
-    public function loadBySystemnameAndLanguage($name, $language) {
+    public function loadBySlugAndLanguage($name, $language) {
         throw new NotImplementedException("not implemented for list");
     }
 

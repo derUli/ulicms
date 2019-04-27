@@ -166,18 +166,18 @@ class ModuleHelper extends Helper {
 
         $currentLanguage = isset($_SESSION["language"]) ? $_SESSION["language"] : Settings::get("default_language");
         if ($domain) {
-            $url = get_site_protocol() . $domain . $dirname . $page->systemname . ".html";
+            $url = get_site_protocol() . $domain . $dirname . $page->slug . ".html";
             if (!is_null($suffix)) {
                 $url .= "?{$suffix}";
             }
         } else {
             if ($page->language != $currentLanguage) {
-                $url = get_protocol_and_domain() . $dirname . $page->systemname . ".html" . "?language=" . $page->language;
+                $url = get_protocol_and_domain() . $dirname . $page->slug . ".html" . "?language=" . $page->language;
                 if (!is_null($suffix)) {
                     $url .= "&{$suffix}";
                 }
             } else {
-                $url = get_protocol_and_domain() . $dirname . $page->systemname . ".html";
+                $url = get_protocol_and_domain() . $dirname . $page->slug . ".html";
                 if (!is_null($suffix)) {
                     $url .= "?{$suffix}";
                 }

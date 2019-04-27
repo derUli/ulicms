@@ -7,8 +7,8 @@ class PageController extends Controller {
     // @FIXME: Content-Model statt SQL verwenden
     public function createPost() {
         $acl = new ACL();
-        if ($_POST["systemname"] != "") {
-            $systemname = db_escape($_POST["systemname"]);
+        if ($_POST["slug"] != "") {
+            $slug = db_escape($_POST["slug"]);
             $page_title = db_escape($_POST["page_title"]);
             $alternate_title = db_escape($_POST["alternate_title"]);
             $activated = intval($_POST["activated"]);
@@ -100,7 +100,7 @@ class PageController extends Controller {
             $show_headline = intval($_POST["show_headline"]);
 
             do_event("before_create_page");
-            db_query("INSERT INTO " . tbname("content") . " (systemname, title, content, parent, active, created, lastmodified, author_id, `group_id`,
+            db_query("INSERT INTO " . tbname("content") . " (slug, title, content, parent, active, created, lastmodified, author_id, `group_id`,
   redirection,menu,position,
   access, meta_description, meta_keywords, language, target, category_id, `alternate_title`, `menu_image`, `custom_data`, `theme`,
   `og_title`, `og_description`, `og_type`, `og_image`, `type`, `module`, `video`, `audio`, `text_position`, `image_url`, `approved`, `show_headline`, `cache_control`, `article_author_name`, `article_author_email`,
@@ -108,7 +108,7 @@ class PageController extends Controller {
 				`only_admins_can_edit`, `only_group_can_edit`, `only_owner_can_edit`, `only_others_can_edit`,
 				`comment_homepage`, `link_to_language`, `comments_enabled` )
 
-  VALUES('$systemname','$page_title','$page_content',$parent, $activated," . time() . ", " . time() . "," . $_SESSION["login_id"] . "," . $_SESSION["group_id"] . ", '$redirection', '$menu', $position, '" . $access . "',
+  VALUES('$slug','$page_title','$page_content',$parent, $activated," . time() . ", " . time() . "," . $_SESSION["login_id"] . "," . $_SESSION["group_id"] . ", '$redirection', '$menu', $position, '" . $access . "',
   '$meta_description', '$meta_keywords',
   '$language', '$target', '$category_id', '$alternate_title',
   '$menu_image', '$custom_data', '$theme', '$og_title',
@@ -194,7 +194,7 @@ class PageController extends Controller {
     public function editPost() {
         $acl = new ACL();
         // @FIXME: Berechtigungen pages_edit_own und pages_edit_others prüfen.
-        $systemname = db_escape($_POST["systemname"]);
+        $slug = db_escape($_POST["slug"]);
         $page_title = db_escape($_POST["page_title"]);
         $activated = intval($_POST["activated"]);
         $unescaped_content = $_POST["page_content"];
@@ -293,7 +293,7 @@ class PageController extends Controller {
         $comments_enabled = Database::escapeValue($comments_enabled);
 
         do_event("before_edit_page");
-        $sql = "UPDATE " . tbname("content") . " SET systemname = '$systemname' , title='$page_title', `alternate_title`='$alternate_title', parent=$parent, content='$page_content', active=$activated, lastmodified=" . time() . ", redirection = '$redirection', menu = '$menu', position = $position, lastchangeby = $user, language='$language', access = '$access', meta_description = '$meta_description', meta_keywords = '$meta_keywords', target='$target', category_id = $category_id, menu_image='$menu_image', custom_data='$custom_data', theme='$theme',
+        $sql = "UPDATE " . tbname("content") . " SET slug = '$slug' , title='$page_title', `alternate_title`='$alternate_title', parent=$parent, content='$page_content', active=$activated, lastmodified=" . time() . ", redirection = '$redirection', menu = '$menu', position = $position, lastchangeby = $user, language='$language', access = '$access', meta_description = '$meta_description', meta_keywords = '$meta_keywords', target='$target', category_id = $category_id, menu_image='$menu_image', custom_data='$custom_data', theme='$theme',
 	og_title = '$og_title', og_type ='$og_type', og_image = '$og_image', og_description='$og_description', `type` = '$type', `module` = $module, `video` = $video, `audio` = $audio, text_position = '$text_position', author_id = $author_id, `group_id` = $group_id, image_url = $image_url, show_headline = $show_headline, cache_control ='$cache_control' $approved_sql,
 	article_author_name='$article_author_name', article_author_email = '$article_author_email', article_image = '$article_image',  article_date = $article_date, excerpt = '$excerpt',
 	only_admins_can_edit = $only_admins_can_edit, `only_group_can_edit` = $only_group_can_edit,
@@ -463,21 +463,21 @@ class PageController extends Controller {
         HTTPStatusCodeResult(HttpStatusCode::OK);
     }
 
-    public function checkSystemNameFree() {
-        if ($this->checkIfSystemnameIsFree($_REQUEST["systemname"], $_REQUEST["language"], intval($_REQUEST["id"]))) {
+    public function checkSlugFree() {
+        if ($this->checkIfSlugIsFree($_REQUEST["slug"], $_REQUEST["language"], intval($_REQUEST["id"]))) {
             TextResult("yes");
         }
         TextResult("");
     }
 
-    private function checkIfSystemnameIsFree($systemname, $language, $id) {
-        if (StringHelper::isNullOrWhitespace($systemname)) {
+    private function checkIfSlugIsFree($slug, $language, $id) {
+        if (StringHelper::isNullOrWhitespace($slug)) {
             return true;
         }
-        $systemname = Database::escapeValue($systemname);
+        $slug = Database::escapeValue($slug);
         $language = Database::escapeValue($language);
         $id = intval($id);
-        $sql = "SELECT id FROM " . tbname("content") . " where systemname='$systemname' and language = '$language' ";
+        $sql = "SELECT id FROM " . tbname("content") . " where slug='$slug' and language = '$language' ";
         if ($id > 0) {
             $sql .= "and id <> $id";
         }

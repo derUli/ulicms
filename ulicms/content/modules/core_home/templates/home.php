@@ -160,9 +160,9 @@ if ($permissionChecker->hasPermission("dashboard")) {
 
                     $domain = getDomainByLanguage($row->language);
                     if (!$domain) {
-                        $url = "../" . $row->systemname . ".html";
+                        $url = "../" . $row->slug . ".html";
                     } else {
-                        $url = "http://" . $domain . "/" . $row->systemname . ".html";
+                        $url = "http://" . $domain . "/" . $row->slug . ".html";
                     }
                     ?>
                     <tr>
@@ -196,9 +196,9 @@ if ($permissionChecker->hasPermission("dashboard")) {
                 foreach ($model->lastModfiedPages as $row) {
                     $domain = getDomainByLanguage($row->language);
                     if (!$domain) {
-                        $url = "../" . $row->systemname . ".html";
+                        $url = "../" . $row->slug . ".html";
                     } else {
-                        $url = "http://" . $domain . "/" . $row->systemname . ".html";
+                        $url = "http://" . $domain . "/" . $row->slug . ".html";
                     }
                     ?>
                     <tr>
