@@ -103,7 +103,7 @@ class BackendPageRenderer {
         }
 
         do_event("before_admin_cron");
-        require_once "inc/cron.php";
+        do_event("admin_cron");
         do_event("after_admin_cron");
 
         db_close($connection);

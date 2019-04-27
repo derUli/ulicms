@@ -467,7 +467,6 @@ add_translation("REQUIRE_PASSWORD_CHANGE_ON_NEXT_LOGIN", "Änderung des Passwort
 add_translation("BACK_TO_LOGIN", "Zurück zur Anmeldung");
 
 add_translation("SECURITY", "Sicherheit");
-add_translation("FORCE_PASSWORD_CHANGE_EVERY_X_DAYS", "Anwender müssen ihr Passwort alle X Tage ändern (0 = Aus)");
 
 add_translation("IS_ADMIN", "Ist Admin");
 add_translation("NO_PATCHES_SELECTED", "Keine Patches zur Installation ausgewählt.");

@@ -8,7 +8,7 @@ if (!$permissionChecker->hasPermission("other")) {
 } else {
     $email_mode = Settings::get("email_mode");
     $menus = getAllMenus();
-    $force_password_change_every_x_days = intval(Settings::get("force_password_change_every_x_days"));
+
     $max_failed_logins_items = Settings::get("max_failed_logins_items");
 
     $smtp_encryption = Settings::get("smtp_encryption");
@@ -84,32 +84,12 @@ if (!$permissionChecker->hasPermission("other")) {
         </h2>
 
         <div class="accordion-content">
-            <h2><?php translate("passwords"); ?></h2>
-            <div class="label">
-                <label for="force_password_change_every_x_days"><?php
-                    translate("FORCE_PASSWORD_CHANGE_EVERY_X_DAYS");
-                    ?>
-                </label>
-
-            </div>
-
-            <div class="inputWrapper">
-                <input type="number" name="force_password_change_every_x_days"
-                       min="0" max="999"
-                       value="<?php
-                       echo $force_password_change_every_x_days;
-                       ?>" />
-            </div>
-            <br />
-
             <div class="label">
                 <label for="max_failed_logins_items"><?php
                     translate("max_failed_login_items");
                     ?>
                 </label>
-
             </div>
-
             <div class="inputWrapper">
                 <input type="number" name="max_failed_logins_items" min="0" max="999"
                        value="<?php

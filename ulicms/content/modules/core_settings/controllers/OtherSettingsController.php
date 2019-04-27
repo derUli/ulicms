@@ -50,10 +50,6 @@ class OtherSettingsController extends Controller {
             Settings::set("smtp_port", intval($_POST["smtp_port"]));
         }
 
-        if (isset($_POST["force_password_change_every_x_days"])) {
-            Settings::set("force_password_change_every_x_days", intval($_POST["force_password_change_every_x_days"]));
-        }
-
         if (isset($_POST["max_failed_logins_items"])) {
             Settings::set("max_failed_logins_items", intval($_POST["max_failed_logins_items"]));
         }
