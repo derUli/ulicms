@@ -1,4 +1,7 @@
-===== Neues in UliCMS 2019.4 =====
+===== Neues in UliCMS 2019.2.8 =====
+
+Neue API-Methoden:
+* Content->isRegular()
 
 Entfernte Features:
 * Option "Anwender müssen ihr Passwort alle X Tage ändern" entfernt
@@ -26,7 +29,6 @@ Neue API-Methoden:
 * compileSCSS($stylesheet)
 * compileSCSSToFile($stylesheet)
 * is_blank($val)
-* Content->isRegular()
 
 Fehlerkorrekturen:
 * Custom Types Feature repariert
