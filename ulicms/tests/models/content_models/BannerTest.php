@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Exceptions\NotImplementedException;
+
 class BannerTest extends \PHPUnit\Framework\TestCase {
 
     const HTML_TEXT1 = "My first Banner HTML";
@@ -232,6 +234,27 @@ class BannerTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("2016-04-16", $banner->getDateTo());
 
         $banner->delete();
+    }
+
+    public function testRenderHtmlBanner() {
+
+        $banner = new Banner();
+        $banner->setType("html");
+        $banner->setHtml(self::HTML_TEXT1);
+        $this->assertEquals(self::HTML_TEXT1, $banner->render());
+    }
+
+    public function testRenderGifBanner() {
+        $banner = new Banner();
+        $banner->setType("gif");
+        $banner->setName(self::NAME_TEXT1);
+        $banner->setImageUrl(self::IMAGE_URL_TEXT1);
+        $banner->setLinkUrl(self::LINK_URL_TEXT1);
+        $this->assertEquals(
+                '<a href="http://www.google.de" target="_blank">'
+                . '<img src="http://firma.de/bild.gif" '
+                . 'title="My first Gif Banner" alt="My first Gif Banner" '
+                . 'border="0"></a>', $banner->render());
     }
 
 }
