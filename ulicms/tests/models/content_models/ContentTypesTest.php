@@ -46,4 +46,22 @@ class ContentTypesTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
+    public function testIsRegularReturnsTrue() {
+        $types = array("Page", "Article", "Image_Page",
+            "Video_Page", "Audio_Page", "Snippet",
+            "Module_Page", "Content_List");
+        foreach ($types as $type) {
+            $model = new $type();
+            $this->assertTrue($model->isRegular());
+        }
+    }
+
+    public function testIsRegularReturnsFalse() {
+        $types = array("Link", "Node", "Language_Link");
+        foreach ($types as $type) {
+            $model = new $type();
+            $this->assertFalse($model->isRegular());
+        }
+    }
+
 }

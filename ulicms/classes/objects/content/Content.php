@@ -22,4 +22,8 @@ abstract class Content extends Model {
         return StringHelper::isNullOrEmpty($this->alternate_title) ? $this->title : $this->alternate_title;
     }
 
+    public function isRegular() {
+        return true;
+    }
+
 }

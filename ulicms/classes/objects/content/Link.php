@@ -37,4 +37,8 @@ class Link extends Page {
         return $result;
     }
 
+    public function isRegular() {
+        return false;
+    }
+
 }

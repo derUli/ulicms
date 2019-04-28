@@ -37,4 +37,8 @@ class Language_Link extends Page {
         return $result;
     }
 
+    public function isRegular() {
+        return false;
+    }
+
 }
