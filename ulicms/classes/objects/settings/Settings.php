@@ -16,13 +16,6 @@ class Settings {
         return $retval;
     }
 
-    public static function preloadAll() {
-        $query = db_query("SELECT name, value FROM " . tbname("settings"));
-        while ($result = Database::fetchObject($query)) {
-            SettingsCache::set($result->name, $result->value);
-        }
-    }
-
     // get a config variable
     public static function get($key, $type = 'str') {
         if (!is_null(SettingsCache::get($key))) {

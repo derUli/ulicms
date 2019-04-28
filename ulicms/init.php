@@ -322,10 +322,6 @@ if (!$select) {
     throw new SqlException("<h1>Database " . $config->db_database . " doesn't exist.</h1>");
 }
 
-if (is_true($cfg->preload_all_settings)) {
-    Settings::preloadAll();
-}
-
 if (!Settings::get("session_name")) {
     Settings::set("session_name", uniqid() . "_SESSION");
 }
