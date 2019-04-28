@@ -1,6 +1,6 @@
 <?php
 $permissionChecker = new ACL();
-if (!is_admin() and ! $permissionChecker->hasPermission("categories")) {
+if (!$permissionChecker->hasPermission("categories")) {
     noPerms();
 } else {
     if (isset($_GET["order"]) and faster_in_array($_GET["order"], array(
