@@ -26,6 +26,7 @@ Neue API-Methoden:
 * compileSCSS($stylesheet)
 * compileSCSSToFile($stylesheet)
 * is_blank($val)
+* Content->isRegular()
 
 Fehlerkorrekturen:
 * Custom Types Feature repariert

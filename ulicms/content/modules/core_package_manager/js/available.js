@@ -6,7 +6,7 @@ $(function () {
         $(container).html(result);
         $(container).slideDown();
         initRemoteAlerts(container);
-        initDataTables(".tablesorter");
+        initDataTables("#pkglist");
 
         $(container).find(".btn-install").click(function (event) {
             event.preventDefault();
