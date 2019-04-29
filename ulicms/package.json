@@ -14,7 +14,7 @@
         "js-url": "^2.3.0",
         "jscolor-picker": "2.x",
         "password-strength-meter": "^1.2.2",
-        "select2": "^4.0.6-rc.1",
+        "select2": "^4.0.6",
         "slug": "^1.1.0"
     },
     "license": "The BSD License",
