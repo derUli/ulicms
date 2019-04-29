@@ -15,7 +15,14 @@ class PDFCreator {
     public function __construct() {
         ob_start();
         echo "<h1>" . get_title() . "</h1>";
+        $text_position = get_text_position();
+        if ($text_position == "after") {
+            Template::outputContentElement();
+        }
         content();
+        if ($text_position == "before") {
+            Template::outputContentElement();
+        }
         $this->content = ob_get_clean();
     }
 
