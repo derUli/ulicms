@@ -1,1 +1,1 @@
-ALTER TABLE {prefix}content CHANGE `systemname`  `slug` varchar(255) NOT NULL
+ALTER TABLE {prefix}content CHANGE `systemname` `slug` varchar(255) NOT NULL

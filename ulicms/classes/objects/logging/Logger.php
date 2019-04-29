@@ -8,6 +8,7 @@ class Logger {
     private $logger;
 
     public function __construct($path) {
+        $environment = get_environment();
         $this->path = $path;
         // if the directory doesn't exist, create it.
         if (!is_dir($this->path)) {
@@ -15,7 +16,8 @@ class Logger {
         }
         if (is_dir($this->path)) {
             $this->logger = new Katzgrau\KLogger\Logger($this->path, Psr\Log\LogLevel::DEBUG, array(
-                "extension" => "log"
+                "extension" => "log",
+                "prefix" => "{$environment}_"
             ));
             $cfg = new CMSConfig();
             // Option fix_log_permissions
