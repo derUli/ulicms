@@ -45,6 +45,10 @@ $(function () {
             editor.on("change", function (cmEditor) {
                 var wrapper = $(editor.getWrapperElement());
                 validateCodeMirrorJson(cmEditor, wrapper);
+
+                // Make sure that the is updated
+                // TODO: Do this only on before submit for performance reasons
+                cmEditor.save();
             });
 
             validateCodeMirrorJson(editor, $(editor.getWrapperElement()));
