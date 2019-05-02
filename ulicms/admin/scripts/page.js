@@ -321,7 +321,7 @@ $(function () {
 // various filter functions
 // XXX: this functions should be binded unobstrusive
 function filterByLanguage(element) {
-    var index = element.selectedIndex
+    var index = element.selectedIndex;
     if (element.options[index].value !== "") {
         location.replace("index.php?action=pages&filter_language="
                 + element.options[index].value)
@@ -329,7 +329,7 @@ function filterByLanguage(element) {
 }
 
 function filterByType(element) {
-    var index = element.selectedIndex
+    var index = element.selectedIndex;
     if (element.options[index].value !== "") {
         location.replace("index.php?action=pages&filter_type="
                 + element.options[index].value)
@@ -337,7 +337,7 @@ function filterByType(element) {
 }
 
 function filterByMenu(element) {
-    var index = element.selectedIndex
+    var index = element.selectedIndex;
     if (element.options[index].value !== "") {
         location.replace("index.php?action=pages&filter_menu="
                 + element.options[index].value)

@@ -41,17 +41,28 @@ $(function () {
             tabMode: "shift",
             readOnly: $(elem).prop("readonly")
         });
-        if ($(elem).data("validate") === "json") {
-            editor.on("change", function (cmEditor) {
-                var wrapper = $(editor.getWrapperElement());
-                validateCodeMirrorJson(cmEditor, wrapper);
+        switch ($(elem).data("validate")) {
+            case "json":
+                editor.on("change", function (cmEditor) {
+                    var wrapper = $(editor.getWrapperElement());
+                    validateCodeMirrorJson(cmEditor, wrapper);
+                });
 
-                // Make sure that the is updated
-                // TODO: Do this only on before submit for performance reasons
-                cmEditor.save();
-            });
+                editor.on("blur", function (cmEditor) {
+                    var wrapper = $(editor.getWrapperElement());
+                    if (validateCodeMirrorJson(cmEditor, wrapper)) {
+                        cmEditor.save();
+                    }
+                });
+                validateCodeMirrorJson(editor, $(editor.getWrapperElement()));
+                break;
 
-            validateCodeMirrorJson(editor, $(editor.getWrapperElement()));
+            default:
+                editor.on("blur", function (cmEditor) {
+                    cmEditor.save();
+                });
         }
+
+
     });
 });
