@@ -105,8 +105,8 @@ class Forms {
             $email_to = $form["email_to"];
             $subject = $form["subject"];
             $target_page_id = $form["target_page_id"];
-            $target_page_systemname = getPageSystemnameByID($target_page_id);
-            $redirect_url = buildSEOUrl($target_page_systemname);
+            $target_page_slug = getPageSlugByID($target_page_id);
+            $redirect_url = buildSEOUrl($target_page_slug);
 
             $mail_from_field = $form["mail_from_field"];
 

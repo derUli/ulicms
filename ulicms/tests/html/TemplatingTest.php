@@ -11,16 +11,16 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         Vars::delete("type");
 
         unset($_GET ["seite"]);
-        Database::query("delete from {prefix}content where systemname = 'testdisableshortcodes' or title like 'Unit Test%'", true);
+        Database::query("delete from {prefix}content where slug = 'testdisableshortcodes' or title like 'Unit Test%'", true);
     }
 
-    public function testGetRequestedPageNameWithSystemNameSet() {
+    public function testGetRequestedPageNameWithSlugSet() {
         $_GET ["seite"] = "foobar";
         $this->assertEquals("foobar", get_requested_pagename());
         $this->cleanUp();
     }
 
-    public function testGetRequestedPageNameWithoutSystemName() {
+    public function testGetRequestedPageNameWithoutSlug() {
         $this->cleanUp();
         $this->assertEquals(get_frontpage(), get_requested_pagename());
     }
@@ -62,7 +62,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
     public function testGetType() {
         $content1 = new Module_Page();
         $content1->title = 'Unit Test ' . uniqid();
-        $content1->systemname = 'unit-test-' . uniqid();
+        $content1->slug = 'unit-test-' . uniqid();
         $content1->language = 'de';
         $content1->content = "even more text";
         $content1->comments_enabled = false;
@@ -71,7 +71,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         $content1->save();
 
         $this->assertEquals("module",
-                get_type($content1->systemname,
+                get_type($content1->slug,
                         $content1->language));
 
         $content1->type = "video";
@@ -79,19 +79,19 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
 
         // The type is cached so get_type() returns the same
         $this->assertEquals("module",
-                get_type($content1->systemname,
+                get_type($content1->slug,
                         $content1->language));
         // unset the cached type
-        Vars::delete("type_{$content1->systemname}_{$content1->language}");
+        Vars::delete("type_{$content1->slug}_{$content1->language}");
 
         // no it should get the actual type (video)
         $this->assertEquals("video",
-                get_type($content1->systemname,
+                get_type($content1->slug,
                         $content1->language));
 
         $content2 = new Article();
         $content2->title = 'Unit Test ' . uniqid();
-        $content2->systemname = 'unit-test-' . uniqid();
+        $content2->slug = 'unit-test-' . uniqid();
         $content2->language = 'de';
         $content2->content = "even more text";
         $content2->comments_enabled = false;
@@ -101,7 +101,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
 
         // the type is cached
         $this->assertEquals("article",
-                get_type($content2->systemname,
+                get_type($content2->slug,
                         $content2->language));
     }
 

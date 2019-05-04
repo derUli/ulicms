@@ -28,10 +28,10 @@ function og_tags() {
     echo get_og_tags();
 }
 
-function get_og_tags($systemname = null) {
+function get_og_tags($slug = null) {
     $html = "";
     if (is_200()) {
-        $og_data = get_og_data($systemname);
+        $og_data = get_og_data($slug);
         $og_title = $og_data["og_title"];
         $og_type = $og_data["og_type"];
         $og_image = $og_data["og_image"];
@@ -59,7 +59,7 @@ function get_og_tags($systemname = null) {
             $og_image = ModuleHelper::getBaseUrl() . ltrim($og_image, "/");
         }
         if (empty($og_image)) {
-            $page = get_page($systemname);
+            $page = get_page($slug);
             if ($page["type"] == "article" && !StringHelper::isNullOrWhitespace($page["article_image"]))
                 ;
             $og_image = ltrim($page["article_image"], "/");
@@ -101,15 +101,15 @@ function get_og_tags($systemname = null) {
     return $html;
 }
 
-function get_og_data($systemname = "") {
-    if (empty($systemname)) {
-        $systemname = $_GET["seite"];
+function get_og_data($slug = "") {
+    if (empty($slug)) {
+        $slug = $_GET["seite"];
     }
 
-    if (empty($systemname)) {
-        $systemname = get_frontpage();
+    if (empty($slug)) {
+        $slug = get_frontpage();
     }
-    $query = db_query("SELECT og_title, og_type, og_image, og_description FROM " . tbname("content") . " WHERE systemname='" . db_escape($systemname) . "' AND language='" . db_escape($_SESSION["language"]) . "'");
+    $query = db_query("SELECT og_title, og_type, og_image, og_description FROM " . tbname("content") . " WHERE slug='" . db_escape($slug) . "' AND language='" . db_escape($_SESSION["language"]) . "'");
     if (db_num_rows($query) > 0) {
         return db_fetch_assoc($query);
     } else {
@@ -146,7 +146,7 @@ function get_ID() {
         $page = get_requested_pagename();
     }
     $result = null;
-    $sql = "SELECT `id` FROM " . tbname("content") . " WHERE systemname='" . db_escape($page) . "'  AND language='" . db_escape($_SESSION["language"]) . "'";
+    $sql = "SELECT `id` FROM " . tbname("content") . " WHERE slug='" . db_escape($page) . "'  AND language='" . db_escape($_SESSION["language"]) . "'";
     $query = db_query($sql);
     if (db_num_rows($query) > 0) {
         $result = db_fetch_object($query);
@@ -164,7 +164,7 @@ function is_active() {
         $page = get_requested_pagename();
     }
     $result = 1;
-    $sql = "SELECT `active` FROM " . tbname("content") . " WHERE systemname='" . db_escape($page) . "'  AND language='" . db_escape($_SESSION["language"]) . "'";
+    $sql = "SELECT `active` FROM " . tbname("content") . " WHERE slug='" . db_escape($page) . "'  AND language='" . db_escape($_SESSION["language"]) . "'";
     $query = db_query($sql);
     if (db_num_rows($query) > 0) {
         $result = db_fetch_object($query);
@@ -174,21 +174,21 @@ function is_active() {
     return $result;
 }
 
-function get_type($systemname = null, $language = null) {
+function get_type($slug = null, $language = null) {
 
-    if (!$systemname) {
-        $systemname = get_requested_pagename();
+    if (!$slug) {
+        $slug = get_requested_pagename();
     }
 
     if (!$language) {
         $language = getCurrentLanguage();
     }
-    $varName = "type_{$systemname}_{$language}";
+    $varName = "type_{$slug}_{$language}";
     if (Vars::get($varName)) {
         return Vars::get($varName);
     }
     try {
-        $page = ContentFactory::getBySystemnameAndLanguage($systemname, $language);
+        $page = ContentFactory::getBySlugAndLanguage($slug, $language);
         $type = $page->type;
     } catch (Exception $e) {
         $type = "page";
@@ -204,7 +204,7 @@ function get_article_meta($page = null) {
         $page = get_requested_pagename();
     }
     $result = null;
-    $sql = "SELECT `article_author_name`, `article_author_email`, CASE WHEN `article_date` is not null then UNIX_TIMESTAMP(article_date) else null end as article_date, `article_image`, `excerpt` FROM " . tbname("content") . " WHERE systemname='" . db_escape($page) . "'  AND language='" . Database::escapeValue($_SESSION["language"]) . "'";
+    $sql = "SELECT `article_author_name`, `article_author_email`, CASE WHEN `article_date` is not null then UNIX_TIMESTAMP(article_date) else null end as article_date, `article_image`, `excerpt` FROM " . tbname("content") . " WHERE slug='" . db_escape($page) . "'  AND language='" . Database::escapeValue($_SESSION["language"]) . "'";
     $query = db_query($sql);
     if (db_num_rows($query) > 0) {
         $result = Database::fetchObject($query);
@@ -222,7 +222,7 @@ function get_cache_control() {
         $page = get_requested_pagename();
     }
     $result = "";
-    $sql = "SELECT `cache_control` FROM " . tbname("content") . " WHERE systemname='" . db_escape($page) . "'  AND language='" . db_escape($_SESSION["language"]) . "'";
+    $sql = "SELECT `cache_control` FROM " . tbname("content") . " WHERE slug='" . db_escape($page) . "'  AND language='" . db_escape($_SESSION["language"]) . "'";
     $query = db_query($sql);
     if ($query and db_num_rows($query) > 0) {
         $result = db_fetch_object($query);
@@ -241,7 +241,7 @@ function get_text_position() {
         $page = get_requested_pagename();
     }
     $result = "";
-    $sql = "SELECT `text_position` FROM " . tbname("content") . " WHERE systemname='" . db_escape($page) . "'  AND language='" . db_escape($_SESSION["language"]) . "'";
+    $sql = "SELECT `text_position` FROM " . tbname("content") . " WHERE slug='" . db_escape($page) . "'  AND language='" . db_escape($_SESSION["language"]) . "'";
     $query = db_query($sql);
     if (db_num_rows($query) > 0) {
         $result = db_fetch_object($query);
@@ -258,7 +258,7 @@ function get_category_id($page = null) {
         $page = get_requested_pagename();
     }
     $result = null;
-    $sql = "SELECT `category_id` FROM " . tbname("content") . " WHERE systemname='" . db_escape($page) . "'  AND language='" . db_escape(getCurrentLanguage()) . "'";
+    $sql = "SELECT `category_id` FROM " . tbname("content") . " WHERE slug='" . db_escape($page) . "'  AND language='" . db_escape(getCurrentLanguage()) . "'";
     $query = db_query($sql);
     if ($query and db_num_rows($query) > 0) {
         $result = db_fetch_object($query);
@@ -276,7 +276,7 @@ function get_parent($page = null) {
         $page = get_requested_pagename();
     }
     $result = "";
-    $sql = "SELECT `parent` FROM " . tbname("content") . " WHERE systemname='" . db_escape($page) . "'  AND language='" . db_escape($_SESSION["language"]) . "'";
+    $sql = "SELECT `parent` FROM " . tbname("content") . " WHERE slug='" . db_escape($page) . "'  AND language='" . db_escape($_SESSION["language"]) . "'";
     $query = db_query($sql);
     if (db_num_rows($query) > 0) {
         $result = db_fetch_object($query);
@@ -293,7 +293,7 @@ function get_custom_data($page = null) {
         $page = get_requested_pagename();
     }
 
-    $sql = "SELECT `custom_data` FROM " . tbname("content") . " WHERE systemname='" . db_escape($page) . "'  AND language='" . db_escape($_SESSION["language"]) . "'";
+    $sql = "SELECT `custom_data` FROM " . tbname("content") . " WHERE slug='" . db_escape($page) . "'  AND language='" . db_escape($_SESSION["language"]) . "'";
     $query = db_query($sql);
     if (db_num_rows($query) > 0) {
         $result = db_fetch_object($query);
@@ -310,7 +310,7 @@ function get_access($page = null) {
     if (!$page) {
         $page = get_requested_pagename();
     }
-    $sql = "SELECT `access` FROM " . tbname("content") . " WHERE systemname='" . db_escape($page) . "'  AND language='" . db_escape($_SESSION["language"]) . "'";
+    $sql = "SELECT `access` FROM " . tbname("content") . " WHERE slug='" . db_escape($page) . "'  AND language='" . db_escape($_SESSION["language"]) . "'";
     $query = db_query($sql);
     if (db_num_rows($query) > 0) {
         $result = db_fetch_object($query);
@@ -324,7 +324,7 @@ function get_redirection($page = null) {
     if (!$page) {
         $page = get_requested_pagename();
     }
-    $sql = "SELECT `redirection` FROM " . tbname("content") . " WHERE systemname='" . db_escape($page) . "'  AND language='" . db_escape($_SESSION["language"]) . "' and type='link'";
+    $sql = "SELECT `redirection` FROM " . tbname("content") . " WHERE slug='" . db_escape($page) . "'  AND language='" . db_escape($_SESSION["language"]) . "' and type='link'";
     $query = db_query($sql);
     if (db_num_rows($query) > 0) {
         $result = db_fetch_object($query);
@@ -351,7 +351,7 @@ function get_theme($page = null) {
     }
 
     if (is_200()) {
-        $sql = "SELECT `theme` FROM " . tbname("content") . " WHERE systemname='" . db_escape($page) . "'  AND language='" . db_escape($_SESSION["language"]) . "'";
+        $sql = "SELECT `theme` FROM " . tbname("content") . " WHERE slug='" . db_escape($page) . "'  AND language='" . db_escape($_SESSION["language"]) . "'";
         $query = db_query($sql);
         if ($query and db_num_rows($query) > 0) {
             $data = db_fetch_object($query);
@@ -385,7 +385,7 @@ function delete_custom_data($var = null, $page = null) {
 
     $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
-    return db_query("UPDATE " . tbname("content") . " SET custom_data = '" . db_escape($json) . "' WHERE systemname='" . db_escape($page) . "'");
+    return db_query("UPDATE " . tbname("content") . " SET custom_data = '" . db_escape($json) . "' WHERE slug='" . db_escape($page) . "'");
 }
 
 function set_custom_data($var, $value, $page = null) {
@@ -400,7 +400,7 @@ function set_custom_data($var, $value, $page = null) {
     $data[$var] = $value;
     $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
-    return db_query("UPDATE " . tbname("content") . " SET custom_data = '" . db_escape($json) . "' WHERE systemname='" . db_escape($page) . "'");
+    return db_query("UPDATE " . tbname("content") . " SET custom_data = '" . db_escape($json) . "' WHERE slug='" . db_escape($page) . "'");
 }
 
 function language_selection() {
@@ -495,7 +495,7 @@ $status = check_status();
 
 function get_meta_keywords($dummy = null) {
     $ipage = db_escape($_GET["seite"]);
-    $query = db_query("SELECT meta_keywords FROM " . tbname("content") . " WHERE systemname='$ipage' AND language='" . db_escape($_SESSION["language"]) . "'");
+    $query = db_query("SELECT meta_keywords FROM " . tbname("content") . " WHERE slug='$ipage' AND language='" . db_escape($_SESSION["language"]) . "'");
 
     if (db_num_rows($query) > 0) {
         while ($row = db_fetch_object($query)) {
@@ -521,7 +521,7 @@ function meta_keywords($dummy = null) {
 
 function get_meta_description($ipage = null) {
     $ipage = db_escape($_GET["seite"]);
-    $query = db_query("SELECT meta_description FROM " . tbname("content") . " WHERE systemname='$ipage' AND language='" . db_escape($_SESSION["language"]) . "'");
+    $query = db_query("SELECT meta_description FROM " . tbname("content") . " WHERE slug='$ipage' AND language='" . db_escape($_SESSION["language"]) . "'");
     if ($ipage == "") {
         $query = db_query("SELECT meta_description FROM " . tbname("content") . " ORDER BY id LIMIT 1", $connection);
     }
@@ -575,7 +575,7 @@ function get_title($ipage = null, $headline = false) {
     }
 
     $ipage = db_escape($_GET["seite"]);
-    $query = db_query("SELECT alternate_title, title FROM " . tbname("content") . " WHERE systemname='$ipage' AND language='" . db_escape($_SESSION["language"]) . "'", $connection);
+    $query = db_query("SELECT alternate_title, title FROM " . tbname("content") . " WHERE slug='$ipage' AND language='" . db_escape($_SESSION["language"]) . "'", $connection);
     if ($ipage == "") {
         $query = db_query("SELECT title, alternate_title FROM " . tbname("content") . " ORDER BY id LIMIT 1");
     }
@@ -715,7 +715,7 @@ function parent_item_contains_current_page($id) {
     $retval = false;
     $id = intval($id);
     $language = $_SESSION["language"];
-    $sql = "SELECT id, systemname, parent FROM " . tbname("content") . " WHERE language = '$language' AND active = 1 AND `deleted_at` IS NULL";
+    $sql = "SELECT id, slug, parent FROM " . tbname("content") . " WHERE language = '$language' AND active = 1 AND `deleted_at` IS NULL";
     $r = db_query($sql);
 
     $data = array();
@@ -725,7 +725,7 @@ function parent_item_contains_current_page($id) {
 
     $tree = buildtree($data, $id);
     foreach ($tree as $key) {
-        if ($key["systemname"] == get_requested_pagename()) {
+        if ($key["slug"] == get_requested_pagename()) {
             $retval = true;
         }
     }
@@ -736,7 +736,7 @@ function get_menu($name = "top", $parent = null, $recursive = true, $order = "po
     $html = "";
     $name = db_escape($name);
     $language = $_SESSION["language"];
-    $sql = "SELECT id, systemname, access, redirection, title, alternate_title, menu_image, target, type, link_to_language, position FROM " . tbname("content") . " WHERE menu='$name' AND language = '$language' AND active = 1 AND `deleted_at` IS NULL AND hidden = 0 and type <> 'snippet' and parent ";
+    $sql = "SELECT id, slug, access, redirection, title, alternate_title, menu_image, target, type, link_to_language, position FROM " . tbname("content") . " WHERE menu='$name' AND language = '$language' AND active = 1 AND `deleted_at` IS NULL AND hidden = 0 and type <> 'snippet' and parent ";
 
     if (is_null($parent)) {
         $sql .= " IS NULL ";
@@ -772,7 +772,7 @@ function get_menu($name = "top", $parent = null, $recursive = true, $order = "po
                 $additional_classes .= "contains-current-page ";
             }
 
-            if (get_requested_pagename() != $row->systemname) {
+            if (get_requested_pagename() != $row->slug) {
                 $html .= "  <li class='" . trim($additional_classes) . "'>";
             } else {
                 $html .= "  <li class='menu_active_list_item" . rtrim($additional_classes) . "'>";
@@ -793,10 +793,10 @@ function get_menu($name = "top", $parent = null, $recursive = true, $order = "po
                 $redirection = $language->getLanguageLink();
             }
 // if content has type link or node url is the target url else build seo url
-            $url = ($row->type == "link" or $row->type == "node") ? $row->redirection : buildSEOUrl($row->systemname);
+            $url = ($row->type == "link" or $row->type == "node") ? $row->redirection : buildSEOUrl($row->slug);
             $url = Template::getEscape($url);
 
-            if (get_requested_pagename() != $row->systemname) {
+            if (get_requested_pagename() != $row->slug) {
                 $html .= "<a href='" . $url . "' target='" . $row->target . "' class='" . trim($additional_classes) . "'>";
             } else {
                 $html .= "<a class='menu_active_link" . rtrim($additional_classes) . "' href='" . $url . "' target='" . $row->target . "'>";
@@ -861,23 +861,23 @@ function author() {
     echo get_author();
 }
 
-function get_page($systemname = '') {
-    if (empty($systemname)) {
-        $systemname = $_GET["seite"];
+function get_page($slug = '') {
+    if (empty($slug)) {
+        $slug = $_GET["seite"];
     }
-    if (empty($systemname)) {
-        $systemname = get_frontpage();
+    if (empty($slug)) {
+        $slug = get_frontpage();
     }
-    if (Vars::get("page_" . $systemname)) {
-        return Vars::get("page_" . $systemname);
+    if (Vars::get("page_" . $slug)) {
+        return Vars::get("page_" . $slug);
     }
-    $query = db_query("SELECT * FROM " . tbname("content") . " WHERE systemname='" . db_escape($systemname) . "' AND language='" . db_escape($_SESSION["language"]) . "'");
+    $query = db_query("SELECT * FROM " . tbname("content") . " WHERE slug='" . db_escape($slug) . "' AND language='" . db_escape($_SESSION["language"]) . "'");
     if (db_num_rows($query) > 0) {
         $result = db_fetch_assoc($query);
-        Vars::set("page_" . $systemname, $result);
+        Vars::set("page_" . $slug, $result);
         return $result;
     } else {
-        Vars::set("page_" . $systemname, null);
+        Vars::set("page_" . $slug, null);
         return null;
     }
 }

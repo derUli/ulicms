@@ -111,18 +111,13 @@ function initRemoteAlerts(rootElement) {
     });
 }
 function initDataTables(rootElement) {
-    if (!localStorage.getItem("datablesLength")) {
-        localStorage.setItem("datablesLength", 10);
-    }
     // Sortable and searchable tables
     $(rootElement).find(".tablesorter").DataTable({
         language: {
             url: $("body").data("datatables-translation"),
         },
+		deferRender: true,
+		stateSave: true,
         columnDefs: [{targets: "no-sort", orderable: false}],
-        pageLength: localStorage.getItem("datablesLength")
-    });
-    $(rootElement).find(".tablesorter").on('length.dt', function (e, settings, len) {
-        localStorage.setItem("datablesLength", len)
     });
 }

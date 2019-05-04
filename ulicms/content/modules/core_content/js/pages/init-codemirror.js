@@ -41,13 +41,28 @@ $(function () {
             tabMode: "shift",
             readOnly: $(elem).prop("readonly")
         });
-        if ($(elem).data("validate") === "json") {
-            editor.on("change", function (cmEditor) {
-                var wrapper = $(editor.getWrapperElement());
-                validateCodeMirrorJson(cmEditor, wrapper);
-            });
+        switch ($(elem).data("validate")) {
+            case "json":
+                editor.on("change", function (cmEditor) {
+                    var wrapper = $(editor.getWrapperElement());
+                    validateCodeMirrorJson(cmEditor, wrapper);
+                });
 
-            validateCodeMirrorJson(editor, $(editor.getWrapperElement()));
+                editor.on("blur", function (cmEditor) {
+                    var wrapper = $(editor.getWrapperElement());
+                    if (validateCodeMirrorJson(cmEditor, wrapper)) {
+                        cmEditor.save();
+                    }
+                });
+                validateCodeMirrorJson(editor, $(editor.getWrapperElement()));
+                break;
+
+            default:
+                editor.on("blur", function (cmEditor) {
+                    cmEditor.save();
+                });
         }
+
+
     });
 });

@@ -3,7 +3,7 @@
 class PagePermissionsTest extends \PHPUnit\Framework\TestCase {
 
     public function tearDown() {
-        $sql = "delete from `{prefix}content` where systemname = ?";
+        $sql = "delete from `{prefix}content` where slug = ?";
         $args = array(
             "page_permission_test"
         );
@@ -53,7 +53,7 @@ class PagePermissionsTest extends \PHPUnit\Framework\TestCase {
 
     public function testCreatePageWithPermissions() {
         $page = new Page();
-        $page->systemname = "page_permission_test";
+        $page->slug = "page_permission_test";
         $page->title = "Page Permission Test";
         $page->language = "en";
 
@@ -80,7 +80,7 @@ class PagePermissionsTest extends \PHPUnit\Framework\TestCase {
         $page->save();
 
         $page2 = new Page();
-        $page2->loadBySystemnameAndLanguage("page_permission_test", "en");
+        $page2->loadBySlugAndLanguage("page_permission_test", "en");
         $this->assertEquals("Page Permission Test", $page2->title);
         $this->assertTrue($page->getPermissions()
                         ->getEditRestriction("owner"));

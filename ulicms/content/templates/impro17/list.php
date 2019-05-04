@@ -32,7 +32,7 @@ if ($id !== null) {
                 <?php
                 foreach ($entries as $entry) {
                     $article_image = getTemplateDirPath("impro17") . "images/nopic.jpg";
-                    $meta = get_article_meta($entry->systemname);
+                    $meta = get_article_meta($entry->slug);
 
                     $article_date = !is_null($entry->article_date) ? $entry->article_date : $entry->created;
                     $excerpt = strip_tags($meta->excerpt, "<img><iframe><embed><object>");
@@ -42,14 +42,14 @@ if ($id !== null) {
                     <div class="article-list-row">
                         <p>
                             <strong><a
-                                    href="<?php Template::escape(buildSEOUrl($entry->systemname, $entry->redirection)); ?>"><?php Template::escape($entry->title); ?></a></strong>
+                                    href="<?php Template::escape(buildSEOUrl($entry->slug, $entry->redirection)); ?>"><?php Template::escape($entry->title); ?></a></strong>
                             <br /> <small><?php translate("date"); ?>: <?php echo strftime("%x %X", $article_date); ?></small>
                         </p>
 
                         <p><?php echo $excerpt; ?></p>
                         <p>
                             <a
-                                href="<?php Template::escape(buildSEOUrl($entry->systemname, $entry->redirection)); ?>"><?php translate("readmore"); ?></a>
+                                href="<?php Template::escape(buildSEOUrl($entry->slug, $entry->redirection)); ?>"><?php translate("readmore"); ?></a>
                         </p>
                     </div>
                 <?php } ?>

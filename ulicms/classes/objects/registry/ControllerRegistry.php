@@ -77,8 +77,10 @@ class ControllerRegistry {
     public static function userCanCall($sClass, $sMethod) {
         $allowed = true;
         $acl = new ACL();
-        if (isset(self::$controller_function_permissions[$sClass . "::" . $sMethod]) and StringHelper::isNotNullOrWhitespace(self::$controller_function_permissions[$sClass . "::" . $sMethod])) {
-            $allowed = $acl->hasPermission(self::$controller_function_permissions[$sClass . "::" . $sMethod]);
+        $methodIdentifier = $sClass . "::" . $sMethod;
+
+        if (!is_blank(self::$controller_function_permissions[$methodIdentifier])) {
+            $allowed = $acl->hasPermission(self::$controller_function_permissions[$methodIdentifier]);
         }
         return $allowed;
     }

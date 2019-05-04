@@ -4,6 +4,11 @@ use UliCMS\Security\PermissionChecker;
 
 class ACL {
 
+    public function hasPermission($name) {
+        $checker = new PermissionChecker(get_user_id());
+        return $checker->hasPermission($name);
+    }
+
     public function setPermission($name, $value, $group_id) {
         $result = $this->getPermissionQueryResult();
 
@@ -24,11 +29,6 @@ class ACL {
         $newJSON = json_encode($permissionData, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
         $updateSQLString = "UPDATE `" . tbname("groups") . "` SET `permissions`='" . db_escape($newJSON) . "' WHERE id=" . $group_id;
-    }
-
-    public function hasPermission($name) {
-        $checker = new PermissionChecker(get_user_id());
-        return $checker->hasPermission($name);
     }
 
     public function createGroup($name, $permissions = null) {

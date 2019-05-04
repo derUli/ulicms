@@ -9,7 +9,7 @@ class ArticleTest extends \PHPUnit\Framework\TestCase {
     public function testSetArticle() {
         $article = new Article();
         $article->title = "Unit Test Article";
-        $article->systemname = "unit test";
+        $article->slug = "unit test";
         $article->menu = "none";
         $article->language = "de";
         $article->article_date = 1413821696;

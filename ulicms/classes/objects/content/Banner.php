@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Exceptions\NotImplementedException;
+
 class Banner {
 
     private $id = null;
@@ -299,6 +301,25 @@ class Banner {
             $this->id = null;
         }
         return $retval;
+    }
+
+    public function render() {
+        $html = "";
+        switch ($this->getType()) {
+            case "gif":
+                $title = Template::getEscape($this->getName());
+                $link_url = Template::getEscape($this->getLinkUrl());
+                $image_url = Template::getEscape($this->getImageUrl());
+                $html = "<a href=\"$link_url\" target=\"_blank\">"
+                        . "<img src=\"$image_url\" title=\"$title\" "
+                        . "alt=\"$title\" border=\"0\"></a>";
+                break;
+            case "html":
+                $html = $this->getHtml();
+
+                break;
+        }
+        return $html;
     }
 
 }

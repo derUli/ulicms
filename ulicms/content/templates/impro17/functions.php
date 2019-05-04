@@ -4,7 +4,7 @@ function jumbotron_get_menu($name = "top", $parent = null, $recursive = true, $o
     $html = "";
     $name = db_escape($name);
     $language = $_SESSION["language"];
-    $sql = "SELECT id, systemname, access, redirection, title, alternate_title, menu_image, target, type, position FROM " . tbname("content") . " WHERE menu='$name' AND language = '$language' AND active = 1 AND `deleted_at` IS NULL AND parent ";
+    $sql = "SELECT id, slug, access, redirection, title, alternate_title, menu_image, target, type, position FROM " . tbname("content") . " WHERE menu='$name' AND language = '$language' AND active = 1 AND `deleted_at` IS NULL AND parent ";
 
     if (is_null($parent)) {
         $sql .= " IS NULL ";
@@ -40,7 +40,7 @@ function jumbotron_get_menu($name = "top", $parent = null, $recursive = true, $o
                 $additional_classes .= "active ";
             }
 
-            if (get_requested_pagename() != $row->systemname) {
+            if (get_requested_pagename() != $row->slug) {
                 $html .= "  <li class='" . trim($additional_classes) . "'>";
             } else {
                 $html .= "  <li class='active" . rtrim($additional_classes) . "'>";
@@ -58,10 +58,10 @@ function jumbotron_get_menu($name = "top", $parent = null, $recursive = true, $o
             }
 
             // if content has type link or node url is the target url else build seo url
-            $url = ($row->type == "link" or $row->type == "node") ? $row->redirection : buildSEOUrl($row->systemname);
+            $url = ($row->type == "link" or $row->type == "node") ? $row->redirection : buildSEOUrl($row->slug);
             $url = Template::getEscape($url);
 
-            if (get_requested_pagename() != $row->systemname) {
+            if (get_requested_pagename() != $row->slug) {
                 $html .= "<a href='" . $url . "' target='" . $row->target . "' class='" . trim($additional_classes) . "'>";
             } else {
                 $html .= "<a class='menu_active_link" . rtrim($additional_classes) . "' href='" . $url . "' target='" . $row->target . "'>";

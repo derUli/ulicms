@@ -86,7 +86,7 @@ if ($permissionChecker->hasPermission("pages")) {
                     "id" => "pageform-edit",
                     "class" => "main-form",
                     "data-get-content-types-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "getContentTypes"),
-                    "data-systemname-free-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "checkSystemNameFree"),
+                    "data-slug-free-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "checkSlugFree"),
                     "data-parent-pages-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "filterParentPages")
                 ));
                 ?>
@@ -97,9 +97,9 @@ if ($permissionChecker->hasPermission("pages")) {
                     <h2 class="accordion-header"><?php translate("title_and_headline"); ?></h2>
                     <div class="accordion-content">
                         <strong><?php translate("permalink"); ?>*</strong><br /> <input
-                            type="text" required="required" name="systemname"
+                            type="text" required="required" name="slug"
                             value="<?php
-                            esc($row->systemname);
+                            esc($row->slug);
                             ?>"> <br /> <strong><?php translate("page_title"); ?>* </strong><br />
                         <input type="text" name="page_title"
                                value="<?php

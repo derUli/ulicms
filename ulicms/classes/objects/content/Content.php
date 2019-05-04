@@ -2,7 +2,7 @@
 
 abstract class Content extends Model {
 
-    abstract protected function loadBySystemnameAndLanguage($name, $language);
+    abstract protected function loadBySlugAndLanguage($name, $language);
 
     public function getShowHeadline() {
         $retval = true;
@@ -20,6 +20,10 @@ abstract class Content extends Model {
 
     public function getHeadline() {
         return StringHelper::isNullOrEmpty($this->alternate_title) ? $this->title : $this->alternate_title;
+    }
+
+    public function isRegular() {
+        return true;
     }
 
 }

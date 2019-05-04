@@ -6,38 +6,13 @@ use UliCMS\Security\PermissionChecker;
 
 class Template {
 
-// TODO: Rewrite this using the models
+    // TODO: Rewrite this using the models
+    // Add method render() to Banner class
+    // Add method Banner::getRandom()
     public static function randomBanner() {
-        $query = db_query("SELECT name, link_url, image_url, `type`, html FROM " . tbname("banner") . "
-WHERE enabled = 1 and
-(language IS NULL OR language='" . db_escape($_SESSION["language"]) . "') and
-(
-(date_from is not null and date_to is not null and CURRENT_DATE() >= date_from and CURRENT_DATE() <= date_to)
-or
-(date_from is not null and date_to is null and CURRENT_DATE() >= date_from )
-or
-(date_from is null and date_to is not null and CURRENT_DATE() <= date_to)
-or
-(date_from is null and date_to is null)
-)
-ORDER BY RAND() LIMIT 1") or die(Database::getError());
-        if (db_num_rows($query) > 0) {
-            while ($row = db_fetch_object($query)) {
-                $type = "gif";
-                if (isset($row->type)) {
-                    if (!empty($row->type)) {
-                        $type = $row->type;
-                    }
-                }
-                if ($type == "gif") {
-                    $title = Template::getEscape($row->name);
-                    $link_url = Template::getEscape($row->link_url);
-                    $image_url = Template::getEscape($row->image_url);
-                    echo "<a href='$link_url' target='_blank'><img src='$image_url' title='$title' alt='$title' border=0></a>";
-                } else if ($type == "html") {
-                    echo $row->html;
-                }
-            }
+        $banner = Banners::getRandom();
+        if ($banner) {
+            echo $banner->render();
         }
     }
 
@@ -425,10 +400,10 @@ color:" . Settings::get("body-text-color") . ";
 
         $content = null;
         if (is_200()) {
-            $content = ContentFactory::getBySystemnameAndLanguage(get_requested_pagename(), getCurrentLanguage());
+            $content = ContentFactory::getBySlugAndLanguage(get_requested_pagename(), getCurrentLanguage());
 
             if (!is_logged_in()) {
-                db_query("UPDATE " . tbname("content") . " SET views = views + 1 WHERE systemname='" . Database::escapeValue($_GET["seite"]) . "' AND language='" . db_escape($_SESSION["language"]) . "'");
+                db_query("UPDATE " . tbname("content") . " SET views = views + 1 WHERE slug='" . Database::escapeValue($_GET["seite"]) . "' AND language='" . db_escape($_SESSION["language"]) . "'");
             }
         } else if (is_404()) {
             if ($errorPage404) {

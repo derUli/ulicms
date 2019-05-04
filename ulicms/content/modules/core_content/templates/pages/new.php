@@ -29,7 +29,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                 "style" => "display:none",
                 "class" => "pageform main-form",
                 "data-get-content-types-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "getContentTypes"),
-                "data-systemname-free-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "checkSystemNameFree"),
+                "data-slug-free-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "checkSlugFree"),
                 "data-parent-pages-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "filterParentPages")
     ));
     ?>
@@ -44,12 +44,12 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
             <strong><?php
                 translate("permalink");
                 ?>*
-            </strong><br /> <input type="text" name="systemname" id="systemname"
+            </strong><br /> <input type="text" name="slug" id="slug"
                                    required="required" value=""> <br /> <strong><?php
                                        translate("page_title");
                                        ?>*
             </strong><br /> <input type="text" required="required"
-                                   name="page_title" value="" onkeyup="suggestSystemname(this.value)">
+                                   name="page_title" value="" onkeyup="suggestSlug(this.value)">
             <div class="typedep hide-on-snippet hide-on-non-regular">
                 <br /> <strong><?php translate("alternate_title"); ?>
                 </strong><br /> <input type="text" name="alternate_title" value=""> <small><?php translate("ALTERNATE_TITLE_INFO"); ?>

@@ -93,7 +93,7 @@ if (!defined("KCFINDER_PAGE")) {
             return false;
         }
 
-        public static function sureRemoveDir($dir, $DeleteMe = true) {
+        public static function sureRemoveDir($dir, $deleteMe = true) {
             if (!$dh = @opendir($dir)) {
                 return;
             }
@@ -107,7 +107,7 @@ if (!defined("KCFINDER_PAGE")) {
             }
 
             closedir($dh);
-            if ($DeleteMe) {
+            if ($deleteMe) {
                 @rmdir($dir);
             }
         }

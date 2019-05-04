@@ -7,6 +7,7 @@ class RequestTest extends \PHPUnit\Framework\TestCase {
         unset($_SERVER["HTTP_REFERRER"]);
         unset($_SERVER["HTTP_USER_AGENT"]);
         unset($_SERVER["REQUEST_URI"]);
+        unset($_SERVER["SERVER_PORT"]);
     }
 
     public function testGetVar() {
@@ -24,6 +25,19 @@ class RequestTest extends \PHPUnit\Framework\TestCase {
 
         $this->assertEquals(123.0, Request::getVar("var2", null, "float"));
         $this->assertEquals(1, Request::getVar("var3", null, "int"));
+    }
+
+    public function testHasVarReturnsTrue() {
+        $_POST["this_var"] = "exists";
+        $this->assertTrue(Request::hasVar("this_var"));
+
+        unset($_POST["this_var"]);
+        $_GET["this_var"] = "exists";
+        $this->assertTrue(Request::hasVar("this_var"));
+    }
+
+    public function testHasVarReturnsFalse() {
+        $this->assertFalse(Request::hasVar("web_servers_are_magic"));
     }
 
     public function testGetMethod() {
@@ -79,6 +93,39 @@ class RequestTest extends \PHPUnit\Framework\TestCase {
         $_SERVER["REQUEST_URI"] = "/admin/index.php?action=foobar";
         $this->assertEquals($_SERVER["REQUEST_URI"], Request::getRequestUri());
         $this->assertEquals($_SERVER["REQUEST_URI"], get_request_uri());
+    }
+
+    public function testIsSSLExpectTrue() {
+        $_SERVER["SERVER_PORT"] = 443;
+        $this->assertTrue(Request::isSSL());
+    }
+
+    public function testIsSSLExpectFalse() {
+        $_SERVER["SERVER_PORT"] = 80;
+        $this->assertFalse(Request::isSSL());
+    }
+
+    public function testGetPort() {
+        $_SERVER["SERVER_PORT"] = 8080;
+        $this->assertEquals(8080, Request::getPort());
+
+        $_SERVER["SERVER_PORT"] = 443;
+        $this->assertEquals(443, Request::getPort());
+    }
+
+    public function testGetProtocolExpectHttp() {
+        $_SERVER["SERVER_PORT"] = 8080;
+        $this->assertEquals("http://", Request::getProtocol());
+    }
+
+    public function testGetProtocolExpectHttps() {
+        $_SERVER["SERVER_PORT"] = 443;
+        $this->assertEquals("https://", Request::getProtocol());
+    }
+
+    public function testGetProtocolExpectHttpsWithPrefix() {
+        $_SERVER["SERVER_PORT"] = 443;
+        $this->assertEquals("https://www.ulicms.de", Request::getProtocol("www.ulicms.de"));
     }
 
 }

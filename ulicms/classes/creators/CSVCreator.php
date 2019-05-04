@@ -9,7 +9,16 @@ class CSVCreator {
     public function __construct() {
         $this->title = get_title();
         ob_start();
+
+        $text_position = get_text_position();
+        if ($text_position == "after") {
+            Template::outputContentElement();
+        }
         content();
+        if ($text_position == "before") {
+            Template::outputContentElement();
+        }
+
         $this->content = ob_get_clean();
     }
 
@@ -40,8 +49,7 @@ class CSVCreator {
             $this->title,
             $this->content,
             get_meta_description(),
-            get_meta_keywords(),
-            $author
+            get_meta_keywords()
         );
         $csv_string = getCSV($data[0]);
         $csv_string .= getCSV($data[1]);

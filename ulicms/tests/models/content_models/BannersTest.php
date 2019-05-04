@@ -126,4 +126,24 @@ class BannersTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
+    public function testGetRandom() {
+
+        $_SESSION["language"] = "de";
+
+        for ($i = 1; $i < 20; $i++) {
+            $banner = new Banner();
+            $banner->setType("html");
+            $banner->setHtml(self::HTML_TEXT1);
+            $banner->save();
+        }
+
+        $banner1 = Banners::getRandom();
+        $this->assertInstanceOf(Banner::class, $banner1);
+
+        $banner2 = Banners::getRandom();
+        $this->assertInstanceOf(Banner::class, $banner2);
+
+        $this->assertNotEquals($banner2->getId(), $banner1->getId());
+    }
+
 }

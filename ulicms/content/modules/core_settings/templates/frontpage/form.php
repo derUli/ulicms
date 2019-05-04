@@ -49,10 +49,10 @@ if ($permissionChecker->hasPermission("settings_simple")) {
                             $pages = getAllPages($lang, "title", true);
 
                             for ($i = 0; $i < count($pages); $i ++) {
-                                if ($pages[$i]["systemname"] == $frontpages[$lang]) {
-                                    echo "<option value='" . _esc($pages[$i]["systemname"]) . "' selected='selected'>" . _esc($pages[$i]["title"]) . " (ID: " . $pages[$i]["id"] . ")</option>";
+                                if ($pages[$i]["slug"] == $frontpages[$lang]) {
+                                    echo "<option value='" . _esc($pages[$i]["slug"]) . "' selected='selected'>" . _esc($pages[$i]["title"]) . " (ID: " . $pages[$i]["id"] . ")</option>";
                                 } else {
-                                    echo "<option value='" . _esc($pages[$i]["systemname"]) . "'>" . _esc($pages[$i]["title"]) . " (ID: " . $pages[$i]["id"] . ")</option>";
+                                    echo "<option value='" . _esc($pages[$i]["slug"]) . "'>" . _esc($pages[$i]["title"]) . " (ID: " . $pages[$i]["id"] . ")</option>";
                                 }
                             }
                             ?>

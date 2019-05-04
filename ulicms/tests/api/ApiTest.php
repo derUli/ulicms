@@ -10,6 +10,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
     public function tearDown() {
         $this->cleanUp();
         Database::query("delete from {prefix}users where username like 'testuser-%", true);
+        unset($_SESSION["login_id"]);
         @session_destroy();
     }
 
@@ -273,16 +274,16 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertContains("impro17", $themes);
     }
 
-    public function testGetPageSystemnameByID() {
-        $this->assertEquals($first->systemname, getPageSystemnameByID($first->id));
-        $this->assertNull(getPageSystemnameByID(PHP_INT_MAX));
+    public function testGetPageSlugByID() {
+        $this->assertEquals($first->slug, getPageSlugByID($first->id));
+        $this->assertNull(getPageSlugByID(PHP_INT_MAX));
     }
 
-    public function testGetPageIDBySystemname() {
+    public function testGetPageIDBySlug() {
         $allPages = ContentFactory::getAll();
         $first = $allPages[0];
-        $this->assertEquals($first->id, getPageIDBySystemname($first->systemname));
-        $this->assertNull(getPageIDBySystemname("ich-existiere-wirklich-nicht"));
+        $this->assertEquals($first->id, getPageIDBySlug($first->slug));
+        $this->assertNull(getPageIDBySlug("ich-existiere-wirklich-nicht"));
     }
 
     public function testGetPageTitleByID() {
@@ -354,6 +355,71 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(is_blank(true));
         $this->assertFalse(is_blank(array("foo", "bar")));
         $this->assertFalse(is_blank("13"));
+    }
+
+    public function testGetAllSlugs() {
+        $slugs = getAllSlugs();
+        $this->assertTrue(in_array("willkommen", $slugs));
+        $this->assertTrue(in_array("welcome", $slugs));
+        $this->assertTrue(in_array("lorem_ipsum", $slugs));
+    }
+
+    public function testGetAllSlugsByLanguage() {
+        $germanSlugs = getAllSlugs("de");
+        $this->assertTrue(in_array("willkommen", $germanSlugs));
+        $this->assertFalse(in_array("welcome", $germanSlugs));
+        $this->assertTrue(in_array("glueckskeks", $germanSlugs));
+        $this->assertFalse(in_array("fortune", $germanSlugs));
+
+        $englishSlugs = getAllSlugs("en");
+        $this->assertTrue(in_array("welcome", $englishSlugs));
+        $this->assertFalse(in_array("willkommen", $englishSlugs));
+        $this->assertTrue(in_array("fortune", $englishSlugs));
+        $this->assertFalse(in_array("glueckskeks", $englishSlugs));
+    }
+
+    public function testIsAdminReturnsFalse() {
+        $user = new User();
+        $user->setUsername("testuser-nicht-admin");
+        $user->setLastname("Admin");
+        $user->setFirstname("Nicht");
+        $user->setPassword(uniqid());
+        $user->setAdmin(false);
+        $user->save();
+
+        $_SESSION["login_id"] = $user->getId();
+
+        $this->assertFalse(is_admin());
+    }
+
+    public function testIsAdminReturnsTrue() {
+        $user = new User();
+        $user->setUsername("testuser-ist-admin");
+        $user->setLastname("Admin");
+        $user->setFirstname("Ist");
+        $user->setPassword(uniqid());
+        $user->setAdmin(true);
+        $user->save();
+
+        $_SESSION["login_id"] = $user->getId();
+
+        $this->assertTrue(is_admin());
+    }
+
+    public function testGetAllUsedMenus() {
+        $menus = get_all_used_menus();
+        $this->assertCount(1, $menus);
+        $this->isTrue(in_array("top", $menus));
+        $this->isFalse(in_array("left", $menus));
+    }
+
+    public function testCmsVersion() {
+        $this->assertTrue(version_compare(cms_version(), "2019.2",
+                        ">"));
+    }
+
+    public function testGetEnvironment() {
+        $this->assertEquals("test", get_environment());
     }
 
 }

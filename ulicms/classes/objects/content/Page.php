@@ -6,7 +6,7 @@ use UliCMS\Data\Content\Comment;
 class Page extends Content {
 
     public $id = null;
-    public $systemname = "";
+    public $slug = "";
     public $title = "";
     public $alternate_title = "";
     public $target = "_self";
@@ -53,7 +53,7 @@ class Page extends Content {
 
     protected function fillVarsByResult($result) {
         $this->id = $result->id;
-        $this->systemname = $result->systemname;
+        $this->slug = $result->slug;
         $this->title = $result->title;
         $this->alternate_title = $result->alternate_title;
         $this->target = $result->target;
@@ -113,10 +113,10 @@ class Page extends Content {
         }
     }
 
-    public function loadBySystemnameAndLanguage($name, $language) {
+    public function loadBySlugAndLanguage($name, $language) {
         $name = Database::escapeValue($name);
         $language = Database::escapeValue($language);
-        $query = Database::query("SELECT * FROM `" . tbname("content") . "` where `systemname` = '$name' and `language` = '$language'");
+        $query = Database::query("SELECT * FROM `" . tbname("content") . "` where `slug` = '$name' and `language` = '$language'");
         if (Database::getNumRows($query) > 0) {
             $result = Database::fetchObject($query);
             $this->fillVarsByResult($result);
@@ -136,12 +136,12 @@ class Page extends Content {
     }
 
     public function create() {
-        $sql = "INSERT INTO `" . tbname("content") . "` (systemname, title, alternate_title, target, category_id,
+        $sql = "INSERT INTO `" . tbname("content") . "` (slug, title, alternate_title, target, category_id,
 				content, language, menu_image, active, created, lastmodified, author_id,
 				`group_id`, lastchangeby, views, menu, position, parent, access, meta_description, meta_keywords, deleted_at,
 				theme, custom_data, `type`, og_title, og_type, og_image, og_description, cache_control, hidden, comments_enabled) VALUES (";
 
-        $sql .= "'" . Database::escapeValue($this->systemname) . "',";
+        $sql .= "'" . Database::escapeValue($this->slug) . "',";
         $sql .= "'" . Database::escapeValue($this->title) . "',";
         $sql .= "'" . Database::escapeValue($this->alternate_title) . "',";
         $sql .= "'" . Database::escapeValue($this->target) . "',";
@@ -229,7 +229,7 @@ class Page extends Content {
 
         $sql = "UPDATE " . tbname("content") . " ";
 
-        $sql .= "set systemname='" . Database::escapeValue($this->systemname) . "',";
+        $sql .= "set slug='" . Database::escapeValue($this->slug) . "',";
         $sql .= "title='" . Database::escapeValue($this->title) . "',";
         $sql .= "alternate_title='" . Database::escapeValue($this->alternate_title) . "',";
         $sql .= "target='" . Database::escapeValue($this->target) . "',";

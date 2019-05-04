@@ -67,7 +67,7 @@ if (!$searchPage) {
             if ((!containsModule(null, "extended_search") and ! containsModule(null, "search")) and $hasSearch and $searchPage) {
                 ?>
                 <form id="search-form-head" method="get"
-                      action="<?php Template::escape(buildSEOURL($searchPage->systemname)); ?>">
+                      action="<?php Template::escape(buildSEOURL($searchPage->slug)); ?>">
                     <input type="search" required="required" name="q"
                            value="<?php Template::escape($q); ?>" results="10"
                            autosave="<?php echo md5($_SERVER ["SERVER_NAME"]); ?>"

@@ -783,7 +783,7 @@ function getCurrentLanguage($current = false) {
         return Vars::get("current_language_" . strbool($current));
     }
     if ($current) {
-        $query = db_query("SELECT language FROM " . tbname("content") . " WHERE systemname='" . get_requested_pagename() . "'");
+        $query = db_query("SELECT language FROM " . tbname("content") . " WHERE slug='" . get_requested_pagename() . "'");
         if (db_num_rows($query) > 0) {
             $fetch = db_fetch_object($query);
             $language = $fetch->language;
@@ -913,7 +913,7 @@ function getCurrentURL() {
 /**
  * Generate path to Page
  * Argumente
- * String $page (Systemname)
+ * String $page (Slug)
  * Rückgabewert String im Format
  * ../seite.html
  * bzw.
@@ -1163,9 +1163,9 @@ function getPageByID($id) {
     }
 }
 
-// get page id by systemname
-function getPageIDBySystemname($systemname) {
-    $query = db_query("SELECT systemname, id FROM `" . tbname("content") . "` where systemname='" . db_escape($systemname) . "'");
+// get page id by slug
+function getPageIDBySlug($slug) {
+    $query = db_query("SELECT slug, id FROM `" . tbname("content") . "` where slug='" . db_escape($slug) . "'");
     if (db_num_rows($query) > 0) {
         $row = db_fetch_object($query);
         return $row->id;
@@ -1174,11 +1174,11 @@ function getPageIDBySystemname($systemname) {
     }
 }
 
-function getPageSystemnameByID($id) {
-    $query = db_query("SELECT systemname, id FROM `" . tbname("content") . "` where id=" . intval($id));
+function getPageSlugByID($id) {
+    $query = db_query("SELECT slug, id FROM `" . tbname("content") . "` where id=" . intval($id));
     if (db_num_rows($query) > 0) {
         $row = db_fetch_object($query);
-        return $row->systemname;
+        return $row->slug;
     } else {
         return null;
     }
@@ -1194,23 +1194,23 @@ function getPageTitleByID($id) {
     }
 }
 
-// Get systemnames of all pages
+// Get slugs of all pages
 function getAllPagesWithTitle() {
-    $query = db_query("SELECT systemname, id, title FROM `" . tbname("content") . "` WHERE `deleted_at` IS NULL ORDER BY systemname");
+    $query = db_query("SELECT slug, id, title FROM `" . tbname("content") . "` WHERE `deleted_at` IS NULL ORDER BY slug");
     $returnvalues = Array();
     while ($row = db_fetch_object($query)) {
         $a = Array(
             $row->title,
-            $row->systemname . ".html"
+            $row->slug . ".html"
         );
         array_push($returnvalues, $a);
-        if (containsModule($row->systemname, "blog")) {
+        if (containsModule($row->slug, "blog")) {
 
             $sql = "select title, seo_shortname from " . tbname("blog") . " ORDER by datum DESC";
             $query_blog = db_query($sql);
             while ($row_blog = db_fetch_object($query_blog)) {
                 $title = $row->title . " -> " . $row_blog->title;
-                $url = $row->systemname . ".html" . "?single=" . $row_blog->seo_shortname;
+                $url = $row->slug . ".html" . "?single=" . $row_blog->seo_shortname;
                 $b = Array(
                     $title,
                     $url
@@ -1223,7 +1223,7 @@ function getAllPagesWithTitle() {
 }
 
 // Get all pages
-function getAllPages($lang = null, $order = "systemname", $exclude_hash_links = true, $menu = null) {
+function getAllPages($lang = null, $order = "slug", $exclude_hash_links = true, $menu = null) {
     if (!$lang) {
         if (!$menu) {
             $query = db_query("SELECT * FROM `" . tbname("content") . "` WHERE `deleted_at` IS NULL ORDER BY $order");
@@ -1247,20 +1247,21 @@ function getAllPages($lang = null, $order = "systemname", $exclude_hash_links = 
     return $returnvalues;
 }
 
-// Get systemnames of all pages
-function getAllSystemNames($lang = null) {
+// Get slugs of all pages
+function getAllSlugs($lang = null) {
+    $slugs = Array();
+
     if (!$lang) {
-        $query = db_query("SELECT systemname,id FROM `" . tbname("content") . "` WHERE `deleted_at` IS NULL AND redirection NOT LIKE '#%' ORDER BY systemname");
+        $query = db_query("SELECT slug,id FROM `" . tbname("content") . "` WHERE `deleted_at` IS NULL AND redirection NOT LIKE '#%' ORDER BY slug");
     } else {
 
-        $query = db_query("SELECT systemname,id FROM `" . tbname("content") . "` WHERE `deleted_at` IS NULL  AND redirection NOT LIKE '#%' AND language ='" . db_escape($lang) . "' ORDER BY systemname");
+        $query = db_query("SELECT slug,id FROM `" . tbname("content") . "` WHERE `deleted_at` IS NULL  AND redirection NOT LIKE '#%' AND language ='" . db_escape($lang) . "' ORDER BY slug");
     }
-    $returnvalues = Array();
     while ($row = db_fetch_object($query)) {
-        array_push($returnvalues, $row->systemname);
+        array_push($slugs, $row->slug);
     }
 
-    return $returnvalues;
+    return $slugs;
 }
 
 // Sprachcodes abfragen und als Array zurück geben
@@ -1280,12 +1281,12 @@ function getAllLanguages($filtered = false) {
         return Vars::get("all_languages");
     }
     $query = db_query("SELECT language_code FROM `" . tbname("languages") . "` ORDER BY language_code");
-    $returnvalues = Array();
+    $languageCodes = Array();
     while ($row = db_fetch_object($query)) {
-        array_push($returnvalues, $row->language_code);
+        array_push($languageCodes, $row->language_code);
     }
-    Vars::set("all_languages", $returnvalues);
-    return $returnvalues;
+    Vars::set("all_languages", $languageCodes);
+    return $languageCodes;
 }
 
 // get URL to UliCMS
@@ -1375,7 +1376,7 @@ function containsModule($page = null, $module = false) {
     if (!is_null(Vars::get("page_" . $page . "_contains_" . $module))) {
         return Vars::get("page_" . $page . "_contains_" . $module);
     }
-    $query = db_query("SELECT content, module, `type` FROM " . tbname("content") . " WHERE systemname = '" . db_escape($page) . "'");
+    $query = db_query("SELECT content, module, `type` FROM " . tbname("content") . " WHERE slug = '" . db_escape($page) . "'");
     $dataset = db_fetch_assoc($query);
     $content = $dataset["content"];
     $content = str_replace("&quot;", "\"", $content);
@@ -1471,6 +1472,10 @@ function is_desktop() {
     return !is_mobile();
 }
 
+function get_environment() {
+    return getenv("ULICMS_ENVIRONMENT") ? getenv("ULICMS_ENVIRONMENT") : "default";
+}
+
 // 21. Februar 2015
 // Nutzt nun die Klasse Mobile_Detect
 function is_mobile() {
@@ -1504,20 +1509,13 @@ function func_enabled($func) {
 }
 
 function is_admin() {
-    if (!is_null(Vars::get("is_admin"))) {
-        return Vars::get("is_admin");
-    }
-    $retval = false;
+    $isAdmin = false;
     $user_id = get_user_id();
-    if (!$user_id) {
-        $retval = false;
-    } else {
-        $query = db_query("SELECT `admin` FROM " . tbname("users") . " where id = " . $user_id . " and admin = 1");
-        $retval = db_num_rows($query);
-
-        return Vars::set("is_admin", db_num_rows($query));
+    if ($user_id) {
+        $user = new User(get_user_id());
+        $isAdmin = $user->getAdmin();
     }
-    return $retval;
+    return $isAdmin;
 }
 
 function set_eTagHeaders($identifier, $timestamp) {

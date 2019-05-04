@@ -53,4 +53,32 @@ class Banners {
         return $result;
     }
 
+    public static function getRandom() {
+        $banner = null;
+
+        $result = Database::pQuery("SELECT id FROM {prefix}banner
+        WHERE enabled = 1 and
+        (language IS NULL OR language = ? ) and
+        (
+        (
+        date_from is not null and date_to is not null and
+        CURRENT_DATE() >= date_from and CURRENT_DATE() <= date_to)
+        or
+        (date_from is not null and date_to is null and
+        CURRENT_DATE() >= date_from )
+        or
+        (date_from is null and date_to is not null and
+        CURRENT_DATE() <= date_to)
+        or
+        (date_from is null and date_to is null)
+        )
+        ORDER BY RAND() LIMIT 1", array(getCurrentLanguage()), true);
+
+        if (Database::getNumRows($result)) {
+            $data = Database::fetchObject($result);
+            $banner = new Banner($data->id);
+        }
+        return $banner;
+    }
+
 }

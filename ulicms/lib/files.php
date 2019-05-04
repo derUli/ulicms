@@ -1,7 +1,7 @@
 <?php
 
-function sureRemoveDir($dir, $DeleteMe = true) {
-    File::sureRemoveDir($dir, $DeleteMe);
+function sureRemoveDir($dir, $deleteMe = true) {
+    File::sureRemoveDir($dir, $deleteMe);
 }
 
 // Ordner rekursiv kopieren

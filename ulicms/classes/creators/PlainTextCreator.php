@@ -11,7 +11,14 @@ class PlainTextCreator {
         echo get_title();
         echo "\r\n";
         echo "\r\n";
+        $text_position = get_text_position();
+        if ($text_position == "after") {
+            Template::outputContentElement();
+        }
         content();
+        if ($text_position == "before") {
+            Template::outputContentElement();
+        }
         $this->content = ob_get_clean();
     }
 
