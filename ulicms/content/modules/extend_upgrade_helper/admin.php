@@ -19,7 +19,6 @@ function extend_upgrade_helper_admin() {
         <?php
     } else {
         ?>
-
         <div class="alert alert-success alert-dismissable fade in">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
             <?php translate("no_extend_modules") ?>

@@ -10,8 +10,6 @@ $(function () {
     });
 });
 
-
-
 function isTouchDevice() {
     var prefixes = ' -webkit- -moz- -o- -ms- '.split(' ');
     var mq = function (query) {

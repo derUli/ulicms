@@ -45,7 +45,6 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                         <td><?php Template::escape($name) ?></td>
                     </tr>
                 <?php } ?>
-
                 <tr>
                     <td><strong><?php translate("version") ?></strong></td>
                     <td><?php Template::escape($version) ?></td>
@@ -61,7 +60,6 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                         <td><strong><?php translate("build_date") ?></strong></td>
                         <td><?php Template::escape(strftime("%x %X", $build_date)); ?></td>
                     </tr>
-
                 <?php } ?>
                 <?php
                 if ($screenshot) {
@@ -81,8 +79,6 @@ if (!$permissionChecker->hasPermission("install_packages")) {
 
                     </tr>
                 <?php } ?>
-
-
                 <?php
                 if ($compatible_from) {
                     ?>
@@ -92,15 +88,12 @@ if (!$permissionChecker->hasPermission("install_packages")) {
 
                     </tr>
                 <?php } ?>
-
-
                 <?php
                 if ($compatible_to) {
                     ?>
                     <tr>
                         <td><strong><?php translate("compatible_to") ?></strong></td>
                         <td>UliCMS <?php Template::escape($compatible_to); ?></td>
-
                     </tr>
                 <?php } ?>
                 <?php
@@ -109,20 +102,16 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                     <tr>
                         <td><strong><?php translate("min_php_version") ?></strong></td>
                         <td><?php Template::escape($min_php_version); ?></td>
-
                     </tr>
                 <?php } ?>
-
                 <?php
                 if ($max_php_version) {
                     ?>
                     <tr>
                         <td><strong><?php translate("max_php_version") ?></strong></td>
                         <td><?php Template::escape($max_php_version); ?></td>
-
                     </tr>
                 <?php } ?>
-
                 <?php if ($required_php_extensions) { ?>
                     <tr>
                         <td><strong><?php translate("required_php_extensions") ?></strong></td>
@@ -131,7 +120,6 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                                 ?>
                                 <?php Template::escape($extension); ?><br />
                             <?php } ?></td>
-
                     </tr>
                     <?php
                 }
@@ -142,7 +130,6 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                     <tr>
                         <td><strong><?php translate("min_mysql_version") ?></strong></td>
                         <td><?php Template::escape($min_mysql_version); ?></td>
-
                     </tr>
                 <?php } ?>
 
@@ -152,7 +139,6 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                     <tr>
                         <td><strong><?php translate("max_mysql_version") ?></strong></td>
                         <td><?php Template::escape($max_mysql_version); ?></td>
-
                     </tr>
                 <?php } ?>
                 <?php
@@ -165,11 +151,9 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                                 ?>
                                 <?php Template::escape($dep); ?><br />
                             <?php } ?></td>
-
                     </tr>
                 <?php } ?>
             </table>
-
             <?php if ($license) { ?>
                 <h2><?php translate("license_agreement"); ?></h2>
                 <div class="license-agreement"><?php echo nl2br(Template::getEscape($license)) ?></div>

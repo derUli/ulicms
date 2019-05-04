@@ -90,7 +90,6 @@ if ($permissionChecker->hasPermission("audio")) {
                             esc(basename($row->mp3_file));
                             ?>
                         </td>
-
                         <?php if ($permissionChecker->hasPermission("audio_edit")) { ?>
                             <td><a
                                     href="index.php?action=edit_audio&id=<?php

@@ -23,15 +23,14 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
               name="userdata_form" method="post" enctype="multipart/form-data"
               id="edit_user" class="voffset3-5">
                   <?php csrf_token_html(); ?>
-            <img
-                src="<?php
-                echo get_gravatar($row->email, 200);
-                ?>"
-                alt="Avatar Image" /> <br /> <input type="hidden" name="edit_admin"
-                value="edit_admin"> <input type="hidden" name="id"
-                value="<?php
-                echo $row->id;
-                ?>"> <br /> <strong><?php translate("username"); ?>*</strong><br />
+            <img src="<?php
+            echo get_gravatar($row->email, 200);
+            ?>"
+                 alt="Avatar Image" /> <br /> <input type="hidden" name="edit_admin"
+                 value="edit_admin"> <input type="hidden" name="id"
+                 value="<?php
+                 echo $row->id;
+                 ?>"> <br /> <strong><?php translate("username"); ?>*</strong><br />
             <input type="text" name="username"
                    value="<?php echo _esc($row->username); ?>" required
                    <?php
@@ -127,7 +126,6 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
                     }
                     ?>
                 </select> <br /> <br />
-
                 <?php
             }
             ?>

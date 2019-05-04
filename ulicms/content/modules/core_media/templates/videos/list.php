@@ -99,7 +99,6 @@ if ($permissionChecker->hasPermission("videos")) {
                         esc(basename($row->mp4_file));
                         ?>
                     </td>
-
                     <?php if ($permissionChecker->hasPermission("videos_edit")) { ?>
                         <td><a
                                 href="index.php?action=edit_video&id=<?php
@@ -121,7 +120,8 @@ if ($permissionChecker->hasPermission("videos")) {
                                     title="<?php
                                     translate("delete");
                                     ?>">
-                            </form></td>
+                            </form>
+                        </td>
                     <?php } ?>
                 </tr>
                 <?php

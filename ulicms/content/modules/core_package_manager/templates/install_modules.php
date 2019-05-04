@@ -92,7 +92,8 @@ if (!$permissionChecker->hasPermission("install_packages")) {
             <p>
                 <a
                     href="<?php echo ModuleHelper::buildActionURL("available_modules"); ?>"
-                    class="btn btn-default"><i class="fas fa-box"></i> <?php translate("install_another_package") ?></a>
+                    class="btn btn-default"><i class="fas fa-box"></i>
+                    <?php translate("install_another_package") ?></a>
             </p>
             <?php
         }

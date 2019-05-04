@@ -5,8 +5,8 @@
         <title><?php translate("error"); ?></title>
         <style>
 <?php
-readfile(Path::resolve("ULICMS_ROOT/core.css "));
-readfile(Path::resolve("ULICMS_ROOT/admin/css/modern.scss "));
+readfile(Path::resolve("ULICMS_ROOT/lib/css/core.css"));
+readfile(Path::resolve("ULICMS_ROOT/admin/css/modern.scss"));
 ?> body {
                 padding: 10px;
             }

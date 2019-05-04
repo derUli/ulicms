@@ -38,8 +38,6 @@ if ($permissionChecker->hasPermission("videos") and $permissionChecker->hasPermi
                                    onclick="this.focus();this.select();" readonly> <br />
             <button type="submit" class="btn btn-primary">
                 <i class="fa fa-save"></i> <?php translate("save_changes"); ?></button>
-
-
         </form>
         <?php
     } else {

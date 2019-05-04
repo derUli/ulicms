@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Exceptions\NotImplementedException;
+
 class ApiTest extends \PHPUnit\Framework\TestCase {
 
     public function setUp() {
@@ -355,6 +357,30 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(is_blank(true));
         $this->assertFalse(is_blank(array("foo", "bar")));
         $this->assertFalse(is_blank("13"));
+    }
+
+    public function testStartsWithReturnsTrue() {
+        throw new NotImplementedException();
+    }
+
+    public function testStartsWithReturnsFalse() {
+        throw new NotImplementedException();
+    }
+
+    public function testEndsWithReturnsTrue() {
+        throw new NotImplementedException();
+    }
+
+    public function testEndsWithReturnsFalse() {
+        throw new NotImplementedException();
+    }
+
+    public function testIdefine() {
+        throw new NotImplementedException();
+    }
+
+    public function testFasterInArray() {
+        throw new NotImplementedException();
     }
 
     public function testGetAllSlugs() {

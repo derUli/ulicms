@@ -46,14 +46,18 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
             $select2TranslationFile,
             "../node_modules/datatables/media/js/jquery.dataTables.min.js",
             "../lib/js/global.js",
-            "../node_modules/jscolor-picker/jscolor.min.js"
         );
         ?>
         <?php
+        if (is_logged_in()) {
+            $scripts[] = "../node_modules/jscolor-picker/jscolor.min.js";
+        }
         foreach ($scripts as $script) {
             enqueueScriptFile($script);
         }
-        echo Script::FromFile("ckeditor/ckeditor.js");
+        if (is_logged_in()) {
+            echo Script::FromFile("ckeditor/ckeditor.js");
+        }
         combinedScriptHtml();
         ?>
         <?php require "inc/touch_icons.php"; ?>
@@ -76,7 +80,6 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
               }
 
               echo UliCMS\HTML\Style::FromExternalFile("../node_modules/password-strength-meter/dist/password.min.css");
-
               combinedStylesheetHtml();
               ?>
               <?php

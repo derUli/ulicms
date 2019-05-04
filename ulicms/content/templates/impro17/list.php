@@ -45,7 +45,6 @@ if ($id !== null) {
                                     href="<?php Template::escape(buildSEOUrl($entry->slug, $entry->redirection)); ?>"><?php Template::escape($entry->title); ?></a></strong>
                             <br /> <small><?php translate("date"); ?>: <?php echo strftime("%x %X", $article_date); ?></small>
                         </p>
-
                         <p><?php echo $excerpt; ?></p>
                         <p>
                             <a
@@ -53,7 +52,6 @@ if ($id !== null) {
                         </p>
                     </div>
                 <?php } ?>
-
                 <div class="bottom-list-border"></div>
                 <?php if ($use_pagination) { ?>
                     <div class="page_older_newer">
@@ -64,10 +62,8 @@ if ($id !== null) {
                             <?php if ($start + $limit < $entries_count_total and $use_pagination) { ?>
                             <span class="blog_pagination_older"><a
                                     href="<?php Template::escape(buildSEOUrl()); ?>?start=<?php echo $next_start; ?>"><?php Template::escape(">>"); ?></a></span>
-
-                        <?php } ?>
+                            <?php } ?>
                     </div>
-
                     <div class="text-right rss-icon">
                         <a class="fa fa-rss fa-4x"
                            href="<?php Template::escape(buildSEOUrl(false, null, "rss")); ?>"

@@ -297,7 +297,7 @@ class Template {
             }
         }
         if (!Settings::get("no_autoembed_core_css")) {
-            enqueueStylesheet("core.css");
+            enqueueStylesheet("lib/css/core.css");
             combinedStylesheetHtml();
             echo "\r\n";
         }
