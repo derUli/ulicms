@@ -8,21 +8,24 @@ All rights reserved.
     modification, are permitted provided that the following conditions are
     met:
 <ul>
-    <li>Redistributions of source code must retain the above copyright
-        notice, this list of conditions and the following disclaimer.
-
-    <li>Redistributions in binary form must reproduce the above copyright
+    <li>
+        Redistributions of source code must retain the above copyright
+        notice, this list of conditions and the following disclaimer.</li>
+    <li>
+        Redistributions in binary form must reproduce the above copyright
         notice, this list of conditions and the following disclaimer in the
         documentation and/or other materials provided with the distribution.
-
-    <li>All advertising materials mentioning features or use of this
+    </li>
+    <li>
+        All advertising materials mentioning features or use of this
         software must display the following acknowledgement: This product
         includes software developed by UliCMS and its contributors.
-
-    <li>Neither the name of UliCMS nor the names of its contributors may be
+    </li>
+    <li>
+        Neither the name of UliCMS nor the names of its contributors may be
         used to endorse or promote products derived from this software without
         specific prior written permission.
-
+    </li>
 </ul>
 <p>THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
     "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT

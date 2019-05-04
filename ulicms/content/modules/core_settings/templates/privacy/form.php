@@ -139,8 +139,6 @@ if ($permissionChecker->hasPermission("privacy_settings")) {
     ?>
     <?php echo ModuleHelper::endForm(); ?>
     </div>
-
-
     <?php
 } else {
     noPerms();

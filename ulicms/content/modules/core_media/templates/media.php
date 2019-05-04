@@ -3,7 +3,6 @@ $permissionChecker = new ACL();
 
 if ($permissionChecker->hasPermission("images") or $permissionChecker->hasPermission("videos") or $permissionChecker->hasPermission("audio") or $permissionChecker->hasPermission("files")) {
     ?>
-
     <h2>
         <?php translate("media"); ?>
     </h2>
@@ -34,8 +33,6 @@ if ($permissionChecker->hasPermission("images") or $permissionChecker->hasPermis
         <?php
     }
     ?>
-
-
     <?php
     if ($permissionChecker->hasPermission("videos")) {
         ?>
@@ -47,7 +44,6 @@ if ($permissionChecker->hasPermission("images") or $permissionChecker->hasPermis
         <?php
     }
     ?>
-
     <?php
     if ($permissionChecker->hasPermission("audio")) {
         ?>

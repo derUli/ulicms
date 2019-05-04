@@ -46,7 +46,6 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                 <strong><?php translate("error"); ?></strong> <br />
                 <?php translate("nothing_to_do"); ?>
             </p>
-
             <?php
         } else {
             for ($i = 0; $i < count($packagesToInstall); $i ++) {

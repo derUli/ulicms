@@ -2,7 +2,6 @@
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("favicon")) {
     ?>
-
     <p>
         <a href="<?php echo ModuleHelper::buildActionURL("design"); ?>"
            class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
@@ -61,7 +60,7 @@ if ($permissionChecker->hasPermission("favicon")) {
             <tr>
                 <td></td>
                 <td class="text-center"><button type="submit"
-                                                       class="btn btn-primary"><?php translate("upload"); ?></td>
+                                                class="btn btn-primary"><?php translate("upload"); ?></td>
             </tr>
         </table>
     </form>

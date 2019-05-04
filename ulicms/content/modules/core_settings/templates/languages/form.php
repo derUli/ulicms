@@ -57,7 +57,6 @@ if ($permissionChecker->hasPermission("languages")) {
                         <td>
                             <?php echo htmlspecialchars($language->getName()); ?>
                         </td>
-
                         <td class="text-bold">
                             <?php
                             if ($language->getLanguageCode() !== Settings::get("default_language")) {

@@ -18,7 +18,6 @@ $errorCodes = array(
 </p>
 
 <h1><?php translate("error_pages"); ?></h1>
-
 <?php
 echo ModuleHelper::buildMethodCallForm(ErrorPagesController::class, "save");
 ?>
@@ -45,7 +44,6 @@ echo ModuleHelper::buildMethodCallForm(ErrorPagesController::class, "save");
                 <tr>
                     <td>
                         <?php esc(getLanguageNameByCode($language)); ?></td>
-
                     <td>
                         <?php
                         echo Input::SingleSelect("error_page[{$code}][{$language}]", Settings::getLanguageSetting("error_page_{$code}", $language),

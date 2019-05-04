@@ -14,7 +14,6 @@ function validatePasswords(event) {
         $(field1).css("background-color", "red");
         $(field1).addClass("invalid");
         $(field2).css("background-color", "red");
-
         $(field1).css("color", "white");
         $(field2).css("color", "white");
     } else {

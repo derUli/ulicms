@@ -3,7 +3,6 @@ $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("motd")) {
     $editor = get_html_editor();
     ?>
-
     <p>
         <a
             href="<?php echo ModuleHelper::buildActionURL("settings_categories"); ?>"
@@ -42,7 +41,6 @@ if ($permissionChecker->hasPermission("motd")) {
                 }
                 ?>><?php Template::escape(getLanguageNameByCode($language)); ?></option>
                     <?php } ?>
-
         </select>
     </p>
     <?php
@@ -54,7 +52,6 @@ if ($permissionChecker->hasPermission("motd")) {
                       esc(Request::getVar("language") ? Settings::get("motd_" . Request::getVar("language")) : Settings::get("motd"));
                       ?></textarea>
     </p>
-
     <button type="submit" name="motd_submit"
             class="btn btn-primary voffset2">
         <i class="fa fa-save"></i> <?php translate("save_changes"); ?></button>

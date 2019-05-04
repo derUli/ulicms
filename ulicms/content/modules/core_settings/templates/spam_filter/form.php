@@ -10,8 +10,6 @@ if ($permissionChecker->hasPermission("spam_filter")) {
     ?>
     <form id="spamfilter_settings" name="?action=spam_filter" method="post">
         <?php echo ModuleHelper::buildMethodCallForm("SpamFilterController", "save"); ?>
-
-
         <div class="checkbox">
             <label for="spamfilter_enabled"> <input type="checkbox"
                                                     id="spamfilter_enabled" name="spamfilter_enabled"
@@ -44,7 +42,6 @@ if ($permissionChecker->hasPermission("spam_filter")) {
                    value="<?php
                    esc(Settings::get("country_blacklist"));
                    ?>">
-
             <div class="checkbox">
                 <label for="disallow_chinese_chars"> <input type="checkbox"
                                                             name="disallow_chinese_chars" id="disallow_chinese_chars"

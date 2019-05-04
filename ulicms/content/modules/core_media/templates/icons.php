@@ -21,7 +21,6 @@ $notSelectedButton = "btn btn-default"
 
 <div class="btn-toolbar" role="toolbar"
      aria-label="Toolbar with button groups">
-
     <div class="btn-group" role="group">
         <a href="<?php echo ModuleHelper::buildActionURL("media"); ?>"
            class="btn btn-default btn-back" title="<?php translate("back"); ?>"><i
@@ -34,6 +33,5 @@ $notSelectedButton = "btn btn-default"
                 <i class="<?php echo $cssClass ?>"></i><span class="hide-on-820"> <?php translate($action); ?></span>
             </a>
         </div>
-
     <?php } ?>
 </div>

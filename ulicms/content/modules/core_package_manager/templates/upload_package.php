@@ -48,8 +48,5 @@ if (!$permissionChecker->hasPermission("install_packages")) {
         <input type="file" name="file"><br /> <br />
         <button type="submit" class="btn btn-warning"><i class="fa fa-upload" aria-hidden="true"></i> <?php translate("install_package"); ?></button>
     </form>
-
-
     <?php
 }
-?>

@@ -68,9 +68,7 @@ if (!$permissionChecker->hasPermission("other")) {
         </h2>
 
         <div class="accordion-content">
-
             <?php translate("DOMAIN2LANGUAGE_MAPPING_INFO"); ?>
-
             <p>
                 <textarea name="domain_to_language" rows="10" cols="40"><?php
                     echo _esc(Settings::get("domain_to_language"));
@@ -82,7 +80,6 @@ if (!$permissionChecker->hasPermission("other")) {
             translate("security");
             ?>
         </h2>
-
         <div class="accordion-content">
             <div class="label">
                 <label for="max_failed_logins_items"><?php
@@ -96,7 +93,6 @@ if (!$permissionChecker->hasPermission("other")) {
                        echo intval($max_failed_logins_items);
                        ?>" />
             </div>
-
             <h2><?php translate("google_authenticator"); ?></h2>
             <div class="label">
                 <label for="twofactor_authentication"><?php
@@ -125,7 +121,6 @@ if (!$permissionChecker->hasPermission("other")) {
                         class="fa fa-question-circle" aria-hidden="true"></i>
                     <?php translate("help"); ?></a>
             </p>
-
             <?php
             if ($permissionChecker->hasPermission("default_access_restrictions_edit")) {
                 ?>
@@ -139,12 +134,9 @@ if (!$permissionChecker->hasPermission("other")) {
             }
             ?>
         </div>
-
         <h2 class="accordion-header">
             <?php translate("EMAIL_DELIVERY"); ?>
         </h2>
-
-
         <div class="accordion-content">
             <div class="label">Modus:</div>
             <div class="inputWrapper">
@@ -173,10 +165,7 @@ if (!$permissionChecker->hasPermission("other")) {
                 <div class="inputWrapper">
                     <input type="text" name="smtp_host"
                            value="<?php esc($smtp_host); ?>">
-
                 </div>
-
-
                 <div class="label">
                     <?php
                     translate("port");
@@ -187,9 +176,7 @@ if (!$permissionChecker->hasPermission("other")) {
                            value="<?php
                            echo _esc($smtp_port);
                            ?>">
-
                 </div>
-
                 <div class="label">
                     <label for="smtp_auth"> <?php translate("smtp_encryption"); ?>
                     </label>
@@ -223,7 +210,6 @@ if (!$permissionChecker->hasPermission("other")) {
                                value="smtp_no_verify_certificate"> <br /> <small><?php translate("smtp_no_verify_certificate_warning"); ?></small>
                     </p>
                 </div>
-
                 <div class="label">
                     <label for="smtp_auth"> <?php translate("AUTHENTIFACTION_REQUIRED"); ?>
                     </label>
@@ -239,8 +225,6 @@ if (!$permissionChecker->hasPermission("other")) {
                            ?>
                            value="auth">
                 </div>
-
-
                 <div id="smtp_auth_div" style="display: none">
                     <div class="label">
                         <?php translate("user"); ?>
@@ -251,7 +235,6 @@ if (!$permissionChecker->hasPermission("other")) {
                                echo _esc($smtp_user);
                                ?>">
                     </div>
-
                     <div class="label">
                         <?php translate("password"); ?>
                     </div>
@@ -265,7 +248,6 @@ if (!$permissionChecker->hasPermission("other")) {
                 </div>
             </div>
         </div>
-
         <script type="text/javascript">
     <?php
 // FIXME: Extract this code to an external script
@@ -304,7 +286,6 @@ if (!$permissionChecker->hasPermission("other")) {
         <h2 class="accordion-header">
             <?php translate("expert_settings"); ?>
         </h2>
-
         <div class="accordion-content">
             <p>
                 <a href="index.php?action=settings" class="btn btn-danger"><i
@@ -312,10 +293,11 @@ if (!$permissionChecker->hasPermission("other")) {
             </p>
         </div>
     </div>
-
     <button type="submit" name="submit" class="btn btn-primary voffset3">
-        <i class="fa fa-save"></i> <?php translate("save_changes"); ?></button>
-        <?php echo ModuleHelper::endForm(); ?>
+        <i class="fa fa-save"></i>
+        <?php translate("save_changes"); ?>
+    </button>
+    <?php echo ModuleHelper::endForm(); ?>
     <script type="text/javascript">
         $("#other_settings").ajaxForm({beforeSubmit: function (e) {
                 $("#message").html("");

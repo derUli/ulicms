@@ -25,17 +25,16 @@ if (!$permissionChecker->hasPermission("upload_patches")) {
           action="index.php?action=upload_patches" method="POST">
               <?php csrf_token_html(); ?>
         <p>
-            <strong><?php translate("name"); ?></strong> <br /> <input type="text"
-                                                                       name="name" value="" required />
+            <strong><?php translate("name"); ?></strong> <br />
+            <input type="text" name="name" value="" required />
         </p>
         <p>
-            <strong><?php translate("description"); ?></strong> <br /> <input
-                type="text" name="description" value="" required />
+            <strong><?php translate("description"); ?></strong> <br />
+            <input type="text" name="description" value="" required />
         </p>
-
         <p>
-            <strong><?php translate("file"); ?></strong> <br /> <input name="file"
-                                                                       type="file" required />
+            <strong><?php translate("file"); ?></strong> <br />
+            <input name="file" type="file" required />
         </p>
         <p>
             <button type="submit" class="btn btn-warning" name="upload_patch"><?php translate("install_patch"); ?></button>

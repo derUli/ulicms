@@ -2,7 +2,6 @@
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("logo")) {
     ?>
-
     <p>
         <a
             href="<?php echo ModuleHelper::buildActionURL("design"); ?>"
@@ -35,8 +34,7 @@ if ($permissionChecker->hasPermission("logo")) {
                     }
                     ?>
                 </td>
-
-
+            </tr>
             <tr>
                 <td><strong><?php translate("hide_logo") ?></strong></td>
                 <td><select name="logo_disabled" size=1>

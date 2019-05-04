@@ -13,7 +13,6 @@ if (!$permissionChecker->hasPermission("performance_settings")) {
     <?php
     if (Request::getVar("clear_cache")) {
         ?>
-
         <div class="alert alert-success alert-dismissable fade in">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
             <?php translate("cache_was_cleared"); ?>

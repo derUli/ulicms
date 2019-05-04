@@ -38,7 +38,6 @@ if ($permissionChecker->hasPermission("settings_simple")) {
                        echo $settings["homepage_owner"];
                        ?>"></td>
         </tr>
-
         <tr>
             <td><strong><?php translate("OWNER_MAILADRESS"); ?></strong></td>
             <td><input type="email" name="email"
@@ -84,10 +83,11 @@ if ($permissionChecker->hasPermission("settings_simple")) {
                        ?>></td>
         </tr>
         <tr>
-            <td><strong><?php
+            <td>
+                <strong><?php
                     translate("enable_password_reset");
                     ?></strong>
-
+            </td>
             <td><input type="checkbox" name="disable_password_reset"
                        value="enable"
                        class="js-switch"
@@ -181,7 +181,6 @@ if ($permissionChecker->hasPermission("settings_simple")) {
         ?>
         <tr>
             <td>
-
             <td align="center">
                 <button type="submit" class="btn btn-primary">
                     <i class="fa fa-save"></i> <?php translate("save_changes") ?></button>

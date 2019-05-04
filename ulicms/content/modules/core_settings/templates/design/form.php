@@ -85,7 +85,6 @@ if (!$permissionChecker->hasPermission("design")) {
                     ?>
                 </select></td>
         </tr>
-
         <tr>
             <td><strong><?php translate("mobile_design"); ?> </strong></td>
             <td>
@@ -123,8 +122,7 @@ if (!$permissionChecker->hasPermission("design")) {
                 </p>
                 <div class="alert alert-warning fade in" id="mobile_detect_notice"
                      data-installed="<?php echo strbool($mobileDetectInstalled); ?>">
-
-                    <?php translate("mobile_detect_install_notice"); ?>
+                         <?php translate("mobile_detect_install_notice"); ?>
                 </div>
             </td>
         </tr>

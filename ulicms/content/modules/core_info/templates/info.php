@@ -96,6 +96,5 @@ if (!$permissionChecker->hasPermission("info")) {
     <a href="http://www.ulicms.de/kontakt.html" target="_blank"
        class="btn btn-info" role="button"><i class="fas fa-envelope"></i>
         Feedback</a>
-    <br />
     <?php
 }
