@@ -110,7 +110,7 @@ def main():
     # Install npm packages
     # TODO: is there are a way to specify a working dir like used for composer (code above)?
     os.chdir("ulicms")
-    os.system("npm install")
+    os.system("npm install --production")
     os.chdir(old_cwd)
 
     if args.zip:
