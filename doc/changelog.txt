@@ -8,6 +8,7 @@ Neue API-Methoden:
 
 Fehlerkorrekturen:
 * Es wird nun immer der aktuelle Wert von CodeMirror Editoren übertragen
+* User-Formular kann nun nicht mehr abgesendet wenn die Passwortwiederholung falsch ist
 
 Entfernte Features:
 * Option "Anwender müssen ihr Passwort alle X Tage ändern" entfernt

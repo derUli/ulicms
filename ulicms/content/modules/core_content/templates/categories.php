@@ -50,7 +50,6 @@ if (!$permissionChecker->hasPermission("categories")) {
                             <td></td>
                         <?php } ?>
                     </tr>
-
                 </thead>
                 <tbody>
                     <?php
@@ -69,7 +68,7 @@ if (!$permissionChecker->hasPermission("categories")) {
                             <?php
                             if ($permissionChecker->hasPermission("categories_edit")) {
                                 ?>
-                                <td style="text-align: center;"><a
+                                <td class="text-center"><a
                                         href="?action=categories&edit=<?php echo $category->getID(); ?>"><img
                                             src="gfx/edit.png" class="mobile-big-image"
                                             alt="<?php translate("edit"); ?>"
@@ -77,7 +76,7 @@ if (!$permissionChecker->hasPermission("categories")) {
                                     <?php
                                     if ($category->getId() != 1) {
                                         ?>
-                                    <td style="text-align: center;"><form
+                                    <td class="text-center"><form
                                             action="?sClass=CategoryController&sMethod=delete&del=<?php
                                             echo $category->getId();
                                             ?>"
@@ -90,12 +89,11 @@ if (!$permissionChecker->hasPermission("categories")) {
                                                 translate("delete");
                                                 ?>">
                                         </form></td>
-
                                     <?php
                                 } else {
                                     ?>
-                                    <td style="text-align: center;"><a href="#"
-                                                                       onclick="alert('<?php translate("CANT_DELETE_CATEGORY_GENERAL"); ?>')"><img
+                                    <td class="text-center"><a href="#"
+                                                               onclick="alert('<?php translate("CANT_DELETE_CATEGORY_GENERAL"); ?>')"><img
                                                 class="mobile-big-image" src="gfx/delete.gif"
                                                 alt="<?php
                                                 translate("delete");
@@ -131,7 +129,6 @@ if (!$permissionChecker->hasPermission("categories")) {
             <p>
                 <strong><?php translate("name"); ?>*</strong> <input type="text"
                                                                      name="name" value="" required>
-
             </p>
 
             <p>
@@ -177,7 +174,6 @@ if (!$permissionChecker->hasPermission("categories")) {
                     ?></button>
             </p>
             </form>
-
             <?php
         } else {
             noPerms();

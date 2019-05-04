@@ -60,7 +60,7 @@ if ($permissionChecker->hasPermission("favicon")) {
             </tr>
             <tr>
                 <td></td>
-                <td style="text-align: center"><button type="submit"
+                <td class="text-center"><button type="submit"
                                                        class="btn btn-primary"><?php translate("upload"); ?></td>
             </tr>
         </table>

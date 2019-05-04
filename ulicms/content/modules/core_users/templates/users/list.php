@@ -15,11 +15,8 @@ if ($permissionChecker->hasPermission("users")) {
     }
     $groups = Group::getAll();
     ?>
-
     <?php echo Template::executeModuleTemplate("core_users", "icons.php"); ?>
-
     <h2><?php translate("users"); ?></h2>
-
     <?php if ($permissionChecker->hasPermission("users_create")) { ?>
         <p>
             <?php translate("users_infotext"); ?>
@@ -27,7 +24,6 @@ if ($permissionChecker->hasPermission("users")) {
                              class="btn btn-default"><i class="fa fa-plus"></i> <?php translate("create_user"); ?></a><br />
         </p>
     <?php } ?>
-
     <form action="index.php" method="get" class="voffset3-5">    <strong><?php translate("primary_group"); ?></strong>
         <br />
         <input type="hidden" name="action" value="admins"> <select
@@ -92,12 +88,12 @@ if ($permissionChecker->hasPermission("users")) {
                         }
                         echo "</td>";
                         if ($permissionChecker->hasPermission("users_edit")) {
-                            echo "<td style='text-align:center;'>" . '<a href="index.php?action=admin_edit&id=' . $row->getId() . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . get_translation("edit") . '" title="' . get_translation("edit") . '"></a></td>';
+                            echo "<td class=\"text-center\">" . '<a href="index.php?action=admin_edit&id=' . $row->getId() . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . get_translation("edit") . '" title="' . get_translation("edit") . '"></a></td>';
 
                             if ($row->getId() == $_SESSION["login_id"]) {
-                                echo "<td style='text-align:center;'></td>";
+                                echo "<td class=\"text-center\"></td>";
                             } else {
-                                echo "<td style='text-align:center;'>" . '<form action="index.php?sClass=UserController&sMethod=delete&id=' . $row->getId() . '" method="post" class="delete-form">' . get_csrf_token_html() . '<input type="image" class="mobile-big-image" src="gfx/delete.gif"></form></td>';
+                                echo "<td class=\"text-center\">" . '<form action="index.php?sClass=UserController&sMethod=delete&id=' . $row->getId() . '" method="post" class="delete-form">' . get_csrf_token_html() . '<input type="image" class="mobile-big-image" src="gfx/delete.gif"></form></td>';
                             }
                         }
                         echo '</tr>';

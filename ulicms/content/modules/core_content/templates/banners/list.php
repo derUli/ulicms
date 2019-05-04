@@ -69,8 +69,8 @@ if ($permissionChecker->hasPermission("banners")) {
                             echo '<td>' . getLanguageNameByCode($banner->getLanguage()) . "</td>";
                         }
                         if ($permissionChecker->hasPermission("banners_edit")) {
-                            echo "<td style='text-align:center;'>" . '<a href="index.php?action=banner_edit&banner=' . $banner->getId() . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . get_translation("edit") . '" title="' . get_translation("edit") . '"></a></td>';
-                            echo "<td style='text-align:center;'>" . '<form action="index.php?sClass=BannerController&sMethod=delete&banner=' . $banner->getId() . '" method="post" class="delete-form">' . get_csrf_token_html() . '<input type="image" class="mobile-big-image" src="gfx/delete.gif" title="' . get_translation("delete") . '"></form></td>';
+                            echo "<td class=\"text-center\">" . '<a href="index.php?action=banner_edit&banner=' . $banner->getId() . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . get_translation("edit") . '" title="' . get_translation("edit") . '"></a></td>';
+                            echo "<td class=\"text-center\">" . '<form action="index.php?sClass=BannerController&sMethod=delete&banner=' . $banner->getId() . '" method="post" class="delete-form">' . get_csrf_token_html() . '<input type="image" class="mobile-big-image" src="gfx/delete.gif" title="' . get_translation("delete") . '"></form></td>';
                         }
                         echo '</tr>';
                     }

@@ -11,9 +11,7 @@ if (!$permissionChecker->hasPermission("info")) {
     ?>
     <p>
         <strong>Release <?php echo cms_version(); ?> "<?php echo $version->getVersion(); ?>"</strong>
-
         <?php if ($version->getBuildTimestamp() > 0) { ?>
-
             <br /> <small><?php translate("build_date"); ?>: <?php echo $version->getBuildDate() ?></small>
             <?php
         }
@@ -43,7 +41,6 @@ if (!$permissionChecker->hasPermission("info")) {
         Copyright (c) 2016 <br /> <a href="https://github.com/Athari/YaLinqo"
                                      target="_blank">YaLinqo</a> Copyright © 2012–2016, Alexander Prokhorov
     </p>
-
     <div>
         Icon made by <a href="http://www.freepik.com" title="Freepik">Freepik</a>
         from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>
@@ -90,20 +87,15 @@ if (!$permissionChecker->hasPermission("info")) {
                           title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
     </div>
     <br />
-
     <a href="http://www.ulicms.de" target="_blank" class="btn btn-info"
        role="button"><i class="fa fa-globe" aria-hidden="true"></i> UliCMS
         Portal</a>
-
     <a href="index.php?action=license" class="btn btn-info" role="button"><i
             class="fa fa-info-circle" aria-hidden="true"></i>
         <?php translate("license") ?></a>
-
     <a href="http://www.ulicms.de/kontakt.html" target="_blank"
        class="btn btn-info" role="button"><i class="fas fa-envelope"></i>
         Feedback</a>
-
     <br />
-
     <?php
 }

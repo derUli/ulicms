@@ -12,16 +12,15 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
     <form action="index.php?sClass=UserController&sMethod=create"
           method="post" id="edit_user" class="voffset3-5">
               <?php csrf_token_html(); ?>
-        <input type="hidden" name="add_admin" value="add_admin"> <strong><?php translate("username"); ?>*</strong><br />
+        <input type="hidden" name="add_admin" value="add_admin">
+        <strong><?php translate("username"); ?>*</strong><br />
         <input type="text" required="required" name="username" value="">
         <br />
-
         <div class="row">
             <div class="col-xs-12 col-md-6">
                 <strong><?php translate("firstname"); ?></strong><br />
                 <input type="text" name="firstname" value=""><br />
             </div>
-
             <div class="col-xs-12 col-md-6">
                 <strong><?php translate("lastname"); ?></strong><br /> <input
                     type="text" name="lastname" value=""> <br />
@@ -36,7 +35,6 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
                        class="password-security-check"
                        id="password" value="" autocomplete="new-password"> <br />
             </div>
-
             <div class="col-xs-12 col-md-6">
                 <strong><?php translate("password_repeat"); ?>*</strong><br />
                 <input type="password" required="required" name="password_repeat"
@@ -73,9 +71,9 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
                 <?php
             }
             ?>
-        </select> <br /> <br /> <strong><?php translate("secondary_groups"); ?></strong>
+        </select> <br /> <br />
+        <strong><?php translate("secondary_groups"); ?></strong>
         <br /> <select name="secondary_groups[]" multiple>
-
             <?php
             foreach ($allGroups as $key => $value) {
                 ?>
@@ -88,7 +86,6 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
             }
             ?>
         </select>
-
         <div class="checkbox block voffset3-5">
             <label>
                 <input type="checkbox" value="1"
@@ -96,7 +93,6 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
                        id="require_password_change"
                        class="js-switch"><?php translate("REQUIRE_PASSWORD_CHANGE_ON_NEXT_LOGIN"); ?> </label>
         </div>
-
         <div class="checkbox block voffset3-5">
             <label><input type="checkbox" id="send_mail" name="send_mail"
                           value="sendmail"
@@ -108,7 +104,6 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
                           class="js-switch">
 
                 <?php translate("is_admin"); ?> </label>
-
             <span
                 style="cursor: help;" onclick="$('div#is_admin').slideToggle()">
                 <i class="fa fa-question-circle text-info" aria-hidden="true"></i>
@@ -119,13 +114,11 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
             echo nl2br(get_translation("HELP_IS_ADMIN"));
             ?>
         </div>
-
         <div class="checkbox block voffset3-5">
             <label><input type="checkbox" value="1" name="locked" id="locked"
                           class="js-switch">
                 <?php translate("locked"); ?> </label>
         </div>
-
         <div class="voffset3">
             <strong><?php translate("default_language"); ?></strong><br />
             <select name="default_language">
@@ -140,6 +133,13 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
             <i class="fa fa-save"></i> <?php translate("create_user"); ?></button>
     </form>
     <?php
+    $translation = new JSTranslation(array(), "UserTranslation");
+    $translation->addKey("passwords_not_equal");
+    $translation->render();
+    enqueueScriptFile(
+            ModuleHelper::buildRessourcePath(
+                    "core_users", "js/users.js")
+    );
     enqueueScriptFile("../node_modules/password-strength-meter/dist/password.min.js");
     combinedScriptHtml();
     ?>

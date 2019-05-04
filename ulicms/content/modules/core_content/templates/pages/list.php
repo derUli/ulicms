@@ -113,9 +113,7 @@ if ($permissionChecker->hasPermission("pages")) {
     ?>
 
     <?php echo Template::executeModuleTemplate("core_content", "icons.php"); ?>
-
     <h2><?php translate("pages"); ?></h2>
-
     <p><?php translate("pages_infotext"); ?></p>
     <div id="page-list">
         <?php
@@ -145,9 +143,7 @@ if ($permissionChecker->hasPermission("pages")) {
                     </div>
                 </div>
             </div>
-
         <?php } ?>
-
         <form method="get" action="index.php" class="page-list-filters" style="<?php if (!$show_filters) echo "display:none"; ?>">
             <div class="row">
                 <div class="col-xs-6">
@@ -175,11 +171,9 @@ if ($permissionChecker->hasPermission("pages")) {
                         }
                         ?>
                         <?php ?>
-
                     </select>
                 </div>
             </div>
-
             <div class="row">
                 <div class="col-xs-6">
                     <?php translate("type") ?>
@@ -202,7 +196,6 @@ if ($permissionChecker->hasPermission("pages")) {
                         }
                         ?>
                     </select>
-
                 </div>
                 <div class="col-xs-6">
                     <?php translate("status") ?>
@@ -226,7 +219,6 @@ if ($permissionChecker->hasPermission("pages")) {
                     </select>
                 </div>
             </div>
-
             <div class="row">
                 <div class="col-xs-6">
                     <?php translate("category"); ?>
@@ -351,7 +343,6 @@ if ($permissionChecker->hasPermission("pages")) {
                 </div>
             </div>
         </form>
-
         <?php
         if ($_SESSION["filter_status"] == "trash" and $permissionChecker->hasPermission("pages")) {
             ?>
@@ -501,7 +492,7 @@ if ($permissionChecker->hasPermission("pages")) {
                             }
 
                             if (startsWith($row->redirection, "#") or $row->type == "node" or $row->type == "snippet") {
-                                echo "<td style='text-align:center'></td>";
+                                echo "<td class=\"text-center\"></td>";
                             } else {
                                 $url = "../?goid={$row->id}";
                                 echo "<td class='text-center'><a href=\"" . $url . "\"><img class=\"mobile-big-image\" src=\"gfx/preview.png\" alt=\"" . get_translation("view") . "\" title=\"" . get_translation("view") . "\"></a></td>";

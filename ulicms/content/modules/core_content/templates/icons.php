@@ -34,12 +34,10 @@ $notSelectedButton = "btn btn-default"
 
 <div class="btn-toolbar" role="toolbar"
      aria-label="Toolbar with button groups">
-
     <div class="btn-group" role="group">
         <a href="<?php echo ModuleHelper::buildActionURL("contents"); ?>"
            class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i>
             <?php translate("back") ?></a>
-
     </div>
     <?php foreach ($icons as $action => $cssClass) { ?>
         <div class="btn-group" role="group">
@@ -48,6 +46,5 @@ $notSelectedButton = "btn btn-default"
                 <i class="<?php echo $cssClass ?>"></i><span class="hide-on-820"> <?php (isset($specialLabels[$action]) ? esc($specialLabels[$action]) : translate($action)); ?></span>
             </a>
         </div>
-
     <?php } ?>
 </div>

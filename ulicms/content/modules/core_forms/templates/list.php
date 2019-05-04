@@ -43,20 +43,20 @@ if (!$permissionChecker->hasPermission("forms")) {
                                    onclick="this.select();"></td>
 
                         <?php if ($permissionChecker->hasPermission("forms_edit")) { ?>
-                            <td style="text-align: center;"><a
+                            <td class="text-center"><a
                                     href="?action=forms_edit&id=<?php
                                     echo $form["id"];
                                     ?>"><img src="gfx/edit.png" class="mobile-big-image"
                                        alt="<?php translate("edit"); ?>"
                                        title="<?php translate("edit"); ?>"></a></td>
-                            <td style="text-align: center;">
-                                <?php echo ModuleHelper::deleteButton(ModuleHelper::buildMethodCallUrl("FormController", "delete"), array("del" => $form ["id"])); ?>
-                            </td>
-                        <?php } ?>
-                    </tr>
-                <?php } ?>
-            </tbody>
-        </table>
+                            <td class="text-center"
+                            <?php echo ModuleHelper::deleteButton(ModuleHelper::buildMethodCallUrl("FormController", "delete"), array("del" => $form ["id"])); ?>
+                        </td>
+                    <?php } ?>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
     </div>
     <style type="text/css">
         input.form-submit-url {

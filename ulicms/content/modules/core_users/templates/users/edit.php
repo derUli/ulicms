@@ -43,12 +43,10 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
             <div class="row">
                 <div class="col-xs-12 col-md-6">
                     <strong><?php translate("firstname"); ?></strong><br />
-
                     <input type="text" name="firstname"
                            value="<?php
                            echo _esc($row->firstname);
-                           ?>"
-                           required="required"><br />
+                           ?>"><br />
                 </div>
                 <div class="col-xs-12 col-md-6"> <strong><?php translate("lastname"); ?></strong><br />
                     <input type="text" name="lastname"
@@ -221,6 +219,14 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
     }
     ?>
     <?php
+    $translation = new JSTranslation(array(), "UserTranslation");
+    $translation->addKey("passwords_not_equal");
+    $translation->render();
+
+    enqueueScriptFile(
+            ModuleHelper::buildRessourcePath(
+                    "core_users", "js/users.js")
+    );
     enqueueScriptFile("../node_modules/password-strength-meter/dist/password.min.js");
     combinedScriptHtml();
     ?>

@@ -32,8 +32,6 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
         ?>
         <?php
         $scripts = array(
-            "scripts/php.js/strip_tags.js",
-            "scripts/php.js/htmlspecialchars.js",
             "../node_modules/jquery/dist/jquery.min.js",
             "../node_modules/js-url/url.min.js",
             "../node_modules/jquery-datetimepicker/build/jquery.datetimepicker.full.js",
@@ -50,26 +48,17 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
             "../lib/js/global.js",
             "../node_modules/jscolor-picker/jscolor.min.js"
         );
-
-        if (is_logged_in()) {
-            $scripts[] = "scripts/users.js";
-            $scripts[] = "scripts/cookie.js";
-        }
         ?>
         <?php
         foreach ($scripts as $script) {
             enqueueScriptFile($script);
         }
-
         echo Script::FromFile("ckeditor/ckeditor.js");
-
         combinedScriptHtml();
         ?>
-
         <?php require "inc/touch_icons.php"; ?>
         <link rel="stylesheet" type="text/css"
               href="scripts/vallenato/vallenato.css" />
-
         <link rel="stylesheet" type="text/css"
               href="../node_modules/datatables/media/css/jquery.dataTables.min.css" />
         <link rel="stylesheet"
@@ -133,11 +122,12 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
                     if (is_logged_in()) {
                         $colClass = $permissionChecker->hasPermission("comments_manage") ? "col-xs-4" : "col-xs-6";
                         ?>
-
                         <div class="row pull-right top-right-icons">
                             <div class="<?php esc($colClass); ?>">
                                 <a href="#" id="menu-clear-cache"
-                                   data-url="<?php echo ModuleHelper::buildMethodCallUrl("PerformanceSettingsController", "clearCache", "clear_cache=1"); ?>"><i class="fas fa-broom"></i></a><a href="#" id="menu-clear-cache-loading" style="display: none;"><i class="fa fa-spinner fa-spin"></i></a>
+                                   data-url="<?php echo ModuleHelper::buildMethodCallUrl("PerformanceSettingsController", "clearCache", "clear_cache=1"); ?>">
+                                    <i class="fas fa-broom"></i></a>
+                                <a href="#" id="menu-clear-cache-loading" style="display: none;"><i class="fa fa-spinner fa-spin"></i></a>
                             </div>
                             <?php
                             if ($permissionChecker->hasPermission("comments_manage")) {

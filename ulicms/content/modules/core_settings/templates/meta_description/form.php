@@ -49,7 +49,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
         ?>
         <tr>
             <td></td>
-            <td style="text-align: center"><button type="submit" name="submit"
+            <td class="text-center"><button type="submit" name="submit"
                                                    class="btn btn-primary">
                     <i class="fa fa-save"></i> <?php translate("save_changes"); ?></button></td>
         </tr>
