@@ -42,4 +42,27 @@ class RotatingTextTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull($deletedText->getId());
     }
 
+    private function createTestData() {
+        for ($i = 0; $i <= 3; $i++) {
+            $text = new RotatingText();
+            $text->setAnimation("great-animation-{$i}");
+            $text->setSeparator("|");
+            $text->setSpeed(2500);
+            $text->setWords("Linux|Apache|PHP|MySQL");
+            $text->save();
+        }
+    }
+
+    public function testGetAll() {
+        $this->createTestData();
+        $texts = RotatingText::getAll();
+        $this->assertGreaterThanOrEqual(3, count($texts));
+        foreach ($texts as $text) {
+            $this->assertInstanceOf(RotatingText::class, $text);
+            $this->assertNotNull($text->getID());
+            $this->assertStringStartsWith("great-animation-",
+                    $text->getAnimation());
+        }
+    }
+
 }

@@ -92,4 +92,13 @@ class RotatingText extends Model {
         $this->setID(null);
     }
 
+    public static function getAll() {
+        $query = Database::query("select id from {prefix}rotating_text order by id", true);
+        $texts = array();
+        while ($row = Database::fetchObject($query)) {
+            $texts[] = new self($row->id);
+        }
+        return $texts;
+    }
+
 }
