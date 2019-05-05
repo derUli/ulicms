@@ -1,0 +1,1 @@
+drop table `{prefix}rotating_text`

@@ -1,0 +1,8 @@
+{
+    "source": "extend",
+    "embed": false,
+    "version": "1.0.0",
+    "models": {
+        "RotatingText": "models/RotatingText"
+    }
+}
