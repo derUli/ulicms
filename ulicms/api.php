@@ -3,10 +3,14 @@
 use UliCMS\Security\PermissionChecker;
 use Negotiation\LanguageNegotiator;
 
-function is_blank($val) {
-    return (is_string($val) &&
+function is_blank($val = null) {
+    return isset($val) && (is_string($val) &&
             StringHelper::isNullOrWhitespace($val)) ||
             empty($val);
+}
+
+function is_present($val = null) {
+    return isset($val) && !is_blank($val);
 }
 
 function startsWith($haystack, $needle, $case = true) {
@@ -24,9 +28,12 @@ function endsWith($haystack, $needle, $case = true) {
 }
 
 function idefine($key, $value) {
+    $key = strtoupper($key);
     if (!defined($key)) {
         define($key, $value);
+        return true;
     }
+    return false;
 }
 
 function faster_in_array($needle, $haystack) {

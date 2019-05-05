@@ -1,7 +1,5 @@
 <?php
 
-use UliCMS\Exceptions\NotImplementedException;
-
 class ApiTest extends \PHPUnit\Framework\TestCase {
 
     public function setUp() {
@@ -349,6 +347,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue(is_blank(0));
         $this->assertTrue(is_blank(array()));
         $this->assertTrue(is_blank("0"));
+        $this->assertTrue(is_blank($notDefined));
     }
 
     public function testIsBlankReturnsFalse() {
@@ -359,28 +358,65 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(is_blank("13"));
     }
 
+    public function testIsPresentReturnsTrue() {
+        $this->assertTrue(is_present(" hallo welt "));
+        $this->assertTrue(is_present(13));
+        $this->assertTrue(is_present(true));
+        $this->assertTrue(is_present(array("foo", "bar")));
+        $this->assertTrue(is_present("13"));
+    }
+
+    public function testIsPresentReturnsFalse() {
+        $this->assertFalse(is_present(""));
+        $this->assertFalse(is_present("  "));
+        $this->assertFalse(is_present(false));
+        $this->assertFalse(is_present(null));
+        $this->assertFalse(is_present(0));
+        $this->assertFalse(is_present(array()));
+        $this->assertFalse(is_present("0"));
+        $this->assertFalse(is_present($undefinedVar));
+    }
+
     public function testStartsWithReturnsTrue() {
-        throw new NotImplementedException();
+        $this->assertTrue(startsWith("hello world", "hello"));
+        $this->assertTrue(startsWith("hello world", "Hello", false));
     }
 
     public function testStartsWithReturnsFalse() {
-        throw new NotImplementedException();
+        $this->assertFalse(startsWith("hello world", "bye"));
+        $this->assertFalse(startsWith("hello world", "Hello"));
     }
 
     public function testEndsWithReturnsTrue() {
-        throw new NotImplementedException();
+        $this->assertTrue(endsWith("hello world", "world"));
+        $this->assertTrue(endsWith("hello world", "World", false));
     }
 
     public function testEndsWithReturnsFalse() {
-        throw new NotImplementedException();
+        $this->assertFalse(endsWith("hello world", "you"));
+        $this->assertFalse(endsWith("hello world", "World"));
     }
 
     public function testIdefine() {
-        throw new NotImplementedException();
+        $this->assertFalse(defined("test_hello"));
+
+        $this->assertTrue(idefine("TEST_HELLO", "World"));
+        $this->assertEquals("World", TEST_HELLO);
+
+        $this->assertFalse(idefine("TEST_HELLO", "Uli"));
+        $this->assertEquals("World", TEST_HELLO);
     }
 
-    public function testFasterInArray() {
-        throw new NotImplementedException();
+    public function testFasterInArrayReturnsTrue() {
+        $array = array("hello", "world", 123);
+        $this->assertTrue(faster_in_array("world", $array));
+        $this->assertTrue(faster_in_array(123, $array));
+    }
+
+    public function testFasterInArrayReturnsFalse() {
+        $array = array("hello", "world", 123);
+        $this->assertFalse(faster_in_array("germany", $array));
+        $this->assertFalse(faster_in_array(789, $array));
     }
 
     public function testGetAllSlugs() {

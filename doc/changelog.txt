@@ -5,6 +5,7 @@ Neue API-Methoden:
 * get_environment()
 * Banners::getRandom()
 * Banner->render()
+* is_present($val)
 
 Fehlerkorrekturen:
 * Es wird nun immer der aktuelle Wert von CodeMirror Editoren übertragen
