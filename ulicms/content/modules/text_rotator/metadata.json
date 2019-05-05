@@ -2,6 +2,13 @@
     "source": "extend",
     "embed": false,
     "version": "1.0.0",
+    "controllers":
+            {
+                "TextRotatorController": "controllers/TextRotatorController.php"
+            },
+    "main_class": "TextRotatorController",
+    "custom_acl": ["text_rotator_list"],
+    "admin_permission": "text_rotator_list",
     "models": {
         "RotatingText": "models/RotatingText"
     }
