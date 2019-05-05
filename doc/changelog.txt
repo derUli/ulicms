@@ -7,6 +7,9 @@ Neue API-Methoden:
 * Banner->render()
 * is_present($val)
 
+Verbesserungen:
+* Spalte "Version" unter "Pakete" auf Smartphones ausgeblendet.
+
 Fehlerkorrekturen:
 * Es wird nun immer der aktuelle Wert von CodeMirror Editoren übertragen
 * User-Formular kann nun nicht mehr abgesendet wenn die Passwortwiederholung falsch ist

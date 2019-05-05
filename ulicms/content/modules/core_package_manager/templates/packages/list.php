@@ -20,11 +20,11 @@ if ($permissionChecker->hasPermission("list_packages")) {
             <thead>
                 <tr>
                     <th><?php translate("module"); ?></th>
-                    <th><?php translate("version"); ?></th>
+                    <th class="hide-on-mobile"><?php translate("version"); ?></th>
                     <?php if ($anyEmbedModules) { ?>
                         <th><?php translate("shortcode"); ?></th>
                     <?php } ?>
-                    <th class="actions"><?php translate("actions"); ?></th>
+                    <th class="actions no-sort"><?php translate("actions"); ?></th>
                 </tr>
             </thead>
 
@@ -49,7 +49,7 @@ if ($permissionChecker->hasPermission("list_packages")) {
                                    title="<?php translate("no_permission"); ?>"></i>
                                <?php } ?>
                         </td>
-                        <td><?php esc(getModuleMeta($module->getName(), "version")); ?></td>
+                        <td class="hide-on-mobile"><?php esc(getModuleMeta($module->getName(), "version")); ?></td>
                         <?php if ($anyEmbedModules) { ?>
                             <td><?php
                                 if ($module->isEmbedModule()) {
@@ -114,9 +114,9 @@ if ($permissionChecker->hasPermission("list_packages")) {
             <thead>
                 <tr>
                     <th><?php translate("design"); ?></th>
-                    <th><?php translate("version"); ?></th>
+                    <th class="hide-on-mobile"><?php translate("version"); ?></th>
                     <th><?php translate("in_use"); ?></th>
-                    <th class="actions"><?php translate("actions"); ?></th>
+                    <th class="actions no-sort"><?php translate("actions"); ?></th>
                 </tr>
             </thead>
 
@@ -127,7 +127,7 @@ if ($permissionChecker->hasPermission("list_packages")) {
                     ?>
                     <tr>
                         <td><?php esc($theme); ?></td>
-                        <td>
+                        <td class="hide-on-mobile">
                             <?php esc(getThemeMeta($theme, "version")); ?>
                         </td>
                         <td><?php if ($inUse) { ?>
@@ -205,7 +205,7 @@ if ($permissionChecker->hasPermission("list_packages")) {
                             ?></th>
                         <th><?php translate("description"); ?></th>
                         <th><?php translate("date"); ?></th>
-                        <th><?php translate("actions"); ?></th>
+                        <th class="actions no-sort"><?php translate("actions"); ?></th>
                     </tr>
                 </thead>
                 <tbody>
