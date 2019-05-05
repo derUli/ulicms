@@ -4,7 +4,6 @@ use UliCMS\Exceptions\NotImplementedException;
 
 class Model {
 
-    private static $model = null;
     protected $id = null;
 
     public function __construct($id = null) {

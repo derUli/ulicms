@@ -10,7 +10,8 @@ class RotatingText extends Model {
     private $words = null;
 
     public function loadByID($id) {
-        throw new NotImplementedException("load not implemented");
+        $query = Database::pQuery("select * from {prefix}rotating_text where id = ?", array(intval($id)), true);
+        $this->fillVars($query);
     }
 
     public function getAnimation() {
@@ -46,32 +47,49 @@ class RotatingText extends Model {
     }
 
     protected function fillVars($query = null) {
-        throw new NotImplementedException("fillVars not implemented");
+        if ($query && Database::getNumRows($query)) {
+            $data = Database::fetchObject($query);
+            $this->setID($data->id);
+            $this->setAnimation($data->animation);
+            $this->setSeparator($data->separator);
+            $this->setSpeed($data->speed);
+            $this->setWords($data->words);
+        } else {
+            $this->setID(null);
+            $this->setAnimation(null);
+            $this->setSeparator(null);
+            $this->setSpeed(null);
+            $this->setWords(null);
+        }
     }
 
     protected function insert() {
         Database::pQuery("insert into {prefix}rotating_text
-            (animation, separator, speed, words)
-            values(?, ?, ?, ?)", array(
-            $this->getAnimation(), $this->getSeparator(),
-            $this->getSpeed(), $this->getWords()
-                ), true);
+            (animation, `separator`, speed, words)
+            values
+            (?, ?, ?, ?)", array(
+                    $this->getAnimation(), $this->getSeparator(),
+                    $this->getSpeed(), $this->getWords()
+                        ), true)or die(Database::getLastError());
         $this->setID(Database::getLastInsertID());
     }
 
     protected function update() {
         Database::pQuery("update {prefix}rotating_text
-            set animation = ?, separator = ?, speed = ?, words = ?
-            where id = ?", array(
+    set animation = ?, `separator` = ?, speed = ?, words = ?
+    where id = ?", array(
             $this->getAnimation(), $this->getSeparator(),
             $this->getSpeed(), $this->getWords(),
             $this->getId()
                 ), true);
-        $this->setID(Database::getLastInsertID());
     }
 
     public function delete() {
-        throw new NotImplementedException("delete not implemented");
+        if (!$this->getId()) {
+            return;
+        }
+        Database::pQuery("DELETE FROM {prefix}rotating_text where id = ?", array($this->getID()), true);
+        $this->setID(null);
     }
 
 }
