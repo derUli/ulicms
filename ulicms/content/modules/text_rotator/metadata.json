@@ -7,9 +7,16 @@
                 "TextRotatorController": "controllers/TextRotatorController.php"
             },
     "main_class": "TextRotatorController",
-    "custom_acl": ["text_rotator_list"],
+    "custom_acl": ["text_rotator_list",
+        "text_rotator_edit"],
     "admin_permission": "text_rotator_list",
     "models": {
         "RotatingText": "models/RotatingText"
+    },
+    "actions": {
+        "text_rotator_create": "templates/form.php"
+    },
+    "action_permissions": {
+        "text_rotator_create": "text_rotator_edit"
     }
 }
