@@ -280,8 +280,7 @@ add_translation("PASSWORD", "Passwort");
 // Update
 add_translation("UPDATE_INFORMATION_TEXT", "Hier können Sie Ihr CMS Updaten, nachdem Sie alle Patch Dateien auf den Server geladen haben. Mehr Informationen über aktuelle Updates erhalten Sie auf www.ulicms.de");
 add_translation("RUN_UPDATE", "Update durchführen");
-add_translation("UPDATE_NOTICE", "<span style=\"color:red\"><strong>Achtung!!!</strong> Bitte direkt nach der Durchführung des Updates die Datei <strong>update.php</strong> vom Server löschen, falls das nicht automatisch geschehen sollte.</span>
-");
+add_translation("UPDATE_NOTICE", "<strong>Achtung!!!</strong> Bitte direkt nach der Durchführung des Updates die Datei <strong>update.php</strong> vom Server löschen, falls das nicht automatisch geschehen sollte.");
 
 // Login
 add_translation("PLEASE_AUTHENTICATE", "Bitte authentifizieren Sie sich:");
