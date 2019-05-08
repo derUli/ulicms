@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\HTML\ListItem;
+
 class TextRotatorController extends MainClass {
 
     const MODULE_NAME = "text_rotator";
@@ -69,6 +71,72 @@ class TextRotatorController extends MainClass {
                         self::MODULE_NAME
                 )
         );
+    }
+
+    public function getAnimtionItems() {
+        $fx = [
+            "attention_seekers" => [
+                "bounce",
+                "flash",
+                "pulse",
+                "rubberBand",
+                "shake",
+                "swing",
+                "tada",
+                "wobble"
+            ],
+            "bouncing_entrances" => [
+                "bounceIn",
+                "bounceInDown",
+                "bounceInLeft",
+                "bounceInRight",
+                "bounceInUp"
+            ],
+            "fading_entrances" => [
+                "fadeIn",
+                "fadeInDown",
+                "fadeInDownBig",
+                "fadeInLeft",
+                "fadeInLeftBig",
+                "fadeInRight",
+                "fadeInRightBig",
+                "fadeInUp",
+                "fadeInUpBig"
+            ],
+            "flipping_entrances" => [
+                "flip",
+                "flipInX",
+                "flipInY"
+            ],
+            "rotating_entrances" => [
+                "rotateIn",
+                "rotateInDownLeft",
+                "rotateInDownRight",
+                "rotateInUpLeft",
+                "rotateInUpRight"
+            ],
+            "zoom_entrances" => [
+                "zoomIn",
+                "zoomInDown",
+                "zoomInLeft",
+                "zoomInRight",
+                "zoomInUp"
+            ],
+            "others" => [
+                "lightSpeedIn",
+                "rollIn"
+            ]
+        ];
+        $items = array();
+        foreach ($fx as $type => $effects) {
+            foreach ($effects as $effect) {
+                $translatedType = get_translation("fx_type_{$type}");
+                $item = new ListItem($effect,
+                        "$effect ({$translatedType})");
+                $items[] = $item;
+            }
+        }
+        return $items;
     }
 
     public function deletePost() {

@@ -7,6 +7,8 @@ $(".text-rotator").each(
                 // An array of phrases to rotate are created based on this separator. Change it if you wish to separate the phrases differently (e.g. So Simple | Very Doge | Much Wow | Such Cool).
                 separator: $(element).data("separator"),
                 // The delay between the changing of each phrase in milliseconds.
-                speed: $(element).data("speed")
+                speed: $(element).data("speed"),
+                complete: function () {
+                }
             });
         });

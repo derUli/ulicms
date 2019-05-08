@@ -17,6 +17,10 @@
         "text_rotator_create": "templates/form.php",
         "text_rotator_edit": "templates/form.php"
     },
+    "action_controllers": {
+        "text_rotator_create": "TextRotatorController",
+        "text_rotator_edit": "TextRotatorController"
+    },
     "action_permissions": {
         "text_rotator_create": "text_rotator_edit",
         "text_rotator_edit": "text_rotator_edit"

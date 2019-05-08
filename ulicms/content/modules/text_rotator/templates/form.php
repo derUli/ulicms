@@ -4,6 +4,7 @@ use UliCMS\HTML\Input;
 
 $id = Request::getVar("id", null, "int");
 $model = new RotatingText($id);
+$controller = ControllerRegistry::get();
 ?>
 <a href="<?php esc(ModuleHelper::buildAdminURL(TextRotatorController::MODULE_NAME)); ?>" class="btn btn-default btn-back">
     <i
@@ -65,7 +66,8 @@ if ($id) {
         <?php translate("animation"); ?>
     </label>
     <?php
-    echo Input::TextBox("animation", $model->getAnimation(), "text",
+    echo Input::SingleSelect("animation", $model->getAnimation(), $controller->getAnimtionItems(),
+            1,
             array(
                 "required" => "required",
                 "placeholder" => get_translation("animation")
