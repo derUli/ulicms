@@ -30,6 +30,10 @@ class RotatingText extends Model {
         return $this->words;
     }
 
+    public function getShortcode() {
+        return "[rotating_text={$this->getID()}]";
+    }
+
     public function setAnimation($val) {
         $this->animation = !is_blank($val) ? strval($val) : null;
     }
@@ -92,8 +96,8 @@ class RotatingText extends Model {
         $this->setID(null);
     }
 
-    public static function getAll() {
-        $query = Database::query("select id from {prefix}rotating_text order by id", true);
+    public static function getAll($order = "id") {
+        $query = Database::query("select id from {prefix}rotating_text order by {$order}", true);
         $texts = array();
         while ($row = Database::fetchObject($query)) {
             $texts[] = new self($row->id);
