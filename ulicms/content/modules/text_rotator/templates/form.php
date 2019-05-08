@@ -96,6 +96,7 @@ echo Input::Hidden("speed", $model->getSpeed());
 echo ModuleHelper::endForm();
 ?>
 
+<h3><?php translate("preview"); ?></h3>
 <div id="preview-text"></div>
 <?php
 enqueueScriptFile(
