@@ -14,12 +14,15 @@
         "RotatingText": "models/RotatingText"
     },
     "actions": {
-        "text_rotator_create": "templates/form.php"
+        "text_rotator_create": "templates/form.php",
+        "text_rotator_edit": "templates/form.php"
     },
     "action_permissions": {
-        "text_rotator_create": "text_rotator_edit"
+        "text_rotator_create": "text_rotator_edit",
+        "text_rotator_edit": "text_rotator_edit"
     },
     "controller_function_permissions": {
-        "TextRotatorController::savePost": "text_rotator_edit"
+        "TextRotatorController::savePost": "text_rotator_edit",
+        "TextRotatorController::deletePost": "text_rotator_edit"
     }
 }

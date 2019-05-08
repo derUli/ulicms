@@ -15,6 +15,12 @@ $rotatingTexts = RotatingText::getAll();
                 <th><?php translate("id"); ?></th>
                 <th><?php translate("words"); ?></th>
                 <th class="no-sort"><?php translate("shortcode"); ?></th>
+                <th class="no-sort text-center">
+                    <?php translate("edit") ?>
+                </th>
+                <th class="no-sort text-center">
+                    <?php translate("delete") ?>
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -31,6 +37,18 @@ $rotatingTexts = RotatingText::getAll();
                                     "class" => "select-on-click"));
                         ?>
                     </td>
+                    <td class="text-center"><a
+                            href="<?php
+                            esc(ModuleHelper::buildActionURL("text_rotator_edit", "id={$text->getID()}"));
+                            ?>">
+                            <img class="mobile-big-image" src="gfx/edit.png"
+                                 alt="<?php translate("edit"); ?>"
+                                 title="<?php translate("edit"); ?>">
+                        </a></td>
+                    <td class="text-center">
+                        <?php echo ModuleHelper::deleteButton(ModuleHelper::buildMethodCallUrl(TextRotatorController::class, "delete", "id={$text->getID()}")); ?>
+
+                    </td>
                 </tr>
                 <?php
             }
@@ -38,3 +56,9 @@ $rotatingTexts = RotatingText::getAll();
         </tbody>
     </table>
 </div>
+<?php
+$translation = new JSTranslation();
+$translation->addKey("ask_for_delete");
+$translation->renderJS();
+?>
+<?php

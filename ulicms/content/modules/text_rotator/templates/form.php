@@ -1,3 +1,10 @@
+<?php
+
+use UliCMS\HTML\Input;
+
+$id = Request::getVar("id", null, "int");
+$model = new RotatingText($id);
+?>
 <a href="<?php esc(ModuleHelper::buildAdminURL(TextRotatorController::MODULE_NAME)); ?>" class="btn btn-default btn-back">
     <i
         class="fa fa-arrow-left"></i>
@@ -8,20 +15,16 @@
 <?php
 echo ModuleHelper::buildMethodCallForm(TextRotatorController::class, "save");
 
-/*
-  private $animation;
-  private $separator = ",";
-  private $speed = 2000;
-  private $words = null;
-
- */
+if ($id) {
+    echo Input::Hidden("id", $model->getID());
+}
 ?>
 <div class="form-group">
     <label for="words">
         <?php translate("words"); ?>
     </label>
     <?php
-    echo UliCMS\HTML\Input::TextBox("words", "", "text",
+    echo Input::TextBox("words", $model->getWords(), "text",
             array(
                 "required" => "required",
                 "placeholder" => get_translation("words"),
@@ -34,7 +37,7 @@ echo ModuleHelper::buildMethodCallForm(TextRotatorController::class, "save");
         <?php translate("separator"); ?>
     </label>
     <?php
-    echo UliCMS\HTML\Input::TextBox("separator", "", "text",
+    echo Input::TextBox("separator", $model->getSeparator(), "text",
             array(
                 "required" => "required",
                 "placeholder" => get_translation("separator"),
@@ -47,7 +50,7 @@ echo ModuleHelper::buildMethodCallForm(TextRotatorController::class, "save");
         <?php translate("speed"); ?>
     </label>
     <?php
-    echo UliCMS\HTML\Input::TextBox("speed", "", "number",
+    echo Input::TextBox("speed", $model->getSpeed(), "number",
             array(
                 "min" => 1,
                 "max" => 9999,
@@ -62,7 +65,7 @@ echo ModuleHelper::buildMethodCallForm(TextRotatorController::class, "save");
         <?php translate("animation"); ?>
     </label>
     <?php
-    echo UliCMS\HTML\Input::TextBox("animation", "", "text",
+    echo Input::TextBox("animation", $model->getAnimation(), "text",
             array(
                 "required" => "required",
                 "placeholder" => get_translation("animation")
@@ -72,7 +75,7 @@ echo ModuleHelper::buildMethodCallForm(TextRotatorController::class, "save");
 <button type="submit" class="btn btn-primary">
     <i class="fa fa-save"></i>
     <?php
-    translate("create");
+    !$id ? translate("create") : translate("save");
     ?></button>
 <?php
 echo ModuleHelper::endForm();

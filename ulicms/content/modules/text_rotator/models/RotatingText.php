@@ -4,7 +4,7 @@ use UliCMS\Exceptions\NotImplementedException;
 
 class RotatingText extends Model {
 
-    private $animation;
+    private $animation = "bounceIn";
     private $separator = ",";
     private $speed = 2000;
     private $words = null;

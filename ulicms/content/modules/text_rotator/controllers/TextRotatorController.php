@@ -38,4 +38,17 @@ class TextRotatorController extends MainClass {
         );
     }
 
+    public function deletePost() {
+
+        $id = Request::getVar("id", null, "int");
+        if (!$id) {
+            ExceptionResult(get_translation("not_found"), HttpStatusCode::NOT_FOUND);
+        }
+        $rotatingText = new RotatingText($id);
+        $rotatingText->delete();
+        Response::sendHttpStatusCodeResultIfAjax(
+                HttpStatusCode::OK, ModuleHelper::buildAdminUrl(self::MODULE_NAME)
+        );
+    }
+
 }
