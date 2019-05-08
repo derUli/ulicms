@@ -26,8 +26,7 @@ if ($permissionChecker->hasPermission("audio") and $permissionChecker->hasPermis
             </strong><br /> <input name="mp3_file" type="text"
                                    value="<?php echo htmlspecialchars($result->mp3_file); ?>"><br /> <strong><?php translate("insert_this_code_into_a_page"); ?>
             </strong><br /> <input type="text" name="code"
-                                   value="[audio id=<?php echo $result->id; ?>]"
-                                   onclick="this.focus();this.select();" readonly> <br />
+                                   value="[audio id=<?php echo $result->id; ?>]" class="select-on-click" readonly> <br />
             <button type="submit" class="btn btn-primary">
                 <i class="fa fa-save"></i> <?php translate("SAVE_CHANGES"); ?></button>
         </form>

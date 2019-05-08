@@ -71,7 +71,7 @@ class AudioController extends Controller {
         }
 
         $name = db_escape($_POST ["name"]);
-        $category_id = intval($_POST ["category"]);
+        $category_id = intval($_POST ["category_id"]);
         $ogg_file_value = db_escape($ogg_file_value);
         $mp3_file_value = db_escape($mp3_file_value);
         $timestamp = time();
@@ -88,7 +88,7 @@ class AudioController extends Controller {
         $ogg_file = db_escape(basename($_POST ["ogg_file"]));
         $mp3_file = db_escape(basename($_POST ["mp3_file"]));
         $updated = time();
-        $category_id = intval($_POST ["category"]);
+        $category_id = intval($_POST ["category_id"]);
         db_query("UPDATE " . tbname("audio") . " SET name='$name', ogg_file='$ogg_file', mp3_file='$mp3_file', category_id = $category_id, `updated` = $updated where id = $id") or die(db_error());
         Request::redirect(ModuleHelper::buildActionURL("audio"));
     }

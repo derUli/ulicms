@@ -38,7 +38,7 @@ class VideoController extends Controller {
         $width = intval($_POST ["width"]);
         $height = intval($_POST ["height"]);
         $updated = time();
-        $category_id = intval($_POST ["category"]);
+        $category_id = intval($_POST ["category_id"]);
         db_query("UPDATE " . tbname("videos") . " SET name='$name', ogg_file='$ogg_file', mp4_file='$mp4_file', webm_file='$webm_file', width=$width, height=$height, category_id = $category_id, `updated` = $updated where id = $id") or die(db_error());
         Request::redirect(ModuleHelper::buildActionURL("videos"));
     }
@@ -113,7 +113,7 @@ class VideoController extends Controller {
             }
 
             $name = db_escape($_POST ["name"]);
-            $category_id = intval($_POST ["category"]);
+            $category_id = intval($_POST ["category_id"]);
             $ogg_file_value = db_escape($ogg_file_value);
             $webm_file_value = db_escape($webm_file_value);
             $mp4_file_value = db_escape($mp4_file_value);
