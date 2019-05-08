@@ -7,6 +7,7 @@ $(function () {
 })
 
 function updatePreview() {
+    $("#preview-text").html('<i class="fa fa-spinner fa-spin"></i>');
     const editForm = $("#edit-form");
     const previewForm = $("#preview-form");
     editForm.find("select, input").each(function (index, element) {
