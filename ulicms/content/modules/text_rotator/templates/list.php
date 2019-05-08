@@ -10,7 +10,7 @@ $permissionChecker = new PermissionChecker(get_user_id());
 if ($permissionChecker->hasPermission("text_rotator_edit")) {
     ?>
     <div class="form-group">
-        <a href="<?php esc(ModuleHelper::buildActionURL("text_rotator_create")); ?>" clas="btn btn-primary">
+        <a href="<?php esc(ModuleHelper::buildActionURL("text_rotator_create")); ?>" class="btn btn-primary">
             <i class="fa fa-plus"></i> <?php translate("new");
     ?></a>
     </div>
