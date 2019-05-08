@@ -23,7 +23,8 @@ class TextRotatorController extends MainClass {
     public function enqueueFrontendStylesheets() {
         if ($this->currentPageContainsRotatingText()) {
             enqueueStylesheet(
-                    ModuleHelper::buildRessourcePath(self::MODULE_NAME, "node_modules/animate.css/animate.min.css"));
+                    ModuleHelper::buildRessourcePath(self::MODULE_NAME, "node_modules/animate.css/animate.min.css")
+            );
             enqueueStylesheet(
                     ModuleHelper::buildRessourcePath(self::MODULE_NAME, "node_modules/morphext/dist/morphext.css"));
         }
@@ -34,7 +35,8 @@ class TextRotatorController extends MainClass {
             enqueueScriptFile(
                     ModuleHelper::buildRessourcePath(self::MODULE_NAME, "node_modules/morphext/dist/morphext.min.js"));
             enqueueScriptFile(
-                    ModuleHelper::buildRessourcePath(self::MODULE_NAME, "js/text_rotator.js"));
+                    ModuleHelper::buildRessourcePath(self::MODULE_NAME, "js/text_rotator.js")
+            );
         }
     }
 
