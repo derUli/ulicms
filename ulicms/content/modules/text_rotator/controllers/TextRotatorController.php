@@ -73,7 +73,7 @@ class TextRotatorController extends MainClass {
         );
     }
 
-    public function getAnimtionItems() {
+    public function getAnimationItems() {
         $fx = [
             "attention_seekers" => [
                 "bounce",

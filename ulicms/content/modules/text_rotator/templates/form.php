@@ -66,7 +66,7 @@ if ($id) {
         <?php translate("animation"); ?>
     </label>
     <?php
-    echo Input::SingleSelect("animation", $model->getAnimation(), $controller->getAnimtionItems(),
+    echo Input::SingleSelect("animation", $model->getAnimation(), $controller->getAnimationItems(),
             1,
             array(
                 "required" => "required",
