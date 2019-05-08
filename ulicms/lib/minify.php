@@ -232,6 +232,9 @@ function enqueueStylesheet($path) {
 
 function getCombinedStylesheetHTML() {
     $cfg = new CMSConfig();
+    if (!Vars::get("stylesheet_queue")) {
+        return;
+    }
     if (is_true($cfg->no_minify)) {
         foreach (Vars::get("stylesheet_queue") as $stylesheet) {
             $type = pathinfo($stylesheet, PATHINFO_EXTENSION);

@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Exceptions\NotImplementedException;
+use UliCMS\Backend\BackendPageRenderer;
 
 class RotatingText extends Model {
 
@@ -32,6 +32,11 @@ class RotatingText extends Model {
 
     public function getShortcode() {
         return "[rotating_text={$this->getID()}]";
+    }
+
+    public function getHtml() {
+        BackendPageRenderer::setModel($this);
+        return Template::executeModuleTemplate(TextRotatorController::MODULE_NAME, "rotator.php");
     }
 
     public function setAnimation($val) {

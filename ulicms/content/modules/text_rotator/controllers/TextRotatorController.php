@@ -13,6 +13,39 @@ class TextRotatorController extends MainClass {
                         self::MODULE_NAME, "list.php");
     }
 
+    private function currentPageContainsRotatingText() {
+        $page = ContentFactory::getCurrentPage();
+        return str_contains("[rotating_text=", $page->content);
+    }
+
+    public function enqueueFrontendStylesheets() {
+        if ($this->currentPageContainsRotatingText()) {
+            enqueueStylesheet(
+                    ModuleHelper::buildRessourcePath(self::MODULE_NAME, "node_modules/animate.css/animate.min.css"));
+            enqueueStylesheet(
+                    ModuleHelper::buildRessourcePath(self::MODULE_NAME, "node_modules/morphext/dist/morphext.css"));
+        }
+    }
+
+    public function enqueueFrontendFooterScripts() {
+        if ($this->currentPageContainsRotatingText()) {
+            enqueueScriptFile(
+                    ModuleHelper::buildRessourcePath(self::MODULE_NAME, "node_modules/morphext/dist/morphext.min.js"));
+            enqueueScriptFile(
+                    ModuleHelper::buildRessourcePath(self::MODULE_NAME, "js/text_rotator.js"));
+        }
+    }
+
+    public function beforeContentFilter($html) {
+        $texts = RotatingText::getAll();
+        foreach ($texts as $text) {
+            if (str_contains($text->getShortcode(), $html)) {
+                $html = str_replace($text->getShortcode(), $text->getHtml(), $html);
+            }
+        }
+        return $html;
+    }
+
     public function savePost() {
         $id = Request::getVar("id", null, "int");
 

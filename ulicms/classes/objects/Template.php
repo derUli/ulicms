@@ -64,6 +64,7 @@ class Template {
     }
 
     public static function footer() {
+        do_event("enqueue_frontend_footer_scripts");
         enqueueScriptFile("lib/js/global.js");
         combinedScriptHtml();
 
@@ -296,11 +297,15 @@ class Template {
                 echo "\r\n";
             }
         }
+
         if (!Settings::get("no_autoembed_core_css")) {
             enqueueStylesheet("lib/css/core.css");
-            combinedStylesheetHtml();
-            echo "\r\n";
         }
+        do_event("enqueue_frontend_stylesheets");
+
+        combinedStylesheetHtml();
+        echo "\r\n";
+
 
         $min_style_file = getTemplateDirPath(get_theme()) . "style.min.css";
         $min_style_file_realpath = getTemplateDirPath(get_theme(), true) . "style.min.css";
