@@ -14,7 +14,9 @@ $controller = ControllerRegistry::get();
         ?></a>
 <h1><?php translate("create_new_text_rotator"); ?></h1>
 <?php
-echo ModuleHelper::buildMethodCallForm(TextRotatorController::class, "save");
+echo ModuleHelper::buildMethodCallForm(TextRotatorController::class, "save", [], RequestMethod::POST, [
+    "id" => "edit-form"
+]);
 
 if ($id) {
     echo Input::Hidden("id", $model->getID());
@@ -74,10 +76,32 @@ if ($id) {
     ));
     ?>
 </div>
-<button type="submit" class="btn btn-primary">
-    <i class="fa fa-save"></i>
-    <?php
-    !$id ? translate("create") : translate("save");
-    ?></button>
+<div class="form-group"><button type="submit" class="btn btn-primary">
+        <i class="fa fa-save"></i>
+        <?php
+        !$id ? translate("create") : translate("save");
+        ?></button>
+</div>
 <?php
 echo ModuleHelper::endForm();
+
+echo ModuleHelper::buildMethodCallForm(TextRotatorController::class, "preview", [], RequestMethod::POST, [
+    "id" => "preview-form"
+]);
+echo Input::Hidden("words", $model->getWords());
+echo Input::Hidden("animation", $model->getAnimation());
+echo Input::Hidden("separator", $model->getSeparator());
+echo Input::Hidden("speed", $model->getSpeed());
+
+echo ModuleHelper::endForm();
+?>
+
+<div id="preview-text"></div>
+<?php
+enqueueScriptFile(
+        ModuleHelper::buildRessourcePath(TextRotatorController::MODULE_NAME, "node_modules/morphext/dist/morphext.min.js"));
+enqueueScriptFile(
+        ModuleHelper::buildRessourcePath(
+                TextRotatorController::MODULE_NAME, "js/backend.js")
+);
+combinedScriptHtml();

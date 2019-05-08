@@ -15,6 +15,15 @@ class TextRotatorController extends MainClass {
                         self::MODULE_NAME, "list.php");
     }
 
+    public function adminHead() {
+        enqueueStylesheet(
+                ModuleHelper::buildRessourcePath(self::MODULE_NAME, "node_modules/animate.css/animate.min.css")
+        );
+        enqueueStylesheet(
+                ModuleHelper::buildRessourcePath(self::MODULE_NAME, "node_modules/morphext/dist/morphext.css"));
+        combinedStylesheetHtml();
+    }
+
     private function currentPageContainsRotatingText() {
         $page = ContentFactory::getCurrentPage();
         return str_contains("[rotating_text=", $page->content);
@@ -38,6 +47,21 @@ class TextRotatorController extends MainClass {
                     ModuleHelper::buildRessourcePath(self::MODULE_NAME, "js/text_rotator.js")
             );
         }
+    }
+
+    public function preview() {
+        $rotating_text = new RotatingText();
+        $words = Request::getVar("words", "", "str");
+        $separator = Request::getVar("separator", ",", "str");
+        $speed = Request::getVar("speed", 2000, "int");
+        $animation = Request::getVar("animation", "", "str");
+
+        $rotating_text->setWords($words);
+        $rotating_text->setSeparator($separator);
+        $rotating_text->setSpeed($speed);
+        $rotating_text->setAnimation($animation);
+
+        HtmlResult($rotating_text->getHtml());
     }
 
     public function beforeContentFilter($html) {
