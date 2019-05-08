@@ -15,6 +15,7 @@ class RotatingTextTest extends \PHPUnit\Framework\TestCase {
         $text->setWords("Linux|Apache|PHP|MySQL");
         $text->save();
 
+
         $savedText = new RotatingText($text->getID());
 
         $this->assertNotNull($savedText->getID());
@@ -23,6 +24,16 @@ class RotatingTextTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(2500, $savedText->getSpeed());
         $this->assertEquals("Linux|Apache|PHP|MySQL", $savedText->getWords());
         $this->assertEquals("[rotating_text={$savedText->getID()}]", $savedText->getShortcode());
+
+
+        $html = $text->getHtml();
+
+        $this->assertStringContainsString('class="text-rotator"', $html);
+        $this->assertStringContainsString('data-animation="great-animation-1"', $html);
+        $this->assertStringContainsString('data-speed="2500"', $html);
+        $this->assertStringContainsString('data-separator="|"', $html);
+        $this->assertStringContainsString("Linux|Apache|PHP|MySQL", $html);
+
 
         $savedText->setAnimation("great-animation-2");
         $savedText->setSeparator(";");
