@@ -7,6 +7,10 @@ Neue API-Methoden:
 * Banner->render()
 * is_present($val)
 
+Neue Events:
+* enqueue_frontend_footer_scripts
+* enqueue_frontend_stylesheets
+
 Verbesserungen:
 * Spalte "Version" unter "Pakete" auf Smartphones ausgeblendet.
 
