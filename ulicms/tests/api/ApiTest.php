@@ -484,4 +484,10 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("test", get_environment());
     }
 
+    public function testPathToUnix() {
+        $this->assertEquals("the/real/foo/bar", pathToUnix('the\real\foo\bar'));
+        $this->assertEquals("the/real/foo/bar", pathToUnix('the/real\foo/bar'));
+        $this->assertEquals("the/real/foo/bar", pathToUnix("the/real/foo/bar"));
+    }
+
 }

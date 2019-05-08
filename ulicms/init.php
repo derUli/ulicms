@@ -4,9 +4,13 @@ use UliCMS\Exceptions\AccessDeniedException;
 use UliCMS\Exceptions\SqlException;
 use UliCMS\Exceptions\FileNotFoundException;
 
+function pathToUnix($path){
+	return str_replace("\\", "/", $path);
+}
+
 // root directory of UliCMS
 if (!defined("ULICMS_ROOT")) {
-    define("ULICMS_ROOT", dirname(__file__));
+    define("ULICMS_ROOT", pathToUnix(dirname(__file__)));
 }
 
 // this is kept for compatiblity reasons
@@ -23,9 +27,6 @@ define("DIRSEP", DIRECTORY_SEPARATOR);
 // use this constant at the end
 // of the page load procedure to measure site performance
 define("START_TIME", microtime(true));
-
-
-
 
 /*
  * Diese Datei initalisiert das System
@@ -143,6 +144,21 @@ function exception_handler($exception) {
         $logger->error($exception);
     }
     $httpStatus = $exception instanceof AccessDeniedException ? HttpStatusCode::FORBIDDEN : HttpStatusCode::INTERNAL_SERVER_ERROR;
+	
+	$file = pathToUnix($exception->getFile());
+
+	// if the error happend in a module
+	if(startsWith($file, ULICMS_MODULES) 
+		and is_admin_dir()
+		and	!is_false($cfg->disable_module_on_error)){
+		$pathParts = explode("/",
+				str_replace(ULICMS_MODULES."/", "", $file)
+		);
+		$moduleName = $pathParts[0];
+		$module = new Module($moduleName);
+		$module->disable();
+	}
+	
     if (function_exists("HTMLResult") and class_exists("Template") and ! headers_sent() and function_exists("get_theme")) {
         ViewBag::set("exception", nl2br($message));
         HTMLResult(Template::executeDefaultOrOwnTemplate("exception.php"), $httpStatus);
@@ -216,13 +232,17 @@ if (!is_dir(ULICMS_TMP)) {
 }
 
 if (!defined("ULICMS_CACHE")) {
-    define("ULICMS_CACHE", ULICMS_DATA_STORAGE_ROOT . "/content/cache/");
+    define("ULICMS_CACHE", ULICMS_DATA_STORAGE_ROOT . "/content/cache");
 }
 if (!defined("ULICMS_LOG")) {
-    define("ULICMS_LOG", ULICMS_DATA_STORAGE_ROOT . "/content/log/");
+    define("ULICMS_LOG", ULICMS_DATA_STORAGE_ROOT . "/content/log");
 }
 if (!defined("ULICMS_CONTENT")) {
-    define("ULICMS_CONTENT", ULICMS_DATA_STORAGE_ROOT . "/content/");
+    define("ULICMS_CONTENT", ULICMS_DATA_STORAGE_ROOT . "/content");
+}
+
+if (!defined("ULICMS_MODULES")) {
+    define("ULICMS_MODULES", ULICMS_CONTENT . "/modules");
 }
 
 if (!defined("ULICMS_CONFIGURATIONS")) {
