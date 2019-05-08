@@ -28,7 +28,7 @@ class RotatingTextTest extends \PHPUnit\Framework\TestCase {
         $html = $text->getHtml();
 
         $this->assertStringContainsString('class="text-rotator"', $html);
-        $this->assertStringContainsString('data-animation="great-animation-1"', $html);
+        $this->assertStringContainsString('data-animation="great-animation-1 infinite"', $html);
         $this->assertStringContainsString('data-speed="2500"', $html);
         $this->assertStringContainsString('data-separator="|"', $html);
         $this->assertStringContainsString("Linux|Apache|PHP|MySQL", $html);
