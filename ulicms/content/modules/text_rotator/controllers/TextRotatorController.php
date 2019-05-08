@@ -127,7 +127,7 @@ class TextRotatorController extends MainClass {
                 "rollIn"
             ]
         ];
-        $items = array();
+        $items = [];
         foreach ($fx as $type => $effects) {
             foreach ($effects as $effect) {
                 $translatedType = get_translation("fx_type_{$type}");

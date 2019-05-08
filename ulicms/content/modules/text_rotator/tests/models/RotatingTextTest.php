@@ -15,7 +15,6 @@ class RotatingTextTest extends \PHPUnit\Framework\TestCase {
         $text->setWords("Linux|Apache|PHP|MySQL");
         $text->save();
 
-
         $savedText = new RotatingText($text->getID());
 
         $this->assertNotNull($savedText->getID());
@@ -75,6 +74,30 @@ class RotatingTextTest extends \PHPUnit\Framework\TestCase {
             $this->assertStringStartsWith("great-animation-",
                     $text->getAnimation());
         }
+    }
+
+    public function testBeforeContentFilter() {
+        $this->createTestData();
+
+        $texts = RotatingText::getAll();
+
+        $input = "";
+        foreach ($texts as $text) {
+            $input .= "Foo " . $text->getShortcode() . " Bar<br/>";
+        }
+
+        $processed = apply_filter($input, "before_content");
+
+        foreach ($texts as $text) {
+            $this->assertStringContainsString($text->getHtml(), $processed);
+        }
+    }
+
+    public function testGetAnimationItems() {
+        $controller = new TextRotatorController();
+        $items = $controller->getAnimationItems();
+        $this->assertTrue(is_array($items));
+        $this->assertCount(37, $items);
     }
 
 }
