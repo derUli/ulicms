@@ -16,7 +16,7 @@ if ($permissionChecker->hasPermission("videos") and $permissionChecker->hasPermi
             <input type="hidden" name="id" value="<?php echo $result->id; ?>"> <input
                 type="hidden" name="update" value="update"> <strong><?php translate("name"); ?>*
             </strong><br /> <input type="text" name="name" required="required"
-                                   value="<?php echo htmlspecialchars($result->name); ?>" maxlength=255 />
+                                   value="<?php echo htmlspecialchars($result->name); ?>" maxlength="255" />
             <br /> <strong><?php translate("category"); ?>
             </strong><br />
             <?php echo Categories::getHTMLSelect($result->category_id); ?>
@@ -34,8 +34,7 @@ if ($permissionChecker->hasPermission("videos") and $permissionChecker->hasPermi
             </strong><br /> <input type="number" name="height"
                                    value="<?php echo $result->height; ?>" step="1"> <br /> <strong><?php translate("insert_this_code_into_a_page"); ?>
             </strong><br /> <input type="text" name="code"
-                                   value="[video id=<?php echo $result->id; ?>]"
-                                   onclick="this.focus();this.select();" readonly> <br />
+                                   value="[video id=<?php echo $result->id; ?>]" class="select-on-click" readonly> <br />
             <button type="submit" class="btn btn-primary">
                 <i class="fa fa-save"></i> <?php translate("save_changes"); ?></button>
         </form>

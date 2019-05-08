@@ -409,10 +409,10 @@ function language_selection() {
 
 function get_category() {
     $current_page = get_page();
-    if (!$current_page["category"]) {
+    if (!$current_page["category_id"]) {
         return null;
     }
-    return Categories::getCategoryById($current_page["category"]);
+    return Categories::getCategoryById($current_page["category_id"]);
 }
 
 function category() {

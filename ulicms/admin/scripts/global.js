@@ -29,6 +29,10 @@ $(function () {
         sLengthSelect: "form-control"
     });
 
+    $(".select-on-click").click(function (event) {
+        $(event.target).select();
+    });
+
     initDataTables("body");
 
     // password security check

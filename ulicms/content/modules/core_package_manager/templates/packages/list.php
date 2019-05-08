@@ -53,7 +53,7 @@ if ($permissionChecker->hasPermission("list_packages")) {
                         <?php if ($anyEmbedModules) { ?>
                             <td><?php
                                 if ($module->isEmbedModule()) {
-                                    echo "<input type='text' value='[module=\"" . $module->getName() . "\"]' readonly='readonly' onclick='this.focus(); this.select()'>";
+                                    echo "<input type='text' value='[module=\"" . $module->getName() . "\"]' readonly='readonly' class='select-on-click'>";
                                 }
                                 ?></td>
                             <td class="actions">

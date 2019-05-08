@@ -124,9 +124,8 @@ if ($permissionChecker->hasPermission("pages")) {
                         </div>
                         <div class="typedep show-on-snippet">
                             <br /> <strong><?php translate("snippet_code") ?></strong> <br /> <input
-                                type="text"
-                                value="<?php Template::escape("[include=" . $row->id . "]") ?>" readonly
-                                onclick="this.select();"><br /> <small><?php translate("snippet_code_help"); ?></small>
+                                type="text" class="select-on-click"
+                                value="<?php Template::escape("[include=" . $row->id . "]") ?>" readonly><br /> <small><?php translate("snippet_code_help"); ?></small>
                         </div>
                     </div>
                     <h2 class="accordion-header"><?php translate("page_type"); ?></h2>

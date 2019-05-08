@@ -38,9 +38,8 @@ if (!$permissionChecker->hasPermission("forms")) {
                         <td><?php echo $form["id"]; ?></td>
                         <td><?php esc($form["name"]); ?></td>
                         <td class="hide-on-mobile"><?php esc($form["email_to"]); ?></td>
-                        <td><input class="form-submit-url" type="text" readonly
-                                   value="<?php esc($submit_form_url); ?>"
-                                   onclick="this.select();"></td>
+                        <td><input class="form-submit-url select-on-click" type="text" readonly
+                                   value="<?php esc($submit_form_url); ?>"></td>
 
                         <?php if ($permissionChecker->hasPermission("forms_edit")) { ?>
                             <td class="text-center"><a

@@ -11,7 +11,7 @@ class FormController extends Controller {
         $enabled = $_POST["enabled"];
         $email_to = $_POST["email_to"];
         $subject = $_POST["subject"];
-        $category_id = $_POST["category"];
+        $category_id = $_POST["category_id"];
         $fields = $_POST["fields"];
         $required_fields = $_POST["required_fields"];
         $mail_from_field = $_POST["mail_from_field"];
@@ -33,7 +33,7 @@ class FormController extends Controller {
         $enabled = $_POST["enabled"];
         $email_to = $_POST["email_to"];
         $subject = $_POST["subject"];
-        $category_id = $_POST["category"];
+        $category_id = $_POST["category_id"];
         $fields = $_POST["fields"];
 
         $required_fields = $_POST["required_fields"];

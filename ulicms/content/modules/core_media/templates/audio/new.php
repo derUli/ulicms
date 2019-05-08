@@ -13,7 +13,7 @@ if ($permissionChecker->hasPermission("audio") and $permissionChecker->hasPermis
         <input type="hidden" name="add" value="add">
         <?php csrf_token_html(); ?>
         <strong><?php translate("name"); ?>*</strong> <br /> <input
-            type="text" name="name" required value="" maxlength=255 /> <br /> <strong><?php translate("category"); ?></strong><br />
+            type="text" name="name" required value="" maxlength="255" /> <br /> <strong><?php translate("category"); ?></strong><br />
             <?php
             echo Categories::getHTMLSelect();
             ?>
