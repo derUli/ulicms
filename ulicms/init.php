@@ -82,7 +82,6 @@ require_once dirname(__file__) . "/classes/objects/html/load.php";
 require_once dirname(__file__) . "/classes/objects/content/TypeMapper.php";
 require_once dirname(__file__) . "/lib/db_functions.php";
 require_once dirname(__file__) . "/lib/files.php";
-require_once dirname(__file__) . "/lib/mailer.php";
 require_once dirname(__file__) . "/lib/file_get_contents_wrapper.php";
 require_once dirname(__file__) . "/lib/translation.php";
 require_once dirname(__file__) . "/lib/html5_media.php";

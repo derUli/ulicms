@@ -25,26 +25,22 @@ function get_ip() {
     return Request::getIp();
 }
 
-if (!function_exists("get_host")) {
-
-    function get_host() {
-        if ($host = $_SERVER['HTTP_X_FORWARDED_HOST']) {
-            $elements = explode(',', $host);
-            $host = trim(end($elements));
-        } else {
-            if (!$host = $_SERVER['HTTP_HOST']) {
-                if (!$host = $_SERVER['SERVER_NAME']) {
-                    $host = !empty($_SERVER['SERVER_ADDR']) ? $_SERVER['SERVER_ADDR'] : '';
-                }
+function get_host() {
+    if ($host = $_SERVER['HTTP_X_FORWARDED_HOST']) {
+        $elements = explode(',', $host);
+        $host = trim(end($elements));
+    } else {
+        if (!$host = $_SERVER['HTTP_HOST']) {
+            if (!$host = $_SERVER['SERVER_NAME']) {
+                $host = !empty($_SERVER['SERVER_ADDR']) ? $_SERVER['SERVER_ADDR'] : '';
             }
         }
-
-        // Remove port number from host
-        $host = preg_replace('/:\d+$/', '', $host);
-
-        return trim($host);
     }
 
+    // Remove port number from host
+    $host = preg_replace('/:\d+$/', '', $host);
+
+    return trim($host);
 }
 
 // Übersetzung HTTP Status Code => Name
@@ -137,4 +133,8 @@ function get_request_method() {
 // Check for Secure HTTP Connection (SSL)
 function is_ssl() {
     return Request::isSSL();
+}
+
+function ulicms_mail($to, $subject, $message, $headers = "") {
+    return Mailer::send($to, $subject, $message, $headers);
 }

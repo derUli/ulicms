@@ -1,150 +1,107 @@
 <?php
 
-if (!function_exists("cleanString")) {
-
-    function cleanString($string, $separator = '-') {
-        return StringHelper::cleanString($string, $separator);
-    }
-
+function cleanString($string, $separator = '-') {
+    return StringHelper::cleanString($string, $separator);
 }
 
-if (!function_exists("sanitize")) {
-
-    function sanitize(& $array) {
-        foreach ($array as & $data) {
-            $data = str_ireplace(array(
-                "\r",
-                "\n",
-                "%0a",
-                "%0d"
-                    ), '', stripslashes($data));
-        }
+function sanitize(& $array) {
+    foreach ($array as & $data) {
+        $data = str_ireplace(array(
+            "\r",
+            "\n",
+            "%0a",
+            "%0d"
+                ), '', stripslashes($data));
     }
-
 }
 
 // TODO: Deprecate this
 // Implement new methods unesc() and _unesc()
-if (!function_exists("unhtmlspecialchars")) {
 
-    function unhtmlspecialchars($string) {
-        return html_entity_decode($string, ENT_COMPAT, "UTF-8");
-    }
-
+function unhtmlspecialchars($string) {
+    return html_entity_decode($string, ENT_COMPAT, "UTF-8");
 }
 
-if (!function_exists("br2nlr")) {
-
-    function br2nlr($html) {
-        return preg_replace('#<br\s*/?>#i', "\r\n", $html);
-    }
-
+function br2nlr($html) {
+    return preg_replace('#<br\s*/?>#i', "\r\n", $html);
 }
 
-if (!function_exists("normalizeLN")) {
-
-    function normalizeLN($txt, $style = "\r\n") {
-        $txt = str_replace("\r\n", "\n", $txt);
-        $txt = str_replace("\r", "\n", $txt);
-        $txt = str_replace("\n", $style, $txt);
-        return $txt;
-    }
-
+function normalizeLN($txt, $style = "\r\n") {
+    $txt = str_replace("\r\n", "\n", $txt);
+    $txt = str_replace("\r", "\n", $txt);
+    $txt = str_replace("\n", $style, $txt);
+    return $txt;
 }
 
-if (!function_exists("real_htmlspecialchars")) {
-
-    function real_htmlspecialchars($string) {
-        return StringHelper::realHtmlSpecialchars($string);
-    }
-
+function real_htmlspecialchars($string) {
+    return StringHelper::realHtmlSpecialchars($string);
 }
 
-if (!function_exists("multi_explode")) {
-
-    function multi_explode($delimiters, $string) {
-        return explode($delimiters[0], strtr($string, array_combine(array_slice($delimiters, 1), array_fill(0, count($delimiters) - 1, array_shift($delimiters)))));
-    }
-
+function multi_explode($delimiters, $string) {
+    return explode($delimiters[0], strtr($string, array_combine(array_slice($delimiters, 1), array_fill(0, count($delimiters) - 1, array_shift($delimiters)))));
 }
 
-if (!function_exists("make_links_clickable")) {
-
-    // Links klickbar machen
-    function make_links_clickable($text) {
-        return StringHelper::makeLinksClickable($text);
-    }
-
+// Links klickbar machen
+function make_links_clickable($text) {
+    return StringHelper::makeLinksClickable($text);
 }
 
-if (!function_exists("getExcerpt")) {
-
-    /**
-     * Get excerpt from string
-     *
-     * @param String $str
-     *            String to get an excerpt from
-     * @param Integer $startPos
-     *            Position int string to start excerpt from
-     * @param Integer $maxLength
-     *            Maximum length the excerpt may be
-     * @return String excerpt
-     */
-    function getExcerpt($str, $startPos = 0, $maxLength = 100) {
-        return StringHelper::getExcerpt($str, $startPos, $maxLength);
-    }
-
+/**
+ * Get excerpt from string
+ *
+ * @param String $str
+ *            String to get an excerpt from
+ * @param Integer $startPos
+ *            Position int string to start excerpt from
+ * @param Integer $maxLength
+ *            Maximum length the excerpt may be
+ * @return String excerpt
+ */
+function getExcerpt($str, $startPos = 0, $maxLength = 100) {
+    return StringHelper::getExcerpt($str, $startPos, $maxLength);
 }
 
-if (!function_exists("decodeHTMLEntities")) {
-
-    function decodeHTMLEntities($str) {
-        return StringHelper::decodeHTMLEntities($str);
-    }
-
+function decodeHTMLEntities($str) {
+    return StringHelper::decodeHTMLEntities($str);
 }
 
-if (!function_exists("keywordsFromString")) {
+// Häufigste Wörter in String ermitteln und als Assoziatives Array zurückgeben.
+// z.B. für automatisches ausfüllen der Meta-Keywords nutzbar
+function keywordsFromString($text) {
+    $return = array();
 
-    // Häufigste Wörter in String ermitteln und als Assoziatives Array zurückgeben.
-    // z.B. für automatisches ausfüllen der Meta-Keywords nutzbar
-    function keywordsFromString($text) {
-        $return = array();
+    // Punkt, Beistrich, Zeilenumbruch... in Leerzeichen umwandeln
+    $text = str_replace(array(
+        "\n",
+        ".",
+        ",",
+        "!",
+        "?"
+            ), " ", $text);
 
-        // Punkt, Beistrich, Zeilenumbruch... in Leerzeichen umwandeln
-        $text = str_replace(array(
-            "\n",
-            ".",
-            ",",
-            "!",
-            "?"
-                ), " ", $text);
+    // text an Leerzeichen zerlegen
+    $array = explode(" ", $text);
 
-        // text an Leerzeichen zerlegen
-        $array = explode(" ", $text);
-
-        foreach ($array as $word) {
-            if (strlen($word) == 0) {
-                // wenn kein Wort vorhanden ist nichts machen
-                continue;
-            }
-            if (!faster_in_array($word, $array)) {
-                // wenn das wort zum ersten mal gefunden wurde
-                $return[$word] = 1;
-            } else {
-                // wenn schon vorhanden
-                $return[$word] ++;
-            }
+    foreach ($array as $word) {
+        if (strlen($word) == 0) {
+            // wenn kein Wort vorhanden ist nichts machen
+            continue;
         }
-
-        $return = array_filter($return, "decodeHTMLEntities");
-        // nach häufigkeit sortieren
-        arsort($return);
-
-        // array zurückgeben
-        return $return;
+        if (!faster_in_array($word, $array)) {
+            // wenn das wort zum ersten mal gefunden wurde
+            $return[$word] = 1;
+        } else {
+            // wenn schon vorhanden
+            $return[$word] ++;
+        }
     }
 
+    $return = array_filter($return, "decodeHTMLEntities");
+    // nach häufigkeit sortieren
+    arsort($return);
+
+    // array zurückgeben
+    return $return;
 }
 
 function stringOrNull($val) {

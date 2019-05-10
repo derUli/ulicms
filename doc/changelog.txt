@@ -21,6 +21,10 @@ Fehlerkorrekturen:
 Entfernte Features:
 * Option "Anwender müssen ihr Passwort alle X Tage ändern" entfernt
 
+Entfernte API-Methoden:
+* split_headers($headers)
+* formatTime($seconds)
+
 ===== Neues in UliCMS 2019.2.7 =====
 
 Neue Features:

@@ -1,6 +1,5 @@
 <?php
 $permissionChecker = new ACL();
-require_once ULICMS_ROOT . "/lib/formatter.php";
 
 $controller = ControllerRegistry::get();
 $model = $controller->getModel();
@@ -88,7 +87,7 @@ if ($permissionChecker->hasPermission("dashboard")) {
                 $installed_at = Settings::get("installed_at");
                 if ($installed_at) {
                     $time = time() - $installed_at;
-                    $formatted = formatTime($time);
+                    $formatted = NumberFormatHelper::formatTime($time);
                     ?>
                     <tr>
                         <td><?php translate("site_online_since"); ?></td>

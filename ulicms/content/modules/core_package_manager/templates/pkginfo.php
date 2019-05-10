@@ -1,5 +1,4 @@
 <?php
-require_once Path::resolve("ULICMS_ROOT/lib/formatter.php");
 $permissionChecker = new ACL();
 if (!$permissionChecker->hasPermission("install_packages")) {
     noPerms();
@@ -27,7 +26,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
             $build_date = $pkg->getProperty("build_date");
             $screenshot = $pkg->getProperty("screenshot");
             $size = intval($pkg->getSize());
-            $size = formatSizeUnits($size);
+            $size = NumberFormatHelper::formatSizeUnits($size);
             ?>
             <p>
                 <a href="<?php echo ModuleHelper::buildActionURL("upload_package"); ?>"
