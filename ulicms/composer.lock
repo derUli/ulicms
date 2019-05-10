@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3cd0881dae0f418b7ddc3a6a226ea008",
+    "content-hash": "cf6a2bf03fcf0ddf889709ff8b6b5132",
     "packages": [
         {
             "name": "chrisjean/php-ico",
@@ -381,26 +381,27 @@
         },
         {
             "name": "phpfastcache/phpfastcache",
-            "version": "6.1.3",
+            "version": "7.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPSocialNetwork/phpfastcache.git",
-                "reference": "a1edf28ae8d847b692b6bee8cae867398ff7d2f2"
+                "reference": "64638b27f473aa26603e84288d91a2b80a4aa388"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPSocialNetwork/phpfastcache/zipball/a1edf28ae8d847b692b6bee8cae867398ff7d2f2",
-                "reference": "a1edf28ae8d847b692b6bee8cae867398ff7d2f2",
+                "url": "https://api.github.com/repos/PHPSocialNetwork/phpfastcache/zipball/64638b27f473aa26603e84288d91a2b80a4aa388",
+                "reference": "64638b27f473aa26603e84288d91a2b80a4aa388",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "ext-mbstring": "*",
-                "php": "^5.6 || ^7.0 || ^7.1 || ^7.2",
+                "php": ">=7.0",
                 "psr/cache": "~1.0.0",
                 "psr/simple-cache": "~1.0.0"
             },
             "conflict": {
+                "basho/riak": "*",
                 "doctrine/couchdb": "*"
             },
             "suggest": {
@@ -417,12 +418,13 @@
                 "mongodb/mongodb": "^1.1",
                 "phpfastcache/couchdb": "~1.0.0",
                 "phpfastcache/phpssdb": "~1.0.0",
+                "phpfastcache/riak-client": "~1.4.4",
                 "predis/predis": "~1.1.0"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "phpFastCache\\": "src/phpFastCache/"
+                    "Phpfastcache\\": "lib/Phpfastcache/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -431,22 +433,23 @@
             ],
             "authors": [
                 {
-                    "name": "Khoa Bui",
-                    "email": "khoaofgod@gmail.com",
-                    "homepage": "http://www.phpfastcache.com",
-                    "role": "Developer"
-                },
-                {
                     "name": "Georges.L",
                     "email": "contact@geolim4.com",
                     "homepage": "https://github.com/Geolim4",
-                    "role": "Developer"
+                    "role": "Actual Project Manager/Developer"
+                },
+                {
+                    "name": "Khoa Bui",
+                    "email": "khoaofgod@gmail.com",
+                    "homepage": "https://www.phpfastcache.com",
+                    "role": "Former Project Developer/Original Creator"
                 }
             ],
-            "description": "PHP Cache Class - Reduce your database call using cache system. PhpFastCache handles a lot of drivers such as Apc(u), Cassandra, CouchBase, Couchdb, Mongodb, Files, (P)redis, Leveldb, Memcache(d), Ssdb, Sqlite, Wincache, Xcache, Zend Data Cache.",
-            "homepage": "http://www.phpfastcache.com",
+            "description": "PHP Abstract Cache Class - Reduce your database call using cache system. PhpFastCache handles a lot of drivers such as Apc(u), Cassandra, CouchBase, Couchdb, Mongodb, Files, (P)redis, Leveldb, Memcache(d), Ssdb, Sqlite, Wincache, Xcache, Zend Data Cache.",
+            "homepage": "https://www.phpfastcache.com",
             "keywords": [
                 "LevelDb",
+                "abstract",
                 "apc",
                 "apcu",
                 "cache",
@@ -474,7 +477,7 @@
                 "zend memory cache",
                 "zend server"
             ],
-            "time": "2018-06-08T13:27:13+00:00"
+            "time": "2019-03-03T14:39:16+00:00"
         },
         {
             "name": "phpgangsta/googleauthenticator",
@@ -1455,16 +1458,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "7.5.9",
+            "version": "7.5.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "134669cf0eeac3f79bc7f0c793efbc158bffc160"
+                "reference": "d7d9cee051d03ed98df6023aad93f7902731a780"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/134669cf0eeac3f79bc7f0c793efbc158bffc160",
-                "reference": "134669cf0eeac3f79bc7f0c793efbc158bffc160",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/d7d9cee051d03ed98df6023aad93f7902731a780",
+                "reference": "d7d9cee051d03ed98df6023aad93f7902731a780",
                 "shasum": ""
             },
             "require": {
@@ -1535,7 +1538,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2019-04-19T15:50:46+00:00"
+            "time": "2019-05-09T05:06:47+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",

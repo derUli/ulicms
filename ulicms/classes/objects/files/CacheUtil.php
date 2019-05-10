@@ -1,6 +1,6 @@
 <?php
 
-use phpFastCache\Helper\Psr16Adapter;
+use Phpfastcache\Helper\Psr16Adapter;
 
 class CacheUtil {
 
@@ -20,11 +20,11 @@ class CacheUtil {
             "defaultTtl" => self::getCachePeriod()
         );
 
-        // If SQLite available use it
-        // else use file
-        // TODO: Add other fallback methods
+        // Auto Detect which caching driver to use
         $driver = "files";
-        if (function_exists('sqlite_open')) {
+        if (extension_loaded("apcu") && ini_get("apc.enabled")) {
+            $driver = "apcu";
+        } else if (function_exists("sqlite_open")) {
             $driver = "sqlite";
         }
 
@@ -65,7 +65,7 @@ class CacheUtil {
 
     // Return cache period in seconds
     public static function getCachePeriod() {
-        return Settings::get("cache_period", "int");
+        return intval(Settings::get("cache_period"));
     }
 
     public static function getCurrentUid() {
