@@ -6,7 +6,6 @@ $classes = array(
     "BackendHelper",
     "ModuleHelper",
     "NumberFormatHelper",
-    "SecurityHelper",
     "StringHelper",
     "UrlHelper",
     "DataTablesHelper"

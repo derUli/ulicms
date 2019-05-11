@@ -24,6 +24,8 @@ Entfernte Features:
 Entfernte API-Methoden:
 * split_headers($headers)
 * formatTime($seconds)
+* formatSizeUnits($bytes)
+* SecurityHelper::securePath($path)
 
 ===== Neues in UliCMS 2019.2.7 =====
 

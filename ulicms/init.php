@@ -24,9 +24,6 @@ define("DIRSEP", DIRECTORY_SEPARATOR);
 // of the page load procedure to measure site performance
 define("START_TIME", microtime(true));
 
-
-
-
 /*
  * Diese Datei initalisiert das System
  */
@@ -196,7 +193,6 @@ if (isset($config->data_storage_root) and ! is_null($config->data_storage_root))
     define("ULICMS_DATA_STORAGE_ROOT", ULICMS_ROOT);
 }
 
-
 require_once dirname(__file__) . "/classes/creators/load.php";
 
 // this enables us to set an base url for statis ressources such as images
@@ -204,7 +200,6 @@ require_once dirname(__file__) . "/classes/creators/load.php";
 if (isset($config->data_storage_url) and ! is_null($config->data_storage_url)) {
     define("ULICMS_DATA_STORAGE_URL", $config->data_storage_url);
 }
-
 
 if (!defined("ULICMS_TMP")) {
     define("ULICMS_TMP", ULICMS_DATA_STORAGE_ROOT . "/content/tmp/");

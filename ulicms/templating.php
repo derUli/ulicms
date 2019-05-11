@@ -491,8 +491,6 @@ function homepage_title() {
     echo get_homepage_title();
 }
 
-$status = check_status();
-
 function get_meta_keywords($dummy = null) {
     $ipage = db_escape($_GET["seite"]);
     $query = db_query("SELECT meta_keywords FROM " . tbname("content") . " WHERE slug='$ipage' AND language='" . db_escape($_SESSION["language"]) . "'");
