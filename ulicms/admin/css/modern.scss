@@ -524,13 +524,13 @@ div#login-welcome-text {
 }
 .main {
     margin-top: 10px;
-    width:98%;
+    width:100%;
 }
 .ulicms-logo {
     max-width: 100%;
 }
 .main-content {
-    margin-top: 10px;
+    margin-top: 15px;
     a.btn-default {
         color: $color_10;
     }
@@ -897,9 +897,6 @@ pre {
     }
 }
 @media (max-width: 1200px) {
-    .main{
-        width:100%;
-    }
     table.tablesorter {
         .header {
             background-image: none !important;

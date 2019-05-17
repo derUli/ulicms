@@ -156,10 +156,9 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
                     <?php } ?>
                 </div>
             </div>
-            <div class="row main-content">
-                <div class="col-xs-12">
-                    <?php
-                    if (is_logged_in() and version_compare(phpversion(), '7.1', '<')) {
-                        require_once "inc/php_upgrade.php";
-                    }
+            <div class="main-content">
+                <?php
+                if (is_logged_in() and version_compare(phpversion(), '7.1', '<')) {
+                    require_once "inc/php_upgrade.php";
+                }
 
