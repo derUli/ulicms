@@ -1,11 +1,12 @@
 {
     "source": "extend",
-    "version": "0.1",
+    "version": "1.0.0",
     "menus": [
         "top"
     ],
     "disable_functions":
             [
-                "output_content"
+                "output_content",
+                "edit_button"
             ]
 }

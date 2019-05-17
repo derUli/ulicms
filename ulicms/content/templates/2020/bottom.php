@@ -1,6 +1,4 @@
 
-<?php /* Template::comments(); */ ?>
-<?php Template::footerText(); ?>
 <?php
 enqueueScriptFile(
         getTemplateDirPath(

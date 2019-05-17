@@ -24,13 +24,14 @@ $pages = ContentFactory::getAllByMenu("top", "position");
             ) .
             "css/main.scss");
     combinedStylesheetHtml();
+    $css = ".start-page{ background-color:" . Settings::get("header-background-color") . ";}";
     echo \UliCMS\HTML\Style::FromString($css);
     ?>
 
 </head>
-<body class = "<?php body_classes(); ?>">
-    <div class = "main">
-        <section class = "start-page">
+<body class="<?php body_classes(); ?>">
+    <div class="main">
+        <section class="start-page">
             <?php Template::logo();
             ?>
             <p class="site-slogan"><strong><?php Template::motto(); ?> </strong></p>
@@ -38,14 +39,14 @@ $pages = ContentFactory::getAllByMenu("top", "position");
             if (count($pages)) {
                 $firstPage = $pages[0];
                 ?>
-                <a href="#" class="button move-down"><p><?php esc($firstPage->getHeadline()); ?></p></a>
+                <a href="#" class="button move-down"><?php esc($firstPage->getHeadline()); ?></a>
             <?php } ?>
             <div class="advertisement">
                 <?php random_banner(); ?>
             </div>
         </section>
         <?php
-        foreach ($pages as $page) {
+        foreach ($pages as $index => $page) {
             if ($page->language !== getCurrentLanguage() ||
                     !$page->isRegular() ||
                     (!$page->active && !is_logged_in()) ||
@@ -55,18 +56,24 @@ $pages = ContentFactory::getAllByMenu("top", "position");
             set_requested_pagename($page->slug, $page->language);
             ?>
             <section>
-                <?php
-                echo $page->getShowHeadline() ? "<h1>{$page->getHeadline()}</h1>" : "";
-                if ($text_position == "after") {
-                    Template::outputContentElement();
-                }
+                <div class="content">
+                    <?php
+                    echo $page->getShowHeadline() ? "<h1>{$page->getHeadline()}</h1>" : "";
+                    if ($text_position == "after") {
+                        Template::outputContentElement();
+                    }
 
-                content();
+                    content();
 
-                if ($text_position == "before") {
-                    Template::outputContentElement();
-                }
-                ?>
+                    if ($text_position == "before") {
+                        Template::outputContentElement();
+                    }
+                    ?>
+                    <?php Template::comments(); ?>
+                </div>
+                <footer>
+                    <?php Template::footerText(); ?>
+                </footer>
             </section>
             <?php
         }
