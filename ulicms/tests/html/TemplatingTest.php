@@ -105,4 +105,11 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
                         $content2->language));
     }
 
+    public function testSetRequestedPageName() {
+        set_requested_pagename("my-slug", "en", "pdf");
+        $this->assertEquals("my-slug", get_requested_pagename());
+        $this->assertEquals("en", Request::getVar("language"));
+        $this->assertEquals("pdf", get_format());
+    }
+
 }

@@ -5,7 +5,8 @@ $classes = array(
     "EmailModes",
     "CommentStatus",
     "RequestMethod",
-    "ModuleEventConstants"
+    "ModuleEventConstants",
+    "AllowedTags"
 );
 foreach ($classes as $class) {
     require_once dirname(__file__) . "/$class.php";

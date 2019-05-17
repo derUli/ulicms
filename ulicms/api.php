@@ -236,6 +236,10 @@ function set_format($format) {
     $_GET["format"] = trim($format, ".");
 }
 
+function get_format() {
+    return is_present($_GET["format"]) ? $_GET["format"] : "html";
+}
+
 function get_jquery_url() {
     $url = "node_modules/jquery/dist/jquery.min.js";
     $url = apply_filter($url, "jquery_url");

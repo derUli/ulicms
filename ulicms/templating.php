@@ -674,8 +674,9 @@ function set_requested_pagename($slug, $language = null, $format = "html") {
     $_GET["seite"] = $slug;
     $_REQUEST["seite"] = $slug;
 
-    $_GET["langauge"] = $language;
-    $_REQUEST["langauge"] = $language;
+    $_GET["language"] = $language;
+    $_REQUEST["language"] = $language;
+
     set_format($format);
 }
 
