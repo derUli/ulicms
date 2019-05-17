@@ -1,6 +1,6 @@
 $(function () {
     $(".main").onepage_scroll({
-        pagination: false
+        pagination: true
     });
     $('.button.move-down').click(function () {
         $(".main").moveDown();

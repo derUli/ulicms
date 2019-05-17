@@ -1,5 +1,9 @@
 $default-vertical-margin: 10px;
 
+.onepage-pagination{
+    right: 1%;
+}
+
 .onepage-wrapper, .main{
     padding: 2%;
 
@@ -10,7 +14,7 @@ $default-vertical-margin: 10px;
         .content{
             height: 92vh;
             overflow-y: hidden;
-            width: 90%;
+            width: 88vw;
         }
 
     }
@@ -18,7 +22,7 @@ $default-vertical-margin: 10px;
         position: absolute;
         top: calc(100vh - 6vh);
         left: 2%;
-        width: 90%;
+        width: 88vw;
         height: auto;
 
         font-size: 0.7em;
@@ -39,9 +43,7 @@ h1, h2, h3, h4, h5, h6{
         margin: 2% 0 0 0;
         max-width: 92%;
     }
-    .site-slogan{
-        font-size:1.3em;
-    }
+
     .advertisement{
         position: absolute;
         top: 90vh;
@@ -104,7 +106,8 @@ code {
 blockquote {
     background: #f9f9f9;
     border-left: $default-vertical-margin solid #ccc;
-    margin: 1.5em $default-vertical-margin;
+    margin: 1em 0;
+    max-width: 85vw;
     padding: 0.5em $default-vertical-margin;
     quotes: "\201C""\201D""\2018""\2019";
 }

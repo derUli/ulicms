@@ -33,7 +33,7 @@ $pages = ContentFactory::getAllByMenu("top", "position");
         <section class="start-page">
             <?php Template::logo();
             ?>
-            <p class="site-slogan"><strong><?php Template::motto(); ?> </strong></p>
+            <blockquote class="site-slogan"><strong><?php Template::motto(); ?> </blockquote></p>
             <?php
             if (count($pages)) {
                 $firstPage = $pages[0];
