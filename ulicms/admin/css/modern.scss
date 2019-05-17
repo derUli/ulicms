@@ -33,8 +33,6 @@ body {
     -ms-overflow-style: scrollbar;
 }
 
-
-
 // For some reasons Bootbox adds padding-right as inline when opening a modal.
 // This causes the page content to shift to the left while the modal is open.
 body.modal-open {
