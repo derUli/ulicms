@@ -30,7 +30,6 @@ $passwordSecurityTranslation->render();
     <br />
 </div>
 </div>
-</div>
 <div id="footer">
 
     <?php do_event("admin_copyright_footer_left"); ?>
