@@ -1,0 +1,96 @@
+$default-vertical-margin: 10px;
+
+.onepage-wrapper{
+    section{
+        padding: 0 2% !important;
+        width: 90% !important;
+        height: 98% !important;
+        overflow-y: hidden
+    }
+}
+
+h1, h2, h3, h4, h5, h6{
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.start-page{
+    .website_logo{
+        margin: 1% 0;
+    }
+    .site-slogan{
+        font-size:1.3em;
+    }
+    .advertisement{
+        position: absolute;
+        bottom: 0;
+        left: 2%
+    }
+}
+.button{
+    text-decoration: none;
+    color: white;
+    background-color: #35A1E8;
+    display: inline-block;
+    padding: 0 20px;
+    font-size: 1.1em;
+    text-align: center;
+}
+
+h1{
+    font-size: 2.0em;
+}
+
+h2{
+    font-size: 1.8em;
+}
+
+h3{
+    font-size: 1.6em;
+}
+
+h4{
+    font-size: 1.4em;
+}
+
+h5{
+    font-size: 1.2em;
+}
+
+h6{
+    font-size: 1.1em;
+}
+
+code {
+    background-color: white;
+    display: block;
+    padding: 20px;
+    border: 1px dotted blue;
+    font-size: 0.7em;
+    word-wrap: break-word;
+    font-family: Pragmata, Menlo, "DejaVu LGC Sans Mono", "DejaVu Sans Mono",
+        Consolas, "Everson Mono", "Lucida Console", "Andale Mono", "Nimbus Mono L",
+        "Liberation Mono", FreeMono, "Osaka Monospaced", Courier, "New Courier",
+        monospace;
+}
+
+blockquote {
+    background: #f9f9f9;
+    border-left: $default-vertical-margin solid #ccc;
+    margin: 1.5em $default-vertical-margin;
+    padding: 0.5em $default-vertical-margin;
+    quotes: "\201C""\201D""\2018""\2019";
+}
+
+blockquote:before {
+    color: #ccc;
+    content: open-quote;
+    font-size: 4em;
+    line-height: 0.1em;
+    margin-right: 0.25em;
+    vertical-align: -0.4em;
+}
+
+blockquote p {
+    display: inline;
+}

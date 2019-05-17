@@ -1,0 +1,11 @@
+{
+    "source": "extend",
+    "version": "0.1",
+    "menus": [
+        "top"
+    ],
+    "disable_functions":
+            [
+                "output_content"
+            ]
+}

@@ -667,6 +667,18 @@ function get_requested_pagename() {
     return Database::escapeValue($value);
 }
 
+function set_requested_pagename($slug, $language = null, $format = "html") {
+    if (!$language) {
+        $language = getCurrentLanguage();
+    }
+    $_GET["seite"] = $slug;
+    $_REQUEST["seite"] = $slug;
+
+    $_GET["langauge"] = $language;
+    $_REQUEST["langauge"] = $language;
+    set_format($format);
+}
+
 function is_home() {
     return get_requested_pagename() === get_frontpage();
 }
