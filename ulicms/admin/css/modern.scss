@@ -941,3 +941,11 @@ pre {
         font-size: 0.35em;
     }
 }
+
+#designForm{
+    .preview{
+        img{
+            max-height: 50vh;
+        }
+    }
+}

@@ -10,6 +10,37 @@ function initMobileDetectNotice() {
     }
 }
 
+function loadThemePreview(selectField) {
+    const url = $(selectField).find("option:selected").data("preview-url");
+
+
+    const targetElement = $($(selectField).data("preview-target-element"));
+
+
+    if (!url) {
+        $(targetElement).hide();
+        return;
+    }
+
+    $(targetElement).show();
+    targetElement.find(".fa-spinner").show();
+    targetElement.find(".preview").hide();
+
+    $.ajax({
+        url: url,
+        success: function (result) {
+            targetElement.find(".preview").html(result);
+            targetElement.find(".fa-spinner").hide();
+            targetElement.find(".preview").show();
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            targetElement.find(".fa-spinner").hide();
+            targetElement.find(".preview").hide();
+            $(targetElement).hide();
+        }
+    });
+}
+
 // show a privacy warning if a google font is selected
 function onChangeDefaultFont() {
     var value = $("select#default_font").val();
@@ -28,6 +59,13 @@ $(function () {
     });
 
     $("select#default_font").change(onChangeDefaultFont);
+
+    loadThemePreview($("select[name='theme']"));
+    loadThemePreview($("select[name='mobile_theme']"));
+    $("select[name='theme'], select[name='mobile_theme']").change(function (event) {
+        loadThemePreview($(event.target));
+    });
+
 
     // ajax form submit
     $("#designForm").ajaxForm(

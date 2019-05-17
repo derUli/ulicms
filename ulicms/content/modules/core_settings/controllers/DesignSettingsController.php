@@ -133,4 +133,24 @@ class DesignSettingsController extends Controller {
         return $retval;
     }
 
+    public function getThemePreview() {
+        $theme = Request::getVar("theme", null, "str");
+
+        if (!$theme) {
+            HTTPStatusCodeResult(HttpStatusCode::UNPROCESSABLE_ENTITY);
+        }
+
+        $screenshotFiles = array(
+            "screenshot.jpg",
+            "screenshot.gif"
+        );
+        foreach ($screenshotFiles as $file) {
+            $fullPath = getTemplateDirPath($theme) . $file;
+            if (is_file($fullPath)) {
+                HTMLResult(UliCMS\HTML\imageTag($fullPath));
+            }
+        }
+        HTTPStatusCodeResult(HttpStatusCode::NOT_FOUND);
+    }
+
 }

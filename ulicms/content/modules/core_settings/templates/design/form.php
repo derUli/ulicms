@@ -64,10 +64,11 @@ if (!$permissionChecker->hasPermission("design")) {
         </tr>
         <tr>
             <td><strong><?php translate("frontend_design"); ?> </strong></td>
-            <td><select name="theme" size=1>
-                    <?php
-                    foreach ($allThemes as $th) {
-                        ?>
+            <td><select name="theme" size="1"
+                        data-preview-target-element="#theme-preview">
+                            <?php
+                            foreach ($allThemes as $th) {
+                                ?>
                         <option value="<?php
                         echo $th;
                         ?>"
@@ -75,7 +76,12 @@ if (!$permissionChecker->hasPermission("design")) {
                                 if ($th === $theme) {
                                     echo " selected";
                                 }
-                                ?>>
+                                ?>
+                                data-preview-url="<?php
+                                echo ModuleHelper::buildMethodCallUrl(DesignSettingsController::class, "getThemePreview",
+                                        "theme={$th}");
+                                ?>"
+                                >
                                     <?php
                                     echo $th;
                                     ?>
@@ -83,19 +89,25 @@ if (!$permissionChecker->hasPermission("design")) {
                         <?php
                     }
                     ?>
-                </select></td>
+                </select>
+                <div id="theme-preview" class="voffset3">                        <i class="fa fa-spinner fa-spin"></i>
+                    <div class="preview"></div>
+                </div>
+            </td>
         </tr>
         <tr>
             <td><strong><?php translate("mobile_design"); ?> </strong></td>
             <td>
                 <p>
-                    <select name="mobile_theme" size=1>
+                    <select name="mobile_theme" size="1"
+                            data-preview-target-element="#theme-mobile-preview">
                         <option value=""
                         <?php
                         if (!$mobile_theme) {
                             echo " selected";
                         }
-                        ?>>
+                        ?>
+                                >
                             [
                             <?php translate("standard"); ?>
                             ]
@@ -110,7 +122,11 @@ if (!$permissionChecker->hasPermission("design")) {
                                     if ($th === $mobile_theme) {
                                         echo " selected";
                                     }
-                                    ?>>
+                                    ?>
+                                    data-preview-url="<?php
+                                    echo ModuleHelper::buildMethodCallUrl(DesignSettingsController::class, "getThemePreview",
+                                            "theme={$th}");
+                                    ?>">
                                         <?php
                                         echo $th;
                                         ?>
@@ -119,6 +135,11 @@ if (!$permissionChecker->hasPermission("design")) {
                         }
                         ?>
                     </select>
+                <div id="theme-mobile-preview" class="voffset3">
+                    <i class="fa fa-spinner fa-spin"></i>
+                    <div class="preview"></div>
+                </div>
+
                 </p>
                 <div class="alert alert-warning fade in" id="mobile_detect_notice"
                      data-installed="<?php echo strbool($mobileDetectInstalled); ?>">
