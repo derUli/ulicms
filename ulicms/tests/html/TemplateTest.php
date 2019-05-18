@@ -1,7 +1,6 @@
 <?php
 
 use UliCMS\Exceptions\FileNotFoundException;
-use UliCMS\Exceptions\NotImplementedException;
 
 class TemplateTest extends \PHPUnit\Framework\TestCase {
 
@@ -60,8 +59,8 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetHtml5Doctype() {
-        $this->assertEquals("<!doctype html>\r\n", Template::getHtml5Doctype());
-        $this->assertEquals("<!doctype html>\r\n", get_html5_doctype());
+        $this->assertEquals("<!doctype html>", Template::getHtml5Doctype());
+        $this->assertEquals("<!doctype html>", get_html5_doctype());
     }
 
     public function testGetYear() {
@@ -72,9 +71,9 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetOgHTMLPrefix() {
         $_SESSION["language"] = "en";
-        $this->assertEquals("<html prefix=\"og: http://ogp.me/ns#\" lang=\"en\">\r\n", Template::getOgHTMLPrefix());
+        $this->assertEquals("<html prefix=\"og: http://ogp.me/ns#\" lang=\"en\">", Template::getOgHTMLPrefix());
         $_SESSION["language"] = "de";
-        $this->assertEquals("<html prefix=\"og: http://ogp.me/ns#\" lang=\"de\">\r\n", Template::getOgHTMLPrefix());
+        $this->assertEquals("<html prefix=\"og: http://ogp.me/ns#\" lang=\"de\">", Template::getOgHTMLPrefix());
         unset($_SESSION["language"]);
     }
 

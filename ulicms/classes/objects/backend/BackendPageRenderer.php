@@ -93,7 +93,7 @@ class BackendPageRenderer {
         if (Settings::get("minify_html")) {
             $generatedHtml = ob_get_clean();
             $options = array(
-                'optimizationLevel' => HTMLMinify::OPTIMIZATION_SIMPLE
+                'optimizationLevel' => HTMLMinify::OPTIMIZATION_ADVANCED
             );
             $HTMLMinify = new HTMLMinify($generatedHtml, $options);
             $generatedHtml = $HTMLMinify->process();

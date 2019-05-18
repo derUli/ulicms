@@ -3,6 +3,7 @@
 use UliCMS\Exceptions\FileNotFoundException;
 use UliCMS\HTML\Script;
 use UliCMS\Security\PermissionChecker;
+use MatthiasMullie\Minify;
 
 class Template {
 
@@ -195,7 +196,6 @@ class Template {
 
     public static function getDoctype() {
         $html = '<!doctype html>';
-        $html .= "\r\n";
         return $html;
     }
 
@@ -205,7 +205,7 @@ class Template {
 
     public static function getOgHTMLPrefix() {
         $language = getCurrentLanguage();
-        $html = "<html prefix=\"og: http://ogp.me/ns#\" lang=\"$language\">\r\n";
+        $html = "<html prefix=\"og: http://ogp.me/ns#\" lang=\"$language\">";
         return $html;
     }
 
@@ -226,7 +226,7 @@ class Template {
     }
 
     public static function getHtml5Doctype() {
-        return "<!doctype html>\r\n";
+        return "<!doctype html>";
     }
 
     public static function html5Doctype() {
@@ -247,18 +247,14 @@ class Template {
             $title = str_ireplace("%title%", get_title(), $title);
             $title = str_ireplace("%motto%", get_motto(), $title);
             $title = apply_filter($title, "title_tag");
-            echo "<title>" . $title . "</title>\r\n";
+            echo "<title>" . $title . "</title>";
         }
 
         echo '<meta http-equiv="content-type" content="text/html; charset=utf-8"/>';
-        echo "\r\n";
-
         echo '<meta charset="utf-8"/>';
-        echo "\r\n";
 
         if (!Settings::get("disable_no_format_detection")) {
             echo '<meta name="format-detection" content="telephone=no"/>';
-            echo "\r\n";
         }
 
         $dir = dirname($_SERVER["SCRIPT_NAME"]);
@@ -272,21 +268,18 @@ class Template {
         if ($robots) {
             $robots = apply_filter($robots, "meta_robots");
             echo '<meta name="robots" content="' . $robots . '"/>';
-            echo "\r\n";
         }
         if (!Settings::get("hide_meta_generator")) {
             echo Template::executeDefaultOrOwnTemplate("powered-by");
             echo '<meta name="generator" content="UliCMS ' . cms_version() . '"/>';
-            echo "\r\n";
         }
         output_favicon_code();
-        echo "\r\n";
+
 
         if (!Settings::get("hide_shortlink") and ( is_200() or is_403())) {
             $shortlink = get_shortlink();
             if ($shortlink) {
                 echo '<link rel="shortlink" href="' . $shortlink . '"/>';
-                echo "\r\n";
             }
         }
 
@@ -294,7 +287,6 @@ class Template {
             $canonical = get_canonical();
             if ($canonical) {
                 echo '<link rel="canonical"  href="' . $canonical . '"/>';
-                echo "\r\n";
             }
         }
 
@@ -304,7 +296,7 @@ class Template {
         do_event("enqueue_frontend_stylesheets");
 
         combinedStylesheetHtml();
-        echo "\r\n";
+
 
 
         $min_style_file = getTemplateDirPath(get_theme()) . "style.min.css";
@@ -318,7 +310,6 @@ class Template {
             } else if (is_file($style_file_realpath)) {
                 echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"$style_file\"/>";
             }
-            echo "\r\n";
         }
         $keywords = get_meta_keywords();
         if (!$keywords) {
@@ -329,7 +320,6 @@ class Template {
                 $keywords = apply_filter($keywords, "meta_keywords");
 
                 echo '<meta name="keywords" content="' . _esc($keywords) . '"/>';
-                echo "\r\n";
             }
         }
         $description = get_meta_description();
@@ -341,7 +331,6 @@ class Template {
             $$description = _esc($description);
             if (!Settings::get("hide_meta_description")) {
                 echo '<meta name="description" content="' . $description . '"/>';
-                echo "\r\n";
             }
         }
 
@@ -351,20 +340,21 @@ class Template {
                 $google_font = Settings::get("google-font");
                 if ($google_font) {
                     echo '<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=' . urlencode($google_font) . '"/>';
-                    echo "\r\n";
+
                     $font = "'$google_font'";
                 }
             }
-            echo "
-<style type=\"text/css\">
-body{
+            $cssCode = "body{
 font-family:" . $font . ";
 font-size:" . Settings::get("font-size") . ";
 background-color:" . Settings::get("body-background-color") . ";
 color:" . Settings::get("body-text-color") . ";
-}
-</style>
-";
+}";
+
+            $minifier = new Minify\CSS();
+            $minifier->add($cssCode);
+
+            echo UliCMS\HTML\Style::FromString($minifier->minify());
 
             if (Settings::get("video_width_100_percent")) {
                 echo "<style type=\"text/css\">
