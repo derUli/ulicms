@@ -350,7 +350,7 @@ class Template {
             if ($font == "google") {
                 $google_font = Settings::get("google-font");
                 if ($google_font) {
-                    echo '<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=' . urlencode($google_font) . '"/>';
+                    echo '<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=' . urlencode($google_font) . '&display=swap"/>';
                     echo "\r\n";
                     $font = "'$google_font'";
                 }
