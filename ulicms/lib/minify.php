@@ -11,10 +11,10 @@ function resetScriptQueue() {
     Vars::set("script_queue", array());
 }
 
-function optimizeHtml($html) {
+function optimizeHtml($html, $level = HTMLMinify::OPTIMIZATION_SIMPLE) {
     if (Database::isConnected() and Settings::get("minify_html")) {
         $options = array(
-            'optimizationLevel' => HTMLMinify::OPTIMIZATION_SIMPLE
+            'optimizationLevel' => $level
         );
         $minifier = new HTMLMinify($html, $options);
         $html = $minifier->process();

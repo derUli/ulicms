@@ -78,23 +78,17 @@ function get_og_tags($slug = null) {
         $og_description = apply_filter($og_description, "og_description");
 
         $html .= '<meta property="og:title" content="' . htmlspecialchars($og_title) . '" />';
-        $html .= "\r\n";
 
         if (!is_null($og_description) and ! empty($og_description)) {
             $html .= '<meta property="og:description" content="' . htmlspecialchars($og_description) . '" />';
-            $html .= "\r\n";
         }
 
         $html .= '<meta property="og:type" content="' . htmlspecialchars($og_type) . '" />';
-        $html .= "\r\n";
 
         $html .= '<meta property="og:url" content="' . htmlspecialchars($og_url) . '" />';
-        $html .= "\r\n";
 
         $html .= '<meta property="og:image" content="' . htmlspecialchars($og_image) . '" />';
-        $html .= "\r\n";
         $html .= '<meta property="og:site_name" content="' . get_homepage_title() . '" />';
-        $html .= "\r\n";
     }
 
     $html = apply_filter($html, "og_html");
@@ -120,9 +114,7 @@ function get_og_data($slug = "") {
 function get_all_combined_html() {
     $html = "";
     $html .= getCombinedStylesheetHtml();
-    $html .= "\r\n";
     $html .= combinedScriptHtml();
-    $html .= "\r\n";
     return $html;
 }
 
@@ -847,7 +839,7 @@ function get_output_favicon_code() {
     $html = "";
     if (is_file($path)) {
         $url .= "?time=" . File::getLastChanged($path);
-        $html = '<link rel="icon" href="' . $url . '" type="image/x-icon" />' . "\r\n" . '<link rel="shortcut icon" href="' . $url . '" type="image/x-icon" />';
+        $html = '<link rel="icon" href="' . $url . '" type="image/x-icon" />' . '<link rel="shortcut icon" href="' . $url . '" type="image/x-icon" />';
     }
     return $html;
 }
