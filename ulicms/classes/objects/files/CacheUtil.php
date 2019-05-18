@@ -1,6 +1,7 @@
 <?php
 
 use Phpfastcache\Helper\Psr16Adapter;
+use Phpfastcache\Config\ConfigurationOption;
 
 class CacheUtil {
 
@@ -28,7 +29,8 @@ class CacheUtil {
             $driver = "sqlite";
         }
 
-        self::$adapter = new Psr16Adapter($driver, $cacheConfig);
+        self::$adapter = new Psr16Adapter($driver,
+                new ConfigurationOption($cacheConfig));
 
         return self::$adapter;
     }
