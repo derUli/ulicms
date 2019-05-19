@@ -1,3 +1,7 @@
+===== Neues in UliCMS 2019.3 =====
+
+Diese Version ist funktional identisch zu 2019.2.8
+
 ===== Neues in UliCMS 2019.2.8 =====
 
 Neue API-Methoden:
