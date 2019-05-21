@@ -1,8 +1,18 @@
 <?php
 
+use InstagramAPI\Exception\InvalidUserException;
+use InstagramAPI\Exception\IncorrectPasswordException;
+
 // Damn I hate this Instagram / Social Media Crap
 // But many corporations think they need this shit for marketing reasons
 class InstagramController extends MainClass {
+
+    public function __construct() {
+
+        // Yes I wan't to use this API in a web application
+        // and not in CLI environment
+        \InstagramAPI\Instagram::$allowDangerousWebUsageAtMyOwnRisk = true;
+    }
 
     const MODULE_NAME = "instagram";
 
@@ -29,10 +39,6 @@ class InstagramController extends MainClass {
         if (!count($images)) {
             return;
         }
-
-        // Yes I wan't to use this API in a web application
-        // and not in CLI environment
-        \InstagramAPI\Instagram::$allowDangerousWebUsageAtMyOwnRisk = true;
 
         // Connect to that Instagram thing
         $instaCrap = new \InstagramAPI\Instagram();
@@ -73,7 +79,25 @@ class InstagramController extends MainClass {
         // else show error message
         Settings::set("instagram/username", Request::getVar("username"));
         Settings::set("instagram/password", Request::getVar("password"));
-        Response::redirect(ModuleHelper::buildAdminURL(self::MODULE_NAME, "save=1"));
+
+        $error = null;
+
+        try {
+            // Connect to that Instagram thing
+            $instaCrap = new \InstagramAPI\Instagram();
+            $instaCrap->login(Request::getVar("username"), Request::getVar("password"));
+            $instaCrap->logout();
+        } catch (IncorrectPasswordException $e) {
+            $error = "invalid_password";
+        } catch (InvalidUserException $e) {
+            $error = "invalid_user";
+        }
+
+        if (!$error) {
+            Response::redirect(ModuleHelper::buildAdminURL(self::MODULE_NAME, "save=1"));
+        } else {
+            Response::redirect(ModuleHelper::buildAdminURL(self::MODULE_NAME, "error={$error}"));
+        }
     }
 
 }

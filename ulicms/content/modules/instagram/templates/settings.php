@@ -1,5 +1,15 @@
 <?php echo ModuleHelper::buildMethodCallForm(InstagramController::class, "save"); ?>
 
+<?php
+if (Request::getVar("save")) {
+    echo UliCMS\HTML\Alert::success(get_translation("changes_was_saved"));
+}
+
+if (Request::getVar("error")) {
+    echo UliCMS\HTML\Alert::danger(get_translation(
+                    Request::getVar("error")));
+}
+?>
 
 <div class="form-group">
     <label for="username"><?php translate("username"); ?></label>
