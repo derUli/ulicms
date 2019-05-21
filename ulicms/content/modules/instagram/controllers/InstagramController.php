@@ -48,13 +48,14 @@ class InstagramController extends MainClass {
     }
 
     public function getSettingsHeadline() {
-        return '<i class="fab fa-instagram"></i> | Instagram';
+        return '<i class="fab fa-instagram" '
+                . 'style="font-size: 30px"></i> | Instagram';
     }
 
     // get all not posted images
     public function getNotPosted($order = "id") {
         $result = [];
-        $sql = "SELECT id, `type` FROM " . tbname("content") . " where `type` = 'image' and posted2instagram = 0 ORDER BY $order";
+        $sql = "SELECT id, `type` FROM " . tbname("content") . " where `type` = 'image' and active = 1 and posted2instagram = 0 ORDER BY $order";
 
         $query = Database::query($sql);
         while ($row = Database::fetchObject($query)) {
@@ -65,6 +66,14 @@ class InstagramController extends MainClass {
 
     public function settings() {
         return Template::executeModuleTemplate(self::MODULE_NAME, "settings.php");
+    }
+
+    public function savePost() {
+        // TODO: Test if login data is valid
+        // else show error message
+        Settings::set("instagram/username", Request::getVar("username"));
+        Settings::set("instagram/password", Request::getVar("password"));
+        Response::redirect(ModuleHelper::buildAdminURL(self::MODULE_NAME, "save=1"));
     }
 
 }

@@ -9,6 +9,9 @@
     "controllers": {
         "InstagramController": "controllers/InstagramController"
     },
+    "controller_function_permissions": {
+        "InstagramController::savePost": "instagram_settings"
+    },
     "objects": {
         "InstagramAutoload":
                 "vendor/autoload.php",
