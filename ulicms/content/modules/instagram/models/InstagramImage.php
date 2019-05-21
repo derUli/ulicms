@@ -17,10 +17,9 @@ class InstagramImage extends Image_Page {
         }
         $pathInfo = pathinfo($this->getImagePath());
         $cacheFile = md5_file($this->getImagePath()) . "." . $pathInfo["extension"];
-        var_dump($cacheFile);
 
         $cacheFullPath = "$cacheDir/$cacheFile";
-        var_dump($cacheFullPath);
+		
         copy($resizer->getFile(), $cacheFullPath);
 
         $instaCrap->timeline->uploadPhoto(
