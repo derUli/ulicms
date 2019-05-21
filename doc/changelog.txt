@@ -4,7 +4,6 @@ Neue Features:
 * Neues Standardtheme "2020"
 * Design-Einstellungen: Vorschaubild vom ausgewählten Theme
 
-
 Neue API-Methoden:
 * UliCMS\HTML\icon($classes, $htmlAttributes = array())
 * ContentFactory::getAllByType($type, $order = "id")
