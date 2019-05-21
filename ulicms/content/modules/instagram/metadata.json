@@ -1,0 +1,15 @@
+
+{
+    "version": "1.0",
+    "embed": false,
+    "controllers": {
+        "InstagramController": "controllers/InstagramController"
+    },
+
+    "objects": {
+        "InstagramAutoload":
+                "vendor/autoload.php",
+        "InstagramImage": "models/InstagramImage"
+    },
+    "main_class": "InstagramController"
+}

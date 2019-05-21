@@ -85,6 +85,17 @@ class ContentFactory {
         return $result;
     }
 
+    public static function getAllByType($type, $order = "id") {
+        $type = Database::escapeValue($type);
+        $result = array();
+        $sql = "SELECT id, `type` FROM " . tbname("content") . " where `type` = '$type' ORDER BY $order";
+        $query = Database::query($sql);
+        while ($row = Database::fetchObject($query)) {
+            $result[] = self::getContentObjectByID($row);
+        }
+        return $result;
+    }
+
     public static function getAllWithComments($order = "title") {
         $result = array();
         $sql = "select type, a.id  from {prefix}content a inner join {prefix}comments c on c.content_id = a.id group by c.content_id order by a.{$order}";
