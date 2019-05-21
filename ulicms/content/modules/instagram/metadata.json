@@ -1,0 +1,21 @@
+
+{
+    "version": "1.0",
+    "embed": false,
+    "custom_acl": [
+        "instagram_settings"
+    ],
+    "admin_permission": "instagram_settings",
+    "controllers": {
+        "InstagramController": "controllers/InstagramController"
+    },
+    "controller_function_permissions": {
+        "InstagramController::savePost": "instagram_settings"
+    },
+    "objects": {
+        "InstagramAutoload":
+                "vendor/autoload.php",
+        "InstagramImage": "models/InstagramImage"
+    },
+    "main_class": "InstagramController"
+}
