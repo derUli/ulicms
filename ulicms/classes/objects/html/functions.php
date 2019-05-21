@@ -19,6 +19,13 @@ function imageTag($file, $htmlAttributes = array()) {
     return "<img {$attribHTML}>";
 }
 
+function icon($classes, $htmlAttributes = array()) {
+    $htmlAttributes["class"] = $classes;
+
+    $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes);
+    return "<i $attribHTML></i>";
+}
+
 function imageTagInline($file, $htmlAttributes = array()) {
 
     $url = File::toDataUri($file);
