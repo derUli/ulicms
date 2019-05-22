@@ -73,7 +73,7 @@ class AntispamHelperTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue(AntiSpamHelper::isCountryBlocked());
 
         // Japan
-        $_SERVER["REMOTE_ADDR"] = "183.79.23.196";
+        $_SERVER["REMOTE_ADDR"] = "202.172.26.11";
         $this->assertTrue(AntiSpamHelper::isCountryBlocked());
 
         // Austria
