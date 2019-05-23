@@ -10,5 +10,3 @@ if (Request::getVar("error")) {
     echo UliCMS\HTML\Alert::danger(get_translation(
                     Request::getVar("error")));
 }
-?>
-
