@@ -5,7 +5,7 @@ class TelegramController extends MainClass {
     const MODULE_NAME = "telegram";
 
     public function cron() {
-        BetterCron::minutes("telegram/post_blog_articles", 10, function() {
+        BetterCron::minutes("telegram/post_blog_articles", 5, function() {
             $connection = $this->getConnection();
             if (!$connection) {
                 return;
@@ -28,8 +28,7 @@ class TelegramController extends MainClass {
     protected function postBlogArticles($connection) {
         foreach (getAllLanguages() as $language) {
             $query = Database::selectAll("blog",
-                            ["id", "title", "seo_shortname", "meta_description"], "entry_enabled = 1 and posted2telegram = 0 and UNIX_TIMESTAMP() >= datum and language='" . Database::escapeValue($language) . "'", [], "datum asc
-		limit 1");
+                            ["id", "title", "seo_shortname", "meta_description"], "entry_enabled = 1 and posted2telegram = 0 and UNIX_TIMESTAMP() >= datum and language='" . Database::escapeValue($language) . "'", [], "datum asc limit 1");
             while ($article = Database::fetchObject($query)) {
                 $page = ModuleHelper::getFirstPageWithModule("blog", $language);
                 if (!$page) {
