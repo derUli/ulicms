@@ -1,6 +1,10 @@
 <?php
 
-class BetterCron extends Controller {
+class BetterCron extends MainClass {
+
+    public function afterHtml() {
+        do_event("register_cronjobs");
+    }
 
     public static function seconds($job, $seconds, $callback) {
         $currentTime = time();
@@ -16,6 +20,7 @@ class BetterCron extends Controller {
                         ControllerRegistry::get($sClass)->$sMethod();
                     }
                 } else {
+                    self::updateLastRun($job);
                     call_user_func($callback);
                 }
             } else if (is_callable($callback)) {

@@ -4,15 +4,26 @@ class TelegramController extends MainClass {
 
     const MODULE_NAME = "telegram";
 
-    public function cron() {
+    public function registerCronjobs() {
+
         BetterCron::minutes("telegram/post_blog_articles", 5, function() {
+            @set_time_limit(0);
+
             $connection = $this->getConnection();
             if (!$connection) {
                 return;
             }
-
             $this->postBlogArticles($connection);
         });
+    }
+
+    public function settings() {
+        return Template::executeModuleTemplate(self::MODULE_NAME, "settings.php");
+    }
+
+    public function getSettingsHeadline() {
+        return '<i class="fab fa-telegram" '
+                . 'style="font-size: 30px; color:#0088cc"></i> | Telegram';
     }
 
     protected function getConnection() {
@@ -27,21 +38,21 @@ class TelegramController extends MainClass {
 
     protected function postBlogArticles($connection) {
         foreach (getAllLanguages() as $language) {
+            $page = ModuleHelper::getFirstPageWithModule("blog", $language);
+            if (!$page) {
+                continue;
+            }
+
+            $pageModel = ContentFactory::getById($page->id);
             $query = Database::selectAll("blog",
-                            ["id", "title", "seo_shortname", "meta_description"], "entry_enabled = 1 and posted2telegram = 0 and UNIX_TIMESTAMP() >= datum and language='" . Database::escapeValue($language) . "'", [], "datum asc limit 1");
+                            ["id", "title", "seo_shortname", "meta_description"], "entry_enabled = 1 and posted2telegram = 0 and UNIX_TIMESTAMP() >= datum and language='" . Database::escapeValue($language) . "'", [], true, "datum asc limit 1");
             while ($article = Database::fetchObject($query)) {
-                $page = ModuleHelper::getFirstPageWithModule("blog", $language);
-                if (!$page) {
-                    continue;
-                }
-                $pageModel = ContentFactory::getById($page->id);
                 $viewModel = new stdClass();
                 $viewModel->title = $article->title;
                 $viewModel->description = $article->meta_description;
                 $viewModel->url = $pageModel->getUrl("single={$article->seo_shortname}");
 
                 ViewBag::set("message", $viewModel);
-
                 $messageText = Template::executeModuleTemplate(self::MODULE_NAME, "message.php");
                 $result = $connection->postMessage($messageText);
                 if ($result->ok) {

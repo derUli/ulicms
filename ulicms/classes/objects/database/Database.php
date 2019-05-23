@@ -227,10 +227,11 @@ class Database {
         $columns_sql = implode(", ", $columns);
 
         $sql = "select $columns_sql from $table";
+
         if (StringHelper::isNotNullOrEmpty($where)) {
             $sql .= " where $where ";
         }
-        if (!empty($order)) {
+        if (StringHelper::isNotNullOrEmpty($order)) {
             $sql .= " order by {$order}";
         }
         return self::pQuery($sql, $args);
