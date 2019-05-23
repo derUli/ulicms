@@ -9,12 +9,25 @@ class TelegramController extends MainClass {
         BetterCron::minutes("telegram/post_blog_articles", 5, function() {
             @set_time_limit(0);
 
-            $connection = $this->getConnection();
+            $connection = $this->connect();
+
             if (!$connection) {
                 return;
             }
             $this->postBlogArticles($connection);
         });
+    }
+
+    public function savePost() {
+        Settings::set("telegram/bot_token", Request::getVar("bot_token"));
+        Settings::set("telegram/channel_name", Request::getVar("channel_name"));
+
+        $connection = $this->connect();
+        if ($connection) {
+            Response::redirect(ModuleHelper::buildAdminURL(self::MODULE_NAME, "save=1"));
+        } else {
+            Response::redirect(ModuleHelper::buildAdminURL(self::MODULE_NAME, "error=telegram_connect_failed"));
+        }
     }
 
     public function settings() {
@@ -26,7 +39,7 @@ class TelegramController extends MainClass {
                 . 'style="font-size: 30px; color:#0088cc"></i> | Telegram';
     }
 
-    protected function getConnection() {
+    protected function connect() {
         $bot_token = Settings::get("telegram/bot_token");
         $channel_name = Settings::get("telegram/channel_name");
         if (!is_present($bot_token) or ! is_present($channel_name)) {
