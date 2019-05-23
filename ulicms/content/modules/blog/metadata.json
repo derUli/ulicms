@@ -1,0 +1,5 @@
+{
+	"version": "6.7.5",
+	"admin_permission": "blog_settings",
+	"embed": true
+}
