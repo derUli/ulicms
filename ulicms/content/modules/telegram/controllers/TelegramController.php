@@ -6,34 +6,51 @@ class TelegramController extends MainClass {
 
     public function registerCronjobs() {
 
-        BetterCron::minutes("telegram/post_blog_articles", 10, function() {
-            @set_time_limit(0);
+        if (isModuleInstalled("blog")
+                and Settings::get("telegram/publish_blog_posts")) {
+            BetterCron::minutes("telegram/post_blog_articles", 5, function() {
+                @set_time_limit(0);
 
-            $connection = $this->connect();
+                $connection = $this->connect();
 
-            if (!$connection) {
-                return;
-            }
-            if (isModuleInstalled("blog")) {
+                if (!$connection) {
+                    return;
+                }
+
                 $this->postBlogArticles($connection);
-            }
-        });
-        BetterCron::minutes("telegram/post_content", 10, function() {
-            @set_time_limit(0);
+            });
+        }
 
-            $connection = $this->connect();
+        if (Settings::get("telegram/publish_articles_and_images")) {
+            BetterCron::minutes("telegram/post_content", 5, function() {
+                @set_time_limit(0);
 
-            if (!$connection) {
-                return;
-            }
-            $this->postContent($connection);
-        });
+                $connection = $this->connect();
+
+                if (!$connection) {
+                    return;
+                }
+                $this->postContent($connection);
+            });
+        }
     }
 
     public function savePost() {
         Settings::set("telegram/bot_token", Request::getVar("bot_token"));
         Settings::set("telegram/channel_name", Request::getVar("channel_name"));
 
+        if (Request::getVar("publish_articles_and_images")) {
+            Settings::set("telegram/publish_articles_and_images", "1");
+        } else {
+            Settings::delete("telegram/publish_articles_and_images");
+        }
+        if (isModuleInstalled("blog")) {
+            if (Request::getVar("publish_blog_posts")) {
+                Settings::set("telegram/publish_blog_posts", "1");
+            } else {
+                Settings::delete("telegram/publish_blog_posts");
+            }
+        }
         $connection = $this->connect();
         if ($connection) {
             Response::redirect(ModuleHelper::buildAdminURL(self::MODULE_NAME, "save=1"));

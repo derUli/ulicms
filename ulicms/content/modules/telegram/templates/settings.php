@@ -10,6 +10,25 @@ if (Request::getVar("error")) {
                     Request::getVar("error")));
 }
 ?>
+
+<div class="checkbox">
+    <label><?php
+        echo UliCMS\HTML\Input::CheckBox("publish_articles_and_images", boolval(Settings::get("telegram/publish_articles_and_images")), "1",
+                array("class" => "js-switch"));
+        ?>
+        <?php translate("telegram_publish_articles_and_images") ?></label>
+</div>
+
+<?php if (isModuleInstalled("blog")) { ?>
+    <div class="checkbox voffset3">
+        <label><?php
+            echo UliCMS\HTML\Input::CheckBox("publish_blog_posts", boolval(Settings::get("telegram/publish_blog_posts")), "1",
+                    array("class" => "js-switch"));
+            ?>
+            <?php translate("telegram_publish_blog_posts") ?></label>
+    </div>
+<?php } ?>
+<hr/>
 <div class="form-group">
     <label for="text"><?php translate("telegram_channel_name"); ?></label>
     <input type="text" class="form-control"
@@ -21,7 +40,7 @@ if (Request::getVar("error")) {
     <input type="text" class="form-control"
            name="bot_token" id="username"
 
-           placeholder="<?php translate("telegram_bot_token_placeholder"); ?>" autocomplete="new-password" value="<?php esc(Settings::get("telegram/bot_token")); ?>">
+           placeholder="<?php translate("telegram_bot_token"); ?>" autocomplete="new-password" value="<?php esc(Settings::get("telegram/bot_token")); ?>">
 </div>
 
 <button type="submit" class="btn btn-primary">
