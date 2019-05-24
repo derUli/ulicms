@@ -40,6 +40,7 @@ class Page extends Content {
     public $hidden = 0;
     public $comments_enabled = null;
     private $permissions;
+    public $show_headline = true;
 
     public function __construct($id = null) {
         if ($this->custom_data === null) {
@@ -88,6 +89,7 @@ class Page extends Content {
         $this->og_description = $result->og_description;
         $this->cache_control = $result->cache_control;
         $this->hidden = $result->hidden;
+        $this->show_headline = boolval($result->show_headline);
         $this->comments_enabled = !is_null($result->comments_enabled) ? boolval($result->comments_enabled) : null;
 
         // fill page permissions object
@@ -139,7 +141,7 @@ class Page extends Content {
         $sql = "INSERT INTO `" . tbname("content") . "` (slug, title, alternate_title, target, category_id,
 				content, language, menu_image, active, created, lastmodified, author_id,
 				`group_id`, lastchangeby, views, menu, position, parent, access, meta_description, meta_keywords, deleted_at,
-				theme, custom_data, `type`, og_title, og_type, og_image, og_description, cache_control, hidden, comments_enabled) VALUES (";
+				theme, custom_data, `type`, og_title, og_type, og_image, og_description, cache_control, hidden, comments_enabled, show_headline) VALUES (";
 
         $sql .= "'" . Database::escapeValue($this->slug) . "',";
         $sql .= "'" . Database::escapeValue($this->title) . "',";
@@ -214,7 +216,8 @@ class Page extends Content {
         $sql .= "'" . Database::escapeValue($this->og_description) . "', ";
         $sql .= "'" . Database::escapeValue($this->cache_control) . "', ";
         $sql .= Database::escapeValue($this->hidden) . ", ";
-        $sql .= Database::escapeValue($this->comments_enabled);
+        $sql .= Database::escapeValue($this->comments_enabled) . ",";
+        $sql .= Database::escapeValue($this->show_headline);
         $sql .= ")";
 
         $result = Database::query($sql) or die(Database::error());
@@ -306,6 +309,7 @@ class Page extends Content {
         $sql .= "og_description='" . Database::escapeValue($this->og_description) . "', ";
         $sql .= "hidden='" . Database::escapeValue($this->hidden) . "', ";
         $sql .= "comments_enabled=" . Database::escapeValue($this->comments_enabled) . ", ";
+        $sql .= "show_headline=" . Database::escapeValue($this->show_headline) . ",";
         $sql .= "cache_control='" . Database::escapeValue($this->cache_control) . "' ";
 
         $sql .= " WHERE id = " . $this->id;
@@ -329,13 +333,13 @@ class Page extends Content {
         $this->save();
     }
 
-    public function containsModule($module = false) {
+    public function containsModule($module = null) {
         $content = $this->content;
         $content = str_replace("&quot;", "\"", $content);
         if ($module) {
-            return preg_match("/\[module=\"" . preg_quote($module) . "\"\]/", $content);
+            return boolval(preg_match("/\[module=\"" . preg_quote($module) . "\"\]/", $content));
         } else {
-            return preg_match("/\[module=\".+\"\]/", $content);
+            return boolval(preg_match("/\[module=\".+\"\]/", $content));
         }
     }
 

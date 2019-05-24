@@ -121,6 +121,74 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         unset($_GET["seite"]);
     }
 
+    public function testGetShowHeadlineReturnsTrue() {
+        $page = new Page();
+
+        $this->assertTrue($page->getShowHeadline());
+        $page->title = 'testDisableShortcodesNull';
+        $page->slug = 'testdisableshortcodes';
+        $page->language = 'de';
+        $page->content = "foo [csrf_token_html] bar";
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->author_id = 1;
+        $page->show_headline = true;
+
+        $page->save();
+
+        $savedPage = ContentFactory::getById($page->id);
+        $this->assertTrue($savedPage->getShowHeadline());
+    }
+
+    public function testGetShowHeadlineReturnsFalse() {
+        $page = new Page();
+
+        $page->title = 'testDisableShortcodesNull';
+        $page->slug = 'testdisableshortcodes';
+        $page->language = 'de';
+        $page->content = "foo [csrf_token_html] bar";
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->show_headline = false;
+
+        $page->save();
+
+        $savedPage = ContentFactory::getById($page->id);
+        $this->assertFalse($savedPage->getShowHeadline());
+    }
+
+    public function testGetHeadlineReturnsTitle() {
+        $page = new Page();
+        $page->title = 'Originaler Titel';
+        $page->slug = 'testdisableshortcodes';
+        $page->language = 'de';
+        $page->content = "foo [csrf_token_html] bar";
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->save();
+
+        $savedPage = ContentFactory::getById($page->id);
+        $this->assertEquals('Originaler Titel', $savedPage->getHeadline());
+    }
+
+    public function testGetHeadlineReturnsAlternateTitle() {
+        $page = new Page();
+
+        $page->title = 'Originaler Titel';
+        $page->alternate_title = "Alternativer Titel";
+        $page->slug = 'testdisableshortcodes';
+        $page->language = 'de';
+        $page->content = "foo [csrf_token_html] bar";
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->author_id = 1;
+
+        $page->save();
+
+        $savedPage = ContentFactory::getById($page->id);
+        $this->assertEquals('Alternativer Titel', $savedPage->getHeadline());
+    }
+
     public function testDisableShortcodesNull() {
         $page = new Page();
         $page->title = 'testDisableShortcodesNull';

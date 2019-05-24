@@ -7,7 +7,7 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
         $this->assertGreaterThanOrEqual(11, count($types));
 
         foreach ($types as $type => $modelClass) {
-            $content = ContentFactory::getAllByType($types);
+            $content = ContentFactory::getAllByType($type);
             foreach ($content as $page) {
                 $this->assertInstanceOf($modelClass, $page);
             }
