@@ -493,6 +493,57 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->cleanUp();
     }
 
+    public function testCreatePageWithMetaDescriptionNull() {
+        $page = new Page();
+        $page->title = 'Unit Test ' . time();
+        $page->slug = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "Some Text";
+        $page->comments_enabled = true;
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->meta_description = null;
+        $page->meta_keywords = null;
+        $page->save();
+
+        $this->assertNotNull($page->id);
+
+        $page = new Page($page->id);
+        $this->assertNull($page->meta_description);
+        $this->assertNull($page->meta_keywords);
+
+        $this->cleanUp();
+    }
+
+    public function testUpdatePageWithMetaDescriptionNull() {
+        $page = new Page();
+        $page->title = 'Unit Test ' . time();
+        $page->slug = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "Some Text";
+        $page->comments_enabled = true;
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->meta_description = 'foo';
+        $page->meta_keywords = 'foo';
+
+        $page->save();
+        $this->assertEquals("foo", $page->meta_description);
+        $this->assertEquals("foo", $page->meta_keywords);
+
+        $page->meta_description = null;
+        $page->meta_keywords = null;
+        $page->save();
+
+        $this->assertNotNull($page->id);
+
+        $page = new Page($page->id);
+        $this->assertNull($page->meta_description);
+        $this->assertNull($page->meta_keywords);
+
+        $this->cleanUp();
+    }
+
     public function testCustomDataJsonIsObjectByDefault() {
         $page = new Page();
         $page->title = 'Unit Test ' . time();

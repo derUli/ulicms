@@ -27,8 +27,8 @@ class Page extends Content {
     public $cache_control = "auto";
     public $parent = null;
     public $access = "all";
-    public $meta_description = "";
-    public $meta_keywords = "";
+    public $meta_description = null;
+    public $meta_keywords = null;
     private $deleted_at = null;
     public $theme = null;
     public $custom_data = null;
@@ -175,11 +175,19 @@ class Page extends Content {
         }
 
         $sql .= "'" . Database::escapeValue($this->access) . "',";
-        $sql .= "'" . Database::escapeValue($this->meta_description) . "',";
-        $sql .= "'" . Database::escapeValue($this->meta_keywords) . "',";
+        if (is_present($this->meta_description)) {
+            $sql .= "'" . Database::escapeValue($this->meta_description) . "',";
+        } else {
+            $sql .= "NULL,";
+        }
 
+        if (is_present($this->meta_keywords)) {
+            $sql .= "'" . Database::escapeValue($this->meta_keywords) . "',";
+        } else {
+            $sql .= "NULL,";
+        }
         if ($this->deleted_at === null) {
-            $sql .= " NULL ,";
+            $sql .= " NULL,";
         } else {
             $sql .= intval($this->deleted_at) . ",";
         }
@@ -258,8 +266,17 @@ class Page extends Content {
         }
 
         $sql .= "access='" . Database::escapeValue($this->access) . "',";
-        $sql .= "meta_description='" . Database::escapeValue($this->meta_description) . "',";
-        $sql .= "meta_keywords='" . Database::escapeValue($this->meta_keywords) . "',";
+        if (is_present($this->meta_description)) {
+            $sql .= "meta_description='" . Database::escapeValue($this->meta_description) . "',";
+        } else {
+            $sql .= "meta_description = null,";
+        }
+
+        if (is_present($this->meta_keywords)) {
+            $sql .= "meta_keywords='" . Database::escapeValue($this->meta_keywords) . "',";
+        } else {
+            $sql .= "meta_keywords = null,";
+        }
 
         if ($this->deleted_at === null) {
             $sql .= "deleted_at=NULL ,";
