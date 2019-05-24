@@ -64,6 +64,24 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(3, count($page->getEmbeddedModules()));
     }
 
+    public function testContainsModuleReturnsTrue() {
+        $page = new Page();
+        $page->content = $this->ipsum;
+
+        $this->assertTrue($page->containsModule());
+        $this->assertTrue($page->containsModule("fortune2"));
+        $this->assertTrue($page->containsModule("hello"));
+    }
+
+    public function testContainsModuleReturnsFalse() {
+        $page = new Page();
+        $page->content = "Hallo Welt";
+
+        $this->assertFalse($page->containsModule());
+        $this->assertFalse($page->containsModule("fortune2"));
+        $this->assertFalse($page->containsModule("hello"));
+    }
+
     public function testGetEmbeddedModulesModulePage() {
         $page = new Module_Page();
 
