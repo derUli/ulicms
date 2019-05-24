@@ -92,7 +92,9 @@ class TelegramController extends MainClass {
         $typesSubQuery = "('--',";
 
         foreach ($types as $key => $class) {
-            if (new $class() instanceof Image_Page) {
+            if (new $class() instanceof Image_Page or
+                    new $class() instanceof Article
+            ) {
                 $typesSubQuery .= "'{$key}',";
             }
         }
@@ -125,6 +127,9 @@ class TelegramController extends MainClass {
         if ($page instanceof Image_Page and is_present($page->image_url)) {
             $image_url = Path::resolve("ULICMS_ROOT" .
                             urldecode($page->image_url));
+        } else if ($page instanceof Article and is_present($page->article_image)) {
+            $image_url = Path::resolve("ULICMS_ROOT" .
+                            urldecode($page->article_image));
         }
         return $image_url;
     }
