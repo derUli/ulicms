@@ -6,6 +6,8 @@ use function UliCMS\HTML\imageTagInline;
 use function UliCMS\HTML\icon;
 use function UliCMS\HTML\link;
 use function UliCMS\HTML\button_link;
+use UliCMS\Constants\LinkTarget;
+use UliCMS\Constants\ButtonType;
 
 class HtmlFunctionsTest extends \PHPUnit\Framework\TestCase {
 

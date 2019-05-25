@@ -1,5 +1,7 @@
 <?php
 
+namespace UliCMS\Constants;
+
 // Bootstrap 3.x Button Styles
 class ButtonType {
 

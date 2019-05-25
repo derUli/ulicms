@@ -7,7 +7,8 @@ $classes = array(
     "ListItem",
     "Input",
     "Alert",
-    "functions"
+    "functions",
+    "Form"
 );
 foreach ($classes as $class) {
     require_once dirname(__file__) . "/$class.php";

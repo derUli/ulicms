@@ -1,5 +1,7 @@
 <?php
 
+namespace UliCMS\Constants;
+
 // Targets for HTML Links
 class LinkTarget {
 

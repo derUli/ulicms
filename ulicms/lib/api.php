@@ -2,6 +2,7 @@
 
 use UliCMS\Security\PermissionChecker;
 use Negotiation\LanguageNegotiator;
+use UliCMS\Constants\ModuleEventConstants;
 
 function is_blank($val = null) {
     return isset($val) && (is_string($val) &&
