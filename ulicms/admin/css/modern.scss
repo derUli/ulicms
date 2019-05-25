@@ -489,9 +489,9 @@ div#google-fonts {
 
     .checkbox, .radio{
         margin-top: 0;
-        margin-bottom: 0;
     }
 }
+
 .accordion-header {
     width: auto !important;
     word-wrap: break-word;
@@ -647,6 +647,11 @@ input[type="reset"] {
 }
 input[type="image"] {
     cursor: pointer;
+}
+
+input[type="radio"],
+input[type="checkbox"]{
+    margin-right: 5px;
 }
 
 .nomargin{
