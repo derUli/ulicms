@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Constants\CommentStatus;
+
 class CommentStatusTest extends \PHPUnit\Framework\TestCase {
 
     public function testDefault() {

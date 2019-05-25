@@ -1,5 +1,7 @@
 <?php
 
+namespace UliCMS\Constants;
+
 class CommentStatus {
 
     const PENDING = "pending";

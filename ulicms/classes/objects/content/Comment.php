@@ -4,7 +4,7 @@ namespace UliCMS\Data\Content;
 
 use Database;
 use ContentFactory;
-use CommentStatus;
+use UliCMS\Constants\CommentStatus;
 use InvalidArgumentException;
 use Model;
 use StringHelper;
