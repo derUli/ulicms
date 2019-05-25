@@ -38,7 +38,8 @@ if (is_file($composerAutoloadFile)) {
 }
 
 require_once dirname(__file__) . "/lib/minify.php";
-require_once dirname(__file__) . "/api.php";
+require_once dirname(__file__) . "/lib/api.php";
+require_once dirname(__file__) . "/lib/csv_writer.php";
 require_once dirname(__file__) . "/classes/objects/privacy/load.php";
 require_once dirname(__file__) . "/lib/users_api.php";
 require_once dirname(__file__) . "/lib/string_functions.php";

@@ -1003,24 +1003,6 @@ function getModuleUninstallScriptPath2($module, $abspath = true) {
 }
 
 /**
- * outputCSV creates a line of CSV and outputs it to browser
- */
-function outputCSV($array) {
-    $fp = fopen('php://output', 'w'); // this file actual writes to php output
-    fputcsv($fp, $array);
-    fclose($fp);
-}
-
-/**
- * getCSV creates a line of CSV and returns it.
- */
-function getCSV($array) {
-    ob_start(); // buffer the output ...
-    outputCSV($array);
-    return ob_get_clean(); // ... then return it as a string!
-}
-
-/**
  * Output buffer flusher
  * Forces a flush of the output buffer to screen useful for displaying long loading lists eg: bulk emailers on screen
  * Stops the end user seeing loads of just plain old white and thinking the browser has crashed on long loading pages.

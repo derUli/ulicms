@@ -1,8 +1,5 @@
 <?php
 
-require_once "init.php";
-fcflush();
-
 use UliCMS\Data\Content\Comment;
 
 if (!defined("LOADED_LANGUAGE_FILE")) {

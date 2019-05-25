@@ -47,6 +47,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" and ! defined("NO_ANTI_CSRF")) {
     }
 }
 
+// call domain.de/?run_cron=1 with curl or a similiar tool
+// to automatically execute cronjobs
+if (Request::getVar("run_cron")) {
+    do_event("before_cron");
+    require 'lib/cron.php';
+    do_event("after_cron");
+    TextResult("finished cron at " . strftime("%x %X"), HttpStatusCode::OK);
+}
+
 $status = check_status();
 
 if (Settings::get("redirection") != "" && Settings::get("redirection") != false) {
@@ -186,7 +195,7 @@ if ($cacheAdapter and $cacheAdapter->get($uid)) {
     }
 
     do_event("before_cron");
-    @require 'cron.php';
+    @require 'lib/cron.php';
     do_event("after_cron");
     die();
 }
@@ -262,9 +271,8 @@ if ($cacheAdapter or Settings::get("minify_html")) {
 
 // Wenn no_auto_cron gesetzt ist, dann muss cron.php manuell ausgeführt bzw. aufgerufen werden
 if (!Settings::get("no_auto_cron")) {
-
     do_event("before_cron");
-    require 'cron.php';
+    require 'lib/cron.php';
     do_event("after_cron");
 }
 

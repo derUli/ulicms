@@ -130,7 +130,7 @@ class BannersTest extends \PHPUnit\Framework\TestCase {
 
         $_SESSION["language"] = "de";
 
-        for ($i = 1; $i < 20; $i++) {
+        for ($i = 1; $i < 50; $i++) {
             $banner = new Banner();
             $banner->setType("html");
             $banner->setHtml(self::HTML_TEXT1);

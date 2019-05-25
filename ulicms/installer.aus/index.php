@@ -6,7 +6,7 @@ error_reporting(E_ALL ^ E_NOTICE);
 
 date_default_timezone_set("Europe/Berlin");
 
-include_once "../api.php";
+include_once "../lib/api.php";
 include_once "../classes/objects/web/Request.php";
 include_once "controllers/InstallerController.php";
 
