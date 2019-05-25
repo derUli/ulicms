@@ -1,4 +1,7 @@
 <?php
+
+use UliCMS\Constants\EmailModes;
+
 $ga = new PHPGangsta_GoogleAuthenticator();
 $ga_secret = Settings::get("ga_secret");
 $qrCodeUrl = $ga->getQRCodeGoogleUrl(get_translation("ULICMS_LOGIN_AT") . " " . get_domain(), $ga_secret);
@@ -64,11 +67,11 @@ if (!$permissionChecker->hasPermission("other")) {
     </p>
     <div id="accordion-container">
         <h2 class="accordion-header">
-            <?php translate("DOMAIN2LANGUAGE_MAPPING"); ?>
+    <?php translate("DOMAIN2LANGUAGE_MAPPING"); ?>
         </h2>
 
         <div class="accordion-content">
-            <?php translate("DOMAIN2LANGUAGE_MAPPING_INFO"); ?>
+    <?php translate("DOMAIN2LANGUAGE_MAPPING_INFO"); ?>
             <p>
                 <textarea name="domain_to_language" rows="10" cols="40"><?php
                     echo _esc(Settings::get("domain_to_language"));
@@ -119,7 +122,7 @@ if (!$permissionChecker->hasPermission("other")) {
                 <a href="https://support.google.com/accounts/answer/1066447"
                    target="_blank" class="btn btn-info voffset3"><i
                         class="fa fa-question-circle" aria-hidden="true"></i>
-                    <?php translate("help"); ?></a>
+            <?php translate("help"); ?></a>
             </p>
             <?php
             if ($permissionChecker->hasPermission("default_access_restrictions_edit")) {
@@ -135,7 +138,7 @@ if (!$permissionChecker->hasPermission("other")) {
             ?>
         </div>
         <h2 class="accordion-header">
-            <?php translate("EMAIL_DELIVERY"); ?>
+    <?php translate("EMAIL_DELIVERY"); ?>
         </h2>
         <div class="accordion-content">
             <div class="label">Modus:</div>
@@ -157,10 +160,10 @@ if (!$permissionChecker->hasPermission("other")) {
             </div>
             <div class="smtp_settings" id="smtp_settings" style="display: none">
                 <h3>
-                    <?php translate("smtp_settings"); ?>
+    <?php translate("smtp_settings"); ?>
                 </h3>
                 <div class="label">
-                    <?php translate("hostname"); ?>
+    <?php translate("hostname"); ?>
                 </div>
                 <div class="inputWrapper">
                     <input type="text" name="smtp_host"
@@ -188,7 +191,7 @@ if (!$permissionChecker->hasPermission("other")) {
                         <option value="ssl"
                                 <?php if ($smtp_encryption == "ssl") echo "selected" ?>>SSL</option>
                         <option value="tls"
-                                <?php if ($smtp_encryption == "tls") echo "selected" ?>>TLS</option>
+    <?php if ($smtp_encryption == "tls") echo "selected" ?>>TLS</option>
                     </select>
                 </div>
                 <div class="label">
@@ -227,7 +230,7 @@ if (!$permissionChecker->hasPermission("other")) {
                 </div>
                 <div id="smtp_auth_div" style="display: none">
                     <div class="label">
-                        <?php translate("user"); ?>
+    <?php translate("user"); ?>
                     </div>
                     <div class="inputWrapper">
                         <input type="text" name="smtp_user"
@@ -236,7 +239,7 @@ if (!$permissionChecker->hasPermission("other")) {
                                ?>">
                     </div>
                     <div class="label">
-                        <?php translate("password"); ?>
+    <?php translate("password"); ?>
                     </div>
                     <div class="inputWrapper">
                         <input type="password" name="smtp_password"
@@ -284,7 +287,7 @@ if (!$permissionChecker->hasPermission("other")) {
 
         </script>
         <h2 class="accordion-header">
-            <?php translate("expert_settings"); ?>
+    <?php translate("expert_settings"); ?>
         </h2>
         <div class="accordion-content">
             <p>
@@ -295,7 +298,7 @@ if (!$permissionChecker->hasPermission("other")) {
     </div>
     <button type="submit" name="submit" class="btn btn-primary voffset3">
         <i class="fa fa-save"></i>
-        <?php translate("save_changes"); ?>
+    <?php translate("save_changes"); ?>
     </button>
     <?php echo ModuleHelper::endForm(); ?>
     <script type="text/javascript">

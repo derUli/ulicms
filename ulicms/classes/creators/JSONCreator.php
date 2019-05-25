@@ -1,5 +1,7 @@
 <?php
 
+namespace UliCMS\Creators;
+
 class JSONCreator {
 
     public $target_file = null;

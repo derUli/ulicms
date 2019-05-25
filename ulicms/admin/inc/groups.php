@@ -1,4 +1,7 @@
 <?php
+
+use UliCMS\Constants\AuditLog;
+
 $permissionChecker = new ACL();
 if (!$permissionChecker->hasPermission("groups")) {
     noPerms();

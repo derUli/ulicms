@@ -1,6 +1,8 @@
 <?php
 
-class DataTablesHelper extends Helper {
+namespace UliCMS\Helpers;
+
+class DataTablesHelper extends \Helper {
 
     public static function getLanguageFileURL($lang) {
         $baseUrl = "scripts/datatables/lang";

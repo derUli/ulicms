@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Constants\AuditLog;
+
 class BannerController extends Controller {
 
     private $logger;

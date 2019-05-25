@@ -1,5 +1,7 @@
 <?php
 
+namespace UliCMS\Constants;
+
 $allowedTags = array(
     "<menu>",
     "<command>",
@@ -107,4 +109,5 @@ $allowedTags = array(
 );
 natcasesort($allowedTags);
 $allowedTags = implode("", $allowedTags);
-define("HTML5_ALLOWED_TAGS", $allowedTags);
+
+define(__NAMESPACE__ . '\HTML5_ALLOWED_TAGS', $allowedTags);

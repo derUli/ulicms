@@ -1,5 +1,7 @@
 <?php
 
+namespace UliCMS\Creators;
+
 $mpdf = ULICMS_ROOT . "/lib/MPDF60/mpdf.php";
 if (is_file($mpdf)) {
     require_once ($mpdf);

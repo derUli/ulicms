@@ -3,6 +3,8 @@
 use UliCMS\Exceptions\AccessDeniedException;
 use UliCMS\Exceptions\SqlException;
 use UliCMS\Exceptions\FileNotFoundException;
+use UliCMS\Constants\AuditLog;
+use UliCMS\Registries\HelperRegistry;
 
 // root directory of UliCMS
 if (!defined("ULICMS_ROOT")) {

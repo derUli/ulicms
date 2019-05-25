@@ -1,6 +1,8 @@
 <?php
 
-class UrlHelper extends Helper {
+namespace UliCMS\Helpers;
+
+class UrlHelper extends \Helper {
 
     public static function getUrlWithoutGetParameters($url) {
         $parsedUri = parse_url($url);
