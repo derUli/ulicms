@@ -408,46 +408,4 @@ class Page extends Content {
         return checkAccess($this->access);
     }
 
-    public function testHasChildrenReturnsTrue() {
-        $query = Database::pQuery("select parent from {prefix}content where "
-                        . "parent is not null", array(), true);
-        $result = Database::fetchObject($query);
-
-        $page = ContentFactory::getByID($result->parent);
-        $this->assertTrue($page->hasChildren());
-    }
-
-    public function testHasChildrenReturnsFalse() {
-        $query = Database::pQuery("select parent from {prefix}content where "
-                        . "parent is null", array(), true);
-        $result = Database::fetchObject($query);
-
-        $page = ContentFactory::getByID($result->parent);
-        $this->assertFalse($page->hasChildren());
-    }
-
-    public function testGetChildrenReturnsTrue() {
-        $query = Database::pQuery("select parent from {prefix}content where "
-                        . "parent is not null", array(), true);
-        $result = Database::fetchObject($query);
-
-        $page = ContentFactory::getByID($result->parent);
-        $children = $page->getChildren();
-        $this->assertGreaterThanOrEquals(1, count($children));
-
-        foreach ($children as $child) {
-            $this->assertEquals($page->id, $child->parent);
-        }
-    }
-
-    public function testGetChildrenReturnsFalse() {
-        $query = Database::pQuery("select parent from {prefix}content where "
-                        . "parent is null", array(), true);
-        $result = Database::fetchObject($query);
-
-        $page = ContentFactory::getByID($result->parent);
-        $children = $page->getChildren();
-        $this->assertCount(0, $children);
-    }
-
 }

@@ -646,4 +646,60 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('{}', $raw->custom_data);
     }
 
+    public function testHasChildrenReturnsTrue() {
+        $query = Database::pQuery("select parent from {prefix}content where "
+                        . "parent is not null", array(), true);
+        $result = Database::fetchObject($query);
+
+        $page = ContentFactory::getByID($result->parent);
+        $this->assertTrue($page->hasChildren());
+    }
+
+    public function testHasChildrenReturnsFalse() {
+        $page = new Page();
+
+        $page->title = 'Unit Test ' . time();
+        $page->slug = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "foo [csrf_token_html] bar";
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->author_id = 1;
+        $page->show_headline = true;
+        $page->save();
+
+        $this->assertFalse($page->hasChildren());
+    }
+
+    public function testGetChildrenReturnsTrue() {
+        $query = Database::pQuery("select parent from {prefix}content where "
+                        . "parent is not null", array(), true);
+        $result = Database::fetchObject($query);
+
+        $page = ContentFactory::getByID($result->parent);
+        $children = $page->getChildren();
+        $this->assertGreaterThanOrEqual(1, count($children));
+
+        foreach ($children as $child) {
+            $this->assertEquals($page->id, $child->parent);
+        }
+    }
+
+    public function testGetChildrenReturnsFalse() {
+        $page = new Page();
+
+        $page->title = 'Unit Test ' . time();
+        $page->slug = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "foo [csrf_token_html] bar";
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->author_id = 1;
+        $page->show_headline = true;
+        $page->save();
+
+        $children = $page->getChildren();
+        $this->assertCount(0, $children);
+    }
+
 }

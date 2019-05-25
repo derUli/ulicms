@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Exceptions\FileNotFoundException;
+
 abstract class Content extends Model {
 
     abstract protected function loadBySlugAndLanguage($name, $language);
@@ -24,11 +26,15 @@ abstract class Content extends Model {
         if (!$this->getID()) {
             return array();
         }
-        return ContentFactory:: getAllByParent($this->getID(), $order);
+        try {
+            return ContentFactory:: getAllByParent($this->getID(), $order);
+        } catch (FileNotFoundException $e) {
+            return array();
+        }
     }
 
     public function hasChildren() {
-        return count($this->getChildren());
+        return count($this->getChildren()) > 0;
     }
 
 }

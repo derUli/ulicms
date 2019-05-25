@@ -1,7 +1,7 @@
 <?php
 
 // TODO: This is old code before the switch to MVC architecture
-// This should be rewritten with MVC pattern
+// This should be rewritten with MVC pattern and using partial views
 use UliCMS\Security\PermissionChecker;
 use UliCMS\Security\ContentPermissionChecker;
 
@@ -21,7 +21,7 @@ if ($permissionChecker->hasPermission("pages")) {
     }
     if (!empty($_GET["filter_language"]) and faster_in_array($_GET["filter_language"], getAllLanguages(true))) {
         $_SESSION["filter_language"] = $_GET["filter_language"];
-        $_SESSION["filter_parent"] = null;
+        $_SESSION["filter_parent"] = "-";
     }
 
     if (!isset($_SESSION["filter_category"])) {
@@ -67,7 +67,7 @@ if ($permissionChecker->hasPermission("pages")) {
     }
 
     if (!isset($_SESSION["filter_parent"])) {
-        $_SESSION["filter_parent"] = null;
+        $_SESSION["filter_parent"] = "-";
     }
 
     if (!isset($_SESSION["filter_menu"])) {
@@ -444,6 +444,21 @@ if ($permissionChecker->hasPermission("pages")) {
         $query = db_query("SELECT * FROM " . tbname("content") . " " . $filter_sql . " ORDER BY $order,position, slug ASC") or die(db_error());
         ?>
         <div class="x-results-found"><?php BackendHelper::formatDatasetCount(Database::getNumRows($query)); ?></div>
+        <?php
+        if ($_SESSION["filter_parent"] and $_SESSION["filter_parent"] != '-') {
+            $parentPage = ContentFactory::getByID($_SESSION["filter_parent"]);
+            $parentId = $parentPage->parent ? $parentPage : "-";
+            ?>
+            <div class="form-group">
+                <a href="<?php
+                echo ModuleHelper::buildActionUrl("pages",
+                        "filter_parent={$parentId}");
+                ?>" class="btn btn-default">
+                    <?php echo UliCMS\HTML\icon("fa fa-arrow-up"); ?> <?php translate("go_up"); ?></a>
+                <?php
+            }
+            ?>
+        </div>
         <div class="scroll">
             <table class="tablesorter dataset-list">
                 <thead>
@@ -472,15 +487,22 @@ if ($permissionChecker->hasPermission("pages")) {
                     <?php
                     if (db_num_rows($query) > 0) {
                         while ($row = db_fetch_object($query)) {
+                            $model = ContentFactory::getByID($row->id);
                             echo '<tr id="dataset-' . $row->id . '">';
-                            echo "<td>" . htmlspecialchars($row->title);
+                            echo '<td>';
+                            if ($model->hasChildren()) {
+                                echo "<a href=\""
+                                . ModuleHelper::buildActionURL("pages", "filter_parent={$model->getId()}") . "\">" . UliCMS\HTML\icon("fas fa-arrow-down") . " " . _esc($row->title) . "</a></td>";
+                            } else {
+                                esc($row->title);
+                            }
                             if (!empty($row->redirection) and ! is_null($row->redirection) and $row->type == "link") {
                                 esc(" --> ");
                                 esc($row->redirection);
                             }
 
                             echo "</td>";
-                            echo "<td class=\"hide-on-mobile\">" . htmlspecialchars(get_translation($row->menu)) . "</td>";
+                            echo "<td class = \"hide-on-mobile\">" . htmlspecialchars(get_translation($row->menu)) . "</td>";
 
                             echo "<td class=\"hide-on-mobile\">" . $row->position . "</td>";
                             echo "<td class=\"hide-on-mobile\">" . htmlspecialchars(getPageTitleByID($row->parent)) . "</td>";

@@ -1,13 +1,18 @@
 ===== Neues in UliCMS 2019.3.1 =====
 
 Neue Features:
+* Seitenverwaltung ist nun hierarchisch
 * Neues Standardtheme "2020"
 * Design-Einstellungen: Vorschaubild vom ausgewählten Theme
 
 Neue API-Methoden:
 * UliCMS\HTML\icon($classes, $htmlAttributes = array())
 * ContentFactory::getAllByType($type, $order = "id")
-* ContentFactory::getAllWithParent($parent_id, $order = "id")
+* ContentFactory::getAllByParent($parent_id, $order = "id")
+*`Content->getChildren($order)
+* Content->hasChildren()
+* link($url, $text, $allowHtml = false, $target = null, $htmlAttributes = array())
+* button_link($url, $text, $type = null, $allowHtml = false, $target = null, $htmlAttributes = array())
 
 ===== Neues in UliCMS 2019.3 =====
 
