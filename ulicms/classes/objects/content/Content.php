@@ -20,4 +20,15 @@ abstract class Content extends Model {
         return true;
     }
 
+    public function getChildren($order = "id") {
+        if (!$this->getID()) {
+            return array();
+        }
+        return ContentFactory:: getAllByParent($this->getID(), $order);
+    }
+
+    public function hasChildren() {
+        return count($this->getChildren());
+    }
+
 }

@@ -74,6 +74,28 @@ class ContentFactory {
         return $result;
     }
 
+    public static function getAllByParent($parent_id, $order = "id") {
+        $result = array();
+
+        $sql = "SELECT id, type FROM {prefix}content ";
+
+        $args = array(
+            !is_null($parent_id) ? intval($parent_id) : null
+        );
+
+        $sql .= !is_null($parent_id) ? "where `parent` = ?" :
+                "where `parent` IS ?";
+
+        $sql .= " ORDER BY $order";
+
+        $query = Database::pQuery($sql, $args, true);
+        while ($row = Database::fetchObject($query)) {
+            $result[] = self::getContentObjectByID($row);
+        }
+
+        return $result;
+    }
+
     public static function getAllByMenu($menu, $order = "id") {
         $menu = Database::escapeValue($menu);
         $result = array();

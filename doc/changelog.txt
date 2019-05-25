@@ -7,6 +7,7 @@ Neue Features:
 Neue API-Methoden:
 * UliCMS\HTML\icon($classes, $htmlAttributes = array())
 * ContentFactory::getAllByType($type, $order = "id")
+* ContentFactory::getAllWithParent($parent_id, $order = "id")
 
 ===== Neues in UliCMS 2019.3 =====
 
