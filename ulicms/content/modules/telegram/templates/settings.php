@@ -1,6 +1,7 @@
 <?php
 echo ModuleHelper::buildMethodCallForm(TelegramController::class, "save");
-
+?>
+<?php
 if (Request::getVar("save")) {
     echo UliCMS\HTML\Alert::success(get_translation("changes_was_saved"));
 }
@@ -42,10 +43,18 @@ if (Request::getVar("error")) {
 
            placeholder="<?php translate("telegram_bot_token"); ?>" autocomplete="new-password" value="<?php esc(Settings::get("telegram/bot_token")); ?>">
 </div>
-
-<button type="submit" class="btn btn-primary">
-    <i class="fa fa-save"></i>
-    <?php translate("save"); ?>
-</button>
+<div class="row">
+    <div class="col-xs-6">
+        <button type="submit" class="btn btn-primary">
+            <i class="fa fa-save"></i>
+            <?php translate("save"); ?>
+        </button>
+    </div>
+    <div class="col-xs-6 text-right">
+        <a href="<?php echo ModuleHelper::buildActionURL("telegram_help"); ?>"
+           class="btn btn-info"><i class="fa fa-question-circle"></i>
+            <?php translate("help"); ?></a>
+    </div>
+</div>
 <?php
 echo ModuleHelper::endForm();

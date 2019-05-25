@@ -9,6 +9,12 @@
     "controllers": {
         "TelegramController": "controllers/TelegramController"
     },
+    "actions": {
+        "telegram_help": "templates/help.php"
+    },
+    "action_permissions": {
+        "telegram_help": "telegram_settings"
+    },
     "controller_function_permissions": {
         "TelegramController::savePost": "telegram_settings"
     },
