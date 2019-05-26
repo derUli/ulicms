@@ -1,4 +1,7 @@
 <?php
+
+use UliCMS\Constants\RequestMethod;
+
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("banners") and $permissionChecker->hasPermission("banners_edit")) {
     $banner = intval($_GET["banner"]);
@@ -22,18 +25,18 @@ if ($permissionChecker->hasPermission("banners") and $permissionChecker->hasPerm
             <p>
                 <a
                     href="<?php
-                    Template::escape($row->getLinkUrl());
-                    ?>"
+            Template::escape($row->getLinkUrl());
+            ?>"
                     target="_blank"><img
                         src="<?php
-                        Template::escape($row->getImageUrl());
-                        ?>"
+            Template::escape($row->getImageUrl());
+            ?>"
                         title="<?php
-                        Template::escape($row->getName());
-                        ?>"
+            Template::escape($row->getName());
+            ?>"
                         alt="<?php
-                        Template::escape($row->getName());
-                        ?>"
+            Template::escape($row->getName());
+            ?>"
                         border=0> </a>
             </p>
 
@@ -62,20 +65,20 @@ if ($permissionChecker->hasPermission("banners") and $permissionChecker->hasPerm
         ?>">
 
             <strong><?php
-                translate("bannertext");
-                ?></strong><br /> <input type="text" name="banner_name"
+        translate("bannertext");
+        ?></strong><br /> <input type="text" name="banner_name"
                                    value="<?php
-                                   Template::escape($row->getName());
-                                   ?>"> <br /> <strong><?php
-                                       translate("IMAGE_URL");
+                                       Template::escape($row->getName());
+                                       ?>"> <br /> <strong><?php
+        translate("IMAGE_URL");
                                        ?></strong><br /> <input type="text" name="image_url"
                                    value="<?php
-                                   Template::escape($row->getImageUrl());
-                                   ?>"> <br /> <strong><?php translate("link_url"); ?></strong><br />
+                           Template::escape($row->getImageUrl());
+                           ?>"> <br /> <strong><?php translate("link_url"); ?></strong><br />
             <input type="text" name="link_url"
                    value="<?php
-                   Template::escape($row->getLinkUrl());
-                   ?>">
+                           Template::escape($row->getLinkUrl());
+                           ?>">
         </fieldset>
         <br />
         <input type="radio"
@@ -93,8 +96,8 @@ if ($permissionChecker->hasPermission("banners") and $permissionChecker->hasPerm
         }
         ?>">
             <textarea name="html" cols=40 rows=10><?php
-                esc($row->getHtml());
-                ?></textarea>
+        esc($row->getHtml());
+        ?></textarea>
         </fieldset>
 
         <br />

@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Constants\RequestMethod;
+
 class RequestMethodTest extends \PHPUnit\Framework\TestCase {
 
     public function testPost() {

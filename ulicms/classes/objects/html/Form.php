@@ -5,7 +5,7 @@ namespace UliCMS\HTML;
 use StringHelper;
 use ModuleHelper;
 use Template;
-use RequestMethod;
+use UliCMS\Constants\RequestMethod;
 
 class Form {
 

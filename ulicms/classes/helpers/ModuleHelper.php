@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\HTML\Form;
+use UliCMS\Constants\RequestMethod;
 
 class ModuleHelper extends Helper {
 
