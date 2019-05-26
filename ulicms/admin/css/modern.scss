@@ -710,6 +710,17 @@ input[type="checkbox"]{
 .hide {
     display: block;
 }
+
+
+@media only screen and (min-width: 375px) {
+
+    .btn-group .btn{
+        margin-right: 10px;
+    }
+    .btn-group .btn:last-child{
+        margin-right: 0;
+    }
+}
 .btn-primary {
     background-color: $background_color_4;
 }
