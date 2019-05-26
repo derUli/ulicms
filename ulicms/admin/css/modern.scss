@@ -531,6 +531,11 @@ div#login-welcome-text {
 }
 .main-content {
     margin-top: 15px;
+
+    li{
+        margin-bottom:10px;
+    }
+
     a.btn-default {
         color: $color_10;
     }
@@ -945,7 +950,7 @@ pre {
 #designForm{
     .preview{
         img{
-            max-height: 50vh; 
+            max-height: 50vh;
             max-width: 100%;
         }
     }
