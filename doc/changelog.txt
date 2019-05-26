@@ -83,7 +83,7 @@ Geänderte API-Methoden:
 Fehlerkorrekturen:
 * Shake Animation bei fehlschlagen von Login wird nun wieder angezeigt
 * Page->update() ändert den Typ von
-  "Custom Data" nicht mehr von Objekt nach Array
+  "Benutzerdefinierte Werte (JSON)" nicht mehr von Objekt nach Array
 * Wenn das Laden des Newsfeeds auf der Startseite des Backends fehlschlägt, erscheint nun eine Fehlermeldung
 
 Sicherheit:
