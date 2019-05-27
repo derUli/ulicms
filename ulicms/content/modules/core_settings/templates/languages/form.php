@@ -55,7 +55,7 @@ if ($permissionChecker->hasPermission("languages")) {
                             <?php esc($language->getLanguageCode()); ?>
                         </td>
                         <td>
-                            <?php echo htmlspecialchars($language->getName()); ?>
+                            <?php esc($language->getName()); ?>
                         </td>
                         <td class="text-bold">
                             <?php

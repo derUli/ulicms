@@ -269,7 +269,7 @@ if ($permissionChecker->hasPermission("pages")) {
                         <?php
                         while ($parent = db_fetch_object($parents)) {
                             $parent_id = $parent->id;
-                            $title = htmlspecialchars($parent->title);
+                            $title = _esc($parent->title);
                             if ($parent_id == $_SESSION["filter_parent"]) {
                                 echo '<option value="' . $parent_id . '" selected>' . $title . "</option>";
                             } else {
@@ -502,10 +502,10 @@ if ($permissionChecker->hasPermission("pages")) {
                             }
 
                             echo "</td>";
-                            echo "<td class = \"hide-on-mobile\">" . htmlspecialchars(get_translation($row->menu)) . "</td>";
+                            echo "<td class = \"hide-on-mobile\">" . _esc(get_translation($row->menu)) . "</td>";
 
                             echo "<td class=\"hide-on-mobile\">" . $row->position . "</td>";
-                            echo "<td class=\"hide-on-mobile\">" . htmlspecialchars(getPageTitleByID($row->parent)) . "</td>";
+                            echo "<td class=\"hide-on-mobile\">" . _esc(getPageTitleByID($row->parent)) . "</td>";
 
                             if ($row->active) {
                                 echo "<td class=\"hide-on-mobile\">" . get_translation("yes") . "</td>";

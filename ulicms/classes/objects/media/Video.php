@@ -1,5 +1,15 @@
 <?php
 
+namespace UliCMS\Models\Media;
+
+use Database;
+use Model;
+use Path;
+use StringHelper;
+use Category;
+use function _esc;
+use function get_translation;
+
 class Video extends Model {
 
     private $name = null;
@@ -185,13 +195,13 @@ class Video extends Model {
         }
         $html = '<video width="' . $this->width . '" height="' . $this->height . '" controls>';
         if (!empty($this->mp4_file)) {
-            $html .= '<source src="' . $video_dir . htmlspecialchars($this->mp4_file) . '" type="video/mp4">';
+            $html .= '<source src="' . $video_dir . _esc($this->mp4_file) . '" type="video/mp4">';
         }
         if (!empty($this->ogg_file)) {
-            $html .= '<source src="' . $video_dir . htmlspecialchars($this->ogg_file) . '" type="video/ogg">';
+            $html .= '<source src="' . $video_dir . _esc($this->ogg_file) . '" type="video/ogg">';
         }
         if (!empty($this->webm_file)) {
-            $html .= '<source src="' . $video_dir . htmlspecialchars($this->webm_file) . '" type="video/webm">';
+            $html .= '<source src="' . $video_dir . _esc($this->webm_file) . '" type="video/webm">';
         }
         $html .= get_translation("no_html5");
         if (!empty($this->mp4_file) or ! empty($this->ogg_file) or ! empty($this->webm_file)) {

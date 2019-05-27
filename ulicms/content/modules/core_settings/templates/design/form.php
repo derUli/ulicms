@@ -209,9 +209,9 @@ if (!$permissionChecker->hasPermission("design")) {
                             <?php
                             foreach ($google_fonts as $myfont) {
                                 if ($myfont == $google_font) {
-                                    echo '<option value="' . htmlspecialchars($myfont) . '" selected>' . htmlspecialchars($myfont) . "</option>";
+                                    echo '<option value="' . _esc($myfont) . '" selected>' . _esc($myfont) . "</option>";
                                 } else {
-                                    echo '<option value="' . htmlspecialchars($myfont) . '">' . htmlspecialchars($myfont) . "</option>";
+                                    echo '<option value="' . _esc($myfont) . '">' . _esc($myfont) . "</option>";
                                 }
                             }
                             ?>

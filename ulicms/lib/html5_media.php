@@ -24,10 +24,10 @@ function replaceAudioTags($txt) {
 
             $html = '<audio controls>';
             if (!empty($row->mp3_file)) {
-                $html .= '<source src="' . $audio_dir . htmlspecialchars($row->mp3_file) . '" type="audio/mp3">';
+                $html .= '<source src="' . $audio_dir . _esc($row->mp3_file) . '" type="audio/mp3">';
             }
             if (!empty($row->ogg_file)) {
-                $html .= '<source src="' . $audio_dir . htmlspecialchars($row->ogg_file) . '" type="audio/ogg">';
+                $html .= '<source src="' . $audio_dir . _esc($row->ogg_file) . '" type="audio/ogg">';
             }
             $html .= get_translation("no_html5");
             if (!empty($row->mp3_file) or ! empty($row->ogg_file)) {
@@ -70,13 +70,13 @@ function replaceVideoTags($txt) {
 
             $html = '<video width="' . $row->width . '" height="' . $row->height . '" controls>';
             if (!empty($row->mp4_file)) {
-                $html .= '<source src="' . $video_dir . htmlspecialchars($row->mp4_file) . '" type="video/mp4">';
+                $html .= '<source src="' . $video_dir . _esc($row->mp4_file) . '" type="video/mp4">';
             }
             if (!empty($row->ogg_file)) {
-                $html .= '<source src="' . $video_dir . htmlspecialchars($row->ogg_file) . '" type="video/ogg">';
+                $html .= '<source src="' . $video_dir . _esc($row->ogg_file) . '" type="video/ogg">';
             }
             if (!empty($row->webm_file)) {
-                $html .= '<source src="' . $video_dir . htmlspecialchars($row->webm_file) . '" type="video/webm">';
+                $html .= '<source src="' . $video_dir . _esc($row->webm_file) . '" type="video/webm">';
             }
             $html .= TRANSLATION_NO_HTML5;
             if (!empty($row->mp4_file) or ! empty($row->ogg_file) or ! empty($row->webm_file)) {

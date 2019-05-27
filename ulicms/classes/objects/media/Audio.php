@@ -1,5 +1,15 @@
 <?php
 
+namespace UliCMS\Models\Media;
+
+use Database;
+use Model;
+use Path;
+use StringHelper;
+use Category;
+use function _esc;
+use function get_translation;
+
 class Audio extends Model {
 
     private $name = null;
@@ -166,10 +176,10 @@ class Audio extends Model {
         }
         $html = '<audio controls>';
         if (!empty($this->mp3_file)) {
-            $html .= '<source src="' . $audio_dir . htmlspecialchars($this->mp3_file) . '" type="audio/mp3">';
+            $html .= '<source src="' . $audio_dir . _esc($this->mp3_file) . '" type="audio/mp3">';
         }
         if (!empty($this->ogg_file)) {
-            $html .= '<source src="' . $audio_dir . htmlspecialchars($this->ogg_file) . '" type="audio/ogg">';
+            $html .= '<source src="' . $audio_dir . _esc($this->ogg_file) . '" type="audio/ogg">';
         }
         $html .= get_translation("no_html5");
         if (!empty($this->mp3_file) or ! empty($this->ogg_file)) {

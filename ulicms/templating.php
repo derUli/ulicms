@@ -77,17 +77,17 @@ function get_og_tags($slug = null) {
         $og_image = apply_filter($og_image, "og_image");
         $og_description = apply_filter($og_description, "og_description");
 
-        $html .= '<meta property="og:title" content="' . htmlspecialchars($og_title) . '" />';
+        $html .= '<meta property="og:title" content="' . _esc($og_title) . '" />';
 
         if (!is_null($og_description) and ! empty($og_description)) {
-            $html .= '<meta property="og:description" content="' . htmlspecialchars($og_description) . '" />';
+            $html .= '<meta property="og:description" content="' . _esc($og_description) . '" />';
         }
 
-        $html .= '<meta property="og:type" content="' . htmlspecialchars($og_type) . '" />';
+        $html .= '<meta property="og:type" content="' . _esc($og_type) . '" />';
 
-        $html .= '<meta property="og:url" content="' . htmlspecialchars($og_url) . '" />';
+        $html .= '<meta property="og:url" content="' . _esc($og_url) . '" />';
 
-        $html .= '<meta property="og:image" content="' . htmlspecialchars($og_image) . '" />';
+        $html .= '<meta property="og:image" content="' . _esc($og_image) . '" />';
         $html .= '<meta property="og:site_name" content="' . get_homepage_title() . '" />';
     }
 
