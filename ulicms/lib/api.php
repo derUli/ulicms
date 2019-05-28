@@ -3,6 +3,8 @@
 use UliCMS\Security\PermissionChecker;
 use Negotiation\LanguageNegotiator;
 use UliCMS\Constants\ModuleEventConstants;
+use UliCMS\Models\Content\Types\DefaultContentTypes;
+use UliCMS\Utils\CacheUtil;
 
 function is_blank($val = null) {
     return isset($val) && (is_string($val) &&

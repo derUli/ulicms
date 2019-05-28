@@ -4,7 +4,7 @@ namespace UliCMS\HTML;
 
 use UliCMS\Exceptions\FileNotFoundException;
 use ModuleHelper;
-use File;
+use UliCMS\Utils\File;
 
 function text($str) {
     return \nl2br(\_esc($str));

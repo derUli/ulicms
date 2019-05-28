@@ -2,6 +2,7 @@
 
 use UliCMS\CoreContent\Models\ViewModels\DiffViewModel;
 use UliCMS\Models\Content\VCS;
+use UliCMS\Models\Content\Types\DefaultContentTypes;
 
 class PageController extends Controller {
 

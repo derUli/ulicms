@@ -1,6 +1,7 @@
 <?php
 
 use const UliCMS\Constants\HTML5_ALLOWED_TAGS;
+use UliCMS\Models\Content\Language;
 
 $permissionChecker = new ACL();
 $all_permissions = $permissionChecker->getDefaultACL(true, true);

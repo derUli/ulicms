@@ -1,5 +1,12 @@
 <?php
 
+namespace UliCMS\Models\Content;
+
+use Database;
+use Request;
+use function getDomainByLanguage;
+use Settings;
+
 class Language {
 
     private $id = null;

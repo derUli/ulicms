@@ -1,5 +1,6 @@
 <?php
 
+use UliCMS\Models\Content\Language;
 use UliCMS\HTML\Form;
 use UliCMS\Constants\RequestMethod;
 

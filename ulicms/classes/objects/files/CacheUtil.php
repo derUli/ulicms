@@ -1,7 +1,20 @@
 <?php
 
+namespace UliCMS\Utils;
+
+use Path;
+use Settings;
 use Phpfastcache\Helper\Psr16Adapter;
 use Phpfastcache\Config\ConfigurationOption;
+use ModuleManager;
+use function do_event;
+use function sureRemoveDir;
+use function get_request_uri;
+use function getCurrentLanguage;
+use function strbool;
+use function is_mobile;
+use function is_crawler;
+use function is_tablet;
 
 class CacheUtil {
 

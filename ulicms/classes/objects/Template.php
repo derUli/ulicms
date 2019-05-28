@@ -1,5 +1,6 @@
 <?php
 
+use UliCMS\Utils\File;
 use UliCMS\Exceptions\FileNotFoundException;
 use UliCMS\HTML\Script;
 use UliCMS\Security\PermissionChecker;

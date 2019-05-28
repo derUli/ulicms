@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Utils\File;
+
 function sureRemoveDir($dir, $deleteMe = true) {
     File::sureRemoveDir($dir, $deleteMe);
 }

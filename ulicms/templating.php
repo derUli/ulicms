@@ -1,6 +1,9 @@
 <?php
 
+use UliCMS\Models\Content\Language;
 use UliCMS\Models\Content\Categories;
+use UliCMS\Models\Content\Types\DefaultContentTypes;
+use UliCMS\Utils\File;
 
 function esc($value) {
     Template::escape($value);

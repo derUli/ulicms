@@ -2,6 +2,8 @@
 
 require_once "init.php";
 
+use UliCMS\Models\Content\Language;
+use UliCMS\Utils\CacheUtil;
 use UliCMS\Creators\CSVCreator;
 use UliCMS\Creators\JSONCreator;
 use UliCMS\Creators\PDFCreator;

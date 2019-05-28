@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Utils\File;
+
 class ApiTest extends \PHPUnit\Framework\TestCase {
 
     public function setUp() {

@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Exceptions\CorruptDownloadException;
+use UliCMS\Utils\CacheUtil;
 
 class FileGetContentsWrapperTest extends \PHPUnit\Framework\TestCase {
 

@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Utils\File;
+
 class Path {
 
     public static function resolve($path) {

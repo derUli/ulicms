@@ -1,4 +1,7 @@
 <?php
+
+use UliCMS\Models\Content\Language;
+
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("languages")) {
     $languages = Language::getAllLanguages();
@@ -77,14 +80,14 @@ if ($permissionChecker->hasPermission("languages")) {
                                    );
                                    ?>">
                                     <i class="fas fa-language"></i>
-                                    <?php translate("make_default"); ?>
+                                <?php translate("make_default"); ?>
                                 </a>
                             <?php } else { ?>
                                 <i class="fas fa-check text-success"></i>
-                            <?php } ?>
+                    <?php } ?>
                         </td>
                     </tr>
-                <?php } ?>
+        <?php } ?>
             </tbody>
         </table>
         <?php
