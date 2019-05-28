@@ -1,5 +1,8 @@
 <?php
 
+use UliCMS\Models\Content\Advertisement\Banners;
+use UliCMS\Models\Content\Advertisement\Banner;
+
 class BannersTest extends \PHPUnit\Framework\TestCase {
 
     const HTML_TEXT1 = "My first Banner HTML";

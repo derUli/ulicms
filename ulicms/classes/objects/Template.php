@@ -4,6 +4,7 @@ use UliCMS\Exceptions\FileNotFoundException;
 use UliCMS\HTML\Script;
 use UliCMS\Security\PermissionChecker;
 use MatthiasMullie\Minify;
+use UliCMS\Models\Content\Advertisement\Banners;
 
 class Template {
 

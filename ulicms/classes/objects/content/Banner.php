@@ -1,6 +1,9 @@
 <?php
 
-use UliCMS\Exceptions\NotImplementedException;
+namespace UliCMS\Models\Content\Advertisement;
+
+use Template;
+use Database;
 
 class Banner {
 
