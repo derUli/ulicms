@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Helpers\ArrayHelper;
+
 class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
 
     public function testTake4String() {

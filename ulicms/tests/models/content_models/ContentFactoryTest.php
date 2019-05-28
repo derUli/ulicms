@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Exceptions\NotImplementedException;
+
 class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetAllbyType() {
@@ -33,6 +35,29 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
             foreach ($content as $page) {
                 $this->assertEquals($menu, $page->menu);
             }
+        }
+    }
+
+    public function testGetAllByParent() {
+
+        $query = Database::pQuery("select parent from {prefix}content where "
+                        . "parent is not null", array(), true);
+        $result = Database::fetchObject($query);
+
+        $pages = ContentFactory::getAllByParent($result->parent);
+
+        $this->assertGreaterThanOrEqual(1, count($pages));
+        foreach ($pages as $page) {
+            $this->assertEquals($result->parent, $page->parent);
+        }
+    }
+
+    public function testGetAllByParentNoParent() {
+        $pages = ContentFactory::getAllByParent(null);
+
+        $this->assertGreaterThanOrEqual(1, count($pages));
+        foreach ($pages as $page) {
+            $this->assertNull($page->parent_id);
         }
     }
 

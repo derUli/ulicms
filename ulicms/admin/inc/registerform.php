@@ -32,7 +32,7 @@ if (Settings::get("visitors_can_register") == "off" or ! Settings::get("visitors
 
             echo "<p style='color:green;'>" . get_translation("REGISTRATION_SUCCESSFUL") . "</p>";
             if (!empty($_REQUEST["go"])) {
-                $go = htmlspecialchars($_REQUEST["go"]);
+                $go = _esc($_REQUEST["go"]);
             } else {
                 $go = "index.php";
             }

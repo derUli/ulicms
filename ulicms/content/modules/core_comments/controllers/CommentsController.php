@@ -4,6 +4,7 @@ use UliCMS\Data\Content\Comment;
 use UliCMS\Exceptions\FileNotFoundException;
 use UliCMS\HTML as HTML;
 use UliCMS\Exceptions\NotImplementedException;
+use UliCMS\Constants\CommentStatus;
 
 class CommentsController extends MainClass {
 

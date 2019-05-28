@@ -1,4 +1,7 @@
 <?php
+
+use UliCMS\Constants\RequestMethod;
+
 $ga = new PHPGangsta_GoogleAuthenticator();
 $ga_secret = Settings::get("ga_secret");
 $qrCodeUrl = $ga->getQRCodeGoogleUrl("UliCMS Login auf " . get_domain(), $ga_secret);
@@ -25,11 +28,11 @@ $login_welcome_text = get_lang_config("login_welcome_text", $default_language);
 if ($login_welcome_text) {
     ?>
     <div id="login-welcome-text">
-        <?php echo nl2br($login_welcome_text); ?>
+    <?php echo nl2br($login_welcome_text); ?>
     </div>
-<?php } ?>
+    <?php } ?>
 <h3 id="login-please-headline">
-    <?php translate("please_authenticate"); ?>
+<?php translate("please_authenticate"); ?>
 </h3>
 <?php
 echo ModuleHelper::buildMethodCallForm("SessionManager", "login",
@@ -117,8 +120,8 @@ if (Settings::get("visitors_can_register") === "on" or Settings::get("visitors_c
         }
         ?>"
         class="btn btn-default voffset2"><i class="fas fa-user-plus"></i> <?php
-            translate("register");
-            ?></a>
+        translate("register");
+        ?></a>
     <?php
 }
 ?>

@@ -1,5 +1,7 @@
 <?php
 
+namespace UliCMS\Creators;
+
 class CSVCreator {
 
     public $target_file = null;

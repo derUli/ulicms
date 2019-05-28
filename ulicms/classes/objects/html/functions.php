@@ -11,12 +11,35 @@ function text($str) {
 }
 
 function imageTag($file, $htmlAttributes = array()) {
-
     if (!isset($htmlAttributes["src"])) {
         $htmlAttributes["src"] = $file;
     }
     $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes);
     return "<img {$attribHTML}>";
+}
+
+function button_link($url, $text, $type = null, $allowHtml = false, $target = null, $htmlAttributes = array()) {
+    if (!isset($htmlAttributes["class"])) {
+        $htmlAttributes["class"] = $type;
+    } else {
+        $htmlAttributes["class"] = "$type {$htmlAttributes["class"]}";
+    }
+    return link($url, $text, $allowHtml, $target, $htmlAttributes);
+}
+
+function link($url, $text, $allowHtml = false, $target = null, $htmlAttributes = array()) {
+    $htmlAttributes["href"] = $url;
+    if (is_present($target)) {
+        $htmlAttributes["target"] = $target;
+    }
+
+    if (!$allowHtml) {
+        $text = _esc($text);
+    }
+
+    $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes);
+
+    return "<a {$attribHTML}>{$text}</a>";
 }
 
 function icon($classes, $htmlAttributes = array()) {

@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Security\PermissionChecker;
+use UliCMS\Constants\AuditLog;
 
 class UserController extends Controller {
 

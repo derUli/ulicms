@@ -3,6 +3,8 @@
 use UliCMS\Exceptions\AccessDeniedException;
 use UliCMS\Exceptions\SqlException;
 use UliCMS\Exceptions\FileNotFoundException;
+use UliCMS\Constants\AuditLog;
+use UliCMS\Registries\HelperRegistry;
 
 // root directory of UliCMS
 if (!defined("ULICMS_ROOT")) {
@@ -124,7 +126,7 @@ function exception_handler($exception) {
     if (!defined("EXCEPTION_OCCURRED")) {
         define("EXCEPTION_OCCURRED", true);
     }
-    $error = nl2br(htmlspecialchars($exception));
+    $error = nl2br(_esc($exception));
 
     // FIXME: what if there is no config class?
     $cfg = class_exists("CMSConfig") ? new CMSConfig() : null;

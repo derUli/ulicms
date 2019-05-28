@@ -48,7 +48,7 @@ abstract class Controller {
                     throw new AccessDeniedException(get_translation("forbidden"));
                 }
             } else {
-                throw new BadMethodCallException("method " . htmlspecialchars($sMethod) . " is not callable");
+                throw new BadMethodCallException("method " . _esc($sMethod) . " is not callable");
             }
         }
     }

@@ -6,7 +6,9 @@ $classes = array(
     "CommentStatus",
     "RequestMethod",
     "ModuleEventConstants",
-    "AllowedTags"
+    "AllowedTags",
+    "LinkTarget",
+    "ButtonType"
 );
 foreach ($classes as $class) {
     require_once dirname(__file__) . "/$class.php";

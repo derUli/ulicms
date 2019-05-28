@@ -1,4 +1,8 @@
 <?php
+
+use UliCMS\Constants\RequestMethod;
+use UliCMS\Models\Content\Advertisement\Banner;
+
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("banners") and $permissionChecker->hasPermission("banners_edit")) {
     $banner = intval($_GET["banner"]);

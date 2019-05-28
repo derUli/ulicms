@@ -2,6 +2,7 @@
 
 use UliCMS\Security\PermissionChecker;
 use Negotiation\LanguageNegotiator;
+use UliCMS\Constants\ModuleEventConstants;
 
 function is_blank($val = null) {
     return isset($val) && (is_string($val) &&
@@ -284,7 +285,7 @@ function get_canonical() {
 
     if (containsModule(null, "blog")) {
         if (isset($_GET["single"])) {
-            $canonical .= "?single=" . htmlspecialchars($_GET["single"]);
+            $canonical .= "?single=" . _esc($_GET["single"]);
         } else if (isset($_GET["limit"])) {
             $canonical .= "?limit=" . intval($_GET["limit"]);
         }

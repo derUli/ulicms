@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Models\Media\Video;
+
 class VideoTest extends \PHPUnit\Framework\TestCase {
 
     public function testCreateUpdateAndDelete() {

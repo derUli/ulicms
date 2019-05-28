@@ -1,4 +1,7 @@
 <?php
+
+use UliCMS\Helpers\NumberFormatHelper;
+
 $permissionChecker = new ACL();
 
 $controller = ControllerRegistry::get();
@@ -32,11 +35,11 @@ if ($permissionChecker->hasPermission("dashboard")) {
                 echo $motd;
                 ?>
             </div>
-        <?php } ?>
+    <?php } ?>
         <div id="patch-notification" style="display: none;"
              data-url="<?php echo ModuleHelper::buildMethodCallUrl(UpdateCheckController::class, "patchCheck"); ?>">
             <h2 class="accordion-header">
-                <?php translate("there_are_patches_available"); ?>
+    <?php translate("there_are_patches_available"); ?>
             </h2>
             <div class="accordion-content" id="patch-message"></div>
         </div>
@@ -48,20 +51,20 @@ if ($permissionChecker->hasPermission("dashboard")) {
             <div class="accordion-content">
                 <a
                     href="<?php echo ModuleHelper::buildActionURL("do_post_install"); ?>">
-                    <?php translate("there_are_unfinished_package_installations"); ?></a>
+            <?php translate("there_are_unfinished_package_installations"); ?></a>
             </div>
         <?php } ?>
         <?php
         if (!Settings::get("disable_ulicms_newsfeed")) {
             ?>
             <h2 class="accordion-header" id="ulicms-newsfeed">
-                <?php translate("ulicms_news"); ?></h2>
+        <?php translate("ulicms_news"); ?></h2>
             <div class="accordion-content" id="ulicms-feed"
                  data-url="<?php echo ModuleHelper::buildMethodCallUrl(HomeController::class, "newsfeed") ?>">
-                     <?php require "inc/loadspinner.php"; ?>
+            <?php require "inc/loadspinner.php"; ?>
             </div>
         <?php } ?>
-        <?php if ($permissionChecker->hasPermission("pages_show_positions")) { ?>
+    <?php if ($permissionChecker->hasPermission("pages_show_positions")) { ?>
             <h2 class="accordion-header"><?php translate("helper_utils"); ?></h2>
             <div class="accordion-content">
                 <form action="#" class="checkbox">
@@ -73,13 +76,13 @@ if ($permissionChecker->hasPermission("dashboard")) {
                                if (Settings::get("user/" . get_user_id() . "/show_positions"))
                                    echo "checked";
                                ?>>
-                        <?php translate("show_positions_in_menus"); ?></label>
+        <?php translate("show_positions_in_menus"); ?></label>
                     </label>
                 </form>
             </div>
-        <?php } ?>
+            <?php } ?>
         <h2 class="accordion-header">
-            <?php translate("statistics"); ?>
+    <?php translate("statistics"); ?>
         </h2>
         <div class="accordion-content">
             <table>
@@ -131,7 +134,7 @@ if ($permissionChecker->hasPermission("dashboard")) {
             </table>
         </div>
         <h2 class="accordion-header">
-            <?php translate("online_now"); ?>
+    <?php translate("online_now"); ?>
         </h2>
         <div class="accordion-content">
             <ul id="users_online">
@@ -139,11 +142,11 @@ if ($permissionChecker->hasPermission("dashboard")) {
                 foreach (getOnlineUsers() as $user) {
                     ?>
                     <li><?php Template::escape($user); ?></li>
-                <?php } ?>
+    <?php } ?>
             </ul>
         </div>
         <h2 class="accordion-header">
-            <?php translate("top_pages"); ?>
+    <?php translate("top_pages"); ?>
         </h2>
         <div class="accordion-content">
             <table>
@@ -166,11 +169,11 @@ if ($permissionChecker->hasPermission("dashboard")) {
                     ?>
                     <tr>
                         <td><a href="<?php
-                            echo $url;
-                            ?>"
+                               echo $url;
+                               ?>"
                                target="_blank"><?php
-                                   esc($row->title);
-                                   ?></a></td>
+                                esc($row->title);
+                                ?></a></td>
                         <td align="right"><?php
                             echo $row->views;
                             ?></td>
@@ -202,10 +205,10 @@ if ($permissionChecker->hasPermission("dashboard")) {
                     ?>
                     <tr>
                         <td><a href="<?php
-                            echo $url;
-                            ?>" target="_blank"><?php
-                                   esc($row->title);
-                                   ?></a></td>
+                               echo $url;
+                               ?>" target="_blank"><?php
+                                esc($row->title);
+                                ?></a></td>
                         <td><?php echo strftime("%x %X", $row->lastmodified) ?></td>
                         <td><?php
                             $autorName = $model->admins[$row->lastchangeby];

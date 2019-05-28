@@ -1,5 +1,9 @@
 <?php
 
+namespace UliCMS\Helpers;
+
+use Helper;
+
 class NumberFormatHelper extends Helper {
 
     // Snippet from PHP Share: http://www.phpshare.org

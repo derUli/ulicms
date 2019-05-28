@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Constants\AuditLog;
+
 // get a config variable
 function getconfig($key) {
     return Settings::get($key);

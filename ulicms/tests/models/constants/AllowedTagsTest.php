@@ -1,5 +1,7 @@
 <?php
 
+use const UliCMS\Constants\HTML5_ALLOWED_TAGS;
+
 class AllowedTagsTest extends \PHPUnit\Framework\TestCase {
 
     public function testAllowedTags() {

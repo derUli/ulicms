@@ -1,4 +1,7 @@
 <?php
+
+use UliCMS\Models\Content\Advertisement\Banners;
+
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("banners")) {
     if (!isset($_SESSION["filter_category"])) {
@@ -23,7 +26,7 @@ if ($permissionChecker->hasPermission("banners")) {
             ?><br /> <br /> <a href="index.php?action=banner_new"
                              class="btn btn-default"><i class="fa fa-plus"></i> <?php translate("add_advertisement"); ?>
             </a><br />
-        <?php } ?>
+    <?php } ?>
     </p>
     <p><?php translate("category"); ?>
         <?php
@@ -40,12 +43,12 @@ if ($permissionChecker->hasPermission("banners")) {
                     </th>
                     <th><?php translate("language"); ?>
                     </th>
-                    <?php if ($permissionChecker->hasPermission("banners_edit")) { ?>
+    <?php if ($permissionChecker->hasPermission("banners_edit")) { ?>
                         <td><?php translate("edit"); ?>
                         </td>
                         <td><?php translate("delete"); ?>
                         </td>
-                    <?php } ?>
+    <?php } ?>
                 </tr>
             </thead>
             <tbody>

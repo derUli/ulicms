@@ -58,7 +58,7 @@ class ControllerRegistry {
             } else {
 
                 $sClass = $_REQUEST["sClass"];
-                throw new BadMethodCallException("class " . htmlspecialchars($sClass) . " not found");
+                throw new BadMethodCallException("class " . _esc($sClass) . " not found");
             }
         }
     }

@@ -2,6 +2,7 @@
 
 use UliCMS\Exceptions\NotImplementedException;
 use PHPMailer\PHPMailer\PHPMailer;
+use UliCMS\Constants\EmailModes;
 
 class Mailer {
 

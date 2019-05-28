@@ -1,6 +1,12 @@
 <?php
 
 require_once "init.php";
+
+use UliCMS\Creators\CSVCreator;
+use UliCMS\Creators\JSONCreator;
+use UliCMS\Creators\PDFCreator;
+use UliCMS\Creators\PlainTextCreator;
+
 global $connection;
 
 do_event("before_session_start");

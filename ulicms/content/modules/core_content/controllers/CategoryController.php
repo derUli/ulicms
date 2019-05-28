@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Constants\AuditLog;
+
 class CategoryController extends Controller {
 
     private $logger;

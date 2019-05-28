@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Models\Media\Audio;
+
 class AudioTest extends \PHPUnit\Framework\TestCase {
 
     public function setUp() {

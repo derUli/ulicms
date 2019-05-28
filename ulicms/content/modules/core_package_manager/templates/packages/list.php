@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Security\PermissionChecker;
+use UliCMS\Constants\RequestMethod;
 
 $permissionChecker = new PermissionChecker(get_user_id());
 

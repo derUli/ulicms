@@ -4,6 +4,10 @@ use function UliCMS\HTML\text;
 use function UliCMS\HTML\imageTag;
 use function UliCMS\HTML\imageTagInline;
 use function UliCMS\HTML\icon;
+use function UliCMS\HTML\link;
+use function UliCMS\HTML\button_link;
+use UliCMS\Constants\LinkTarget;
+use UliCMS\Constants\ButtonType;
 
 class HtmlFunctionsTest extends \PHPUnit\Framework\TestCase {
 
@@ -47,6 +51,47 @@ class HtmlFunctionsTest extends \PHPUnit\Framework\TestCase {
             "title" => "Hallo Welt",
             "data-something" => "hello"
         )));
+    }
+
+    public function testLinkWithoutAdditionalAttributes() {
+        $this->assertEquals(
+                '<a href="https://www.google.de">&lt;strong&gt;Google&lt;/strong&gt;</a>',
+                link("https://www.google.de", "<strong>Google</strong>", false));
+    }
+
+    public function testLinkAllowHtml() {
+        $this->assertEquals(
+                '<a href="https://www.google.de"><strong>Google</strong></a>',
+                link("https://www.google.de", "<strong>Google</strong>", true));
+    }
+
+    public function testLinkAllowHtmlAndTarget() {
+        $this->assertEquals(
+                '<a href="https://www.google.de" target="_blank"><strong>Google</strong></a>',
+                link("https://www.google.de", "<strong>Google</strong>", true, LinkTarget::TARGET_BLANK));
+    }
+
+    public function testLinkAllowHtmlAndTargetAndAdditionalAttributes() {
+        $this->assertEquals(
+                '<a id="mylink" class="btn btn-primary" href="https://www.google.de" target="_self"><strong>Google</strong></a>',
+                link("https://www.google.de", "<strong>Google</strong>", true, LinkTarget::TARGET_SELF, array(
+            "id" => "mylink",
+            "class" => "btn btn-primary"
+        )));
+    }
+
+    public function testButtonLink() {
+        $this->assertEquals(
+                '<a class="btn btn-info" href="https://www.google.de"><i class="fa fa fa-google"></i></a>',
+                button_link("https://www.google.de", icon("fa fa fa-google"), ButtonType::TYPE_INFO, true));
+    }
+
+    public function testButtonLinkWithAttributes() {
+        $this->assertEquals(
+                '<a data-hello="world" class="btn btn-info awesome-button" href="https://www.google.de"><i class="fa fa fa-google"></i></a>',
+                button_link("https://www.google.de", icon("fa fa fa-google"), ButtonType::TYPE_INFO, true, null,
+                        array("data-hello" => "world",
+                            "class" => "awesome-button")));
     }
 
 }
