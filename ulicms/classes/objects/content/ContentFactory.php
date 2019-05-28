@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Exceptions\FileNotFoundException;
+use UliCMS\Models\Content\TypeMapper;
 
 class ContentFactory {
 

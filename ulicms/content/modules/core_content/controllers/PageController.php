@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\CoreContent\Models\ViewModels\DiffViewModel;
+use UliCMS\Models\Content\VCS;
 
 class PageController extends Controller {
 

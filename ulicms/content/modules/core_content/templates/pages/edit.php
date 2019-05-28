@@ -2,7 +2,8 @@
 
 use UliCMS\Security\ContentPermissionChecker;
 use UliCMS\Security\PermissionChecker;
-use UliCMS\Data\Content\Comment;
+use UliCMS\Models\Content\Comment;
+use UliCMS\Models\Content\VCS;
 
 $permissionChecker = new PermissionChecker(get_user_id());
 if ($permissionChecker->hasPermission("pages")) {
@@ -842,7 +843,7 @@ if ($permissionChecker->hasPermission("pages")) {
                         ?></textarea>
                 </p>
                 <?php
-                $rev = vcs::getRevisionsByContentID($row->id);
+                $rev = VCS::getRevisionsByContentID($row->id);
                 if (count($rev) > 0) {
                     ?>
                     <p>

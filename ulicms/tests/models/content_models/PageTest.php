@@ -1,8 +1,7 @@
 <?php
 
-use UliCMS\Data\Content\Comment;
-
-require_once Path::resolve("ULICMS_ROOT/templating.php");
+use UliCMS\Models\Content\Comment;
+use UliCMS\Models\Content\VCS;
 
 class PageTest extends \PHPUnit\Framework\TestCase {
 
@@ -700,6 +699,65 @@ class PageTest extends \PHPUnit\Framework\TestCase {
 
         $children = $page->getChildren();
         $this->assertCount(0, $children);
+    }
+
+    public function testGetParentReturnsNull() {
+        $query = Database::pQuery("select id from {prefix}content where "
+                        . "parent is null", array(), true);
+        $result = Database::fetchObject($query);
+
+        $page = ContentFactory::getByID($result->id);
+        $this->assertNull($page->getParent());
+    }
+
+    public function testGetParentReturnsModel() {
+        $query = Database::pQuery("select parent, id from {prefix}content where "
+                        . "parent is not null", array(), true);
+        $result = Database::fetchObject($query);
+
+        $page = ContentFactory::getByID($result->id);
+        $this->assertInstanceOf(Content::class, $page->getParent());
+        $this->assertEquals($page->getParent()->getId(), $result->parent);
+        $this->assertGreaterThanOrEqual(1, count($page->getParent()->getChildren()));
+    }
+
+    public function testGetHistoryReturnsNothing() {
+
+        $page = new Page();
+
+        $page->title = 'Unit Test ' . time();
+        $page->slug = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "foo [csrf_token_html] bar";
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->author_id = 1;
+        $page->show_headline = true;
+        $page->save();
+
+        $this->assertIsArray($page->getHistory());
+        $this->assertCount(0, $page->getHistory());
+    }
+
+    public function testGetHistoryReturnsChanges() {
+        $page = new Page();
+
+        $page->title = 'Unit Test ' . time();
+        $page->slug = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "foo [csrf_token_html] bar";
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->author_id = 1;
+        $page->show_headline = true;
+        $page->save();
+
+        VCS::createRevision($page->getID(), "New Text 1", 1);
+        VCS::createRevision($page->getID(), "New Text 2", 1);
+        VCS::createRevision($page->getID(), "New Text 3", 1);
+
+        $this->assertIsArray($page->getHistory());
+        $this->assertCount(3, $page->getHistory());
     }
 
 }

@@ -11,6 +11,8 @@ Neue API-Methoden:
 * ContentFactory::getAllByParent($parent_id, $order = "id")
 *`Content->getChildren($order)
 * Content->hasChildren()
+* Page->getHistory()
+* Page->getParent()
 * link($url, $text, $allowHtml = false, $target = null, $htmlAttributes = array())
 * button_link($url, $text, $type = null, $allowHtml = false, $target = null, $htmlAttributes = array())
 

@@ -1,7 +1,8 @@
 <?php
 
 use UliCMS\Security\Permissions\PagePermissions;
-use UliCMS\Data\Content\Comment;
+use UliCMS\Models\Content\Comment;
+use UliCMS\Models\Content\VCS;
 
 class Page extends Content {
 
@@ -356,6 +357,20 @@ class Page extends Content {
             }
         }
         return $result;
+    }
+
+    public function getParent() {
+        if (!$this->parent) {
+            return null;
+        }
+        return ContentFactory::getByID($this->parent);
+    }
+
+    public function getHistory($order = "date DESC") {
+        if (!$this->getID()) {
+            return array();
+        }
+        return VCS::getRevisionsByContentID($this->getID(), $order);
     }
 
     public function getPermissions() {

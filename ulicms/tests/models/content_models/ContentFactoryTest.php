@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Exceptions\NotImplementedException;
+use UliCMS\Models\Content\TypeMapper;
 
 class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
 

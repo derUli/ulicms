@@ -1,6 +1,6 @@
 <?php
 
-namespace UliCMS\Data\Content;
+namespace UliCMS\Models\Content;
 
 use Database;
 use ContentFactory;

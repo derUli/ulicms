@@ -4,6 +4,12 @@
 // Die Namen der Modelklassen sollten direkt gespeichert werden in der Tabelle
 // content
 
+namespace UliCMS\Models\Content;
+
+use function getAllModules;
+use function getModuleMeta;
+use StringHelper;
+
 class TypeMapper {
 
     private static $mapping = array(

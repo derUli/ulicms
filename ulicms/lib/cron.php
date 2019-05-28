@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Data\Content\Comment;
+use UliCMS\Models\Content\Comment;
 
 if (!defined("LOADED_LANGUAGE_FILE")) {
 

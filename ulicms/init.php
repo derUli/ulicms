@@ -5,6 +5,7 @@ use UliCMS\Exceptions\SqlException;
 use UliCMS\Exceptions\FileNotFoundException;
 use UliCMS\Constants\AuditLog;
 use UliCMS\Registries\HelperRegistry;
+use UliCMS\Models\Content\TypeMapper;
 
 // root directory of UliCMS
 if (!defined("ULICMS_ROOT")) {
