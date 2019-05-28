@@ -1,5 +1,6 @@
 <?php
 
+use UliCMS\Models\Content\Categories;
 // TODO: This is old code before the switch to MVC architecture
 // This should be rewritten with MVC pattern and using partial views
 use UliCMS\Security\PermissionChecker;

@@ -1,5 +1,11 @@
 <?php
 
+namespace UliCMS\Models\Content;
+
+use function get_translation;
+use function db_escape;
+use UliCMS\Models\Content\Category;
+
 class Categories {
 
     public static function updateCategory($id, $name, $description = '') {

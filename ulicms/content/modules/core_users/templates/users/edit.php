@@ -138,7 +138,7 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
                 <option value="ckeditor"
                         <?php if (!$row->html_editor or $row->html_editor == "ckeditor") echo "selected" ?>>CKEditor</option>
                 <option value="codemirror"
-                        <?php if ($row->html_editor == "codemirror") echo "selected" ?>>CodeMirror</option>
+                        <?php if ($row->html_editor == "codemirror") echo "selected" ?> disabled>CodeMirror</option>
             </select>
             <div class="checkbox block voffset3-5">
                 <label>

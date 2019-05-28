@@ -1,4 +1,7 @@
 <?php
+
+use UliCMS\Models\Content\Categories;
+
 $permissionChecker = new ACL();
 if (!$permissionChecker->hasPermission("forms") or ! $permissionChecker->hasPermission("forms_edit")) {
     noPerms();
@@ -61,14 +64,14 @@ if (!$permissionChecker->hasPermission("forms") or ! $permissionChecker->hasPerm
         <p>
             <strong><?php translate("target_page_id"); ?></strong><br /> <select
                 name="target_page_id">
-                    <?php foreach ($pages as $page) { ?>
+                <?php foreach ($pages as $page) { ?>
                     <option value="<?php echo $page["id"]; ?>"
                     <?php
                     if ($page["id"] == $form["target_page_id"]) {
                         echo " selected";
                     }
                     ?>><?php esc($page["title"]); ?></option>
-                        <?php } ?>
+        <?php } ?>
             </select>
         </p>
         <p>

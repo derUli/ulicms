@@ -2,6 +2,7 @@
 
 use UliCMS\Constants\RequestMethod;
 use UliCMS\Models\Content\Advertisement\Banner;
+use UliCMS\Models\Content\Categories;
 
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("banners") and $permissionChecker->hasPermission("banners_edit")) {

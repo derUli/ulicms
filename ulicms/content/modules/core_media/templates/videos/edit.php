@@ -1,4 +1,7 @@
 <?php
+
+use UliCMS\Models\Content\Categories;
+
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("videos") and $permissionChecker->hasPermission("videos_edit")) {
     $id = intval($_REQUEST["id"]);
@@ -12,20 +15,20 @@ if ($permissionChecker->hasPermission("videos") and $permissionChecker->hasPermi
         <h1><?php translate("UPLOAD_VIDEO"); ?></h1>
         <form action="index.php?sClass=VideoController&sMethod=update"
               method="post">
-                  <?php csrf_token_html(); ?>
+        <?php csrf_token_html(); ?>
             <input type="hidden" name="id" value="<?php echo $result->id; ?>"> <input
                 type="hidden" name="update" value="update"> <strong><?php translate("name"); ?>*
             </strong><br /> <input type="text" name="name" required="required"
                                    value="<?php echo _esc($result->name); ?>" maxlength="255" />
             <br /> <strong><?php translate("category"); ?>
             </strong><br />
-            <?php echo Categories::getHTMLSelect($result->category_id); ?>
+        <?php echo Categories::getHTMLSelect($result->category_id); ?>
 
             <br /> <br /> <strong><?php translate("video_ogg"); ?>
             </strong><br /> <input name="ogg_file" type="text"
                                    value="<?php echo _esc($result->ogg_file); ?>"><br /> <strong><?php
-                                       translate("video_webm");
-                                       ?></strong><br /> <input name="webm_file" type="text"
+        translate("video_webm");
+        ?></strong><br /> <input name="webm_file" type="text"
                                    value="<?php echo _esc($result->webm_file); ?>"><br /> <strong><?php echo translate("video_mp4"); ?>
             </strong><br /> <input name="mp4_file" type="text"
                                    value="<?php echo _esc($result->mp4_file); ?>"><br /> <strong><?php translate("width"); ?>

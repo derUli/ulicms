@@ -1,4 +1,7 @@
 <?php
+
+use UliCMS\Models\Content\Categories;
+
 $permissionChecker = new ACL();
 $groups = db_query("SELECT id, name from " . tbname("groups"));
 if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermission("pages_create")) {
@@ -19,7 +22,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
     $types = get_available_post_types();
     ?>
     <div class="loadspinner">
-        <?php require "inc/loadspinner.php"; ?>
+    <?php require "inc/loadspinner.php"; ?>
     </div>
     <?php
     echo ModuleHelper::buildMethodCallForm("PageController", "create", array(), "post",
@@ -42,12 +45,12 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
         <h2 class="accordion-header"><?php translate("title_and_headline"); ?></h2>
         <div class="accordion-content">
             <strong><?php
-                translate("permalink");
-                ?>*
+    translate("permalink");
+    ?>*
             </strong><br /> <input type="text" name="slug" id="slug"
                                    required="required" value=""> <br /> <strong><?php
-                                       translate("page_title");
-                                       ?>*
+    translate("page_title");
+    ?>*
             </strong><br /> <input type="text" required="required"
                                    name="page_title" value="" onkeyup="suggestSlug(this.value)">
             <div class="typedep hide-on-snippet hide-on-non-regular">
@@ -62,7 +65,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
         </div>
         <h2 class="accordion-header"><?php translate("page_type"); ?></h2>
         <div class="accordion-content">
-            <?php foreach ($types as $type) { ?>
+                   <?php foreach ($types as $type) { ?>
                 <input type="radio" name="type" id="type_<?php echo $type; ?>"
                        value="<?php echo $type; ?>"
                        <?php
@@ -71,7 +74,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                        }
                        ?>> <label
                        for="type_<?php echo $type; ?>"><?php translate($type); ?></label> <br />
-                   <?php } ?>
+    <?php } ?>
 
         </div>
         <h2 class="accordion-header"><?php translate("menu_entry"); ?></h2>
@@ -106,14 +109,14 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                         foreach (getAllMenus() as $menu) {
                             ?>
                         <option value="<?php echo $menu ?>"
-                                <?php if ($menu == "top") echo "selected"; ?>>
-                            <?php translate($menu); ?></option>
+                        <?php if ($menu == "top") echo "selected"; ?>>
+                        <?php translate($menu); ?></option>
                         <?php
                     }
                     ?>
                 </select>
                 <div id="menu_help" class="help" style="display: none">
-                    <?php echo nl2br(get_translation("help_menu")); ?>
+    <?php echo nl2br(get_translation("help_menu")); ?>
                 </div>
                 <br /> <br /> <strong><?php translate("position"); ?>
                 </strong> <span style="cursor: help;"
@@ -121,7 +124,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                     type="number" required="required" name="position" value="0" min="0"
                     step="1">
                 <div id="position_help" class="help" style="display: none">
-                    <?php echo nl2br(get_translation("help_position")); ?>
+    <?php echo nl2br(get_translation("help_position")); ?>
                 </div>
                 <br />
                 <div id="parent-div">
@@ -129,15 +132,15 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                         name="parent" size=1>
                         <option selected="selected" value="NULL">
                             [
-                            <?php translate("none"); ?>
+                        <?php translate("none"); ?>
                             ]
                         </option>
                         <?php
                         foreach ($pages as $key => $page) {
                             ?>
                             <option value="<?php
-                            echo $page["id"];
-                            ?>">
+                                        echo $page["id"];
+                                        ?>">
                                         <?php
                                         esc($page["title"]);
                                         ?>
@@ -155,25 +158,25 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
             </div>
             <div class="typedep" id="tab-target">
                 <strong><?php
-                    translate("open_in");
-                    ?>
+                        translate("open_in");
+                        ?>
                 </strong><br /> <select name="target" size=1>
                     <option value="_self">
                         <?php translate("target_self"); ?>
                     </option>
                     <option value="_blank">
-                        <?php translate("target_blank"); ?>
+    <?php translate("target_blank"); ?>
                     </option>
                 </select><br /> <br />
             </div>
             <strong><?php translate("activated"); ?>
             </strong><br /> <select name="activated" size=1
-                                    <?php if (!$pages_activate_own) echo "disabled"; ?>>
+                    <?php if (!$pages_activate_own) echo "disabled"; ?>>
                 <option value="1">
                     <?php translate("enabled"); ?>
                 </option>
                 <option value="0" <?php if (!$pages_activate_own) echo "selected"; ?>>
-                    <?php translate("disabled"); ?>
+    <?php translate("disabled"); ?>
                 </option>
             </select> <br /> <br />
             <div class="typedep" id="hidden-attrib">
@@ -182,13 +185,13 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                         <?php translate("yes"); ?>
                     </option>
                     <option value="0" selected>
-                        <?php translate("no"); ?>
+    <?php translate("no"); ?>
                     </option>
                 </select> <br /> <br />
             </div>
             <strong><?php translate("category"); ?>
             </strong><br />
-            <?php echo Categories :: getHTMLSelect(); ?>
+    <?php echo Categories :: getHTMLSelect(); ?>
             <div id="menu_image_div" class="voffset3">
                 <strong><?php translate("menu_image"); ?>
                 </strong><br />
@@ -220,7 +223,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                     <option value="">[<?php translate("none"); ?>]</option>
                     <?php foreach ($languages as $language) { ?>
                         <option value="<?php Template::escape($language->getID()); ?>"><?php Template::escape($language->getName()); ?></option>
-                    <?php } ?>
+    <?php } ?>
                 </select>
             </div>
         </div>
@@ -279,8 +282,8 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                             foreach ($fields as $field) {
                                 $field->name = "{$name}_{$field->name}";
                                 ?>
-                                <?php echo $field->render(null); ?>
-                            <?php } ?>
+                <?php echo $field->render(null); ?>
+                    <?php } ?>
                         </div>
                     </div>
                     <?php
@@ -292,7 +295,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
             <h2 class="accordion-header"><?php translate("list_properties"); ?></h2>
             <div class="accordion-content">
                 <strong><?php translate("type") ?></strong> <br />
-                <?php $types = get_available_post_types(); ?>
+    <?php $types = get_available_post_types(); ?>
                 <select name="list_type">
                     <option value="null" selected>[<?php translate("every") ?>]
                     </option>
@@ -313,10 +316,10 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                     ?>
                 </select> <br /> <br /> <strong><?php translate("category"); ?>
                 </strong><br />
-                <?php echo Categories :: getHTMLSelect(-1, true, "list_category") ?>
+                    <?php echo Categories :: getHTMLSelect(-1, true, "list_category") ?>
                 <br /> <br /> <strong><?php
-                    translate("menu");
-                    ?>
+                translate("menu");
+                ?>
                 </strong><br /> <select name="list_menu" size=1>
                     <option value="">[<?php translate("every"); ?>]</option>
                     <?php
@@ -324,8 +327,8 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                         ?>
                         <option value="<?php echo $menu; ?>">
                             <?php
-                            translate($menu);
-                            ?></option>
+                        translate($menu);
+                        ?></option>
                         <?php
                     }
                     ?>
@@ -342,8 +345,8 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                     foreach ($pages as $key => $page) {
                         ?>
                         <option value="<?php
-                        echo $page["id"];
-                        ?>">
+                                    echo $page["id"];
+                                    ?>">
                                     <?php
                                     esc($page["title"]);
                                     ?>
@@ -357,7 +360,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                     }
                     ?>
                 </select> <br /> <br /> <strong><?php
-                    translate("order_by");
+                translate("order_by");
                     ?>
                 </strong> <br /> <select name="list_order_by">
                     <?php foreach ($cols as $col) { ?>
@@ -367,10 +370,10 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                             echo 'selected';
                         }
                         ?>><?php echo $col; ?></option>
-                            <?php } ?>
+                    <?php } ?>
                 </select> <br /> <br /> <strong><?php
-                    translate("order_direction");
-                    ?>
+                translate("order_direction");
+                ?>
                 </strong> <select name="list_order_direction">
                     <option value="asc"><?php translate("asc"); ?></option>
                     <option value="desc"><?php translate("desc"); ?></option>
@@ -391,7 +394,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                     <option value="null">[<?php translate("none"); ?>]</option>
                     <?php foreach (ModuleHelper::getAllEmbedModules() as $module) { ?>
                         <option value="<?php echo $module; ?>"><?php echo $module; ?></option>
-                    <?php } ?>
+    <?php } ?>
                 </select>
             </div>
         </div>
@@ -403,7 +406,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                     <option value="">[<?php translate("none"); ?>]</option>
                     <?php while ($row = Database::fetchObject($videos)) { ?>
                         <option value="<?php echo $row->id; ?>"><?php Template::escape($row->name); ?> (ID: <?php echo $row->id; ?>)</option>
-                    <?php } ?>
+    <?php } ?>
                 </select>
             </div>
         </div>
@@ -415,7 +418,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                     <option value="">[<?php translate("none"); ?>]</option>
                     <?php while ($row = Database::fetchObject($audios)) { ?>
                         <option value="<?php echo $row->id; ?>"><?php Template::escape($row->name); ?> (ID: <?php echo $row->id; ?>)</option>
-                    <?php } ?>
+    <?php } ?>
                 </select>
             </div>
         </div>
@@ -427,8 +430,8 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                        value="" style="cursor: pointer" /> <a href="#"
                        onclick="$('#menu_image').val('');return false;"
                        class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php
-                           translate("clear");
-                           ?>
+    translate("clear");
+    ?>
                 </a>
             </div>
         </div>
@@ -481,18 +484,18 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                     name="theme" size=1>
                     <option value="">
                         [
-                        <?php translate("standard"); ?>
+                    <?php translate("standard"); ?>
                         ]
                     </option>
                     <?php
                     foreach ($allThemes as $th) {
                         ?>
                         <option value="<?php
-                        echo $th;
-                        ?>">
-                                    <?php
                                     echo $th;
-                                    ?></option>
+                                    ?>">
+                            <?php
+                        echo $th;
+                        ?></option>
                         <?php
                     }
                     ?>
@@ -517,7 +520,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                 ?>
             </select> <br /> <br />
             <div class="typedep" id="custom_data_json">
-                <?php do_event("before_custom_data_json"); ?>
+    <?php do_event("before_custom_data_json"); ?>
                 <strong><?php translate("custom_data_json"); ?></strong>
                 <textarea name="custom_data" style="width: 100%; height: 200px;"
                           cols=80 rows=10

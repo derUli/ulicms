@@ -2,11 +2,11 @@
 
 namespace UliCMS\Models\Media;
 
+use UliCMS\Models\Content\Category;
 use Database;
 use Model;
 use Path;
 use StringHelper;
-use Category;
 use function _esc;
 use function get_translation;
 

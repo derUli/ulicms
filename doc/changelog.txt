@@ -16,6 +16,9 @@ Neue API-Methoden:
 * link($url, $text, $allowHtml = false, $target = null, $htmlAttributes = array())
 * button_link($url, $text, $type = null, $allowHtml = false, $target = null, $htmlAttributes = array())
 
+Bekannte Probleme:
+* CodeMirror kann im Moment nicht als Standard HTML-Editor festgelegt werden. Das Feature ist auf Grund eines Bugs vorerst deaktiviert.
+
 ===== Neues in UliCMS 2019.3 =====
 
 Diese Version ist funktional identisch zu 2019.2.8

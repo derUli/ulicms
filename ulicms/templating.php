@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Models\Content\Categories;
+
 function esc($value) {
     Template::escape($value);
 }

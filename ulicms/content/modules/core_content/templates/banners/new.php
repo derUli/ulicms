@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Constants\RequestMethod;
+use UliCMS\Models\Content\Categories;
 
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("banners") and $permissionChecker->hasPermission("banners_create")) {
@@ -27,8 +28,8 @@ if ($permissionChecker->hasPermission("banners") and $permissionChecker->hasPerm
         <input type="hidden" name="add_banner" value="add_banner"> <strong><?php translate("bannertext"); ?>
         </strong><br /> <input type="text" name="banner_name" value=""> <br />
         <strong><?php
-    translate("IMAGE_URL");
-    ?></strong><br /> <input type="text" name="image_url" value=""> <br />
+            translate("IMAGE_URL");
+            ?></strong><br /> <input type="text" name="image_url" value=""> <br />
         <strong><?php translate("link_url"); ?>
         </strong><br /> <input type="text" name="link_url" value=""> <br />
     </fieldset>
@@ -74,7 +75,7 @@ if ($permissionChecker->hasPermission("banners") and $permissionChecker->hasPerm
         <strong><?php translate("category"); ?>
         </strong>
 
-    <?php echo Categories :: getHTMLSelect() ?></p>
+        <?php echo Categories :: getHTMLSelect() ?></p>
     </p>
     <br />
     <p>

@@ -1,5 +1,9 @@
 <?php
 
+namespace UliCMS\Models\Content;
+
+use Database;
+
 class Category {
 
     private $id = null;

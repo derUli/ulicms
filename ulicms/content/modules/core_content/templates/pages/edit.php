@@ -4,6 +4,7 @@ use UliCMS\Security\ContentPermissionChecker;
 use UliCMS\Security\PermissionChecker;
 use UliCMS\Models\Content\Comment;
 use UliCMS\Models\Content\VCS;
+use UliCMS\Models\Content\Categories;
 
 $permissionChecker = new PermissionChecker(get_user_id());
 if ($permissionChecker->hasPermission("pages")) {
