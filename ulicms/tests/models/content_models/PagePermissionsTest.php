@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Security\Permissions\PagePermissions;
+
 class PagePermissionsTest extends \PHPUnit\Framework\TestCase {
 
     public function tearDown() {

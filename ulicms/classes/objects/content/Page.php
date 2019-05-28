@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Exceptions\NotImplementedException;
+use UliCMS\Security\Permissions\PagePermissions;
 use UliCMS\Data\Content\Comment;
 
 class Page extends Content {
