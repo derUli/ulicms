@@ -45,6 +45,7 @@ $pages = ContentFactory::getAllByMenu("top", "position");
             </div>
         </section>
         <?php
+        $color = 0;
         foreach ($pages as $index => $page) {
             if ($page->language !== getCurrentLanguage() ||
                     !$page->isRegular() ||
@@ -53,11 +54,12 @@ $pages = ContentFactory::getAllByMenu("top", "position");
                 continue;
             }
             set_requested_pagename($page->slug, $page->language);
+            $color ++;
             ?>
-            <section>
+            <section class="bgcolor bgcolor<?php echo $color; ?>">
                 <div class="content">
                     <?php
-                    echo $page->getShowHeadline() ? "<h1>{$page->getHeadline()}</h1>" : "";
+                    echo $page->getShowHeadline() ? "<h1 class=\"sliding\">{$page->getHeadline()}</h1>" : "";
                     if ($text_position == "after") {
                         Template::outputContentElement();
                     }
@@ -75,6 +77,9 @@ $pages = ContentFactory::getAllByMenu("top", "position");
                 </footer>
             </section>
             <?php
+            if ($color >= 4) {
+                $color = 0;
+            }
         }
         ?>
     </div>
