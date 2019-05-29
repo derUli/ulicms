@@ -4,6 +4,78 @@ $default-vertical-margin: 10px;
     right: 1%;
 }
 
+@-webkit-keyframes move-right-to-left {
+    100% {
+        margin-left: 0;
+    }
+}
+
+@keyframes move-right-to-left{
+    100% {
+        margin-left: 0;
+    }
+}
+
+@-webkit-keyframes move-up {
+    100% {
+        left: 0;
+    }
+}
+
+@keyframes move-up{
+    100% {
+        left: 0;
+    }
+}
+
+@-webkit-keyframes logo-zoom {
+    100% {
+        transform: scale(1.0);
+    }
+}
+
+@keyframes logo-zoom {
+    100% {
+        transform: scale(1.0);
+    }
+}
+
+@-webkit-keyframes image-zoom {
+    100% {
+        transform: scale(1.005);
+    }
+}
+
+@keyframes image-zoom {
+    100% {
+        transform: scale(1.020);
+    }
+}
+
+@-webkit-keyframes color-to-yellow {
+    100% {
+        color: yellow;
+    }
+}
+
+@keyframes  color-to-yellow {
+    100% {
+        color: yellow;
+    }
+}
+
+@-webkit-keyframes text-fade-in{
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes text-fade-in {
+    100% {
+        opacity: 1;
+    }
+}
+
 .onepage-wrapper, .main{
     .start-page{
         position: relative;
@@ -13,10 +85,8 @@ $default-vertical-margin: 10px;
         color: white;
     }
     .slide-in{
-        -webkit-animation: slide 0.5s forwards;
-        -webkit-animation-delay: 0.5s;
-        animation: slide 0.5s forwards;
-        animation-delay:  0.5s;
+        -webkit-animation:  color-to-yellow 0.5s forwards;
+        animation:  color-to-yellow 0.5s forwards;
     }
 
     a, a:visited, a:active{
@@ -31,27 +101,25 @@ $default-vertical-margin: 10px;
             padding: 20px;
             font-size: 1.1em;
             text-align: center;
+
+            margin-left: 100vw;
+
+            -webkit-animation: move-right-to-left 0.6s forwards;
+            animation: move-right-to-left 0.6s forwards;
+            animation-delay: 3s;
+            -webkit-animation-delay: 3s;
         }
     }
 
     a:hover{
         text-decoration: underline;
-    }
-    @-webkit-keyframes slide {
-        100% {
-            opacity: 1.0;
-            color: yellow;
+        img{
+            -webkit-animation: image-zoom 0.5s forwards;
+            animation: image-zoom 0.5s forwards;
         }
     }
 
-    @keyframes slide {
-        100% {
-            opacity: 1.0;
-            color: yellow;
-        }
-    }
 }
-
 
 section.bgcolor{
     color:white;
@@ -78,7 +146,15 @@ section{
         overflow-y: hidden;
         width: 88vw;
     }
+    .text-content{
+        position: relative;
+        left: -100vw;
 
+        &.move-up{
+            -webkit-animation: move-up 0.2s forwards;
+            animation: move-up 0.2s forwards;
+        }
+    }
 }
 footer{
     position: absolute;
@@ -108,28 +184,14 @@ strong{
     font-weight:bolder;
 }
 
-@keyframes slide-in {
-    100% { transform: translateX(0%); }
-}
-
-@-webkit-keyframes slide-in {
-    100% { -webkit-transform: translateX(0%); }
-}
-
-@keyframes slide-out {
-    0% { transform: translateX(0%); }
-    100% { transform: translateX(-100%); }
-}
-
-@-webkit-keyframes slide-out {
-    0% { -webkit-transform: translateX(0%); }
-    100% { -webkit-transform: translateX(-100%); }
-}
-
 .start-page{
     .website_logo{
         margin: 2% 0 0 0;
         max-width: 92%;
+
+        transform: scale(0.1);
+        -webkit-animation: logo-zoom 1s forwards;
+        animation: logo-zoom 1s forwards;
     }
 
     .advertisement{
@@ -180,6 +242,14 @@ code {
         Consolas, "Everson Mono", "Lucida Console", "Andale Mono", "Nimbus Mono L",
         "Liberation Mono", FreeMono, "Osaka Monospaced", Courier, "New Courier",
         monospace;
+}
+
+blockquote.text-fade-in{
+    opacity: 0;
+    -webkit-animation:  text-fade-in 2s forwards;
+    animation: text-fade-in 2s forwards;
+    animation-delay: 1s;
+    -webkit-animation-delay: 1s;
 }
 
 blockquote {

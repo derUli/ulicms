@@ -1,11 +1,3 @@
-$.fn.isInViewport = function () {
-    var elementTop = $(this).offset().top;
-    var elementBottom = elementTop + $(this).outerHeight();
-    var viewportTop = $(window).scrollTop();
-    var viewportBottom = viewportTop + $(window).height();
-    return elementBottom > viewportTop && elementTop < viewportBottom;
-};
-
 $(function () {
     $("footer").last().fadeIn();
 
@@ -15,6 +7,7 @@ $(function () {
 
         afterMove: function (index) {
             $($("section .sliding").get(index - 2)).addClass("slide-in");
+            $($("section .text-content").get(index - 2)).addClass("move-up");
         },
         loop: false
     });

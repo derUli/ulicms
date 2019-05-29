@@ -33,7 +33,7 @@ $pages = ContentFactory::getAllByMenu("top", "position");
         <section class="start-page">
             <?php Template::logo();
             ?>
-            <blockquote class="site-slogan"><strong><?php Template::motto(); ?> </blockquote></p>
+            <blockquote class="site-slogan text-fade-in"><strong><?php Template::motto(); ?> </blockquote></p>
             <?php
             if (count($pages)) {
                 $firstPage = $pages[0];
@@ -63,9 +63,11 @@ $pages = ContentFactory::getAllByMenu("top", "position");
                     if ($text_position == "after") {
                         Template::outputContentElement();
                     }
-
-                    content();
-
+                    ?>
+                    <div class="text-content">
+                        <?php content(); ?>
+                    </div>
+                    <?php
                     if ($text_position == "before") {
                         Template::outputContentElement();
                     }
