@@ -79,7 +79,19 @@ $default-vertical-margin: 10px;
 .onepage-wrapper, .main{
     .start-page{
         position: relative;
-        width:97%;
+
+        #frontpage-photo{
+            margin-top: 1em;
+            opacity: 0;
+
+            -webkit-animation:  text-fade-in 2s forwards;
+            animation: text-fade-in 2s forwards;
+            animation-delay: 1s;
+            -webkit-animation-delay: 1s;
+            img{
+                max-height: 40vh
+            }
+        }
     }
     .sliding{
         color: white;
@@ -92,15 +104,18 @@ $default-vertical-margin: 10px;
     a, a:visited, a:active{
         color: yellow;
         text-decoration: none;
+        border: 1px solid transparent;
+        padding: 2px;
 
         &.button{
             text-decoration: none;
             color: white;
             background-color: #28a745;
             display: inline-block;
-            padding: 20px;
+            padding: 10px;
             font-size: 1.1em;
             text-align: center;
+
 
             margin-left: 100vw;
 
@@ -112,7 +127,7 @@ $default-vertical-margin: 10px;
     }
 
     a:hover{
-        text-decoration: underline;
+        border: 1px solid yellow;
         img{
             -webkit-animation: image-zoom 0.5s forwards;
             animation: image-zoom 0.5s forwards;
@@ -141,10 +156,13 @@ section.bgcolor4{
 section{
     padding: 0 2% !important;
     word-wrap: break-word;
+    line-height: 1.4em;
     .content{
         height: 98vh;
+        margin-top:1vh;
         overflow-y: hidden;
-        width: 88vw;
+        width: 90vw;
+
     }
     .text-content{
         position: relative;
@@ -176,12 +194,14 @@ footer{
 h1, h2, h3, h4, h5, h6{
     text-decoration: underline;
     text-transform: uppercase;
-    margin: 2% 0 2% 0;
+    margin: 0;
+    line-height: 1.2em;
     font-weight: bolder;
 }
 
 strong{
     font-weight:bolder;
+    text-transform: uppercase;
 }
 
 .start-page{

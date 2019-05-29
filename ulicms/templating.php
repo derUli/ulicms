@@ -673,7 +673,7 @@ function set_requested_pagename($slug, $language = null, $format = "html") {
 
     $_GET["language"] = $language;
     $_REQUEST["language"] = $language;
-
+    $_SESSION["language"] = $language;
     set_format($format);
 }
 

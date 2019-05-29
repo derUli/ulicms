@@ -5,6 +5,11 @@ html5_doctype();
 og_html_prefix();
 
 $pages = ContentFactory::getAllByMenu("top", "position");
+
+$frontpagePhotoFile = ULICMS_CONTENT . "/images/theme/frontpage_photo.png";
+
+$frontpagePhoto = file_exists($frontpagePhotoFile) ? UliCMS\HTML\imageTag("content/images/theme/frontpage_photo.png"
+        ) : null;
 ?>
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,12 +38,20 @@ $pages = ContentFactory::getAllByMenu("top", "position");
         <section class="start-page">
             <?php Template::logo();
             ?>
-            <blockquote class="site-slogan text-fade-in"><strong><?php Template::motto(); ?> </blockquote></p>
+            <blockquote class="site-slogan text-fade-in">
+                <strong><?php Template::motto(); ?></strong> </blockquote>
             <?php
             if (count($pages)) {
                 $firstPage = $pages[0];
                 ?>
                 <a href="#" class="button move-down"><?php esc($firstPage->getHeadline()); ?></a>
+                <?php if ($frontpagePhoto) { ?>
+                    <div id="frontpage-photo">
+                        <?php echo $frontpagePhoto; ?>
+                    </div>
+                    <?php
+                }
+                ?>
             <?php } ?>
             <div class="advertisement">
                 <?php random_banner(); ?>
@@ -61,18 +74,25 @@ $pages = ContentFactory::getAllByMenu("top", "position");
                 <div class="content">
                     <?php
                     echo $page->getShowHeadline() ? "<h1 class=\"sliding\">{$page->getHeadline()}</h1>" : "";
-                    if ($text_position == "after") {
-                        Template::outputContentElement();
-                    }
                     ?>
+
                     <div class="text-content">
-                        <?php content(); ?>
+                        <?php
+                        if ($text_position == "after") {
+                            Template::outputContentElement();
+                        }
+
+                        if ($page instanceof Article and
+                                $page->article_image) {
+                            echo UliCMS\HTML\imageTag($page->article_image, ["class" => "article-image"]);
+                        }
+                        content();
+                        if ($text_position == "before") {
+                            Template::outputContentElement();
+                        }
+                        ?>
                     </div>
-                    <?php
-                    if ($text_position == "before") {
-                        Template::outputContentElement();
-                    }
-                    ?>
+
                     <?php Template::comments(); ?>
                 </div>
                 <footer>
