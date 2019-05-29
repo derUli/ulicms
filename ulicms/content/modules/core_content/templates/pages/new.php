@@ -130,8 +130,8 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                 </div>
                 <br />
                 <div id="parent-div">
-                    <strong><?php translate("parent"); ?></strong><br /> <select
-                        name="parent" size=1>
+                    <strong><?php translate("parent_id"); ?></strong><br /> <select
+                        name="parent_id" size=1>
                         <option selected="selected" value="NULL">
                             [
                             <?php translate("none"); ?>
@@ -183,7 +183,8 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
             </select> <br /> <br />
             <div class="typedep" id="hidden-attrib">
                 <strong><?php translate("hidden"); ?>
-                </strong><br /> <select name="hidden" size="1"><option value="1">
+                </strong><br /> <select name="hidden" size="1">
+                    <option value="1">
                         <?php translate("yes"); ?>
                     </option>
                     <option value="0" selected>
@@ -266,7 +267,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                            value="<?php esc($og_image); ?>"
                            style="cursor: pointer" /> <a href="#"
                            onclick="$('#og_image').val('');
-                                       return false;"
+                                   return false;"
                            class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?></a>
                 </div>
             </div>
@@ -334,7 +335,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                         <?php
                     }
                     ?>
-                </select> <br /> <br /> <strong><?php translate("parent"); ?>
+                </select> <br /> <br /> <strong><?php translate("parent_id"); ?>
                 </strong><br /> <select name="list_parent" size=1>
                     <option selected="selected" value="NULL">
                         [
@@ -456,7 +457,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                        readonly="readonly" class="kcfinder"
                        value="" style="cursor: pointer" maxlength="255" /> <a href="#"
                        onclick="$('#article_image').val('');
-                                   return false;"
+                               return false;"
                        class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?></a>
             </div>
         </div>

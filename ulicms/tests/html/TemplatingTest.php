@@ -112,4 +112,25 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("pdf", get_format());
     }
 
+    public function testGetMenu() {
+        $_SESSION["language"] = 'en';
+        $html = get_menu("top", null, false);
+        $this->assertStringContainsString("<ul", $html);
+        $this->assertStringContainsString("<li", $html);
+        $this->assertStringContainsString("menu_top", $html);
+        $this->assertStringContainsString("<a href", $html);
+
+        $pages = Contentfactory::getAllByMenuAndLanguage("top", "en");
+        foreach ($pages as $page) {
+            if (!$page->isFrontPage() && $page->isRegular() && !$page->getParent()) {
+                $this->assertStringContainsString($page->slug . ".html", $html);
+                $this->assertStringContainsString($page->title, $html);
+            }
+        }
+        $germanPages = Contentfactory::getAllByLanguage("de");
+        foreach ($germanPages as $page) {
+            $this->assertStringNotContainsString($page->title . ".html", $html);
+        }
+    }
+
 }

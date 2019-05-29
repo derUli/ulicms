@@ -84,8 +84,8 @@ class ContentFactory {
             !is_null($parent_id) ? intval($parent_id) : null
         );
 
-        $sql .= !is_null($parent_id) ? "where `parent` = ?" :
-                "where `parent` IS ?";
+        $sql .= !is_null($parent_id) ? "where `parent_id` = ?" :
+                "where `parent_id` IS ?";
 
         $sql .= " ORDER BY $order";
 
@@ -148,7 +148,7 @@ class ContentFactory {
 
         if ($parent_id !== null and $parent_id !== 0) {
             $parent_id = intval($parent_id);
-            $sql .= "parent = $parent_id and ";
+            $sql .= "parent_id = $parent_id and ";
         }
 
         if ($type !== null and $type !== "") {

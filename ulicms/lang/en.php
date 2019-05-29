@@ -138,7 +138,7 @@ add_translation("RECOVER", "Recover");
 add_translation("PERMALINK", "Name for URL");
 add_translation("MENU", "Menu");
 add_translation("POSITION", "Position");
-add_translation("PARENT", "Parent");
+add_translation("parent_id", "Parent Page");
 add_translation("ACTIVATED", "Enabled");
 add_translation("DEACTIVATED", "Disabled");
 add_translation("VIEW", "View");

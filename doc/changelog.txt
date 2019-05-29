@@ -13,6 +13,8 @@ Neue API-Methoden:
 * Content->hasChildren()
 * Page->getHistory()
 * Page->getParent()
+* Page->makeFrontPage()
+* Page->isFrontPage()
 * link($url, $text, $allowHtml = false, $target = null, $htmlAttributes = array())
 * button_link($url, $text, $type = null, $allowHtml = false, $target = null, $htmlAttributes = array())
 

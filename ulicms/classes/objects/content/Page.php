@@ -26,7 +26,7 @@ class Page extends Content {
     public $menu = "top";
     public $position = 0;
     public $cache_control = "auto";
-    public $parent = null;
+    public $parent_id = null;
     public $access = "all";
     public $meta_description = null;
     public $meta_keywords = null;
@@ -72,7 +72,7 @@ class Page extends Content {
         $this->views = $result->views;
         $this->menu = $result->menu;
         $this->position = $result->position;
-        $this->parent = $result->parent;
+        $this->parent_id = $result->parent_id;
         $this->access = $result->access;
         $this->meta_description = $result->meta_description;
         $this->meta_keywords = $result->meta_keywords;
@@ -141,7 +141,7 @@ class Page extends Content {
     public function create() {
         $sql = "INSERT INTO `" . tbname("content") . "` (slug, title, alternate_title, target, category_id,
 				content, language, menu_image, active, created, lastmodified, author_id,
-				`group_id`, lastchangeby, views, menu, position, parent, access, meta_description, meta_keywords, deleted_at,
+				`group_id`, lastchangeby, views, menu, position, parent_id, access, meta_description, meta_keywords, deleted_at,
 				theme, custom_data, `type`, og_title, og_type, og_image, og_description, cache_control, hidden, comments_enabled, show_headline) VALUES (";
 
         $sql .= "'" . Database::escapeValue($this->slug) . "',";
@@ -171,10 +171,10 @@ class Page extends Content {
 
         $sql .= "'" . Database::escapeValue($this->menu) . "',";
         $sql .= intval($this->position) . ",";
-        if ($this->parent === null) {
+        if ($this->parent_id === null) {
             $sql .= " NULL ,";
         } else {
-            $sql .= intval($this->parent) . ",";
+            $sql .= intval($this->parent_id) . ",";
         }
 
         $sql .= "'" . Database::escapeValue($this->access) . "',";
@@ -263,10 +263,10 @@ class Page extends Content {
 
         $sql .= "menu='" . Database::escapeValue($this->menu) . "',";
         $sql .= "position=" . intval($this->position) . ",";
-        if ($this->parent === null) {
-            $sql .= "parent = NULL ,";
+        if ($this->parent_id === null) {
+            $sql .= "parent_id = NULL ,";
         } else {
-            $sql .= "parent=" . intval($this->parent) . ",";
+            $sql .= "parent_id=" . intval($this->parent_id) . ",";
         }
 
         $sql .= "access='" . Database::escapeValue($this->access) . "',";
@@ -360,10 +360,10 @@ class Page extends Content {
     }
 
     public function getParent() {
-        if (!$this->parent) {
+        if (!$this->parent_id) {
             return null;
         }
-        return ContentFactory::getByID($this->parent);
+        return ContentFactory::getByID($this->parent_id);
     }
 
     public function getHistory($order = "date DESC") {
@@ -421,6 +421,16 @@ class Page extends Content {
 
     public function checkAccess() {
         return checkAccess($this->access);
+    }
+
+    public function makeFrontPage() {
+        Settings::setLanguageSetting("frontpage", $this->slug, $this->language);
+    }
+
+    public function isFrontPage() {
+        $frontPage = Settings::getLang("frontpage",
+                        $this->language);
+        return $frontPage === $this->slug;
     }
 
 }

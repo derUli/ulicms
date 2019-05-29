@@ -40,15 +40,15 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetAllByParent() {
 
-        $query = Database::pQuery("select parent from {prefix}content where "
-                        . "parent is not null", array(), true);
+        $query = Database::pQuery("select parent_id from {prefix}content where "
+                        . "parent_id is not null", array(), true);
         $result = Database::fetchObject($query);
 
-        $pages = ContentFactory::getAllByParent($result->parent);
+        $pages = ContentFactory::getAllByParent($result->parent_id);
 
         $this->assertGreaterThanOrEqual(1, count($pages));
         foreach ($pages as $page) {
-            $this->assertEquals($result->parent, $page->parent);
+            $this->assertEquals($result->parent_id, $page->parent_id);
         }
     }
 

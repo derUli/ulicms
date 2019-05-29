@@ -1,0 +1,1 @@
+ALTER TABLE {prefix}content CHANGE `parent` `parent_id` int(11) DEFAULT NULL;

@@ -139,7 +139,7 @@ add_translation("RECOVER", "Wiederherstellen");
 add_translation("PERMALINK", "Name für die URL");
 add_translation("MENU", "Menü");
 add_translation("POSITION", "Position");
-add_translation("PARENT", "Übergeordnete Seite");
+add_translation("parent_id", "Übergeordnete Seite");
 add_translation("ACTIVATED", "Aktiv");
 add_translation("DEACTIVATED", "Deaktiv");
 add_translation("VIEW", "Anzeigen");

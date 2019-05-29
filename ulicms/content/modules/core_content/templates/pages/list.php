@@ -102,7 +102,7 @@ if ($permissionChecker->hasPermission("pages")) {
 
     array_unshift($menus, "null");
 // FIXME: Das SQL hier in einen Controller auslagern
-    $sql = "select a.id as id, a.title as title from " . tbname("content") . " a inner join " . tbname("content") . " b on a.id = b.parent ";
+    $sql = "select a.id as id, a.title as title from " . tbname("content") . " a inner join " . tbname("content") . " b on a.id = b.parent_id ";
 
     if (faster_in_array($_SESSION["filter_language"], getAllLanguages(true))) {
         $sql .= "where b.language='" . $_SESSION["filter_language"] . "' ";
@@ -251,7 +251,7 @@ if ($permissionChecker->hasPermission("pages")) {
             </div>
             <div class="row">
                 <div class="col-xs-6">
-                    <?php translate("parent"); ?>
+                    <?php translate("parent_id"); ?>
                     <select name="filter_parent" onchange="filterByParent(this);">
                         <option value="null"
                         <?php
@@ -347,7 +347,6 @@ if ($permissionChecker->hasPermission("pages")) {
         <?php
         if ($_SESSION["filter_status"] == "trash" and $permissionChecker->hasPermission("pages")) {
             ?>
-
             <a
                 href="<?php echo ModuleHelper::buildMethodCallUrl("PageController", "emptyTrash"); ?>"
                 onclick="return ajaxEmptyTrash(this.href);" class="btn btn-warning">
@@ -356,16 +355,7 @@ if ($permissionChecker->hasPermission("pages")) {
             <?php
         }
         ?>
-
         <?php
-        if (faster_in_array($_GET["order"], array(
-                    "title",
-                    "menu",
-                    "position",
-                    "parent",
-                    "active"
-                )))
-            $order = $_GET["order"];
         $filter_language = basename($_GET["filter_language"]);
         $filter_status = basename($_GET["filter_status"]);
 
@@ -416,9 +406,9 @@ if ($permissionChecker->hasPermission("pages")) {
 
         if ($_SESSION["filter_parent"] != null) {
             if ($_SESSION["filter_parent"] != "-") {
-                $filter_sql .= "AND parent = '" . intval($_SESSION["filter_parent"]) . "' ";
+                $filter_sql .= "AND parent_id = '" . intval($_SESSION["filter_parent"]) . "' ";
             } else {
-                $filter_sql .= "AND parent IS NULL ";
+                $filter_sql .= "AND parent_id is NULL ";
             }
         }
 
@@ -448,7 +438,7 @@ if ($permissionChecker->hasPermission("pages")) {
         <?php
         if ($_SESSION["filter_parent"] and $_SESSION["filter_parent"] != '-') {
             $parentPage = ContentFactory::getByID($_SESSION["filter_parent"]);
-            $parentId = $parentPage->parent ? $parentPage : "-";
+            $parentId = $parentPage->parent_id ? $parentPage : "-";
             ?>
             <div class="form-group">
                 <a href="<?php
@@ -470,7 +460,7 @@ if ($permissionChecker->hasPermission("pages")) {
                         </th>
                         <th class="hide-on-mobile"><?php translate("position"); ?>
                         </th>
-                        <th class="hide-on-mobile"><?php translate("parent"); ?>
+                        <th class="hide-on-mobile"><?php translate("parent_id"); ?>
                         </th>
 
                         <th class="hide-on-mobile"><?php translate("activated"); ?>
@@ -506,7 +496,7 @@ if ($permissionChecker->hasPermission("pages")) {
                             echo "<td class = \"hide-on-mobile\">" . _esc(get_translation($row->menu)) . "</td>";
 
                             echo "<td class=\"hide-on-mobile\">" . $row->position . "</td>";
-                            echo "<td class=\"hide-on-mobile\">" . _esc(getPageTitleByID($row->parent)) . "</td>";
+                            echo "<td class=\"hide-on-mobile\">" . _esc(getPageTitleByID($row->parent_id)) . "</td>";
 
                             if ($row->active) {
                                 echo "<td class=\"hide-on-mobile\">" . get_translation("yes") . "</td>";
