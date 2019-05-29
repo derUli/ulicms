@@ -7,7 +7,7 @@ $.fn.isInViewport = function () {
 };
 
 $(function () {
-    $(".footer").last().fadeIn();
+    $("footer").last().fadeIn();
 
     $(".main").onepage_scroll({
         pagination: true,
