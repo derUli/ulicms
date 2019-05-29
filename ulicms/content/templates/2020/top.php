@@ -54,6 +54,7 @@ $pages = ContentFactory::getAllByMenu("top", "position");
                 continue;
             }
             set_requested_pagename($page->slug, $page->language);
+            $text_position = get_text_position();
             $color ++;
             ?>
             <section class="bgcolor bgcolor<?php echo $color; ?>">
