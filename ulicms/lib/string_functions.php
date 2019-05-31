@@ -105,7 +105,7 @@ function keywordsFromString($text) {
 }
 
 function stringOrNull($val) {
-    return StringHelper::isNotNullOrWhitespace($val) ? $val : null;
+    return is_present($val) ? $val : null;
 }
 
 // Aus einer Boolean einen String machen ("true" oder "false")
@@ -115,12 +115,12 @@ function strbool($value) {
 
 function isNullOrEmpty($variable) {
     trigger_error("global function isNullOrEmpty() is deprecated. Plese use StringHelper::isNullOrEmpty() instead.", E_USER_WARNING);
-    return StringHelper::isNullOrEmpty($variable);
+    return is_blank($variable);
 }
 
 function isNotNullOrEmpty($variable) {
     trigger_error("global function isNotNullOrEmpty() is deprecated. Plese use StringHelper::isNotNullOrEmpty() instead.", E_USER_WARNING);
-    return StringHelper::isNotNullOrEmpty($variable);
+    return is_present($variable);
 }
 
 function convertLineEndingsToLN($s) {

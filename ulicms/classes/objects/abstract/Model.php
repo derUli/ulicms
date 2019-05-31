@@ -103,4 +103,8 @@ class Model {
         return $result;
     }
 
+    public function isPersistent() {
+        return intval($this->getID()) >= 1;
+    }
+
 }

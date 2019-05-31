@@ -25,7 +25,7 @@ if ($permissionChecker->hasPermission("pages")) {
     $sql = "SELECT id, name FROM " . tbname("audio");
     $audios = Database::query($sql);
 
-    $users = getAllUsers();
+    $users = getUsers();
 
     $groups = Group::getAll();
     $groupsSql = db_query("SELECT id, name from " . tbname("groups"));

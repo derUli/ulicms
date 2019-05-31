@@ -1,6 +1,8 @@
 <?php
 
-// this class contains functions for managing user accounts
+use UliCMS\Security\Encryption;
+
+// this ffile contains functions for managing user accounts
 function getUsers() {
     $query = Database::query("SELECT id, username FROM " . tbname("users") . " ORDER by username");
     $users = array();
@@ -11,7 +13,6 @@ function getUsers() {
     return $users;
 }
 
-// this class contains functions for managing user accounts
 function getAllUsers() {
     return getUsers();
 }
@@ -25,9 +26,14 @@ function getUsersOnline() {
     return $retval;
 }
 
-function changePassword($password, $id) {
-    $newPassword = Encryption::hashPassword($password);
-    return Database::query("UPDATE " . tbname("users") . " SET `password` = '$newPassword',  `old_encryption` = 0, `password_changed` = NOW() WHERE id = $id");
+function changePassword($password, $userId) {
+    $user = new User($userId);
+    if (!$user->getId()) {
+        return false;
+    }
+    $user->setPassword($password);
+    $user->save();
+    return true;
 }
 
 function getUserByName($name) {
@@ -48,30 +54,6 @@ function getUserById($id) {
     }
 }
 
-function addUser($username, $lastname, $firstname, $email, $password, $sendMessage = true, $acl_group = null, $require_password_change = 0, $admin = 0, $locked = 0, $default_language = null) {
-    trigger_error("addUser is deprecated. Please use the User class directly instead.", E_USER_DEPRECATED);
-    if (user_exists($username)) {
-        return null;
-    }
-    $user = new User();
-    $user->setUsername($username);
-    $user->setLastname($lastname);
-    $user->setFirstname($firstname);
-    $user->setEmail($email);
-    $user->setPassword($password);
-    if ($acl_group) {
-        $user->setPrimaryGroupId($acl_group);
-    } else if (Settings::get("default_acl_group")) {
-        $user->setPrimaryGroupId(Settings::get("default_acl_group"));
-    }
-    $user->setRequirePasswordChange($require_password_change);
-    $user->setAdmin($admin);
-    $user->setLocked($locked);
-    $user->setDefaultLanguage($default_language);
-    $user->save();
-    return $user;
-}
-
 function get_user_id() {
     if (isset($_SESSION["login_id"])) {
         return intval($_SESSION["login_id"]);
@@ -81,8 +63,9 @@ function get_user_id() {
 }
 
 function user_exists($name) {
-    $query = Database::query("SELECT id FROM " . tbname("users") . " WHERE username = '" . db_escape($name) . "'");
-    return db_num_rows($query) > 0;
+    $user = new User();
+    $user->loadByUsername($name);
+    return intval($user->getId()) > 0;
 }
 
 function register_session($user, $redirect = true) {
@@ -124,11 +107,8 @@ function validate_login($user, $password, $token = null) {
     $user = getUserByName($user);
 
     if ($user) {
-        if ($user["old_encryption"]) {
-            $password = md5($password);
-        } else {
-            $password = Encryption::hashPassword($password);
-        }
+        $password = Encryption::hashPassword($password);
+
         $twofactor_authentication = Settings::get("twofactor_authentication");
         if ($user["password"] == $password) {
             if ($twofactor_authentication and ! is_null($token)) {
