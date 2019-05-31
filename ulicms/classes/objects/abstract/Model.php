@@ -107,4 +107,25 @@ class Model {
         return intval($this->getID()) >= 1;
     }
 
+    public function hasChanges() {
+
+        $hasChanges = false;
+        $className = get_class($this);
+        $originalDataset = new $className($this->getID());
+
+        $reflection = new ReflectionClass($this);
+
+        $vars = $reflection->getProperties();
+        foreach ($vars as $property) {
+            $camelCaseVar = ModuleHelper::underscoreToCamel($property->getName());
+            $method = "get" . ucfirst($camelCaseVar);
+
+            if (method_exists($this, $method)
+                    and $this->$method() != $originalDataset->$method()) {
+                $hasChanges = true;
+            }
+        }
+        return $hasChanges;
+    }
+
 }

@@ -17,6 +17,7 @@ Neue API-Methoden:
 * Page->isFrontPage()
 * User->checkPassword($password)
 * Model->isPersistent()
+* Model->hasChanges()
 * link($url, $text, $allowHtml = false, $target = null, $htmlAttributes = array())
 * button_link($url, $text, $type = null, $allowHtml = false, $target = null, $htmlAttributes = array())
 
