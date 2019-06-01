@@ -19,6 +19,7 @@ Neue API-Methoden:
 * User->checkPassword($password)
 * Model->isPersistent()
 * Model->hasChanges()
+* TypeMapper::getModel($type)
 * link($url, $text, $allowHtml = false, $target = null, $htmlAttributes = array())
 * button_link($url, $text, $type = null, $allowHtml = false, $target = null, $htmlAttributes = array())
 
