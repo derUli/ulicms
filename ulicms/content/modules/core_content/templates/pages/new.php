@@ -537,7 +537,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
     do_event("page_option");
     ?>
     <div class="typedep" id="content-editor">
-        <textarea name="page_content" id="page_content" cols=60 rows=20
+        <textarea name="content" id="content" cols=60 rows=20
                   class="<?php esc($editor); ?>" data-mimetype="text/html"></textarea>
 
     </div>

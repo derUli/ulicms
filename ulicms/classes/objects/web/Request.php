@@ -26,6 +26,9 @@ class Request {
         }
         if ($value !== null) {
             switch ($convert) {
+                case "bool":
+                    $value = intval($value);
+                    break;
                 case "int":
                     $value = intval($value);
                     break;

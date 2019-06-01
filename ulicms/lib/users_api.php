@@ -62,6 +62,14 @@ function get_user_id() {
     }
 }
 
+function get_group_id() {
+    if (isset($_SESSION["group_id"])) {
+        return intval($_SESSION["group_id"]);
+    } else {
+        return 0;
+    }
+}
+
 function user_exists($name) {
     $user = new User();
     $user->loadByUsername($name);
