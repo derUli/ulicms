@@ -62,6 +62,16 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(0, get_user_id());
     }
 
+    public function testGetUserGroupReturnsGroupId() {
+        $_SESSION["group_id"] = 666;
+        $this->assertEquals(666, get_group_id());
+        unset($_SESSION["group_id"]);
+    }
+
+    public function testGetUserGroupReturnsZero() {
+        $this->assertEquals(0, get_group_id());
+    }
+
     public function testUserExistsTrue() {
         $this->assertTrue(user_exists("testuser1"));
     }

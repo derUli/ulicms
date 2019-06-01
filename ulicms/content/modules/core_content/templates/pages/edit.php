@@ -358,12 +358,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                 <input type="email" name="article_author_email"
                                        value="<?php echo _esc($row->article_author_email); ?>"
                                        maxlength="80"> <br />
-                                <div id="comment-fields">
-                                    <strong><?php translate("homepage"); ?></strong><br /> <input
-                                        type="url" name="comment_homepage"
-                                        value="<?php echo _esc($row->comment_homepage); ?>"
-                                        maxlength="255"> <br />
-                                </div>
+
                                 <strong><?php translate("article_date"); ?></strong><br /> <input
                                     name="article_date" type="datetime-local"
                                     value="<?php

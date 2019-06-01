@@ -10,7 +10,9 @@ use UliCMS\Constants\LinkTarget;
 
 class PageController extends Controller {
 
-// @FIXME: Content-Model statt SQL verwenden
+    // @FIXME: Content-Model statt SQL verwenden
+    // Speichern Kürzere Methoden: In mehrere Methoden aufteilen
+    // Code in createPost in editPost wiederverwenden
     public function createPost() {
 
         $this->validateInput();
@@ -19,7 +21,7 @@ class PageController extends Controller {
 
         $model = TypeMapper::getModel(Request::getVar("type"));
         $model->slug = Request::getVar(
-                        "model",
+                        "slug",
                         StringHelper::cleanString(
                                 Request::getVar("title")
                         )
@@ -53,7 +55,7 @@ class PageController extends Controller {
         $model->cache_control = Request::getVar("cache_control", "auto", "str");
 
         $parent_id = Request::getVar("parent_id", null, "str");
-        $model->parent_id = $parent_id and $parent_id !== "NULL" ? intval($parent_id) : null;
+        $model->parent_id = intval($parent_id) > 0 ? intval($parent_id) : null;
         if (Request::getVar("access")) {
             $model->access = implode(",", Request::getVar("access"));
         }
@@ -113,7 +115,6 @@ class PageController extends Controller {
                     Request::getVar("only_{$object}_can_edit"), false, "bool");
         }
 
-        $model->comment_homepage = Request::getVar("comment_homepage");
         $model->link_to_language = Request::getVar("link_to_language", null, "int");
 
         $model->comments_enabled = Request::getVar("commens_enabled") !== "null" ? Request::getVar("comments_enabled", false, "bool") : null;
@@ -130,7 +131,7 @@ class PageController extends Controller {
         $user_id = get_user_id();
         $content_id = $model->getId();
 
-        if ($type == "list") {
+        if ($model instanceof Content_List) {
             $list_language = $_POST["list_language"];
             if (empty($list_language)) {
                 $list_language = null;
@@ -174,10 +175,10 @@ class PageController extends Controller {
             $list->type = $list_type;
             $list->save();
         }
-        $content = $unescaped_content;
+        $content = $model->content;
         VCS::createRevision($content_id, $content, $user_id);
 
-        $type = DefaultContentTypes::get($type);
+        $type = DefaultContentTypes::get($model->type);
         foreach ($type->customFields as $field) {
             $field->name = "{$_POST['type']}_{$field->name}";
             $value = null;
@@ -294,7 +295,6 @@ class PageController extends Controller {
         $only_others_can_edit = intval(isset($_POST["only_others_can_edit"]));
         $hidden = intval($_POST["hidden"]);
 
-        $comment_homepage = Database::escapeValue($_POST["comment_homepage"]);
         $link_to_language = StringHelper::isNotNullOrWhitespace(Request::getVar("link_to_language")) ? intval(Request::getVar("link_to_language")) : "NULL";
 
         $comments_enabled = $_POST["comments_enabled"] !== "null" ? intval($_POST["comments_enabled"]) : null;
@@ -306,7 +306,7 @@ class PageController extends Controller {
 	article_author_name='$article_author_name', article_author_email = '$article_author_email', article_image = '$article_image',  article_date = $article_date, excerpt = '$excerpt',
 	only_admins_can_edit = $only_admins_can_edit, `only_group_can_edit` = $only_group_can_edit,
 	only_owner_can_edit = $only_owner_can_edit, only_others_can_edit = $only_others_can_edit,
-	hidden = $hidden, comment_homepage = '$comment_homepage',
+	hidden = $hidden,
 	link_to_language = $link_to_language, comments_enabled = $comments_enabled WHERE id=$id";
         db_query($sql);
 
@@ -525,6 +525,7 @@ class PageController extends Controller {
             </option>
             <?php
         }
+        exit();
     }
 
     protected function validateInput() {
