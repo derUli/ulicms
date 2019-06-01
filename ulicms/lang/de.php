@@ -143,7 +143,7 @@ add_translation("parent_id", "Übergeordnete Seite");
 add_translation("ACTIVATED", "Aktiv");
 add_translation("DEACTIVATED", "Deaktiv");
 add_translation("VIEW", "Anzeigen");
-add_translation("PAGE_TITLE", "Seitentitel");
+add_translation("page_title", "Seitentitel");
 add_translation("ALTERNATE_TITLE", "Alternative Überschrift");
 add_translation("ALTERNATE_TITLE_INFO", "Falls die Überschrift auf der Seite vom Titel im Navigationsmenü abweichen soll. ");
 add_translation("LANGUAGE", "Sprache");

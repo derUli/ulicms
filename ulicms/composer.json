@@ -38,7 +38,8 @@
         "chrisjean/php-ico": "*",
         "willdurand/negotiation": "*",
         "cocur/slugify": "*",
-        "matthiasmullie/minify": "*"
+        "matthiasmullie/minify": "*",
+        "rakit/validation": "^1.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^7.0"

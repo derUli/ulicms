@@ -142,7 +142,7 @@ add_translation("parent_id", "Parent Page");
 add_translation("ACTIVATED", "Enabled");
 add_translation("DEACTIVATED", "Disabled");
 add_translation("VIEW", "View");
-add_translation("PAGE_TITLE", "Page title");
+add_translation("page_title", "Page title");
 add_translation("ALTERNATE_TITLE", "Alternate title");
 add_translation("ALTERNATE_TITLE_INFO", "If the headline should not be the page title.");
 add_translation("LANGUAGE", "Language");

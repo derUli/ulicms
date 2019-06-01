@@ -11,7 +11,7 @@ class PageController extends Controller {
         $acl = new ACL();
         if ($_POST["slug"] != "") {
             $slug = db_escape($_POST["slug"]);
-            $page_title = db_escape($_POST["page_title"]);
+            $page_title = db_escape($_POST["title"]);
             $alternate_title = db_escape($_POST["alternate_title"]);
             $activated = intval($_POST["activated"]);
             $hidden = intval($_POST["hidden"]);
@@ -197,7 +197,7 @@ class PageController extends Controller {
         $acl = new ACL();
         // @FIXME: Berechtigungen pages_edit_own und pages_edit_others prüfen.
         $slug = db_escape($_POST["slug"]);
-        $page_title = db_escape($_POST["page_title"]);
+        $page_title = db_escape($_POST["title"]);
         $activated = intval($_POST["activated"]);
         $unescaped_content = $_POST["page_content"];
         $page_content = $_POST["page_content"];
@@ -505,9 +505,9 @@ class PageController extends Controller {
         foreach ($pages as $key => $page) {
             ?>
             <option value="<?php
-            echo $page["id"];
-            ?>"
-                    <?php if ($page["id"] == $parent_id) echo "selected"; ?>>
+                    echo $page["id"];
+                    ?>"
+                        <?php if ($page["id"] == $parent_id) echo "selected"; ?>>
                         <?php
                         echo esc($page["title"]);
                         ?>
