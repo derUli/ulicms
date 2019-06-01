@@ -418,7 +418,7 @@ TypeMapper::loadMapping();
 HelperRegistry::loadModuleHelpers();
 ControllerRegistry::loadModuleControllers();
 
-require_once dirname(__file__) . "/templating.php";
+require_once dirname(__file__) . "/lib/templating.php";
 
 do_event("before_init");
 do_event("init");

@@ -42,7 +42,6 @@ if (faster_in_array($_SESSION["language"], $languages) && is_file(getLanguageFil
 Translation::loadAllModuleLanguageFiles($_SESSION["language"]);
 Translation::includeCustomLangFile($_SESSION["language"]);
 
-require_once "templating.php";
 Translation::loadCurrentThemeLanguageFiles($_SESSION["language"]);
 do_event("custom_lang_" . $_SESSION["language"]);
 
