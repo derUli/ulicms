@@ -172,7 +172,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                 </select><br /> <br />
             </div>
             <strong><?php translate("activated"); ?>
-            </strong><br /> <select name="activated" size=1
+            </strong><br /> <select name="active" size=1
                                     <?php if (!$pages_activate_own) echo "disabled"; ?>>
                 <option value="1">
                     <?php translate("enabled"); ?>

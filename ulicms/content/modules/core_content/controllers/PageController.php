@@ -18,7 +18,7 @@ class PageController extends Controller {
         $slug = db_escape($_POST["slug"]);
         $page_title = db_escape($_POST["title"]);
         $alternate_title = db_escape($_POST["alternate_title"]);
-        $activated = intval($_POST["activated"]);
+        $active = intval($_POST["active"]);
         $hidden = intval($_POST["hidden"]);
         $page_content = $_POST["page_content"];
         $group = Group::getCurrentGroup();
@@ -84,7 +84,7 @@ class PageController extends Controller {
         }
 
         $approved = 1;
-        if (!$pages_activate_own and $activated == 0) {
+        if (!$pages_activate_own and $active == 0) {
             $approved = 0;
         }
 
@@ -115,7 +115,7 @@ class PageController extends Controller {
 				`only_admins_can_edit`, `only_group_can_edit`, `only_owner_can_edit`, `only_others_can_edit`,
 				`comment_homepage`, `link_to_language`, `comments_enabled` )
 
-  VALUES('$slug','$page_title','$page_content',$parent_id, $activated," . time() . ", " . time() . "," . $_SESSION["login_id"] . "," . $_SESSION["group_id"] . ", '$redirection', '$menu', $position, '" . $access . "',
+  VALUES('$slug','$page_title','$page_content',$parent_id, $active," . time() . ", " . time() . "," . $_SESSION["login_id"] . "," . $_SESSION["group_id"] . ", '$redirection', '$menu', $position, '" . $access . "',
   '$meta_description', '$meta_keywords',
   '$language', '$target', '$category_id', '$alternate_title',
   '$menu_image', '$custom_data', '$theme', '$og_title',
@@ -204,7 +204,7 @@ class PageController extends Controller {
         // @FIXME: Berechtigungen pages_edit_own und pages_edit_others prüfen.
         $slug = db_escape($_POST["slug"]);
         $page_title = db_escape($_POST["title"]);
-        $activated = intval($_POST["activated"]);
+        $active = intval($_POST["active"]);
         $unescaped_content = $_POST["page_content"];
         $page_content = $_POST["page_content"];
         $group = Group::getCurrentGroup();
@@ -271,7 +271,7 @@ class PageController extends Controller {
         $group_id = intval($_POST["group_id"]);
         $approved_sql = "";
 
-        if ($activated) {
+        if ($active) {
             $approved_sql = ", approved = 1";
         }
 
@@ -301,7 +301,7 @@ class PageController extends Controller {
         $comments_enabled = Database::escapeValue($comments_enabled);
 
         do_event("before_edit_page");
-        $sql = "UPDATE " . tbname("content") . " SET slug = '$slug' , title='$page_title', `alternate_title`='$alternate_title', parent_id=$parent_id, content='$page_content', active=$activated, lastmodified=" . time() . ", redirection = '$redirection', menu = '$menu', position = $position, lastchangeby = $user, language='$language', access = '$access', meta_description = '$meta_description', meta_keywords = '$meta_keywords', target='$target', category_id = $category_id, menu_image='$menu_image', custom_data='$custom_data', theme='$theme',
+        $sql = "UPDATE " . tbname("content") . " SET slug = '$slug' , title='$page_title', `alternate_title`='$alternate_title', parent_id=$parent_id, content='$page_content', active=$active, lastmodified=" . time() . ", redirection = '$redirection', menu = '$menu', position = $position, lastchangeby = $user, language='$language', access = '$access', meta_description = '$meta_description', meta_keywords = '$meta_keywords', target='$target', category_id = $category_id, menu_image='$menu_image', custom_data='$custom_data', theme='$theme',
 	og_title = '$og_title', og_type ='$og_type', og_image = '$og_image', og_description='$og_description', `type` = '$type', `module` = $module, `video` = $video, `audio` = $audio, text_position = '$text_position', author_id = $author_id, `group_id` = $group_id, image_url = $image_url, show_headline = $show_headline, cache_control ='$cache_control' $approved_sql,
 	article_author_name='$article_author_name', article_author_email = '$article_author_email', article_image = '$article_image',  article_date = $article_date, excerpt = '$excerpt',
 	only_admins_can_edit = $only_admins_can_edit, `only_group_can_edit` = $only_group_can_edit,
