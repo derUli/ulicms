@@ -28,6 +28,7 @@ Entfernte API-Methoden:
 
 Entfernte Features:
 * Unterstützung für veraltete unsichere Passwortverschlüsselung entfernt
+* Unbenutztes Feld "Homepage" in den Metadaten eines Artikels entfernt
 
 Bekannte Probleme:
 * CodeMirror kann im Moment nicht als Standard HTML-Editor festgelegt werden. Das Feature ist auf Grund eines Bugs vorerst deaktiviert.
