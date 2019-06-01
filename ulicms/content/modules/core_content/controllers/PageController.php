@@ -3,106 +3,111 @@
 use UliCMS\CoreContent\Models\ViewModels\DiffViewModel;
 use UliCMS\Models\Content\VCS;
 use UliCMS\Models\Content\Types\DefaultContentTypes;
+use Rakit\Validation\Validator;
+use UliCMS\Security\PermissionChecker;
 
 class PageController extends Controller {
 
     // @FIXME: Content-Model statt SQL verwenden
     public function createPost() {
-        $acl = new ACL();
-        if ($_POST["slug"] != "") {
-            $slug = db_escape($_POST["slug"]);
-            $page_title = db_escape($_POST["title"]);
-            $alternate_title = db_escape($_POST["alternate_title"]);
-            $activated = intval($_POST["activated"]);
-            $hidden = intval($_POST["hidden"]);
-            $page_content = $_POST["page_content"];
-            $group = Group::getCurrentGroup();
-            if (Stringhelper::isNotNullOrWhitespace($group->getAllowableTags())) {
-                $page_content = strip_tags($page_content, $group->getAllowableTags());
-            }
-            $page_content = Database::escapeValue($page_content);
-            $category_id = intval($_POST["category_id"]);
-            $redirection = db_escape($_POST["redirection"]);
-            $menu = db_escape($_POST["menu"]);
-            $position = (int) $_POST["position"];
-            $menu_image = db_escape($_POST["menu_image"]);
-            $custom_data = db_escape($_POST["custom_data"]);
-            $theme = db_escape($_POST["theme"]);
-            $type = db_escape($_POST["type"]);
-            if ($type == "node") {
-                $redirection = "#";
-            }
-            $cache_control = db_escape($_POST["cache_control"]);
 
-            if ($_POST["parent_id"] == "NULL") {
-                $parent_id = "NULL";
-            } else {
-                $parent_id = intval($_POST["parent_id"]);
-            }
-            $access = implode(",", $_POST["access"]);
-            $access = db_escape($access);
-            $target = db_escape($_POST["target"]);
+        $this->validateInput();
 
-            // Open Graph
-            $og_title = db_escape($_POST["og_title"]);
-            $og_description = db_escape($_POST["og_description"]);
-            $og_type = db_escape($_POST["og_type"]);
-            $og_image = db_escape($_POST["og_image"]);
+        $permissionChecker = new PermissionChecker(get_user_id());
 
-            $meta_description = Database::escapeValue($_POST["meta_description"]);
-            $meta_keywords = Database::escapeValue($_POST["meta_keywords"]);
+        $slug = db_escape($_POST["slug"]);
+        $page_title = db_escape($_POST["title"]);
+        $alternate_title = db_escape($_POST["alternate_title"]);
+        $activated = intval($_POST["activated"]);
+        $hidden = intval($_POST["hidden"]);
+        $page_content = $_POST["page_content"];
+        $group = Group::getCurrentGroup();
+        if (Stringhelper::isNotNullOrWhitespace($group->getAllowableTags())) {
+            $page_content = strip_tags($page_content, $group->getAllowableTags());
+        }
+        $page_content = Database::escapeValue($page_content);
+        $category_id = intval($_POST["category_id"]);
+        $redirection = db_escape($_POST["redirection"]);
+        $menu = db_escape($_POST["menu"]);
+        $position = (int) $_POST["position"];
+        $menu_image = db_escape($_POST["menu_image"]);
+        $custom_data = db_escape($_POST["custom_data"]);
+        $theme = db_escape($_POST["theme"]);
+        $type = db_escape($_POST["type"]);
+        if ($type == "node") {
+            $redirection = "#";
+        }
+        $cache_control = db_escape($_POST["cache_control"]);
 
-            $language = db_escape($_POST["language"]);
-            $module = "NULL";
+        if ($_POST["parent_id"] == "NULL") {
+            $parent_id = "NULL";
+        } else {
+            $parent_id = intval($_POST["parent_id"]);
+        }
+        $access = implode(",", $_POST["access"]);
+        $access = db_escape($access);
+        $target = db_escape($_POST["target"]);
 
-            if (isset($_POST["module"]) and $_POST["module"] !== "null") {
-                $module = "'" . Database::escapeValue($_POST["module"]) . "'";
-            }
+// Open Graph
+        $og_title = db_escape($_POST["og_title"]);
+        $og_description = db_escape($_POST["og_description"]);
+        $og_type = db_escape($_POST["og_type"]);
+        $og_image = db_escape($_POST["og_image"]);
 
-            $video = "NULL";
-            if (isset($_POST["video"]) and ! empty($_POST["video"])) {
-                $video = intval($_POST["video"]);
-            }
+        $meta_description = Database::escapeValue($_POST["meta_description"]);
+        $meta_keywords = Database::escapeValue($_POST["meta_keywords"]);
 
-            $audio = "NULL";
-            if (isset($_POST["audio"]) and ! empty($_POST["audio"])) {
-                $audio = intval($_POST["audio"]);
-            }
+        $language = db_escape($_POST["language"]);
+        $module = "NULL";
 
-            $text_position = Database::escapeValue($_POST["text_position"]);
+        if (isset($_POST["module"]) and $_POST["module"] !== "null") {
+            $module = "'" . Database::escapeValue($_POST["module"]) . "'";
+        }
 
-            $pages_activate_own = $acl->hasPermission("pages_activate_own");
+        $video = "NULL";
+        if (isset($_POST["video"]) and ! empty($_POST["video"])) {
+            $video = intval($_POST["video"]);
+        }
 
-            $image_url = "NULL";
-            if (isset($_POST["image_url"]) and $_POST["image_url"] !== "") {
-                $image_url = "'" . Database::escapeValue($_POST["image_url"]) . "'";
-            }
+        $audio = "NULL";
+        if (isset($_POST["audio"]) and ! empty($_POST["audio"])) {
+            $audio = intval($_POST["audio"]);
+        }
 
-            $approved = 1;
-            if (!$pages_activate_own and $activated == 0) {
-                $approved = 0;
-            }
+        $text_position = Database::escapeValue($_POST["text_position"]);
 
-            $article_author_name = Database::escapeValue($_POST["article_author_name"]);
-            $article_author_email = Database::escapeValue($_POST["article_author_email"]);
-            $article_image = Database::escapeValue($_POST["article_image"]);
-            $article_date = StringHelper::isNotNullOrEmpty($_POST["article_date"]) ? "'" . date('Y-m-d H:i:s', strtotime($_POST["article_date"])) . "'" : "Null";
-            $excerpt = Database::escapeValue($_POST["excerpt"]);
-            $only_admins_can_edit = intval(Settings::get("only_admins_can_edit"));
-            $only_group_can_edit = intval(Settings::get("only_group_can_edit"));
-            $only_owner_can_edit = intval(Settings::get("only_owner_can_edit"));
-            $only_others_can_edit = intval(Settings::get("only_others_can_edit"));
+        $pages_activate_own = $permissionChecker->hasPermission("pages_activate_own");
 
-            $comment_homepage = Database::escapeValue($_POST["comment_homepage"]);
-            $link_to_language = StringHelper::isNotNullOrWhitespace(Request::getVar("link_to_language")) ? intval(Request::getVar("link_to_language")) : "NULL";
+        $image_url = "NULL";
+        if (isset($_POST["image_url"]) and $_POST["image_url"] !== "") {
+            $image_url = "'" . Database::escapeValue($_POST["image_url"]) . "'";
+        }
 
-            $comments_enabled = $_POST["comments_enabled"] !== "null" ? intval($_POST["comments_enabled"]) : null;
-            $comments_enabled = Database::escapeValue($comments_enabled);
+        $approved = 1;
+        if (!$pages_activate_own and $activated == 0) {
+            $approved = 0;
+        }
 
-            $show_headline = intval($_POST["show_headline"]);
+        $article_author_name = Database::escapeValue($_POST["article_author_name"]);
+        $article_author_email = Database::escapeValue($_POST["article_author_email"]);
+        $article_image = Database::escapeValue($_POST["article_image"]);
+        $article_date = StringHelper::isNotNullOrEmpty($_POST["article_date"]) ? "'" . date('Y-m-d H:i:s', strtotime($_POST["article_date"])) . "'" : "Null";
+        $excerpt = Database::escapeValue($_POST["excerpt"]);
+        $only_admins_can_edit = intval(Settings::get("only_admins_can_edit"));
+        $only_group_can_edit = intval(Settings::get("only_group_can_edit"));
+        $only_owner_can_edit = intval(Settings::get("only_owner_can_edit"));
+        $only_others_can_edit = intval(Settings::get("only_others_can_edit"));
 
-            do_event("before_create_page");
-            db_query("INSERT INTO " . tbname("content") . " (slug, title, content, parent_id, active, created, lastmodified, author_id, `group_id`,
+        $comment_homepage = Database::escapeValue($_POST["comment_homepage"]);
+        $link_to_language = StringHelper::isNotNullOrWhitespace(Request::getVar("link_to_language")) ? intval(Request::getVar("link_to_language")) : "NULL";
+
+        $comments_enabled = $_POST["comments_enabled"] !== "null" ? intval($_POST["comments_enabled"]) : null;
+        $comments_enabled = Database::escapeValue($comments_enabled);
+
+        $show_headline = intval($_POST["show_headline"]);
+
+        do_event("before_create_page");
+        db_query("INSERT INTO " . tbname("content") . " (slug, title, content, parent_id, active, created, lastmodified, author_id, `group_id`,
   redirection,menu,position,
   access, meta_description, meta_keywords, language, target, category_id, `alternate_title`, `menu_image`, `custom_data`, `theme`,
   `og_title`, `og_description`, `og_type`, `og_image`, `type`, `module`, `video`, `audio`, `text_position`, `image_url`, `approved`, `show_headline`, `cache_control`, `article_author_name`, `article_author_email`,
@@ -122,79 +127,80 @@ class PageController extends Controller {
    $hidden, $only_admins_can_edit, $only_group_can_edit, $only_owner_can_edit, $only_others_can_edit,
 				'$comment_homepage', $link_to_language, $comments_enabled)") or die(db_error());
 
-            $user_id = get_user_id();
-            $content_id = db_insert_id();
+        $user_id = get_user_id();
+        $content_id = db_insert_id();
 
-            if ($type == "list") {
-                $list_language = $_POST["list_language"];
-                if (empty($list_language)) {
-                    $list_language = null;
-                }
-                $list_category = $_POST["list_category"];
-                if (empty($list_category)) {
-                    $list_category = null;
-                }
-
-                $list_menu = $_POST["list_menu"];
-                if (empty($list_menu)) {
-                    $list_menu = null;
-                }
-
-                $list_parent = $_POST["list_parent"];
-                if (empty($list_parent)) {
-                    $list_parent = null;
-                }
-
-                $list_order_by = Database::escapeValue($_POST["list_order_by"]);
-                $list_order_direction = Database::escapeValue($_POST["list_order_direction"]);
-
-                $list_use_pagination = intval($_POST["list_use_pagination"]);
-
-                $limit = intval($_POST["limit"]);
-
-                $list_type = $_POST["list_type"];
-                if (empty($list_type) or $list_type == "null") {
-                    $list_type = null;
-                }
-
-                $list = new List_Data($content_id);
-                $list->language = $list_language;
-                $list->category_id = $list_category;
-                $list->menu = $list_menu;
-                $list->parent_id = $list_parent;
-                $list->order_by = $list_order_by;
-                $list->order_direction = $list_order_direction;
-                $list->limit = $limit;
-                $list->use_pagination = $list_use_pagination;
-                $list->type = $list_type;
-                $list->save();
+        if ($type == "list") {
+            $list_language = $_POST["list_language"];
+            if (empty($list_language)) {
+                $list_language = null;
             }
-            $content = $unescaped_content;
-            VCS::createRevision($content_id, $content, $user_id);
-
-            $type = DefaultContentTypes::get($type);
-            foreach ($type->customFields as $field) {
-                $field->name = "{$_POST['type']}_{$field->name}";
-                $value = null;
-                if (isset($_POST[$field->name])) {
-                    $value = $_POST[$field->name];
-                }
-
-                CustomFields::set($field->name, $value, $content_id, false);
+            $list_category = $_POST["list_category"];
+            if (empty($list_category)) {
+                $list_category = null;
             }
 
-            do_event("after_create_page");
-            // header("Location: index.php?action=pages_edit&page=".db_insert_id()."#bottom");
-
-            if ($acl->hasPermission("pages_edit_own") and $content_id) {
-                Request::redirect(ModuleHelper::buildActionURL("pages_edit", "page=$content_id"));
+            $list_menu = $_POST["list_menu"];
+            if (empty($list_menu)) {
+                $list_menu = null;
             }
-            Request::redirect(ModuleHelper::buildActionURL("pages"));
+
+            $list_parent = $_POST["list_parent"];
+            if (empty($list_parent)) {
+                $list_parent = null;
+            }
+
+            $list_order_by = Database::escapeValue($_POST["list_order_by"]);
+            $list_order_direction = Database::escapeValue($_POST["list_order_direction"]);
+
+            $list_use_pagination = intval($_POST["list_use_pagination"]);
+
+            $limit = intval($_POST["limit"]);
+
+            $list_type = $_POST["list_type"];
+            if (empty($list_type) or $list_type == "null") {
+                $list_type = null;
+            }
+
+            $list = new List_Data($content_id);
+            $list->language = $list_language;
+            $list->category_id = $list_category;
+            $list->menu = $list_menu;
+            $list->parent_id = $list_parent;
+            $list->order_by = $list_order_by;
+            $list->order_direction = $list_order_direction;
+            $list->limit = $limit;
+            $list->use_pagination = $list_use_pagination;
+            $list->type = $list_type;
+            $list->save();
         }
+        $content = $unescaped_content;
+        VCS::createRevision($content_id, $content, $user_id);
+
+        $type = DefaultContentTypes::get($type);
+        foreach ($type->customFields as $field) {
+            $field->name = "{$_POST['type']}_{$field->name}";
+            $value = null;
+            if (isset($_POST[$field->name])) {
+                $value = $_POST[$field->name];
+            }
+
+            CustomFields::set($field->name, $value, $content_id, false);
+        }
+
+        do_event("after_create_page");
+
+        if ($permissionChecker->hasPermission("pages_edit_own") and $content_id) {
+            Request::redirect(ModuleHelper::buildActionURL("pages_edit", "page=$content_id"));
+        }
+        Request::redirect(ModuleHelper::buildActionURL("pages"));
     }
 
     public function editPost() {
-        $acl = new ACL();
+
+        $this->validateInput();
+
+        $permissionChecker = new PermissionChecker();
         // @FIXME: Berechtigungen pages_edit_own und pages_edit_others prüfen.
         $slug = db_escape($_POST["slug"]);
         $page_title = db_escape($_POST["title"]);
@@ -227,7 +233,7 @@ class PageController extends Controller {
         if ($_POST["parent_id"] != "NULL") {
             $parent_id = intval($_POST["parent_id"]);
         }
-        // Open Graph
+// Open Graph
         $og_title = db_escape($_POST["og_title"]);
         $og_description = db_escape($_POST["og_description"]);
         $og_type = db_escape($_POST["og_type"]);
@@ -407,7 +413,7 @@ class PageController extends Controller {
     }
 
     public function resetFilters() {
-        // reset all filters
+// reset all filters
         foreach ($_SESSION as $key => $value) {
             if (startsWith($key, "filter_")) {
                 unset($_SESSION[$key]);
@@ -487,7 +493,7 @@ class PageController extends Controller {
         return (Database::getNumRows($result) <= 0);
     }
 
-    // FIXME: There should be no html code in controller
+// FIXME: There should be no html code in controller
     public function filterParentPages() {
         $lang = $_REQUEST["mlang"];
         $menu = $_REQUEST["mmenu"];
@@ -505,9 +511,9 @@ class PageController extends Controller {
         foreach ($pages as $key => $page) {
             ?>
             <option value="<?php
-                    echo $page["id"];
-                    ?>"
-                        <?php if ($page["id"] == $parent_id) echo "selected"; ?>>
+            echo $page["id"];
+            ?>"
+                    <?php if ($page["id"] == $parent_id) echo "selected"; ?>>
                         <?php
                         echo esc($page["title"]);
                         ?>
@@ -520,6 +526,29 @@ class PageController extends Controller {
             <?php
         }
         exit();
+    }
+
+    protected function validateInput() {
+        $validator = new Validator;
+        $validation = $validator->make($_POST + $_FILES, [
+            'slug' => 'required',
+            'title' => 'required',
+            'language' => 'required',
+            'position' => 'required|numeric',
+            'menu' => 'required'
+        ]);
+        $validation->validate();
+
+        $errors = $validation->errors()->all('<li>:message</li>');
+
+        if ($validation->fails()) {
+            $html = '<ul>';
+            foreach ($errors as $error) {
+                $html .= $error;
+            }
+            $html .= '</ul>';
+            ExceptionResult($html, HttpStatusCode::UNPROCESSABLE_ENTITY);
+        }
     }
 
 }
