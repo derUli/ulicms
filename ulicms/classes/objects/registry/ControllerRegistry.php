@@ -78,9 +78,12 @@ class ControllerRegistry {
         $allowed = true;
         $acl = new ACL();
         $methodIdentifier = $sClass . "::" . $sMethod;
+        $wildcardMethodIdentifier = $sClass . "::*";
 
         if (!is_blank(self::$controller_function_permissions[$methodIdentifier])) {
             $allowed = $acl->hasPermission(self::$controller_function_permissions[$methodIdentifier]);
+        } else if (!is_blank(self::$controller_function_permissions[$wildcardMethodIdentifier])) {
+            $allowed = $acl->hasPermission(self::$controller_function_permissions[$wildcardMethodIdentifier]);
         }
         return $allowed;
     }

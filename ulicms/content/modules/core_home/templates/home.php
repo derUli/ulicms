@@ -35,11 +35,11 @@ if ($permissionChecker->hasPermission("dashboard")) {
                 echo $motd;
                 ?>
             </div>
-    <?php } ?>
+        <?php } ?>
         <div id="patch-notification" style="display: none;"
              data-url="<?php echo ModuleHelper::buildMethodCallUrl(UpdateCheckController::class, "patchCheck"); ?>">
             <h2 class="accordion-header">
-    <?php translate("there_are_patches_available"); ?>
+                <?php translate("there_are_patches_available"); ?>
             </h2>
             <div class="accordion-content" id="patch-message"></div>
         </div>
@@ -51,20 +51,23 @@ if ($permissionChecker->hasPermission("dashboard")) {
             <div class="accordion-content">
                 <a
                     href="<?php echo ModuleHelper::buildActionURL("do_post_install"); ?>">
-            <?php translate("there_are_unfinished_package_installations"); ?></a>
+                    <?php translate("there_are_unfinished_package_installations"); ?></a>
             </div>
         <?php } ?>
         <?php
         if (!Settings::get("disable_ulicms_newsfeed")) {
             ?>
-            <h2 class="accordion-header" id="ulicms-newsfeed">
-        <?php translate("ulicms_news"); ?></h2>
-            <div class="accordion-content" id="ulicms-feed"
+            <div class="has-ajax-content"
                  data-url="<?php echo ModuleHelper::buildMethodCallUrl(HomeController::class, "newsfeed") ?>">
-            <?php require "inc/loadspinner.php"; ?>
+
+                <h2 class="accordion-header" >
+                    <?php translate("ulicms_news"); ?></h2>
+                <div class="accordion-content">
+                    <?php require "inc/loadspinner.php"; ?>
+                </div>
             </div>
         <?php } ?>
-    <?php if ($permissionChecker->hasPermission("pages_show_positions")) { ?>
+        <?php if ($permissionChecker->hasPermission("pages_show_positions")) { ?>
             <h2 class="accordion-header"><?php translate("helper_utils"); ?></h2>
             <div class="accordion-content">
                 <form action="#" class="checkbox">
@@ -76,154 +79,40 @@ if ($permissionChecker->hasPermission("dashboard")) {
                                if (Settings::get("user/" . get_user_id() . "/show_positions"))
                                    echo "checked";
                                ?>>
-        <?php translate("show_positions_in_menus"); ?></label>
+                        <?php translate("show_positions_in_menus"); ?></label>
                     </label>
                 </form>
             </div>
-            <?php } ?>
-        <h2 class="accordion-header">
-    <?php translate("statistics"); ?>
-        </h2>
-        <div class="accordion-content">
-            <table>
-                <?php
-                $installed_at = Settings::get("installed_at");
-                if ($installed_at) {
-                    $time = time() - $installed_at;
-                    $formatted = NumberFormatHelper::formatTime($time);
-                    ?>
-                    <tr>
-                        <td><?php translate("site_online_since"); ?></td>
-                        <td><?php
-                            echo $formatted;
-                            ?></td>
-                    </tr>
-                    <?php
-                }
-                ?>
-                <tr>
-                    <td><?php translate("pages_count"); ?>
-                    </td>
-                    <td><?php echo $model->contentCount; ?></td>
-                </tr>
-                <tr>
-                    <td><?php translate("REGISTERED_USERS_COUNT"); ?>
-                    </td>
-                    <td><?php echo count(getUsers()) ?></td>
-                </tr>
-                <?php
-                if (Settings::get("contact_form_refused_spam_mails") !== false) {
-                    ?>
-                    <tr>
-                        <td><?php echo translate("BLOCKED_SPAM_MAILS"); ?></td>
-                        <td><?php echo Settings::get("contact_form_refused_spam_mails") ?></td>
-                    </tr>
-                    <?php
-                }
-                ?>
-                <?php
-                if (!is_null($model->guestbookEntryCount)) {
-                    ?>
-                    <tr>
-                        <td><?php translate("GUESTBOOK_ENTRIES"); ?></td>
-                        <td><?php echo $model->guestbookEntryCount; ?></td>
-                    </tr>
-                    <?php
-                }
-                ?>
-            </table>
+        <?php } ?>
+        <div class="has-ajax-content" data-url="<?php echo ModuleHelper::buildMethodCallUrl(HomeController::class, "statistics"); ?>">
+            <h2 class="accordion-header">
+                <?php translate("statistics"); ?>
+            </h2>
+            <div class="accordion-content">
+                <?php require "inc/loadspinner.php"; ?>
+            </div>
         </div>
-        <h2 class="accordion-header">
-    <?php translate("online_now"); ?>
-        </h2>
-        <div class="accordion-content">
-            <ul id="users_online">
-                <?php
-                foreach (getOnlineUsers() as $user) {
-                    ?>
-                    <li><?php Template::escape($user); ?></li>
-    <?php } ?>
-            </ul>
+        <div class="has-ajax-content always-update" data-url="<?php echo ModuleHelper::buildMethodCallUrl(HomeController::class, "onlineUsers"); ?>">
+            <h2 class="accordion-header">
+                <?php translate("online_now"); ?>
+            </h2>
+            <div class="accordion-content">
+                <?php require "inc/loadspinner.php"; ?>
+            </div>
         </div>
-        <h2 class="accordion-header">
-    <?php translate("top_pages"); ?>
-        </h2>
-        <div class="accordion-content">
-            <table>
-                <tr style="font-weight: bold;
-                    ">
-                    <td><?php translate("title"); ?>
-                    </td>
-                    <td><?php translate("views"); ?>
-                    </td>
-                </tr>
-                <?php
-                foreach ($model->topPages as $row) {
-
-                    $domain = getDomainByLanguage($row->language);
-                    if (!$domain) {
-                        $url = "../" . $row->slug . ".html";
-                    } else {
-                        $url = "http://" . $domain . "/" . $row->slug . ".html";
-                    }
-                    ?>
-                    <tr>
-                        <td><a href="<?php
-                               echo $url;
-                               ?>"
-                               target="_blank"><?php
-                                esc($row->title);
-                                ?></a></td>
-                        <td align="right"><?php
-                            echo $row->views;
-                            ?></td>
-                        <?php
-                    }
-                    ?>
-                </tr>
-            </table>
+        <div class="has-ajax-content" data-url="<?php echo ModuleHelper::buildMethodCallUrl(HomeController::class, "topPages"); ?>">
+            <h2 class="accordion-header">
+                <?php translate("top_pages"); ?>
+            </h2>
+            <div class="accordion-content">
+                <?php require "inc/loadspinner.php"; ?>
+            </div>
         </div>
-        <h2 class="accordion-header"><?php translate("last_changes"); ?></h2>
-        <div class="accordion-content">
-            <table cellpadding="2">
-                <tr style="font-weight: bold;">
-                    <td><?php translate("title"); ?>
-                    </td>
-                    <td><?php translate("date"); ?>
-                    </td>
-                    <td><?php translate("done_by"); ?>
-                    </td>
-                </tr>
-                <?php
-                foreach ($model->lastModfiedPages as $row) {
-                    $domain = getDomainByLanguage($row->language);
-                    if (!$domain) {
-                        $url = "../" . $row->slug . ".html";
-                    } else {
-                        $url = "http://" . $domain . "/" . $row->slug . ".html";
-                    }
-                    ?>
-                    <tr>
-                        <td><a href="<?php
-                               echo $url;
-                               ?>" target="_blank"><?php
-                                esc($row->title);
-                                ?></a></td>
-                        <td><?php echo strftime("%x %X", $row->lastmodified) ?></td>
-                        <td><?php
-                            $autorName = $model->admins[$row->lastchangeby];
-                            if (!empty($autorName)) {
-
-                            } else {
-                                $autorName = $model->admins[$row->author_id];
-                            }
-                            echo $autorName;
-                            ?></td>
-                    </tr>
-                    <?php
-                }
-                ?>
-            </table>
+        <div class="has-ajax-content" data-url="<?php echo ModuleHelper::buildMethodCallUrl(HomeController::class, "lastUpdatedPages"); ?>">
+            <h2 class="accordion-header"><?php translate("last_changes"); ?></h2>
+            <div class="accordion-content">
+                <?php require "inc/loadspinner.php"; ?>
+            </div>
         </div>
         <?php
         do_event("accordion_layout");

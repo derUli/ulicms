@@ -32,7 +32,7 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
                  echo $row->id;
                  ?>"> <br /> <strong><?php translate("username"); ?>*</strong><br />
             <input type="text" name="username"
-                   value="<?php echo _esc($row->username); ?>" required
+                   value="<?php echo _esc($row->username); ?>" required disabled
                    <?php
                    if (!$permissionChecker->hasPermission("users")) {
                        ?>

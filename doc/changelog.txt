@@ -4,6 +4,7 @@ Neue Features:
 * Seitenverwaltung ist nun hierarchisch
 * Neues Standardtheme "2020"
 * Design-Einstellungen: Vorschaubild vom ausgewählten Theme
+* controller_function_permissions unterstüzt nun Wildcards
 
 Neue API-Methoden:
 * UliCMS\HTML\icon($classes, $htmlAttributes = array())
