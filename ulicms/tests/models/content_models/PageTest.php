@@ -646,11 +646,11 @@ class PageTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testHasChildrenReturnsTrue() {
-        $query = Database::pQuery("select parent from {prefix}content where "
-                        . "parent is not null", array(), true);
+        $query = Database::pQuery("select parent_id from {prefix}content where "
+                        . "parent_id is not null", array(), true);
         $result = Database::fetchObject($query);
 
-        $page = ContentFactory::getByID($result->parent);
+        $page = ContentFactory::getByID($result->parent_id);
         $this->assertTrue($page->hasChildren());
     }
 
@@ -671,16 +671,16 @@ class PageTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetChildrenReturnsTrue() {
-        $query = Database::pQuery("select parent from {prefix}content where "
-                        . "parent is not null", array(), true);
+        $query = Database::pQuery("select parent_id from {prefix}content where "
+                        . "parent_id is not null", array(), true);
         $result = Database::fetchObject($query);
 
-        $page = ContentFactory::getByID($result->parent);
+        $page = ContentFactory::getByID($result->parent_id);
         $children = $page->getChildren();
         $this->assertGreaterThanOrEqual(1, count($children));
 
         foreach ($children as $child) {
-            $this->assertEquals($page->id, $child->parent);
+            $this->assertEquals($page->id, $child->parent_id);
         }
     }
 
@@ -703,7 +703,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetParentReturnsNull() {
         $query = Database::pQuery("select id from {prefix}content where "
-                        . "parent is null", array(), true);
+                        . "parent_id is null", array(), true);
         $result = Database::fetchObject($query);
 
         $page = ContentFactory::getByID($result->id);
@@ -711,13 +711,13 @@ class PageTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetParentReturnsModel() {
-        $query = Database::pQuery("select parent, id from {prefix}content where "
-                        . "parent is not null", array(), true);
+        $query = Database::pQuery("select parent_id, id from {prefix}content where "
+                        . "parent_id is not null", array(), true);
         $result = Database::fetchObject($query);
 
         $page = ContentFactory::getByID($result->id);
         $this->assertInstanceOf(Content::class, $page->getParent());
-        $this->assertEquals($page->getParent()->getId(), $result->parent);
+        $this->assertEquals($page->getParent()->getId(), $result->parent_id);
         $this->assertGreaterThanOrEqual(1, count($page->getParent()->getChildren()));
     }
 
@@ -758,6 +758,37 @@ class PageTest extends \PHPUnit\Framework\TestCase {
 
         $this->assertIsArray($page->getHistory());
         $this->assertCount(3, $page->getHistory());
+    }
+
+    public function testIsFrontPageReturnsTrue() {
+        $page = new Page();
+        $page->title = 'hallo';
+        $page->slug = 'unit-test-not-frontpage' . uniqid();
+        $page->language = 'de';
+        $page->content = "foo [csrf_token_html] bar";
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->author_id = 1;
+        $page->show_headline = true;
+        $page->save();
+
+        $page->makeFrontPage();
+        $this->assertTrue($page->isFrontPage());
+    }
+
+    public function testIsFrontPageReturnsFalse() {
+        $page = new Page();
+        $page->title = 'hallo';
+        $page->slug = 'unit-test-not-frontpage' . uniqid();
+        $page->language = 'de';
+        $page->content = "foo [csrf_token_html] bar";
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->author_id = 1;
+        $page->show_headline = true;
+        $page->save();
+
+        $this->assertFalse($page->isFrontPage());
     }
 
 }

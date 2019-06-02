@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Security\Encryption;
+
 class UserTest extends \PHPUnit\Framework\TestCase {
 
     private $otherGroup;
@@ -122,6 +124,23 @@ class UserTest extends \PHPUnit\Framework\TestCase {
 
         $this->assertEquals("john@doe.com", $loadedUser->getEmail());
         $this->assertEquals("john-doe", $loadedUser->getUsername());
+
+        $user->delete();
+    }
+
+    public function testCheckPasswordReturnsTrue() {
+        $user = new User();
+        $user->setPassword("topsecretpassword");
+
+        $this->assertTrue($user->checkPassword("topsecretpassword"));
+
+        $user->delete();
+    }
+
+    public function testCheckPasswordReturnsFalse() {
+        $user = new User();
+        $user->setPassword("topsecretpassword");
+        $this->assertFalse($user->checkPassword("falschesPassW0rt"));
 
         $user->delete();
     }

@@ -46,4 +46,44 @@ class HomeController extends Controller {
         HtmlResult($html);
     }
 
+    public function statistics() {
+        $html = Template::executeModuleTemplate("core_home", "statistics.php");
+        $options = array(
+            'optimizationLevel' => HTMLMinify::OPTIMIZATION_ADVANCED
+        );
+        $HTMLMinify = new HTMLMinify($html, $options);
+        $html = $HTMLMinify->process();
+        HtmlResult($html);
+    }
+
+    public function topPages() {
+        $html = Template::executeModuleTemplate("core_home", "top_pages.php");
+        $options = array(
+            'optimizationLevel' => HTMLMinify::OPTIMIZATION_ADVANCED
+        );
+        $HTMLMinify = new HTMLMinify($html, $options);
+        $html = $HTMLMinify->process();
+        HtmlResult($html);
+    }
+
+    public function lastUpdatedPages() {
+        $html = Template::executeModuleTemplate("core_home", "last_updated_pages.php");
+        $options = array(
+            'optimizationLevel' => HTMLMinify::OPTIMIZATION_ADVANCED
+        );
+        $HTMLMinify = new HTMLMinify($html, $options);
+        $html = $HTMLMinify->process();
+        HtmlResult($html);
+    }
+
+    public function onlineUsers() {
+        $html = Template::executeModuleTemplate("core_home", "online_users.php");
+        $options = array(
+            'optimizationLevel' => HTMLMinify::OPTIMIZATION_ADVANCED
+        );
+        $HTMLMinify = new HTMLMinify($html, $options);
+        $html = $HTMLMinify->process();
+        HtmlResult($html);
+    }
+
 }

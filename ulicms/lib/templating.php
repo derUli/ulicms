@@ -273,11 +273,11 @@ function get_parent($page = null) {
         $page = get_requested_pagename();
     }
     $result = "";
-    $sql = "SELECT `parent` FROM " . tbname("content") . " WHERE slug='" . db_escape($page) . "'  AND language='" . db_escape($_SESSION["language"]) . "'";
+    $sql = "SELECT `parent_id` FROM " . tbname("content") . " WHERE slug='" . db_escape($page) . "'  AND language='" . db_escape($_SESSION["language"]) . "'";
     $query = db_query($sql);
     if (db_num_rows($query) > 0) {
         $result = db_fetch_object($query);
-        $result = $result->parent;
+        $result = $result->parent_id;
     }
     if (empty($result)) {
         $result = null;
@@ -723,7 +723,7 @@ function parent_item_contains_current_page($id) {
     $retval = false;
     $id = intval($id);
     $language = $_SESSION["language"];
-    $sql = "SELECT id, slug, parent FROM " . tbname("content") . " WHERE language = '$language' AND active = 1 AND `deleted_at` IS NULL";
+    $sql = "SELECT id, slug, parent_id FROM " . tbname("content") . " WHERE language = '$language' AND active = 1 AND `deleted_at` IS NULL";
     $r = db_query($sql);
 
     $data = array();
@@ -740,16 +740,16 @@ function parent_item_contains_current_page($id) {
     return $retval;
 }
 
-function get_menu($name = "top", $parent = null, $recursive = true, $order = "position") {
+function get_menu($name = "top", $parent_id = null, $recursive = true, $order = "position") {
     $html = "";
     $name = db_escape($name);
     $language = $_SESSION["language"];
-    $sql = "SELECT id, slug, access, redirection, title, alternate_title, menu_image, target, type, link_to_language, position FROM " . tbname("content") . " WHERE menu='$name' AND language = '$language' AND active = 1 AND `deleted_at` IS NULL AND hidden = 0 and type <> 'snippet' and parent ";
+    $sql = "SELECT id, slug, access, redirection, title, alternate_title, menu_image, target, type, link_to_language, position FROM " . tbname("content") . " WHERE menu='$name' AND language = '$language' AND active = 1 AND `deleted_at` IS NULL AND hidden = 0 and type <> 'snippet' and parent_id ";
 
-    if (is_null($parent)) {
+    if (is_null($parent_id)) {
         $sql .= " IS NULL ";
     } else {
-        $sql .= " = " . intval($parent) . " ";
+        $sql .= " = " . intval($parent_id) . " ";
     }
     $sql .= " ORDER by " . $order;
     $query = db_query($sql);
@@ -758,10 +758,10 @@ function get_menu($name = "top", $parent = null, $recursive = true, $order = "po
         return $html;
     }
 
-    if (is_null($parent)) {
+    if (is_null($parent_id)) {
         $html .= "<ul class='menu_" . $name . " navmenu'>\n";
     } else {
-        $containsCurrentItem = parent_item_contains_current_page($parent);
+        $containsCurrentItem = parent_item_contains_current_page($parent_id);
 
         $classes = "sub_menu";
 

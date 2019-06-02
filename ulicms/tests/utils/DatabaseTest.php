@@ -51,7 +51,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetColumnNames() {
         $columns = Database::getColumnNames("users", true);
-        $this->assertGreaterThanOrEqual(19, count($columns));
+        $this->assertGreaterThanOrEqual(18, count($columns));
         $this->assertContains("username", $columns);
         $this->assertContains("about_me", $columns);
         $this->assertContains("homepage", $columns);

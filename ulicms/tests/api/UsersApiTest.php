@@ -62,6 +62,16 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(0, get_user_id());
     }
 
+    public function testGetUserGroupReturnsGroupId() {
+        $_SESSION["group_id"] = 666;
+        $this->assertEquals(666, get_group_id());
+        unset($_SESSION["group_id"]);
+    }
+
+    public function testGetUserGroupReturnsZero() {
+        $this->assertEquals(0, get_group_id());
+    }
+
     public function testUserExistsTrue() {
         $this->assertTrue(user_exists("testuser1"));
     }
@@ -143,7 +153,7 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetAllUsers() {
-        $allUsers = getAllUsers();
+        $allUsers = getUsers();
         foreach ($allUsers as $user) {
             if ($user["username"] == "testuser1") {
                 $this->assertEquals($user["id"], $this->testUser->getID());
@@ -162,19 +172,6 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase {
             }
         }
         $this->fail("The testuser is not in the result.");
-    }
-
-    public function testAddUser() {
-        $this->assertFalse(user_exists("testuser2"));
-
-        // adduser returns the saved user
-        $user = @addUser("testuser2", "Kolumna", "Karla", "karla.kolumna@presse.de", "oldpassword", false);
-        $this->assertInstanceOf(User::class, $user);
-        $this->assertEquals("testuser2", $user->getUsername());
-        $this->assertNotNull($user->getId());
-
-        // adduser return null if the user already exists
-        $this->assertNull(@addUser("testuser2", "Kolumna", "Karla", "karla.kolumna@presse.de", "oldpassword", false));
     }
 
     public function testChangePassword() {

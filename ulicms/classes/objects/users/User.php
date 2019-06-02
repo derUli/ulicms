@@ -2,6 +2,7 @@
 
 use UliCMS\Exceptions\NotImplementedException;
 use UliCMS\Security\PermissionChecker;
+use UliCMS\Security\Encryption;
 
 class User {
 
@@ -11,7 +12,6 @@ class User {
     private $firstname = "";
     private $email = "";
     private $password = "";
-    private $old_encryption = false;
     private $about_me = "";
     private $group_id = null;
     private $secondary_groups = array();
@@ -109,17 +109,15 @@ class User {
     }
 
     protected function insert() {
-        $sql = "insert into {prefix}users (username, lastname, firstname, email, password,
-				old_encryption, about_me, group_id, html_editor,
+        $sql = "insert into {prefix}users (username, lastname, firstname, email, password, about_me, group_id, html_editor,
 				require_password_change, admin, password_changed, locked, last_login,
-				homepage, default_language) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				homepage, default_language) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         $args = array(
             $this->username,
             $this->lastname,
             $this->firstname,
             $this->email,
             $this->password,
-            $this->old_encryption,
             $this->about_me,
             $this->group_id,
             $this->html_editor,
@@ -137,7 +135,7 @@ class User {
 
     protected function update() {
         $sql = "update {prefix}users set username = ?, lastname = ?, firstname = ?, email = ?, password = ?,
-				old_encryption = ?, about_me = ?, group_id = ?, html_editor = ?,
+            about_me = ?, group_id = ?, html_editor = ?,
 				require_password_change = ?, admin = ?, password_changed = ?, locked = ?, last_login = ?,
 				homepage = ?, default_language = ? where id = ?";
         $args = array(
@@ -146,7 +144,6 @@ class User {
             $this->firstname,
             $this->email,
             $this->password,
-            $this->old_encryption,
             $this->about_me,
             $this->group_id,
             $this->html_editor,
@@ -223,7 +220,6 @@ class User {
 
     public function setPassword($password) {
         $this->password = Encryption::hashPassword($password);
-        $this->old_encryption = false;
         $this->password_changed = date("Y-m-d H:i:s");
     }
 
@@ -237,12 +233,8 @@ class User {
         $passwordReset->sendMail($token, $this->getEmail(), "xxx.xxx.xxx.xxx", $this->getFirstname(), $this->getLastname());
     }
 
-    public function getOldEncryption() {
-        return $this->old_encryption;
-    }
-
-    public function setOldEncryption($value) {
-        $this->old_encryption = boolval($value);
+    public function checkPassword($password) {
+        return Encryption::hashPassword($password) == $this->getPassword();
     }
 
     public function getAboutMe() {

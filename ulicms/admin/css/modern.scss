@@ -427,7 +427,7 @@ div.inPageMessage {
 textarea#code {
     height: auto;
 }
-textarea#page_content {
+textarea#content {
     height: auto;
 }
 div.help {
@@ -485,6 +485,7 @@ div#google-fonts {
 .accordion-content {
     width: auto !important;
     word-wrap: break-word;
+    overflow-x: auto;
     padding: 15px;
 
     .checkbox, .radio{

@@ -54,7 +54,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                                        translate("page_title");
                                        ?>*
             </strong><br /> <input type="text" required="required"
-                                   name="page_title" value="" onkeyup="suggestSlug(this.value)">
+                                   name="title" value="" onkeyup="suggestSlug(this.value)">
             <div class="typedep hide-on-snippet hide-on-non-regular">
                 <br /> <strong><?php translate("alternate_title"); ?>
                 </strong><br /> <input type="text" name="alternate_title" value=""> <small><?php translate("ALTERNATE_TITLE_INFO"); ?>
@@ -130,8 +130,8 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                 </div>
                 <br />
                 <div id="parent-div">
-                    <strong><?php translate("parent"); ?></strong><br /> <select
-                        name="parent" size=1>
+                    <strong><?php translate("parent_id"); ?></strong><br /> <select
+                        name="parent_id" size=1>
                         <option selected="selected" value="NULL">
                             [
                             <?php translate("none"); ?>
@@ -172,7 +172,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                 </select><br /> <br />
             </div>
             <strong><?php translate("activated"); ?>
-            </strong><br /> <select name="activated" size=1
+            </strong><br /> <select name="active" size=1
                                     <?php if (!$pages_activate_own) echo "disabled"; ?>>
                 <option value="1">
                     <?php translate("enabled"); ?>
@@ -183,7 +183,8 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
             </select> <br /> <br />
             <div class="typedep" id="hidden-attrib">
                 <strong><?php translate("hidden"); ?>
-                </strong><br /> <select name="hidden" size="1"><option value="1">
+                </strong><br /> <select name="hidden" size="1">
+                    <option value="1">
                         <?php translate("yes"); ?>
                     </option>
                     <option value="0" selected>
@@ -242,11 +243,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                         type="text" name="article_author_name" value="" maxlength="80"> <br />
                     <strong><?php translate("author_email"); ?></strong><br /> <input
                         type="email" name="article_author_email" value="" maxlength="80"> <br />
-                    <div class="typedep" id="comment-fields">
-                        <strong><?php translate("homepage"); ?></strong><br /> <input
-                            type="url" name="comment_homepage" value="" maxlength="255"> <br />
-                        <br />
-                    </div>
+
                     <strong><?php translate("article_date"); ?></strong><br /> <input
                         name="article_date" type="datetime-local"
                         value="<?php echo date("Y-m-d\TH:i:s"); ?>" step="any"> <br /> <strong><?php translate("excerpt"); ?></strong>
@@ -334,7 +331,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                         <?php
                     }
                     ?>
-                </select> <br /> <br /> <strong><?php translate("parent"); ?>
+                </select> <br /> <br /> <strong><?php translate("parent_id"); ?>
                 </strong><br /> <select name="list_parent" size=1>
                     <option selected="selected" value="NULL">
                         [
@@ -536,7 +533,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
     do_event("page_option");
     ?>
     <div class="typedep" id="content-editor">
-        <textarea name="page_content" id="page_content" cols=60 rows=20
+        <textarea name="content" id="content" cols=60 rows=20
                   class="<?php esc($editor); ?>" data-mimetype="text/html"></textarea>
 
     </div>
