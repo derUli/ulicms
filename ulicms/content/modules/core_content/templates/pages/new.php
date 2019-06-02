@@ -246,7 +246,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
 
                     <strong><?php translate("article_date"); ?></strong><br /> <input
                         name="article_date" type="datetime-local"
-                        value="<?php echo date("Y-m-d\TH:i:s"); ?>" step="any"> <br /> <strong><?php translate("excerpt"); ?></strong>
+                        value="<?php echo date("Y-m-d\TH:i"); ?>" step="any"> <br /> <strong><?php translate("excerpt"); ?></strong>
                     <textarea name="excerpt" id="excerpt" rows="5" cols="80" class="<?php esc($editor); ?>" data-mimetype="text/html"></textarea>
                 </div>
                 <div class="typedep" id="tab-og" style="display: none;">

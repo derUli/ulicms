@@ -363,7 +363,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                     name="article_date" type="datetime-local"
                                     value="<?php
                                     if (StringHelper::isNotNullOrEmpty($row->article_date)) {
-                                        echo date("Y-m-d\TH:i:s", strtotime($row->article_date));
+                                        echo date("Y-m-d\TH:i", strtotime($row->article_date));
                                     }
                                     ?>"
                                     step=any> <br /> <br /> <strong><?php translate("excerpt"); ?></strong>

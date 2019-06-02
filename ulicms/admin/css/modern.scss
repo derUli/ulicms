@@ -292,6 +292,22 @@ input[type="button"] {
     color: $color_9;
     padding: 10px;
 }
+
+input[type="date"],
+input[type="time"],
+input[type="datetime-local"]
+{
+    display:block;
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+	width: 100%;
+	line-height: 1em;
+	
+	::-webkit-inner-spin-button {
+    display: none;
+}
+}
+
 input[type="submit"] {
     background-color: $background_color_4;
     color: $color_9;
