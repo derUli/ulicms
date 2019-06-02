@@ -7,6 +7,7 @@ use UliCMS\Models\Content\VCS;
 use UliCMS\Models\Content\Categories;
 use UliCMS\Models\Content\Language;
 use UliCMS\Models\Content\Types\DefaultContentTypes;
+use UliCMS\Helpers\NumberFormatHelper;
 
 $permissionChecker = new PermissionChecker(get_user_id());
 if ($permissionChecker->hasPermission("pages")) {
@@ -301,7 +302,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                    ?>"
                                    style="cursor: pointer" /> <a href="#"
                                    onclick="$('#menu_image').val('');
-                                                       return false;"
+                                           return false;"
                                    class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?> </a>
                         </div></div>
                     <div class="typedep" id="tab-link">
@@ -363,7 +364,9 @@ if ($permissionChecker->hasPermission("pages")) {
                                     name="article_date" type="datetime-local"
                                     value="<?php
                                     if (StringHelper::isNotNullOrEmpty($row->article_date)) {
-                                        echo date("Y-m-d\TH:i", strtotime($row->article_date));
+                                        echo NumberFormatHelper::timestampToHtml5Datetime(
+                                                strtotime($row->article_date)
+                                        );
                                     }
                                     ?>"
                                     step=any> <br /> <br /> <strong><?php translate("excerpt"); ?></strong>
@@ -393,7 +396,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                        ?>"
                                        style="cursor: pointer" /> <a href="#"
                                        onclick="$('#og_image').val('');
-                                                           return false;"
+                                               return false;"
                                        class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?>
                                 </a>
                                 <?php
@@ -617,7 +620,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                    value="<?php Template::escape($row->image_url); ?>"
                                    style="cursor: pointer" /> <a href="#"
                                    onclick="$('#menu_image').val('');
-                                                       return false;"
+                                           return false;"
                                    class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?>
                             </a>
                         </div>
@@ -652,7 +655,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                    value="<?php echo _esc($row->article_image); ?>"
                                    style="cursor: pointer" maxlength="255" /> <a href="#"
                                    onclick="$('#article_image').val('');
-                                                       return false;"
+                                           return false;"
                                    class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?></a>
                         </div>
                     </div>

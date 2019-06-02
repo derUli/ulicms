@@ -6,8 +6,10 @@ Neue Features:
 * Design-Einstellungen: Vorschaubild vom ausgewählten Theme
 * controller_function_permissions unterstüzt nun Wildcards
 
+
 Neue API-Methoden:
 * UliCMS\HTML\icon($classes, $htmlAttributes = array())
+* NumberFormatHelper::timestampToHtml5Datetime($timestamp = null)
 * ContentFactory::getAllByType($type, $order = "id")
 * ContentFactory::getAllByParent($parent_id, $order = "id")
 *`Content->getChildren($order)

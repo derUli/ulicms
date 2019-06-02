@@ -34,4 +34,10 @@ class NumberFormatHelperTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("1096 Days 10:17:36 Hours", NumberFormatHelper::formatTime($number));
     }
 
+    public function testTimestampToHtml5Datetime() {
+        $this->assertEquals("2019-09-10T14:25", NumberFormatHelper::timestampToHtml5Datetime(1568118319));
+
+        $this->assertRegExp('/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})$/', NumberFormatHelper::timestampToHtml5Datetime());
+    }
+
 }

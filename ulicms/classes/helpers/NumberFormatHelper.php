@@ -25,6 +25,11 @@ class NumberFormatHelper extends Helper {
         return $bytes;
     }
 
+    public static function timestampToHtml5Datetime($timestamp = null) {
+        $time = !is_null($timestamp) ? $timestamp : time();
+        return date("Y-m-d\TH:i", $time);
+    }
+
     public static function formatTime($seconds) {
         $seconds = abs($seconds); // Ganzzahlwert bilden
         return sprintf(get_translation("FORMAT_TIME"), $seconds / 60 / 60 / 24, ($seconds / 60 / 60) % 24, ($seconds / 60) % 60, $seconds % 60);

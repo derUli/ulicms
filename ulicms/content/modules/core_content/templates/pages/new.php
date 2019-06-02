@@ -3,6 +3,7 @@
 use UliCMS\Models\Content\Categories;
 use UliCMS\Models\Content\Language;
 use UliCMS\Models\Content\Types\DefaultContentTypes;
+use UliCMS\Helpers\NumberFormatHelper;
 
 $permissionChecker = new ACL();
 $groups = db_query("SELECT id, name from " . tbname("groups"));
@@ -246,7 +247,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
 
                     <strong><?php translate("article_date"); ?></strong><br /> <input
                         name="article_date" type="datetime-local"
-                        value="<?php echo date("Y-m-d\TH:i"); ?>" step="any"> <br /> <strong><?php translate("excerpt"); ?></strong>
+                        value="<?php echo NumberFormatHelper::timestampToHtml5Datetime(); ?>" step="any"> <br /> <strong><?php translate("excerpt"); ?></strong>
                     <textarea name="excerpt" id="excerpt" rows="5" cols="80" class="<?php esc($editor); ?>" data-mimetype="text/html"></textarea>
                 </div>
                 <div class="typedep" id="tab-og" style="display: none;">
@@ -263,7 +264,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                            value="<?php esc($og_image); ?>"
                            style="cursor: pointer" /> <a href="#"
                            onclick="$('#og_image').val('');
-                                       return false;"
+                                   return false;"
                            class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?></a>
                 </div>
             </div>
@@ -453,7 +454,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                        readonly="readonly" class="kcfinder"
                        value="" style="cursor: pointer" maxlength="255" /> <a href="#"
                        onclick="$('#article_image').val('');
-                                   return false;"
+                               return false;"
                        class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?></a>
             </div>
         </div>
