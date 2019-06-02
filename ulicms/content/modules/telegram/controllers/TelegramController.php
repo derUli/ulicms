@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Models\Content\TypeMapper;
+
 class TelegramController extends MainClass {
 
     const MODULE_NAME = "telegram";
