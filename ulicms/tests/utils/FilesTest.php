@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Utils\File;
+
 class FilesTest extends \PHPUnit\Framework\TestCase {
 
     public function testFileExtension() {

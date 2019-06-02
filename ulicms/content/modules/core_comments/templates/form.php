@@ -1,4 +1,9 @@
-<?php if (Vars::get("comments_enabled")) { ?>
+<?php
+
+use UliCMS\Constants\CommentStatus;
+
+if (Vars::get("comments_enabled")) {
+    ?>
     <?php
     $comment_published = Request::getVar("comment_published");
     $cssClass = "alert ";
@@ -20,7 +25,7 @@
         ?>
         <div class="<?php esc($cssClass); ?>">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <?php translate("comment_published_{$comment_published}"); ?>
+        <?php translate("comment_published_{$comment_published}"); ?>
         </div>
         <?php
     }
@@ -33,7 +38,7 @@
             "autocomplete" => "off"
         ));
         ?>
-        <?php echo UliCMS\HTML\Input::Hidden("content_id", Vars::get("content_id")); ?>
+    <?php echo UliCMS\HTML\Input::Hidden("content_id", Vars::get("content_id")); ?>
 
         <div>
             <label for="author_name"><?php translate("your_name") ?>

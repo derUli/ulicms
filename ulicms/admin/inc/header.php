@@ -1,7 +1,8 @@
 <?php
 
-use UliCMS\Data\Content\Comment;
+use UliCMS\Models\Content\Comment;
 use UliCMS\HTML\Script;
+use UliCMS\Helpers\DataTablesHelper;
 
 $admin_logo = Settings::get("admin_logo");
 if (!$admin_logo) {
@@ -60,7 +61,7 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
         }
         combinedScriptHtml();
         ?>
-        <?php require "inc/touch_icons.php"; ?>
+<?php require "inc/touch_icons.php"; ?>
         <link rel="stylesheet" type="text/css"
               href="scripts/vallenato/vallenato.css" />
         <link rel="stylesheet" type="text/css"
@@ -143,17 +144,17 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
                                             if ($count) {
                                                 ?>
                                                 <div class="count" data-count="<?php echo $count ?>">
-                                                    <?php echo $count; ?>
+                                                <?php echo $count; ?>
                                                 </div>
-                                            <?php } ?></a>
+        <?php } ?></a>
                                     </div>
                                 </div>
-                            <?php } ?>
+    <?php } ?>
                             <div class="<?php esc($colClass); ?>">
                                 <a id="menu-toggle"><i class="fa fa-bars"></i> </a>
                             </div>
                         </div>
-                    <?php } ?>
+<?php } ?>
                 </div>
             </div>
             <div class="main-content">

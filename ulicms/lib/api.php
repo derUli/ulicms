@@ -2,6 +2,9 @@
 
 use UliCMS\Security\PermissionChecker;
 use Negotiation\LanguageNegotiator;
+use UliCMS\Constants\ModuleEventConstants;
+use UliCMS\Models\Content\Types\DefaultContentTypes;
+use UliCMS\Utils\CacheUtil;
 
 function is_blank($val = null) {
     return isset($val) && (is_string($val) &&
@@ -37,6 +40,9 @@ function idefine($key, $value) {
 }
 
 function faster_in_array($needle, $haystack) {
+    if (!is_array($haystack)) {
+        return false;
+    }
     $flipped = array_flip($haystack);
     return isset($flipped[$needle]);
 }
@@ -236,6 +242,10 @@ function set_format($format) {
     $_GET["format"] = trim($format, ".");
 }
 
+function get_format() {
+    return is_present($_GET["format"]) ? $_GET["format"] : "html";
+}
+
 function get_jquery_url() {
     $url = "node_modules/jquery/dist/jquery.min.js";
     $url = apply_filter($url, "jquery_url");
@@ -277,7 +287,7 @@ function get_canonical() {
 
     if (containsModule(null, "blog")) {
         if (isset($_GET["single"])) {
-            $canonical .= "?single=" . htmlspecialchars($_GET["single"]);
+            $canonical .= "?single=" . _esc($_GET["single"]);
         } else if (isset($_GET["limit"])) {
             $canonical .= "?limit=" . intval($_GET["limit"]);
         }
@@ -993,24 +1003,6 @@ function getModuleUninstallScriptPath($module, $abspath = true) {
 
 function getModuleUninstallScriptPath2($module, $abspath = true) {
     return getModulePath($module, $abspath) . "uninstall.php";
-}
-
-/**
- * outputCSV creates a line of CSV and outputs it to browser
- */
-function outputCSV($array) {
-    $fp = fopen('php://output', 'w'); // this file actual writes to php output
-    fputcsv($fp, $array);
-    fclose($fp);
-}
-
-/**
- * getCSV creates a line of CSV and returns it.
- */
-function getCSV($array) {
-    ob_start(); // buffer the output ...
-    outputCSV($array);
-    return ob_get_clean(); // ... then return it as a string!
 }
 
 /**

@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Exceptions\SCSSCompileException;
+use UliCMS\Utils\CacheUtil;
 
 class MinifyTest extends \PHPUnit\Framework\TestCase {
 

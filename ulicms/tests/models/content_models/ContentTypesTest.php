@@ -1,5 +1,8 @@
 <?php
 
+use UliCMS\Models\Content\Types\ContentType;
+use UliCMS\Models\Content\Types\DefaultContentTypes;
+
 class ContentTypesTest extends \PHPUnit\Framework\TestCase {
 
     private function getBaseTypes() {

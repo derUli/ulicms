@@ -3,6 +3,7 @@
 use UliCMS\Backend\BackendPageRenderer;
 use UliCMS\HTML\Input;
 use UliCMS\HTML\ListItem;
+use UliCMS\Constants\CommentStatus;
 
 $controller = ModuleHelper::getMainController("core_comments");
 $defaultStatus = $controller->getDefaultStatus();
@@ -138,10 +139,10 @@ echo ModuleHelper::buildMethodCallForm(CommentsController::class, "doAction", ar
 </div>
 <div class="row">
     <div class="col-xs-6">
-		<?php
-		echo Input::SingleSelect("action", "", $actionSelect, 1);
-		?>
-	</div>
+        <?php
+        echo Input::SingleSelect("action", "", $actionSelect, 1);
+        ?>
+    </div>
     <div class="col-xs-6">
         <button type="submit" class="btn btn-primary">
             <i class="fas fa-running"></i> <?php translate("do_action") ?></button>

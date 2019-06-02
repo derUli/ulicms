@@ -1,4 +1,8 @@
 <?php
+
+use UliCMS\Models\Content\Advertisement\Banners;
+use UliCMS\Models\Content\Categories;
+
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("banners")) {
     if (!isset($_SESSION["filter_category"])) {

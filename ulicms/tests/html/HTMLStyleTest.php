@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\HTML\Style as Style;
+use UliCMS\Utils\File;
 
 class HTMLStyleTest extends \PHPUnit\Framework\TestCase {
 

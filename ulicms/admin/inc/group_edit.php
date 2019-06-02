@@ -1,4 +1,7 @@
 <?php
+
+use UliCMS\Models\Content\Language;
+
 $permissionChecker = new ACL();
 
 if (!$permissionChecker->hasPermission("groups")) {
@@ -23,7 +26,7 @@ if (!$permissionChecker->hasPermission("groups")) {
     ksort($all_permissions);
     ?>
     <form action="?action=groups" method="post">
-        <?php csrf_token_html(); ?>
+    <?php csrf_token_html(); ?>
         <input type="hidden" name="id" value="<?php echo $id; ?>">
         <p>
             <strong><?php translate("name"); ?>*</strong>
@@ -35,7 +38,7 @@ if (!$permissionChecker->hasPermission("groups")) {
             <div class="checkbox">
                 <label>
                     <input id="select-all" type="checkbox" class="checkall">
-                    <?php translate("select_all"); ?>
+    <?php translate("select_all"); ?>
                 </label>
             </div>
             <div class="voffset3">
@@ -49,9 +52,9 @@ if (!$permissionChecker->hasPermission("groups")) {
                                    data-select-all-checkbox="#select-all"
                                    data-checkbox-group=".permission-checkbox"
                                    class="permission-checkbox" <?php if ($value) echo "checked"; ?>>
-                                   <?php
-                                   esc($key);
-                                   ?> </label>
+                            <?php
+                            esc($key);
+                            ?> </label>
                     </div>
                     <?php
                 }
@@ -60,7 +63,7 @@ if (!$permissionChecker->hasPermission("groups")) {
         </fieldset>
         <h4 class="minimal-margin-bottom"><?php translate("languages"); ?></h4>
         <fieldset>
-            <?php foreach ($languages as $lang) { ?>
+    <?php foreach ($languages as $lang) { ?>
                 <div class="checkbox">
                     <label>
                         <input type="checkbox" name="restrict_edit_access_language[]"
@@ -71,10 +74,10 @@ if (!$permissionChecker->hasPermission("groups")) {
                                }
                                ?>
                                id="lang-<?php echo $lang->getID(); ?>">
-                               <?php Template::escape($lang->getName()); ?>
+                <?php Template::escape($lang->getName()); ?>
                     </label>
                 </div>
-            <?php } ?>
+    <?php } ?>
         </fieldset>
         <h4 class="minimal-margin-bottom"><?php translate("allowable_tags"); ?></h4>
         <fieldset>

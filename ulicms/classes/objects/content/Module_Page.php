@@ -39,7 +39,7 @@ class Module_Page extends Page {
         return $result;
     }
 
-    public function containsModule($module = false) {
+    public function containsModule($module = null) {
         $retval = false;
         if (parent::containsModule($module)) {
             $retval = true;

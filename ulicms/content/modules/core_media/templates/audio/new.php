@@ -1,4 +1,7 @@
 <?php
+
+use UliCMS\Models\Content\Categories;
+
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("audio") and $permissionChecker->hasPermission("audio_create")) {
     ?>
@@ -11,7 +14,7 @@ if ($permissionChecker->hasPermission("audio") and $permissionChecker->hasPermis
     <form action="index.php?sClass=AudioController&sMethod=create"
           method="post" enctype="multipart/form-data">
         <input type="hidden" name="add" value="add">
-        <?php csrf_token_html(); ?>
+            <?php csrf_token_html(); ?>
         <strong><?php translate("name"); ?>*</strong> <br /> <input
             type="text" name="name" required value="" maxlength="255" /> <br /> <strong><?php translate("category"); ?></strong><br />
             <?php

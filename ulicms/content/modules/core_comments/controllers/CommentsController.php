@@ -1,9 +1,11 @@
 <?php
 
-use UliCMS\Data\Content\Comment;
+use UliCMS\Models\Content\Comment;
 use UliCMS\Exceptions\FileNotFoundException;
 use UliCMS\HTML as HTML;
 use UliCMS\Exceptions\NotImplementedException;
+use UliCMS\Constants\CommentStatus;
+use UliCMS\Utils\CacheUtil;
 
 class CommentsController extends MainClass {
 

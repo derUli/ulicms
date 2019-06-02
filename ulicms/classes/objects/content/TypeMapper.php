@@ -4,6 +4,12 @@
 // Die Namen der Modelklassen sollten direkt gespeichert werden in der Tabelle
 // content
 
+namespace UliCMS\Models\Content;
+
+use function getAllModules;
+use function getModuleMeta;
+use StringHelper;
+
 class TypeMapper {
 
     private static $mapping = array(
@@ -22,6 +28,13 @@ class TypeMapper {
 
     public static function getMappings() {
         return self::$mapping;
+    }
+
+    public static function getModel($type) {
+        if (!(isset(self::$mapping[$type]) and class_exists(self::$mapping[$type]))) {
+            return null;
+        }
+        return new self::$mapping[$type]();
     }
 
     public static function loadMapping() {

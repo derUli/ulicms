@@ -1,5 +1,12 @@
 <?php
 
+namespace UliCMS\Models\Content;
+
+use function db_query;
+use function db_fetch_object;
+use function db_num_rows;
+use function db_escape;
+
 // Version Control System for pages
 class VCS {
 

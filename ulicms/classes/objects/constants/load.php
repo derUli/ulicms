@@ -5,7 +5,10 @@ $classes = array(
     "EmailModes",
     "CommentStatus",
     "RequestMethod",
-    "ModuleEventConstants"
+    "ModuleEventConstants",
+    "AllowedTags",
+    "LinkTarget",
+    "ButtonType"
 );
 foreach ($classes as $class) {
     require_once dirname(__file__) . "/$class.php";

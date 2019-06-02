@@ -1,6 +1,14 @@
 <?php
 
 require_once "init.php";
+
+use UliCMS\Models\Content\Language;
+use UliCMS\Utils\CacheUtil;
+use UliCMS\Creators\CSVCreator;
+use UliCMS\Creators\JSONCreator;
+use UliCMS\Creators\PDFCreator;
+use UliCMS\Creators\PlainTextCreator;
+
 global $connection;
 
 do_event("before_session_start");
@@ -34,7 +42,6 @@ if (faster_in_array($_SESSION["language"], $languages) && is_file(getLanguageFil
 Translation::loadAllModuleLanguageFiles($_SESSION["language"]);
 Translation::includeCustomLangFile($_SESSION["language"]);
 
-require_once "templating.php";
 Translation::loadCurrentThemeLanguageFiles($_SESSION["language"]);
 do_event("custom_lang_" . $_SESSION["language"]);
 
@@ -45,6 +52,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" and ! defined("NO_ANTI_CSRF")) {
     if (Settings::get("min_time_to_fill_form", "int") > 0) {
         check_form_timestamp();
     }
+}
+
+// call domain.de/?run_cron=1 with curl or a similiar tool
+// to automatically execute cronjobs
+if (Request::getVar("run_cron")) {
+    do_event("before_cron");
+    require 'lib/cron.php';
+    do_event("after_cron");
+    TextResult("finished cron at " . strftime("%x %X"), HttpStatusCode::OK);
 }
 
 $status = check_status();
@@ -186,7 +202,7 @@ if ($cacheAdapter and $cacheAdapter->get($uid)) {
     }
 
     do_event("before_cron");
-    @require 'cron.php';
+    @require 'lib/cron.php';
     do_event("after_cron");
     die();
 }
@@ -262,9 +278,8 @@ if ($cacheAdapter or Settings::get("minify_html")) {
 
 // Wenn no_auto_cron gesetzt ist, dann muss cron.php manuell ausgeführt bzw. aufgerufen werden
 if (!Settings::get("no_auto_cron")) {
-
     do_event("before_cron");
-    require 'cron.php';
+    require 'lib/cron.php';
     do_event("after_cron");
 }
 

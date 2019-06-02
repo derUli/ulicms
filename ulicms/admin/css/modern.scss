@@ -427,7 +427,7 @@ div.inPageMessage {
 textarea#code {
     height: auto;
 }
-textarea#page_content {
+textarea#content {
     height: auto;
 }
 div.help {
@@ -485,6 +485,7 @@ div#google-fonts {
 .accordion-content {
     width: auto !important;
     word-wrap: break-word;
+    overflow-x: auto;
     padding: 15px;
 
     .checkbox, .radio{
@@ -531,6 +532,11 @@ div#login-welcome-text {
 }
 .main-content {
     margin-top: 15px;
+
+    li{
+        margin-bottom:10px;
+    }
+
     a.btn-default {
         color: $color_10;
     }
@@ -704,6 +710,17 @@ input[type="checkbox"]{
 }
 .hide {
     display: block;
+}
+
+
+@media only screen and (min-width: 375px) {
+
+    .btn-group .btn{
+        margin-right: 10px;
+    }
+    .btn-group .btn:last-child{
+        margin-right: 0;
+    }
 }
 .btn-primary {
     background-color: $background_color_4;
@@ -939,5 +956,14 @@ pre {
         border-radius: 5px;
         padding: 0 6px;
         font-size: 0.35em;
+    }
+}
+
+#designForm{
+    .preview{
+        img{
+            max-height: 50vh;
+            max-width: 100%;
+        }
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Constants\AuditLog;
+
 class Settings {
 
     public static function register($key, $value, $type = 'str') {

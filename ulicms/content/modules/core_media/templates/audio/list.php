@@ -1,4 +1,7 @@
 <?php
+
+use UliCMS\Models\Content\Categories;
+
 $permissionChecker = new ACL();
 $audio_folder = ULICMS_DATA_STORAGE_ROOT . "/content/audio";
 if (!is_dir($audio_folder)) {
@@ -23,7 +26,7 @@ $all_audio = db_query($sql);
 
 if ($permissionChecker->hasPermission("audio")) {
     ?>
-    <?php echo Template::executeModuleTemplate("core_media", "icons.php"); ?>
+        <?php echo Template::executeModuleTemplate("core_media", "icons.php"); ?>
 
     <h1>
         <?php
@@ -34,7 +37,7 @@ if ($permissionChecker->hasPermission("audio")) {
     <?php echo Categories::getHTMLSelect($_SESSION ["filter_category"], true); ?>
     <br />
     <br />
-    <?php if ($permissionChecker->hasPermission("audio_create")) { ?>
+            <?php if ($permissionChecker->hasPermission("audio_create")) { ?>
         <p>
             <a href="index.php?action=add_audio" class="btn btn-default"><i class="fa fa-upload"></i> <?php
                 translate("upload_audio");
@@ -46,26 +49,26 @@ if ($permissionChecker->hasPermission("audio")) {
             <thead>
                 <tr>
                     <th><?php
-                        translate("id");
-                        ?>
+    translate("id");
+    ?>
                     </th>
                     <th><?php
-                        translate("name");
-                        ?>
+    translate("name");
+    ?>
                     </th>
                     <th class="hide-on-mobile"><?php
-                        translate("OGG_FILE");
-                        ?>
+    translate("OGG_FILE");
+    ?>
                     </th>
                     <th class="hide-on-mobile"><?php
-                        translate("MP3_FILE");
-                        ?>
+    translate("MP3_FILE");
+    ?>
                     </th>
 
                     <?php if ($permissionChecker->hasPermission("audio_edit")) { ?>
                         <td></td>
                         <td></td>
-                    <?php } ?>
+    <?php } ?>
                 </tr>
 
             </thead>
@@ -75,32 +78,32 @@ if ($permissionChecker->hasPermission("audio")) {
                     ?>
                     <tr id="dataset-<?php echo $row->id; ?>">
                         <td><?php
-                            echo $row->id;
-                            ?>
+                    echo $row->id;
+                    ?>
                         </td>
                         <td><?php
-                            esc($row->name);
-                            ?>
+                    esc($row->name);
+                    ?>
                         </td>
                         <td class="hide-on-mobile"><?php
-                            esc(basename($row->ogg_file));
-                            ?>
+                    esc(basename($row->ogg_file));
+                    ?>
                         </td>
                         <td class="hide-on-mobile"><?php
-                            esc(basename($row->mp3_file));
-                            ?>
+                    esc(basename($row->mp3_file));
+                    ?>
                         </td>
-                        <?php if ($permissionChecker->hasPermission("audio_edit")) { ?>
+                                <?php if ($permissionChecker->hasPermission("audio_edit")) { ?>
                             <td><a
                                     href="index.php?action=edit_audio&id=<?php
                                     echo $row->id;
                                     ?>"><img src="gfx/edit.png" class="mobile-big-image"
                                        alt="<?php
-                                       translate("edit");
-                                       ?>"
+                           translate("edit");
+                                    ?>"
                                        title="<?php
-                                       translate("edit");
-                                       ?>"> </a></td>
+                           translate("edit");
+                           ?>"> </a></td>
                             <td><form
                                     action="?sClass=AudioController&sMethod=delete&delete=<?php echo $row->id; ?>"
                                     method="post" class="delete-form"><?php csrf_token_html(); ?><input
@@ -108,9 +111,9 @@ if ($permissionChecker->hasPermission("audio")) {
                                         alt="<?php translate("delete"); ?>"
                                         title="<?php translate("delete"); ?>">
                                 </form></td>
-                        <?php } ?>
+                    <?php } ?>
                     </tr>
-                <?php } ?>
+    <?php } ?>
             </tbody>
         </table>
     </div>

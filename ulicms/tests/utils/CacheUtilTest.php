@@ -1,6 +1,7 @@
 <?php
 
 use Phpfastcache\Helper\Psr16Adapter;
+use UliCMS\Utils\CacheUtil;
 
 class CacheUtilTest extends \PHPUnit\Framework\TestCase {
 

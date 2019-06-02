@@ -3,7 +3,7 @@
 namespace UliCMS\HTML;
 
 use ModuleHelper;
-use File;
+use UliCMS\Utils\File;
 
 class Style {
 

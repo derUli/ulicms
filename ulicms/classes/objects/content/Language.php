@@ -1,8 +1,16 @@
 <?php
 
-class Language {
+namespace UliCMS\Models\Content;
 
-    private $id = null;
+use Model;
+use Database;
+use Request;
+use function getDomainByLanguage;
+use Settings;
+
+class Language extends Model {
+
+    protected $id = null;
     private $name = null;
     private $language_code = null;
 
@@ -12,7 +20,7 @@ class Language {
         }
     }
 
-    public function fillVars($query) {
+    public function fillVars($query = null) {
         if (Database::getNumRows($query) > 0) {
             $result = Database::fetchObject($query);
             $this->id = $result->id;

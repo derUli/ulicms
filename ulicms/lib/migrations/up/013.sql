@@ -1,0 +1,1 @@
+ALTER TABLE `{prefix}users` DROP COLUMN `old_encryption`;

@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Models\Content\Language;
+
 class Group {
 
     private $id = null;

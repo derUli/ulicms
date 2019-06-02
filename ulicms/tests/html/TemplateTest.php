@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Exceptions\FileNotFoundException;
+use UliCMS\Utils\File;
 
 class TemplateTest extends \PHPUnit\Framework\TestCase {
 

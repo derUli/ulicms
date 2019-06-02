@@ -1,6 +1,7 @@
 <?php
 
-use UliCMS\Data\Content\Comment;
+use UliCMS\Models\Content\Comment;
+use UliCMS\Constants\CommentStatus;
 
 $comments = Comment::getAllByStatus(CommentStatus::PUBLISHED, Vars::get("content_id"));
 $last = end($comments);

@@ -1,7 +1,8 @@
 <?php
 
-use UliCMS\Exceptions\NotImplementedException;
-use UliCMS\Data\Content\Comment;
+use UliCMS\Security\Permissions\PagePermissions;
+use UliCMS\Models\Content\Comment;
+use UliCMS\Models\Content\VCS;
 
 class Page extends Content {
 
@@ -25,10 +26,10 @@ class Page extends Content {
     public $menu = "top";
     public $position = 0;
     public $cache_control = "auto";
-    public $parent = null;
+    public $parent_id = null;
     public $access = "all";
-    public $meta_description = "";
-    public $meta_keywords = "";
+    public $meta_description = null;
+    public $meta_keywords = null;
     private $deleted_at = null;
     public $theme = null;
     public $custom_data = null;
@@ -40,6 +41,7 @@ class Page extends Content {
     public $hidden = 0;
     public $comments_enabled = null;
     private $permissions;
+    public $show_headline = true;
 
     public function __construct($id = null) {
         if ($this->custom_data === null) {
@@ -70,7 +72,7 @@ class Page extends Content {
         $this->views = $result->views;
         $this->menu = $result->menu;
         $this->position = $result->position;
-        $this->parent = $result->parent;
+        $this->parent_id = $result->parent_id;
         $this->access = $result->access;
         $this->meta_description = $result->meta_description;
         $this->meta_keywords = $result->meta_keywords;
@@ -88,6 +90,7 @@ class Page extends Content {
         $this->og_description = $result->og_description;
         $this->cache_control = $result->cache_control;
         $this->hidden = $result->hidden;
+        $this->show_headline = boolval($result->show_headline);
         $this->comments_enabled = !is_null($result->comments_enabled) ? boolval($result->comments_enabled) : null;
 
         // fill page permissions object
@@ -138,8 +141,8 @@ class Page extends Content {
     public function create() {
         $sql = "INSERT INTO `" . tbname("content") . "` (slug, title, alternate_title, target, category_id,
 				content, language, menu_image, active, created, lastmodified, author_id,
-				`group_id`, lastchangeby, views, menu, position, parent, access, meta_description, meta_keywords, deleted_at,
-				theme, custom_data, `type`, og_title, og_type, og_image, og_description, cache_control, hidden, comments_enabled) VALUES (";
+				`group_id`, lastchangeby, views, menu, position, parent_id, access, meta_description, meta_keywords, deleted_at,
+				theme, custom_data, `type`, og_title, og_type, og_image, og_description, cache_control, hidden, comments_enabled, show_headline) VALUES (";
 
         $sql .= "'" . Database::escapeValue($this->slug) . "',";
         $sql .= "'" . Database::escapeValue($this->title) . "',";
@@ -168,18 +171,26 @@ class Page extends Content {
 
         $sql .= "'" . Database::escapeValue($this->menu) . "',";
         $sql .= intval($this->position) . ",";
-        if ($this->parent === null) {
+        if ($this->parent_id === null) {
             $sql .= " NULL ,";
         } else {
-            $sql .= intval($this->parent) . ",";
+            $sql .= intval($this->parent_id) . ",";
         }
 
         $sql .= "'" . Database::escapeValue($this->access) . "',";
-        $sql .= "'" . Database::escapeValue($this->meta_description) . "',";
-        $sql .= "'" . Database::escapeValue($this->meta_keywords) . "',";
+        if (is_present($this->meta_description)) {
+            $sql .= "'" . Database::escapeValue($this->meta_description) . "',";
+        } else {
+            $sql .= "NULL,";
+        }
 
+        if (is_present($this->meta_keywords)) {
+            $sql .= "'" . Database::escapeValue($this->meta_keywords) . "',";
+        } else {
+            $sql .= "NULL,";
+        }
         if ($this->deleted_at === null) {
-            $sql .= " NULL ,";
+            $sql .= " NULL,";
         } else {
             $sql .= intval($this->deleted_at) . ",";
         }
@@ -206,7 +217,8 @@ class Page extends Content {
         $sql .= "'" . Database::escapeValue($this->og_description) . "', ";
         $sql .= "'" . Database::escapeValue($this->cache_control) . "', ";
         $sql .= Database::escapeValue($this->hidden) . ", ";
-        $sql .= Database::escapeValue($this->comments_enabled);
+        $sql .= Database::escapeValue($this->comments_enabled) . ",";
+        $sql .= Database::escapeValue($this->show_headline);
         $sql .= ")";
 
         $result = Database::query($sql) or die(Database::error());
@@ -251,15 +263,24 @@ class Page extends Content {
 
         $sql .= "menu='" . Database::escapeValue($this->menu) . "',";
         $sql .= "position=" . intval($this->position) . ",";
-        if ($this->parent === null) {
-            $sql .= "parent = NULL ,";
+        if ($this->parent_id === null) {
+            $sql .= "parent_id = NULL ,";
         } else {
-            $sql .= "parent=" . intval($this->parent) . ",";
+            $sql .= "parent_id=" . intval($this->parent_id) . ",";
         }
 
         $sql .= "access='" . Database::escapeValue($this->access) . "',";
-        $sql .= "meta_description='" . Database::escapeValue($this->meta_description) . "',";
-        $sql .= "meta_keywords='" . Database::escapeValue($this->meta_keywords) . "',";
+        if (is_present($this->meta_description)) {
+            $sql .= "meta_description='" . Database::escapeValue($this->meta_description) . "',";
+        } else {
+            $sql .= "meta_description = null,";
+        }
+
+        if (is_present($this->meta_keywords)) {
+            $sql .= "meta_keywords='" . Database::escapeValue($this->meta_keywords) . "',";
+        } else {
+            $sql .= "meta_keywords = null,";
+        }
 
         if ($this->deleted_at === null) {
             $sql .= "deleted_at=NULL ,";
@@ -289,6 +310,7 @@ class Page extends Content {
         $sql .= "og_description='" . Database::escapeValue($this->og_description) . "', ";
         $sql .= "hidden='" . Database::escapeValue($this->hidden) . "', ";
         $sql .= "comments_enabled=" . Database::escapeValue($this->comments_enabled) . ", ";
+        $sql .= "show_headline=" . Database::escapeValue($this->show_headline) . ",";
         $sql .= "cache_control='" . Database::escapeValue($this->cache_control) . "' ";
 
         $sql .= " WHERE id = " . $this->id;
@@ -312,13 +334,13 @@ class Page extends Content {
         $this->save();
     }
 
-    public function containsModule($module = false) {
+    public function containsModule($module = null) {
         $content = $this->content;
         $content = str_replace("&quot;", "\"", $content);
         if ($module) {
-            return preg_match("/\[module=\"" . preg_quote($module) . "\"\]/", $content);
+            return boolval(preg_match("/\[module=\"" . preg_quote($module) . "\"\]/", $content));
         } else {
-            return preg_match("/\[module=\".+\"\]/", $content);
+            return boolval(preg_match("/\[module=\".+\"\]/", $content));
         }
     }
 
@@ -335,6 +357,20 @@ class Page extends Content {
             }
         }
         return $result;
+    }
+
+    public function getParent() {
+        if (!$this->parent_id) {
+            return null;
+        }
+        return ContentFactory::getByID($this->parent_id);
+    }
+
+    public function getHistory($order = "date DESC") {
+        if (!$this->getID()) {
+            return array();
+        }
+        return VCS::getRevisionsByContentID($this->getID(), $order);
     }
 
     public function getPermissions() {
@@ -385,6 +421,16 @@ class Page extends Content {
 
     public function checkAccess() {
         return checkAccess($this->access);
+    }
+
+    public function makeFrontPage() {
+        Settings::setLanguageSetting("frontpage", $this->slug, $this->language);
+    }
+
+    public function isFrontPage() {
+        $frontPage = Settings::getLang("frontpage",
+                        $this->language);
+        return $frontPage === $this->slug;
     }
 
 }

@@ -1,6 +1,14 @@
 <?php
 
+namespace UliCMS\Registries;
+
 use UliCMS\Exceptions\FileNotFoundException;
+use Vars;
+use function getAllModules;
+use function faster_in_array;
+use function getModuleMeta;
+use function endsWith;
+use function getModulePath;
 
 class HelperRegistry {
 

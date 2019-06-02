@@ -1,5 +1,9 @@
 <?php
 
+namespace UliCMS\Models\Content\Types;
+
+use UliCMS\Models\Content\Types\ContentType;
+
 class DefaultContentTypes {
 
     private static $types = array();

@@ -62,6 +62,15 @@ $(function () {
     // Showing a link in an alert box
     initRemoteAlerts("body");
 
+    // There is a bug in iOS Safari's implementation of datetime-local
+    // Safari appends a timezone to value on change while the
+    // validation only accepts value without timezone
+    // remove the timezone from the datetime value
+    // https://www.reddit.com/r/webdev/comments/6pxfn3/ios_datetimelocal_inputs_broken_universally/
+    $("input[type='datetime-local']").change(function (event) {
+        event.target.value = event.target.value.substr(0, 16);
+    });
+
     // dynamically add class form-control to all form elements to
     // make inputs prettier
     $("input, select, textarea")

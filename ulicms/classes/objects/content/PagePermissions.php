@@ -1,5 +1,9 @@
 <?php
 
+namespace UliCMS\Security\Permissions;
+
+use Database;
+
 class PagePermissions {
 
     public function __construct($objects = array()) {

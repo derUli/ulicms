@@ -43,7 +43,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
                         esc($lang);
                         ?>"
                         value="<?php
-                        echo StringHelper::realHtmlSpecialchars($metaKeywords[$lang]);
+                        esc($metaKeywords[$lang]);
                         ?>"></td>
             </tr>
             <?php

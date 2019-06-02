@@ -1,6 +1,8 @@
 <?php
 
-class ArrayHelper extends Helper {
+namespace UliCMS\Helpers;
+
+class ArrayHelper extends \Helper {
 
     public static function insertBefore($input, $index, $element) {
         if (!array_key_exists($index, $input)) {

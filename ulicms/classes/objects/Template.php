@@ -1,9 +1,11 @@
 <?php
 
+use UliCMS\Utils\File;
 use UliCMS\Exceptions\FileNotFoundException;
 use UliCMS\HTML\Script;
 use UliCMS\Security\PermissionChecker;
 use MatthiasMullie\Minify;
+use UliCMS\Models\Content\Advertisement\Banners;
 
 class Template {
 
@@ -339,8 +341,7 @@ class Template {
             if ($font == "google") {
                 $google_font = Settings::get("google-font");
                 if ($google_font) {
-                    echo '<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=' . urlencode($google_font) . '"/>';
-
+                    echo '<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=' . urlencode($google_font) . '&display=swap"/>';
                     $font = "'$google_font'";
                 }
             }

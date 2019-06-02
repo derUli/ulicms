@@ -1,5 +1,7 @@
 <?php
 
+namespace UliCMS\Creators;
+
 class PlainTextCreator {
 
     public $target_file = null;

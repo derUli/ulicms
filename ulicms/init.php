@@ -3,6 +3,9 @@
 use UliCMS\Exceptions\AccessDeniedException;
 use UliCMS\Exceptions\SqlException;
 use UliCMS\Exceptions\FileNotFoundException;
+use UliCMS\Constants\AuditLog;
+use UliCMS\Registries\HelperRegistry;
+use UliCMS\Models\Content\TypeMapper;
 
 // root directory of UliCMS
 if (!defined("ULICMS_ROOT")) {
@@ -38,9 +41,8 @@ if (is_file($composerAutoloadFile)) {
 }
 
 require_once dirname(__file__) . "/lib/minify.php";
-require_once dirname(__file__) . "/api.php";
-// todo reorganize includes
-require_once dirname(__file__) . "/lib/constants.php";
+require_once dirname(__file__) . "/lib/api.php";
+require_once dirname(__file__) . "/lib/csv_writer.php";
 require_once dirname(__file__) . "/classes/objects/privacy/load.php";
 require_once dirname(__file__) . "/lib/users_api.php";
 require_once dirname(__file__) . "/lib/string_functions.php";
@@ -125,7 +127,7 @@ function exception_handler($exception) {
     if (!defined("EXCEPTION_OCCURRED")) {
         define("EXCEPTION_OCCURRED", true);
     }
-    $error = nl2br(htmlspecialchars($exception));
+    $error = nl2br(_esc($exception));
 
     // FIXME: what if there is no config class?
     $cfg = class_exists("CMSConfig") ? new CMSConfig() : null;
@@ -416,7 +418,7 @@ TypeMapper::loadMapping();
 HelperRegistry::loadModuleHelpers();
 ControllerRegistry::loadModuleControllers();
 
-require_once dirname(__file__) . "/templating.php";
+require_once dirname(__file__) . "/lib/templating.php";
 
 do_event("before_init");
 do_event("init");

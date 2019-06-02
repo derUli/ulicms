@@ -1,5 +1,9 @@
 <?php
 
+use UliCMS\Models\Content\Advertisement\Banners;
+use UliCMS\Models\Content\Advertisement\Banner;
+use UliCMS\Models\Content\Category;
+
 class BannersTest extends \PHPUnit\Framework\TestCase {
 
     const HTML_TEXT1 = "My first Banner HTML";
@@ -130,7 +134,7 @@ class BannersTest extends \PHPUnit\Framework\TestCase {
 
         $_SESSION["language"] = "de";
 
-        for ($i = 1; $i < 20; $i++) {
+        for ($i = 1; $i < 5; $i++) {
             $banner = new Banner();
             $banner->setType("html");
             $banner->setHtml(self::HTML_TEXT1);
@@ -140,8 +144,16 @@ class BannersTest extends \PHPUnit\Framework\TestCase {
         $banner1 = Banners::getRandom();
         $this->assertInstanceOf(Banner::class, $banner1);
 
+
         $banner2 = Banners::getRandom();
-        $this->assertInstanceOf(Banner::class, $banner2);
+
+        $i = 1;
+
+        do {
+            $banner2 = Banners::getRandom();
+            $i++;
+        } while ($banner1->getId() == $banner2->getId() and
+        $i < 10);
 
         $this->assertNotEquals($banner2->getId(), $banner1->getId());
     }

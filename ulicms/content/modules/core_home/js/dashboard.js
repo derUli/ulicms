@@ -1,12 +1,15 @@
 $(function () {
-    $("#ulicms-newsfeed").click(function (event) {
+    $(".has-ajax-content").click(function (event) {
         if ($(event.target).hasClass("loaded")) {
             return;
         }
-        var url = $("#ulicms-feed").data("url");
-        $('#ulicms-feed').load(url);
-        $(event.target).addClass("loaded")
+        var url = $(this).data("url");
+        $(this).find(".accordion-content").load(url);
+        if (!$(this).hasClass("always-update")) {
+            $($(this)).addClass("loaded");
+        }
     });
+
     var url = $("#patch-notification").data("url");
     $.get(url, function (data) {
         if (data.length > 0) {

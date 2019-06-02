@@ -1,7 +1,9 @@
 <?php
 
-use UliCMS\Data\Content\Comment;
+use UliCMS\Models\Content\Comment;
+use UliCMS\Constants\CommentStatus;
 use UliCMS\Exceptions\FileNotFoundException;
+use UliCMS\Utils\CacheUtil;
 
 class CommentTest extends \PHPUnit\Framework\TestCase {
 

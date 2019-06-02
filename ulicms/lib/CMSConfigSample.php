@@ -5,8 +5,7 @@
 // If ULICMS_ENVIRONMENT is not set UliCMS fallbacks to "default" Environment
 // configuration files are now located in ULICMS_ROOT/content/configurations
 // Don't edit this file!
-$environment = get_environment();
-$environment = basename($environment);
+$environment = basename(get_environment());
 
 $file = dirname(__FILE__) . "/content/configurations/{$environment}.php";
 

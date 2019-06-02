@@ -2,7 +2,7 @@
 
 namespace UliCMS\HTML;
 
-use File;
+use UliCMS\Utils\File;
 use ModuleHelper;
 
 class Script {

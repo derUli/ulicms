@@ -1,5 +1,11 @@
 <?php
 
+namespace UliCMS\Models\Content\Advertisement;
+
+use Database;
+use DB;
+use function tbname;
+
 class Banners {
 
     public static function getAll($order = "id") {

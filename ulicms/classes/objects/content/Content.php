@@ -1,17 +1,13 @@
 <?php
 
+use UliCMS\Exceptions\FileNotFoundException;
+
 abstract class Content extends Model {
 
     abstract protected function loadBySlugAndLanguage($name, $language);
 
     public function getShowHeadline() {
-        $retval = true;
-        $query = Database::query("SELECT `show_headline` FROM " . tbname("content") . " where id =" . intval($this->id));
-        if ($query) {
-            $data = Database::fetchObject($query);
-            $retval = boolval($data->show_headline);
-        }
-        return $retval;
+        return $this->show_headline;
     }
 
     public static function emptyTrash() {
@@ -24,6 +20,21 @@ abstract class Content extends Model {
 
     public function isRegular() {
         return true;
+    }
+
+    public function getChildren($order = "id") {
+        if (!$this->getID()) {
+            return array();
+        }
+        try {
+            return ContentFactory:: getAllByParent($this->getID(), $order);
+        } catch (FileNotFoundException $e) {
+            return array();
+        }
+    }
+
+    public function hasChildren() {
+        return count($this->getChildren()) > 0;
     }
 
 }

@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Exceptions\FileNotFoundException;
+use UliCMS\Models\Content\TypeMapper;
 
 class ContentFactory {
 
@@ -74,10 +75,43 @@ class ContentFactory {
         return $result;
     }
 
+    public static function getAllByParent($parent_id, $order = "id") {
+        $result = array();
+
+        $sql = "SELECT id, type FROM {prefix}content ";
+
+        $args = array(
+            !is_null($parent_id) ? intval($parent_id) : null
+        );
+
+        $sql .= !is_null($parent_id) ? "where `parent_id` = ?" :
+                "where `parent_id` IS ?";
+
+        $sql .= " ORDER BY $order";
+
+        $query = Database::pQuery($sql, $args, true);
+        while ($row = Database::fetchObject($query)) {
+            $result[] = self::getContentObjectByID($row);
+        }
+
+        return $result;
+    }
+
     public static function getAllByMenu($menu, $order = "id") {
         $menu = Database::escapeValue($menu);
         $result = array();
         $sql = "SELECT id, `type` FROM " . tbname("content") . " where `menu` = '$menu' ORDER BY $order";
+        $query = Database::query($sql);
+        while ($row = Database::fetchObject($query)) {
+            $result[] = self::getContentObjectByID($row);
+        }
+        return $result;
+    }
+
+    public static function getAllByType($type, $order = "id") {
+        $type = Database::escapeValue($type);
+        $result = array();
+        $sql = "SELECT id, `type` FROM " . tbname("content") . " where `type` = '$type' ORDER BY $order";
         $query = Database::query($sql);
         while ($row = Database::fetchObject($query)) {
             $result[] = self::getContentObjectByID($row);
@@ -114,7 +148,7 @@ class ContentFactory {
 
         if ($parent_id !== null and $parent_id !== 0) {
             $parent_id = intval($parent_id);
-            $sql .= "parent = $parent_id and ";
+            $sql .= "parent_id = $parent_id and ";
         }
 
         if ($type !== null and $type !== "") {

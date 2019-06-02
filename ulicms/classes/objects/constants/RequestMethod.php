@@ -1,5 +1,7 @@
 <?php
 
+namespace UliCMS\Constants;
+
 class RequestMethod {
 
     const POST = "post";

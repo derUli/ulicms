@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Utils\File;
+
 class ApiTest extends \PHPUnit\Framework\TestCase {
 
     public function setUp() {
@@ -482,6 +484,15 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetEnvironment() {
         $this->assertEquals("test", get_environment());
+    }
+
+    public function testIsModuleInstalledReturnsTrue() {
+        $this->assertTrue(isModuleInstalled("core_content"));
+        $this->assertTrue(isModuleInstalled("fortune2"));
+    }
+
+    public function testIsModuleInstalledReturnsFalse() {
+        $this->assertFalse(isModuleInstalled("not_a_module"));
     }
 
 }

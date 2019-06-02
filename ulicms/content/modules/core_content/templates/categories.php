@@ -1,4 +1,7 @@
 <?php
+
+use UliCMS\Models\Content\Categories;
+
 $permissionChecker = new ACL();
 if (!$permissionChecker->hasPermission("categories")) {
     noPerms();
@@ -48,7 +51,7 @@ if (!$permissionChecker->hasPermission("categories")) {
                             ?>
                             <td></td>
                             <td></td>
-                        <?php } ?>
+        <?php } ?>
                     </tr>
                 </thead>
                 <tbody>
@@ -57,14 +60,14 @@ if (!$permissionChecker->hasPermission("categories")) {
                         ?>
                         <tr id="dataset-<?php echo $category->getID(); ?>">
                             <td><?php
-                                echo $category->getId();
-                                ?></td>
+                    echo $category->getId();
+                        ?></td>
                             <td style="padding-right: 20px;"><?php
-                                esc($category->getName());
-                                ?></td>
+                    esc($category->getName());
+                        ?></td>
                             <td style="padding-right: 20px;" class="hide-on-mobile"><?php
-                                echo nl2br(_esc($category->getDescription()));
-                                ?></td>
+                            echo nl2br(_esc($category->getDescription()));
+                            ?></td>
                             <?php
                             if ($permissionChecker->hasPermission("categories_edit")) {
                                 ?>
@@ -78,16 +81,16 @@ if (!$permissionChecker->hasPermission("categories")) {
                                         ?>
                                     <td class="text-center"><form
                                             action="?sClass=CategoryController&sMethod=delete&del=<?php
-                                            echo $category->getId();
-                                            ?>"
+                                        echo $category->getId();
+                                        ?>"
                                             method="post" class="delete-form"><?php csrf_token_html(); ?><input
                                                 type="image" class="mobile-big-image" src="gfx/delete.gif"
                                                 alt="<?php
-                                                translate("delete");
-                                                ?>"
+                                        translate("delete");
+                                        ?>"
                                                 title="<?php
-                                                translate("delete");
-                                                ?>">
+                            translate("delete");
+                                        ?>">
                                         </form></td>
                                     <?php
                                 } else {
@@ -96,15 +99,15 @@ if (!$permissionChecker->hasPermission("categories")) {
                                                                onclick="alert('<?php translate("CANT_DELETE_CATEGORY_GENERAL"); ?>')"><img
                                                 class="mobile-big-image" src="gfx/delete.gif"
                                                 alt="<?php
-                                                translate("delete");
-                                                ?>"
+                                    translate("delete");
+                                    ?>"
                                                 title="<?php
-                                                translate("delete");
-                                                ?>"> </a></td>
+                                        translate("delete");
+                                        ?>"> </a></td>
                                         <?php
                                     }
                                     ?>
-                                <?php } ?>
+                        <?php } ?>
                         </tr>
                         <?php
                     }
@@ -157,21 +160,21 @@ if (!$permissionChecker->hasPermission("categories")) {
                 <strong><?php translate("name"); ?>*</strong> <input type="text"
                                                                      name="name" required
                                                                      value="<?php
-                                                                     echo Categories::getCategoryById(intval($_GET["edit"]));
-                                                                     ?>">
+            echo Categories::getCategoryById(intval($_GET["edit"]));
+            ?>">
             </p>
             <p>
 
                 <strong><?php translate("description"); ?></strong> <br />
                 <textarea cols="50" name="description" rows="5" maxlength="255"><?php
-                    esc(Categories::getCategoryDescriptionById(intval($_GET["edit"])));
-                    ?></textarea>
+            esc(Categories::getCategoryDescriptionById(intval($_GET["edit"])));
+            ?></textarea>
             </p>
             <p>
                 <button type="submit" name="update" class="btn btn-primary">
                     <i class="fa fa-save"></i> <?php
-                    translate("save");
-                    ?></button>
+            translate("save");
+            ?></button>
             </p>
             </form>
             <?php

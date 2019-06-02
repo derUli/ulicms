@@ -216,13 +216,13 @@ function filterParentPages() {
         csrf_token: $("input[name=csrf_token]").first().val(),
         mlang: $("select[name='language']").val(),
         mmenu: $("select[name='menu']").val(),
-        mparent: $("select[name='parent']").val()
+        mparent: $("select[name='parent_id']").val()
     };
 
     var url = $(".main-form").first().data("parent-pages-url");
 
     $.post(url, data, function (text, status) {
-        $("select[name='parent']").html(text);
+        $("select[name='parent_id']").html(text);
     });
 }
 

@@ -1,0 +1,22 @@
+{
+  "name": "theme-2020",
+  "version": "1.0.0",
+  "description": "Attribution-ShareAlike 4.0 International",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "theme",
+    "2020",
+    "onepager",
+    "ulicms",
+    "php"
+  ],
+  "author": "Ulrich Schmidt",
+  "license": "ISC",
+  "dependencies": {
+    "onepage-scroll": "^1.3.0"
+  },
+  "private" : true
+}

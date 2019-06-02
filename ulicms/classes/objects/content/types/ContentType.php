@@ -1,5 +1,7 @@
 <?php
 
+namespace UliCMS\Models\Content\Types;
+
 class ContentType {
 
     public $show = array();

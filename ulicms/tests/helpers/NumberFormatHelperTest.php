@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Helpers\NumberFormatHelper;
+
 class NumberFormatHelperTest extends \PHPUnit\Framework\TestCase {
 
     public function setUp() {

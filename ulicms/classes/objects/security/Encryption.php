@@ -1,5 +1,9 @@
 <?php
 
+namespace UliCMS\Security;
+
+use Settings;
+
 class Encryption {
 
     public static function hashPassword($password) {
@@ -15,5 +19,3 @@ class Encryption {
     }
 
 }
-
-?>
