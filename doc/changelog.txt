@@ -26,6 +26,9 @@ Neue API-Methoden:
 Entfernte API-Methoden:
 * addUser()
 
+Fehlerkorrekturen:
+* datetime-local Eingabefelder auf iOS Safari sind immer ungültig
+
 Entfernte Features:
 * Unterstützung für veraltete unsichere Passwortverschlüsselung entfernt
 * Unbenutztes Feld "Homepage" in den Metadaten eines Artikels entfernt
