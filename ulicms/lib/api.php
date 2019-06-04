@@ -5,30 +5,7 @@ use Negotiation\LanguageNegotiator;
 use UliCMS\Constants\ModuleEventConstants;
 use UliCMS\Models\Content\Types\DefaultContentTypes;
 use UliCMS\Utils\CacheUtil;
-
-function is_blank($val = null) {
-    return isset($val) && (is_string($val) &&
-            StringHelper::isNullOrWhitespace($val)) ||
-            empty($val);
-}
-
-function is_present($val = null) {
-    return isset($val) && !is_blank($val);
-}
-
-function startsWith($haystack, $needle, $case = true) {
-    if ($case) {
-        return (strcmp(substr($haystack, 0, strlen($needle)), $needle) === 0);
-    }
-    return (strcasecmp(substr($haystack, 0, strlen($needle)), $needle) === 0);
-}
-
-function endsWith($haystack, $needle, $case = true) {
-    if ($case) {
-        return (strcmp(substr($haystack, strlen($haystack) - strlen($needle)), $needle) === 0);
-    }
-    return (strcasecmp(substr($haystack, strlen($haystack) - strlen($needle)), $needle) === 0);
-}
+use Carbon\Carbon;
 
 function idefine($key, $value) {
     $key = strtoupper($key);
@@ -45,22 +22,6 @@ function faster_in_array($needle, $haystack) {
     }
     $flipped = array_flip($haystack);
     return isset($flipped[$needle]);
-}
-
-function is_json($str) {
-    return json_decode($str) != null;
-}
-
-function is_numeric_array($var) {
-    if (!is_array($var)) {
-        return false;
-    }
-    foreach ($var as $key => $value) {
-        if (!is_numeric($value)) {
-            return false;
-        }
-    }
-    return true;
 }
 
 function var_is_type($var, $type, $required = false) {
@@ -124,14 +85,6 @@ if (!function_exists("each")) {
         return myEach($arr);
     }
 
-}
-
-function is_true($var) {
-    return (isset($var) and $var);
-}
-
-function is_false($var) {
-    return !(isset($var) and $var);
 }
 
 function bool2YesNo($value, $yesString = null, $noString = null) {
@@ -225,17 +178,8 @@ function get_action() {
     return BackendHelper::getAction();
 }
 
-function isMaintenanceMode() {
-    return (strtolower(Settings::get("maintenance_mode")) == "on" || strtolower(Settings::get("maintenance_mode")) == "true" || Settings::get("maintenance_mode") == "1");
-}
-
 function getStringLengthInBytes($data) {
     return ini_get('mbstring.func_overload') ? mb_strlen($data, '8bit') : strlen($data);
-}
-
-// sind wir gerade im Adminordner?
-function is_admin_dir() {
-    return basename(getcwd()) === "admin";
 }
 
 function set_format($format) {
@@ -296,20 +240,6 @@ function get_canonical() {
     return $canonical;
 }
 
-function is_crawler($useragent = null) {
-    if (is_null($useragent)) {
-        $useragent = $_SERVER['HTTP_USER_AGENT'];
-    }
-    $isCrawler = apply_filter($useragent, "is_crawler");
-    if (is_bool($isCrawler) or is_int($isCrawler)) {
-        return boolval($isCrawler);
-    }
-
-    $crawlers = 'Google|msnbot|Rambler|Yahoo|AbachoBOT|accoona|' . 'AcioRobot|ASPSeek|CocoCrawler|Dumbot|FAST-WebCrawler|' . 'GeonaBot|Gigabot|Lycos|MSRBOT|Scooter|AltaVista|IDBot|eStyle|Scrubby';
-    $isCrawler = (preg_match("/$crawlers/", $useragent) > 0);
-    return $isCrawler;
-}
-
 function get_lang_config($name, $lang) {
     $retval = false;
     $config = Settings::get($name . "_" . $lang);
@@ -319,12 +249,6 @@ function get_lang_config($name, $lang) {
         $config = Settings::get($name);
     }
     return $config;
-}
-
-// Check if it is night (current hour between 0 and 4 o'Clock AM)
-function is_night() {
-    $hour = (int) date("G", time());
-    return ($hour >= 0 and $hour <= 4);
 }
 
 function eTagFromString($str) {
@@ -350,15 +274,6 @@ function browsercacheOneDay($modified = null) {
 // PHP Formbuilder Class initialisieren
 function initPFBC() {
     do_event("init_pfbc");
-}
-
-function is_debug_mode() {
-    $config = new CMSConfig();
-    return (defined("ULICMS_DEBUG") and ULICMS_DEBUG) or ( isset($config->debug) and $config->debug);
-}
-
-function isCLI() {
-    return php_sapi_name() == "cli";
 }
 
 /**
@@ -1458,38 +1373,8 @@ function cms_version() {
     return implode(".", $v->getInternalVersion());
 }
 
-function is_tablet() {
-    if (!class_exists("Mobile_Detect")) {
-        return false;
-    }
-    $detect = new Mobile_Detect();
-    $result = $detect->isTablet();
-    return $result;
-}
-
-function is_desktop() {
-    return !is_mobile();
-}
-
 function get_environment() {
     return getenv("ULICMS_ENVIRONMENT") ? getenv("ULICMS_ENVIRONMENT") : "default";
-}
-
-// 21. Februar 2015
-// Nutzt nun die Klasse Mobile_Detect
-function is_mobile() {
-    if (!class_exists("Mobile_Detect")) {
-        return false;
-    }
-    $detect = new Mobile_Detect();
-    $result = $detect->isMobile();
-    if (Settings::get("no_mobile_design_on_tablet") and $result and $detect->isTablet()) {
-        $result = false;
-    }
-    if (function_exists("apply_filter")) {
-        $result = apply_filter($result, "is_mobile");
-    }
-    return $result;
 }
 
 function func_enabled($func) {
@@ -1505,16 +1390,6 @@ function func_enabled($func) {
         $it_is_disabled["s"] = 1;
     }
     return $it_is_disabled;
-}
-
-function is_admin() {
-    $isAdmin = false;
-    $user_id = get_user_id();
-    if ($user_id) {
-        $user = new User(get_user_id());
-        $isAdmin = $user->getAdmin();
-    }
-    return $isAdmin;
 }
 
 function set_eTagHeaders($identifier, $timestamp) {

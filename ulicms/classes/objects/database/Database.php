@@ -3,6 +3,11 @@
 class Database {
 
     private static $connection = null;
+    private static $echoQueries = false;
+
+    public static function setEchoQueries($echoQueries = true) {
+        self::$echoQueries = $echoQueries;
+    }
 
     // Connect with database server
     public static function connect($server, $user, $password, $port, $socket = null) {
@@ -55,6 +60,9 @@ class Database {
         if ($logger) {
             $logger->info($sql);
         }
+        if (self::$echoQueries) {
+            echo $sql . "\n";
+        }
         return mysqli_query(self::$connection, $sql);
     }
 
@@ -67,6 +75,9 @@ class Database {
         $logger = LoggerRegistry::get("sql_log");
         if ($logger) {
             $logger->info($sql);
+        }
+        if (self::$echoQueries) {
+            echo $sql . "\n";
         }
         return mysqli_multi_query(self::$connection, $sql);
     }

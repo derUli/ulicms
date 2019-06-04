@@ -40,6 +40,7 @@ if (is_file($composerAutoloadFile)) {
     throw new FileNotFoundException("autoload.php not found. Please run \"./composer install\" to install dependecies.");
 }
 
+require_once dirname(__file__) . "/lib/comparisons.php";
 require_once dirname(__file__) . "/lib/minify.php";
 require_once dirname(__file__) . "/lib/api.php";
 require_once dirname(__file__) . "/lib/csv_writer.php";
@@ -309,10 +310,15 @@ $path_to_installer = dirname(__file__) . "/installer/installer.php";
 
 if (is_true($config->dbmigrator_auto_migrate)) {
     $additionalSql = is_array($config->dbmigrator_initial_sql_files) ? $config->dbmigrator_initial_sql_files : array();
+    if (isCLI()) {
+        Database::setEchoQueries(true);
+    }
     $select = Database::setupSchemaAndSelect($config->db_database, $additionalSql);
 } else {
     $select = Database::select($config->db_database);
 }
+
+Database::setEchoQueries(false);
 
 if (!$select) {
     throw new SqlException("<h1>Database " . $config->db_database . " doesn't exist.</h1>");
@@ -322,7 +328,7 @@ if (!Settings::get("session_name")) {
     Settings::set("session_name", uniqid() . "_SESSION");
 }
 
-session_name(Settings::get("session_name"));
+@session_name(Settings::get("session_name"));
 
 $useragent = Settings::get("useragent");
 
@@ -393,7 +399,11 @@ function shutdown_function() {
         echo "\n\n<!--" . (microtime(true) - START_TIME) . "-->";
     }
     if (is_true($cfg->dbmigrator_drop_database_on_shutdown)) {
+        if (isCLI()) {
+            Database::setEchoQueries(true);
+        }
         Database::dropSchema($cfg->db_database);
+        Database::setEchoQueries(false);
     }
 }
 

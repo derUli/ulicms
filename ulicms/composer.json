@@ -39,7 +39,8 @@
         "willdurand/negotiation": "*",
         "cocur/slugify": "*",
         "matthiasmullie/minify": "*",
-        "rakit/validation": "^1.1"
+        "rakit/validation": "^1.1",
+        "nesbot/carbon": "^2.19"
     },
     "require-dev": {
         "phpunit/phpunit": "^7.0"
