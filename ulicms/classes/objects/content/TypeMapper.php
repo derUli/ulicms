@@ -38,7 +38,7 @@ class TypeMapper {
     }
 
     public static function loadMapping() {
-        $objectRegistry = array();
+        $objectRegistry = [];
         $modules = getAllModules();
         foreach ($modules as $module) {
             $mappings = getModuleMeta($module, "type_classes");

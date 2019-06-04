@@ -1,7 +1,7 @@
 <div class="mainmenu">
     <?php
     $menu = new AdminMenu();
-    $entries = array();
+    $entries = [];
     $entries[] = new MenuEntry('<i class="fa fa-home" aria-hidden="true"></i> ' . get_translation("welcome"), "?action=home", "home", "dashboard");
     $entries[] = new MenuEntry('<i class="fas fa-book"></i> ' . get_translation("contents"), "?action=contents", "contents", array(
         "pages",

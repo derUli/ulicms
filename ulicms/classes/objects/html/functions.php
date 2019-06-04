@@ -10,7 +10,7 @@ function text($str) {
     return \nl2br(\_esc($str));
 }
 
-function imageTag($file, $htmlAttributes = array()) {
+function imageTag($file, $htmlAttributes = []) {
     if (!isset($htmlAttributes["src"])) {
         $htmlAttributes["src"] = $file;
     }
@@ -18,7 +18,7 @@ function imageTag($file, $htmlAttributes = array()) {
     return "<img {$attribHTML}>";
 }
 
-function button_link($url, $text, $type = null, $allowHtml = false, $target = null, $htmlAttributes = array()) {
+function button_link($url, $text, $type = null, $allowHtml = false, $target = null, $htmlAttributes = []) {
     if (!isset($htmlAttributes["class"])) {
         $htmlAttributes["class"] = $type;
     } else {
@@ -27,7 +27,7 @@ function button_link($url, $text, $type = null, $allowHtml = false, $target = nu
     return link($url, $text, $allowHtml, $target, $htmlAttributes);
 }
 
-function link($url, $text, $allowHtml = false, $target = null, $htmlAttributes = array()) {
+function link($url, $text, $allowHtml = false, $target = null, $htmlAttributes = []) {
     $htmlAttributes["href"] = $url;
     if (is_present($target)) {
         $htmlAttributes["target"] = $target;
@@ -42,14 +42,14 @@ function link($url, $text, $allowHtml = false, $target = null, $htmlAttributes =
     return "<a {$attribHTML}>{$text}</a>";
 }
 
-function icon($classes, $htmlAttributes = array()) {
+function icon($classes, $htmlAttributes = []) {
     $htmlAttributes["class"] = $classes;
 
     $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes);
     return "<i $attribHTML></i>";
 }
 
-function imageTagInline($file, $htmlAttributes = array()) {
+function imageTagInline($file, $htmlAttributes = []) {
 
     $url = File::toDataUri($file);
     if (!$url) {

@@ -44,7 +44,7 @@ class VCS {
     public static function getRevisionsByContentID($content_id, $order = "date DESC") {
         $content_id = intval($content_id);
         $query = db_query("SELECT * FROM " . tbname("history") . " WHERE content_id = " . $content_id . " ORDER BY " . $order);
-        $retval = array();
+        $retval = [];
         while ($row = db_fetch_object($query)) {
             $retval[] = $row;
         }

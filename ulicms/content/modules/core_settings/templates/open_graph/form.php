@@ -15,7 +15,7 @@ if ($permissionChecker->hasPermission("open_graph")) {
     <h1><?php translate("open_graph"); ?></h1>
     <p><?php translate("og_defaults_help"); ?></p>
     <?php
-    echo ModuleHelper::buildMethodCallForm("OpenGraphController", "save", array(), "post", array(
+    echo ModuleHelper::buildMethodCallForm("OpenGraphController", "save", [], "post", array(
         "id" => "open_graph"
     ));
     ?>

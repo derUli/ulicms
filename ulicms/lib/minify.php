@@ -8,7 +8,7 @@ use zz\Html\HTMLMinify;
 use MatthiasMullie\Minify;
 
 function resetScriptQueue() {
-    Vars::set("script_queue", array());
+    Vars::set("script_queue", []);
 }
 
 function optimizeHtml($html, $level = HTMLMinify::OPTIMIZATION_SIMPLE) {
@@ -217,7 +217,7 @@ function get_combined_script_html() {
 
 // Ab hier Stylesheet Funktionen
 function resetStylesheetQueue() {
-    Vars::set("stylesheet_queue", array());
+    Vars::set("stylesheet_queue", []);
 }
 
 function enqueueStylesheet($path) {

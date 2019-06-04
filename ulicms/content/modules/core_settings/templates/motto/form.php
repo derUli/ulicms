@@ -2,7 +2,7 @@
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("settings_simple")) {
     $languages = getAllLanguages();
-    $mottos = array();
+    $mottos = [];
     for ($i = 0; $i < count($languages); $i ++) {
         $lang = $languages[$i];
         $mottos[$lang] = Settings::get("motto_" . $lang);
@@ -19,7 +19,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
         <?php translate("motto"); ?>
     </h1>
     <?php
-    echo ModuleHelper::buildMethodCallForm("MottoController", "save", array(), "post", array(
+    echo ModuleHelper::buildMethodCallForm("MottoController", "save", [], "post", array(
         "id" => "motto_settings"
     ));
     ?>

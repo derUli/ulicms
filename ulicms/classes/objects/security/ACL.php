@@ -102,7 +102,7 @@ class ACL {
     public function getAllGroups($order = 'id DESC') {
         $sql = "SELECT * FROM `" . tbname("groups") . "` ORDER by " . $order;
         $query = db_query($sql);
-        $list = array();
+        $list = [];
         while ($assoc = db_fetch_assoc($query)) {
             $list[$assoc["id"]] = $assoc["name"];
         }
@@ -110,7 +110,7 @@ class ACL {
     }
 
     public function getDefaultACLAsJSON($admin = false, $plain = false) {
-        $acl_data = Array();
+        $acl_data = [];
 
         // Willkommen
         $acl_data["dashboard"] = null;

@@ -56,7 +56,7 @@ if (count($argv) == 0) {
             $available = patchck_available();
 
             if ($available and ! empty($available)) {
-                $toinstall = array();
+                $toinstall = [];
                 for ($i = 1; $i < count($argv); $i ++) {
                     $toinstall[] = $argv[$i];
                 }

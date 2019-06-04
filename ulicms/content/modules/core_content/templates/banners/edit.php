@@ -16,7 +16,7 @@ if ($permissionChecker->hasPermission("banners") and $permissionChecker->hasPerm
                class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
         </p>
         <?php
-        echo ModuleHelper::buildMethodCallForm("BannerController", "update", array(), RequestMethod::POST, array(
+        echo ModuleHelper::buildMethodCallForm("BannerController", "update", [], RequestMethod::POST, array(
             "autocomplete" => "off"
         ));
         ?>

@@ -78,7 +78,7 @@ class Mobile_Detect {
      * A cache for resolved matches
      * @var array
      */
-    protected $cache = array();
+    protected $cache = [];
 
     /**
      * The User-Agent HTTP header is stored in here.
@@ -90,13 +90,13 @@ class Mobile_Detect {
      * HTTP headers in the PHP-flavor. So HTTP_USER_AGENT and SERVER_SOFTWARE.
      * @var array
      */
-    protected $httpHeaders = array();
+    protected $httpHeaders = [];
 
     /**
      * CloudFront headers. E.g. CloudFront-Is-Desktop-Viewer, CloudFront-Is-Mobile-Viewer & CloudFront-Is-Tablet-Viewer.
      * @var array
      */
-    protected $cloudfrontHeaders = array();
+    protected $cloudfrontHeaders = [];
 
     /**
      * The matching Regex.
@@ -705,7 +705,7 @@ class Mobile_Detect {
         }
 
         // clear existing headers
-        $this->httpHeaders = array();
+        $this->httpHeaders = [];
 
         // Only save HTTP headers. In PHP land, that means only _SERVER vars that
         // start with HTTP_.
@@ -787,7 +787,7 @@ class Mobile_Detect {
         }
 
         // clear existing headers
-        $this->cloudfrontHeaders = array();
+        $this->cloudfrontHeaders = [];
 
         // Only save CLOUDFRONT headers. In PHP land, that means only _SERVER vars that
         // start with cloudfront-.
@@ -830,7 +830,7 @@ class Mobile_Detect {
      */
     public function setUserAgent($userAgent = null) {
         // Invalidate cache due to #375
-        $this->cache = array();
+        $this->cache = [];
 
         if (false === empty($userAgent)) {
             return $this->userAgent = $this->prepareUserAgent($userAgent);

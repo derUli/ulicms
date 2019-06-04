@@ -5,7 +5,7 @@ use UliCMS\Utils\File;
 
 class TemplateTest extends \PHPUnit\Framework\TestCase {
 
-    private $savedSettings = array();
+    private $savedSettings = [];
 
     public function setUp() {
         Flags::setNoCache(true);

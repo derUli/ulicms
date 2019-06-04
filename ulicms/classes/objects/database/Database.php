@@ -27,7 +27,7 @@ class Database {
     }
 
     // TODO: Do logging when auto initialize the database
-    public static function setupSchemaAndSelect($schemaName, $otherScripts = array()) {
+    public static function setupSchemaAndSelect($schemaName, $otherScripts = []) {
         $selected = self::select($schemaName);
         if (!$selected) {
             $success = Database::query("CREATE DATABASE {$schemaName}");
@@ -94,7 +94,7 @@ class Database {
         self::$connection = $con;
     }
 
-    public static function pQuery($sql, $args = array(), $replacePrefix = false) {
+    public static function pQuery($sql, $args = [], $replacePrefix = false) {
         $preparedQuery = "";
         $chars = mb_str_split($sql);
         $i = 0;
@@ -226,7 +226,7 @@ class Database {
         return self::query("ALTER TABLE $table DROP COLUMN $column");
     }
 
-    public static function selectAll($table, $columns = array(), $where = "", $args = array(), $prefix = true, $order = "") {
+    public static function selectAll($table, $columns = [], $where = "", $args = [], $prefix = true, $order = "") {
         if ($prefix) {
             $table = tbname($table);
         }
@@ -281,7 +281,7 @@ class Database {
         }
 
         // @FIXME : $resulttype in alternativer Implementation von fetch_all behandeln
-        $retval = array();
+        $retval = [];
         while ($row = self::fetchAssoc($result)) {
             $retval[] = $row;
         }
@@ -327,7 +327,7 @@ class Database {
     }
 
     public static function getAllTables() {
-        $tableList = array();
+        $tableList = [];
         $res = mysqli_query(self::$connection, "SHOW TABLES");
         while ($cRow = mysqli_fetch_array($res)) {
             $tableList[] = $cRow[0];
@@ -368,7 +368,7 @@ class Database {
     }
 
     public static function getColumnNames($table, $prefix = true) {
-        $retval = array();
+        $retval = [];
         if ($prefix) {
             $table = tbname($table);
         }

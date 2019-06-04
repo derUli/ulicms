@@ -7,7 +7,7 @@ use ModuleHelper;
 
 class Script {
 
-    public static function FromFile($file, $async = false, $defer = false, $htmlAttributes = array()) {
+    public static function FromFile($file, $async = false, $defer = false, $htmlAttributes = []) {
         $attributes = array(
             "src" => $file,
             "type" => "text/javascript"
@@ -30,7 +30,7 @@ class Script {
         return "<script $attribHTML></script>";
     }
 
-    public static function FromString($code, $async = false, $defer = false, $htmlAttributes = array()) {
+    public static function FromString($code, $async = false, $defer = false, $htmlAttributes = []) {
         $attributes = array(
             "type" => "text/javascript"
         );

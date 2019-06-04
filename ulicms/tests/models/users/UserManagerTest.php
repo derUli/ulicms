@@ -48,9 +48,9 @@ class UserManagerTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetByGroup() {
         $manager = new UserManager();
-        $this->assertEquals(array(), $manager->getUsersByGroupId(666));
+        $this->assertEquals([], $manager->getUsersByGroupId(666));
 
-        $this->assertEquals(array(), $manager->getUsersByGroupId(null));
+        $this->assertEquals([], $manager->getUsersByGroupId(null));
         $this->assertTrue(count($manager->getUsersByGroupId(1)) >= 7);
     }
 

@@ -24,7 +24,7 @@ class PackageManager {
 
     public function getInstalledPatchNames() {
         $query = db_query("SELECT name from " . tbname("installed_patches"));
-        $retval = array();
+        $retval = [];
         while ($row = db_fetch_object($query)) {
             $retval[] = $row->name;
         }
@@ -83,7 +83,7 @@ class PackageManager {
 
     public function getInstalledPatches() {
         $query = db_query("SELECT * from " . tbname("installed_patches"));
-        $retval = array();
+        $retval = [];
         while ($row = db_fetch_object($query)) {
             $retval[$row->name] = $row;
         }
@@ -139,7 +139,7 @@ class PackageManager {
     public function getInstalledModules() {
         $module_folder = Path::resolve("ULICMS_DATA_STORAGE_ROOT/content/modules") . "/";
 
-        $available_modules = array();
+        $available_modules = [];
         $directory_content = scandir($module_folder);
 
         natcasesort($directory_content);
@@ -162,7 +162,7 @@ class PackageManager {
     }
 
     public function getInstalledThemes() {
-        $themes = Array();
+        $themes = [];
         $templateDir = Path::resolve("ULICMS_DATA_STORAGE_ROOT/content/templates") . "/";
 
         $folders = scanDir($templateDir);

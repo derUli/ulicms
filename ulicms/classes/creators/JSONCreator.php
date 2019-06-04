@@ -27,7 +27,7 @@ class JSONCreator {
         }
 
 
-        $data = array();
+        $data = [];
         $this->content = str_replace("\r\n", "\n", $this->content);
         $this->content = str_replace("\r", "\n", $this->content);
         $this->content = str_replace("\n", "\r\n", $this->content);

@@ -3,7 +3,7 @@
 class ExtendUpgradeHelper extends Controller {
 
     public function getModules() {
-        $result = array();
+        $result = [];
         $modules = getAllModules();
         foreach ($modules as $module) {
             if (getModuleMeta($module, "source") == "extend") {

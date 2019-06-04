@@ -22,7 +22,7 @@ if (in_array ( $_SESSION ["language"], $languages )) {
 }
 
 $cons = get_defined_constants();
-$translations = array();
+$translations = [];
 foreach($cons as $key=>$value){
 	if(startsWith($key, "TRANSLATION_")){
 		$translations[$key] = $value;

@@ -105,7 +105,7 @@ class CommentsController extends MainClass {
     }
 
     public function getResults($status = null, $content_id = null, $limit = 0) {
-        $results = array();
+        $results = [];
         if ($status) {
             $results = Comment::getAllByStatus($status, $content_id);
         } else if ($content_id) {
@@ -142,7 +142,7 @@ class CommentsController extends MainClass {
 
     public function doAction() {
         // post arguments
-        $comments = Request::getVar("comments", array());
+        $comments = Request::getVar("comments", []);
         $action = Request::getVar("action", null, "str");
 
         // if we have comments and an action

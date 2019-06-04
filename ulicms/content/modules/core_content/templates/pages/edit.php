@@ -87,7 +87,7 @@ if ($permissionChecker->hasPermission("pages")) {
                        <?php echo ModuleHelper::endForm(); ?>
                 </div>
                 <?php
-                echo ModuleHelper::buildMethodCallForm("PageController", "edit", array(), "post", array(
+                echo ModuleHelper::buildMethodCallForm("PageController", "edit", [], "post", array(
                     "id" => "pageform-edit",
                     "class" => "main-form",
                     "data-get-content-types-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "getContentTypes"),
@@ -868,7 +868,7 @@ if ($permissionChecker->hasPermission("pages")) {
                     </div>
                 </div>
                 <?php
-                $translation = new JSTranslation(array(), "PageTranslation");
+                $translation = new JSTranslation([], "PageTranslation");
                 $translation->addKey("confirm_exit_without_save");
                 $translation->render();
 

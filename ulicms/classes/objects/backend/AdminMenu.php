@@ -2,9 +2,9 @@
 
 class AdminMenu {
 
-    private $children = array();
+    private $children = [];
 
-    public function __construct($children = array()) {
+    public function __construct($children = []) {
         $this->children = $children;
     }
 

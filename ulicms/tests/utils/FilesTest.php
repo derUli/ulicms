@@ -116,7 +116,7 @@ class FilesTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetNewestMtimeNoFiles() {
-        $this->assertEquals(0, File::getNewestMtime(array()));
+        $this->assertEquals(0, File::getNewestMtime([]));
     }
 
     public function testGetNewestMtimeWithFiles() {

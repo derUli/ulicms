@@ -6,7 +6,7 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
     $query = db_query("SELECT * FROM " . tbname("users") . " WHERE id='$id'");
     $user = new User($id);
     $secondaryGroups = $user->getSecondaryGroups();
-    $secondaryGroupIds = array();
+    $secondaryGroupIds = [];
     foreach ($secondaryGroups as $group) {
         $secondaryGroupIds[] = $group->getID();
     }
@@ -217,7 +217,7 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
     }
     ?>
     <?php
-    $translation = new JSTranslation(array(), "UserTranslation");
+    $translation = new JSTranslation([], "UserTranslation");
     $translation->addKey("passwords_not_equal");
     $translation->render();
 

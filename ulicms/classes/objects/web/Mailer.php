@@ -7,7 +7,7 @@ use UliCMS\Constants\EmailModes;
 class Mailer {
 
     public static function splitHeaders($headers) {
-        $header_array = array();
+        $header_array = [];
         $lines = normalizeLN($headers, "\n");
         $lines = explode("\n", $lines);
         foreach ($lines as $line) {

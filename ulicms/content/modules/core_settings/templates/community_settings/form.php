@@ -1,11 +1,11 @@
 <?php
 $types = get_available_post_types();
-$typeSelection = array();
+$typeSelection = [];
 foreach ($types as $type) {
     $typeSelection[] = new UliCMS\HTML\ListItem($type, get_translation($type));
 }
 
-$commentableContentTypes = array();
+$commentableContentTypes = [];
 
 $commentableContentTypeSettings = Settings::get("commentable_content_types");
 if ($commentableContentTypeSettings) {

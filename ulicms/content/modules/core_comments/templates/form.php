@@ -34,7 +34,7 @@ if (Vars::get("comments_enabled")) {
     <h3><?php translate("write_a_comment"); ?></h3>
     <div class="comments">
         <?php
-        echo ModuleHelper::buildMethodCallForm(CommentsController::class, "postComment", array(), "post", array(
+        echo ModuleHelper::buildMethodCallForm(CommentsController::class, "postComment", [], "post", array(
             "autocomplete" => "off"
         ));
         ?>

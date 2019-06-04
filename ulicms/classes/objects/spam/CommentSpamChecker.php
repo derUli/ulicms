@@ -18,10 +18,10 @@ class CommentSpamChecker implements ISpamChecker {
         $this->spamFilterConfiguration = $spamFilterConfiguration;
     }
 
-    private $errors = array();
+    private $errors = [];
 
     public function clearErrors() {
-        $this->errors = array();
+        $this->errors = [];
     }
 
     public function isSpam() {

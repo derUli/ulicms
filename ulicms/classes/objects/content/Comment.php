@@ -29,7 +29,7 @@ class Comment extends Model {
     const TABLE_NAME = "comments";
 
     public function loadByID($id) {
-        $query = Database::selectAll("comments", array(), "id=" . intval($id));
+        $query = Database::selectAll("comments", [], "id=" . intval($id));
         if ($query == null or ! Database::any($query)) {
             throw new FileNotFoundException("no comment with id " . intval($id));
         }
@@ -252,7 +252,20 @@ VALUES      ( ?,
 
     public static function getUnreadCount() {
         $query = Database::pQuery("select count(id) as amount from {prefix}comments where `read` = ?",
-                        array(false), true);
+                        [false], true);
+        $result = Database::fetchObject($query);
+        return $result->amount;
+    }
+
+    public static function getReadCount() {
+        $query = Database::pQuery("select count(id) as amount from {prefix}comments where `read` = ?",
+                        [true], true);
+        $result = Database::fetchObject($query);
+        return $result->amount;
+    }
+
+    public static function getAllCount() {
+        $query = Database::pQuery("select count(id) as amount from {prefix}comments", [], true);
         $result = Database::fetchObject($query);
         return $result->amount;
     }

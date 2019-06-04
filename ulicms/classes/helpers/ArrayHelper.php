@@ -8,7 +8,7 @@ class ArrayHelper extends \Helper {
         if (!array_key_exists($index, $input)) {
             throw new Exception("Index not found");
         }
-        $tmpArray = array();
+        $tmpArray = [];
         $originalIndex = 0;
         foreach ($input as $key => $value) {
             if ($key === $index) {
@@ -26,7 +26,7 @@ class ArrayHelper extends \Helper {
         if (!array_key_exists($index, $input)) {
             throw new Exception("Index not found");
         }
-        $tmpArray = array();
+        $tmpArray = [];
         $originalIndex = 0;
         foreach ($input as $key => $value) {
             $tmpArray[$key] = $value;

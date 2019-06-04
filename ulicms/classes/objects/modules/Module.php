@@ -82,7 +82,7 @@ class Module {
     }
 
     public function getMissingDependencies() {
-        $result = array();
+        $result = [];
         $manager = new ModuleManager ();
         $dependencies = $manager->getDependencies($this->name);
         $enabledMods = $manager->getEnabledModuleNames();
@@ -112,7 +112,7 @@ class Module {
     }
 
     public function getDependentModules() {
-        $result = array();
+        $result = [];
         $manager = new ModuleManager ();
         $enabledMods = $manager->getEnabledModuleNames();
         $dependent = $manager->getDependentModules($module);

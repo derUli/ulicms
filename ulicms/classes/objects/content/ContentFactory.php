@@ -45,7 +45,7 @@ class ContentFactory {
     }
 
     public static function getAll($order = "id") {
-        $result = array();
+        $result = [];
         $sql = "SELECT id, `type` FROM " . tbname("content") . " ORDER BY $order";
         $query = Database::query($sql);
         while ($row = Database::fetchObject($query)) {
@@ -55,7 +55,7 @@ class ContentFactory {
     }
 
     public static function getAllRegular($order = "id") {
-        $result = array();
+        $result = [];
         $sql = "SELECT id, `type` FROM " . tbname("content") . " where type not in ('link', 'language_link', 'node') ORDER BY $order";
         $query = Database::query($sql);
         while ($row = Database::fetchObject($query)) {
@@ -66,7 +66,7 @@ class ContentFactory {
 
     public static function getAllByLanguage($language, $order = "id") {
         $language = Database::escapeValue($language);
-        $result = array();
+        $result = [];
         $sql = "SELECT id, `type` FROM " . tbname("content") . " where `language` = '$language' ORDER BY $order";
         $query = Database::query($sql);
         while ($row = Database::fetchObject($query)) {
@@ -76,7 +76,7 @@ class ContentFactory {
     }
 
     public static function getAllByParent($parent_id, $order = "id") {
-        $result = array();
+        $result = [];
 
         $sql = "SELECT id, type FROM {prefix}content ";
 
@@ -99,7 +99,7 @@ class ContentFactory {
 
     public static function getAllByMenu($menu, $order = "id") {
         $menu = Database::escapeValue($menu);
-        $result = array();
+        $result = [];
         $sql = "SELECT id, `type` FROM " . tbname("content") . " where `menu` = '$menu' ORDER BY $order";
         $query = Database::query($sql);
         while ($row = Database::fetchObject($query)) {
@@ -110,7 +110,7 @@ class ContentFactory {
 
     public static function getAllByType($type, $order = "id") {
         $type = Database::escapeValue($type);
-        $result = array();
+        $result = [];
         $sql = "SELECT id, `type` FROM " . tbname("content") . " where `type` = '$type' ORDER BY $order";
         $query = Database::query($sql);
         while ($row = Database::fetchObject($query)) {
@@ -120,7 +120,7 @@ class ContentFactory {
     }
 
     public static function getAllWithComments($order = "title") {
-        $result = array();
+        $result = [];
         $sql = "select type, a.id  from {prefix}content a inner join {prefix}comments c on c.content_id = a.id group by c.content_id order by a.{$order}";
         $query = Database::query($sql, true) or die(Database::getError());
 
@@ -131,7 +131,7 @@ class ContentFactory {
     }
 
     public static function getForFilter($language = null, $category_id = null, $menu = null, $parent_id = null, $order_by = "title", $order_direction = "asc", $type = null, $limit = null) {
-        $result = array();
+        $result = [];
         $sql = "select id, `type` from " . tbname("content") . " where active = 1 and deleted_at is null and ";
         if ($language !== null and $language !== "") {
             $language = Database::escapeValue($language);
@@ -180,7 +180,7 @@ class ContentFactory {
     public static function getAllByMenuAndLanguage($menu, $language, $order = "id") {
         $menu = Database::escapeValue($menu);
         $language = Database::escapeValue($language);
-        $result = array();
+        $result = [];
         $sql = "SELECT id, `type` FROM " . tbname("content") . " where `menu` = '$menu' and language = '$language' ORDER BY $order";
         $query = Database::query($sql);
         while ($row = Database::fetchObject($query)) {
@@ -190,7 +190,7 @@ class ContentFactory {
     }
 
     public static function filterByEnabled($elements, $enabled = 1) {
-        $result = array();
+        $result = [];
         foreach ($elements as $element) {
             if ($element->active == $enabled) {
                 $result[] = $element;
@@ -200,7 +200,7 @@ class ContentFactory {
     }
 
     public static function filterByCategory($elements, $category_id = 1) {
-        $result = array();
+        $result = [];
         foreach ($elements as $element) {
             if ($element->category_id == $category_id) {
                 $result[] = $element;
@@ -210,7 +210,7 @@ class ContentFactory {
     }
 
     public static function filterByAuthor($elements, $author_id = 1) {
-        $result = array();
+        $result = [];
         foreach ($elements as $element) {
             if ($element->author_id == $author_id) {
                 $result[] = $element;
@@ -220,7 +220,7 @@ class ContentFactory {
     }
 
     public static function filterByLastChangeBy($elements, $lastchangeby = 1) {
-        $result = array();
+        $result = [];
         foreach ($elements as $element) {
             if ($element->lastchangeby == $lastchangeby) {
                 $result[] = $element;

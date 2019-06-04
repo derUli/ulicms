@@ -368,7 +368,7 @@ function delete_custom_data($var = null, $page = null) {
     }
     $data = get_custom_data($page);
     if (is_null($data)) {
-        $data = array();
+        $data = [];
     }
 // Wenn $var gesetzt ist, nur $var aus custom_data löschen
     if ($var) {
@@ -377,7 +377,7 @@ function delete_custom_data($var = null, $page = null) {
         }
     } // Wenn $var nicht gesetzt ist, alle Werte von custom_data löschen
     else {
-        $data = array();
+        $data = [];
     }
 
     $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
@@ -391,7 +391,7 @@ function set_custom_data($var, $value, $page = null) {
     }
     $data = get_custom_data($page);
     if (is_null($data)) {
-        $data = array();
+        $data = [];
     }
 
     $data[$var] = $value;
@@ -705,7 +705,7 @@ function is_503() {
     return check_status() == "503 Service Unavailable";
 }
 
-function buildtree($src_arr, $parent_id = 0, $tree = array()) {
+function buildtree($src_arr, $parent_id = 0, $tree = []) {
     foreach ($src_arr as $idx => $row) {
         if ($row['parent'] == $parent_id) {
             foreach ($row as $k => $v) {
@@ -726,7 +726,7 @@ function parent_item_contains_current_page($id) {
     $sql = "SELECT id, slug, parent_id FROM " . tbname("content") . " WHERE language = '$language' AND active = 1 AND `deleted_at` IS NULL";
     $r = db_query($sql);
 
-    $data = array();
+    $data = [];
     while ($row = db_fetch_assoc($r)) {
         $data[] = $row;
     }

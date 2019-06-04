@@ -7,7 +7,7 @@ use UliCMS\Utils\File;
 
 class Style {
 
-    public static function FromExternalFile($href, $media = null, $htmlAttributes = array()) {
+    public static function FromExternalFile($href, $media = null, $htmlAttributes = []) {
         $attributes = array(
             "rel" => "stylesheet",
             "href" => $href,
@@ -27,7 +27,7 @@ class Style {
         return "<link {$attribHTML}/>";
     }
 
-    public static function FromString($code, $media = null, $htmlAttributes = array()) {
+    public static function FromString($code, $media = null, $htmlAttributes = []) {
         $attributes = array(
             "type" => "text/css"
         );

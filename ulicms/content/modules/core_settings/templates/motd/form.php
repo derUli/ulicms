@@ -18,7 +18,7 @@ if ($permissionChecker->hasPermission("motd")) {
         </p>
     <?php } ?>
     <?php
-    echo ModuleHelper::buildMethodCallForm("MOTDController", "save", array(), "post", array(
+    echo ModuleHelper::buildMethodCallForm("MOTDController", "save", [], "post", array(
         "id" => "motd_form"
     ));
     ?>

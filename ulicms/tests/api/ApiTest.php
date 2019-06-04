@@ -253,7 +253,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue(is_blank(false));
         $this->assertTrue(is_blank(null));
         $this->assertTrue(is_blank(0));
-        $this->assertTrue(is_blank(array()));
+        $this->assertTrue(is_blank([]));
         $this->assertTrue(is_blank("0"));
         $this->assertTrue(is_blank($notDefined));
     }
@@ -280,7 +280,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(is_present(false));
         $this->assertFalse(is_present(null));
         $this->assertFalse(is_present(0));
-        $this->assertFalse(is_present(array()));
+        $this->assertFalse(is_present([]));
         $this->assertFalse(is_present("0"));
         $this->assertFalse(is_present($undefinedVar));
     }

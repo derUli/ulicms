@@ -213,7 +213,7 @@ class FineDiffOps {
         }
     }
 
-    public $edits = array();
+    public $edits = [];
 
 }
 
@@ -239,7 +239,7 @@ class FineDiff {
     public function __construct($from_text = '', $to_text = '', $granularityStack = null) {
         // setup stack for generic text documents by default
         $this->granularityStack = $granularityStack ? $granularityStack : FineDiff::$characterGranularity;
-        $this->edits = array();
+        $this->edits = [];
         $this->from_text = $from_text;
         $this->doDiff($from_text, $to_text);
     }
@@ -249,7 +249,7 @@ class FineDiff {
     }
 
     public function getOpcodes() {
-        $opcodes = array();
+        $opcodes = [];
         foreach ($this->edits as $edit) {
             $opcodes [] = $edit->getOpcode();
         }
@@ -535,7 +535,7 @@ class FineDiff {
             return FineDiff::doCharDiff($from_text, $to_text);
         }
 
-        $result = array();
+        $result = [];
 
         // fragment-level diffing
         $from_text_len = strlen($from_text);
@@ -552,7 +552,7 @@ class FineDiff {
             )
         );
 
-        $cached_array_keys = array();
+        $cached_array_keys = [];
 
         while ($job = array_pop($jobs)) {
 
@@ -576,7 +576,7 @@ class FineDiff {
 
             $from_base_fragment_index = $from_segment_start;
 
-            $cached_array_keys_for_current_segment = array();
+            $cached_array_keys_for_current_segment = [];
 
             while ($from_base_fragment_index < $from_segment_end) {
                 $from_base_fragment = $from_fragments [$from_base_fragment_index];
@@ -590,7 +590,7 @@ class FineDiff {
                     }
                     // get only indices which falls within current segment
                     if ($to_segment_start > 0 || $to_segment_end < $to_text_len) {
-                        $to_fragment_indices = array();
+                        $to_fragment_indices = [];
                         foreach ($to_all_fragment_indices as $to_fragment_index) {
                             if ($to_fragment_index < $to_segment_start) {
                                 continue;
@@ -685,7 +685,7 @@ class FineDiff {
      * performant.
      */
     private static function doCharDiff($from_text, $to_text) {
-        $result = array();
+        $result = [];
         $jobs = array(
             array(
                 0,
@@ -781,7 +781,7 @@ class FineDiff {
             $chars [strlen($text)] = '';
             return $chars;
         }
-        $fragments = array();
+        $fragments = [];
         $start = $end = 0;
         for (;;) {
             $end += strcspn($text, $delimiters, $end);

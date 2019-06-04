@@ -12,11 +12,11 @@ use function getModulePath;
 
 class HelperRegistry {
 
-    private static $helpers = array();
+    private static $helpers = [];
 
     public static function loadModuleHelpers() {
         if (!defined("KCFINDER_PAGE")) {
-            $helperRegistry = array();
+            $helperRegistry = [];
             $modules = getAllModules();
             $disabledModules = Vars::get("disabledModules");
             foreach ($modules as $module) {

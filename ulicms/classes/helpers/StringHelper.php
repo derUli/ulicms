@@ -75,7 +75,7 @@ class StringHelper extends Helper {
     // Häufigste Wörter in String ermitteln und als Assoziatives Array zurückgeben.
     // z.B. für automatisches ausfüllen der Meta-Keywords nutzbar
     public static function keywordsFromString($text) {
-        $return = array();
+        $return = [];
 
         // Punkt, Beistrich, Zeilenumbruch... in Leerzeichen umwandeln
         $text = str_replace(array(

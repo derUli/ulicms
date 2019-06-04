@@ -4,7 +4,7 @@ class UpdateManager {
 
     public static function getAllUpdateablePackages() {
         $pkg = new PackageManager();
-        $retval = array();
+        $retval = [];
         $modules = getAllModules();
         if (count($modules) > 0) {
             foreach ($modules as $module) {

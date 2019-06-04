@@ -66,7 +66,7 @@ class BackendPageRenderer {
             require_once "inc/adminmenu.php";
             // FIXME: don't use globals!
             global $actions;
-            $actions = array();
+            $actions = [];
 
             ActionRegistry::loadModuleActions();
 

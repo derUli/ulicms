@@ -3,7 +3,7 @@
 class SinPackageInstaller {
 
     private $file = null;
-    private $errors = array();
+    private $errors = [];
 
     public function __construct($file) {
         if (StringHelper::isNotNullOrEmpty($file)) {
@@ -58,7 +58,7 @@ class SinPackageInstaller {
     }
 
     public function isInstallable() {
-        $this->errors = array();
+        $this->errors = [];
         $installed_modules = getAllModules();
         $data = $this->loadPackage();
         if (isset($data["dependencies"]) and is_array($data["dependencies"])) {

@@ -6,8 +6,8 @@ class Group {
 
     private $id = null;
     private $name = "";
-    private $permissions = array();
-    private $languages = array();
+    private $permissions = [];
+    private $languages = [];
     private $allowable_tags = null;
 
     public function __construct($id = null) {
@@ -43,7 +43,7 @@ class Group {
     public static function getAll() {
         $sql = "select id from `{prefix}groups` order by id";
         $query = Database::query($sql, true);
-        $data = array();
+        $data = [];
         while ($row = Database::fetchobject($query)) {
             $data[] = new Group($row->id);
         }
@@ -70,7 +70,7 @@ class Group {
                 }
             }
         }
-        $this->languages = array();
+        $this->languages = [];
         $sql = "select `language_id` from `{prefix}group_languages` where `group_id` = ?";
         $args = array(
             $this->getId()

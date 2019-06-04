@@ -28,7 +28,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
         <?php require "inc/loadspinner.php"; ?>
     </div>
     <?php
-    echo ModuleHelper::buildMethodCallForm("PageController", "create", array(), "post",
+    echo ModuleHelper::buildMethodCallForm("PageController", "create", [], "post",
             array(
                 "name" => "newpageform",
                 "id" => "pageform",
@@ -543,7 +543,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
     <button type="submit" class="btn btn-primary">
         <i class="far fa-save"></i> <?php translate("save"); ?></button>
     <?php
-    $translation = new JSTranslation(array(), "PageTranslation");
+    $translation = new JSTranslation([], "PageTranslation");
     $translation->addKey("confirm_exit_without_save");
     $translation->render();
 

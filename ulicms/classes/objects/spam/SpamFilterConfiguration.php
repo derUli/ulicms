@@ -10,8 +10,8 @@ use InvalidArgumentException;
 class SpamFilterConfiguration {
 
     private $spamfilterEnabled = true;
-    private $badwords = array();
-    private $blockedCountries = array();
+    private $badwords = [];
+    private $blockedCountries = [];
     private $disallowChineseChars = false;
     private $disallowCyrillicChars = false;
     private $disallowRtlChars = false;
@@ -56,7 +56,7 @@ class SpamFilterConfiguration {
         } else if (is_array($this->badwords)) {
             $this->badwords = $val;
         } else if (is_null($this->badwords)) {
-            $this->badwords = array();
+            $this->badwords = [];
         } else {
             throw new InvalidArgumentException("$val is not a valid value for badwords");
         }
@@ -76,7 +76,7 @@ class SpamFilterConfiguration {
         } else if (is_array($val)) {
             $this->blockedCountries = $val;
         } else if (is_null($this->badwords)) {
-            $this->badwords = array();
+            $this->badwords = [];
         } else {
             throw new InvalidArgumentException("$val is not a valid value for badwords");
         }

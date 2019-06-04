@@ -9,7 +9,7 @@ use function tbname;
 class Banners {
 
     public static function getAll($order = "id") {
-        $result = array();
+        $result = [];
         $sql = "SELECT id FROM " . tbname("banner") . " ORDER BY $order";
         $query = DB::query($sql);
         while ($row = DB::fetchObject($query)) {
@@ -22,7 +22,7 @@ class Banners {
 
     public static function getByLanguage($language, $order = "language") {
         $language = DB::escapeValue($language);
-        $result = array();
+        $result = [];
         $sql = "SELECT id FROM " . tbname("banner") . " WHERE language = '$language' ORDER BY $order";
         $query = DB::query($sql);
         while ($row = DB::fetchObject($query)) {
@@ -35,7 +35,7 @@ class Banners {
 
     public static function getByCategory($category_id, $order = "id") {
         $category_id = intval($category_id);
-        $result = array();
+        $result = [];
         $sql = "SELECT id FROM " . tbname("banner") . " WHERE `category_id` = $category_id ORDER BY $order";
         $query = DB::query($sql);
         while ($row = DB::fetchObject($query)) {
@@ -48,7 +48,7 @@ class Banners {
 
     public static function getByType($type = "gif", $order = "language") {
         $type = DB::escapeValue($type);
-        $result = array();
+        $result = [];
         $sql = "SELECT id FROM " . tbname("banner") . " WHERE `type` = '$type' ORDER BY $order";
         $query = DB::query($sql);
         while ($row = DB::fetchObject($query)) {

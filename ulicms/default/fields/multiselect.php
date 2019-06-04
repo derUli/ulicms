@@ -1,12 +1,12 @@
 <?php
 $field = ViewBag::get("field");
-$value = ViewBag::get("field_value") ? ViewBag::get("field_value") : array();
+$value = ViewBag::get("field_value") ? ViewBag::get("field_value") : [];
 if (is_string($value)) {
     $value = array(
         $value
     );
 }
-$options = Viewbag::get("field_options") ? Viewbag::get("field_options") : array();
+$options = Viewbag::get("field_options") ? Viewbag::get("field_options") : [];
 if (is_null($value)) {
     $value = $field->defaultValue;
 }

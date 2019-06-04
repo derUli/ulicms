@@ -6,7 +6,7 @@ use ModuleHelper;
 
 class Link {
 
-    public static function Link($href, $text, $htmlAttributes = array()) {
+    public static function Link($href, $text, $htmlAttributes = []) {
         $attributes = array(
             "href" => $href
         );
@@ -19,7 +19,7 @@ class Link {
         return "<a $attribHTML>" . $text . "</a>";
     }
 
-    public static function ActionLink($action, $text, $suffix = null, $htmlAttributes = array()) {
+    public static function ActionLink($action, $text, $suffix = null, $htmlAttributes = []) {
         $attributes = array(
             "href" => ModuleHelper::buildActionURL($action, $suffix, true)
         );

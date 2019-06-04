@@ -6,7 +6,7 @@ use Database;
 
 class PagePermissions {
 
-    public function __construct($objects = array()) {
+    public function __construct($objects = []) {
         foreach ($objects as $object => $restriction) {
             $this->setEditRestriction($object, $restriction);
         }
@@ -34,7 +34,7 @@ class PagePermissions {
     }
 
     public function getAll() {
-        $result = array();
+        $result = [];
         $classArray = (array) $this;
         foreach ($classArray as $key => $value) {
             preg_match("/only_([a-z]+)_can_edit/", $key, $matches);
@@ -50,7 +50,7 @@ class PagePermissions {
         $all = $this->getAll();
 
         $sql = "update `{prefix}content` set ";
-        $args = array();
+        $args = [];
         foreach ($all as $key => $value) {
             $sql .= " only_{$key}_can_edit = ?, ";
             $args[] = $value;

@@ -67,7 +67,7 @@ class ModuleHelper extends Helper {
     }
 
     public static function getAllEmbedModules() {
-        $retval = array();
+        $retval = [];
         $modules = getAllModules();
         foreach ($modules as $module) {
             $noembedfile1 = Path::Resolve("ULICMS_DATA_STORAGE_ROOT/content/modules/$module/.noembed");
@@ -212,24 +212,24 @@ class ModuleHelper extends Helper {
         return "index.php?" . self::buildMethodCall($sClass, $sMethod, $suffix);
     }
 
-    public static function buildMethodCallUploadForm($sClass, $sMethod, $otherVars = array(), $requestMethod = RequestMethod::POST, $htmlAttributes = array()) {
+    public static function buildMethodCallUploadForm($sClass, $sMethod, $otherVars = [], $requestMethod = RequestMethod::POST, $htmlAttributes = []) {
         $htmlAttributes["enctype"] = "multipart/form-data";
         return self::buildMethodCallForm($sClass, $sMethod, $otherVars, $requestMethod, $htmlAttributes);
     }
 
-    public static function buildMethodCallForm($sClass, $sMethod, $otherVars = array(), $requestMethod = RequestMethod::POST, $htmlAttributes = array()) {
+    public static function buildMethodCallForm($sClass, $sMethod, $otherVars = [], $requestMethod = RequestMethod::POST, $htmlAttributes = []) {
         return Form::buildMethodCallForm($sClass, $sMethod, $otherVars, $requestMethod, $htmlAttributes);
     }
 
-    public static function buildMethodCallButton($sClass, $sMethod, $buttonText, $buttonAttributes = array("class" => "btn btn-default", "type" => "submit"), $otherVars = array(), $formAttributes = array(), $requestMethod = RequestMethod::POST) {
+    public static function buildMethodCallButton($sClass, $sMethod, $buttonText, $buttonAttributes = array("class" => "btn btn-default", "type" => "submit"), $otherVars = [], $formAttributes = [], $requestMethod = RequestMethod::POST) {
         return Form::buildMethodCallButton($sClass, $sMethod, $buttonText, $buttonAttributes, $otherVars, $formAttributes, $requestMethod);
     }
 
-    public static function deleteButton($url, $otherVars = array(), $htmlAttributes = array()) {
+    public static function deleteButton($url, $otherVars = [], $htmlAttributes = []) {
         return Form::deleteButton($url, $otherVars, $htmlAttributes);
     }
 
-    public static function buildHTMLAttributesFromArray($attributes = array()) {
+    public static function buildHTMLAttributesFromArray($attributes = []) {
         $html = "";
         foreach ($attributes as $key => $value) {
             $val = is_bool($value) ? strbool($value) : $value;

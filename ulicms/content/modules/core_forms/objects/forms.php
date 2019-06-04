@@ -56,7 +56,7 @@ class Forms {
     }
 
     public static function getAllForms() {
-        $retval = array();
+        $retval = [];
         $query = db_query("select * from `" . tbname("forms") . "` ORDER BY id");
         if (db_num_rows($query) > 0) {
             while ($row = db_fetch_assoc($query)) {

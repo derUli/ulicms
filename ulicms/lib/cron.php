@@ -9,7 +9,7 @@ if (!defined("LOADED_LANGUAGE_FILE")) {
     $languages = getAllLanguages();
 
     if (!is_array($_SESSION)) {
-        $_SESSION = array();
+        $_SESSION = [];
     }
 
     if (!empty($_GET["language"]) and faster_in_array($_GET["language"], $languages)) {

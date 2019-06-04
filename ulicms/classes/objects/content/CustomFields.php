@@ -51,7 +51,7 @@ class CustomFields {
     }
 
     public static function getAll($content_id = null, $removePrefix = true) {
-        $fields = array();
+        $fields = [];
         if (is_null($content_id)) {
             $content_id = get_ID();
         }

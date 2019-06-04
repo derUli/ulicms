@@ -40,7 +40,7 @@ if (!$permissionChecker->hasPermission("design")) {
         <?php translate("design"); ?>
     </h1>
     <?php
-    echo ModuleHelper::buildMethodCallForm("DesignSettingsController", "save", array(), "post", array(
+    echo ModuleHelper::buildMethodCallForm("DesignSettingsController", "save", [], "post", array(
         "id" => "designForm"
     ));
     ?>

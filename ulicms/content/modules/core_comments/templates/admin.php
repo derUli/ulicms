@@ -22,7 +22,7 @@ $stati = array(
 
 $contents = ContentFactory::getAllWithComments("title");
 
-$contentSelect = array();
+$contentSelect = [];
 
 $contentSelect[] = new ListItem(0, "[" . get_translation("every") . "]");
 foreach ($contents as $content) {
@@ -46,7 +46,7 @@ $actionSelect = array(
 
 <h1><?php translate("comments_manage"); ?></h1>
 <?php
-echo ModuleHelper::buildMethodCallForm(CommentsController::class, "filterComments", array(), "get");
+echo ModuleHelper::buildMethodCallForm(CommentsController::class, "filterComments", [], "get");
 ?>
 <div class="form-group">
     <label for="status"><?php translate("status"); ?></label>

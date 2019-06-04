@@ -8,7 +8,7 @@ if ($permissionChecker->hasPermission("banners") and $permissionChecker->hasPerm
     ?>
 
     <?php
-    echo ModuleHelper::buildMethodCallForm("BannerController", "create", array(), RequestMethod::POST, array(
+    echo ModuleHelper::buildMethodCallForm("BannerController", "create", [], RequestMethod::POST, array(
         "autocomplete" => "off"
     ));
     ?>

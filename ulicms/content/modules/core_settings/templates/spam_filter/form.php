@@ -115,7 +115,7 @@ if ($permissionChecker->hasPermission("spam_filter")) {
     </form>
 
     <?php
-    $jsTranslation = new JSTranslation(array(), "SettingsTranslation");
+    $jsTranslation = new JSTranslation([], "SettingsTranslation");
     $jsTranslation->addKey("changes_was_saved");
     $jsTranslation->render();
     enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/spam_filter.js"));

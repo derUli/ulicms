@@ -647,7 +647,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
 
     public function testHasChildrenReturnsTrue() {
         $query = Database::pQuery("select parent_id from {prefix}content where "
-                        . "parent_id is not null", array(), true);
+                        . "parent_id is not null", [], true);
         $result = Database::fetchObject($query);
 
         $page = ContentFactory::getByID($result->parent_id);
@@ -672,7 +672,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetChildrenReturnsTrue() {
         $query = Database::pQuery("select parent_id from {prefix}content where "
-                        . "parent_id is not null", array(), true);
+                        . "parent_id is not null", [], true);
         $result = Database::fetchObject($query);
 
         $page = ContentFactory::getByID($result->parent_id);
@@ -703,7 +703,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetParentReturnsNull() {
         $query = Database::pQuery("select id from {prefix}content where "
-                        . "parent_id is null", array(), true);
+                        . "parent_id is null", [], true);
         $result = Database::fetchObject($query);
 
         $page = ContentFactory::getByID($result->id);
@@ -712,7 +712,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetParentReturnsModel() {
         $query = Database::pQuery("select parent_id, id from {prefix}content where "
-                        . "parent_id is not null", array(), true);
+                        . "parent_id is not null", [], true);
         $result = Database::fetchObject($query);
 
         $page = ContentFactory::getByID($result->id);

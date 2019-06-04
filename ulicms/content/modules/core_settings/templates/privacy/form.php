@@ -30,7 +30,7 @@ if ($permissionChecker->hasPermission("privacy_settings")) {
             <h2 class="accordion-header"><?php translate("dsgvo_checkbox"); ?></h2>
             <div class="accordion-content">
                 <?php
-                echo ModuleHelper::buildMethodCallForm("PrivacyController", "save", array(), "post", array(
+                echo ModuleHelper::buildMethodCallForm("PrivacyController", "save", [], "post", array(
                     "id" => "privacy_form"
                 ));
                 ?>

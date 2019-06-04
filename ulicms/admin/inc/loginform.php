@@ -36,7 +36,7 @@ if ($login_welcome_text) {
 </h3>
 <?php
 echo ModuleHelper::buildMethodCallForm("SessionManager", "login",
-        array(), RequestMethod::POST,
+        [], RequestMethod::POST,
         array
             (
             "id" => "login-form",

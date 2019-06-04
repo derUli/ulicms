@@ -161,7 +161,7 @@ function array_keep($array, $keys) {
 function getAllUsedLanguages() {
     $sql = "select language from `{prefix}content` where active = 1 group by language order by language";
     $query = Database::query($sql, true);
-    $languages = array();
+    $languages = [];
     while ($row = Database::fetchobject($query)) {
         $languages[] = $row->language;
     }
@@ -202,7 +202,7 @@ function get_prefered_language($priorities, $http_accept_language) {
 }
 
 function get_all_used_menus() {
-    $retval = array();
+    $retval = [];
     $query = db_query("select menu from " . tbname("content") . " group by menu");
     while ($row = db_fetch_object($query)) {
         $retval[] = $row->menu;
@@ -294,7 +294,7 @@ function initPFBC() {
  * @return String containing either just a URL or a complete image tag
  *         @source http://gravatar.com/site/implement/images/php/
  */
-function get_gravatar($email, $s = 80, $d = 'mm', $r = 'g', $img = false, $atts = array()) {
+function get_gravatar($email, $s = 80, $d = 'mm', $r = 'g', $img = false, $atts = []) {
     // Nach dem in Kraft treten, der Datenschutz-Grundverordnung 2018
     // wird die Nutzung von Gravatar in Deutschland illegal
     // daher wird an dieser Stelle die Gravatar-Integration gekappt
@@ -384,7 +384,7 @@ function get_csrf_token() {
 }
 
 function getFieldsForCustomType($type) {
-    $fields = array();
+    $fields = [];
     $modules = getAllModules();
     foreach ($modules as $module) {
         $custom_types = getModuleMeta($module, "custom_types");
@@ -404,8 +404,8 @@ function getFieldsForCustomType($type) {
 function get_used_post_types() {
     $query = Database::query("select `type` from {prefix}content group by `type`", true);
     $types = get_available_post_types();
-    $used_types = array();
-    $return_types = array();
+    $used_types = [];
+    $return_types = [];
     while ($row = Database::fetchObject($query)) {
         $used_types[] = $row->type;
     }
@@ -426,7 +426,7 @@ function get_available_post_types() {
 // Schriftgrößen zurückgeben
 function getFontSizes() {
     global $sizes;
-    $sizes = array();
+    $sizes = [];
     for ($i = 6; $i <= 80; $i ++) {
         $sizes[] = $i . "px";
     }
@@ -512,7 +512,7 @@ function getAvailableBackendLanguages() {
     $langdir = ULICMS_ROOT . "/lang/";
     $list = scandir($langdir);
     sort($list);
-    $retval = array();
+    $retval = [];
     for ($i = 0; $i < count($list); $i ++) {
         if (endsWith($list[$i], ".php")) {
             array_push($retval, basename($list[$i], ".php"));
@@ -577,7 +577,7 @@ function setLanguageByDomain() {
 
 function getOnlineUsers() {
     $users_online = db_query("SELECT username FROM " . tbname("users") . " WHERE last_action > " . (time() - 300) . " ORDER BY username");
-    $users = array();
+    $users = [];
     while ($row = db_fetch_object($users_online)) {
         array_push($users, $row->username);
     }
@@ -771,7 +771,7 @@ function replace_num_entity($ord) {
     }
 
     $no_bytes = 0;
-    $byte = array();
+    $byte = [];
 
     if ($ord < 128) {
         return chr($ord);
@@ -892,7 +892,7 @@ function getModulePath($module, $abspath = false) {
         $module_folder = Path::resolve("ULICMS_DATA_STORAGE_URL/content/modules") . "/";
     }
 
-    $available_modules = array();
+    $available_modules = [];
     return $module_folder . $module . "/";
 }
 
@@ -1111,7 +1111,7 @@ function getPageTitleByID($id) {
 // Get slugs of all pages
 function getAllPagesWithTitle() {
     $query = db_query("SELECT slug, id, title FROM `" . tbname("content") . "` WHERE `deleted_at` IS NULL ORDER BY slug");
-    $returnvalues = Array();
+    $returnvalues = [];
     while ($row = db_fetch_object($query)) {
         $a = Array(
             $row->title,
@@ -1151,7 +1151,7 @@ function getAllPages($lang = null, $order = "slug", $exclude_hash_links = true, 
             $query = db_query("SELECT * FROM `" . tbname("content") . "` WHERE `deleted_at` IS NULL AND language ='" . db_escape($lang) . "' and menu = '" . Database::escapeValue($menu) . "' ORDER BY $order");
         }
     }
-    $returnvalues = Array();
+    $returnvalues = [];
     while ($row = db_fetch_assoc($query)) {
         if (!$exclude_hash_links or ( $exclude_hash_links and $row["type"] != "link" and $row["type"] != "node" and $row["type"] != "language_link")) {
             array_push($returnvalues, $row);
@@ -1163,7 +1163,7 @@ function getAllPages($lang = null, $order = "slug", $exclude_hash_links = true, 
 
 // Get slugs of all pages
 function getAllSlugs($lang = null) {
-    $slugs = Array();
+    $slugs = [];
 
     if (!$lang) {
         $query = db_query("SELECT slug,id FROM `" . tbname("content") . "` WHERE `deleted_at` IS NULL AND redirection NOT LIKE '#%' ORDER BY slug");
@@ -1184,7 +1184,7 @@ function getAllLanguages($filtered = false) {
         $permissionChecker = new PermissionChecker(get_user_id());
         $languages = $permissionChecker->getLanguages();
         if (count($languages) > 0) {
-            $result = array();
+            $result = [];
             foreach ($languages as $lang) {
                 $result[] = $lang->getLanguageCode();
             }
@@ -1195,7 +1195,7 @@ function getAllLanguages($filtered = false) {
         return Vars::get("all_languages");
     }
     $query = db_query("SELECT language_code FROM `" . tbname("languages") . "` ORDER BY language_code");
-    $languageCodes = Array();
+    $languageCodes = [];
     while ($row = db_fetch_object($query)) {
         array_push($languageCodes, $row->language_code);
     }
@@ -1248,7 +1248,7 @@ function getAllMenus($only_used = false) {
     }
     if ($only_used) {
         $used = get_all_used_menus();
-        $new_menus = array();
+        $new_menus = [];
         for ($i = 0; $i <= count($menus); $i ++) {
             if (faster_in_array($menus[$i], $used)) {
                 $new_menus[] = $menus[$i];
@@ -1258,7 +1258,7 @@ function getAllMenus($only_used = false) {
     }
 
     $themesList = getThemesList();
-    $allThemeMenus = array();
+    $allThemeMenus = [];
     foreach ($themesList as $theme) {
         $themeMenus = getThemeMeta($theme, "menus");
         if ($themeMenus and is_array($themeMenus)) {

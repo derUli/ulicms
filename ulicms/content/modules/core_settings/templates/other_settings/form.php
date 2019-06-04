@@ -55,7 +55,7 @@ if (!$permissionChecker->hasPermission("other")) {
     );
     ?>
     <?php
-    echo ModuleHelper::buildMethodCallForm("OtherSettingsController", "save", array(), "post", array(
+    echo ModuleHelper::buildMethodCallForm("OtherSettingsController", "save", [], "post", array(
         "id" => "other_settings",
         "autocomplete" => "off"
     ));

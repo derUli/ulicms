@@ -2,7 +2,7 @@
 
 class CustomData {
 
-    private static $defaults = array();
+    private static $defaults = [];
 
     public static function get($page = null) {
         if (!$page) {
@@ -23,7 +23,7 @@ class CustomData {
         }
         $data = self::get($page);
         if (is_null($data)) {
-            $data = array();
+            $data = [];
         }
         $data[$var] = $value;
         $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
@@ -36,7 +36,7 @@ class CustomData {
         }
         $data = self::get($page);
         if (is_null($data)) {
-            $data = array();
+            $data = [];
         }
         // Wenn $var gesetzt ist, nur $var aus custom_data löschen
         if ($var) {
@@ -45,7 +45,7 @@ class CustomData {
             }
         } else {
             // Wenn $var nicht gesetzt ist, alle Werte von custom_data löschen
-            $data = array();
+            $data = [];
         }
         $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
         return Database::query("UPDATE " . tbname("content") . " SET custom_data = '" . Database::escapeValue($json) . "' WHERE slug='" . Database::escapeValue($page) . "'");

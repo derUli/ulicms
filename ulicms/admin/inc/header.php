@@ -29,7 +29,7 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
         <title>[<?php Template::escape(Settings::get("homepage_title")); ?>] - UliCMS</title>
         <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
         <?php
-        $styles = array();
+        $styles = [];
         ?>
         <?php
         $scripts = array(

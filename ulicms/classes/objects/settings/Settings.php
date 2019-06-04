@@ -132,7 +132,7 @@ class Settings {
     }
 
     public static function getAll($order = "name") {
-        $result = array();
+        $result = [];
         $query = Database::query("SELECT * FROM `{prefix}settings` order by $order", true);
         while ($dataset = Database::fetchObject($query)) {
             $result[] = $dataset;
@@ -146,7 +146,7 @@ class Settings {
         $lines = explode("\n", $str);
         $lines = array_map('trim', $lines);
         $lines = array_filter($lines, 'strlen');
-        $result = array();
+        $result = [];
         foreach ($lines as $line) {
 // if a line starts with a hash skip it (comment)
             if (startsWith($line, "#")) {

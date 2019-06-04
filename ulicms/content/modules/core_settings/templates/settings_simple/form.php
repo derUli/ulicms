@@ -3,7 +3,7 @@ $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("settings_simple")) {
     $controller = ControllerRegistry::get();
     $allSettings = Settings::getAll();
-    $settings = array();
+    $settings = [];
     foreach ($allSettings as $option) {
         $settings[$option->name] = Template::getEscape($option->value);
     }
@@ -16,7 +16,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
     <h2><?php translate("general_settings"); ?></h2>
     <p>Hier können Sie die Einstellungen für Ihre Internetseite verändern.</p>
     <?php
-    echo ModuleHelper::buildMethodCallForm("SimpleSettingsController", "save", array(), "post", array(
+    echo ModuleHelper::buildMethodCallForm("SimpleSettingsController", "save", [], "post", array(
         "id" => "settings_simple"
     ))
     ?>

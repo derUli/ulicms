@@ -87,7 +87,7 @@ class DesignSettingsController extends Controller {
 
     public function getFontFamilys() {
         global $fonts;
-        $fonts = Array();
+        $fonts = [];
         $fonts["Times New Roman"] = "TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif";
         $fonts["Georgia"] = "Georgia, Times, 'Times New Roman', serif";
         $fonts["Sans Serif"] = "sans-serif";
@@ -123,7 +123,7 @@ class DesignSettingsController extends Controller {
     }
 
     public function getGoogleFonts() {
-        $retval = array();
+        $retval = [];
         $file = ModuleHelper::buildModuleRessourcePath($this->moduleName, "data/webFontNames.opml");
         $content = file_get_contents($file);
         $xml = new SimpleXMLElement($content);

@@ -78,7 +78,7 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testIsSingleWithEmptyArray() {
-        $this->assertFalse(ArrayHelper::isSingle(array()));
+        $this->assertFalse(ArrayHelper::isSingle([]));
     }
 
     public function testIsSingleWithOneItem() {
@@ -95,7 +95,7 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testgetSingleWithEmptyArray() {
-        $this->assertNull(ArrayHelper::getSingle(array()));
+        $this->assertNull(ArrayHelper::getSingle([]));
     }
 
     public function testgetSingleWithOneItem() {

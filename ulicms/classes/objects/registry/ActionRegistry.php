@@ -4,12 +4,12 @@ use UliCMS\Exceptions\FileNotFoundException;
 
 class ActionRegistry {
 
-    private static $assignedControllers = array();
+    private static $assignedControllers = [];
     private static $defaultCoreActions = array(
         "module_settings" => "inc/module_settings.php",
         "groups" => "inc/groups.php"
     );
-    private static $actionPermissions = array();
+    private static $actionPermissions = [];
 
     public static function getDefaultCoreActions() {
         return self::$defaultCoreActions;

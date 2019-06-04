@@ -7,7 +7,7 @@ class Translation {
     private static $translations = null;
 
     public static function init() {
-        $translations = array();
+        $translations = [];
     }
 
     public static function set($key, $value) {

@@ -45,7 +45,7 @@ class Page extends Content {
 
     public function __construct($id = null) {
         if ($this->custom_data === null) {
-            $this->custom_data = array();
+            $this->custom_data = [];
         }
         $this->permissions = new PagePermissions();
         if ($id) {
@@ -79,7 +79,7 @@ class Page extends Content {
         $this->deleted_at = $result->deleted_at;
         $this->theme = $result->theme;
         if ($this->customData === null) {
-            $this->custom_data = array();
+            $this->custom_data = [];
         }
         $this->custom_data = json_decode($result->custom_data, false);
 
@@ -202,7 +202,7 @@ class Page extends Content {
         }
 
         if ($this->custom_data === null) {
-            $this->custom_data = array();
+            $this->custom_data = [];
         }
 
         $json = json_encode($this->custom_data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_FORCE_OBJECT);
@@ -295,7 +295,7 @@ class Page extends Content {
         }
 
         if ($this->custom_data === null) {
-            $this->custom_data = array();
+            $this->custom_data = [];
         }
 
         $json = json_encode($this->custom_data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_FORCE_OBJECT);
@@ -345,7 +345,7 @@ class Page extends Content {
     }
 
     public function getEmbeddedModules() {
-        $result = array();
+        $result = [];
         $content = str_ireplace("&quot;", '"', $this->content);
         preg_match_all("/\[module=\"([a-z_\-0-9]+)\"]/i", $content, $match);
         if (count($match) > 0) {
@@ -368,7 +368,7 @@ class Page extends Content {
 
     public function getHistory($order = "date DESC") {
         if (!$this->getID()) {
-            return array();
+            return [];
         }
         return VCS::getRevisionsByContentID($this->getID(), $order);
     }

@@ -278,7 +278,7 @@ define('BR', '<br />' . LF); // HTML Break
 define("ONE_DAY_IN_SECONDS", 60 * 60 * 24);
 
 global $actions;
-$actions = array();
+$actions = [];
 
 function noPerms() {
     echo "<div class=\"alert alert-danger\">" . get_translation("no_permissions") . "</div>";
@@ -309,7 +309,7 @@ if ($connection === false) {
 $path_to_installer = dirname(__file__) . "/installer/installer.php";
 
 if (is_true($config->dbmigrator_auto_migrate)) {
-    $additionalSql = is_array($config->dbmigrator_initial_sql_files) ? $config->dbmigrator_initial_sql_files : array();
+    $additionalSql = is_array($config->dbmigrator_initial_sql_files) ? $config->dbmigrator_initial_sql_files : [];
     if (isCLI()) {
         Database::setEchoQueries(true);
     }

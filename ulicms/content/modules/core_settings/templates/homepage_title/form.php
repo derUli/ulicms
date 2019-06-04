@@ -2,7 +2,7 @@
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("settings_simple")) {
     $languages = getAllLanguages();
-    $homepage_titles = array();
+    $homepage_titles = [];
     for ($i = 0; $i < count($languages); $i ++) {
         $lang = $languages[$i];
         $homepage_titles[$lang] = Settings::get("homepage_title_" . $lang);
@@ -18,7 +18,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
     </p>
     <h1><?php translate("homepage_title"); ?></h1>
     <?php
-    echo ModuleHelper::buildMethodCallForm("HomepageTitleController", "save", array(), "post", array(
+    echo ModuleHelper::buildMethodCallForm("HomepageTitleController", "save", [], "post", array(
         "id" => "homepage_title_settings"
     ));
     ?>

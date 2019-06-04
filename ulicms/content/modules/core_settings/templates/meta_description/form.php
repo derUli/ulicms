@@ -2,7 +2,7 @@
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("settings_simple")) {
     $languages = getAllLanguages();
-    $meta_descriptions = array();
+    $meta_descriptions = [];
     for ($i = 0; $i < count($languages); $i ++) {
         $lang = $languages[$i];
         $meta_descriptions[$lang] = Settings::get("meta_description_" . $lang);
@@ -17,7 +17,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
     </p>
     <h1><?php get_translation("meta_description"); ?></h1>
     <?php
-    echo ModuleHelper::buildMethodCallForm("MetaDescriptionController", "save", array(), "post", array(
+    echo ModuleHelper::buildMethodCallForm("MetaDescriptionController", "save", [], "post", array(
         "id" => "meta_description_settings"
     ));
     ?>

@@ -42,7 +42,7 @@ class PlainTextCreator {
             "Meta Keywords",
             "Author"
         );
-        $data = array();
+        $data = [];
         $this->content = br2nlr($this->content);
         $this->content = strip_tags($this->content);
         $this->content = str_replace("\r\n", "\n", $this->content);

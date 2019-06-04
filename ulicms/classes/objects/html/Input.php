@@ -7,7 +7,7 @@ use Template;
 
 class Input {
 
-    public static function TextBox($name, $value, $type = "text", $htmlAttributes = array()) {
+    public static function TextBox($name, $value, $type = "text", $htmlAttributes = []) {
         $attributes = array(
             "type" => $type,
             "name" => $name,
@@ -20,7 +20,7 @@ class Input {
         return "<input {$attribHTML}>";
     }
 
-    public static function TextArea($name, $value, $rows = 25, $cols = 80, $htmlAttributes = array()) {
+    public static function TextArea($name, $value, $rows = 25, $cols = 80, $htmlAttributes = []) {
         $attributes = array(
             "name" => $name,
             "rows" => $rows,
@@ -36,11 +36,11 @@ class Input {
         return "<textarea {$attribHTML}>{$escapedValue}</textarea>";
     }
 
-    public static function Password($name, $value, $htmlAttributes = array()) {
+    public static function Password($name, $value, $htmlAttributes = []) {
         return self::TextBox($name, $value, "password", $htmlAttributes);
     }
 
-    public static function File($name, $multiple = false, $accept = null, $htmlAttributes = array()) {
+    public static function File($name, $multiple = false, $accept = null, $htmlAttributes = []) {
         $attributes = array(
             "name" => $name
         );
@@ -61,25 +61,25 @@ class Input {
         return self::TextBox($name, "", "file", $attributes);
     }
 
-    public static function Hidden($name, $value, $htmlAttributes = array()) {
+    public static function Hidden($name, $value, $htmlAttributes = []) {
         return self::TextBox($name, $value, "hidden", $htmlAttributes);
     }
 
-    public static function CheckBox($name, $checked = false, $value = "1", $htmlAttributes = array()) {
+    public static function CheckBox($name, $checked = false, $value = "1", $htmlAttributes = []) {
         if ($checked) {
             $htmlAttributes["checked"] = "checked";
         }
         return self::TextBox($name, $value, "checkbox", $htmlAttributes);
     }
 
-    public static function RadioButton($name, $checked = false, $value = "1", $htmlAttributes = array()) {
+    public static function RadioButton($name, $checked = false, $value = "1", $htmlAttributes = []) {
         if ($checked) {
             $htmlAttributes["checked"] = "checked";
         }
         return self::TextBox($name, $value, "radio", $htmlAttributes);
     }
 
-    public static function SingleSelect($name, $value = null, $options = array(), $size = 1, $htmlAttributes = array()) {
+    public static function SingleSelect($name, $value = null, $options = [], $size = 1, $htmlAttributes = []) {
         $attributes = array(
             "name" => $name,
             "size" => $size
@@ -100,7 +100,7 @@ class Input {
         return $html;
     }
 
-    public static function MultiSelect($name, $value = null, $options = array(), $size = 5, $htmlAttributes = array()) {
+    public static function MultiSelect($name, $value = null, $options = [], $size = 5, $htmlAttributes = []) {
         $attributes = array(
             "name" => $name,
             "size" => $size
