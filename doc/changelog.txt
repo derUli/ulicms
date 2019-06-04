@@ -20,6 +20,7 @@ Neue API-Methoden:
 * User->checkPassword($password)
 * Comment::getReadCount()
 * Comment::getAllCount()
+* Database::createSchema($name)
 * Model->isPersistent()
 * Model->hasChanges()
 * TypeMapper::getModel($type)

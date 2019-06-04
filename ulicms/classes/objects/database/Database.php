@@ -26,11 +26,15 @@ class Database {
         mysqli_close(self::$connection);
     }
 
+    public static function createSchema($name) {
+        return Database::query("CREATE DATABASE {$name}");
+    }
+
     // TODO: Do logging when auto initialize the database
     public static function setupSchemaAndSelect($schemaName, $otherScripts = []) {
         $selected = self::select($schemaName);
         if (!$selected) {
-            $success = Database::query("CREATE DATABASE {$schemaName}");
+            $success = self::createSchema($schemaName);
             if ($success) {
                 $selected = self::select($schemaName);
             }

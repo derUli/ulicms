@@ -257,8 +257,10 @@ if (isset($config->memory_limit)) {
 Translation::init();
 
 if (class_exists("Path")) {
-    LoggerRegistry::register("exception_log", new Logger(Path::resolve("ULICMS_LOG/exception_log")));
 
+    if (is_true($config->exception_logging)) {
+        LoggerRegistry::register("exception_log", new Logger(Path::resolve("ULICMS_LOG/exception_log")));
+    }
     if (is_true($config->query_logging)) {
         LoggerRegistry::register("sql_log", new Logger(Path::resolve("ULICMS_LOG/sql_log")));
     }
