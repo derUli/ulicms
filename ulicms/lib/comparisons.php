@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 function is_today($datetime = null) {
     $carbon = get_carbon($datetime);
     return $carbon->isToday();
@@ -22,11 +24,11 @@ function is_past($datetime = null) {
 
 function is_future($datetime = null) {
     $carbon = get_carbon($datetime);
-    return $carbon->isPast();
+    return $carbon->isFuture();
 }
 
 function get_carbon($datetime = null) {
-    return new Carbon($datetime ?? time(), date_default_timezone_get);
+    return new Carbon($datetime ?? time(), date_default_timezone_get());
 }
 
 function is_blank($val = null) {

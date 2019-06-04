@@ -24,6 +24,12 @@ Neue API-Methoden:
 * TypeMapper::getModel($type)
 * link($url, $text, $allowHtml = false, $target = null, $htmlAttributes = array())
 * button_link($url, $text, $type = null, $allowHtml = false, $target = null, $htmlAttributes = array())
+* is_today($datetime = null)
+* is_tomorrow($datetime = null)
+* is_yesterday($datetime = null)
+* is_past($datetime = null)
+* is_future($datetime = null)
+* get_carbon($datetime = null)
 
 Entfernte API-Methoden:
 * addUser()
