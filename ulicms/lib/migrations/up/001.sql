@@ -105,7 +105,6 @@ CREATE TABLE `{prefix}content` (
   `comments_enabled` tinyint(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-
 CREATE TABLE `{prefix}custom_fields` (
   `id` int(11) NOT NULL,
   `content_id` int(11) NOT NULL,
