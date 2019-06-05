@@ -10,14 +10,16 @@ class Database {
     }
 
     // Connect with database server
-    public static function connect($server, $user, $password, $port, $socket = null) {
+    public static function connect($server, $user, $password, $port, $socket = null, $db_strict_mode = false) {
         self::$connection = mysqli_connect($server, $user, $password, "", $port, $socket);
         if (!self::$connection) {
             return false;
         }
         self::query("SET NAMES 'utf8mb4'");
         // sql_mode auf leer setzen, da sich UliCMS nicht im strict_mode betreiben lässt
-        self::query("SET SESSION sql_mode = '';");
+        if (!$db_strict_mode) {
+            self::query("SET SESSION sql_mode = ''");
+        }
 
         return self::$connection;
     }
