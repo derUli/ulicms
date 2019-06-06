@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Models\Content\VCS;
+
 class HistoryController extends Controller {
 
     public function doRestore() {
