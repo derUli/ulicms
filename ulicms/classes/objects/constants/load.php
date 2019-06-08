@@ -8,7 +8,8 @@ $classes = array(
     "ModuleEventConstants",
     "AllowedTags",
     "LinkTarget",
-    "ButtonType"
+    "ButtonType",
+    "PackageTypes"
 );
 foreach ($classes as $class) {
     require_once dirname(__file__) . "/$class.php";

@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Services\Connectors\PackageSourceConnector;
+use UliCMS\Constants\PackageTypes;
 
 class PackageManager {
 
@@ -33,6 +34,18 @@ class PackageManager {
 
     public function truncateInstalledPatches() {
         return db_query("TRUNCATE TABLE " . tbname("installed_patches"));
+    }
+
+    public function isInstalled($package, $type = PackageTypes::TYPE_MODULE) {
+        switch ($type) {
+            case PackageTypes::TYPE_MODULE:
+                $module = new Module($package);
+                return $module->isInstalled();
+            case PackageTypes::TYPE_THEME:
+                return faster_in_array($package, getThemesList());
+            default:
+                throw new NotImplementedException("Package Type {$type} not supported");
+        }
     }
 
     public function installPatch($name, $description, $url, $clear_cache = true, $checksum = null) {
