@@ -437,9 +437,8 @@ function getFontSizes() {
 }
 
 function getModuleMeta($module, $attrib = null) {
-
     $metadata_file = ModuleHelper::buildRessourcePath($module, "metadata.json");
-    if (!is_file($metadata_file)) {
+    if (!file_exists($metadata_file)) {
         return null;
     }
 
