@@ -7,7 +7,6 @@ class CMSConfig extends BaseConfig {
     public $db_password = "{mysql_password}";
     public $db_database = "{mysql_database}";
     public $db_prefix = "{prefix}";
-    public $db_type = "mysql";
     public $debug = false;
     public $exception_logging = true;
     public $log_requests = false;
