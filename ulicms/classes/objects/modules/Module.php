@@ -19,6 +19,7 @@ class Module {
         );
         $query = Database::pQuery($sql, $args, true);
         $dataset = Database::fetchSingle($query);
+
         if ($dataset) {
             $this->name = $dataset->name;
             $this->version = $dataset->version;
@@ -42,7 +43,7 @@ class Module {
         }
     }
 
-    private function insert() {
+    protected function insert() {
         $sql = "INSERT INTO {prefix}modules (name, version, enabled) values(?, ?, ?)";
         $args = array(
             $this->name,
@@ -52,7 +53,7 @@ class Module {
         return Database::pQuery($sql, $args, true);
     }
 
-    private function update() {
+    protected function update() {
         $sql = "update {prefix}modules set version = ?, enabled = ? where name = ?";
         $args = array(
             $this->version,
@@ -92,6 +93,13 @@ class Module {
             }
         }
         return $result;
+    }
+
+    public function isInstalled() {
+        if (!$this->getName()) {
+            return false;
+        }
+        return !is_null(getModuleMeta($this->getName()));
     }
 
     public function isMissingDependencies() {

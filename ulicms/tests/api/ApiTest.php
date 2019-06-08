@@ -5,6 +5,9 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
     public function setUp() {
         $this->cleanUp();
         @session_start();
+
+        $moduleManager = new ModuleManager();
+        $moduleManager->sync();
     }
 
     public function tearDown() {

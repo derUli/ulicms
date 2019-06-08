@@ -437,29 +437,21 @@ function getFontSizes() {
 }
 
 function getModuleMeta($module, $attrib = null) {
-    $retval = null;
-    $metadata_file = getModulePath($module, true) . "metadata.json";
-    if (is_file($metadata_file)) {
-        if ($attrib != null) {
-            $data = !Vars::get("module_{$module}_meta") ? file_get_contents($metadata_file) : Vars::get("module_{$module}_meta");
-            if (is_string($data)) {
-                $data = json_decode($data, true);
-            }
-            Vars::set("module_{$module}_meta", $data);
-            if (isset($data[$attrib])) {
-                $retval = $data[$attrib];
-            }
-        } else {
-            $data = !Vars::get("module_{$module}_meta") ? file_get_contents($metadata_file) : Vars::get("module_{$module}_meta");
-            if (is_string($data)) {
-                $data = json_decode($data, true);
-            }
-            Vars::set("module_{$module}_meta", $data);
 
-            $retval = $data;
-        }
+    $metadata_file = ModuleHelper::buildRessourcePath($module, "metadata.json");
+    if (!is_file($metadata_file)) {
+        return null;
     }
-    return $retval;
+
+    $data = file_get_contents($metadata_file);
+    $json = json_decode($data, true);
+    if (!$json) {
+        return null;
+    }
+    if ($attrib and ! isset($json[$attrib])) {
+        return null;
+    }
+    return $attrib ? $json[$attrib] : $json;
 }
 
 function getThemeMeta($theme, $attrib = null) {
@@ -944,7 +936,8 @@ function fcflush() {
 }
 
 function isModuleInstalled($name) {
-    return faster_in_array($name, getAllModules());
+    $module = new Module($name);
+    return $module->isInstalled();
 }
 
 function getAllModules() {

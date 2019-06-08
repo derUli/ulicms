@@ -23,6 +23,7 @@ Neue API-Methoden:
 * Database::createSchema($name)
 * Model->isPersistent()
 * Model->hasChanges()
+* Module->isInstalled()
 * TypeMapper::getModel($type)
 * link($url, $text, $allowHtml = false, $target = null, $htmlAttributes = array())
 * button_link($url, $text, $type = null, $allowHtml = false, $target = null, $htmlAttributes = array())
