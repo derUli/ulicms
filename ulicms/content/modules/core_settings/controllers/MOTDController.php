@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Utils\CacheUtil;
+
 class MOTDController extends Controller {
 
     public function savePost() {
@@ -8,6 +10,9 @@ class MOTDController extends Controller {
         } else {
             Settings::set("motd_" . Request::getVar("language"), Request::getVar("motd"));
         }
+
+        CacheUtil::clearPageCache();
+
         Response::sendHttpStatusCodeResultIfAjax();
 
         Request::redirect(ModuleHelper::buildActionURL("motd", ModuleHelper::buildQueryString(array(

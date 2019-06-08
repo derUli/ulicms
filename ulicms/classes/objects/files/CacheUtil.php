@@ -52,6 +52,13 @@ class CacheUtil {
         return (!Settings::get("cache_disabled") && !is_logged_in());
     }
 
+    public static function clearPageCache() {
+        $adapter = self::getAdapter();
+        if ($adapter) {
+            $adapter->clear();
+        }
+    }
+
     public static function clearCache() {
         do_event("before_clear_cache");
 
@@ -84,7 +91,7 @@ class CacheUtil {
     }
 
     public static function getCurrentUid() {
-        return md5(get_request_uri() . getCurrentLanguage() . strbool(is_mobile()) . strbool(is_crawler()) . strbool(is_tablet()));
+        return "fullpage-cache-" . md5(get_request_uri() . getCurrentLanguage() . strbool(is_mobile()) . strbool(is_crawler()) . strbool(is_tablet()));
     }
 
 }

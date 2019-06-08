@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Utils\CacheUtil;
+
 class MottoController extends Controller {
 
     public function savePost() {
@@ -18,6 +20,9 @@ class MottoController extends Controller {
                 }
             }
         }
+
+        CacheUtil::clearPageCache();
+
         // if called by ajax return no content to improve performance
         if (Request::isAjaxRequest()) {
             HTTPStatusCodeResult(HttpStatusCode::OK);

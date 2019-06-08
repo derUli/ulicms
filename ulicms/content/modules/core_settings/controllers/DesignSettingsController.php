@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Utils\CacheUtil;
+
 class DesignSettingsController extends Controller {
 
     private $moduleName = "core_settings";
@@ -81,6 +83,8 @@ class DesignSettingsController extends Controller {
         if (Settings::get("body-background-color") != $_REQUEST["body-background-color"]) {
             Settings::set("body-background-color", $_REQUEST["body-background-color"]);
         }
+
+        CacheUtil::clearPageCache();
 
         HTTPStatusCodeResult(HttpStatusCode::OK);
     }

@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Utils\CacheUtil;
+
 class OtherSettingsController extends Controller {
 
     public function savePost() {
@@ -61,6 +63,8 @@ class OtherSettingsController extends Controller {
         if (isset($_POST["smtp_password"])) {
             Settings::set("smtp_password", $_POST["smtp_password"]);
         }
+
+        CacheUtil::clearPageCache();
 
         if (Request::isAjaxRequest()) {
             HTTPStatusCodeResult(HttpStatusCode::OK);

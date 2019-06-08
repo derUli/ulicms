@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Utils\CacheUtil;
+
 class OpenGraphController extends Controller {
 
     public function savePost() {
@@ -10,6 +12,9 @@ class OpenGraphController extends Controller {
         if (isset($_POST["og_image"])) {
             Settings::set("og_image", $_POST["og_image"]);
         }
+
+        CacheUtil::clearPageCache();
+
         // if called by ajax return no content to improve performance
         if (Request::isAjaxRequest()) {
             HTTPStatusCodeResult(HttpStatusCode::OK);

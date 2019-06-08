@@ -2,6 +2,7 @@
 
 use UliCMS\Constants\AuditLog;
 use UliCMS\Models\Content\Advertisement\Banner;
+use UliCMS\Utils\CacheUtil;
 
 class BannerController extends Controller {
 
@@ -36,6 +37,8 @@ class BannerController extends Controller {
 
         do_event("after_create_banner");
 
+        CacheUtil::clearPageCache();
+
         Request::redirect(ModuleHelper::buildActionURL("banner"));
     }
 
@@ -51,6 +54,9 @@ class BannerController extends Controller {
             $this->logger->debug("User $userName - Deleted Banner with id ($id)");
         }
         do_event("after_banner_delete");
+
+        CacheUtil::clearPageCache();
+
         Request::redirect(ModuleHelper::buildActionURL("banner"));
     }
 
@@ -80,6 +86,9 @@ class BannerController extends Controller {
         }
 
         do_event("after_edit_banner");
+
+        CacheUtil::clearPageCache();
+
         Request::redirect(ModuleHelper::buildActionURL("banner"));
     }
 

@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Models\Content\VCS;
+use UliCMS\Utils\CacheUtil;
 
 class HistoryController extends Controller {
 
@@ -11,6 +12,9 @@ class HistoryController extends Controller {
             if ($rev) {
                 VCS::restoreRevision($version_id);
             }
+
+            CacheUtil::clearPageCache();
+
             Request::redirect(ModuleHelper::buildActionURL("pages_edit", "page=" . $rev->content_id));
         }
     }

@@ -67,7 +67,7 @@ if ($permissionChecker->hasPermission("settings_simple")
             <a
                 href="<?php echo ModuleHelper::buildActionURL("community_settings"); ?>"
                 class="btn btn-default"><i class="fas fa-tools"></i> <?php
-                    translate("community");
+                    translate("comments");
                     ?></a> <br /> <br />
             <?php
         }

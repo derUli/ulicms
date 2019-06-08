@@ -7,6 +7,7 @@ use Rakit\Validation\Validator;
 use UliCMS\Security\PermissionChecker;
 use UliCMS\Models\Content\TypeMapper;
 use UliCMS\Constants\LinkTarget;
+use UliCMS\Utils\CacheUtil;
 
 class PageController extends Controller {
 
@@ -23,9 +24,12 @@ class PageController extends Controller {
 
         do_event("after_create_page");
 
+        CacheUtil::clearPageCache();
+
         if ($permissionChecker->hasPermission("pages_edit_own") and $model->getID()) {
             Request::redirect(ModuleHelper::buildActionURL("pages_edit", "page={$model->getID()}"));
         }
+
         Request::redirect(ModuleHelper::buildActionURL("pages"));
     }
 
@@ -45,6 +49,8 @@ class PageController extends Controller {
         $this->fillAndSaveModel($model, $permissionChecker, $authorId, $groupId);
 
         do_event("after_edit_page");
+
+        CacheUtil::clearPageCache();
 
         // if called by ajax return no content to improve performance
         if (Request::isAjaxRequest()) {
@@ -233,6 +239,9 @@ class PageController extends Controller {
         }
         $content->undelete();
         do_event("after_undelete_page");
+
+        CacheUtil::clearPageCache();
+
         Response::sendHttpStatusCodeResultIfAjax(HTTPStatusCode::OK, ModuleHelper::buildActionURL("pages"));
     }
 
@@ -246,6 +255,9 @@ class PageController extends Controller {
         $content->delete();
 
         do_event("after_delete_page");
+
+        CacheUtil::clearPageCache();
+
         Response::sendHttpStatusCodeResultIfAjax(HTTPStatusCode::OK, ModuleHelper::buildActionURL("pages"));
     }
 
@@ -253,6 +265,9 @@ class PageController extends Controller {
         do_event("before_empty_trash");
         Content::emptyTrash();
         do_event("after_empty_trash");
+
+        CacheUtil::clearPageCache();
+
         Request::redirect(ModuleHelper::buildActionURL("pages"));
     }
 

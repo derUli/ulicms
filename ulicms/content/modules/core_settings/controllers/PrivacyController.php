@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Utils\CacheUtil;
+
 class PrivacyController extends Controller {
 
     public function savePost() {
@@ -32,6 +34,9 @@ class PrivacyController extends Controller {
 
         $varName = StringHelper::isNotNullOrWhitespace($language) ? "privacy_policy_checkbox_text_{$language}" : "privacy_policy_checkbox_text";
         Settings::set($varName, Request::getVar("privacy_policy_checkbox_text", ""));
+
+        CacheUtil::clearPageCache();
+
         Response::redirect(ModuleHelper::buildActionURL("privacy_settings", "save=1&language={$language}"));
     }
 

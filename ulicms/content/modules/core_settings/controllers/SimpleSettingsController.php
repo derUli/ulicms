@@ -1,8 +1,8 @@
 <?php
 
-class SimpleSettingsController extends Controller {
+use UliCMS\Utils\CacheUtil;
 
-    private $moduleName = "core_settings";
+class SimpleSettingsController extends Controller {
 
     public function savePost() {
         do_event("before_safe_simple_settings");
@@ -21,8 +21,9 @@ class SimpleSettingsController extends Controller {
             Settings::delete("disable_password_reset");
         }
 
-
         do_event("after_safe_simple_settings");
+
+        CacheUtil::clearPageCache();
 
         // if called by ajax return no content to improve performance
         if (Request::isAjaxRequest()) {
