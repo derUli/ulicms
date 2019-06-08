@@ -27,7 +27,7 @@ class ModelRegistry {
                 }
             }
             foreach ($modelRegistry as $key => $value) {
-                if (is_file($value)) {
+                if (file_exists($value)) {
                     require $value;
                 } else {
                     throw new FileNotFoundException("Module {$module}: File '{$path}' not found.");

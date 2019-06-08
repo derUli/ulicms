@@ -121,10 +121,10 @@ class PackageManager {
 
             // post_install_script ausführen und anschließend
             // entfernen, sofern vorhanden;
-            if (is_file($post_install_script1)) {
+            if (file_exists($post_install_script1)) {
                 require_once $post_install_script1;
                 unlink($post_install_script1);
-            } else if (is_file($post_install_script2)) {
+            } else if (file_exists($post_install_script2)) {
                 require_once $post_install_script2;
                 unlink($post_install_script2);
             }
@@ -161,10 +161,10 @@ class PackageManager {
                 $module_init_file = $module_folder . $directory_content[$i] . "/" . $directory_content[$i] . "_main.php";
                 $module_init_file2 = $module_folder . $directory_content[$i] . "/" . "main.php";
                 $metadata_file = $module_folder . $directory_content[$i] . "/metadata.json";
-                if (is_file($metadata_file)) {
+                if (file_exists($metadata_file)) {
                     array_push($available_modules, $directory_content[$i]);
                 } else if ($directory_content[$i] != ".." and $directory_content[$i] != ".") {
-                    if (is_file($module_init_file) or is_file($module_init_file2)) {
+                    if (file_exists($module_init_file) or file_exists($module_init_file2)) {
                         array_push($available_modules, $directory_content[$i]);
                     }
                 }

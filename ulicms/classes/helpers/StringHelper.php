@@ -129,7 +129,7 @@ class StringHelper extends Helper {
 
     public static function linesFromFile($file, $trim = true, $removeEmpty = true, $removeComments = true) {
         $lines = null;
-        if (is_File($file)) {
+        if (file_exists($file)) {
             $str = file_get_contents($file);
             $lines = self::linesFromString($str, $trim, $removeEmpty, $removeComments);
         }

@@ -8,7 +8,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
 } else {
     if (StringHelper::isNotNullOrEmpty($_REQUEST["file"]) and endsWith($_REQUEST["file"], ".sin")) {
         $tempfile = Path::resolve("ULICMS_TMP/" . basename($_REQUEST["file"]));
-        if (is_file($tempfile)) {
+        if (file_exists($tempfile)) {
             $pkg = new SinPackageInstaller($tempfile);
             $installable = $pkg->isInstallable();
             $errors = $pkg->getErrors();
@@ -46,7 +46,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                         <td><strong><?php translate("name") ?></strong></td>
                         <td><?php Template::escape($name) ?></td>
                     </tr>
-            <?php } ?>
+                <?php } ?>
                 <tr>
                     <td><strong><?php translate("version") ?></strong></td>
                     <td><?php Template::escape($version) ?></td>
@@ -114,14 +114,14 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                         <td><?php Template::escape($max_php_version); ?></td>
                     </tr>
                 <?php } ?>
-            <?php if ($required_php_extensions) { ?>
+                <?php if ($required_php_extensions) { ?>
                     <tr>
                         <td><strong><?php translate("required_php_extensions") ?></strong></td>
                         <td><?php
                             foreach ($required_php_extensions as $extension) {
                                 ?>
                                 <?php Template::escape($extension); ?><br />
-                    <?php } ?></td>
+                            <?php } ?></td>
                     </tr>
                     <?php
                 }
@@ -152,9 +152,9 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                             foreach ($dependencies as $dep) {
                                 ?>
                                 <?php Template::escape($dep); ?><br />
-                    <?php } ?></td>
+                            <?php } ?></td>
                     </tr>
-            <?php } ?>
+                <?php } ?>
             </table>
             <?php if ($license) { ?>
                 <h2><?php translate("license_agreement"); ?></h2>

@@ -36,7 +36,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
         $packagesToInstall = explode(",", $_REQUEST ["packages"]);
 
         $post_install_script = ULICMS_DATA_STORAGE_ROOT . "/post-install.php";
-        if (is_file($post_install_script)) {
+        if (file_exists($post_install_script)) {
             unlink($post_install_script);
         }
 
@@ -69,7 +69,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                         fwrite($handle, $pkgContent);
                         fclose($handle);
 
-                        if (is_file($tmpFile)) {
+                        if (file_exists($tmpFile)) {
                             // Paket installieren
                             if ($pkg->installPackage($tmpFile, false)) {
                                 echo "<p style='color:green;'>" . str_ireplace("%pkg%", $packagesToInstall [$i], get_translation("INSTALLATION_SUCCESSFULL")) . "</p>";

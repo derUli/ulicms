@@ -8,19 +8,19 @@ class VideoController extends Controller {
             // OGG
             $result = db_fetch_object($query);
             $filepath = ULICMS_DATA_STORAGE_ROOT . "/content/videos/" . basename($result->ogg_file);
-            if (!empty($result->ogg_file) and is_file($filepath)) {
+            if (!empty($result->ogg_file) and file_exists($filepath)) {
                 unlink($filepath);
             }
 
             // WebM
             $filepath = ULICMS_DATA_STORAGE_ROOT . "/content/videos/" . basename($result->webm_file);
-            if (!empty($result->webm_file) and is_file($filepath)) {
+            if (!empty($result->webm_file) and file_exists($filepath)) {
                 unlink($filepath);
             }
 
             // MP4
             $filepath = ULICMS_DATA_STORAGE_ROOT . "/content/videos/" . basename($result->mp4_file);
-            if (!empty($result->mp4_file) and is_file($filepath)) {
+            if (!empty($result->mp4_file) and file_exists($filepath)) {
                 @unlink($filepath);
             }
 

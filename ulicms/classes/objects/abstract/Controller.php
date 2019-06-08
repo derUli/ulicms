@@ -10,7 +10,7 @@ abstract class Controller {
 
     public function __construct() {
         $file = Path::resolve("ULICMS_ROOT/lib/hooks.txt");
-        if (is_file($file)) {
+        if (file_exists($file)) {
             $lines = StringHelper::linesFromFile($file);
             $lines = array_unique($lines);
             foreach ($lines as $line) {

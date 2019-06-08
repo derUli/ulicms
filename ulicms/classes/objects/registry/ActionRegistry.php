@@ -24,7 +24,7 @@ class ActionRegistry {
                 if (!endsWith($path, ".php")) {
                     $path .= ".php";
                 }
-                if (is_file($path)) {
+                if (file_exists($path)) {
                     $actions[$action] = $file;
                 }
             }
@@ -42,7 +42,7 @@ class ActionRegistry {
                             $path .= ".php";
                         }
 
-                        if (is_file($path)) {
+                        if (file_exists($path)) {
                             $actions[$key] = $path;
                         } else {
                             throw new FileNotFoundException("Module {$module}: File '{$path}' not found.");

@@ -13,13 +13,13 @@ if ($permissionChecker->hasPermission("favicon")) {
     if (isset($_GET["error"])) {
         ?>
         <div class="alert alert-danger">
-        <?php echo translate(_esc($_GET["error"])); ?>
+            <?php echo translate(_esc($_GET["error"])); ?>
         </div>
-        <?php } ?>
+    <?php } ?>
     <h1><?php translate("favicon"); ?></h1>
     <p><?php
-    translate("favicon_infotext");
-    ?>
+        translate("favicon_infotext");
+        ?>
     </p>
     <form enctype="multipart/form-data" action="index.php?action=favicon"
           method="post">
@@ -31,13 +31,13 @@ if ($permissionChecker->hasPermission("favicon")) {
         <table style="height: 250px">
             <tr>
                 <td><strong><?php
-            translate("current_favicon");
-            ?>
+                        translate("current_favicon");
+                        ?>
                     </strong></td>
                 <td><?php
                     $favicon_path = ULICMS_DATA_STORAGE_ROOT . "/content/images/favicon.ico";
                     $favicon_url = defined("ULICMS_DATA_STORAGE_URL") ? ULICMS_DATA_STORAGE_URL . "/content/images/favicon.ico" : "../content/images/favicon.ico";
-                    if (is_file($favicon_path)) {
+                    if (file_exists($favicon_path)) {
                         $favicon_url .= "?time=" . File::getLastChanged($favicon_path);
                         echo '<img class="website_favicon" src="' . $favicon_url . '" alt="' . Settings::get("homepage_title") . '"/>';
                     }
@@ -54,8 +54,8 @@ if ($permissionChecker->hasPermission("favicon")) {
             </tr>
             <tr>
                 <td width=480><strong><?php
-                    translate("upload_new_favicon");
-                    ?>
+                        translate("upload_new_favicon");
+                        ?>
                     </strong></td>
                 <td><input name="favicon_upload_file" type="file"> <br /></td>
 

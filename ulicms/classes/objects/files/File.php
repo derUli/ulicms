@@ -61,12 +61,12 @@ class File {
     }
 
     public static function existsLocally($path) {
-        return ( preg_match('~^(\w+:)?//~', $path) === 0 and is_file($path));
+        return ( preg_match('~^(\w+:)?//~', $path) === 0 and file_exists($path));
     }
 
     public static function toDataUri($file, $mime = null) {
         $url = null;
-        if (is_file($file)) {
+        if (file_exists($file)) {
             $mime = is_null($mime) ? get_mime($file) : $mime;
             $data = file_get_contents($file);
             $base64_data = base64_encode($data);
@@ -115,7 +115,7 @@ class File {
     public static function getNewestMtime($files) {
         $mtime = 0;
         foreach ($files as $file) {
-            if (is_file($file) and filemtime($file) > $mtime) {
+            if (file_exists($file) and filemtime($file) > $mtime) {
                 $mtime = filemtime($file);
             }
         }

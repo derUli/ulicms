@@ -34,7 +34,7 @@ define("START_TIME", microtime(true));
 // load composer packages
 $composerAutoloadFile = dirname(__FILE__) . "/vendor/autoload.php";
 
-if (is_file($composerAutoloadFile)) {
+if (file_exists($composerAutoloadFile)) {
     require_once $composerAutoloadFile;
 } else {
     throw new FileNotFoundException("autoload.php not found. Please run \"./composer install\" to install dependecies.");
@@ -120,7 +120,7 @@ require_once dirname(__file__) . "/classes/objects/media/load.php";
 require_once dirname(__file__) . "/UliCMSVersion.php";
 
 $mobile_detect_as_module = dirname(__file__) . "/content/modules/Mobile_Detect/Mobile_Detect.php";
-if (is_file($mobile_detect_as_module)) {
+if (file_exists($mobile_detect_as_module)) {
     require_once $mobile_detect_as_module;
 }
 
@@ -157,7 +157,7 @@ function exception_handler($exception) {
 $path_to_config = dirname(__file__) . "/CMSConfig.php";
 
 // load config file
-if (is_file($path_to_config)) {
+if (file_exists($path_to_config)) {
     require_once $path_to_config;
 } else if (is_dir("installer")) {
     header("Location: installer/");
@@ -234,7 +234,7 @@ if (!is_dir(ULICMS_LOG)) {
 
 $htaccessForLogFolderSource = ULICMS_ROOT . "/lib/htaccess-deny-all.txt";
 $htaccessLogFolderTarget = ULICMS_LOG . "/.htaccess";
-if (!is_file($htaccessLogFolderTarget)) {
+if (!file_exists($htaccessLogFolderTarget)) {
     copy($htaccessForLogFolderSource, $htaccessLogFolderTarget);
 }
 
@@ -427,10 +427,10 @@ Vars::set("disabledModules", $moduleManager->getDisabledModuleNames());
 // class of KCFinder
 
 ModelRegistry::loadModuleModels();
+
 TypeMapper::loadMapping();
 HelperRegistry::loadModuleHelpers();
 ControllerRegistry::loadModuleControllers();
-
 require_once dirname(__file__) . "/lib/templating.php";
 
 do_event("before_init");

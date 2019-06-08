@@ -620,12 +620,12 @@ function apply_filter($text, $type) {
         $escapedName = ModuleHelper::underscoreToCamel($type . "_filter");
         if ($controller and method_exists($controller, $escapedName)) {
             $text = $controller->$escapedName($text);
-        } else if (is_file($module_content_filter_file1)) {
+        } else if (file_exists($module_content_filter_file1)) {
             require_once $module_content_filter_file1;
             if (function_exists($modules[$i] . "_" . $type . "_filter")) {
                 $text = call_user_func($modules[$i] . "_" . $type . "_filter", $text);
             }
-        } else if (is_file($module_content_filter_file2)) {
+        } else if (file_exists($module_content_filter_file2)) {
             require_once $module_content_filter_file2;
             if (function_exists($modules[$i] . "_" . $type . "_filter")) {
                 $text = call_user_func($modules[$i] . "_" . $type . "_filter", $text);
@@ -842,7 +842,7 @@ function get_output_favicon_code() {
     }
     $path = ULICMS_DATA_STORAGE_ROOT . "/content/images/favicon.ico";
     $html = "";
-    if (is_file($path)) {
+    if (file_exists($path)) {
         $url .= "?time=" . File::getLastChanged($path);
         $html = '<link rel="icon" href="' . $url . '" type="image/x-icon" />' . '<link rel="shortcut icon" href="' . $url . '" type="image/x-icon" />';
     }

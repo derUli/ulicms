@@ -42,6 +42,7 @@ class TypeMapper {
         $modules = getAllModules();
         foreach ($modules as $module) {
             $mappings = getModuleMeta($module, "type_classes");
+
             if ($mappings) {
                 foreach ($mappings as $key => $value) {
                     if (StringHelper::isNullOrEmpty($value)) {

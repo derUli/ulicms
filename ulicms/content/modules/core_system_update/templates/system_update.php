@@ -1,7 +1,7 @@
 <?php
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("update_system")) {
-    if (is_file(Path::resolve("ULICMS_ROOT/update.php"))) {
+    if (file_exists(Path::resolve("ULICMS_ROOT/update.php"))) {
         ?>
 
         <div class="alert alert-danger">

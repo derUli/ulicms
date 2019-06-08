@@ -108,8 +108,8 @@ class Module {
 
     public function hasAdminPage() {
         $controller = ModuleHelper::getMainController($this->name);
-        return (is_file(getModuleAdminFilePath($this->name))
-                or is_file(getModuleAdminFilePath2($this->name))
+        return (file_exists(getModuleAdminFilePath($this->name))
+                or file_exists(getModuleAdminFilePath2($this->name))
                 or ( $controller and method_exists($controller, "settings"))
                 or ( getModuleMeta($this->name, "main_class")) and
                 getModuleMeta($this->name, "admin_permission"));

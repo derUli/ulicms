@@ -150,7 +150,7 @@ class DesignSettingsController extends Controller {
         );
         foreach ($screenshotFiles as $file) {
             $fullPath = getTemplateDirPath($theme) . $file;
-            if (is_file($fullPath)) {
+            if (file_exists($fullPath)) {
                 HTMLResult(UliCMS\HTML\imageTag($fullPath));
             }
         }

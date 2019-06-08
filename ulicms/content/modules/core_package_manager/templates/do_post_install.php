@@ -5,11 +5,11 @@ if ($permissionChecker->hasPermission("update_system")) {
     <h1><?php translate("run_post_install_script"); ?></h1>
     <?php
     $postinstall = ULICMS_DATA_STORAGE_ROOT . "/post-install.php";
-    if (is_file($postinstall)) {
+    if (file_exists($postinstall)) {
         require $postinstall;
         unlink($postinstall);
         ?>
-        <?php if (!is_file($postinstall)) { ?>
+        <?php if (!file_exists($postinstall)) { ?>
             <p><?php translate("finished"); ?></p>
         <?php } ?>
         <?php

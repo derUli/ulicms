@@ -30,7 +30,7 @@ class Translation {
 
     public static function includeCustomLangFile($lang) {
         $file = ULICMS_ROOT . "/lang/custom/" . basename($lang) . ".php";
-        if (is_file($file)) {
+        if (file_exists($file)) {
             require_once $file;
         }
     }
@@ -40,12 +40,12 @@ class Translation {
         foreach ($modules as $module) {
             $file = getModulePath($module, true) . "/lang/" . $lang . ".php";
 
-            if (is_file($file)) {
+            if (file_exists($file)) {
                 require_once $file;
             } else {
                 $file = getModulePath($module, true) . "/lang/en.php";
 
-                if (is_file($file)) {
+                if (file_exists($file)) {
                     require_once $file;
                 }
             }
@@ -55,11 +55,11 @@ class Translation {
     public static function loadCurrentThemeLanguageFiles($lang) {
         $modules = getAllModules();
         $file = getTemplateDirPath(get_theme(), true) . "/lang/" . $lang . ".php";
-        if (is_file($file)) {
+        if (file_exists($file)) {
             require_once $file;
         } else {
             $file = getTemplateDirPath(get_theme(), true) . "/lang/en.php";
-            if (is_file($file)) {
+            if (file_exists($file)) {
                 require_once $file;
             }
         }

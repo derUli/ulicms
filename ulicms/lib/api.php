@@ -437,8 +437,8 @@ function getFontSizes() {
 }
 
 function getModuleMeta($module, $attrib = null) {
-    $metadata_file = ModuleHelper::buildRessourcePath($module, "metadata.json");
-    if (!file_exists($metadata_file)) {
+    $metadata_file = ModuleHelper::buildModuleRessourcePath($module, "metadata.json", true);
+    if (!file_exists($metadata_file) || is_dir($metadata_file)) {
         return null;
     }
 
@@ -456,7 +456,7 @@ function getModuleMeta($module, $attrib = null) {
 function getThemeMeta($theme, $attrib = null) {
     $retval = null;
     $metadata_file = getTemplateDirPath($theme, true) . "metadata.json";
-    if (is_file($metadata_file)) {
+    if (file_exists($metadata_file)) {
         $data = !Vars::get("theme_{$theme}_meta") ? file_get_contents($metadata_file) : Vars::get("theme_{$theme}_meta");
 
         if (is_string($data)) {
@@ -476,7 +476,7 @@ function getThemeMeta($theme, $attrib = null) {
 
 function getModuleName($module) {
     $name_file = getModulePath($module) . $module . "_name.php";
-    if (!is_file($name_file)) {
+    if (!file_exists($name_file)) {
         return $module;
     }
     require_once $name_file;
@@ -523,7 +523,7 @@ function getSystemLanguage() {
     } else {
         $lang = "de";
     }
-    if (!is_file(getLanguageFilePath($lang))) {
+    if (!file_exists(getLanguageFilePath($lang))) {
         $lang = "de";
     }
     return $lang;
@@ -647,13 +647,13 @@ function do_event($name, $runs = ModuleEventConstants::RUNS_ONCE) {
         $escapedName = ModuleHelper::underscoreToCamel($name);
         if ($controller and method_exists($controller, $escapedName)) {
             echo $controller->$escapedName();
-        } else if (is_file($file1)) {
+        } else if (file_exists($file1)) {
             if ($runs === ModuleEventConstants::RUNS_MULTIPLE) {
                 require $file1;
             } else {
                 require_once $file1;
             }
-        } else if (is_file($file2)) {
+        } else if (file_exists($file2)) {
 
             if ($runs === ModuleEventConstants::RUNS_MULTIPLE) {
                 require $file1;
@@ -859,7 +859,7 @@ function buildSEOUrl($page = false, $redirection = null, $format = "html") {
 
     $seo_url = "";
 
-    if (is_file("backend.php")) {
+    if (file_exists("backend.php")) {
         $seo_url .= "../";
     }
     $seo_url .= $page;
@@ -873,7 +873,7 @@ function getModulePath($module, $abspath = false) {
     }
     if (ULICMS_ROOT == ULICMS_DATA_STORAGE_ROOT and ! defined("ULICMS_DATA_STORAGE_URL")) {
         // Frontend Directory
-        if (is_file("CMSConfig.php")) {
+        if (file_exists("CMSConfig.php")) {
             $module_folder = "content/modules/";
         } // Backend Directory
         else {
@@ -1026,9 +1026,9 @@ function replaceShortcodesWithModules($string, $replaceOther = true) {
         $module_mainfile_path = getModuleMainFilePath($thisModule);
         $module_mainfile_path2 = getModuleMainFilePath2($thisModule);
 
-        if (is_file($module_mainfile_path) and ( str_contains($stringToReplace1, $string) or str_contains($stringToReplace2, $string))) {
+        if (file_exists($module_mainfile_path) and ( str_contains($stringToReplace1, $string) or str_contains($stringToReplace2, $string))) {
             require_once $module_mainfile_path;
-        } else if (is_file($module_mainfile_path2)) {
+        } else if (file_exists($module_mainfile_path2)) {
             require_once $module_mainfile_path2;
         } else {
             $html_output = "<p class='ulicms_error'>Das Modul " . $thisModule . " konnte nicht geladen werden.</p>";
@@ -1333,9 +1333,9 @@ function uninstall_module($name, $type = "module") {
                 $mainController = ModuleHelper::getMainController($name);
                 if ($mainController and method_exists($mainController, "uninstall")) {
                     $mainController->uninstall();
-                } else if (is_file($uninstall_script)) {
+                } else if (file_exists($uninstall_script)) {
                     require $uninstall_script;
-                } else if (is_file($uninstall_script2)) {
+                } else if (file_exists($uninstall_script2)) {
                     require $uninstall_script2;
                 }
                 sureRemoveDir($moduleDir, true);

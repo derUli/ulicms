@@ -22,9 +22,9 @@ if (!defined("LOADED_LANGUAGE_FILE")) {
 
     setLocaleByLanguage();
 
-    if (faster_in_array($_SESSION["language"], $languages) && is_file(getLanguageFilePath($_SESSION["language"]))) {
+    if (faster_in_array($_SESSION["language"], $languages) && file_exists(getLanguageFilePath($_SESSION["language"]))) {
         require_once getLanguageFilePath($_SESSION["language"]);
-    } else if (is_file(getLanguageFilePath("en"))) {
+    } else if (file_exists(getLanguageFilePath("en"))) {
         require getLanguageFilePath("en");
     }
 

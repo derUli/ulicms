@@ -1,7 +1,6 @@
 <?php
 
 // required because my local XAMPP is sometimes in wrong folder, so includes will fail
-chdir(dirname(__FILE__));
 
 require_once "../init.php";
 
@@ -18,9 +17,9 @@ setLanguageByDomain();
 do_event("after_set_language_by_domain");
 
 $syslang = getSystemLanguage();
-if (is_file(getLanguageFilePath($syslang))) {
+if (file_exists(getLanguageFilePath($syslang))) {
     require_once getLanguageFilePath($syslang);
-} else if (is_file(getLanguageFilePath("en"))) {
+} else if (file_exists(getLanguageFilePath("en"))) {
     require_once getLanguageFilePath("en");
 }
 Translation::loadAllModuleLanguageFiles($syslang);
@@ -67,3 +66,4 @@ do_event("after_backend_run_methods");
 
 $renderer = new BackendPageRenderer(BackendHelper::getAction());
 $renderer->render();
+

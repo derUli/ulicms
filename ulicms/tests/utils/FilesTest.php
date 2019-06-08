@@ -76,9 +76,9 @@ class FilesTest extends \PHPUnit\Framework\TestCase {
             "$baseDir/bar/1");
 
         foreach ($testFiles as $file) {
-            $this->assertFalse(is_file($file));
+            $this->assertFalse(file_exists($file));
             file_put_contents($file, "hallo");
-            $this->assertTrue(is_file($file));
+            $this->assertTrue(file_exists($file));
         }
 
         sureRemoveDir($baseDir, true);
@@ -101,9 +101,9 @@ class FilesTest extends \PHPUnit\Framework\TestCase {
             "$baseDir/bar/1");
 
         foreach ($testFiles as $file) {
-            $this->assertFalse(is_file($file));
+            $this->assertFalse(file_exists($file));
             file_put_contents($file, "hallo");
-            $this->assertTrue(is_file($file));
+            $this->assertTrue(file_exists($file));
         }
 
         sureRemoveDir($baseDir, false);

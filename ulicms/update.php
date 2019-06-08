@@ -3,7 +3,7 @@
 $configFile = "CMSConfig.php";
 
 // since UliCMS 2018.3 the config file has a new name
-if (is_file("cms-config.php") and ! is_file($configFile)) {
+if (file_exists("cms-config.php") and ! file_exists($configFile)) {
     // update config file
     $content = file_get_contents("cms-config.php");
     $content = str_replace("class config", "class CMSConfig", $content);
@@ -30,7 +30,7 @@ if (!is_dir(ULICMS_CONFIGURATIONS)) {
 
 $defaultConfig = Path::resolve("ULICMS_CONFIGURATIONS/default.php");
 
-if (!is_file($defaultConfig)) {
+if (!file_exists($defaultConfig)) {
     rename($configFile, $defaultConfig);
 }
 

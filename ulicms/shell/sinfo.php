@@ -78,7 +78,7 @@ if (count($argv) > 2) {
                 sinfo_usage();
             }
             $file = $argv[1];
-            if (!is_file($file)) {
+            if (!file_exists($file)) {
                 echo "File " . basename($file) . " not found!\n";
                 exit();
             }

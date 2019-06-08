@@ -18,7 +18,7 @@
 
     $entries[] = new MenuEntry('<i class="fas fa-box"></i> ' . get_translation("packages"), ModuleHelper::buildActionURL("packages"), "modules", "list_packages");
 
-    if (is_file(Path::resolve("ULICMS_ROOT/update.php"))) {
+    if (file_exists(Path::resolve("ULICMS_ROOT/update.php"))) {
         $entries[] = new MenuEntry('<i class="fas fa-sync"></i> ' . get_translation("update"), "?action=system_update", "update_system", "update_system");
     }
 

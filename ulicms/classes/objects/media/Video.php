@@ -164,19 +164,19 @@ class Video extends Model {
             if ($deletePhysical) {
                 if ($this->getMp4File()) {
                     $file = Path::resolve("ULICMS_DATA_STORAGE_ROOT/content/videos/" . basename($this->getMP4File()));
-                    if (is_file($file)) {
+                    if (file_exists($file)) {
                         @unlink($file);
                     }
                 }
                 if ($this->getOggFile()) {
                     $file = Path::resolve("ULICMS_DATA_STORAGE_ROOT/content/videos/" . basename($this->getOggFile()));
-                    if (is_file($file)) {
+                    if (file_exists($file)) {
                         @unlink($file);
                     }
                 }
                 if ($this->getWebmFile()) {
                     $file = Path::resolve("ULICMS_DATA_STORAGE_ROOT/content/videos/" . basename($this->getWebmFile()));
-                    if (is_file($file)) {
+                    if (file_exists($file)) {
                         @unlink($file);
                     }
                 }
