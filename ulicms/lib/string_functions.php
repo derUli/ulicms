@@ -154,3 +154,13 @@ function str_replace_first($search, $replace, $subject) {
     }
     return $subject;
 }
+
+
+function esc($value) {
+    Template::escape($value);
+}
+
+function _esc($value) {
+    return Template::getEscape($value);
+}
+

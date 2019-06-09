@@ -5,7 +5,6 @@ use Negotiation\LanguageNegotiator;
 use UliCMS\Constants\ModuleEventConstants;
 use UliCMS\Models\Content\Types\DefaultContentTypes;
 use UliCMS\Utils\CacheUtil;
-use Carbon\Carbon;
 
 function idefine($key, $value) {
     $key = strtoupper($key);

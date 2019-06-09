@@ -5,14 +5,6 @@ use UliCMS\Models\Content\Categories;
 use UliCMS\Models\Content\Types\DefaultContentTypes;
 use UliCMS\Utils\File;
 
-function esc($value) {
-    Template::escape($value);
-}
-
-function _esc($value) {
-    return Template::getEscape($value);
-}
-
 function html5_doctype() {
     echo Template::getHtml5Doctype();
 }
