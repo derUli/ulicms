@@ -1,4 +1,5 @@
 <?php
+
 define("TRANSLATION_YOUR_LOGO", "Ihr Logo");
 define("TRANSLATION_UPLOAD_NEW_LOGO", "Neues Logo hochladen");
 define("TRANSLATION_UPLOAD", "Hochladen");
@@ -49,3 +50,5 @@ add_translation("sameorigin", "Nur innerhalb der selben Domain");
 
 add_translation("x_xss_protection", "XSS-Schutz");
 add_translation("on_block", "An (Block Modus)");
+
+add_translation("no_html_allowed", "HTML ist in der Zeichenkette nicht erlaubt");

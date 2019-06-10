@@ -1,4 +1,5 @@
 <?php
+
 define("TRANSLATION_YOUR_LOGO", "Your Logo");
 define("TRANSLATION_UPLOAD_NEW_LOGO", "Upload new logo");
 define("TRANSLATION_UPLOAD", "Upload");
@@ -50,3 +51,5 @@ add_translation("sameorigin", "Only Same Domain");
 
 add_translation("x_xss_protection", "XSS Protection");
 add_translation("on_block", "On (Block Mode)");
+
+add_translation("no_html_allowed", "String must not contain HTML.");

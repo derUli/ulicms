@@ -2088,8 +2088,7 @@
         "ext-mbstring": "*",
         "ext-openssl": "*",
         "ext-dom": "*",
-        "ext-libxml": "*",
-        "ext-ldap": "*"
+        "ext-libxml": "*"
     },
     "platform-dev": []
 }
