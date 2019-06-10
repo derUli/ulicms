@@ -1,8 +1,16 @@
 <?php
 
+use function UliCMS\HTML\stringContainsHtml;
+
 class LanguageController extends Controller {
 
     public function createPost() {
+        // Fix for security issue CVE-2019-11398
+        if (stringContainsHtml($_POST["name"])
+                or stringContainsHtml($_POST["language_code"])) {
+            ExceptionResult(get_translation("no_html_allowed"));
+        }
+
         $name = db_escape($_POST["name"]);
         $language_code = db_escape($_POST["language_code"]);
         do_event("before_create_language");

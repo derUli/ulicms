@@ -3,6 +3,7 @@
 use function UliCMS\HTML\text;
 use function UliCMS\HTML\imageTag;
 use function UliCMS\HTML\imageTagInline;
+use function UliCMS\HTML\stringContainsHtml;
 
 class HtmlFunctionsTest extends \PHPUnit\Framework\TestCase {
 
@@ -35,6 +36,14 @@ class HtmlFunctionsTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('<img class="my-awesome-image" title="Very awesome image" src="' . $expectedUrl . '">', imageTagInline($imagePath,
                         array("class" => "my-awesome-image",
                             "title" => "Very awesome image")));
+    }
+
+    public function testStringContainsHtmlReturnsTrue() {
+        $this->assertTrue(stringContainsHtml('Hallo <script>alert("xss");</script> Welt!'));
+    }
+
+    public function testStringContainsHtmlReturnsFalse() {
+        $this->assertFalse(stringContainsHtml("Hallo Welt"));
     }
 
 }

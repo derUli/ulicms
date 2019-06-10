@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\CoreContent\Models\ViewModels\DiffViewModel;
+use function UliCMS\HTML\stringContainsHtml;
 
 class PageController extends Controller {
 
@@ -8,6 +9,11 @@ class PageController extends Controller {
     public function createPost() {
         $acl = new ACL();
         if ($_POST["slug"] != "") {
+            // Fix for security issue CVE-2019-11398
+            if (stringContainsHtml($_POST["slug"])) {
+                ExceptionResult(get_translation("no_html_allowed"));
+            }
+
             $slug = db_escape($_POST["slug"]);
             $page_title = db_escape($_POST["page_title"]);
             $alternate_title = db_escape($_POST["alternate_title"]);
@@ -194,6 +200,11 @@ class PageController extends Controller {
     public function editPost() {
         $acl = new ACL();
         // @FIXME: Berechtigungen pages_edit_own und pages_edit_others prüfen.
+        // Fix for security issue CVE-2019-11398
+        if (stringContainsHtml($_POST["slug"])) {
+            ExceptionResult(get_translation("no_html_allowed"));
+        }
+
         $slug = db_escape($_POST["slug"]);
         $page_title = db_escape($_POST["page_title"]);
         $activated = intval($_POST["activated"]);
