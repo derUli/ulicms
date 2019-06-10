@@ -46,4 +46,4 @@ add_translation("not_found", "Nicht gefunden");
 
 add_translation("make_default", "Als Standard festlegen");
 
-add_translation("no_html_allowed", "String must not contain HTML.");
+add_translation("no_html_allowed", "HTML ist in der Zeichenkette nicht erlaubt");
