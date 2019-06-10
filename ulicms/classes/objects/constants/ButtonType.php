@@ -5,7 +5,10 @@ namespace UliCMS\Constants;
 // Bootstrap 3.x Button Styles
 class ButtonType {
 
-    const TXPE_BASIC = "btn";
+    const BUTTON_BUTTON = "button";
+    const BUTTON_SUBMIT = "submit";
+    const BUTTON_RESET = "reset";
+    const TYPE_BASIC = "btn";
     const TYPE_DEFAULT = "btn btn-default";
     const TYPE_PRIMARY = "btn btn-primary";
     const TYPE_SUCCESS = "btn btn-success";

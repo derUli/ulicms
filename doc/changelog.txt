@@ -34,6 +34,13 @@ Neue API-Methoden:
 * is_past($datetime = null)
 * is_future($datetime = null)
 * get_carbon($datetime = null)
+* Button::button($text, $type = ButtonType::BUTTON_SUBMIT, $htmlAttributes = [], $allowHtml = false)
+* Button::default($text, $type = ButtonType::BUTTON_SUBMIT, $htmlAttributes = [], $allowHtml = false)
+* Button::primary($text, $type = ButtonType::BUTTON_SUBMIT, $htmlAttributes = [], $allowHtml = false)
+* Button::info($text, $type = ButtonType::BUTTON_SUBMIT, $htmlAttributes = [], $allowHtml = false)
+* Button::warning($text, $type = ButtonType::BUTTON_SUBMIT, $htmlAttributes = [], $allowHtml = false)
+* Button::danger($text, $type = ButtonType::BUTTON_SUBMIT, $htmlAttributes = [], $allowHtml = false)
+* Button::link($text, $type = ButtonType::BUTTON_SUBMIT, $htmlAttributes = [], $allowHtml = false)
 
 Entfernte API-Methoden:
 * addUser()

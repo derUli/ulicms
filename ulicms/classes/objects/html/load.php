@@ -7,6 +7,7 @@ $classes = array(
     "ListItem",
     "Input",
     "Alert",
+    "Button",
     "functions",
     "Form"
 );
