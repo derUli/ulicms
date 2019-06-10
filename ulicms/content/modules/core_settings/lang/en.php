@@ -1,4 +1,5 @@
 <?php
+
 define("TRANSLATION_YOUR_LOGO", "Your Logo");
 define("TRANSLATION_UPLOAD_NEW_LOGO", "Upload new logo");
 define("TRANSLATION_UPLOAD", "Upload");
@@ -39,3 +40,5 @@ add_translation("comments_must_be_approved", "Comments muste be approved");
 add_translation("commentable_content_types", "Commentable Content Types");
 
 add_translation("keep_spam_ips", "Keep ip addresses of spam comments");
+
+add_translation("no_html_allowed", "String must not contain HTML.");

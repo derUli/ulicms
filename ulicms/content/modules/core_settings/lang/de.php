@@ -1,4 +1,5 @@
 <?php
+
 define("TRANSLATION_YOUR_LOGO", "Ihr Logo");
 define("TRANSLATION_UPLOAD_NEW_LOGO", "Neues Logo hochladen");
 define("TRANSLATION_UPLOAD", "Hochladen");
@@ -38,3 +39,5 @@ add_translation("comments_must_be_approved", "Kommentare müssen genehmigt werde
 add_translation("commentable_content_types", "Kommentierbare Inhaltstypen");
 
 add_translation("keep_spam_ips", "IP-Adressen von Spamkommentaren nicht löschen");
+
+add_translation("no_html_allowed", "HTML ist in der Zeichenkette nicht erlaubt");
