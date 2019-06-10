@@ -6,6 +6,7 @@ use function UliCMS\HTML\imageTagInline;
 use function UliCMS\HTML\icon;
 use function UliCMS\HTML\link;
 use function UliCMS\HTML\button_link;
+use function UliCMS\HTML\stringContainsHtml;
 use UliCMS\Constants\LinkTarget;
 use UliCMS\Constants\ButtonType;
 
@@ -92,6 +93,14 @@ class HtmlFunctionsTest extends \PHPUnit\Framework\TestCase {
                 button_link("https://www.google.de", icon("fa fa fa-google"), ButtonType::TYPE_INFO, true, null,
                         array("data-hello" => "world",
                             "class" => "awesome-button")));
+    }
+
+    public function testStringContainsHtmlReturnsTrue() {
+        $this->assertTrue(stringContainsHtml('Hallo <script>alert("xss");</script> Welt!'));
+    }
+
+    public function testStringContainsHtmlReturnsFalse() {
+        $this->assertFalse(stringContainsHtml("Hallo Welt"));
     }
 
 }

@@ -47,3 +47,5 @@ add_translation("error_pages", "Error Pages");
 add_translation("not_found", "Not Found");
 
 add_translation("make_default", "Make Default");
+
+add_translation("no_html_allowed", "HTML ist in der Zeichenkette nicht erlaubt");

@@ -400,6 +400,11 @@ class PageController extends Controller {
 
         $errors = $validation->errors()->all('<li>:message</li>');
 
+        // Fix for security issue CVE-2019-11398
+        if (stringContainsHtml($_POST["slug"])) {
+            ExceptionResult(get_translation("no_html_allowed"));
+        }
+
         if ($validation->fails()) {
             $html = '<ul>';
             foreach ($errors as $error) {

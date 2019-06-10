@@ -58,3 +58,7 @@ function imageTagInline($file, $htmlAttributes = []) {
 
     return imageTag($url, $htmlAttributes);
 }
+
+function stringContainsHtml($string) {
+    return $string != strip_tags($string);
+}

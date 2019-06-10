@@ -41,6 +41,7 @@ Neue API-Methoden:
 * Button::warning($text, $type = ButtonType::BUTTON_SUBMIT, $htmlAttributes = [], $allowHtml = false)
 * Button::danger($text, $type = ButtonType::BUTTON_SUBMIT, $htmlAttributes = [], $allowHtml = false)
 * Button::link($text, $type = ButtonType::BUTTON_SUBMIT, $htmlAttributes = [], $allowHtml = false)
+* UliCMS\HTML\stringContainsHtml($string)
 
 Entfernte API-Methoden:
 * addUser()
@@ -51,6 +52,9 @@ Fehlerkorrekturen:
 Entfernte Features:
 * Unterstützung für veraltete unsichere Passwortverschlüsselung entfernt
 * Unbenutztes Feld "Homepage" in den Metadaten eines Artikels entfernt
+
+Sicherheit:
+* Fix für XSS-Sicherheitslücke CVE-2019-11398
 
 Bekannte Probleme:
 * CodeMirror kann im Moment nicht als Standard HTML-Editor festgelegt werden. Das Feature ist auf Grund eines Bugs vorerst deaktiviert.
