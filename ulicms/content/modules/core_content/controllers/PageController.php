@@ -8,6 +8,7 @@ use UliCMS\Security\PermissionChecker;
 use UliCMS\Models\Content\TypeMapper;
 use UliCMS\Constants\LinkTarget;
 use UliCMS\Utils\CacheUtil;
+use function UliCMS\HTML\stringContainsHtml;
 
 class PageController extends Controller {
 
