@@ -179,7 +179,7 @@ $(function () {
 
 // this suggest a slug which may be used as the url for a page
 function suggestSlug(text) {
-    var pageSlug = slug(text);
+    var pageSlug = slug(text, {lower: true});
     $("#slug").val(pageSlug);
 }
 
