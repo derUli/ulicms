@@ -31,8 +31,9 @@ class LanguageController extends Controller {
     }
 
     public function deletePost() {
+        $id = Request::getVar("id", null, "int");
         do_event("before_delete_language");
-        db_query("DELETE FROM " . tbname("languages") . " WHERE id = " . intval($_GET["id"]));
+        db_query("DELETE FROM " . tbname("languages") . " WHERE id = " . $id);
         do_event("after_delete_language");
         CacheUtil::clearPageCache();
         Request::redirect(ModuleHelper::buildActionURL("languages"));

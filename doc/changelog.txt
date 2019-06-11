@@ -5,6 +5,7 @@ Neue Features:
 * Neues Standardtheme "2020"
 * Design-Einstellungen: Vorschaubild vom ausgewählten Theme
 * controller_function_permissions unterstüzt nun Wildcards
+* Sprachen können wieder gelöscht werden
 
 Neue API-Methoden:
 * UliCMS\HTML\icon($classes, $htmlAttributes = array())
