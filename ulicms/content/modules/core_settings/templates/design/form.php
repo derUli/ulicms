@@ -126,7 +126,7 @@ if (!$permissionChecker->hasPermission("design")) {
                                         ?>
                                         data-preview-url="<?php
                                         echo ModuleHelper::buildMethodCallUrl(DesignSettingsController::class, "getThemePreview",
-                                                "theme={$th}");
+                                                "theme ={$th}");
                                         ?>">
                                             <?php
                                             echo $th;
@@ -222,7 +222,7 @@ if (!$permissionChecker->hasPermission("design")) {
             <tr>
                 <td><strong><?php translate("font_size"); ?> </strong>
 
-                <td><select name="font-size">
+                <td> <select name="font-size">
                         <?php
                         foreach ($font_sizes as $size) {
                             echo '<option value="' . $size . '"';
@@ -256,7 +256,7 @@ if (!$permissionChecker->hasPermission("design")) {
                 <td><strong><?php translate("BACKGROUNDCOLOR"); ?> </strong></td>
                 <td><input name="body-background-color"
                            class="jscolor {hash:true,caps:true}"
-                           value="<?php
+                           value ="<?php
                            echo _esc(Settings::get("body-background-color"));
                            ?>"></td>
             </tr>
@@ -325,9 +325,8 @@ if (!$permissionChecker->hasPermission("design")) {
         <button type="submit" class="btn btn-primary" name="submit">
             <i class="fas fa-save"></i> <?php translate("save_changes"); ?></button>
     </p>
-    <?php echo ModuleHelper::endForm(); ?>
-
     <?php
+    echo ModuleHelper::endForm();
     $translation = new JSTranslation();
     $translation->addKey("changes_was_saved");
     $translation->render();

@@ -123,7 +123,7 @@ class FilesTest extends \PHPUnit\Framework\TestCase {
         $files = array(
             Path::resolve("ULICMS_ROOT/init.php"),
             Path::resolve("ULICMS_ROOT/composer.json"),
-            Path::resolve("ULICMS_ROOT/lib/css/core.css")
+            Path::resolve("ULICMS_ROOT/lib/css/core.scss")
         );
 
         $minimumResult = mktime(0, 0, 0, 1, 1, 2019);

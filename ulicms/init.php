@@ -449,5 +449,3 @@ $installed_patches = implode(";", $installed_patches);
 if (!defined("PATCH_CHECK_URL")) {
     define("PATCH_CHECK_URL", "https://patches.ulicms.de/?v=" . urlencode(implode(".", $version->getInternalVersion())) . "&installed_patches=" . urlencode($installed_patches));
 }
-
-

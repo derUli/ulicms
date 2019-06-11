@@ -40,7 +40,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
     public function testStylesheetQueue() {
         $filemtime = 0;
         $files = array(
-            "lib/css/core.css",
+            "lib/css/core.scss",
             "node_modules/bootstrap/dist/css/bootstrap.css",
             "node_modules/bootstrap/dist/css/bootstrap-theme.css",
             "admin/css/modern.scss"
@@ -76,7 +76,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         $styles = array(
             "tests/fixtures/scss/style1.scss",
             "tests/fixtures/scss/style2.scss",
-            "lib/css/core.css"
+            "lib/css/core.scss"
         );
         foreach ($styles as $style) {
             enqueueStylesheet($style);

@@ -136,8 +136,9 @@ if ($permissionChecker->hasPermission("privacy_settings")) {
     <?php
     enqueueScriptFile("scripts/privacy.js");
     combinedScriptHtml();
+
+    echo ModuleHelper::endForm();
     ?>
-    <?php echo ModuleHelper::endForm(); ?>
     </div>
     <?php
 } else {

@@ -148,8 +148,8 @@ echo ModuleHelper::buildMethodCallForm(CommentsController::class, "doAction", ar
             <i class="fas fa-running"></i> <?php translate("do_action") ?></button>
     </div>
 </div>
-<?php ModuleHelper::endForm(); ?>
 <?php
+echo ModuleHelper::endForm();
+
 enqueueScriptFile(ModuleHelper::buildRessourcePath("core_comments", "js/admin.js"));
 combinedScriptHtml();
-?>

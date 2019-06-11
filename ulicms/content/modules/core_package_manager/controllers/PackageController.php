@@ -57,7 +57,6 @@ class PackageController extends MainClass {
     public function uninstallModule() {
         $name = Request::getVar("name");
         $type = "module";
-        $pkg = new PackageManager ();
         if (uninstall_module($name, $type)) {
             $this->redirectToPackageView();
         } else {
@@ -71,7 +70,6 @@ class PackageController extends MainClass {
     public function uninstallTheme() {
         $name = Request::getVar("name");
         $type = "theme";
-        $pkg = new PackageManager ();
         if (uninstall_module($name, $type)) {
             $this->redirectToPackageView();
         } else {

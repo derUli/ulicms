@@ -67,7 +67,6 @@ if ($permissionChecker->hasPermission("favicon")) {
             </tr>
         </table>
     </form>
-
     <?php
 } else {
     noPerms();

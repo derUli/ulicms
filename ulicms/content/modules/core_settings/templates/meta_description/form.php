@@ -57,13 +57,10 @@ if ($permissionChecker->hasPermission("settings_simple")) {
             </td>
         </tr>
     </table>
-    <?php echo ModuleHelper::endForm(); ?>
     <?php
+    echo ModuleHelper::endForm();
     enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/meta_description.js"));
     combinedScriptHtml();
-    ?>
-
-    <?php
 } else {
     noPerms();
 }

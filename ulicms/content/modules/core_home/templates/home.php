@@ -1,7 +1,4 @@
 <?php
-
-use UliCMS\Helpers\NumberFormatHelper;
-
 $permissionChecker = new ACL();
 
 $controller = ControllerRegistry::get();
@@ -79,7 +76,7 @@ if ($permissionChecker->hasPermission("dashboard")) {
                                if (Settings::get("user/" . get_user_id() . "/show_positions"))
                                    echo "checked";
                                ?>>
-                        <?php translate("show_positions_in_menus"); ?></label>
+                               <?php translate("show_positions_in_menus"); ?></label>
                     </label>
                 </form>
             </div>

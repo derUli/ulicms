@@ -19,7 +19,8 @@ if ($permissionChecker->hasPermission("expert_settings") and $permissionChecker-
     <strong><?php translate("option"); ?></strong>
     <br />
     <input type="text" name="name" value="<?php Template::escape($name) ?>"
-           <?php if ($name) echo "readonly"; ?>>
+    <?php if ($name) echo "readonly"; ?>
+           >
     <br />
     <br />
     <strong><?php translate("value"); ?>
@@ -29,9 +30,8 @@ if ($permissionChecker->hasPermission("expert_settings") and $permissionChecker-
     <br />
     <br />
     <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> <?php translate("create_option"); ?></button>
-    <?php echo ModuleHelper::endForm(); ?>
-
     <?php
+    echo ModuleHelper::endForm();
 } else {
     noPerms();
 }

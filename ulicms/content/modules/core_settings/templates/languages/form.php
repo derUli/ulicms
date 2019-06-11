@@ -88,12 +88,13 @@ if ($permissionChecker->hasPermission("languages")) {
                             <?php } ?>
                         </td>
                         <td>
-                            <?php echo ModuleHelper::deleteButton(ModuleHelper::buildMethodCallUrl(LanguageController::class, "delete"),
+                            <?php
+                            echo ModuleHelper::deleteButton(ModuleHelper::buildMethodCallUrl(LanguageController::class, "delete"),
                                     ["id" => $language->getID()]);
                             ?>
                         </td>
                     </tr>
-        <?php } ?>
+                <?php } ?>
             </tbody>
         </table>
         <?php

@@ -273,7 +273,7 @@ class PageController extends Controller {
     }
 
     public function resetFilters() {
-    // reset all filters
+        // reset all filters
         foreach ($_SESSION as $key => $value) {
             if (startsWith($key, "filter_")) {
                 unset($_SESSION[$key]);

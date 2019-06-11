@@ -158,8 +158,6 @@ if ($permissionChecker->hasPermission("banners") and $permissionChecker->hasPerm
         </form>
         <?php
     }
-    ?>
-    <?php
 } else {
     noPerms();
 }

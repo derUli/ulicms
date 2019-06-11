@@ -30,4 +30,4 @@ reset($comments);
         <?php } ?>
     </div>
     <?php
-}?>
+}

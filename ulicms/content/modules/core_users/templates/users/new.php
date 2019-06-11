@@ -142,8 +142,6 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
     );
     enqueueScriptFile("../node_modules/password-strength-meter/dist/password.min.js");
     combinedScriptHtml();
-    ?>
-    <?php
 } else {
     noPerms();
 }
