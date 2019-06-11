@@ -6,7 +6,6 @@ use function UliCMS\HTML\stringContainsHtml;
 class LanguageController extends Controller {
 
     public function createPost() {
-
         // Fix for security issue CVE-2019-11398
         if (stringContainsHtml($_POST["name"])
                 or stringContainsHtml($_POST["language_code"])) {

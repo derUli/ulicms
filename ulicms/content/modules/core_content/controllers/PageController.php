@@ -273,7 +273,7 @@ class PageController extends Controller {
     }
 
     public function resetFilters() {
-// reset all filters
+    // reset all filters
         foreach ($_SESSION as $key => $value) {
             if (startsWith($key, "filter_")) {
                 unset($_SESSION[$key]);
@@ -353,7 +353,7 @@ class PageController extends Controller {
         return (Database::getNumRows($result) <= 0);
     }
 
-// FIXME: There should be no html code in controller
+    // FIXME: There should be no html code in controller
     public function filterParentPages() {
         $lang = $_REQUEST["mlang"];
         $menu = $_REQUEST["mmenu"];
