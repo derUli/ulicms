@@ -180,7 +180,7 @@ $(function () {
 // this suggest a slug which may be used as the url for a page
 function suggestSlug(text) {
     var pageSlug = slug(text);
-    $("#slug").val(pageSlug);
+    $("#slug").val(pageSlug, {lower: true});
 }
 
 // this checks if a slug is free within the selected language
