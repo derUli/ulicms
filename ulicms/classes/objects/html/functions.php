@@ -18,7 +18,7 @@ function imageTag($file, $htmlAttributes = []) {
     return "<img {$attribHTML}>";
 }
 
-function button_link($url, $text, $type = null, $allowHtml = false, $target = null, $htmlAttributes = []) {
+function buttonLink($url, $text, $type = null, $allowHtml = false, $target = null, $htmlAttributes = []) {
     if (!isset($htmlAttributes["class"])) {
         $htmlAttributes["class"] = $type;
     } else {

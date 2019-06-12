@@ -29,7 +29,7 @@ Neue API-Methoden:
 * TypeMapper::getModel($type)
 * UliCMS\HTML\stringContainsHtml($string)
 * UliCMS\HTML\link($url, $text, $allowHtml = false, $target = null, $htmlAttributes = array())
-* UliCMS\HTML\button_link($url, $text, $type = null, $allowHtml = false, $target = null, $htmlAttributes = array())
+* UliCMS\HTML\buttonLink($url, $text, $type = null, $allowHtml = false, $target = null, $htmlAttributes = array())
 * is_today($datetime = null)
 * is_tomorrow($datetime = null)
 * is_yesterday($datetime = null)
