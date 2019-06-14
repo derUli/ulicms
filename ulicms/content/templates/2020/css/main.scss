@@ -6,7 +6,11 @@ $box-shadow-color: #545454;
 }
 
 html{
-    letter-spacing: 0.1rem;
+    letter-spacing: 0.02rem;
+}
+
+body{
+    line-height: 1.5em;
 }
 
 @-webkit-keyframes move-right-to-left {
@@ -215,6 +219,7 @@ h1, h2, h3, h4, h5, h6{
     line-height: 1.2em;
     font-weight: bolder;
     text-shadow: 2px 2px 2px rgb(100, 100, 100);
+    letter-spacing: 0.1rem;
 }
 
 strong{
