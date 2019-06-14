@@ -86,6 +86,8 @@ class DesignSettingsController extends Controller {
 
         CacheUtil::clearPageCache();
 
+        $this->generateSCSSToFile();
+
         HTTPStatusCodeResult(HttpStatusCode::OK);
     }
 
@@ -155,6 +157,37 @@ class DesignSettingsController extends Controller {
             }
         }
         HTTPStatusCodeResult(HttpStatusCode::NOT_FOUND);
+    }
+
+    public function generateSCSS() {
+        $settings = [
+            "header-background-color" => Settings::get("header-background-color"),
+            "body-text-color" => Settings::get("body-text-color"),
+            "body-background-color" => Settings::get("body-background-color"),
+            "default-font" => Settings::get("default_font") !== "google" ? Settings::get("default_font") : Settings::get("google-font"),
+            "font-size" => Settings::get("font-size")
+        ];
+
+        if (Settings::get("disable_custom_layout_options")) {
+            return null;
+        }
+
+        $output = "";
+
+        foreach ($settings as $var => $value) {
+            $output .= "\${$var}: {$value};\n";
+        }
+        return $output;
+    }
+
+    public function generateSCSSToFile() {
+        $scss = $this->generateSCSS();
+        if ($scss) {
+            $outputFile = Path::resolve("ULICMS_GENERATED/design_variables.scss");
+            file_put_contents($outputFile, $scss);
+            return $outputFile;
+        }
+        return null;
     }
 
 }

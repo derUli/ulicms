@@ -1,4 +1,13 @@
+@import 'design_variables';
+
 $default-vertical-margin: 10px;
+
+body{
+    font-family: $default-font;
+    font-size: $font-size;
+    background-color: $body-background-color;
+    color: $body-text-color;
+}
 
 /* Space out content a bit */
 #root {
@@ -167,6 +176,14 @@ nav .sub_menu {
 
 .slicknav_nav a {
     margin: 0 !important;
+}
+.slicknav_btn, .slicknav_nav, nav .active, nav .sub_menu li:hover, nav .menu_active_link
+{
+    background: $header-background-color;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: $header-background-color;
 }
 
 #mobile-nav {

@@ -3,5 +3,8 @@
     "version": "2.1.0",
     "menus": [
         "top"
+    ],
+    "disable_functions": [
+        "output_design_settings_styles"
     ]
 }

@@ -15,6 +15,8 @@ use function strbool;
 use function is_mobile;
 use function is_crawler;
 use function is_tablet;
+use ControllerRegistry;
+use DesignSettingsController;
 
 class CacheUtil {
 
@@ -81,6 +83,9 @@ class CacheUtil {
         // Sync modules table in database with modules folder
         $moduleManager = new ModuleManager();
         $moduleManager->sync();
+
+        $designSettingsController = ControllerRegistry::get(DesignSettingsController::class);
+        $designSettingsController->generateSCSSToFile();
 
         do_event("after_clear_cache");
     }

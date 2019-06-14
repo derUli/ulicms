@@ -222,6 +222,10 @@ if (!defined("ULICMS_CONTENT")) {
     define("ULICMS_CONTENT", ULICMS_DATA_STORAGE_ROOT . "/content/");
 }
 
+if (!defined("ULICMS_GENERATED")) {
+    define("ULICMS_GENERATED", ULICMS_CONTENT . "generated");
+}
+
 if (!defined("ULICMS_CONFIGURATIONS")) {
     define("ULICMS_CONFIGURATIONS", ULICMS_CONTENT . "/configurations/");
 }
@@ -230,6 +234,9 @@ if (!is_dir(ULICMS_CACHE)) {
 }
 if (!is_dir(ULICMS_LOG)) {
     mkdir(ULICMS_LOG);
+}
+if (!is_dir(ULICMS_GENERATED)) {
+    mkdir(ULICMS_GENERATED);
 }
 
 $htaccessForLogFolderSource = ULICMS_ROOT . "/lib/htaccess-deny-all.txt";

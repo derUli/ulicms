@@ -13,6 +13,8 @@ class Path {
         }
         $path = str_ireplace("ULICMS_TMP", rtrim(ULICMS_TMP, "/"), $path);
         $path = str_ireplace("ULICMS_CACHE", rtrim(ULICMS_CACHE, "/"), $path);
+        $path = str_ireplace("ULICMS_CONTENT", rtrim(ULICMS_CONTENT, "/"), $path);
+        $path = str_ireplace("ULICMS_GENERATED", rtrim(ULICMS_GENERATED, "/"), $path);
         $path = str_ireplace("ULICMS_LOG", rtrim(ULICMS_LOG, "/"), $path);
         $path = str_ireplace("\\", "/", $path);
         $path = rtrim($path, "/");

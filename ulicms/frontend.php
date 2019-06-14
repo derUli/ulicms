@@ -95,6 +95,8 @@ if (isset($_GET["format"]) and ! empty($_GET["format"])) {
     $format = "html";
 }
 
+setSCSSImportPaths([ULICMS_GENERATED]);
+
 do_event("before_http_header");
 
 $redirection = get_redirection();

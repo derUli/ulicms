@@ -346,16 +346,19 @@ class Template {
                 }
             }
             $cssCode = "body{
-font-family:" . $font . ";
-font-size:" . Settings::get("font-size") . ";
-background-color:" . Settings::get("body-background-color") . ";
-color:" . Settings::get("body-text-color") . ";
+font-family: " . $font . ";
+font-size: " . Settings::get("font-size") . ";
+background-color: " . Settings::get("body-background-color") . ";
+color: " . Settings::get("body-text-color") . ";
 }";
+
+            $disableFunctions = getThemeMeta(get_theme(), "disable_functions");
 
             $minifier = new Minify\CSS();
             $minifier->add($cssCode);
-
-            echo UliCMS\HTML\Style::FromString($minifier->minify());
+            if (!(is_array($disableFunctions) and in_array("output_design_settings_styles", $disableFunctions))) {
+                echo UliCMS\HTML\Style::FromString($minifier->minify());
+            }
 
             if (Settings::get("video_width_100_percent")) {
                 echo "<style type=\"text/css\">
