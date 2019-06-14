@@ -23,7 +23,7 @@ class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase {
 
     public function testGenerateSCSS() {
         $controller = ControllerRegistry::get(DesignSettingsController::class);
-        $scss = $controller->GenerateSCSS();
+        $scss = $controller->removeCommentFromCss($controller->GenerateSCSS());
         $this->assertGreaterThanOrEqual(5, substr_count($scss, "\n"));
         $lines = explode("\n", trim(normalizeLN($scss, "\n")));
         foreach ($lines as $line) {
@@ -37,7 +37,7 @@ class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertStringEndsWith("/content/generated/design_variables.scss", $file);
         $this->assertFileExists($file);
 
-        $fileContent = file_get_contents($file);
+        $fileContent = $controller->removeCommentFromCss(file_get_contents($file));
 
         $this->assertGreaterThanOrEqual(5, substr_count($fileContent, "\n"));
     }
