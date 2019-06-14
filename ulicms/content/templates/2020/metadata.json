@@ -7,6 +7,7 @@
     "disable_functions":
             [
                 "output_content",
-                "edit_button"
+                "edit_button",
+                "output_design_settings_styles"
             ]
 }

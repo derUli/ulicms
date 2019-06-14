@@ -28,7 +28,6 @@ $frontpagePhoto = file_exists($frontpagePhotoFile) ? UliCMS\HTML\imageTag("conte
             ) .
             "css/main.scss");
     combinedStylesheetHtml();
-    $css = ".start-page{ background-color:" . Settings::get("header-background-color") . ";}";
     echo \UliCMS\HTML\Style::FromString($css);
     ?>
 

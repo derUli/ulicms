@@ -1,5 +1,15 @@
+@import 'design_variables';
+
 $default-vertical-margin: 10px;
 $box-shadow-color: #545454;
+
+body{
+    font-family: $default-font;
+    font-size: $font-size;
+    background-color: $body-background-color;
+    color: $body-text-color;
+}
+
 
 .onepage-pagination{
     right: 1%;
@@ -91,6 +101,7 @@ body{
         box-shadow: 3px 4px 15px 5px $box-shadow-color;
     }
     .start-page{
+        background-color: $header-background-color;
         position: relative;
 
         #frontpage-photo{
