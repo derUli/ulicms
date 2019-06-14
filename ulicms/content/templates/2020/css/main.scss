@@ -1,7 +1,12 @@
 $default-vertical-margin: 10px;
+$box-shadow-color: #545454;
 
 .onepage-pagination{
     right: 1%;
+}
+
+html{
+    letter-spacing: 0.1rem;
 }
 
 @-webkit-keyframes move-right-to-left {
@@ -77,11 +82,15 @@ $default-vertical-margin: 10px;
 }
 
 .onepage-wrapper, .main{
+    .has-box-shadow{
+        -webkit-box-shadow: 3px 4px 15px 5px $box-shadow-color;
+        box-shadow: 3px 4px 15px 5px $box-shadow-color;
+    }
     .start-page{
         position: relative;
 
         #frontpage-photo{
-            margin-top: 1em;
+            margin-top: 30px;
             opacity: 0;
 
             -webkit-animation:  text-fade-in 2s forwards;
@@ -89,7 +98,9 @@ $default-vertical-margin: 10px;
             animation-delay: 1s;
             -webkit-animation-delay: 1s;
             img{
-                max-height: 40vh
+                max-height: 40vh;
+                border: 1px solid #499649;
+                @extend .has-box-shadow;
             }
         }
     }
@@ -104,10 +115,15 @@ $default-vertical-margin: 10px;
     a, a:visited, a:active{
         color: yellow;
         text-decoration: none;
-        border: 1px solid transparent;
+        border: 2px solid transparent;
         padding: 2px;
 
+        &:hover{
+            border: yellow 2px solid;
+        }
+
         &.button{
+            margin-top: 10px;
             text-decoration: none;
             color: white;
             background-color: #28a745;
@@ -115,19 +131,20 @@ $default-vertical-margin: 10px;
             padding: 10px;
             font-size: 1.1em;
             text-align: center;
-
-
             margin-left: 100vw;
-
+            text-transform: uppercase;
             -webkit-animation: move-right-to-left 0.6s forwards;
             animation: move-right-to-left 0.6s forwards;
             animation-delay: 3s;
             -webkit-animation-delay: 3s;
+            border: 2px solid #499649;
+            &:hover{
+                border: 2px solid $box-shadow-color;
+            }
         }
     }
 
     a:hover{
-        border: 1px solid yellow;
         img{
             -webkit-animation: image-zoom 0.5s forwards;
             animation: image-zoom 0.5s forwards;
@@ -197,6 +214,7 @@ h1, h2, h3, h4, h5, h6{
     margin: 0;
     line-height: 1.2em;
     font-weight: bolder;
+    text-shadow: 2px 2px 2px rgb(100, 100, 100);
 }
 
 strong{
@@ -212,6 +230,7 @@ strong{
         transform: scale(0.1);
         -webkit-animation: logo-zoom 1s forwards;
         animation: logo-zoom 1s forwards;
+
     }
 
     .advertisement{
@@ -270,6 +289,7 @@ blockquote.text-fade-in{
     animation: text-fade-in 2s forwards;
     animation-delay: 1s;
     -webkit-animation-delay: 1s;
+    border: 1px solid #499649;
 }
 
 blockquote {
@@ -279,6 +299,7 @@ blockquote {
     max-width: 85vw;
     padding: 0.5em $default-vertical-margin;
     quotes: "\201C""\201D""\2018""\2019";
+
 }
 
 blockquote:before {
