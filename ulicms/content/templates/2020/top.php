@@ -69,7 +69,7 @@ $frontpagePhoto = file_exists($frontpagePhotoFile) ? UliCMS\HTML\imageTag("conte
             $text_position = get_text_position();
             $color ++;
             ?>
-            <section class="bgcolor bgcolor<?php echo $color; ?>">
+            <section class="bgcolor<?php echo $color; ?>">
                 <div class="content">
                     <?php
                     echo $page->getShowHeadline() ? "<h1 class=\"sliding\">{$page->getHeadline()}</h1>" : "";
@@ -99,7 +99,7 @@ $frontpagePhoto = file_exists($frontpagePhotoFile) ? UliCMS\HTML\imageTag("conte
                 </footer>
             </section>
             <?php
-            if ($color >= 4) {
+            if ($color >= 5) {
                 $color = 0;
             }
         }
