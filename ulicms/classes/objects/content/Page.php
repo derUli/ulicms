@@ -433,4 +433,14 @@ class Page extends Content {
         return $frontPage === $this->slug;
     }
 
+    // TODO: Write test for this method
+    public function getDeletedAt() {
+        return $this->deleted_at;
+    }
+
+// TODO: Write test for this method
+    public function isDeleted() {
+        return !is_null($this->getDeletedAt());
+    }
+
 }

@@ -34,7 +34,7 @@ $frontpagePhoto = file_exists($frontpagePhotoFile) ? UliCMS\HTML\imageTag("conte
 
     $slugs = ["frontpage"];
     foreach ($pages as $index => $page) {
-        if ($page->language !== getCurrentLanguage() ||
+        if ($page->isDeleted() || $page->language !== getCurrentLanguage() ||
                 !$page->isRegular() ||
                 (!$page->active && !is_logged_in()) ||
                 !$permissionChecker->canRead($page->id)) {
@@ -82,7 +82,7 @@ $frontpagePhoto = file_exists($frontpagePhotoFile) ? UliCMS\HTML\imageTag("conte
         <?php
         $color = 0;
         foreach ($pages as $index => $page) {
-            if ($page->language !== getCurrentLanguage() ||
+            if ($page->isDeleted() || $page->language !== getCurrentLanguage() ||
                     !$page->isRegular() ||
                     (!$page->active && !is_logged_in()) ||
                     !$permissionChecker->canRead($page->id)) {
