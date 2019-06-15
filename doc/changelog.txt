@@ -19,6 +19,8 @@ Neue API-Methoden:
 * Page->getParent()
 * Page->makeFrontPage()
 * Page->isFrontPage()
+* Page->getDeletedAt()
+* Page->isDeleted()
 * User->checkPassword($password)
 * Comment::getReadCount()
 * Comment::getAllCount()

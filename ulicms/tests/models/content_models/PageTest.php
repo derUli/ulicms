@@ -439,6 +439,61 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->cleanUp();
     }
 
+    public function testIsDeletedReturnsFalse() {
+        $page = new Page();
+        $page->title = 'Unit Test ' . time();
+        $page->slug = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "Some Text";
+        $page->comments_enabled = true;
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->save();
+        $this->assertFalse($page->isDeleted());
+    }
+
+    public function testIsDeletedReturnsTrue() {
+        $page = new Page();
+        $page->title = 'Unit Test ' . time();
+        $page->slug = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "Some Text";
+        $page->comments_enabled = true;
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->save();
+        $page->delete();
+
+        $this->assertTrue($page->isDeleted());
+    }
+
+    public function testGetDeletedAtReturnsNull() {
+        $page = new Page();
+        $page->title = 'Unit Test ' . time();
+        $page->slug = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "Some Text";
+        $page->comments_enabled = true;
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->save();
+        $this->assertNull($page->getDeletedAt());
+    }
+
+    public function testGetDeletedAtReturnsTimestamp() {
+        $page = new Page();
+        $page->title = 'Unit Test ' . time();
+        $page->slug = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "Some Text";
+        $page->comments_enabled = true;
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->save();
+        $page->delete();
+        $this->assertGreaterThan(time() - 100, $page->getDeletedAt());
+    }
+
     public function testGetCommentsReturnsArrayWithResults() {
         $page = new Page();
         $page->title = 'Unit Test ' . time();

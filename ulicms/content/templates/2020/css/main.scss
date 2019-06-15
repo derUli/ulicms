@@ -3,6 +3,10 @@
 $default-vertical-margin: 10px;
 $box-shadow-color: #545454;
 
+html{
+    letter-spacing: 0.02rem;
+}
+
 body{
     font-family: $default-font;
     font-size: $font-size;
@@ -15,11 +19,6 @@ body{
 .onepage-pagination{
     right: 1%;
 }
-
-html{
-    letter-spacing: 0.02rem;
-}
-
 
 @-webkit-keyframes move-right-to-left {
     100% {
@@ -172,18 +171,10 @@ html{
     }
 }
 
-
 .section{
-    padding: 0 2% !important;
+    padding: 2%;
     word-wrap: break-word;
     line-height: 1.4em;
-    .content{
-        height: 98vh;
-        margin-top:1vh;
-        overflow-y: hidden;
-        width: 90vw;
-
-    }
     .fp-tableCell {
         display: block;
     }
@@ -307,15 +298,6 @@ code {
         monospace;
 }
 
-blockquote.text-fade-in{
-    opacity: 0;
-    -webkit-animation:  text-fade-in 2s forwards;
-    animation: text-fade-in 2s forwards;
-    animation-delay: 1s;
-    -webkit-animation-delay: 1s;
-    border: 1px solid #499649;
-}
-
 blockquote {
     background: #f9f9f9;
     border-left: $default-vertical-margin solid #ccc;
@@ -323,17 +305,25 @@ blockquote {
     max-width: 85vw;
     padding: 0.5em $default-vertical-margin;
     quotes: "\201C""\201D""\2018""\2019";
-
+    &:before {
+        color: #ccc;
+        content: open-quote;
+        font-size: 4em;
+        line-height: 0.1em;
+        margin-right: 0.25em;
+        vertical-align: -0.4em;
+    }
+    &.text-fade-in{
+        opacity: 0;
+        -webkit-animation:  text-fade-in 2s forwards;
+        animation: text-fade-in 2s forwards;
+        animation-delay: 1s;
+        -webkit-animation-delay: 1s;
+        border: 1px solid #499649;
+    }
 }
 
-blockquote:before {
-    color: #ccc;
-    content: open-quote;
-    font-size: 4em;
-    line-height: 0.1em;
-    margin-right: 0.25em;
-    vertical-align: -0.4em;
-}
+
 
 blockquote p {
     display: inline;
