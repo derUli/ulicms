@@ -9,7 +9,8 @@ $(function () {
         anchors: $("#fullpage").data("slugs").split("||"),
         navigationTooltips: $("#fullpage").data("titles").split("||"),
         navigation: true,
-        navigationPosition: 'right'
+        navigationPosition: 'right',
+        verticalCentered: false
     });
 
 });

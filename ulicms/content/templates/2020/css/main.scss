@@ -97,28 +97,7 @@ body{
         -webkit-box-shadow: 3px 4px 15px 5px $box-shadow-color;
         box-shadow: 3px 4px 15px 5px $box-shadow-color;
     }
-    .start-page{
-        background-color: $header-background-color;
-        position: relative;
 
-        #frontpage-photo{
-            margin-top: 30px;
-            opacity: 0;
-
-            -webkit-animation:  text-fade-in 2s forwards;
-            animation: text-fade-in 2s forwards;
-            animation-delay: 1s;
-            -webkit-animation-delay: 1s;
-            img{
-                max-height: 40vh;
-                border: 1px solid #499649;
-                @extend .has-box-shadow;
-            }
-        }
-    }
-    .sliding{
-        color: white;
-    }
     .slide-in{
         -webkit-animation:  color-to-yellow 0.5s forwards;
         animation:  color-to-yellow 0.5s forwards;
@@ -172,14 +151,12 @@ body{
 }
 
 .section{
-    padding: 2%;
+    padding: 10px;
     word-wrap: break-word;
     line-height: 1.4em;
-    .fp-tableCell {
-        display: block;
-    }
     .text-content{
         position: relative;
+        top: 10px;
         left: -100vw;
 
         &.move-up{
@@ -197,7 +174,6 @@ body{
         background-color: #583843;
         color: white;
     }
-
     &.bgcolor4{
         background-color: #F7C8C6;
     }
@@ -238,8 +214,22 @@ strong{
 }
 
 .start-page{
+    background-color: $header-background-color;
+    #frontpage-photo{
+        margin-top: 25px;
+        opacity: 0;
+
+        -webkit-animation:  text-fade-in 2s forwards;
+        animation: text-fade-in 2s forwards;
+        animation-delay: 1s;
+        -webkit-animation-delay: 1s;
+        img{
+            max-height: 40vh;
+            border: 1px solid #499649;
+            @extend .has-box-shadow;
+        }
+    }
     .website_logo{
-        margin: 2% 0 0 0;
         max-width: 92%;
 
         transform: scale(0.1);
@@ -254,6 +244,11 @@ strong{
         left: 2%;
         max-width: 94vw;
         max-height: 8vh;
+
+        a:hover{
+            border: 2px solid transparent;
+
+        }
     }
 }
 
