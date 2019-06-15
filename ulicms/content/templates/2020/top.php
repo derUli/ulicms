@@ -31,6 +31,7 @@ $frontpagePhoto = file_exists($frontpagePhotoFile) ? UliCMS\HTML\imageTag("conte
     echo \UliCMS\HTML\Style::FromString($css);
 
     $titles = [get_translation("frontpage")];
+    $filteredPages = [];
 
     $slugs = ["frontpage"];
     foreach ($pages as $index => $page) {
@@ -42,6 +43,7 @@ $frontpagePhoto = file_exists($frontpagePhotoFile) ? UliCMS\HTML\imageTag("conte
         }
         $slugs[] = $page->slug;
         $titles[] = $page->title;
+        $filteredPages[] = $page;
     }
 
     $slugAttr = implode("||", $slugs);
@@ -81,13 +83,8 @@ $frontpagePhoto = file_exists($frontpagePhotoFile) ? UliCMS\HTML\imageTag("conte
         </div>
         <?php
         $color = 0;
-        foreach ($pages as $index => $page) {
-            if ($page->isDeleted() || $page->language !== getCurrentLanguage() ||
-                    !$page->isRegular() ||
-                    (!$page->active && !is_logged_in()) ||
-                    !$permissionChecker->canRead($page->id)) {
-                continue;
-            }
+        foreach ($filteredPages as $index => $page) {
+
             set_requested_pagename($page->slug, $page->language);
             $text_position = get_text_position();
             $color ++;
