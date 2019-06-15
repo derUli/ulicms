@@ -1,18 +1,15 @@
 $(function () {
     $("footer").last().fadeIn();
 
-    $(".main").onepage_scroll({
-        pagination: true,
-        animationTime: 2000,
-
-        afterMove: function (index) {
-            $($("section .sliding").get(index - 2)).addClass("slide-in");
-            $($("section .text-content").get(index - 2)).addClass("move-up");
+    new fullpage('#fullpage', {
+        afterLoad: function (origin, destination, direction) {
+            $(destination.item).find(".sliding").addClass("slide-in");
+            $(destination.item).find(".text-content").addClass("move-up");
         },
-        loop: false
+        anchors: $("#fullpage").data("slugs").split("||"),
+        navigationTooltips: $("#fullpage").data("titles").split("||"),
+        navigation: true,
+        navigationPosition: 'right'
     });
 
-    $('.button.move-down').click(function () {
-        $(".main").moveDown();
-    });
 });

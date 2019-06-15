@@ -8,6 +8,8 @@ body{
     font-size: $font-size;
     background-color: $body-background-color;
     color: $body-text-color;
+    line-height: 1.5em;
+    -webkit-overflow-scrolling: touch;
 }
 
 .onepage-pagination{
@@ -18,9 +20,6 @@ html{
     letter-spacing: 0.02rem;
 }
 
-body{
-    line-height: 1.5em;
-}
 
 @-webkit-keyframes move-right-to-left {
     100% {
@@ -166,26 +165,15 @@ body{
     }
 
 }
-section.bgcolor1{
-    background-color: #E4B0A2;
-}
-section.bgcolor2{
-    background-color: #ADD6D8;
-}
-section.bgcolor3{
-    background-color: #583843;
-    color: white;
+/* Hide fullscreen Page Rows Navigation Dots on Mobile  */
+@media only screen and (max-width: 1023px) {
+    div#fp-nav {
+        display:none !important;
+    }
 }
 
-section.bgcolor4{
-    background-color: #F7C8C6;
-}
 
-section.bgcolor5{
-    background-color: #96D3BD;
-}
-
-section{
+.section{
     padding: 0 2% !important;
     word-wrap: break-word;
     line-height: 1.4em;
@@ -196,6 +184,9 @@ section{
         width: 90vw;
 
     }
+    .fp-tableCell {
+        display: block;
+    }
     .text-content{
         position: relative;
         left: -100vw;
@@ -205,6 +196,24 @@ section{
             animation: move-up 0.2s forwards;
         }
     }
+    &.bgcolor1{
+        background-color: #E4B0A2;
+    }
+    &.bgcolor2{
+        background-color: #ADD6D8;
+    }
+    &.bgcolor3{
+        background-color: #583843;
+        color: white;
+    }
+
+    &.bgcolor4{
+        background-color: #F7C8C6;
+    }
+
+    &.bgcolor5{
+        background-color: #96D3BD;
+    }
 }
 footer{
     position: absolute;
@@ -212,7 +221,6 @@ footer{
     left: 2%;
     width: 88vw;
     height: auto;
-
 
     font-size: 0.7em;
     display:none;
@@ -251,7 +259,7 @@ strong{
 
     .advertisement{
         position: absolute;
-        top: 90vh;
+        bottom: 2vh;
         left: 2%;
         max-width: 88%;
         max-height: 8vh;

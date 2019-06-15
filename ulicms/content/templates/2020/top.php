@@ -21,7 +21,7 @@ $frontpagePhoto = file_exists($frontpagePhotoFile) ? UliCMS\HTML\imageTag("conte
             getTemplateDirPath(
                     get_theme()
             ) .
-            "node_modules/onepage-scroll/onepage-scroll.css");
+            "node_modules/fullpage.js/dist/fullpage.min.css");
     enqueueStylesheet(
             getTemplateDirPath(
                     get_theme()
@@ -29,12 +29,33 @@ $frontpagePhoto = file_exists($frontpagePhotoFile) ? UliCMS\HTML\imageTag("conte
             "css/main.scss");
     combinedStylesheetHtml();
     echo \UliCMS\HTML\Style::FromString($css);
+
+    $titles = [get_translation("frontpage")];
+
+    $slugs = ["frontpage"];
+    foreach ($pages as $index => $page) {
+        if ($page->language !== getCurrentLanguage() ||
+                !$page->isRegular() ||
+                (!$page->active && !is_logged_in()) ||
+                !$permissionChecker->canRead($page->id)) {
+            continue;
+        }
+        $slugs[] = $page->slug;
+        $titles[] = $page->title;
+    }
+
+    $slugAttr = implode("||", $slugs);
+    $titleAttr = implode("||", $titles);
     ?>
 
 </head>
 <body class="<?php body_classes(); ?>">
-    <div class="main">
-        <section class="start-page">
+    <div class="main"
+         id="fullpage"
+         data-slugs="<?php esc($slugAttr); ?>"
+         data-titles="<?php esc($titleAttr); ?>"
+         >
+        <div class="section start-page">
             <?php Template::logo();
             ?>
             <blockquote class="site-slogan text-fade-in">
@@ -43,7 +64,9 @@ $frontpagePhoto = file_exists($frontpagePhotoFile) ? UliCMS\HTML\imageTag("conte
             if (count($pages)) {
                 $firstPage = $pages[0];
                 ?>
-                <a href="#" class="button move-down"><?php esc($firstPage->getHeadline()); ?></a>
+                <?php if (count($slugs) >= 2) { ?>
+                    <a href="#<?php esc($slugs[1]); ?>" class="button move-down"><?php esc($firstPage->getHeadline()); ?></a>
+                <?php } ?>
                 <?php if ($frontpagePhoto) { ?>
                     <div id="frontpage-photo">
                         <?php echo $frontpagePhoto; ?>
@@ -55,7 +78,7 @@ $frontpagePhoto = file_exists($frontpagePhotoFile) ? UliCMS\HTML\imageTag("conte
             <div class="advertisement">
                 <?php random_banner(); ?>
             </div>
-        </section>
+        </div>
         <?php
         $color = 0;
         foreach ($pages as $index => $page) {
@@ -69,7 +92,7 @@ $frontpagePhoto = file_exists($frontpagePhotoFile) ? UliCMS\HTML\imageTag("conte
             $text_position = get_text_position();
             $color ++;
             ?>
-            <section class="bgcolor<?php echo $color; ?>">
+            <div class="section bgcolor<?php echo $color; ?>">
                 <div class="content">
                     <?php
                     echo $page->getShowHeadline() ? "<h1 class=\"sliding\">{$page->getHeadline()}</h1>" : "";
@@ -94,10 +117,10 @@ $frontpagePhoto = file_exists($frontpagePhotoFile) ? UliCMS\HTML\imageTag("conte
 
                     <?php Template::comments(); ?>
                 </div>
-                <footer>
+                <footer style="display: none">
                     <?php Template::footerText(); ?>
                 </footer>
-            </section>
+            </div>
             <?php
             if ($color >= 5) {
                 $color = 0;
