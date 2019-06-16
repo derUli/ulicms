@@ -65,7 +65,7 @@ class CoreUpgradeController extends Controller {
         try {
             $data = file_get_contents_wrapper($jsonData->file, false, $jsonData->hashsum);
         } catch (CorruptDownloadException $e) {
-            Request::redirect("admin/" . ModuleHelper::buildActionURL("CorruptedDownloadError"));
+            Request::redirect(ModuleHelper::buildActionURL("CorruptedDownloadError"));
         }
         if ($data) {
             file_put_contents($tmpArchive, $data);
