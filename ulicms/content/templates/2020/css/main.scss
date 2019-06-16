@@ -164,23 +164,33 @@ body{
             animation: move-up 0.2s forwards;
         }
     }
+	
     &.bgcolor1{
         background-color: #E4B0A2;
     }
+	
     &.bgcolor2{
         background-color: #ADD6D8;
     }
+	
     &.bgcolor3{
         background-color: #583843;
         color: white;
     }
+	
     &.bgcolor4{
         background-color: #F7C8C6;
     }
-
+	
     &.bgcolor5{
         background-color: #96D3BD;
     }
+
+}
+
+audio, video, iframe, p{
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 footer{
     position: absolute;
@@ -203,7 +213,7 @@ h1, h2, h3, h4, h5, h6{
     text-transform: uppercase;
     margin: 0;
     line-height: 1.2em;
-    font-weight: bolder;
+    font-weight: bold;
     text-shadow: 2px 2px 2px rgb(100, 100, 100);
     letter-spacing: 0.1rem;
 }
@@ -274,10 +284,6 @@ h5{
 
 h6{
     font-size: 1.1em;
-}
-
-p{
-    margin: 0.8em 0;
 }
 
 code {

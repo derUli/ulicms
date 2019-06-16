@@ -94,7 +94,6 @@ $frontpagePhoto = file_exists($frontpagePhotoFile) ? UliCMS\HTML\imageTag("conte
                     <?php
                     echo $page->getShowHeadline() ? "<h1 class=\"sliding\">{$page->getHeadline()}</h1>" : "";
                     ?>
-
                     <div class="text-content">
                         <?php
                         if ($text_position == "after") {
