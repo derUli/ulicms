@@ -1,1 +1,0 @@
-ALTER TABLE `{prefix}content` modify `content` longtext NOT NULL;

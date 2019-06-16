@@ -1,18 +1,21 @@
 <?php
+
 use UliCMS\Exceptions\AccessDeniedException;
+use UliCMS\Exceptions\SqlException;
+use UliCMS\Exceptions\FileNotFoundException;
 
 // root directory of UliCMS
-if (! defined("ULICMS_ROOT")) {
+if (!defined("ULICMS_ROOT")) {
     define("ULICMS_ROOT", dirname(__file__));
 }
 
 // this is kept for compatiblity reasons
 define("DIRECTORY_SEPERATOR", DIRECTORY_SEPARATOR);
+
 // shortcut for DIRECTORY_SEPARATOR
 // however it's unnecessary to use these constansts
 // since PHP normalizes all paths
 // So just always use a forward slash
-
 // Shortcut, but should not be used anymore
 // Just use /
 define("DIRSEP", DIRECTORY_SEPARATOR);
@@ -20,8 +23,6 @@ define("DIRSEP", DIRECTORY_SEPARATOR);
 // use this constant at the end
 // of the page load procedure to measure site performance
 define("START_TIME", microtime(true));
-
-include_once dirname(__file__) . "/api.php";
 
 /*
  * Diese Datei initalisiert das System
@@ -31,117 +32,115 @@ include_once dirname(__file__) . "/api.php";
 $composerAutoloadFile = dirname(__FILE__) . "/vendor/autoload.php";
 
 if (is_file($composerAutoloadFile)) {
-    include_once $composerAutoloadFile;
+    require_once $composerAutoloadFile;
 } else {
-    throw new Exception("autoload.php not found. Please run \"./composer install\" to install dependecies.");
+    throw new FileNotFoundException("autoload.php not found. Please run \"./composer install\" to install dependecies.");
 }
 
-$classes_dir = ULICMS_ROOT . "/" . "classes";
-@set_include_path(get_include_path() . PATH_SEPARATOR . $classes_dir);
-
+require_once dirname(__file__) . "/lib/minify.php";
+require_once dirname(__file__) . "/api.php";
 // todo reorganize includes
-include_once dirname(__file__) . "/lib/constants.php";
-include_once dirname(__file__) . "/classes/objects/privacy/load.php";
-include_once dirname(__file__) . "/lib/users_api.php";
-include_once dirname(__file__) . "/lib/string_functions.php";
-include_once dirname(__file__) . "/lib/network.php";
-include_once dirname(__file__) . "/lib/settings.php";
+require_once dirname(__file__) . "/lib/constants.php";
+require_once dirname(__file__) . "/classes/objects/privacy/load.php";
+require_once dirname(__file__) . "/lib/users_api.php";
+require_once dirname(__file__) . "/lib/string_functions.php";
+require_once dirname(__file__) . "/lib/network.php";
+require_once dirname(__file__) . "/lib/settings.php";
+require_once dirname(__file__) . "/classes/objects/abstract/load.php";
+require_once dirname(__file__) . "/classes/objects/constants/load.php";
+require_once dirname(__file__) . "/classes/objects/storages/load.php";
+require_once dirname(__file__) . "/classes/objects/modules/load.php";
+require_once dirname(__file__) . "/classes/objects/backend/load.php";
+require_once dirname(__file__) . "/classes/objects/settings/load.php";
+require_once dirname(__file__) . "/classes/objects/web/load.php";
+require_once dirname(__file__) . "/classes/objects/content/Categories.php";
+require_once dirname(__file__) . "/classes/objects/content/VCS.php";
+require_once dirname(__file__) . "/classes/objects/content/types/ContentType.php";
+require_once dirname(__file__) . "/classes/objects/content/types/DefaultContentTypes.php";
+require_once dirname(__file__) . "/classes/objects/content/types/fields/CustomField.php";
+require_once dirname(__file__) . "/classes/objects/content/types/fields/TextField.php";
+require_once dirname(__file__) . "/classes/objects/content/types/fields/MultilineTextField.php";
+require_once dirname(__file__) . "/classes/objects/content/types/fields/EmailField.php";
+require_once dirname(__file__) . "/classes/objects/content/types/fields/MonthField.php";
+require_once dirname(__file__) . "/classes/objects/content/types/fields/DatetimeField.php";
+require_once dirname(__file__) . "/classes/objects/content/types/fields/NumberField.php";
+require_once dirname(__file__) . "/classes/objects/content/types/fields/ColorField.php";
+require_once dirname(__file__) . "/classes/objects/content/types/fields/HtmlField.php";
+require_once dirname(__file__) . "/classes/objects/content/types/fields/SelectField.php";
+require_once dirname(__file__) . "/classes/objects/content/types/fields/CheckboxField.php";
+require_once dirname(__file__) . "/classes/objects/content/types/fields/FileFile.php";
+require_once dirname(__file__) . "/classes/objects/content/types/fields/FileImage.php";
+require_once dirname(__file__) . "/classes/objects/pkg/load.php";
+require_once dirname(__file__) . "/classes/helpers/load.php";
+require_once dirname(__file__) . "/classes/exceptions/load.php";
+require_once dirname(__file__) . "/classes/objects/registry/load.php";
+require_once dirname(__file__) . "/classes/objects/logging/load.php";
+require_once dirname(__file__) . "/classes/objects/html/load.php";
+require_once dirname(__file__) . "/classes/objects/content/TypeMapper.php";
+require_once dirname(__file__) . "/lib/db_functions.php";
+require_once dirname(__file__) . "/lib/files.php";
+require_once dirname(__file__) . "/lib/file_get_contents_wrapper.php";
+require_once dirname(__file__) . "/lib/translation.php";
+require_once dirname(__file__) . "/lib/html5_media.php";
+require_once dirname(__file__) . "/classes/objects/database/load.php";
+require_once dirname(__file__) . "/classes/objects/Template.php";
+require_once dirname(__file__) . "/classes/objects/security/load.php";
+require_once dirname(__file__) . "/classes/objects/files/load.php";
+require_once dirname(__file__) . "/classes/objects/spam/load.php";
+require_once dirname(__file__) . "/classes/objects/users/load.php";
+require_once dirname(__file__) . "/classes/objects/localization/load.php";
+require_once dirname(__file__) . "/classes/objects/content/CustomData.php";
+require_once dirname(__file__) . "/classes/objects/content/Category.php";
+require_once dirname(__file__) . "/classes/objects/content/PagePermissions.php";
+require_once dirname(__file__) . "/classes/objects/content/Content.php";
+require_once dirname(__file__) . "/classes/objects/content/Page.php";
+require_once dirname(__file__) . "/classes/objects/content/Snippet.php";
+require_once dirname(__file__) . "/classes/objects/content/Link.php";
+require_once dirname(__file__) . "/classes/objects/content/Language_Link.php";
+require_once dirname(__file__) . "/classes/objects/content/Language.php";
+require_once dirname(__file__) . "/classes/objects/content/Node.php";
+require_once dirname(__file__) . "/classes/objects/content/List_Data.php";
+require_once dirname(__file__) . "/classes/objects/content/Content_List.php";
+require_once dirname(__file__) . "/classes/objects/content/Module_Page.php";
+require_once dirname(__file__) . "/classes/objects/content/Video_Page.php";
+require_once dirname(__file__) . "/classes/objects/content/Audio_Page.php";
+require_once dirname(__file__) . "/classes/objects/content/Image_Page.php";
+require_once dirname(__file__) . "/classes/objects/content/Banner.php";
+require_once dirname(__file__) . "/classes/objects/content/Banners.php";
+require_once dirname(__file__) . "/classes/objects/content/Article.php";
+require_once dirname(__file__) . "/classes/objects/content/Comment.php";
+require_once dirname(__file__) . "/classes/objects/content/ContentFactory.php";
+require_once dirname(__file__) . "/classes/objects/content/CustomFields.php";
+require_once dirname(__file__) . "/classes/objects/content/Results.php";
+require_once dirname(__file__) . "/classes/objects/media/load.php";
 
-include_once dirname(__file__) . "/classes/objects/abstract/load.php";
-include_once dirname(__file__) . "/classes/objects/constants/load.php";
-include_once dirname(__file__) . "/classes/objects/storages/load.php";
-include_once dirname(__file__) . "/classes/objects/modules/load.php";
-include_once dirname(__file__) . "/classes/objects/backend/load.php";
-include_once dirname(__file__) . "/classes/objects/settings/load.php";
-include_once dirname(__file__) . "/classes/objects/web/load.php";
-include_once dirname(__file__) . "/classes/objects/content/Categories.php";
-include_once dirname(__file__) . "/classes/objects/content/types/ContentType.php";
-include_once dirname(__file__) . "/classes/objects/content/types/DefaultContentTypes.php";
-include_once dirname(__file__) . "/classes/objects/content/types/fields/CustomField.php";
-include_once dirname(__file__) . "/classes/objects/content/types/fields/TextField.php";
-include_once dirname(__file__) . "/classes/objects/content/types/fields/MultilineTextField.php";
-include_once dirname(__file__) . "/classes/objects/content/types/fields/EmailField.php";
-include_once dirname(__file__) . "/classes/objects/content/types/fields/MonthField.php";
-include_once dirname(__file__) . "/classes/objects/content/types/fields/DatetimeField.php";
-include_once dirname(__file__) . "/classes/objects/content/types/fields/NumberField.php";
-include_once dirname(__file__) . "/classes/objects/content/types/fields/ColorField.php";
-include_once dirname(__file__) . "/classes/objects/content/types/fields/HtmlField.php";
-include_once dirname(__file__) . "/classes/objects/content/types/fields/SelectField.php";
-include_once dirname(__file__) . "/classes/objects/content/types/fields/CheckboxField.php";
-include_once dirname(__file__) . "/classes/objects/content/types/fields/FileFile.php";
-include_once dirname(__file__) . "/classes/objects/content/types/fields/FileImage.php";
-include_once dirname(__file__) . "/classes/objects/pkg/load.php";
-include_once dirname(__file__) . "/classes/helper/load.php";
-include_once dirname(__file__) . "/classes/exceptions/load.php";
-include_once dirname(__file__) . "/classes/objects/registry/load.php";
-include_once dirname(__file__) . "/classes/objects/logging/load.php";
-include_once dirname(__file__) . "/classes/objects/html/load.php";
-include_once dirname(__file__) . "/classes/objects/SpellChecker.php";
-include_once dirname(__file__) . "/classes/objects/content/TypeMapper.php";
-include_once dirname(__file__) . "/lib/db_functions.php";
-include_once dirname(__file__) . "/lib/files.php";
-include_once dirname(__file__) . "/lib/mailer.php";
-include_once dirname(__file__) . "/lib/file_get_contents_wrapper.php";
-include_once dirname(__file__) . "/lib/translation.php";
-include_once dirname(__file__) . "/lib/html5_media.php";
-include_once dirname(__file__) . "/classes/objects/database/load.php";
-include_once dirname(__file__) . "/classes/objects/Template.php";
-include_once dirname(__file__) . "/classes/objects/security/load.php";
-include_once dirname(__file__) . "/classes/objects/files/load.php";
-include_once dirname(__file__) . "/classes/objects/spam/load.php";
-include_once dirname(__file__) . "/classes/objects/users/load.php";
-include_once dirname(__file__) . "/classes/objects/localization/load.php";
-include_once dirname(__file__) . "/classes/objects/content/CustomData.php";
-include_once dirname(__file__) . "/classes/objects/content/Category.php";
-include_once dirname(__file__) . "/classes/objects/content/PagePermissions.php";
-include_once dirname(__file__) . "/classes/objects/content/Content.php";
-include_once dirname(__file__) . "/classes/objects/content/Page.php";
-include_once dirname(__file__) . "/classes/objects/content/Snippet.php";
-include_once dirname(__file__) . "/classes/objects/content/Link.php";
-include_once dirname(__file__) . "/classes/objects/content/Language_Link.php";
-include_once dirname(__file__) . "/classes/objects/content/Language.php";
-include_once dirname(__file__) . "/classes/objects/content/Node.php";
-include_once dirname(__file__) . "/classes/objects/content/List_Data.php";
-include_once dirname(__file__) . "/classes/objects/content/Content_List.php";
-include_once dirname(__file__) . "/classes/objects/content/Module_Page.php";
-include_once dirname(__file__) . "/classes/objects/content/Video_Page.php";
-include_once dirname(__file__) . "/classes/objects/content/Audio_Page.php";
-include_once dirname(__file__) . "/classes/objects/content/Image_Page.php";
-include_once dirname(__file__) . "/classes/objects/content/Banner.php";
-include_once dirname(__file__) . "/classes/objects/content/Banners.php";
-include_once dirname(__file__) . "/classes/objects/content/Article.php";
-include_once dirname(__file__) . "/classes/objects/content/Comment.php";
-include_once dirname(__file__) . "/classes/objects/content/ContentFactory.php";
-include_once dirname(__file__) . "/classes/objects/content/CustomFields.php";
-include_once dirname(__file__) . "/classes/objects/content/Results.php";
-include_once dirname(__file__) . "/classes/objects/media/load.php";
-include_once dirname(__file__) . "/UliCMSVersion.php";
+require_once dirname(__file__) . "/UliCMSVersion.php";
 
 $mobile_detect_as_module = dirname(__file__) . "/content/modules/Mobile_Detect/Mobile_Detect.php";
 if (is_file($mobile_detect_as_module)) {
-    include_once $mobile_detect_as_module;
+    require_once $mobile_detect_as_module;
 }
 
-function exception_handler($exception)
-{
-    if (! defined("EXCEPTION_OCCURRED")) {
+function exception_handler($exception) {
+    if (!defined("EXCEPTION_OCCURRED")) {
         define("EXCEPTION_OCCURRED", true);
     }
     $error = nl2br(htmlspecialchars($exception));
-    
+
     // FIXME: what if there is no config class?
     $cfg = class_exists("CMSConfig") ? new CMSConfig() : null;
+
     // TODO: useful error message if $debug is disabled
     // Log exception into a text file
-    $message = is_true($cfg->debug) ? $exception : "An error occurred! See exception_log for details. 😞";
-    
+    $message = !is_null($cfg) && is_true($cfg->debug) ? $exception : "An error occurred! See exception_log for details. 😞";
+
     $logger = LoggerRegistry::get("exception_log");
     if ($logger) {
         $logger->error($exception);
     }
     $httpStatus = $exception instanceof AccessDeniedException ? HttpStatusCode::FORBIDDEN : HttpStatusCode::INTERNAL_SERVER_ERROR;
     if (function_exists("HTMLResult") and class_exists("Template") and ! headers_sent() and function_exists("get_theme")) {
-        ViewBag::set("exception", $message);
+        ViewBag::set("exception", nl2br($message));
         HTMLResult(Template::executeDefaultOrOwnTemplate("exception.php"), $httpStatus);
     }
     if (function_exists("HTMLResult") and ! headers_sent()) {
@@ -161,7 +160,7 @@ if (is_file($path_to_config)) {
     header("Location: installer/");
     exit();
 } else {
-    die("Can't include CMSConfig.php. Starting installer failed, too.");
+    throw new ExceptionResult("Can't require CMSConfig.php. Starting installer failed, too.");
 }
 
 if (php_sapi_name() != "cli") {
@@ -178,7 +177,7 @@ $config = new CMSConfig();
 
 // IF ULICMS_DEBUG is defined then display all errors except E_NOTICE,
 // else use default error_reporting from php.ini
-if ((defined("ULICMS_DEBUG") and ULICMS_DEBUG) or (isset($config->debug) and $config->debug)) {
+if ((defined("ULICMS_DEBUG") and ULICMS_DEBUG) or ( isset($config->debug) and $config->debug)) {
     error_reporting(E_ALL ^ E_NOTICE);
 } else {
     error_reporting(0);
@@ -194,45 +193,45 @@ if (isset($config->data_storage_root) and ! is_null($config->data_storage_root))
     define("ULICMS_DATA_STORAGE_ROOT", ULICMS_ROOT);
 }
 
+require_once dirname(__file__) . "/classes/creators/load.php";
+
 // this enables us to set an base url for statis ressources such as images
 // stored in ULICMS_DATA_STORAGE_ROOT
 if (isset($config->data_storage_url) and ! is_null($config->data_storage_url)) {
     define("ULICMS_DATA_STORAGE_URL", $config->data_storage_url);
 }
 
-include_once dirname(__file__) . "/classes/creators/load.php";
-
-if (! defined("ULICMS_TMP")) {
+if (!defined("ULICMS_TMP")) {
     define("ULICMS_TMP", ULICMS_DATA_STORAGE_ROOT . "/content/tmp/");
 }
 
-if (! is_dir(ULICMS_TMP)) {
+if (!is_dir(ULICMS_TMP)) {
     mkdir(ULICMS_TMP);
 }
 
-if (! defined("ULICMS_CACHE")) {
+if (!defined("ULICMS_CACHE")) {
     define("ULICMS_CACHE", ULICMS_DATA_STORAGE_ROOT . "/content/cache/");
 }
-if (! defined("ULICMS_LOG")) {
+if (!defined("ULICMS_LOG")) {
     define("ULICMS_LOG", ULICMS_DATA_STORAGE_ROOT . "/content/log/");
 }
-if (! defined("ULICMS_CONTENT")) {
+if (!defined("ULICMS_CONTENT")) {
     define("ULICMS_CONTENT", ULICMS_DATA_STORAGE_ROOT . "/content/");
 }
 
-if (! defined("ULICMS_CONFIGURATIONS")) {
+if (!defined("ULICMS_CONFIGURATIONS")) {
     define("ULICMS_CONFIGURATIONS", ULICMS_CONTENT . "/configurations/");
 }
-if (! is_dir(ULICMS_CACHE)) {
+if (!is_dir(ULICMS_CACHE)) {
     mkdir(ULICMS_CACHE);
 }
-if (! is_dir(ULICMS_LOG)) {
+if (!is_dir(ULICMS_LOG)) {
     mkdir(ULICMS_LOG);
 }
 
 $htaccessForLogFolderSource = ULICMS_ROOT . "/lib/htaccess-deny-all.txt";
 $htaccessLogFolderTarget = ULICMS_LOG . "/.htaccess";
-if (! is_file($htaccessLogFolderTarget)) {
+if (!is_file($htaccessLogFolderTarget)) {
     copy($htaccessForLogFolderSource, $htaccessLogFolderTarget);
 }
 
@@ -256,7 +255,7 @@ Translation::init();
 
 if (class_exists("Path")) {
     LoggerRegistry::register("exception_log", new Logger(Path::resolve("ULICMS_LOG/exception_log")));
-    
+
     if (is_true($config->query_logging)) {
         LoggerRegistry::register("sql_log", new Logger(Path::resolve("ULICMS_LOG/sql_log")));
     }
@@ -267,7 +266,6 @@ if (class_exists("Path")) {
         LoggerRegistry::register("audit_log", new Logger(Path::resolve("ULICMS_LOG/audit_log")));
     }
 }
-include_once dirname(__file__) . "/lib/minify.php";
 
 // define Constants
 define('CR', "\r"); // carriage return; Mac
@@ -279,9 +277,8 @@ define("ONE_DAY_IN_SECONDS", 60 * 60 * 24);
 global $actions;
 $actions = array();
 
-function noPerms()
-{
-    echo "<p class=\"ulicms_error\">" . get_translation("no_permissions") . "</p>";
+function noPerms() {
+    echo "<div class=\"alert alert-danger\">" . get_translation("no_permissions") . "</div>";
     $logger = LoggerRegistry::get("audit_log");
     if ($logger) {
         $userId = get_user_id();
@@ -296,38 +293,6 @@ function noPerms()
     return false;
 }
 
-function startsWith($haystack, $needle, $case = true)
-{
-    if ($case) {
-        return (strcmp(substr($haystack, 0, strlen($needle)), $needle) === 0);
-    }
-    return (strcasecmp(substr($haystack, 0, strlen($needle)), $needle) === 0);
-}
-
-function endsWith($haystack, $needle, $case = true)
-{
-    if ($case) {
-        return (strcmp(substr($haystack, strlen($haystack) - strlen($needle)), $needle) === 0);
-    }
-    return (strcasecmp(substr($haystack, strlen($haystack) - strlen($needle)), $needle) === 0);
-}
-
-function is_in_include_path($find)
-{
-    $paths = explode(PATH_SEPARATOR, get_include_path());
-    $found = false;
-    foreach ($paths as $p) {
-        $fullname = $p . DIRECTORY_SEPARATOR . $find;
-        if (is_file($fullname)) {
-            $found = $fullname;
-            break;
-        }
-    }
-}
-
-global $config;
-$config = new CMSConfig();
-
 $db_socket = isset($config->db_socket) ? $config->db_socket : ini_get("mysqli.default_socket");
 
 $db_port = isset($config->db_port) ? $config->db_port : ini_get("mysqli.default_port");
@@ -335,22 +300,23 @@ $db_port = isset($config->db_port) ? $config->db_port : ini_get("mysqli.default_
 @$connection = Database::connect($config->db_server, $config->db_user, $config->db_password, $db_port, $db_socket);
 
 if ($connection === false) {
-    throw new Exception("<h1>Can't connect to Database.</h1>");
+    throw new SqlException("Can't connect to Database.</h1>");
 }
 
 $path_to_installer = dirname(__file__) . "/installer/installer.php";
 
-$select = Database::select($config->db_database);
-
-if (! $select) {
-    throw new Exception("<h1>Database " . $config->db_database . " doesn't exist.</h1>");
+if (is_true($config->dbmigrator_auto_migrate)) {
+    $additionalSql = is_array($config->dbmigrator_initial_sql_files) ? $config->dbmigrator_initial_sql_files : array();
+    $select = Database::setupSchemaAndSelect($config->db_database, $additionalSql);
+} else {
+    $select = Database::select($config->db_database);
 }
 
-if (is_true($cfg->preload_all_settings)) {
-    Settings::preloadAll();
+if (!$select) {
+    throw new SqlException("<h1>Database " . $config->db_database . " doesn't exist.</h1>");
 }
 
-if (! Settings::get("session_name")) {
+if (!Settings::get("session_name")) {
     Settings::set("session_name", uniqid() . "_SESSION");
 }
 
@@ -366,7 +332,7 @@ if ($useragent) {
 
 @ini_set('user_agent', ULICMS_USERAGENT);
 
-if (! Settings::get("hide_meta_generator")) {
+if (!Settings::get("hide_meta_generator")) {
     @header('X-Powered-By: UliCMS Release ' . cms_version());
 }
 
@@ -376,10 +342,6 @@ if ($memory_limit !== false) {
     @ini_set('memory_limit', $memory_limit);
 }
 
-if (isset($config->log_requests) and $config->log_requests == true) {
-    $log_ip = Settings::get("log_ip");
-    log_request($log_ip);
-}
 
 $cache_period = Settings::get("cache_period");
 
@@ -394,9 +356,7 @@ if ($cache_period === false) {
 
 date_default_timezone_set(Settings::get("timezone"));
 
-if (isset($_GET["output_scripts"])) {
-    getCombinedScripts();
-} else if (isset($_GET["output_stylesheets"])) {
+if (isset($_GET["output_stylesheets"])) {
     getCombinedStylesheets();
 }
 
@@ -420,16 +380,18 @@ if (isset($_SESSION["session_begin"])) {
     }
 }
 
-function shutdown_function()
-{
+function shutdown_function() {
     // don't execute shutdown hook on kcfinder page (media)
     // since the "Path" class has a naming conflict with the same named
     // class of KCFinder
     do_event("shutdown");
-    
+
     $cfg = new CMSConfig();
     if (is_true($cfg->show_render_time) and ! Request::isAjaxRequest()) {
         echo "\n\n<!--" . (microtime(true) - START_TIME) . "-->";
+    }
+    if (is_true($cfg->dbmigrator_drop_database_on_shutdown)) {
+        Database::dropSchema($cfg->db_database);
     }
 }
 
@@ -437,27 +399,31 @@ register_shutdown_function("shutdown_function");
 
 $enforce_https = Settings::get("enforce_https");
 
-if (! is_ssl() and $enforce_https !== false) {
+if (!is_ssl() and $enforce_https !== false) {
     header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
     exit();
 }
 
 $moduleManager = new ModuleManager();
 Vars::set("disabledModules", $moduleManager->getDisabledModuleNames());
+
 // don't load module stuff on kcfinder page (media)
 // since the "Path" class has a naming conflict with the same named
 // class of KCFinder
+
 ModelRegistry::loadModuleModels();
 TypeMapper::loadMapping();
 HelperRegistry::loadModuleHelpers();
 ControllerRegistry::loadModuleControllers();
+
+require_once dirname(__file__) . "/templating.php";
 
 do_event("before_init");
 do_event("init");
 do_event("after_init");
 
 $version = new UliCMSVersion();
-if (! defined("UPDATE_CHECK_URL")) {
+if (!defined("UPDATE_CHECK_URL")) {
     define("UPDATE_CHECK_URL", "https://update.ulicms.de/?v=" . urlencode(implode(".", $version->getInternalVersion())) . "&update=" . urlencode($version->getUpdate()));
 }
 
@@ -465,7 +431,7 @@ $pkg = new PackageManager();
 $installed_patches = $pkg->getInstalledPatchNames();
 $installed_patches = implode(";", $installed_patches);
 
-if (! defined("PATCH_CHECK_URL")) {
+if (!defined("PATCH_CHECK_URL")) {
     define("PATCH_CHECK_URL", "https://patches.ulicms.de/?v=" . urlencode(implode(".", $version->getInternalVersion())) . "&installed_patches=" . urlencode($installed_patches));
 }
 

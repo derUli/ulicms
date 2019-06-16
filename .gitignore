@@ -22,8 +22,9 @@ ulicms/content/custom_code/functions.php
 .htpasswd
 ulicms/content/modules/modstarter
 .modstarter
-ulicms/vendor/*
+vendor/
 .thumbs
 nbproject
 node_modules
 ulicms/content/configurations
+ulicms/content/generated/*

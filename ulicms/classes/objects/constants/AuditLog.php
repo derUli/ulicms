@@ -1,7 +1,7 @@
 <?php
 
-class AuditLog
-{
+class AuditLog {
 
     const UNKNOWN = "[Unknown]";
+
 }

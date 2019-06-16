@@ -1,1 +1,0 @@
-ALTER TABLE `{prefix}content` modify `meta_description` varchar(200) not null;

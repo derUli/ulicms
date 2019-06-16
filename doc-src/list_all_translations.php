@@ -1,5 +1,5 @@
 <?php
-include_once 'init.php';
+require_once 'init.php';
 @session_start();
 
 $languages = getAllLanguages ();
@@ -15,7 +15,7 @@ if (! isset ( $_SESSION ["language"] )) {
 setLocaleByLanguage ();
 
 if (in_array ( $_SESSION ["language"], $languages )) {
-	include getLanguageFilePath ( $_SESSION ["language"] );
+	require getLanguageFilePath ( $_SESSION ["language"] );
 	Translation::loadAllModuleLanguageFiles ( $_SESSION ["language"] );
 	Translation::includeCustomLangFile ( $_SESSION ["language"] );
 	do_event ( "custom_lang_" . $_SESSION ["language"] );

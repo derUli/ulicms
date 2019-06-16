@@ -1,4 +1,5 @@
 <?php
+
 add_translation("honeypot_is_not_empty", "Honeypot is not empty!");
 
 add_translation("chinese_chars_not_allowed", "Chinese chars are not allowed!");

@@ -1,13 +1,11 @@
 <?php
 
-class HomepageTitleController extends Controller
-{
+class HomepageTitleController extends Controller {
 
-    public function savePost()
-    {
+    public function savePost() {
         $languages = getAllLanguages();
         for ($i = 0; $i < count($languages); $i ++) {
-            
+
             $lang = $languages[$i];
             if (isset($_POST["homepage_title_" . $lang])) {
                 $page = $_POST["homepage_title_" . $lang];
@@ -17,6 +15,11 @@ class HomepageTitleController extends Controller
                 }
             }
         }
+        // if called by ajax return no content to improve performance
+        if (Request::isAjaxRequest()) {
+            HTTPStatusCodeResult(HttpStatusCode::OK);
+        }
         Request::redirect(ModuleHelper::buildActionURL("homepage_title"));
     }
+
 }

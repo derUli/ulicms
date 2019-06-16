@@ -2,8 +2,7 @@
 <?php
 $language = "en";
 
-function sinstall_usage()
-{
+function sinstall_usage() {
     echo "sinstall - Install an UliCMS package\n";
     echo "UliCMS Version " . cms_version() . "\n";
     echo "Copyright (C) 2015 - 2018 by Ulrich Schmidt";
@@ -17,10 +16,10 @@ if (php_sapi_name() != "cli") {
 }
 
 $parent_path = dirname(__file__) . "/../";
-include $parent_path . "init.php";
+require $parent_path . "init.php";
 array_shift($argv);
 
-include getLanguageFilePath($language);
+require getLanguageFilePath($language);
 
 // No time limit
 @set_time_limit(0);
@@ -58,7 +57,7 @@ if (count($argv) == 0) {
             echo "\n";
             exit();
         }
-        
+
         if ($result) {
             echo "Package $file was successfully installed.";
         } else {

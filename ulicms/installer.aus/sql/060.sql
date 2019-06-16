@@ -1,1 +1,0 @@
-delete from `{prefix}settings` where name = 'registered_user_default_level';

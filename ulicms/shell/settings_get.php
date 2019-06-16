@@ -1,8 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-function usage()
-{
+function usage() {
     echo "settings_get - Get a setting\n";
     echo "UliCMS Version " . cms_version() . "\n";
     echo "Copyright (C) 2018 by Ulrich Schmidt";
@@ -16,7 +15,7 @@ if (php_sapi_name() != "cli") {
 }
 
 $parent_path = dirname(__file__) . "/../";
-include $parent_path . "init.php";
+require $parent_path . "init.php";
 array_shift($argv);
 
 // No time limit

@@ -1,0 +1,1 @@
+delete from {prefix}settings where name = 'force_password_change_every_x_days'

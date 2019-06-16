@@ -1,36 +1,31 @@
 <?php
+
 use UliCMS\HTML\Input as Input;
 
 // Class with DSGVO / GDPR related functions
-class PrivacyCheckbox
-{
+class PrivacyCheckbox {
 
     private $language;
 
     const CHECKBOX_NAME = "accept_privacy_policy";
 
-    public function __construct($language)
-    {
+    public function __construct($language) {
         $this->language = $language;
     }
 
-    public function isEnabled()
-    {
+    public function isEnabled() {
         return boolval(Settings::get("privacy_policy_checkbox_enable_{$this->language}", "bool"));
     }
 
-    public function getCheckboxName()
-    {
+    public function getCheckboxName() {
         return self::CHECKBOX_NAME;
     }
 
-    Public function isChecked()
-    {
+    Public function isChecked() {
         return StringHelper::isNotNullOrWhitespace(Request::getVar($this->getCheckboxName(), "", "str"));
     }
 
-    public function check($success = null, $failed = null)
-    {
+    public function check($success = null, $failed = null) {
         if ($this->isChecked()) {
             if ($success != null) {
                 $success();
@@ -46,17 +41,17 @@ class PrivacyCheckbox
         }
     }
 
-    public function render()
-    {
+    public function render() {
         $checkboxHtml = Input::CheckBox($this->getCheckboxName(), false, "✔", array(
-            "required" => "required",
-            "id" => $this->getCheckboxName()
+                    "required" => "required",
+                    "id" => $this->getCheckboxName()
         ));
         $fullHtml = Settings::get("privacy_policy_checkbox_text_{$this->language}");
-        if (! $this->isEnabled() || StringHelper::isNullOrWhitespace($fullHtml)) {
+        if (!$this->isEnabled() || StringHelper::isNullOrWhitespace($fullHtml)) {
             return "";
         }
         $fullHtml = str_ireplace("[checkbox]", $checkboxHtml, $fullHtml);
         return $fullHtml;
     }
+
 }

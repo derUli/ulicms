@@ -1,4 +1,5 @@
 <?php
+
 add_translation("honeypot_is_not_empty", "Das Honigtopf-Feld ist nicht leer!");
 
 add_translation("chinese_chars_not_allowed", "Chinesische Schriftzeichen sind nicht erlaubt!");

@@ -1,38 +1,30 @@
 <?php
 
-class JSONCreator
-{
+class JSONCreator {
 
     public $target_file = null;
-
     public $content = null;
-
     public $title = null;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->title = get_title();
         ob_start();
         content();
         $this->content = ob_get_clean();
     }
 
-    private function httpHeader()
-    {
+    private function httpHeader() {
         header("Content-type: application/json; charset=UTF-8");
     }
 
-    public function output()
-    {
+    public function output() {
         $uid = CacheUtil::getCurrentUid();
         $adapter = CacheUtil::getAdapter();
         if ($adapter and $adapter->has($uid)) {
             $adapter->get($uid);
         }
-        
-        ob_start();
-        autor();
-        $author = ob_get_clean();
+
+
         $data = array();
         $this->content = str_replace("\r\n", "\n", $this->content);
         $this->content = str_replace("\r", "\n", $this->content);
@@ -50,4 +42,5 @@ class JSONCreator
         }
         exit();
     }
+
 }

@@ -1,1 +1,0 @@
-update `{prefix}banner` set language = "all" where language = NULL

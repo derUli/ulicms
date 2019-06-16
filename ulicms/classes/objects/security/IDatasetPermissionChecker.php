@@ -1,8 +1,8 @@
 <?php
+
 namespace UliCMS\Security;
 
-interface IDatasetPermissionChecker
-{
+interface IDatasetPermissionChecker {
 
     public function __construct($user_id);
 

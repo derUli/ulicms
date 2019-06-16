@@ -1,38 +1,33 @@
 <?php
+
 use UliCMS\Exceptions\CorruptDownloadException;
 
-class CoreUpgradeController extends Controller
-{
+class CoreUpgradeController extends Controller {
 
-    public function getCheckURL()
-    {
+    public function getCheckURL() {
         return "http://channels.ulicms.de/" . Settings::get("oneclick_upgrade_channel") . ".json";
     }
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->checkURL = $this->getCheckURL();
     }
 
-    public function setCheckURL($url)
-    {
+    public function setCheckURL($url) {
         $this->checkURL = $url;
     }
 
-    public function getJSON()
-    {
+    public function getJSON() {
         $data = file_get_contents_wrapper($this->getCheckURL(), true);
-        if (! $data) {
+        if (!$data) {
             return null;
         }
         $data = json_decode($data);
         return $data;
     }
 
-    public function checkForUpgrades()
-    {
+    public function checkForUpgrades() {
         $data = $this->getJSON();
-        if (! $data) {
+        if (!$data) {
             return null;
         }
         $version = $data->version;
@@ -44,28 +39,27 @@ class CoreUpgradeController extends Controller
         return null;
     }
 
-    public function runUpgrade($skipPermissions = false)
-    {
+    public function runUpgrade($skipPermissions = false) {
         @set_time_limit(0);
         @ignore_user_abort(1);
         $acl = new ACL();
-        if ((! $skipPermissions and (! $acl->hasPermission("update_system")) or ! $this->checkForUpgrades() or get_request_method() != "post")) {
+        if ((!$skipPermissions and ( !$acl->hasPermission("update_system")) or ! $this->checkForUpgrades() or get_request_method() != "post")) {
             return false;
         }
-        
+
         $jsonData = $this->getJSON();
-        if (! $jsonData) {
+        if (!$jsonData) {
             return null;
         }
-        
+
         $tmpDir = Path::resolve("ULICMS_TMP/upgrade");
         $tmpArchive = Path::resolve("$tmpDir/upgrade.zip");
-        
+
         if (is_dir($tmpDir)) {
             sureRemoveDir($tmpDir, true);
         }
-        
-        if (! is_dir($tmpDir)) {
+
+        if (!is_dir($tmpDir)) {
             mkdir($tmpDir, 0777, true);
         }
         try {
@@ -76,25 +70,17 @@ class CoreUpgradeController extends Controller
         if ($data) {
             file_put_contents($tmpArchive, $data);
             $zip = new ZipArchive();
-            if ($zip->open($tmpArchive) === TRUE) {
+            if ($zip->open($tmpArchive) === true) {
                 $zip->extractTo($tmpDir);
                 $zip->close();
             }
-            
+
             $upgradeCodeDir = Path::resolve("$tmpDir/ulicms");
-            
+
             if (is_dir($upgradeCodeDir)) {
-                
-                // Workaround für einen Kunden, bei dem die aktuelle Version von KCFinder Probleme macht
-                if (intval(Settings::get("oneclick_upgrade_skip_kcfinder"))) {
-                    $kcfinderFolder = Path::resolve("$upgradeCodeDir/admin/kcfinder");
-                    sureRemoveDir($kcfinderFolder, true);
-                }
-                
                 recurse_copy($upgradeCodeDir, ULICMS_ROOT);
-                
                 sureRemoveDir($tmpDir, true);
-                
+
                 response::redirect("../update.php");
                 return true;
             } else {
@@ -104,4 +90,5 @@ class CoreUpgradeController extends Controller
             return false;
         }
     }
+
 }

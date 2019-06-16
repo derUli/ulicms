@@ -1,19 +1,17 @@
 <?php
 
-class Module_Page extends Page
-{
+class Module_Page extends Page {
 
+    public $type = "module";
     public $module = null;
 
-    protected function fillVarsByResult($result)
-    {
+    protected function fillVarsByResult($result) {
         parent::fillVarsByResult($result);
         $this->module = $result->module;
         $this->text_position = $result->text_position;
     }
 
-    public function save()
-    {
+    public function save() {
         $retval = null;
         if ($this->id === null) {
             $retval = $this->create();
@@ -24,8 +22,7 @@ class Module_Page extends Page
         return $retval;
     }
 
-    public function update()
-    {
+    public function update() {
         $result = null;
         if ($this->id === null) {
             return $this->create();
@@ -37,13 +34,12 @@ class Module_Page extends Page
             $this->text_position,
             $this->id
         );
-        
+
         $result = Database::pQuery($sql, $args, true);
         return $result;
     }
 
-    public function containsModule($module = false)
-    {
+    public function containsModule($module = false) {
         $retval = false;
         if (parent::containsModule($module)) {
             $retval = true;
@@ -56,12 +52,12 @@ class Module_Page extends Page
         return $retval;
     }
 
-    public function getEmbeddedModules()
-    {
+    public function getEmbeddedModules() {
         $result = parent::getEmbeddedModules();
         if (StringHelper::isNotNullOrEmpty($this->module) and ! faster_in_array($this->module, $result)) {
             $result[] = $this->module;
         }
         return $result;
     }
+
 }

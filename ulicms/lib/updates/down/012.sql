@@ -1,1 +1,0 @@
-update `{prefix}users` set default_language = '';

@@ -1,10 +1,8 @@
 <?php
 
-class MetaDescriptionController extends Controller
-{
+class MetaDescriptionController extends Controller {
 
-    public function savePost()
-    {
+    public function savePost() {
         $languages = getAllLanguages();
         for ($i = 0; $i < count($languages); $i ++) {
             $lang = $languages[$i];
@@ -16,6 +14,11 @@ class MetaDescriptionController extends Controller
                 }
             }
         }
+        // if called by ajax return no content to improve performance
+        if (Request::isAjaxRequest()) {
+            HTTPStatusCodeResult(HttpStatusCode::OK);
+        }
         Request::redirect(ModuleHelper::buildActionURL("meta_description"));
     }
+
 }

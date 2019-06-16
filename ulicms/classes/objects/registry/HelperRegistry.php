@@ -1,13 +1,13 @@
 <?php
 
-class HelperRegistry
-{
+use UliCMS\Exceptions\FileNotFoundException;
+
+class HelperRegistry {
 
     private static $helpers = array();
 
-    public static function loadModuleHelpers()
-    {
-        if (! defined("KCFINDER_PAGE")) {
+    public static function loadModuleHelpers() {
+        if (!defined("KCFINDER_PAGE")) {
             $helperRegistry = array();
             $modules = getAllModules();
             $disabledModules = Vars::get("disabledModules");
@@ -19,7 +19,7 @@ class HelperRegistry
                 if ($helpers) {
                     foreach ($helpers as $key => $value) {
                         $path = getModulePath($module, true) . trim($value, "/");
-                        if (! endsWith($path, ".php")) {
+                        if (!endsWith($path, ".php")) {
                             $path .= ".php";
                         }
                         $helperRegistry[$key] = $path;
@@ -27,7 +27,11 @@ class HelperRegistry
                 }
             }
             foreach ($helperRegistry as $key => $value) {
-                include $value;
+                if (is_file($value)) {
+                    require $value;
+                } else {
+                    throw new FileNotFoundException("Module {$module}: File '{$path}' not found.");
+                }
                 if (class_exists($key)) {
                     $classInstance = new $key();
                     if ($classInstance instanceof Helper) {
@@ -37,4 +41,5 @@ class HelperRegistry
             }
         }
     }
+
 }

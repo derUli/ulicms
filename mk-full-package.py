@@ -35,7 +35,7 @@ def main():
               ".gitignore", "cache", "*~", ".settings", ".project",
               ".buildpath", "tests", "run-tests.sh", "run-tests.bat",
               "run-tests.xampp.mac.sh", ".pydevproject", "CMSConfig.php", "log",
-              "configurations", ".phpunit.result.cache")
+              "configurations", ".phpunit.result.cache", "nbproject")
 
     IGNORE_PATTERNS = shutil.ignore_patterns(*ignore)
     if args.delete and os.path.exists(target):
@@ -74,7 +74,7 @@ def main():
     # Install npm packages
     # TODO: is there are a way to specify a working dir like used for composer (code above)?
     os.chdir("ulicms")
-    os.system("npm install")
+    os.system("npm install --production")
     os.chdir(old_cwd)
 
     archive_name = os.path.join(target, "..", os.path.basename(target) + ".zip")

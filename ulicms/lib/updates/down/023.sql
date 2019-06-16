@@ -1,1 +1,0 @@
-insert into `{prefix}settings` (`name`, `value`) values('override_shortcuts', 'backend');

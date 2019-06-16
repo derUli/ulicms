@@ -1,4 +1,5 @@
 <?php
+
 $classes = array(
     "Controller",
     "Helper",
@@ -6,6 +7,6 @@ $classes = array(
     "Model"
 );
 foreach ($classes as $class) {
-    include_once dirname(__file__) . "/$class.php";
+    require_once dirname(__file__) . "/$class.php";
 }
 

@@ -1,21 +1,18 @@
 <?php
 
-class Image_Page extends Page
-{
+class Image_Page extends Page {
 
+    public $type = "image";
     public $image_url = null;
-
     public $text_position = "after";
 
-    protected function fillVarsByResult($result)
-    {
+    protected function fillVarsByResult($result) {
         parent::fillVarsByResult($result);
         $this->image_url = $result->image_url;
         $this->text_position = $result->text_position;
     }
 
-    public function save()
-    {
+    public function save() {
         $retval = null;
         if ($this->id === null) {
             $retval = $this->create();
@@ -26,8 +23,7 @@ class Image_Page extends Page
         return $retval;
     }
 
-    public function update()
-    {
+    public function update() {
         $result = null;
         if ($this->id === null) {
             return $this->create();
@@ -39,8 +35,9 @@ class Image_Page extends Page
             $this->text_position,
             $this->id
         );
-        
+
         $result = Database::pQuery($sql, $args, true);
         return $result;
     }
+
 }

@@ -1,6 +1,7 @@
 <?php
-define("TRANSLATION_EMPTY_RECYCLE_BIN", "Papierkorb leeren");
-define("TRANSLATION_WANNA_EMPTY_TRASH", "Möchten Sie den Papierkorb leeren?");
+
+add_translation("EMPTY_RECYCLE_BIN", "Papierkorb leeren");
+add_translation("WANNA_EMPTY_TRASH", "Möchten Sie den Papierkorb leeren?");
 
 add_translation("reset_filters", "Filter zurücksetzen");
 add_translation("helper_utils", "Hilfswerkzeuge");
@@ -14,3 +15,5 @@ add_translation("date_from", "Datum von");
 add_translation("date_to", "Datum bis");
 
 add_translation("banner", get_translation("advertisements"));
+
+add_translation("page_type", "Seitentyp");

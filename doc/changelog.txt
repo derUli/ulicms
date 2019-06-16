@@ -1,3 +1,216 @@
+===== Neues in UliCMS 2019.3 =====
+
+Diese Version ist funktional identisch zu 2019.2.8
+
+===== Neues in UliCMS 2019.2.8 =====
+
+Neue API-Methoden:
+* Content->isRegular()
+* get_environment()
+* Banners::getRandom()
+* Banner->render()
+* is_present($val)
+
+Neue Events:
+* enqueue_frontend_footer_scripts
+* enqueue_frontend_stylesheets
+
+Verbesserungen:
+* Spalte "Version" unter "Pakete" auf Smartphones ausgeblendet.
+
+Fehlerkorrekturen:
+* Es wird nun immer der aktuelle Wert von CodeMirror Editoren übertragen
+* User-Formular kann nun nicht mehr abgesendet wenn die Passwortwiederholung falsch ist
+
+Entfernte Features:
+* Option "Anwender müssen ihr Passwort alle X Tage ändern" entfernt
+
+Entfernte API-Methoden:
+* split_headers($headers)
+* formatTime($seconds)
+* formatSizeUnits($bytes)
+* SecurityHelper::securePath($path)
+
+===== Neues in UliCMS 2019.2.7 =====
+
+Neue Features:
+* Minifying von Javascript und Stylesheets optimiert
+* In einigen Backend-Seiten wird nun der Name von Sprachen statt deren Sprachcode angezeigt
+* Verfügbare Pakete: Lizenzen können nun angezeigt werden
+* "Sprachen" Einstellungen im Backend optisch überarbeitet
+* DataTables: "X Einträge anzeigen" merkt sich nun die letzte Auswahl
+* CKEditor: Beim Einfügen eines Bilds wird nun "Breite" und "Höhe" werden mehr automatisch gefüllt
+* HTML-Helper um Bootstrap Alerts zu erzeugen
+
+Neue API-Methoden:
+* File::getNewestMtime($files)
+* UliCMS\HTML\Alert::alert($text, $cssClasses, $allowHtml = false)
+* UliCMS\HTML\Alert::danger($text, $cssClasses = "", $allowHtml = false)
+* UliCMS\HTML\Alert::warning($text, $cssClasses = "", $allowHtml = false)
+* UliCMS\HTML\Alert::success($text, $cssClasses = "", $allowHtml = false)
+* UliCMS\HTML\Alert::info($text, $cssClasses = "", $allowHtml = false)
+* User->loadByEmail($email)
+* minifyJs()
+* minifyCSS()
+* compileSCSS($stylesheet)
+* compileSCSSToFile($stylesheet)
+* is_blank($val)
+
+Fehlerkorrekturen:
+* Custom Types Feature repariert
+* Wenn man ein Modul welches beim Laden der "Pakete" Übersicht deaktiviert war aktiviert, wird nun der Button zum Aufrufen des Moduls sofort und ohne Neuladen der Seite aktiviert
+* Bei Links wird nun wieder in der Seitenliste die Ziel-URL angezeigt
+
+Entfernte Features:
+* Request Logs
+* Einstellungen der Paketquelle
+
+===== Neues in UliCMS 2019.2.6 =====
+
+Verbesserungen:
+* Generierung von Systemnamen unterstützt nun mehr Zeichen
+* Überprüfung der Passwort-Wiederholung optisch verbessert.
+* Performance des Abrufs von "Verfügbare Pakete" massiv verbessert
+
+Neue API-Methoden:
+* Request::getDomain()
+* optimizeHtml($html)
+
+Geänderte API-Methoden:
+* get_prefered_language($priorities, $http_accept_language) gibt nun einen
+  String zurück
+
+Fehlerkorrekturen:
+* Shake Animation bei fehlschlagen von Login wird nun wieder angezeigt
+* Page->update() ändert den Typ von
+  "Benutzerdefinierte Werte (JSON)" nicht mehr von Objekt nach Array
+* Wenn das Laden des Newsfeeds auf der Startseite des Backends fehlschlägt, erscheint nun eine Fehlermeldung
+
+Sicherheit:
+* Drei XSS-Sicherheitslücken geschlossen (gemeldet von Kağan Eğlence)
+
+===== Neues in UliCMS 2019.2.5 =====
+
+Neue Features:
+* "Verfügbare Pakete" neu gestaltet
+
+Verbesserungen:
+* Das Löschen-Icon beim eigenen Benutzer wird nicht mehr angezeigt.
+
+Neue API-Methoden:
+* UliCMS\HTML\imageTag($file, $htmlAttributes = array())
+* UliCMS\HTML\imageTagInline($file, $htmlAttributes = array())
+* File::toDataUri($file, $mime = null)
+* Group::getCurrentGroupId()
+* Group::getDefaultPrimaryGroupId()
+* Group::getDefaultPrimaryGroup()
+
+Geänderte API-Methoden:
+* Group::getCurrentGroup() ist nun statisch
+
+Fehlerkorrekturen:
+* Einige "Zurück" Buttons in der Paketverwaltung funktionieren nicht
+
+===== Neues in UliCMS 2019.2.4 =====
+
+Neue Features:
+* Anzeige der Passwortsicherheit
+* ContentPermissionChecker->canRead($contentId) Methode implementiert.
+  zuvor gab diese immer true zurück
+
+Verbesserungen:
+* Logout-Bestätigung wird nun als bootbox angezeigt
+
+Fehlerkorrekturen:
+* Auto-Completion für Passwortfelder korrigiert
+
+===== Neues in UliCMS 2019.2.3 =====
+
+Neue Features:
+* Kontextmenü-Plugin von CKEditor ist auf Geräten mit Touchscreen nun deaktiviert
+
+===== Neues in UliCMS 2019.2.2 =====
+
+Neue Features
+* Footer Text bearbeiten
+
+Fehlerkorrekturen:
+* In den Experteneinstellungen wird ein leerer Datensatz angezeigt
+* Wenn die metadata.json eines Moduls eine "helpers" Sektion enthält,
+  verursacht das einen fatalen Fehler (FileNotFoundException)
+
+===== Neues in UliCMS 2019.2.1 =====
+
+Neue Features:
+* Performance Verbesserungen im Backend durchgeführt
+* minify_html ist nun per default eingeschalten.
+* Das Feld "Menü als Grafik" wird nun ausgeblendet, wenn man "Nicht im Menü" auswählt
+* Checkboxen werden nun als Schalter dargestellt
+* Kommentar Icon mit Anzahl der neuen Kommentare hinzugefügt
+* Update von jQuery auf Version 3.3.1
+* Update von Bootstrap auf Version 3.4.1
+* Update von CKEditor auf Version 4.11.3
+* MOTD Formular nutzt jetzt AJAX zum Speichern
+* Das Feld "Custom Data (JSON)" wird nun validiert
+* Die Tastenkombination ctrl+s (PC) bzw. cmd+s (Mac) löst nun das Absenden eines Formulars aus
+* Script und Style Helper fügen den nun einen Timestamp an den Pfad an um
+ungewünschtes Caching zu verhindern
+* SQL Migrations von Installer und Updates vereint
+* Neue Optionen in der Konfigurationsdatei unterstützt
+* Design Optimierungen an der Userverwaltung durchgeführt
+* Zeige eine Warnung im Backend, wenn eine veraltete PHP Version verwendet wird.
+* Die E-Mail mit den Zugangsdaten, welche man optional beim Anlegen von Usern versenden kann,
+  kann nun per Default Template angepasst werden.
+
+Neue API-Methoden:
+* Response::sendHttpStatusCodeResultIfAjax($status = HTTPStatusCode::OK, $redirect = null, $redirectStatus = HttpStatusCode::MOVED_TEMPORARILY)
+* Response::redirectToAction($action, $controller = null, $status = HttpStatusCode::MOVED_TEMPORARILY)
+* File::existsLocally($path)
+* Content::emptyTrash()
+* Database::setupSchemaAndSelect($schemaName, $otherScripts = array())
+* Database::dropSchema($schema)
+* HTTPStatusCode::UNPROCESSABLE_ENTITY (Konstante für HTTP Status 422)
+
+veraltete API-Methoden:
+* adduser($username, $lastname, $firstname, $email, $password, $sendMessage = true, $acl_group = null, $require_password_change = 0, $admin = 0, $locked = 0, $default_language = null)
+
+Entfernte API-Methoden:
+* is_in_include_path($find)
+
+Verbesserungen:
+* Die Funktion "Neues Logo hochladen" befindet sich nun in den Design-Einstellungen
+
+Fehlerkorrekturen:
+* Auf der "Lizenz" Backend-Seite ist ein Button nicht mit einem Icon versehen
+* Der CodeMirror HTML-Editor wird fehlerhaft dargestellt, wenn man die Checkbox
+  "Aktiviere DSGVO Checkbox für Formulare" in den Datenschutz Einstellungen
+  anklickt.
+* Die Deaktivierung der Auto-Vervollständigung für Formulare funktioniert
+  in einigen modernen Browsern (z.B. Google Chrome) nicht mehr.
+* Wenn ein Bootbox geöffnet wird, verschiebt sich der Inhalt der Seite nach Links.
+* Bei den Demodaten war nach einer Neuinstallation die group_id Spalte nicht gefüllt
+* Ein Icon unter "Installierte Patches" wird nicht angezeigt
+* Nach dem installieren von Patches werden die temporären Dateien nicht gelöscht.
+* "Neuigkeiten in UliCMS" wird nicht geladen, wenn allow_url_fopen=Off ist.
+
+Entfernte Features:
+* Alte Ansicht von "Pakete" entfernt
+* Folgende Optionen wurden aus dem Einstellungen entfernt:
+  * Gebe "generator" Meta-Tag aus
+  * cron.php nicht automatisch ausführen
+  * Erlauben diese Webseite in andere Sites einzubinden
+  * XSS-Schutz
+  Es ist geplant, für die Anwender, die diese Einstellungen benötigen, ein optionales Modul zu veröffentlichen, welches die entfernten Optionen wieder zum System hinzufügt.
+* Social Media Felder aus den Userprofilen entfernt
+* Die User-bezogene Option "Benachrichtige mich per E-Mail,
+wenn sich jemand mit meinem Benutzerkonto
+anmeldet" wurde entfernt
+
+Bekannte Probleme:
+* Wenn die Option db_migrator_auto_migrate aktiviert ist,
+  erfolgt auf der Kommandozeile kein Logging während der Ausführung der Migrations
+  Es sieht so aus, als würde nichts passieren, bis die Ausführung der Unit Tests beginnt.
+
 ===== Neues in UliCMS 2019.2 =====
 
 Neue Features:
@@ -19,7 +232,7 @@ Bugfixes:
 
 Neue Features:
 * Sicherheitsoption "XSS-Schutz" hinzugefügt
-* Wenn ein User die admin_permission eines Moduls nicht besitzt, ist der Button mit dem Namen des Moduls deaktiviert und 
+* Wenn ein User die admin_permission eines Moduls nicht besitzt, ist der Button mit dem Namen des Moduls deaktiviert und
   ein Schloss-Icon wird angezeigt.
 * Weitere Seiten mit Icons versehen (core_media)
 
@@ -135,7 +348,7 @@ Neue API-Funktionen:
 * ActionResult($action, $model = null)
 
 Bugfixes:
-* Die Berechtigungsprüfung für die Bearbeiten-Rechte für Seiten wertete die sekundären Gruppen nicht aus.  
+* Die Berechtigungsprüfung für die Bearbeiten-Rechte für Seiten wertete die sekundären Gruppen nicht aus.
 * Der Text "No Results Found" in den Select2 Dropdown-Boxen war nicht lokalisiert
 * Funktion Database::dropColumn($table, $column, $prefix = true) war nicht funktional
 
@@ -168,7 +381,7 @@ Neue Features:
 * Tablesorter durch DataTables ersetzen
 * Wrapper für Kommandozeilen-Scripts hinzugefügt "manage"
 * Neues CLI-Script "settings_list.php"
-* CLI-Befehl zum Anzeigen von Informationen über eine SimpleInstall v2 Paketdatei hinzugefügt 
+* CLI-Befehl zum Anzeigen von Informationen über eine SimpleInstall v2 Paketdatei hinzugefügt
     $ ./manage sinfo examine /path/to/package-1.0.sin
 * Pakete können nun eine bestimmte PHP-Version bei der Installation vorausetzen
 * Pakete können nun vorausetzen, dass bestimmte PHP-Erweiterungen installiert sein müssen
@@ -242,7 +455,7 @@ Neue API-Funktionen:
 * Javascript-Mechanismus um eine "Alle auswählen" Checkbox zu implementieren
 * do_event()
 * add_hook() ist nun deprecated
-* Der Konstruktur von JSTranslation nimmt nun ein Array als optionalen Parameter an 
+* Der Konstruktur von JSTranslation nimmt nun ein Array als optionalen Parameter an
 * Template::renderPartial($template, $theme = null)
 * CustomFields::getAll($id = null)
 

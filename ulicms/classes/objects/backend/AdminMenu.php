@@ -1,39 +1,32 @@
 <?php
 
-class AdminMenu
-{
+class AdminMenu {
 
     private $children = array();
 
-    public function __construct($children = array())
-    {
+    public function __construct($children = array()) {
         $this->children = $children;
     }
 
-    public function getChildren()
-    {
+    public function getChildren() {
         return $this->children;
     }
 
-    public function setChildren($value)
-    {
+    public function setChildren($value) {
         $this->children = $value;
     }
 
-    public function hasChildren()
-    {
+    public function hasChildren() {
         return (count($this->children) > 0);
     }
 
-    public function addChild($children)
-    {
+    public function addChild($children) {
         $this->children[] = $children;
     }
 
-    public function getChildByID($identifier, $root = null)
-    {
+    public function getChildByID($identifier, $root = null) {
         $result = null;
-        if (! $root) {
+        if (!$root) {
             $root = $this->children;
         }
         foreach ($this->children as $root) {
@@ -47,8 +40,7 @@ class AdminMenu
         return null;
     }
 
-    public function render()
-    {
+    public function render() {
         $html = "<ul>";
         foreach ($this->children as $child) {
             if ($child->userHasPermission()) {
@@ -70,4 +62,5 @@ class AdminMenu
         }
         echo $html;
     }
+
 }

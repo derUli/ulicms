@@ -1,12 +1,13 @@
 <?php
-define("TRANSLATION_YOUR_LOGO", "Your Logo");
-define("TRANSLATION_UPLOAD_NEW_LOGO", "Upload new logo");
-define("TRANSLATION_UPLOAD", "Upload");
-define("TRANSLATION_LOGO_INFOTEXT", "You can upload logo here.");
-define("TRANSLATION_UPLOADED_IMAGE_TOO_BIG", "Your uploaded image was to big.");
-define("TRANSLATION_CREATE_OPTION", "Create configuration variable");
-define("TRANSLATION_OPTION", "Variable");
-define("TRANSLATION_VALUE", "Value");
+
+add_translation("YOUR_LOGO", "Your Logo");
+add_translation("UPLOAD_NEW_LOGO", "Upload new logo");
+add_translation("UPLOAD", "Upload");
+add_translation("LOGO_INFOTEXT", "You can upload logo here.");
+add_translation("UPLOADED_IMAGE_TOO_BIG", "Your uploaded image was to big.");
+add_translation("CREATE_OPTION", "Create configuration variable");
+add_translation("OPTION", "Variable");
+add_translation("VALUE", "Value");
 
 // translations for smtp_encryption select field
 add_translation("smtp_encryption", "Encryption");
@@ -24,8 +25,6 @@ add_translation("privacy_policy_checkbox_enable", "Enable GDPR Checkbox for form
 add_translation("privacy_policy_checkbox_text", "Text for  GDPR Checkbox");
 add_translation("dsgvo_checkbox", "GDPR Checkbox");
 
-add_translation("no_auto_cron_help", "Enable this option if you wan't to setup a real cronjob.\nIf this option is disabled cronjobs will be executed while page load. This may decrease the site performance.");
-
 add_translation("language_shortcode", "Shortcode");
 
 add_translation("reject_requests_from_bots", "Reject Requests From Bots");
@@ -42,11 +41,13 @@ add_translation("keep_spam_ips", "Keep ip addresses of spam comments");
 
 add_translation("min_time_to_fill_form_help", "One word per line. Parts of a string are also detected.");
 
-add_translation("http_headers", "HTTP Headers");
-add_translation("x_frame_options", "Allow embedding this website in other sites");
-add_translation("deny", "Deny");
-add_translation("allow", "Allow");
-add_translation("sameorigin", "Only Same Domain");
+add_translation("footer", "Footer");
+add_translation("edit_footer_text", "Edit Footer Text");
 
-add_translation("x_xss_protection", "XSS Protection");
-add_translation("on_block", "On (Block Mode)");
+
+add_translation("error_pages", "Error Pages");
+add_translation("not_found", "Not Found");
+
+add_translation("make_default", "Make Default");
+
+add_translation("no_html_allowed", "String must not contain HTML.");

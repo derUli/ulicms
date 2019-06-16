@@ -1,16 +1,22 @@
 <?php
+
+use UliCMS\Data\Content\Comment;
+use UliCMS\HTML\Script;
+
 $admin_logo = Settings::get("admin_logo");
 if (!$admin_logo) {
     $admin_logo = "gfx/logo.png";
 }
 
 // translation for select2 dropdown boxes
-$select2TranslationFile = "scripts/js/i18n/" . getSystemLanguage() . ".js";
+$select2TranslationFile = "../node_modules/select2/dist/js/i18n/" . getSystemLanguage() . ".js";
 $select2Language = getSystemLanguage();
 if (!file_exists($select2TranslationFile)) {
-    $select2TranslationFile = "scripts/js/i18n/en.js";
+    $select2TranslationFile = "../node_modules/select2/dist/js/i18n/en.js";
     $select2Language = "en";
 }
+
+$permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
 ?>
 <!DOCTYPE html>
 <html data-select2-language="<?php esc($select2Language) ?>">
@@ -19,114 +25,70 @@ if (!file_exists($select2TranslationFile)) {
               content="width=device-width, user-scalable=yes, initial-scale=1" />
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <meta name="google" content="notranslate" />
-
         <title>[<?php Template::escape(Settings::get("homepage_title")); ?>] - UliCMS</title>
-
         <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
         <?php
         $styles = array();
         ?>
         <?php
-        $enq = array(
-            "scripts/php.js/strip_tags.js",
-            "scripts/php.js/htmlspecialchars.js",
-            "scripts/jquery.min.js",
-            "scripts/datetimepicker/jquery.datetimepicker.full.js",
-            "scripts/jquery.form.min.js",
+        $scripts = array(
+            "../node_modules/jquery/dist/jquery.min.js",
+            "../node_modules/js-url/url.min.js",
+            "../node_modules/jquery-datetimepicker/build/jquery.datetimepicker.full.js",
+            "../node_modules/jquery-form/dist/jquery.form.min.js",
             "scripts/vallenato/vallenato.js",
-            "../node_modules/codemirror-minified/lib/codemirror.js",
-            "../node_modules/codemirror-minified/mode/php/php.js",
-            "../node_modules/codemirror-minified/mode/xml/xml.js",
-            "../node_modules/codemirror-minified/mode/javascript/javascript.js",
-            "../node_modules/codemirror-minified/mode/clike/clike.js",
-            "../node_modules/codemirror-minified/mode/css/css.js",
-            "scripts/url.min.js",
             "scripts/util.js",
-            "scripts/users.js",
             "scripts/global.js",
-            "scripts/bootstrap.min.js",
-            "scripts/js/select2.min.js",
-            "scripts/bootbox.min.js",
+            "../node_modules/bootstrap/dist/js/bootstrap.min.js",
+            "../node_modules/bootstrap-toggle/js/bootstrap-toggle.min.js",
+            "../node_modules/select2/dist/js/select2.min.js",
+            "../node_modules/bootbox/bootbox.min.js",
             $select2TranslationFile,
-            "scripts/datatables/datatables.min.js",
-            "../lib/js/global.js"
+            "../node_modules/datatables/media/js/jquery.dataTables.min.js",
+            "../lib/js/global.js",
         );
-
-        if (is_logged_in()) {
-            $enq[] = "scripts/cookie.js";
-            $enq[] = "scripts/jquery-shiftclick.js";
-            $enq[] = "scripts/shift_checkbox.js";
-        }
-        if (!is_mobile()) {
-            $enq[] = "scripts/doubletaptogo/doubletaptogo.min.js";
-        }
         ?>
         <?php
-        foreach ($enq as $script) {
+        if (is_logged_in()) {
+            $scripts[] = "../node_modules/jscolor-picker/jscolor.min.js";
+        }
+        foreach ($scripts as $script) {
             enqueueScriptFile($script);
         }
+        if (is_logged_in()) {
+            echo Script::FromFile("ckeditor/ckeditor.js");
+        }
+        combinedScriptHtml();
         ?>
-        <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
-
-        <?php combinedScriptHtml(); ?>
-        <script type="text/javascript" src="scripts/jscolor/jscolor.min.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $.ajaxSetup({cache: false});
-                // It seems like the autocomplete html attribute 
-                // is broken in some modern browsers (Chrome)
-                // This is an ugly workaround for that issue
-                $("form input[autocomplete], form[autocomplete]").not(":disabled").prop("disabled", true);
-                setTimeout(function () {
-                    $("form input[autocomplete], form[autocomplete] input").prop("disabled", false);
-                }, 500);
-<?php
-if (!is_mobile()) {
-    ?>
-                    $(window).scroll(function () {
-                        if ($(this).scrollTop()) {
-                            $('a.scrollup:hidden').stop(true, true).fadeIn();
-                        } else {
-                            $('a.scrollup').stop(true, true).fadeOut();
-                        }
-                    });
-                    $(".menu li:has(ul)").doubleTapToGo();
-
-    <?php
-}
-?>
-            });
-        </script>
+        <?php require "inc/touch_icons.php"; ?>
         <link rel="stylesheet" type="text/css"
               href="scripts/vallenato/vallenato.css" />
-
-        <?php include "inc/ulicms_touch_icons.php"; ?>
-        <?php
-        $styles[] = "css/bootstrap.min.css";
-        $styles[] = "../node_modules/codemirror-minified/lib/codemirror.css";
-        $styles[] = "../node_modules/codemirror-minified/lib/codemirror.css";
-        $styles[] = "css/modern.css";
-        $styles[] = "scripts/css/select2.min.css";
-        $styles[] = "scripts/datetimepicker/jquery.datetimepicker.min.css";
-
-        foreach ($styles as $style) {
-            enqueueStylesheet($style);
-        }
-
-        combinedStylesheetHtml();
-        ?>
-        <?php
-        do_event("admin_head");
-        ?>
-
         <link rel="stylesheet" type="text/css"
-              href="scripts/datatables/datatables.min.css" />
+              href="../node_modules/datatables/media/css/jquery.dataTables.min.css" />
         <link rel="stylesheet"
-              href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" />
+              href="../node_modules/@fortawesome/fontawesome-free/css/all.min.css" />
+              <?php
+              $styles[] = "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+              $styles[] = "../node_modules/codemirror-minified/lib/codemirror.css";
+              $styles[] = "css/modern.scss";
+              $styles[] = "../node_modules/bootstrap-toggle/css/bootstrap-toggle.min.css";
+              $styles[] = "../node_modules/select2/dist/css/select2.min.css";
+              $styles[] = "../node_modules/jquery-datetimepicker/build/jquery.datetimepicker.min.css";
+
+              foreach ($styles as $style) {
+                  enqueueStylesheet($style);
+              }
+
+              echo UliCMS\HTML\Style::FromExternalFile("../node_modules/password-strength-meter/dist/password.min.css");
+              combinedStylesheetHtml();
+              ?>
+              <?php
+              do_event("admin_head");
+              ?>
     </head>
-<?php
-do_event("before_backend_header");
-?>
+    <?php
+    do_event("before_backend_header");
+    ?>
     <?php
     $cssClasses = "";
     if (get_user_id()) {
@@ -140,43 +102,63 @@ do_event("before_backend_header");
         $cssClasses .= "no-action";
     }
     ?>
-
     <body class="<?php esc($cssClasses); ?>"
-          data-datatables-translation="<?php echo DataTablesHelper::getLanguageFileURL(getSystemLanguage()); ?>">
-<?php
-do_event("after_backend_header");
-?>
+          data-datatables-translation="<?php echo DataTablesHelper::getLanguageFileURL(getSystemLanguage()); ?>"
+          data-ckeditor-skin="<?php esc(Settings::get("ckeditor_skin")); ?>">
+              <?php
+              do_event("after_backend_header");
+              ?>
         <div
-            class="container-fluid main <?php
-              if (get_action()) {
-                  echo 'action-' . Template::getEscape(get_action());
-              }
-              ?>">
-
+            class="container main <?php
+            if (get_action()) {
+                echo 'action-' . Template::getEscape(get_action());
+            }
+            ?>">
             <div class="row">
-                <div class="col-xs-8">
+                <div class="col-xs-7">
                     <a href="../" title="<?php translate("goto_frontend"); ?>"><img
                             src="<?php Template::escape($admin_logo); ?>" alt="UliCMS"
                             class="ulicms-logo"></a>
                 </div>
-                <div class="col-xs-4 menu-container">
-<?php
-if (is_logged_in()) {
-    ?>
+                <div class="col-xs-5 menu-container">
+                    <?php
+                    if (is_logged_in()) {
+                        $colClass = $permissionChecker->hasPermission("comments_manage") ? "col-xs-4" : "col-xs-6";
+                        ?>
                         <div class="row pull-right top-right-icons">
-                            <div class="col-xs-6">
+                            <div class="<?php esc($colClass); ?>">
                                 <a href="#" id="menu-clear-cache"
                                    data-url="<?php echo ModuleHelper::buildMethodCallUrl("PerformanceSettingsController", "clearCache", "clear_cache=1"); ?>">
-                                    <i class="fas fa-broom"></i>
-                                </a> <a href="#" id="menu-clear-cache-loading"
-                                        style="display: none;"><i class="fa fa-spinner fa-spin"></i></a>
+                                    <i class="fas fa-broom"></i></a>
+                                <a href="#" id="menu-clear-cache-loading" style="display: none;"><i class="fa fa-spinner fa-spin"></i></a>
                             </div>
-                            <div class="col-xs-6">
+                            <?php
+                            if ($permissionChecker->hasPermission("comments_manage")) {
+                                $count = Comment::getUnreadCount();
+                                ?>
+                                <div class="<?php esc($colClass); ?>">
+                                    <div class="comment-counter">
+                                        <a href="<?php echo ModuleHelper::buildActionURL("comments_manage"); ?>"><i class="fa fa-comments"></i>
+                                            <?php
+                                            if ($count) {
+                                                ?>
+                                                <div class="count" data-count="<?php echo $count ?>">
+                                                    <?php echo $count; ?>
+                                                </div>
+                                            <?php } ?></a>
+                                    </div>
+                                </div>
+                            <?php } ?>
+                            <div class="<?php esc($colClass); ?>">
                                 <a id="menu-toggle"><i class="fa fa-bars"></i> </a>
                             </div>
                         </div>
-<?php } ?>
+                    <?php } ?>
                 </div>
             </div>
-            <div class="row main-content">
-                <div class="col-xs-12">
+            <div class="main-content">
+                <?php
+                if (is_logged_in() and version_compare(phpversion(), '7.1', '<')) {
+                    require_once "inc/php_upgrade.php";
+                }
+

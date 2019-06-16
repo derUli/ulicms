@@ -1,10 +1,9 @@
 <?php
 
-class UpdateCheckController extends Controller
-{
+class UpdateCheckController extends Controller {
 
-    public function patchCheck()
-    {
+    public function patchCheck() {
         HTMLResult(Template::executeModuleTemplate("core_package_manager", "patch_check.php"));
     }
+
 }

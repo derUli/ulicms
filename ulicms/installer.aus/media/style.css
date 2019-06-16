@@ -1,62 +1,198 @@
 body {
-	font-family: "wf_SegoeUI", "Segoe UI", "Segoe", "Segoe WP", "Tahoma",
-		"Verdana", "Arial", "sans-serif";
-	background-color: rgb(246, 245, 250);
-	font-size: 15px;
+    font-family: "wf_SegoeUI", "Segoe UI", "Segoe", "Segoe WP", "Tahoma",
+        "Verdana", "Arial", "sans-serif";
+    background-color: rgb(246, 245, 250);
+    font-size: 15px;
 }
 
 #license {
-	width: 100%;
+    width: 100%;
 }
 
 #header {
-	padding-top: 10px;
-	border: 1px solid #b7b7b7;
-	border-top: none;
-	background-color: #60a8bd;
+    padding-top: 10px;
+    border: 1px solid #b7b7b7;
+    border-top: none;
+    background-color: #60a8bd;
 }
 
 #main {
-	padding-bottom: 30px;
-	word-break: break-word;
+    padding-bottom: 30px;
+    word-break: break-word;
 }
 
 #my-container {
-	border: 1px solid #b7b7b7;
-	border-top: none;
+    border: 1px solid #b7b7b7;
+    border-top: none;
 }
 
 #navigation {
-	padding-top: 30px;
-	padding-bottom: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 
 a.current-item {
-	font-weight: bold;
+    font-weight: bold;
 }
 
 #footer {
-	margin-top: 10px;
-	text-align: center;
+    margin-top: 10px;
+    text-align: center;
 }
 
 #my-container {
-	background-color: white;
+    background-color: white;
 }
 
 #navigation li {
-	margin-bottom: 5px;
+    margin-bottom: 5px;
 }
 
 select {
-	width: 100%;
+    width: 100%;
 }
 
 #loading, #error-message {
-	display: none;
-	margin-top: 20px;
+    display: none;
+    margin-top: 20px;
 }
 
 img {
-	max-width: 100%;
+    max-width: 100%;
+}
+
+kbd {
+    border-radius: 0 !important;
+}
+
+pre {
+    border-radius: 0 !important;
+}
+
+.img-rounded {
+    border-radius: 0 !important;
+}
+
+.img-thumbnail {
+    border-radius: 0 !important;
+}
+
+.img-circle {
+    border-radius: 0 !important;
+}
+
+.form-control {
+    border-radius: 0 !important;
+}
+
+.btn {
+    border-radius: 0 !important;
+}
+
+.btn-link {
+    border-radius: 0 !important;
+}
+
+.dropdown-menu {
+    border-radius: 0 !important;
+}
+
+.list-group-item {
+    border-radius: 0 !important;
+}
+
+.input-group-addon {
+    border-radius: 0 !important;
+}
+
+.input-group-btn {
+    border-radius: 0 !important;
+}
+
+.nav-tabs a {
+    border-radius: 0 !important;
+}
+
+.nav-pills a {
+    border-radius: 0 !important;
+}
+
+.navbar {
+    border-radius: 0 !important;
+}
+
+.navbar-toggle {
+    border-radius: 0 !important;
+}
+
+.icon-bar {
+    border-radius: 0 !important;
+}
+
+.breadcrumb {
+    border-radius: 0 !important;
+}
+
+.pagination {
+    border-radius: 0 !important;
+}
+
+.pager * {
+    border-radius: 0 !important;
+}
+
+.badge {
+    border-radius: 0 !important;
+}
+
+.jumbotron {
+    border-radius: 0 !important;
+}
+
+.thumbnail {
+    border-radius: 0 !important;
+}
+
+.alert {
+    border-radius: 0 !important;
+}
+
+.progress {
+    border-radius: 0 !important;
+}
+
+.panel {
+    border-radius: 0 !important;
+}
+
+.well {
+    border-radius: 0 !important;
+}
+
+.modal-content {
+    border-radius: 0 !important;
+}
+
+.tooltip-inner {
+    border-radius: 0 !important;
+}
+
+.popover {
+    border-radius: 0 !important;
+}
+
+.popover-title {
+    border-radius: 0 !important;
+}
+
+.carousel-indicators li {
+    border-radius: 0 !important;
+}
+
+[class^=select2] {
+    border-radius: 0 !important;
+}
+
+.paginate_button {
+    border-radius: 0 !important;
 }

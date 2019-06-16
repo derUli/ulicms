@@ -1,8 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-function usage()
-{
+function usage() {
     echo "dg_migrator - Apply database migrations\n";
     echo "UliCMS Version " . cms_version() . "\n";
     echo "Copyright (C) 2018 by Ulrich Schmidt";
@@ -15,7 +14,7 @@ if (php_sapi_name() != "cli") {
     die("This script can be run from command line only.");
 }
 $parent_path = dirname(__file__) . "/../";
-include $parent_path . "init.php";
+require $parent_path . "init.php";
 
 array_shift($argv);
 
@@ -49,7 +48,7 @@ if ($command == "reset") {
     exit();
 }
 if ($command == "up") {
-    if (! $component or ! $directory) {
+    if (!$component or ! $directory) {
         usage();
     }
     $folder = Path::resolve($directory . "/up");
@@ -63,7 +62,7 @@ if ($command == "up") {
 }
 
 if ($command == "down") {
-    if (! $component or ! $directory) {
+    if (!$component or ! $directory) {
         usage();
     }
     $folder = Path::resolve($directory . "/down");

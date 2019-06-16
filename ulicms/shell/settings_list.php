@@ -5,7 +5,7 @@ if (php_sapi_name() != "cli") {
 }
 
 $parent_path = dirname(__file__) . "/../";
-include $parent_path . "init.php";
+require $parent_path . "init.php";
 
 // show all settings
 $settings = Settings::getAll();

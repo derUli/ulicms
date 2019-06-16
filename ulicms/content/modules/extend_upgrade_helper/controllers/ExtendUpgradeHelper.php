@@ -1,10 +1,8 @@
 <?php
 
-class ExtendUpgradeHelper extends Controller
-{
+class ExtendUpgradeHelper extends Controller {
 
-    public function getModules()
-    {
+    public function getModules() {
         $result = array();
         $modules = getAllModules();
         foreach ($modules as $module) {
@@ -18,4 +16,5 @@ class ExtendUpgradeHelper extends Controller
         }
         return $result;
     }
+
 }

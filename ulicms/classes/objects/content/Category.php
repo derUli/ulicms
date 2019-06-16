@@ -1,23 +1,18 @@
 <?php
 
-class Category
-{
+class Category {
 
     private $id = null;
-
     private $name = null;
-
     private $description = null;
 
-    public function __construct($id = null)
-    {
+    public function __construct($id = null) {
         if ($id) {
             $this->loadByID($id);
         }
     }
 
-    public function loadByID($id)
-    {
+    public function loadByID($id) {
         $sql = "select * from {prefix}categories where id = ?";
         $args = array(
             intval($id)
@@ -26,12 +21,11 @@ class Category
         $this->fillVars($query);
     }
 
-    public function fillVars($query)
-    {
+    public function fillVars($query) {
         $this->id = null;
         $this->name = null;
         $this->description = null;
-        
+
         if ($query and Database::getNumRows($query) > 0) {
             $result = Database::fetchObject($query);
             $this->id = $result->id;
@@ -40,8 +34,7 @@ class Category
         }
     }
 
-    public function save()
-    {
+    public function save() {
         if ($this->id) {
             $this->update();
         } else {
@@ -49,8 +42,7 @@ class Category
         }
     }
 
-    protected function insert()
-    {
+    protected function insert() {
         $sql = "INSERT INTO `{prefix}categories` (name, description) values (?, ?)";
         $args = array(
             $this->getName(),
@@ -60,8 +52,7 @@ class Category
         $this->id = Database::getLastInsertID();
     }
 
-    protected function update()
-    {
+    protected function update() {
         $sql = "update `{prefix}categories` set name = ?, description = ? where id = ?";
         $args = array(
             $this->getName(),
@@ -71,8 +62,7 @@ class Category
         Database::pQuery($sql, $args, true);
     }
 
-    public function delete()
-    {
+    public function delete() {
         if ($this->id) {
             $sql = "delete from {prefix}categories where id = ?";
             $args = array(
@@ -83,8 +73,7 @@ class Category
         }
     }
 
-    public static function getAll($order = "id")
-    {
+    public static function getAll($order = "id") {
         $sql = "select id from `{prefix}categories` order by $order";
         $query = Database::query($sql, true);
         $datasets = array();
@@ -94,33 +83,28 @@ class Category
         return $datasets;
     }
 
-    public function getID()
-    {
+    public function getID() {
         return $this->id;
     }
 
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
-    public function getDescription()
-    {
+    public function getDescription() {
         return $this->description;
     }
 
-    public function setID($val)
-    {
-        $this->id = ! is_null($val) ? intval($val) : null;
+    public function setID($val) {
+        $this->id = !is_null($val) ? intval($val) : null;
     }
 
-    public function setName($val)
-    {
-        $this->name = ! is_null($val) ? strval($val) : null;
+    public function setName($val) {
+        $this->name = !is_null($val) ? strval($val) : null;
     }
 
-    public function setDescription($val)
-    {
-        $this->description = ! is_null($val) ? strval($val) : null;
+    public function setDescription($val) {
+        $this->description = !is_null($val) ? strval($val) : null;
     }
+
 }

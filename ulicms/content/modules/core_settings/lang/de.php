@@ -1,13 +1,14 @@
 <?php
-define("TRANSLATION_YOUR_LOGO", "Ihr Logo");
-define("TRANSLATION_UPLOAD_NEW_LOGO", "Neues Logo hochladen");
-define("TRANSLATION_UPLOAD", "Hochladen");
-define("TRANSLATION_LOGO_INFOTEXT", "Laden Sie ein beliebiges Logo hoch, welches im Head Bereich Ihrer Homepage angezeigt wird.<br/>
+
+add_translation("YOUR_LOGO", "Ihr Logo");
+add_translation("UPLOAD_NEW_LOGO", "Neues Logo hochladen");
+add_translation("UPLOAD", "Hochladen");
+add_translation("LOGO_INFOTEXT", "Laden Sie ein beliebiges Logo hoch, welches im Head Bereich Ihrer Homepage angezeigt wird.<br/>
 Sie können das Logo in den Grundeinstellungen deaktivieren.");
-define("TRANSLATION_UPLOADED_IMAGE_TOO_BIG", "Die von Ihnen hochgeladene Grafik ist zu groß.");
-define("TRANSLATION_CREATE_OPTION", "Konfigurationsvariable erstellen");
-define("TRANSLATION_OPTION", "Option");
-define("TRANSLATION_VALUE", "Wert");
+add_translation("UPLOADED_IMAGE_TOO_BIG", "Die von Ihnen hochgeladene Grafik ist zu groß.");
+add_translation("CREATE_OPTION", "Konfigurationsvariable erstellen");
+add_translation("OPTION", "Option");
+add_translation("VALUE", "Wert");
 
 // translations for smtp_encryption select field
 add_translation("smtp_encryption", "Verschlüsselung");
@@ -22,8 +23,6 @@ add_translation("privacy", "Datenschutz");
 add_translation("privacy_policy_checkbox_enable", "Aktiviere DSGVO Checkbox für Formulare");
 add_translation("privacy_policy_checkbox_text", "Text für DSGVO Checkbox");
 add_translation("dsgvo_checkbox", "DSGVO Checkbox");
-
-add_translation("no_auto_cron_help", "Aktivieren Sie diese Option, wenn Sie einen richtigen Cronjob einrichten möchten.\nWenn diese Option nicht aktiviert ist, werden Cronjobs beim Laden einer Seite ausgefürt, was die Ladezeiten verschlechtert.");
 
 add_translation("language_shortcode", "Kürzel");
 
@@ -41,11 +40,12 @@ add_translation("keep_spam_ips", "IP-Adressen von Spamkommentaren nicht löschen
 
 add_translation("min_time_to_fill_form_help", "Ein Wort je Zeile. Auch Teile einer Zeichenkette werden erkannt.");
 
-add_translation("http_headers", "HTTP Header");
-add_translation("x_frame_options", "Erlauben diese Webseite in andere Sites einzubinden");
-add_translation("deny", "Verbieten");
-add_translation("allow", "Erlauben");
-add_translation("sameorigin", "Nur innerhalb der selben Domain");
+add_translation("footer", "Footer");
+add_translation("edit_footer_text", "Footer Text bearbeiten");
 
-add_translation("x_xss_protection", "XSS-Schutz");
-add_translation("on_block", "An (Block Modus)");
+add_translation("error_pages", "Fehlerseiten");
+add_translation("not_found", "Nicht gefunden");
+
+add_translation("make_default", "Als Standard festlegen");
+
+add_translation("no_html_allowed", "HTML ist in der Zeichenkette nicht erlaubt");

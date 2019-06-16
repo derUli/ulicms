@@ -1,10 +1,8 @@
 <?php
 
-class PkgInfoController extends Controller
-{
+class PkgInfoController extends Controller {
 
-    public function installPost()
-    {
+    public function installPost() {
         if (StringHelper::isNotNullOrEmpty($_REQUEST["file"])) {
             $file = basename($_POST["file"]);
             $path = Path::resolve("ULICMS_TMP/$file");
@@ -16,4 +14,5 @@ class PkgInfoController extends Controller
             Request::redirect(ModuleHelper::buildActionURL("sin_package_install_ok", "file=$file"));
         }
     }
+
 }

@@ -1,1 +1,0 @@
-ALTER TABLE `{prefix}content` ADD `comments_enabled` TINYINT NULL DEFAULT NULL

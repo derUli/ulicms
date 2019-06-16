@@ -6,7 +6,6 @@
         "settings_simple": "templates/settings_simple/form.php",
         "homepage_title": "templates/homepage_title/form.php",
         "motto": "templates/motto/form.php",
-        "cache": "templates/cache/form.php",
         "settings_categories": "templates/categories/menu.php",
         "frontpage_settings": "templates/frontpage/form.php",
         "logo_upload": "templates/logo/form.php",
@@ -21,21 +20,26 @@
         "settings_edit": "templates/expert_settings/form.php",
         "design": "templates/design/form.php",
         "favicon": "templates/favicon/form.php",
-        "pkg_settings": "templates/pkg_settings/form.php",
         "languages": "templates/languages/form.php",
         "spam_filter": "templates/spam_filter/form.php",
         "performance_settings": "templates/performance_settings/form.php",
-        "community_settings": "templates/community_settings/form.php"
+        "community_settings": "templates/community_settings/form.php",
+        "footer_text": "templates/design/footer_text.php",
+        "error_pages": "templates/error_pages/form.php"
     },
     "action_permissions": {
         "privacy_settings": "privacy_settings",
         "performance_settings": "performance_settings",
-        "community_settings": "community_settings"
+        "community_settings": "community_settings",
+        "footer_text": "footer_text",
+        "error_pages": "error_pages"
     },
     "custom_acl": [
         "privacy_settings",
         "performance_settings",
-        "community_settings"
+        "community_settings",
+        "footer_text",
+        "error_pages"
     ],
     "controllers": {
         "SimpleSettingsController": "controllers/SimpleSettingsController",
@@ -52,12 +56,13 @@
         "ExpertSettingsController": "controllers/ExpertSettingsController.php",
         "DesignSettingsController": "controllers/DesignSettingsController.php",
         "FaviconController": "controllers/FaviconController.php",
-        "PkgSettingsController": "controllers/PkgSettingsController.php",
         "LanguageController": "controllers/LanguageController.php",
         "SpamFilterController": "controllers/SpamFilterController.php",
         "PrivacyController": "controllers/PrivacyController.php",
         "PerformanceSettingsController": "controllers/PerformanceSettingsController.php",
-        "CommunitySettingsController": "controllers/CommunitySettingsController.php"
+        "CommunitySettingsController": "controllers/CommunitySettingsController.php",
+        "FooterTextController": "controllers/FooterTextController.php",
+        "ErrorPagesController": "controllers/ErrorPagesController.php"
     },
     "action_controllers": {
         "settings_simple": "SimpleSettingsController",
@@ -65,7 +70,8 @@
         "design": "DesignSettingsController",
         "privacy": "PrivacyController",
         "performance_settings": "PerformanceSettingsController",
-        "community_settings": "CommunitySettingsController"
+        "community_settings": "CommunitySettingsController",
+        "footer_text": "FooterTextController"
     },
     "controller_function_permissions": {
         "SimpleSettingsController::savePost": "settings_simple",
@@ -83,13 +89,14 @@
         "ExpertSettingsController::delete": "expert_settings_edit",
         "ExpertSettingsController::savePost": "design",
         "FaviconController::doUpload": "favicon",
-        "PkgSettingsController::savePost": "pkg_settings",
         "LanguageController::createPost": "languages",
         "LanguageController::deletePost": "languages",
         "LanguageController::setDefaultLanguage": "languages",
         "SpamFilterController::savePost": "spam_filter",
         "PrivacyController::savePost": "privacy_settings",
         "PerformanceSettingsController::savePost": "performance_settings",
-        "CommunitySettingsController::savePost": "community_settings"
+        "CommunitySettingsController::savePost": "community_settings",
+        "FooterTextController::savePost": "footer_text",
+        "ErrorPagesController::savePost": "error_pages"
     }
 }

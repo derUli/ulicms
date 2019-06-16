@@ -1,1 +1,0 @@
-ALTER TABLE `{prefix}forms` DROP COLUMN `enabled`

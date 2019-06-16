@@ -1,1 +1,0 @@
-ALTER TABLE `{prefix}content` DROP COLUMN `comments_enabled`

@@ -1,10 +1,8 @@
 <?php
 
-class FrontPageSettingsController extends Controller
-{
+class FrontPageSettingsController extends Controller {
 
-    public function savePost()
-    {
+    public function savePost() {
         $languages = getAllLanguages();
         for ($i = 0; $i < count($languages); $i ++) {
             $lang = $languages[$i];
@@ -16,6 +14,11 @@ class FrontPageSettingsController extends Controller
                 }
             }
         }
+        // if called by ajax return no content to improve performance
+        if (Request::isAjaxRequest()) {
+            HTTPStatusCodeResult(HttpStatusCode::OK);
+        }
         Request::redirect(ModuleHelper::buildActionURL("frontpage_settings"));
     }
+
 }

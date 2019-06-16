@@ -1,33 +1,33 @@
 {
-	"source": "core",
-	"version": "2019.2",
-	"embed": false,
-	"actions": {
-		"media": "templates/media.php",
-		"images": "templates/filemanager.php",
-		"files": "templates/filemanager.php",
-		"flash": "templates/filemanager.php",
-		"videos": "templates/videos/list.php",
-		"add_video": "templates/videos/new.php",
-		"edit_video": "templates/videos/edit.php",
-		"audio": "templates/audio/list.php",
-		"add_audio": "templates/audio/new.php",
-		"edit_audio": "templates/audio/edit.php"
-	},
-	"controllers": {
-		"VideoController": "controllers/VideoController.php",
-		"AudioController": "controllers/AudioController.php"
-	},
-	"action_controllers": {
-		"videos": "VideoController",
-		"audio": "AudioController"
-	},
-	"controller_function_permissions": {
-		"VideoController::deletePost": "videos",
-		"VideoController::updatePost": "videos_edit",
-		"VideoController::createPost": "videos_create",
-		"AudioController::deletePost": "audio",
-		"AudioController::createPost": "audio_create",
-		"AudioController::updatePost": "audio_edit"
-	}
+    "source": "core",
+    "version": "2019.2",
+    "embed": false,
+    "actions": {
+        "media": "templates/media.php",
+        "images": "templates/filemanager.php",
+        "files": "templates/filemanager.php",
+        "flash": "templates/filemanager.php",
+        "videos": "templates/videos/list.php",
+        "add_video": "templates/videos/new.php",
+        "edit_video": "templates/videos/edit.php",
+        "audio": "templates/audio/list.php",
+        "add_audio": "templates/audio/new.php",
+        "edit_audio": "templates/audio/edit.php"
+    },
+    "controllers": {
+        "VideoController": "controllers/VideoController.php",
+        "AudioController": "controllers/AudioController.php"
+    },
+    "action_controllers": {
+        "videos": "VideoController",
+        "audio": "AudioController"
+    },
+    "controller_function_permissions": {
+        "VideoController::deletePost": "videos",
+        "VideoController::updatePost": "videos_edit",
+        "VideoController::createPost": "videos_create",
+        "AudioController::deletePost": "audio",
+        "AudioController::createPost": "audio_create",
+        "AudioController::updatePost": "audio_edit"
+    }
 }

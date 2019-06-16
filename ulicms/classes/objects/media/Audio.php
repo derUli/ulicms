@@ -1,27 +1,19 @@
 <?php
 
-class Audio extends Model
-{
+class Audio extends Model {
 
     private $name = null;
-
     private $mp3_file = null;
-
     private $ogg_file = null;
-
     private $category_id = null;
-
     private $category = null;
-
     private $created;
-
     private $updated;
 
     const AUDIO_DIR = "content/audio/";
 
-    public function __construct($id = null)
-    {
-        if (! is_null($id)) {
+    public function __construct($id = null) {
+        if (!is_null($id)) {
             $this->loadById($id);
         } else {
             $this->created = time();
@@ -29,19 +21,17 @@ class Audio extends Model
         }
     }
 
-    public function loadById($id)
-    {
+    public function loadById($id) {
         $query = Database::pQuery("select * from `{prefix}audio` where id = ?", array(
-            intval($id)
-        ), true);
-        if (! Database::any($query)) {
+                    intval($id)
+                        ), true);
+        if (!Database::any($query)) {
             $query = null;
         }
         $this->fillVars($query);
     }
 
-    protected function fillVars($query = null)
-    {
+    protected function fillVars($query = null) {
         if ($query) {
             $result = Database::fetchSingle($query);
             $this->setID($result->id);
@@ -62,8 +52,7 @@ class Audio extends Model
         }
     }
 
-    protected function insert()
-    {
+    protected function insert() {
         $this->created = time();
         $this->updated = $this->created;
         $args = array(
@@ -74,15 +63,14 @@ class Audio extends Model
             $this->created,
             $this->updated
         );
-        $sql = "insert into `{prefix}audio` 
+        $sql = "insert into `{prefix}audio`
 				(name, mp3_file, ogg_file, category_id, created, updated)
 				values (?, ?, ?, ?, ?, ?)";
         Database::pQuery($sql, $args, true);
         $this->setID(Database::getLastInsertID());
     }
 
-    protected function update()
-    {
+    protected function update() {
         $this->updated = time();
         $args = array(
             $this->name,
@@ -98,70 +86,57 @@ class Audio extends Model
         Database::pQuery($sql, $args, true);
     }
 
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
-    public function getMP3File()
-    {
+    public function getMP3File() {
         return $this->mp3_file;
     }
 
-    public function getOggFile()
-    {
+    public function getOggFile() {
         return $this->ogg_file;
     }
 
-    public function getCategoryId()
-    {
+    public function getCategoryId() {
         return $this->category_id;
     }
 
-    public function getCategory()
-    {
+    public function getCategory() {
         return $this->category;
     }
 
-    public function getCreated()
-    {
+    public function getCreated() {
         return $this->created;
     }
 
-    public function getUpdated()
-    {
+    public function getUpdated() {
         return $this->updated;
     }
 
-    public function setName($val)
-    {
+    public function setName($val) {
         $this->name = StringHelper::isNotNullOrWhitespace($val) ? strval($val) : null;
     }
 
-    public function setMP3File($val)
-    {
+    public function setMP3File($val) {
         $this->mp3_file = StringHelper::isNotNullOrWhitespace($val) ? strval($val) : null;
     }
 
-    public function setOGGFile($val)
-    {
+    public function setOGGFile($val) {
         $this->ogg_file = StringHelper::isNotNullOrWhitespace($val) ? strval($val) : null;
     }
 
-    public function setCategoryId($val)
-    {
+    public function setCategoryId($val) {
         $this->category_id = is_numeric($val) ? intval($val) : null;
         $this->category = is_numeric($val) ? new Category($val) : null;
     }
 
-    public function setCategory($val)
-    {
-        $this->category = ! is_null($val) ? new Category($val) : null;
+    public function setCategory($val) {
+        $this->category = !is_null($val) ? new Category($val) : null;
         $this->category_id = $this->category->getID();
     }
 
-    public function delete($deletePhysical = true)
-    {
+    public function delete($deletePhysical = true) {
         if ($this->getId()) {
             if ($deletePhysical) {
                 if ($this->getMP3File()) {
@@ -179,36 +154,35 @@ class Audio extends Model
             }
             Database::pQuery("delete from `{prefix}audio` where id = ?", array(
                 $this->getID()
-            ), true);
+                    ), true);
             $this->fillVars(null);
         }
     }
 
-    public function getHtml()
-    {
+    public function getHtml() {
         $audio_dir = self::AUDIO_DIR;
         if (defined("ULICMS_DATA_STORAGE_URL")) {
             $audio_dir = Path::resolve("ULICMS_DATA_STORAGE_URL/$audio_dir") . "/";
         }
         $html = '<audio controls>';
-        if (! empty($this->mp3_file)) {
+        if (!empty($this->mp3_file)) {
             $html .= '<source src="' . $audio_dir . htmlspecialchars($this->mp3_file) . '" type="audio/mp3">';
         }
-        if (! empty($this->ogg_file)) {
+        if (!empty($this->ogg_file)) {
             $html .= '<source src="' . $audio_dir . htmlspecialchars($this->ogg_file) . '" type="audio/ogg">';
         }
         $html .= get_translation("no_html5");
-        if (! empty($this->mp3_file) or ! empty($this->ogg_file)) {
-            $preferred = ! empty($this->mp3_file) ? $this->mp3_file : $this->ogg_file;
+        if (!empty($this->mp3_file) or ! empty($this->ogg_file)) {
+            $preferred = !empty($this->mp3_file) ? $this->mp3_file : $this->ogg_file;
             $html .= '<br/><a href="' . self::AUDIO_DIR . $preferred . '">' . get_translation("DOWNLOAD_AUDIO_INSTEAD") . '</a>';
         }
-        
+
         $html .= '</audio>';
         return $html;
     }
 
-    public function html()
-    {
+    public function html() {
         echo $this->getHtml();
     }
+
 }
