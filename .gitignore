@@ -26,5 +26,5 @@ vendor/
 .thumbs
 nbproject
 node_modules
-ulicms/content/configurations
+ulicms/content/configurations/*
 ulicms/content/generated/*
