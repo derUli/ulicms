@@ -73,19 +73,17 @@ class CacheUtil {
             opcache_reset();
         }
 
-        $adapter = self::getAdapter();
-        if ($adapter) {
-            $adapter->clear();
-        }
-
         sureRemoveDir(Path::resolve("ULICMS_CACHE"), false);
+        sureRemoveDir(Path::resolve("ULICMS_TMP"), false);
 
         // Sync modules table in database with modules folder
         $moduleManager = new ModuleManager();
         $moduleManager->sync();
 
-        $designSettingsController = ControllerRegistry::get(DesignSettingsController::class);
-        $designSettingsController->generateSCSSToFile();
+        if (class_exists("DesignSettingsController")) {
+            $designSettingsController = ControllerRegistry::get(DesignSettingsController::class);
+            $designSettingsController->generateSCSSToFile();
+        }
 
         do_event("after_clear_cache");
     }
