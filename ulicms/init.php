@@ -313,7 +313,7 @@ $db_strict_mode = isset($config->db_strict_mode) ? boolval($config->db_strict_mo
 @$connection = Database::connect($config->db_server, $config->db_user, $config->db_password, $db_port, $db_socket, $db_strict_mode);
 
 if ($connection === false) {
-    throw new SqlException("Can't connect to Database.</h1>");
+    throw new SqlException("Can't connect to Database.");
 }
 
 $path_to_installer = dirname(__file__) . "/installer/installer.php";
