@@ -4,16 +4,14 @@ Neue Features:
 * Seitenverwaltung ist nun hierarchisch
 * Neues Standardtheme "2020"
 * Design-Einstellungen: Vorschaubild vom ausgewählten Theme
-* controller_function_permissions unterstüzt nun Wildcards
+* controller_function_permissions unterstützt nun Wildcards
 * Sprachen können wieder gelöscht werden
 * Design-Einstellungen können nun in SCSS Code als Variablen verwendet werden
 
 Neue API-Methoden:
-* UliCMS\HTML\icon($classes, $htmlAttributes = array())
-* NumberFormatHelper::timestampToHtml5Datetime($timestamp = null)
 * ContentFactory::getAllByType($type, $order = "id")
 * ContentFactory::getAllByParent($parent_id, $order = "id")
-*`Content->getChildren($order)
+* Content->getChildren($order)
 * Content->hasChildren()
 * Page->getHistory()
 * Page->getParent()
@@ -21,6 +19,7 @@ Neue API-Methoden:
 * Page->isFrontPage()
 * Page->getDeletedAt()
 * Page->isDeleted()
+* TypeMapper::getModel($type)
 * User->checkPassword($password)
 * Comment::getReadCount()
 * Comment::getAllCount()
@@ -29,23 +28,24 @@ Neue API-Methoden:
 * Model->hasChanges()
 * Module->isInstalled()
 * PackageManager->isInstalled($package, $type = PackageTypes::TYPE_MODULE)
-* TypeMapper::getModel($type)
+* UliCMS\HTML\icon($classes, $htmlAttributes = array())
 * UliCMS\HTML\stringContainsHtml($string)
 * UliCMS\HTML\link($url, $text, $allowHtml = false, $target = null, $htmlAttributes = array())
 * UliCMS\HTML\buttonLink($url, $text, $type = null, $allowHtml = false, $target = null, $htmlAttributes = array())
+* UliCMS\HTML\Button::button($text, $type = ButtonType::BUTTON_SUBMIT, $htmlAttributes = [], $allowHtml = false)
+* UliCMS\HTML\Button::default($text, $type = ButtonType::BUTTON_SUBMIT, $htmlAttributes = [], $allowHtml = false)
+* UliCMS\HTML\Button::primary($text, $type = ButtonType::BUTTON_SUBMIT, $htmlAttributes = [], $allowHtml = false)
+* UliCMS\HTML\Button::info($text, $type = ButtonType::BUTTON_SUBMIT, $htmlAttributes = [], $allowHtml = false)
+* UliCMS\HTML\Button::warning($text, $type = ButtonType::BUTTON_SUBMIT, $htmlAttributes = [], $allowHtml = false)
+* UliCMS\HTML\Button::danger($text, $type = ButtonType::BUTTON_SUBMIT, $htmlAttributes = [], $allowHtml = false)
+* UliCMS\HTML\Button::link($text, $type = ButtonType::BUTTON_SUBMIT, $htmlAttributes = [], $allowHtml = false)
+* NumberFormatHelper::timestampToHtml5Datetime($timestamp = null)
 * is_today($datetime = null)
 * is_tomorrow($datetime = null)
 * is_yesterday($datetime = null)
 * is_past($datetime = null)
 * is_future($datetime = null)
 * get_carbon($datetime = null)
-* Button::button($text, $type = ButtonType::BUTTON_SUBMIT, $htmlAttributes = [], $allowHtml = false)
-* Button::default($text, $type = ButtonType::BUTTON_SUBMIT, $htmlAttributes = [], $allowHtml = false)
-* Button::primary($text, $type = ButtonType::BUTTON_SUBMIT, $htmlAttributes = [], $allowHtml = false)
-* Button::info($text, $type = ButtonType::BUTTON_SUBMIT, $htmlAttributes = [], $allowHtml = false)
-* Button::warning($text, $type = ButtonType::BUTTON_SUBMIT, $htmlAttributes = [], $allowHtml = false)
-* Button::danger($text, $type = ButtonType::BUTTON_SUBMIT, $htmlAttributes = [], $allowHtml = false)
-* Button::link($text, $type = ButtonType::BUTTON_SUBMIT, $htmlAttributes = [], $allowHtml = false)
 
 Entfernte API-Methoden:
 * addUser()
