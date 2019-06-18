@@ -41,7 +41,7 @@ class User {
     }
 
     public function loadByUsername($name) {
-        $sql = "select * from {prefix}users where username = ?";
+        $sql = "select * from {prefix}users where username COLLATE utf8mb4_general_ci = ?";
         $args = array(
             strval($name)
         );
@@ -50,7 +50,7 @@ class User {
     }
 
     public function loadByEmail($email) {
-        $sql = "select * from {prefix}users where email = ?";
+        $sql = "select * from {prefix}users where email COLLATE utf8mb4_general_ci = ?";
         $args = array(
             strval($email)
         );

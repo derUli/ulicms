@@ -7,6 +7,7 @@ Neue Features:
 * controller_function_permissions unterstützt nun Wildcards
 * Sprachen können wieder gelöscht werden
 * Design-Einstellungen können nun in SCSS Code als Variablen verwendet werden
+* Username beim Login ist nun Case-Insensitive
 
 Neue API-Methoden:
 * ContentFactory::getAllByType($type, $order = "id")
