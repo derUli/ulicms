@@ -9,7 +9,6 @@ class PkgInfoController extends Controller {
             $pkg = new SinPackageInstaller($path);
             if (file_exists($path)) {
                 $pkg->installPackage();
-                @unlink($path);
             }
             Request::redirect(ModuleHelper::buildActionURL("sin_package_install_ok", "file=$file"));
         }
