@@ -336,6 +336,6 @@ if (!$permissionChecker->hasPermission("design")) {
     $translation = new JSTranslation();
     $translation->addKey("changes_was_saved");
     $translation->render();
-    enqueueScriptFile("scripts/design.js");
+    enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/design.js"));
     combinedScriptHtml();
 }
