@@ -1,6 +1,7 @@
 // This script contains the code for the "design settings" page
 
-// show a message if a "design for mobile devices" is set but Mobile_Detect is not installed
+// show a message if a "design for mobile devices" is set but
+// Mobile_Detect is not installed
 function initMobileDetectNotice() {
     if ($("select[name='mobile_theme']").val() != ""
             && $("#mobile_detect_notice").data("installed") === false) {
@@ -40,17 +41,19 @@ function loadThemePreview(selectField) {
 }
 
 // show a privacy warning if a google font is selected
-function onChangeDefaultFont() {
+function updateFontPreview() {
     const fontFamily = $("select#default_font").val();
     const fontSize = $("select#font-size").val();
     const googleFont = $("#google-fonts select").val();
     if (fontFamily === "google") {
         $("div#google-fonts").slideDown();
-        const url = $("#font-preview").data("google-font-url") + encodeURIComponent(googleFont);
+        const url = $("#font-preview").data("google-font-url") +
+                encodeURIComponent(googleFont);
         if ($("#google-font-loader").length) {
             $("#google-font-loader").attr("href", url);
         } else {
-            $('head').append(`<link id="google-font-loader" rel="stylesheet" href="${url}" type="text/css"/>`);
+            $('head').append(`<link id="google-font-loader" rel="stylesheet"` +
+                    `href="${url}" type="text/css"/>`);
         }
     } else {
         $("div#google-fonts").slideUp();
@@ -71,13 +74,16 @@ $(function () {
     });
 
     $("select#default_font, select#font-size, #google-fonts select")
-            .change(onChangeDefaultFont);
+            .change(updateFontPreview);
+
+    updateFontPreview();
 
     loadThemePreview($("select[name='theme']"));
     loadThemePreview($("select[name='mobile_theme']"));
-    $("select[name='theme'], select[name='mobile_theme']").change(function (event) {
-        loadThemePreview($(event.target));
-    });
+    $("select[name='theme'], select[name='mobile_theme']").change(
+            function (event) {
+                loadThemePreview($(event.target));
+            });
 
     // ajax form submit
     $("#designForm").ajaxForm(
