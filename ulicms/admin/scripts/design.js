@@ -3,7 +3,7 @@
 // show a message if a "design for mobile devices" is set but Mobile_Detect is not installed
 function initMobileDetectNotice() {
     if ($("select[name='mobile_theme']").val() != ""
-            && $("#mobile_detect_notice").data("installed") == false) {
+            && $("#mobile_detect_notice").data("installed") === false) {
         $("#mobile_detect_notice").slideDown();
     } else {
         $("#mobile_detect_notice").slideUp();
@@ -13,9 +13,7 @@ function initMobileDetectNotice() {
 function loadThemePreview(selectField) {
     const url = $(selectField).find("option:selected").data("preview-url");
 
-
     const targetElement = $($(selectField).data("preview-target-element"));
-
 
     if (!url) {
         $(targetElement).hide();
