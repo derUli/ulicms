@@ -24,7 +24,7 @@ function recurse_copy($src, $dst) {
 
 function find_all_files($dir) {
     $root = scandir($dir);
-    $result = array();
+    $result = [];
     foreach ($root as $value) {
         if ($value === '.' || $value === '..') {
             continue;
@@ -43,7 +43,7 @@ function find_all_files($dir) {
 
 function find_all_folders($dir) {
     $root = scandir($dir);
-    $result = array();
+    $result = [];
     foreach ($root as $value) {
         if ($value === '.' || $value === '..') {
             continue;

@@ -21,7 +21,7 @@
         }
     ],
     "require": {
-        "php": ">=5.6",
+        "php": ">=7.0",
         "ext-mysqli": "*",
         "ext-gd": "*",
         "ext-json": "*",
@@ -39,7 +39,8 @@
         "willdurand/negotiation": "*",
         "cocur/slugify": "*",
         "matthiasmullie/minify": "*",
-        "rakit/validation": "^1.1"
+        "rakit/validation": "*",
+        "nesbot/carbon": "*"
     },
     "require-dev": {
         "phpunit/phpunit": "^7.0"

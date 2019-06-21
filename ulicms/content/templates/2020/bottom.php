@@ -3,7 +3,7 @@ enqueueScriptFile(
         getTemplateDirPath(
                 get_theme()
         ) .
-        "node_modules/onepage-scroll/jquery.onepage-scroll.min.js");
+        "node_modules/fullpage.js/dist/fullpage.min.js");
 enqueueScriptFile(
         getTemplateDirPath(
                 get_theme()

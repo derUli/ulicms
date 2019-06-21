@@ -116,8 +116,8 @@ function initDataTables(rootElement) {
         language: {
             url: $("body").data("datatables-translation"),
         },
-		deferRender: true,
-		stateSave: true,
+        deferRender: true,
+        stateSave: true,
         columnDefs: [{targets: "no-sort", orderable: false}],
     });
 }

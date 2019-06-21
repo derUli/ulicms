@@ -1,6 +1,6 @@
 <?php
 
-function get_translation($name, $placeholders = array()) {
+function get_translation($name, $placeholders = []) {
     $iname = strtoupper($name);
     foreach (get_defined_constants() as $key => $value) {
         if (startsWith($key, "TRANSLATION_") and $key == "TRANSLATION_" . $iname) {
@@ -20,22 +20,22 @@ function get_translation($name, $placeholders = array()) {
     return $name;
 }
 
-function translation($name, $placeholders = array()) {
+function translation($name, $placeholders = []) {
     echo get_translation($name, $placeholders);
 }
 
-function translate($name, $placeholders = array()) {
+function translate($name, $placeholders = []) {
     translation($name, $placeholders);
 }
 
-function get_secure_translation($name, $placeholders = array()) {
+function get_secure_translation($name, $placeholders = []) {
     return Template::getEscape(get_translation($name, $placeholders));
 }
 
-function secure_translation($name, $placeholders = array()) {
+function secure_translation($name, $placeholders = []) {
     echo get_secure_translation($name, $placeholders);
 }
 
-function secure_translate($name, $placeholders = array()) {
+function secure_translate($name, $placeholders = []) {
     secure_translation($name, $placeholders);
 }

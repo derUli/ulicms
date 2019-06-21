@@ -2,7 +2,7 @@
 
 class SelectField extends CustomField {
 
-    public $options = array();
+    public $options = [];
     public $translateOptions = true;
 
     public function render($value = null) {
@@ -18,7 +18,7 @@ class SelectField extends CustomField {
 
 class MultiSelectField extends CustomField {
 
-    public $options = array();
+    public $options = [];
     public $translateOptions = true;
 
     public function render($value = null) {

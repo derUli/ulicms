@@ -9,7 +9,7 @@ use UliCMS\Constants\RequestMethod;
 
 class Form {
 
-    public static function buildMethodCallForm($sClass, $sMethod, $otherVars = array(), $requestMethod = RequestMethod::POST, $htmlAttributes = array()) {
+    public static function buildMethodCallForm($sClass, $sMethod, $otherVars = [], $requestMethod = RequestMethod::POST, $htmlAttributes = []) {
         $html = "";
         $attribhtml = StringHelper::isNotNullOrWhitespace(ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes)) ? " " . ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes) : "";
         $html .= '<form action="index.php" method="' . $requestMethod . '"' . $attribhtml . '>';
@@ -23,7 +23,7 @@ class Form {
         return $html;
     }
 
-    public static function buildMethodCallButton($sClass, $sMethod, $buttonText, $buttonAttributes = array("class" => "btn btn-default", "type" => "submit"), $otherVars = array(), $formAttributes = array(), $requestMethod = RequestMethod::POST) {
+    public static function buildMethodCallButton($sClass, $sMethod, $buttonText, $buttonAttributes = array("class" => "btn btn-default", "type" => "submit"), $otherVars = [], $formAttributes = [], $requestMethod = RequestMethod::POST) {
         $html = ModuleHelper::buildMethodCallForm($sClass, $sMethod, $otherVars, $requestMethod, $formAttributes);
         $html .= '<button ' . ModuleHelper::buildHTMLAttributesFromArray($buttonAttributes) . ">";
         $html .= $buttonText . "</button>";
@@ -31,7 +31,7 @@ class Form {
         return $html;
     }
 
-    public static function deleteButton($url, $otherVars = array(), $htmlAttributes = array()) {
+    public static function deleteButton($url, $otherVars = [], $htmlAttributes = []) {
         $html = "";
         $htmlAttributes["class"] = trim("delete-form " . $htmlAttributes["class"]);
 

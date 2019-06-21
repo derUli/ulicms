@@ -8,7 +8,7 @@ if ($permissionChecker->hasPermission("banners") and $permissionChecker->hasPerm
     ?>
 
     <?php
-    echo ModuleHelper::buildMethodCallForm("BannerController", "create", array(), RequestMethod::POST, array(
+    echo ModuleHelper::buildMethodCallForm("BannerController", "create", [], RequestMethod::POST, array(
         "autocomplete" => "off"
     ));
     ?>
@@ -82,8 +82,8 @@ if ($permissionChecker->hasPermission("banners") and $permissionChecker->hasPerm
         <button type="submit" class="btn btn-primary">
             <i class="fa fa-save"></i> <?php translate("add_banner"); ?></button>
     </p>
-    <?php echo ModuleHelper::endForm(); ?>
     <?php
+    echo ModuleHelper::endForm();
 } else {
     noPerms();
 }

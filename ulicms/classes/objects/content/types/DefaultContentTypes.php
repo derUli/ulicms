@@ -6,10 +6,10 @@ use UliCMS\Models\Content\Types\ContentType;
 
 class DefaultContentTypes {
 
-    private static $types = array();
+    private static $types = [];
 
     public static function initTypes() {
-        self::$types = array();
+        self::$types = [];
         self::$types["page"] = new ContentType();
         self::$types["page"]->show = array(
             ".hide-on-non-regular",
@@ -90,7 +90,7 @@ class DefaultContentTypes {
     }
 
     public static function toJSON() {
-        $result = array();
+        $result = [];
         foreach (self::$types as $key => $value) {
             $result[$key] = array(
                 "show" => $value->show

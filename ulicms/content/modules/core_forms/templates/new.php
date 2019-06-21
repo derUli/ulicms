@@ -59,9 +59,9 @@ if (!$permissionChecker->hasPermission("forms") or ! $permissionChecker->hasPerm
     <p>
         <strong><?php translate("target_page_id"); ?></strong><br /> <select
             name="target_page_id">
-            <?php foreach ($pages as $page) { ?>
+                <?php foreach ($pages as $page) { ?>
                 <option value="<?php echo $page["id"]; ?>"><?php esc($page["title"]); ?></option>
-    <?php } ?>
+            <?php } ?>
 
 
         </select>
@@ -70,6 +70,6 @@ if (!$permissionChecker->hasPermission("forms") or ! $permissionChecker->hasPerm
         <button name="create_form" type="submit" class="btn btn-primary">
             <i class="fas fa-save"></i> <?php translate("create"); ?></button>
     </p>
-    <?php echo ModuleHelper::endForm(); ?>
     <?php
+    echo ModuleHelper::endForm();
 }

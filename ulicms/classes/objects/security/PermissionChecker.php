@@ -41,7 +41,7 @@ class PermissionChecker {
 
     private function getUserGroups($user) {
         // Collect primary group and secondary groups of the user
-        $groups = array();
+        $groups = [];
         if ($user->getGroup()) {
             $groups[] = $user->getGroup();
         }
@@ -55,7 +55,7 @@ class PermissionChecker {
         $user = new User($this->user_id);
         $groups = $this->getUserGroups($user);
 
-        $languages = array();
+        $languages = [];
 
         foreach ($groups as $group) {
             $languages = array_merge($languages, $group->getLanguages());

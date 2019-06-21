@@ -6,30 +6,6 @@ use UliCMS\Constants\ModuleEventConstants;
 use UliCMS\Models\Content\Types\DefaultContentTypes;
 use UliCMS\Utils\CacheUtil;
 
-function is_blank($val = null) {
-    return isset($val) && (is_string($val) &&
-            StringHelper::isNullOrWhitespace($val)) ||
-            empty($val);
-}
-
-function is_present($val = null) {
-    return isset($val) && !is_blank($val);
-}
-
-function startsWith($haystack, $needle, $case = true) {
-    if ($case) {
-        return (strcmp(substr($haystack, 0, strlen($needle)), $needle) === 0);
-    }
-    return (strcasecmp(substr($haystack, 0, strlen($needle)), $needle) === 0);
-}
-
-function endsWith($haystack, $needle, $case = true) {
-    if ($case) {
-        return (strcmp(substr($haystack, strlen($haystack) - strlen($needle)), $needle) === 0);
-    }
-    return (strcasecmp(substr($haystack, strlen($haystack) - strlen($needle)), $needle) === 0);
-}
-
 function idefine($key, $value) {
     $key = strtoupper($key);
     if (!defined($key)) {
@@ -45,22 +21,6 @@ function faster_in_array($needle, $haystack) {
     }
     $flipped = array_flip($haystack);
     return isset($flipped[$needle]);
-}
-
-function is_json($str) {
-    return json_decode($str) != null;
-}
-
-function is_numeric_array($var) {
-    if (!is_array($var)) {
-        return false;
-    }
-    foreach ($var as $key => $value) {
-        if (!is_numeric($value)) {
-            return false;
-        }
-    }
-    return true;
 }
 
 function var_is_type($var, $type, $required = false) {
@@ -124,14 +84,6 @@ if (!function_exists("each")) {
         return myEach($arr);
     }
 
-}
-
-function is_true($var) {
-    return (isset($var) and $var);
-}
-
-function is_false($var) {
-    return !(isset($var) and $var);
 }
 
 function bool2YesNo($value, $yesString = null, $noString = null) {
@@ -208,7 +160,7 @@ function array_keep($array, $keys) {
 function getAllUsedLanguages() {
     $sql = "select language from `{prefix}content` where active = 1 group by language order by language";
     $query = Database::query($sql, true);
-    $languages = array();
+    $languages = [];
     while ($row = Database::fetchobject($query)) {
         $languages[] = $row->language;
     }
@@ -225,17 +177,8 @@ function get_action() {
     return BackendHelper::getAction();
 }
 
-function isMaintenanceMode() {
-    return (strtolower(Settings::get("maintenance_mode")) == "on" || strtolower(Settings::get("maintenance_mode")) == "true" || Settings::get("maintenance_mode") == "1");
-}
-
 function getStringLengthInBytes($data) {
     return ini_get('mbstring.func_overload') ? mb_strlen($data, '8bit') : strlen($data);
-}
-
-// sind wir gerade im Adminordner?
-function is_admin_dir() {
-    return basename(getcwd()) === "admin";
 }
 
 function set_format($format) {
@@ -258,7 +201,7 @@ function get_prefered_language($priorities, $http_accept_language) {
 }
 
 function get_all_used_menus() {
-    $retval = array();
+    $retval = [];
     $query = db_query("select menu from " . tbname("content") . " group by menu");
     while ($row = db_fetch_object($query)) {
         $retval[] = $row->menu;
@@ -296,20 +239,6 @@ function get_canonical() {
     return $canonical;
 }
 
-function is_crawler($useragent = null) {
-    if (is_null($useragent)) {
-        $useragent = $_SERVER['HTTP_USER_AGENT'];
-    }
-    $isCrawler = apply_filter($useragent, "is_crawler");
-    if (is_bool($isCrawler) or is_int($isCrawler)) {
-        return boolval($isCrawler);
-    }
-
-    $crawlers = 'Google|msnbot|Rambler|Yahoo|AbachoBOT|accoona|' . 'AcioRobot|ASPSeek|CocoCrawler|Dumbot|FAST-WebCrawler|' . 'GeonaBot|Gigabot|Lycos|MSRBOT|Scooter|AltaVista|IDBot|eStyle|Scrubby';
-    $isCrawler = (preg_match("/$crawlers/", $useragent) > 0);
-    return $isCrawler;
-}
-
 function get_lang_config($name, $lang) {
     $retval = false;
     $config = Settings::get($name . "_" . $lang);
@@ -319,12 +248,6 @@ function get_lang_config($name, $lang) {
         $config = Settings::get($name);
     }
     return $config;
-}
-
-// Check if it is night (current hour between 0 and 4 o'Clock AM)
-function is_night() {
-    $hour = (int) date("G", time());
-    return ($hour >= 0 and $hour <= 4);
 }
 
 function eTagFromString($str) {
@@ -352,15 +275,6 @@ function initPFBC() {
     do_event("init_pfbc");
 }
 
-function is_debug_mode() {
-    $config = new CMSConfig();
-    return (defined("ULICMS_DEBUG") and ULICMS_DEBUG) or ( isset($config->debug) and $config->debug);
-}
-
-function isCLI() {
-    return php_sapi_name() == "cli";
-}
-
 /**
  * Get either a Gravatar URL or complete image tag for a specified email address.
  *
@@ -379,7 +293,7 @@ function isCLI() {
  * @return String containing either just a URL or a complete image tag
  *         @source http://gravatar.com/site/implement/images/php/
  */
-function get_gravatar($email, $s = 80, $d = 'mm', $r = 'g', $img = false, $atts = array()) {
+function get_gravatar($email, $s = 80, $d = 'mm', $r = 'g', $img = false, $atts = []) {
     // Nach dem in Kraft treten, der Datenschutz-Grundverordnung 2018
     // wird die Nutzung von Gravatar in Deutschland illegal
     // daher wird an dieser Stelle die Gravatar-Integration gekappt
@@ -469,7 +383,7 @@ function get_csrf_token() {
 }
 
 function getFieldsForCustomType($type) {
-    $fields = array();
+    $fields = [];
     $modules = getAllModules();
     foreach ($modules as $module) {
         $custom_types = getModuleMeta($module, "custom_types");
@@ -489,8 +403,8 @@ function getFieldsForCustomType($type) {
 function get_used_post_types() {
     $query = Database::query("select `type` from {prefix}content group by `type`", true);
     $types = get_available_post_types();
-    $used_types = array();
-    $return_types = array();
+    $used_types = [];
+    $return_types = [];
     while ($row = Database::fetchObject($query)) {
         $used_types[] = $row->type;
     }
@@ -511,7 +425,7 @@ function get_available_post_types() {
 // Schriftgrößen zurückgeben
 function getFontSizes() {
     global $sizes;
-    $sizes = array();
+    $sizes = [];
     for ($i = 6; $i <= 80; $i ++) {
         $sizes[] = $i . "px";
     }
@@ -522,35 +436,26 @@ function getFontSizes() {
 }
 
 function getModuleMeta($module, $attrib = null) {
-    $retval = null;
-    $metadata_file = getModulePath($module, true) . "metadata.json";
-    if (is_file($metadata_file)) {
-        if ($attrib != null) {
-            $data = !Vars::get("module_{$module}_meta") ? file_get_contents($metadata_file) : Vars::get("module_{$module}_meta");
-            if (is_string($data)) {
-                $data = json_decode($data, true);
-            }
-            Vars::set("module_{$module}_meta", $data);
-            if (isset($data[$attrib])) {
-                $retval = $data[$attrib];
-            }
-        } else {
-            $data = !Vars::get("module_{$module}_meta") ? file_get_contents($metadata_file) : Vars::get("module_{$module}_meta");
-            if (is_string($data)) {
-                $data = json_decode($data, true);
-            }
-            Vars::set("module_{$module}_meta", $data);
-
-            $retval = $data;
-        }
+    $metadata_file = ModuleHelper::buildModuleRessourcePath($module, "metadata.json", true);
+    if (!file_exists($metadata_file) || is_dir($metadata_file)) {
+        return null;
     }
-    return $retval;
+
+    $data = file_get_contents($metadata_file);
+    $json = json_decode($data, true);
+    if (!$json) {
+        return null;
+    }
+    if ($attrib and ! isset($json[$attrib])) {
+        return null;
+    }
+    return $attrib ? $json[$attrib] : $json;
 }
 
 function getThemeMeta($theme, $attrib = null) {
     $retval = null;
     $metadata_file = getTemplateDirPath($theme, true) . "metadata.json";
-    if (is_file($metadata_file)) {
+    if (file_exists($metadata_file)) {
         $data = !Vars::get("theme_{$theme}_meta") ? file_get_contents($metadata_file) : Vars::get("theme_{$theme}_meta");
 
         if (is_string($data)) {
@@ -570,7 +475,7 @@ function getThemeMeta($theme, $attrib = null) {
 
 function getModuleName($module) {
     $name_file = getModulePath($module) . $module . "_name.php";
-    if (!is_file($name_file)) {
+    if (!file_exists($name_file)) {
         return $module;
     }
     require_once $name_file;
@@ -597,7 +502,7 @@ function getAvailableBackendLanguages() {
     $langdir = ULICMS_ROOT . "/lang/";
     $list = scandir($langdir);
     sort($list);
-    $retval = array();
+    $retval = [];
     for ($i = 0; $i < count($list); $i ++) {
         if (endsWith($list[$i], ".php")) {
             array_push($retval, basename($list[$i], ".php"));
@@ -617,7 +522,7 @@ function getSystemLanguage() {
     } else {
         $lang = "de";
     }
-    if (!is_file(getLanguageFilePath($lang))) {
+    if (!file_exists(getLanguageFilePath($lang))) {
         $lang = "de";
     }
     return $lang;
@@ -662,7 +567,7 @@ function setLanguageByDomain() {
 
 function getOnlineUsers() {
     $users_online = db_query("SELECT username FROM " . tbname("users") . " WHERE last_action > " . (time() - 300) . " ORDER BY username");
-    $users = array();
+    $users = [];
     while ($row = db_fetch_object($users_online)) {
         array_push($users, $row->username);
     }
@@ -741,13 +646,13 @@ function do_event($name, $runs = ModuleEventConstants::RUNS_ONCE) {
         $escapedName = ModuleHelper::underscoreToCamel($name);
         if ($controller and method_exists($controller, $escapedName)) {
             echo $controller->$escapedName();
-        } else if (is_file($file1)) {
+        } else if (file_exists($file1)) {
             if ($runs === ModuleEventConstants::RUNS_MULTIPLE) {
                 require $file1;
             } else {
                 require_once $file1;
             }
-        } else if (is_file($file2)) {
+        } else if (file_exists($file2)) {
 
             if ($runs === ModuleEventConstants::RUNS_MULTIPLE) {
                 require $file1;
@@ -856,7 +761,7 @@ function replace_num_entity($ord) {
     }
 
     $no_bytes = 0;
-    $byte = array();
+    $byte = [];
 
     if ($ord < 128) {
         return chr($ord);
@@ -953,7 +858,7 @@ function buildSEOUrl($page = false, $redirection = null, $format = "html") {
 
     $seo_url = "";
 
-    if (is_file("backend.php")) {
+    if (file_exists("backend.php")) {
         $seo_url .= "../";
     }
     $seo_url .= $page;
@@ -967,7 +872,7 @@ function getModulePath($module, $abspath = false) {
     }
     if (ULICMS_ROOT == ULICMS_DATA_STORAGE_ROOT and ! defined("ULICMS_DATA_STORAGE_URL")) {
         // Frontend Directory
-        if (is_file("CMSConfig.php")) {
+        if (file_exists("CMSConfig.php")) {
             $module_folder = "content/modules/";
         } // Backend Directory
         else {
@@ -977,7 +882,7 @@ function getModulePath($module, $abspath = false) {
         $module_folder = Path::resolve("ULICMS_DATA_STORAGE_URL/content/modules") . "/";
     }
 
-    $available_modules = array();
+    $available_modules = [];
     return $module_folder . $module . "/";
 }
 
@@ -1029,7 +934,8 @@ function fcflush() {
 }
 
 function isModuleInstalled($name) {
-    return faster_in_array($name, getAllModules());
+    $module = new Module($name);
+    return $module->isInstalled();
 }
 
 function getAllModules() {
@@ -1119,9 +1025,9 @@ function replaceShortcodesWithModules($string, $replaceOther = true) {
         $module_mainfile_path = getModuleMainFilePath($thisModule);
         $module_mainfile_path2 = getModuleMainFilePath2($thisModule);
 
-        if (is_file($module_mainfile_path) and ( str_contains($stringToReplace1, $string) or str_contains($stringToReplace2, $string))) {
+        if (file_exists($module_mainfile_path) and ( str_contains($stringToReplace1, $string) or str_contains($stringToReplace2, $string))) {
             require_once $module_mainfile_path;
-        } else if (is_file($module_mainfile_path2)) {
+        } else if (file_exists($module_mainfile_path2)) {
             require_once $module_mainfile_path2;
         } else {
             $html_output = "<p class='ulicms_error'>Das Modul " . $thisModule . " konnte nicht geladen werden.</p>";
@@ -1196,7 +1102,7 @@ function getPageTitleByID($id) {
 // Get slugs of all pages
 function getAllPagesWithTitle() {
     $query = db_query("SELECT slug, id, title FROM `" . tbname("content") . "` WHERE `deleted_at` IS NULL ORDER BY slug");
-    $returnvalues = Array();
+    $returnvalues = [];
     while ($row = db_fetch_object($query)) {
         $a = Array(
             $row->title,
@@ -1236,7 +1142,7 @@ function getAllPages($lang = null, $order = "slug", $exclude_hash_links = true, 
             $query = db_query("SELECT * FROM `" . tbname("content") . "` WHERE `deleted_at` IS NULL AND language ='" . db_escape($lang) . "' and menu = '" . Database::escapeValue($menu) . "' ORDER BY $order");
         }
     }
-    $returnvalues = Array();
+    $returnvalues = [];
     while ($row = db_fetch_assoc($query)) {
         if (!$exclude_hash_links or ( $exclude_hash_links and $row["type"] != "link" and $row["type"] != "node" and $row["type"] != "language_link")) {
             array_push($returnvalues, $row);
@@ -1248,7 +1154,7 @@ function getAllPages($lang = null, $order = "slug", $exclude_hash_links = true, 
 
 // Get slugs of all pages
 function getAllSlugs($lang = null) {
-    $slugs = Array();
+    $slugs = [];
 
     if (!$lang) {
         $query = db_query("SELECT slug,id FROM `" . tbname("content") . "` WHERE `deleted_at` IS NULL AND redirection NOT LIKE '#%' ORDER BY slug");
@@ -1269,7 +1175,7 @@ function getAllLanguages($filtered = false) {
         $permissionChecker = new PermissionChecker(get_user_id());
         $languages = $permissionChecker->getLanguages();
         if (count($languages) > 0) {
-            $result = array();
+            $result = [];
             foreach ($languages as $lang) {
                 $result[] = $lang->getLanguageCode();
             }
@@ -1280,7 +1186,7 @@ function getAllLanguages($filtered = false) {
         return Vars::get("all_languages");
     }
     $query = db_query("SELECT language_code FROM `" . tbname("languages") . "` ORDER BY language_code");
-    $languageCodes = Array();
+    $languageCodes = [];
     while ($row = db_fetch_object($query)) {
         array_push($languageCodes, $row->language_code);
     }
@@ -1333,7 +1239,7 @@ function getAllMenus($only_used = false) {
     }
     if ($only_used) {
         $used = get_all_used_menus();
-        $new_menus = array();
+        $new_menus = [];
         for ($i = 0; $i <= count($menus); $i ++) {
             if (faster_in_array($menus[$i], $used)) {
                 $new_menus[] = $menus[$i];
@@ -1343,7 +1249,7 @@ function getAllMenus($only_used = false) {
     }
 
     $themesList = getThemesList();
-    $allThemeMenus = array();
+    $allThemeMenus = [];
     foreach ($themesList as $theme) {
         $themeMenus = getThemeMeta($theme, "menus");
         if ($themeMenus and is_array($themeMenus)) {
@@ -1426,9 +1332,9 @@ function uninstall_module($name, $type = "module") {
                 $mainController = ModuleHelper::getMainController($name);
                 if ($mainController and method_exists($mainController, "uninstall")) {
                     $mainController->uninstall();
-                } else if (is_file($uninstall_script)) {
+                } else if (file_exists($uninstall_script)) {
                     require $uninstall_script;
-                } else if (is_file($uninstall_script2)) {
+                } else if (file_exists($uninstall_script2)) {
                     require $uninstall_script2;
                 }
                 sureRemoveDir($moduleDir, true);
@@ -1458,38 +1364,8 @@ function cms_version() {
     return implode(".", $v->getInternalVersion());
 }
 
-function is_tablet() {
-    if (!class_exists("Mobile_Detect")) {
-        return false;
-    }
-    $detect = new Mobile_Detect();
-    $result = $detect->isTablet();
-    return $result;
-}
-
-function is_desktop() {
-    return !is_mobile();
-}
-
 function get_environment() {
     return getenv("ULICMS_ENVIRONMENT") ? getenv("ULICMS_ENVIRONMENT") : "default";
-}
-
-// 21. Februar 2015
-// Nutzt nun die Klasse Mobile_Detect
-function is_mobile() {
-    if (!class_exists("Mobile_Detect")) {
-        return false;
-    }
-    $detect = new Mobile_Detect();
-    $result = $detect->isMobile();
-    if (Settings::get("no_mobile_design_on_tablet") and $result and $detect->isTablet()) {
-        $result = false;
-    }
-    if (function_exists("apply_filter")) {
-        $result = apply_filter($result, "is_mobile");
-    }
-    return $result;
 }
 
 function func_enabled($func) {
@@ -1505,16 +1381,6 @@ function func_enabled($func) {
         $it_is_disabled["s"] = 1;
     }
     return $it_is_disabled;
-}
-
-function is_admin() {
-    $isAdmin = false;
-    $user_id = get_user_id();
-    if ($user_id) {
-        $user = new User(get_user_id());
-        $isAdmin = $user->getAdmin();
-    }
-    return $isAdmin;
 }
 
 function set_eTagHeaders($identifier, $timestamp) {

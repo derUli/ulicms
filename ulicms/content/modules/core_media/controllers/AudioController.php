@@ -7,12 +7,12 @@ class AudioController extends Controller {
         if (db_num_rows($query) > 0) {
             $result = db_fetch_object($query);
             $filepath = ULICMS_DATA_STORAGE_ROOT . "/content/audio/" . basename($result->ogg_file);
-            if (!empty($result->ogg_file) and is_file($filepath)) {
+            if (!empty($result->ogg_file) and file_exists($filepath)) {
                 @unlink($filepath);
             }
 
             $filepath = ULICMS_DATA_STORAGE_ROOT . "/content/audio/" . basename($result->mp3_file);
-            if (!empty($result->mp3_file) and is_file($filepath)) {
+            if (!empty($result->mp3_file) and file_exists($filepath)) {
                 @unlink($filepath);
             }
 

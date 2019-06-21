@@ -40,7 +40,7 @@ if (!$permissionChecker->hasPermission("design")) {
         <?php translate("design"); ?>
     </h1>
     <?php
-    echo ModuleHelper::buildMethodCallForm("DesignSettingsController", "save", array(), "post", array(
+    echo ModuleHelper::buildMethodCallForm("DesignSettingsController", "save", [], "post", array(
         "id" => "designForm"
     ));
     ?>
@@ -126,7 +126,7 @@ if (!$permissionChecker->hasPermission("design")) {
                                         ?>
                                         data-preview-url="<?php
                                         echo ModuleHelper::buildMethodCallUrl(DesignSettingsController::class, "getThemePreview",
-                                                "theme={$th}");
+                                                "theme ={$th}");
                                         ?>">
                                             <?php
                                             echo $th;
@@ -217,12 +217,13 @@ if (!$permissionChecker->hasPermission("design")) {
                             ?>
                         </select>
                         <div class="voffset3 alert alert-warning"><?php translate("google_fonts_privacy_warning"); ?></div>
-                    </div></td>
+                    </div>
+                </td>
             </tr>
             <tr>
                 <td><strong><?php translate("font_size"); ?> </strong>
 
-                <td><select name="font-size">
+                <td> <select name="font-size" id="font-size">
                         <?php
                         foreach ($font_sizes as $size) {
                             echo '<option value="' . $size . '"';
@@ -235,6 +236,11 @@ if (!$permissionChecker->hasPermission("design")) {
                         }
                         ?>
                     </select></td>
+            </tr>
+            <tr id="font-preview"
+                data-google-font-url="//fonts.googleapis.com/css?family=">
+                <td></td>
+                <td>Franz jagt im komplett verwahrlosten Taxi quer durch Bayern</td>
             </tr>
             <tr>
                 <td><strong><?php translate("HEADER_BACKGROUNDCOLOR"); ?> </strong></td>
@@ -256,7 +262,7 @@ if (!$permissionChecker->hasPermission("design")) {
                 <td><strong><?php translate("BACKGROUNDCOLOR"); ?> </strong></td>
                 <td><input name="body-background-color"
                            class="jscolor {hash:true,caps:true}"
-                           value="<?php
+                           value ="<?php
                            echo _esc(Settings::get("body-background-color"));
                            ?>"></td>
             </tr>
@@ -325,12 +331,11 @@ if (!$permissionChecker->hasPermission("design")) {
         <button type="submit" class="btn btn-primary" name="submit">
             <i class="fas fa-save"></i> <?php translate("save_changes"); ?></button>
     </p>
-    <?php echo ModuleHelper::endForm(); ?>
-
     <?php
+    echo ModuleHelper::endForm();
     $translation = new JSTranslation();
     $translation->addKey("changes_was_saved");
     $translation->render();
-    enqueueScriptFile("scripts/design.js");
+    enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/design.js"));
     combinedScriptHtml();
 }

@@ -2,7 +2,7 @@
 
 class ViewBag {
 
-    private static $vars = array();
+    private static $vars = [];
 
     public static function get($var) {
         if (isset(self::$vars[$var])) {
@@ -22,7 +22,7 @@ class ViewBag {
     }
 
     public static function clear() {
-        self::$vars = array();
+        self::$vars = [];
     }
 
     public static function getAllVars() {

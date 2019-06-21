@@ -25,7 +25,7 @@ if (Vars::get("comments_enabled")) {
         ?>
         <div class="<?php esc($cssClass); ?>">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <?php translate("comment_published_{$comment_published}"); ?>
+            <?php translate("comment_published_{$comment_published}"); ?>
         </div>
         <?php
     }
@@ -34,11 +34,11 @@ if (Vars::get("comments_enabled")) {
     <h3><?php translate("write_a_comment"); ?></h3>
     <div class="comments">
         <?php
-        echo ModuleHelper::buildMethodCallForm(CommentsController::class, "postComment", array(), "post", array(
+        echo ModuleHelper::buildMethodCallForm(CommentsController::class, "postComment", [], "post", array(
             "autocomplete" => "off"
         ));
         ?>
-    <?php echo UliCMS\HTML\Input::Hidden("content_id", Vars::get("content_id")); ?>
+        <?php echo UliCMS\HTML\Input::Hidden("content_id", Vars::get("content_id")); ?>
 
         <div>
             <label for="author_name"><?php translate("your_name") ?>
@@ -96,6 +96,6 @@ if (Vars::get("comments_enabled")) {
             <button type="submit" class="btn btn-primary"><?php translate("post_comment") ?></button>
         </p>
     </div>
-    <?php echo ModuleHelper::endForm(); ?>
     <?php
+    echo ModuleHelper::endForm();
 }

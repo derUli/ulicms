@@ -41,7 +41,7 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
     public function testGetAllByParent() {
 
         $query = Database::pQuery("select parent_id from {prefix}content where "
-                        . "parent_id is not null", array(), true);
+                        . "parent_id is not null", [], true);
         $result = Database::fetchObject($query);
 
         $pages = ContentFactory::getAllByParent($result->parent_id);
@@ -63,7 +63,7 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetAll() {
         $content = ContentFactory::getAll();
-        $query = Database::pQuery("select id from {prefix}content", array(), true);
+        $query = Database::pQuery("select id from {prefix}content", [], true);
         $this->assertEquals(count($content), Database::getNumRows($query));
 
         foreach ($content as $page) {
@@ -80,7 +80,7 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testFilterByEnabled() {
-        $elements = array();
+        $elements = [];
 
         $test1 = new Page();
         $test1->active = 1;

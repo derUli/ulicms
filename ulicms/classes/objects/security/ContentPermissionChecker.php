@@ -30,7 +30,7 @@ class ContentPermissionChecker implements IDatasetPermissionChecker {
 
         $user = new User($this->user_id);
         $permissionChecker = new PermissionChecker($this->user_id);
-        $userGroups = array();
+        $userGroups = [];
         $primaryGroup = $user->getGroupId();
 
         if ($primaryGroup) {
@@ -42,7 +42,7 @@ class ContentPermissionChecker implements IDatasetPermissionChecker {
 
         $userGroups = array_merge($userGroups, $user->getSecondaryGroups());
 
-        $groupIds = array();
+        $groupIds = [];
         foreach ($userGroups as $group) {
             $groupIds[] = $group->getID();
         }

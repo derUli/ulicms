@@ -24,12 +24,12 @@ abstract class Content extends Model {
 
     public function getChildren($order = "id") {
         if (!$this->getID()) {
-            return array();
+            return [];
         }
         try {
             return ContentFactory:: getAllByParent($this->getID(), $order);
         } catch (FileNotFoundException $e) {
-            return array();
+            return [];
         }
     }
 

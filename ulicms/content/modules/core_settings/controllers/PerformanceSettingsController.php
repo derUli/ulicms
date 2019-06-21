@@ -19,6 +19,7 @@ class PerformanceSettingsController extends Controller {
             Request::redirect("index.php");
         }
         clearCache();
+
         // No need to redirect on ajax request
         if (Request::isAjaxRequest()) {
             HTTPStatusCodeResult(HttpStatusCode::OK);

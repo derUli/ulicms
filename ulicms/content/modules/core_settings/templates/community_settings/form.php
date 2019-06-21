@@ -1,11 +1,11 @@
 <?php
 $types = get_available_post_types();
-$typeSelection = array();
+$typeSelection = [];
 foreach ($types as $type) {
     $typeSelection[] = new UliCMS\HTML\ListItem($type, get_translation($type));
 }
 
-$commentableContentTypes = array();
+$commentableContentTypes = [];
 
 $commentableContentTypeSettings = Settings::get("commentable_content_types");
 if ($commentableContentTypeSettings) {
@@ -24,8 +24,7 @@ if ($commentableContentTypeSettings) {
     </div>
 <?php } ?>
 <?php echo ModuleHelper::buildMethodCallForm(CommunitySettingsController::class, "save"); ?>
-<h1><?php translate("community") ?></h1>
-<h2><?php translate("comments"); ?></h2>
+<h1><?php translate("comments") ?></h1>
 <div class="checkbox">
     <label><?php
         echo UliCMS\HTML\Input::CheckBox("comments_enabled", boolval(Settings::get("comments_enabled")), "1",

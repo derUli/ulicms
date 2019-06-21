@@ -6,10 +6,10 @@ class MenuEntry {
     private $link;
     private $identifier;
     private $permissions;
-    private $children = array();
+    private $children = [];
     private $newWindow = false;
 
-    public function __construct($title, $link, $identifier, $permissions = null, $children = array(), $newWindow = false) {
+    public function __construct($title, $link, $identifier, $permissions = null, $children = [], $newWindow = false) {
         $this->title = $title;
         $this->link = $link;
         $this->identifier = $identifier;
@@ -56,22 +56,6 @@ class MenuEntry {
 
     public function addChild($children) {
         $this->children[] = $children;
-    }
-
-    public function getChildByID($identifier, $root = null) {
-        $result = null;
-        if (!$root) {
-            $root = $this->children;
-        }
-        foreach ($this->children as $root) {
-            if ($child->getIdentifier() == $identifier) {
-                return $child;
-            }
-            if ($child->hasChildren()) {
-                return $this->getChildByID($identifier, $child);
-            }
-        }
-        return null;
     }
 
     public function getPermissions() {

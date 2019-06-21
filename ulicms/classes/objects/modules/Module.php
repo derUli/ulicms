@@ -19,6 +19,7 @@ class Module {
         );
         $query = Database::pQuery($sql, $args, true);
         $dataset = Database::fetchSingle($query);
+
         if ($dataset) {
             $this->name = $dataset->name;
             $this->version = $dataset->version;
@@ -42,7 +43,7 @@ class Module {
         }
     }
 
-    private function insert() {
+    protected function insert() {
         $sql = "INSERT INTO {prefix}modules (name, version, enabled) values(?, ?, ?)";
         $args = array(
             $this->name,
@@ -52,7 +53,7 @@ class Module {
         return Database::pQuery($sql, $args, true);
     }
 
-    private function update() {
+    protected function update() {
         $sql = "update {prefix}modules set version = ?, enabled = ? where name = ?";
         $args = array(
             $this->version,
@@ -82,7 +83,7 @@ class Module {
     }
 
     public function getMissingDependencies() {
-        $result = array();
+        $result = [];
         $manager = new ModuleManager ();
         $dependencies = $manager->getDependencies($this->name);
         $enabledMods = $manager->getEnabledModuleNames();
@@ -94,14 +95,21 @@ class Module {
         return $result;
     }
 
+    public function isInstalled() {
+        if (!$this->getName()) {
+            return false;
+        }
+        return !is_null(getModuleMeta($this->getName()));
+    }
+
     public function isMissingDependencies() {
         return (count($this->getMissingDependencies()) > 0);
     }
 
     public function hasAdminPage() {
         $controller = ModuleHelper::getMainController($this->name);
-        return (is_file(getModuleAdminFilePath($this->name))
-                or is_file(getModuleAdminFilePath2($this->name))
+        return (file_exists(getModuleAdminFilePath($this->name))
+                or file_exists(getModuleAdminFilePath2($this->name))
                 or ( $controller and method_exists($controller, "settings"))
                 or ( getModuleMeta($this->name, "main_class")) and
                 getModuleMeta($this->name, "admin_permission"));
@@ -112,7 +120,7 @@ class Module {
     }
 
     public function getDependentModules() {
-        $result = array();
+        $result = [];
         $manager = new ModuleManager ();
         $enabledMods = $manager->getEnabledModuleNames();
         $dependent = $manager->getDependentModules($module);

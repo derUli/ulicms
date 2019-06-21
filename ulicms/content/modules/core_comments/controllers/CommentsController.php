@@ -79,8 +79,7 @@ class CommentsController extends MainClass {
 
         // Clear cache when posting a comment
         // FIXME: clear only the cache entries for the commented content
-        $cacheAdapater = CacheUtil::getAdapter(true);
-        $cacheAdapater->clear();
+        CacheUtil::clearPageCache();
 
         // Redirect to the page and show a message to the user
         Response::redirect(ModuleHelper::getFullPageURLByID($content_id, "comment_published=" . $status));
@@ -105,7 +104,7 @@ class CommentsController extends MainClass {
     }
 
     public function getResults($status = null, $content_id = null, $limit = 0) {
-        $results = array();
+        $results = [];
         if ($status) {
             $results = Comment::getAllByStatus($status, $content_id);
         } else if ($content_id) {
@@ -142,7 +141,7 @@ class CommentsController extends MainClass {
 
     public function doAction() {
         // post arguments
-        $comments = Request::getVar("comments", array());
+        $comments = Request::getVar("comments", []);
         $action = Request::getVar("action", null, "str");
 
         // if we have comments and an action
@@ -175,10 +174,15 @@ class CommentsController extends MainClass {
                         throw new NotImplementedException("comment action not implemented");
                         break;
                 }
+
+
+
                 // if action is not delete save it
                 if ($action != "delete") {
                     $comment->save();
                 }
+
+                CacheUtil::clearPageCache();
             }
         }
 

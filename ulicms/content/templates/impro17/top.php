@@ -32,20 +32,7 @@ if (!$searchPage) {
           <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
-    <style type="text/css">
-        .slicknav_btn, .slicknav_nav, nav .active, nav .sub_menu li:hover, nav .menu_active_link
-        {
-            background: <?php
-            echo getconfig("header-background-color");
-            ?> !important;
-        }
 
-        h1, h2, h3, h4, h5, h6 {
-            color: <?php
-            echo getconfig("header-background-color");
-            ?>;
-        }
-    </style>
     <?php
     enqueueStylesheet(getTemplateDirPath("impro17") . "style.scss");
     combinedStylesheetHtml();

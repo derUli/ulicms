@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Utils\CacheUtil;
+
 class CommunitySettingsController extends Controller {
 
     public function savePost() {
@@ -18,6 +20,9 @@ class CommunitySettingsController extends Controller {
         } else {
             Settings::delete("commentable_content_types");
         }
+
+        CacheUtil::clearPageCache();
+
         Response::redirect(ModuleHelper::buildActionURL("community_settings", "save=1"));
     }
 

@@ -1,9 +1,10 @@
 // This script contains the code for the "design settings" page
 
-// show a message if a "design for mobile devices" is set but Mobile_Detect is not installed
+// show a message if a "design for mobile devices" is set but
+// Mobile_Detect is not installed
 function initMobileDetectNotice() {
     if ($("select[name='mobile_theme']").val() != ""
-            && $("#mobile_detect_notice").data("installed") == false) {
+            && $("#mobile_detect_notice").data("installed") === false) {
         $("#mobile_detect_notice").slideDown();
     } else {
         $("#mobile_detect_notice").slideUp();
@@ -13,9 +14,7 @@ function initMobileDetectNotice() {
 function loadThemePreview(selectField) {
     const url = $(selectField).find("option:selected").data("preview-url");
 
-
     const targetElement = $($(selectField).data("preview-target-element"));
-
 
     if (!url) {
         $(targetElement).hide();
@@ -42,13 +41,29 @@ function loadThemePreview(selectField) {
 }
 
 // show a privacy warning if a google font is selected
-function onChangeDefaultFont() {
-    var value = $("select#default_font").val();
-    if (value === "google") {
+function updateFontPreview() {
+    const fontFamily = $("select#default_font").val();
+    const fontSize = $("select#font-size").val();
+    const googleFont = $("#google-fonts select").val();
+    if (fontFamily === "google") {
         $("div#google-fonts").slideDown();
+        const url = $("#font-preview").data("google-font-url") +
+                encodeURIComponent(googleFont);
+        if ($("#google-font-loader").length) {
+            $("#google-font-loader").attr("href", url);
+        } else {
+            $('head').append(`<link id="google-font-loader" rel="stylesheet"` +
+                    `href="${url}" type="text/css"/>`);
+        }
     } else {
         $("div#google-fonts").slideUp();
     }
+    $("#font-preview").css(
+            {
+                fontFamily: fontFamily !== "google" ? fontFamily : googleFont,
+                fontSize: fontSize
+            }
+    );
 }
 
 $(function () {
@@ -58,14 +73,17 @@ $(function () {
         initMobileDetectNotice();
     });
 
-    $("select#default_font").change(onChangeDefaultFont);
+    $("select#default_font, select#font-size, #google-fonts select")
+            .change(updateFontPreview);
+
+    updateFontPreview();
 
     loadThemePreview($("select[name='theme']"));
     loadThemePreview($("select[name='mobile_theme']"));
-    $("select[name='theme'], select[name='mobile_theme']").change(function (event) {
-        loadThemePreview($(event.target));
-    });
-
+    $("select[name='theme'], select[name='mobile_theme']").change(
+            function (event) {
+                loadThemePreview($(event.target));
+            });
 
     // ajax form submit
     $("#designForm").ajaxForm(

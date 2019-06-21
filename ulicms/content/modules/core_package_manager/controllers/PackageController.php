@@ -24,7 +24,7 @@ class PackageController extends MainClass {
         $model->manufacturerName = getModuleMeta($name, "manufacturer_name");
         $model->manufacturerUrl = getModuleMeta($name, "manufacturer_url");
         $model->source = getModuleMeta($name, "source");
-        $model->customPermissions = is_array(getModuleMeta($name, "custom_acl")) ? getModuleMeta($name, "custom_acl") : array();
+        $model->customPermissions = is_array(getModuleMeta($name, "custom_acl")) ? getModuleMeta($name, "custom_acl") : [];
         $model->adminPermission = getModuleMeta($name, "admin_permission");
         natcasesort($model->customPermissions);
         ViewBag::set("model", $model);
@@ -43,7 +43,7 @@ class PackageController extends MainClass {
         $model->manufacturerName = getThemeMeta($name, "manufacturer_name");
         $model->manufacturerUrl = getThemeMeta($name, "manufacturer_url");
         $model->source = getThemeMeta($name, "source");
-        $model->disableFunctions = is_array(getThemeMeta($name, "disable_functions")) ? getThemeMeta($name, "disable_functions") : array();
+        $model->disableFunctions = is_array(getThemeMeta($name, "disable_functions")) ? getThemeMeta($name, "disable_functions") : [];
         natcasesort($model->disableFunctions);
         ViewBag::set("model", $model);
         $html = Template::executeModuleTemplate(self::MODULE_NAME, "packages/info/theme.php");
@@ -57,7 +57,6 @@ class PackageController extends MainClass {
     public function uninstallModule() {
         $name = Request::getVar("name");
         $type = "module";
-        $pkg = new PackageManager ();
         if (uninstall_module($name, $type)) {
             $this->redirectToPackageView();
         } else {
@@ -71,7 +70,6 @@ class PackageController extends MainClass {
     public function uninstallTheme() {
         $name = Request::getVar("name");
         $type = "theme";
-        $pkg = new PackageManager ();
         if (uninstall_module($name, $type)) {
             $this->redirectToPackageView();
         } else {

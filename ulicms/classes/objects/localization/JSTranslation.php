@@ -3,10 +3,10 @@
 // Makes translation strings avaiable for Javascript
 class JSTranslation {
 
-    private $keys = array();
+    private $keys = [];
     private $varName = "Translation";
 
-    public function __construct($keys = array(), $varName = "Translation") {
+    public function __construct($keys = [], $varName = "Translation") {
         $this->addKeys($keys);
         $this->setVarName($varName);
     }

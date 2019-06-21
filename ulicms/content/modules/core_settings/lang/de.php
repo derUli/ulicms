@@ -30,8 +30,6 @@ add_translation("reject_requests_from_bots", "Anfragen von Bots blockieren");
 
 add_translation("performance", "Performance");
 
-add_translation("community", "Community");
-add_translation("community_settings", "Community Einstellungen");
 add_translation("comments_enabled", "Kommentare aktiviert");
 add_translation("comments_must_be_approved", "Kommentare müssen genehmigt werden");
 add_translation("commentable_content_types", "Kommentierbare Inhaltstypen");
@@ -47,3 +45,5 @@ add_translation("error_pages", "Fehlerseiten");
 add_translation("not_found", "Nicht gefunden");
 
 add_translation("make_default", "Als Standard festlegen");
+
+add_translation("no_html_allowed", "HTML ist in der Zeichenkette nicht erlaubt");

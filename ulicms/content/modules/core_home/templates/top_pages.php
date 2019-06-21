@@ -22,15 +22,15 @@ $model = $controller->getModel();
         ?>
         <tr>
             <td><a href="<?php
-    echo $url;
-        ?>"
+                echo $url;
+                ?>"
                    target="_blank"><?php
-            esc($row->title);
-        ?></a></td>
+                       esc($row->title);
+                       ?></a></td>
             <td align="right"><?php
-                   echo $row->views;
-        ?></td>
-                <?php
+                echo $row->views;
+                ?></td>
+            <?php
         }
         ?>
     </tr>

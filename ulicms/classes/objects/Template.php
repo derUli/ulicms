@@ -85,9 +85,9 @@ class Template {
             $ownTemplatePath .= ".php";
         }
         ob_start();
-        if (is_file($ownTemplatePath)) {
+        if (file_exists($ownTemplatePath)) {
             require $ownTemplatePath;
-        } else if (is_file($originalTemplatePath)) {
+        } else if (file_exists($originalTemplatePath)) {
             require $originalTemplatePath;
         } else {
             $retval = ob_get_clean();
@@ -120,7 +120,7 @@ class Template {
         $logo_storage_url = defined("ULICMS_DATA_STORAGE_URL") ? ULICMS_DATA_STORAGE_URL . "/content/images/" . Settings::get("logo_image") : "content/images/" . Settings::get("logo_image");
         $logo_storage_path = ULICMS_DATA_STORAGE_ROOT . "/content/images/" . Settings::get("logo_image");
 
-        if (Settings::get("logo_disabled") == "no" and is_file($logo_storage_path)) {
+        if (Settings::get("logo_disabled") == "no" and file_exists($logo_storage_path)) {
             echo '<img class="website_logo" src="' . $logo_storage_url . '" alt="' . _esc(Settings::get("homepage_title")) . '"/>';
         }
     }
@@ -160,9 +160,9 @@ class Template {
         }
 
         ob_start();
-        if (is_file($ownTemplatePath)) {
+        if (file_exists($ownTemplatePath)) {
             require $ownTemplatePath;
-        } else if (is_file($originalTemplatePath)) {
+        } else if (file_exists($originalTemplatePath)) {
             require $originalTemplatePath;
         } else {
             $retval = ob_get_clean();
@@ -218,7 +218,7 @@ class Template {
 
         $file = getTemplateDirPath($theme, true) . "partials/{$template}";
         $file = !endsWith($file, ".php") ? $file . ".php" : $file;
-        if (!is_file($file)) {
+        if (!file_exists($file)) {
             throw new FileNotFoundException("Partial Template {$template} of Theme {$theme} not found.");
         }
         ob_start();
@@ -293,7 +293,7 @@ class Template {
         }
 
         if (!Settings::get("no_autoembed_core_css")) {
-            enqueueStylesheet("lib/css/core.css");
+            enqueueStylesheet("lib/css/core.scss");
         }
         do_event("enqueue_frontend_stylesheets");
 
@@ -305,11 +305,11 @@ class Template {
         $min_style_file_realpath = getTemplateDirPath(get_theme(), true) . "style.min.css";
         $style_file = getTemplateDirPath(get_theme()) . "style.css";
         $style_file_realpath = getTemplateDirPath(get_theme(), true) . "style.css";
-        if (is_file($style_file_realpath)) {
+        if (file_exists($style_file_realpath)) {
             $style_file .= "?time=" . File::getLastChanged($style_file_realpath);
-            if (is_file($min_style_file_realpath)) {
+            if (file_exists($min_style_file_realpath)) {
                 echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"$min_style_file\"/>";
-            } else if (is_file($style_file_realpath)) {
+            } else if (file_exists($style_file_realpath)) {
                 echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"$style_file\"/>";
             }
         }
@@ -346,16 +346,19 @@ class Template {
                 }
             }
             $cssCode = "body{
-font-family:" . $font . ";
-font-size:" . Settings::get("font-size") . ";
-background-color:" . Settings::get("body-background-color") . ";
-color:" . Settings::get("body-text-color") . ";
+font-family: " . $font . ";
+font-size: " . Settings::get("font-size") . ";
+background-color: " . Settings::get("body-background-color") . ";
+color: " . Settings::get("body-text-color") . ";
 }";
+
+            $disableFunctions = getThemeMeta(get_theme(), "disable_functions");
 
             $minifier = new Minify\CSS();
             $minifier->add($cssCode);
-
-            echo UliCMS\HTML\Style::FromString($minifier->minify());
+            if (!(is_array($disableFunctions) and in_array("output_design_settings_styles", $disableFunctions))) {
+                echo UliCMS\HTML\Style::FromString($minifier->minify());
+            }
 
             if (Settings::get("video_width_100_percent")) {
                 echo "<style type=\"text/css\">

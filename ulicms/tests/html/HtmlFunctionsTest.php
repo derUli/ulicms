@@ -5,7 +5,8 @@ use function UliCMS\HTML\imageTag;
 use function UliCMS\HTML\imageTagInline;
 use function UliCMS\HTML\icon;
 use function UliCMS\HTML\link;
-use function UliCMS\HTML\button_link;
+use function UliCMS\HTML\buttonLink;
+use function UliCMS\HTML\stringContainsHtml;
 use UliCMS\Constants\LinkTarget;
 use UliCMS\Constants\ButtonType;
 
@@ -83,15 +84,23 @@ class HtmlFunctionsTest extends \PHPUnit\Framework\TestCase {
     public function testButtonLink() {
         $this->assertEquals(
                 '<a class="btn btn-info" href="https://www.google.de"><i class="fa fa fa-google"></i></a>',
-                button_link("https://www.google.de", icon("fa fa fa-google"), ButtonType::TYPE_INFO, true));
+                buttonLink("https://www.google.de", icon("fa fa fa-google"), ButtonType::TYPE_INFO, true));
     }
 
     public function testButtonLinkWithAttributes() {
         $this->assertEquals(
                 '<a data-hello="world" class="btn btn-info awesome-button" href="https://www.google.de"><i class="fa fa fa-google"></i></a>',
-                button_link("https://www.google.de", icon("fa fa fa-google"), ButtonType::TYPE_INFO, true, null,
+                buttonLink("https://www.google.de", icon("fa fa fa-google"), ButtonType::TYPE_INFO, true, null,
                         array("data-hello" => "world",
                             "class" => "awesome-button")));
+    }
+
+    public function testStringContainsHtmlReturnsTrue() {
+        $this->assertTrue(stringContainsHtml('Hallo <script>alert("xss");</script> Welt!'));
+    }
+
+    public function testStringContainsHtmlReturnsFalse() {
+        $this->assertFalse(stringContainsHtml("Hallo Welt"));
     }
 
 }

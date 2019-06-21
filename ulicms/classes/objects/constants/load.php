@@ -8,6 +8,8 @@ $classes = array(
     "ModuleEventConstants",
     "AllowedTags",
     "LinkTarget",
+    "ButtonType",
+    "PackageTypes",
     "ButtonType"
 );
 foreach ($classes as $class) {

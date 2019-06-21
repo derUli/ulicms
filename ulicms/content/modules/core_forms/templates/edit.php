@@ -64,22 +64,21 @@ if (!$permissionChecker->hasPermission("forms") or ! $permissionChecker->hasPerm
         <p>
             <strong><?php translate("target_page_id"); ?></strong><br /> <select
                 name="target_page_id">
-                <?php foreach ($pages as $page) { ?>
+                    <?php foreach ($pages as $page) { ?>
                     <option value="<?php echo $page["id"]; ?>"
                     <?php
                     if ($page["id"] == $form["target_page_id"]) {
                         echo " selected";
                     }
                     ?>><?php esc($page["title"]); ?></option>
-        <?php } ?>
+                        <?php } ?>
             </select>
         </p>
         <p>
             <button name="edit_form" type="submit" class="btn btn-primary">
                 <i class="fas fa-save"></i>  <?php translate("save"); ?></button>
         </p>
-        <?php echo ModuleHelper::endForm(); ?>
-
         <?php
+        echo ModuleHelper::endForm();
     }
 }

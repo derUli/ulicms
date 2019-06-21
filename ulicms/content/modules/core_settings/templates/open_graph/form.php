@@ -15,7 +15,7 @@ if ($permissionChecker->hasPermission("open_graph")) {
     <h1><?php translate("open_graph"); ?></h1>
     <p><?php translate("og_defaults_help"); ?></p>
     <?php
-    echo ModuleHelper::buildMethodCallForm("OpenGraphController", "save", array(), "post", array(
+    echo ModuleHelper::buildMethodCallForm("OpenGraphController", "save", [], "post", array(
         "id" => "open_graph"
     ));
     ?>
@@ -57,12 +57,10 @@ if ($permissionChecker->hasPermission("open_graph")) {
             </td>
         </tr>
     </table>
-    <?php echo ModuleHelper::endForm(); ?>
     <?php
+    echo ModuleHelper::endForm();
     enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/open_graph.js"));
     combinedScriptHtml();
-    ?>
-    <?php
 } else {
     noPerms();
 }

@@ -105,7 +105,6 @@ CREATE TABLE `{prefix}content` (
   `comments_enabled` tinyint(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-
 CREATE TABLE `{prefix}custom_fields` (
   `id` int(11) NOT NULL,
   `content_id` int(11) NOT NULL,
@@ -233,7 +232,7 @@ INSERT INTO `{prefix}settings` (`id`, `name`, `value`) VALUES
 (3, 'redirection', ''),
 (4, 'homepage_owner', 'Ulrich Schmidt'),
 (5, 'email', 'admin@deruli.de'),
-(6, 'motto', 'Where do you want to go today?'),
+(6, 'motto', 'A new website'),
 (7, 'date_format', 'd.m.Y H:i'),
 (8, 'autor_text', 'Diese Seite wurde verfasst von Vorname Nachname'),
 (9, 'robots', 'index,follow'),

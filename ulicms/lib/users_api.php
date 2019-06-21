@@ -5,7 +5,7 @@ use UliCMS\Security\Encryption;
 // this ffile contains functions for managing user accounts
 function getUsers() {
     $query = Database::query("SELECT id, username FROM " . tbname("users") . " ORDER by username");
-    $users = array();
+    $users = [];
     while ($row = db_fetch_assoc($query)) {
         array_push($users, $row);
     }
@@ -19,7 +19,7 @@ function getAllUsers() {
 
 function getUsersOnline() {
     $users_online = Database::query("SELECT username FROM " . tbname("users") . " WHERE last_action > " . (time() - 300) . " ORDER BY username");
-    $retval = array();
+    $retval = [];
     while ($row = db_fetch_object($users_online)) {
         $retval[] = $row->username;
     }

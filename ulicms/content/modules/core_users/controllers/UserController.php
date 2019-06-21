@@ -41,7 +41,7 @@ class UserController extends Controller {
         $user->setRequirePasswordChange($require_password_change);
         $secondary_groups = $_POST["secondary_groups"];
 
-        $user->setSecondaryGroups(array());
+        $user->setSecondaryGroups([]);
         if (is_array($secondary_groups)) {
             foreach ($secondary_groups as $group) {
                 $user->addSecondaryGroup(new Group($group));
@@ -98,7 +98,7 @@ class UserController extends Controller {
                 $user->setAdmin($admin);
                 $user->setLocked($locked);
                 $user->setGroupid($group_id);
-                $user->setSecondaryGroups(array());
+                $user->setSecondaryGroups([]);
 
                 $secondary_groups = $_POST["secondary_groups"];
                 if (is_array($secondary_groups)) {

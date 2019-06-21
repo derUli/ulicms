@@ -133,7 +133,7 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
             <i class="fa fa-save"></i> <?php translate("create_user"); ?></button>
     </form>
     <?php
-    $translation = new JSTranslation(array(), "UserTranslation");
+    $translation = new JSTranslation([], "UserTranslation");
     $translation->addKey("passwords_not_equal");
     $translation->render();
     enqueueScriptFile(
@@ -142,8 +142,6 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
     );
     enqueueScriptFile("../node_modules/password-strength-meter/dist/password.min.js");
     combinedScriptHtml();
-    ?>
-    <?php
 } else {
     noPerms();
 }

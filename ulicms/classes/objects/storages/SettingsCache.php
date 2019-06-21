@@ -2,7 +2,7 @@
 
 class SettingsCache {
 
-    private static $settings = array();
+    private static $settings = [];
 
     public static function get($key) {
         if (isset(self::$settings[$key])) {

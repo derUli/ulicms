@@ -44,9 +44,10 @@ if ($permissionChecker->hasPermission("languages")) {
                     <th>
                         <strong><?php translate("full_name"); ?></strong>
                     </th>
-                    <th>
+                    <th class="no-sort">
                         <strong><?php translate("standard"); ?></strong>
                     </th>
+                    <th class="no-sort"></th>
                 </tr>
             </thead>
             <tbody>
@@ -80,14 +81,20 @@ if ($permissionChecker->hasPermission("languages")) {
                                    );
                                    ?>">
                                     <i class="fas fa-language"></i>
-                                <?php translate("make_default"); ?>
+                                    <?php translate("make_default"); ?>
                                 </a>
                             <?php } else { ?>
                                 <i class="fas fa-check text-success"></i>
-                    <?php } ?>
+                            <?php } ?>
+                        </td>
+                        <td>
+                            <?php
+                            echo ModuleHelper::deleteButton(ModuleHelper::buildMethodCallUrl(LanguageController::class, "delete"),
+                                    ["id" => $language->getID()]);
+                            ?>
                         </td>
                     </tr>
-        <?php } ?>
+                <?php } ?>
             </tbody>
         </table>
         <?php

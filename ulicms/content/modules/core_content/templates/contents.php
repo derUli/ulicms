@@ -46,8 +46,6 @@ if ($permissionChecker->hasPermission("pages") or $permissionChecker->hasPermiss
             <?php
         }
         do_event("content_type_list_entry");
-        ?>
-        <?php
     } else {
         noPerms();
     }

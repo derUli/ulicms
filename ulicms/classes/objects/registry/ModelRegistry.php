@@ -4,11 +4,11 @@ use UliCMS\Exceptions\FileNotFoundException;
 
 class ModelRegistry {
 
-    private static $objects = array();
+    private static $objects = [];
 
     public static function loadModuleModels() {
         if (!defined("KCFINDER_PAGE")) {
-            $modelRegistry = array();
+            $modelRegistry = [];
             $modules = getAllModules();
             $disabledModules = Vars::get("disabledModules");
             foreach ($modules as $module) {
@@ -27,7 +27,7 @@ class ModelRegistry {
                 }
             }
             foreach ($modelRegistry as $key => $value) {
-                if (is_file($value)) {
+                if (file_exists($value)) {
                     require $value;
                 } else {
                     throw new FileNotFoundException("Module {$module}: File '{$path}' not found.");

@@ -14,7 +14,7 @@ class User {
     private $password = "";
     private $about_me = "";
     private $group_id = null;
-    private $secondary_groups = array();
+    private $secondary_groups = [];
     private $group = null;
     private $html_editor = "ckeditor";
     private $require_password_change = false;
@@ -41,7 +41,7 @@ class User {
     }
 
     public function loadByUsername($name) {
-        $sql = "select * from {prefix}users where username = ?";
+        $sql = "select * from {prefix}users where username COLLATE utf8mb4_general_ci = ?";
         $args = array(
             strval($name)
         );
@@ -50,7 +50,7 @@ class User {
     }
 
     public function loadByEmail($email) {
-        $sql = "select * from {prefix}users where email = ?";
+        $sql = "select * from {prefix}users where email COLLATE utf8mb4_general_ci = ?";
         $args = array(
             strval($email)
         );
@@ -104,7 +104,7 @@ class User {
             // load secondary groups
             $this->loadGroups($result["id"]);
         } else {
-            $this->setSecondaryGroups(array());
+            $this->setSecondaryGroups([]);
         }
     }
 
@@ -448,7 +448,7 @@ class User {
     }
 
     public function removeSecondaryGroup($val) {
-        $filtered = array();
+        $filtered = [];
         foreach ($this->secondary_groups as $group) {
             if ($group->getID() != $val->getID()) {
                 $filtered[] = $group;
@@ -466,7 +466,7 @@ class User {
     }
 
     private function loadGroups($user_id) {
-        $groups = array();
+        $groups = [];
 
         $sql = "select `group_id` from `{prefix}user_groups` where user_id = ?";
         $args = array(

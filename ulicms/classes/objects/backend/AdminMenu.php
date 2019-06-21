@@ -2,9 +2,9 @@
 
 class AdminMenu {
 
-    private $children = array();
+    private $children = [];
 
-    public function __construct($children = array()) {
+    public function __construct($children = []) {
         $this->children = $children;
     }
 
@@ -22,22 +22,6 @@ class AdminMenu {
 
     public function addChild($children) {
         $this->children[] = $children;
-    }
-
-    public function getChildByID($identifier, $root = null) {
-        $result = null;
-        if (!$root) {
-            $root = $this->children;
-        }
-        foreach ($this->children as $root) {
-            if ($child->getIdentifier() == $identifier) {
-                return $child;
-            }
-            if ($child->hasChildren()) {
-                return $this->getChildByID($identifier, $child);
-            }
-        }
-        return null;
     }
 
     public function render() {

@@ -7,18 +7,18 @@ if ($permissionChecker->hasPermission("videos") and $permissionChecker->hasPermi
     ?><p>
         <a href="<?php echo ModuleHelper::buildActionURL("videos"); ?>"
            class="btn btn-default btn-back"> <i class="fa fa-arrow-left"></i>
-    <?php translate("back") ?></a>
+            <?php translate("back") ?></a>
     </p>
     <h1><?php translate("UPLOAD_VIDEO"); ?></h1>
     <form action="index.php?sClass=VideoController&sMethod=create"
           method="post" enctype="multipart/form-data">
         <input type="hidden" name="add" value="add">
-    <?php csrf_token_html(); ?>
+        <?php csrf_token_html(); ?>
         <strong><?php translate("name"); ?>*
         </strong><br /> <input type="text" name="name" value="" maxlength="255"
                                required /> <br /> <strong><?php translate("category"); ?>
         </strong><br />
-    <?php echo Categories::getHTMLSelect(); ?>
+        <?php echo Categories::getHTMLSelect(); ?>
 
         <br /> <br /> <strong><?php echo translate("video_ogg"); ?>
         </strong><br /> <input name="ogg_file" type="file"><br /> <strong><?php echo translate("video_webm"); ?>

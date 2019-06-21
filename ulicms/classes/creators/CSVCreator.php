@@ -36,7 +36,7 @@ class CSVCreator {
         }
 
 
-        $data = array();
+        $data = [];
         $data[] = array(
             "Title",
             "Content",

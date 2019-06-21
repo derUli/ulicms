@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Utils\CacheUtil;
+
 class ExpertSettingsController extends Controller {
 
     const LIST_ACTION = "settings";
@@ -10,6 +12,9 @@ class ExpertSettingsController extends Controller {
         if (StringHelper::isNotNullOrWhitespace($name) and ! is_null($value)) {
             Settings::set($name, $value);
         }
+
+        CacheUtil::clearPageCache();
+
         Request::redirect(ModuleHelper::buildActionURL(self::LIST_ACTION));
     }
 
@@ -18,6 +23,9 @@ class ExpertSettingsController extends Controller {
         if (!is_null($name)) {
             Settings::delete($name);
         }
+
+        CacheUtil::clearPageCache();
+
         Request::redirect(ModuleHelper::buildActionURL(self::LIST_ACTION));
     }
 

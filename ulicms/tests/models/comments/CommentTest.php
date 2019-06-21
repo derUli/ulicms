@@ -59,6 +59,91 @@ class CommentTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
+    public function testGetUnreadCount() {
+        $content = ContentFactory::getAll();
+        $first = $content[0];
+        $second = $content[1];
+
+        $comment = new Comment();
+        $comment->setContentId($first->id);
+        $comment->setAuthorName("John Doe");
+        $comment->setAuthorEmail("john@doe.de");
+        $comment->setAuthorUrl("http://john-doe.de");
+        $comment->setIp("123.123.123.123");
+        $comment->setUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36");
+        $comment->setText("Unit Test 1");
+        $comment->setRead(false);
+        $time = time();
+        $comment->setDate($time);
+
+        $comment->save();
+
+        $this->assertGreaterThanOrEqual(1, Comment::getUnreadCount());
+    }
+
+    public function testGetReadCount() {
+        $content = ContentFactory::getAll();
+        $first = $content[0];
+        $second = $content[1];
+
+        $comment = new Comment();
+        $comment->setContentId($first->id);
+        $comment->setAuthorName("John Doe");
+        $comment->setAuthorEmail("john@doe.de");
+        $comment->setAuthorUrl("http://john-doe.de");
+        $comment->setIp("123.123.123.123");
+        $comment->setUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36");
+        $comment->setText("Unit Test 1");
+        $comment->setRead(true);
+
+        $time = time();
+        $comment->setDate($time);
+
+        $comment->save();
+
+        $this->assertGreaterThanOrEqual(1, Comment::getReadCount());
+    }
+
+    public function testGetAllCount() {
+        $content = ContentFactory::getAll();
+        $first = $content[0];
+        $second = $content[1];
+
+        $comment = new Comment();
+        $comment->setContentId($first->id);
+        $comment->setAuthorName("John Doe");
+        $comment->setAuthorEmail("john@doe.de");
+        $comment->setAuthorUrl("http://john-doe.de");
+        $comment->setIp("123.123.123.123");
+        $comment->setUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36");
+        $comment->setText("Unit Test 1");
+        $comment->setRead(true);
+
+        $time = time();
+        $comment->setDate($time);
+
+        $comment->save();
+        $content = ContentFactory::getAll();
+        $first = $content[0];
+        $second = $content[1];
+
+        $comment = new Comment();
+        $comment->setContentId($first->id);
+        $comment->setAuthorName("John Doe");
+        $comment->setAuthorEmail("john@doe.de");
+        $comment->setAuthorUrl("http://john-doe.de");
+        $comment->setIp("123.123.123.123");
+        $comment->setUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36");
+        $comment->setText("Unit Test 1");
+        $comment->setRead(false);
+
+        $time = time();
+        $comment->setDate($time);
+
+        $comment->save();
+        $this->assertGreaterThanOrEqual(1, Comment::getAllCount());
+    }
+
     public function testIsSpamNull() {
         $comment = new Comment();
         $comment->setAuthorName("John Doe");
@@ -146,6 +231,7 @@ class CommentTest extends \PHPUnit\Framework\TestCase {
         $comment->setDate($time);
 
         $comment->save();
+
 
         $comment = new Comment($id);
 

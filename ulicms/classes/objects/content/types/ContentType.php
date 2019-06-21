@@ -4,9 +4,9 @@ namespace UliCMS\Models\Content\Types;
 
 class ContentType {
 
-    public $show = array();
+    public $show = [];
     public $customFieldTabTitle;
-    public $customFields = array();
+    public $customFields = [];
 
     public function toJSON() {
         return json_encode(array(

@@ -36,7 +36,7 @@ if (count($argv) == 0) {
         echo 'public $sinstall_allow_url = true;';
     } else if (is_dir($file)) {
         echo "$file is a directory.";
-    } else if (is_file($file) or is_url($file)) {
+    } else if (file_exists($file) or is_url($file)) {
         $result = false;
         if (endsWith($file, ".tar.gz")) {
             $pkg = new PackageManager();

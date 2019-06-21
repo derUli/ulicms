@@ -52,11 +52,15 @@ if ($command == "up") {
         usage();
     }
     $folder = Path::resolve($directory . "/up");
+
     $migrator = new DBMigrator($component, $folder);
     try {
+        Database::setEchoQueries(true);
         $migrator->migrate($stop);
     } catch (Exception $e) {
         echo $e->getMessage() . "\n";
+    } finally {
+        Database::setEchoQueries(false);
     }
     exit();
 }

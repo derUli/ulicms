@@ -68,7 +68,7 @@ function decodeHTMLEntities($str) {
 // Häufigste Wörter in String ermitteln und als Assoziatives Array zurückgeben.
 // z.B. für automatisches ausfüllen der Meta-Keywords nutzbar
 function keywordsFromString($text) {
-    $return = array();
+    $return = [];
 
     // Punkt, Beistrich, Zeilenumbruch... in Leerzeichen umwandeln
     $text = str_replace(array(
@@ -153,4 +153,12 @@ function str_replace_first($search, $replace, $subject) {
         return substr_replace($subject, $replace, $pos, strlen($search));
     }
     return $subject;
+}
+
+function esc($value) {
+    Template::escape($value);
+}
+
+function _esc($value) {
+    return Template::getEscape($value);
 }

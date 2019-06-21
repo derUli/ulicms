@@ -3,16 +3,32 @@
 class Database {
 
     private static $connection = null;
+    private static $echoQueries = false;
+
+    public static function setEchoQueries($echoQueries = true) {
+        self::$echoQueries = $echoQueries;
+    }
 
     // Connect with database server
-    public static function connect($server, $user, $password, $port, $socket = null) {
+    public static function connect($server, $user, $password, $port, $socket = null, $db_strict_mode = false) {
         self::$connection = mysqli_connect($server, $user, $password, "", $port, $socket);
         if (!self::$connection) {
             return false;
         }
         self::query("SET NAMES 'utf8mb4'");
         // sql_mode auf leer setzen, da sich UliCMS nicht im strict_mode betreiben lässt
-        self::query("SET SESSION sql_mode = '';");
+        if ($db_strict_mode) {
+            Database::pQuery("SET SESSION sql_mode =
+                'ONLY_FULL_GROUP_BY,
+                STRICT_TRANS_TABLES,
+                NO_ZERO_IN_DATE,
+                NO_ZERO_DATE',
+                ERROR_FOR_DIVISION_BY_ZERO,
+                NO_AUTO_CREATE_USER,
+                NO_ENGINE_SUBSTITUTION");
+        } else {
+            self::query("SET SESSION sql_mode = ''");
+        }
 
         return self::$connection;
     }
@@ -21,11 +37,15 @@ class Database {
         mysqli_close(self::$connection);
     }
 
+    public static function createSchema($name) {
+        return Database::query("CREATE DATABASE {$name}");
+    }
+
     // TODO: Do logging when auto initialize the database
-    public static function setupSchemaAndSelect($schemaName, $otherScripts = array()) {
+    public static function setupSchemaAndSelect($schemaName, $otherScripts = []) {
         $selected = self::select($schemaName);
         if (!$selected) {
-            $success = Database::query("CREATE DATABASE {$schemaName}");
+            $success = self::createSchema($schemaName);
             if ($success) {
                 $selected = self::select($schemaName);
             }
@@ -55,6 +75,9 @@ class Database {
         if ($logger) {
             $logger->info($sql);
         }
+        if (self::$echoQueries) {
+            echo $sql . "\n";
+        }
         return mysqli_query(self::$connection, $sql);
     }
 
@@ -67,6 +90,9 @@ class Database {
         $logger = LoggerRegistry::get("sql_log");
         if ($logger) {
             $logger->info($sql);
+        }
+        if (self::$echoQueries) {
+            echo $sql . "\n";
         }
         return mysqli_multi_query(self::$connection, $sql);
     }
@@ -83,7 +109,7 @@ class Database {
         self::$connection = $con;
     }
 
-    public static function pQuery($sql, $args = array(), $replacePrefix = false) {
+    public static function pQuery($sql, $args = [], $replacePrefix = false) {
         $preparedQuery = "";
         $chars = mb_str_split($sql);
         $i = 0;
@@ -215,7 +241,7 @@ class Database {
         return self::query("ALTER TABLE $table DROP COLUMN $column");
     }
 
-    public static function selectAll($table, $columns = array(), $where = "", $args = array(), $prefix = true, $order = "") {
+    public static function selectAll($table, $columns = [], $where = "", $args = [], $prefix = true, $order = "") {
         if ($prefix) {
             $table = tbname($table);
         }
@@ -271,7 +297,7 @@ class Database {
         }
 
         // @FIXME : $resulttype in alternativer Implementation von fetch_all behandeln
-        $retval = array();
+        $retval = [];
         while ($row = self::fetchAssoc($result)) {
             $retval[] = $row;
         }
@@ -317,7 +343,7 @@ class Database {
     }
 
     public static function getAllTables() {
-        $tableList = array();
+        $tableList = [];
         $res = mysqli_query(self::$connection, "SHOW TABLES");
         while ($cRow = mysqli_fetch_array($res)) {
             $tableList[] = $cRow[0];
@@ -358,7 +384,7 @@ class Database {
     }
 
     public static function getColumnNames($table, $prefix = true) {
-        $retval = array();
+        $retval = [];
         if ($prefix) {
             $table = tbname($table);
         }

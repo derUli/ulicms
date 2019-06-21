@@ -2,7 +2,7 @@
 
 class GroupTest extends \PHPUnit\Framework\TestCase {
 
-    private $savedSettings = array();
+    private $savedSettings = [];
 
     public function setUp() {
 

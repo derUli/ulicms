@@ -4,24 +4,50 @@ Neue Features:
 * Seitenverwaltung ist nun hierarchisch
 * Neues Standardtheme "2020"
 * Design-Einstellungen: Vorschaubild vom ausgewählten Theme
-* controller_function_permissions unterstüzt nun Wildcards
+* Design-Einstellungen: Vorschau der gewählten Schriftart
+* controller_function_permissions unterstützt nun Wildcards
+* Sprachen können wieder gelöscht werden
+* Design-Einstellungen können nun in SCSS Code als Variablen verwendet werden
+* Username beim Login ist nun Case-Insensitive
 
 Neue API-Methoden:
-* UliCMS\HTML\icon($classes, $htmlAttributes = array())
 * ContentFactory::getAllByType($type, $order = "id")
 * ContentFactory::getAllByParent($parent_id, $order = "id")
-*`Content->getChildren($order)
+* Content->getChildren($order)
 * Content->hasChildren()
 * Page->getHistory()
 * Page->getParent()
 * Page->makeFrontPage()
 * Page->isFrontPage()
+* Page->getDeletedAt()
+* Page->isDeleted()
+* TypeMapper::getModel($type)
 * User->checkPassword($password)
+* Comment::getReadCount()
+* Comment::getAllCount()
+* Database::createSchema($name)
 * Model->isPersistent()
 * Model->hasChanges()
-* TypeMapper::getModel($type)
-* link($url, $text, $allowHtml = false, $target = null, $htmlAttributes = array())
-* button_link($url, $text, $type = null, $allowHtml = false, $target = null, $htmlAttributes = array())
+* Module->isInstalled()
+* PackageManager->isInstalled($package, $type = PackageTypes::TYPE_MODULE)
+* UliCMS\HTML\icon($classes, $htmlAttributes = array())
+* UliCMS\HTML\stringContainsHtml($string)
+* UliCMS\HTML\link($url, $text, $allowHtml = false, $target = null, $htmlAttributes = array())
+* UliCMS\HTML\buttonLink($url, $text, $type = null, $allowHtml = false, $target = null, $htmlAttributes = array())
+* UliCMS\HTML\Button::button($text, $type = ButtonType::BUTTON_SUBMIT, $htmlAttributes = [], $allowHtml = false)
+* UliCMS\HTML\Button::default($text, $type = ButtonType::BUTTON_SUBMIT, $htmlAttributes = [], $allowHtml = false)
+* UliCMS\HTML\Button::primary($text, $type = ButtonType::BUTTON_SUBMIT, $htmlAttributes = [], $allowHtml = false)
+* UliCMS\HTML\Button::info($text, $type = ButtonType::BUTTON_SUBMIT, $htmlAttributes = [], $allowHtml = false)
+* UliCMS\HTML\Button::warning($text, $type = ButtonType::BUTTON_SUBMIT, $htmlAttributes = [], $allowHtml = false)
+* UliCMS\HTML\Button::danger($text, $type = ButtonType::BUTTON_SUBMIT, $htmlAttributes = [], $allowHtml = false)
+* UliCMS\HTML\Button::link($text, $type = ButtonType::BUTTON_SUBMIT, $htmlAttributes = [], $allowHtml = false)
+* NumberFormatHelper::timestampToHtml5Datetime($timestamp = null)
+* is_today($datetime = null)
+* is_tomorrow($datetime = null)
+* is_yesterday($datetime = null)
+* is_past($datetime = null)
+* is_future($datetime = null)
+* get_carbon($datetime = null)
 
 Entfernte API-Methoden:
 * addUser()
@@ -32,6 +58,9 @@ Fehlerkorrekturen:
 Entfernte Features:
 * Unterstützung für veraltete unsichere Passwortverschlüsselung entfernt
 * Unbenutztes Feld "Homepage" in den Metadaten eines Artikels entfernt
+
+Sicherheit:
+* Fix für XSS-Sicherheitslücke CVE-2019-11398
 
 Bekannte Probleme:
 * CodeMirror kann im Moment nicht als Standard HTML-Editor festgelegt werden. Das Feature ist auf Grund eines Bugs vorerst deaktiviert.

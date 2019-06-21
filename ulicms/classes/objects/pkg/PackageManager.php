@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Services\Connectors\PackageSourceConnector;
+use UliCMS\Constants\PackageTypes;
 
 class PackageManager {
 
@@ -24,7 +25,7 @@ class PackageManager {
 
     public function getInstalledPatchNames() {
         $query = db_query("SELECT name from " . tbname("installed_patches"));
-        $retval = array();
+        $retval = [];
         while ($row = db_fetch_object($query)) {
             $retval[] = $row->name;
         }
@@ -33,6 +34,18 @@ class PackageManager {
 
     public function truncateInstalledPatches() {
         return db_query("TRUNCATE TABLE " . tbname("installed_patches"));
+    }
+
+    public function isInstalled($package, $type = PackageTypes::TYPE_MODULE) {
+        switch ($type) {
+            case PackageTypes::TYPE_MODULE:
+                $module = new Module($package);
+                return $module->isInstalled();
+            case PackageTypes::TYPE_THEME:
+                return faster_in_array($package, getThemesList());
+            default:
+                throw new NotImplementedException("Package Type {$type} not supported");
+        }
     }
 
     public function installPatch($name, $description, $url, $clear_cache = true, $checksum = null) {
@@ -83,7 +96,7 @@ class PackageManager {
 
     public function getInstalledPatches() {
         $query = db_query("SELECT * from " . tbname("installed_patches"));
-        $retval = array();
+        $retval = [];
         while ($row = db_fetch_object($query)) {
             $retval[$row->name] = $row;
         }
@@ -108,10 +121,10 @@ class PackageManager {
 
             // post_install_script ausführen und anschließend
             // entfernen, sofern vorhanden;
-            if (is_file($post_install_script1)) {
+            if (file_exists($post_install_script1)) {
                 require_once $post_install_script1;
                 unlink($post_install_script1);
-            } else if (is_file($post_install_script2)) {
+            } else if (file_exists($post_install_script2)) {
                 require_once $post_install_script2;
                 unlink($post_install_script2);
             }
@@ -139,7 +152,7 @@ class PackageManager {
     public function getInstalledModules() {
         $module_folder = Path::resolve("ULICMS_DATA_STORAGE_ROOT/content/modules") . "/";
 
-        $available_modules = array();
+        $available_modules = [];
         $directory_content = scandir($module_folder);
 
         natcasesort($directory_content);
@@ -148,10 +161,10 @@ class PackageManager {
                 $module_init_file = $module_folder . $directory_content[$i] . "/" . $directory_content[$i] . "_main.php";
                 $module_init_file2 = $module_folder . $directory_content[$i] . "/" . "main.php";
                 $metadata_file = $module_folder . $directory_content[$i] . "/metadata.json";
-                if (is_file($metadata_file)) {
+                if (file_exists($metadata_file)) {
                     array_push($available_modules, $directory_content[$i]);
                 } else if ($directory_content[$i] != ".." and $directory_content[$i] != ".") {
-                    if (is_file($module_init_file) or is_file($module_init_file2)) {
+                    if (file_exists($module_init_file) or file_exists($module_init_file2)) {
                         array_push($available_modules, $directory_content[$i]);
                     }
                 }
@@ -162,7 +175,7 @@ class PackageManager {
     }
 
     public function getInstalledThemes() {
-        $themes = Array();
+        $themes = [];
         $templateDir = Path::resolve("ULICMS_DATA_STORAGE_ROOT/content/templates") . "/";
 
         $folders = scanDir($templateDir);

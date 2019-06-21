@@ -70,7 +70,6 @@ if ($permissionChecker->hasPermission("users")) {
                         echo '<tr id="dataset-' . $row->getId() . '">';
                         echo "<td style=\"width:40px;\">" . $row->getId() . "</td>";
                         echo "<td>";
-                        echo '<img src="' . get_gravatar($row->getEmail(), 26) . '" alt="Avatar von ' . _esc($row->getUsername()) . '" style="width:26px;"> ';
                         esc($row->getUsername()) . "</td>";
                         echo "<td class=\"hide-on-mobile\">" . _esc($row->getLastName()) . "</td>";
                         echo "<td class=\"hide-on-mobile\">" . _esc($row->getFirstname()) . "</td>";

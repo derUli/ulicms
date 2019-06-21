@@ -4,12 +4,12 @@ use UliCMS\Exceptions\FileNotFoundException;
 
 class ActionRegistry {
 
-    private static $assignedControllers = array();
+    private static $assignedControllers = [];
     private static $defaultCoreActions = array(
         "module_settings" => "inc/module_settings.php",
         "groups" => "inc/groups.php"
     );
-    private static $actionPermissions = array();
+    private static $actionPermissions = [];
 
     public static function getDefaultCoreActions() {
         return self::$defaultCoreActions;
@@ -24,7 +24,7 @@ class ActionRegistry {
                 if (!endsWith($path, ".php")) {
                     $path .= ".php";
                 }
-                if (is_file($path)) {
+                if (file_exists($path)) {
                     $actions[$action] = $file;
                 }
             }
@@ -42,7 +42,7 @@ class ActionRegistry {
                             $path .= ".php";
                         }
 
-                        if (is_file($path)) {
+                        if (file_exists($path)) {
                             $actions[$key] = $path;
                         } else {
                             throw new FileNotFoundException("Module {$module}: File '{$path}' not found.");

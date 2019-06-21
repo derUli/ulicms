@@ -439,6 +439,61 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->cleanUp();
     }
 
+    public function testIsDeletedReturnsFalse() {
+        $page = new Page();
+        $page->title = 'Unit Test ' . time();
+        $page->slug = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "Some Text";
+        $page->comments_enabled = true;
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->save();
+        $this->assertFalse($page->isDeleted());
+    }
+
+    public function testIsDeletedReturnsTrue() {
+        $page = new Page();
+        $page->title = 'Unit Test ' . time();
+        $page->slug = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "Some Text";
+        $page->comments_enabled = true;
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->save();
+        $page->delete();
+
+        $this->assertTrue($page->isDeleted());
+    }
+
+    public function testGetDeletedAtReturnsNull() {
+        $page = new Page();
+        $page->title = 'Unit Test ' . time();
+        $page->slug = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "Some Text";
+        $page->comments_enabled = true;
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->save();
+        $this->assertNull($page->getDeletedAt());
+    }
+
+    public function testGetDeletedAtReturnsTimestamp() {
+        $page = new Page();
+        $page->title = 'Unit Test ' . time();
+        $page->slug = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "Some Text";
+        $page->comments_enabled = true;
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->save();
+        $page->delete();
+        $this->assertGreaterThan(time() - 100, $page->getDeletedAt());
+    }
+
     public function testGetCommentsReturnsArrayWithResults() {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
@@ -647,7 +702,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
 
     public function testHasChildrenReturnsTrue() {
         $query = Database::pQuery("select parent_id from {prefix}content where "
-                        . "parent_id is not null", array(), true);
+                        . "parent_id is not null", [], true);
         $result = Database::fetchObject($query);
 
         $page = ContentFactory::getByID($result->parent_id);
@@ -672,7 +727,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetChildrenReturnsTrue() {
         $query = Database::pQuery("select parent_id from {prefix}content where "
-                        . "parent_id is not null", array(), true);
+                        . "parent_id is not null", [], true);
         $result = Database::fetchObject($query);
 
         $page = ContentFactory::getByID($result->parent_id);
@@ -703,7 +758,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetParentReturnsNull() {
         $query = Database::pQuery("select id from {prefix}content where "
-                        . "parent_id is null", array(), true);
+                        . "parent_id is null", [], true);
         $result = Database::fetchObject($query);
 
         $page = ContentFactory::getByID($result->id);
@@ -712,7 +767,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetParentReturnsModel() {
         $query = Database::pQuery("select parent_id, id from {prefix}content where "
-                        . "parent_id is not null", array(), true);
+                        . "parent_id is not null", [], true);
         $result = Database::fetchObject($query);
 
         $page = ContentFactory::getByID($result->id);

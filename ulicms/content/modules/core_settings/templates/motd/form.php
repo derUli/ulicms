@@ -18,7 +18,7 @@ if ($permissionChecker->hasPermission("motd")) {
         </p>
     <?php } ?>
     <?php
-    echo ModuleHelper::buildMethodCallForm("MOTDController", "save", array(), "post", array(
+    echo ModuleHelper::buildMethodCallForm("MOTDController", "save", [], "post", array(
         "id" => "motd_form"
     ));
     ?>
@@ -55,17 +55,13 @@ if ($permissionChecker->hasPermission("motd")) {
     <button type="submit" name="motd_submit"
             class="btn btn-primary voffset2">
         <i class="fa fa-save"></i> <?php translate("save_changes"); ?></button>
-        <?php
-        $translation = new JSTranslation();
-        $translation->addKey("changes_was_saved");
-        $translation->render();
-        enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/motd.js"));
-        combinedScriptHtml();
-        ?>
-
-    <?php echo ModuleHelper::endForm(); ?>
-
     <?php
+    $translation = new JSTranslation();
+    $translation->addKey("changes_was_saved");
+    $translation->render();
+    enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/motd.js"));
+    combinedScriptHtml();
+    echo ModuleHelper::endForm();
 } else {
     noPerms();
 }

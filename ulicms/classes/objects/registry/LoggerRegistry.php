@@ -2,7 +2,7 @@
 
 class LoggerRegistry {
 
-    private static $loggers = array();
+    private static $loggers = [];
 
     public static function register($name, $logger) {
         self::$loggers[$name] = $logger;

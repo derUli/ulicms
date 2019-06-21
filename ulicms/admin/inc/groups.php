@@ -26,7 +26,7 @@ if (!$permissionChecker->hasPermission("groups")) {
         if (!empty($name)) {
             $id = $permissionChecker->createGroup($name, $all_permissions);
             $group = new Group($id);
-            $languages = array();
+            $languages = [];
             if (isset($_POST["restrict_edit_access_language"]) and count($_POST["restrict_edit_access_language"]) > 0) {
                 foreach ($_POST["restrict_edit_access_language"] as $lang) {
                     $languages[] = new Language($lang);
@@ -67,7 +67,7 @@ if (!$permissionChecker->hasPermission("groups")) {
         $group->loadById($id);
         $allowed_tags = StringHelper::isNotNullOrWhitespace($_POST["allowable_tags"]) ? strval($_POST["allowable_tags"]) : null;
         $group->setAllowableTags($allowed_tags);
-        $languages = array();
+        $languages = [];
         if (isset($_POST["restrict_edit_access_language"]) and count($_POST["restrict_edit_access_language"]) > 0) {
             foreach ($_POST["restrict_edit_access_language"] as $lang) {
                 $languages[] = new Language($lang);

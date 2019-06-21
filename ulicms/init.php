@@ -34,12 +34,13 @@ define("START_TIME", microtime(true));
 // load composer packages
 $composerAutoloadFile = dirname(__FILE__) . "/vendor/autoload.php";
 
-if (is_file($composerAutoloadFile)) {
+if (file_exists($composerAutoloadFile)) {
     require_once $composerAutoloadFile;
 } else {
     throw new FileNotFoundException("autoload.php not found. Please run \"./composer install\" to install dependecies.");
 }
 
+require_once dirname(__file__) . "/lib/comparisons.php";
 require_once dirname(__file__) . "/lib/minify.php";
 require_once dirname(__file__) . "/lib/api.php";
 require_once dirname(__file__) . "/lib/csv_writer.php";
@@ -119,7 +120,7 @@ require_once dirname(__file__) . "/classes/objects/media/load.php";
 require_once dirname(__file__) . "/UliCMSVersion.php";
 
 $mobile_detect_as_module = dirname(__file__) . "/content/modules/Mobile_Detect/Mobile_Detect.php";
-if (is_file($mobile_detect_as_module)) {
+if (file_exists($mobile_detect_as_module)) {
     require_once $mobile_detect_as_module;
 }
 
@@ -156,7 +157,7 @@ function exception_handler($exception) {
 $path_to_config = dirname(__file__) . "/CMSConfig.php";
 
 // load config file
-if (is_file($path_to_config)) {
+if (file_exists($path_to_config)) {
     require_once $path_to_config;
 } else if (is_dir("installer")) {
     header("Location: installer/");
@@ -221,6 +222,10 @@ if (!defined("ULICMS_CONTENT")) {
     define("ULICMS_CONTENT", ULICMS_DATA_STORAGE_ROOT . "/content/");
 }
 
+if (!defined("ULICMS_GENERATED")) {
+    define("ULICMS_GENERATED", ULICMS_CONTENT . "generated");
+}
+
 if (!defined("ULICMS_CONFIGURATIONS")) {
     define("ULICMS_CONFIGURATIONS", ULICMS_CONTENT . "/configurations/");
 }
@@ -230,10 +235,13 @@ if (!is_dir(ULICMS_CACHE)) {
 if (!is_dir(ULICMS_LOG)) {
     mkdir(ULICMS_LOG);
 }
+if (!is_dir(ULICMS_GENERATED)) {
+    mkdir(ULICMS_GENERATED);
+}
 
 $htaccessForLogFolderSource = ULICMS_ROOT . "/lib/htaccess-deny-all.txt";
 $htaccessLogFolderTarget = ULICMS_LOG . "/.htaccess";
-if (!is_file($htaccessLogFolderTarget)) {
+if (!file_exists($htaccessLogFolderTarget)) {
     copy($htaccessForLogFolderSource, $htaccessLogFolderTarget);
 }
 
@@ -256,8 +264,10 @@ if (isset($config->memory_limit)) {
 Translation::init();
 
 if (class_exists("Path")) {
-    LoggerRegistry::register("exception_log", new Logger(Path::resolve("ULICMS_LOG/exception_log")));
 
+    if (is_true($config->exception_logging)) {
+        LoggerRegistry::register("exception_log", new Logger(Path::resolve("ULICMS_LOG/exception_log")));
+    }
     if (is_true($config->query_logging)) {
         LoggerRegistry::register("sql_log", new Logger(Path::resolve("ULICMS_LOG/sql_log")));
     }
@@ -277,7 +287,7 @@ define('BR', '<br />' . LF); // HTML Break
 define("ONE_DAY_IN_SECONDS", 60 * 60 * 24);
 
 global $actions;
-$actions = array();
+$actions = [];
 
 function noPerms() {
     echo "<div class=\"alert alert-danger\">" . get_translation("no_permissions") . "</div>";
@@ -298,21 +308,27 @@ function noPerms() {
 $db_socket = isset($config->db_socket) ? $config->db_socket : ini_get("mysqli.default_socket");
 
 $db_port = isset($config->db_port) ? $config->db_port : ini_get("mysqli.default_port");
+$db_strict_mode = isset($config->db_strict_mode) ? boolval($config->db_strict_mode) : false;
 
-@$connection = Database::connect($config->db_server, $config->db_user, $config->db_password, $db_port, $db_socket);
+@$connection = Database::connect($config->db_server, $config->db_user, $config->db_password, $db_port, $db_socket, $db_strict_mode);
 
 if ($connection === false) {
-    throw new SqlException("Can't connect to Database.</h1>");
+    throw new SqlException("Can't connect to Database.");
 }
 
 $path_to_installer = dirname(__file__) . "/installer/installer.php";
 
 if (is_true($config->dbmigrator_auto_migrate)) {
-    $additionalSql = is_array($config->dbmigrator_initial_sql_files) ? $config->dbmigrator_initial_sql_files : array();
+    $additionalSql = is_array($config->dbmigrator_initial_sql_files) ? $config->dbmigrator_initial_sql_files : [];
+    if (isCLI()) {
+        Database::setEchoQueries(true);
+    }
     $select = Database::setupSchemaAndSelect($config->db_database, $additionalSql);
 } else {
     $select = Database::select($config->db_database);
 }
+
+Database::setEchoQueries(false);
 
 if (!$select) {
     throw new SqlException("<h1>Database " . $config->db_database . " doesn't exist.</h1>");
@@ -322,7 +338,7 @@ if (!Settings::get("session_name")) {
     Settings::set("session_name", uniqid() . "_SESSION");
 }
 
-session_name(Settings::get("session_name"));
+@session_name(Settings::get("session_name"));
 
 $useragent = Settings::get("useragent");
 
@@ -393,7 +409,11 @@ function shutdown_function() {
         echo "\n\n<!--" . (microtime(true) - START_TIME) . "-->";
     }
     if (is_true($cfg->dbmigrator_drop_database_on_shutdown)) {
+        if (isCLI()) {
+            Database::setEchoQueries(true);
+        }
         Database::dropSchema($cfg->db_database);
+        Database::setEchoQueries(false);
     }
 }
 
@@ -414,10 +434,10 @@ Vars::set("disabledModules", $moduleManager->getDisabledModuleNames());
 // class of KCFinder
 
 ModelRegistry::loadModuleModels();
+
 TypeMapper::loadMapping();
 HelperRegistry::loadModuleHelpers();
 ControllerRegistry::loadModuleControllers();
-
 require_once dirname(__file__) . "/lib/templating.php";
 
 do_event("before_init");
@@ -436,5 +456,3 @@ $installed_patches = implode(";", $installed_patches);
 if (!defined("PATCH_CHECK_URL")) {
     define("PATCH_CHECK_URL", "https://patches.ulicms.de/?v=" . urlencode(implode(".", $version->getInternalVersion())) . "&installed_patches=" . urlencode($installed_patches));
 }
-
-

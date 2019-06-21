@@ -95,6 +95,42 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull($user->getId());
     }
 
+    public function testLoadByUsernameCaseInsensitive() {
+        $user = new User();
+        $user->setUsername("paul.panzer");
+        $user->setLastname("Panzer");
+        $user->setFirstname("Paul");
+        $user->setPassword("secret");
+        $user->setEmail("paul@panzer.de");
+        $user->save();
+
+        $savedUser = new User();
+        $savedUser->loadByUsername("Paul.Panzer");
+
+        $this->assertEquals("paul.panzer", $savedUser->getUsername());
+        $this->assertEquals("Panzer", $savedUser->getLastname());
+
+        $user->delete();
+    }
+
+    public function testLoadByEmailCaseInsensitive() {
+        $user = new User();
+        $user->setUsername("paul.panzer");
+        $user->setLastname("Panzer");
+        $user->setFirstname("Paul");
+        $user->setPassword("secret");
+        $user->setEmail("paul@panzer.de");
+        $user->save();
+
+        $savedUser = new User();
+        $savedUser->loadByEmail("Paul@PaNzER.DE");
+
+        $this->assertEquals("paul@panzer.de", $savedUser->getEmail());
+        $this->assertEquals("Panzer", $savedUser->getLastname());
+
+        $user->delete();
+    }
+
     public function testGetWelcomeMailText() {
         $user = new User();
         $user->setUsername("john.doe");

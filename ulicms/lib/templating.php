@@ -5,14 +5,6 @@ use UliCMS\Models\Content\Categories;
 use UliCMS\Models\Content\Types\DefaultContentTypes;
 use UliCMS\Utils\File;
 
-function esc($value) {
-    Template::escape($value);
-}
-
-function _esc($value) {
-    return Template::getEscape($value);
-}
-
 function html5_doctype() {
     echo Template::getHtml5Doctype();
 }
@@ -368,7 +360,7 @@ function delete_custom_data($var = null, $page = null) {
     }
     $data = get_custom_data($page);
     if (is_null($data)) {
-        $data = array();
+        $data = [];
     }
 // Wenn $var gesetzt ist, nur $var aus custom_data löschen
     if ($var) {
@@ -377,7 +369,7 @@ function delete_custom_data($var = null, $page = null) {
         }
     } // Wenn $var nicht gesetzt ist, alle Werte von custom_data löschen
     else {
-        $data = array();
+        $data = [];
     }
 
     $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
@@ -391,7 +383,7 @@ function set_custom_data($var, $value, $page = null) {
     }
     $data = get_custom_data($page);
     if (is_null($data)) {
-        $data = array();
+        $data = [];
     }
 
     $data[$var] = $value;
@@ -620,12 +612,12 @@ function apply_filter($text, $type) {
         $escapedName = ModuleHelper::underscoreToCamel($type . "_filter");
         if ($controller and method_exists($controller, $escapedName)) {
             $text = $controller->$escapedName($text);
-        } else if (is_file($module_content_filter_file1)) {
+        } else if (file_exists($module_content_filter_file1)) {
             require_once $module_content_filter_file1;
             if (function_exists($modules[$i] . "_" . $type . "_filter")) {
                 $text = call_user_func($modules[$i] . "_" . $type . "_filter", $text);
             }
-        } else if (is_file($module_content_filter_file2)) {
+        } else if (file_exists($module_content_filter_file2)) {
             require_once $module_content_filter_file2;
             if (function_exists($modules[$i] . "_" . $type . "_filter")) {
                 $text = call_user_func($modules[$i] . "_" . $type . "_filter", $text);
@@ -705,7 +697,7 @@ function is_503() {
     return check_status() == "503 Service Unavailable";
 }
 
-function buildtree($src_arr, $parent_id = 0, $tree = array()) {
+function buildtree($src_arr, $parent_id = 0, $tree = []) {
     foreach ($src_arr as $idx => $row) {
         if ($row['parent'] == $parent_id) {
             foreach ($row as $k => $v) {
@@ -726,7 +718,7 @@ function parent_item_contains_current_page($id) {
     $sql = "SELECT id, slug, parent_id FROM " . tbname("content") . " WHERE language = '$language' AND active = 1 AND `deleted_at` IS NULL";
     $r = db_query($sql);
 
-    $data = array();
+    $data = [];
     while ($row = db_fetch_assoc($r)) {
         $data[] = $row;
     }
@@ -842,7 +834,7 @@ function get_output_favicon_code() {
     }
     $path = ULICMS_DATA_STORAGE_ROOT . "/content/images/favicon.ico";
     $html = "";
-    if (is_file($path)) {
+    if (file_exists($path)) {
         $url .= "?time=" . File::getLastChanged($path);
         $html = '<link rel="icon" href="' . $url . '" type="image/x-icon" />' . '<link rel="shortcut icon" href="' . $url . '" type="image/x-icon" />';
     }

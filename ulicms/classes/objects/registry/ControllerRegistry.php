@@ -4,12 +4,12 @@ use UliCMS\Exceptions\FileNotFoundException;
 
 class ControllerRegistry {
 
-    private static $controllers = array();
-    private static $controller_function_permissions = array();
+    private static $controllers = [];
+    private static $controller_function_permissions = [];
 
     public static function loadModuleControllers() {
         if (!defined("KCFINDER_PAGE")) {
-            $controllerRegistry = array();
+            $controllerRegistry = [];
             $modules = getAllModules();
             $disabledModules = Vars::get("disabledModules");
             foreach ($modules as $module) {

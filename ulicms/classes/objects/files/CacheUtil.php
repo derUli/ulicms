@@ -15,6 +15,8 @@ use function strbool;
 use function is_mobile;
 use function is_crawler;
 use function is_tablet;
+use ControllerRegistry;
+use DesignSettingsController;
 
 class CacheUtil {
 
@@ -52,6 +54,13 @@ class CacheUtil {
         return (!Settings::get("cache_disabled") && !is_logged_in());
     }
 
+    public static function clearPageCache() {
+        $adapter = self::getAdapter();
+        if ($adapter) {
+            $adapter->clear();
+        }
+    }
+
     public static function clearCache() {
         do_event("before_clear_cache");
 
@@ -64,16 +73,17 @@ class CacheUtil {
             opcache_reset();
         }
 
-        $adapter = self::getAdapter();
-        if ($adapter) {
-            $adapter->clear();
-        }
-
         sureRemoveDir(Path::resolve("ULICMS_CACHE"), false);
+        sureRemoveDir(Path::resolve("ULICMS_TMP"), false);
 
         // Sync modules table in database with modules folder
         $moduleManager = new ModuleManager();
         $moduleManager->sync();
+
+        if (class_exists("DesignSettingsController")) {
+            $designSettingsController = ControllerRegistry::get(DesignSettingsController::class);
+            $designSettingsController->generateSCSSToFile();
+        }
 
         do_event("after_clear_cache");
     }
@@ -84,7 +94,7 @@ class CacheUtil {
     }
 
     public static function getCurrentUid() {
-        return md5(get_request_uri() . getCurrentLanguage() . strbool(is_mobile()) . strbool(is_crawler()) . strbool(is_tablet()));
+        return "fullpage-cache-" . md5(get_request_uri() . getCurrentLanguage() . strbool(is_mobile()) . strbool(is_crawler()) . strbool(is_tablet()));
     }
 
 }

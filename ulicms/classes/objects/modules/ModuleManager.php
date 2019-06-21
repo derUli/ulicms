@@ -5,7 +5,7 @@ class ModuleManager {
     public function getAllModules() {
         $sql = "select name from {prefix}modules";
         $query = Database::query($sql, true);
-        $modules = array();
+        $modules = [];
         while ($row = Database::fetchObject($query)) {
             $modules [] = new Module($row->name);
         }
@@ -15,7 +15,7 @@ class ModuleManager {
     public function getEnabledModuleNames() {
         $sql = "select name from {prefix}modules where enabled = 1";
         $query = Database::query($sql, true);
-        $modules = array();
+        $modules = [];
         while ($row = Database::fetchObject($query)) {
             $modules [] = $row->name;
         }
@@ -25,7 +25,7 @@ class ModuleManager {
     public function getDisabledModuleNames() {
         $sql = "select name from {prefix}modules where enabled = 0";
         $query = Database::query($sql, true);
-        $modules = array();
+        $modules = [];
         while ($row = Database::fetchObject($query)) {
             $modules [] = $row->name;
         }
@@ -35,14 +35,14 @@ class ModuleManager {
     public function getAllModuleNames() {
         $sql = "select name from {prefix}modules";
         $query = Database::query($sql, true);
-        $modules = array();
+        $modules = [];
         while ($row = Database::fetchObject($query)) {
             $modules [] = $row->name;
         }
         return $modules;
     }
 
-    public function getDependencies($module, $allDeps = array()) {
+    public function getDependencies($module, $allDeps = []) {
         $dependencies = getModuleMeta($module, "dependencies");
         if ($dependencies) {
             foreach ($dependencies as $dep) {
@@ -54,7 +54,7 @@ class ModuleManager {
         return $allDeps;
     }
 
-    public function getDependentModules($module, $allDeps = array()) {
+    public function getDependentModules($module, $allDeps = []) {
         $allModules = $this->getEnabledModuleNames();
         foreach ($allModules as $mod) {
             $dependencies = getModuleMeta($mod, "dependencies");

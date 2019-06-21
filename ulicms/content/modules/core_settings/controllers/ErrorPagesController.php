@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Utils\CacheUtil;
+
 class ErrorPagesController extends Controller {
 
     public function savePost() {
@@ -17,6 +19,9 @@ class ErrorPagesController extends Controller {
                 }
             }
         }
+
+        CacheUtil::clearPageCache();
+
         Response::sendHttpStatusCodeResultIfAjax(HttpStatusCode::OK,
                 ModuleHelper::buildActionURL("error_pages"));
     }

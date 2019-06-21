@@ -9,7 +9,7 @@ class CustomField {
     public $required = false;
     public $helpText;
     public $defaultValue = "";
-    public $htmlAttributes = array();
+    public $htmlAttributes = [];
     public $contentType;
 
     public function render($value = null) {

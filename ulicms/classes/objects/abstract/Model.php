@@ -56,7 +56,7 @@ class Model {
     }
 
     // bind values from associative array $values to class properties
-    public function bindValues($values = array()) {
+    public function bindValues($values = []) {
         $values = (array) $values;
         foreach ($values as $key => $value) {
             $camelCaseVar = ModuleHelper::underscoreToCamel($key);
@@ -93,10 +93,10 @@ class Model {
     }
 
     public static function getAllDatasets($tableName, $modelClass, $orderBy = "id", $where = "") {
-        $result = array();
+        $result = [];
         $query = Database::selectAll($tableName, array(
                     "id"
-                        ), $where, array(), true, $orderBy);
+                        ), $where, [], true, $orderBy);
         while ($row = Database::fetchObject($query)) {
             $result[] = new $modelClass($row->id);
         }

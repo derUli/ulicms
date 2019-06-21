@@ -134,7 +134,7 @@ class AntiSpamHelper extends Helper {
         $domain = remove_prefix($domain, "@");
         // In some cases getmxrr() would return a result for an invalid domain if there is no additional dot at the end
         $domain = !endsWith($domain, ".") ? $domain . "." : $domain;
-        $result = array();
+        $result = [];
 
         // sometimes getmxrr returns true even if the result is empty
         // so check the count of $result
