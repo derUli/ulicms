@@ -4,6 +4,7 @@ Neue Features:
 * Seitenverwaltung ist nun hierarchisch
 * Neues Standardtheme "2020"
 * Design-Einstellungen: Vorschaubild vom ausgewählten Theme
+* Design-Einstellungen: Vorschau der gewählten Schriftart
 * controller_function_permissions unterstützt nun Wildcards
 * Sprachen können wieder gelöscht werden
 * Design-Einstellungen können nun in SCSS Code als Variablen verwendet werden

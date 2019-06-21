@@ -217,12 +217,13 @@ if (!$permissionChecker->hasPermission("design")) {
                             ?>
                         </select>
                         <div class="voffset3 alert alert-warning"><?php translate("google_fonts_privacy_warning"); ?></div>
-                    </div></td>
+                    </div>
+                </td>
             </tr>
             <tr>
                 <td><strong><?php translate("font_size"); ?> </strong>
 
-                <td> <select name="font-size">
+                <td> <select name="font-size" id="font-size">
                         <?php
                         foreach ($font_sizes as $size) {
                             echo '<option value="' . $size . '"';
@@ -235,6 +236,11 @@ if (!$permissionChecker->hasPermission("design")) {
                         }
                         ?>
                     </select></td>
+            </tr>
+            <tr id="font-preview"
+                data-google-font-url="//fonts.googleapis.com/css?family=">
+                <td></td>
+                <td>Franz jagt im komplett verwahrlosten Taxi quer durch Bayern</td>
             </tr>
             <tr>
                 <td><strong><?php translate("HEADER_BACKGROUNDCOLOR"); ?> </strong></td>

@@ -43,12 +43,26 @@ function loadThemePreview(selectField) {
 
 // show a privacy warning if a google font is selected
 function onChangeDefaultFont() {
-    var value = $("select#default_font").val();
-    if (value === "google") {
+    const fontFamily = $("select#default_font").val();
+    const fontSize = $("select#font-size").val();
+    const googleFont = $("#google-fonts select").val();
+    if (fontFamily === "google") {
         $("div#google-fonts").slideDown();
+        const url = $("#font-preview").data("google-font-url") + encodeURIComponent(googleFont);
+        if ($("#google-font-loader").length) {
+            $("#google-font-loader").attr("href", url);
+        } else {
+            $('head').append(`<link id="google-font-loader" rel="stylesheet" href="${url}" type="text/css"/>`);
+        }
     } else {
         $("div#google-fonts").slideUp();
     }
+    $("#font-preview").css(
+            {
+                fontFamily: fontFamily !== "google" ? fontFamily : googleFont,
+                fontSize: fontSize
+            }
+    );
 }
 
 $(function () {
@@ -58,14 +72,14 @@ $(function () {
         initMobileDetectNotice();
     });
 
-    $("select#default_font").change(onChangeDefaultFont);
+    $("select#default_font, select#font-size, #google-fonts select")
+            .change(onChangeDefaultFont);
 
     loadThemePreview($("select[name='theme']"));
     loadThemePreview($("select[name='mobile_theme']"));
     $("select[name='theme'], select[name='mobile_theme']").change(function (event) {
         loadThemePreview($(event.target));
     });
-
 
     // ajax form submit
     $("#designForm").ajaxForm(
