@@ -68,6 +68,18 @@ class BackendPageRenderer {
     }
 
     protected function handleNotLoggedIn() {
+        // FIXME: don't use globals
+
+        ActionRegistry::loadModuleActions();
+        $actions = ActionRegistry::getActions();
+
+        if ($this->getAction()) {
+            $action_permission = ActionRegistry::getActionPermission($this->getAction());
+            if ($action_permission and $action_permission === "*") {
+                require_once $actions[$this->getAction()];
+            }
+        }
+
         if (isset($_GET["register"])) {
             do_event("before_register_form");
             require_once "inc/registerform.php";
@@ -87,11 +99,9 @@ class BackendPageRenderer {
         $permissionChecker = new PermissionChecker(get_user_id());
 
         require_once "inc/adminmenu.php";
-        // FIXME: don't use globals!
-        global $actions;
-        $actions = [];
 
         ActionRegistry::loadModuleActions();
+        $actions = ActionRegistry::getActions();
 
         do_event("register_actions");
 

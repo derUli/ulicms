@@ -4,6 +4,7 @@ use UliCMS\Exceptions\FileNotFoundException;
 
 class ActionRegistry {
 
+    private static $actions = [];
     private static $assignedControllers = [];
     private static $defaultCoreActions = array(
         "module_settings" => "inc/module_settings.php",
@@ -16,8 +17,9 @@ class ActionRegistry {
     }
 
     public static function loadModuleActions() {
+        self::$actions = [];
+
         if (!defined("KCFINDER_PAGE")) {
-            global $actions;
             $coreActions = self::getDefaultCoreActions();
             foreach ($coreActions as $action => $file) {
                 $path = $file;
@@ -25,7 +27,7 @@ class ActionRegistry {
                     $path .= ".php";
                 }
                 if (file_exists($path)) {
-                    $actions[$action] = $file;
+                    self::$actions[$action] = $file;
                 }
             }
             $modules = getAllModules();
@@ -43,7 +45,7 @@ class ActionRegistry {
                         }
 
                         if (file_exists($path)) {
-                            $actions[$key] = $path;
+                            self::$actions[$key] = $path;
                         } else {
                             throw new FileNotFoundException("Module {$module}: File '{$path}' not found.");
                         }
@@ -102,6 +104,10 @@ class ActionRegistry {
         } else {
             return null;
         }
+    }
+
+    public static function getActions() {
+        return self::$actions;
     }
 
 }

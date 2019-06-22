@@ -1,0 +1,1 @@
+update `{prefix}blog` SET `posted2telegram` = 1 where posted2telegram = 0

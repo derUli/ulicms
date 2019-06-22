@@ -286,9 +286,6 @@ define('CRLF', "\r\n"); // carriage return and line feed; Windows
 define('BR', '<br />' . LF); // HTML Break
 define("ONE_DAY_IN_SECONDS", 60 * 60 * 24);
 
-global $actions;
-$actions = [];
-
 function noPerms() {
     echo "<div class=\"alert alert-danger\">" . get_translation("no_permissions") . "</div>";
     $logger = LoggerRegistry::get("audit_log");

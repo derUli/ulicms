@@ -1,0 +1,25 @@
+
+{
+    "version": "1.0",
+    "embed": false,
+    "custom_acl": [
+        "telegram_settings"
+    ],
+    "admin_permission": "telegram_settings",
+    "controllers": {
+        "TelegramController": "controllers/TelegramController"
+    },
+    "actions": {
+        "telegram_help": "templates/help.php"
+    },
+    "action_permissions": {
+        "telegram_help": "telegram_settings"
+    },
+    "controller_function_permissions": {
+        "TelegramController::savePost": "telegram_settings"
+    },
+    "objects": {
+        "TelegramAutoload": "vendor/autoload.php"
+    },
+    "main_class": "TelegramController"
+}
