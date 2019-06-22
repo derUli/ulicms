@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Utils\File;
+
 class SinPackageInstaller {
 
     private $file = null;
