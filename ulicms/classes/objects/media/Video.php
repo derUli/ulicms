@@ -2,6 +2,7 @@
 
 namespace UliCMS\Models\Media;
 
+use UliCMS\Utils\File;
 use UliCMS\Models\Content\Category;
 use Database;
 use Model;
@@ -164,21 +165,15 @@ class Video extends Model {
             if ($deletePhysical) {
                 if ($this->getMp4File()) {
                     $file = Path::resolve("ULICMS_DATA_STORAGE_ROOT/content/videos/" . basename($this->getMP4File()));
-                    if (file_exists($file)) {
-                        @unlink($file);
-                    }
+                    File::deleteIfExists($file);
                 }
                 if ($this->getOggFile()) {
                     $file = Path::resolve("ULICMS_DATA_STORAGE_ROOT/content/videos/" . basename($this->getOggFile()));
-                    if (file_exists($file)) {
-                        @unlink($file);
-                    }
+                    File::deleteIfExists($file);
                 }
                 if ($this->getWebmFile()) {
                     $file = Path::resolve("ULICMS_DATA_STORAGE_ROOT/content/videos/" . basename($this->getWebmFile()));
-                    if (file_exists($file)) {
-                        @unlink($file);
-                    }
+                    File::deleteIfExists($file);
                 }
             }
             Database::pQuery("delete from `{prefix}videos` where id = ?", array(

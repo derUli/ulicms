@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Utils\File;
+
 class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase {
 
     public function setUp() {
@@ -16,9 +18,7 @@ class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase {
         ];
         foreach ($filesToDelete as $file) {
             $file = Path::resolve($file);
-            if (file_exists($file)) {
-                unlink($file);
-            }
+            File::deleteIfExists($file);
         }
     }
 

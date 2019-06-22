@@ -52,6 +52,16 @@ class File {
         return $data;
     }
 
+    public static function deleteIfExists($file) {
+        if (file_exists($file) and is_file($file)) {
+            return unlink($file);
+        } else if (file_exists($file) and is_dir($file)) {
+            sureRemoveDir($file, true);
+            return !file_exists($file);
+        }
+        return false;
+    }
+
     public static function loadLinesAndTrim($url) {
         $data = self::loadLines($url);
         if ($data) {

@@ -22,6 +22,7 @@ Neue API-Methoden:
 * Page->getDeletedAt()
 * Page->isDeleted()
 * TypeMapper::getModel($type)
+* File::deleteIfExists($file)
 * User->checkPassword($password)
 * Comment::getReadCount()
 * Comment::getAllCount()

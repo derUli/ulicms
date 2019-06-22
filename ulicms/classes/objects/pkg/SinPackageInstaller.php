@@ -30,7 +30,7 @@ class SinPackageInstaller {
             $path = $this->extractArchive();
             $pkg = new PackageManager();
             $result = $pkg->installPackage($path, $clear_cache);
-            unlink($path);
+            File::deleteIfExists($path);
             return $result;
         } else {
             return false;
