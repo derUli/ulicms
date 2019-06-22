@@ -68,7 +68,6 @@ class BackendPageRenderer {
     }
 
     protected function handleNotLoggedIn() {
-        // FIXME: don't use globals
 
         ActionRegistry::loadModuleActions();
         $actions = ActionRegistry::getActions();

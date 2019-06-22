@@ -110,4 +110,9 @@ class ActionRegistry {
         return self::$actions;
     }
 
+    public static function getAction($action) {
+        return isset(self::$actions[$action]) ?
+                self::$actions[$action] : null;
+    }
+
 }
