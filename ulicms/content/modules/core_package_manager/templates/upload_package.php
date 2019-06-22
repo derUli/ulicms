@@ -17,7 +17,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
             if (move_uploaded_file($_FILES['file']['tmp_name'], $file_in_tmp)) {
                 if (endsWith($file_in_tmp, ".tar.gz")) {
                     $pkg = new PackageManager();
-                    if ($pkg->installPackage($file_in_tmp)) {
+                    if ($pkg->installPackage($file_in_tmp, false)) {
                         @unlink($file_in_tmp);
                         echo "<p style='color:green'>" . get_translation("PACKAGE_SUCCESSFULL_UPLOADED", array(
                             "%file%" => $_FILES['file']['name']
