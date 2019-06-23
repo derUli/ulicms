@@ -3,7 +3,7 @@
 class UliCMSVersion {
 
     function __construct() {
-        $this->version = "Dancing parrot";
+        $this->version = "Tidy Guanako";
         $this->releaseYear = 2019;
         $this->buildDate = 0; // {InsertBuildDate}
         $this->internalVersion = Array(
