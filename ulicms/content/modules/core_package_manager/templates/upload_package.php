@@ -1,4 +1,8 @@
 <?php
+// TODO: Refactor this
+// Move logic to controller
+// don't use so much nested if-statements
+
 $permissionChecker = new ACL();
 if (!$permissionChecker->hasPermission("install_packages")) {
     noPerms();
