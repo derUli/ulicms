@@ -494,6 +494,10 @@ div#google-fonts {
     }
 }
 
+.toggle.btn{
+    margin-right: 10px;
+}
+
 .accordion-header {
     width: auto !important;
     word-wrap: break-word;
@@ -536,6 +540,10 @@ div#login-welcome-text {
 
     li{
         margin-bottom:10px;
+    }
+
+    .mainmenu li{
+        margin-bottom: 0;
     }
 
     a.btn-default {

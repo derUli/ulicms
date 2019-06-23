@@ -552,7 +552,7 @@ if ($permissionChecker->hasPermission("pages")) {
         </div>
     </div>
     <?php
-    enqueueScriptFile("scripts/page.js");
+    enqueueScriptFile(ModuleHelper::buildRessourcePath("core_content", "js/pages/page.js"));
     combinedScriptHtml();
     ?>
     <?php
