@@ -112,12 +112,34 @@ function initRemoteAlerts(rootElement) {
 }
 function initDataTables(rootElement) {
     // Sortable and searchable tables
+
+    // Internet Exploder doesn't support URLSearchParams,
+    // but which caveman are still using IE?
+    // Fuck IE, Fuck Microsuck since Windows 8
+    const urlParams = new URLSearchParams(window.location.search);
+    // get current action from url
+    // this is used as identifier when saving and loading the state
+    const action = urlParams.get('action');
+
     $(rootElement).find(".tablesorter").DataTable({
         language: {
-            url: $("body").data("datatables-translation"),
+            url: $("body").data("datatables-translation")
         },
-		deferRender: true,
-		stateSave: true,
-        columnDefs: [{targets: "no-sort", orderable: false}],
+        deferRender: true,
+        stateSave: true,
+        stateDuration: 0,
+        stateSaveCallback: function (settings, data) {
+            console.log(settings, data);
+            localStorage.setItem(
+                    "DataTables_" + action + "_"
+                    + settings.sInstance, JSON.stringify(data)
+                    );
+        },
+        stateLoadCallback: function (settings) {
+            return JSON.parse(
+                    localStorage.getItem(
+                            "DataTables_" + action + "_" + settings.sInstance));
+        },
+        columnDefs: [{targets: "no-sort", orderable: false}]
     });
 }
