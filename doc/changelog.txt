@@ -57,6 +57,7 @@ Entfernte API-Methoden:
 
 Fehlerkorrekturen:
 * datetime-local Eingabefelder auf iOS Safari sind immer ungültig
+* Das Speichern des States der DataTables ist fehlerhaft
 
 Entfernte Features:
 * Unterstützung für veraltete unsichere Passwortverschlüsselung entfernt
