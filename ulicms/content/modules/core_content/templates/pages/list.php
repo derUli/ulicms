@@ -30,17 +30,19 @@ if ($permissionChecker->hasPermission("pages")) {
     }
 
     if (isset($_GET["filter_active"])) {
-        if ($_GET["filter_active"] === "null")
+        if ($_GET["filter_active"] === "null") {
             $_SESSION["filter_active"] = null;
-        else
+        } else {
             $_SESSION["filter_active"] = intval($_GET["filter_active"]);
+        }
     }
 
     if (isset($_GET["filter_approved"])) {
-        if ($_GET["filter_approved"] === "null")
+        if ($_GET["filter_approved"] === "null") {
             $_SESSION["filter_approved"] = null;
-        else
+        } else {
             $_SESSION["filter_approved"] = intval($_GET["filter_approved"]);
+        }
     }
 
     if (isset($_GET["filter_type"])) {
@@ -129,7 +131,7 @@ if ($permissionChecker->hasPermission("pages")) {
             </form>
             <div class="row">
                 <div class="col-xs-6">
-                    <a href="index.php?action=pages_new" class="btn btn-default"><i
+                    <a href="index.php?action=pages_new&parent_id=<?php echo $_SESSION["filter_parent"]; ?>" class="btn btn-default"><i
                             class="fa fa-plus"></i> <?php translate("create_page"); ?></a>
                 </div>
                 <div class="col-xs-6 text-right">
