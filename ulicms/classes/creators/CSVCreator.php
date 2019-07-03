@@ -40,8 +40,8 @@ class CSVCreator {
         $data[] = array(
             "Title",
             "Content",
-            "Meta Description",
-            "Meta Keywords",
+            "Description",
+            "Tags",
             "Author"
         );
         $this->content = str_replace("\r\n", "\n", $this->content);

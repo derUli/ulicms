@@ -35,14 +35,6 @@ class PlainTextCreator {
             $adapter->get($uid);
         }
 
-        $data[] = array(
-            "Title",
-            "Content",
-            "Meta Description",
-            "Meta Keywords",
-            "Author"
-        );
-        $data = [];
         $this->content = br2nlr($this->content);
         $this->content = strip_tags($this->content);
         $this->content = str_replace("\r\n", "\n", $this->content);
