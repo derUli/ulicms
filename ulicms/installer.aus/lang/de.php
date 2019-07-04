@@ -39,9 +39,10 @@ add_translation("INSTALL_X_OF_Y", "Installiere Datei %x% von %y%");
 add_translation("BUILD_DATABASE", "Datenbank aufbauen");
 add_translation("CREATE_CMS_CONFIG_PHP", "Erstelle CMSConfig.php");
 add_translation("WRITE_CMS_CONFIG_FAILED", "Speichern der CMSConfig.php fehlgeschlagen.<br/>" . "Bitte erstellen Sie die Datei CMSConfig.php und fügen Sie den folgenden Code darin ein.");
+// FIXME: The button should not be contained in this language file. Move it to step9.php
 add_translation("LAST_STEP", "Dies ist der letzte Schritt der Installation.<br/>Bitte löschen Sie den \"installer\" Ordner von ihrem Server.<br/>
 		Danach können Sie sich in UliCMS einloggen.<br/><br/>
-		<a href=\"index.php?submit_form=LoginToBackend\" class=\"btn btn-primary\">Gehe zur Anmeldung</a>");
+		<a href=\"index.php?submit_form=LoginToBackend\" class=\"btn btn-primary\"><i class=\"fas fa-sign-in-alt\"></i> Gehe zur Anmeldung</a>");
 add_translation("ADD_FK", "Fremdschlüssel hinzufügen");
 add_translation("ACCEPT_LICNSE", "Lizenz akzeptieren");
 add_translation("NEXT", "Weiter");
