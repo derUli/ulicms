@@ -66,9 +66,6 @@ Entfernte Features:
 Sicherheit:
 * Fix für XSS-Sicherheitslücke CVE-2019-11398
 
-Bekannte Probleme:
-* CodeMirror kann im Moment nicht als Standard HTML-Editor festgelegt werden. Das Feature ist auf Grund eines Bugs vorerst deaktiviert.
-
 ===== Neues in UliCMS 2019.3 =====
 
 Diese Version ist funktional identisch zu 2019.2.8

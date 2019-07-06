@@ -134,6 +134,7 @@ if ($permissionChecker->hasPermission("privacy_settings")) {
             <i class="fas fa-save"></i> <?php translate("save_changes"); ?></button>
     </p>
     <?php
+    BackendHelper::enqueueEditorScripts();
     enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/privacy.js"));
     combinedScriptHtml();
 

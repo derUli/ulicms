@@ -1,3 +1,7 @@
+let formChanged = 0;
+let submitted = 0;
+let isCtrl = false;
+
 function isJsonString(str) {
     try {
         JSON.parse(str);
@@ -62,7 +66,5 @@ $(function () {
                     cmEditor.save();
                 });
         }
-
-
     });
 });

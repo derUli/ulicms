@@ -1,20 +1,21 @@
+/* global CKEDITOR, PageTranslation */
+
 function CKCHANGED(event) {
     formChanged = 1;
-    if (event.data.$.keyCode == 17) {
+    if (event.data.$.keyCode === 17) {
         isCtrl = false;
     }
 }
 
-formChanged = 0;
-submitted = 0;
-isCtrl = false;
-
+let formChanged = 0;
+let submitted = 0;
+let isCtrl = false;
 
 $(function () {
     for (name in CKEDITOR.instances)
     {
         var id = CKEDITOR.instances[name].element.getId();
-        CKEDITOR.instances[name].destroy()
+        CKEDITOR.instances[name].destroy();
         var editor = CKEDITOR.replace(id,
                 {
                     skin: $("body").data("ckeditor-skin")}
@@ -26,9 +27,9 @@ $(function () {
 
             editor.document.on('keydown', function (event)
             {
-                if (event.data.$.keyCode == 17)
+                if (event.data.$.keyCode === 17)
                     isCtrl = true;
-                if (event.data.$.keyCode == 83 && isCtrl == true)
+                if (event.data.$.keyCode === 83 && isCtrl === true)
                 {
                     //The preventDefault() call prevents the browser's save popup to appear.
                     //The try statement fixes a weird IE error.
@@ -47,19 +48,18 @@ $(function () {
     }
     $('form').each(function (i, n) {
         $('input', n).change(function () {
-            formChanged = 1
+            formChanged = 1;
         });
         $('textarea', n).change(function () {
-            formChanged = 1
+            formChanged = 1;
         });
         $('select', n).change(function () {
-            formChanged = 1
+            formChanged = 1;
         });
         $(n).submit(function () {
-            submitted = 1
+            submitted = 1;
         });
     });
-
 });
 
 window.onbeforeunload = confirmExit;
