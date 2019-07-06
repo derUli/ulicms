@@ -1,3 +1,5 @@
+/* global bootbox */
+
 $(function () {
     $(".btn-make-default").click(function (event) {
         event.preventDefault();

@@ -1,3 +1,5 @@
+/* global Translation */
+
 function uninstallModule(url, name) {
     if (confirm(Translation.AskForUninstallPackage.replace("%name%", name))) {
         $.ajax({
@@ -27,11 +29,10 @@ function uninstallTheme(url, name) {
 }
 
 var ajaxOptions = {
-    success: function (responseText, statusText, xhr, $form) {
+    success: function () {
         $("div#inst_patch_slide_container").slideUp();
 
     }
-
-}
+};
 
 $("form#truncate_installed_patches").ajaxForm(ajaxOptions);

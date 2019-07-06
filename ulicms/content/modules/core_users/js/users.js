@@ -1,8 +1,10 @@
+/* global bootbox, UserTranslation */
+
 // This file contains the code for the user profil edit page
 
 // check if password field and password repeat are equal
 // then colorize the inputs
-function validatePasswords(event) {
+function validatePasswords() {
     var field1 = $("#password");
     var field2 = $("#password_repeat");
 

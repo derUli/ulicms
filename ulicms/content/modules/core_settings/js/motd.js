@@ -1,3 +1,5 @@
+/* global Translation */
+
 $(function () {
     $("select#language").change(
             function () {
@@ -7,11 +9,11 @@ $(function () {
             });
     $("#motd_form").ajaxForm(
             {
-                beforeSubmit: function (e) {
+                beforeSubmit: function () {
                     $("#message").html("");
                     $("#loading").show();
                 },
-                success: function (e) {
+                success: function () {
                     $("#loading").hide();
                     $("#message").html(
                             "<span style=\"color:green;\">"

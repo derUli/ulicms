@@ -1,9 +1,11 @@
+/* global Translation */
+
 // This script contains the code for the "design settings" page
 
 // show a message if a "design for mobile devices" is set but
 // Mobile_Detect is not installed
 function initMobileDetectNotice() {
-    if ($("select[name='mobile_theme']").val() != ""
+    if ($("select[name='mobile_theme']").val() !== ""
             && $("#mobile_detect_notice").data("installed") === false) {
         $("#mobile_detect_notice").slideDown();
     } else {

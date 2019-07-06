@@ -17,11 +17,11 @@ $(function () {
     $("#open_graph")
             .ajaxForm(
                     {
-                        beforeSubmit: function (e) {
+                        beforeSubmit: function () {
                             $("#message").html("");
                             $("#loading").show();
                         },
-                        success: function (e) {
+                        success: function () {
                             $("#loading").hide();
                             // FIXME: localize this string
                             $("#message")

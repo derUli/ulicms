@@ -1,3 +1,5 @@
+/* global bootbox, AvailablePackageTranslation */
+
 $(function () {
     $("div#loadpkg").slideDown();
     const container = $("div#pkglist");

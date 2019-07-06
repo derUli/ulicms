@@ -3,11 +3,11 @@ $(function () {
     $("#settings_simple")
             .ajaxForm(
                     {
-                        beforeSubmit: function (e) {
+                        beforeSubmit: function () {
                             $("#message").html("");
                             $("#loading").show();
                         },
-                        success: function (e) {
+                        success: function () {
                             $("#loading").hide();
                             $("#message")
                                     .html(

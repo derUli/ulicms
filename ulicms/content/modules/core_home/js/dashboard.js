@@ -23,7 +23,7 @@ $(function () {
         $.ajax({
             method: "get",
             url: url,
-            error: function (xhr, status, error) {
+            error: function (xhr) {
                 alert(xhr.responseText);
             }
         });

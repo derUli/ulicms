@@ -137,7 +137,6 @@ if ($permissionChecker->hasPermission("privacy_settings")) {
     BackendHelper::enqueueEditorScripts();
     enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/privacy.js"));
     combinedScriptHtml();
-
     echo ModuleHelper::endForm();
     ?>
     </div>

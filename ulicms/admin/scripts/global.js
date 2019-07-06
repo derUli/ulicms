@@ -1,3 +1,5 @@
+/* global bootbox, PasswordSecurityTranslation, MenuTranslation */
+
 $(document).ready(function () {
     $.ajaxSetup({cache: false});
 });

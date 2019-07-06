@@ -16,7 +16,7 @@ $(function () {
             var tr = $("tr#" + list_item_id);
             $(tr).fadeOut();
         }
-    }
+    };
 
     $("form.delete-form").ajaxForm(ajaxOptions);
 });

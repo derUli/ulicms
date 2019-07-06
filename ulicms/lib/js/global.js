@@ -1,3 +1,5 @@
+/* global DocumentTouch, Translation */
+
 // function to ask if a dataset should be deleted
 function askForDelete() {
     return confirm(Translation.AskForDelete);
@@ -14,7 +16,7 @@ function isTouchDevice() {
     var prefixes = ' -webkit- -moz- -o- -ms- '.split(' ');
     var mq = function (query) {
         return window.matchMedia(query).matches;
-    }
+    };
 
     if (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch) {
         return true;
