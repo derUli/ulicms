@@ -19,7 +19,7 @@ $(function () {
         $(this).hide();
         $("#menu-clear-cache-loading").show();
         var url = $("#menu-clear-cache").data("url");
-        $.get(url, function (result) {
+        $.get(url, function () {
             $("#menu-clear-cache").show();
             $("#menu-clear-cache-loading").hide();
         });
@@ -127,7 +127,7 @@ $(function () {
     $("a.backend-menu-item-logout").click(function (event) {
         event.preventDefault();
         var url = $(event.target).attr("href");
-        bootbox.confirm(MenuTranslation.Logout + "?", function (result) {
+        bootbox.confirm(`${MenuTranslation.Logout}?`, function (result) {
             if (result) {
                 location.href = url;
             }

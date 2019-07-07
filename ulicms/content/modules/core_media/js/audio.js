@@ -5,7 +5,7 @@ $(function () {
             function (e) {
                 var valueSelected = $('#category').val();
                 location.replace("index.php?action=audio&filter_category="
-                        + valueSelected)
+                        + valueSelected);
 
             });
     var ajaxOptions = {

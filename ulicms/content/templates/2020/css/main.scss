@@ -164,33 +164,32 @@ body{
             animation: move-up 0.2s forwards;
         }
     }
-	
+
     &.bgcolor1{
         background-color: #E4B0A2;
     }
-	
+
     &.bgcolor2{
         background-color: #ADD6D8;
     }
-	
+
     &.bgcolor3{
         background-color: #583843;
         color: white;
     }
-	
+
     &.bgcolor4{
         background-color: #F7C8C6;
     }
-	
+
     &.bgcolor5{
         background-color: #96D3BD;
     }
-
 }
 
 audio, video, iframe, p{
-	margin-top: 10px;
-	margin-bottom: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 footer{
     position: absolute;
@@ -206,7 +205,6 @@ footer{
         margin: 0;
     }
 }
-
 
 h1, h2, h3, h4, h5, h6{
     text-decoration: underline;
@@ -323,8 +321,6 @@ blockquote {
         border: 1px solid #499649;
     }
 }
-
-
 
 blockquote p {
     display: inline;

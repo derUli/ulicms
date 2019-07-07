@@ -3,7 +3,7 @@ $(function () {
     // when select another language
     $('#category_id').on(
             'change',
-            function (e) {
+            function () {
                 var valueSelected = $('#category_id').val();
                 location.replace("index.php?action=banner&filter_category="
                         + valueSelected);

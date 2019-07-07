@@ -181,4 +181,59 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $user->delete();
     }
 
+    public function testFromSessionDataWithInvalidIdReturnsEmptyUser() {
+
+        @session_start();
+
+        $_SESSION["login_id"] = PHP_INT_MAX;
+        $userFromSession = User::fromSessionData();
+        $this->assertInstanceOf(User::class, $userFromSession);
+        $this->assertNull($userFromSession->getId());
+        $this->assertNull($userFromSession->getUsername());
+
+        @session_destroy();
+    }
+
+    public function testFromSessionDataWithoutSessionReturnsNull() {
+
+        $userFromSession = User::fromSessionData();
+        $this->assertNull($userFromSession);
+    }
+
+    public function testFromSessionDataReturnsUser() {
+        $manager = new UserManager();
+        $users = $manager->getLockedUsers(false);
+        $user = $users[0];
+        @session_start();
+
+        $_SESSION["login_id"] = $user->getId();
+
+        $userFromSession = User::fromSessionData();
+
+        $this->assertInstanceOf(User::class, $userFromSession);
+        $this->assertEquals($userFromSession->getId(), $user->getId());
+        $this->assertEquals($userFromSession->getUsername(), $user->getUsername());
+        $this->assertEquals($userFromSession->getLastname(), $user->getLastname());
+
+        @session_destroy();
+    }
+
+    public function testToSessionDataReturnsNull() {
+        $user = new User();
+        $this->assertNull($user->toSessionData());
+    }
+
+    public function testToSessionDataReturnsArray() {
+        $manager = new UserManager();
+        $users = $manager->getLockedUsers(false);
+        $user = $users[0];
+        $sessionData = $user->toSessionData();
+        $this->assertIsArray($sessionData);
+        $this->assertCount(9, $sessionData);
+        $this->assertEquals($user->getId(), $sessionData["login_id"]);
+        $this->assertEquals($user->getUsername(), $sessionData["ulicms_login"]);
+
+        $this->assertEquals($user->getLastname(), $sessionData["lastname"]);
+    }
+
 }

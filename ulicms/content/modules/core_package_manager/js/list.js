@@ -23,7 +23,7 @@ $(function () {
                 var form = $(event.target);
                 // submit the form
                 $(form).ajaxSubmit({
-                    success: function (result) {
+                    success: function () {
                         // hide and remove the table row of the uninstalled
                         // package
                         $(form).closest("tr").fadeOut(400, function () {

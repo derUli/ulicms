@@ -2,7 +2,7 @@
 $(function () {
     $('#category').on(
             'change',
-            function (e) {
+            function () {
                 var valueSelected = $('#category').val();
                 location.replace("index.php?action=videos&filter_category="
                         + valueSelected);

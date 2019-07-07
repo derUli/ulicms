@@ -33,7 +33,6 @@ function submitPasswordForm(event) {
     event.preventDefault();
     validatePasswords(event);
     if ($("#password").hasClass("invalid")) {
-
         bootbox.alert(UserTranslation.PasswordsNotEqual, function () {
             $("#password").focus();
         });

@@ -4,9 +4,9 @@ use UliCMS\Exceptions\NotImplementedException;
 use UliCMS\Security\PermissionChecker;
 use UliCMS\Security\Encryption;
 
-class User {
+class User extends Model {
 
-    private $id = null;
+    protected $id = null;
     private $username = null;
     private $lastname = "";
     private $firstname = "";
@@ -38,6 +38,24 @@ class User {
         );
         $query = Database::pQuery($sql, $args, true);
         $this->fillVars($query);
+    }
+
+    public static function fromSessionData() {
+        return get_user_id() ? new self(get_user_id()) : null;
+    }
+
+    public function toSessionData() {
+        return $this->isPersistent() ? [
+            "ulicms_login" => $this->getUsername(),
+            "lastname" => $this->getLastname(),
+            "firstname" => $this->getFirstname(),
+            "email" => $this->getEmail(),
+            "login_id" => $this->getId(),
+            "require_password_change" => $this->getRequirePasswordChange(),
+            "group_id" => $this->getPrimaryGroupId(),
+            "logged_in" => true,
+            "session_begin" => time()
+                ] : null;
     }
 
     public function loadByUsername($name) {
@@ -88,7 +106,7 @@ class User {
         return Template::executeDefaultOrOwnTemplate("email/user_welcome.php");
     }
 
-    public function fillVars($query) {
+    public function fillVars($query = null) {
         if (Database::any($query)) {
             $result = Database::fetchAssoc($query);
             foreach ($result as $key => $value) {

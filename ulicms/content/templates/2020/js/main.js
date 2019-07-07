@@ -2,7 +2,7 @@ $(function () {
     $("footer").last().fadeIn();
 
     new fullpage('#fullpage', {
-        afterLoad: function (origin, destination, direction) {
+        afterLoad: function (origin, destination) {
             $(destination.item).find(".sliding").addClass("slide-in");
             $(destination.item).find(".text-content").addClass("move-up");
         },
@@ -12,5 +12,4 @@ $(function () {
         navigationPosition: 'right',
         verticalCentered: false
     });
-
 });

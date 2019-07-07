@@ -39,7 +39,6 @@ $(function () {
                     return false;
                 }
             });
-
         });
     }
     $('form').each(function (i, n) {

@@ -1,3 +1,5 @@
+/* global Translation, formChanged, submitted */
+
 function showAndHideFieldsByTypeWithoutEffects() {
     var type = $("input[name=type]:checked").val();
     if (typeof AllTypes[type] === "undefined") {
@@ -44,6 +46,7 @@ function showAndHideFieldsByTypeWithoutEffects() {
         $("#menu_image_div").show();
     }
 }
+
 // this function shows and hides areas for the selected content type
 function showAndHideFieldsByType() {
     if (typeof AllTypes[type] === "undefined") {
@@ -248,7 +251,7 @@ function filterParentPages() {
 $(function () {
     // bind event to reset filters button
     $("#btn-reset-filters").click(function (e) {
-        if (!window.confirm(Translation.ResetFilters + "?")) {
+        if (!window.confirm(`${Translation.ResetFilters}?`)) {
             e.preventDefault();
         }
     });
@@ -290,7 +293,7 @@ $(function () {
             $("#message_page_edit").hide();
             $(".loading").show();
         },
-        beforeSerialize: function ($Form, options) {
+        beforeSerialize: function () {
             /* Before serialize */
             for (instance in CKEDITOR.instances) {
                 CKEDITOR.instances[instance].updateElement();
