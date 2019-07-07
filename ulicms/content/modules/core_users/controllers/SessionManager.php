@@ -7,11 +7,12 @@ class SessionManager extends Controller {
     public function login() {
         $logger = LoggerRegistry::get("audit_log");
 
+        $user = new User();
+        $user->loadByUsername($_POST["user"]);
+
         if (StringHelper::isNotNullOrWhitespace($_POST["system_language"])) {
             $_SESSION["system_language"] = basename($_POST["system_language"]);
         } else {
-            $user = new User();
-            $user->loadByUsername($_POST["user"]);
             $_SESSION["system_language"] = $user->getDefaultLanguage() ? $user->getDefaultLanguage() : Settings::get("system_language");
         }
 
@@ -22,6 +23,9 @@ class SessionManager extends Controller {
             $confirmation_code = $_POST["confirmation_code"];
         }
 
+        // TODO:
+        // * user $user->checkPassword() instead of validate_login()
+        // * Implement Google Authenticator in
         $sessionData = validate_login($_POST["user"], $_POST["password"], $confirmation_code);
         $sessionData = apply_filter($sessionData, "session_data");
 
