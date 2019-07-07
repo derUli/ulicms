@@ -17,7 +17,7 @@ if ($permissionChecker->hasPermission("dashboard")) {
         ?> </p>
     <p>
         <a
-            href="?action=admin_edit&id=<?php echo $_SESSION["login_id"] ?>&ref=home"
+            href="?action=admin_edit&id=<?php echo get_user_id() ?>&ref=home"
             class="btn btn-default"><i class="fas fa-user"></i> <?php translate("edit_profile"); ?></a>
     </p>
     <div id="accordion-container">
@@ -76,7 +76,7 @@ if ($permissionChecker->hasPermission("dashboard")) {
                                if (Settings::get("user/" . get_user_id() . "/show_positions"))
                                    echo "checked";
                                ?>>
-                               <?php translate("show_positions_in_menus"); ?></label>
+                        <?php translate("show_positions_in_menus"); ?></label>
                     </label>
                 </form>
             </div>

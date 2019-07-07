@@ -45,7 +45,7 @@ class User extends Model {
     }
 
     public function toSessionData() {
-        return $this->isPersistent() ? [
+        return apply_filter($this->isPersistent() ? [
             "ulicms_login" => $this->getUsername(),
             "lastname" => $this->getLastname(),
             "firstname" => $this->getFirstname(),
@@ -55,7 +55,36 @@ class User extends Model {
             "group_id" => $this->getPrimaryGroupId(),
             "logged_in" => true,
             "session_begin" => time()
-                ] : null;
+                ] : null, "session_data");
+    }
+
+    public function registerSession($redirect = true) {
+        $sessionData = $this->toSessionData();
+
+        if (!is_array($sessionData)) {
+            throw new BadMethodCallException();
+        }
+        if (!session_id()) {
+            @session_start();
+        }
+
+        foreach ($sessionData as $key => $value) {
+            $_SESSION[$key] = $value;
+        }
+
+        $this->setLastLogin(time());
+        $this->save();
+
+        if (!$redirect || isCLI()) {
+            return;
+        }
+        $login_url = apply_filter("index.php", "login_url");
+        if (isset($_REQUEST["go"])) {
+            Response::safeRedirect($_REQUEST["go"]);
+        } else {
+            $login_url = apply_filter("index.php", "login_url");
+            Response::redirect($login_url);
+        }
     }
 
     public function loadByUsername($name) {

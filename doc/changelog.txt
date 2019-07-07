@@ -27,6 +27,7 @@ Neue API-Methoden:
 * ActionRegistry::getActions()
 * User->checkPassword($password)
 * User->toSessionData()
+* User->registerSession($redirect)
 * User:fromSessionData()
 * Comment::getReadCount()
 * Comment::getAllCount()

@@ -77,38 +77,8 @@ function user_exists($name) {
 }
 
 function register_session($user, $redirect = true) {
-    $_SESSION["ulicms_login"] = $user["username"];
-    $_SESSION["lastname"] = $user["lastname"];
-    $_SESSION["firstname"] = $user["firstname"];
-    $_SESSION["email"] = $user["email"];
-    $_SESSION["login_id"] = $user["id"];
-    $_SESSION["require_password_change"] = $user["require_password_change"];
-
-    // Group ID
-    $_SESSION["group_id"] = $user["group_id"];
-
-    if (is_null($_SESSION["group_id"])) {
-        $_SESSION["group_id"] = 0;
-    }
-
-    $_SESSION["logged_in"] = true;
-
-    $_SESSION["session_begin"] = time();
-
-    Database::query("UPDATE " . tbname("users") . " SET `last_login` = " . time() . " where id = " . $user["id"]);
-
-    if (!$redirect) {
-        return;
-    }
-    $login_url = apply_filter("index.php", "login_url");
-    if (isset($_REQUEST["go"])) {
-        Response::safeRedirect($_REQUEST["go"]);
-    } else {
-        $login_url = apply_filter("index.php", "login_url");
-        Response::redirect($login_url);
-    }
-
-    return;
+    $userDataset = new User($user["id"]);
+    $userDataset->registerSession($redirect);
 }
 
 function validate_login($user, $password, $token = null) {

@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Security\Encryption;
+use UliCMS\Exceptions\NotImplementedException;
 
 class UserTest extends \PHPUnit\Framework\TestCase {
 
@@ -216,6 +217,25 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals($userFromSession->getLastname(), $user->getLastname());
 
         @session_destroy();
+    }
+
+    public function testRegisterSessionRegistersSession() {
+        $manager = new UserManager();
+        $users = $manager->getLockedUsers(false);
+        $user = $users[0];
+
+        $user->registerSession();
+
+        $this->assertEquals(get_user_id(), $user->getId());
+        $this->assertEquals($user->getUsername(), $_SESSION["ulicms_login"]);
+        $this->assertNotNull(session_id());
+        @session_destroy();
+    }
+
+    public function testRegisterSessionThrowError() {
+        $this->expectException(BadMethodCallException::class);
+        $user = new User();
+        $user->registerSession();
     }
 
     public function testToSessionDataReturnsNull() {

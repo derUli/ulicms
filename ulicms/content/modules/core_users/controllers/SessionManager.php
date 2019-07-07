@@ -36,7 +36,7 @@ class SessionManager extends Controller {
             if ($logger) {
                 $logger->debug("User {$_POST['user']} - Login OK");
             }
-            register_session($sessionData, true);
+            $user->registerSession(true);
         } else {
             // If login failed
             if ($logger) {
