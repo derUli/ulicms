@@ -7,10 +7,6 @@ function CKCHANGED(event) {
     }
 }
 
-let formChanged = 0;
-let submitted = 0;
-let isCtrl = false;
-
 $(function () {
     for (name in CKEDITOR.instances)
     {

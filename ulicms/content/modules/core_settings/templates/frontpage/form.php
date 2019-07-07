@@ -71,7 +71,12 @@ if ($permissionChecker->hasPermission("settings_simple")) {
     </table>
     <?php
     echo ModuleHelper::endForm();
-    enqueueScriptFile(ModuleHelper::buildRessourcePath("core_content", "js/frontpage.js"));
+
+    $translation = new JSTranslation();
+    $translation->addKey("changes_was_saved");
+    $translation->render();
+
+    enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/frontpage.js"));
     combinedScriptHtml();
 } else {
     noPerms();

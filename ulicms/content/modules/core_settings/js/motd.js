@@ -20,7 +20,5 @@ $(function () {
                             + Translation.ChangesWasSaved + "</span>");
                     $("#loading").hide();
                 }
-
-
             });
 });

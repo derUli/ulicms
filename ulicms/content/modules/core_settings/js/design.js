@@ -90,15 +90,14 @@ $(function () {
     // ajax form submit
     $("#designForm").ajaxForm(
             {
-                beforeSubmit: function (e) {
+                beforeSubmit: function () {
                     $("#message").html("");
                     $("#msgcontainer, #loading").show();
                 },
-                success: function (e) {
+                success: function () {
                     $("#loading").hide();
                     $("#message").html(
-                            "<span style=\"color:green;\">"
-                            + Translation.ChangesWasSaved + "</span>");
+                            `<span style="color:green;">${Translation.ChangesWasSaved}</span>`);
                     $("#msgcontainer, #loading").hide();
                 }
             });

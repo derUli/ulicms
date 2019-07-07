@@ -1,3 +1,5 @@
+/* global Translation */
+
 // scripts for meta keywords settings page
 $(function () {
     $("#meta_keywords_settings")
@@ -10,8 +12,7 @@ $(function () {
                         success: function () {
                             $("#loading").hide();
                             $("#message")
-                                    .html(
-                                            "<span style=\"color:green;\">Die Einstellungen wurden gespeichert.</span>");
+                                    .html(`<span style="color:green;">${Translation.ChangesWasSaved}</span>`);
                         }
                     });
 });

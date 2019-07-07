@@ -59,6 +59,11 @@ if ($permissionChecker->hasPermission("open_graph")) {
     </table>
     <?php
     echo ModuleHelper::endForm();
+
+    $translation = new JSTranslation();
+    $translation->addKey("changes_was_saved");
+    $translation->render();
+
     enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/open_graph.js"));
     combinedScriptHtml();
 } else {

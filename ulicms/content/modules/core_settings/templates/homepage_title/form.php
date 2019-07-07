@@ -58,6 +58,11 @@ if ($permissionChecker->hasPermission("settings_simple")) {
     </table>
     <?php
     echo ModuleHelper::endForm();
+
+    $translation = new JSTranslation();
+    $translation->addKey("changes_was_saved");
+    $translation->render();
+
     enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/homepage_title.js"));
     combinedScriptHtml();
 } else {

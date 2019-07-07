@@ -6,9 +6,7 @@ var ajaxOptions = {
         var list_item_id = "dataset-" + id;
         var tr = $("tr#" + list_item_id);
         $(tr).fadeOut();
-
     }
-
-}
+};
 
 $("form.delete-form").ajaxForm(ajaxOptions);

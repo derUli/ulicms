@@ -1,3 +1,5 @@
+/* global bootbox */
+
 $(function () {
     bootbox.setDefaults({
         'locale': $("html").data("select2-language")

@@ -1,3 +1,5 @@
+/* global Translation */
+
 // Scripts for simple settings page
 $(function () {
     $("#settings_simple")
@@ -10,8 +12,7 @@ $(function () {
                         success: function () {
                             $("#loading").hide();
                             $("#message")
-                                    .html(
-                                            "<span style=\"color:green;\">Die Einstellungen wurden gespeichert.</span>");
+                                    .html(`<span style="color:green;">${Translation.ChangesWasSaved}</span>`);
                         }
                     });
 });

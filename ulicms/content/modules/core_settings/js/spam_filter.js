@@ -14,7 +14,6 @@ $(function () {
     $("#spamfilter_enabled").change(function (event) {
         if (event.target.checked) {
             $('#country_filter_settings').slideDown();
-
         } else {
             $('#country_filter_settings').slideUp();
         }

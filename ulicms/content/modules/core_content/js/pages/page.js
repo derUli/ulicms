@@ -317,12 +317,11 @@ $(function () {
 
     $("#show_filters").change(function (event) {
         var url = $(event.target).data("url");
+        $(".page-list-filters").slideToggle();
+
         $.ajax({
             method: "get",
             url: url,
-            success: function () {
-                $(".page-list-filters").slideToggle();
-            },
             error: function (xhr, status, error) {
                 alert(xhr.responseText);
             }

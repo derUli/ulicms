@@ -190,6 +190,12 @@ if ($permissionChecker->hasPermission("settings_simple")) {
     <input type="hidden" name="save_settings" value="save_settings">
     <?php
     echo ModuleHelper::endForm();
+
+    $translation = new JSTranslation();
+    $translation->addKey("changes_was_saved");
+    $translation->render();
+
+
     enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/settings_simple.js"));
     combinedScriptHtml();
 } else {

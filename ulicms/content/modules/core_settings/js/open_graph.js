@@ -1,3 +1,5 @@
+/* global Translation */
+
 function openMenuImageSelectWindow(field) {
     window.KCFinder = {
         callBack: function (url) {
@@ -25,8 +27,7 @@ $(function () {
                             $("#loading").hide();
                             // FIXME: localize this string
                             $("#message")
-                                    .html(
-                                            "<span style=\"color:green;\">Die Einstellungen wurden gespeichert.</span>");
+                                    .html(`<span style="color:green;">${Translation.ChangesWasSaved}</span>`);
                         }
                     });
 });

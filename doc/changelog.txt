@@ -55,9 +55,13 @@ Neue API-Methoden:
 Entfernte API-Methoden:
 * addUser()
 
+Verbesserungen:
+* Ein- und Ausblenden der Filter in der Seitenliste ist nun schneller
+
 Fehlerkorrekturen:
 * datetime-local Eingabefelder auf iOS Safari sind immer ungültig
 * Das Speichern des States der DataTables ist fehlerhaft
+* Einige Stellen an denen Texte hardgecodet waren sind nun korrekt lokalisiert
 
 Entfernte Features:
 * Unterstützung für veraltete unsichere Passwortverschlüsselung entfernt
