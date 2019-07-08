@@ -104,8 +104,8 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue(is_array(validate_login("testuser1", "topsecret")));
     }
 
-    public function testValidateLoginFalse() {
-        $this->assertFalse(validate_login("testuser1", "dasfalschepassword"));
+    public function testValidateLoginNull() {
+        $this->assertNull(validate_login("testuser1", "dasfalschepassword"));
     }
 
     public function testGetUsersOnlineUserIsOnline() {

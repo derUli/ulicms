@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Security\Encryption;
+use UliCMS\Security\TwoFactorAuthentication;
 
 // this ffile contains functions for managing user accounts
 function getUsers() {
@@ -81,42 +81,48 @@ function register_session($user, $redirect = true) {
     $userDataset->registerSession($redirect);
 }
 
-function validate_login($user, $password, $token = null) {
-    $user = getUserByName($user);
+function validate_login($username, $password, $token = null) {
+    $user = new User();
+    $user->loadByUsername($username);
 
-    if ($user) {
-        $password = Encryption::hashPassword($password);
+    $auth = new TwoFactorAuthentication();
 
-        $twofactor_authentication = Settings::get("twofactor_authentication");
-        if ($user["password"] == $password) {
-            if ($twofactor_authentication and ! is_null($token)) {
-                $ga = new PHPGangsta_GoogleAuthenticator();
-                $ga_secret = Settings::get("ga_secret");
-                $code = $ga->getCode($ga_secret);
-                if ($code != $token) {
-                    $_REQUEST["error"] = get_translation("confirmation_code_wrong");
-                    return false;
-                }
-            }
-
-            if ($user["locked"]) {
-                $_REQUEST["error"] = get_translation("YOUR_ACCOUNT_IS_LOCKED");
-                return false;
-            }
-
-            Database::query("update " . tbname("users") . " set `failed_logins` = 0 where id = " . intval($user["id"]));
-            return $user;
-        } else {
-            // Limit Login Attampts
-            $max_failed_logins_items = intval(Settings::get("max_failed_logins_items"));
-            if ($max_failed_logins_items >= 1) {
-                Database::query("update " . tbname("users") . " set `failed_logins` = `failed_logins` + 1 where id = " . intval($user["id"]));
-                Database::query("update " . tbname("users") . " set `locked` = 1, `failed_logins` = 0 where `failed_logins` >= $max_failed_logins_items");
-            }
-        }
+    if ($user->getLocked()) {
+        $_REQUEST["error"] = get_translation("YOUR_ACCOUNT_IS_LOCKED");
+        return null;
     }
-    $_REQUEST["error"] = get_translation("USER_OR_PASSWORD_INCORRECT");
-    return false;
+
+    if (!$user->isPersistent()) {
+        $_REQUEST["error"] = get_translation("USER_OR_PASSWORD_INCORRECT");
+        return null;
+    }
+
+    if (!$user->checkPassword($password)) {
+        $_REQUEST["error"] = get_translation("USER_OR_PASSWORD_INCORRECT");
+
+// Limit Login Attampts
+        $max_failed_logins_items = intval(Settings::get("max_failed_logins_items"));
+        $user->setFailedLogins($user->getFailedLogins() + 1);
+        $user->save();
+
+        if ($user->getFailedLogins() >= $max_failed_logins_items) {
+            $user->setLocked($user->getLocked());
+            $user->save();
+
+            $_REQUEST["error"] = get_translation("YOUR_ACCOUNT_IS_LOCKED");
+        }
+        return null;
+    }
+
+    if (TwoFactorAuthentication::isEnabled() and ! $auth->checkCode($token)) {
+        $_REQUEST["error"] = get_translation("confirmation_code_wrong");
+        return null;
+    }
+
+    $user->setFailedLogins(0);
+    $user->save();
+
+    return getUserById($user->getId());
 }
 
 // Ist der User eingeloggt
