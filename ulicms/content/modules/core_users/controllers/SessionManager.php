@@ -22,7 +22,7 @@ class SessionManager extends Controller {
         if ($twofactor_authentication) {
             $confirmation_code = $_POST["confirmation_code"];
         }
-
+		
         // TODO:
         // * user $user->checkPassword() instead of validate_login()
         // * Implement Google Authenticator in
@@ -40,7 +40,7 @@ class SessionManager extends Controller {
             if ($logger) {
                 $logger->debug("User {$_POST['user']} - Login OK");
             }
-            $user->registerSession(true);
+            register_session($sessionData);
         } else {
             // If login failed
             if ($logger) {

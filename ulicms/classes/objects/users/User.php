@@ -45,7 +45,7 @@ class User extends Model {
     }
 
     public function toSessionData() {
-        return apply_filter($this->isPersistent() ? [
+        return $this->isPersistent() ? [
             "ulicms_login" => $this->getUsername(),
             "lastname" => $this->getLastname(),
             "firstname" => $this->getFirstname(),
@@ -55,7 +55,7 @@ class User extends Model {
             "group_id" => $this->getPrimaryGroupId(),
             "logged_in" => true,
             "session_begin" => time()
-                ] : null, "session_data");
+                ] : null;
     }
 
     public function registerSession($redirect = true) {
