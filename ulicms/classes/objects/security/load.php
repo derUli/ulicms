@@ -5,7 +5,8 @@ $classes = array(
     "Encryption",
     "PermissionChecker",
     "IDatasetPermissionChecker",
-    "ContentPermissionChecker"
+    "ContentPermissionChecker",
+    "TwoFactorAuthentication"
 );
 foreach ($classes as $class) {
     require_once dirname(__file__) . "/$class.php";
