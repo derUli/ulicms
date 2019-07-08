@@ -128,13 +128,10 @@ function exception_handler($exception) {
     if (!defined("EXCEPTION_OCCURRED")) {
         define("EXCEPTION_OCCURRED", true);
     }
-    $error = nl2br(_esc($exception));
 
     // FIXME: what if there is no config class?
     $cfg = class_exists("CMSConfig") ? new CMSConfig() : null;
 
-    // TODO: useful error message if $debug is disabled
-    // Log exception into a text file
     $message = !is_null($cfg) && is_true($cfg->debug) ? $exception : "An error occurred! See exception_log for details. 😞";
 
     $logger = LoggerRegistry::get("exception_log");
@@ -143,7 +140,7 @@ function exception_handler($exception) {
     }
     $httpStatus = $exception instanceof AccessDeniedException ? HttpStatusCode::FORBIDDEN : HttpStatusCode::INTERNAL_SERVER_ERROR;
     if (function_exists("HTMLResult") and class_exists("Template") and ! headers_sent() and function_exists("get_theme")) {
-        ViewBag::set("exception", nl2br($message));
+        ViewBag::set("exception", nl2br(_esc($exception)));
         HTMLResult(Template::executeDefaultOrOwnTemplate("exception.php"), $httpStatus);
     }
     if (function_exists("HTMLResult") and ! headers_sent()) {

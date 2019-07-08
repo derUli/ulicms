@@ -9,9 +9,6 @@ use UliCMS\Models\Content\Advertisement\Banners;
 
 class Template {
 
-    // TODO: Rewrite this using the models
-    // Add method render() to Banner class
-    // Add method Banner::getRandom()
     public static function randomBanner() {
         $banner = Banners::getRandom();
         if ($banner) {

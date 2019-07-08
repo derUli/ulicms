@@ -41,7 +41,6 @@ class PDFCreator {
         }
 
         // TODO: Reimplement Caching of generated pdf files
-
         $mpdf = new mPDF(getCurrentLanguage(true), 'A4');
         $mpdf->WriteHTML($this->content);
         $this->httpHeader();

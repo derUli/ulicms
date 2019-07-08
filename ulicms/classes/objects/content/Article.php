@@ -2,7 +2,7 @@
 
 class Article extends Page {
 
-    // @FIXME: Variablen alle private machen und getter und setter implementieren
+    // FIXME: Variablen alle private machen und getter und setter implementieren
     public $article_author_name = "";
     public $article_author_email = "";
     public $article_date = null;

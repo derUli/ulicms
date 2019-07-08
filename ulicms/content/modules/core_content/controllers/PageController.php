@@ -12,9 +12,6 @@ use function UliCMS\HTML\stringContainsHtml;
 
 class PageController extends Controller {
 
-    // @FIXME: Content-Model statt SQL verwenden
-    // Speichern Kürzere Methoden: In mehrere Methoden aufteilen
-    // Code in createPost in editPost wiederverwenden
     public function createPost() {
         $this->validateInput();
 
@@ -61,6 +58,8 @@ class PageController extends Controller {
         Response::redirect(ModuleHelper::buildActionURL("pages"));
     }
 
+    // TODO: This method is too long
+    // Split this in multiple methods
     private function fillAndSaveModel($model, $permissionChecker, $userId = null, $groupId = null) {
         $model->slug = Request::getVar(
                         "slug",
@@ -389,7 +388,7 @@ class PageController extends Controller {
     }
 
     protected function validateInput() {
-        $validator = new Validator;
+        $validator = new Validator();
         $validation = $validator->make($_POST + $_FILES, [
             'slug' => 'required',
             'title' => 'required',

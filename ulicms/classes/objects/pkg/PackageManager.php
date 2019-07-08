@@ -128,6 +128,7 @@ class PackageManager {
                 require_once $post_install_script2;
                 unlink($post_install_script2);
             }
+
             if ($clear_cache) {
                 clearCache();
             }
@@ -138,15 +139,6 @@ class PackageManager {
             }
             return false;
         }
-    }
-
-    private function replacePlaceHolders($url) {
-        $cfg = new CMSConfig();
-        $version = new UliCMSVersion();
-        $internalVersion = $version->getInternalVersion();
-        $internalVersion = implode(".", $internalVersion);
-        $url = str_replace("{version}", $internalVersion, $url);
-        return $url;
     }
 
     public function getInstalledModules() {
@@ -197,9 +189,8 @@ class PackageManager {
             return $this->getInstalledModules();
         } else if ($type === 'themes') {
             return $this->getInstalledThemes();
-        } else {
-            return null;
         }
+        return null;
     }
 
 }

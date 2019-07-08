@@ -57,6 +57,7 @@ Neue API-Methoden:
 
 Entfernte API-Methoden:
 * addUser()
+* PackageManager->replacePlaceHolders($url)
 
 Verbesserungen:
 * Ein- und Ausblenden der Filter in der Seitenliste ist nun schneller

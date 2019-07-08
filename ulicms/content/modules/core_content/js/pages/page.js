@@ -1,4 +1,4 @@
-/* global Translation, formChanged, submitted */
+/* global Translation, formChanged, submitted, bootbox */
 
 function showAndHideFieldsByTypeWithoutEffects() {
     var type = $("input[name=type]:checked").val();
@@ -251,9 +251,12 @@ function filterParentPages() {
 $(function () {
     // bind event to reset filters button
     $("#btn-reset-filters").click(function (e) {
-        if (!window.confirm(`${Translation.ResetFilters}?`)) {
-            e.preventDefault();
-        }
+        e.preventDefault();
+        bootbox.confirm(`${Translation.ResetFilters}?`, function (result) {
+            if (result) {
+                location.href = $(e.target).attr("href");
+            }
+        });
     });
     // check if a slug is free on changing system title or menu
     // XXX: this field should be named slug everywhere in the code

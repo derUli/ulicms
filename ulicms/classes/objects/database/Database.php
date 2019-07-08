@@ -296,7 +296,7 @@ class Database {
             return mysqli_fetch_all($result, $resulttype);
         }
 
-        // @FIXME : $resulttype in alternativer Implementation von fetch_all behandeln
+        // FIXME : $resulttype in alternativer Implementation von fetch_all behandeln
         $retval = [];
         while ($row = self::fetchAssoc($result)) {
             $retval[] = $row;
