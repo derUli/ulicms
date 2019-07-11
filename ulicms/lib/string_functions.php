@@ -17,7 +17,6 @@ function sanitize(& $array) {
 
 // TODO: Deprecate this
 // Implement new methods unesc() and _unesc()
-
 function unhtmlspecialchars($string) {
     return html_entity_decode($string, ENT_COMPAT, "UTF-8");
 }

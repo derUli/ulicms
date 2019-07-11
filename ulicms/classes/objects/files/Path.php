@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 use UliCMS\Utils\File;
 
 class Path {
 
-    public static function resolve($path) {
+    public static function resolve(string$path): string {
         $path = str_ireplace("ULICMS_ROOT", rtrim(ULICMS_ROOT, "/"), $path);
         $path = str_ireplace("ULICMS_DATA_STORAGE_ROOT", rtrim(ULICMS_DATA_STORAGE_ROOT, "/"), $path);
         $path = str_ireplace("ULICMS_CONFIGURATIONS", ULICMS_CONFIGURATIONS, $path);
@@ -21,7 +23,7 @@ class Path {
         return $path;
     }
 
-    public static function removeDir($dir, $deleteMe) {
+    public static function removeDir(string $dir, bool $deleteMe = true): void {
         File::sureRemoveDir($dir, $deleteMe);
     }
 

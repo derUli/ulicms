@@ -3,21 +3,21 @@
 use UliCMS\Security\TwoFactorAuthentication;
 
 // this ffile contains functions for managing user accounts
-function getUsers() {
+function getUsers(): array {
     $query = Database::query("SELECT id, username FROM " . tbname("users") . " ORDER by username");
     $users = [];
     while ($row = db_fetch_assoc($query)) {
-        array_push($users, $row);
+        $users[] = $row;
     }
 
     return $users;
 }
 
-function getAllUsers() {
+function getAllUsers(): array {
     return getUsers();
 }
 
-function getUsersOnline() {
+function getUsersOnline(): array {
     $users_online = Database::query("SELECT username FROM " . tbname("users") . " WHERE last_action > " . (time() - 300) . " ORDER BY username");
     $retval = [];
     while ($row = db_fetch_object($users_online)) {
@@ -36,25 +36,25 @@ function changePassword($password, $userId) {
     return true;
 }
 
-function getUserByName($name) {
+function getUserByName(string $name): ?array {
     $query = Database::query("SELECT * FROM " . tbname("users") . " WHERE username='" . Database::escapeValue($name, DB_TYPE_STRING) . "'");
     if (db_num_rows($query) > 0) {
         return db_fetch_assoc($query);
     } else {
-        return false;
+        return null;
     }
 }
 
-function getUserById($id) {
+function getUserById($id): ?array {
     $query = Database::query("SELECT * FROM " . tbname("users") . " WHERE id = " . intval($id));
     if (db_num_rows($query) > 0) {
         return db_fetch_assoc($query);
     } else {
-        return false;
+        return null;
     }
 }
 
-function get_user_id() {
+function get_user_id(): int {
     if (isset($_SESSION["login_id"])) {
         return intval($_SESSION["login_id"]);
     } else {
@@ -62,7 +62,7 @@ function get_user_id() {
     }
 }
 
-function get_group_id() {
+function get_group_id(): int {
     if (isset($_SESSION["group_id"])) {
         return intval($_SESSION["group_id"]);
     } else {
@@ -70,18 +70,18 @@ function get_group_id() {
     }
 }
 
-function user_exists($name) {
+function user_exists(string $name): bool {
     $user = new User();
     $user->loadByUsername($name);
     return intval($user->getId()) > 0;
 }
 
-function register_session($user, $redirect = true) {
+function register_session(array $user, bool $redirect = true): void {
     $userDataset = new User($user["id"]);
     $userDataset->registerSession($redirect);
 }
 
-function validate_login($username, $password, $token = null) {
+function validate_login(string $username, string $password, ?string $token = null) {
     $user = new User();
     $user->loadByUsername($username);
 
@@ -126,11 +126,11 @@ function validate_login($username, $password, $token = null) {
 }
 
 // Ist der User eingeloggt
-function is_logged_in() {
+function is_logged_in(): bool {
     return isset($_SESSION["logged_in"]);
 }
 
 // Alias für is_logged_in
-function logged_in() {
+function logged_in(): bool {
     return is_logged_in();
 }

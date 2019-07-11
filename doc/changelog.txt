@@ -54,6 +54,9 @@ Neue API-Methoden:
 * is_past($datetime = null)
 * is_future($datetime = null)
 * get_carbon($datetime = null)
+* _t(string $name, array $placeholders = [])
+* t(string $name, array $placeholders = [])
+* singularOrPlural(int $count, string $singular, string $plural)
 
 Entfernte API-Methoden:
 * addUser()

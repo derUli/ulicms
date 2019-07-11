@@ -133,7 +133,7 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase {
     public function testGetUserByNameUserNotExists() {
         $user = getUserByName("slenderman");
 
-        $this->assertFalse($user);
+        $this->assertNull($user);
     }
 
     public function testGetUserByIdUserExists() {
@@ -149,7 +149,7 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase {
     public function testGetUserByIdUserNotExists() {
         $user = getUserById(PHP_INT_MAX);
 
-        $this->assertFalse($user);
+        $this->assertNull($user);
     }
 
     public function testGetAllUsers() {

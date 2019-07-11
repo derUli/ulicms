@@ -1,13 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 use UliCMS\Utils\File;
 
-function sureRemoveDir($dir, $deleteMe = true) {
+function sureRemoveDir(string $dir, bool $deleteMe = true): void {
     File::sureRemoveDir($dir, $deleteMe);
 }
 
 // Ordner rekursiv kopieren
-function recurse_copy($src, $dst) {
+function recurse_copy(string $src, string $dst): void {
     $dir = opendir($src);
     @mkdir($dst);
     while (false !== ($file = readdir($dir))) {
@@ -22,7 +24,7 @@ function recurse_copy($src, $dst) {
     closedir($dir);
 }
 
-function find_all_files($dir) {
+function find_all_files(string $dir): array {
     $root = scandir($dir);
     $result = [];
     foreach ($root as $value) {
@@ -41,7 +43,7 @@ function find_all_files($dir) {
     return $result;
 }
 
-function find_all_folders($dir) {
+function find_all_folders(string $dir): array {
     $root = scandir($dir);
     $result = [];
     foreach ($root as $value) {
@@ -57,11 +59,11 @@ function find_all_folders($dir) {
     return $result;
 }
 
-function file_extension($filename) {
+function file_extension(string $filename): string {
     return File::getExtension($filename);
 }
 
 // Mimetypen einer Datei ermitteln
-function get_mime($file) {
+function get_mime(?string $file): string {
     return File::getMime($file);
 }

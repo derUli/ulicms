@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace UliCMS\Utils;
 
 class File {
@@ -86,7 +88,7 @@ class File {
     }
 
     // Mimetypen einer Datei ermitteln
-    public static function getMime($file) {
+    public static function getMime(string $file) {
         if (function_exists("finfo_file")) {
             $finfo = finfo_open(FILEINFO_MIME_TYPE); // return mime type ala mimetype extension
             $mime = finfo_file($finfo, $file);
@@ -100,7 +102,7 @@ class File {
             $mime = shell_exec("file -bi " . $file);
             return $mime;
         }
-        return false;
+        return null;
     }
 
     public static function sureRemoveDir($dir, $deleteMe = true) {
