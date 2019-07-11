@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 class Vars {
 
     private static $vars = [];
@@ -11,21 +13,21 @@ class Vars {
         return null;
     }
 
-    public static function set($var, $val) {
+    public static function set($var, $val): void {
         self::$vars[$var] = $val;
     }
 
-    public static function delete($var) {
+    public static function delete($var): void {
         if (isset(self::$vars[$var])) {
             unset(self::$vars[$var]);
         }
     }
 
-    public static function clear() {
+    public static function clear(): void {
         self::$vars = [];
     }
 
-    public static function getAllVars() {
+    public static function getAllVars(): array {
         return self::$vars;
     }
 

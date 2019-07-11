@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 use UliCMS\Security\PermissionChecker;
 use Negotiation\LanguageNegotiator;
 use UliCMS\Constants\ModuleEventConstants;
 use UliCMS\Models\Content\Types\DefaultContentTypes;
 use UliCMS\Utils\CacheUtil;
 
-function idefine($key, $value) {
+function idefine($key, $value): bool {
     $key = strtoupper($key);
     if (!defined($key)) {
         define($key, $value);
@@ -15,7 +17,7 @@ function idefine($key, $value) {
     return false;
 }
 
-function faster_in_array($needle, $haystack) {
+function faster_in_array($needle, $haystack): bool {
     if (!is_array($haystack)) {
         return false;
     }
@@ -23,7 +25,7 @@ function faster_in_array($needle, $haystack) {
     return isset($flipped[$needle]);
 }
 
-function var_is_type($var, $type, $required = false) {
+function var_is_type($var, $type, $required = false): bool {
     $methodName = "is_{$type}";
 
     if ($var === null or $var === "") {
@@ -36,7 +38,7 @@ function var_is_type($var, $type, $required = false) {
     return false;
 }
 
-function var_dump_str() {
+function var_dump_str(): string {
     $argc = func_num_args();
     $argv = func_get_args();
 
@@ -51,14 +53,14 @@ function var_dump_str() {
     return '';
 }
 
-function remove_prefix($text, $prefix) {
+function remove_prefix(string $text, string $prefix): string {
     if (startsWith($text, $prefix)) {
         $text = substr($text, strlen($prefix));
     }
     return $text;
 }
 
-function remove_suffix($text, $suffix) {
+function remove_suffix(string $text, string $suffix): string {
     if (endsWith($text, $suffix)) {
         $text = substr($text, 0, strlen($text) - strlen($suffix));
     }
@@ -86,7 +88,7 @@ if (!function_exists("each")) {
 
 }
 
-function bool2YesNo($value, $yesString = null, $noString = null) {
+function bool2YesNo(bool $value, string $yesString = null, string $noString = null): string {
     if (!$yesString) {
         $yesString = get_translation("yes");
     }
@@ -97,7 +99,7 @@ function bool2YesNo($value, $yesString = null, $noString = null) {
 }
 
 // like json_encode() but human readable
-function json_readable_encode($in, $indent = 0) {
+function json_readable_encode($in, $indent = 0): string {
     $_myself = __FUNCTION__;
     $_escape = function ($str) {
         return preg_replace("!([\b\t\n\r\f\"\\'])!", "\\\\\\1", $str);
@@ -148,7 +150,7 @@ function register_translation($key, $value) {
 }
 
 // returns true if $needle is a substring of $haystack
-function str_contains($needle, $haystack) {
+function str_contains($needle, $haystack): bool {
     return strpos($haystack, $needle) !== false;
 }
 
@@ -157,7 +159,7 @@ function array_keep($array, $keys) {
     return array_intersect_key($array, array_fill_keys($keys, null));
 }
 
-function getAllUsedLanguages() {
+function getAllUsedLanguages(): array {
     $sql = "select language from `{prefix}content` where active = 1 group by language order by language";
     $query = Database::query($sql, true);
     $languages = [];
@@ -169,27 +171,27 @@ function getAllUsedLanguages() {
 
 // prepares a text / code for html output
 // replaces new lines with <br> tags
-function preparePlainTextforHTMLOutput($text) {
+function preparePlainTextforHTMLOutput($text): string {
     return UliCMS\HTML\text($text);
 }
 
-function get_action() {
+function get_action(): string {
     return BackendHelper::getAction();
 }
 
-function getStringLengthInBytes($data) {
+function getStringLengthInBytes(string $data): int {
     return ini_get('mbstring.func_overload') ? mb_strlen($data, '8bit') : strlen($data);
 }
 
-function set_format($format) {
+function set_format(string $format): void {
     $_GET["format"] = trim($format, ".");
 }
 
-function get_format() {
+function get_format(): string {
     return is_present($_GET["format"]) ? $_GET["format"] : "html";
 }
 
-function get_jquery_url() {
+function get_jquery_url(): string {
     $url = "node_modules/jquery/dist/jquery.min.js";
     $url = apply_filter($url, "jquery_url");
     return $url;
@@ -200,7 +202,7 @@ function get_prefered_language($priorities, $http_accept_language) {
     return $negotiator->getBest($http_accept_language, $priorities)->getType();
 }
 
-function get_all_used_menus() {
+function get_all_used_menus(): array {
     $retval = [];
     $query = db_query("select menu from " . tbname("content") . " group by menu");
     while ($row = db_fetch_object($query)) {
@@ -209,20 +211,19 @@ function get_all_used_menus() {
     return $retval;
 }
 
-function get_shortlink($id = null) {
-    if (is_null($id)) {
-        $shortlink = null;
-        $id = get_ID();
-    }
+function get_shortlink($id = null): ?string {
+    $shortlink = null;
+    $id = $id ? $id : get_ID();
+
     if ($id) {
         $shortlink = getBaseFolderURL() . "/?goid=" . get_ID();
+        $shortlink = apply_filter($shortlink, "shortlink");
     }
 
-    $shortlink = apply_filter($shortlink, "shortlink");
     return $shortlink;
 }
 
-function get_canonical() {
+function get_canonical(): string {
     $canonical = getBaseFolderURL() . "/";
     if (!is_frontpage()) {
         $canonical .= buildSEOUrl();
@@ -239,24 +240,24 @@ function get_canonical() {
     return $canonical;
 }
 
-function get_lang_config($name, $lang) {
-    $retval = false;
+function get_lang_config(string $name, string $lang): ?string {
+    $retval = null;
     $config = Settings::get($name . "_" . $lang);
     if ($config) {
         $retval = $config;
     } else {
         $config = Settings::get($name);
     }
-    return $config;
+    return $config ? $config : null;
 }
 
-function eTagFromString($str) {
+function eTagFromString($str): void {
     header('ETag: ' . md5($str));
 }
 
 // Browser soll nur einen Tag Cachen
 // Für statische Ressourcen nutzen
-function browsercacheOneDay($modified = null) {
+function browsercacheOneDay(int $modified = null): void {
     header('Cache-Control: public');
     header("Expires: " . gmdate("D, d M Y H:i:s", time() + 86400) . " GMT");
     header("Cache-Control: public,max-age=86400");
@@ -271,7 +272,7 @@ function browsercacheOneDay($modified = null) {
 }
 
 // PHP Formbuilder Class initialisieren
-function initPFBC() {
+function initPFBC(): void {
     do_event("init_pfbc");
 }
 
@@ -293,7 +294,7 @@ function initPFBC() {
  * @return String containing either just a URL or a complete image tag
  *         @source http://gravatar.com/site/implement/images/php/
  */
-function get_gravatar($email, $s = 80, $d = 'mm', $r = 'g', $img = false, $atts = []) {
+function get_gravatar(string $email, int $s = 80, string $d = 'mm', string $r = 'g', bool $img = false, array $atts = []): string {
     // Nach dem in Kraft treten, der Datenschutz-Grundverordnung 2018
     // wird die Nutzung von Gravatar in Deutschland illegal
     // daher wird an dieser Stelle die Gravatar-Integration gekappt
@@ -302,26 +303,27 @@ function get_gravatar($email, $s = 80, $d = 'mm', $r = 'g', $img = false, $atts 
     $url = ModuleHelper::getBaseUrl("/admin/gfx/no_avatar.png");
     if ($img) {
         $url = '<img src="' . $url . '"';
-        foreach ($atts as $key => $val)
+        foreach ($atts as $key => $val) {
             $url .= ' ' . $key . '="' . $val . '"';
+        }
         $url .= ' />';
     }
     return $url;
 }
 
 // Random string generieren (für Passwort)
-function rand_string($length) {
+function rand_string(int $length): string {
     $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     return substr(str_shuffle($chars), 0, $length);
 }
 
-function getLanguageFilePath($lang = "de") {
+function getLanguageFilePath(string $lang = "de"): string {
     return ULICMS_ROOT . "/lang/" . $lang . ".php";
 }
 
 // Gibt den für den derzeit eingeloggten User eingestellten HTML-Editor aus.
-// Wenn der Anwender nicht eingeloggt ist return null;
-function get_html_editor() {
+// Wenn der Anwender nicht eingeloggt ist return null
+function get_html_editor(): ?string {
     if (!is_logged_in()) {
         return null;
     }
@@ -340,14 +342,14 @@ function get_html_editor() {
 
 // Prüfen, ob Anti CSRF Token vorhanden ist
 // Siehe http://de.wikipedia.org/wiki/Cross-Site-Request-Forgery
-function check_csrf_token() {
+function check_csrf_token(): bool {
     if (!isset($_REQUEST["csrf_token"])) {
         return false;
     }
     return $_REQUEST["csrf_token"] == $_SESSION["csrf_token"];
 }
 
-function check_form_timestamp() {
+function check_form_timestamp(): void {
     if (Settings::get("spamfilter_enabled") != "yes") {
         return;
     }
@@ -362,7 +364,7 @@ function check_form_timestamp() {
 
 // HTML Code für Anti CSRF Token zurückgeben
 // Siehe http://de.wikipedia.org/wiki/Cross-Site-Request-Forgery
-function get_csrf_token_html() {
+function get_csrf_token_html(): string {
     $html = '<input type="hidden" name="csrf_token" value="' . get_csrf_token() . '">';
     if (Settings::get("min_time_to_fill_form", "int") > 0) {
         $html .= '<input type="hidden" name="form_timestamp" value="' . time() . '">';
@@ -371,28 +373,29 @@ function get_csrf_token_html() {
     return optimizeHtml($html);
 }
 
-function csrf_token_html() {
+function csrf_token_html(): void {
     echo get_csrf_token_html();
 }
 
-function get_csrf_token() {
+function get_csrf_token(): string {
     if (!isset($_SESSION["csrf_token"])) {
-        $_SESSION["csrf_token"] = md5(uniqid(rand(), true));
+        $_SESSION["csrf_token"] = md5(uniqid());
     }
     return $_SESSION["csrf_token"];
 }
 
-function getFieldsForCustomType($type) {
+function getFieldsForCustomType(string $type): array {
     $fields = [];
     $modules = getAllModules();
     foreach ($modules as $module) {
         $custom_types = getModuleMeta($module, "custom_types");
-        if ($custom_types) {
-            foreach ($custom_types as $key => $value) {
-                if ($key == $type) {
-                    foreach ($value as $field) {
-                        $fields[] = $field;
-                    }
+        if (!$custom_types) {
+            continue;
+        }
+        foreach ($custom_types as $key => $value) {
+            if ($key === $type) {
+                foreach ($value as $field) {
+                    $fields[] = $field;
                 }
             }
         }
@@ -400,7 +403,7 @@ function getFieldsForCustomType($type) {
     return $fields;
 }
 
-function get_used_post_types() {
+function get_used_post_types(): array {
     $query = Database::query("select `type` from {prefix}content group by `type`", true);
     $types = get_available_post_types();
     $used_types = [];
@@ -416,14 +419,14 @@ function get_used_post_types() {
     return $return_types;
 }
 
-function get_available_post_types() {
+function get_available_post_types(): array {
     $types = DefaultContentTypes::getAll();
     $types = array_keys($types);
     return $types;
 }
 
 // Schriftgrößen zurückgeben
-function getFontSizes() {
+function getFontSizes(): string {
     global $sizes;
     $sizes = [];
     for ($i = 6; $i <= 80; $i ++) {
@@ -452,7 +455,7 @@ function getModuleMeta($module, $attrib = null) {
     return $attrib ? $json[$attrib] : $json;
 }
 
-function getThemeMeta($theme, $attrib = null) {
+function getThemeMeta(string $theme, string $attrib = null) {
     $retval = null;
     $metadata_file = getTemplateDirPath($theme, true) . "metadata.json";
     if (file_exists($metadata_file)) {
@@ -473,7 +476,7 @@ function getThemeMeta($theme, $attrib = null) {
     return $retval;
 }
 
-function getModuleName($module) {
+function getModuleName(string $module): string {
     $name_file = getModulePath($module) . $module . "_name.php";
     if (!file_exists($name_file)) {
         return $module;
@@ -487,7 +490,7 @@ function getModuleName($module) {
     }
 }
 
-function getLanguageNameByCode($code) {
+function getLanguageNameByCode(string $code): string {
     $query = db_query("SELECT name FROM `" . tbname("languages") . "` WHERE language_code = '" . db_escape($code) . "'");
     $retval = $code;
     if (db_num_rows($query) > 0) {
@@ -498,21 +501,21 @@ function getLanguageNameByCode($code) {
     return $retval;
 }
 
-function getAvailableBackendLanguages() {
+function getAvailableBackendLanguages(): array {
     $langdir = ULICMS_ROOT . "/lang/";
     $list = scandir($langdir);
     sort($list);
     $retval = [];
     for ($i = 0; $i < count($list); $i ++) {
         if (endsWith($list[$i], ".php")) {
-            array_push($retval, basename($list[$i], ".php"));
+            $retval[] = basename($list[$i], ".php");
         }
     }
 
     return $retval;
 }
 
-function getSystemLanguage() {
+function getSystemLanguage(): string {
     if (isset($_SESSION["system_language"])) {
         $lang = $_SESSION["system_language"];
     } else if (isset($_SESSION["language"])) {
@@ -528,7 +531,7 @@ function getSystemLanguage() {
     return $lang;
 }
 
-function getDomainByLanguage($givenLanguage) {
+function getDomainByLanguage($givenLanguage): ?string {
     $domainMapping = Settings::get("domain_to_language");
     $domainMapping = Settings::mappingStringToArray($domainMapping);
     foreach ($domainMapping as $domain => $language) {
@@ -540,7 +543,7 @@ function getDomainByLanguage($givenLanguage) {
     return null;
 }
 
-function getLanguageByDomain($givenDomain) {
+function getLanguageByDomain($givenDomain): ?string {
     $domainMapping = Settings::get("domain_to_language");
     $domainMapping = Settings::mappingStringToArray($domainMapping);
     foreach ($domainMapping as $domain => $language) {
@@ -552,7 +555,7 @@ function getLanguageByDomain($givenDomain) {
     return null;
 }
 
-function setLanguageByDomain() {
+function setLanguageByDomain(): bool {
     $domainMapping = Settings::get("domain_to_language");
     $domainMapping = Settings::mappingStringToArray($domainMapping);
     foreach ($domainMapping as $domain => $language) {
@@ -565,16 +568,16 @@ function setLanguageByDomain() {
     return false;
 }
 
-function getOnlineUsers() {
+function getOnlineUsers(): array {
     $users_online = db_query("SELECT username FROM " . tbname("users") . " WHERE last_action > " . (time() - 300) . " ORDER BY username");
     $users = [];
     while ($row = db_fetch_object($users_online)) {
-        array_push($users, $row->username);
+        $users[] = $row->username;
     }
     return $users;
 }
 
-function rootDirectory() {
+function rootDirectory(): string {
     $pageURL = 'http';
     if ($_SERVER["HTTPS"] == "on") {
         $pageURL .= "s";
@@ -597,7 +600,7 @@ function rootDirectory() {
 }
 
 // Alternative PHP Cache leeren, sofern installiert und aktiv
-function clearAPCCache() {
+function clearAPCCache(): bool {
     if (!function_exists("apc_clear_cache")) {
         return false;
     }
@@ -610,19 +613,19 @@ function clearAPCCache() {
 // Alle Caches leeren
 // Sowohl den Seiten-Cache, den Download/Paketmanager Cache
 // als auch den APC Bytecode Cache
-function clearCache() {
+function clearCache(): void {
     CacheUtil::clearCache();
 }
 
 // DEPRECATED:
 // This function may be removed in future releases of UliCMS
 // Use do_event()
-function add_hook($name, $runs = ModuleEventConstants::RUNS_ONCE) {
+function add_hook(string $name, string $runs = ModuleEventConstants::RUNS_ONCE): void {
     trigger_error("add_hook() is deprecated. Please use do_event().", E_USER_DEPRECATED);
     do_event($name, $runs);
 }
 
-function do_event($name, $runs = ModuleEventConstants::RUNS_ONCE) {
+function do_event(string $name, string $runs = ModuleEventConstants::RUNS_ONCE) {
     // don't run this code on kcfinder page (media)
     // since the "Path" class has a naming conflict with the same named
     // class of KCFinder
@@ -664,16 +667,16 @@ function do_event($name, $runs = ModuleEventConstants::RUNS_ONCE) {
     }
 }
 
-function cms_release_year() {
+function cms_release_year(): void {
     $v = new UliCMSVersion();
     echo $v->getReleaseYear();
 }
 
-function splitAndTrim($str) {
+function splitAndTrim(string $str): array {
     return array_map('trim', explode(";", $str));
 }
 
-function setLocaleByLanguage() {
+function setLocaleByLanguage(): array {
     $locale = null;
     if (is_admin_dir()) {
         $var = "locale_" . db_escape($_SESSION["system_language"]);
@@ -700,7 +703,7 @@ function setLocaleByLanguage() {
 // Returns the language code of the current language
 // If $current is true returns language of the current page
 // else it returns $_SESSION["language"];
-function getCurrentLanguage($current = false) {
+function getCurrentLanguage($current = false): string {
     if (Vars::get("current_language_" . strbool($current))) {
         return Vars::get("current_language_" . strbool($current));
     }
@@ -720,16 +723,16 @@ function getCurrentLanguage($current = false) {
     }
 }
 
-function getThemeList() {
+function getThemeList(): array {
     return getThemesList();
 }
 
-function getThemesList() {
+function getThemesList(): array {
     $pkg = new PackageManager();
     return $pkg->getInstalledPackages('themes');
 }
 
-function getTemplateDirPath($sub = "default", $abspath = false) {
+function getTemplateDirPath(string $sub = "default", bool $abspath = false): string {
     if ($abspath) {
         $templateDir = Path::resolve("ULICMS_DATA_STORAGE_ROOT/content/templates/") . "/";
     } else if (ULICMS_ROOT != ULICMS_DATA_STORAGE_ROOT and defined("ULICMS_DATA_STORAGE_URL")) {
@@ -744,7 +747,7 @@ function getTemplateDirPath($sub = "default", $abspath = false) {
     return $templateDir;
 }
 
-function getModuleAdminSelfPath() {
+function getModuleAdminSelfPath(): string {
     $self_path = $_SERVER["REQUEST_URI"];
     $self_path = str_replace('"', '', $self_path);
     $self_path = str_replace("'", '', $self_path);
@@ -752,7 +755,7 @@ function getModuleAdminSelfPath() {
 }
 
 // replace num entity with the character
-function replace_num_entity($ord) {
+function replace_num_entity(string $ord) {
     $ord = $ord[1];
     if (preg_match('/^x([0-9a-f]+)$/i', $ord, $match)) {
         $ord = hexdec($match[1]);
@@ -814,7 +817,7 @@ function replace_num_entity($ord) {
 
 // This Returns the current full URL
 // for example: http://www.homepage.de/news.html?single=title
-function getBaseFolderURL() {
+function getBaseFolderURL(): string {
     $s = empty($_SERVER["HTTPS"]) ? '' : ($_SERVER["HTTPS"] == "on") ? "s" : "";
     $sp = strtolower($_SERVER["SERVER_PROTOCOL"]);
     $protocol = substr($sp, 0, strpos($sp, "/")) . $s;
@@ -824,7 +827,7 @@ function getBaseFolderURL() {
 
 // This Returns the current full URL
 // for example: http://www.homepage.de/news.html?single=title
-function getCurrentURL() {
+function getCurrentURL(): string {
     $s = empty($_SERVER["HTTPS"]) ? '' : ($_SERVER["HTTPS"] == "on") ? "s" : "";
     $sp = strtolower($_SERVER["SERVER_PROTOCOL"]);
     $protocol = substr($sp, 0, strpos($sp, "/")) . $s;
@@ -841,14 +844,15 @@ function getCurrentURL() {
  * bzw.
  * seite.html;
  */
-function buildSEOUrl($page = false, $redirection = null, $format = "html") {
+function buildSEOUrl($page = false, bool $redirection = null, string $format = "html"): string {
     if (!is_null($redirection) and ! empty($redirection)) {
         return $redirection;
     }
-    if ($page === false)
+    if ($page === false) {
         $page = get_requested_pagename();
+    }
 
-    if (startsWith($redirection, "#")) {
+    if (is_string($redirection) and startsWith($redirection, "#")) {
         return $redirection;
     }
 
@@ -866,7 +870,7 @@ function buildSEOUrl($page = false, $redirection = null, $format = "html") {
     return $seo_url;
 }
 
-function getModulePath($module, $abspath = false) {
+function getModulePath($module, $abspath = false): string {
     if ($abspath) {
         return Path::resolve("ULICMS_DATA_STORAGE_ROOT/content/modules/$module") . "/";
     }
@@ -886,27 +890,27 @@ function getModulePath($module, $abspath = false) {
     return $module_folder . $module . "/";
 }
 
-function getModuleAdminFilePath($module) {
+function getModuleAdminFilePath($module): string {
     return getModulePath($module, true) . $module . "_admin.php";
 }
 
-function getModuleAdminFilePath2($module) {
+function getModuleAdminFilePath2($module): string {
     return getModulePath($module, true) . "admin.php";
 }
 
-function getModuleMainFilePath($module) {
+function getModuleMainFilePath($module): string {
     return getModulePath($module, true) . $module . "_main.php";
 }
 
-function getModuleMainFilePath2($module) {
+function getModuleMainFilePath2($module): string {
     return getModulePath($module, true) . "main.php";
 }
 
-function getModuleUninstallScriptPath($module, $abspath = true) {
+function getModuleUninstallScriptPath(string $module, bool $abspath = true): string {
     return getModulePath($module, $abspath) . $module . "_uninstall.php";
 }
 
-function getModuleUninstallScriptPath2($module, $abspath = true) {
+function getModuleUninstallScriptPath2(string $module, bool $abspath = true): string {
     return getModulePath($module, $abspath) . "uninstall.php";
 }
 
@@ -915,7 +919,7 @@ function getModuleUninstallScriptPath2($module, $abspath = true) {
  * Forces a flush of the output buffer to screen useful for displaying long loading lists eg: bulk emailers on screen
  * Stops the end user seeing loads of just plain old white and thinking the browser has crashed on long loading pages.
  */
-function fcflush() {
+function fcflush(): void {
     static $output_handler = null;
     if ($output_handler === null) {
         $output_handler = @ini_get('output_handler');
@@ -933,12 +937,12 @@ function fcflush() {
     }
 }
 
-function isModuleInstalled($name) {
+function isModuleInstalled(string $name): bool {
     $module = new Module($name);
     return $module->isInstalled();
 }
 
-function getAllModules() {
+function getAllModules(): array {
     if (Vars::get("allModules")) {
         return Vars::get("allModules");
     }
@@ -948,7 +952,7 @@ function getAllModules() {
     return $modules;
 }
 
-function no_cache($do = false) {
+function no_cache($do = false): void {
     if ($do) {
         Flags::setNoCache(true);
     } else if (get_cache_control() == "auto" || get_cache_control() == "no_cache") {
@@ -956,14 +960,14 @@ function no_cache($do = false) {
     }
 }
 
-function no_anti_csrf() {
+function no_anti_csrf(): void {
     if (!defined("NO_ANTI_CSRF")) {
         define("NO_ANTI_CSRF", true);
     }
 }
 
 // replace Shortcodes with modules
-function replaceShortcodesWithModules($string, $replaceOther = true) {
+function replaceShortcodesWithModules(string $string, bool $replaceOther = true): string {
     if ($replaceOther) {
         $string = str_ireplace('[title]', get_title(), $string);
         ob_start();
@@ -1058,18 +1062,17 @@ function replaceShortcodesWithModules($string, $replaceOther = true) {
     return $string;
 }
 
-function getPageByID($id) {
+function getPageByID(int $id): ?object {
     $id = intval($id);
     $query = db_query("SELECT * FROM " . tbname("content") . " where id = " . $id);
     if (db_num_rows($query) > 0) {
         return db_fetch_object($query);
-    } else {
-        return null;
     }
+    return null;
 }
 
 // get page id by slug
-function getPageIDBySlug($slug) {
+function getPageIDBySlug(string $slug) {
     $query = db_query("SELECT slug, id FROM `" . tbname("content") . "` where slug='" . db_escape($slug) . "'");
     if (db_num_rows($query) > 0) {
         $row = db_fetch_object($query);
@@ -1079,7 +1082,7 @@ function getPageIDBySlug($slug) {
     }
 }
 
-function getPageSlugByID($id) {
+function getPageSlugByID(?int $id): ?string {
     $query = db_query("SELECT slug, id FROM `" . tbname("content") . "` where id=" . intval($id));
     if (db_num_rows($query) > 0) {
         $row = db_fetch_object($query);
@@ -1089,7 +1092,7 @@ function getPageSlugByID($id) {
     }
 }
 
-function getPageTitleByID($id) {
+function getPageTitleByID(int $id): string {
     $query = db_query("SELECT title, id FROM `" . tbname("content") . "` where id=" . intval($id));
     if (db_num_rows($query) > 0) {
         $row = db_fetch_object($query);
@@ -1100,7 +1103,7 @@ function getPageTitleByID($id) {
 }
 
 // Get slugs of all pages
-function getAllPagesWithTitle() {
+function getAllPagesWithTitle(): array {
     $query = db_query("SELECT slug, id, title FROM `" . tbname("content") . "` WHERE `deleted_at` IS NULL ORDER BY slug");
     $returnvalues = [];
     while ($row = db_fetch_object($query)) {
@@ -1128,7 +1131,7 @@ function getAllPagesWithTitle() {
 }
 
 // Get all pages
-function getAllPages($lang = null, $order = "slug", $exclude_hash_links = true, $menu = null) {
+function getAllPages(string $lang = null, string $order = "slug", bool $exclude_hash_links = true, string $menu = null): array {
     if (!$lang) {
         if (!$menu) {
             $query = db_query("SELECT * FROM `" . tbname("content") . "` WHERE `deleted_at` IS NULL ORDER BY $order");
@@ -1153,7 +1156,7 @@ function getAllPages($lang = null, $order = "slug", $exclude_hash_links = true, 
 }
 
 // Get slugs of all pages
-function getAllSlugs($lang = null) {
+function getAllSlugs(string $lang = null): array {
     $slugs = [];
 
     if (!$lang) {
@@ -1170,7 +1173,7 @@ function getAllSlugs($lang = null) {
 }
 
 // Sprachcodes abfragen und als Array zurück geben
-function getAllLanguages($filtered = false) {
+function getAllLanguages($filtered = false): array {
     if ($filtered) {
         $permissionChecker = new PermissionChecker(get_user_id());
         $languages = $permissionChecker->getLanguages();
@@ -1195,7 +1198,7 @@ function getAllLanguages($filtered = false) {
 }
 
 // get URL to UliCMS
-function the_url() {
+function the_url(): string {
     $pageURL = 'http';
     if ($_SERVER["HTTPS"] == "on") {
         $pageURL .= "s";
@@ -1221,7 +1224,7 @@ function the_url() {
 // Gibt die Identifier aller Menüs zurück.
 // Zusätzliche Navigationsmenüs können definiert werden,
 // durch setzen von additional_menus
-function getAllMenus($only_used = false) {
+function getAllMenus(bool $only_used = false): array {
     $menus = Array(
         "left",
         "top",
@@ -1274,7 +1277,7 @@ function getAllMenus($only_used = false) {
 }
 
 // Check if site contains a module
-function containsModule($page = null, $module = false) {
+function containsModule(string $page = null, string $module = null): bool {
     if (is_null($page)) {
         $page = get_requested_pagename();
     }
@@ -1291,11 +1294,11 @@ function containsModule($page = null, $module = false) {
             return true;
         }
     } else if ($module) {
-        $result = preg_match("/\[module=\"" . preg_quote($module) . "\"\]/", $content);
+        $result = boolval(preg_match("/\[module=\"" . preg_quote($module) . "\"\]/", $content));
         Vars::set("page_" . $page . "_contains_" . $module, $result);
         return $result;
     } else {
-        $result = preg_match("/\[module=\".+\"\]/", $content);
+        $result = boolval(preg_match("/\[module=\".+\"\]/", $content));
         Vars::set("page_" . $page . "_contains_" . $module, $result);
         return $result;
     }
@@ -1307,7 +1310,7 @@ function containsModule($page = null, $module = false) {
 // Ruft uninstall Script auf, falls vorhanden
 // Löscht anschließend den Ordner modules/$name
 // TODO: dies in die PackageManager Klasse verschieben
-function uninstall_module($name, $type = "module") {
+function uninstall_module(string $name, string $type = "module") {
     $acl = new ACL();
     // Nur Admins können Module löschen
     if (!$acl->hasPermission("install_packages") and ! isCLI()) {
@@ -1359,16 +1362,16 @@ function uninstall_module($name, $type = "module") {
 }
 
 // returns version number of UliCMS Core
-function cms_version() {
+function cms_version(): string {
     $v = new UliCMSVersion();
     return implode(".", $v->getInternalVersion());
 }
 
-function get_environment() {
+function get_environment(): string {
     return getenv("ULICMS_ENVIRONMENT") ? getenv("ULICMS_ENVIRONMENT") : "default";
 }
 
-function func_enabled($func) {
+function func_enabled(string $func): bool {
     $disabled = explode(',', ini_get('disable_functions'));
     foreach ($disabled as $disableFunction) {
         $is_disabled[] = trim($disableFunction);
@@ -1383,7 +1386,7 @@ function func_enabled($func) {
     return $it_is_disabled;
 }
 
-function set_eTagHeaders($identifier, $timestamp) {
+function set_eTagHeaders(string $identifier, int $timestamp) {
     $gmt_mTime = gmdate('r', $timestamp);
 
     header('Cache-Control: public');
@@ -1391,7 +1394,7 @@ function set_eTagHeaders($identifier, $timestamp) {
     header('Last-Modified: ' . $gmt_mTime);
 
     if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) || isset($_SERVER['HTTP_IF_NONE_MATCH'])) {
-        if ($_SERVER['HTTP_IF_MODIFIED_SINCE'] == $gmt_mtime || str_replace('"', '', stripslashes($_SERVER['HTTP_IF_NONE_MATCH'])) == md5($timestamp . $identifier)) {
+        if ($_SERVER['HTTP_IF_MODIFIED_SINCE'] == $gmt_mtime || str_replace('"', '', stripslashes($_SERVER['HTTP_IF_NONE_MATCH'])) == md5(strval($timestamp) . $identifier)) {
             header('HTTP/1.1 304 Not Modified');
             exit();
         }
