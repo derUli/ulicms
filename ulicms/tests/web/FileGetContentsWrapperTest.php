@@ -52,7 +52,7 @@ class FileGetContentsWrapperTest extends \PHPUnit\Framework\TestCase {
 
     public function testFileGetContentsCurl() {
         $this->assertTrue(is_string(file_get_contents_curl("http://example.org")));
-        $this->assertFalse(file_get_contents_curl("http://www.gibtsnicht.ch"));
+        $this->assertNull(file_get_contents_curl("http://www.gibtsnicht.ch"));
     }
 
     public function testFileGetContentsWrapperNoCache() {

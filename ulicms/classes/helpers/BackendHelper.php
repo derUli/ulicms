@@ -2,7 +2,7 @@
 
 class BackendHelper extends Helper {
 
-    public static function formatDatasetCount($count) {
+    public static function formatDatasetCount(int $count): void {
         if ($count == 1) {
             translate("ONE_DATASET_FOUND");
         } else {
@@ -12,15 +12,11 @@ class BackendHelper extends Helper {
         }
     }
 
-    public static function getAction() {
-        if (isset($_REQUEST["action"])) {
-            return $_REQUEST["action"];
-        } else {
-            return "home";
-        }
+    public static function getAction(): string {
+        return isset($_REQUEST["action"]) ? $_REQUEST["action"] : "home";
     }
 
-    public static function setAction($action) {
+    public static function setAction($action): void {
         $_REQUEST["action"] = $action;
         $_GET["action"] = $action;
         if (Request::isPost()) {
@@ -28,7 +24,7 @@ class BackendHelper extends Helper {
         }
     }
 
-    public static function enqueueEditorScripts() {
+    public static function enqueueEditorScripts(): void {
         if (get_html_editor() == "ckeditor") {
             enqueueScriptFile(ModuleHelper::buildRessourcePath("core_content", "js/pages/init-ckeditor.js"));
         }

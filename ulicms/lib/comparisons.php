@@ -4,32 +4,32 @@ declare(strict_types=1);
 
 use Carbon\Carbon;
 
-function is_today(?int $datetime = null): bool {
+function is_today($datetime = null): bool {
     $carbon = get_carbon($datetime);
     return $carbon->isToday();
 }
 
-function is_tomorrow(?int $datetime = null): bool {
+function is_tomorrow($datetime = null): bool {
     $carbon = get_carbon($datetime);
     return $carbon->isTomorrow();
 }
 
-function is_yesterday(?int $datetime = null): bool {
+function is_yesterday($datetime = null): bool {
     $carbon = get_carbon($datetime);
     return $carbon->isYesterday();
 }
 
-function is_past(?ìnt $datetime = null): bool {
+function is_past($datetime = null): bool {
     $carbon = get_carbon($datetime);
     return $carbon->isPast();
 }
 
-function is_future(?int $datetime = null): bool {
+function is_future($datetime = null): bool {
     $carbon = get_carbon($datetime);
     return $carbon->isFuture();
 }
 
-function get_carbon(?int $datetime = null): Carbon {
+function get_carbon($datetime = null): Carbon {
     return new Carbon($datetime ?? time(), date_default_timezone_get());
 }
 

@@ -4,7 +4,7 @@ namespace UliCMS\Helpers;
 
 class UrlHelper extends \Helper {
 
-    public static function getUrlWithoutGetParameters($url) {
+    public static function getUrlWithoutGetParameters(string $url): string {
         $parsedUri = parse_url($url);
         $hostWithPort = $parsedUri["host"];
         if (!empty($parsedUri["port"])) {

@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 use UliCMS\Exceptions\CorruptDownloadException;
 
 // die Funktionalität von file_get_contents
 // mit dem Curl-Modul umgesetzt
-function file_get_contents_curl($url) {
+function file_get_contents_curl(string $url): ?string {
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_USERAGENT, ULICMS_USERAGENT);
     curl_setopt($ch, CURLOPT_HEADER, 0);
@@ -15,14 +17,14 @@ function file_get_contents_curl($url) {
     $data = curl_exec($ch);
 
     if (curl_getinfo($ch, CURLINFO_HTTP_CODE) != 200 and curl_getinfo($ch, CURLINFO_HTTP_CODE) != 304 and curl_getinfo($ch, CURLINFO_HTTP_CODE) != 302) {
-        $data = false;
+        $data = null;
     }
 
     curl_close($ch);
     return $data;
 }
 
-function is_url($url) {
+function is_url(string $url): bool {
     if (startsWith($url, "http://") or startsWith($url, "https://") or startsWith($url, "ftp://")) {
         return ($url != "http://" and $url != "https://" and $url != "ftp://");
     }
@@ -31,7 +33,7 @@ function is_url($url) {
 
 // Nutze curl zum Download der Datei, sofern verfügbar
 // Ansonsten Fallback auf file_get_contents
-function file_get_contents_wrapper($url, $no_cache = false, $checksum = null) {
+function file_get_contents_wrapper(string $url, bool $no_cache = false, $checksum = null): ?string {
     $content = false;
     if (!is_url($url)) {
         return file_get_contents($url);
@@ -64,7 +66,7 @@ function file_get_contents_wrapper($url, $no_cache = false, $checksum = null) {
     return $content;
 }
 
-function url_exists($url) {
+function url_exists(string $url): bool {
     if (@file_get_contents($url, FALSE, NULL, 0, 0) === false) {
         return false;
     }

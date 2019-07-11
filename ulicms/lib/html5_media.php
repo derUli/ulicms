@@ -1,6 +1,8 @@
 <?php
 
-function replaceAudioTags($txt) {
+declare(strict_types=1);
+
+function replaceAudioTags(string $txt): string {
     $audio_dir = "content/audio/";
     if (defined("ULICMS_DATA_STORAGE_URL")) {
         $audio_dir = Path::resolve("ULICMS_DATA_STORAGE_URL/$audio_dir") . "/";
@@ -14,7 +16,7 @@ function replaceAudioTags($txt) {
 
         while ($row = db_fetch_object($query)) {
             $code1 = "[audio id=\"" . $row->id . "\"]";
-            $code2 = "[audio id=$quot;" . $row->id . "$quot;]";
+            $code2 = "[audio id=&quot;" . $row->id . "$quot;]";
             $code3 = "[audio id=" . $row->id . "]";
             if (!empty($row->mp3_file)) {
                 $preferred = $row->mp3_file;
@@ -43,7 +45,7 @@ function replaceAudioTags($txt) {
     return $txt;
 }
 
-function replaceVideoTags($txt) {
+function replaceVideoTags(string $txt): string {
     $video_dir = "content/videos/";
     if (defined("ULICMS_DATA_STORAGE_URL")) {
         $video_dir = Path::resolve("ULICMS_DATA_STORAGE_URL/$video_dir") . "/";

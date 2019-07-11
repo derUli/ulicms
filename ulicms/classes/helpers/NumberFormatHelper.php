@@ -7,7 +7,7 @@ use Helper;
 class NumberFormatHelper extends Helper {
 
     // Snippet from PHP Share: http://www.phpshare.org
-    public static function formatSizeUnits($bytes) {
+    public static function formatSizeUnits(int $bytes) {
         if ($bytes >= 1073741824) {
             $bytes = number_format($bytes / 1073741824, 2) . ' GB';
         } elseif ($bytes >= 1048576) {
@@ -25,7 +25,7 @@ class NumberFormatHelper extends Helper {
         return $bytes;
     }
 
-    public static function timestampToHtml5Datetime($timestamp = null) {
+    public static function timestampToHtml5Datetime(?int $timestamp = null): string {
         $time = !is_null($timestamp) ? $timestamp : time();
         return date("Y-m-d\TH:i", $time);
     }
