@@ -1,51 +1,53 @@
 <?php
 
+declare(strict_types=1);
+
 use Carbon\Carbon;
 
-function is_today($datetime = null) {
+function is_today(?int $datetime = null): bool {
     $carbon = get_carbon($datetime);
     return $carbon->isToday();
 }
 
-function is_tomorrow($datetime = null) {
+function is_tomorrow(?int $datetime = null): bool {
     $carbon = get_carbon($datetime);
     return $carbon->isTomorrow();
 }
 
-function is_yesterday($datetime = null) {
+function is_yesterday(?int $datetime = null): bool {
     $carbon = get_carbon($datetime);
     return $carbon->isYesterday();
 }
 
-function is_past($datetime = null) {
+function is_past(?ìnt $datetime = null): bool {
     $carbon = get_carbon($datetime);
     return $carbon->isPast();
 }
 
-function is_future($datetime = null) {
+function is_future(?int $datetime = null): bool {
     $carbon = get_carbon($datetime);
     return $carbon->isFuture();
 }
 
-function get_carbon($datetime = null) {
+function get_carbon(?int $datetime = null): Carbon {
     return new Carbon($datetime ?? time(), date_default_timezone_get());
 }
 
-function is_blank($val = null) {
+function is_blank($val = null): bool {
     return isset($val) && (is_string($val) &&
             StringHelper::isNullOrWhitespace($val)) ||
             empty($val);
 }
 
-function is_present($val = null) {
+function is_present($val = null): bool {
     return isset($val) && !is_blank($val);
 }
 
-function is_json($str) {
+function is_json(string $str): bool {
     return json_decode($str) != null;
 }
 
-function is_numeric_array($var) {
+function is_numeric_array($var): bool {
     if (!is_array($var)) {
         return false;
     }
@@ -57,24 +59,24 @@ function is_numeric_array($var) {
     return true;
 }
 
-function is_true($var) {
+function is_true($var): bool {
     return (isset($var) and $var);
 }
 
-function is_false($var) {
+function is_false($var): bool {
     return !(isset($var) and $var);
 }
 
 // sind wir gerade im Adminordner?
-function is_admin_dir() {
+function is_admin_dir(): bool {
     return basename(getcwd()) === "admin";
 }
 
-function is_desktop() {
+function is_desktop(): bool {
     return !is_mobile();
 }
 
-function is_crawler($useragent = null) {
+function is_crawler(?string $useragent = null): bool {
     if (is_null($useragent)) {
         $useragent = $_SERVER['HTTP_USER_AGENT'];
     }
@@ -90,7 +92,7 @@ function is_crawler($useragent = null) {
 
 // 21. Februar 2015
 // Nutzt nun die Klasse Mobile_Detect
-function is_mobile() {
+function is_mobile(): bool {
     if (!class_exists("Mobile_Detect")) {
         return false;
     }
@@ -105,11 +107,11 @@ function is_mobile() {
     return $result;
 }
 
-function isMaintenanceMode() {
+function isMaintenanceMode(): bool {
     return (strtolower(Settings::get("maintenance_mode")) == "on" || strtolower(Settings::get("maintenance_mode")) == "true" || Settings::get("maintenance_mode") == "1");
 }
 
-function is_tablet() {
+function is_tablet(): bool {
     if (!class_exists("Mobile_Detect")) {
         return false;
     }
@@ -118,7 +120,7 @@ function is_tablet() {
     return $result;
 }
 
-function is_admin() {
+function is_admin(): bool {
     $isAdmin = false;
     $user_id = get_user_id();
     if ($user_id) {
@@ -129,28 +131,28 @@ function is_admin() {
 }
 
 // Check if it is night (current hour between 0 and 4 o'Clock AM)
-function is_night() {
+function is_night(): bool {
     $hour = (int) date("G", time());
     return ($hour >= 0 and $hour <= 4);
 }
 
-function is_debug_mode() {
+function is_debug_mode(): bool {
     $config = new CMSConfig();
     return (defined("ULICMS_DEBUG") and ULICMS_DEBUG) or ( isset($config->debug) and $config->debug);
 }
 
-function isCLI() {
+function isCLI(): bool {
     return php_sapi_name() == "cli";
 }
 
-function startsWith($haystack, $needle, $case = true) {
+function startsWith(string $haystack, string $needle, bool $case = true): bool {
     if ($case) {
         return (strcmp(substr($haystack, 0, strlen($needle)), $needle) === 0);
     }
     return (strcasecmp(substr($haystack, 0, strlen($needle)), $needle) === 0);
 }
 
-function endsWith($haystack, $needle, $case = true) {
+function endsWith(string $haystack, string $needle, bool $case = true): bool {
     if ($case) {
         return (strcmp(substr($haystack, strlen($haystack) - strlen($needle)), $needle) === 0);
     }
