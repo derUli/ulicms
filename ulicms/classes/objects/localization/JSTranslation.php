@@ -28,6 +28,7 @@ class JSTranslation {
     public function removeKey(string $del_var): void {
         if (($key = array_search($del_var, $this->keys)) !== false) {
             unset($this->keys[$key]);
+            $this->keys = array_values($this->keys);
         }
     }
 

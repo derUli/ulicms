@@ -1,1 +1,1 @@
-<script type="text/javascript">Translation = {};Translation.Help = "HELP";Translation.Pages = "PAGES";Translation.GibtsNicht = "GIBTS_NICHT";</script>
+<script type="text/javascript">Translation = {};Translation.Help = "HELP";Translation.Pages = "Pages";Translation.GibtsNicht = "GIBTS_NICHT";</script>

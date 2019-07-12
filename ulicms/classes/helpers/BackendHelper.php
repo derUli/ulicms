@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 class BackendHelper extends Helper {
 
     public static function formatDatasetCount(int $count): void {
@@ -16,7 +18,7 @@ class BackendHelper extends Helper {
         return isset($_REQUEST["action"]) ? $_REQUEST["action"] : "home";
     }
 
-    public static function setAction($action): void {
+    public static function setAction(string $action): void {
         $_REQUEST["action"] = $action;
         $_GET["action"] = $action;
         if (Request::isPost()) {
