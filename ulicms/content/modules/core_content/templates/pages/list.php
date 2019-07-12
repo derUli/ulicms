@@ -506,7 +506,8 @@ if ($permissionChecker->hasPermission("pages")) {
                                 echo "<td class=\"hide-on-mobile\">" . get_translation("no") . "</td>";
                             }
 
-                            if (startsWith($row->redirection, "#") or $row->type == "node" or $row->type == "snippet") {
+                            if ((
+							$row->redirection and startsWith($row->redirection, "#")) or $row->type == "node" or $row->type == "snippet") {
                                 echo "<td class=\"text-center\"></td>";
                             } else {
                                 $url = "../?goid={$row->id}";
