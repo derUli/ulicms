@@ -1,30 +1,32 @@
 <?php
 
+declare(strict_types=1);
+
 class AdminMenu {
 
     private $children = [];
 
-    public function __construct($children = []) {
+    public function __construct(array $children = []) {
         $this->children = $children;
     }
 
-    public function getChildren() {
+    public function getChildren(): array {
         return $this->children;
     }
 
-    public function setChildren($value) {
+    public function setChildren(array $value): void {
         $this->children = $value;
     }
 
-    public function hasChildren() {
+    public function hasChildren(): bool {
         return (count($this->children) > 0);
     }
 
-    public function addChild($children) {
+    public function addChild(array $children): void {
         $this->children[] = $children;
     }
 
-    public function render() {
+    public function render(): void {
         $html = "<ul>";
         foreach ($this->children as $child) {
             if ($child->userHasPermission()) {

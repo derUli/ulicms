@@ -3,7 +3,7 @@
 class SystemRequirementsTest extends \PHPUnit\Framework\TestCase {
 
     public function testPhpVersion() {
-        $this->assertTrue(version_compare(phpversion(), "7.1", ">="));
+        $this->assertTrue(version_compare(phpversion(), "7.2", ">="));
     }
 
     public function testPhpModuleMySqli() {

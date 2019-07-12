@@ -1,31 +1,33 @@
 <?php
 
+declare(strict_types=1);
+
 // returns site protocl
 // http:// or https://
-function get_site_protocol() {
+function get_site_protocol(): string {
     return Request::getProtocol();
 }
 
-function site_protocol() {
+function site_protocol(): void {
     echo get_site_protocol();
 }
 
-function get_protocol_and_domain() {
+function get_protocol_and_domain(): string {
     return get_site_protocol() . get_domain();
 }
 
-function get_domain() {
+function get_domain(): ?string {
     return Request::getDomain();
 }
 
 // Die IP-Adresse des Clients zurückgeben
 // Falls ein Proxy genutzt wurde, versuchen, die echte IP statt der
 // des Proxy zu ermitteln
-function get_ip() {
+function get_ip(): string {
     return Request::getIp();
 }
 
-function get_host() {
+function get_host(): string {
     if ($host = $_SERVER['HTTP_X_FORWARDED_HOST']) {
         $elements = explode(',', $host);
         $host = trim(end($elements));
@@ -37,14 +39,14 @@ function get_host() {
         }
     }
 
-    // Remove port number from host
+// Remove port number from host
     $host = preg_replace('/:\d+$/', '', $host);
 
     return trim($host);
 }
 
 // Übersetzung HTTP Status Code => Name
-function getStatusCodeByNumber($nr) {
+function getStatusCodeByNumber(int $nr) {
     $http_codes = array(
         100 => 'Continue',
         101 => 'Switching Protocols',
@@ -106,35 +108,38 @@ function getStatusCodeByNumber($nr) {
     return $nr . " " . $http_codes[$nr];
 }
 
-function get_request_uri() {
+function get_request_uri(): ?string {
     return Request::getRequestUri();
 }
 
-function get_http_host() {
+function get_http_host(): ?string {
     return get_domain();
 }
 
-function get_referer() {
+function get_referer(): string {
     return get_referrer();
 }
 
-function get_referrer() {
+function get_referrer(): string {
     return Request::getReferrer();
 }
 
-function get_useragent() {
+function get_useragent(): string {
     return Request::getUserAgent();
 }
 
-function get_request_method() {
+function get_request_method(): string {
     return Request::getMethod();
 }
 
 // Check for Secure HTTP Connection (SSL)
-function is_ssl() {
+function is_ssl(): bool {
     return Request::isSSL();
 }
 
-function ulicms_mail($to, $subject, $message, $headers = "") {
+function ulicms_mail(string $to,
+        string $subject,
+        string $message,
+        ?string $headers = ""): bool {
     return Mailer::send($to, $subject, $message, $headers);
 }

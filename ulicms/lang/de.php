@@ -736,7 +736,7 @@ add_translation("on", "An");
 add_translation("off", "Aus");
 
 add_translation("php_upgrade_notice", "Sie benutzen eine veraltete PHP Version, welche vom Hersteller nicht mehr mit Sicherheitsupdates versorgt wird.\n"
-        . "Sie sollten PHP 7.1 oder eine neuere Version verwenden.\n"
+        . "Sie sollten PHP 7.2 oder eine neuere Version verwenden.\n"
         . "Bitte kontaktieren Sie ihren Administrator oder Provider.");
 
 add_translation("hello_x", "Hallo %x%");

@@ -739,7 +739,7 @@ add_translation("on", "On");
 add_translation("off", "Off");
 
 add_translation("php_upgrade_notice", "You're using an outdated PHP version.\n" .
-        "You should use at least PHP 7.1.\n" .
+        "You should use at least PHP 7.2.\n" .
         "Please ask your system administrator or provider for an upgrade of the PHP version.");
 
 add_translation("hello_x", "Hello %x%");

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use UliCMS\Exceptions\SqlException;
 
 class DBMigrator {
@@ -8,7 +10,7 @@ class DBMigrator {
     private $folder = null;
     private $strictMode = true;
 
-    public function __construct($component, $folder) {
+    public function __construct(string $component, string$folder) {
         $this->component = $component;
         $this->folder = $folder;
         $cfg = new CMSConfig();
@@ -17,15 +19,15 @@ class DBMigrator {
         }
     }
 
-    public function enableStrictMode() {
+    public function enableStrictMode(): void {
         $this->strictMode = true;
     }
 
-    public function disableStrictMode() {
+    public function disableStrictMode(): void {
         $this->strictMode = false;
     }
 
-    public function migrate($stop = null) {
+    public function migrate(?string $stop = null): void {
         $this->checkVars();
         $files = scandir($this->folder);
         natcasesort($files);
@@ -37,7 +39,7 @@ class DBMigrator {
         }
     }
 
-    public function executeSqlScript($file) {
+    public function executeSqlScript(string $file): void {
         if (endsWith($file, ".sql")) {
             $sql = "SELECT id from {prefix}dbtrack where component = ? and name = ?";
             $args = array(
@@ -65,7 +67,7 @@ class DBMigrator {
         }
     }
 
-    public function rollback($stop = null) {
+    public function rollback(?string $stop = null): void {
         $this->checkVars();
         $files = scandir($this->folder);
         natcasesort($files);
@@ -101,17 +103,17 @@ class DBMigrator {
         }
     }
 
-    public function resetDBTrack() {
+    public function resetDBTrack(): mysqli_result {
         return Database::pQuery("DELETE FROM {prefix}dbtrack where component = ?", array(
                     $this->component
                         ), true);
     }
 
-    public function resetDBTrackAll() {
+    public function resetDBTrackAll(): void {
         Database::truncateTable("dbtrack");
     }
 
-    private function checkVars() {
+    private function checkVars(): void {
         if (StringHelper::isNullOrEmpty($this->component)) {
             throw new Exception("component is null or empty");
         }

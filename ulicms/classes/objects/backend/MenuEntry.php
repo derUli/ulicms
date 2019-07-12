@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 class MenuEntry {
 
     private $title;
@@ -9,7 +11,7 @@ class MenuEntry {
     private $children = [];
     private $newWindow = false;
 
-    public function __construct($title, $link, $identifier, $permissions = null, $children = [], $newWindow = false) {
+    public function __construct(string $title, string $link, string $identifier, $permissions = null, array $children = [], bool $newWindow = false) {
         $this->title = $title;
         $this->link = $link;
         $this->identifier = $identifier;
@@ -18,43 +20,43 @@ class MenuEntry {
         $this->newWindow = $newWindow;
     }
 
-    public function getTitle() {
+    public function getTitle(): string {
         return $this->title;
     }
 
-    public function getLink() {
+    public function getLink(): string {
         return $this->link;
     }
 
-    public function getIdentifier() {
+    public function getIdentifier(): string {
         return $this->identifier;
     }
 
-    public function setTitle($value) {
+    public function setTitle(string $value): void {
         $this->title = $value;
     }
 
-    public function setLink($value) {
+    public function setLink(string $value): void {
         $this->link = $value;
     }
 
-    public function setIdentifier($value) {
+    public function setIdentifier(string $value): void {
         $this->identifier = $value;
     }
 
-    public function getChildren() {
+    public function getChildren(): array {
         return $this->children;
     }
 
-    public function setChildren($value) {
+    public function setChildren(array $value): void {
         $this->children = $value;
     }
 
-    public function hasChildren() {
+    public function hasChildren(): bool {
         return (count($this->children) > 0);
     }
 
-    public function addChild($children) {
+    public function addChild(array $children): void {
         $this->children[] = $children;
     }
 
@@ -62,19 +64,19 @@ class MenuEntry {
         return $this->permissions;
     }
 
-    public function setPermissions($permissions) {
+    public function setPermissions($permissions): void {
         $this->permissions = $permissions;
     }
 
-    public function getNewWindow() {
+    public function getNewWindow(): bool {
         return $this->newWindow;
     }
 
-    public function setNewWindow($val) {
-        $this->newWindow = boolval($val);
+    public function setNewWindow(bool $val): void {
+        $this->newWindow = $val;
     }
 
-    public function userHasPermission() {
+    public function userHasPermission(): bool {
         $acl = new ACL();
         if (is_string($this->permissions) and ! empty($this->permissions)) {
             return $acl->hasPermission($this->permissions);
@@ -86,9 +88,8 @@ class MenuEntry {
                 }
             }
             return $isPermitted;
-        } else {
-            return true;
         }
+        return true;
     }
 
 }

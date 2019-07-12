@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use UliCMS\HTML\Style;
 use UliCMS\HTML\Script;
 use UliCMS\Exceptions\SCSSCompileException;
@@ -7,11 +9,12 @@ use Leafo\ScssPhp\Compiler;
 use zz\Html\HTMLMinify;
 use MatthiasMullie\Minify;
 
-function resetScriptQueue() {
+function resetScriptQueue(): void {
     Vars::set("script_queue", []);
 }
 
-function optimizeHtml($html, $level = HTMLMinify::OPTIMIZATION_SIMPLE) {
+function optimizeHtml(string $html,
+        int $level = HTMLMinify::OPTIMIZATION_SIMPLE): string {
     if (Database::isConnected() and Settings::get("minify_html")) {
         $options = array(
             'optimizationLevel' => $level
@@ -24,7 +27,7 @@ function optimizeHtml($html, $level = HTMLMinify::OPTIMIZATION_SIMPLE) {
     return $html;
 }
 
-function enqueueScriptFile($path) {
+function enqueueScriptFile($path): void {
     if (!Vars::get("script_queue")) {
         resetScriptQueue();
     }
@@ -34,7 +37,7 @@ function enqueueScriptFile($path) {
     Vars::set("script_queue", $script_queue);
 }
 
-function setSCSSImportPaths($importPaths = null) {
+function setSCSSImportPaths(?array $importPaths = null): void {
     if ($importPaths == null) {
         $importPaths = array(
             Path::resolve("ULICMS_ROOT")
@@ -43,15 +46,15 @@ function setSCSSImportPaths($importPaths = null) {
     Vars::set("css_include_paths", $importPaths);
 }
 
-function getSCSSImportPaths() {
+function getSCSSImportPaths(): ?array {
     return Vars::get("css_include_paths");
 }
 
-function unsetSCSSImportPaths() {
+function unsetSCSSImportPaths(): void {
     Vars::delete("css_include_paths");
 }
 
-function minifyJs() {
+function minifyJs(): string {
     $scripts = Vars::get("script_queue");
     $lastmod = 0;
 
@@ -95,7 +98,7 @@ function minifyJs() {
     return $bundleUrl;
 }
 
-function minifyCSS() {
+function minifyCSS(): string {
     $stylesheets = Vars::get("stylesheet_queue");
     $lastmod = 0;
 
@@ -145,7 +148,7 @@ function minifyCSS() {
     return $bundleUrl;
 }
 
-function compileSCSS($stylesheet) {
+function compileSCSS(string $stylesheet): string {
     $scss = new Compiler();
 
     $importPaths = getSCSSImportPaths();
@@ -164,7 +167,7 @@ function compileSCSS($stylesheet) {
     return $scssOutput;
 }
 
-function compileSCSSToFile($stylesheet) {
+function compileSCSSToFile(string $stylesheet): string {
     $cssDir = Path::resolve("ULICMS_ROOT/content/cache/stylesheets");
 
     if (!is_dir($cssDir)) {
@@ -184,16 +187,16 @@ function compileSCSSToFile($stylesheet) {
     return $bundleUrl;
 }
 
-function combinedScriptHtml() {
+function combinedScriptHtml(): void {
     echo getCombinedScriptHtml();
 }
 
-function combined_script_html() {
+function combined_script_html(): void {
     trigger_error("combined_script_html is deprecated", E_USER_DEPRECATED);
     echo getCombinedScriptHtml();
 }
 
-function getCombinedScriptHtml() {
+function getCombinedScriptHtml(): string {
 
     $cfg = new CMSConfig();
     if (is_true($cfg->no_minify)) {
@@ -210,17 +213,17 @@ function getCombinedScriptHtml() {
     return $html;
 }
 
-function get_combined_script_html() {
+function get_combined_script_html(): string {
     trigger_error("combined_script_html is deprecated", E_USER_DEPRECATED);
     return getCombinedScriptHtml();
 }
 
 // Ab hier Stylesheet Funktionen
-function resetStylesheetQueue() {
+function resetStylesheetQueue(): void {
     Vars::set("stylesheet_queue", []);
 }
 
-function enqueueStylesheet($path) {
+function enqueueStylesheet(string $path): void {
     if (!Vars::get("stylesheet_queue")) {
         resetStylesheetQueue();
     }
@@ -230,10 +233,10 @@ function enqueueStylesheet($path) {
     Vars::set("stylesheet_queue", $stylesheet_queue);
 }
 
-function getCombinedStylesheetHTML() {
+function getCombinedStylesheetHTML(): ?string {
     $cfg = new CMSConfig();
     if (!Vars::get("stylesheet_queue")) {
-        return;
+        return null;
     }
     if (is_true($cfg->no_minify)) {
         foreach (Vars::get("stylesheet_queue") as $stylesheet) {
@@ -254,11 +257,11 @@ function getCombinedStylesheetHTML() {
     return $html;
 }
 
-function combinedStylesheetHtml() {
+function combinedStylesheetHtml(): void {
     echo getCombinedStylesheetHTML();
 }
 
-function get_combined_stylesheet_html() {
+function get_combined_stylesheet_html(): string {
     trigger_error("get_combined_stylesheet_html is deprecated", E_USER_DEPRECATED);
     return getCombinedStylesheetHTML();
 }

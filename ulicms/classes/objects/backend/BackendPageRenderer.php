@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace UliCMS\Backend;
 
 use StringHelper;
@@ -24,11 +26,11 @@ class BackendPageRenderer {
         self::$model = $model;
     }
 
-    public function getAction() {
+    public function getAction(): string {
         return $this->action;
     }
 
-    public function setAction($action) {
+    public function setAction(string $action): void {
         $this->action = $action;
     }
 
@@ -36,12 +38,12 @@ class BackendPageRenderer {
         return self::$model;
     }
 
-    public static function setModel($model) {
+    public static function setModel($model): void {
         self::$model = $model;
     }
 
     // renders a backend page, outputs it and do events
-    public function render() {
+    public function render(): void {
         if (Settings::get("minify_html")) {
             ob_start();
         }
@@ -67,7 +69,7 @@ class BackendPageRenderer {
         exit();
     }
 
-    protected function handleNotLoggedIn() {
+    protected function handleNotLoggedIn(): void {
 
         ActionRegistry::loadModuleActions();
         $actions = ActionRegistry::getActions();
@@ -94,7 +96,7 @@ class BackendPageRenderer {
         }
     }
 
-    protected function handleLoggedIn() {
+    protected function handleLoggedIn(): void {
         $permissionChecker = new PermissionChecker(get_user_id());
 
         require_once "inc/adminmenu.php";
@@ -118,7 +120,7 @@ class BackendPageRenderer {
         }
     }
 
-    protected function outputMinified() {
+    protected function outputMinified(): void {
         $generatedHtml = ob_get_clean();
         $options = array(
             'optimizationLevel' => HTMLMinify::OPTIMIZATION_ADVANCED
@@ -130,7 +132,7 @@ class BackendPageRenderer {
         echo $generatedHtml;
     }
 
-    protected function doCronEvents() {
+    protected function doCronEvents(): void {
         do_event("before_admin_cron");
         do_event("admin_cron");
         do_event("after_admin_cron");
