@@ -1092,7 +1092,7 @@ function getPageSlugByID(?int $id): ?string {
     }
 }
 
-function getPageTitleByID(int $id): string {
+function getPageTitleByID(?int $id): string {
     $query = db_query("SELECT title, id FROM `" . tbname("content") . "` where id=" . intval($id));
     if (db_num_rows($query) > 0) {
         $row = db_fetch_object($query);
