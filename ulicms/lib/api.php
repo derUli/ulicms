@@ -1371,7 +1371,7 @@ function get_environment(): string {
     return getenv("ULICMS_ENVIRONMENT") ? getenv("ULICMS_ENVIRONMENT") : "default";
 }
 
-function func_enabled(string $func): bool {
+function func_enabled(string $func): array {
     $disabled = explode(',', ini_get('disable_functions'));
     foreach ($disabled as $disableFunction) {
         $is_disabled[] = trim($disableFunction);
@@ -1386,7 +1386,7 @@ function func_enabled(string $func): bool {
     return $it_is_disabled;
 }
 
-function set_eTagHeaders(string $identifier, int $timestamp) {
+function set_eTagHeaders(string $identifier, int $timestamp): void {
     $gmt_mTime = gmdate('r', $timestamp);
 
     header('Cache-Control: public');

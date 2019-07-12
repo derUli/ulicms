@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use UliCMS\Exceptions\AccessDeniedException;
 
 abstract class Controller {
@@ -19,7 +21,7 @@ abstract class Controller {
         }
     }
 
-    public function runCommand() {
+    public function runCommand(): void {
         $sClass = Request::getVar("sClass");
         if (isset($_REQUEST["sMethod"]) and StringHelper::isNotNullOrEmpty($_REQUEST["sMethod"]) and ! faster_in_array($_REQUEST["sMethod"], $this->blacklist)) {
             $sMethod = $_REQUEST["sMethod"];
