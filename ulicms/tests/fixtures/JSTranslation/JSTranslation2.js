@@ -1,0 +1,1 @@
+<script type="text/javascript">ThisIsNotGoogleTranslator = {};ThisIsNotGoogleTranslator.Help = "HELP";ThisIsNotGoogleTranslator.Pages = "PAGES";ThisIsNotGoogleTranslator.GibtsNicht = "GIBTS_NICHT";</script>
