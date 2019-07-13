@@ -87,19 +87,13 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
     public function testGetBaseMetasVideoWidth100Percent() {
         Settings::set("video_width_100_percent", "1");
         $baseMetas = Template::getBaseMetas();
-
-        $expected = "<style type=\"text/css\">
-  video {
-  width: 100% !important;
-  height: auto !important;
-  }
-           </style>
-        ";
-        $this->assertTrue(str_contains($expected, $baseMetas));
+        $this->assertTrue(str_contains("video {", $baseMetas));
+        $this->assertTrue(str_contains("width: 100% !important;", $baseMetas));
+        $this->assertTrue(str_contains("height: auto !important;", $baseMetas));
 
         Settings::delete("video_width_100_percent");
         $baseMetas = Template::getBaseMetas();
-        $this->assertFalse(str_contains($expected, $baseMetas));
+        $this->assertFalse(str_contains("video {", $baseMetas));
     }
 
     public function testGetBaseMetasHideMetaGenerator() {

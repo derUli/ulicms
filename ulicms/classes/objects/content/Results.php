@@ -5,7 +5,7 @@ declare(strict_types=1);
 use UliCMS\Backend\BackendPageRenderer;
 
 function JSONResult($data, int $status = 200): void {
-    Response::sendStatusHeader(Response::getStatusCodeByNumber($status));
+    Response::sendStatusHeader($status);
     $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
     // get string size in Byte
     $size = getStringLengthInBytes($json);
@@ -16,7 +16,7 @@ function JSONResult($data, int $status = 200): void {
 }
 
 function RawJSONResult(string $data, int $status = 200): void {
-    Response::sendStatusHeader(Response::getStatusCodeByNumber($status));
+    Response::sendStatusHeader($status);
     $size = getStringLengthInBytes($data);
     header('Content-Type: application/json');
     header("Content-length: $size");
@@ -25,7 +25,7 @@ function RawJSONResult(string $data, int $status = 200): void {
 }
 
 function HTMLResult(string $data, int $status = 200): void {
-    Response::sendStatusHeader(Response::getStatusCodeByNumber($status));
+    Response::sendStatusHeader($status);
     $data = optimizeHtml($data);
     $size = getStringLengthInBytes($data);
     header('Content-Type: text/html; charset=UTF-8');
@@ -35,7 +35,7 @@ function HTMLResult(string $data, int $status = 200): void {
 }
 
 function TextResult(string $data, int $status = 200): void {
-    Response::sendStatusHeader(Response::getStatusCodeByNumber($status));
+    Response::sendStatusHeader($status);
     $size = getStringLengthInBytes($data);
     header('Content-Type: text/plain; charset=utf-8');
     header("Content-length: $size");
@@ -44,7 +44,7 @@ function TextResult(string $data, int $status = 200): void {
 }
 
 function Result(string $data, int $status = 200, ?string $type = null): void {
-    Response::sendStatusHeader(Response::getStatusCodeByNumber($status));
+    Response::sendStatusHeader($status);
     $size = getStringLengthInBytes($data);
     if ($type) {
         header("Content-Type: $type");

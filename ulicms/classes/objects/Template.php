@@ -354,7 +354,7 @@ color: " . Settings::get("body-text-color") . ";
             $minifier = new Minify\CSS();
             $minifier->add($cssCode);
             if (!(is_array($disableFunctions) and in_array("output_design_settings_styles", $disableFunctions))) {
-                echo UliCMS\HTML\Style::FromString($minifier->minify());
+                echo UliCMS\HTML\Style::fromString($minifier->minify());
             }
 
             if (Settings::get("video_width_100_percent")) {

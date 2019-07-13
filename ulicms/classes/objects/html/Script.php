@@ -35,7 +35,7 @@ class Script {
         return "<script $attribHTML></script>";
     }
 
-    public static function fromString(string $code,
+    public static function fromString(?string $code,
             bool $async = false,
             bool $defer = false,
             array $htmlAttributes = []): string {

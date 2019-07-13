@@ -31,7 +31,7 @@ class Style {
         return "<link {$attribHTML}/>";
     }
 
-    public static function FromString(string $code,
+    public static function fromString(?string $code,
             ?string $media = null,
             array $htmlAttributes = []): string {
         $attributes = array(

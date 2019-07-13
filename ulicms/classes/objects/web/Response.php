@@ -1,8 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 class Response {
 
-    public static function sendHttpStatusCodeResultIfAjax($status = HTTPStatusCode::OK, $redirect = null, $redirectStatus = HttpStatusCode::MOVED_TEMPORARILY) {
+    public static function sendHttpStatusCodeResultIfAjax(
+            int $status = HTTPStatusCode::OK,
+            ?string $redirect = null,
+            int $redirectStatus = HttpStatusCode::MOVED_TEMPORARILY): void {
         if (Request::isAjaxRequest()) {
             HTTPStatusCodeResult($status);
         }
@@ -12,20 +17,24 @@ class Response {
     }
 
     // Weiterleitung per Location header;
-    public static function redirect($url = "http://www.ulicms.de", $status = HttpStatusCode::MOVED_TEMPORARILY) {
-        Response::sendStatusHeader(self::getStatusCodeByNumber($status));
+    public static function redirect(string $url = "http://www.ulicms.de",
+            int $status = HttpStatusCode::MOVED_TEMPORARILY): void {
+        Response::sendStatusHeader($status);
         header("Location: " . $url);
         exit();
     }
 
-    public static function redirectToAction($action, $controller = null, $status = HttpStatusCode::MOVED_TEMPORARILY) {
+    public static function redirectToAction(string $action,
+            ?string $controller = null,
+            $status = HttpStatusCode::MOVED_TEMPORARILY): void {
         if (is_null($controller)) {
             Response::redirect(ModuleHelper::buildActionURL($action), $status);
         }
         Response::redirect(ModuleHelper::buildMethodCallUrl($controller, $action), $status);
     }
 
-    public static function javascriptRedirect($url = "http://www.ulicms.de") {
+    public static function javascriptRedirect(
+            string $url = "http://www.ulicms.de"): void {
         echo "<script type=\"text/javascript\">location.replace(\"$url\");</script>";
         echo "<noscript><p>" . get_translation("jsredirect_noscript", array(
             "%url%" => Template::getEscape($url)
@@ -33,7 +42,8 @@ class Response {
         exit();
     }
 
-    public static function getSafeRedirectURL($url, $safeHosts = null) {
+    public static function getSafeRedirectURL(string $url,
+            $safeHosts = null): string {
         $cfg = new CMSConfig();
         if (is_array($safeHosts) and count($safeHosts) >= 1) {
             $safeHosts = $safeHosts;
@@ -56,12 +66,14 @@ class Response {
         return $url;
     }
 
-    public static function safeRedirect($url, $status = 302, $safeHosts = null) {
+    public static function safeRedirect(string $url,
+            int $status = 302,
+            $safeHosts = null): void {
         $url = self::getSafeRedirectUrl($url, $safeHosts);
         Request::redirect($url, $status);
     }
 
-    public static function sendStatusHeader($nr) {
+    public static function sendStatusHeader(?int $nr): bool {
         if (headers_sent()) {
             return false;
         }
@@ -70,7 +82,7 @@ class Response {
     }
 
     // Übersetzung HTTP Status Code => Name
-    public static function getStatusCodeByNumber($nr) {
+    public static function getStatusCodeByNumber(int $nr): string {
         $http_codes = array(
             100 => 'Continue',
             101 => 'Switching Protocols',
