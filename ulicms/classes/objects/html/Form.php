@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace UliCMS\HTML;
 
 use StringHelper;
@@ -9,7 +11,11 @@ use UliCMS\Constants\RequestMethod;
 
 class Form {
 
-    public static function buildMethodCallForm($sClass, $sMethod, $otherVars = [], $requestMethod = RequestMethod::POST, $htmlAttributes = []) {
+    public static function buildMethodCallForm(string $sClass,
+            string $sMethod,
+            array $otherVars = [],
+            string $requestMethod = RequestMethod::POST,
+            array $htmlAttributes = []): string {
         $html = "";
         $attribhtml = StringHelper::isNotNullOrWhitespace(ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes)) ? " " . ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes) : "";
         $html .= '<form action="index.php" method="' . $requestMethod . '"' . $attribhtml . '>';
@@ -23,7 +29,15 @@ class Form {
         return $html;
     }
 
-    public static function buildMethodCallButton($sClass, $sMethod, $buttonText, $buttonAttributes = array("class" => "btn btn-default", "type" => "submit"), $otherVars = [], $formAttributes = [], $requestMethod = RequestMethod::POST) {
+    public static function buildMethodCallButton(string $sClass,
+            string $sMethod,
+            string $buttonText,
+            array $buttonAttributes = [
+                "class" => "btn btn-default",
+                "type" => "submit"],
+            array $otherVars = [],
+            array $formAttributes = [],
+            string $requestMethod = RequestMethod::POST): string {
         $html = ModuleHelper::buildMethodCallForm($sClass, $sMethod, $otherVars, $requestMethod, $formAttributes);
         $html .= '<button ' . ModuleHelper::buildHTMLAttributesFromArray($buttonAttributes) . ">";
         $html .= $buttonText . "</button>";
@@ -31,7 +45,9 @@ class Form {
         return $html;
     }
 
-    public static function deleteButton($url, $otherVars = [], $htmlAttributes = []) {
+    public static function deleteButton(string $url,
+            array $otherVars = [],
+            array $htmlAttributes = []) {
         $html = "";
         $htmlAttributes["class"] = trim("delete-form " . $htmlAttributes["class"]);
 
@@ -48,7 +64,7 @@ class Form {
         return optimizeHtml($html);
     }
 
-    public static function endForm() {
+    public static function endForm(): string {
         return "</form>";
     }
 

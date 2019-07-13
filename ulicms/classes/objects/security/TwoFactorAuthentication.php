@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace UliCMS\Security;
 
 use Settings;
@@ -22,27 +24,27 @@ class TwoFactorAuthentication {
         return Settings::get("ga_secret");
     }
 
-    public function changeSecret($secret) {
+    public function changeSecret(string $secret): void {
         Settings::set("ga_secret", $secret);
     }
 
-    public function generateSecret() {
+    public function generateSecret(): string {
         $ga = new PHPGangsta_GoogleAuthenticator();
         $secret = $ga->createSecret();
         $this->changeSecret($secret);
         return $secret;
     }
 
-    public function getCode() {
+    public function getCode(): string {
         $ga = new PHPGangsta_GoogleAuthenticator();
         return $ga->getCode($this->getSecret());
     }
 
-    public function checkCode($code) {
+    public function checkCode(string $code) {
         return $this->getCode() === $code;
     }
 
-    public static function isEnabled() {
+    public static function isEnabled(): bool {
         return boolval(Settings::get("twofactor_authentication"));
     }
 

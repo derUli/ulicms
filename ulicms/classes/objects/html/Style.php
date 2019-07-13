@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace UliCMS\HTML;
 
 use ModuleHelper;
@@ -7,7 +9,9 @@ use UliCMS\Utils\File;
 
 class Style {
 
-    public static function FromExternalFile($href, $media = null, $htmlAttributes = []) {
+    public static function fromExternalFile(string $href,
+            ?string $media = null,
+            array $htmlAttributes = []): string {
         $attributes = array(
             "rel" => "stylesheet",
             "href" => $href,
@@ -27,7 +31,9 @@ class Style {
         return "<link {$attribHTML}/>";
     }
 
-    public static function FromString($code, $media = null, $htmlAttributes = []) {
+    public static function FromString(string $code,
+            ?string $media = null,
+            array $htmlAttributes = []): string {
         $attributes = array(
             "type" => "text/css"
         );

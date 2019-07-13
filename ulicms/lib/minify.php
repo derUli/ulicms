@@ -242,16 +242,16 @@ function getCombinedStylesheetHTML(): ?string {
         foreach (Vars::get("stylesheet_queue") as $stylesheet) {
             $type = pathinfo($stylesheet, PATHINFO_EXTENSION);
             if ($type == "css") {
-                $html .= Style::FromExternalFile($stylesheet);
+                $html .= Style::fromExternalFile($stylesheet);
             } else if ($type == "scss") {
-                $html .= Style::FromExternalFile(compileSCSSToFile($stylesheet));
+                $html .= Style::fromExternalFile(compileSCSSToFile($stylesheet));
             }
         }
         resetStylesheetQueue();
         return $html;
     }
 
-    $html = Style::FromExternalFile(minifyCSS());
+    $html = Style::fromExternalFile(minifyCSS());
 
     resetStylesheetQueue();
     return $html;

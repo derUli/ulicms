@@ -10,10 +10,4 @@ class ContentType {
     public $customFieldTabTitle;
     public $customFields = [];
 
-    public function toJSON(): string {
-        return json_encode(array(
-            "show" => $this->show
-                ), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-    }
-
 }

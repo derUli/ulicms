@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace UliCMS\HTML;
 
 use UliCMS\Exceptions\FileNotFoundException;
@@ -10,7 +12,7 @@ function text($str) {
     return \nl2br(\_esc($str));
 }
 
-function imageTag($file, $htmlAttributes = []) {
+function imageTag(string $file, array $htmlAttributes = []): string {
     if (!isset($htmlAttributes["src"])) {
         $htmlAttributes["src"] = $file;
     }
@@ -18,7 +20,12 @@ function imageTag($file, $htmlAttributes = []) {
     return "<img {$attribHTML}>";
 }
 
-function buttonLink($url, $text, $type = null, $allowHtml = false, $target = null, $htmlAttributes = []) {
+function buttonLink(string $url,
+        string $text,
+        ?string $type = null,
+        bool $allowHtml = false,
+        ?string $target = null,
+        array $htmlAttributes = []): string {
     if (!isset($htmlAttributes["class"])) {
         $htmlAttributes["class"] = $type;
     } else {
@@ -27,7 +34,11 @@ function buttonLink($url, $text, $type = null, $allowHtml = false, $target = nul
     return link($url, $text, $allowHtml, $target, $htmlAttributes);
 }
 
-function link($url, $text, $allowHtml = false, $target = null, $htmlAttributes = []) {
+function link(string $url,
+        string $text,
+        bool $allowHtml = false,
+        ?string $target = null,
+        array $htmlAttributes = []): string {
     $htmlAttributes["href"] = $url;
     if (is_present($target)) {
         $htmlAttributes["target"] = $target;
@@ -42,14 +53,14 @@ function link($url, $text, $allowHtml = false, $target = null, $htmlAttributes =
     return "<a {$attribHTML}>{$text}</a>";
 }
 
-function icon($classes, $htmlAttributes = []) {
+function icon(string $classes, array $htmlAttributes = []): string {
     $htmlAttributes["class"] = $classes;
 
     $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes);
     return "<i $attribHTML></i>";
 }
 
-function imageTagInline($file, $htmlAttributes = []) {
+function imageTagInline(string $file, array $htmlAttributes = []): string {
 
     $url = File::toDataUri($file);
     if (!$url) {
@@ -59,6 +70,6 @@ function imageTagInline($file, $htmlAttributes = []) {
     return imageTag($url, $htmlAttributes);
 }
 
-function stringContainsHtml($string) {
+function stringContainsHtml(string $string): bool {
     return $string != strip_tags($string);
 }

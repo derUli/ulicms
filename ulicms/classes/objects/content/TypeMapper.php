@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 // TODO: TypeMapper überflüssig machen
 // Die Namen der Modelklassen sollten direkt gespeichert werden in der Tabelle
 // content
@@ -26,18 +28,18 @@ class TypeMapper {
         "language_link" => "Language_Link"
     );
 
-    public static function getMappings() {
+    public static function getMappings(): array {
         return self::$mapping;
     }
 
-    public static function getModel($type) {
+    public static function getModel($type): ?object {
         if (!(isset(self::$mapping[$type]) and class_exists(self::$mapping[$type]))) {
             return null;
         }
         return new self::$mapping[$type]();
     }
 
-    public static function loadMapping() {
+    public static function loadMapping(): void {
         $objectRegistry = [];
         $modules = getAllModules();
         foreach ($modules as $module) {

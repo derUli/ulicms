@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace UliCMS\Security\Permissions;
 
 use Database;
@@ -17,7 +19,7 @@ class PagePermissions {
     private $only_owner_can_edit = false;
     private $only_others_can_edit = false;
 
-    public function getEditRestriction($object) {
+    public function getEditRestriction(string $object): bool {
         $varName = "only_{$object}_can_edit";
         if (!isset($this->$varName)) {
             return null;
@@ -25,7 +27,7 @@ class PagePermissions {
         return $this->$varName;
     }
 
-    public function setEditRestriction($object, $restricted = false) {
+    public function setEditRestriction(string $object, bool $restricted = false): void {
         $varName = "only_{$object}_can_edit";
         if (!isset($this->$varName)) {
             return;
@@ -33,7 +35,7 @@ class PagePermissions {
         $this->$varName = boolval($restricted);
     }
 
-    public function getAll() {
+    public function getAll(): array {
         $result = [];
         $classArray = (array) $this;
         foreach ($classArray as $key => $value) {
@@ -46,7 +48,7 @@ class PagePermissions {
         return $result;
     }
 
-    public function save($id) {
+    public function save(int $id): void {
         $all = $this->getAll();
 
         $sql = "update `{prefix}content` set ";

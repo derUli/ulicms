@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace UliCMS\Security;
 
 use ContentFactory;
@@ -10,18 +12,18 @@ class ContentPermissionChecker implements IDatasetPermissionChecker {
 
     private $user_id;
 
-    public function __construct($user_id) {
+    public function __construct(int $user_id) {
         $this->user_id = $user_id;
     }
 
-    public function canRead($contentId) {
+    public function canRead(int $contentId): bool {
         $content = ContentFactory::getByID($contentId);
         $access = $content->checkAccess($content);
 
         return !is_null($access);
     }
 
-    public function canWrite($contentId) {
+    public function canWrite(int $contentId): bool {
         $content = ContentFactory::getByID($contentId);
         $permissions = $content->getPermissions();
 
@@ -82,7 +84,7 @@ class ContentPermissionChecker implements IDatasetPermissionChecker {
         return $canEditThis;
     }
 
-    public function canDelete($contentId) {
+    public function canDelete($contentId): bool {
         return $this->canWrite($contentId);
     }
 

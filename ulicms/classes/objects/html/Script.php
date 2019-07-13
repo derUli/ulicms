@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace UliCMS\HTML;
 
 use UliCMS\Utils\File;
@@ -7,7 +9,10 @@ use ModuleHelper;
 
 class Script {
 
-    public static function FromFile($file, $async = false, $defer = false, $htmlAttributes = []) {
+    public static function fromFile(string $file,
+            bool $async = false,
+            bool $defer = false,
+            array $htmlAttributes = []): string {
         $attributes = array(
             "src" => $file,
             "type" => "text/javascript"
@@ -30,7 +35,10 @@ class Script {
         return "<script $attribHTML></script>";
     }
 
-    public static function FromString($code, $async = false, $defer = false, $htmlAttributes = []) {
+    public static function fromString(string $code,
+            bool $async = false,
+            bool $defer = false,
+            array $htmlAttributes = []): string {
         $attributes = array(
             "type" => "text/javascript"
         );

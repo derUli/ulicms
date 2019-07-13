@@ -46,9 +46,8 @@ class PasswordReset {
         $query = Database::pQuery($sql, $args, true);
         if (Database::any($query)) {
             return Database::fetchObject($query);
-        } else {
-            return null;
         }
+        return null;
     }
 
     public function deleteToken($token) {

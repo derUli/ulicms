@@ -57,7 +57,7 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
             enqueueScriptFile($script);
         }
         if (is_logged_in()) {
-            echo Script::FromFile("ckeditor/ckeditor.js");
+            echo Script::fromFile("ckeditor/ckeditor.js");
         }
         combinedScriptHtml();
         ?>
@@ -80,7 +80,7 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
                   enqueueStylesheet($style);
               }
 
-              echo UliCMS\HTML\Style::FromExternalFile("../node_modules/password-strength-meter/dist/password.min.css");
+              echo UliCMS\HTML\Style::fromExternalFile("../node_modules/password-strength-meter/dist/password.min.css");
               combinedStylesheetHtml();
               ?>
               <?php

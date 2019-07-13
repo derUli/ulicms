@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace UliCMS\Utils;
 
 use Path;
@@ -22,7 +24,7 @@ class CacheUtil {
 
     private static $adapter;
 
-    public static function getAdapter($force = false) {
+    public static function getAdapter(bool $force = false): ?Psr16Adapter {
         if (!self::isCacheEnabled() && !$force) {
             return null;
         }
@@ -50,18 +52,18 @@ class CacheUtil {
         return self::$adapter;
     }
 
-    public static function isCacheEnabled() {
-        return (!Settings::get("cache_disabled") && !is_logged_in());
+    public static function isCacheEnabled(): bool {
+        return !Settings::get("cache_disabled") && !is_logged_in();
     }
 
-    public static function clearPageCache() {
+    public static function clearPageCache(): void {
         $adapter = self::getAdapter();
         if ($adapter) {
             $adapter->clear();
         }
     }
 
-    public static function clearCache() {
+    public static function clearCache(): void {
         do_event("before_clear_cache");
 
         // clear apc cache if available
@@ -89,11 +91,11 @@ class CacheUtil {
     }
 
     // Return cache period in seconds
-    public static function getCachePeriod() {
+    public static function getCachePeriod(): int {
         return intval(Settings::get("cache_period"));
     }
 
-    public static function getCurrentUid() {
+    public static function getCurrentUid(): string {
         return "fullpage-cache-" . md5(get_request_uri() . getCurrentLanguage() . strbool(is_mobile()) . strbool(is_crawler()) . strbool(is_tablet()));
     }
 

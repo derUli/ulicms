@@ -51,19 +51,19 @@ echo ModuleHelper::buildMethodCallForm(CommentsController::class, "filterComment
 <div class="form-group">
     <label for="status"><?php translate("status"); ?></label>
     <?php
-    echo Input::SingleSelect("status", $selectedStatus, $stati, 1);
+    echo Input::singleSelect("status", $selectedStatus, $stati, 1);
     ?>
 </div>
 <div class="form-group">
     <label for="status"><?php translate("contents"); ?></label>
     <?php
-    echo Input::SingleSelect("content_id", $content_id, $contentSelect, 1);
+    echo Input::singleSelect("content_id", $content_id, $contentSelect, 1);
     ?>
 </div>
 <div class="form-group">
     <label for="status"><?php translate("limit_results"); ?></label>
     <?php
-    echo Input::TextBox("limit", $limit, "number", array(
+    echo Input::textBox("limit", $limit, "number", array(
         "step" => "10",
         "min" => "0"
     ));
@@ -87,7 +87,7 @@ echo ModuleHelper::buildMethodCallForm(CommentsController::class, "doAction", ar
         <thead>
             <tr>
                 <th class="no-sort"><?php
-                    echo Input::CheckBox("select_all", false, "", array(
+                    echo Input::checkBox("select_all", false, "", array(
                         "class" => "select-all",
                         "data-target" => ".comment-checkbox"
                     ));
@@ -104,7 +104,7 @@ echo ModuleHelper::buildMethodCallForm(CommentsController::class, "doAction", ar
                 <?php $content = $comment->getContent(); ?>
                 <tr class="<?php if (!$comment->isRead()) echo "unread"; ?>">
                     <td><?php
-                        echo Input::CheckBox("comments[]", false, $comment->getId(), array(
+                        echo Input::checkBox("comments[]", false, $comment->getId(), array(
                             "class" => "checkbox comment-checkbox",
                             "data-select-all-checkbox" => ".select-all",
                             "data-checkbox-group" => ".comment-checkbox"
@@ -140,7 +140,7 @@ echo ModuleHelper::buildMethodCallForm(CommentsController::class, "doAction", ar
 <div class="row">
     <div class="col-xs-6">
         <?php
-        echo Input::SingleSelect("action", "", $actionSelect, 1);
+        echo Input::singleSelect("action", "", $actionSelect, 1);
         ?>
     </div>
     <div class="col-xs-6">

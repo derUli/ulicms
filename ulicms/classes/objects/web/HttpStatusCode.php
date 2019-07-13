@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /** HTTP status codes */
 class HttpStatusCode {
 

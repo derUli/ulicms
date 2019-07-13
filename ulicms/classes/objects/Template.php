@@ -373,7 +373,7 @@ color: " . Settings::get("body-text-color") . ";
 
     public static function jQueryScript() {
         $jQueryurl = get_jquery_url();
-        echo Script::FromFile($jQueryurl);
+        echo Script::fromFile($jQueryurl);
         do_event("after_jquery_include");
     }
 
@@ -481,7 +481,7 @@ color: " . Settings::get("body-text-color") . ";
                 $page = ContentFactory::getById($id);
                 if (in_array($page->language, getAllLanguages(true))) {
                     $html .= '<div class="ulicms-edit">';
-                    $html .= UliCMS\HTML\Link::ActionLink("pages_edit", get_translation("edit"), "page={$id}", array(
+                    $html .= UliCMS\HTML\Link::actionLink("pages_edit", get_translation("edit"), "page={$id}", array(
                                 "class" => "btn btn-warning btn-edit"
                     ));
                     $html .= "</div>";

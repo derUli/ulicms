@@ -38,14 +38,14 @@ if (Vars::get("comments_enabled")) {
             "autocomplete" => "off"
         ));
         ?>
-        <?php echo UliCMS\HTML\Input::Hidden("content_id", Vars::get("content_id")); ?>
+        <?php echo UliCMS\HTML\Input::hidden("content_id", Vars::get("content_id")); ?>
 
         <div>
             <label for="author_name"><?php translate("your_name") ?>
                 <span class="text-danger">*</span></label>
             <div>
                 <?php
-                echo UliCMS\HTML\Input::TextBox("author_name", "", "text", array(
+                echo UliCMS\HTML\Input::textBox("author_name", "", "text", array(
                     "class" => "form-control",
                     "required" => "required"
                 ));
@@ -56,7 +56,7 @@ if (Vars::get("comments_enabled")) {
             <label for="author_email"><?php translate("your_email") ?></label>
             <div>
                 <?php
-                echo UliCMS\HTML\Input::TextBox("author_email", "", "email", array(
+                echo UliCMS\HTML\Input::textBox("author_email", "", "email", array(
                     "class" => "form-control"
                 ));
                 ?>
@@ -65,7 +65,7 @@ if (Vars::get("comments_enabled")) {
         <label for="author_url"><?php translate("your_website") ?></label>
         <div>
             <?php
-            echo UliCMS\HTML\Input::TextBox("author_url", "", "url", array(
+            echo UliCMS\HTML\Input::textBox("author_url", "", "url", array(
                 "class" => "form-control"
             ));
             ?>
@@ -76,7 +76,7 @@ if (Vars::get("comments_enabled")) {
                     <label for="text"><?php translate("text") ?>
                         <span class="text-danger">*</span></label>
                     <?php
-                    echo UliCMS\HTML\Input::TextArea("text", "", 10, 80, array(
+                    echo UliCMS\HTML\Input::textArea("text", "", 10, 80, array(
                         "required" => "required",
                         "class" => "form-control"
                     ))

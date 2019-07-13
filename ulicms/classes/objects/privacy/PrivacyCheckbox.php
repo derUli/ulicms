@@ -44,7 +44,7 @@ class PrivacyCheckbox {
     }
 
     public function render(): string {
-        $checkboxHtml = Input::CheckBox($this->getCheckboxName(), false, "✔", array(
+        $checkboxHtml = Input::checkBox($this->getCheckboxName(), false, "✔", array(
                     "required" => "required",
                     "id" => $this->getCheckboxName()
         ));
