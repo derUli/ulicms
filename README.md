@@ -9,7 +9,7 @@ It runs on an LAMP Stack and includes an MVC inspired development framework.
    * For secure access to UliCMS services (for example package source) you will also need the root certificate of Let's encrypt on your server (in Debian Linux contained in the ca-certificates package).
 
 #### PHP Modules
-UliCMS requires some special modules for PHP
+UliCMS requires some special modules for PHP.
    * mysqli
    * gd
    * json

@@ -38,7 +38,31 @@ class PasswordReset {
         return $url;
     }
 
-    public function getToken($token) {
+    public function getAllTokens() {
+        $tokens = [];
+        $result = Database::selectAll("password_reset");
+        if (Database::getNumRows($result) === 0) {
+            return $tokens;
+        }
+        while ($token = Database::fetchObject($result)) {
+            $tokens[] = $token;
+        }
+        return $tokens;
+    }
+
+    public function getAllTokensByUserId(int $user_id) {
+        $tokens = [];
+        $result = Database::selectAll("password_reset", [], "user_id={$user_id}");
+        if (Database::getNumRows($result) === 0) {
+            return $tokens;
+        }
+        while ($token = Database::fetchObject($result)) {
+            $tokens[] = $token;
+        }
+        return $tokens;
+    }
+
+    public function getTokenByTokenString($token) {
         $sql = "select * from {prefix}password_reset where token = ?";
         $args = array(
             strval($token)

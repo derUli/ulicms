@@ -754,7 +754,7 @@ function getModuleAdminSelfPath(): string {
     return $self_path;
 }
 
-// replace num entity with the character
+// this magic method replaces html num entities with the character
 function replace_num_entity(string $ord) {
     $ord = $ord[1];
     if (preg_match('/^x([0-9a-f]+)$/i', $ord, $match)) {
@@ -815,24 +815,29 @@ function replace_num_entity(string $ord) {
     return $ret;
 }
 
-// This Returns the current full URL
-// for example: http://www.homepage.de/news.html?single=title
-function getBaseFolderURL(): string {
+// TODO: this code works but looks like garbage
+// rewrite this method
+function getBaseFolderURL(?string $suffix = null): string {
     $s = empty($_SERVER["HTTPS"]) ? '' : ($_SERVER["HTTPS"] == "on") ? "s" : "";
     $sp = strtolower($_SERVER["SERVER_PROTOCOL"]);
     $protocol = substr($sp, 0, strpos($sp, "/")) . $s;
     $port = ($_SERVER["SERVER_PORT"] == "80" || $_SERVER["SERVER_PORT"] == "443") ? "" : (":" . $_SERVER["SERVER_PORT"]);
-    return trim(rtrim($protocol . "://" . $_SERVER['SERVER_NAME'] . $port . str_replace("\\", "/", dirname($_SERVER['REQUEST_URI']))), "/");
+    $path = basename(dirname($_SERVER['REQUEST_URI'])) == "" ? $_SERVER['REQUEST_URI'] : dirname($_SERVER['REQUEST_URI']);
+
+    $suffix = $suffix ? str_replace("\\", "/", $suffix) : str_replace("\\", "/", $path);
+
+    return trim(
+            rtrim(
+                    $protocol . "://"
+                    . $_SERVER['SERVER_NAME'] . $port
+                    .
+                    $suffix), "/");
 }
 
 // This Returns the current full URL
 // for example: http://www.homepage.de/news.html?single=title
 function getCurrentURL(): string {
-    $s = empty($_SERVER["HTTPS"]) ? '' : ($_SERVER["HTTPS"] == "on") ? "s" : "";
-    $sp = strtolower($_SERVER["SERVER_PROTOCOL"]);
-    $protocol = substr($sp, 0, strpos($sp, "/")) . $s;
-    $port = ($_SERVER["SERVER_PORT"] == "80" || $_SERVER["SERVER_PORT"] == "443") ? "" : (":" . $_SERVER["SERVER_PORT"]);
-    return $protocol . "://" . $_SERVER['SERVER_NAME'] . $port . $_SERVER['REQUEST_URI'];
+    return getBaseFolderURL(get_request_uri());
 }
 
 /**

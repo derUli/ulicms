@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Exceptions\NotImplementedException;
+
 class ApiTest extends \PHPUnit\Framework\TestCase {
 
     public function setUp() {
@@ -408,6 +410,87 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $enabled = func_enabled("mysqli_connect");
         $this->assertEquals("mysqli_connect() is allow to use", $enabled["m"]);
         $this->assertEquals(1, $enabled["s"]);
+    }
+
+    public function testGetBaseFolderUrlWithFilenameInUrl() {
+
+        $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
+        $_SERVER["SERVER_PORT"] = "80";
+        $_SERVER['SERVER_NAME'] = "example.org";
+        $_SERVER['REQUEST_URI'] = "/foobar/foo.html";
+
+        $this->assertEquals("http://example.org/foobar", getBaseFolderURL());
+
+        unset($_SERVER["SERVER_PROTOCOL"]);
+        unset($_SERVER['SERVER_NAME']);
+        unset($_SERVER['SERVER_PORT']);
+        unset($_SERVER['REQUEST_URI']);
+    }
+
+    public function testGetBaseFolderUrlWithFilenameInUrlAndHttps() {
+
+        $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
+        $_SERVER["SERVER_PORT"] = "443";
+        $_SERVER["HTTPS"] = "on";
+        $_SERVER['SERVER_NAME'] = "example.org";
+        $_SERVER['REQUEST_URI'] = "/foobar/foo.html";
+
+        $this->assertEquals("https://example.org/foobar", getBaseFolderURL());
+
+        unset($_SERVER["SERVER_PROTOCOL"]);
+        unset($_SERVER['SERVER_NAME']);
+        unset($_SERVER['SERVER_PORT']);
+        unset($_SERVER['REQUEST_URI']);
+        unset($_SERVER['HTTPS']);
+    }
+
+    public function testGetBaseFolderUrlWithFilenameInUrlAndHttpsAndAlternativePort() {
+
+        $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
+        $_SERVER["SERVER_PORT"] = "8080";
+        $_SERVER["HTTPS"] = "on";
+        $_SERVER['SERVER_NAME'] = "example.org";
+        $_SERVER['REQUEST_URI'] = "/foobar/foo.html";
+
+        $this->assertEquals("https://example.org:8080/foobar", getBaseFolderURL());
+
+        unset($_SERVER["SERVER_PROTOCOL"]);
+        unset($_SERVER['SERVER_NAME']);
+        unset($_SERVER['SERVER_PORT']);
+        unset($_SERVER['REQUEST_URI']);
+        unset($_SERVER['HTTPS']);
+    }
+
+    public function testGetBaseFolderUrlWithoutFilename() {
+
+        $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
+        $_SERVER["SERVER_PORT"] = "80";
+        $_SERVER['SERVER_NAME'] = "example.org";
+        $_SERVER['REQUEST_URI'] = "/foobar/";
+
+        $this->assertEquals("http://example.org/foobar", getBaseFolderURL());
+
+        unset($_SERVER["SERVER_PROTOCOL"]);
+        unset($_SERVER['SERVER_NAME']);
+        unset($_SERVER['SERVER_PORT']);
+        unset($_SERVER['REQUEST_URI']);
+    }
+
+    public function testGetCurrentURL() {
+        $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
+        $_SERVER["SERVER_PORT"] = "8080";
+        $_SERVER["HTTPS"] = "on";
+        $_SERVER['SERVER_NAME'] = "example.org";
+        $_SERVER['REQUEST_URI'] = "/foobar/foo.html?hello=world";
+
+
+        $this->assertEquals("https://example.org:8080/foobar/foo.html?hello=world", getCurrentURL());
+
+        unset($_SERVER["SERVER_PROTOCOL"]);
+        unset($_SERVER['SERVER_NAME']);
+        unset($_SERVER['SERVER_PORT']);
+        unset($_SERVER['REQUEST_URI']);
+        unset($_SERVER['HTTPS']);
     }
 
 }

@@ -78,7 +78,7 @@ class SessionManager extends Controller {
             ExceptionResult("A token is required");
         }
         $reset = new PasswordReset();
-        $token = $reset->getToken($_REQUEST["token"]);
+        $token = $reset->getTokenByTokenString($_REQUEST["token"]);
         if ($token) {
             $user_id = $token->user_id;
             $user = new User($user_id);
