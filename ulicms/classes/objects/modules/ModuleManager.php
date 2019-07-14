@@ -124,7 +124,7 @@ class ModuleManager {
         }
     }
 
-    protected function updateModuleVersion(string $version, string $realModule): void {
+    protected function updateModuleVersion(?string $version, string $realModule): void {
 
         $module = new Module($realModule);
         if ($module->getVersion() !== $version) {

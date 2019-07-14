@@ -51,7 +51,7 @@ class PackageController extends MainClass {
     }
 
     public function redirectToPackageView() {
-        Response::redirect(ModuleHelper::buildActionURL("packages"));
+        Response::sendHttpStatusCodeResultIfAjax(HttpStatusCode::OK, ModuleHelper::buildActionURL("packages"));
     }
 
     public function uninstallModule() {

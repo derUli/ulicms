@@ -26,7 +26,7 @@
 
 <?php if (count($model->disableFunctions) > 0) { ?>
     <p>
-        <strong><?php translate("disabled_functions"); ?></strong><br />
+        <strong><?php translate("disabled_functions"); ?>:</strong><br />
     <ul>
         <?php foreach ($model->disableFunctions as $function) { ?>
             <li><?php esc($function); ?></li>

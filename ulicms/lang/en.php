@@ -756,4 +756,6 @@ add_translation("enter_pass", "Type your password");
 
 add_translation("all", "All");
 
+add_translation("disabled_functions", "Disabled functions");
+
 do_event("lang_en");

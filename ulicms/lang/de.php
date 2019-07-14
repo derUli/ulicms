@@ -753,4 +753,6 @@ add_translation("enter_pass", "Geben Sie Ihr Passwort ein");
 
 add_translation("all", "Alle");
 
+add_translation("disabled_functions", "Deaktivierte Funktionen");
+
 do_event("lang_de");
