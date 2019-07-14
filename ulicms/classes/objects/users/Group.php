@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use UliCMS\Models\Content\Language;
 
 class Group {
@@ -14,43 +16,43 @@ class Group {
         $acl = new ACL();
         $this->permissions = $acl->getDefaultACLAsJSON(false, true);
         if (!is_null($id)) {
-            $this->loadById($id);
+            $this->loadById(intval($id));
         }
     }
 
-    public static function getCurrentGroupId() {
+    public static function getCurrentGroupId(): ?int {
         return isset($_SESSION["group_id"]) ? intval($_SESSION["group_id"]) : null;
     }
 
-    public static function getCurrentGroup() {
+    public static function getCurrentGroup(): ?Group {
         if (self::getCurrentGroupId()) {
             return new self(self::getCurrentGroupId());
         }
         return null;
     }
 
-    public static function getDefaultPrimaryGroupId() {
+    public static function getDefaultPrimaryGroupId(): ?int {
         return Settings::get("default_acl_group") ? intval(Settings::get("default_acl_group")) : null;
     }
 
-    public static function getDefaultPrimaryGroup() {
+    public static function getDefaultPrimaryGroup(): ?Group {
         if (self::getDefaultPrimaryGroupId()) {
             return new self(self::getDefaultPrimaryGroupId());
         }
         return null;
     }
 
-    public static function getAll() {
+    public static function getAll(): array {
+        $data = [];
         $sql = "select id from `{prefix}groups` order by id";
         $query = Database::query($sql, true);
-        $data = [];
         while ($row = Database::fetchobject($query)) {
             $data[] = new Group($row->id);
         }
         return $data;
     }
 
-    public function loadById($id) {
+    public function loadById(int $id): void {
         $sql = "select * from `{prefix}groups` where id = ?";
         $args = array(
             intval($id)
@@ -58,7 +60,7 @@ class Group {
         $query = Database::pQuery($sql, $args, true);
         if (Database::any($query)) {
             $result = Database::fetchObject($query);
-            $this->id = $result->id;
+            $this->id = intval($result->id);
             $this->name = $result->name;
             $this->permissions = json_decode($result->permissions, true);
             $this->allowable_tags = $result->allowable_tags;
@@ -85,15 +87,15 @@ class Group {
         }
     }
 
-    public function save() {
+    public function save(): void {
         if ($this->id) {
             $this->update();
-        } else {
-            $this->insert();
+            return;
         }
+        $this->insert();
     }
 
-    protected Function saveLanguages() {
+    protected Function saveLanguages(): void {
         $sql = "delete from `{prefix}group_languages` where `group_id` = ?";
         $args = array(
             $this->getId()
@@ -110,7 +112,7 @@ class Group {
         }
     }
 
-    protected function insert() {
+    protected function insert(): void {
         $sql = "insert into `{prefix}groups` (name, permissions, allowable_tags) values (?,?,?)";
         $args = array(
             $this->getName(),
@@ -125,7 +127,7 @@ class Group {
         }
     }
 
-    protected function update() {
+    protected function update(): void {
         $sql = "update `{prefix}groups` set name = ?, permissions = ?, allowable_tags = ? where id = ?";
         $args = array(
             $this->getName(),
@@ -133,14 +135,13 @@ class Group {
             $this->getAllowableTags(),
             $this->id
         );
-        $retval = Database::pQuery($sql, $args, true);
+        Database::pQuery($sql, $args, true);
         $this->saveLanguages();
-        return $retval;
     }
 
-    public function delete() {
+    public function delete(): void {
         if (is_null($this->id)) {
-            return false;
+            return;
         }
         $sql = "delete from `{prefix}groups` where id = ?";
         $args = array(
@@ -150,64 +151,63 @@ class Group {
         if ($query) {
             $this->id = null;
         }
-        return $query;
     }
 
-    public function getId() {
-        return $this->id;
+    public function getId(): ?int {
+        return !is_null($this->id) ? intval($this->id) : null;
     }
 
-    public function setId($id) {
+    public function setId(?int $id): void {
         $this->id = !is_null($id) ? $id : null;
     }
 
-    public function getName() {
+    public function getName(): ?string {
         return $this->name;
     }
 
-    public function setName($name) {
+    public function setName(?string $name): void {
         $this->name = !is_null($name) ? strval($name) : null;
     }
 
-    public function getPermissions() {
+    public function getPermissions(): array {
         return $this->permissions;
     }
 
-    public function setPermissions($permissions) {
+    public function setPermissions(array $permissions): void {
         $this->permissions = $permissions;
     }
 
-    public function addPermission($name, $value = false) {
+    public function addPermission(string $name, bool $value = false): void {
         $this->permissions[$name] = $value;
     }
 
-    public function hasPermission($name) {
+    public function hasPermission(string $name): bool {
         return (in_array($name, $this->permissions) and $this->permissions[$name]);
     }
 
-    public function removePermission($name) {
+    public function removePermission(string $name): void {
         if (isset($this->permissions[$name])) {
             unset($this->permissions[$name]);
         }
     }
 
-    public function getLanguages() {
+    public function getLanguages(): array {
         return $this->languages;
     }
 
-    public function setLanguages($val) {
+    public function setLanguages(array $val): void {
         $this->languages = $val;
     }
 
-    public function getAllowableTags() {
+    public function getAllowableTags(): ?string {
         return $this->allowable_tags;
     }
 
-    public function setAllowableTags($val) {
+    public function setAllowableTags(?string $val): void {
         $this->allowable_tags = Stringhelper::isNotNullOrWhitespace($val) ? strval($val) : null;
     }
 
-    public function getUsers($order = "id") {
+    public function getUsers(string $order = "id"): array {
         $manager = new UserManager();
         return $manager->getUsersByGroupId($this->getId(), $order);
     }

@@ -100,9 +100,8 @@ class CustomFields {
                 $value = explode("\0\0", $value);
             }
             return $value;
-        } else {
-            return null;
         }
+        return null;
     }
 
 }
