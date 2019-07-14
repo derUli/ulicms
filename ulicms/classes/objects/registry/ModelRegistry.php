@@ -1,12 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 use UliCMS\Exceptions\FileNotFoundException;
 
 class ModelRegistry {
 
-    private static $objects = [];
-
-    public static function loadModuleModels() {
+    // TODO: refactor this and split int into multiple method s
+    public static function loadModuleModels(): void {
         if (!defined("KCFINDER_PAGE")) {
             $modelRegistry = [];
             $modules = getAllModules();
@@ -16,14 +17,15 @@ class ModelRegistry {
                     continue;
                 }
                 $models = getModuleMeta($module, "models") ? getModuleMeta($module, "models") : getModuleMeta($module, "objects");
-                if ($models) {
-                    foreach ($models as $key => $value) {
-                        $path = getModulePath($module, true) . trim($value, "/");
-                        if (!endsWith($path, ".php")) {
-                            $path .= ".php";
-                        }
-                        $modelRegistry[$key] = $path;
+                if (!$models) {
+                    continue;
+                }
+                foreach ($models as $key => $value) {
+                    $path = getModulePath($module, true) . trim($value, "/");
+                    if (!endsWith($path, ".php")) {
+                        $path .= ".php";
                     }
+                    $modelRegistry[$key] = $path;
                 }
             }
             foreach ($modelRegistry as $key => $value) {

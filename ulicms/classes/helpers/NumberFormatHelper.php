@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace UliCMS\Helpers;
 
 use Helper;
@@ -30,7 +32,7 @@ class NumberFormatHelper extends Helper {
         return date("Y-m-d\TH:i", $time);
     }
 
-    public static function formatTime($seconds) {
+    public static function formatTime(int $seconds): string {
         $seconds = abs($seconds); // Ganzzahlwert bilden
         return sprintf(get_translation("FORMAT_TIME"), $seconds / 60 / 60 / 24, ($seconds / 60 / 60) % 24, ($seconds / 60) % 60, $seconds % 60);
     }

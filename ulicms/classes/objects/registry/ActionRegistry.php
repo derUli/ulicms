@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use UliCMS\Exceptions\FileNotFoundException;
 
 class ActionRegistry {
@@ -12,11 +14,11 @@ class ActionRegistry {
     );
     private static $actionPermissions = [];
 
-    public static function getDefaultCoreActions() {
+    public static function getDefaultCoreActions(): array {
         return self::$defaultCoreActions;
     }
 
-    public static function loadModuleActions() {
+    public static function loadModuleActions(): void {
         self::$actions = [];
 
         if (!defined("KCFINDER_PAGE")) {
@@ -57,7 +59,7 @@ class ActionRegistry {
         }
     }
 
-    private static function loadActionPermissions() {
+    private static function loadActionPermissions(): void {
         $modules = getAllModules();
         $disabledModules = Vars::get("disabledModules");
         foreach ($modules as $module) {
@@ -65,15 +67,16 @@ class ActionRegistry {
                 continue;
             }
             $action_permissions = getModuleMeta($module, "action_permissions");
-            if ($action_permissions) {
-                foreach ($action_permissions as $action => $permission) {
-                    self::$actionPermissions[$action] = $permission;
-                }
+            if (!$action_permissions) {
+                continue;
+            }
+            foreach ($action_permissions as $action => $permission) {
+                self::$actionPermissions[$action] = $permission;
             }
         }
     }
 
-    public static function getActionPermission($action) {
+    public static function getActionPermission(string $action): ?string {
         $permission = null;
         if (isset(self::$actionPermissions[$action]) and is_string(self::$actionPermissions[$action])) {
             $permission = self::$actionPermissions[$action];
@@ -81,36 +84,36 @@ class ActionRegistry {
         return $permission;
     }
 
-    public static function loadModuleActionAssignment() {
+    public static function loadModuleActionAssignment(): void {
         $modules = getAllModules();
         foreach ($modules as $module) {
             $action_controllers = getModuleMeta($module, "action_controllers");
-            if ($action_controllers) {
-                foreach ($action_controllers as $key => $value) {
-                    self::$assignedControllers[$key] = $value;
-                }
+            if (!$action_controllers) {
+                continue;
+            }
+            foreach ($action_controllers as $key => $value) {
+                self::$assignedControllers[$key] = $value;
             }
         }
     }
 
-    public static function assignControllerToAction($action, $controller) {
+    public static function assignControllerToAction(string $action, string $controller): void {
         self::$assignedControllers[$action] = $controller;
     }
 
-    public static function getController() {
+    public static function getController(): ?Controller {
         $action = get_action();
         if ($action and isset(self::$assignedControllers[$action])) {
             return ControllerRegistry::get(self::$assignedControllers[$action]);
-        } else {
-            return null;
         }
+        return null;
     }
 
-    public static function getActions() {
+    public static function getActions(): array {
         return self::$actions;
     }
 
-    public static function getAction($action) {
+    public static function getAction(string $action): ?string {
         return isset(self::$actions[$action]) ?
                 self::$actions[$action] : null;
     }

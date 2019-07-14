@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace UliCMS\Registries;
 
 use UliCMS\Exceptions\FileNotFoundException;
@@ -14,7 +16,9 @@ class HelperRegistry {
 
     private static $helpers = [];
 
-    public static function loadModuleHelpers() {
+    // TODO: This code works but looks like crap
+    // refactor it and split it into multiple small methods
+    public static function loadModuleHelpers(): void {
         if (!defined("KCFINDER_PAGE")) {
             $helperRegistry = [];
             $modules = getAllModules();
