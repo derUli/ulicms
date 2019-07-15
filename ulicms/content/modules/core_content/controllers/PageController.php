@@ -216,7 +216,8 @@ class PageController extends Controller {
             $list->save();
         }
         $content = $model->content;
-        VCS::createRevision($content_id, $content, $user_id);
+        VCS::createRevision(intval($content_id), $content,
+                intval($user_id));
 
         $type = DefaultContentTypes::get($model->type);
         foreach ($type->customFields as $field) {
@@ -289,8 +290,8 @@ class PageController extends Controller {
     }
 
     public function diffContents($history_id = null, $content_id = null) {
-        $history_id = !$history_id ? $_GET ["history_id"] : $history_id;
-        $content_id = !$content_id ? $_GET ["content_id"] : $content_id;
+        $history_id = intval(!$history_id ? $_GET ["history_id"] : $history_id);
+        $content_id = intval(!$content_id ? $_GET ["content_id"] : $content_id);
 
         $current_version = getPageByID($content_id);
         $old_version = VCS::getRevisionByID($history_id);
