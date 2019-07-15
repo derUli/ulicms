@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Models\Media\Audio;
+use UliCMS\Models\Content\Category;
 
 class AudioTest extends \PHPUnit\Framework\TestCase {
 
@@ -37,7 +38,7 @@ class AudioTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("not-music.ogg", $audio->getOggFile());
         $this->assertEquals(null, $audio->getCategoryId());
 
-        $audio->setCategory(new Group(1));
+        $audio->setCategory(new Category(1));
         $audio->save();
 
         $audio = new Audio($id);

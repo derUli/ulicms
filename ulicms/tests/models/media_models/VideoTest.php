@@ -1,8 +1,13 @@
 <?php
 
 use UliCMS\Models\Media\Video;
+use UliCMS\Models\Content\Category;
 
 class VideoTest extends \PHPUnit\Framework\TestCase {
+
+    public function setUp() {
+        require_once getLanguageFilePath("en");
+    }
 
     public function testCreateUpdateAndDelete() {
         $Video = new Video();
@@ -40,7 +45,7 @@ class VideoTest extends \PHPUnit\Framework\TestCase {
 
         $video = new Video($id);
 
-        $video->setCategory(new Group(1));
+        $video->setCategory(new Category(1));
         $video->save();
 
         $video = new Video($id);

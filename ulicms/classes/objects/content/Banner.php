@@ -4,10 +4,11 @@ namespace UliCMS\Models\Content\Advertisement;
 
 use Template;
 use Database;
+use Model;
 
-class Banner {
+class Banner extends Model {
 
-    private $id = null;
+    protected $id = null;
     private $name = "";
     private $link_url = "";
     private $image_url = "";
@@ -73,6 +74,10 @@ class Banner {
         if ($this->id != null) {
             return $this->update();
         }
+        return $this->insert();
+    }
+
+    public function insert() {
         $sql = "INSERT INTO " . tbname("banner") . "(name, link_url, image_url, category_id, type, html, language, date_from, date_to, enabled) values (";
         if ($this->name === null) {
             $sql .= "NULL, ";

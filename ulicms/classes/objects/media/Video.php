@@ -46,7 +46,7 @@ class Video extends Model {
     protected function fillVars($query = null) {
         if ($query) {
             $result = Database::fetchSingle($query);
-            $this->setID($result->id);
+            $this->setID(intval($result->id));
             $this->setName($result->name);
             $this->mp4_file = $result->mp4_file;
             $this->ogg_file = $result->ogg_file;
@@ -156,8 +156,8 @@ class Video extends Model {
     }
 
     public function setCategory($val) {
-        $this->category = !is_null($val) ? new Category($val) : null;
-        $this->category_id = $this->category->getID();
+        $this->category = $val instanceof Category ? $val : null;
+        $this->category_id = $val instanceof Category ? $val->getID() : null;
     }
 
     public function delete($deletePhysical = true) {
