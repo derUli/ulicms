@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Exceptions\NotImplementedException;
+
 class DatabaseTest extends \PHPUnit\Framework\TestCase {
 
     public function tearDown() {
@@ -209,6 +211,14 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals($result->id, $lastInsertId);
 
         Settings::delete("foo2");
+    }
+
+    public function testGetNumFieldCount() {
+        Database::selectAll("users", ["lastname", "firstname", "email"]);
+        $this->assertEquals(3, Database::getNumFieldCount());
+
+        Database::selectAll("content", ["slug", "title"]);
+        $this->assertEquals(2, Database::getNumFieldCount());
     }
 
     // TODO: implement tests for other Database functions

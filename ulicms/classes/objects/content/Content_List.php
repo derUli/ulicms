@@ -10,8 +10,8 @@ class Content_List extends Page {
         $this->listData = new List_Data();
     }
 
-    protected function fillVarsByResult($result) {
-        parent::fillVarsByResult($result);
+    protected function fillVars($result = null) {
+        parent::fillVars($result);
         $this->listData = new List_Data($this->id);
     }
 

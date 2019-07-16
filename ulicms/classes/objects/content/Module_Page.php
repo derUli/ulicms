@@ -5,8 +5,8 @@ class Module_Page extends Page {
     public $type = "module";
     public $module = null;
 
-    protected function fillVarsByResult($result) {
-        parent::fillVarsByResult($result);
+    protected function fillVars($result = null) {
+        parent::fillVars($result);
         $this->module = $result->module;
         $this->text_position = $result->text_position;
     }

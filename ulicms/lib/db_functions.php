@@ -62,8 +62,8 @@ function db_select($schema) {
     return Database::select($schema);
 }
 
-function db_num_fields($result) {
-    return Database::getNumFieldCount($result);
+function db_num_fields() {
+    return Database::getNumFieldCount();
 }
 
 function db_affected_rows() {

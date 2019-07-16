@@ -16,8 +16,8 @@ class Link extends Page {
         return $retval;
     }
 
-    protected function fillVarsByResult($result) {
-        parent::fillVarsByResult($result);
+    protected function fillVars($result = null) {
+        parent::fillVars($result);
         $this->redirection = $result->redirection;
     }
 

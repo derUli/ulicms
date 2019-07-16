@@ -45,9 +45,9 @@ class Video extends Model {
         $this->fillVars($query);
     }
 
-    protected function fillVars($query = null): void {
-        if ($query) {
-            $result = Database::fetchSingle($query);
+    protected function fillVars($result = null): void {
+        if ($result) {
+            $result = Database::fetchSingle($result);
             $this->setID(intval($result->id));
             $this->setName($result->name);
             $this->mp4_file = $result->mp4_file;

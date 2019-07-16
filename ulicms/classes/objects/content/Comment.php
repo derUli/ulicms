@@ -36,8 +36,8 @@ class Comment extends Model {
         $this->fillVars($query);
     }
 
-    public function fillVars($query = null) {
-        $data = Database::fetchObject($query);
+    public function fillVars($result = null) {
+        $data = Database::fetchObject($result);
         $this->setID($data->id);
         $this->setContentId($data->content_id);
         $this->setAuthorName($data->author_name);

@@ -31,7 +31,7 @@ class Banner extends Model {
         $query = Database::query("SELECT * FROM `" . tbname("banner") . "` where id = $id");
         if (Database::getNumRows($query) > 0) {
             $result = Database::fetchObject($query);
-            $this->fillVarsByResult($result);
+            $this->fillVars($result);
         } else {
             throw new Exception("No banner with id $id");
         }
@@ -42,11 +42,11 @@ class Banner extends Model {
         $query = Database::query("SELECT * FROM `" . tbname("banner") . "` order by rand() LIMIT 1");
         if (Database::getNumRows($query) > 0) {
             $result = Database::fetchObject($query);
-            $this->fillVarsByResult($result);
+            $this->fillVars($result);
         }
     }
 
-    private function fillVarsByResult($result) {
+    protected function fillVars($result = null) {
         $this->id = $result->id;
         $this->name = $result->name;
         $this->link_url = $result->link_url;

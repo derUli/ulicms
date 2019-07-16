@@ -45,9 +45,9 @@ class Audio extends Model {
         $this->fillVars($query);
     }
 
-    protected function fillVars($query = null) {
-        if ($query) {
-            $result = Database::fetchSingle($query);
+    protected function fillVars($result = null) {
+        if ($result) {
+            $result = Database::fetchSingle($result);
             $this->setID($result->id);
             $this->setName($result->name);
             $this->setMP3File($result->mp3_file);

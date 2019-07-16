@@ -6,8 +6,8 @@ class Audio_Page extends Page {
     public $type = "audio";
     public $text_position = "after";
 
-    protected function fillVarsByResult($result) {
-        parent::fillVarsByResult($result);
+    protected function fillVars($result = null) {
+        parent::fillVars($result);
         $this->audio = $result->audio;
         $this->text_position = $result->text_position;
     }

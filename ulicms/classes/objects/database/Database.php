@@ -310,7 +310,7 @@ class Database {
         return mysqli_select_db(self::$connection, $schema);
     }
 
-    public static function getNumFieldCount($result) {
+    public static function getNumFieldCount() {
         return mysqli_field_count(self::$connection);
     }
 
@@ -388,11 +388,11 @@ class Database {
         if ($prefix) {
             $table = tbname($table);
         }
-        $query = Database::query("SELECT * FROM $table limit 1");
-        $fields_num = self::getNumFieldCount($query);
+        $result = Database::query("SELECT * FROM $table limit 1");
+        $fields_num = self::getNumFieldCount();
         if ($fields_num > 0) {
             for ($i = 0; $i < $fields_num; $i ++) {
-                $field = db_fetch_field($query);
+                $field = db_fetch_field($result);
                 $retval[] = $field->name;
             }
             sort($retval);

@@ -40,9 +40,8 @@ function getUserByName(string $name): ?array {
     $query = Database::query("SELECT * FROM " . tbname("users") . " WHERE username='" . Database::escapeValue($name, DB_TYPE_STRING) . "'");
     if (db_num_rows($query) > 0) {
         return db_fetch_assoc($query);
-    } else {
-        return null;
     }
+    return null;
 }
 
 function getUserById($id): ?array {

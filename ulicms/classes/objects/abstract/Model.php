@@ -31,7 +31,7 @@ class Model {
         }
     }
 
-    protected function fillVars($query = null) {
+    protected function fillVars($result = null) {
         throw new NotImplementedException("fillVars not implemented");
     }
 

@@ -6,8 +6,8 @@ class Video_Page extends Page {
     public $video = null;
     public $text_position = "after";
 
-    protected function fillVarsByResult($result) {
-        parent::fillVarsByResult($result);
+    protected function fillVars($result = null) {
+        parent::fillVars($result);
         $this->video = $result->video;
         $this->text_position = $result->text_position;
     }

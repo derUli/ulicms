@@ -135,9 +135,9 @@ class User extends Model {
         return Template::executeDefaultOrOwnTemplate("email/user_welcome.php");
     }
 
-    public function fillVars($query = null) {
-        if (Database::any($query)) {
-            $result = Database::fetchAssoc($query);
+    public function fillVars($result = null) {
+        if (Database::any($result)) {
+            $result = Database::fetchAssoc($result);
             foreach ($result as $key => $value) {
                 if (isset($this->$key) || property_exists($this, $key)) {
                     $this->$key = $value;

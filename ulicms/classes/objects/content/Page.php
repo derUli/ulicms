@@ -53,7 +53,7 @@ class Page extends Content {
         }
     }
 
-    protected function fillVarsByResult($result) {
+    protected function fillVars($result = null) {
         $this->id = $result->id;
         $this->slug = $result->slug;
         $this->title = $result->title;
@@ -110,7 +110,7 @@ class Page extends Content {
                         ), true);
         if (Database::getNumRows($query) > 0) {
             $result = Database::fetchObject($query);
-            $this->fillVarsByResult($result);
+            $this->fillVars($result);
         } else {
             throw new Exception("No content with id $id");
         }
@@ -122,7 +122,7 @@ class Page extends Content {
         $query = Database::query("SELECT * FROM `" . tbname("content") . "` where `slug` = '$name' and `language` = '$language'");
         if (Database::getNumRows($query) > 0) {
             $result = Database::fetchObject($query);
-            $this->fillVarsByResult($result);
+            $this->fillVars($result);
         } else {
             throw new Exception("No such page");
         }

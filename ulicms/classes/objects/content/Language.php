@@ -20,9 +20,9 @@ class Language extends Model {
         }
     }
 
-    public function fillVars($query = null) {
-        if (Database::getNumRows($query) > 0) {
-            $result = Database::fetchObject($query);
+    public function fillVars($result = null) {
+        if (Database::getNumRows($result) > 0) {
+            $result = Database::fetchObject($result);
             $this->id = $result->id;
             $this->name = $result->name;
             $this->language_code = $result->language_code;

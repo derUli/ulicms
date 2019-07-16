@@ -16,8 +16,8 @@ class Language_Link extends Page {
         return $retval;
     }
 
-    protected function fillVarsByResult($result) {
-        parent::fillVarsByResult($result);
+    protected function fillVars($result = null) {
+        parent::fillVars($result);
         $this->link_to_language = $result->link_to_language;
     }
 
