@@ -26,7 +26,7 @@ class Audio extends Model {
 
     const AUDIO_DIR = "content/audio/";
 
-    public function __construct(?int $id = null) {
+    public function __construct($id = null) {
         if (!is_null($id)) {
             $this->loadById($id);
         } else {
@@ -35,7 +35,7 @@ class Audio extends Model {
         }
     }
 
-    public function loadById(?int $id) {
+    public function loadById($id) {
         $query = Database::pQuery("select * from `{prefix}audio` where id = ?", array(
                     intval($id)
                         ), true);
@@ -45,7 +45,7 @@ class Audio extends Model {
         $this->fillVars($query);
     }
 
-    protected function fillVars(?mysqli_result $query = null) {
+    protected function fillVars($query = null) {
         if ($query) {
             $result = Database::fetchSingle($query);
             $this->setID($result->id);
