@@ -1,4 +1,5 @@
 <?php
+// FIXME: this file looks like shit, refactor this to MVC pattern.
 
 use UliCMS\Models\Content\Language;
 use UliCMS\Constants\AuditLog;
@@ -83,9 +84,8 @@ if (!$permissionChecker->hasPermission("groups")) {
         }
 
         $name = trim($_POST["name"]);
-        $json_permissions = json_encode($all_permissions);
         if (!empty($name)) {
-            $permissionChecker->updateGroup($id, $name, $json_permissions);
+            $permissionChecker->updateGroup($id, $name, $all_permissions);
             $modified = true;
             $name = _esc($name);
         }
