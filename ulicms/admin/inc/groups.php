@@ -1,6 +1,5 @@
 <?php
 // FIXME: this file looks like shit, refactor this to MVC pattern.
-
 use UliCMS\Models\Content\Language;
 use UliCMS\Constants\AuditLog;
 
