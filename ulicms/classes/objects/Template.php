@@ -180,10 +180,10 @@ class Template {
             $html = str_replace("%title%", get_title(null, true), $format);
             return $html;
         }
-        $query = "SELECT show_headline FROM " . tbname("content") . " where id = $id";
-        $query = Database::query($query);
-        $result = Database::fetchObject($query);
-        if ($result->show_headline) {
+        $sql = "SELECT show_headline FROM " . tbname("content") . " where id = $id";
+        $result = Database::query($sql);
+        $dataset = Database::fetchObject($result);
+        if ($dataset->show_headline) {
             $html = str_replace("%title%", get_title(null, true), $format);
         }
         return $html;
@@ -436,9 +436,9 @@ color: " . Settings::get("body-text-color") . ";
     }
 
     public static function languageSelection() {
-        $query = db_query("SELECT language_code, name FROM " . tbname("languages") . " ORDER by name");
+        $result = db_query("SELECT language_code, name FROM " . tbname("languages") . " ORDER by name");
         echo "<ul class='language_selection'>";
-        while ($row = db_fetch_object($query)) {
+        while ($row = db_fetch_object($result)) {
             $domain = getDomainByLanguage($row->language_code);
             if ($domain) {
                 echo "<li>" . "<a href='http://" . $domain . "'>" . $row->name . "</a></li>";

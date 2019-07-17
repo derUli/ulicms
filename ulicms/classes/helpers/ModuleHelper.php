@@ -33,8 +33,8 @@ class ModuleHelper extends Helper {
             $language
         );
         $sql = "select * from {prefix}content where active = ? and language = ?";
-        $query = Database::pQuery($sql, $args, true);
-        while ($dataset = Database::fetchObject($query)) {
+        $result = Database::pQuery($sql, $args, true);
+        while ($dataset = Database::fetchObject($result)) {
             $content = $dataset->content;
             $content = str_replace("&quot;", "\"", $content);
             if (!is_null($dataset->module) and ! empty($dataset->module) and $dataset->type == "module") {

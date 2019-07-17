@@ -12,9 +12,9 @@ function jumbotron_get_menu($name = "top", $parent_id = null, $recursive = true,
         $sql .= " = " . intval($parent_id) . " ";
     }
     $sql .= " ORDER by " . $order;
-    $query = db_query($sql);
+    $result = db_query($sql);
 
-    if (db_num_rows($query) == 0) {
+    if (db_num_rows($result) == 0) {
         return $html;
     }
 
@@ -31,7 +31,7 @@ function jumbotron_get_menu($name = "top", $parent_id = null, $recursive = true,
         $html .= "<ul class='" . $classes . "'>\n";
     }
 
-    while ($row = db_fetch_object($query)) {
+    while ($row = db_fetch_object($result)) {
         if (checkAccess($row->access)) {
             $containsCurrentItem = parent_item_contains_current_page($row->id);
 

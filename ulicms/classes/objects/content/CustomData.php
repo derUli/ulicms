@@ -9,10 +9,10 @@ class CustomData {
             $page = get_requested_pagename();
         }
         $sql = "SELECT `custom_data` FROM " . tbname("content") . " WHERE slug='" . Database::escapeValue($page) . "'  AND language='" . Database::escapeValue($_SESSION["language"]) . "'";
-        $query = Database::query($sql);
-        if (Database::getNumRows($query) > 0) {
-            $result = Database::fetchObject($query);
-            return json_decode($result->custom_data, true);
+        $result = Database::query($sql);
+        if (Database::getNumRows($result) > 0) {
+            $dataset = Database::fetchObject($result);
+            return json_decode($dataset->custom_data, true);
         }
         return null;
     }

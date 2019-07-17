@@ -43,13 +43,13 @@ class Group {
     }
 
     public static function getAll(): array {
-        $data = [];
+        $datasets = [];
         $sql = "select id from `{prefix}groups` order by id";
-        $query = Database::query($sql, true);
-        while ($row = Database::fetchobject($query)) {
-            $data[] = new Group($row->id);
+        $result = Database::query($sql, true);
+        while ($row = Database::fetchobject($result)) {
+            $datasets[] = new Group($row->id);
         }
-        return $data;
+        return $datasets;
     }
 
     public function loadById(int $id): void {
@@ -57,13 +57,13 @@ class Group {
         $args = array(
             intval($id)
         );
-        $query = Database::pQuery($sql, $args, true);
-        if (Database::any($query)) {
-            $result = Database::fetchObject($query);
-            $this->id = intval($result->id);
-            $this->name = $result->name;
-            $this->permissions = json_decode($result->permissions, true);
-            $this->allowable_tags = $result->allowable_tags;
+        $result = Database::pQuery($sql, $args, true);
+        if (Database::any($result)) {
+            $dataset = Database::fetchObject($result);
+            $this->id = intval($dataset->id);
+            $this->name = $dataset->name;
+            $this->permissions = json_decode($dataset->permissions, true);
+            $this->allowable_tags = $dataset->allowable_tags;
             $acl = new ACL();
             $allPermissions = $acl->getDefaultACLAsJSON(false, true);
             foreach ($allPermissions as $name => $value) {
@@ -77,8 +77,8 @@ class Group {
         $args = array(
             $this->getId()
         );
-        $query = Database::pQuery($sql, $args, true);
-        while ($row = Database::fetchobject($query)) {
+        $result = Database::pQuery($sql, $args, true);
+        while ($row = Database::fetchobject($result)) {
             $lang = new Language();
             $lang->loadById($row->language_id);
             if (!is_null($lang->getID())) {
@@ -119,8 +119,8 @@ class Group {
             json_encode($this->getPermissions(), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES),
             $this->getAllowableTags()
         );
-        $query = Database::pQuery($sql, $args, true);
-        if ($query) {
+        $result = Database::pQuery($sql, $args, true);
+        if ($result) {
             $id = Database::getInsertID();
             $this->id = $id;
             $this->saveLanguages();
@@ -147,8 +147,8 @@ class Group {
         $args = array(
             $this->id
         );
-        $query = Database::pQuery($sql, $args, true);
-        if ($query) {
+        $result = Database::pQuery($sql, $args, true);
+        if ($result) {
             $this->id = null;
         }
     }

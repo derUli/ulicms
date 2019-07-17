@@ -28,9 +28,9 @@ class Banner extends Model {
 
     public function loadByID($id) {
         $id = intval($id);
-        $query = Database::query("SELECT * FROM `" . tbname("banner") . "` where id = $id");
-        if (Database::getNumRows($query) > 0) {
-            $result = Database::fetchObject($query);
+        $result = Database::query("SELECT * FROM `" . tbname("banner") . "` where id = $id");
+        if (Database::getNumRows($result) > 0) {
+            $result = Database::fetchObject($result);
             $this->fillVars($result);
         } else {
             throw new Exception("No banner with id $id");
@@ -39,10 +39,10 @@ class Banner extends Model {
 
     public function loadRandom() {
         $id = intval($id);
-        $query = Database::query("SELECT * FROM `" . tbname("banner") . "` order by rand() LIMIT 1");
-        if (Database::getNumRows($query) > 0) {
-            $result = Database::fetchObject($query);
-            $this->fillVars($result);
+        $result = Database::query("SELECT * FROM `" . tbname("banner") . "` order by rand() LIMIT 1");
+        if (Database::getNumRows($result) > 0) {
+            $dataset = Database::fetchObject($result);
+            $this->fillVars($dataset);
         }
     }
 

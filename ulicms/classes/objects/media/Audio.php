@@ -36,13 +36,13 @@ class Audio extends Model {
     }
 
     public function loadById($id) {
-        $query = Database::pQuery("select * from `{prefix}audio` where id = ?", array(
+        $result = Database::pQuery("select * from `{prefix}audio` where id = ?", array(
                     intval($id)
                         ), true);
-        if (!Database::any($query)) {
-            $query = null;
+        if (!Database::any($result)) {
+            $result = null;
         }
-        $this->fillVars($query);
+        $this->fillVars($result);
     }
 
     protected function fillVars($result = null) {

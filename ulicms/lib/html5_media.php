@@ -12,9 +12,9 @@ function replaceAudioTags(string $txt): string {
     $contains = strpos($txt, "[audio id=") !== FALSE;
 
     if ($contains) {
-        $query = db_query("select id, ogg_file, mp3_file from " . tbname("audio") . " order by id");
+        $result = db_query("select id, ogg_file, mp3_file from " . tbname("audio") . " order by id");
 
-        while ($row = db_fetch_object($query)) {
+        while ($row = db_fetch_object($result)) {
             $code1 = "[audio id=\"" . $row->id . "\"]";
             $code2 = "[audio id=&quot;" . $row->id . "$quot;]";
             $code3 = "[audio id=" . $row->id . "]";
@@ -56,9 +56,9 @@ function replaceVideoTags(string $txt): string {
     $contains = strpos($txt, "[video id=") !== FALSE;
 
     if ($contains) {
-        $query = db_query("select id, ogg_file, webm_file, mp4_file, width, height from " . tbname("videos") . " order by id");
+        $result = db_query("select id, ogg_file, webm_file, mp4_file, width, height from " . tbname("videos") . " order by id");
 
-        while ($row = db_fetch_object($query)) {
+        while ($row = db_fetch_object($result)) {
             $code1 = "[video id=\"" . $row->id . "\"]";
             $code2 = "[video id=$quot;" . $row->id . "$quot;]";
             $code3 = "[video id=" . $row->id . "]";

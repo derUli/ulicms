@@ -4,9 +4,9 @@ class Forms {
 
     public static function getFormByID($id) {
         $retval = null;
-        $query = db_query("select * from `" . tbname("forms") . "` WHERE id = " . intval($id));
-        if (db_num_rows($query) > 0) {
-            $retval = db_fetch_assoc($query);
+        $result = db_query("select * from `" . tbname("forms") . "` WHERE id = " . intval($id));
+        if (db_num_rows($result) > 0) {
+            $retval = db_fetch_assoc($result);
         }
 
         return $retval;
@@ -57,9 +57,9 @@ class Forms {
 
     public static function getAllForms() {
         $retval = [];
-        $query = db_query("select * from `" . tbname("forms") . "` ORDER BY id");
-        if (db_num_rows($query) > 0) {
-            while ($row = db_fetch_assoc($query)) {
+        $result = db_query("select * from `" . tbname("forms") . "` ORDER BY id");
+        if (db_num_rows($result) > 0) {
+            while ($row = db_fetch_assoc($result)) {
                 $retval[] = $row;
             }
         }

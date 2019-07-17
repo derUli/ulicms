@@ -3,16 +3,16 @@
 class AudioController extends Controller {
 
     public function deletePost() {
-        $query = db_query("select ogg_file, mp3_file from " . tbname("audio") . " where id = " . intval($_REQUEST ["delete"]));
-        if (db_num_rows($query) > 0) {
-            $result = db_fetch_object($query);
-            $filepath = ULICMS_DATA_STORAGE_ROOT . "/content/audio/" . basename($result->ogg_file);
-            if (!empty($result->ogg_file) and file_exists($filepath)) {
+        $result = db_query("select ogg_file, mp3_file from " . tbname("audio") . " where id = " . intval($_REQUEST ["delete"]));
+        if (db_num_rows($result) > 0) {
+            $dataset = db_fetch_object($result);
+            $filepath = ULICMS_DATA_STORAGE_ROOT . "/content/audio/" . basename($dataset->ogg_file);
+            if (!empty($dataset->ogg_file) and file_exists($filepath)) {
                 @unlink($filepath);
             }
 
-            $filepath = ULICMS_DATA_STORAGE_ROOT . "/content/audio/" . basename($result->mp3_file);
-            if (!empty($result->mp3_file) and file_exists($filepath)) {
+            $filepath = ULICMS_DATA_STORAGE_ROOT . "/content/audio/" . basename($dataset->mp3_file);
+            if (!empty($dataset->mp3_file) and file_exists($filepath)) {
                 @unlink($filepath);
             }
 

@@ -7,8 +7,8 @@ class ModuleManager {
     public function getAllModules(): array {
         $modules = [];
         $sql = "select name from {prefix}modules";
-        $query = Database::query($sql, true);
-        while ($row = Database::fetchObject($query)) {
+        $result = Database::query($sql, true);
+        while ($row = Database::fetchObject($result)) {
             $modules [] = new Module($row->name);
         }
         return $modules;
@@ -17,8 +17,8 @@ class ModuleManager {
     public function getEnabledModuleNames(): array {
         $modules = [];
         $sql = "select name from {prefix}modules where enabled = 1";
-        $query = Database::query($sql, true);
-        while ($row = Database::fetchObject($query)) {
+        $result = Database::query($sql, true);
+        while ($row = Database::fetchObject($result)) {
             $modules [] = $row->name;
         }
         return $modules;
@@ -27,8 +27,8 @@ class ModuleManager {
     public function getDisabledModuleNames(): array {
         $modules = [];
         $sql = "select name from {prefix}modules where enabled = 0";
-        $query = Database::query($sql, true);
-        while ($row = Database::fetchObject($query)) {
+        $result = Database::query($sql, true);
+        while ($row = Database::fetchObject($result)) {
             $modules [] = $row->name;
         }
         return $modules;
@@ -37,8 +37,8 @@ class ModuleManager {
     public function getAllModuleNames(): array {
         $modules = [];
         $sql = "select name from {prefix}modules";
-        $query = Database::query($sql, true);
-        while ($row = Database::fetchObject($query)) {
+        $result = Database::query($sql, true);
+        while ($row = Database::fetchObject($result)) {
             $modules [] = $row->name;
         }
         return $modules;

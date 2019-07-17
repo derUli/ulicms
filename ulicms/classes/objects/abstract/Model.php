@@ -93,14 +93,14 @@ class Model {
     }
 
     public static function getAllDatasets($tableName, $modelClass, $orderBy = "id", $where = "") {
-        $result = [];
-        $query = Database::selectAll($tableName, array(
+        $datasets = [];
+        $result = Database::selectAll($tableName, array(
                     "id"
                         ), $where, [], true, $orderBy);
-        while ($row = Database::fetchObject($query)) {
-            $result[] = new $modelClass($row->id);
+        while ($row = Database::fetchObject($result)) {
+            $datasets[] = new $modelClass($row->id);
         }
-        return $result;
+        return $datasets;
     }
 
     public function isPersistent() {

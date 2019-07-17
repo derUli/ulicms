@@ -24,9 +24,9 @@ class PackageManager {
     }
 
     public function getInstalledPatchNames() {
-        $query = db_query("SELECT name from " . tbname("installed_patches"));
+        $result = db_query("SELECT name from " . tbname("installed_patches"));
         $retval = [];
-        while ($row = db_fetch_object($query)) {
+        while ($row = db_fetch_object($result)) {
             $retval[] = $row->name;
         }
         return $retval;
@@ -95,9 +95,9 @@ class PackageManager {
     }
 
     public function getInstalledPatches() {
-        $query = db_query("SELECT * from " . tbname("installed_patches"));
+        $result = db_query("SELECT * from " . tbname("installed_patches"));
         $retval = [];
-        while ($row = db_fetch_object($query)) {
+        while ($row = db_fetch_object($result)) {
             $retval[$row->name] = $row;
         }
         return $retval;

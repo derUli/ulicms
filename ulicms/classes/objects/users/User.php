@@ -36,8 +36,8 @@ class User extends Model {
         $args = array(
             intval($id)
         );
-        $query = Database::pQuery($sql, $args, true);
-        $this->fillVars($query);
+        $result = Database::pQuery($sql, $args, true);
+        $this->fillVars($result);
     }
 
     public static function fromSessionData() {
@@ -92,8 +92,8 @@ class User extends Model {
         $args = array(
             strval($name)
         );
-        $query = Database::pQuery($sql, $args, true);
-        $this->fillVars($query);
+        $result = Database::pQuery($sql, $args, true);
+        $this->fillVars($result);
     }
 
     public function loadByEmail($email) {
@@ -101,8 +101,8 @@ class User extends Model {
         $args = array(
             strval($email)
         );
-        $query = Database::pQuery($sql, $args, true);
-        $this->fillVars($query);
+        $result = Database::pQuery($sql, $args, true);
+        $this->fillVars($result);
     }
 
     public function save() {
@@ -293,20 +293,20 @@ class User extends Model {
     }
 
     public function getLastAction() {
-        $result = 0;
+        $lastAction = 0;
         if (!is_null($this->id)) {
 
             $sql = "select last_action from {prefix}users where id = ?";
             $args = array(
                 $this->id
             );
-            $query = Database::pQuery($sql, $args, true);
-            if (Database::any($query)) {
-                $data = Database::fetchObject($query);
-                $result = $data->last_action;
+            $result = Database::pQuery($sql, $args, true);
+            if (Database::any($result)) {
+                $data = Database::fetchObject($result);
+                $lastAction = $data->last_action;
             }
         }
-        return $result;
+        return $lastAction;
     }
 
     public function setLastAction($time) {
@@ -404,20 +404,20 @@ class User extends Model {
     }
 
     public function getFailedLogins() {
-        $result = 0;
+        $failedLogins = 0;
         if (!is_null($this->id)) {
 
             $sql = "select failed_logins from {prefix}users where id = ?";
             $args = array(
                 $this->id
             );
-            $query = Database::pQuery($sql, $args, true);
-            if (Database::any($query)) {
-                $data = Database::fetchObject($query);
-                $result = $data->failed_logins;
+            $result = Database::pQuery($sql, $args, true);
+            if (Database::any($result)) {
+                $data = Database::fetchObject($result);
+                $failedLogins = $data->failed_logins;
             }
         }
-        return $result;
+        return $failedLogins;
     }
 
     public function increaseFailedLogins() {
@@ -519,8 +519,8 @@ class User extends Model {
         $args = array(
             intval($user_id)
         );
-        $query = Database::pQuery($sql, $args, true);
-        while ($row = Database::fetchObject($query)) {
+        $result = Database::pQuery($sql, $args, true);
+        while ($row = Database::fetchObject($result)) {
             $groups[] = new Group($row->group_id);
         }
         $this->setSecondaryGroups($groups);

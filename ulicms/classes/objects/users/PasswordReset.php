@@ -67,9 +67,9 @@ class PasswordReset {
         $args = array(
             strval($token)
         );
-        $query = Database::pQuery($sql, $args, true);
-        if (Database::any($query)) {
-            return Database::fetchObject($query);
+        $result = Database::pQuery($sql, $args, true);
+        if (Database::any($result)) {
+            return Database::fetchObject($result);
         }
         return null;
     }

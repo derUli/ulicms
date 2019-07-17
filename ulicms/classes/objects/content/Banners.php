@@ -9,54 +9,54 @@ use function tbname;
 class Banners {
 
     public static function getAll($order = "id") {
-        $result = [];
+        $datasets = [];
         $sql = "SELECT id FROM " . tbname("banner") . " ORDER BY $order";
-        $query = DB::query($sql);
-        while ($row = DB::fetchObject($query)) {
+        $result = DB::query($sql);
+        while ($row = DB::fetchObject($result)) {
             $banner = new Banner();
             $banner->loadByID($row->id);
-            $result[] = $banner;
+            $datasets[] = $banner;
         }
-        return $result;
+        return $datasets;
     }
 
     public static function getByLanguage($language, $order = "language") {
+        $datasets = [];
         $language = DB::escapeValue($language);
-        $result = [];
         $sql = "SELECT id FROM " . tbname("banner") . " WHERE language = '$language' ORDER BY $order";
-        $query = DB::query($sql);
-        while ($row = DB::fetchObject($query)) {
+        $result = DB::query($sql);
+        while ($row = DB::fetchObject($result)) {
             $banner = new Banner();
             $banner->loadByID($row->id);
-            $result[] = $banner;
+            $datasets[] = $banner;
         }
-        return $result;
+        return $datasets;
     }
 
     public static function getByCategory($category_id, $order = "id") {
         $category_id = intval($category_id);
-        $result = [];
+        $datasets = [];
         $sql = "SELECT id FROM " . tbname("banner") . " WHERE `category_id` = $category_id ORDER BY $order";
-        $query = DB::query($sql);
-        while ($row = DB::fetchObject($query)) {
+        $result = DB::query($sql);
+        while ($row = DB::fetchObject($result)) {
             $banner = new Banner();
             $banner->loadByID($row->id);
-            $result[] = $banner;
+            $datasets[] = $banner;
         }
-        return $result;
+        return $datasets;
     }
 
     public static function getByType($type = "gif", $order = "language") {
         $type = DB::escapeValue($type);
-        $result = [];
+        $datasets = [];
         $sql = "SELECT id FROM " . tbname("banner") . " WHERE `type` = '$type' ORDER BY $order";
-        $query = DB::query($sql);
-        while ($row = DB::fetchObject($query)) {
+        $result = DB::query($sql);
+        while ($row = DB::fetchObject($result)) {
             $banner = new Banner();
             $banner->loadByID($row->id);
-            $result[] = $banner;
+            $datasets[] = $banner;
         }
-        return $result;
+        return $datasets;
     }
 
     public static function getRandom() {

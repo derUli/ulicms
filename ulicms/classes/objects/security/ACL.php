@@ -59,7 +59,7 @@ class ACL {
             $permissionData = json_encode($permissions);
         }
 
-        $sql = "UPDATE `" . tbname("groups") . "` SET name='" . db_escape($name) . "', permissions='" . db_escape($permissions) . "' WHERE id=" . $id;
+        $sql = "UPDATE `" . tbname("groups") . "` SET name='" . db_escape($name) . "', permissions='" . db_escape($permissionData) . "' WHERE id=" . $id;
 
         // Führe Query aus
         db_query($sql);
@@ -92,22 +92,22 @@ class ACL {
         }
 
         $sqlString = "SELECT * FROM `" . tbname("groups") . "` WHERE id=" . $group_id;
-        $query = db_query($sqlString);
+        $result = db_query($sqlString);
 
-        if (db_num_rows($query) == 0) {
+        if (db_num_rows($result) == 0) {
             return null;
         }
 
-        $result = db_fetch_assoc($query);
+        $dataset = db_fetch_assoc($result);
 
-        return $result;
+        return $dataset;
     }
 
     public function getAllGroups(string $order = 'id DESC'): array {
         $list = [];
         $sql = "SELECT * FROM `" . tbname("groups") . "` ORDER by " . $order;
-        $query = db_query($sql);
-        while ($assoc = db_fetch_assoc($query)) {
+        $result = db_query($sql);
+        while ($assoc = db_fetch_assoc($result)) {
             $list[$assoc["id"]] = $assoc["name"];
         }
         return $list;

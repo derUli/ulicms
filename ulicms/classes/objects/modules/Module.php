@@ -19,8 +19,8 @@ class Module {
         $args = array(
             $name
         );
-        $query = Database::pQuery($sql, $args, true);
-        $dataset = Database::fetchSingle($query);
+        $result = Database::pQuery($sql, $args, true);
+        $dataset = Database::fetchSingle($result);
 
         if ($dataset) {
             $this->name = $dataset->name;
@@ -36,9 +36,9 @@ class Module {
         $args = array(
             $this->name
         );
-        $query = Database::pQuery($sql, $args, true);
+        $result = Database::pQuery($sql, $args, true);
 
-        if (Database::any($query)) {
+        if (Database::any($result)) {
             $this->update();
         } else {
             $this->insert();
@@ -170,8 +170,8 @@ class Module {
         $args = array(
             $this->name
         );
-        $query = Database::pQuery($sql, $args, true);
-        if (Database::any($query)) {
+        $result = Database::pQuery($sql, $args, true);
+        if (Database::any($result)) {
             $sql = "delete from {prefix}modules where name = ?";
             $args = array(
                 $this->name

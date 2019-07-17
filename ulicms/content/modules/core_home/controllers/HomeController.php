@@ -6,9 +6,9 @@ class HomeController extends Controller {
 
     public function getModel() {
         $model = new HomeViewModel();
-        $query = Database::query("SELECT count(id) as amount FROM `{prefix}content`", true);
-        $result = Database::fetchObject($query);
-        $model->contentCount = $result->amount;
+        $result = Database::query("SELECT count(id) as amount FROM `{prefix}content`", true);
+        $dataset = Database::fetchObject($result);
+        $model->contentCount = $dataset->amount;
 
         $topPages = Database::query("SELECT language, slug, title, `views` FROM " . tbname("content") . " WHERE deleted_at is null and type <> 'node' ORDER BY `views` DESC LIMIT 5", false);
         while ($row = Database::fetchObject($topPages)) {
@@ -28,8 +28,8 @@ class HomeController extends Controller {
         $pkg = new PackageManager();
         if (in_array("guestbook", getAllModules())) {
             $guestbookEntries = Database::query("SELECT count(id) as amount FROM " . tbname("guestbook_entries"), false);
-            $result = Database::fetchObject($guestbookEntries);
-            $model->guestbookEntryCount = $result->amount;
+            $dataset = Database::fetchObject($guestbookEntries);
+            $model->guestbookEntryCount = $dataset->amount;
         }
         return $model;
     }

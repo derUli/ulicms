@@ -42,13 +42,13 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testAnyReturnsTrue() {
-        $query = Database::query("select * from {prefix}settings where value <> ''", true);
-        $this->assertTrue(Database::any($query));
+        $result = Database::query("select * from {prefix}settings where value <> ''", true);
+        $this->assertTrue(Database::any($result));
     }
 
     public function testAnyReturnsFalse() {
-        $query = Database::query("select * from {prefix}settings where value <> value", true);
-        $this->assertFalse(Database::any($query));
+        $result = Database::query("select * from {prefix}settings where value <> value", true);
+        $this->assertFalse(Database::any($result));
     }
 
     public function testGetColumnNames() {
@@ -61,19 +61,19 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetNumRowsAny() {
-        $query = Database::query("select * from {prefix}settings where name in ('homepage_title', 'frontpage', 'installed_at')", true);
-        $this->assertEquals(3, Database::getNumRows($query));
+        $result = Database::query("select * from {prefix}settings where name in ('homepage_title', 'frontpage', 'installed_at')", true);
+        $this->assertEquals(3, Database::getNumRows($result));
     }
 
     public function testGetNumRowsZero() {
-        $query = Database::query("select * from {prefix}settings where name in ('this_is_not_a_setting')", true);
-        $this->assertEquals(0, Database::getNumRows($query));
+        $result = Database::query("select * from {prefix}settings where name in ('this_is_not_a_setting')", true);
+        $this->assertEquals(0, Database::getNumRows($result));
     }
 
     public function testGetLastError() {
         // this sql fails always
-        $query = Database::query("select devil from hell", true);
-        $this->assertFalse($query);
+        $result = Database::query("select devil from hell", true);
+        $this->assertFalse($result);
 
         $error = Database::getLastError();
 
@@ -83,8 +83,8 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
 
     public function testError() {
         // this sql fails always
-        $query = Database::query("select devil from hell", true);
-        $this->assertFalse($query);
+        $result = Database::query("select devil from hell", true);
+        $this->assertFalse($result);
 
         $error = Database::error();
 
@@ -94,8 +94,8 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetError() {
         // this sql fails always
-        $query = Database::query("select devil from hell", true);
-        $this->assertFalse($query);
+        $result = Database::query("select devil from hell", true);
+        $this->assertFalse($result);
 
         $error = Database::getError();
 
@@ -187,11 +187,11 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         $lastInsertId = Database::getLastInsertID();
         $this->assertNotNull($lastInsertId);
 
-        $query = Database::selectAll("settings", array(
+        $result = Database::selectAll("settings", array(
                     "id"
                         ), "name = 'foo2'");
-        $result = Database::fetchObject($query);
-        $this->assertEquals($result->id, $lastInsertId);
+        $dataset = Database::fetchObject($result);
+        $this->assertEquals($dataset->id, $lastInsertId);
 
         Settings::delete("foo2");
     }
@@ -204,11 +204,11 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         $lastInsertId = Database::getInsertID();
         $this->assertNotNull($lastInsertId);
 
-        $query = Database::selectAll("settings", array(
+        $result = Database::selectAll("settings", array(
                     "id"
                         ), "name = 'foo2'");
-        $result = Database::fetchObject($query);
-        $this->assertEquals($result->id, $lastInsertId);
+        $dataset = Database::fetchObject($result);
+        $this->assertEquals($dataset->id, $lastInsertId);
 
         Settings::delete("foo2");
     }

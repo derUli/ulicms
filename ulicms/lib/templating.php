@@ -102,9 +102,9 @@ function get_og_data($slug = "") {
     if (empty($slug)) {
         $slug = get_frontpage();
     }
-    $query = db_query("SELECT og_title, og_type, og_image, og_description FROM " . tbname("content") . " WHERE slug='" . db_escape($slug) . "' AND language='" . db_escape($_SESSION["language"]) . "'");
-    if (db_num_rows($query) > 0) {
-        return db_fetch_assoc($query);
+    $result = db_query("SELECT og_title, og_type, og_image, og_description FROM " . tbname("content") . " WHERE slug='" . db_escape($slug) . "' AND language='" . db_escape($_SESSION["language"]) . "'");
+    if (db_num_rows($result) > 0) {
+        return db_fetch_assoc($result);
     }
     return null;
 }
@@ -135,16 +135,16 @@ function get_ID(): ?int {
 
     $page = get_requested_pagename();
 
-    $result = null;
+    $dataset = null;
 
     $sql = "SELECT `id` FROM " . tbname("content") . " WHERE slug='" . db_escape($page) . "'  AND language='" . db_escape($_SESSION["language"]) . "'";
-    $query = db_query($sql);
-    if (db_num_rows($query) > 0) {
-        $result = db_fetch_object($query);
-        $result = intval($result->id);
+    $result = db_query($sql);
+    if (db_num_rows($result) > 0) {
+        $dataset = db_fetch_object($result);
+        $dataset = intval($dataset->id);
     }
-    Vars::set("id", $result);
-    return $result;
+    Vars::set("id", $dataset);
+    return $dataset;
 }
 
 function is_active(): bool {
@@ -154,15 +154,15 @@ function is_active(): bool {
     if (!$page) {
         $page = get_requested_pagename();
     }
-    $result = boolval(1);
+    $dataset = boolval(1);
     $sql = "SELECT `active` FROM " . tbname("content") . " WHERE slug='" . db_escape($page) . "'  AND language='" . db_escape($_SESSION["language"]) . "'";
-    $query = db_query($sql);
-    if (db_num_rows($query) > 0) {
-        $result = db_fetch_object($query);
-        $result = boolval($result->active);
+    $result = db_query($sql);
+    if (db_num_rows($result) > 0) {
+        $dataset = db_fetch_object($result);
+        $dataset = boolval($dataset->active);
     }
-    Vars::set("active", $result);
-    return $result;
+    Vars::set("active", $dataset);
+    return $dataset;
 }
 
 function get_type(?string $slug = null, ?string $language = null): string {
@@ -194,15 +194,15 @@ function get_article_meta(?string $page = null): ?string {
     if (!$page) {
         $page = get_requested_pagename();
     }
-    $result = null;
+    $dataset = null;
     $sql = "SELECT `article_author_name`, `article_author_email`, CASE WHEN `article_date` is not null then UNIX_TIMESTAMP(article_date) else null end as article_date, `article_image`, `excerpt` FROM " . tbname("content") . " WHERE slug='" . db_escape($page) . "'  AND language='" . Database::escapeValue($_SESSION["language"]) . "'";
-    $query = db_query($sql);
-    if (db_num_rows($query) > 0) {
-        $result = Database::fetchObject($query);
-        $result->excerpt = replaceShortcodesWithModules($result->excerpt);
+    $result = db_query($sql);
+    if (db_num_rows($result) > 0) {
+        $dataset = Database::fetchObject($result);
+        $dataset->excerpt = replaceShortcodesWithModules($dataset->excerpt);
     }
-    $result = apply_filter($result, "get_article_meta");
-    return $result;
+    $dataset = apply_filter($dataset, "get_article_meta");
+    return $dataset;
 }
 
 function get_cache_control(): string {
@@ -211,49 +211,49 @@ function get_cache_control(): string {
     }
     $page = get_requested_pagename();
 
-    $result = "";
+    $dataset = "";
     $sql = "SELECT `cache_control` FROM " . tbname("content") . " WHERE slug='" . db_escape($page) . "'  AND language='" . db_escape($_SESSION["language"]) . "'";
-    $query = db_query($sql);
-    if ($query and db_num_rows($query) > 0) {
-        $result = db_fetch_object($query);
-        $result = $result->cache_control;
+    $result = db_query($sql);
+    if ($result and db_num_rows($result) > 0) {
+        $dataset = db_fetch_object($result);
+        $dataset = $dataset->cache_control;
     }
-    if (empty($result)) {
-        $result = "auto";
+    if (empty($dataset)) {
+        $dataset = "auto";
     }
-    $result = apply_filter($result, "get_cache_control");
-    Vars::set("cache_control", $result);
-    return $result;
+    $dataset = apply_filter($dataset, "get_cache_control");
+    Vars::set("cache_control", $dataset);
+    return $dataset;
 }
 
 function get_text_position(): string {
     $page = get_requested_pagename();
 
-    $result = "";
+    $dataset = null;
     $sql = "SELECT `text_position` FROM " . tbname("content") . " WHERE slug='" . db_escape($page) . "'  AND language='" . db_escape($_SESSION["language"]) . "'";
-    $query = db_query($sql);
-    if (db_num_rows($query) > 0) {
-        $result = db_fetch_object($query);
-        $result = $result->text_position;
+    $result = db_query($sql);
+    if (db_num_rows($result) > 0) {
+        $dataset = db_fetch_object($result);
+        $dataset = $dataset->text_position;
     }
-    if (empty($result)) {
-        $result = "before";
+    if (empty($dataset)) {
+        $dataset = "before";
     }
-    return $result;
+    return $dataset;
 }
 
 function get_category_id(string $page = null): ?int {
     if (!$page) {
         $page = get_requested_pagename();
     }
-    $result = null;
+    $dataset = null;
     $sql = "SELECT `category_id` FROM " . tbname("content") . " WHERE slug='" . db_escape($page) . "'  AND language='" . db_escape(getCurrentLanguage()) . "'";
-    $query = db_query($sql);
-    if ($query and db_num_rows($query) > 0) {
-        $result = db_fetch_object($query);
-        $result = intval($result->category_id);
+    $result = db_query($sql);
+    if ($result and db_num_rows($result) > 0) {
+        $dataset = db_fetch_object($result);
+        $dataset = intval($dataset->category_id);
     }
-    return $result;
+    return $dataset;
 }
 
 function category_id(?string $page = null): int {
@@ -264,17 +264,17 @@ function get_parent(string $page = null): ?int {
     if (!$page) {
         $page = get_requested_pagename();
     }
-    $result = "";
+    $dataset = null;
     $sql = "SELECT `parent_id` FROM " . tbname("content") . " WHERE slug='" . db_escape($page) . "'  AND language='" . db_escape($_SESSION["language"]) . "'";
-    $query = db_query($sql);
-    if (db_num_rows($query) > 0) {
-        $result = db_fetch_object($query);
-        $result = $result->parent_id;
+    $result = db_query($sql);
+    if (db_num_rows($result) > 0) {
+        $dataset = db_fetch_object($result);
+        $dataset = $dataset->parent_id;
     }
-    if (empty($result)) {
-        $result = null;
+    if (empty($dataset)) {
+        $dataset = null;
     }
-    return $result;
+    return $dataset;
 }
 
 function get_custom_data(?string $page = null): array {
@@ -283,10 +283,10 @@ function get_custom_data(?string $page = null): array {
     }
 
     $sql = "SELECT `custom_data` FROM " . tbname("content") . " WHERE slug='" . db_escape($page) . "'  AND language='" . db_escape($_SESSION["language"]) . "'";
-    $query = db_query($sql);
-    if (db_num_rows($query) > 0) {
-        $result = db_fetch_object($query);
-        return json_decode($result->custom_data, true);
+    $result = db_query($sql);
+    if (db_num_rows($result) > 0) {
+        $dataset = db_fetch_object($result);
+        return json_decode($dataset->custom_data, true);
     }
     return null;
 }
@@ -300,10 +300,10 @@ function get_access(?string $page = null): string {
         $page = get_requested_pagename();
     }
     $sql = "SELECT `access` FROM " . tbname("content") . " WHERE slug='" . db_escape($page) . "'  AND language='" . db_escape($_SESSION["language"]) . "'";
-    $query = db_query($sql);
-    if (db_num_rows($query) > 0) {
-        $result = db_fetch_object($query);
-        $access = explode(",", $result->access);
+    $result = db_query($sql);
+    if (db_num_rows($result) > 0) {
+        $dataset = db_fetch_object($result);
+        $access = explode(",", $dataset->access);
         return $access;
     }
     return null;
@@ -314,11 +314,11 @@ function get_redirection(?string $page = null): ?string {
         $page = get_requested_pagename();
     }
     $sql = "SELECT `redirection` FROM " . tbname("content") . " WHERE slug='" . db_escape($page) . "'  AND language='" . db_escape($_SESSION["language"]) . "' and type='link'";
-    $query = db_query($sql);
-    if (db_num_rows($query) > 0) {
-        $result = db_fetch_object($query);
-        if (!empty($result->redirection) and ! is_null($result->redirection)) {
-            return $result->redirection;
+    $result = db_query($sql);
+    if (db_num_rows($result) > 0) {
+        $dataset = db_fetch_object($result);
+        if (!empty($dataset->redirection) and ! is_null($dataset->redirection)) {
+            return $dataset->redirection;
         }
         return null;
     }
@@ -341,9 +341,9 @@ function get_theme(?string $page = null): ?string {
 
     if (is_200()) {
         $sql = "SELECT `theme` FROM " . tbname("content") . " WHERE slug='" . db_escape($page) . "'  AND language='" . db_escape($_SESSION["language"]) . "'";
-        $query = db_query($sql);
-        if ($query and db_num_rows($query) > 0) {
-            $data = db_fetch_object($query);
+        $result = db_query($sql);
+        if ($result and db_num_rows($result) > 0) {
+            $data = db_fetch_object($result);
             if (isset($data->theme) and ! empty($data->theme) and ! is_null($data->theme)) {
                 $theme = $data->theme;
             }
@@ -482,10 +482,10 @@ function homepage_title(): void {
 
 function get_meta_keywords(): string {
     $ipage = db_escape($_GET["seite"]);
-    $query = db_query("SELECT meta_keywords FROM " . tbname("content") . " WHERE slug='$ipage' AND language='" . db_escape($_SESSION["language"]) . "'");
+    $result = db_query("SELECT meta_keywords FROM " . tbname("content") . " WHERE slug='$ipage' AND language='" . db_escape($_SESSION["language"]) . "'");
 
-    if (db_num_rows($query) > 0) {
-        while ($row = db_fetch_object($query)) {
+    if (db_num_rows($result) > 0) {
+        while ($row = db_fetch_object($result)) {
             if (StringHelper::isNotNullOrEmpty($row->meta_keywords)) {
                 return $row->meta_keywords;
             }
@@ -508,12 +508,12 @@ function meta_keywords(): void {
 
 function get_meta_description(?string $ipage = null): string {
     $ipage = db_escape($_GET["seite"]);
-    $query = db_query("SELECT meta_description FROM " . tbname("content") . " WHERE slug='$ipage' AND language='" . db_escape($_SESSION["language"]) . "'");
+    $result = db_query("SELECT meta_description FROM " . tbname("content") . " WHERE slug='$ipage' AND language='" . db_escape($_SESSION["language"]) . "'");
     if ($ipage == "") {
-        $query = db_query("SELECT meta_description FROM " . tbname("content") . " ORDER BY id LIMIT 1", $connection);
+        $result = db_query("SELECT meta_description FROM " . tbname("content") . " ORDER BY id LIMIT 1", $connection);
     }
-    if (db_num_rows($query) > 0) {
-        while ($row = db_fetch_object($query)) {
+    if (db_num_rows($result) > 0) {
+        while ($row = db_fetch_object($result)) {
             if (!empty($row->meta_description)) {
                 return $row->meta_description;
             }
@@ -562,12 +562,12 @@ function get_title(?string $ipage = null, bool$headline = false): string {
     }
 
     $ipage = db_escape($_GET["seite"]);
-    $query = db_query("SELECT alternate_title, title FROM " . tbname("content") . " WHERE slug='$ipage' AND language='" . db_escape($_SESSION["language"]) . "'", $connection);
+    $result = db_query("SELECT alternate_title, title FROM " . tbname("content") . " WHERE slug='$ipage' AND language='" . db_escape($_SESSION["language"]) . "'", $connection);
     if ($ipage == "") {
-        $query = db_query("SELECT title, alternate_title FROM " . tbname("content") . " ORDER BY id LIMIT 1");
+        $result = db_query("SELECT title, alternate_title FROM " . tbname("content") . " ORDER BY id LIMIT 1");
     }
-    if (db_num_rows($query) > 0) {
-        while ($row = db_fetch_object($query)) {
+    if (db_num_rows($result) > 0) {
+        while ($row = db_fetch_object($result)) {
             if ($headline and isset($row->alternate_title) and ! empty($row->alternate_title)) {
                 $title = $row->alternate_title;
             } else {
@@ -744,9 +744,9 @@ function get_menu(string $name = "top", ?int $parent_id = null, bool $recursive 
         $sql .= " = " . intval($parent_id) . " ";
     }
     $sql .= " ORDER by " . $order;
-    $query = db_query($sql);
+    $result = db_query($sql);
 
-    if (db_num_rows($query) == 0) {
+    if (db_num_rows($result) == 0) {
         return $html;
     }
 
@@ -763,7 +763,7 @@ function get_menu(string $name = "top", ?int $parent_id = null, bool $recursive 
         $html .= "<ul class='" . $classes . "'>\n";
     }
 
-    while ($row = db_fetch_object($query)) {
+    while ($row = db_fetch_object($result)) {
         if (checkAccess($row->access)) {
             $containsCurrentItem = parent_item_contains_current_page(intval($row->id));
 
@@ -871,11 +871,11 @@ function get_page(?string $slug = ''): ?array {
     if (Vars::get("page_" . $slug)) {
         return Vars::get("page_" . $slug);
     }
-    $query = db_query("SELECT * FROM " . tbname("content") . " WHERE slug='" . db_escape($slug) . "' AND language='" . db_escape($_SESSION["language"]) . "'");
-    if (db_num_rows($query) > 0) {
-        $result = db_fetch_assoc($query);
-        Vars::set("page_" . $slug, $result);
-        return $result;
+    $result = db_query("SELECT * FROM " . tbname("content") . " WHERE slug='" . db_escape($slug) . "' AND language='" . db_escape($_SESSION["language"]) . "'");
+    if (db_num_rows($result) > 0) {
+        $dataset = db_fetch_assoc($result);
+        Vars::set("page_" . $slug, $dataset);
+        return $dataset;
     } else {
         Vars::set("page_" . $slug, null);
         return null;

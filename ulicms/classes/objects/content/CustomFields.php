@@ -21,9 +21,9 @@ class CustomFields {
             $name
         );
         $sql = "Select id from {prefix}custom_fields where content_id = ? and name = ?";
-        $query = Database::pQuery($sql, $args, true);
-        if (Database::getNumRows($query) > 0) {
-            $result = Database::fetchObject($query);
+        $result = Database::pQuery($sql, $args, true);
+        if (Database::getNumRows($result) > 0) {
+            $result = Database::fetchObject($result);
             if (is_null($value)) {
                 $args = array(
                     intval($result->id)
@@ -61,9 +61,9 @@ class CustomFields {
             $content_id
         );
         $sql = "Select name, value from {prefix}custom_fields where content_id = ?";
-        $query = Database::pQuery($sql, $args, true);
+        $result = Database::pQuery($sql, $args, true);
 
-        while ($row = Database::fetchObject($query)) {
+        while ($row = Database::fetchObject($result)) {
             $name = $row->name;
 
             if ($removePrefix) {
@@ -90,10 +90,10 @@ class CustomFields {
             $name
         );
         $sql = "Select value from {prefix}custom_fields where content_id = ? and name = ?";
-        $query = Database::pQuery($sql, $args, true);
-        if (Database::getNumRows($query) > 0) {
-            $result = Database::fetchObject($query);
-            $value = $result->value;
+        $result = Database::pQuery($sql, $args, true);
+        if (Database::getNumRows($result) > 0) {
+            $dataset = Database::fetchObject($result);
+            $value = $dataset->value;
             // if string contains double null bytes it is an array
             // FIXME: Use new boolean "array" Attribute
             if (str_contains("\0\0", $value)) {

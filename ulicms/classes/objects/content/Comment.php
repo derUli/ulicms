@@ -29,11 +29,11 @@ class Comment extends Model {
     const TABLE_NAME = "comments";
 
     public function loadByID($id) {
-        $query = Database::selectAll("comments", [], "id=" . intval($id));
-        if ($query == null or ! Database::any($query)) {
+        $result = Database::selectAll("comments", [], "id=" . intval($id));
+        if ($result == null or ! Database::any($result)) {
             throw new FileNotFoundException("no comment with id " . intval($id));
         }
-        $this->fillVars($query);
+        $this->fillVars($result);
     }
 
     public function fillVars($result = null) {
@@ -251,23 +251,23 @@ VALUES      ( ?,
     }
 
     public static function getUnreadCount() {
-        $query = Database::pQuery("select count(id) as amount from {prefix}comments where `read` = ?",
+        $result = Database::pQuery("select count(id) as amount from {prefix}comments where `read` = ?",
                         [false], true);
-        $result = Database::fetchObject($query);
-        return $result->amount;
+        $dataset = Database::fetchObject($result);
+        return $dataset->amount;
     }
 
     public static function getReadCount() {
-        $query = Database::pQuery("select count(id) as amount from {prefix}comments where `read` = ?",
+        $result = Database::pQuery("select count(id) as amount from {prefix}comments where `read` = ?",
                         [true], true);
-        $result = Database::fetchObject($query);
-        return $result->amount;
+        $dataset = Database::fetchObject($result);
+        return $dataset->amount;
     }
 
     public static function getAllCount() {
-        $query = Database::pQuery("select count(id) as amount from {prefix}comments", [], true);
-        $result = Database::fetchObject($query);
-        return $result->amount;
+        $result = Database::pQuery("select count(id) as amount from {prefix}comments", [], true);
+        $dataset = Database::fetchObject($result);
+        return $dataset->amount;
     }
 
     public static function deleteIpsAfter48Hours($keepSpamIps = false) {
@@ -288,8 +288,8 @@ VALUES      ( ?,
             $sql .= " and status = ?";
             $args[] = strval($status);
         }
-        $query = Database::pQuery($sql, $args, true);
-        return Database::any($query);
+        $result = Database::pQuery($sql, $args, true);
+        return Database::any($result);
     }
 
     public function isRead() {

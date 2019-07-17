@@ -11,10 +11,10 @@ class ContentFactory {
 
     public static function getByID($id) {
         $id = intval($id);
-        $query = Database::query("SELECT `id`, `type` FROM `" . tbname("content") . "` where id = " . $id);
-        if (Database::getNumRows($query) > 0) {
-            $result = Database::fetchObject($query);
-            return self::getContentObjectByID($result);
+        $result = Database::query("SELECT `id`, `type` FROM `" . tbname("content") . "` where id = " . $id);
+        if (Database::getNumRows($result) > 0) {
+            $dataset = Database::fetchObject($result);
+            return self::getContentObjectByID($dataset);
         } else {
             throw new FileNotFoundException("No page with id $id");
         }
@@ -23,10 +23,10 @@ class ContentFactory {
     public static function getBySlugAndLanguage($name, $language) {
         $name = Database::escapeValue($name);
         $language = Database::escapeValue($language);
-        $query = Database::query("SELECT id, `type` FROM `" . tbname("content") . "` where `slug` = '$name' and `language` = '$language'");
-        if (Database::getNumRows($query) > 0) {
-            $result = Database::fetchObject($query);
-            return self::getContentObjectByID($result);
+        $result = Database::query("SELECT id, `type` FROM `" . tbname("content") . "` where `slug` = '$name' and `language` = '$language'");
+        if (Database::getNumRows($result) > 0) {
+            $dataset = Database::fetchObject($result);
+            return self::getContentObjectByID($dataset);
         } else {
             throw new FileNotFoundException("No page with this combination of $name and $language");
         }
@@ -45,38 +45,38 @@ class ContentFactory {
     }
 
     public static function getAll($order = "id") {
-        $result = [];
+        $datasets = [];
         $sql = "SELECT id, `type` FROM " . tbname("content") . " ORDER BY $order";
-        $query = Database::query($sql);
-        while ($row = Database::fetchObject($query)) {
-            $result[] = self::getContentObjectByID($row);
+        $result = Database::query($sql);
+        while ($row = Database::fetchObject($result)) {
+            $datasets[] = self::getContentObjectByID($row);
         }
-        return $result;
+        return $datasets;
     }
 
     public static function getAllRegular($order = "id") {
-        $result = [];
+        $datasets = [];
         $sql = "SELECT id, `type` FROM " . tbname("content") . " where type not in ('link', 'language_link', 'node') ORDER BY $order";
-        $query = Database::query($sql);
-        while ($row = Database::fetchObject($query)) {
-            $result[] = self::getContentObjectByID($row);
+        $result = Database::query($sql);
+        while ($row = Database::fetchObject($result)) {
+            $datasets[] = self::getContentObjectByID($row);
         }
-        return $result;
+        return $datasets;
     }
 
     public static function getAllByLanguage($language, $order = "id") {
         $language = Database::escapeValue($language);
-        $result = [];
+        $datasets = [];
         $sql = "SELECT id, `type` FROM " . tbname("content") . " where `language` = '$language' ORDER BY $order";
-        $query = Database::query($sql);
-        while ($row = Database::fetchObject($query)) {
-            $result[] = self::getContentObjectByID($row);
+        $result = Database::query($sql);
+        while ($row = Database::fetchObject($result)) {
+            $datasets[] = self::getContentObjectByID($row);
         }
-        return $result;
+        return $datasets;
     }
 
     public static function getAllByParent($parent_id, $order = "id") {
-        $result = [];
+        $contents = [];
 
         $sql = "SELECT id, type FROM {prefix}content ";
 
@@ -89,49 +89,49 @@ class ContentFactory {
 
         $sql .= " ORDER BY $order";
 
-        $query = Database::pQuery($sql, $args, true);
-        while ($row = Database::fetchObject($query)) {
-            $result[] = self::getContentObjectByID($row);
+        $result = Database::pQuery($sql, $args, true);
+        while ($row = Database::fetchObject($result)) {
+            $contents[] = self::getContentObjectByID($row);
         }
 
-        return $result;
+        return $contents;
     }
 
     public static function getAllByMenu($menu, $order = "id") {
         $menu = Database::escapeValue($menu);
-        $result = [];
+        $datasets = [];
         $sql = "SELECT id, `type` FROM " . tbname("content") . " where `menu` = '$menu' ORDER BY $order";
-        $query = Database::query($sql);
-        while ($row = Database::fetchObject($query)) {
-            $result[] = self::getContentObjectByID($row);
+        $result = Database::query($sql);
+        while ($row = Database::fetchObject($result)) {
+            $datasets[] = self::getContentObjectByID($row);
         }
-        return $result;
+        return $datasets;
     }
 
     public static function getAllByType($type, $order = "id") {
         $type = Database::escapeValue($type);
-        $result = [];
+        $datasets = [];
         $sql = "SELECT id, `type` FROM " . tbname("content") . " where `type` = '$type' ORDER BY $order";
-        $query = Database::query($sql);
-        while ($row = Database::fetchObject($query)) {
-            $result[] = self::getContentObjectByID($row);
+        $result = Database::query($sql);
+        while ($row = Database::fetchObject($result)) {
+            $datasets[] = self::getContentObjectByID($row);
         }
-        return $result;
+        return $datasets;
     }
 
     public static function getAllWithComments($order = "title") {
-        $result = [];
+        $datasets = [];
         $sql = "select type, a.id  from {prefix}content a inner join {prefix}comments c on c.content_id = a.id group by c.content_id order by a.{$order}";
-        $query = Database::query($sql, true) or die(Database::getError());
+        $result = Database::query($sql, true);
 
-        while ($row = Database::fetchObject($query)) {
-            $result[] = self::getContentObjectByID($row);
+        while ($row = Database::fetchObject($result)) {
+            $datasets[] = self::getContentObjectByID($row);
         }
-        return $result;
+        return $datasets;
     }
 
     public static function getForFilter($language = null, $category_id = null, $menu = null, $parent_id = null, $order_by = "title", $order_direction = "asc", $type = null, $limit = null) {
-        $result = [];
+        $datasets = [];
         $sql = "select id, `type` from " . tbname("content") . " where active = 1 and deleted_at is null and ";
         if ($language !== null and $language !== "") {
             $language = Database::escapeValue($language);
@@ -169,24 +169,24 @@ class ContentFactory {
             $sql .= " limit " . $limit;
         }
 
-        $query = Database::query($sql) or die(Database::error());
+        $result = Database::query($sql) or die(Database::error());
 
-        while ($row = Database::fetchObject($query)) {
-            $result[] = self::getContentObjectByID($row);
+        while ($row = Database::fetchObject($result)) {
+            $datasets[] = self::getContentObjectByID($row);
         }
-        return $result;
+        return $datasets;
     }
 
     public static function getAllByMenuAndLanguage($menu, $language, $order = "id") {
         $menu = Database::escapeValue($menu);
         $language = Database::escapeValue($language);
-        $result = [];
+        $datasets = [];
         $sql = "SELECT id, `type` FROM " . tbname("content") . " where `menu` = '$menu' and language = '$language' ORDER BY $order";
-        $query = Database::query($sql);
-        while ($row = Database::fetchObject($query)) {
-            $result[] = self::getContentObjectByID($row);
+        $result = Database::query($sql);
+        while ($row = Database::fetchObject($result)) {
+            $datasets[] = self::getContentObjectByID($row);
         }
-        return $result;
+        return $datasets;
     }
 
     public static function filterByEnabled($elements, $enabled = 1) {

@@ -701,11 +701,11 @@ class PageTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testHasChildrenReturnsTrue() {
-        $query = Database::pQuery("select parent_id from {prefix}content where "
+        $result = Database::pQuery("select parent_id from {prefix}content where "
                         . "parent_id is not null", [], true);
-        $result = Database::fetchObject($query);
+        $dataset = Database::fetchObject($result);
 
-        $page = ContentFactory::getByID($result->parent_id);
+        $page = ContentFactory::getByID($dataset->parent_id);
         $this->assertTrue($page->hasChildren());
     }
 
@@ -726,11 +726,11 @@ class PageTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetChildrenReturnsTrue() {
-        $query = Database::pQuery("select parent_id from {prefix}content where "
+        $result = Database::pQuery("select parent_id from {prefix}content where "
                         . "parent_id is not null", [], true);
-        $result = Database::fetchObject($query);
+        $dataset = Database::fetchObject($result);
 
-        $page = ContentFactory::getByID($result->parent_id);
+        $page = ContentFactory::getByID($dataset->parent_id);
         $children = $page->getChildren();
         $this->assertGreaterThanOrEqual(1, count($children));
 
@@ -757,22 +757,22 @@ class PageTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetParentReturnsNull() {
-        $query = Database::pQuery("select id from {prefix}content where "
+        $result = Database::pQuery("select id from {prefix}content where "
                         . "parent_id is null", [], true);
-        $result = Database::fetchObject($query);
+        $dataset = Database::fetchObject($result);
 
-        $page = ContentFactory::getByID($result->id);
+        $page = ContentFactory::getByID($dataset->id);
         $this->assertNull($page->getParent());
     }
 
     public function testGetParentReturnsModel() {
-        $query = Database::pQuery("select parent_id, id from {prefix}content where "
+        $result = Database::pQuery("select parent_id, id from {prefix}content where "
                         . "parent_id is not null", [], true);
-        $result = Database::fetchObject($query);
+        $dataset = Database::fetchObject($result);
 
-        $page = ContentFactory::getByID($result->id);
+        $page = ContentFactory::getByID($dataset->id);
         $this->assertInstanceOf(Content::class, $page->getParent());
-        $this->assertEquals($page->getParent()->getId(), $result->parent_id);
+        $this->assertEquals($page->getParent()->getId(), $dataset->parent_id);
         $this->assertGreaterThanOrEqual(1, count($page->getParent()->getChildren()));
     }
 

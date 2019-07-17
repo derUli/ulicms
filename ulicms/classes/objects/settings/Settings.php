@@ -24,9 +24,9 @@ class Settings {
             return SettingsCache::get($key);
         }
         $key = db_escape($key);
-        $query = db_query("SELECT value FROM " . tbname("settings") . " WHERE name='$key'");
-        if (db_num_rows($query) > 0) {
-            while ($row = db_fetch_object($query)) {
+        $result = db_query("SELECT value FROM " . tbname("settings") . " WHERE name='$key'");
+        if (db_num_rows($result) > 0) {
+            while ($row = db_fetch_object($result)) {
                 $value = self::convertVar($row->value, $type);
                 SettingsCache::set($key, $value, $type);
                 return $value;
@@ -83,8 +83,8 @@ class Settings {
         $key = db_escape($key);
         $originalValue = self::convertVar($value, $type);
         $value = db_escape($originalValue);
-        $query = db_query("SELECT id FROM " . tbname("settings") . " WHERE name='$key'");
-        if (db_num_rows($query) > 0) {
+        $result = db_query("SELECT id FROM " . tbname("settings") . " WHERE name='$key'");
+        if (db_num_rows($result) > 0) {
             db_query("UPDATE " . tbname("settings") . " SET value='$value' WHERE name='$key'");
         } else {
             db_query("INSERT INTO " . tbname("settings") . " (name, value) VALUES('$key', '$value')");
@@ -132,12 +132,12 @@ class Settings {
     }
 
     public static function getAll($order = "name") {
-        $result = [];
-        $query = Database::query("SELECT * FROM `{prefix}settings` order by $order", true);
-        while ($dataset = Database::fetchObject($query)) {
-            $result[] = $dataset;
+        $datasets = [];
+        $result = Database::query("SELECT * FROM `{prefix}settings` order by $order", true);
+        while ($dataset = Database::fetchObject($result)) {
+            $datasets[] = $dataset;
         }
-        return $result;
+        return $datasets;
     }
 
     public static function mappingStringToArray($str) {

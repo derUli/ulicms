@@ -4,9 +4,9 @@ use UliCMS\Security\TwoFactorAuthentication;
 
 // this ffile contains functions for managing user accounts
 function getUsers(): array {
-    $query = Database::query("SELECT id, username FROM " . tbname("users") . " ORDER by username");
     $users = [];
-    while ($row = db_fetch_assoc($query)) {
+    $result = Database::query("SELECT id, username FROM " . tbname("users") . " ORDER by username");
+    while ($row = db_fetch_assoc($result)) {
         $users[] = $row;
     }
 
@@ -37,20 +37,19 @@ function changePassword($password, $userId) {
 }
 
 function getUserByName(string $name): ?array {
-    $query = Database::query("SELECT * FROM " . tbname("users") . " WHERE username='" . Database::escapeValue($name, DB_TYPE_STRING) . "'");
-    if (db_num_rows($query) > 0) {
-        return db_fetch_assoc($query);
+    $result = Database::query("SELECT * FROM " . tbname("users") . " WHERE username='" . Database::escapeValue($name, DB_TYPE_STRING) . "'");
+    if (db_num_rows($result) > 0) {
+        return db_fetch_assoc($result);
     }
     return null;
 }
 
 function getUserById($id): ?array {
-    $query = Database::query("SELECT * FROM " . tbname("users") . " WHERE id = " . intval($id));
-    if (db_num_rows($query) > 0) {
-        return db_fetch_assoc($query);
-    } else {
-        return null;
+    $result = Database::query("SELECT * FROM " . tbname("users") . " WHERE id = " . intval($id));
+    if (db_num_rows($result) > 0) {
+        return db_fetch_assoc($result);
     }
+    return null;
 }
 
 function get_user_id(): int {

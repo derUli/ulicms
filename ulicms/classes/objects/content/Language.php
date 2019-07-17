@@ -38,8 +38,8 @@ class Language extends Model {
             $id
         );
         $sql = "SELECT * FROM `{prefix}languages` where id = ?";
-        $query = Database::pQuery($sql, $args, true);
-        $this->fillVars($query);
+        $result = Database::pQuery($sql, $args, true);
+        $this->fillVars($result);
     }
 
     public function loadByLanguageCode($language_code) {
@@ -47,8 +47,8 @@ class Language extends Model {
             strval($language_code)
         );
         $sql = "SELECT * FROM `{prefix}languages` where language_code = ?";
-        $query = Database::pQuery($sql, $args, true);
-        $this->fillVars($query);
+        $result = Database::pQuery($sql, $args, true);
+        $this->fillVars($result);
     }
 
     public function getID() {
@@ -132,13 +132,13 @@ class Language extends Model {
     }
 
     public static function getAllLanguages($order = "id") {
-        $result = [];
+        $datasets = [];
         $sql = "select id from `{prefix}languages` order by $order";
-        $query = Database::query($sql, true);
-        while ($row = Database::fetchObject($query)) {
-            $result[] = new Language($row->id);
+        $result = Database::query($sql, true);
+        while ($row = Database::fetchObject($result)) {
+            $datasets[] = new Language($row->id);
         }
-        return $result;
+        return $datasets;
     }
 
     public function __toString() {

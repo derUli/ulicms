@@ -160,10 +160,10 @@ function array_keep($array, $keys) {
 }
 
 function getAllUsedLanguages(): array {
-    $sql = "select language from `{prefix}content` where active = 1 group by language order by language";
-    $query = Database::query($sql, true);
     $languages = [];
-    while ($row = Database::fetchobject($query)) {
+    $sql = "select language from `{prefix}content` where active = 1 group by language order by language";
+    $result = Database::query($sql, true);
+    while ($row = Database::fetchobject($result)) {
         $languages[] = $row->language;
     }
     return $languages;
@@ -204,8 +204,8 @@ function get_prefered_language($priorities, $http_accept_language) {
 
 function get_all_used_menus(): array {
     $retval = [];
-    $query = db_query("select menu from " . tbname("content") . " group by menu");
-    while ($row = db_fetch_object($query)) {
+    $result = db_query("select menu from " . tbname("content") . " group by menu");
+    while ($row = db_fetch_object($result)) {
         $retval[] = $row->menu;
     }
     return $retval;
@@ -327,12 +327,12 @@ function get_html_editor(): ?string {
     if (!is_logged_in()) {
         return null;
     }
-    $query = db_query("SELECT html_editor from " . tbname("users") . " where id = " . get_user_id());
-    if (!$query) {
+    $result = db_query("SELECT html_editor from " . tbname("users") . " where id = " . get_user_id());
+    if (!$result) {
         return "ckeditor";
     }
 
-    $obj = db_fetch_assoc($query);
+    $obj = db_fetch_assoc($result);
     if (!is_null($obj["html_editor"]) and ! empty($obj["html_editor"])) {
         return $obj["html_editor"];
     } else {
@@ -404,11 +404,11 @@ function getFieldsForCustomType(string $type): array {
 }
 
 function get_used_post_types(): array {
-    $query = Database::query("select `type` from {prefix}content group by `type`", true);
+    $result = Database::query("select `type` from {prefix}content group by `type`", true);
     $types = get_available_post_types();
     $used_types = [];
     $return_types = [];
-    while ($row = Database::fetchObject($query)) {
+    while ($row = Database::fetchObject($result)) {
         $used_types[] = $row->type;
     }
     foreach ($types as $type) {
@@ -491,11 +491,11 @@ function getModuleName(string $module): string {
 }
 
 function getLanguageNameByCode(string $code): string {
-    $query = db_query("SELECT name FROM `" . tbname("languages") . "` WHERE language_code = '" . db_escape($code) . "'");
+    $result = db_query("SELECT name FROM `" . tbname("languages") . "` WHERE language_code = '" . db_escape($code) . "'");
     $retval = $code;
-    if (db_num_rows($query) > 0) {
-        $result = db_fetch_object($query);
-        $retval = $result->name;
+    if (db_num_rows($result) > 0) {
+        $dataset = db_fetch_object($result);
+        $retval = $dataset->name;
     }
 
     return $retval;
@@ -708,10 +708,10 @@ function getCurrentLanguage($current = false): string {
         return Vars::get("current_language_" . strbool($current));
     }
     if ($current) {
-        $query = db_query("SELECT language FROM " . tbname("content") . " WHERE slug='" . get_requested_pagename() . "'");
-        if (db_num_rows($query) > 0) {
-            $fetch = db_fetch_object($query);
-            $language = $fetch->language;
+        $result = db_query("SELECT language FROM " . tbname("content") . " WHERE slug='" . get_requested_pagename() . "'");
+        if (db_num_rows($result) > 0) {
+            $dataset = db_fetch_object($result);
+            $language = $dataset->language;
             Vars::set("current_language_" . strbool($current), $language);
         }
     }
@@ -1069,18 +1069,18 @@ function replaceShortcodesWithModules(string $string, bool $replaceOther = true)
 
 function getPageByID(int $id): ?object {
     $id = intval($id);
-    $query = db_query("SELECT * FROM " . tbname("content") . " where id = " . $id);
-    if (db_num_rows($query) > 0) {
-        return db_fetch_object($query);
+    $result = db_query("SELECT * FROM " . tbname("content") . " where id = " . $id);
+    if (db_num_rows($result) > 0) {
+        return db_fetch_object($result);
     }
     return null;
 }
 
 // get page id by slug
 function getPageIDBySlug(string $slug) {
-    $query = db_query("SELECT slug, id FROM `" . tbname("content") . "` where slug='" . db_escape($slug) . "'");
-    if (db_num_rows($query) > 0) {
-        $row = db_fetch_object($query);
+    $result = db_query("SELECT slug, id FROM `" . tbname("content") . "` where slug='" . db_escape($slug) . "'");
+    if (db_num_rows($result) > 0) {
+        $row = db_fetch_object($result);
         return $row->id;
     } else {
         return null;
@@ -1088,9 +1088,9 @@ function getPageIDBySlug(string $slug) {
 }
 
 function getPageSlugByID(?int $id): ?string {
-    $query = db_query("SELECT slug, id FROM `" . tbname("content") . "` where id=" . intval($id));
-    if (db_num_rows($query) > 0) {
-        $row = db_fetch_object($query);
+    $result = db_query("SELECT slug, id FROM `" . tbname("content") . "` where id=" . intval($id));
+    if (db_num_rows($result) > 0) {
+        $row = db_fetch_object($result);
         return $row->slug;
     } else {
         return null;
@@ -1098,9 +1098,9 @@ function getPageSlugByID(?int $id): ?string {
 }
 
 function getPageTitleByID(?int $id): string {
-    $query = db_query("SELECT title, id FROM `" . tbname("content") . "` where id=" . intval($id));
-    if (db_num_rows($query) > 0) {
-        $row = db_fetch_object($query);
+    $result = db_query("SELECT title, id FROM `" . tbname("content") . "` where id=" . intval($id));
+    if (db_num_rows($result) > 0) {
+        $row = db_fetch_object($result);
         return $row->title;
     } else {
         return "[" . get_translation("none") . "]";
@@ -1109,9 +1109,9 @@ function getPageTitleByID(?int $id): string {
 
 // Get slugs of all pages
 function getAllPagesWithTitle(): array {
-    $query = db_query("SELECT slug, id, title FROM `" . tbname("content") . "` WHERE `deleted_at` IS NULL ORDER BY slug");
+    $result = db_query("SELECT slug, id, title FROM `" . tbname("content") . "` WHERE `deleted_at` IS NULL ORDER BY slug");
     $returnvalues = [];
-    while ($row = db_fetch_object($query)) {
+    while ($row = db_fetch_object($result)) {
         $a = Array(
             $row->title,
             $row->slug . ".html"
@@ -1139,19 +1139,19 @@ function getAllPagesWithTitle(): array {
 function getAllPages(string $lang = null, string $order = "slug", bool $exclude_hash_links = true, string $menu = null): array {
     if (!$lang) {
         if (!$menu) {
-            $query = db_query("SELECT * FROM `" . tbname("content") . "` WHERE `deleted_at` IS NULL ORDER BY $order");
+            $result = db_query("SELECT * FROM `" . tbname("content") . "` WHERE `deleted_at` IS NULL ORDER BY $order");
         } else {
-            $query = db_query("SELECT * FROM `" . tbname("content") . "` WHERE `deleted_at` IS NULL and menu = '" . Database::escapeValue($menu) . "' ORDER BY $order");
+            $result = db_query("SELECT * FROM `" . tbname("content") . "` WHERE `deleted_at` IS NULL and menu = '" . Database::escapeValue($menu) . "' ORDER BY $order");
         }
     } else {
         if (!$menu) {
-            $query = db_query("SELECT * FROM `" . tbname("content") . "` WHERE `deleted_at` IS NULL AND language ='" . db_escape($lang) . "' ORDER BY $order");
+            $result = db_query("SELECT * FROM `" . tbname("content") . "` WHERE `deleted_at` IS NULL AND language ='" . db_escape($lang) . "' ORDER BY $order");
         } else {
-            $query = db_query("SELECT * FROM `" . tbname("content") . "` WHERE `deleted_at` IS NULL AND language ='" . db_escape($lang) . "' and menu = '" . Database::escapeValue($menu) . "' ORDER BY $order");
+            $result = db_query("SELECT * FROM `" . tbname("content") . "` WHERE `deleted_at` IS NULL AND language ='" . db_escape($lang) . "' and menu = '" . Database::escapeValue($menu) . "' ORDER BY $order");
         }
     }
     $returnvalues = [];
-    while ($row = db_fetch_assoc($query)) {
+    while ($row = db_fetch_assoc($result)) {
         if (!$exclude_hash_links or ( $exclude_hash_links and $row["type"] != "link" and $row["type"] != "node" and $row["type"] != "language_link")) {
             array_push($returnvalues, $row);
         }
@@ -1165,12 +1165,12 @@ function getAllSlugs(string $lang = null): array {
     $slugs = [];
 
     if (!$lang) {
-        $query = db_query("SELECT slug,id FROM `" . tbname("content") . "` WHERE `deleted_at` IS NULL AND redirection NOT LIKE '#%' ORDER BY slug");
+        $result = db_query("SELECT slug,id FROM `" . tbname("content") . "` WHERE `deleted_at` IS NULL AND redirection NOT LIKE '#%' ORDER BY slug");
     } else {
 
-        $query = db_query("SELECT slug,id FROM `" . tbname("content") . "` WHERE `deleted_at` IS NULL  AND redirection NOT LIKE '#%' AND language ='" . db_escape($lang) . "' ORDER BY slug");
+        $result = db_query("SELECT slug,id FROM `" . tbname("content") . "` WHERE `deleted_at` IS NULL  AND redirection NOT LIKE '#%' AND language ='" . db_escape($lang) . "' ORDER BY slug");
     }
-    while ($row = db_fetch_object($query)) {
+    while ($row = db_fetch_object($result)) {
         array_push($slugs, $row->slug);
     }
 
@@ -1179,6 +1179,8 @@ function getAllSlugs(string $lang = null): array {
 
 // Sprachcodes abfragen und als Array zurück geben
 function getAllLanguages($filtered = false): array {
+    $languageCodes = [];
+
     if ($filtered) {
         $permissionChecker = new PermissionChecker(get_user_id());
         $languages = $permissionChecker->getLanguages();
@@ -1193,9 +1195,9 @@ function getAllLanguages($filtered = false): array {
     if (!is_null(Vars::get("all_languages"))) {
         return Vars::get("all_languages");
     }
-    $query = db_query("SELECT language_code FROM `" . tbname("languages") . "` ORDER BY language_code");
-    $languageCodes = [];
-    while ($row = db_fetch_object($query)) {
+    $result = db_query("SELECT language_code FROM `" . tbname("languages") . "` ORDER BY language_code");
+
+    while ($row = db_fetch_object($result)) {
         array_push($languageCodes, $row->language_code);
     }
     Vars::set("all_languages", $languageCodes);
@@ -1286,11 +1288,13 @@ function containsModule(string $page = null, string $module = null): bool {
     if (is_null($page)) {
         $page = get_requested_pagename();
     }
+
     if (!is_null(Vars::get("page_" . $page . "_contains_" . $module))) {
         return Vars::get("page_" . $page . "_contains_" . $module);
     }
-    $query = db_query("SELECT content, module, `type` FROM " . tbname("content") . " WHERE slug = '" . db_escape($page) . "'");
-    $dataset = db_fetch_assoc($query);
+
+    $result = db_query("SELECT content, module, `type` FROM " . tbname("content") . " WHERE slug = '" . db_escape($page) . "'");
+    $dataset = db_fetch_assoc($result);
     $content = $dataset["content"];
     $content = str_replace("&quot;", "\"", $content);
     if (!is_null($dataset["module"]) and ! empty($dataset["module"]) and $dataset["type"] == "module") {
@@ -1299,13 +1303,13 @@ function containsModule(string $page = null, string $module = null): bool {
             return true;
         }
     } else if ($module) {
-        $result = boolval(preg_match("/\[module=\"" . preg_quote($module) . "\"\]/", $content));
-        Vars::set("page_" . $page . "_contains_" . $module, $result);
-        return $result;
+        $match = boolval(preg_match("/\[module=\"" . preg_quote($module) . "\"\]/", $content));
+        Vars::set("page_" . $page . "_contains_" . $module, $match);
+        return $match;
     } else {
-        $result = boolval(preg_match("/\[module=\".+\"\]/", $content));
-        Vars::set("page_" . $page . "_contains_" . $module, $result);
-        return $result;
+        $match = boolval(preg_match("/\[module=\".+\"\]/", $content));
+        Vars::set("page_" . $page . "_contains_" . $module, $match);
+        return $match;
     }
     Vars::set("page_" . $page . "_contains_" . $module, false);
     return false;

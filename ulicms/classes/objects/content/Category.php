@@ -24,8 +24,8 @@ class Category {
         $args = array(
             intval($id)
         );
-        $query = Database::pQuery($sql, $args, true);
-        $this->fillVars($query);
+        $result = Database::pQuery($sql, $args, true);
+        $this->fillVars($result);
     }
 
     public function fillVars(?mysqli_result $query): void {
@@ -83,8 +83,8 @@ class Category {
     public static function getAll(string $order = "id"): array {
         $datasets = [];
         $sql = "select id from `{prefix}categories` order by $order";
-        $query = Database::query($sql, true);
-        while ($row = Database::fetchobject($query)) {
+        $result = Database::query($sql, true);
+        while ($row = Database::fetchobject($result)) {
             $datasets[] = new Category(intval($row->id));
         }
         return $datasets;

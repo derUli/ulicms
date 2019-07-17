@@ -40,15 +40,15 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetAllByParent() {
 
-        $query = Database::pQuery("select parent_id from {prefix}content where "
+        $result = Database::pQuery("select parent_id from {prefix}content where "
                         . "parent_id is not null", [], true);
-        $result = Database::fetchObject($query);
+        $dataset = Database::fetchObject($result);
 
-        $pages = ContentFactory::getAllByParent($result->parent_id);
+        $pages = ContentFactory::getAllByParent($dataset->parent_id);
 
         $this->assertGreaterThanOrEqual(1, count($pages));
         foreach ($pages as $page) {
-            $this->assertEquals($result->parent_id, $page->parent_id);
+            $this->assertEquals($dataset->parent_id, $page->parent_id);
         }
     }
 
@@ -63,8 +63,8 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetAll() {
         $content = ContentFactory::getAll();
-        $query = Database::pQuery("select id from {prefix}content", [], true);
-        $this->assertEquals(count($content), Database::getNumRows($query));
+        $result = Database::pQuery("select id from {prefix}content", [], true);
+        $this->assertEquals(count($content), Database::getNumRows($result));
 
         foreach ($content as $page) {
             $this->assertInstanceOf(Content::class, $page);

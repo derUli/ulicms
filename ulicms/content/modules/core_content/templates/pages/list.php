@@ -434,9 +434,9 @@ if ($permissionChecker->hasPermission("pages")) {
 
         $filter_sql .= " ";
 
-        $query = db_query("SELECT * FROM " . tbname("content") . " " . $filter_sql . " ORDER BY $order,position, slug ASC") or die(db_error());
+        $result = db_query("SELECT * FROM " . tbname("content") . " " . $filter_sql . " ORDER BY $order,position, slug ASC") or die(db_error());
         ?>
-        <div class="x-results-found"><?php BackendHelper::formatDatasetCount(Database::getNumRows($query)); ?></div>
+        <div class="x-results-found"><?php BackendHelper::formatDatasetCount(Database::getNumRows($result)); ?></div>
         <?php
         if ($_SESSION["filter_parent"] and $_SESSION["filter_parent"] != '-') {
             $parentPage = ContentFactory::getByID($_SESSION["filter_parent"]);
@@ -478,8 +478,8 @@ if ($permissionChecker->hasPermission("pages")) {
                 </thead>
                 <tbody>
                     <?php
-                    if (db_num_rows($query) > 0) {
-                        while ($row = db_fetch_object($query)) {
+                    if (db_num_rows($result) > 0) {
+                        while ($row = db_fetch_object($result)) {
                             $model = ContentFactory::getByID($row->id);
                             echo '<tr id="dataset-' . $row->id . '">';
                             echo '<td>';
@@ -507,7 +507,7 @@ if ($permissionChecker->hasPermission("pages")) {
                             }
 
                             if ((
-							$row->redirection and startsWith($row->redirection, "#")) or $row->type == "node" or $row->type == "snippet") {
+                                    $row->redirection and startsWith($row->redirection, "#")) or $row->type == "node" or $row->type == "snippet") {
                                 echo "<td class=\"text-center\"></td>";
                             } else {
                                 $url = "../?goid={$row->id}";

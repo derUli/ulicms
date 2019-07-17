@@ -21,18 +21,18 @@ class VCS {
 
     public static function getRevisionByID(int $history_id): ?object {
         $history_id = intval($history_id);
-        $query = db_query("SELECT * FROM " . tbname("history") . " WHERE id = " . $history_id);
-        if (db_num_rows($query) > 0) {
-            return db_fetch_object($query);
+        $result = db_query("SELECT * FROM " . tbname("history") . " WHERE id = " . $history_id);
+        if (db_num_rows($result) > 0) {
+            return db_fetch_object($result);
         }
         return null;
     }
 
     public static function restoreRevision(int $history_id): ?bool {
         $history_id = intval($history_id);
-        $query = db_query("SELECT * FROM " . tbname("history") . " WHERE id = " . $history_id);
-        if (db_num_rows($query) > 0) {
-            $row = db_fetch_object($query);
+        $result = db_query("SELECT * FROM " . tbname("history") . " WHERE id = " . $history_id);
+        if (db_num_rows($result) > 0) {
+            $row = db_fetch_object($result);
             $content_id = intval($row->content_id);
             $lastmodified = time();
             $content = db_escape($row->content);
@@ -43,9 +43,9 @@ class VCS {
 
     public static function getRevisionsByContentID(int $content_id, string $order = "date DESC"): array {
         $content_id = intval($content_id);
-        $query = db_query("SELECT * FROM " . tbname("history") . " WHERE content_id = " . $content_id . " ORDER BY " . $order);
+        $result = db_query("SELECT * FROM " . tbname("history") . " WHERE content_id = " . $content_id . " ORDER BY " . $order);
         $retval = [];
-        while ($row = db_fetch_object($query)) {
+        while ($row = db_fetch_object($result)) {
             $retval[] = $row;
         }
         return $retval;

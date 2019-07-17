@@ -10,8 +10,8 @@ class UserManager {
         $args = array(
             intval($gid)
         );
-        $query = Database::pQuery($sql, $args, true);
-        while ($row = Database::fetchObject($query)) {
+        $result = Database::pQuery($sql, $args, true);
+        while ($row = Database::fetchObject($result)) {
             $users[] = new User($row->id);
         }
         return $users;
@@ -20,8 +20,8 @@ class UserManager {
     public function getAllUsers(string $order = "id"): array {
         $users = [];
         $sql = "select id from {prefix}users order by $order";
-        $query = Database::Query($sql, true);
-        while ($row = Database::fetchObject($query)) {
+        $result = Database::Query($sql, true);
+        while ($row = Database::fetchObject($result)) {
             $users[] = new User($row->id);
         }
         return $users;
@@ -34,8 +34,8 @@ class UserManager {
         $args = array(
             intval($locked)
         );
-        $query = Database::pQuery($sql, $args, true);
-        while ($row = Database::fetchObject($query)) {
+        $result = Database::pQuery($sql, $args, true);
+        while ($row = Database::fetchObject($result)) {
             $users[] = new User($row->id);
         }
         return $users;

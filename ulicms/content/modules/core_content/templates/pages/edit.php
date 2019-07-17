@@ -16,7 +16,7 @@ $permissionChecker = new PermissionChecker(get_user_id());
 if ($permissionChecker->hasPermission("pages")) {
     // FIXME: Die SQL Statements in einen Controller bzw. Model auslagern.
     $page = intval($_GET["page"]);
-    $query = db_query("SELECT * FROM " . tbname("content") . " WHERE id='$page'");
+    $result = db_query("SELECT * FROM " . tbname("content") . " WHERE id='$page'");
 
     $allThemes = getThemesList();
 
@@ -41,7 +41,7 @@ if ($permissionChecker->hasPermission("pages")) {
     $pages_activate_own = $permissionChecker->hasPermission("pages_activate_own");
     $pages_activate_others = $permissionChecker->hasPermission("pages_activate_others");
 
-    while ($row = db_fetch_object($query)) {
+    while ($row = db_fetch_object($result)) {
         $list_data = new List_Data($row->id);
 
         $author_id = $row->author_id;

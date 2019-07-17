@@ -105,11 +105,11 @@ class Page extends Content {
     }
 
     public function loadByID($id) {
-        $query = Database::pQuery("SELECT * FROM `{prefix}content` where id = ?", array(
+        $result = Database::pQuery("SELECT * FROM `{prefix}content` where id = ?", array(
                     intval($id)
                         ), true);
-        if (Database::getNumRows($query) > 0) {
-            $result = Database::fetchObject($query);
+        if (Database::getNumRows($result) > 0) {
+            $result = Database::fetchObject($result);
             $this->fillVars($result);
         } else {
             throw new Exception("No content with id $id");
@@ -119,13 +119,13 @@ class Page extends Content {
     public function loadBySlugAndLanguage($name, $language) {
         $name = Database::escapeValue($name);
         $language = Database::escapeValue($language);
-        $query = Database::query("SELECT * FROM `" . tbname("content") . "` where `slug` = '$name' and `language` = '$language'");
-        if (Database::getNumRows($query) > 0) {
-            $result = Database::fetchObject($query);
-            $this->fillVars($result);
-        } else {
-            throw new Exception("No such page");
+        $result = Database::query("SELECT * FROM `" . tbname("content") . "` where `slug` = '$name' and `language` = '$language'");
+        if (Database::getNumRows($result) > 0) {
+            $dataset = Database::fetchObject($result);
+            $this->fillVars($dataset);
+            return;
         }
+        throw new Exception("No such page");
     }
 
     public function save() {
@@ -166,7 +166,7 @@ class Page extends Content {
         $sql .= intval($this->author_id) . ",";
         $sql .= intval($this->group_id) . ",";
         $sql .= intval($this->lastchangeby) . ",";
-        // Views
+// Views
         $sql .= "0,";
 
         $sql .= "'" . Database::escapeValue($this->menu) . "',";
@@ -381,10 +381,10 @@ class Page extends Content {
         $this->permissions = $permissions;
     }
 
-    // returns if the comments for the page are enabled
-    // if "Comments enabled" has "[Default]" selected
-    // then it returns if the comments are enabled in
-    // the global settings
+// returns if the comments for the page are enabled
+// if "Comments enabled" has "[Default]" selected
+// then it returns if the comments are enabled in
+// the global settings
     public function areCommentsEnabled() {
         $commentsEnabled = false;
         if (is_null($this->comments_enabled)) {
@@ -405,12 +405,12 @@ class Page extends Content {
     }
 
     public function hasComments() {
-        // TODO: write a more ressource friendly implementation
-        // which doesn't load all comment datasets into the memory
+// TODO: write a more ressource friendly implementation
+// which doesn't load all comment datasets into the memory
         return count($this->getComments()) > 0;
     }
 
-    // this returns an array of all comments of this content
+// this returns an array of all comments of this content
     public function getComments($order_by = "date desc") {
         return Comment::getAllByContentId($this->id, $order_by);
     }
@@ -433,7 +433,7 @@ class Page extends Content {
         return $frontPage === $this->slug;
     }
 
-    // TODO: Write test for this method
+// TODO: Write test for this method
     public function getDeletedAt() {
         return $this->deleted_at;
     }

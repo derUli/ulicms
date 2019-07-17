@@ -36,13 +36,13 @@ class Video extends Model {
     }
 
     public function loadById($id): void {
-        $query = Database::pQuery("select * from `{prefix}videos` where id = ?", array(
+        $result = Database::pQuery("select * from `{prefix}videos` where id = ?", array(
                     intval($id)
                         ), true);
-        if (!Database::any($query)) {
-            $query = null;
+        if (!Database::any($result)) {
+            $result = null;
         }
-        $this->fillVars($query);
+        $this->fillVars($result);
     }
 
     protected function fillVars($result = null): void {
