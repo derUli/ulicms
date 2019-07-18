@@ -1,10 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace UliCMS\Helpers;
 
-class ArrayHelper extends \Helper {
+use Helper;
 
-    public static function insertBefore($input, $index, $element) {
+class ArrayHelper extends Helper {
+
+    public static function insertBefore(array $input, int $index, $element): array {
         if (!array_key_exists($index, $input)) {
             throw new Exception("Index not found");
         }
@@ -22,7 +26,7 @@ class ArrayHelper extends \Helper {
         return $input;
     }
 
-    public static function insertAfter($input, $index, $element) {
+    public static function insertAfter(array $input, int $index, $element): array {
         if (!array_key_exists($index, $input)) {
             throw new Exception("Index not found");
         }
@@ -40,7 +44,7 @@ class ArrayHelper extends \Helper {
         return $input;
     }
 
-    public static function take($count, $data) {
+    public static function take(int $count, $data) {
         if (is_array($data)) {
             return array_slice($data, 0, $count);
         } else if (is_string($data)) {
@@ -49,11 +53,11 @@ class ArrayHelper extends \Helper {
         return null;
     }
 
-    public static function isSingle($input) {
+    public static function isSingle(array $input): bool {
         return count($input) == 1;
     }
 
-    public static function getSingle($input) {
+    public static function getSingle(array $input) {
         if (self::isSingle($input)) {
             return $input[0];
         }
