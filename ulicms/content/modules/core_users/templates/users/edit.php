@@ -6,7 +6,7 @@ $permissionChecker = new ACL();
 if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermission("users_edit")) or ( $_GET["id"] == $_SESSION["login_id"])) {
     $id = intval($_GET["id"]);
     $languages = getAvailableBackendLanguages();
-    $query = db_query("SELECT * FROM " . tbname("users") . " WHERE id='$id'");
+    $result = db_query("SELECT * FROM " . tbname("users") . " WHERE id='$id'");
     $user = new User($id);
     $secondaryGroups = $user->getSecondaryGroups();
     $secondaryGroupIds = [];
@@ -16,7 +16,7 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
 
     $backUrl = $permissionChecker->hasPermission("users_edit") ? ModuleHelper::buildActionURL("admins") : ModuleHelper::buildActionURL("home");
 
-    while ($row = db_fetch_object($query)) {
+    while ($row = db_fetch_object($result)) {
         ?>
         <p>
             <a href="<?php echo $backUrl; ?>"

@@ -28,13 +28,13 @@ class Category {
         $this->fillVars($result);
     }
 
-    public function fillVars(?mysqli_result $query): void {
+    public function fillVars(?mysqli_result $result): void {
         $this->id = null;
         $this->name = null;
         $this->description = null;
 
-        if ($query and Database::getNumRows($query) > 0) {
-            $result = Database::fetchObject($query);
+        if ($result and Database::getNumRows($result) > 0) {
+            $result = Database::fetchObject($result);
             $this->id = intval($result->id);
             $this->name = $result->name;
             $this->description = $result->description;
