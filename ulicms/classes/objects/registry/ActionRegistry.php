@@ -102,6 +102,7 @@ class ActionRegistry {
     }
 
     public static function getController(): ?Controller {
+
         $action = get_action();
         if ($action and isset(self::$assignedControllers[$action])) {
             return ControllerRegistry::get(self::$assignedControllers[$action]);

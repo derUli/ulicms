@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use UliCMS\Exceptions\FileNotFoundException;
 
 class ControllerRegistry {
@@ -7,7 +9,7 @@ class ControllerRegistry {
     private static $controllers = [];
     private static $controller_function_permissions = [];
 
-    public static function loadModuleControllers() {
+    public static function loadModuleControllers(): void {
         if (!defined("KCFINDER_PAGE")) {
             $controllerRegistry = [];
             $modules = getAllModules();
@@ -50,7 +52,7 @@ class ControllerRegistry {
         }
     }
 
-    public static function runMethods() {
+    public static function runMethods(): void {
         if (isset($_REQUEST["sClass"]) and StringHelper::isNotNullOrEmpty($_REQUEST["sClass"])) {
             if (self::get($_REQUEST["sClass"])) {
                 $sClass = $_REQUEST["sClass"];
@@ -63,18 +65,18 @@ class ControllerRegistry {
         }
     }
 
-    public static function get($class = null) {
+    public static function get(?string $class = null): ?Controller {
+
         if ($class == null and get_action()) {
             return ActionRegistry::getController();
         } else if (isset(self::$controllers[$class])) {
             return self::$controllers[$class];
-        } else {
-            return null;
         }
+        return null;
     }
 
     // check if user is permitted to call controller method $sMethod in Class $sClass
-    public static function userCanCall($sClass, $sMethod) {
+    public static function userCanCall(string $sClass, string $sMethod): bool {
         $allowed = true;
         $acl = new ACL();
         $methodIdentifier = $sClass . "::" . $sMethod;
