@@ -64,4 +64,19 @@ class ArrayHelper extends Helper {
         return null;
     }
 
+    public static function flatten($input) {
+        if (!is_array($input)) {
+            // nothing to do if it's not an array
+            return [$input];
+        }
+
+        $result = [];
+        foreach ($input as $value) {
+            // explode the sub-array, and add the parts
+            $result = array_merge($result, self::flatten($value));
+        }
+
+        return $result;
+    }
+
 }

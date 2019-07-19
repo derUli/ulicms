@@ -35,6 +35,7 @@ Neue API-Methoden:
 * Model->isPersistent()
 * Model->hasChanges()
 * Module->isInstalled()
+* ArrayHelper::flatten($input)
 * PackageManager->isInstalled($package, $type = PackageTypes::TYPE_MODULE)
 * UliCMS\HTML\icon($classes, $htmlAttributes = array())
 * UliCMS\HTML\stringContainsHtml($string)

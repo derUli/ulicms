@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 class PasswordReset {
 
-    public function addToken($user_id) {
+    public function addToken(int $user_id): string {
         $token = md5(uniqid() . strval($user_id));
         $sql = "INSERT INTO {prefix}password_reset (token, user_id) values (?, ?)";
         $args = array(
@@ -13,7 +15,7 @@ class PasswordReset {
         return $token;
     }
 
-    public function sendMail($token, $to, $ip, $firstname, $lastname) {
+    public function sendMail(string $token, string $to, string $ip, string $firstname, string $lastname) {
         ViewBag::set("url", $this->getPasswordResetLink($token));
         ViewBag::set("firstname", $firstname);
         ViewBag::set("lastname", $lastname);
@@ -28,7 +30,7 @@ class PasswordReset {
         Mailer::send($to, $subject, $message, $headers);
     }
 
-    public function getPasswordResetLink($token) {
+    public function getPasswordResetLink(string $token): string {
         $url = getBaseFolderURL();
         $url = rtrim($url, "/");
         if (!is_admin_dir()) {
@@ -38,7 +40,7 @@ class PasswordReset {
         return $url;
     }
 
-    public function getAllTokens() {
+    public function getAllTokens(): array {
         $tokens = [];
         $result = Database::selectAll("password_reset");
         if (Database::getNumRows($result) === 0) {
@@ -50,7 +52,7 @@ class PasswordReset {
         return $tokens;
     }
 
-    public function getAllTokensByUserId(int $user_id) {
+    public function getAllTokensByUserId(int $user_id): array {
         $tokens = [];
         $result = Database::selectAll("password_reset", [], "user_id={$user_id}");
         if (Database::getNumRows($result) === 0) {
@@ -62,7 +64,7 @@ class PasswordReset {
         return $tokens;
     }
 
-    public function getTokenByTokenString($token) {
+    public function getTokenByTokenString(string $token): ?object {
         $sql = "select * from {prefix}password_reset where token = ?";
         $args = array(
             strval($token)
@@ -74,7 +76,7 @@ class PasswordReset {
         return null;
     }
 
-    public function deleteToken($token) {
+    public function deleteToken(string $token): void {
         $sql = "delete from {prefix}password_reset where token = ?";
         $args = array(
             strval($token)

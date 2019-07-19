@@ -5,6 +5,7 @@ if (Settings::get("disable_password_reset")) {
     ?>
     <?php
     $messame = null;
+    $color = "danger";
     if (isset($_POST["username"]) and ! empty($_POST["username"])) {
         $username = $_POST["username"];
         $user = getUserByName($username);
@@ -13,6 +14,7 @@ if (Settings::get("disable_password_reset")) {
             $token = $passwordReset->addToken($user["id"]);
             $passwordReset->sendMail($token, $user["email"], get_ip(), $user["firstname"], $user["lastname"]);
             $message = get_translation("PASSWORD_RESET_SUCCESSFULL");
+            $color = "success";
         } else {
             $message = get_translation("NO_SUCH_USER");
         }
@@ -44,7 +46,7 @@ if (Settings::get("disable_password_reset")) {
         <?php
         if ($message) {
             ?>
-            <div class="alert alert-danger">
+            <div class="alert alert-<?php echo $color; ?>">
                 <?php
                 esc($message);
                 ?>
