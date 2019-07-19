@@ -28,7 +28,7 @@ function sinfo_list_modules() {
 }
 
 function sinfo_list_themes() {
-    $themes = getThemeList();
+    $themes = getAllThemes();
 
     if (count($themes) > 0) {
         for ($i = 0; $i < count($themes); $i ++) {

@@ -16,7 +16,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
 
     $editor = get_html_editor();
 
-    $allThemes = getThemesList();
+    $allThemes = getAllThemes();
     $cols = Database::getColumnNames("content");
 
     // FIXME: No SQL in Views

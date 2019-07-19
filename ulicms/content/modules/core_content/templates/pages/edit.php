@@ -18,7 +18,7 @@ if ($permissionChecker->hasPermission("pages")) {
     $page = intval($_GET["page"]);
     $result = db_query("SELECT * FROM " . tbname("content") . " WHERE id='$page'");
 
-    $allThemes = getThemesList();
+    $allThemes = getAllThemes();
 
     $editor = get_html_editor();
     $cols = Database::getColumnNames("content");

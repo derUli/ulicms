@@ -58,6 +58,14 @@ Neue API-Methoden:
 * _t(string $name, array $placeholders = [])
 * t(string $name, array $placeholders = [])
 * singularOrPlural(int $count, string $singular, string $plural)
+* is_zero($number)
+* midnight($datetime = null)
+* midday($datetime = null)
+* end_of_day($datetime = null)
+* is_midnight($datetime = null)
+* is_end_of_day($datetime = null)
+* is_midday($datetime = null)
+* is_zero($val)
 
 Entfernte API-Methoden:
 * addUser()

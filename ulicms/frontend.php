@@ -151,7 +151,7 @@ if ($format == "html") {
 
 do_event("after_http_header");
 
-if (count(getThemeList()) === 0) {
+if (count(getAllThemes()) === 0) {
     throw new Exception("Keine Themes vorhanden!");
 }
 

@@ -4,9 +4,46 @@ declare(strict_types=1);
 
 use Carbon\Carbon;
 
+function is_zero($val) {
+    return is_numeric($val) && $val == 0;
+}
+
 function is_today($datetime = null): bool {
     $carbon = get_carbon($datetime);
     return $carbon->isToday();
+}
+
+function midnight($datetime = null) {
+    $carbon = get_carbon($datetime);
+    $midnight = $carbon->startOfDay();
+    return $midnight->getTimestamp();
+}
+
+function midday($datetime = null) {
+    $carbon = get_carbon($datetime);
+    $mdiday = $carbon->midday();
+    return $mdiday->getTimestamp();
+}
+
+function end_of_day($datetime = null) {
+    $carbon = get_carbon($datetime);
+    $endOfDay = $carbon->endOfDay();
+    return $endOfDay->getTimestamp();
+}
+
+function is_midnight($datetime = null): bool {
+    $carbon = get_carbon($datetime);
+    return $carbon->isStartOfDay();
+}
+
+function is_end_of_day($datetime = null): bool {
+    $carbon = get_carbon($datetime);
+    return $carbon->isEndOfDay();
+}
+
+function is_midday($datetime = null): bool {
+    $carbon = get_carbon($datetime);
+    return $carbon->isMidday();
 }
 
 function is_tomorrow($datetime = null): bool {
@@ -108,7 +145,9 @@ function is_mobile(): bool {
 }
 
 function isMaintenanceMode(): bool {
-    return (strtolower(Settings::get("maintenance_mode")) == "on" || strtolower(Settings::get("maintenance_mode")) == "true" || Settings::get("maintenance_mode") == "1");
+    return (strtolower(Settings::get("maintenance_mode")) == "on" ||
+            strtolower(Settings::get("maintenance_mode")) == "true" ||
+            Settings::get("maintenance_mode") == "1");
 }
 
 function is_tablet(): bool {
@@ -138,7 +177,8 @@ function is_night(): bool {
 
 function is_debug_mode(): bool {
     $config = new CMSConfig();
-    return (defined("ULICMS_DEBUG") and ULICMS_DEBUG) or ( isset($config->debug) and $config->debug);
+    return (defined("ULICMS_DEBUG") and ULICMS_DEBUG)
+            or ( isset($config->debug) and $config->debug);
 }
 
 function isCLI(): bool {
@@ -154,7 +194,9 @@ function startsWith(string $haystack, string $needle, bool $case = true): bool {
 
 function endsWith(string $haystack, string $needle, bool $case = true): bool {
     if ($case) {
-        return (strcmp(substr($haystack, strlen($haystack) - strlen($needle)), $needle) === 0);
+        return (strcmp(substr($haystack, strlen($haystack) - strlen($needle)),
+                        $needle) === 0);
     }
-    return (strcasecmp(substr($haystack, strlen($haystack) - strlen($needle)), $needle) === 0);
+    return (strcasecmp(substr($haystack, strlen($haystack) - strlen($needle)),
+                    $needle) === 0);
 }

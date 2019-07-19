@@ -42,7 +42,7 @@ class PackageManager {
                 $module = new Module($package);
                 return $module->isInstalled();
             case PackageTypes::TYPE_THEME:
-                return faster_in_array($package, getThemesList());
+                return faster_in_array($package, getAllThemes());
             default:
                 throw new NotImplementedException("Package Type {$type} not supported");
         }

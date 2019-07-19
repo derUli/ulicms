@@ -723,11 +723,7 @@ function getCurrentLanguage($current = false): string {
     }
 }
 
-function getThemeList(): array {
-    return getThemesList();
-}
-
-function getThemesList(): array {
+function getAllThemes(): array {
     $pkg = new PackageManager();
     return $pkg->getInstalledPackages('themes');
 }
@@ -1258,7 +1254,7 @@ function getAllMenus(bool $only_used = false): array {
         $menus = $new_menus;
     }
 
-    $themesList = getThemesList();
+    $themesList = getAllThemes();
     $allThemeMenus = [];
     foreach ($themesList as $theme) {
         $themeMenus = getThemeMeta($theme, "menus");
@@ -1356,7 +1352,7 @@ function uninstall_module(string $name, string $type = "module") {
             break;
         case "theme":
             $cTheme = Settings::get("theme");
-            $allThemes = getThemeList();
+            $allThemes = getAllThemes();
 
             if (faster_in_array($name, $allThemes) and $cTheme !== $name) {
                 $theme_path = getTemplateDirPath($name, true);

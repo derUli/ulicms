@@ -182,12 +182,21 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("Musterstadt", $result[3]);
     }
 
-    public function testGetThemesList() {
-        $themes = getThemesList();
+    public function testGetAllThemes() {
+        $themes = getAllThemes();
         $this->assertContains("impro17", $themes);
     }
 
+    public function testGetAllModules() {
+        $modules = getAllModules();
+        $this->assertContains("core_content", $modules);
+        $this->assertContains("slicknav", $modules);
+        $this->assertContains("bootstrap", $modules);
+    }
+
     public function testGetPageSlugByID() {
+        $allPages = ContentFactory::getAll();
+        $first = $allPages[0];
         $this->assertEquals($first->slug, getPageSlugByID($first->id));
         $this->assertNull(getPageSlugByID(PHP_INT_MAX));
     }

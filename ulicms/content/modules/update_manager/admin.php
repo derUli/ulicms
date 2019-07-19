@@ -1,5 +1,4 @@
 <?php
-require_once getModulePath("update_manager", true) . "/objects/update_manager.php";
 define("MODULE_ADMIN_HEADLINE", get_translation("update_manager"));
 define("MODULE_ADMIN_REQUIRED_PERMISSION", "install_packages");
 
@@ -49,8 +48,9 @@ function update_manager_admin() {
         <span id="translation_please_select_packages"
               data-translation="<?php translate("please_select_packages"); ?>"></span>
     </form>
-    <script
-    src="<?php echo getModulePath("update_manager"); ?>scripts/update_manager.js"></script>
     <?php
+    enqueueScriptFile(
+            ModuleHelper::buildRessourcePath("update_manager",
+                    "scripts/update_manager.js"));
+    combinedScriptHtml();
 }
-?>

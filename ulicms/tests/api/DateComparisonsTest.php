@@ -53,8 +53,56 @@ class DateComparisonsTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(is_future(time() - 5));
     }
 
+    public function testIsStartOfDateReturnsTrue() {
+        $timestamp = gmmktime(0, 0, 0, 4, 1, 2017);
+        $this->assertTrue(is_midnight($timestamp));
+    }
+
+    public function testIsStartOfDateReturnsFalse() {
+        $timestamp = gmmktime(10, 30, 15, 4, 1, 2017);
+        $this->assertFalse(is_midnight($timestamp));
+    }
+
+    public function testIsEndOfDateReturnsTrue() {
+        $timestamp = gmmktime(23, 59, 59, 4, 1, 2017);
+        $this->assertTrue(is_end_of_day($timestamp));
+    }
+
+    public function testIsEndOfDateReturnsFalse() {
+        $timestamp = gmmktime(10, 30, 15, 4, 1, 2017);
+        $this->assertFalse(is_end_of_day($timestamp));
+    }
+
+    public function testIsMiddayOfDateReturnsTrue() {
+        $timestamp = gmmktime(12, 00, 00, 4, 1, 2017);
+        $this->assertTrue(is_midday($timestamp));
+    }
+
+    public function testIsMiddayOfDateReturnsFalse() {
+        $timestamp = gmmktime(10, 30, 15, 4, 1, 2017);
+        $this->assertFalse(is_midday($timestamp));
+    }
+
     public function testGetCarbon() {
         $this->assertInstanceOf(Carbon::class, get_carbon("2019-04-14"));
+    }
+
+    public function testMidgnight() {
+        $midnight = midnight(time());
+        $this->assertTrue(is_today($midnight));
+        $this->assertTrue(is_yesterday($midnight - 1));
+    }
+
+    public function testEndOfDay() {
+        $midnight = end_of_day(time());
+        $this->assertTrue(is_today($midnight));
+        $this->assertTrue(is_tomorrow($midnight + 1));
+    }
+
+    public function testMidday() {
+        $timestamp = gmmktime(10, 30, 15, 4, 1, 2017);
+        $midday_timestamp = gmmktime(12, 0, 0, 4, 1, 2017);
+        $this->assertEquals($midday_timestamp, midday($timestamp));
     }
 
 }

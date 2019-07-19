@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use UliCMS\Utils\File;
 use UliCMS\Exceptions\FileNotFoundException;
 use UliCMS\HTML\Script;
@@ -9,14 +11,52 @@ use UliCMS\Models\Content\Advertisement\Banners;
 
 class Template {
 
-    public static function randomBanner() {
+    public static function getBodyClasses(): string {
+        $str = get_ID() ? "page-id-" . get_ID() . " " : "";
+        if (is_frontpage()) {
+            $str .= "home ";
+        }
+
+        if (is_404()) {
+            $str .= "error404 ";
+        }
+
+        if (is_403()) {
+            $str .= "error403 ";
+        }
+
+        if (is_404() or is_403()) {
+            $str .= "errorPage ";
+        } else {
+            $str .= "page ";
+        }
+
+        if (is_mobile()) {
+            $str .= "mobile ";
+        } else {
+            $str .= "desktop ";
+        }
+
+        if (containsModule(get_requested_pagename())) {
+            $str .= "containsModule ";
+        }
+        $str = trim($str);
+        $str = apply_filter($str, "body_classes");
+        return $str;
+    }
+
+    public static function bodyClasses() {
+        echo self::getBodyClasses();
+    }
+
+    public static function randomBanner(): void {
         $banner = Banners::getRandom();
         if ($banner) {
             echo $banner->render();
         }
     }
 
-    public static function outputContentElement() {
+    public static function outputContentElement(): void {
         $type = get_type();
         $output = "";
         switch ($type) {
@@ -54,16 +94,16 @@ class Template {
         echo optimizeHtml($output);
     }
 
-    public static function getHomepageOwner() {
+    public static function getHomepageOwner(): string {
         $homepage_title = Settings::getLanguageSetting("homepage_owner", $_SESSION["language"]);
         return _esc($homepage_title);
     }
 
-    public static function homepageOwner() {
+    public static function homepageOwner(): void {
         echo self::getHomepageOwner();
     }
 
-    public static function footer() {
+    public static function footer(): void {
         do_event("enqueue_frontend_footer_scripts");
         enqueueScriptFile("lib/js/global.js");
         combinedScriptHtml();
@@ -71,7 +111,7 @@ class Template {
         do_event("frontend_footer");
     }
 
-    public static function executeModuleTemplate($module, $template) {
+    public static function executeModuleTemplate(string $module, string $template): string {
 
         $retval = "";
         $originalTemplatePath = getModulePath($module, true) . "templates/" . $template;
@@ -95,15 +135,15 @@ class Template {
         return optimizeHtml($retval);
     }
 
-    public static function escape($value) {
+    public static function escape($value): void {
         echo self::getEscape($value);
     }
 
-    public static function getEscape($value) {
-        return htmlspecialchars($value, ENT_QUOTES, "UTF-8");
+    public static function getEscape($value): string {
+        return htmlspecialchars(strval($value), ENT_QUOTES, "UTF-8");
     }
 
-    public static function logo() {
+    public static function logo(): void {
         if (Settings::get("logo_disabled") != "no") {
             return;
         }
@@ -123,15 +163,15 @@ class Template {
     }
 
     // get current year
-    public static function getYear($format = "Y") {
+    public static function getYear(string $format = "Y"): string {
         return date($format);
     }
 
-    public static function year($format = "Y") {
+    public static function year(string $format = "Y"): string {
         echo self::getYear($format);
     }
 
-    public static function getMotto() {
+    public static function getMotto(): string {
         // Existiert ein Motto für diese Sprache? z.B. motto_en
         $motto = Settings::get("motto_" . $_SESSION["language"]);
 
@@ -142,11 +182,11 @@ class Template {
         return _esc($motto);
     }
 
-    public static function motto() {
+    public static function motto(): void {
         echo self::getMotto();
     }
 
-    public static function executeDefaultOrOwnTemplate($template) {
+    public static function executeDefaultOrOwnTemplate(string $template): string {
         $retval = "";
         $originalTemplatePath = ULICMS_ROOT . "/default/" . $template;
         $ownTemplatePath = getTemplateDirPath(get_theme()) . "/" . $template;
@@ -169,46 +209,42 @@ class Template {
         return optimizeHtml($retval);
     }
 
-    public static function headline($format = "<h1>%title%</h1>") {
+    public static function headline($format = "<h1>%title%</h1>"): void {
         echo self::getHeadline($format);
     }
 
-    public static function getHeadline($format = "<h1>%title%</h1>") {
-        $retval = "";
+    public static function getHeadline($format = "<h1>%title%</h1>"): ?string {
         $id = get_ID();
         if (!$id) {
-            $html = str_replace("%title%", get_title(null, true), $format);
-            return $html;
+            return str_replace("%title%", get_title(null, true), $format);
         }
         $sql = "SELECT show_headline FROM " . tbname("content") . " where id = $id";
         $result = Database::query($sql);
         $dataset = Database::fetchObject($result);
         if ($dataset->show_headline) {
-            $html = str_replace("%title%", get_title(null, true), $format);
+            return str_replace("%title%", get_title(null, true), $format);
         }
-        return $html;
+        return null;
     }
 
-    public static function doctype() {
+    public static function doctype(): void {
         echo self::getDoctype();
     }
 
-    public static function getDoctype() {
-        $html = '<!doctype html>';
-        return $html;
+    public static function getDoctype(): string {
+        return '<!doctype html>';
     }
 
-    public static function ogHTMLPrefix() {
+    public static function ogHTMLPrefix(): void {
         echo self::getOgHTMLPrefix();
     }
 
-    public static function getOgHTMLPrefix() {
+    public static function getOgHTMLPrefix(): string {
         $language = getCurrentLanguage();
-        $html = "<html prefix=\"og: http://ogp.me/ns#\" lang=\"$language\">";
-        return $html;
+        return "<html prefix=\"og: http://ogp.me/ns#\" lang=\"$language\">";
     }
 
-    public static function renderPartial($template, $theme = null) {
+    public static function renderPartial(string $template, ?string $theme = null): string {
         if (!$theme) {
             $theme = get_theme();
         }
@@ -224,21 +260,21 @@ class Template {
         return $result;
     }
 
-    public static function getHtml5Doctype() {
+    public static function getHtml5Doctype(): string {
         return "<!doctype html>";
     }
 
-    public static function html5Doctype() {
+    public static function html5Doctype(): void {
         echo self::getHtml5Doctype();
     }
 
-    public static function getBaseMetas() {
+    public static function getBaseMetas(): string {
         ob_start();
         self::baseMetas();
         return ob_get_clean();
     }
 
-    public static function baseMetas() {
+    public static function baseMetas(): void {
         $title_format = Settings::get("title_format");
         if ($title_format) {
             $title = $title_format;
@@ -295,8 +331,6 @@ class Template {
         do_event("enqueue_frontend_stylesheets");
 
         combinedStylesheetHtml();
-
-
 
         $min_style_file = getTemplateDirPath(get_theme()) . "style.min.css";
         $min_style_file_realpath = getTemplateDirPath(get_theme(), true) . "style.min.css";
@@ -371,24 +405,24 @@ color: " . Settings::get("body-text-color") . ";
         do_event("head");
     }
 
-    public static function jQueryScript() {
+    public static function jQueryScript(): void {
         $jQueryurl = get_jquery_url();
         echo Script::fromFile($jQueryurl);
         do_event("after_jquery_include");
     }
 
-    public static function getjQueryScript() {
+    public static function getjQueryScript(): string {
         ob_start();
         self::jQueryScript();
         return ob_get_clean();
     }
 
-    public static function content() {
+    public static function content(): void {
         echo self::getContent();
     }
 
     // TODO: Refactor this method
-    public static function getContent() {
+    public static function getContent(): string {
         $theme = get_theme();
 
         $errorPage403 = Settings::getLanguageSetting("error_page_403", getCurrentLanguage());
@@ -449,30 +483,30 @@ color: " . Settings::get("body-text-color") . ";
         echo "</ul>";
     }
 
-    public static function getLanguageSelection() {
+    public static function getLanguageSelection(): string {
         ob_start();
         self::languageSelection();
         return ob_get_clean();
     }
 
-    public static function getPoweredByUliCMS() {
+    public static function getPoweredByUliCMS(): string {
         return get_translation("powered_by_ulicms");
     }
 
     // Gibt "Diese Seite läuft mit UliCMS" aus
-    public static function poweredByUliCMS() {
+    public static function poweredByUliCMS(): void {
         echo self::getPoweredByUliCMS();
     }
 
-    public static function getComments() {
+    public static function getComments(): string {
         return Template::executeModuleTemplate("core_comments", "comments.php");
     }
 
-    public static function comments() {
+    public static function comments(): void {
         echo self::getComments();
     }
 
-    public static function getEditButton() {
+    public static function getEditButton(): string {
         $html = "";
         if (is_logged_in()) {
             $acl = new PermissionChecker(get_user_id());
@@ -491,15 +525,15 @@ color: " . Settings::get("body-text-color") . ";
         return $html;
     }
 
-    public static function editButton() {
+    public static function editButton(): void {
         echo self::getEditButton();
     }
 
-    public static function getFooterText() {
+    public static function getFooterText(): string {
         return replaceShortcodesWithModules(Settings::get("footer_text"), true);
     }
 
-    public static function footerText() {
+    public static function footerText(): void {
         echo self::getFooterText();
     }
 

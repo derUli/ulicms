@@ -107,7 +107,7 @@ if ($permissionChecker->hasPermission("list_packages")) {
         </table>
     </div>
     <?php
-    $themes = getThemesList();
+    $themes = getAllThemes();
     ?>
     <h2><?php translate("installed_designs"); ?></h2>
     <div class="scroll">

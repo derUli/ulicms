@@ -40,7 +40,7 @@ class DesignSettingsController extends Controller {
 
         // Wenn Formular abgesendet wurde, Wert Speichern
         if ($_REQUEST["theme"] !== $theme) { // if theme auf
-            $themes = getThemesList();
+            $themes = getAllThemes();
             if (faster_in_array($_REQUEST["theme"], $themes)) { // if faster_in_array theme auf
                 Settings::set("theme", $_REQUEST["theme"]);
                 $theme = $_REQUEST["theme"];
@@ -48,7 +48,7 @@ class DesignSettingsController extends Controller {
         } // if theme zu
         // Wenn Formular abgesendet wurde, Wert Speichern
         if ($_REQUEST["mobile_theme"] !== $mobile_theme) { // if mobile_theme auf
-            $themes = getThemesList();
+            $themes = getAllThemes();
             if (empty($_REQUEST["mobile_theme"]))
                 Settings::delete("mobile_theme");
             else if (faster_in_array($_REQUEST["mobile_theme"], $themes)) { // if faster_in_array mobile_theme auf

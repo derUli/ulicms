@@ -409,41 +409,11 @@ function category(): void {
 }
 
 function get_body_classes(): string {
-    $str = "page-id-" . get_ID() . " ";
-    if (is_frontpage()) {
-        $str .= "home ";
-    }
-
-    if (is_404()) {
-        $str .= "error404 ";
-    }
-
-    if (is_403()) {
-        $str .= "error403 ";
-    }
-
-    if (is_404() or is_403()) {
-        $str .= "errorPage ";
-    } else {
-        $str .= "page ";
-    }
-
-    if (is_mobile()) {
-        $str .= "mobile ";
-    } else {
-        $str .= "desktop ";
-    }
-
-    if (containsModule(get_requested_pagename())) {
-        $str .= "containsModule ";
-    }
-    $str = trim($str);
-    $str = apply_filter($str, "body_classes");
-    return $str;
+    return Template::getBodyClasses();
 }
 
 function body_classes(): void {
-    echo get_body_classes();
+    echo Template::getBodyClasses();
 }
 
 // Gibt "Diese Seite läuft mit UliCMS" aus

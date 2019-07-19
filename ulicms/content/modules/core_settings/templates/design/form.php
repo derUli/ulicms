@@ -7,7 +7,7 @@ if (!$permissionChecker->hasPermission("design")) {
     $theme = Settings::get("theme");
     $additional_menus = Settings::get("additional_menus");
     $mobile_theme = Settings::get("mobile_theme");
-    $allThemes = getThemesList();
+    $allThemes = getAllThemes();
     $fonts = $controller->getFontFamilys();
     $google_fonts = $controller->getGoogleFonts();
     $theme = Settings::get("theme");
