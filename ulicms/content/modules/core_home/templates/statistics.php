@@ -34,7 +34,7 @@ $model = $controller->getModel();
         <td><?php echo count(getUsers()) ?></td>
     </tr>
     <?php
-    if (Settings::get("contact_form_refused_spam_mails") !== false) {
+    if (Settings::get("contact_form_refused_spam_mails")) {
         ?>
         <tr>
             <td><?php echo translate("BLOCKED_SPAM_MAILS"); ?></td>

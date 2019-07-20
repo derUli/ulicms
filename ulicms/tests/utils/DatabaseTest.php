@@ -156,7 +156,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         // clear settings cache
         SettingsCache::set("foo", null);
 
-        $this->assertFalse(Settings::get("foo"));
+        $this->assertNull(Settings::get("foo"));
     }
 
     public function testEscapeName() {

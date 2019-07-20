@@ -1,25 +1,26 @@
 <?php
 
+declare(strict_types=1);
+
 use UliCMS\Constants\AuditLog;
 
 class Settings {
 
-    public static function register($key, $value, $type = 'str') {
+    public static function register(string $key, $value, $type = 'str'): void {
         self::init($key, $value, $type);
     }
 
-    public static function init($key, $value, $type = 'str') {
-        $retval = false;
+    public static function init(string $key, $value, string $type = 'str'): bool {
         if (!self::get($key)) {
             self::set($key, $value, $type);
-            $retval = true;
             SettingsCache::set($key, $value);
+            return true;
         }
-        return $retval;
+        return false;
     }
 
     // get a config variable
-    public static function get($key, $type = 'str') {
+    public static function get(string $key, string $type = 'str') {
         if (!is_null(SettingsCache::get($key))) {
             return SettingsCache::get($key);
         }
@@ -31,27 +32,28 @@ class Settings {
                 SettingsCache::set($key, $value, $type);
                 return $value;
             }
-        } else {
-            SettingsCache::set($key, false);
-            return false;
         }
+        SettingsCache::set($key, null);
+        return null;
     }
 
-    public static function output($key, $type = 'str') {
+    public static function output(string $key, string $type = 'str'): void {
         $value = self::get($key, $type);
         if ($value) {
             echo $value;
         }
     }
 
-    public static function outputEscaped($key, $type = 'str') {
+    public static function outputEscaped(string $key,
+            string $type = 'str'): void {
         $value = self::get($key, $type);
         if ($value) {
             esc($value);
         }
     }
 
-    public static function getLanguageSetting($name, $language = null, $type = 'str') {
+    public static function getLanguageSetting(string$name,
+            ?string $language = null, string $type = 'str') {
         $retval = false;
         $settingsName = $language ? "{$name}_{$language}" : $name;
 
@@ -64,11 +66,13 @@ class Settings {
         return $config;
     }
 
-    public static function getLang($name, $language = null, $type = 'str') {
+    public static function getLang(string $name,
+            ?string $language = null, string $type = 'str') {
         return self::getLanguageSetting($name, $language, $type);
     }
 
-    public static function setLanguageSetting($name, $value, $language = null) {
+    public static function setLanguageSetting(string $name, $value,
+            ?string $language = null): void {
         $settingsName = $language ? "{$name}_{$language}" : $name;
 
         if ($value) {
@@ -79,7 +83,8 @@ class Settings {
     }
 
     // Set a configuration Variable;
-    public static function set($key, $value, $type = 'str') {
+    public static function set(string $key, $value,
+            string $type = 'str'): void {
         $key = db_escape($key);
         $originalValue = self::convertVar($value, $type);
         $value = db_escape($originalValue);
@@ -106,14 +111,14 @@ class Settings {
     }
 
 // Remove an configuration variable
-    public static function delete($key) {
+    public static function delete(string $key): bool {
         $key = db_escape($key);
         db_query("DELETE FROM " . tbname("settings") . " WHERE name='$key'");
         SettingsCache::set($key, null);
         return db_affected_rows() > 0;
     }
 
-    public static function convertVar($value, $type) {
+    public static function convertVar($value, string $type) {
         switch ($type) {
             case 'str':
                 $value = strval($value);
@@ -131,7 +136,7 @@ class Settings {
         return $value;
     }
 
-    public static function getAll($order = "name") {
+    public static function getAll(string $order = "name"): array {
         $datasets = [];
         $result = Database::query("SELECT * FROM `{prefix}settings` order by $order", true);
         while ($dataset = Database::fetchObject($result)) {
@@ -140,7 +145,7 @@ class Settings {
         return $datasets;
     }
 
-    public static function mappingStringToArray($str) {
+    public static function mappingStringToArray(string $str): array {
         $str = trim($str);
         $str = normalizeLN($str, "\n");
         $lines = explode("\n", $str);

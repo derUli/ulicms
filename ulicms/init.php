@@ -350,7 +350,7 @@ if (!Settings::get("hide_meta_generator")) {
 
 $memory_limit = Settings::get("memory_limit");
 
-if ($memory_limit !== false) {
+if ($memory_limit) {
     @ini_set('memory_limit', $memory_limit);
 }
 
@@ -415,7 +415,7 @@ register_shutdown_function("shutdown_function");
 
 $enforce_https = Settings::get("enforce_https");
 
-if (!is_ssl() and $enforce_https !== false) {
+if (!is_ssl() and $enforce_https) {
     header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
     exit();
 }

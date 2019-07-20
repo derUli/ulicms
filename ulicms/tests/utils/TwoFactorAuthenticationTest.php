@@ -50,7 +50,7 @@ class TwoFactorAuthenticationTest extends \PHPUnit\Framework\TestCase {
     public function testConstructor() {
         Settings::set("twofactor_authentication", "twofactor_authentication");
         Settings::delete("ga_secret");
-        $this->assertFalse(Settings::get("ga_secret"));
+        $this->assertNull(Settings::get("ga_secret"));
 
         $auth = new TwoFactorAuthentication();
         $this->assertIsString(Settings::get("ga_secret"));

@@ -25,17 +25,27 @@ class SpamFilterConfiguration {
     public static function fromSettings(): SpamFilterConfiguration {
         $settings = new SpamFilterConfiguration();
         $settings->setSpamFilterEnabled(AntiSpamHelper::isSpamFilterEnabled());
-        $settings->setBadwords(Settings::get("spamfilter_words_blacklist"));
+        $settings->setBadwords(
+                Settings::get("spamfilter_words_blacklist")
+        );
         $settings->setBlockedCountries(Settings::get("country_blacklist"));
 
-        $settings->setDisallowChineseChars(Settings::get("disallow_chinese_chars"));
-        $settings->setDisallowCyrillicChars(Settings::get("disallow_cyrillic_chars"));
-        $settings->setDisallowRtlChars(Settings::get("disallow_rtl_chars"));
-
-        $settings->setRejectRequestsFromBots(Settings::get("reject_requests_from_bots"));
-        $settings->setCheckMxOfMailAddress(Settings::get("check_mx_of_mail_address"));
-
-        // TODO: read other antispam settings
+        $settings->setDisallowChineseChars(
+                boolval(Settings::get("disallow_chinese_chars"))
+        );
+        $settings->setDisallowCyrillicChars(boolval(
+                        Settings::get("disallow_cyrillic_chars"))
+        );
+        $settings->setDisallowRtlChars(
+                boolval(Settings::get("disallow_rtl_chars")
+        ));
+        $settings->setRejectRequestsFromBots(
+                boolval(Settings::get("reject_requests_from_bots"))
+        );
+        $settings->setCheckMxOfMailAddress(
+                boolval(
+                        Settings::get("check_mx_of_mail_address"))
+        );
 
         return $settings;
     }
