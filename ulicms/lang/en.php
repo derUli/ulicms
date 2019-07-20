@@ -758,4 +758,6 @@ add_translation("all", "All");
 
 add_translation("disabled_functions", "Disabled functions");
 
+add_translation("unsupported_output_format", "Unsupported Output Format: %format%");
+
 do_event("lang_en");

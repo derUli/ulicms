@@ -1,6 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace UliCMS\Creators;
+
+use Template;
+use UliCMS\Utils\CacheUtil;
 
 class CSVCreator {
 
@@ -24,17 +29,12 @@ class CSVCreator {
         $this->content = ob_get_clean();
     }
 
-    private function httpHeader() {
-        header("Content-type: text/csv; charset=UTF-8");
-    }
-
-    public function output() {
+    public function render(): string {
         $uid = CacheUtil::getCurrentUid();
         $adapter = CacheUtil::getAdapter();
         if ($adapter and $adapter->has($uid)) {
-            $adapter->get($uid);
+            return $adapter->get($uid);
         }
-
 
         $data = [];
         $data[] = array(
@@ -56,12 +56,10 @@ class CSVCreator {
         $csv_string = getCSV($data[0]);
         $csv_string .= getCSV($data[1]);
 
-        $this->httpHeader();
-        echo $csv_string;
         if ($adapter) {
             $adapter->set($uid, $csv_string, CacheUtil::getCachePeriod());
         }
-        exit();
+        return $csv_string;
     }
 
 }

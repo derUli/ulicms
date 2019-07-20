@@ -138,15 +138,21 @@ if ($format == "html") {
     $pdf->output();
 } else if ($format == "csv") {
     $csv = new CSVCreator();
-    $csv->output();
+    Result($csv->render(), HttpStatusCode::OK, "text/csv");
 } else if ($format == "json") {
     $json = new JSONCreator();
-    $json->output();
+    RawJSONResult($json->render());
 } else if ($format == "txt") {
     $plain = new PlainTextCreator();
-    $plain->output();
+    TextResult($plain->render());
 } else {
-    $format = "html";
+    ExceptionResult(
+            get_secure_translation("unsupported_output_format",
+                    [
+                        "%format%" => $format
+                    ]
+            )
+    );
 }
 
 do_event("after_http_header");

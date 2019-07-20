@@ -755,4 +755,6 @@ add_translation("all", "Alle");
 
 add_translation("disabled_functions", "Deaktivierte Funktionen");
 
+add_translation("unsupported_output_format", "Nicht unterstütztes Ausgabeformat: %format%");
+
 do_event("lang_de");

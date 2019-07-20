@@ -2,6 +2,8 @@
 
 namespace UliCMS\Creators;
 
+use Template;
+
 $mpdf = ULICMS_ROOT . "/lib/MPDF60/mpdf.php";
 if (is_file($mpdf)) {
     require_once ($mpdf);
@@ -44,7 +46,7 @@ class PDFCreator {
         $mpdf = new mPDF(getCurrentLanguage(true), 'A4');
         $mpdf->WriteHTML($this->content);
         $this->httpHeader();
-        $mpdf->output();
+        $mpdf->render();
         exit();
     }
 

@@ -1,6 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace UliCMS\Creators;
+
+use Template;
+use UliCMS\Utils\CacheUtil;
 
 class PlainTextCreator {
 
@@ -24,15 +29,11 @@ class PlainTextCreator {
         $this->content = ob_get_clean();
     }
 
-    private function httpHeader() {
-        header("Content-type: text/plain; charset=UTF-8");
-    }
-
-    public function output() {
+    public function render(): string {
         $uid = CacheUtil::getCurrentUid();
         $adapter = CacheUtil::getAdapter();
         if ($adapter and $adapter->has($uid)) {
-            $adapter->get($uid);
+            return $adapter->get($uid);
         }
 
         $this->content = br2nlr($this->content);
@@ -43,12 +44,11 @@ class PlainTextCreator {
         $this->content = unhtmlspecialchars($this->content);
         $this->content = preg_replace_callback('/&#([0-9a-fx]+);/mi', 'replace_num_entity', $this->content);
 
-        $this->httpHeader();
-        echo $this->content;
+
         if ($adapter) {
             $adapter->set($uid, $this->content, CacheUtil::getCachePeriod());
         }
-        exit();
+        return $this->content;
     }
 
 }

@@ -1,6 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace UliCMS\Creators;
+
+use UliCMS\Utils\CacheUtil;
 
 class JSONCreator {
 
@@ -15,17 +19,12 @@ class JSONCreator {
         $this->content = ob_get_clean();
     }
 
-    private function httpHeader() {
-        header("Content-type: application/json; charset=UTF-8");
-    }
-
-    public function output() {
+    public function render(): string {
         $uid = CacheUtil::getCurrentUid();
         $adapter = CacheUtil::getAdapter();
         if ($adapter and $adapter->has($uid)) {
-            $adapter->get($uid);
+            return $adapter->get($uid);
         }
-
 
         $data = [];
         $this->content = str_replace("\r\n", "\n", $this->content);
@@ -35,14 +34,11 @@ class JSONCreator {
         $data["content"] = $this->content;
         $data["meta_description"] = get_meta_description();
         $data["meta_keywords"] = get_meta_keywords();
-        $data["author"] = $author;
         $json_string = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-        $this->httpHeader();
-        echo $json_string;
         if ($adapter) {
             $adapter->set($uid, $json_string, CacheUtil::getCachePeriod());
         }
-        exit();
+        return $json_string;
     }
 
 }

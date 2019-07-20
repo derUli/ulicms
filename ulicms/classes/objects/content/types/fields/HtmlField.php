@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 class HtmlField extends CustomField {
 
-    public function render($value = null) {
+    public function render($value = null): string {
         if (!isset($this->htmlAttributes["class"])) {
             $this->htmlAttributes["class"] = get_html_editor();
         }
