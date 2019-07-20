@@ -1,42 +1,44 @@
 <?php
 
+declare(strict_types=1);
+
 use UliCMS\Services\Connectors\PackageSourceConnector;
 use UliCMS\Constants\PackageTypes;
 
 class PackageManager {
 
-    public function checkForNewerVersionOfPackage($name) {
+    public function checkForNewerVersionOfPackage(string $name): ?string {
         $connector = new PackageSourceConnector();
         $connector->fetch(true);
         return $connector->getVersionOfPackage($name);
     }
 
-    public function splitPackageName($name) {
+    public function splitPackageName(string $name): array {
         $name = str_ireplace(".tar.gz", "", $name);
         $name = str_ireplace(".zip", "", $name);
         $splitted = explode("-", $name);
         $version = array_pop($splitted);
         $name = $splitted;
-        return array(
+        return [
             join("-", $name),
             $version
-        );
+        ];
     }
 
-    public function getInstalledPatchNames() {
-        $result = db_query("SELECT name from " . tbname("installed_patches"));
+    public function getInstalledPatchNames(): array {
         $retval = [];
+        $result = db_query("SELECT name from " . tbname("installed_patches"));
         while ($row = db_fetch_object($result)) {
             $retval[] = $row->name;
         }
         return $retval;
     }
 
-    public function truncateInstalledPatches() {
+    public function truncateInstalledPatches(): bool {
         return db_query("TRUNCATE TABLE " . tbname("installed_patches"));
     }
 
-    public function isInstalled($package, $type = PackageTypes::TYPE_MODULE) {
+    public function isInstalled(string $package, string $type = PackageTypes::TYPE_MODULE): bool {
         switch ($type) {
             case PackageTypes::TYPE_MODULE:
                 $module = new Module($package);
@@ -48,7 +50,7 @@ class PackageManager {
         }
     }
 
-    public function installPatch($name, $description, $url, $clear_cache = true, $checksum = null) {
+    public function installPatch(string $name, string $description, string $url, bool $clear_cache = true, ?string $checksum = null): bool {
         @set_time_limit(0);
         $test = $this->getInstalledPatchNames();
         if (faster_in_array($name, $test)) {
@@ -94,9 +96,9 @@ class PackageManager {
         return false;
     }
 
-    public function getInstalledPatches() {
-        $result = db_query("SELECT * from " . tbname("installed_patches"));
+    public function getInstalledPatches(): array {
         $retval = [];
+        $result = db_query("SELECT * from " . tbname("installed_patches"));
         while ($row = db_fetch_object($result)) {
             $retval[$row->name] = $row;
         }
@@ -104,7 +106,7 @@ class PackageManager {
     }
 
     // TODO: Reimplement in PackageSourceconnector
-    public function installPackage($file, $clear_cache = true) {
+    public function installPackage(string $file, bool $clear_cache = true): bool {
         @set_time_limit(0);
         try {
             // Paket entpacken
@@ -141,10 +143,10 @@ class PackageManager {
         }
     }
 
-    public function getInstalledModules() {
-        $module_folder = Path::resolve("ULICMS_DATA_STORAGE_ROOT/content/modules") . "/";
-
+    public function getInstalledModules(): array {
         $available_modules = [];
+
+        $module_folder = Path::resolve("ULICMS_DATA_STORAGE_ROOT/content/modules") . "/";
         $directory_content = scandir($module_folder);
 
         natcasesort($directory_content);
@@ -166,7 +168,7 @@ class PackageManager {
         return $available_modules;
     }
 
-    public function getInstalledThemes() {
+    public function getInstalledThemes(): array {
         $themes = [];
         $templateDir = Path::resolve("ULICMS_DATA_STORAGE_ROOT/content/templates") . "/";
 
@@ -184,13 +186,13 @@ class PackageManager {
         return $themes;
     }
 
-    public function getInstalledPackages($type = 'modules') {
+    public function getInstalledPackages(string $type = 'modules'): ?array {
         if ($type === 'modules') {
             return $this->getInstalledModules();
         } else if ($type === 'themes') {
             return $this->getInstalledThemes();
         }
-        return null;
+        throw new BadMethodCallException("No such package type: $type");
     }
 
 }

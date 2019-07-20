@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace UliCMS\Models\Media;
 
-use mysqli_result;
 use UliCMS\Utils\File;
 use UliCMS\Models\Content\Category;
 use Database;

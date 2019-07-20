@@ -135,7 +135,7 @@ if ($format == "html") {
     header("Content-Type: text/html; charset=utf-8");
 } else if ($format == "pdf") {
     $pdf = new PDFCreator();
-    $pdf->output();
+    Result($pdf->render(), HttpStatusCode::OK, "application/pdf");
 } else if ($format == "csv") {
     $csv = new CSVCreator();
     Result($csv->render(), HttpStatusCode::OK, "text/csv");

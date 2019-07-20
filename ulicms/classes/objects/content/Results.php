@@ -39,8 +39,7 @@ function TextResult(string $data, int $status = 200): void {
     $size = getStringLengthInBytes($data);
     header('Content-Type: text/plain; charset=utf-8');
     header("Content-length: $size");
-    echo $data;
-    exit();
+    die($data);
 }
 
 function Result(string $data, int $status = 200, ?string $type = null): void {
@@ -50,8 +49,7 @@ function Result(string $data, int $status = 200, ?string $type = null): void {
         header("Content-Type: $type");
     }
     header("Content-length: $size");
-    echo $data;
-    exit();
+    die($data);
 }
 
 function HTTPStatusCodeResult(int $status, ?string $description = null): void {

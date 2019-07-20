@@ -9,6 +9,8 @@ if (is_file($mpdf)) {
     require_once ($mpdf);
 }
 
+use Mpdf\Mpdf;
+
 class PDFCreator {
 
     public $target_file = null;
@@ -30,24 +32,18 @@ class PDFCreator {
         $this->content = ob_get_clean();
     }
 
-    private function httpHeader() {
-        header("Content-type: application/pdf");
-    }
+    public function render() {
 
-    public function output() {
-        $hasModul = containsModule(get_requested_pagename());
-
-        if (!class_exists("mPDF")) {
-            echo "mPDF is not installed. Please install <a href=\"http://www.ulicms.de/mpdf_supplement.html\" target=\"_blank\">mPDF supplement</a>.";
-            die();
+        if (!class_exists("\\Mpdf\\Mpdf")) {
+            ExceptionResult("Mpdf is not installed. Please install <a href=\"http://www.ulicms.de/mpdf_supplement.html\" target=\"_blank\">mPDF supplement</a>.");
         }
 
         // TODO: Reimplement Caching of generated pdf files
-        $mpdf = new mPDF(getCurrentLanguage(true), 'A4');
+        $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-P']);
+
         $mpdf->WriteHTML($this->content);
-        $this->httpHeader();
-        $mpdf->render();
-        exit();
+        $output = $mpdf->Output('foobar.pdf', \Mpdf\Output\Destination::STRING_RETURN);
+        return $output;
     }
 
 }

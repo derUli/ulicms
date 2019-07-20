@@ -40,7 +40,8 @@
         "cocur/slugify": "*",
         "matthiasmullie/minify": "*",
         "rakit/validation": "*",
-        "nesbot/carbon": "*"
+        "nesbot/carbon": "*",
+        "mpdf/mpdf": "^8.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^7.0"
