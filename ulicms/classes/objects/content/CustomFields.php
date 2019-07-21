@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 class CustomFields {
 
-    public static function set($name, $value, $content_id = null, $addPrefix = false) {
+    public static function set(string $name, $value, ?int $content_id = null, $addPrefix = false): ?bool {
         if (is_null($content_id)) {
             $content_id = get_ID();
         }
@@ -50,7 +52,7 @@ class CustomFields {
         }
     }
 
-    public static function getAll($content_id = null, $removePrefix = true) {
+    public static function getAll(?int $content_id = null, bool $removePrefix = true): array {
         $fields = [];
         if (is_null($content_id)) {
             $content_id = get_ID();
@@ -76,7 +78,7 @@ class CustomFields {
         return $fields;
     }
 
-    public static function get($name, $content_id = null, $addPrefix = true) {
+    public static function get(string $name, ?int $content_id = null, $addPrefix = true) {
         if (is_null($content_id)) {
             $content_id = get_ID();
         }
