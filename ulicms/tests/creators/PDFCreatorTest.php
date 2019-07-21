@@ -21,8 +21,7 @@ class PDFCreatorTest extends \PHPUnit\Framework\TestCase {
 
         $output = $creator->render();
         $this->assertStringStartsWith("%PDF-1.4", $output);
-
-        $this->assertGreaterThan(28.962,
+        $this->assertGreaterThanOrEqual(29000,
                 getStringLengthInBytes($output));
     }
 

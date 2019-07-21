@@ -1,38 +1,38 @@
 <?php
 
+declare(strict_types=1);
+
 use UliCMS\Exceptions\FileNotFoundException;
 use UliCMS\Models\Content\TypeMapper;
 
 class ContentFactory {
 
-    public static function getCurrentPage() {
+    public static function getCurrentPage(): ?Content {
         return ContentFactory::getBySlugAndLanguage(get_requested_pagename(), getCurrentLanguage(true));
     }
 
-    public static function getByID($id) {
+    public static function getByID(int $id): ?Content {
         $id = intval($id);
         $result = Database::query("SELECT `id`, `type` FROM `" . tbname("content") . "` where id = " . $id);
         if (Database::getNumRows($result) > 0) {
             $dataset = Database::fetchObject($result);
             return self::getContentObjectByID($dataset);
-        } else {
-            throw new FileNotFoundException("No page with id $id");
         }
+        throw new FileNotFoundException("No page with id $id");
     }
 
-    public static function getBySlugAndLanguage($name, $language) {
+    public static function getBySlugAndLanguage(string $name, string $language): ?Content {
         $name = Database::escapeValue($name);
         $language = Database::escapeValue($language);
         $result = Database::query("SELECT id, `type` FROM `" . tbname("content") . "` where `slug` = '$name' and `language` = '$language'");
         if (Database::getNumRows($result) > 0) {
             $dataset = Database::fetchObject($result);
             return self::getContentObjectByID($dataset);
-        } else {
-            throw new FileNotFoundException("No page with this combination of $name and $language");
         }
+        throw new FileNotFoundException("No page with this combination of $name and $language");
     }
 
-    private static function getContentObjectByID($row) {
+    private static function getContentObjectByID(object $row): ?Content {
         $retval = null;
         $type = $row->type;
         $mappings = TypeMapper::getMappings();
@@ -44,7 +44,7 @@ class ContentFactory {
         return $retval;
     }
 
-    public static function getAll($order = "id") {
+    public static function getAll(string $order = "id"): array {
         $datasets = [];
         $sql = "SELECT id, `type` FROM " . tbname("content") . " ORDER BY $order";
         $result = Database::query($sql);
@@ -54,7 +54,7 @@ class ContentFactory {
         return $datasets;
     }
 
-    public static function getAllRegular($order = "id") {
+    public static function getAllRegular(string $order = "id"): array {
         $datasets = [];
         $sql = "SELECT id, `type` FROM " . tbname("content") . " where type not in ('link', 'language_link', 'node') ORDER BY $order";
         $result = Database::query($sql);
@@ -64,9 +64,9 @@ class ContentFactory {
         return $datasets;
     }
 
-    public static function getAllByLanguage($language, $order = "id") {
-        $language = Database::escapeValue($language);
+    public static function getAllByLanguage(string $language, string $order = "id"): array {
         $datasets = [];
+        $language = Database::escapeValue($language);
         $sql = "SELECT id, `type` FROM " . tbname("content") . " where `language` = '$language' ORDER BY $order";
         $result = Database::query($sql);
         while ($row = Database::fetchObject($result)) {
@@ -75,7 +75,7 @@ class ContentFactory {
         return $datasets;
     }
 
-    public static function getAllByParent($parent_id, $order = "id") {
+    public static function getAllByParent(?int $parent_id, string $order = "id"): array {
         $contents = [];
 
         $sql = "SELECT id, type FROM {prefix}content ";
@@ -97,7 +97,7 @@ class ContentFactory {
         return $contents;
     }
 
-    public static function getAllByMenu($menu, $order = "id") {
+    public static function getAllByMenu(string $menu, string $order = "id"): array {
         $menu = Database::escapeValue($menu);
         $datasets = [];
         $sql = "SELECT id, `type` FROM " . tbname("content") . " where `menu` = '$menu' ORDER BY $order";
@@ -108,7 +108,7 @@ class ContentFactory {
         return $datasets;
     }
 
-    public static function getAllByType($type, $order = "id") {
+    public static function getAllByType(string $type, string $order = "id"): array {
         $type = Database::escapeValue($type);
         $datasets = [];
         $sql = "SELECT id, `type` FROM " . tbname("content") . " where `type` = '$type' ORDER BY $order";
@@ -119,7 +119,7 @@ class ContentFactory {
         return $datasets;
     }
 
-    public static function getAllWithComments($order = "title") {
+    public static function getAllWithComments(string $order = "title"): array {
         $datasets = [];
         $sql = "select type, a.id  from {prefix}content a inner join {prefix}comments c on c.content_id = a.id group by c.content_id order by a.{$order}";
         $result = Database::query($sql, true);
@@ -130,7 +130,7 @@ class ContentFactory {
         return $datasets;
     }
 
-    public static function getForFilter($language = null, $category_id = null, $menu = null, $parent_id = null, $order_by = "title", $order_direction = "asc", $type = null, $limit = null) {
+    public static function getForFilter(?string $language = null, ?int $category_id = null, ?string $menu = null, ?int $parent_id = null, string $order_by = "title", string $order_direction = "asc", ?string $type = null, ?string $limit = null): array {
         $datasets = [];
         $sql = "select id, `type` from " . tbname("content") . " where active = 1 and deleted_at is null and ";
         if ($language !== null and $language !== "") {
@@ -177,7 +177,7 @@ class ContentFactory {
         return $datasets;
     }
 
-    public static function getAllByMenuAndLanguage($menu, $language, $order = "id") {
+    public static function getAllByMenuAndLanguage(string $menu, string $language, string $order = "id"): array {
         $menu = Database::escapeValue($menu);
         $language = Database::escapeValue($language);
         $datasets = [];
@@ -189,7 +189,7 @@ class ContentFactory {
         return $datasets;
     }
 
-    public static function filterByEnabled($elements, $enabled = 1) {
+    public static function filterByEnabled(array $elements, $enabled = 1) {
         $result = [];
         foreach ($elements as $element) {
             if ($element->active == $enabled) {
@@ -199,7 +199,7 @@ class ContentFactory {
         return $result;
     }
 
-    public static function filterByCategory($elements, $category_id = 1) {
+    public static function filterByCategory(array $elements, ?int $category_id = 1): array {
         $result = [];
         foreach ($elements as $element) {
             if ($element->category_id == $category_id) {
@@ -209,7 +209,7 @@ class ContentFactory {
         return $result;
     }
 
-    public static function filterByAuthor($elements, $author_id = 1) {
+    public static function filterByAuthor(array $elements, ?int $author_id = 1): array {
         $result = [];
         foreach ($elements as $element) {
             if ($element->author_id == $author_id) {
@@ -219,7 +219,7 @@ class ContentFactory {
         return $result;
     }
 
-    public static function filterByLastChangeBy($elements, $lastchangeby = 1) {
+    public static function filterByLastChangeBy(array $elements, ?int $lastchangeby = 1): array {
         $result = [];
         foreach ($elements as $element) {
             if ($element->lastchangeby == $lastchangeby) {
