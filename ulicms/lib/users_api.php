@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use UliCMS\Security\TwoFactorAuthentication;
 
 // this ffile contains functions for managing user accounts
@@ -79,7 +81,7 @@ function register_session(array $user, bool $redirect = true): void {
     $userDataset->registerSession($redirect);
 }
 
-function validate_login(string $username, string $password, ?string $token = null) {
+function validate_login(string $username, string $password, ?string $token = null): ?array {
     $user = new User();
     $user->loadByUsername($username);
 
