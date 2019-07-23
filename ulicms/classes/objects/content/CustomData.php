@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 class CustomData {
 
     private static $defaults = [];
 
-    public static function get($page = null) {
+    public static function get(?string $page = null) {
         if (!$page) {
             $page = get_requested_pagename();
         }
@@ -17,7 +19,7 @@ class CustomData {
         return null;
     }
 
-    public static function set($var, $value, $page = null) {
+    public static function set(string $var, $value, ?string $page = null): void {
         if (!$page) {
             $page = get_requested_pagename();
         }
@@ -27,10 +29,10 @@ class CustomData {
         }
         $data[$var] = $value;
         $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-        return Database::query("UPDATE " . tbname("content") . " SET custom_data = '" . Database::escapeValue($json) . "' WHERE slug='" . Database::escapeValue($page) . "'");
+        Database::query("UPDATE " . tbname("content") . " SET custom_data = '" . Database::escapeValue($json) . "' WHERE slug='" . Database::escapeValue($page) . "'");
     }
 
-    public static function delete($var = null, $page = null) {
+    public static function delete(?string $var = null, ?string $page = null) {
         if (!$page) {
             $page = get_requested_pagename();
         }
@@ -48,10 +50,10 @@ class CustomData {
             $data = [];
         }
         $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-        return Database::query("UPDATE " . tbname("content") . " SET custom_data = '" . Database::escapeValue($json) . "' WHERE slug='" . Database::escapeValue($page) . "'");
+        Database::query("UPDATE " . tbname("content") . " SET custom_data = '" . Database::escapeValue($json) . "' WHERE slug='" . Database::escapeValue($page) . "'");
     }
 
-    public static function getCustomDataOrSetting($name) {
+    public static function getCustomDataOrSetting(string $name) {
         $data = CustomData::get();
         if (!is_null($data) and is_array($data) and isset($data[$name])) {
             return $data[$name];
@@ -59,18 +61,18 @@ class CustomData {
         return Settings::get($name);
     }
 
-    public static function setDefault($key, $value) {
+    public static function setDefault(string $key, $value): void {
         self::$defaults[$key] = $value;
     }
 
-    public static function getDefault($key) {
+    public static function getDefault(string $key) {
         if (!isset(self::$defaults[$key])) {
             return null;
         }
         return self::$defaults[$key];
     }
 
-    public static function getDefaultJSON() {
+    public static function getDefaultJSON(): string {
         return json_readable_encode(self::$defaults);
     }
 

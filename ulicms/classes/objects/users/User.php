@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use UliCMS\Exceptions\NotImplementedException;
 use UliCMS\Security\PermissionChecker;
 use UliCMS\Security\Encryption;
@@ -40,11 +42,11 @@ class User extends Model {
         $this->fillVars($result);
     }
 
-    public static function fromSessionData() {
+    public static function fromSessionData(): ?User {
         return get_user_id() ? new self(get_user_id()) : null;
     }
 
-    public function toSessionData() {
+    public function toSessionData(): ?array {
         return $this->isPersistent() ? [
             "ulicms_login" => $this->getUsername(),
             "lastname" => $this->getLastname(),
@@ -58,7 +60,7 @@ class User extends Model {
                 ] : null;
     }
 
-    public function registerSession($redirect = true) {
+    public function registerSession(bool $redirect = true): void {
         $sessionData = $this->toSessionData();
 
         if (!is_array($sessionData)) {
@@ -87,7 +89,7 @@ class User extends Model {
         }
     }
 
-    public function loadByUsername($name) {
+    public function loadByUsername(string $name): void {
         $sql = "select * from {prefix}users where username COLLATE utf8mb4_general_ci = ?";
         $args = array(
             strval($name)
@@ -96,7 +98,7 @@ class User extends Model {
         $this->fillVars($result);
     }
 
-    public function loadByEmail($email) {
+    public function loadByEmail(string $email): void {
         $sql = "select * from {prefix}users where email COLLATE utf8mb4_general_ci = ?";
         $args = array(
             strval($email)
@@ -114,12 +116,12 @@ class User extends Model {
         $this->saveGroups();
     }
 
-    public function saveAndSendMail($password) {
+    public function saveAndSendMail(string $password): void {
         $this->save();
         $this->sendWelcomeMail($password);
     }
 
-    public function sendWelcomeMail($password) {
+    public function sendWelcomeMail(string $password): void {
         $subject = get_translation("new_user_account_at_site",
                 array("%domain%" => get_domain()));
         $mailBody = $this->getWelcomeMailText($password);
@@ -128,7 +130,7 @@ class User extends Model {
         Mailer::send($this->getEmail(), $subject, $mailBody, $headers);
     }
 
-    public function getWelcomeMailText($password) {
+    public function getWelcomeMailText(string $password): string {
         ViewBag::set("user", $this);
         ViewBag::set("url", ModuleHelper::getBaseUrl());
         ViewBag::set("password", $password);
@@ -150,9 +152,10 @@ class User extends Model {
             }
             // load secondary groups
             $this->loadGroups($result["id"]);
-        } else {
-            $this->setSecondaryGroups([]);
+            $this->setId(intval($result["id"]));
+            return;
         }
+        $this->setSecondaryGroups([]);
     }
 
     protected function insert() {
@@ -206,7 +209,7 @@ class User extends Model {
         Database::pQuery($sql, $args, true) or die(Database::getError());
     }
 
-    public function getId() {
+    public function getId(): ?int {
         return $this->id;
     }
 
@@ -214,35 +217,35 @@ class User extends Model {
         $this->id = !is_null($id) ? intval($id) : null;
     }
 
-    public function getUsername() {
+    public function getUsername(): ?string {
         return $this->username;
     }
 
-    public function setUsername($username) {
+    public function setUsername(string $username): void {
         $this->username = !is_null($username) ? strval($username) : null;
     }
 
-    public function getLastname() {
+    public function getLastname(): ?string {
         return $this->lastname;
     }
 
-    public function setLastname($lastname) {
+    public function setLastname(?string $lastname): void {
         $this->lastname = !is_null($lastname) ? strval($lastname) : null;
     }
 
-    public function getFirstname() {
+    public function getFirstname(): ?string {
         return $this->firstname;
     }
 
-    public function setFirstname($firstname) {
+    public function setFirstname(?string $firstname): void {
         $this->firstname = !is_null($firstname) ? strval($firstname) : null;
     }
 
-    public function getEmail() {
+    public function getEmail(): ?string {
         return $this->email;
     }
 
-    public function setEmail($email) {
+    public function setEmail(?string $email): void {
         $this->email = !is_null($email) ? strval($email) : null;
     }
 
@@ -261,38 +264,38 @@ class User extends Model {
         return $result;
     }
 
-    public function getPassword() {
+    public function getPassword(): ?string {
         return $this->password;
     }
 
-    public function setPassword($password) {
+    public function setPassword(?string $password): void {
         $this->password = Encryption::hashPassword($password);
         $this->password_changed = date("Y-m-d H:i:s");
     }
 
-    public function getPasswordChanged() {
+    public function getPasswordChanged(): ?int {
         return $this->password_changed;
     }
 
-    public function resetPassword() {
+    public function resetPassword(): void {
         $passwordReset = new PasswordReset();
         $token = $passwordReset->addToken($this->getId());
         $passwordReset->sendMail($token, $this->getEmail(), "xxx.xxx.xxx.xxx", $this->getFirstname(), $this->getLastname());
     }
 
-    public function checkPassword($password) {
+    public function checkPassword(string $password): bool {
         return Encryption::hashPassword($password) == $this->getPassword();
     }
 
-    public function getAboutMe() {
+    public function getAboutMe(): ?string {
         return $this->about_me;
     }
 
-    public function setAboutMe($text) {
+    public function setAboutMe(?string $text): void {
         $this->about_me = !is_null($text) ? strval($text) : null;
     }
 
-    public function getLastAction() {
+    public function getLastAction(): int {
         $lastAction = 0;
         if (!is_null($this->id)) {
 
@@ -309,7 +312,7 @@ class User extends Model {
         return $lastAction;
     }
 
-    public function setLastAction($time) {
+    public function setLastAction(?int $time): void {
         if (is_null($this->id)) {
             return;
         }
@@ -335,7 +338,7 @@ class User extends Model {
         $this->group = !is_null($gid) ? new Group($gid) : null;
     }
 
-    public function setGroupid($gid) {
+    public function setGroupId($gid) {
         $this->setPrimaryGroupId($gid);
     }
 
@@ -356,11 +359,11 @@ class User extends Model {
         $this->setPrimaryGroup($group);
     }
 
-    public function getHTMLEditor() {
+    public function getHTMLEditor(): ?string {
         return $this->html_editor;
     }
 
-    public function setHTMLEditor($editor) {
+    public function setHTMLEditor(string $editor): void {
         $allowedEditors = array(
             "ckeditor",
             "codemirror"
@@ -371,23 +374,23 @@ class User extends Model {
         $this->html_editor = $editor;
     }
 
-    public function getRequirePasswordChange() {
+    public function getRequirePasswordChange(): bool {
         return boolval($this->require_password_change);
     }
 
-    public function setRequirePasswordChange($val) {
+    public function setRequirePasswordChange($val): void {
         $this->require_password_change = boolval($val);
     }
 
-    public function getAdmin() {
+    public function getAdmin(): bool {
         return boolval($this->admin);
     }
 
-    public function setAdmin($val) {
+    public function setAdmin($val): void {
         $this->admin = boolval($val);
     }
 
-    public function getLocked() {
+    public function getLocked(): bool {
         return boolval($this->locked);
     }
 
@@ -399,11 +402,11 @@ class User extends Model {
         return $this->last_login;
     }
 
-    public function setLastLogin($val) {
+    public function setLastLogin($val): void {
         $this->last_login = !is_null($val) ? intval($val) : null;
     }
 
-    public function getFailedLogins() {
+    public function getFailedLogins(): int {
         $failedLogins = 0;
         if (!is_null($this->id)) {
 
@@ -414,13 +417,13 @@ class User extends Model {
             $result = Database::pQuery($sql, $args, true);
             if (Database::any($result)) {
                 $data = Database::fetchObject($result);
-                $failedLogins = $data->failed_logins;
+                $failedLogins = intval($data->failed_logins);
             }
         }
         return $failedLogins;
     }
 
-    public function increaseFailedLogins() {
+    public function increaseFailedLogins(): void {
         if (is_null($this->id)) {
             return;
         }
@@ -432,7 +435,7 @@ class User extends Model {
         Database::pQuery($sql, $args, true);
     }
 
-    public function resetFailedLogins() {
+    public function resetFailedLogins(): void {
         if (is_null($this->id)) {
             return;
         }
@@ -445,7 +448,7 @@ class User extends Model {
         Database::pQuery($sql, $args, true);
     }
 
-    public function setFailedLogins($amount) {
+    public function setFailedLogins($amount): void {
         if (is_null($this->id)) {
             return;
         }
@@ -458,39 +461,39 @@ class User extends Model {
         Database::pQuery($sql, $args, true);
     }
 
-    public function getHomepage() {
+    public function getHomepage(): ?string {
         return $this->homepage;
     }
 
-    public function setHomepage($val) {
+    public function setHomepage(?string $val): void {
         $this->homepage = strval($val);
     }
 
-    public function getDefaultLanguage() {
+    public function getDefaultLanguage(): ?string {
         return $this->default_language;
     }
 
-    public function setDefaultLanguage($val) {
+    public function setDefaultLanguage(?string $val): void {
         $this->default_language = StringHelper::isNotNullOrWhitespace($val) ? strval($val) : null;
     }
 
-    public function getAvatar() {
+    public function getAvatar(): ?string {
         return ModuleHelper::getBaseUrl("/admin/gfx/no_avatar.png");
     }
 
-    public function setAvatar() {
+    public function setAvatar(): void {
         throw new NotImplementedException("Avatar feature is not implemented yet.");
     }
 
-    public function getSecondaryGroups() {
+    public function getSecondaryGroups(): array {
         return $this->secondary_groups;
     }
 
-    public function setSecondaryGroups($val) {
+    public function setSecondaryGroups(array $val): void {
         $this->secondary_groups = $val;
     }
 
-    public function addSecondaryGroup($val) {
+    public function addSecondaryGroup($val): void {
         $this->secondary_groups[] = $val;
     }
 
@@ -504,15 +507,15 @@ class User extends Model {
         return $filtered;
     }
 
-    public function getPermissionChecker() {
+    public function getPermissionChecker(): PermissionChecker {
         return new PermissionChecker($this->getId());
     }
 
-    public function hasPermission($permission) {
+    public function hasPermission(string $permission): bool {
         return $this->getPermissionChecker()->hasPermission($permission);
     }
 
-    private function loadGroups($user_id) {
+    private function loadGroups($user_id): void {
         $groups = [];
 
         $sql = "select `group_id` from `{prefix}user_groups` where user_id = ?";
@@ -526,7 +529,7 @@ class User extends Model {
         $this->setSecondaryGroups($groups);
     }
 
-    private function saveGroups() {
+    private function saveGroups(): void {
         Database::pQuery("delete from {prefix}user_groups where user_id = ?", array(
             $this->getId()
                 ), true);

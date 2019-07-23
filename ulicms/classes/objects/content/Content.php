@@ -1,39 +1,41 @@
 <?php
 
+declare(strict_types=1);
+
 use UliCMS\Exceptions\FileNotFoundException;
 
 abstract class Content extends Model {
 
     abstract protected function loadBySlugAndLanguage($name, $language);
 
-    public function getShowHeadline() {
+    public function getShowHeadline(): bool {
         return $this->show_headline;
     }
 
-    public static function emptyTrash() {
+    public static function emptyTrash(): void {
         Database::query("DELETE FROM {prefix}content WHERE deleted_at IS NOT NULL", true);
     }
 
-    public function getHeadline() {
+    public function getHeadline(): ?string {
         return StringHelper::isNullOrEmpty($this->alternate_title) ? $this->title : $this->alternate_title;
     }
 
-    public function isRegular() {
+    public function isRegular(): bool {
         return true;
     }
 
-    public function getChildren($order = "id") {
+    public function getChildren(string $order = "id"): array {
         if (!$this->getID()) {
             return [];
         }
         try {
-            return ContentFactory:: getAllByParent($this->getID(), $order);
+            return ContentFactory::getAllByParent($this->getID(), $order);
         } catch (FileNotFoundException $e) {
             return [];
         }
     }
 
-    public function hasChildren() {
+    public function hasChildren(): bool {
         return count($this->getChildren()) > 0;
     }
 

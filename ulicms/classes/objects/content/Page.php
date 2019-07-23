@@ -54,7 +54,7 @@ class Page extends Content {
     }
 
     protected function fillVars($result = null) {
-        $this->id = $result->id;
+        $this->id = intval($result->id);
         $this->slug = $result->slug;
         $this->title = $result->title;
         $this->alternate_title = $result->alternate_title;
@@ -329,22 +329,21 @@ class Page extends Content {
         $this->save();
     }
 
-    public function undelete() {
+    public function undelete(): void {
         $this->deleted_at = null;
         $this->save();
     }
 
-    public function containsModule($module = null) {
+    public function containsModule(?string $module = null): bool {
         $content = $this->content;
         $content = str_replace("&quot;", "\"", $content);
         if ($module) {
             return boolval(preg_match("/\[module=\"" . preg_quote($module) . "\"\]/", $content));
-        } else {
-            return boolval(preg_match("/\[module=\".+\"\]/", $content));
         }
+        return boolval(preg_match("/\[module=\".+\"\]/", $content));
     }
 
-    public function getEmbeddedModules() {
+    public function getEmbeddedModules(): array {
         $result = [];
         $content = str_ireplace("&quot;", '"', $this->content);
         preg_match_all("/\[module=\"([a-z_\-0-9]+)\"]/i", $content, $match);
@@ -359,25 +358,25 @@ class Page extends Content {
         return $result;
     }
 
-    public function getParent() {
+    public function getParent(): ?Content {
         if (!$this->parent_id) {
             return null;
         }
         return ContentFactory::getByID($this->parent_id);
     }
 
-    public function getHistory($order = "date DESC") {
+    public function getHistory(string $order = "date DESC"): array {
         if (!$this->getID()) {
             return [];
         }
         return VCS::getRevisionsByContentID($this->getID(), $order);
     }
 
-    public function getPermissions() {
+    public function getPermissions(): PagePermissions {
         return $this->permissions;
     }
 
-    public function setPermissions($permissions) {
+    public function setPermissions(PagePermissions $permissions): void {
         $this->permissions = $permissions;
     }
 
@@ -385,7 +384,7 @@ class Page extends Content {
 // if "Comments enabled" has "[Default]" selected
 // then it returns if the comments are enabled in
 // the global settings
-    public function areCommentsEnabled() {
+    public function areCommentsEnabled(): bool {
         $commentsEnabled = false;
         if (is_null($this->comments_enabled)) {
             $commentsEnabled = boolval(Settings::get("comments_enabled"));
@@ -404,42 +403,40 @@ class Page extends Content {
         return $commentsEnabled;
     }
 
-    public function hasComments() {
+    public function hasComments(): bool {
 // TODO: write a more ressource friendly implementation
 // which doesn't load all comment datasets into the memory
         return count($this->getComments()) > 0;
     }
 
 // this returns an array of all comments of this content
-    public function getComments($order_by = "date desc") {
+    public function getComments($order_by = "date desc"): array {
         return Comment::getAllByContentId($this->id, $order_by);
     }
 
-    public function getUrl($suffix = null) {
+    public function getUrl(?string $suffix = null): string {
         return ModuleHelper::getFullPageURLByID($this->id, $suffix);
     }
 
-    public function checkAccess() {
+    public function checkAccess(): ?string {
         return checkAccess($this->access);
     }
 
-    public function makeFrontPage() {
+    public function makeFrontPage(): void {
         Settings::setLanguageSetting("frontpage", $this->slug, $this->language);
     }
 
-    public function isFrontPage() {
+    public function isFrontPage(): bool {
         $frontPage = Settings::getLang("frontpage",
                         $this->language);
         return $frontPage === $this->slug;
     }
 
-// TODO: Write test for this method
-    public function getDeletedAt() {
+    public function getDeletedAt(): ?int {
         return $this->deleted_at;
     }
 
-// TODO: Write test for this method
-    public function isDeleted() {
+    public function isDeleted(): bool {
         return !is_null($this->getDeletedAt());
     }
 

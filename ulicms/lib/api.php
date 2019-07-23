@@ -1280,7 +1280,7 @@ function getAllMenus(bool $only_used = false): array {
 }
 
 // Check if site contains a module
-function containsModule(string $page = null, string $module = null): bool {
+function containsModule(?string $page = null, ?string $module = null): bool {
     if (is_null($page)) {
         $page = get_requested_pagename();
     }

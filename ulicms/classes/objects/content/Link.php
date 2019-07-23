@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 class Link extends Page {
 
     public $redirection = "";
@@ -37,7 +39,7 @@ class Link extends Page {
         return $result;
     }
 
-    public function isRegular() {
+    public function isRegular(): bool {
         return false;
     }
 

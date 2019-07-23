@@ -39,8 +39,9 @@ class Module_Page extends Page {
         return $result;
     }
 
-    public function containsModule($module = null) {
+    public function containsModule(?string $module = null): bool {
         $retval = false;
+
         if (parent::containsModule($module)) {
             $retval = true;
         }
@@ -52,7 +53,7 @@ class Module_Page extends Page {
         return $retval;
     }
 
-    public function getEmbeddedModules() {
+    public function getEmbeddedModules(): array {
         $result = parent::getEmbeddedModules();
         if (StringHelper::isNotNullOrEmpty($this->module) and ! faster_in_array($this->module, $result)) {
             $result[] = $this->module;
