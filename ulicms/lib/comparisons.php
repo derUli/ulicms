@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Carbon\Carbon;
 
-function is_zero($val) {
+function is_zero($val): bool {
     return is_numeric($val) && $val == 0;
 }
 
