@@ -11,14 +11,14 @@ class Database {
         self::$echoQueries = $echoQueries;
     }
 
-    // Connect with database server
+// Connect with database server
     public static function connect(string $server, string $user, string $password, int $port, ?string $socket = null, bool $db_strict_mode = false): ?mysqli {
         self::$connection = mysqli_connect($server, $user, $password, "", $port, $socket);
         if (!self::$connection) {
             return null;
         }
         self::query("SET NAMES 'utf8mb4'");
-        // sql_mode auf leer setzen, da sich UliCMS nicht im strict_mode betreiben lässt
+// sql_mode auf leer setzen, da sich UliCMS nicht im strict_mode betreiben lässt
         if ($db_strict_mode) {
             Database::pQuery("SET SESSION sql_mode =
                 'ONLY_FULL_GROUP_BY,
@@ -43,7 +43,7 @@ class Database {
         return Database::query("CREATE DATABASE {$name}");
     }
 
-    // TODO: Do logging when auto initialize the database
+// TODO: Do logging when auto initialize the database
     public static function setupSchemaAndSelect(string $schemaName, array $otherScripts = []): bool {
         $selected = self::select($schemaName);
         if (!$selected) {
@@ -67,7 +67,7 @@ class Database {
         return $selected;
     }
 
-    // Abstraktion für Ausführen von SQL Strings
+// Abstraktion für Ausführen von SQL Strings
     public static function query(string $sql, bool $replacePrefix = false) {
         $cfg = new CMSConfig();
         if ($replacePrefix) {
@@ -83,7 +83,7 @@ class Database {
         return mysqli_query(self::$connection, $sql);
     }
 
-    // execute a sql string with multiple statements
+// execute a sql string with multiple statements
     public static function multiQuery(string $sql, bool $replacePrefix = false) {
         $cfg = new CMSConfig();
         if ($replacePrefix) {
@@ -164,34 +164,67 @@ class Database {
         return self::query("DROP SCHEMA $schema");
     }
 
-    public static function selectAVG(string $table, string $column, string $where = "", bool $prefix = true): ?mysqli_result {
+    public static function selectMin(string $table, string $column, string $where = "", bool $prefix = true) {
         if ($prefix) {
             $table = tbname($table);
         }
 
         $table = self::escapeName($table);
         $column = self::escapeName($column);
-        $sql = "select avg($column) from $table";
+        $sql = "select min($column) as val from $table";
         if (StringHelper::isNotNullOrEmpty($where)) {
             $sql .= " where $where";
         }
+
         $result = Database::query($sql);
-        return $result;
+        if (!self::any($result)) {
+            return null;
+        }
+        $row = Database::fetchObject($result);
+        $val = $row->val;
+        return is_decimal($val) ? floatval(val) : intval($val);
     }
 
-    public static function selectMin(string $table, string $column, string $where = "", bool $prefix = true): ?mysqli_result {
+    public static function selectMax(string $table, string $column, string $where = "", bool $prefix = true) {
         if ($prefix) {
             $table = tbname($table);
         }
 
         $table = self::escapeName($table);
         $column = self::escapeName($column);
-        $sql = "select min($column) from $table";
+        $sql = "select max($column) as val from $table";
         if (StringHelper::isNotNullOrEmpty($where)) {
             $sql .= " where $where";
         }
+
         $result = Database::query($sql);
-        return $result;
+        if (!self::any($result)) {
+            return null;
+        }
+        $row = Database::fetchObject($result);
+        $val = $row->val;
+        return is_decimal($val) ? floatval(val) : intval($val);
+    }
+
+    public static function selectAvg(string $table, string $column, string $where = "", bool $prefix = true) {
+        if ($prefix) {
+            $table = tbname($table);
+        }
+
+        $table = self::escapeName($table);
+        $column = self::escapeName($column);
+        $sql = "select avg($column) as val from $table";
+        if (StringHelper::isNotNullOrEmpty($where)) {
+            $sql .= " where $where";
+        }
+
+        $result = Database::query($sql);
+        if (!self::any($result)) {
+            return null;
+        }
+        $row = Database::fetchObject($result);
+        $val = $row->val;
+        return is_decimal($val) ? floatval($val) : intval($val);
     }
 
     public static function deleteFrom(string $table, string $where = "", bool $prefix = true): bool {
@@ -202,21 +235,6 @@ class Database {
 
         $sql = "DELETE FROM $table";
 
-        if (StringHelper::isNotNullOrEmpty($where)) {
-            $sql .= " where $where";
-        }
-        $result = Database::query($sql);
-        return $result;
-    }
-
-    public static function selectMax(string $table, string $column, string $where = "", bool $prefix = true): ?mysqli_result {
-        if ($prefix) {
-            $table = tbname($table);
-        }
-
-        $table = self::escapeName($table);
-        $column = self::escapeName($column);
-        $sql = "select min($column) from $table";
         if (StringHelper::isNotNullOrEmpty($where)) {
             $sql .= " where $where";
         }
@@ -280,7 +298,7 @@ class Database {
         return self::getLastInsertID();
     }
 
-    // Fetch Row in diversen Datentypen
+// Fetch Row in diversen Datentypen
     public static function fetchArray(?mysqli_result $result): ?array {
         return mysqli_fetch_array($result);
     }
@@ -293,21 +311,17 @@ class Database {
         return mysqli_fetch_assoc($result);
     }
 
-    public static function fetchAll(mysqli_result $result, $resulttype = MYSQLI_NUM) {
-        if (function_exists("mysqli_fetch_all")) {
-            return mysqli_fetch_all($result, $resulttype);
+    public static function fetchAll(?mysqli_result $result): array {
+        $datasets = [];
+
+        while (!is_null($result) and $row = self::fetchObject($result)) {
+            $datasets[] = $row;
         }
 
-        // FIXME : $resulttype in alternativer Implementation von fetch_all behandeln
-        $retval = [];
-        while ($row = self::fetchAssoc($result)) {
-            $retval[] = $row;
-        }
-
-        return $retval;
+        return $datasets;
     }
 
-    // Datenbank auswählen
+// Datenbank auswählen
     public static function select(string $schema): bool {
         return mysqli_select_db(self::$connection, $schema);
     }
@@ -355,7 +369,7 @@ class Database {
         return $tableList;
     }
 
-    // Abstraktion für Escapen von Werten
+// Abstraktion für Escapen von Werten
     public static function escapeValue($value, int $type = null) {
         if (is_null($value)) {
             return "NULL";

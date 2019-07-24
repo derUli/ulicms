@@ -133,4 +133,18 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(is_zero(null));
     }
 
+    public function testIsDecimalReturnsTrue() {
+        $this->assertTrue(is_decimal(1.99));
+        $this->assertTrue(is_decimal("1.99"));
+        $this->assertTrue(is_decimal("0.00"));
+        $this->assertTrue(is_decimal("1.00"));
+    }
+
+    public function testisDecimalReturnsFalse() {
+        $this->assertFalse(is_decimal(666));
+        $this->assertFalse(is_decimal("666"));
+        $this->assertFalse(is_decimal("foobar"));
+        $this->assertFalse(is_decimal("0"));
+    }
+
 }

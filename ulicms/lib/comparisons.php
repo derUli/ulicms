@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 use Carbon\Carbon;
 
+// is $val a decimal number or a integer?
+function is_decimal($val): bool {
+    return is_numeric($val) and ! ctype_digit(strval($val));
+}
+
 function is_zero($val): bool {
     return is_numeric($val) && $val == 0;
 }

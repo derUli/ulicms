@@ -5,8 +5,6 @@ declare(strict_types=1);
 use UliCMS\Models\Media\Audio;
 use UliCMS\Models\Media\Video;
 
-// TODO: remove duplicate code, use the render() method of the models
-// to render the html5 media elements
 function replaceAudioTags(string $txt): ?string {
     $audio_dir = "content/audio/";
     if (defined("ULICMS_DATA_STORAGE_URL")) {

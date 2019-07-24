@@ -221,5 +221,68 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(2, Database::getNumFieldCount());
     }
 
+    public function testGetAffectedRows() {
+        for ($i = 1; $i <= 13; $i++) {
+            Settings::set("test_setting_{$i}", 1);
+        }
+        Database::deleteFrom("settings", "name like 'test_setting_%'");
+        $this->assertEquals(13, Database::getAffectedRows());
+    }
+
+    public function testSelectMinReturnsZero() {
+        $this->assertEquals(0, Database::selectMin("settings", "id", "1 = 0"));
+    }
+
+    public function testSelectMinReturnsMin() {
+        $min = Database::selectMin("settings", "id");
+        $max = Database::selectMax("settings", "id");
+
+        $this->assertIsInt($min);
+        $this->assertGreaterThanOrEqual(1, $min);
+        $this->assertLessThan($max, $min);
+    }
+
+    public function testSelectMaxReturnsZero() {
+        $this->assertEquals(0, Database::selectMax("settings", "id", "1 = 0"));
+    }
+
+    public function testSelectMaxReturnsMax() {
+        $min = Database::selectMin("settings", "id");
+        $max = Database::selectMax("settings", "id");
+        $this->assertIsInt($max);
+        $this->assertGreaterThan($min, $max);
+    }
+
+    public function testSelectAvgReturnsZero() {
+        $this->assertEquals(0, Database::selectAvg("settings", "id", "1 = 0"));
+    }
+
+    public function testSelectAvgReturnsAvg() {
+        $min = Database::selectMin("settings", "id");
+        $max = Database::selectMax("settings", "id");
+        $avg = Database::selectAvg("settings", "id");
+        $this->assertIsFloat($avg);
+
+        $this->assertGreaterThan($min, $avg);
+        $this->assertLessThan($max, $avg);
+    }
+
+    public function testFetchAll() {
+        $result = Database::query(
+                        "select * from {prefix}settings where
+        name in
+        ('default_font', 'frontpage', 'homepage_title')
+        order by name", true);
+
+        $datasets = Database::fetchAll($result);
+        $this->assertCount(3, $datasets);
+        $this->assertEquals('default_font', $datasets[0]->name);
+        $this->assertEquals('frontpage', $datasets[1]->name);
+        $this->assertEquals('homepage_title', $datasets[2]->name);
+        foreach ($datasets as $dataset) {
+            $this->assertNotEmpty($dataset->value);
+        }
+    }
+
     // TODO: implement tests for other Database functions
 }

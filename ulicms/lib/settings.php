@@ -1,19 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 use UliCMS\Constants\AuditLog;
 
 // get a config variable
-function getconfig($key) {
+function getconfig(string $key) {
     return Settings::get($key);
 }
 
 // Remove an configuration variable
-function deleteconfig($key) {
+function deleteconfig(string $key): bool {
     return Settings::delete($key);
 }
 
 // Set a configuration Variable;
-function setconfig($key, $value) {
+function setconfig(string $key, $value) {
     $result = db_query("SELECT id FROM " . tbname("settings") . " WHERE name='$key'");
     if (db_num_rows($result) > 0) {
         db_query("UPDATE " . tbname("settings") . " SET value='$value' WHERE name='$key'");
@@ -35,7 +37,7 @@ function setconfig($key, $value) {
     SettingsCache::set($key, $value);
 }
 
-function initconfig($key, $value) {
+function initconfig(string $key, $value): bool {
     $retval = false;
     if (!Settings::get($key)) {
         setconfig($key, $value);

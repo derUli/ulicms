@@ -67,6 +67,7 @@ Neue API-Methoden:
 * is_end_of_day($datetime = null)
 * is_midday($datetime = null)
 * is_zero($val)
+* is_decimal($val): bool
 
 Entfernte API-Methoden:
 * addUser()
