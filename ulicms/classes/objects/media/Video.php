@@ -35,6 +35,16 @@ class Video extends Model {
         }
     }
 
+    public static function getAll(string $order = "id"): array {
+        $datasets = [];
+        $sql = "SELECT id FROM {prefix}videos ORDER BY $order";
+        $result = Database::query($sql, true);
+        while ($row = Database::fetchObject($result)) {
+            $datasets[] = new self(intval($row->id));
+        }
+        return $datasets;
+    }
+
     public function loadById($id): void {
         $result = Database::pQuery("select * from `{prefix}videos` where id = ?", array(
                     intval($id)
@@ -186,7 +196,7 @@ class Video extends Model {
         }
     }
 
-    public function getHtml(): string {
+    public function render(): string {
         $video_dir = self::VIDEO_DIR;
         if (defined("ULICMS_DATA_STORAGE_URL")) {
             $video_dir = Path::resolve("ULICMS_DATA_STORAGE_URL/$video_dir") . "/";
@@ -208,10 +218,6 @@ class Video extends Model {
         }
         $html .= "</video>";
         return $html;
-    }
-
-    public function render(): void {
-        echo $this->getHtml();
     }
 
 }

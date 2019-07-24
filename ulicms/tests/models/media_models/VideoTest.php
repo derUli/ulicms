@@ -10,38 +10,38 @@ class VideoTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testCreateUpdateAndDelete() {
-        $Video = new Video();
-        $Video->setName("My Name");
-        $Video->setMP4File("video.mp4");
-        $Video->setOGGFile("video.ogv");
-        $Video->setWebmFile("video.webm");
-        $Video->setCategoryId(1);
-        $Video->save();
-        $this->assertNotNull($Video->getID());
-        $id = $Video->getId();
-        $Video = new Video($id);
-        $this->assertNotNull($Video->getID());
-        $this->assertEquals("My Name", $Video->getName());
-        $this->assertEquals("video.mp4", $Video->getMP4File());
-        $this->assertEquals("video.ogv", $Video->getOggFile());
-        $this->assertEquals("video.webm", $Video->getWebmFile());
-        $this->assertEquals(1, $Video->getCategoryId());
-        $this->assertEquals(1, $Video->getCategory()
+        $video = new Video();
+        $video->setName("My Name");
+        $video->setMP4File("video.mp4");
+        $video->setOGGFile("video.ogv");
+        $video->setWebmFile("video.webm");
+        $video->setCategoryId(1);
+        $video->save();
+        $this->assertNotNull($video->getID());
+        $id = $video->getId();
+        $video = new Video($id);
+        $this->assertNotNull($video->getID());
+        $this->assertEquals("My Name", $video->getName());
+        $this->assertEquals("video.mp4", $video->getMP4File());
+        $this->assertEquals("video.ogv", $video->getOggFile());
+        $this->assertEquals("video.webm", $video->getWebmFile());
+        $this->assertEquals(1, $video->getCategoryId());
+        $this->assertEquals(1, $video->getCategory()
                         ->getID());
 
-        $Video->setName("New Name");
-        $Video->setMP4File("not-video.mp4");
-        $Video->setOGGFile("not-video.ogg");
-        $Video->setWebmFile("not-video.webm");
-        $Video->setCategoryId(null);
-        $Video->save();
-        $Video = new Video($id);
+        $video->setName("New Name");
+        $video->setMP4File("not-video.mp4");
+        $video->setOGGFile("not-video.ogg");
+        $video->setWebmFile("not-video.webm");
+        $video->setCategoryId(null);
+        $video->save();
+        $video = new Video($id);
 
-        $this->assertEquals("New Name", $Video->getName());
-        $this->assertEquals("not-video.mp4", $Video->getMP4File());
-        $this->assertEquals("not-video.ogg", $Video->getOggFile());
-        $this->assertEquals("not-video.webm", $Video->getWebmFile());
-        $this->assertEquals(null, $Video->getCategoryId());
+        $this->assertEquals("New Name", $video->getName());
+        $this->assertEquals("not-video.mp4", $video->getMP4File());
+        $this->assertEquals("not-video.ogg", $video->getOggFile());
+        $this->assertEquals("not-video.webm", $video->getWebmFile());
+        $this->assertEquals(null, $video->getCategoryId());
 
         $video = new Video($id);
 
@@ -54,20 +54,46 @@ class VideoTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(1, $video->getCategory()
                         ->getID());
 
-        $Video->delete();
-        $this->assertNull($Video->getID());
-        $Video = new Video();
-        $this->assertNull($Video->getID());
+        $video->delete();
+        $this->assertNull($video->getID());
+        $video = new Video();
+        $this->assertNull($video->getID());
     }
 
     public function testVideoHtml() {
-        $Video = new Video();
-        $Video->setName("My Name");
-        $Video->setMP4File("video.mp4");
-        $Video->setOGGFile("video.ogv");
-        $Video->setWebmFile("video.webm");
-        $Video->setCategoryId(1);
-        $this->assertEquals('<video width="" height="" controls><source src="content/videos/video.mp4" type="video/mp4"><source src="content/videos/video.ogv" type="video/ogg"><source src="content/videos/video.webm" type="video/webm">Your browser doesn\'t support HTML 5.<br/><a href="content/videos/video.mp4">But you can download the video here.</a></video>', $Video->getHtml());
+        $video = new Video();
+        $video->setName("My Name");
+        $video->setMP4File("video.mp4");
+        $video->setOGGFile("video.ogv");
+        $video->setWebmFile("video.webm");
+        $video->setCategoryId(1);
+        $this->assertEquals('<video width="" height="" controls><source src="content/videos/video.mp4" type="video/mp4"><source src="content/videos/video.ogv" type="video/ogg"><source src="content/videos/video.webm" type="video/webm">Your browser doesn\'t support HTML 5.<br/><a href="content/videos/video.mp4">But you can download the video here.</a></video>', $video->render());
+    }
+
+    public function testGetAll() {
+        $savedVideos = [];
+        for ($i = 1; $i <= 10; $i++) {
+            $video = new Video();
+            $video->setName("My Name $i");
+            $video->setMP4File("video.mp4");
+            $video->setOGGFile("video.ogv");
+            $video->setWebmFile("video.webm");
+            $video->setCategoryId(1);
+            $video->save();
+            $savedVideos[] = $video;
+        }
+
+        $videos = Video::getAll();
+        $this->assertGreaterThanOrEqual(10, count($videos));
+
+        foreach ($videos as $video) {
+            $this->assertInstanceOf(Video::class, $video);
+            $this->assertGreaterThanOrEqual(1, $video->getID());
+        }
+
+        foreach ($savedVideos as $video) {
+            $video->delete();
+        }
     }
 
 }

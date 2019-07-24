@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+// TODO: remove duplicate code, use the render() method of the models
+// to render the html5 media elements
 function replaceAudioTags(string $txt): string {
     $audio_dir = "content/audio/";
     if (defined("ULICMS_DATA_STORAGE_URL")) {
@@ -60,7 +62,7 @@ function replaceVideoTags(string $txt): string {
 
         while ($row = db_fetch_object($result)) {
             $code1 = "[video id=\"" . $row->id . "\"]";
-            $code2 = "[video id=$quot;" . $row->id . "$quot;]";
+            $code2 = "[video id=&quot;" . $row->id . "&quot;]";
             $code3 = "[video id=" . $row->id . "]";
             if (!empty($row->mp4_file)) {
                 $preferred = $row->mp4_file;

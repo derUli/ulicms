@@ -34,6 +34,16 @@ class Audio extends Model {
         }
     }
 
+    public static function getAll(string $order = "id"): array {
+        $datasets = [];
+        $sql = "SELECT id FROM {prefix}audio ORDER BY $order";
+        $result = Database::query($sql, true);
+        while ($row = Database::fetchObject($result)) {
+            $datasets[] = new self(intval($row->id));
+        }
+        return $datasets;
+    }
+
     public function loadById($id) {
         $result = Database::pQuery("select * from `{prefix}audio` where id = ?", array(
                     intval($id)
@@ -171,7 +181,7 @@ class Audio extends Model {
         }
     }
 
-    public function getHtml(): string {
+    public function render(): string {
         $audio_dir = self::AUDIO_DIR;
         if (defined("ULICMS_DATA_STORAGE_URL")) {
             $audio_dir = Path::resolve("ULICMS_DATA_STORAGE_URL/$audio_dir") . "/";
@@ -191,10 +201,6 @@ class Audio extends Model {
 
         $html .= '</audio>';
         return $html;
-    }
-
-    public function html(): void {
-        echo $this->getHtml();
     }
 
 }

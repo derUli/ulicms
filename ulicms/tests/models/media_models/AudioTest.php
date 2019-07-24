@@ -59,7 +59,32 @@ class AudioTest extends \PHPUnit\Framework\TestCase {
         $audio->setOGGFile("music.ogg");
         $audio->setCategoryId(1);
         $this->assertEquals(
-                '<audio controls><source src="content/audio/music.mp3" type="audio/mp3"><source src="content/audio/music.ogg" type="audio/ogg">Your browser doesn\'t support HTML 5.<br/><a href="content/audio/music.mp3">But you can download the audio file here.</a></audio>', $audio->getHtml());
+                '<audio controls><source src="content/audio/music.mp3" type="audio/mp3"><source src="content/audio/music.ogg" type="audio/ogg">Your browser doesn\'t support HTML 5.<br/><a href="content/audio/music.mp3">But you can download the audio file here.</a></audio>', $audio->render());
+    }
+
+    public function testGetAll() {
+        $savedAudios = [];
+
+        for ($i = 1; $i <= 10; $i++) {
+            $audio = new Audio ();
+            $audio->setName("My Name $i");
+            $audio->setMP3File("music.mp3");
+            $audio->setOGGFile("music.ogg");
+            $audio->setCategoryId(1);
+            $audio->save();
+            $savedAudios[] = $audio;
+        }
+        $audios = Audio::getAll();
+        $this->assertGreaterThanOrEqual(10, count($audios));
+
+        foreach ($audios as $audio) {
+            $this->assertInstanceOf(Audio::class, $audio);
+            $this->assertGreaterThanOrEqual(1, $audio->getID());
+        }
+
+        foreach ($savedAudios as $audio) {
+            $audio->delete();
+        }
     }
 
 }

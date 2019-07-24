@@ -20,7 +20,8 @@ Neue API-Methoden:
 * Page->makeFrontPage()
 * Page->isFrontPage()
 * Page->getDeletedAt()
-* Page->isDeleted()
+* Video::getAll(string $order = "id"): array
+* Audio::getAll(string $order = "id"): array
 * TypeMapper::getModel($type)
 * File::deleteIfExists($file)
 * ActionRegistry::getAction($action)
