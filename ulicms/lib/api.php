@@ -1019,7 +1019,7 @@ function replaceShortcodesWithModules(string $string, bool $replaceOther = true)
     }
     $allModules = ModuleHelper::getAllEmbedModules();
     $disabledModules = Vars::get("disabledModules");
-    for ($i = 0; $i <= count($allModules); $i ++) {
+    for ($i = 0; $i < count($allModules); $i ++) {
         $thisModule = $allModules[$i];
         if (faster_in_array($thisModule, $disabledModules)) {
             continue;

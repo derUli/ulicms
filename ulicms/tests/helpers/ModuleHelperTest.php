@@ -8,6 +8,7 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase {
         @session_start();
         $this->default_language = Settings::get("default_language");
         require_once getLanguageFilePath("en");
+        $_SERVER["REQUEST_URI"] = "/other-url.html?param=value";
     }
 
     public function tearDown() {
@@ -15,6 +16,7 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase {
         unset($_SERVER['HTTP_HOST']);
         unset($_SERVER['HTTPS']);
         unset($_SERVER[$_SESSION["language"]]);
+        unset($_SERVER["REQUEST_URI"]);
         unset($_SERVER["REQUEST_URI"]);
         @session_destroy();
     }

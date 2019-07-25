@@ -16,7 +16,7 @@ abstract class Controller {
             $lines = StringHelper::linesFromFile($file);
             $lines = array_unique($lines);
             foreach ($lines as $line) {
-                $blacklist[] = ModuleHelper::underscoreToCamel($line);
+                $this->blacklist[] = ModuleHelper::underscoreToCamel($line);
             }
         }
     }

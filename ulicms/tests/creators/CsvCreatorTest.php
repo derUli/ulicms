@@ -4,10 +4,15 @@ use UliCMS\Creators\CSVCreator;
 
 class CsvCreatorTest extends \PHPUnit\Framework\TestCase {
 
-    public function unset() {
+    public function setUp() {
+        $_SERVER["REQUEST_URI"] = "/other-url.html?param=value";
+    }
+
+    public function tearDown() {
         unset($_SESSION["language"]);
         unset($_GET["seite"]);
         unset($_SERVER["HTTP_USER_AGENT"]);
+        unset($_SERVER["REQUEST_URI"]);
     }
 
     public function testRender() {

@@ -24,6 +24,8 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         }
         $this->setMotto();
 
+        $_SERVER["REQUEST_URI"] = "/other-url.html?param=value";
+
         require_once getLanguageFilePath("en");
     }
 
@@ -38,6 +40,8 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         Database::query("delete from {prefix}content where "
                 . "title like 'Test Page %' or slug ='testgetbodyclasses'",
                 true);
+
+        unset($_SERVER["REQUEST_URI"]);
     }
 
     private function cleanUp() {

@@ -26,6 +26,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
 
         $_SERVER['HTTP_HOST'] = "company.com";
         $_SESSION["language"] = "de";
+        $_SERVER["REQUEST_URI"] = "/";
 
         $this->cleanUp();
     }
@@ -35,6 +36,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->cleanUp();
 
         unset($_SERVER['HTTP_HOST']);
+        unset($_SERVER["REQUEST_URI"]);
 
         if ($this->commentsInitialEnabled) {
             Settings::set("comments_enabled", "1");

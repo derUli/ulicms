@@ -8,6 +8,9 @@ class UserTest extends \PHPUnit\Framework\TestCase {
     private $otherGroup;
 
     public function setUp() {
+
+        $_SERVER["REQUEST_URI"] = "/other-url.html?param=value";
+
         require_once getLanguageFilePath("en");
 
         $user = new User();
@@ -26,6 +29,7 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         Database::pQuery("delete from `{prefix}groups` where name = ?", array(
             "Other Group"
                 ), true);
+        unset($_SERVER["REQUEST_URI"]);
     }
 
     public function testCreateAndDeleteUser() {

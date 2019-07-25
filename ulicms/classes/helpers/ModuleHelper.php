@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 use UliCMS\Models\Content\Language;
 use UliCMS\HTML\Form;
 use UliCMS\Constants\RequestMethod;
 
 class ModuleHelper extends Helper {
 
-    public static function buildAdminURL($module, $suffix = null) {
+    public static function buildAdminURL(string $module, ?string $suffix = null): string {
         $url = "?action=module_settings&module=" . $module;
         if ($suffix !== null and ! empty($suffix)) {
             $url .= "&" . $suffix;
@@ -15,16 +17,17 @@ class ModuleHelper extends Helper {
         return $url;
     }
 
-    public static function buildModuleRessourcePath($module, $path, $absolute = false) {
+    public static function buildModuleRessourcePath(string $module, string $path, bool $absolute = false): string {
         $path = trim($path, "/");
         return getModulePath($module, $absolute) . $path;
     }
 
-    public static function buildRessourcePath($module, $path) {
+    public static function buildRessourcePath(string $module, string $path): string {
         return self::buildModuleRessourcePath($module, $path);
     }
 
-    public static function getFirstPageWithModule($module = null, $language = null) {
+    // TODO: Refactor this method
+    public static function getFirstPageWithModule(?string $module = null, ?string $language = null): ?object {
         if (is_null($language)) {
             $language = getCurrentLanguage();
         }
@@ -54,7 +57,7 @@ class ModuleHelper extends Helper {
         return null;
     }
 
-    public static function buildActionURL($action, $suffix = null, $prependSuffixIfRequired = false) {
+    public static function buildActionURL(string $action, ?string $suffix = null, bool $prependSuffixIfRequired = false): string {
         $url = "?action=" . $action;
         if ($suffix !== null and ! empty($suffix)) {
             $url .= "&" . $suffix;
@@ -66,7 +69,7 @@ class ModuleHelper extends Helper {
         return $url;
     }
 
-    public static function getAllEmbedModules() {
+    public static function getAllEmbedModules(): array {
         $retval = [];
         $modules = getAllModules();
         foreach ($modules as $module) {
@@ -87,7 +90,7 @@ class ModuleHelper extends Helper {
         return $retval;
     }
 
-    public static function getMainController($module) {
+    public static function getMainController(string $module): ?Controller {
         $controller = null;
         $main_class = getModuleMeta($module, "main_class");
         if ($main_class) {
@@ -96,7 +99,11 @@ class ModuleHelper extends Helper {
         return $controller;
     }
 
-    public static function isEmbedModule($module) {
+    public static function getMainClass(string $module): ?Controller {
+        return self::getMainController($module);
+    }
+
+    public static function isEmbedModule(string $module): bool {
         $retval = true;
         $noembedfile1 = Path::Resolve("ULICMS_DATA_STORAGE_ROOT/content/modules/$module/.noembed");
         $noembedfile2 = Path::Resolve("ULICMS_DATA_STORAGE_ROOT/content/modules/$module/noembed.txt");
@@ -114,7 +121,7 @@ class ModuleHelper extends Helper {
         return $retval;
     }
 
-    public static function getBaseUrl($suffix = "/") {
+    public static function getBaseUrl(string $suffix = "/"): string {
         $domain = get_http_host();
 
         $dirname = dirname(get_request_uri());
@@ -134,7 +141,7 @@ class ModuleHelper extends Helper {
         return get_site_protocol() . $domain . $dirname . $suffix;
     }
 
-    public static function getFullPageURLByID($page_id = null, $suffix = null) {
+    public static function getFullPageURLByID(?int $page_id = null, ?string $suffix = null): string {
         if (!$page_id) {
             $page_id = get_id();
         }
@@ -195,12 +202,12 @@ class ModuleHelper extends Helper {
      *
      * @param {string} $str
      */
-    public static function underscoreToCamel($str) {
+    public static function underscoreToCamel(string $str): string {
         // Remove underscores, capitalize words, squash, lowercase first.
         return lcfirst(str_replace(' ', '', ucwords(str_replace('_', ' ', $str))));
     }
 
-    public static function buildMethodCall($sClass, $sMethod, $suffix = null) {
+    public static function buildMethodCall(string $sClass, string $sMethod, ?string $suffix = null): string {
         $result = "sClass=" . urlencode($sClass) . "&sMethod=" . urlencode($sMethod);
         if (StringHelper::isNotNullOrWhitespace($suffix)) {
             $result .= "&" . trim($suffix);
@@ -208,28 +215,28 @@ class ModuleHelper extends Helper {
         return $result;
     }
 
-    public static function buildMethodCallUrl($sClass, $sMethod, $suffix = null) {
+    public static function buildMethodCallUrl(string $sClass, string $sMethod, ?string $suffix = null): string {
         return "index.php?" . self::buildMethodCall($sClass, $sMethod, $suffix);
     }
 
-    public static function buildMethodCallUploadForm($sClass, $sMethod, $otherVars = [], $requestMethod = RequestMethod::POST, $htmlAttributes = []) {
+    public static function buildMethodCallUploadForm(string $sClass, string $sMethod, array $otherVars = [], string $requestMethod = RequestMethod::POST, array $htmlAttributes = []): string {
         $htmlAttributes["enctype"] = "multipart/form-data";
         return self::buildMethodCallForm($sClass, $sMethod, $otherVars, $requestMethod, $htmlAttributes);
     }
 
-    public static function buildMethodCallForm($sClass, $sMethod, $otherVars = [], $requestMethod = RequestMethod::POST, $htmlAttributes = []) {
+    public static function buildMethodCallForm(string $sClass, string $sMethod, array $otherVars = [], string $requestMethod = RequestMethod::POST, array $htmlAttributes = []): string {
         return Form::buildMethodCallForm($sClass, $sMethod, $otherVars, $requestMethod, $htmlAttributes);
     }
 
-    public static function buildMethodCallButton($sClass, $sMethod, $buttonText, $buttonAttributes = array("class" => "btn btn-default", "type" => "submit"), $otherVars = [], $formAttributes = [], $requestMethod = RequestMethod::POST) {
+    public static function buildMethodCallButton(string $sClass, string $sMethod, string $buttonText, array $buttonAttributes = ["class" => "btn btn-default", "type" => "submit"], array $otherVars = [], array $formAttributes = [], string $requestMethod = RequestMethod::POST): string {
         return Form::buildMethodCallButton($sClass, $sMethod, $buttonText, $buttonAttributes, $otherVars, $formAttributes, $requestMethod);
     }
 
-    public static function deleteButton($url, $otherVars = [], $htmlAttributes = []) {
+    public static function deleteButton(string $url, array $otherVars = [], array $htmlAttributes = []): string {
         return Form::deleteButton($url, $otherVars, $htmlAttributes);
     }
 
-    public static function buildHTMLAttributesFromArray($attributes = []) {
+    public static function buildHTMLAttributesFromArray(array $attributes = []): string {
         $html = "";
         foreach ($attributes as $key => $value) {
             $val = is_bool($value) ? strbool($value) : $value;
@@ -239,12 +246,12 @@ class ModuleHelper extends Helper {
         return $html;
     }
 
-    public static function buildQueryString($data, $forHtml = true) {
+    public static function buildQueryString($data, bool $forHtml = true): string {
         $seperator = $forHtml ? "&amp;" : "&";
         return http_build_query($data, '', $seperator);
     }
 
-    public static function endForm() {
+    public static function endForm(): string {
         return Form::endForm();
     }
 
