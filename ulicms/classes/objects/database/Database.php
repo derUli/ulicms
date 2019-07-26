@@ -14,8 +14,8 @@ class Database {
 // Connect with database server
     public static function connect(string $server, string $user, string $password, int $port, ?string $socket = null, bool $db_strict_mode = false): ?mysqli {
         $connected = mysqli_connect($server, $user, $password, "", $port, $socket);
-		self::$connection = $connected ? $connected : null;
-        if (!self::$connection ) {
+        self::$connection = $connected ? $connected : null;
+        if (!self::$connection) {
             return null;
         }
         self::query("SET NAMES 'utf8mb4'");
