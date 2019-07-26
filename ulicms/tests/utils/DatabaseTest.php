@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Exceptions\NotImplementedException;
+use UliCMS\Exceptions\SqlException;
 
 class DatabaseTest extends \PHPUnit\Framework\TestCase {
 
@@ -71,6 +72,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetLastError() {
+        $this->expectException(SqlException::class);
         // this sql fails always
         $result = Database::query("select devil from hell", true);
         $this->assertFalse($result);
@@ -82,6 +84,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testError() {
+        $this->expectException(SqlException::class);
         // this sql fails always
         $result = Database::query("select devil from hell", true);
         $this->assertFalse($result);
@@ -93,6 +96,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetError() {
+        $this->expectException(SqlException::class);
         // this sql fails always
         $result = Database::query("select devil from hell", true);
         $this->assertFalse($result);

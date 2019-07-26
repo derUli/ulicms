@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use UliCMS\Exceptions\SqlException;
+
 class Database {
 
     private static $connection = null;
@@ -21,7 +23,7 @@ class Database {
         self::query("SET NAMES 'utf8mb4'");
 // sql_mode auf leer setzen, da sich UliCMS nicht im strict_mode betreiben lässt
         if ($db_strict_mode) {
-            Database::pQuery("SET SESSION sql_mode =
+            self::pQuery("SET SESSION sql_mode =
                 'ONLY_FULL_GROUP_BY,
                 STRICT_TRANS_TABLES,
                 NO_ZERO_IN_DATE,
@@ -81,7 +83,11 @@ class Database {
         if (self::$echoQueries) {
             echo $sql . "\n";
         }
-        return mysqli_query(self::$connection, $sql);
+        $result = mysqli_query(self::$connection, $sql);
+        if (!$result) {
+            throw new SqlException(self::getError());
+        }
+        return $result;
     }
 
 // execute a sql string with multiple statements
@@ -154,6 +160,10 @@ class Database {
     public static function dropTable(string $table, bool $prefix = true): bool {
         if ($prefix) {
             $table = tbname($table);
+        }
+
+        if (!faster_in_array($table, self::getAllTables())) {
+            return true;
         }
 
         $table = self::escapeName($table);
