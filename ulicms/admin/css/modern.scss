@@ -240,6 +240,13 @@ a {
         text-decoration: none;
         font-weight: 500;
     }
+    &:visited {
+        &:not(.btn) {
+            color: $color_8;
+            text-decoration: none;
+            font-weight: 500;
+        }
+    }
     &:focus {
         &:not(.btn) {
             color: $color_8;
@@ -535,10 +542,6 @@ div#login-welcome-text {
         margin-bottom:10px;
     }
 
-    .mainmenu li{
-        margin-bottom: 0;
-    }
-
     a.btn-default {
         color: $color_10;
     }
@@ -553,6 +556,8 @@ h2.accordion-header {
     margin-bottom: 20px;
     ul {
         li {
+		margin-bottom:0;
+		
             .fa {
                 width: 40px;
             }
@@ -561,11 +566,6 @@ h2.accordion-header {
             }
             .fas {
                 width: 40px;
-            }
-            a {
-                &:focus {
-                    text-decoration: none;
-                }
             }
         }
         list-style: none;
@@ -588,9 +588,12 @@ h2.accordion-header {
                 padding-left: 20px;
                 padding-right: 20px;
             }
+			&:focus {
+                text-decoration: none;
+                color: $color_9;
+                }
             &:active {
                 display: block;
-                color: $color_9;
                 font-size: 24px;
                 padding-top: 15px;
                 padding-bottom: 15px;
@@ -600,6 +603,7 @@ h2.accordion-header {
             &:hover {
                 text-decoration: none;
                 background-color: $background_color_4;
+				color: white !important;
             }
         }
         a.active {
