@@ -240,13 +240,6 @@ a {
         text-decoration: none;
         font-weight: 500;
     }
-    &:visited {
-        &:not(.btn) {
-            color: $color_8;
-            text-decoration: none;
-            font-weight: 500;
-        }
-    }
     &:focus {
         &:not(.btn) {
             color: $color_8;
