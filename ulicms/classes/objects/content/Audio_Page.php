@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Models\Media\Audio;
+
 class Audio_Page extends Page {
 
     public $audio = null;
@@ -38,6 +40,14 @@ class Audio_Page extends Page {
 
         $result = Database::pQuery($sql, $args, true);
         return $result;
+    }
+
+    public function getAudio(): ?Audio {
+        return $this->audio ? new Audio($this->audio) : null;
+    }
+
+    public function setAudio(?Audio $audio): void {
+        $this->audio = $audio->getID();
     }
 
 }

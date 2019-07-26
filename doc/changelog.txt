@@ -20,6 +20,10 @@ Neue API-Methoden:
 * Page->makeFrontPage()
 * Page->isFrontPage()
 * Page->getDeletedAt()
+* Audio_Page->getAudio(): ?Audio
+* Audio_Page->setAudio(?Audio $audio): void
+* Video_Page->getVideo(): ?Video
+* Video_Page->setVideo(?Video $video): void
 * Video::getAll(string $order = "id"): array
 * Audio::getAll(string $order = "id"): array
 * TypeMapper::getModel($type)
