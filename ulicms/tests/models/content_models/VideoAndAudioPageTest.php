@@ -16,6 +16,8 @@ class VideoAndAudioPageTest extends \PHPUnit\Framework\TestCase {
         $video->setOGGFile("video.ogv");
         $video->setWebmFile("video.webm");
         $video->setCategoryId(1);
+        $video->setWidth(640);
+        $video->setHeight(480);
         $video->save();
 
         $userManager = new UserManager();

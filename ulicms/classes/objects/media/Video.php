@@ -23,6 +23,8 @@ class Video extends Model {
     private $category = null;
     private $created;
     private $updated;
+    private $width = null;
+    private $height = null;
 
     const VIDEO_DIR = "content/videos/";
 
@@ -67,6 +69,8 @@ class Video extends Model {
                             intval($result->category_id) : null);
             $this->created = $result->created;
             $this->updated = $result->updated;
+            $this->width = intval($result->width);
+            $this->height = intval($result->height);
         } else {
             $this->setID(null);
             $this->setName(null);
@@ -76,6 +80,8 @@ class Video extends Model {
             $this->setCategoryId(null);
             $this->created = null;
             $this->updated = null;
+            $this->width = null;
+            $this->height = null;
         }
     }
 
@@ -89,11 +95,14 @@ class Video extends Model {
             $this->webm_file,
             $this->category_id,
             $this->created,
-            $this->updated
+            $this->updated,
+            $this->width,
+            $this->height
         );
         $sql = "insert into `{prefix}videos`
-				(name, mp4_file, ogg_file, webm_file, category_id, created, updated)
-				values (?, ?, ?, ?, ?, ?, ?)";
+				(name, mp4_file, ogg_file, webm_file,
+                                category_id, created, updated, width, height)
+				values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         Database::pQuery($sql, $args, true);
         $this->setID(Database::getLastInsertID());
     }
@@ -107,10 +116,14 @@ class Video extends Model {
             $this->webm_file,
             $this->category_id,
             $this->updated,
+            $this->width,
+            $this->height,
             $this->getID()
         );
         $sql = "update `{prefix}videos` set
-				name = ?, mp4_file = ?, ogg_file = ?, webm_file = ?, category_id = ?, updated = ?
+				name = ?, mp4_file = ?, ogg_file = ?,
+                                webm_file = ?, category_id = ?, updated = ?,
+                                width = ?, height = ?
 				where id = ?";
         Database::pQuery($sql, $args, true);
     }
@@ -218,6 +231,22 @@ class Video extends Model {
         }
         $html .= "</video>";
         return $html;
+    }
+
+    public function getWidth(): ?int {
+        return $this->width;
+    }
+
+    public function getHeight(): ?int {
+        return $this->height;
+    }
+
+    public function setWidth(?int $val): void {
+        $this->width = $val;
+    }
+
+    public function setHeight(?int $val): void {
+        $this->height = $val;
     }
 
 }

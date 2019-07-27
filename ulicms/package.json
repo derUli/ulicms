@@ -8,7 +8,7 @@
         "bootstrap-toggle": "2.x",
         "codemirror-minified": "^5.48.0",
         "datatables": "1.x",
-        "jquery": "3.x",
+        "jquery": "^3.4.1",
         "jquery-datetimepicker": "2.x",
         "jquery-form": "4.x",
         "js-url": "2.x",
