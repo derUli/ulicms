@@ -387,6 +387,12 @@ class Database {
         return $tableList;
     }
 
+    public static function tableExists(string $table,
+            bool $prefix = true): bool {
+        $tableName = $prefix ? tbname($table) : $table;
+        return faster_in_array($tableName, self::getAllTables());
+    }
+
 // Abstraktion für Escapen von Werten
     public static function escapeValue($value, int $type = null) {
         if (is_null($value)) {
@@ -488,5 +494,5 @@ class Database {
 
 // Alias für Database
 class DB extends Database {
-    
+
 }

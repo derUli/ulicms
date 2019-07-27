@@ -290,13 +290,24 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetSqlStrictModeFlags() {
         $this->assertCount(7, Database::getSqlStrictModeFlags());
-        foreach(Database::getSqlStrictModeFlags() as $flag){
+        foreach (Database::getSqlStrictModeFlags() as $flag) {
             $this->assertIsString($flag);
             $this->assertNotEmpty($flag);
-            
+
             // string must be Uppercase
             $this->assertEquals(strtoupper($flag), $flag);
         }
+    }
+
+    public function testTableExistsReturnsTrue() {
+        $this->assertTrue(Database::tableExists("content"));
+        $this->assertTrue(Database::tableExists("settings"), true);
+        $this->assertTrue(Database::tableExists(tbname("content"), false));
+    }
+
+    public function testTableExistsReturnsFalse() {
+        $this->assertFalse(Database::tableExists("gibts_echt_nicht"));
+        $this->assertFalse(Database::tableExists("content", false));
     }
 
     // TODO: implement tests for other Database functions
