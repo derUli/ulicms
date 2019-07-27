@@ -293,6 +293,9 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         foreach(Database::getSqlStrictModeFlags() as $flag){
             $this->assertIsString($flag);
             $this->assertNotEmpty($flag);
+            
+            // string must be Uppercase
+            $this->assertEquals(strtoupper($flag), $flag);
         }
     }
 

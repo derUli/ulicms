@@ -26,6 +26,10 @@ Neue API-Methoden:
 * Video_Page->setVideo(?Video $video): void
 * Video::getAll(string $order = "id"): array
 * Audio::getAll(string $order = "id"): array
+* Video->getWidth(): ?int
+* Video->getHeight(): ?int
+* Video->setWidth(?int $val): void
+* Video->setHeight(?int $val): void
 * TypeMapper::getModel($type)
 * File::deleteIfExists($file)
 * ActionRegistry::getAction($action)
