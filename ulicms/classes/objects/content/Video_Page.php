@@ -49,7 +49,7 @@ class Video_Page extends Page {
     }
 
     public function setVideo(?Video $video): void {
-        $this->video = $video->getID();
+        $this->video = $video ? $video->getID() : null;
     }
 
 }

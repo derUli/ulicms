@@ -47,7 +47,7 @@ class Audio_Page extends Page {
     }
 
     public function setAudio(?Audio $audio): void {
-        $this->audio = $audio->getID();
+        $this->audio = $audio ? $audio->getID() : null;
     }
 
 }

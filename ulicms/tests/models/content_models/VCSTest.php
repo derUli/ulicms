@@ -5,8 +5,7 @@ use UliCMS\Models\Content\VCS;
 class VCSTest extends \PHPUnit\Framework\TestCase {
 
     public function tearDown() {
-        Database::deleteFrom("content", "slug like 'unit-test%");
-        Database::deleteFrom("history", "content like ' %Text'");
+        Database::deleteFrom("history", "content like '%Text'");
     }
 
     public function testGetRevisionByContentId() {

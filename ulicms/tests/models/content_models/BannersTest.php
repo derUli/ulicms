@@ -15,7 +15,7 @@ class BannersTest extends \PHPUnit\Framework\TestCase {
             self::HTML_TEXT2
                 ), true);
 
-        Database::query("DELETE FROM `{prefix}categories` where title like 'Testkategorie %'", true);
+        Database::query("DELETE FROM `{prefix}categories` where name like 'Testkategorie %'", true);
     }
 
     public function testGetByCategoryExpectEmptyResult() {
