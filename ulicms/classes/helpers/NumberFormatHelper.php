@@ -9,7 +9,7 @@ use Helper;
 class NumberFormatHelper extends Helper {
 
     // Snippet from PHP Share: http://www.phpshare.org
-    public static function formatSizeUnits(int $bytes) {
+    public static function formatSizeUnits(float $bytes): string {
         if ($bytes >= 1073741824) {
             $bytes = number_format($bytes / 1073741824, 2) . ' GB';
         } elseif ($bytes >= 1048576) {
