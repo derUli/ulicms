@@ -23,8 +23,7 @@ class Database {
         self::query("SET NAMES 'utf8mb4'");
 // sql_mode auf leer setzen, da sich UliCMS nicht im strict_mode betreiben lässt
         if ($db_strict_mode) {
-            self::pQuery("SET SESSION sql_mode =
-                'ONLY_FULL_GROUP_BY, STRICT_TRANS_TABLES, NO_ZERO_IN_DATE, NO_ZERO_DATE, ERROR_FOR_DIVISION_BY_ZERO, NO_AUTO_CREATE_USER, NO_ENGINE_SUBSTITUTION'");
+            self::pQuery("SET SESSION sql_mode =  'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION'");
         } else {
             self::query("SET SESSION sql_mode = ''");
         }
