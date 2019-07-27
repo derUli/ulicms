@@ -137,10 +137,18 @@ class StringHelper extends Helper {
         return $lines;
     }
 
-    public static function trimLines(string$str, string $newline = PHP_EOL): string {
+    public static function trimLines(string $str, string $newline = PHP_EOL): string {
         $str = StringHelper::linesFromString($str, true, true, false);
         $str = implode($newline, $str);
         return $str;
+    }
+
+    public static function isUpperCase(string $val): bool {
+        return strtoupper($val) === $val;
+    }
+
+    public static function isLowerCase(string $val): bool {
+        return strtolower($val) === $val;
     }
 
 }

@@ -45,6 +45,8 @@ Neue API-Methoden:
 * Model->hasChanges()
 * Module->isInstalled()
 * ModuleHelper::getMainClass(string $module): ?Controller
+* StringHelper::isUpperCase(string $val): bool
+* StringHelper::isLowerCase(string $val): bool
 * ArrayHelper::flatten($input)
 * PackageManager->isInstalled($package, $type = PackageTypes::TYPE_MODULE)
 * UliCMS\HTML\icon($classes, $htmlAttributes = array())
