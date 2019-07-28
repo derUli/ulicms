@@ -10,7 +10,7 @@ use Template;
 class Input {
 
     public static function textBox(string $name,
-            string $value,
+            ?string $value,
             string $type = "text",
             array $htmlAttributes = []): string {
         $attributes = array(
@@ -26,7 +26,7 @@ class Input {
     }
 
     public static function textArea(string $name,
-            string $value,
+            ?string $value,
             int $rows = 25,
             int $cols = 80,
             array $htmlAttributes = []): string {
@@ -46,7 +46,7 @@ class Input {
     }
 
     public static function password(string $name,
-            string $value,
+            ?string $value,
             array $htmlAttributes = []): string {
         return self::textBox($name, $value, "password", $htmlAttributes);
     }
@@ -75,7 +75,7 @@ class Input {
     }
 
     public static function hidden(string $name,
-            string $value,
+            ?string $value,
             array $htmlAttributes = []): string {
         return self::textBox($name, $value, "hidden", $htmlAttributes);
     }

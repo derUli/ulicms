@@ -426,7 +426,7 @@ function get_available_post_types(): array {
 }
 
 // Schriftgrößen zurückgeben
-function getFontSizes(): string {
+function getFontSizes(): array {
     global $sizes;
     $sizes = [];
     for ($i = 6; $i <= 80; $i ++) {

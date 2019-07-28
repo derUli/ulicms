@@ -502,4 +502,9 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         unset($_SERVER['HTTPS']);
     }
 
+    public function testGetFontSizes() {
+        $this->assertCount(75, getFontSizes());
+        $this->assertContains("14px", getFontSizes());
+    }
+
 }
