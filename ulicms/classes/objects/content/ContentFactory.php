@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use UliCMS\Exceptions\FileNotFoundException;
+use UliCMS\Exceptions\UnknownContentTypeException;
 use UliCMS\Models\Content\TypeMapper;
 
 class ContentFactory {
@@ -39,6 +40,15 @@ class ContentFactory {
         if (isset($mappings[$type]) and StringHelper::isNotNullOrEmpty($mappings[$type]) and class_exists($mappings[$type])) {
             $retval = new $mappings[$type]();
             $retval->loadByID(intval($row->id));
+        } else {
+            $message = "Content with id={$row->id} has unknown content type \"{$type}\"";
+            $logger = LoggerRegistry::get("exception_log");
+            if ($logger) {
+                $logger->error($message);
+            }
+            throw new UnknownContentTypeException(
+                    $message
+            );
         }
 
         return $retval;

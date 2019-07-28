@@ -86,6 +86,8 @@ Entfernte API-Methoden:
 
 Verbesserungen:
 * Ein- und Ausblenden der Filter in der Seitenliste ist nun schneller
+* Auf iOS Geräten wird nun für alle scrollbaren Bereiche
+  impulsbasiertes Scrolling verwendet
 
 Fehlerkorrekturen:
 * datetime-local Eingabefelder auf iOS Safari sind immer ungültig
