@@ -110,7 +110,7 @@ if ($permissionChecker->hasPermission("pages")) {
         $sql .= "where b.language='" . $_SESSION["filter_language"] . "' ";
     }
 
-    $sql .= " group by a.title ";
+    $sql .= " group by a.title, a.id ";
     $sql .= " order by a.title";
     $parents = db_query($sql);
     ?>
@@ -480,7 +480,7 @@ if ($permissionChecker->hasPermission("pages")) {
                     <?php
                     if (db_num_rows($result) > 0) {
                         while ($row = db_fetch_object($result)) {
-                            $model = ContentFactory::getByID($row->id);
+                            $model = ContentFactory::getByID(intval($row->id));
                             echo '<tr id="dataset-' . $row->id . '">';
                             echo '<td>';
                             if ($model->hasChildren()) {
