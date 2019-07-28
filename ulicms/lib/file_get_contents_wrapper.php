@@ -24,8 +24,16 @@ function file_get_contents_curl(string $url): ?string {
     return $data;
 }
 
-function is_url(string $url): bool {
-    if (startsWith($url, "http://") or startsWith($url, "https://") or startsWith($url, "ftp://")) {
+function is_url(?string $url): bool {
+    if (!$url) {
+        return false;
+    }
+    
+    // it it is an URL
+    if (startsWith($url, "http://")
+            or startsWith($url, "https://")
+            or startsWith($url, "ftp://")) {
+        // if it is not an incomplete url return true
         return ($url != "http://" and $url != "https://" and $url != "ftp://");
     }
     return false;
