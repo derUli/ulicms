@@ -28,6 +28,7 @@ class Request {
         } else if (isset($_GET[$name])) {
             $value = $_GET[$name];
         }
+
         if ($value !== null) {
             switch ($convert) {
                 case "bool":

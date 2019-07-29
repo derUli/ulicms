@@ -152,8 +152,12 @@ class PageController extends Controller {
 
         $permissionObjects = array("admins", "group", "owner", "other");
         foreach ($permissionObjects as $object) {
-            $model->getPermissions()->setEditRestriction($object,
-                    Request::getVar("only_{$object}_can_edit"), false, "bool");
+            $model->getPermissions()->setEditRestriction(
+                    $object,
+                    Request::getVar(
+                            "only_{$object}_can_edit", false, "bool"
+                    )
+            );
         }
 
         $model->link_to_language = Request::getVar("link_to_language", null, "int");
@@ -374,7 +378,7 @@ class PageController extends Controller {
             echo $page["id"];
             ?>"
                     <?php if ($page["id"] == $parent_id) echo "selected"; ?>>
-                        <?php
+                    <?php
                         echo esc($page["title"]);
                         ?>
                 (ID:
