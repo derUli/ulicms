@@ -161,8 +161,8 @@ class PageController extends Controller {
         }
 
         $model->link_to_language = Request::getVar("link_to_language", null, "int");
-
-        $model->comments_enabled = Request::getVar("commens_enabled") !== "null" ? Request::getVar("comments_enabled", false, "bool") : null;
+        var_dump(Request::getVar("comments_enabled"));
+        $model->comments_enabled = Request::getVar("comments_enabled") !== "null" ? Request::getVar("comments_enabled", false, "bool") : null;
 
         $model->show_headline = Request::getVar("show_headline", 1, "bool");
         $model->author_id = $userId ? $userId : get_user_id();
@@ -378,7 +378,7 @@ class PageController extends Controller {
             echo $page["id"];
             ?>"
                     <?php if ($page["id"] == $parent_id) echo "selected"; ?>>
-                    <?php
+                        <?php
                         echo esc($page["title"]);
                         ?>
                 (ID:
