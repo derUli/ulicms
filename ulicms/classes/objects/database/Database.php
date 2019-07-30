@@ -317,15 +317,15 @@ class Database {
     }
 
 // Fetch Row in diversen Datentypen
-    public static function fetchArray(?mysqli_result $result): ?array {
+    public static function fetchArray(?mysqli_result $result) {
         return mysqli_fetch_array($result);
     }
 
-    public static function fetchField(?mysqli_result $result): ?object {
+    public static function fetchField(?mysqli_result $result) {
         return mysqli_fetch_field($result);
     }
 
-    public static function fetchAssoc(?mysqli_result$result): ?array {
+    public static function fetchAssoc(?mysqli_result $result) {
         return mysqli_fetch_assoc($result);
     }
 
@@ -356,7 +356,7 @@ class Database {
         return mysqli_fetch_object($result);
     }
 
-    public static function fetchRow(mysqli_result $result): array {
+    public static function fetchRow(mysqli_result $result) {
         return mysqli_fetch_row($result);
     }
 
