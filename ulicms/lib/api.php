@@ -845,7 +845,7 @@ function getCurrentURL(): string {
  * bzw.
  * seite.html;
  */
-function buildSEOUrl($page = false, bool $redirection = null, string $format = "html"): string {
+function buildSEOUrl($page = false, bool $redirection = null, string $format = "html") {
     if (!is_null($redirection) and ! empty($redirection)) {
         return $redirection;
     }
