@@ -161,7 +161,6 @@ class PageController extends Controller {
         }
 
         $model->link_to_language = Request::getVar("link_to_language", null, "int");
-        var_dump(Request::getVar("comments_enabled"));
         $model->comments_enabled = Request::getVar("comments_enabled") !== "null" ? Request::getVar("comments_enabled", false, "bool") : null;
 
         $model->show_headline = Request::getVar("show_headline", 1, "bool");
