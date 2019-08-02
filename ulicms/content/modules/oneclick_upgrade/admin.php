@@ -2,7 +2,7 @@
 define("MODULE_ADMIN_HEADLINE", get_translation("oneclick_upgrade") . " " . get_translation("settings"));
 
 function oneclick_upgrade_admin() {
-    if (get_request_method() == "POST") {
+    if (get_request_method() == "post") {
         Settings::set("oneclick_upgrade_channel", strval($_POST["oneclick_upgrade_channel"]));
     }
     $oneclick_upgrade_channel = strval(Settings::get("oneclick_upgrade_channel"));
@@ -12,7 +12,7 @@ function oneclick_upgrade_admin() {
     );
     ?>
     <?php
-    if (get_request_method() == "POST") {
+    if (get_request_method() == "post") {
         ?>
         <div class="alert alert-success alert-dismissable fade in">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
