@@ -40,7 +40,7 @@ if (! $permissionChecker->hasPermission("groups")) {
             }
             $name = real_htmlspecialchars($name);
         }
-    } else if (isset($_GET["delete"]) and get_request_method() == "POST") {
+    } else if (isset($_GET["delete"]) and Request::isPost()) {
         $id = intval($_GET["delete"]);
         $permissionChecker = new ACL();
         $permissionChecker->deleteGroup($id);
