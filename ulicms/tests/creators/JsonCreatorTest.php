@@ -24,7 +24,7 @@ class JsonCreatorTest extends \PHPUnit\Framework\TestCase {
         );
         $creator = new JSONCreator();
 
-        $this->assertEquals($expected, $creator->render());
+        $this->assertEquals(normalizeLN($expected), normalizeLN($creator->render()));
     }
 
 }
