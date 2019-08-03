@@ -46,7 +46,8 @@ class DBMigrator {
                 $this->component,
                 $file
             );
-            $result = Database::pQuery($sql, $args, true);
+            $result = Database::tableExists("dbtrack") ?
+                    Database::pQuery($sql, $args, true) : false;
             if (!$result or Database::getNumRows($result) == 0) {
                 $path = $this->folder . "/" . $file;
                 $sql = file_get_contents($path);

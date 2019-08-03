@@ -5,14 +5,14 @@ use UliCMS\Models\Content\Categories;
 // This should be rewritten with MVC pattern and using partial views
 use UliCMS\Security\PermissionChecker;
 use UliCMS\Security\ContentPermissionChecker;
+use UliCMS\Exceptions\UnknownContentTypeException;
 
 $show_filters = Settings::get("user/" . get_user_id() . "/show_filters");
 
 $permissionChecker = new PermissionChecker(get_user_id());
 
 if ($permissionChecker->hasPermission("pages")) {
-    ?>
-    <?php
+
     if (!isset($_SESSION["filter_title"])) {
         $_SESSION["filter_title"] = "";
     }
@@ -110,7 +110,7 @@ if ($permissionChecker->hasPermission("pages")) {
         $sql .= "where b.language='" . $_SESSION["filter_language"] . "' ";
     }
 
-    $sql .= " group by a.title ";
+    $sql .= " group by a.title, a.id ";
     $sql .= " order by a.title";
     $parents = db_query($sql);
     ?>
@@ -480,7 +480,12 @@ if ($permissionChecker->hasPermission("pages")) {
                     <?php
                     if (db_num_rows($result) > 0) {
                         while ($row = db_fetch_object($result)) {
-                            $model = ContentFactory::getByID($row->id);
+                            try {
+                                $model = ContentFactory::getByID(intval($row->id));
+                            } catch (UnknownContentTypeException $e) {
+                                // skip contents with unknown types
+                                continue;
+                            }
                             echo '<tr id="dataset-' . $row->id . '">';
                             echo '<td>';
                             if ($model->hasChildren()) {

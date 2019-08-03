@@ -26,6 +26,10 @@ Neue API-Methoden:
 * Video_Page->setVideo(?Video $video): void
 * Video::getAll(string $order = "id"): array
 * Audio::getAll(string $order = "id"): array
+* Video->getWidth(): ?int
+* Video->getHeight(): ?int
+* Video->setWidth(?int $val): void
+* Video->setHeight(?int $val): void
 * TypeMapper::getModel($type)
 * File::deleteIfExists($file)
 * ActionRegistry::getAction($action)
@@ -41,6 +45,8 @@ Neue API-Methoden:
 * Model->hasChanges()
 * Module->isInstalled()
 * ModuleHelper::getMainClass(string $module): ?Controller
+* StringHelper::isUpperCase(string $val): bool
+* StringHelper::isLowerCase(string $val): bool
 * ArrayHelper::flatten($input)
 * PackageManager->isInstalled($package, $type = PackageTypes::TYPE_MODULE)
 * UliCMS\HTML\icon($classes, $htmlAttributes = array())
@@ -80,6 +86,8 @@ Entfernte API-Methoden:
 
 Verbesserungen:
 * Ein- und Ausblenden der Filter in der Seitenliste ist nun schneller
+* Auf iOS Geräten wird nun für alle scrollbaren Bereiche
+  impulsbasiertes Scrolling verwendet
 
 Fehlerkorrekturen:
 * datetime-local Eingabefelder auf iOS Safari sind immer ungültig

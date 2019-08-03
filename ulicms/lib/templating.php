@@ -190,7 +190,7 @@ function get_type(?string $slug = null, ?string $language = null): string {
     return $result;
 }
 
-function get_article_meta(?string $page = null): ?string {
+function get_article_meta(?string $page = null): ?object {
     if (!$page) {
         $page = get_requested_pagename();
     }
@@ -681,8 +681,11 @@ function buildtree(array $src_arr, ?int $parent_id = 0, ?array $tree = []): arra
     return $tree;
 }
 
-function parent_item_contains_current_page(int $id): bool {
+function parent_item_contains_current_page(?int $id): bool {
     $retval = false;
+	if(!$id){
+		return $retval;
+	}
     $id = intval($id);
     $language = $_SESSION["language"];
     $sql = "SELECT id, slug, parent_id FROM " . tbname("content") . " WHERE language = '$language' AND active = 1 AND `deleted_at` IS NULL";

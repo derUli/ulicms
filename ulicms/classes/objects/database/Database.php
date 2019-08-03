@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use UliCMS\Exceptions\SqlException;
+
 class Database {
 
     private static $connection = null;
@@ -9,6 +11,18 @@ class Database {
 
     public static function setEchoQueries($echoQueries = true) {
         self::$echoQueries = $echoQueries;
+    }
+
+    public static function getSqlStrictModeFlags() {
+        return [
+            "ONLY_FULL_GROUP_BY",
+            "STRICT_TRANS_TABLES",
+            "NO_ZERO_IN_DATE",
+            "NO_ZERO_DATE",
+            "ERROR_FOR_DIVISION_BY_ZERO",
+            "NO_AUTO_CREATE_USER",
+            "NO_ENGINE_SUBSTITUTION"
+        ];
     }
 
 // Connect with database server
@@ -21,14 +35,9 @@ class Database {
         self::query("SET NAMES 'utf8mb4'");
 // sql_mode auf leer setzen, da sich UliCMS nicht im strict_mode betreiben lässt
         if ($db_strict_mode) {
-            Database::pQuery("SET SESSION sql_mode =
-                'ONLY_FULL_GROUP_BY,
-                STRICT_TRANS_TABLES,
-                NO_ZERO_IN_DATE,
-                NO_ZERO_DATE',
-                ERROR_FOR_DIVISION_BY_ZERO,
-                NO_AUTO_CREATE_USER,
-                NO_ENGINE_SUBSTITUTION");
+            self::pQuery("SET SESSION sql_mode = ?", [
+                implode(",", self::getSqlStrictModeFlags())
+            ]);
         } else {
             self::query("SET SESSION sql_mode = ''");
         }
@@ -81,7 +90,11 @@ class Database {
         if (self::$echoQueries) {
             echo $sql . "\n";
         }
-        return mysqli_query(self::$connection, $sql);
+        $result = mysqli_query(self::$connection, $sql);
+        if (!$result) {
+            throw new SqlException(self::getError());
+        }
+        return $result;
     }
 
 // execute a sql string with multiple statements
@@ -154,6 +167,10 @@ class Database {
     public static function dropTable(string $table, bool $prefix = true): bool {
         if ($prefix) {
             $table = tbname($table);
+        }
+
+        if (!faster_in_array($table, self::getAllTables())) {
+            return true;
         }
 
         $table = self::escapeName($table);
@@ -300,15 +317,15 @@ class Database {
     }
 
 // Fetch Row in diversen Datentypen
-    public static function fetchArray(?mysqli_result $result): ?array {
+    public static function fetchArray(?mysqli_result $result) {
         return mysqli_fetch_array($result);
     }
 
-    public static function fetchField(?mysqli_result $result): ?object {
+    public static function fetchField(?mysqli_result $result) {
         return mysqli_fetch_field($result);
     }
 
-    public static function fetchAssoc(?mysqli_result$result): ?array {
+    public static function fetchAssoc(?mysqli_result $result) {
         return mysqli_fetch_assoc($result);
     }
 
@@ -339,7 +356,7 @@ class Database {
         return mysqli_fetch_object($result);
     }
 
-    public static function fetchRow(mysqli_result $result): array {
+    public static function fetchRow(mysqli_result $result) {
         return mysqli_fetch_row($result);
     }
 
@@ -368,6 +385,12 @@ class Database {
 
         sort($tableList);
         return $tableList;
+    }
+
+    public static function tableExists(string $table,
+            bool $prefix = true): bool {
+        $tableName = $prefix ? tbname($table) : $table;
+        return faster_in_array($tableName, self::getAllTables());
     }
 
 // Abstraktion für Escapen von Werten

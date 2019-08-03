@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace UliCMS\Models\Content;
 
+use stdClass;
 use Database;
 use ContentFactory;
 use UliCMS\Constants\CommentStatus;
@@ -38,8 +41,8 @@ class Comment extends Model {
 
     public function fillVars($result = null) {
         $data = Database::fetchObject($result);
-        $this->setID($data->id);
-        $this->setContentId($data->content_id);
+        $this->setID(intval($data->id));
+        $this->setContentId(intval($data->content_id));
         $this->setAuthorName($data->author_name);
         $this->setAuthorUrl($data->author_url);
         $this->setAuthorEmail($data->author_email);
@@ -48,7 +51,7 @@ class Comment extends Model {
         $this->setStatus($data->status);
         $this->setIp($data->ip);
         $this->setUserAgent($data->useragent);
-        $this->setRead($data->read);
+        $this->setRead(boolval($data->read));
     }
 
     protected function insert() {
@@ -131,7 +134,7 @@ VALUES      ( ?,
     // of SpamDetectionResults
     // if the comment contains no spam the function
     // returns null
-    public function isSpam() {
+    public function isSpam(): ?array {
         $configuration = SpamFilterConfiguration::fromSettings();
         $checker = new CommentSpamChecker($this, $configuration);
         $result = null;
@@ -141,41 +144,38 @@ VALUES      ( ?,
         return $result;
     }
 
-    public function getContentId() {
+    public function getContentId(): ?int {
         return $this->content_id;
     }
 
-    public function setContentId($val) {
+    public function setContentId(?int $val): void {
         if (!is_numeric($val)) {
             throw new InvalidArgumentException("$val is not a number");
         }
         $this->content_id = intval($val);
     }
 
-    public function getAuthorName() {
+    public function getAuthorName(): ?string {
         return $this->author_name;
     }
 
-    public function setAuthorName($val) {
-        if (!is_string($val)) {
-            throw new InvalidArgumentException("$val is not a string");
-        }
+    public function setAuthorName(?string $val): void {
         $this->author_name = StringHelper::isNotNullOrWhitespace($val) ? strval($val) : null;
     }
 
-    public function getAuthorEmail() {
+    public function getAuthorEmail(): ?string {
         return $this->author_email;
     }
 
-    public function setAuthorEmail($val) {
+    public function setAuthorEmail(?string $val): void {
         $this->author_email = StringHelper::isNotNullOrWhitespace($val) ? strval($val) : null;
     }
 
-    public function getAuthorUrl() {
+    public function getAuthorUrl(): ?string {
         return $this->author_url;
     }
 
-    public function setAuthorUrl($val) {
+    public function setAuthorUrl(?string $val): void {
         $this->author_url = is_url($val) ? strval($val) : null;
     }
 
@@ -183,7 +183,7 @@ VALUES      ( ?,
         return $this->date;
     }
 
-    public function setDate($val) {
+    public function setDate($val): void {
         if (is_string($val)) {
             $val = strtotime($val);
         } else if (!is_numeric($val)) {
@@ -192,11 +192,11 @@ VALUES      ( ?,
         $this->date = intval($val);
     }
 
-    public function getText() {
+    public function getText(): ?string {
         return $this->text;
     }
 
-    public function setText($val) {
+    public function setText(?string $val): void {
         $this->text = StringHelper::isNotNullOrWhitespace($val) ? strval($val) : null;
     }
 
@@ -204,26 +204,26 @@ VALUES      ( ?,
         return $this->status;
     }
 
-    public function setStatus($val) {
+    public function setStatus(?string $val): void {
         if (!is_string($val)) {
             throw new InvalidArgumentException("$val is not a status string");
         }
         $this->status = $val;
     }
 
-    public function getIp() {
+    public function getIp(): ?string {
         return $this->ip;
     }
 
-    public function setIp($val) {
+    public function setIp(?string $val): void {
         $this->ip = StringHelper::isNotNullOrWhitespace($val) ? strval($val) : null;
     }
 
-    public function getUserAgent() {
+    public function getUserAgent(): ?string {
         return $this->useragent;
     }
 
-    public function setUserAgent($val) {
+    public function setUserAgent(?string $val): void {
         $this->useragent = StringHelper::isNotNullOrWhitespace($val) ? strval($val) : null;
     }
 
@@ -234,11 +234,14 @@ VALUES      ( ?,
         return ContentFactory::getByID($this->getContentId());
     }
 
-    public static function getAllByContentId($content_id, $order_by = "date desc") {
+    public static function getAllByContentId(int $content_id,
+            string $order_by = "date desc"): array {
         return self::getAllDatasets(self::TABLE_NAME, self::class, $order_by, "content_id = " . intval($content_id));
     }
 
-    public static function getAllByStatus($status, $content_id = null, $order = "date desc") {
+    public static function getAllByStatus(string $status,
+            ?int $content_id = null,
+            string $order = "date desc"): array {
         $where = "status = '" . Database::escapeValue($status) . "'";
         if ($content_id) {
             $where .= " and content_id = " . intval($content_id);
@@ -246,31 +249,31 @@ VALUES      ( ?,
         return self::getAllDatasets(self::TABLE_NAME, self::class, $order, $where);
     }
 
-    public static function getAll($order = "id desc") {
+    public static function getAll(string $order = "id desc"): array {
         return self::getAllDatasets(self::TABLE_NAME, self::class, $order);
     }
 
-    public static function getUnreadCount() {
+    public static function getUnreadCount(): int {
         $result = Database::pQuery("select count(id) as amount from {prefix}comments where `read` = ?",
                         [false], true);
         $dataset = Database::fetchObject($result);
-        return $dataset->amount;
+        return intval($dataset->amount);
     }
 
-    public static function getReadCount() {
+    public static function getReadCount(): ?int {
         $result = Database::pQuery("select count(id) as amount from {prefix}comments where `read` = ?",
                         [true], true);
         $dataset = Database::fetchObject($result);
-        return $dataset->amount;
+        return intval($dataset->amount);
     }
 
-    public static function getAllCount() {
+    public static function getAllCount(): ?int {
         $result = Database::pQuery("select count(id) as amount from {prefix}comments", [], true);
         $dataset = Database::fetchObject($result);
-        return $dataset->amount;
+        return intval($dataset->amount);
     }
 
-    public static function deleteIpsAfter48Hours($keepSpamIps = false) {
+    public static function deleteIpsAfter48Hours(bool $keepSpamIps = false): int {
         $sql = "update {prefix}comments set ip = null WHERE date < FROM_UNIXTIME(UNIX_TIMESTAMP(NOW() - INTERVAL 2 DAY)) and ip is not null";
         if ($keepSpamIps) {
             $sql .= " and status <> 'spam'";
@@ -279,7 +282,8 @@ VALUES      ( ?,
         return Database::getAffectedRows();
     }
 
-    public static function checkIfCommentWithIpExists($ip, $status = CommentStatus::SPAM) {
+    public static function checkIfCommentWithIpExists(?string $ip,
+            string $status = CommentStatus::SPAM): bool {
         $sql = "select ip from {prefix}comments where ip = ?";
         $args = array(
             strval($ip)
@@ -292,11 +296,11 @@ VALUES      ( ?,
         return Database::any($result);
     }
 
-    public function isRead() {
+    public function isRead(): bool {
         return boolval($this->read);
     }
 
-    public function setRead($val) {
+    public function setRead(?bool $val): void {
         $this->read = boolval($val);
     }
 

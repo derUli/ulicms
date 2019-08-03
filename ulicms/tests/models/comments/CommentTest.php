@@ -19,26 +19,6 @@ class CommentTest extends \PHPUnit\Framework\TestCase {
         CacheUtil::clearCache();
     }
 
-    public function testSetContentIdInvalidArgument() {
-        $comment = new Comment();
-        try {
-            $comment->setContentId("foo");
-            $this->fail("expected exception not thrown");
-        } catch (InvalidArgumentException $e) {
-            $this->assertEquals("foo is not a number", $e->getMessage());
-        }
-    }
-
-    public function testSetAuthorNameInvalidArgument() {
-        $comment = new Comment();
-        try {
-            $comment->setAuthorName(123);
-            $this->fail("expected exception not thrown");
-        } catch (InvalidArgumentException $e) {
-            $this->assertEquals("123 is not a string", $e->getMessage());
-        }
-    }
-
     public function tesSetDateInvalidArgument() {
         $comment = new Comment();
         try {
@@ -46,16 +26,6 @@ class CommentTest extends \PHPUnit\Framework\TestCase {
             $this->fail("expected exception not thrown");
         } catch (InvalidArgumentException $e) {
             $this->assertEquals("foo is not an integer timestamp", $e->getMessage());
-        }
-    }
-
-    public function testSetStatusInvalidArgument() {
-        $comment = new Comment();
-        try {
-            $comment->setStatus(123);
-            $this->fail("expected exception not thrown");
-        } catch (InvalidArgumentException $e) {
-            $this->assertEquals("123 is not a status string", $e->getMessage());
         }
     }
 
@@ -263,7 +233,7 @@ class CommentTest extends \PHPUnit\Framework\TestCase {
         $comment->setContentId($first->id);
 
         $content = $comment->getContent();
-        $this->assertInstanceOf(Content::class, $content);
+        $this->assertTrue(is_subclass_of($content,  Content::class));
         $this->assertEquals($first->id, $content->getId());
     }
 
@@ -389,7 +359,6 @@ class CommentTest extends \PHPUnit\Framework\TestCase {
     public function testGetAllByStatus() {
         $contents = ContentFactory::getAll();
         $last = array_pop($contents);
-
         $comment = new Comment();
         $comment->setContentId($last->id);
         $comment->setAuthorName("John Doe");

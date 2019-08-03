@@ -16,7 +16,10 @@ class VideoTest extends \PHPUnit\Framework\TestCase {
         $video->setOGGFile("video.ogv");
         $video->setWebmFile("video.webm");
         $video->setCategoryId(1);
+        $video->setWidth(640);
+        $video->setHeight(480);
         $video->save();
+
         $this->assertNotNull($video->getID());
         $id = $video->getId();
         $video = new Video($id);
@@ -28,13 +31,19 @@ class VideoTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(1, $video->getCategoryId());
         $this->assertEquals(1, $video->getCategory()
                         ->getID());
+        $this->assertEquals(640, $video->getWidth());
+        $this->assertEquals(480, $video->getHeight());
 
         $video->setName("New Name");
         $video->setMP4File("not-video.mp4");
         $video->setOGGFile("not-video.ogg");
         $video->setWebmFile("not-video.webm");
         $video->setCategoryId(null);
+
+        $video->setWidth(800);
+        $video->setHeight(600);
         $video->save();
+
         $video = new Video($id);
 
         $this->assertEquals("New Name", $video->getName());
@@ -42,6 +51,8 @@ class VideoTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("not-video.ogg", $video->getOggFile());
         $this->assertEquals("not-video.webm", $video->getWebmFile());
         $this->assertEquals(null, $video->getCategoryId());
+        $this->assertEquals(800, $video->getWidth());
+        $this->assertEquals(600, $video->getHeight());
 
         $video = new Video($id);
 
@@ -66,8 +77,10 @@ class VideoTest extends \PHPUnit\Framework\TestCase {
         $video->setMP4File("video.mp4");
         $video->setOGGFile("video.ogv");
         $video->setWebmFile("video.webm");
+        $video->setWidth(800);
+        $video->setHeight(600);
         $video->setCategoryId(1);
-        $this->assertEquals('<video width="" height="" controls><source src="content/videos/video.mp4" type="video/mp4"><source src="content/videos/video.ogv" type="video/ogg"><source src="content/videos/video.webm" type="video/webm">Your browser doesn\'t support HTML 5.<br/><a href="content/videos/video.mp4">But you can download the video here.</a></video>', $video->render());
+        $this->assertEquals('<video width="800" height="600" controls><source src="content/videos/video.mp4" type="video/mp4"><source src="content/videos/video.ogv" type="video/ogg"><source src="content/videos/video.webm" type="video/webm">Your browser doesn\'t support HTML 5.<br/><a href="content/videos/video.mp4">But you can download the video here.</a></video>', $video->render());
     }
 
     public function testGetAll() {
@@ -78,6 +91,8 @@ class VideoTest extends \PHPUnit\Framework\TestCase {
             $video->setMP4File("video.mp4");
             $video->setOGGFile("video.ogv");
             $video->setWebmFile("video.webm");
+            $video->setWidth(800);
+            $video->setHeight(600);
             $video->setCategoryId(1);
             $video->save();
             $savedVideos[] = $video;

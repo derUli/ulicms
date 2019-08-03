@@ -65,7 +65,6 @@ class BackendPageRenderer {
         }
 
         $this->doCronEvents();
-        Database::close();
         exit();
     }
 

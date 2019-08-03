@@ -11,7 +11,7 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase {
 
     public function tearDown() {
         $this->cleanUp();
-        Database::query("delete from {prefix}users where username like 'testuser-%", true);
+        Database::query("delete from {prefix}users where username like 'testuser-%'", true);
         unset($_SESSION["login_id"]);
         @session_destroy();
     }

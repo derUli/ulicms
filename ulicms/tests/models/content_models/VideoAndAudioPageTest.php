@@ -16,6 +16,8 @@ class VideoAndAudioPageTest extends \PHPUnit\Framework\TestCase {
         $video->setOGGFile("video.ogv");
         $video->setWebmFile("video.webm");
         $video->setCategoryId(1);
+        $video->setWidth(640);
+        $video->setHeight(480);
         $video->save();
 
         $userManager = new UserManager();
@@ -39,7 +41,10 @@ class VideoAndAudioPageTest extends \PHPUnit\Framework\TestCase {
         $savedPage = ContentFactory::getByID($page->getId());
         $this->assertEquals($video->getID(), $savedPage->video);
 
-        $video->delete(false);
+        $savedPage->setVideo(null);
+        $savedPage->save();
+
+        $savedPage->delete(false);
         $page->delete();
     }
 
@@ -63,6 +68,7 @@ class VideoAndAudioPageTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull($page->getAudio());
 
         $page->setAudio($audio);
+
         $this->assertEquals($audio->getID(), $page->audio);
         $this->assertEquals($audio->getID(), $page->getAudio()->getId());
 
@@ -71,7 +77,10 @@ class VideoAndAudioPageTest extends \PHPUnit\Framework\TestCase {
         $savedPage = ContentFactory::getByID($page->getId());
         $this->assertEquals($audio->getID(), $savedPage->audio);
 
-        $audio->delete(false);
+        $savedPage->setAudio(null);
+        $savedPage->save();
+
+        $savedPage->delete(false);
         $page->delete();
     }
 

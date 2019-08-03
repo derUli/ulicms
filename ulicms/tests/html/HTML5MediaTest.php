@@ -70,6 +70,8 @@ class Html5MediaTest extends \PHPUnit\Framework\TestCase {
         $video->setMP4File("video.mp4");
         $video->setOGGFile("video.ogv");
         $video->setWebmFile("video.webm");
+        $video->setWidth(640);
+        $video->setHeight(480);
         $video->setCategoryId(1);
         $video->save();
 

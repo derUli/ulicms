@@ -15,7 +15,7 @@ class ControllerRegistryTest extends \PHPUnit\Framework\TestCase {
             @session_destroy();
         }
 
-        Database::query("delete from {prefix}users where username like 'testuser-%", true);
+        Database::query("delete from {prefix}users where username like 'testuser-%'", true);
     }
 
     public function testGetWithClassNameReturnsController() {

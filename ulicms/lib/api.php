@@ -426,7 +426,7 @@ function get_available_post_types(): array {
 }
 
 // Schriftgrößen zurückgeben
-function getFontSizes(): string {
+function getFontSizes(): array {
     global $sizes;
     $sizes = [];
     for ($i = 6; $i <= 80; $i ++) {
@@ -845,7 +845,7 @@ function getCurrentURL(): string {
  * bzw.
  * seite.html;
  */
-function buildSEOUrl($page = false, bool $redirection = null, string $format = "html"): string {
+function buildSEOUrl($page = false, bool $redirection = null, string $format = "html") {
     if (!is_null($redirection) and ! empty($redirection)) {
         return $redirection;
     }

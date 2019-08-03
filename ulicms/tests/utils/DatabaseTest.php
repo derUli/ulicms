@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Exceptions\NotImplementedException;
+use UliCMS\Exceptions\SqlException;
 
 class DatabaseTest extends \PHPUnit\Framework\TestCase {
 
@@ -71,6 +72,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetLastError() {
+        $this->expectException(SqlException::class);
         // this sql fails always
         $result = Database::query("select devil from hell", true);
         $this->assertFalse($result);
@@ -82,6 +84,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testError() {
+        $this->expectException(SqlException::class);
         // this sql fails always
         $result = Database::query("select devil from hell", true);
         $this->assertFalse($result);
@@ -93,6 +96,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetError() {
+        $this->expectException(SqlException::class);
         // this sql fails always
         $result = Database::query("select devil from hell", true);
         $this->assertFalse($result);
@@ -282,6 +286,28 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         foreach ($datasets as $dataset) {
             $this->assertNotEmpty($dataset->value);
         }
+    }
+
+    public function testGetSqlStrictModeFlags() {
+        $this->assertCount(7, Database::getSqlStrictModeFlags());
+        foreach (Database::getSqlStrictModeFlags() as $flag) {
+            $this->assertIsString($flag);
+            $this->assertNotEmpty($flag);
+
+            // string must be Uppercase
+            $this->assertEquals(strtoupper($flag), $flag);
+        }
+    }
+
+    public function testTableExistsReturnsTrue() {
+        $this->assertTrue(Database::tableExists("content"));
+        $this->assertTrue(Database::tableExists("settings"), true);
+        $this->assertTrue(Database::tableExists(tbname("content"), false));
+    }
+
+    public function testTableExistsReturnsFalse() {
+        $this->assertFalse(Database::tableExists("gibts_echt_nicht"));
+        $this->assertFalse(Database::tableExists("content", false));
     }
 
     // TODO: implement tests for other Database functions

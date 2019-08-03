@@ -14,7 +14,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
 
     public function tearDown() {
         $this->cleanUp();
-        Database::query("delete from {prefix}users where username like 'testuser-%", true);
+        Database::query("delete from {prefix}users where username like 'testuser-%'", true);
         unset($_SESSION["login_id"]);
         @session_destroy();
     }
@@ -500,6 +500,11 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         unset($_SERVER['SERVER_PORT']);
         unset($_SERVER['REQUEST_URI']);
         unset($_SERVER['HTTPS']);
+    }
+
+    public function testGetFontSizes() {
+        $this->assertCount(75, getFontSizes());
+        $this->assertContains("14px", getFontSizes());
     }
 
 }

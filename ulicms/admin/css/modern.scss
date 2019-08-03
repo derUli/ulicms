@@ -23,6 +23,12 @@ $odd-background-color: #eee;
 $even-backgroind-color: #fff;
 $background_color_8: black;
 
+// impulse based scrolling on touch devices (e.g. iPad)
+// see https://developer.mozilla.org/de/docs/Web/CSS/-webkit-overflow-scrolling
+*{
+    -webkit-overflow-scrolling: touch !important;
+}
+
 body {
     background-color: $default-background-color;
     font-family: $default-font;
