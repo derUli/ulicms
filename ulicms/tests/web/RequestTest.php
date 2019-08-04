@@ -8,6 +8,9 @@ class RequestTest extends \PHPUnit\Framework\TestCase {
         unset($_SERVER["HTTP_USER_AGENT"]);
         unset($_SERVER["REQUEST_URI"]);
         unset($_SERVER["SERVER_PORT"]);
+        unset($_SERVER['REMOTE_ADDR']);
+        unset($_SERVER['REMOTE_ADDR']);
+        unset($_SERVER['X_FORWARDED']);
     }
 
     public function testGetVar() {
@@ -126,6 +129,18 @@ class RequestTest extends \PHPUnit\Framework\TestCase {
     public function testGetProtocolExpectHttpsWithPrefix() {
         $_SERVER["SERVER_PORT"] = 443;
         $this->assertEquals("https://www.ulicms.de", Request::getProtocol("www.ulicms.de"));
+    }
+
+    public function testGetIp() {
+        $_SERVER['REMOTE_ADDR'] = "123.123.123.123";
+        $this->assertEquals("123.123.123.123", Request::getIp());
+    }
+
+    public function testGetIpWithProxy() {
+        $_SERVER['REMOTE_ADDR'] = "123.123.123.123";
+        $_SERVER['X_FORWARDED'] = "111.111.111.111";
+
+        $this->assertEquals("111.111.111.111", Request::getIp());
     }
 
 }

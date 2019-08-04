@@ -301,14 +301,15 @@ function get_gravatar(string $email, int $s = 80, string $d = 'mm', string $r = 
     // und stattdessen wird ein statisches Platzhalter-Bild angezeigt
     // Bis ein integrierter Avatar-Upload in UliCMS implementiert ist.
     $url = ModuleHelper::getBaseUrl("/admin/gfx/no_avatar.png");
+	$html = "";
     if ($img) {
-        $img = '<img src="' . $url . '"';
+        $html = '<img src="' . $url . '"';
         foreach ($atts as $key => $val) {
-            $img .= ' ' . $key . '="' . $val . '"';
+            $html .= ' ' . $key . '="' . $val . '"';
         }
-        $img .= ' />';
+        $html .= ' />';
     }
-    return $img;
+    return $img ? $html : $url;
 }
 
 // Random string generieren (für Passwort)

@@ -507,4 +507,39 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertContains("14px", getFontSizes());
     }
 
+    public function testGetGravatarReturnsUrl() {
+        $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
+        $_SERVER["SERVER_PORT"] = "8080";
+        $_SERVER["HTTPS"] = "on";
+        $_SERVER['HTTP_HOST'] = "example.org";
+        $_SERVER['REQUEST_URI'] = "/foobar/foo.html?hello=world";
+
+        $this->assertEquals("https://example.org/foobar/admin/gfx/no_avatar.png",
+                get_gravatar("foo@bar.de"));
+
+        unset($_SERVER["SERVER_PROTOCOL"]);
+        unset($_SERVER['HTTP_HOST']);
+        unset($_SERVER['SERVER_PORT']);
+        unset($_SERVER['REQUEST_URI']);
+        unset($_SERVER['HTTPS']);
+    }
+
+    public function testGetGravatarReturnsImage() {
+        $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
+        $_SERVER["SERVER_PORT"] = "8080";
+        $_SERVER["HTTPS"] = "on";
+        $_SERVER['HTTP_HOST'] = "example.org";
+        $_SERVER['REQUEST_URI'] = "/foobar/foo.html?hello=world";
+
+        $this->assertEquals(
+                '<img src="https://example.org/foobar/admin/gfx/no_avatar.png" />',
+                get_gravatar("foo@bar.de", 80, 'mm', 'g', true)
+        );
+        unset($_SERVER["SERVER_PROTOCOL"]);
+        unset($_SERVER['HTTP_HOST']);
+        unset($_SERVER['SERVER_PORT']);
+        unset($_SERVER['REQUEST_URI']);
+        unset($_SERVER['HTTPS']);
+    }
+
 }

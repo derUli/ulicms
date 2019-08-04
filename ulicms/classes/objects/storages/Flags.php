@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 class Flags {
 
-    private static $no_cache = false;
+    private static $noCache = false;
 
     public static function setNoCache(bool $bool): void {
-        self::$no_cache = boolval($bool);
+        self::$noCache = boolval($bool);
     }
 
     public static function getNoCache(): bool {
-        return self::$no_cache;
+        return self::$noCache;
     }
 
 }

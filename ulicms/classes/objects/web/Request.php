@@ -91,8 +91,8 @@ class Request {
                 $_SERVER['SERVER_PORT'] == 443);
     }
 
-    public static function getIp(): string {
-        $proxy_headers = array(
+    private static function getProxyHeaders(): array {
+        return array(
             'CLIENT_IP',
             'FORWARDED',
             'FORWARDED_FOR',
@@ -113,7 +113,10 @@ class Request {
             'X_FORWARDED',
             'X_FORWARDED_FOR'
         );
-        $regEx = "/^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])){3}$/";
+    }
+
+    public static function getIp(): string {
+        $proxy_headers = self::getProxyHeaders();
         foreach ($proxy_headers as $proxy_header) {
             if (isset($_SERVER[$proxy_header])) {
                 /**
