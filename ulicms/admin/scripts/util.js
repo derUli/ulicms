@@ -1,3 +1,5 @@
+/* global bootbox */
+
 $(function () {
     $("input[type=checkbox].select-all").change(selectAllChecked);
     $("input[type=checkbox]").change(checkboxChecked);
@@ -12,8 +14,10 @@ $(function () {
     });
 
     // scroll to the given anchor
-    var jumpTo = url("?jumpto");
-    if (typeof jumpTo !== "undefined" && jumpTo.length > 0) {
+    const params = new URLSearchParams(location.search);
+
+    var jumpTo = params.get('jumpto');
+    if (jumpTo && jumpTo.length > 0) {
         location.href = "#" + jumpTo;
     }
 });
@@ -55,9 +59,9 @@ function shake(div) {
 
 // this bind an event to a checkbox to toggle a password field between clear
 // text and stars
-function bindTogglePassword(input, checkbox) {
-    var input = $(input);
-    var checkbox = $(checkbox);
+function bindTogglePassword(inputField, checkboxField) {
+    var input = $(inputField);
+    var checkbox = $(checkboxField);
     $(checkbox).click(function () {
         if ($(checkbox).is(':checked')) {
             $(input).attr('type', 'text');

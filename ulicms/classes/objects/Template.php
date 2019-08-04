@@ -13,33 +13,14 @@ class Template {
 
     public static function getBodyClasses(): string {
         $str = get_ID() ? "page-id-" . get_ID() . " " : "";
-        if (is_frontpage()) {
-            $str .= "home ";
-        }
 
-        if (is_404()) {
-            $str .= "error404 ";
-        }
+        $str .= (is_frontpage() ? "home " : "");
+        $str .= (is_404() ? "error404 " : "");
+        $str .= (is_403() ? "error403 " : "");
+        $str .= ((is_404() or is_403()) ? "errorPage " : "page ");
+        $str .= (is_mobile() ? "mobile " : "desktop ");
+        $str .= (containsModule(get_requested_pagename()) ? " containsModule " : "");
 
-        if (is_403()) {
-            $str .= "error403 ";
-        }
-
-        if (is_404() or is_403()) {
-            $str .= "errorPage ";
-        } else {
-            $str .= "page ";
-        }
-
-        if (is_mobile()) {
-            $str .= "mobile ";
-        } else {
-            $str .= "desktop ";
-        }
-
-        if (containsModule(get_requested_pagename())) {
-            $str .= "containsModule ";
-        }
         $str = trim($str);
         $str = apply_filter($str, "body_classes");
         return $str;
@@ -508,20 +489,22 @@ color: " . Settings::get("body-text-color") . ";
 
     public static function getEditButton(): string {
         $html = "";
-        if (is_logged_in()) {
-            $acl = new PermissionChecker(get_user_id());
-            if ($acl->hasPermission("pages") and Flags::getNoCache() && is_200()) {
-                $id = get_ID();
-                $page = ContentFactory::getById($id);
-                if (in_array($page->language, getAllLanguages(true))) {
-                    $html .= '<div class="ulicms-edit">';
-                    $html .= UliCMS\HTML\Link::actionLink("pages_edit", get_translation("edit"), "page={$id}", array(
-                                "class" => "btn btn-warning btn-edit"
-                    ));
-                    $html .= "</div>";
-                }
+        if (!is_logged_in()) {
+            return $html;
+        }
+        $acl = new PermissionChecker(get_user_id());
+        if ($acl->hasPermission("pages") and Flags::getNoCache() && is_200()) {
+            $id = get_ID();
+            $page = ContentFactory::getById($id);
+            if (in_array($page->language, getAllLanguages(true))) {
+                $html .= '<div class="ulicms-edit">';
+                $html .= UliCMS\HTML\Link::actionLink("pages_edit", get_translation("edit"), "page={$id}", array(
+                            "class" => "btn btn-warning btn-edit"
+                ));
+                $html .= "</div>";
             }
         }
+
         return $html;
     }
 

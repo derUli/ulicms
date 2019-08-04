@@ -10,7 +10,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         $files = array(
             "node_modules/jquery/dist/jquery.js",
             "admin/scripts/global.js",
-            "node_modules/js-url/url.min.js"
+            "node_modules/bootbox/bootbox.js"
         );
         foreach ($files as $file) {
             enqueueScriptFile($file);
@@ -20,7 +20,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         }
         $this->assertCount(3, Vars::get("script_queue"));
         $this->assertEquals("node_modules/jquery/dist/jquery.js", Vars::get("script_queue")[0]);
-        $this->assertEquals("node_modules/js-url/url.min.js", Vars::get("script_queue")[2]);
+        $this->assertEquals("node_modules/bootbox/bootbox.js", Vars::get("script_queue")[2]);
 
         resetScriptQueue();
         $this->assertCount(0, Vars::get("script_queue"));

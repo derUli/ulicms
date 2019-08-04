@@ -302,13 +302,13 @@ function get_gravatar(string $email, int $s = 80, string $d = 'mm', string $r = 
     // Bis ein integrierter Avatar-Upload in UliCMS implementiert ist.
     $url = ModuleHelper::getBaseUrl("/admin/gfx/no_avatar.png");
     if ($img) {
-        $url = '<img src="' . $url . '"';
+        $img = '<img src="' . $url . '"';
         foreach ($atts as $key => $val) {
-            $url .= ' ' . $key . '="' . $val . '"';
+            $img .= ' ' . $key . '="' . $val . '"';
         }
-        $url .= ' />';
+        $img .= ' />';
     }
-    return $url;
+    return $img;
 }
 
 // Random string generieren (für Passwort)
@@ -887,7 +887,6 @@ function getModulePath($module, $abspath = false): string {
         $module_folder = Path::resolve("ULICMS_DATA_STORAGE_URL/content/modules") . "/";
     }
 
-    $available_modules = [];
     return $module_folder . $module . "/";
 }
 
@@ -1399,7 +1398,7 @@ function set_eTagHeaders(string $identifier, int $timestamp): void {
     header('Last-Modified: ' . $gmt_mTime);
 
     if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) || isset($_SERVER['HTTP_IF_NONE_MATCH'])) {
-        if ($_SERVER['HTTP_IF_MODIFIED_SINCE'] == $gmt_mtime || str_replace('"', '', stripslashes($_SERVER['HTTP_IF_NONE_MATCH'])) == md5(strval($timestamp) . $identifier)) {
+        if ($_SERVER['HTTP_IF_MODIFIED_SINCE'] == $gmt_mTime || str_replace('"', '', stripslashes($_SERVER['HTTP_IF_NONE_MATCH'])) == md5(strval($timestamp) . $identifier)) {
             header('HTTP/1.1 304 Not Modified');
             exit();
         }

@@ -11,7 +11,6 @@
         "jquery": "^3.4.1",
         "jquery-datetimepicker": "2.x",
         "jquery-form": "4.x",
-        "js-url": "2.x",
         "jscolor-picker": "2.x",
         "password-strength-meter": "1.x",
         "select2": "4.0.7-rc.0",

@@ -12,9 +12,13 @@ $(function () {
     $("form.delete-form").ajaxForm({
         success: function (responseText, statusText, xhr, $form) {
             var action = $($form).attr("action");
-            var id = url('?banner', action);
-            var list_item_id = "dataset-" + id;
-            var tr = $("tr#" + list_item_id);
+
+            var params = new URLSearchParams(action);
+
+            var id = params.get("banner");
+            var list_item_id = `dataset-${id}`;
+            var tr = $(`tr#${list_item_id}`);
+
             $(tr).fadeOut();
         }
     });

@@ -34,7 +34,6 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
         <?php
         $scripts = array(
             "../node_modules/jquery/dist/jquery.min.js",
-            "../node_modules/js-url/url.min.js",
             "../node_modules/jquery-datetimepicker/build/jquery.datetimepicker.full.js",
             "../node_modules/jquery-form/dist/jquery.form.min.js",
             "scripts/vallenato/vallenato.js",
@@ -60,8 +59,10 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
             echo Script::fromFile("ckeditor/ckeditor.js");
         }
         combinedScriptHtml();
+
+        require "inc/touch_icons.php";
         ?>
-        <?php require "inc/touch_icons.php"; ?>
+
         <link rel="stylesheet" type="text/css"
               href="scripts/vallenato/vallenato.css" />
         <link rel="stylesheet" type="text/css"
@@ -82,15 +83,13 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
 
               echo UliCMS\HTML\Style::fromExternalFile("../node_modules/password-strength-meter/dist/password.min.css");
               combinedStylesheetHtml();
-              ?>
-              <?php
+
               do_event("admin_head");
               ?>
     </head>
     <?php
     do_event("before_backend_header");
-    ?>
-    <?php
+
     $cssClasses = "";
     if (get_user_id()) {
         $cssClasses .= "user-" . get_user_id() . "-logged-in ";
@@ -159,7 +158,7 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
             </div>
             <div class="main-content">
                 <?php
-                if (is_logged_in() and version_compare(phpversion(), '7.1', '<')) {
+                if (is_logged_in() and version_compare(phpversion(), '7.2', '<')) {
                     require_once "inc/php_upgrade.php";
                 }
 

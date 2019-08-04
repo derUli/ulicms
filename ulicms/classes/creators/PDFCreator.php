@@ -3,12 +3,6 @@
 namespace UliCMS\Creators;
 
 use Template;
-
-$mpdf = ULICMS_ROOT . "/lib/MPDF60/mpdf.php";
-if (is_file($mpdf)) {
-    require_once ($mpdf);
-}
-
 use Mpdf\Mpdf;
 
 class PDFCreator {
@@ -39,7 +33,7 @@ class PDFCreator {
         }
 
         // TODO: Reimplement Caching of generated pdf files
-        $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-P']);
+        $mpdf = new Mpdf(['mode' => 'utf-8', 'format' => 'A4-P']);
 
         $mpdf->WriteHTML($this->content);
         $output = $mpdf->Output('foobar.pdf', \Mpdf\Output\Destination::STRING_RETURN);

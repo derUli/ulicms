@@ -29,13 +29,7 @@ class CSVCreator {
         $this->content = ob_get_clean();
     }
 
-    public function render(): string {
-        $uid = CacheUtil::getCurrentUid();
-        $adapter = CacheUtil::getAdapter();
-        if ($adapter and $adapter->has($uid)) {
-            return $adapter->get($uid);
-        }
-
+    private function getData(): array {
         $data = [];
         $data[] = array(
             "Title",
@@ -53,6 +47,18 @@ class CSVCreator {
             get_meta_description(),
             get_meta_keywords()
         );
+        return $data;
+    }
+
+    public function render(): string {
+        $uid = CacheUtil::getCurrentUid();
+        $adapter = CacheUtil::getAdapter();
+        if ($adapter and $adapter->has($uid)) {
+            return $adapter->get($uid);
+        }
+
+        $data = $this->getData();
+
         $csv_string = getCSV($data[0]);
         $csv_string .= getCSV($data[1]);
 

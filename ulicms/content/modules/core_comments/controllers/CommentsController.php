@@ -172,7 +172,6 @@ class CommentsController extends MainClass {
                         break;
                     default:
                         throw new NotImplementedException("comment action not implemented");
-                        break;
                 }
 
 
