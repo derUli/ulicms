@@ -1,25 +1,26 @@
 /* global bootbox, PasswordSecurityTranslation, MenuTranslation */
 
-$(document).ready(function () {
-    $.ajaxSetup({cache: false});
-});
+// Internet Exploder caches AJAX requests by default
+$(document).ready(() =>
+    $.ajaxSetup({cache: false})
+);
 
-$(function () {
-    var language = $("html").data("select2-language");
+$(() => {
+    const language = $("html").data("select2-language");
 
     bootbox.setDefaults({
         locale: $("html").data("select2-language")
     });
     // toggle hamburger menu
-    $("#menu-toggle").click(function () {
-        $(".mainmenu").slideToggle();
-    });
+    $("#menu-toggle").click(() =>
+        $(".mainmenu").slideToggle()
+    );
     // clear-cache shortcut icon
-    $("#menu-clear-cache").click(function () {
-        $(this).hide();
+    $("#menu-clear-cache").click((button) => {
+        $(button).hide();
         $("#menu-clear-cache-loading").show();
-        var url = $("#menu-clear-cache").data("url");
-        $.get(url, function () {
+        const url = $("#menu-clear-cache").data("url");
+        $.get(url, () => {
             $("#menu-clear-cache").show();
             $("#menu-clear-cache-loading").hide();
         });
@@ -31,9 +32,9 @@ $(function () {
         sLengthSelect: "form-control"
     });
 
-    $(".select-on-click").click(function (event) {
-        $(event.target).select();
-    });
+    $(".select-on-click").click((event) =>
+        $(event.target).select()
+    );
 
     initDataTables("body");
 
@@ -57,7 +58,7 @@ $(function () {
     }
     // Links to upcoming features
 
-    $(".coming-soon").click(function (event) {
+    $(".coming-soon").click((event) => {
         event.preventDefault();
         bootbox.alert("Coming Soon!");
     });
@@ -69,9 +70,9 @@ $(function () {
     // validation only accepts value without timezone
     // remove the timezone from the datetime value
     // https://www.reddit.com/r/webdev/comments/6pxfn3/ios_datetimelocal_inputs_broken_universally/
-    $("input[type='datetime-local']").change(function (event) {
-        event.target.value = event.target.value.substr(0, 16);
-    });
+    $("input[type='datetime-local']").change((event) =>
+        event.target.value = event.target.value.substr(0, 16)
+    );
 
     // dynamically add class form-control to all form elements to
     // make inputs prettier
@@ -88,20 +89,16 @@ $(function () {
     if ($("form button[type=submit], form input[type=submit]").length) {
         document.addEventListener(
                 "keydown",
-                function (e) {
-                    if (
-                            (window.navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey) &&
-                            e.keyCode === 83
-                            ) {
-                        e.preventDefault();
-                        $("form button[type=submit], form input[type=submit]")
-                                .last()
-                                .click();
-                        // Process the event here (such as click on submit button)
-                    }
-                },
-                false
-                );
+                (e) => {
+            if ((window.navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)
+                    && e.keyCode === 83) {
+                e.preventDefault();
+                $("form button[type=submit], form input[type=submit]")
+                        .last()
+                        .click();
+                // Process the event here (such as click on submit button)
+            }
+        }, false);
     }
 
     // prettier select-boxes
@@ -124,7 +121,7 @@ $(function () {
     });
 
     // User has to confirm logout
-    $("a.backend-menu-item-logout").click(function (event) {
+    $("a.backend-menu-item-logout").click((event) => {
         event.preventDefault();
         var url = $(event.target).attr("href");
         bootbox.confirm(`${MenuTranslation.Logout}?`, function (result) {

@@ -1,9 +1,9 @@
-$(document).ready(function () {
+$(document).ready(() =>
     bindTogglePassword("#password", "#view_password")
-});
+);
 
 // Shake animation on failed login
-$(function () {
+$(() => {
     if ($("form#login-form").data("has-error")) {
         shake("form#login-form");
     }
