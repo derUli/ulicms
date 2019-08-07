@@ -33,9 +33,9 @@ submitPasswordForm = (event) => {
     event.preventDefault();
     validatePasswords(event);
     if ($("#password").hasClass("invalid")) {
-        bootbox.alert(UserTranslation.PasswordsNotEqual, function () {
-            $("#password").focus();
-        });
+        bootbox.alert(UserTranslation.PasswordsNotEqual,
+                () => $("#password").focus()
+        );
         return false;
     }
     $("form#edit_user").off("submit").submit();

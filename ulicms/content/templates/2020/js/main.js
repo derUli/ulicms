@@ -1,8 +1,8 @@
-$(function () {
+$(() => {
     $("footer").last().fadeIn();
 
     new fullpage('#fullpage', {
-        afterLoad: function (origin, destination) {
+        afterLoad: (origin, destination) => {
             $(destination.item).find(".sliding").addClass("slide-in");
             $(destination.item).find(".text-content").addClass("move-up");
         },

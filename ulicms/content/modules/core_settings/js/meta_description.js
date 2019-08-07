@@ -1,15 +1,15 @@
 /* global Translation */
 
 // scripts for meta description settings page
-$(function () {
+$(() => {
     $("#meta_description_settings")
             .ajaxForm(
                     {
-                        beforeSubmit: function () {
+                        beforeSubmit: () => {
                             $("#message").html("");
                             $("#loading").show();
                         },
-                        success: function () {
+                        success: () => {
                             $("#loading").hide();
                             $("#message")
                                     .html(`<span style="color:green;">${Translation.ChangesWasSaved}</span>`);

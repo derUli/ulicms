@@ -66,7 +66,7 @@ showAndHideFieldsByType = () => {
         bindEvents();
     }
 
-    $(".custom-field-tab").each(function (index, el) {
+    $(".custom-field-tab").each((index, el) => {
         if ($(el).data("type") === $("input[name='type']:checked").val()) {
             $(el).slideDown();
         } else {
@@ -92,7 +92,7 @@ showAndHideFieldsByType = () => {
 // this shows a thumbnail of the selected file on text inputs with
 // kcfinder image uploader attached
 refreshFieldThumbnails = () => {
-    $("input.kcfinder[data-kcfinder-type=images]").each(function (index, element) {
+    $("input.kcfinder[data-kcfinder-type=images]").each((index, element) => {
         const id = $(element).attr("name");
         if ($(element).val().length > 0) {
             $("img#thumbnail-" + id).attr("src", $(element).val());
@@ -112,7 +112,7 @@ bindEvents = () => {
             .select2({
                 width: "100%"
             });
-    $(".clear-field").on("click", function (event) {
+    $(".clear-field").on("click", (event) => {
         event.preventDefault();
         const element = $(event.target);
         const linkFor = $(element).data("for");
@@ -131,7 +131,7 @@ bindEvents = () => {
                 : "images";
 
         window.KCFinder = {
-            callBack: function (url) {
+            callBack: (url) => {
                 field.val(url);
                 window.KCFinder = null;
                 refreshFieldThumbnails();
@@ -158,24 +158,24 @@ unbindEvents = () => {
 
 AllTypes = {};
 
-$(function () {
+$(() => {
     if ($("#page-list").length <= 0) {
-        var url = $(".main-form")
+        const url = $(".main-form")
                 .first()
                 .data("get-content-types-url");
 
         $.ajax({
             url,
-            success: function (response, status) {
+            success: (response) => {
                 AllTypes = response;
                 showAndHideFieldsByTypeWithoutEffects();
                 $(".loadspinner").hide();
                 $(".pageform").show();
                 // Refresh CodeMirror
                 refreshCodeMirrors();
-                $(".accordion-header").click(function () {
-                    refreshCodeMirrors();
-                });
+                $(".accordion-header").click(() =>
+                    refreshCodeMirrors()
+                );
             }
         });
 
@@ -184,14 +184,14 @@ $(function () {
 });
 
 // this suggest a slug which may be used as the url for a page
-function suggestSlug(text) {
-    var pageSlug = slug(text, {lower: true});
+suggestSlug = (text) => {
+    const pageSlug = slug(text, {lower: true});
     $("#slug").val(pageSlug);
-}
+};
 
 // this checks if a slug is free within the selected language
 // the combination of slug + language must be unique
-function slugOrLanguageChanged(item) {
+slugOrLanguageChanged = () => {
     var id_field = $("input[name='page_id']");
     var myid = 0;
     if (id_field) {
@@ -218,9 +218,10 @@ function slugOrLanguageChanged(item) {
             $("select[name='language']").addClass("error-field");
         }
     });
-}
+};
+
 // filter parent pages by selected language and menu
-function filterParentPages() {
+filterParentPages = () => {
     var data = {
         csrf_token: $("input[name=csrf_token]")
                 .first()
@@ -237,9 +238,9 @@ function filterParentPages() {
     $.post(url, data, function (text, status) {
         $("select[name='parent_id']").html(text);
     });
-}
+};
 
-$(function () {
+$(() => {
     // bind event to reset filters button
     $("#btn-reset-filters").click(function (e) {
         e.preventDefault();
@@ -252,7 +253,7 @@ $(function () {
     // check if a slug is free on changing system title or menu
     // XXX: this field should be named slug everywhere in the code
     $("input[name='slug']").keyup(function () {
-        slugOrLanguageChanged($(this));
+        slugOrLanguageChanged();
     });
     $("select[name='menu']").change(function () {
         filterParentPages();
@@ -260,7 +261,7 @@ $(function () {
 
     // check if slug is free and update parent page options
     $("select[name='language']").change(function () {
-        slugOrLanguageChanged($(this));
+        slugOrLanguageChanged();
         filterParentPages();
     });
     // bind event to "View" button at the bottom of page edit form
@@ -275,8 +276,8 @@ $(function () {
         }
     });
 
-    slugOrLanguageChanged($("input[name='slug']"));
-    slugOrLanguageChanged($("select[name='language']"));
+    slugOrLanguageChanged();
+    slugOrLanguageChanged();
 
     filterParentPages();
 
@@ -328,7 +329,7 @@ $(function () {
 
 // various filter functions
 // XXX: this functions should be binded unobstrusive
-ilterByLanguage = (element) => {
+filterByLanguage = (element) => {
     var index = element.selectedIndex;
     if (element.options[index].value !== "") {
         location.replace(
@@ -409,9 +410,7 @@ const ajaxOptionsUndelete = {
     success: (responseText, statusText, xhr, $form) => {
         const action = $($form).attr("action");
         const id = $($form).data("id");
-        $($form)
-                .closest("tr")
-                .fadeOut();
+        $($form).closest("tr").fadeOut();
     }
 };
 
@@ -420,7 +419,7 @@ const ajaxOptionsDelete = {
     beforeSubmit: function () {
         return askForDelete();
     },
-    success: function (responseText, statusText, xhr, $form) {
+    success: (responseText, statusText, xhr, $form) => {
         const action = $($form).attr("action");
         const id = $($form).data("id");
         $($form)

@@ -1,13 +1,13 @@
 /* global bootbox */
 
-$(function () {
+$(() => {
     $("input[type=checkbox].select-all").change(selectAllChecked);
     $("input[type=checkbox]").change(checkboxChecked);
 
     // check "Select All" checkbox if all checkboxes of this group are checked
     $("input[type=checkbox]").each((index, target) => {
-        var item = $(target).data("select-all-checkbox");
-        var group = $(target).data("checkbox-group");
+        const item = $(target).data("select-all-checkbox");
+        const group = $(target).data("checkbox-group");
         if (item !== null && group !== null) {
             checkSelectAllIfAllChecked(item, group);
         }
@@ -106,11 +106,11 @@ setDefaultCursor = () => {
 };
 
 initRemoteAlerts = (rootElement) => {
-    $(rootElement).find(".remote-alert").click(function (event) {
+    $(rootElement).find(".remote-alert").click((event) => {
         event.preventDefault();
         setWaitCursor();
-        const url = $(this).data("url");
-        $.get(url, function (result) {
+        const url = $(event.currentTarget).data("url");
+        $.get(url, (result) => {
             setDefaultCursor();
             bootbox.alert(result);
         });
@@ -135,19 +135,19 @@ initDataTables = (rootElement) => {
         deferRender: true,
         stateSave: true,
         stateDuration: 0,
-        stateSaveCallback: function (settings, data) {
+        stateSaveCallback: (settings, data) => {
             console.log(settings, data);
             localStorage.setItem(
                     "DataTables_" + action + "_"
                     + settings.sInstance, JSON.stringify(data)
                     );
         },
-        stateLoadCallback: function (settings) {
-            return JSON.parse(
+        stateLoadCallback: (settings) =>
+            JSON.parse(
                     localStorage.getItem(
                             "DataTables_" + action + "_" + settings.sInstance)
-                    );
-        },
+                    )
+        ,
         columnDefs: [{targets: "no-sort", orderable: false}]
     });
 };

@@ -1,5 +1,5 @@
 // This the script for the advertisement banners list page
-$(function () {
+$(() => {
     // when select another language
     $('#category_id').on(
             'change',

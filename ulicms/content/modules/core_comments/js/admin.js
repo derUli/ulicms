@@ -9,7 +9,7 @@ $(() => {
         // do an ajax call
         $.ajax({
             url: url,
-            success: function (result) {
+            success: (result) => {
                 const unread = $(event.target).closest(".unread");
                 if (unread.length) {
                     unread.removeClass("unread");

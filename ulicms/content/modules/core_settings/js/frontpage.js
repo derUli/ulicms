@@ -1,16 +1,18 @@
 // The script for the frontpage settings page
-$(function () {
+$(() => {
     $("#frontpage_settings")
             .ajaxForm(
                     {
-                        beforeSubmit: function () {
+                        beforeSubmit: () => {
                             $("#message").html("");
                             $("#loading").show();
                         },
-                        success: function () {
+                        success: () => {
                             $("#loading").hide();
-                            $("#message")
-                                    .html(`<span style="color:green;">${Translation.ChangesWasSaved}</span>`);
+                            $("#message").html(
+                                    `<span style="color:green;">
+                            ${Translation.ChangesWasSaved}
+                </span>`);
                         }
                     });
 });

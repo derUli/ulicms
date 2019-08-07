@@ -1,15 +1,15 @@
 /* global Translation */
 
 // Scripts for simple settings page
-$(function () {
+$(() => {
     $("#settings_simple")
             .ajaxForm(
                     {
-                        beforeSubmit: function () {
+                        beforeSubmit: () => {
                             $("#message").html("");
                             $("#loading").show();
                         },
-                        success: function () {
+                        success: () => {
                             $("#loading").hide();
                             $("#message")
                                     .html(`<span style="color:green;">${Translation.ChangesWasSaved}</span>`);

@@ -7,9 +7,9 @@ askForDelete = () => {
 
 $(() => {
 // delete form handling
-    $("form.delete-form").submit(function () {
-        return askForDelete();
-    });
+    $("form.delete-form").submit(() =>
+        askForDelete()
+    );
 });
 
 isTouchDevice = () => {

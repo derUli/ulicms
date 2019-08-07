@@ -4,16 +4,16 @@
 
 // show a message if a "design for mobile devices" is set but
 // Mobile_Detect is not installed
-function initMobileDetectNotice() {
+initMobileDetectNotice = () => {
     if ($("select[name='mobile_theme']").val() !== ""
             && $("#mobile_detect_notice").data("installed") === false) {
         $("#mobile_detect_notice").slideDown();
     } else {
         $("#mobile_detect_notice").slideUp();
     }
-}
+};
 
-function loadThemePreview(selectField) {
+loadThemePreview = (selectField) => {
     const url = $(selectField).find("option:selected").data("preview-url");
 
     const targetElement = $($(selectField).data("preview-target-element"));
@@ -29,21 +29,21 @@ function loadThemePreview(selectField) {
 
     $.ajax({
         url: url,
-        success: function (result) {
+        success: (result) => {
             targetElement.find(".preview").html(result);
             targetElement.find(".fa-spinner").hide();
             targetElement.find(".preview").show();
         },
-        error: function (jqXHR, textStatus, errorThrown) {
+        error: (jqXHR, textStatus, errorThrown) => {
             targetElement.find(".fa-spinner").hide();
             targetElement.find(".preview").hide();
             $(targetElement).hide();
         }
     });
-}
+};
 
 // show a privacy warning if a google font is selected
-function updateFontPreview() {
+updateFontPreview = () => {
     const fontFamily = $("select#default_font").val();
     const fontSize = $("select#font-size").val();
     const googleFont = $("#google-fonts select").val();
@@ -66,12 +66,12 @@ function updateFontPreview() {
                 fontSize: fontSize
             }
     );
-}
+};
 
-$(function () {
+$(() => {
     $("#mobile_detect_notice").hide();
     initMobileDetectNotice();
-    $("select[name='mobile_theme']").change(function () {
+    $("select[name='mobile_theme']").change(() => {
         initMobileDetectNotice();
     });
 
@@ -83,21 +83,23 @@ $(function () {
     loadThemePreview($("select[name='theme']"));
     loadThemePreview($("select[name='mobile_theme']"));
     $("select[name='theme'], select[name='mobile_theme']").change(
-            function (event) {
-                loadThemePreview($(event.target));
-            });
+            (event) => {
+        loadThemePreview($(event.currentTarget));
+    });
 
     // ajax form submit
     $("#designForm").ajaxForm(
             {
-                beforeSubmit: function () {
+                beforeSubmit: () => {
                     $("#message").html("");
                     $("#msgcontainer, #loading").show();
                 },
-                success: function () {
+                success: () => {
                     $("#loading").hide();
                     $("#message").html(
-                            `<span style="color:green;">${Translation.ChangesWasSaved}</span>`);
+                            `<span style="color:green;">
+                    ${Translation.ChangesWasSaved}
+        </span>`);
                     $("#msgcontainer, #loading").hide();
                 }
             });

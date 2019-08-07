@@ -15,15 +15,15 @@ function openMenuImageSelectWindow(field) {
                     + 'resizable=1, scrollbars=0, width=800, height=600');
 }
 
-$(function () {
+$(() => {
     $("#open_graph")
             .ajaxForm(
                     {
-                        beforeSubmit: function () {
+                        beforeSubmit: () => {
                             $("#message").html("");
                             $("#loading").show();
                         },
-                        success: function () {
+                        success: () => {
                             $("#loading").hide();
                             // FIXME: localize this string
                             $("#message")

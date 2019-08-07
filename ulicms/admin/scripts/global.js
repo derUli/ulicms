@@ -123,8 +123,8 @@ $(() => {
     // User has to confirm logout
     $("a.backend-menu-item-logout").click((event) => {
         event.preventDefault();
-        var url = $(event.target).attr("href");
-        bootbox.confirm(`${MenuTranslation.Logout}?`, function (result) {
+        const url = $(event.target).attr("href");
+        bootbox.confirm(`${MenuTranslation.Logout}?`, (result) => {
             if (result) {
                 location.href = url;
             }
