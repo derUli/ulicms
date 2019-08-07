@@ -1,17 +1,13 @@
-/* global Translation, formChanged, submitted, bootbox */
+/* global Translation, formChanged, submitted, bootbox, instance, CKEDITOR */
 
-function showAndHideFieldsByTypeWithoutEffects() {
-    var type = $("input[name=type]:checked").val();
-    if (typeof AllTypes[type] === "undefined") {
-        type = "page";
-    }
+showAndHideFieldsByTypeWithoutEffects = () => {
+    const type = $("input[name=type]:checked").val();
+
     $(".typedep").hide();
-    var typeData = AllTypes[type];
-    var show = typeData["show"];
+    const typeData = AllTypes[type];
+    const show = typeData["show"];
 
-    for (i = 0; i < show.length; i++) {
-        $(show[i]).show();
-    }
+    show.forEach((element) => $(element).show());
 
     if ($("#type_snippet").is(":checked")) {
         unbindEvents();
@@ -24,7 +20,7 @@ function showAndHideFieldsByTypeWithoutEffects() {
         bindEvents();
     }
 
-    $(".custom-field-tab").each(function (index, el) {
+    $(".custom-field-tab").each((index, el) => {
         if ($(el).data("type") === $("input[name='type']:checked").val()) {
             $(el).show();
         } else {
@@ -45,24 +41,19 @@ function showAndHideFieldsByTypeWithoutEffects() {
         $("#parent-div").show();
         $("#menu_image_div").show();
     }
-}
+};
 
 // this function shows and hides areas for the selected content type
-function showAndHideFieldsByType() {
-    if (typeof AllTypes[type] === "undefined") {
-        type = "page";
-    }
-    var type = $("input[name=type]:checked").val();
-    var showSelector = AllTypes[type]["show"].join(",");
+showAndHideFieldsByType = () => {
+    const type = $("input[name=type]:checked").val();
+    const showSelector = AllTypes[type]["show"].join(",");
     $(".typedep")
             .not(showSelector)
             .slideUp();
-    var typeData = AllTypes[type];
-    var show = typeData["show"];
+    const typeData = AllTypes[type];
+    const show = typeData["show"];
 
-    for (i = 0; i < show.length; i++) {
-        $(show[i]).slideDown();
-    }
+    show.forEach((element) => $(element).slideDown());
 
     if ($("#type_snippet").is(":checked")) {
         unbindEvents();
@@ -96,13 +87,13 @@ function showAndHideFieldsByType() {
         $("#parent-div").slideDown();
         $("#menu_image_div").slideDown();
     }
-}
+};
 
 // this shows a thumbnail of the selected file on text inputs with
 // kcfinder image uploader attached
-function refreshFieldThumbnails() {
+refreshFieldThumbnails = () => {
     $("input.kcfinder[data-kcfinder-type=images]").each(function (index, element) {
-        var id = $(element).attr("name");
+        const id = $(element).attr("name");
         if ($(element).val().length > 0) {
             $("img#thumbnail-" + id).attr("src", $(element).val());
             $("img#thumbnail-" + id).show();
@@ -110,10 +101,10 @@ function refreshFieldThumbnails() {
             $("img#thumbnail-" + id).hide();
         }
     });
-}
+};
 
 // Bind events for dependend fields, clear-buttons, and file inputs
-function bindEvents() {
+bindEvents = () => {
     $('input[name="type"]').change(showAndHideFieldsByType);
     $("select[name='menu']").change(showAndHideFieldsByType);
     $("select[name='menu']")
@@ -123,19 +114,19 @@ function bindEvents() {
             });
     $(".clear-field").on("click", function (event) {
         event.preventDefault();
-        var element = $(event.target);
-        var linkFor = $(element).data("for");
+        const element = $(event.target);
+        const linkFor = $(element).data("for");
         $(linkFor).val("");
         refreshFieldThumbnails();
     });
 
     refreshFieldThumbnails();
-    $("input.kcfinder").on("click", function (event) {
-        var field = $(event.target);
-        var name = $(field).data("kcfinder-name")
+    $("input.kcfinder").on("click", (event) => {
+        const field = $(event.target);
+        const name = $(field).data("kcfinder-name")
                 ? $(field).data("kcfinder-name")
                 : "kcfinder_textbox";
-        var type = $(field).data("kcfinder-type")
+        const type = $(field).data("kcfinder-type")
                 ? $(field).data("kcfinder-type")
                 : "images";
 
@@ -156,14 +147,14 @@ function bindEvents() {
                 "resizable=1, scrollbars=0, width=800, height=600"
                 );
     });
-}
+};
 // undbindEvents to prevent endless loop when selecting specific content types
-function unbindEvents() {
+unbindEvents = () => {
     $('input[name="type"]').off("change");
     $("select[name='menu']").off("change");
     $("input.kcfinder").off("click");
     $(".clear-field").off("click");
-}
+};
 
 AllTypes = {};
 
@@ -274,7 +265,7 @@ $(function () {
     });
     // bind event to "View" button at the bottom of page edit form
     $("#btn-view-page").click(function () {
-        var url = "../?goid=" + $("#page_id").val();
+        const url = "../?goid=" + $("#page_id").val();
         // if page has unsaved changes open it in new window/tab
         // else open it in the same window/tab
         if (formChanged && !submitted) {
@@ -291,20 +282,21 @@ $(function () {
 
     // AJAX submit page edit form
     $("#pageform-edit").ajaxForm({
-        beforeSubmit: function (e) {
+        beforeSubmit: () => {
             $("#message_page_edit").html("");
             $("#message_page_edit").hide();
             $(".loading").show();
         },
-        beforeSerialize: function () {
+        beforeSerialize: () => {
             /* Before serialize */
             for (instance in CKEDITOR.instances) {
                 CKEDITOR.instances[instance].updateElement();
             }
             return true;
         },
-        success: function (e) {
+        success: () => {
             $(".loading").hide();
+            // FIXME: Use translation
             $("#message_page_edit").html(
                     '<span style="color:green;">Die Seite wurde gespeichert</span>'
                     );
@@ -313,8 +305,8 @@ $(function () {
     });
 
     // filter by category
-    $("#page-list #category_id").on("change", function (e) {
-        var valueSelected = $("#category_id").val();
+    $("#page-list #category_id").on("change", () => {
+        const valueSelected = $("#category_id").val();
         location.replace("index.php?action=pages&filter_category=" + valueSelected);
     });
     $("#page-list form.page-delete-form").off("submit");
@@ -322,86 +314,85 @@ $(function () {
     $("#page-list form.undelete-form").ajaxForm(ajaxOptionsUndelete);
 
     $("#show_filters").change(function (event) {
-        var url = $(event.target).data("url");
+        const url = $(event.target).data("url");
         $(".page-list-filters").slideToggle();
 
         $.ajax({
             method: "get",
             url: url,
-            error: function (xhr, status, error) {
-                alert(xhr.responseText);
-            }
+            error: (xhr) =>
+                alert(xhr.responseText)
         });
     });
 });
 
 // various filter functions
 // XXX: this functions should be binded unobstrusive
-function filterByLanguage(element) {
+ilterByLanguage = (element) => {
     var index = element.selectedIndex;
     if (element.options[index].value !== "") {
         location.replace(
                 "index.php?action=pages&filter_language=" + element.options[index].value
                 );
     }
-}
+};
 
-function filterByType(element) {
-    var index = element.selectedIndex;
+filterByType = (element) => {
+    const index = element.selectedIndex;
     if (element.options[index].value !== "") {
         location.replace(
                 "index.php?action=pages&filter_type=" + element.options[index].value
                 );
     }
-}
+};
 
-function filterByMenu(element) {
-    var index = element.selectedIndex;
+filterByMenu = (element) => {
+    const index = element.selectedIndex;
     if (element.options[index].value !== "") {
         location.replace(
                 "index.php?action=pages&filter_menu=" + element.options[index].value
                 );
     }
-}
+};
 
-function filterByActive(element) {
-    var index = element.selectedIndex;
+filterByActive = (element) => {
+    const index = element.selectedIndex;
     if (element.options[index].value !== "") {
         location.replace(
                 "index.php?action=pages&filter_active=" + element.options[index].value
                 );
     }
-}
+};
 
-function filterByApproved(element) {
-    var index = element.selectedIndex;
+filterByApproved = (element) => {
+    const index = element.selectedIndex;
     if (element.options[index].value !== "") {
         location.replace(
                 "index.php?action=pages&filter_approved=" + element.options[index].value
                 );
     }
-}
+};
 
-function filterByParent(element) {
-    var index = element.selectedIndex;
+filterByParent = (element) => {
+    const index = element.selectedIndex;
     if (element.options[index].value !== "") {
         location.replace(
                 "index.php?action=pages&filter_parent=" + element.options[index].value
                 );
     }
-}
+};
 
-function filterByStatus(element) {
-    var index = element.selectedIndex;
+filterByStatus = (element) => {
+    const index = element.selectedIndex;
     if (element.options[index].value !== "") {
         location.replace(
                 "index.php?action=pages&filter_status=" + element.options[index].value
                 );
     }
-}
+};
 
 // empty recycle bin without reloading the page
-function ajaxEmptyTrash(url) {
+ajaxEmptyTrash = (url) => {
     if (confirm(Translation.WannaEmptyTrash)) {
         $.ajax({
             url: url,
@@ -411,13 +402,13 @@ function ajaxEmptyTrash(url) {
         });
     }
     return false;
-}
+};
 
 // undelete action
-var ajaxOptionsUndelete = {
-    success: function (responseText, statusText, xhr, $form) {
-        var action = $($form).attr("action");
-        var id = $($form).data("id");
+const ajaxOptionsUndelete = {
+    success: (responseText, statusText, xhr, $form) => {
+        const action = $($form).attr("action");
+        const id = $($form).data("id");
         $($form)
                 .closest("tr")
                 .fadeOut();
@@ -425,13 +416,13 @@ var ajaxOptionsUndelete = {
 };
 
 // handling delete action
-var ajaxOptionsDelete = {
+const ajaxOptionsDelete = {
     beforeSubmit: function () {
         return askForDelete();
     },
     success: function (responseText, statusText, xhr, $form) {
-        var action = $($form).attr("action");
-        var id = $($form).data("id");
+        const action = $($form).attr("action");
+        const id = $($form).data("id");
         $($form)
                 .closest("tr")
                 .fadeOut();
