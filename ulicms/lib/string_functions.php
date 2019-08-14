@@ -151,12 +151,6 @@ function str_replace_nth(string $search, string $replace, string $subject, int $
     return $subject;
 }
 
-function mb_str_split(string $string): array {
-// Split at all position not after the start: ^
-    // and not before the end: $
-    return preg_split('/(?<!^)(?!$)/u', $string);
-}
-
 function str_replace_first(string $search, string $replace, string $subject): string {
     $pos = strpos($subject, $search);
     if ($pos !== false) {
