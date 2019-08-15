@@ -33,7 +33,6 @@ class FileUploadController extends Controller {
 
         if ($success) {
             $result["uploaded"] = true;
-
             $result["url"] = $uploadUrl;
         } else {
             $result["uploaded"] = false;
