@@ -10,7 +10,7 @@ class Settings {
         self::init($key, $value, $type);
     }
 
-    public static function init(string $key, $value, string $type = 'str'): bool {
+    public static function init(string $key, $value, ?string $type = 'str'): bool {
         if (!self::get($key)) {
             self::set($key, $value, $type);
             SettingsCache::set($key, $value);
@@ -20,7 +20,7 @@ class Settings {
     }
 
     // get a config variable
-    public static function get(string $key, string $type = 'str') {
+    public static function get(string $key, ?string $type = 'str') {
         if (!is_null(SettingsCache::get($key))) {
             return SettingsCache::get($key);
         }
@@ -37,7 +37,7 @@ class Settings {
         return null;
     }
 
-    public static function output(string $key, string $type = 'str'): void {
+    public static function output(string $key, ?string $type = 'str'): void {
         $value = self::get($key, $type);
         if ($value) {
             echo $value;
@@ -45,7 +45,7 @@ class Settings {
     }
 
     public static function outputEscaped(string $key,
-            string $type = 'str'): void {
+            ?string $type = 'str'): void {
         $value = self::get($key, $type);
         if ($value) {
             esc($value);
@@ -53,7 +53,7 @@ class Settings {
     }
 
     public static function getLanguageSetting(string$name,
-            ?string $language = null, string $type = 'str') {
+            ?string $language = null, ?string $type = 'str') {
         $retval = false;
         $settingsName = $language ? "{$name}_{$language}" : $name;
 
@@ -67,7 +67,7 @@ class Settings {
     }
 
     public static function getLang(string $name,
-            ?string $language = null, string $type = 'str') {
+            ?string $language = null, ?string $type = 'str') {
         return self::getLanguageSetting($name, $language, $type);
     }
 
@@ -84,7 +84,7 @@ class Settings {
 
     // Set a configuration Variable;
     public static function set(string $key, $value,
-            string $type = 'str'): void {
+            ?string $type = 'str'): void {
         $key = db_escape($key);
         $originalValue = self::convertVar($value, $type);
         $value = db_escape($originalValue);
@@ -118,7 +118,7 @@ class Settings {
         return db_affected_rows() > 0;
     }
 
-    public static function convertVar($value, string $type) {
+    public static function convertVar($value, ?string $type) {
         switch ($type) {
             case 'str':
                 $value = strval($value);
@@ -130,6 +130,13 @@ class Settings {
                 $value = floatval($value);
                 break;
             case 'bool':
+
+                if ($value === "true") {
+                    $value = true;
+                } else if ($value === "false") {
+                    $value = false;
+                }
+
                 $value = intval(boolval($value));
                 break;
         }
