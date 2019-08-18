@@ -22,8 +22,8 @@ class CommentsController extends MainClass {
                 Flags::setNoCache(true);
                 Vars::set("comments_enabled", true);
             }
-        }
         Vars::set("content_id", $page->id);
+        }
     }
 
     // This method handles posted comments

@@ -277,7 +277,7 @@ function get_parent(string $page = null): ?int {
     return $dataset;
 }
 
-function get_custom_data(?string $page = null): array {
+function get_custom_data(?string $page = null): ?array {
     if (!$page) {
         $page = get_requested_pagename();
     }
@@ -510,8 +510,8 @@ function get_title(?string $ipage = null, bool$headline = false): string {
         return Vars::get($cacheVar);
     }
 
-    $errorPage403 = Settings::getLanguageSetting("error_page_403", getCurrentLanguage());
-    $errorPage404 = Settings::getLanguageSetting("error_page_404", getCurrentLanguage());
+    $errorPage403 = intval(Settings::getLanguageSetting("error_page_403", getCurrentLanguage()));
+    $errorPage404 = intval(Settings::getLanguageSetting("error_page_404", getCurrentLanguage()));
 
     if (is_404()) {
         if ($errorPage404) {

@@ -406,8 +406,8 @@ color: " . Settings::get("body-text-color") . ";
     public static function getContent(): string {
         $theme = get_theme();
 
-        $errorPage403 = Settings::getLanguageSetting("error_page_403", getCurrentLanguage());
-        $errorPage404 = Settings::getLanguageSetting("error_page_404", getCurrentLanguage());
+        $errorPage403 = intval(Settings::getLanguageSetting("error_page_403", getCurrentLanguage()));
+        $errorPage404 = intval(Settings::getLanguageSetting("error_page_404", getCurrentLanguage()));
 
         $content = null;
         if (is_200()) {
@@ -480,7 +480,7 @@ color: " . Settings::get("body-text-color") . ";
     }
 
     public static function getComments(): string {
-        return Template::executeModuleTemplate("core_comments", "comments.php");
+        return is_200() ? Template::executeModuleTemplate("core_comments", "comments.php") : "";
     }
 
     public static function comments(): void {
