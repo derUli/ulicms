@@ -6,13 +6,13 @@ if (!class_exists("UliCMSVersion")) {
 
         function __construct() {
             $this->version = "Dancing parrot";
-            $this->releaseYear = 2019;
+            $this->releaseYear = 2020;
             $this->buildDate = 0; // {InsertBuildDate}
             $this->internalVersion = Array(
-				2019,
-				3,
-				0,
-				1
+                2019,
+                3,
+                0,
+                1
             );
             $this->update = "";
             $this->developmentVersion = false;

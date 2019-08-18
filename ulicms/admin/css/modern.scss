@@ -23,6 +23,12 @@ $odd-background-color: #eee;
 $even-backgroind-color: #fff;
 $background_color_8: black;
 
+// impulse based scrolling on touch devices (e.g. iPad)
+// see https://developer.mozilla.org/de/docs/Web/CSS/-webkit-overflow-scrolling
+*{
+    -webkit-overflow-scrolling: touch !important;
+}
+
 body {
     background-color: $default-background-color;
     font-family: $default-font;
@@ -31,12 +37,6 @@ body {
     margin: 0;
     padding: 0;
     -ms-overflow-style: scrollbar;
-}
-
-// impulse based scrolling on touch devices (e.g. iPad)
-// see https://developer.mozilla.org/de/docs/Web/CSS/-webkit-overflow-scrolling
-*{
-    -webkit-overflow-scrolling: touch !important;
 }
 
 // For some reasons Bootbox adds padding-right as inline when opening a modal.
@@ -298,6 +298,7 @@ input[type="button"] {
     color: $color_9;
     padding: 10px;
 }
+
 input[type="submit"] {
     background-color: $background_color_4;
     color: $color_9;
@@ -491,11 +492,16 @@ div#google-fonts {
 .accordion-content {
     width: auto !important;
     word-wrap: break-word;
+    overflow-x: auto;
     padding: 15px;
 
     .checkbox, .radio{
         margin-top: 0;
     }
+}
+
+.toggle.btn{
+    margin-right: 10px;
 }
 
 .accordion-header {
@@ -537,6 +543,11 @@ div#login-welcome-text {
 }
 .main-content {
     margin-top: 15px;
+
+    li{
+        margin-bottom:10px;
+    }
+
     a.btn-default {
         color: $color_10;
     }
@@ -551,6 +562,8 @@ h2.accordion-header {
     margin-bottom: 20px;
     ul {
         li {
+            margin-bottom:0;
+
             .fa {
                 width: 40px;
             }
@@ -559,11 +572,6 @@ h2.accordion-header {
             }
             .fas {
                 width: 40px;
-            }
-            a {
-                &:focus {
-                    text-decoration: none;
-                }
             }
         }
         list-style: none;
@@ -586,9 +594,12 @@ h2.accordion-header {
                 padding-left: 20px;
                 padding-right: 20px;
             }
+            &:focus {
+                text-decoration: none;
+                color: $color_9;
+            }
             &:active {
                 display: block;
-                color: $color_9;
                 font-size: 24px;
                 padding-top: 15px;
                 padding-bottom: 15px;
@@ -598,6 +609,7 @@ h2.accordion-header {
             &:hover {
                 text-decoration: none;
                 background-color: $background_color_4;
+                color: white !important;
             }
         }
         a.active {
@@ -635,9 +647,6 @@ h5 {
 }
 h6 {
     margin-bottom: 20px;
-}
-div#message {
-    margin-top: 20px;
 }
 #msgcontainer {
     padding-top: 16px;
@@ -710,6 +719,17 @@ input[type="checkbox"]{
 }
 .hide {
     display: block;
+}
+
+
+@media only screen and (min-width: 375px) {
+
+    .btn-group .btn{
+        margin-right: 10px;
+    }
+    .btn-group .btn:last-child{
+        margin-right: 0;
+    }
 }
 .btn-primary {
     background-color: $background_color_4;
@@ -945,5 +965,14 @@ pre {
         border-radius: 5px;
         padding: 0 6px;
         font-size: 0.35em;
+    }
+}
+
+#designForm{
+    .preview{
+        img{
+            max-height: 50vh;
+            max-width: 100%;
+        }
     }
 }
