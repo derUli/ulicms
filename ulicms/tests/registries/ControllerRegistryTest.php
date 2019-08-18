@@ -6,7 +6,7 @@ class ControllerRegistryTest extends \PHPUnit\Framework\TestCase {
         if (session_id()) {
             session_destroy();
         }
-        session_start();
+        @session_start();
     }
 
     public function tearDown() {

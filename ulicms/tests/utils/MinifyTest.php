@@ -98,7 +98,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
             $this->fail("Expected exception not thrown");
         } catch (SCSSCompileException $e) {
             $this->assertStringStartsWith("Compilation of tests/fixtures/scss/fail.scss failed: parse error: failed at", $e->getMessage());
-            $this->assertStringEndsWith("(stdin) on line 5", $e->getMessage());
+            $this->assertStringEndsWith("on line 5, at column 5", $e->getMessage());
         } finally {
             resetStylesheetQueue();
         }
