@@ -848,4 +848,72 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($page->isFrontPage());
     }
 
+    public function testIsErrorPage403ReturnsFalse() {
+        $page = new Page();
+        $page->title = 'Unit Test Error Page 403';
+        $page->slug = 'unit-test-error-page-403-' . uniqid();
+        $page->language = 'de';
+        $page->content = "foo [csrf_token_html] bar";
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->author_id = 1;
+        $page->show_headline = true;
+        $page->save();
+
+        $this->assertFalse($page->isErrorPage403());
+        $this->assertFalse($page->isErrorPage());
+    }
+
+    public function testIsErrorPage404ReturnsFalse() {
+        $page = new Page();
+        $page->title = 'Unit Test Error Page 404';
+        $page->slug = 'unit-test-error-page-404-' . uniqid();
+        $page->language = 'de';
+        $page->content = "foo [csrf_token_html] bar";
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->author_id = 1;
+        $page->show_headline = true;
+        $page->save();
+
+        $this->assertFalse($page->isErrorPage404());
+        $this->assertFalse($page->isErrorPage());
+    }
+
+    public function testIsErrorPage403ReturnsTrue() {
+        $page = new Page();
+        $page->title = 'Unit Test Error Page 403';
+        $page->slug = 'unit-test-error-page-403-' . uniqid();
+        $page->language = 'de';
+        $page->content = "foo [csrf_token_html] bar";
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->author_id = 1;
+        $page->show_headline = true;
+        $page->save();
+
+        $page->makeErrorPage403();
+
+        $this->assertTrue($page->isErrorPage403());
+        $this->assertTrue($page->isErrorPage());
+    }
+
+    public function testIsErrorPage404ReturnsTrue() {
+        $page = new Page();
+        $page->title = 'Unit Test Error Page 404';
+        $page->slug = 'unit-test-error-page-404-' . uniqid();
+        $page->language = 'de';
+        $page->content = "foo [csrf_token_html] bar";
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->author_id = 1;
+        $page->show_headline = true;
+        $page->save();
+
+        $page->makeErrorPage404();
+
+        $this->assertTrue($page->isErrorPage404());
+        $this->assertTrue($page->isErrorPage());
+    }
+
 }

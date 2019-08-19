@@ -440,4 +440,30 @@ class Page extends Content {
         return !is_null($this->getDeletedAt());
     }
 
+    public function isErrorPage403(): bool {
+        $errorPage403 = intval(Settings::getLanguageSetting("error_page_403", $this->language));
+        return $this->getID() && $this->getID() == $errorPage403;
+    }
+
+    public function isErrorPage404(): bool {
+        $errorPage404 = intval(Settings::getLanguageSetting("error_page_404", $this->language));
+        return $this->getID() && $this->getID() == $errorPage404;
+    }
+
+    public function isErrorPage(): bool {
+        return $this->isErrorPage403() or $this->isErrorPage404();
+    }
+
+    public function makeErrorPage403(bool $enabled = true): void {
+        Settings::setLanguageSetting("error_page_403",
+                $enabled ? $this->getID() : null,
+                $this->language);
+    }
+
+    public function makeErrorPage404(bool $enabled = true): void {
+        Settings::setLanguageSetting("error_page_404",
+                $enabled ? $this->getID() : null,
+                $this->language);
+    }
+
 }

@@ -18,7 +18,12 @@ Neue API-Methoden:
 * Page->getHistory()
 * Page->getParent()
 * Page->makeFrontPage()
+* Page->makeErrorPage403(bool $enabled = true): void
+* Page->makeErrorPage404(bool $enabled = true): void
 * Page->isFrontPage()
+* Page->isErrorPage403(): bool
+* Page->isErrorPage404(): bool
+* Page->isErrorPage(): bool
 * Page->getDeletedAt()
 * Audio_Page->getAudio(): ?Audio
 * Audio_Page->setAudio(?Audio $audio): void
