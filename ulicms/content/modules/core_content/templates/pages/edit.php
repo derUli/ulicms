@@ -388,10 +388,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                                        value="<?php
                                                        esc($row->og_description);
                                                        ?>"> <br /> <strong><?php translate("type"); ?>
-                                </strong><br /> <input type="text" name="og_type"
-                                                       value="<?php
-                                                       esc($row->og_type);
-                                                       ?>"> <br /> <strong><?php translate("image"); ?></strong> <br />
+                                </strong><br />
 
                                 <input type="text" id="og_image" name="og_image"
                                        readonly="readonly" class="kcfinder"

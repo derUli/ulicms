@@ -35,7 +35,6 @@ class Page extends Content {
     public $custom_data = null;
     public $type = "page";
     public $og_title = "";
-    public $og_type = "";
     public $og_image = "";
     public $og_description = "";
     public $hidden = 0;
@@ -84,8 +83,6 @@ class Page extends Content {
         $this->custom_data = json_decode($result->custom_data, false);
 
         $this->type = $result->type;
-        $this->og_title = $result->og_title;
-        $this->og_type = $result->og_type;
         $this->og_image = $result->og_image;
         $this->og_description = $result->og_description;
         $this->cache_control = $result->cache_control;
@@ -142,7 +139,7 @@ class Page extends Content {
         $sql = "INSERT INTO `" . tbname("content") . "` (slug, title, alternate_title, target, category_id,
 				content, language, menu_image, active, created, lastmodified, author_id,
 				`group_id`, lastchangeby, views, menu, position, parent_id, access, meta_description, meta_keywords, deleted_at,
-				theme, custom_data, `type`, og_title, og_type, og_image, og_description, cache_control, hidden, comments_enabled, show_headline) VALUES (";
+				theme, custom_data, `type`, og_title, og_image, og_description, cache_control, hidden, comments_enabled, show_headline) VALUES (";
 
         $sql .= "'" . Database::escapeValue($this->slug) . "',";
         $sql .= "'" . Database::escapeValue($this->title) . "',";
@@ -212,7 +209,6 @@ class Page extends Content {
         $sql .= "'" . Database::escapeValue($this->type) . "',";
 
         $sql .= "'" . Database::escapeValue($this->og_title) . "',";
-        $sql .= "'" . Database::escapeValue($this->og_type) . "',";
         $sql .= "'" . Database::escapeValue($this->og_image) . "',";
         $sql .= "'" . Database::escapeValue($this->og_description) . "', ";
         $sql .= "'" . Database::escapeValue($this->cache_control) . "', ";
@@ -305,7 +301,6 @@ class Page extends Content {
         $sql .= "type='" . Database::escapeValue($this->type) . "',";
 
         $sql .= "og_title='" . Database::escapeValue($this->og_title) . "',";
-        $sql .= "og_type='" . Database::escapeValue($this->og_type) . "',";
         $sql .= "og_image='" . Database::escapeValue($this->og_image) . "',";
         $sql .= "og_description='" . Database::escapeValue($this->og_description) . "', ";
         $sql .= "hidden='" . Database::escapeValue($this->hidden) . "', ";

@@ -269,8 +269,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                 <strong><?php translate("title"); ?>
                 </strong><br /> <input type="text" name="og_title" value=""> <br /> <strong><?php translate("description"); ?>
                 </strong><br /> <input type="text" name="og_description" value=""> <br />
-                <strong><?php translate("type"); ?>
-                </strong><br /> <input type="text" name="og_type" value=""> <br /> <strong><?php translate("image"); ?></strong>
+                <strong><?php translate("image"); ?></strong>
                 <br />
                 <input type="text" id="og_image" name="og_image" readonly="readonly"
                        class="kcfinder"

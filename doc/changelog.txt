@@ -102,6 +102,7 @@ Fehlerkorrekturen:
 Entfernte Features:
 * Unterstützung für veraltete unsichere Passwortverschlüsselung entfernt
 * Unbenutztes Feld "Homepage" in den Metadaten eines Artikels entfernt
+* Feld "Open Graph - Typ" entfernt
 
 Sicherheit:
 * Fix für XSS-Sicherheitslücke CVE-2019-11398

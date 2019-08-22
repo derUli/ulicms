@@ -32,7 +32,6 @@ function get_og_tags(?string $slug = null): string {
     if (is_200()) {
         $og_data = get_og_data($slug);
         $og_title = $og_data["og_title"];
-        $og_type = $og_data["og_type"];
         $og_image = $og_data["og_image"];
         $og_description = $og_data["og_description"];
         $og_url = getCurrentURL();
@@ -42,25 +41,16 @@ function get_og_tags(?string $slug = null): string {
             $og_title = get_headline();
         }
 
-        if (is_null($og_type) or empty($og_type)) {
-            $og_type = Settings::get("og_type");
-        }
-
         if (is_null($og_image) or empty($og_image)) {
             $og_image = Settings::get("og_image");
-        }
-
-        if (!$og_type) {
-            $og_type = "article";
         }
 
         if (!empty($og_image) and ! startsWith($og_image, "http")) {
             $og_image = ModuleHelper::getBaseUrl() . ltrim($og_image, "/");
         }
-        if (empty($og_image)) {
-            $page = get_page($slug);
-            if ($page["type"] == "article" && !StringHelper::isNullOrWhitespace($page["article_image"]))
-                ;
+        $page = get_page($slug);
+        if (empty($og_image) and ! StringHelper::isNullOrWhitespace($page["article_image"])) {
+
             $og_image = ltrim($page["article_image"], "/");
         }
         if (!empty($og_image) and ! startsWith($og_image, "http")) {
@@ -71,22 +61,31 @@ function get_og_tags(?string $slug = null): string {
         }
 
         $og_title = apply_filter($og_title, "og_title");
-        $og_type = apply_filter($og_type, "og_type");
+        $og_type = apply_filter("article", "og_type");
         $og_url = apply_filter($og_url, "og_url");
         $og_image = apply_filter($og_image, "og_image");
         $og_description = apply_filter($og_description, "og_description");
 
-        $html .= '<meta property="og:title" content="' . _esc($og_title) . '" />';
+        if ($og_title) {
+            $html .= '<meta property="og:title" content="' . _esc($og_title) . '" />';
+        }
 
-        if (!is_null($og_description) and ! empty($og_description)) {
+        if ($og_description) {
             $html .= '<meta property="og:description" content="' . _esc($og_description) . '" />';
         }
 
-        $html .= '<meta property="og:type" content="' . _esc($og_type) . '" />';
+        if ($og_type) {
+            $html .= '<meta property="og:type" content="' . _esc($og_type) . '" />';
+        }
 
-        $html .= '<meta property="og:url" content="' . _esc($og_url) . '" />';
+        if ($og_url) {
+            $html .= '<meta property="og:url" content="' . _esc($og_url) . '" />';
+        }
 
-        $html .= '<meta property="og:image" content="' . _esc($og_image) . '" />';
+        if ($og_image) {
+            $html .= '<meta property="og:image" content="' . _esc($og_image) . '" />';
+        }
+
         $html .= '<meta property="og:site_name" content="' . get_homepage_title() . '" />';
     }
 
@@ -102,7 +101,7 @@ function get_og_data($slug = "") {
     if (empty($slug)) {
         $slug = get_frontpage();
     }
-    $result = db_query("SELECT og_title, og_type, og_image, og_description FROM " . tbname("content") . " WHERE slug='" . db_escape($slug) . "' AND language='" . db_escape($_SESSION["language"]) . "'");
+    $result = db_query("SELECT og_title, og_image, og_description FROM " . tbname("content") . " WHERE slug='" . db_escape($slug) . "' AND language='" . db_escape($_SESSION["language"]) . "'");
     if (db_num_rows($result) > 0) {
         return db_fetch_assoc($result);
     }
@@ -683,9 +682,9 @@ function buildtree(array $src_arr, ?int $parent_id = 0, ?array $tree = []): arra
 
 function parent_item_contains_current_page(?int $id): bool {
     $retval = false;
-	if(!$id){
-		return $retval;
-	}
+    if (!$id) {
+        return $retval;
+    }
     $id = intval($id);
     $language = $_SESSION["language"];
     $sql = "SELECT id, slug, parent_id FROM " . tbname("content") . " WHERE language = '$language' AND active = 1 AND `deleted_at` IS NULL";

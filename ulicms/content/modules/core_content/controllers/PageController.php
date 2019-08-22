@@ -106,7 +106,6 @@ class PageController extends Controller {
         // Open Graph
         $model->og_title = Request::getVar("og_title");
         $model->og_description = Request::getVar("og_description");
-        $model->og_type = Request::getVar("og_type");
         $model->og_image = Request::getVar("og_image");
 
         $model->meta_description = Request::getVar("meta_description");
