@@ -1,7 +1,5 @@
 <?php
 
-use UliCMS\Exceptions\NotImplementedException;
-
 class ApiTest extends \PHPUnit\Framework\TestCase {
 
     public function setUp() {
@@ -13,9 +11,12 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function tearDown() {
+
+        Database::query("delete from {prefix}content where title like 'Unit Test%'", true);
         $this->cleanUp();
         Database::query("delete from {prefix}users where username like 'testuser-%'", true);
         unset($_SESSION["login_id"]);
+        unset($_SESSION["language"]);
         @session_destroy();
     }
 
@@ -612,6 +613,13 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
+    public function testReplaceShortcodesWithNonExistingName() {
+        $this->assertEquals(
+                '[module=gibts_nicht]',
+                replaceShortcodesWithModules('[module=gibts_nicht]')
+        );
+    }
+
     public function testReplaceShortcodesWithModulesWithoutOther() {
         $inputString = 'Foo [year] Bar [module=fortune2]';
         $processedInput = replaceShortcodesWithModules($inputString, false);
@@ -626,19 +634,86 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testContainsModuleReturnsTrue() {
-        throw new NotImplementedException();
+        $page = new Module_Page();
+        $page->title = "Unit Test " . uniqid();
+        $page->slug = "unit-test-" . uniqid();
+        $page->menu = "none";
+        $page->language = "de";
+        $page->article_date = 1413821696;
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->module = "fortune2";
+        $page->content = "Hello World";
+        $page->save();
+
+        $_SESSION["language"] = "de";
+        $this->assertTrue(containsModule($page->slug));
     }
 
     public function testContainsModuleReturnsFalse() {
-        throw new NotImplementedException();
+        $page = new Page();
+        $page->title = "Unit Test " . uniqid();
+        $page->slug = "unit-test-" . uniqid();
+        $page->menu = "none";
+        $page->language = "de";
+        $page->article_date = 1413821696;
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->save();
+
+        $_SESSION["language"] = "de";
+
+        $this->assertFalse(containsModule($page->slug));
     }
 
-    public function testContainsModuleWithNameReturnsTrue() {
-        throw new NotImplementedException();
+    public function testContainsModuleWithModulePageAndNameReturnsTrue() {
+        $page = new Module_Page();
+        $page->title = "Unit Test " . uniqid();
+        $page->slug = "unit-test-" . uniqid();
+        $page->menu = "none";
+        $page->language = "de";
+        $page->article_date = 1413821696;
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->module = "fortune2";
+        $page->content = "Hello World";
+        $page->save();
+
+        $_SESSION["language"] = "de";
+        $this->assertTrue(containsModule($page->slug, "fortune2"));
+    }
+
+    public function testContainsModuleWithShortcodeAndNameReturnsTrue() {
+        $page = new Page();
+        $page->title = "Unit Test " . uniqid();
+        $page->slug = "unit-test-" . uniqid();
+        $page->menu = "none";
+        $page->language = "de";
+        $page->article_date = 1413821696;
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->content = "Hello [module=fortune2] World";
+        $page->save();
+
+        $_SESSION["language"] = "de";
+        $this->assertTrue(containsModule($page->slug, "fortune2"));
     }
 
     public function testContainsModuleWithNameReturnsFalse() {
-        throw new NotImplementedException();
+        $page = new Page();
+        $page->title = "Unit Test " . uniqid();
+        $page->slug = "unit-test-" . uniqid();
+        $page->menu = "none";
+        $page->language = "de";
+        $page->article_date = 1413821696;
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->content = "Hello [module=fortune2] World";
+        $page->save();
+
+        $_SESSION["language"] = "de";
+
+        $this->assertFalse(containsModule($page->slug, "nicht_enthalten"));
     }
 
 }
