@@ -49,6 +49,7 @@ Neue API-Methoden:
 * Model->isPersistent()
 * Model->hasChanges()
 * Module->isInstalled()
+* Module->getShortCode()
 * ModuleHelper::getMainClass(string $module): ?Controller
 * StringHelper::isUpperCase(string $val): bool
 * StringHelper::isLowerCase(string $val): bool
@@ -84,6 +85,7 @@ Neue API-Methoden:
 * is_midday($datetime = null)
 * is_zero($val)
 * is_decimal($val): bool
+* stringContainsShortCodes(string $content, ?string $module = null): bool
 
 Entfernte API-Methoden:
 * addUser()
@@ -98,6 +100,7 @@ Fehlerkorrekturen:
 * datetime-local Eingabefelder auf iOS Safari sind immer ungültig
 * Das Speichern des States der DataTables ist fehlerhaft
 * Einige Stellen an denen Texte hardgecodet waren sind nun korrekt lokalisiert
+* render() Methode eines Modules wird nun nur noch aufgerufen, wenn ein HTML-String dessen Shortcode enthält
 
 Entfernte Features:
 * Unterstützung für veraltete unsichere Passwortverschlüsselung entfernt

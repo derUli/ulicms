@@ -542,4 +542,103 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         unset($_SERVER['HTTPS']);
     }
 
+    public function testStringContainsShortCodeWithoutNameReturnsTrue() {
+        $this->assertTrue(stringContainsShortCodes(
+                        'Foo [module=hello_world] Bar')
+        );
+        $this->assertTrue(stringContainsShortCodes(
+                        'Foo [module="hello_world"] Bar')
+        );
+    }
+
+    public function testStringContainsShortCodeWithoutNameReturnsFalse() {
+        $this->assertFalse(stringContainsShortCodes(
+                        '[module=hello_world '
+                )
+        );
+        $this->assertFalse(stringContainsShortCodes(
+                        'nic-code'
+                )
+        );
+    }
+
+    public function testStringContainsShortCodeWithNameReturnsTrue() {
+        $this->assertTrue(stringContainsShortCodes(
+                        'Foo [module=hello_world] Bar',
+                        'hello_world'
+                )
+        );
+        $this->assertTrue(stringContainsShortCodes(
+                        'Foo [module="hello_world"] Bar',
+                        'hello_world'
+                )
+        );
+    }
+
+    public function testStringContainsShortCodeWithNameReturnsFalse() {
+        $this->assertFalse(stringContainsShortCodes(
+                        'Foo [module="hello_world"] Bar',
+                        'berlin'
+                )
+        );
+        $this->assertFalse(stringContainsShortCodes(
+                        'Foo [module=hello_world] Bar', 'berlin'
+                )
+        );
+    }
+
+    public function testReplaceShortcodesWithModulesWithOther() {
+        $inputString = 'Foo [year] Bar [module=fortune2]';
+        $processedInput = replaceShortcodesWithModules($inputString, true);
+
+        $this->assertStringStartsWith('Foo ' . date("Y") . ' Bar ',
+                $processedInput);
+        $this->assertStringEndsNotWith('[module=fortune2]',
+                $processedInput);
+        $this->assertGreaterThan(strlen($inputString) + 10,
+                strlen($processedInput));
+    }
+
+    public function testReplaceShortcodesWithModulesThreeFormats() {
+        $formats = [
+            '[module=fortune2]',
+            '[module="fortune2"]',
+            '[module=&quot;fortune2&quot;]'
+        ];
+        foreach ($formats as $format) {
+            $html = replaceShortcodesWithModules($format, false);
+            $this->assertNotEquals($format, $html);
+            $this->assertGreaterThan(strlen($format), strlen($html));
+        }
+    }
+
+    public function testReplaceShortcodesWithModulesWithoutOther() {
+        $inputString = 'Foo [year] Bar [module=fortune2]';
+        $processedInput = replaceShortcodesWithModules($inputString, false);
+
+        $this->assertStringStartsWith('Foo [year] Bar ', $processedInput);
+        $this->assertStringEndsNotWith('[module=fortune2]', $processedInput);
+        $this->assertGreaterThan(strlen($inputString) + 10, strlen($processedInput));
+    }
+
+    public function testReplaceOtherShortcodes() {
+        $this->assertStringMatchesFormat('Foo %d Bar [module=fortune2]', replaceOtherShortCodes('Foo [year] Bar [module=fortune2]'));
+    }
+
+    public function testContainsModuleReturnsTrue() {
+        throw new NotImplementedException();
+    }
+
+    public function testContainsModuleReturnsFalse() {
+        throw new NotImplementedException();
+    }
+
+    public function testContainsModuleWithNameReturnsTrue() {
+        throw new NotImplementedException();
+    }
+
+    public function testContainsModuleWithNameReturnsFalse() {
+        throw new NotImplementedException();
+    }
+
 }

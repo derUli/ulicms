@@ -513,6 +513,7 @@ color: " . Settings::get("body-text-color") . ";
     }
 
     public static function getFooterText(): string {
+
         return replaceShortcodesWithModules(Settings::get("footer_text"), true);
     }
 

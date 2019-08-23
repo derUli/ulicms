@@ -896,6 +896,8 @@ class PageTest extends \PHPUnit\Framework\TestCase {
 
         $this->assertTrue($page->isErrorPage403());
         $this->assertTrue($page->isErrorPage());
+
+        $page->makeErrorPage403(false);
     }
 
     public function testIsErrorPage404ReturnsTrue() {
@@ -914,6 +916,8 @@ class PageTest extends \PHPUnit\Framework\TestCase {
 
         $this->assertTrue($page->isErrorPage404());
         $this->assertTrue($page->isErrorPage());
+
+        $page->makeErrorPage404(false);
     }
 
 }

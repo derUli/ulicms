@@ -333,9 +333,9 @@ class Page extends Content {
         $content = $this->content;
         $content = str_replace("&quot;", "\"", $content);
         if ($module) {
-            return boolval(preg_match("/\[module=\"" . preg_quote($module) . "\"\]/", $content));
+            return stringContainsShortCodes($content, $module);
         }
-        return boolval(preg_match("/\[module=\".+\"\]/", $content));
+        return stringContainsShortCodes($content);
     }
 
     public function getEmbeddedModules(): array {

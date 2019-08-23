@@ -121,6 +121,10 @@ class Module {
         return ModuleHelper::isEmbedModule($this->name);
     }
 
+    public function getShortCode(): ?string {
+        return $this->getName() ? "[module={$this->getName()}]" : null;
+    }
+
     public function getDependentModules(): array {
         $result = [];
         $manager = new ModuleManager ();

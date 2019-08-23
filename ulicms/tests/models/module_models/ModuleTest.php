@@ -96,4 +96,17 @@ class ModuleTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($module->isInstalled());
     }
 
+    public function testGetShortcodeReturnsShortcode() {
+        $module = new Module();
+        $module->setName("hello_world");
+        $this->assertEquals("[module=hello_world]", $module->getShortCode());
+    }
+
+    public function testGetShortcodeReturnsNull() {
+        $module = new Module();
+        $this->assertNull(
+                $module->getShortCode()
+        );
+    }
+
 }

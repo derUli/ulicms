@@ -301,7 +301,7 @@ function get_gravatar(string $email, int $s = 80, string $d = 'mm', string $r = 
     // und stattdessen wird ein statisches Platzhalter-Bild angezeigt
     // Bis ein integrierter Avatar-Upload in UliCMS implementiert ist.
     $url = ModuleHelper::getBaseUrl("/admin/gfx/no_avatar.png");
-	$html = "";
+    $html = "";
     if ($img) {
         $html = '<img src="' . $url . '"';
         foreach ($atts as $key => $val) {
@@ -967,93 +967,108 @@ function no_anti_csrf(): void {
     }
 }
 
-// replace Shortcodes with modules
-function replaceShortcodesWithModules(string $string, bool $replaceOther = true): string {
-    if ($replaceOther) {
-        $string = str_ireplace('[title]', get_title(), $string);
-        ob_start();
-        logo();
-        $string = str_ireplace('[logo]', ob_get_clean(), $string);
-        $language = getCurrentLanguage(true);
-        $checkbox = new PrivacyCheckbox($language);
-        $string = str_ireplace("[accept_privacy_policy]", $checkbox->render(), $string);
-        ob_start();
-        motto();
-        $string = str_ireplace('[motto]', ob_get_clean(), $string);
-        ob_start();
-        motto();
-        $string = str_ireplace('[slogan]', ob_get_clean(), $string);
+function stringContainsShortCodes(string $content, ?string $module = null): bool {
+    $quot = '(' . preg_quote('&quot;') . ')?';
+    return boolval(
+            $module ?
+            preg_match('/\[module=\"?' . $quot . preg_quote($module) . '\"?' . $quot . '\]/m', $content) :
+            preg_match('/\[module=\"?' . $quot . '([a-zA-Z0-9_]+)\"?' . $quot . '\]/m', $content)
+    );
+}
 
-        $string = str_ireplace('[category]', get_category(), $string);
-        $token = get_csrf_token_html();
+function replaceOtherShortCodes(string $string): string {
+    $string = str_ireplace('[title]', get_title(), $string);
+    ob_start();
+    logo();
+    $string = str_ireplace('[logo]', ob_get_clean(), $string);
+    $language = getCurrentLanguage(true);
+    $checkbox = new PrivacyCheckbox($language);
+    $string = str_ireplace("[accept_privacy_policy]", $checkbox->render(), $string);
+    ob_start();
+    motto();
+    $string = str_ireplace('[motto]', ob_get_clean(), $string);
+    ob_start();
+    motto();
+    $string = str_ireplace('[slogan]', ob_get_clean(), $string);
 
-        $token .= '<input type="url" name="my_homepage_url" class="antispam_honeypot" value="" autocomplete="nope">';
-        $string = str_ireplace('[csrf_token_html]', $token, $string);
-        // [tel] Links for tel Tags
-        $string = preg_replace('/\[tel\]([^\[\]]+)\[\/tel\]/i', '<a href="tel:$1" class="tel">$1</a>', $string);
-        $string = preg_replace('/\[skype\]([^\[\]]+)\[\/skype\]/i', '<a href="skye:$1?call" class="skype">$1</a>', $string);
+    $string = str_ireplace('[category]', get_category(), $string);
 
-        $string = str_ireplace("[year]", Template::getYear(), $string);
-        $string = str_ireplace("[homepage_owner]", Template::getHomepageOwner(), $string);
+    $token = get_csrf_token_html() . '<input type="url" name="my_homepage_url" class="antispam_honeypot" value="" autocomplete="nope">';
+    $string = str_ireplace('[csrf_token_html]', $token, $string);
 
-        preg_match_all("/\[include=([0-9]+)]/i", $string, $match);
+    // [tel] Links for tel Tags
+    $string = preg_replace('/\[tel\]([^\[\]]+)\[\/tel\]/i', '<a href="tel:$1" class="tel">$1</a>', $string);
+    $string = preg_replace('/\[skype\]([^\[\]]+)\[\/skype\]/i', '<a href="skye:$1?call" class="skype">$1</a>', $string);
 
-        if (count($match) > 0) {
-            for ($i = 0; $i < count($match[0]); $i ++) {
-                $placeholder = $match[0][$i];
-                $id = unhtmlspecialchars($match[1][$i]);
-                $id = intval($id);
+    $string = str_ireplace("[year]", Template::getYear(), $string);
+    $string = str_ireplace("[homepage_owner]", Template::getHomepageOwner(), $string);
 
-                $page = ContentFactory::getByID($id);
-                // a page should not include itself
-                // because that would cause an endless loop
-                if ($page and $id != get_ID()) {
-                    $content = "";
-                    if ($page->active and checkAccess($page->access)) {
-                        $content = $page->content;
-                    }
-                    $string = str_ireplace($placeholder, $content, $string);
+    preg_match_all("/\[include=([0-9]+)]/i", $string, $match);
+
+    if (count($match) > 0) {
+        for ($i = 0; $i < count($match[0]); $i ++) {
+            $placeholder = $match[0][$i];
+            $id = unhtmlspecialchars($match[1][$i]);
+            $id = intval($id);
+
+            $page = ContentFactory::getByID($id);
+            // a page should not include itself
+            // because that would cause an endless loop
+            if ($page and $id != get_ID()) {
+                $content = "";
+                if ($page->active and checkAccess($page->access)) {
+                    $content = $page->content;
                 }
+                $string = str_ireplace($placeholder, $content, $string);
             }
         }
     }
+    return $string;
+}
+
+// replace Shortcodes with modules
+function replaceShortcodesWithModules(string $string, bool $replaceOther = true): string {
+
+    $string = $replaceOther ? replaceOtherShortCodes($string) : $string;
+
     $allModules = ModuleHelper::getAllEmbedModules();
     $disabledModules = Vars::get("disabledModules");
-    for ($i = 0; $i < count($allModules); $i ++) {
-        $thisModule = $allModules[$i];
-        if (faster_in_array($thisModule, $disabledModules)) {
+
+    foreach ($allModules as $module) {
+        if (faster_in_array($module, $disabledModules) or ! stringContainsShortCodes($string, $module)) {
             continue;
         }
-        $stringToReplace1 = '[module="' . $thisModule . '"]';
-        $stringToReplace2 = '[module=&quot;' . $thisModule . '&quot;]';
+        $stringToReplace1 = '[module="' . $module . '"]';
+        $stringToReplace2 = '[module=&quot;' . $module . '&quot;]';
+        $stringToReplace3 = '[module=' . $module . ']';
 
-        $module_mainfile_path = getModuleMainFilePath($thisModule);
-        $module_mainfile_path2 = getModuleMainFilePath2($thisModule);
+        $module_mainfile_path = getModuleMainFilePath($module);
+        $module_mainfile_path2 = getModuleMainFilePath2($module);
 
-        if (file_exists($module_mainfile_path) and ( str_contains($stringToReplace1, $string) or str_contains($stringToReplace2, $string))) {
+        if (file_exists($module_mainfile_path)) {
             require_once $module_mainfile_path;
         } else if (file_exists($module_mainfile_path2)) {
             require_once $module_mainfile_path2;
-        } else {
-            $html_output = "<p class='ulicms_error'>Das Modul " . $thisModule . " konnte nicht geladen werden.</p>";
         }
 
-        $main_class = getModuleMeta($thisModule, "main_class");
+        $main_class = getModuleMeta($module, "main_class");
         $controller = null;
         if ($main_class) {
             $controller = ControllerRegistry::get($main_class);
         }
-
         if ($controller and method_exists($controller, "render")) {
             $html_output = $controller->render();
-        } else if (function_exists($thisModule . "_render")) {
-            $html_output = call_user_func($thisModule . "_render");
+        } else if (function_exists($module . "_render")) {
+            $html_output = call_user_func($module . "_render");
         } else {
-            $html_output = "<p class='ulicms_error'>Das Modul " . $thisModule . " konnte nicht geladen werden.</p>";
+            // FIXME: localize this
+            $html_output = "<p class='ulicms_error'>Das Modul " . $module . " konnte nicht geladen werden.</p>";
         }
 
         $string = str_replace($stringToReplace1, $html_output, $string);
         $string = str_replace($stringToReplace2, $html_output, $string);
+
+        $string = str_replace($stringToReplace3, $html_output, $string);
         $string = str_replace('[title]', get_title(), $string);
     }
     $string = replaceVideoTags($string);
@@ -1298,12 +1313,8 @@ function containsModule(?string $page = null, ?string $module = null): bool {
             Vars::set("page_" . $page . "_contains_" . $module, true);
             return true;
         }
-    } else if ($module) {
-        $match = boolval(preg_match("/\[module=\"" . preg_quote($module) . "\"\]/", $content));
-        Vars::set("page_" . $page . "_contains_" . $module, $match);
-        return $match;
     } else {
-        $match = boolval(preg_match("/\[module=\".+\"\]/", $content));
+        $match = stringContainsShortCodes($content, $module);
         Vars::set("page_" . $page . "_contains_" . $module, $match);
         return $match;
     }
@@ -1317,7 +1328,6 @@ function containsModule(?string $page = null, ?string $module = null): bool {
 // TODO: dies in die PackageManager Klasse verschieben
 function uninstall_module(string $name, string $type = "module") {
     $acl = new ACL();
-    // Nur Admins können Module löschen
     if (!$acl->hasPermission("install_packages") and ! isCLI()) {
         return false;
     }
@@ -1332,10 +1342,12 @@ function uninstall_module(string $name, string $type = "module") {
     switch ($type) {
         case "module":
             $moduleDir = getModulePath($name, true);
+
             // Modul-Ordner entfernen
             if (is_dir($moduleDir)) {
                 $uninstall_script = getModuleUninstallScriptPath($name, true);
                 $uninstall_script2 = getModuleUninstallScriptPath2($name, true);
+
                 // Uninstall Script ausführen, sofern vorhanden
                 $mainController = ModuleHelper::getMainController($name);
                 if ($mainController and method_exists($mainController, "uninstall")) {
