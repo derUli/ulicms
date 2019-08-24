@@ -186,6 +186,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
     public function testGetAllThemes() {
         $themes = getAllThemes();
         $this->assertContains("impro17", $themes);
+        $this->assertContains("2020", $themes);
     }
 
     public function testGetAllModules() {

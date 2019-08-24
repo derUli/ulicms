@@ -1,5 +1,6 @@
 <?php
-// FIXME: this file looks like shit, refactor this to MVC pattern.
+
+// FIXME: this file looks like shit, refactor this code to MVC pattern.
 use UliCMS\Models\Content\Language;
 use UliCMS\Constants\AuditLog;
 
@@ -105,21 +106,21 @@ if (!$permissionChecker->hasPermission("groups")) {
     if ($created) {
         ?>
         <div class="alert alert-success">
-            <?php translate("group_x_created", array("%name%" => $name)); ?>
+        <?php translate("group_x_created", array("%name%" => $name)); ?>
         </div>
         <?php
     }
     if ($modified) {
         ?>
         <div class="alert alert-success">
-            <?php translate("changes_was_saved"); ?>
+        <?php translate("changes_was_saved"); ?>
         </div>
         <?php
     }
     if ($removed) {
         ?>
         <div class="alert alert-success">
-            <?php translate("group_was_deleted") ?>
+        <?php translate("group_was_deleted") ?>
         </div>
         <?php
     }

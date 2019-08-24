@@ -1061,8 +1061,7 @@ function replaceShortcodesWithModules(string $string, bool $replaceOther = true)
         } else if (function_exists($module . "_render")) {
             $html_output = call_user_func($module . "_render");
         } else {
-            // FIXME: localize this
-            $html_output = "<p class='ulicms_error'>Das Modul " . $module . " konnte nicht geladen werden.</p>";
+            throw new BadMethodCallException("Module $module has no render() method");
         }
 
         $string = str_replace($stringToReplace1, $html_output, $string);

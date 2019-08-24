@@ -22,6 +22,7 @@ class PackageManagerTest extends \PHPUnit\Framework\TestCase {
     public function testIsInstalledThemeReturnsTrue() {
         $packageManager = new PackageManager();
         $this->assertTrue($packageManager->isInstalled("impro17", PackageTypes::TYPE_THEME));
+        $this->assertTrue($packageManager->isInstalled("2020", PackageTypes::TYPE_THEME));
     }
 
     public function testIsInstalledThemeReturnsFalse() {
