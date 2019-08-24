@@ -429,7 +429,7 @@ function logo(): void {
     Template::logo();
 }
 
-function year($format = "Y"): string {
+function year($format = "Y"): void {
     Template::year($format);
 }
 

@@ -148,7 +148,7 @@ class Template {
         return date($format);
     }
 
-    public static function year(string $format = "Y"): string {
+    public static function year(string $format = "Y"): void {
         echo self::getYear($format);
     }
 
