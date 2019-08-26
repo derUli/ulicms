@@ -16,8 +16,8 @@ $(() => {
         $(".mainmenu").slideToggle()
     );
     // clear-cache shortcut icon
-    $("#menu-clear-cache").click((button) => {
-        $(button).hide();
+    $("#menu-clear-cache").click((event) => {
+            $("#menu-clear-cache").hide();
         $("#menu-clear-cache-loading").show();
         const url = $("#menu-clear-cache").data("url");
         $.get(url, () => {
