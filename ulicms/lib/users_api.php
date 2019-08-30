@@ -105,7 +105,7 @@ function validate_login(string $username, string $password, ?string $token = nul
         $user->setFailedLogins($user->getFailedLogins() + 1);
         $user->save();
 
-        if ($user->getFailedLogins() >= $max_failed_logins_items) {
+        if ($max_failed_logins_items >= 1 && $user->getFailedLogins() >= $max_failed_logins_items) {
             $user->setLocked($user->getLocked());
             $user->save();
 
