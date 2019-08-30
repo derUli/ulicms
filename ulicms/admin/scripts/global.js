@@ -17,7 +17,7 @@ $(() => {
     );
     // clear-cache shortcut icon
     $("#menu-clear-cache").click((event) => {
-            $("#menu-clear-cache").hide();
+        $("#menu-clear-cache").hide();
         $("#menu-clear-cache-loading").show();
         const url = $("#menu-clear-cache").data("url");
         $.get(url, () => {
@@ -69,10 +69,16 @@ $(() => {
     // Safari appends a timezone to value on change while the
     // validation only accepts value without timezone
     // remove the timezone from the datetime value
+
+
     // https://www.reddit.com/r/webdev/comments/6pxfn3/ios_datetimelocal_inputs_broken_universally/
-    $("input[type='datetime-local']").change((event) =>
-        event.target.value = event.target.value.substr(0, 16)
-    );
+
+    const isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
+    if (isSafari) {
+        $("input[type='datetime-local']").change((event) =>
+            event.target.value = event.target.value.substr(0, 16)
+        );
+    }
 
     // dynamically add class form-control to all form elements to
     // make inputs prettier
