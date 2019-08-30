@@ -15,6 +15,10 @@ class CustomFields {
         // use two nullbytes as seperator for arrays
         if (is_array($value)) {
             $value = join("\0\0", $value);
+        } else if (is_bool($value)) {
+            $value = strval($value);
+        } else {
+            $value = strval($value);
         }
 
         $content_id = intval($content_id);
@@ -41,7 +45,7 @@ class CustomFields {
                 $sql = "UPDATE {prefix}custom_fields set value = ? where name = ? and content_id = ?";
                 return Database::pQuery($sql, $args, true);
             }
-        } else {
+        } else if (!is_null($value)) {
             $args = array(
                 $content_id,
                 $name,
