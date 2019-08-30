@@ -16,8 +16,8 @@ class CustomFields {
         if (is_array($value)) {
             $value = join("\0\0", $value);
         } else if (is_bool($value)) {
-            $value = strval($value);
-        } else {
+            $value = strval(intval($value));
+        } else if (!is_null($value)) {
             $value = strval($value);
         }
 
@@ -54,6 +54,7 @@ class CustomFields {
             $sql = "INSERT INTO {prefix}custom_fields (content_id, name, value) VALUES(?, ?, ?)";
             return Database::pQuery($sql, $args, true);
         }
+        return false;
     }
 
     public static function getAll(?int $content_id = null, bool $removePrefix = true): array {

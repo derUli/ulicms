@@ -46,4 +46,28 @@ class CustomFieldsTest extends \PHPUnit\Framework\TestCase {
         $this->assertGreaterThanOrEqual(0, count($all));
     }
 
+    public function testSetAndGetBooleanToFalse() {
+        $id = $this->getFirstPage()->id;
+
+        $uniq = uniqid();
+
+        CustomFields::set($uniq, false, $id, true);
+
+        $this->assertEquals('0', CustomFields::get($uniq, $id));
+
+        CustomFields::set($uniq, null);
+    }
+
+    public function testSetAndGetBooleanToTrue() {
+        $id = $this->getFirstPage()->id;
+
+        $uniq = uniqid();
+
+        CustomFields::set($uniq, true, $id, true);
+
+        $this->assertEquals('1', CustomFields::get($uniq, $id));
+
+        CustomFields::set($uniq, null);
+    }
+
 }
