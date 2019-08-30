@@ -16,7 +16,7 @@ $(() => {
         $(".mainmenu").slideToggle()
     );
     // clear-cache shortcut icon
-    $("#menu-clear-cache").click((event) => {
+    $("#menu-clear-cache").click(() => {
         $("#menu-clear-cache").hide();
         $("#menu-clear-cache-loading").show();
         const url = $("#menu-clear-cache").data("url");
@@ -69,8 +69,6 @@ $(() => {
     // Safari appends a timezone to value on change while the
     // validation only accepts value without timezone
     // remove the timezone from the datetime value
-
-
     // https://www.reddit.com/r/webdev/comments/6pxfn3/ios_datetimelocal_inputs_broken_universally/
 
     const isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
