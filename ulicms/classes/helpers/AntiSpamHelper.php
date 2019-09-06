@@ -50,7 +50,10 @@ class AntiSpamHelper extends Helper {
         return (bool) preg_match($rtl_chars_pattern, $str);
     }
 
-    public static function containsBadwords(string $str, array $words_blacklist = null) {
+    public static function containsBadwords(?string $str, array $words_blacklist = null) {
+		if(!$str){
+			return false;
+		}
         if (is_null($words_blacklist)) {
             $words_blacklist = Settings::get("spamfilter_words_blacklist");
         }
