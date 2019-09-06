@@ -1,7 +1,7 @@
 <?php
 
 use UliCMS\Exceptions\AccessDeniedException;
-use UliCMS\Exceptions\SqlException;
+use UliCMS\Exceptions\ConnectionFailedException;
 use UliCMS\Exceptions\FileNotFoundException;
 use UliCMS\Constants\AuditLog;
 use UliCMS\Registries\HelperRegistry;
@@ -307,7 +307,7 @@ $db_strict_mode = isset($config->db_strict_mode) ? boolval($config->db_strict_mo
 @$connection = Database::connect($config->db_server, $config->db_user, $config->db_password, $db_port, $db_socket, $db_strict_mode);
 
 if (!$connection) {
-    throw new SqlException("Can't connect to Database.");
+    throw new ConnectionFailedException("Can't connect to Database.");
 }
 
 $path_to_installer = dirname(__file__) . "/installer/installer.php";
