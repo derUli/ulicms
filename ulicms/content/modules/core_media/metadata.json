@@ -16,8 +16,10 @@
     },
     "controllers": {
         "VideoController": "controllers/VideoController.php",
-        "AudioController": "controllers/AudioController.php"
+        "AudioController": "controllers/AudioController.php",
+		"CoreMediaController" : "controllers/CoreMediaController.php"
     },
+	"main_class" : "CoreMediaController",
     "action_controllers": {
         "videos": "VideoController",
         "audio": "AudioController"
