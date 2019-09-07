@@ -1,0 +1,8 @@
+{
+    "version": "2020.1",
+    "embed": false,
+    "controllers": {
+        "CoreMediaEmbedController": "controllers/CoreMediaEmbedController.php"
+    },
+    "main_class": "CoreMediaEmbedController"
+}
