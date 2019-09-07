@@ -111,8 +111,8 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
         )));
     }
 
-    public function testFlattenWithNestedArray() {
-        $input = [
+    private function getNestesdArray() {
+        return [
             "foo",
             "bar",
             [
@@ -125,7 +125,10 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
                     "linux"]
             ]
         ];
+    }
 
+    public function testFlattenWithNestedArray() {
+        $input = $this->getNestesdArray();
         $expected = [
             "foo",
             "bar",

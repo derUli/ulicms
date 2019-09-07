@@ -39,7 +39,7 @@ class ActionRegistryTest extends \PHPUnit\Framework\TestCase {
         $actions = ActionRegistry::getActions();
         $this->assertGreaterThanOrEqual(60, count($actions));
         $this->assertStringEndsWith("content/modules/core_content/templates/contents.php", $actions["contents"]);
-        foreach ($actions as $action => $file) {
+        foreach (array_values($actions) as $file) {
             $this->assertFileExists($file);
             $this->assertStringContainsString("content/modules/", $file);
         }
