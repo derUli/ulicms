@@ -5,17 +5,24 @@ use MediaEmbed\MediaEmbed;
 class CoreMediaEmbedController extends MainClass {
 
     public function beforeContentFilter($input) {
-        return $this->replaceLinks($input);
+        $data = CustomData::get();
+
+        $mediaEmbedEnabled = !($data and is_true($data["disable_media_embed"]));
+
+        return $mediaEmbedEnabled ? $this->replaceLinks($input) : $input;
     }
 
     public function replaceLinks($input) {
-        $content = mb_convert_encoding($content, 'HTML-ENTITIES', "UTF-8");
+        $content = mb_convert_encoding($input, 'HTML-ENTITIES', "UTF-8");
         $dom = new DOMDocument();
-        @$dom->loadHTML($input);
+        @$dom->loadHTML($content);
 
+        $linksToReplace = [];
 
-        foreach ($dom->getElementsByTagName('a') as $oldNode) {
+        $elements = $dom->getElementsByTagName("a");
 
+        for ($i = 0; $i < $elements->count(); $i++) {
+            $oldNode = $elements->item($i);
             $href = $oldNode->getAttribute('href');
             $text = $oldNode->textContent;
 
@@ -25,14 +32,13 @@ class CoreMediaEmbedController extends MainClass {
 
             $url = $text;
             $embedCode = $this->embedCodeFromUrl($url);
-
             if ($embedCode) {
-                $newNode = $this->createElementFromHTML($dom, $embedCode);
-                var_dump($newNode);
-
-                $dom->replaceChild($newNode, $oldNode); // this line doesn't work
+                $newNode = $this->createElementFromHTML($embedCode, $dom);
+                $importNode = $dom->importNode($newNode, true);
+                $oldNode->parentNode->replaceChild($importNode, $oldNode);
             }
         }
+
         return preg_replace('/^<!DOCTYPE.+?>/', '', str_replace(array(
             '<html>',
             '</html>',
@@ -50,17 +56,27 @@ class CoreMediaEmbedController extends MainClass {
         $mediaEmbed = new MediaEmbed();
         $mediaObject = $mediaEmbed->parseUrl($url);
         if ($mediaObject) {
+            $mediaObject->setAttribute([
+                'class' => 'embed-media',
+            ]);
             return $mediaObject->getEmbedCode();
         }
         return null;
     }
 
-    public function createElementFromHTML($doc, $str) {
+    public function createElementFromHTML($str, $dom) {
+        $element = $dom->createElement("span");
+        $this->appendHTML($element, $str);
+        return $element;
+    }
 
-        $str = "<span>{$str}</span>";
-        $d = new DOMDocument();
-        $d->loadHTML($str);
-        return $doc->importNode($d->documentElement, false);
+    function appendHTML(DOMNode $parent, $html) {
+        $tmpDoc = new DOMDocument();
+        $tmpDoc->loadHTML($html);
+        foreach ($tmpDoc->getElementsByTagName('body')->item(0)->childNodes as $node) {
+            $node = $parent->ownerDocument->importNode($node, true);
+            $parent->appendChild($node);
+        }
     }
 
 }
