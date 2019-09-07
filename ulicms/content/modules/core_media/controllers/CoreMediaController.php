@@ -13,7 +13,7 @@ class CoreMediaController extends MainClass {
     }
 
     // This method replaces links to services like youtube with embedded media
-    public function replaceLinks($input) {
+    protected function replaceLinks($input) {
         $content = mb_convert_encoding($input, 'HTML-ENTITIES', "UTF-8");
 
         $dom = new DOMDocument();
@@ -27,7 +27,7 @@ class CoreMediaController extends MainClass {
     }
 
     // this method collect all embedable links and return it including a replacement node containg the embed element
-    private function collectLinks($dom) {
+    protected function collectLinks($dom) {
 
         $elements = $dom->getElementsByTagName("a");
         $linksToReplace = [];
@@ -51,7 +51,7 @@ class CoreMediaController extends MainClass {
 
     // saveHTML() on DOMDocument returns a full valid html document
     // This method extracts the content of the body
-    private function getBodyContent($html) {
+    protected function getBodyContent($html) {
         return preg_replace('/^<!DOCTYPE.+?>/', '', str_replace(array(
             '<html>',
             '</html>',
@@ -66,7 +66,7 @@ class CoreMediaController extends MainClass {
     }
 
     // This method retrieves the embed code for an URL
-    public function embedCodeFromUrl($url) {
+    protected function embedCodeFromUrl($url) {
         $mediaEmbed = new MediaEmbed();
         $mediaObject = $mediaEmbed->parseUrl($url);
         if ($mediaObject) {
@@ -79,14 +79,14 @@ class CoreMediaController extends MainClass {
     }
 
     // This method creates a dom node from an html element
-    private function createElementFromHTML($str, $dom) {
+    protected function createElementFromHTML($str, $dom) {
         $element = $dom->createElement("span");
         $this->appendHTML($element, $str);
         return $element;
     }
 
     // This method appends html code to a DOMElement
-    private function appendHTML(DOMNode $parent, $html) {
+    protected function appendHTML(DOMNode $parent, $html) {
         $tmpDoc = new DOMDocument();
         $tmpDoc->loadHTML($html);
         foreach ($tmpDoc->getElementsByTagName('body')->item(0)->childNodes as $node) {
