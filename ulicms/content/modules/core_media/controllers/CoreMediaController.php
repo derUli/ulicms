@@ -12,14 +12,24 @@ class CoreMediaController extends MainClass {
         return $mediaEmbedEnabled ? $this->replaceLinks($input) : $input;
     }
 
+    // This method replaces links to services like youtube with embedded media
     public function replaceLinks($input) {
         $content = mb_convert_encoding($input, 'HTML-ENTITIES', "UTF-8");
 
         $dom = new DOMDocument();
         @$dom->loadHTML($content);
 
-        $elements = $dom->getElementsByTagName("a");
+        $linksToReplace = $this->collectLinks($dom);
+        foreach ($linksToReplace as $link) {
+            $link->oldNode->parentNode->replaceChild($link->newNode, $link->oldNode);
+        }
+        return $this->getBodyContent($dom->saveHTML());
+    }
 
+    // this method collect all embedable links and return it including a replacement node containg the embed element
+    private function collectLinks($dom) {
+
+        $elements = $dom->getElementsByTagName("a");
         $linksToReplace = [];
 
         foreach ($elements as $oldNode) {
@@ -36,12 +46,11 @@ class CoreMediaController extends MainClass {
                 $linksToReplace[] = $link;
             }
         }
-        foreach ($linksToReplace as $link) {
-            $link->oldNode->parentNode->replaceChild($link->newNode, $link->oldNode);
-        }
-        return $this->getBodyContent($dom->saveHTML());
+        return $linksToReplace;
     }
 
+    // saveHTML() on DOMDocument returns a full valid html document
+    // This method extracts the content of the body
     private function getBodyContent($html) {
         return preg_replace('/^<!DOCTYPE.+?>/', '', str_replace(array(
             '<html>',
@@ -56,6 +65,7 @@ class CoreMediaController extends MainClass {
                         ), $html));
     }
 
+    // This method retrieves the embed code for an URL
     public function embedCodeFromUrl($url) {
         $mediaEmbed = new MediaEmbed();
         $mediaObject = $mediaEmbed->parseUrl($url);
@@ -68,12 +78,14 @@ class CoreMediaController extends MainClass {
         return null;
     }
 
+    // This method creates a dom node from an html element
     private function createElementFromHTML($str, $dom) {
         $element = $dom->createElement("span");
         $this->appendHTML($element, $str);
         return $element;
     }
 
+    // This method appends html code to a DOMElement
     private function appendHTML(DOMNode $parent, $html) {
         $tmpDoc = new DOMDocument();
         $tmpDoc->loadHTML($html);
