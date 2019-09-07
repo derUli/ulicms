@@ -82,7 +82,6 @@ class GroupTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetPrimaryGroupReturnsGroup() {
-
         Settings::set("default_acl_group", "1");
 
         $group = Group::getDefaultPrimaryGroup();

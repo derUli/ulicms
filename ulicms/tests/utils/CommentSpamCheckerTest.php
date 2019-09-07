@@ -81,7 +81,7 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase {
         $comment = new Comment();
         $comment->setAuthorName("Motherfucker");
         $comment->setText("hey, you motherfucker! You are a shit cock! You need cheap viagra!");
-        $comment->setAuthorEmail("shittyspammer@example.org");
+        $comment->setAuthorEmail("shittyspammer@ftp.gnu.org");
         $checker = new CommentSpamChecker($comment, $configuration);
         $this->assertTrue($checker->doSpamCheck());
         $errors = $checker->getErrors();

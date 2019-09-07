@@ -1,9 +1,0 @@
-{
-	"version": "6.7.8",
-	"admin_permission": "blog_settings",
-	"custom_acl" : [
-					"blog",
-					"blog_settings"
-					],
-	"embed": true
-}

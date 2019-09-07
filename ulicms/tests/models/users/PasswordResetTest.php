@@ -1,7 +1,5 @@
 <?php
 
-use UliCMS\Exceptions\NotImplementedException;
-
 class PasswordResetTest extends \PHPUnit\Framework\TestCase {
 
     private $testUserId;
