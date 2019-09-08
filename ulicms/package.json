@@ -13,7 +13,7 @@
         "jquery-form": "4.x",
         "jscolor-picker": "2.x",
         "password-strength-meter": "1.x",
-        "select2": "4.0.7-rc.0",
+        "select2": "4.0.10",
         "slug": "1.x"
     },
     "license": "The BSD License",
