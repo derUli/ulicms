@@ -24,7 +24,7 @@ class PackageController extends MainClass {
         $model->manufacturerName = getModuleMeta($name, "manufacturer_name");
         $model->manufacturerUrl = getModuleMeta($name, "manufacturer_url");
         $model->source = getModuleMeta($name, "source");
-        $model->source_url = $model->source === "extend" ? $this->getExtendUrl($model->name) : null;
+        $model->source_url = $model->source === "extend" ? $this->getPackageDownloadUrl($model->name) : null;
 
         $model->customPermissions = is_array(getModuleMeta($name, "custom_acl")) ? getModuleMeta($name, "custom_acl") : [];
         $model->adminPermission = getModuleMeta($name, "admin_permission");
@@ -34,7 +34,7 @@ class PackageController extends MainClass {
         HTMLResult($html);
     }
 
-    private function getExtendUrl($package) {
+    public function getPackageDownloadUrl($package) {
         $url = "https://extend.ulicms.de/{$package}.html";
         return url_exists($url) ? $url : null;
     }
@@ -50,7 +50,7 @@ class PackageController extends MainClass {
         $model->manufacturerName = getThemeMeta($name, "manufacturer_name");
         $model->manufacturerUrl = getThemeMeta($name, "manufacturer_url");
         $model->source = getThemeMeta($name, "source");
-        $model->source_url = $model->source === "extend" ? $this->getExtendUrl($model->name) : null;
+        $model->source_url = $model->source === "extend" ? $this->getPackageDownloadUrl($model->name) : null;
 
         $model->disableFunctions = is_array(getThemeMeta($name, "disable_functions")) ? getThemeMeta($name, "disable_functions") : [];
         natcasesort($model->disableFunctions);
