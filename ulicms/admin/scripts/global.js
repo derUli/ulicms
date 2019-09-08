@@ -36,6 +36,14 @@ $(() => {
         $(event.target).select()
     );
 
+    // Disabled a link-buttons must not be clickable
+    $("a").click((event) => {
+        const target = $(event.currentTarget);
+        if ((target.hasClass("disabled") || target.attr("disabled")) && target.attr("href").length > 1) {
+            event.preventDefault();
+        }
+    });
+
     initDataTables("body");
 
     // password security check

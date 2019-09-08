@@ -28,7 +28,7 @@ function is_url(?string $url): bool {
     if (!$url) {
         return false;
     }
-    
+
     // it it is an URL
     if (startsWith($url, "http://")
             or startsWith($url, "https://")
@@ -74,7 +74,28 @@ function file_get_contents_wrapper(string $url, bool $no_cache = false, $checksu
     return $content;
 }
 
+function curl_url_exists(string $url): bool {
+    $timeout = 10;
+    $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'HEAD'); // HTTP request is 'HEAD'
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
+
+    curl_exec($ch);
+
+    $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+    return $http_code >= 200 and $http_code < 400;
+}
+
 function url_exists(string $url): bool {
+    if (function_exists("curl_init") and
+            startsWith($url, "http")) {
+        return curl_url_exists($url);
+    }
+
     if (@file_get_contents($url, FALSE, NULL, 0, 0) === false) {
         return false;
     }

@@ -1,3 +1,9 @@
+<?php
+
+use UliCMS\HTML\Link;
+
+$model = ViewBag::get("model");
+?>
 <?php $model = ViewBag::get("model"); ?>
 <h3><?php esc($model->name); ?></h3>
 <?php if ($model->version) { ?>
@@ -19,9 +25,19 @@
         <?php } ?>
     </p>
 <?php } ?>
+
 <?php if ($model->source) { ?>
     <p>
-        <strong><?php translate("source"); ?>: </strong> <?php secure_translate($model->source); ?></p>
+        <strong><?php translate("source"); ?>: </strong>
+        <?php
+        echo $model->source_url ?
+                Link::link($model->source_url, get_secure_translation($model->source),
+                        ["target" => UliCMS\Constants\LinkTarget::TARGET_BLANK]
+                ) :
+                get_secure_translation($model->source);
+        ?>
+    </p>
+
 <?php } ?>
 
 <?php if (count($model->disableFunctions) > 0) { ?>
@@ -32,6 +48,7 @@
             <li><?php esc($function); ?></li>
         <?php } ?>
     </ul>
-<?php } ?>
+    <?php
+}
 
 
