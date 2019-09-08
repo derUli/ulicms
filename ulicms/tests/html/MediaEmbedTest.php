@@ -18,7 +18,7 @@ class MediaEmbedTest extends \PHPUnit\Framework\TestCase {
         $expected = file_get_contents("tests/fixtures/AutoEmbed/expected.html");
         $output = apply_filter($input, "before_content");
 
-        $this->assertEquals($expected, $output);
+        $this->assertEquals($expected, normalizeLN($output));
     }
 
     public function testReplaceLinksWithDisableMediaEmbedTrue() {
@@ -30,7 +30,7 @@ class MediaEmbedTest extends \PHPUnit\Framework\TestCase {
         $input = file_get_contents("tests/fixtures/AutoEmbed/input.html");
         $output = apply_filter($input, "before_content");
 
-        $this->assertEquals($input, $output);
+        $this->assertEquals($input, normalizeLN($output));
 
         $page->delete();
     }
@@ -45,7 +45,7 @@ class MediaEmbedTest extends \PHPUnit\Framework\TestCase {
         $expected = file_get_contents("tests/fixtures/AutoEmbed/expected.html");
         $output = apply_filter($input, "before_content");
 
-        $this->assertEquals($expected, $output);
+        $this->assertEquals($expected, normalizeLN($output));
 
         $page->delete();
     }
