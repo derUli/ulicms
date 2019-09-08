@@ -34,10 +34,11 @@ class CoreMediaController extends MainClass {
 
         foreach ($elements as $oldNode) {
             $href = $oldNode->getAttribute('href');
+            $text = $oldNode->textContent;
 
             $embedCode = $this->embedCodeFromUrl($href);
 
-            if ($embedCode) {
+            if ($href === $text and $embedCode) {
                 $newNode = $this->createElementFromHTML($embedCode, $dom);
                 $importNode = $dom->importNode($newNode, true);
                 $link = new stdClass();
