@@ -132,7 +132,7 @@ initDataTables = (rootElement) => {
                     )
         ,
         drawCallback: (settings) => {
-            $(`#${settings.sInstance}`).find("a.btn").off("click").click(
+            $(`#${settings.sInstance}`).find("a.btn").click(
                     (event) => {
                 const target = $(event.currentTarget);
                 if ((target.hasClass("disabled") || target.attr("disabled")) && target.attr("href").length > 1) {

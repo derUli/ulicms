@@ -32,10 +32,13 @@ class FileGetContentsWrapperTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testIsURL() {
+    public function testIsURLReturnsTrue() {
         $this->assertTrue(is_url("http://example.org"));
         $this->assertTrue(is_url("https://www.ulicms.de"));
         $this->assertTrue(is_url("ftp://ftp.hostserver.de/pub/OpenBSD/"));
+    }
+
+    public function testIsURLReturnsFalse() {
         $this->assertFalse(is_url("/var/www/html"));
         $this->assertFalse(is_url("C:\\xampp\\htdocs"));
         $this->assertFalse(is_url("http://"));
@@ -43,15 +46,35 @@ class FileGetContentsWrapperTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(is_url("ftp://"));
     }
 
-    public function testUrlExists() {
+    public function testUrlExistsReturnsTrue() {
         $this->assertTrue(url_exists("http://example.org"));
         $this->assertTrue(url_exists("https://www.ulicms.de/content/images/67cc042b9ee9eb28cdc81ae7d7420d8a.png"));
+    }
+
+    public function testUrlExistsReturnsFalse() {
         $this->assertFalse(url_exists("http://www.gibtsnicht.ch/"));
         $this->assertFalse(url_exists("https://www.ulicms.de/gibtsnicht.html"));
     }
 
-    public function testFileGetContentsCurl() {
+    // curl_url_exists supports only http / https
+    // and is used by url_exists if php curl module is installed
+    public function testCurlUrlExistsReturnsTrue() {
+        $this->assertTrue(curl_url_exists("http://example.org"));
+        $this->assertTrue(curl_url_exists("https://www.ulicms.de/content/images/67cc042b9ee9eb28cdc81ae7d7420d8a.png"));
+    }
+
+    // curl_url_exists supports only http / https
+    // and is used by url_exists if php curl module is installed
+    public function testCurlUrlExistsReturnsFalse() {
+        $this->assertFalse(curl_url_exists("http://www.gibtsnicht.ch/"));
+        $this->assertFalse(curl_url_exists("https://www.ulicms.de/gibtsnicht.html"));
+    }
+
+    public function testFileGetContentsCurlReturnsString() {
         $this->assertTrue(is_string(file_get_contents_curl("http://example.org")));
+    }
+
+    public function testFileGetContentsCurlReturnsNull() {
         $this->assertNull(file_get_contents_curl("http://www.gibtsnicht.ch"));
     }
 
