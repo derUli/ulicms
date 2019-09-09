@@ -1,6 +1,7 @@
 <?php
 
 $classes = array(
+    "HttpStatusCode",
     "AuditLog",
     "EmailModes",
     "CommentStatus",

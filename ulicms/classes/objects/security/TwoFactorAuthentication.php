@@ -7,11 +7,8 @@ namespace UliCMS\Security;
 use Settings;
 use PHPGangsta_GoogleAuthenticator;
 
-/**
- * Description of TwoFactorAuthentication
- *
- * @author deruli
- */
+// two factor authentication based by Google Authenticator
+// and PHPGangstas implementation of Google Authenticator in PHP
 class TwoFactorAuthentication {
 
     public function __construct() {
@@ -44,6 +41,7 @@ class TwoFactorAuthentication {
         return $this->getCode() === $code;
     }
 
+    // is two factor authentication enabled?
     public static function isEnabled(): bool {
         return boolval(Settings::get("twofactor_authentication"));
     }

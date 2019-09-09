@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use UliCMS\Constants\AuditLog;
 
+// class for handling system settings
 class Settings {
 
     public static function register(string $key, $value, $type = 'str'): void {
@@ -152,6 +153,10 @@ class Settings {
         return $datasets;
     }
 
+    // converts a mapping string (such as domain2language mapping) to an associative array
+    // example mapping string
+    // foo=>bar
+    // hello=>world
     public static function mappingStringToArray(string $str): array {
         $str = trim($str);
         $str = normalizeLN($str, "\n");

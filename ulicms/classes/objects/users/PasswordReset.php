@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 class PasswordReset {
 
+    // create a password reset token
     public function addToken(int $user_id): string {
         $token = md5(uniqid() . strval($user_id));
         $sql = "INSERT INTO {prefix}password_reset (token, user_id) values (?, ?)";
@@ -15,6 +16,7 @@ class PasswordReset {
         return $token;
     }
 
+    // send a password reset mail
     public function sendMail(string $token, string $to, string $ip, string $firstname, string $lastname) {
         ViewBag::set("url", $this->getPasswordResetLink($token));
         ViewBag::set("firstname", $firstname);
@@ -30,6 +32,7 @@ class PasswordReset {
         Mailer::send($to, $subject, $message, $headers);
     }
 
+    // get a password reset link
     public function getPasswordResetLink(string $token): string {
         $url = getBaseFolderURL();
         $url = rtrim($url, "/");
@@ -40,6 +43,7 @@ class PasswordReset {
         return $url;
     }
 
+    // get all tokens
     public function getAllTokens(): array {
         $tokens = [];
         $result = Database::selectAll("password_reset");
@@ -52,6 +56,7 @@ class PasswordReset {
         return $tokens;
     }
 
+    // get all tokens for a user
     public function getAllTokensByUserId(int $user_id): array {
         $tokens = [];
         $result = Database::selectAll("password_reset", [], "user_id={$user_id}");

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use UliCMS\Exceptions\FileNotFoundException;
 
+// loads model files of modules
 class ModelRegistry {
 
     // TODO: refactor this and split int into multiple method s

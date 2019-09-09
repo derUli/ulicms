@@ -20,10 +20,12 @@ class Group {
         }
     }
 
+    // get the primary group id of the current user
     public static function getCurrentGroupId(): ?int {
         return isset($_SESSION["group_id"]) ? intval($_SESSION["group_id"]) : null;
     }
 
+    // get the primary group of the current user
     public static function getCurrentGroup(): ?Group {
         if (self::getCurrentGroupId()) {
             return new self(self::getCurrentGroupId());
@@ -31,10 +33,12 @@ class Group {
         return null;
     }
 
+    // Get the id of the default group
     public static function getDefaultPrimaryGroupId(): ?int {
         return Settings::get("default_acl_group") ? intval(Settings::get("default_acl_group")) : null;
     }
 
+    // get the default group
     public static function getDefaultPrimaryGroup(): ?Group {
         if (self::getDefaultPrimaryGroupId()) {
             return new self(self::getDefaultPrimaryGroupId());
@@ -207,6 +211,7 @@ class Group {
         $this->allowable_tags = Stringhelper::isNotNullOrWhitespace($val) ? strval($val) : null;
     }
 
+    // get all users in this group
     public function getUsers(string $order = "id"): array {
         $manager = new UserManager();
         return $manager->getUsersByGroupId($this->getId(), $order);

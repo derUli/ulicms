@@ -18,6 +18,7 @@ class ActionRegistry {
         return self::$defaultCoreActions;
     }
 
+    // load module backend action pages
     public static function loadModuleActions(): void {
         self::$actions = [];
 
@@ -59,6 +60,7 @@ class ActionRegistry {
         }
     }
 
+    // load backend action page permission of modules
     private static function loadActionPermissions(): void {
         $modules = getAllModules();
         $disabledModules = Vars::get("disabledModules");
@@ -84,6 +86,7 @@ class ActionRegistry {
         return $permission;
     }
 
+    // load action => controller assignments of modules
     public static function loadModuleActionAssignment(): void {
         $modules = getAllModules();
         foreach ($modules as $module) {
@@ -101,6 +104,7 @@ class ActionRegistry {
         self::$assignedControllers[$action] = $controller;
     }
 
+    // return the controller for this action page
     public static function getController(): ?Controller {
 
         $action = get_action();

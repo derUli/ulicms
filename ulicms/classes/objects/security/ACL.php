@@ -5,6 +5,8 @@ declare(strict_types=1);
 use UliCMS\Security\PermissionChecker;
 use UliCMS\Constants\ModuleEventConstants;
 
+// old permission check class
+// please use PermissionChecker instead
 class ACL {
 
     public function hasPermission(string $name): bool {
@@ -113,6 +115,7 @@ class ACL {
         return $list;
     }
 
+    // initializes a json object with default permissions
     public function getDefaultACLAsJSON(bool $admin = false, bool $plain = false) {
         $acl_data = [];
 
@@ -194,6 +197,7 @@ class ACL {
         $acl_data = $acl_array;
         unset($acl_array);
 
+        // read custom permissions from modules
         $modules = getAllModules();
         foreach ($modules as $module) {
             $acl_metadata = getModuleMeta($module, "custom_acl");

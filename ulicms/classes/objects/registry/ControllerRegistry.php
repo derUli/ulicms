@@ -9,6 +9,7 @@ class ControllerRegistry {
     private static $controllers = [];
     private static $controller_function_permissions = [];
 
+    // load and initialize all module controllers
     public static function loadModuleControllers(): void {
         if (!defined("KCFINDER_PAGE")) {
             $controllerRegistry = [];
@@ -29,6 +30,7 @@ class ControllerRegistry {
                     }
                 }
 
+                // read controller function permissions from metadata files of modules
                 $controller_function_permissions = getModuleMeta($module, "controller_function_permissions");
                 if ($controller_function_permissions) {
                     foreach ($controller_function_permissions as $key => $value) {
@@ -65,6 +67,8 @@ class ControllerRegistry {
         }
     }
 
+    //return an instance of a controller by it's name
+    // if $class is null it returns the main class for the current backend action if defined
     public static function get(?string $class = null): ?Controller {
 
         if ($class == null and get_action()) {

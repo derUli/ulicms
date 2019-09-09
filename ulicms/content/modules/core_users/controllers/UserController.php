@@ -120,9 +120,8 @@ class UserController extends Controller {
             } else {
                 Request::redirect(ModuleHelper::buildActionURL("admins"));
             }
-        } else {
-            return ExceptionResult(get_translation("forbidden"), HttpStatusCode::FORBIDDEN);
         }
+        return ExceptionResult(get_translation("forbidden"), HttpStatusCode::FORBIDDEN);
     }
 
     public function deletePost() {

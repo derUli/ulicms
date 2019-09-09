@@ -15,18 +15,23 @@ class PrivacyCheckbox {
         $this->language = $language;
     }
 
+    // the gdpr checkbox must be enabled and configured by language
     public function isEnabled(): bool {
         return boolval(Settings::get("privacy_policy_checkbox_enable_{$this->language}", "bool"));
     }
 
+    // returns the name of the checkbox input
     public function getCheckboxName(): string {
         return self::CHECKBOX_NAME;
     }
 
-    Public function isChecked(): bool {
+    // returns true if the checkbox is checked
+    public function isChecked(): bool {
         return StringHelper::isNotNullOrWhitespace(Request::getVar($this->getCheckboxName(), "", "str"));
     }
 
+    // check if the gdpr checkbox is checked
+    // after that execute success or failed callback
     public function check(?callable $success = null, ?callable $failed = null): void {
         if ($this->isChecked()) {
             if ($success != null) {
@@ -43,6 +48,9 @@ class PrivacyCheckbox {
         }
     }
 
+    // render the dgpr checkbox input
+    // the dgpr accept text can be written in a html editor
+    // this method replaces the [checkbox] placeholder with the checkbox input
     public function render(): string {
         $checkboxHtml = Input::checkBox($this->getCheckboxName(), false, "✔", array(
                     "required" => "required",

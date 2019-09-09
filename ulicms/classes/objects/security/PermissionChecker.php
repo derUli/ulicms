@@ -6,6 +6,7 @@ namespace UliCMS\Security;
 
 use User;
 
+// class for permission checks
 class PermissionChecker {
 
     private $user_id;

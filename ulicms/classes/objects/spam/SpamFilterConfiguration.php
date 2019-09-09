@@ -20,8 +20,7 @@ class SpamFilterConfiguration {
     private $rejectRequestsFromBots = false;
     private $checkMxOfMailAddress = false;
 
-    // TODO: Make class vars, getter and setter for all
-    // spam filter related settings
+    // load configuration from settings
     public static function fromSettings(): SpamFilterConfiguration {
         $settings = new SpamFilterConfiguration();
         $settings->setSpamFilterEnabled(AntiSpamHelper::isSpamFilterEnabled());

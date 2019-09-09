@@ -9,10 +9,8 @@ class Request {
     }
 
     public static function getProtocol(?string $suffix = null): string {
-        $protocol = "http://";
-        if (self::isSSL()) {
-            $protocol = "https://";
-        }
+        $protocol = self::isSSL() ? "https://" : "http://";
+
         if (StringHelper::isNotNullOrWhitespace($suffix)) {
             $protocol .= $suffix;
         }

@@ -12,6 +12,7 @@ use function getModuleMeta;
 use function endsWith;
 use function getModulePath;
 
+// This method loads all module's helper classes
 class HelperRegistry {
 
     private static $helpers = [];

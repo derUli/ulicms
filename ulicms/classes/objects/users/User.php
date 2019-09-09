@@ -116,11 +116,13 @@ class User extends Model {
         $this->saveGroups();
     }
 
+    // save a new user and send a welcome mail
     public function saveAndSendMail(string $password): void {
         $this->save();
         $this->sendWelcomeMail($password);
     }
 
+    // Sent welcome mail to new user
     public function sendWelcomeMail(string $password): void {
         $subject = get_translation("new_user_account_at_site",
                 array("%domain%" => get_domain()));
@@ -130,6 +132,7 @@ class User extends Model {
         Mailer::send($this->getEmail(), $subject, $mailBody, $headers);
     }
 
+    // get text for welcome mail
     public function getWelcomeMailText(string $password): string {
         ViewBag::set("user", $this);
         ViewBag::set("url", ModuleHelper::getBaseUrl());
@@ -273,10 +276,12 @@ class User extends Model {
         $this->password_changed = date("Y-m-d H:i:s");
     }
 
+    // The password is encrypted
     public function getPasswordChanged(): ?int {
         return $this->password_changed;
     }
 
+    // reset password for this user
     public function resetPassword(): void {
         $passwordReset = new PasswordReset();
         $token = $passwordReset->addToken($this->getId());
