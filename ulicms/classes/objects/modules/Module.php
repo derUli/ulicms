@@ -133,7 +133,7 @@ class Module {
 
         foreach ($dependent as $dep) {
             if (faster_in_array($dep, $enabledMods)) {
-                $result [] = $dependency;
+                $result [] = $dep;
             }
         }
         return $result;

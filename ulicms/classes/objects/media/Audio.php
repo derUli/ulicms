@@ -13,6 +13,9 @@ use StringHelper;
 use function _esc;
 use function get_translation;
 
+// html5 format support of browser are different
+// UliCMS allows *.mp3 and *.ogg file uploads for audio
+// *.ogg is used by browsers which are not allowed to include a *.mp3 codec due legal reasons
 class Audio extends Model {
 
     private $name = null;
@@ -181,6 +184,7 @@ class Audio extends Model {
         }
     }
 
+    // render HTML5 <audio> tag
     public function render(): string {
         $audio_dir = self::AUDIO_DIR;
         if (defined("ULICMS_DATA_STORAGE_URL")) {

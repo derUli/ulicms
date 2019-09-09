@@ -80,6 +80,7 @@ class ModuleManager {
         $this->addNewModules();
     }
 
+    // remove modules from database which aren't installed anymore
     protected function removeDeletedModules() {
         $realModules = getAllModules();
 
@@ -93,6 +94,7 @@ class ModuleManager {
         }
     }
 
+    // add new modules to database
     protected function addNewModules() {
         $realModules = getAllModules();
         $dataBaseModules = $this->getAllModuleNames();
@@ -111,6 +113,7 @@ class ModuleManager {
         }
     }
 
+    // modules may define default values for it's settings in it's metadata file
     protected function initModulesDefaultSettings(): void {
         $enabledModules = $this->getEnabledModuleNames();
         foreach ($enabledModules as $module) {
@@ -124,6 +127,8 @@ class ModuleManager {
         }
     }
 
+    // if the installed version of the module is different from the one stored in the database
+    // update the version number in the database
     protected function updateModuleVersion(?string $version, string $realModule): void {
 
         $module = new Module($realModule);

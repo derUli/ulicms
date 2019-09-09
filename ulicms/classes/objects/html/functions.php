@@ -8,10 +8,14 @@ use UliCMS\Exceptions\FileNotFoundException;
 use ModuleHelper;
 use UliCMS\Utils\File;
 
+// use this to output a string as html
+// html specialchars are encoded, line breaks are replaced with
+// <br>
 function text($str) {
     return \nl2br(\_esc($str));
 }
 
+// generates a html img tag
 function imageTag(string $file, array $htmlAttributes = []): string {
     if (!isset($htmlAttributes["src"])) {
         $htmlAttributes["src"] = $file;
@@ -20,6 +24,7 @@ function imageTag(string $file, array $htmlAttributes = []): string {
     return "<img {$attribHTML}>";
 }
 
+// generates a html link which looks like a button
 function buttonLink(string $url,
         string $text,
         ?string $type = null,
@@ -34,6 +39,7 @@ function buttonLink(string $url,
     return link($url, $text, $allowHtml, $target, $htmlAttributes);
 }
 
+// generates a html link
 function link(string $url,
         string $text,
         bool $allowHtml = false,
@@ -53,6 +59,8 @@ function link(string $url,
     return "<a {$attribHTML}>{$text}</a>";
 }
 
+// Use this method to output font-awesome icons
+// e.g. icon("fas fa-cog");
 function icon(string $classes, array $htmlAttributes = []): string {
     $htmlAttributes["class"] = $classes;
 
@@ -60,6 +68,7 @@ function icon(string $classes, array $htmlAttributes = []): string {
     return "<i $attribHTML></i>";
 }
 
+// embed an image as base64 data URI
 function imageTagInline(string $file, array $htmlAttributes = []): string {
 
     $url = File::toDataUri($file);
@@ -70,6 +79,7 @@ function imageTagInline(string $file, array $htmlAttributes = []): string {
     return imageTag($url, $htmlAttributes);
 }
 
+// returns true if the string contains html codes
 function stringContainsHtml(string $string): bool {
     return $string != strip_tags($string);
 }

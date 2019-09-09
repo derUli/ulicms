@@ -6,30 +6,37 @@ namespace UliCMS\Utils;
 
 class File {
 
+    // write a string to a file
     public static function write($file, $data) {
         return file_put_contents($file, $data);
     }
 
+    // append a string to a file
     public static function append($file, $data) {
         return file_put_contents($file, $data, FILE_APPEND | LOCK_EX);
     }
 
+    // read a file and return it as string
     public static function read($file) {
         return file_get_contents($file);
     }
 
+    // delete a file
     public static function delete($file) {
         return unlink($file);
     }
 
+    // rename a file
     public static function rename($old, $new) {
         return rename($old, $new);
     }
 
+    // output the last modification time of a file
     public static function lastChanged($file) {
         echo self::getLastChanged($file);
     }
 
+    // get the last modification time of a file
     public static function getLastChanged($file) {
         clearstatcache();
         $retval = filemtime($file);
@@ -37,6 +44,8 @@ class File {
         return $retval;
     }
 
+    // return the extension of a file without dot
+    // eg pdf, doc, jpg
     public static function getExtension($filename) {
         $ext = explode(".", $filename);
         $ext = end($ext);
@@ -44,6 +53,7 @@ class File {
         return $ext;
     }
 
+    // loads a (remote) file and split lines
     public static function loadLines($url) {
         $data = file_get_contents_wrapper($url);
         if (!$data) {
@@ -54,6 +64,7 @@ class File {
         return $data;
     }
 
+    // Delete a file  or a directory if it exist
     public static function deleteIfExists($file) {
         if (file_exists($file) and is_file($file)) {
             return unlink($file);
@@ -64,6 +75,7 @@ class File {
         return false;
     }
 
+    // load, split, and trim a remote file
     public static function loadLinesAndTrim($url) {
         $data = self::loadLines($url);
         if ($data) {
@@ -72,10 +84,12 @@ class File {
         return $data;
     }
 
+    // check if a file exists in the local file system
     public static function existsLocally($path) {
         return ( preg_match('~^(\w+:)?//~', $path) === 0 and file_exists($path));
     }
 
+    // converts a file to a data URI
     public static function toDataUri($file, $mime = null) {
         $url = null;
         if (file_exists($file)) {
@@ -87,8 +101,10 @@ class File {
         return $url;
     }
 
-    // Mimetypen einer Datei ermitteln
+    // detect the mime type of a file
     public static function getMime(string $file) {
+        // try multiple methods to detect mime type,
+        // based on the php environment
         if (function_exists("finfo_file")) {
             $finfo = finfo_open(FILEINFO_MIME_TYPE); // return mime type ala mimetype extension
             $mime = finfo_file($finfo, $file);
@@ -102,6 +118,7 @@ class File {
             $mime = shell_exec("file -bi " . $file);
             return $mime;
         }
+        // if detection of file mimetype failed
         return null;
     }
 

@@ -13,6 +13,8 @@ use StringHelper;
 use function _esc;
 use function get_translation;
 
+// html5 format support of browser are different
+// UliCMS allows *.mp4, *.ogv and *.webm file uploads for video
 class Video extends Model {
 
     private $name = null;
@@ -209,6 +211,7 @@ class Video extends Model {
         }
     }
 
+    // render HTML5 <video> tag
     public function render(): string {
         $video_dir = self::VIDEO_DIR;
         if (defined("ULICMS_DATA_STORAGE_URL")) {
