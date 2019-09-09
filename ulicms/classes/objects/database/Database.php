@@ -4,15 +4,19 @@ declare(strict_types=1);
 
 use UliCMS\Exceptions\SqlException;
 
+// this class provides an abstraction for database access
+// and many helpful utility methods to do database stuff
 class Database {
 
     private static $connection = null;
     private static $echoQueries = false;
 
+    // this is used to show sql queries while running the unit tests
     public static function setEchoQueries($echoQueries = true) {
         self::$echoQueries = $echoQueries;
     }
 
+    // force MySQL into strict mode
     public static function getSqlStrictModeFlags() {
         return [
             "ONLY_FULL_GROUP_BY",
@@ -45,10 +49,12 @@ class Database {
         return self::$connection;
     }
 
+    // Close the databse connection
     public static function close(): void {
         mysqli_close(self::$connection);
     }
 
+    // Create a database schema
     public static function createSchema($name): bool {
         return Database::query("CREATE DATABASE {$name}");
     }
@@ -113,10 +119,12 @@ class Database {
         return mysqli_multi_query(self::$connection, $sql);
     }
 
+    // get the current database connection
     public static function getConnection(): ?mysqli {
         return self::$connection;
     }
 
+    // returns true if UliCMS is connected to database
     public static function isConnected(): bool {
         return !is_null(self::$connection);
     }
@@ -125,6 +133,13 @@ class Database {
         self::$connection = $con;
     }
 
+    // prepared statements
+    // $sql must be a sql string containg question marks
+    // $args must be an array of values
+    // please ensure, that all values in $args have the type they     // are intended to have.
+    // e.g numbers must be int or float
+    // the method replaces the question marks with the items of the $args array
+    // $args are automatically escaped to prevent sql injections
     public static function pQuery(string $sql, array $args = [], bool $replacePrefix = false) {
         $preparedQuery = "";
         $chars = mb_str_split($sql);
@@ -364,18 +379,22 @@ class Database {
         return mysqli_num_rows($result);
     }
 
+    // returns the last mysqli error
     public static function getLastError(): ?string {
         return mysqli_error(self::$connection);
     }
 
+    // returns the last mysqli error
     public static function error(): ?string {
         return self::getLastError();
     }
 
+    // returns the last mysqli error
     public static function getError(): ?string {
         return self::getLastError();
     }
 
+    // returns a list of all tables in the database
     public static function getAllTables(): array {
         $tableList = [];
         $res = mysqli_query(self::$connection, "SHOW TABLES");
@@ -387,13 +406,16 @@ class Database {
         return $tableList;
     }
 
+    // returns true if a database table exists
     public static function tableExists(string $table,
             bool $prefix = true): bool {
         $tableName = $prefix ? tbname($table) : $table;
         return faster_in_array($tableName, self::getAllTables());
     }
 
-    // Abstraktion für Escapen von Werten
+    // escape values to prevent sql injections
+    // don't manually call this, if you use
+    // pQuery() to make queries
     public static function escapeValue($value, int $type = null) {
         if (is_null($value)) {
             return "NULL";
@@ -423,6 +445,7 @@ class Database {
         }
     }
 
+    // returns a list of all tables of a table
     public static function getColumnNames(string $table, bool $prefix = true): array {
         $retval = [];
         if ($prefix) {
@@ -440,6 +463,9 @@ class Database {
         return $retval;
     }
 
+    // if the result contains one result returns it
+    // if the result contains no result returns null
+    // if the result returns more than one result throws an exception
     public static function fetchSingle(?mysqli_result $result): ?object {
         if (self::getNumRows($result) > 1) {
             throw new RangeException("Result contains more than one element.");
@@ -450,6 +476,9 @@ class Database {
         return null;
     }
 
+    // if the result contains one result returns it
+    // if the result contains no result returns a default object
+    // if the result returns more than one result throws an exception
     public static function fetchSingleOrDefault(?mysqli_result $result, ?object $default = null): ?object {
         if (self::getNumRows($result) > 1) {
             throw new RangeException("Result contains more than one element.");
@@ -460,6 +489,8 @@ class Database {
         return $default;
     }
 
+    // fetches and returns the first dataset of a mysqli_result
+    // as object
     public static function fetchFirst(mysqli_result $result): ?object {
         if (Database::getNumRows($result) > 0) {
             return self::fetchObject($result);
@@ -467,6 +498,9 @@ class Database {
         return null;
     }
 
+    // fetches and returns the first dataset of a mysqli_result
+    // as object
+    // if there are no results, return a default object
     public static function fetchFirstOrDefault(mysqli_result$result, ?object $default = null): ?object {
         if (Database::getNumRows($result) > 0) {
             return self::fetchObject($result);
@@ -474,25 +508,29 @@ class Database {
         return $default;
     }
 
+    // returns true if the database result contains at least one row
     public static function any(mysqli_result $result): bool {
         return (Database::getNumRows($result) > 0);
     }
 
+    // used for multi queries
     public static function hasMoreResults(): bool {
         return mysqli_more_results(self::$connection);
     }
 
+    // used for multi queries
     public static function loadNextResult(): bool {
         return mysqli_next_result(self::$connection);
     }
 
+    // used for multi queries
     public static function storeResult(): bool {
         return mysqli_store_result(self::$connection);
     }
 
 }
 
-// Alias für Database
+// Alias for Database for backwards compatiblity
 class DB extends Database {
 
 }

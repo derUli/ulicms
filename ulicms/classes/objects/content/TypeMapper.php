@@ -12,6 +12,8 @@ use function getAllModules;
 use function getModuleMeta;
 use StringHelper;
 
+// this class maps the values in the "type" column of the
+// "content" table to the equally model class names
 class TypeMapper {
 
     private static $mapping = array(
@@ -39,6 +41,7 @@ class TypeMapper {
         return new self::$mapping[$type]();
     }
 
+    // custom modules may load their own content type models
     public static function loadMapping(): void {
         $objectRegistry = [];
         $modules = getAllModules();

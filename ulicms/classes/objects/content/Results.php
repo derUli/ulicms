@@ -1,5 +1,7 @@
 <?php
 
+// use the methods in this class to render responses in controller actions
+
 declare(strict_types=1);
 
 use UliCMS\Backend\BackendPageRenderer;
