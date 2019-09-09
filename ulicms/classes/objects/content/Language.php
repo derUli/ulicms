@@ -122,15 +122,18 @@ class Language extends Model {
         }
     }
 
+    // returns true if this language is the default language
     public function isDefaultLanguage() {
         return $this->language_code == Settings::get("default_language");
     }
 
+    // returns true if this is the user's current language
     public function isCurrentLanguage() {
         $current_language = is_admin_dir() ? getSystemLanguage() : getCurrentLanguage();
         return $this->language_code == $current_language;
     }
 
+    // returns an array of all languages
     public static function getAllLanguages($order = "id") {
         $datasets = [];
         $sql = "select id from `{prefix}languages` order by $order";
@@ -145,6 +148,7 @@ class Language extends Model {
         return $this->getLanguageCode();
     }
 
+    // returns a link to view the website in this language
     public function getLanguageLink() {
         $domain = getDomainByLanguage($this->language_code);
         if ($domain) {

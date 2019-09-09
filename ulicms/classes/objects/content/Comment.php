@@ -16,6 +16,8 @@ use UliCMS\Security\SpamChecker\SpamFilterConfiguration;
 use UliCMS\Security\SpamChecker\CommentSpamChecker;
 
 // TODO: Comment public static functions
+// This class is a comment model class
+// Users can post comments to content types were comments are enabled
 class Comment extends Model {
 
     private $content_id;
@@ -227,6 +229,7 @@ VALUES      ( ?,
         $this->useragent = StringHelper::isNotNullOrWhitespace($val) ? strval($val) : null;
     }
 
+    // returns the content where this comment is attached
     public function getContent() {
         if (!$this->getContentId()) {
             return null;
@@ -234,6 +237,7 @@ VALUES      ( ?,
         return ContentFactory::getByID($this->getContentId());
     }
 
+    // returns all comments for a content by content_id
     public static function getAllByContentId(int $content_id,
             string $order_by = "date desc"): array {
         return self::getAllDatasets(self::TABLE_NAME, self::class, $order_by, "content_id = " . intval($content_id));
@@ -253,6 +257,8 @@ VALUES      ( ?,
         return self::getAllDatasets(self::TABLE_NAME, self::class, $order);
     }
 
+    // returns unread comments count to display at the comments icon
+    // left to the hamburger menu
     public static function getUnreadCount(): int {
         $result = Database::pQuery("select count(id) as amount from {prefix}comments where `read` = ?",
                         [false], true);
@@ -260,6 +266,7 @@ VALUES      ( ?,
         return intval($dataset->amount);
     }
 
+    // returns the count of all read comments
     public static function getReadCount(): ?int {
         $result = Database::pQuery("select count(id) as amount from {prefix}comments where `read` = ?",
                         [true], true);
@@ -267,12 +274,17 @@ VALUES      ( ?,
         return intval($dataset->amount);
     }
 
+    // returns the count of all comments
     public static function getAllCount(): ?int {
         $result = Database::pQuery("select count(id) as amount from {prefix}comments", [], true);
         $dataset = Database::fetchObject($result);
         return intval($dataset->amount);
     }
 
+    // As enforces by the GDPR of the EU
+    // it is not allowed to permanently save ips
+    // however it may be required to save ips temporarly to defend the system against bad bots
+    // this method deletes ip addresses of comments after 48 hours
     public static function deleteIpsAfter48Hours(bool $keepSpamIps = false): int {
         $sql = "update {prefix}comments set ip = null WHERE date < FROM_UNIXTIME(UNIX_TIMESTAMP(NOW() - INTERVAL 2 DAY)) and ip is not null";
         if ($keepSpamIps) {
@@ -282,6 +294,7 @@ VALUES      ( ?,
         return Database::getAffectedRows();
     }
 
+    // check if a comment from this ip exists
     public static function checkIfCommentWithIpExists(?string $ip,
             string $status = CommentStatus::SPAM): bool {
         $sql = "select ip from {prefix}comments where ip = ?";
@@ -296,6 +309,7 @@ VALUES      ( ?,
         return Database::any($result);
     }
 
+    // returns true if the comments was read by a backend user
     public function isRead(): bool {
         return boolval($this->read);
     }

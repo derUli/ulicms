@@ -1,5 +1,6 @@
 <?php
 
+// Page that has assigned a module
 class Module_Page extends Page {
 
     public $type = "module";

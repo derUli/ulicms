@@ -328,6 +328,7 @@ class Page extends Content {
         $this->save();
     }
 
+    // returns true if this page contains a module
     public function containsModule(?string $module = null): bool {
         $content = $this->content;
         $content = str_replace("&quot;", "\"", $content);
@@ -337,6 +338,7 @@ class Page extends Content {
         return stringContainsShortCodes($content);
     }
 
+    // returns all modules contained in this page
     public function getEmbeddedModules(): array {
         $result = [];
         $content = str_ireplace("&quot;", '"', $this->content);
@@ -352,6 +354,7 @@ class Page extends Content {
         return $result;
     }
 
+    // returns the parent page
     public function getParent(): ?Content {
         if (!$this->parent_id) {
             return null;
@@ -359,6 +362,7 @@ class Page extends Content {
         return ContentFactory::getByID($this->parent_id);
     }
 
+    // returns the change history of this page
     public function getHistory(string $order = "date DESC"): array {
         if (!$this->getID()) {
             return [];
@@ -408,6 +412,7 @@ class Page extends Content {
         return Comment::getAllByContentId($this->id, $order_by);
     }
 
+    // returns the url of this page
     public function getUrl(?string $suffix = null): string {
         return ModuleHelper::getFullPageURLByID($this->id, $suffix);
     }
@@ -416,10 +421,12 @@ class Page extends Content {
         return checkAccess($this->access);
     }
 
+    // set this page as frontpage
     public function makeFrontPage(): void {
         Settings::setLanguageSetting("frontpage", $this->slug, $this->language);
     }
 
+    // returns true if this page is the frontpage
     public function isFrontPage(): bool {
         $frontPage = Settings::getLang("frontpage",
                         $this->language);
@@ -434,26 +441,31 @@ class Page extends Content {
         return !is_null($this->getDeletedAt());
     }
 
+    // returns true if this page is configured as the 403 error page
     public function isErrorPage403(): bool {
         $errorPage403 = intval(Settings::getLanguageSetting("error_page_403", $this->language));
         return $this->getID() && $this->getID() == $errorPage403;
     }
 
+    // returns true if this page is configured as the 404 error page
     public function isErrorPage404(): bool {
         $errorPage404 = intval(Settings::getLanguageSetting("error_page_404", $this->language));
         return $this->getID() && $this->getID() == $errorPage404;
     }
 
+    // returns true if this page is configured as an error page
     public function isErrorPage(): bool {
         return $this->isErrorPage403() or $this->isErrorPage404();
     }
 
+    // set this page as error page for http status 403
     public function makeErrorPage403(bool $enabled = true): void {
         Settings::setLanguageSetting("error_page_403",
                 $enabled ? $this->getID() : null,
                 $this->language);
     }
 
+    // set this page as error page for http status 404
     public function makeErrorPage404(bool $enabled = true): void {
         Settings::setLanguageSetting("error_page_404",
                 $enabled ? $this->getID() : null,

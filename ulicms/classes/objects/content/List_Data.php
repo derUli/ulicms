@@ -2,6 +2,9 @@
 
 use UliCMS\Exceptions\NotImplementedException;
 
+// A list is a paginated set of content
+// filtered by conditions
+// e.g. article archive
 class List_Data extends Content {
 
     public $content_id = null;
@@ -21,6 +24,8 @@ class List_Data extends Content {
         }
     }
 
+    // apply the filter conditions of this list
+    // returns array of contents
     public function filter() {
         if ($this->use_pagination) {
             return ContentFactory::getForFilter($this->language, $this->category_id, $this->menu, $this->parent_id, $this->order_by, $this->order_direction, $this->type);

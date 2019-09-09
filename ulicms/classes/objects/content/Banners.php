@@ -8,6 +8,7 @@ use Database;
 use DB;
 use function tbname;
 
+// This class contains methods that return an array of banners
 class Banners {
 
     public static function getAll(string $order = "id"): array {

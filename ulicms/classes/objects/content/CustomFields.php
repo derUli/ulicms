@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+// This class contains methods to manipulate CustomFields
+// defined by modules
 class CustomFields {
 
     public static function set(string $name, $value, ?int $content_id = null, $addPrefix = false): ?bool {

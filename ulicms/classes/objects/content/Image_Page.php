@@ -1,5 +1,7 @@
 <?php
 
+// Image Pages are like regular pages but a field to
+// select an image file
 class Image_Page extends Page {
 
     public $type = "image";

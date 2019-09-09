@@ -6,8 +6,10 @@ use UliCMS\Exceptions\FileNotFoundException;
 use UliCMS\Exceptions\UnknownContentTypeException;
 use UliCMS\Models\Content\TypeMapper;
 
+// this class contains methods to return one content model or an array of multiple content datasets
 class ContentFactory {
 
+    // this methods returns the model of the current page
     public static function getCurrentPage(): ?Content {
         return ContentFactory::getBySlugAndLanguage(get_requested_pagename(), getCurrentLanguage(true));
     }

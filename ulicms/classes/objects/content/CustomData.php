@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+// This class contains methods to handle CustomData which is saved
+// as json object in the "content" database table
 class CustomData {
 
     private static $defaults = [];

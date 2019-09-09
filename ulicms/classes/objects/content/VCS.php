@@ -10,6 +10,7 @@ use function db_num_rows;
 use function db_escape;
 
 // Version Control System for pages
+// tracks content changes
 class VCS {
 
     public static function createRevision(int $content_id, string $content, $user_id) {

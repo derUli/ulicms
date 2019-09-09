@@ -20,6 +20,9 @@ abstract class Content extends Model {
         return StringHelper::isNullOrEmpty($this->alternate_title) ? $this->title : $this->alternate_title;
     }
 
+    // returns true if this is regular content
+    // regular content is content that contains regular html text
+    // non regular content types are for example nodes and links
     public function isRegular(): bool {
         return true;
     }

@@ -1,5 +1,6 @@
 <?php
 
+// Links to another language
 class Language_Link extends Page {
 
     public $link_to_language = null;

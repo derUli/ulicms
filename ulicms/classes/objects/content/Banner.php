@@ -8,6 +8,7 @@ use Template;
 use Database;
 use Model;
 
+// advertisement banners can be html codes or classic gif banners
 class Banner extends Model {
 
     protected $id = null;

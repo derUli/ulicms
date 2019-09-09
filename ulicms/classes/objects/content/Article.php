@@ -12,6 +12,8 @@ class Article extends Page {
 
     protected function fillVars($result = null) {
         parent::fillVars($result);
+
+        // article metadata
         $this->article_author_email = $result->article_author_email;
         $this->article_author_name = $result->article_author_name;
         $this->article_image = $result->article_image;

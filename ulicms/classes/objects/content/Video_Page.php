@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 use UliCMS\Models\Media\Video;
 
+// video pages are pages that are linked to video files
+// video files are played with html5
 class Video_Page extends Page {
 
     public $type = "video";

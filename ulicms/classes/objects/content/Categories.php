@@ -8,6 +8,7 @@ use function get_translation;
 use function db_escape;
 use UliCMS\Models\Content\Category;
 
+// methods for manipulating categories
 class Categories {
 
     public static function updateCategory(int $id, ?string $name, string $description = ''): ?int {
@@ -26,6 +27,7 @@ class Categories {
         return $category->getID();
     }
 
+    // builds a html category select box
     public static function getHTMLSelect(int $default = 1, bool $allowNull = false, string $name = 'category_id'): string {
         $lst = self::getAllCategories("name");
         $html = "<select name='" . $name . "' id='$name' size='1'>";

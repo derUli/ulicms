@@ -2,6 +2,9 @@
 
 use UliCMS\Models\Media\Audio;
 
+// audio pages are pages that are linked to audio files
+// audio files are played with html5
+
 class Audio_Page extends Page {
 
     public $audio = null;
