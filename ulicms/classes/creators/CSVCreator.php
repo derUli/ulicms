@@ -7,6 +7,7 @@ namespace UliCMS\Creators;
 use Template;
 use UliCMS\Utils\CacheUtil;
 
+// this class renders a content as csv
 class CSVCreator {
 
     public $target_file = null;
@@ -29,24 +30,25 @@ class CSVCreator {
         $this->content = ob_get_clean();
     }
 
+    // get data nested array for csv lines
     private function getData(): array {
         $data = [];
-        $data[] = array(
+        $data[] = [
             "Title",
             "Content",
             "Description",
             "Tags",
             "Author"
-        );
+        ];
         $this->content = str_replace("\r\n", "\n", $this->content);
         $this->content = str_replace("\r", "\n", $this->content);
         $this->content = str_replace("\n", " ", $this->content);
-        $data[] = array(
+        $data[] = [
             $this->title,
             $this->content,
             get_meta_description(),
             get_meta_keywords()
-        );
+        ];
         return $data;
     }
 

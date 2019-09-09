@@ -41,6 +41,6 @@
 
     $entries = apply_filter($entries, "admin_menu_entries");
     $menu->setChildren($entries);
-    $menu->render();
+    echo $menu->render();
     ?>
 </div>

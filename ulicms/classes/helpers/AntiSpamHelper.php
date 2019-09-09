@@ -5,6 +5,8 @@ declare(strict_types=1);
 class AntiSpamHelper extends Helper {
 
     // checking if this Country is blocked by spamfilter
+    // blocking works by the domain extension of the client's
+    // hostname
     public static function isCountryBlocked(?string $ip = null, ?array $country_blacklist = null): bool {
         if (is_null($ip)) {
             $ip = get_ip();
@@ -37,23 +39,29 @@ class AntiSpamHelper extends Helper {
         return false;
     }
 
+    // returns true if a string contains chinese chars
     public static function isChinese(string $str): bool {
         return (bool) preg_match("/\p{Han}+/u", $str);
     }
 
+    // returns true if a string contains cyrillic chars
     public static function isCyrillic(string $str): bool {
         return (bool) preg_match('/\p{Cyrillic}+/u', $str);
     }
 
+    // returns true if a string contains chars in right to left languages such as arabic
     public static function isRtl(string $str): bool {
         $rtl_chars_pattern = '/[\x{0590}-\x{05ff}\x{0600}-\x{06ff}]/u';
         return (bool) preg_match($rtl_chars_pattern, $str);
     }
 
+    // returns the first matching word if the string contains badwords
+    // badwords can be specified at the spamfilter settings
+    // returns null if there are no badwords
     public static function containsBadwords(?string $str, array $words_blacklist = null) {
-		if(!$str){
-			return false;
-		}
+        if (!$str) {
+            return null;
+        }
         if (is_null($words_blacklist)) {
             $words_blacklist = Settings::get("spamfilter_words_blacklist");
         }
@@ -70,15 +78,17 @@ class AntiSpamHelper extends Helper {
         return null;
     }
 
+    // returns true if the spamfilter is enabled
     public static function isSpamFilterEnabled(): bool {
         return Settings::get("spamfilter_enabled") == "yes";
     }
 
+    // returns true if this is a bot, based on a static useragent list
     public static function checkForBot(?string $useragent = null): bool {
         if (!$useragent) {
             $useragent = $_SERVER['HTTP_USER_AGENT'];
         }
-        $bots = array(
+        $bots = [
             "Indy",
             "Blaiz",
             "Java",
@@ -117,7 +127,7 @@ class AntiSpamHelper extends Helper {
             "Spade",
             "ZyBorg",
             "rabaz"
-        );
+        ];
         foreach ($bots as $bot) {
             if (stripos($useragent, $bot) !== false) {
                 return true;

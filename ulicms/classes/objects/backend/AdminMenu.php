@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+// this class renders the backend main navigation menu
 class AdminMenu {
 
     private $children = [];
@@ -26,27 +27,17 @@ class AdminMenu {
         $this->children[] = $children;
     }
 
-    public function render(): void {
+    // render the menu as list which is formatted by SCSS
+    public function render(): string {
         $html = "<ul>";
         foreach ($this->children as $child) {
+            // only render items for that the current user has permissions
             if ($child->userHasPermission()) {
-                $html .= "<li>";
-                $targetString = '';
-                if ($child->getNewWindow()) {
-                    $targetString = ' target="_blank" ';
-                }
-                $cssClassString = "class=\"backend-menu-item-{$child->getIdentifier()}\"";
-                if ($child->getIdentifier() == get_action()) {
-                    $html .= '<a href="' . $child->getLink() . '" class="active"' . $targetString . $cssClassString . '>';
-                } else {
-                    $html .= '<a href="' . $child->getLink() . '"' . $targetString . $cssClassString . '>';
-                }
-                $html .= $child->getTitle();
-                $html .= "</a>";
-                $html .= "</li>";
+                $html .= $child->render();
             }
         }
-        echo $html;
+        $html .= "</ul>";
+        return $html;
     }
 
 }

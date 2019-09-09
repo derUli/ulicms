@@ -2,16 +2,24 @@
 
 use UliCMS\Exceptions\NotImplementedException;
 
+// This is a base class for database models
+// one model contains the definition of a database table and methods to load,
+// create, update and delete and manipulate it's values
+// you have to override all methods that are throwing NotImplementedException
+// in your model classes
+
 class Model {
 
     protected $id = null;
 
+    // calls loadById if $id is not null
     public function __construct($id = null) {
         if (!is_null($id)) {
             $this->loadByID($id);
         }
     }
 
+    // this method loads a dataset by id from $_GET
     public function loadByRequestId() {
         $id = Request::getVar("id");
         if (is_numeric($id)) {
@@ -19,6 +27,7 @@ class Model {
         }
     }
 
+    // override this method to implement your sql select statement
     public function loadByID($id) {
         throw new NotImplementedException("load not implemented");
     }
@@ -31,18 +40,24 @@ class Model {
         }
     }
 
+    // $result must be a mysqli result or null
+    // use this method to fill the data from database to
+    // class variables
     protected function fillVars($result = null) {
         throw new NotImplementedException("fillVars not implemented");
     }
 
+    // override this method to implement your sql insert statement
     protected function insert() {
         throw new NotImplementedException("insert not implemented");
     }
 
+    // override this method to implement your sql update statement
     protected function update() {
         throw new NotImplementedException("update not implemented");
     }
 
+    // override this method to implement your sql delete statement
     public function delete() {
         throw new NotImplementedException("delete not implemented");
     }
@@ -103,12 +118,14 @@ class Model {
         return $datasets;
     }
 
-    public function isPersistent() {
-        return intval($this->getID()) >= 1;
+    // returns true if the database exists in database
+    // returns false if it weren't saved yet to database
+    public function isPersistent(): bool {
+        return $this->getID() >= 1;
     }
 
+    // returns true if there are any unsaved changes to this dataset
     public function hasChanges() {
-
         $hasChanges = false;
         $className = get_class($this);
         $originalDataset = new $className($this->getID());

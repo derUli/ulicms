@@ -18,7 +18,6 @@ class Page extends Content {
     public $active = 1;
     public $created = 0;
     public $lastmodified = 0;
-    // TODO: Rename this column to author_id to make it fit conventions
     public $author_id = null;
     public $group_id = null;
     public $lastchangeby = 1;
@@ -375,10 +374,10 @@ class Page extends Content {
         $this->permissions = $permissions;
     }
 
-// returns if the comments for the page are enabled
-// if "Comments enabled" has "[Default]" selected
-// then it returns if the comments are enabled in
-// the global settings
+    // returns if the comments for the page are enabled
+    // if "Comments enabled" has "[Default]" selected
+    // then it returns if the comments are enabled in
+    // the global settings
     public function areCommentsEnabled(): bool {
         $commentsEnabled = false;
         if (is_null($this->comments_enabled)) {
@@ -398,13 +397,13 @@ class Page extends Content {
         return $commentsEnabled;
     }
 
+    // TODO: write a more ressource friendly implementation
+    // which doesn't load all comment datasets into the memory
     public function hasComments(): bool {
-// TODO: write a more ressource friendly implementation
-// which doesn't load all comment datasets into the memory
         return count($this->getComments()) > 0;
     }
 
-// this returns an array of all comments of this content
+    // this returns an array of all comments of this content
     public function getComments($order_by = "date desc"): array {
         return Comment::getAllByContentId($this->id, $order_by);
     }

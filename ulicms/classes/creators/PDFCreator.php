@@ -5,6 +5,7 @@ namespace UliCMS\Creators;
 use Template;
 use Mpdf\Mpdf;
 
+// this class renders a page as pdf using mPDF
 class PDFCreator {
 
     public $target_file = null;
@@ -27,12 +28,7 @@ class PDFCreator {
     }
 
     public function render() {
-
-        if (!class_exists("\\Mpdf\\Mpdf")) {
-            ExceptionResult("Mpdf is not installed. Please install <a href=\"http://www.ulicms.de/mpdf_supplement.html\" target=\"_blank\">mPDF supplement</a>.");
-        }
-
-        // TODO: Reimplement Caching of generated pdf files
+        // TODO: Implement Caching of generated pdf files
         $mpdf = new Mpdf(['mode' => 'utf-8', 'format' => 'A4-P']);
 
         $mpdf->WriteHTML($this->content);

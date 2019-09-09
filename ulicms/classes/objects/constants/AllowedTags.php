@@ -2,6 +2,9 @@
 
 namespace UliCMS\Constants;
 
+// whitelisted html tags
+// these are used when you create new groups
+// to prefill the text input for allowed html tags
 $allowedTags = array(
     "<menu>",
     "<command>",

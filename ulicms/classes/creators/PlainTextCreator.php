@@ -7,6 +7,7 @@ namespace UliCMS\Creators;
 use Template;
 use UliCMS\Utils\CacheUtil;
 
+// this class renders a page as plain text
 class PlainTextCreator {
 
     public $target_file = null;
@@ -36,6 +37,7 @@ class PlainTextCreator {
             return $adapter->get($uid);
         }
 
+        // clean up html content
         $this->content = br2nlr($this->content);
         $this->content = strip_tags($this->content);
         $this->content = str_replace("\r\n", "\n", $this->content);

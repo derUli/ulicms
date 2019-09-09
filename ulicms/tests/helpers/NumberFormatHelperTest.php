@@ -30,8 +30,8 @@ class NumberFormatHelperTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testFormatTime() {
-        $number = (60 * 60 * 24 * 365 * 3 + 123456);
-        $this->assertEquals("1096 Days 10:17:36 Hours", NumberFormatHelper::formatTime($number));
+        $number = time() - (60 * 60 * 24 * 365 * 2);
+        $this->assertEquals("vor über 2 Jahren", NumberFormatHelper::formatTime($number));
     }
 
     public function testTimestampToHtml5Datetime() {

@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace UliCMS\Helpers;
 
 use Helper;
+use Datetime;
+use Westsworld\TimeAgo;
 
 class NumberFormatHelper extends Helper {
 
+    // This method formats bytes in a human readable format
     // Snippet from PHP Share: http://www.phpshare.org
     public static function formatSizeUnits(float $bytes): string {
         if ($bytes >= 1073741824) {
@@ -27,14 +30,26 @@ class NumberFormatHelper extends Helper {
         return $bytes;
     }
 
+    // use this to convert an integer timestamp to use it for a html5 datetime-local input
     public static function timestampToHtml5Datetime(?int $timestamp = null): string {
         $time = !is_null($timestamp) ? $timestamp : time();
         return date("Y-m-d\TH:i", $time);
     }
 
-    public static function formatTime(int $seconds): string {
-        $seconds = abs($seconds); // Ganzzahlwert bilden
-        return sprintf(get_translation("FORMAT_TIME"), $seconds / 60 / 60 / 24, ($seconds / 60 / 60) % 24, ($seconds / 60) % 60, $seconds % 60);
+    // Use this to format the time at "Online since"
+    // Todo: use a packagist package to format relative times
+    public static function formatTime(int $time): string {
+        $dateTime = new DateTime();
+        $dateTime->setTimestamp($time);
+
+
+        $languageClass = "\\Westsworld\\TimeAgo\\Translations\\" .
+                ucfirst(getSystemLanguage());
+        $language = class_exists($languageClass) ? new $languageClass() :
+                new \Westsworld\TimeAgo\Translations\De();
+
+        $timeAgo = new TimeAgo($language);
+        return $timeAgo->inWords($dateTime);
     }
 
 }

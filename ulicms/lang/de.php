@@ -8,7 +8,7 @@ add_translation("ONLINE_NOW", "Jetzt online sind");
 add_translation("TOP_PAGES", "Top-Seiten");
 add_translation("LAST_CHANGES", "Letzte Änderungen");
 
-add_translation("SITE_ONLINE_SINCE", "Alter dieser Website");
+add_translation("SITE_ONLINE_SINCE", "Website online seit");
 add_translation("PAGES_COUNT", "Anzahl der Seiten");
 add_translation("REGISTERED_USERS_COUNT", "Anzahl der Benutzer");
 add_translation("BLOCKED_SPAM_MAILS", "Blockierte Spam Nachrichten");

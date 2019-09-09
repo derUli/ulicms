@@ -9,7 +9,6 @@ use ActionRegistry;
 use Settings;
 use zz\Html\HTMLMinify;
 use UliCMS\Security\PermissionChecker;
-use Database;
 
 // This class renders a backend page
 // if you set a model from a model
@@ -68,6 +67,7 @@ class BackendPageRenderer {
         exit();
     }
 
+    // this method handles access to the features that are accesible for non authenticated users
     protected function handleNotLoggedIn(): void {
 
         ActionRegistry::loadModuleActions();
@@ -95,6 +95,7 @@ class BackendPageRenderer {
         }
     }
 
+// this method handles all actions by authenticated users
     protected function handleLoggedIn(): void {
         $permissionChecker = new PermissionChecker(get_user_id());
 
@@ -119,6 +120,7 @@ class BackendPageRenderer {
         }
     }
 
+    // minify html output
     protected function outputMinified(): void {
         $generatedHtml = ob_get_clean();
         $options = array(
@@ -131,6 +133,7 @@ class BackendPageRenderer {
         echo $generatedHtml;
     }
 
+    // run cron events of modules
     protected function doCronEvents(): void {
         do_event("before_admin_cron");
         do_event("admin_cron");

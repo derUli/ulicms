@@ -25,7 +25,7 @@ class Database {
         ];
     }
 
-// Connect with database server
+    // Connect with database server
     public static function connect(string $server, string $user, string $password, int $port, ?string $socket = null, bool $db_strict_mode = false): ?mysqli {
         $connected = mysqli_connect($server, $user, $password, "", $port, $socket);
         self::$connection = $connected ? $connected : null;
@@ -33,7 +33,7 @@ class Database {
             return null;
         }
         self::query("SET NAMES 'utf8mb4'");
-// sql_mode auf leer setzen, da sich UliCMS nicht im strict_mode betreiben lässt
+        // sql_mode auf leer setzen, da sich UliCMS nicht im strict_mode betreiben lässt
         if ($db_strict_mode) {
             self::pQuery("SET SESSION sql_mode = ?", [
                 implode(",", self::getSqlStrictModeFlags())
@@ -53,7 +53,7 @@ class Database {
         return Database::query("CREATE DATABASE {$name}");
     }
 
-// TODO: Do logging when auto initialize the database
+    // TODO: Do logging when auto initialize the database
     public static function setupSchemaAndSelect(string $schemaName, array $otherScripts = []): bool {
         $selected = self::select($schemaName);
         if (!$selected) {
@@ -77,7 +77,7 @@ class Database {
         return $selected;
     }
 
-// Abstraktion für Ausführen von SQL Strings
+    // Abstraktion für Ausführen von SQL Strings
     public static function query(string $sql, bool $replacePrefix = false) {
         $cfg = new CMSConfig();
         if ($replacePrefix) {
@@ -97,7 +97,7 @@ class Database {
         return $result;
     }
 
-// execute a sql string with multiple statements
+    // execute a sql string with multiple statements
     public static function multiQuery(string $sql, bool $replacePrefix = false) {
         $cfg = new CMSConfig();
         if ($replacePrefix) {
@@ -339,7 +339,7 @@ class Database {
         return $datasets;
     }
 
-// Datenbank auswählen
+    // Datenbank auswählen
     public static function select(string $schema): bool {
         return mysqli_select_db(self::$connection, $schema);
     }
@@ -393,7 +393,7 @@ class Database {
         return faster_in_array($tableName, self::getAllTables());
     }
 
-// Abstraktion für Escapen von Werten
+    // Abstraktion für Escapen von Werten
     public static function escapeValue($value, int $type = null) {
         if (is_null($value)) {
             return "NULL";

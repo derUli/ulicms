@@ -6,6 +6,7 @@ namespace UliCMS\Creators;
 
 use UliCMS\Utils\CacheUtil;
 
+// this class renders a content as csv
 class JSONCreator {
 
     public $target_file = null;
