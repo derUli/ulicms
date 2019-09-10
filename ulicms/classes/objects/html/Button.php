@@ -7,6 +7,8 @@ namespace UliCMS\HTML;
 use UliCMS\Constants\ButtonType;
 use ModuleHelper;
 
+// This class contains helper methods to build Bootstrap buttons
+// see https://getbootstrap.com/docs/3.3/components/
 class Button {
 
     public static function button(string $text,

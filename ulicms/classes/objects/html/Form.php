@@ -9,6 +9,7 @@ use ModuleHelper;
 use Template;
 use UliCMS\Constants\RequestMethod;
 
+// this class contains method to build <form> tags
 class Form {
 
     public static function buildMethodCallForm(string $sClass,

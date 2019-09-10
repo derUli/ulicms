@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace UliCMS\HTML;
 
+// This class contains helper methods to build Bootstrap alerts
+// see https://getbootstrap.com/docs/3.3/components/
 class Alert {
 
     public static function alert(string $text, string $cssClasses, bool $allowHtml = false): string {

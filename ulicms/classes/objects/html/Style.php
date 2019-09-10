@@ -7,6 +7,8 @@ namespace UliCMS\HTML;
 use ModuleHelper;
 use UliCMS\Utils\File;
 
+// generates HTML style tags
+// please use stylesheet queue instead of this methods if possible
 class Style {
 
     public static function fromExternalFile(string $href,

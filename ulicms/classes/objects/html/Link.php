@@ -6,6 +6,7 @@ namespace UliCMS\HTML;
 
 use ModuleHelper;
 
+// this class contains helper methods to build clickable links
 class Link {
 
     public static function link(string $href,

@@ -7,6 +7,8 @@ namespace UliCMS\HTML;
 use UliCMS\Utils\File;
 use ModuleHelper;
 
+// generates HTML script tags
+// please use script queue instead of this methods if possible
 class Script {
 
     public static function fromFile(string $file,

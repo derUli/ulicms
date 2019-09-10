@@ -7,6 +7,7 @@ namespace UliCMS\HTML;
 use ModuleHelper;
 use Template;
 
+// this class contains methods to build input fields
 class Input {
 
     public static function textBox(string $name,

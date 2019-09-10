@@ -6,6 +6,7 @@ namespace UliCMS\HTML;
 
 use Template;
 
+// represents a list item in a singleSelect() or multiSelect()
 class ListItem {
 
     private $value;
