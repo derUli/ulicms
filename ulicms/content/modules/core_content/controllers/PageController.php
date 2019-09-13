@@ -390,6 +390,63 @@ class PageController extends Controller {
         exit();
     }
 
+    public function getPages() {
+        $start = Request::getVar("start", 0, "int");
+        $length = Request::getVar("length", 50, "int");
+        $draw = Request::getVar("draw", 50, "int");
+        $search = $_REQUEST["search"]["value"];
+        $result = [];
+        $result["data"] = [];
+
+        $where = "deleted_at is null";
+
+
+        $results = Database::selectAll("content", [],
+                        $where);
+
+        while ($row = Database::fetchObject($results)) {
+            $addThis = true;
+
+            if ($search and ! stristr($row->title, $search)) {
+                $addThis = false;
+            }
+            if ($addThis) {
+                $result["data"][] = $this->pageDatasetsToResponse($row);
+            }
+        }
+
+        $result["draw"] = $draw;
+
+        $result["data"] = array_slice(
+                $result["data"],
+                $start > 0 ? $start - 1 : 0,
+                $length
+        );
+        $result["recordsFiltered"] = $search ? count($result["data"]) : Database::getNumRows($results);
+        $result["recordsTotal"] = Database::getNumRows($results);
+
+        sleep(10);
+
+        JSONResult($result);
+    }
+
+    protected function pageDatasetsToResponse($dataset) {
+        return [
+            $dataset->title,
+            get_translation($dataset->menu),
+            $dataset->position,
+            getPageTitleByID($dataset->parent_id),
+            bool2YesNo(
+                    boolval(
+                            $dataset->active
+                    )
+            ),
+            "<strong>Test</strong>",
+            "<strong>Test</strong>",
+            "<strong>Test</strong>"
+        ];
+    }
+
     protected function validateInput() {
         $validator = new Validator();
         $validation = $validator->make($_POST + $_FILES, [

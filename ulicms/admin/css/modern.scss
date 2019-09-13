@@ -770,6 +770,11 @@ form.page-list-filters {
     margin-top: 10px;
     margin-bottom: 10px;
 }
+.dataTables_wrapper{
+    .dataTables_processing{
+        z-index: 30;
+    }
+}
 table.dataTable {
     width: 100% !important;
     position: relative;

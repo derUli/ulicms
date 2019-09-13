@@ -4,8 +4,6 @@ use UliCMS\Models\Content\Categories;
 // TODO: This is old code before the switch to MVC architecture
 // This should be rewritten with MVC pattern and using partial views
 use UliCMS\Security\PermissionChecker;
-use UliCMS\Security\ContentPermissionChecker;
-use UliCMS\Exceptions\UnknownContentTypeException;
 
 $show_filters = Settings::get("user/" . get_user_id() . "/show_filters");
 
@@ -103,7 +101,7 @@ if ($permissionChecker->hasPermission("pages")) {
     $menus = getAllMenus(true);
 
     array_unshift($menus, "null");
-// FIXME: Das SQL hier in einen Controller auslagern
+    // FIXME: Das SQL hier in einen Controller auslagern
     $sql = "select a.id as id, a.title as title from " . tbname("content") . " a inner join " . tbname("content") . " b on a.id = b.parent_id ";
 
     if (faster_in_array($_SESSION["filter_language"], getAllLanguages(true))) {
@@ -131,7 +129,7 @@ if ($permissionChecker->hasPermission("pages")) {
             </form>
             <div class="row">
                 <div class="col-xs-6">
-                    <a href="index.php?action=pages_new&parent_id=<?php echo $_SESSION["filter_parent"]; ?>" class="btn btn-default"><i
+                    <a href="index.php?action=pagespages_new&parent_id=<?php echo $_SESSION["filter_parent"]; ?>" class="btn btn-default"><i
                             class="fa fa-plus"></i> <?php translate("create_page"); ?></a>
                 </div>
                 <div class="col-xs-6 text-right">
@@ -356,88 +354,8 @@ if ($permissionChecker->hasPermission("pages")) {
                 <?php translate("empty_recycle_bin"); ?></a>
             <?php
         }
-        ?>
-        <?php
-        $filter_language = basename($_GET["filter_language"]);
-        $filter_status = basename($_GET["filter_status"]);
-
-        if (empty($filter_language)) {
-            if (!empty($_SESSION["filter_language"])) {
-                $filter_language = $_SESSION["filter_language"];
-            } else {
-                $filter_language = "";
-            }
-        }
-
-        if ($_SESSION["filter_status"] == "trash") {
-            $filter_status = "`deleted_at` IS NOT NULL";
-        } else {
-            $filter_status = "`deleted_at` IS NULL";
-        }
-
-        if (empty($order)) {
-            $order = "menu";
-        }
-
-        if (!empty($filter_language)) {
-            $filter_sql = "WHERE language = '" . $filter_language . "' ";
-        } else {
-            $filter_sql = "WHERE 1=1 ";
-        }
-
-        if ($_SESSION["filter_category"] != 0) {
-            $filter_sql .= "AND category_id=" . intval($_SESSION["filter_category"]) . " ";
-        }
-
-        $filter_sql .= "AND " . $filter_status . " ";
-
-        if ($_SESSION["filter_menu"] != null) {
-            $filter_sql .= "AND menu = '" . db_escape($_SESSION["filter_menu"]) . "' ";
-        }
-        if ($_SESSION["filter_type"] != null) {
-            $filter_sql .= "AND `type` = '" . db_escape($_SESSION["filter_type"]) . "' ";
-        }
-
-        if ($_SESSION["filter_active"] !== null) {
-            $filter_sql .= "AND active = " . intval($_SESSION["filter_active"]) . " ";
-        }
-
-        if ($_SESSION["filter_approved"] !== null) {
-            $filter_sql .= "AND approved = " . intval($_SESSION["filter_approved"]) . " ";
-        }
-
-        if ($_SESSION["filter_parent"] != null) {
-            if ($_SESSION["filter_parent"] != "-") {
-                $filter_sql .= "AND parent_id = '" . intval($_SESSION["filter_parent"]) . "' ";
-            } else {
-                $filter_sql .= "AND parent_id is NULL ";
-            }
-        }
-
-        if (isset($_SESSION["filter_title"]) and ! empty($_SESSION["filter_title"])) {
-            $filter_sql .= "AND (title LIKE '" . db_escape($_SESSION["filter_title"]) . "%' or title LIKE '%" . db_escape($_SESSION["filter_title"]) . "' or title LIKE '%" . db_escape($_SESSION["filter_title"]) . "%' or title LIKE '" . db_escape($_SESSION["filter_title"]) . "' ) ";
-        }
 
 
-        $group = Group::getCurrentGroup();
-        $userLanguage = $permissionChecker->getLanguages();
-        $joined = "";
-        foreach ($userLanguage as $lang) {
-            $joined .= "'" . Database::escapeValue($lang->getLanguageCode()) . "',";
-        }
-        $joined = trim($joined, ",");
-        if (count($userLanguage) > 0) {
-            $filter_sql .= " AND language in (";
-            $filter_sql .= $joined;
-            $filter_sql .= ")";
-        }
-
-        $filter_sql .= " ";
-
-        $result = db_query("SELECT * FROM " . tbname("content") . " " . $filter_sql . " ORDER BY $order,position, slug ASC") or die(db_error());
-        ?>
-        <div class="x-results-found"><?php BackendHelper::formatDatasetCount(Database::getNumRows($result)); ?></div>
-        <?php
         if ($_SESSION["filter_parent"] and $_SESSION["filter_parent"] != '-') {
             $parentPage = ContentFactory::getByID($_SESSION["filter_parent"]);
             $parentId = $parentPage->parent_id ? $parentPage : "-";
@@ -453,7 +371,11 @@ if ($permissionChecker->hasPermission("pages")) {
             ?>
         </div>
         <div class="scroll">
-            <table class="tablesorter dataset-list">
+            <table class="tablesorter dataset-list"
+                   data-url="<?php
+                   echo ModuleHelper::buildMethodCallUrl("PageController",
+                           "getPages");
+                   ?>">
                 <thead>
                     <tr style="font-weight: bold;">
                         <th><?php translate("title"); ?>
@@ -473,88 +395,9 @@ if ($permissionChecker->hasPermission("pages")) {
                         </td>
                         <td class="no-sort text-center"><?php translate("delete"); ?>
                         </td>
-
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                    if (db_num_rows($result) > 0) {
-                        while ($row = db_fetch_object($result)) {
-                            try {
-                                $model = ContentFactory::getByID(intval($row->id));
-                            } catch (UnknownContentTypeException $e) {
-                                // skip contents with unknown types
-                                continue;
-                            }
-                            echo '<tr id="dataset-' . $row->id . '">';
-                            echo '<td>';
-                            if ($model->hasChildren()) {
-                                echo "<a href=\""
-                                . ModuleHelper::buildActionURL("pages", "filter_parent={$model->getId()}") . "\">" . UliCMS\HTML\icon("fas fa-arrow-down") . " " . _esc($row->title) . "</a></td>";
-                            } else {
-                                esc($row->title);
-                            }
-                            if (!empty($row->redirection) and ! is_null($row->redirection) and $row->type == "link") {
-                                esc(" --> ");
-                                esc($row->redirection);
-                            }
-
-                            echo "</td>";
-                            echo "<td class = \"hide-on-mobile\">" . _esc(get_translation($row->menu)) . "</td>";
-
-                            echo "<td class=\"hide-on-mobile\">" . $row->position . "</td>";
-                            echo "<td class=\"hide-on-mobile\">" . _esc(getPageTitleByID($row->parent_id)) . "</td>";
-
-                            if ($row->active) {
-                                echo "<td class=\"hide-on-mobile\">" . get_translation("yes") . "</td>";
-                            } else {
-                                echo "<td class=\"hide-on-mobile\">" . get_translation("no") . "</td>";
-                            }
-
-                            if ((
-                                    $row->redirection and startsWith($row->redirection, "#")) or $row->type == "node" or $row->type == "snippet") {
-                                echo "<td class=\"text-center\"></td>";
-                            } else {
-                                $url = "../?goid={$row->id}";
-                                echo "<td class='text-center'><a href=\"" . $url . "\"><img class=\"mobile-big-image\" src=\"gfx/preview.png\" alt=\"" . get_translation("view") . "\" title=\"" . get_translation("view") . "\"></a></td>";
-                            }
-
-                            $checker = new ContentPermissionChecker(get_user_id());
-                            $can_edit_this = $checker->canWrite($row->id);
-
-                            if (!$can_edit_this) {
-                                echo "<td></td><td></td>";
-                            } else {
-                                echo "<td class='text-center'>" . '<a href="index.php?action=pages_edit&page=' . $row->id . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . get_translation("edit") . '" title="' . get_translation("edit") . '"></a></td>';
-
-                                if ($_SESSION["filter_status"] == "trash") {
-                                    echo "<td class='text-center'>";
-                                    echo ModuleHelper::buildMethodCallForm("PageController", "undelete", array(
-                                        "page" => $row->id
-                                            ), "post", array(
-                                        "class" => "undelete-form",
-                                        "data->id" => $row->id
-                                    ));
-
-                                    get_csrf_token_html();
-                                    echo '<input type="image" class="mobile-big-image" src="gfx/undelete.png" alt="' . get_translation("recover") . '" title="' . get_translation("recover") . '"></form></td>';
-                                } else {
-                                    echo "<td class='text-center'>";
-                                    echo ModuleHelper::deleteButton("index.php", array(
-                                        "page" => $row->id,
-                                        "sClass" => "PageController",
-                                        "sMethod" => "delete"
-                                            ), array(
-                                        "data-id" => $row->id,
-                                        "class" => "page-delete-form"
-                                    ));
-                                    echo "</td>";
-                                }
-                            }
-                            echo '</tr>';
-                        }
-                    }
-                    ?>
                 </tbody>
             </table>
         </div>

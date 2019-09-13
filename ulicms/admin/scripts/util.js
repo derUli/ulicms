@@ -111,36 +111,47 @@ initDataTables = (rootElement) => {
     // get current action from url
     // this is used as identifier when saving and loading the state
     const action = urlParams.get('action');
-    $(rootElement).find(".tablesorter").DataTable({
-        language: {
-            url: $("body").data("datatables-translation")
-        },
-        deferRender: true,
-        stateSave: true,
-        stateDuration: 0,
-        stateSaveCallback: (settings, data) => {
-            console.log(settings, data);
-            localStorage.setItem(
-                    "DataTables_" + action + "_"
-                    + settings.sInstance, JSON.stringify(data)
-                    );
-        },
-        stateLoadCallback: (settings) =>
-            JSON.parse(
-                    localStorage.getItem(
-                            "DataTables_" + action + "_" + settings.sInstance)
-                    )
-        ,
-        drawCallback: (settings) => {
-            $(`#${settings.sInstance}`).find("a.btn").click(
-                    (event) => {
-                const target = $(event.currentTarget);
-                if ((target.hasClass("disabled") || target.attr("disabled")) && target.attr("href").length > 1) {
-                    event.preventDefault();
-                }
-            });
+    $(rootElement).find(".tablesorter").each((index, element) => {
+        const table = $(element);
+        const url = table.data("url");
+        $(element).DataTable({
+            language: {
+                url: $("body").data("datatables-translation")
+            },
+            processing: false,
+            serverSide: !!url,
+            ajax: {
+                url,
+                type: 'GET'
+            },
+            deferRender: true,
+            stateSave: true,
+            stateDuration: 0,
+            stateSaveCallback: (settings, data) => {
+                console.log(settings, data);
+                localStorage.setItem(
+                        "DataTables_" + action + "_"
+                        + settings.sInstance, JSON.stringify(data)
+                        );
+            },
+            stateLoadCallback: (settings) =>
+                JSON.parse(
+                        localStorage.getItem(
+                                "DataTables_" + action + "_" + settings.sInstance)
+                        )
+            ,
+            drawCallback: (settings) => {
+                $(`#${settings.sInstance}`).find("a.btn").click(
+                        (event) => {
+                    const target = $(event.currentTarget);
+                    if ((target.hasClass("disabled") || target.attr("disabled")) && target.attr("href").length > 1) {
+                        event.preventDefault();
+                    }
+                });
 
-        },
-        columnDefs: [{targets: "no-sort", orderable: false}]
-    });
+            },
+            columnDefs: [{targets: "no-sort", orderable: false}]
+        });
+    })
+
 };
