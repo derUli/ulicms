@@ -10,7 +10,6 @@ $show_filters = Settings::get("user/" . get_user_id() . "/show_filters");
 $permissionChecker = new PermissionChecker(get_user_id());
 
 if ($permissionChecker->hasPermission("pages")) {
-
     if (!isset($_SESSION["filter_title"])) {
         $_SESSION["filter_title"] = "";
     }

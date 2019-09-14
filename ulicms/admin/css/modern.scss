@@ -770,11 +770,7 @@ form.page-list-filters {
     margin-top: 10px;
     margin-bottom: 10px;
 }
-.dataTables_wrapper{
-    .dataTables_processing{
-        z-index: 30;
-    }
-}
+
 table.dataTable {
     width: 100% !important;
     position: relative;
@@ -799,12 +795,16 @@ table.dataTable {
     margin-top: 10px;
 }
 .dataTables_wrapper {
+    margin-bottom: 40px;
+    .dataTables_processing{
+        z-index: 30;
+        background: none;
+    }
     .dataTables_filter {
         input {
             margin-left: 0 !important;
         }
     }
-    margin-bottom: 10px;
 }
 .top-bar {
     margin-bottom: 10px;

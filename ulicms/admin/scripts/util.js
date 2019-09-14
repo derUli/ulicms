@@ -118,12 +118,12 @@ initDataTables = (rootElement) => {
             language: {
                 url: $("body").data("datatables-translation")
             },
-            processing: false,
+            processing: !!url,
             serverSide: !!url,
-            ajax: {
+            ajax: url ? {
                 url,
                 type: 'GET'
-            },
+            } : null,
             deferRender: true,
             stateSave: true,
             stateDuration: 0,

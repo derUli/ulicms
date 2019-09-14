@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\CoreContent\Models\ViewModels\DiffViewModel;
+use UliCMS\CoreContent\PageTableRenderer;
 use UliCMS\Models\Content\VCS;
 use UliCMS\Models\Content\Types\DefaultContentTypes;
 use Rakit\Validation\Validator;
@@ -11,7 +12,9 @@ use UliCMS\Utils\CacheUtil;
 use function UliCMS\HTML\stringContainsHtml;
 
 class PageController extends Controller {
-	const MODULE_NAME = "core_content";
+
+    const MODULE_NAME = "core_content";
+
     public function createPost() {
         $this->validateInput();
 
@@ -149,7 +152,7 @@ class PageController extends Controller {
         }
 
 
-        $permissionObjects = array("admins", "group", "owner", "other");
+        $permissionObjects = array("admins", "group", "owner", "others");
         foreach ($permissionObjects as $object) {
             $model->getPermissions()->setEditRestriction(
                     $object,
@@ -395,59 +398,15 @@ class PageController extends Controller {
         $length = Request::getVar("length", 50, "int");
         $draw = Request::getVar("draw", 50, "int");
         $search = $_REQUEST["search"]["value"];
-        $result = [];
-        $result["data"] = [];
 
-        $where = "deleted_at is null";
+        $renderer = new PageTableRenderer();
 
-
-        $results = Database::selectAll("content", [],
-                        $where);
-
-        while ($row = Database::fetchObject($results)) {
-            $addThis = true;
-
-            if ($search and ! stristr($row->title, $search)) {
-                $addThis = false;
-            }
-            if ($addThis) {
-                $result["data"][] = $this->pageDatasetsToResponse($row);
-            }
-        }
-
-        $result["draw"] = $draw;
-
-        $result["data"] = array_slice(
-                $result["data"],
-                $start > 0 ? $start - 1 : 0,
-                $length
-        );
-        $result["recordsFiltered"] = $search ? count($result["data"]) : Database::getNumRows($results);
-        $result["recordsTotal"] = Database::getNumRows($results);
-
-        JSONResult($result);
-    }
-
-    protected function pageDatasetsToResponse($dataset) {
-		
-		$viewButton = Template::executeModuleTemplate(self::MODULE_NAME, "pages/partials/view_button.php");
-		$editButton = Template::executeModuleTemplate(self::MODULE_NAME, "pages/partials/edit_button.php");
-		$deleteButton = Template::executeModuleTemplate(self::MODULE_NAME, "pages/partials/delete_button.php");
-		
-        return [
-            _esc($dataset->title),
-            _esc(get_translation($dataset->menu)),
-            _esc($dataset->position),
-            _esc(getPageTitleByID($dataset->parent_id)),
-            bool2YesNo(
-                    boolval(
-                            $dataset->active
-                    )
-            ),
-            $viewButton,
-			$editButton,
-            $deleteButton
-        ];
+        JSONResult($renderer->getData(
+                        $start,
+                        $length,
+                        $draw,
+                        $search
+        ));
     }
 
     protected function validateInput() {
