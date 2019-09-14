@@ -101,6 +101,42 @@ initRemoteAlerts = (rootElement) => {
         });
     });
 };
+dataTableDrawCallback = (settings) => {
+    $(`#${settings.sInstance}`).find("a.btn").click(
+            (event) => {
+        const target = $(event.currentTarget);
+        if ((target.hasClass("disabled") ||
+                target.attr("disabled")) &&
+                target.attr("href").length > 1) {
+            event.preventDefault();
+            return;
+        }
+    });
+    $(`#${settings.sInstance}`).find("a.delete-icon").click((event) => {
+        event.preventDefault();
+        const target = $(event.currentTarget);
+        const confirmMessage = target.data("confirm");
+        const url = target.data("url");
+        bootbox.confirm(confirmMessage, (result) => {
+            if (result) {
+                $.ajax({
+                    url,
+                    method: 'POST',
+                    success: () => {
+                        const table = $(`#${settings.sInstance}`);
+                        const dataTable = table.DataTable();
+                        const row = target.closest("tr");
+                        $(row).fadeOut(400, () => {
+                            dataTable.row(row).remove().draw();
+                        });
+                    }
+                });
+            }
+        });
+    }
+    );
+};
+
 initDataTables = (rootElement) => {
 // Sortable and searchable tables
 
@@ -141,35 +177,7 @@ initDataTables = (rootElement) => {
                                 "DataTables_" + action + "_" + settings.sInstance)
                         )
             ,
-            drawCallback: (settings) => {
-                $(`#${settings.sInstance}`).find("a.btn").click(
-                        (event) => {
-                    const target = $(event.currentTarget);
-                    if ((target.hasClass("disabled") || target.attr("disabled")) && target.attr("href").length > 1) {
-                        event.preventDefault();
-                        return;
-                    }
-                });
-                $(`#${settings.sInstance}`).find("a.delete-icon").click(
-                        (event) => {
-                    event.preventDefault();
-                    const target = $(event.currentTarget);
-                    const confirmMessage = target.data("confirm");
-                    const url = target.data("url");
-                    bootbox.confirm(confirmMessage, (result) => {
-                        if (result) {
-                            $.ajax({
-                                url,
-                                method: 'POST',
-                                success: () => {
-                                    target.closest("tr").fadeOut();
-                                }
-                            });
-                        }
-                    });
-                }
-                );
-            },
+            drawCallback: dataTableDrawCallback,
             columnDefs: [{targets: "no-sort", orderable: false}]
         });
     });
