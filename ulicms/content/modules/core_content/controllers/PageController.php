@@ -400,13 +400,16 @@ class PageController extends Controller {
         $search = $_REQUEST["search"]["value"];
 
         $renderer = new PageTableRenderer();
-
-        JSONResult($renderer->getData(
+		
+		$data = $renderer->getData(
                         $start,
                         $length,
                         $draw,
                         $search
-        ));
+        );
+
+        $json = json_encode($data, JSON_UNESCAPED_SLASHES);
+		return RawJSONResult($json);
     }
 
     protected function validateInput() {

@@ -37,26 +37,34 @@ class PageTableRenderer {
 		if(count($languages)){
 			$where .= " and language in (".implode(",", $languages).")";
 		}
-		$where .= " order by menu, position";
 
-        $results = Database::selectAll("content", $columns,
-                        $where);
-						
-		$totalCount = Database::getNumRows($results);
+		$countSql = "select count(id) as count from {prefix}content where $where";
+        $countResult = Database::query($countSql, true);
+		$countData = Database::fetchObject($countResult);
+		$totalCount = $countData->count;
+		
+		if($search){
+			$placeHolderString = "%".Database::escapeValue(strtolower($search))."%";
+			$where .= " and lower(title) like '{$placeHolderString}'";
+		}
+		
+		$where .= " order by menu, position";
+		
+		$countSql = "select count(id) as count from {prefix}content where $where";
+        $countResult = Database::query($countSql, true);
+		$countData = Database::fetchObject($countResult);
+		$filteredCount = $countData->count;
 		
 		$where .= " limit $start, $length";
 		
-		$resultsForPage = Database::selectAll("content", $columns,
-                        $where);
+		$resultsForPage = Database::selectAll("content", $columns, $where);
 		
         $result["data"] = $this->fetchResults($resultsForPage, $user);
+        $result["draw"] = $draw;
 
         $result["recordsTotal"] = $totalCount;
-        $filteredResults = $this->filterResults($result["data"], $search, $user);
-        $result["data"] = $filteredResults;
 
-        $result["recordsFiltered"] = count($filteredResults) < Database::getNumRows($resultsForPage) ? 
-		count($filteredResults) : $totalCount;
+        $result["recordsFiltered"] = $search ? $filteredCount : $totalCount;
 
         return $result;
     }
@@ -65,23 +73,9 @@ class PageTableRenderer {
         $filteredResults = [];
 
         while ($row = Database::fetchObject($results)) {
-                $filteredResults[] = $this->pageDatasetsToResponse($row, $user);
+            $filteredResults[] = $this->pageDatasetsToResponse($row, $user);
             }
         
-        return $filteredResults;
-    }
-
-    protected function filterResults(array $data, ?string $search, User $user) {
-        $filteredResults = [];
-        foreach ($data as $ds) {
-            $addThis = true;
-            if ($search and ! stristr($ds[0], $search)) {
-                $addThis = false;
-            }
-            if ($addThis) {
-                $filteredResults[] = $ds;
-            }
-        }
         return $filteredResults;
     }
 
