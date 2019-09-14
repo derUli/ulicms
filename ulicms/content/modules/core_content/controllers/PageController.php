@@ -149,7 +149,7 @@ class PageController extends Controller {
         }
 
 
-        $permissionObjects = array("admins", "group", "owner", "other");
+        $permissionObjects = array("admins", "group", "owner", "others");
         foreach ($permissionObjects as $object) {
             $model->getPermissions()->setEditRestriction(
                     $object,
