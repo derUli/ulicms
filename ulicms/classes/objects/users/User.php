@@ -504,7 +504,6 @@ class User extends Model {
 
         $groups = array_merge($primaryGroup, $secondaryGroups);
         $groups = array_filter($groups);
-        $groups = array_unique($groups);
         return array_values($groups);
     }
 

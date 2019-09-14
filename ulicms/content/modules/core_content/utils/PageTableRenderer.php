@@ -17,29 +17,46 @@ class PageTableRenderer {
     public function getData($start = 0, $length = 10, $draw = 1, $search = null) {
         $result = [];
         $result["data"] = [];
+		
+		$columns = [
+			"id", "title", "menu", "position", "parent_id", "active", "language"
+		];
+		
+		$user = User::fromSessionData();
+		$groups = $user->getAllGroups();
 
-        $where = "deleted_at is null order by menu, position";
+        $languages = [];
+        foreach ($groups as $group) {
+            foreach ($group->getLanguages() as $language) {
+                $languages[] = "'" . Database::escapeValue($language->getLanguageCode()). "'";
+            }
+        }
 
-        $results = Database::selectAll("content", [],
+        $where = "deleted_at is null";
+		
+		if(count($languages)){
+			$where .= " and language in (".implode(",", $languages).")";
+		}
+		$where .= " order by menu, position";
+
+        $results = Database::selectAll("content", $columns,
                         $where);
+						
+		$totalCount = Database::getNumRows($results);
+		
+		$where .= " limit $start, $length";
+		
+		$resultsForPage = Database::selectAll("content", $columns,
+                        $where);
+		
+        $result["data"] = $this->fetchResults($resultsForPage, $user);
 
-        $user = User::fromSessionData();
-
-        $result["data"] = $this->fetchResults($results, $user, $search);
-
-        $result["draw"] = $draw;
-
-        $result["recordsTotal"] = count($result["data"]);
-        $filteredResults = $this->filterResults($result["data"], $search);
+        $result["recordsTotal"] = $totalCount;
+        $filteredResults = $this->filterResults($result["data"], $search, $user);
         $result["data"] = $filteredResults;
 
-        $result["recordsFiltered"] = count($filteredResults);
-
-        $result["data"] = array_slice(
-                $result["data"],
-                $start > 0 ? $start - 1 : 0,
-                $length
-        );
+        $result["recordsFiltered"] = count($filteredResults) < Database::getNumRows($resultsForPage) ? 
+		count($filteredResults) : $totalCount;
 
         return $result;
     }
@@ -47,29 +64,14 @@ class PageTableRenderer {
     protected function fetchResults($results, User $user) {
         $filteredResults = [];
 
-        $groups = $user->getAllGroups();
-
-        $languages = [];
-        foreach ($groups as $group) {
-            foreach ($group->getLanguages() as $language) {
-                $languages[] = $language->getLanguageCode();
-            }
-        }
-
         while ($row = Database::fetchObject($results)) {
-            $addThis = true;
-
-            if (count($languages) and ! in_array($row->language, $languages)) {
-                $addThis = false;
+                $filteredResults[] = $this->pageDatasetsToResponse($row, $user);
             }
-            if ($addThis) {
-                $filteredResults[] = $this->pageDatasetsToResponse($row);
-            }
-        }
+        
         return $filteredResults;
     }
 
-    protected function filterResults(array $data, ?string $search) {
+    protected function filterResults(array $data, ?string $search, User $user) {
         $filteredResults = [];
         foreach ($data as $ds) {
             $addThis = true;
@@ -83,18 +85,16 @@ class PageTableRenderer {
         return $filteredResults;
     }
 
-    protected function pageDatasetsToResponse($dataset) {
-
+    protected function pageDatasetsToResponse($dataset, User $user) {
         $viewButtonRenderer = new ViewButtonRenderer();
         $editButtonRenderer = new EditButtonRenderer();
         $deleteButtonRender = new DeleteButtonRenderer();
 
-        $currentUser = User::fromSessionData();
         $id = intval($dataset->id);
 
-        $viewButton = $viewButtonRenderer->render($id, $currentUser);
-        $editButton = $editButtonRenderer->render($id, $currentUser);
-        $deleteButton = $deleteButtonRender->render($id, $currentUser);
+        $viewButton = $viewButtonRenderer->render($id, $user);
+        $editButton = $editButtonRenderer->render($id, $user);
+        $deleteButton = $deleteButtonRender->render($id, $user);
 
         return [
             _esc($dataset->title),
