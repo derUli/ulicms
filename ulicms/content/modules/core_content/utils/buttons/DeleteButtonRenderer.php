@@ -7,6 +7,8 @@ namespace UliCMS\CoreContent\Partials;
 use Template;
 use ViewBag;
 use User;
+use ModuleHelper;
+use PageController;
 use UliCMS\Security\ContentPermissionChecker;
 use function UliCMS\HTML\icon;
 use function UliCMS\HTML\link;
@@ -18,6 +20,7 @@ class DeleteButtonRenderer {
     public function render($pageId, User $user) {
         $permitted = true;
 
+
         // check edit permissions
         $pagePermissionChecker = new ContentPermissionChecker($user->getId());
 
@@ -28,7 +31,16 @@ class DeleteButtonRenderer {
         $icon = icon("fa fa-trash fa-2x");
 
         $url = "#";
-        $link = link($url, $icon, true);
+        $message = get_secure_translation("confirm_delete_page",
+                ["%title%" => getPageTitleByID($pageId)
+                ]
+                );
+        $attributes = [
+            "data-confirm" => $message,
+            "data-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "delete", "page={$pageId}csrf_token=" . get_csrf_token()),
+            "class" => "delete-icon"
+        ];
+        $link = link($url, $icon, true, null, $attributes);
         ViewBag::set("button", $link);
 
         return $permitted ? Template::executeModuleTemplate(self::MODULE_NAME, "pages/partials/delete_button.php") : "";

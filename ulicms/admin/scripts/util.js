@@ -147,12 +147,30 @@ initDataTables = (rootElement) => {
                     const target = $(event.currentTarget);
                     if ((target.hasClass("disabled") || target.attr("disabled")) && target.attr("href").length > 1) {
                         event.preventDefault();
+                        return;
                     }
                 });
-
+                $(`#${settings.sInstance}`).find("a.delete-icon").click(
+                        (event) => {
+                    event.preventDefault();
+                    const target = $(event.currentTarget);
+                    const confirmMessage = target.data("confirm");
+                    const url = target.data("url");
+                    bootbox.confirm(confirmMessage, (result) => {
+                        if (result) {
+                            $.ajax({
+                                url,
+                                method: 'POST',
+                                success: () => {
+                                    target.closest("tr").fadeOut();
+                                }
+                            });
+                        }
+                    });
+                }
+                );
             },
             columnDefs: [{targets: "no-sort", orderable: false}]
         });
-    })
-
+    });
 };

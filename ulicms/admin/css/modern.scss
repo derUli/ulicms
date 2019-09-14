@@ -929,13 +929,14 @@ pre {
         display: none;
     }
 }
-@media (max-width: 650px) {
-    .dataTables_length {
-        display: none;
+@media (max-width: 640px) {
+    .dataTables_length,
+    .dataTables_filter{
+        label{
+            width: 100%;
+        }
     }
-    .dataTables_filter {
-        display: none;
-    }
+
 }
 @media (max-width: 1200px) {
     table.tablesorter {

@@ -17,3 +17,5 @@ add_translation("banner", get_translation("advertisements"));
 add_translation("page_type", "Page Type");
 
 add_translation("go_up", "Go Up");
+
+add_translation("confirm_delete_page", "Do your really want to delete the page \"%title%\"?");

@@ -1,8 +1,23 @@
 /* global bootbox, PasswordSecurityTranslation, MenuTranslation */
 
 // Internet Exploder caches AJAX requests by default
-$(document).ready(() =>
-    $.ajaxSetup({cache: false})
+$(document).ready(() => {
+    $.ajaxSetup({cache: false});
+    const token = $("body").data("csrf-token");
+
+    $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
+        if (options.type.toLowerCase() === "post") {
+            // initialize `data` to empty string if it does not exist
+            options.data = options.data || "";
+
+            // add leading ampersand if `data` is non-empty
+            options.data += options.data ? "&" : "";
+
+            // add _token entry
+            options.data += "csrf_token=" + encodeURIComponent(token);
+        }
+    });
+}
 );
 
 $(() => {
