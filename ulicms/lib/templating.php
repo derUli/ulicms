@@ -36,7 +36,7 @@ function get_og_tags(?string $slug = null): string {
         $og_description = $og_data["og_description"];
         $og_url = getCurrentURL();
 
-// Falls kein og_title für die Seite gesetzt ist, Standardtitel bzw. Headline verwenden
+        // Falls kein og_title für die Seite gesetzt ist, Standardtitel bzw. Headline verwenden
         if (is_null($og_title) or empty($og_title)) {
             $og_title = get_headline();
         }

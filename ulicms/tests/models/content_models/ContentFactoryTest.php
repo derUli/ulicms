@@ -5,9 +5,10 @@ use UliCMS\Exceptions\UnknownContentTypeException;
 
 class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
 
-    public function tearDown(){
+    public function tearDown() {
         Database::deleteFrom("content", "type = 'gibts_nicht'");
     }
+
     public function testGetAllbyType() {
         $types = TypeMapper::getMappings();
         $this->assertGreaterThanOrEqual(11, count($types));
@@ -45,11 +46,11 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
     public function testThrowsExceptionOnUnknownTypes() {
         $userManager = new UserManager();
         $user = $userManager->getAllUsers()[0];
-        
+
         $group = Group::getAll()[0];
-        
+
         $page = new Page();
-        
+
         $page->type = "gibts_nicht";
         $page->position = 0;
         $page->language = 'de';
@@ -59,7 +60,7 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
         $page->content = '';
         $page->author_id = $user->getId();
         $page->group_id = $group->getId();
-        
+
         $page->save();
 
         $this->expectException(UnknownContentTypeException::class);
@@ -67,7 +68,6 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
                 "Content with id={$page->getId()} has unknown content type \"{$page->type}\"");
 
         ContentFactory::getBySlugAndLanguage("test-123", "de");
-
     }
 
     public function testGetAllByParent() {
