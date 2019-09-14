@@ -18,7 +18,7 @@ class PageTableRenderer {
         $result = [];
         $result["data"] = [];
 
-        $where = "deleted_at is null";
+        $where = "deleted_at is null order by menu, position";
 
         $results = Database::selectAll("content", [],
                         $where);
@@ -29,18 +29,17 @@ class PageTableRenderer {
 
         $result["draw"] = $draw;
 
+        $result["recordsTotal"] = count($result["data"]);
+        $filteredResults = $this->filterResults($result["data"], $search);
+        $result["data"] = $filteredResults;
+
+        $result["recordsFiltered"] = count($filteredResults);
+
         $result["data"] = array_slice(
                 $result["data"],
                 $start > 0 ? $start - 1 : 0,
                 $length
         );
-
-        $filteredResults = $this->filterResults($result["data"], $search);
-
-        $result["recordsFiltered"] = count($filteredResults);
-        $result["recordsTotal"] = count($result["data"]);
-
-        $result["data"] = $filteredResults;
 
         return $result;
     }
