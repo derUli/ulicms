@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Security\Encryption;
+use UliCMS\Exceptions\NotImplementedException;
 
 class UserTest extends \PHPUnit\Framework\TestCase {
 
@@ -257,6 +258,10 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals($user->getUsername(), $sessionData["ulicms_login"]);
 
         $this->assertEquals($user->getLastname(), $sessionData["lastname"]);
+    }
+
+    public function testGetAllGroups() {
+        throw new NotImplementedException();
     }
 
 }

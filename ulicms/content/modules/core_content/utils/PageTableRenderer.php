@@ -9,56 +9,57 @@ use User;
 use UliCMS\CoreContent\Partials\ViewButtonRenderer;
 use UliCMS\CoreContent\Partials\EditButtonRenderer;
 use UliCMS\CoreContent\Partials\DeleteButtonRenderer;
+use UliCMS\CoreContent\Partials\UnDeleteButtonRenderer;
 
 class PageTableRenderer {
 
     const MODULE_NAME = "core_content";
 
-    public function getData($start = 0, $length = 10, $draw = 1, $search = null) {
+    public function getData($start = 0, $length = 10, $draw = 1, $search = null, $view = "default") {
         $result = [];
         $result["data"] = [];
-		
-		$columns = [
-			"id", "title", "menu", "position", "parent_id", "active", "language"
-		];
-		
-		$user = User::fromSessionData();
-		$groups = $user->getAllGroups();
+
+        $columns = [
+            "id", "title", "menu", "position", "parent_id", "active", "language", "deleted_at"
+        ];
+
+        $user = User::fromSessionData();
+        $groups = $user->getAllGroups();
 
         $languages = [];
         foreach ($groups as $group) {
             foreach ($group->getLanguages() as $language) {
-                $languages[] = "'" . Database::escapeValue($language->getLanguageCode()). "'";
+                $languages[] = "'" . Database::escapeValue($language->getLanguageCode()) . "'";
             }
         }
 
-        $where = "deleted_at is null";
-		
-		if(count($languages)){
-			$where .= " and language in (".implode(",", $languages).")";
-		}
+        $where = $view === "default" ? "deleted_at is null" : "deleted_at is not null";
 
-		$countSql = "select count(id) as count from {prefix}content where $where";
+        if (count($languages)) {
+            $where .= " and language in (" . implode(",", $languages) . ")";
+        }
+
+        $countSql = "select count(id) as count from {prefix}content where $where";
         $countResult = Database::query($countSql, true);
-		$countData = Database::fetchObject($countResult);
-		$totalCount = $countData->count;
-		
-		if($search){
-			$placeHolderString = "%".Database::escapeValue(strtolower($search))."%";
-			$where .= " and lower(title) like '{$placeHolderString}'";
-		}
-		
-		$where .= " order by menu, position";
-		
-		$countSql = "select count(id) as count from {prefix}content where $where";
+        $countData = Database::fetchObject($countResult);
+        $totalCount = $countData->count;
+
+        if ($search) {
+            $placeHolderString = "%" . Database::escapeValue(strtolower($search)) . "%";
+            $where .= " and lower(title) like '{$placeHolderString}'";
+        }
+
+        $where .= " order by menu, position";
+
+        $countSql = "select count(id) as count from {prefix}content where $where";
         $countResult = Database::query($countSql, true);
-		$countData = Database::fetchObject($countResult);
-		$filteredCount = $countData->count;
-		
-		$where .= " limit $start, $length";
-		
-		$resultsForPage = Database::selectAll("content", $columns, $where);
-		
+        $countData = Database::fetchObject($countResult);
+        $filteredCount = $countData->count;
+
+        $where .= " limit $start, $length";
+
+        $resultsForPage = Database::selectAll("content", $columns, $where);
+
         $result["data"] = $this->fetchResults($resultsForPage, $user);
         $result["draw"] = $draw;
 
@@ -74,21 +75,24 @@ class PageTableRenderer {
 
         while ($row = Database::fetchObject($results)) {
             $filteredResults[] = $this->pageDatasetsToResponse($row, $user);
-            }
-        
+        }
+
         return $filteredResults;
     }
 
     protected function pageDatasetsToResponse($dataset, User $user) {
         $viewButtonRenderer = new ViewButtonRenderer();
         $editButtonRenderer = new EditButtonRenderer();
-        $deleteButtonRender = new DeleteButtonRenderer();
+
+        $deleteButtonRenderer = new DeleteButtonRenderer();
+        $undeleteButtonRenderer = new UnDeleteButtonRenderer();
 
         $id = intval($dataset->id);
-
         $viewButton = $viewButtonRenderer->render($id, $user);
         $editButton = $editButtonRenderer->render($id, $user);
-        $deleteButton = $deleteButtonRender->render($id, $user);
+        $deleteButton = $deleteButtonRenderer->render($id, $user);
+        $undeleteButton = $undeleteButtonRenderer->render($id, $user);
+
 
         return [
             _esc($dataset->title),
@@ -106,7 +110,7 @@ class PageTableRenderer {
             ),
             $viewButton,
             $editButton,
-            $deleteButton
+            !$dataset->deleted_at ? $deleteButton : $undeleteButton
         ];
     }
 

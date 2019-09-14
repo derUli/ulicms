@@ -20,7 +20,6 @@ class DeleteButtonRenderer {
     public function render($pageId, User $user) {
         $permitted = true;
 
-
         // check edit permissions
         $pagePermissionChecker = new ContentPermissionChecker($user->getId());
 
@@ -34,7 +33,7 @@ class DeleteButtonRenderer {
         $message = get_secure_translation("confirm_delete_page",
                 ["%title%" => getPageTitleByID($pageId)
                 ]
-                );
+        );
         $attributes = [
             "data-confirm" => $message,
             "data-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "delete", "page={$pageId}csrf_token=" . get_csrf_token()),

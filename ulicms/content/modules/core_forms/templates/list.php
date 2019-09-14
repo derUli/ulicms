@@ -49,7 +49,7 @@ if (!$permissionChecker->hasPermission("forms")) {
                                        alt="<?php translate("edit"); ?>"
                                        title="<?php translate("edit"); ?>"></a></td>
                             <td class="text-center"
-                            <?php echo ModuleHelper::deleteButton(ModuleHelper::buildMethodCallUrl("FormController", "delete"), array("del" => $form ["id"])); ?>
+                                <?php echo ModuleHelper::deleteButton(ModuleHelper::buildMethodCallUrl("FormController", "delete"), array("del" => $form ["id"])); ?>
                         </td>
                     <?php } ?>
                 </tr>
@@ -57,19 +57,6 @@ if (!$permissionChecker->hasPermission("forms")) {
         </tbody>
     </table>
     </div>
-    <style type="text/css">
-        input.form-submit-url {
-            border: none;
-        }
-
-        tr.odd input.form-submit-url {
-            background-color: #eee !important;
-        }
-
-        tr.even input.form-submit-url {
-            background-color: #fff !important;
-        }
-    </style>
     <?php
     $translation = new JSTranslation();
     $translation->addKey("ask_for_delete");

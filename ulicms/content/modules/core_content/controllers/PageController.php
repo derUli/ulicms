@@ -15,6 +15,24 @@ class PageController extends Controller {
 
     const MODULE_NAME = "core_content";
 
+    public function getPagesListView() {
+        return $_SESSION["pages_list_view"] ?? "default";
+    }
+
+    public function recycleBin() {
+        $_SESSION["pages_list_view"] = "recycle_bin";
+
+        $url = ModuleHelper::buildActionURL("pages");
+        Request::redirect($url);
+    }
+
+    public function pages() {
+        $_SESSION["pages_list_view"] = "default";
+
+        $url = ModuleHelper::buildActionURL("pages");
+        Request::redirect($url);
+    }
+
     public function createPost() {
         $this->validateInput();
 
@@ -400,16 +418,17 @@ class PageController extends Controller {
         $search = $_REQUEST["search"]["value"];
 
         $renderer = new PageTableRenderer();
-		
-		$data = $renderer->getData(
-                        $start,
-                        $length,
-                        $draw,
-                        $search
+
+        $data = $renderer->getData(
+                $start,
+                $length,
+                $draw,
+                $search,
+                $this->getPagesListView()
         );
 
         $json = json_encode($data, JSON_UNESCAPED_SLASHES);
-		return RawJSONResult($json);
+        return RawJSONResult($json);
     }
 
     protected function validateInput() {
