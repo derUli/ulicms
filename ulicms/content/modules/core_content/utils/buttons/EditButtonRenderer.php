@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace UliCMS\CoreContent\Partials;
 
-use ContentFactory;
 use Template;
 use User;
 use ViewBag;

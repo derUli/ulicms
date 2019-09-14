@@ -379,14 +379,14 @@ if ($permissionChecker->hasPermission("pages")) {
                     <tr style="font-weight: bold;">
                         <th><?php translate("title"); ?>
                         </th>
-                        <th class="hide-on-mobile"><?php translate("menu"); ?>
+                        <th><?php translate("menu"); ?>
                         </th>
-                        <th class="hide-on-mobile"><?php translate("position"); ?>
+                        <th><?php translate("position"); ?>
                         </th>
-                        <th class="hide-on-mobile"><?php translate("parent_id"); ?>
+                        <th><?php translate("parent_id"); ?>
                         </th>
 
-                        <th class="hide-on-mobile"><?php translate("activated"); ?>
+                        <th><?php translate("activated"); ?>
                         </th>
                         <td class="no-sort text-center"><?php translate("view"); ?>
                         </td>

@@ -498,6 +498,16 @@ class User extends Model {
         $this->secondary_groups = $val;
     }
 
+    public function getAllGroups() {
+        $primaryGroup = [$this->getPrimaryGroup()];
+        $secondaryGroups = $this->getSecondaryGroups();
+
+        $groups = array_merge($primaryGroup, $secondaryGroups);
+        $groups = array_filter($groups);
+        $groups = array_unique($groups);
+        return array_values($groups);
+    }
+
     public function addSecondaryGroup($val): void {
         $this->secondary_groups[] = $val;
     }

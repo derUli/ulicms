@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace UliCMS\CoreContent\Partials;
 
-use ContentFactory;
 use Template;
 use ViewBag;
 use User;
@@ -14,16 +15,25 @@ class DeleteButtonRenderer {
 
     const MODULE_NAME = "core_content";
 
-    public function render($pageId) {
-        $content = ContentFactory::getByID($pageId);
+    public function render($pageId, User $user) {
+
+        // FIXME: check edit restrictions
+        $permitted = true;
+
+        // check edit permissions
+        $pagePermissionChecker = new ContentPermissionChecker($user->getId());
+
+        if (!$pagePermissionChecker->canDelete($pageId)) {
+            $permitted = false;
+        }
         // FIXME: check permissions
         $permitted = true;
 
-        $icon = icon("fas fa-pencil-alt fa-2x");
+        $icon = icon("fa fa-trash fa-2x");
 
-        $url = "../?goid={$pageId}";
+        $url = "#";
         $link = link($url, $icon, true);
-        ViewBag::set("button", "Löschen Icon");
+        ViewBag::set("button", $link);
 
         return $permitted ? Template::executeModuleTemplate(self::MODULE_NAME, "pages/partials/delete_button.php") : "";
     }

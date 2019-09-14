@@ -6,6 +6,8 @@ namespace UliCMS\CoreContent;
 
 use Database;
 use User;
+use ArrayHelper;
+use Group;
 use UliCMS\CoreContent\Partials\ViewButtonRenderer;
 use UliCMS\CoreContent\Partials\EditButtonRenderer;
 use UliCMS\CoreContent\Partials\DeleteButtonRenderer;
@@ -24,7 +26,9 @@ class PageTableRenderer {
         $results = Database::selectAll("content", [],
                         $where);
 
-        $result["data"] = $this->fetchResults($results);
+        $user = User::fromSessionData();
+
+        $result["data"] = $this->fetchResults($results, $user, $search);
 
         $result["draw"] = $draw;
 
@@ -33,18 +37,41 @@ class PageTableRenderer {
                 $start > 0 ? $start - 1 : 0,
                 $length
         );
-        $result["recordsFiltered"] = $search ? count($result["data"]) : Database::getNumRows($results);
-        $result["recordsTotal"] = Database::getNumRows($results);
+
+        $filteredResults = [];
+        foreach ($result["data"] as $ds) {
+            $addThis = true;
+            if ($search and ! stristr($ds["data"][0], $search)) {
+                $addThis = false;
+            }
+            if ($addThis) {
+                $filteredResults[] = $ds;
+            }
+        }
+        $result["recordsFiltered"] = count($filteredResults);
+        $result["recordsTotal"] = count($result["data"]);
+
+        $result["data"] = $filteredResults;
 
         return $result;
     }
 
-    protected function fetchResults($results, $search = null) {
+    protected function fetchResults($results, User $user, ?string $search = null) {
         $filteredResults = [];
+
+        $groups = $user->getAllGroups();
+
+        $languages = [];
+        foreach ($groups as $group) {
+            foreach ($group->getLanguages() as $language) {
+                $languages[] = $language->getLanguageCode();
+            }
+        }
+
         while ($row = Database::fetchObject($results)) {
             $addThis = true;
 
-            if ($search and ! stristr($row->title, $search)) {
+            if (count($languages) and ! in_array($row->language, $languages)) {
                 $addThis = false;
             }
             if ($addThis) {
@@ -54,8 +81,7 @@ class PageTableRenderer {
         return $filteredResults;
     }
 
-    protected
-            function pageDatasetsToResponse($dataset) {
+    protected function pageDatasetsToResponse($dataset) {
 
         $viewButtonRenderer = new ViewButtonRenderer();
         $editButtonRenderer = new EditButtonRenderer();
