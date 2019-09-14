@@ -104,18 +104,18 @@ $redirection = get_redirection();
 if ($redirection and ( is_active() or is_logged_in())) {
     Request::redirect($redirection, 302);
 }
-if(get_ID()){
-	try {
-		$page = ContentFactory::getByID(get_ID());
-		if (!is_null($page->id) and $page instanceof Language_Link) {
-			$language = new Language($page->link_to_language);
-			if (!is_null($language->getID()) and StringHelper::isNotNullOrWhitespace($language->getLanguageLink())) {
-				Request::redirect($language->getLanguageLink());
-			}
-		}
-	} catch (Exception $e) {
-		// TODO: Log error
-	}
+if (get_ID()) {
+    try {
+        $page = ContentFactory::getByID(get_ID());
+        if (!is_null($page->id) and $page instanceof Language_Link) {
+            $language = new Language($page->link_to_language);
+            if (!is_null($language->getID()) and StringHelper::isNotNullOrWhitespace($language->getLanguageLink())) {
+                Request::redirect($language->getLanguageLink());
+            }
+        }
+    } catch (Exception $e) {
+        // TODO: Log error
+    }
 }
 
 if (isset($_GET["goid"])) {
