@@ -17,6 +17,8 @@ class ViewButtonRenderer {
     const MODULE_NAME = "core_content";
 
     public function render(int $pageId, User $user) {
+        $permitted = true;
+
         $content = ContentFactory::getByID($pageId);
         if (!$content->isRegular()) {
             return "";
@@ -26,7 +28,7 @@ class ViewButtonRenderer {
         $pagePermissionChecker = new ContentPermissionChecker($user->getId());
 
         if (!$pagePermissionChecker->canRead($pageId)) {
-            return "";
+            $permitted = false;
         }
 
         $icon = icon("fa fa-eye fa-2x");
@@ -34,8 +36,9 @@ class ViewButtonRenderer {
         $url = "../?goid={$pageId}";
         $link = link($url, $icon, true);
         ViewBag::set("button", $link);
-        return Template::executeModuleTemplate(self::MODULE_NAME,
-                        "pages/partials/view_button.php");
+        return $permitted ?
+                Template::executeModuleTemplate(self::MODULE_NAME,
+                        "pages/partials/view_button.php") : "";
     }
 
 }

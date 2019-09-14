@@ -6,8 +6,6 @@ namespace UliCMS\CoreContent;
 
 use Database;
 use User;
-use ArrayHelper;
-use Group;
 use UliCMS\CoreContent\Partials\ViewButtonRenderer;
 use UliCMS\CoreContent\Partials\EditButtonRenderer;
 use UliCMS\CoreContent\Partials\DeleteButtonRenderer;
@@ -21,7 +19,6 @@ class PageTableRenderer {
         $result["data"] = [];
 
         $where = "deleted_at is null";
-
 
         $results = Database::selectAll("content", [],
                         $where);
@@ -38,16 +35,8 @@ class PageTableRenderer {
                 $length
         );
 
-        $filteredResults = [];
-        foreach ($result["data"] as $ds) {
-            $addThis = true;
-            if ($search and ! stristr($ds["data"][0], $search)) {
-                $addThis = false;
-            }
-            if ($addThis) {
-                $filteredResults[] = $ds;
-            }
-        }
+        $filteredResults = $this->filterResults($result["data"], $search);
+
         $result["recordsFiltered"] = count($filteredResults);
         $result["recordsTotal"] = count($result["data"]);
 
@@ -56,7 +45,7 @@ class PageTableRenderer {
         return $result;
     }
 
-    protected function fetchResults($results, User $user, ?string $search = null) {
+    protected function fetchResults($results, User $user) {
         $filteredResults = [];
 
         $groups = $user->getAllGroups();
@@ -81,6 +70,20 @@ class PageTableRenderer {
         return $filteredResults;
     }
 
+    protected function filterResults(array $data, ?string $search) {
+        $filteredResults = [];
+        foreach ($data as $ds) {
+            $addThis = true;
+            if ($search and ! stristr($ds[0], $search)) {
+                $addThis = false;
+            }
+            if ($addThis) {
+                $filteredResults[] = $ds;
+            }
+        }
+        return $filteredResults;
+    }
+
     protected function pageDatasetsToResponse($dataset) {
 
         $viewButtonRenderer = new ViewButtonRenderer();
@@ -89,7 +92,6 @@ class PageTableRenderer {
 
         $currentUser = User::fromSessionData();
         $id = intval($dataset->id);
-
 
         $viewButton = $viewButtonRenderer->render($id, $currentUser);
         $editButton = $editButtonRenderer->render($id, $currentUser);

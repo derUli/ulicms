@@ -17,8 +17,6 @@ class EditButtonRenderer {
     const MODULE_NAME = "core_content";
 
     public function render($pageId, User $user): string {
-
-        // FIXME: check edit restrictions
         $permitted = true;
 
         // check edit permissions
