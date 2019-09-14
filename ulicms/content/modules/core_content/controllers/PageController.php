@@ -11,7 +11,7 @@ use UliCMS\Utils\CacheUtil;
 use function UliCMS\HTML\stringContainsHtml;
 
 class PageController extends Controller {
-
+	const MODULE_NAME = "core_content";
     public function createPost() {
         $this->validateInput();
 
@@ -425,25 +425,28 @@ class PageController extends Controller {
         $result["recordsFiltered"] = $search ? count($result["data"]) : Database::getNumRows($results);
         $result["recordsTotal"] = Database::getNumRows($results);
 
-        sleep(10);
-
         JSONResult($result);
     }
 
     protected function pageDatasetsToResponse($dataset) {
+		
+		$viewButton = Template::executeModuleTemplate(self::MODULE_NAME, "pages/partials/view_button.php");
+		$editButton = Template::executeModuleTemplate(self::MODULE_NAME, "pages/partials/edit_button.php");
+		$deleteButton = Template::executeModuleTemplate(self::MODULE_NAME, "pages/partials/delete_button.php");
+		
         return [
-            $dataset->title,
-            get_translation($dataset->menu),
-            $dataset->position,
-            getPageTitleByID($dataset->parent_id),
+            _esc($dataset->title),
+            _esc(get_translation($dataset->menu)),
+            _esc($dataset->position),
+            _esc(getPageTitleByID($dataset->parent_id)),
             bool2YesNo(
                     boolval(
                             $dataset->active
                     )
             ),
-            "<strong>Test</strong>",
-            "<strong>Test</strong>",
-            "<strong>Test</strong>"
+            $viewButton,
+			$editButton,
+            $deleteButton
         ];
     }
 
