@@ -46,7 +46,7 @@ $migrator->migrate();
 // Enable HTML Minifying
 Settings::register("minify_html", "1");
 
-// Patch Manager zurücksetzen
+// Reset tracking of installed patches
 $pkg = new PackageManager();
 $pkg->truncateInstalledPatches();
 

@@ -6,6 +6,7 @@ use UliCMS\HTML as HTML;
 use UliCMS\Exceptions\NotImplementedException;
 use UliCMS\Constants\CommentStatus;
 use UliCMS\Utils\CacheUtil;
+use zz\Html\HTMLMinify;
 
 class CommentsController extends MainClass {
 
@@ -22,7 +23,7 @@ class CommentsController extends MainClass {
                 Flags::setNoCache(true);
                 Vars::set("comments_enabled", true);
             }
-        Vars::set("content_id", $page->id);
+            Vars::set("content_id", $page->id);
         }
     }
 
@@ -91,7 +92,7 @@ class CommentsController extends MainClass {
             $comment = new Comment($id);
             $comment->setRead(true);
             $comment->save();
-            HtmlResult(StringHelper::makeLinksClickable(HTML\text(trim($comment->getText()))));
+            HtmlResult(StringHelper::makeLinksClickable(HTML\text(trim($comment->getText()))), HttpStatusCode::OK, HTMLMinify::OPTIMIZATION_ADVANCED);
         } catch (FileNotFoundException $e) {
             HTMLResult(get_translation("not_found"), 404);
         }

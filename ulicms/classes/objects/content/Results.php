@@ -4,11 +4,14 @@
 
 declare(strict_types=1);
 
+use zz\Html\HTMLMinify;
 use UliCMS\Backend\BackendPageRenderer;
 
-function JSONResult($data, int $status = 200): void {
+function JSONResult($data, int $status = 200, $compact = true): void {
     Response::sendStatusHeader($status);
-    $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+    $json = $compact ?
+            json_encode($data, JSON_UNESCAPED_SLASHES) :
+            json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
     // get string size in Byte
     $size = getStringLengthInBytes($json);
     header('Content-Type: application/json');
@@ -26,9 +29,9 @@ function RawJSONResult(string $data, int $status = 200): void {
     exit();
 }
 
-function HTMLResult(string $data, int $status = 200): void {
+function HTMLResult(string $data, int $status = 200, int $optimizationLevel = HTMLMinify::OPTIMIZATION_SIMPLE): void {
     Response::sendStatusHeader($status);
-    $data = optimizeHtml($data);
+    $data = optimizeHtml($data, $optimizationLevel);
     $size = getStringLengthInBytes($data);
     header('Content-Type: text/html; charset=UTF-8');
     header("Content-length: $size");

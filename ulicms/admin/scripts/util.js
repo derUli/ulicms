@@ -61,10 +61,11 @@ bindTogglePassword = (inputField, checkboxField) => {
     });
 };
 checkboxChecked = (event) => {
-    const item = $(event.target).data("select-all-checkbox");
-    const group = $(event.target).data("checkbox-group");
+    const item = $(event.currentTarget).data("select-all-checkbox");
+    const group = $(event.currentTarget).data("checkbox-group");
     checkSelectAllIfAllChecked(item, group);
 };
+
 checkSelectAllIfAllChecked = (item, group) => {
     if (!item) {
         return;
@@ -75,7 +76,7 @@ checkSelectAllIfAllChecked = (item, group) => {
             + "']:checked").length === $("input[type=checkbox][data-checkbox-group='"
             + group + "']").length;
     // check the "Select All" Checkbox, else uncheck it
-    $(item).prop("checked", allSelected).change();
+    $(item).prop("checked", allSelected)
 };
 selectAllChecked = (event) => {
     const selectAllCheckbox = $(event.target);

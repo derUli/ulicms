@@ -3,8 +3,7 @@ $controller = ControllerRegistry::get("HomeController");
 $model = $controller->getModel();
 ?>
 <table>
-    <tr style="font-weight: bold;
-        ">
+    <tr style="font-weight: bold;">
         <td><?php translate("title"); ?>
         </td>
         <td><?php translate("views"); ?>

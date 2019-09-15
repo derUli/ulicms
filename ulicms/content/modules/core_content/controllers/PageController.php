@@ -9,6 +9,7 @@ use UliCMS\Security\PermissionChecker;
 use UliCMS\Models\Content\TypeMapper;
 use UliCMS\Constants\LinkTarget;
 use UliCMS\Utils\CacheUtil;
+use zz\Html\HTMLMinify;
 use function UliCMS\HTML\stringContainsHtml;
 
 class PageController extends Controller {
@@ -370,13 +371,11 @@ class PageController extends Controller {
         $lang = $_REQUEST["mlang"];
         $menu = $_REQUEST["mmenu"];
         $parent_id = $_REQUEST["mparent"];
+
+        ob_start();
         ?>
         <option selected="selected" value="NULL">
-            [
-            <?php
-            translate("none");
-            ?>
-            ]
+            [<?php translate("none"); ?>]
         </option>
         <?php
         $pages = getAllPages($lang, "title", false, $menu);
@@ -384,20 +383,20 @@ class PageController extends Controller {
             ?>
             <option value="<?php
             echo $page["id"];
-            ?>"
-                    <?php if ($page["id"] == $parent_id) echo "selected"; ?>>
+            ?>" <?php
+                    if ($page["id"] == $parent_id) {
+                        echo "selected";
+                    }
+                    ?>>
                         <?php
                         echo esc($page["title"]);
                         ?>
-                (ID:
-                <?php
-                echo $page["id"];
-                ?>
-                )
+                (ID: <?php echo $page["id"]; ?>)
             </option>
             <?php
         }
-        exit();
+        HTMLResult(ob_get_clean(), HttpStatusCode::OK,
+                HTMLMinify::OPTIMIZATION_ADVANCED);
     }
 
     public function getPages() {

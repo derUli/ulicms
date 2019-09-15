@@ -17,7 +17,7 @@ class UnDeleteButtonRenderer {
 
     const MODULE_NAME = "core_content";
 
-    public function render($pageId, User $user) {
+    public function render(int $pageId, User $user) {
         $permitted = true;
 
         // check edit permissions

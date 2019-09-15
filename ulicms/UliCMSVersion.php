@@ -21,7 +21,7 @@ class UliCMSVersion {
         return strval($this->releaseYear);
     }
 
-    // Gibt den Codenamen der UliCMS Version zurück (z.B. 2013R2)
+    //  returns the codename of this UliCMS release
     public function getVersion(): string {
         return $this->version;
     }
@@ -34,12 +34,12 @@ class UliCMSVersion {
         return $this->developmentVersion;
     }
 
-    // Gibt die interne Versionsnummer als Array mit Integer-Datentyp zurück
+    // returns the version number
     public function getInternalVersion(): array {
         return $this->internalVersion;
     }
 
-    // Gibt die interne Versionsnummer als String mit Integer-Datentyp zurück
+    // Returns the full version number as string
     public function getInternalVersionAsString(): string {
         return implode(".", $this->internalVersion);
     }

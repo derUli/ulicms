@@ -1,4 +1,4 @@
-<script type="text/javascript"
+<script
         src="<?php
         echo getModulePath("slicknav");
         ?>dist/jquery.slicknav.min.js?version=<?php echo getModuleMeta("slicknav", "version"); ?>"></script>

@@ -16,7 +16,7 @@ class EditButtonRenderer {
 
     const MODULE_NAME = "core_content";
 
-    public function render($pageId, User $user): string {
+    public function render(int $pageId, User $user): string {
         $permitted = true;
 
         // check edit permissions

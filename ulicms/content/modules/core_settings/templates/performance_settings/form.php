@@ -67,7 +67,7 @@ if (!$permissionChecker->hasPermission("performance_settings")) {
         <button type="submit" name="submit" class="btn btn-primary voffset3">
             <i class="fa fa-save"></i> <?php translate("save_changes"); ?></button>
     </p>
-    <script type="text/javascript">
+    <script>
         $("#form").ajaxForm({beforeSubmit: function (e) {
                 $("#message").html("");
                 $("#loading").show();

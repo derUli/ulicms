@@ -12,7 +12,7 @@ if (isset($_POST["change_password"])) {
     }
 }
 if (!$_SESSION["require_password_change"]) {
-    echo '<script type="text/javascript">location.replace(window.location.href);</script>';
+    echo '<script>location.replace(window.location.href);</script>';
 } else {
     ?>
     <form id="change_password_form" action="index.php" method="post">

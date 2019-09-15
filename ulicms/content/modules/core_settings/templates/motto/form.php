@@ -63,7 +63,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
         </tr>
     </table>
     <?php echo ModuleHelper::endForm(); ?>
-    <script type="text/javascript">
+    <script>
         $("#motto_settings").ajaxForm({beforeSubmit: function (e) {
                 $("#message").html("");
                 $("#loading").show();

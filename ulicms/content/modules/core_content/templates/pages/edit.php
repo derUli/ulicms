@@ -295,7 +295,7 @@ if ($permissionChecker->hasPermission("pages")) {
                         <?php echo Categories::getHTMLSelect($row->category_id); ?>
                         <div id="menu_image_div" class="voffset3">
                             <strong><?php translate("menu_image"); ?> </strong><br />
-                            <script type="text/javascript">
+                            <script>
 
                             </script>
                             <input type="text" id="menu_image" name="menu_image"

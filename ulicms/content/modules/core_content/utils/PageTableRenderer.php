@@ -21,7 +21,7 @@ class PageTableRenderer {
 
     const MODULE_NAME = "core_content";
 
-    public function getData($start = 0, $length = 10, $draw = 1, $search = null, $view = "default") {
+    public function getData(int $start = 0, int $length = 10, int $draw = 1, ?string $search = null, string $view = "default"): array {
         $result = [];
         $result["data"] = [];
 
@@ -98,7 +98,7 @@ class PageTableRenderer {
     }
 
     // builds an array which is used to show table data in frontend
-    protected function pageDatasetsToResponse($dataset, User $user) {
+    protected function pageDatasetsToResponse(object $dataset, User $user) {
         $viewButtonRenderer = new ViewButtonRenderer();
         $editButtonRenderer = new EditButtonRenderer();
 
