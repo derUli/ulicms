@@ -34,7 +34,8 @@ if ($permissionChecker->hasPermission("pages")) {
             <div id="page-list">
                 <div class="row">
                     <div class="col-xs-6">
-                        <a href="#" class="btn btn-primary"><i
+                        <a href="<?php echo ModuleHelper::buildMethodCallUrl(PageController::class, "emptyTrash"); ?>"
+                           class="btn btn-primary"><i
                                 class="fas fa-broom"></i> <?php translate("empty_recycle_bin"); ?></a>
                     </div>
                     <div class="col-xs-6 text-right">
@@ -67,7 +68,11 @@ if ($permissionChecker->hasPermission("pages")) {
                             </td>
                             <td class="no-sort text-center"><?php translate("edit"); ?>
                             </td>
-                            <td class="no-sort text-center"><?php translate("delete"); ?>
+                            <td class="no-sort text-center"><?php
+                                translate(
+                                        $controller->getPagesListView() === "default" ? "delete" : "restore"
+                                );
+                                ?>
                             </td>
                         </tr>
                     </thead>

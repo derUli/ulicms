@@ -21,3 +21,5 @@ add_translation("page_type", "Seitentyp");
 add_translation("go_up", "Nach oben");
 
 add_translation("confirm_delete_page", "Möchten Sie die Seite \"%title%\" wirklich löschen?");
+
+add_translation("confirm_undelete_page", "Möchten Sie die Seite \"%title%\" wiederherstellen?");

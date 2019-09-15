@@ -138,11 +138,10 @@ dataTableDrawCallback = (settings) => {
 };
 
 initDataTables = (rootElement) => {
-// Sortable and searchable tables
-
-// Internet Exploder doesn't support URLSearchParams,
-// but which caveman are still using IE?
-// Fuck IE, Fuck Microsuck since Windows 8
+    // Sortable and searchable tables
+    // Internet Exploder doesn't support URLSearchParams,
+    // but which caveman are still using IE?
+    // Fuck IE, Fuck Microsuck since Windows 8
     const urlParams = new URLSearchParams(window.location.search);
     // get current action from url
     // this is used as identifier when saving and loading the state

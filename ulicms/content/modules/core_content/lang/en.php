@@ -19,3 +19,5 @@ add_translation("page_type", "Page Type");
 add_translation("go_up", "Go Up");
 
 add_translation("confirm_delete_page", "Do your really want to delete the page \"%title%\"?");
+
+add_translation("confirm_undelete_page", "Do your really want to restore the page \"%title%\"?");

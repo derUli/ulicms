@@ -27,7 +27,22 @@ class UnDeleteButtonRenderer {
             $permitted = false;
         }
 
-        return $permitted ? "Wiederherstellen" : null;
+        $icon = icon("fas fa-trash-restore fa-2x");
+
+        $url = "#";
+        $message = get_secure_translation("confirm_undelete_page",
+                ["%title%" => getPageTitleByID($pageId)
+                ]
+        );
+        $attributes = [
+            "data-confirm" => $message,
+            "data-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "undelete", "page={$pageId}csrf_token=" . get_csrf_token()),
+            "class" => "delete-icon"
+        ];
+        $link = link($url, $icon, true, null, $attributes);
+        ViewBag::set("button", $link);
+
+        return $permitted ? Template::executeModuleTemplate(self::MODULE_NAME, "pages/partials/delete_button.php") : "";
     }
 
 }

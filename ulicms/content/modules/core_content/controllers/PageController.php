@@ -295,17 +295,6 @@ class PageController extends Controller {
         Request::redirect(ModuleHelper::buildActionURL("pages"));
     }
 
-    public function resetFilters() {
-        // reset all filters
-        foreach ($_SESSION as $key => $value) {
-            if (startsWith($key, "filter_")) {
-                unset($_SESSION[$key]);
-            }
-        }
-
-        Request::redirect(ModuleHelper::buildActionURL("pages"));
-    }
-
     public function getContentTypes() {
         $json = json_encode(DefaultContentTypes::getAll(), JSON_UNESCAPED_SLASHES);
 
