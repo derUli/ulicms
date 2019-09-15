@@ -8,6 +8,7 @@ class UserController extends Controller {
     private $logger;
 
     public function __construct() {
+        parent::__construct();
         $this->logger = LoggerRegistry::get("audit_log");
     }
 
@@ -137,7 +138,7 @@ class UserController extends Controller {
         if ($this->logger) {
             $user = getUserById(get_user_id());
             $name = isset($user["username"]) ? $user["username"] : AuditLog::UNKNOWN;
-            $this->logger->debug("User $name - Deleted User with id ($admin)");
+            $this->logger->debug("User $name - Deleted User with id ($id)");
         }
         Request::redirect(ModuleHelper::buildActionURL("admins"));
     }

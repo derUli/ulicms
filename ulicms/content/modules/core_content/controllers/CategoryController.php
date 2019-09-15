@@ -8,6 +8,7 @@ class CategoryController extends Controller {
     private $logger;
 
     public function __construct() {
+        parent::__construct();
         $this->logger = LoggerRegistry::get("audit_log");
     }
 

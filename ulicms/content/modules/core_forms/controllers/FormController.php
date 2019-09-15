@@ -5,6 +5,7 @@ use UliCMS\Constants\AuditLog;
 class FormController extends Controller {
 
     public function __construct() {
+        parent::__construct();
         $this->logger = LoggerRegistry::get("audit_log");
     }
 

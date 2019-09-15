@@ -55,7 +55,7 @@ if ($permissionChecker->hasPermission("expert_settings")) {
                 </tbody>
             </table>
         </div>
-    <?php
+        <?php
     }
     $translation = new JSTranslation();
     $translation->addKey("ask_for_delete");
