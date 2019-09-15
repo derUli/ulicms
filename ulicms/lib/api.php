@@ -846,12 +846,16 @@ function getCurrentURL(): string {
  * bzw.
  * seite.html;
  */
-function buildSEOUrl($page = false, bool $redirection = null, string $format = "html") {
+function buildSEOUrl(?string $page = null, ?string $redirection = null, ?string $format = null) {
     if (!is_null($redirection) and ! empty($redirection)) {
         return $redirection;
     }
-    if ($page === false) {
+    if (!$page) {
         $page = get_requested_pagename();
+    }
+
+    if (!$format) {
+        $format = get_format() ? get_format() : "html";
     }
 
     if (is_string($redirection) and startsWith($redirection, "#")) {

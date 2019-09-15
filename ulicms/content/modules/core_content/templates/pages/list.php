@@ -440,7 +440,7 @@ if ($permissionChecker->hasPermission("pages")) {
         <?php
         if ($_SESSION["filter_parent"] and $_SESSION["filter_parent"] != '-') {
             $parentPage = ContentFactory::getByID($_SESSION["filter_parent"]);
-            $parentId = $parentPage->parent_id ? $parentPage : "-";
+            $parentId = $parentPage->parent_id ? $parentPage->parent_id : "-";
             ?>
             <div class="form-group">
                 <a href="<?php

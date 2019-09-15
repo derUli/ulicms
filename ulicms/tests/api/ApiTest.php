@@ -717,4 +717,32 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(containsModule($page->slug, "nicht_enthalten"));
     }
 
+    public function testBuildSEOUrlWithoutAnythingNoPageSpecified() {
+        unset($_GET["seite"]);
+        unset($_GET["html"]);
+
+        $this->assertEquals(get_frontpage() . ".html", buildSEOUrl());
+    }
+
+    public function testBuildSEOUrlWithoutAnything() {
+        set_requested_pagename("hello_world", null, "pdf");
+        $this->assertEquals("hello_world.pdf", buildSEOUrl());
+    }
+
+    public function testBuildSEOUrlWithPage() {
+        $this->assertEquals("foobar.html", buildSEOUrl("foobar"));
+    }
+
+    public function testBuildSEOUrlWithPageAndRedirection() {
+        $this->assertEquals("#", buildSEOUrl("foobar", "#"));
+
+        $this->assertEquals("https://google.com", buildSEOUrl("foobar",
+                        "https://google.com"));
+    }
+
+    public function testBuildSEOUrlWithPageAnd() {
+        $this->assertEquals("foobar.txt",
+                buildSEOUrl("foobar", null, "txt"));
+    }
+
 }
