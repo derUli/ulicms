@@ -5,7 +5,7 @@ Neue Features:
 * Diverse Performance Verbesserungen
 
 Neue API-Methoden
-* User->getAllGroups()
+* User->getAllGroups(): array
 
 Entfernte Features:
 * Sortierung der Seitenlistn und Dropdown Filter
