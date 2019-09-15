@@ -2,9 +2,14 @@
 
 Neue Features:
 * Serverseitige Pagination für Seitenverwaltung
+* Diverse Performance Verbesserungen
 
 Neue API-Methoden
 * User->getAllGroups()
+
+Entfernte Features:
+* Sortierung der Seitenlistn und Dropdown Filter
+  Diese Features werden in den nächsten UliCMS Releases erneut hinzugefügt werden.
 
 ===== Neues in UliCMS 2019.4 =====
 

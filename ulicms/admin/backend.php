@@ -37,10 +37,10 @@ do_event("custom_lang_" . $syslang);
 do_event("after_custom_lang");
 
 // Cross-Site-Request-Forgery Protection
-if (logged_in() and $_SERVER["REQUEST_METHOD"] == "POST" and ! isset($_REQUEST["ajax_cmd"]) and ! defined("NO_ANTI_CSRF")) {
-    if (!check_csrf_token()) {
-        ExceptionResult("This is probably a CSRF attack!", HttpStatusCode::FORBIDDEN);
-    }
+if ((logged_in()
+        and Request::isPost()
+        and ! defined("NO_ANTI_CSRF")) and ! check_csrf_token()) {
+    ExceptionResult("This is probably a CSRF attack!", HttpStatusCode::FORBIDDEN);
 }
 
 // set locale for date formats and other stuff
