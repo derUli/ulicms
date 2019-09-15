@@ -26,8 +26,9 @@ class UserTest extends \PHPUnit\Framework\TestCase {
 
     public function tearDown() {
         $this->setUp();
-        Database::pQuery("delete from `{prefix}groups` where name = ?", array(
-            "Other Group"
+        Database::pQuery("delete from `{prefix}groups` where name like ? or name like ?", array(
+            "Other Grou%",
+            "Main Group"
                 ), true);
         unset($_SERVER["REQUEST_URI"]);
     }
@@ -90,8 +91,8 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(true, $user->getRequirePasswordChange());
         $this->assertEquals("bye", $user->getAboutMe());
 
-        // This always returns the URL of an placeholder image
-        // since the new avatar feature is not implemented yet
+// This always returns the URL of an placeholder image
+// since the new avatar feature is not implemented yet
         $this->assertTrue(endsWith($user->getAvatar(), "/admin/gfx/no_avatar.png"));
 
         $user->delete();
@@ -260,8 +261,59 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals($user->getLastname(), $sessionData["lastname"]);
     }
 
-    public function testGetAllGroups() {
-        throw new NotImplementedException();
+    public function testGetAllGroupsReturnsEmptyArray() {
+        $user = new User();
+        $user->setUsername("john-doe");
+        $user->setFirstname("John");
+        $user->setLastname("Doe");
+        $user->setPassword("password123");
+        $user->setEmail("john@doe.com");
+        $user->save();
+
+        $this->assertCount(0, $user->getAllGroups());
+
+        $user->delete();
+    }
+
+    public function testGetAllGroupsReturnsGroups() {
+
+        $user = new User();
+        $user->setUsername("john-doe");
+        $user->setFirstname("John");
+        $user->setLastname("Doe");
+        $user->setPassword("password123");
+        $user->setEmail("john@doe.com");
+
+        $group1 = new Group();
+        $group1->setName("Main Group");
+        $group1->save();
+
+        $group2 = new Group();
+        $group2->setName("Other Group 1");
+        $group2->save();
+
+        $group3 = new Group();
+        $group3->setName("Other Group 2");
+        $group3->save();
+
+        $user->setPrimaryGroup($group1);
+        $user->setSecondaryGroups([$group2, $group3]);
+        $user->save();
+
+        $allGroups = $user->getAllGroups();
+        $this->assertCount(3, $allGroups);
+
+        $this->assertEquals($allGroups[0]->getName(),
+                "Main Group"
+        );
+        $this->assertEquals($allGroups[1]->getName(),
+                "Other Group 1"
+        );
+        $this->assertEquals($allGroups[2]->getName(),
+                "Other Group 2"
+        );
+
+        $user->delete();
     }
 
 }
