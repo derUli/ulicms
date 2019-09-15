@@ -402,8 +402,8 @@ class PageController extends Controller {
 
     public function getPages() {
         $start = Request::getVar("start", 0, "int");
-        $length = Request::getVar("length", 50, "int");
-        $draw = Request::getVar("draw", 50, "int");
+        $length = Request::getVar("length", 25, "int");
+        $draw = Request::getVar("draw", 1, "int");
         $search = $_REQUEST["search"]["value"];
 
         $renderer = new PageTableRenderer();
@@ -417,7 +417,7 @@ class PageController extends Controller {
         );
 
         $json = json_encode($data, JSON_UNESCAPED_SLASHES);
-        return RawJSONResult($json);
+        RawJSONResult($json);
     }
 
     protected function validateInput() {
