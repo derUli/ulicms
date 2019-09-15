@@ -66,8 +66,8 @@ if ($permissionChecker->hasPermission("audio")) {
                     </th>
 
                     <?php if ($permissionChecker->hasPermission("audio_edit")) { ?>
-                        <td></td>
-                        <td></td>
+					<td class="no-sort"></td>
+					<td class="no-sort"></td>
                     <?php } ?>
                 </tr>
 

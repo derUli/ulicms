@@ -35,9 +35,9 @@ if (count($groups) > 0) {
                     <th style="min-width: 200px;"><strong><?php translate("name"); ?> </strong></th>
                     <?php if ($permissionChecker->hasPermission("groups_edit")) { ?>
                         <th><strong><?php translate("standard"); ?> </strong></th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td class="no-sort"></td>
+                        <td class="no-sort"></td>
+                        <td class="no-sort"></td>
                     <?php } ?>
                 </tr>
             </thead>

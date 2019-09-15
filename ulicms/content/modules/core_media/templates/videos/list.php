@@ -72,8 +72,8 @@ if ($permissionChecker->hasPermission("videos")) {
                     ?>
                 </th>
                 <?php if ($permissionChecker->hasPermission("videos_edit")) { ?>
-                    <td></td>
-                    <td></td>
+                <td class="no-sort"></td>
+                <td class="no-sort"></td>
                 <?php } ?>
             </tr>
         </thead>

@@ -52,8 +52,12 @@ if ($permissionChecker->hasPermission("users")) {
                         <th class="hide-on-mobile"><?php translate("email"); ?></th>
                         <th class="hide-on-mobile"><?php translate("primary_group"); ?></th>
                             <?php if ($permissionChecker->hasPermission("users_edit")) { ?>
-                            <td><?php translate("edit"); ?></td>
-                            <td><span><?php translate("delete"); ?> </span></td>
+								<td class="no-sort text-center">
+								<?php translate("edit"); ?>
+								</td>
+								<td class="no-sort text-center">
+								<?php translate("delete"); ?>
+								</td>
                         <?php } ?>
                     </tr>
                 </thead>
