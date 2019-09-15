@@ -45,9 +45,9 @@ if ($permissionChecker->hasPermission("banners")) {
                     <th><?php translate("language"); ?>
                     </th>
                     <?php if ($permissionChecker->hasPermission("banners_edit")) { ?>
-                        <td><?php translate("edit"); ?>
+                        <td class="no-sort text-center"><?php translate("edit"); ?>
                         </td>
-                        <td><?php translate("delete"); ?>
+                        <td class="no-sort text-center"><?php translate("delete"); ?>
                         </td>
                     <?php } ?>
                 </tr>

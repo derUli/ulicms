@@ -26,8 +26,8 @@ if ($permissionChecker->hasPermission("expert_settings")) {
                         <th><?php translate("option"); ?></th>
                         <th><?php translate("value"); ?></th>
                         <?php if ($permissionChecker->hasPermission("expert_settings_edit")) { ?>
-                            <td><?php translate("edit"); ?></td>
-                            <td><?php translate("delete"); ?></td>
+                            <td class="no-sort"><?php translate("edit"); ?></td>
+                            <td class="no-sort"><?php translate("delete"); ?></td>
                         <?php } ?>
                     </tr>
                 </thead>

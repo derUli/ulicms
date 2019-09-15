@@ -49,8 +49,8 @@ if (!$permissionChecker->hasPermission("categories")) {
                         <?php
                         if ($permissionChecker->hasPermission("categories_edit")) {
                             ?>
-                            <td></td>
-                            <td></td>
+                            <td class="no-sort"></td>
+                            <td class="no-sort"></td>
                         <?php } ?>
                     </tr>
                 </thead>

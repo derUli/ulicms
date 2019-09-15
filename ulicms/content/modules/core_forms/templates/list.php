@@ -24,8 +24,9 @@ if (!$permissionChecker->hasPermission("forms")) {
                     <th class="hide-on-mobile"><?php translate("email_to"); ?></th>
                     <th><?php translate("submit_form_url"); ?></th>
                     <?php if ($permissionChecker->hasPermission("forms_edit")) { ?>
-                        <td style="font-weight: bold; text-align: center"><?php translate("edit"); ?></td>
-                        <td style="font-weight: bold; text-align: center"><?php translate("delete"); ?></td>
+                        <td class="no-sort text-center" style="font-weight: bold;"><?php translate("edit"); ?></td>
+                        <td class="no-sort text-center"
+						style="font-weight: bold;"><?php translate("delete"); ?></td>
                     <?php } ?>
                 </tr>
             </thead>
