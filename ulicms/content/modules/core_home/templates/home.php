@@ -33,13 +33,18 @@ if ($permissionChecker->hasPermission("dashboard")) {
                 ?>
             </div>
         <?php } ?>
-        <div id="patch-notification" style="display: none;"
-             data-url="<?php echo ModuleHelper::buildMethodCallUrl(UpdateCheckController::class, "patchCheck"); ?>">
-            <h2 class="accordion-header">
-                <?php translate("there_are_patches_available"); ?>
-            </h2>
-            <div class="accordion-content" id="patch-message"></div>
-        </div>
+        <?php if (!Settings::get("disable_core_patch_check")) {
+            ?>
+
+            <div id="patch-notification" style="display: none;"
+                 data-url="<?php echo ModuleHelper::buildMethodCallUrl(UpdateCheckController::class, "patchCheck"); ?>">
+                <h2 class="accordion-header">
+                    <?php translate("there_are_patches_available"); ?>
+                </h2>
+                <div class="accordion-content" id="patch-message"></div>
+            </div>
+        <?php } ?>
+
         <?php
         $pi = ULICMS_DATA_STORAGE_ROOT . "/post-install.php";
         if (is_writable($pi)) {
