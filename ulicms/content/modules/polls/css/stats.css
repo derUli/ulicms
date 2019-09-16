@@ -1,0 +1,29 @@
+.stats-container {
+	margin: auto;
+	width: 96%;
+}
+
+.votes-row {
+	width: 200px !important;
+}
+
+.double_underline {
+	border-bottom: double 3px #000000;
+}
+
+.print-button-container {
+	margin-top: 20px;
+	text-align: Center;
+}
+
+@media print {
+	.no-print, .no-print * {
+		display: none !important;
+	}
+}
+
+.number-font {
+	font-family: Courier New, Courier, Lucida Sans Typewriter,
+		Lucida Typewriter, monospace;
+	font-size: 110%;
+}

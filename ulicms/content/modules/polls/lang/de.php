@@ -1,0 +1,22 @@
+<?php
+define ( "TRANSLATION_POLLS", "Umfragen" );
+define ( "TRANSLATION_QUESTION", "Frage" );
+define ( "TRANSLATION_VIEW_STATS", "Statistiken anzeigen" );
+define ( "TRANSLATION_CREATE_POLL", "Umfrage erstellen" );
+define ( "TRANSLATION_DATE_FROM", "Datum von" );
+define ( "TRANSLATION_DATE_TO", "Datum bis" );
+define ( "TRANSLATION_ANSWER", "Antwort" );
+define ( "TRANSLATION_VOTES", "Abstimmungen" );
+define ( "TRANSLATION_VOTES_TOTAL", "Abstimmungen Gesamt" );
+define ( "TRANSLATION_ANSWERS", "Antwortmöglichkeiten" );
+define ( "TRANSLATION_ANSWER_NUMBER_X", "Antwort Nr. %x" );
+define ( "TRANSLATION_NO_POLLS_FOUND", "Keine Umfragen vorhanden." );
+define ( "TRANSLATION_RESET_POLL", "Umfrage zurücksetzen" );
+define ( "TRANSLATION_ASK_FOR_RESET_POLL", "Möchten Sie die Ergebnisse dieser Umfrage wirklich zurücksetzen?" );
+define ( "TRANSLATION_POLL_NOT_FOUND", "Keine Umfrage mit dieser ID vorhanden." );
+define ( "TRANSLATION_PRINT_RESULTS", "Ergebnisse Drucken" );
+define ( "TRANSLATION_POLL_ID_NOT_SET", "Die Variable poll_id wurde nicht gesetzt. Bitte setzen Sie die Variable poll_id wie im Handbuch beschrieben." );
+define ( "TRANSLATION_DO_VOTE", "Abstimmen!" );
+define ( "TRANSLATION_ALREADY_VOTED", "Sie haben bereits abgestimmt. Hier können Sie die  Ergebnisse einsehen." );
+define ( "TRANSLATION_THIS_POLL_IS_DISABLED", "Diese Umfrage ist abgelaufen. Wir bedanken uns bei allen Teilnehmern." );
+define ( "TRANSLATION_BACK", "Zurück" );

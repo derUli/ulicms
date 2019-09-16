@@ -1,0 +1,22 @@
+<?php
+define ( "TRANSLATION_POLLS", "Polls" );
+define ( "TRANSLATION_QUESTION", "Question" );
+define ( "TRANSLATION_VIEW_STATS", "View Statistics" );
+define ( "TRANSLATION_CREATE_POLL", "Create Poll" );
+define ( "TRANSLATION_DATE_FROM", "Date from" );
+define ( "TRANSLATION_DATE_TO", "Date to" );
+define ( "TRANSLATION_ANSWERS", "Answers" );
+define ( "TRANSLATION_ANSWER_NUMBER_X", "Answer No. %x" );
+define ( "TRANSLATION_NO_POLLS_FOUND", "No polls found." );
+define ( "TRANSLATION_RESET_POLL", "Reset poll" );
+define ( "TRANSLATION_ASK_FOR_RESET_POLL", "Do you really want do delete this poll?" );
+define ( "TRANSLATION_POLL_NOT_FOUND", "Poll not found." );
+define ( "TRANSLATION_ANSWER", "Answer" );
+define ( "TRANSLATION_VOTES", "Votes" );
+define ( "TRANSLATION_VOTES_TOTAL", "Votes Total" );
+define ( "TRANSLATION_PRINT_RESULTS", "Print Results" );
+define ( "TRANSLATION_POLL_ID_NOT_SET", "Var poll_id is not set. Please set poll_id variable as instructed by manual." );
+define ( "TRANSLATION_DO_VOTE", "Do Vote!" );
+define ( "TRANSLATION_ALREADY_VOTED", "You have already voted. You can view the results here." );
+define ( "TRANSLATION_THIS_POLL_IS_DISABLED", "This poll is over. We give thanks to all voters." );
+define ( "TRANSLATION_BACK", "Back" );

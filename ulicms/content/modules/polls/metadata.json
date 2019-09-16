@@ -1,0 +1,11 @@
+{
+	"version": "1.2.0",
+	"admin_permission": "polls_edit",
+	"custom_acl" : ["polls_edit"],
+	"objects" : {
+		"poll_question": "objects/question.php",
+		"poll_answer": "objects/answer.php",
+		"poll_factory": "objects/poll_factory.php"
+	}
+	
+}
