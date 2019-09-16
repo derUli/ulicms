@@ -8,6 +8,7 @@ class SinPackageInstaller {
 
     private $file = null;
     private $errors = [];
+    private $packageData = null;
 
     public function __construct(string $file) {
         if (StringHelper::isNotNullOrEmpty($file)) {
@@ -16,8 +17,12 @@ class SinPackageInstaller {
     }
 
     public function loadPackage(): array {
+        if ($this->packageData) {
+            return $this->packageData;
+        }
         $data = file_get_contents($this->file);
         $json = json_decode($data, true);
+        $this->packageData = $json;
         return $json;
     }
 
