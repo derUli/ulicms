@@ -48,8 +48,7 @@ class SinPackageInstaller {
     public function getSize(): int {
         $data = $this->loadPackage();
         $decoded = base64_decode($data["data"]);
-        $size = mb_strlen($decoded, '8bit');
-        return $size;
+        return mb_strlen($decoded, '8bit');
     }
 
     public function getProperty(string $name) {
@@ -81,31 +80,24 @@ class SinPackageInstaller {
         $version = new UliCMSVersion();
         $version = $version->getInternalVersionAsString();
         $version_not_supported = false;
-        if (isset($data["compatible_from"]) and StringHelper::isNotNullOrEmpty($data["compatible_from"])) {
-            if (!version_compare($version, $data["compatible_from"], ">=")) {
-                $version_not_supported = true;
-            }
+        if (isset($data["compatible_from"]) and StringHelper::isNotNullOrEmpty($data["compatible_from"]) and ! version_compare($version, $data["compatible_from"], ">=")) {
+            $version_not_supported = true;
         }
 
-        if (isset($data["compatible_to"]) and StringHelper::isNotNullOrEmpty($data["compatible_to"])) {
-            if (!version_compare($version, $data["compatible_to"], "<=")) {
-                $version_not_supported = true;
-            }
+        if (isset($data["compatible_to"]) and StringHelper::isNotNullOrEmpty($data["compatible_to"]) and ! version_compare($version, $data["compatible_to"], "<=")) {
+
+            $version_not_supported = true;
         }
 
         $phpVersionSupported = true;
 
         // if package requires a specific php version check it
-        if (isset($data["min_php_version"]) and StringHelper::isNotNullOrEmpty($data["min_php_version"])) {
-            if (!version_compare(phpversion(), $data["min_php_version"], ">=")) {
-                $phpVersionSupported = false;
-            }
+        if (isset($data["min_php_version"]) and StringHelper::isNotNullOrEmpty($data["min_php_version"]) and ! version_compare(phpversion(), $data["min_php_version"], ">=")) {
+            $phpVersionSupported = false;
         }
 
-        if (isset($data["max_php_version"]) and StringHelper::isNotNullOrEmpty($data["max_php_version"])) {
-            if (!version_compare(phpversion(), $data["max_php_version"], "<=")) {
-                $phpVersionSupported = false;
-            }
+        if (isset($data["max_php_version"]) and StringHelper::isNotNullOrEmpty($data["max_php_version"]) and ! version_compare(phpversion(), $data["max_php_version"], "<=")) {
+            $phpVersionSupported = false;
         }
         if (!$phpVersionSupported) {
             $this->errors[] = get_translation("php_version_x_not_supported", array(
@@ -119,16 +111,12 @@ class SinPackageInstaller {
         $mysqlVersionSupported = true;
 
         // if package requires a specific mysql version check it
-        if (isset($data["min_mysql_version"]) and StringHelper::isNotNullOrEmpty($data["min_mysql_version"])) {
-            if (!version_compare($mysqlVersion, $data["min_mysql_version"], ">=")) {
-                $mysqlVersionSupported = false;
-            }
+        if (isset($data["min_mysql_version"]) and StringHelper::isNotNullOrEmpty($data["min_mysql_version"]) and ! version_compare($mysqlVersion, $data["min_mysql_version"], ">=")) {
+            $mysqlVersionSupported = false;
         }
 
-        if (isset($data["max_mysql_version"]) and StringHelper::isNotNullOrEmpty($data["max_mysql_version"])) {
-            if (!version_compare($mysqlVersion, $data["max_mysql_version"], "<=")) {
-                $mysqlVersionSupported = false;
-            }
+        if (isset($data["max_mysql_version"]) and StringHelper::isNotNullOrEmpty($data["max_mysql_version"]) and ! version_compare($mysqlVersion, $data["max_mysql_version"], "<=")) {
+            $mysqlVersionSupported = false;
         }
 
         if (!$mysqlVersionSupported) {
