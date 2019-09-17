@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 // This class is a work in progress
-// It's currently only used for overriding of translation
+// It's currently only used for overriding of translations
 class Translation {
 
     private static $translations = null;

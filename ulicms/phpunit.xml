@@ -26,7 +26,7 @@
     </php>
     <testsuites>
         <testsuite name="Application Test Suite">
-            <directory>./tests/</directory>
+            <directory>tests/</directory>
             <exclude>./vendor/</exclude>
         </testsuite>
     </testsuites>
@@ -34,13 +34,13 @@
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">./</directory>
             <exclude>
-                <directory>./vendor/</directory>
+                <directory>vendor/</directory>
             </exclude>
             <exclude>
-                <directory>./installer.aus/</directory>
+                <directory>installer.aus/</directory>
             </exclude>
             <exclude>
-                <directory>./lang/</directory>
+                <directory>lang/</directory>
             </exclude>
             <exclude>
                 <!-- Damn PHPUnit has no support for wildcards. -->
@@ -50,26 +50,29 @@
                 <directory>content/modules/core_forms/lang</directory>
             </exclude>
             <exclude>
+                <directory>content/modules/core_settings/lang</directory>
+            </exclude>
+            <exclude>
                 <directory>content/modules/core_help/lang</directory>
             </exclude>
             <exclude>
-                <directory>./tests/</directory>
+                <directory>tests/</directory>
             </exclude>
             <exclude>
-                <directory>./shell</directory>
+                <directory>shell</directory>
             </exclude>
             <exclude>
-                <directory>./admin/kcfinder/</directory>
+                <directory>admin/kcfinder/</directory>
             </exclude>
 
             <exclude>
-                <directory>./admin/inc</directory>
+                <directory>admin/inc</directory>
             </exclude>
             <exclude>
-                <directory>./content/modules/Mobile_Detect</directory>
+                <directory>content/modules/Mobile_Detect</directory>
             </exclude>
             <exclude>
-                <directory>./content/configurations/</directory>
+                <directory>content/configurations/</directory>
             </exclude>
             <exclude>
                 <directory>content/modules/core_comments/templates</directory>
@@ -138,37 +141,37 @@
                 <directory>content/modules/core_media/templates</directory>
             </exclude>
             <exclude>
-                <directory>./content/templates/impro17</directory>
+                <directory>content/templates/impro17</directory>
             </exclude>
             <exclude>
-                <directory>./content/templates/2020</directory>
+                <directory>content/templates/2020</directory>
             </exclude>
             <exclude>
-                <directory>./content/modules/core_forms/templates</directory>
+                <directory>content/modules/core_forms/templates</directory>
             </exclude>
             <exclude>
-                <directory>./content/modules/core_help/templates</directory>
+                <directory>content/modules/core_help/templates</directory>
             </exclude>
             <exclude>
-                <directory>./default</directory>
+                <directory>default</directory>
             </exclude>
             <exclude>
                 <file>index.php</file>
             </exclude>
             <exclude>
-                <file>./lib/CMSConfigSample.php</file>
+                <file>lib/CMSConfigSample.php</file>
             </exclude>
             <exclude>
-                <file>./CMSConfig.php</file>
+                <file>CMSConfig.php</file>
             </exclude>
             <exclude>
-                <file>./admin/index.php</file>
+                <file>admin/index.php</file>
             </exclude>
             <exclude>
-                <file>./admin/backend.php</file>
+                <file>admin/backend.php</file>
             </exclude>
             <exclude>
-                <file>./frontend.php</file>
+                <file>frontend.php</file>
             </exclude>
             <exclude>
                 <file>init.php</file>
@@ -180,10 +183,10 @@
                 <file>admin.php</file>
             </exclude>
             <exclude>
-                <file>./admin/inc/getlinksforeditor.php</file>
+                <file>admin/inc/getlinksforeditor.php</file>
             </exclude>
             <exclude>
-                <file>./admin/inc/header.php</file>
+                <file>admin/inc/header.php</file>
             </exclude>
         </whitelist>
     </filter>
