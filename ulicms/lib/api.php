@@ -271,11 +271,6 @@ function browsercacheOneDay(int $modified = null): void {
     }
 }
 
-// PHP Formbuilder Class initialisieren
-function initPFBC(): void {
-    do_event("init_pfbc");
-}
-
 /**
  * Get either a Gravatar URL or complete image tag for a specified email address.
  *

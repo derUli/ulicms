@@ -50,9 +50,9 @@ class JSTranslation {
         return $this->varName;
     }
 
-    public function getJS(string $wrap = "<script type=\"text/javascript\">{code}</script>"): string {
+    public function getJS(string $wrap = "<script>{code}</script>"): string {
         $js = array(
-            "{$this->varName} = {};"
+            "{$this->varName}={};"
         );
         foreach ($this->keys as $key) {
             if (startsWith($key, "TRANSLATION_")) {
@@ -63,7 +63,7 @@ class JSTranslation {
             $value = get_translation($key);
             $value = str_replace("\"", "\\\"", $value);
             $value = str_replace("\n", '\n', $value);
-            $line = "{$this->varName}." . $jsName . " = \"" . $value . "\";";
+            $line = "{$this->varName}.{$jsName}=\"{$value}\";";
             $js[] = $line;
         }
         $jsString = implode("", $js);
@@ -71,11 +71,11 @@ class JSTranslation {
         return $output;
     }
 
-    public function renderJS(string $wrap = "<script type=\"text/javascript\">{code}</script>"): void {
+    public function renderJS(string $wrap = "<script>{code}</script>"): void {
         echo $this->getJS($wrap);
     }
 
-    public function render(string $wrap = "<script type=\"text/javascript\">{code}</script>"): void {
+    public function render(string $wrap = "<script>{code}</script>"): void {
         $this->renderJS($wrap);
     }
 

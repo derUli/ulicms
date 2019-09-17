@@ -15,6 +15,7 @@ class JsTranslationTest extends \PHPUnit\Framework\TestCase {
 
     public function setUp() {
         require_once getLanguageFilePath("en");
+        require_once ModuleHelper::buildModuleRessourcePath("core_help", "lang/en.php");
     }
 
     public function testConstructorWithKeys() {
@@ -37,8 +38,11 @@ class JsTranslationTest extends \PHPUnit\Framework\TestCase {
 
 
         $this->assertEquals(
-                $translation->getJS(),
-                file_get_contents(ULICMS_ROOT . "/tests/fixtures/JSTranslation/JSTranslation1.js")
+                file_get_contents(
+                        ULICMS_ROOT .
+                        "/tests/fixtures/JSTranslation/JSTranslation1.html"
+                ),
+                $translation->getJS()
         );
     }
 
@@ -51,8 +55,10 @@ class JsTranslationTest extends \PHPUnit\Framework\TestCase {
         $translation = new JSTranslation($keys, "ThisIsNotGoogleTranslator");
 
         $this->assertEquals(
-                $translation->getJS(),
-                file_get_contents(ULICMS_ROOT . "/tests/fixtures/JSTranslation/JSTranslation2.js")
+                file_get_contents(
+                        ULICMS_ROOT .
+                        "/tests/fixtures/JSTranslation/JSTranslation2.html"),
+                $translation->getJS()
         );
     }
 
@@ -65,9 +71,11 @@ class JsTranslationTest extends \PHPUnit\Framework\TestCase {
         $translation = new JSTranslation($keys, "ThisIsNotGoogleTranslator");
 
         $this->assertEquals(
-                $translation->getJS('<script id="my-script">{code}</script>'),
-                file_get_contents(ULICMS_ROOT . "/tests/fixtures/JSTranslation/JSTranslation3.js")
-        );
+                file_get_contents(
+                        ULICMS_ROOT . "/tests/fixtures/JSTranslation/JSTranslation3.html"
+                ), $translation->getJS('<script id="my-script">{code}</script>')
+        )
+        ;
     }
 
     public function testRenderJs() {
@@ -82,8 +90,11 @@ class JsTranslationTest extends \PHPUnit\Framework\TestCase {
         $output = ob_get_clean();
 
         $this->assertEquals(
-                $output,
-                file_get_contents(ULICMS_ROOT . "/tests/fixtures/JSTranslation/JSTranslation1.js")
+                file_get_contents(
+                        ULICMS_ROOT .
+                        "/tests/fixtures/JSTranslation/JSTranslation1.html"
+                ),
+                $output
         );
     }
 
@@ -99,7 +110,10 @@ class JsTranslationTest extends \PHPUnit\Framework\TestCase {
         $output = ob_get_clean();
         $this->assertEquals(
                 $output,
-                file_get_contents(ULICMS_ROOT . "/tests/fixtures/JSTranslation/JSTranslation2.js")
+                file_get_contents(
+                        ULICMS_ROOT .
+                        "/tests/fixtures/JSTranslation/JSTranslation2.html"
+                )
         );
     }
 
@@ -117,7 +131,10 @@ class JsTranslationTest extends \PHPUnit\Framework\TestCase {
 
         $this->assertEquals(
                 $output,
-                file_get_contents(ULICMS_ROOT . "/tests/fixtures/JSTranslation/JSTranslation3.js")
+                file_get_contents(
+                        ULICMS_ROOT .
+                        "/tests/fixtures/JSTranslation/JSTranslation3.html"
+                )
         );
     }
 
