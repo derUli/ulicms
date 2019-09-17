@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Exceptions\NotImplementedException;
+
 class ApiTest extends \PHPUnit\Framework\TestCase {
 
     public function setUp() {
@@ -72,6 +74,17 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull(getModuleMeta("not_a_module"));
         $this->assertNull(getModuleMeta("not_a_module", "version"));
         $this->assertNull(getModuleMeta("core_home", "not_here"));
+
+        $meta = getModuleMeta("Mobile_Detect");
+        $this->assertIsArray($meta);
+        $this->assertEquals("2.8.33", $meta["version"]);
+        $this->assertEquals(false, $meta["embed"]);
+    }
+
+    public function testGetThemeMeta() {
+        $meta = getThemeMeta("impro17");
+        $this->assertIsArray($meta);
+        $this->assertEquals("2.1.1", $meta["version"]);
     }
 
     public function testBool2YesNo() {
@@ -98,6 +111,12 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(var_is_type(null, "numeric", true));
         $this->assertFalse(var_is_type("", "numeric", true));
         $this->assertTrue(var_is_type("", "numeric", false));
+
+        $this->assertFalse(var_is_type("nicht leer", "typ_der_nicht_existiert", true));
+    }
+
+    public function testVarDumpStr() {
+        throw new NotImplementedException();
     }
 
     public function testStrContainsTrue() {
@@ -175,7 +194,10 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testSplitAndTrim() {
-        $input = "Max; Muster; max@muster.de ; Musterstadt";
+        $input = "Max;
+        Muster;
+        max@muster.de;
+        Musterstadt";
         $result = splitAndTrim($input);
         $this->assertEquals("Max", $result[0]);
         $this->assertEquals("Muster", $result[1]);
@@ -218,10 +240,16 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetPreferredLanguage() {
-        $acceptLanguageHeader1 = "Accept-Language: da, en-gb;q=0.8, en;q=0.7, de;q=0.5";
+        $acceptLanguageHeader1 = "Accept-Language: da, en - gb;
+        q = 0.8, en;
+        q = 0.7, de;
+        q = 0.5";
         $this->assertEquals("en", get_prefered_language(array("de", "en"), $acceptLanguageHeader1));
 
-        $acceptLanguageHeader2 = "Accept-Language: da, en-gb;q=0.8, en;q=0.7, de;q=0.9";
+        $acceptLanguageHeader2 = "Accept-Language: da, en - gb;
+        q = 0.8, en;
+        q = 0.7, de;
+        q = 0.9";
         $this->assertEquals("de", get_prefered_language(array("de", "en"), $acceptLanguageHeader2));
     }
 
@@ -265,7 +293,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
 
     public function testIsBlankReturnsTrue() {
         $this->assertTrue(is_blank(""));
-        $this->assertTrue(is_blank("  "));
+        $this->assertTrue(is_blank(" "));
         $this->assertTrue(is_blank(false));
         $this->assertTrue(is_blank(null));
         $this->assertTrue(is_blank(0));
@@ -292,7 +320,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
 
     public function testIsPresentReturnsFalse() {
         $this->assertFalse(is_present(""));
-        $this->assertFalse(is_present("  "));
+        $this->assertFalse(is_present(" "));
         $this->assertFalse(is_present(false));
         $this->assertFalse(is_present(null));
         $this->assertFalse(is_present(0));
@@ -544,6 +572,27 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         unset($_SERVER['HTTPS']);
     }
 
+    public function testGetGravatarWithHtmlAttributesReturnsImage() {
+        $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
+        $_SERVER["SERVER_PORT"] = "8080";
+        $_SERVER["HTTPS"] = "on";
+        $_SERVER['HTTP_HOST'] = "example.org";
+        $_SERVER['REQUEST_URI'] = "/foobar/foo.html?hello=world";
+
+        $this->assertEquals(
+                '<img src="https://example.org/foobar/admin/gfx/no_avatar.png" '
+                . 'class="gravatar" />',
+                get_gravatar("foo@bar.de", 80, 'mm', 'g', true,
+                        ["class" => "gravatar"]
+                )
+        );
+        unset($_SERVER["SERVER_PROTOCOL"]);
+        unset($_SERVER['HTTP_HOST']);
+        unset($_SERVER['SERVER_PORT']);
+        unset($_SERVER['REQUEST_URI']);
+        unset($_SERVER['HTTPS']);
+    }
+
     public function testStringContainsShortCodeWithoutNameReturnsTrue() {
         $this->assertTrue(stringContainsShortCodes(
                         'Foo [module=hello_world] Bar')
@@ -736,13 +785,24 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
     public function testBuildSEOUrlWithPageAndRedirection() {
         $this->assertEquals("#", buildSEOUrl("foobar", "#"));
 
-        $this->assertEquals("https://google.com", buildSEOUrl("foobar",
-                        "https://google.com"));
+        $this->assertEquals("https://google.com", buildSEOUrl("foobar", "https://google.com"));
     }
 
-    public function testBuildSEOUrlWithPageAnd() {
+    public function testBuildSEOUrlWithPageAndType() {
         $this->assertEquals("foobar.txt",
                 buildSEOUrl("foobar", null, "txt"));
+    }
+
+    public function testGetAllLanguagesFiltered() {
+        $languages = getAllLanguages();
+
+        $this->assertContains("de", $languages);
+        $this->assertContains("en", $languages);
+    }
+
+    public function testGetAllLanguagesNotFiltered() {
+        $languages = getAllLanguages();
+        $this->assertGreaterThanOrEqual(1, count($languages));
     }
 
 }

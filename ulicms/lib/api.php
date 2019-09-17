@@ -442,9 +442,7 @@ function getModuleMeta($module, $attrib = null) {
 
     $data = file_get_contents($metadata_file);
     $json = json_decode($data, true);
-    if (!$json) {
-        return null;
-    }
+
     if ($attrib and ! isset($json[$attrib])) {
         return null;
     }
@@ -470,20 +468,6 @@ function getThemeMeta(string $theme, string $attrib = null) {
         }
     }
     return $retval;
-}
-
-function getModuleName(string $module): string {
-    $name_file = getModulePath($module) . $module . "_name.php";
-    if (!file_exists($name_file)) {
-        return $module;
-    }
-    require_once $name_file;
-    $name_function = $module . "_name";
-    if (function_exists($name_function)) {
-        return call_user_func($name_function);
-    } else {
-        return $module;
-    }
 }
 
 function getLanguageNameByCode(string $code): string {
