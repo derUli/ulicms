@@ -102,13 +102,16 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
         $cssClasses .= "no-action";
     }
     ?>
-    <body class="<?php esc($cssClasses); ?>"
-          data-datatables-translation="<?php echo DataTablesHelper::getLanguageFileURL(getSystemLanguage()); ?>"
-          data-ckeditor-skin="<?php esc(Settings::get("ckeditor_skin")); ?>"
-          data-csrf-token="<?php esc(get_csrf_token()); ?>">
-              <?php
-              do_event("after_backend_header");
-              ?>
+    <body
+        class="<?php esc($cssClasses); ?>"
+        data-datatables-translation="<?php echo DataTablesHelper::getLanguageFileURL(getSystemLanguage()); ?>"
+        data-ckeditor-skin="<?php esc(Settings::get("ckeditor_skin")); ?>"
+        data-csrf-token="<?php esc(get_csrf_token()); ?>"
+        data-ckeditor-links-action-url="<?php echo ModuleHelper::buildMethodCallUrl(PageController::class, "getCKEditorLinkList"); ?>"
+        >
+            <?php
+            do_event("after_backend_header");
+            ?>
         <div
             class="container main <?php
             if (get_action()) {

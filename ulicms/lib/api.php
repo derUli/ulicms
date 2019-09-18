@@ -70,7 +70,9 @@ function remove_suffix(string $text, string $suffix): string {
     return $text;
 }
 
+// TODO: refactor this into a "polyfill.php" file
 // replacement for the each() function which is deprecated since PHP 7.2.0
+// used by kcfinder
 function myEach(&$arr) {
     $key = key($arr);
     $result = ($key === null) ? false : [
@@ -252,10 +254,6 @@ function get_lang_config(string $name, string $lang): ?string {
         $config = Settings::get($name);
     }
     return $config ? $config : null;
-}
-
-function eTagFromString($str): void {
-    header('ETag: ' . md5($str));
 }
 
 // Browser soll nur einen Tag Cachen
@@ -604,7 +602,8 @@ function clearCache(): void {
 // This function may be removed in future releases of UliCMS
 // Use do_event()
 function add_hook(string $name, string $runs = ModuleEventConstants::RUNS_ONCE): void {
-    trigger_error("add_hook() is deprecated. Please use do_event().", E_USER_DEPRECATED);
+    trigger_error("add_hook() is deprecated. Please use do_event().",
+            E_USER_DEPRECATED);
     do_event($name, $runs);
 }
 
@@ -1227,7 +1226,7 @@ function the_url(): string {
 // Gibt die Identifier aller Menüs zurück.
 // Zusätzliche Navigationsmenüs können definiert werden,
 // durch setzen von additional_menus
-function getAllMenus(bool $only_used = false): array {
+function getAllMenus(bool $only_used = false, $read_theme_menus = true): array {
     $menus = Array(
         "left",
         "top",
@@ -1267,7 +1266,7 @@ function getAllMenus(bool $only_used = false): array {
         }
     }
 
-    if (count($allThemeMenus) > 0) {
+    if ($read_theme_menus and count($allThemeMenus) > 0) {
         $menus = $allThemeMenus;
     }
 

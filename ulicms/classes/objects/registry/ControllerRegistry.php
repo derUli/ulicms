@@ -84,6 +84,7 @@ class ControllerRegistry {
         $allowed = true;
         $acl = new ACL();
         $methodIdentifier = $sClass . "::" . $sMethod;
+
         $wildcardMethodIdentifier = $sClass . "::*";
 
         if (!is_blank(self::$controller_function_permissions[$methodIdentifier])) {

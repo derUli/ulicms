@@ -1,8 +1,12 @@
 <?php
 
 use UliCMS\Exceptions\NotImplementedException;
+use UliCMS\Models\Content\Language;
 
 class ApiTest extends \PHPUnit\Framework\TestCase {
+
+    private $initialUser;
+    private $additionalMenus;
 
     public function setUp() {
         $this->cleanUp();
@@ -10,6 +14,11 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
 
         $moduleManager = new ModuleManager();
         $moduleManager->sync();
+
+        $userQuery = Database::query("select id, html_editor from {prefix}users order by id asc limit 1", true);
+
+        $this->initialUser = Database::fetchObject($userQuery);
+        $this->additionalMenus = Settings::get("additional_menus");
     }
 
     public function tearDown() {
@@ -20,6 +29,13 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         unset($_SESSION["login_id"]);
         unset($_SESSION["language"]);
         @session_destroy();
+
+        $user = new User(
+                intval($this->initialUser->id)
+        );
+        $user->setHtmlEditor($this->initialUser->html_editor);
+        $user->save();
+        Settings::set("additional_menus", $this->additionalMenus);
     }
 
     public function cleanUp() {
@@ -249,15 +265,29 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("de", get_prefered_language(array("de", "en"), $acceptLanguageHeader2));
     }
 
-    public function testGetHtmlEditorReturnsNull() {
+    public function testGetHtmlEditorNotLoggedInReturnsNull() {
         if (session_id()) {
             @session_destroy();
         }
         $this->assertNull(get_html_editor());
     }
 
-    public function testGetHtmlEditorReturnsCKEditor() {
+    public function testGetHtmlEditorHtmlEditorIsEmptyReturnsNull() {
+        Database::query("update {prefix}users set html_editor = '' where id = {$this->initialUser->id}", true);
 
+        @session_start();
+        register_session(getUserById(
+                        ($this->initialUser->id)
+                ), false);
+
+        $user = new User($this->initialUser->id);
+
+        $this->assertEquals("", $user->getHtmlEditor());
+
+        @session_destroy();
+    }
+
+    public function testGetHtmlEditorReturnsCKEditor() {
         $user = new User();
         $user->setUsername("testuser-1");
         $user->setPassword(rand_string(23));
@@ -679,6 +709,25 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertStringMatchesFormat('Foo %d Bar [module=fortune2]', replaceOtherShortCodes('Foo [year] Bar [module=fortune2]'));
     }
 
+    public function testContainsModuleWithoutArgumentsReturnsTrue() {
+
+        $page = new Module_Page();
+        $page->title = "Unit Test " . uniqid();
+        $page->slug = "unit-test-" . uniqid();
+        $page->menu = "none";
+        $page->language = "de";
+        $page->article_date = 1413821696;
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->module = "fortune2";
+        $page->content = "Hello World";
+        $page->save();
+
+        $_SESSION["language"] = "de";
+        $_GET["seite"] = $page->slug;
+        $this->assertTrue(containsModule());
+    }
+
     public function testContainsModuleReturnsTrue() {
         $page = new Module_Page();
         $page->title = "Unit Test " . uniqid();
@@ -790,10 +839,36 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetAllLanguagesFiltered() {
-        $languages = getAllLanguages();
+        $language = new Language();
+        $language->loadByLanguageCode("en");
 
-        $this->assertContains("de", $languages);
+        $group = new Group();
+        $group->setName("Testgroup");
+        $group->setLanguages(
+                [
+                    $language
+                ]
+        );
+        $group->save();
+
+        $user = new User();
+        $user->setUsername("testuser-1");
+        $user->setPassword(rand_string(23));
+        $user->setLastname("Beutlin");
+        $user->setFirstname("Bilbo");
+        $user->setHTMLEditor("ckeditor");
+        $user->setPrimaryGroup($group);
+        $user->save();
+
+        register_session(
+                getUserById($user->getId())
+        );
+        $languages = getAllLanguages(true);
+
+        $this->assertNotContains("de", $languages);
         $this->assertContains("en", $languages);
+        $user->delete();
+        $group->delete();
     }
 
     public function testGetAllLanguagesNotFiltered() {
@@ -837,15 +912,196 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetAllMenus() {
-        throw new NotImplementedException();
+        $menus = getAllMenus();
+        $this->assertContains("top", $menus);
+        $this->assertContains("not_in_menu", $menus);
+        $this->assertNotContains("foo", $menus);
+        $this->assertNotContains("bar", $menus);
     }
 
     public function testGetAllMenusWithAdditional() {
-        throw new NotImplementedException();
+        Settings::set("additional_menus", "foo;bar");
+
+        $menus = getAllMenus(false, false);
+
+        $this->assertContains("top", $menus);
+        $this->assertContains("not_in_menu", $menus);
+        $this->assertContains("foo", $menus);
+        $this->assertContains("bar", $menus);
+
+        getAllMenus();
     }
 
-    public function testGetAllMenusOnlyUsed() {
-        throw new NotImplementedException();
+    public function testGetAllMenusWithAdditionalOnlyUsed() {
+        Settings::set("additional_menus", "foo;bar");
+
+        $menus = getAllMenus(true, false);
+        $this->assertContains("top", $menus);
+        $this->assertContains("not_in_menu", $menus);
+        $this->assertNotContains("foo", $menus);
+        $this->assertNotContains("bar", $menus);
+    }
+
+    public function testEach() {
+        $arr = array(
+            "foo" => "bar",
+            "hello" => "world"
+        );
+
+        @$output = each($arr);
+        $this->assertCount(4, $output);
+    }
+
+    public function testMyEach() {
+        $arr = array(
+            "foo" => "bar",
+            "hello" => "world"
+        );
+        $this->assertCount(4, myEach($arr));
+    }
+
+    public function testGetLangConfig() {
+        Settings::setLanguageSetting("my_setting", "Lampukisch");
+        Settings::setLanguageSetting("my_setting", "Germanisch", "de");
+        Settings::setLanguageSetting("my_setting", "Angelsächisch", "en");
+
+        $this->assertEquals("Lampukisch", get_lang_config("my_setting", "fr"));
+        $this->assertEquals("Germanisch", get_lang_config("my_setting", "de"));
+        $this->assertEquals("Angelsächisch", get_lang_config("my_setting", "en"));
+    }
+
+    public function testGetCsrfTokenHtmlWithMinTimeToFillForm() {
+        $initialMinTime = Settings::get("min_time_to_fill_form");
+
+        Settings::set("min_time_to_fill_form", "6");
+
+        $this->assertStringContainsString(
+                '<input type="hidden" name="form_timestamp" value="',
+                get_csrf_token_html()
+        );
+        Settings::set("min_time_to_fill_form", $initialMinTime);
+    }
+
+    public function testCsrfTokenHtmlWithMinTimeToFillForm() {
+        $initialMinTime = Settings::get("min_time_to_fill_form");
+
+        Settings::set("min_time_to_fill_form", "6");
+
+        ob_start();
+        csrf_token_html();
+
+        $this->assertStringContainsString(
+                '<input type="hidden" name="form_timestamp" value="',
+                ob_get_clean()
+        );
+        Settings::set("min_time_to_fill_form", $initialMinTime);
+    }
+
+    public function testGetUsedPostTypes() {
+        $postTypes = get_used_post_types();
+        $this->assertContains("page", $postTypes);
+    }
+
+    public function testGetLanguageNameByCodeReturnsName() {
+        $this->assertEquals("Deutsch", getLanguageNameByCode("de"));
+        $this->assertEquals("English", getLanguageNameByCode("en"));
+    }
+
+    public function testGetLanguageNameByCodeReturnsCode() {
+        $this->assertEquals("gibts_nicht",
+                getLanguageNameByCode("gibts_nicht"));
+    }
+
+    public function testGetAvailableBackendLanguages() {
+        $this->assertContains("de", getAvailableBackendLanguages());
+        $this->assertContains("en", getAvailableBackendLanguages());
+    }
+
+    public function testAddHook() {
+        @$this->assertNull(add_hook("gibts_nicht"));
+    }
+
+    public function testGetPageByIDReturnsNull() {
+        $this->assertNull(getPageById(PHP_INT_MAX));
+    }
+
+    public function testGetPageByIDReturnsObject() {
+        $all = ContentFactory::getAll();
+        $first = $all[0];
+        $page = getPageByID($first->id);
+
+        $this->assertIsObject($page);
+        $this->assertEquals($first->getId(), $page->id);
+        $this->assertEquals($first->title, $page->title);
+    }
+
+    public function testGetAllPagesWithTitle() {
+        $pages = getAllPagesWithTitle();
+        $this->assertGreaterThanOrEqual(1, count($pages));
+        foreach ($pages as $page) {
+            $this->assertCount(2, $page);
+            $this->assertNotEmpty($page[0]);
+            $this->assertNotEmpty($page[1]);
+            $this->assertStringContainsString(".html", $page[1]);
+        }
+    }
+
+    public function testJsonReadableEncode() {
+        $data = [
+            "foo" => "bar",
+            "hello" => "world",
+            "animals" => ["cat", "dog", "pig"],
+            "number" => 123,
+            "boolean" => true,
+            "null" => null
+        ];
+        $expected = file_get_contents(
+                Path::resolve(
+                        "ULICMS_ROOT/tests/fixtures/json_readable_encode.txt"
+                )
+        );
+        $output = json_readable_encode($data);
+
+        $this->assertEquals($expected, $output);
+    }
+
+    public function testGetSystemLanguageReturnsSystemLanguageFromSession() {
+        $_SESSION["system_language"] = "de";
+        $_SESSION["language"] = "en";
+        $this->assertEquals("de", getSystemLanguage());
+    }
+
+    public function testGetSystemLanguageReturnsFrontendLanguageFromSession() {
+        $_SESSION["language"] = "en";
+        $this->assertEquals("en", getSystemLanguage());
+    }
+
+    public function testGetSystemLanguageReturnsSystemLanguageFromSetting() {
+        unset($_SESSION["language"]);
+        unset($_SESSION["system_language"]);
+        $system_language = Settings::get("system_language");
+        Settings::set("system_language", "en");
+        $this->assertEquals("en", getSystemLanguage());
+
+        Settings::set("system_language", $system_language);
+    }
+
+    public function testGetSystemLanguageReturnsDe() {
+        $system_language = Settings::get("system_language");
+
+        Settings::delete("system_language");
+
+        $this->assertEquals("de", getSystemLanguage());
+
+        Settings::set("system_language", $system_language);
+    }
+
+    public function testGetModuleUninstallScriptPath() {
+        $this->assertStringEndsWith("content/modules/my_module/my_module_uninstall.php", getModuleUninstallScriptPath("my_module"));
+    }
+
+    public function testGetModuleUninstallScriptPath2() {
+        $this->assertStringEndsWith("content/modules/my_module/uninstall.php", getModuleUninstallScriptPath2("my_module"));
     }
 
 }

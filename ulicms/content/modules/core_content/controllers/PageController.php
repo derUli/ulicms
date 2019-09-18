@@ -447,4 +447,9 @@ class PageController extends Controller {
         }
     }
 
+    public function getCKEditorLinkList() {
+        $data = getAllPagesWithTitle();
+        JSONResult($data, HttpStatusCode::OK, true);
+    }
+
 }

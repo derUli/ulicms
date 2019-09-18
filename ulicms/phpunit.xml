@@ -43,6 +43,9 @@
                 <directory>lang/</directory>
             </exclude>
             <exclude>
+                <directory>classes/objects/exceptions.php</directory>
+            </exclude>
+            <exclude>
                 <!-- Damn PHPUnit has no support for wildcards. -->
                 <directory>content/modules/core_comments/lang</directory>
             </exclude>
