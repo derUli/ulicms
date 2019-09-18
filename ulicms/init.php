@@ -439,9 +439,6 @@ do_event("init");
 do_event("after_init");
 
 $version = new UliCMSVersion();
-if (!defined("UPDATE_CHECK_URL")) {
-    define("UPDATE_CHECK_URL", "https://update.ulicms.de/?v=" . urlencode(implode(".", $version->getInternalVersion())) . "&update=" . urlencode($version->getUpdate()));
-}
 
 $pkg = new PackageManager();
 $installed_patches = $pkg->getInstalledPatchNames();

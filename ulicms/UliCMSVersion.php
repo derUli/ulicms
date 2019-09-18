@@ -5,7 +5,7 @@ declare(strict_types=1);
 class UliCMSVersion {
 
     function __construct() {
-        $this->version = "Tidy Guanako";
+        $this->codename = "Tidy Guanako";
         $this->releaseYear = 2019;
         $this->buildDate = 0; // {InsertBuildDate}
         $this->internalVersion = Array(
@@ -14,7 +14,6 @@ class UliCMSVersion {
             1
         );
         $this->update = "";
-        $this->developmentVersion = false;
     }
 
     public function getReleaseYear(): string {
@@ -22,16 +21,8 @@ class UliCMSVersion {
     }
 
     //  returns the codename of this UliCMS release
-    public function getVersion(): string {
-        return $this->version;
-    }
-
-    public function getUpdate(): string {
-        return $this->update;
-    }
-
-    public function getDevelopmentVersion(): bool {
-        return $this->developmentVersion;
+    public function getCodeName(): string {
+        return $this->codename;
     }
 
     // returns the version number

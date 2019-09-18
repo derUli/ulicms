@@ -76,10 +76,30 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("<!doctype html>", get_html5_doctype());
     }
 
+    public function testHtml5Doctype() {
+        ob_start();
+        Template::html5Doctype();
+        $this->assertEquals("<!doctype html>", ob_get_clean());
+    }
+
     public function testGetYear() {
         $this->assertEquals(date("Y"), Template::getYear());
         $this->assertEquals(date("Y"), Template::getYear("Y"));
         $this->assertEquals(date("y"), Template::getYear("y"));
+    }
+
+    public function testYear() {
+        ob_start();
+        Template::year();
+        $this->assertEquals(date("Y"), ob_get_clean());
+
+        ob_start();
+        Template::year("Y");
+        $this->assertEquals(date("Y"), ob_get_clean());
+
+        ob_start();
+        Template::year("y");
+        $this->assertEquals(date("y"), ob_get_clean());
     }
 
     public function testGetOgHTMLPrefix() {
@@ -202,6 +222,15 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("John Doe", Template::getHomepageOwner());
     }
 
+    public function testHomepageOwner() {
+        Settings::set("homepage_owner", "John Doe");
+
+        ob_start();
+        Template::homepageOwner();
+
+        $this->assertEquals("John Doe", ob_get_clean());
+    }
+
     public function testGetFooterText() {
         Settings::set("footer_text", "&copy; (C) [year] by John Doe");
 
@@ -209,6 +238,19 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
 
         $this->assertEquals("&copy; (C) {$year} by John Doe",
                 Template::getFooterText());
+    }
+
+    public function testFooterText() {
+        Settings::set("footer_text", "&copy; (C) [year] by John Doe");
+
+        $year = date("Y");
+
+        ob_start();
+        Template::footerText();
+        $this->assertEquals(
+                "&copy; (C) {$year} by John Doe",
+                ob_get_clean()
+        );
     }
 
     public function testGetContentWithPlaceholder() {
@@ -245,6 +287,22 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $_GET["seite"] = get_frontpage();
         $this->assertRegExp('/page-id-\d{1,19} home page(.+)/',
                 Template::getBodyClasses());
+
+        Vars::delete("id");
+        Vars::delete("active");
+    }
+
+    public function testBodyClassesHome() {
+        $_SESSION["language"] = "de";
+        $_GET["seite"] = get_frontpage();
+
+        ob_start();
+        Template::bodyClasses();
+
+        $this->assertRegExp(
+                '/page-id-\d{1,19} home page(.+)/',
+                ob_get_clean()
+        );
 
         Vars::delete("id");
         Vars::delete("active");
@@ -343,6 +401,30 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
                 Template::getBodyClasses());
         Vars::delete("id");
         Vars::delete("active");
+    }
+
+    public function testGetDocType() {
+        $this->assertEquals("<!doctype html>", Template::getDoctype());
+    }
+
+    public function testDocType() {
+        ob_start();
+        Template::doctype();
+        $this->assertEquals("<!doctype html>", ob_get_clean());
+    }
+
+    public function testOgHTMLPrefix() {
+        $_SESSION["language"] = "en";
+
+        ob_start();
+        Template::OgHTMLPrefix();
+        $this->assertEquals("<html prefix=\"og: http://ogp.me/ns#\" lang=\"en\">", ob_get_clean());
+
+        $_SESSION["language"] = "de";
+        ob_start();
+        Template::OgHTMLPrefix();
+        $this->assertEquals("<html prefix=\"og: http://ogp.me/ns#\" lang=\"de\">", ob_get_clean());
+        unset($_SESSION["language"]);
     }
 
 }

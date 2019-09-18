@@ -61,6 +61,24 @@ class RequestTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue(Request::isHead());
     }
 
+    public function testGetRequestMethod() {
+        $_SERVER["REQUEST_METHOD"] = "GET";
+        $this->assertEquals("get", get_request_method());
+        $this->assertTrue(Request::isGet());
+        $this->assertFalse(Request::isPost());
+        $this->assertFalse(Request::isHead());
+        $_SERVER["REQUEST_METHOD"] = "POST";
+        $this->assertEquals("post", get_request_method());
+        $this->assertFalse(Request::isGet());
+        $this->assertTrue(Request::isPost());
+        $this->assertFalse(Request::isHead());
+        $_SERVER["REQUEST_METHOD"] = "HEAD";
+        $this->assertEquals("head", get_request_method());
+        $this->assertFalse(Request::isGet());
+        $this->assertFalse(Request::isPost());
+        $this->assertTrue(Request::isHead());
+    }
+
     public function testIsAjaxRequest() {
         unset($_SERVER['HTTP_X_REQUESTED_WITH']);
         $this->assertFalse(Request::isAjaxRequest());
@@ -77,6 +95,12 @@ class RequestTest extends \PHPUnit\Framework\TestCase {
         $_SERVER["HTTP_HOST"] = "en.ulicms.de";
         $this->assertEquals("en.ulicms.de", Request::getDomain());
         $this->assertEquals("en.ulicms.de", get_domain());
+    }
+
+    public function testGetStatusCodeByNumber() {
+        $this->assertEquals("200 OK", getStatusCodeByNumber(200));
+        $this->assertEquals("404 Not Found", getStatusCodeByNumber(404));
+        $this->assertEquals("418 I'm a teapot", getStatusCodeByNumber(418));
     }
 
     public function testGetReferrer() {

@@ -30,4 +30,48 @@ class PackageManagerTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($packageManager->isInstalled("my_ugly_theme", PackageTypes::TYPE_THEME));
     }
 
+    public function testSplitPackageName() {
+        $packageManager = new PackageManager();
+        $input = "foo-bar-2.0";
+        $expected = [
+            "foo-bar",
+            "2.0"
+        ];
+        $this->assertEquals($expected, $packageManager->splitPackageName($input));
+    }
+
+    public function testCheckForNewerVersionPackageReturnsFalse() {
+        $packageManager = new PackageManager();
+        $this->assertEquals(
+                "3.3.7",
+                $packageManager->checkForNewerVersionOfPackage("bootstrap")
+        );
+    }
+
+    public function testGetInstalledPatches() {
+        $packageManager = new PackageManager();
+        $patches = $packageManager->getInstalledPatches();
+
+        $this->assertIsArray($patches);
+
+        foreach ($patches as $patch) {
+            $this->assertNotEmpty($patch->id);
+            $this->assertNotEmpty($patch->name);
+            $this->assertNotEmpty($patch->description);
+            $this->assertNotEmpty($patch->url);
+            $this->assertNotEmpty($patch->date);
+        }
+    }
+
+    public function testGetInstalledPatchNames() {
+        $packageManager = new PackageManager();
+        $patches = $packageManager->GetInstalledPatchNames();
+
+        $this->assertIsArray($patches);
+
+        foreach ($patches as $patch) {
+            $this->assertNotEmpty($patch);
+        }
+    }
+
 }

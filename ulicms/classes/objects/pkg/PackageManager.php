@@ -35,7 +35,7 @@ class PackageManager {
     }
 
     public function truncateInstalledPatches(): bool {
-        return db_query("TRUNCATE TABLE " . tbname("installed_patches"));
+        return Database::truncateTable("installed_patches");
     }
 
     public function isInstalled(string $package, string $type = PackageTypes::TYPE_MODULE): bool {

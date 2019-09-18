@@ -10,7 +10,7 @@ if (!$permissionChecker->hasPermission("info")) {
     }
     ?>
     <p>
-        <strong>Release <?php echo cms_version(); ?> "<?php echo $version->getVersion(); ?>"</strong>
+        <strong>Release <?php echo cms_version(); ?> "<?php echo $version->getCodeName(); ?>"</strong>
         <?php if ($version->getBuildTimestamp() > 0) { ?>
             <br /> <small><?php translate("build_date"); ?>: <?php echo $version->getBuildDate() ?></small>
             <?php

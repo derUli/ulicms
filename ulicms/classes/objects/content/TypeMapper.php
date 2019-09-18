@@ -43,18 +43,18 @@ class TypeMapper {
 
     // custom modules may load their own content type models
     public static function loadMapping(): void {
-        $objectRegistry = [];
         $modules = getAllModules();
         foreach ($modules as $module) {
             $mappings = getModuleMeta($module, "type_classes");
 
-            if ($mappings) {
-                foreach ($mappings as $key => $value) {
-                    if (StringHelper::isNullOrEmpty($value)) {
-                        unset(self::$mapping[$key]);
-                    } else {
-                        self::$mapping[$key] = $value;
-                    }
+            if (!$mappings) {
+                continue;
+            }
+            foreach ($mappings as $key => $value) {
+                if (StringHelper::isNullOrEmpty($value)) {
+                    unset(self::$mapping[$key]);
+                } else {
+                    self::$mapping[$key] = $value;
                 }
             }
         }
