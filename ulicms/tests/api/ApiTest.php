@@ -115,10 +115,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(var_is_type("nicht leer", "typ_der_nicht_existiert", true));
     }
 
-    public function testVarDumpStr() {
-        throw new NotImplementedException();
-    }
-
     public function testStrContainsTrue() {
         $this->assertTrue(str_contains("Ananas", "Ich esse gerne Ananas."));
     }
@@ -803,6 +799,53 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
     public function testGetAllLanguagesNotFiltered() {
         $languages = getAllLanguages();
         $this->assertGreaterThanOrEqual(1, count($languages));
+    }
+
+    public function testVarDumpStrReturnsStringWithOneVar() {
+        $expected = file_get_contents(
+                Path::resolve("ULICMS_ROOT/tests/fixtures/var_dump_str.txt"
+                )
+        );
+        $output = var_dump_str(new Page());
+        $this->assertStringContainsString($expected, $output);
+    }
+
+    public function testVarDumpStrWithoutAnything() {
+        $this->assertEmpty(var_dump_str());
+    }
+
+    public function testArrayKeep() {
+        $input = [
+            "hello" => "world",
+            "foo" => "bar",
+            "cat" => "dog",
+            "pig" => "chicken"
+        ];
+
+        $keys = [
+            "cat",
+            "pig"
+        ];
+
+
+        $expected = [
+            "cat" => "dog",
+            "pig" => "chicken"
+        ];
+
+        $this->assertEquals($expected, array_keep($input, $keys));
+    }
+
+    public function testGetAllMenus() {
+        throw new NotImplementedException();
+    }
+
+    public function testGetAllMenusWithAdditional() {
+        throw new NotImplementedException();
+    }
+
+    public function testGetAllMenusOnlyUsed() {
+        throw new NotImplementedException();
     }
 
 }

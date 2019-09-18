@@ -1,0 +1,65 @@
+  ["id"]=>
+  NULL
+  ["slug"]=>
+  string(0) ""
+  ["title"]=>
+  string(0) ""
+  ["alternate_title"]=>
+  string(0) ""
+  ["target"]=>
+  string(5) "_self"
+  ["category_id"]=>
+  int(1)
+  ["content"]=>
+  string(0) ""
+  ["language"]=>
+  string(2) "de"
+  ["menu_image"]=>
+  NULL
+  ["active"]=>
+  int(1)
+  ["created"]=>
+  int(0)
+  ["lastmodified"]=>
+  int(0)
+  ["author_id"]=>
+  NULL
+  ["group_id"]=>
+  NULL
+  ["lastchangeby"]=>
+  int(1)
+  ["views"]=>
+  int(0)
+  ["menu"]=>
+  string(3) "top"
+  ["position"]=>
+  int(0)
+  ["cache_control"]=>
+  string(4) "auto"
+  ["parent_id"]=>
+  NULL
+  ["access"]=>
+  string(3) "all"
+  ["meta_description"]=>
+  NULL
+  ["meta_keywords"]=>
+  NULL
+  ["deleted_at":"Page":private]=>
+  NULL
+  ["theme"]=>
+  NULL
+  ["custom_data"]=>
+  array(0) {
+  }
+  ["type"]=>
+  string(4) "page"
+  ["og_title"]=>
+  string(0) ""
+  ["og_image"]=>
+  string(0) ""
+  ["og_description"]=>
+  string(0) ""
+  ["hidden"]=>
+  int(0)
+  ["comments_enabled"]=>
+  NULL

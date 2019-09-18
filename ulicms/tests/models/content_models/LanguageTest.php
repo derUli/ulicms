@@ -4,14 +4,20 @@ use UliCMS\Models\Content\Language;
 
 class LanguageTest extends \PHPUnit\Framework\TestCase {
 
+    private $initialDefaultLanguage;
+
     public function setUp() {
+        $this->initialDefaultLanguage = Settings::get("default_language");
         $this->tearDown();
+
+        Settings::set("default_language", "de");
     }
 
     public function tearDown() {
         $sql = "delete from `{prefix}languages` where language_code <> 'de' and language_code <> 'en'";
         Database::query($sql, true);
-        Settings::set("default_language", "de");
+
+        Settings::set("default_language", $this->initialDefaultLanguage);
     }
 
     public function testGetAllLanguages() {
