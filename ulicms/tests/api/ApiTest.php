@@ -272,21 +272,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull(get_html_editor());
     }
 
-    public function testGetHtmlEditorHtmlEditorIsEmptyReturnsNull() {
-        Database::query("update {prefix}users set html_editor = '' where id = {$this->initialUser->id}", true);
-
-        @session_start();
-        register_session(getUserById(
-                        ($this->initialUser->id)
-                ), false);
-
-        $user = new User($this->initialUser->id);
-
-        $this->assertEquals("", $user->getHtmlEditor());
-
-        @session_destroy();
-    }
-
     public function testGetHtmlEditorReturnsCKEditor() {
         $user = new User();
         $user->setUsername("testuser-1");
@@ -1102,6 +1087,41 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetModuleUninstallScriptPath2() {
         $this->assertStringEndsWith("content/modules/my_module/uninstall.php", getModuleUninstallScriptPath2("my_module"));
+    }
+
+    public function testGetFieldsForCustomType() {
+        $this->assertCount(0, getFieldsForCustomType("gibts_nicht"));
+    }
+
+    public function testGetOnlineUsersReturnsEmptyArray() {
+        $usersOnline = getUsersOnline();
+        $this->assertCount(0, $usersOnline);
+    }
+
+    public function testGetOnlineUsersReturnsArrayWith2Items() {
+        $user1 = new User();
+        $user1->setUsername("testuser-1");
+        $user1->setPassword(rand_string(23));
+        $user1->setLastname("Beutlin");
+        $user1->setFirstname("Bilbo");
+        $user1->setHTMLEditor("ckeditor");
+        $user1->save();
+        $user1->setLastAction(time() - 10);
+
+        $user2 = new User();
+        $user2->setUsername("testuser-2");
+        $user2->setPassword(rand_string(23));
+        $user2->setLastname("Duck");
+        $user2->setFirstname("Donald");
+        $user2->setHTMLEditor("ckeditor");
+        $user2->save();
+        $user2->setLastAction(time() - 10);
+
+        $usersOnline = getUsersOnline();
+        $this->assertCount(2, $usersOnline);
+
+        $user1->delete();
+        $user2->delete();
     }
 
 }

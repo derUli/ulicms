@@ -321,20 +321,14 @@ function getLanguageFilePath(string $lang = "de"): string {
 // Gibt den für den derzeit eingeloggten User eingestellten HTML-Editor aus.
 // Wenn der Anwender nicht eingeloggt ist return null
 function get_html_editor(): ?string {
-    if (!is_logged_in()) {
+    $user_id = get_user_id();
+
+    if (!$user_id) {
         return null;
     }
-    $result = db_query("SELECT html_editor from " . tbname("users") . " where id = " . get_user_id());
-    if (!$result) {
-        return "ckeditor";
-    }
 
-    $obj = db_fetch_assoc($result);
-    if (!is_null($obj["html_editor"]) and ! empty($obj["html_editor"])) {
-        return $obj["html_editor"];
-    } else {
-        return "ckeditor";
-    }
+    $user = new User($user_id);
+    return $user->getHTMLEditor();
 }
 
 // Prüfen, ob Anti CSRF Token vorhanden ist
