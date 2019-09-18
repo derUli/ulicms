@@ -166,5 +166,26 @@ class RequestTest extends \PHPUnit\Framework\TestCase {
 
         $this->assertEquals("111.111.111.111", Request::getIp());
     }
-
+	
+    public function testSiteProtocolExpectHttp() {
+        $_SERVER["SERVER_PORT"] = 80;
+		ob_start();
+		site_protocol();
+        $this->assertEquals("http://", ob_get_clean());
+    }
+    public function testSiteProtocolExpectHttps() {
+        $_SERVER["SERVER_PORT"] = 443;
+		ob_start();
+		site_protocol();
+        $this->assertEquals("https://", ob_get_clean());
+    }
+	
+    public function testIsSSLReturnsFalse() {
+        $_SERVER["SERVER_PORT"] = 80;
+        $this->assertFalse(is_ssl());
+    }
+    public function testIsSSLReturnsTrue() {
+        $_SERVER["SERVER_PORT"] = 443;
+        $this->assertTrue(is_ssl());
+    }
 }
