@@ -13,6 +13,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
 		[module="test"]
 		[module=&quot;hello&quot;]
 		consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.';
+    private $savedSettings = [];
 
     public function setUp() {
         @session_start();
@@ -27,6 +28,15 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $_SERVER['HTTP_HOST'] = "company.com";
         $_SESSION["language"] = "de";
         $_SERVER["REQUEST_URI"] = "/";
+
+        $settings = array(
+            "frontpage",
+            "frontpage_de",
+            "frontpage_en"
+        );
+        foreach ($settings as $setting) {
+            $this->savedSettings[$setting] = Settings::get($setting);
+        }
 
         $this->cleanUp();
     }
@@ -47,6 +57,9 @@ class PageTest extends \PHPUnit\Framework\TestCase {
             Settings::set("commentable_content_types", $this->initialCommentableContentTypes);
         } else {
             Settings::delete("commentable_content_types");
+        }
+        foreach ($this->savedSettings as $key => $value) {
+            Settings::set($key, $value);
         }
     }
 
@@ -821,7 +834,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
     public function testIsFrontPageReturnsTrue() {
         $page = new Page();
         $page->title = 'hallo';
-        $page->slug = 'unit-test-not-frontpage' . uniqid();
+        $page->slug = 'unit-test-is-frontpage' . uniqid();
         $page->language = 'de';
         $page->content = "foo [csrf_token_html] bar";
         $page->author_id = 1;

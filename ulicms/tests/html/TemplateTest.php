@@ -38,10 +38,11 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         }
 
         Database::query("delete from {prefix}content where "
-                . "title like 'Test Page %' or slug ='testgetbodyclasses'",
+                . "title like 'Test Page %' or slug like 'testpage%' or slug ='testgetbodyclasses'",
                 true);
 
         unset($_SERVER["REQUEST_URI"]);
+		unset($_SESSION["language"]);
     }
 
     private function cleanUp() {
@@ -169,6 +170,8 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $_SESSION["language"] = "en";
         $this->assertEquals("Motto English", Template::getMotto());
         $this->cleanUp();
+
+		
     }
 
     public function testGetMottoWithExistingLanguage() {
@@ -274,8 +277,9 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $page->group_id = $group_id;
         $page->save();
 
-        $_GET["seite"] = $page->slug;
         $_SESSION["language"] = $page->language;
+        $_GET["seite"] = $page->slug;
+		
         $_GET["REQUEST_URI"] = "/{$page->slug}.html";
         $this->assertEquals("<p>Wir schreiben das Jahr " . date("Y") .
                 " des fliegenden Spaghettimonsters</p>",
@@ -285,7 +289,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
     public function testGetBodyClassesHome() {
         $_SESSION["language"] = "de";
         $_GET["seite"] = get_frontpage();
-        $this->assertRegExp('/page-id-\d{1,19} home page(.+)/',
+        $this->assertRegExp('/page-id-\d+ home page(.+)/',
                 Template::getBodyClasses());
 
         Vars::delete("id");
@@ -300,7 +304,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         Template::bodyClasses();
 
         $this->assertRegExp(
-                '/page-id-\d{1,19} home page(.+)/',
+                '/page-id-\d+ home page(.+)/',
                 ob_get_clean()
         );
 
@@ -311,7 +315,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
     public function testGetBodyClassesError403Active() {
         $page = new Page();
         $page->title = 'testgetbodyclasses';
-        $page->slug = 'testgetbodyclasses';
+        $page->slug = 'testpage-'.uniqid();
         $page->language = 'de';
         $page->content = "Hello World";
         $page->author_id = 1;
@@ -320,10 +324,10 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $page->active = 0;
         $page->save();
 
-        $_SESSION["language"] = "de";
-        $_GET["seite"] = "testgetbodyclasses";
+        $_SESSION["language"] = $page->language;
+        $_GET["seite"] = $page->slug;
 
-        $this->assertRegExp('/page-id-\d{1,19} error403 errorPage(.+)/',
+        $this->assertRegExp('/page-id-\d+ error403 errorPage(.+)/',
                 Template::getBodyClasses());
 
         $page->delete();
@@ -335,7 +339,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
     public function testGetBodyClassesError403CauseAccess() {
         $page = new Page();
         $page->title = 'testgetbodyclasses';
-        $page->slug = 'testgetbodyclasses';
+        $page->slug = 'testpage-'.uniqid();
         $page->language = 'de';
         $page->content = "Hello World";
         $page->author_id = 1;
@@ -344,10 +348,10 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $page->active = 1;
         $page->save();
 
-        $_SESSION["language"] = "de";
-        $_GET["seite"] = "testgetbodyclasses";
+        $_SESSION["language"] = $page->language;
+        $_GET["seite"] = $page->slug;
 
-        $this->assertRegExp('/page-id-\d{1,19} error403 errorPage(.+)/',
+        $this->assertRegExp('/page-id-\d+ error403 errorPage(.+)/',
                 Template::getBodyClasses());
 
         $page->delete();
@@ -397,7 +401,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
     public function testGetBodyClassesContainsModule() {
         $_SESSION["language"] = "de";
         $_GET["seite"] = ModuleHelper::getFirstPageWithModule()->slug;
-        $this->assertRegExp('/page-id-\d{1,19} (.+)containsModule/',
+        $this->assertRegExp('/page-id-\d+ (.+)containsModule/',
                 Template::getBodyClasses());
         Vars::delete("id");
         Vars::delete("active");
