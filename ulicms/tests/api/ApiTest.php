@@ -265,11 +265,11 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("de", get_prefered_language(array("de", "en"), $acceptLanguageHeader2));
     }
 
-    public function testGetHtmlEditorNotLoggedInReturnsNull() {
+    public function testGetHtmlEditorNotLoggedInReturnsCkeditor() {
         if (session_id()) {
             @session_destroy();
         }
-        $this->assertNull(get_html_editor());
+        $this->assertEquals("ckeditor", get_html_editor());
     }
 
     public function testGetHtmlEditorReturnsCKEditor() {

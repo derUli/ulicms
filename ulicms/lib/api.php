@@ -324,7 +324,7 @@ function get_html_editor(): ?string {
     $user_id = get_user_id();
 
     if (!$user_id) {
-        return null;
+        return "ckeditor";
     }
 
     $user = new User($user_id);

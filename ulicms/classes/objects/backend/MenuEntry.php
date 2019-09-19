@@ -57,7 +57,7 @@ class MenuEntry {
         return (count($this->children) > 0);
     }
 
-    public function addChild(array $children): void {
+    public function addChildren(array $children): void {
         $this->children[] = $children;
     }
 
@@ -77,7 +77,7 @@ class MenuEntry {
         $this->newWindow = $val;
     }
 
-    // check if the user has permissions to access this menu entry
+// check if the user has permissions to access this menu entry
     public function userHasPermission(): bool {
         $acl = new ACL();
         if (is_string($this->permissions) and ! empty($this->permissions)) {
@@ -92,23 +92,22 @@ class MenuEntry {
             }
             return $isPermitted;
         }
-        // if there are no permissions required for accessing this menu entry
+// if there are no permissions required for accessing this menu entry
         return true;
     }
 
-    // render a single menu item
+// render a single menu item
     public function render(): string {
         $html = "<li>";
-        $targetString = '';
-        if ($this->getNewWindow()) {
-            $targetString = ' target="_blank" ';
+        $targetString = $this->getNewWindow() ? "_blank" : "_self";
+        $cssClasses = "backend-menu-item-{$this->getIdentifier()}";
+        if (get_action() == $this->getIdentifier()) {
+
+            $cssClasses .= " active";
         }
-        $cssClassString = "class=\"backend-menu-item-{$this->getIdentifier()}\"";
-        if ($this->getIdentifier() == get_action()) {
-            $html .= '<a href="' . $this->getLink() . '" class="active"' . $targetString . $cssClassString . '>';
-        } else {
-            $html .= '<a href="' . $this->getLink() . '"' . $targetString . $cssClassString . '>';
-        }
+        $html .= "<a href=\"{$this->getLink()}\" "
+                . "target=\"{$targetString}\" class=\"{$cssClasses}\">";
+
         $html .= $this->getTitle();
         $html .= "</a>";
         $html .= "</li>";

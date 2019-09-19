@@ -51,7 +51,8 @@ class PageTest extends \PHPUnit\Framework\TestCase {
     }
 
     private function cleanUp() {
-        Database::query("delete from {prefix}content where slug = 'testdisableshortcodes' or title like 'Unit Test%'", true);
+        Database::query("delete from {prefix}content where slug = 'testdisableshortcodes' or title like 'Unit Test%' or slug like"
+                . "'unit-test%'", true);
 
         Settings::delete("comments_enabled");
         Settings::delete("commentable_content_types");

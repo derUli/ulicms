@@ -141,7 +141,7 @@ class ModuleHelper extends Helper {
         $dirname = str_replace("\\", "/", $dirname);
 
         if (is_admin_dir()) {
-            $dirname = dirname(dirname($dirname . "/.."));
+            $dirname = dirname($dirname . "/..");
         }
 
         // Replace backslashes with slashes (Windows)

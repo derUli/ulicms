@@ -24,9 +24,10 @@ class BackendHelper extends Helper {
     // set backend action parameter
     public static function setAction(string $action): void {
         $_REQUEST["action"] = $action;
-        $_GET["action"] = $action;
         if (Request::isPost()) {
             $_POST["action"] = $action;
+        } else {
+            $_GET["action"] = $action;
         }
     }
 

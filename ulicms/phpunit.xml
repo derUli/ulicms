@@ -43,6 +43,15 @@
                 <directory>lang/</directory>
             </exclude>
             <exclude>
+                <file>classes/helpers/load.php</file>
+            </exclude>
+            <exclude>
+                <file>classes/exceptions/load.php</file>
+            </exclude>
+            <exclude>
+                <file>classes/creators/load.php</file>
+            </exclude>
+            <exclude>
                 <directory>classes/objects/exceptions.php</directory>
             </exclude>
             <exclude>
