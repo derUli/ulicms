@@ -55,6 +55,17 @@ class SettingsTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(isset($mapped["#This is a comment"]));
     }
 
+    public function testGetAndSetLang() {
+        Settings::setLanguageSetting("my_setting", "Lampukisch");
+        Settings::setLanguageSetting("my_setting", "Germanisch", "de");
+        Settings::setLanguageSetting("my_setting", "Angelsächisch", "en");
+
+        $this->assertEquals("Lampukisch", Settings::getLang("my_setting"));
+        $this->assertEquals("Lampukisch", Settings::getLang("my_setting", "fr"));
+        $this->assertEquals("Germanisch", Settings::getLang("my_setting", "de"));
+        $this->assertEquals("Angelsächisch", Settings::getLang("my_setting", "en"));
+    }
+
     public function testGetAndSetLanguageSetting() {
         Settings::setLanguageSetting("my_setting", "Lampukisch");
         Settings::setLanguageSetting("my_setting", "Germanisch", "de");
@@ -90,6 +101,18 @@ class SettingsTest extends \PHPUnit\Framework\TestCase {
 
         $this->assertEquals(1, Settings::convertVar("wuff", "bool"));
         $this->assertEquals(0, Settings::convertVar("", "bool"));
+    }
+
+    public function testGetAllSettings() {
+        $settings = Settings::getAll();
+
+        $this->assertGreaterThanOrEqual(50, count($settings));
+
+        foreach ($settings as $setting) {
+            $this->assertIsNumeric($setting->id);
+            $this->assertNotEmpty($setting->name);
+            $this->assertTrue(isset($setting->value));
+        }
     }
 
 }

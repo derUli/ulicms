@@ -22,8 +22,8 @@ class ControllerRegistryTest extends \PHPUnit\Framework\TestCase {
         $this->assertInstanceOf(CommentsController::class,
                 ControllerRegistry::get("CommentsController"));
     }
-	
-	public function testGetWithClassNameReturnsNull() {
+
+    public function testGetWithClassNameReturnsNull() {
         $this->assertNull(ControllerRegistry::get("GibtsNichtController"));
     }
 
@@ -85,6 +85,24 @@ class ControllerRegistryTest extends \PHPUnit\Framework\TestCase {
         $_SESSION["login_id"] = $user->getId();
 
         $this->assertFalse(ControllerRegistry::userCanCall("PageController", "createPost"));
+        unset($_SESSION["login_id"]);
+    }
+
+    public function testUserCanCallWildCard() {
+        $user = new User();
+        $user->setUsername("testuser-nicht-admin");
+        $user->setLastname("Admin");
+        $user->setFirstname("Nicht");
+        $user->setPassword(uniqid());
+        $user->setAdmin(false);
+        $user->save();
+
+        $_SESSION["login_id"] = $user->getId();
+
+        $this->assertFalse(
+                ControllerRegistry::userCanCall(
+                        "HomeController", "newsfeed")
+        );
         unset($_SESSION["login_id"]);
     }
 

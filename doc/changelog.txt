@@ -7,6 +7,10 @@ Neue Features:
 Neue API-Methoden
 * User->getAllGroups(): array
 
+Entfernte API-Methoden:
+* Settings::output(string $key, ?string $type = 'str'): void
+* Settings::outputEscaped(string $key, ?string $type = 'str'): void
+
 Entfernte Features:
 * Sortierung der Seitenlistn und Dropdown Filter
   Diese Features werden in den nächsten UliCMS Releases erneut hinzugefügt werden.

@@ -38,21 +38,6 @@ class Settings {
         return null;
     }
 
-    public static function output(string $key, ?string $type = 'str'): void {
-        $value = self::get($key, $type);
-        if ($value) {
-            echo $value;
-        }
-    }
-
-    public static function outputEscaped(string $key,
-            ?string $type = 'str'): void {
-        $value = self::get($key, $type);
-        if ($value) {
-            esc($value);
-        }
-    }
-
     public static function getLanguageSetting(string$name,
             ?string $language = null, ?string $type = 'str') {
         $retval = false;
@@ -111,7 +96,7 @@ class Settings {
         SettingsCache::set($key, $originalValue);
     }
 
-// Remove an configuration variable
+    // Remove an configuration variable
     public static function delete(string $key): bool {
         $key = db_escape($key);
         db_query("DELETE FROM " . tbname("settings") . " WHERE name='$key'");
