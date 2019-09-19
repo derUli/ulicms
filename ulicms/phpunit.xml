@@ -99,8 +99,10 @@
             <exclude>
                 <directory>content/modules/core_content/lang</directory>
             </exclude>
+			<exclude>
+                <directory>lang/</directory>
+            </exclude>
             <exclude>
-
                 <directory>content/modules/core_package_manager/lang</directory>
             </exclude>
             <exclude>
