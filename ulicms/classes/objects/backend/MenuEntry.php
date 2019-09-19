@@ -92,11 +92,11 @@ class MenuEntry {
             }
             return $isPermitted;
         }
-// if there are no permissions required for accessing this menu entry
+        // if there are no permissions required for accessing this menu entry
         return true;
     }
 
-// render a single menu item
+    // render a single menu item
     public function render(): string {
         $html = "<li>";
         $targetString = $this->getNewWindow() ? "_blank" : "_self";

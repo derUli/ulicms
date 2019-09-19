@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use UliCMS\Exceptions\AccessDeniedException;
 
+// All module controllers must inherit from this class
 abstract class Controller {
 
     protected $blacklist = array(
@@ -13,7 +14,7 @@ abstract class Controller {
     public function __construct() {
         // add all hooks to blacklist
         // blacklisted methods can not be remote called as action
-        $file = Path::resolve("ULICMS_ROOT/lib/hooks.txt");
+        $file = Path::resolve("ULICMS_ROOT/lib/ressources/hooks.txt");
         if (file_exists($file)) {
             $lines = StringHelper::linesFromFile($file);
             $lines = array_unique($lines);

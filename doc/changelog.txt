@@ -10,6 +10,11 @@ Neue API-Methoden
 Entfernte API-Methoden:
 * Settings::output(string $key, ?string $type = 'str'): void
 * Settings::outputEscaped(string $key, ?string $type = 'str'): void
+* AdminMenu->addChild(array $children): void
+* MenuEntry->addChild(array $children): void
+* eTagFromString($str): void
+* getModuleName(string $module): string
+* initPFBC(): void
 
 Entfernte Features:
 * Sortierung der Seitenlistn und Dropdown Filter

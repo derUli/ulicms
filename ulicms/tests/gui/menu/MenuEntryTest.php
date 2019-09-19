@@ -4,7 +4,40 @@ use UliCMS\Exceptions\NotImplementedException;
 
 class MenuEntryTest extends \PHPUnit\Framework\TestCase {
 
+    private $permittedUser;
+    private $notPermittedUser;
+    private $testGroup;
+
+    public function setUp() {
+        $group = new Group();
+        $group->addPermission("info", true);
+        $group->save();
+
+        $permittedUser = new User();
+        $permittedUser->setUsername("testuser-admin");
+        $permittedUser->setLastname("Admin");
+        $permittedUser->setFirstname("Der");
+        $permittedUser->setPassword(uniqid());
+        $permittedUser->setPrimaryGroup($group);
+        $permittedUser->save();
+        $this->permittedUser = $permittedUser;
+
+        $this->testGroup = $group;
+
+        $notPermittedUser = new User();
+        $notPermittedUser->setUsername("testuser-nichtadmin");
+        $notPermittedUser->setLastname("Admin");
+        $notPermittedUser->setFirstname("Nicht");
+        $notPermittedUser->setPassword(uniqid());
+        $notPermittedUser->save();
+        $this->notPermittedUser = $notPermittedUser;
+    }
+
     public function tearDown() {
+        $this->permittedUser->delete();
+        $this->notPermittedUser->delete();
+        $this->testGroup->delete();
+
         unset($_GET["action"]);
         unset($_REQUEST["action"]);
     }
@@ -98,11 +131,18 @@ class MenuEntryTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testUserHasPermissionReturnsTrue() {
-        throw new NotImplementedException();
+        $menuEntry = $this->constructMenuEntryWithoutChildren();
+
+        $this->permittedUser->registerSession(false);
+        $this->assertTrue($menuEntry->userHasPermission());
     }
 
     public function testUserHasPermissionReturnsFalse() {
-        throw new NotImplementedException();
+
+        $menuEntry = $this->constructMenuEntryWithoutChildren();
+
+        $this->notPermittedUser->registerSession(false);
+        $this->assertFalse($menuEntry->userHasPermission());
     }
 
     public function testRender() {

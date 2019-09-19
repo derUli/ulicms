@@ -23,10 +23,6 @@ class AdminMenu {
         return (count($this->children) > 0);
     }
 
-    public function addChild(array $children): void {
-        $this->children[] = $children;
-    }
-
     // render the menu as list which is formatted by SCSS
     public function render(): string {
         $html = "<ul>";

@@ -39,20 +39,24 @@
             <exclude>
                 <directory>installer.aus/</directory>
             </exclude>
-            <exclude>
-                <directory>lang/</directory>
-            </exclude>
+
             <exclude>
                 <file>classes/helpers/load.php</file>
             </exclude>
             <exclude>
-                <file>classes/exceptions/load.php</file>
+                <directory>classes/exceptions</directory>
             </exclude>
             <exclude>
                 <file>classes/creators/load.php</file>
             </exclude>
             <exclude>
-                <directory>classes/objects/exceptions.php</directory>
+                <file>classes/objects/backend/load.php</file>
+            </exclude>
+            <exclude>
+                <file>classes/objects/exceptions.php</file>
+            </exclude>
+            <exclude>
+                <file>classes/objects/abstract/load.php</file>
             </exclude>
             <exclude>
                 <!-- Damn PHPUnit has no support for wildcards. -->
