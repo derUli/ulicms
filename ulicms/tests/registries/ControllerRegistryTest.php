@@ -22,6 +22,10 @@ class ControllerRegistryTest extends \PHPUnit\Framework\TestCase {
         $this->assertInstanceOf(CommentsController::class,
                 ControllerRegistry::get("CommentsController"));
     }
+	
+	public function testGetWithClassNameReturnsNull() {
+        $this->assertNull(ControllerRegistry::get("GibtsNichtController"));
+    }
 
     public function testGetWithActionReturnsController() {
         BackendHelper::setAction("audio");
