@@ -309,8 +309,8 @@
             "authors": [
                 {
                     "name": "Jimmi Westerberg",
-                    "role": "Developer",
-                    "homepage": "http://www.westsworld.dk"
+                    "homepage": "http://www.westsworld.dk",
+                    "role": "Developer"
                 }
             ],
             "description": "Simple module, that displays the date in a \"time ago\" format",

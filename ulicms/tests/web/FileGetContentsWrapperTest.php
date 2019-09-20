@@ -19,6 +19,15 @@ class FileGetContentsWrapperTest extends \PHPUnit\Framework\TestCase {
         CacheUtil::clearCache();
     }
 
+    public function testFileGetContentsWrapperWithLocalPath() {
+        $fileContent = file_get_contents_wrapper(
+                Path::resolve(
+                        "ULICMS_ROOT/tests/fixtures/lorem_ipsum.txt"
+                )
+        );
+        $this->assertStringContainsString("Lorem ipsum", $fileContent);
+    }
+
     public function testDownloadUrlWithChecksumValid() {
         $this->assertTrue(is_string(file_get_contents_wrapper(self::EXAMPLE_URL_OK, true, self::EXAMPLE_HASH)));
     }

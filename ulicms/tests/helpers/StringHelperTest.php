@@ -137,7 +137,7 @@ Noch mehr Text <a href="http://www.ulicms.de" rel="nofollow" target="_blank">htt
                 Path::resolve("ULICMS_ROOT/tests/fixtures/lorem_ipsum.txt"));
 
         $keywords = StringHelper::keywordsFromString($input);
-        $this->assertCount(74, $keywords);
+        $this->assertCount(75, $keywords);
         $this->assertEquals(7, $keywords["Lorem"]);
         $this->assertEquals(14, $keywords["et"]);
         $this->assertEquals(7, $keywords["ipsum"]);

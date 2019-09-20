@@ -867,7 +867,10 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
                 )
         );
         $output = var_dump_str(new Page());
-        $this->assertStringContainsString($expected, $output);
+        $this->assertStringContainsString(
+                normalizeLN($expected),
+                normalizeLN($output)
+        );
     }
 
     public function testVarDumpStrWithoutAnything() {
@@ -1047,7 +1050,10 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         );
         $output = json_readable_encode($data);
 
-        $this->assertEquals($expected, $output);
+        $this->assertEquals(
+                normalizeLN($expected),
+                normalizeLN($output)
+        );
     }
 
     public function testGetSystemLanguageReturnsSystemLanguageFromSession() {

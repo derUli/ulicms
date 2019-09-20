@@ -25,6 +25,7 @@ class GroupTest extends \PHPUnit\Framework\TestCase {
             Settings::set($key, $value);
         }
         @session_destroy();
+        unset($_SESSION["login_id"]);
     }
 
     public function testCreateGroup() {
@@ -41,8 +42,19 @@ class GroupTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("bla", $group->getName());
         $this->assertTrue(is_array($group->getPermissions()));
         $this->assertTrue(count($group->getPermissions()) >= 2);
+
+        $group->setName("Hello");
+        $group->save();
+
+        $group = new Group($oldID);
+        $this->assertEquals("Hello", $group->getName());
+
         $group->delete();
         $this->assertNull($group->getId());
+
+        // delete an already deleted element should do nothing
+        $group->delete();
+
         $group = new Group($oldID);
         $this->assertNull($group->getId());
     }
@@ -64,6 +76,10 @@ class GroupTest extends \PHPUnit\Framework\TestCase {
         $this->assertInstanceOf(Group::class, $group);
         $this->assertEquals(1, $group->getId());
         $this->assertFalse(StringHelper::isNullOrWhitespace($group->getName()));
+    }
+
+    public function testGetCurrentGroupReturnsNull() {
+        $this->assertNull(Group::getCurrentGroup());
     }
 
     public function testGetPrimaryGroupIdReturnsNull() {
@@ -88,6 +104,42 @@ class GroupTest extends \PHPUnit\Framework\TestCase {
         $this->assertInstanceOf(Group::class, $group);
         $this->assertEquals(1, $group->getId());
         $this->assertFalse(StringHelper::isNullOrWhitespace($group->getName()));
+    }
+
+    public function testSetPermissions() {
+        $group = new Group();
+        $group->setPermissions(["foo", "bar"]);
+        $this->assertEquals(
+                ["foo", "bar"],
+                $group->getPermissions()
+        );
+    }
+
+    public function testAddPermission() {
+        $group = new Group();
+        $group->setPermissions(["foo" => true, "bar" => false]);
+        $group->removePermission("foo");
+
+        $this->assertEquals(["bar" => false], $group->getPermissions());
+    }
+
+    public function testSetAllowableTags() {
+        $group = new Group();
+        $group->setAllowableTags("<strong><p><i><em><a><ul><li><ol>");
+
+        $this->assertEquals("<strong><p><i><em><a><ul><li><ol>",
+                $group->getAllowableTags());
+    }
+
+    public function testGetIdReturnsNull() {
+        $group = new Group();
+        $this->assertNull($group->getId());
+    }
+
+    public function testSetAndGetIdIdReturnsNull() {
+        $group = new Group();
+        $group->setId(123);
+        $this->assertEquals(123, $group->getId());
     }
 
 }

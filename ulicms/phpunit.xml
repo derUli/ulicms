@@ -56,7 +56,52 @@
                 <file>classes/objects/exceptions.php</file>
             </exclude>
             <exclude>
+                <file>classes/objects/database/load.php</file>
+            </exclude>
+            <exclude>
+                <file>classes/objects/files/load.php</file>
+            </exclude>
+            <exclude>
+                <file>classes/objects/html/load.php</file>
+            </exclude>
+            <exclude>
+                <file>classes/objects/localization/load.php</file>
+            </exclude>
+            <exclude>
+                <file>classes/objects/logging/load.php</file>
+            </exclude>
+            <exclude>
+                <file>classes/objects/media/load.php</file>
+            </exclude>
+            <exclude>
                 <file>classes/objects/abstract/load.php</file>
+            </exclude>
+            <exclude>
+                <file>classes/objects/modules/load.php</file>
+            </exclude>
+            <exclude>
+                <file>classes/objects/pkg/load.php</file>
+            </exclude>
+            <exclude>
+                <file>classes/objects/privacy/load.php</file>
+            </exclude>
+            <exclude>
+                <file>classes/objects/spam/load.php</file>
+            </exclude>
+            <exclude>
+                <file>classes/objects/security/load.php</file>
+            </exclude>
+            <exclude>
+                <file>classes/objects/settings/load.php</file>
+            </exclude>
+            <exclude>
+                <file>classes/objects/storages/load.php</file>
+            </exclude>
+            <exclude>
+                <file>classes/objects/users/load.php</file>
+            </exclude>
+            <exclude>
+                <file>classes/objects/web/load.php</file>
             </exclude>
             <exclude>
                 <!-- Damn PHPUnit has no support for wildcards. -->
@@ -99,7 +144,7 @@
             <exclude>
                 <directory>content/modules/core_content/lang</directory>
             </exclude>
-			<exclude>
+            <exclude>
                 <directory>lang/</directory>
             </exclude>
             <exclude>
@@ -156,6 +201,9 @@
                 <directory>content/modules/core_history/templates</directory>
             </exclude>
             <exclude>
+                <directory>classes/objects/constants</directory>
+            </exclude>
+            <exclude>
                 <directory>content/modules/core_media/templates</directory>
             </exclude>
             <exclude>
@@ -205,6 +253,12 @@
             </exclude>
             <exclude>
                 <file>admin/inc/header.php</file>
+            </exclude>
+            <exclude>
+                <file>lib/cron.php</file>
+            </exclude>
+            <exclude>
+                <file>admin/cron.php</file>
             </exclude>
         </whitelist>
     </filter>
