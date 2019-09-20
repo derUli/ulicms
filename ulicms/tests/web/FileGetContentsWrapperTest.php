@@ -44,6 +44,7 @@ class FileGetContentsWrapperTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(is_url("http://"));
         $this->assertFalse(is_url("https://"));
         $this->assertFalse(is_url("ftp://"));
+        $this->assertFalse(is_url(null));
     }
 
     public function testUrlExistsReturnsTrue() {
