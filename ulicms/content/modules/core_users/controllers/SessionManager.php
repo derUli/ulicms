@@ -22,7 +22,7 @@ class SessionManager extends Controller {
         if ($twofactor_authentication) {
             $confirmation_code = $_POST["confirmation_code"];
         }
-		
+
         // TODO:
         // * user $user->checkPassword() instead of validate_login()
         // * Implement Google Authenticator in
@@ -84,12 +84,13 @@ class SessionManager extends Controller {
             $user = new User($user_id);
             $user->setRequirePasswordChange(1);
             $user->save();
-            register_session(getUserById($user_id));
             $token = $reset->deleteToken($_REQUEST["token"]);
             if ($logger) {
                 $name = $user->getUsername() ? $user->getUsername() : AuditLog::UNKNOWN;
                 $logger->debug("Password reset $name - OK");
             }
+
+            register_session(getUserById($user_id));
         } else {
             if ($logger) {
                 $logger->error("Password reset - Invalid token");
