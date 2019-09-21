@@ -16,6 +16,12 @@ class AudioTest extends \PHPUnit\Framework\TestCase {
         $audio->setOGGFile("music.ogg");
         $audio->setCategoryId(1);
         $audio->save();
+
+        sleep(1);
+
+        $this->assertGreaterThanOrEqual(time() - 5, $audio->getCreated());
+        $this->assertEquals($audio->getCreated(), $audio->getUpdated());
+
         $this->assertNotNull($audio->getID());
         $id = $audio->getId();
         $audio = new Audio($id);
@@ -40,6 +46,9 @@ class AudioTest extends \PHPUnit\Framework\TestCase {
 
         $audio->setCategory(new Category(1));
         $audio->save();
+
+
+        $this->assertNotEquals($audio->getCreated(), $audio->getUpdated());
 
         $audio = new Audio($id);
 

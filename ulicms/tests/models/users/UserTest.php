@@ -316,4 +316,85 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $user->delete();
     }
 
+    public function testGetPasswordChanged() {
+        $user = new User();
+        $user->setPassword("top-secret");
+        $this->assertRegExp(
+                '/\d{1,4}-\d{1,2}-\d[1,2] \d{1,2}:\d{1,2}:\d{1,2}/',
+                $user->getPasswordChanged()
+        );
+    }
+
+    public function testSetAndGetLastAction() {
+        $user = new User();
+        $user->setUsername("john-doe");
+        $user->setFirstname("John");
+        $user->setLastname("Doe");
+        $user->setPassword("password123");
+        $user->setEmail("john@doe.com");
+        // does nothing because the dataset is not saved yet
+        $user->setLastAction(null);
+        $user->save();
+
+        // is zero until the user does something
+        $this->assertEquals(0, $user->getLastAction());
+
+        $time = time();
+        $user->setLastAction($time);
+        $this->assertEquals($time, $user->getLastAction());
+
+        $user->setLastAction(null);
+        $this->assertEquals(0, $user->getLastAction());
+
+        $user->delete();
+    }
+
+    // Avatar is not implemented yet
+    // UliCMS had support for Gravatars
+    // but had to dropped it because
+    // the introduction of the new GDPR privacy laws in
+    // the european union
+    public function testSetAvatar() {
+
+        $user = new User();
+        $this->expectException(NotImplementedException::class);
+        $user->setAvatar($file);
+    }
+
+    public function testRemoveSecondaryGroup() {
+
+        $group1 = new Group();
+        $group1->setName("Group1");
+        $group1->setId(123);
+
+        $group2 = new Group();
+        $group2->setName("Group2");
+        $group2->setId(456);
+
+        $user = new User();
+        $user->setSecondaryGroups([$group1, $group2]);
+
+        $this->assertCount(2, $user->getSecondaryGroups());
+
+        $user->removeSecondaryGroup($group1);
+
+        $this->assertCount(1, $user->getSecondaryGroups());
+        $this->assertEquals(
+                "Group2",
+                $user->getSecondaryGroups()[0]->getName()
+        );
+    }
+
+    public function testSetHtmlEditorToNonSupported() {
+        $user = new User();
+
+        $user->setHTMLEditor("codemirror");
+        $this->assertEquals("codemirror", $user->getHTMLEditor());
+
+        // there is no "super_editor" so UliCMS sets html_editor
+        // to the default value
+        $user->setHTMLEditor("super_editor");
+        $this->assertEquals("ckeditor", $user->getHTMLEditor());
+    }
+
 }

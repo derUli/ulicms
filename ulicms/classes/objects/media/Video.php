@@ -70,8 +70,8 @@ class Video extends Model {
             $this->webm_file = $result->webm_file;
             $this->setCategoryId($result->category_id ?
                             intval($result->category_id) : null);
-            $this->created = $result->created;
-            $this->updated = $result->updated;
+            $this->created = intval($result->created);
+            $this->updated = intval($result->updated);
             $this->width = intval($result->width);
             $this->height = intval($result->height);
         } else {

@@ -284,7 +284,7 @@ class User extends Model {
     }
 
     // The password is encrypted
-    public function getPasswordChanged(): ?int {
+    public function getPasswordChanged(): ?string {
         return $this->password_changed;
     }
 
@@ -324,7 +324,7 @@ class User extends Model {
             $result = Database::pQuery($sql, $args, true);
             if (Database::any($result)) {
                 $data = Database::fetchObject($result);
-                $lastAction = $data->last_action;
+                $lastAction = intval($data->last_action);
             }
         }
         return $lastAction;
@@ -502,7 +502,7 @@ class User extends Model {
         return ModuleHelper::getBaseUrl("/admin/gfx/no_avatar.png");
     }
 
-    public function setAvatar(): void {
+    public function setAvatar($file): void {
         throw new NotImplementedException(
                 "Avatar feature is not implemented yet."
         );
@@ -536,7 +536,7 @@ class User extends Model {
                 $filtered[] = $group;
             }
         }
-        return $filtered;
+        $this->secondary_groups = $filtered;
     }
 
     public function getPermissionChecker(): PermissionChecker {

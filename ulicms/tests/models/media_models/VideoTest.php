@@ -19,6 +19,10 @@ class VideoTest extends \PHPUnit\Framework\TestCase {
         $video->setWidth(640);
         $video->setHeight(480);
         $video->save();
+        $this->assertGreaterThanOrEqual(time() - 5, $video->getCreated());
+        $this->assertEquals($video->getCreated(), $video->getUpdated());
+
+        sleep(1);
 
         $this->assertNotNull($video->getID());
         $id = $video->getId();
@@ -43,6 +47,8 @@ class VideoTest extends \PHPUnit\Framework\TestCase {
         $video->setWidth(800);
         $video->setHeight(600);
         $video->save();
+
+        $this->assertNotEquals($video->getCreated(), $video->getUpdated());
 
         $video = new Video($id);
 

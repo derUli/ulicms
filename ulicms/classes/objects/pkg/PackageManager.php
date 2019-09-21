@@ -49,7 +49,7 @@ class PackageManager {
             case PackageTypes::TYPE_THEME:
                 return faster_in_array($package, getAllThemes());
             default:
-                throw new NotImplementedException("Package Type {$type} not supported");
+                throw new BadMethodCallException("Package Type {$type} not supported");
         }
     }
 
@@ -214,9 +214,9 @@ class PackageManager {
     }
 
     public function getInstalledPackages(string $type = 'modules'): ?array {
-        if ($type === 'modules') {
+        if ($type === 'modules' or $type === 'module') {
             return $this->getInstalledModules();
-        } else if ($type === 'themes') {
+        } else if ($type === 'themes' or $type === 'theme') {
             return $this->getInstalledThemes();
         }
         throw new BadMethodCallException("No such package type: $type");

@@ -57,7 +57,7 @@ class PasswordResetTest extends \PHPUnit\Framework\TestCase {
         $this->cleanUp();
     }
 
-    public function testGetAllTokens() {
+    public function testGetAllTokensReturnsTokens() {
 
         $passwordReset = new PasswordReset();
         for ($i = 1; $i < 4; $i++) {
@@ -67,6 +67,12 @@ class PasswordResetTest extends \PHPUnit\Framework\TestCase {
         $this->assertCount(4, $passwordReset->getAllTokens());
 
         $this->cleanUp();
+    }
+
+    public function testGetAllTokensReturnsEmptyArray() {
+        Database::truncateTable("password_reset");
+        $passwordReset = new PasswordReset();
+        $this->assertCount(0, $passwordReset->getAllTokens());
     }
 
     public function testGetAllTokensByUserId() {
