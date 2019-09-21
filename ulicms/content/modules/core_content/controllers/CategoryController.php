@@ -16,11 +16,16 @@ class CategoryController extends Controller {
         $logger = LoggerRegistry::get("audit_log");
 
         if (!empty($_REQUEST["name"])) {
-            Categories::addCategory($_REQUEST["name"], $_REQUEST["description"]);
+            Categories::addCategory(
+                    $_REQUEST["name"],
+                    $_REQUEST["description"]
+            );
             if ($this->logger) {
                 $user = getUserById(get_user_id());
-                $name = isset($user["username"]) ? $user["username"] : AuditLog::UNKNOWN;
-                $this->logger->debug("User $name - Created a new category ({$_REQUEST['name']})");
+                $name = isset($user["username"]) ?
+                        $user["username"] : AuditLog::UNKNOWN;
+                $this->logger->debug("User $name - "
+                        . "Created a new category ({$_REQUEST['name']})");
             }
         }
         Request::redirect(ModuleHelper::buildActionURL("categories"));
@@ -28,11 +33,18 @@ class CategoryController extends Controller {
 
     public function updatePost() {
         if (!empty($_REQUEST["name"]) and ! empty($_REQUEST["id"])) {
-            Categories::updateCategory(intval($_REQUEST["id"]), $_REQUEST["name"], $_REQUEST["description"]);
+            Categories::updateCategory(
+                    intval($_REQUEST["id"]),
+                    $_REQUEST["name"],
+                    $_REQUEST["description"]
+            );
             if ($this->logger) {
                 $user = getUserById(get_user_id());
-                $name = isset($user["username"]) ? $user["username"] : AuditLog::UNKNOWN;
-                $this->logger->debug("User $name - Update category with id ({$_REQUEST['id']}) new title is \"{$_REQUEST['name']}\"");
+                $name = isset($user["username"]) ?
+                        $user["username"] : AuditLog::UNKNOWN;
+                $this->logger->debug("User $name - Update category with id "
+                        . "({$_REQUEST['id']}) new title is "
+                        . "\"{$_REQUEST['name']}\"");
             }
         }
         Request::redirect(ModuleHelper::buildActionURL("categories"));
@@ -44,8 +56,10 @@ class CategoryController extends Controller {
             Categories::deleteCategory($del);
             if ($this->logger) {
                 $user = getUserById(get_user_id());
-                $name = isset($user["username"]) ? $user["username"] : AuditLog::UNKNOWN;
-                $this->logger->debug("User $name - delete category with id ({$_REQUEST['id']})");
+                $name = isset($user["username"]) ?
+                        $user["username"] : AuditLog::UNKNOWN;
+                $this->logger->debug("User $name - "
+                        . "delete category with id ({$_REQUEST['id']})");
             }
         }
         Request::redirect(ModuleHelper::buildActionURL("categories"));

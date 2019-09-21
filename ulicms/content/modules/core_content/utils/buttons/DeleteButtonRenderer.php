@@ -36,13 +36,20 @@ class DeleteButtonRenderer {
         );
         $attributes = [
             "data-confirm" => $message,
-            "data-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "delete", "page={$pageId}csrf_token=" . get_csrf_token()),
+            "data-url" => ModuleHelper::buildMethodCallUrl(
+                    PageController::class,
+                    "delete",
+                    "page={$pageId}csrf_token=" . get_csrf_token()
+            ),
             "class" => "delete-icon"
         ];
         $link = link($url, $icon, true, null, $attributes);
         ViewBag::set("button", $link);
 
-        return $permitted ? Template::executeModuleTemplate(self::MODULE_NAME, "pages/partials/delete_button.php") : "";
+        return $permitted ? Template::executeModuleTemplate(
+                        self::MODULE_NAME,
+                        "pages/partials/delete_button.php"
+                ) : "";
     }
 
 }

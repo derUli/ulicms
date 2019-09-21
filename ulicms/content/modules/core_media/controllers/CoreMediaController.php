@@ -26,7 +26,8 @@ class CoreMediaController extends MainClass {
         return $this->getBodyContent($dom->saveHTML());
     }
 
-    // this method collect all embedable links and return it including a replacement node containg the embed element
+    // this method collect all embedable links and return it including
+    // a replacement node containg the embed element
     protected function collectLinks($dom) {
 
         $elements = $dom->getElementsByTagName("a");

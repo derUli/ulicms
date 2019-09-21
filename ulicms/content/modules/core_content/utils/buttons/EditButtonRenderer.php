@@ -32,7 +32,9 @@ class EditButtonRenderer {
         $link = link($url, $icon, true);
         ViewBag::set("button", $link);
 
-        return $permitted ? Template::executeModuleTemplate(self::MODULE_NAME, "pages/partials/edit_button.php") : "";
+        return $permitted ? Template::executeModuleTemplate(
+                        self::MODULE_NAME, "pages/partials/edit_button.php"
+                ) : "";
     }
 
 }

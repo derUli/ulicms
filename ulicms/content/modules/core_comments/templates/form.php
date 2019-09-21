@@ -24,8 +24,12 @@ if (Vars::get("comments_enabled")) {
         $cssClass .= "  alert-dismissable fade in";
         ?>
         <div class="<?php esc($cssClass); ?>">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <?php translate("comment_published_{$comment_published}"); ?>
+            <a
+                href="#"
+                class="close"
+                data-dismiss="alert"
+                aria-label="close">&times;</a>
+                <?php translate("comment_published_{$comment_published}"); ?>
         </div>
         <?php
     }
@@ -34,21 +38,37 @@ if (Vars::get("comments_enabled")) {
     <h3><?php translate("write_a_comment"); ?></h3>
     <div class="comments">
         <?php
-        echo ModuleHelper::buildMethodCallForm(CommentsController::class, "postComment", [], "post", array(
-            "autocomplete" => "off"
-        ));
+        echo ModuleHelper::buildMethodCallForm(
+                CommentsController::class,
+                "postComment",
+                [],
+                "post",
+                [
+                    "autocomplete" => "off"
+                ]
+        );
         ?>
-        <?php echo UliCMS\HTML\Input::hidden("content_id", Vars::get("content_id")); ?>
+        <?php
+        echo UliCMS\HTML\Input::hidden(
+                "content_id",
+                Vars::get("content_id")
+        );
+        ?>
 
         <div>
             <label for="author_name"><?php translate("your_name") ?>
                 <span class="text-danger">*</span></label>
             <div>
                 <?php
-                echo UliCMS\HTML\Input::textBox("author_name", "", "text", array(
-                    "class" => "form-control",
-                    "required" => "required"
-                ));
+                echo UliCMS\HTML\Input::textBox(
+                        "author_name",
+                        "",
+                        "text",
+                        [
+                            "class" => "form-control",
+                            "required" => "required"
+                        ]
+                );
                 ?>
             </div>
         </div>
@@ -56,9 +76,14 @@ if (Vars::get("comments_enabled")) {
             <label for="author_email"><?php translate("your_email") ?></label>
             <div>
                 <?php
-                echo UliCMS\HTML\Input::textBox("author_email", "", "email", array(
-                    "class" => "form-control"
-                ));
+                echo UliCMS\HTML\Input::textBox(
+                        "author_email",
+                        "",
+                        "email",
+                        [
+                            "class" => "form-control"
+                        ]
+                );
                 ?>
             </div>
         </div>
@@ -93,7 +118,10 @@ if (Vars::get("comments_enabled")) {
         <input type="url" name="my_homepage_url" class="antispam_honeypot"
                value="" autocomplete="nope">
         <p>
-            <button type="submit" class="btn btn-primary"><?php translate("post_comment") ?></button>
+            <button type="submit" class="btn btn-primary"><?php
+                translate(
+                        "post_comment")
+                ?></button>
         </p>
     </div>
     <?php

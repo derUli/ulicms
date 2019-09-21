@@ -14,7 +14,8 @@ $(() => {
             event.preventDefault();
             const url = $(event.currentTarget).attr("href");
             const name = $(event.currentTarget).data("name");
-            const message = AvailablePackageTranslation.AskForInstallPackage.replace
+            const message = AvailablePackageTranslation.AskForInstallPackage
+                    .replace
                     ("%pkg%", name);
             bootbox.confirm(message, (confirmed) => {
                 if (confirmed) {

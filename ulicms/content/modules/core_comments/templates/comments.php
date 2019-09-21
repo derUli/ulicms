@@ -3,7 +3,10 @@
 use UliCMS\Models\Content\Comment;
 use UliCMS\Constants\CommentStatus;
 
-$comments = Comment::getAllByStatus(CommentStatus::PUBLISHED, Vars::get("content_id"));
+$comments = Comment::getAllByStatus(
+                CommentStatus::PUBLISHED,
+                Vars::get("content_id")
+);
 $last = end($comments);
 reset($comments);
 ?>
@@ -14,20 +17,31 @@ reset($comments);
         <?php
         foreach ($comments as $comment) {
             ?>    <p>
-                <strong><?php translate("date"); ?>:</strong> <?php echo strftime("%x %X", $comment->getDate()); ?>
-                <br /> <strong><?php translate("name"); ?>:</strong> <?php esc($comment->getAuthorName()); ?>
+                <strong><?php translate("date"); ?>:</strong>
+                <?php echo strftime("%x %X", $comment->getDate()); ?>
+                <br /> <strong><?php translate("name"); ?>:</strong>
+                <?php esc($comment->getAuthorName()); ?>
                 <br />
                 <?php if ($comment->getAuthorUrl()) { ?>
                     <strong><?php translate("website"); ?>:</strong> <a
-                        href="<?php esc($comment->getAuthorUrl()); ?>" rel="nofollow"
-                        target="_blank"><?php esc($comment->getAuthorUrl()); ?></a> <br />
-                    <?php } ?>
-                    <?php echo make_links_clickable(UliCMS\HTML\text($comment->getText())); ?>
+                        href="<?php esc($comment->getAuthorUrl()); ?>"
+                        rel="nofollow"
+                        target="_blank"><?php
+                            esc(
+                                    $comment->getAuthorUrl()
+                            );
+                            ?></a> <br />
+                <?php } ?>
+                <?php
+                echo make_links_clickable(
+                        UliCMS\HTML\text($comment->getText())
+                );
+                ?>
             </p>
             <?php if ($comment != $last) { ?>
                 <hr />
-            <?php } ?>
         <?php } ?>
+    <?php } ?>
     </div>
     <?php
 }

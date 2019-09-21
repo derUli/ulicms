@@ -3,20 +3,22 @@
 use UliCMS\Models\Content\Categories;
 
 $permissionChecker = new ACL();
-if (!$permissionChecker->hasPermission("forms") or ! $permissionChecker->hasPermission("forms_create")) {
+if (!$permissionChecker->hasPermission("forms")
+        or ! $permissionChecker->hasPermission("forms_create")) {
     noPerms();
 } else {
     $forms = Forms::getAllForms();
     $pages = getAllPages();
     ?><p>
         <a href="<?php echo ModuleHelper::buildActionURL("forms"); ?>"
-           class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
+           class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i>
+            <?php translate("back") ?></a>
     </p>
     <h1><?php translate("create_form"); ?></h1>
     <?php echo ModuleHelper::buildMethodCallForm("FormController", "create"); ?>
     <p>
-        <strong><?php translate("name"); ?>*</strong><br /> <input type="text"
-                                                                   value="" name="name" required />
+        <strong><?php translate("name"); ?>*</strong><br />
+        <input type="text" value="" name="name" required />
     </p>
     <p>
         <strong><?php translate("enabled"); ?></strong><br /> <select
@@ -60,8 +62,12 @@ if (!$permissionChecker->hasPermission("forms") or ! $permissionChecker->hasPerm
         <strong><?php translate("target_page_id"); ?></strong><br /> <select
             name="target_page_id">
                 <?php foreach ($pages as $page) { ?>
-                <option value="<?php echo $page["id"]; ?>"><?php esc($page["title"]); ?></option>
-            <?php } ?>
+                <option value="<?php echo $page["id"]; ?>"><?php
+                    esc(
+                            $page["title"]
+                    );
+                    ?></option>
+    <?php } ?>
 
 
         </select>

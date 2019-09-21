@@ -16,9 +16,10 @@ class CommentsController extends MainClass {
         if (is_200()) {
             $page = ContentFactory::getCurrentPage();
 
-            // currently it's not supported to cache pages where comments are enabled
-            // This is a limitation of UliCMS caching system and will get fixed in a future
-            // release of UliCMS
+            // currently it's not supported to cache pages
+            // where comments are enabled
+            // This is a limitation of UliCMS caching system and will get fixed
+            // in a future release of UliCMS
             if ($page->areCommentsEnabled()) {
                 Flags::setNoCache(true);
                 Vars::set("comments_enabled", true);
@@ -55,8 +56,10 @@ class CommentsController extends MainClass {
         $comment->setIp(Request::getIp());
         $comment->setUserAgent(get_useragent());
 
-        // if comments must be approved, set the comment status to pending, else to published
-        $status = Settings::get("comments_must_be_approved") ? CommentStatus::PENDING : CommentStatus::PUBLISHED;
+        // if comments must be approved, set the comment status to pending,
+        // else to published
+        $status = Settings::get("comments_must_be_approved") ?
+                CommentStatus::PENDING : CommentStatus::PUBLISHED;
 
         // show error if not all required fields are filled
         if (!$comment->getAuthorName() or ! $comment->getText()) {
@@ -70,7 +73,8 @@ class CommentsController extends MainClass {
 
         $comment->setStatus($status);
 
-        // if ip login is disabled (which is a legal must in countries of the european union)
+        // if ip login is disabled (which is a legal must in countries
+        // of the european union)
         // unset the ip field
         if (!Settings::get("log_ip")) {
             $comment->setIp(null);
@@ -83,7 +87,12 @@ class CommentsController extends MainClass {
         CacheUtil::clearPageCache();
 
         // Redirect to the page and show a message to the user
-        Response::redirect(ModuleHelper::getFullPageURLByID($content_id, "comment_published=" . $status));
+        Response::redirect(
+                ModuleHelper::getFullPageURLByID(
+                        $content_id,
+                        "comment_published=" . $status
+                )
+        );
     }
 
     public function getCommentText() {
@@ -92,7 +101,13 @@ class CommentsController extends MainClass {
             $comment = new Comment($id);
             $comment->setRead(true);
             $comment->save();
-            HtmlResult(StringHelper::makeLinksClickable(HTML\text(trim($comment->getText()))), HttpStatusCode::OK, HTMLMinify::OPTIMIZATION_ADVANCED);
+            HtmlResult(
+                    StringHelper::makeLinksClickable(
+                            HTML\text(trim($comment->getText()))
+                    ),
+                    HttpStatusCode::OK,
+                    HTMLMinify::OPTIMIZATION_ADVANCED
+            );
         } catch (FileNotFoundException $e) {
             HTMLResult(get_translation("not_found"), 404);
         }
@@ -100,7 +115,8 @@ class CommentsController extends MainClass {
 
     // this returns the default status for new comments
     public function getDefaultStatus() {
-        $defaultStatus = Settings::get("comments_must_be_approved") ? CommentStatus::PENDING : CommentStatus::PUBLISHED;
+        $defaultStatus = Settings::get("comments_must_be_approved") ?
+                CommentStatus::PENDING : CommentStatus::PUBLISHED;
         return $defaultStatus;
     }
 
@@ -172,7 +188,9 @@ class CommentsController extends MainClass {
                         $comment->delete();
                         break;
                     default:
-                        throw new NotImplementedException("comment action not implemented");
+                        throw new NotImplementedException(
+                                "comment action not implemented"
+                        );
                 }
 
 
@@ -187,7 +205,8 @@ class CommentsController extends MainClass {
         }
 
         // referrer is from a hidden field on the form
-        // Append jumpto=comments to the url to jump to the comment table after redirect
+        // Append jumpto=comments to the url to jump to the comment
+        // table after redirect
         // It's inpossible to append an anchor to the url on a http redirect
         // a javascript in util.js performs the jump to the anchor
         $referrer = Request::getVar("referrer");

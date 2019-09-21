@@ -3,20 +3,25 @@
 class AudioController extends Controller {
 
     public function deletePost() {
-        $result = db_query("select ogg_file, mp3_file from " . tbname("audio") . " where id = " . intval($_REQUEST ["delete"]));
+        $result = db_query("select ogg_file, mp3_file from " .
+                tbname("audio") . " where id = " .
+                intval($_REQUEST ["delete"]));
         if (db_num_rows($result) > 0) {
             $dataset = db_fetch_object($result);
-            $filepath = ULICMS_DATA_STORAGE_ROOT . "/content/audio/" . basename($dataset->ogg_file);
+            $filepath = ULICMS_DATA_STORAGE_ROOT . "/content/audio/" .
+                    basename($dataset->ogg_file);
             if (!empty($dataset->ogg_file) and file_exists($filepath)) {
                 @unlink($filepath);
             }
 
-            $filepath = ULICMS_DATA_STORAGE_ROOT . "/content/audio/" . basename($dataset->mp3_file);
+            $filepath = ULICMS_DATA_STORAGE_ROOT . "/content/audio/" .
+                    basename($dataset->mp3_file);
             if (!empty($dataset->mp3_file) and file_exists($filepath)) {
                 @unlink($filepath);
             }
 
-            db_query("DELETE FROM " . tbname("audio") . " where id = " . $_REQUEST ["delete"]);
+            db_query("DELETE FROM " . tbname("audio") . " where id = " .
+                    $_REQUEST ["delete"]);
         }
         Request::redirect(ModuleHelper::buildActionURL("videos"));
     }
@@ -38,9 +43,12 @@ class AudioController extends Controller {
             );
             if (faster_in_array($mp3_type, $mp3_allowed_mime_type)) {
                 $target = $audio_folder . "/" . $mp3_file;
-                if (move_uploaded_file($_FILES ['mp3_file'] ['tmp_name'], $target)) {
+                if (move_uploaded_file(
+                                $_FILES ['mp3_file'] ['tmp_name'], $target
+                        )) {
                     // Google Cloud: make file public
-                    if (startsWith(ULICMS_DATA_STORAGE_ROOT, "gs://") and class_exists("GoogleCloudHelper")) {
+                    if (startsWith(ULICMS_DATA_STORAGE_ROOT, "gs://")
+                            and class_exists("GoogleCloudHelper")) {
                         GoogleCloudHelper::changeFileVisiblity($target, true);
                     }
                     $mp3_file_value = basename($mp3_file);
@@ -60,9 +68,12 @@ class AudioController extends Controller {
             );
             if (faster_in_array($ogg_type, $ogg_allowed_mime_type)) {
                 $target = $audio_folder . "/" . $ogg_file;
-                if (move_uploaded_file($_FILES ['ogg_file'] ['tmp_name'], $target)) {
+                if (move_uploaded_file(
+                                $_FILES ['ogg_file'] ['tmp_name'],
+                                $target)) {
                     // Google Cloud: make file public
-                    if (startsWith(ULICMS_DATA_STORAGE_ROOT, "gs://") and class_exists("GoogleCloudHelper")) {
+                    if (startsWith(ULICMS_DATA_STORAGE_ROOT, "gs://")
+                            and class_exists("GoogleCloudHelper")) {
                         GoogleCloudHelper::changeFileVisiblity($target, true);
                     }
                     $ogg_file_value = basename($ogg_file);
@@ -77,7 +88,11 @@ class AudioController extends Controller {
         $timestamp = time();
 
         if (!empty($ogg_file_value) or ! empty($mp3_file_value)) {
-            db_query("INSERT INTO " . tbname("audio") . " (name, ogg_file, mp3_file, created, category_id, `updated`) VALUES ('$name', '$ogg_file_value', '$mp3_file_value', $timestamp, $category_id, $timestamp);") or die(db_error());
+            db_query("INSERT INTO " . tbname("audio") .
+                    " (name, ogg_file, mp3_file, created, category_id, "
+                    . "`updated`) VALUES ('$name', '$ogg_file_value', "
+                    . "'$mp3_file_value', $timestamp, $category_id, "
+                    . "$timestamp);");
         }
         Request::redirect(ModuleHelper::buildActionURL("audio"));
     }
@@ -89,7 +104,10 @@ class AudioController extends Controller {
         $mp3_file = db_escape(basename($_POST ["mp3_file"]));
         $updated = time();
         $category_id = intval($_POST ["category_id"]);
-        db_query("UPDATE " . tbname("audio") . " SET name='$name', ogg_file='$ogg_file', mp3_file='$mp3_file', category_id = $category_id, `updated` = $updated where id = $id") or die(db_error());
+        db_query("UPDATE " . tbname("audio") . " SET name='$name', "
+                . "ogg_file='$ogg_file', mp3_file='$mp3_file', "
+                . "category_id = $category_id, `updated` = $updated "
+                . "where id = $id");
         Request::redirect(ModuleHelper::buildActionURL("audio"));
     }
 

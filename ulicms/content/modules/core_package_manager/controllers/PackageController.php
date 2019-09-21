@@ -24,13 +24,19 @@ class PackageController extends MainClass {
         $model->manufacturerName = getModuleMeta($name, "manufacturer_name");
         $model->manufacturerUrl = getModuleMeta($name, "manufacturer_url");
         $model->source = getModuleMeta($name, "source");
-        $model->source_url = $model->source === "extend" ? $this->getPackageDownloadUrl($model->name) : null;
+        $model->source_url = $model->source === "extend" ?
+                $this->getPackageDownloadUrl($model->name) : null;
 
-        $model->customPermissions = is_array(getModuleMeta($name, "custom_acl")) ? getModuleMeta($name, "custom_acl") : [];
+        $model->customPermissions = is_array(
+                        getModuleMeta($name, "custom_acl")
+                ) ? getModuleMeta($name, "custom_acl") : [];
         $model->adminPermission = getModuleMeta($name, "admin_permission");
         natcasesort($model->customPermissions);
         ViewBag::set("model", $model);
-        $html = Template::executeModuleTemplate(self::MODULE_NAME, "packages/info/module.php");
+        $html = Template::executeModuleTemplate(
+                        self::MODULE_NAME,
+                        "packages/info/module.php"
+        );
         HTMLResult($html);
     }
 
@@ -50,17 +56,26 @@ class PackageController extends MainClass {
         $model->manufacturerName = getThemeMeta($name, "manufacturer_name");
         $model->manufacturerUrl = getThemeMeta($name, "manufacturer_url");
         $model->source = getThemeMeta($name, "source");
-        $model->source_url = $model->source === "extend" ? $this->getPackageDownloadUrl($model->name) : null;
+        $model->source_url = $model->source === "extend" ?
+                $this->getPackageDownloadUrl($model->name) : null;
 
-        $model->disableFunctions = is_array(getThemeMeta($name, "disable_functions")) ? getThemeMeta($name, "disable_functions") : [];
+        $model->disableFunctions = is_array(
+                        getThemeMeta($name, "disable_functions")
+                ) ? getThemeMeta($name, "disable_functions") : [];
         natcasesort($model->disableFunctions);
         ViewBag::set("model", $model);
-        $html = Template::executeModuleTemplate(self::MODULE_NAME, "packages/info/theme.php");
+        $html = Template::executeModuleTemplate(
+                        self::MODULE_NAME,
+                        "packages/info/theme.php"
+        );
         HTMLResult($html);
     }
 
     public function redirectToPackageView() {
-        Response::sendHttpStatusCodeResultIfAjax(HttpStatusCode::OK, ModuleHelper::buildActionURL("packages"));
+        Response::sendHttpStatusCodeResultIfAjax(
+                HttpStatusCode::OK,
+                ModuleHelper::buildActionURL("packages")
+        );
     }
 
     public function uninstallModule() {
@@ -69,9 +84,11 @@ class PackageController extends MainClass {
         if (uninstall_module($name, $type)) {
             $this->redirectToPackageView();
         } else {
-            $errorMessage = get_translation("removing_package_failed", array(
-                "%name%" => $name
-            ));
+            $errorMessage = get_translation("removing_package_failed",
+                    [
+                        "%name%" => $name
+                    ]
+            );
             ExceptionResult($errorMessage, HttpStatusCode::INTERNAL_SERVER_ERROR);
         }
     }
@@ -85,7 +102,10 @@ class PackageController extends MainClass {
             $errorMessage = get_translation("removing_package_failed", array(
                 "%name%" => $name
             ));
-            ExceptionResult($errorMessage, HttpStatusCode::INTERNAL_SERVER_ERROR);
+            ExceptionResult(
+                    $errorMessage,
+                    HttpStatusCode::INTERNAL_SERVER_ERROR
+            );
         }
     }
 
@@ -115,7 +135,10 @@ class PackageController extends MainClass {
     }
 
     public function availablePackages() {
-        $html = Template::executeModuleTemplate(self::MODULE_NAME, "packages/available_list.php");
+        $html = Template::executeModuleTemplate(
+                        self::MODULE_NAME,
+                        "packages/available_list.php"
+        );
         HtmlResult($html);
     }
 

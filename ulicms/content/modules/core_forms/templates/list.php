@@ -24,9 +24,11 @@ if (!$permissionChecker->hasPermission("forms")) {
                     <th class="hide-on-mobile"><?php translate("email_to"); ?></th>
                     <th><?php translate("submit_form_url"); ?></th>
                     <?php if ($permissionChecker->hasPermission("forms_edit")) { ?>
-                        <td class="no-sort text-center" style="font-weight: bold;"><?php translate("edit"); ?></td>
                         <td class="no-sort text-center"
-						style="font-weight: bold;"><?php translate("delete"); ?></td>
+                            style="font-weight: bold;"><?php translate("edit"); ?></td>
+                        <td class="no-sort text-center"
+                            style="font-weight: bold;">
+                            <?php translate("delete"); ?></td>
                     <?php } ?>
                 </tr>
             </thead>
@@ -39,22 +41,38 @@ if (!$permissionChecker->hasPermission("forms")) {
                         <td><?php echo $form["id"]; ?></td>
                         <td><?php esc($form["name"]); ?></td>
                         <td class="hide-on-mobile"><?php esc($form["email_to"]); ?></td>
-                        <td><input class="form-submit-url select-on-click" type="text" readonly
-                                   value="<?php esc($submit_form_url); ?>"></td>
+                        <td><input
+                                class="form-submit-url select-on-click"
+                                type="text"
+                                readonly
+                                value="<?php esc($submit_form_url); ?>"></td>
 
-                        <?php if ($permissionChecker->hasPermission("forms_edit")) { ?>
-                            <td class="text-center"><a
+                        <?php
+                        if ($permissionChecker->hasPermission(
+                                        "forms_edit")
+                        ) {
+                            ?>
+                            <td class="text-center">
+                                <a
                                     href="?action=forms_edit&id=<?php
                                     echo $form["id"];
                                     ?>"><img src="gfx/edit.png" class="mobile-big-image"
                                        alt="<?php translate("edit"); ?>"
-                                       title="<?php translate("edit"); ?>"></a></td>
+                                       title="<?php translate("edit"); ?>"></a>
+                            </td>
                             <td class="text-center"
-                                <?php echo ModuleHelper::deleteButton(ModuleHelper::buildMethodCallUrl("FormController", "delete"), array("del" => $form ["id"])); ?>
+                                <?php
+                                echo ModuleHelper::deleteButton(
+                                        ModuleHelper::buildMethodCallUrl(
+                                                "FormController",
+                                                "delete"),
+                                        ["del" => $form ["id"]
+                                ]);
+                                ?>
                         </td>
-                    <?php } ?>
+                <?php } ?>
                 </tr>
-            <?php } ?>
+    <?php } ?>
         </tbody>
     </table>
     </div>

@@ -26,8 +26,8 @@ const validateCodeMirrorJson = (cmEditor, wrapper) => {
 };
 
 $(() => {
-    // apply codemirror source code editor to all textareas with "codemirror"
-    // class
+    // apply codemirror source code editor to all textareas
+    // with "codemirror" class
     $("textarea.codemirror").each((index, elem) => {
         let mode = "text/html";
         // if the textarea has a data-mimetype attribute use this for syntax

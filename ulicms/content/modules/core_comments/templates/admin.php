@@ -12,12 +12,23 @@ $selectedStatus = Request::getVar("status", $defaultStatus, "str");
 $content_id = Request::getVar("content_id", 0, "int");
 $limit = Request::getVar("limit", $controller->getDefaultLimit(), "int");
 
-$comments = is_array(BackendPageRenderer::getModel()) ? BackendPageRenderer::getModel() : $controller->getResults($selectedStatus, $content_id, $limit);
+$comments = is_array(BackendPageRenderer::getModel()) ?
+        BackendPageRenderer::getModel() :
+        $controller->getResults($selectedStatus, $content_id, $limit);
 
 $stati = array(
-    new ListItem(CommentStatus::SPAM, get_translation(CommentStatus::SPAM)),
-    new ListItem(CommentStatus::PENDING, get_translation(CommentStatus::PENDING)),
-    new ListItem(CommentStatus::PUBLISHED, get_translation(CommentStatus::PUBLISHED))
+    new ListItem(
+            CommentStatus::SPAM,
+            get_translation(CommentStatus::SPAM)
+    ),
+    new ListItem(
+            CommentStatus::PENDING,
+            get_translation(CommentStatus::PENDING)
+    ),
+    new ListItem(
+            CommentStatus::PUBLISHED,
+            get_translation(CommentStatus::PUBLISHED)
+    )
 );
 
 $contents = ContentFactory::getAllWithComments("title");
@@ -28,7 +39,9 @@ $contentSelect[] = new ListItem(0, "[" . get_translation("every") . "]");
 foreach ($contents as $content) {
     $language = getLanguageNameByCode($content->language);
     $type = get_translation($content->type);
-    $contentSelect[] = new ListItem($content->id, "{$content->title} ({$type} - {$language})");
+    $contentSelect[] = new ListItem(
+            $content->id,
+            "{$content->title} ({$type} - {$language})");
 }
 
 $actionSelect = array(
@@ -46,7 +59,11 @@ $actionSelect = array(
 
 <h1><?php translate("comments_manage"); ?></h1>
 <?php
-echo ModuleHelper::buildMethodCallForm(CommentsController::class, "filterComments", [], "get");
+echo ModuleHelper::buildMethodCallForm(
+        CommentsController::class,
+        "filterComments",
+        [],
+        "get");
 ?>
 <div class="form-group">
     <label for="status"><?php translate("status"); ?></label>
@@ -75,12 +92,17 @@ echo ModuleHelper::buildMethodCallForm(CommentsController::class, "filterComment
 </p>
 <?php echo ModuleHelper::endForm(); ?>
 <?php
-echo ModuleHelper::buildMethodCallForm(CommentsController::class, "doAction", array(
-    "referrer" => getCurrentURL()
-        ), "post", array(
-    "class" => "voffset3",
-    "id" => "comments"
-));
+echo ModuleHelper::buildMethodCallForm(
+        CommentsController::class,
+        "doAction",
+        [
+            "referrer" => getCurrentURL()
+        ], "post",
+        [
+            "class" => "voffset3",
+            "id" => "comments"
+        ]
+);
 ?>
 <div class="scroll">
     <table class="tablesorter table">
@@ -100,17 +122,26 @@ echo ModuleHelper::buildMethodCallForm(CommentsController::class, "doAction", ar
         </thead>
         <tbody>
             <?php foreach ($comments as $comment) { ?>
-                <?php $url = strlen($comment->getAuthorUrl()) > 30 ? substr($comment->getAuthorUrl(), 0, 30) . "..." : $comment->getAuthorUrl(); ?>
+                <?php
+                $url = strlen($comment->getAuthorUrl()) > 30 ?
+                        substr($comment->getAuthorUrl(), 0, 30) . "..." : $comment->getAuthorUrl();
+                ?>
                 <?php $content = $comment->getContent(); ?>
                 <tr class="<?php if (!$comment->isRead()) echo "unread"; ?>">
                     <td><?php
-                        echo Input::checkBox("comments[]", false, $comment->getId(), array(
-                            "class" => "checkbox comment-checkbox",
-                            "data-select-all-checkbox" => ".select-all",
-                            "data-checkbox-group" => ".comment-checkbox"
-                        ));
+                        echo Input::checkBox(
+                                "comments[]",
+                                false,
+                                $comment->getId(),
+                                [
+                                    "class" => "checkbox comment-checkbox",
+                                    "data-select-all-checkbox" => ".select-all",
+                                    "data-checkbox-group" => ".comment-checkbox"
+                        ]);
                         ?></td>
-                    <td><?php esc(date("Y-m-d H:i:s", $comment->getDate())); ?></td>
+                    <td>
+                        <?php esc(date("Y-m-d H:i:s", $comment->getDate())); ?>
+                    </td>
                     <td><?php translate($comment->getStatus()); ?></td>
                     <td><?php esc($comment->getAuthorName()); ?>
                         <br />
@@ -119,7 +150,8 @@ echo ModuleHelper::buildMethodCallForm(CommentsController::class, "doAction", ar
                             <br />
                         <?php } ?>
                         <?php if ($comment->getAuthorUrl()) { ?>
-                            <a href="<?php esc($comment->getAuthorUrl()); ?>" target="_blank"
+                            <a href="<?php esc($comment->getAuthorUrl()); ?>"
+                               target="_blank"
                                rel="nofollow"><?php esc($url); ?></a>
                         <?php } ?></td>
                     <td>
@@ -128,7 +160,13 @@ echo ModuleHelper::buildMethodCallForm(CommentsController::class, "doAction", ar
                         </p>
                         <p>
                             <a href="#"
-                               data-url="<?php echo ModuleHelper::buildMethodCallUrl(CommentsController::class, "getCommentText", "id=" . $comment->getID()); ?>"
+                               data-url="<?php
+                               echo
+                               ModuleHelper::buildMethodCallUrl(
+                                       CommentsController::class,
+                                       "getCommentText",
+                                       "id=" . $comment->getID());
+                               ?>"
                                class="ajax-alert"><?php esc(getExcerpt($comment->getText())); ?></a>
                         </p>
                     </td>
@@ -145,11 +183,14 @@ echo ModuleHelper::buildMethodCallForm(CommentsController::class, "doAction", ar
     </div>
     <div class="col-xs-6">
         <button type="submit" class="btn btn-primary">
-            <i class="fas fa-running"></i> <?php translate("do_action") ?></button>
+            <i class="fas fa-running"></i>
+            <?php translate("do_action") ?></button>
     </div>
 </div>
 <?php
 echo ModuleHelper::endForm();
 
-enqueueScriptFile(ModuleHelper::buildRessourcePath("core_comments", "js/admin.js"));
+enqueueScriptFile(ModuleHelper::buildRessourcePath(
+                "core_comments",
+                "js/admin.js"));
 combinedScriptHtml();

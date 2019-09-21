@@ -298,7 +298,8 @@ $(() => {
     // filter by category
     $("#page-list #category_id").on("change", () => {
         const valueSelected = $("#category_id").val();
-        location.replace("index.php?action=pages&filter_category=" + valueSelected);
+        location.replace("index.php?action=pages&filter_category=" +
+                valueSelected);
     });
     $("#page-list form.page-delete-form").off("submit");
     $("#page-list form.page-delete-form").ajaxForm(ajaxOptionsDelete);
@@ -323,7 +324,8 @@ filterByLanguage = (element) => {
     var index = element.selectedIndex;
     if (element.options[index].value !== "") {
         location.replace(
-                "index.php?action=pages&filter_language=" + element.options[index].value
+                "index.php?action=pages&filter_language=" +
+                element.options[index].value
                 );
     }
 };
@@ -332,7 +334,8 @@ filterByType = (element) => {
     const index = element.selectedIndex;
     if (element.options[index].value !== "") {
         location.replace(
-                "index.php?action=pages&filter_type=" + element.options[index].value
+                "index.php?action=pages&filter_type=" +
+                element.options[index].value
                 );
     }
 };
@@ -341,7 +344,8 @@ filterByMenu = (element) => {
     const index = element.selectedIndex;
     if (element.options[index].value !== "") {
         location.replace(
-                "index.php?action=pages&filter_menu=" + element.options[index].value
+                "index.php?action=pages&filter_menu=" +
+                element.options[index].value
                 );
     }
 };
@@ -350,7 +354,8 @@ filterByActive = (element) => {
     const index = element.selectedIndex;
     if (element.options[index].value !== "") {
         location.replace(
-                "index.php?action=pages&filter_active=" + element.options[index].value
+                "index.php?action=pages&filter_active=" +
+                element.options[index].value
                 );
     }
 };
@@ -359,7 +364,8 @@ filterByApproved = (element) => {
     const index = element.selectedIndex;
     if (element.options[index].value !== "") {
         location.replace(
-                "index.php?action=pages&filter_approved=" + element.options[index].value
+                "index.php?action=pages&filter_approved=" +
+                element.options[index].value
                 );
     }
 };
@@ -368,7 +374,8 @@ filterByParent = (element) => {
     const index = element.selectedIndex;
     if (element.options[index].value !== "") {
         location.replace(
-                "index.php?action=pages&filter_parent=" + element.options[index].value
+                "index.php?action=pages&filter_parent=" +
+                element.options[index].value
                 );
     }
 };
@@ -377,7 +384,8 @@ filterByStatus = (element) => {
     const index = element.selectedIndex;
     if (element.options[index].value !== "") {
         location.replace(
-                "index.php?action=pages&filter_status=" + element.options[index].value
+                "index.php?action=pages&filter_status=" +
+                element.options[index].value
                 );
     }
 };

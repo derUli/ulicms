@@ -28,12 +28,15 @@ class BannerController extends Controller {
         $banner->setDateTo(stringOrNull($_POST["date_to"]));
 
         $banner->setEnabled(boolval($_POST["enabled"]));
-        $banner->setLanguage($_POST["language"] != "all" ? strval($_POST["language"]) : null);
+        $banner->setLanguage($_POST["language"] != "all" ?
+                        strval($_POST["language"]) : null);
         $banner->save();
         if ($this->logger) {
             $user = getUserById(get_user_id());
-            $userName = isset($user["username"]) ? $user["username"] : AuditLog::UNKNOWN;
-            $this->logger->debug("User $userName - Created new banner with type ({$_POST ['type']})");
+            $userName = isset($user["username"]) ?
+                    $user["username"] : AuditLog::UNKNOWN;
+            $this->logger->debug("User $userName - "
+                    . "Created new banner with type ({$_POST ['type']})");
         }
 
         do_event("after_create_banner");
@@ -51,8 +54,10 @@ class BannerController extends Controller {
 
         if ($this->logger) {
             $user = getUserById(get_user_id());
-            $userName = isset($user["username"]) ? $user["username"] : AuditLog::UNKNOWN;
-            $this->logger->debug("User $userName - Deleted Banner with id ($id)");
+            $userName = isset($user["username"]) ?
+                    $user["username"] : AuditLog::UNKNOWN;
+            $this->logger->debug("User $userName - "
+                    . "Deleted Banner with id ($id)");
         }
         do_event("after_banner_delete");
 
@@ -77,13 +82,16 @@ class BannerController extends Controller {
         $banner->setDateTo(stringOrNull($_POST["date_to"]));
 
         $banner->setEnabled(boolval($_POST["enabled"]));
-        $banner->setLanguage($_POST["language"] != "all" ? strval($_POST["language"]) : null);
+        $banner->setLanguage($_POST["language"] != "all" ?
+                        strval($_POST["language"]) : null);
         $banner->save();
 
         if ($this->logger) {
             $user = getUserById(get_user_id());
-            $userName = isset($user["username"]) ? $user["username"] : AuditLog::UNKNOWN;
-            $this->logger->debug("User $userName - Updated Banner with id ($id)");
+            $userName = isset($user["username"]) ?
+                    $user["username"] : AuditLog::UNKNOWN;
+            $this->logger->debug("User $userName - "
+                    . "Updated Banner with id ($id)");
         }
 
         do_event("after_edit_banner");

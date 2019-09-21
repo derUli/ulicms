@@ -21,12 +21,25 @@ class PageTableRenderer {
 
     const MODULE_NAME = "core_content";
 
-    public function getData(int $start = 0, int $length = 10, int $draw = 1, ?string $search = null, string $view = "default"): array {
+    public function getData(
+            int $start = 0,
+            int $length = 10,
+            int $draw = 1,
+            ?string $search = null,
+            string $view = "default"
+    ): array {
         $result = [];
         $result["data"] = [];
 
         $columns = [
-            "id", "title", "menu", "position", "parent_id", "active", "language", "deleted_at"
+            "id",
+            "title",
+            "menu",
+            "position",
+            "parent_id",
+            "active",
+            "language",
+            "deleted_at"
         ];
 
         $user = $this->user;
@@ -37,12 +50,15 @@ class PageTableRenderer {
         $languages = [];
         foreach ($groups as $group) {
             foreach ($group->getLanguages() as $language) {
-                $languages[] = "'" . Database::escapeValue($language->getLanguageCode()) . "'";
+                $languages[] = "'" .
+                        Database::escapeValue($language->getLanguageCode())
+                        . "'";
             }
         }
 
         // show all deleted or all not deleted pages (recycle bin)
-        $where = $view === "default" ? "deleted_at is null" : "deleted_at is not null";
+        $where = $view === "default" ?
+                "deleted_at is null" : "deleted_at is not null";
 
         // filter pages by languages assigned to the user's groups
         if (count($languages)) {
@@ -50,20 +66,24 @@ class PageTableRenderer {
         }
 
         // get total pages count for this user
-        $countSql = "select count(id) as count from {prefix}content where $where";
+        $countSql = "select count(id) as count from {prefix}content "
+                . "where $where";
         $countResult = Database::query($countSql, true);
         $countData = Database::fetchObject($countResult);
         $totalCount = $countData->count;
 
         if ($search) {
-            $placeHolderString = "%" . Database::escapeValue(strtolower($search)) . "%";
+            $placeHolderString = "%" . Database::escapeValue(
+                            strtolower($search)
+                    ) . "%";
             $where .= " and lower(title) like '{$placeHolderString}'";
         }
 
         $where .= " order by menu, position";
 
         // get filtered pages count
-        $countSql = "select count(id) as count from {prefix}content where $where";
+        $countSql = "select count(id) as count from {prefix}content "
+                . "where $where";
         $countResult = Database::query($countSql, true);
         $countData = Database::fetchObject($countResult);
         $filteredCount = $countData->count;
@@ -74,7 +94,8 @@ class PageTableRenderer {
         $resultsForPage = Database::selectAll("content", $columns, $where);
 
         $result["data"] = $this->fetchResults($resultsForPage, $user);
-        // this is required by DataTables to ensure that always the result of the latest AJAX request is shown
+        // this is required by DataTables to ensure that always the result
+        // of the latest AJAX request is shown
         $result["draw"] = $draw;
 
         // Total count of pages shown to the user

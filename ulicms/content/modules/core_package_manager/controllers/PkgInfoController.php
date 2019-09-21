@@ -10,7 +10,11 @@ class PkgInfoController extends Controller {
             if (file_exists($path)) {
                 $pkg->installPackage();
             }
-            Request::redirect(ModuleHelper::buildActionURL("sin_package_install_ok", "file=$file"));
+            Request::redirect(
+                    ModuleHelper::buildActionURL(
+                            "sin_package_install_ok", "file=$file"
+                    )
+            );
         }
     }
 
