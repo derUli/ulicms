@@ -48,11 +48,7 @@ class ACL {
     }
 
     public function createGroup(string $name, ?array $permissions = null): int {
-        if (is_null($permissions)) {
-            $permission_data = $this->getDefaultACL();
-        } else {
-            $permissionData = json_encode($permissions);
-        }
+        $permissionData = is_null($permissions) ? $this->getDefaultACL() : json_encode($permissions);
 
         $sql = "INSERT INTO `" . tbname("groups") .
                 "` (`name`, `permissions`) " .
@@ -71,11 +67,7 @@ class ACL {
             string $name,
             ?array $permissions = null
     ): int {
-        if (is_null($permissions)) {
-            $permission_data = $this->getDefaultACL();
-        } else {
-            $permissionData = json_encode($permissions);
-        }
+        $permissionData = is_null($permissions) ? $this->getDefaultACL() : json_encode($permissions);
 
         $sql = "UPDATE `" . tbname("groups") . "` SET name='" .
                 db_escape($name) . "', permissions='" . db_escape($permissionData) . "' WHERE id=" . $id;
@@ -233,11 +225,7 @@ class ACL {
         }
 
         // Admin has all rights
-        if ($admin) {
-            $default_value = true;
-        } else {
-            $default_value = false;
-        }
+        $default_value = $admin;
 
         foreach ($acl_data as $key => $value) {
             $acl_data[$key] = $default_value;

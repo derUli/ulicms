@@ -30,7 +30,12 @@ class Request {
         if ($value !== null) {
             switch ($convert) {
                 case "bool":
-                    $value = intval($value);
+                    if ($value === "true") {
+                        $value = true;
+                    } else if ($value === "false") {
+                        $value = false;
+                    }
+                    $value = intval(boolval($value));
                     break;
                 case "int":
                     $value = intval($value);

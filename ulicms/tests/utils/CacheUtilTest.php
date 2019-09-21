@@ -3,6 +3,25 @@
 use Phpfastcache\Helper\Psr16Adapter;
 use UliCMS\Utils\CacheUtil;
 
+// if opcache is not installed, define dummy function to
+// have full code coverage
+if (!function_exists("opcache_reset")) {
+
+    function opcache_reset() {
+
+    }
+
+}
+// if apc is not installed, define dummy function to
+// have full code coverage
+if (!function_exists("apc_clear_cache")) {
+
+    function apc_clear_cache() {
+
+    }
+
+}
+
 class CacheUtilTest extends \PHPUnit\Framework\TestCase {
 
     private $cacheDisabledOriginal;
@@ -89,6 +108,22 @@ class CacheUtilTest extends \PHPUnit\Framework\TestCase {
         $uid2 = CacheUtil::getCurrentUid();
 
         $this->assertNotEquals($uid2, $uid1);
+    }
+
+    public function testClearCache() {
+
+        Settings::delete("cache_disabled");
+        Settings::set("cache_period", 123);
+
+        $adapter = CacheUtil::getAdapter(true);
+        $adapter->set("cache_test", "hello");
+
+        $this->assertEquals(
+                "hello", $adapter->get("cache_test"));
+
+        CacheUtil::clearPageCache();
+        CacheUtil::clearCache();
+        $this->assertNull($adapter->get("cache_test"));
     }
 
 }

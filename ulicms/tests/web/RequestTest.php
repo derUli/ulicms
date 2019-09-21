@@ -18,6 +18,10 @@ class RequestTest extends \PHPUnit\Framework\TestCase {
         $_GET["var1"] = "that";
         $_GET["var2"] = "123";
         $_POST["var3"] = "1.5";
+
+        $_GET["var4"] = "true";
+        $_GET["var5"] = "false";
+        $_GET["var6"] = "3";
         $this->assertEquals("this", Request::getVar("var1"));
         $this->assertEquals("this", Request::getVar("var1"));
         $this->assertEquals(null, Request::getVar("nothing"));
@@ -28,6 +32,10 @@ class RequestTest extends \PHPUnit\Framework\TestCase {
 
         $this->assertEquals(123.0, Request::getVar("var2", null, "float"));
         $this->assertEquals(1, Request::getVar("var3", null, "int"));
+
+        $this->assertEquals(1, Request::getVar("var4", null, "bool"));
+        $this->assertEquals(0, Request::getVar("var5", null, "bool"));
+        $this->assertEquals(1, Request::getVar("var6", null, "bool"));
     }
 
     public function testHasVarReturnsTrue() {
@@ -166,26 +174,29 @@ class RequestTest extends \PHPUnit\Framework\TestCase {
 
         $this->assertEquals("111.111.111.111", Request::getIp());
     }
-	
+
     public function testSiteProtocolExpectHttp() {
         $_SERVER["SERVER_PORT"] = 80;
-		ob_start();
-		site_protocol();
+        ob_start();
+        site_protocol();
         $this->assertEquals("http://", ob_get_clean());
     }
+
     public function testSiteProtocolExpectHttps() {
         $_SERVER["SERVER_PORT"] = 443;
-		ob_start();
-		site_protocol();
+        ob_start();
+        site_protocol();
         $this->assertEquals("https://", ob_get_clean());
     }
-	
+
     public function testIsSSLReturnsFalse() {
         $_SERVER["SERVER_PORT"] = 80;
         $this->assertFalse(is_ssl());
     }
+
     public function testIsSSLReturnsTrue() {
         $_SERVER["SERVER_PORT"] = 443;
         $this->assertTrue(is_ssl());
     }
+
 }
