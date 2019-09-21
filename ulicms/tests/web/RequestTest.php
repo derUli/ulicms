@@ -22,6 +22,7 @@ class RequestTest extends \PHPUnit\Framework\TestCase {
         $_GET["var4"] = "true";
         $_GET["var5"] = "false";
         $_GET["var6"] = "3";
+
         $this->assertEquals("this", Request::getVar("var1"));
         $this->assertEquals("this", Request::getVar("var1"));
         $this->assertEquals(null, Request::getVar("nothing"));

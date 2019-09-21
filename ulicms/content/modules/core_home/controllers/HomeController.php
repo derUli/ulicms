@@ -25,12 +25,6 @@ class HomeController extends Controller {
         }
         $model->admins = $admins;
 
-        $pkg = new PackageManager();
-        if (in_array("guestbook", getAllModules())) {
-            $guestbookEntries = Database::query("SELECT count(id) as amount FROM " . tbname("guestbook_entries"), false);
-            $dataset = Database::fetchObject($guestbookEntries);
-            $model->guestbookEntryCount = $dataset->amount;
-        }
         return $model;
     }
 

@@ -107,6 +107,9 @@
                 <!-- Damn PHPUnit has no support for wildcards. -->
                 <directory>content/modules/core_comments/lang</directory>
             </exclude>
+			   <exclude>
+                <directory>content/modules/core_home/lang</directory>
+            </exclude>
             <exclude>
                 <directory>content/modules/core_forms/lang</directory>
             </exclude>

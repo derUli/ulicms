@@ -1225,11 +1225,12 @@ function getAllPagesWithTitle(): array {
             $query_blog = db_query($sql);
             while ($row_blog = db_fetch_object($query_blog)) {
                 $title = $row->title . " -> " . $row_blog->title;
-                $url = $row->slug . ".html" . "?single=" . $row_blog->seo_shortname;
-                $b = Array(
+                $url = $row->slug . ".html" . "?single=" .
+                        $row_blog->seo_shortname;
+                $b = [
                     $title,
                     $url
-                );
+                ];
                 array_push($returnvalues, $b);
             }
         }

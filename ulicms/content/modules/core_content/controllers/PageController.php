@@ -382,16 +382,6 @@ class PageController extends Controller {
         );
     }
 
-    public function toggleFilters() {
-        $settingsName = "user/" . get_user_id() . "/show_filters";
-        if (Settings::get($settingsName)) {
-            Settings::delete($settingsName);
-        } else {
-            Settings::set($settingsName, "1");
-        }
-        HTTPStatusCodeResult(HttpStatusCode::OK);
-    }
-
     public function toggleShowPositions() {
         $settingsName = "user/" . get_user_id() . "/show_positions";
         if (Settings::get($settingsName)) {
@@ -413,7 +403,11 @@ class PageController extends Controller {
         TextResult("");
     }
 
-    private function checkIfSlugIsFree($slug, $language, $id) {
+    // returns true if this slug is unused in a language
+    // if $id is set the content with the id will be excluded from this check
+    // to prevent the slug field to be marked as error when editing a page
+
+    public function checkIfSlugIsFree($slug, $language, $id) {
         if (StringHelper::isNullOrWhitespace($slug)) {
             return true;
         }
@@ -510,6 +504,8 @@ class PageController extends Controller {
         }
     }
 
+    // this is used for the Link feature of the CKEditor
+    // The user can select an internal page from a dropdown list for linking
     public function getCKEditorLinkList() {
         $data = getAllPagesWithTitle();
         JSONResult($data, HttpStatusCode::OK, true);
