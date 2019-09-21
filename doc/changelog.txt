@@ -12,6 +12,7 @@ Entfernte API-Methoden:
 * Settings::outputEscaped(string $key, ?string $type = 'str'): void
 * AdminMenu->addChild(array $children): void
 * MenuEntry->addChild(array $children): void
+* DesignSettingsController->removeCommentFromCss($textContent)
 * eTagFromString($str): void
 * getModuleName(string $module): string
 * initPFBC(): void

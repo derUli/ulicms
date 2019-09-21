@@ -12,15 +12,18 @@ class LogoUploadController extends Controller {
             $filename = $logo_upload['name'];
             $extension = file_extension($filename);
 
-            if ($type == "image/jpeg" or $type == "image/jpg" or $type == "image/gif" or $type == "image/png") {
+            if ($type == "image/jpeg" or $type == "image/jpg"
+                    or $type == "image/gif" or $type == "image/png") {
                 $hash = md5(file_get_contents($logo_upload['tmp_name']));
-                $new_filename = ULICMS_DATA_STORAGE_ROOT . "/content/images/" . $hash . "." . $extension;
+                $new_filename = ULICMS_DATA_STORAGE_ROOT . "/content/images/"
+                        . $hash . "." . $extension;
                 $logo_upload_filename = $hash . "." . $extension;
 
                 do_event("before_upload_logo");
                 move_uploaded_file($logo_upload['tmp_name'], $new_filename);
                 // Google Cloud: make file public
-                if (startsWith(ULICMS_DATA_STORAGE_ROOT, "gs://") and class_exists("GoogleCloudHelper")) {
+                if (startsWith(ULICMS_DATA_STORAGE_ROOT, "gs://")
+                        and class_exists("GoogleCloudHelper")) {
                     GoogleCloudHelper::changeFileVisiblity($new_filename, true);
                 }
 
@@ -31,7 +34,14 @@ class LogoUploadController extends Controller {
             do_event("after_upload_logo");
         }
 
-        Settings::set("logo_disabled", Request::getVar("logo_disabled", "no", "str"));
+        Settings::set(
+                "logo_disabled",
+                Request::getVar(
+                        "logo_disabled",
+                        "no",
+                        "str"
+                )
+        );
 
         CacheUtil::clearPageCache();
 

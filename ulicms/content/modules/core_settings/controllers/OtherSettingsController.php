@@ -27,7 +27,10 @@ class OtherSettingsController extends Controller {
         }
 
         if (isset($_POST["smtp_no_verify_certificate"])) {
-            Settings::set("smtp_no_verify_certificate", "smtp_no_verify_certificate");
+            Settings::set(
+                    "smtp_no_verify_certificate",
+                    "smtp_no_verify_certificate"
+            );
         } else {
             Settings::delete("smtp_no_verify_certificate");
         }
@@ -35,7 +38,10 @@ class OtherSettingsController extends Controller {
         if (!isset($_POST["twofactor_authentication"])) {
             Settings::delete("twofactor_authentication");
         } else {
-            Settings::set("twofactor_authentication", "twofactor_authentication");
+            Settings::set(
+                    "twofactor_authentication",
+                    "twofactor_authentication"
+            );
         }
 
         if (!isset($_POST["no_auto_cron"])) {
@@ -53,7 +59,10 @@ class OtherSettingsController extends Controller {
         }
 
         if (isset($_POST["max_failed_logins_items"])) {
-            Settings::set("max_failed_logins_items", intval($_POST["max_failed_logins_items"]));
+            Settings::set(
+                    "max_failed_logins_items",
+                    intval($_POST["max_failed_logins_items"])
+            );
         }
 
         if (isset($_POST["smtp_user"])) {

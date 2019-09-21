@@ -10,7 +10,9 @@ class DesignSettingsController extends Controller {
     public function __construct() {
         parent::__construct();
         // generate scss file for design settings if it doesn't exist.
-        $this->generatedSCSS = Path::resolve("ULICMS_GENERATED/design_variables.scss");
+        $this->generatedSCSS = Path::resolve(
+                        "ULICMS_GENERATED/design_variables.scss"
+        );
         if (!file_exists($this->generatedSCSS)) {
             $this->generateSCSSToFile();
         }
@@ -18,13 +20,19 @@ class DesignSettingsController extends Controller {
 
     public function savePost() {
         if (!isset($_REQUEST["disable_custom_layout_options"])) {
-            Settings::set("disable_custom_layout_options", "disable");
+            Settings::set(
+                    "disable_custom_layout_options",
+                    "disable"
+            );
         } else {
             Settings::delete("disable_custom_layout_options");
         }
 
         if (isset($_REQUEST["no_mobile_design_on_tablet"])) {
-            Settings::set("no_mobile_design_on_tablet", "no_mobile_design_on_tablet");
+            Settings::set(
+                    "no_mobile_design_on_tablet",
+                    "no_mobile_design_on_tablet"
+            );
         } else {
             Settings::delete("no_mobile_design_on_tablet");
         }
@@ -39,24 +47,26 @@ class DesignSettingsController extends Controller {
             Settings::set("additional_menus", $_REQUEST["additional_menus"]);
         }
 
+
+
         // Wenn Formular abgesendet wurde, Wert Speichern
-        if ($_REQUEST["theme"] !== $theme) { // if theme auf
-            $themes = getAllThemes();
-            if (faster_in_array($_REQUEST["theme"], $themes)) { // if faster_in_array theme auf
-                Settings::set("theme", $_REQUEST["theme"]);
-                $theme = $_REQUEST["theme"];
-            } // if faster_in_array theme zu
-        } // if theme zu
+        $themes = getAllThemes();
+        if (faster_in_array($_REQUEST["theme"], $themes)) {
+            Settings::set("theme", $_REQUEST["theme"]);
+            $theme = $_REQUEST["theme"];
+        }
+
+
         // Wenn Formular abgesendet wurde, Wert Speichern
-        if ($_REQUEST["mobile_theme"] !== $mobile_theme) { // if mobile_theme auf
-            $themes = getAllThemes();
-            if (empty($_REQUEST["mobile_theme"]))
-                Settings::delete("mobile_theme");
-            else if (faster_in_array($_REQUEST["mobile_theme"], $themes)) { // if faster_in_array mobile_theme auf
-                Settings::set("mobile_theme", $_REQUEST["mobile_theme"]);
-                $mobile_theme = $_REQUEST["mobile_theme"];
-            } // if faster_in_array mobile_theme zu
-        } // if mobile_theme zu
+        $themes = getAllThemes();
+        if (empty($_REQUEST["mobile_theme"]))
+            Settings::delete("mobile_theme");
+        else if (faster_in_array($_REQUEST["mobile_theme"], $themes)) {
+            Settings::set("mobile_theme", $_REQUEST["mobile_theme"]);
+            $mobile_theme = $_REQUEST["mobile_theme"];
+        }
+
+
 
         if ($_REQUEST["default_font"] != Settings::get("default_font")) {
             if (!empty($_REQUEST["custom-font"])) {
@@ -79,19 +89,28 @@ class DesignSettingsController extends Controller {
         Settings::set("font-size", $_REQUEST["font-size"]);
         Settings::set("ckeditor_skin", $_REQUEST["ckeditor_skin"]);
 
-        if (Settings::get("header-background-color") != $_REQUEST["header-background-color"]) {
-            Settings::set("header-background-color", $_REQUEST["header-background-color"]);
+        if (Settings::get("header-background-color") != $_REQUEST["header-background-color"]
+        ) {
+            Settings::set(
+                    "header-background-color",
+                    $_REQUEST["header-background-color"]
+            );
         }
 
         if (Settings::get("body-text-color") != $_REQUEST["body-text-color"]) {
             Settings::set("body-text-color", $_REQUEST["body-text-color"]);
         }
 
-        if (Settings::get("title_format") != $_REQUEST["title_format"])
+        if (Settings::get("title_format") != $_REQUEST["title_format"]) {
             Settings::set("title_format", $_REQUEST["title_format"]);
+        }
 
-        if (Settings::get("body-background-color") != $_REQUEST["body-background-color"]) {
-            Settings::set("body-background-color", $_REQUEST["body-background-color"]);
+        if (Settings::get("body-background-color") != $_REQUEST["body-background-color"]
+        ) {
+            Settings::set(
+                    "body-background-color",
+                    $_REQUEST["body-background-color"]
+            );
         }
 
         CacheUtil::clearPageCache();
@@ -141,7 +160,10 @@ class DesignSettingsController extends Controller {
 
     public function getGoogleFonts() {
         $retval = [];
-        $file = ModuleHelper::buildModuleRessourcePath($this->moduleName, "data/webFontNames.opml");
+        $file = ModuleHelper::buildModuleRessourcePath(
+                        $this->moduleName,
+                        "data/webFontNames.opml"
+        );
         $content = file_get_contents($file);
         $xml = new SimpleXMLElement($content);
         foreach ($xml->body->outline as $outline) {
@@ -175,7 +197,8 @@ class DesignSettingsController extends Controller {
             "header-background-color" => Settings::get("header-background-color"),
             "body-text-color" => Settings::get("body-text-color"),
             "body-background-color" => Settings::get("body-background-color"),
-            "default-font" => Settings::get("default_font") !== "google" ? Settings::get("default_font") : Settings::get("google-font"),
+            "default-font" => Settings::get("default_font") !== "google" ?
+            Settings::get("default_font") : Settings::get("google-font"),
             "font-size" => Settings::get("font-size")
         ];
 
@@ -201,29 +224,6 @@ class DesignSettingsController extends Controller {
             return $outputFile;
         }
         return null;
-    }
-
-    public function removeCommentFromCss($textContent) {
-        $clearText = "";
-        $charsInCss = strlen($textContent);
-        $searchForStart = true;
-        for ($index = 0; $index < $charsInCss; $index++) {
-            if ($searchForStart) {
-                if ($textContent[$index] == "/" && (( $index + 1 ) < $charsInCss ) && $textContent[$index + 1] == "*") {
-                    $searchForStart = false;
-                    continue;
-                } else {
-                    $clearText .= $textContent[$index];
-                }
-            } else {
-                if ($textContent[$index] == "*" && (( $index + 1 ) < $charsInCss ) && $textContent[$index + 1] == "/") {
-                    $searchForStart = true;
-                    $index++;
-                    continue;
-                }
-            }
-        }
-        return $clearText;
     }
 
 }
