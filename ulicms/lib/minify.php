@@ -64,7 +64,8 @@ function minifyJs(): string {
     // returns the updated timestamp of the last changed file
     foreach ($scripts as $script) {
         $script = ltrim($script, "/");
-        if (file_exists($script) and pathinfo($script, PATHINFO_EXTENSION) == "js"
+        if (file_exists($script)
+                and pathinfo($script, PATHINFO_EXTENSION) == "js"
                 and filemtime($script) > $lastmod) {
             $lastmod = filemtime($script);
         }
@@ -76,7 +77,8 @@ function minifyJs(): string {
     if (!is_dir($jsDir)) {
         mkdir($jsDir, 0777, true);
     }
-    $jsUrl = !is_admin_dir() ? "content/cache/scripts" : "../content/cache/scripts";
+    $jsUrl = !is_admin_dir() ?
+            "content/cache/scripts" : "../content/cache/scripts";
 
     $bundleFile = "{$jsDir}/{$cacheId}.js";
     $bundleUrl = "{$jsUrl}/{$cacheId}.js";
@@ -85,7 +87,8 @@ function minifyJs(): string {
     if (!file_exists($bundleFile)) {
         foreach ($scripts as $script) {
             $script = ltrim($script, "/");
-            if (file_exists($script) and pathinfo($script, PATHINFO_EXTENSION) == "js") {
+            if (file_exists($script)
+                    and pathinfo($script, PATHINFO_EXTENSION) == "js") {
                 $minifier->add($script);
             }
         }
@@ -122,7 +125,8 @@ function minifyCSS(): string {
     if (!is_dir($cssDir)) {
         mkdir($cssDir, 0777, true);
     }
-    $cssUrl = !is_admin_dir() ? "content/cache/stylesheets" : "../content/cache/stylesheets";
+    $cssUrl = !is_admin_dir() ?
+            "content/cache/stylesheets" : "../content/cache/stylesheets";
 
     $bundleFile = "{$cssDir}/{$cacheId}.css";
     $bundleUrl = "{$cssUrl}/{$cacheId}.css";
@@ -162,7 +166,8 @@ function compileSCSS(string $stylesheet): string {
     try {
         $scssOutput = $scss->compile($scssInput);
     } catch (Exception $e) {
-        throw new SCSSCompileException("Compilation of $stylesheet failed: {$e->getMessage()}");
+        throw new SCSSCompileException("Compilation of $stylesheet failed: "
+                . "{$e->getMessage()}");
     }
     return $scssOutput;
 }
@@ -178,7 +183,8 @@ function compileSCSSToFile(string $stylesheet): string {
 
     $cacheId = md5($stylesheet . filemtime($stylesheet)) . ".css";
 
-    $cssUrl = !is_admin_dir() ? "content/cache/stylesheets" : "../content/cache/stylesheets";
+    $cssUrl = !is_admin_dir() ?
+            "content/cache/stylesheets" : "../content/cache/stylesheets";
 
     $bundleFile = "{$cssDir}/{$cacheId}.css";
     $bundleUrl = "{$cssUrl}/{$cacheId}.css";
@@ -244,7 +250,9 @@ function getCombinedStylesheetHTML(): ?string {
             if ($type == "css") {
                 $html .= Style::fromExternalFile($stylesheet);
             } else if ($type == "scss") {
-                $html .= Style::fromExternalFile(compileSCSSToFile($stylesheet));
+                $html .= Style::fromExternalFile(
+                                compileSCSSToFile($stylesheet)
+                );
             }
         }
         resetStylesheetQueue();
@@ -262,6 +270,9 @@ function combinedStylesheetHtml(): void {
 }
 
 function get_combined_stylesheet_html(): string {
-    trigger_error("get_combined_stylesheet_html is deprecated", E_USER_DEPRECATED);
+    trigger_error(
+            "get_combined_stylesheet_html is deprecated",
+            E_USER_DEPRECATED
+    );
     return getCombinedStylesheetHTML();
 }

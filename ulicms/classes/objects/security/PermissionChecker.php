@@ -24,14 +24,16 @@ class PermissionChecker {
             return false;
         }
         $user = new User($this->user_id);
-        // If the "Is Admin" flag is set the user has full access to the whole system
+        // If the "Is Admin" flag is set the user has full access
+        // to the whole system
         if ($user->getAdmin()) {
             return true;
         }
 
         $groups = $this->getUserGroups($user);
 
-        // if at least one group of the user has the required permission return true
+        // if at least one group of the user has the
+        // required permission return true
         foreach ($groups as $group) {
             if ($group->hasPermission($permission)) {
                 return true;

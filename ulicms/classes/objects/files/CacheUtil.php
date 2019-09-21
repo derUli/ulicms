@@ -68,7 +68,8 @@ class CacheUtil {
         }
     }
 
-    // clears all caches including apc, opcache, cache directory and tmp directory, sync modules directory with database
+    // clears all caches including apc, opcache, cache directory
+    // and tmp directory, sync modules directory with database
     public static function clearCache(): void {
         do_event("before_clear_cache");
 
@@ -89,7 +90,9 @@ class CacheUtil {
         $moduleManager->sync();
 
         if (class_exists("DesignSettingsController")) {
-            $designSettingsController = ControllerRegistry::get(DesignSettingsController::class);
+            $designSettingsController = ControllerRegistry::get(
+                            DesignSettingsController::class
+            );
             $designSettingsController->generateSCSSToFile();
         }
 
@@ -103,7 +106,9 @@ class CacheUtil {
 
     // generates an unique identifier for the current page
     public static function getCurrentUid(): string {
-        return "fullpage-cache-" . md5(get_request_uri() . getCurrentLanguage() . strbool(is_mobile()) . strbool(is_crawler()) . strbool(is_tablet()));
+        return "fullpage-cache-" . md5(get_request_uri()
+                        . getCurrentLanguage() . strbool(is_mobile())
+                        . strbool(is_crawler()) . strbool(is_tablet()));
     }
 
 }

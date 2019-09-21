@@ -14,7 +14,11 @@ class ACL {
         return $checker->hasPermission($name);
     }
 
-    public function setPermission(string $name, bool $value, int $group_id): void {
+    public function setPermission(
+            string $name,
+            bool $value,
+            int $group_id
+    ): void {
         $result = $this->getPermissionQueryResult();
 
         if (!$result) {
@@ -31,9 +35,14 @@ class ACL {
 
         $permissionData[$name] = $value;
 
-        $newJSON = json_encode($permissionData, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+        $newJSON = json_encode(
+                $permissionData,
+                JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
+        );
 
-        $updateSQLString = "UPDATE `" . tbname("groups") . "` SET `permissions`='" . db_escape($newJSON) . "' WHERE id=" . $group_id;
+        $updateSQLString = "UPDATE `" . tbname("groups") .
+                "` SET `permissions`='" . db_escape($newJSON)
+                . "' WHERE id=" . $group_id;
 
         Database::query($updateSQLString);
     }
@@ -45,7 +54,10 @@ class ACL {
             $permissionData = json_encode($permissions);
         }
 
-        $sql = "INSERT INTO `" . tbname("groups") . "` (`name`, `permissions`) " . "VALUES('" . db_escape($name) . "','" . db_escape($permissionData) . "')";
+        $sql = "INSERT INTO `" . tbname("groups") .
+                "` (`name`, `permissions`) " .
+                "VALUES('" . db_escape($name) . "','" .
+                db_escape($permissionData) . "')";
 
         // Führe Query aus
         db_query($sql);
@@ -54,14 +66,19 @@ class ACL {
         return db_last_insert_id();
     }
 
-    public function updateGroup(int $id, string $name, ?array $permissions = null): int {
+    public function updateGroup(
+            int $id,
+            string $name,
+            ?array $permissions = null
+    ): int {
         if (is_null($permissions)) {
             $permission_data = $this->getDefaultACL();
         } else {
             $permissionData = json_encode($permissions);
         }
 
-        $sql = "UPDATE `" . tbname("groups") . "` SET name='" . db_escape($name) . "', permissions='" . db_escape($permissionData) . "' WHERE id=" . $id;
+        $sql = "UPDATE `" . tbname("groups") . "` SET name='" .
+                db_escape($name) . "', permissions='" . db_escape($permissionData) . "' WHERE id=" . $id;
 
         // Führe Query aus
         db_query($sql);
@@ -71,13 +88,16 @@ class ACL {
 
     public function deleteGroup(int $id, ?int $move_users_to = null) {
         $id = intval($id);
-        $deleteGroupSQL = "DELETE FROM `" . tbname("groups") . "` WHERE id=" . $id;
+        $deleteGroupSQL = "DELETE FROM `" . tbname("groups") .
+                "` WHERE id=" . $id;
         db_query($deleteGroupSQL);
 
         if (is_null($move_users_to)) {
-            $updateUsers = "UPDATE " . tbname("users") . " SET `group_id`=NULL where `group_id`=$id";
+            $updateUsers = "UPDATE " . tbname("users") .
+                    " SET `group_id`=NULL where `group_id`=$id";
         } else {
-            $updateUsers = "UPDATE " . tbname("users") . " SET `group_id`=" . $move_users_to . " where `group_id`=$id";
+            $updateUsers = "UPDATE " . tbname("users") .
+                    " SET `group_id`=" . $move_users_to . " where `group_id`=$id";
         }
 
         db_query($updateUsers);
@@ -93,7 +113,8 @@ class ACL {
             return null;
         }
 
-        $sqlString = "SELECT * FROM `" . tbname("groups") . "` WHERE id=" . $group_id;
+        $sqlString = "SELECT * FROM `" . tbname("groups") .
+                "` WHERE id=" . $group_id;
         $result = db_query($sqlString);
 
         if (db_num_rows($result) == 0) {
@@ -116,7 +137,10 @@ class ACL {
     }
 
     // initializes a json object with default permissions
-    public function getDefaultACLAsJSON(bool $admin = false, bool $plain = false) {
+    public function getDefaultACLAsJSON(
+            bool $admin = false,
+            bool $plain = false
+    ) {
         $acl_data = [];
 
         // Willkommen

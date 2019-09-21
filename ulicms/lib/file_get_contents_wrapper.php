@@ -11,12 +11,16 @@ function file_get_contents_curl(string $url): ?string {
     curl_setopt($ch, CURLOPT_USERAGENT, ULICMS_USERAGENT);
     curl_setopt($ch, CURLOPT_HEADER, 0);
     curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); // Set curl to return the data instead of printing it to the browser.
+
+    // Set curl to return the data instead of printing it to the browser.
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_URL, $url);
 
     $data = curl_exec($ch);
 
-    if (curl_getinfo($ch, CURLINFO_HTTP_CODE) != 200 and curl_getinfo($ch, CURLINFO_HTTP_CODE) != 304 and curl_getinfo($ch, CURLINFO_HTTP_CODE) != 302) {
+    if (curl_getinfo($ch, CURLINFO_HTTP_CODE) != 200
+            and curl_getinfo($ch, CURLINFO_HTTP_CODE) != 304
+            and curl_getinfo($ch, CURLINFO_HTTP_CODE) != 302) {
         $data = null;
     }
 
@@ -41,7 +45,11 @@ function is_url(?string $url): bool {
 
 // Nutze curl zum Download der Datei, sofern verfügbar
 // Ansonsten Fallback auf file_get_contents
-function file_get_contents_wrapper(string $url, bool $no_cache = false, $checksum = null): ?string {
+function file_get_contents_wrapper(
+        string $url,
+        bool $no_cache = false,
+        $checksum = null
+): ?string {
     $content = false;
     if (!is_url($url)) {
         return file_get_contents($url);
@@ -54,7 +62,8 @@ function file_get_contents_wrapper(string $url, bool $no_cache = false, $checksu
     }
 
     // use file_get_contents() on Google Cloud Platform since it's optimized by Google
-    $runningInGoogleCloud = class_exists("GoogleCloudHelper") ? GoogleCloudHelper::isProduction() : false;
+    $runningInGoogleCloud = class_exists("GoogleCloudHelper") ?
+            GoogleCloudHelper::isProduction() : false;
 
     if (function_exists("curl_init") and is_url($url) and ! $runningInGoogleCloud) {
         $content = file_get_contents_curl($url);
@@ -63,8 +72,11 @@ function file_get_contents_wrapper(string $url, bool $no_cache = false, $checksu
         $content = @file_get_contents($url, 0, $context);
     }
 
-    if ($content and StringHelper::isNotNullOrWhitespace($checksum) and md5($content) !== strtolower($checksum)) {
-        throw new CorruptDownloadException("Download of $url - Checksum validation failed");
+    if ($content and StringHelper::isNotNullOrWhitespace($checksum)
+            and md5($content) !== strtolower($checksum)) {
+        throw new CorruptDownloadException(
+                "Download of $url - Checksum validation failed"
+        );
     }
 
     if (is_dir($cache_folder) and is_url($url) and ! $no_cache) {
@@ -77,8 +89,8 @@ function file_get_contents_wrapper(string $url, bool $no_cache = false, $checksu
 function curl_url_exists(string $url): bool {
     $timeout = 10;
     $ch = curl_init();
-
-    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'HEAD'); // HTTP request is 'HEAD'
+    // HTTP request is 'HEAD' too make this method fast
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'HEAD');
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);

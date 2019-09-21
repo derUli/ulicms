@@ -90,7 +90,8 @@ class User extends Model {
     }
 
     public function loadByUsername(string $name): void {
-        $sql = "select * from {prefix}users where username COLLATE utf8mb4_general_ci = ?";
+        $sql = "select * from {prefix}users where username "
+                . "COLLATE utf8mb4_general_ci = ?";
         $args = array(
             strval($name)
         );
@@ -99,7 +100,8 @@ class User extends Model {
     }
 
     public function loadByEmail(string $email): void {
-        $sql = "select * from {prefix}users where email COLLATE utf8mb4_general_ci = ?";
+        $sql = "select * from {prefix}users where email "
+                . "COLLATE utf8mb4_general_ci = ?";
         $args = array(
             strval($email)
         );
@@ -162,9 +164,12 @@ class User extends Model {
     }
 
     protected function insert() {
-        $sql = "insert into {prefix}users (username, lastname, firstname, email, password, about_me, group_id, html_editor,
-				require_password_change, admin, password_changed, locked, last_login,
-				homepage, default_language) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        $sql = "insert into {prefix}users (username, lastname, firstname,
+                email, password, about_me, group_id, html_editor,
+                require_password_change, admin,
+                password_changed, locked, last_login,
+                homepage, default_language) values
+                (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         $args = array(
             $this->username,
             $this->lastname,
@@ -187,10 +192,12 @@ class User extends Model {
     }
 
     protected function update() {
-        $sql = "update {prefix}users set username = ?, lastname = ?, firstname = ?, email = ?, password = ?,
-            about_me = ?, group_id = ?, html_editor = ?,
-				require_password_change = ?, admin = ?, password_changed = ?, locked = ?, last_login = ?,
-				homepage = ?, default_language = ? where id = ?";
+        $sql = "update {prefix}users set username = ?, lastname = ?,
+            firstname = ?, email = ?, password = ?, about_me = ?,
+            group_id = ?, html_editor = ?,
+            require_password_change = ?, admin = ?, password_changed = ?,
+            locked = ?, last_login = ?,
+            homepage = ?, default_language = ? where id = ?";
         $args = array(
             $this->username,
             $this->lastname,
@@ -209,7 +216,7 @@ class User extends Model {
             $this->default_language,
             $this->id
         );
-        Database::pQuery($sql, $args, true) or die(Database::getError());
+        Database::pQuery($sql, $args, true);
     }
 
     public function getId(): ?int {
@@ -285,7 +292,13 @@ class User extends Model {
     public function resetPassword(): void {
         $passwordReset = new PasswordReset();
         $token = $passwordReset->addToken($this->getId());
-        $passwordReset->sendMail($token, $this->getEmail(), "xxx.xxx.xxx.xxx", $this->getFirstname(), $this->getLastname());
+        $passwordReset->sendMail(
+                $token,
+                $this->getEmail(),
+                "xxx.xxx.xxx.xxx",
+                $this->getFirstname(),
+                $this->getLastname()
+        );
     }
 
     public function checkPassword(string $password): bool {
@@ -433,7 +446,8 @@ class User extends Model {
             return;
         }
         $time = intval($time);
-        $sql = "update {prefix}users set failed_logins = failed_logins + 1 where id = ?";
+        $sql = "update {prefix}users set failed_logins = failed_logins + 1 "
+                . "where id = ?";
         $args = array(
             $this->id
         );
@@ -445,7 +459,8 @@ class User extends Model {
             return;
         }
         $time = intval($time);
-        $sql = "update {prefix}users set failed_logins = ? where id = ?";
+        $sql = "update {prefix}users set failed_logins = ? "
+                . "where id = ?";
         $args = array(
             0,
             $this->id
@@ -479,7 +494,8 @@ class User extends Model {
     }
 
     public function setDefaultLanguage(?string $val): void {
-        $this->default_language = StringHelper::isNotNullOrWhitespace($val) ? strval($val) : null;
+        $this->default_language = StringHelper::isNotNullOrWhitespace($val) ?
+                strval($val) : null;
     }
 
     public function getAvatar(): ?string {
@@ -487,7 +503,9 @@ class User extends Model {
     }
 
     public function setAvatar(): void {
-        throw new NotImplementedException("Avatar feature is not implemented yet.");
+        throw new NotImplementedException(
+                "Avatar feature is not implemented yet."
+        );
     }
 
     public function getSecondaryGroups(): array {
@@ -544,9 +562,12 @@ class User extends Model {
     }
 
     private function saveGroups(): void {
-        Database::pQuery("delete from {prefix}user_groups where user_id = ?", array(
-            $this->getId()
-                ), true);
+        Database::pQuery(
+                "delete from {prefix}user_groups where user_id = ?",
+                [
+                    $this->getId()
+                ]
+                , true);
         foreach ($this->secondary_groups as $group) {
             Database::pQuery("insert into {prefix}user_groups
                               (user_id, group_id)

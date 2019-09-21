@@ -8,7 +8,14 @@ class StringHelper extends Helper {
 
     // removes empty lines from a string
     public static function removeEmptyLinesFromString(string $input): string {
-        return normalizeLN(preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $input), "\n");
+        return normalizeLN(
+                preg_replace(
+                        "/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/",
+                        "\n",
+                        $input
+                ),
+                "\n"
+        );
     }
 
     // returns true if the string is null or empty
@@ -32,19 +39,28 @@ class StringHelper extends Helper {
     }
 
     // clean a string to use it in urls
-    public static function cleanString(string $string, string $separator = '-'): string {
+    public static function cleanString(
+            string $string,
+            string $separator = '-'
+    ): string {
         $slugify = new Slugify();
         return $slugify->slugify($string, $separator);
     }
 
     // encode strings to prevent XSS
-    public static function realHtmlSpecialchars(string $string): string {
+    public static function realHtmlSpecialchars(
+            string $string
+    ): string {
         return _esc($string);
     }
 
     // replace urls with clickable html links
     public static function makeLinksClickable(string $text): string {
-        return preg_replace('!(((f|ht)tp(s)?://)[-a-zA-Zа-яА-Я()0-9@:%_+.~#?&;//=]+)!i', '<a href="$1" rel="nofollow" target="_blank">$1</a>', $text);
+        return preg_replace(
+                '!(((f|ht)tp(s)?://)[-a-zA-Zа-яА-Я()0-9@:%_+.~#?&;//=]+)!i',
+                '<a href="$1" rel="nofollow" target="_blank">$1</a>',
+                $text
+        );
     }
 
     /**
@@ -58,7 +74,11 @@ class StringHelper extends Helper {
      *            Maximum length the excerpt may be
      * @return String excerpt
      */
-    public static function getExcerpt(string $str, int $startPos = 0, int $maxLength = 100): string {
+    public static function getExcerpt(
+            string $str,
+            int $startPos = 0,
+            int $maxLength = 100
+    ): string {
         $excerpt = $str;
         $str = str_replace("&nbsp;", " ", $str);
         if (strlen($str) > $maxLength) {
@@ -81,7 +101,8 @@ class StringHelper extends Helper {
         return html_entity_decode($str, ENT_COMPAT, 'UTF-8');
     }
 
-    // Häufigste Wörter in String ermitteln und als Assoziatives Array zurückgeben.
+    // Häufigste Wörter in String ermitteln und
+    // als Assoziatives Array zurückgeben.
     // z.B. für automatisches ausfüllen der Meta-Keywords nutzbar
     public static function keywordsFromString(string $text): array {
         $return = [];
@@ -119,7 +140,12 @@ class StringHelper extends Helper {
     }
 
     // converts a string to an array of lines
-    public static function linesFromString(string $str, bool $trim = true, bool $removeEmpty = true, bool $removeComments = true): array {
+    public static function linesFromString(
+            string $str,
+            bool $trim = true,
+            bool $removeEmpty = true,
+            bool $removeComments = true
+    ): array {
         $str = normalizeLN($str, "\n");
         $lines = explode("\n", $str);
         if ($trim) {
@@ -138,17 +164,30 @@ class StringHelper extends Helper {
     }
 
     // reads a file and converts it to an array of lines
-    public static function linesFromFile(string $file, bool $trim = true, bool $removeEmpty = true, bool $removeComments = true): ?array {
+    public static function linesFromFile(
+            string $file,
+            bool $trim = true,
+            bool $removeEmpty = true,
+            bool $removeComments = true
+    ): ?array {
         $lines = null;
         if (file_exists($file)) {
             $str = file_get_contents($file);
-            $lines = self::linesFromString($str, $trim, $removeEmpty, $removeComments);
+            $lines = self::linesFromString(
+                            $str,
+                            $trim,
+                            $removeEmpty,
+                            $removeComments
+            );
         }
         return $lines;
     }
 
     // trims all lines of string
-    public static function trimLines(string $str, string $newline = PHP_EOL): string {
+    public static function trimLines(
+            string $str,
+            string $newline = PHP_EOL
+    ): string {
         $str = StringHelper::linesFromString($str, true, true, false);
         $str = implode($newline, $str);
         return $str;

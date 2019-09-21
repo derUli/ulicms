@@ -22,7 +22,8 @@ class Group {
 
     // get the primary group id of the current user
     public static function getCurrentGroupId(): ?int {
-        return isset($_SESSION["group_id"]) ? intval($_SESSION["group_id"]) : null;
+        return isset($_SESSION["group_id"]) ?
+                intval($_SESSION["group_id"]) : null;
     }
 
     // get the primary group of the current user
@@ -35,7 +36,8 @@ class Group {
 
     // Get the id of the default group
     public static function getDefaultPrimaryGroupId(): ?int {
-        return Settings::get("default_acl_group") ? intval(Settings::get("default_acl_group")) : null;
+        return Settings::get("default_acl_group") ?
+                intval(Settings::get("default_acl_group")) : null;
     }
 
     // get the default group
@@ -77,7 +79,8 @@ class Group {
             }
         }
         $this->languages = [];
-        $sql = "select `language_id` from `{prefix}group_languages` where `group_id` = ?";
+        $sql = "select `language_id` from `{prefix}group_languages` "
+                . "where `group_id` = ?";
         $args = array(
             $this->getId()
         );
@@ -117,10 +120,14 @@ class Group {
     }
 
     protected function insert(): void {
-        $sql = "insert into `{prefix}groups` (name, permissions, allowable_tags) values (?,?,?)";
+        $sql = "insert into `{prefix}groups` "
+                . "(name, permissions, allowable_tags) values (?,?,?)";
         $args = array(
             $this->getName(),
-            json_encode($this->getPermissions(), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES),
+            json_encode(
+                    $this->getPermissions(),
+                    JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
+            ),
             $this->getAllowableTags()
         );
         $result = Database::pQuery($sql, $args, true);
@@ -132,7 +139,8 @@ class Group {
     }
 
     protected function update(): void {
-        $sql = "update `{prefix}groups` set name = ?, permissions = ?, allowable_tags = ? where id = ?";
+        $sql = "update `{prefix}groups`set name = ?, permissions = ?, "
+                . "allowable_tags = ? where id = ?";
         $args = array(
             $this->getName(),
             json_encode($this->getPermissions()),
@@ -186,7 +194,8 @@ class Group {
     }
 
     public function hasPermission(string $name): bool {
-        return (in_array($name, $this->permissions) and $this->permissions[$name]);
+        return (in_array($name, $this->permissions)
+                and $this->permissions[$name]);
     }
 
     public function removePermission(string $name): void {
@@ -208,7 +217,8 @@ class Group {
     }
 
     public function setAllowableTags(?string $val): void {
-        $this->allowable_tags = Stringhelper::isNotNullOrWhitespace($val) ? strval($val) : null;
+        $this->allowable_tags = Stringhelper::isNotNullOrWhitespace($val) ?
+                strval($val) : null;
     }
 
     // get all users in this group

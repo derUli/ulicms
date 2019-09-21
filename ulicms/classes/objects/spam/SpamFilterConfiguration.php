@@ -69,7 +69,8 @@ class SpamFilterConfiguration {
         } else if (is_null($val)) {
             $this->badwords = [];
         } else {
-            throw new InvalidArgumentException(var_dump_str($val) . " is not a valid value for badwords");
+            throw new InvalidArgumentException(var_dump_str($val) .
+                    " is not a valid value for badwords");
         }
     }
 
@@ -89,7 +90,8 @@ class SpamFilterConfiguration {
         } else if (is_null($val)) {
             $this->blockedCountries = [];
         } else {
-            throw new InvalidArgumentException(var_dump_str($val) . " is not a valid value for badwords");
+            throw new InvalidArgumentException(var_dump_str($val) .
+                    " is not a valid value for badwords");
         }
     }
 

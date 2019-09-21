@@ -30,7 +30,8 @@ class UserManager {
     public function getLockedUsers(bool $locked = true,
             string $order = "id"): array {
         $users = [];
-        $sql = "select id from {prefix}users where `locked` = ? order by $order";
+        $sql = "select id from {prefix}users where `locked` = ? "
+                . "order by $order";
         $args = array(
             intval($locked)
         );

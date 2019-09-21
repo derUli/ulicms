@@ -13,11 +13,13 @@ abstract class Content extends Model {
     }
 
     public static function emptyTrash(): void {
-        Database::query("DELETE FROM {prefix}content WHERE deleted_at IS NOT NULL", true);
+        Database::query("DELETE FROM {prefix}content WHERE deleted_at "
+                . "IS NOT NULL", true);
     }
 
     public function getHeadline(): ?string {
-        return StringHelper::isNullOrEmpty($this->alternate_title) ? $this->title : $this->alternate_title;
+        return StringHelper::isNullOrEmpty($this->alternate_title) ?
+                $this->title : $this->alternate_title;
     }
 
     // returns true if this is regular content

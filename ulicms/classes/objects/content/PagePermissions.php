@@ -29,7 +29,10 @@ class PagePermissions {
         return $this->$varName;
     }
 
-    public function setEditRestriction(string $object, bool $restricted = false): void {
+    public function setEditRestriction(
+            string $object,
+            bool $restricted = false
+    ): void {
         $varName = "only_{$object}_can_edit";
         if (!isset($this->$varName)) {
             return;

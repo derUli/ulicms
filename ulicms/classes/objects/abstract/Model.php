@@ -100,14 +100,20 @@ class Model {
         if ($type === null) {
             return;
         }
-        if (function_exists($isXyzFunction) and ! var_is_type($value, $type, $required)) {
+        if (function_exists($isXyzFunction)
+                and ! var_is_type($value, $type, $required)) {
             throw new InvalidArgumentException("\"{$value}\" is not of type {$type}.");
         } else if (class_exists($type) and $value instanceof $type) {
             throw new InvalidArgumentException("\"{$value}\" is not of type {$type}.");
         }
     }
 
-    public static function getAllDatasets($tableName, $modelClass, $orderBy = "id", $where = "") {
+    public static function getAllDatasets(
+            $tableName,
+            $modelClass,
+            $orderBy = "id",
+            $where = ""
+    ) {
         $datasets = [];
         $result = Database::selectAll($tableName, array(
                     "id"
@@ -134,7 +140,9 @@ class Model {
 
         $vars = $reflection->getProperties();
         foreach ($vars as $property) {
-            $camelCaseVar = ModuleHelper::underscoreToCamel($property->getName());
+            $camelCaseVar = ModuleHelper::underscoreToCamel(
+                            $property->getName()
+            );
             $method = "get" . ucfirst($camelCaseVar);
 
             if (method_exists($this, $method)

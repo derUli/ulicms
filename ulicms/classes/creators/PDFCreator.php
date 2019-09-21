@@ -32,7 +32,8 @@ class PDFCreator {
         $mpdf = new Mpdf(['mode' => 'utf-8', 'format' => 'A4-P']);
 
         $mpdf->WriteHTML($this->content);
-        $output = $mpdf->Output('foobar.pdf', \Mpdf\Output\Destination::STRING_RETURN);
+        $output = $mpdf->Output('foobar.pdf',
+                \Mpdf\Output\Destination::STRING_RETURN);
         return $output;
     }
 

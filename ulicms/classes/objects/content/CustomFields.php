@@ -6,7 +6,12 @@ declare(strict_types=1);
 // defined by modules
 class CustomFields {
 
-    public static function set(string $name, $value, ?int $content_id = null, $addPrefix = false): ?bool {
+    public static function set(
+            string $name,
+            $value,
+            ?int $content_id = null,
+            $addPrefix = false
+    ): ?bool {
         if (is_null($content_id)) {
             $content_id = get_ID();
         }
@@ -28,7 +33,8 @@ class CustomFields {
             $content_id,
             $name
         );
-        $sql = "Select id from {prefix}custom_fields where content_id = ? and name = ?";
+        $sql = "Select id from {prefix}custom_fields "
+                . "where content_id = ? and name = ?";
         $result = Database::pQuery($sql, $args, true);
         if (Database::getNumRows($result) > 0) {
             $result = Database::fetchObject($result);
@@ -36,7 +42,8 @@ class CustomFields {
                 $args = array(
                     intval($result->id)
                 );
-                $sql = "DELETE FROM {prefix}custom_fields where id = ?";
+                $sql = "DELETE FROM {prefix}custom_fields "
+                        . "where id = ?";
                 return Database::pQuery($sql, $args, true);
             } else {
                 $args = array(
@@ -44,7 +51,8 @@ class CustomFields {
                     $name,
                     $content_id
                 );
-                $sql = "UPDATE {prefix}custom_fields set value = ? where name = ? and content_id = ?";
+                $sql = "UPDATE {prefix}custom_fields set value = ? "
+                        . "where name = ? and content_id = ?";
                 return Database::pQuery($sql, $args, true);
             }
         } else if (!is_null($value)) {
@@ -53,13 +61,17 @@ class CustomFields {
                 $name,
                 $value
             );
-            $sql = "INSERT INTO {prefix}custom_fields (content_id, name, value) VALUES(?, ?, ?)";
+            $sql = "INSERT INTO {prefix}custom_fields "
+                    . "(content_id, name, value) VALUES(?, ?, ?)";
             return Database::pQuery($sql, $args, true);
         }
         return false;
     }
 
-    public static function getAll(?int $content_id = null, bool $removePrefix = true): array {
+    public static function getAll(
+            ?int $content_id = null,
+            bool $removePrefix = true
+    ): array {
         $fields = [];
         if (is_null($content_id)) {
             $content_id = get_ID();
@@ -69,7 +81,8 @@ class CustomFields {
         $args = array(
             $content_id
         );
-        $sql = "Select name, value from {prefix}custom_fields where content_id = ?";
+        $sql = "Select name, value from {prefix}custom_fields "
+                . "where content_id = ?";
         $result = Database::pQuery($sql, $args, true);
 
         while ($row = Database::fetchObject($result)) {
@@ -85,7 +98,11 @@ class CustomFields {
         return $fields;
     }
 
-    public static function get(string $name, ?int $content_id = null, $addPrefix = true) {
+    public static function get(
+            string $name,
+            ?int $content_id = null,
+            $addPrefix = true
+    ) {
         if (is_null($content_id)) {
             $content_id = get_ID();
         }
@@ -98,7 +115,8 @@ class CustomFields {
             $content_id,
             $name
         );
-        $sql = "Select value from {prefix}custom_fields where content_id = ? and name = ?";
+        $sql = "Select value from {prefix}custom_fields "
+                . "where content_id = ? and name = ?";
         $result = Database::pQuery($sql, $args, true);
         if (Database::getNumRows($result) > 0) {
             $dataset = Database::fetchObject($result);

@@ -46,7 +46,8 @@ class Module {
     }
 
     protected function insert(): bool {
-        $sql = "INSERT INTO {prefix}modules (name, version, enabled) values(?, ?, ?)";
+        $sql = "INSERT INTO {prefix}modules (name, version, enabled) "
+                . "values(?, ?, ?)";
         $args = array(
             $this->name,
             $this->version,
@@ -56,7 +57,8 @@ class Module {
     }
 
     protected function update(): bool {
-        $sql = "update {prefix}modules set version = ?, enabled = ? where name = ?";
+        $sql = "update {prefix}modules set version = ?, enabled = ? "
+                . "where name = ?";
         $args = array(
             $this->version,
             $this->enabled,

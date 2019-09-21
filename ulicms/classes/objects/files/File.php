@@ -86,7 +86,8 @@ class File {
 
     // check if a file exists in the local file system
     public static function existsLocally($path) {
-        return ( preg_match('~^(\w+:)?//~', $path) === 0 and file_exists($path));
+        return ( preg_match('~^(\w+:)?//~', $path) === 0
+                and file_exists($path));
     }
 
     // converts a file to a data URI
@@ -106,7 +107,8 @@ class File {
         // try multiple methods to detect mime type,
         // based on the php environment
         if (function_exists("finfo_file")) {
-            $finfo = finfo_open(FILEINFO_MIME_TYPE); // return mime type ala mimetype extension
+            // return mime type ala mimetype extension
+            $finfo = finfo_open(FILEINFO_MIME_TYPE);
             $mime = finfo_file($finfo, $file);
             finfo_close($finfo);
             return $mime;

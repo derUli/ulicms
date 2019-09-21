@@ -7,7 +7,8 @@ use UliCMS\Security\TwoFactorAuthentication;
 // this ffile contains functions for managing user accounts
 function getUsers(): array {
     $users = [];
-    $result = Database::query("SELECT id, username FROM " . tbname("users") . " ORDER by username");
+    $result = Database::query("SELECT id, username FROM " . tbname("users") .
+                    " ORDER by username");
     while ($row = db_fetch_assoc($result)) {
         $users[] = $row;
     }
@@ -20,7 +21,8 @@ function getAllUsers(): array {
 }
 
 function getUsersOnline(): array {
-    $users_online = Database::query("SELECT username FROM " . tbname("users") . " WHERE last_action > " . (time() - 300) . " ORDER BY username");
+    $users_online = Database::query("SELECT username FROM " . tbname("users") .
+                    " WHERE last_action > " . (time() - 300) . " ORDER BY username");
     $retval = [];
     while ($row = db_fetch_object($users_online)) {
         $retval[] = $row->username;
@@ -39,7 +41,8 @@ function changePassword($password, $userId) {
 }
 
 function getUserByName(string $name): ?array {
-    $result = Database::query("SELECT * FROM " . tbname("users") . " WHERE username='" . Database::escapeValue($name, DB_TYPE_STRING) . "'");
+    $result = Database::query("SELECT * FROM " . tbname("users") .
+                    " WHERE username='" . Database::escapeValue($name, DB_TYPE_STRING) . "'");
     if (db_num_rows($result) > 0) {
         return db_fetch_assoc($result);
     }
@@ -47,7 +50,8 @@ function getUserByName(string $name): ?array {
 }
 
 function getUserById($id): ?array {
-    $result = Database::query("SELECT * FROM " . tbname("users") . " WHERE id = " . intval($id));
+    $result = Database::query("SELECT * FROM " . tbname("users") .
+                    " WHERE id = " . intval($id));
     if (db_num_rows($result) > 0) {
         return db_fetch_assoc($result);
     }
@@ -81,7 +85,11 @@ function register_session(array $user, bool $redirect = true): void {
     $userDataset->registerSession($redirect);
 }
 
-function validate_login(string $username, string $password, ?string $token = null): ?array {
+function validate_login(
+        string $username,
+        string $password,
+        ?string $token = null
+): ?array {
     $user = new User();
     $user->loadByUsername($username);
 
@@ -101,11 +109,14 @@ function validate_login(string $username, string $password, ?string $token = nul
         $_REQUEST["error"] = get_translation("USER_OR_PASSWORD_INCORRECT");
 
 // Limit Login Attampts
-        $max_failed_logins_items = intval(Settings::get("max_failed_logins_items"));
+        $max_failed_logins_items = intval(
+                Settings::get("max_failed_logins_items")
+        );
         $user->setFailedLogins($user->getFailedLogins() + 1);
         $user->save();
 
-        if ($max_failed_logins_items >= 1 && $user->getFailedLogins() >= $max_failed_logins_items) {
+        if ($max_failed_logins_items >= 1
+                and $user->getFailedLogins() >= $max_failed_logins_items) {
             $user->setLocked($user->getLocked());
             $user->save();
 

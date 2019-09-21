@@ -11,7 +11,11 @@ class Settings {
         self::init($key, $value, $type);
     }
 
-    public static function init(string $key, $value, ?string $type = 'str'): bool {
+    public static function init(
+            string $key,
+            $value,
+            ?string $type = 'str'
+    ): bool {
         if (!self::get($key)) {
             self::set($key, $value, $type);
             SettingsCache::set($key, $value);
@@ -21,12 +25,16 @@ class Settings {
     }
 
     // get a config variable
-    public static function get(string $key, ?string $type = 'str') {
+    public static function get(
+            string $key,
+            ?string $type = 'str'
+    ) {
         if (!is_null(SettingsCache::get($key))) {
             return SettingsCache::get($key);
         }
         $key = db_escape($key);
-        $result = db_query("SELECT value FROM " . tbname("settings") . " WHERE name='$key'");
+        $result = db_query("SELECT value FROM " . tbname("settings") .
+                " WHERE name='$key'");
         if (db_num_rows($result) > 0) {
             while ($row = db_fetch_object($result)) {
                 $value = self::convertVar($row->value, $type);
@@ -38,8 +46,11 @@ class Settings {
         return null;
     }
 
-    public static function getLanguageSetting(string$name,
-            ?string $language = null, ?string $type = 'str') {
+    public static function getLanguageSetting(
+            string $name,
+            ?string $language = null,
+            ?string $type = 'str'
+    ) {
         $retval = false;
         $settingsName = $language ? "{$name}_{$language}" : $name;
 
@@ -52,13 +63,19 @@ class Settings {
         return $config;
     }
 
-    public static function getLang(string $name,
-            ?string $language = null, ?string $type = 'str') {
+    public static function getLang(
+            string $name,
+            ?string $language = null,
+            ?string $type = 'str'
+    ) {
         return self::getLanguageSetting($name, $language, $type);
     }
 
-    public static function setLanguageSetting(string $name, $value,
-            ?string $language = null): void {
+    public static function setLanguageSetting(
+            string $name,
+            $value,
+            ?string $language = null
+    ): void {
         $settingsName = $language ? "{$name}_{$language}" : $name;
 
         if ($value) {
@@ -69,16 +86,22 @@ class Settings {
     }
 
     // Set a configuration Variable;
-    public static function set(string $key, $value,
-            ?string $type = 'str'): void {
+    public static function set(
+            string $key,
+            $value,
+            ?string $type = 'str'
+    ): void {
         $key = db_escape($key);
         $originalValue = self::convertVar($value, $type);
         $value = db_escape($originalValue);
-        $result = db_query("SELECT id FROM " . tbname("settings") . " WHERE name='$key'");
+        $result = db_query("SELECT id FROM " . tbname("settings") .
+                " WHERE name='$key'");
         if (db_num_rows($result) > 0) {
-            db_query("UPDATE " . tbname("settings") . " SET value='$value' WHERE name='$key'");
+            db_query("UPDATE " . tbname("settings") . " SET value='$value' "
+                    . "WHERE name='$key'");
         } else {
-            db_query("INSERT INTO " . tbname("settings") . " (name, value) VALUES('$key', '$value')");
+            db_query("INSERT INTO " . tbname("settings") . " (name, value) "
+                    . "VALUES('$key', '$value')");
         }
 
         $logger = LoggerRegistry::get("audit_log");
@@ -86,11 +109,14 @@ class Settings {
         if ($logger) {
             if ($userId) {
                 $user = getUserById($userId);
-                $username = isset($user["username"]) ? $user["username"] : AuditLog::UNKNOWN;
-                $logger->debug("User $username - Changed setting $key to '$originalValue'");
+                $username = isset($user["username"]) ?
+                        $user["username"] : AuditLog::UNKNOWN;
+                $logger->debug("User $username - "
+                        . "Changed setting $key to '$originalValue'");
             } else {
                 $username = AuditLog::UNKNOWN;
-                $logger->debug("User $username - Changed setting $key to '$originalValue'");
+                $logger->debug("User $username - "
+                        . "Changed setting $key to '$originalValue'");
             }
         }
         SettingsCache::set($key, $originalValue);
@@ -131,14 +157,16 @@ class Settings {
 
     public static function getAll(string $order = "name"): array {
         $datasets = [];
-        $result = Database::query("SELECT * FROM `{prefix}settings` order by $order", true);
+        $result = Database::query("SELECT * FROM `{prefix}settings` "
+                        . "order by $order", true);
         while ($dataset = Database::fetchObject($result)) {
             $datasets[] = $dataset;
         }
         return $datasets;
     }
 
-    // converts a mapping string (such as domain2language mapping) to an associative array
+    // converts a mapping string (such as domain2language mapping)
+    // to an associative array
     // example mapping string
     // foo=>bar
     // hello=>world
@@ -150,7 +178,7 @@ class Settings {
         $lines = array_filter($lines, 'strlen');
         $result = [];
         foreach ($lines as $line) {
-// if a line starts with a hash skip it (comment)
+            // if a line starts with a hash skip it (comment)
             if (startsWith($line, "#")) {
                 continue;
             }

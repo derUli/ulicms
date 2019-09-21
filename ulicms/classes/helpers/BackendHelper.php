@@ -35,17 +35,33 @@ class BackendHelper extends Helper {
     public static function enqueueEditorScripts(): void {
         // ckeditor is huge so embed it only if this is the user'S preferred html editor
         if (get_html_editor() == "ckeditor") {
-            enqueueScriptFile(ModuleHelper::buildRessourcePath("core_content", "js/pages/init-ckeditor.js"));
+            enqueueScriptFile(ModuleHelper::buildRessourcePath("core_content",
+                            "js/pages/init-ckeditor.js"));
         }
 
-        enqueueScriptFile("../node_modules/codemirror-minified/lib/codemirror.js");
-        enqueueScriptFile("../node_modules/codemirror-minified/mode/php/php.js");
-        enqueueScriptFile("../node_modules/codemirror-minified/mode/xml/xml.js");
-        enqueueScriptFile("../node_modules/codemirror-minified/mode/javascript/javascript.js");
-        enqueueScriptFile("../node_modules/codemirror-minified/mode/clike/clike.js");
-        enqueueScriptFile("../node_modules/codemirror-minified/mode/css/css.js");
+        enqueueScriptFile(
+                "../node_modules/codemirror-minified/lib/codemirror.js"
+        );
+        enqueueScriptFile(
+                "../node_modules/codemirror-minified/mode/php/php.js"
+        );
+        enqueueScriptFile(
+                "../node_modules/codemirror-minified/mode/xml/xml.js"
+        );
+        enqueueScriptFile(
+                "../node_modules/codemirror-minified/mode/javascript/javascript.js"
+        );
+        enqueueScriptFile(
+                "../node_modules/codemirror-minified/mode/clike/clike.js"
+        );
+        enqueueScriptFile(
+                "../node_modules/codemirror-minified/mode/css/css.js"
+        );
 
-        enqueueScriptFile(ModuleHelper::buildRessourcePath("core_content", "js/pages/init-codemirror.js"));
+        enqueueScriptFile(ModuleHelper::buildRessourcePath(
+                        "core_content",
+                        "js/pages/init-codemirror.js"
+        ));
     }
 
 }

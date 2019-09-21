@@ -16,18 +16,21 @@ function deleteconfig(string $key): bool {
 
 // Set a configuration Variable;
 function setconfig(string $key, $value) {
-    $result = db_query("SELECT id FROM " . tbname("settings") . " WHERE name='$key'");
+    $result = db_query("SELECT id FROM " . tbname("settings") .
+            " WHERE name='$key'");
     if (db_num_rows($result) > 0) {
         db_query("UPDATE " . tbname("settings") . " SET value='$value' WHERE name='$key'");
     } else {
-        db_query("INSERT INTO " . tbname("settings") . " (name, value) VALUES('$key', '$value')");
+        db_query("INSERT INTO " . tbname("settings") .
+                " (name, value) VALUES('$key', '$value')");
     }
     $logger = LoggerRegistry::get("audit_log");
     $userId = get_user_id();
     if ($logger) {
         if ($userId) {
             $user = getUserById($userId);
-            $username = isset($user["username"]) ? $user["username"] : AuditLog::UNKNOWN;
+            $username = isset($user["username"]) ?
+                    $user["username"] : AuditLog::UNKNOWN;
             $logger->debug("User $username - Changed setting $key to '$value'");
         } else {
             $username = AuditLog::UNKNOWN;

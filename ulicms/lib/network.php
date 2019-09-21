@@ -34,7 +34,8 @@ function get_host(): string {
     } else {
         if (!$host = $_SERVER['HTTP_HOST']) {
             if (!$host = $_SERVER['SERVER_NAME']) {
-                $host = !empty($_SERVER['SERVER_ADDR']) ? $_SERVER['SERVER_ADDR'] : '';
+                $host = !empty($_SERVER['SERVER_ADDR']) ?
+                        $_SERVER['SERVER_ADDR'] : '';
             }
         }
     }

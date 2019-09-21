@@ -17,7 +17,8 @@ class ModelRegistry {
                 if (faster_in_array($module, $disabledModules)) {
                     continue;
                 }
-                $models = getModuleMeta($module, "models") ? getModuleMeta($module, "models") : getModuleMeta($module, "objects");
+                $models = getModuleMeta($module, "models") ?
+                        getModuleMeta($module, "models") : getModuleMeta($module, "objects");
                 if (!$models) {
                     continue;
                 }
@@ -33,7 +34,8 @@ class ModelRegistry {
                 if (file_exists($value)) {
                     require $value;
                 } else {
-                    throw new FileNotFoundException("Module {$module}: File '{$path}' not found.");
+                    throw new FileNotFoundException("Module {$module}: "
+                            . "File '{$path}' not found.");
                 }
             }
         }

@@ -141,7 +141,10 @@ class Request {
     }
 
     public static function isAjaxRequest(): bool {
-        return (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
+        return (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) and
+                strtolower(
+                        $_SERVER['HTTP_X_REQUESTED_WITH']
+                ) == 'xmlhttprequest');
     }
 
     public static function getDomain(): ?string {
@@ -164,7 +167,8 @@ class Request {
     }
 
     public static function getRequestUri(): ?string {
-        return isset($_SERVER["REQUEST_URI"]) ? $_SERVER["REQUEST_URI"] : null;
+        return isset($_SERVER["REQUEST_URI"]) ?
+                $_SERVER["REQUEST_URI"] : null;
     }
 
 }

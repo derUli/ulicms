@@ -21,9 +21,11 @@ class ListItem {
 
     public function getHtml(): string {
         if ($this->selected) {
-            return '<option value="' . Template::getEscape($this->value) . '" selected>' . Template::getEscape($this->text) . '</option>';
+            return '<option value="' . Template::getEscape($this->value) .
+                    '" selected>' . Template::getEscape($this->text) . '</option>';
         }
-        return '<option value="' . Template::getEscape($this->value) . '">' . Template::getEscape($this->text) . '</option>';
+        return '<option value="' . Template::getEscape($this->value) . '">' .
+                Template::getEscape($this->text) . '</option>';
     }
 
     public function __toString(): string {

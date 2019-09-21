@@ -41,8 +41,11 @@ function real_htmlspecialchars(string $string): string {
 }
 
 function multi_explode(array $delimiters, string $string): array {
-    return explode($delimiters[0], strtr($string, array_combine(array_slice($delimiters, 1),
-                            array_fill(0, count($delimiters) - 1, array_shift($delimiters)))));
+    return explode($delimiters[0],
+            strtr($string,
+                    array_combine(array_slice($delimiters, 1),
+                            array_fill(0, count($delimiters) - 1,
+                                    array_shift($delimiters)))));
 }
 
 // Links klickbar machen
@@ -61,7 +64,11 @@ function make_links_clickable(string $text): string {
  *            Maximum length the excerpt may be
  * @return String excerpt
  */
-function getExcerpt(string $str, int $startPos = 0, int $maxLength = 100): string {
+function getExcerpt(
+        string $str,
+        int $startPos = 0,
+        int $maxLength = 100
+): string {
     return StringHelper::getExcerpt($str, $startPos, $maxLength);
 }
 
@@ -121,13 +128,15 @@ function strbool($value): string {
 }
 
 function isNullOrEmpty($variable): bool {
-    trigger_error("global function isNullOrEmpty() is deprecated. Plese use StringHelper::isNullOrEmpty() instead."
+    trigger_error("global function isNullOrEmpty() is deprecated. "
+            . "Plese use StringHelper::isNullOrEmpty() instead."
             , E_USER_WARNING);
     return is_blank($variable);
 }
 
 function isNotNullOrEmpty($variable): bool {
-    trigger_error("global function isNotNullOrEmpty() is deprecated. Plese use StringHelper::isNotNullOrEmpty() instead.", E_USER_WARNING
+    trigger_error("global function isNotNullOrEmpty() is deprecated. "
+            . "Plese use StringHelper::isNotNullOrEmpty() instead.", E_USER_WARNING
     );
     return is_present($variable);
 }
@@ -142,16 +151,29 @@ function convertLineEndingsToLN(string $s): string {
     return $s;
 }
 
-function str_replace_nth(string $search, string $replace, string $subject, int $nth): string {
+function str_replace_nth(
+        string $search,
+        string $replace,
+        string $subject,
+        int $nth): string {
     $found = preg_match_all('/' .
             preg_quote($search) . '/', $subject, $matches, PREG_OFFSET_CAPTURE);
     if (false !== $found && $found > $nth) {
-        return substr_replace($subject, $replace, $matches[0][$nth][1], strlen($search));
+        return substr_replace(
+                $subject,
+                $replace,
+                $matches[0][$nth][1],
+                strlen($search)
+        );
     }
     return $subject;
 }
 
-function str_replace_first(string $search, string $replace, string $subject): string {
+function str_replace_first(
+        string $search,
+        string $replace,
+        string $subject
+): string {
     $pos = strpos($subject, $search);
     if ($pos !== false) {
         return substr_replace($subject, $replace, $pos, strlen($search));

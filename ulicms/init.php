@@ -37,7 +37,10 @@ $composerAutoloadFile = dirname(__FILE__) . "/vendor/autoload.php";
 if (file_exists($composerAutoloadFile)) {
     require_once $composerAutoloadFile;
 } else {
-    throw new FileNotFoundException("autoload.php not found. Please run \"./composer install\" to install dependecies.");
+    throw new FileNotFoundException(
+            "autoload.php not found. "
+            . "Please run \"./composer install\" to install dependecies."
+    );
 }
 
 require_once dirname(__file__) . "/lib/comparisons.php";
@@ -119,7 +122,8 @@ require_once dirname(__file__) . "/classes/objects/media/load.php";
 
 require_once dirname(__file__) . "/UliCMSVersion.php";
 
-$mobile_detect_as_module = dirname(__file__) . "/content/modules/Mobile_Detect/Mobile_Detect.php";
+$mobile_detect_as_module = dirname(__file__) .
+        "/content/modules/Mobile_Detect/Mobile_Detect.php";
 if (file_exists($mobile_detect_as_module)) {
     require_once $mobile_detect_as_module;
 }
@@ -132,14 +136,17 @@ function exception_handler($exception) {
     // FIXME: what if there is no config class?
     $cfg = class_exists("CMSConfig") ? new CMSConfig() : null;
 
-    $message = !is_null($cfg) && is_true($cfg->debug) ? $exception : "An error occurred! See exception_log for details. 😞";
+    $message = !is_null($cfg) && is_true($cfg->debug) ?
+            $exception : "An error occurred! See exception_log for details. 😞";
 
     $logger = LoggerRegistry::get("exception_log");
     if ($logger) {
         $logger->error($exception);
     }
-    $httpStatus = $exception instanceof AccessDeniedException ? HttpStatusCode::FORBIDDEN : HttpStatusCode::INTERNAL_SERVER_ERROR;
-    if (function_exists("HTMLResult") and class_exists("Template") and ! headers_sent() and function_exists("get_theme")) {
+    $httpStatus = $exception instanceof AccessDeniedException ?
+            HttpStatusCode::FORBIDDEN : HttpStatusCode::INTERNAL_SERVER_ERROR;
+    if (function_exists("HTMLResult") and class_exists("Template")
+            and ! headers_sent() and function_exists("get_theme")) {
         ViewBag::set("exception", nl2br(_esc($exception)));
         HTMLResult(Template::executeDefaultOrOwnTemplate("exception.php"), $httpStatus);
     }
@@ -177,7 +184,8 @@ $config = new CMSConfig();
 
 // IF ULICMS_DEBUG is defined then display all errors except E_NOTICE,
 // else use default error_reporting from php.ini
-if ((defined("ULICMS_DEBUG") and ULICMS_DEBUG) or ( isset($config->debug) and $config->debug)) {
+if ((defined("ULICMS_DEBUG") and ULICMS_DEBUG)
+        or ( isset($config->debug) and $config->debug)) {
     error_reporting(E_ALL ^ E_NOTICE);
 } else {
     error_reporting(0);
@@ -187,7 +195,8 @@ if ((defined("ULICMS_DEBUG") and ULICMS_DEBUG) or ( isset($config->debug) and $c
 // to seperate it's core files from variable data such as modules and media
 // this enables us to use stuff like Docker containers where data gets lost
 // after stopping the container
-if (isset($config->data_storage_root) and ! is_null($config->data_storage_root)) {
+if (isset($config->data_storage_root)
+        and ! is_null($config->data_storage_root)) {
     define("ULICMS_DATA_STORAGE_ROOT", $config->data_storage_root);
 } else {
     define("ULICMS_DATA_STORAGE_ROOT", ULICMS_ROOT);
@@ -197,7 +206,8 @@ require_once dirname(__file__) . "/classes/creators/load.php";
 
 // this enables us to set an base url for statis ressources such as images
 // stored in ULICMS_DATA_STORAGE_ROOT
-if (isset($config->data_storage_url) and ! is_null($config->data_storage_url)) {
+if (isset($config->data_storage_url)
+        and ! is_null($config->data_storage_url)) {
     define("ULICMS_DATA_STORAGE_URL", $config->data_storage_url);
 }
 
@@ -243,8 +253,10 @@ if (!file_exists($htaccessLogFolderTarget)) {
 }
 
 // umask setzen
-// Die umask legt die Standarddateirechte für neue Dateien auf Unix Systemen fest
-// Die Variable $umask sollte nur gesetzt werden, sofern es zu Berechtigungsproblemen bei durch UliCMS generierten Dateien kommt.
+// Die umask legt die Standarddateirechte für neue Dateien auf
+// Unix Systemen fest.
+// Die Variable $umask sollte nur gesetzt werden, sofern es zu
+// Berechtigungsproblemen bei durch UliCMS generierten Dateien kommt.
 // umask lässt sich wie folgt berechnen
 // 0777 - X = gewünschte Berechtigung
 // X ist die umask
@@ -263,16 +275,28 @@ Translation::init();
 if (class_exists("Path")) {
 
     if (is_true($config->exception_logging)) {
-        LoggerRegistry::register("exception_log", new Logger(Path::resolve("ULICMS_LOG/exception_log")));
+        LoggerRegistry::register(
+                "exception_log",
+                new Logger(Path::resolve("ULICMS_LOG/exception_log"))
+        );
     }
     if (is_true($config->query_logging)) {
-        LoggerRegistry::register("sql_log", new Logger(Path::resolve("ULICMS_LOG/sql_log")));
+        LoggerRegistry::register(
+                "sql_log",
+                new Logger(Path::resolve("ULICMS_LOG/sql_log"))
+        );
     }
     if (is_true($config->phpmailer_logging)) {
-        LoggerRegistry::register("phpmailer_log", new Logger(Path::resolve("ULICMS_LOG/phpmailer_log")));
+        LoggerRegistry::register(
+                "phpmailer_log",
+                new Logger(Path::resolve("ULICMS_LOG/phpmailer_log"))
+        );
     }
     if (is_true($config->audit_log)) {
-        LoggerRegistry::register("audit_log", new Logger(Path::resolve("ULICMS_LOG/audit_log")));
+        LoggerRegistry::register(
+                "audit_log",
+                new Logger(Path::resolve("ULICMS_LOG/audit_log"))
+        );
     }
 }
 
@@ -284,7 +308,8 @@ define('BR', '<br />' . LF); // HTML Break
 define("ONE_DAY_IN_SECONDS", 60 * 60 * 24);
 
 function noPerms() {
-    echo "<div class=\"alert alert-danger\">" . get_translation("no_permissions") . "</div>";
+    echo "<div class=\"alert alert-danger\">"
+    . get_translation("no_permissions") . "</div>";
     $logger = LoggerRegistry::get("audit_log");
     if ($logger) {
         $userId = get_user_id();
@@ -299,12 +324,22 @@ function noPerms() {
     return false;
 }
 
-$db_socket = isset($config->db_socket) ? $config->db_socket : ini_get("mysqli.default_socket");
+$db_socket = isset($config->db_socket) ?
+        $config->db_socket : ini_get("mysqli.default_socket");
 
-$db_port = isset($config->db_port) ? $config->db_port : ini_get("mysqli.default_port");
-$db_strict_mode = isset($config->db_strict_mode) ? boolval($config->db_strict_mode) : false;
+$db_port = isset($config->db_port) ?
+        $config->db_port : ini_get("mysqli.default_port");
+$db_strict_mode = isset($config->db_strict_mode) ?
+        boolval($config->db_strict_mode) : false;
 
-@$connection = Database::connect($config->db_server, $config->db_user, $config->db_password, $db_port, $db_socket, $db_strict_mode);
+@$connection = Database::connect(
+                $config->db_server,
+                $config->db_user,
+                $config->db_password,
+                $db_port,
+                $db_socket,
+                $db_strict_mode
+);
 
 if (!$connection) {
     throw new ConnectionFailedException("Can't connect to Database.");
@@ -313,11 +348,15 @@ if (!$connection) {
 $path_to_installer = dirname(__file__) . "/installer/installer.php";
 
 if (is_true($config->dbmigrator_auto_migrate)) {
-    $additionalSql = is_array($config->dbmigrator_initial_sql_files) ? $config->dbmigrator_initial_sql_files : [];
+    $additionalSql = is_array($config->dbmigrator_initial_sql_files) ?
+            $config->dbmigrator_initial_sql_files : [];
     if (isCLI()) {
         Database::setEchoQueries(true);
     }
-    $select = Database::setupSchemaAndSelect($config->db_database, $additionalSql);
+    $select = Database::setupSchemaAndSelect(
+                    $config->db_database,
+                    $additionalSql
+    );
 } else {
     $select = Database::select($config->db_database);
 }
@@ -325,7 +364,8 @@ if (is_true($config->dbmigrator_auto_migrate)) {
 Database::setEchoQueries(false);
 
 if (!$select) {
-    throw new SqlException("<h1>Database " . $config->db_database . " doesn't exist.</h1>");
+    throw new SqlException("<h1>Database "
+            . $config->db_database . " doesn't exist.</h1>");
 }
 
 if (!Settings::get("session_name")) {
@@ -416,7 +456,8 @@ register_shutdown_function("shutdown_function");
 $enforce_https = Settings::get("enforce_https");
 
 if (!is_ssl() and $enforce_https) {
-    header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
+    header("Location: https://" . $_SERVER["HTTP_HOST"] .
+            $_SERVER["REQUEST_URI"]);
     exit();
 }
 
@@ -445,5 +486,6 @@ $installed_patches = $pkg->getInstalledPatchNames();
 $installed_patches = implode(";", $installed_patches);
 
 if (!defined("PATCH_CHECK_URL")) {
-    define("PATCH_CHECK_URL", "https://patches.ulicms.de/?v=" . urlencode(implode(".", $version->getInternalVersion())) . "&installed_patches=" . urlencode($installed_patches));
+    define("PATCH_CHECK_URL", "https://patches.ulicms.de/?v=" .
+            urlencode(implode(".", $version->getInternalVersion())) . "&installed_patches=" . urlencode($installed_patches));
 }

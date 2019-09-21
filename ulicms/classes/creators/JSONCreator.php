@@ -35,7 +35,10 @@ class JSONCreator {
         $data["content"] = $this->content;
         $data["meta_description"] = get_meta_description();
         $data["meta_keywords"] = get_meta_keywords();
-        $json_string = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+        $json_string = json_encode(
+                $data,
+                JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
+        );
         if ($adapter) {
             $adapter->set($uid, $json_string, CacheUtil::getCachePeriod());
         }

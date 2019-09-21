@@ -9,7 +9,11 @@ use Helper;
 class ArrayHelper extends Helper {
 
     // inserts an item before an index to an array
-    public static function insertBefore(array $input, int $index, $element): array {
+    public static function insertBefore(
+            array $input,
+            int $index,
+            $element
+    ): array {
         if (!array_key_exists($index, $input)) {
             throw new Exception("Index not found");
         }
@@ -28,7 +32,11 @@ class ArrayHelper extends Helper {
     }
 
     // inserts an item after an index to an array
-    public static function insertAfter(array $input, int $index, $element): array {
+    public static function insertAfter(
+            array $input,
+            int $index,
+            $element
+    ): array {
         if (!array_key_exists($index, $input)) {
             throw new Exception("Index not found");
         }

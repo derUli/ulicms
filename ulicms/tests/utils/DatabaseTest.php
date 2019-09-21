@@ -1,14 +1,17 @@
 <?php
 
-use UliCMS\Exceptions\NotImplementedException;
 use UliCMS\Exceptions\SqlException;
 
 class DatabaseTest extends \PHPUnit\Framework\TestCase {
 
     public function tearDown() {
+        Database::setEchoQueries(false);
         Database::dropTable("test_table");
         Settings::delete("foo");
         Settings::delete("foo2");
+
+        $configuration = new CMSConfig();
+        Database::select($configuration->db_database);
     }
 
     public function testIsConnectedReturnsTrue() {
@@ -73,7 +76,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetLastError() {
         $this->expectException(SqlException::class);
-        // this sql fails always
+// this sql fails always
         $result = Database::query("select devil from hell", true);
         $this->assertFalse($result);
 
@@ -84,27 +87,33 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testError() {
-        $this->expectException(SqlException::class);
-        // this sql fails always
-        $result = Database::query("select devil from hell", true);
-        $this->assertFalse($result);
+// this sql fails always
+        try {
+            $result = Database::query("select devil from hell", true);
+            $this->assertFalse($result);
+        } catch (Exception $e) {
+            $error = Database::error();
 
-        $error = Database::error();
-
-        $this->assertStringStartsWith("Table", $error);
-        $this->assertStringEndsWith("doesn't exist", $error);
+            $this->assertStringStartsWith("Table", $error);
+            $this->assertStringEndsWith("doesn't exist", $error);
+        }
     }
 
     public function testGetError() {
-        $this->expectException(SqlException::class);
-        // this sql fails always
-        $result = Database::query("select devil from hell", true);
-        $this->assertFalse($result);
 
-        $error = Database::getError();
+        LoggerRegistry::register("sql_log", new Logger(
+                        ULICMS_LOG, "sql_log"));
+        try {
+            // this sql fails always
+            $result = Database::query("select devil from hell", true);
+            $this->assertFalse($result);
+        } catch (SqlException $e) {
+            $error = Database::getError();
 
-        $this->assertStringStartsWith("Table", $error);
-        $this->assertStringEndsWith("doesn't exist", $error);
+            $this->assertStringStartsWith("Table", $error);
+            $this->assertStringEndsWith("doesn't exist", $error);
+        }
+        LoggerRegistry::unregister("sql_log");
     }
 
     public function testSelectAll() {
@@ -308,6 +317,249 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
     public function testTableExistsReturnsFalse() {
         $this->assertFalse(Database::tableExists("gibts_echt_nicht"));
         $this->assertFalse(Database::tableExists("content", false));
+    }
+
+    public function testFetchArray() {
+        $query = Database::selectAll("settings");
+
+        while ($row = Database::fetchArray($query)) {
+            $this->assertCount(6, $row);
+            $this->assertNotEmpty($row["name"]);
+        }
+    }
+
+    public function testFetchRow() {
+        $query = Database::selectAll("settings");
+
+        while ($row = Database::fetchRow($query)) {
+            $this->assertCount(3, $row);
+            $this->assertIsNumeric($row[0]);
+            $this->assertNotEmpty($row[1]);
+        }
+    }
+
+    public function testFetchSingleOrDefaultReturnsObject() {
+        $query = Database::selectAll("settings", [], " 1 = 1 limit 1");
+
+        $default = new stdClass();
+        $default->name = "default value";
+
+        $row = Database::fetchSingleOrDefault($query, $default);
+        $this->assertIsObject($row);
+        $this->assertIsNumeric($row->id);
+        $this->assertNotEmpty($row->name);
+    }
+
+    public function testFetchFirstReturnsNull() {
+        $query = Database::selectAll("settings", [], "1 = 0");
+
+        $row = Database::fetchFirst($query);
+        $this->assertNull($row);
+    }
+
+    public function testFetchFirstReturnsObject() {
+        $query = Database::selectAll("settings", [], "1=1");
+
+        $row = Database::fetchFirst($query);
+        $this->assertIsObject($row);
+        $this->assertIsNumeric($row->id);
+        $this->assertNotEmpty($row->name);
+    }
+
+    public function testFetchSingleOrDefaultThrowsException() {
+        $query = Database::selectAll("settings", []);
+
+        $default = new stdClass();
+        $default->name = "default value";
+
+        $this->expectException(RangeException::class);
+
+        Database::fetchSingleOrDefault($query, $default);
+    }
+
+    public function testFetchSingleOrDefaultReturnsDefault() {
+        $query = Database::selectAll("settings", [], "1 = 0");
+
+        $default = new stdClass();
+        $default->name = "default value";
+
+        $row = Database::fetchSingleOrDefault($query, $default);
+
+        $this->assertIsObject($row);
+        $this->assertEquals("default value", $row->name);
+    }
+
+    public function testEscapeValueWithFloat() {
+        $this->assertEquals(2.99, Database::escapevalue(2.99));
+    }
+
+    public function testEscapeValueWithTypeInt() {
+        $this->assertEquals(2, Database::escapevalue(2.99, DB_TYPE_INT));
+    }
+
+    public function testEscapeValueWithTypeFloat() {
+        $this->assertEquals(2.0, Database::escapevalue(2, DB_TYPE_FLOAT));
+    }
+
+    public function testEscapeValueWithTypeString() {
+        $this->assertEquals("123", Database::escapevalue(123, DB_TYPE_STRING));
+    }
+
+    public function testEscapeValueWithTypeBool() {
+        $this->assertEquals(0, Database::escapevalue(false, DB_TYPE_BOOL));
+        $this->assertEquals(1, Database::escapevalue(true, DB_TYPE_BOOL));
+    }
+
+    public function testEscapeValueWithTypeOther() {
+        $this->assertInstanceOf(Page::class, Database::escapevalue(new Page(), PHP_INT_MAX));
+    }
+
+    public function testfetchFirstOrDefaultReturnsFirst() {
+        $query = Database::selectAll("settings", []);
+
+        $default = new stdClass();
+        $default->name = "default value";
+
+        $row = Database::fetchFirstOrDefault($query, $default);
+
+        $this->assertIsNumeric($row->id);
+        $this->assertNotEmpty($row->name);
+    }
+
+    public function testfetchFirstOrDefaultReturnsDefault() {
+        $query = Database::selectAll("settings", [], "1 = 0");
+
+        $default = new stdClass();
+        $default->name = "default value";
+
+        $row = Database::fetchFirstOrDefault($query, $default);
+
+        $this->assertIsObject($row);
+        $this->assertEquals("default value", $row->name);
+    }
+
+    public function testFetchSingleReturnsNull() {
+        $query = Database::selectAll("settings", [], "1 = 0");
+
+        $row = Database::fetchSingle($query);
+        $this->assertNull($row);
+    }
+
+    public function testFetchSingleThrowsException() {
+        $query = Database::selectAll("settings");
+
+        $this->expectException(RangeException::class);
+        Database::fetchSingle($query);
+    }
+
+    public function testFetchSingleReturnsObject() {
+        $query = Database::selectAll("settings", [], "1=1 limit 1");
+
+        $row = Database::fetchSingle($query);
+        $this->assertIsObject($row);
+        $this->assertIsNumeric($row->id);
+        $this->assertNotEmpty($row->name);
+    }
+
+    public function hasMoreResultsReturnsFalse() {
+        $this->assertFalse(Database::hasMoreResults());
+    }
+
+    public function testCreateSelectAndDropSchema() {
+        $schema = "tmp_database_" . uniqid();
+        $this->assertTrue(Database::createSchema($schema));
+        $this->assertTrue(Database::select($schema));
+
+        $configuration = new CMSConfig();
+        $this->assertTrue(
+                Database::select($configuration->db_database)
+        );
+
+        $this->assertTrue(Database::dropSchema($schema));
+    }
+
+    public function testEchoQueriesOutputsSQL() {
+        Database::setEchoQueries(true);
+        ob_start();
+        Database::query("select 'foo' as bar");
+        $this->assertEquals("select 'foo' as bar\n", ob_get_clean());
+    }
+
+    public function testEchoQueriesOutputsNothing() {
+        Database::setEchoQueries(false);
+        ob_start();
+        Database::query("select 'foo' as bar");
+        $this->assertEmpty(ob_get_clean());
+    }
+
+    public function testClose() {
+        $this->assertTrue(Database::isConnected());
+
+        Database::close();
+        $this->assertFalse(Database::isConnected());
+
+        $this->reconnect(true);
+        $this->assertTrue(Database::isConnected());
+
+        Database::close();
+
+        $this->reconnect();
+    }
+
+    public function testConnectFails() {
+        Database::close();
+
+        $config = new CMSConfig();
+        $db_socket = isset($config->db_socket) ? $config->db_socket : ini_get("mysqli.default_socket");
+        $db_port = isset($config->db_port) ? $config->db_port : ini_get("mysqli.default_port");
+
+        $db_strict_mode = isset($config->db_strict_mode) ? boolval($config->db_strict_mode) : false;
+
+        @$connect = Database::connect($config->db_server, $config->db_user, "invalid_password", $db_port, $db_socket, $db_strict_mode);
+        $this->assertNull($connect);
+
+
+        $this->reconnect();
+    }
+
+    private function reconnect($db_strict_mode = null) {
+        $config = new CMSConfig();
+        $db_socket = isset($config->db_socket) ? $config->db_socket : ini_get("mysqli.default_socket");
+
+        $db_port = isset($config->db_port) ? $config->db_port : ini_get("mysqli.default_port");
+
+        if ($db_strict_mode === null) {
+            $db_strict_mode = isset($config->db_strict_mode) ? boolval($config->db_strict_mode) : false;
+        }
+
+        Database::connect($config->db_server, $config->db_user, $config->db_password, $db_port, $db_socket, $db_strict_mode);
+
+        Database::select($config->db_database);
+    }
+
+    public function testMultiQuery() {
+
+        Database::setEchoQueries(true);
+        ob_start();
+
+        LoggerRegistry::register("sql_log", new Logger(
+                        ULICMS_LOG, "sql_log"));
+
+        Database::multiQuery(
+                "select * from {prefix}settings; select 'foo' as bar;"
+                . "show tables;", true);
+
+        $queries = 0;
+        while (Database::hasMoreResults()) {
+            Database::loadNextResult();
+            $result = Database::storeResult();
+            $this->assertInstanceOf(mysqli_result::class, $result);
+            $this->assertGreaterThanOrEqual(1, Database::getNumRows($result));
+            $queries++;
+        }
+        $this->assertEquals(3, $queries);
+        LoggerRegistry::unregister("sql_log");
+        ob_end_clean();
     }
 
     // TODO: implement tests for other Database functions

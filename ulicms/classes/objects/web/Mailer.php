@@ -22,20 +22,32 @@ class Mailer {
     }
 
     public static function send($to, $subject, $message, $headers = "") {
-        $mode = Settings::get("email_mode") ? Settings::get("email_mode") : EmailModes::INTERNAL;
+        $mode = Settings::get("email_mode") ?
+                Settings::get("email_mode") : EmailModes::INTERNAL;
 
         // UliCMS speichert seit UliCMS 9.0.1 E-Mails, die das System versendet hat
         // in der Datenbank
         // TODO: Make a method for this sql statement
-        $insert_sql = "INSERT INTO " . tbname("mails") . " (headers, `to`, subject, body) VALUES ('" . db_escape($headers) . "', '" . db_escape($to) . "', '" . db_escape($subject) . "', '" . db_escape($message) . "')";
+        $insert_sql = "INSERT INTO " . tbname("mails") .
+                " (headers, `to`, subject, body) VALUES ('" .
+                db_escape($headers) . "', '" . db_escape($to) . "', '" .
+                db_escape($subject) . "', '" . db_escape($message) . "')";
         db_query($insert_sql);
 
         switch ($mode) {
             case EmailModes::INTERNAL:
             case EmailModes::PHPMAILER:
-                return self::sendWithPHPMailer($to, $subject, $message, $headers, $mode);
+                return self::sendWithPHPMailer(
+                                $to,
+                                $subject,
+                                $message,
+                                $headers,
+                                $mode
+                );
             default:
-                throw new NotImplementedException("E-Mail Mode \"$mode\" not implemented.");
+                throw new NotImplementedException(
+                        "E-Mail Mode \"$mode\" not implemented."
+                );
         }
     }
 
@@ -88,7 +100,13 @@ class Mailer {
         return $mailer;
     }
 
-    public static function sendWithPHPMailer($to, $subject, $message, $headers = "", $mode = EmailModes::INTERNAL) {
+    public static function sendWithPHPMailer(
+            $to,
+            $subject,
+            $message,
+            $headers = "",
+            $mode = EmailModes::INTERNAL
+    ) {
         $headers = self::splitHeaders($headers);
         $headersLower = array_change_key_case($headers, CASE_LOWER);
 
@@ -97,7 +115,11 @@ class Mailer {
         if (isset($headersLower["x-mailer"])) {
             $mailer->XMailer = $headersLower["x-mailer"];
         }
-        $mailer->setFrom(StringHelper::isNotNullOrWhitespace($headers["From"]) ? $headers["From"] : Settings::get("email"));
+        $mailer->setFrom(
+                StringHelper::isNotNullOrWhitespace(
+                        $headers["From"]) ?
+                        $headers["From"] : Settings::get("email")
+        );
 
         if (isset($headersLower["reply-to"])) {
 
@@ -105,7 +127,13 @@ class Mailer {
         }
         $mailer->addAddress($to);
         $mailer->Subject = $subject;
-        $mailer->isHTML(isset($headersLower["content-type"]) and startsWith($headersLower["content-type"], "text/html"));
+        $mailer->isHTML(
+                isset(
+                        $headersLower["content-type"])
+                and startsWith(
+                        $headersLower["content-type"],
+                        "text/html")
+        );
         $mailer->Body = $message;
 
         $mailer = apply_filter($mailer, "php_mailer_send");

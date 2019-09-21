@@ -18,19 +18,29 @@ class Form {
             string $requestMethod = RequestMethod::POST,
             array $htmlAttributes = []): string {
         $html = "";
-        $attribhtml = StringHelper::isNotNullOrWhitespace(ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes)) ? " " . ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes) : "";
-        $html .= '<form action="index.php" method="' . $requestMethod . '"' . $attribhtml . '>';
+        $attribhtml = StringHelper::isNotNullOrWhitespace(
+                        ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes)) ?
+                " " .
+                ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes) :
+                "";
+        $html .= '<form action="index.php" method="' . $requestMethod . '"'
+                . $attribhtml . '>';
         $html .= get_csrf_token_html();
         $args = $otherVars;
         $args["sClass"] = $sClass;
         $args["sMethod"] = $sMethod;
         foreach ($args as $key => $value) {
-            $html .= '<input type="hidden" name="' . Template::getEscape($key) . '" value="' . Template::getEscape($value) . '">';
+            $html .= '<input type="hidden" name="' .
+                    Template::getEscape($key) . '" value="' .
+                    Template::getEscape($value) . '">';
         }
+
+
         return $html;
     }
 
-    public static function buildMethodCallButton(string $sClass,
+    public static function buildMethodCallButton(
+            string $sClass,
             string $sMethod,
             string $buttonText,
             array $buttonAttributes = [
@@ -39,10 +49,20 @@ class Form {
             array $otherVars = [],
             array $formAttributes = [],
             string $requestMethod = RequestMethod::POST): string {
-        $html = ModuleHelper::buildMethodCallForm($sClass, $sMethod, $otherVars, $requestMethod, $formAttributes);
-        $html .= '<button ' . ModuleHelper::buildHTMLAttributesFromArray($buttonAttributes) . ">";
+        $html = ModuleHelper::buildMethodCallForm(
+                        $sClass,
+                        $sMethod,
+                        $otherVars,
+                        $requestMethod,
+                        $formAttributes
+        );
+        $html .= '<button ' .
+                ModuleHelper::buildHTMLAttributesFromArray($buttonAttributes)
+                . ">";
         $html .= $buttonText . "</button>";
         $html .= "</form>";
+
+
         return $html;
     }
 
@@ -52,17 +72,26 @@ class Form {
         $html = "";
         $htmlAttributes["class"] = trim("delete-form " . $htmlAttributes["class"]);
 
-        $attribhtml = StringHelper::isNotNullOrWhitespace(ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes)) ? " " . ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes) : "";
+        $attribhtml = StringHelper::isNotNullOrWhitespace(
+                        ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes)) ?
+                " " . ModuleHelper::buildHTMLAttributesFromArray(
+                        $htmlAttributes
+                ) : "";
 
-        $html .= '<form action="' . _esc($url) . '" method="' . RequestMethod::POST . '"' . $attribhtml . '>';
+        $html .= '<form action="' . _esc($url) . '" method="' .
+                RequestMethod::POST . '"' . $attribhtml . '>';
         $html .= get_csrf_token_html();
         foreach ($otherVars as $key => $value) {
-            $html .= '<input type="hidden" name="' . Template::getEscape($key) . '" value="' . Template::getEscape($value) . '">';
+            $html .= '<input type="hidden" name="' . Template::getEscape($key)
+                    . '" value="' . Template::getEscape($value) . '">';
         }
         $imgFile = is_admin_dir() ? "gfx/delete.gif" : "admin/gfx/delete.gif";
-        $html .= '<input type="image" src="' . $imgFile . '" alt="' . get_translation("delete") . '" title="' . get_translation("delete") . '">';
+        $html .= '<input type="image" src="' . $imgFile . '" alt="' .
+                get_translation("delete") . '" title="' .
+                get_translation("delete") . '">';
         $html .= "</form>";
-        return optimizeHtml($html);
+        return optimizeHtml
+                ($html);
     }
 
     public static function endForm(): string {

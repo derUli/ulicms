@@ -28,15 +28,33 @@ class List_Data extends Content {
     // returns array of contents
     public function filter() {
         if ($this->use_pagination) {
-            return ContentFactory::getForFilter($this->language, $this->category_id, $this->menu, $this->parent_id, $this->order_by, $this->order_direction, $this->type);
+            return ContentFactory::getForFilter(
+                            $this->language,
+                            $this->category_id,
+                            $this->menu,
+                            $this->parent_id,
+                            $this->order_by,
+                            $this->order_direction,
+                            $this->type
+            );
         } else {
-            return ContentFactory::getForFilter($this->language, $this->category_id, $this->menu, $this->parent_id, $this->order_by, $this->order_direction, $this->type, $this->limit);
+            return ContentFactory::getForFilter(
+                            $this->language,
+                            $this->category_id,
+                            $this->menu,
+                            $this->parent_id,
+                            $this->order_by,
+                            $this->order_direction,
+                            $this->type,
+                            $this->limit
+            );
         }
     }
 
     public function loadByID($id) {
         $id = intval($id);
-        $result = Database::query("select * from " . tbname("lists") . " WHERE content_id = $id");
+        $result = Database::query("select * from " . tbname("lists")
+                        . " WHERE content_id = $id");
         if (Database::getNumRows($result) > 0) {
             $dataset = Database::fetchObject($result);
             $this->fillVars($dataset);
@@ -66,7 +84,8 @@ class List_Data extends Content {
             throw new Exception("no content_id for list set");
         }
         $id = intval($this->content_id);
-        $result = Database::query("select * from " . tbname("lists") . " WHERE content_id = $id");
+        $result = Database::query("select * from " . tbname("lists")
+                        . " WHERE content_id = $id");
         if (Database::getNumRows($result) > 0) {
             $this->update();
         } else {
@@ -134,9 +153,13 @@ class List_Data extends Content {
         if (intval($this->limit) > 0) {
             $limit = intval($this->limit);
         }
-        $sql = "INSERT INTO " . tbname("lists") . " (content_id, language, category_id, menu, parent_id, `order_by`, `order_direction`, `limit`, `use_pagination`, `type`) values ($content_id, $language,
-		$category_id, $menu, $parent_id, '$order_by', '$order_direction', $limit, $use_pagination, $type)";
-        Database::query($sql) or die(Database::error());
+        $sql = "INSERT INTO " . tbname("lists") .
+                " (content_id, language, category_id, menu, parent_id, "
+                . "`order_by`, `order_direction`, `limit`, `use_pagination`, "
+                . "`type`) values ($content_id, $language,
+		$category_id, $menu, $parent_id, '$order_by', "
+                . "'$order_direction', $limit, $use_pagination, $type)";
+        Database::query($sql);
     }
 
     public function update() {
@@ -202,7 +225,11 @@ class List_Data extends Content {
         $use_pagination = intval($this->use_pagination);
 
         $sql = "UPDATE " . tbname("lists") . " set language = $language,
-		category_id = $category_id, menu = $menu, parent_id = $parent_id, `order_by` = '$order_by', `order_direction` = '$order_direction', `limit` = $limit, `use_pagination` = $use_pagination, `type` = $type where content_id = $content_id ";
+		category_id = $category_id, menu = $menu,"
+                . "parent_id = $parent_id, `order_by` = '$order_by',"
+                . "`order_direction` = '$order_direction', `limit` = $limit,"
+                . "`use_pagination` = $use_pagination, `type` = $type"
+                . "where content_id = $content_id ";
         Database::query($sql) or die(Database::error());
     }
 

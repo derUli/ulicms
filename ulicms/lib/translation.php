@@ -5,12 +5,14 @@ declare(strict_types=1);
 function get_translation(string $name, array $placeholders = []): string {
     $iname = strtoupper($name);
     foreach (get_defined_constants() as $key => $value) {
-        if (startsWith($key, "TRANSLATION_") and $key == "TRANSLATION_" . $iname) {
+        if (startsWith($key, "TRANSLATION_")
+                and $key == "TRANSLATION_" . $iname) {
             $custom_translation = Translation::get($key);
             if ($custom_translation !== null) {
                 $value = $custom_translation;
             }
-            // Platzhalter ersetzen, diese können als assoziatives Array als zweiter Parameter
+            // Platzhalter ersetzen, diese können
+            // als assoziatives Array als zweiter Parameter
             // dem Funktionsaufruf mitgegeben werden
             foreach ($placeholders as $placeholder => $replacement) {
                 $value = str_ireplace($placeholder, $replacement, $value);
@@ -44,7 +46,10 @@ function translate(string $name, array $placeholders = []) {
     translation($name, $placeholders);
 }
 
-function get_secure_translation(string $name, array $placeholders = []): string {
+function get_secure_translation(
+        string $name,
+        array $placeholders = []
+): string {
     return Template::getEscape(get_translation($name, $placeholders));
 }
 

@@ -67,14 +67,17 @@ class BackendPageRenderer {
         exit();
     }
 
-    // this method handles access to the features that are accesible for non authenticated users
+    // this method handles access to the features that are
+    // accesible for non authenticated users
     protected function handleNotLoggedIn(): void {
 
         ActionRegistry::loadModuleActions();
         $actions = ActionRegistry::getActions();
 
         if ($this->getAction()) {
-            $action_permission = ActionRegistry::getActionPermission($this->getAction());
+            $action_permission = ActionRegistry::getActionPermission(
+                            $this->getAction()
+            );
             if ($action_permission and $action_permission === "*") {
                 require_once $actions[$this->getAction()];
             }
@@ -109,8 +112,14 @@ class BackendPageRenderer {
         if ($_SESSION["require_password_change"]) {
             require_once "inc/change_password.php";
         } else if (isset($actions[$this->getAction()])) {
-            $requiredPermission = ActionRegistry::getActionPermission($this->getAction());
-            if (!$requiredPermission or ( $requiredPermission and $permissionChecker->hasPermission($requiredPermission))) {
+            $requiredPermission = ActionRegistry::getActionPermission(
+                            $this->getAction()
+            );
+            if (!$requiredPermission
+                    or (
+                    $requiredPermission
+                    and $permissionChecker->hasPermission($requiredPermission))
+            ) {
                 require_once $actions[$this->getAction()];
             } else {
                 noPerms();
@@ -128,7 +137,9 @@ class BackendPageRenderer {
         );
         $HTMLMinify = new HTMLMinify($generatedHtml, $options);
         $generatedHtml = $HTMLMinify->process();
-        $generatedHtml = StringHelper::removeEmptyLinesFromString($generatedHtml);
+        $generatedHtml = StringHelper::removeEmptyLinesFromString(
+                        $generatedHtml
+        );
 
         echo $generatedHtml;
     }

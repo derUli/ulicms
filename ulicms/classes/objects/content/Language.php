@@ -84,7 +84,8 @@ class Language extends Model {
     }
 
     protected function insert() {
-        $sql = "INSERT INTO `{prefix}languages` (name, language_code) values (?,?)";
+        $sql = "INSERT INTO `{prefix}languages` (name, language_code) "
+                . "values (?,?)";
         $args = array(
             $this->name,
             $this->language_code
@@ -94,7 +95,8 @@ class Language extends Model {
     }
 
     protected function update() {
-        $sql = "UPDATE `{prefix}languages` set name = ?, language_code = ? where id = ?";
+        $sql = "UPDATE `{prefix}languages` set name = ?, language_code = ? "
+                . "where id = ?";
         $args = array(
             $this->name,
             $this->language_code,
@@ -129,7 +131,8 @@ class Language extends Model {
 
     // returns true if this is the user's current language
     public function isCurrentLanguage() {
-        $current_language = is_admin_dir() ? getSystemLanguage() : getCurrentLanguage();
+        $current_language = is_admin_dir() ?
+                getSystemLanguage() : getCurrentLanguage();
         return $this->language_code == $current_language;
     }
 

@@ -53,7 +53,7 @@
                 <file>classes/objects/backend/load.php</file>
             </exclude>
             <exclude>
-                <file>classes/objects/exceptions.php</file>
+                <file>classes/objects/registry/load.php</file>
             </exclude>
             <exclude>
                 <file>classes/objects/database/load.php</file>

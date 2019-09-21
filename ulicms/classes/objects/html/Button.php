@@ -24,7 +24,9 @@ class Button {
             $htmlAttributes["class"] = ButtonType::TYPE_BASIC;
         }
 
-        $attributesHtml = ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes);
+        $attributesHtml = ModuleHelper::buildHTMLAttributesFromArray(
+                        $htmlAttributes
+        );
         return "<button {$attributesHtml}>{$text}</button>";
     }
 

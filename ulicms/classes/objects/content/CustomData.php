@@ -12,7 +12,10 @@ class CustomData {
         if (!$page) {
             $page = get_requested_pagename();
         }
-        $sql = "SELECT `custom_data` FROM " . tbname("content") . " WHERE slug='" . Database::escapeValue($page) . "'  AND language='" . Database::escapeValue($_SESSION["language"]) . "'";
+        $sql = "SELECT `custom_data` FROM " . tbname("content") .
+                " WHERE slug='" . Database::escapeValue($page) .
+                "'  AND language='" .
+                Database::escapeValue($_SESSION["language"]) . "'";
         $result = Database::query($sql);
         if (Database::getNumRows($result) > 0) {
             $dataset = Database::fetchObject($result);
@@ -31,7 +34,10 @@ class CustomData {
         }
         $data[$var] = $value;
         $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-        Database::query("UPDATE " . tbname("content") . " SET custom_data = '" . Database::escapeValue($json) . "' WHERE slug='" . Database::escapeValue($page) . "'");
+        Database::query("UPDATE " . tbname("content") .
+                " SET custom_data = '" .
+                Database::escapeValue($json) .
+                "' WHERE slug='" . Database::escapeValue($page) . "'");
     }
 
     public static function delete(?string $var = null, ?string $page = null) {
@@ -52,7 +58,9 @@ class CustomData {
             $data = [];
         }
         $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-        Database::query("UPDATE " . tbname("content") . " SET custom_data = '" . Database::escapeValue($json) . "' WHERE slug='" . Database::escapeValue($page) . "'");
+        Database::query("UPDATE " . tbname("content") . " SET custom_data = '"
+                . Database::escapeValue($json)
+                . "' WHERE slug='" . Database::escapeValue($page) . "'");
     }
 
     public static function getCustomDataOrSetting(string $name) {

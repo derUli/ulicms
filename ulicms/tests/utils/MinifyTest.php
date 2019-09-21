@@ -5,6 +5,11 @@ use UliCMS\Utils\CacheUtil;
 
 class MinifyTest extends \PHPUnit\Framework\TestCase {
 
+    public function tearDown() {
+        setSCSSImportPaths([]);
+        Vars::delete("css_include_paths");
+    }
+
     public function testScriptQueue() {
         $filemtime = 0;
         $files = array(
@@ -19,8 +24,14 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
             }
         }
         $this->assertCount(3, Vars::get("script_queue"));
-        $this->assertEquals("node_modules/jquery/dist/jquery.js", Vars::get("script_queue")[0]);
-        $this->assertEquals("node_modules/bootbox/bootbox.js", Vars::get("script_queue")[2]);
+        $this->assertEquals(
+                "node_modules/jquery/dist/jquery.js",
+                Vars::get("script_queue")[0]
+        );
+        $this->assertEquals(
+                "node_modules/bootbox/bootbox.js",
+                Vars::get("script_queue")[2]
+        );
 
         resetScriptQueue();
         $this->assertCount(0, Vars::get("script_queue"));
@@ -30,7 +41,10 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         }
 
         $html = getCombinedScriptHtml();
-        $this->assertStringStartsWith('<script src="content/cache/scripts/', $html);
+        $this->assertStringStartsWith(
+                '<script src="content/cache/scripts/',
+                $html
+        );
         $this->assertContains(".js?time=", $html);
         $this->assertStringEndsWith('type="text/javascript"></script>', $html);
 
@@ -52,8 +66,14 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
             }
         }
         $this->assertCount(4, Vars::get("stylesheet_queue"));
-        $this->assertEquals("node_modules/bootstrap/dist/css/bootstrap.css", Vars::get("stylesheet_queue")[1]);
-        $this->assertEquals("node_modules/bootstrap/dist/css/bootstrap-theme.css", Vars::get("stylesheet_queue")[2]);
+        $this->assertEquals(
+                "node_modules/bootstrap/dist/css/bootstrap.css",
+                Vars::get("stylesheet_queue")[1]
+        );
+        $this->assertEquals(
+                "node_modules/bootstrap/dist/css/bootstrap-theme.css",
+                Vars::get("stylesheet_queue")[2]
+        );
 
         resetStylesheetQueue();
         $this->assertCount(0, Vars::get("stylesheet_queue"));
@@ -98,18 +118,39 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
             minifyCSS();
             $this->fail("Expected exception not thrown");
         } catch (SCSSCompileException $e) {
-            $this->assertStringStartsWith("Compilation of tests/fixtures/scss/fail.scss failed: parse error: failed at", $e->getMessage());
-            $this->assertStringEndsWith("(stdin) on line 5, at column 5", $e->getMessage());
+            $this->assertStringStartsWith(
+                    "Compilation of tests/fixtures/scss/fail.scss failed: parse error: failed at",
+                    $e->getMessage()
+            );
+            $this->assertStringEndsWith(
+                    "(stdin) on line 5, at column 5",
+                    $e->getMessage()
+            );
         } finally {
             resetStylesheetQueue();
         }
     }
 
-    public function testSetAndGetSCSSImportPaths() {
+    public function testSetSCSSImportPathsToNull() {
         $paths = array(
             "folder1/foo/bar",
             "folder2/another/folder"
         );
+        setSCSSImportPaths($paths);
+
+        setSCSSImportPaths(null);
+        $this->assertCount(1, getSCSSImportPaths());
+        $this->assertEquals(
+                str_replace(
+                        "\\", "/", ULICMS_ROOT
+                ), getSCSSImportPaths()[0]);
+    }
+
+    public function testSetAndGetSCSSImportPaths() {
+        $paths = [
+            "folder1/foo/bar",
+            "folder2/another/folder"
+        ];
         $this->assertNull(getSCSSImportPaths());
         setSCSSImportPaths($paths);
 
@@ -117,6 +158,21 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         unsetSCSSImportPaths();
 
         $this->assertNull(getSCSSImportPaths());
+    }
+
+    public function testCompileSCSS() {
+        setSCSSImportPaths(
+                [
+                    "folder1/foo/bar",
+                    "folder2/another/folder"
+                ]
+        );
+        $code = compileSCSS(
+                Path::resolve(
+                        "ULICMS_ROOT/lib/css/core.scss")
+        );
+        $this->assertStringContainsString(".antispam_honeypot", $code);
+        $this->assertStringContainsString("span.blog_article_next", $code);
     }
 
 }

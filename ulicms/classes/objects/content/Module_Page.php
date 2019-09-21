@@ -29,7 +29,8 @@ class Module_Page extends Page {
             return $this->create();
         }
         parent::update();
-        $sql = "update {prefix}content set module = ?, text_position = ? where id = ?";
+        $sql = "update {prefix}content set module = ?, text_position = ? "
+                . "where id = ?";
         $args = array(
             $this->module,
             $this->text_position,
@@ -56,7 +57,8 @@ class Module_Page extends Page {
 
     public function getEmbeddedModules(): array {
         $result = parent::getEmbeddedModules();
-        if (StringHelper::isNotNullOrEmpty($this->module) and ! faster_in_array($this->module, $result)) {
+        if (StringHelper::isNotNullOrEmpty($this->module)
+                and ! faster_in_array($this->module, $result)) {
             $result[] = $this->module;
         }
         return $result;

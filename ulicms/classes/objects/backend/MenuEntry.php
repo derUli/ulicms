@@ -12,7 +12,14 @@ class MenuEntry {
     private $children = [];
     private $newWindow = false;
 
-    public function __construct(string $title, string $link, string $identifier, $permissions = null, array $children = [], bool $newWindow = false) {
+    public function __construct(
+            string $title,
+            string $link,
+            string $identifier,
+            $permissions = null,
+            array $children = [],
+            bool $newWindow = false
+    ) {
         $this->title = $title;
         $this->link = $link;
         $this->identifier = $identifier;
@@ -86,7 +93,9 @@ class MenuEntry {
         if (is_array($this->permissions) and count($this->permissions) > 0) {
             $isPermitted = false;
             foreach ($this->permissions as $permission) {
-                if (is_string($permission) and ! empty($permission) and $acl->hasPermission($permission)) {
+                if (is_string($permission)
+                        and ! empty($permission)
+                        and $acl->hasPermission($permission)) {
                     $isPermitted = true;
                 }
             }

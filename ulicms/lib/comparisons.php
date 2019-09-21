@@ -127,7 +127,10 @@ function is_crawler(?string $useragent = null): bool {
         return boolval($isCrawler);
     }
 
-    $crawlers = 'Google|msnbot|Rambler|Yahoo|AbachoBOT|accoona|' . 'AcioRobot|ASPSeek|CocoCrawler|Dumbot|FAST-WebCrawler|' . 'GeonaBot|Gigabot|Lycos|MSRBOT|Scooter|AltaVista|IDBot|eStyle|Scrubby';
+    $crawlers = 'Google|msnbot|Rambler|Yahoo|AbachoBOT|accoona|' .
+            'AcioRobot|ASPSeek|CocoCrawler|Dumbot|FAST-WebCrawler|' .
+            'GeonaBot|Gigabot|Lycos|MSRBOT|Scooter|AltaVista|IDBot'
+            . '|eStyle|Scrubby';
     $isCrawler = (preg_match("/$crawlers/", $useragent) > 0);
     return $isCrawler;
 }
@@ -140,7 +143,8 @@ function is_mobile(): bool {
     }
     $detect = new Mobile_Detect();
     $result = $detect->isMobile();
-    if (Settings::get("no_mobile_design_on_tablet") and $result and $detect->isTablet()) {
+    if (Settings::get("no_mobile_design_on_tablet")
+            and $result and $detect->isTablet()) {
         $result = false;
     }
     if (function_exists("apply_filter")) {

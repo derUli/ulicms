@@ -87,7 +87,8 @@ class Page extends Content {
         $this->cache_control = $result->cache_control;
         $this->hidden = $result->hidden;
         $this->show_headline = boolval($result->show_headline);
-        $this->comments_enabled = !is_null($result->comments_enabled) ? boolval($result->comments_enabled) : null;
+        $this->comments_enabled = !is_null($result->comments_enabled) ?
+                boolval($result->comments_enabled) : null;
 
         // fill page permissions object
         $resultArray = (array) $result;
@@ -101,7 +102,8 @@ class Page extends Content {
     }
 
     public function loadByID($id) {
-        $result = Database::pQuery("SELECT * FROM `{prefix}content` where id = ?", array(
+        $result = Database::pQuery("SELECT * FROM `{prefix}content` "
+                        . "where id = ?", array(
                     intval($id)
                         ), true);
         if (Database::getNumRows($result) > 0) {
@@ -115,7 +117,9 @@ class Page extends Content {
     public function loadBySlugAndLanguage($name, $language) {
         $name = Database::escapeValue($name);
         $language = Database::escapeValue($language);
-        $result = Database::query("SELECT * FROM `" . tbname("content") . "` where `slug` = '$name' and `language` = '$language'");
+        $result = Database::query("SELECT * FROM `" . tbname("content") .
+                        "` where `slug` = '$name' and "
+                        . "`language` = '$language'");
         if (Database::getNumRows($result) > 0) {
             $dataset = Database::fetchObject($result);
             $this->fillVars($dataset);
@@ -135,10 +139,16 @@ class Page extends Content {
     }
 
     public function create() {
-        $sql = "INSERT INTO `" . tbname("content") . "` (slug, title, alternate_title, target, category_id,
-				content, language, menu_image, active, created, lastmodified, author_id,
-				`group_id`, lastchangeby, views, menu, position, parent_id, access, meta_description, meta_keywords, deleted_at,
-				theme, custom_data, `type`, og_title, og_image, og_description, cache_control, hidden, comments_enabled, show_headline) VALUES (";
+        $sql = "INSERT INTO `" . tbname("content") . "` (slug, title,
+            alternate_title, target, category_id,
+				content, language, menu_image, active, created,
+                                lastmodified, author_id,
+				`group_id`, lastchangeby, views, menu, position,
+                                parent_id, access, meta_description,
+                                meta_keywords, deleted_at,
+				theme, custom_data, `type`, og_title, og_image,
+                                og_description, cache_control, hidden,
+                                comments_enabled, show_headline) VALUES (";
 
         $sql .= "'" . Database::escapeValue($this->slug) . "',";
         $sql .= "'" . Database::escapeValue($this->title) . "',";
@@ -201,7 +211,10 @@ class Page extends Content {
             $this->custom_data = [];
         }
 
-        $json = json_encode($this->custom_data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_FORCE_OBJECT);
+        $json = json_encode(
+                $this->custom_data,
+                JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_FORCE_OBJECT
+        );
 
         $sql .= "'" . Database::escapeValue($json) . "',";
 
@@ -238,7 +251,8 @@ class Page extends Content {
 
         $sql .= "set slug='" . Database::escapeValue($this->slug) . "',";
         $sql .= "title='" . Database::escapeValue($this->title) . "',";
-        $sql .= "alternate_title='" . Database::escapeValue($this->alternate_title) . "',";
+        $sql .= "alternate_title='" .
+                Database::escapeValue($this->alternate_title) . "',";
         $sql .= "target='" . Database::escapeValue($this->target) . "',";
         $sql .= "category_id = " . intval($this->category_id) . ",";
         $sql .= "content='" . Database::escapeValue($this->content) . "',";
@@ -247,7 +261,8 @@ class Page extends Content {
         if ($this->menu_image === null) {
             $sql .= "menu_image = NULL ,";
         } else {
-            $sql .= "menu_image =  '" . Database::escapeValue($this->menu_image) . "',";
+            $sql .= "menu_image =  '" .
+                    Database::escapeValue($this->menu_image) . "',";
         }
 
         $sql .= "active=" . intval($this->active) . ",";
@@ -266,13 +281,15 @@ class Page extends Content {
 
         $sql .= "access='" . Database::escapeValue($this->access) . "',";
         if (is_present($this->meta_description)) {
-            $sql .= "meta_description='" . Database::escapeValue($this->meta_description) . "',";
+            $sql .= "meta_description='" .
+                    Database::escapeValue($this->meta_description) . "',";
         } else {
             $sql .= "meta_description = null,";
         }
 
         if (is_present($this->meta_keywords)) {
-            $sql .= "meta_keywords='" . Database::escapeValue($this->meta_keywords) . "',";
+            $sql .= "meta_keywords='" .
+                    Database::escapeValue($this->meta_keywords) . "',";
         } else {
             $sql .= "meta_keywords = null,";
         }
@@ -293,7 +310,10 @@ class Page extends Content {
             $this->custom_data = [];
         }
 
-        $json = json_encode($this->custom_data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_FORCE_OBJECT);
+        $json = json_encode(
+                $this->custom_data,
+                JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_FORCE_OBJECT
+        );
 
         $sql .= "custom_data='" . Database::escapeValue($json) . "',";
 
@@ -301,15 +321,20 @@ class Page extends Content {
 
         $sql .= "og_title='" . Database::escapeValue($this->og_title) . "',";
         $sql .= "og_image='" . Database::escapeValue($this->og_image) . "',";
-        $sql .= "og_description='" . Database::escapeValue($this->og_description) . "', ";
+        $sql .= "og_description='" . Database::escapeValue(
+                        $this->og_description
+                ) . "', ";
         $sql .= "hidden='" . Database::escapeValue($this->hidden) . "', ";
-        $sql .= "comments_enabled=" . Database::escapeValue($this->comments_enabled) . ", ";
-        $sql .= "show_headline=" . Database::escapeValue($this->show_headline) . ",";
-        $sql .= "cache_control='" . Database::escapeValue($this->cache_control) . "' ";
+        $sql .= "comments_enabled=" . Database::escapeValue(
+                        $this->comments_enabled) . ", ";
+        $sql .= "show_headline=" . Database::escapeValue($this->show_headline)
+                . ",";
+        $sql .= "cache_control='" . Database::escapeValue($this->cache_control)
+                . "' ";
 
         $sql .= " WHERE id = " . $this->id;
 
-        $result = Database::query($sql) or die(Database::getLastError());
+        $result = Database::query($sql);
 
         $this->permissions->save($this->id);
 
@@ -387,11 +412,17 @@ class Page extends Content {
         if (is_null($this->comments_enabled)) {
             $commentsEnabled = boolval(Settings::get("comments_enabled"));
 
-            $commentable_content_types = Settings::get("commentable_content_types");
+            $commentable_content_types = Settings::get(
+                            "commentable_content_types"
+            );
             if ($commentable_content_types) {
-                $commentable_content_types = splitAndTrim($commentable_content_types);
+                $commentable_content_types = splitAndTrim(
+                        $commentable_content_types
+                );
 
-                if (count($commentable_content_types) > 0 and ! faster_in_array($this->type, $commentable_content_types)) {
+                if (count($commentable_content_types) > 0
+                        and ! faster_in_array($this->type,
+                                $commentable_content_types)) {
                     $commentsEnabled = false;
                 }
             }
@@ -443,13 +474,19 @@ class Page extends Content {
 
     // returns true if this page is configured as the 403 error page
     public function isErrorPage403(): bool {
-        $errorPage403 = intval(Settings::getLanguageSetting("error_page_403", $this->language));
+        $errorPage403 = intval(Settings::getLanguageSetting(
+                        "error_page_403",
+                        $this->language)
+        );
         return $this->getID() && $this->getID() == $errorPage403;
     }
 
     // returns true if this page is configured as the 404 error page
     public function isErrorPage404(): bool {
-        $errorPage404 = intval(Settings::getLanguageSetting("error_page_404", $this->language));
+        $errorPage404 = intval(
+                Settings::getLanguageSetting("error_page_404",
+                        $this->language)
+        );
         return $this->getID() && $this->getID() == $errorPage404;
     }
 

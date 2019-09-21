@@ -29,7 +29,11 @@ function RawJSONResult(string $data, int $status = 200): void {
     exit();
 }
 
-function HTMLResult(string $data, int $status = 200, int $optimizationLevel = HTMLMinify::OPTIMIZATION_SIMPLE): void {
+function HTMLResult(
+        string $data,
+        int $status = 200,
+        int $optimizationLevel = HTMLMinify::OPTIMIZATION_SIMPLE
+): void {
     Response::sendStatusHeader($status);
     $data = optimizeHtml($data, $optimizationLevel);
     $size = getStringLengthInBytes($data);
@@ -57,8 +61,12 @@ function Result(string $data, int $status = 200, ?string $type = null): void {
     die($data);
 }
 
-function HTTPStatusCodeResult(int $status, ?string $description = null): void {
-    $header = $_SERVER ["SERVER_PROTOCOL"] . " " . getStatusCodeByNumber(intval($status));
+function HTTPStatusCodeResult(
+        int $status,
+        ?string $description = null
+): void {
+    $header = $_SERVER ["SERVER_PROTOCOL"] . " "
+            . getStatusCodeByNumber(intval($status));
 
     if ($description != null and $description != "") {
         $header = $_SERVER ["SERVER_PROTOCOL"] . " " . intval($status) . " " . $description;
@@ -73,7 +81,8 @@ function ExceptionResult(string $message, int $status = 500): void {
 
     $size = getStringLengthInBytes($content);
 
-    header($_SERVER ["SERVER_PROTOCOL"] . " " . getStatusCodeByNumber(intval($status)));
+    header($_SERVER ["SERVER_PROTOCOL"] . " "
+            . getStatusCodeByNumber(intval($status)));
     header("Content-Type: text/html; charset=UTF-8");
     header("Content-length: $size");
 

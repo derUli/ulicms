@@ -19,7 +19,8 @@ class Template {
         $str .= (is_403() ? "error403 " : "");
         $str .= ((is_404() or is_403()) ? "errorPage " : "page ");
         $str .= (is_mobile() ? "mobile " : "desktop ");
-        $str .= (containsModule(get_requested_pagename()) ? " containsModule " : "");
+        $str .= (containsModule(get_requested_pagename()) ?
+                " containsModule " : "");
 
         $str = trim($str);
         $str = apply_filter($str, "body_classes");
@@ -52,19 +53,25 @@ class Template {
 
                 if ($page["module"] != null and strlen($page['module']) > 0) {
                     no_cache();
-                    $output = replaceShortcodesWithModules("[module=\"" . $page["module"] . "\"]");
+                    $output = replaceShortcodesWithModules(
+                            "[module=\"" . $page["module"] . "\"]"
+                    );
                 }
                 break;
             case "video":
                 $page = get_page();
                 if ($page["video"] != null and strlen($page['video']) > 0) {
-                    $output = replaceVideoTags("[video id=" . $page['video'] . "]");
+                    $output = replaceVideoTags(
+                            "[video id=" . $page['video'] . "]"
+                    );
                 }
                 break;
             case "audio":
                 $page = get_page();
                 if ($page["audio"] != null and strlen($page["audio"]) > 0) {
-                    $output = replaceAudioTags("[audio id=" . $page['audio'] . "]");
+                    $output = replaceAudioTags(
+                            "[audio id=" . $page['audio'] . "]"
+                    );
                 }
                 break;
         }
@@ -76,7 +83,9 @@ class Template {
     }
 
     public static function getHomepageOwner(): string {
-        $homepage_title = Settings::getLanguageSetting("homepage_owner", $_SESSION["language"]);
+        $homepage_title = Settings::getLanguageSetting(
+                        "homepage_owner", $_SESSION["language"]
+        );
         return _esc($homepage_title);
     }
 
@@ -92,11 +101,16 @@ class Template {
         do_event("frontend_footer");
     }
 
-    public static function executeModuleTemplate(string $module, string $template): string {
+    public static function executeModuleTemplate(
+            string $module,
+            string $template
+    ): string {
 
         $retval = "";
-        $originalTemplatePath = getModulePath($module, true) . "templates/" . $template;
-        $ownTemplatePath = getTemplateDirPath(get_theme(), true) . $module . "/" . $template;
+        $originalTemplatePath = getModulePath($module, true) . "templates/" .
+                $template;
+        $ownTemplatePath = getTemplateDirPath(get_theme(), true) . $module
+                . "/" . $template;
 
         if (!endsWith($template, ".php")) {
             $originalTemplatePath .= ".php";
@@ -109,7 +123,8 @@ class Template {
             require $originalTemplatePath;
         } else {
             $retval = ob_get_clean();
-            throw new Exception("Template " . $module . "/" . $template . " not found!");
+            throw new Exception("Template " . $module . "/" . $template
+                    . " not found!");
         }
         $retval = trim(ob_get_clean());
 
@@ -135,11 +150,16 @@ class Template {
             setconfig("logo_disabled", "no");
         }
 
-        $logo_storage_url = defined("ULICMS_DATA_STORAGE_URL") ? ULICMS_DATA_STORAGE_URL . "/content/images/" . Settings::get("logo_image") : "content/images/" . Settings::get("logo_image");
-        $logo_storage_path = ULICMS_DATA_STORAGE_ROOT . "/content/images/" . Settings::get("logo_image");
+        $logo_storage_url = defined("ULICMS_DATA_STORAGE_URL") ?
+                ULICMS_DATA_STORAGE_URL . "/content/images/" .
+                Settings::get("logo_image") : "content/images/" .
+                Settings::get("logo_image");
+        $logo_storage_path = ULICMS_DATA_STORAGE_ROOT . "/content/images/" .
+                Settings::get("logo_image");
 
         if (Settings::get("logo_disabled") == "no" and file_exists($logo_storage_path)) {
-            echo '<img class="website_logo" src="' . $logo_storage_url . '" alt="' . _esc(Settings::get("homepage_title")) . '"/>';
+            echo '<img class="website_logo" src="' . $logo_storage_url .
+            '" alt="' . _esc(Settings::get("homepage_title")) . '"/>';
         }
     }
 
@@ -167,7 +187,9 @@ class Template {
         echo self::getMotto();
     }
 
-    public static function executeDefaultOrOwnTemplate(string $template): string {
+    public static function executeDefaultOrOwnTemplate(
+            string $template
+    ): string {
         $retval = "";
         $originalTemplatePath = ULICMS_ROOT . "/default/" . $template;
         $ownTemplatePath = getTemplateDirPath(get_theme()) . "/" . $template;
@@ -184,7 +206,9 @@ class Template {
             require $originalTemplatePath;
         } else {
             $retval = ob_get_clean();
-            throw new FileNotFoundException("Template " . $template . " not found!");
+            throw new FileNotFoundException(
+                    "Template " . $template . " not found!"
+            );
         }
         $retval = ob_get_clean();
         return optimizeHtml($retval);
@@ -199,7 +223,8 @@ class Template {
         if (!$id) {
             return str_replace("%title%", get_title(null, true), $format);
         }
-        $sql = "SELECT show_headline FROM " . tbname("content") . " where id = $id";
+        $sql = "SELECT show_headline FROM " . tbname("content") .
+                " where id = $id";
         $result = Database::query($sql);
         $dataset = Database::fetchObject($result);
         if ($dataset->show_headline) {
@@ -225,7 +250,10 @@ class Template {
         return "<html prefix=\"og: http://ogp.me/ns#\" lang=\"$language\">";
     }
 
-    public static function renderPartial(string $template, ?string $theme = null): string {
+    public static function renderPartial(
+            string $template,
+            ?string $theme = null
+    ): string {
         if (!$theme) {
             $theme = get_theme();
         }
@@ -233,7 +261,8 @@ class Template {
         $file = getTemplateDirPath($theme, true) . "partials/{$template}";
         $file = !endsWith($file, ".php") ? $file . ".php" : $file;
         if (!file_exists($file)) {
-            throw new FileNotFoundException("Partial Template {$template} of Theme {$theme} not found.");
+            throw new FileNotFoundException("Partial Template {$template} "
+                    . "of Theme {$theme} not found.");
         }
         ob_start();
         require $file;
@@ -259,7 +288,11 @@ class Template {
         $title_format = Settings::get("title_format");
         if ($title_format) {
             $title = $title_format;
-            $title = str_ireplace("%homepage_title%", get_homepage_title(), $title);
+            $title = str_ireplace(
+                    "%homepage_title%",
+                    get_homepage_title(),
+                    $titl
+            );
             $title = str_ireplace("%title%", get_title(), $title);
             $title = str_ireplace("%motto%", get_motto(), $title);
             $title = apply_filter($title, "title_tag");
@@ -313,16 +346,23 @@ class Template {
 
         combinedStylesheetHtml();
 
-        $min_style_file = getTemplateDirPath(get_theme()) . "style.min.css";
-        $min_style_file_realpath = getTemplateDirPath(get_theme(), true) . "style.min.css";
+        $min_style_file = getTemplateDirPath(get_theme()) .
+                "style.min.css";
+        $min_style_file_realpath = getTemplateDirPath(get_theme(), true) .
+                "style.min.css";
         $style_file = getTemplateDirPath(get_theme()) . "style.css";
-        $style_file_realpath = getTemplateDirPath(get_theme(), true) . "style.css";
+        $style_file_realpath = getTemplateDirPath(get_theme(), true) .
+                "style.css";
         if (file_exists($style_file_realpath)) {
-            $style_file .= "?time=" . File::getLastChanged($style_file_realpath);
+            $style_file .= "?time=" . File::getLastChanged(
+                            $style_file_realpath
+            );
             if (file_exists($min_style_file_realpath)) {
-                echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"$min_style_file\"/>";
+                echo "<link rel=\"stylesheet\" type=\"text/css\" "
+                . "href=\"$min_style_file\"/>";
             } else if (file_exists($style_file_realpath)) {
-                echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"$style_file\"/>";
+                echo "<link rel=\"stylesheet\" type=\"text/css\" "
+                . "href=\"$style_file\"/>";
             }
         }
         $keywords = get_meta_keywords();
@@ -333,7 +373,8 @@ class Template {
             if (!Settings::get("hide_meta_keywords")) {
                 $keywords = apply_filter($keywords, "meta_keywords");
 
-                echo '<meta name="keywords" content="' . _esc($keywords) . '"/>';
+                echo '<meta name="keywords" content="'
+                . _esc($keywords) . '"/>';
             }
         }
         $description = get_meta_description();
@@ -344,7 +385,8 @@ class Template {
             $description = apply_filter($description, "meta_description");
             $$description = _esc($description);
             if (!Settings::get("hide_meta_description")) {
-                echo '<meta name="description" content="' . $description . '"/>';
+                echo '<meta name="description" content="'
+                . $description . '"/>';
             }
         }
 
@@ -353,7 +395,9 @@ class Template {
             if ($font == "google") {
                 $google_font = Settings::get("google-font");
                 if ($google_font) {
-                    echo '<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=' . urlencode($google_font) . '&display=swap"/>';
+                    echo '<link rel="stylesheet" type="text/css" '
+                    . 'href="//fonts.googleapis.com/css?family=' .
+                    urlencode($google_font) . '&display=swap"/>';
                     $font = "'$google_font'";
                 }
             }
@@ -364,11 +408,18 @@ background-color: " . Settings::get("body-background-color") . ";
 color: " . Settings::get("body-text-color") . ";
 }";
 
-            $disableFunctions = getThemeMeta(get_theme(), "disable_functions");
+            $disableFunctions = getThemeMeta(
+                    get_theme(),
+                    "disable_functions"
+            );
 
             $minifier = new Minify\CSS();
             $minifier->add($cssCode);
-            if (!(is_array($disableFunctions) and in_array("output_design_settings_styles", $disableFunctions))) {
+            if (!is_array($disableFunctions)
+                    and in_array(
+                            "output_design_settings_styles",
+                            $disableFunctions)
+            ) {
                 echo UliCMS\HTML\Style::fromString($minifier->minify());
             }
 
@@ -406,15 +457,31 @@ color: " . Settings::get("body-text-color") . ";
     public static function getContent(): string {
         $theme = get_theme();
 
-        $errorPage403 = intval(Settings::getLanguageSetting("error_page_403", getCurrentLanguage()));
-        $errorPage404 = intval(Settings::getLanguageSetting("error_page_404", getCurrentLanguage()));
+        $errorPage403 = intval(
+                Settings::getLanguageSetting(
+                        "error_page_403", getCurrentLanguage()
+                )
+        );
+        $errorPage404 = intval(
+                Settings::getLanguageSetting(
+                        "error_page_404",
+                        getCurrentLanguage()
+                )
+        );
 
         $content = null;
         if (is_200()) {
-            $content = ContentFactory::getBySlugAndLanguage(get_requested_pagename(), getCurrentLanguage());
+            $content = ContentFactory::getBySlugAndLanguage(
+                            get_requested_pagename(),
+                            getCurrentLanguage()
+            );
 
             if (!is_logged_in()) {
-                db_query("UPDATE " . tbname("content") . " SET views = views + 1 WHERE slug='" . Database::escapeValue($_GET["seite"]) . "' AND language='" . db_escape($_SESSION["language"]) . "'");
+                db_query("UPDATE " . tbname("content") .
+                        " SET views = views + 1 WHERE slug='" .
+                        Database::escapeValue($_GET["seite"]) .
+                        "' AND language='" . db_escape($_SESSION["language"])
+                        . "'");
             }
         } else if (is_404()) {
             if ($errorPage404) {
@@ -451,14 +518,17 @@ color: " . Settings::get("body-text-color") . ";
     }
 
     public static function languageSelection() {
-        $result = db_query("SELECT language_code, name FROM " . tbname("languages") . " ORDER by name");
+        $result = db_query("SELECT language_code, name FROM " .
+                tbname("languages") . " ORDER by name");
         echo "<ul class='language_selection'>";
         while ($row = db_fetch_object($result)) {
             $domain = getDomainByLanguage($row->language_code);
             if ($domain) {
-                echo "<li>" . "<a href='http://" . $domain . "'>" . $row->name . "</a></li>";
+                echo "<li>" . "<a href='http://" . $domain . "'>" .
+                $row->name . "</a></li>";
             } else {
-                echo "<li>" . "<a href='./?language=" . $row->language_code . "'>" . $row->name . "</a></li>";
+                echo "<li>" . "<a href='./?language=" . $row->language_code
+                . "'>" . $row->name . "</a></li>";
             }
         }
         echo "</ul>";
@@ -480,7 +550,11 @@ color: " . Settings::get("body-text-color") . ";
     }
 
     public static function getComments(): string {
-        return is_200() ? Template::executeModuleTemplate("core_comments", "comments.php") : "";
+        return is_200() ?
+                Template::executeModuleTemplate(
+                        "core_comments",
+                        "comments.php"
+                ) : "";
     }
 
     public static function comments(): void {
@@ -498,9 +572,14 @@ color: " . Settings::get("body-text-color") . ";
             $page = ContentFactory::getById($id);
             if (in_array($page->language, getAllLanguages(true))) {
                 $html .= '<div class="ulicms-edit">';
-                $html .= UliCMS\HTML\Link::actionLink("pages_edit", get_translation("edit"), "page={$id}", array(
-                            "class" => "btn btn-warning btn-edit"
-                ));
+                $html .= UliCMS\HTML\Link::actionLink(
+                                "pages_edit",
+                                get_translation("edit"),
+                                "page={$id}",
+                                [
+                                    "class" => "btn btn-warning btn-edit"
+                                ]
+                );
                 $html .= "</div>";
             }
         }

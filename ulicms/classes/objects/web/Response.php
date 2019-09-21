@@ -30,12 +30,19 @@ class Response {
         if (is_null($controller)) {
             Response::redirect(ModuleHelper::buildActionURL($action), $status);
         }
-        Response::redirect(ModuleHelper::buildMethodCallUrl($controller, $action), $status);
+        Response::redirect(
+                ModuleHelper::buildMethodCallUrl(
+                        $controller,
+                        $action
+                ),
+                $status
+        );
     }
 
     public static function javascriptRedirect(
             string $url = "http://www.ulicms.de"): void {
-        echo "<script type=\"text/javascript\">location.replace(\"$url\");</script>";
+        echo "<script type=\"text/javascript\">"
+        . "location.replace(\"$url\");</script>";
         echo "<noscript><p>" . get_translation("jsredirect_noscript", array(
             "%url%" => Template::getEscape($url)
         )) . "</p></noscript>";
@@ -57,7 +64,12 @@ class Response {
         $host = parse_url($url, PHP_URL_HOST);
         if (!in_array($host, $safeHosts)) {
             try {
-                $page = ContentFactory::getBySlugAndLanguage(Settings::getLanguageSetting("frontpage", getCurrentLanguage()), getCurrentLanguage());
+                $page = ContentFactory::getBySlugAndLanguage(
+                                Settings::getLanguageSetting(
+                                        "frontpage",
+                                        getCurrentLanguage()
+                                ),
+                                getCurrentLanguage());
                 $url = ModuleHelper::getFullPageURLByID($page->id);
             } catch (Exception $e) {
                 $url = ModuleHelper::getBaseUrl();
@@ -77,7 +89,8 @@ class Response {
         if (headers_sent()) {
             return false;
         }
-        header($_SERVER["SERVER_PROTOCOL"] . " " . self::getStatusCodeByNumber($nr));
+        header($_SERVER["SERVER_PROTOCOL"] . " " .
+                self::getStatusCodeByNumber($nr));
         return true;
     }
 

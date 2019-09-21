@@ -31,7 +31,8 @@ class HelperRegistry {
                 $helpers = getModuleMeta($module, "helpers");
                 if ($helpers) {
                     foreach ($helpers as $key => $value) {
-                        $path = getModulePath($module, true) . trim($value, "/");
+                        $path = getModulePath($module, true) .
+                                trim($value, "/");
                         if (!endsWith($path, ".php")) {
                             $path .= ".php";
                         }
@@ -43,7 +44,8 @@ class HelperRegistry {
                 if (file_exists($value)) {
                     require $value;
                 } else {
-                    throw new FileNotFoundException("Module {$module}: File '{$path}' not found.");
+                    throw new FileNotFoundException("Module {$module}: "
+                            . "File '{$path}' not found.");
                 }
                 if (class_exists($key)) {
                     $classInstance = new $key();

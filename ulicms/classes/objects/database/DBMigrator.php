@@ -48,7 +48,8 @@ class DBMigrator {
 
     public function executeSqlScript(string $file): void {
         if (endsWith($file, ".sql")) {
-            $sql = "SELECT id from {prefix}dbtrack where component = ? and name = ?";
+            $sql = "SELECT id from {prefix}dbtrack where component = ? "
+                    . "and name = ?";
             $args = array(
                 $this->component,
                 $file
@@ -66,10 +67,12 @@ class DBMigrator {
                     mysqli_next_result(Database::getConnection());
                 }
                 if ($success) {
-                    $sql = "INSERT INTO {prefix}dbtrack (component, name) values (?,?)";
+                    $sql = "INSERT INTO {prefix}dbtrack (component, name) "
+                            . "values (?,?)";
                     Database::pQuery($sql, $args, true);
                 } else if ($this->strictMode) {
-                    throw new SqlException("{$this->component} - {$file}: " . Database::getLastError());
+                    throw new SqlException("{$this->component} - {$file}: " .
+                            Database::getLastError());
                 }
             }
         }
@@ -85,7 +88,8 @@ class DBMigrator {
         $files = array_reverse($files);
         foreach ($files as $file) {
             if (endsWith($file, ".sql")) {
-                $sql = "SELECT id from {prefix}dbtrack where component = ? and name = ?";
+                $sql = "SELECT id from {prefix}dbtrack where component = ? "
+                        . "and name = ?";
                 $args = array(
                     $this->component,
                     $file
@@ -101,10 +105,13 @@ class DBMigrator {
                         mysqli_next_result(Database::getConnection());
                     }
                     if ($success or ! $this->strictMode) {
-                        $sql = "DELETE FROM {prefix}dbtrack where component = ? and name = ?";
+                        $sql = "DELETE FROM {prefix}dbtrack "
+                                . "where component = ? and name = ?";
                         Database::pQuery($sql, $args, true);
                     } else if ($this->strictMode) {
-                        throw new SqlException("{$this->component} - {$file}: " . Database::getLastError());
+                        throw new SqlException(
+                                "{$this->component} - {$file}: "
+                                . Database::getLastError());
                     }
                 }
             }
@@ -115,7 +122,8 @@ class DBMigrator {
     }
 
     public function resetDBTrack(): mysqli_result {
-        return Database::pQuery("DELETE FROM {prefix}dbtrack where component = ?", array(
+        return Database::pQuery("DELETE FROM {prefix}dbtrack "
+                        . "where component = ?", array(
                     $this->component
                         ), true);
     }

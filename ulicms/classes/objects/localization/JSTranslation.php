@@ -8,7 +8,10 @@ class JSTranslation {
     private $keys = [];
     private $varName = "Translation";
 
-    public function __construct(array $keys = [], string $varName = "Translation") {
+    public function __construct(
+            array $keys = [],
+            string $varName = "Translation"
+    ) {
         $this->addKeys($keys);
         $this->setVarName($varName);
     }
@@ -58,7 +61,11 @@ class JSTranslation {
             if (startsWith($key, "TRANSLATION_")) {
                 $key = substr($key, 12);
             }
-            $jsName = ucfirst(ModuleHelper::underscoreToCamel(strtolower($key)));
+            $jsName = ucfirst(
+                    ModuleHelper::underscoreToCamel(
+                            strtolower($key)
+                    )
+            );
             $key = strtoupper($key);
             $value = get_translation($key);
             $value = str_replace("\"", "\\\"", $value);

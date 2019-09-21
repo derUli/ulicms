@@ -22,7 +22,8 @@ class ControllerRegistry {
                 $controllers = getModuleMeta($module, "controllers");
                 if ($controllers) {
                     foreach ($controllers as $key => $value) {
-                        $path = getModulePath($module, true) . trim($value, "/");
+                        $path = getModulePath($module, true) .
+                                trim($value, "/");
                         if (!endsWith($path, ".php")) {
                             $path .= ".php";
                         }
@@ -31,7 +32,10 @@ class ControllerRegistry {
                 }
 
                 // read controller function permissions from metadata files of modules
-                $controller_function_permissions = getModuleMeta($module, "controller_function_permissions");
+                $controller_function_permissions = getModuleMeta(
+                        $module,
+                        "controller_function_permissions"
+                );
                 if ($controller_function_permissions) {
                     foreach ($controller_function_permissions as $key => $value) {
                         self::$controller_function_permissions[$key] = $value;
@@ -42,7 +46,8 @@ class ControllerRegistry {
                 if (file_exists($value)) {
                     require $value;
                 } else {
-                    throw new FileNotFoundException("Module {$module}: File '{$path}' not found.");
+                    throw new FileNotFoundException("Module {$module}:"
+                            . "File '{$path}' not found.");
                 }
                 if (class_exists($key)) {
                     $classInstance = new $key();
@@ -55,14 +60,17 @@ class ControllerRegistry {
     }
 
     public static function runMethods(): void {
-        if (isset($_REQUEST["sClass"]) and StringHelper::isNotNullOrEmpty($_REQUEST["sClass"])) {
+        if (isset($_REQUEST["sClass"])
+                and StringHelper::isNotNullOrEmpty($_REQUEST["sClass"])) {
             if (self::get($_REQUEST["sClass"])) {
                 $sClass = $_REQUEST["sClass"];
                 self::get($sClass)->runCommand();
             } else {
 
                 $sClass = $_REQUEST["sClass"];
-                throw new BadMethodCallException("class " . _esc($sClass) . " not found");
+                throw new BadMethodCallException(
+                        "class " . _esc($sClass) . " not found"
+                );
             }
         }
     }
@@ -87,10 +95,18 @@ class ControllerRegistry {
 
         $wildcardMethodIdentifier = $sClass . "::*";
 
-        if (!is_blank(self::$controller_function_permissions[$methodIdentifier])) {
-            $allowed = $acl->hasPermission(self::$controller_function_permissions[$methodIdentifier]);
-        } else if (!is_blank(self::$controller_function_permissions[$wildcardMethodIdentifier])) {
-            $allowed = $acl->hasPermission(self::$controller_function_permissions[$wildcardMethodIdentifier]);
+        if (!is_blank(
+                        self::$controller_function_permissions[$methodIdentifier])
+        ) {
+            $allowed = $acl->hasPermission(
+                    self::$controller_function_permissions[$methodIdentifier]
+            );
+        } else if (!is_blank(
+                        self::$controller_function_permissions[$wildcardMethodIdentifier])
+        ) {
+            $allowed = $acl->hasPermission(
+                    self::$controller_function_permissions[$wildcardMethodIdentifier]
+            );
         }
         return $allowed;
     }

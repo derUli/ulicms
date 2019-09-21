@@ -40,8 +40,10 @@ class Translation {
     public static function loadAllModuleLanguageFiles(string $lang): void {
         $modules = getAllModules();
         foreach ($modules as $module) {
-            $currentLanguageFile = getModulePath($module, true) . "/lang/" . $lang . ".php";
-            $englishLanguageFile = getModulePath($module, true) . "/lang/en.php";
+            $currentLanguageFile = getModulePath($module, true) . "/lang/" .
+                    $lang . ".php";
+            $englishLanguageFile = getModulePath($module, true) .
+                    "/lang/en.php";
 
             if (file_exists($currentLanguageFile)) {
                 require_once $currentLanguageFile;
@@ -52,12 +54,14 @@ class Translation {
     }
 
     public static function loadCurrentThemeLanguageFiles(string $lang): void {
-        $file = getTemplateDirPath(get_theme(), true) . "/lang/" . $lang . ".php";
+        $file = getTemplateDirPath(get_theme(), true) . "/lang/" .
+                $lang . ".php";
         if (file_exists($file)) {
             require_once $file;
             return;
         }
-        $file = getTemplateDirPath(get_theme(), true) . "/lang/en.php";
+        $file = getTemplateDirPath(get_theme(), true) .
+                "/lang/en.php";
         if (file_exists($file)) {
             require_once $file;
         }

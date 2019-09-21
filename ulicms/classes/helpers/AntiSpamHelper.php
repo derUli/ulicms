@@ -7,7 +7,8 @@ class AntiSpamHelper extends Helper {
     // checking if this Country is blocked by spamfilter
     // blocking works by the domain extension of the client's
     // hostname
-    public static function isCountryBlocked(?string $ip = null, ?array $country_blacklist = null): bool {
+    public static function isCountryBlocked(?string $ip = null,
+            ?array $country_blacklist = null): bool {
         if (is_null($ip)) {
             $ip = get_ip();
         }
@@ -49,7 +50,8 @@ class AntiSpamHelper extends Helper {
         return (bool) preg_match('/\p{Cyrillic}+/u', $str);
     }
 
-    // returns true if a string contains chars in right to left languages such as arabic
+    // returns true if a string contains chars in
+    // right to left languages such as arabic
     public static function isRtl(string $str): bool {
         $rtl_chars_pattern = '/[\x{0590}-\x{05ff}\x{0600}-\x{06ff}]/u';
         return (bool) preg_match($rtl_chars_pattern, $str);
@@ -58,7 +60,10 @@ class AntiSpamHelper extends Helper {
     // returns the first matching word if the string contains badwords
     // badwords can be specified at the spamfilter settings
     // returns null if there are no badwords
-    public static function containsBadwords(?string $str, array $words_blacklist = null) {
+    public static function containsBadwords(
+            ?string $str,
+            array $words_blacklist = null
+    ) {
         if (!$str) {
             return null;
         }
@@ -66,7 +71,12 @@ class AntiSpamHelper extends Helper {
             $words_blacklist = Settings::get("spamfilter_words_blacklist");
         }
         if (is_string($words_blacklist)) {
-            $words_blacklist = StringHelper::linesFromString($words_blacklist, false, true, true);
+            $words_blacklist = StringHelper::linesFromString(
+                            $words_blacklist,
+                            false,
+                            true,
+                            true
+            );
         }
         for ($i = 0; $i < count($words_blacklist); $i ++) {
             $word = strtolower($words_blacklist[$i]);
@@ -140,14 +150,16 @@ class AntiSpamHelper extends Helper {
     }
 
     // This function checks if the domain of an email address has a mx nds entry
-    // if it is invalid there is a high chance, that this is not valid email address
+    // if it is invalid there is a high chance, that this is not valid
+    // email address
     // please note that this function returns also true if
     // you send an email to a nonexisting user on a valid domain.
     // Use this function with care
     public static function checkMailDomain(string $email): bool {
         $domain = strstr($email, '@');
         $domain = remove_prefix($domain, "@");
-        // In some cases getmxrr() would return a result for an invalid domain if there is no additional dot at the end
+        // In some cases getmxrr() would return a result for an invalid domain
+        // if there is no additional dot at the end
         $domain = !endsWith($domain, ".") ? $domain . "." : $domain;
         $result = [];
 

@@ -8,22 +8,30 @@ namespace UliCMS\HTML;
 // see https://getbootstrap.com/docs/3.3/components/
 class Alert {
 
-    public static function alert(string $text, string $cssClasses, bool $allowHtml = false): string {
+    public static function alert(
+            string $text,
+            string $cssClasses,
+            bool $allowHtml = false
+    ): string {
         if (!$allowHtml) {
             $text = _esc($text);
         }
         return "<div class=\"alert {$cssClasses}\">{$text}</div>";
     }
 
-    public static function info(string $text,
+    public static function info(
+            string $text,
             string $cssClasses = "",
-            bool $allowHtml = false): string {
+            bool $allowHtml = false
+    ): string {
         return self::alert($text, "alert-info {$cssClasses}", $allowHtml);
     }
 
-    public static function danger($text,
+    public static function danger(
+            $text,
             string $cssClasses = "",
-            bool $allowHtml = false): string {
+            bool $allowHtml = false
+    ): string {
         return self::alert($text, "alert-danger {$cssClasses}", $allowHtml);
     }
 

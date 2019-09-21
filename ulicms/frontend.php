@@ -23,8 +23,12 @@ setLanguageByDomain();
 
 $languages = getAllLanguages();
 
-if (!empty($_GET["language"]) and faster_in_array($_GET["language"], $languages)) {
-    $_SESSION["language"] = Database::escapeValue($_GET["language"], DB_TYPE_STRING);
+if (!empty($_GET["language"])
+        and faster_in_array($_GET["language"], $languages)) {
+    $_SESSION["language"] = Database::escapeValue(
+                    $_GET["language"],
+                    DB_TYPE_STRING
+    );
 }
 
 if (!isset($_SESSION["language"])) {
@@ -33,7 +37,8 @@ if (!isset($_SESSION["language"])) {
 
 setLocaleByLanguage();
 
-if (faster_in_array($_SESSION["language"], $languages) && file_exists(getLanguageFilePath($_SESSION["language"]))) {
+if (faster_in_array($_SESSION["language"], $languages)
+        and file_exists(getLanguageFilePath($_SESSION["language"]))) {
     require_once getLanguageFilePath($_SESSION["language"]);
 } else if (file_exists(getLanguageFilePath("en"))) {
     require getLanguageFilePath("en");
@@ -65,7 +70,8 @@ if (Request::getVar("run_cron")) {
 
 $status = check_status();
 
-if (Settings::get("redirection") != "" && Settings::get("redirection") != false) {
+if (Settings::get("redirection") != ""
+        and Settings::get("redirection") != false) {
     do_event("before_global_redirection");
     header("Location: " . Settings::get("redirection"));
     exit();
@@ -76,7 +82,8 @@ $theme = get_theme();
 if (isMaintenanceMode()) {
     do_event("before_maintenance_message");
     // Sende HTTP Status 503 und Retry-After im Wartungsmodus
-    header($_SERVER["SERVER_PROTOCOL"] . " 503 Service Temporarily Unavailable");
+    header($_SERVER["SERVER_PROTOCOL"] .
+            " 503 Service Temporarily Unavailable");
     header('Status: 503 Service Temporarily Unavailable');
     header('Retry-After: 60');
     header("Content-Type: text/html; charset=utf-8");
@@ -109,7 +116,10 @@ if (get_ID()) {
         $page = ContentFactory::getByID(get_ID());
         if (!is_null($page->id) and $page instanceof Language_Link) {
             $language = new Language($page->link_to_language);
-            if (!is_null($language->getID()) and StringHelper::isNotNullOrWhitespace($language->getLanguageLink())) {
+            if (!is_null($language->getID())
+                    and StringHelper::isNotNullOrWhitespace(
+                            $language->getLanguageLink())
+            ) {
                 Request::redirect($language->getLanguageLink());
             }
         }
@@ -157,6 +167,7 @@ if ($format == "html") {
     );
 }
 
+
 do_event("after_http_header");
 
 if (count(getAllThemes()) === 0) {
@@ -200,7 +211,8 @@ if (is_logged_in() and get_cache_control() == "auto") {
 do_event("before_html");
 
 $cacheAdapter = null;
-if (CacheUtil::isCacheEnabled() and Request::isGet() and ! Flags::getNoCache()) {
+if (CacheUtil::isCacheEnabled() and Request::isGet()
+        and ! Flags::getNoCache()) {
     $cacheAdapter = CacheUtil::getAdapter();
 }
 $uid = CacheUtil::getCurrentUid();
@@ -226,13 +238,16 @@ $top_files = array(
     "oben.php",
     "top.php"
 );
+
 foreach ($top_files as $file) {
     $file = getTemplateDirPath($theme, true) . $file;
     if (file_exists($file)) {
         require $file;
         break;
     }
+
 }
+
 do_event("before_content");
 $text_position = get_text_position();
 if ($text_position == "after") {
@@ -241,7 +256,8 @@ if ($text_position == "after") {
 
 $disable_functions = getThemeMeta(get_theme(), "disable_functions");
 
-if (!(is_array($disable_functions) and faster_in_array("output_content", $disable_functions))) {
+if (!(is_array($disable_functions)
+        and faster_in_array("output_content", $disable_functions))) {
     content();
 }
 
@@ -253,7 +269,8 @@ do_event("after_content");
 
 do_event("before_edit_button");
 
-if (!(is_array($disable_functions) and faster_in_array("edit_button", $disable_functions))) {
+if (!(is_array($disable_functions)
+        and faster_in_array("edit_button", $disable_functions))) {
     edit_button();
 }
 
@@ -286,7 +303,8 @@ if ($cacheAdapter or Settings::get("minify_html")) {
     }
 }
 
-// Wenn no_auto_cron gesetzt ist, dann muss cron.php manuell ausgeführt bzw. aufgerufen werden
+// Wenn no_auto_cron gesetzt ist, dann muss cron.php
+// manuell ausgeführt bzw. aufgerufen werden
 if (!Settings::get("no_auto_cron")) {
     do_event("before_cron");
     require 'lib/cron.php';

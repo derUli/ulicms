@@ -6,7 +6,8 @@ define("DB_TYPE_STRING", 3);
 define("DB_TYPE_BOOL", 4);
 
 // database api functions
-// all functions in this file are deprecated you should use the Database class instead.
+// all functions in this file are deprecated you should
+// use the Database class instead.
 function db_query($query) {
     return Database::query($query);
 }

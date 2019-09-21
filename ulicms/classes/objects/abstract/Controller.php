@@ -30,7 +30,12 @@ abstract class Controller {
     // Example URL: index.php?sClass=MyController&sMethod=helloWorld
     public function runCommand(): void {
         $sClass = Request::getVar("sClass");
-        if (isset($_REQUEST["sMethod"]) and StringHelper::isNotNullOrEmpty($_REQUEST["sMethod"]) and ! faster_in_array($_REQUEST["sMethod"], $this->blacklist)) {
+        if (isset($_REQUEST["sMethod"])
+                and StringHelper::isNotNullOrEmpty($_REQUEST["sMethod"])
+                and ! faster_in_array(
+                        $_REQUEST["sMethod"],
+                        $this->blacklist)
+        ) {
             $sMethod = $_REQUEST["sMethod"];
             $sMethodWithRequestType = $sMethod . ucfirst(Request::getMethod());
 
@@ -52,20 +57,34 @@ abstract class Controller {
 
             // if there is a method, it is public and the user has the required
             // permissions, call it
-            if (method_exists($this, $sMethodWithRequestType) and ! startsWith($sMethodWithRequestType, "_") and $reflectionWithRequestType and $reflectionWithRequestType->isPublic()) {
-                if (ControllerRegistry::userCanCall($sClass, $sMethodWithRequestType)) {
+            if (method_exists($this, $sMethodWithRequestType)
+                    and ! startsWith($sMethodWithRequestType, "_")
+                    and $reflectionWithRequestType
+                    and $reflectionWithRequestType->isPublic()) {
+                if (ControllerRegistry::userCanCall(
+                                $sClass,
+                                $sMethodWithRequestType
+                        )) {
                     $this->$sMethodWithRequestType();
                 } else {
-                    throw new AccessDeniedException(get_translation("forbidden"));
+                    throw new AccessDeniedException(
+                            get_translation("forbidden")
+                    );
                 }
-            } else if (method_exists($this, $sMethod) and ! startsWith($sMethod, "_") and $reflection and $reflection->isPublic()) {
+            } else if (method_exists($this, $sMethod)
+                    and ! startsWith($sMethod, "_")
+                    and $reflection and $reflection->isPublic()) {
                 if (ControllerRegistry::userCanCall($sClass, $sMethod)) {
                     $this->$sMethod();
                 } else {
-                    throw new AccessDeniedException(get_translation("forbidden"));
+                    throw new AccessDeniedException(
+                            get_translation("forbidden")
+                    );
                 }
             } else {
-                throw new BadMethodCallException("method " . _esc($sMethod) . " is not callable");
+                throw new BadMethodCallException(
+                        "method " . _esc($sMethod) . " is not callable"
+                );
             }
         }
     }

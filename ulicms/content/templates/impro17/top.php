@@ -40,6 +40,7 @@ if (!$searchPage) {
 </head>
 <body class="<?php body_classes(); ?>">
     <div class="container" id="root">
+
         <div class="header clearfix">
             <nav>
                 <?= jumbotron_get_menu("top"); ?>
@@ -75,7 +76,6 @@ if (!$searchPage) {
                 </p>
             </div>
         <?php } ?>
-
         <div class="row marketing">
             <?php if ($motto) { ?>
                 <blockquote>

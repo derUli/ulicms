@@ -7,7 +7,8 @@ class PasswordReset {
     // create a password reset token
     public function addToken(int $user_id): string {
         $token = md5(uniqid() . strval($user_id));
-        $sql = "INSERT INTO {prefix}password_reset (token, user_id) values (?, ?)";
+        $sql = "INSERT INTO {prefix}password_reset (token, user_id) "
+                . "values (?, ?)";
         $args = array(
             $token,
             intval($user_id)
@@ -17,7 +18,13 @@ class PasswordReset {
     }
 
     // send a password reset mail
-    public function sendMail(string $token, string $to, string $ip, string $firstname, string $lastname) {
+    public function sendMail(
+            string $token,
+            string $to,
+            string $ip,
+            string $firstname,
+            string $lastname
+    ) {
         ViewBag::set("url", $this->getPasswordResetLink($token));
         ViewBag::set("firstname", $firstname);
         ViewBag::set("lastname", $lastname);
@@ -39,7 +46,11 @@ class PasswordReset {
         if (!is_admin_dir()) {
             $url .= "/admin";
         }
-        $url .= "/" . ModuleHelper::buildMethodCallUrl(SessionManager::class, "resetPassword", "token=$token");
+        $url .= "/" . ModuleHelper::buildMethodCallUrl(
+                        SessionManager::class,
+                        "resetPassword",
+                        "token=$token"
+        );
         return $url;
     }
 
@@ -59,7 +70,11 @@ class PasswordReset {
     // get all tokens for a user
     public function getAllTokensByUserId(int $user_id): array {
         $tokens = [];
-        $result = Database::selectAll("password_reset", [], "user_id={$user_id}");
+        $result = Database::selectAll(
+                        "password_reset",
+                        [],
+                        "user_id={$user_id}"
+        );
         if (Database::getNumRows($result) === 0) {
             return $tokens;
         }
