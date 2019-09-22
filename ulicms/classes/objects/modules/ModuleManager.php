@@ -85,6 +85,8 @@ class ModuleManager {
     public function sync(): void {
         $this->removeDeletedModules();
         $this->addNewModules();
+
+        $this->initModulesDefaultSettings();
     }
 
     // remove modules from database which aren't installed anymore
@@ -105,8 +107,12 @@ class ModuleManager {
     protected function addNewModules() {
         $realModules = getAllModules();
         $dataBaseModules = $this->getAllModuleNames();
+
+        $newModules = [];
+
         // Settings aller aktiven Module auslesen und registrieren
         foreach ($realModules as $realModule) {
+
             $version = getModuleMeta($realModule, "version");
             if (faster_in_array($realModule, $dataBaseModules)) {
                 $this->updateModuleVersion($version, $realModule);
@@ -116,6 +122,13 @@ class ModuleManager {
             $module->setName($realModule);
             $module->setVersion($version);
             $module->save();
+            $newModules[] = $module;
+            $module->enable();
+        }
+
+        // try again to enable modules since the first enable
+        // of a module would fail if it dependencies modules are not enabled yet
+        foreach ($newModules as $module) {
             $module->enable();
         }
     }

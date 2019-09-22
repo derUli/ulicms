@@ -131,7 +131,7 @@ class Module {
         $result = [];
         $manager = new ModuleManager ();
         $enabledMods = $manager->getEnabledModuleNames();
-        $dependent = $manager->getDependentModules($module);
+        $dependent = $manager->getDependentModules($this->getName());
 
         foreach ($dependent as $dep) {
             if (faster_in_array($dep, $enabledMods)) {
@@ -165,10 +165,7 @@ class Module {
     }
 
     public function setVersion(?string $version): void {
-        if ($version === null) {
-            $this->version = null;
-        }
-        $this->version = strval($version);
+        $this->version = $version ? strval($version) : null;
     }
 
     public function delete(): ?bool {

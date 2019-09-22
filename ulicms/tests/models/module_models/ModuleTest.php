@@ -5,11 +5,17 @@ class ModuleTest extends \PHPUnit\Framework\TestCase {
     public function setUp() {
         $manager = new ModuleManager();
         $manager->sync();
+
+        $module = new Module("core_comments");
+        $module->enable();
     }
 
     public function tearDown() {
         $manager = new ModuleManager();
         $manager->sync();
+
+        $module = new Module("core_comments");
+        $module->enable();
     }
 
     public function testHasAdminPageReturnsTrue() {
@@ -63,7 +69,10 @@ class ModuleTest extends \PHPUnit\Framework\TestCase {
         $module = new Module("my_awesome_module");
         $this->assertFalse($module->isEnabled());
 
-        $module->delete();
+        $this->assertTrue($module->delete());
+
+        // can't delete an already deleted dataset
+        $this->assertNull($module->delete());
 
         $module = new Module("my_awesome_module");
         $this->assertNull($module->getName());
@@ -106,6 +115,16 @@ class ModuleTest extends \PHPUnit\Framework\TestCase {
         $module = new Module();
         $this->assertNull(
                 $module->getShortCode()
+        );
+    }
+
+    public function testGetDependentModules() {
+
+        $module = new Module("core_content");
+
+        $this->assertContains(
+                "core_comments",
+                $module->getDependentModules()
         );
     }
 
