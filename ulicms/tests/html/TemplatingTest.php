@@ -4,13 +4,14 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
 
     public function tearDown() {
         $this->cleanUp();
+        unset($_SESSION["language"]);
+        unset($_GET ["seite"]);
     }
 
     private function cleanUp() {
         Vars::delete("page");
         Vars::delete("type");
 
-        unset($_GET ["seite"]);
         Database::query("delete from {prefix}content where slug = 'testdisableshortcodes' or title like 'Unit Test%'", true);
     }
 
@@ -131,6 +132,50 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         foreach ($germanPages as $page) {
             $this->assertStringNotContainsString($page->title . ".html", $html);
         }
+    }
+
+    public function testHtml5Doctype() {
+        ob_start();
+        html5_doctype();
+        $this->assertEquals("<!doctype html>", ob_get_clean());
+    }
+
+    public function testOgHTMLPrefix() {
+        $_SESSION["language"] = "en";
+
+        ob_start();
+        og_html_prefix();
+
+        $this->assertEquals(
+                "<html prefix=\"og: http://ogp.me/ns#\" lang=\"en\">",
+                ob_get_clean()
+        );
+        $_SESSION["language"] = "de";
+
+        ob_start();
+        og_html_prefix();
+        $this->assertEquals(
+                "<html prefix=\"og: http://ogp.me/ns#\" lang=\"de\">",
+                ob_get_clean()
+        );
+    }
+
+    public function testGetOgHTMLPrefix() {
+        $_SESSION["language"] = "en";
+        $this->assertEquals(
+                "<html prefix=\"og: http://ogp.me/ns#\" lang=\"en\">",
+                get_og_html_prefix()
+        );
+        $_SESSION["language"] = "de";
+        $this->assertEquals(
+                "<html prefix=\"og: http://ogp.me/ns#\" lang=\"de\">",
+                get_og_html_prefix()
+        );
+        unset($_SESSION["language"]);
+    }
+
+    public function testGetHtml5Doctype() {
+        $this->assertEquals("<!doctype html>", get_html5_doctype());
     }
 
 }

@@ -94,6 +94,12 @@ class StringFunctionsTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("Apple Strawberry Apple Tomato", str_replace_nth("Strawberry", "Tomato", $input, 1));
     }
 
+    public function testStrReplaceNthSubjectNotFound() {
+        $input = "Hallo Welt";
+        $this->assertEquals("Hallo Welt",
+                str_replace_nth("Gibts Nicht", "Tomato", $input, 1));
+    }
+
     public function testMbStrSplit() {
         $input = "Dieser Hügel ist der höchste.";
         $result = mb_str_split($input);
@@ -141,9 +147,55 @@ Noch mehr Text <a href="http://www.ulicms.de" rel="nofollow" target="_blank">htt
         );
     }
 
+    public function testEsc() {
+        ob_start();
+        esc("<script>alert('xss')</script>");
+        $this->assertEquals("&lt;script&gt;alert(&#039;xss&#039;)&lt;/script&gt;",
+                ob_get_clean()
+        );
+    }
+
     public function testGetExcerptReturnsShortedString() {
         $this->assertEquals("Lorem Ipsum...",
                 getExcerpt("Lorem Ipsum sit dor amet usw.", 0, 16));
+    }
+
+    public function testIsBlankReturnsTrue() {
+        $this->assertTrue(@isNullOrEmpty(""));
+        $this->assertTrue(@isNullOrEmpty(" "));
+        $this->assertTrue(@isNullOrEmpty(false));
+        $this->assertTrue(@isNullOrEmpty(null));
+        $this->assertTrue(@isNullOrEmpty(0));
+        $this->assertTrue(@isNullOrEmpty([]));
+        $this->assertTrue(@isNullOrEmpty("0"));
+        $this->assertTrue(@isNullOrEmpty($notDefined));
+    }
+
+    public function testIsBlankReturnsFalse() {
+        $this->assertFalse(@isNullOrEmpty(" hallo welt "));
+        $this->assertFalse(@isNullOrEmpty(13));
+        $this->assertFalse(@isNullOrEmpty(true));
+        $this->assertFalse(@isNullOrEmpty(array("foo", "bar")));
+        $this->assertFalse(@isNullOrEmpty("13"));
+    }
+
+    public function testIsPresentReturnsTrue() {
+        $this->assertTrue(@isNotNullOrEmpty(" hallo welt "));
+        $this->assertTrue(@isNotNullOrEmpty(13));
+        $this->assertTrue(@isNotNullOrEmpty(true));
+        $this->assertTrue(@isNotNullOrEmpty(array("foo", "bar")));
+        $this->assertTrue(@isNotNullOrEmpty("13"));
+    }
+
+    public function testIsPresentReturnsFalse() {
+        $this->assertFalse(@isNotNullOrEmpty(""));
+        $this->assertFalse(@isNotNullOrEmpty(" "));
+        $this->assertFalse(@isNotNullOrEmpty(false));
+        $this->assertFalse(@isNotNullOrEmpty(null));
+        $this->assertFalse(@isNotNullOrEmpty(0));
+        $this->assertFalse(@isNotNullOrEmpty([]));
+        $this->assertFalse(@isNotNullOrEmpty("0"));
+        $this->assertFalse(@isNotNullOrEmpty($undefinedVar));
     }
 
 }

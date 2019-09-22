@@ -80,7 +80,6 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetHtml5Doctype() {
         $this->assertEquals("<!doctype html>", Template::getHtml5Doctype());
-        $this->assertEquals("<!doctype html>", get_html5_doctype());
     }
 
     public function testHtml5Doctype() {

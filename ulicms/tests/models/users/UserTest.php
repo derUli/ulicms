@@ -320,7 +320,7 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $user = new User();
         $user->setPassword("top-secret");
         $this->assertRegExp(
-                '/\d{1,4}-\d{1,2}-\d[1,2] \d{1,2}:\d{1,2}:\d{1,2}/',
+                '/\d+-\d+-\d+ \d+:\d+:\d+/',
                 $user->getPasswordChanged()
         );
     }
