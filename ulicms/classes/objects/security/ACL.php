@@ -80,9 +80,6 @@ class ACL {
 
     public function deleteGroup(int $id, ?int $move_users_to = null) {
         $id = intval($id);
-        $deleteGroupSQL = "DELETE FROM `" . tbname("groups") .
-                "` WHERE id=" . $id;
-        db_query($deleteGroupSQL);
 
         if (is_null($move_users_to)) {
             $updateUsers = "UPDATE " . tbname("users") .
@@ -93,6 +90,10 @@ class ACL {
         }
 
         db_query($updateUsers);
+
+        $deleteGroupSQL = "DELETE FROM `" . tbname("groups") .
+                "` WHERE id=" . $id;
+        db_query($deleteGroupSQL);
     }
 
     public function getPermissionQueryResult(?int $id = null): ?array {

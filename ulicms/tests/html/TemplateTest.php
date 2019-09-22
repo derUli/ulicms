@@ -1,5 +1,6 @@
 <?php
 
+use UliCMS\Exceptions\NotImplementedException;
 use UliCMS\Exceptions\FileNotFoundException;
 use UliCMS\Utils\File;
 
@@ -17,7 +18,8 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
             "motto_en",
             "motto_fr",
             "homepage_owner",
-            "footer_text"
+            "footer_text",
+            "domain_to_language"
         );
         foreach ($settings as $setting) {
             $this->savedSettings[$setting] = Settings::get($setting);
@@ -42,7 +44,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
                 true);
 
         unset($_SERVER["REQUEST_URI"]);
-		unset($_SESSION["language"]);
+        unset($_SESSION["language"]);
     }
 
     private function cleanUp() {
@@ -59,6 +61,10 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testRenderPartialSuccess() {
+        $this->assertEquals("Hello World!", Template::renderPartial("hello"));
+    }
+
+    public function testRenderPartialSuccessWithTheme() {
         $this->assertEquals("Hello World!", Template::renderPartial("hello",
                         "impro17"));
     }
@@ -170,8 +176,6 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $_SESSION["language"] = "en";
         $this->assertEquals("Motto English", Template::getMotto());
         $this->cleanUp();
-
-		
     }
 
     public function testGetMottoWithExistingLanguage() {
@@ -213,6 +217,27 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         // german and english
         $this->assertGreaterThanOrEqual(2, substr_count($html, "<li>"));
         // TODO: Check if there are links in the returned html
+    }
+
+    public function testGetLanguageSelectionWithDomain2LanguageMapping() {
+
+        $mappingLines = [
+            'example.de=>de',
+            'example.co.uk=>en'
+        ];
+
+        Settings::set("domain_to_language",
+                implode("\n", $mappingLines));
+        $html = Template::getLanguageSelection();
+        $this->assertTrue(str_contains("<ul class='language_selection'>",
+                        $html));
+
+        // By default there should be at least 2 languages
+        // german and english
+        $this->assertGreaterThanOrEqual(2, substr_count($html, "<li>"));
+
+        $this->assertStringContainsString("://example.de", $html);
+        $this->assertStringContainsString("://example.co.uk", $html);
     }
 
     public function testGetPoweredBy() {
@@ -279,7 +304,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
 
         $_SESSION["language"] = $page->language;
         $_GET["seite"] = $page->slug;
-		
+
         $_GET["REQUEST_URI"] = "/{$page->slug}.html";
         $this->assertEquals("<p>Wir schreiben das Jahr " . date("Y") .
                 " des fliegenden Spaghettimonsters</p>",
@@ -315,7 +340,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
     public function testGetBodyClassesError403Active() {
         $page = new Page();
         $page->title = 'testgetbodyclasses';
-        $page->slug = 'testpage-'.uniqid();
+        $page->slug = 'testpage-' . uniqid();
         $page->language = 'de';
         $page->content = "Hello World";
         $page->author_id = 1;
@@ -339,7 +364,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
     public function testGetBodyClassesError403CauseAccess() {
         $page = new Page();
         $page->title = 'testgetbodyclasses';
-        $page->slug = 'testpage-'.uniqid();
+        $page->slug = 'testpage-' . uniqid();
         $page->language = 'de';
         $page->content = "Hello World";
         $page->author_id = 1;

@@ -8,7 +8,6 @@ class UserTest extends \PHPUnit\Framework\TestCase {
     private $otherGroup;
 
     public function setUp() {
-
         $_SERVER["REQUEST_URI"] = "/other-url.html?param=value";
 
         require_once getLanguageFilePath("en");
@@ -44,6 +43,7 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $user->setHomepage("http://www.google.de");
         $user->setDefaultLanguage("fr");
         $user->setHTMLEditor("ckeditor");
+        $user->setFailedLogins(0);
 
         $user->setAboutMe("hello world");
         $lastLogin = time();
@@ -91,8 +91,8 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(true, $user->getRequirePasswordChange());
         $this->assertEquals("bye", $user->getAboutMe());
 
-// This always returns the URL of an placeholder image
-// since the new avatar feature is not implemented yet
+        // This always returns the URL of an placeholder image
+        // since the new avatar feature is not implemented yet
         $this->assertTrue(endsWith($user->getAvatar(), "/admin/gfx/no_avatar.png"));
 
         $user->delete();
@@ -395,6 +395,34 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         // to the default value
         $user->setHTMLEditor("super_editor");
         $this->assertEquals("ckeditor", $user->getHTMLEditor());
+    }
+
+    public function testIncreaseAndResetFailedLogins() {
+        $user = new User();
+        $user->setUsername("john-doe");
+        $user->setFirstname("John");
+        $user->setLastname("Doe");
+        $user->setPassword("password123");
+        $user->setEmail("john@doe.com");
+
+        // does nothing because the dataset is not saved yet
+        $user->setFailedLogins(3);
+        $user->increaseFailedLogins();
+        $user->resetFailedLogins();
+
+        $user->save();
+        $user->setFailedLogins(1);
+
+        for ($i = 1; $i <= 3; $i++) {
+            $user->increaseFailedLogins();
+        }
+
+        $this->assertEquals(4, $user->getFailedLogins());
+
+        $user->resetFailedLogins();
+        $this->assertEquals(0, $user->getFailedLogins());
+
+        $user->delete();
     }
 
 }

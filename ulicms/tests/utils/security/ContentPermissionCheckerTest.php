@@ -6,6 +6,7 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase {
 
     private $testUser1;
     private $testUser2;
+    private $testUser3;
     private $testGroup1;
     private $testGroup2;
 
@@ -56,6 +57,15 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase {
         $this->testUser2->setPassword("foobar");
         $this->testUser2->setGroup($this->testGroup1);
         $this->testUser2->save();
+
+        $this->testUser3 = new User();
+        $this->testUser3->setUsername("testuser3");
+        $this->testUser3->setLastname("Doe");
+        $this->testUser3->setFirstname("Jane");
+        $this->testUser3->setPassword("foobar");
+        $this->testUser3->setAdmin(true);
+        $this->testUser3->setGroup($this->testGroup1);
+        $this->testUser3->save();
     }
 
     public function tearDown() {
@@ -159,6 +169,58 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($checker->canDelete($page->getID()));
 
         $page->delete();
+    }
+
+    public function testCanWriteWithEditRestrictionAsAdminReturnsTrue() {
+        $page = new Page();
+        $page->slug = "testpage3";
+        $page->language = "de";
+        $page->group_id = $this->testGroup2->getId();
+        $page->author_id = $this->testUser2->getId();
+        $page->getPermissions()->setEditRestriction("admins", true);
+        $page->save();
+
+        $checker = new ContentPermissionChecker($this->testUser3->getId());
+        $this->assertTrue($checker->canWrite($page->getId()));
+    }
+
+    public function testCanWriteWithEditRestrictionAsAdminReturnsFalse() {
+        $page = new Page();
+        $page->slug = "testpage3";
+        $page->language = "de";
+        $page->group_id = $this->testGroup2->getId();
+        $page->author_id = $this->testUser1->getId();
+        $page->getPermissions()->setEditRestriction("admins", true);
+        $page->save();
+
+        $checker = new ContentPermissionChecker($this->testUser1->getId());
+        $this->assertFalse($checker->canWrite($page->getID()));
+    }
+
+    public function testCanWriteWithEditRestrictionAsGroupReturnsTrue() {
+        $page = new Page();
+        $page->slug = "testpage3";
+        $page->language = "de";
+        $page->group_id = $this->testGroup3->getId();
+        $page->author_id = $this->testUser2->getId();
+        $page->getPermissions()->setEditRestriction("group", true);
+        $page->save();
+
+        $checker = new ContentPermissionChecker($this->testUser1->getId());
+        $this->assertTrue($checker->canWrite($page->getId()));
+    }
+
+    public function testCanWriteWithEditRestrictionAsGroupReturnsFalse() {
+        $page = new Page();
+        $page->slug = "testpage3";
+        $page->language = "de";
+        $page->group_id = $this->testGroup3->getId();
+        $page->author_id = $this->testUser1->getId();
+        $page->getPermissions()->setEditRestriction("group", true);
+        $page->save();
+
+        $checker = new ContentPermissionChecker($this->testUser2->getId());
+        $this->assertFalse($checker->canWrite($page->getID()));
     }
 
 }
