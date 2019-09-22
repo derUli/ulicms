@@ -98,7 +98,7 @@ function keywordsFromString(string $text): array {
 // wenn kein Wort vorhanden ist nichts machen
             continue;
         }
-        if (!faster_in_array($word, $array)) {
+        if (!isset($return[$word])) {
             // wenn das wort zum ersten mal gefunden wurde
 
             $return[$word] = 1;

@@ -24,6 +24,11 @@
     <php>
         <env name="ULICMS_ENVIRONMENT" value="test" force="true"/>
     </php>
+    <logging>
+        <log type="coverage-html" target="./report"
+             showUncoveredFiles="false" />
+        <!-- <log type="testdox-html" target="./log/testdox.html" /> -->
+    </logging>
     <testsuites>
         <testsuite name="Application Test Suite">
             <directory>tests/</directory>
@@ -31,6 +36,7 @@
         </testsuite>
     </testsuites>
     <filter>
+        <!-- Damn PHPUnit has no support for wildcards. -->
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">./</directory>
             <exclude>
@@ -104,10 +110,9 @@
                 <file>classes/objects/web/load.php</file>
             </exclude>
             <exclude>
-                <!-- Damn PHPUnit has no support for wildcards. -->
                 <directory>content/modules/core_comments/lang</directory>
             </exclude>
-			   <exclude>
+            <exclude>
                 <directory>content/modules/core_home/lang</directory>
             </exclude>
             <exclude>

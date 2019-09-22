@@ -107,7 +107,8 @@ function db_real_escape_string($value) {
     return Database::escapeValue($value, DB_TYPE_STRING);
 }
 
-// Tabellenname zusammensetzen
+// prefixes the name of a database table with the table prefix from configuration
+//
 function tbname($name) {
     $config = new CMSConfig();
     return $config->db_prefix . $name;

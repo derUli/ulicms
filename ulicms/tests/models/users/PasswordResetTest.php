@@ -12,7 +12,7 @@ class PasswordResetTest extends \PHPUnit\Framework\TestCase {
 
         $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
         $_SERVER["SERVER_PORT"] = "80";
-        $_SERVER['SERVER_NAME'] = "example.org";
+        $_SERVER['HTTP_HOST'] = "example.org";
         $_SERVER['REQUEST_URI'] = "/foobar/";
 
         $this->cleanUp();
@@ -21,7 +21,7 @@ class PasswordResetTest extends \PHPUnit\Framework\TestCase {
     public function tearDown() {
         $this->cleanUp();
         unset($_SERVER["SERVER_PROTOCOL"]);
-        unset($_SERVER['SERVER_NAME']);
+        unset($_SERVER['HTTP_HOST']);
         unset($_SERVER['SERVER_PORT']);
         unset($_SERVER['REQUEST_URI']);
     }

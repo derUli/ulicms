@@ -16,6 +16,7 @@ Entfernte API-Methoden:
 * eTagFromString($str): void
 * getModuleName(string $module): string
 * initPFBC(): void
+* the_url(): string
 
 Entfernte Features:
 * Sortierung der Seitenlistn und Dropdown Filter

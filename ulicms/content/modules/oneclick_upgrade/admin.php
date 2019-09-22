@@ -21,7 +21,7 @@ function oneclick_upgrade_admin() {
         <?php
     }
     ?>
-    <form action="<?php Template::escape(getModuleAdminSelfPath()); ?>"
+    <form action="<?php echo getModuleAdminSelfPath(); ?>"
           method="post">
               <?php csrf_token_html(); ?>
         <div>

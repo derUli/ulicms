@@ -228,7 +228,7 @@ function get_shortlink($id = null): ?string {
     $id = $id ? $id : get_ID();
 
     if ($id) {
-        $shortlink = getBaseFolderURL() . "/?goid=" . get_ID();
+        $shortlink = getBaseFolderURL() . "/?goid=" . $id;
         $shortlink = apply_filter($shortlink, "shortlink");
     }
 
@@ -581,36 +581,11 @@ function setLanguageByDomain(): bool {
 }
 
 function getOnlineUsers(): array {
-    $users_online = db_query("SELECT username FROM " . tbname("users") .
-            " WHERE last_action > " . (time() - 300) . " ORDER BY username");
-    $users = [];
-    while ($row = db_fetch_object($users_online)) {
-        $users[] = $row->username;
-    }
-    return $users;
+    return getUsersOnline();
 }
 
 function rootDirectory(): string {
-    $pageURL = 'http';
-    if ($_SERVER["HTTPS"] == "on") {
-        $pageURL .= "s";
-    }
-    $pageURL .= "://";
-    $dirname = dirname($_SERVER["REQUEST_URI"]);
-    $dirname = str_replace("\\", "/", $dirname);
-    $dirname = trim($dirname, "/");
-    if ($dirname != "") {
-        $dirname = "/" . $dirname . "/";
-    } else {
-        $dirname = "/";
-    }
-    if ($_SERVER["SERVER_PORT"] != "80" and $_SERVER["SERVER_PORT"] != "443") {
-        $pageURL .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] .
-                $dirname;
-    } else {
-        $pageURL .= $_SERVER["SERVER_NAME"] . $dirname;
-    }
-    return $pageURL;
+    return ModuleHelper::getBaseUrl();
 }
 
 // Alternative PHP Cache leeren, sofern installiert und aktiv
@@ -775,11 +750,11 @@ function getTemplateDirPath(
     return $templateDir;
 }
 
+// XXX: What's the meaning of this method?
+// is this method mandatory or is there an other method
+// which can be used as replacement?
 function getModuleAdminSelfPath(): string {
-    $self_path = $_SERVER["REQUEST_URI"];
-    $self_path = str_replace('"', '', $self_path);
-    $self_path = str_replace("'", '', $self_path);
-    return $self_path;
+    return _esc(get_request_uri());
 }
 
 // this magic method replaces html num entities with the character
@@ -849,7 +824,8 @@ function replace_num_entity(string $ord) {
 // TODO: this code works but looks like garbage
 // rewrite this method
 function getBaseFolderURL(?string $suffix = null): string {
-    $s = empty($_SERVER["HTTPS"]) ? '' : ($_SERVER["HTTPS"] == "on") ? "s" : "";
+    $s = empty($_SERVER["HTTPS"]) ? '' : ($_SERVER["HTTPS"] == "on") ?
+            "s" : "";
     $sp = strtolower($_SERVER["SERVER_PROTOCOL"]);
     $protocol = substr($sp, 0, strpos($sp, "/")) . $s;
     $port = ($_SERVER["SERVER_PORT"] == "80"
@@ -857,14 +833,12 @@ function getBaseFolderURL(?string $suffix = null): string {
             "" : (":" . $_SERVER["SERVER_PORT"] );
     $path = basename(dirname($_SERVER['REQUEST_URI'])) == "" ?
             $_SERVER['REQUEST_URI'] : dirname($_SERVER['REQUEST_URI']);
-
     $suffix = $suffix ?
             str_replace("\\", "/", $suffix) : str_replace("\\", "/", $path);
-
     return trim(
             rtrim(
                     $protocol . "://"
-                    . $_SERVER['SERVER_NAME'] . $port
+                    . $_SERVER['HTTP_HOST'] . $port
                     .
                     $suffix), "/");
 }
@@ -1326,30 +1300,6 @@ function getAllLanguages($filtered = false): array {
     }
     Vars::set("all_languages", $languageCodes);
     return $languageCodes;
-}
-
-// get URL to UliCMS
-function the_url(): string {
-    $pageURL = 'http';
-    if ($_SERVER["HTTPS"] == "on") {
-        $pageURL .= "s";
-    }
-    $pageURL .= "://";
-    $dirname = dirname($_SERVER["REQUEST_URI"]);
-    $dirname = str_replace("\\", "/", $dirname);
-    $dirname = str_replace("admin", "", $dirname);
-    $dirname = trim($dirname, "/");
-    if ($dirname != "") {
-        $dirname = "/" . $dirname . "/";
-    } else {
-        $dirname = "/";
-    }
-    if ($_SERVER["SERVER_PORT"] != "80" && $_SERVER["SERVER_PORT"] != "443") {
-        $pageURL .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . $dirname;
-    } else {
-        $pageURL .= $_SERVER["SERVER_NAME"] . $dirname;
-    }
-    return $pageURL;
 }
 
 // Gibt die Identifier aller Menüs zurück.

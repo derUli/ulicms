@@ -115,4 +115,35 @@ class StringFunctionsTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull(stringOrNull(null));
     }
 
+    public function testMakeLinksClickable() {
+        $input = "Das hier ist ein Text.
+http://www.google.de
+Noch mehr Text http://www.ulicms.de und so weiter.";
+
+        $expected = 'Das hier ist ein Text.
+<a href="http://www.google.de" rel="nofollow" target="_blank">http://www.google.de</a>
+Noch mehr Text <a href="http://www.ulicms.de" rel="nofollow" target="_blank">http://www.ulicms.de</a> und so weiter.';
+
+        $this->assertEquals($expected, make_links_clickable($input));
+    }
+
+    public function testCleanString() {
+        $this->assertEquals("hello-world", cleanString("Hello World"));
+        $this->assertEquals("hello-world", cleanString("Hello World", "-"));
+        $this->assertEquals("hello_world", cleanString("Hello World", "_"));
+        $this->assertEquals("das-ist-die-grossfraesmaschinenoeffnungstuer",
+                cleanString("Das ist die Großfräsmaschinenöffnungstür."));
+    }
+
+    public function testRealHtmlSpecialChars() {
+        $this->assertEquals("&lt;script&gt;alert(&#039;xss&#039;)&lt;/script&gt;",
+                real_htmlspecialchars("<script>alert('xss')</script>")
+        );
+    }
+
+    public function testGetExcerptReturnsShortedString() {
+        $this->assertEquals("Lorem Ipsum...",
+                getExcerpt("Lorem Ipsum sit dor amet usw.", 0, 16));
+    }
+
 }

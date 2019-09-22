@@ -19,6 +19,10 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
 
         $this->initialUser = Database::fetchObject($userQuery);
         $this->additionalMenus = Settings::get("additional_menus");
+
+        // call this method, which is an alias for CacheUtil::clearCache()
+        // to have it covered
+        clearCache();
     }
 
     public function tearDown() {
@@ -26,8 +30,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         Database::query("delete from {prefix}content where title like 'Unit Test%'", true);
         $this->cleanUp();
         Database::query("delete from {prefix}users where username like 'testuser-%'", true);
-        unset($_SESSION["login_id"]);
-        unset($_SESSION["language"]);
         @session_destroy();
 
         $user = new User(
@@ -36,6 +38,15 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $user->setHtmlEditor($this->initialUser->html_editor);
         $user->save();
         Settings::set("additional_menus", $this->additionalMenus);
+
+        unset($_SERVER["SERVER_PROTOCOL"]);
+        unset($_SERVER['HTTP_HOST']);
+        unset($_SERVER['SERVER_PORT']);
+        unset($_SERVER['HTTPS']);
+        unset($_SERVER['REQUEST_URI']);
+        unset($_GET["seite"]);
+        unset($_SESSION["login_id"]);
+        unset($_SESSION["language"]);
     }
 
     public function cleanUp() {
@@ -456,7 +467,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(isModuleInstalled("not_a_module"));
     }
 
-    public function testFuncEnabled() {
+    public function testFuncEnabledReturnsTrue() {
         $enabled = func_enabled("mysqli_connect");
         $this->assertEquals("mysqli_connect() is allow to use", $enabled["m"]);
         $this->assertEquals(1, $enabled["s"]);
@@ -466,15 +477,10 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
 
         $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
         $_SERVER["SERVER_PORT"] = "80";
-        $_SERVER['SERVER_NAME'] = "example.org";
+        $_SERVER['HTTP_HOST'] = "example.org";
         $_SERVER['REQUEST_URI'] = "/foobar/foo.html";
 
         $this->assertEquals("http://example.org/foobar", getBaseFolderURL());
-
-        unset($_SERVER["SERVER_PROTOCOL"]);
-        unset($_SERVER['SERVER_NAME']);
-        unset($_SERVER['SERVER_PORT']);
-        unset($_SERVER['REQUEST_URI']);
     }
 
     public function testGetBaseFolderUrlWithFilenameInUrlAndHttps() {
@@ -482,13 +488,13 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
         $_SERVER["SERVER_PORT"] = "443";
         $_SERVER["HTTPS"] = "on";
-        $_SERVER['SERVER_NAME'] = "example.org";
+        $_SERVER['HTTP_HOST'] = "example.org";
         $_SERVER['REQUEST_URI'] = "/foobar/foo.html";
 
         $this->assertEquals("https://example.org/foobar", getBaseFolderURL());
 
         unset($_SERVER["SERVER_PROTOCOL"]);
-        unset($_SERVER['SERVER_NAME']);
+        unset($_SERVER['HTTP_HOST']);
         unset($_SERVER['SERVER_PORT']);
         unset($_SERVER['REQUEST_URI']);
         unset($_SERVER['HTTPS']);
@@ -499,13 +505,13 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
         $_SERVER["SERVER_PORT"] = "8080";
         $_SERVER["HTTPS"] = "on";
-        $_SERVER['SERVER_NAME'] = "example.org";
+        $_SERVER['HTTP_HOST'] = "example.org";
         $_SERVER['REQUEST_URI'] = "/foobar/foo.html";
 
         $this->assertEquals("https://example.org:8080/foobar", getBaseFolderURL());
 
         unset($_SERVER["SERVER_PROTOCOL"]);
-        unset($_SERVER['SERVER_NAME']);
+        unset($_SERVER['HTTP_HOST']);
         unset($_SERVER['SERVER_PORT']);
         unset($_SERVER['REQUEST_URI']);
         unset($_SERVER['HTTPS']);
@@ -515,13 +521,13 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
 
         $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
         $_SERVER["SERVER_PORT"] = "80";
-        $_SERVER['SERVER_NAME'] = "example.org";
+        $_SERVER['HTTP_HOST'] = "example.org";
         $_SERVER['REQUEST_URI'] = "/foobar/";
 
         $this->assertEquals("http://example.org/foobar", getBaseFolderURL());
 
         unset($_SERVER["SERVER_PROTOCOL"]);
-        unset($_SERVER['SERVER_NAME']);
+        unset($_SERVER['HTTP_HOST']);
         unset($_SERVER['SERVER_PORT']);
         unset($_SERVER['REQUEST_URI']);
     }
@@ -530,14 +536,14 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
         $_SERVER["SERVER_PORT"] = "8080";
         $_SERVER["HTTPS"] = "on";
-        $_SERVER['SERVER_NAME'] = "example.org";
+        $_SERVER['HTTP_HOST'] = "example.org";
         $_SERVER['REQUEST_URI'] = "/foobar/foo.html?hello=world";
 
 
         $this->assertEquals("https://example.org:8080/foobar/foo.html?hello=world", getCurrentURL());
 
         unset($_SERVER["SERVER_PROTOCOL"]);
-        unset($_SERVER['SERVER_NAME']);
+        unset($_SERVER['HTTP_HOST']);
         unset($_SERVER['SERVER_PORT']);
         unset($_SERVER['REQUEST_URI']);
         unset($_SERVER['HTTPS']);
@@ -1100,7 +1106,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetOnlineUsersReturnsEmptyArray() {
-        $usersOnline = getUsersOnline();
+        $usersOnline = getOnlineUsers();
         $this->assertCount(0, $usersOnline);
     }
 
@@ -1123,11 +1129,54 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $user2->save();
         $user2->setLastAction(time() - 10);
 
-        $usersOnline = getUsersOnline();
+        $usersOnline = getOnlineUsers();
         $this->assertCount(2, $usersOnline);
 
         $user1->delete();
         $user2->delete();
+    }
+
+    public function testGetShortlink() {
+        $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
+        $_SERVER["SERVER_PORT"] = "443";
+        $_SERVER["HTTPS"] = "on";
+        $_SERVER['HTTP_HOST'] = "example.org";
+        $_SERVER['REQUEST_URI'] = "/foobar/foo.html";
+
+        $pages = ContentFactory::getAll();
+
+        $expected = "/?goid=" . $pages[0]->getId();
+        $shortlink = get_shortlink($pages[0]->getId());
+
+        $this->assertEquals(
+                "https://example.org/foobar/?goid=1",
+                $shortlink
+        );
+    }
+
+    public function testGetCanonical() {
+        $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
+        $_SERVER["SERVER_PORT"] = "443";
+        $_SERVER["HTTPS"] = "on";
+        $_SERVER['HTTP_HOST'] = "example.org";
+        $_SERVER['REQUEST_URI'] = "/foobar/foo.html";
+
+        $_GET["seite"] = "hello_world";
+
+        $this->assertEquals(
+                "https://example.org/foobar/hello_world.html",
+                get_canonical()
+        );
+    }
+
+    // XXX: Whats the purpose of this method?
+    public function testGetModuleAdminSelfPath() {
+        $_SERVER["REQUEST_URI"] = "/foo/?bar=\"hello\"";
+        $this->assertEquals("/foo/?bar=&quot;hello&quot;", getModuleAdminSelfPath());
+    }
+
+    public function testReplaceNumEntity() {
+        throw new NotImplementedException();
     }
 
 }

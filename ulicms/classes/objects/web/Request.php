@@ -5,7 +5,7 @@ declare(strict_types=1);
 class Request {
 
     public static function getPort(): ?int {
-        return isset($_SERVER['SERVER_PORT']) ? $_SERVER['SERVER_PORT'] : null;
+        return isset($_SERVER['SERVER_PORT']) ? intval($_SERVER['SERVER_PORT']) : null;
     }
 
     public static function getProtocol(?string $suffix = null): string {
