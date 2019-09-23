@@ -229,7 +229,7 @@ class List_Data extends Content {
                 . "parent_id = $parent_id, `order_by` = '$order_by',"
                 . "`order_direction` = '$order_direction', `limit` = $limit,"
                 . "`use_pagination` = $use_pagination, `type` = $type"
-                . "where content_id = $content_id ";
+                . " where content_id = $content_id ";
         Database::query($sql) or die(Database::error());
     }
 
