@@ -3,6 +3,7 @@
 Neue Features:
 * Serverseitige Pagination für Seitenverwaltung
 * Diverse Performance Verbesserungen
+* CKEditor aktualisiert auf Version 4.12.1
 
 Neue API-Methoden
 * User->getAllGroups(): array
