@@ -276,7 +276,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                        value="<?php esc($og_image); ?>"
                        style="cursor: pointer" /> <a href="#"
                        onclick="$('#og_image').val('');
-                                   return false;"
+                               return false;"
                        class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?></a>
             </div>
         </div>
@@ -389,7 +389,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
             </strong> <select name="list_order_direction">
                 <option value="asc"><?php translate("asc"); ?></option>
                 <option value="desc"><?php translate("desc"); ?></option>
-            </select> <br /> <br /> <strong><?php translate("limit"); ?></strong>
+            </select> <br /> <br /> <strong><?php translate("entries_per_page"); ?></strong>
             <input type="number" min="0" name="limit" step="1" value="0"> <br />
             <strong><?php translate("use_pagination"); ?></strong><br /> <select
                 name="list_use_pagination">
@@ -466,7 +466,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                    readonly="readonly" class="kcfinder"
                    value="" style="cursor: pointer" maxlength="255" /> <a href="#"
                    onclick="$('#article_image').val('');
-                               return false;"
+                           return false;"
                    class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?></a>
         </div>
     </div>

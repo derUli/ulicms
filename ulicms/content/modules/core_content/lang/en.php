@@ -25,3 +25,5 @@ add_translation("confirm_delete_page",
 
 add_translation("confirm_undelete_page",
         "Do your really want to restore the page \"%title%\"?");
+
+add_translation("entries_per_page", "Entries per page");

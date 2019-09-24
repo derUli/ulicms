@@ -305,7 +305,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                    ?>"
                                    style="cursor: pointer" /> <a href="#"
                                    onclick="$('#menu_image').val('');
-                                                       return false;"
+                                           return false;"
                                    class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?> </a>
                         </div></div>
                     <div class="typedep" id="tab-link">
@@ -397,7 +397,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                        ?>"
                                        style="cursor: pointer" /> <a href="#"
                                        onclick="$('#og_image').val('');
-                                                           return false;"
+                                               return false;"
                                        class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?>
                                 </a>
                                 <?php
@@ -559,9 +559,13 @@ if ($permissionChecker->hasPermission("pages")) {
                                 <option value="asc"><?php translate("asc"); ?></option>
                                 <option value="desc"
                                         <?php if ($list_data->order_direction === "desc") echo ' selected'; ?>><?php translate("desc"); ?></option>
-                            </select> <br /> <br /> <strong><?php translate("limit"); ?></strong>
+                            </select>
+                            <br />
+                            <br />
+                            <strong><?php translate("entries_per_page"); ?></strong>
                             <input type="number" name="limit" min="0" step="1"
-                                   value="<?php echo intval($list_data->limit); ?>"> <br /> <strong><?php translate("use_pagination"); ?></strong><br />
+                                   value="<?php echo intval($list_data->limit); ?>"> <br /> <strong><?php translate("use_pagination"); ?></strong>
+                            <br />
                             <select name="list_use_pagination">
                                 <option value="1"
                                         <?php if ($list_data->use_pagination) echo "selected"; ?>><?php translate("yes") ?></option>
@@ -621,7 +625,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                    value="<?php Template::escape($row->image_url); ?>"
                                    style="cursor: pointer" /> <a href="#"
                                    onclick="$('#menu_image').val('');
-                                                       return false;"
+                                           return false;"
                                    class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?>
                             </a>
                         </div>
@@ -656,7 +660,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                    value="<?php echo _esc($row->article_image); ?>"
                                    style="cursor: pointer" maxlength="255" /> <a href="#"
                                    onclick="$('#article_image').val('');
-                                                       return false;"
+                                           return false;"
                                    class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?></a>
                         </div>
                     </div>

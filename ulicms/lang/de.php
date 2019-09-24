@@ -586,8 +586,6 @@ add_translation("ORDER_DIRECTION", "Sotieren Reihenfolge");
 add_translation("ASC", "Aufsteigend");
 add_translation("DESC", "Absteigend");
 
-add_translation("LIMIT", "Limit");
-
 // Inhaltstyp "Link"
 add_translation("LINK", "Link");
 
