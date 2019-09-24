@@ -116,16 +116,16 @@
         },
         {
             "name": "dereuromark/media-embed",
-            "version": "0.5.0",
+            "version": "0.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dereuromark/media-embed.git",
-                "reference": "c7a8d46180d8b359e060da53108d0fd44f8e1a9b"
+                "reference": "9ee485322d3497e4ed6338432bcf0cccae519c5e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dereuromark/media-embed/zipball/c7a8d46180d8b359e060da53108d0fd44f8e1a9b",
-                "reference": "c7a8d46180d8b359e060da53108d0fd44f8e1a9b",
+                "url": "https://api.github.com/repos/dereuromark/media-embed/zipball/9ee485322d3497e4ed6338432bcf0cccae519c5e",
+                "reference": "9ee485322d3497e4ed6338432bcf0cccae519c5e",
                 "shasum": ""
             },
             "require": {
@@ -148,8 +148,8 @@
             "authors": [
                 {
                     "name": "Mark Scherer",
-                    "role": "Author",
-                    "homepage": "https://www.dereuromark.de"
+                    "homepage": "https://www.dereuromark.de",
+                    "role": "Author"
                 }
             ],
             "description": "A PHP library to deal with all those media services around, parsing their URLs and embedding their audio/video content in websites.",
@@ -161,7 +161,7 @@
                 "php",
                 "video"
             ],
-            "time": "2019-07-08T18:24:49+00:00"
+            "time": "2019-09-06T13:48:57+00:00"
         },
         {
             "name": "deruli/html-minifier",
@@ -309,8 +309,8 @@
             "authors": [
                 {
                     "name": "Jimmi Westerberg",
-                    "role": "Developer",
-                    "homepage": "http://www.westsworld.dk"
+                    "homepage": "http://www.westsworld.dk",
+                    "role": "Developer"
                 }
             ],
             "description": "Simple module, that displays the date in a \"time ago\" format",
@@ -766,16 +766,16 @@
         },
         {
             "name": "phpfastcache/phpfastcache",
-            "version": "7.0.5",
+            "version": "7.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPSocialNetwork/phpfastcache.git",
-                "reference": "64638b27f473aa26603e84288d91a2b80a4aa388"
+                "reference": "11c7b17a824925c2b99dce10df15ba67cbef132a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPSocialNetwork/phpfastcache/zipball/64638b27f473aa26603e84288d91a2b80a4aa388",
-                "reference": "64638b27f473aa26603e84288d91a2b80a4aa388",
+                "url": "https://api.github.com/repos/PHPSocialNetwork/phpfastcache/zipball/11c7b17a824925c2b99dce10df15ba67cbef132a",
+                "reference": "11c7b17a824925c2b99dce10df15ba67cbef132a",
                 "shasum": ""
             },
             "require": {
@@ -862,7 +862,7 @@
                 "zend memory cache",
                 "zend server"
             ],
-            "time": "2019-03-03T14:39:16+00:00"
+            "time": "2019-09-15T15:11:18+00:00"
         },
         {
             "name": "phpgangsta/googleauthenticator",
@@ -2038,16 +2038,16 @@
         },
         {
             "name": "phpunit/php-token-stream",
-            "version": "3.1.0",
+            "version": "3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-token-stream.git",
-                "reference": "e899757bb3df5ff6e95089132f32cd59aac2220a"
+                "reference": "995192df77f63a59e47f025390d2d1fdf8f425ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/e899757bb3df5ff6e95089132f32cd59aac2220a",
-                "reference": "e899757bb3df5ff6e95089132f32cd59aac2220a",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/995192df77f63a59e47f025390d2d1fdf8f425ff",
+                "reference": "995192df77f63a59e47f025390d2d1fdf8f425ff",
                 "shasum": ""
             },
             "require": {
@@ -2083,7 +2083,7 @@
             "keywords": [
                 "tokenizer"
             ],
-            "time": "2019-07-25T05:29:42+00:00"
+            "time": "2019-09-17T06:23:10+00:00"
         },
         {
             "name": "phpunit/phpunit",
