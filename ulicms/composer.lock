@@ -116,16 +116,16 @@
         },
         {
             "name": "dereuromark/media-embed",
-            "version": "0.5.0",
+            "version": "0.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dereuromark/media-embed.git",
-                "reference": "c7a8d46180d8b359e060da53108d0fd44f8e1a9b"
+                "reference": "9ee485322d3497e4ed6338432bcf0cccae519c5e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dereuromark/media-embed/zipball/c7a8d46180d8b359e060da53108d0fd44f8e1a9b",
-                "reference": "c7a8d46180d8b359e060da53108d0fd44f8e1a9b",
+                "url": "https://api.github.com/repos/dereuromark/media-embed/zipball/9ee485322d3497e4ed6338432bcf0cccae519c5e",
+                "reference": "9ee485322d3497e4ed6338432bcf0cccae519c5e",
                 "shasum": ""
             },
             "require": {
@@ -148,8 +148,8 @@
             "authors": [
                 {
                     "name": "Mark Scherer",
-                    "role": "Author",
-                    "homepage": "https://www.dereuromark.de"
+                    "homepage": "https://www.dereuromark.de",
+                    "role": "Author"
                 }
             ],
             "description": "A PHP library to deal with all those media services around, parsing their URLs and embedding their audio/video content in websites.",
@@ -161,7 +161,7 @@
                 "php",
                 "video"
             ],
-            "time": "2019-07-08T18:24:49+00:00"
+            "time": "2019-09-06T13:48:57+00:00"
         },
         {
             "name": "deruli/html-minifier",
