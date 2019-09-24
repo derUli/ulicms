@@ -79,8 +79,11 @@ if ($permissionChecker->hasPermission("pages")) {
         </div>
     </div>
     <?php
-    enqueueScriptFile(ModuleHelper::buildRessourcePath("core_content",
-                    "js/pages/page.js"));
+    enqueueScriptFile(ModuleHelper::buildRessourcePath(
+                    "core_content",
+                    "js/pages/list.js"
+            )
+    );
     combinedScriptHtml();
     $translation = new JSTranslation();
     $translation->addKey("ask_for_delete");

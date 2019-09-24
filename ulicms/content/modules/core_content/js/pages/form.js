@@ -1,80 +1,74 @@
-/* global Translation, formChanged, submitted, bootbox, instance, CKEDITOR */
-
-let AllTypes = {};
-
+// Script for new page and edit page form
 $(() => {
-    // if we are not in the page list but in a page edit form
-    if (!$("#page-list").length) {
-        const url = $(".main-form")
-                .first()
-                .data("get-content-types-url");
+    const url = $(".main-form")
+            .first()
+            .data("get-content-types-url");
 
-        $.ajax({
-            url,
-            success: (response) => {
-                AllTypes = response;
-                showAndHideFieldsByTypeWithoutEffects();
-                $(".loadspinner").hide();
-                $(".pageform").show();
-                // Refresh CodeMirror
-                refreshCodeMirrors();
-                $(".accordion-header").click(() =>
-                    refreshCodeMirrors()
-                );
+    $.ajax({
+        url,
+        success: (response) => {
+            AllTypes = response;
+            showAndHideFieldsByTypeWithoutEffects();
+            $(".loadspinner").hide();
+            $(".pageform").show();
+            // Refresh CodeMirror
+            refreshCodeMirrors();
+            $(".accordion-header").click(() =>
+                refreshCodeMirrors()
+            );
+        }
+    });
+
+    bindEvents();
+    slugOrLanguageChanged();
+    filterParentPages();
+
+    // AJAX submit page edit form
+    $("#pageform-edit").ajaxForm({
+        beforeSubmit: () => {
+            $("#message_page_edit").html("");
+            $("#message_page_edit").hide();
+            $(".loading").show();
+        },
+        beforeSerialize: () => {
+            /* Before serialize */
+            for (instance in CKEDITOR.instances) {
+                CKEDITOR.instances[instance].updateElement();
             }
-        });
+            return true;
+        },
+        success: () => {
+            $(".loading").hide();
+            // FIXME: Use translation
+            $("#message_page_edit").html(
+                    '<span style="color:green;">Die Seite wurde gespeichert</span>'
+                    );
+            $("#message_page_edit").show();
+        }
+    });
 
-        bindEvents();
+    // check if a slug is free on changing system title or menu
+    $("input[name='slug']").keyup(() => slugOrLanguageChanged());
+
+    $("select[name='menu']").change(() => filterParentPages());
+
+    // check if slug is free and update parent page options
+    $("select[name='language']").change(() => {
         slugOrLanguageChanged();
         filterParentPages();
+    });
 
-        // AJAX submit page edit form
-        $("#pageform-edit").ajaxForm({
-            beforeSubmit: () => {
-                $("#message_page_edit").html("");
-                $("#message_page_edit").hide();
-                $(".loading").show();
-            },
-            beforeSerialize: () => {
-                /* Before serialize */
-                for (instance in CKEDITOR.instances) {
-                    CKEDITOR.instances[instance].updateElement();
-                }
-                return true;
-            },
-            success: () => {
-                $(".loading").hide();
-                // FIXME: Use translation
-                $("#message_page_edit").html(
-                        '<span style="color:green;">Die Seite wurde gespeichert</span>'
-                        );
-                $("#message_page_edit").show();
-            }
-        });
-
-        // check if a slug is free on changing system title or menu
-        $("input[name='slug']").keyup(() => slugOrLanguageChanged());
-
-        $("select[name='menu']").change(() => filterParentPages());
-
-        // check if slug is free and update parent page options
-        $("select[name='language']").change(() => {
-            slugOrLanguageChanged();
-            filterParentPages();
-        });
-
-        // bind event to "View" button at the bottom of page edit form
-        $("#btn-view-page").click(() => {
-            const url = "../?goid=" + $("#page_id").val();
-            // if page has unsaved changes open it in new window/tab
-            // else open it in the same window/tab
-            if (formChanged && !submitted) {
-                window.open(url);
-            } else {
-                location.href = url;
-            }
-        });
-    }
+    // bind event to "View" button at the bottom of page edit form
+    $("#btn-view-page").click(() => {
+        const url = "../?goid=" + $("#page_id").val();
+        // if page has unsaved changes open it in new window/tab
+        // else open it in the same window/tab
+        if (formChanged && !submitted) {
+            window.open(url);
+        } else {
+            location.href = url;
+        }
+    });
 });
 
 showAndHideFieldsByTypeWithoutEffects = () => {
@@ -165,6 +159,11 @@ showAndHideFieldsByType = () => {
         $("#menu_image_div").slideDown();
     }
 };
+
+
+/* global Translation, formChanged, submitted, bootbox, instance, CKEDITOR */
+
+let AllTypes = {};
 
 // this shows a thumbnail of the selected file on text inputs with
 // kcfinder image uploader attached
@@ -259,17 +258,16 @@ slugOrLanguageChanged = () => {
             .first()
             .data("slug-free-url");
 
-    if (url) {
-        $.get(url, data, function (text) {
-            if (text === "yes") {
-                $("input[name='slug']").removeClass("error-field");
-                $("select[name='language']").removeClass("error-field");
-            } else {
-                $("input[name='slug']").addClass("error-field");
-                $("select[name='language']").addClass("error-field");
-            }
-        });
-    }
+    $.get(url, data, function (text) {
+        if (text === "yes") {
+            $("input[name='slug']").removeClass("error-field");
+            $("select[name='language']").removeClass("error-field");
+        } else {
+            $("input[name='slug']").addClass("error-field");
+            $("select[name='language']").addClass("error-field");
+        }
+    });
+
 };
 
 // filter parent pages by selected language and menu
@@ -286,9 +284,7 @@ filterParentPages = () => {
     const url = $(".main-form")
             .first()
             .data("parent-pages-url");
-    if (url) {
-        $.get(url, data, function (text, status) {
-            $("select[name='parent_id']").html(text);
-        });
-    }
+    $.get(url, data, function (text, status) {
+        $("select[name='parent_id']").html(text);
+    });
 };

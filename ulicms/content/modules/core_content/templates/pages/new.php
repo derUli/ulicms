@@ -563,7 +563,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
 
     BackendHelper::enqueueEditorScripts();
 
-    enqueueScriptFile(ModuleHelper::buildRessourcePath("core_content", "js/pages/page.js"));
+    enqueueScriptFile(ModuleHelper::buildRessourcePath("core_content", "js/pages/form.js"));
 
     combinedScriptHtml();
 

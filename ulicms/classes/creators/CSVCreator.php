@@ -10,11 +10,10 @@ use UliCMS\Utils\CacheUtil;
 // this class renders a content as csv
 class CSVCreator {
 
-    public $target_file = null;
     public $content = null;
     public $title = null;
 
-    public function __construct() {
+    protected function renderContent() {
         $this->title = get_title();
         ob_start();
 
@@ -53,11 +52,14 @@ class CSVCreator {
     }
 
     public function render(): string {
-        $uid = CacheUtil::getCurrentUid();
+        $cacheUid = CacheUtil::getCurrentUid();
         $adapter = CacheUtil::getAdapter();
-        if ($adapter and $adapter->has($uid)) {
-            return $adapter->get($uid);
+        // if it is in cache return it from there
+        if ($adapter and $adapter->has($cacheUid)) {
+            return $adapter->get($cacheUid);
         }
+
+        $this->renderContent();
 
         $data = $this->getData();
 
@@ -65,7 +67,7 @@ class CSVCreator {
         $csv_string .= getCSV($data[1]);
 
         if ($adapter) {
-            $adapter->set($uid, $csv_string, CacheUtil::getCachePeriod());
+            $adapter->set($cacheUid, $csv_string, CacheUtil::getCachePeriod());
         }
         return $csv_string;
     }

@@ -57,6 +57,7 @@ class ModuleHelper extends Helper {
         while ($dataset = Database::fetchObject($result)) {
             $content = $dataset->content;
             $content = str_replace("&quot;", "\"", $content);
+
             // TODO: refactor this if-hell
             if (!is_null($dataset->module) and ! empty($dataset->module) and $dataset->type == "module") {
                 if (!$module or ( $module and $dataset->module == $module)) {

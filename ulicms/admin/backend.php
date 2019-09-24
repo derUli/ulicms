@@ -65,11 +65,6 @@ if (is_logged_in()) {
 
 header("Content-Type: text/html; charset=UTF-8");
 
-// TODO: Ajax Handlers are deprcated since 2019.3 and will get removed in 2020.1
-
-do_event("before_ajax_handler");
-do_event("after_ajax_handler");
-
 // run controller methods if called
 do_event("before_backend_run_methods");
 ControllerRegistry::runMethods();

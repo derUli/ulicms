@@ -4,6 +4,7 @@ Neue Features:
 * Serverseitige Pagination für Seitenverwaltung
 * Diverse Performance Verbesserungen
 * CKEditor aktualisiert auf Version 4.12.1
+* Ausgabe von Content als PDF wird nun auch im Cache gespeichert
 
 Neue API-Methoden
 * User->getAllGroups(): array
@@ -21,6 +22,7 @@ Entfernte API-Methoden:
 
 Verbesserungen:
 * Übersetzung "Limit" in "Einträge je Seite" umbenannt
+* Cachings von Content-Ausgaben im *.pdf, *.csv, *.json und *.txt Format optimiert
 
 Entfernte Features:
 * Sortierung der Seitenliste und Dropdown Filter

@@ -10,11 +10,10 @@ use UliCMS\Utils\CacheUtil;
 // this class renders a page as plain text
 class PlainTextCreator {
 
-    public $target_file = null;
     public $content = null;
-    public $title = null;
 
-    public function __construct() {
+    // render html content to string
+    protected function renderContent(): void {
         ob_start();
         echo get_title();
         echo "\r\n";
@@ -32,13 +31,17 @@ class PlainTextCreator {
     }
 
     public function render(): string {
-        $uid = CacheUtil::getCurrentUid();
+        $cacheUid = CacheUtil::getCurrentUid();
         $adapter = CacheUtil::getAdapter();
 
         // return the rendered text from cache if it exists
-        if ($adapter and $adapter->has($uid)) {
-            return $adapter->get($uid);
+        if ($adapter and $adapter->has($cacheUid)) {
+            return $adapter->get($cacheUid);
         }
+
+        // if the generated txt is not in cache yet
+        // generate it
+        $this->renderContent();
 
         // clean up html stuff
         $this->content = br2nlr($this->content);
@@ -55,7 +58,7 @@ class PlainTextCreator {
 
         // save this in cache
         if ($adapter) {
-            $adapter->set($uid, $this->content, CacheUtil::getCachePeriod());
+            $adapter->set($cacheUid, $this->content, CacheUtil::getCachePeriod());
         }
         return $this->content;
     }

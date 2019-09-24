@@ -13,7 +13,7 @@ class JSONCreator {
     public $content = null;
     public $title = null;
 
-    public function __construct() {
+    protected function renderContent() {
         $this->title = get_title();
         ob_start();
         content();
@@ -21,11 +21,17 @@ class JSONCreator {
     }
 
     public function render(): string {
-        $uid = CacheUtil::getCurrentUid();
+        $cacheUid = CacheUtil::getCurrentUid();
+
+
         $adapter = CacheUtil::getAdapter();
-        if ($adapter and $adapter->has($uid)) {
-            return $adapter->get($uid);
+        // if it is in cache return it from cache
+        if ($adapter and $adapter->has($cacheUid)) {
+            return $adapter->get($cacheUid);
         }
+
+        // generate the json
+        $this->renderContent();
 
         $data = [];
         $this->content = str_replace("\r\n", "\n", $this->content);
@@ -40,7 +46,7 @@ class JSONCreator {
                 JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
         );
         if ($adapter) {
-            $adapter->set($uid, $json_string, CacheUtil::getCachePeriod());
+            $adapter->set($cacheUid, $json_string, CacheUtil::getCachePeriod());
         }
         return $json_string;
     }

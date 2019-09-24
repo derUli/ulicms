@@ -40,7 +40,6 @@ class NumberFormatHelper extends Helper {
     }
 
     // Use this to format the time at "Online since"
-    // Todo: use a packagist package to format relative times
     public static function formatTime(int $time): string {
         $dateTime = new DateTime();
         $dateTime->setTimestamp($time);
