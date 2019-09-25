@@ -45,6 +45,7 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
             "../node_modules/bootbox/bootbox.min.js",
             $select2TranslationFile,
             "../node_modules/datatables/media/js/jquery.dataTables.min.js",
+            "../node_modules/zenscroll/zenscroll-min.js",
             "../lib/js/global.js",
         );
         ?>
@@ -62,7 +63,6 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
 
         require "inc/touch_icons.php";
         ?>
-
         <link rel="stylesheet" type="text/css"
               href="scripts/vallenato/vallenato.css" />
         <link rel="stylesheet" type="text/css"

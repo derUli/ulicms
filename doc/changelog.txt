@@ -5,6 +5,7 @@ Neue Features:
 * Diverse Performance Verbesserungen
 * CKEditor aktualisiert auf Version 4.12.1
 * Ausgabe von Content als PDF wird nun auch im Cache gespeichert
+* Nach-Oben Pfeil in der rechten unten Ecke hinzugefügt
 
 Neue API-Methoden
 * User->getAllGroups(): array
