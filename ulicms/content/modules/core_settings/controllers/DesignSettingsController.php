@@ -157,8 +157,9 @@ class DesignSettingsController extends Controller {
         }
 
         $screenshotFiles = array(
-            "screenshot.jpg",
-            "screenshot.gif"
+			"screenshot.jpg",
+			"screenshot.png",
+			"screenshot.gif"
         );
         foreach ($screenshotFiles as $file) {
             $fullPath = getTemplateDirPath($theme) . $file;
