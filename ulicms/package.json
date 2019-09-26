@@ -2,7 +2,7 @@
     "name": "ulicms",
     "description": "Open Source Content Management System",
     "dependencies": {
-        "@fortawesome/fontawesome-free": "^5.11.1",
+        "@fortawesome/fontawesome-free": "^5.11.2",
         "bootbox": "4.x",
         "bootstrap": "3.x",
         "bootstrap-toggle": "2.x",
@@ -14,7 +14,8 @@
         "jscolor-picker": "2.x",
         "password-strength-meter": "1.x",
         "select2": "4.0.10",
-        "slug": "1.x"
+        "slug": "1.x",
+        "zenscroll": "^4.0.2"
     },
     "license": "The BSD License",
     "private": true

@@ -39,6 +39,15 @@ body {
     -ms-overflow-style: scrollbar;
 }
 
+#scroll-to-top{
+    position: fixed;
+    bottom: 10px;
+    right: 20px;
+    cursor: pointer;
+    display: none;
+    font-size: 30px;
+}
+
 button:disabled, .disabled {
     cursor: not-allowed;
     pointer-events: all !important;

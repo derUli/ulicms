@@ -1,4 +1,7 @@
 <?php
+
+use function UliCMS\HTML\icon;
+
 $menuTranslation = new JsTranslation(
         array("logout", "on", "off"), "MenuTranslation");
 $menuTranslation->render();
@@ -39,6 +42,9 @@ $passwordSecurityTranslation->render();
     <?php do_event("admin_copyright_footer_right"); ?>
 </p>
 </div>
+</div>
+<div id="scroll-to-top">
+    <?php echo icon("fas fa-arrow-circle-up"); ?>
 </div>
 <?php do_event("backend_footer"); ?>
 </body>
