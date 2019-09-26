@@ -25,8 +25,8 @@ Verbesserungen:
 * Cachings von Content-Ausgaben im *.pdf, *.csv, *.json und *.txt Format optimiert
 
 Entfernte Features:
-* Sortierung der Seitenliste und Dropdown Filter
-  Diese Features werden in den nächsten UliCMS Releases erneut hinzugefügt werden.
+* Dropdown Filter
+  Diese Features werden in den nächsten UliCMS Releases erneut integriert werden.
 
 ===== Neues in UliCMS 2019.4 =====
 

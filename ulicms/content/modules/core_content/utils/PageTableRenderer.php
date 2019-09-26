@@ -21,12 +21,24 @@ class PageTableRenderer {
 
     const MODULE_NAME = "core_content";
 
+    // get paginated data for DataTables
+    // returns an array with can be returned to client
+    // as json
+    // $start - first item index of pagination
+    // $length - count of items shown at the page
+    // $draw - this is sent by DataTables and must be returned
+    // It's used by DataTables to ensure that always the latest data is shown
+    // $search - A search subject. If set the results are filtered by it
+    // $view show all not deleted pages or the recyle bin
+    // $order = order array with sorcolumn, and dir (direction)
+    // returns an array of results
     public function getData(
             int $start = 0,
             int $length = 10,
             int $draw = 1,
             ?string $search = null,
-            string $view = "default"
+            string $view = "default",
+            ?array $order = null
     ): array {
         $result = [];
         $result["data"] = [];
@@ -41,6 +53,25 @@ class PageTableRenderer {
             "language",
             "deleted_at"
         ];
+
+        $orderColumns = [
+            "title",
+            "menu",
+            "position",
+            "parent_id",
+            "active"
+        ];
+
+        $sortColumn = "position";
+        $sortDirection = "asc";
+
+        if ($order) {
+            $sortDirection = (isset($order["dir"]) and $order["dir"] === "desc") ? "desc" : "asc";
+            $columnNumber = isset($order["column"]) ? intval($order["column"]) : 0;
+            if ($columnNumber >= 0 and $columnNumber < count($orderColumns)) {
+                $sortColumn = $orderColumns[$columnNumber];
+            }
+        }
 
         $user = $this->user;
         $groups = $user->getAllGroups();
@@ -79,7 +110,7 @@ class PageTableRenderer {
             $where .= " and lower(title) like '{$placeHolderString}'";
         }
 
-        $where .= " order by menu, position";
+        $where .= " order by $sortColumn $sortDirection";
 
         // get filtered pages count
         $countSql = "select count(id) as count from {prefix}content "

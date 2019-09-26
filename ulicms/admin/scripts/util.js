@@ -154,7 +154,6 @@ initDataTables = (rootElement) => {
             language: {
                 url: $("body").data("datatables-translation")
             },
-            ordering: !url,
             processing: !!url,
             serverSide: !!url,
             ajax: url ? {

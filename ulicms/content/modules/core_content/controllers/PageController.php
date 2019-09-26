@@ -462,6 +462,9 @@ class PageController extends Controller {
         $draw = Request::getVar("draw", 1, "int");
         $search = $_REQUEST["search"]["value"];
 
+        // if the client requested sorting apply it
+        $order = is_array($_REQUEST["order"]) ? $_REQUEST["order"][0] : null;
+
         $renderer = new PageTableRenderer();
 
         $data = $renderer->getData(
@@ -469,7 +472,8 @@ class PageController extends Controller {
                 $length,
                 $draw,
                 $search,
-                $this->getPagesListView()
+                $this->getPagesListView(),
+                $order
         );
 
         $json = json_encode($data, JSON_UNESCAPED_SLASHES);
