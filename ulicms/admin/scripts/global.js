@@ -157,7 +157,8 @@ $(() => {
     });
 
     // scroll to top arrow at bottom right
-    $("#scroll-to-top").click(() => {
+    $("#scroll-to-top").click((event) => {
+		event.preventDefault();
         zenscroll.toY(0);
     });
 });

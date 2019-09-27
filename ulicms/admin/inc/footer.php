@@ -43,9 +43,9 @@ $passwordSecurityTranslation->render();
 </p>
 </div>
 </div>
-<div id="scroll-to-top">
+<a href="#" id="scroll-to-top">
     <?php echo icon("fas fa-arrow-circle-up"); ?>
-</div>
+</a>
 <?php do_event("backend_footer"); ?>
 </body>
 </html>
