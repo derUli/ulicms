@@ -3,7 +3,7 @@
 use MediaEmbed\MediaEmbed;
 
 class CoreMediaController extends MainClass {
-
+	
     public function beforeContentFilter($input) {
         $data = CustomData::get();
 
@@ -12,7 +12,7 @@ class CoreMediaController extends MainClass {
         return $mediaEmbedEnabled ? $this->replaceLinks($input) : $input;
     }
 
-    // This method replaces links to services like youtube with embedded media
+    // This method replaces links to media services like youtube with embedded media
     public function replaceLinks($input) {
         $content = mb_convert_encoding($input, 'HTML-ENTITIES', "UTF-8");
 

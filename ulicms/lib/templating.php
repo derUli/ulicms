@@ -218,7 +218,7 @@ function get_article_meta(?string $page = null): ?object {
     $result = db_query($sql);
     if (db_num_rows($result) > 0) {
         $dataset = Database::fetchObject($result);
-        $dataset->excerpt = $dataset->excerpt ? replaceShortcodesWithModules($dataset->excerpt) : null;
+        $dataset->excerpt = $dataset->excerpt ? replaceShortcodesWithModules($dataset->excerpt) : "";
     }
     $dataset = apply_filter($dataset, "get_article_meta");
     return $dataset;
