@@ -1,6 +1,6 @@
 {
     "source": "extend",
-    "version": "2.4",
+    "version": "2.5",
     "embed": false,
     "controllers": {
         "CoreUpgradeController": "controllers/CoreUpgradeController"
