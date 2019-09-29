@@ -3,6 +3,7 @@
 use UliCMS\Security\Permissions\PagePermissions;
 use UliCMS\Models\Content\Comment;
 use UliCMS\Models\Content\VCS;
+use UliCMS\Exceptions\DatasetNotFoundException;
 
 class Page extends Content {
 
@@ -112,7 +113,7 @@ class Page extends Content {
             $result = Database::fetchObject($result);
             $this->fillVars($result);
         } else {
-            throw new Exception("No content with id $id");
+            throw new DatasetNotFoundException("No content with id $id");
         }
     }
 
@@ -127,7 +128,7 @@ class Page extends Content {
             $this->fillVars($dataset);
             return;
         }
-        throw new Exception("No such page");
+        throw new DatasetNotFoundException("No such page");
     }
 
     public function save() {
