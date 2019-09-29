@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use UliCMS\Exceptions\FileNotFoundException;
+use UliCMS\Exceptions\DatasetNotFoundException;
 use UliCMS\Exceptions\UnknownContentTypeException;
 use UliCMS\Models\Content\TypeMapper;
 
@@ -25,7 +25,7 @@ class ContentFactory {
             $dataset = Database::fetchObject($result);
             return self::getContentObjectByID($dataset);
         }
-        throw new FileNotFoundException("No page with id $id");
+        throw new DatasetNotFoundException("No page with id $id");
     }
 
     public static function getBySlugAndLanguage(
@@ -41,7 +41,7 @@ class ContentFactory {
             $dataset = Database::fetchObject($result);
             return self::getContentObjectByID($dataset);
         }
-        throw new FileNotFoundException("No page with this combination of "
+        throw new DatasetNotFoundException("No page with this combination of "
                 . "$name and $language");
     }
 

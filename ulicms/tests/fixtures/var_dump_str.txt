@@ -48,6 +48,8 @@
   NULL
   ["theme"]=>
   NULL
+  ["robots"]=>
+  NULL
   ["custom_data"]=>
   array(0) {
   }

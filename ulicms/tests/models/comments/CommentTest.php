@@ -2,7 +2,7 @@
 
 use UliCMS\Models\Content\Comment;
 use UliCMS\Constants\CommentStatus;
-use UliCMS\Exceptions\FileNotFoundException;
+use UliCMS\Exceptions\DatasetNotFoundException;
 use UliCMS\Utils\CacheUtil;
 
 class CommentTest extends \PHPUnit\Framework\TestCase {
@@ -220,7 +220,7 @@ class CommentTest extends \PHPUnit\Framework\TestCase {
         try {
             $comment = new Comment($id);
             $this->fail("expected exception not thrown");
-        } catch (FileNotFoundException $e) {
+        } catch (DatasetNotFoundException $e) {
             $this->assertEquals("no comment with id " . intval($id), $e->getMessage());
         }
     }
