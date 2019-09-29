@@ -148,6 +148,8 @@ class PageController extends Controller {
 
         $model->meta_description = Request::getVar("meta_description");
         $model->meta_keywords = Request::getVar("meta_keywords");
+        $model->robots = Request::getVar("robots", null, "str");
+
         $model->language = Request::getVar("language");
 
         if ($model instanceof Module_Page) {

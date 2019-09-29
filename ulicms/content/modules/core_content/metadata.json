@@ -22,7 +22,8 @@
                 "UliCMS\\CoreContent\\PageTableRenderer" : "utils/PageTableRenderer.php",
                 "UliCMS\\CoreContent\\Partials\\ViewButtonRenderer" : "utils/buttons/ViewButtonRenderer.php", "UliCMS\\CoreContent\\Partials\\EditButtonRenderer" : "utils/buttons/EditButtonRenderer.php",
                 "UliCMS\\CoreContent\\Partials\\DeleteButtonRenderer" : "utils/buttons/DeleteButtonRenderer.php",
-                "UliCMS\\CoreContent\\Partials\\UnDeleteButtonRenderer" : "utils/buttons/UnDeleteButtonRenderer.php"
+                "UliCMS\\CoreContent\\Partials\\UnDeleteButtonRenderer" : "utils/buttons/UnDeleteButtonRenderer.php",
+				"UliCMS\\CoreContent\\UIUtils": "utils/UIUtils.php"
         },
         "controller_function_permissions": {
         "PageController::createPost": "pages_create",
