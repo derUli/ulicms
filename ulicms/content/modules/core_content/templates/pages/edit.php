@@ -11,6 +11,8 @@ use UliCMS\Models\Content\Categories;
 use UliCMS\Models\Content\Language;
 use UliCMS\Models\Content\Types\DefaultContentTypes;
 use UliCMS\Helpers\NumberFormatHelper;
+use UliCMS\HTML\Input;
+use UliCMS\CoreContent\UIUtils;
 
 $permissionChecker = new PermissionChecker(get_user_id());
 if ($permissionChecker->hasPermission("pages")) {
@@ -355,6 +357,15 @@ if ($permissionChecker->hasPermission("pages")) {
                                    ?>"
                                    maxlength="200"
                                    placeholder="<?php translate("comma_separated"); ?>">
+                            <br/>
+                            <strong>
+                                <?php translate("robots"); ?>
+                            </strong>
+                            <?php
+                            echo Input::singleSelect("robots", $row->robots,
+                                    UIUtils::getRobotsListItems());
+                            ?>
+
                             <div class="typedep" id="article-metadata">
                                 <br /> <strong><?php translate("author_name"); ?></strong><br /> <input
                                     type="text" name="article_author_name"

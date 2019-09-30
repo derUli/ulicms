@@ -2,6 +2,8 @@
 
 use UliCMS\Models\Content\Comment;
 use UliCMS\Models\Content\VCS;
+use UliCMS\Exceptions\DatasetNotFoundException;
+use UliCMS\Security\Permissions\PagePermissions;
 
 class PageTest extends \PHPUnit\Framework\TestCase {
 
@@ -667,6 +669,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $page = new Page($page->id);
         $this->assertNull($page->meta_description);
         $this->assertNull($page->meta_keywords);
+        $this->assertNull($page->robots);
 
         $this->cleanUp();
     }
@@ -792,7 +795,12 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertGreaterThanOrEqual(1, count($page->getParent()->getChildren()));
     }
 
-    public function testGetHistoryReturnsNothing() {
+    public function testGetHistoryNotPersistentReturnsNothing() {
+        $page = new Page();
+        $this->assertCount(0, $page->getHistory());
+    }
+
+    public function testGetHistoryWithPersistentReturnsNothing() {
 
         $page = new Page();
 
@@ -932,6 +940,75 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue($page->isErrorPage());
 
         $page->makeErrorPage404(false);
+    }
+
+    public function testCreatePageWithRobots() {
+        $page = new Page();
+        $page->title = 'Unit Test ' . time();
+        $page->slug = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "Some Text";
+        $page->comments_enabled = true;
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->meta_description = null;
+        $page->meta_keywords = null;
+        $page->robots = "noindex, nofollow";
+        $page->save();
+
+        $this->assertNotNull($page->id);
+
+        $page = new Page($page->id);
+        $this->assertEquals("noindex, nofollow", $page->robots);
+
+        $this->cleanUp();
+    }
+
+    public function testLoadByIdThrowsException() {
+        $page = new Page();
+
+        $this->expectException(DatasetNotFoundException::class);
+
+        $page->loadByID(PHP_INT_MAX);
+    }
+
+    public function testLoadBySlugAndLanguageThrowsException() {
+        $page = new Page();
+
+        $this->expectException(DatasetNotFoundException::class);
+
+        $page->loadBySlugAndLanguage("erdogan-kokuyor", "tr");
+    }
+
+    public function testSetAndGetPermissions() {
+        $permissions = new PagePermissions(
+                [
+            "group" => true,
+            "owner" => true
+                ]
+        );
+
+        $page = new Page();
+        $page->setPermissions($permissions);
+
+        $this->assertEquals($permissions, $page->getPermissions());
+    }
+
+    public function testUndelete() {
+        $page = new Page();
+        $page->title = 'Unit Test ' . time();
+        $page->slug = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "Some Text";
+        $page->comments_enabled = true;
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->save();
+        $page->delete();
+
+        $page->undelete();
+
+        $this->assertFalse($page->isDeleted());
     }
 
 }

@@ -7,12 +7,15 @@ use UliCMS\Models\Content\Categories;
 use UliCMS\Models\Content\Language;
 use UliCMS\Models\Content\Types\DefaultContentTypes;
 use UliCMS\Helpers\NumberFormatHelper;
+use UliCMS\CoreContent\UIUtils;
+use UliCMS\HTML\Input;
 
 $parent_id = Request::getVar("parent_id", null, "int");
 
 $permissionChecker = new ACL();
 $groups = db_query("SELECT id, name from " . tbname("groups"));
-if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermission("pages_create")) {
+if ($permissionChecker->hasPermission("pages")
+        and $permissionChecker->hasPermission("pages_create")) {
 
     $editor = get_html_editor();
 
@@ -39,14 +42,21 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                 "id" => "pageform",
                 "style" => "display:none",
                 "class" => "pageform main-form",
-                "data-get-content-types-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "getContentTypes"),
-                "data-slug-free-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "checkSlugFree"),
-                "data-parent-pages-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "filterParentPages")
+                "data-get-content-types-url" =>
+                ModuleHelper::buildMethodCallUrl(PageController::class,
+                        "getContentTypes"),
+                "data-slug-free-url" =>
+                ModuleHelper::buildMethodCallUrl(PageController::class,
+                        "checkSlugFree"),
+                "data-parent-pages-url" =>
+                ModuleHelper::buildMethodCallUrl(PageController::class,
+                        "filterParentPages")
     ));
     ?>
     <p>
         <a href="<?php echo ModuleHelper::buildActionURL("pages"); ?>"
-           class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
+           class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i>
+            <?php translate("back") ?></a>
     </p>
     <input type="hidden" name="add" value="add">
     <div id="accordion-container">
@@ -248,10 +258,26 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
     <div class="typedep" id="tab-metadata">
         <h2 class="accordion-header"><?php translate("metadata"); ?></h2>
         <div class="accordion-content">
-            <strong><?php translate("meta_description"); ?>
-            </strong><br /> <input type="text" name="meta_description" value=''
-                                   maxlength="200"> <br /> <strong><?php translate("meta_keywords"); ?>
-            </strong><br /> <input type="text" name="meta_keywords" value='' maxlength="200" placeholder="<?php translate("comma_separated"); ?>">
+            <strong>
+                <?php translate("meta_description"); ?>
+            </strong>
+            <br />
+            <input type="text" name="meta_description" value=''
+                   maxlength="200">
+            <br />
+            <strong>
+                <?php translate("meta_keywords"); ?>
+            </strong>
+            <br />
+            <input type="text" name="meta_keywords" value='' maxlength="200" placeholder="<?php translate("comma_separated"); ?>">
+            <br/>
+            <strong>
+                <?php translate("robots"); ?>
+            </strong>
+            <?php
+            echo Input::singleSelect("robots", null,
+                    UIUtils::getRobotsListItems());
+            ?>
             <div class="typedep" id="article-metadata">
                 <br /> <strong><?php translate("author_name"); ?></strong><br /> <input
                     type="text" name="article_author_name" value="" maxlength="80"> <br />

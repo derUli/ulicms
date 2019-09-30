@@ -3,6 +3,7 @@
 use UliCMS\Security\Permissions\PagePermissions;
 use UliCMS\Models\Content\Comment;
 use UliCMS\Models\Content\VCS;
+use UliCMS\Exceptions\DatasetNotFoundException;
 
 class Page extends Content {
 
@@ -31,6 +32,7 @@ class Page extends Content {
     public $meta_keywords = null;
     private $deleted_at = null;
     public $theme = null;
+    public $robots = null;
     public $custom_data = null;
     public $type = "page";
     public $og_title = "";
@@ -76,6 +78,7 @@ class Page extends Content {
         $this->meta_keywords = $result->meta_keywords;
         $this->deleted_at = $result->deleted_at;
         $this->theme = $result->theme;
+        $this->robots = $result->robots;
         if ($this->customData === null) {
             $this->custom_data = [];
         }
@@ -110,7 +113,7 @@ class Page extends Content {
             $result = Database::fetchObject($result);
             $this->fillVars($result);
         } else {
-            throw new Exception("No content with id $id");
+            throw new DatasetNotFoundException("No content with id $id");
         }
     }
 
@@ -125,7 +128,7 @@ class Page extends Content {
             $this->fillVars($dataset);
             return;
         }
-        throw new Exception("No such page");
+        throw new DatasetNotFoundException("No such page");
     }
 
     public function save() {
@@ -146,7 +149,8 @@ class Page extends Content {
 				`group_id`, lastchangeby, views, menu, position,
                                 parent_id, access, meta_description,
                                 meta_keywords, deleted_at,
-				theme, custom_data, `type`, og_title, og_image,
+				theme, robots,
+                                custom_data, `type`, og_title, og_image,
                                 og_description, cache_control, hidden,
                                 comments_enabled, show_headline) VALUES (";
 
@@ -205,6 +209,12 @@ class Page extends Content {
             $sql .= " NULL ,";
         } else {
             $sql .= "'" . Database::escapeValue($this->theme) . "',";
+        }
+
+        if ($this->robots === null) {
+            $sql .= " NULL ,";
+        } else {
+            $sql .= "'" . Database::escapeValue($this->robots) . "',";
         }
 
         if ($this->custom_data === null) {
@@ -304,6 +314,12 @@ class Page extends Content {
             $sql .= "theme=NULL ,";
         } else {
             $sql .= "theme='" . Database::escapeValue($this->theme) . "',";
+        }
+
+        if ($this->robots === null) {
+            $sql .= "robots=NULL ,";
+        } else {
+            $sql .= "robots='" . Database::escapeValue($this->robots) . "',";
         }
 
         if ($this->custom_data === null) {

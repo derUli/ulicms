@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use UliCMS\Exceptions\FileNotFoundException;
+use UliCMS\Exceptions\DatasetNotFoundException;
 
 abstract class Content extends Model {
 
@@ -35,7 +35,7 @@ abstract class Content extends Model {
         }
         try {
             return ContentFactory::getAllByParent($this->getID(), $order);
-        } catch (FileNotFoundException $e) {
+        } catch (DatasetNotFoundException $e) {
             return [];
         }
     }

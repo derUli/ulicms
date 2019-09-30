@@ -313,7 +313,19 @@ class Template {
             $dir .= "/";
         }
 
-        $robots = Settings::get("robots");
+        $robots = null;
+
+        // if the robots value is set for the current
+        // page, use it as robots meta tag
+        // else do fallback to the default setting
+        try {
+            $page = ContentFactory::getCurrentPage();
+        } catch (DatsetNotFoundException $e) {
+            $robots = Settings::get("robots");
+        } finally {
+            $robots = $page->robots ? $page->robots : Settings::get("robots");
+        }
+
         if ($robots) {
             $robots = apply_filter($robots, "meta_robots");
             echo '<meta name="robots" content="' . $robots . '"/>';

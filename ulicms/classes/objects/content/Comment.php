@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace UliCMS\Models\Content;
 
-use stdClass;
 use Database;
 use ContentFactory;
 use UliCMS\Constants\CommentStatus;
 use InvalidArgumentException;
 use Model;
 use StringHelper;
-use UliCMS\Exceptions\FileNotFoundException;
+use UliCMS\Exceptions\DatasetNotFoundException;
 use UliCMS\Security\SpamChecker\SpamFilterConfiguration;
 use UliCMS\Security\SpamChecker\CommentSpamChecker;
 
@@ -36,7 +35,7 @@ class Comment extends Model {
     public function loadByID($id) {
         $result = Database::selectAll("comments", [], "id=" . intval($id));
         if ($result == null or ! Database::any($result)) {
-            throw new FileNotFoundException("no comment with id " .
+            throw new DatasetNotFoundException("no comment with id " .
                     intval($id));
         }
         $this->fillVars($result);

@@ -28,3 +28,5 @@ add_translation("confirm_undelete_page",
         "Möchten Sie die Seite \"%title%\" wiederherstellen?");
 
 add_translation("entries_per_page", "Einträge je Seite");
+
+add_translation("robots", "Robots");

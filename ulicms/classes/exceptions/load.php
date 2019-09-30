@@ -6,6 +6,7 @@ $classes = [
     "NotImplementedException",
     "DatabaseException",
     "SqlException",
+    "DatasetNotFoundException",
     "ConnectionFailedException",
     "FileNotFoundException",
     "ArgumentNullException",

@@ -1,7 +1,7 @@
 <?php
 
 use UliCMS\Models\Content\Comment;
-use UliCMS\Exceptions\FileNotFoundException;
+use UliCMS\Exceptions\DatasetNotFoundException;
 use UliCMS\HTML as HTML;
 use UliCMS\Exceptions\NotImplementedException;
 use UliCMS\Constants\CommentStatus;
@@ -41,7 +41,7 @@ class CommentsController extends MainClass {
         $content = null;
         try {
             $content = ContentFactory::getByID($content_id);
-        } catch (FileNotFoundException $e) {
+        } catch (DatasetNotFoundException $e) {
             ExceptionResult(get_translation("no_such_content"));
         }
 
@@ -108,7 +108,7 @@ class CommentsController extends MainClass {
                     HttpStatusCode::OK,
                     HTMLMinify::OPTIMIZATION_ADVANCED
             );
-        } catch (FileNotFoundException $e) {
+        } catch (DatasetNotFoundException $e) {
             HTMLResult(get_translation("not_found"), 404);
         }
     }
