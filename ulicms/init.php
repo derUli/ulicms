@@ -3,6 +3,7 @@
 use UliCMS\Exceptions\AccessDeniedException;
 use UliCMS\Exceptions\ConnectionFailedException;
 use UliCMS\Exceptions\FileNotFoundException;
+use UliCMS\Exceptions\SqlException;
 use UliCMS\Constants\AuditLog;
 use UliCMS\Registries\HelperRegistry;
 use UliCMS\Models\Content\TypeMapper;
@@ -393,7 +394,6 @@ $memory_limit = Settings::get("memory_limit");
 if ($memory_limit) {
     @ini_set('memory_limit', $memory_limit);
 }
-
 
 $cache_period = Settings::get("cache_period");
 
