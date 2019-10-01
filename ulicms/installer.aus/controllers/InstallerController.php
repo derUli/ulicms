@@ -1,6 +1,7 @@
 <?php
 
 require_once "../vendor/autoload.php";
+require_once "../lib/files.php";
 
 class InstallerController {
 
@@ -72,7 +73,9 @@ class InstallerController {
 
     public static function getFooter() {
         $version = new UliCMSVersion();
-        return "&copy; 2011 - " . $version->getReleaseYear() . " by <a href=\"http://www.ulicms.de\" target=\"_blank\">UliCMS</a>";
+        return "&copy; 2011 - " . $version->getReleaseYear() .
+                " by <a href=\"http://www.ulicms.de\" "
+                . "target=\"_blank\">UliCMS</a>";
     }
 
     public static function submitAdminData() {
@@ -85,7 +88,11 @@ class InstallerController {
     }
 
     public static function submitTryConnect() {
-        @$connection = mysqli_connect($_POST["servername"], $_POST["loginname"], $_POST["passwort"]);
+        @$connection = mysqli_connect(
+                $_POST["servername"],
+                $_POST["loginname"],
+                $_POST["passwort"]
+        );
         if ($connection == false) {
             die(TRANSLATION_DB_CONNECTION_FAILED);
         }
@@ -99,7 +106,12 @@ class InstallerController {
 
         if (!in_array($_POST["datenbank"], $databases)) {
             // Try to create database if it not exists
-            mysqli_query($connection, "CREATE DATABASE " . mysqli_real_escape_string($connection, $_POST["datenbank"]));
+            mysqli_query($connection, "CREATE DATABASE " .
+                    mysqli_real_escape_string(
+                            $connection,
+                            $_POST["datenbank"]
+                    )
+            );
         }
 
         @$select = mysqli_select_db($connection, $_POST["datenbank"]);
@@ -132,88 +144,101 @@ class InstallerController {
             $files[] = "../lib/migrations/up/opt/democontent.min.sql";
         }
 
-        $onefile = 100 / floatval(count($files));
-        $currentPercent = floatval($_SESSION["install_index"]) * $onefile;
+        $allSteps = count($files);
+        $currentStep = intval($_SESSION["install_index"]);
 
-        if ($_SESSION["install_index"] == count($files)) {
-            $str = TRANSLATION_INSTALL_X_OF_Y;
-            $str = str_ireplace("%x%", $_SESSION["install_index"], $str);
-            $str = str_ireplace("%y%", count($files), $str);
-            echo '<!--finish--><div style="background-color:green;height:50px; width:' . intval(100) . '%"></div>';
-            echo "<div class='info-text-progress'>" . $str . "</div>";
-        } else {
-            $sql_file = $files[$_SESSION["install_index"]];
-            $str = TRANSLATION_INSTALL_X_OF_Y;
-            $str = str_ireplace("%x%", $_SESSION["install_index"] + 1, $str);
-            $str = str_ireplace("%y%", count($files), $str);
-            @$connection = mysqli_connect($_SESSION["mysql_host"], $_SESSION["mysql_user"], $_SESSION["mysql_password"]) or die(TRANSLATION_DB_CONNECTION_FAILED);
+        echo ($currentStep >= $allSteps - 1 ?
+                '<!--finish-->' : ' <!--ok-->');
 
-            $select = mysqli_select_db($connection, $_SESSION["mysql_database"]);
+        $sql_file = $files[$currentStep];
 
-            mysqli_query($connection, "SET NAMES 'utf8mb4'") or die(mysqli_error($connection));
+        @$connection = mysqli_connect(
+                        $_SESSION["mysql_host"],
+                        $_SESSION["mysql_user"],
+                        $_SESSION["mysql_password"]
+                ) or die(TRANSLATION_DB_CONNECTION_FAILED);
 
-// sql_mode auf leer setzen, da sich UliCMS nicht im strict_mode betreiben lässt
-            mysqli_query($connection, "SET SESSION sql_mode = '';");
+        $select = mysqli_select_db($connection, $_SESSION["mysql_database"]);
 
-            if (!isset($_SESSION["salt"])) {
-                $salt = uniqid();
-                $_SESSION["salt"] = $salt;
-            }
+        mysqli_query($connection, "SET NAMES 'utf8mb4'")
+                or die(mysqli_error($connection));
 
-            if (!isset($_SESSION["ga_secret"])) {
-                $ga = new PHPGangsta_GoogleAuthenticator();
-                $ga_secret = $ga->createSecret();
-                $_SESSION["ga_secret"] = $ga_secret;
-            }
+        // sql_mode auf leer setzen, da sich UliCMS nicht im strict_mode betreiben lässt
+        mysqli_query($connection, "SET SESSION sql_mode = '';");
 
-            if (!isset($_SESSION["encrypted_password"])) {
-                $_SESSION["encrypted_password"] = hash("sha512", $_SESSION["salt"] . $_SESSION["admin_password"]);
-            }
-
-            $script = file_get_contents($sql_file);
-            $prefix = mysqli_real_escape_string($connection, $_SESSION["mysql_prefix"]);
-            $language = mysqli_real_escape_string($connection, $_SESSION["language"]);
-            $admin_user = mysqli_real_escape_string($connection, $_SESSION["admin_user"]);
-            $encrypted_password = mysqli_real_escape_string($connection, $_SESSION["encrypted_password"]);
-            $admin_lastname = mysqli_real_escape_string($connection, $_SESSION["admin_lastname"]);
-            $admin_firstname = mysqli_real_escape_string($connection, $_SESSION["admin_firstname"]);
-            $admin_email = mysqli_real_escape_string($connection, $_SESSION["admin_email"]);
-            $salt = mysqli_real_escape_string($connection, $_SESSION["salt"]);
-            $script = str_ireplace("{prefix}", $prefix, $script);
-            $script = str_ireplace("{language}", $language, $script);
-            $script = str_ireplace("{admin_user}", $admin_user, $script);
-            $script = str_ireplace("{encrypted_password}", $encrypted_password, $script);
-            $script = str_ireplace("{salt}", $salt, $script);
-            $script = str_ireplace("{ga_secret}", $_SESSION["ga_secret"], $script);
-            $script = str_ireplace("{admin_lastname}", $admin_lastname, $script);
-            $script = str_ireplace("{admin_firstname}", $admin_firstname, $script);
-            $script = str_ireplace("{admin_email}", $admin_email, $script);
-            $script = str_ireplace("{time}", time(), $script);
-
-            mysqli_multi_query($connection, $script);
-            while (mysqli_more_results($connection)) {
-                mysqli_next_result($connection);
-            }
-
-            $sqlFileName = mysqli_real_escape_string($connection, basename($sql_file));
-
-            mysqli_query($connection, "INSERT INTO {$prefix}dbtrack (component, name) values ('core', '$sqlFileName')");
-
-            echo '<!--ok--><div style="background-color:green;height:50px; width:' . intval($currentPercent) . '%"></div>';
-            echo "<div class='info-text-progress'>" . $str . "</div>";
-
-            $_SESSION["install_index"] += 1;
+        if (!isset($_SESSION["salt"])) {
+            $salt = uniqid();
+            $_SESSION["salt"] = $salt;
         }
+
+        if (!isset($_SESSION["ga_secret"])) {
+            $ga = new PHPGangsta_GoogleAuthenticator();
+            $ga_secret = $ga->createSecret();
+            $_SESSION["ga_secret"] = $ga_secret;
+        }
+
+        if (!isset($_SESSION["encrypted_password"])) {
+            $_SESSION["encrypted_password"] = hash("sha512",
+                    $_SESSION["salt"] . $_SESSION["admin_password"]);
+        }
+
+        $script = file_exists($sql_file) ? file_get_contents($sql_file) : '';
+        $prefix = mysqli_real_escape_string($connection,
+                $_SESSION["mysql_prefix"]);
+        $language = mysqli_real_escape_string($connection,
+                $_SESSION["language"]);
+        $admin_user = mysqli_real_escape_string($connection,
+                $_SESSION["admin_user"]);
+        $encrypted_password = mysqli_real_escape_string($connection,
+                $_SESSION["encrypted_password"]);
+        $admin_lastname = mysqli_real_escape_string($connection,
+                $_SESSION["admin_lastname"]);
+        $admin_firstname = mysqli_real_escape_string($connection,
+                $_SESSION["admin_firstname"]);
+        $admin_email = mysqli_real_escape_string($connection,
+                $_SESSION["admin_email"]);
+        $salt = mysqli_real_escape_string($connection,
+                $_SESSION["salt"]);
+        $script = str_ireplace("{prefix}", $prefix, $script);
+        $script = str_ireplace("{language}", $language, $script);
+        $script = str_ireplace("{admin_user}", $admin_user, $script);
+        $script = str_ireplace("{encrypted_password}", $encrypted_password,
+                $script);
+        $script = str_ireplace("{salt}", $salt, $script);
+        $script = str_ireplace("{ga_secret}", $_SESSION["ga_secret"], $script);
+        $script = str_ireplace("{admin_lastname}", $admin_lastname, $script);
+        $script = str_ireplace("{admin_firstname}", $admin_firstname, $script);
+        $script = str_ireplace("{admin_email}", $admin_email, $script);
+        $script = str_ireplace("{time}", time(), $script);
+
+        mysqli_multi_query($connection, $script);
+        while (mysqli_more_results($connection)) {
+            mysqli_next_result($connection);
+        }
+
+        $sqlFileName = mysqli_real_escape_string($connection,
+                basename($sql_file));
+
+        mysqli_query($connection, "INSERT INTO {$prefix
+                }dbtrack (component, name) values ('core', '$sqlFileName')");
+
+        echo "<progress value='$currentStep' max='$allSteps'>";
+        $_SESSION["install_index"] += 1;
     }
 
     public static function submitCreateConfig() {
         $template_path = "templates/CMSConfig.tpl";
         $content = file_get_contents($template_path);
-        $content = str_replace("{prefix}", $_SESSION["mysql_prefix"], $content);
-        $content = str_replace("{mysql_host}", $_SESSION["mysql_host"], $content);
-        $content = str_replace("{mysql_user}", $_SESSION["mysql_user"], $content);
-        $content = str_replace("{mysql_password}", $_SESSION["mysql_password"], $content);
-        $content = str_replace("{mysql_database}", $_SESSION["mysql_database"], $content);
+        $content = str_replace("{prefix}", $_SESSION["mysql_prefix"],
+                $content);
+        $content = str_replace("{mysql_host}", $_SESSION["mysql_host"],
+                $content);
+        $content = str_replace("{mysql_user}", $_SESSION["mysql_user"],
+                $content);
+        $content = str_replace("{mysql_password}", $_SESSION["mysql_password"],
+                $content);
+        $content = str_replace("{mysql_database}", $_SESSION["mysql_database"],
+                $content);
 
         copy("../lib/CMSConfigSample.php", "../CMSConfig.php");
 
@@ -228,7 +253,8 @@ class InstallerController {
             echo "<!--ok-->";
         } else {
             echo "<!--failed-->" . TRANSLATION_WRITE_CMS_CONFIG_FAILED;
-            echo "<p><textarea rows=10 class=\"form-control\" readonly>" . htmlspecialchars($content) . "</textarea></p>";
+            echo "<p><textarea rows=10 class=\"form-control\" readonly>" .
+            htmlspecialchars($content) . "</textarea></p>";
         }
     }
 

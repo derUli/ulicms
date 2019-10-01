@@ -10,6 +10,8 @@ Neue Features:
 
 Neue API-Methoden
 * User->getAllGroups(): array
+* _unesc($string): string
+* unesc($string): void
 
 Entfernte API-Methoden:
 * Settings::output(string $key, ?string $type = 'str'): void

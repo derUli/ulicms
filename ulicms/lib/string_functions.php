@@ -18,9 +18,17 @@ function sanitize(array & $array): void {
 }
 
 // TODO: Deprecate this
-// Implement new methods unesc() and _unesc()
+// use unesc() and _unesc() instead
 function unhtmlspecialchars(string $string): string {
+    return _unesc($string);
+}
+
+function _unesc(string $string): string {
     return html_entity_decode($string, ENT_COMPAT, "UTF-8");
+}
+
+function unesc(string $string): void {
+    echo _unesc($string);
 }
 
 function br2nlr(string $html
