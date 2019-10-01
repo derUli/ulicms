@@ -31,7 +31,12 @@ if ($permissionChecker->hasPermission("pages")) {
             ?>
             <div class="row">
                 <div class="col-xs-6">
-                    <a href="<?php echo ModuleHelper::buildMethodCallUrl(PageController::class, "emptyTrash"); ?>"
+                    <a href="<?php
+                    echo ModuleHelper::buildMethodCallUrl(
+                            PageController::class, "emptyTrash"
+                    );
+                    ?>"
+                       id="empty-trash"
                        class="btn btn-primary"><i
                             class="fas fa-broom"></i> <?php translate("empty_recycle_bin"); ?></a>
                 </div>
