@@ -128,7 +128,7 @@ dataTableDrawCallback = (settings) => {
                         const dataTable = table.DataTable();
                         const row = target.closest("tr");
                         $(row).fadeOut(400, () => {
-                            dataTable.row(row).remove().draw();
+                            dataTable.row(row).remove().draw(false);
                         });
                     }
                 });
