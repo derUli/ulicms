@@ -102,6 +102,77 @@ class RoboFile extends \Robo\Tasks {
     }
 
     /**
+     * examines a *.sin SimpleInstall v2 package file
+     * @param string $file path to *.sin package file
+     */
+    public function packageExamine(string $file) {
+        if (!file_exists($file)) {
+            $this->writeln("File " . basename($file) . " not found!");
+            return;
+        }
+        $json = json_decode(file_get_contents($file), true);
+        ksort($json);
+        $skipAttributes = array(
+            "data",
+            "screenshot"
+        );
+        foreach ($json as $key => $value) {
+            if (in_array($key, $skipAttributes)) {
+                continue;
+            }
+            if (is_array($value)) {
+                $processedValue = implode(", ", $value);
+            } else {
+                $processedValue = $value;
+            }
+            $this->writeln("$key: $processedValue");
+        }
+    }
+
+    /**
+     * list all installed packages
+     */
+    public function packagesList() {
+        $this->writeln("Modules:");
+        $this->modulesList();
+        $this->writeln("");
+        $this->writeln("Themes:");
+        $this->themesList();
+    }
+
+    /**
+     * installs a SimpleInstall v1 or SimpleInstall v2 package
+     * @param string $file path to *.sin or *.tar.gz package file
+     */
+    public function packageInstall($file): void {
+        if (!is_file($file)) {
+            $this->writeln("Can't open $file. File doesn't exists");
+            return;
+        }
+
+        $result = false;
+
+        if (endsWith($file, ".tar.gz")) {
+            $pkg = new PackageManager();
+            $result = $pkg->installPackage($file);
+        } else if (endsWith($file, ".sin")) {
+            $pkg = new SinPackageInstaller($file);
+            $result = $pkg->installPackage();
+        }
+        if ($result) {
+            $this->writeln('Package ' . basename($file) . " successfully installed");
+            return;
+        } else {
+            $this->writeln('Installation of package ' . basename($file) . " failed");
+        }
+        if ($pkg instanceof SinPackageInstaller) {
+            foreach ($pkg->getErrors() as $error) {
+                $this->writeln($error);
+            }
+        }
+    }
+
+    /**
      * List all installed modules and their version numbers
      */
     public function modulesList() {
