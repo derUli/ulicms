@@ -235,14 +235,43 @@ class RoboFile extends \Robo\Tasks {
     }
 
     /**
-     * Run core database migrations
+     * Run sql migrations
+     * @param string $component name of the component
+     * @param string $directory path to migrations directory
+     * @param string $stop path to migrations directory
      */
-    public function dbMigrate() {
-        // Run SQL Migration Scripts
-        Database::setEchoQueries(true);
-        $migrator = new DBMigrator("core", "lib/migrations/up");
-        $migrator->migrate();
-        Database::setEchoQueries(false);
+    public function dbMigrateUp(string $component, string $directory, ?string $stop = null) {
+        $folder = Path::resolve($directory . "/up");
+
+        $migrator = new DBMigrator($component, $folder);
+        try {
+            Database::setEchoQueries(true);
+            $migrator->migrate($stop);
+        } catch (Exception $e) {
+            $this->writeln($e->getMessage());
+        } finally {
+            Database::setEchoQueries(false);
+        }
+    }
+
+    /**
+     * Run sql migrations
+     * @param string $component name of the component
+     * @param string $directory path to migrations directory
+     * @param string $stop path to migrations directory
+     */
+    public function dbMigrateDown(string $component, string $directory, ?string $stop = null) {
+        $folder = Path::resolve($directory . "/down");
+
+        $migrator = new DBMigrator($component, $folder);
+        try {
+            Database::setEchoQueries(true);
+            $migrator->rollback($stop);
+        } catch (Exception $e) {
+            $this->writeln($e->getMessage());
+        } finally {
+            Database::setEchoQueries(false);
+        }
     }
 
 }
