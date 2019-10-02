@@ -119,6 +119,20 @@ class RoboFile extends \Robo\Tasks {
     }
 
     /**
+     * Uninstalls one or more modules
+     * @param array $modules one or more modules
+     */
+    public function modulesRemove(array $modules) {
+        foreach ($modules as $module) {
+            if (uninstall_module($module, "module")) {
+                echo "Package $module removed\n";
+            } else {
+                echo "Removing  $module failed.\n";
+            }
+        }
+    }
+
+    /**
      * List all installed themes and their version numbers
      */
     public function themesList() {
@@ -131,6 +145,20 @@ class RoboFile extends \Robo\Tasks {
                     $line .= " $version";
                 }
                 $this->writeln($line);
+            }
+        }
+    }
+
+    /**
+     * Uninstalls one or more themes
+     * @param array $themes one or more themes
+     */
+    public function themesRemove(array $themes) {
+        foreach ($themes as $theme) {
+            if (uninstall_module($theme, "theme")) {
+                echo "Package $theme removed\n";
+            } else {
+                echo "Removing  $theme failed.\n";
             }
         }
     }

@@ -168,7 +168,7 @@ if (file_exists($path_to_config)) {
     header("Location: installer/");
     exit();
 } else {
-    throw new ExceptionResult("Can't require CMSConfig.php. Starting installer failed, too.");
+    throw new Exception("Can't require CMSConfig.php. Starting installer failed, too.");
 }
 
 if (php_sapi_name() != "cli") {
