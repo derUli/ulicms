@@ -351,7 +351,6 @@ function get_redirection(?string $page = null): ?string {
         if (!empty($dataset->redirection) and ! is_null($dataset->redirection)) {
             return $dataset->redirection;
         }
-        return null;
     }
     return null;
 }

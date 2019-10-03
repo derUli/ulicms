@@ -175,4 +175,28 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         $this->assertStringContainsString("span.blog_article_next", $code);
     }
 
+    public function testCompileSCSSToFile() {
+        sureRemoveDir(
+                Path::resolve(
+                        "ULICMS_ROOT/content/cache/stylesheets"
+                )
+        );
+        setSCSSImportPaths(
+                [
+                    "folder1/foo/bar",
+                    "folder2/another/folder"
+                ]
+        );
+        $filename = compileSCSSToFile(
+                Path::resolve(
+                        "ULICMS_ROOT/lib/css/core.scss")
+        );
+
+        $this->assertStringEndsWith(".css", $filename);
+
+        $code = file_get_contents($filename);
+        $this->assertStringContainsString(".antispam_honeypot", $code);
+        $this->assertStringContainsString("span.blog_article_next", $code);
+    }
+
 }

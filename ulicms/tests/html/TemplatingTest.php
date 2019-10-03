@@ -154,6 +154,31 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
+    public function testMenu() {
+        $_SESSION["language"] = 'en';
+
+        ob_start();
+        menu("top", null, false);
+        $html = ob_get_clean();
+
+        $this->assertStringContainsString("<ul", $html);
+        $this->assertStringContainsString("<li", $html);
+        $this->assertStringContainsString("menu_top", $html);
+        $this->assertStringContainsString("<a href", $html);
+
+        $pages = Contentfactory::getAllByMenuAndLanguage("top", "en");
+        foreach ($pages as $page) {
+            if (!$page->isFrontPage() && $page->isRegular() && !$page->getParent()) {
+                $this->assertStringContainsString($page->slug . ".html", $html);
+                $this->assertStringContainsString($page->title, $html);
+            }
+        }
+        $germanPages = Contentfactory::getAllByLanguage("de");
+        foreach ($germanPages as $page) {
+            $this->assertStringNotContainsString($page->title . ".html", $html);
+        }
+    }
+
     public function testHtml5Doctype() {
         ob_start();
         html5_doctype();
@@ -302,6 +327,11 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         // UliCMS explodes after the year 2037 caused by
         // the Year 2038 problem
         $this->assertLessThan(2038, $year);
+    }
+
+    public function testGetTextPositionWithNonExistingPageReturnsBefore() {
+        $_GET["seite"] = "gibts-echt-nicht";
+        $this->assertEquals("before", get_text_position());
     }
 
 }

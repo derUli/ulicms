@@ -1,14 +1,21 @@
 <?php
 
-use UliCMS\Exceptions\NotImplementedException;
-
 class SettingsTest extends \PHPUnit\Framework\TestCase {
+
+    public function setUp() {
+        LoggerRegistry::register(
+                "audit_log",
+                new Logger(Path::resolve("ULICMS_LOG/audit_log"))
+        );
+    }
 
     public function tearDown() {
 
         Settings::delete("my_setting");
         Settings::delete("my_setting_de");
         Settings::delete("my_setting_en");
+        LoggerRegistry::unregister("audit_log");
+        unset($_SESSION["login_id"]);
     }
 
     public function testSettingsOld() {
@@ -26,6 +33,14 @@ class SettingsTest extends \PHPUnit\Framework\TestCase {
 
         deleteconfig("example_setting");
         $this->assertEquals(false, getconfig("example_setting"));
+
+        $userManager = new UserManager();
+        $users = $userManager->getAllUsers();
+        $_SESSION["login_id"] = $users[0]->getId();
+
+        setconfig("foo", "bar");
+        $this->assertEquals("bar", getconfig("foo"));
+        deleteconfig("foo");
     }
 
     public function testSettingsNew() {

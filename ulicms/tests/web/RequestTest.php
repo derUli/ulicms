@@ -8,9 +8,10 @@ class RequestTest extends \PHPUnit\Framework\TestCase {
         unset($_SERVER["HTTP_USER_AGENT"]);
         unset($_SERVER["REQUEST_URI"]);
         unset($_SERVER["SERVER_PORT"]);
-        unset($_SERVER['REMOTE_ADDR']);
-        unset($_SERVER['REMOTE_ADDR']);
-        unset($_SERVER['X_FORWARDED']);
+        unset($_SERVER["REMOTE_ADDR"]);
+        unset($_SERVER["REMOTE_ADDR"]);
+        unset($_SERVER["X_FORWARDED"]);
+        unset($_SERVER["HTTP_X_FORWARDED_HOST"]);
     }
 
     public function testGetVar() {
@@ -89,11 +90,11 @@ class RequestTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testIsAjaxRequest() {
-        unset($_SERVER['HTTP_X_REQUESTED_WITH']);
+        unset($_SERVER["HTTP_X_REQUESTED_WITH"]);
         $this->assertFalse(Request::isAjaxRequest());
-        $_SERVER['HTTP_X_REQUESTED_WITH'] = "XMLHttpRequest";
+        $_SERVER["HTTP_X_REQUESTED_WITH"] = "XMLHttpRequest";
         $this->assertTrue(Request::isAjaxRequest());
-        unset($_SERVER['HTTP_X_REQUESTED_WITH']);
+        unset($_SERVER["HTTP_X_REQUESTED_WITH"]);
     }
 
     public function testGetDomain() {
@@ -165,13 +166,13 @@ class RequestTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetIp() {
-        $_SERVER['REMOTE_ADDR'] = "123.123.123.123";
+        $_SERVER["REMOTE_ADDR"] = "123.123.123.123";
         $this->assertEquals("123.123.123.123", Request::getIp());
     }
 
     public function testGetIpWithProxy() {
-        $_SERVER['REMOTE_ADDR'] = "123.123.123.123";
-        $_SERVER['X_FORWARDED'] = "111.111.111.111";
+        $_SERVER["REMOTE_ADDR"] = "123.123.123.123";
+        $_SERVER["X_FORWARDED"] = "111.111.111.111";
 
         $this->assertEquals("111.111.111.111", Request::getIp());
     }
