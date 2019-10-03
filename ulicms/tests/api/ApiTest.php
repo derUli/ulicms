@@ -44,7 +44,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         unset($_SERVER['SERVER_PORT']);
         unset($_SERVER['HTTPS']);
         unset($_SERVER['REQUEST_URI']);
-        unset($_GET["seite"]);
+        unset($_GET["slug"]);
         unset($_SESSION["login_id"]);
         unset($_SESSION["language"]);
     }
@@ -660,7 +660,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $page->save();
 
         $_SESSION["language"] = "de";
-        $_GET["seite"] = $page->slug;
+        $_GET["slug"] = $page->slug;
         $this->assertTrue(containsModule());
     }
 
@@ -748,7 +748,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testBuildSEOUrlWithoutAnythingNoPageSpecified() {
-        unset($_GET["seite"]);
+        unset($_GET["slug"]);
         unset($_GET["html"]);
 
         $this->assertEquals("./", buildSEOUrl());
@@ -1109,7 +1109,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $_SERVER['HTTP_HOST'] = "example.org";
         $_SERVER['REQUEST_URI'] = "/foobar/foo.html";
 
-        $_GET["seite"] = "hello_world";
+        $_GET["slug"] = "hello_world";
 
         $this->assertEquals(
                 "https://example.org/foobar/hello_world.html",

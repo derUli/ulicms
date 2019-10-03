@@ -4,7 +4,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
 
     public function setUp() {
         $_SESSION["language"] = "de";
-        $_GET["seite"] = get_frontpage();
+        $_GET["slug"] = get_frontpage();
         require_once getLanguageFilePath("en");
 
         $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
@@ -23,7 +23,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         unset($_SERVER['SERVER_PORT']);
         unset($_SERVER['HTTPS']);
         unset($_SERVER['REQUEST_URI']);
-        unset($_GET["seite"]);
+        unset($_GET["slug"]);
         unset($_SESSION["login_id"]);
         unset($_SESSION["language"]);
     }
@@ -36,7 +36,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetRequestedPageNameWithSlugSet() {
-        $_GET ["seite"] = "foobar";
+        $_GET ["slug"] = "foobar";
         $this->assertEquals("foobar", get_requested_pagename());
         $this->cleanUp();
     }
@@ -47,35 +47,35 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetRequestedPageNameWithNull() {
-        $_GET ["seite"] = null;
+        $_GET ["slug"] = null;
         $this->assertEquals(get_frontpage(), get_requested_pagename());
     }
 
     public function testGetRequestedPageNameWithEmptyString() {
-        $_GET ["seite"] = "";
+        $_GET ["slug"] = "";
         $this->assertEquals(get_frontpage(), get_requested_pagename());
     }
 
     public function testIsHomeTrue() {
-        $_GET ["seite"] = get_frontpage();
+        $_GET ["slug"] = get_frontpage();
         $this->assertTrue(is_home());
         $this->cleanUp();
     }
 
     public function testIsHomeFalse() {
-        $_GET ["seite"] = "nothome";
+        $_GET ["slug"] = "nothome";
         $this->assertFalse(is_home());
         $this->cleanUp();
     }
 
     public function testIsFrontPageTrue() {
-        $_GET ["seite"] = get_frontpage();
+        $_GET ["slug"] = get_frontpage();
         $this->assertTrue(is_frontpage());
         $this->cleanUp();
     }
 
     public function testIsFrontPageFalse() {
-        $_GET ["seite"] = "nothome";
+        $_GET ["slug"] = "nothome";
         $this->assertFalse(is_frontpage());
         $this->cleanUp();
     }
@@ -330,7 +330,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetTextPositionWithNonExistingPageReturnsBefore() {
-        $_GET["seite"] = "gibts-echt-nicht";
+        $_GET["slug"] = "gibts-echt-nicht";
         $this->assertEquals("before", get_text_position());
     }
 

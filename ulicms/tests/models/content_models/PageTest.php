@@ -122,7 +122,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $page->save();
 
         $_SESSION["language"] = 'de';
-        $_GET["seite"] = "testdisableshortcodes";
+        $_GET["slug"] = "testdisableshortcodes";
 
         $this->assertStringNotContainsString(get_csrf_token_html(), get_content());
         $this->assertStringContainsString("[csrf_token_html]", get_content());
@@ -130,7 +130,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->cleanUp();
 
         unset($_SESSION["language"]);
-        unset($_GET["seite"]);
+        unset($_GET["slug"]);
     }
 
     public function testDisableShortcodesFalse() {
@@ -145,7 +145,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $page->save();
 
         $_SESSION["language"] = 'de';
-        $_GET["seite"] = "testdisableshortcodes";
+        $_GET["slug"] = "testdisableshortcodes";
 
         $this->assertStringContainsString(get_csrf_token_html(), get_content());
         $this->assertStringNotContainsString("[csrf_token_html]", get_content());
@@ -153,7 +153,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->cleanUp();
 
         unset($_SESSION["language"]);
-        unset($_GET["seite"]);
+        unset($_GET["slug"]);
     }
 
     public function testGetShowHeadlineReturnsTrue() {
@@ -237,14 +237,14 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $page->save();
 
         $_SESSION["language"] = 'de';
-        $_GET["seite"] = "testdisableshortcodes";
+        $_GET["slug"] = "testdisableshortcodes";
 
         $this->assertStringContainsString(get_csrf_token_html(), get_content());
         $this->assertStringNotContainsString("[csrf_token_html]", get_content());
         $this->cleanUp();
 
         unset($_SESSION["language"]);
-        unset($_GET["seite"]);
+        unset($_GET["slug"]);
     }
 
     public function testCreatePageWithCommentsEnabledTrue() {

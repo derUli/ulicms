@@ -153,7 +153,7 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetAllUsers() {
-        $allUsers = getUsers();
+        $allUsers = getAllUsers();
         foreach ($allUsers as $user) {
             if ($user["username"] == "testuser1") {
                 $this->assertEquals($user["id"], $this->testUser->getID());
@@ -174,16 +174,21 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase {
         $this->fail("The testuser is not in the result.");
     }
 
-    public function testChangePassword() {
+    public function testChangePasswordReturnsTrue() {
         $user = new User();
         $user->loadByUsername("testuser3");
         $id = $user->getId();
 
         $this->assertTrue(is_array(validate_login("testuser3", "oldpassword")));
 
-        changePassword("newpassword", $id);
+        $this->assertTrue(changePassword("newpassword", $id));
 
         $this->assertTrue(is_array(validate_login("testuser3", "newpassword")));
+    }
+
+    public function testChangePasswordReturnsFalse() {
+        // user doesn't exists
+        $this->assertFalse(changePassword("newpassword", PHP_INT_MAX));
     }
 
     public function testRegisterSession() {

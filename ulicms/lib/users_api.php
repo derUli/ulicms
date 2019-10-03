@@ -31,7 +31,7 @@ function getUsersOnline(): array {
 
 function changePassword($password, $userId) {
     $user = new User($userId);
-    if (!$user->getId()) {
+    if (!$user->isPersistent()) {
         return false;
     }
     $user->setPassword($password);

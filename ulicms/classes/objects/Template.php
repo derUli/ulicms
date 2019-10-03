@@ -491,7 +491,7 @@ color: " . Settings::get("body-text-color") . ";
             if (!is_logged_in()) {
                 db_query("UPDATE " . tbname("content") .
                         " SET views = views + 1 WHERE slug='" .
-                        Database::escapeValue($_GET["seite"]) .
+                        Database::escapeValue($_GET["slug"]) .
                         "' AND language='" . db_escape($_SESSION["language"])
                         . "'");
             }

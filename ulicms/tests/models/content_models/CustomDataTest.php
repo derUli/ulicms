@@ -3,14 +3,14 @@
 class CustomDataTest extends \PHPUnit\Framework\TestCase {
 
     public function setUp() {
-        $_GET["seite"] = "welcome";
+        $_GET["slug"] = "welcome";
         $_SESSION["language"] = "en";
     }
 
     public function tearDown() {
         Settings::delete("my_value");
         CustomData::delete("my_value");
-        unset($_GET["seite"]);
+        unset($_GET["slug"]);
         unset($_SESSION["language"]);
     }
 

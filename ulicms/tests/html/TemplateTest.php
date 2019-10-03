@@ -49,12 +49,12 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
 
     private function cleanUp() {
         unset($_SESSION["language"]);
-        unset($_GET["seite"]);
+        unset($_GET["slug"]);
         Settings::delete("video_width_100_percent");
         Settings::delete("hide_meta_generator");
         Settings::delete("disable_no_format_detection");
         unset($_SERVER["HTTP_USER_AGENT"]);
-        unset($_GET["seite"]);
+        unset($_GET["slug"]);
         unset($_SESSION["language"]);
 
         Vars::delete("id");
@@ -196,7 +196,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetContent() {
-        $_GET["seite"] = "lorem_ipsum";
+        $_GET["slug"] = "lorem_ipsum";
         $_SESSION["language"] = "de";
         $_GET["REQUEST_URI"] = "/lorem_ipsum.html";
 
@@ -309,7 +309,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $page->save();
 
         $_SESSION["language"] = $page->language;
-        $_GET["seite"] = $page->slug;
+        $_GET["slug"] = $page->slug;
 
         $_GET["REQUEST_URI"] = "/{$page->slug}.html";
         $this->assertEquals("<p>Wir schreiben das Jahr " . date("Y") .
@@ -319,7 +319,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetBodyClassesHome() {
         $_SESSION["language"] = "de";
-        $_GET["seite"] = get_frontpage();
+        $_GET["slug"] = get_frontpage();
         $this->assertRegExp('/page-id-\d+ home page(.+)/',
                 Template::getBodyClasses());
 
@@ -329,7 +329,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
 
     public function testBodyClassesHome() {
         $_SESSION["language"] = "de";
-        $_GET["seite"] = get_frontpage();
+        $_GET["slug"] = get_frontpage();
 
         ob_start();
         Template::bodyClasses();
@@ -356,7 +356,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $page->save();
 
         $_SESSION["language"] = $page->language;
-        $_GET["seite"] = $page->slug;
+        $_GET["slug"] = $page->slug;
 
         $this->assertRegExp('/page-id-\d+ error403 errorPage(.+)/',
                 Template::getBodyClasses());
@@ -380,7 +380,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $page->save();
 
         $_SESSION["language"] = $page->language;
-        $_GET["seite"] = $page->slug;
+        $_GET["slug"] = $page->slug;
 
         $this->assertRegExp('/page-id-\d+ error403 errorPage(.+)/',
                 Template::getBodyClasses());
@@ -393,7 +393,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetBodyClassesError404() {
         $_SESSION["language"] = "de";
-        $_GET["seite"] = "gibts-nicht";
+        $_GET["slug"] = "gibts-nicht";
         $this->assertRegExp('/error404 errorPage(.+)/',
                 Template::getBodyClasses());
 
@@ -431,7 +431,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetBodyClassesContainsModule() {
         $_SESSION["language"] = "de";
-        $_GET["seite"] = ModuleHelper::getFirstPageWithModule()->slug;
+        $_GET["slug"] = ModuleHelper::getFirstPageWithModule()->slug;
         $this->assertRegExp('/page-id-\d+ (.+)containsModule/',
                 Template::getBodyClasses());
         Vars::delete("id");

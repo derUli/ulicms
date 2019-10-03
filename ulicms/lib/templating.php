@@ -103,7 +103,7 @@ function get_og_tags(?string $slug = null): string {
 
 function get_og_data($slug = "") {
     if (empty($slug)) {
-        $slug = $_GET["seite"];
+        $slug = $_GET["slug"];
     }
 
     if (empty($slug)) {
@@ -486,7 +486,7 @@ function homepage_title(): void {
 }
 
 function get_meta_keywords(): string {
-    $ipage = db_escape($_GET["seite"]);
+    $ipage = db_escape($_GET["slug"]);
     $result = db_query("SELECT meta_keywords FROM " . tbname("content") .
             " WHERE slug='$ipage' AND language='" .
             db_escape($_SESSION["language"]) . "'");
@@ -514,7 +514,7 @@ function meta_keywords(): void {
 }
 
 function get_meta_description(?string $ipage = null): string {
-    $ipage = db_escape($_GET["seite"]);
+    $ipage = db_escape($_GET["slug"]);
     $result = db_query("SELECT meta_description FROM " . tbname("content") .
             " WHERE slug='$ipage' AND language='" .
             db_escape($_SESSION["language"]) . "'");
@@ -578,7 +578,7 @@ function get_title(?string $ipage = null, bool $headline = false): string {
         return get_translation("forbidden");
     }
 
-    $ipage = db_escape($_GET["seite"]);
+    $ipage = db_escape($_GET["slug"]);
     $result = db_query("SELECT alternate_title, title FROM " .
             tbname("content") . " WHERE slug='$ipage' AND language='" .
             db_escape($_SESSION["language"]) . "'");
@@ -675,8 +675,8 @@ function get_frontpage(): string {
 function get_requested_pagename(): string {
     $value = get_frontpage();
 
-    if (StringHelper::isNotNullOrWhitespace($_GET["seite"])) {
-        $value = $_GET["seite"];
+    if (StringHelper::isNotNullOrWhitespace($_GET["slug"])) {
+        $value = $_GET["slug"];
     }
     return Database::escapeValue($value);
 }
@@ -685,8 +685,8 @@ function set_requested_pagename(string $slug, ?string $language = null, ?string 
     if (!$language) {
         $language = getCurrentLanguage();
     }
-    $_GET["seite"] = $slug;
-    $_REQUEST["seite"] = $slug;
+    $_GET["slug"] = $slug;
+    $_REQUEST["slug"] = $slug;
 
     $_GET["language"] = $language;
     $_REQUEST["language"] = $language;
@@ -888,7 +888,7 @@ function get_head(): string {
 
 function get_page(?string $slug = ''): ?array {
     if (empty($slug)) {
-        $slug = $_GET["seite"];
+        $slug = $_GET["slug"];
     }
     if (empty($slug)) {
         $slug = get_frontpage();
@@ -962,17 +962,17 @@ function check_status(): string {
     if (get_type() == "snippet") {
         return "403 Forbidden";
     }
-    if ($_GET["seite"] == "") {
-        $_GET["seite"] = get_frontpage();
+    if ($_GET["slug"] == "") {
+        $_GET["slug"] = get_frontpage();
     }
 
-    $page = $_GET["seite"];
+    $page = $_GET["slug"];
 
     if (!is_active() and ! is_logged_in()) {
         return "403 Forbidden";
     }
 
-    $test = get_page($_GET["seite"]);
+    $test = get_page($_GET["slug"]);
     if (!$test or ! is_null($test["deleted_at"])) {
         no_cache();
         return "404 Not Found";
