@@ -23,6 +23,8 @@ Entfernte API-Methoden:
 * getModuleName(string $module): string
 * initPFBC(): void
 * the_url(): string
+* set_eTagHeaders(string $identifier, int $timestamp): void
+* browsercacheOneDay(int $modified = null): void
 
 Verbesserungen:
 * Übersetzung "Limit" in "Einträge je Seite" umbenannt

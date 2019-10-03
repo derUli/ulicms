@@ -235,6 +235,8 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetAllModules() {
+        Vars::delete("allModules");
+        $modules = getAllModules();
         $modules = getAllModules();
         $this->assertContains("core_content", $modules);
         $this->assertContains("slicknav", $modules);
@@ -333,6 +335,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $array = array("hello", "world", 123);
         $this->assertFalse(faster_in_array("germany", $array));
         $this->assertFalse(faster_in_array(789, $array));
+        $this->assertFalse(faster_in_array(789, "not-an-array"));
     }
 
     public function testGetAllSlugs() {
@@ -807,6 +810,9 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
     public function testGetAllLanguagesNotFiltered() {
         $languages = getAllLanguages();
         $this->assertGreaterThanOrEqual(1, count($languages));
+
+        $languages = getAllLanguages();
+        $this->assertGreaterThanOrEqual(1, count($languages));
     }
 
     public function testVarDumpStrReturnsStringWithOneVar() {
@@ -1115,6 +1121,26 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
     public function testGetModuleAdminSelfPath() {
         $_SERVER["REQUEST_URI"] = "/foo/?bar=\"hello\"";
         $this->assertEquals("/foo/?bar=&quot;hello&quot;", getModuleAdminSelfPath());
+    }
+
+    public function testRootDirectory() {
+        $_SERVER['HTTP_HOST'] = "company.com";
+        $_SERVER["REQUEST_URI"] = "/subdir/foo.png";
+
+        $this->assertEquals("http://company.com/subdir/", rootDirectory());
+    }
+
+    public function testGetModuleAdminFilePath() {
+        $this->assertStringEndsWith(
+                "/content/modules/my_module/my_module_admin.php", getModuleAdminFilePath("my_module")
+        );
+    }
+
+    public function testGetModuleAdminFilePath2() {
+        $this->assertStringEndsWith(
+                "/content/modules/my_module/admin.php",
+                getModuleAdminFilePath2("my_module")
+        );
     }
 
 }

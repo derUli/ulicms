@@ -2,10 +2,30 @@
 
 class TemplatingTest extends \PHPUnit\Framework\TestCase {
 
+    public function setUp() {
+        $_SESSION["language"] = "de";
+        $_GET["seite"] = get_frontpage();
+        require_once getLanguageFilePath("en");
+
+        $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
+        $_SERVER["SERVER_PORT"] = "80";
+        $_SERVER['HTTP_HOST'] = "example.org";
+        $_SERVER['REQUEST_URI'] = "/foobar/foo.html";
+    }
+
     public function tearDown() {
         $this->cleanUp();
+
+        Settings::set("maintenance_mode", "off");
+
+        unset($_SERVER["SERVER_PROTOCOL"]);
+        unset($_SERVER['HTTP_HOST']);
+        unset($_SERVER['SERVER_PORT']);
+        unset($_SERVER['HTTPS']);
+        unset($_SERVER['REQUEST_URI']);
+        unset($_GET["seite"]);
+        unset($_SESSION["login_id"]);
         unset($_SESSION["language"]);
-        unset($_GET ["seite"]);
     }
 
     private function cleanUp() {
@@ -176,6 +196,112 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetHtml5Doctype() {
         $this->assertEquals("<!doctype html>", get_html5_doctype());
+    }
+
+    public function testPoweredByUliCMS() {
+        ob_start();
+        poweredByUliCMS();
+        $this->assertStringContainsString("This page is powered by",
+                ob_get_clean());
+    }
+
+    public function testYear() {
+        ob_start();
+        year();
+        $output = ob_get_clean();
+        $this->assertIsNumeric($output);
+        $this->assertEquals(4, strlen($output));
+    }
+
+    public function testIs503ReturnsTrue() {
+        Settings::set("maintenance_mode", "on");
+        $this->assertTrue(is_503());
+    }
+
+    public function testIs503ReturnsFalse() {
+        Settings::set("maintenance_mode", "off");
+        $this->assertFalse(is_503());
+    }
+
+    public function testGetBaseMetas() {
+        $baseMetas = get_base_metas();
+
+        $this->assertTrue(str_contains('<meta http-equiv="content-type" content="text/html; charset=utf-8"/>', $baseMetas));
+        $this->assertTrue(str_contains('<meta charset="utf-8"/>', $baseMetas));
+    }
+
+    public function testBaseMetas() {
+        ob_start();
+        base_metas();
+        $baseMetas = ob_get_clean();
+
+        $this->assertTrue(str_contains('<meta http-equiv="content-type" content="text/html; charset=utf-8"/>', $baseMetas));
+        $this->assertTrue(str_contains('<meta charset="utf-8"/>', $baseMetas));
+    }
+
+    public function testHead() {
+        ob_start();
+        head();
+        $baseMetas = ob_get_clean();
+
+        $this->assertTrue(str_contains('<meta http-equiv="content-type" content="text/html; charset=utf-8"/>', $baseMetas));
+        $this->assertTrue(str_contains('<meta charset="utf-8"/>', $baseMetas));
+    }
+
+    public function testGetHead() {
+        $baseMetas = get_head();
+        $this->assertTrue(str_contains('<meta http-equiv="content-type" content="text/html; charset=utf-8"/>', $baseMetas));
+        $this->assertTrue(str_contains('<meta charset="utf-8"/>', $baseMetas));
+    }
+
+    public function testIs500ReturnsFalse() {
+        $this->assertFalse(is_500());
+    }
+
+    public function testGetBodyClassesDesktop() {
+        $_SESSION["language"] = "de";
+        $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (Windows NT 6.1;" .
+                " Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)" .
+                " Chrome/63.0.3239.132 Safari/537.36";
+
+        $cssClasses = get_body_classes();
+        $this->assertStringContainsString("desktop",
+                $cssClasses);
+        $this->assertStringNotContainsString("mobile",
+                $cssClasses);
+
+        Vars::delete("id");
+        Vars::delete("active");
+    }
+
+    public function testBodyClassesDesktop() {
+        $_SESSION["language"] = "de";
+        $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (Windows NT 6.1;" .
+                " Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)" .
+                " Chrome/63.0.3239.132 Safari/537.36";
+
+        ob_start();
+        body_classes();
+
+        $cssClasses = ob_get_clean();
+        $this->assertStringContainsString("desktop",
+                $cssClasses);
+        $this->assertStringNotContainsString("mobile",
+                $cssClasses);
+
+        Vars::delete("id");
+        Vars::delete("active");
+    }
+
+    public function testCMSReleaseYear() {
+        ob_start();
+        cms_release_year();
+        $year = ob_get_clean();
+        $this->assertIsNumeric($year);
+        $this->assertGreaterThanOrEqual(2019, $year);
+        // UliCMS explodes after the year 2037 caused by
+        // the Year 2038 problem
+        $this->assertLessThan(2038, $year);
     }
 
 }

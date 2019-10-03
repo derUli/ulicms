@@ -263,26 +263,6 @@ function get_lang_config(string $name, string $lang): ?string {
     return $config ? $config : null;
 }
 
-// Browser soll nur einen Tag Cachen
-// Für statische Ressourcen nutzen
-function browsercacheOneDay(int $modified = null): void {
-    header('Cache-Control: public');
-    header("Expires: " . gmdate("D, d M Y H:i:s", time() + 86400) . " GMT");
-    header("Cache-Control: public,max-age=86400");
-    if (!is_null($modified)) {
-        header("Last-Modified: " . gmdate(
-                        "D, d M Y H:i:s", $modified) . " GMT"
-        );
-        if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])
-                and $modified <= strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE'])
-        ) {
-            $_SERVER["ulicms_send_304"];
-            header("HTTP/1.1 304 Not Modified");
-            exit();
-        }
-    }
-}
-
 /**
  * Get either a Gravatar URL or complete image tag for a specified email address.
  *
@@ -310,11 +290,11 @@ function get_gravatar(
         bool $img = false,
         array $atts = []
 ): string {
-    // Nach dem in Kraft treten, der Datenschutz-Grundverordnung 2018
-    // wird die Nutzung von Gravatar in Deutschland illegal
-    // daher wird an dieser Stelle die Gravatar-Integration gekappt
-    // und stattdessen wird ein statisches Platzhalter-Bild angezeigt
-    // Bis ein integrierter Avatar-Upload in UliCMS implementiert ist.
+// Nach dem in Kraft treten, der Datenschutz-Grundverordnung 2018
+// wird die Nutzung von Gravatar in Deutschland illegal
+// daher wird an dieser Stelle die Gravatar-Integration gekappt
+// und stattdessen wird ein statisches Platzhalter-Bild angezeigt
+// Bis ein integrierter Avatar-Upload in UliCMS implementiert ist.
     $url = ModuleHelper::getBaseUrl("/admin/gfx/no_avatar.png");
     $html = "";
     if ($img) {
@@ -350,15 +330,6 @@ function get_html_editor(): ?string {
     return $user->getHTMLEditor();
 }
 
-// Prüfen, ob Anti CSRF Token vorhanden ist
-// Siehe http://de.wikipedia.org/wiki/Cross-Site-Request-Forgery
-function check_csrf_token(): bool {
-    if (!isset($_REQUEST["csrf_token"])) {
-        return false;
-    }
-    return $_REQUEST["csrf_token"] == $_SESSION["csrf_token"];
-}
-
 function check_form_timestamp(): void {
     if (Settings::get("spamfilter_enabled") != "yes") {
         return;
@@ -373,6 +344,15 @@ function check_form_timestamp(): void {
         );
         HTMLResult("Spam detected based on timestamp.", 400);
     }
+}
+
+// Prüfen, ob Anti CSRF Token vorhanden ist
+// Siehe http://de.wikipedia.org/wiki/Cross-Site-Request-Forgery
+function check_csrf_token(): bool {
+    if (!isset($_REQUEST["csrf_token"])) {
+        return false;
+    }
+    return $_REQUEST["csrf_token"] == $_SESSION["csrf_token"];
 }
 
 // HTML Code für Anti CSRF Token zurückgeben
@@ -547,7 +527,6 @@ function getDomainByLanguage($givenLanguage): ?string {
             return $domain;
         }
     }
-
     return null;
 }
 
@@ -559,7 +538,6 @@ function getLanguageByDomain($givenDomain): ?string {
             return $language;
         }
     }
-
     return null;
 }
 
@@ -622,9 +600,9 @@ function do_event(
         string $name,
         string $runs = ModuleEventConstants::RUNS_ONCE
 ) {
-    // don't run this code on kcfinder page (media)
-    // since the "Path" class has a naming conflict with the same named
-    // class of KCFinder
+// don't run this code on kcfinder page (media)
+// since the "Path" class has a naming conflict with the same named
+// class of KCFinder
     if (defined("KCFINDER_PAGE")) {
         return;
     }
@@ -663,11 +641,6 @@ function do_event(
         }
         echo optimizeHtml(ob_get_clean());
     }
-}
-
-function cms_release_year(): void {
-    $v = new UliCMSVersion();
-    echo $v->getReleaseYear();
 }
 
 function splitAndTrim(string $str): array {
@@ -899,7 +872,7 @@ function getModulePath($module, $abspath = false): string {
                 ) . "/";
     }
     if (ULICMS_ROOT == ULICMS_DATA_STORAGE_ROOT and ! defined("ULICMS_DATA_STORAGE_URL")) {
-        // Frontend Directory
+// Frontend Directory
         if (file_exists("CMSConfig.php")) {
             $module_folder = "content/modules/";
         } // Backend Directory
@@ -958,7 +931,7 @@ function fcflush(): void {
         $output_handler = @ini_get('output_handler');
     }
     if ($output_handler == 'ob_gzhandler') {
-        // forcing a flush with this is very bad
+// forcing a flush with this is very bad
         return;
     }
     flush();
@@ -1039,7 +1012,7 @@ function replaceOtherShortCodes(string $string): string {
             . 'class="antispam_honeypot" value="" autocomplete="nope">';
     $string = str_ireplace('[csrf_token_html]', $token, $string);
 
-    // [tel] Links for tel Tags
+// [tel] Links for tel Tags
     $string = preg_replace(
             '/\[tel\]([^\[\]]+)\[\/tel\]/i',
             '<a href="tel:$1" class="tel">$1</a>',
@@ -1067,8 +1040,8 @@ function replaceOtherShortCodes(string $string): string {
             $id = intval($id);
 
             $page = ContentFactory::getByID($id);
-            // a page should not include itself
-            // because that would cause an endless loop
+// a page should not include itself
+// because that would cause an endless loop
             if ($page and $id != get_ID()) {
                 $content = "";
                 if ($page->active and checkAccess($page->access)) {
@@ -1154,9 +1127,8 @@ function getPageIDBySlug(string $slug) {
     if (db_num_rows($result) > 0) {
         $row = db_fetch_object($result);
         return $row->id;
-    } else {
-        return null;
     }
+    return null;
 }
 
 function getPageSlugByID(?int $id): ?string {
@@ -1165,9 +1137,8 @@ function getPageSlugByID(?int $id): ?string {
     if (db_num_rows($result) > 0) {
         $row = db_fetch_object($result);
         return $row->slug;
-    } else {
-        return null;
     }
+    return null;
 }
 
 function getPageTitleByID(?int $id): string {
@@ -1176,9 +1147,8 @@ function getPageTitleByID(?int $id): string {
     if (db_num_rows($result) > 0) {
         $row = db_fetch_object($result);
         return $row->title;
-    } else {
-        return "[" . get_translation("none") . "]";
     }
+    return "[" . get_translation("none") . "]";
 }
 
 // Get slugs of all pages
@@ -1413,7 +1383,7 @@ function uninstall_module(string $name, string $type = "module") {
                 $uninstall_script = getModuleUninstallScriptPath($name, true);
                 $uninstall_script2 = getModuleUninstallScriptPath2($name, true);
 
-                // Uninstall Script ausführen, sofern vorhanden
+// Uninstall Script ausführen, sofern vorhanden
                 $mainController = ModuleHelper::getMainController($name);
                 if ($mainController
                         and method_exists($mainController, "uninstall")) {
@@ -1469,23 +1439,4 @@ function func_enabled(string $func): array {
         $it_is_disabled["s"] = 1;
     }
     return $it_is_disabled;
-}
-
-function set_eTagHeaders(string $identifier, int $timestamp): void {
-    $gmt_mTime = gmdate('r', $timestamp);
-
-    header('Cache-Control: public');
-    header('ETag: "' . md5($timestamp . $identifier) . '"');
-    header('Last-Modified: ' . $gmt_mTime);
-
-    if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])
-            or isset($_SERVER['HTTP_IF_NONE_MATCH'])) {
-        if ($_SERVER['HTTP_IF_MODIFIED_SINCE'] == $gmt_mTime or
-                str_replace('"', '', stripslashes(
-                                $_SERVER['HTTP_IF_NONE_MATCH'])
-                ) == md5(strval($timestamp) . $identifier)) {
-            header('HTTP/1.1 304 Not Modified');
-            exit();
-        }
-    }
 }

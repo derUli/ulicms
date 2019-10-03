@@ -808,7 +808,8 @@ function get_menu(string $name = "top", ?int $parent_id = null, bool $recursive 
             }
 
             $title = $row->title;
-// Show page positions in menu if user has the "pages_show_positions" permission.
+
+            // Show page positions in menu if user has the "pages_show_positions" permission.
             if (is_logged_in()) {
                 $acl = new ACL();
                 if ($acl->hasPermission("pages_show_positions") and Settings::get("user/" . get_user_id() . "/show_positions")) {
@@ -821,7 +822,7 @@ function get_menu(string $name = "top", ?int $parent_id = null, bool $recursive 
                 $language = new Language($row->link_to_language);
                 $redirection = $language->getLanguageLink();
             }
-// if content has type link or node url is the target url else build seo url
+            // if content has type link or node url is the target url else build seo url
             $url = ($row->type == "link" or $row->type == "node") ? $row->redirection : buildSEOUrl($row->slug);
             $url = Template::getEscape($url);
 
@@ -874,8 +875,8 @@ function base_metas(): void {
     Template::baseMetas();
 }
 
-function get_base_metas(): void {
-    Template::getBaseMetas();
+function get_base_metas(): string {
+    return Template::getBaseMetas();
 }
 
 function head(): void {
@@ -884,10 +885,6 @@ function head(): void {
 
 function get_head(): string {
     return get_base_metas();
-}
-
-function author(): void {
-    echo get_author();
 }
 
 function get_page(?string $slug = ''): ?array {
@@ -991,6 +988,11 @@ function check_status(): string {
     }
     no_cache();
     return "403 Forbidden";
+}
+
+function cms_release_year(): void {
+    $v = new UliCMSVersion();
+    echo $v->getReleaseYear();
 }
 
 DefaultContentTypes::initTypes();

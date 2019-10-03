@@ -167,4 +167,18 @@ class FilesTest extends \PHPUnit\Framework\TestCase {
         $this->assertGreaterThanOrEqual($minimumResult, File::getNewestMtime($files));
     }
 
+    public function testRecurseCopy() {
+        $source = Path::resolve("ULICMS_ROOT/tests/fixtures");
+
+        $destination = Path::resolve("ULICMS_TMP/copy-target");
+
+        recurse_copy($source, $destination);
+
+        $sourceFiles = find_all_files($source);
+        $targetFiles = find_all_files($destination);
+
+        $this->assertCount(count($sourceFiles), $targetFiles);
+        sureRemoveDir($destination, true);
+    }
+
 }
