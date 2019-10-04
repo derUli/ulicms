@@ -46,6 +46,7 @@ if (file_exists($composerAutoloadFile)) {
 
 require_once dirname(__file__) . "/lib/comparisons.php";
 require_once dirname(__file__) . "/lib/minify.php";
+require_once dirname(__file__) . "/lib/csrf_token.php";
 require_once dirname(__file__) . "/lib/api.php";
 require_once dirname(__file__) . "/lib/csv_writer.php";
 require_once dirname(__file__) . "/classes/objects/privacy/load.php";

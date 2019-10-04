@@ -1,6 +1,5 @@
 <?php
 
-use UliCMS\Exceptions\NotImplementedException;
 use UliCMS\Models\Content\Language;
 
 class ApiTest extends \PHPUnit\Framework\TestCase {
@@ -54,8 +53,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         Settings::set("maintenance_mode", "0");
         chdir(Path::resolve("ULICMS_ROOT"));
         set_format("html");
-        unset($_SESSION["csrf_token"]);
-        unset($_REQUEST["csrf_token"]);
     }
 
     public function testRemovePrefix() {
@@ -174,30 +171,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetJqueryUrl() {
         $this->assertEquals("node_modules/jquery/dist/jquery.min.js", get_jquery_url());
-    }
-
-    public function testCheckCsrfTokenNoToken() {
-        unset($_SESSION["csrf_token"]);
-        $this->assertFalse(check_csrf_token());
-    }
-
-    public function testCheckCsrfTokenValid() {
-        $token = get_csrf_token();
-        $this->assertNotNull($token);
-
-        $_REQUEST["csrf_token"] = $token;
-
-        $this->assertTrue(check_csrf_token());
-
-        unset($_SESSION["csrf_token"]);
-        unset($_REQUEST["csrf_token"]);
-    }
-
-    public function testCheckCsrfTokenInvalid() {
-        $token = get_csrf_token();
-        $_REQUEST["csrf_token"] = "thisisnotthetoken";
-        $this->assertFalse(check_csrf_token());
-        unset($_SESSION["csrf_token"]);
     }
 
     public function testPreparePlainTextforHTMLOutput() {
@@ -910,33 +883,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("Lampukisch", get_lang_config("my_setting", "fr"));
         $this->assertEquals("Germanisch", get_lang_config("my_setting", "de"));
         $this->assertEquals("Angelsächisch", get_lang_config("my_setting", "en"));
-    }
-
-    public function testGetCsrfTokenHtmlWithMinTimeToFillForm() {
-        $initialMinTime = Settings::get("min_time_to_fill_form");
-
-        Settings::set("min_time_to_fill_form", "6");
-
-        $this->assertStringContainsString(
-                '<input type="hidden" name="form_timestamp" value="',
-                get_csrf_token_html()
-        );
-        Settings::set("min_time_to_fill_form", $initialMinTime);
-    }
-
-    public function testCsrfTokenHtmlWithMinTimeToFillForm() {
-        $initialMinTime = Settings::get("min_time_to_fill_form");
-
-        Settings::set("min_time_to_fill_form", "6");
-
-        ob_start();
-        csrf_token_html();
-
-        $this->assertStringContainsString(
-                '<input type="hidden" name="form_timestamp" value="',
-                ob_get_clean()
-        );
-        Settings::set("min_time_to_fill_form", $initialMinTime);
     }
 
     public function testGetUsedPostTypes() {
