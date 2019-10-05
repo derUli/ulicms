@@ -47,7 +47,7 @@ class RoboFile extends \Robo\Tasks {
      * List all settings
      */
     public function settingsList(): void {
-        // show all settings
+// show all settings
         $settings = Settings::getAll();
         foreach ($settings as $setting) {
             if (empty($setting->name)) {
@@ -112,10 +112,17 @@ class RoboFile extends \Robo\Tasks {
         }
         $json = json_decode(file_get_contents($file), true);
         ksort($json);
+
+
+        $this->showPageKeys($json);
+    }
+
+    private function showPageKeys($json) {
         $skipAttributes = array(
             "data",
             "screenshot"
         );
+
         foreach ($json as $key => $value) {
             if (in_array($key, $skipAttributes)) {
                 continue;
@@ -160,10 +167,12 @@ class RoboFile extends \Robo\Tasks {
             $result = $pkg->installPackage();
         }
         if ($result) {
-            $this->writeln('Package ' . basename($file) . " successfully installed");
+            $this->writeln('Package ' . basename($file)
+                    . " successfully installed");
             return;
         } else {
-            $this->writeln('Installation of package ' . basename($file) . " failed");
+            $this->writeln('Installation of package '
+                    . basename($file) . " failed");
         }
         if ($pkg instanceof SinPackageInstaller) {
             foreach ($pkg->getErrors() as $error) {
@@ -196,9 +205,9 @@ class RoboFile extends \Robo\Tasks {
     public function modulesRemove(array $modules) {
         foreach ($modules as $module) {
             if (uninstall_module($module, "module")) {
-                echo "Package $module removed\n";
+                $this->writeln("Package $module removed");
             } else {
-                echo "Removing  $module failed.\n";
+                $this->writeln("Removing  $module failed.");
             }
         }
     }
@@ -227,9 +236,9 @@ class RoboFile extends \Robo\Tasks {
     public function themesRemove(array $themes) {
         foreach ($themes as $theme) {
             if (uninstall_module($theme, "theme")) {
-                echo "Package $theme removed\n";
+                $this->writeln("Package $theme removed");
             } else {
-                echo "Removing  $theme failed.\n";
+                $this->writeln("Removing  $theme failed.");
             }
         }
     }
@@ -240,7 +249,10 @@ class RoboFile extends \Robo\Tasks {
      * @param string $directory path to migrations directory
      * @param string $stop path to migrations directory
      */
-    public function dbMigrateUp(string $component, string $directory, ?string $stop = null) {
+    public function dbmigratorUp(
+            string $component,
+            string $directory,
+            ?string $stop = null): void {
         $folder = Path::resolve($directory . "/up");
 
         $migrator = new DBMigrator($component, $folder);
@@ -260,7 +272,11 @@ class RoboFile extends \Robo\Tasks {
      * @param string $directory path to migrations directory
      * @param string $stop path to migrations directory
      */
-    public function dbMigrateDown(string $component, string $directory, ?string $stop = null) {
+    public function dbmigratorDown(
+            string $component,
+            string $directory,
+            ?string $stop = null
+    ): void {
         $folder = Path::resolve($directory . "/down");
 
         $migrator = new DBMigrator($component, $folder);
@@ -271,6 +287,130 @@ class RoboFile extends \Robo\Tasks {
             $this->writeln($e->getMessage());
         } finally {
             Database::setEchoQueries(false);
+        }
+    }
+
+    /**
+     * reset dbtrack table
+     * @param string $component name of the component
+     */
+    public function dbmigratorReset(?string $component = null): void {
+        Database::setEchoQueries(true);
+
+        $migrator = new DBMigrator($component, getcwd());
+        if ($component) {
+            $migrator->resetDBTrack();
+        } else {
+            $migrator->resetDBTrackAll();
+        }
+
+        Database::setEchoQueries(false);
+    }
+
+    /**
+     * list all applied sql migrations
+     * @param string $component name of the component
+     */
+    public function dbmigratorList(?string $component = null): void {
+
+        $where = $component ? "component='" .
+                Database::escapeValue($component) . "'" : "1=1";
+        $result = Database::query("Select * from {prefix}dbtrack "
+                        . "where $where order by component, date", true);
+        while ($row = Database::fetchObject($result)) {
+            $this->writeln("{$row->component} | {$row->name} | {$row->date}");
+        }
+    }
+
+    /**
+     * get a list of all available patches
+     */
+    public function patchesAvailable() {
+        $available = $this->patchckAvailable();
+        if (!$available) {
+            $this->writeln("No patches available");
+        }
+        $this->writeln(trim($available));
+    }
+
+    private function patchckAvailable() {
+        return file_get_contents_wrapper(PATCH_CHECK_URL, true);
+    }
+
+    /**
+     * Truncate list of installed patches in database
+     */
+    public function patchesTruncate(): void {
+        $pkg = new PackageManager();
+        $pkg->truncateInstalledPatches();
+    }
+
+    /**
+     * List installed patches
+     */
+    public function patchesInstalled() {
+        $pkg = new PackageManager();
+        $installedPatches = $pkg->getInstalledPatchNames();
+        if (count($installedPatches) == 0) {
+            $this->writeln("No Patches installed");
+            return;
+        }
+        foreach ($installedPatches as $patch) {
+            $this->writeln($patch);
+        }
+    }
+
+    /**
+     * install patches
+     * @param array $patchesToInstall name of the patches to install or "all"
+     */
+    public function patchesInstall(array $patchesToInstall): void {
+        $available = $this->patchckAvailable();
+        if (!$available) {
+            $this->writeln("no patches available");
+            return;
+        }
+        $installed_amount = 0;
+        $available = str_ireplace("\r\n", "\n", $available);
+        $available = explode("\n", $available);
+
+        // TODO: this code looks like shit
+        // implement PatchManager class and move all patch management related
+        // tasks to that class
+        // refactor this code
+        // a method should return an array of AvailablePatch objects
+        foreach ($available as $line) {
+            $line = trim($line);
+            if (!empty($line)) {
+                $splitted = explode("|", $line);
+                if (count($splitted) >= 3) {
+                    if (faster_in_array($splitted[0], $patchesToInstall) or
+                            faster_in_array("all", $patchesToInstall)) {
+                        $success = $pkg->installPatch($splitted[0],
+                                $splitted[1], $splitted[2]);
+                        if ($success) {
+                            echo "Patch " . $splitted[0] .
+                            " was installed.\n";
+                            $installed_amount ++;
+                        } else {
+                            echo "Installation of patch " .
+                            $success . " failed.\n";
+                            echo "Abort.\n";
+                            exit();
+                        }
+                    }
+                } else {
+                    echo "Patch " . $splitted[0] . " is not available\n";
+                }
+            }
+        }
+        if ($installed_amount != 1) {
+            echo $installed_amount . " patches successfully installed.\n";
+        } else {
+            echo $installed_amount . " patch successfully installed.\n";
+        }
+        if ($installed_amount > 0) {
+            clearCache();
         }
     }
 
