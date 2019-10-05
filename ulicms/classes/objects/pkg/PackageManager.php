@@ -25,19 +25,6 @@ class PackageManager {
         ];
     }
 
-    public function getInstalledPatchNames(): array {
-        $retval = [];
-        $result = db_query("SELECT name from " . tbname("installed_patches"));
-        while ($row = db_fetch_object($result)) {
-            $retval[] = $row->name;
-        }
-        return $retval;
-    }
-
-    public function truncateInstalledPatches(): bool {
-        return Database::truncateTable("installed_patches");
-    }
-
     public function isInstalled(
             string $package,
             string $type = PackageTypes::TYPE_MODULE
@@ -51,69 +38,6 @@ class PackageManager {
             default:
                 throw new BadMethodCallException("Package Type {$type} not supported");
         }
-    }
-
-    public function installPatch(
-            string $name,
-            string $description,
-            string $url,
-            bool $clear_cache = true,
-            ?string $checksum = null
-    ): bool {
-        @set_time_limit(0);
-        $test = $this->getInstalledPatchNames();
-        if (faster_in_array($name, $test)) {
-            return false;
-        }
-
-        $tmp_dir = ULICMS_TMP . "/" . uniqid() . "/";
-        if (!is_dir($tmp_dir)) {
-            mkdir($tmp_dir);
-        }
-        $download = file_get_contents_wrapper($url, true, $checksum);
-
-        $download_tmp = $tmp_dir . "patch.zip";
-
-        if (!$download) {
-            return false;
-        }
-
-        file_put_contents($download_tmp, $download);
-        $zip = new ZipArchive();
-        if ($zip->open($download_tmp) === TRUE) {
-            $zip->extractTo($tmp_dir);
-            $patch_dir = $tmp_dir . "patch";
-            $zip->close();
-            if (is_dir($patch_dir)) {
-                recurse_copy($patch_dir, ULICMS_ROOT);
-                $name = db_escape($name);
-                $description = db_escape($description);
-                $url = db_escape($url);
-                db_query("INSERT INTO " . tbname("installed_patches") .
-                        " (name, description, url, date) VALUES "
-                        . "('$name', '$description', '$url', NOW())");
-
-                sureRemoveDir($tmp_dir, true);
-                if ($clear_cache) {
-                    clearCache();
-                }
-                return true;
-            }
-        }
-        sureRemoveDir($tmp_dir, true);
-        if ($clear_cache) {
-            clearCache();
-        }
-        return false;
-    }
-
-    public function getInstalledPatches(): array {
-        $retval = [];
-        $result = db_query("SELECT * from " . tbname("installed_patches"));
-        while ($row = db_fetch_object($result)) {
-            $retval[$row->name] = $row;
-        }
-        return $retval;
     }
 
     // TODO: Reimplement in PackageSourceconnector

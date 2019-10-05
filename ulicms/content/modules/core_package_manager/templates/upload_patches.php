@@ -1,12 +1,21 @@
 <?php
+
+use UliCMS\Packages\PatchManager;
+
 $permissionChecker = new ACL ();
 if (!$permissionChecker->hasPermission("upload_patches")) {
     noPerms();
 } else {
     $redirect = false;
-    if (isset($_POST ["upload_patch"]) and isset($_FILES ['file'] ['tmp_name']) and endsWith($_FILES ['file'] ['name'], ".zip")) {
-        $pkg = new PackageManager ();
-        if ($pkg->installPatch($_POST ["name"], $_POST ["description"], $_FILES ['file'] ['tmp_name'])) {
+    if (isset($_POST ["upload_patch"]) and isset($_FILES ['file'] ['tmp_name'])
+            and endsWith($_FILES ['file'] ['name'], ".zip")) {
+        $patchManager = new PatchManager ();
+        if ($patchManager->installPatch(
+                        $_POST ["name"],
+                        $_POST ["description"],
+                        $_FILES ['file']['tmp_name']
+                )
+        ) {
             $redirect = true;
         }
     }

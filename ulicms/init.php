@@ -7,6 +7,7 @@ use UliCMS\Exceptions\SqlException;
 use UliCMS\Constants\AuditLog;
 use UliCMS\Registries\HelperRegistry;
 use UliCMS\Models\Content\TypeMapper;
+use UliCMS\Packages\PatchManager;
 
 // root directory of UliCMS
 if (!defined("ULICMS_ROOT")) {
@@ -480,11 +481,12 @@ do_event("before_init");
 do_event("init");
 do_event("after_init");
 
-$version = new UliCMSVersion();
+$patchManager = new PatchManager();
 
-$pkg = new PackageManager();
-$installed_patches = $pkg->getInstalledPatchNames();
+$installed_patches = $patchManager->getInstalledPatchNames();
 $installed_patches = implode(";", $installed_patches);
+
+$version = new UliCMSVersion();
 
 if (!defined("PATCH_CHECK_URL")) {
     define("PATCH_CHECK_URL", "https://patches.ulicms.de/?v=" .

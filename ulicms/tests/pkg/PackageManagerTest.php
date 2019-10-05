@@ -9,11 +9,6 @@ class PackageManagerTest extends \PHPUnit\Framework\TestCase {
         $moduleManager->sync();
     }
 
-    public function tearDown() {
-        $packageManager = new PackageManager();
-        $packageManager->truncateInstalledPatches();
-    }
-
     public function testIsInstalledModuleReturnsTrue() {
         $packageManager = new PackageManager();
         $this->assertTrue($packageManager->isInstalled("core_home", PackageTypes::TYPE_MODULE));
@@ -59,61 +54,6 @@ class PackageManagerTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testGetInstalledPatches() {
-        for ($i = 1; $i <= 3; $i++) {
-            Database::pQuery(
-                    "insert into {prefix}installed_patches "
-                    . "(name, description, url, date) VALUES "
-                    . "(?,?,?, NOW())",
-                    [
-                        "patch-$i",
-                        "Beschreibung $i",
-                        "https://google.de",
-                    ],
-                    true
-            );
-        }
-
-        $packageManager = new PackageManager();
-        $patches = $packageManager->getInstalledPatches();
-
-        $this->assertIsArray($patches);
-
-        $this->assertCount(3, $patches);
-
-        foreach ($patches as $patch) {
-            $this->assertNotEmpty($patch->id);
-            $this->assertNotEmpty($patch->name);
-            $this->assertNotEmpty($patch->description);
-            $this->assertNotEmpty($patch->url);
-            $this->assertNotEmpty($patch->date);
-        }
-    }
-
-    public function testGetInstalledPatchNames() {
-        for ($i = 1; $i <= 3; $i++) {
-            Database::pQuery(
-                    "insert into {prefix}installed_patches "
-                    . "(name, description, url, date) VALUES "
-                    . "(?,?,?, NOW())",
-                    [
-                        "patch-$i",
-                        "Beschreibung $i",
-                        "https://google.de",
-                    ],
-                    true
-            );
-        }
-        $packageManager = new PackageManager();
-        $patches = $packageManager->GetInstalledPatchNames();
-
-        $this->assertIsArray($patches);
-
-        foreach ($patches as $patch) {
-            $this->assertNotEmpty($patch);
-        }
-    }
-
     public function testGetInstalledPackagesWithTypeModules() {
         $packageManager = new PackageManager();
         $packages = $packageManager->getInstalledPackages(
@@ -140,13 +80,6 @@ class PackageManagerTest extends \PHPUnit\Framework\TestCase {
         $this->expectException(BadMethodCallException::class);
         $packageManager->getInstalledPackages(
                 "invalid_type");
-    }
-
-    public function testTruncateInstalledPatches() {
-        $packageManager = new PackageManager();
-        $packageManager->truncateInstalledPatches();
-        $query = Database::selectAll("installed_patches");
-        $this->assertFalse(Database::any($query));
     }
 
 }

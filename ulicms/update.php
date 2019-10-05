@@ -14,6 +14,8 @@ if (file_exists("cms-config.php") and ! file_exists($configFile)) {
 
 require_once "init.php";
 
+use UliCMS\Packages\PatchManager;
+
 // "var" is old and should not be used in PHP >= 5
 // if the config file is writable replace "var" with "public"
 if (is_writable($configFile)) {
@@ -50,8 +52,8 @@ $migrator->migrate();
 Settings::register("minify_html", "1");
 
 // Reset tracking of installed patches
-$pkg = new PackageManager();
-$pkg->truncateInstalledPatches();
+$patchManager = new PatchManager();
+$patchManager->truncateInstalledPatches();
 
 // The line below will be uncommented by the mk-upgrade-package.py deploy script
 // The script will delete itself after execution.

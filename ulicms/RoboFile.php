@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use UliCMS\Packages\PatchManager;
 use UliCMS\Utils\CacheUtil;
 
 /**
@@ -341,16 +342,16 @@ class RoboFile extends \Robo\Tasks {
      * Truncate list of installed patches in database
      */
     public function patchesTruncate(): void {
-        $pkg = new PackageManager();
-        $pkg->truncateInstalledPatches();
+        $patchManager = new PatchManager();
+        $patchManager->truncateInstalledPatches();
     }
 
     /**
      * List installed patches
      */
     public function patchesInstalled() {
-        $pkg = new PackageManager();
-        $installedPatches = $pkg->getInstalledPatchNames();
+        $patchManager = new PatchManager();
+        $installedPatches = $patchManager->getInstalledPatchNames();
         if (count($installedPatches) == 0) {
             $this->writeln("No Patches installed");
             return;
@@ -365,6 +366,7 @@ class RoboFile extends \Robo\Tasks {
      * @param array $patchesToInstall name of the patches to install or "all"
      */
     public function patchesInstall(array $patchesToInstall): void {
+        $patchManager = new PatchManager();
         $available = $this->patchckAvailable();
         if (!$available) {
             $this->writeln("no patches available");
@@ -386,7 +388,7 @@ class RoboFile extends \Robo\Tasks {
                 if (count($splitted) >= 3) {
                     if (faster_in_array($splitted[0], $patchesToInstall) or
                             faster_in_array("all", $patchesToInstall)) {
-                        $success = $pkg->installPatch($splitted[0],
+                        $success = $patchManager->installPatch($splitted[0],
                                 $splitted[1], $splitted[2]);
                         if ($success) {
                             echo "Patch " . $splitted[0] .

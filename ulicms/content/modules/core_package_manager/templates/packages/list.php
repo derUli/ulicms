@@ -2,6 +2,7 @@
 
 use UliCMS\Security\PermissionChecker;
 use UliCMS\Constants\RequestMethod;
+use UliCMS\Packages\PatchManager;
 
 $permissionChecker = new PermissionChecker(get_user_id());
 
@@ -171,8 +172,8 @@ if ($permissionChecker->hasPermission("list_packages")) {
         </table>
     </div>
     <?php
-    $pkg = new PackageManager();
-    $patches = $pkg->getInstalledPatches();
+    $patchManager = new PatchManager();
+    $patches = $patchManager->getInstalledPatches();
     ?>
     <?php if ($permissionChecker->hasPermission("patch_management")) { ?>
         <h2><?php translate("installed_patches"); ?></h2>
