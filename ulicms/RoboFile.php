@@ -372,47 +372,23 @@ class RoboFile extends \Robo\Tasks {
             $this->writeln("no patches available");
             return;
         }
-        $installed_amount = 0;
-        $available = str_ireplace("\r\n", "\n", $available);
-        $available = explode("\n", $available);
+        $availablePatches = $patchManager->getAvailablePatches();
 
-        // TODO: this code looks like shit
-        // implement PatchManager class and move all patch management related
-        // tasks to that class
-        // refactor this code
-        // a method should return an array of AvailablePatch objects
-        foreach ($available as $line) {
-            $line = trim($line);
-            if (!empty($line)) {
-                $splitted = explode("|", $line);
-                if (count($splitted) >= 3) {
-                    if (faster_in_array($splitted[0], $patchesToInstall) or
-                            faster_in_array("all", $patchesToInstall)) {
-                        $success = $patchManager->installPatch($splitted[0],
-                                $splitted[1], $splitted[2]);
-                        if ($success) {
-                            echo "Patch " . $splitted[0] .
-                            " was installed.\n";
-                            $installed_amount ++;
-                        } else {
-                            echo "Installation of patch " .
-                            $success . " failed.\n";
-                            echo "Abort.\n";
-                            exit();
-                        }
-                    }
-                } else {
-                    echo "Patch " . $splitted[0] . " is not available\n";
-                }
+        $filteredPatches = [];
+        foreach ($availablePatches as $patch) {
+            if (faster_in_array($patch->name, $patchesToInstall) or faster_in_array("all", $patchesToInstall)) {
+                $filteredPatches[] = $patch;
             }
         }
-        if ($installed_amount != 1) {
-            echo $installed_amount . " patches successfully installed.\n";
-        } else {
-            echo $installed_amount . " patch successfully installed.\n";
-        }
-        if ($installed_amount > 0) {
-            clearCache();
+        // apply patches
+        foreach ($filteredPatches as $patch) {
+            $this->writeln("Apply patch {$patch->name}...");
+            if ($patch->install()) {
+                $this->writeln("Patch {$patch->name} applied");
+            } else {
+                $this->writeln("Installation of patch {$patch->name} failed");
+                exit(1);
+            }
         }
     }
 

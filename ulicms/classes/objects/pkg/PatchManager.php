@@ -8,6 +8,7 @@ use function clearCache;
 use function sureRemoveDir;
 use function recurse_copy;
 use ZipArchive;
+use StringHelper;
 
 class PatchManager {
 
@@ -20,6 +21,29 @@ class PatchManager {
             $retval[] = $row->name;
         }
         return $retval;
+    }
+
+    public function fetchPackageIndex(): ?string {
+        return file_get_contents_wrapper(PATCH_CHECK_URL, true);
+    }
+
+    public function getAvailablePatches(): array {
+        $patches = [];
+        $indexData = $this->fetchPackageIndex();
+        if (!$indexData) {
+            return $patches;
+        }
+        $lines = StringHelper::linesFromString($indexData, true, true);
+        foreach ($lines as $line) {
+            $splittedLine = explode("|", $line);
+            $patches[] = new Patch(
+                    $splittedLine[0],
+                    $splittedLine[1],
+                    $splittedLine[2],
+                    $splittedLine[3]
+            );
+        }
+        return $patches;
     }
 
     public function truncateInstalledPatches(): bool {

@@ -4,6 +4,7 @@ $classes = array(
     "PackageManager",
     "SinPackageInstaller",
     "PackageSourceConnector",
+    "Patch",
     "PatchManager"
 );
 foreach ($classes as $class) {
