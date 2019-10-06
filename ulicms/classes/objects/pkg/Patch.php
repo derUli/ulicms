@@ -18,10 +18,19 @@ class Patch {
         $this->hash = $hash;
     }
 
+    public static function fromLine(string $line): Patch {
+        $splittedLine = explode("|", $line);
+        return new self(
+                $splittedLine[0],
+                $splittedLine[1],
+                $splittedLine[2],
+                $splittedLine[3]
+        );
+    }
+
     public function install(): bool {
 
         $patchManager = new PatchManager();
-
         return $patchManager->installPatch(
                         $this->name,
                         $this->description,

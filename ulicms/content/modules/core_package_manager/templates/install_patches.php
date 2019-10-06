@@ -1,7 +1,7 @@
 <?php
 
 use UliCMS\Exceptions\CorruptDownloadException;
-use UliCMS\Packages\PatchManager;
+use UliCMS\Packages\Patch;
 
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("update_system")) {
@@ -16,36 +16,28 @@ if ($permissionChecker->hasPermission("update_system")) {
     <h1><?php translate("install_patches"); ?></h1>
     <?php
     $patches = $_POST["patches"];
-    $patchManager = new PatchManager();
 
     if (count($patches) <= 0) {
         translate("no_patches_selected");
     } else {
         foreach ($patches as $patch) {
-            $splitted = explode("|", $patch);
+            $patchObject = Patch::fromLine($patch);
 
-            $checksum = count($splitted) >= 4 ? $splitted[3] : null;
             try {
-                $success = $patchManager->installPatch(
-                        $splitted[0],
-                        $splitted[1],
-                        $splitted[2],
-                        false,
-                        $checksum
-                );
+                $success = $patchObject->install();
 
                 if ($success) {
-                    echo '<p style="color:green">' . _esc($splitted[0]) . " " .
+                    echo '<p style="color:green">' . _esc($patchObject->name) . " " .
                     get_translation("was_successfully_installed") . '</p>';
                 } else {
                     echo '<p style="color:red">' .
                     get_translation("installation_of") . " " .
-                    _esc($splitted[0]) . " " . get_Translation("is_failed") .
+                    _esc($patchObject->name) . " " . get_Translation("is_failed") .
                     "</p>";
                 }
             } catch (CorruptDownloadException $e) {
                 echo '<p>' . get_secure_translation("download_of_x_failed", array(
-                    "%item%" => $splitted[0]
+                    "%item%" => $patchObject->name
                 )) . '</p>';
             }
             fcflush();
