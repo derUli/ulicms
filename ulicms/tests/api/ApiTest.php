@@ -25,6 +25,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function tearDown() {
+        Flags::setNoCache(false);
 
         Database::query("delete from {prefix}content where title like 'Unit Test%'", true);
         $this->cleanUp();
@@ -127,24 +128,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("text/plain", get_mime(Path::resolve("ULICMS_ROOT/.htaccess")));
         $this->assertEquals("image/gif", get_mime(Path::resolve("ULICMS_ROOT/admin/gfx/edit.gif")));
         $this->assertEquals("image/png", get_mime(Path::resolve("ULICMS_ROOT/admin/gfx/edit.png")));
-    }
-
-    public function testVarIsType() {
-        $this->assertTrue(var_is_type(123, "numeric", true));
-        $this->assertTrue(var_is_type(null, "numeric", false));
-        $this->assertFalse(var_is_type(null, "numeric", true));
-        $this->assertFalse(var_is_type("", "numeric", true));
-        $this->assertTrue(var_is_type("", "numeric", false));
-
-        $this->assertFalse(var_is_type("nicht leer", "typ_der_nicht_existiert", true));
-    }
-
-    public function testStrContainsTrue() {
-        $this->assertTrue(str_contains("Ananas", "Ich esse gerne Ananas."));
-    }
-
-    public function testStrContainsFalse() {
-        $this->assertFalse(str_contains("Tomaten", "Ich esse gerne Ananas."));
     }
 
     public function testGetActionIsSet() {
@@ -296,19 +279,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
 
         $this->assertFalse(idefine("TEST_HELLO", "Uli"));
         $this->assertEquals("World", TEST_HELLO);
-    }
-
-    public function testFasterInArrayReturnsTrue() {
-        $array = array("hello", "world", 123);
-        $this->assertTrue(faster_in_array("world", $array));
-        $this->assertTrue(faster_in_array(123, $array));
-    }
-
-    public function testFasterInArrayReturnsFalse() {
-        $array = array("hello", "world", 123);
-        $this->assertFalse(faster_in_array("germany", $array));
-        $this->assertFalse(faster_in_array(789, $array));
-        $this->assertFalse(faster_in_array(789, "not-an-array"));
     }
 
     public function testGetAllSlugs() {
@@ -1087,6 +1057,14 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
                 "/content/modules/my_module/admin.php",
                 getModuleAdminFilePath2("my_module")
         );
+    }
+
+    public function testNoCacheWithTrue() {
+        $this->assertFalse(Flags::getNoCache());
+
+        no_cache(true);
+
+        $this->assertTrue(Flags::getNoCache());
     }
 
 }

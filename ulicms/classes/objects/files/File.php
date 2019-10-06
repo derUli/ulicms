@@ -59,7 +59,7 @@ class File {
         if (!$data) {
             return null;
         }
-        $data = str_replace("\r\n", "\n");
+        $data = normalizeLN($data, "\n");
         $data = explode("\n", $data);
         return $data;
     }

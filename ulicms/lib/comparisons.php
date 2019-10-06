@@ -4,6 +4,14 @@ declare(strict_types=1);
 
 use Carbon\Carbon;
 
+function faster_in_array($needle, $haystack): bool {
+    if (!is_array($haystack)) {
+        return false;
+    }
+    $flipped = array_flip($haystack);
+    return isset($flipped[$needle]);
+}
+
 // is $val a decimal number or a integer?
 function is_decimal($val): bool {
     return is_numeric($val) and ! ctype_digit(strval($val));
@@ -154,9 +162,9 @@ function is_mobile(): bool {
 }
 
 function isMaintenanceMode(): bool {
-	if(!is_string(Settings::get("maintenance_mode"))){
-		return false;
-	}
+    if (!is_string(Settings::get("maintenance_mode"))) {
+        return false;
+    }
     return (strtolower(Settings::get("maintenance_mode")) == "on" ||
             strtolower(Settings::get("maintenance_mode")) == "true" ||
             Settings::get("maintenance_mode") == "1");
@@ -182,8 +190,9 @@ function is_admin(): bool {
 }
 
 // Check if it is night (current hour between 0 and 4 o'Clock AM)
-function is_night(): bool {
-    $hour = (int) date("G", time());
+function is_night(?int $time = null): bool {
+    $time = $time ? $time : time();
+    $hour = (int) date("G", $time);
     return ($hour >= 0 and $hour <= 4);
 }
 
@@ -211,4 +220,22 @@ function endsWith(string $haystack, string $needle, bool $case = true): bool {
     }
     return (strcasecmp(substr($haystack, strlen($haystack) - strlen($needle)),
                     $needle) === 0);
+}
+
+function var_is_type($var, $type, $required = false): bool {
+    $methodName = "is_{$type}";
+
+    if ($var === null or $var === "") {
+        return !$required;
+    }
+
+    if (function_exists($methodName)) {
+        return $methodName($var);
+    }
+    return false;
+}
+
+// returns true if $needle is a substring of $haystack
+function str_contains($needle, $haystack): bool {
+    return strpos($haystack, $needle) !== false;
 }

@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Models\Content\Advertisement\Banner;
+use UliCMS\Exceptions\DatasetNotFoundException;
 
 class BannerTest extends \PHPUnit\Framework\TestCase {
 
@@ -255,6 +256,30 @@ class BannerTest extends \PHPUnit\Framework\TestCase {
                 . '<img src="http://firma.de/bild.gif" '
                 . 'title="My first Gif Banner" alt="My first Gif Banner" '
                 . 'border="0"></a>', $banner->render());
+    }
+
+    public function testSetDateFromThrowsException() {
+        $banner = new Banner();
+
+        $this->expectException("InvalidArgumentException");
+        $banner->setDateFrom(new Page());
+    }
+
+    public function testSetDateToThrowsException() {
+        $banner = new Banner();
+
+        $this->expectException("InvalidArgumentException");
+        $banner->setDateTo(new Page());
+    }
+
+    public function testLoadByIdNotFound() {
+        $banner = new Banner();
+
+        $this->expectException(DatasetNotFoundException::class);
+
+        $banner->loadByID(PHP_INT_MAX);
+
+        $this->assertFalse($banner->isPersistent());
     }
 
 }

@@ -20,27 +20,6 @@ function idefine($key, $value): bool {
     return false;
 }
 
-function faster_in_array($needle, $haystack): bool {
-    if (!is_array($haystack)) {
-        return false;
-    }
-    $flipped = array_flip($haystack);
-    return isset($flipped[$needle]);
-}
-
-function var_is_type($var, $type, $required = false): bool {
-    $methodName = "is_{$type}";
-
-    if ($var === null or $var === "") {
-        return !$required;
-    }
-
-    if (function_exists($methodName)) {
-        return $methodName($var);
-    }
-    return false;
-}
-
 function var_dump_str(): string {
     $argc = func_num_args();
     $argv = func_get_args();
@@ -95,8 +74,8 @@ if (!function_exists("each")) {
 
 function bool2YesNo(
         bool $value,
-        string $yesString = null,
-        string $noString = null
+        ?string $yesString = null,
+        ?string $noString = null
 ): string {
     if (!$yesString) {
         $yesString = get_translation("yes");
@@ -156,11 +135,6 @@ function register_translation($key, $value) {
         $key = "TRANSLATION_" . $key;
     }
     idefine($key, $value);
-}
-
-// returns true if $needle is a substring of $haystack
-function str_contains($needle, $haystack): bool {
-    return strpos($haystack, $needle) !== false;
 }
 
 // Get a subset of an associative array by providing the keys.
@@ -912,6 +886,15 @@ function fcflush(): void {
     }
 }
 
+function no_cache($do = false): void {
+    if ($do) {
+        Flags::setNoCache(true);
+    } else if (get_cache_control() == "auto"
+            or get_cache_control() == "no_cache") {
+        Flags::setNoCache(true);
+    }
+}
+
 function isModuleInstalled(string $name): bool {
     $module = new Module($name);
     return $module->isInstalled();
@@ -927,15 +910,6 @@ function getAllModules(): array {
     return $modules;
 }
 
-function no_cache($do = false): void {
-    if ($do) {
-        Flags::setNoCache(true);
-    } else if (get_cache_control() == "auto"
-            or get_cache_control() == "no_cache") {
-        Flags::setNoCache(true);
-    }
-}
-
 function stringContainsShortCodes(string $content, ?string $module = null): bool {
     $quot = '(' . preg_quote('&quot;') . ')?';
     return boolval(
@@ -945,6 +919,61 @@ function stringContainsShortCodes(string $content, ?string $module = null): bool
             preg_match('/\[module=\"?' . $quot . '([a-zA-Z0-9_]+)\"?' .
                     $quot . '\]/m', $content)
     );
+}
+
+// replace Shortcodes with modules
+function replaceShortcodesWithModules(
+        string $string,
+        bool $replaceOther = true
+): string {
+    $string = $replaceOther ? replaceOtherShortCodes($string) : $string;
+
+    $allModules = ModuleHelper::getAllEmbedModules();
+    $disabledModules = Vars::get("disabledModules");
+
+    foreach ($allModules as $module) {
+        if (faster_in_array($module, $disabledModules)
+                or ! stringContainsShortCodes($string, $module)) {
+            continue;
+        }
+        $stringToReplace1 = '[module="' . $module . '"]';
+        $stringToReplace2 = '[module=&quot;' . $module . '&quot;]';
+        $stringToReplace3 = '[module=' . $module . ']';
+
+        $module_mainfile_path = getModuleMainFilePath($module);
+        $module_mainfile_path2 = getModuleMainFilePath2($module);
+
+        if (file_exists($module_mainfile_path)) {
+            require_once $module_mainfile_path;
+        } else if (file_exists($module_mainfile_path2)) {
+            require_once $module_mainfile_path2;
+        }
+
+        $main_class = getModuleMeta($module, "main_class");
+        $controller = null;
+        if ($main_class) {
+            $controller = ControllerRegistry::get($main_class);
+        }
+        if ($controller and method_exists($controller, "render")) {
+            $html_output = $controller->render();
+        } else if (function_exists($module . "_render")) {
+            $html_output = call_user_func($module . "_render");
+        } else {
+            throw new BadMethodCallException("Module $module "
+                    . "has no render() method");
+        }
+
+        $string = str_replace($stringToReplace1, $html_output, $string);
+        $string = str_replace($stringToReplace2, $html_output, $string);
+
+        $string = str_replace($stringToReplace3, $html_output, $string);
+        $string = str_replace('[title]', get_title(), $string);
+    }
+    $string = replaceVideoTags($string);
+    $string = replaceAudioTags($string);
+
+    $string = optimizeHtml($string);
+    return $string;
 }
 
 function replaceOtherShortCodes(string $string): string {
@@ -1012,62 +1041,6 @@ function replaceOtherShortCodes(string $string): string {
             }
         }
     }
-    return $string;
-}
-
-// replace Shortcodes with modules
-function replaceShortcodesWithModules(
-        string $string,
-        bool $replaceOther = true
-): string {
-
-    $string = $replaceOther ? replaceOtherShortCodes($string) : $string;
-
-    $allModules = ModuleHelper::getAllEmbedModules();
-    $disabledModules = Vars::get("disabledModules");
-
-    foreach ($allModules as $module) {
-        if (faster_in_array($module, $disabledModules)
-                or ! stringContainsShortCodes($string, $module)) {
-            continue;
-        }
-        $stringToReplace1 = '[module="' . $module . '"]';
-        $stringToReplace2 = '[module=&quot;' . $module . '&quot;]';
-        $stringToReplace3 = '[module=' . $module . ']';
-
-        $module_mainfile_path = getModuleMainFilePath($module);
-        $module_mainfile_path2 = getModuleMainFilePath2($module);
-
-        if (file_exists($module_mainfile_path)) {
-            require_once $module_mainfile_path;
-        } else if (file_exists($module_mainfile_path2)) {
-            require_once $module_mainfile_path2;
-        }
-
-        $main_class = getModuleMeta($module, "main_class");
-        $controller = null;
-        if ($main_class) {
-            $controller = ControllerRegistry::get($main_class);
-        }
-        if ($controller and method_exists($controller, "render")) {
-            $html_output = $controller->render();
-        } else if (function_exists($module . "_render")) {
-            $html_output = call_user_func($module . "_render");
-        } else {
-            throw new BadMethodCallException("Module $module "
-                    . "has no render() method");
-        }
-
-        $string = str_replace($stringToReplace1, $html_output, $string);
-        $string = str_replace($stringToReplace2, $html_output, $string);
-
-        $string = str_replace($stringToReplace3, $html_output, $string);
-        $string = str_replace('[title]', get_title(), $string);
-    }
-    $string = replaceVideoTags($string);
-    $string = replaceAudioTags($string);
-
-    $string = optimizeHtml($string);
     return $string;
 }
 

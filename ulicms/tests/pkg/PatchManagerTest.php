@@ -43,6 +43,25 @@ class PatchManagerTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
+    public function testGetAvailablePatches() {
+
+        $patchManager = new PatchManager();
+        $patches = $patchManager->getAvailablePatches();
+
+        $this->assertIsArray($patches);
+        foreach ($patches as $patch) {
+            $this->assertNotEmpty($patch->name);
+            $this->assertNotEmpty($patch->description);
+            $this->assertNotEmpty($patch->url);
+            $this->assertNotEmpty($patch->hash);
+        }
+    }
+
+    public function testFetchpageIndex() {
+        $patchManager = new PatchManager();
+        $this->assertIsString($patchManager->fetchPackageIndex());
+    }
+
     public function testTruncateInstalledPatches() {
         $patchManager = new PatchManager();
         $patchManager->truncateInstalledPatches();

@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Utils\File;
+use UliCMS\Exceptions\NotImplementedException;
 
 class FilesTest extends \PHPUnit\Framework\TestCase {
 
@@ -119,6 +120,8 @@ class FilesTest extends \PHPUnit\Framework\TestCase {
 
         sureRemoveDir($baseDir, true);
 
+        sureRemoveDir("gibts_nicht", true);
+
         $this->assertFalse(is_dir($baseDir));
     }
 
@@ -179,6 +182,75 @@ class FilesTest extends \PHPUnit\Framework\TestCase {
 
         $this->assertCount(count($sourceFiles), $targetFiles);
         sureRemoveDir($destination, true);
+    }
+
+    public function testLastChanged() {
+        $file = Path::resolve("ULICMS_ROOT/package.json");
+
+        ob_start();
+
+        File::lastChanged($file);
+
+        $timestamp = ob_get_clean();
+
+        $this->assertIsNumeric($timestamp);
+        $this->assertGreaterThanOrEqual(1, $timestamp);
+    }
+
+    public function testWriteAppendAndDeleteFile() {
+        $path = Path::resolve(
+                        "ULICMS_TMP/" . uniqid()
+        );
+
+        File::write($path, "foo");
+        File::append($path, "bar");
+
+        $fileContent = File::read($path);
+        $this->assertEquals("foobar", $fileContent);
+    }
+
+    public function testWriteRenameAndDelete() {
+        $path1 = Path::resolve(
+                        "ULICMS_TMP/" . uniqid()
+        );
+        $path2 = Path::resolve(
+                        "ULICMS_TMP/" . uniqid()
+        );
+
+        File::write($path1, "My File");
+
+        $this->assertFileExists($path1);
+        $this->assertFileNotExists($path2);
+
+        File::rename($path1, $path2);
+
+        $this->assertFileNotExists($path1);
+        $this->assertFileExists($path2);
+
+        File::delete($path2);
+
+        $this->assertFileNotExists($path1);
+        $this->assertFileNotExists($path2);
+    }
+
+    public function testLoadLinesAndTrim() {
+        $inputFile = Path::resolve("ULICMS_ROOT/tests/fixtures/trimLines.input.txt");
+        $inputExpected = Path::resolve("ULICMS_ROOT/tests/fixtures/trimLines.expected.txt");
+
+        $expectedData = normalizeLN(
+                file_get_contents($inputExpected),
+                "\n");
+        $expectedData = explode("\n", $expectedData);
+
+        $output = File::loadLinesAndTrim($inputFile);
+
+        $this->assertCount(8, $output);
+    }
+
+    public function testLoadLines() {
+        $this->assertNull(
+                File::loadLines("gibts_nicht")
+        );
     }
 
 }

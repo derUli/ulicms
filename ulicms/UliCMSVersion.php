@@ -8,10 +8,10 @@ class UliCMSVersion {
         $this->codename = "Tidy Guanako";
         $this->releaseYear = 2019;
         $this->buildDate = 0; // {InsertBuildDate}
-        $this->internalVersion = Array(
+        $this->internalVersion = [
             2020,
             1
-        );
+        ];
         $this->update = "";
     }
 

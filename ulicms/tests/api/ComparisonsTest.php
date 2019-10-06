@@ -76,6 +76,9 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase {
     public function testIsMaintenanceModeOff() {
         Settings::set("maintenance_mode", "0");
         $this->assertFalse(isMaintenanceMode());
+
+        Settings::delete("maintenance_mode");
+        $this->assertFalse(isMaintenanceMode());
     }
 
     public function testIsFalse() {
@@ -146,6 +149,7 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(is_decimal("foobar"));
         $this->assertFalse(is_decimal("0"));
     }
+
     public function testIsBlankReturnsTrue() {
         $this->assertTrue(is_blank(""));
         $this->assertTrue(is_blank(" "));
@@ -203,4 +207,52 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(endsWith("hello world", "you"));
         $this->assertFalse(endsWith("hello world", "World"));
     }
+
+    public function testFasterInArrayReturnsTrue() {
+        $array = array("hello", "world", 123);
+        $this->assertTrue(faster_in_array("world", $array));
+        $this->assertTrue(faster_in_array(123, $array));
+    }
+
+    public function testFasterInArrayReturnsFalse() {
+        $array = array("hello", "world", 123);
+        $this->assertFalse(faster_in_array("germany", $array));
+        $this->assertFalse(faster_in_array(789, $array));
+        $this->assertFalse(faster_in_array(789, "not-an-array"));
+    }
+
+    public function testVarIsType() {
+        $this->assertTrue(var_is_type(123, "numeric", true));
+        $this->assertTrue(var_is_type(null, "numeric", false));
+        $this->assertFalse(var_is_type(null, "numeric", true));
+        $this->assertFalse(var_is_type("", "numeric", true));
+        $this->assertTrue(var_is_type("", "numeric", false));
+
+        $this->assertFalse(var_is_type("nicht leer", "typ_der_nicht_existiert", true));
+    }
+
+    public function testStrContainsTrue() {
+        $this->assertTrue(str_contains("Ananas", "Ich esse gerne Ananas."));
+    }
+
+    public function testStrContainsFalse() {
+        $this->assertFalse(str_contains("Tomaten", "Ich esse gerne Ananas."));
+    }
+
+    public function testIsNightReturnsTrue() {
+        $this->assertTrue(is_night(1570404356));
+    }
+
+    public function testIsNightReturnsFalse() {
+        $this->assertFalse(is_night(1570389956));
+    }
+
+    public function testIsNightWithoutTimeReturnsBool() {
+        $this->assertIsBool(is_night());
+    }
+
+    public function testIsDebugMode() {
+        $this->assertIsBool(is_debug_mode());
+    }
+
 }

@@ -7,6 +7,8 @@ namespace UliCMS\Models\Content\Advertisement;
 use Template;
 use Database;
 use Model;
+use InvalidArgumentException;
+use UliCMS\Exceptions\DatasetNotFoundException;
 
 // advertisement banners can be html codes or classic gif banners
 class Banner extends Model {
@@ -37,7 +39,7 @@ class Banner extends Model {
             $result = Database::fetchObject($result);
             $this->fillVars($result);
         } else {
-            throw new Exception("No banner with id $id");
+            throw new DatasetNotFoundException("No banner with id $id");
         }
     }
 

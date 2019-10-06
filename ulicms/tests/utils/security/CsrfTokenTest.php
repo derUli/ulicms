@@ -58,4 +58,10 @@ class CsrfTokenTest extends \PHPUnit\Framework\TestCase {
         Settings::set("min_time_to_fill_form", $initialMinTime);
     }
 
+    public function testNoAntiCsrf() {
+        $this->assertFalse(defined("NO_ANTI_CSRF"));
+        no_anti_csrf();
+        $this->assertTrue(defined("NO_ANTI_CSRF"));
+    }
+
 }
