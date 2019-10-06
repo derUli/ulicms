@@ -30,4 +30,14 @@ class Patch {
                         $this->hash);
     }
 
+    public function toLine() {
+        $columns = [
+            $this->name,
+            $this->description,
+            $this->url,
+            $this->hash
+        ];
+        return implode("|", $columns);
+    }
+
 }
