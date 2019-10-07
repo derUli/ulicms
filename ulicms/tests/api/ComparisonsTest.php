@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Utils\File;
+use UliCMS\Exceptions\DatasetNotFoundException;
 
 class ComparisonsTest extends \PHPUnit\Framework\TestCase {
 
@@ -253,6 +254,11 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase {
 
     public function testIsDebugMode() {
         $this->assertIsBool(is_debug_mode());
+    }
+
+    public function testGetByIdThrowsException() {
+        $this->expectException(DatasetNotFoundException::class);
+        ContentFactory::getByID(PHP_INT_MAX);
     }
 
 }
