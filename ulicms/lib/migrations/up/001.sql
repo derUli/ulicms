@@ -42,7 +42,7 @@ CREATE TABLE `{prefix}comments` (
   `author_name` varchar(255) NOT NULL,
   `author_email` varchar(255) DEFAULT NULL,
   `author_url` varchar(255) DEFAULT NULL,
-  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `text` text NOT NULL,
   `status` varchar(50) NOT NULL DEFAULT 'pending',
   `ip` varchar(255) DEFAULT NULL,
@@ -51,7 +51,7 @@ CREATE TABLE `{prefix}comments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `{prefix}content` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `systemname` varchar(255) NOT NULL,
   `title` varchar(255) NOT NULL,
   `alternate_title` varchar(255) DEFAULT '',
@@ -102,7 +102,8 @@ CREATE TABLE `{prefix}content` (
   `hidden` tinyint(1) NOT NULL DEFAULT '0',
   `comment_homepage` varchar(255) DEFAULT NULL,
   `link_to_language` int(11) DEFAULT NULL,
-  `comments_enabled` tinyint(4) DEFAULT NULL
+  `comments_enabled` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `{prefix}custom_fields` (
@@ -113,10 +114,11 @@ CREATE TABLE `{prefix}custom_fields` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `{prefix}dbtrack` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `component` varchar(150) NOT NULL,
   `name` varchar(150) NOT NULL,
-  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `{prefix}forms` (
@@ -162,7 +164,7 @@ CREATE TABLE `{prefix}installed_patches` (
   `name` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `url` varchar(255) NOT NULL,
-  `date` datetime NOT NULL
+  `date` TIMESTAMP NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `{prefix}languages` (
@@ -232,7 +234,7 @@ INSERT INTO `{prefix}settings` (`id`, `name`, `value`) VALUES
 (3, 'redirection', ''),
 (4, 'homepage_owner', 'Ulrich Schmidt'),
 (5, 'email', 'admin@deruli.de'),
-(6, 'motto', 'A new website'),
+(6, 'motto', 'Thoughts, stories and ideas.'),
 (7, 'date_format', 'd.m.Y H:i'),
 (8, 'autor_text', 'Diese Seite wurde verfasst von Vorname Nachname'),
 (9, 'robots', 'index,follow'),
@@ -341,29 +343,9 @@ ALTER TABLE `{prefix}comments`
   ADD PRIMARY KEY (`id`),
   ADD KEY `content_id` (`content_id`);
 
-ALTER TABLE `{prefix}content`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `systemname` (`systemname`(191)),
-  ADD KEY `language` (`language`),
-  ADD KEY `menu` (`menu`),
-  ADD KEY `parent` (`parent`),
-  ADD KEY `active` (`active`),
-  ADD KEY `deleted_at` (`deleted_at`),
-  ADD KEY `hidden` (`hidden`),
-  ADD KEY `type` (`type`),
-  ADD KEY `fk_category` (`category`),
-  ADD KEY `fk_autor` (`autor`),
-  ADD KEY `fk_video` (`video`),
-  ADD KEY `fk_audio` (`audio`),
-  ADD KEY `fk_link_to_language` (`link_to_language`),
-  ADD KEY `fk_content_group_id` (`group_id`);
-
 ALTER TABLE `{prefix}custom_fields`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_content_id` (`content_id`);
-
-ALTER TABLE `{prefix}dbtrack`
-  ADD PRIMARY KEY (`id`);
 
 ALTER TABLE `{prefix}forms`
   ADD PRIMARY KEY (`id`),
@@ -436,13 +418,7 @@ ALTER TABLE `{prefix}categories`
 ALTER TABLE `{prefix}comments`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `{prefix}content`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 ALTER TABLE `{prefix}custom_fields`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `{prefix}dbtrack`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `{prefix}forms`
@@ -479,21 +455,8 @@ ALTER TABLE `{prefix}videos`
 ALTER TABLE `{prefix}audio`
   ADD CONSTRAINT `fk_audio_category` FOREIGN KEY (`category_id`) REFERENCES `{prefix}categories` (`id`) ON DELETE SET NULL;
 
-ALTER TABLE `{prefix}banner`
-  ADD CONSTRAINT `fk_category_id` FOREIGN KEY (`category`) REFERENCES `{prefix}categories` (`id`) ON DELETE SET NULL;
-
 ALTER TABLE `{prefix}comments`
   ADD CONSTRAINT `{prefix}comments_ibfk_1` FOREIGN KEY (`content_id`) REFERENCES `{prefix}content` (`id`) ON DELETE CASCADE;
-
-ALTER TABLE `{prefix}content`
-  ADD CONSTRAINT `fk_audio` FOREIGN KEY (`audio`) REFERENCES `{prefix}audio` (`id`) ON DELETE SET NULL,
-  ADD CONSTRAINT `fk_autor` FOREIGN KEY (`autor`) REFERENCES `{prefix}users` (`id`) ON DELETE SET NULL,
-  ADD CONSTRAINT `fk_category` FOREIGN KEY (`category`) REFERENCES `{prefix}categories` (`id`) ON DELETE SET NULL,
-  ADD CONSTRAINT `fk_content_group_id` FOREIGN KEY (`group_id`) REFERENCES `{prefix}groups` (`id`) ON DELETE NO ACTION,
-  ADD CONSTRAINT `fk_content_language` FOREIGN KEY (`language`) REFERENCES `{prefix}languages` (`language_code`) ON DELETE SET NULL,
-  ADD CONSTRAINT `fk_link_to_language` FOREIGN KEY (`link_to_language`) REFERENCES `{prefix}languages` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `fk_parent_content` FOREIGN KEY (`parent`) REFERENCES `{prefix}content` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `fk_video` FOREIGN KEY (`video`) REFERENCES `{prefix}videos` (`id`) ON DELETE SET NULL;
 
 ALTER TABLE `{prefix}custom_fields`
   ADD CONSTRAINT `fk_content_id` FOREIGN KEY (`content_id`) REFERENCES `{prefix}content` (`id`) ON DELETE CASCADE;
