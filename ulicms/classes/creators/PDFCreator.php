@@ -37,7 +37,7 @@ class PDFCreator {
         if (!class_exists('\Mpdf\Mpdf')) {
             ExceptionResult(
                     get_translation("mpdf_not_installed",
-                            ["link" => StringHelper::makeLinksClickable(
+                            ["%link%" => StringHelper::makeLinksClickable(
                                         "https://extend.ulicms.de/mPDF.html"
                                 )]
                     )
