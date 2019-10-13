@@ -33,6 +33,8 @@ Verbesserungen:
 Entfernte Features:
 * Dropdown Filter
   Diese Features werden in den nächsten UliCMS Releases erneut integriert werden.
+* mPDF wurde aus den Composer Abhängigkeiten entfernt.
+  Wenn die PDF-Ausgabe genutzt werden soll, muss dafür das mPDF Paket von https://extend.ulicms.de/mPDF.html installiert werden
 
 ===== Neues in UliCMS 2019.4 =====
 
