@@ -30,3 +30,5 @@ add_translation("confirm_undelete_page",
 add_translation("entries_per_page", "Einträge je Seite");
 
 add_translation("robots", "Robots");
+
+add_translation("page_saved", "Die Seite wurde gespeichert.");

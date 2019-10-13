@@ -37,9 +37,10 @@ $(() => {
         },
         success: () => {
             $(".loading").hide();
-            // FIXME: Use translation
             $("#message_page_edit").html(
-                    '<span style="color:green;">Die Seite wurde gespeichert</span>'
+                    `<span style="color:green;">
+                        ${Translation.PageSaved}
+                     </span>`
                     );
             $("#message_page_edit").show();
         }
