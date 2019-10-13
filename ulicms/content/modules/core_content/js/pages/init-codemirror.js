@@ -1,4 +1,3 @@
-
 /* global CodeMirror */
 
 let formChanged = 0;

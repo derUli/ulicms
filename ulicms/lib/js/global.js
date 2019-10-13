@@ -1,14 +1,9 @@
 /* global DocumentTouch, Translation */
 
-// function to ask if a dataset should be deleted
-askForDelete = () => {
-    return confirm(Translation.AskForDelete);
-};
-
 $(() => {
-// delete form handling
+    // delete form handling with confirmation
     $("form.delete-form").submit(() =>
-        askForDelete()
+        confirm(Translation.AskForDelete)
     );
 });
 

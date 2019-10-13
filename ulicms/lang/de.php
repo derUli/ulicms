@@ -755,4 +755,8 @@ add_translation("disabled_functions", "Deaktivierte Funktionen");
 
 add_translation("unsupported_output_format", "Nicht unterstütztes Ausgabeformat: %format%");
 
+add_translation("mpdf_not_installed", "mPDF ist nicht installiert.\n"
+        . "Bitte installieren Sie mPDF von %link% um das PDF-Ausgabe "
+        . "Feature nutzen zu können.");
+
 do_event("lang_de");

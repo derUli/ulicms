@@ -13,9 +13,7 @@ $(() => {
             $(".pageform").show();
             // Refresh CodeMirror
             refreshCodeMirrors();
-            $(".accordion-header").click(() =>
-                refreshCodeMirrors()
-            );
+            $(".accordion-header").click(() => refreshCodeMirrors());
         }
     });
 

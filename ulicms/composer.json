@@ -41,7 +41,6 @@
         "matthiasmullie/minify": "*",
         "rakit/validation": "*",
         "nesbot/carbon": "*",
-        "mpdf/mpdf": "^8.0",
 		"symfony/polyfill-mbstring": "*",
         "dereuromark/media-embed": "^0.5.0",
         "jimmiw/php-time-ago": "^3.1",

@@ -7,6 +7,7 @@ namespace UliCMS\Creators;
 use Template;
 use Mpdf\Mpdf;
 use UliCMS\Utils\CacheUtil;
+use StringHelper;
 
 // this class renders a page as pdf using mPDF
 class PDFCreator {
@@ -30,6 +31,18 @@ class PDFCreator {
 
     // renders the pdf and returns the pdf binary data as string
     public function render(): string {
+
+        // The Mpdf module is required to render pdf files
+        // if it is not installed shown an error message to the user
+        if (!class_exists('\Mpdf\Mpdf')) {
+            ExceptionResult(
+                    get_translation("mpdf_not_installed",
+                            ["link" => StringHelper::makeLinksClickable(
+                                        "https://extend.ulicms.de/mPDF.html"
+                                )]
+                    )
+            );
+        }
 
         $cacheUid = CacheUtil::getCurrentUid();
 
