@@ -18,6 +18,7 @@ $(() => {
         location.href = "#" + jumpTo;
     }
 });
+
 // scrolls to an anchor with animation
 scrollToAnchor = (aid) => {
     const aTag = $("a[name='" + aid + "']");
@@ -30,6 +31,7 @@ refreshCodeMirrors = () => {
         el.CodeMirror.refresh()
     );
 };
+
 // shakes a div (animation)
 // This is used when login fails
 shake = (div) => {
@@ -47,6 +49,7 @@ shake = (div) => {
         left: 0
     }, interval);
 };
+
 // this bind an event to a checkbox to toggle a password field between clear
 // text and stars
 bindTogglePassword = (inputField, checkboxField) => {
@@ -70,13 +73,14 @@ checkSelectAllIfAllChecked = (item, group) => {
     if (!item) {
         return;
     }
-// if the count of the checked checkboxes in the group is equal to the count
-// of all checkboxes in this group
+
+    // if the count of the checked checkboxes in the group is equal to the count
+    // of all checkboxes in this group
     const allSelected = $("input[type=checkbox][data-checkbox-group='" + group
             + "']:checked").length === $("input[type=checkbox][data-checkbox-group='"
             + group + "']").length;
     // check the "Select All" Checkbox, else uncheck it
-    $(item).prop("checked", allSelected)
+    $(item).prop("checked", allSelected);
 };
 selectAllChecked = (event) => {
     const selectAllCheckbox = $(event.target);
