@@ -2,7 +2,7 @@
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("settings_simple")) {
     $languages = getAllLanguages();
-    $meta_descriptions = array();
+    $meta_descriptions = [];
     for ($i = 0; $i < count($languages); $i ++) {
         $lang = $languages[$i];
         $meta_descriptions[$lang] = Settings::get("meta_description_" . $lang);
@@ -17,7 +17,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
     </p>
     <h1><?php get_translation("meta_description"); ?></h1>
     <?php
-    echo ModuleHelper::buildMethodCallForm("MetaDescriptionController", "save", array(), "post", array(
+    echo ModuleHelper::buildMethodCallForm("MetaDescriptionController", "save", [], "post", array(
         "id" => "meta_description_settings"
     ));
     ?>
@@ -41,7 +41,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
                         esc($lang);
                         ?>"
                         value="<?php
-                        echo StringHelper::realHtmlSpecialchars($meta_descriptions[$lang]);
+                        esc($meta_descriptions[$lang]);
                         ?>"></td>
             </tr>
             <?php
@@ -57,13 +57,15 @@ if ($permissionChecker->hasPermission("settings_simple")) {
             </td>
         </tr>
     </table>
-    <?php echo ModuleHelper::endForm(); ?>
     <?php
+    echo ModuleHelper::endForm();
+
+    $translation = new JSTranslation();
+    $translation->addKey("changes_was_saved");
+    $translation->render();
+
     enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/meta_description.js"));
     combinedScriptHtml();
-    ?>
-
-    <?php
 } else {
     noPerms();
 }

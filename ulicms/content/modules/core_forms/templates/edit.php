@@ -1,4 +1,7 @@
 <?php
+
+use UliCMS\Models\Content\Categories;
+
 $permissionChecker = new ACL();
 if (!$permissionChecker->hasPermission("forms") or ! $permissionChecker->hasPermission("forms_edit")) {
     noPerms();
@@ -75,8 +78,7 @@ if (!$permissionChecker->hasPermission("forms") or ! $permissionChecker->hasPerm
             <button name="edit_form" type="submit" class="btn btn-primary">
                 <i class="fas fa-save"></i>  <?php translate("save"); ?></button>
         </p>
-        <?php echo ModuleHelper::endForm(); ?>
-
         <?php
+        echo ModuleHelper::endForm();
     }
 }

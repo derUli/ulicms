@@ -1,13 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace UliCMS\HTML;
 
 use ModuleHelper;
 use Template;
 
+// this class contains methods to build input fields
 class Input {
 
-    public static function TextBox($name, $value, $type = "text", $htmlAttributes = array()) {
+    public static function textBox(string $name,
+            $value,
+            string $type = "text",
+            array $htmlAttributes = []): string {
         $attributes = array(
             "type" => $type,
             "name" => $name,
@@ -20,7 +26,11 @@ class Input {
         return "<input {$attribHTML}>";
     }
 
-    public static function TextArea($name, $value, $rows = 25, $cols = 80, $htmlAttributes = array()) {
+    public static function textArea(string $name,
+            $value,
+            int $rows = 25,
+            int $cols = 80,
+            array $htmlAttributes = []): string {
         $attributes = array(
             "name" => $name,
             "rows" => $rows,
@@ -36,11 +46,15 @@ class Input {
         return "<textarea {$attribHTML}>{$escapedValue}</textarea>";
     }
 
-    public static function Password($name, $value, $htmlAttributes = array()) {
-        return self::TextBox($name, $value, "password", $htmlAttributes);
+    public static function password(string $name,
+            $value,
+            array $htmlAttributes = []): string {
+        return self::textBox($name, $value, "password", $htmlAttributes);
     }
 
-    public static function File($name, $multiple = false, $accept = null, $htmlAttributes = array()) {
+    public static function file(string $name,
+            bool $multiple = false,
+            $accept = null, array $htmlAttributes = []): string {
         $attributes = array(
             "name" => $name
         );
@@ -58,28 +72,40 @@ class Input {
             $attributes[$key] = $val;
         }
 
-        return self::TextBox($name, "", "file", $attributes);
+        return self::textBox($name, "", "file", $attributes);
     }
 
-    public static function Hidden($name, $value, $htmlAttributes = array()) {
-        return self::TextBox($name, $value, "hidden", $htmlAttributes);
+    public static function hidden(string $name,
+            $value,
+            array $htmlAttributes = []): string {
+        return self::textBox($name, $value, "hidden", $htmlAttributes);
     }
 
-    public static function CheckBox($name, $checked = false, $value = "1", $htmlAttributes = array()) {
+    public static function checkBox(string $name,
+            bool $checked = false,
+            $value = "1",
+            array $htmlAttributes = []): string {
         if ($checked) {
             $htmlAttributes["checked"] = "checked";
         }
-        return self::TextBox($name, $value, "checkbox", $htmlAttributes);
+        return self::textBox($name, $value, "checkbox", $htmlAttributes);
     }
 
-    public static function RadioButton($name, $checked = false, $value = "1", $htmlAttributes = array()) {
+    public static function radioButton(string $name,
+            bool $checked = false,
+            $value = "1",
+            array $htmlAttributes = []): string {
         if ($checked) {
             $htmlAttributes["checked"] = "checked";
         }
-        return self::TextBox($name, $value, "radio", $htmlAttributes);
+        return self::textBox($name, $value, "radio", $htmlAttributes);
     }
 
-    public static function SingleSelect($name, $value = null, $options = array(), $size = 1, $htmlAttributes = array()) {
+    public static function singleSelect(string $name,
+            $value = null,
+            array $options = [],
+            int $size = 1,
+            array $htmlAttributes = []): string {
         $attributes = array(
             "name" => $name,
             "size" => $size
@@ -100,7 +126,11 @@ class Input {
         return $html;
     }
 
-    public static function MultiSelect($name, $value = null, $options = array(), $size = 5, $htmlAttributes = array()) {
+    public static function multiSelect(string $name,
+            $value = null,
+            array $options = [],
+            int $size = 5,
+            array $htmlAttributes = []): string {
         $attributes = array(
             "name" => $name,
             "size" => $size

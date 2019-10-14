@@ -1,22 +1,24 @@
 <?php
 
+declare(strict_types=1);
+
 class SettingsCache {
 
-    private static $settings = array();
+    private static $settings = [];
 
-    public static function get($key) {
+    public static function get(string $key) {
         if (isset(self::$settings[$key])) {
             return self::$settings[$key];
         }
         return null;
     }
 
-    public static function set($key, $value) {
+    public static function set(string $key, $value): void {
         if ($value === null and isset(self::$settings[$key])) {
             unset(self::$settings[$key]);
-        } else {
-            self::$settings[$key] = $value;
+            return;
         }
+        self::$settings[$key] = $value;
     }
 
 }

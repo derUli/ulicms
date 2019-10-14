@@ -8,7 +8,7 @@ add_translation("ONLINE_NOW", "Jetzt online sind");
 add_translation("TOP_PAGES", "Top-Seiten");
 add_translation("LAST_CHANGES", "Letzte Änderungen");
 
-add_translation("SITE_ONLINE_SINCE", "Alter dieser Website");
+add_translation("SITE_ONLINE_SINCE", "Website online seit");
 add_translation("PAGES_COUNT", "Anzahl der Seiten");
 add_translation("REGISTERED_USERS_COUNT", "Anzahl der Benutzer");
 add_translation("BLOCKED_SPAM_MAILS", "Blockierte Spam Nachrichten");
@@ -139,11 +139,11 @@ add_translation("RECOVER", "Wiederherstellen");
 add_translation("PERMALINK", "Name für die URL");
 add_translation("MENU", "Menü");
 add_translation("POSITION", "Position");
-add_translation("PARENT", "Übergeordnete Seite");
+add_translation("parent_id", "Übergeordnete Seite");
 add_translation("ACTIVATED", "Aktiv");
 add_translation("DEACTIVATED", "Deaktiv");
 add_translation("VIEW", "Anzeigen");
-add_translation("PAGE_TITLE", "Seitentitel");
+add_translation("page_title", "Seitentitel");
 add_translation("ALTERNATE_TITLE", "Alternative Überschrift");
 add_translation("ALTERNATE_TITLE_INFO", "Falls die Überschrift auf der Seite vom Titel im Navigationsmenü abweichen soll. ");
 add_translation("LANGUAGE", "Sprache");
@@ -152,8 +152,9 @@ add_translation("LANGUAGE", "Sprache");
 add_translation("EXTERNAL_REDIRECT", "Weiterleitung auf externen Link");
 add_translation("ADDITIONAL_SETTINGS", "Zusätzliche Optionen &gt;&gt;");
 add_translation("MENU_IMAGE", "Menüpunkt als Grafik");
-add_translation("META_DESCRIPTION", "Meta Description");
-add_translation("META_KEYWORDS", "Meta Keywords");
+add_translation("META_DESCRIPTION", "Beschreibung");
+add_translation("META_KEYWORDS", "Tags");
+add_translation("comma_separated", "Kommagetrennt");
 add_translation("COMMENTS", "Kommentare");
 add_translation("OPEN_IN", "Öffnen in");
 add_translation("CLEAR", "Leeren");
@@ -735,7 +736,7 @@ add_translation("on", "An");
 add_translation("off", "Aus");
 
 add_translation("php_upgrade_notice", "Sie benutzen eine veraltete PHP Version, welche vom Hersteller nicht mehr mit Sicherheitsupdates versorgt wird.\n"
-        . "Sie sollten PHP 7.1 oder eine neuere Version verwenden.\n"
+        . "Sie sollten PHP 7.2 oder eine neuere Version verwenden.\n"
         . "Bitte kontaktieren Sie ihren Administrator oder Provider.");
 
 add_translation("hello_x", "Hallo %x%");
@@ -751,5 +752,9 @@ add_translation("contains_username", "Das Passwort enthält den Benutzernamen");
 add_translation("enter_pass", "Geben Sie Ihr Passwort ein");
 
 add_translation("all", "Alle");
+
+add_translation("disabled_functions", "Deaktivierte Funktionen");
+
+add_translation("unsupported_output_format", "Nicht unterstütztes Ausgabeformat: %format%");
 
 do_event("lang_de");

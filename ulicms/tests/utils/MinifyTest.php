@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Exceptions\SCSSCompileException;
+use UliCMS\Utils\CacheUtil;
 
 class MinifyTest extends \PHPUnit\Framework\TestCase {
 
@@ -9,7 +10,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         $files = array(
             "node_modules/jquery/dist/jquery.js",
             "admin/scripts/global.js",
-            "node_modules/js-url/url.min.js"
+            "node_modules/bootbox/bootbox.js"
         );
         foreach ($files as $file) {
             enqueueScriptFile($file);
@@ -19,7 +20,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         }
         $this->assertCount(3, Vars::get("script_queue"));
         $this->assertEquals("node_modules/jquery/dist/jquery.js", Vars::get("script_queue")[0]);
-        $this->assertEquals("node_modules/js-url/url.min.js", Vars::get("script_queue")[2]);
+        $this->assertEquals("node_modules/bootbox/bootbox.js", Vars::get("script_queue")[2]);
 
         resetScriptQueue();
         $this->assertCount(0, Vars::get("script_queue"));
@@ -39,7 +40,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
     public function testStylesheetQueue() {
         $filemtime = 0;
         $files = array(
-            "lib/css/core.css",
+            "lib/css/core.scss",
             "node_modules/bootstrap/dist/css/bootstrap.css",
             "node_modules/bootstrap/dist/css/bootstrap-theme.css",
             "admin/css/modern.scss"
@@ -75,7 +76,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         $styles = array(
             "tests/fixtures/scss/style1.scss",
             "tests/fixtures/scss/style2.scss",
-            "lib/css/core.css"
+            "lib/css/core.scss"
         );
         foreach ($styles as $style) {
             enqueueStylesheet($style);
@@ -98,7 +99,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
             $this->fail("Expected exception not thrown");
         } catch (SCSSCompileException $e) {
             $this->assertStringStartsWith("Compilation of tests/fixtures/scss/fail.scss failed: parse error: failed at", $e->getMessage());
-            $this->assertStringEndsWith("(stdin) on line 5", $e->getMessage());
+            $this->assertStringEndsWith("(stdin) on line 5, at column 5", $e->getMessage());
         } finally {
             resetStylesheetQueue();
         }

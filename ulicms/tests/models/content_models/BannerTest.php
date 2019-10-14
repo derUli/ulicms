@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Exceptions\NotImplementedException;
+use UliCMS\Models\Content\Advertisement\Banner;
 
 class BannerTest extends \PHPUnit\Framework\TestCase {
 

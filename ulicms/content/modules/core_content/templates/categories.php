@@ -1,4 +1,7 @@
 <?php
+
+use UliCMS\Models\Content\Categories;
+
 $permissionChecker = new ACL();
 if (!$permissionChecker->hasPermission("categories")) {
     noPerms();

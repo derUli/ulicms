@@ -1,59 +1,68 @@
 <?php
 
+declare(strict_types=1);
+
+namespace UliCMS\Models\Content\Advertisement;
+
+use Database;
+use DB;
+use function tbname;
+
+// This class contains methods that return an array of banners
 class Banners {
 
-    public static function getAll($order = "id") {
-        $result = array();
+    public static function getAll(string $order = "id"): array {
+        $datasets = [];
         $sql = "SELECT id FROM " . tbname("banner") . " ORDER BY $order";
-        $query = DB::query($sql);
-        while ($row = DB::fetchObject($query)) {
+        $result = DB::query($sql);
+        while ($row = DB::fetchObject($result)) {
             $banner = new Banner();
             $banner->loadByID($row->id);
-            $result[] = $banner;
+            $datasets[] = $banner;
         }
-        return $result;
+        return $datasets;
     }
 
-    public static function getByLanguage($language, $order = "language") {
+    public static function getByLanguage(string $language, string $order = "language"): array {
+        $datasets = [];
         $language = DB::escapeValue($language);
-        $result = array();
         $sql = "SELECT id FROM " . tbname("banner") . " WHERE language = '$language' ORDER BY $order";
-        $query = DB::query($sql);
-        while ($row = DB::fetchObject($query)) {
+        $result = DB::query($sql);
+        while ($row = DB::fetchObject($result)) {
             $banner = new Banner();
             $banner->loadByID($row->id);
-            $result[] = $banner;
+            $datasets[] = $banner;
         }
-        return $result;
+        return $datasets;
     }
 
-    public static function getByCategory($category_id, $order = "id") {
+    public static function getByCategory(?int $category_id, string $order = "id"): array {
         $category_id = intval($category_id);
-        $result = array();
+        $datasets = [];
         $sql = "SELECT id FROM " . tbname("banner") . " WHERE `category_id` = $category_id ORDER BY $order";
-        $query = DB::query($sql);
-        while ($row = DB::fetchObject($query)) {
+        $result = DB::query($sql);
+        while ($row = DB::fetchObject($result)) {
             $banner = new Banner();
             $banner->loadByID($row->id);
-            $result[] = $banner;
+            $datasets[] = $banner;
         }
-        return $result;
+        return $datasets;
     }
 
-    public static function getByType($type = "gif", $order = "language") {
+    public static function getByType(string $type = "gif", string $order = "language"): array {
         $type = DB::escapeValue($type);
-        $result = array();
+        $datasets = [];
         $sql = "SELECT id FROM " . tbname("banner") . " WHERE `type` = '$type' ORDER BY $order";
-        $query = DB::query($sql);
-        while ($row = DB::fetchObject($query)) {
+        $result = DB::query($sql);
+        while ($row = DB::fetchObject($result)) {
             $banner = new Banner();
             $banner->loadByID($row->id);
-            $result[] = $banner;
+            $datasets[] = $banner;
         }
-        return $result;
+        return $datasets;
     }
 
-    public static function getRandom() {
+    public static function getRandom(): ?Banner {
         $banner = null;
 
         $result = Database::pQuery("SELECT id FROM {prefix}banner

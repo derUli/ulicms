@@ -1,9 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 // TODO: TypeMapper überflüssig machen
 // Die Namen der Modelklassen sollten direkt gespeichert werden in der Tabelle
 // content
 
+namespace UliCMS\Models\Content;
+
+use function getAllModules;
+use function getModuleMeta;
+use StringHelper;
+
+// this class maps the values in the "type" column of the
+// "content" table to the equally model class names
 class TypeMapper {
 
     private static $mapping = array(
@@ -20,15 +30,24 @@ class TypeMapper {
         "language_link" => "Language_Link"
     );
 
-    public static function getMappings() {
+    public static function getMappings(): array {
         return self::$mapping;
     }
 
-    public static function loadMapping() {
-        $objectRegistry = array();
+    public static function getModel($type): ?object {
+        if (!(isset(self::$mapping[$type]) and class_exists(self::$mapping[$type]))) {
+            return null;
+        }
+        return new self::$mapping[$type]();
+    }
+
+    // custom modules may load their own content type models
+    public static function loadMapping(): void {
+        $objectRegistry = [];
         $modules = getAllModules();
         foreach ($modules as $module) {
             $mappings = getModuleMeta($module, "type_classes");
+
             if ($mappings) {
                 foreach ($mappings as $key => $value) {
                     if (StringHelper::isNullOrEmpty($value)) {

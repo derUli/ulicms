@@ -27,7 +27,6 @@ if (!$permissionChecker->hasPermission("performance_settings")) {
             <?php translate("changes_was_saved"); ?>
         </div>
     <?php } ?>
-    <?php ModuleHelper::buildMethodCallForm($sClass, $sMethod); ?>
     <p>
         <a
             href="<?php echo ModuleHelper::buildActionURL("settings_categories"); ?>"

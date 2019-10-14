@@ -1,8 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
+namespace UliCMS\Security\Permissions;
+
+use Database;
+
+// this class is used to store the edit restrictions of content
+// think of it as ACL like write permissions
 class PagePermissions {
 
-    public function __construct($objects = array()) {
+    public function __construct($objects = []) {
         foreach ($objects as $object => $restriction) {
             $this->setEditRestriction($object, $restriction);
         }
@@ -13,7 +21,7 @@ class PagePermissions {
     private $only_owner_can_edit = false;
     private $only_others_can_edit = false;
 
-    public function getEditRestriction($object) {
+    public function getEditRestriction(string $object): bool {
         $varName = "only_{$object}_can_edit";
         if (!isset($this->$varName)) {
             return null;
@@ -21,7 +29,7 @@ class PagePermissions {
         return $this->$varName;
     }
 
-    public function setEditRestriction($object, $restricted = false) {
+    public function setEditRestriction(string $object, bool $restricted = false): void {
         $varName = "only_{$object}_can_edit";
         if (!isset($this->$varName)) {
             return;
@@ -29,8 +37,8 @@ class PagePermissions {
         $this->$varName = boolval($restricted);
     }
 
-    public function getAll() {
-        $result = array();
+    public function getAll(): array {
+        $result = [];
         $classArray = (array) $this;
         foreach ($classArray as $key => $value) {
             preg_match("/only_([a-z]+)_can_edit/", $key, $matches);
@@ -42,11 +50,11 @@ class PagePermissions {
         return $result;
     }
 
-    public function save($id) {
+    public function save(int $id): void {
         $all = $this->getAll();
 
         $sql = "update `{prefix}content` set ";
-        $args = array();
+        $args = [];
         foreach ($all as $key => $value) {
             $sql .= " only_{$key}_can_edit = ?, ";
             $args[] = $value;

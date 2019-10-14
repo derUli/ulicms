@@ -1,9 +1,11 @@
 <?php
 
-use UliCMS\Data\Content\Comment;
+use UliCMS\Models\Content\Comment;
 use UliCMS\Exceptions\FileNotFoundException;
 use UliCMS\HTML as HTML;
 use UliCMS\Exceptions\NotImplementedException;
+use UliCMS\Constants\CommentStatus;
+use UliCMS\Utils\CacheUtil;
 
 class CommentsController extends MainClass {
 
@@ -20,8 +22,8 @@ class CommentsController extends MainClass {
                 Flags::setNoCache(true);
                 Vars::set("comments_enabled", true);
             }
-        }
         Vars::set("content_id", $page->id);
+        }
     }
 
     // This method handles posted comments
@@ -77,8 +79,7 @@ class CommentsController extends MainClass {
 
         // Clear cache when posting a comment
         // FIXME: clear only the cache entries for the commented content
-        $cacheAdapater = CacheUtil::getAdapter(true);
-        $cacheAdapater->clear();
+        CacheUtil::clearPageCache();
 
         // Redirect to the page and show a message to the user
         Response::redirect(ModuleHelper::getFullPageURLByID($content_id, "comment_published=" . $status));
@@ -103,7 +104,7 @@ class CommentsController extends MainClass {
     }
 
     public function getResults($status = null, $content_id = null, $limit = 0) {
-        $results = array();
+        $results = [];
         if ($status) {
             $results = Comment::getAllByStatus($status, $content_id);
         } else if ($content_id) {
@@ -132,7 +133,7 @@ class CommentsController extends MainClass {
     // get the configured default limit or if is set the default value
     public function getDefaultLimit() {
         $limit = 100;
-        if (Settings::get("comments_default_limit") !== false) {
+        if (Settings::get("comments_default_limit")) {
             $limit = intval(Settings::get("comments_default_limit"));
         }
         return $limit;
@@ -140,7 +141,7 @@ class CommentsController extends MainClass {
 
     public function doAction() {
         // post arguments
-        $comments = Request::getVar("comments", array());
+        $comments = Request::getVar("comments", []);
         $action = Request::getVar("action", null, "str");
 
         // if we have comments and an action
@@ -171,12 +172,16 @@ class CommentsController extends MainClass {
                         break;
                     default:
                         throw new NotImplementedException("comment action not implemented");
-                        break;
                 }
+
+
+
                 // if action is not delete save it
                 if ($action != "delete") {
                     $comment->save();
                 }
+
+                CacheUtil::clearPageCache();
             }
         }
 

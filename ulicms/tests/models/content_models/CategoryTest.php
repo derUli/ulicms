@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Models\Content\Category;
+
 class CategoryTest extends \PHPUnit\Framework\TestCase {
 
     const name1 = "Name 1";

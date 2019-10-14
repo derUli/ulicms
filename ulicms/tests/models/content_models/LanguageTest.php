@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Models\Content\Language;
+
 class LanguageTest extends \PHPUnit\Framework\TestCase {
 
     public function setUp() {

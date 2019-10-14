@@ -1,9 +1,13 @@
 <?php
 
+// use the methods in this class to render responses in controller actions
+
+declare(strict_types=1);
+
 use UliCMS\Backend\BackendPageRenderer;
 
-function JSONResult($data, $status = 200) {
-    Response::sendStatusHeader(Response::getStatusCodeByNumber($status));
+function JSONResult($data, int $status = 200): void {
+    Response::sendStatusHeader($status);
     $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
     // get string size in Byte
     $size = getStringLengthInBytes($json);
@@ -13,8 +17,8 @@ function JSONResult($data, $status = 200) {
     exit();
 }
 
-function RawJSONResult($data, $status = 200) {
-    Response::sendStatusHeader(Response::getStatusCodeByNumber($status));
+function RawJSONResult(string $data, int $status = 200): void {
+    Response::sendStatusHeader($status);
     $size = getStringLengthInBytes($data);
     header('Content-Type: application/json');
     header("Content-length: $size");
@@ -22,8 +26,8 @@ function RawJSONResult($data, $status = 200) {
     exit();
 }
 
-function HTMLResult($data, $status = 200) {
-    Response::sendStatusHeader(Response::getStatusCodeByNumber($status));
+function HTMLResult(string $data, int $status = 200): void {
+    Response::sendStatusHeader($status);
     $data = optimizeHtml($data);
     $size = getStringLengthInBytes($data);
     header('Content-Type: text/html; charset=UTF-8');
@@ -32,27 +36,25 @@ function HTMLResult($data, $status = 200) {
     exit();
 }
 
-function TextResult($data, $status = 200) {
-    Response::sendStatusHeader(Response::getStatusCodeByNumber($status));
+function TextResult(string $data, int $status = 200): void {
+    Response::sendStatusHeader($status);
     $size = getStringLengthInBytes($data);
     header('Content-Type: text/plain; charset=utf-8');
     header("Content-length: $size");
-    echo $data;
-    exit();
+    die($data);
 }
 
-function Result($data, $status = 200, $type = null) {
-    Response::sendStatusHeader(Response::getStatusCodeByNumber($status));
+function Result(string $data, int $status = 200, ?string $type = null): void {
+    Response::sendStatusHeader($status);
     $size = getStringLengthInBytes($data);
     if ($type) {
         header("Content-Type: $type");
     }
     header("Content-length: $size");
-    echo $data;
-    exit();
+    die($data);
 }
 
-function HTTPStatusCodeResult($status, $description = null) {
+function HTTPStatusCodeResult(int $status, ?string $description = null): void {
     $header = $_SERVER ["SERVER_PROTOCOL"] . " " . getStatusCodeByNumber(intval($status));
 
     if ($description != null and $description != "") {
@@ -62,7 +64,7 @@ function HTTPStatusCodeResult($status, $description = null) {
     exit();
 }
 
-function ExceptionResult($message, $status = 500) {
+function ExceptionResult(string $message, int $status = 500): void {
     ViewBag::set("exception", nl2br($message));
     $content = Template::executeDefaultOrOwnTemplate("exception.php");
 
@@ -76,7 +78,7 @@ function ExceptionResult($message, $status = 500) {
     exit();
 }
 
-function ActionResult($action, $model = null) {
+function ActionResult(string $action, $model = null): void {
     $renderer = new BackendPageRenderer($action, $model);
     $renderer->render();
 }

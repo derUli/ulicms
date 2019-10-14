@@ -1,23 +1,43 @@
 <?php
 
+declare(strict_types=1);
+
+use UliCMS\Utils\File;
 use UliCMS\Exceptions\FileNotFoundException;
 use UliCMS\HTML\Script;
 use UliCMS\Security\PermissionChecker;
 use MatthiasMullie\Minify;
+use UliCMS\Models\Content\Advertisement\Banners;
 
 class Template {
 
-    // TODO: Rewrite this using the models
-    // Add method render() to Banner class
-    // Add method Banner::getRandom()
-    public static function randomBanner() {
+    public static function getBodyClasses(): string {
+        $str = get_ID() ? "page-id-" . get_ID() . " " : "";
+
+        $str .= (is_frontpage() ? "home " : "");
+        $str .= (is_404() ? "error404 " : "");
+        $str .= (is_403() ? "error403 " : "");
+        $str .= ((is_404() or is_403()) ? "errorPage " : "page ");
+        $str .= (is_mobile() ? "mobile " : "desktop ");
+        $str .= (containsModule(get_requested_pagename()) ? " containsModule " : "");
+
+        $str = trim($str);
+        $str = apply_filter($str, "body_classes");
+        return $str;
+    }
+
+    public static function bodyClasses() {
+        echo self::getBodyClasses();
+    }
+
+    public static function randomBanner(): void {
         $banner = Banners::getRandom();
         if ($banner) {
             echo $banner->render();
         }
     }
 
-    public static function outputContentElement() {
+    public static function outputContentElement(): void {
         $type = get_type();
         $output = "";
         switch ($type) {
@@ -55,16 +75,16 @@ class Template {
         echo optimizeHtml($output);
     }
 
-    public static function getHomepageOwner() {
+    public static function getHomepageOwner(): string {
         $homepage_title = Settings::getLanguageSetting("homepage_owner", $_SESSION["language"]);
         return _esc($homepage_title);
     }
 
-    public static function homepageOwner() {
+    public static function homepageOwner(): void {
         echo self::getHomepageOwner();
     }
 
-    public static function footer() {
+    public static function footer(): void {
         do_event("enqueue_frontend_footer_scripts");
         enqueueScriptFile("lib/js/global.js");
         combinedScriptHtml();
@@ -72,7 +92,7 @@ class Template {
         do_event("frontend_footer");
     }
 
-    public static function executeModuleTemplate($module, $template) {
+    public static function executeModuleTemplate(string $module, string $template): string {
 
         $retval = "";
         $originalTemplatePath = getModulePath($module, true) . "templates/" . $template;
@@ -83,9 +103,9 @@ class Template {
             $ownTemplatePath .= ".php";
         }
         ob_start();
-        if (is_file($ownTemplatePath)) {
+        if (file_exists($ownTemplatePath)) {
             require $ownTemplatePath;
-        } else if (is_file($originalTemplatePath)) {
+        } else if (file_exists($originalTemplatePath)) {
             require $originalTemplatePath;
         } else {
             $retval = ob_get_clean();
@@ -96,15 +116,15 @@ class Template {
         return optimizeHtml($retval);
     }
 
-    public static function escape($value) {
+    public static function escape($value): void {
         echo self::getEscape($value);
     }
 
-    public static function getEscape($value) {
-        return htmlspecialchars($value, ENT_QUOTES, "UTF-8");
+    public static function getEscape($value): string {
+        return htmlspecialchars(strval($value), ENT_QUOTES, "UTF-8");
     }
 
-    public static function logo() {
+    public static function logo(): void {
         if (Settings::get("logo_disabled") != "no") {
             return;
         }
@@ -118,21 +138,21 @@ class Template {
         $logo_storage_url = defined("ULICMS_DATA_STORAGE_URL") ? ULICMS_DATA_STORAGE_URL . "/content/images/" . Settings::get("logo_image") : "content/images/" . Settings::get("logo_image");
         $logo_storage_path = ULICMS_DATA_STORAGE_ROOT . "/content/images/" . Settings::get("logo_image");
 
-        if (Settings::get("logo_disabled") == "no" and is_file($logo_storage_path)) {
+        if (Settings::get("logo_disabled") == "no" and file_exists($logo_storage_path)) {
             echo '<img class="website_logo" src="' . $logo_storage_url . '" alt="' . _esc(Settings::get("homepage_title")) . '"/>';
         }
     }
 
     // get current year
-    public static function getYear($format = "Y") {
+    public static function getYear(string $format = "Y"): string {
         return date($format);
     }
 
-    public static function year($format = "Y") {
+    public static function year(string $format = "Y"): void {
         echo self::getYear($format);
     }
 
-    public static function getMotto() {
+    public static function getMotto(): string {
         // Existiert ein Motto für diese Sprache? z.B. motto_en
         $motto = Settings::get("motto_" . $_SESSION["language"]);
 
@@ -143,11 +163,11 @@ class Template {
         return _esc($motto);
     }
 
-    public static function motto() {
+    public static function motto(): void {
         echo self::getMotto();
     }
 
-    public static function executeDefaultOrOwnTemplate($template) {
+    public static function executeDefaultOrOwnTemplate(string $template): string {
         $retval = "";
         $originalTemplatePath = ULICMS_ROOT . "/default/" . $template;
         $ownTemplatePath = getTemplateDirPath(get_theme()) . "/" . $template;
@@ -158,9 +178,9 @@ class Template {
         }
 
         ob_start();
-        if (is_file($ownTemplatePath)) {
+        if (file_exists($ownTemplatePath)) {
             require $ownTemplatePath;
-        } else if (is_file($originalTemplatePath)) {
+        } else if (file_exists($originalTemplatePath)) {
             require $originalTemplatePath;
         } else {
             $retval = ob_get_clean();
@@ -170,53 +190,49 @@ class Template {
         return optimizeHtml($retval);
     }
 
-    public static function headline($format = "<h1>%title%</h1>") {
+    public static function headline($format = "<h1>%title%</h1>"): void {
         echo self::getHeadline($format);
     }
 
-    public static function getHeadline($format = "<h1>%title%</h1>") {
-        $retval = "";
+    public static function getHeadline($format = "<h1>%title%</h1>"): ?string {
         $id = get_ID();
         if (!$id) {
-            $html = str_replace("%title%", get_title(null, true), $format);
-            return $html;
+            return str_replace("%title%", get_title(null, true), $format);
         }
-        $query = "SELECT show_headline FROM " . tbname("content") . " where id = $id";
-        $query = Database::query($query);
-        $result = Database::fetchObject($query);
-        if ($result->show_headline) {
-            $html = str_replace("%title%", get_title(null, true), $format);
+        $sql = "SELECT show_headline FROM " . tbname("content") . " where id = $id";
+        $result = Database::query($sql);
+        $dataset = Database::fetchObject($result);
+        if ($dataset->show_headline) {
+            return str_replace("%title%", get_title(null, true), $format);
         }
-        return $html;
+        return null;
     }
 
-    public static function doctype() {
+    public static function doctype(): void {
         echo self::getDoctype();
     }
 
-    public static function getDoctype() {
-        $html = '<!doctype html>';
-        return $html;
+    public static function getDoctype(): string {
+        return '<!doctype html>';
     }
 
-    public static function ogHTMLPrefix() {
+    public static function ogHTMLPrefix(): void {
         echo self::getOgHTMLPrefix();
     }
 
-    public static function getOgHTMLPrefix() {
+    public static function getOgHTMLPrefix(): string {
         $language = getCurrentLanguage();
-        $html = "<html prefix=\"og: http://ogp.me/ns#\" lang=\"$language\">";
-        return $html;
+        return "<html prefix=\"og: http://ogp.me/ns#\" lang=\"$language\">";
     }
 
-    public static function renderPartial($template, $theme = null) {
+    public static function renderPartial(string $template, ?string $theme = null): string {
         if (!$theme) {
             $theme = get_theme();
         }
 
         $file = getTemplateDirPath($theme, true) . "partials/{$template}";
         $file = !endsWith($file, ".php") ? $file . ".php" : $file;
-        if (!is_file($file)) {
+        if (!file_exists($file)) {
             throw new FileNotFoundException("Partial Template {$template} of Theme {$theme} not found.");
         }
         ob_start();
@@ -225,21 +241,21 @@ class Template {
         return $result;
     }
 
-    public static function getHtml5Doctype() {
+    public static function getHtml5Doctype(): string {
         return "<!doctype html>";
     }
 
-    public static function html5Doctype() {
+    public static function html5Doctype(): void {
         echo self::getHtml5Doctype();
     }
 
-    public static function getBaseMetas() {
+    public static function getBaseMetas(): string {
         ob_start();
         self::baseMetas();
         return ob_get_clean();
     }
 
-    public static function baseMetas() {
+    public static function baseMetas(): void {
         $title_format = Settings::get("title_format");
         if ($title_format) {
             $title = $title_format;
@@ -291,23 +307,21 @@ class Template {
         }
 
         if (!Settings::get("no_autoembed_core_css")) {
-            enqueueStylesheet("lib/css/core.css");
+            enqueueStylesheet("lib/css/core.scss");
         }
         do_event("enqueue_frontend_stylesheets");
 
         combinedStylesheetHtml();
 
-
-
         $min_style_file = getTemplateDirPath(get_theme()) . "style.min.css";
         $min_style_file_realpath = getTemplateDirPath(get_theme(), true) . "style.min.css";
         $style_file = getTemplateDirPath(get_theme()) . "style.css";
         $style_file_realpath = getTemplateDirPath(get_theme(), true) . "style.css";
-        if (is_file($style_file_realpath)) {
+        if (file_exists($style_file_realpath)) {
             $style_file .= "?time=" . File::getLastChanged($style_file_realpath);
-            if (is_file($min_style_file_realpath)) {
+            if (file_exists($min_style_file_realpath)) {
                 echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"$min_style_file\"/>";
-            } else if (is_file($style_file_realpath)) {
+            } else if (file_exists($style_file_realpath)) {
                 echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"$style_file\"/>";
             }
         }
@@ -339,22 +353,24 @@ class Template {
             if ($font == "google") {
                 $google_font = Settings::get("google-font");
                 if ($google_font) {
-                    echo '<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=' . urlencode($google_font) . '"/>';
-
+                    echo '<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=' . urlencode($google_font) . '&display=swap"/>';
                     $font = "'$google_font'";
                 }
             }
             $cssCode = "body{
-font-family:" . $font . ";
-font-size:" . Settings::get("font-size") . ";
-background-color:" . Settings::get("body-background-color") . ";
-color:" . Settings::get("body-text-color") . ";
+font-family: " . $font . ";
+font-size: " . Settings::get("font-size") . ";
+background-color: " . Settings::get("body-background-color") . ";
+color: " . Settings::get("body-text-color") . ";
 }";
+
+            $disableFunctions = getThemeMeta(get_theme(), "disable_functions");
 
             $minifier = new Minify\CSS();
             $minifier->add($cssCode);
-
-            echo UliCMS\HTML\Style::FromString($minifier->minify());
+            if (!(is_array($disableFunctions) and in_array("output_design_settings_styles", $disableFunctions))) {
+                echo UliCMS\HTML\Style::fromString($minifier->minify());
+            }
 
             if (Settings::get("video_width_100_percent")) {
                 echo "<style type=\"text/css\">
@@ -370,28 +386,28 @@ color:" . Settings::get("body-text-color") . ";
         do_event("head");
     }
 
-    public static function jQueryScript() {
+    public static function jQueryScript(): void {
         $jQueryurl = get_jquery_url();
-        echo Script::FromFile($jQueryurl);
+        echo Script::fromFile($jQueryurl);
         do_event("after_jquery_include");
     }
 
-    public static function getjQueryScript() {
+    public static function getjQueryScript(): string {
         ob_start();
         self::jQueryScript();
         return ob_get_clean();
     }
 
-    public static function content() {
+    public static function content(): void {
         echo self::getContent();
     }
 
     // TODO: Refactor this method
-    public static function getContent() {
+    public static function getContent(): string {
         $theme = get_theme();
 
-        $errorPage403 = Settings::getLanguageSetting("error_page_403", getCurrentLanguage());
-        $errorPage404 = Settings::getLanguageSetting("error_page_404", getCurrentLanguage());
+        $errorPage403 = intval(Settings::getLanguageSetting("error_page_403", getCurrentLanguage()));
+        $errorPage404 = intval(Settings::getLanguageSetting("error_page_404", getCurrentLanguage()));
 
         $content = null;
         if (is_200()) {
@@ -435,9 +451,9 @@ color:" . Settings::get("body-text-color") . ";
     }
 
     public static function languageSelection() {
-        $query = db_query("SELECT language_code, name FROM " . tbname("languages") . " ORDER by name");
+        $result = db_query("SELECT language_code, name FROM " . tbname("languages") . " ORDER by name");
         echo "<ul class='language_selection'>";
-        while ($row = db_fetch_object($query)) {
+        while ($row = db_fetch_object($result)) {
             $domain = getDomainByLanguage($row->language_code);
             if ($domain) {
                 echo "<li>" . "<a href='http://" . $domain . "'>" . $row->name . "</a></li>";
@@ -448,57 +464,60 @@ color:" . Settings::get("body-text-color") . ";
         echo "</ul>";
     }
 
-    public static function getLanguageSelection() {
+    public static function getLanguageSelection(): string {
         ob_start();
         self::languageSelection();
         return ob_get_clean();
     }
 
-    public static function getPoweredByUliCMS() {
+    public static function getPoweredByUliCMS(): string {
         return get_translation("powered_by_ulicms");
     }
 
     // Gibt "Diese Seite läuft mit UliCMS" aus
-    public static function poweredByUliCMS() {
+    public static function poweredByUliCMS(): void {
         echo self::getPoweredByUliCMS();
     }
 
-    public static function getComments() {
-        return Template::executeModuleTemplate("core_comments", "comments.php");
+    public static function getComments(): string {
+        return is_200() ? Template::executeModuleTemplate("core_comments", "comments.php") : "";
     }
 
-    public static function comments() {
+    public static function comments(): void {
         echo self::getComments();
     }
 
-    public static function getEditButton() {
+    public static function getEditButton(): string {
         $html = "";
-        if (is_logged_in()) {
-            $acl = new PermissionChecker(get_user_id());
-            if ($acl->hasPermission("pages") and Flags::getNoCache() && is_200()) {
-                $id = get_ID();
-                $page = ContentFactory::getById($id);
-                if (in_array($page->language, getAllLanguages(true))) {
-                    $html .= '<div class="ulicms-edit">';
-                    $html .= UliCMS\HTML\Link::ActionLink("pages_edit", get_translation("edit"), "page={$id}", array(
-                                "class" => "btn btn-warning btn-edit"
-                    ));
-                    $html .= "</div>";
-                }
+        if (!is_logged_in()) {
+            return $html;
+        }
+        $acl = new PermissionChecker(get_user_id());
+        if ($acl->hasPermission("pages") and Flags::getNoCache() && is_200()) {
+            $id = get_ID();
+            $page = ContentFactory::getById($id);
+            if (in_array($page->language, getAllLanguages(true))) {
+                $html .= '<div class="ulicms-edit">';
+                $html .= UliCMS\HTML\Link::actionLink("pages_edit", get_translation("edit"), "page={$id}", array(
+                            "class" => "btn btn-warning btn-edit"
+                ));
+                $html .= "</div>";
             }
         }
+
         return $html;
     }
 
-    public static function editButton() {
+    public static function editButton(): void {
         echo self::getEditButton();
     }
 
-    public static function getFooterText() {
+    public static function getFooterText(): string {
+
         return replaceShortcodesWithModules(Settings::get("footer_text"), true);
     }
 
-    public static function footerText() {
+    public static function footerText(): void {
         echo self::getFooterText();
     }
 

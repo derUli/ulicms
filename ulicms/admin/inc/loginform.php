@@ -1,4 +1,7 @@
 <?php
+
+use UliCMS\Constants\RequestMethod;
+
 $ga = new PHPGangsta_GoogleAuthenticator();
 $ga_secret = Settings::get("ga_secret");
 $qrCodeUrl = $ga->getQRCodeGoogleUrl("UliCMS Login auf " . get_domain(), $ga_secret);
@@ -33,7 +36,7 @@ if ($login_welcome_text) {
 </h3>
 <?php
 echo ModuleHelper::buildMethodCallForm("SessionManager", "login",
-        array(), RequestMethod::POST,
+        [], RequestMethod::POST,
         array
             (
             "id" => "login-form",

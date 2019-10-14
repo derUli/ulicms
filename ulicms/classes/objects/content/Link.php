@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 class Link extends Page {
 
     public $redirection = "";
@@ -16,8 +18,8 @@ class Link extends Page {
         return $retval;
     }
 
-    protected function fillVarsByResult($result) {
-        parent::fillVarsByResult($result);
+    protected function fillVars($result = null) {
+        parent::fillVars($result);
         $this->redirection = $result->redirection;
     }
 
@@ -37,7 +39,7 @@ class Link extends Page {
         return $result;
     }
 
-    public function isRegular() {
+    public function isRegular(): bool {
         return false;
     }
 

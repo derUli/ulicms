@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace UliCMS\Security\SpamChecker;
 
 use AntiSpamHelper;
@@ -10,63 +12,72 @@ use InvalidArgumentException;
 class SpamFilterConfiguration {
 
     private $spamfilterEnabled = true;
-    private $badwords = array();
-    private $blockedCountries = array();
+    private $badwords = [];
+    private $blockedCountries = [];
     private $disallowChineseChars = false;
     private $disallowCyrillicChars = false;
     private $disallowRtlChars = false;
     private $rejectRequestsFromBots = false;
     private $checkMxOfMailAddress = false;
 
-    // TODO: Make class vars, getter and setter for all
-    // spam filter related settings
-    public static function fromSettings() {
+    // load configuration from settings
+    public static function fromSettings(): SpamFilterConfiguration {
         $settings = new SpamFilterConfiguration();
         $settings->setSpamFilterEnabled(AntiSpamHelper::isSpamFilterEnabled());
-        $settings->setBadwords(Settings::get("spamfilter_words_blacklist"));
+        $settings->setBadwords(
+                Settings::get("spamfilter_words_blacklist")
+        );
         $settings->setBlockedCountries(Settings::get("country_blacklist"));
 
-        $settings->setDisallowChineseChars(Settings::get("disallow_chinese_chars"));
-        $settings->setDisallowCyrillicChars(Settings::get("disallow_cyrillic_chars"));
-        $settings->setDisallowRtlChars(Settings::get("disallow_rtl_chars"));
-
-        $settings->setRejectRequestsFromBots(Settings::get("reject_requests_from_bots"));
-        $settings->setCheckMxOfMailAddress(Settings::get("check_mx_of_mail_address"));
-
-        // TODO: read other antispam settings
+        $settings->setDisallowChineseChars(
+                boolval(Settings::get("disallow_chinese_chars"))
+        );
+        $settings->setDisallowCyrillicChars(boolval(
+                        Settings::get("disallow_cyrillic_chars"))
+        );
+        $settings->setDisallowRtlChars(
+                boolval(Settings::get("disallow_rtl_chars")
+        ));
+        $settings->setRejectRequestsFromBots(
+                boolval(Settings::get("reject_requests_from_bots"))
+        );
+        $settings->setCheckMxOfMailAddress(
+                boolval(
+                        Settings::get("check_mx_of_mail_address"))
+        );
 
         return $settings;
     }
 
-    public function getSpamFilterEnabled() {
+    public function getSpamFilterEnabled(): bool {
         return $this->spamfilterEnabled;
     }
 
-    public function setSpamFilterEnabled($val) {
+    public function setSpamFilterEnabled(bool $val): void {
         $this->spamfilterEnabled = boolval($val);
     }
 
-    public function getBadwords() {
+    public function getBadwords(): array {
         return $this->badwords;
     }
 
-    public function setBadwords($val) {
+    public function setBadwords($val): void {
         if (is_string($val)) {
             $this->badwords = StringHelper::linesFromString($val);
         } else if (is_array($this->badwords)) {
             $this->badwords = $val;
         } else if (is_null($this->badwords)) {
-            $this->badwords = array();
+            $this->badwords = [];
         } else {
             throw new InvalidArgumentException("$val is not a valid value for badwords");
         }
     }
 
-    public function getBlockedCountries() {
+    public function getBlockedCountries(): array {
         return $this->blockedCountries;
     }
 
-    public function setBlockedCountries($val) {
+    public function setBlockedCountries($val): void {
         if (is_string($val)) {
             $countries = explode(",", $val);
             $countries = array_map("trim", $countries);
@@ -76,49 +87,49 @@ class SpamFilterConfiguration {
         } else if (is_array($val)) {
             $this->blockedCountries = $val;
         } else if (is_null($this->badwords)) {
-            $this->badwords = array();
+            $this->badwords = [];
         } else {
             throw new InvalidArgumentException("$val is not a valid value for badwords");
         }
     }
 
-    public function getDisallowChineseChars() {
+    public function getDisallowChineseChars(): bool {
         return $this->disallowChineseChars;
     }
 
-    public function setDisallowChineseChars($val) {
+    public function setDisallowChineseChars(bool $val): void {
         $this->disallowChineseChars = boolval($val);
     }
 
-    public function getDisallowCyrillicChars() {
+    public function getDisallowCyrillicChars(): bool {
         return $this->disallowCyrillicChars;
     }
 
-    public function setDisallowCyrillicChars($val) {
+    public function setDisallowCyrillicChars(bool $val): void {
         $this->disallowCyrillicChars = boolval($val);
     }
 
-    public function getDisallowRtlChars() {
+    public function getDisallowRtlChars(): bool {
         return $this->disallowRtlChars;
     }
 
-    public function setDisallowRtlChars($val) {
+    public function setDisallowRtlChars(bool $val): void {
         $this->disallowRtlChars = boolval($val);
     }
 
-    public function getRejectRequestsFromBots() {
+    public function getRejectRequestsFromBots(): bool {
         return $this->rejectRequestsFromBots;
     }
 
-    public function setRejectRequestsFromBots($val) {
+    public function setRejectRequestsFromBots(bool $val): void {
         $this->rejectRequestsFromBots = boolval($val);
     }
 
-    public function getCheckMxOfMailAddress() {
+    public function getCheckMxOfMailAddress(): bool {
         return $this->checkMxOfMailAddress;
     }
 
-    public function setCheckMxOfMailAddress($val) {
+    public function setCheckMxOfMailAddress(bool $val): void {
         $this->checkMxOfMailAddress = boolval($val);
     }
 

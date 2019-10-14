@@ -2,7 +2,7 @@
 
 class Article extends Page {
 
-    // @FIXME: Variablen alle private machen und getter und setter implementieren
+    // FIXME: Variablen alle private machen und getter und setter implementieren
     public $article_author_name = "";
     public $article_author_email = "";
     public $article_date = null;
@@ -10,8 +10,10 @@ class Article extends Page {
     public $excerpt = "";
     public $type = "article";
 
-    protected function fillVarsByResult($result) {
-        parent::fillVarsByResult($result);
+    protected function fillVars($result = null) {
+        parent::fillVars($result);
+
+        // article metadata
         $this->article_author_email = $result->article_author_email;
         $this->article_author_name = $result->article_author_name;
         $this->article_image = $result->article_image;

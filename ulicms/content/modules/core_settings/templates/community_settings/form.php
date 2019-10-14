@@ -1,11 +1,11 @@
 <?php
 $types = get_available_post_types();
-$typeSelection = array();
+$typeSelection = [];
 foreach ($types as $type) {
     $typeSelection[] = new UliCMS\HTML\ListItem($type, get_translation($type));
 }
 
-$commentableContentTypes = array();
+$commentableContentTypes = [];
 
 $commentableContentTypeSettings = Settings::get("commentable_content_types");
 if ($commentableContentTypeSettings) {
@@ -24,17 +24,16 @@ if ($commentableContentTypeSettings) {
     </div>
 <?php } ?>
 <?php echo ModuleHelper::buildMethodCallForm(CommunitySettingsController::class, "save"); ?>
-<h1><?php translate("community") ?></h1>
-<h2><?php translate("comments"); ?></h2>
+<h1><?php translate("comments") ?></h1>
 <div class="checkbox">
     <label><?php
-        echo UliCMS\HTML\Input::CheckBox("comments_enabled", boolval(Settings::get("comments_enabled")), "1",
+        echo UliCMS\HTML\Input::checkBox("comments_enabled", boolval(Settings::get("comments_enabled")), "1",
                 array("class" => "js-switch"));
         ?><?php translate("comments_enabled") ?></label>
 </div>
 <div class="checkbox">
     <label><?php
-        echo UliCMS\HTML\Input::CheckBox("comments_must_be_approved", boolval(Settings::get("comments_must_be_approved")),
+        echo UliCMS\HTML\Input::checkBox("comments_must_be_approved", boolval(Settings::get("comments_must_be_approved")),
                 "1",
                 array("class" => "js-switch"));
         ?><?php translate("comments_must_be_approved") ?></label>
@@ -42,7 +41,7 @@ if ($commentableContentTypeSettings) {
 <div class="form-group">
     <label for="commentable_content_types[]"><?php translate("commentable_content_types") ?></label>
     <?php
-    echo UliCMS\HTML\Input::MultiSelect("commentable_content_types[]", $commentableContentTypes, $typeSelection, 5);
+    echo UliCMS\HTML\Input::multiSelect("commentable_content_types[]", $commentableContentTypes, $typeSelection, 5);
     ?>
 </div>
 <p>

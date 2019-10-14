@@ -1,8 +1,7 @@
 <?php
 
-use UliCMS\Data\Content\Comment;
-
-require_once Path::resolve("ULICMS_ROOT/templating.php");
+use UliCMS\Models\Content\Comment;
+use UliCMS\Models\Content\VCS;
 
 class PageTest extends \PHPUnit\Framework\TestCase {
 
@@ -27,6 +26,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
 
         $_SERVER['HTTP_HOST'] = "company.com";
         $_SESSION["language"] = "de";
+        $_SERVER["REQUEST_URI"] = "/";
 
         $this->cleanUp();
     }
@@ -36,6 +36,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->cleanUp();
 
         unset($_SERVER['HTTP_HOST']);
+        unset($_SERVER["REQUEST_URI"]);
 
         if ($this->commentsInitialEnabled) {
             Settings::set("comments_enabled", "1");
@@ -62,6 +63,24 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $page = new Page();
         $page->content = $this->ipsum;
         $this->assertEquals(3, count($page->getEmbeddedModules()));
+    }
+
+    public function testContainsModuleReturnsTrue() {
+        $page = new Page();
+        $page->content = $this->ipsum;
+
+        $this->assertTrue($page->containsModule());
+        $this->assertTrue($page->containsModule("fortune2"));
+        $this->assertTrue($page->containsModule("hello"));
+    }
+
+    public function testContainsModuleReturnsFalse() {
+        $page = new Page();
+        $page->content = "Hallo Welt";
+
+        $this->assertFalse($page->containsModule());
+        $this->assertFalse($page->containsModule("fortune2"));
+        $this->assertFalse($page->containsModule("hello"));
     }
 
     public function testGetEmbeddedModulesModulePage() {
@@ -119,6 +138,74 @@ class PageTest extends \PHPUnit\Framework\TestCase {
 
         unset($_SESSION["language"]);
         unset($_GET["seite"]);
+    }
+
+    public function testGetShowHeadlineReturnsTrue() {
+        $page = new Page();
+
+        $this->assertTrue($page->getShowHeadline());
+        $page->title = 'testDisableShortcodesNull';
+        $page->slug = 'testdisableshortcodes';
+        $page->language = 'de';
+        $page->content = "foo [csrf_token_html] bar";
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->author_id = 1;
+        $page->show_headline = true;
+
+        $page->save();
+
+        $savedPage = ContentFactory::getById($page->id);
+        $this->assertTrue($savedPage->getShowHeadline());
+    }
+
+    public function testGetShowHeadlineReturnsFalse() {
+        $page = new Page();
+
+        $page->title = 'testDisableShortcodesNull';
+        $page->slug = 'testdisableshortcodes';
+        $page->language = 'de';
+        $page->content = "foo [csrf_token_html] bar";
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->show_headline = false;
+
+        $page->save();
+
+        $savedPage = ContentFactory::getById($page->id);
+        $this->assertFalse($savedPage->getShowHeadline());
+    }
+
+    public function testGetHeadlineReturnsTitle() {
+        $page = new Page();
+        $page->title = 'Originaler Titel';
+        $page->slug = 'testdisableshortcodes';
+        $page->language = 'de';
+        $page->content = "foo [csrf_token_html] bar";
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->save();
+
+        $savedPage = ContentFactory::getById($page->id);
+        $this->assertEquals('Originaler Titel', $savedPage->getHeadline());
+    }
+
+    public function testGetHeadlineReturnsAlternateTitle() {
+        $page = new Page();
+
+        $page->title = 'Originaler Titel';
+        $page->alternate_title = "Alternativer Titel";
+        $page->slug = 'testdisableshortcodes';
+        $page->language = 'de';
+        $page->content = "foo [csrf_token_html] bar";
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->author_id = 1;
+
+        $page->save();
+
+        $savedPage = ContentFactory::getById($page->id);
+        $this->assertEquals('Alternativer Titel', $savedPage->getHeadline());
     }
 
     public function testDisableShortcodesNull() {
@@ -354,6 +441,61 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->cleanUp();
     }
 
+    public function testIsDeletedReturnsFalse() {
+        $page = new Page();
+        $page->title = 'Unit Test ' . time();
+        $page->slug = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "Some Text";
+        $page->comments_enabled = true;
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->save();
+        $this->assertFalse($page->isDeleted());
+    }
+
+    public function testIsDeletedReturnsTrue() {
+        $page = new Page();
+        $page->title = 'Unit Test ' . time();
+        $page->slug = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "Some Text";
+        $page->comments_enabled = true;
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->save();
+        $page->delete();
+
+        $this->assertTrue($page->isDeleted());
+    }
+
+    public function testGetDeletedAtReturnsNull() {
+        $page = new Page();
+        $page->title = 'Unit Test ' . time();
+        $page->slug = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "Some Text";
+        $page->comments_enabled = true;
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->save();
+        $this->assertNull($page->getDeletedAt());
+    }
+
+    public function testGetDeletedAtReturnsTimestamp() {
+        $page = new Page();
+        $page->title = 'Unit Test ' . time();
+        $page->slug = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "Some Text";
+        $page->comments_enabled = true;
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->save();
+        $page->delete();
+        $this->assertGreaterThan(time() - 100, $page->getDeletedAt());
+    }
+
     public function testGetCommentsReturnsArrayWithResults() {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
@@ -493,6 +635,57 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->cleanUp();
     }
 
+    public function testCreatePageWithMetaDescriptionNull() {
+        $page = new Page();
+        $page->title = 'Unit Test ' . time();
+        $page->slug = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "Some Text";
+        $page->comments_enabled = true;
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->meta_description = null;
+        $page->meta_keywords = null;
+        $page->save();
+
+        $this->assertNotNull($page->id);
+
+        $page = new Page($page->id);
+        $this->assertNull($page->meta_description);
+        $this->assertNull($page->meta_keywords);
+
+        $this->cleanUp();
+    }
+
+    public function testUpdatePageWithMetaDescriptionNull() {
+        $page = new Page();
+        $page->title = 'Unit Test ' . time();
+        $page->slug = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "Some Text";
+        $page->comments_enabled = true;
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->meta_description = 'foo';
+        $page->meta_keywords = 'foo';
+
+        $page->save();
+        $this->assertEquals("foo", $page->meta_description);
+        $this->assertEquals("foo", $page->meta_keywords);
+
+        $page->meta_description = null;
+        $page->meta_keywords = null;
+        $page->save();
+
+        $this->assertNotNull($page->id);
+
+        $page = new Page($page->id);
+        $this->assertNull($page->meta_description);
+        $this->assertNull($page->meta_keywords);
+
+        $this->cleanUp();
+    }
+
     public function testCustomDataJsonIsObjectByDefault() {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
@@ -507,6 +700,224 @@ class PageTest extends \PHPUnit\Framework\TestCase {
 
         $raw = Database::fetchFirst(Database::selectAll("content", array("custom_data"), "id = {$page->id}"));
         $this->assertEquals('{}', $raw->custom_data);
+    }
+
+    public function testHasChildrenReturnsTrue() {
+        $result = Database::pQuery("select parent_id from {prefix}content where "
+                        . "parent_id is not null", [], true);
+        $dataset = Database::fetchObject($result);
+
+        $page = ContentFactory::getByID($dataset->parent_id);
+        $this->assertTrue($page->hasChildren());
+    }
+
+    public function testHasChildrenReturnsFalse() {
+        $page = new Page();
+
+        $page->title = 'Unit Test ' . time();
+        $page->slug = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "foo [csrf_token_html] bar";
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->author_id = 1;
+        $page->show_headline = true;
+        $page->save();
+
+        $this->assertFalse($page->hasChildren());
+    }
+
+    public function testGetChildrenReturnsTrue() {
+        $result = Database::pQuery("select parent_id from {prefix}content where "
+                        . "parent_id is not null", [], true);
+        $dataset = Database::fetchObject($result);
+
+        $page = ContentFactory::getByID($dataset->parent_id);
+        $children = $page->getChildren();
+        $this->assertGreaterThanOrEqual(1, count($children));
+
+        foreach ($children as $child) {
+            $this->assertEquals($page->id, $child->parent_id);
+        }
+    }
+
+    public function testGetChildrenReturnsFalse() {
+        $page = new Page();
+
+        $page->title = 'Unit Test ' . time();
+        $page->slug = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "foo [csrf_token_html] bar";
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->author_id = 1;
+        $page->show_headline = true;
+        $page->save();
+
+        $children = $page->getChildren();
+        $this->assertCount(0, $children);
+    }
+
+    public function testGetParentReturnsNull() {
+        $result = Database::pQuery("select id from {prefix}content where "
+                        . "parent_id is null", [], true);
+        $dataset = Database::fetchObject($result);
+
+        $page = ContentFactory::getByID($dataset->id);
+        $this->assertNull($page->getParent());
+    }
+
+    public function testGetParentReturnsModel() {
+        $result = Database::pQuery("select parent_id, id from {prefix}content where "
+                        . "parent_id is not null", [], true);
+        $dataset = Database::fetchObject($result);
+
+        $page = ContentFactory::getByID($dataset->id);
+        $this->assertInstanceOf(Content::class, $page->getParent());
+        $this->assertEquals($page->getParent()->getId(), $dataset->parent_id);
+        $this->assertGreaterThanOrEqual(1, count($page->getParent()->getChildren()));
+    }
+
+    public function testGetHistoryReturnsNothing() {
+
+        $page = new Page();
+
+        $page->title = 'Unit Test ' . time();
+        $page->slug = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "foo [csrf_token_html] bar";
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->author_id = 1;
+        $page->show_headline = true;
+        $page->save();
+
+        $this->assertIsArray($page->getHistory());
+        $this->assertCount(0, $page->getHistory());
+    }
+
+    public function testGetHistoryReturnsChanges() {
+        $page = new Page();
+
+        $page->title = 'Unit Test ' . time();
+        $page->slug = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "foo [csrf_token_html] bar";
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->author_id = 1;
+        $page->show_headline = true;
+        $page->save();
+
+        VCS::createRevision($page->getID(), "New Text 1", 1);
+        VCS::createRevision($page->getID(), "New Text 2", 1);
+        VCS::createRevision($page->getID(), "New Text 3", 1);
+
+        $this->assertIsArray($page->getHistory());
+        $this->assertCount(3, $page->getHistory());
+    }
+
+    public function testIsFrontPageReturnsTrue() {
+        $page = new Page();
+        $page->title = 'hallo';
+        $page->slug = 'unit-test-not-frontpage' . uniqid();
+        $page->language = 'de';
+        $page->content = "foo [csrf_token_html] bar";
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->author_id = 1;
+        $page->show_headline = true;
+        $page->save();
+
+        $page->makeFrontPage();
+        $this->assertTrue($page->isFrontPage());
+    }
+
+    public function testIsFrontPageReturnsFalse() {
+        $page = new Page();
+        $page->title = 'hallo';
+        $page->slug = 'unit-test-not-frontpage' . uniqid();
+        $page->language = 'de';
+        $page->content = "foo [csrf_token_html] bar";
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->author_id = 1;
+        $page->show_headline = true;
+        $page->save();
+
+        $this->assertFalse($page->isFrontPage());
+    }
+
+    public function testIsErrorPage403ReturnsFalse() {
+        $page = new Page();
+        $page->title = 'Unit Test Error Page 403';
+        $page->slug = 'unit-test-error-page-403-' . uniqid();
+        $page->language = 'de';
+        $page->content = "foo [csrf_token_html] bar";
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->author_id = 1;
+        $page->show_headline = true;
+        $page->save();
+
+        $this->assertFalse($page->isErrorPage403());
+        $this->assertFalse($page->isErrorPage());
+    }
+
+    public function testIsErrorPage404ReturnsFalse() {
+        $page = new Page();
+        $page->title = 'Unit Test Error Page 404';
+        $page->slug = 'unit-test-error-page-404-' . uniqid();
+        $page->language = 'de';
+        $page->content = "foo [csrf_token_html] bar";
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->author_id = 1;
+        $page->show_headline = true;
+        $page->save();
+
+        $this->assertFalse($page->isErrorPage404());
+        $this->assertFalse($page->isErrorPage());
+    }
+
+    public function testIsErrorPage403ReturnsTrue() {
+        $page = new Page();
+        $page->title = 'Unit Test Error Page 403';
+        $page->slug = 'unit-test-error-page-403-' . uniqid();
+        $page->language = 'de';
+        $page->content = "foo [csrf_token_html] bar";
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->author_id = 1;
+        $page->show_headline = true;
+        $page->save();
+
+        $page->makeErrorPage403();
+
+        $this->assertTrue($page->isErrorPage403());
+        $this->assertTrue($page->isErrorPage());
+
+        $page->makeErrorPage403(false);
+    }
+
+    public function testIsErrorPage404ReturnsTrue() {
+        $page = new Page();
+        $page->title = 'Unit Test Error Page 404';
+        $page->slug = 'unit-test-error-page-404-' . uniqid();
+        $page->language = 'de';
+        $page->content = "foo [csrf_token_html] bar";
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->author_id = 1;
+        $page->show_headline = true;
+        $page->save();
+
+        $page->makeErrorPage404();
+
+        $this->assertTrue($page->isErrorPage404());
+        $this->assertTrue($page->isErrorPage());
+
+        $page->makeErrorPage404(false);
     }
 
 }

@@ -1,5 +1,8 @@
 <?php
 
+use UliCMS\Exceptions\NotImplementedException;
+use UliCMS\Exceptions\SqlException;
+
 class DatabaseTest extends \PHPUnit\Framework\TestCase {
 
     public function tearDown() {
@@ -40,18 +43,18 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testAnyReturnsTrue() {
-        $query = Database::query("select * from {prefix}settings where value <> ''", true);
-        $this->assertTrue(Database::any($query));
+        $result = Database::query("select * from {prefix}settings where value <> ''", true);
+        $this->assertTrue(Database::any($result));
     }
 
     public function testAnyReturnsFalse() {
-        $query = Database::query("select * from {prefix}settings where value <> value", true);
-        $this->assertFalse(Database::any($query));
+        $result = Database::query("select * from {prefix}settings where value <> value", true);
+        $this->assertFalse(Database::any($result));
     }
 
     public function testGetColumnNames() {
         $columns = Database::getColumnNames("users", true);
-        $this->assertGreaterThanOrEqual(19, count($columns));
+        $this->assertGreaterThanOrEqual(18, count($columns));
         $this->assertContains("username", $columns);
         $this->assertContains("about_me", $columns);
         $this->assertContains("homepage", $columns);
@@ -59,19 +62,20 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetNumRowsAny() {
-        $query = Database::query("select * from {prefix}settings where name in ('homepage_title', 'frontpage', 'installed_at')", true);
-        $this->assertEquals(3, Database::getNumRows($query));
+        $result = Database::query("select * from {prefix}settings where name in ('homepage_title', 'frontpage', 'installed_at')", true);
+        $this->assertEquals(3, Database::getNumRows($result));
     }
 
     public function testGetNumRowsZero() {
-        $query = Database::query("select * from {prefix}settings where name in ('this_is_not_a_setting')", true);
-        $this->assertEquals(0, Database::getNumRows($query));
+        $result = Database::query("select * from {prefix}settings where name in ('this_is_not_a_setting')", true);
+        $this->assertEquals(0, Database::getNumRows($result));
     }
 
     public function testGetLastError() {
+        $this->expectException(SqlException::class);
         // this sql fails always
-        $query = Database::query("select devil from hell", true);
-        $this->assertFalse($query);
+        $result = Database::query("select devil from hell", true);
+        $this->assertFalse($result);
 
         $error = Database::getLastError();
 
@@ -80,9 +84,10 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testError() {
+        $this->expectException(SqlException::class);
         // this sql fails always
-        $query = Database::query("select devil from hell", true);
-        $this->assertFalse($query);
+        $result = Database::query("select devil from hell", true);
+        $this->assertFalse($result);
 
         $error = Database::error();
 
@@ -91,9 +96,10 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetError() {
+        $this->expectException(SqlException::class);
         // this sql fails always
-        $query = Database::query("select devil from hell", true);
-        $this->assertFalse($query);
+        $result = Database::query("select devil from hell", true);
+        $this->assertFalse($result);
 
         $error = Database::getError();
 
@@ -154,7 +160,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         // clear settings cache
         SettingsCache::set("foo", null);
 
-        $this->assertFalse(Settings::get("foo"));
+        $this->assertNull(Settings::get("foo"));
     }
 
     public function testEscapeName() {
@@ -185,11 +191,11 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         $lastInsertId = Database::getLastInsertID();
         $this->assertNotNull($lastInsertId);
 
-        $query = Database::selectAll("settings", array(
+        $result = Database::selectAll("settings", array(
                     "id"
                         ), "name = 'foo2'");
-        $result = Database::fetchObject($query);
-        $this->assertEquals($result->id, $lastInsertId);
+        $dataset = Database::fetchObject($result);
+        $this->assertEquals($dataset->id, $lastInsertId);
 
         Settings::delete("foo2");
     }
@@ -202,13 +208,106 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         $lastInsertId = Database::getInsertID();
         $this->assertNotNull($lastInsertId);
 
-        $query = Database::selectAll("settings", array(
+        $result = Database::selectAll("settings", array(
                     "id"
                         ), "name = 'foo2'");
-        $result = Database::fetchObject($query);
-        $this->assertEquals($result->id, $lastInsertId);
+        $dataset = Database::fetchObject($result);
+        $this->assertEquals($dataset->id, $lastInsertId);
 
         Settings::delete("foo2");
+    }
+
+    public function testGetNumFieldCount() {
+        Database::selectAll("users", ["lastname", "firstname", "email"]);
+        $this->assertEquals(3, Database::getNumFieldCount());
+
+        Database::selectAll("content", ["slug", "title"]);
+        $this->assertEquals(2, Database::getNumFieldCount());
+    }
+
+    public function testGetAffectedRows() {
+        for ($i = 1; $i <= 13; $i++) {
+            Settings::set("test_setting_{$i}", 1);
+        }
+        Database::deleteFrom("settings", "name like 'test_setting_%'");
+        $this->assertEquals(13, Database::getAffectedRows());
+    }
+
+    public function testSelectMinReturnsZero() {
+        $this->assertEquals(0, Database::selectMin("settings", "id", "1 = 0"));
+    }
+
+    public function testSelectMinReturnsMin() {
+        $min = Database::selectMin("settings", "id");
+        $max = Database::selectMax("settings", "id");
+
+        $this->assertIsInt($min);
+        $this->assertGreaterThanOrEqual(1, $min);
+        $this->assertLessThan($max, $min);
+    }
+
+    public function testSelectMaxReturnsZero() {
+        $this->assertEquals(0, Database::selectMax("settings", "id", "1 = 0"));
+    }
+
+    public function testSelectMaxReturnsMax() {
+        $min = Database::selectMin("settings", "id");
+        $max = Database::selectMax("settings", "id");
+        $this->assertIsInt($max);
+        $this->assertGreaterThan($min, $max);
+    }
+
+    public function testSelectAvgReturnsZero() {
+        $this->assertEquals(0, Database::selectAvg("settings", "id", "1 = 0"));
+    }
+
+    public function testSelectAvgReturnsAvg() {
+        $min = Database::selectMin("settings", "id");
+        $max = Database::selectMax("settings", "id");
+        $avg = Database::selectAvg("settings", "id");
+        $this->assertIsFloat($avg);
+
+        $this->assertGreaterThan($min, $avg);
+        $this->assertLessThan($max, $avg);
+    }
+
+    public function testFetchAll() {
+        $result = Database::query(
+                        "select * from {prefix}settings where
+        name in
+        ('default_font', 'frontpage', 'homepage_title')
+        order by name", true);
+
+        $datasets = Database::fetchAll($result);
+        $this->assertCount(3, $datasets);
+        $this->assertEquals('default_font', $datasets[0]->name);
+        $this->assertEquals('frontpage', $datasets[1]->name);
+        $this->assertEquals('homepage_title', $datasets[2]->name);
+        foreach ($datasets as $dataset) {
+            $this->assertNotEmpty($dataset->value);
+        }
+    }
+
+    public function testGetSqlStrictModeFlags() {
+        $this->assertCount(7, Database::getSqlStrictModeFlags());
+        foreach (Database::getSqlStrictModeFlags() as $flag) {
+            $this->assertIsString($flag);
+            $this->assertNotEmpty($flag);
+
+            // string must be Uppercase
+            $this->assertEquals(strtoupper($flag), $flag);
+        }
+    }
+
+    public function testTableExistsReturnsTrue() {
+        $this->assertTrue(Database::tableExists("content"));
+        $this->assertTrue(Database::tableExists("settings"), true);
+        $this->assertTrue(Database::tableExists(tbname("content"), false));
+    }
+
+    public function testTableExistsReturnsFalse() {
+        $this->assertFalse(Database::tableExists("gibts_echt_nicht"));
+        $this->assertFalse(Database::tableExists("content", false));
     }
 
     // TODO: implement tests for other Database functions

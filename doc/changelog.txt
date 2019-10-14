@@ -1,3 +1,117 @@
+===== Neues in UliCMS 2019.4 =====
+
+Neue Features:
+* Automatische Einbindung von externen Medien
+* Download-Quelle von Paketen nun in Infos hinterlegt
+* Seitenverwaltung ist nun hierarchisch
+* Neues Standardtheme "2020"
+* Design-Einstellungen: Vorschaubild vom ausgewählten Theme
+* Design-Einstellungen: Vorschau der gewählten Schriftart
+* controller_function_permissions unterstützt nun Wildcards
+* Sprachen können wieder gelöscht werden
+* Design-Einstellungen können nun in SCSS Code als Variablen verwendet werden
+* Username beim Login ist nun Case-Insensitive
+
+Neue API-Methoden:
+* ContentFactory::getAllByType($type, $order = "id")
+* ContentFactory::getAllByParent($parent_id, $order = "id")
+* Content->getChildren($order)
+* Content->hasChildren()
+* Page->getHistory()
+* Page->getParent()
+* Page->makeFrontPage()
+* Page->makeErrorPage403(bool $enabled = true): void
+* Page->makeErrorPage404(bool $enabled = true): void
+* Page->isFrontPage()
+* Page->isErrorPage403(): bool
+* Page->isErrorPage404(): bool
+* Page->isErrorPage(): bool
+* Page->getDeletedAt()
+* Audio_Page->getAudio(): ?Audio
+* Audio_Page->setAudio(?Audio $audio): void
+* Video_Page->getVideo(): ?Video
+* Video_Page->setVideo(?Video $video): void
+* Video::getAll(string $order = "id"): array
+* Audio::getAll(string $order = "id"): array
+* Video->getWidth(): ?int
+* Video->getHeight(): ?int
+* Video->setWidth(?int $val): void
+* Video->setHeight(?int $val): void
+* TypeMapper::getModel($type)
+* File::deleteIfExists($file)
+* ActionRegistry::getAction($action)
+* ActionRegistry::getActions()
+* User->checkPassword($password)
+* User->toSessionData()
+* User->registerSession($redirect)
+* User:fromSessionData()
+* Comment::getReadCount()
+* Comment::getAllCount()
+* Database::createSchema($name)
+* Model->isPersistent()
+* Model->hasChanges()
+* Module->isInstalled()
+* Module->getShortCode()
+* ModuleHelper::getMainClass(string $module): ?Controller
+* StringHelper::isUpperCase(string $val): bool
+* StringHelper::isLowerCase(string $val): bool
+* ArrayHelper::flatten($input)
+* PackageManager->isInstalled($package, $type = PackageTypes::TYPE_MODULE)
+* UliCMS\HTML\icon($classes, $htmlAttributes = array())
+* UliCMS\HTML\stringContainsHtml($string)
+* UliCMS\HTML\link($url, $text, $allowHtml = false, $target = null, $htmlAttributes = array())
+* UliCMS\HTML\buttonLink($url, $text, $type = null, $allowHtml = false, $target = null, $htmlAttributes = array())
+* UliCMS\HTML\Button::button($text, $type = ButtonType::BUTTON_SUBMIT, $htmlAttributes = [], $allowHtml = false)
+* UliCMS\HTML\Button::default($text, $type = ButtonType::BUTTON_SUBMIT, $htmlAttributes = [], $allowHtml = false)
+* UliCMS\HTML\Button::primary($text, $type = ButtonType::BUTTON_SUBMIT, $htmlAttributes = [], $allowHtml = false)
+* UliCMS\HTML\Button::info($text, $type = ButtonType::BUTTON_SUBMIT, $htmlAttributes = [], $allowHtml = false)
+* UliCMS\HTML\Button::warning($text, $type = ButtonType::BUTTON_SUBMIT, $htmlAttributes = [], $allowHtml = false)
+* UliCMS\HTML\Button::danger($text, $type = ButtonType::BUTTON_SUBMIT, $htmlAttributes = [], $allowHtml = false)
+* UliCMS\HTML\Button::link($text, $type = ButtonType::BUTTON_SUBMIT, $htmlAttributes = [], $allowHtml = false)
+* NumberFormatHelper::timestampToHtml5Datetime($timestamp = null)
+* is_today($datetime = null)
+* is_tomorrow($datetime = null)
+* is_yesterday($datetime = null)
+* is_past($datetime = null)
+* is_future($datetime = null)
+* get_carbon($datetime = null)
+* _t(string $name, array $placeholders = [])
+* t(string $name, array $placeholders = [])
+* singularOrPlural(int $count, string $singular, string $plural)
+* is_zero($number)
+* midnight($datetime = null)
+* midday($datetime = null)
+* end_of_day($datetime = null)
+* is_midnight($datetime = null)
+* is_end_of_day($datetime = null)
+* is_midday($datetime = null)
+* is_zero($val)
+* is_decimal($val): bool
+* stringContainsShortCodes(string $content, ?string $module = null): bool
+
+Entfernte API-Methoden:
+* addUser()
+* PackageManager->replacePlaceHolders($url)
+
+Verbesserungen:
+* Ein- und Ausblenden der Filter in der Seitenliste ist nun schneller
+* Auf iOS Geräten wird nun für alle scrollbaren Bereiche
+  impulsbasiertes Scrolling verwendet
+
+Fehlerkorrekturen:
+* datetime-local Eingabefelder auf iOS Safari sind immer ungültig
+* Das Speichern des States der DataTables ist fehlerhaft
+* Einige Stellen an denen Texte hardgecodet waren sind nun korrekt lokalisiert
+* render() Methode eines Modules wird nun nur noch aufgerufen, wenn ein HTML-String dessen Shortcode enthält
+
+Entfernte Features:
+* Unterstützung für veraltete unsichere Passwortverschlüsselung entfernt
+* Unbenutztes Feld "Homepage" in den Metadaten eines Artikels entfernt
+* Feld "Open Graph - Typ" entfernt
+
+Sicherheit:
+* Fix für XSS-Sicherheitslücke CVE-2019-11398
+
 ===== Neues in UliCMS 2019.3 =====
 
 Diese Version ist funktional identisch zu 2019.2.8

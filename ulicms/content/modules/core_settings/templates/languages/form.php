@@ -1,4 +1,7 @@
 <?php
+
+use UliCMS\Models\Content\Language;
+
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("languages")) {
     $languages = Language::getAllLanguages();
@@ -41,9 +44,10 @@ if ($permissionChecker->hasPermission("languages")) {
                     <th>
                         <strong><?php translate("full_name"); ?></strong>
                     </th>
-                    <th>
+                    <th class="no-sort">
                         <strong><?php translate("standard"); ?></strong>
                     </th>
+                    <th class="no-sort"></th>
                 </tr>
             </thead>
             <tbody>
@@ -55,7 +59,7 @@ if ($permissionChecker->hasPermission("languages")) {
                             <?php esc($language->getLanguageCode()); ?>
                         </td>
                         <td>
-                            <?php echo htmlspecialchars($language->getName()); ?>
+                            <?php esc($language->getName()); ?>
                         </td>
                         <td class="text-bold">
                             <?php
@@ -82,6 +86,12 @@ if ($permissionChecker->hasPermission("languages")) {
                             <?php } else { ?>
                                 <i class="fas fa-check text-success"></i>
                             <?php } ?>
+                        </td>
+                        <td>
+                            <?php
+                            echo ModuleHelper::deleteButton(ModuleHelper::buildMethodCallUrl(LanguageController::class, "delete"),
+                                    ["id" => $language->getID()]);
+                            ?>
                         </td>
                     </tr>
                 <?php } ?>

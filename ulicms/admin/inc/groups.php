@@ -1,4 +1,9 @@
 <?php
+
+// FIXME: this file looks like shit, refactor this code to MVC pattern.
+use UliCMS\Models\Content\Language;
+use UliCMS\Constants\AuditLog;
+
 $permissionChecker = new ACL();
 if (!$permissionChecker->hasPermission("groups")) {
     noPerms();
@@ -22,7 +27,7 @@ if (!$permissionChecker->hasPermission("groups")) {
         if (!empty($name)) {
             $id = $permissionChecker->createGroup($name, $all_permissions);
             $group = new Group($id);
-            $languages = array();
+            $languages = [];
             if (isset($_POST["restrict_edit_access_language"]) and count($_POST["restrict_edit_access_language"]) > 0) {
                 foreach ($_POST["restrict_edit_access_language"] as $lang) {
                     $languages[] = new Language($lang);
@@ -40,7 +45,7 @@ if (!$permissionChecker->hasPermission("groups")) {
             }
             $name = _esc($name);
         }
-    } else if (isset($_GET["delete"]) and get_request_method() == "POST") {
+    } else if (isset($_GET["delete"]) and get_request_method() == "post") {
         $id = intval($_GET["delete"]);
         $permissionChecker = new ACL();
         $permissionChecker->deleteGroup($id);
@@ -63,7 +68,7 @@ if (!$permissionChecker->hasPermission("groups")) {
         $group->loadById($id);
         $allowed_tags = StringHelper::isNotNullOrWhitespace($_POST["allowable_tags"]) ? strval($_POST["allowable_tags"]) : null;
         $group->setAllowableTags($allowed_tags);
-        $languages = array();
+        $languages = [];
         if (isset($_POST["restrict_edit_access_language"]) and count($_POST["restrict_edit_access_language"]) > 0) {
             foreach ($_POST["restrict_edit_access_language"] as $lang) {
                 $languages[] = new Language($lang);
@@ -79,9 +84,8 @@ if (!$permissionChecker->hasPermission("groups")) {
         }
 
         $name = trim($_POST["name"]);
-        $json_permissions = json_encode($all_permissions);
         if (!empty($name)) {
-            $permissionChecker->updateGroup($id, $name, $json_permissions);
+            $permissionChecker->updateGroup($id, $name, $all_permissions);
             $modified = true;
             $name = _esc($name);
         }

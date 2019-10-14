@@ -1,4 +1,8 @@
 <?php
+
+use UliCMS\Models\Content\Advertisement\Banners;
+use UliCMS\Models\Content\Categories;
+
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("banners")) {
     if (!isset($_SESSION["filter_category"])) {
@@ -61,7 +65,7 @@ if ($permissionChecker->hasPermission("banners")) {
                             $name = Template::getEscape($banner->getName());
                             echo '<td><a href="' . $link_url . '" target="_blank"><img src="' . $image_url . '" title="' . $name . '" alt="' . $name . '" border=0></a></td>';
                         } else {
-                            echo '<td>' . Template::getEscape($banner->getHtml()) . '</td>';
+                            echo '<td>' . Template::getEscape($banner->render()) . '</td>';
                         }
                         if (!$banner->getLanguage()) {
                             echo '<td>' . get_translation("every") . '</td>';

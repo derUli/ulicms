@@ -3,24 +3,24 @@
 class VideoController extends Controller {
 
     public function deletePost() {
-        $query = db_query("select ogg_file, webm_file, mp4_file from " . tbname("videos") . " where id = " . intval($_REQUEST ["delete"]));
-        if (db_num_rows($query) > 0) {
+        $result = db_query("select ogg_file, webm_file, mp4_file from " . tbname("videos") . " where id = " . intval($_REQUEST ["delete"]));
+        if (db_num_rows($result) > 0) {
             // OGG
-            $result = db_fetch_object($query);
-            $filepath = ULICMS_DATA_STORAGE_ROOT . "/content/videos/" . basename($result->ogg_file);
-            if (!empty($result->ogg_file) and is_file($filepath)) {
+            $dataset = db_fetch_object($result);
+            $filepath = ULICMS_DATA_STORAGE_ROOT . "/content/videos/" . basename($dataset->ogg_file);
+            if (!empty($dataset->ogg_file) and file_exists($filepath)) {
                 unlink($filepath);
             }
 
             // WebM
-            $filepath = ULICMS_DATA_STORAGE_ROOT . "/content/videos/" . basename($result->webm_file);
-            if (!empty($result->webm_file) and is_file($filepath)) {
+            $filepath = ULICMS_DATA_STORAGE_ROOT . "/content/videos/" . basename($dataset->webm_file);
+            if (!empty($dataset->webm_file) and file_exists($filepath)) {
                 unlink($filepath);
             }
 
             // MP4
-            $filepath = ULICMS_DATA_STORAGE_ROOT . "/content/videos/" . basename($result->mp4_file);
-            if (!empty($result->mp4_file) and is_file($filepath)) {
+            $filepath = ULICMS_DATA_STORAGE_ROOT . "/content/videos/" . basename($dataset->mp4_file);
+            if (!empty($dataset->mp4_file) and file_exists($filepath)) {
                 @unlink($filepath);
             }
 

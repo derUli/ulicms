@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Exceptions\NotImplementedException;
+use UliCMS\Constants\CommentStatus;
 
 class CommentsControllerTest extends \PHPUnit\Framework\TestCase {
 

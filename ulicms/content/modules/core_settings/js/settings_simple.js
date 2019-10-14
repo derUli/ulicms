@@ -1,17 +1,18 @@
+/* global Translation */
+
 // Scripts for simple settings page
-$(function () {
+$(() => {
     $("#settings_simple")
             .ajaxForm(
                     {
-                        beforeSubmit: function (e) {
+                        beforeSubmit: () => {
                             $("#message").html("");
                             $("#loading").show();
                         },
-                        success: function (e) {
+                        success: () => {
                             $("#loading").hide();
                             $("#message")
-                                    .html(
-                                            "<span style=\"color:green;\">Die Einstellungen wurden gespeichert.</span>");
+                                    .html(`<span style="color:green;">${Translation.ChangesWasSaved}</span>`);
                         }
                     });
 });

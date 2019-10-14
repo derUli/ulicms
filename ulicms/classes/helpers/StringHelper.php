@@ -1,40 +1,49 @@
 <?php
 
+declare(strict_types=1);
+
 use Cocur\Slugify\Slugify;
 
 class StringHelper extends Helper {
 
-    public static function removeEmptyLinesFromString($input) {
+    // removes empty lines from a string
+    public static function removeEmptyLinesFromString(string $input): string {
         return normalizeLN(preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $input), "\n");
     }
 
-    public static function isNullOrEmpty($variable) {
+    // returns true if the string is null or empty
+    public static function isNullOrEmpty($variable): bool {
         return (is_null($variable) or empty($variable));
     }
 
-    public static function isNotNullOrEmpty($variable) {
+    // returns true if the string is not null or empty
+    public static function isNotNullOrEmpty($variable): bool {
         return (!is_null($variable) and ! empty($variable));
     }
 
-    public static function isNullOrWhitespace($variable) {
-        return self::isNullOrEmpty(trim($variable));
+    // returns true if the string is null or whitespace
+    public static function isNullOrWhitespace(?string $variable): bool {
+        return $variable ? self::isNullOrEmpty(trim($variable)) : true;
     }
 
-    public static function isNotNullOrWhitespace($variable) {
-        return self::isNotNullOrEmpty(trim($variable));
+    // returns true if the string is not null or whitespace
+    public static function isNotNullOrWhitespace($variable): bool {
+        return $variable ? self::isNotNullOrEmpty(trim($variable)) : false;
     }
 
-    public static function cleanString($string, $separator = '-') {
+    // clean a string to use it in urls
+    public static function cleanString(string $string, string $separator = '-'): string {
         $slugify = new Slugify();
         return $slugify->slugify($string, $separator);
     }
 
-    public static function realHtmlSpecialchars($string) {
+    // encode strings to prevent XSS
+    public static function realHtmlSpecialchars(string $string): string {
         return _esc($string);
     }
 
-    // Links klickbar machen
-    public static function makeLinksClickable($text) {
+    // replace urls with clickable html links
+    public static function makeLinksClickable(string $text): string {
         return preg_replace('!(((f|ht)tp(s)?://)[-a-zA-Zа-яА-Я()0-9@:%_+.~#?&;//=]+)!i', '<a href="$1" rel="nofollow" target="_blank">$1</a>', $text);
     }
 
@@ -49,33 +58,33 @@ class StringHelper extends Helper {
      *            Maximum length the excerpt may be
      * @return String excerpt
      */
-    public static function getExcerpt($str, $startPos = 0, $maxLength = 100) {
+    public static function getExcerpt(string $str, int $startPos = 0, int $maxLength = 100): string {
+        $excerpt = $str;
         $str = str_replace("&nbsp;", " ", $str);
         if (strlen($str) > $maxLength) {
             $excerpt = substr($str, $startPos, $maxLength - 3);
             $lastSpace = strrpos($excerpt, ' ');
             $excerpt = substr($excerpt, 0, $lastSpace);
             $excerpt .= '...';
-        } else {
-            $excerpt = $str;
         }
 
         return $excerpt;
     }
 
-    public static function isEmpty($str) {
+    // returns true if the string is empty
+    public static function isEmpty($str): bool {
         $str = trim($str);
         return empty($str);
     }
 
-    public static function decodeHTMLEntities($str) {
+    public static function decodeHTMLEntities(string $str): string {
         return html_entity_decode($str, ENT_COMPAT, 'UTF-8');
     }
 
     // Häufigste Wörter in String ermitteln und als Assoziatives Array zurückgeben.
     // z.B. für automatisches ausfüllen der Meta-Keywords nutzbar
-    public static function keywordsFromString($text) {
-        $return = array();
+    public static function keywordsFromString(string $text): array {
+        $return = [];
 
         // Punkt, Beistrich, Zeilenumbruch... in Leerzeichen umwandeln
         $text = str_replace(array(
@@ -109,7 +118,8 @@ class StringHelper extends Helper {
         return $return;
     }
 
-    public static function linesFromString($str, $trim = true, $removeEmpty = true, $removeComments = true) {
+    // converts a string to an array of lines
+    public static function linesFromString(string $str, bool $trim = true, bool $removeEmpty = true, bool $removeComments = true): array {
         $str = normalizeLN($str, "\n");
         $lines = explode("\n", $str);
         if ($trim) {
@@ -127,19 +137,31 @@ class StringHelper extends Helper {
         return $lines;
     }
 
-    public static function linesFromFile($file, $trim = true, $removeEmpty = true, $removeComments = true) {
+    // reads a file and converts it to an array of lines
+    public static function linesFromFile(string $file, bool $trim = true, bool $removeEmpty = true, bool $removeComments = true): ?array {
         $lines = null;
-        if (is_File($file)) {
+        if (file_exists($file)) {
             $str = file_get_contents($file);
             $lines = self::linesFromString($str, $trim, $removeEmpty, $removeComments);
         }
         return $lines;
     }
 
-    public static function trimLines($str, $newline = PHP_EOL) {
+    // trims all lines of string
+    public static function trimLines(string $str, string $newline = PHP_EOL): string {
         $str = StringHelper::linesFromString($str, true, true, false);
         $str = implode($newline, $str);
         return $str;
+    }
+
+    // returns true if this string is all upper case
+    public static function isUpperCase(string $val): bool {
+        return strtoupper($val) === $val;
+    }
+
+    // returns true if this string is all lower case
+    public static function isLowerCase(string $val): bool {
+        return strtolower($val) === $val;
     }
 
 }

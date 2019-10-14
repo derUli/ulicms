@@ -8,6 +8,7 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase {
         @session_start();
         $this->default_language = Settings::get("default_language");
         require_once getLanguageFilePath("en");
+        $_SERVER["REQUEST_URI"] = "/other-url.html?param=value";
     }
 
     public function tearDown() {
@@ -15,6 +16,7 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase {
         unset($_SERVER['HTTP_HOST']);
         unset($_SERVER['HTTPS']);
         unset($_SERVER[$_SESSION["language"]]);
+        unset($_SERVER["REQUEST_URI"]);
         unset($_SERVER["REQUEST_URI"]);
         @session_destroy();
     }
@@ -85,7 +87,7 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testBuildMethodCallFormWithHtmlAttributes() {
-        $html = ModuleHelper::buildMethodCallForm("MyClass", "MyMethod", array(), "post", array(
+        $html = ModuleHelper::buildMethodCallForm("MyClass", "MyMethod", [], "post", array(
                     "class" => "myclass",
                     "onsubmit" => "return confirm('Do you really want to do that')"
         ));
@@ -93,7 +95,7 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testBuildMethodCallUploadFormWithHtmlAttributes() {
-        $html = ModuleHelper::buildMethodCallUploadForm("MyClass", "MyMethod", array(), "post", array(
+        $html = ModuleHelper::buildMethodCallUploadForm("MyClass", "MyMethod", [], "post", array(
                     "class" => "myclass",
                     "onsubmit" => "return confirm('Do you really want to do that')"
         ));

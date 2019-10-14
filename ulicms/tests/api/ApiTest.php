@@ -5,12 +5,18 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
     public function setUp() {
         $this->cleanUp();
         @session_start();
+
+        $moduleManager = new ModuleManager();
+        $moduleManager->sync();
     }
 
     public function tearDown() {
+
+        Database::query("delete from {prefix}content where title like 'Unit Test%'", true);
         $this->cleanUp();
-        Database::query("delete from {prefix}users where username like 'testuser-%", true);
+        Database::query("delete from {prefix}users where username like 'testuser-%'", true);
         unset($_SESSION["login_id"]);
+        unset($_SESSION["language"]);
         @session_destroy();
     }
 
@@ -19,7 +25,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         Settings::set("maintenance_mode", "0");
         chdir(Path::resolve("ULICMS_ROOT"));
         set_format("html");
-        unseT($_SESSION["csrf_token"]);
+        unset($_SESSION["csrf_token"]);
         unset($_REQUEST["csrf_token"]);
     }
 
@@ -35,25 +41,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("FooBar", remove_suffix("FooBar", "Foo"));
         $this->assertEquals("", remove_suffix("Foo", "Foo"));
         $this->assertEquals("Foo", remove_suffix("Foo", "Hello"));
-    }
-
-    public function testIsCrawler() {
-        $pkg = new PackageManager();
-        if (!faster_in_array("CrawlerDetect", $pkg->getInstalledModules())) {
-            $this->assertNotNull("CrawlerDetect is not installed. Skip this test");
-            return;
-        }
-        $useragents = array(
-            "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)" => true,
-            "Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)" => true,
-            "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36" => false,
-            "Mozilla/5.0 (compatible; YandexBot/3.0; +http://yandex.com/bots)" => true,
-            "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; NP08; .NET4.0C; .NET4.0E; NP08; MAAU; rv:11.0) like Gecko" => false,
-            "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:55.0) Gecko/20100101 Firefox/55.0" => false
-        );
-        foreach ($useragents as $key => $value) {
-            $this->assertEquals($value, is_crawler($key));
-        }
     }
 
     public function testGetAllUsedLanguages() {
@@ -105,53 +92,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("image/png", get_mime(Path::resolve("ULICMS_ROOT/admin/gfx/edit.png")));
     }
 
-    public function testIsTrue() {
-        $this->assertTrue(is_true(true));
-        $this->assertTrue(is_true(1));
-        $this->assertFalse(is_true($nothing));
-        $this->assertFalse(is_true(false));
-        $this->assertFalse(is_true(0));
-    }
-
-    public function testIsFalse() {
-        $this->assertFalse(is_false(true));
-        $this->assertFalse(is_false(1));
-        $this->assertTrue(is_false($nothing));
-        $this->assertTrue(is_false(false));
-        $this->assertTrue(is_false(0));
-    }
-
-    public function testIsJsonTrue() {
-        $validJson = File::read(ModuleHelper::buildModuleRessourcePath("core_content", "metadata.json"));
-        $this->assertTrue(is_json($validJson));
-    }
-
-    public function testIsJsonFalse() {
-        $invalidJson = File::read(ModuleHelper::buildModuleRessourcePath("core_content", "lang/de.php"));
-        $this->assertFalse(is_json($invalidJson));
-    }
-
-    public function testIsNumericArray() {
-        $this->assertTrue(is_numeric_array(array(
-            "42",
-            1337,
-            0x539,
-            02471,
-            0b10100111001,
-            1337e0,
-            9.1
-        )));
-        $this->assertFalse(is_numeric_array(array(
-            "42",
-            "foo",
-            "not numeric",
-            1337
-        )));
-        $this->assertFalse(is_numeric_array("Not an array"));
-        $this->assertFalse(is_numeric_array(42));
-        $this->assertFalse(is_numeric_array(9.1));
-    }
-
     public function testVarIsType() {
         $this->assertTrue(var_is_type(123, "numeric", true));
         $this->assertTrue(var_is_type(null, "numeric", false));
@@ -178,28 +118,8 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("home", get_action());
     }
 
-    public function testIsMaintenanceModeOn() {
-        Settings::set("maintenance_mode", "1");
-        $this->assertTrue(isMaintenanceMode());
-    }
-
-    public function testIsMaintenanceModeOff() {
-        Settings::set("maintenance_mode", "0");
-        $this->assertFalse(isMaintenanceMode());
-    }
-
     public function testGetStringLengthInBytes() {
         $this->assertEquals(39, getStringLengthInBytes("Das ist die Lösung für die Änderung."));
-    }
-
-    public function testIsAdminDirTrue() {
-        chdir(Path::resolve("ULICMS_ROOT/admin"));
-        $this->assertTrue(is_admin_dir());
-    }
-
-    public function testIsAdminDirFalse() {
-        chdir(Path::resolve("ULICMS_ROOT"));
-        $this->assertFalse(is_admin_dir());
     }
 
     public function testSetFormat() {
@@ -244,12 +164,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals($expected, preparePlainTextforHTMLOutput($input));
     }
 
-    // in the test environment this returns always true
-    // since the tests are running at the command line
-    public function testIsCli() {
-        $this->assertTrue(isCLI());
-    }
-
     public function testRandStr() {
         $password1 = rand_string(15);
         $password2 = rand_string(15);
@@ -269,12 +183,22 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("Musterstadt", $result[3]);
     }
 
-    public function testGetThemesList() {
-        $themes = getThemesList();
+    public function testGetAllThemes() {
+        $themes = getAllThemes();
         $this->assertContains("impro17", $themes);
+        $this->assertContains("2020", $themes);
+    }
+
+    public function testGetAllModules() {
+        $modules = getAllModules();
+        $this->assertContains("core_content", $modules);
+        $this->assertContains("slicknav", $modules);
+        $this->assertContains("bootstrap", $modules);
     }
 
     public function testGetPageSlugByID() {
+        $allPages = ContentFactory::getAll();
+        $first = $allPages[0];
         $this->assertEquals($first->slug, getPageSlugByID($first->id));
         $this->assertNull(getPageSlugByID(PHP_INT_MAX));
     }
@@ -345,7 +269,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue(is_blank(false));
         $this->assertTrue(is_blank(null));
         $this->assertTrue(is_blank(0));
-        $this->assertTrue(is_blank(array()));
+        $this->assertTrue(is_blank([]));
         $this->assertTrue(is_blank("0"));
         $this->assertTrue(is_blank($notDefined));
     }
@@ -372,7 +296,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(is_present(false));
         $this->assertFalse(is_present(null));
         $this->assertFalse(is_present(0));
-        $this->assertFalse(is_present(array()));
+        $this->assertFalse(is_present([]));
         $this->assertFalse(is_present("0"));
         $this->assertFalse(is_present($undefinedVar));
     }
@@ -482,6 +406,343 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetEnvironment() {
         $this->assertEquals("test", get_environment());
+    }
+
+    public function testIsModuleInstalledReturnsTrue() {
+        $this->assertTrue(isModuleInstalled("core_content"));
+        $this->assertTrue(isModuleInstalled("fortune2"));
+    }
+
+    public function testIsModuleInstalledReturnsFalse() {
+        $this->assertFalse(isModuleInstalled("not_a_module"));
+    }
+
+    public function testFuncEnabled() {
+        $enabled = func_enabled("mysqli_connect");
+        $this->assertEquals("mysqli_connect() is allow to use", $enabled["m"]);
+        $this->assertEquals(1, $enabled["s"]);
+    }
+
+    public function testGetBaseFolderUrlWithFilenameInUrl() {
+
+        $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
+        $_SERVER["SERVER_PORT"] = "80";
+        $_SERVER['SERVER_NAME'] = "example.org";
+        $_SERVER['REQUEST_URI'] = "/foobar/foo.html";
+
+        $this->assertEquals("http://example.org/foobar", getBaseFolderURL());
+
+        unset($_SERVER["SERVER_PROTOCOL"]);
+        unset($_SERVER['SERVER_NAME']);
+        unset($_SERVER['SERVER_PORT']);
+        unset($_SERVER['REQUEST_URI']);
+    }
+
+    public function testGetBaseFolderUrlWithFilenameInUrlAndHttps() {
+
+        $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
+        $_SERVER["SERVER_PORT"] = "443";
+        $_SERVER["HTTPS"] = "on";
+        $_SERVER['SERVER_NAME'] = "example.org";
+        $_SERVER['REQUEST_URI'] = "/foobar/foo.html";
+
+        $this->assertEquals("https://example.org/foobar", getBaseFolderURL());
+
+        unset($_SERVER["SERVER_PROTOCOL"]);
+        unset($_SERVER['SERVER_NAME']);
+        unset($_SERVER['SERVER_PORT']);
+        unset($_SERVER['REQUEST_URI']);
+        unset($_SERVER['HTTPS']);
+    }
+
+    public function testGetBaseFolderUrlWithFilenameInUrlAndHttpsAndAlternativePort() {
+
+        $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
+        $_SERVER["SERVER_PORT"] = "8080";
+        $_SERVER["HTTPS"] = "on";
+        $_SERVER['SERVER_NAME'] = "example.org";
+        $_SERVER['REQUEST_URI'] = "/foobar/foo.html";
+
+        $this->assertEquals("https://example.org:8080/foobar", getBaseFolderURL());
+
+        unset($_SERVER["SERVER_PROTOCOL"]);
+        unset($_SERVER['SERVER_NAME']);
+        unset($_SERVER['SERVER_PORT']);
+        unset($_SERVER['REQUEST_URI']);
+        unset($_SERVER['HTTPS']);
+    }
+
+    public function testGetBaseFolderUrlWithoutFilename() {
+
+        $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
+        $_SERVER["SERVER_PORT"] = "80";
+        $_SERVER['SERVER_NAME'] = "example.org";
+        $_SERVER['REQUEST_URI'] = "/foobar/";
+
+        $this->assertEquals("http://example.org/foobar", getBaseFolderURL());
+
+        unset($_SERVER["SERVER_PROTOCOL"]);
+        unset($_SERVER['SERVER_NAME']);
+        unset($_SERVER['SERVER_PORT']);
+        unset($_SERVER['REQUEST_URI']);
+    }
+
+    public function testGetCurrentURL() {
+        $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
+        $_SERVER["SERVER_PORT"] = "8080";
+        $_SERVER["HTTPS"] = "on";
+        $_SERVER['SERVER_NAME'] = "example.org";
+        $_SERVER['REQUEST_URI'] = "/foobar/foo.html?hello=world";
+
+
+        $this->assertEquals("https://example.org:8080/foobar/foo.html?hello=world", getCurrentURL());
+
+        unset($_SERVER["SERVER_PROTOCOL"]);
+        unset($_SERVER['SERVER_NAME']);
+        unset($_SERVER['SERVER_PORT']);
+        unset($_SERVER['REQUEST_URI']);
+        unset($_SERVER['HTTPS']);
+    }
+
+    public function testGetFontSizes() {
+        $this->assertCount(75, getFontSizes());
+        $this->assertContains("14px", getFontSizes());
+    }
+
+    public function testGetGravatarReturnsUrl() {
+        $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
+        $_SERVER["SERVER_PORT"] = "8080";
+        $_SERVER["HTTPS"] = "on";
+        $_SERVER['HTTP_HOST'] = "example.org";
+        $_SERVER['REQUEST_URI'] = "/foobar/foo.html?hello=world";
+
+        $this->assertEquals("https://example.org/foobar/admin/gfx/no_avatar.png",
+                get_gravatar("foo@bar.de"));
+
+        unset($_SERVER["SERVER_PROTOCOL"]);
+        unset($_SERVER['HTTP_HOST']);
+        unset($_SERVER['SERVER_PORT']);
+        unset($_SERVER['REQUEST_URI']);
+        unset($_SERVER['HTTPS']);
+    }
+
+    public function testGetGravatarReturnsImage() {
+        $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
+        $_SERVER["SERVER_PORT"] = "8080";
+        $_SERVER["HTTPS"] = "on";
+        $_SERVER['HTTP_HOST'] = "example.org";
+        $_SERVER['REQUEST_URI'] = "/foobar/foo.html?hello=world";
+
+        $this->assertEquals(
+                '<img src="https://example.org/foobar/admin/gfx/no_avatar.png" />',
+                get_gravatar("foo@bar.de", 80, 'mm', 'g', true)
+        );
+        unset($_SERVER["SERVER_PROTOCOL"]);
+        unset($_SERVER['HTTP_HOST']);
+        unset($_SERVER['SERVER_PORT']);
+        unset($_SERVER['REQUEST_URI']);
+        unset($_SERVER['HTTPS']);
+    }
+
+    public function testStringContainsShortCodeWithoutNameReturnsTrue() {
+        $this->assertTrue(stringContainsShortCodes(
+                        'Foo [module=hello_world] Bar')
+        );
+        $this->assertTrue(stringContainsShortCodes(
+                        'Foo [module="hello_world"] Bar')
+        );
+    }
+
+    public function testStringContainsShortCodeWithoutNameReturnsFalse() {
+        $this->assertFalse(stringContainsShortCodes(
+                        '[module=hello_world '
+                )
+        );
+        $this->assertFalse(stringContainsShortCodes(
+                        'nic-code'
+                )
+        );
+    }
+
+    public function testStringContainsShortCodeWithNameReturnsTrue() {
+        $this->assertTrue(stringContainsShortCodes(
+                        'Foo [module=hello_world] Bar',
+                        'hello_world'
+                )
+        );
+        $this->assertTrue(stringContainsShortCodes(
+                        'Foo [module="hello_world"] Bar',
+                        'hello_world'
+                )
+        );
+    }
+
+    public function testStringContainsShortCodeWithNameReturnsFalse() {
+        $this->assertFalse(stringContainsShortCodes(
+                        'Foo [module="hello_world"] Bar',
+                        'berlin'
+                )
+        );
+        $this->assertFalse(stringContainsShortCodes(
+                        'Foo [module=hello_world] Bar', 'berlin'
+                )
+        );
+    }
+
+    public function testReplaceShortcodesWithModulesWithOther() {
+        $inputString = 'Foo [year] Bar [module=fortune2]';
+        $processedInput = replaceShortcodesWithModules($inputString, true);
+
+        $this->assertStringStartsWith('Foo ' . date("Y") . ' Bar ',
+                $processedInput);
+        $this->assertStringEndsNotWith('[module=fortune2]',
+                $processedInput);
+        $this->assertGreaterThan(strlen($inputString) + 10,
+                strlen($processedInput));
+    }
+
+    public function testReplaceShortcodesWithModulesThreeFormats() {
+        $formats = [
+            '[module=fortune2]',
+            '[module="fortune2"]',
+            '[module=&quot;fortune2&quot;]'
+        ];
+        foreach ($formats as $format) {
+            $html = replaceShortcodesWithModules($format, false);
+            $this->assertNotEquals($format, $html);
+            $this->assertGreaterThan(strlen($format), strlen($html));
+        }
+    }
+
+    public function testReplaceShortcodesWithNonExistingName() {
+        $this->assertEquals(
+                '[module=gibts_nicht]',
+                replaceShortcodesWithModules('[module=gibts_nicht]')
+        );
+    }
+
+    public function testReplaceShortcodesWithModulesWithoutOther() {
+        $inputString = 'Foo [year] Bar [module=fortune2]';
+        $processedInput = replaceShortcodesWithModules($inputString, false);
+
+        $this->assertStringStartsWith('Foo [year] Bar ', $processedInput);
+        $this->assertStringEndsNotWith('[module=fortune2]', $processedInput);
+        $this->assertGreaterThan(strlen($inputString) + 10, strlen($processedInput));
+    }
+
+    public function testReplaceOtherShortcodes() {
+        $this->assertStringMatchesFormat('Foo %d Bar [module=fortune2]', replaceOtherShortCodes('Foo [year] Bar [module=fortune2]'));
+    }
+
+    public function testContainsModuleReturnsTrue() {
+        $page = new Module_Page();
+        $page->title = "Unit Test " . uniqid();
+        $page->slug = "unit-test-" . uniqid();
+        $page->menu = "none";
+        $page->language = "de";
+        $page->article_date = 1413821696;
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->module = "fortune2";
+        $page->content = "Hello World";
+        $page->save();
+
+        $_SESSION["language"] = "de";
+        $this->assertTrue(containsModule($page->slug));
+    }
+
+    public function testContainsModuleReturnsFalse() {
+        $page = new Page();
+        $page->title = "Unit Test " . uniqid();
+        $page->slug = "unit-test-" . uniqid();
+        $page->menu = "none";
+        $page->language = "de";
+        $page->article_date = 1413821696;
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->save();
+
+        $_SESSION["language"] = "de";
+
+        $this->assertFalse(containsModule($page->slug));
+    }
+
+    public function testContainsModuleWithModulePageAndNameReturnsTrue() {
+        $page = new Module_Page();
+        $page->title = "Unit Test " . uniqid();
+        $page->slug = "unit-test-" . uniqid();
+        $page->menu = "none";
+        $page->language = "de";
+        $page->article_date = 1413821696;
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->module = "fortune2";
+        $page->content = "Hello World";
+        $page->save();
+
+        $_SESSION["language"] = "de";
+        $this->assertTrue(containsModule($page->slug, "fortune2"));
+    }
+
+    public function testContainsModuleWithShortcodeAndNameReturnsTrue() {
+        $page = new Page();
+        $page->title = "Unit Test " . uniqid();
+        $page->slug = "unit-test-" . uniqid();
+        $page->menu = "none";
+        $page->language = "de";
+        $page->article_date = 1413821696;
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->content = "Hello [module=fortune2] World";
+        $page->save();
+
+        $_SESSION["language"] = "de";
+        $this->assertTrue(containsModule($page->slug, "fortune2"));
+    }
+
+    public function testContainsModuleWithNameReturnsFalse() {
+        $page = new Page();
+        $page->title = "Unit Test " . uniqid();
+        $page->slug = "unit-test-" . uniqid();
+        $page->menu = "none";
+        $page->language = "de";
+        $page->article_date = 1413821696;
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->content = "Hello [module=fortune2] World";
+        $page->save();
+
+        $_SESSION["language"] = "de";
+
+        $this->assertFalse(containsModule($page->slug, "nicht_enthalten"));
+    }
+
+    public function testBuildSEOUrlWithoutAnythingNoPageSpecified() {
+        unset($_GET["seite"]);
+        unset($_GET["html"]);
+
+        $this->assertEquals(get_frontpage() . ".html", buildSEOUrl());
+    }
+
+    public function testBuildSEOUrlWithoutAnything() {
+        set_requested_pagename("hello_world", null, "pdf");
+        $this->assertEquals("hello_world.pdf", buildSEOUrl());
+    }
+
+    public function testBuildSEOUrlWithPage() {
+        $this->assertEquals("foobar.html", buildSEOUrl("foobar"));
+    }
+
+    public function testBuildSEOUrlWithPageAndRedirection() {
+        $this->assertEquals("#", buildSEOUrl("foobar", "#"));
+
+        $this->assertEquals("https://google.com", buildSEOUrl("foobar",
+                        "https://google.com"));
+    }
+
+    public function testBuildSEOUrlWithPageAnd() {
+        $this->assertEquals("foobar.txt",
+                buildSEOUrl("foobar", null, "txt"));
     }
 
 }

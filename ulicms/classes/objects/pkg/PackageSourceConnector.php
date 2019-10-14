@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace UliCMS\Services\Connectors;
 
 use Settings;
@@ -11,17 +13,16 @@ class PackageSourceConnector {
     private $packageSourceUrl = null;
     private $data = null;
 
-    public function __construct($packageSourceUrl = null) {
+    public function __construct(?string $packageSourceUrl = null) {
         if (!$packageSourceUrl) {
             $packageSourceUrl = Settings::get("pkg_src");
         }
-        $packageSourceUrl = str_replace("{version}", cms_version(),
-                $packageSourceUrl);
+        $packageSourceUrl = str_replace("{version}", cms_version(), $packageSourceUrl);
         $packageSourceUrl .= "index.json";
         $this->packageSourceUrl = $packageSourceUrl;
     }
 
-    public function fetch($forceUpdate = false) {
+    public function fetch(bool $forceUpdate = false): bool {
         $json = file_get_contents_wrapper($this->packageSourceUrl, $forceUpdate);
         if (!$json) {
             return false;
@@ -30,18 +31,18 @@ class PackageSourceConnector {
         return true;
     }
 
-    public function getPackageSourceUrl() {
+    public function getPackageSourceUrl(): ?string {
         return $this->packageSourceUrl;
     }
 
-    public function getAllAvailablePackages() {
+    public function getAllAvailablePackages(): ?array {
         if (!$this->data) {
             $this->fetch();
         }
         return $this->data;
     }
 
-    public function getVersionOfPackage($name) {
+    public function getVersionOfPackage(string $name): ?string {
         if (!$this->data) {
             $this->fetch();
         }
@@ -53,7 +54,7 @@ class PackageSourceConnector {
         return null;
     }
 
-    public function getDataOfPackage($name) {
+    public function getDataOfPackage(string $name): ?object {
         if (!$this->data) {
             $this->fetch();
         }
@@ -65,7 +66,7 @@ class PackageSourceConnector {
         return null;
     }
 
-    public function getLicenseOfPackage($name) {
+    public function getLicenseOfPackage(string $name): ?string {
         if (!$this->data) {
             $this->fetch();
         }

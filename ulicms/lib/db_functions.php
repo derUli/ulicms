@@ -44,8 +44,8 @@ function db_fetch_assoc($result) {
     return Database::fetchAssoc($result);
 }
 
-function db_fetch_all($result, $resulttype = MYSQLI_NUM) {
-    return Database::fetchAll($result, $resulttype);
+function db_fetch_all($result) {
+    return Database::fetchAll($result);
 }
 
 function db_close() {
@@ -62,8 +62,8 @@ function db_select($schema) {
     return Database::select($schema);
 }
 
-function db_num_fields($result) {
-    return Database::getNumFieldCount($result);
+function db_num_fields() {
+    return Database::getNumFieldCount();
 }
 
 function db_affected_rows() {

@@ -2,7 +2,7 @@
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("settings_simple")) {
     $languages = getAllLanguages();
-    $homepage_titles = array();
+    $homepage_titles = [];
     for ($i = 0; $i < count($languages); $i ++) {
         $lang = $languages[$i];
         $homepage_titles[$lang] = Settings::get("homepage_title_" . $lang);
@@ -18,7 +18,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
     </p>
     <h1><?php translate("homepage_title"); ?></h1>
     <?php
-    echo ModuleHelper::buildMethodCallForm("HomepageTitleController", "save", array(), "post", array(
+    echo ModuleHelper::buildMethodCallForm("HomepageTitleController", "save", [], "post", array(
         "id" => "homepage_title_settings"
     ));
     ?>
@@ -42,7 +42,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
                         esc($lang);
                         ?>"
                         value="<?php
-                        echo StringHelper::realHtmlSpecialchars($homepage_titles[$lang]);
+                        esc($homepage_titles[$lang]);
                         ?>"></td>
             </tr>
             <?php
@@ -56,12 +56,15 @@ if ($permissionChecker->hasPermission("settings_simple")) {
             </td>
         </tr>
     </table>
-    <?php echo ModuleHelper::endForm(); ?>
     <?php
+    echo ModuleHelper::endForm();
+
+    $translation = new JSTranslation();
+    $translation->addKey("changes_was_saved");
+    $translation->render();
+
     enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/homepage_title.js"));
     combinedScriptHtml();
-    ?>
-    <?php
 } else {
     noPerms();
 }

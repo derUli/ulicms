@@ -1,27 +1,30 @@
 <?php
 
+declare(strict_types=1);
+
 namespace UliCMS\Security;
 
 use ContentFactory;
 use User;
 use Group;
 
+// permission checks for read, write and delete content permissions
 class ContentPermissionChecker implements IDatasetPermissionChecker {
 
     private $user_id;
 
-    public function __construct($user_id) {
+    public function __construct(int $user_id) {
         $this->user_id = $user_id;
     }
 
-    public function canRead($contentId) {
+    public function canRead(int $contentId): bool {
         $content = ContentFactory::getByID($contentId);
         $access = $content->checkAccess($content);
 
         return !is_null($access);
     }
 
-    public function canWrite($contentId) {
+    public function canWrite(int $contentId): bool {
         $content = ContentFactory::getByID($contentId);
         $permissions = $content->getPermissions();
 
@@ -30,7 +33,7 @@ class ContentPermissionChecker implements IDatasetPermissionChecker {
 
         $user = new User($this->user_id);
         $permissionChecker = new PermissionChecker($this->user_id);
-        $userGroups = array();
+        $userGroups = [];
         $primaryGroup = $user->getGroupId();
 
         if ($primaryGroup) {
@@ -42,7 +45,7 @@ class ContentPermissionChecker implements IDatasetPermissionChecker {
 
         $userGroups = array_merge($userGroups, $user->getSecondaryGroups());
 
-        $groupIds = array();
+        $groupIds = [];
         foreach ($userGroups as $group) {
             $groupIds[] = $group->getID();
         }
@@ -82,7 +85,7 @@ class ContentPermissionChecker implements IDatasetPermissionChecker {
         return $canEditThis;
     }
 
-    public function canDelete($contentId) {
+    public function canDelete($contentId): bool {
         return $this->canWrite($contentId);
     }
 

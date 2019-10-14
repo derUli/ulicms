@@ -1,5 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
+namespace UliCMS\Constants;
+
+// comments have three states
+// if a comment is pending
+// it has to be approved by a backend user
 class CommentStatus {
 
     const PENDING = "pending";

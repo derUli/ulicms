@@ -1,7 +1,6 @@
 <?php
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("open_graph")) {
-    $og_type = Settings::get("og_type");
     $og_image = Settings::get("og_image");
     $og_url = "";
     if (!empty($og_image) and ! startsWith($og_image, "http")) {
@@ -15,16 +14,11 @@ if ($permissionChecker->hasPermission("open_graph")) {
     <h1><?php translate("open_graph"); ?></h1>
     <p><?php translate("og_defaults_help"); ?></p>
     <?php
-    echo ModuleHelper::buildMethodCallForm("OpenGraphController", "save", array(), "post", array(
+    echo ModuleHelper::buildMethodCallForm("OpenGraphController", "save", [], "post", array(
         "id" => "open_graph"
     ));
     ?>
     <table style="border: 0px;">
-        <tr>
-            <td><strong><?php translate("type"); ?></strong></td>
-            <td><input type="text" name="og_type"
-                       value="<?php esc($og_type); ?>" /></td>
-        </tr>
         <tr>
             <td><strong><?php translate("image"); ?></strong></td>
             <td>
@@ -57,12 +51,15 @@ if ($permissionChecker->hasPermission("open_graph")) {
             </td>
         </tr>
     </table>
-    <?php echo ModuleHelper::endForm(); ?>
     <?php
+    echo ModuleHelper::endForm();
+
+    $translation = new JSTranslation();
+    $translation->addKey("changes_was_saved");
+    $translation->render();
+
     enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/open_graph.js"));
     combinedScriptHtml();
-    ?>
-    <?php
 } else {
     noPerms();
 }

@@ -46,7 +46,7 @@ echo ModuleHelper::buildMethodCallForm(ErrorPagesController::class, "save");
                         <?php esc(getLanguageNameByCode($language)); ?></td>
                     <td>
                         <?php
-                        echo Input::SingleSelect("error_page[{$code}][{$language}]", Settings::getLanguageSetting("error_page_{$code}", $language),
+                        echo Input::singleSelect("error_page[{$code}][{$language}]", Settings::getLanguageSetting("error_page_{$code}", $language),
                                 $items);
                         ?>
 

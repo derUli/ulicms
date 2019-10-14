@@ -39,9 +39,11 @@ add_translation("INSTALL_X_OF_Y", "Install File %x% of %y%");
 add_translation("BUILD_DATABASE", "Build Database");
 add_translation("CREATE_CMS_CONFIG_PHP", "Create CMSConfig.php");
 add_translation("WRITE_CMS_CONFIG_FAILED", "Writing CMSConfig.php failed.<br/>" . "Please create CMSConfig.php manually and insert the following code:");
-add_translation("LAST_STEP", "This is the last step of the installation.<br/>Now, please delete the \"installer\" Folder from your web server.<br/>
-		Then you can login to UliCMS.<br/><br/>
-		<a href=\"index.php?submit_form=LoginToBackend\" class=\"btn btn-primary\">Goto login</a>");
+add_translation("LAST_STEP", "This is the last step of the installation.<br/>"
+        . "Now, please delete the \"installer\" Folder from your web server.<br/>"
+        . "Then you can login to UliCMS.");
+add_translation("goto_login", "Goto Login");
+
 add_translation("ADD_FK", "Add Foreign Keys");
 add_translation("ACCEPT_LICNSE", "Accept License");
 add_translation("NEXT", "Next");

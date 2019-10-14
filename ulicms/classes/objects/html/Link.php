@@ -1,12 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace UliCMS\HTML;
 
 use ModuleHelper;
 
+// this class contains helper methods to build clickable links
 class Link {
 
-    public static function Link($href, $text, $htmlAttributes = array()) {
+    public static function link(string $href,
+            string $text,
+            array $htmlAttributes = []): string {
         $attributes = array(
             "href" => $href
         );
@@ -19,7 +24,10 @@ class Link {
         return "<a $attribHTML>" . $text . "</a>";
     }
 
-    public static function ActionLink($action, $text, $suffix = null, $htmlAttributes = array()) {
+    public static function actionLink(string $action,
+            string $text,
+            ?string $suffix = null,
+            array $htmlAttributes = []): string {
         $attributes = array(
             "href" => ModuleHelper::buildActionURL($action, $suffix, true)
         );

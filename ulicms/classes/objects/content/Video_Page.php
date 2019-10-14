@@ -1,14 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
+use UliCMS\Models\Media\Video;
+
+// video pages are pages that are linked to video files
+// video files are played with html5
 class Video_Page extends Page {
 
     public $type = "video";
     public $video = null;
     public $text_position = "after";
 
-    protected function fillVarsByResult($result) {
-        parent::fillVarsByResult($result);
-        $this->video = $result->video;
+    protected function fillVars($result = null) {
+        parent::fillVars($result);
+        $this->video = $result->video ? intval($result->video) : null;
         $this->text_position = $result->text_position;
     }
 
@@ -38,6 +44,14 @@ class Video_Page extends Page {
 
         $result = Database::pQuery($sql, $args, true);
         return $result;
+    }
+
+    public function getVideo(): ?Video {
+        return $this->video ? new Video($this->video) : null;
+    }
+
+    public function setVideo(?Video $video): void {
+        $this->video = $video ? $video->getID() : null;
     }
 
 }

@@ -1,11 +1,17 @@
 <?php
 
 $classes = array(
+    "HttpStatusCode",
     "AuditLog",
     "EmailModes",
     "CommentStatus",
     "RequestMethod",
-    "ModuleEventConstants"
+    "ModuleEventConstants",
+    "AllowedTags",
+    "LinkTarget",
+    "ButtonType",
+    "PackageTypes",
+    "ButtonType"
 );
 foreach ($classes as $class) {
     require_once dirname(__file__) . "/$class.php";

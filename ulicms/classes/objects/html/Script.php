@@ -1,13 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace UliCMS\HTML;
 
-use File;
+use UliCMS\Utils\File;
 use ModuleHelper;
 
+// generates HTML script tags
+// please use script queue instead of this methods if possible
 class Script {
 
-    public static function FromFile($file, $async = false, $defer = false, $htmlAttributes = array()) {
+    public static function fromFile(string $file,
+            bool $async = false,
+            bool $defer = false,
+            array $htmlAttributes = []): string {
         $attributes = array(
             "src" => $file,
             "type" => "text/javascript"
@@ -30,7 +37,10 @@ class Script {
         return "<script $attribHTML></script>";
     }
 
-    public static function FromString($code, $async = false, $defer = false, $htmlAttributes = array()) {
+    public static function fromString(?string $code,
+            bool $async = false,
+            bool $defer = false,
+            array $htmlAttributes = []): string {
         $attributes = array(
             "type" => "text/javascript"
         );

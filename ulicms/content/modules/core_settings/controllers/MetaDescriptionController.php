@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Utils\CacheUtil;
+
 class MetaDescriptionController extends Controller {
 
     public function savePost() {
@@ -14,10 +16,14 @@ class MetaDescriptionController extends Controller {
                 }
             }
         }
+
+        CacheUtil::clearPageCache();
+
         // if called by ajax return no content to improve performance
         if (Request::isAjaxRequest()) {
             HTTPStatusCodeResult(HttpStatusCode::OK);
         }
+
         Request::redirect(ModuleHelper::buildActionURL("meta_description"));
     }
 

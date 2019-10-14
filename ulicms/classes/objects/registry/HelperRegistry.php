@@ -1,14 +1,27 @@
 <?php
 
-use UliCMS\Exceptions\FileNotFoundException;
+declare(strict_types=1);
 
+namespace UliCMS\Registries;
+
+use UliCMS\Exceptions\FileNotFoundException;
+use Vars;
+use function getAllModules;
+use function faster_in_array;
+use function getModuleMeta;
+use function endsWith;
+use function getModulePath;
+
+// This method loads all module's helper classes
 class HelperRegistry {
 
-    private static $helpers = array();
+    private static $helpers = [];
 
-    public static function loadModuleHelpers() {
+    // TODO: This code works but looks like crap
+    // refactor it and split it into multiple small methods
+    public static function loadModuleHelpers(): void {
         if (!defined("KCFINDER_PAGE")) {
-            $helperRegistry = array();
+            $helperRegistry = [];
             $modules = getAllModules();
             $disabledModules = Vars::get("disabledModules");
             foreach ($modules as $module) {
@@ -27,7 +40,7 @@ class HelperRegistry {
                 }
             }
             foreach ($helperRegistry as $key => $value) {
-                if (is_file($value)) {
+                if (file_exists($value)) {
                     require $value;
                 } else {
                     throw new FileNotFoundException("Module {$module}: File '{$path}' not found.");

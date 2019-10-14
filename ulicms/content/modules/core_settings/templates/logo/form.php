@@ -29,7 +29,7 @@ if ($permissionChecker->hasPermission("logo")) {
                     }
                     $logo_storage_path = ULICMS_DATA_STORAGE_ROOT . "/content/images/" . Settings::get("logo_image");
 
-                    if (is_file($logo_storage_path)) {
+                    if (file_exists($logo_storage_path)) {
                         echo '<img class="website_logo" src="' . $logo_path . '" alt="' . Settings::get("homepage_title") . '"/>';
                     }
                     ?>

@@ -32,6 +32,4 @@ if (!$_SESSION["require_password_change"]) {
     <?php
     enqueueScriptFile("../node_modules/password-strength-meter/dist/password.min.js");
     combinedScriptHtml();
-    ?>
-    <?php
 }

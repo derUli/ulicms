@@ -1,8 +1,16 @@
 <?php
 
-class Language {
+namespace UliCMS\Models\Content;
 
-    private $id = null;
+use Model;
+use Database;
+use Request;
+use function getDomainByLanguage;
+use Settings;
+
+class Language extends Model {
+
+    protected $id = null;
     private $name = null;
     private $language_code = null;
 
@@ -12,9 +20,9 @@ class Language {
         }
     }
 
-    public function fillVars($query) {
-        if (Database::getNumRows($query) > 0) {
-            $result = Database::fetchObject($query);
+    public function fillVars($result = null) {
+        if (Database::getNumRows($result) > 0) {
+            $result = Database::fetchObject($result);
             $this->id = $result->id;
             $this->name = $result->name;
             $this->language_code = $result->language_code;
@@ -30,8 +38,8 @@ class Language {
             $id
         );
         $sql = "SELECT * FROM `{prefix}languages` where id = ?";
-        $query = Database::pQuery($sql, $args, true);
-        $this->fillVars($query);
+        $result = Database::pQuery($sql, $args, true);
+        $this->fillVars($result);
     }
 
     public function loadByLanguageCode($language_code) {
@@ -39,8 +47,8 @@ class Language {
             strval($language_code)
         );
         $sql = "SELECT * FROM `{prefix}languages` where language_code = ?";
-        $query = Database::pQuery($sql, $args, true);
-        $this->fillVars($query);
+        $result = Database::pQuery($sql, $args, true);
+        $this->fillVars($result);
     }
 
     public function getID() {
@@ -114,29 +122,33 @@ class Language {
         }
     }
 
+    // returns true if this language is the default language
     public function isDefaultLanguage() {
         return $this->language_code == Settings::get("default_language");
     }
 
+    // returns true if this is the user's current language
     public function isCurrentLanguage() {
         $current_language = is_admin_dir() ? getSystemLanguage() : getCurrentLanguage();
         return $this->language_code == $current_language;
     }
 
+    // returns an array of all languages
     public static function getAllLanguages($order = "id") {
-        $result = array();
+        $datasets = [];
         $sql = "select id from `{prefix}languages` order by $order";
-        $query = Database::query($sql, true);
-        while ($row = Database::fetchObject($query)) {
-            $result[] = new Language($row->id);
+        $result = Database::query($sql, true);
+        while ($row = Database::fetchObject($result)) {
+            $datasets[] = new Language($row->id);
         }
-        return $result;
+        return $datasets;
     }
 
     public function __toString() {
         return $this->getLanguageCode();
     }
 
+    // returns a link to view the website in this language
     public function getLanguageLink() {
         $domain = getDomainByLanguage($this->language_code);
         if ($domain) {

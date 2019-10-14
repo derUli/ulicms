@@ -138,11 +138,11 @@ add_translation("RECOVER", "Recover");
 add_translation("PERMALINK", "Name for URL");
 add_translation("MENU", "Menu");
 add_translation("POSITION", "Position");
-add_translation("PARENT", "Parent");
+add_translation("parent_id", "Parent Page");
 add_translation("ACTIVATED", "Enabled");
 add_translation("DEACTIVATED", "Disabled");
 add_translation("VIEW", "View");
-add_translation("PAGE_TITLE", "Page title");
+add_translation("page_title", "Page title");
 add_translation("ALTERNATE_TITLE", "Alternate title");
 add_translation("ALTERNATE_TITLE_INFO", "If the headline should not be the page title.");
 add_translation("LANGUAGE", "Language");
@@ -151,8 +151,9 @@ add_translation("LANGUAGE", "Language");
 add_translation("EXTERNAL_REDIRECT", "external redirect");
 add_translation("ADDITIONAL_SETTINGS", "additional options &gt;&gt;");
 add_translation("MENU_IMAGE", "menu entry as image");
-add_translation("META_DESCRIPTION", "Meta Description");
-add_translation("META_KEYWORDS", "Meta Keywords");
+add_translation("META_DESCRIPTION", "Description");
+add_translation("META_KEYWORDS", "Tags");
+add_translation("comma_separated", "Comma separated");
 add_translation("COMMENTS", "Comments");
 add_translation("OPEN_IN", "Target");
 add_translation("CLEAR", "clear");
@@ -225,8 +226,7 @@ add_translation("DISALLOW_RTL_CHARS", "Disallow RTL-Languages (Arabic, Hebrew, P
 add_translation("CACHE_TEXT1", "<p>Um die Performance der Website zu verbessern,
 bietet das UliCMS eine Cache-Funktion.<br/>
 Statische Seiten, die keine Module enthalten, werden einmalig generiert und dann im cache-Ordner zwischengespeichert.
-Anschließend werden statt die Inhalte immer wieder aus der Datenbank zu laden, die Inhalte aus den gespeicherten HTML-Dateien geladen.</p>
-");
+Anschließend werden statt die Inhalte immer wieder aus der Datenbank zu laden, die Inhalte aus den gespeicherten HTML-Dateien geladen.</p>");
 add_translation("CACHE_TEXT2", "
 <p>Sie können den Cache deaktivieren, in dem Sie in den Einstellungen im Expertenmodus die Konfigurationsvariable<br/>
 <code>cache_disabled</code><br/>
@@ -739,7 +739,7 @@ add_translation("on", "On");
 add_translation("off", "Off");
 
 add_translation("php_upgrade_notice", "You're using an outdated PHP version.\n" .
-        "You should use at least PHP 7.1.\n" .
+        "You should use at least PHP 7.2.\n" .
         "Please ask your system administrator or provider for an upgrade of the PHP version.");
 
 add_translation("hello_x", "Hello %x%");
@@ -755,5 +755,9 @@ add_translation("contains_username", "The password contains the username");
 add_translation("enter_pass", "Type your password");
 
 add_translation("all", "All");
+
+add_translation("disabled_functions", "Disabled functions");
+
+add_translation("unsupported_output_format", "Unsupported Output Format: %format%");
 
 do_event("lang_en");

@@ -13,5 +13,8 @@
     },
     "objects": {
         "HomeViewModel": "models/HomeViewModel.php"
+    },
+    "controller_function_permissions": {
+        "HomeController::*": "dashboard"
     }
 }

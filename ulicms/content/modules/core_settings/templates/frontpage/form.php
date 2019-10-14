@@ -2,7 +2,7 @@
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("settings_simple")) {
     $languages = getAllLanguages();
-    $frontpages = array();
+    $frontpages = [];
 
     for ($i = 0; $i < count($languages); $i ++) {
         $lang = $languages[$i];
@@ -21,7 +21,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
         <?php translate("frontpage"); ?>
     </h1>
     <?php
-    echo ModuleHelper::buildMethodCallForm("FrontPageSettingsController", "save", array(), "post", array(
+    echo ModuleHelper::buildMethodCallForm("FrontPageSettingsController", "save", [], "post", array(
         "id" => "frontpage_settings"
     ));
     ?>
@@ -69,12 +69,15 @@ if ($permissionChecker->hasPermission("settings_simple")) {
             </td>
         </tr>
     </table>
-    <?php echo ModuleHelper::endForm(); ?>
     <?php
-    enqueueScriptFile(ModuleHelper::buildRessourcePath("core_content", "js/frontpage.js"));
+    echo ModuleHelper::endForm();
+
+    $translation = new JSTranslation();
+    $translation->addKey("changes_was_saved");
+    $translation->render();
+
+    enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/frontpage.js"));
     combinedScriptHtml();
-    ?>
-    <?php
 } else {
     noPerms();
 }

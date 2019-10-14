@@ -1,10 +1,15 @@
 <?php
 
+use UliCMS\Security\Encryption;
+
 class UserTest extends \PHPUnit\Framework\TestCase {
 
     private $otherGroup;
 
     public function setUp() {
+
+        $_SERVER["REQUEST_URI"] = "/other-url.html?param=value";
+
         require_once getLanguageFilePath("en");
 
         $user = new User();
@@ -23,6 +28,7 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         Database::pQuery("delete from `{prefix}groups` where name = ?", array(
             "Other Group"
                 ), true);
+        unset($_SERVER["REQUEST_URI"]);
     }
 
     public function testCreateAndDeleteUser() {
@@ -93,6 +99,42 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull($user->getId());
     }
 
+    public function testLoadByUsernameCaseInsensitive() {
+        $user = new User();
+        $user->setUsername("paul.panzer");
+        $user->setLastname("Panzer");
+        $user->setFirstname("Paul");
+        $user->setPassword("secret");
+        $user->setEmail("paul@panzer.de");
+        $user->save();
+
+        $savedUser = new User();
+        $savedUser->loadByUsername("Paul.Panzer");
+
+        $this->assertEquals("paul.panzer", $savedUser->getUsername());
+        $this->assertEquals("Panzer", $savedUser->getLastname());
+
+        $user->delete();
+    }
+
+    public function testLoadByEmailCaseInsensitive() {
+        $user = new User();
+        $user->setUsername("paul.panzer");
+        $user->setLastname("Panzer");
+        $user->setFirstname("Paul");
+        $user->setPassword("secret");
+        $user->setEmail("paul@panzer.de");
+        $user->save();
+
+        $savedUser = new User();
+        $savedUser->loadByEmail("Paul@PaNzER.DE");
+
+        $this->assertEquals("paul@panzer.de", $savedUser->getEmail());
+        $this->assertEquals("Panzer", $savedUser->getLastname());
+
+        $user->delete();
+    }
+
     public function testGetWelcomeMailText() {
         $user = new User();
         $user->setUsername("john.doe");
@@ -124,6 +166,97 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("john-doe", $loadedUser->getUsername());
 
         $user->delete();
+    }
+
+    public function testCheckPasswordReturnsTrue() {
+        $user = new User();
+        $user->setPassword("topsecretpassword");
+
+        $this->assertTrue($user->checkPassword("topsecretpassword"));
+
+        $user->delete();
+    }
+
+    public function testCheckPasswordReturnsFalse() {
+        $user = new User();
+        $user->setPassword("topsecretpassword");
+        $this->assertFalse($user->checkPassword("falschesPassW0rt"));
+
+        $user->delete();
+    }
+
+    public function testFromSessionDataWithInvalidIdReturnsEmptyUser() {
+
+        @session_start();
+
+        $_SESSION["login_id"] = PHP_INT_MAX;
+        $userFromSession = User::fromSessionData();
+        $this->assertInstanceOf(User::class, $userFromSession);
+        $this->assertNull($userFromSession->getId());
+        $this->assertNull($userFromSession->getUsername());
+
+        @session_destroy();
+    }
+
+    public function testFromSessionDataWithoutSessionReturnsNull() {
+
+        $userFromSession = User::fromSessionData();
+        $this->assertNull($userFromSession);
+    }
+
+    public function testFromSessionDataReturnsUser() {
+        $manager = new UserManager();
+        $users = $manager->getLockedUsers(false);
+        $user = $users[0];
+        @session_start();
+
+        $_SESSION["login_id"] = $user->getId();
+
+        $userFromSession = User::fromSessionData();
+
+        $this->assertInstanceOf(User::class, $userFromSession);
+        $this->assertEquals($userFromSession->getId(), $user->getId());
+        $this->assertEquals($userFromSession->getUsername(), $user->getUsername());
+        $this->assertEquals($userFromSession->getLastname(), $user->getLastname());
+
+        @session_destroy();
+    }
+
+    public function testRegisterSessionRegistersSession() {
+        $manager = new UserManager();
+        $users = $manager->getLockedUsers(false);
+        $user = $users[0];
+
+        $user->registerSession();
+
+        $this->assertEquals(get_user_id(), $user->getId());
+        $this->assertEquals($user->getUsername(), $_SESSION["ulicms_login"]);
+        $this->assertNotNull(session_id());
+        @session_destroy();
+    }
+
+    public function testRegisterSessionThrowError() {
+        $this->expectException(BadMethodCallException::class);
+        $user = new User();
+        $user->registerSession();
+    }
+
+    public function testToSessionDataReturnsNull() {
+        $user = new User();
+        $this->assertNull($user->toSessionData());
+    }
+
+    public function testToSessionDataReturnsArray() {
+        $manager = new UserManager();
+        $users = $manager->getLockedUsers(false);
+        $user = $users[0];
+        $sessionData = $user->toSessionData();
+        $this->assertIsArray($sessionData);
+        $this->assertCount(9, $sessionData);
+        $this->assertEquals($user->getId(), $sessionData["login_id"]);
+        $this->assertEquals($user->getUsername(), $sessionData["ulicms_login"]);
+
+        $this->assertEquals($user->getLastname(), $sessionData["lastname"]);
     }
 
 }

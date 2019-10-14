@@ -1,5 +1,6 @@
 <?php
 
+// Links to another language
 class Language_Link extends Page {
 
     public $link_to_language = null;
@@ -16,8 +17,8 @@ class Language_Link extends Page {
         return $retval;
     }
 
-    protected function fillVarsByResult($result) {
-        parent::fillVarsByResult($result);
+    protected function fillVars($result = null) {
+        parent::fillVars($result);
         $this->link_to_language = $result->link_to_language;
     }
 
@@ -37,7 +38,7 @@ class Language_Link extends Page {
         return $result;
     }
 
-    public function isRegular() {
+    public function isRegular(): bool {
         return false;
     }
 

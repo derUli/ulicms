@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Security\PermissionChecker;
+use UliCMS\Constants\AuditLog;
 
 class UserController extends Controller {
 
@@ -36,11 +37,11 @@ class UserController extends Controller {
         $user->setDefaultLanguage($default_language);
         $user->setAdmin($admin);
         $user->setLocked($locked);
-        $user->setGroupid($group_id);
+        $user->setGroupId($group_id);
         $user->setRequirePasswordChange($require_password_change);
         $secondary_groups = $_POST["secondary_groups"];
 
-        $user->setSecondaryGroups(array());
+        $user->setSecondaryGroups([]);
         if (is_array($secondary_groups)) {
             foreach ($secondary_groups as $group) {
                 $user->addSecondaryGroup(new Group($group));
@@ -64,7 +65,6 @@ class UserController extends Controller {
         $permissionChecker = new PermissionChecker(get_user_id());
         if ($permissionChecker->hasPermission("users_edit") or $_POST["id"] == $_SESSION["login_id"]) {
             $id = intval($_POST["id"]);
-            $username = $_POST["username"];
             $lastname = $_POST["lastname"];
             $firstname = $_POST["firstname"];
             $password = $_POST["password"];
@@ -95,11 +95,10 @@ class UserController extends Controller {
             $user->setDefaultLanguage($default_language);
 
             if ($permissionChecker->hasPermission("users_edit")) {
-                $user->setUsername($username);
                 $user->setAdmin($admin);
                 $user->setLocked($locked);
-                $user->setGroupid($group_id);
-                $user->setSecondaryGroups(array());
+                $user->setGroupId($group_id);
+                $user->setSecondaryGroups([]);
 
                 $secondary_groups = $_POST["secondary_groups"];
                 if (is_array($secondary_groups)) {
@@ -121,9 +120,8 @@ class UserController extends Controller {
             } else {
                 Request::redirect(ModuleHelper::buildActionURL("admins"));
             }
-        } else {
-            return ExceptionResult(get_translation("forbidden"), HttpStatusCode::FORBIDDEN);
         }
+        return ExceptionResult(get_translation("forbidden"), HttpStatusCode::FORBIDDEN);
     }
 
     public function deletePost() {

@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 use UliCMS\Exceptions\CorruptDownloadException;
 
 // die Funktionalität von file_get_contents
 // mit dem Curl-Modul umgesetzt
-function file_get_contents_curl($url) {
+function file_get_contents_curl(string $url): ?string {
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_USERAGENT, ULICMS_USERAGENT);
     curl_setopt($ch, CURLOPT_HEADER, 0);
@@ -15,15 +17,23 @@ function file_get_contents_curl($url) {
     $data = curl_exec($ch);
 
     if (curl_getinfo($ch, CURLINFO_HTTP_CODE) != 200 and curl_getinfo($ch, CURLINFO_HTTP_CODE) != 304 and curl_getinfo($ch, CURLINFO_HTTP_CODE) != 302) {
-        $data = false;
+        $data = null;
     }
 
     curl_close($ch);
     return $data;
 }
 
-function is_url($url) {
-    if (startsWith($url, "http://") or startsWith($url, "https://") or startsWith($url, "ftp://")) {
+function is_url(?string $url): bool {
+    if (!$url) {
+        return false;
+    }
+
+    // it it is an URL
+    if (startsWith($url, "http://")
+            or startsWith($url, "https://")
+            or startsWith($url, "ftp://")) {
+        // if it is not an incomplete url return true
         return ($url != "http://" and $url != "https://" and $url != "ftp://");
     }
     return false;
@@ -31,7 +41,7 @@ function is_url($url) {
 
 // Nutze curl zum Download der Datei, sofern verfügbar
 // Ansonsten Fallback auf file_get_contents
-function file_get_contents_wrapper($url, $no_cache = false, $checksum = null) {
+function file_get_contents_wrapper(string $url, bool $no_cache = false, $checksum = null): ?string {
     $content = false;
     if (!is_url($url)) {
         return file_get_contents($url);
@@ -64,7 +74,28 @@ function file_get_contents_wrapper($url, $no_cache = false, $checksum = null) {
     return $content;
 }
 
-function url_exists($url) {
+function curl_url_exists(string $url): bool {
+    $timeout = 10;
+    $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'HEAD'); // HTTP request is 'HEAD'
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
+
+    curl_exec($ch);
+
+    $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+    return $http_code >= 200 and $http_code < 400;
+}
+
+function url_exists(string $url): bool {
+    if (function_exists("curl_init") and
+            startsWith($url, "http")) {
+        return curl_url_exists($url);
+    }
+
     if (@file_get_contents($url, FALSE, NULL, 0, 0) === false) {
         return false;
     }

@@ -1,8 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
+namespace UliCMS\Models\Content;
+
+use function get_translation;
+use function db_escape;
+use UliCMS\Models\Content\Category;
+
+// methods for manipulating categories
 class Categories {
 
-    public static function updateCategory($id, $name, $description = '') {
+    public static function updateCategory(int $id, ?string $name, string $description = ''): ?int {
         $category = new Category($id);
         $category->setName($name);
         $category->setDescription($description);
@@ -10,7 +19,7 @@ class Categories {
         return $category->getID();
     }
 
-    public static function addCategory($name = null, $description = "") {
+    public static function addCategory(?string $name = null, string $description = ""): ?int {
         $category = new Category();
         $category->setName($name);
         $category->setDescription($description);
@@ -18,7 +27,8 @@ class Categories {
         return $category->getID();
     }
 
-    public static function getHTMLSelect($default = 1, $allowNull = false, $name = 'category_id') {
+    // builds a html category select box
+    public static function getHTMLSelect(int $default = 1, bool $allowNull = false, string $name = 'category_id'): string {
         $lst = self::getAllCategories("name");
         $html = "<select name='" . $name . "' id='$name' size='1'>";
         if ($allowNull) {
@@ -40,22 +50,22 @@ class Categories {
         return $html;
     }
 
-    public static function deleteCategory($id) {
+    public static function deleteCategory(int $id): void {
         $category = new Category($id);
         $category->delete();
     }
 
-    public static function getCategoryDescriptionById($id) {
+    public static function getCategoryDescriptionById(?int $id): ?string {
         $category = new Category($id);
         return $category->getDescription();
     }
 
-    public static function getCategoryById($id) {
+    public static function getCategoryById(?int $id): ?string {
         $category = new Category($id);
         return $category->getName();
     }
 
-    public static function getAllCategories($order = 'id') {
+    public static function getAllCategories(string $order = 'id'): array {
         return Category::getAll($order);
     }
 

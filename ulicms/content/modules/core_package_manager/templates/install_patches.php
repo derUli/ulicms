@@ -28,9 +28,9 @@ if ($permissionChecker->hasPermission("update_system")) {
                 $success = $pkg->installPatch($splitted[0], $splitted[1], $splitted[2], false, $checksum);
 
                 if ($success) {
-                    echo '<p style="color:green">' . htmlspecialchars($splitted[0]) . " " . get_translation("was_successfully_installed") . '</p>';
+                    echo '<p style="color:green">' . _esc($splitted[0]) . " " . get_translation("was_successfully_installed") . '</p>';
                 } else {
-                    echo '<p style="color:red">' . get_translation("installation_of") . " " . htmlspecialchars($splitted[0]) . " " . get_Translation("is_failed") . "</p>";
+                    echo '<p style="color:red">' . get_translation("installation_of") . " " . _esc($splitted[0]) . " " . get_Translation("is_failed") . "</p>";
                 }
             } catch (CorruptDownloadException $e) {
                 echo '<p>' . get_secure_translation("download_of_x_failed", array(

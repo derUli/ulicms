@@ -1,3 +1,5 @@
+/* global Translation */
+
 function openMenuImageSelectWindow(field) {
     window.KCFinder = {
         callBack: function (url) {
@@ -13,20 +15,19 @@ function openMenuImageSelectWindow(field) {
                     + 'resizable=1, scrollbars=0, width=800, height=600');
 }
 
-$(function () {
+$(() => {
     $("#open_graph")
             .ajaxForm(
                     {
-                        beforeSubmit: function (e) {
+                        beforeSubmit: () => {
                             $("#message").html("");
                             $("#loading").show();
                         },
-                        success: function (e) {
+                        success: () => {
                             $("#loading").hide();
                             // FIXME: localize this string
                             $("#message")
-                                    .html(
-                                            "<span style=\"color:green;\">Die Einstellungen wurden gespeichert.</span>");
+                                    .html(`<span style="color:green;">${Translation.ChangesWasSaved}</span>`);
                         }
                     });
 });

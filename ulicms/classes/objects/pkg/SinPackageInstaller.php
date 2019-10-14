@@ -1,23 +1,32 @@
 <?php
 
+declare(strict_types=1);
+
+use UliCMS\Utils\File;
+
 class SinPackageInstaller {
 
     private $file = null;
-    private $errors = array();
+    private $errors = [];
+    private $packageData = null;
 
-    public function __construct($file) {
+    public function __construct(string $file) {
         if (StringHelper::isNotNullOrEmpty($file)) {
             $this->file = $file;
         }
     }
 
-    private function loadPackage() {
+    public function loadPackage(): array {
+        if ($this->packageData) {
+            return $this->packageData;
+        }
         $data = file_get_contents($this->file);
         $json = json_decode($data, true);
+        $this->packageData = $json;
         return $json;
     }
 
-    public function extractArchive() {
+    public function extractArchive(): string {
         $path = Path::resolve("ULICMS_TMP/package-" . $this->getProperty("id") . "-" . $this->getProperty("version") . ".tar.gz");
         $data = $this->loadPackage();
         $decoded = base64_decode($data["data"]);
@@ -25,40 +34,38 @@ class SinPackageInstaller {
         return $path;
     }
 
-    public function installPackage($clear_cache = true) {
+    public function installPackage(bool $clear_cache = true): bool {
         if ($this->isInstallable()) {
             $path = $this->extractArchive();
             $pkg = new PackageManager();
             $result = $pkg->installPackage($path, $clear_cache);
-            unlink($path);
+            File::deleteIfExists($path);
             return $result;
-        } else {
-            return false;
         }
+        return false;
     }
 
-    public function getSize() {
+    public function getSize(): int {
         $data = $this->loadPackage();
         $decoded = base64_decode($data["data"]);
         $size = mb_strlen($decoded, '8bit');
         return $size;
     }
 
-    public function getProperty($name) {
+    public function getProperty(string $name) {
         $data = $this->loadPackage();
         if (isset($data[$name]) and StringHelper::isNotNullOrEmpty($data[$name])) {
             return $data[$name];
-        } else {
-            return null;
         }
+        return null;
     }
 
-    public function getErrors() {
+    public function getErrors(): array {
         return $this->errors;
     }
 
-    public function isInstallable() {
-        $this->errors = array();
+    public function isInstallable(): bool {
+        $this->errors = [];
         $installed_modules = getAllModules();
         $data = $this->loadPackage();
         if (isset($data["dependencies"]) and is_array($data["dependencies"])) {

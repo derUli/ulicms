@@ -1,10 +1,17 @@
 <?php
 
-use UliCMS\Exceptions\NotImplementedException;
+declare(strict_types=1);
 
-class Banner {
+namespace UliCMS\Models\Content\Advertisement;
 
-    private $id = null;
+use Template;
+use Database;
+use Model;
+
+// advertisement banners can be html codes or classic gif banners
+class Banner extends Model {
+
+    protected $id = null;
     private $name = "";
     private $link_url = "";
     private $image_url = "";
@@ -24,30 +31,30 @@ class Banner {
 
     public function loadByID($id) {
         $id = intval($id);
-        $query = Database::query("SELECT * FROM `" . tbname("banner") . "` where id = $id");
-        if (Database::getNumRows($query) > 0) {
-            $result = Database::fetchObject($query);
-            $this->fillVarsByResult($result);
+        $result = Database::query("SELECT * FROM `" . tbname("banner") . "` where id = $id");
+        if (Database::getNumRows($result) > 0) {
+            $result = Database::fetchObject($result);
+            $this->fillVars($result);
         } else {
             throw new Exception("No banner with id $id");
         }
     }
 
-    public function loadRandom() {
+    public function loadRandom(): void {
         $id = intval($id);
-        $query = Database::query("SELECT * FROM `" . tbname("banner") . "` order by rand() LIMIT 1");
-        if (Database::getNumRows($query) > 0) {
-            $result = Database::fetchObject($query);
-            $this->fillVarsByResult($result);
+        $result = Database::query("SELECT * FROM `" . tbname("banner") . "` order by rand() LIMIT 1");
+        if (Database::getNumRows($result) > 0) {
+            $dataset = Database::fetchObject($result);
+            $this->fillVars($dataset);
         }
     }
 
-    private function fillVarsByResult($result) {
-        $this->id = $result->id;
+    protected function fillVars($result = null) {
+        $this->id = intval($result->id);
         $this->name = $result->name;
         $this->link_url = $result->link_url;
         $this->image_url = $result->image_url;
-        $this->category_id = $result->category_id;
+        $this->category_id = intval($result->category_id);
         $this->type = $result->type;
         $this->html = $result->html;
         $this->language = $result->language;
@@ -70,6 +77,10 @@ class Banner {
         if ($this->id != null) {
             return $this->update();
         }
+        return $this->insert();
+    }
+
+    public function insert() {
         $sql = "INSERT INTO " . tbname("banner") . "(name, link_url, image_url, category_id, type, html, language, date_from, date_to, enabled) values (";
         if ($this->name === null) {
             $sql .= "NULL, ";
@@ -188,11 +199,11 @@ class Banner {
         return Database::query($sql);
     }
 
-    public function getId() {
+    public function getId(): ?int {
         return $this->id;
     }
 
-    public function setDateFrom($val) {
+    public function setDateFrom($val): void {
         if (is_null($val) or is_string($val)) {
             $this->date_from = $val;
         } else if (is_numeric($val)) {
@@ -202,7 +213,7 @@ class Banner {
         }
     }
 
-    public function setDateTo($val) {
+    public function setDateTo($val): void {
         if (is_null($val) or is_string($val)) {
             $this->date_to = $val;
         } else if (is_numeric($val)) {
@@ -212,56 +223,53 @@ class Banner {
         }
     }
 
-    public function setType($type) {
+    public function setType(string $type): void {
         $allowedTypes = array(
             "gif",
             "html"
         );
         if (faster_in_array($type, $allowedTypes)) {
             $this->type = $type;
-            return true;
         }
-
-        return false;
     }
 
-    public function getType() {
+    public function getType(): string {
         return $this->type;
     }
 
-    public function getHtml() {
+    public function getHtml(): ?string {
         return $this->html;
     }
 
-    public function setHtml($val) {
+    public function setHtml(?string $val): void {
         $this->html = !is_null($val) ? strval($val) : null;
     }
 
-    public function getDateFrom() {
+    public function getDateFrom(): ?string {
         return $this->date_from;
     }
 
-    public function getDateTo() {
+    public function getDateTo(): ?string {
         return $this->date_to;
     }
 
-    public function getCategoryId() {
+    public function getCategoryId(): ?int {
         return $this->category_id;
     }
 
-    public function setCategoryId($val) {
+    public function setCategoryId(?int $val): void {
         $this->category_id = is_numeric($val) ? intval($val) : null;
     }
 
-    public function getLanguage() {
+    public function getLanguage(): ?string {
         return $this->language;
     }
 
-    public function setLanguage($val) {
+    public function setLanguage(?string $val): void {
         $this->language = !is_null($val) ? strval($val) : null;
     }
 
-    public function getName() {
+    public function getName(): ?string {
         return $this->name;
     }
 
@@ -269,27 +277,27 @@ class Banner {
         $this->name = !is_null($val) ? strval($val) : null;
     }
 
-    public function getImageUrl() {
+    public function getImageUrl(): ?string {
         return $this->image_url;
     }
 
-    public function setImageUrl($val) {
+    public function setImageUrl(?string $val): void {
         $this->image_url = !is_null($val) ? strval($val) : null;
     }
 
-    public function getLinkUrl() {
+    public function getLinkUrl(): ?string {
         return $this->link_url;
     }
 
-    public function setLinkUrl($val) {
+    public function setLinkUrl(?string $val): void {
         $this->link_url = !is_null($val) ? strval($val) : null;
     }
 
-    public function getEnabled() {
+    public function getEnabled(): bool {
         return $this->enabled;
     }
 
-    public function setEnabled($val) {
+    public function setEnabled(bool $val): void {
         $this->enabled = boolval($val);
     }
 
@@ -303,7 +311,7 @@ class Banner {
         return $retval;
     }
 
-    public function render() {
+    public function render(): string {
         $html = "";
         switch ($this->getType()) {
             case "gif":

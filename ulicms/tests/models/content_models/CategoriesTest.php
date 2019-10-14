@@ -1,6 +1,7 @@
 <?php
 
-use UliCMS\Exceptions\NotImplementedException;
+use UliCMS\Models\Content\Categories;
+use UliCMS\Models\Content\Category;
 
 class CategoriesTest extends \PHPUnit\Framework\TestCase {
 

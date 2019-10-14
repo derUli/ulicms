@@ -1,7 +1,10 @@
 {
     "source": "extend",
-    "version": "2.0.3",
+    "version": "2.1.1",
     "menus": [
         "top"
+    ],
+    "disable_functions": [
+        "output_design_settings_styles"
     ]
 }

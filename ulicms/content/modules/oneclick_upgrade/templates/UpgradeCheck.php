@@ -10,7 +10,7 @@ if ($permissionChecker->hasPermission("update_system")) {
         $release_notes = $json->release_notes;
         $lang = getSystemLanguage();
         $release_notes = isset($release_notes->$lang) ? $release_notes->$lang : $release_notes->en;
-        $release_notes = nl2br(htmlspecialchars($release_notes));
+        $release_notes = nl2br(_esc($release_notes));
     }
     ?>
     <?php if ($currentVersion == $newVersion) { ?>

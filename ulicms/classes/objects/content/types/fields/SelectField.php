@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 class SelectField extends CustomField {
 
-    public $options = array();
+    public $options = [];
     public $translateOptions = true;
 
-    public function render($value = null) {
+    public function render($value = null): string {
         ViewBag::set("field", $this);
         ViewBag::set("field_value", $value);
         ViewBag::set("field_options", $this->options);
@@ -18,10 +20,10 @@ class SelectField extends CustomField {
 
 class MultiSelectField extends CustomField {
 
-    public $options = array();
+    public $options = [];
     public $translateOptions = true;
 
-    public function render($value = null) {
+    public function render($value = null): string {
         if (!isset($this->htmlAttributes["multiple"])) {
             $this->htmlAttributes["multiple"] = "";
         }

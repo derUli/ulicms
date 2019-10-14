@@ -1,10 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace UliCMS\Security\SpamChecker;
 
 use StringHelper;
 use AntiSpamHelper;
 use Request;
+use UliCMS\Models\Content\Comment;
 
 class CommentSpamChecker implements ISpamChecker {
 
@@ -13,22 +16,22 @@ class CommentSpamChecker implements ISpamChecker {
 
     // Constructor takes the Comment to check and
     // the SpamFilterFonuration
-    public function __construct($comment, $spamFilterConfiguration) {
+    public function __construct(Comment $comment, SpamFilterConfiguration $spamFilterConfiguration) {
         $this->comment = $comment;
         $this->spamFilterConfiguration = $spamFilterConfiguration;
     }
 
-    private $errors = array();
+    private $errors = [];
 
-    public function clearErrors() {
-        $this->errors = array();
+    public function clearErrors(): void {
+        $this->errors = [];
     }
 
-    public function isSpam() {
+    public function isSpam(): bool {
         return count($this->errors) > 0;
     }
 
-    public function doSpamCheck() {
+    public function doSpamCheck(): bool {
         $this->clearErrors();
 
         // Abort here if the spam filter is disabled
@@ -137,7 +140,7 @@ class CommentSpamChecker implements ISpamChecker {
         return $this->isSpam();
     }
 
-    public function getErrors() {
+    public function getErrors(): array {
         return $this->errors;
     }
 

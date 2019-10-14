@@ -1,4 +1,7 @@
 <?php
+
+use UliCMS\Utils\File;
+
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("favicon")) {
     ?>
@@ -34,7 +37,7 @@ if ($permissionChecker->hasPermission("favicon")) {
                 <td><?php
                     $favicon_path = ULICMS_DATA_STORAGE_ROOT . "/content/images/favicon.ico";
                     $favicon_url = defined("ULICMS_DATA_STORAGE_URL") ? ULICMS_DATA_STORAGE_URL . "/content/images/favicon.ico" : "../content/images/favicon.ico";
-                    if (is_file($favicon_path)) {
+                    if (file_exists($favicon_path)) {
                         $favicon_url .= "?time=" . File::getLastChanged($favicon_path);
                         echo '<img class="website_favicon" src="' . $favicon_url . '" alt="' . Settings::get("homepage_title") . '"/>';
                     }
@@ -64,7 +67,6 @@ if ($permissionChecker->hasPermission("favicon")) {
             </tr>
         </table>
     </form>
-
     <?php
 } else {
     noPerms();

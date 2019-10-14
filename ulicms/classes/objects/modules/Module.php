@@ -1,24 +1,27 @@
 <?php
 
+declare(strict_types=1);
+
 class Module {
 
     private $name = null;
     private $version = null;
     private $enabled = 0;
 
-    public function __construct($name = null) {
+    public function __construct(?string $name = null) {
         if ($name) {
             $this->loadByName($name);
         }
     }
 
-    public function loadByName($name) {
+    public function loadByName(string $name): bool {
         $sql = "select * from {prefix}modules where name = ?";
         $args = array(
             $name
         );
-        $query = Database::pQuery($sql, $args, true);
-        $dataset = Database::fetchSingle($query);
+        $result = Database::pQuery($sql, $args, true);
+        $dataset = Database::fetchSingle($result);
+
         if ($dataset) {
             $this->name = $dataset->name;
             $this->version = $dataset->version;
@@ -28,21 +31,21 @@ class Module {
         return false;
     }
 
-    public function save() {
+    public function save(): void {
         $sql = "select name from {prefix}modules where name = ?";
         $args = array(
             $this->name
         );
-        $query = Database::pQuery($sql, $args, true);
+        $result = Database::pQuery($sql, $args, true);
 
-        if (Database::any($query)) {
+        if (Database::any($result)) {
             $this->update();
         } else {
             $this->insert();
         }
     }
 
-    private function insert() {
+    protected function insert(): bool {
         $sql = "INSERT INTO {prefix}modules (name, version, enabled) values(?, ?, ?)";
         $args = array(
             $this->name,
@@ -52,7 +55,7 @@ class Module {
         return Database::pQuery($sql, $args, true);
     }
 
-    private function update() {
+    protected function update(): bool {
         $sql = "update {prefix}modules set version = ?, enabled = ? where name = ?";
         $args = array(
             $this->version,
@@ -62,27 +65,27 @@ class Module {
         return Database::pQuery($sql, $args, true);
     }
 
-    public function getVersion() {
+    public function getVersion(): ?string {
         return $this->version;
     }
 
-    public function getName() {
+    public function getName(): ?string {
         return $this->name;
     }
 
-    public function isEnabled() {
+    public function isEnabled(): bool {
         return boolval($this->enabled);
     }
 
-    public function enable() {
+    public function enable(): void {
         if (!$this->isMissingDependencies()) {
             $this->enabled = 1;
             $this->save();
         }
     }
 
-    public function getMissingDependencies() {
-        $result = array();
+    public function getMissingDependencies(): array {
+        $result = [];
         $manager = new ModuleManager ();
         $dependencies = $manager->getDependencies($this->name);
         $enabledMods = $manager->getEnabledModuleNames();
@@ -94,49 +97,60 @@ class Module {
         return $result;
     }
 
-    public function isMissingDependencies() {
+    public function isInstalled(): bool {
+        if (!$this->getName()) {
+            return false;
+        }
+        return !is_null(getModuleMeta($this->getName()));
+    }
+
+    public function isMissingDependencies(): bool {
         return (count($this->getMissingDependencies()) > 0);
     }
 
-    public function hasAdminPage() {
+    public function hasAdminPage(): bool {
         $controller = ModuleHelper::getMainController($this->name);
-        return (is_file(getModuleAdminFilePath($this->name))
-                or is_file(getModuleAdminFilePath2($this->name))
+        return (file_exists(getModuleAdminFilePath($this->name))
+                or file_exists(getModuleAdminFilePath2($this->name))
                 or ( $controller and method_exists($controller, "settings"))
                 or ( getModuleMeta($this->name, "main_class")) and
                 getModuleMeta($this->name, "admin_permission"));
     }
 
-    public function isEmbedModule() {
+    public function isEmbedModule(): bool {
         return ModuleHelper::isEmbedModule($this->name);
     }
 
-    public function getDependentModules() {
-        $result = array();
+    public function getShortCode(): ?string {
+        return $this->getName() ? "[module={$this->getName()}]" : null;
+    }
+
+    public function getDependentModules(): array {
+        $result = [];
         $manager = new ModuleManager ();
         $enabledMods = $manager->getEnabledModuleNames();
         $dependent = $manager->getDependentModules($module);
 
         foreach ($dependent as $dep) {
             if (faster_in_array($dep, $enabledMods)) {
-                $result [] = $dependency;
+                $result [] = $dep;
             }
         }
         return $result;
     }
 
-    public function hasDependentModules() {
+    public function hasDependentModules(): bool {
         return (count($this->getDependentModules()) > 0);
     }
 
-    public function disable() {
+    public function disable(): void {
         if (!$this->hasDependentModules()) {
             $this->enabled = 0;
             $this->save();
         }
     }
 
-    public function toggleEnabled() {
+    public function toggleEnabled(): void {
         if ($this->isEnabled()) {
             $this->disable();
         } else {
@@ -144,31 +158,31 @@ class Module {
         }
     }
 
-    public function setName($name) {
+    public function setName(?string $name): void {
         $this->name = strval($name);
     }
 
-    public function setVersion($version) {
+    public function setVersion(?string $version): void {
         if ($version === null) {
             $this->version = null;
         }
         $this->version = strval($version);
     }
 
-    public function delete() {
+    public function delete(): ?bool {
         $sql = "select name from {prefix}modules where name = ?";
         $args = array(
             $this->name
         );
-        $query = Database::pQuery($sql, $args, true);
-        if (Database::any($query)) {
+        $result = Database::pQuery($sql, $args, true);
+        if (Database::any($result)) {
             $sql = "delete from {prefix}modules where name = ?";
             $args = array(
                 $this->name
             );
             return Database::pQuery($sql, $args, true);
         }
-        return false;
+        return null;
     }
 
 }

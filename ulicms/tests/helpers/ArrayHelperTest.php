@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Helpers\ArrayHelper;
+
 class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
 
     public function testTake4String() {
@@ -76,7 +78,7 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testIsSingleWithEmptyArray() {
-        $this->assertFalse(ArrayHelper::isSingle(array()));
+        $this->assertFalse(ArrayHelper::isSingle([]));
     }
 
     public function testIsSingleWithOneItem() {
@@ -93,7 +95,7 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testgetSingleWithEmptyArray() {
-        $this->assertNull(ArrayHelper::getSingle(array()));
+        $this->assertNull(ArrayHelper::getSingle([]));
     }
 
     public function testgetSingleWithOneItem() {
@@ -107,6 +109,48 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
                     "foo",
                     "bar"
         )));
+    }
+
+    private function getNestesdArray() {
+        return [
+            "foo",
+            "bar",
+            [
+                "hello",
+                "world",
+                [
+                    "apache",
+                    "php",
+                    "mysql",
+                    "linux"]
+            ]
+        ];
+    }
+
+    public function testFlattenWithNestedArray() {
+        $input = $this->getNestesdArray();
+        $expected = [
+            "foo",
+            "bar",
+            "hello",
+            "world",
+            "apache",
+            "php",
+            "mysql",
+            "linux"
+        ];
+        $this->assertEquals($expected, ArrayHelper::flatten($input));
+    }
+
+    public function testFlattenWithFlattenArray() {
+        $input = ["dog", "cat", "pig", "horse"];
+        $this->assertEquals($input,
+                ArrayHelper::flatten($input));
+    }
+
+    public function testFlattenWithString() {
+        $this->assertEquals(["ulicms"],
+                ArrayHelper::flatten("ulicms"));
     }
 
 }

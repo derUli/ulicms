@@ -1,4 +1,7 @@
 <?php
+
+use UliCMS\Constants\EmailModes;
+
 $ga = new PHPGangsta_GoogleAuthenticator();
 $ga_secret = Settings::get("ga_secret");
 $qrCodeUrl = $ga->getQRCodeGoogleUrl(get_translation("ULICMS_LOGIN_AT") . " " . get_domain(), $ga_secret);
@@ -52,7 +55,7 @@ if (!$permissionChecker->hasPermission("other")) {
     );
     ?>
     <?php
-    echo ModuleHelper::buildMethodCallForm("OtherSettingsController", "save", array(), "post", array(
+    echo ModuleHelper::buildMethodCallForm("OtherSettingsController", "save", [], "post", array(
         "id" => "other_settings",
         "autocomplete" => "off"
     ));

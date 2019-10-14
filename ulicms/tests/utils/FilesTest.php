@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Utils\File;
+
 class FilesTest extends \PHPUnit\Framework\TestCase {
 
     public function testFileExtension() {
@@ -59,6 +61,42 @@ class FilesTest extends \PHPUnit\Framework\TestCase {
                 File::toDataUri(Path::resolve("ULICMS_ROOT/tests/fixtures/hello-original.txt"), "application/inf"));
     }
 
+    public function testDeleteIfExistsWithNonExistingFile() {
+        $this->assertFalse(File::deleteIfExists("diese-datei-existiert-nicht"));
+    }
+
+    public function testDeleteIfExistsWithDirectory() {
+        $dirs = Path::resolve("ULICMS_TMP/foo/bar");
+
+        $baseDir = Path::resolve("ULICMS_TMP/foo");
+
+        mkdir($dirs, 0777, true);
+
+        $this->assertTrue(is_dir($dirs));
+
+        $testFiles = array(
+            "$baseDir/1",
+            "$baseDir/2",
+            "$baseDir/bar/1");
+
+        foreach ($testFiles as $file) {
+            $this->assertFalse(file_exists($file));
+            file_put_contents($file, "hallo");
+            $this->assertTrue(file_exists($file));
+        }
+
+        $this->assertTrue(File::deleteIfExists($baseDir));
+        $this->assertFalse(File::deleteIfExists($baseDir));
+    }
+
+    public function testDeleteIfExistsWithFile() {
+        $file = Path::Resolve("ULICMS_TMP/hello");
+        file_put_contents($file, "world");
+
+        $this->assertTrue(File::deleteIfExists($file));
+        $this->assertFalse(File::deleteIfExists($file));
+    }
+
     public function testSureRemoveDirIncludingItself() {
         $dirs = Path::resolve("ULICMS_TMP/foo/bar");
 
@@ -74,9 +112,9 @@ class FilesTest extends \PHPUnit\Framework\TestCase {
             "$baseDir/bar/1");
 
         foreach ($testFiles as $file) {
-            $this->assertFalse(is_file($file));
+            $this->assertFalse(file_exists($file));
             file_put_contents($file, "hallo");
-            $this->assertTrue(is_file($file));
+            $this->assertTrue(file_exists($file));
         }
 
         sureRemoveDir($baseDir, true);
@@ -99,9 +137,9 @@ class FilesTest extends \PHPUnit\Framework\TestCase {
             "$baseDir/bar/1");
 
         foreach ($testFiles as $file) {
-            $this->assertFalse(is_file($file));
+            $this->assertFalse(file_exists($file));
             file_put_contents($file, "hallo");
-            $this->assertTrue(is_file($file));
+            $this->assertTrue(file_exists($file));
         }
 
         sureRemoveDir($baseDir, false);
@@ -114,14 +152,14 @@ class FilesTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetNewestMtimeNoFiles() {
-        $this->assertEquals(0, File::getNewestMtime(array()));
+        $this->assertEquals(0, File::getNewestMtime([]));
     }
 
     public function testGetNewestMtimeWithFiles() {
         $files = array(
             Path::resolve("ULICMS_ROOT/init.php"),
             Path::resolve("ULICMS_ROOT/composer.json"),
-            Path::resolve("ULICMS_ROOT/lib/css/core.css")
+            Path::resolve("ULICMS_ROOT/lib/css/core.scss")
         );
 
         $minimumResult = mktime(0, 0, 0, 1, 1, 2019);

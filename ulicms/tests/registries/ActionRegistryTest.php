@@ -35,4 +35,20 @@ class ActionRegistryTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull(ActionRegistry::getController());
     }
 
+    public function testGetActions() {
+        $actions = ActionRegistry::getActions();
+        $this->assertGreaterThanOrEqual(60, count($actions));
+        $this->assertStringEndsWith("content/modules/core_content/templates/contents.php", $actions["contents"]);
+        foreach (array_values($actions) as $file) {
+            $this->assertFileExists($file);
+            $this->assertStringContainsString("content/modules/", $file);
+        }
+    }
+
+    public function testGetAction() {
+        $file = ActionRegistry::getAction("comments_manage");
+        $this->assertStringEndsWith("content/modules/core_comments/templates/admin.php", $file);
+        $this->assertFileExists($file);
+    }
+
 }

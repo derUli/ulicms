@@ -1,5 +1,9 @@
 <?php
 
+// Use this class to manipulate the database schema
+// TODO: Write knowledge base article how the DBMigrator works
+declare(strict_types=1);
+
 use UliCMS\Exceptions\SqlException;
 
 class DBMigrator {
@@ -8,7 +12,10 @@ class DBMigrator {
     private $folder = null;
     private $strictMode = true;
 
-    public function __construct($component, $folder) {
+    // component is an identifier for the module which executes the migrations
+    // $folder is the path to an up or down folder
+    // containing numbered sql scripts from 001.sql to 999.sql
+    public function __construct(string $component, string $folder) {
         $this->component = $component;
         $this->folder = $folder;
         $cfg = new CMSConfig();
@@ -17,15 +24,17 @@ class DBMigrator {
         }
     }
 
-    public function enableStrictMode() {
+    // in strict mode DBMigrator stops on error
+    public function enableStrictMode(): void {
         $this->strictMode = true;
     }
 
-    public function disableStrictMode() {
+    public function disableStrictMode(): void {
         $this->strictMode = false;
     }
 
-    public function migrate($stop = null) {
+    // use this to migrate up migrations
+    public function migrate(?string $stop = null): void {
         $this->checkVars();
         $files = scandir($this->folder);
         natcasesort($files);
@@ -37,14 +46,15 @@ class DBMigrator {
         }
     }
 
-    public function executeSqlScript($file) {
+    public function executeSqlScript(string $file): void {
         if (endsWith($file, ".sql")) {
             $sql = "SELECT id from {prefix}dbtrack where component = ? and name = ?";
             $args = array(
                 $this->component,
                 $file
             );
-            $result = Database::pQuery($sql, $args, true);
+            $result = Database::tableExists("dbtrack") ?
+                    Database::pQuery($sql, $args, true) : false;
             if (!$result or Database::getNumRows($result) == 0) {
                 $path = $this->folder . "/" . $file;
                 $sql = file_get_contents($path);
@@ -65,7 +75,10 @@ class DBMigrator {
         }
     }
 
-    public function rollback($stop = null) {
+    // use this to rollback migrations
+    // $stop is the name of the sql file where rollback should stop
+    // if $stop is null, all migrations for this component will rollback
+    public function rollback(?string $stop = null): void {
         $this->checkVars();
         $files = scandir($this->folder);
         natcasesort($files);
@@ -101,17 +114,17 @@ class DBMigrator {
         }
     }
 
-    public function resetDBTrack() {
+    public function resetDBTrack(): mysqli_result {
         return Database::pQuery("DELETE FROM {prefix}dbtrack where component = ?", array(
                     $this->component
                         ), true);
     }
 
-    public function resetDBTrackAll() {
+    public function resetDBTrackAll(): void {
         Database::truncateTable("dbtrack");
     }
 
-    private function checkVars() {
+    private function checkVars(): void {
         if (StringHelper::isNullOrEmpty($this->component)) {
             throw new Exception("component is null or empty");
         }

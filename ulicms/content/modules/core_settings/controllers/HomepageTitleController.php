@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Utils\CacheUtil;
+
 class HomepageTitleController extends Controller {
 
     public function savePost() {
@@ -15,6 +17,9 @@ class HomepageTitleController extends Controller {
                 }
             }
         }
+
+        CacheUtil::clearPageCache();
+
         // if called by ajax return no content to improve performance
         if (Request::isAjaxRequest()) {
             HTTPStatusCodeResult(HttpStatusCode::OK);

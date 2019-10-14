@@ -1,15 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 use UliCMS\Exceptions\FileNotFoundException;
 
 class ControllerRegistry {
 
-    private static $controllers = array();
-    private static $controller_function_permissions = array();
+    private static $controllers = [];
+    private static $controller_function_permissions = [];
 
-    public static function loadModuleControllers() {
+    // load and initialize all module controllers
+    public static function loadModuleControllers(): void {
         if (!defined("KCFINDER_PAGE")) {
-            $controllerRegistry = array();
+            $controllerRegistry = [];
             $modules = getAllModules();
             $disabledModules = Vars::get("disabledModules");
             foreach ($modules as $module) {
@@ -27,6 +30,7 @@ class ControllerRegistry {
                     }
                 }
 
+                // read controller function permissions from metadata files of modules
                 $controller_function_permissions = getModuleMeta($module, "controller_function_permissions");
                 if ($controller_function_permissions) {
                     foreach ($controller_function_permissions as $key => $value) {
@@ -50,7 +54,7 @@ class ControllerRegistry {
         }
     }
 
-    public static function runMethods() {
+    public static function runMethods(): void {
         if (isset($_REQUEST["sClass"]) and StringHelper::isNotNullOrEmpty($_REQUEST["sClass"])) {
             if (self::get($_REQUEST["sClass"])) {
                 $sClass = $_REQUEST["sClass"];
@@ -58,29 +62,34 @@ class ControllerRegistry {
             } else {
 
                 $sClass = $_REQUEST["sClass"];
-                throw new BadMethodCallException("class " . htmlspecialchars($sClass) . " not found");
+                throw new BadMethodCallException("class " . _esc($sClass) . " not found");
             }
         }
     }
 
-    public static function get($class = null) {
+    //return an instance of a controller by it's name
+    // if $class is null it returns the main class for the current backend action if defined
+    public static function get(?string $class = null): ?Controller {
+
         if ($class == null and get_action()) {
             return ActionRegistry::getController();
         } else if (isset(self::$controllers[$class])) {
             return self::$controllers[$class];
-        } else {
-            return null;
         }
+        return null;
     }
 
     // check if user is permitted to call controller method $sMethod in Class $sClass
-    public static function userCanCall($sClass, $sMethod) {
+    public static function userCanCall(string $sClass, string $sMethod): bool {
         $allowed = true;
         $acl = new ACL();
         $methodIdentifier = $sClass . "::" . $sMethod;
+        $wildcardMethodIdentifier = $sClass . "::*";
 
         if (!is_blank(self::$controller_function_permissions[$methodIdentifier])) {
             $allowed = $acl->hasPermission(self::$controller_function_permissions[$methodIdentifier]);
+        } else if (!is_blank(self::$controller_function_permissions[$wildcardMethodIdentifier])) {
+            $allowed = $acl->hasPermission(self::$controller_function_permissions[$wildcardMethodIdentifier]);
         }
         return $allowed;
     }

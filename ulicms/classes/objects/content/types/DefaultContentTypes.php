@@ -1,11 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
+namespace UliCMS\Models\Content\Types;
+
+use UliCMS\Models\Content\Types\ContentType;
+
 class DefaultContentTypes {
 
-    private static $types = array();
+    private static $types = [];
 
-    public static function initTypes() {
-        self::$types = array();
+    public static function initTypes(): void {
+        self::$types = [];
         self::$types["page"] = new ContentType();
         self::$types["page"]->show = array(
             ".hide-on-non-regular",
@@ -74,26 +80,26 @@ class DefaultContentTypes {
         self::$types = apply_filter(self::$types, "content_types");
     }
 
-    public static function getAll() {
+    public static function getAll(): array {
         return self::$types;
     }
 
-    public static function get($name) {
+    public static function get($name): ?object {
         if (isset(self::$types[$name])) {
             return self::$types[$name];
         }
         return null;
     }
 
-    public static function toJSON() {
-        $result = array();
+    public static function toJSON(): string {
+        $result = [];
         foreach (self::$types as $key => $value) {
             $result[$key] = array(
                 "show" => $value->show
             );
         }
 
-        return $result;
+        return json_encode($result);
     }
 
 }

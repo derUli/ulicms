@@ -3,7 +3,7 @@
 if (!Settings::get("disable_ulicms_newsfeed")) {
     @session_start();
     $rss = new DOMDocument();
-    $feeds = array();
+    $feeds = [];
     $feeds["de"] = "https://www.ulicms.de/blog_rss.php?s=aktuelles&lang=de";
     $feeds["en"] = "https://en.ulicms.de/blog_rss.php?s=aktuelles&lang=en";
 
@@ -17,7 +17,7 @@ if (!Settings::get("disable_ulicms_newsfeed")) {
 
     if ($xml and $rss->loadXML($xml)) {
 
-        $feed = array();
+        $feed = [];
         foreach ($rss->getElementsByTagName('item') as $node) {
             $item = array(
                 'title' => $node->getElementsByTagName('title')->item(0)->nodeValue,

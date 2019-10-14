@@ -1,4 +1,7 @@
 <?php
+
+use UliCMS\Models\Content\Categories;
+
 $permissionChecker = new ACL();
 
 $video_folder = ULICMS_DATA_STORAGE_ROOT . "/content/videos";

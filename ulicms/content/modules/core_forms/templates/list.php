@@ -74,6 +74,4 @@ if (!$permissionChecker->hasPermission("forms")) {
     $translation = new JSTranslation();
     $translation->addKey("ask_for_delete");
     $translation->renderJS();
-    ?>
-    <?php
 }

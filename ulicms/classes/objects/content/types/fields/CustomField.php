@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use UliCMS\Exceptions\NotImplementedException;
 
 class CustomField {
@@ -9,10 +11,10 @@ class CustomField {
     public $required = false;
     public $helpText;
     public $defaultValue = "";
-    public $htmlAttributes = array();
+    public $htmlAttributes = [];
     public $contentType;
 
-    public function render($value = null) {
+    public function render($value = null): string {
         throw new NotImplementedException();
     }
 

@@ -1,17 +1,18 @@
 <?php
 
+use UliCMS\Models\Content\Categories;
 // TODO: This is old code before the switch to MVC architecture
-// This should be rewritten with MVC pattern
+// This should be rewritten with MVC pattern and using partial views
 use UliCMS\Security\PermissionChecker;
 use UliCMS\Security\ContentPermissionChecker;
+use UliCMS\Exceptions\UnknownContentTypeException;
 
 $show_filters = Settings::get("user/" . get_user_id() . "/show_filters");
 
 $permissionChecker = new PermissionChecker(get_user_id());
 
 if ($permissionChecker->hasPermission("pages")) {
-    ?>
-    <?php
+
     if (!isset($_SESSION["filter_title"])) {
         $_SESSION["filter_title"] = "";
     }
@@ -21,7 +22,7 @@ if ($permissionChecker->hasPermission("pages")) {
     }
     if (!empty($_GET["filter_language"]) and faster_in_array($_GET["filter_language"], getAllLanguages(true))) {
         $_SESSION["filter_language"] = $_GET["filter_language"];
-        $_SESSION["filter_parent"] = null;
+        $_SESSION["filter_parent"] = "-";
     }
 
     if (!isset($_SESSION["filter_category"])) {
@@ -29,17 +30,19 @@ if ($permissionChecker->hasPermission("pages")) {
     }
 
     if (isset($_GET["filter_active"])) {
-        if ($_GET["filter_active"] === "null")
+        if ($_GET["filter_active"] === "null") {
             $_SESSION["filter_active"] = null;
-        else
+        } else {
             $_SESSION["filter_active"] = intval($_GET["filter_active"]);
+        }
     }
 
     if (isset($_GET["filter_approved"])) {
-        if ($_GET["filter_approved"] === "null")
+        if ($_GET["filter_approved"] === "null") {
             $_SESSION["filter_approved"] = null;
-        else
+        } else {
             $_SESSION["filter_approved"] = intval($_GET["filter_approved"]);
+        }
     }
 
     if (isset($_GET["filter_type"])) {
@@ -67,7 +70,7 @@ if ($permissionChecker->hasPermission("pages")) {
     }
 
     if (!isset($_SESSION["filter_parent"])) {
-        $_SESSION["filter_parent"] = null;
+        $_SESSION["filter_parent"] = "-";
     }
 
     if (!isset($_SESSION["filter_menu"])) {
@@ -101,13 +104,13 @@ if ($permissionChecker->hasPermission("pages")) {
 
     array_unshift($menus, "null");
 // FIXME: Das SQL hier in einen Controller auslagern
-    $sql = "select a.id as id, a.title as title from " . tbname("content") . " a inner join " . tbname("content") . " b on a.id = b.parent ";
+    $sql = "select a.id as id, a.title as title from " . tbname("content") . " a inner join " . tbname("content") . " b on a.id = b.parent_id ";
 
     if (faster_in_array($_SESSION["filter_language"], getAllLanguages(true))) {
         $sql .= "where b.language='" . $_SESSION["filter_language"] . "' ";
     }
 
-    $sql .= " group by a.title ";
+    $sql .= " group by a.title, a.id ";
     $sql .= " order by a.title";
     $parents = db_query($sql);
     ?>
@@ -128,7 +131,7 @@ if ($permissionChecker->hasPermission("pages")) {
             </form>
             <div class="row">
                 <div class="col-xs-6">
-                    <a href="index.php?action=pages_new" class="btn btn-default"><i
+                    <a href="index.php?action=pages_new&parent_id=<?php echo $_SESSION["filter_parent"]; ?>" class="btn btn-default"><i
                             class="fa fa-plus"></i> <?php translate("create_page"); ?></a>
                 </div>
                 <div class="col-xs-6 text-right">
@@ -250,7 +253,7 @@ if ($permissionChecker->hasPermission("pages")) {
             </div>
             <div class="row">
                 <div class="col-xs-6">
-                    <?php translate("parent"); ?>
+                    <?php translate("parent_id"); ?>
                     <select name="filter_parent" onchange="filterByParent(this);">
                         <option value="null"
                         <?php
@@ -269,7 +272,7 @@ if ($permissionChecker->hasPermission("pages")) {
                         <?php
                         while ($parent = db_fetch_object($parents)) {
                             $parent_id = $parent->id;
-                            $title = htmlspecialchars($parent->title);
+                            $title = _esc($parent->title);
                             if ($parent_id == $_SESSION["filter_parent"]) {
                                 echo '<option value="' . $parent_id . '" selected>' . $title . "</option>";
                             } else {
@@ -346,7 +349,6 @@ if ($permissionChecker->hasPermission("pages")) {
         <?php
         if ($_SESSION["filter_status"] == "trash" and $permissionChecker->hasPermission("pages")) {
             ?>
-
             <a
                 href="<?php echo ModuleHelper::buildMethodCallUrl("PageController", "emptyTrash"); ?>"
                 onclick="return ajaxEmptyTrash(this.href);" class="btn btn-warning">
@@ -355,16 +357,7 @@ if ($permissionChecker->hasPermission("pages")) {
             <?php
         }
         ?>
-
         <?php
-        if (faster_in_array($_GET["order"], array(
-                    "title",
-                    "menu",
-                    "position",
-                    "parent",
-                    "active"
-                )))
-            $order = $_GET["order"];
         $filter_language = basename($_GET["filter_language"]);
         $filter_status = basename($_GET["filter_status"]);
 
@@ -415,9 +408,9 @@ if ($permissionChecker->hasPermission("pages")) {
 
         if ($_SESSION["filter_parent"] != null) {
             if ($_SESSION["filter_parent"] != "-") {
-                $filter_sql .= "AND parent = '" . intval($_SESSION["filter_parent"]) . "' ";
+                $filter_sql .= "AND parent_id = '" . intval($_SESSION["filter_parent"]) . "' ";
             } else {
-                $filter_sql .= "AND parent IS NULL ";
+                $filter_sql .= "AND parent_id is NULL ";
             }
         }
 
@@ -441,9 +434,24 @@ if ($permissionChecker->hasPermission("pages")) {
 
         $filter_sql .= " ";
 
-        $query = db_query("SELECT * FROM " . tbname("content") . " " . $filter_sql . " ORDER BY $order,position, slug ASC") or die(db_error());
+        $result = db_query("SELECT * FROM " . tbname("content") . " " . $filter_sql . " ORDER BY $order,position, slug ASC") or die(db_error());
         ?>
-        <div class="x-results-found"><?php BackendHelper::formatDatasetCount(Database::getNumRows($query)); ?></div>
+        <div class="x-results-found"><?php BackendHelper::formatDatasetCount(Database::getNumRows($result)); ?></div>
+        <?php
+        if ($_SESSION["filter_parent"] and $_SESSION["filter_parent"] != '-') {
+            $parentPage = ContentFactory::getByID($_SESSION["filter_parent"]);
+            $parentId = $parentPage->parent_id ? $parentPage->parent_id : "-";
+            ?>
+            <div class="form-group">
+                <a href="<?php
+                echo ModuleHelper::buildActionUrl("pages",
+                        "filter_parent={$parentId}");
+                ?>" class="btn btn-default">
+                    <?php echo UliCMS\HTML\icon("fa fa-arrow-up"); ?> <?php translate("go_up"); ?></a>
+                <?php
+            }
+            ?>
+        </div>
         <div class="scroll">
             <table class="tablesorter dataset-list">
                 <thead>
@@ -454,7 +462,7 @@ if ($permissionChecker->hasPermission("pages")) {
                         </th>
                         <th class="hide-on-mobile"><?php translate("position"); ?>
                         </th>
-                        <th class="hide-on-mobile"><?php translate("parent"); ?>
+                        <th class="hide-on-mobile"><?php translate("parent_id"); ?>
                         </th>
 
                         <th class="hide-on-mobile"><?php translate("activated"); ?>
@@ -470,20 +478,32 @@ if ($permissionChecker->hasPermission("pages")) {
                 </thead>
                 <tbody>
                     <?php
-                    if (db_num_rows($query) > 0) {
-                        while ($row = db_fetch_object($query)) {
+                    if (db_num_rows($result) > 0) {
+                        while ($row = db_fetch_object($result)) {
+                            try {
+                                $model = ContentFactory::getByID(intval($row->id));
+                            } catch (UnknownContentTypeException $e) {
+                                // skip contents with unknown types
+                                continue;
+                            }
                             echo '<tr id="dataset-' . $row->id . '">';
-                            echo "<td>" . htmlspecialchars($row->title);
+                            echo '<td>';
+                            if ($model->hasChildren()) {
+                                echo "<a href=\""
+                                . ModuleHelper::buildActionURL("pages", "filter_parent={$model->getId()}") . "\">" . UliCMS\HTML\icon("fas fa-arrow-down") . " " . _esc($row->title) . "</a></td>";
+                            } else {
+                                esc($row->title);
+                            }
                             if (!empty($row->redirection) and ! is_null($row->redirection) and $row->type == "link") {
                                 esc(" --> ");
                                 esc($row->redirection);
                             }
 
                             echo "</td>";
-                            echo "<td class=\"hide-on-mobile\">" . htmlspecialchars(get_translation($row->menu)) . "</td>";
+                            echo "<td class = \"hide-on-mobile\">" . _esc(get_translation($row->menu)) . "</td>";
 
                             echo "<td class=\"hide-on-mobile\">" . $row->position . "</td>";
-                            echo "<td class=\"hide-on-mobile\">" . htmlspecialchars(getPageTitleByID($row->parent)) . "</td>";
+                            echo "<td class=\"hide-on-mobile\">" . _esc(getPageTitleByID($row->parent_id)) . "</td>";
 
                             if ($row->active) {
                                 echo "<td class=\"hide-on-mobile\">" . get_translation("yes") . "</td>";
@@ -491,7 +511,8 @@ if ($permissionChecker->hasPermission("pages")) {
                                 echo "<td class=\"hide-on-mobile\">" . get_translation("no") . "</td>";
                             }
 
-                            if (startsWith($row->redirection, "#") or $row->type == "node" or $row->type == "snippet") {
+                            if ((
+                                    $row->redirection and startsWith($row->redirection, "#")) or $row->type == "node" or $row->type == "snippet") {
                                 echo "<td class=\"text-center\"></td>";
                             } else {
                                 $url = "../?goid={$row->id}";
@@ -539,7 +560,7 @@ if ($permissionChecker->hasPermission("pages")) {
         </div>
     </div>
     <?php
-    enqueueScriptFile("scripts/page.js");
+    enqueueScriptFile(ModuleHelper::buildRessourcePath("core_content", "js/pages/page.js"));
     combinedScriptHtml();
     ?>
     <?php

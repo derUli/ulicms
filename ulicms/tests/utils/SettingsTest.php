@@ -66,4 +66,30 @@ class SettingsTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("Angelsächisch", Settings::getLanguageSetting("my_setting", "en"));
     }
 
+    public function testConvertVarTypeStr() {
+        $this->assertIsString(Settings::convertVar(2.12, "str"));
+    }
+
+    public function testConvertVarTypeInt() {
+        $this->assertIsInt(Settings::convertVar(2.12, "int"));
+        $this->assertEquals(2, Settings::convertVar(2.12, "int"));
+    }
+
+    public function testConvertVarTypeFloat() {
+
+        $this->assertIsFloat(Settings::convertVar(666, "float"));
+        $this->assertIsFloat(Settings::convertVar(0, "float"));
+    }
+
+    public function testConvertVarTypeBool() {
+        $this->assertEquals(1, Settings::convertVar(666, "bool"));
+        $this->assertEquals(0, Settings::convertVar(0, "bool"));
+
+        $this->assertEquals(1, Settings::convertVar("true", "bool"));
+        $this->assertEquals(0, Settings::convertVar("false", "bool"));
+
+        $this->assertEquals(1, Settings::convertVar("wuff", "bool"));
+        $this->assertEquals(0, Settings::convertVar("", "bool"));
+    }
+
 }

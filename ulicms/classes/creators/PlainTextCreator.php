@@ -1,5 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
+namespace UliCMS\Creators;
+
+use Template;
+use UliCMS\Utils\CacheUtil;
+
+// this class renders a page as plain text
 class PlainTextCreator {
 
     public $target_file = null;
@@ -22,25 +30,14 @@ class PlainTextCreator {
         $this->content = ob_get_clean();
     }
 
-    private function httpHeader() {
-        header("Content-type: text/plain; charset=UTF-8");
-    }
-
-    public function output() {
+    public function render(): string {
         $uid = CacheUtil::getCurrentUid();
         $adapter = CacheUtil::getAdapter();
         if ($adapter and $adapter->has($uid)) {
-            $adapter->get($uid);
+            return $adapter->get($uid);
         }
 
-        $data[] = array(
-            "Title",
-            "Content",
-            "Meta Description",
-            "Meta Keywords",
-            "Author"
-        );
-        $data = array();
+        // clean up html content
         $this->content = br2nlr($this->content);
         $this->content = strip_tags($this->content);
         $this->content = str_replace("\r\n", "\n", $this->content);
@@ -49,12 +46,11 @@ class PlainTextCreator {
         $this->content = unhtmlspecialchars($this->content);
         $this->content = preg_replace_callback('/&#([0-9a-fx]+);/mi', 'replace_num_entity', $this->content);
 
-        $this->httpHeader();
-        echo $this->content;
+
         if ($adapter) {
             $adapter->set($uid, $this->content, CacheUtil::getCachePeriod());
         }
-        exit();
+        return $this->content;
     }
 
 }

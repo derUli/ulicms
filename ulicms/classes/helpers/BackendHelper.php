@@ -1,8 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 class BackendHelper extends Helper {
 
-    public static function formatDatasetCount($count) {
+    // Format dataset count singular / prual
+    // one dataset found or 123 datasets found
+    public static function formatDatasetCount(int $count): void {
         if ($count == 1) {
             translate("ONE_DATASET_FOUND");
         } else {
@@ -12,15 +16,13 @@ class BackendHelper extends Helper {
         }
     }
 
-    public static function getAction() {
-        if (isset($_REQUEST["action"])) {
-            return $_REQUEST["action"];
-        } else {
-            return "home";
-        }
+    // returns the current backend action or "home" if not specified
+    public static function getAction(): string {
+        return isset($_REQUEST["action"]) ? $_REQUEST["action"] : "home";
     }
 
-    public static function setAction($action) {
+    // set backend action parameter
+    public static function setAction(string $action): void {
         $_REQUEST["action"] = $action;
         $_GET["action"] = $action;
         if (Request::isPost()) {
@@ -28,7 +30,9 @@ class BackendHelper extends Helper {
         }
     }
 
-    public static function enqueueEditorScripts() {
+    // add html editor scripts to the script queue
+    public static function enqueueEditorScripts(): void {
+        // ckeditor is huge so embed it only if this is the user'S preferred html editor
         if (get_html_editor() == "ckeditor") {
             enqueueScriptFile(ModuleHelper::buildRessourcePath("core_content", "js/pages/init-ckeditor.js"));
         }

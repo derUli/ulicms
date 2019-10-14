@@ -1,7 +1,5 @@
 <?php
 
-require_once ULICMS_ROOT . "/templating.php";
-
 class CustomDataTest extends \PHPUnit\Framework\TestCase {
 
     public function setUp() {

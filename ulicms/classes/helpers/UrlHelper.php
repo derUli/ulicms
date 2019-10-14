@@ -1,8 +1,13 @@
 <?php
 
-class UrlHelper extends Helper {
+declare(strict_types=1);
 
-    public static function getUrlWithoutGetParameters($url) {
+namespace UliCMS\Helpers;
+
+class UrlHelper extends \Helper {
+
+    // this method removes the get parameters string from $url and returns the url without get parameters
+    public static function getUrlWithoutGetParameters(string $url): string {
         $parsedUri = parse_url($url);
         $hostWithPort = $parsedUri["host"];
         if (!empty($parsedUri["port"])) {

@@ -31,8 +31,6 @@ add_translation("reject_requests_from_bots", "Reject Requests From Bots");
 
 add_translation("performance", "Performance");
 
-add_translation("community", "Community");
-add_translation("community_settings", "Community Settings");
 add_translation("comments_enabled", "Comments enabled");
 add_translation("comments_must_be_approved", "Comments muste be approved");
 add_translation("commentable_content_types", "Commentable Content Types");

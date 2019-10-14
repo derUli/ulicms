@@ -1,25 +1,30 @@
 <?php
 
-use UliCMS\Security\PermissionChecker;
+declare(strict_types=1);
 
+use UliCMS\Security\PermissionChecker;
+use UliCMS\Constants\ModuleEventConstants;
+
+// old permission check class
+// please use PermissionChecker instead
 class ACL {
 
-    public function hasPermission($name) {
+    public function hasPermission(string $name): bool {
         $checker = new PermissionChecker(get_user_id());
         return $checker->hasPermission($name);
     }
 
-    public function setPermission($name, $value, $group_id) {
+    public function setPermission(string $name, bool $value, int $group_id): void {
         $result = $this->getPermissionQueryResult();
 
         if (!$result) {
-            return false;
+            return;
         }
 
         // JSON holen
         $json = $result["permissions"];
         if (is_null($json) or strlen($json) < 2) {
-            return false;
+            return;
         }
 
         $permissionData = json_decode($json, true);
@@ -29,9 +34,11 @@ class ACL {
         $newJSON = json_encode($permissionData, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
         $updateSQLString = "UPDATE `" . tbname("groups") . "` SET `permissions`='" . db_escape($newJSON) . "' WHERE id=" . $group_id;
+
+        Database::query($updateSQLString);
     }
 
-    public function createGroup($name, $permissions = null) {
+    public function createGroup(string $name, ?array $permissions = null): int {
         if (is_null($permissions)) {
             $permission_data = $this->getDefaultACL();
         } else {
@@ -47,14 +54,14 @@ class ACL {
         return db_last_insert_id();
     }
 
-    public function updateGroup($id, $name, $permissions = null) {
+    public function updateGroup(int $id, string $name, ?array $permissions = null): int {
         if (is_null($permissions)) {
             $permission_data = $this->getDefaultACL();
         } else {
             $permissionData = json_encode($permissions);
         }
 
-        $sql = "UPDATE `" . tbname("groups") . "` SET name='" . db_escape($name) . "', permissions='" . db_escape($permissions) . "' WHERE id=" . $id;
+        $sql = "UPDATE `" . tbname("groups") . "` SET name='" . db_escape($name) . "', permissions='" . db_escape($permissionData) . "' WHERE id=" . $id;
 
         // Führe Query aus
         db_query($sql);
@@ -62,7 +69,7 @@ class ACL {
         return $id;
     }
 
-    public function deleteGroup($id, $move_users_to = null) {
+    public function deleteGroup(int $id, ?int $move_users_to = null) {
         $id = intval($id);
         $deleteGroupSQL = "DELETE FROM `" . tbname("groups") . "` WHERE id=" . $id;
         db_query($deleteGroupSQL);
@@ -76,7 +83,7 @@ class ACL {
         db_query($updateUsers);
     }
 
-    public function getPermissionQueryResult($id = null) {
+    public function getPermissionQueryResult(?int $id = null): ?array {
         if ($id) {
             $group_id = $id;
         } else {
@@ -87,29 +94,30 @@ class ACL {
         }
 
         $sqlString = "SELECT * FROM `" . tbname("groups") . "` WHERE id=" . $group_id;
-        $query = db_query($sqlString);
+        $result = db_query($sqlString);
 
-        if (db_num_rows($query) == 0) {
+        if (db_num_rows($result) == 0) {
             return null;
         }
 
-        $result = db_fetch_assoc($query);
+        $dataset = db_fetch_assoc($result);
 
-        return $result;
+        return $dataset;
     }
 
-    public function getAllGroups($order = 'id DESC') {
+    public function getAllGroups(string $order = 'id DESC'): array {
+        $list = [];
         $sql = "SELECT * FROM `" . tbname("groups") . "` ORDER by " . $order;
-        $query = db_query($sql);
-        $list = array();
-        while ($assoc = db_fetch_assoc($query)) {
+        $result = db_query($sql);
+        while ($assoc = db_fetch_assoc($result)) {
             $list[$assoc["id"]] = $assoc["name"];
         }
         return $list;
     }
 
-    public function getDefaultACLAsJSON($admin = false, $plain = false) {
-        $acl_data = Array();
+    // initializes a json object with default permissions
+    public function getDefaultACLAsJSON(bool $admin = false, bool $plain = false) {
+        $acl_data = [];
 
         // Willkommen
         $acl_data["dashboard"] = null;
@@ -189,6 +197,7 @@ class ACL {
         $acl_data = $acl_array;
         unset($acl_array);
 
+        // read custom permissions from modules
         $modules = getAllModules();
         foreach ($modules as $module) {
             $acl_metadata = getModuleMeta($module, "custom_acl");
@@ -219,7 +228,7 @@ class ACL {
         return $json;
     }
 
-    public function getDefaultACL($admin = false, $plain = false) {
+    public function getDefaultACL(bool $admin = false, bool $plain = false) {
         return $this->getDefaultACLAsJSON($admin, $plain);
     }
 

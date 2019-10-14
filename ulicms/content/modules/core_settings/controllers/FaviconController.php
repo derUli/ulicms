@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Utils\CacheUtil;
+
 class FaviconController extends Controller {
 
     public function doUpload() {
@@ -47,6 +49,9 @@ class FaviconController extends Controller {
                 }
 
                 do_event("after_upload_favicon");
+
+                CacheUtil::clearPageCache();
+
                 Request::redirect(ModuleHelper::buildActionURL("favicon"));
             } else {
                 Request::redirect(ModuleHelper::buildActionURL("favicon", "error=UPLOAD_WRONG_FILE_FORMAT"));

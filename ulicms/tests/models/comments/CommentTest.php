@@ -1,7 +1,9 @@
 <?php
 
-use UliCMS\Data\Content\Comment;
+use UliCMS\Models\Content\Comment;
+use UliCMS\Constants\CommentStatus;
 use UliCMS\Exceptions\FileNotFoundException;
+use UliCMS\Utils\CacheUtil;
 
 class CommentTest extends \PHPUnit\Framework\TestCase {
 
@@ -17,26 +19,6 @@ class CommentTest extends \PHPUnit\Framework\TestCase {
         CacheUtil::clearCache();
     }
 
-    public function testSetContentIdInvalidArgument() {
-        $comment = new Comment();
-        try {
-            $comment->setContentId("foo");
-            $this->fail("expected exception not thrown");
-        } catch (InvalidArgumentException $e) {
-            $this->assertEquals("foo is not a number", $e->getMessage());
-        }
-    }
-
-    public function testSetAuthorNameInvalidArgument() {
-        $comment = new Comment();
-        try {
-            $comment->setAuthorName(123);
-            $this->fail("expected exception not thrown");
-        } catch (InvalidArgumentException $e) {
-            $this->assertEquals("123 is not a string", $e->getMessage());
-        }
-    }
-
     public function tesSetDateInvalidArgument() {
         $comment = new Comment();
         try {
@@ -47,14 +29,89 @@ class CommentTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testSetStatusInvalidArgument() {
+    public function testGetUnreadCount() {
+        $content = ContentFactory::getAll();
+        $first = $content[0];
+        $second = $content[1];
+
         $comment = new Comment();
-        try {
-            $comment->setStatus(123);
-            $this->fail("expected exception not thrown");
-        } catch (InvalidArgumentException $e) {
-            $this->assertEquals("123 is not a status string", $e->getMessage());
-        }
+        $comment->setContentId($first->id);
+        $comment->setAuthorName("John Doe");
+        $comment->setAuthorEmail("john@doe.de");
+        $comment->setAuthorUrl("http://john-doe.de");
+        $comment->setIp("123.123.123.123");
+        $comment->setUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36");
+        $comment->setText("Unit Test 1");
+        $comment->setRead(false);
+        $time = time();
+        $comment->setDate($time);
+
+        $comment->save();
+
+        $this->assertGreaterThanOrEqual(1, Comment::getUnreadCount());
+    }
+
+    public function testGetReadCount() {
+        $content = ContentFactory::getAll();
+        $first = $content[0];
+        $second = $content[1];
+
+        $comment = new Comment();
+        $comment->setContentId($first->id);
+        $comment->setAuthorName("John Doe");
+        $comment->setAuthorEmail("john@doe.de");
+        $comment->setAuthorUrl("http://john-doe.de");
+        $comment->setIp("123.123.123.123");
+        $comment->setUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36");
+        $comment->setText("Unit Test 1");
+        $comment->setRead(true);
+
+        $time = time();
+        $comment->setDate($time);
+
+        $comment->save();
+
+        $this->assertGreaterThanOrEqual(1, Comment::getReadCount());
+    }
+
+    public function testGetAllCount() {
+        $content = ContentFactory::getAll();
+        $first = $content[0];
+        $second = $content[1];
+
+        $comment = new Comment();
+        $comment->setContentId($first->id);
+        $comment->setAuthorName("John Doe");
+        $comment->setAuthorEmail("john@doe.de");
+        $comment->setAuthorUrl("http://john-doe.de");
+        $comment->setIp("123.123.123.123");
+        $comment->setUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36");
+        $comment->setText("Unit Test 1");
+        $comment->setRead(true);
+
+        $time = time();
+        $comment->setDate($time);
+
+        $comment->save();
+        $content = ContentFactory::getAll();
+        $first = $content[0];
+        $second = $content[1];
+
+        $comment = new Comment();
+        $comment->setContentId($first->id);
+        $comment->setAuthorName("John Doe");
+        $comment->setAuthorEmail("john@doe.de");
+        $comment->setAuthorUrl("http://john-doe.de");
+        $comment->setIp("123.123.123.123");
+        $comment->setUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36");
+        $comment->setText("Unit Test 1");
+        $comment->setRead(false);
+
+        $time = time();
+        $comment->setDate($time);
+
+        $comment->save();
+        $this->assertGreaterThanOrEqual(1, Comment::getAllCount());
     }
 
     public function testIsSpamNull() {
@@ -145,6 +202,7 @@ class CommentTest extends \PHPUnit\Framework\TestCase {
 
         $comment->save();
 
+
         $comment = new Comment($id);
 
         $this->assertEquals($second->id, $comment->getContentID());
@@ -175,7 +233,7 @@ class CommentTest extends \PHPUnit\Framework\TestCase {
         $comment->setContentId($first->id);
 
         $content = $comment->getContent();
-        $this->assertInstanceOf(Content::class, $content);
+        $this->assertTrue(is_subclass_of($content, Content::class));
         $this->assertEquals($first->id, $content->getId());
     }
 
@@ -301,7 +359,6 @@ class CommentTest extends \PHPUnit\Framework\TestCase {
     public function testGetAllByStatus() {
         $contents = ContentFactory::getAll();
         $last = array_pop($contents);
-
         $comment = new Comment();
         $comment->setContentId($last->id);
         $comment->setAuthorName("John Doe");

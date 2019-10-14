@@ -1,13 +1,18 @@
 <?php
 
+use UliCMS\Models\Media\Audio;
+
+// audio pages are pages that are linked to audio files
+// audio files are played with html5
+
 class Audio_Page extends Page {
 
     public $audio = null;
     public $type = "audio";
     public $text_position = "after";
 
-    protected function fillVarsByResult($result) {
-        parent::fillVarsByResult($result);
+    protected function fillVars($result = null) {
+        parent::fillVars($result);
         $this->audio = $result->audio;
         $this->text_position = $result->text_position;
     }
@@ -38,6 +43,14 @@ class Audio_Page extends Page {
 
         $result = Database::pQuery($sql, $args, true);
         return $result;
+    }
+
+    public function getAudio(): ?Audio {
+        return $this->audio ? new Audio($this->audio) : null;
+    }
+
+    public function setAudio(?Audio $audio): void {
+        $this->audio = $audio ? $audio->getID() : null;
     }
 
 }

@@ -1,6 +1,6 @@
 <?php
 
-class ModulesTest extends \PHPUnit\Framework\TestCase {
+class ModuleTest extends \PHPUnit\Framework\TestCase {
 
     public function setUp() {
         $manager = new ModuleManager();
@@ -84,6 +84,29 @@ class ModulesTest extends \PHPUnit\Framework\TestCase {
 
         $module = new Module("fortune2");
         $this->assertTrue($module->isEnabled());
+    }
+
+    public function testIsInstalledReturnsTrue() {
+        $module = new Module("core_content");
+        $this->assertTrue($module->isInstalled());
+    }
+
+    public function testIsInstalledReturnsFalse() {
+        $module = new Module("not_existing_module");
+        $this->assertFalse($module->isInstalled());
+    }
+
+    public function testGetShortcodeReturnsShortcode() {
+        $module = new Module();
+        $module->setName("hello_world");
+        $this->assertEquals("[module=hello_world]", $module->getShortCode());
+    }
+
+    public function testGetShortcodeReturnsNull() {
+        $module = new Module();
+        $this->assertNull(
+                $module->getShortCode()
+        );
     }
 
 }

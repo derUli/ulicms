@@ -6,7 +6,7 @@ function usage() {
     echo "UliCMS Version " . cms_version() . "\n";
     echo "Copyright (C) 2018 by Ulrich Schmidt";
     echo "\n\n";
-    echo "Usage php -f settings_get.php [name] [value]\n\n";
+    echo "Usage php -f settings_set.php [name] [value]\n\n";
     echo "[NULL] as value (including square brackets) for delete";
     exit();
 }

@@ -1,29 +1,35 @@
-function isJsonString(str) {
+
+/* global CodeMirror */
+
+let formChanged = 0;
+let submitted = 0;
+let isCtrl = false;
+
+const isJsonString = (str) => {
     try {
         JSON.parse(str);
     } catch (e) {
         return false;
     }
     return true;
-}
+};
 
-function validateCodeMirrorJson(cmEditor, wrapper) {
+const validateCodeMirrorJson = (cmEditor, wrapper) => {
     if (isJsonString(cmEditor.getValue())) {
         wrapper.removeClass("border-red");
         wrapper.addClass("border-green");
         return true;
-    } else {
-        wrapper.removeClass("border-green");
-        wrapper.addClass("border-red");
-        return false;
     }
-}
+    wrapper.removeClass("border-green");
+    wrapper.addClass("border-red");
+    return false;
+};
 
-$(function () {
+$(() => {
     // apply codemirror source code editor to all textareas with "codemirror"
     // class
-    $("textarea.codemirror").each(function (index, elem) {
-        var mode = "text/html";
+    $("textarea.codemirror").each((index, elem) => {
+        let mode = "text/html";
         // if the textarea has a data-mimetype attribute use this for syntax
         // higlighting scheme
         // else fallback to html mode
@@ -31,7 +37,7 @@ $(function () {
             mode = $(elem).data("mimetype");
         }
 
-        var editor = CodeMirror.fromTextArea(elem, {
+        const editor = CodeMirror.fromTextArea(elem, {
             lineNumbers: true,
             matchBrackets: true,
             mode: mode,
@@ -43,7 +49,7 @@ $(function () {
         });
         switch ($(elem).data("validate")) {
             case "json":
-                editor.on("change", function (cmEditor) {
+                editor.on("change", (cmEditor) => {
                     var wrapper = $(editor.getWrapperElement());
                     validateCodeMirrorJson(cmEditor, wrapper);
                 });
@@ -56,13 +62,10 @@ $(function () {
                 });
                 validateCodeMirrorJson(editor, $(editor.getWrapperElement()));
                 break;
-
             default:
                 editor.on("blur", function (cmEditor) {
                     cmEditor.save();
                 });
         }
-
-
     });
 });

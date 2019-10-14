@@ -1,13 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 // Wrapper for KLogger
 class Logger {
 
     private $path;
-    private $enabled = false;
     private $logger;
 
-    public function __construct($path) {
+    public function __construct(string $path) {
         $environment = get_environment();
         $this->path = $path;
         // if the directory doesn't exist, create it.
@@ -30,19 +31,19 @@ class Logger {
         }
     }
 
-    public function debug($message) {
+    public function debug($message): void {
         if ($this->logger) {
             $this->logger->debug($message);
         }
     }
 
-    public function error($message) {
+    public function error($message): void {
         if ($this->logger) {
             $this->logger->error($message);
         }
     }
 
-    public function info($message) {
+    public function info($message): void {
         if ($this->logger) {
             $this->logger->info($message);
         }

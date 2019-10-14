@@ -17,7 +17,7 @@ class UpdateManagerDashboard {
             }
         }
 
-        $themes = getThemeList();
+        $themes = getAllThemes();
         if (count($themes) > 0) {
             foreach ($themes as $theme) {
                 $version = getThemeMeta($theme, "version");

@@ -1,7 +1,6 @@
 <?php
 
 // required because my local XAMPP is sometimes in wrong folder, so includes will fail
-chdir(dirname(__FILE__));
 
 require_once "../init.php";
 
@@ -17,10 +16,13 @@ do_event("before_set_language_by_domain");
 setLanguageByDomain();
 do_event("after_set_language_by_domain");
 
+// load the language files for the current language
+// if there is no translation for the current language code
+// then do a fallback to english locale
 $syslang = getSystemLanguage();
-if (is_file(getLanguageFilePath($syslang))) {
+if (file_exists(getLanguageFilePath($syslang))) {
     require_once getLanguageFilePath($syslang);
-} else if (is_file(getLanguageFilePath("en"))) {
+} else if (file_exists(getLanguageFilePath("en"))) {
     require_once getLanguageFilePath("en");
 }
 Translation::loadAllModuleLanguageFiles($syslang);
@@ -41,31 +43,38 @@ if (logged_in() and $_SERVER["REQUEST_METHOD"] == "POST" and ! isset($_REQUEST["
     }
 }
 
+// set locale for date formats and other stuff
 do_event("before_set_locale_by_language");
 setLocaleByLanguage();
 do_event("after_set_locale_by_language");
 
-require_once "../templating.php";
-
+// it's supported to configure an ip whitelist in the
+// configuration file
+// reject access to the backend if the client's ip is not whitelisted
 $cfg = new CMSConfig();
 if (isset($cfg->ip_whitelist) and is_array($cfg->ip_whitelist) and count($cfg->ip_whitelist) > 0 and ! faster_in_array(get_ip(), $cfg->ip_whitelist)) {
     ExceptionResult(get_translation("login_from_ip_not_allowed"));
     die();
 }
 
+// if the user is logged in then update the time of
+// last action on every request
 if (is_logged_in()) {
     db_query("UPDATE " . tbname("users") . " SET last_action = " . time() . " WHERE id = " . get_user_id());
 }
 
 header("Content-Type: text/html; charset=UTF-8");
 
-// Ajax Handlers are deprcated since 2019.3 and will get removed in 2019.4
+// TODO: Ajax Handlers are deprcated since 2019.3 and will get removed in 2020.1
+
 do_event("before_ajax_handler");
 do_event("after_ajax_handler");
 
+// run controller methods if called
 do_event("before_backend_run_methods");
 ControllerRegistry::runMethods();
 do_event("after_backend_run_methods");
 
+// render backend page
 $renderer = new BackendPageRenderer(BackendHelper::getAction());
 $renderer->render();

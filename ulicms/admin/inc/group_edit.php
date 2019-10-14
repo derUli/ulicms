@@ -1,4 +1,7 @@
 <?php
+
+use UliCMS\Models\Content\Language;
+
 $permissionChecker = new ACL();
 
 if (!$permissionChecker->hasPermission("groups")) {

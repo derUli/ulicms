@@ -6,23 +6,52 @@ class ControllerRegistryTest extends \PHPUnit\Framework\TestCase {
         if (session_id()) {
             session_destroy();
         }
-        session_start();
+        @session_start();
+        ActionRegistry::loadModuleActionAssignment();
     }
 
     public function tearDown() {
         if (session_id()) {
-            session_destroy();
+            @session_destroy();
         }
 
-        Database::query("delete from {prefix}users where username like 'testuser-%", true);
+        Database::query("delete from {prefix}users where username like 'testuser-%'", true);
     }
 
-    public function testGet() {
-        $this->assertInstanceOf(CommentsController::class, ControllerRegistry::get("CommentsController"));
+    public function testGetWithClassNameReturnsController() {
+        $this->assertInstanceOf(CommentsController::class,
+                ControllerRegistry::get("CommentsController"));
+    }
+
+    public function testGetWithActionReturnsController() {
+        BackendHelper::setAction("audio");
+        $this->assertInstanceOf(AudioController::class,
+                ControllerRegistry::get()
+        );
+
+        BackendHelper::setAction("home");
+    }
+
+    public function testGetWithNonExistingActionReturnsNull() {
+        BackendHelper::setAction("pages");
+        $this->assertNull(
+                ControllerRegistry::get()
+        );
+
+        BackendHelper::setAction("home");
+    }
+
+    public function testGetReturnsNull() {
+        BackendHelper::setAction("info");
+        $this->assertNull(
+                ControllerRegistry::get()
+        );
     }
 
     public function testUserCanCallNotLoggedIn() {
-        $this->assertFalse(ControllerRegistry::userCanCall("PageController", "createPost"));
+        $this->assertFalse(
+                ControllerRegistry::userCanCall("PageController", "createPost")
+        );
     }
 
     public function testUserCanCallReturnsTrue() {

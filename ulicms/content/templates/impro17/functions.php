@@ -1,27 +1,27 @@
 <?php
 
-function jumbotron_get_menu($name = "top", $parent = null, $recursive = true, $order = "position") {
+function jumbotron_get_menu($name = "top", $parent_id = null, $recursive = true, $order = "position") {
     $html = "";
     $name = db_escape($name);
     $language = $_SESSION["language"];
-    $sql = "SELECT id, slug, access, redirection, title, alternate_title, menu_image, target, type, position FROM " . tbname("content") . " WHERE menu='$name' AND language = '$language' AND active = 1 AND `deleted_at` IS NULL AND parent ";
+    $sql = "SELECT id, slug, access, redirection, title, alternate_title, menu_image, target, type, position FROM " . tbname("content") . " WHERE menu='$name' AND language = '$language' AND active = 1 AND `deleted_at` IS NULL AND parent_id ";
 
-    if (is_null($parent)) {
+    if (is_null($parent_id)) {
         $sql .= " IS NULL ";
     } else {
-        $sql .= " = " . intval($parent) . " ";
+        $sql .= " = " . intval($parent_id) . " ";
     }
     $sql .= " ORDER by " . $order;
-    $query = db_query($sql);
+    $result = db_query($sql);
 
-    if (db_num_rows($query) == 0) {
+    if (db_num_rows($result) == 0) {
         return $html;
     }
 
-    if (is_null($parent)) {
+    if (is_null($parent_id)) {
         $html .= "<ul class='nav nav-pills pull-right menu_top'>\n";
     } else {
-        $containsCurrentItem = parent_item_contains_current_page($parent);
+        $containsCurrentItem = parent_item_contains_current_page($parent_id);
 
         $classes = "sub_menu";
 
@@ -31,7 +31,7 @@ function jumbotron_get_menu($name = "top", $parent = null, $recursive = true, $o
         $html .= "<ul class='" . $classes . "'>\n";
     }
 
-    while ($row = db_fetch_object($query)) {
+    while ($row = db_fetch_object($result)) {
         if (checkAccess($row->access)) {
             $containsCurrentItem = parent_item_contains_current_page($row->id);
 

@@ -28,7 +28,7 @@ function sinfo_list_modules() {
 }
 
 function sinfo_list_themes() {
-    $themes = getThemeList();
+    $themes = getAllThemes();
 
     if (count($themes) > 0) {
         for ($i = 0; $i < count($themes); $i ++) {
@@ -78,7 +78,7 @@ if (count($argv) > 2) {
                 sinfo_usage();
             }
             $file = $argv[1];
-            if (!is_file($file)) {
+            if (!file_exists($file)) {
                 echo "File " . basename($file) . " not found!\n";
                 exit();
             }

@@ -1,17 +1,18 @@
+/* global Translation */
+
 // scripts for meta description settings page
-$(function () {
+$(() => {
     $("#meta_description_settings")
             .ajaxForm(
                     {
-                        beforeSubmit: function (e) {
+                        beforeSubmit: () => {
                             $("#message").html("");
                             $("#loading").show();
                         },
-                        success: function (e) {
+                        success: () => {
                             $("#loading").hide();
                             $("#message")
-                                    .html(
-                                            "<span style=\"color:green;\">Die Einstellungen wurden gespeichert.</span>");
+                                    .html(`<span style="color:green;">${Translation.ChangesWasSaved}</span>`);
                         }
                     });
 });

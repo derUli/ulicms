@@ -1,17 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace UliCMS\HTML;
 
 use UliCMS\Exceptions\FileNotFoundException;
 use ModuleHelper;
-use File;
+use UliCMS\Utils\File;
 
+// use this to output a string as html
+// html specialchars are encoded, line breaks are replaced with
+// <br>
 function text($str) {
     return \nl2br(\_esc($str));
 }
 
-function imageTag($file, $htmlAttributes = array()) {
-
+// generates a html img tag
+function imageTag(string $file, array $htmlAttributes = []): string {
     if (!isset($htmlAttributes["src"])) {
         $htmlAttributes["src"] = $file;
     }
@@ -19,7 +24,52 @@ function imageTag($file, $htmlAttributes = array()) {
     return "<img {$attribHTML}>";
 }
 
-function imageTagInline($file, $htmlAttributes = array()) {
+// generates a html link which looks like a button
+function buttonLink(string $url,
+        string $text,
+        ?string $type = null,
+        bool $allowHtml = false,
+        ?string $target = null,
+        array $htmlAttributes = []): string {
+    if (!isset($htmlAttributes["class"])) {
+        $htmlAttributes["class"] = $type;
+    } else {
+        $htmlAttributes["class"] = "$type {$htmlAttributes["class"]}";
+    }
+    return link($url, $text, $allowHtml, $target, $htmlAttributes);
+}
+
+// generates a html link
+function link(string $url,
+        string $text,
+        bool $allowHtml = false,
+        ?string $target = null,
+        array $htmlAttributes = []): string {
+    $htmlAttributes["href"] = $url;
+    if (is_present($target)) {
+        $htmlAttributes["target"] = $target;
+    }
+
+    if (!$allowHtml) {
+        $text = _esc($text);
+    }
+
+    $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes);
+
+    return "<a {$attribHTML}>{$text}</a>";
+}
+
+// Use this method to output font-awesome icons
+// e.g. icon("fas fa-cog");
+function icon(string $classes, array $htmlAttributes = []): string {
+    $htmlAttributes["class"] = $classes;
+
+    $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes);
+    return "<i $attribHTML></i>";
+}
+
+// embed an image as base64 data URI
+function imageTagInline(string $file, array $htmlAttributes = []): string {
 
     $url = File::toDataUri($file);
     if (!$url) {
@@ -29,6 +79,7 @@ function imageTagInline($file, $htmlAttributes = array()) {
     return imageTag($url, $htmlAttributes);
 }
 
-function stringContainsHtml($string) {
+// returns true if the string contains html codes
+function stringContainsHtml(string $string): bool {
     return $string != strip_tags($string);
 }

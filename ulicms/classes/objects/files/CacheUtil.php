@@ -1,13 +1,33 @@
 <?php
 
+declare(strict_types=1);
+
+namespace UliCMS\Utils;
+
+use Path;
+use Settings;
 use Phpfastcache\Helper\Psr16Adapter;
 use Phpfastcache\Config\ConfigurationOption;
+use ModuleManager;
+use function do_event;
+use function sureRemoveDir;
+use function get_request_uri;
+use function getCurrentLanguage;
+use function strbool;
+use function is_mobile;
+use function is_crawler;
+use function is_tablet;
+use ControllerRegistry;
+use DesignSettingsController;
 
 class CacheUtil {
 
     private static $adapter;
 
-    public static function getAdapter($force = false) {
+    // returns a Psr16 cache adapter if caching is enabled
+    // or $force is true
+    // else returns null
+    public static function getAdapter(bool $force = false): ?Psr16Adapter {
         if (!self::isCacheEnabled() && !$force) {
             return null;
         }
@@ -35,11 +55,21 @@ class CacheUtil {
         return self::$adapter;
     }
 
-    public static function isCacheEnabled() {
-        return (!Settings::get("cache_disabled") && !is_logged_in());
+    // returns true if caching is enabled
+    public static function isCacheEnabled(): bool {
+        return !Settings::get("cache_disabled") && !is_logged_in();
     }
 
-    public static function clearCache() {
+    // clears the page cache
+    public static function clearPageCache(): void {
+        $adapter = self::getAdapter();
+        if ($adapter) {
+            $adapter->clear();
+        }
+    }
+
+    // clears all caches including apc, opcache, cache directory and tmp directory, sync modules directory with database
+    public static function clearCache(): void {
         do_event("before_clear_cache");
 
         // clear apc cache if available
@@ -51,27 +81,29 @@ class CacheUtil {
             opcache_reset();
         }
 
-        $adapter = self::getAdapter();
-        if ($adapter) {
-            $adapter->clear();
-        }
-
         sureRemoveDir(Path::resolve("ULICMS_CACHE"), false);
+        sureRemoveDir(Path::resolve("ULICMS_TMP"), false);
 
         // Sync modules table in database with modules folder
         $moduleManager = new ModuleManager();
         $moduleManager->sync();
 
+        if (class_exists("DesignSettingsController")) {
+            $designSettingsController = ControllerRegistry::get(DesignSettingsController::class);
+            $designSettingsController->generateSCSSToFile();
+        }
+
         do_event("after_clear_cache");
     }
 
-    // Return cache period in seconds
-    public static function getCachePeriod() {
+    // Returns cache expiration time as integer
+    public static function getCachePeriod(): int {
         return intval(Settings::get("cache_period"));
     }
 
-    public static function getCurrentUid() {
-        return md5(get_request_uri() . getCurrentLanguage() . strbool(is_mobile()) . strbool(is_crawler()) . strbool(is_tablet()));
+    // generates an unique identifier for the current page
+    public static function getCurrentUid(): string {
+        return "fullpage-cache-" . md5(get_request_uri() . getCurrentLanguage() . strbool(is_mobile()) . strbool(is_crawler()) . strbool(is_tablet()));
     }
 
 }

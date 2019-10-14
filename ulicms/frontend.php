@@ -1,6 +1,14 @@
 <?php
 
 require_once "init.php";
+
+use UliCMS\Models\Content\Language;
+use UliCMS\Utils\CacheUtil;
+use UliCMS\Creators\CSVCreator;
+use UliCMS\Creators\JSONCreator;
+use UliCMS\Creators\PDFCreator;
+use UliCMS\Creators\PlainTextCreator;
+
 global $connection;
 
 do_event("before_session_start");
@@ -25,16 +33,15 @@ if (!isset($_SESSION["language"])) {
 
 setLocaleByLanguage();
 
-if (faster_in_array($_SESSION["language"], $languages) && is_file(getLanguageFilePath($_SESSION["language"]))) {
+if (faster_in_array($_SESSION["language"], $languages) && file_exists(getLanguageFilePath($_SESSION["language"]))) {
     require_once getLanguageFilePath($_SESSION["language"]);
-} else if (is_file(getLanguageFilePath("en"))) {
+} else if (file_exists(getLanguageFilePath("en"))) {
     require getLanguageFilePath("en");
 }
 
 Translation::loadAllModuleLanguageFiles($_SESSION["language"]);
 Translation::includeCustomLangFile($_SESSION["language"]);
 
-require_once "templating.php";
 Translation::loadCurrentThemeLanguageFiles($_SESSION["language"]);
 do_event("custom_lang_" . $_SESSION["language"]);
 
@@ -45,6 +52,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" and ! defined("NO_ANTI_CSRF")) {
     if (Settings::get("min_time_to_fill_form", "int") > 0) {
         check_form_timestamp();
     }
+}
+
+// call domain.de/?run_cron=1 with curl or a similiar tool
+// to automatically execute cronjobs
+if (Request::getVar("run_cron")) {
+    do_event("before_cron");
+    require 'lib/cron.php';
+    do_event("after_cron");
+    TextResult("finished cron at " . strftime("%x %X"), HttpStatusCode::OK);
 }
 
 $status = check_status();
@@ -64,7 +80,7 @@ if (isMaintenanceMode()) {
     header('Status: 503 Service Temporarily Unavailable');
     header('Retry-After: 60');
     header("Content-Type: text/html; charset=utf-8");
-    if (is_file(getTemplateDirPath($theme) . "maintenance.php")) {
+    if (file_exists(getTemplateDirPath($theme) . "maintenance.php")) {
         require_once getTemplateDirPath($theme) . "maintenance.php";
     } else {
         die(get_translation("UNDER_MAINTENANCE"));
@@ -79,6 +95,8 @@ if (isset($_GET["format"]) and ! empty($_GET["format"])) {
     $format = "html";
 }
 
+setSCSSImportPaths([ULICMS_GENERATED]);
+
 do_event("before_http_header");
 
 $redirection = get_redirection();
@@ -86,16 +104,18 @@ $redirection = get_redirection();
 if ($redirection and ( is_active() or is_logged_in())) {
     Request::redirect($redirection, 302);
 }
-try {
-    $page = ContentFactory::getByID(get_ID());
-    if (!is_null($page->id) and $page instanceof Language_Link) {
-        $language = new Language($page->link_to_language);
-        if (!is_null($language->getID()) and StringHelper::isNotNullOrWhitespace($language->getLanguageLink())) {
-            Request::redirect($language->getLanguageLink());
+if (get_ID()) {
+    try {
+        $page = ContentFactory::getByID(get_ID());
+        if (!is_null($page->id) and $page instanceof Language_Link) {
+            $language = new Language($page->link_to_language);
+            if (!is_null($language->getID()) and StringHelper::isNotNullOrWhitespace($language->getLanguageLink())) {
+                Request::redirect($language->getLanguageLink());
+            }
         }
+    } catch (Exception $e) {
+        // TODO: Log error
     }
-} catch (Exception $e) {
-
 }
 
 if (isset($_GET["goid"])) {
@@ -117,23 +137,29 @@ if ($format == "html") {
     header("Content-Type: text/html; charset=utf-8");
 } else if ($format == "pdf") {
     $pdf = new PDFCreator();
-    $pdf->output();
+    Result($pdf->render(), HttpStatusCode::OK, "application/pdf");
 } else if ($format == "csv") {
     $csv = new CSVCreator();
-    $csv->output();
+    Result($csv->render(), HttpStatusCode::OK, "text/csv");
 } else if ($format == "json") {
     $json = new JSONCreator();
-    $json->output();
+    RawJSONResult($json->render());
 } else if ($format == "txt") {
     $plain = new PlainTextCreator();
-    $plain->output();
+    TextResult($plain->render());
 } else {
-    $format = "html";
+    ExceptionResult(
+            get_secure_translation("unsupported_output_format",
+                    [
+                        "%format%" => $format
+                    ]
+            )
+    );
 }
 
 do_event("after_http_header");
 
-if (count(getThemeList()) === 0) {
+if (count(getAllThemes()) === 0) {
     throw new Exception("Keine Themes vorhanden!");
 }
 
@@ -143,7 +169,7 @@ if (!is_dir(getTemplateDirPath($theme, true))) {
 
 do_event("before_functions");
 
-if (is_file(getTemplateDirPath($theme, true) . "functions.php")) {
+if (file_exists(getTemplateDirPath($theme, true) . "functions.php")) {
     require getTemplateDirPath($theme, true) . "functions.php";
 }
 
@@ -186,7 +212,7 @@ if ($cacheAdapter and $cacheAdapter->get($uid)) {
     }
 
     do_event("before_cron");
-    @require 'cron.php';
+    @require 'lib/cron.php';
     do_event("after_cron");
     die();
 }
@@ -202,7 +228,7 @@ $top_files = array(
 );
 foreach ($top_files as $file) {
     $file = getTemplateDirPath($theme, true) . $file;
-    if (is_file($file)) {
+    if (file_exists($file)) {
         require $file;
         break;
     }
@@ -240,7 +266,7 @@ $bottom_files = array(
 );
 foreach ($bottom_files as $file) {
     $file = getTemplateDirPath($theme, true) . $file;
-    if (is_file($file)) {
+    if (file_exists($file)) {
         require $file;
         break;
     }
@@ -262,9 +288,8 @@ if ($cacheAdapter or Settings::get("minify_html")) {
 
 // Wenn no_auto_cron gesetzt ist, dann muss cron.php manuell ausgeführt bzw. aufgerufen werden
 if (!Settings::get("no_auto_cron")) {
-
     do_event("before_cron");
-    require 'cron.php';
+    require 'lib/cron.php';
     do_event("after_cron");
 }
 

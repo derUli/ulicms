@@ -1,15 +1,18 @@
 <?php
 
+use UliCMS\Constants\AuditLog;
+
 class SessionManager extends Controller {
 
     public function login() {
         $logger = LoggerRegistry::get("audit_log");
 
+        $user = new User();
+        $user->loadByUsername($_POST["user"]);
+
         if (StringHelper::isNotNullOrWhitespace($_POST["system_language"])) {
             $_SESSION["system_language"] = basename($_POST["system_language"]);
         } else {
-            $user = new User();
-            $user->loadByUsername($_POST["user"]);
             $_SESSION["system_language"] = $user->getDefaultLanguage() ? $user->getDefaultLanguage() : Settings::get("system_language");
         }
 
@@ -20,6 +23,9 @@ class SessionManager extends Controller {
             $confirmation_code = $_POST["confirmation_code"];
         }
 
+        // TODO:
+        // * user $user->checkPassword() instead of validate_login()
+        // * Implement Google Authenticator in
         $sessionData = validate_login($_POST["user"], $_POST["password"], $confirmation_code);
         $sessionData = apply_filter($sessionData, "session_data");
 
@@ -34,7 +40,7 @@ class SessionManager extends Controller {
             if ($logger) {
                 $logger->debug("User {$_POST['user']} - Login OK");
             }
-            register_session($sessionData, true);
+            register_session($sessionData);
         } else {
             // If login failed
             if ($logger) {
@@ -72,18 +78,19 @@ class SessionManager extends Controller {
             ExceptionResult("A token is required");
         }
         $reset = new PasswordReset();
-        $token = $reset->getToken($_REQUEST["token"]);
+        $token = $reset->getTokenByTokenString($_REQUEST["token"]);
         if ($token) {
             $user_id = $token->user_id;
             $user = new User($user_id);
             $user->setRequirePasswordChange(1);
             $user->save();
-            register_session(getUserById($user_id));
             $token = $reset->deleteToken($_REQUEST["token"]);
             if ($logger) {
                 $name = $user->getUsername() ? $user->getUsername() : AuditLog::UNKNOWN;
                 $logger->debug("Password reset $name - OK");
             }
+
+            register_session(getUserById($user_id));
         } else {
             if ($logger) {
                 $logger->error("Password reset - Invalid token");

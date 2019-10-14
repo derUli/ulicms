@@ -1,13 +1,15 @@
 <?php
 
+// Image Pages are like regular pages but a field to
+// select an image file
 class Image_Page extends Page {
 
     public $type = "image";
     public $image_url = null;
     public $text_position = "after";
 
-    protected function fillVarsByResult($result) {
-        parent::fillVarsByResult($result);
+    protected function fillVars($result = null) {
+        parent::fillVars($result);
         $this->image_url = $result->image_url;
         $this->text_position = $result->text_position;
     }

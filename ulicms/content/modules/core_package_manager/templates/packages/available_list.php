@@ -8,8 +8,6 @@ use UliCMS\Services\Connectors\PackageSourceConnector;
 
 $permissionChecker = new ACL ();
 if ($permissionChecker->hasPermission("install_packages")) {
-
-
     if (!Settings::get("pkg_src")) {
         ?>
         <p>

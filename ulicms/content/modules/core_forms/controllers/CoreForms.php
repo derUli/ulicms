@@ -2,8 +2,6 @@
 
 class CoreForms extends Controller {
 
-    private $moduleName = "core_forms";
-
     protected function incSpamCount() {
         Settings::set("contact_form_refused_spam_mails", Settings::get("contact_form_refused_spam_mails") + 1);
     }

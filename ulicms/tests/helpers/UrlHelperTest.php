@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Helpers\UrlHelper;
+
 class UrlHelperTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetUrlWithoutGetParameters() {

@@ -1,42 +1,46 @@
 <?php
 
+declare(strict_types=1);
+
+// This class contains methods to handle CustomData which is saved
+// as json object in the "content" database table
 class CustomData {
 
-    private static $defaults = array();
+    private static $defaults = [];
 
-    public static function get($page = null) {
+    public static function get(?string $page = null) {
         if (!$page) {
             $page = get_requested_pagename();
         }
         $sql = "SELECT `custom_data` FROM " . tbname("content") . " WHERE slug='" . Database::escapeValue($page) . "'  AND language='" . Database::escapeValue($_SESSION["language"]) . "'";
-        $query = Database::query($sql);
-        if (Database::getNumRows($query) > 0) {
-            $result = Database::fetchObject($query);
-            return json_decode($result->custom_data, true);
+        $result = Database::query($sql);
+        if (Database::getNumRows($result) > 0) {
+            $dataset = Database::fetchObject($result);
+            return json_decode($dataset->custom_data, true);
         }
         return null;
     }
 
-    public static function set($var, $value, $page = null) {
+    public static function set(string $var, $value, ?string $page = null): void {
         if (!$page) {
             $page = get_requested_pagename();
         }
         $data = self::get($page);
         if (is_null($data)) {
-            $data = array();
+            $data = [];
         }
         $data[$var] = $value;
         $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-        return Database::query("UPDATE " . tbname("content") . " SET custom_data = '" . Database::escapeValue($json) . "' WHERE slug='" . Database::escapeValue($page) . "'");
+        Database::query("UPDATE " . tbname("content") . " SET custom_data = '" . Database::escapeValue($json) . "' WHERE slug='" . Database::escapeValue($page) . "'");
     }
 
-    public static function delete($var = null, $page = null) {
+    public static function delete(?string $var = null, ?string $page = null) {
         if (!$page) {
             $page = get_requested_pagename();
         }
         $data = self::get($page);
         if (is_null($data)) {
-            $data = array();
+            $data = [];
         }
         // Wenn $var gesetzt ist, nur $var aus custom_data löschen
         if ($var) {
@@ -45,13 +49,13 @@ class CustomData {
             }
         } else {
             // Wenn $var nicht gesetzt ist, alle Werte von custom_data löschen
-            $data = array();
+            $data = [];
         }
         $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-        return Database::query("UPDATE " . tbname("content") . " SET custom_data = '" . Database::escapeValue($json) . "' WHERE slug='" . Database::escapeValue($page) . "'");
+        Database::query("UPDATE " . tbname("content") . " SET custom_data = '" . Database::escapeValue($json) . "' WHERE slug='" . Database::escapeValue($page) . "'");
     }
 
-    public static function getCustomDataOrSetting($name) {
+    public static function getCustomDataOrSetting(string $name) {
         $data = CustomData::get();
         if (!is_null($data) and is_array($data) and isset($data[$name])) {
             return $data[$name];
@@ -59,18 +63,18 @@ class CustomData {
         return Settings::get($name);
     }
 
-    public static function setDefault($key, $value) {
+    public static function setDefault(string $key, $value): void {
         self::$defaults[$key] = $value;
     }
 
-    public static function getDefault($key) {
+    public static function getDefault(string $key) {
         if (!isset(self::$defaults[$key])) {
             return null;
         }
         return self::$defaults[$key];
     }
 
-    public static function getDefaultJSON() {
+    public static function getDefaultJSON(): string {
         return json_readable_encode(self::$defaults);
     }
 

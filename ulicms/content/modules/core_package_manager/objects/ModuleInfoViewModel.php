@@ -5,7 +5,8 @@ class ModuleInfoViewModel {
     public $name;
     public $version;
     public $source;
-    public $customPermissions = array();
+    public $source_url;
+    public $customPermissions = [];
     public $adminPermission;
     public $manufacturerName;
     public $manufacturerUrl;

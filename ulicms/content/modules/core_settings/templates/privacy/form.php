@@ -30,7 +30,7 @@ if ($permissionChecker->hasPermission("privacy_settings")) {
             <h2 class="accordion-header"><?php translate("dsgvo_checkbox"); ?></h2>
             <div class="accordion-content">
                 <?php
-                echo ModuleHelper::buildMethodCallForm("PrivacyController", "save", array(), "post", array(
+                echo ModuleHelper::buildMethodCallForm("PrivacyController", "save", [], "post", array(
                     "id" => "privacy_form"
                 ));
                 ?>
@@ -134,10 +134,11 @@ if ($permissionChecker->hasPermission("privacy_settings")) {
             <i class="fas fa-save"></i> <?php translate("save_changes"); ?></button>
     </p>
     <?php
-    enqueueScriptFile("scripts/privacy.js");
+    BackendHelper::enqueueEditorScripts();
+    enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/privacy.js"));
     combinedScriptHtml();
+    echo ModuleHelper::endForm();
     ?>
-    <?php echo ModuleHelper::endForm(); ?>
     </div>
     <?php
 } else {

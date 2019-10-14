@@ -1,11 +1,14 @@
 <?php
+
+use UliCMS\Helpers\NumberFormatHelper;
+
 $permissionChecker = new ACL();
 if (!$permissionChecker->hasPermission("install_packages")) {
     noPerms();
 } else {
     if (StringHelper::isNotNullOrEmpty($_REQUEST["file"]) and endsWith($_REQUEST["file"], ".sin")) {
         $tempfile = Path::resolve("ULICMS_TMP/" . basename($_REQUEST["file"]));
-        if (is_file($tempfile)) {
+        if (file_exists($tempfile)) {
             $pkg = new SinPackageInstaller($tempfile);
             $installable = $pkg->isInstallable();
             $errors = $pkg->getErrors();

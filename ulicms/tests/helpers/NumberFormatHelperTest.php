@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Helpers\NumberFormatHelper;
+
 class NumberFormatHelperTest extends \PHPUnit\Framework\TestCase {
 
     public function setUp() {
@@ -28,8 +30,14 @@ class NumberFormatHelperTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testFormatTime() {
-        $number = (60 * 60 * 24 * 365 * 3 + 123456);
-        $this->assertEquals("1096 Days 10:17:36 Hours", NumberFormatHelper::formatTime($number));
+        $number = time() - (60 * 60 * 24 * 365 * 2);
+        $this->assertEquals("vor über 2 Jahren", NumberFormatHelper::formatTime($number));
+    }
+
+    public function testTimestampToHtml5Datetime() {
+        $this->assertEquals("2019-09-10T14:25", NumberFormatHelper::timestampToHtml5Datetime(1568118319));
+
+        $this->assertRegExp('/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})$/', NumberFormatHelper::timestampToHtml5Datetime());
     }
 
 }
