@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Models\Content\Language;
+use UliCMS\Exceptions\NotImplementedException;
 
 class ModelTest extends \PHPUnit\Framework\TestCase {
 
@@ -42,6 +43,31 @@ class ModelTest extends \PHPUnit\Framework\TestCase {
 
         $language->delete();
         $this->assertFalse($language->hasChanges());
+    }
+
+    public function testLoadByIdThrowsException() {
+        $this->expectException(NotImplementedException::class);
+        $model = new Model();
+        $model->loadByID(123);
+    }
+
+    public function testInsertThrowsNotImplementedException() {
+        $this->expectException(NotImplementedException::class);
+        $model = new Model();
+        $model->save();
+    }
+
+    public function testUpdateThrowsNotImplementedException() {
+        $this->expectException(NotImplementedException::class);
+        $model = new Model();
+        $model->setID(123);
+        $model->save();
+    }
+
+    public function testDeleteThrowsNotImplementedException() {
+        $this->expectException(NotImplementedException::class);
+        $model = new Model();
+        $model->delete();
     }
 
 }

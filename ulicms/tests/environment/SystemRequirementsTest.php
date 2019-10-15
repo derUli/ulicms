@@ -6,6 +6,18 @@ class SystemRequirementsTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue(version_compare(phpversion(), "7.2", ">="));
     }
 
+    public function testMySQLVersion() {
+        $this->assertTrue(
+                version_compare($this->getMySQLVersion(), "5.5.3", '>=')
+        );
+    }
+
+    private function getMySQLVersion() {
+        $version = Database::getServerVersion();
+        $version = preg_replace('/[^0-9.].*/', '', $version);
+        return $version;
+    }
+
     public function testPhpModuleMySqli() {
         $this->assertTrue(extension_loaded("mysqli"));
     }
