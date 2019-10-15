@@ -14,6 +14,8 @@ class LanguageTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function tearDown() {
+        unset($_SESSION["language"]);
+
         $sql = "delete from `{prefix}languages` where language_code <> 'de' and language_code <> 'en'";
         Database::query($sql, true);
 
@@ -64,7 +66,7 @@ class LanguageTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull($lang->getID());
     }
 
-    public function testDefaultLanguage() {
+    public function testIsDefaultLanguage() {
         $lang = new Language();
         $lang->loadByLanguageCode("de");
         $this->assertTrue($lang->isDefaultLanguage());
@@ -72,6 +74,39 @@ class LanguageTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($lang->isDefaultLanguage());
         $lang->makeDefaultLanguage();
         $this->assertTrue($lang->isDefaultLanguage());
+    }
+
+    public function testIsCurrentLanguageReturnsTrue() {
+        $_SESSION["language"] = "de";
+        $lang = new Language();
+        $lang->loadByLanguageCode("de");
+        $this->assertTrue($lang->isCurrentLanguage());
+    }
+
+    public function testIsCurrentLanguageReturnsFalse() {
+        $_SESSION["language"] = "de";
+        $lang = new Language();
+        $lang->loadByLanguageCode("en");
+        $this->assertFalse($lang->isCurrentLanguage());
+    }
+
+    public function testToString() {
+        $lang = new Language();
+        $lang->setLanguageCode("fr");
+        $this->assertEquals("fr", strval($lang));
+    }
+
+    public function testGetLanguageLink() {
+
+        $lang = new Language();
+        $lang->setLanguageCode("fr");
+        $this->assertEquals("./?language=fr", $lang->getLanguageLink());
+    }
+
+    public function testFillVars() {
+        $lang = new Language();
+        $lang->fillVars(null);
+        $this->assertNull($lang->getLanguageCode());
     }
 
 }

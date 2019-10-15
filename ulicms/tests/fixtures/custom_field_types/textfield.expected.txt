@@ -1,0 +1,8 @@
+<div class="custom-field" 
+ data-field-name="my_field">
+<p>
+<strong>Username </strong><br />
+<input type="text" 
+ name="my_field" value="hello world" />
+</p>
+</div>

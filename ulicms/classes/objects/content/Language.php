@@ -21,7 +21,7 @@ class Language extends Model {
     }
 
     public function fillVars($result = null) {
-        if (Database::getNumRows($result) > 0) {
+        if ($result and Database::getNumRows($result) > 0) {
             $result = Database::fetchObject($result);
             $this->id = $result->id;
             $this->name = $result->name;
@@ -51,20 +51,12 @@ class Language extends Model {
         $this->fillVars($result);
     }
 
-    public function getID() {
-        return $this->id;
-    }
-
     public function getName() {
         return $this->name;
     }
 
     public function getLanguageCode() {
         return $this->language_code;
-    }
-
-    public function setId($val) {
-        $this->id = !is_null($val) ? intval($val) : null;
     }
 
     public function setName($val) {
