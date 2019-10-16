@@ -17,7 +17,7 @@ class NumberFieldTest extends \PHPUnit\Framework\TestCase {
         //file_put_contents($expectedFile, $rendered);
 
         $expected = file_get_contents($expectedFile);
-        $this->assertEquals($expected, $rendered);
+        $this->assertEquals(normalizeLN($expected), normalizeLN($rendered));
     }
 
 }
