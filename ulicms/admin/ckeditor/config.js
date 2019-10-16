@@ -5,14 +5,19 @@
  */
 
 CKEDITOR.editorConfig = function (config) {
-// config.language = 'de';
-// Bootstrap soll eingebunden werden
+    // config.language = 'de';
+    // Bootstrap soll eingebunden werden
     config.contentsCss = [CKEDITOR.basePath + 'contents.css',
-    '//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css']
+        '//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'];
     config.ShiftEnterMode = 'p';
-    config.height = '300px';
-	config.image_prefillDimensions = false;
 
+    // allow all html tags
+    config.allowedContent = true;
+
+    config.height = '300px';
+    config.image_prefillDimensions = false;
+
+    // kcfinder file uploader
     if (window.location.href.indexOf("admin/") !== -1) {
         config.filebrowserBrowseUrl = 'kcfinder/browse.php?type=files';
         config.filebrowserImageBrowseUrl = 'kcfinder/browse.php?type=images';
@@ -35,7 +40,7 @@ CKEDITOR.editorConfig = function (config) {
     // disable contextmenu on touchy things
     // to make it possible to select text in editor
     if (isTouchDevice()) {
-        console.log("CKEditor: This is a touchscreen device. Disable Context Menu")
+        console.log("CKEditor: This is a touchscreen device. Disable Context Menu");
         // We need also to disable plugins which are dependent on contextmenu
         config.removePlugins += ',colordialog,liststyle,tabletools,contextmenu,';
     } else
