@@ -37,6 +37,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
 
         unset($_SERVER['HTTP_HOST']);
         unset($_SERVER["REQUEST_URI"]);
+        unset($_GET["id"]);
 
         if ($this->commentsInitialEnabled) {
             Settings::set("comments_enabled", "1");
@@ -918,6 +919,25 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue($page->isErrorPage());
 
         $page->makeErrorPage404(false);
+    }
+
+    public function testLoadByRequestId() {
+        $page = new Page();
+        $page->title = 'Unit Test ' . time();
+        $page->slug = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "Some Text";
+        $page->comments_enabled = true;
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->save();
+        $page->delete();
+        $oldId = $page->getId();
+        $_GET["id"] = $oldId;
+        $loadedPage = new Page();
+        $loadedPage->loadByRequestId();
+        $this->assertEquals($oldId, $loadedPage->getId());
+        $this->assertEquals("Some Text", $loadedPage->content);
     }
 
 }

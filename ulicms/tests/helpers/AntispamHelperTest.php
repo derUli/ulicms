@@ -31,6 +31,8 @@ class AntispamHelperTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(AntiSpamHelper::isChinese("이것은 단순한 텍스트입니다."));
         // Russian
         $this->assertFalse(AntiSpamHelper::isChinese("Это просто простой текст"));
+        // with null
+        $this->assertFalse(AntiSpamHelper::isChinese(null));
     }
 
     public function testIsCyrillicReturnsTrue() {
@@ -48,6 +50,8 @@ class AntispamHelperTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(AntiSpamHelper::isCyrillic("Deutsche Büchstäben"));
         // korean
         $this->assertFalse(AntiSpamHelper::isCyrillic("이것은 단순한 텍스트입니다."));
+        // with null
+        $this->assertFalse(AntiSpamHelper::isCyrillic(null));
     }
 
     public function testIsRtlReturnsTrue() {
@@ -61,6 +65,9 @@ class AntispamHelperTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(AntiSpamHelper::isRtl("Es gibt keinen Gott."));
         $this->assertFalse(AntiSpamHelper::isRtl("Немає бога."));
         $this->assertFalse(AntiSpamHelper::isRtl("没有上帝。"));
+
+        // with null
+        $this->assertFalse(AntiSpamHelper::isRtl(null));
     }
 
     public function testIsCountryBlockedReturnsTrue() {

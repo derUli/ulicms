@@ -16,7 +16,7 @@ class CustomData {
         $result = Database::query($sql);
         if (Database::getNumRows($result) > 0) {
             $dataset = Database::fetchObject($result);
-            return json_decode($dataset->custom_data, true);
+            return is_json($dataset->custom_data) ? json_decode($dataset->custom_data, true) : null;
         }
         return null;
     }

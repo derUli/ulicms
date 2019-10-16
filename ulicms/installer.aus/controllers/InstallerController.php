@@ -1,6 +1,8 @@
 <?php
 
 require_once "../vendor/autoload.php";
+require_once "../classes/objects/files/File.php";
+require_once "../lib/files.php";
 
 class InstallerController {
 

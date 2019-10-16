@@ -285,7 +285,9 @@ function get_custom_data(?string $page = null): ?array {
     $result = db_query($sql);
     if (db_num_rows($result) > 0) {
         $dataset = db_fetch_object($result);
-        return json_decode($dataset->custom_data, true);
+        if (is_json($dataset->custom_data)) {
+            return json_decode($dataset->custom_data, true);
+        }
     }
     return null;
 }

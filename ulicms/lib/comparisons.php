@@ -85,8 +85,8 @@ function is_present($val = null): bool {
     return isset($val) && !is_blank($val);
 }
 
-function is_json(string $str): bool {
-    return json_decode($str) != null;
+function is_json(?string $str): bool {
+    return !is_null($str) ? json_decode($str) != null : false;
 }
 
 function is_numeric_array($var): bool {
@@ -150,9 +150,9 @@ function is_mobile(): bool {
 }
 
 function isMaintenanceMode(): bool {
-	if(!is_string(Settings::get("maintenance_mode"))){
-		return false;
-	}
+    if (!is_string(Settings::get("maintenance_mode"))) {
+        return false;
+    }
     return (strtolower(Settings::get("maintenance_mode")) == "on" ||
             strtolower(Settings::get("maintenance_mode")) == "true" ||
             Settings::get("maintenance_mode") == "1");
