@@ -42,29 +42,29 @@ class AntiSpamHelper extends Helper {
 
     // returns true if a string contains chinese chars
     public static function isChinese(?string $str): bool {
-		if(!$str){
-			return false;
-		}
-		
+        if (!$str) {
+            return false;
+        }
+
         return (bool) preg_match("/\p{Han}+/u", $str);
     }
 
     // returns true if a string contains cyrillic chars
     public static function isCyrillic(?string $str): bool {
-		if(!$str){
-			return false;
-		}
-		
+        if (!$str) {
+            return false;
+        }
+
         return (bool) preg_match('/\p{Cyrillic}+/u', $str);
     }
 
     // returns true if a string contains chars in
     // right to left languages such as arabic
     public static function isRtl(?string $str): bool {
-		if(!$str){
-			return false;
-		}
-		
+        if (!$str) {
+            return false;
+        }
+
         $rtl_chars_pattern = '/[\x{0590}-\x{05ff}\x{0600}-\x{06ff}]/u';
         return (bool) preg_match($rtl_chars_pattern, $str);
     }
