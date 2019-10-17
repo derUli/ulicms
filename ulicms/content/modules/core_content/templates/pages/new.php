@@ -65,17 +65,39 @@ if ($permissionChecker->hasPermission("pages")
             <strong><?php
                 translate("permalink");
                 ?>*
-            </strong><br /> <input type="text" name="slug" id="slug"
-                                   required="required" value=""> <br /> <strong><?php
-                                       translate("page_title");
-                                       ?>*
-            </strong><br /> <input type="text" required="required"
-                                   name="title" value="" onkeyup="suggestSlug(this.value)">
+            </strong>
+            <br />
+            <input type="text" name="slug" id="slug"
+                   required="required" value="">
+            <small>
+                <?php translate("auto_generated_from_title"); ?>
+            </small>
+            <br />
+            <br />
+            <strong>
+                <?php
+                translate("page_title");
+                ?>*
+            </strong>
+            <br />
+            <input type="text" required="required"
+                   name="title" value="" onkeyup="suggestSlug(this.value)">
             <div class="typedep hide-on-snippet hide-on-non-regular">
-                <br /> <strong><?php translate("alternate_title"); ?>
-                </strong><br /> <input type="text" name="alternate_title" value=""> <small><?php translate("ALTERNATE_TITLE_INFO"); ?>
-                </small> <br /> <br /> <strong><?php translate("show_headline"); ?></strong>
-                <br /> <select name="show_headline">
+                <br />
+                <strong>
+                    <?php translate("alternate_title"); ?>
+                </strong>
+                <br />
+                <input type="text" name="alternate_title" value="">
+                <small>
+                    <?php translate("ALTERNATE_TITLE_INFO"); ?>
+                </small>
+                <br />
+                <br />
+                <strong><?php translate("show_headline"); ?></strong>
+
+                <br />
+                <select name="show_headline">
                     <option value="1" selected><?php translate("yes"); ?></option>
                     <option value="0"><?php translate("no"); ?></option>
                 </select>
@@ -302,7 +324,7 @@ if ($permissionChecker->hasPermission("pages")
                        value="<?php esc($og_image); ?>"
                        style="cursor: pointer" /> <a href="#"
                        onclick="$('#og_image').val('');
-                                   return false;"
+                               return false;"
                        class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?></a>
             </div>
         </div>
@@ -492,7 +514,7 @@ if ($permissionChecker->hasPermission("pages")
                    readonly="readonly" class="kcfinder"
                    value="" style="cursor: pointer" maxlength="255" /> <a href="#"
                    onclick="$('#article_image').val('');
-                               return false;"
+                           return false;"
                    class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?></a>
         </div>
     </div>

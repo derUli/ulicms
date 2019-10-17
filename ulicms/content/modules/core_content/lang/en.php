@@ -31,3 +31,5 @@ add_translation("entries_per_page", "Entries per page");
 add_translation("robots", "Robots");
 
 add_translation("page_saved", "The page was saved.");
+
+add_translation("auto_generated_from_title", "Auto generated from title");
