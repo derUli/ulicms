@@ -123,7 +123,6 @@ if ($permissionChecker->hasPermission("list_packages")) {
                     <th class="actions no-sort"><?php translate("actions"); ?></th>
                 </tr>
             </thead>
-
             <tbody>
                 <?php
                 foreach ($themes as $theme) {
@@ -225,7 +224,8 @@ if ($permissionChecker->hasPermission("list_packages")) {
                                     <?php } ?>
                             </td>
                         </tr>
-                    <?php } ?></tbody>
+                    <?php } ?>
+                </tbody>
             </table>
         </div>
     <?php } ?>
