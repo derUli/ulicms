@@ -10,7 +10,9 @@ class UliCMSVersion {
         $this->buildDate = 0; // {InsertBuildDate}
         $this->internalVersion = Array(
             2019,
-            4
+            4,
+			0,
+			1
         );
         $this->update = "";
         $this->developmentVersion = false;
