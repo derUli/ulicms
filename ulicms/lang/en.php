@@ -590,6 +590,8 @@ add_translation("ORDER_DIRECTION", "Order direction");
 add_translation("ASC", "Ascending");
 add_translation("DESC", "Descending");
 
+add_translation("LIMIT", "Entries by page");
+
 // Inhaltstyp "Link"
 add_translation("LINK", "Link");
 

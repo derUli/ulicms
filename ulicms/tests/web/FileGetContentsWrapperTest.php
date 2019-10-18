@@ -5,9 +5,9 @@ use UliCMS\Utils\CacheUtil;
 
 class FileGetContentsWrapperTest extends \PHPUnit\Framework\TestCase {
 
-    const EXAMPLE_URL_OK = "http://example.org/";
+    const EXAMPLE_URL_OK = "https://www.ulicms.de/robots.txt";
     const EXAMPLE_URL_INVALID = "http://www.google.de";
-    const EXAMPLE_HASH = "84238dfc8092e5d9c0dac8ef93371a07";
+    const EXAMPLE_HASH = "485b2c1ec3bc6b6fd93297ed4b1140b5";
     const UNIQID_URL = "http://test.ulicms.de/uniqid.php";
     const USER_AGENT_URL = "http://test.ulicms.de/useragent.php";
 
