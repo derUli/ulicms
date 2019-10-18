@@ -721,7 +721,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         unset($_GET["seite"]);
         unset($_GET["html"]);
 
-        $this->assertEquals(get_frontpage() . ".html", buildSEOUrl());
+        $this->assertEquals("./", buildSEOUrl());
     }
 
     public function testBuildSEOUrlWithoutAnything() {

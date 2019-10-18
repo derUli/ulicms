@@ -565,7 +565,7 @@ add_translation("MAX_FAILED_LOGIN_ITEMS", "Benutzer-Accounts nach X fehlgeschlag
 add_translation("NO_MOBILE_DESIGN_ON_TABLET", "Das Design für Mobilgeräte nicht auf Tablets verwenden");
 
 add_translation("TITLE_AND_HEADLINE", "Titel und Überschrift");
-add_translation("MENU_ENTRY", "Menü Eintrag");
+add_translation("MENU_ENTRY", "Menüeintrag");
 add_translation("VISIBILITY", "Sichtbarkeit");
 
 // Typ
@@ -586,7 +586,7 @@ add_translation("ORDER_DIRECTION", "Sotieren Reihenfolge");
 add_translation("ASC", "Aufsteigend");
 add_translation("DESC", "Absteigend");
 
-add_translation("LIMIT", "Limit");
+add_translation("LIMIT", "Einträge je Seite");
 
 // Inhaltstyp "Link"
 add_translation("LINK", "Link");
