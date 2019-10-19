@@ -655,12 +655,20 @@ function apply_filter($text, string $type) {
     return $text;
 }
 
-function get_motto(): string {
-    return Template::getMotto();
+function get_site_slogan(): string {
+    return Template::getSiteSlogan();
+}
+
+function site_slogan(): void {
+    echo Template::siteSlogan();
 }
 
 function motto(): void {
-    echo Template::motto();
+    site_slogan();
+}
+
+function get_motto(): string {
+    return get_site_slogan();
 }
 
 function get_frontpage(): string {

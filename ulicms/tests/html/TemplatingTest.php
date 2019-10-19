@@ -331,7 +331,24 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetTextPositionWithNonExistingPageReturnsBefore() {
         $_GET["slug"] = "gibts-echt-nicht";
-        $this->assertEquals("before", get_text_position());
+        $this->assertEquals
+                ("before", get_text_position());
+    }
+
+    public function testGetMotto() {
+        $slogan1 = get_motto();
+
+        $this->assertNotEmpty($slogan1);
+
+        ob_start();
+
+        motto();
+
+        $slogan2 = ob_get_clean();
+
+        $this->assertNotEmpty($slogan2);
+
+        $this->assertEquals($slogan1, $slogan2);
     }
 
 }

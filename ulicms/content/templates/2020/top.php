@@ -61,7 +61,7 @@ $frontpagePhoto = file_exists($frontpagePhotoFile) ? UliCMS\HTML\imageTag("conte
             <?php Template::logo();
             ?>
             <blockquote class="site-slogan text-fade-in">
-                <?php Template::motto(); ?> </blockquote>
+                <?php Template::siteSlogan(); ?> </blockquote>
             <?php
             if (count($pages)) {
                 $firstPage = $pages[0];

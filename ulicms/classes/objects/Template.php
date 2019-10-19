@@ -172,19 +172,28 @@ class Template {
         echo self::getYear($format);
     }
 
-    public static function getMotto(): string {
-        // Existiert ein Motto für diese Sprache? z.B. motto_en
-        $motto = Settings::get("motto_" . $_SESSION["language"]);
+    public static function getSiteSlogan(): string {
+        // Existiert ein Motto für diese Sprache?
+        // z.B. site_slogan_en
+        $site_slogan = Settings::get("site_slogan_" . $_SESSION["language"]);
 
         // Ansonsten Standard Motto
-        if (!$motto) {
-            $motto = Settings::get("motto");
+        if (!$site_slogan) {
+            $site_slogan = Settings::get("site_slogan");
         }
-        return _esc($motto);
+        return _esc($site_slogan);
+    }
+
+    public static function siteSlogan(): void {
+        echo self::getSiteSlogan();
+    }
+
+    public static function getMotto(): string {
+        return self::getSiteSlogan();
     }
 
     public static function motto(): void {
-        echo self::getMotto();
+        self::siteSlogan();
     }
 
     public static function executeDefaultOrOwnTemplate(
@@ -294,7 +303,7 @@ class Template {
                     $titl
             );
             $title = str_ireplace("%title%", get_title(), $title);
-            $title = str_ireplace("%motto%", get_motto(), $title);
+            $title = str_ireplace("%motto%", get_site_slogan(), $title);
             $title = apply_filter($title, "title_tag");
             echo "<title>" . $title . "</title>";
         }

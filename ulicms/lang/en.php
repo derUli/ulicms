@@ -181,7 +181,7 @@ add_translation("INSTALLED_DESIGNS_INFO", "This is a list of all installed desig
 
 // Grundeinstellungen
 add_translation("HOMEPAGE_TITLE", "Site Title");
-add_translation("MOTTO", "Site Slogan");
+add_translation("site_slogan", "Site Slogan");
 add_translation("HOMEPAGE_OWNER", "Site owner");
 add_translation("HIDE_LOGO", "hide Logo");
 add_translation("OWNER_MAILADRESS", "E-Mail Adress of Site Admin");

@@ -25,6 +25,8 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function tearDown() {
+        chdir(Path::resolve("ULICMS_ROOT"));
+
         Flags::setNoCache(false);
 
         Database::query("delete from {prefix}content where title like 'Unit Test%'", true);
@@ -109,7 +111,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
     public function testGetThemeMeta() {
         $meta = getThemeMeta("impro17");
         $this->assertIsArray($meta);
-        $this->assertEquals("2.1.1", $meta["version"]);
+        $this->assertEquals("2.1.2", $meta["version"]);
     }
 
     public function testBool2YesNo() {
@@ -704,6 +706,11 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
 
     public function testBuildSEOUrlWithPage() {
         $this->assertEquals("foobar.html", buildSEOUrl("foobar"));
+    }
+
+    public function testBuildSEOUrlWithPageFromAdminDir() {
+        chdir(Path::resolve("ULICMS_ROOT/admin"));
+        $this->assertEquals("../foobar.html", buildSEOUrl("foobar"));
     }
 
     public function testBuildSEOUrlWithPageAndRedirection() {

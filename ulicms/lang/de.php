@@ -182,7 +182,7 @@ add_translation("INSTALLED_DESIGNS_INFO", "Hier finden Sie eine Auflistung der i
 
 // Grundeinstellungen
 add_translation("HOMEPAGE_TITLE", "Titel der Website");
-add_translation("MOTTO", "Motto der Homepage");
+add_translation("site_slogan", "Motto der Homepage");
 add_translation("HOMEPAGE_OWNER", "Inhaber der Website");
 add_translation("HIDE_LOGO", "Logo ausblenden");
 add_translation("OWNER_MAILADRESS", "E-Mail Adresse des Administrators");

@@ -1,10 +1,10 @@
 <?php
 html5_doctype();
 og_html_prefix();
-$motto = get_motto();
+$site_slogan = get_site_slogan();
 $data = get_custom_data();
-if (isset($data["motto"])) {
-    $motto = $data["motto"];
+if (isset($data["site_slogan"])) {
+    $site_slogan = $data["site_slogan"];
 }
 $q = "";
 if (isset($_GET["q"])) {
@@ -77,9 +77,9 @@ if (!$searchPage) {
             </div>
         <?php } ?>
         <div class="row marketing">
-            <?php if ($motto) { ?>
+            <?php if ($site_slogan) { ?>
                 <blockquote>
-                    <?php Template::escape($motto); ?></blockquote>
+                    <?php Template::escape($site_slogan); ?></blockquote>
             <?php } ?>
             <main>
                 <?php Template::headline(); ?>

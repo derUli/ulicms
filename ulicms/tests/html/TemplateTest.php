@@ -13,10 +13,10 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $this->cleanUp();
 
         $settings = array(
-            "motto",
-            "motto_de",
-            "motto_en",
-            "motto_fr",
+            "site_slogan",
+            "site_slogan_de",
+            "site_slogan_en",
+            "site_slogan_fr",
             "homepage_owner",
             "footer_text",
             "domain_to_language"
@@ -24,7 +24,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         foreach ($settings as $setting) {
             $this->savedSettings[$setting] = Settings::get($setting);
         }
-        $this->setMotto();
+        $this->setSiteSlogan();
 
         $_SERVER["REQUEST_URI"] = "/other-url.html?param=value";
 
@@ -161,30 +161,30 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue(str_contains($expected, $baseMetas));
     }
 
-    private function setMotto() {
-        Settings::set("motto", "Motto General");
-        Settings::set("motto_de", "Motto Deutsch");
-        Settings::set("motto_en", "Motto English");
-        Settings::delete("motto_fr");
+    private function setSiteSlogan() {
+        Settings::set("site_slogan", "SiteSlogan General");
+        Settings::set("site_slogan_de", "SiteSlogan Deutsch");
+        Settings::set("site_slogan_en", "SiteSlogan English");
+        Settings::delete("site_slogan_fr");
     }
 
-    public function testGetMottoWithoutLanguage() {
+    public function testGetSiteSloganWithoutLanguage() {
         $_SESSION["language"] = "de";
-        $this->assertEquals("Motto Deutsch", Template::getMotto());
+        $this->assertEquals("SiteSlogan Deutsch", Template::getSiteSlogan());
 
         $_SESSION["language"] = "en";
-        $this->assertEquals("Motto English", Template::getMotto());
+        $this->assertEquals("SiteSlogan English", Template::getSiteSlogan());
         $this->cleanUp();
     }
 
-    public function testGetMottoWithExistingLanguage() {
+    public function testGetSiteSloganWithExistingLanguage() {
         $_SESSION["language"] = "fr";
-        $this->assertEquals("Motto General", Template::getMotto());
+        $this->assertEquals("SiteSlogan General", Template::getSiteSlogan());
         $this->cleanUp();
     }
 
-    public function testGetMottoWithNotExistingLanguage() {
-        $this->assertEquals("Motto General", Template::getMotto());
+    public function testGetSiteSloganWithNotExistingLanguage() {
+        $this->assertEquals("SiteSlogan General", Template::getSiteSlogan());
     }
 
     public function testGetjQueryScript() {

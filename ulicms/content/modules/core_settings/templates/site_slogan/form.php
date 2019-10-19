@@ -2,13 +2,13 @@
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("settings_simple")) {
     $languages = getAllLanguages();
-    $mottos = [];
+    $site_slogans = [];
     for ($i = 0; $i < count($languages); $i ++) {
         $lang = $languages[$i];
-        $mottos[$lang] = Settings::get("motto_" . $lang);
+        $site_slogans[$lang] = Settings::get("site_slogan_" . $lang);
 
-        if (!$mottos[$lang]) {
-            $mottos[$lang] = Settings::get("motto");
+        if (!$site_slogans[$lang]) {
+            $site_slogans[$lang] = Settings::get("site_slogan");
         }
     }
     ?><p>
@@ -16,11 +16,11 @@ if ($permissionChecker->hasPermission("settings_simple")) {
            class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
     </p>
     <h1>
-        <?php translate("motto"); ?>
+        <?php translate("site_slogan"); ?>
     </h1>
     <?php
-    echo ModuleHelper::buildMethodCallForm("MottoController", "save", [], "post", array(
-        "id" => "motto_settings"
+    echo ModuleHelper::buildMethodCallForm("SiteSloganController", "save", [], "post", array(
+        "id" => "site_slogan_settings"
     ));
     ?>
     <table>
@@ -30,7 +30,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
                     ?>
                 </strong></td>
             <td>
-                <strong><?php translate("motto"); ?></strong>
+                <strong><?php translate("site_slogan"); ?></strong>
             </td>
         </tr>
         <?php
@@ -42,11 +42,11 @@ if ($permissionChecker->hasPermission("settings_simple")) {
                     esc(getLanguageNameByCode($lang));
                     ?></td>
                 <td><input
-                        name="motto_<?php
+                        name="site_slogan_<?php
                         esc($lang);
                         ?>"
                         value="<?php
-                        esc($mottos[$lang]);
+                        esc($site_slogans[$lang]);
                         ?>"></td>
                     <?php
                 }
@@ -64,7 +64,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
     </table>
     <?php echo ModuleHelper::endForm(); ?>
     <script>
-        $("#motto_settings").ajaxForm({beforeSubmit: function (e) {
+        $("#site_slogan_settings").ajaxForm({beforeSubmit: function (e) {
                 $("#message").html("");
                 $("#loading").show();
             },

@@ -777,7 +777,7 @@ function buildSEOUrl(
         ?string $redirection = null,
         ?string $format = null
 ) {
-    if (!is_null($redirection) and ! empty($redirection)) {
+    if ($redirection) {
         return $redirection;
     }
     if (!$page) {
@@ -786,10 +786,6 @@ function buildSEOUrl(
 
     if (!$format) {
         $format = get_format() ? get_format() : "html";
-    }
-
-    if (is_string($redirection) and startsWith($redirection, "#")) {
-        return $redirection;
     }
 
     if ($page === get_frontpage()) {
@@ -989,10 +985,10 @@ function replaceOtherShortCodes(string $string): string {
             $string
     );
     ob_start();
-    motto();
+    site_slogan();
     $string = str_ireplace('[motto]', ob_get_clean(), $string);
     ob_start();
-    motto();
+    site_slogan();
     $string = str_ireplace('[slogan]', ob_get_clean(), $string);
 
     $string = str_ireplace('[category]', get_category(), $string);

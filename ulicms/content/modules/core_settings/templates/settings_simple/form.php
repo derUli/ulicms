@@ -27,8 +27,8 @@ if ($permissionChecker->hasPermission("settings_simple")) {
                         class="fa fa-edit"></i> <?php translate("edit"); ?></a></td>
         </tr>
         <tr>
-            <td><strong><?php translate("motto"); ?></strong></td>
-            <td><a href="index.php?action=motto" class="btn btn-default"><i
+            <td><strong><?php translate("site_slogan"); ?></strong></td>
+            <td><a href="index.php?action=site_slogan" class="btn btn-default"><i
                         class="fa fa-edit"></i> <?php translate("edit"); ?></a></td>
         </tr>
         <tr>

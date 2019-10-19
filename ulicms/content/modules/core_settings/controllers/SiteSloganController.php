@@ -2,7 +2,7 @@
 
 use UliCMS\Utils\CacheUtil;
 
-class MottoController extends Controller {
+class SiteSloganController extends Controller {
 
     public function savePost() {
         $languages = getAllLanguages();
@@ -11,11 +11,11 @@ class MottoController extends Controller {
             for ($i = 0; $i < count($languages); $i ++) {
 
                 $lang = $languages[$i];
-                if (isset($_POST["motto_" . $lang])) {
-                    $page = $_POST["motto_" . $lang];
-                    Settings::set("motto_" . $lang, $page);
+                if (isset($_POST["site_slogan_" . $lang])) {
+                    $page = $_POST["site_slogan_" . $lang];
+                    Settings::set("site_slogan_" . $lang, $page);
                     if ($lang == Settings::get("default_language")) {
-                        Settings::set("motto", $page);
+                        Settings::set("site_slogan", $page);
                     }
                 }
             }
@@ -27,7 +27,7 @@ class MottoController extends Controller {
         if (Request::isAjaxRequest()) {
             HTTPStatusCodeResult(HttpStatusCode::OK);
         }
-        Request::redirect(ModuleHelper::buildActionURL("motto"));
+        Request::redirect(ModuleHelper::buildActionURL("site_slogan"));
     }
 
 }
