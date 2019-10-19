@@ -28,6 +28,28 @@ Anschließend werden statt die Inhalte immer wieder aus der Datenbank zu laden, 
                 normalizeLN(get_secure_translation("CACHE_TEXT1")));
     }
 
+    public function testSecureTranslation() {
+        ob_start();
+        secure_translation("CACHE_TEXT1");
+
+        $this->assertEquals(normalizeLN(_esc("<p>Um die Performance der Website zu verbessern,
+bietet das UliCMS eine Cache-Funktion.<br/>
+Statische Seiten, die keine Module enthalten, werden einmalig generiert und dann im cache-Ordner zwischengespeichert.
+Anschließend werden statt die Inhalte immer wieder aus der Datenbank zu laden, die Inhalte aus den gespeicherten HTML-Dateien geladen.</p>")),
+                normalizeLN(ob_get_clean()));
+    }
+
+    public function testSecureTranslate() {
+        ob_start();
+        secure_translate("CACHE_TEXT1");
+
+        $this->assertEquals(normalizeLN(_esc("<p>Um die Performance der Website zu verbessern,
+bietet das UliCMS eine Cache-Funktion.<br/>
+Statische Seiten, die keine Module enthalten, werden einmalig generiert und dann im cache-Ordner zwischengespeichert.
+Anschließend werden statt die Inhalte immer wieder aus der Datenbank zu laden, die Inhalte aus den gespeicherten HTML-Dateien geladen.</p>")),
+                normalizeLN(ob_get_clean()));
+    }
+
     public function testGetSecureTranslationWithPlaceholders() {
 
         $this->assertEquals(_esc("Hello <script>alert('xss');</script>John " .

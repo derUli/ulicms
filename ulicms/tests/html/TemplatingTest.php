@@ -2,7 +2,12 @@
 
 class TemplatingTest extends \PHPUnit\Framework\TestCase {
 
+    private $homepageOwner;
+
     public function setUp() {
+        $this->homepageOwner = Settings::get("homepage_owner");
+
+
         $_SESSION["language"] = "de";
         $_GET["slug"] = get_frontpage();
         require_once getLanguageFilePath("en");
@@ -15,7 +20,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
 
     public function tearDown() {
         $this->cleanUp();
-
+        Settings::set("homepage_owner", $this->homepageOwner);
         Settings::set("maintenance_mode", "off");
 
         unset($_SERVER["SERVER_PROTOCOL"]);
@@ -349,6 +354,14 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         $this->assertNotEmpty($slogan2);
 
         $this->assertEquals($slogan1, $slogan2);
+    }
+
+    public function testHomepageOwner() {
+        Settings::set("homepage_owner", "John Doe");
+
+        ob_start();
+        homepage_owner();
+        $this->assertEquals("John Doe", ob_get_clean());
     }
 
 }

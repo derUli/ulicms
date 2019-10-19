@@ -177,6 +177,19 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $this->cleanUp();
     }
 
+    public function testGetMottoWithoutLanguage() {
+        $_SESSION["language"] = "de";
+        $this->assertEquals("SiteSlogan Deutsch", Template::getMotto());
+    }
+
+    public function testMottoWithoutLanguage() {
+        $_SESSION["language"] = "de";
+
+        ob_start();
+        Template::motto();
+        $this->assertEquals("SiteSlogan Deutsch", ob_get_clean());
+    }
+
     public function testGetSiteSloganWithExistingLanguage() {
         $_SESSION["language"] = "fr";
         $this->assertEquals("SiteSlogan General", Template::getSiteSlogan());
