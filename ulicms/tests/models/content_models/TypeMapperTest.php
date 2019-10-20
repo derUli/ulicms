@@ -4,6 +4,10 @@ use UliCMS\Models\Content\TypeMapper;
 
 class TypeMapperTest extends \PHPUnit\Framework\TestCase {
 
+    public function setUp() {
+        TypeMapper::loadMapping();
+    }
+
     public function testGetMappings() {
         $types = TypeMapper::getMappings();
         $this->assertGreaterThanOrEqual(11, count($types));

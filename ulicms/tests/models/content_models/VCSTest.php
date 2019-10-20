@@ -8,7 +8,7 @@ class VCSTest extends \PHPUnit\Framework\TestCase {
         Database::deleteFrom("history", "content like '%Text'");
     }
 
-    public function testGetRevisionByContentId() {
+    public function testGetRevisionByContentIdReturnsRevision() {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
         $page->slug = 'unit-test-' . time();
@@ -31,6 +31,10 @@ class VCSTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("New Text", $revision->content);
         $this->assertEquals($page->id, $revision->content_id);
         $this->assertEquals(1, $revision->user_id);
+    }
+
+    public function testGetRevisionByIdReturnsNul() {
+        $this->assertNull(VCS::getRevisionByID(PHP_INT_MAX));
     }
 
 }

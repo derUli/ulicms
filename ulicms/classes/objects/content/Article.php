@@ -59,7 +59,7 @@ excerpt = ? where id = ?";
             $this->excerpt,
             $this->id
         );
-        Database::pQuery($sql, $args, true);
+        return Database::pQuery($sql, $args, true);
     }
 
 }

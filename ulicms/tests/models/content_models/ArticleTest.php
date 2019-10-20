@@ -22,6 +22,15 @@ class ArticleTest extends \PHPUnit\Framework\TestCase {
 
         $this->assertInstanceOf(Article::class, $article);
         $this->assertEquals(1413821696, $article->article_date);
+
+        $article->title = "Unit Test Article 2";
+        $article->save();
+    }
+
+    public function testUpdateWithoutIdReturnsFalse() {
+        $article = new Article();
+        $this->assertFalse($article->update());
+        $this->assertFalse($article->isPersistent());
     }
 
 }

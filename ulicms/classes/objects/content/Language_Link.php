@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Models\Content\Language;
+
 // Links to another language
 class Language_Link extends Page {
 
@@ -36,6 +38,14 @@ class Language_Link extends Page {
 
         $result = Database::pQuery($sql, $args, true);
         return $result;
+    }
+
+    public function getLinkedLanguage() {
+        return $this->link_to_language ? new Language($this->link_to_language) : null;
+    }
+
+    public function setLinkedLanguage(?Language $language) {
+        $this->link_to_language = $language ? $language->getID() : null;
     }
 
     public function isRegular(): bool {

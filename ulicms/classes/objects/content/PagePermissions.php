@@ -21,7 +21,7 @@ class PagePermissions {
     private $only_owner_can_edit = false;
     private $only_others_can_edit = false;
 
-    public function getEditRestriction(string $object): bool {
+    public function getEditRestriction(string $object): ?bool {
         $varName = "only_{$object}_can_edit";
         if (!isset($this->$varName)) {
             return null;

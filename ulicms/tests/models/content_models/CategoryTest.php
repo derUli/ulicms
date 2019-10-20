@@ -45,4 +45,11 @@ class CategoryTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull($category->getID());
     }
 
+    public function testSetId() {
+        $category = new Category();
+        $category->setID(123);
+
+        $this->assertEquals(123, $category->getID());
+    }
+
 }

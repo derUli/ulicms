@@ -92,7 +92,16 @@ class PagePermissionsTest extends \PHPUnit\Framework\TestCase {
                         ->getEditRestriction("others"));
         $this->assertFalse($page->getPermissions()
                         ->getEditRestriction("admins"));
+
         $page2->delete();
+    }
+
+    public function testSetAndGetEditRestrictionForNonExistingObject() {
+        $page = new Page();
+
+        // Der Pumuckl ist nur das Hirngespinst von Meister Eder
+        $page->getPermissions()->setEditRestriction("pumuckl", true);
+        $this->assertNull($page->getPermissions()->getEditRestriction("pumuckl"));
     }
 
 }
