@@ -5,8 +5,16 @@ use UliCMS\Exceptions\UnknownContentTypeException;
 
 class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
 
+    public function setUp() {
+        LoggerRegistry::register(
+                "exception_log",
+                new Logger(Path::resolve("ULICMS_LOG/exception_log"))
+        );
+    }
+
     public function tearDown() {
         Database::deleteFrom("content", "type = 'gibts_nicht'");
+        LoggerRegistry::unregister("exception_log");
     }
 
     public function testGetAllbyType() {

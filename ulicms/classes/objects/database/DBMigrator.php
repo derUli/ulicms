@@ -132,7 +132,7 @@ class DBMigrator {
         Database::truncateTable("dbtrack");
     }
 
-    private function checkVars(): void {
+    public function checkVars(): bool {
         if (StringHelper::isNullOrEmpty($this->component)) {
             throw new Exception("component is null or empty");
         }
@@ -142,6 +142,7 @@ class DBMigrator {
         if (!is_dir($this->folder)) {
             throw new Exception("folder not found " . $this->folder);
         }
+        return true;
     }
 
 }
