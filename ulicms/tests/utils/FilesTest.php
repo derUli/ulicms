@@ -1,7 +1,6 @@
 <?php
 
 use UliCMS\Utils\File;
-use UliCMS\Exceptions\NotImplementedException;
 
 class FilesTest extends \PHPUnit\Framework\TestCase {
 

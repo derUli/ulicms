@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace UliCMS\Helpers;
 
 use Helper;
+use Exception;
 
 class ArrayHelper extends Helper {
 

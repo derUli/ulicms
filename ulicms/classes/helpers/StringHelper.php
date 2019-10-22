@@ -116,13 +116,10 @@ class StringHelper extends Helper {
 
         // text an Leerzeichen zerlegen
         $array = explode(" ", $text);
+        $array = array_filter($array);
 
         foreach ($array as $word) {
-            if (strlen($word) == 0) {
-                // wenn kein Wort vorhanden ist nichts machen
-                continue;
-            }
-            if (!faster_in_array($word, $array)) {
+            if (!array_key_exists($word, $return)) {
                 // wenn das wort zum ersten mal gefunden wurde
                 $return[$word] = 1;
             } else {

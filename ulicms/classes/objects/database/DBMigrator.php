@@ -121,7 +121,7 @@ class DBMigrator {
         }
     }
 
-    public function resetDBTrack(): mysqli_result {
+    public function resetDBTrack(): bool {
         return Database::pQuery("DELETE FROM {prefix}dbtrack "
                         . "where component = ?", array(
                     $this->component

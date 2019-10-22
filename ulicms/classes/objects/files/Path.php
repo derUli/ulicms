@@ -40,11 +40,4 @@ class Path {
         return $path;
     }
 
-    public static function removeDir(
-            string $dir,
-            bool $deleteMe = true
-    ): void {
-        File::sureRemoveDir($dir, $deleteMe);
-    }
-
 }

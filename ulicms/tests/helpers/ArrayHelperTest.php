@@ -27,7 +27,7 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull(ArrayHelper::take(4, 2017));
     }
 
-    public function testInsertBefore() {
+    public function testInsertBeforeReturnsArray() {
         $input = array(
             "apple",
             "tomato",
@@ -52,7 +52,21 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
                 ), ArrayHelper::insertBefore($input, 0, "pineapple"));
     }
 
-    public function testAfterBefore() {
+    public function testInsertBeforeReturnsThrowsException() {
+        $input = array(
+            "apple",
+            "tomato",
+            "banana",
+            "cucumber"
+        );
+
+        $this->expectException("Exception");
+        $this->expectExceptionMessage("Index not found");
+
+        ArrayHelper::insertBefore($input, PHP_INT_MAX, 'gibts_nicht');
+    }
+
+    public function testInsertAfterReturnsArray() {
         $input = array(
             "apple",
             "tomato",
@@ -75,6 +89,20 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
             "cucumber",
             "pineapple"
                 ), ArrayHelper::insertAfter($input, 3, "pineapple"));
+    }
+
+    public function testInsertAfterReturnsThrowsException() {
+        $input = array(
+            "apple",
+            "tomato",
+            "banana",
+            "cucumber"
+        );
+
+        $this->expectException("Exception");
+        $this->expectExceptionMessage("Index not found");
+
+        ArrayHelper::insertAfter($input, PHP_INT_MAX, 'gibts_nicht');
     }
 
     public function testIsSingleWithEmptyArray() {
