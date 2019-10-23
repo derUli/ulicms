@@ -3,10 +3,14 @@
 class TranslationTest extends \PHPUnit\Framework\TestCase {
 
     public function setUp() {
+        Translation::init();
         require_once getLanguageFilePath("en");
+        Translation::loadAllModuleLanguageFiles("en");
+        Translation::loadCurrentThemeLanguageFiles("en");
     }
 
     public function testGetTranslation() {
+        Translation::init();
         $this->assertEquals("Type your password",
                 get_translation("enter_pass"));
     }
@@ -103,6 +107,33 @@ Anschließend werden statt die Inhalte immer wieder aus der Datenbank zu laden, 
 
     public function testSingularOrPluralWith3ExpectSingular() {
         $this->assertEquals("3 Biere", singularOrPlural(3, "%number% Bier", "%number% Biere"));
+    }
+
+    public function testGetTranslationReturnsCustomTranslation() {
+        Translation::set("pages", "Parchments");
+        $this->assertEquals("Parchments", get_translation("pages"));
+
+        Translation::override("pages", "Papers");
+        $this->assertEquals("Papers", get_translation("pages"));
+
+        Translation::delete("pages");
+        $this->assertEquals("Pages", get_translation("pages"));
+    }
+
+    public function testGetTranslationNotFoundReturnsKey() {
+        $this->assertEquals("not_a_translation", get_translation("not_a_translation"));
+    }
+
+    public function testTranslate() {
+        ob_start();
+        translate("pages");
+        $this->assertEquals("Pages", ob_get_clean());
+    }
+
+    public function testTranslation() {
+        ob_start();
+        translation("pages");
+        $this->assertEquals("Pages", ob_get_clean());
     }
 
 }

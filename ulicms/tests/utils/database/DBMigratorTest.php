@@ -74,6 +74,7 @@ class DBMigratorTest extends \PHPUnit\Framework\TestCase {
 
         $dbmigrator = new DBMigrator("dbmigrator_test", self::DB_MIGRATOR_UP_DIR);
         $dbmigrator->resetDBTrack("dbmigrator_test");
+
         $this->assertFalse(
                 Database::any(
                         Database::selectAll("dbtrack",

@@ -6,16 +6,24 @@ declare(strict_types=1);
 // It's currently only used for overriding of translations
 class Translation {
 
-    private static $translations = null;
+    private static $translations = [];
 
     public static function init(): void {
         self::$translations = [];
     }
 
-    public static function set(string $key, string $value): void {
+    public static function set(string $key, ?string $value): void {
         $key = "translation_" . $key;
         $key = strtoupper($key);
-        self::$translations[$key] = $value;
+        if (!is_null($value)) {
+            self::$translations[$key] = $value;
+        } else {
+            unset(self::$translations[$key]);
+        }
+    }
+
+    public static function delete(string $key) {
+        self::set($key, null);
     }
 
     public static function override(string $key, string $value): void {
