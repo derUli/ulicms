@@ -96,4 +96,9 @@ class AudioTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
+    public function testLoadByIdNotFound() {
+        $audio = new Audio(PHP_INT_MAX);
+        $this->assertNull($audio->getID());
+    }
+
 }

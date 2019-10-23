@@ -14,12 +14,12 @@ use UliCMS\Exceptions\DatasetNotFoundException;
 class Banner extends Model {
 
     protected $id = null;
-    private $name = "";
-    private $link_url = "";
-    private $image_url = "";
+    private $name = null;
+    private $link_url = null;
+    private $image_url = null;
     private $category_id = 1;
     private $type = "gif";
-    private $html = "";
+    private $html = null;
     private $language = null;
     private $enabled = true;
     private $date_from = null;
@@ -108,11 +108,9 @@ class Banner extends Model {
         } else {
             $sql .= "'" . intval($this->category_id) . "',";
         }
-        if ($this->type === null) {
-            $sql .= "NULL, ";
-        } else {
-            $sql .= "'" . Database::escapeValue($this->type) . "',";
-        }
+
+        $sql .= "'" . Database::escapeValue($this->type) . "',";
+
         if ($this->html === null) {
             $sql .= "NULL, ";
         } else {
@@ -174,11 +172,9 @@ class Banner extends Model {
         } else {
             $sql .= "category_id='" . intval($this->category_id) . "',";
         }
-        if ($this->type === null) {
-            $sql .= "`type`=NULL, ";
-        } else {
-            $sql .= "`type`='" . Database::escapeValue($this->type) . "',";
-        }
+
+        $sql .= "`type`='" . Database::escapeValue($this->type) . "',";
+
         if ($this->html === null) {
             $sql .= "html=NULL, ";
         } else {

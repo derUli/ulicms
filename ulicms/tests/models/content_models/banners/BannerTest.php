@@ -14,15 +14,11 @@ class BannerTest extends \PHPUnit\Framework\TestCase {
     const LINK_URL_TEXT1 = "http://www.google.de";
     const LINK_URL_TEXT2 = "http://www.yahoo.com";
 
-    public function setUp() {
+    public function tearDown() {
         Database::pQuery("DELETE FROM `{prefix}banner` where html in (? , ?)", array(
             self::HTML_TEXT1,
             self::HTML_TEXT1
                 ), true);
-    }
-
-    public function tearDown() {
-        $this->setUp();
     }
 
     public function testHTMLBannerWithoutLanguage() {
@@ -280,6 +276,55 @@ class BannerTest extends \PHPUnit\Framework\TestCase {
         $banner->loadByID(PHP_INT_MAX);
 
         $this->assertFalse($banner->isPersistent());
+    }
+
+    private function createTestBanners() {
+        for ($i = 1; $i < 20; $i++) {
+            $banner = new Banner();
+            $banner->setType("html");
+            $banner->setHtml(self::HTML_TEXT1);
+            $banner->save();
+        }
+    }
+
+    public function testLoadRandom() {
+        $this->createTestBanners();
+
+        $banner1 = new Banner();
+        $banner1->loadRandom();
+
+        $this->assertGreaterThanOrEqual(1, $banner1->getId());
+
+        $banner2 = new Banner();
+        $banner2->loadRandom();
+
+        $this->assertGreaterThanOrEqual(1, $banner2->getId());
+
+        $this->assertNotEquals($banner2->getId(), $banner1->getId());
+    }
+
+    public function testCreateWithAllEmpty() {
+        $banner = new Banner();
+        $banner->setCategoryId(null);
+        $banner->save(); // insert
+        $banner->save(); // update
+
+        $this->assertGreaterThanOrEqual(1, $banner->getId());
+
+        $banner->delete();
+    }
+
+    public function testUpdateWithoutInsert() {
+        $banner = new Banner();
+        $banner->setType("html");
+
+        $banner->setHtml(self::HTML_TEXT1);
+        $this->assertFalse($banner->isPersistent());
+        $banner->update();
+
+        $this->assertTrue($banner->isPersistent());
+
+        $banner->delete();
     }
 
 }

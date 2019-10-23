@@ -276,17 +276,14 @@ class CommentTest extends \PHPUnit\Framework\TestCase {
 
         $comment->save();
 
-        $comments = Comment::getAllDatasets(Comment::TABLE_NAME, Comment::class);
-
+        $comments = Comment::getAll();
         $this->assertGreaterThanOrEqual(2, count($comments));
 
-        $comment = array_pop($comments);
-        $this->assertNotNull($comment->getID());
-        $this->assertEquals("Unit Test 3", $comment->getText());
-
-        $comment = array_pop($comments);
-        $this->assertNotNull($comment->getID());
-        $this->assertEquals("Unit Test 2", $comment->getText());
+        foreach ($comments as $comment) {
+            $this->assertInstanceOf(Comment::class, $comment);
+            $this->assertNotNull($comment->getId());
+            $this->assertNotNull($comment->getContentId());
+        }
     }
 
     public function testGetAllByContentId() {
@@ -356,7 +353,7 @@ class CommentTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("Unit Test 4", $comment->getText());
     }
 
-    public function testGetAllByStatus() {
+    public function testGetAllcoByStatus() {
         $contents = ContentFactory::getAll();
         $last = array_pop($contents);
         $comment = new Comment();
@@ -479,6 +476,12 @@ class CommentTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(Comment::checkIfCommentWithIpExists("111.111.111.111", CommentStatus::SPAM));
         $this->assertFalse(Comment::checkIfCommentWithIpExists("111.111.111.111", CommentStatus::PUBLISHED));
         $this->assertFalse(Comment::checkIfCommentWithIpExists("111.111.111.111", CommentStatus::PENDING));
+    }
+
+    public function testDataWithInvalidValueThrowsException() {
+        $this->expectException("InvalidArgumentException");
+        $comment = new Comment();
+        $comment->setDate(new UliCMSVersion());
     }
 
 }

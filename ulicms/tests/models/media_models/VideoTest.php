@@ -117,4 +117,9 @@ class VideoTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
+    public function testLoadByIdNotFound() {
+        $video = new Video(PHP_INT_MAX);
+        $this->assertNull($video->getID());
+    }
+
 }

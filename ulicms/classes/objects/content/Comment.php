@@ -97,9 +97,6 @@ VALUES      ( ?,
     }
 
     protected function update() {
-        if (!$this->getDate()) {
-            $this->date = time();
-        }
         Database::pQuery("UPDATE `{prefix}comments` set
                          `content_id` = ?,
                          `author_name` = ?,
@@ -150,10 +147,7 @@ VALUES      ( ?,
         return $this->content_id;
     }
 
-    public function setContentId(?int $val): void {
-        if (!is_numeric($val)) {
-            throw new InvalidArgumentException("$val is not a number");
-        }
+    public function setContentId(int $val): void {
         $this->content_id = intval($val);
     }
 
@@ -192,7 +186,7 @@ VALUES      ( ?,
             $val = strtotime($val);
         } else if (!is_numeric($val)) {
             throw new InvalidArgumentException(
-                    "$val is not an integer timestamp"
+                    var_dump_str($val) . " is not an integer timestamp"
             );
         }
         $this->date = intval($val);
@@ -211,10 +205,7 @@ VALUES      ( ?,
         return $this->status;
     }
 
-    public function setStatus(?string $val): void {
-        if (!is_string($val)) {
-            throw new InvalidArgumentException("$val is not a status string");
-        }
+    public function setStatus(string $val): void {
         $this->status = $val;
     }
 
