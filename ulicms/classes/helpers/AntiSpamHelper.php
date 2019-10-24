@@ -32,7 +32,7 @@ class AntiSpamHelper extends Helper {
 
         for ($i = 0; $i < count($country_blacklist); $i ++) {
             $ending = "." . $country_blacklist[$i];
-            if (EndsWith($hostname, $ending)) {
+            if (endsWith($hostname, $ending)) {
                 return true;
             }
         }
@@ -151,10 +151,7 @@ class AntiSpamHelper extends Helper {
             "rabaz"
         ];
         foreach ($bots as $bot) {
-            if (stripos($useragent, $bot) !== false) {
-                return true;
-            }
-            if (empty($useragent) || $useragent == " ") {
+            if ($useragent && stripos($useragent, $bot) !== false) {
                 return true;
             }
         }

@@ -12,6 +12,7 @@ class AntispamHelperTest extends \PHPUnit\Framework\TestCase {
     public function tearDown() {
         Settings::set("country_blacklist", $this->initialCountryBlacklist);
         unset($_SERVER["REMOTE_ADDR"]);
+        unset($_SERVER['HTTP_USER_AGENT']);
         Settings::set("spamfilter_enabled", "yes");
     }
 
@@ -104,6 +105,10 @@ class AntispamHelperTest extends \PHPUnit\Framework\TestCase {
         // United Kingdom
         $_SERVER["REMOTE_ADDR"] = "52.222.250.185";
         $this->assertFalse(AntiSpamHelper::isCountryBlocked());
+
+
+        $_SERVER["REMOTE_ADDR"] = "not an ip address";
+        $this->assertFalse(AntiSpamHelper::isCountryBlocked());
     }
 
     public function testContainsBadWordsReturnsWord() {
@@ -112,6 +117,10 @@ class AntispamHelperTest extends \PHPUnit\Framework\TestCase {
 
     public function testContainsBadWordsReturnsNull() {
         $this->assertNull(AntiSpamHelper::containsBadwords("This is a clean text without spammy words"));
+    }
+
+    public function testContainsBadWordsWithoutInputStringReturnsNull() {
+        $this->assertNull(AntiSpamHelper::containsBadwords(null));
     }
 
     public function testIsSpamFilterEnabledReturnsTrue() {
@@ -127,6 +136,15 @@ class AntispamHelperTest extends \PHPUnit\Framework\TestCase {
     public function testCheckForBotReturnsTrue() {
         $this->assertTrue(AntiSpamHelper::checkForBot("libwww-perl/5.65"));
         $this->assertTrue(AntiSpamHelper::checkForBot("Mozilla/4.0 (compatible; Win32; WinHttp.WinHttpRequest.5"));
+    }
+
+    public function testCheckForBotWithoutArgumentReturnsTrue() {
+        $_SERVER['HTTP_USER_AGENT'] = "libwww-perl/5.65";
+        $this->assertTrue(AntiSpamHelper::checkForBot());
+    }
+
+    public function testCheckForBotWithoutUseragentReturnsTrue() {
+        $this->assertFalse(AntiSpamHelper::checkForBot());
     }
 
     public function testCheckForBotReturnsFalse() {
