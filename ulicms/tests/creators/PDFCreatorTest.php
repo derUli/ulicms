@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Creators\PDFCreator;
+use UliCMS\Utils\CacheUtil;
 
 class PDFCreatorTest extends \PHPUnit\Framework\TestCase {
 
@@ -11,10 +12,12 @@ class PDFCreatorTest extends \PHPUnit\Framework\TestCase {
         $this->cacheDisabledOriginal = Settings::get("cache_disabled");
         $this->cachePeriodOriginal = Settings::get("cache_period");
         Settings::delete("cache_disabled");
-        $_SERVER["REQUEST_URI"] = "/other-url.pdf?param=value";
     }
 
     public function tearDown() {
+        CacheUtil::clearPageCache();
+        Database::query("delete from {prefix}content where title like 'Unit Test%'", true);
+
         if ($this->cacheDisabledOriginal) {
             Settings::set("cache_disabled", "yes");
         } else {
@@ -29,7 +32,20 @@ class PDFCreatorTest extends \PHPUnit\Framework\TestCase {
         unset($_SESSION["logged_in"]);
     }
 
-    public function testRender() {
+    public function testRenderWithTextPositionBefore() {
+        $modulePage = new Module_Page();
+        $modulePage->title = "Unit Test Article";
+        $modulePage->slug = "unit-test-" . uniqid();
+        $modulePage->menu = "none";
+        $modulePage->language = "de";
+        $modulePage->article_date = 1413821696;
+        $modulePage->author_id = 1;
+        $modulePage->group_id = 1;
+        $modulePage->module = 'fortune2';
+        $modulePage->text_position = 'before';
+        $modulePage->save();
+
+        $_SERVER["REQUEST_URI"] = "/one-url.pdf?param=value";
         Settings::delete("cache_disabled");
         Settings::set("cache_period", 500);
 
@@ -45,8 +61,38 @@ class PDFCreatorTest extends \PHPUnit\Framework\TestCase {
         $output = $creator->render();
 
         $this->assertStringStartsWith("%PDF-1.4", $output);
-        $this->assertGreaterThanOrEqual(29000,
-                getStringLengthInBytes($output));
+    }
+
+    public function testRenderWithTextPositionAfter() {
+
+        $_SERVER["REQUEST_URI"] = "/url-two.pdf?param=value&foo=bar";
+        $modulePage = new Module_Page();
+        $modulePage->title = "Unit Test Article";
+        $modulePage->slug = "unit-test-" . uniqid();
+        $modulePage->menu = "none";
+        $modulePage->language = "de";
+        $modulePage->article_date = 1413821696;
+        $modulePage->author_id = 1;
+        $modulePage->group_id = 1;
+        $modulePage->module = 'fortune2';
+        $modulePage->text_position = 'after';
+        $modulePage->save();
+
+        Settings::delete("cache_disabled");
+        Settings::set("cache_period", 500);
+
+        $_GET["slug"] = $modulePage->slug;
+        $_SESSION["language"] = "de";
+        $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (Windows NT 6.1; "
+                . "Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
+                . "Chrome/63.0.3239.132 Safari/537.36";
+
+        $creator = new PDFCreator();
+
+        $output = $creator->render();
+        $output = $creator->render();
+
+        $this->assertStringStartsWith("%PDF-1.4", $output);
     }
 
 }

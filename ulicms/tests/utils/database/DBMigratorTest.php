@@ -85,4 +85,15 @@ class DBMigratorTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
+    public function testSetStrictMode() {
+        $dbmigrator = new DBMigrator("dbmigrator_test", self::DB_MIGRATOR_UP_DIR);
+        $this->assertTrue($dbmigrator->isStrictMode());
+
+        $dbmigrator->disableStrictMode();
+        $this->assertFalse($dbmigrator->isStrictMode());
+
+        $dbmigrator->enableStrictMode();
+        $this->assertTrue($dbmigrator->isStrictMode());
+    }
+
 }

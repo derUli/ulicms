@@ -33,6 +33,10 @@ class DBMigrator {
         $this->strictMode = false;
     }
 
+    public function isStrictMode(): bool {
+        return $this->strictMode;
+    }
+
     // use this to migrate up migrations
     public function migrate(?string $stop = null): void {
         $this->checkVars();
