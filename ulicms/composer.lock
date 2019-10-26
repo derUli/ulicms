@@ -537,16 +537,16 @@
         },
         {
             "name": "mpdf/mpdf",
-            "version": "v8.0.2",
+            "version": "v8.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mpdf/mpdf.git",
-                "reference": "ab0662606cc2396015616633946f3b8918d818a7"
+                "reference": "6dd4285aff21f013554ff752046bb44ab1240f5f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mpdf/mpdf/zipball/ab0662606cc2396015616633946f3b8918d818a7",
-                "reference": "ab0662606cc2396015616633946f3b8918d818a7",
+                "url": "https://api.github.com/repos/mpdf/mpdf/zipball/6dd4285aff21f013554ff752046bb44ab1240f5f",
+                "reference": "6dd4285aff21f013554ff752046bb44ab1240f5f",
                 "shasum": ""
             },
             "require": {
@@ -562,7 +562,7 @@
                 "mockery/mockery": "^0.9.5",
                 "mpdf/qrcode": "^1.0.0",
                 "phpunit/phpunit": "^5.0",
-                "squizlabs/php_codesniffer": "^2.7.0",
+                "squizlabs/php_codesniffer": "^3.5.0",
                 "tracy/tracy": "^2.4"
             },
             "suggest": {
@@ -602,7 +602,7 @@
                 "php",
                 "utf-8"
             ],
-            "time": "2019-06-17T09:03:49+00:00"
+            "time": "2019-10-25T17:54:07+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -654,16 +654,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.25.2",
+            "version": "2.25.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "443fe5f1498147e0fbc792142b5dc43e2e8a533f"
+                "reference": "d07636581795383e2fea2d711212d30f941f2039"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/443fe5f1498147e0fbc792142b5dc43e2e8a533f",
-                "reference": "443fe5f1498147e0fbc792142b5dc43e2e8a533f",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/d07636581795383e2fea2d711212d30f941f2039",
+                "reference": "d07636581795383e2fea2d711212d30f941f2039",
                 "shasum": ""
             },
             "require": {
@@ -717,7 +717,7 @@
                 "datetime",
                 "time"
             ],
-            "time": "2019-10-14T14:18:59+00:00"
+            "time": "2019-10-20T11:05:44+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -1021,16 +1021,16 @@
         },
         {
             "name": "psr/log",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "6c001f1daafa3a3ac1d8ff69ee4db8e799a654dd"
+                "reference": "bf73deb2b3b896a9d9c75f3f0d88185d2faa27e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/6c001f1daafa3a3ac1d8ff69ee4db8e799a654dd",
-                "reference": "6c001f1daafa3a3ac1d8ff69ee4db8e799a654dd",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/bf73deb2b3b896a9d9c75f3f0d88185d2faa27e2",
+                "reference": "bf73deb2b3b896a9d9c75f3f0d88185d2faa27e2",
                 "shasum": ""
             },
             "require": {
@@ -1039,7 +1039,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-master": "1.1.x-dev"
                 }
             },
             "autoload": {
@@ -1064,7 +1064,7 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2018-11-20T15:27:04+00:00"
+            "time": "2019-10-25T08:06:51+00:00"
         },
         {
             "name": "psr/simple-cache",
