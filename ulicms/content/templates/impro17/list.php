@@ -42,13 +42,13 @@ if ($id !== null) {
                     <div class="article-list-row">
                         <p>
                             <strong><a
-                                    href="<?php Template::escape(buildSEOUrl($entry->slug, $entry->redirection)); ?>"><?php Template::escape($entry->title); ?></a></strong>
+                                    href="<?php Template::escape(buildSEOUrl($entry->slug, $entry->link_url)); ?>"><?php Template::escape($entry->title); ?></a></strong>
                             <br /> <small><?php translate("date"); ?>: <?php echo strftime("%x %X", $article_date); ?></small>
                         </p>
                         <p><?php echo $excerpt; ?></p>
                         <p>
                             <a
-                                href="<?php Template::escape(buildSEOUrl($entry->slug, $entry->redirection)); ?>"><?php translate("readmore"); ?></a>
+                                href="<?php Template::escape(buildSEOUrl($entry->slug, $entry->link_url)); ?>"><?php translate("readmore"); ?></a>
                         </p>
                     </div>
                 <?php } ?>

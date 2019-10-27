@@ -258,7 +258,8 @@ if ($permissionChecker->hasPermission("pages")
         <h2 class="accordion-header"><?php translate("link_url"); ?></h2>
         <div class="accordion-content">
             <strong><?php translate("link_url"); ?>
-            </strong><br /> <input type="text" name="redirection" value="">
+            </strong>
+            <br /> <input type="text" name="link_url" value="">
         </div>
     </div>
     <div class="typedep" id="tab-language-link" style="display: none;">

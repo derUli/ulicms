@@ -305,16 +305,16 @@ if ($permissionChecker->hasPermission("pages")) {
                                    ?>"
                                    style="cursor: pointer" /> <a href="#"
                                    onclick="$('#menu_image').val('');
-                                                                   return false;"
+                                           return false;"
                                    class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?> </a>
                         </div></div>
                     <div class="typedep" id="tab-link">
                         <h2 class="accordion-header"><?php translate("link_url"); ?></h2>
                         <div class="accordion-content">
                             <strong><?php translate("link_url"); ?></strong><br /> <input
-                                type="text" name="redirection"
+                                type="text" name="link_url"
                                 value="<?php
-                                echo $row->redirection;
+                                echo $row->link_url;
                                 ?>">
                         </div>
                     </div>
@@ -406,7 +406,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                        ?>"
                                        style="cursor: pointer" /> <a href="#"
                                        onclick="$('#og_image').val('');
-                                                                       return false;"
+                                               return false;"
                                        class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?>
                                 </a>
                                 <?php
@@ -634,7 +634,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                    value="<?php Template::escape($row->image_url); ?>"
                                    style="cursor: pointer" /> <a href="#"
                                    onclick="$('#menu_image').val('');
-                                                                   return false;"
+                                           return false;"
                                    class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?>
                             </a>
                         </div>
@@ -669,7 +669,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                    value="<?php echo _esc($row->article_image); ?>"
                                    style="cursor: pointer" maxlength="255" /> <a href="#"
                                    onclick="$('#article_image').val('');
-                                                                   return false;"
+                                           return false;"
                                    class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?></a>
                         </div>
                     </div>
