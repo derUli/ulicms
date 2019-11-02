@@ -5,11 +5,11 @@
 class Node extends Link {
 
     public $type = "node";
-    public $redirection = "#";
+    public $link_url = "#";
 
     protected function fillVars($result = null) {
         parent::fillVars($result);
-        $this->redirection = "#";
+        $this->link_url = "#";
     }
 
 }

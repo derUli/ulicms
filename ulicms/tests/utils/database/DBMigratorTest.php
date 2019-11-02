@@ -1,11 +1,20 @@
 <?php
 
-use UliCMS\Exceptions\NotImplementedException;
+use UliCMS\Exceptions\SqlException;
 
 class DBMigratorTest extends \PHPUnit\Framework\TestCase {
 
     const DB_MIGRATOR_UP_DIR = "ULICMS_ROOT/tests/fixtures/migrations/up";
     const DB_MIGRATOR_DOWN_DIR = "ULICMS_ROOT/tests/fixtures/migrations/down";
+    const DB_MIGRATOR_FAILED_UP_DIR = "ULICMS_ROOT/tests/fixtures/failed_migrations/up";
+    const DB_MIGRATOR_FAILED_DOWN_DIR = "ULICMS_ROOT/tests/fixtures/failed_migrations/down";
+
+    public function tearDown() {
+        Database::dropTable("employees");
+
+        $dbmigrator = new DBMigrator("dbmigrator_test", self::DB_MIGRATOR_UP_DIR);
+        $dbmigrator->resetDBTrack("dbmigrator_test");
+    }
 
     public function testCheckVarsWithComponentEmpty() {
         $migrator = new DBMigrator("", "");
@@ -38,22 +47,6 @@ class DBMigratorTest extends \PHPUnit\Framework\TestCase {
         );
 
         $this->assertTrue($migrator->checkVars());
-    }
-
-    public function testMigrate() {
-        throw new NotImplementedException();
-    }
-
-    public function testMigrateWithStop() {
-        throw new NotImplementedException();
-    }
-
-    public function testRollback() {
-        throw new NotImplementedException();
-    }
-
-    public function testRollbackWithStop() {
-        throw new NotImplementedException();
     }
 
     public function testResetDBTrack() {
@@ -94,6 +87,82 @@ class DBMigratorTest extends \PHPUnit\Framework\TestCase {
 
         $dbmigrator->enableStrictMode();
         $this->assertTrue($dbmigrator->isStrictMode());
+    }
+
+    public function testMigrateWithStop() {
+        $dbmigrator = new DBMigrator("dbmigrator_test",
+                Path::resolve(self::DB_MIGRATOR_UP_DIR));
+        $dbmigrator->migrate("001.sql");
+
+        $columns = Database::getColumnNames("employees");
+        $this->assertCount(5, $columns);
+        $this->assertNotContains("email", $columns);
+    }
+
+    public function testMigrate() {
+        $dbmigrator = new DBMigrator("dbmigrator_test",
+                Path::resolve(self::DB_MIGRATOR_UP_DIR));
+        $dbmigrator->migrate();
+
+        $columns = Database::getColumnNames("employees");
+        $this->assertCount(6, $columns);
+        $this->assertContains("email", $columns);
+    }
+
+    public function testRollback() {
+        $dbmigrator = new DBMigrator("dbmigrator_test",
+                Path::resolve(self::DB_MIGRATOR_UP_DIR));
+        $dbmigrator->migrate();
+
+        $this->assertTrue(Database::tableExists("employees"));
+
+
+        $dbmigrator = new DBMigrator("dbmigrator_test",
+                Path::resolve(self::DB_MIGRATOR_DOWN_DIR));
+        $dbmigrator->rollback();
+
+        $this->assertFalse(Database::tableExists("employees"));
+    }
+
+    public function testRollbackWithStop() {
+        $dbmigrator = new DBMigrator("dbmigrator_test",
+                Path::resolve(self::DB_MIGRATOR_UP_DIR));
+        $dbmigrator->migrate();
+
+        $this->assertTrue(Database::tableExists("employees"));
+
+        $dbmigrator = new DBMigrator("dbmigrator_test",
+                Path::resolve(self::DB_MIGRATOR_DOWN_DIR));
+        $dbmigrator->rollback("002.sql");
+
+        $columns = Database::getColumnNames("employees");
+        $this->assertCount(5, $columns);
+        $this->assertNotContains("email", $columns);
+    }
+
+    public function testMigrateThrowsSQLException() {
+        $dbmigrator = new DBMigrator("dbmigrator_test",
+                Path::resolve(self::DB_MIGRATOR_FAILED_UP_DIR)
+        );
+        $dbmigrator->enableStrictMode();
+        $this->expectException(SqlException::class);
+        $dbmigrator->migrate();
+    }
+
+    public function testRollbackThrowsSQLException() {
+        $dbmigrator = new DBMigrator("dbmigrator_test",
+                Path::resolve(self::DB_MIGRATOR_FAILED_UP_DIR)
+        );
+        $dbmigrator->enableStrictMode();
+        $dbmigrator->migrate("001.sql");
+
+
+        $dbmigrator = new DBMigrator("dbmigrator_test",
+                Path::resolve(self::DB_MIGRATOR_FAILED_DOWN_DIR)
+        );
+
+        $this->expectException(SqlException::class);
+        $dbmigrator->rollback();
     }
 
 }

@@ -112,7 +112,7 @@ class PageController extends Controller {
             );
         }
         $model->category_id = Request::getVar("category_id", 1, "int");
-        $model->redirection = Request::getVar("redirection", NULL, "str");
+        $model->link_url = Request::getVar("link_url", NULL, "str");
         $model->menu = Request::getVar("menu", "not_in_menu", "str");
         $model->position = Request::getVar("position", 0, "int");
 
@@ -124,7 +124,7 @@ class PageController extends Controller {
         $model->theme = Request::getVar("theme", NULL, "str");
 
         if ($model instanceof Node) {
-            $model->redirection = "#";
+            $model->link_url = "#";
         }
 
         $model->cache_control = Request::getVar("cache_control", "auto", "str");

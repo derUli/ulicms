@@ -1,0 +1,1 @@
+ALTER TABLE {prefix}content CHANGE `redirection` `link_url` varchar(255) DEFAULT NULL

@@ -17,7 +17,7 @@ class BannerTest extends \PHPUnit\Framework\TestCase {
     public function tearDown() {
         Database::pQuery("DELETE FROM `{prefix}banner` where html in (? , ?)", array(
             self::HTML_TEXT1,
-            self::HTML_TEXT1
+            self::HTML_TEXT2
                 ), true);
     }
 

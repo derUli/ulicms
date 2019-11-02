@@ -15,7 +15,7 @@ class LinkTest extends \PHPUnit\Framework\TestCase {
         $link->language = "de";
         $link->author_id = 1;
         $link->group_id = 1;
-        $link->redirection = "https://www.google.de";
+        $link->link_url = "https://www.google.de";
         $link->save();
 
         $id = $link->getID();
@@ -29,19 +29,19 @@ class LinkTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("de", $loadedLink->language);
         $this->assertEquals(
                 "https://www.google.de",
-                $loadedLink->redirection
+                $loadedLink->link_url
         );
 
         $this->assertEquals("link", $loadedLink->type);
 
         $loadedLink->title = "Unit Test Updated Link";
-        $loadedLink->redirection = "https://www.ulicms.de";
+        $loadedLink->link_url = "https://www.ulicms.de";
         $loadedLink->save();
 
         $loadedLink = new Link($id);
 
         $this->assertEquals("Unit Test Updated Link", $loadedLink->title);
-        $this->assertEquals("https://www.ulicms.de", $loadedLink->redirection);
+        $this->assertEquals("https://www.ulicms.de", $loadedLink->link_url);
     }
 
     public function testUpdateCreatesDataset() {
@@ -52,7 +52,7 @@ class LinkTest extends \PHPUnit\Framework\TestCase {
         $link->language = "de";
         $link->author_id = 1;
         $link->group_id = 1;
-        $link->redirection = "https://www.google.de";
+        $link->link_url = "https://www.google.de";
 
         $this->assertNull($link->getID());
         $this->assertFalse($link->isPersistent());

@@ -1,0 +1,1 @@
+ALTER TABLE {prefix}employees drop column gibts_nicht kein gültiges sql;

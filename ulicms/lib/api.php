@@ -1158,12 +1158,12 @@ function getAllSlugs(string $lang = null): array {
 
     if (!$lang) {
         $result = db_query("SELECT slug,id FROM `" . tbname("content") .
-                "` WHERE `deleted_at` IS NULL AND redirection "
+                "` WHERE `deleted_at` IS NULL AND link_url "
                 . "NOT LIKE '#%' ORDER BY slug");
     } else {
 
         $result = db_query("SELECT slug,id FROM `" . tbname("content") .
-                "` WHERE `deleted_at` IS NULL  AND redirection "
+                "` WHERE `deleted_at` IS NULL  AND link_url "
                 . "NOT LIKE '#%' AND language ='" . db_escape($lang) .
                 "' ORDER BY slug");
     }

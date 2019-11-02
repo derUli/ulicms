@@ -70,8 +70,7 @@ if (Request::getVar("run_cron")) {
 
 $status = check_status();
 
-if (Settings::get("redirection") != ""
-        and Settings::get("redirection") != false) {
+if (Settings::get("redirection")) {
     do_event("before_global_redirection");
     header("Location: " . Settings::get("redirection"));
     exit();
@@ -245,7 +244,6 @@ foreach ($top_files as $file) {
         require $file;
         break;
     }
-
 }
 
 do_event("before_content");

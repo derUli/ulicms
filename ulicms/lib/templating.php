@@ -344,14 +344,14 @@ function get_redirection(?string $page = null): ?string {
     if (!$page) {
         $page = get_requested_pagename();
     }
-    $sql = "SELECT `redirection` FROM " . tbname("content") .
+    $sql = "SELECT `link_url` FROM " . tbname("content") .
             " WHERE slug='" . db_escape($page) . "'  AND language='" .
             db_escape($_SESSION["language"]) . "' and type='link'";
     $result = db_query($sql);
     if (db_num_rows($result) > 0) {
         $dataset = db_fetch_object($result);
-        if (!empty($dataset->redirection) and ! is_null($dataset->redirection)) {
-            return $dataset->redirection;
+        if (!empty($dataset->link_url) and ! is_null($dataset->link_url)) {
+            return $dataset->link_url;
         }
     }
     return null;
@@ -774,7 +774,7 @@ function get_menu(string $name = "top", ?int $parent_id = null, bool $recursive 
     $html = "";
     $name = db_escape($name);
     $language = $_SESSION["language"];
-    $sql = "SELECT id, slug, access, redirection, title, alternate_title, menu_image, target, type, link_to_language, position FROM " . tbname("content") . " WHERE menu='$name' AND language = '$language' AND active = 1 AND `deleted_at` IS NULL AND hidden = 0 and type <> 'snippet' and parent_id ";
+    $sql = "SELECT id, slug, access, link_url, title, alternate_title, menu_image, target, type, link_to_language, position FROM " . tbname("content") . " WHERE menu='$name' AND language = '$language' AND active = 1 AND `deleted_at` IS NULL AND hidden = 0 and type <> 'snippet' and parent_id ";
 
     if (is_null($parent_id)) {
         $sql .= " IS NULL ";
@@ -826,13 +826,13 @@ function get_menu(string $name = "top", ?int $parent_id = null, bool $recursive 
                 }
             }
 
-            $redirection = $row->redirection;
+            $redirection = $row->link_url;
             if ($row->type == "language_link" && !is_null($row->link_to_language)) {
                 $language = new Language($row->link_to_language);
                 $redirection = $language->getLanguageLink();
             }
             // if content has type link or node url is the target url else build seo url
-            $url = ($row->type == "link" or $row->type == "node") ? $row->redirection : buildSEOUrl($row->slug);
+            $url = ($row->type == "link" or $row->type == "node") ? $row->link_url : buildSEOUrl($row->slug);
             $url = Template::getEscape($url);
 
             if (get_requested_pagename() != $row->slug) {

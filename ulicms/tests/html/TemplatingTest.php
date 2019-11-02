@@ -1,8 +1,12 @@
 <?php
 
+use UliCMS\Models\Content\Advertisement\Banner;
+
 class TemplatingTest extends \PHPUnit\Framework\TestCase {
 
     private $homepageOwner;
+
+    const HTML_TEXT1 = "My first Banner HTML";
 
     public function setUp() {
         $this->homepageOwner = Settings::get("homepage_owner");
@@ -31,6 +35,10 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         unset($_GET["slug"]);
         unset($_SESSION["login_id"]);
         unset($_SESSION["language"]);
+
+        Database::pQuery("DELETE FROM `{prefix}banner` where html like ?", array(
+            self::HTML_TEXT1 . "%",
+                ), true);
     }
 
     private function cleanUp() {
@@ -362,6 +370,34 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         ob_start();
         homepage_owner();
         $this->assertEquals("John Doe", ob_get_clean());
+    }
+
+    private function createTestBanners() {
+        for ($i = 1; $i < 20; $i++) {
+            $banner = new Banner();
+            $banner->setType("html");
+            $banner->setHtml(
+                    self::HTML_TEXT1 . " " . uniqid()
+            );
+            $banner->save();
+        }
+    }
+
+    public function testRandomBanner() {
+        $this->createTestBanners();
+
+        ob_start();
+        random_banner();
+        $banner1 = ob_get_clean();
+
+        ob_start();
+        random_banner();
+        $banner2 = ob_get_clean();
+
+        $this->assertNotEmpty($banner1);
+        $this->assertNotEmpty($banner2);
+
+        $this->assertNotEquals($banner1, $banner2);
     }
 
 }
