@@ -12,6 +12,7 @@ class UliCMSVersion {
             2020,
             1
         ];
+
         $this->update = "";
     }
 

@@ -168,11 +168,12 @@ class Video extends Model {
     }
 
     public function getCreated(): int {
-        return $this->created;
+        return intval($this->created);
     }
 
     public function getUpdated(): ?int {
-        return $this->updated;
+        return !is_null($this->updated) ?
+                intval($this->updated) : null;
     }
 
     public function setName(?string $val): void {
