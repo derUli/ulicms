@@ -13,7 +13,7 @@
         "jquery-form": "4.x",
         "jscolor-picker": "2.x",
         "password-strength-meter": "1.x",
-        "select2": "4.0.10",
+        "select2": "^4.0.11",
         "slug": "1.x",
         "zenscroll": "^4.0.2"
     },
