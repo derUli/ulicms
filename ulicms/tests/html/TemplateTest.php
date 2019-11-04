@@ -74,7 +74,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
             $nothing = Template::renderPartial("nothing", "impro17");
             $this->fail("FileNotFoundException not thrown");
         } catch (FileNotFoundException $e) {
-            $this->assertNotNull("Partial not found test successfull");
+            $this->assertNotNull("Partial not found test successful");
         }
     }
 

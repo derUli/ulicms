@@ -28,7 +28,7 @@ class LogoUploadController extends Controller {
                 }
 
                 Settings::set("logo_image", $logo_upload_filename);
-                do_event("after_upload_logo_successfull");
+                do_event("after_upload_logo_successful");
             }
 
             do_event("after_upload_logo");

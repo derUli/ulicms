@@ -301,9 +301,9 @@ add_translation("PHARDATA_NOT_AVAILABLE", "Eine für das Entpacken der Pakete be
 Bitte aktualisieren Sie die Serversoftware auf PHP Version 5.3.0 oder neuer.");
 add_translation("NOTHING_TO_DO", "Nothing to do");
 add_translation("DOWNLOAD_FAILED", "Download failed (%pkg%)");
-add_translation("INSTALLATION_SUCCESSFULL", "Installation successfull (%pkg%)");
+add_translation("INSTALLATION_SUCCESSFUL", "Installation successful (%pkg%)");
 add_translation("EXTRACTION_OF_PACKAGE_FAILED", "Extracting file failed. (%pkg%)");
-add_translation("PACKAGE_SUCCESSFULL_UPLOADED", "The package \"%file%\" was successfully installed.");
+add_translation("PACKAGE_SUCCESSFULLY_UPLOADED", "The package \"%file%\" was successfully installed.");
 add_translation("INSALLATION_FAILED", "The package \"%file%\" could not be installed.");
 add_translation("UPLOAD_FAILED", "File Upload failed!");
 
@@ -333,20 +333,6 @@ add_translation("ADMINS", "Only Admins");
 
 add_translation("TARGET_SELF", "In this window");
 add_translation("TARGET_BLANK", "In a new window");
-
-// Import
-add_translation("JSON_IMPORT", "JSON Import");
-add_translation("IMPORT_INTO_TABLE", "Import into table");
-add_translation("DO_IMPORT", "Run Import");
-
-add_translation("IMPORT_INTO_TABLE_SUCCESSFULL", "Import into table %tabelle% was successfull!");
-
-add_translation("NOT_A_JSON_FILE", "This is not a JSON file!");
-
-// Export
-add_translation("JSON_EXPORT", "JSON Export");
-add_translation("EXPORT_INTO_TABLE", "Export table");
-add_translation("DO_EXPORT", "Run Export");
 
 // Shortcuts
 add_translation("ONLY_IN_BACKEND", "Only at Backend");
@@ -458,7 +444,7 @@ add_translation("RESET_PASSWORD_SUBJECT", "Reset Password");
 add_translation("RESET_PASSWORD", "Reset Password");
 
 add_translation("NO_SUCH_USER", "There is no such user.");
-add_translation("PASSWORD_RESET_SUCCESSFULL", "An email with a link to reset your password was sent");
+add_translation("PASSWORD_RESET_SUCCESSFUL", "An email with a link to reset your password was sent");
 
 add_translation("REQUIRE_PASSWORD_CHANGE_NOTICE", "You must change your password.");
 

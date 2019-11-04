@@ -303,9 +303,9 @@ add_translation("PHARDATA_NOT_AVAILABLE", "Eine für das Entpacken der Pakete be
 Bitte aktualisieren Sie die Serversoftware auf PHP Version 5.3.0 oder neuer.");
 add_translation("NOTHING_TO_DO", "Nichts zu tun.");
 add_translation("DOWNLOAD_FAILED", "Download fehlgeschlagen (%pkg%)");
-add_translation("INSTALLATION_SUCCESSFULL", "Installation erfolgreich (%pkg%)");
+add_translation("INSTALLATION_SUCCESSFUL", "Installation erfolgreich (%pkg%)");
 add_translation("EXTRACTION_OF_PACKAGE_FAILED", "Entpacken der Datei fehlgeschlagen (%pkg%)");
-add_translation("PACKAGE_SUCCESSFULL_UPLOADED", "Das Paket \"%file%\" wurde erfolgreich installiert.");
+add_translation("PACKAGE_SUCCESSFULLY_UPLOADED", "Das Paket \"%file%\" wurde erfolgreich installiert.");
 add_translation("UPLOAD_FAILED", "Dateiupload fehlgeschlagen!");
 
 // Info
@@ -331,18 +331,6 @@ add_translation("ADMINS", "Admin");
 
 add_translation("TARGET_SELF", "In diesem Fenster");
 add_translation("TARGET_BLANK", "In einem neuen Fenster");
-
-// Import
-add_translation("JSON_IMPORT", "JSON Import");
-add_translation("IMPORT_INTO_TABLE", "Importe in Tabelle");
-add_translation("DO_IMPORT", "Importieren");
-add_translation("IMPORT_INTO_TABLE_SUCCESSFULL", "Import in Tabelle %table% erfolgreich!");
-add_translation("NOT_A_JSON_FILE", "Diese Datei ist nicht im JSON Format!");
-
-// Export
-add_translation("JSON_EXPORT", "JSON Export");
-add_translation("EXPORT_INTO_TABLE", "Exportiere Tabelle");
-add_translation("DO_EXPORT", "Exportieren");
 
 // Shortcuts
 add_translation("ONLY_IN_BACKEND", "Nur im Backend");
@@ -452,7 +440,7 @@ add_translation("RESET_PASSWORD_SUBJECT", "Passwort zurücksetzen");
 add_translation("RESET_PASSWORD", "Passwort zurücksetzen");
 
 add_translation("NO_SUCH_USER", "Es existiert kein Benutzerkonto mit diesem Namen.");
-add_translation("PASSWORD_RESET_SUCCESSFULL", "Sie bekommen demnächst eine E-Mail mit einem Link zum Zurücksetzen des Passworts zugeschickt.");
+add_translation("PASSWORD_RESET_SUCCESSFUL", "Sie bekommen demnächst eine E-Mail mit einem Link zum Zurücksetzen des Passworts zugeschickt.");
 
 add_translation("ENABLE_PASSWORD_RESET", "Passwort kann zurückgesetzt werden");
 
