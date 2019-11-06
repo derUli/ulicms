@@ -644,24 +644,12 @@ h2.accordion-header {
     display: inline-block;
     width: 37.5px;
 }
-h1 {
+h1, h2, h3, h4, h5, h6 {
     margin-bottom: 20px;
+    word-break: break-word;
 }
-h2 {
-    margin-bottom: 20px;
-}
-h3 {
-    margin-bottom: 20px;
-}
-h4 {
-    margin-bottom: 20px;
-}
-h5 {
-    margin-bottom: 20px;
-}
-h6 {
-    margin-bottom: 20px;
-}
+
+
 #msgcontainer {
     padding-top: 16px;
 }
