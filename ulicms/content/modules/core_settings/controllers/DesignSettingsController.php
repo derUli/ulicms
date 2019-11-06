@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Utils\CacheUtil;
+use UliCMS\Packages\Theme;
 
 class DesignSettingsController extends Controller {
 
@@ -179,17 +180,13 @@ class DesignSettingsController extends Controller {
 			HTTPStatusCodeResult(HttpStatusCode::UNPROCESSABLE_ENTITY);
 		}
 
-		$screenshotFiles = array(
-			"screenshot.jpg",
-			"screenshot.png",
-			"screenshot.gif"
-		);
-		foreach ($screenshotFiles as $file) {
-			$fullPath = getTemplateDirPath($theme) . $file;
-			if (file_exists($fullPath)) {
-				HTMLResult(UliCMS\HTML\imageTag($fullPath));
-			}
+		$theme = new Theme($theme);
+		$screenshot = $theme->getScreenshotFile();
+
+		if ($screenshot) {
+			HTMLResult(UliCMS\HTML\imageTag($screenshot));
 		}
+
 		HTTPStatusCodeResult(HttpStatusCode::NOT_FOUND);
 	}
 
