@@ -39,7 +39,9 @@ if ($permissionChecker->hasPermission("list_packages")) {
 							$module->getName(), "admin_permission"
 					);
 					$userIsPermitted = (
-							$adminPermission and $permissionChecker->hasPermission($adminPermission)) or ( !$adminPermission
+							$adminPermission and
+							$permissionChecker->hasPermission($adminPermission))
+							or ( !$adminPermission
 							);
 					$btnClass = ($hasAdminPage && $userIsPermitted) ?
 							"btn btn-primary" :
@@ -133,8 +135,6 @@ if ($permissionChecker->hasPermission("list_packages")) {
 			<tbody>
 				<?php
 				foreach ($themes as $theme) {
-					$inUse = (Settings::get("theme") == $theme or
-							Settings::get("mobile_theme") == $theme);
 					$inGeneralUse = (Settings::get("theme") == $theme);
 					$inMobileUse = (Settings::get("mobile_theme") == $theme)
 					?>
@@ -145,25 +145,44 @@ if ($permissionChecker->hasPermission("list_packages")) {
 						</td>
 						<td class="actions">
 							<div class="btn-toolbar">
-								<?php $colorClasses = $inGeneralUse ?
-										"btn-success disabled" : "btn-danger";
+								<?php
+								$colorClasses = $inGeneralUse ?
+										"btn-success" : "btn-danger";
 								?>
 								<span
 									class="btn <?php echo $colorClasses; ?>
-									btn-sm icon coming-soon"
+									btn-sm icon default-theme-icon"
 									title="<?php
 									translate("set_as_default_theme");
 									?>"
-								>
+									data-theme="<?php esc($theme); ?>"
+									data-url="<?php
+									echo ModuleHelper::buildMethodCallUrl(
+											DesignSettingsController::class,
+											"setDefaultTheme",
+											"name={$theme}");
+									?>"
+									>
 									<i class="fa fa-desktop"></i>
 								</span>
-								<?php $colorClasses = $inMobileUse ? "btn-success " : "btn-danger";
+								<?php
+								$colorClasses = $inMobileUse ?
+										"btn-success " : "btn-danger";
 								?>
 								<span
-									class="btn <?php echo $colorClasses; ?> btn-sm icon coming-soon"
+									class="btn <?php echo $colorClasses; ?>
+									btn-sm icon default-mobile-theme-icon"
 									title="<?php
 									translate("set_as_mobile_default_theme");
-									?>">								   
+									?>"
+									data-theme="<?php esc($theme); ?>"
+									data-url="<?php
+									echo ModuleHelper::buildMethodCallUrl(
+											DesignSettingsController::class,
+											"setDefaultMobileTheme",
+											"name={$theme}");
+									?>"
+									>
 									<i class="fas fa-mobile-alt"></i>
 								</span>
 								<span class="btn btn-info btn-sm remote-alert icon"
@@ -172,8 +191,9 @@ if ($permissionChecker->hasPermission("list_packages")) {
 									  echo ModuleHelper::buildMethodCallUrl(
 											  "PackageController",
 											  "getThemeInfo",
-											  "name={$theme}"); ?>"
-								>
+											  "name={$theme}");
+									  ?>"
+									  >
 									<i class="fa fa-info-circle" aria-hidden="true"></i>
 								</span>
 								<?php
@@ -188,8 +208,7 @@ if ($permissionChecker->hasPermission("list_packages")) {
 									));
 									?>
 									<button type="submit" class="btn btn-danger btn-sm icon"
-											title="<?php translate("uninstall"); ?>"
-											<?php if ($inUse) echo "disabled"; ?>>
+											title="<?php translate("uninstall"); ?>">
 										<i class="fa fa-trash" aria-hidden="true"></i>
 									</button>
 									<?php
