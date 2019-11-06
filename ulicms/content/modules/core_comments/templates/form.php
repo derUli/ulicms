@@ -13,7 +13,6 @@ if (Vars::get("comments_enabled")) {
             case CommentStatus::PENDING:
                 $cssClass .= " alert-success";
                 break;
-                break;
             case CommentStatus::SPAM:
                 $cssClass .= " alert-warning";
                 break;

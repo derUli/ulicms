@@ -62,10 +62,10 @@ if ($permissionChecker->hasPermission("list_packages")) {
                                 ?></td>
                             <td class="actions">
                                 <div class="btn-toolbar">
-                                    <a href="#" class="btn btn-info btn-sm remote-alert icon"
+                                    <span href="#" class="btn btn-info btn-sm remote-alert icon"
                                        title="<?php translate("info"); ?>"
                                        data-url="<?php echo ModuleHelper::buildMethodCallUrl(PackageController::class, "getModuleInfo", "name={$module->getName()}"); ?>"><i
-                                            class="fas fa-info-circle"></i> </a>
+                                            class="fas fa-info-circle"></i> </span>
                                         <?php
                                         $canToggleModule = (getModuleMeta($module->getName(), "source") != "core" and $permissionChecker->hasPermission("enable_disable_module"));
                                         echo ModuleHelper::buildMethodCallForm(PackageController::class, "toggleModule", array(
@@ -138,11 +138,11 @@ if ($permissionChecker->hasPermission("list_packages")) {
                             <?php } ?></td>
                         <td class="actions">
                             <div class="btn-toolbar">
-                                <a href="#" class="btn btn-info btn-sm remote-alert icon"
+                                <span href="#" class="btn btn-info btn-sm remote-alert icon"
                                    title="<?php translate("info"); ?>"
                                    data-url="<?php echo ModuleHelper::buildMethodCallUrl("PackageController", "getThemeInfo", "name={$theme}"); ?>">
                                     <i class="fa fa-info-circle" aria-hidden="true"></i>
-                                </a>
+                                </span>
                                 <?php
                                 if ($permissionChecker->hasPermission("remove_packages") and getModuleMeta($module->getName(), "source") != "core") {
                                     echo ModuleHelper::buildMethodCallForm(PackageController::class, "uninstallTheme", array(

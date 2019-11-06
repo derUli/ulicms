@@ -43,7 +43,7 @@ $passwordSecurityTranslation->render();
 </p>
 </div>
 </div>
-<a href="#" id="scroll-to-top">
+<a href="#" id="scroll-to-top" class="has-pointer">
     <?php echo icon("fas fa-arrow-circle-up"); ?>
 </a>
 <?php do_event("backend_footer"); ?>

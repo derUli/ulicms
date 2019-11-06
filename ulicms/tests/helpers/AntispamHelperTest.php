@@ -59,6 +59,7 @@ class AntispamHelperTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue(AntiSpamHelper::isRtl("ایران یک دولت نیست"));
         $this->assertTrue(AntiSpamHelper::isRtl("אין אלוהים."));
         $this->assertTrue(AntiSpamHelper::isRtl("لا يوجد إله."));
+		$this->assertTrue(AntiSpamHelper::isRtl("לופטים"));
     }
 
     public function testIsRtlReturnsFalse() {

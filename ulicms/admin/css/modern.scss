@@ -39,15 +39,24 @@ body {
     -ms-overflow-style: scrollbar;
 }
 
+.has-pointer,
+input.kcfinder,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+input[type="image"],
+button {
+    cursor: pointer
+}
+
 #scroll-to-top{
     position: fixed;
     bottom: 10px;
     right: 10px;
-	padding: 10px;
-    cursor: pointer;
+    padding: 10px;
     display: none;
     font-size: 32px;
-	z-index: 5
+    z-index: 5
 }
 
 button:disabled, .disabled {
@@ -317,7 +326,6 @@ button {
     background-color: $background_color_4;
     color: $color_9;
     padding: 10px;
-    cursor: pointer;
 }
 input[type="text"] {
     width: 100%;
@@ -627,11 +635,8 @@ h2.accordion-header {
         }
     }
 }
-#menu-toggle {
-    cursor: pointer;
-}
+
 #menu-clear-cache {
-    cursor: pointer;
     display: inline-block;
     width: 37.5px;
 }
@@ -659,10 +664,6 @@ h6 {
 }
 #msgcontainer {
     padding-top: 16px;
-}
-
-input[type="image"] {
-    cursor: pointer;
 }
 
 input[type="radio"],
@@ -735,9 +736,7 @@ input[type="checkbox"]{
 .btn-primary {
     background-color: $background_color_4;
 }
-input.kcfinder {
-    cursor: pointer;
-}
+
 .normal-weight {
     font-weight: normal;
 }
@@ -974,6 +973,14 @@ pre {
         padding: 0 6px;
         font-size: 0.35em;
     }
+}
+
+.comment-link{
+    font-weight: 500;
+}
+
+.comment-link:hover{
+    text-decoration: underline;
 }
 
 #designForm{

@@ -131,7 +131,7 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
                         ?>
                         <div class="row pull-right top-right-icons">
                             <div class="<?php esc($colClass); ?>">
-                                <a href="#" id="menu-clear-cache"
+                                <a href="#" class="has-pointer" id="menu-clear-cache"
                                    data-url="<?php echo ModuleHelper::buildMethodCallUrl("PerformanceSettingsController", "clearCache", "clear_cache=1"); ?>">
                                     <i class="fas fa-broom"></i></a>
                                 <a href="#" id="menu-clear-cache-loading" style="display: none;"><i class="fa fa-spinner fa-spin"></i></a>
@@ -154,7 +154,7 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
                                 </div>
                             <?php } ?>
                             <div class="<?php esc($colClass); ?>">
-                                <a id="menu-toggle"><i class="fa fa-bars"></i> </a>
+                                <a id="menu-toggle" class="has-pointer"><i class="fa fa-bars"></i> </a>
                             </div>
                         </div>
                     <?php } ?>
