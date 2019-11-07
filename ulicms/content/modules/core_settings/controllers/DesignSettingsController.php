@@ -240,7 +240,11 @@ class DesignSettingsController extends Controller {
 	public function setDefaultMobileTheme() {
 		$theme = Request::getVar("name");
 
-		Settings::set("mobile_theme", $theme);
+		if($theme !== Settings::get("mobile_theme")){
+			Settings::set("mobile_theme", $theme);
+		} else {
+			Settings::delete("mobile_theme");
+		}
 
 		Response::sendHttpStatusCodeResultIfAjax(
 				HTTPStatusCode::OK,
