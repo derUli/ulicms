@@ -3,6 +3,7 @@
 use UliCMS\Security\PermissionChecker;
 use UliCMS\Constants\RequestMethod;
 use UliCMS\Packages\PatchManager;
+use UliCMS\Packages\Theme;
 
 $permissionChecker = new PermissionChecker(get_user_id());
 
@@ -135,6 +136,8 @@ if ($permissionChecker->hasPermission("list_packages")) {
 			<tbody>
 				<?php
 				foreach ($themes as $theme) {
+					$theTheme = new Theme($theme);
+
 					$inGeneralUse = (Settings::get("theme") == $theme);
 					$inMobileUse = (Settings::get("mobile_theme") == $theme)
 					?>
@@ -196,6 +199,20 @@ if ($permissionChecker->hasPermission("list_packages")) {
 									  >
 									<i class="fa fa-info-circle" aria-hidden="true"></i>
 								</span>
+								<?php if ($theTheme->hasScreenshot()) {
+									?>
+									<span class="btn btn-info btn-sm remote-alert icon"
+										  title="<?php translate("show_preview"); ?>"
+										  data-url="<?php
+										  echo ModuleHelper::buildMethodCallUrl(
+												  DesignSettingsController::class,
+												  "getThemePreview",
+												  "theme={$theme}");
+										  ?>"
+										  >
+										<i class="far fa-image"></i>
+									</span>
+								<?php } ?>
 								<?php
 								if ($permissionChecker->hasPermission("remove_packages") and getModuleMeta($module->getName(), "source") != "core") {
 									echo ModuleHelper::buildMethodCallForm(PackageController::class, "uninstallTheme", array(

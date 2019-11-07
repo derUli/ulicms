@@ -27,3 +27,4 @@ add_translation("package", "Paket");
 
 add_translation("set_as_default_theme", "Als Standard-Theme festlegen");
 add_translation("set_as_mobile_default_theme", "Als Standard-Theme für Mobilgeräte festlegen");
+add_translation("show_preview", "Vorschau anzeigen");

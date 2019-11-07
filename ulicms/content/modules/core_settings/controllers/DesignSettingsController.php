@@ -48,15 +48,12 @@ class DesignSettingsController extends Controller {
 			Settings::set("additional_menus", $_REQUEST["additional_menus"]);
 		}
 
-
-
 		// Wenn Formular abgesendet wurde, Wert Speichern
 		$themes = getAllThemes();
 		if (faster_in_array($_REQUEST["theme"], $themes)) {
 			Settings::set("theme", $_REQUEST["theme"]);
 			$theme = $_REQUEST["theme"];
 		}
-
 
 		// Wenn Formular abgesendet wurde, Wert Speichern
 		$themes = getAllThemes();
@@ -66,8 +63,6 @@ class DesignSettingsController extends Controller {
 			Settings::set("mobile_theme", $_REQUEST["mobile_theme"]);
 			$mobile_theme = $_REQUEST["mobile_theme"];
 		}
-
-
 
 		if ($_REQUEST["default_font"] != Settings::get("default_font")) {
 			if (!empty($_REQUEST["custom-font"])) {
@@ -184,7 +179,14 @@ class DesignSettingsController extends Controller {
 		$screenshot = $theme->getScreenshotFile();
 
 		if ($screenshot) {
-			HTMLResult(UliCMS\HTML\imageTag($screenshot));
+			HTMLResult(
+					UliCMS\HTML\imageTag(
+							$screenshot,
+							[
+								"class" => "img-responsive"
+							]
+					)
+			);
 		}
 
 		HTTPStatusCodeResult(HttpStatusCode::NOT_FOUND);

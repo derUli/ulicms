@@ -28,3 +28,4 @@ add_translation("package", "Package");
 
 add_translation("set_as_default_theme", "Set as default theme");
 add_translation("set_as_mobile_default_theme", "Set as mobile default theme");
+add_translation("show_preview", "Show Preview");
