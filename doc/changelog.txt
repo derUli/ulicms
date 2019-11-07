@@ -8,6 +8,7 @@ Neue Features:
 * Nach-Oben Pfeil in der rechten unten Ecke hinzugefügt
 * Der Wert des Robots-Metatags kann je Seite festgelegt werden
 * Shellscripts nun mit Robo implementiert
+* Es kann nun auch unter "Pakete" das Standard-Design ausgewählt  und die Vorschau von Themes angezeigt werden
 
 Neue API-Methoden
 * User->getAllGroups(): array
