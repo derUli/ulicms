@@ -7,4 +7,4 @@ if (!(php_sapi_name() === 'cli' or defined('STDIN'))) {
     exit();
 }
 
-echo "This tool is obsolete use vendor/bin/robo instead to execute CLI tasks";
+echo "This tool is obsolete. Use vendor/bin/robo instead to execute CLI tasks";
