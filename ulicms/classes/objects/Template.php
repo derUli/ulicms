@@ -237,10 +237,8 @@ class Template {
 				" where id = $id";
 		$result = Database::query($sql);
 		$dataset = Database::fetchObject($result);
-		if ($dataset->show_headline) {
-			return str_replace("%title%", get_title(null, true), $format);
-		}
-		return null;
+
+		return str_replace("%title%", get_title(null, true), $format);
 	}
 
 	public static function doctype(): void {
@@ -334,7 +332,7 @@ class Template {
 		} catch (DatasetNotFoundException $e) {
 			$robots = Settings::get("robots");
 		}
-		
+
 		if ($robots) {
 			$robots = apply_filter($robots, "meta_robots");
 			echo '<meta name="robots" content="' . $robots . '"/>';

@@ -1,14 +1,15 @@
 <?php
 
-use UliCMS\Exceptions\DatasetNotFoundException;
 use UliCMS\Exceptions\FileNotFoundException;
 use UliCMS\Utils\File;
+use function UliCMS\HTML\stringContainsHtml;
 
 class TemplateTest extends \PHPUnit\Framework\TestCase {
 
 	private $savedSettings = [];
 
 	public function setUp() {
+		Translation::loadAllModuleLanguageFiles("en");
 		Flags::setNoCache(true);
 		$this->cleanUp();
 
@@ -120,8 +121,16 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetBaseMetas() {
 		$baseMetas = Template::getBaseMetas();
-		$this->assertTrue(str_contains('<meta http-equiv="content-type" content="text/html; charset=utf-8"/>', $baseMetas));
-		$this->assertTrue(str_contains('<meta charset="utf-8"/>', $baseMetas));
+		$this->assertTrue(
+				str_contains(
+						'<meta http-equiv="content-type" content="text/html; charset=utf-8"/>',
+						$baseMetas)
+		);
+		$this->assertTrue(
+				str_contains(
+						'<meta charset="utf-8"/>', $baseMetas
+				)
+		);
 	}
 
 	public function testGetBaseMetasVideoWidth100Percent() {
@@ -174,7 +183,6 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
 
 		$_SESSION["language"] = "en";
 		$this->assertEquals("SiteSlogan English", Template::getSiteSlogan());
-		$this->cleanUp();
 	}
 
 	public function testGetMottoWithoutLanguage() {
@@ -193,7 +201,6 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
 	public function testGetSiteSloganWithExistingLanguage() {
 		$_SESSION["language"] = "fr";
 		$this->assertEquals("SiteSlogan General", Template::getSiteSlogan());
-		$this->cleanUp();
 	}
 
 	public function testGetSiteSloganWithNotExistingLanguage() {
@@ -208,16 +215,44 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
 		$this->assertContains($expected, Template::getjQueryScript());
 	}
 
-	public function testGetContent() {
+	public function testGetContentReturnsContent() {
 		$_GET["slug"] = "lorem_ipsum";
 		$_SESSION["language"] = "de";
 		$_GET["REQUEST_URI"] = "/lorem_ipsum.html";
 
 		$content = Template::getContent();
 
-		$this->assertTrue(str_contains("Lorem ipsum dolor sit amet, " .
-						"consetetur sadipscing elitr", $content));
-		$this->cleanUp();
+		$this->assertStringContainsString(
+				"Lorem ipsum dolor sit amet, " .
+				"consetetur sadipscing elitr", $content
+		);
+	}
+
+	public function testContentOutputsContent() {
+		$_GET["slug"] = "lorem_ipsum";
+		$_SESSION["language"] = "de";
+		$_GET["REQUEST_URI"] = "/lorem_ipsum.html";
+
+		ob_start();
+		Template::content();
+		$content = ob_get_clean();
+
+		$this->assertStringContainsString(
+				"Lorem ipsum dolor sit amet, consetetur sadipscing elitr",
+				$content
+		);
+	}
+
+	public function testGetContentReturnsNotFound() {
+		$_GET["slug"] = "gibts_nicht";
+		$_SESSION["language"] = "de";
+		$_GET["REQUEST_URI"] = "/gibts_nicht.html";
+
+		$content = Template::getContent();
+
+		$this->assertStringContainsString(
+				"This page doesn't exist.", $content
+		);
 	}
 
 	public function testGetLanguageSelection() {
@@ -474,12 +509,18 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
 
 		ob_start();
 		Template::OgHTMLPrefix();
-		$this->assertEquals("<html prefix=\"og: http://ogp.me/ns#\" lang=\"en\">", ob_get_clean());
+		$this->assertEquals(
+				"<html prefix=\"og: http://ogp.me/ns#\" lang=\"en\">",
+				ob_get_clean()
+		);
 
 		$_SESSION["language"] = "de";
 		ob_start();
 		Template::OgHTMLPrefix();
-		$this->assertEquals("<html prefix=\"og: http://ogp.me/ns#\" lang=\"de\">", ob_get_clean());
+		$this->assertEquals(
+				"<html prefix=\"og: http://ogp.me/ns#\" lang=\"de\">",
+				ob_get_clean()
+		);
 		unset($_SESSION["language"]);
 	}
 
@@ -488,6 +529,89 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
 		$_SESSION["language"] = "de";
 
 		$this->assertNotEmpty(Template::getBaseMetas());
+	}
+
+	public function testEditButtonNotLoggedIn() {
+		ob_start();
+		Template::editButton();
+		$this->assertEmpty(ob_get_clean());
+	}
+
+	public function testGetHeadlineNotFound() {
+		$_GET["slug"] = "gibts_echt_nicht";
+		$_SESSION["language"] = "de";
+
+		$this->assertEquals(
+				"<h2>Page not found</h2>",
+				Template::getHeadline("<h2>%title%</h2>")
+		);
+	}
+
+	public function testHeadlinePrintsString() {
+		$pages = ContentFactory::getAllRegular();
+
+		$first = $pages[0];
+
+		$_GET["slug"] = $first->slug;
+		$_SESSION["language"] = $first->language;
+
+		ob_start();
+		Template::headline("<h3>%title%</h3>");
+
+		$this->assertEquals("<h3>{$first->title}</h3>", ob_get_clean());
+	}
+
+	public function testComments() {
+		$_GET["slug"] = "gibts_echt_nicht";
+		$_SESSION["language"] = "de";
+
+		ob_start();
+		Template::comments();
+		$this->assertEmpty(ob_get_clean());
+	}
+
+	private function getPageWithCommentsEnabled() {
+		$manager = new UserManager();
+		$users = $manager->getAllUsers();
+		$user = $users[0];
+		$user_id = $user->getId();
+
+		$page = new Page();
+		$page->title = "Test Page " . time();
+		$page->slug = "test-page-" . time();
+		$page->language = "de";
+		$page->menu = "not_in_menu";
+		$page->content = "<p>Wir schreiben das Jahr [year] des fliegenden " .
+				"Spaghettimonsters</p>";
+
+		$user_id = $user->getId();
+		$groups = Group::getAll();
+		$group = $groups[0];
+		$group_id = $group->getId();
+
+		$page->author_id = $user_id;
+		$page->group_id = $group_id;
+		$page->comments_enabled = 1;
+
+		$page->save();
+
+		return $page;
+	}
+
+	public function testGetCommentsReturnsHtml() {
+		$page = $this->getPageWithCommentsEnabled();
+
+		$_GET["slug"] = $page->slug;
+		$_SESSION["language"] = $page->language;
+
+		$commentsController = ControllerRegistry::get("CommentsController");
+		$commentsController->beforeHtml();
+
+		$html = Template::getComments();
+		$this->assertTrue(stringContainsHtml($html));
+
+		$this->assertStringContainsString("Send comment", $html);
+		$this->assertStringContainsString("Your E-Mail Address", $html);
 	}
 
 }
