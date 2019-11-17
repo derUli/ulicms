@@ -1,11 +1,11 @@
-===== Neues in UliCMS 2020.1 =====
+===== Neues in UliCMS 2019.4.1 =====
 
 Neue Features:
 * Serverseitige Pagination für Seitenverwaltung
 * Diverse Performance Verbesserungen
 * CKEditor aktualisiert auf Version 4.12.1
 * Ausgabe von Content als PDF wird nun auch im Cache gespeichert
-* Icon zum Nach Oben Scrollen in der Ecke rechts unten hinzugefügt
+* Icon zum nach oben scrollen in der Ecke rechts unten hinzugefügt
 * Der Wert des Robots-Metatags kann je Seite festgelegt werden
 * Shellscripts sind nun mit Robo implementiert
 * Es kann nun auch unter "Pakete" das Standard-Design ausgewählt und die Vorschau von Themes angezeigt werden
@@ -27,10 +27,12 @@ Entfernte API-Methoden:
 * the_url(): string
 * set_eTagHeaders(string $identifier, int $timestamp): void
 * browsercacheOneDay(int $modified = null): void
+* ACL->setPermission(string $name, bool $value, int $group_id): void
 
 Verbesserungen:
 * Übersetzung "Limit" in "Einträge je Seite" umbenannt
 * Cachings von Content-Ausgaben im *.pdf, *.csv, *.json und *.txt Format optimiert
+* Bei "Patch hochladen" Icons zu den Buttons hinzugefügt
 
 Entfernte Features:
 * Dropdown Filter
