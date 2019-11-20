@@ -44,7 +44,8 @@
 			"symfony/polyfill-mbstring": "*",
 			"dereuromark/media-embed": "*",
 			"jimmiw/php-time-ago": "*",
-			"consolidation/robo": "*"
+			"consolidation/robo": "*",
+                "lasserafn/php-initial-avatar-generator": "^4.0"
         },
         "require-dev": {
 			"phpunit/phpunit": "^7.0",

@@ -2,12 +2,14 @@
 
 use UliCMS\Security\Encryption;
 use UliCMS\Exceptions\NotImplementedException;
+use UliCMS\Utils\CacheUtil;
 
 class UserTest extends \PHPUnit\Framework\TestCase {
 
 	private $otherGroup;
 
 	public function setUp() {
+		CacheUtil::clearAvatars(true);
 		$_SERVER["REQUEST_URI"] = "/other-url.html?param=value";
 
 		require_once getLanguageFilePath("en");
@@ -29,6 +31,7 @@ class UserTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function tearDown() {
+		CacheUtil::clearAvatars(true);
 		$this->setUp();
 		Database::pQuery("delete from `{prefix}groups` where name like ? or name like ?", array(
 			"Other Grou%",
@@ -63,8 +66,10 @@ class UserTest extends \PHPUnit\Framework\TestCase {
 		$user->loadByUsername("max_muster");
 		$this->assertEquals("max_muster", $user->getUsername());
 		$this->assertEquals("Max", $user->getFirstname());
-		$this->assertEquals("fr", $user->getDefaultLanguage());
 		$this->assertEquals("Muster", $user->getLastname());
+		$this->assertEquals("Max Muster", $user->getFullName());
+
+		$this->assertEquals("fr", $user->getDefaultLanguage());
 		$this->assertEquals("max@muster.de", $user->getEmail());
 		$this->assertEquals(1, $user->getGroupId());
 		$this->assertEquals(1, $user->getGroup()
@@ -102,7 +107,10 @@ class UserTest extends \PHPUnit\Framework\TestCase {
 
 		// This always returns the URL of an placeholder image
 		// since the new avatar feature is not implemented yet
-		$this->assertTrue(endsWith($user->getAvatar(), "/admin/gfx/no_avatar.png"));
+		$this->assertStringEndsWith(
+				"content/avatars/77845dbfbccaebb3f1ccd497e9c47466.png",
+				$user->getAvatar()
+		);
 
 		$user->delete();
 
@@ -456,6 +464,56 @@ class UserTest extends \PHPUnit\Framework\TestCase {
 		$this->assertCount(1, $passwordReset->getAllTokensByUserId($user->getId()));
 
 		$user->delete();
+	}
+
+	public function testGetFullNameReturnsFullName() {
+
+		$user = new User();
+		$user->setFirstname("John");
+		$user->setLastname("Doe");
+		$this->assertEquals("John Doe", $user->getFullName());
+	}
+
+	public function testGetFullNameReturnsEmptyString() {
+
+		$user = new User();
+		$this->assertEmpty($user->getFullName());
+	}
+
+	public function testGetAvatarReturnsFallback() {
+		$user = new User();
+		$this->assertStringEndsWith(
+				"admin/gfx/no_avatar.png",
+				$user->getAvatar()
+		);
+	}
+
+	public function testGetPermissionCheckerReturnsTrue() {
+		$user = new User();
+		$user->setUsername("john-doe");
+		$user->setFirstname("John");
+		$user->setLastname("Doe");
+		$user->setPassword("password123");
+		$user->setEmail("john@doe.invalid");
+		$user->setAdmin(true);
+		$user->save();
+
+		$permissionChecker = $user->getPermissionChecker();
+		$this->assertTrue($permissionChecker->hasPermission("design"));
+
+		$user->delete();
+	}
+
+	public function testGetPermissionCheckerReturnsFalse() {
+		$user = new User();
+
+		$permissionChecker = $user->getPermissionChecker();
+		$this->assertFalse($permissionChecker->hasPermission("design"));
+	}
+
+	public function testHasPermissionReturnsFalse() {
+		$user = new User();
+		$this->assertFalse($user->hasPermission("design"));
 	}
 
 }
