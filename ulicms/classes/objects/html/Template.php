@@ -434,10 +434,10 @@ color: " . Settings::get("body-text-color") . ";
 
 			$minifier = new Minify\CSS();
 			$minifier->add($cssCode);
-			if (!is_array($disableFunctions)
+			if (!(is_array($disableFunctions)
 					and in_array(
 							"output_design_settings_styles",
-							$disableFunctions)
+							$disableFunctions))
 			) {
 				echo UliCMS\HTML\Style::fromString($minifier->minify());
 			}
