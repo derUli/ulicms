@@ -48,7 +48,7 @@ if ($permissionChecker->hasPermission("users")) {
 			<table class="tablesorter">
 				<thead>
 					<tr style="font-weight: bold;">
-						<th className="no-sort">ID</th>
+						<th class="no-sort"></th>
 						<th><?php translate("username"); ?></th>
 						<th class="hide-on-mobile"><?php translate("lastname"); ?></th>
 						<th class="hide-on-mobile"><?php translate("firstname"); ?></th>
