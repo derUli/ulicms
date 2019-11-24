@@ -35,7 +35,8 @@ def main():
               ".gitignore", "cache", "*~", ".settings", ".project",
               ".buildpath", "tests", "run-tests.sh", "run-tests.bat",
               "run-tests.xampp.mac.sh", ".pydevproject", "CMSConfig.php", "log",
-              "configurations", ".phpunit.result.cache", "nbproject")
+              "configurations", ".phpunit.result.cache", "nbproject", "report",
+			  "avatars")
 
     IGNORE_PATTERNS = shutil.ignore_patterns(*ignore)
     if args.delete and os.path.exists(target):
