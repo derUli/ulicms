@@ -299,7 +299,7 @@ class Template {
 			$title = str_ireplace(
 					"%homepage_title%",
 					get_homepage_title(),
-					$titl
+					$title
 			);
 			$title = str_ireplace("%title%", get_title(), $title);
 			$title = str_ireplace("%motto%", get_site_slogan(), $title);
