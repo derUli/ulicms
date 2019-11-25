@@ -125,12 +125,12 @@ function get_all_combined_html() {
 	return $html;
 }
 
-function edit_button() {
+function edit_button(): void {
 	Template::editButton();
 }
 
-function get_edit_button() {
-	Template::getEditButton();
+function get_edit_button(): ?string {
+	return Template::getEditButton();
 }
 
 function all_combined_html() {
@@ -230,19 +230,16 @@ function get_cache_control(): string {
 	}
 	$page = get_requested_pagename();
 
-	$dataset = "";
+	$cacheControl = "auto";
 	$sql = "SELECT `cache_control` FROM " . tbname("content") . " WHERE slug='" . db_escape($page) . "'  AND language='" . db_escape($_SESSION["language"]) . "'";
 	$result = db_query($sql);
 	if ($result and db_num_rows($result) > 0) {
 		$dataset = db_fetch_object($result);
-		$dataset = $dataset->cache_control;
-	}
-	if (empty($dataset)) {
-		$dataset = "auto";
+		$cacheControl = $dataset->cache_control ? $dataset->cache_control : $cacheControl;
 	}
 	$dataset = apply_filter($dataset, "get_cache_control");
-	Vars::set("cache_control", $dataset);
-	return $dataset;
+	Vars::set("cache_control", $cacheControl);
+	return $cacheControl;
 }
 
 function get_text_position(): string {

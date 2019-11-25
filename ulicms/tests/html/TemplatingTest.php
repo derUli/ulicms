@@ -19,6 +19,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
 		$_SERVER["SERVER_PORT"] = "80";
 		$_SERVER['HTTP_HOST'] = "example.org";
 		$_SERVER['REQUEST_URI'] = "/foobar/foo.html";
+		@session_start();
 	}
 
 	public function tearDown() {
@@ -35,6 +36,9 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
 		unset($_SESSION["login_id"]);
 		unset($_SESSION["language"]);
 
+		@session_destroy();
+
+		Database::deleteFrom("users", "username like 'testuser_%'");
 		Database::pQuery("DELETE FROM `{prefix}banner` where html like ?", array(
 			self::HTML_TEXT1 . "%",
 				), true);
@@ -343,8 +347,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetTextPositionWithNonExistingPageReturnsBefore() {
 		$_GET["slug"] = "gibts-echt-nicht";
-		$this->assertEquals
-				("before", get_text_position());
+		$this->assertEquals("before", get_text_position());
 	}
 
 	public function testGetMotto() {
@@ -450,6 +453,70 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
 
 		// TODO: check the html content
 		$this->assertNotEmpty($html);
+	}
+
+	public function getTestUser() {
+		$user = new User();
+		$user->setUsername("testuser_" . uniqid());
+		$user->setFirstname("Max");
+		$user->setLastname("Muster");
+		$user->setGroupId(1);
+		$user->setPassword("password123");
+		$user->setEmail("max@muster.de");
+		$user->setHomepage("http://www.google.de");
+		$user->setDefaultLanguage("fr");
+		$user->setHTMLEditor("ckeditor");
+		$user->setFailedLogins(0);
+
+		$user->setAboutMe("hello world");
+		$lastLogin = time();
+		$user->setLastLogin($lastLogin);
+		$user->setAdmin(true);
+		$user->save();
+
+		return $user;
+	}
+
+	public function testGetEditButtonReturnsHtml() {
+		$user = $this->getTestUser();
+		$user->registerSession(false);
+
+		Flags::setNoCache(true);
+
+		$html = get_edit_button();
+
+		$this->assertStringStartsWith('<div class="ulicms-edit"><a href="admin/?action=pages_edit&amp;page', $html);
+		$this->assertStringEndsWith('class="btn btn-warning btn-edit">Edit</a></div>', $html);
+
+		Flags::setNoCache(false);
+	}
+
+	public function testGetEditButtonReturnsEmptyString() {
+		$this->assertEmpty(get_edit_button());
+	}
+
+	public function testEditButtonOutputsHtml() {
+		$user = $this->getTestUser();
+		$user->registerSession(false);
+
+		Flags::setNoCache(true);
+		ob_start();
+		edit_button();
+		$html = ob_get_clean();
+
+		$this->assertStringStartsWith('<div class="ulicms-edit"><a href="admin/?action=pages_edit&amp;page', $html);
+		$this->assertStringEndsWith('class="btn btn-warning btn-edit">Edit</a></div>', $html);
+
+		Flags::setNoCache(false);
+	}
+
+	public function testGetCacheControl() {
+		$this->assertEquals("auto", get_cache_control());
+		$this->assertEquals("auto", get_cache_control());
+	}
+
+	public function testGetTextPosition() {
+		$this->assertContains("before", get_text_position());
 	}
 
 }

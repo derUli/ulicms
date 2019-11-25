@@ -71,6 +71,8 @@ class User extends Model {
 			@session_start();
 		}
 
+		$_SESSION["logged_in"] = true;
+
 		foreach ($sessionData as $key => $value) {
 			$_SESSION[$key] = $value;
 		}
