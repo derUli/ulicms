@@ -39,6 +39,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
 		@session_destroy();
 
 		Database::deleteFrom("users", "username like 'testuser_%'");
+		Database::deleteFrom("content", "slug like 'unit-test%'");
 		Database::pQuery("DELETE FROM `{prefix}banner` where html like ?", array(
 			self::HTML_TEXT1 . "%",
 				), true);
@@ -517,6 +518,34 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetTextPosition() {
 		$this->assertContains("before", get_text_position());
+	}
+
+	public function testGetArticleMeta() {
+		$article = new Article();
+		$article->title = "Unit Test Article";
+		$article->slug = "unit-test-" . uniqid();
+		$article->menu = "none";
+		$article->language = "de";
+		$article->article_date = 1413821696;
+		$article->author_id = 1;
+		$article->group_id = 1;
+
+		$article->article_author_name = 'Lara Croft';
+		$article->article_author_email = 'lara@croft.com';
+		$article->article_date = mktime(4, 20, 15, 4, 1, 2019);
+		$article->excerpt = "Das ist der Ausschnitt";
+
+		$article->save();
+
+		$_GET["slug"] = $article->slug;
+		$_SESSION["language"] = "de";
+
+		$article_meta = get_article_meta();
+
+		$this->assertEquals("Lara Croft", $article_meta->article_author_name);
+		$this->assertEquals("lara@croft.com", $article_meta->article_author_email);
+		$this->assertEquals(1554085215, $article_meta->article_date);
+		$this->assertEquals("Das ist der Ausschnitt", $article_meta->excerpt);
 	}
 
 }

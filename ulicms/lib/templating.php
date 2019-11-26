@@ -219,6 +219,8 @@ function get_article_meta(?string $page = null): ?object {
 	if (db_num_rows($result) > 0) {
 		$dataset = Database::fetchObject($result);
 		$dataset->excerpt = $dataset->excerpt ? replaceShortcodesWithModules($dataset->excerpt) : "";
+		$dataset->article_date = $dataset->article_date ?
+				intval($dataset->article_date) : null;
 	}
 	$dataset = apply_filter($dataset, "get_article_meta");
 	return $dataset;
