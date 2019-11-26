@@ -10,269 +10,268 @@ use zz\Html\HTMLMinify;
 use MatthiasMullie\Minify;
 
 function resetScriptQueue(): void {
-    Vars::set("script_queue", []);
+	Vars::set("script_queue", []);
 }
 
 function optimizeHtml(string $html,
-        int $level = HTMLMinify::OPTIMIZATION_SIMPLE): string {
-    if (Database::isConnected() and Settings::get("minify_html")) {
-        $options = array(
-            'optimizationLevel' => $level
-        );
-        $minifier = new HTMLMinify($html, $options);
-        $html = $minifier->process();
-    }
+		int $level = HTMLMinify::OPTIMIZATION_SIMPLE): string {
+	if (Database::isConnected() and Settings::get("minify_html")) {
+		$options = array(
+			'optimizationLevel' => $level
+		);
+		$minifier = new HTMLMinify($html, $options);
+		$html = $minifier->process();
+	}
 
-    $html = normalizeLN($html, "\n");
-    return $html;
+	$html = normalizeLN($html, "\n");
+	return $html;
 }
 
 function enqueueScriptFile($path): void {
-    if (!Vars::get("script_queue")) {
-        resetScriptQueue();
-    }
-    $script_queue = Vars::get("script_queue");
-    $script_queue[] = $path;
+	if (!Vars::get("script_queue")) {
+		resetScriptQueue();
+	}
+	$script_queue = Vars::get("script_queue");
+	$script_queue[] = $path;
 
-    Vars::set("script_queue", $script_queue);
+	Vars::set("script_queue", $script_queue);
 }
 
 function setSCSSImportPaths(?array $importPaths = null): void {
-    if ($importPaths == null) {
-        $importPaths = array(
-            Path::resolve("ULICMS_ROOT")
-        );
-    }
-    Vars::set("css_include_paths", $importPaths);
+	if ($importPaths == null) {
+		$importPaths = array(
+			Path::resolve("ULICMS_ROOT")
+		);
+	}
+	Vars::set("css_include_paths", $importPaths);
 }
 
 function getSCSSImportPaths(): ?array {
-    return Vars::get("css_include_paths");
+	return Vars::get("css_include_paths");
 }
 
 function unsetSCSSImportPaths(): void {
-    Vars::delete("css_include_paths");
+	Vars::delete("css_include_paths");
 }
 
 function minifyJs(): string {
-    $scripts = Vars::get("script_queue");
-    $lastmod = 0;
+	$scripts = Vars::get("script_queue");
+	$lastmod = 0;
 
-    $minifier = new Minify\JS();
+	$minifier = new Minify\JS();
 
-    // TODO: Methode erstellen: getLatestMtime()
-    // returns the updated timestamp of the last changed file
-    foreach ($scripts as $script) {
-        $script = ltrim($script, "/");
-        if (file_exists($script)
-                and pathinfo($script, PATHINFO_EXTENSION) == "js"
-                and filemtime($script) > $lastmod) {
-            $lastmod = filemtime($script);
-        }
-    }
+	// TODO: Methode erstellen: getLatestMtime()
+	// returns the updated timestamp of the last changed file
+	foreach ($scripts as $script) {
+		$script = ltrim($script, "/");
+		if (file_exists($script)
+				and pathinfo($script, PATHINFO_EXTENSION) == "js"
+				and filemtime($script) > $lastmod) {
+			$lastmod = filemtime($script);
+		}
+	}
 
-    $cacheId = md5((implode(";", $scripts)) . $lastmod);
-    $jsDir = Path::resolve("ULICMS_ROOT/content/cache/scripts");
+	$cacheId = md5((implode(";", $scripts)) . $lastmod);
+	$jsDir = Path::resolve("ULICMS_ROOT/content/cache/scripts");
 
-    if (!is_dir($jsDir)) {
-        mkdir($jsDir, 0777, true);
-    }
-    $jsUrl = !is_admin_dir() ?
-            "content/cache/scripts" : "../content/cache/scripts";
+	if (!is_dir($jsDir)) {
+		mkdir($jsDir, 0777, true);
+	}
+	$jsUrl = !is_admin_dir() ?
+			"content/cache/scripts" : "../content/cache/scripts";
 
-    $bundleFile = "{$jsDir}/{$cacheId}.js";
-    $bundleUrl = "{$jsUrl}/{$cacheId}.js";
+	$bundleFile = "{$jsDir}/{$cacheId}.js";
+	$bundleUrl = "{$jsUrl}/{$cacheId}.js";
 
-    $output = "";
-    if (!file_exists($bundleFile)) {
-        foreach ($scripts as $script) {
-            $script = ltrim($script, "/");
-            if (file_exists($script)
-                    and pathinfo($script, PATHINFO_EXTENSION) == "js") {
-                $minifier->add($script);
-            }
-        }
+	$output = "";
+	if (!file_exists($bundleFile)) {
+		foreach ($scripts as $script) {
+			$script = ltrim($script, "/");
+			if (file_exists($script)
+					and pathinfo($script, PATHINFO_EXTENSION) == "js") {
+				$minifier->add($script);
+			}
+		}
 
-        $output = $minifier->minify();
+		$output = $minifier->minify();
 
-        file_put_contents($bundleFile, $output);
-    }
-    resetScriptQueue();
-    return $bundleUrl;
+		file_put_contents($bundleFile, $output);
+	}
+	resetScriptQueue();
+	return $bundleUrl;
 }
 
 function minifyCSS(): string {
-    $stylesheets = Vars::get("stylesheet_queue");
-    $lastmod = 0;
+	$stylesheets = Vars::get("stylesheet_queue");
+	$lastmod = 0;
 
-    $minifier = new Minify\CSS();
+	$minifier = new Minify\CSS();
 
-    // TODO: Methode erstellen: getLatestMtime()
-    // returns the updated timestamp of the last changed file
-    foreach ($stylesheets as $stylesheet) {
-        $stylesheet = ltrim($stylesheet, "/");
-        $type = pathinfo($stylesheet, PATHINFO_EXTENSION);
-        if (file_exists($stylesheet) and ( $type == "css" or $type == "scss")
-                and filemtime($stylesheet) > $lastmod) {
-            $lastmod = filemtime($stylesheet);
-        }
-    }
+	// TODO: Methode erstellen: getLatestMtime()
+	// returns the updated timestamp of the last changed file
+	foreach ($stylesheets as $stylesheet) {
+		$stylesheet = ltrim($stylesheet, "/");
+		$type = pathinfo($stylesheet, PATHINFO_EXTENSION);
+		if (file_exists($stylesheet) and ( $type == "css" or $type == "scss")
+				and filemtime($stylesheet) > $lastmod) {
+			$lastmod = filemtime($stylesheet);
+		}
+	}
 
-    $cacheId = md5((implode(";", $stylesheets)) . $lastmod);
+	$cacheId = md5((implode(";", $stylesheets)) . $lastmod);
 
-    $cssDir = Path::resolve("ULICMS_ROOT/content/cache/stylesheets");
+	$cssDir = Path::resolve("ULICMS_ROOT/content/cache/stylesheets");
 
-    if (!is_dir($cssDir)) {
-        mkdir($cssDir, 0777, true);
-    }
-    $cssUrl = !is_admin_dir() ?
-            "content/cache/stylesheets" : "../content/cache/stylesheets";
+	if (!is_dir($cssDir)) {
+		mkdir($cssDir, 0777, true);
+	}
+	$cssUrl = !is_admin_dir() ?
+			"content/cache/stylesheets" : "../content/cache/stylesheets";
 
-    $bundleFile = "{$cssDir}/{$cacheId}.css";
-    $bundleUrl = "{$cssUrl}/{$cacheId}.css";
+	$bundleFile = "{$cssDir}/{$cacheId}.css";
+	$bundleUrl = "{$cssUrl}/{$cacheId}.css";
 
-    $output = "";
-    if (!file_exists($bundleFile)) {
-        foreach ($stylesheets as $stylesheet) {
-            $stylesheet = ltrim($stylesheet, "/");
-            $type = pathinfo($stylesheet, PATHINFO_EXTENSION);
-            if (file_exists($stylesheet) and $type == "css") {
-                $minifier->add($stylesheet);
-            } else if (file_exists($stylesheet) and $type == "scss") {
-                $scssOutput = compileSCSS($stylesheet);
-                $minifier->add($scssOutput);
-            }
-        }
+	$output = "";
+	if (!file_exists($bundleFile)) {
+		foreach ($stylesheets as $stylesheet) {
+			$stylesheet = ltrim($stylesheet, "/");
+			$type = pathinfo($stylesheet, PATHINFO_EXTENSION);
+			if (file_exists($stylesheet) and $type == "css") {
+				$minifier->add($stylesheet);
+			} else if (file_exists($stylesheet) and $type == "scss") {
+				$scssOutput = compileSCSS($stylesheet);
+				$minifier->add($scssOutput);
+			}
+		}
 
-        $output = $minifier->minify();
+		$output = $minifier->minify();
 
-        file_put_contents($bundleFile, $output);
-    }
-    resetStylesheetQueue();
-    return $bundleUrl;
+		file_put_contents($bundleFile, $output);
+	}
+	resetStylesheetQueue();
+	return $bundleUrl;
 }
 
 function compileSCSS(string $stylesheet): string {
-    $scss = new Compiler();
+	$scss = new Compiler();
 
-    $importPaths = getSCSSImportPaths();
-    $scssInput = file_get_contents($stylesheet);
-    if (is_array($importPaths)) {
-        $scss->setImportPaths($importPaths);
-    } else {
-        $scss->setImportPaths(dirname($stylesheet));
-    }
+	$importPaths = getSCSSImportPaths();
+	$scssInput = file_get_contents($stylesheet);
+	if (is_array($importPaths)) {
+		$scss->setImportPaths($importPaths);
+	} else {
+		$scss->setImportPaths(dirname($stylesheet));
+	}
 
-    try {
-        $scssOutput = $scss->compile($scssInput);
-    } catch (Exception $e) {
-        throw new SCSSCompileException("Compilation of $stylesheet failed: "
-                . "{$e->getMessage()}");
-    }
-    return $scssOutput;
+	try {
+		$scssOutput = $scss->compile($scssInput);
+	} catch (Exception $e) {
+		throw new SCSSCompileException("Compilation of $stylesheet failed: "
+				. "{$e->getMessage()}");
+	}
+	return $scssOutput;
 }
 
 function compileSCSSToFile(string $stylesheet): string {
-    $cssDir = Path::resolve("ULICMS_ROOT/content/cache/stylesheets");
+	$cssDir = Path::resolve("ULICMS_ROOT/content/cache/stylesheets");
 
-    if (!is_dir($cssDir)) {
-        mkdir($cssDir, 0777, true);
-    }
+	if (!is_dir($cssDir)) {
+		mkdir($cssDir, 0777, true);
+	}
 
-    $output = compileSCSS($stylesheet);
+	$output = compileSCSS($stylesheet);
 
-    $cacheId = md5($stylesheet . filemtime($stylesheet)) . ".css";
+	$cacheId = md5($stylesheet . filemtime($stylesheet)) . ".css";
 
-    $cssUrl = !is_admin_dir() ?
-            "content/cache/stylesheets" : "../content/cache/stylesheets";
+	$cssUrl = !is_admin_dir() ?
+			"content/cache/stylesheets" : "../content/cache/stylesheets";
 
-    $bundleFile = "{$cssDir}/{$cacheId}.css";
-    $bundleUrl = "{$cssUrl}/{$cacheId}.css";
+	$bundleFile = "{$cssDir}/{$cacheId}.css";
+	$bundleUrl = "{$cssUrl}/{$cacheId}.css";
 
-    file_put_contents($bundleFile, $output);
-    return $bundleUrl;
+	file_put_contents($bundleFile, $output);
+	return $bundleUrl;
 }
 
 function combinedScriptHtml(): void {
-    echo getCombinedScriptHtml();
+	echo getCombinedScriptHtml();
 }
 
 function combined_script_html(): void {
-    trigger_error("combined_script_html is deprecated", E_USER_DEPRECATED);
-    echo getCombinedScriptHtml();
+	trigger_error("combined_script_html is deprecated", E_USER_DEPRECATED);
+	echo getCombinedScriptHtml();
 }
 
 function getCombinedScriptHtml(): string {
+	$cfg = new CMSConfig();
+	if (is_true($cfg->no_minify)) {
+		foreach (Vars::get("script_queue") as $script) {
+			$html .= Script::fromFile($script);
+		}
+		resetScriptQueue();
+		return $html;
+	}
 
-    $cfg = new CMSConfig();
-    if (is_true($cfg->no_minify)) {
-        foreach (Vars::get("script_queue") as $script) {
-            $html .= Script::fromFile($script);
-        }
-        resetScriptQueue();
-        return $html;
-    }
+	$html = Script::fromFile(minifyJs());
 
-    $html = Script::fromFile(minifyJs());
-
-    resetScriptQueue();
-    return $html;
+	resetScriptQueue();
+	return $html;
 }
 
 function get_combined_script_html(): string {
-    trigger_error("combined_script_html is deprecated", E_USER_DEPRECATED);
-    return getCombinedScriptHtml();
+	trigger_error("combined_script_html is deprecated", E_USER_DEPRECATED);
+	return getCombinedScriptHtml();
 }
 
 // Ab hier Stylesheet Funktionen
 function resetStylesheetQueue(): void {
-    Vars::set("stylesheet_queue", []);
+	Vars::set("stylesheet_queue", []);
 }
 
 function enqueueStylesheet(string $path): void {
-    if (!Vars::get("stylesheet_queue")) {
-        resetStylesheetQueue();
-    }
-    $stylesheet_queue = Vars::get("stylesheet_queue");
-    $stylesheet_queue[] = $path;
+	if (!Vars::get("stylesheet_queue")) {
+		resetStylesheetQueue();
+	}
+	$stylesheet_queue = Vars::get("stylesheet_queue");
+	$stylesheet_queue[] = $path;
 
-    Vars::set("stylesheet_queue", $stylesheet_queue);
+	Vars::set("stylesheet_queue", $stylesheet_queue);
 }
 
 function getCombinedStylesheetHTML(): ?string {
-    $cfg = new CMSConfig();
-    if (!Vars::get("stylesheet_queue")) {
-        return null;
-    }
-    if (is_true($cfg->no_minify)) {
-        foreach (Vars::get("stylesheet_queue") as $stylesheet) {
-            $type = pathinfo($stylesheet, PATHINFO_EXTENSION);
-            if ($type == "css") {
-                $html .= Style::fromExternalFile($stylesheet);
-            } else if ($type == "scss") {
-                $html .= Style::fromExternalFile(
-                                compileSCSSToFile($stylesheet)
-                );
-            }
-        }
-        resetStylesheetQueue();
-        return $html;
-    }
+	$cfg = new CMSConfig();
+	if (!Vars::get("stylesheet_queue")) {
+		return null;
+	}
+	if (is_true($cfg->no_minify)) {
+		foreach (Vars::get("stylesheet_queue") as $stylesheet) {
+			$type = pathinfo($stylesheet, PATHINFO_EXTENSION);
+			if ($type == "css") {
+				$html .= Style::fromExternalFile($stylesheet);
+			} else if ($type == "scss") {
+				$html .= Style::fromExternalFile(
+								compileSCSSToFile($stylesheet)
+				);
+			}
+		}
+		resetStylesheetQueue();
+		return $html;
+	}
 
-    $html = Style::fromExternalFile(minifyCSS());
+	$html = Style::fromExternalFile(minifyCSS());
 
-    resetStylesheetQueue();
-    return $html;
+	resetStylesheetQueue();
+	return $html;
 }
 
 function combinedStylesheetHtml(): void {
-    echo getCombinedStylesheetHTML();
+	echo getCombinedStylesheetHTML();
 }
 
 function get_combined_stylesheet_html(): string {
-    trigger_error(
-            "get_combined_stylesheet_html is deprecated",
-            E_USER_DEPRECATED
-    );
-    return getCombinedStylesheetHTML();
+	trigger_error(
+			"get_combined_stylesheet_html is deprecated",
+			E_USER_DEPRECATED
+	);
+	return getCombinedStylesheetHTML();
 }

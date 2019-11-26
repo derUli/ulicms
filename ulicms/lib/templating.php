@@ -6,6 +6,7 @@ use UliCMS\Models\Content\Language;
 use UliCMS\Models\Content\Categories;
 use UliCMS\Models\Content\Types\DefaultContentTypes;
 use UliCMS\Utils\File;
+use UliCMS\Exceptions\DatasetNotFoundException;
 
 function html5_doctype(): void {
 	echo Template::getHtml5Doctype();
@@ -101,27 +102,26 @@ function get_og_tags(?string $slug = null): string {
 	return $html;
 }
 
-function get_og_data($slug = "") {
+function get_og_data($slug = ""): ?array {
 	if (empty($slug)) {
-		$slug = $_GET["slug"];
+		$slug = isset($_GET["slug"]) ? $_GET["slug"] : get_frontpage();
 	}
 
-	if (empty($slug)) {
-		$slug = get_frontpage();
-	}
+	$data = null;
+
 	$result = db_query("SELECT og_title, og_image, og_description FROM " .
 			tbname("content") . " WHERE slug='" . db_escape($slug) .
 			"' AND language='" . db_escape($_SESSION["language"]) . "'");
 	if (db_num_rows($result) > 0) {
-		return db_fetch_assoc($result);
+		$data = db_fetch_assoc($result);
 	}
-	return null;
+	return $data;
 }
 
-function get_all_combined_html() {
+function get_all_combined_html(): string {
 	$html = "";
 	$html .= getCombinedStylesheetHtml();
-	$html .= combinedScriptHtml();
+	$html .= getCombinedScriptHtml();
 	return $html;
 }
 
@@ -134,7 +134,7 @@ function get_edit_button(): ?string {
 }
 
 function all_combined_html() {
-	echo get_all_comined_html();
+	echo get_all_combined_html();
 }
 
 function get_ID(): ?int {
@@ -178,7 +178,7 @@ function is_active(): bool {
 	return $dataset;
 }
 
-function get_type(?string $slug = null, ?string $language = null): string {
+function get_type(?string $slug = null, ?string $language = null): ?string {
 
 	if (!$slug) {
 		$slug = get_requested_pagename();
@@ -191,11 +191,14 @@ function get_type(?string $slug = null, ?string $language = null): string {
 	if (Vars::get($varName)) {
 		return Vars::get($varName);
 	}
+
+	$type = null;
+
 	try {
 		$page = ContentFactory::getBySlugAndLanguage($slug, $language);
 		$type = $page->type;
-	} catch (Exception $e) {
-		$type = "page";
+	} catch (DatasetNotFoundException $e) {
+		$type = null;
 	}
 
 	$result = apply_filter($type, "get_type");
@@ -286,19 +289,16 @@ function get_parent(string $page = null): ?int {
 	if (!$page) {
 		$page = get_requested_pagename();
 	}
-	$dataset = null;
+	$parent_id = null;
 	$sql = "SELECT `parent_id` FROM " . tbname("content") . " WHERE slug='"
 			. db_escape($page) . "'  AND language='" .
 			db_escape($_SESSION["language"]) . "'";
 	$result = db_query($sql);
 	if (db_num_rows($result) > 0) {
 		$dataset = db_fetch_object($result);
-		$dataset = $dataset->parent_id;
+		$parent_id = $dataset->parent_id ? intval($dataset->parent_id) : null;
 	}
-	if (empty($dataset)) {
-		$dataset = null;
-	}
-	return $dataset;
+	return $parent_id;
 }
 
 function get_custom_data(?string $page = null): ?array {
@@ -323,10 +323,12 @@ function include_jquery(): void {
 	Template::jQueryScript();
 }
 
-function get_access(?string $page = null): string {
+function get_access(?string $page = null): array {
+	$access = [];
 	if (!$page) {
 		$page = get_requested_pagename();
 	}
+
 	$sql = "SELECT `access` FROM " . tbname("content") .
 			" WHERE slug='" . db_escape($page) .
 			"'  AND language='" . db_escape($_SESSION["language"]) . "'";
@@ -334,9 +336,9 @@ function get_access(?string $page = null): string {
 	if (db_num_rows($result) > 0) {
 		$dataset = db_fetch_object($result);
 		$access = explode(",", $dataset->access);
-		return $access;
 	}
-	return null;
+
+	return $access;
 }
 
 function get_redirection(?string $page = null): ?string {
@@ -347,13 +349,15 @@ function get_redirection(?string $page = null): ?string {
 			" WHERE slug='" . db_escape($page) . "'  AND language='" .
 			db_escape($_SESSION["language"]) . "' and type='link'";
 	$result = db_query($sql);
+
+	$redirection = null;
 	if (db_num_rows($result) > 0) {
 		$dataset = db_fetch_object($result);
 		if (!empty($dataset->link_url) and ! is_null($dataset->link_url)) {
-			return $dataset->link_url;
+			$redirection = $dataset->link_url;
 		}
 	}
-	return null;
+	return $redirection;
 }
 
 function get_theme(?string $page = null): ?string {
@@ -366,7 +370,7 @@ function get_theme(?string $page = null): ?string {
 	}
 	$theme = Settings::get("theme");
 	$mobile_theme = Settings::get("mobile_theme");
-	if ($mobile_theme and ! empty($mobile_theme) and is_mobile()) {
+	if ($mobile_theme and is_mobile()) {
 		$theme = $mobile_theme;
 	}
 
@@ -377,8 +381,7 @@ function get_theme(?string $page = null): ?string {
 		$result = db_query($sql);
 		if ($result and db_num_rows($result) > 0) {
 			$data = db_fetch_object($result);
-			if (isset($data->theme) and ! empty($data->theme)
-					and ! is_null($data->theme)) {
+			if ($data->theme) {
 				$theme = $data->theme;
 			}
 		}
@@ -519,10 +522,7 @@ function get_meta_description(?string $ipage = null): string {
 	$result = db_query("SELECT meta_description FROM " . tbname("content") .
 			" WHERE slug='$ipage' AND language='" .
 			db_escape($_SESSION["language"]) . "'");
-	if ($ipage == "") {
-		$result = db_query("SELECT meta_description FROM " . tbname("content")
-				. " ORDER BY id LIMIT 1", $connection);
-	}
+
 	if (db_num_rows($result) > 0) {
 		while ($row = db_fetch_object($result)) {
 			if (!empty($row->meta_description)) {
@@ -540,13 +540,13 @@ function get_meta_description(?string $ipage = null): string {
 }
 
 function meta_description() {
-	$value = get_meta_keywords();
+	$value = get_meta_description();
 	if ($value) {
 		echo $value;
 	}
 }
 
-function get_title(?string $ipage = null, bool $headline = false): string {
+function get_title(?string $slug = null, bool $headline = false): string {
 	$cacheVar = $headline ? "headline" : "title";
 	if (Vars::get($cacheVar)) {
 		return Vars::get($cacheVar);
@@ -579,14 +579,11 @@ function get_title(?string $ipage = null, bool $headline = false): string {
 		return get_translation("forbidden");
 	}
 
-	$ipage = db_escape($_GET["slug"]);
+	$slug = db_escape($_GET["slug"]);
 	$result = db_query("SELECT alternate_title, title FROM " .
-			tbname("content") . " WHERE slug='$ipage' AND language='" .
+			tbname("content") . " WHERE slug='$slug' AND language='" .
 			db_escape($_SESSION["language"]) . "'");
-	if ($ipage == "") {
-		$result = db_query("SELECT title, alternate_title FROM " .
-				tbname("content") . " ORDER BY id LIMIT 1");
-	}
+
 	if (db_num_rows($result) > 0) {
 		while ($row = db_fetch_object($result)) {
 			if ($headline and isset($row->alternate_title)
@@ -670,7 +667,7 @@ function get_motto(): string {
 	return get_site_slogan();
 }
 
-function get_frontpage(): string {
+function get_frontpage(): ?string {
 	setLanguageByDomain();
 	if (isset($_SESSION["language"])) {
 		$frontpage = Settings::get("frontpage_" . $_SESSION["language"]);
@@ -974,8 +971,6 @@ function check_status(): string {
 	if ($_GET["slug"] == "") {
 		$_GET["slug"] = get_frontpage();
 	}
-
-	$page = $_GET["slug"];
 
 	if (!is_active() and ! is_logged_in()) {
 		return "403 Forbidden";

@@ -5,11 +5,15 @@ use UliCMS\Models\Content\Advertisement\Banner;
 class TemplatingTest extends \PHPUnit\Framework\TestCase {
 
 	private $homepageOwner;
+	private $initialMobileTheme;
+	private $initialDomainToLanguage;
 
 	const HTML_TEXT1 = "My first Banner HTML";
 
 	public function setUp() {
+		$this->initialMobileTheme = Settings::get("mobile_theme");
 		$this->homepageOwner = Settings::get("homepage_owner");
+		$this->initialDomainToLanguage = Settings::get("domain_to_language");
 
 		$_SESSION["language"] = "de";
 		$_GET["slug"] = get_frontpage();
@@ -24,8 +28,11 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
 
 	public function tearDown() {
 		$this->cleanUp();
+
+		Settings::get("mobile_theme", $this->initialMobileTheme);
 		Settings::set("homepage_owner", $this->homepageOwner);
 		Settings::set("maintenance_mode", "off");
+		Settings::set("domain_to_language", $this->initialDomainToLanguage);
 
 		unset($_SERVER["SERVER_PROTOCOL"]);
 		unset($_SERVER['HTTP_HOST']);
@@ -48,6 +55,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
 	private function cleanUp() {
 		Vars::delete("page");
 		Vars::delete("type");
+		Vars::delete("cache_control");
 
 		Database::query("delete from {prefix}content where slug = 'testdisableshortcodes' or title like 'Unit Test%'", true);
 	}
@@ -148,6 +156,13 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals("my-slug", get_requested_pagename());
 		$this->assertEquals("en", Request::getVar("language"));
 		$this->assertEquals("pdf", get_format());
+	}
+
+	public function testSetRequestedPageNameWithoutLanguage() {
+		set_requested_pagename("my-slug");
+
+		$this->assertEquals("my-slug", get_requested_pagename());
+		$this->assertEquals("de", $_SESSION["language"]);
 	}
 
 	public function testGetMenu() {
@@ -512,8 +527,23 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGetCacheControl() {
-		$this->assertEquals("auto", get_cache_control());
-		$this->assertEquals("auto", get_cache_control());
+		$article = new Article();
+		$article->title = "Unit Test Article";
+		$article->slug = "unit-test-" . uniqid();
+		$article->menu = "none";
+		$article->language = "de";
+		$article->article_date = 1413821696;
+		$article->author_id = 1;
+		$article->group_id = 1;
+		$article->cache_control = "force";
+
+		$article->save();
+
+		$_GET["slug"] = $article->slug;
+		$_SESSION["language"] = "de";
+
+		$this->assertEquals("force", get_cache_control());
+		$this->assertEquals("force", get_cache_control());
 	}
 
 	public function testGetTextPosition() {
@@ -546,6 +576,249 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals("lara@croft.com", $article_meta->article_author_email);
 		$this->assertEquals(1554085215, $article_meta->article_date);
 		$this->assertEquals("Das ist der Ausschnitt", $article_meta->excerpt);
+	}
+
+	public function testGetOgData() {
+		$article = new Article();
+		$article->title = "Unit Test Article";
+		$article->slug = "unit-test-" . uniqid();
+		$article->menu = "none";
+		$article->language = "de";
+		$article->article_date = 1413821696;
+		$article->author_id = 1;
+		$article->group_id = 1;
+
+		$article->article_author_name = 'Lara Croft';
+		$article->article_author_email = 'lara@croft.com';
+		$article->article_date = mktime(4, 20, 15, 4, 1, 2019);
+		$article->excerpt = "Das ist der Ausschnitt";
+
+		$article->og_title = 'Open Graph Titel';
+		$article->og_description = "Open Graph Beschreibung";
+
+		$article->og_image = "/content/images/grafik.jpg";
+		$article->save();
+
+		$_GET["slug"] = $article->slug;
+		$_SESSION["language"] = "de";
+
+		$ogData = get_og_data();
+
+		$this->assertEquals(
+				"Open Graph Titel",
+				$ogData["og_title"]
+		);
+		$this->assertEquals(
+				"Open Graph Beschreibung",
+				$ogData["og_description"]
+		);
+		$this->assertEquals(
+				"/content/images/grafik.jpg",
+				$ogData["og_image"]
+		);
+	}
+
+	public function testGetAccess() {
+		$article = new Article();
+		$article->title = "Unit Test Article";
+		$article->slug = "unit-test-" . uniqid();
+		$article->menu = "none";
+		$article->language = "de";
+		$article->article_date = 1413821696;
+		$article->author_id = 1;
+		$article->group_id = 1;
+
+		$article->article_author_name = 'Lara Croft';
+		$article->article_author_email = 'lara@croft.com';
+		$article->article_date = mktime(4, 20, 15, 4, 1, 2019);
+		$article->excerpt = "Das ist der Ausschnitt";
+
+		$article->access = "mobile,2,5,8";
+		$article->save();
+
+		$_GET["slug"] = $article->slug;
+		$_SESSION["language"] = "de";
+
+		$this->assertEquals(
+				[
+					"mobile",
+					"2",
+					"5",
+					"8"
+				],
+				get_access()
+		);
+	}
+
+	public function testGetRedirection() {
+		$link = new Link();
+		$link->title = "Unit Test Article";
+		$link->slug = "unit-test-" . uniqid();
+		$link->menu = "none";
+		$link->language = "de";
+		$link->article_date = 1413821696;
+		$link->author_id = 1;
+		$link->group_id = 1;
+
+		$link->link_url = "https://www.ulicms.de";
+
+		$link->access = "mobile,2,5,8";
+		$link->save();
+
+		$_GET["slug"] = $link->slug;
+		$_SESSION["language"] = "de";
+
+		$this->assertEquals("https://www.ulicms.de", get_redirection());
+	}
+
+	public function testGetTheme() {
+		$article = new Article();
+		$article->title = "Unit Test Article";
+		$article->slug = "unit-test-" . uniqid();
+		$article->menu = "none";
+		$article->language = "de";
+		$article->article_date = 1413821696;
+		$article->author_id = 1;
+		$article->group_id = 1;
+
+		$article->article_author_name = 'Lara Croft';
+		$article->article_author_email = 'lara@croft.com';
+		$article->article_date = mktime(4, 20, 15, 4, 1, 2019);
+		$article->excerpt = "Das ist der Ausschnitt";
+		$article->theme = "2020";
+		$article->save();
+
+		Settings::set("mobile_theme", "impro17");
+
+		$_GET["slug"] = $article->slug;
+		$_SESSION["language"] = "de";
+
+		$_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (iPhone; CPU iPhone OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3";
+
+		$this->assertEquals("2020", get_theme());
+	}
+
+	public function testGetCategory() {
+		$article = new Article();
+		$article->title = "Unit Test Article";
+		$article->slug = "unit-test-" . uniqid();
+		$article->menu = "none";
+		$article->language = "de";
+		$article->article_date = 1413821696;
+		$article->author_id = 1;
+		$article->group_id = 1;
+		$article->category_id = null;
+
+		$article->article_author_name = 'Lara Croft';
+		$article->article_author_email = 'lara@croft.com';
+		$article->article_date = mktime(4, 20, 15, 4, 1, 2019);
+		$article->excerpt = "Das ist der Ausschnitt";
+		$article->theme = "2020";
+		$article->save();
+
+		Settings::set("mobile_theme", "impro17");
+
+		$_GET["slug"] = $article->slug;
+		$_SESSION["language"] = "de";
+
+		$_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (iPhone; CPU iPhone OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3";
+
+		$this->assertNull(get_category());
+	}
+
+	public function testGetTypeNotFound() {
+		$this->assertNull(get_type("gibts_echt_nicht", "de"));
+	}
+
+	public function testGetMetaDescriptionFromPage() {
+		$article = $this->getArticleWithMetaData();
+
+		$_GET["slug"] = $article->slug;
+		$_SESSION["language"] = "de";
+
+		$this->assertEquals("Bla Bla usw.", get_meta_description());
+	}
+
+	public function testGetMetaKeywordsFromPage() {
+		$article = $this->getArticleWithMetaData();
+
+		$_GET["slug"] = $article->slug;
+		$_SESSION["language"] = "de";
+
+		$this->assertEquals("word 1, word 2, word 3", get_meta_keywords());
+	}
+
+	public function testMetaDescriptionFromPage() {
+		$article = $this->getArticleWithMetaData();
+
+		$_GET["slug"] = $article->slug;
+		$_SESSION["language"] = "de";
+
+		ob_start();
+		meta_description();
+		$this->assertEquals("Bla Bla usw.", ob_get_clean());
+	}
+
+	public function testMetaKeywordsFromPage() {
+		$article = $this->getArticleWithMetaData();
+
+		$_GET["slug"] = $article->slug;
+		$_SESSION["language"] = "de";
+
+		ob_start();
+		meta_keywords();
+		$this->assertEquals("word 1, word 2, word 3", ob_get_clean());
+	}
+
+	private function getArticleWithMetaData(): Article {
+		$article = new Article();
+		$article->title = "Unit Test Article";
+		$article->slug = "unit-test-" . uniqid();
+		$article->menu = "none";
+		$article->language = "de";
+		$article->article_date = 1413821696;
+		$article->author_id = 1;
+		$article->group_id = 1;
+		$article->category_id = null;
+
+		$article->meta_description = "Bla Bla usw.";
+		$article->meta_keywords = "word 1, word 2, word 3";
+
+		$article->excerpt = "Das ist der Ausschnitt";
+
+		$all = ContentFactory::getAllByLanguage($article->language);
+		$first = $all[0];
+
+		$article->parent_id = $first->getId();
+		$article->theme = "2020";
+		$article->save();
+		return $article;
+	}
+
+	public function testGetParentReturnsId() {
+		$article = $this->getArticleWithMetaData();
+
+		$_GET["slug"] = $article->slug;
+		$_SESSION["language"] = "de";
+
+		$this->assertGreaterThanOrEqual(1, get_parent());
+	}
+
+	public function testGetParentReturnsNull() {
+		$article = $this->getArticleWithMetaData();
+		$article->parent_id = null;
+		$article->save();
+
+		$_GET["slug"] = $article->slug;
+		$_SESSION["language"] = "de";
+
+		$this->assertNull(get_parent());
+	}
+
+	public function testGetFrontpage() {
+		unset($_SESSION["language"]);
+		$this->assertIsString(get_frontpage());
+		$this->assertNotEmpty(get_frontpage());
 	}
 
 }
