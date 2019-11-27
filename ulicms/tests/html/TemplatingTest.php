@@ -53,6 +53,8 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	private function cleanUp() {
+		Vars::delete("title");
+		Vars::delete("headline");
 		Vars::delete("page");
 		Vars::delete("type");
 		Vars::delete("cache_control");
@@ -356,6 +358,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
 		$year = ob_get_clean();
 		$this->assertIsNumeric($year);
 		$this->assertGreaterThanOrEqual(2019, $year);
+
 		// UliCMS explodes after the year 2037 caused by
 		// the Year 2038 problem
 		$this->assertLessThan(2038, $year);
@@ -447,12 +450,6 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
 	public function testHomepageTitle() {
 		ob_start();
 		homepage_title();
-		$this->assertNotEmpty(ob_get_clean());
-	}
-
-	public function testTitle() {
-		ob_start();
-		title();
 		$this->assertNotEmpty(ob_get_clean());
 	}
 
@@ -819,6 +816,37 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
 		unset($_SESSION["language"]);
 		$this->assertIsString(get_frontpage());
 		$this->assertNotEmpty(get_frontpage());
+	}
+
+	public function testTitleReturnsTitle() {
+		$article = $this->getArticleWithMetaData();
+
+		$_GET["slug"] = $article->slug;
+		$_SESSION["language"] = "de";
+
+		ob_start();
+		title();
+
+		$this->assertEquals("Unit Test Article", ob_get_clean());
+	}
+
+	public function testTitleReturnsAlternateTitle() {
+		$article = $this->getArticleWithMetaData();
+		$article->alternate_title = "Alternativer Titel";
+		$article->save();
+
+		$_GET["slug"] = $article->slug;
+		$_SESSION["language"] = "de";
+
+		ob_start();
+		title(null, true);
+
+		$this->assertEquals("Alternativer Titel", ob_get_clean());
+
+		ob_start();
+		title(null, true);
+
+		$this->assertEquals("Alternativer Titel", ob_get_clean());
 	}
 
 }

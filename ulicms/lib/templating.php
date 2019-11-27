@@ -601,8 +601,8 @@ function get_title(?string $slug = null, bool $headline = false): string {
 	}
 }
 
-function title(?string $ipage = null): void {
-	echo get_title($ipage);
+function title(?string $ipage = null, bool $headline = false): void {
+	echo get_title($ipage, $headline);
 }
 
 function get_headline(?string $ipage = null): string {
