@@ -12,7 +12,7 @@ Neue Features:
 * Es kann nun auch unter "Pakete" das Standard-Design ausgewählt und die Vorschau von Themes angezeigt werden
 * Soundcloud Player können eingebunden werden
 
-Neue API-Methoden
+Neue API-Methoden:
 * User->getAllGroups(): array
 * _unesc($string): string
 * unesc($string): void
