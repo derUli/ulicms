@@ -33,10 +33,15 @@ class UserTest extends \PHPUnit\Framework\TestCase {
 	public function tearDown() {
 		CacheUtil::clearAvatars(true);
 		$this->setUp();
-		Database::pQuery("delete from `{prefix}groups` where name like ? or name like ?", array(
-			"Other Grou%",
-			"Main Group"
-				), true);
+		Database::pQuery(
+				"delete from `{prefix}groups` "
+				. "where name like ? or name like ?",
+				[
+					"Other Grou%",
+					"Main Group"
+				],
+				true
+		);
 		unset($_SERVER["REQUEST_URI"]);
 		unset($_SERVER["SERVER_PROTOCOL"]);
 		unset($_SERVER['HTTP_HOST']);
@@ -76,7 +81,10 @@ class UserTest extends \PHPUnit\Framework\TestCase {
 						->getId());
 		$this->assertEquals("Administrator", $user->getGroup()
 						->getName());
-		$this->assertEquals(Encryption::hashPassword("password123"), $user->getPassword());
+		$this->assertEquals(
+				Encryption::hashPassword("password123"),
+				$user->getPassword()
+		);
 		$this->assertEquals($lastLogin, $user->getLastLogin());
 		$this->assertEquals("http://www.google.de", $user->getHomepage());
 		$this->assertEquals("ckeditor", $user->getHTMLEditor());
@@ -162,7 +170,10 @@ class UserTest extends \PHPUnit\Framework\TestCase {
 		$user->setPassword("secret");
 
 		$message = $user->getWelcomeMailText("secret");
-		$this->assertStringContainsString("An administrator created a user account for you", $message);
+		$this->assertStringContainsString(
+				"An administrator created a user account for you",
+				$message
+		);
 		$this->assertStringContainsString("Hello John", $message);
 		$this->assertStringContainsString("Username: john.doe", $message);
 		$this->assertStringContainsString("Password: secret", $message);
@@ -235,8 +246,14 @@ class UserTest extends \PHPUnit\Framework\TestCase {
 
 		$this->assertInstanceOf(User::class, $userFromSession);
 		$this->assertEquals($userFromSession->getId(), $user->getId());
-		$this->assertEquals($userFromSession->getUsername(), $user->getUsername());
-		$this->assertEquals($userFromSession->getLastname(), $user->getLastname());
+		$this->assertEquals(
+				$userFromSession->getUsername(),
+				$user->getUsername()
+		);
+		$this->assertEquals(
+				$userFromSession->getLastname(),
+				$user->getLastname()
+		);
 
 		@session_destroy();
 	}
@@ -458,10 +475,16 @@ class UserTest extends \PHPUnit\Framework\TestCase {
 		$user->saveAndSendMail("quak");
 
 		$passwordReset = new PasswordReset();
-		$this->assertCount(0, $passwordReset->getAllTokensByUserId($user->getId()));
+		$this->assertCount(
+				0,
+				$passwordReset->getAllTokensByUserId($user->getId())
+		);
 
 		$user->resetPassword();
-		$this->assertCount(1, $passwordReset->getAllTokensByUserId($user->getId()));
+		$this->assertCount(
+				1,
+				$passwordReset->getAllTokensByUserId($user->getId())
+		);
 
 		$user->delete();
 	}
@@ -514,6 +537,40 @@ class UserTest extends \PHPUnit\Framework\TestCase {
 	public function testHasPermissionReturnsFalse() {
 		$user = new User();
 		$this->assertFalse($user->hasPermission("design"));
+	}
+
+	public function testProcessAvatar() {
+		$inputFile = Path::resolve(
+						"ULICMS_ROOT/admin/gfx/apple-touch-icon-120x120.png"
+		);
+
+		$user = new User();
+		$user->setUsername("john-doe");
+		$user->setFirstname("John");
+		$user->setLastname("Doe");
+		$user->setPassword("password123");
+		$user->setEmail("john@doe.invalid");
+		$user->setAdmin(true);
+		$user->save();
+
+		$this->assertStringEndsNotWith(
+				"/user-" . $user->getId() . ".png",
+				$user->getAvatar()
+		);
+
+		$this->assertFalse($user->hasProcessedAvatar());
+		$this->assertFalse($user->removeAvatar());
+		$user->processAvatar($inputFile);
+
+		$this->assertStringEndsWith(
+				"user-" . $user->getId() . ".png",
+				$user->getAvatar()
+		);
+
+
+		$this->assertTrue($user->hasProcessedAvatar());
+		$this->assertTrue($user->removeAvatar());
+		$this->assertFalse($user->hasProcessedAvatar());
 	}
 
 }

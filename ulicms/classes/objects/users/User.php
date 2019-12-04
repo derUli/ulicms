@@ -190,7 +190,7 @@ class User extends Model {
 			$this->homepage,
 			$this->default_language
 		);
-		$result = Database::pQuery($sql, $args, true) or die(Database::getError());
+		$result = Database::pQuery($sql, $args, true);
 		$this->id = Database::getLastInsertID();
 	}
 
@@ -305,7 +305,8 @@ class User extends Model {
 	}
 
 	public function getFullName(): string {
-		return !empty($this->firstname) && !empty($this->lastname) ? "{$this->firstname} {$this->lastname}" : "";
+		return (!empty($this->firstname) and ! empty($this->lastname)) ?
+				"{$this->firstname} {$this->lastname}" : "";
 	}
 
 	public function checkPassword(string $password): bool {
@@ -518,8 +519,10 @@ class User extends Model {
 		}
 
 		if (file_exists($userAvatarDirectory) and $this->getFullName()) {
-			$avatarImageFile1 = Path::Resolve("$userAvatarDirectory/user-" . $this->getId() . ".png");
-			$avatarImageFile2 = Path::Resolve("$userAvatarDirectory/" . md5($this->getFullName()) . ".png");
+			$avatarImageFile1 = Path::Resolve("$userAvatarDirectory/user-" .
+							$this->getId() . ".png");
+			$avatarImageFile2 = Path::Resolve("$userAvatarDirectory/" .
+							md5($this->getFullName()) . ".png");
 
 			$url = !is_admin_dir() ?
 					"content/avatars/user-" . $this->getId() . ".png" :
@@ -549,7 +552,7 @@ class User extends Model {
 				"content/avatars/" . md5($this->getFullName()) . ".png" :
 				"../content/avatars/" . md5($this->getFullName()) . ".png";
 
-		$avatarUrl = ModuleHelper::getBaseUrl($url);
+		$avatarUrl = $url;
 
 		return $avatarUrl;
 	}
@@ -635,19 +638,48 @@ class User extends Model {
 		$extension = pathinfo($upload["name"], PATHINFO_EXTENSION);
 		$tmpFile = uniqid() . "." . $extension;
 		$tmpFile = Path::resolve("ULICMS_TMP/$tmpFile");
-		move_uploaded_file($upload["tmp_name"], $tmpFile);
 
+		if (move_uploaded_file($upload["tmp_name"], $tmpFile)) {
+			$this->processAvatar($tmpFile);
+			unlink($tmpFile);
+		} else {
+			ExceptionResult(
+					get_translation("avatar_upload_failed")
+			);
+		}
+	}
+
+	public function processAvatar(string $inputFile): void {
 		$imagine = new Imagine\Gd\Imagine();
 
 		$size = new Imagine\Image\Box(40, 40);
 		$mode = Imagine\Image\ImageInterface::THUMBNAIL_INSET;
 
-		$generatedAvatar = Path::resolve("ULICMS_ROOT/content/avatars/user-" . $this->getId() . ".png");
+		$generatedAvatar = $this->getProcessedAvatarPath();
 
-		$imagine->open($tmpFile)
+		$imagine->open($inputFile)
 				->thumbnail($size, $mode)
 				->save($generatedAvatar);
-		unlink($tmpFile);
+	}
+
+	protected function getProcessedAvatarPath(): ?string {
+		return $this->isPersistent() ? Path::resolve(
+						"ULICMS_ROOT/content/avatars/user-" .
+						$this->getId() . ".png"
+				) : null;
+	}
+
+	public function removeAvatar(): bool {
+		$generatedAvatar = $this->getProcessedAvatarPath();
+		if ($generatedAvatar and file_exists($generatedAvatar)) {
+			return unlink($generatedAvatar);
+		}
+		return false;
+	}
+
+	public function hasProcessedAvatar(): bool {
+		return ($this->getProcessedAvatarPath() and
+				file_exists($this->getProcessedAvatarPath()));
 	}
 
 }
