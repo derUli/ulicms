@@ -518,10 +518,16 @@ class User extends Model {
 		}
 
 		if (file_exists($userAvatarDirectory) and $this->getFullName()) {
-			$avatarImageFile = Path::Resolve("$userAvatarDirectory/" . md5($this->getFullName()) . ".png");
+			$avatarImageFile1 = Path::Resolve("$userAvatarDirectory/user-" . $this->getId() . ".png");
+			$avatarImageFile2 = Path::Resolve("$userAvatarDirectory/" . md5($this->getFullName()) . ".png");
+
+			$url = !is_admin_dir() ?
+					"content/avatars/user-" . $this->getId() . ".png" :
+					"../content/avatars/user-" . $this->getId() . ".png";
 
 			// generate initial letter avatar if it doesn't exist
-			$avatarUrl = $this->generateAvatar($avatarImageFile);
+			$avatarUrl = file_exists($avatarImageFile1) ?
+					$url : $this->generateAvatar($avatarImageFile2);
 		}
 		return $avatarUrl;
 	}
@@ -540,8 +546,8 @@ class User extends Model {
 		}
 
 		$url = !is_admin_dir() ?
-				"/content/avatars/" . md5($this->getFullName()) . ".png" :
-				"/../content/avatars/" . md5($this->getFullName()) . ".png";
+				"content/avatars/" . md5($this->getFullName()) . ".png" :
+				"../content/avatars/" . md5($this->getFullName()) . ".png";
 
 		$avatarUrl = ModuleHelper::getBaseUrl($url);
 
@@ -623,6 +629,25 @@ class User extends Model {
 				$group->getID()
 					), true);
 		}
+	}
+
+	public function changeAvatar(array $upload): void {
+		$extension = pathinfo($upload["name"], PATHINFO_EXTENSION);
+		$tmpFile = uniqid() . "." . $extension;
+		$tmpFile = Path::resolve("ULICMS_TMP/$tmpFile");
+		move_uploaded_file($upload["tmp_name"], $tmpFile);
+
+		$imagine = new Imagine\Gd\Imagine();
+
+		$size = new Imagine\Image\Box(40, 40);
+		$mode = Imagine\Image\ImageInterface::THUMBNAIL_INSET;
+
+		$generatedAvatar = Path::resolve("ULICMS_ROOT/content/avatars/user-" . $this->getId() . ".png");
+
+		$imagine->open($tmpFile)
+				->thumbnail($size, $mode)
+				->save($generatedAvatar);
+		unlink($tmpFile);
 	}
 
 }
