@@ -91,10 +91,11 @@ class UserController extends Controller {
 			}
 			$user->setLastname($lastname);
 			$user->setFirstname($firstname);
-			$user->setPassword($password);
+			if ($password) {
+				$user->setPassword($password);
+			}
 			$user->setEmail($email);
 			$user->setDefaultLanguage($default_language);
-
 
 			if ($permissionChecker->hasPermission("users_edit")) {
 				$user->setAdmin($admin);
@@ -117,8 +118,12 @@ class UserController extends Controller {
 			$user->setHTMLEditor($html_editor);
 			$user->save();
 
-			if (isset($_FILES["avatar"])) {
-				$user->changeAvatar($_FILES["avatar"]);
+			if (!empty($_FILES["avatar"]["name"])) {
+				if (!$user->changeAvatar($_FILES["avatar"])) {
+					ExceptionResult(
+							get_translation("avatar_upload_failed")
+					);
+				}
 			}
 
 			if (!$permissionChecker->hasPermission("users")) {

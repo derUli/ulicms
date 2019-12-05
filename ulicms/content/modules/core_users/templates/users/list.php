@@ -77,7 +77,10 @@ if ($permissionChecker->hasPermission("users")) {
 						$avatar = imageTag(
 								$user->getAvatar(),
 								[
-									"class" => "avatar"
+									"class" => "avatar has-pointer",
+									"alt" => get_translation("show_in_original_size"),
+									"title" => get_translation("show_in_original_size"),
+									"data-name" => _esc($user->getUserName())
 								]
 						);
 						echo '<tr id="dataset-' . $user->getId() . '">';
@@ -132,3 +135,10 @@ $translation = new JSTranslation(array(
 	"ask_for_delete"
 		));
 $translation->render();
+
+enqueueScriptFile(
+		ModuleHelper::buildRessourcePath(
+				"core_users", "js/list.js")
+);
+
+combinedScriptHtml();

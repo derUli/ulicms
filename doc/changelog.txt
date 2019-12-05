@@ -1,3 +1,11 @@
+===== Neues in UliCMS 2019.4.2 =====
+Neue Features:
+* Man kann nun ein Avatar in Benutzerprofilen hochladen
+
+Fehlerkorrekturen:
+* Beim Bearbeiten eines Benutzers wird das Passwort nicht mehr geleert, wenn man kein neues eingegeben hat.
+* PackageController->getPackageDownloadUrl() gab immer null zurück.
+
 ===== Neues in UliCMS 2019.4.1 =====
 
 Neue Features:

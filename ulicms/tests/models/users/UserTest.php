@@ -383,18 +383,6 @@ class UserTest extends \PHPUnit\Framework\TestCase {
 		$user->delete();
 	}
 
-	// Avatar is not implemented yet
-	// UliCMS had support for Gravatars
-	// but had to dropped it because
-	// the introduction of the new GDPR privacy laws in
-	// the european union
-	public function testSetAvatar() {
-
-		$user = new User();
-		$this->expectException(NotImplementedException::class);
-		$user->setAvatar($file);
-	}
-
 	public function testRemoveSecondaryGroup() {
 
 		$group1 = new Group();

@@ -34,7 +34,7 @@ class User extends Model {
 		}
 	}
 
-	public function loadById($id) {
+	public function loadById($id): void {
 		$sql = "select * from {prefix}users where id = ?";
 		$args = array(
 			intval($id)
@@ -112,7 +112,7 @@ class User extends Model {
 		$this->fillVars($result);
 	}
 
-	public function save() {
+	public function save(): void {
 		if ($this->id) {
 			$this->update();
 		} else {
@@ -145,7 +145,7 @@ class User extends Model {
 		return Template::executeDefaultOrOwnTemplate("email/user_welcome.php");
 	}
 
-	public function fillVars($result = null) {
+	public function fillVars($result = null): void {
 		if (Database::any($result)) {
 			$result = Database::fetchAssoc($result);
 			foreach ($result as $key => $value) {
@@ -226,7 +226,7 @@ class User extends Model {
 		return $this->id;
 	}
 
-	public function setId($id) {
+	public function setId($id): void {
 		$this->id = !is_null($id) ? intval($id) : null;
 	}
 
@@ -359,12 +359,12 @@ class User extends Model {
 		return $this->group_id;
 	}
 
-	public function setPrimaryGroupId($gid) {
+	public function setPrimaryGroupId($gid): void {
 		$this->group_id = !is_null($gid) ? $gid : null;
 		$this->group = !is_null($gid) ? new Group($gid) : null;
 	}
 
-	public function setGroupId($gid) {
+	public function setGroupId($gid): void {
 		$this->setPrimaryGroupId($gid);
 	}
 
@@ -376,12 +376,12 @@ class User extends Model {
 		return $this->getPrimaryGroup();
 	}
 
-	public function setPrimaryGroup($group) {
+	public function setPrimaryGroup($group): void {
 		$this->group = $group;
 		$this->group_id = !is_null($group) ? $group->getId() : null;
 	}
 
-	public function setGroup($group) {
+	public function setGroup($group): void {
 		$this->setPrimaryGroup($group);
 	}
 
@@ -558,9 +558,7 @@ class User extends Model {
 	}
 
 	public function setAvatar($file): void {
-		throw new NotImplementedException(
-				"Avatar feature is not implemented yet."
-		);
+		$this->processAvatar($file);
 	}
 
 	public function getSecondaryGroups(): array {
@@ -571,7 +569,7 @@ class User extends Model {
 		$this->secondary_groups = $val;
 	}
 
-	public function getAllGroups() {
+	public function getAllGroups(): array {
 		$primaryGroup = [$this->getPrimaryGroup()];
 		$secondaryGroups = $this->getSecondaryGroups();
 
@@ -584,7 +582,7 @@ class User extends Model {
 		$this->secondary_groups[] = $val;
 	}
 
-	public function removeSecondaryGroup($val) {
+	public function removeSecondaryGroup($val): void {
 		$filtered = [];
 		foreach ($this->secondary_groups as $group) {
 			if ($group->getID() != $val->getID()) {
@@ -634,7 +632,7 @@ class User extends Model {
 		}
 	}
 
-	public function changeAvatar(array $upload): void {
+	public function changeAvatar(array $upload): bool {
 		$extension = pathinfo($upload["name"], PATHINFO_EXTENSION);
 		$tmpFile = uniqid() . "." . $extension;
 		$tmpFile = Path::resolve("ULICMS_TMP/$tmpFile");
@@ -642,17 +640,15 @@ class User extends Model {
 		if (move_uploaded_file($upload["tmp_name"], $tmpFile)) {
 			$this->processAvatar($tmpFile);
 			unlink($tmpFile);
-		} else {
-			ExceptionResult(
-					get_translation("avatar_upload_failed")
-			);
+			return true;
 		}
+		return false;
 	}
 
 	public function processAvatar(string $inputFile): void {
 		$imagine = new Imagine\Gd\Imagine();
 
-		$size = new Imagine\Image\Box(40, 40);
+		$size = new Imagine\Image\Box(128, 218);
 		$mode = Imagine\Image\ImageInterface::THUMBNAIL_INSET;
 
 		$generatedAvatar = $this->getProcessedAvatarPath();
