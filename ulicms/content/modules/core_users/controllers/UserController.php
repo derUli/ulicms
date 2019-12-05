@@ -95,6 +95,7 @@ class UserController extends Controller {
 			$user->setEmail($email);
 			$user->setDefaultLanguage($default_language);
 
+
 			if ($permissionChecker->hasPermission("users_edit")) {
 				$user->setAdmin($admin);
 				$user->setLocked($locked);
@@ -115,6 +116,10 @@ class UserController extends Controller {
 			$user->setAboutMe($about_me);
 			$user->setHTMLEditor($html_editor);
 			$user->save();
+
+			if (isset($_FILES["avatar"])) {
+				$user->changeAvatar($_FILES["avatar"]);
+			}
 
 			if (!$permissionChecker->hasPermission("users")) {
 				Request::redirect("index.php");

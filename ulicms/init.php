@@ -379,11 +379,9 @@ if (!Settings::get("session_name")) {
 
 $useragent = Settings::get("useragent");
 
-if ($useragent) {
-	define("ULICMS_USERAGENT", $useragent);
-} else {
-	define("ULICMS_USERAGENT", "UliCMS Release " . cms_version());
-}
+define("ULICMS_USERAGENT", $useragent ?
+				$useragent : "UliCMS Release " . cms_version()
+);
 
 @ini_set('user_agent', ULICMS_USERAGENT);
 

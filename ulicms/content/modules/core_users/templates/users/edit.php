@@ -2,6 +2,7 @@
 
 use UliCMS\Constants\RequestMethod;
 use function UliCMS\HTML\imageTag;
+use UliCMS\HTML\Input;
 
 $permissionChecker = new ACL();
 if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermission("users_edit")) or ( $_GET["id"] == $_SESSION["login_id"])) {
@@ -23,15 +24,34 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
 			<a href="<?php echo $backUrl; ?>"
 			   class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
 		</p>
-		<div>
-			<?php echo imageTag($user->getAvatar()); ?>
+		<div class="voffset3">
+			<?php
+			echo imageTag(
+					$user->getAvatar(),
+					[
+						"alt" => get_translation("avatar_image")
+					]
+			);
+			?>
 		</div>
 		<?php
-		echo ModuleHelper::buildMethodCallForm(UserController::class, "update", [], RequestMethod::POST,
+		echo ModuleHelper::buildMethodCallUploadForm(UserController::class, "update", [], RequestMethod::POST,
 				[
 					"id" => "edit_user"
 		]);
 		?>
+		<div class="voffset3">
+			<label for="avatar">
+				<?php t("upload_new_avatar"); ?>
+			</label>
+			<?php
+			echo Input::file(
+					"avatar",
+					false,
+					"image/*"
+			);
+			?>
+		</div>
 		<input type="hidden" name="edit_admin"
 			   value="edit_admin"> <input type="hidden" name="id"
 			   value="<?php
