@@ -95,7 +95,8 @@ function curl_url_exists(string $url): bool {
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
-
+	curl_setopt($ch, CURLOPT_USERAGENT, ULICMS_USERAGENT);
+	
     curl_exec($ch);
 
     $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
