@@ -90,7 +90,12 @@ class UserController extends Controller {
             }
             $user->setLastname($lastname);
             $user->setFirstname($firstname);
-            $user->setPassword($password);
+									
+            // set new password if changed
+            if ($password) {
+                $user->setPassword($password);
+			}
+			
             $user->setEmail($email);
             $user->setDefaultLanguage($default_language);
 
