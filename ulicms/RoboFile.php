@@ -345,6 +345,14 @@ class RoboFile extends \Robo\Tasks {
         $patchManager = new PatchManager();
         $patchManager->truncateInstalledPatches();
     }
+	
+	/**
+     * Sync installed modules with database
+     */
+    public function modulesSync(): void {
+        $modules = new ModuleManager();
+		$modules->sync();
+    }
 
     /**
      * List installed patches

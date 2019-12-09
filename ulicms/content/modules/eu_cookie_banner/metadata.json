@@ -13,7 +13,7 @@
 		"EuCookieBannerController": "controllers/EuCookieBannerController.php"
 	},
 	"controller_function_permissions": {
-		"EuCookieBannerController::*": "saveSettingsPost"
+		"EuCookieBannerController::saveSettingsPost": "eu_cookie_banner"
 	},
 	"settings": {
 		"eu_cookie_banner/help_text_de": "Wir verwenden Cookies, um Ihre Erfahrung zu verbessern. Um die neuen Datenschutzrichtlinien zu erfüllen, müssen wir Sie um Ihre Zustimmung für Cookies fragen. <strong>Mehr Erfahren</strong>",

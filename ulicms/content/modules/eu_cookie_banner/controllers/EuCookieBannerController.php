@@ -15,6 +15,11 @@ class EuCookieBannerController extends MainClass {
                         "settings.php");
     }
 
+    public function beforeContent() {
+        return Template::executeModuleTemplate(self::MODULE_NAME,
+                        "cookie_banner.php");
+    }
+
     public function saveSettingsPost() {
 
         $this->applyLanguageSpecificSettings();
@@ -59,6 +64,24 @@ class EuCookieBannerController extends MainClass {
                 HttpStatusCode::OK,
                 HTMLMinify::OPTIMIZATION_ADVANCED
         );
+    }
+
+    public function frontendFooter() {
+        enqueueScriptFile(
+                ModuleHelper::buildRessourcePath(
+                        self::MODULE_NAME,
+                        "node_modules/cookies-eu-banner/dist/cookies-eu-banner.js"
+                )
+        );
+
+        enqueueScriptFile(
+                ModuleHelper::buildRessourcePath(
+                        self::MODULE_NAME,
+                        "js/main.js"
+                )
+        );
+
+        combinedScriptHtml();
     }
 
 }
