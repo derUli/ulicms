@@ -46,6 +46,34 @@ class Input {
         return "<textarea {$attribHTML}>{$escapedValue}</textarea>";
     }
 
+    public static function editor(string $name,
+            $value,
+            int $rows = 25,
+            int $cols = 80,
+            array $htmlAttributes = []): string {
+
+        if (!isset($htmlAttributes["id"])) {
+            $htmlAttributes["id"] = $name;
+        }
+        if (isset($htmlAttributes["class"])) {
+            $htmlAttributes .= " " . get_html_editor();
+        } else {
+            $htmlAttributes["class"] = get_html_editor();
+        }
+
+        $htmlAttributes["class"] = trim($htmlAttributes["class"]);
+
+        $htmlAttributes["data-mimetype"] = !isset($htmlAttributes["data-mimetype"]) ?
+                "text/html" : $htmlAttributes["data-mimetype"];
+
+        return self::textArea($name, $value, $rows, $cols, $htmlAttributes);
+    }
+
+    /*
+
+     * 	<textarea name="content" id="content" cols=60 rows=20 class="<?php esc($editor); ?>" data-mimetype="text/html"
+     *      */
+
     public static function password(string $name,
             $value,
             array $htmlAttributes = []): string {
