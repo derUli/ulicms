@@ -3,6 +3,13 @@ Neue Features:
 * Man kann nun ein Avatar in Benutzerprofilen hochladen
 * Neuer Robo Task modules:sync
 
+Neue API-Methoden:
+* UliCMS\HTML\Input::editor(string $name,
+            $value,
+            int $rows = 25,
+            int $cols = 80,
+            array $htmlAttributes = []): string
+
 Fehlerkorrekturen:
 * Beim Bearbeiten eines Benutzers wird das Passwort nicht mehr geleert, wenn man kein neues eingegeben hat.
 * PackageController->getPackageDownloadUrl() gab immer null zurück.
