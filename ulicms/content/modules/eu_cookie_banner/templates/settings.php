@@ -11,6 +11,14 @@ echo ModuleHelper::buildMethodCallForm(
 );
 ?>
 <p>Coming Soon</p>
+<?php
+foreach ($languages as $language) {
+    ?>
+    <h3>
+        <?php esc(getLanguageNameByCode($language)); ?>
+    </h3>
+    <p>Coming Soon!</p>
+<?php } ?>
 <p>
     <label for="eu_cookie_banner/html_code">
         <?php translate("html_tracking_codes"); ?>
