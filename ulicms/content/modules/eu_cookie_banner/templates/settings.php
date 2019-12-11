@@ -75,7 +75,7 @@ foreach ($languages as $index => $language) {
     <?php
 }
 ?>
-<div class="voffset3">
+<div class="voffset4">
     <label for="eu_cookie_banner/html_code">
         <?php translate("html_tracking_codes"); ?>
     </label>
@@ -92,7 +92,26 @@ foreach ($languages as $index => $language) {
     );
     ?>
 </div>
-<p class="voffset3">
+<div class="checkbox voffset4">
+    <label for="eu_cookie_banner_include_default_css">
+        <?php
+        echo Input::checkbox(
+                "eu_cookie_banner/include_default_css",
+                Settings::get(
+                        "eu_cookie_banner/include_default_css",
+                        "bool"
+                ),
+                "1",
+                [
+                    "class" => "js-switch",
+                    "id" => "eu_cookie_banner_include_default_css"
+                ]
+        );
+        ?>
+        <?php translate("include_default_css"); ?>
+    </label>
+</div>
+<p class="voffset4">
     <button type="submit" class="btn btn-primary">
         <?php echo icon("fa fa-save");
         ?>

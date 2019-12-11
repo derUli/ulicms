@@ -6,6 +6,17 @@ class EuCookieBannerController extends MainClass {
 
     const MODULE_NAME = "eu_cookie_banner";
 
+    public function head() {
+        if (intval(Settings::get("eu_cookie_banner/include_default_css")) === 1) {
+            enqueueStylesheet(ModuleHelper::buildRessourcePath(
+                            self::MODULE_NAME,
+                            "css/cookie_banner.css"
+                    )
+            );
+        }
+        combinedStylesheetHtml();
+    }
+
     public function getSettingsHeadline() {
         return get_translation("eu_cookie_banner");
     }
@@ -29,6 +40,16 @@ class EuCookieBannerController extends MainClass {
                         "eu_cookie_banner/html_code"
                 )
         );
+
+        Settings::set(
+                "eu_cookie_banner/include_default_css",
+                Request::getVar(
+                        "eu_cookie_banner/include_default_css",
+                        "0",
+                        "bool"
+                )
+        );
+
         Response::redirect(
                 ModuleHelper::buildAdminURL(
                         self::MODULE_NAME,

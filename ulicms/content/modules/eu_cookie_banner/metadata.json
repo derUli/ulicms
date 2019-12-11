@@ -22,6 +22,9 @@
 		"eu_cookie_banner/accept_en" : "Accept",
 		"eu_cookie_banner/reject_de" : "Ablehnen",
 		"eu_cookie_banner/reject_en" : "Reject",
+		"eu_cookie_banner/more_information_de" : "Mehr Informationen",
+		"eu_cookie_banner/more_information_en" : "Learn More",
+		"eu_cookie_banner/include_default_css" : "1",
 		"eu_cookie_banner/html_code": "<!-- Insert your tracking codes here -->"
 	}
 }

@@ -17,13 +17,17 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button id="cookies-eu-reject">
-                        <?php echo Settings::getLang("eu_cookie_banner/reject",
-						getCurrentLanguage()); ?>
+                    <button id="cookies-eu-reject" class="btn btn-default">
+                        <?php
+                        echo Settings::getLang("eu_cookie_banner/reject",
+                                getCurrentLanguage());
+                        ?>
                     </button>
-                    <button id="cookies-eu-accept">
-                        <?php echo Settings::getLang("eu_cookie_banner/accept",
-						getCurrentLanguage()); ?>
+                    <button id="cookies-eu-accept" class="btn btn-primary">
+                        <?php
+                        echo Settings::getLang("eu_cookie_banner/accept",
+                                getCurrentLanguage());
+                        ?>
                     </button>
                 </div>
             </div>
