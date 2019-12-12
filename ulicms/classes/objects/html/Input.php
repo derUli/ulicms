@@ -56,7 +56,7 @@ class Input {
             $htmlAttributes["id"] = $name;
         }
         if (isset($htmlAttributes["class"])) {
-            $htmlAttributes .= " " . get_html_editor();
+            $htmlAttributes["class"] .= " " . get_html_editor();
         } else {
             $htmlAttributes["class"] = get_html_editor();
         }
