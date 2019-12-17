@@ -1,20 +1,4 @@
-===== Neues in UliCMS 2019.4.2 =====
-Neue Features:
-* Man kann nun ein Avatar in Benutzerprofilen hochladen
-* Neuer Robo Task modules:sync
-
-Neue API-Methoden:
-* UliCMS\HTML\Input::editor(string $name,
-            $value,
-            int $rows = 25,
-            int $cols = 80,
-            array $htmlAttributes = []): string
-
-Fehlerkorrekturen:
-* Beim Bearbeiten eines Benutzers wird das Passwort nicht mehr geleert, wenn man kein neues eingegeben hat.
-* PackageController->getPackageDownloadUrl() gab immer null zurück.
-
-===== Neues in UliCMS 2019.4.1 =====
+===== Neues in UliCMS 2020.1 =====
 
 Neue Features:
 * Serverseitige Pagination für Seitenverwaltung
@@ -27,11 +11,14 @@ Neue Features:
 * Shellscripts sind nun mit Robo implementiert
 * Es kann nun auch unter "Pakete" das Standard-Design ausgewählt und die Vorschau von Themes angezeigt werden
 * Soundcloud Player können eingebunden werden
+* Man kann nun ein Avatar in Benutzerprofilen hochladen
+* Neuer Robo Task modules:sync
 
 Neue API-Methoden:
 * User->getAllGroups(): array
 * _unesc($string): string
 * unesc($string): void
+* UliCMS\HTML\Input::editor(string $name, $value, int $rows = 25, int $cols = 80, array $htmlAttributes = []): string
 
 Entfernte API-Methoden:
 * Settings::output(string $key, ?string $type = 'str'): void
@@ -58,6 +45,10 @@ Entfernte Features:
   Diese Features werden in den nächsten UliCMS Releases erneut integriert werden.
 * mPDF wurde aus den Composer Abhängigkeiten entfernt.
   Wenn die PDF-Ausgabe genutzt werden soll, muss dafür das mPDF Paket von https://extend.ulicms.de/mPDF.html installiert werden
+  
+Fehlerkorrekturen:
+* Beim Bearbeiten eines Benutzers wird das Passwort nicht mehr geleert, wenn man kein neues eingegeben hat.
+* PackageController->getPackageDownloadUrl() gab immer null zurück.
 
 ===== Neues in UliCMS 2019.4 =====
 
