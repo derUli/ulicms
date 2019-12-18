@@ -2,7 +2,7 @@
 
 Neue Features:
 * Serverseitige Pagination für Seitenverwaltung
-* Thumbnails mit den Initialien des Namens werden generiert.
+* Thumbnails mit den Initialen des Namens werden generiert.
 * Diverse Performance Verbesserungen
 * CKEditor aktualisiert auf Version 4.12.1
 * Ausgabe von Content als PDF wird nun auch im Cache gespeichert
