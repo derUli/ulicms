@@ -1,8 +1,6 @@
-<div class="custom-field" 
- data-field-name="my_field">
+<div class="custom-field" data-field-name="my_field">
 <p>
 <strong>Date </strong><br />
-<input type="datetime-local" 
- name="my_field" value="1996-12-19T16:39:57-08:00" />
+<input type="datetime-local" name="my_field" value="1996-12-19T16:39:57-08:00" />
 </p>
 </div>

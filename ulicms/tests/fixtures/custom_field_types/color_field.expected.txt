@@ -1,8 +1,6 @@
-<div class="custom-field" 
- data-field-name="my_field">
+<div class="custom-field" data-field-name="my_field">
 <p>
 <strong>Design </strong><br />
-<input type="text" 
- name="my_field" value="FFC0CB" class="jscolor {hash:true,caps:true}" />
+<input type="text" name="my_field" value="FFC0CB" class="jscolor {hash:true,caps:true}" />
 </p>
 </div>
