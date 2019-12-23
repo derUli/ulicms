@@ -570,11 +570,14 @@ color: " . Settings::get("body-text-color") . ";
     }
 
     public static function getComments(): string {
-        return is_200() ?
-                Template::executeModuleTemplate(
+        if (!is_200()) {
+            return "";
+        }
+        
+        return Template::executeModuleTemplate(
                         "core_comments",
                         "comments.php"
-                ) : "";
+        );
     }
 
     public static function comments(): void {

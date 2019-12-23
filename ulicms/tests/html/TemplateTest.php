@@ -712,6 +712,13 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $this->assertStringContainsString("Send comment", $html);
         $this->assertStringContainsString("Your E-Mail Address", $html);
     }
+    
+    public function testGetCommentsReturnsEmptyString(){
+        $_GET["slug"] = "gibts_echt_nicht";
+        $_SESSION["language"] = "de";
+        
+        $this->assertEmpty(Template::getComments());
+    }
 
     public function testExecuteDefaultOrOwnTemplateOwnExists() {
         $this->assertNotEmpty(Template::executeDefaultOrOwnTemplate("bottom.php"));
