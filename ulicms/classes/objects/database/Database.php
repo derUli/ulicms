@@ -469,7 +469,7 @@ class Database {
     // escape values to prevent sql injections
     // don't manually call this, if you use
     // pQuery() to make queries
-    public static function escapeValue($value, int $type = null) {
+    public static function escapeValue($value, ?int $type = null) {
         if (is_null($value)) {
             return "NULL";
         }

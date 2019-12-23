@@ -46,7 +46,7 @@ function replaceVideoTags(string $txt): string {
     // regulären Ausdruck geht, aber ich kann keine reguläre Ausdrücke.
     // Reguläre Ausdrücke sehen für mich so aus, als wäre
     // eine Katze über die Tastatur gelaufen.
-    $contains = strpos($txt, "[video id=") !== FALSE;
+    $contains = strpos($txt, "[video id=") !== false;
 
     if (!$contains) {
         return $txt;

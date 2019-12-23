@@ -118,7 +118,7 @@ function keywordsFromString(string $text): array {
 
     $return = array_filter($return,
             "decodeHTMLEntities");
-// nach häufigkeit sortieren
+    // nach häufigkeit sortieren
     arsort($return);
 
     // array zurückgeben
