@@ -16,7 +16,25 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase {
         unset($_SESSION["language"]);
         unset($_SERVER["REQUEST_URI"]);
         unset($_SERVER["REQUEST_URI"]);
+
+        Database::deleteFrom("content", "title like 'Unit Test%'");
+
         @session_destroy();
+    }
+
+    private function getPageWithShortcode(): Page {
+        $page = new Page();
+        $page->title = "Unit Test " . uniqid();
+        $page->slug = "unit-test-" . uniqid();
+        $page->menu = "none";
+        $page->language = "tlh";
+        $page->article_date = 1413821696;
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->content = "[module=fortune2]";
+        $page->save();
+        
+        return $page;
     }
 
     public function testUnderscoreToCamel() {
@@ -64,6 +82,11 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(13, ModuleHelper::getFirstPageWithModule("fortune2")->id);
 
         $this->assertNull(ModuleHelper::getFirstPageWithModule('gibts_nicht_modul'));
+
+        $expectedPage = $this->getPageWithShortcode();
+        $actualPage = ModuleHelper::getFirstPageWithModule(null, 'tlh');
+        $this->assertNotNull($actualPage);
+        $this->assertEquals($expectedPage->getId(), $actualPage->id);
     }
 
     public function testIsEmbedModule() {
