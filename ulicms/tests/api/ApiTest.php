@@ -760,20 +760,18 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
     public function testGetAllLanguagesNotFiltered() {
         $languages = getAllLanguages();
         $this->assertGreaterThanOrEqual(1, count($languages));
-
-        $languages = getAllLanguages();
-        $this->assertGreaterThanOrEqual(1, count($languages));
     }
 
     public function testVarDumpStrReturnsStringWithOneVar() {
+        $output = var_dump_str(new User());
         $expected = file_get_contents(
                 Path::resolve("ULICMS_ROOT/tests/fixtures/var_dump_str.txt"
                 )
         );
-        $output = var_dump_str(new Page());
+
         $this->assertStringContainsString(
-                normalizeLN($expected),
-                normalizeLN($output)
+                $expected,
+                $output
         );
     }
 
