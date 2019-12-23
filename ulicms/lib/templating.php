@@ -546,7 +546,7 @@ function meta_description() {
 	}
 }
 
-function get_title(?string $slug = null, bool $headline = false): string {
+function get_title(?string $slug = null, bool $headline = false): ?string {
 	$cacheVar = $headline ? "headline" : "title";
 	if (Vars::get($cacheVar)) {
 		return Vars::get($cacheVar);
@@ -599,6 +599,7 @@ function get_title(?string $slug = null, bool $headline = false): string {
 			return $title;
 		}
 	}
+        return null;
 }
 
 function title(?string $ipage = null, bool $headline = false): void {

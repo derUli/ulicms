@@ -238,7 +238,8 @@ class Template {
         $result = Database::query($sql);
         $dataset = Database::fetchObject($result);
 
-        return str_replace("%title%", get_title(null, true), $format);
+        return $dataset->show_headline ?
+                str_replace("%title%", get_title(null, true), $format) : null;
     }
 
     public static function doctype(): void {

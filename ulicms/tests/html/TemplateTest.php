@@ -45,15 +45,18 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         }
 
         Database::query("delete from {prefix}content where "
-                . "title like 'Test Page %' or slug like 'testpage%' or slug ='testgetbodyclasses'",
+                . "title like 'Test Page %' or slug like 'testpage%' or slug"
+                . " like 'test-page%' or slug ='testgetbodyclasses'",
                 true);
         unset($_SERVER["SERVER_PROTOCOL"]);
         unset($_SERVER['HTTP_HOST']);
         unset($_SERVER['SERVER_PORT']);
         unset($_SERVER['REQUEST_URI']);
         unset($_SERVER['HTTPS']);
-
         unset($_SESSION["language"]);
+        
+        Vars::delete("headline");
+        Vars::delete("title");
     }
 
     private function cleanUp() {
@@ -554,7 +557,93 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
                 Template::getHeadline("<h2>%title%</h2>")
         );
     }
+    
+    public function testGetHeadlineReturnsNull(){
+        $manager = new UserManager();
+        $users = $manager->getAllUsers();
+        $user = $users[0];
+        $user_id = $user->getId();
 
+        $groups = Group::getAll();
+        $group = $groups[0];
+        $group_id = $group->getId();
+        
+        $page = new Page();
+        $page->title = "Test Page " . time();
+        $page->slug = "test-page-" . time();
+        $page->language = "de";
+        $page->menu = "not_in_menu";
+        $page->content = "<p>Wir schreiben das Jahr [year] des fliegenden " .
+                "Spaghettimonsters</p>";
+        $page->author_id = $user_id;
+        $page->group_id = $group_id;
+        $page->show_headline = false;
+        $page->save();
+        
+        $_GET["slug"] = $page->slug;
+        $_SESSION["language"] =  $page->language;
+        
+        $this->assertNull(Template::getHeadline());
+    }
+    
+     
+    public function testGetHeadlineReturnsTitle(){
+        $manager = new UserManager();
+        $users = $manager->getAllUsers();
+        $user = $users[0];
+        $user_id = $user->getId();
+
+        $groups = Group::getAll();
+        $group = $groups[0];
+        $group_id = $group->getId();
+        
+        $page = new Page();
+        $page->title = "Titel";
+        $page->slug = "test-page-" . time();
+        $page->language = "de";
+        $page->menu = "not_in_menu";
+        $page->content = "<p>Wir schreiben das Jahr [year] des fliegenden " .
+                "Spaghettimonsters</p>";
+        $page->author_id = $user_id;
+        $page->group_id = $group_id;
+        $page->save();
+        
+        $_GET["slug"] = $page->slug;
+        $_SESSION["language"] =  $page->language;
+        
+        $this->assertEquals("<h1>Titel</h1>", Template::getHeadline());
+    }
+    
+     public function testGetHeadlineReturnsHeadline(){
+        $manager = new UserManager();
+        $users = $manager->getAllUsers();
+        $user = $users[0];
+        $user_id = $user->getId();
+
+        $groups = Group::getAll();
+        $group = $groups[0];
+        $group_id = $group->getId();
+        
+        $page = new Page();
+        $page->title = "Titel";
+        $page->alternate_title = "Alternative Überschrift";
+        $page->slug = "test-page-" . time();
+        $page->language = "de";
+        $page->menu = "not_in_menu";
+        $page->content = "<p>Wir schreiben das Jahr [year] des fliegenden " .
+                "Spaghettimonsters</p>";
+        $page->author_id = $user_id;
+        $page->group_id = $group_id;
+        $page->save();
+        
+        $_GET["slug"] = $page->slug;
+        $_SESSION["language"] =  $page->language;
+        
+        $this->assertEquals("<h1>Alternative Überschrift</h1>",
+                Template::getHeadline());
+    }
+    
+    
     public function testHeadlinePrintsString() {
         $pages = ContentFactory::getAllRegular();
 
@@ -568,6 +657,8 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
 
         $this->assertEquals("<h3>{$first->title}</h3>", ob_get_clean());
     }
+    
+    
 
     public function testComments() {
         $_GET["slug"] = "gibts_echt_nicht";
