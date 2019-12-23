@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use UliCMS\Security\PermissionChecker;
 use UliCMS\Constants\AuditLog;
 
@@ -12,7 +14,7 @@ class UserController extends Controller {
 		$this->logger = LoggerRegistry::get("audit_log");
 	}
 
-	public function createPost() {
+	public function createPost(): void {
 		$username = $_POST["username"];
 		$lastname = $_POST["lastname"];
 		$firstname = $_POST["firstname"];
@@ -62,7 +64,7 @@ class UserController extends Controller {
 		Request::redirect(ModuleHelper::buildActionURL("admins"));
 	}
 
-	public function updatePost() {
+	public function updatePost(): void {
 		$permissionChecker = new PermissionChecker(get_user_id());
 		if ($permissionChecker->hasPermission("users_edit") or $_POST["id"] == $_SESSION["login_id"]) {
 			$id = intval($_POST["id"]);
@@ -94,7 +96,7 @@ class UserController extends Controller {
 			
 			// set new password if changed
 			if ($password) {
-				$user->setPassword($password);
+                            $user->setPassword($password);
 			}
 			
 			$user->setEmail($email);
@@ -135,10 +137,10 @@ class UserController extends Controller {
 				Request::redirect(ModuleHelper::buildActionURL("admins"));
 			}
 		}
-		return ExceptionResult(get_translation("forbidden"), HttpStatusCode::FORBIDDEN);
+		ExceptionResult(get_translation("forbidden"), HttpStatusCode::FORBIDDEN);
 	}
 
-	public function deletePost() {
+	public function deletePost(): void {
 		$id = intval($_GET["id"]);
 
 		do_event("before_admin_delete");

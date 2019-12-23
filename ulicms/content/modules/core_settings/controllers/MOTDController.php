@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 use UliCMS\Utils\CacheUtil;
 
 class MOTDController extends Controller {
 
-    public function savePost() {
+    public function savePost(): void {
         if (StringHelper::isNullOrEmpty(Request::getVar("language"))) {
             Settings::set("motd", $_POST["motd"]);
         } else {

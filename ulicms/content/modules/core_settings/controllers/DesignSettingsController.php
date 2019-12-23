@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use UliCMS\Utils\CacheUtil;
 use UliCMS\Packages\Theme;
 
@@ -19,7 +21,7 @@ class DesignSettingsController extends Controller {
 		}
 	}
 
-	public function savePost() {
+	public function savePost(): void {
 		if (!isset($_REQUEST["disable_custom_layout_options"])) {
 			Settings::set(
 					"disable_custom_layout_options",
@@ -117,7 +119,7 @@ class DesignSettingsController extends Controller {
 		HTTPStatusCodeResult(HttpStatusCode::OK);
 	}
 
-	public function getFontFamilys() {
+	public function getFontFamilys(): array {
 		global $fonts;
 		$fonts = [];
 		$fonts["Times New Roman"] = "TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif";
@@ -142,7 +144,8 @@ class DesignSettingsController extends Controller {
 		$fonts["Calibri"] = "Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif";
 		$fonts["Segoe"] = "'wf_SegoeUI', 'Segoe UI', 'Segoe','Segoe WP', 'Tahoma', 'Verdana', 'Arial', 'sans-serif'";
 		$fonts["Google Fonts"] = "google";
-		$fonts = apply_filter($fonts, "fonts_filter");
+		
+                $fonts = apply_filter($fonts, "fonts_filter");
 
 		// Hier bei Bedarf weitere Fonts einfügen
 		// $fonts["Meine Font 1"] = "myfont1";
@@ -154,8 +157,8 @@ class DesignSettingsController extends Controller {
 		return $fonts;
 	}
 
-	public function getGoogleFonts() {
-		$retval = [];
+	public function getGoogleFonts(): array {
+		$fonts = [];
 		$file = ModuleHelper::buildModuleRessourcePath(
 						$this->moduleName,
 						"data/webFontNames.opml"
@@ -163,12 +166,12 @@ class DesignSettingsController extends Controller {
 		$content = file_get_contents($file);
 		$xml = new SimpleXMLElement($content);
 		foreach ($xml->body->outline as $outline) {
-			$retval[] = $outline["text"];
+			$fonts[] = $outline["text"];
 		}
-		return $retval;
+		return $fonts;
 	}
 
-	public function getThemePreview() {
+	public function getThemePreview(): void {
 		$theme = Request::getVar("theme", null, "str");
 
 		if (!$theme) {
@@ -192,7 +195,7 @@ class DesignSettingsController extends Controller {
 		HTTPStatusCodeResult(HttpStatusCode::NOT_FOUND);
 	}
 
-	public function generateSCSS() {
+	public function generateSCSS(): ?string {
 		$settings = [
 			"header-background-color" => Settings::get("header-background-color"),
 			"body-text-color" => Settings::get("body-text-color"),
@@ -215,7 +218,7 @@ class DesignSettingsController extends Controller {
 		return $output;
 	}
 
-	public function generateSCSSToFile() {
+	public function generateSCSSToFile(): ?string {
 		$scss = $this->generateSCSS();
 
 		if ($scss) {
@@ -226,7 +229,7 @@ class DesignSettingsController extends Controller {
 		return null;
 	}
 
-	public function setDefaultTheme() {
+	public function setDefaultTheme(): void {
 		$theme = Request::getVar("name");
 
 		Settings::set("theme", $theme);
@@ -237,7 +240,7 @@ class DesignSettingsController extends Controller {
 		);
 	}
 
-	public function setDefaultMobileTheme() {
+	public function setDefaultMobileTheme(): void {
 		$theme = Request::getVar("name");
 
 		if($theme !== Settings::get("mobile_theme")){

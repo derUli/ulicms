@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 class SpamFilterController extends Controller {
 
-    public function savePost() {
+    public function savePost(): void {
         do_event("before_save_spamfilter_settings");
 
         if ($_POST["spamfilter_enabled"] == "yes") {

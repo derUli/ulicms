@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace UliCMS\Packages;
 
 use UliCMS\Packages\PatchManager;
@@ -11,7 +13,11 @@ class Patch {
     public $url;
     public $hash;
 
-    public function __construct($name, $description, $url, $hash = null) {
+    public function __construct(
+            string $name,
+            string $description,
+            string $url,
+            ?string $hash = null) {
         $this->name = $name;
         $this->description = $description;
         $this->url = $url;
@@ -39,7 +45,7 @@ class Patch {
                         $this->hash);
     }
 
-    public function toLine() {
+    public function toLine(): string {
         $columns = [
             $this->name,
             $this->description,

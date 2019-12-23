@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use UliCMS\Models\Content\Comment;
 use UliCMS\Exceptions\DatasetNotFoundException;
 use UliCMS\HTML as HTML;
@@ -10,7 +12,7 @@ use zz\Html\HTMLMinify;
 
 class CommentsController extends MainClass {
 
-    public function beforeHtml() {
+    public function beforeHtml(): void {
         Vars::set("comments_enabled", false);
 
         if (is_200()) {
@@ -29,7 +31,7 @@ class CommentsController extends MainClass {
     }
 
     // This method handles posted comments
-    public function postComment() {
+    public function postComment(): void {
 
         // check if DSGVO checkbox is checked
         $checkbox = new PrivacyCheckbox(getCurrentLanguage(true));
@@ -95,7 +97,7 @@ class CommentsController extends MainClass {
         );
     }
 
-    public function getCommentText() {
+    public function getCommentText(): void {
         $id = Request::getVar("id");
         try {
             $comment = new Comment($id);
@@ -114,13 +116,17 @@ class CommentsController extends MainClass {
     }
 
     // this returns the default status for new comments
-    public function getDefaultStatus() {
+    public function getDefaultStatus(): string {
         $defaultStatus = Settings::get("comments_must_be_approved") ?
                 CommentStatus::PENDING : CommentStatus::PUBLISHED;
         return $defaultStatus;
     }
 
-    public function getResults($status = null, $content_id = null, $limit = 0) {
+    public function getResults(
+            ?string $status = null,
+            ?int $content_id = null,
+            ?int $limit = 0
+    ): array {
         $results = [];
         if ($status) {
             $results = Comment::getAllByStatus($status, $content_id);
@@ -134,7 +140,7 @@ class CommentsController extends MainClass {
     }
 
     // filter and show the comments to the comment moderation
-    public function filterComments() {
+    public function filterComments(): void {
         // get arguments from the URL
         $status = Request::getVar("status", null, "str");
         $content_id = Request::getVar("content_id", null, "int");
@@ -148,7 +154,7 @@ class CommentsController extends MainClass {
     }
 
     // get the configured default limit or if is set the default value
-    public function getDefaultLimit() {
+    public function getDefaultLimit(): int {
         $limit = 100;
         if (Settings::get("comments_default_limit")) {
             $limit = intval(Settings::get("comments_default_limit"));
@@ -156,7 +162,7 @@ class CommentsController extends MainClass {
         return $limit;
     }
 
-    public function doAction() {
+    public function doAction(): void {
         // post arguments
         $comments = Request::getVar("comments", []);
         $action = Request::getVar("action", null, "str");

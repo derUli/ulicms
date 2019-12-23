@@ -12,12 +12,12 @@ class Database {
     private static $echoQueries = false;
 
     // this is used to show sql queries while running the unit tests
-    public static function setEchoQueries($echoQueries = true) {
+    public static function setEchoQueries($echoQueries = true): void {
         self::$echoQueries = $echoQueries;
     }
 
     // force MySQL into strict mode
-    public static function getSqlStrictModeFlags() {
+    public static function getSqlStrictModeFlags(): array {
         return [
             "ONLY_FULL_GROUP_BY",
             "STRICT_TRANS_TABLES",

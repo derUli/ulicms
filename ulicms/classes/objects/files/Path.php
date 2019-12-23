@@ -7,7 +7,7 @@ use UliCMS\Utils\File;
 class Path {
 
     // resolves a path including placeholder constants such as ULICMS_ROOT
-    public static function resolve(string$path): string {
+    public static function resolve(string $path): string {
         $path = str_ireplace("ULICMS_ROOT", rtrim(ULICMS_ROOT, "/"), $path);
         $path = str_ireplace(
                 "ULICMS_DATA_STORAGE_ROOT",

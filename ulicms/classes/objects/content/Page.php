@@ -176,7 +176,8 @@ class Page extends Content {
         $sql .= intval($this->author_id) . ",";
         $sql .= intval($this->group_id) . ",";
         $sql .= intval($this->lastchangeby) . ",";
-// Views
+        
+        // Views
         $sql .= "0,";
 
         $sql .= "'" . Database::escapeValue($this->menu) . "',";

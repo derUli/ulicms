@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use UliCMS\Constants\AuditLog;
 
 class FormController extends Controller {
@@ -9,7 +11,7 @@ class FormController extends Controller {
         $this->logger = LoggerRegistry::get("audit_log");
     }
 
-    public function createPost() {
+    public function createPost(): void {
         $name = $_POST["name"];
         $enabled = $_POST["enabled"];
         $email_to = $_POST["email_to"];
@@ -41,7 +43,7 @@ class FormController extends Controller {
         Request::redirect(ModuleHelper::buildActionURL("forms"));
     }
 
-    public function updatePost() {
+    public function updatePost(): void {
         $id = $_POST["id"];
         $name = $_POST["name"];
         $enabled = $_POST["enabled"];
@@ -76,7 +78,7 @@ class FormController extends Controller {
         Request::redirect(ModuleHelper::buildActionURL("forms"));
     }
 
-    public function deletePost() {
+    public function deletePost(): void {
         $del = Request::getVar("del", 0, "int");
         Forms::deleteForm($del);
         if ($this->logger) {

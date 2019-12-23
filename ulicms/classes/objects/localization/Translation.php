@@ -5,7 +5,6 @@ declare(strict_types=1);
 // This class is a work in progress
 // It's currently only used for overriding of translations
 class Translation {
-
     private static $translations = [];
 
     public static function init(): void {
@@ -22,7 +21,7 @@ class Translation {
         }
     }
 
-    public static function delete(string $key) {
+    public static function delete(string $key): void {
         self::set($key, null);
     }
 

@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 use zz\Html\HTMLMinify;
 
 class HomeController extends Controller {
 
-    public function getModel() {
+    public function getModel(): HomeViewModel {
         $model = new HomeViewModel();
         $result = Database::query("SELECT count(id) as amount FROM `{prefix}content`", true);
         $dataset = Database::fetchObject($result);
@@ -28,7 +30,7 @@ class HomeController extends Controller {
         return $model;
     }
 
-    public function newsfeed() {
+    public function newsfeed(): void {
 
         $html = Template::executeModuleTemplate("core_home", "news.php");
         $options = array(
@@ -40,7 +42,7 @@ class HomeController extends Controller {
         HtmlResult($html);
     }
 
-    public function statistics() {
+    public function statistics(): void {
         $html = Template::executeModuleTemplate("core_home", "statistics.php");
         $options = array(
             'optimizationLevel' => HTMLMinify::OPTIMIZATION_ADVANCED
@@ -50,7 +52,7 @@ class HomeController extends Controller {
         HtmlResult($html);
     }
 
-    public function topPages() {
+    public function topPages(): void {
         $html = Template::executeModuleTemplate("core_home", "top_pages.php");
         $options = array(
             'optimizationLevel' => HTMLMinify::OPTIMIZATION_ADVANCED
@@ -60,7 +62,7 @@ class HomeController extends Controller {
         HtmlResult($html);
     }
 
-    public function lastUpdatedPages() {
+    public function lastUpdatedPages(): void {
         $html = Template::executeModuleTemplate("core_home", "last_updated_pages.php");
         $options = array(
             'optimizationLevel' => HTMLMinify::OPTIMIZATION_ADVANCED
@@ -70,7 +72,7 @@ class HomeController extends Controller {
         HtmlResult($html);
     }
 
-    public function onlineUsers() {
+    public function onlineUsers(): void {
         $html = Template::executeModuleTemplate("core_home", "online_users.php");
         $options = array(
             'optimizationLevel' => HTMLMinify::OPTIMIZATION_ADVANCED

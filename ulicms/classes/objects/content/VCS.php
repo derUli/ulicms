@@ -13,10 +13,12 @@ use function db_escape;
 // tracks content changes
 class VCS {
 
-	public static function createRevision(int $content_id, string $content, $user_id) {
-		$content_id = intval($content_id);
+	public static function createRevision(
+                int $content_id,
+                string $content,
+                int $user_id): bool {
 		$content = db_escape($content);
-		$user_id = intval($user_id);
+                
 		return db_query("INSERT INTO `" . tbname("history")
 				. "` (content_id, content, user_id) "
 				. "VALUES($content_id, '$content', $user_id)");
@@ -33,7 +35,6 @@ class VCS {
 	}
 
 	public static function restoreRevision(int $history_id): bool {
-		$history_id = intval($history_id);
 		$result = db_query("SELECT * FROM " . tbname("history") .
 				" WHERE id = " . $history_id);
 		if (db_num_rows($result) > 0) {

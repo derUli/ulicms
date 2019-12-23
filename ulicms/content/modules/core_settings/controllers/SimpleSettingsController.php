@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 use UliCMS\Utils\CacheUtil;
 
 class SimpleSettingsController extends Controller {
 
-    public function savePost() {
+    public function savePost(): void {
         do_event("before_safe_simple_settings");
         Settings::set("homepage_owner", $_POST["homepage_owner"]);
         Settings::set("language", $_POST["language"]);
@@ -39,7 +41,7 @@ class SimpleSettingsController extends Controller {
         Request::redirect(ModuleHelper::buildActionURL("settings_simple"));
     }
 
-    public function getTimezones() {
+    public function getTimezones(): array {
         return DateTimeZone::listIdentifiers(DateTimeZone::ALL);
     }
 

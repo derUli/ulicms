@@ -18,7 +18,6 @@ use function get_translation;
 // *.ogg is used by browsers which are not allowed to include
 // a *.mp3 codec due legal reasons
 class Audio extends Model {
-
     private $name = null;
     private $mp3_file = null;
     private $ogg_file = null;

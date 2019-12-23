@@ -40,11 +40,11 @@ class Language_Link extends Page {
         return $result;
     }
 
-    public function getLinkedLanguage() {
+    public function getLinkedLanguage(): ?Language {
         return $this->link_to_language ? new Language($this->link_to_language) : null;
     }
 
-    public function setLinkedLanguage(?Language $language) {
+    public function setLinkedLanguage(?Language $language): void {
         $this->link_to_language = $language ? $language->getID() : null;
     }
 

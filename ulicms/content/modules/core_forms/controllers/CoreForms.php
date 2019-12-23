@@ -1,15 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 class CoreForms extends Controller {
 
-    protected function incSpamCount() {
+    protected function incSpamCount(): void{
         Settings::set(
                 "contact_form_refused_spam_mails",
                 Settings::get("contact_form_refused_spam_mails") + 1
         );
     }
 
-    public function beforeHttpHeader() {
+    public function beforeHttpHeader(): void {
         if (StringHelper::isNotNullOrWhitespace(
                         Request::getVar("submit-cms-form")
                 ) and Request::isPost()) {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use UliCMS\CoreContent\Models\ViewModels\DiffViewModel;
 use UliCMS\CoreContent\PageTableRenderer;
 use UliCMS\Models\Content\VCS;
@@ -16,25 +18,25 @@ class PageController extends Controller {
 
     const MODULE_NAME = "core_content";
 
-    public function getPagesListView() {
+    public function getPagesListView(): string {
         return $_SESSION["pages_list_view"] ?? "default";
     }
 
-    public function recycleBin() {
+    public function recycleBin(): void {
         $_SESSION["pages_list_view"] = "recycle_bin";
 
         $url = ModuleHelper::buildActionURL("pages");
         Request::redirect($url);
     }
 
-    public function pages() {
+    public function pages(): void {
         $_SESSION["pages_list_view"] = "default";
 
         $url = ModuleHelper::buildActionURL("pages");
         Request::redirect($url);
     }
 
-    public function createPost() {
+    public function createPost(): void {
         $this->validateInput();
 
         $permissionChecker = new PermissionChecker(get_user_id());
@@ -57,7 +59,7 @@ class PageController extends Controller {
         Request::redirect(ModuleHelper::buildActionURL("pages"));
     }
 
-    public function editPost() {
+    public function editPost(): void {
 
         $this->validateInput();
 
@@ -88,10 +90,10 @@ class PageController extends Controller {
     // Split this in multiple methods
     private function fillAndSaveModel(
             $model,
-            $permissionChecker,
-            $userId = null,
-            $groupId = null
-    ) {
+            Permission $permissionChecker,
+            ?int $userId = null,
+            ?int $groupId = null
+    ): void {
         $model->slug = Request::getVar(
                         "slug",
                         StringHelper::cleanString(
@@ -291,7 +293,7 @@ class PageController extends Controller {
         }
     }
 
-    public function undeletePost() {
+    public function undeletePost(): void {
         $page = Request::getVar("page");
         do_event("before_undelete_page");
         $content = ContentFactory::getByID($page);
@@ -309,7 +311,7 @@ class PageController extends Controller {
         );
     }
 
-    public function deletePost() {
+    public function deletePost(): void {
         $page = Request::getVar("page");
         do_event("before_delete_page");
         $content = ContentFactory::getByID($page);
@@ -328,7 +330,7 @@ class PageController extends Controller {
         );
     }
 
-    public function emptyTrash() {
+    public function emptyTrash(): void {
         do_event("before_empty_trash");
         Content::emptyTrash();
         do_event("after_empty_trash");
@@ -338,7 +340,7 @@ class PageController extends Controller {
         Request::redirect(ModuleHelper::buildActionURL("pages"));
     }
 
-    public function getContentTypes() {
+    public function getContentTypes(): void {
         $json = json_encode(
                 DefaultContentTypes::getAll(),
                 JSON_UNESCAPED_SLASHES
@@ -347,7 +349,10 @@ class PageController extends Controller {
         RawJSONResult($json);
     }
 
-    public function diffContents($history_id = null, $content_id = null) {
+    public function diffContents(
+            ?int $history_id = null,
+            ?int $content_id = null
+    ): DiffViewModel {
         $history_id = intval(!$history_id ?
                 $_GET ["history_id"] : $history_id);
         $content_id = intval(!$content_id ?
@@ -384,7 +389,7 @@ class PageController extends Controller {
         );
     }
 
-    public function toggleShowPositions() {
+    public function toggleShowPositions(): void {
         $settingsName = "user/" . get_user_id() . "/show_positions";
         if (Settings::get($settingsName)) {
             Settings::delete($settingsName);
@@ -394,7 +399,7 @@ class PageController extends Controller {
         HTTPStatusCodeResult(HttpStatusCode::OK);
     }
 
-    public function checkSlugFree() {
+    public function checkSlugFree(): void {
         if ($this->checkIfSlugIsFree(
                         $_REQUEST["slug"],
                         $_REQUEST["language"],
@@ -409,13 +414,17 @@ class PageController extends Controller {
     // if $id is set the content with the id will be excluded from this check
     // to prevent the slug field to be marked as error when editing a page
 
-    public function checkIfSlugIsFree($slug, $language, $id) {
+    public function checkIfSlugIsFree(
+            string $slug,
+            string $language,
+            int $id
+    ): bool {
         if (StringHelper::isNullOrWhitespace($slug)) {
             return true;
         }
         $slug = Database::escapeValue($slug);
         $language = Database::escapeValue($language);
-        $id = intval($id);
+
         $sql = "SELECT id FROM " . tbname("content") .
                 " where slug='$slug' and language = '$language' ";
         if ($id > 0) {
@@ -426,7 +435,7 @@ class PageController extends Controller {
     }
 
     // FIXME: There should be no html code in controller
-    public function filterParentPages() {
+    public function filterParentPages(): void {
         $lang = $_REQUEST["mlang"];
         $menu = $_REQUEST["mmenu"];
         $parent_id = $_REQUEST["mparent"];
@@ -447,7 +456,7 @@ class PageController extends Controller {
                         echo "selected";
                     }
                     ?>>
-                        <?php
+                    <?php
                         echo esc($page["title"]);
                         ?>
                 (ID: <?php echo $page["id"]; ?>)
@@ -458,7 +467,7 @@ class PageController extends Controller {
                 HTMLMinify::OPTIMIZATION_ADVANCED);
     }
 
-    public function getPages() {
+    public function getPages(): void {
         $start = Request::getVar("start", 0, "int");
         $length = Request::getVar("length", 25, "int");
         $draw = Request::getVar("draw", 1, "int");
@@ -482,7 +491,7 @@ class PageController extends Controller {
         RawJSONResult($json);
     }
 
-    protected function validateInput() {
+    protected function validateInput(): void {
         $validator = new Validator();
         $validation = $validator->make($_POST + $_FILES, [
             'slug' => 'required',
@@ -512,7 +521,7 @@ class PageController extends Controller {
 
     // this is used for the Link feature of the CKEditor
     // The user can select an internal page from a dropdown list for linking
-    public function getCKEditorLinkList() {
+    public function getCKEditorLinkList(): void {
         $data = getAllPagesWithTitle();
         JSONResult($data, HttpStatusCode::OK, true);
     }

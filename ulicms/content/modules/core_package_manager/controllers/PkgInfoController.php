@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 class PkgInfoController extends Controller {
 
-    public function installPost() {
+    public function installPost(): void {
         if (StringHelper::isNotNullOrEmpty($_REQUEST["file"])) {
             $file = basename($_POST["file"]);
             $path = Path::resolve("ULICMS_TMP/$file");

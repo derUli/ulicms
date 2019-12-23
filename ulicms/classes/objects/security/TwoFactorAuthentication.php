@@ -17,7 +17,7 @@ class TwoFactorAuthentication {
         }
     }
 
-    public function getSecret() {
+    public function getSecret(): ?string {
         return Settings::get("ga_secret");
     }
 
@@ -37,7 +37,7 @@ class TwoFactorAuthentication {
         return $ga->getCode($this->getSecret());
     }
 
-    public function checkCode(string $code) {
+    public function checkCode(string $code): bool {
         return $this->getCode() === $code;
     }
 

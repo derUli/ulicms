@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use UliCMS\Constants\AuditLog;
 use UliCMS\Models\Content\Categories;
 
@@ -12,7 +14,7 @@ class CategoryController extends Controller {
         $this->logger = LoggerRegistry::get("audit_log");
     }
 
-    public function createPost() {
+    public function createPost(): void {
         $logger = LoggerRegistry::get("audit_log");
 
         if (!empty($_REQUEST["name"])) {
@@ -31,7 +33,7 @@ class CategoryController extends Controller {
         Request::redirect(ModuleHelper::buildActionURL("categories"));
     }
 
-    public function updatePost() {
+    public function updatePost(): void {
         if (!empty($_REQUEST["name"]) and ! empty($_REQUEST["id"])) {
             Categories::updateCategory(
                     intval($_REQUEST["id"]),
@@ -50,7 +52,7 @@ class CategoryController extends Controller {
         Request::redirect(ModuleHelper::buildActionURL("categories"));
     }
 
-    public function deletePost() {
+    public function deletePost(): void {
         $del = intval($_GET["del"]);
         if ($del != 1) {
             Categories::deleteCategory($del);

@@ -1,32 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 class AudioController extends Controller {
 
-    public function deletePost() {
-        $result = db_query("select ogg_file, mp3_file from " .
-                tbname("audio") . " where id = " .
-                intval($_REQUEST ["delete"]));
-        if (db_num_rows($result) > 0) {
-            $dataset = db_fetch_object($result);
-            $filepath = ULICMS_DATA_STORAGE_ROOT . "/content/audio/" .
-                    basename($dataset->ogg_file);
-            if (!empty($dataset->ogg_file) and file_exists($filepath)) {
-                @unlink($filepath);
-            }
-
-            $filepath = ULICMS_DATA_STORAGE_ROOT . "/content/audio/" .
-                    basename($dataset->mp3_file);
-            if (!empty($dataset->mp3_file) and file_exists($filepath)) {
-                @unlink($filepath);
-            }
-
-            db_query("DELETE FROM " . tbname("audio") . " where id = " .
-                    $_REQUEST ["delete"]);
-        }
-        Request::redirect(ModuleHelper::buildActionURL("videos"));
-    }
-
-    public function createPost() {
+    public function createPost(): void {
         $mp3_file_value = "";
         $audio_folder = ULICMS_DATA_STORAGE_ROOT . "/content/audio";
         // mp3
@@ -97,7 +75,7 @@ class AudioController extends Controller {
         Request::redirect(ModuleHelper::buildActionURL("audio"));
     }
 
-    public function updatePost() {
+    public function updatePost(): void {
         $name = db_escape($_POST ["name"]);
         $id = intval($_POST ["id"]);
         $ogg_file = db_escape(basename($_POST ["ogg_file"]));
@@ -109,6 +87,30 @@ class AudioController extends Controller {
                 . "category_id = $category_id, `updated` = $updated "
                 . "where id = $id");
         Request::redirect(ModuleHelper::buildActionURL("audio"));
+    }
+
+    public function deletePost(): void {
+        $result = db_query("select ogg_file, mp3_file from " .
+                tbname("audio") . " where id = " .
+                intval($_REQUEST ["delete"]));
+        if (db_num_rows($result) > 0) {
+            $dataset = db_fetch_object($result);
+            $filepath = ULICMS_DATA_STORAGE_ROOT . "/content/audio/" .
+                    basename($dataset->ogg_file);
+            if (!empty($dataset->ogg_file) and file_exists($filepath)) {
+                @unlink($filepath);
+            }
+
+            $filepath = ULICMS_DATA_STORAGE_ROOT . "/content/audio/" .
+                    basename($dataset->mp3_file);
+            if (!empty($dataset->mp3_file) and file_exists($filepath)) {
+                @unlink($filepath);
+            }
+
+            db_query("DELETE FROM " . tbname("audio") . " where id = " .
+                    $_REQUEST ["delete"]);
+        }
+        Request::redirect(ModuleHelper::buildActionURL("videos"));
     }
 
 }

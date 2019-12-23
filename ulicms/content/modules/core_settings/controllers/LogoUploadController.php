@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 use UliCMS\Utils\CacheUtil;
 
 class LogoUploadController extends Controller {
 
-    public function upload() {
+    public function upload(): void {
         // Logo Upload
         if (!empty($_FILES['logo_upload_file']['name'])) {
             $logo_upload = $_FILES['logo_upload_file'];

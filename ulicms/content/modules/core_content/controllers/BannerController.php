@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use UliCMS\Constants\AuditLog;
 use UliCMS\Models\Content\Advertisement\Banner;
 use UliCMS\Utils\CacheUtil;
@@ -13,7 +15,7 @@ class BannerController extends Controller {
         $this->logger = LoggerRegistry::get("audit_log");
     }
 
-    public function createPost() {
+    public function createPost(): void {
         do_event("before_create_banner");
 
         $banner = new Banner();
@@ -46,27 +48,7 @@ class BannerController extends Controller {
         Request::redirect(ModuleHelper::buildActionURL("banner"));
     }
 
-    public function deletePost() {
-        $id = intval($_GET["banner"]);
-        $banner = new Banner($id);
-        do_event("before_banner_delete");
-        $banner->delete();
-
-        if ($this->logger) {
-            $user = getUserById(get_user_id());
-            $userName = isset($user["username"]) ?
-                    $user["username"] : AuditLog::UNKNOWN;
-            $this->logger->debug("User $userName - "
-                    . "Deleted Banner with id ($id)");
-        }
-        do_event("after_banner_delete");
-
-        CacheUtil::clearPageCache();
-
-        Request::redirect(ModuleHelper::buildActionURL("banner"));
-    }
-
-    public function updatePost() {
+    public function updatePost(): void {
         do_event("before_edit_banner");
 
         $id = intval($_POST["id"]);
@@ -95,6 +77,26 @@ class BannerController extends Controller {
         }
 
         do_event("after_edit_banner");
+
+        CacheUtil::clearPageCache();
+
+        Request::redirect(ModuleHelper::buildActionURL("banner"));
+    }
+
+    public function deletePost(): void {
+        $id = intval($_GET["banner"]);
+        $banner = new Banner($id);
+        do_event("before_banner_delete");
+        $banner->delete();
+
+        if ($this->logger) {
+            $user = getUserById(get_user_id());
+            $userName = isset($user["username"]) ?
+                    $user["username"] : AuditLog::UNKNOWN;
+            $this->logger->debug("User $userName - "
+                    . "Deleted Banner with id ($id)");
+        }
+        do_event("after_banner_delete");
 
         CacheUtil::clearPageCache();
 

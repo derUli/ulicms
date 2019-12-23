@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 class DefaultAccessRestrictionsController extends Controller {
 
-    public function savePost() {
+    public function savePost(): void {
         Settings::set(
                 "only_admins_can_edit",
                 Request::getVar("only_admins_can_edit", null, "int")

@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 class ExtendUpgradeHelper extends Controller {
 
-    public function getModules() {
-        $result = [];
+    public function getModules(): array {
+        $modulesFromExtend = [];
         $modules = getAllModules();
         foreach ($modules as $module) {
             if (getModuleMeta($module, "source") == "extend") {
@@ -11,10 +13,10 @@ class ExtendUpgradeHelper extends Controller {
                 $xtendModule->name = $module;
                 $xtendModule->version = getModuleMeta($module, "version");
                 $xtendModule->url = "https://extend.ulicms.de/" . $module . ".html";
-                $result[] = $xtendModule;
+                $modulesFromExtend[] = $xtendModule;
             }
         }
-        return $result;
+        return $modulesFromExtend;
     }
 
 }

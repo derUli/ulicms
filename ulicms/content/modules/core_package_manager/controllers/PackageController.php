@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use UliCMS\Services\Connectors\PackageSourceConnector;
 use function UliCMS\HTML\text;
 
@@ -7,16 +9,17 @@ class PackageController extends MainClass {
 
 	const MODULE_NAME = "core_package_manager";
 
-	public function afterSessionStart() {
+	public function afterSessionStart(): void {
 		if (BackendHelper::getAction() == "modules") {
 			Response::redirect(ModuleHelper::buildActionURL("packages"));
 		}
 	}
 
-	public function getModuleInfo() {
+	public function getModuleInfo(): void {
 		$name = stringOrNull(Request::getVar("name", null, "str"));
 		if (!$name) {
-			return TextResult(get_translation("not_found"));
+			TextResult(get_translation("not_found"));
+                        return;
 		}
 		$model = new ModuleInfoViewModel ();
 		$model->name = $name;
@@ -40,15 +43,16 @@ class PackageController extends MainClass {
 		HTMLResult($html);
 	}
 
-	public function getPackageDownloadUrl($package) {
+	public function getPackageDownloadUrl(string $package): ?string {
 		$url = "https://extend.ulicms.de/{$package}.html";
 		return url_exists($url) ? $url : null;
 	}
 
-	public function getThemeInfo() {
+	public function getThemeInfo(): void {
 		$name = stringOrNull(Request::getVar("name", null, "str"));
 		if (!$name) {
-			return TextResult(get_translation("not_found"));
+			TextResult(get_translation("not_found"));
+                        return;
 		}
 		$model = new ThemeInfoViewModel ();
 		$model->name = $name;
@@ -71,14 +75,14 @@ class PackageController extends MainClass {
 		HTMLResult($html);
 	}
 
-	public function redirectToPackageView() {
+	public function redirectToPackageView(): void {
 		Response::sendHttpStatusCodeResultIfAjax(
 				HttpStatusCode::OK,
 				ModuleHelper::buildActionURL("packages")
 		);
 	}
 
-	public function uninstallModule() {
+	public function uninstallModule(): void {
 		$name = Request::getVar("name");
 		$type = "module";
 		if (uninstall_module($name, $type)) {
@@ -93,7 +97,7 @@ class PackageController extends MainClass {
 		}
 	}
 
-	public function uninstallTheme() {
+	public function uninstallTheme(): void {
 		$name = Request::getVar("name");
 		$type = "theme";
 		if (uninstall_module($name, $type)) {
@@ -109,7 +113,7 @@ class PackageController extends MainClass {
 		}
 	}
 
-	public function toggleModule() {
+	public function toggleModule(): void {
 		$name = Request::getVar("name");
 
 		$module = new Module($name);
@@ -129,12 +133,12 @@ class PackageController extends MainClass {
 		));
 	}
 
-	public function truncatedInstalledPatches() {
+	public function truncatedInstalledPatches(): void {
 		Database::truncateTable("installed_patches");
 		TextResult("ok", HttpStatusCode::OK);
 	}
 
-	public function availablePackages() {
+	public function availablePackages(): void {
 		$html = Template::executeModuleTemplate(
 						self::MODULE_NAME,
 						"packages/available_list.php"
@@ -142,7 +146,7 @@ class PackageController extends MainClass {
 		HtmlResult($html);
 	}
 
-	public function getPackageLicense() {
+	public function getPackageLicense(): void {
 		$name = Request::getVar("name");
 		if (!$name) {
 			HTTPStatusCodeResult(HttpStatusCode::UNPROCESSABLE_ENTITY);

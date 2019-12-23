@@ -69,7 +69,8 @@ function HTTPStatusCodeResult(
             . getStatusCodeByNumber(intval($status));
 
     if ($description != null and $description != "") {
-        $header = $_SERVER ["SERVER_PROTOCOL"] . " " . intval($status) . " " . $description;
+        $header = $_SERVER ["SERVER_PROTOCOL"] . " " .
+                intval($status) . " " . $description;
     }
     header($header);
     exit();

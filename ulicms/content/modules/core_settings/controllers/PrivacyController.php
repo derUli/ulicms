@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 use UliCMS\Utils\CacheUtil;
 
 class PrivacyController extends Controller {
 
-    public function savePost() {
+    public function savePost(): void {
         $language = basename(Request::getVar("language", null, "str"));
         $varName = StringHelper::isNotNullOrWhitespace($language) ?
                 "privacy_policy_checkbox_enable_{$language}" :

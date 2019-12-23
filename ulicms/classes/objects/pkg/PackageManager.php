@@ -36,7 +36,9 @@ class PackageManager {
             case PackageTypes::TYPE_THEME:
                 return faster_in_array($package, getAllThemes());
             default:
-                throw new BadMethodCallException("Package Type {$type} not supported");
+                throw new BadMethodCallException(
+                        "Package Type {$type} not supported"
+                );
         }
     }
 

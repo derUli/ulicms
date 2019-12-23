@@ -16,7 +16,6 @@ use function get_translation;
 // html5 format support of browser are different
 // UliCMS allows *.mp4, *.ogv and *.webm file uploads for video
 class Video extends Model {
-
     private $name = null;
     private $mp4_file = null;
     private $ogg_file = null;

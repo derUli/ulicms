@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use UliCMS\Utils\CacheUtil;
 use UliCMS\Models\Content\Language;
 use Rakit\Validation\Validator;
@@ -7,7 +9,7 @@ use function UliCMS\HTML\stringContainsHtml;
 
 class LanguageController extends Controller {
 
-    public function createPost() {
+    public function createPost(): void {
         $this->validateInput();
 
         $name = Request::getVar("name", null, "str");
@@ -25,7 +27,7 @@ class LanguageController extends Controller {
         Request::redirect(ModuleHelper::buildActionURL("languages"));
     }
 
-    public function setDefaultLanguage() {
+    public function setDefaultLanguage(): void {
         do_event("before_set_default_language");
 
         $default = Request::getVar("default", null, "str");
@@ -39,7 +41,7 @@ class LanguageController extends Controller {
         Request::redirect(ModuleHelper::buildActionURL("languages"));
     }
 
-    public function deletePost() {
+    public function deletePost(): void {
         $id = Request::getVar("id", null, "int");
         do_event("before_delete_language");
 
@@ -55,7 +57,7 @@ class LanguageController extends Controller {
         Request::redirect(ModuleHelper::buildActionURL("languages"));
     }
 
-    protected function validateInput() {
+    protected function validateInput(): void {
         // Fix for security issue CVE-2019-11398
         if (stringContainsHtml($_POST["name"])
                 or stringContainsHtml($_POST["language_code"])) {

@@ -84,7 +84,7 @@ class MenuEntry {
         $this->newWindow = $val;
     }
 
-// check if the user has permissions to access this menu entry
+    // check if the user has permissions to access this menu entry
     public function userHasPermission(): bool {
         $acl = new ACL();
         if (is_string($this->permissions) and ! empty($this->permissions)) {

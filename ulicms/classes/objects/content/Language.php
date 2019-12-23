@@ -42,7 +42,7 @@ class Language extends Model {
         $this->fillVars($result);
     }
 
-    public function loadByLanguageCode($language_code) {
+    public function loadByLanguageCode(string $language_code): void {
         $args = array(
             strval($language_code)
         );
@@ -51,11 +51,11 @@ class Language extends Model {
         $this->fillVars($result);
     }
 
-    public function getName() {
+    public function getName(): ?string {
         return $this->name;
     }
 
-    public function getLanguageCode() {
+    public function getLanguageCode(): ?string {
         return $this->language_code;
     }
 
@@ -110,26 +110,26 @@ class Language extends Model {
         }
     }
 
-    public function makeDefaultLanguage() {
+    public function makeDefaultLanguage(): void {
         if (!is_null($this->language_code)) {
             Settings::set("default_language", $this->language_code);
         }
     }
 
     // returns true if this language is the default language
-    public function isDefaultLanguage() {
+    public function isDefaultLanguage(): bool {
         return $this->language_code == Settings::get("default_language");
     }
 
     // returns true if this is the user's current language
-    public function isCurrentLanguage() {
+    public function isCurrentLanguage(): bool {
         $current_language = is_admin_dir() ?
                 getSystemLanguage() : getCurrentLanguage();
         return $this->language_code == $current_language;
     }
 
     // returns an array of all languages
-    public static function getAllLanguages($order = "id") {
+    public static function getAllLanguages(string $order = "id"): array {
         $datasets = [];
         $sql = "select id from `{prefix}languages` order by $order";
         $result = Database::query($sql, true);
@@ -139,12 +139,12 @@ class Language extends Model {
         return $datasets;
     }
 
-    public function __toString() {
+    public function __toString(): string {
         return $this->getLanguageCode();
     }
 
     // returns a link to view the website in this language
-    public function getLanguageLink() {
+    public function getLanguageLink(): string {
         $domain = getDomainByLanguage($this->language_code);
         if ($domain) {
             $url = Request::getProtocol($domain);

@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 use UliCMS\Utils\CacheUtil;
 
 class CommunitySettingsController extends Controller {
 
-    public function savePost() {
+    public function savePost(): void {
         if (Request::getVar("comments_enabled")) {
             Settings::set("comments_enabled", "1");
         } else {

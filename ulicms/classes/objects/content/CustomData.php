@@ -8,7 +8,7 @@ class CustomData {
 
     private static $defaults = [];
 
-    public static function get(?string $page = null) {
+    public static function get(?string $page = null): ?array {
         if (!$page) {
             $page = get_requested_pagename();
         }
@@ -40,7 +40,9 @@ class CustomData {
                 "' WHERE slug='" . Database::escapeValue($page) . "'");
     }
 
-    public static function delete(?string $var = null, ?string $page = null) {
+    public static function delete(
+            ?string $var = null, ?string $page = null)
+            : void {
         if (!$page) {
             $page = get_requested_pagename();
         }

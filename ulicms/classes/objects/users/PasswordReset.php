@@ -24,7 +24,7 @@ class PasswordReset {
             string $ip,
             string $firstname,
             string $lastname
-    ) {
+    ): void {
         ViewBag::set("url", $this->getPasswordResetLink($token));
         ViewBag::set("firstname", $firstname);
         ViewBag::set("lastname", $lastname);

@@ -6,7 +6,7 @@ use UliCMS\Constants\EmailModes;
 
 class Mailer {
 
-    public static function splitHeaders($headers) {
+    public static function splitHeaders(string $headers): array {
         $header_array = [];
         $lines = normalizeLN($headers, "\n");
         $lines = explode("\n", $lines);
@@ -21,7 +21,12 @@ class Mailer {
         return $header_array;
     }
 
-    public static function send($to, $subject, $message, $headers = "") {
+    public static function send(
+            string $to,
+            string $subject,
+            string $message,
+            string$headers = ""
+    ): bool {
         $mode = Settings::get("email_mode") ?
                 Settings::get("email_mode") : EmailModes::INTERNAL;
 
@@ -51,7 +56,9 @@ class Mailer {
         }
     }
 
-    public static function getPHPMailer($mode = EmailModes::INTERNAL) {
+    public static function getPHPMailer(
+            string $mode = EmailModes::INTERNAL
+    ): ?PHPMailer {
         $mailer = new PHPMailer();
         $mailer->SMTPDebug = 3;
 
@@ -101,12 +108,12 @@ class Mailer {
     }
 
     public static function sendWithPHPMailer(
-            $to,
-            $subject,
-            $message,
-            $headers = "",
-            $mode = EmailModes::INTERNAL
-    ) {
+            string $to,
+            string $subject,
+            string $message,
+            string $headers = "",
+            string $mode = EmailModes::INTERNAL
+    ): bool {
         $headers = self::splitHeaders($headers);
         $headersLower = array_change_key_case($headers, CASE_LOWER);
 

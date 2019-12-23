@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 use UliCMS\Utils\CacheUtil;
 
 class SiteSloganController extends Controller {
 
-    public function savePost() {
+    public function savePost(): void {
         $languages = getAllLanguages();
 
         if (isset($_POST["submit"])) {

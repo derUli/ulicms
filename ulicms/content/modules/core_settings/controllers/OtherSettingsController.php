@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 use UliCMS\Utils\CacheUtil;
 
 class OtherSettingsController extends Controller {
 
-    public function savePost() {
+    public function savePost(): void {
         if (isset($_POST["email_mode"])) {
             Settings::set("email_mode", $_POST["email_mode"]);
         }

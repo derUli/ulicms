@@ -90,16 +90,17 @@ class Model {
 	}
 
 	// check if $value is a variable of $type
-	public static function checkValueType($value, $type, $required = false): bool {
+	public static function checkValueType($value, ?string $type, bool $required = false): bool {
 		// if it's required and $value is null throw exception
 		if ($required and $value === null) {
 			throw new InvalidArgumentException("Required field not filled");
 		}
-		$isXyzFunction = "is_" . $type;
 		// if it's null and not required it's ok
 		if ($type === null) {
 			return true;
 		}
+                
+		$isXyzFunction = "is_" . $type;
 		if (function_exists($isXyzFunction)
 				and ! var_is_type($value, $type, $required)) {
 			throw new InvalidArgumentException("\"{$value}\" is not of type {$type}.");
@@ -115,7 +116,7 @@ class Model {
 			$modelClass,
 			$orderBy = "id",
 			$where = ""
-	) {
+	): array {
 		$datasets = [];
 		$result = Database::selectAll($tableName, array(
 					"id"
@@ -133,7 +134,7 @@ class Model {
 	}
 
 	// returns true if there are any unsaved changes to this dataset
-	public function hasChanges() {
+	public function hasChanges(): bool {
 		$hasChanges = false;
 		$className = get_class($this);
 		$originalDataset = new $className($this->getID());

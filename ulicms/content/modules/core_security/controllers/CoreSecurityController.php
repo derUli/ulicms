@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 class CoreSecurityController extends MainClass {
 
-    public function beforeInit() {
+    public function beforeInit(): void {
         $x_frame_options = settings::get("x_frame_options");
         $allowedOptions = array(
             "DENY",
