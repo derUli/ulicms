@@ -733,8 +733,8 @@ function replace_num_entity(string $ord) {
 // TODO: this code works but looks like garbage
 // rewrite this method
 function getBaseFolderURL(?string $suffix = null): string {
-    $s = empty($_SERVER["HTTPS"]) ? '' : ($_SERVER["HTTPS"] == "on") ?
-            "s" : "";
+    $s = empty($_SERVER["HTTPS"]) ? '' : (($_SERVER["HTTPS"] == "on") ?
+            "s" : "");
     $sp = strtolower($_SERVER["SERVER_PROTOCOL"]);
     $protocol = substr($sp, 0, strpos($sp, "/")) . $s;
     $port = ($_SERVER["SERVER_PORT"] == "80"
