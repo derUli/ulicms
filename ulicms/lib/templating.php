@@ -740,12 +740,17 @@ function buildtree(
         ?array $tree = []
 ): array {
     foreach ($src_arr as $idx => $row) {
-        if ($row['parent'] == $parent_id) {
+        if ($row['parent_id'] == $parent_id) {
+
             foreach ($row as $k => $v) {
                 $tree[$row['id']][$k] = $v;
             }
             unset($src_arr[$idx]);
-            $tree[$row['id']]['children'] = buildtree($src_arr, $row['id']);
+            $tree[$row['id']]['children'] = buildtree(
+                    $src_arr,
+                    intval($row['id']
+                    )
+            );
         }
     }
     ksort($tree);
@@ -1024,6 +1029,5 @@ function cms_release_year(): void {
 function preparePlainTextforHTMLOutput($text): string {
     return UliCMS\HTML\text($text);
 }
-
 
 DefaultContentTypes::initTypes();
