@@ -60,3 +60,15 @@ function secure_translation(string $name, array $placeholders = []): void {
 function secure_translate(string $name, array $placeholders = []): void {
     secure_translation($name, $placeholders);
 }
+
+function add_translation(string $key, string $value): void {
+    register_translation($key, $value);
+}
+
+function register_translation(string $key, string $value): void {
+    $key = strtoupper($key);
+    if (!startsWith($key, "TRANSLATION_")) {
+        $key = "TRANSLATION_" . $key;
+    }
+    idefine($key, $value);
+}

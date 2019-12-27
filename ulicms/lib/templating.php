@@ -1019,4 +1019,11 @@ function cms_release_year(): void {
     echo $v->getReleaseYear();
 }
 
+// prepares a text / code for html output
+// replaces new lines with <br> tags
+function preparePlainTextforHTMLOutput($text): string {
+    return UliCMS\HTML\text($text);
+}
+
+
 DefaultContentTypes::initTypes();

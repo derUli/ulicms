@@ -49,3 +49,14 @@ function initconfig(string $key, $value): bool {
     }
     return $retval;
 }
+
+function get_lang_config(string $name, string $lang): ?string {
+    $retval = null;
+    $config = Settings::get($name . "_" . $lang);
+    if ($config) {
+        $retval = $config;
+    } else {
+        $config = Settings::get($name);
+    }
+    return $config ? $config : null;
+}

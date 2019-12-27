@@ -196,3 +196,110 @@ function esc($value): void {
 function _esc($value): string {
     return Template::getEscape($value);
 }
+
+function remove_prefix(string $text, string $prefix): string {
+    if (startsWith($text, $prefix)) {
+        $text = substr($text, strlen($prefix));
+    }
+    return $text;
+}
+
+function remove_suffix(string $text, string $suffix): string {
+    if (endsWith($text, $suffix)) {
+        $text = substr($text, 0, strlen($text) - strlen($suffix));
+    }
+    return $text;
+}
+
+function bool2YesNo(
+        bool $value,
+        ?string $yesString = null,
+        ?string $noString = null
+): string {
+    if (!$yesString) {
+        $yesString = get_translation("yes");
+    }
+    if (!$noString) {
+        $noString = get_translation("no");
+    }
+    return ($value ? $yesString : $noString);
+}
+
+// Random string generieren (für Passwort)
+function rand_string(int $length): string {
+    $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    return substr(str_shuffle($chars), 0, $length);
+}
+
+function getStringLengthInBytes(string $data): int {
+    return ini_get('mbstring.func_overload') ?
+            mb_strlen($data, '8bit') : strlen($data);
+}
+
+function splitAndTrim(string $str): array {
+    return array_map('trim', explode(";", $str));
+}
+
+// this magic method replaces html num entities with the character
+// used in PlainTextCreator
+function replace_num_entity(string $ord) {
+    $ord = $ord[1];
+    if (preg_match('/^x([0-9a-f]+)$/i', $ord, $match)) {
+        $ord = hexdec($match[1]);
+    } else {
+        $ord = intval($ord);
+    }
+
+    $no_bytes = 0;
+    $byte = [];
+
+    if ($ord < 128) {
+        return chr($ord);
+    } elseif ($ord < 2048) {
+        $no_bytes = 2;
+    } elseif ($ord < 65536) {
+        $no_bytes = 3;
+    } elseif ($ord < 1114112) {
+        $no_bytes = 4;
+    } else {
+        return;
+    }
+
+    switch ($no_bytes) {
+        case 2: {
+                $prefix = array(
+                    31,
+                    192
+                );
+                break;
+            }
+        case 3: {
+                $prefix = array(
+                    15,
+                    224
+                );
+                break;
+            }
+        case 4: {
+                $prefix = array(
+                    7,
+                    240
+                );
+            }
+    }
+
+    for ($i = 0; $i < $no_bytes; $i ++) {
+        $byte[$no_bytes - $i - 1] = (
+                ($ord & (63 * pow(2, 6 * $i))) / pow(2, 6 * $i)) &
+                63 | 128;
+    }
+
+    $byte[0] = ($byte[0] & $prefix[0]) | $prefix[1];
+
+    $ret = '';
+    for ($i = 0; $i < $no_bytes; $i ++) {
+        $ret .= chr($byte[$i]);
+    }
+
+    return $ret;
+}

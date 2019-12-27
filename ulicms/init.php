@@ -45,16 +45,10 @@ if (file_exists($composerAutoloadFile)) {
 	);
 }
 
-require_once dirname(__file__) . "/lib/comparisons.php";
-require_once dirname(__file__) . "/lib/minify.php";
-require_once dirname(__file__) . "/lib/csrf_token.php";
-require_once dirname(__file__) . "/lib/api.php";
-require_once dirname(__file__) . "/lib/csv_writer.php";
+
+require_once dirname(__file__) . "/lib/load.php";
+
 require_once dirname(__file__) . "/classes/objects/privacy/load.php";
-require_once dirname(__file__) . "/lib/users_api.php";
-require_once dirname(__file__) . "/lib/string_functions.php";
-require_once dirname(__file__) . "/lib/network.php";
-require_once dirname(__file__) . "/lib/settings.php";
 require_once dirname(__file__) . "/classes/objects/abstract/load.php";
 require_once dirname(__file__) . "/classes/objects/constants/load.php";
 require_once dirname(__file__) . "/classes/objects/storages/load.php";
@@ -86,11 +80,7 @@ require_once dirname(__file__) . "/classes/objects/registry/load.php";
 require_once dirname(__file__) . "/classes/objects/logging/load.php";
 require_once dirname(__file__) . "/classes/objects/html/load.php";
 require_once dirname(__file__) . "/classes/objects/content/TypeMapper.php";
-require_once dirname(__file__) . "/lib/db_functions.php";
-require_once dirname(__file__) . "/lib/files.php";
-require_once dirname(__file__) . "/lib/file_get_contents_wrapper.php";
-require_once dirname(__file__) . "/lib/translation.php";
-require_once dirname(__file__) . "/lib/html5_media.php";
+
 require_once dirname(__file__) . "/classes/objects/database/load.php";
 require_once dirname(__file__) . "/classes/objects/html/Template.php";
 require_once dirname(__file__) . "/classes/objects/security/load.php";

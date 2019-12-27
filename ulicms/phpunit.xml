@@ -45,7 +45,6 @@
             <exclude>
                 <directory>installer.aus/</directory>
             </exclude>
-
             <exclude>
                 <file>classes/helpers/load.php</file>
             </exclude>
@@ -234,6 +233,9 @@
             </exclude>
             <exclude>
                 <file>lib/CMSConfigSample.php</file>
+            </exclude>
+            <exclude>
+                <file>lib/load.php</file>
             </exclude>
             <exclude>
                 <file>CMSConfig.php</file>

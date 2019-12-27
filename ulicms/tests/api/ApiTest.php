@@ -340,7 +340,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testCmsVersion() {
-        $this->assertTrue(version_compare(cms_version(), "2019.2",
+        $this->assertTrue(version_compare(cms_version(), "2019.4",
                         ">"));
     }
 
