@@ -302,24 +302,6 @@ function get_parent(string $page = null): ?int {
     return $parent_id;
 }
 
-function get_custom_data(?string $page = null): ?array {
-    if (!$page) {
-        $page = get_requested_pagename();
-    }
-
-    $sql = "SELECT `custom_data` FROM " . tbname("content") .
-            " WHERE slug='" . db_escape($page) .
-            "'  AND language='" . db_escape($_SESSION["language"]) . "'";
-    $result = db_query($sql);
-    if (db_num_rows($result) > 0) {
-        $dataset = db_fetch_object($result);
-        if (is_json($dataset->custom_data)) {
-            return json_decode($dataset->custom_data, true);
-        }
-    }
-    return null;
-}
-
 function include_jquery(): void {
     Template::jQueryScript();
 }
@@ -392,45 +374,6 @@ function get_theme(?string $page = null): ?string {
     return $theme;
 }
 
-function delete_custom_data(?string $var = null, ?string $page = null): void {
-    if (!$page) {
-        $page = get_requested_pagename();
-    }
-    $data = get_custom_data($page);
-    if (is_null($data)) {
-        $data = [];
-    }
-// Wenn $var gesetzt ist, nur $var aus custom_data löschen
-    if ($var) {
-        if (isset($data[$var])) {
-            unset($data[$var]);
-        }
-    } // Wenn $var nicht gesetzt ist, alle Werte von custom_data löschen
-    else {
-        $data = [];
-    }
-
-    $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-
-    db_query("UPDATE " . tbname("content") . " SET custom_data = '" .
-            db_escape($json) . "' WHERE slug='" . db_escape($page) . "'");
-}
-
-function set_custom_data(?string$var, $value, ?string $page = null): void {
-    if (!$page) {
-        $page = get_requested_pagename();
-    }
-    $data = get_custom_data($page);
-    if (is_null($data)) {
-        $data = [];
-    }
-
-    $data[$var] = $value;
-    $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-
-    db_query("UPDATE " . tbname("content") . " SET custom_data = '" .
-            db_escape($json) . "' WHERE slug='" . db_escape($page) . "'");
-}
 
 function language_selection(): void {
     Template::languageSelection();

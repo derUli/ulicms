@@ -83,10 +83,10 @@ function getLanguageByDomain($givenDomain): ?string {
 function setLanguageByDomain(): bool {
     $domainMapping = Settings::get("domain_to_language");
     $domainMapping = Settings::mappingStringToArray($domainMapping);
+
     foreach ($domainMapping as $domain => $language) {
         $givenDomain = $_SERVER["HTTP_HOST"];
-        if ($domain == $givenDomain
-                and faster_in_array(
+        if ($domain == $givenDomain and faster_in_array(
                         $language,
                         getAllLanguages())
         ) {
@@ -94,6 +94,7 @@ function setLanguageByDomain(): bool {
             return true;
         }
     }
+
     return false;
 }
 
@@ -111,28 +112,22 @@ function getLanguageNameByCode(string $code): string {
     return $retval;
 }
 
-
 function setLocaleByLanguage(): array {
-    $locale = null;
-    if (is_admin_dir()) {
-        $var = "locale_" . db_escape($_SESSION["system_language"]);
-    } else {
-        $var = "locale_" . db_escape($_SESSION["language"]);
-    }
-    $locale = Settings::get($var);
-    if ($locale) {
-        $locale = splitAndTrim($locale);
-        array_unshift($locale, LC_ALL);
-        @call_user_func_array("setlocale", $locale);
-    } else {
-        $locale = Settings::get("locale");
-        if ($locale) {
+    $locale = [];
 
-            $locale = splitAndTrim($locale);
-            array_unshift($locale, LC_ALL);
-            @call_user_func_array("setlocale", $locale);
-        }
+    $var = is_admin_dir() ?
+            "locale_" . $_SESSION["system_language"] :
+            "locale_" . $_SESSION["language"];
+
+    $localeSetting = Settings::get($var) ?
+            Settings::get($var) : Settings::get("locale");
+
+    if ($localeSetting) {
+        $locale = splitAndTrim($localeSetting);
+        array_unshift($locale, LC_ALL);
     }
+
+    @call_user_func_array("setlocale", $locale);
     return $locale;
 }
 

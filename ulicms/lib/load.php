@@ -32,7 +32,8 @@ $files = array(
     "files",
     "file_get_contents_wrapper",
     "translation",
-    "html5_media"
+    "html5_media",
+    "custom_data"
 );
 
 foreach ($files as $file) {

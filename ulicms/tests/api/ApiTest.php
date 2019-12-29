@@ -14,7 +14,8 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $moduleManager = new ModuleManager();
         $moduleManager->sync();
 
-        $userQuery = Database::query("select id, html_editor from {prefix}users order by id asc limit 1", true);
+        $userQuery = Database::query("select id, html_editor "
+                        . "from {prefix}users order by id asc limit 1", true);
 
         $this->initialUser = Database::fetchObject($userQuery);
         $this->additionalMenus = Settings::get("additional_menus");
@@ -22,6 +23,11 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         // call this method, which is an alias for CacheUtil::clearCache()
         // to have it covered
         clearCache();
+
+        $avatarsDirectory = Path::resolve("ULICMS_ROOT/content/avatars/");
+        if (!is_dir($avatarsDirectory)) {
+            mkdir($avatarsDirectory, 0777, true);
+        }
     }
 
     public function tearDown() {
@@ -445,6 +451,39 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetGravatarReturnsUrl() {
+        $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
+        $_SERVER["SERVER_PORT"] = "8080";
+        $_SERVER["HTTPS"] = "on";
+        $_SERVER['HTTP_HOST'] = "example.org";
+        $_SERVER['REQUEST_URI'] = "/foobar/foo.html?hello=world";
+
+        $user = new User();
+        $user->setUsername("testuser-1");
+        $user->setEmail('foo@bar.de');
+        $user->setPassword(rand_string(23));
+        $user->setLastname("Beutlin");
+        $user->setFirstname("Bilbo");
+        $user->setHTMLEditor("ckeditor");
+        $user->save();
+
+        $imageFile = Path::resolve(
+                        "ULICMS_ROOT/admin/gfx/apple-touch-icon-152x152.png"
+        );
+        $user->processAvatar($imageFile);
+
+        $this->assertEquals("content/avatars/user-" . $user->getId() . ".png",
+                get_gravatar("foo@bar.de"));
+        
+        $user->delete();
+
+        unset($_SERVER["SERVER_PROTOCOL"]);
+        unset($_SERVER['HTTP_HOST']);
+        unset($_SERVER['SERVER_PORT']);
+        unset($_SERVER['REQUEST_URI']);
+        unset($_SERVER['HTTPS']);
+    }
+
+    public function testGetGravatarReturnsPlaceholderUrl() {
         $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
         $_SERVER["SERVER_PORT"] = "8080";
         $_SERVER["HTTPS"] = "on";
