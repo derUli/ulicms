@@ -27,16 +27,29 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase {
         $this->testUser = $user;
 
         $user = new User();
+        $user->setUsername("testuser2");
+        $user->setLastname("Muster");
+        $user->setFirstname("Max");
+        $user->setEmail("max@muster.de");
+        $user->setPassword("topsecret");
+        $user->setLocked(true);
+        $user->setGroup($this->testGroup);
+        $user->save();
+
+        $user = new User();
         $user->setUsername("testuser3");
         $user->setLastname("Muster");
         $user->setFirstname("Max");
         $user->setPassword("oldpassword");
         $user->save();
+
+        require_once getLanguageFilePath("en");
     }
 
     public function tearDown() {
         unset($_SESSION["login_id"]);
         unset($_SESSION["logged_in"]);
+        unset($_REQUEST["error"]);
 
         $this->testGroup->delete();
         $this->testUser->delete();
@@ -100,12 +113,32 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(logged_in());
     }
 
-    public function testValidateLoginTrue() {
+    public function testValidateLoginIsValid() {
         $this->assertTrue(is_array(validate_login("testuser1", "topsecret")));
     }
 
-    public function testValidateLoginNull() {
+    public function testValidateLoginIsLocked() {
+        $this->assertNull(validate_login("testuser2", "topsecret"));
+
+        $this->assertEquals(
+                "Your Account is locked. " .
+                "Please contact your system administrator if you think, " .
+                "that this is an error.", $_REQUEST["error"]
+        );
+    }
+
+    public function testValidateLoginWrongPassword() {
         $this->assertNull(validate_login("testuser1", "dasfalschepassword"));
+        $this->assertEquals(
+                "Username oder password incorrect!", $_REQUEST["error"]
+        );
+    }
+
+    public function testValidateLoginNonExistingUser() {
+        $this->assertNull(validate_login("ich_existiere_nicht", "dasfalschepassword"));
+        $this->assertEquals(
+                "Username oder password incorrect!", $_REQUEST["error"]
+        );
     }
 
     public function testGetUsersOnlineUserIsOnline() {
