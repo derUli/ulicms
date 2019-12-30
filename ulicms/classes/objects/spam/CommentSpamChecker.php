@@ -164,8 +164,7 @@ class CommentSpamChecker implements ISpamChecker {
             $hostname = @gethostbyaddr($ip);
             $this->errors[] = new SpamDetectionResult(
                     get_translation("ip_address"),
-                    get_translation(
-                            "your_country_is_blocked",
+                    get_translation("your_country_is_blocked",
                             [
                                 "%hostname%" => $hostname
                             ]

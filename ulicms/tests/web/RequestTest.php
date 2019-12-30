@@ -201,4 +201,18 @@ class RequestTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue(is_ssl());
     }
 
+    public function testIsHeaderSentReturnsTrue() {
+        $this->assertTrue(
+                Request::isHeaderSent("Content-Type",
+                        [
+                            "Content-Type: text/plain"
+                        ]
+                )
+        );
+    }
+
+    public function testIsHeaderSentReturnsFalse() {
+        $this->assertFalse(Request::isHeaderSent("Foobar"));
+    }
+
 }

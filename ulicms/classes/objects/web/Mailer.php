@@ -122,11 +122,9 @@ class Mailer {
         if (isset($headersLower["x-mailer"])) {
             $mailer->XMailer = $headersLower["x-mailer"];
         }
-        $mailer->setFrom(
-                StringHelper::isNotNullOrWhitespace(
-                        $headers["From"]) ?
-                        $headers["From"] : Settings::get("email")
-        );
+        $from = StringHelper::isNotNullOrWhitespace($headers["From"]) ?
+                        $headers["From"] : Settings::get("email");
+        $mailer->setFrom($from);
 
         if (isset($headersLower["reply-to"])) {
 

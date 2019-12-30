@@ -131,8 +131,8 @@ class Request {
         return $_SERVER['REMOTE_ADDR'];
     }
 
-    public static function isHeaderSent(string $header): bool {
-        $headers = headers_list();
+    public static function isHeaderSent(string $header, ?array $headers = null): bool {
+        $headers = !$headers ?  headers_list() : $headers;
         $header = trim($header, ': ');
         $result = false;
 
