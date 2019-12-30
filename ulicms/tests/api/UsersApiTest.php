@@ -1,9 +1,13 @@
 <?php
 
+use UliCMS\Security\TwoFactorAuthentication;
+
 class UsersApiTest extends \PHPUnit\Framework\TestCase {
 
     private $testUser;
     private $testGroup;
+    private $twoFactorEnabled = false;
+    private $maxFailedLoginItems;
 
     public function setUp() {
         @session_destroy();
@@ -43,6 +47,8 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase {
         $user->setPassword("oldpassword");
         $user->save();
 
+        $this->twoFactorEnabled = TwoFactorAuthentication::isEnabled();
+        $this->maxFailedLoginItems = Settings::get("max_failed_logins_items");
         require_once getLanguageFilePath("en");
     }
 
@@ -63,6 +69,14 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase {
         $user->delete();
 
         @session_destroy();
+
+        if ($this->twoFactorEnabled) {
+            TwoFactorAuthentication::disable();
+        } else {
+            TwoFactorAuthentication::enable();
+        }
+
+        Settings::set("max_failed_logins_items", strval($this->maxFailedLoginItems));
     }
 
     public function testGetUserIdUserIsLoggedIn() {
@@ -117,8 +131,35 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue(is_array(validate_login("testuser1", "topsecret")));
     }
 
+    public function testValidateLoginIsValidTokenIsInvalid() {
+        TwoFactorAuthentication::enable();
+
+        $this->assertNull(validate_login("testuser1", "topsecret", uniqid()));
+        $this->assertEquals("Confirmation Code invalid.", $_REQUEST["error"]);
+    }
+
     public function testValidateLoginIsLocked() {
         $this->assertNull(validate_login("testuser2", "topsecret"));
+
+        $this->assertEquals(
+                "Your Account is locked. " .
+                "Please contact your system administrator if you think, " .
+                "that this is an error.", $_REQUEST["error"]
+        );
+    }
+
+    public function testInvalidLoginLocksAccount() {
+
+        Settings::set("max_failed_logins_items", 4);
+
+        for ($i = 1; $i <= 3; $i++) {
+            $this->assertNull(validate_login("testuser1", "invalid"));
+            $this->assertEquals(
+                    "Username oder password incorrect!", $_REQUEST["error"]
+            );
+        }
+
+        $this->assertNull(validate_login("testuser1", "invalid"));
 
         $this->assertEquals(
                 "Your Account is locked. " .
@@ -135,7 +176,10 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testValidateLoginNonExistingUser() {
-        $this->assertNull(validate_login("ich_existiere_nicht", "dasfalschepassword"));
+        $this->assertNull(
+                validate_login("ich_existiere_nicht", "dasfalschepassword")
+        );
+        
         $this->assertEquals(
                 "Username oder password incorrect!", $_REQUEST["error"]
         );

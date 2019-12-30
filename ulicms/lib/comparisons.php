@@ -146,18 +146,22 @@ function is_crawler(?string $useragent = null): bool {
 // 21. Februar 2015
 // Nutzt nun die Klasse Mobile_Detect
 function is_mobile(): bool {
-    if (!class_exists("Mobile_Detect")) {
-        return false;
+    $result = false;
+    
+    if (class_exists("Mobile_Detect")) {
+        $detect = new Mobile_Detect();
+        $result = $detect->isMobile();
     }
-    $detect = new Mobile_Detect();
-    $result = $detect->isMobile();
+    
     if (Settings::get("no_mobile_design_on_tablet")
             and $result and $detect->isTablet()) {
         $result = false;
     }
+    
     if (function_exists("apply_filter")) {
         $result = apply_filter($result, "is_mobile");
     }
+    
     return $result;
 }
 
@@ -171,11 +175,12 @@ function isMaintenanceMode(): bool {
 }
 
 function is_tablet(): bool {
-    if (!class_exists("Mobile_Detect")) {
-        return false;
+    $result = false;
+    
+    if (class_exists("Mobile_Detect")) {
+        $detect = new Mobile_Detect();
+        $result = $detect->isTablet();
     }
-    $detect = new Mobile_Detect();
-    $result = $detect->isTablet();
     return $result;
 }
 

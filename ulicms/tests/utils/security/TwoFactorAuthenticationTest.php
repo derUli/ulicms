@@ -1,16 +1,5 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of TwoFactorAuthenticationTest
- *
- * @author deruli
- */
 use UliCMS\Security\TwoFactorAuthentication;
 
 class TwoFactorAuthenticationTest extends \PHPUnit\Framework\TestCase {
@@ -29,7 +18,7 @@ class TwoFactorAuthenticationTest extends \PHPUnit\Framework\TestCase {
 
     public function tearDown() {
         foreach ($this->initialSettings as $key => $value) {
-            if ($value === false) {
+            if ($value === null) {
                 Settings::delete($key);
             } else {
                 Settings::set($key, $value);
@@ -94,6 +83,38 @@ class TwoFactorAuthenticationTest extends \PHPUnit\Framework\TestCase {
         $auth = new TwoFactorAuthentication();
 
         $this->assertFalse($auth->checkCode("123456"));
+    }
+
+    public function testEnable() {
+        Settings::delete("twofactor_authentication");
+
+        $this->assertFalse(TwoFactorAuthentication::isEnabled());
+        TwoFactorAuthentication::enable();
+        $this->assertTrue(TwoFactorAuthentication::isEnabled());
+    }
+
+    public function testDisable() {
+        Settings::delete("twofactor_authentication");
+
+        TwoFactorAuthentication::enable();
+        TwoFactorAuthentication::disable();
+
+        $this->assertFalse(TwoFactorAuthentication::isEnabled());
+    }
+
+    public function testToggle() {
+        Settings::delete("twofactor_authentication");
+
+        $this->assertFalse(TwoFactorAuthentication::isEnabled());
+
+        TwoFactorAuthentication::toggle();
+        $this->assertTrue(TwoFactorAuthentication::isEnabled());
+
+        TwoFactorAuthentication::toggle();
+        $this->assertFalse(TwoFactorAuthentication::isEnabled());
+
+        TwoFactorAuthentication::toggle();
+        $this->assertTrue(TwoFactorAuthentication::isEnabled());
     }
 
 }

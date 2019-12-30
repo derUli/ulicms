@@ -46,4 +46,16 @@ class TwoFactorAuthentication {
         return boolval(Settings::get("twofactor_authentication"));
     }
 
+    public static function enable(): void {
+        Settings::set("twofactor_authentication", "1");
+    }
+
+    public static function disable(): void {
+        Settings::delete("twofactor_authentication");
+    }
+
+    public static function toggle(): void {
+        self::isEnabled() ? self::disable() : self::enable();
+    }
+
 }

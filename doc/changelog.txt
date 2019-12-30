@@ -19,6 +19,10 @@ Neue API-Methoden:
 * _unesc($string): string
 * unesc($string): void
 * UliCMS\HTML\Input::editor(string $name, $value, int $rows = 25, int $cols = 80, array $htmlAttributes = []): string
+* TwoFactorAuthentication::enable(): void
+* TwoFactorAuthentication::disable(): void
+* TwoFactorAuthentication::toggle(): void
+
 
 Entfernte API-Methoden:
 * Settings::output(string $key, ?string $type = 'str'): void
