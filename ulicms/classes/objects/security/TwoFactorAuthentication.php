@@ -37,7 +37,7 @@ class TwoFactorAuthentication {
         return $ga->getCode($this->getSecret());
     }
 
-    public function checkCode(string $code): bool {
+    public function checkCode(?string $code): bool {
         return $this->getCode() === $code;
     }
 

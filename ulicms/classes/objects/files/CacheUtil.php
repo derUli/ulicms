@@ -22,98 +22,102 @@ use DesignSettingsController;
 
 class CacheUtil {
 
-	private static $adapter;
+    private static $adapter;
 
-	// returns a Psr16 cache adapter if caching is enabled
-	// or $force is true
-	// else returns null
-	public static function getAdapter(bool $force = false): ?Psr16Adapter {
-		if (!self::isCacheEnabled() && !$force) {
-			return null;
-		}
+    // returns a Psr16 cache adapter if caching is enabled
+    // or $force is true
+    // else returns null
+    public static function getAdapter(bool $force = false): ?Psr16Adapter {
+        if (!self::isCacheEnabled() and ! $force) {
+            return null;
+        }
 
-		if (!is_null(self::$adapter)) {
-			return self::$adapter;
-		}
+        if (!is_null(self::$adapter)) {
+            return self::$adapter;
+        }
 
-		$cacheConfig = array(
-			"path" => Path::resolve("ULICMS_CACHE"),
-			"defaultTtl" => self::getCachePeriod()
-		);
+        $cacheConfig = array(
+            "path" => Path::resolve("ULICMS_CACHE"),
+            "defaultTtl" => self::getCachePeriod()
+        );
 
-		// Auto Detect which caching driver to use
-		$driver = "files";
-		if (extension_loaded("apcu") && ini_get("apc.enabled")) {
-			$driver = "apcu";
-		} else if (function_exists("sqlite_open")) {
-			$driver = "sqlite";
-		}
+        // Auto Detect which caching driver to use
+        $driver = "files";
+        if (extension_loaded("apcu") && ini_get("apc.enabled")) {
+            $driver = "apcu";
+        } else if (function_exists("sqlite_open")) {
+            $driver = "sqlite";
+        }
 
-		self::$adapter = new Psr16Adapter($driver,
-				new ConfigurationOption($cacheConfig));
+        self::$adapter = new Psr16Adapter($driver,
+                new ConfigurationOption($cacheConfig));
 
-		return self::$adapter;
-	}
+        return self::$adapter;
+    }
+    public static function resetAdapater(){
+        self::$adapter = null;
+        @self::getAdapter(true);
+    }
 
-	// returns true if caching is enabled
-	public static function isCacheEnabled(): bool {
-		return !Settings::get("cache_disabled") && !is_logged_in();
-	}
+    // returns true if caching is enabled
+    public static function isCacheEnabled(): bool {
+        return !Settings::get("cache_disabled") && !is_logged_in();
+    }
 
-	// clears the page cache
-	public static function clearPageCache(): void {
-		$adapter = self::getAdapter();
-		if ($adapter) {
-			$adapter->clear();
-		}
-	}
+    // clears the page cache
+    public static function clearPageCache(): void {
+        $adapter = self::getAdapter();
+        if ($adapter) {
+            $adapter->clear();
+        }
+    }
 
-	// clears all caches including apc, opcache, cache directory
-	// and tmp directory, sync modules directory with database
-	public static function clearCache(): void {
-		do_event("before_clear_cache");
+    // clears all caches including apc, opcache, cache directory
+    // and tmp directory, sync modules directory with database
+    public static function clearCache(): void {
+        do_event("before_clear_cache");
 
-		// clear apc cache if available
-		if (function_exists("apc_clear_cache")) {
-			clearAPCCache();
-		}
-		// clear opcache if available
-		if (function_exists("opcache_reset")) {
-			opcache_reset();
-		}
+        // clear apc cache if available
+        if (function_exists("apc_clear_cache")) {
+            clearAPCCache();
+        }
+        // clear opcache if available
+        if (function_exists("opcache_reset")) {
+            opcache_reset();
+        }
 
-		sureRemoveDir(Path::resolve("ULICMS_CACHE"), false);
-		sureRemoveDir(Path::resolve("ULICMS_TMP"), false);
+        sureRemoveDir(Path::resolve("ULICMS_CACHE"), false);
+        sureRemoveDir(Path::resolve("ULICMS_TMP"), false);
 
-		// Sync modules table in database with modules folder
-		$moduleManager = new ModuleManager();
-		$moduleManager->sync();
+        // Sync modules table in database with modules folder
+        $moduleManager = new ModuleManager();
+        $moduleManager->sync();
 
-		if (class_exists("DesignSettingsController")) {
-			$designSettingsController = ControllerRegistry::get(
-							DesignSettingsController::class
-			);
-			$designSettingsController->generateSCSSToFile();
-		}
+        if (class_exists("DesignSettingsController")) {
+            $designSettingsController = ControllerRegistry::get(
+                            DesignSettingsController::class
+            );
+            $designSettingsController->generateSCSSToFile();
+        }
 
-		do_event("after_clear_cache");
-	}
+        do_event("after_clear_cache");
+    }
 
-	// Returns cache expiration time as integer
-	public static function getCachePeriod(): int {
-		return intval(Settings::get("cache_period"));
-	}
+    // Returns cache expiration time as integer
+    public static function getCachePeriod(): int {
+        return intval(Settings::get("cache_period"));
+    }
 
-	// generates an unique identifier for the current page
-	public static function getCurrentUid(): string {
-		return "fullpage-cache-" . md5(get_request_uri()
-						. getCurrentLanguage() . strbool(is_mobile())
-						. strbool(is_crawler()) . strbool(is_tablet()));
-	}
+    // generates an unique identifier for the current page
+    public static function getCurrentUid(): string {
+        return "fullpage-cache-" . md5(get_request_uri()
+                        . getCurrentLanguage() . strbool(is_mobile())
+                        . strbool(is_crawler()) . strbool(is_tablet()));
+    }
 
-	public static function clearAvatars(bool $removeDir = false): void {
-		$path = Path::resolve("ULICMS_CONTENT/avatars");
-		File::sureRemoveDir($path, $removeDir);
-	}
+    public static function clearAvatars(bool $removeDir = false): void {
+        $path = Path::resolve("ULICMS_CONTENT/avatars");
+        File::sureRemoveDir($path, $removeDir);
+    }
 
 }

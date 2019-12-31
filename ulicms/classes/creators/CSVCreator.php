@@ -54,8 +54,9 @@ class CSVCreator {
     public function render(): string {
         $cacheUid = CacheUtil::getCurrentUid();
         $adapter = CacheUtil::getAdapter();
+        
         // if it is in cache return it from there
-        if ($adapter and $adapter->has($cacheUid)) {
+        if ($adapter and $adapter->get($cacheUid)) {
             return $adapter->get($cacheUid);
         }
 
@@ -65,9 +66,10 @@ class CSVCreator {
 
         $csv_string = getCSV($data[0]);
         $csv_string .= getCSV($data[1]);
+        
 
         if ($adapter) {
-            $adapter->set($cacheUid, $csv_string, CacheUtil::getCachePeriod());
+            $adapter->set($cacheUid, $csv_string);
         }
         return $csv_string;
     }

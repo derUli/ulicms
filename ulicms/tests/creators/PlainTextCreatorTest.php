@@ -25,6 +25,8 @@ class PlainTextCreatorTest extends \PHPUnit\Framework\TestCase {
             Settings::delete("cache_disabled");
         }
         Settings::set("cache_period", $this->cachePeriodOriginal);
+        
+        CacheUtil::resetAdapater();
 
         unset($_SESSION["language"]);
         unset($_GET["slug"]);
@@ -35,8 +37,9 @@ class PlainTextCreatorTest extends \PHPUnit\Framework\TestCase {
 
     public function testRender() {
         Settings::delete("cache_disabled");
-        Settings::set("cache_period", 500);
-
+        Settings::set("cache_period", "500");
+        CacheUtil::resetAdapater();
+        
         $_GET["slug"] = "lorem_ipsum";
         $_SESSION["language"] = "de";
         $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (Windows NT 6.1; "

@@ -17,6 +17,8 @@ class TwoFactorAuthenticationTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function tearDown() {
+        TwoFactorAuthentication::disable();
+        
         foreach ($this->initialSettings as $key => $value) {
             if ($value === null) {
                 Settings::delete($key);

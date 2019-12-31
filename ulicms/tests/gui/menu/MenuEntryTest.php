@@ -130,19 +130,29 @@ class MenuEntryTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($menuEntry->getNewWindow());
     }
 
-    public function testUserHasPermissionReturnsTrue() {
+    public function testUserHasPermissionReturnsTrueWithPermission() {
         $menuEntry = $this->constructMenuEntryWithoutChildren();
 
         $this->permittedUser->registerSession(false);
         $this->assertTrue($menuEntry->userHasPermission());
     }
-
-    public function testUserHasPermissionReturnsFalse() {
-
+    
+    
+    public function testUserHasPermissionReturnsTrueWithoutPermissions() {
         $menuEntry = $this->constructMenuEntryWithoutChildren();
 
+        $this->permittedUser->registerSession(false);
+        $menuEntry->setPermissions(null);
+        $this->assertTrue($menuEntry->userHasPermission());
+    }
+    
+    public function testUserHasPermissionReturnsFalse() {
+        $menuEntry = $this->constructMenuEntryWithoutChildren();
+
+        $menuEntry->setPermissions("foobar");
         $this->notPermittedUser->registerSession(false);
         $this->assertFalse($menuEntry->userHasPermission());
+        
     }
 
     public function testRender() {

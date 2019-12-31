@@ -61,7 +61,7 @@ class PDFCreator {
                 \Mpdf\Output\Destination::STRING_RETURN);
 
         if ($adapter) {
-            $adapter->set($cacheUid, $output, CacheUtil::getCachePeriod());
+            $adapter->set($cacheUid, $output);
         }
         return $output;
     }

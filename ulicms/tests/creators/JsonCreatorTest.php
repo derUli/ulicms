@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Creators\JSONCreator;
+use UliCMS\Utils\CacheUtil;
 
 class JsonCreatorTest extends \PHPUnit\Framework\TestCase {
 
@@ -20,7 +21,10 @@ class JsonCreatorTest extends \PHPUnit\Framework\TestCase {
         } else {
             Settings::delete("cache_disabled");
         }
+
         Settings::set("cache_period", $this->cachePeriodOriginal);
+
+        CacheUtil::resetAdapater();
 
         unset($_SESSION["language"]);
         unset($_GET["slug"]);

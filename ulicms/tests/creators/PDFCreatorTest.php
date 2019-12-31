@@ -15,6 +15,7 @@ class PDFCreatorTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function tearDown() {
+        CacheUtil::resetAdapater();
         CacheUtil::clearPageCache();
         Database::query("delete from {prefix}content where title like 'Unit Test%'", true);
 

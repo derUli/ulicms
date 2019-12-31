@@ -26,7 +26,7 @@ class JSONCreator {
 
         $adapter = CacheUtil::getAdapter();
         // if it is in cache return it from cache
-        if ($adapter and $adapter->has($cacheUid)) {
+        if ($adapter and $adapter->get($cacheUid)) {
             return $adapter->get($cacheUid);
         }
 
@@ -46,7 +46,7 @@ class JSONCreator {
                 JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
         );
         if ($adapter) {
-            $adapter->set($cacheUid, $json_string, CacheUtil::getCachePeriod());
+            $adapter->set($cacheUid, $json_string);
         }
         return $json_string;
     }

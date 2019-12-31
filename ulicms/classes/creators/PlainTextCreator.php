@@ -35,7 +35,7 @@ class PlainTextCreator {
         $adapter = CacheUtil::getAdapter();
 
         // return the rendered text from cache if it exists
-        if ($adapter and $adapter->has($cacheUid)) {
+        if ($adapter and $adapter->get($cacheUid)) {
             return $adapter->get($cacheUid);
         }
 
@@ -58,7 +58,7 @@ class PlainTextCreator {
 
         // save this in cache
         if ($adapter) {
-            $adapter->set($cacheUid, $this->content, CacheUtil::getCachePeriod());
+            $adapter->set($cacheUid, $this->content);
         }
         return $this->content;
     }

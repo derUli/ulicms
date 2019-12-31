@@ -17,6 +17,7 @@ class CsvCreatorTest extends \PHPUnit\Framework\TestCase {
 
     public function tearDown() {
         CacheUtil::clearPageCache();
+        CacheUtil::resetAdapater();
         Database::query("delete from {prefix}content where title like 'Unit Test%'", true);
 
         if ($this->cacheDisabledOriginal) {
@@ -24,6 +25,7 @@ class CsvCreatorTest extends \PHPUnit\Framework\TestCase {
         } else {
             Settings::delete("cache_disabled");
         }
+
         Settings::set("cache_period", $this->cachePeriodOriginal);
 
         unset($_SESSION["language"]);
@@ -35,7 +37,7 @@ class CsvCreatorTest extends \PHPUnit\Framework\TestCase {
 
     public function testRender() {
         Settings::delete("cache_disabled");
-        Settings::set("cache_period", 500);
+        Settings::set("cache_period", "500");
 
         $_GET["slug"] = "lorem_ipsum";
         $_SESSION["language"] = "de";
@@ -45,6 +47,7 @@ class CsvCreatorTest extends \PHPUnit\Framework\TestCase {
                 Path::resolve("ULICMS_ROOT/tests/fixtures/creators/csv.csv")
         );
         $creator = new CSVCreator();
+
         $this->assertEquals($expected, $creator->render());
         $this->assertEquals($expected, $creator->render());
     }
@@ -64,7 +67,7 @@ class CsvCreatorTest extends \PHPUnit\Framework\TestCase {
 
         $_SERVER["REQUEST_URI"] = "/one-url.csv?param=value";
         Settings::delete("cache_disabled");
-        Settings::set("cache_period", 500);
+        Settings::set("cache_period", "500");
 
         $_GET["slug"] = "lorem_ipsum";
         $_SESSION["language"] = "de";
@@ -96,7 +99,7 @@ class CsvCreatorTest extends \PHPUnit\Framework\TestCase {
         $modulePage->save();
 
         Settings::delete("cache_disabled");
-        Settings::set("cache_period", 500);
+        Settings::set("cache_period", "500");
 
         $_GET["slug"] = $modulePage->slug;
         $_SESSION["language"] = "de";
