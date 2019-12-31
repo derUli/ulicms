@@ -207,27 +207,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertContains("bootstrap", $modules);
     }
 
-    public function testGetPageSlugByID() {
-        $allPages = ContentFactory::getAll();
-        $first = $allPages[0];
-        $this->assertEquals($first->slug, getPageSlugByID($first->id));
-        $this->assertNull(getPageSlugByID(PHP_INT_MAX));
-    }
-
-    public function testGetPageIDBySlug() {
-        $allPages = ContentFactory::getAll();
-        $first = $allPages[0];
-        $this->assertEquals($first->id, getPageIDBySlug($first->slug));
-        $this->assertNull(getPageIDBySlug("ich-existiere-wirklich-nicht"));
-    }
-
-    public function testGetPageTitleByID() {
-        $allPages = ContentFactory::getAll();
-        $first = $allPages[0];
-        $this->assertEquals($first->title, getPageTitleByID($first->id));
-        $this->assertEquals("[" . get_translation("none") . "]", getPageTitleByID(PHP_INT_MAX));
-    }
-
     public function testGetPreferredLanguage() {
         $acceptLanguageHeader1 = "Accept-Language: da, en - gb;
         q = 0.8, en;
@@ -287,27 +266,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
 
         $this->assertFalse(idefine("TEST_HELLO", "Uli"));
         $this->assertEquals("World", TEST_HELLO);
-    }
-
-    public function testGetAllSlugs() {
-        $slugs = getAllSlugs();
-        $this->assertTrue(in_array("willkommen", $slugs));
-        $this->assertTrue(in_array("welcome", $slugs));
-        $this->assertTrue(in_array("lorem_ipsum", $slugs));
-    }
-
-    public function testGetAllSlugsByLanguage() {
-        $germanSlugs = getAllSlugs("de");
-        $this->assertTrue(in_array("willkommen", $germanSlugs));
-        $this->assertFalse(in_array("welcome", $germanSlugs));
-        $this->assertTrue(in_array("glueckskeks", $germanSlugs));
-        $this->assertFalse(in_array("fortune", $germanSlugs));
-
-        $englishSlugs = getAllSlugs("en");
-        $this->assertTrue(in_array("welcome", $englishSlugs));
-        $this->assertFalse(in_array("willkommen", $englishSlugs));
-        $this->assertTrue(in_array("fortune", $englishSlugs));
-        $this->assertFalse(in_array("glueckskeks", $englishSlugs));
     }
 
     public function testIsAdminReturnsFalse() {
@@ -473,7 +431,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
 
         $this->assertEquals("content/avatars/user-" . $user->getId() . ".png",
                 get_gravatar("foo@bar.de"));
-        
+
         $user->delete();
 
         unset($_SERVER["SERVER_PROTOCOL"]);
@@ -921,31 +879,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
 
     public function testAddHook() {
         @$this->assertNull(add_hook("gibts_nicht"));
-    }
-
-    public function testGetPageByIDReturnsNull() {
-        $this->assertNull(getPageById(PHP_INT_MAX));
-    }
-
-    public function testGetPageByIDReturnsObject() {
-        $all = ContentFactory::getAll();
-        $first = $all[0];
-        $page = getPageByID($first->id);
-
-        $this->assertIsObject($page);
-        $this->assertEquals($first->getId(), $page->id);
-        $this->assertEquals($first->title, $page->title);
-    }
-
-    public function testGetAllPagesWithTitle() {
-        $pages = getAllPagesWithTitle();
-        $this->assertGreaterThanOrEqual(1, count($pages));
-        foreach ($pages as $page) {
-            $this->assertCount(2, $page);
-            $this->assertNotEmpty($page[0]);
-            $this->assertNotEmpty($page[1]);
-            $this->assertStringContainsString(".html", $page[1]);
-        }
     }
 
     public function testJsonReadableEncode() {
