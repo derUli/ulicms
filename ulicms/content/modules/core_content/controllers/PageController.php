@@ -90,7 +90,7 @@ class PageController extends Controller {
     // Split this in multiple methods
     private function fillAndSaveModel(
             $model,
-            Permission $permissionChecker,
+            PermissionChecker $permissionChecker,
             ?int $userId = null,
             ?int $groupId = null
     ): void {
@@ -208,9 +208,11 @@ class PageController extends Controller {
         foreach ($permissionObjects as $object) {
             $model->getPermissions()->setEditRestriction(
                     $object,
-                    Request::getVar(
+                    boolval(
+					Request::getVar(
                             "only_{$object}_can_edit", false, "bool"
                     )
+				)
             );
         }
 
