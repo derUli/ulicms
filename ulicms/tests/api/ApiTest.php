@@ -761,14 +761,15 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
 
     public function testVarDumpStrReturnsStringWithOneVar() {
         $output = var_dump_str(new User());
+
         $expected = file_get_contents(
                 Path::resolve("ULICMS_ROOT/tests/fixtures/var_dump_str.txt"
                 )
         );
 
         $this->assertStringContainsString(
-                $expected,
-                $output
+                normalizeLN($expected),
+                normalizeLN($output)
         );
     }
 

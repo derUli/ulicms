@@ -1,5 +1,9 @@
-<div class="custom-field" data-field-name="my_field">
+<div class="custom-field" 
+ data-field-name="my_field">
 <p>
-<input type="checkbox" name="my_field" id="cb_my_field" value="1" checked /> <label for="cb_my_field">enabld </label>
+<input type="checkbox" 
+ name="my_field" id="cb_my_field" value="1" checked /> <label
+ for="cb_my_field">enabld </label>
+
 </p>
 </div>

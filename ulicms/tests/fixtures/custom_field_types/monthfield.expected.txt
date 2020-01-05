@@ -1,6 +1,8 @@
-<div class="custom-field" data-field-name="my_field">
+<div class="custom-field" 
+ data-field-name="my_field">
 <p>
 <strong>Username </strong><br />
-<input type="month" name="my_field" value="2019-04" />
+<input type="month" 
+ name="my_field" value="2019-04" />
 </p>
 </div>

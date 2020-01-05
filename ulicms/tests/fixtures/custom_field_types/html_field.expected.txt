@@ -1,6 +1,8 @@
-<div class="custom-field" data-field-name="my_field">
+<div class="custom-field" 
+ data-field-name="my_field">
 <p>
 <strong>Content </strong><br />
-<textarea name="my_field" id="my_field" class="codemirror" data-mimetype="text/html">hello &lt;strong&gt;world&lt;/strong&gt;</textarea>
+<textarea name="my_field" 
+ id="my_field" class="codemirror" data-mimetype="text/html">hello &lt;strong&gt;world&lt;/strong&gt;</textarea>
 </p>
 </div>

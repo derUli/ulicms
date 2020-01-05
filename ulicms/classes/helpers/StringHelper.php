@@ -105,7 +105,8 @@ class StringHelper extends Helper {
     // als Assoziatives Array zurückgeben.
     // z.B. für automatisches ausfüllen der Meta-Keywords nutzbar
     public static function keywordsFromString(string $text): array {
-        $return = [];
+        $text = normalizeLN($text, "\n");
+        $words = [];
 
         // Punkt, Beistrich, Zeilenumbruch... in Leerzeichen umwandeln
         $text = str_replace(array(
@@ -115,25 +116,26 @@ class StringHelper extends Helper {
                 ), " ", $text);
 
         // text an Leerzeichen zerlegen
-        $array = explode(" ", $text);
-        $array = array_filter($array);
+        $textWords = explode(" ", $text);
+        $textWords = array_filter($textWords);
 
-        foreach ($array as $word) {
-            if (!array_key_exists($word, $return)) {
+        foreach ($textWords as $word) {
+            if (!array_key_exists($word, $words)) {
                 // wenn das wort zum ersten mal gefunden wurde
-                $return[$word] = 1;
+                $words[$word] = 1;
             } else {
                 // wenn schon vorhanden
-                $return[$word] ++;
+                $words[$word] ++;
             }
         }
 
-        $return = array_filter($return, "decodeHTMLEntities");
+        $words = array_filter($words, "decodeHTMLEntities");
+
         // nach häufigkeit sortieren
-        arsort($return);
+        arsort($words);
 
         // array zurückgeben
-        return $return;
+        return $words;
     }
 
     // converts a string to an array of lines

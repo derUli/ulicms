@@ -1,6 +1,8 @@
-<div class="custom-field" data-field-name="my_field">
+<div class="custom-field" 
+ data-field-name="my_field">
 <p>
 <strong>Users </strong><br />
-<textarea name="my_field">123</textarea>
+<textarea name="my_field" 
+>123</textarea>
 </p>
 </div>

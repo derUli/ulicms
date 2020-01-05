@@ -1,12 +1,19 @@
-<div class="custom-field" data-field-name="zip_codes">
+<div class="custom-field" 
+ data-field-name="zip_codes">
 <p>
 <strong>zip_codes </strong><br />
-<select name="zip_codes[]" multiple="">
-<option value="38102">Braunschweig</option>
-<option value="38104">Gliesmarode</option>
-<option value="38124">Heidburg</option>
-<option value="38100">Innenstadt</option>
-<option value="38116">Kanzlerfeld</option>
+<select name="zip_codes[]" 
+ multiple="">
+<option value="38102" 
+>Braunschweig</option>
+<option value="38104" 
+>Gliesmarode</option>
+<option value="38124" 
+>Heidburg</option>
+<option value="38100" 
+>Innenstadt</option>
+<option value="38116" 
+>Kanzlerfeld</option>
 </select>
 <br /> <small>hold_ctrl_to_select_multiple</small>
 </p>

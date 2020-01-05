@@ -1,39 +1,8 @@
-{
-  protected $id =>
+  ["id":protected]=>
   NULL
-  private $username =>
+  ["username":"User":private]=>
   NULL
-  private $lastname =>
+  ["lastname":"User":private]=>
   string(0) ""
-  private $firstname =>
+  ["firstname":"User":private]=>
   string(0) ""
-  private $email =>
-  string(0) ""
-  private $password =>
-  string(0) ""
-  private $about_me =>
-  string(0) ""
-  private $group_id =>
-  NULL
-  private $secondary_groups =>
-  array(0) {
-  }
-  private $group =>
-  NULL
-  private $html_editor =>
-  string(8) "ckeditor"
-  private $require_password_change =>
-  bool(false)
-  private $admin =>
-  bool(false)
-  private $password_changed =>
-  NULL
-  private $locked =>
-  bool(false)
-  private $last_login =>
-  NULL
-  private $homepage =>
-  string(0) ""
-  private $default_language =>
-  NULL
-}
