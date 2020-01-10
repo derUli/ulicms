@@ -1,3 +1,8 @@
+===== Neues in UliCMS 2020.2 =====
+
+Neue Features:
+* Höhe des CKEditor Eingabefelds wird nun beibehalten.
+
 ===== Neues in UliCMS 2020.1 =====
 
 Neue Features:
@@ -49,7 +54,7 @@ Entfernte Features:
   Diese Features werden in den nächsten UliCMS Releases erneut integriert werden.
 * mPDF wurde aus den Composer Abhängigkeiten entfernt.
   Wenn die PDF-Ausgabe genutzt werden soll, muss dafür das mPDF Paket von https://extend.ulicms.de/mPDF.html installiert werden
-  
+
 Fehlerkorrekturen:
 * Beim Bearbeiten eines Benutzers wird das Passwort nicht mehr geleert, wenn man kein neues eingegeben hat.
 * PackageController->getPackageDownloadUrl() gab immer null zurück.
