@@ -6,11 +6,12 @@ class UliCMSVersion {
 
 	function __construct() {
 		$this->codename = "Lurking Anaconda";
-		$this->releaseYear = 2019;
+		$this->releaseYear = 2020;
 		$this->buildDate = 0; // {InsertBuildDate}
 		$this->internalVersion = [
 			2020,
-			1
+			1,
+                        1
 		];
 
 		$this->update = "";
