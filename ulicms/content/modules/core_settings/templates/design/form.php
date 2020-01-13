@@ -1,4 +1,13 @@
 <?php
+use UliCMS\HTML\Input;
+use UliCMS\HTML\ListItem;
+
+$skins = Input::getCKEditorSkins();
+$skinItems = [];
+foreach($skins as $skin){
+    $skinItems[] = new ListItem($skin, $skin);
+}
+
 $controller = ControllerRegistry::get();
 $permissionChecker = new ACL();
 if (!$permissionChecker->hasPermission("design")) {
@@ -163,20 +172,14 @@ if (!$permissionChecker->hasPermission("design")) {
             </tr>
             <tr>
                 <td><strong><?php translate("editor_skin"); ?> </strong></td>
-                <td><select name="ckeditor_skin" size=1>
-                        <option value="moono"
-                        <?php
-                        if ($ckeditor_skin === "moono") {
-                            echo " selected";
-                        }
-                        ?>>Moono</option>
-                        <option value="kama"
-                        <?php
-                        if ($ckeditor_skin === "kama") {
-                            echo " selected";
-                        }
-                        ?>>Kama</option>
-                    </select></td>
+                <td>
+                    <?php echo Input::singleSelect(
+                            "ckeditor_skin",
+                            $ckeditor_skin,
+                            $skinItems
+                            );?>
+                </td>
+                
             </tr>
             <tr>
                 <td><strong><?php translate("font_family"); ?> </strong></td>

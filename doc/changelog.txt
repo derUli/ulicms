@@ -3,6 +3,12 @@
 Neue Features:
 * Höhe des CKEditor Eingabefelds wird nun beibehalten.
 
+Neue API-Methoden:
+* Input::getCKEditorSkins(): array
+
+Entfernte API-Methoden:
+* "kama" CKEditor Skin entfernt
+
 ===== Neues in UliCMS 2020.1 =====
 
 Neue Features:

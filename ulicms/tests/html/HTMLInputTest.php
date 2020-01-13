@@ -166,5 +166,12 @@ class HTMLInputTest extends \PHPUnit\Framework\TestCase {
                 )
         );
     }
+    
+    public function testGetCKEditorSkins(){
+        $skins = Input::getCKEditorSkins();
+        
+        $this->assertGreaterThanOrEqual(1, count($skins));
+        $this->assertContains("moono", $skins);
+    }
 
 }

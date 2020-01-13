@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace UliCMS\HTML;
 
+use Path;
 use ModuleHelper;
 use Template;
 
@@ -177,6 +178,21 @@ class Input {
         }
         $html .= '</select>';
         return $html;
+    }
+    
+    public static function getCKEditorSkins(): array{
+        $skins = [];
+        $dir = Path::resolve("ULICMS_ROOT/admin/ckeditor/skins");
+        $folders = find_all_folders($dir);
+        
+        foreach($folders as $folder){
+            $cssFile = "$folder/editor.css";
+            if(file_exists(($cssFile))){
+                $skins[] = basename($folder);
+            }
+        }
+        return $skins;
+        
     }
 
 }
