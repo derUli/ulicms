@@ -5,7 +5,7 @@ declare(strict_types=1);
 class UliCMSVersion {
 
 	function __construct() {
-		$this->codename = "Lurking Anaconda";
+		$this->codename = "Playful Amazon River Dolphin";
 		$this->releaseYear = 2020;
 		$this->buildDate = 0; // {InsertBuildDate}
 		$this->internalVersion = [

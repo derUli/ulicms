@@ -1,6 +1,7 @@
 ===== Neues in UliCMS 2020.2 =====
 
 Neue Features:
+* CKEditor auf Version 4.13.1 aktualisiert
 * Höhe des CKEditor Eingabefelds wird nun beibehalten.
 
 Neue API-Methoden:
