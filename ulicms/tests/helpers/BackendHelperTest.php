@@ -50,5 +50,12 @@ class BackendHelperTest extends \PHPUnit\Framework\TestCase {
         BackendHelper::enqueueEditorScripts();
         $this->assertStringContainsString('<script src="content/cache/scripts/', $output = getCombinedScriptHtml());
     }
+    
+    public function testGetCKEditorSkins(){
+        $skins = BackendHelper::getCKEditorSkins();
+        
+        $this->assertGreaterThanOrEqual(1, count($skins));
+        $this->assertContains("moono", $skins);
+    }
 
 }

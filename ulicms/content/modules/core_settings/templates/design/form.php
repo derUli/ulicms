@@ -2,7 +2,7 @@
 use UliCMS\HTML\Input;
 use UliCMS\HTML\ListItem;
 
-$skins = Input::getCKEditorSkins();
+$skins = BackendHelper::getCKEditorSkins();
 $skinItems = [];
 foreach($skins as $skin){
     $skinItems[] = new ListItem($skin, $skin);

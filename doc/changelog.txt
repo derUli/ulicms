@@ -4,7 +4,7 @@ Neue Features:
 * Höhe des CKEditor Eingabefelds wird nun beibehalten.
 
 Neue API-Methoden:
-* Input::getCKEditorSkins(): array
+* BackendHelper::getCKEditorSkins(): array
 
 Entfernte API-Methoden:
 * "kama" CKEditor Skin entfernt
