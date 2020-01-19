@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 use UliCMS\CoreContent\Models\ViewModels\DiffViewModel;
@@ -209,10 +208,10 @@ class PageController extends Controller {
             $model->getPermissions()->setEditRestriction(
                     $object,
                     boolval(
-					Request::getVar(
-                            "only_{$object}_can_edit", false, "bool"
+                            Request::getVar(
+                                    "only_{$object}_can_edit", false, "bool"
+                            )
                     )
-				)
             );
         }
 
@@ -368,7 +367,7 @@ class PageController extends Controller {
 
         $current_version_date = date(
                 "Y-m-d H:i:s",
-                $current_version->lastmodified
+                intval( $current_version->lastmodified)
         );
         $old_version_date = $old_version->date;
 

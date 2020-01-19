@@ -28,7 +28,9 @@ if ($permissionChecker->hasPermission("videos") and $permissionChecker->hasPermi
         <br /> <strong><?php translate("height"); ?></strong><br /> <input
             type="number" name="height" value="720" step="1"> <br />
         <button type="submit" class="btn btn-primary">
-            <i class="fas fa-upload"></i> <?php translate("UPLOAD_VIDEO"); ?></button>
+            <i class="fas fa-upload"></i>
+            <?php translate("UPLOAD_VIDEO"); ?>
+        </button>
     </form>
     <?php
 } else {

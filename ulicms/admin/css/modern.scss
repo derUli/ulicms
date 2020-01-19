@@ -990,3 +990,9 @@ pre {
     vertical-align: middle;
     height: 40px;
 }
+
+iframe.kcfinder{
+    border: 0;
+    width: 100%;
+    height: calc(100vh - 290px);
+}

@@ -56,7 +56,9 @@ $languages = Language::getAllLanguages();
     <br /> <br />
     <p>
         <button name="add_group" type="submit" class="btn btn-primary">
-            <i class="fa fa-save"></i> <?php translate("create_group"); ?></button>
+            <i class="fa fa-save"></i>
+            <?php translate("save"); ?>
+        </button>
     </p>
 </form>
 <?php

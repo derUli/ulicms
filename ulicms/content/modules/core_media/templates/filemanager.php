@@ -10,8 +10,7 @@ if ($permissionChecker->hasPermission($_GET["action"])) {
         src="kcfinder/browse.php?type=<?php
         echo basename(get_action());
         ?>&lang=<?php esc(getSystemLanguage()); ?>"
-        style="border: 0px; width: 100%; height: 500px;">
-    </iframe>
+        class="kcfinder"></iframe>
     <?php
 } else {
     noPerms();

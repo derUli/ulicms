@@ -37,7 +37,8 @@ if ($permissionChecker->hasPermission("audio")
         <br />
         <button type="submit" class="btn btn-primary">
             <i class="fa fa-upload"></i>
-            <?php translate("UPLOAD_audio"); ?></button>
+            <?php translate("UPLOAD_audio"); ?>
+        </button>
     </form>
     <?php
 } else {

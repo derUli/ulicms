@@ -177,7 +177,8 @@ if (!$permissionChecker->hasPermission("categories")) {
             </p>
             <p>
                 <button type="submit" name="create" class="btn btn-primary">
-                    <i class="fa fa-save"></i> <?php translate("create"); ?>
+                    <i class="fa fa-save"></i>
+                    <?php translate("save"); ?>
                 </button>
             </p>
             <?php echo ModuleHelper::endForm(); ?><?php

@@ -56,7 +56,7 @@ if ($permissionChecker->hasPermission("audio")
             <br />
             <button type="submit" class="btn btn-primary">
                 <i class="fa fa-save"></i>
-                <?php translate("SAVE_CHANGES"); ?>
+                <?php translate("save"); ?>
             </button>
         </form>
         <?php

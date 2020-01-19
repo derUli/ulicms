@@ -68,7 +68,8 @@ if ($permissionChecker->hasPermission("videos")
             <br />
             <button type="submit" class="btn btn-primary">
                 <i class="fa fa-save"></i>
-                <?php translate("save_changes"); ?></button>
+                <?php translate("save"); ?>
+            </button>
         </form>
         <?php
     } else {
