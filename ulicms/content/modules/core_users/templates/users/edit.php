@@ -51,12 +51,26 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
 					"image/*"
 			);
 			?>
+                    <?php if($user->hasProcessedAvatar()){
+                ?>
+            <div class="checkbox">
+                <label>
+                    <?php
+                    echo UliCMS\HTML\Input::checkBox("delete_avatar", false, "1",
+                            array("class" => "js-switch"));
+                    ?><?php translate("delete_avatar") ?>
+                </label>
+            </div>
+            <?php } ?>
 		</div>
 		<input type="hidden" name="edit_admin"
 			   value="edit_admin"> <input type="hidden" name="id"
 			   value="<?php
 			   echo $row->id;
-			   ?>"> <br /> <strong><?php translate("username"); ?>*</strong><br />
+			   ?>">
+                <br/>
+                <strong><?php translate("username"); ?>*</strong>
+                <br />
 		<input type="text" name="username"
 			   value="<?php echo _esc($row->username); ?>" required disabled
 			   <?php

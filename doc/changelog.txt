@@ -2,7 +2,8 @@
 
 Neue Features:
 * CKEditor auf Version 4.13.1 aktualisiert
-* Höhe des CKEditor Eingabefelds wird nun beibehalten.
+* Höhe des CKEditor Eingabefelds wird nun beibehalten
+* Der User-Avatar kann jetzt entfernt werden
 
 Neue API-Methoden:
 * BackendHelper::getCKEditorSkins(): array
