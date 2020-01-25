@@ -14,7 +14,7 @@
         "jscolor-picker": "*",
         "password-strength-meter": "*",
         "select2": "*",
-        "slug": "*",
+        "slug": "^2.1.0",
         "zenscroll": "*"
     },
     "license": "The BSD License",
