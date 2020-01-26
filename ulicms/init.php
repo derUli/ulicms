@@ -1,5 +1,7 @@
 <?php
 
+require_once dirname(__file__) . "/classes/exceptions/load.php";
+
 use UliCMS\Exceptions\AccessDeniedException;
 use UliCMS\Exceptions\ConnectionFailedException;
 use UliCMS\Exceptions\FileNotFoundException;
@@ -75,7 +77,6 @@ require_once dirname(__file__) . "/classes/objects/content/types/fields/FileFile
 require_once dirname(__file__) . "/classes/objects/content/types/fields/FileImage.php";
 require_once dirname(__file__) . "/classes/objects/pkg/load.php";
 require_once dirname(__file__) . "/classes/helpers/load.php";
-require_once dirname(__file__) . "/classes/exceptions/load.php";
 require_once dirname(__file__) . "/classes/objects/registry/load.php";
 require_once dirname(__file__) . "/classes/objects/logging/load.php";
 require_once dirname(__file__) . "/classes/objects/html/load.php";
@@ -387,10 +388,10 @@ if ($memory_limit) {
 
 $cache_period = Settings::get("cache_period");
 
-// Prüfen ob Cache Gültigkeitsdauer gesetzt ist.
-// Ansonsten auf Standardwert setzen
-if ($cache_period === false) {
-	setconfig("cache_period", ONE_DAY_IN_SECONDS);
+// by Check if the cache expiry is set.
+// if not initialize setting with default value
+if ($cache_period === null) {
+	Settings::set("cache_period", strval(ONE_DAY_IN_SECONDS));
 	define("CACHE_PERIOD", ONE_DAY_IN_SECONDS);
 } else {
 	define("CACHE_PERIOD", $cache_period);
