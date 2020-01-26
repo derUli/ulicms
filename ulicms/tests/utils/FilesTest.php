@@ -3,10 +3,6 @@
 use UliCMS\Utils\File;
 
 class FilesTest extends \PHPUnit\Framework\TestCase {
-    
-    public function setUp(){
-        idefine("ULICMS_DATA_STORAGE_URL", ULICMS_ROOT);
-    }
 
     public function testFileExtension() {
         $this->assertEquals("pdf", file_extension("myfile.pdf"));
