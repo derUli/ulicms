@@ -368,7 +368,7 @@ class PageController extends Controller {
 
         $current_version_date = date(
                 "Y-m-d H:i:s",
-                $current_version->lastmodified
+                intval($current_version->lastmodified)
         );
         $old_version_date = $old_version->date;
 
