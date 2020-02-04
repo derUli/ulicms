@@ -17,7 +17,7 @@ class TwoFactorAuthentication {
         }
     }
 
-    public function getSecret() {
+    public function getSecret(): ?string {
         return Settings::get("ga_secret");
     }
 
@@ -37,13 +37,25 @@ class TwoFactorAuthentication {
         return $ga->getCode($this->getSecret());
     }
 
-    public function checkCode(string $code) {
+    public function checkCode(?string $code): bool {
         return $this->getCode() === $code;
     }
 
     // is two factor authentication enabled?
     public static function isEnabled(): bool {
         return boolval(Settings::get("twofactor_authentication"));
+    }
+
+    public static function enable(): void {
+        Settings::set("twofactor_authentication", "1");
+    }
+
+    public static function disable(): void {
+        Settings::delete("twofactor_authentication");
+    }
+
+    public static function toggle(): void {
+        self::isEnabled() ? self::disable() : self::enable();
     }
 
 }

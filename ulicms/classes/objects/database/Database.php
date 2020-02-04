@@ -12,12 +12,12 @@ class Database {
     private static $echoQueries = false;
 
     // this is used to show sql queries while running the unit tests
-    public static function setEchoQueries($echoQueries = true) {
+    public static function setEchoQueries($echoQueries = true): void {
         self::$echoQueries = $echoQueries;
     }
 
     // force MySQL into strict mode
-    public static function getSqlStrictModeFlags() {
+    public static function getSqlStrictModeFlags(): array {
         return [
             "ONLY_FULL_GROUP_BY",
             "STRICT_TRANS_TABLES",
@@ -30,14 +30,23 @@ class Database {
     }
 
     // Connect with database server
-    public static function connect(string $server, string $user, string $password, int $port, ?string $socket = null, bool $db_strict_mode = false): ?mysqli {
+    public static function connect(
+            string $server,
+            string $user,
+            string $password,
+            int $port,
+            ?string $socket = null,
+            bool $db_strict_mode = false
+    ): ?mysqli {
         $connected = mysqli_connect($server, $user, $password, "", $port, $socket);
         self::$connection = $connected ? $connected : null;
         if (!self::$connection) {
             return null;
         }
+
         self::query("SET NAMES 'utf8mb4'");
-        // sql_mode auf leer setzen, da sich UliCMS nicht im strict_mode betreiben lässt
+        // sql_mode auf leer setzen, da sich UliCMS nicht im
+        // strict_mode betreiben lässt
         if ($db_strict_mode) {
             self::pQuery("SET SESSION sql_mode = ?", [
                 implode(",", self::getSqlStrictModeFlags())
@@ -52,6 +61,7 @@ class Database {
     // Close the databse connection
     public static function close(): void {
         mysqli_close(self::$connection);
+        self::$connection = null;
     }
 
     // Create a database schema
@@ -60,7 +70,10 @@ class Database {
     }
 
     // TODO: Do logging when auto initialize the database
-    public static function setupSchemaAndSelect(string $schemaName, array $otherScripts = []): bool {
+    public static function setupSchemaAndSelect(
+            string $schemaName,
+            array $otherScripts = []
+    ): bool {
         $selected = self::select($schemaName);
         if (!$selected) {
             $success = self::createSchema($schemaName);
@@ -70,7 +83,10 @@ class Database {
         }
 
         if ($selected) {
-            $migrator = new DBMigrator("core", Path::resolve("ULICMS_ROOT/lib/migrations/up"));
+            $migrator = new DBMigrator(
+                    "core",
+                    Path::resolve("ULICMS_ROOT/lib/migrations/up")
+            );
             $migrator->migrate();
             foreach ($otherScripts as $script) {
                 $fullPath = Path::resolve($script);
@@ -104,7 +120,10 @@ class Database {
     }
 
     // execute a sql string with multiple statements
-    public static function multiQuery(string $sql, bool $replacePrefix = false) {
+    public static function multiQuery(
+            string $sql,
+            bool $replacePrefix = false
+    ) {
         $cfg = new CMSConfig();
         if ($replacePrefix) {
             $sql = str_replace("{prefix}", $cfg->db_prefix, $sql);
@@ -136,11 +155,15 @@ class Database {
     // prepared statements
     // $sql must be a sql string containg question marks
     // $args must be an array of values
-    // please ensure, that all values in $args have the type they     // are intended to have.
-    // e.g numbers must be int or float
+    // please ensure, that all values in $args have the type they
+    // are intended to have. e.g numbers must be int or float
     // the method replaces the question marks with the items of the $args array
     // $args are automatically escaped to prevent sql injections
-    public static function pQuery(string $sql, array $args = [], bool $replacePrefix = false) {
+    public static function pQuery(
+            string $sql,
+            array $args = [],
+            bool $replacePrefix = false
+    ) {
         $preparedQuery = "";
         $chars = mb_str_split($sql);
         $i = 0;
@@ -179,7 +202,10 @@ class Database {
         return mysqli_get_client_version(self::$connection);
     }
 
-    public static function dropTable(string $table, bool $prefix = true): bool {
+    public static function dropTable(
+            string $table,
+            bool $prefix = true
+    ): bool {
         if ($prefix) {
             $table = tbname($table);
         }
@@ -197,7 +223,12 @@ class Database {
         return self::query("DROP SCHEMA $schema");
     }
 
-    public static function selectMin(string $table, string $column, string $where = "", bool $prefix = true) {
+    public static function selectMin(
+            string $table,
+            string $column,
+            string $where = "",
+            bool $prefix = true
+    ) {
         if ($prefix) {
             $table = tbname($table);
         }
@@ -210,15 +241,18 @@ class Database {
         }
 
         $result = Database::query($sql);
-        if (!self::any($result)) {
-            return null;
-        }
+
         $row = Database::fetchObject($result);
         $val = $row->val;
         return is_decimal($val) ? floatval(val) : intval($val);
     }
 
-    public static function selectMax(string $table, string $column, string $where = "", bool $prefix = true) {
+    public static function selectMax(
+            string $table,
+            string $column,
+            string $where = "",
+            bool $prefix = true
+    ) {
         if ($prefix) {
             $table = tbname($table);
         }
@@ -231,15 +265,18 @@ class Database {
         }
 
         $result = Database::query($sql);
-        if (!self::any($result)) {
-            return null;
-        }
+
         $row = Database::fetchObject($result);
         $val = $row->val;
         return is_decimal($val) ? floatval(val) : intval($val);
     }
 
-    public static function selectAvg(string $table, string $column, string $where = "", bool $prefix = true) {
+    public static function selectAvg(
+            string $table,
+            string $column,
+            string $where = "",
+            bool $prefix = true
+    ) {
         if ($prefix) {
             $table = tbname($table);
         }
@@ -252,15 +289,17 @@ class Database {
         }
 
         $result = Database::query($sql);
-        if (!self::any($result)) {
-            return null;
-        }
+
         $row = Database::fetchObject($result);
         $val = $row->val;
         return is_decimal($val) ? floatval($val) : intval($val);
     }
 
-    public static function deleteFrom(string $table, string $where = "", bool $prefix = true): bool {
+    public static function deleteFrom(
+            string $table,
+            string $where = "",
+            bool $prefix = true
+    ): bool {
         if ($prefix) {
             $table = tbname($table);
         }
@@ -275,7 +314,10 @@ class Database {
         return $result;
     }
 
-    public static function truncateTable(string $table, bool $prefix = true): bool {
+    public static function truncateTable(
+            string $table,
+            bool $prefix = true
+    ): bool {
         if ($prefix) {
             $table = tbname($table);
         }
@@ -284,7 +326,11 @@ class Database {
         return self::query("TRUNCATE TABLE $table");
     }
 
-    public static function dropColumn(string $table, string $column, bool $prefix = true): bool {
+    public static function dropColumn(
+            string $table,
+            string $column,
+            bool $prefix = true
+    ): bool {
         if ($prefix) {
             $table = tbname($table);
         }
@@ -294,7 +340,14 @@ class Database {
         return self::query("ALTER TABLE $table DROP COLUMN $column");
     }
 
-    public static function selectAll(string $table, array $columns = [], string $where = "", array $args = [], bool $prefix = true, string $order = ""): ?mysqli_result {
+    public static function selectAll(
+            string $table,
+            array $columns = [],
+            string $where = "",
+            array $args = [],
+            bool $prefix = true,
+            string $order = ""
+    ): ?mysqli_result {
         if ($prefix) {
             $table = tbname($table);
         }
@@ -416,7 +469,7 @@ class Database {
     // escape values to prevent sql injections
     // don't manually call this, if you use
     // pQuery() to make queries
-    public static function escapeValue($value, int $type = null) {
+    public static function escapeValue($value, ?int $type = null) {
         if (is_null($value)) {
             return "NULL";
         }
@@ -436,7 +489,10 @@ class Database {
             } else if ($type === DB_TYPE_FLOAT) {
                 return floatval($value);
             } else if ($type === DB_TYPE_STRING) {
-                return mysqli_real_escape_string(self::$connection, $value);
+                return mysqli_real_escape_string(
+                        self::$connection,
+                        strval($value)
+                );
             } else if ($type === DB_TYPE_BOOL) {
                 return intval($value);
             } else {
@@ -446,7 +502,10 @@ class Database {
     }
 
     // returns a list of all tables of a table
-    public static function getColumnNames(string $table, bool $prefix = true): array {
+    public static function getColumnNames(
+            string $table,
+            bool $prefix = true
+    ): array {
         $retval = [];
         if ($prefix) {
             $table = tbname($table);
@@ -479,7 +538,10 @@ class Database {
     // if the result contains one result returns it
     // if the result contains no result returns a default object
     // if the result returns more than one result throws an exception
-    public static function fetchSingleOrDefault(?mysqli_result $result, ?object $default = null): ?object {
+    public static function fetchSingleOrDefault(
+            ?mysqli_result $result,
+            ?object $default = null
+    ): ?object {
         if (self::getNumRows($result) > 1) {
             throw new RangeException("Result contains more than one element.");
         }
@@ -501,7 +563,10 @@ class Database {
     // fetches and returns the first dataset of a mysqli_result
     // as object
     // if there are no results, return a default object
-    public static function fetchFirstOrDefault(mysqli_result$result, ?object $default = null): ?object {
+    public static function fetchFirstOrDefault(
+            mysqli_result$result,
+            ?object $default = null
+    ): ?object {
         if (Database::getNumRows($result) > 0) {
             return self::fetchObject($result);
         }
@@ -524,13 +589,11 @@ class Database {
     }
 
     // used for multi queries
-    public static function storeResult(): bool {
+    public static function storeResult(): mysqli_result {
         return mysqli_store_result(self::$connection);
     }
 
 }
 
-// Alias for Database for backwards compatiblity
-class DB extends Database {
-
-}
+// for backwards compatiblity
+class_alias(Database::class, "DB");

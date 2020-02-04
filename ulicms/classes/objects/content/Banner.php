@@ -7,17 +7,19 @@ namespace UliCMS\Models\Content\Advertisement;
 use Template;
 use Database;
 use Model;
+use InvalidArgumentException;
+use UliCMS\Exceptions\DatasetNotFoundException;
 
 // advertisement banners can be html codes or classic gif banners
 class Banner extends Model {
 
     protected $id = null;
-    private $name = "";
-    private $link_url = "";
-    private $image_url = "";
+    private $name = null;
+    private $link_url = null;
+    private $image_url = null;
     private $category_id = 1;
     private $type = "gif";
-    private $html = "";
+    private $html = null;
     private $language = null;
     private $enabled = true;
     private $date_from = null;
@@ -31,18 +33,20 @@ class Banner extends Model {
 
     public function loadByID($id) {
         $id = intval($id);
-        $result = Database::query("SELECT * FROM `" . tbname("banner") . "` where id = $id");
+        $result = Database::query("SELECT * FROM `" . tbname("banner") .
+                        "` where id = $id");
         if (Database::getNumRows($result) > 0) {
             $result = Database::fetchObject($result);
             $this->fillVars($result);
         } else {
-            throw new Exception("No banner with id $id");
+            throw new DatasetNotFoundException("No banner with id $id");
         }
     }
 
     public function loadRandom(): void {
         $id = intval($id);
-        $result = Database::query("SELECT * FROM `" . tbname("banner") . "` order by rand() LIMIT 1");
+        $result = Database::query("SELECT * FROM `" . tbname("banner")
+                        . "` order by rand() LIMIT 1");
         if (Database::getNumRows($result) > 0) {
             $dataset = Database::fetchObject($result);
             $this->fillVars($dataset);
@@ -81,7 +85,9 @@ class Banner extends Model {
     }
 
     public function insert() {
-        $sql = "INSERT INTO " . tbname("banner") . "(name, link_url, image_url, category_id, type, html, language, date_from, date_to, enabled) values (";
+        $sql = "INSERT INTO " . tbname("banner") . "(name, link_url, image_url, "
+                . "category_id, type, html, language, date_from, date_to, "
+                . "enabled) values (";
         if ($this->name === null) {
             $sql .= "NULL, ";
         } else {
@@ -102,11 +108,9 @@ class Banner extends Model {
         } else {
             $sql .= "'" . intval($this->category_id) . "',";
         }
-        if ($this->type === null) {
-            $sql .= "NULL, ";
-        } else {
-            $sql .= "'" . Database::escapeValue($this->type) . "',";
-        }
+
+        $sql .= "'" . Database::escapeValue($this->type) . "',";
+
         if ($this->html === null) {
             $sql .= "NULL, ";
         } else {
@@ -154,23 +158,23 @@ class Banner extends Model {
         if ($this->link_url === null) {
             $sql .= "link_url = NULL, ";
         } else {
-            $sql .= "link_url='" . Database::escapeValue($this->link_url) . "',";
+            $sql .= "link_url='" . Database::escapeValue($this->link_url) .
+                    "',";
         }
         if ($this->image_url === null) {
             $sql .= "image_url=NULL, ";
         } else {
-            $sql .= "image_url='" . Database::escapeValue($this->image_url) . "',";
+            $sql .= "image_url='" . Database::escapeValue($this->image_url) .
+                    "',";
         }
         if ($this->category_id === null) {
             $sql .= "category_id=NULL, ";
         } else {
             $sql .= "category_id='" . intval($this->category_id) . "',";
         }
-        if ($this->type === null) {
-            $sql .= "`type`=NULL, ";
-        } else {
-            $sql .= "`type`='" . Database::escapeValue($this->type) . "',";
-        }
+
+        $sql .= "`type`='" . Database::escapeValue($this->type) . "',";
+
         if ($this->html === null) {
             $sql .= "html=NULL, ";
         } else {
@@ -179,18 +183,21 @@ class Banner extends Model {
         if ($this->language === null) {
             $sql .= "language=NULL, ";
         } else {
-            $sql .= "language='" . Database::escapeValue($this->language) . "', ";
+            $sql .= "language='" . Database::escapeValue($this->language) .
+                    "', ";
         }
 
         if ($this->date_from === null) {
             $sql .= "date_from=NULL, ";
         } else {
-            $sql .= "date_from='" . Database::escapeValue($this->date_from) . "', ";
+            $sql .= "date_from='" . Database::escapeValue($this->date_from) .
+                    "', ";
         }
         if ($this->date_to === null) {
             $sql .= "date_to=NULL, ";
         } else {
-            $sql .= "date_to='" . Database::escapeValue($this->date_to) . "', ";
+            $sql .= "date_to='" . Database::escapeValue($this->date_to) .
+                    "', ";
         }
 
         $sql .= "enabled = " . intval($this->enabled);
@@ -209,7 +216,9 @@ class Banner extends Model {
         } else if (is_numeric($val)) {
             $this->date_from = date("Y-m-d", $val);
         } else {
-            throw new InvalidArgumentException("not a date and not a timestamp");
+            throw new InvalidArgumentException(
+                    "not a date and not a timestamp"
+            );
         }
     }
 
@@ -219,7 +228,9 @@ class Banner extends Model {
         } else if (is_numeric($val)) {
             $this->date_to = date("Y-m-d", $val);
         } else {
-            throw new InvalidArgumentException("not a date and not a timestamp");
+            throw new InvalidArgumentException(
+                    "not a date and not a timestamp"
+            );
         }
     }
 
@@ -304,7 +315,8 @@ class Banner extends Model {
     public function delete() {
         $retval = false;
         if ($this->id !== null) {
-            $sql = "DELETE from " . tbname("banner") . " where id = " . $this->id;
+            $sql = "DELETE from " . tbname("banner") . " where id = " .
+                    $this->id;
             $retval = Database::Query($sql);
             $this->id = null;
         }

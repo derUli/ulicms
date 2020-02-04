@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 class SpamFilterController extends Controller {
 
-    public function savePost() {
+    public function savePost(): void {
         do_event("before_save_spamfilter_settings");
 
         if ($_POST["spamfilter_enabled"] == "yes") {
@@ -49,7 +51,12 @@ class SpamFilterController extends Controller {
             Settings::delete("check_mx_of_mail_address");
         }
 
-        Settings::set("min_time_to_fill_form", Request::getVar("min_time_to_fill_form", 0, "int"));
+        Settings::set(
+                "min_time_to_fill_form",
+                Request::getVar("min_time_to_fill_form",
+                        0,
+                        "int")
+        );
 
         do_event("after_save_spamfilter_settings");
         // if called by ajax return no content to improve performance

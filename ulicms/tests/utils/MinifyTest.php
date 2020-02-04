@@ -5,6 +5,14 @@ use UliCMS\Utils\CacheUtil;
 
 class MinifyTest extends \PHPUnit\Framework\TestCase {
 
+    public function tearDown() {
+        resetScriptQueue();
+        resetStylesheetQueue();
+
+        setSCSSImportPaths([]);
+        Vars::delete("css_include_paths");
+    }
+
     public function testScriptQueue() {
         $filemtime = 0;
         $files = array(
@@ -19,8 +27,14 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
             }
         }
         $this->assertCount(3, Vars::get("script_queue"));
-        $this->assertEquals("node_modules/jquery/dist/jquery.js", Vars::get("script_queue")[0]);
-        $this->assertEquals("node_modules/bootbox/bootbox.js", Vars::get("script_queue")[2]);
+        $this->assertEquals(
+                "node_modules/jquery/dist/jquery.js",
+                Vars::get("script_queue")[0]
+        );
+        $this->assertEquals(
+                "node_modules/bootbox/bootbox.js",
+                Vars::get("script_queue")[2]
+        );
 
         resetScriptQueue();
         $this->assertCount(0, Vars::get("script_queue"));
@@ -30,13 +44,88 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         }
 
         $html = getCombinedScriptHtml();
-        $this->assertStringStartsWith('<script src="content/cache/scripts/', $html);
+        $this->assertStringStartsWith(
+                '<script src="content/cache/scripts/',
+                $html
+        );
         $this->assertContains(".js?time=", $html);
         $this->assertStringEndsWith('type="text/javascript"></script>', $html);
 
         $this->assertCount(0, Vars::get("script_queue"));
     }
 
+    public function testGetCombinedScriptHtml() {
+        $files = array(
+            "node_modules/jquery/dist/jquery.js",
+            "admin/scripts/global.js",
+            "node_modules/bootbox/bootbox.js"
+        );
+
+        foreach ($files as $file) {
+            enqueueScriptFile($file);
+        }
+
+        @$html = get_combined_script_html();
+        $this->assertStringStartsWith(
+                '<script src="content/cache/scripts/',
+                $html
+        );
+        $this->assertContains(".js?time=", $html);
+        $this->assertStringEndsWith('type="text/javascript"></script>', $html);
+
+        $this->assertCount(0, Vars::get("script_queue"));
+    }
+
+    public function testCombinedScriptHTML() {
+        $files = array(
+            "node_modules/jquery/dist/jquery.js",
+            "admin/scripts/global.js",
+            "node_modules/bootbox/bootbox.js"
+        );
+
+        foreach ($files as $file) {
+            enqueueScriptFile($file);
+        }
+
+        ob_start();
+        @combined_script_html();
+        $html = ob_get_clean();
+
+        $this->assertStringStartsWith(
+                '<script src="content/cache/scripts/',
+                $html
+        );
+        $this->assertContains(".js?time=", $html);
+        $this->assertStringEndsWith('type="text/javascript"></script>', $html);
+
+        $this->assertCount(0, Vars::get("script_queue"));
+        
+    }
+  public function testCombinedScriptHTMLDeprecated() {
+        $files = array(
+            "node_modules/jquery/dist/jquery.js",
+            "admin/scripts/global.js",
+            "node_modules/bootbox/bootbox.js"
+        );
+
+        foreach ($files as $file) {
+            enqueueScriptFile($file);
+        }
+
+        ob_start();
+        combinedScriptHtml();
+        $html = ob_get_clean();
+
+        $this->assertStringStartsWith(
+                '<script src="content/cache/scripts/',
+                $html
+        );
+        $this->assertContains(".js?time=", $html);
+        $this->assertStringEndsWith('type="text/javascript"></script>', $html);
+
+        $this->assertCount(0, Vars::get("script_queue"));
+        
+    }
     public function testStylesheetQueue() {
         $filemtime = 0;
         $files = array(
@@ -52,8 +141,14 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
             }
         }
         $this->assertCount(4, Vars::get("stylesheet_queue"));
-        $this->assertEquals("node_modules/bootstrap/dist/css/bootstrap.css", Vars::get("stylesheet_queue")[1]);
-        $this->assertEquals("node_modules/bootstrap/dist/css/bootstrap-theme.css", Vars::get("stylesheet_queue")[2]);
+        $this->assertEquals(
+                "node_modules/bootstrap/dist/css/bootstrap.css",
+                Vars::get("stylesheet_queue")[1]
+        );
+        $this->assertEquals(
+                "node_modules/bootstrap/dist/css/bootstrap-theme.css",
+                Vars::get("stylesheet_queue")[2]
+        );
 
         resetStylesheetQueue();
         $this->assertCount(0, Vars::get("stylesheet_queue"));
@@ -63,6 +158,49 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         }
 
         $html = getCombinedStylesheetHTML();
+        $this->assertStringStartsWith('<link rel="stylesheet" href="', $html);
+        $this->assertContains(".css?time=", $html);
+        $this->assertStringEndsWith('" type="text/css"/>', $html);
+
+        $this->assertCount(0, Vars::get("script_queue"));
+    }
+
+    public function testCombinedStylesheetHtml() {
+        $filemtime = 0;
+        $files = array(
+            "lib/css/core.scss",
+            "node_modules/bootstrap/dist/css/bootstrap.css",
+            "node_modules/bootstrap/dist/css/bootstrap-theme.css",
+            "admin/css/modern.scss"
+        );
+
+        foreach ($files as $file) {
+            enqueueStylesheet($file);
+        }
+
+        ob_start();
+        combinedStylesheetHtml();
+        $html = ob_get_clean();
+        $this->assertStringStartsWith('<link rel="stylesheet" href="', $html);
+        $this->assertContains(".css?time=", $html);
+        $this->assertStringEndsWith('" type="text/css"/>', $html);
+
+        $this->assertCount(0, Vars::get("script_queue"));
+    }
+
+    public function testGetCombinedStylesheetHtml() {
+        $files = array(
+            "lib/css/core.scss",
+            "node_modules/bootstrap/dist/css/bootstrap.css",
+            "node_modules/bootstrap/dist/css/bootstrap-theme.css",
+            "admin/css/modern.scss"
+        );
+
+        foreach ($files as $file) {
+            enqueueStylesheet($file);
+        }
+
+        @$html = get_combined_stylesheet_html();
         $this->assertStringStartsWith('<link rel="stylesheet" href="', $html);
         $this->assertContains(".css?time=", $html);
         $this->assertStringEndsWith('" type="text/css"/>', $html);
@@ -98,18 +236,39 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
             minifyCSS();
             $this->fail("Expected exception not thrown");
         } catch (SCSSCompileException $e) {
-            $this->assertStringStartsWith("Compilation of tests/fixtures/scss/fail.scss failed: parse error: failed at", $e->getMessage());
-            $this->assertStringEndsWith("(stdin) on line 5, at column 5", $e->getMessage());
+            $this->assertStringStartsWith(
+                    "Compilation of tests/fixtures/scss/fail.scss failed: parse error: failed at",
+                    $e->getMessage()
+            );
+            $this->assertStringEndsWith(
+                    "(stdin) on line 5, at column 5",
+                    $e->getMessage()
+            );
         } finally {
             resetStylesheetQueue();
         }
     }
 
-    public function testSetAndGetSCSSImportPaths() {
+    public function testSetSCSSImportPathsToNull() {
         $paths = array(
             "folder1/foo/bar",
             "folder2/another/folder"
         );
+        setSCSSImportPaths($paths);
+
+        setSCSSImportPaths(null);
+        $this->assertCount(1, getSCSSImportPaths());
+        $this->assertEquals(
+                str_replace(
+                        "\\", "/", ULICMS_ROOT
+                ), getSCSSImportPaths()[0]);
+    }
+
+    public function testSetAndGetSCSSImportPaths() {
+        $paths = [
+            "folder1/foo/bar",
+            "folder2/another/folder"
+        ];
         $this->assertNull(getSCSSImportPaths());
         setSCSSImportPaths($paths);
 
@@ -117,6 +276,97 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         unsetSCSSImportPaths();
 
         $this->assertNull(getSCSSImportPaths());
+    }
+
+    public function testCompileSCSS() {
+        setSCSSImportPaths(
+                [
+                    "folder1/foo/bar",
+                    "folder2/another/folder"
+                ]
+        );
+        $code = compileSCSS(
+                Path::resolve(
+                        "ULICMS_ROOT/lib/css/core.scss")
+        );
+        $this->assertStringContainsString(".antispam_honeypot", $code);
+        $this->assertStringContainsString("span.blog_article_next", $code);
+    }
+
+    public function testCompileSCSSToFile() {
+        sureRemoveDir(
+                Path::resolve(
+                        "ULICMS_ROOT/content/cache/stylesheets"
+                )
+        );
+        setSCSSImportPaths(
+                [
+                    "folder1/foo/bar",
+                    "folder2/another/folder"
+                ]
+        );
+        $filename = compileSCSSToFile(
+                Path::resolve(
+                        "ULICMS_ROOT/lib/css/core.scss")
+        );
+
+        $this->assertStringEndsWith(".css", $filename);
+
+        $code = file_get_contents($filename);
+        $this->assertStringContainsString(".antispam_honeypot", $code);
+        $this->assertStringContainsString("span.blog_article_next", $code);
+    }
+
+    public function testGetAllCombinedHtml() {
+        $this->enqeueStuff();
+        $html = get_all_combined_html();
+
+        $this->assertStringContainsString(
+                '<script src="content/cache/scripts/',
+                $html
+        );
+        $this->assertStringContainsString(
+                '<link rel="stylesheet" href="content/cache/stylesheets/',
+                $html
+        );
+    }
+
+    private function enqeueStuff() {
+        $files = array(
+            "node_modules/jquery/dist/jquery.js",
+            "admin/scripts/global.js",
+            "node_modules/bootbox/bootbox.js"
+        );
+        foreach ($files as $file) {
+            enqueueScriptFile($file);
+        }
+
+        $files = array(
+            "lib/css/core.scss",
+            "node_modules/bootstrap/dist/css/bootstrap.css",
+            "node_modules/bootstrap/dist/css/bootstrap-theme.css",
+            "admin/css/modern.scss"
+        );
+        foreach ($files as $file) {
+            enqueueStylesheet($file);
+        }
+    }
+
+    public function testAllCombinedHtml() {
+        $this->enqeueStuff();
+
+        ob_start();
+        all_combined_html();
+        $html = ob_get_clean();
+
+        $this->assertStringContainsString(
+                '<script src="content/cache/scripts/',
+                $html
+        );
+        $this->assertStringContainsString(
+                '<link rel="stylesheet" href="content/cache/stylesheets/',
+                $html
+        );
     }
 
 }

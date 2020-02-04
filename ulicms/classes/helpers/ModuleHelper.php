@@ -9,7 +9,10 @@ use UliCMS\Constants\RequestMethod;
 class ModuleHelper extends Helper {
 
     // builds an url to the main backend GUI of a module
-    public static function buildAdminURL(string $module, ?string $suffix = null): string {
+    public static function buildAdminURL(
+            string $module,
+            ?string $suffix = null
+    ): string {
         $url = "?action=module_settings&module=" . $module;
         if ($suffix !== null and ! empty($suffix)) {
             $url .= "&" . $suffix;
@@ -19,19 +22,29 @@ class ModuleHelper extends Helper {
     }
 
     // builds the path to a modules ressource file
-    public static function buildModuleRessourcePath(string $module, string $path, bool $absolute = false): string {
+    public static function buildModuleRessourcePath(
+            string $module,
+            string $path,
+            bool $absolute = false
+    ): string {
         $path = trim($path, "/");
         return getModulePath($module, $absolute) . $path;
     }
 
     // shorter alias for buildModuleRessourcePath
-    public static function buildRessourcePath(string $module, string $path): string {
+    public static function buildRessourcePath(
+            string $module,
+            string $path
+    ): string {
         return self::buildModuleRessourcePath($module, $path);
     }
 
     // TODO: Refactor this method
     // Returns the first page that contains a specific module
-    public static function getFirstPageWithModule(?string $module = null, ?string $language = null): ?object {
+    public static function getFirstPageWithModule(
+            ?string $module = null,
+            ?string $language = null
+    ): ?object {
         if (is_null($language)) {
             $language = getCurrentLanguage();
         }
@@ -44,6 +57,7 @@ class ModuleHelper extends Helper {
         while ($dataset = Database::fetchObject($result)) {
             $content = $dataset->content;
             $content = str_replace("&quot;", "\"", $content);
+
             // TODO: refactor this if-hell
             if (!is_null($dataset->module) and ! empty($dataset->module) and $dataset->type == "module") {
                 if (!$module or ( $module and $dataset->module == $module)) {
@@ -63,7 +77,11 @@ class ModuleHelper extends Helper {
     }
 
     // build the url to a backend action page
-    public static function buildActionURL(string $action, ?string $suffix = null, bool $prependSuffixIfRequired = false): string {
+    public static function buildActionURL(
+            string $action,
+            ?string $suffix = null,
+            bool $prependSuffixIfRequired = false
+    ): string {
         $url = "?action=" . $action;
         if ($suffix !== null and ! empty($suffix)) {
             $url .= "&" . $suffix;
@@ -80,8 +98,12 @@ class ModuleHelper extends Helper {
         $retval = [];
         $modules = getAllModules();
         foreach ($modules as $module) {
-            $noembedfile1 = Path::Resolve("ULICMS_DATA_STORAGE_ROOT/content/modules/$module/.noembed");
-            $noembedfile2 = Path::Resolve("ULICMS_DATA_STORAGE_ROOT/content/modules/$module/noembed.txt");
+            $noembedfile1 = Path::Resolve(
+                            "ULICMS_DATA_STORAGE_ROOT/content/modules/$module/.noembed"
+            );
+            $noembedfile2 = Path::Resolve(
+                            "ULICMS_DATA_STORAGE_ROOT/content/modules/$module/noembed.txt"
+            );
 
             $embed_attrib = true;
 
@@ -90,7 +112,8 @@ class ModuleHelper extends Helper {
                 $embed_attrib = $meta_attr;
             }
 
-            if (!file_exists($noembedfile1) and ! file_exists($noembedfile2) and $embed_attrib) {
+            if (!file_exists($noembedfile1) and ! file_exists($noembedfile2)
+                    and $embed_attrib) {
                 $retval[] = $module;
             }
         }
@@ -115,8 +138,12 @@ class ModuleHelper extends Helper {
     // returns true if $module offers an embed shortcode
     public static function isEmbedModule(string $module): bool {
         $retval = true;
-        $noembedfile1 = Path::Resolve("ULICMS_DATA_STORAGE_ROOT/content/modules/$module/.noembed");
-        $noembedfile2 = Path::Resolve("ULICMS_DATA_STORAGE_ROOT/content/modules/$module/noembed.txt");
+        $noembedfile1 = Path::Resolve(
+                        "ULICMS_DATA_STORAGE_ROOT/content/modules/$module/.noembed"
+        );
+        $noembedfile2 = Path::Resolve(
+                        "ULICMS_DATA_STORAGE_ROOT/content/modules/$module/noembed.txt"
+        );
 
         $embed_attrib = true;
 
@@ -125,7 +152,8 @@ class ModuleHelper extends Helper {
             $embed_attrib = $meta_attr;
         }
 
-        if (file_exists($noembedfile1) or file_exists($noembedfile2) or ! $embed_attrib) {
+        if (file_exists($noembedfile1) or file_exists($noembedfile2)
+                or ! $embed_attrib) {
             $retval = false;
         }
         return $retval;
@@ -141,7 +169,7 @@ class ModuleHelper extends Helper {
         $dirname = str_replace("\\", "/", $dirname);
 
         if (is_admin_dir()) {
-            $dirname = dirname(dirname($dirname . "/.."));
+            $dirname = dirname($dirname . "/..");
         }
 
         // Replace backslashes with slashes (Windows)
@@ -153,7 +181,10 @@ class ModuleHelper extends Helper {
     }
 
     // returns the absolute url to a page by it's id
-    public static function getFullPageURLByID(?int $page_id = null, ?string $suffix = null): string {
+    public static function getFullPageURLByID(
+            ?int $page_id = null,
+            ?string $suffix = null
+    ): string {
         if (!$page_id) {
             $page_id = get_id();
         }
@@ -187,20 +218,24 @@ class ModuleHelper extends Helper {
         // Replace backslashes with slashes (Windows)
         $dirname = str_replace("\\", "/", $dirname);
 
-        $currentLanguage = isset($_SESSION["language"]) ? $_SESSION["language"] : Settings::get("default_language");
+        $currentLanguage = isset($_SESSION["language"]) ?
+                $_SESSION["language"] : Settings::get("default_language");
         if ($domain) {
-            $url = get_site_protocol() . $domain . $dirname . $page->slug . ".html";
+            $url = get_site_protocol() . $domain .
+                    $dirname . $page->slug . ".html";
             if (!is_null($suffix)) {
                 $url .= "?{$suffix}";
             }
         } else {
             if ($page->language != $currentLanguage) {
-                $url = get_protocol_and_domain() . $dirname . $page->slug . ".html" . "?language=" . $page->language;
+                $url = get_protocol_and_domain() . $dirname .
+                        $page->slug . ".html" . "?language=" . $page->language;
                 if (!is_null($suffix)) {
                     $url .= "&{$suffix}";
                 }
             } else {
-                $url = get_protocol_and_domain() . $dirname . $page->slug . ".html";
+                $url = get_protocol_and_domain() . $dirname
+                        . $page->slug . ".html";
                 if (!is_null($suffix)) {
                     $url .= "?{$suffix}";
                 }
@@ -220,7 +255,11 @@ class ModuleHelper extends Helper {
     }
 
     // build method call get parameters  for a controller and a method
-    public static function buildMethodCall(string $sClass, string $sMethod, ?string $suffix = null): string {
+    public static function buildMethodCall(
+            string $sClass,
+            string $sMethod,
+            ?string $suffix = null
+    ): string {
         $result = "sClass=" . urlencode($sClass) . "&sMethod=" . urlencode($sMethod);
         if (StringHelper::isNotNullOrWhitespace($suffix)) {
             $result .= "&" . trim($suffix);
@@ -229,33 +268,76 @@ class ModuleHelper extends Helper {
     }
 
     // build a method call url for a controller's backend action
-    public static function buildMethodCallUrl(string $sClass, string $sMethod, ?string $suffix = null): string {
+    public static function buildMethodCallUrl(
+            string $sClass,
+            string $sMethod,
+            ?string $suffix = null
+    ): string {
         return "index.php?" . self::buildMethodCall($sClass, $sMethod, $suffix);
     }
 
     // build a html form to upload a file to a backend controller action
-    public static function buildMethodCallUploadForm(string $sClass, string $sMethod, array $otherVars = [], string $requestMethod = RequestMethod::POST, array $htmlAttributes = []): string {
+    public static function buildMethodCallUploadForm(
+            string $sClass,
+            string $sMethod,
+            array $otherVars = [],
+            string $requestMethod = RequestMethod::POST,
+            array $htmlAttributes = []
+    ): string {
         $htmlAttributes["enctype"] = "multipart/form-data";
-        return self::buildMethodCallForm($sClass, $sMethod, $otherVars, $requestMethod, $htmlAttributes);
+        return self::buildMethodCallForm($sClass,
+                        $sMethod,
+                        $otherVars,
+                        $requestMethod,
+                        $htmlAttributes);
     }
 
     // builds a html form to call a backend controller action
-    public static function buildMethodCallForm(string $sClass, string $sMethod, array $otherVars = [], string $requestMethod = RequestMethod::POST, array $htmlAttributes = []): string {
+    public static function buildMethodCallForm(
+            string $sClass,
+            string $sMethod,
+            array $otherVars = [],
+            string $requestMethod = RequestMethod::POST,
+            array $htmlAttributes = []
+    ): string {
         return Form::buildMethodCallForm($sClass, $sMethod, $otherVars, $requestMethod, $htmlAttributes);
     }
 
     // builds a html button to call a backend controller action
-    public static function buildMethodCallButton(string $sClass, string $sMethod, string $buttonText, array $buttonAttributes = ["class" => "btn btn-default", "type" => "submit"], array $otherVars = [], array $formAttributes = [], string $requestMethod = RequestMethod::POST): string {
-        return Form::buildMethodCallButton($sClass, $sMethod, $buttonText, $buttonAttributes, $otherVars, $formAttributes, $requestMethod);
+    public static function buildMethodCallButton(
+            string $sClass,
+            string $sMethod,
+            string $buttonText,
+            array $buttonAttributes = [
+                "class" => "btn btn-default",
+                "type" => "submit"
+            ],
+            array $otherVars = [],
+            array $formAttributes = [],
+            string $requestMethod = RequestMethod::POST): string {
+        return Form::buildMethodCallButton(
+                        $sClass,
+                        $sMethod,
+                        $buttonText,
+                        $buttonAttributes,
+                        $otherVars,
+                        $formAttributes,
+                        $requestMethod);
     }
 
     // build a html button to implement a delete function
-    public static function deleteButton(string $url, array $otherVars = [], array $htmlAttributes = []): string {
+    public static function deleteButton(
+            string $url,
+            array $otherVars = [],
+            array $htmlAttributes = []
+    ): string {
         return Form::deleteButton($url, $otherVars, $htmlAttributes);
     }
 
     // build a string to use for html attributes from an associative array
-    public static function buildHTMLAttributesFromArray(array $attributes = []): string {
+    public static function buildHTMLAttributesFromArray(
+            array $attributes = []
+    ): string {
         $html = "";
         foreach ($attributes as $key => $value) {
             $val = is_bool($value) ? strbool($value) : $value;
@@ -266,7 +348,10 @@ class ModuleHelper extends Helper {
     }
 
     // build a get query string
-    public static function buildQueryString($data, bool $forHtml = true): string {
+    public static function buildQueryString(
+            $data,
+            bool $forHtml = true
+    ): string {
         $seperator = $forHtml ? "&amp;" : "&";
         return http_build_query($data, '', $seperator);
     }

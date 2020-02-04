@@ -1,9 +1,13 @@
 <?php
 
+use UliCMS\Security\TwoFactorAuthentication;
+
 class UsersApiTest extends \PHPUnit\Framework\TestCase {
 
     private $testUser;
     private $testGroup;
+    private $twoFactorEnabled = false;
+    private $maxFailedLoginItems;
 
     public function setUp() {
         @session_destroy();
@@ -27,16 +31,33 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase {
         $this->testUser = $user;
 
         $user = new User();
+        $user->setUsername("testuser2");
+        $user->setLastname("Muster");
+        $user->setFirstname("Max");
+        $user->setEmail("max@muster.de");
+        $user->setPassword("topsecret");
+        $user->setLocked(true);
+        $user->setGroup($this->testGroup);
+        $user->save();
+
+        $user = new User();
         $user->setUsername("testuser3");
         $user->setLastname("Muster");
         $user->setFirstname("Max");
         $user->setPassword("oldpassword");
         $user->save();
+
+        $this->twoFactorEnabled = TwoFactorAuthentication::isEnabled();
+        $this->maxFailedLoginItems = Settings::get("max_failed_logins_items");
+        
+        TwoFactorAuthentication::disable();
+        require_once getLanguageFilePath("en");
     }
 
     public function tearDown() {
         unset($_SESSION["login_id"]);
         unset($_SESSION["logged_in"]);
+        unset($_REQUEST["error"]);
 
         $this->testGroup->delete();
         $this->testUser->delete();
@@ -50,6 +71,14 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase {
         $user->delete();
 
         @session_destroy();
+
+        if ($this->twoFactorEnabled) {
+            TwoFactorAuthentication::disable();
+        } else {
+            TwoFactorAuthentication::enable();
+        }
+
+        Settings::set("max_failed_logins_items", strval($this->maxFailedLoginItems));
     }
 
     public function testGetUserIdUserIsLoggedIn() {
@@ -100,12 +129,62 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(logged_in());
     }
 
-    public function testValidateLoginTrue() {
+    public function testValidateLoginIsValid() {
         $this->assertTrue(is_array(validate_login("testuser1", "topsecret")));
     }
 
-    public function testValidateLoginNull() {
+    public function testValidateLoginIsValidTokenIsInvalid() {
+        TwoFactorAuthentication::enable();
+
+        $this->assertNull(validate_login("testuser1", "topsecret", uniqid()));
+        $this->assertEquals("Confirmation Code invalid.", $_REQUEST["error"]);
+    }
+
+    public function testValidateLoginIsLocked() {
+        $this->assertNull(validate_login("testuser2", "topsecret"));
+
+        $this->assertEquals(
+                "Your Account is locked. " .
+                "Please contact your system administrator if you think, " .
+                "that this is an error.", $_REQUEST["error"]
+        );
+    }
+
+    public function testInvalidLoginLocksAccount() {
+
+        Settings::set("max_failed_logins_items", 4);
+
+        for ($i = 1; $i <= 3; $i++) {
+            $this->assertNull(validate_login("testuser1", "invalid"));
+            $this->assertEquals(
+                    "Username oder password incorrect!", $_REQUEST["error"]
+            );
+        }
+
+        $this->assertNull(validate_login("testuser1", "invalid"));
+
+        $this->assertEquals(
+                "Your Account is locked. " .
+                "Please contact your system administrator if you think, " .
+                "that this is an error.", $_REQUEST["error"]
+        );
+    }
+
+    public function testValidateLoginWrongPassword() {
         $this->assertNull(validate_login("testuser1", "dasfalschepassword"));
+        $this->assertEquals(
+                "Username oder password incorrect!", $_REQUEST["error"]
+        );
+    }
+
+    public function testValidateLoginNonExistingUser() {
+        $this->assertNull(
+                validate_login("ich_existiere_nicht", "dasfalschepassword")
+        );
+        
+        $this->assertEquals(
+                "Username oder password incorrect!", $_REQUEST["error"]
+        );
     }
 
     public function testGetUsersOnlineUserIsOnline() {
@@ -153,7 +232,7 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetAllUsers() {
-        $allUsers = getUsers();
+        $allUsers = getAllUsers();
         foreach ($allUsers as $user) {
             if ($user["username"] == "testuser1") {
                 $this->assertEquals($user["id"], $this->testUser->getID());
@@ -174,16 +253,21 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase {
         $this->fail("The testuser is not in the result.");
     }
 
-    public function testChangePassword() {
+    public function testChangePasswordReturnsTrue() {
         $user = new User();
         $user->loadByUsername("testuser3");
         $id = $user->getId();
 
         $this->assertTrue(is_array(validate_login("testuser3", "oldpassword")));
 
-        changePassword("newpassword", $id);
+        $this->assertTrue(changePassword("newpassword", $id));
 
         $this->assertTrue(is_array(validate_login("testuser3", "newpassword")));
+    }
+
+    public function testChangePasswordReturnsFalse() {
+        // user doesn't exists
+        $this->assertFalse(changePassword("newpassword", PHP_INT_MAX));
     }
 
     public function testRegisterSession() {

@@ -26,7 +26,8 @@ $(() => {
                     isCtrl = true;
                 if (event.data.$.keyCode === 83 && isCtrl === true)
                 {
-                    //The preventDefault() call prevents the browser's save popup to appear.
+                    //The preventDefault() call prevents the browser's
+                    //save popup to appear.
                     //The try statement fixes a weird IE error.
                     try {
                         event.data.$.preventDefault();
@@ -62,7 +63,8 @@ $(() => {
 
 window.onbeforeunload = () =>
         {
-            if (typeof formChanged !== "undefined" && formChanged === 1 && submitted === 0) {
+            if (typeof formChanged !== "undefined" && formChanged === 1
+                    && submitted === 0) {
                 return PageTranslation.ConfirmExitWithoutSave;
             }
             return;

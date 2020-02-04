@@ -2,40 +2,52 @@
 
 class SystemRequirementsTest extends \PHPUnit\Framework\TestCase {
 
-    public function testPhpVersion() {
-        $this->assertTrue(version_compare(phpversion(), "7.2", ">="));
-    }
+	public function testPhpVersion() {
+		$this->assertTrue(version_compare(phpversion(), "7.2", ">="));
+	}
 
-    public function testPhpModuleMySqli() {
-        $this->assertTrue(extension_loaded("mysqli"));
-    }
+	public function testMySQLVersion() {
+		$this->assertTrue(
+				version_compare($this->getMySQLVersion(), "5.5.3", '>=')
+		);
+	}
 
-    public function testPhpModuleGd() {
-        $this->assertTrue(extension_loaded("gd"));
-    }
+	private function getMySQLVersion() {
+		$version = Database::getServerVersion();
+		$version = preg_replace('/[^0-9.].*/', '', $version);
+		return $version;
+	}
 
-    public function testPhpModuleJson() {
-        $this->assertTrue(extension_loaded("json"));
-    }
+	public function testPhpModuleMySqli() {
+		$this->assertTrue(extension_loaded("mysqli"));
+	}
 
-    public function testPhpModuleMbString() {
-        $this->assertTrue(extension_loaded("mbstring"));
-    }
+	public function testPhpModuleGd() {
+		$this->assertTrue(extension_loaded("gd"));
+	}
 
-    public function testPhpModuleOpenSSL() {
-        $this->assertTrue(extension_loaded("openssl"));
-    }
+	public function testPhpModuleJson() {
+		$this->assertTrue(extension_loaded("json"));
+	}
 
-    public function testPhpModuleDom() {
-        $this->assertTrue(extension_loaded("dom"));
-    }
+	public function testPhpModuleMbString() {
+		$this->assertTrue(extension_loaded("mbstring"));
+	}
 
-    public function testPhpModuleXml() {
-        $this->assertTrue(extension_loaded("xml"));
-    }
+	public function testPhpModuleOpenSSL() {
+		$this->assertTrue(extension_loaded("openssl"));
+	}
 
-    public function testConnectToUliCMSServices() {
-        $this->assertNotFalse(file_get_contents_wrapper("https://www.ulicms.de/", true));
-    }
+	public function testPhpModuleDom() {
+		$this->assertTrue(extension_loaded("dom"));
+	}
+
+	public function testPhpModuleXml() {
+		$this->assertTrue(extension_loaded("xml"));
+	}
+
+	public function testConnectToUliCMSServices() {
+		$this->assertNotNull(file_get_contents_wrapper("https://www.ulicms.de/", true));
+	}
 
 }

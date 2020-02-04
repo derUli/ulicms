@@ -17,7 +17,11 @@ class PrivacyCheckbox {
 
     // the gdpr checkbox must be enabled and configured by language
     public function isEnabled(): bool {
-        return boolval(Settings::get("privacy_policy_checkbox_enable_{$this->language}", "bool"));
+        return boolval(
+                Settings::get(
+                        "privacy_policy_checkbox_enable_{$this->language}",
+                        "bool")
+        );
     }
 
     // returns the name of the checkbox input
@@ -27,12 +31,19 @@ class PrivacyCheckbox {
 
     // returns true if the checkbox is checked
     public function isChecked(): bool {
-        return StringHelper::isNotNullOrWhitespace(Request::getVar($this->getCheckboxName(), "", "str"));
+        return StringHelper::isNotNullOrWhitespace(
+                        Request::getVar($this->getCheckboxName(),
+                                "",
+                                "str")
+        );
     }
 
     // check if the gdpr checkbox is checked
     // after that execute success or failed callback
-    public function check(?callable $success = null, ?callable $failed = null): void {
+    public function check(
+            ?callable $success = null,
+            ?callable $failed = null
+    ): void {
         if ($this->isChecked()) {
             if ($success != null) {
                 $success();
@@ -52,15 +63,27 @@ class PrivacyCheckbox {
     // the dgpr accept text can be written in a html editor
     // this method replaces the [checkbox] placeholder with the checkbox input
     public function render(): string {
-        $checkboxHtml = Input::checkBox($this->getCheckboxName(), false, "✔", array(
-                    "required" => "required",
-                    "id" => $this->getCheckboxName()
-        ));
-        $fullHtml = Settings::get("privacy_policy_checkbox_text_{$this->language}");
-        if (!$this->isEnabled() || StringHelper::isNullOrWhitespace($fullHtml)) {
+        $checkboxHtml = Input::checkBox(
+                        $this->getCheckboxName(),
+                        false, "✔",
+                        [
+                            "required" => "required",
+                            "id" => $this->getCheckboxName()
+                        ]
+        );
+        $fullHtml = Settings::get(
+                        "privacy_policy_checkbox_text_{$this->language}"
+        );
+        if (!$this->isEnabled() or
+                StringHelper::isNullOrWhitespace($fullHtml)
+        ) {
             return "";
         }
-        $fullHtml = str_ireplace("[checkbox]", $checkboxHtml, $fullHtml);
+        $fullHtml = str_ireplace(
+                "[checkbox]",
+                $checkboxHtml,
+                $fullHtml
+        );
         return $fullHtml;
     }
 

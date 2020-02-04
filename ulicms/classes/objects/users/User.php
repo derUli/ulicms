@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use LasseRafn\InitialAvatarGenerator\InitialAvatar;
 use UliCMS\Exceptions\NotImplementedException;
 use UliCMS\Security\PermissionChecker;
 use UliCMS\Security\Encryption;
@@ -33,7 +34,7 @@ class User extends Model {
         }
     }
 
-    public function loadById($id) {
+    public function loadById($id): void {
         $sql = "select * from {prefix}users where id = ?";
         $args = array(
             intval($id)
@@ -70,6 +71,8 @@ class User extends Model {
             @session_start();
         }
 
+        $_SESSION["logged_in"] = true;
+
         foreach ($sessionData as $key => $value) {
             $_SESSION[$key] = $value;
         }
@@ -90,7 +93,8 @@ class User extends Model {
     }
 
     public function loadByUsername(string $name): void {
-        $sql = "select * from {prefix}users where username COLLATE utf8mb4_general_ci = ?";
+        $sql = "select * from {prefix}users where username "
+                . "COLLATE utf8mb4_general_ci = ?";
         $args = array(
             strval($name)
         );
@@ -99,7 +103,8 @@ class User extends Model {
     }
 
     public function loadByEmail(string $email): void {
-        $sql = "select * from {prefix}users where email COLLATE utf8mb4_general_ci = ?";
+        $sql = "select * from {prefix}users where email "
+                . "COLLATE utf8mb4_general_ci = ?";
         $args = array(
             strval($email)
         );
@@ -107,7 +112,7 @@ class User extends Model {
         $this->fillVars($result);
     }
 
-    public function save() {
+    public function save(): void {
         if ($this->id) {
             $this->update();
         } else {
@@ -140,7 +145,7 @@ class User extends Model {
         return Template::executeDefaultOrOwnTemplate("email/user_welcome.php");
     }
 
-    public function fillVars($result = null) {
+    public function fillVars($result = null): void {
         if (Database::any($result)) {
             $result = Database::fetchAssoc($result);
             foreach ($result as $key => $value) {
@@ -162,9 +167,12 @@ class User extends Model {
     }
 
     protected function insert() {
-        $sql = "insert into {prefix}users (username, lastname, firstname, email, password, about_me, group_id, html_editor,
-				require_password_change, admin, password_changed, locked, last_login,
-				homepage, default_language) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        $sql = "insert into {prefix}users (username, lastname, firstname,
+                email, password, about_me, group_id, html_editor,
+                require_password_change, admin,
+                password_changed, locked, last_login,
+                homepage, default_language) values
+                (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         $args = array(
             $this->username,
             $this->lastname,
@@ -182,15 +190,17 @@ class User extends Model {
             $this->homepage,
             $this->default_language
         );
-        $result = Database::pQuery($sql, $args, true) or die(Database::getError());
+        $result = Database::pQuery($sql, $args, true);
         $this->id = Database::getLastInsertID();
     }
 
     protected function update() {
-        $sql = "update {prefix}users set username = ?, lastname = ?, firstname = ?, email = ?, password = ?,
-            about_me = ?, group_id = ?, html_editor = ?,
-				require_password_change = ?, admin = ?, password_changed = ?, locked = ?, last_login = ?,
-				homepage = ?, default_language = ? where id = ?";
+        $sql = "update {prefix}users set username = ?, lastname = ?,
+            firstname = ?, email = ?, password = ?, about_me = ?,
+            group_id = ?, html_editor = ?,
+            require_password_change = ?, admin = ?, password_changed = ?,
+            locked = ?, last_login = ?,
+            homepage = ?, default_language = ? where id = ?";
         $args = array(
             $this->username,
             $this->lastname,
@@ -209,14 +219,14 @@ class User extends Model {
             $this->default_language,
             $this->id
         );
-        Database::pQuery($sql, $args, true) or die(Database::getError());
+        Database::pQuery($sql, $args, true);
     }
 
     public function getId(): ?int {
         return $this->id;
     }
 
-    public function setId($id) {
+    public function setId($id): void {
         $this->id = !is_null($id) ? intval($id) : null;
     }
 
@@ -256,14 +266,19 @@ class User extends Model {
         if (is_null($this->id)) {
             return false;
         }
+
         $sql = "delete from {prefix}users where id = ?";
         $args = array(
             $this->id
         );
         $result = Database::pQuery($sql, $args, true);
+
+        $this->removeAvatar();
+
         if ($result) {
             $this->id = null;
         }
+
         return $result;
     }
 
@@ -277,7 +292,7 @@ class User extends Model {
     }
 
     // The password is encrypted
-    public function getPasswordChanged(): ?int {
+    public function getPasswordChanged(): ?string {
         return $this->password_changed;
     }
 
@@ -285,7 +300,18 @@ class User extends Model {
     public function resetPassword(): void {
         $passwordReset = new PasswordReset();
         $token = $passwordReset->addToken($this->getId());
-        $passwordReset->sendMail($token, $this->getEmail(), "xxx.xxx.xxx.xxx", $this->getFirstname(), $this->getLastname());
+        $passwordReset->sendMail(
+                $token,
+                $this->getEmail(),
+                "xxx.xxx.xxx.xxx",
+                $this->getFirstname(),
+                $this->getLastname()
+        );
+    }
+
+    public function getFullName(): string {
+        return (!empty($this->firstname) and ! empty($this->lastname)) ?
+                "{$this->firstname} {$this->lastname}" : "";
     }
 
     public function checkPassword(string $password): bool {
@@ -311,7 +337,7 @@ class User extends Model {
             $result = Database::pQuery($sql, $args, true);
             if (Database::any($result)) {
                 $data = Database::fetchObject($result);
-                $lastAction = $data->last_action;
+                $lastAction = intval($data->last_action);
             }
         }
         return $lastAction;
@@ -338,12 +364,12 @@ class User extends Model {
         return $this->group_id;
     }
 
-    public function setPrimaryGroupId($gid) {
+    public function setPrimaryGroupId($gid): void {
         $this->group_id = !is_null($gid) ? $gid : null;
         $this->group = !is_null($gid) ? new Group($gid) : null;
     }
 
-    public function setGroupId($gid) {
+    public function setGroupId($gid): void {
         $this->setPrimaryGroupId($gid);
     }
 
@@ -355,12 +381,12 @@ class User extends Model {
         return $this->getPrimaryGroup();
     }
 
-    public function setPrimaryGroup($group) {
+    public function setPrimaryGroup($group): void {
         $this->group = $group;
         $this->group_id = !is_null($group) ? $group->getId() : null;
     }
 
-    public function setGroup($group) {
+    public function setGroup($group): void {
         $this->setPrimaryGroup($group);
     }
 
@@ -433,7 +459,8 @@ class User extends Model {
             return;
         }
         $time = intval($time);
-        $sql = "update {prefix}users set failed_logins = failed_logins + 1 where id = ?";
+        $sql = "update {prefix}users set failed_logins = failed_logins + 1 "
+                . "where id = ?";
         $args = array(
             $this->id
         );
@@ -445,7 +472,8 @@ class User extends Model {
             return;
         }
         $time = intval($time);
-        $sql = "update {prefix}users set failed_logins = ? where id = ?";
+        $sql = "update {prefix}users set failed_logins = ? "
+                . "where id = ?";
         $args = array(
             0,
             $this->id
@@ -479,15 +507,63 @@ class User extends Model {
     }
 
     public function setDefaultLanguage(?string $val): void {
-        $this->default_language = StringHelper::isNotNullOrWhitespace($val) ? strval($val) : null;
+        $this->default_language = StringHelper::isNotNullOrWhitespace($val) ?
+                strval($val) : null;
     }
 
+    // Since 2020.1:
+    // generates an avatar based of the capitals of the
+    // users name. if the user isn't logged in, returns the default
+    // no avatar pic
     public function getAvatar(): ?string {
-        return ModuleHelper::getBaseUrl("/admin/gfx/no_avatar.png");
+        $avatarUrl = ModuleHelper::getBaseUrl("/admin/gfx/no_avatar.png");
+        $userAvatarDirectory = Path::resolve("ULICMS_CONTENT/avatars");
+
+        if (!file_exists($userAvatarDirectory)) {
+            mkdir($userAvatarDirectory, 0777, true);
+        }
+
+        if (file_exists($userAvatarDirectory) and $this->getFullName()) {
+            $avatarImageFile1 = Path::Resolve("$userAvatarDirectory/user-" .
+                            $this->getId() . ".png");
+            $avatarImageFile2 = Path::Resolve("$userAvatarDirectory/" .
+                            md5($this->getFullName()) . ".png");
+
+            $url = !is_admin_dir() ?
+                    "content/avatars/user-" . $this->getId() . ".png" :
+                    "../content/avatars/user-" . $this->getId() . ".png";
+
+            // generate initial letter avatar if it doesn't exist
+            $avatarUrl = file_exists($avatarImageFile1) ?
+                    $url : $this->generateAvatar($avatarImageFile2);
+        }
+        return $avatarUrl;
     }
 
-    public function setAvatar(): void {
-        throw new NotImplementedException("Avatar feature is not implemented yet.");
+    // generates an avatar based on the the capitals
+    // of the users first- and lastname
+    // the file is cached for performance reasons
+    protected function generateAvatar(string $avatarImageFile): string {
+        if (!file_exists($avatarImageFile)) {
+            $avatar = new InitialAvatar();
+            $image = $avatar->name($this->getFullName())->
+                            rounded()->smooth()->
+                            autoFont()->fontSize(0.35)->
+                            size(40)->generate();
+            $image->save($avatarImageFile);
+        }
+
+        $url = !is_admin_dir() ?
+                "content/avatars/" . md5($this->getFullName()) . ".png" :
+                "../content/avatars/" . md5($this->getFullName()) . ".png";
+
+        $avatarUrl = $url;
+
+        return $avatarUrl;
+    }
+
+    public function setAvatar($file): void {
+        $this->processAvatar($file);
     }
 
     public function getSecondaryGroups(): array {
@@ -498,18 +574,27 @@ class User extends Model {
         $this->secondary_groups = $val;
     }
 
+    public function getAllGroups(): array {
+        $primaryGroup = [$this->getPrimaryGroup()];
+        $secondaryGroups = $this->getSecondaryGroups();
+
+        $groups = array_merge($primaryGroup, $secondaryGroups);
+        $groups = array_filter($groups);
+        return array_values($groups);
+    }
+
     public function addSecondaryGroup($val): void {
         $this->secondary_groups[] = $val;
     }
 
-    public function removeSecondaryGroup($val) {
+    public function removeSecondaryGroup($val): void {
         $filtered = [];
         foreach ($this->secondary_groups as $group) {
             if ($group->getID() != $val->getID()) {
                 $filtered[] = $group;
             }
         }
-        return $filtered;
+        $this->secondary_groups = $filtered;
     }
 
     public function getPermissionChecker(): PermissionChecker {
@@ -535,9 +620,12 @@ class User extends Model {
     }
 
     private function saveGroups(): void {
-        Database::pQuery("delete from {prefix}user_groups where user_id = ?", array(
-            $this->getId()
-                ), true);
+        Database::pQuery(
+                "delete from {prefix}user_groups where user_id = ?",
+                [
+                    $this->getId()
+                ]
+                , true);
         foreach ($this->secondary_groups as $group) {
             Database::pQuery("insert into {prefix}user_groups
                               (user_id, group_id)
@@ -547,6 +635,52 @@ class User extends Model {
                 $group->getID()
                     ), true);
         }
+    }
+
+    public function changeAvatar(array $upload): bool {
+        $extension = pathinfo($upload["name"], PATHINFO_EXTENSION);
+        $tmpFile = uniqid() . "." . $extension;
+        $tmpFile = Path::resolve("ULICMS_TMP/$tmpFile");
+
+        if (move_uploaded_file($upload["tmp_name"], $tmpFile)) {
+            $this->processAvatar($tmpFile);
+            unlink($tmpFile);
+            return true;
+        }
+        return false;
+    }
+
+    public function processAvatar(string $inputFile): void {
+        $imagine = new Imagine\Gd\Imagine();
+
+        $size = new Imagine\Image\Box(128, 218);
+        $mode = Imagine\Image\ImageInterface::THUMBNAIL_INSET;
+
+        $generatedAvatar = $this->getProcessedAvatarPath();
+
+        $imagine->open($inputFile)
+                ->thumbnail($size, $mode)
+                ->save($generatedAvatar);
+    }
+
+    protected function getProcessedAvatarPath(): ?string {
+        return $this->isPersistent() ? Path::resolve(
+                        "ULICMS_ROOT/content/avatars/user-" .
+                        $this->getId() . ".png"
+                ) : null;
+    }
+
+    public function removeAvatar(): bool {
+        $generatedAvatar = $this->getProcessedAvatarPath();
+        if ($generatedAvatar and file_exists($generatedAvatar)) {
+            return unlink($generatedAvatar);
+        }
+        return false;
+    }
+
+    public function hasProcessedAvatar(): bool {
+        return ($this->getProcessedAvatarPath() and
+                file_exists($this->getProcessedAvatarPath()));
     }
 
 }

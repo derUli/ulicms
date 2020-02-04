@@ -1,577 +1,100 @@
 <?php
 
-use UliCMS\Models\Content\Categories;
 // TODO: This is old code before the switch to MVC architecture
 // This should be rewritten with MVC pattern and using partial views
 use UliCMS\Security\PermissionChecker;
-use UliCMS\Security\ContentPermissionChecker;
-use UliCMS\Exceptions\UnknownContentTypeException;
+
+$controller = ControllerRegistry::get(PageController::class);
 
 $show_filters = Settings::get("user/" . get_user_id() . "/show_filters");
 
 $permissionChecker = new PermissionChecker(get_user_id());
 
 if ($permissionChecker->hasPermission("pages")) {
-
-    if (!isset($_SESSION["filter_title"])) {
-        $_SESSION["filter_title"] = "";
-    }
-
-    if (isset($_GET["filter_title"])) {
-        $_SESSION["filter_title"] = $_GET["filter_title"];
-    }
-    if (!empty($_GET["filter_language"]) and faster_in_array($_GET["filter_language"], getAllLanguages(true))) {
-        $_SESSION["filter_language"] = $_GET["filter_language"];
-        $_SESSION["filter_parent"] = "-";
-    }
-
-    if (!isset($_SESSION["filter_category"])) {
-        $_SESSION["filter_category"] = 0;
-    }
-
-    if (isset($_GET["filter_active"])) {
-        if ($_GET["filter_active"] === "null") {
-            $_SESSION["filter_active"] = null;
-        } else {
-            $_SESSION["filter_active"] = intval($_GET["filter_active"]);
-        }
-    }
-
-    if (isset($_GET["filter_approved"])) {
-        if ($_GET["filter_approved"] === "null") {
-            $_SESSION["filter_approved"] = null;
-        } else {
-            $_SESSION["filter_approved"] = intval($_GET["filter_approved"]);
-        }
-    }
-
-    if (isset($_GET["filter_type"])) {
-        if ($_GET["filter_type"] == "null") {
-            $_SESSION["filter_type"] = null;
-        } else {
-            $_SESSION["filter_type"] = $_GET["filter_type"];
-        }
-    }
-
-    if (isset($_GET["filter_menu"])) {
-        if ($_GET["filter_menu"] == "null") {
-            $_SESSION["filter_menu"] = null;
-        } else {
-            $_SESSION["filter_menu"] = $_GET["filter_menu"];
-        }
-    }
-
-    if (isset($_GET["filter_parent"])) {
-        if ($_GET["filter_parent"] == "null") {
-            $_SESSION["filter_parent"] = null;
-        } else {
-            $_SESSION["filter_parent"] = $_GET["filter_parent"];
-        }
-    }
-
-    if (!isset($_SESSION["filter_parent"])) {
-        $_SESSION["filter_parent"] = "-";
-    }
-
-    if (!isset($_SESSION["filter_menu"])) {
-        $_SESSION["filter_menu"] = null;
-    }
-    if (!isset($_SESSION["filter_type"])) {
-        $_SESSION["filter_type"] = null;
-    }
-
-    if (!isset($_SESSION["filter_active"])) {
-        $_SESSION["filter_active"] = null;
-    }
-
-    if (!isset($_SESSION["filter_approved"])) {
-        $_SESSION["filter_approved"] = null;
-    }
-
-    if (isset($_GET["filter_category"])) {
-        $_SESSION["filter_category"] = intval($_GET["filter_category"]);
-    }
-
-    if (!empty($_GET["filter_status"]) and faster_in_array($_GET["filter_status"], array(
-                "Standard",
-                "standard",
-                "trash"
-            ))) {
-        $_SESSION["filter_status"] = $_GET["filter_status"];
-    }
-
-    $menus = getAllMenus(true);
-
-    array_unshift($menus, "null");
-// FIXME: Das SQL hier in einen Controller auslagern
-    $sql = "select a.id as id, a.title as title from " . tbname("content") . " a inner join " . tbname("content") . " b on a.id = b.parent_id ";
-
-    if (faster_in_array($_SESSION["filter_language"], getAllLanguages(true))) {
-        $sql .= "where b.language='" . $_SESSION["filter_language"] . "' ";
-    }
-
-    $sql .= " group by a.title, a.id ";
-    $sql .= " order by a.title";
-    $parents = db_query($sql);
+    echo Template::executeModuleTemplate("core_content", "icons.php");
     ?>
-
-    <?php echo Template::executeModuleTemplate("core_content", "icons.php"); ?>
     <h2><?php translate("pages"); ?></h2>
     <p><?php translate("pages_infotext"); ?></p>
     <div id="page-list">
-        <?php
-        if ($permissionChecker->hasPermission("pages_create")) {
-            ?>
-            <form action="#" method="get">
-                <div class="checkbox">
-                    <label><input type="checkbox" class="js-switch" name="show_filters" id="show_filters"
-                                  value="1" data-url="<?php echo ModuleHelper::buildMethodCallUrl(PageController::class, "toggleFilters"); ?>"
-                                  <?php if ($show_filters) echo "checked"; ?>> <?php translate("show_filters"); ?></label>
-                </div>
-            </form>
+        <?php if ($controller->getPagesListView() === "default") { ?>
             <div class="row">
                 <div class="col-xs-6">
-                    <a href="index.php?action=pages_new&parent_id=<?php echo $_SESSION["filter_parent"]; ?>" class="btn btn-default"><i
+                    <a href="index.php?action=pages_new" class="btn btn-primary"><i
                             class="fa fa-plus"></i> <?php translate("create_page"); ?></a>
                 </div>
                 <div class="col-xs-6 text-right">
-                    <div class="page-list-filters" style="<?php
-                    if (!$show_filters)
-                        echo "display:none";
-                    ?>">
-                        <a
-                            href="<?php echo ModuleHelper::buildMethodCallUrl("PageController", "resetFilters"); ?>"
-                            class="btn btn-default" id="btn-reset-filters"><i
-                                class="fas fa-undo"></i> <?php translate("reset_filters") ?></a>
-                    </div>
+                    <a href="<?php echo ModuleHelper::buildMethodCallUrl("PageController", "recycleBin"); ?>" class="btn btn-default"><i
+                            class="fa fa-trash"></i> <?php translate("recycle_bin"); ?></a>
                 </div>
             </div>
-        <?php } ?>
-        <form method="get" action="index.php" class="page-list-filters" style="<?php if (!$show_filters) echo "display:none"; ?>">
-            <div class="row">
-                <div class="col-xs-6">
-                    <?php translate("title"); ?>
-                    <input type="hidden" name="action" value="pages"> <input
-                        type="text" name="filter_title"
-                        value="<?php esc($_SESSION["filter_title"]); ?>">
-                </div>
-
-                <div class="col-xs-6">
-                    <?php translate("filter_by_language"); ?>
-                    <select name="filter_language" onchange="filterByLanguage(this)">
-                        <option value="">
-                            <?php translate("please_select"); ?>
-
-                        </option>
-                        <?php
-                        $languages = getAllLanguages(true);
-                        for ($j = 0; $j < count($languages); $j ++) {
-                            if ($languages[$j] == $_SESSION["filter_language"]) {
-                                echo "<option value='" . $languages[$j] . "' selected>" . getLanguageNameByCode($languages[$j]) . "</option>";
-                            } else {
-                                echo "<option value='" . $languages[$j] . "'>" . getLanguageNameByCode($languages[$j]) . "</option>";
-                            }
-                        }
-                        ?>
-                        <?php ?>
-                    </select>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-6">
-                    <?php translate("type") ?>
-                    <?php $types = get_used_post_types(); ?>
-                    <select name="filter_type" onchange="filterByType(this);">
-                        <option value="null"
-                        <?php
-                        if ("null" == $_SESSION["filter_type"])
-                            echo "selected";
-                        ?>>
-                            [<?php translate("every") ?>]
-                        </option>
-                        <?php
-                        foreach ($types as $type) {
-                            if ($type == $_SESSION["filter_type"]) {
-                                echo '<option value="' . $type . '" selected>' . get_translation($type) . "</option>";
-                            } else {
-                                echo '<option value="' . $type . '">' . get_translation($type) . "</option>";
-                            }
-                        }
-                        ?>
-                    </select>
-                </div>
-                <div class="col-xs-6">
-                    <?php translate("status") ?>
-                    <select name="filter_status" onchange="filterByStatus(this)">
-                        <option value="Standard"
-                        <?php
-                        if ($_SESSION["filter_status"] == "standard") {
-                            echo " selected";
-                        }
-                        ?>>
-                                    <?php translate("standard"); ?>
-                        </option>
-                        <option value="trash"
-                        <?php
-                        if ($_SESSION["filter_status"] == "trash") {
-                            echo " selected";
-                        }
-                        ?>>
-                                    <?php translate("recycle_bin"); ?>
-                        </option>
-                    </select>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-6">
-                    <?php translate("category"); ?>
-                    <?php
-                    echo Categories::getHTMLSelect($_SESSION["filter_category"], true);
-                    ?>
-                </div>
-                <div class="col-xs-6">
-                    <?php translate("menu"); ?>
-                    <select name="filter_menu" onchange="filterByMenu(this);">
-
-                        <?php
-                        foreach ($menus as $menu) {
-                            if ($menu == "null") {
-                                $name = "[" . get_translation("every") . "]";
-                            } else {
-                                $name = $menu;
-                            }
-
-                            if ($menu == $_SESSION["filter_menu"]) {
-                                echo '<option value="' . $menu . '" selected>' . get_translation($name) . "</option>";
-                            } else {
-                                echo '<option value="' . $menu . '">' . get_translation($name) . "</option>";
-                            }
-                        }
-                        ?>
-                    </select>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-6">
-                    <?php translate("parent_id"); ?>
-                    <select name="filter_parent" onchange="filterByParent(this);">
-                        <option value="null"
-                        <?php
-                        if ("null" == $_SESSION["filter_parent"])
-                            echo "selected";
-                        ?>>
-                            [<?php translate("every"); ?>]
-                        </option>
-                        <option value="-"
-                        <?php
-                        if ("-" == $_SESSION["filter_parent"])
-                            echo "selected";
-                        ?>>
-                            [<?php translate("none"); ?>]
-                        </option>
-                        <?php
-                        while ($parent = db_fetch_object($parents)) {
-                            $parent_id = $parent->id;
-                            $title = _esc($parent->title);
-                            if ($parent_id == $_SESSION["filter_parent"]) {
-                                echo '<option value="' . $parent_id . '" selected>' . $title . "</option>";
-                            } else {
-                                echo '<option value="' . $parent_id . '">' . $title . "</option>";
-                            }
-                        }
-                        ?>
-                    </select>
-                </div>
-                <div class="col-xs-6">
-                    <?php translate("enabled"); ?>
-                    <select name="filter_active" onchange="filterByActive(this);">
-                        <option value="null"
-                        <?php
-                        if (null == $_SESSION["filter_active"]) {
-                            echo "selected";
-                        }
-                        ?>>
-                            [<?php translate("every"); ?>]
-                        </option>
-                        <option value="1"
-                        <?php
-                        if (1 === $_SESSION["filter_active"]) {
-                            echo "selected";
-                        }
-                        ?>><?php translate("enabled"); ?></option>
-                        <option value="0"
-                        <?php
-                        if (0 === $_SESSION["filter_active"]) {
-                            echo "selected";
-                        }
-                        ?>><?php translate("disabled"); ?></option>
-                    </select>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-6">
-
-                    <?php
-                    translate("approved");
-                    ?>
-                    <p>
-                        <select name="filter_approved" onchange="filterByApproved(this);">
-                            <option value="null"
-                            <?php
-                            if (null == $_SESSION["filter_approved"]) {
-                                echo "selected";
-                            }
-                            ?>>
-                                [<?php
-                                translate("every");
-                                ?>]</option>
-                            <option value="1"
-                            <?php
-                            if (1 === $_SESSION["filter_approved"]) {
-                                echo "selected";
-                            }
-                            ?>><?php
-                                        translate("yes");
-                                        ?></option>
-                            <option value="0"
-                            <?php
-                            if (0 === $_SESSION["filter_approved"]) {
-                                echo "selected";
-                            }
-                            ?>><?php
-                                        translate("no");
-                                        ?></option>
-                        </select>
-                    </p>
-                </div>
-            </div>
-        </form>
-        <?php
-        if ($_SESSION["filter_status"] == "trash" and $permissionChecker->hasPermission("pages")) {
+        <?php } else if ($controller->getPagesListView() === "recycle_bin") {
             ?>
-            <a
-                href="<?php echo ModuleHelper::buildMethodCallUrl("PageController", "emptyTrash"); ?>"
-                onclick="return ajaxEmptyTrash(this.href);" class="btn btn-warning">
-                <i class="fa fa-trash" aria-hidden="true"></i>
-                <?php translate("empty_recycle_bin"); ?></a>
+            <div class="row">
+                <div class="col-xs-6">
+                    <a href="<?php
+                    echo ModuleHelper::buildMethodCallUrl(
+                            PageController::class, "emptyTrash"
+                    );
+                    ?>"
+                       id="empty-trash"
+                       class="btn btn-primary"><i
+                            class="fas fa-broom"></i> <?php translate("empty_recycle_bin"); ?></a>
+                </div>
+                <div class="col-xs-6 text-right">
+                    <a href="<?php echo ModuleHelper::buildMethodCallUrl("PageController", "pages"); ?>" class="btn btn-default"><i
+                            class="fas fa-book"></i> <?php translate("pages"); ?></a>
+                </div>
+            </div>
             <?php
         }
         ?>
-        <?php
-        $filter_language = basename($_GET["filter_language"]);
-        $filter_status = basename($_GET["filter_status"]);
-
-        if (empty($filter_language)) {
-            if (!empty($_SESSION["filter_language"])) {
-                $filter_language = $_SESSION["filter_language"];
-            } else {
-                $filter_language = "";
-            }
-        }
-
-        if ($_SESSION["filter_status"] == "trash") {
-            $filter_status = "`deleted_at` IS NOT NULL";
-        } else {
-            $filter_status = "`deleted_at` IS NULL";
-        }
-
-        if (empty($order)) {
-            $order = "menu";
-        }
-
-        if (!empty($filter_language)) {
-            $filter_sql = "WHERE language = '" . $filter_language . "' ";
-        } else {
-            $filter_sql = "WHERE 1=1 ";
-        }
-
-        if ($_SESSION["filter_category"] != 0) {
-            $filter_sql .= "AND category_id=" . intval($_SESSION["filter_category"]) . " ";
-        }
-
-        $filter_sql .= "AND " . $filter_status . " ";
-
-        if ($_SESSION["filter_menu"] != null) {
-            $filter_sql .= "AND menu = '" . db_escape($_SESSION["filter_menu"]) . "' ";
-        }
-        if ($_SESSION["filter_type"] != null) {
-            $filter_sql .= "AND `type` = '" . db_escape($_SESSION["filter_type"]) . "' ";
-        }
-
-        if ($_SESSION["filter_active"] !== null) {
-            $filter_sql .= "AND active = " . intval($_SESSION["filter_active"]) . " ";
-        }
-
-        if ($_SESSION["filter_approved"] !== null) {
-            $filter_sql .= "AND approved = " . intval($_SESSION["filter_approved"]) . " ";
-        }
-
-        if ($_SESSION["filter_parent"] != null) {
-            if ($_SESSION["filter_parent"] != "-") {
-                $filter_sql .= "AND parent_id = '" . intval($_SESSION["filter_parent"]) . "' ";
-            } else {
-                $filter_sql .= "AND parent_id is NULL ";
-            }
-        }
-
-        if (isset($_SESSION["filter_title"]) and ! empty($_SESSION["filter_title"])) {
-            $filter_sql .= "AND (title LIKE '" . db_escape($_SESSION["filter_title"]) . "%' or title LIKE '%" . db_escape($_SESSION["filter_title"]) . "' or title LIKE '%" . db_escape($_SESSION["filter_title"]) . "%' or title LIKE '" . db_escape($_SESSION["filter_title"]) . "' ) ";
-        }
-
-
-        $group = Group::getCurrentGroup();
-        $userLanguage = $permissionChecker->getLanguages();
-        $joined = "";
-        foreach ($userLanguage as $lang) {
-            $joined .= "'" . Database::escapeValue($lang->getLanguageCode()) . "',";
-        }
-        $joined = trim($joined, ",");
-        if (count($userLanguage) > 0) {
-            $filter_sql .= " AND language in (";
-            $filter_sql .= $joined;
-            $filter_sql .= ")";
-        }
-
-        $filter_sql .= " ";
-
-        $result = db_query("SELECT * FROM " . tbname("content") . " " . $filter_sql . " ORDER BY $order,position, slug ASC") or die(db_error());
-        ?>
-        <div class="x-results-found"><?php BackendHelper::formatDatasetCount(Database::getNumRows($result)); ?></div>
-        <?php
-        if ($_SESSION["filter_parent"] and $_SESSION["filter_parent"] != '-') {
-            $parentPage = ContentFactory::getByID($_SESSION["filter_parent"]);
-            $parentId = $parentPage->parent_id ? $parentPage->parent_id : "-";
-            ?>
-            <div class="form-group">
-                <a href="<?php
-                echo ModuleHelper::buildActionUrl("pages",
-                        "filter_parent={$parentId}");
-                ?>" class="btn btn-default">
-                    <?php echo UliCMS\HTML\icon("fa fa-arrow-up"); ?> <?php translate("go_up"); ?></a>
-                <?php
-            }
-            ?>
-        </div>
-        <div class="scroll">
-            <table class="tablesorter dataset-list">
+        <div class="scroll voffset3">
+            <table class="tablesorter dataset-list"
+                   data-url="<?php
+                   echo ModuleHelper::buildMethodCallUrl("PageController", "getPages");
+                   ?>">
                 <thead>
                     <tr style="font-weight: bold;">
                         <th><?php translate("title"); ?>
                         </th>
-                        <th class="hide-on-mobile"><?php translate("menu"); ?>
+                        <th><?php translate("menu"); ?>
                         </th>
-                        <th class="hide-on-mobile"><?php translate("position"); ?>
+                        <th><?php translate("position"); ?>
                         </th>
-                        <th class="hide-on-mobile"><?php translate("parent_id"); ?>
+                        <th><?php translate("parent_id"); ?>
                         </th>
 
-                        <th class="hide-on-mobile"><?php translate("activated"); ?>
+                        <th><?php translate("activated"); ?>
                         </th>
                         <td class="no-sort text-center"><?php translate("view"); ?>
                         </td>
                         <td class="no-sort text-center"><?php translate("edit"); ?>
                         </td>
-                        <td class="no-sort text-center"><?php translate("delete"); ?>
+                        <td class="no-sort text-center"><?php
+                            translate(
+                                    $controller->getPagesListView() === "default" ? "delete" : "restore"
+                            );
+                            ?>
                         </td>
-
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                    if (db_num_rows($result) > 0) {
-                        while ($row = db_fetch_object($result)) {
-                            try {
-                                $model = ContentFactory::getByID(intval($row->id));
-                            } catch (UnknownContentTypeException $e) {
-                                // skip contents with unknown types
-                                continue;
-                            }
-                            echo '<tr id="dataset-' . $row->id . '">';
-                            echo '<td>';
-                            if ($model->hasChildren()) {
-                                echo "<a href=\""
-                                . ModuleHelper::buildActionURL("pages", "filter_parent={$model->getId()}") . "\">" . UliCMS\HTML\icon("fas fa-arrow-down") . " " . _esc($row->title) . "</a></td>";
-                            } else {
-                                esc($row->title);
-                            }
-                            if (!empty($row->redirection) and ! is_null($row->redirection) and $row->type == "link") {
-                                esc(" --> ");
-                                esc($row->redirection);
-                            }
-
-                            echo "</td>";
-                            echo "<td class = \"hide-on-mobile\">" . _esc(get_translation($row->menu)) . "</td>";
-
-                            echo "<td class=\"hide-on-mobile\">" . $row->position . "</td>";
-                            echo "<td class=\"hide-on-mobile\">" . _esc(getPageTitleByID($row->parent_id)) . "</td>";
-
-                            if ($row->active) {
-                                echo "<td class=\"hide-on-mobile\">" . get_translation("yes") . "</td>";
-                            } else {
-                                echo "<td class=\"hide-on-mobile\">" . get_translation("no") . "</td>";
-                            }
-
-                            if ((
-                                    $row->redirection and startsWith($row->redirection, "#")) or $row->type == "node" or $row->type == "snippet") {
-                                echo "<td class=\"text-center\"></td>";
-                            } else {
-                                $url = "../?goid={$row->id}";
-                                echo "<td class='text-center'><a href=\"" . $url . "\"><img class=\"mobile-big-image\" src=\"gfx/preview.png\" alt=\"" . get_translation("view") . "\" title=\"" . get_translation("view") . "\"></a></td>";
-                            }
-
-                            $checker = new ContentPermissionChecker(get_user_id());
-                            $can_edit_this = $checker->canWrite($row->id);
-
-                            if (!$can_edit_this) {
-                                echo "<td></td><td></td>";
-                            } else {
-                                echo "<td class='text-center'>" . '<a href="index.php?action=pages_edit&page=' . $row->id . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . get_translation("edit") . '" title="' . get_translation("edit") . '"></a></td>';
-
-                                if ($_SESSION["filter_status"] == "trash") {
-                                    echo "<td class='text-center'>";
-                                    echo ModuleHelper::buildMethodCallForm("PageController", "undelete", array(
-                                        "page" => $row->id
-                                            ), "post", array(
-                                        "class" => "undelete-form",
-                                        "data->id" => $row->id
-                                    ));
-
-                                    get_csrf_token_html();
-                                    echo '<input type="image" class="mobile-big-image" src="gfx/undelete.png" alt="' . get_translation("recover") . '" title="' . get_translation("recover") . '"></form></td>';
-                                } else {
-                                    echo "<td class='text-center'>";
-                                    echo ModuleHelper::deleteButton("index.php", array(
-                                        "page" => $row->id,
-                                        "sClass" => "PageController",
-                                        "sMethod" => "delete"
-                                            ), array(
-                                        "data-id" => $row->id,
-                                        "class" => "page-delete-form"
-                                    ));
-                                    echo "</td>";
-                                }
-                            }
-                            echo '</tr>';
-                        }
-                    }
-                    ?>
                 </tbody>
             </table>
         </div>
     </div>
     <?php
-    enqueueScriptFile(ModuleHelper::buildRessourcePath("core_content", "js/pages/page.js"));
+    enqueueScriptFile(ModuleHelper::buildRessourcePath(
+                    "core_content",
+                    "js/pages/list.js"
+            )
+    );
     combinedScriptHtml();
-    ?>
-    <?php
     $translation = new JSTranslation();
     $translation->addKey("ask_for_delete");
     $translation->addKey("wanna_empty_trash");
     $translation->addKey("reset_filters");
     $translation->renderJS();
-    ?>
-    <br />
-    <?php
 } else {
     noPerms();
 }

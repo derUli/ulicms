@@ -27,15 +27,28 @@ class BackendHelperTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("7 datasets found.", $text);
     }
 
-    public function testSetAndGetActionIsSet() {
+    public function testSetAndGetActionIsSetGet() {
+        $_SERVER["REQUEST_METHOD"] = "GET";
         BackendHelper::setAction("pages");
         $this->assertEquals("pages", BackendHelper::getAction());
+        unset($_REQUEST["action"]);
+    }
+
+    public function testSetAndGetActionIsSetPost() {
+        $_SERVER["REQUEST_METHOD"] = "POST";
+        BackendHelper::setAction("home");
+        $this->assertEquals("home", BackendHelper::getAction());
         unset($_REQUEST["action"]);
     }
 
     public function testGetActionIsNotSet() {
         unset($_REQUEST["action"]);
         $this->assertEquals("home", BackendHelper::getAction());
+    }
+
+    public function testEnqueueEditorScripts() {
+        BackendHelper::enqueueEditorScripts();
+        $this->assertStringContainsString('<script src="content/cache/scripts/', $output = getCombinedScriptHtml());
     }
 
 }

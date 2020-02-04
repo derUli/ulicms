@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 use UliCMS\Utils\CacheUtil;
 
 class ErrorPagesController extends Controller {
 
-    public function savePost() {
+    public function savePost(): void {
         $errorPages = $_POST["error_page"];
         if (is_array($errorPages)) {
             foreach ($errorPages as $code => $languages) {

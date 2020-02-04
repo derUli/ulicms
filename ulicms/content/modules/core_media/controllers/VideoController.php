@@ -1,66 +1,34 @@
 <?php
 
+declare(strict_types=1);
+
 class VideoController extends Controller {
 
-    public function deletePost() {
-        $result = db_query("select ogg_file, webm_file, mp4_file from " . tbname("videos") . " where id = " . intval($_REQUEST ["delete"]));
-        if (db_num_rows($result) > 0) {
-            // OGG
-            $dataset = db_fetch_object($result);
-            $filepath = ULICMS_DATA_STORAGE_ROOT . "/content/videos/" . basename($dataset->ogg_file);
-            if (!empty($dataset->ogg_file) and file_exists($filepath)) {
-                unlink($filepath);
-            }
-
-            // WebM
-            $filepath = ULICMS_DATA_STORAGE_ROOT . "/content/videos/" . basename($dataset->webm_file);
-            if (!empty($dataset->webm_file) and file_exists($filepath)) {
-                unlink($filepath);
-            }
-
-            // MP4
-            $filepath = ULICMS_DATA_STORAGE_ROOT . "/content/videos/" . basename($dataset->mp4_file);
-            if (!empty($dataset->mp4_file) and file_exists($filepath)) {
-                @unlink($filepath);
-            }
-
-            db_query("DELETE FROM " . tbname("videos") . " where id = " . intval($_REQUEST ["delete"]));
-        }
-        Request::redirect(ModuleHelper::buildActionURL("videos"));
-    }
-
-    public function updatePost() {
-        $name = db_escape($_POST ["name"]);
-        $id = intval($_POST ["id"]);
-        $ogg_file = db_escape(basename($_POST ["ogg_file"]));
-        $webm_file = db_escape(basename($_POST ["webm_file"]));
-        $mp4_file = db_escape(basename($_POST ["mp4_file"]));
-        $width = intval($_POST ["width"]);
-        $height = intval($_POST ["height"]);
-        $updated = time();
-        $category_id = intval($_POST ["category_id"]);
-        db_query("UPDATE " . tbname("videos") . " SET name='$name', ogg_file='$ogg_file', mp4_file='$mp4_file', webm_file='$webm_file', width=$width, height=$height, category_id = $category_id, `updated` = $updated where id = $id") or die(db_error());
-        Request::redirect(ModuleHelper::buildActionURL("videos"));
-    }
-
-    public function createPost() {
+    public function createPost(): void {
         $video_folder = ULICMS_DATA_STORAGE_ROOT . "/content/videos";
 
         if (isset($_FILES)) {
             $mp4_file_value = "";
             // MP4
             if (!empty($_FILES ['mp4_file'] ['name'])) {
-                $mp4_file = time() . "-" . basename($_FILES ['mp4_file'] ['name']);
+                $mp4_file = time() . "-" .
+                        basename($_FILES ['mp4_file'] ['name']);
                 $mp4_type = $_FILES ['mp4_file'] ["type"];
                 $mp4_allowed_mime_type = array(
                     "video/mp4"
                 );
                 if (faster_in_array($mp4_type, $mp4_allowed_mime_type)) {
                     $target = $video_folder . "/" . $mp4_file;
-                    if (move_uploaded_file($_FILES ['mp4_file'] ['tmp_name'], $target)) {
+                    if (move_uploaded_file(
+                                    $_FILES ['mp4_file'] ['tmp_name'],
+                                    $target)) {
                         // Google Cloud: make file public
-                        if (startsWith(ULICMS_DATA_STORAGE_ROOT, "gs://") and class_exists("GoogleCloudHelper")) {
-                            GoogleCloudHelper::changeFileVisiblity($target, true);
+                        if (startsWith(ULICMS_DATA_STORAGE_ROOT, "gs://")
+                                and class_exists("GoogleCloudHelper")) {
+                            GoogleCloudHelper::changeFileVisiblity(
+                                    $target,
+                                    true
+                            );
                         }
                         $mp4_file_value = basename($mp4_file);
                     }
@@ -79,9 +47,12 @@ class VideoController extends Controller {
                 );
                 if (faster_in_array($ogg_type, $ogg_allowed_mime_type)) {
                     $target = $video_folder . "/" . $ogg_file;
-                    if (move_uploaded_file($_FILES ['ogg_file'] ['tmp_name'], $target)) {
+                    if (move_uploaded_file(
+                                    $_FILES ['ogg_file'] ['tmp_name'], $target
+                            )) {
                         // Google Cloud: make file public
-                        if (startsWith(ULICMS_DATA_STORAGE_ROOT, "gs://") and class_exists("GoogleCloudHelper")) {
+                        if (startsWith(ULICMS_DATA_STORAGE_ROOT, "gs://")
+                                and class_exists("GoogleCloudHelper")) {
                             GoogleCloudHelper::changeFileVisiblity($target, true);
                         }
                         $ogg_file_value = basename($ogg_file);
@@ -102,10 +73,16 @@ class VideoController extends Controller {
                 );
                 if (faster_in_array($webm_type, $webm_allowed_mime_type)) {
                     $target = $video_folder . "/" . $webm_file;
-                    if (move_uploaded_file($_FILES ['webm_file'] ['tmp_name'], $target)) {
+                    if (move_uploaded_file(
+                                    $_FILES ['webm_file'] ['tmp_name'], $target
+                            )) {
                         // Google Cloud: make file public
-                        if (startsWith(ULICMS_DATA_STORAGE_ROOT, "gs://") and class_exists("GoogleCloudHelper")) {
-                            GoogleCloudHelper::changeFileVisiblity($target, true);
+                        if (startsWith(ULICMS_DATA_STORAGE_ROOT, "gs://")
+                                and class_exists("GoogleCloudHelper")) {
+                            GoogleCloudHelper::changeFileVisiblity(
+                                    $target,
+                                    true
+                            );
                         }
                         $webm_file_value = basename($webm_file);
                     }
@@ -122,9 +99,66 @@ class VideoController extends Controller {
             $height = intval($_POST ["height"]);
             $timestamp = time();
 
-            if (!empty($ogg_file_value) or ! empty($mp4_file_value) or ! empty($webm_file_value)) {
-                db_query("INSERT INTO " . tbname("videos") . " (name, ogg_file, webm_file, mp4_file, width, height, created, category_id, `updated`) VALUES ('$name', '$ogg_file_value', '$webm_file_value',  '$mp4_file_value', $width, $height, $timestamp, $category_id, $timestamp);") or die(db_error());
+            if (!empty($ogg_file_value) or ! empty($mp4_file_value)
+                    or ! empty($webm_file_value)) {
+                db_query("INSERT INTO " . tbname("videos") .
+                        " (name, ogg_file, webm_file, mp4_file, width, "
+                        . "height, created, category_id, `updated`) "
+                        . "VALUES ('$name', '$ogg_file_value', "
+                        . "'$webm_file_value',  '$mp4_file_value', "
+                        . "$width, $height, $timestamp, $category_id, "
+                        . "$timestamp);");
             }
+        }
+        Request::redirect(ModuleHelper::buildActionURL("videos"));
+    }
+
+    public function updatePost(): void {
+        $name = db_escape($_POST ["name"]);
+        $id = intval($_POST ["id"]);
+        $ogg_file = db_escape(basename($_POST ["ogg_file"]));
+        $webm_file = db_escape(basename($_POST ["webm_file"]));
+        $mp4_file = db_escape(basename($_POST ["mp4_file"]));
+        $width = intval($_POST ["width"]);
+        $height = intval($_POST ["height"]);
+        $updated = time();
+        $category_id = intval($_POST ["category_id"]);
+        db_query("UPDATE " . tbname("videos") . " SET name='$name', "
+                . "ogg_file='$ogg_file', mp4_file='$mp4_file', "
+                . "webm_file='$webm_file', width=$width, height=$height, "
+                . "category_id = $category_id, `updated` = $updated "
+                . "where id = $id");
+        Request::redirect(ModuleHelper::buildActionURL("videos"));
+    }
+
+    public function deletePost(): void {
+        $result = db_query("select ogg_file, webm_file, mp4_file from " .
+                tbname("videos") . " where id = " . intval($_REQUEST ["delete"]));
+        if (db_num_rows($result) > 0) {
+            // OGG
+            $dataset = db_fetch_object($result);
+            $filepath = ULICMS_DATA_STORAGE_ROOT . "/content/videos/" .
+                    basename($dataset->ogg_file);
+            if (!empty($dataset->ogg_file) and file_exists($filepath)) {
+                unlink($filepath);
+            }
+
+            // WebM
+            $filepath = ULICMS_DATA_STORAGE_ROOT . "/content/videos/" .
+                    basename($dataset->webm_file);
+            if (!empty($dataset->webm_file) and file_exists($filepath)) {
+                unlink($filepath);
+            }
+
+            // MP4
+            $filepath = ULICMS_DATA_STORAGE_ROOT . "/content/videos/" .
+                    basename($dataset->mp4_file);
+            if (!empty($dataset->mp4_file) and file_exists($filepath)) {
+                @unlink($filepath);
+            }
+
+            db_query("DELETE FROM " . tbname("videos") . " where id = " .
+                    intval($_REQUEST ["delete"]));
         }
         Request::redirect(ModuleHelper::buildActionURL("videos"));
     }

@@ -24,24 +24,29 @@ class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase {
 
     public function testGenerateSCSS() {
         $controller = ControllerRegistry::get(DesignSettingsController::class);
-        $scss = $controller->removeCommentFromCss($controller->GenerateSCSS());
+        $scss = $controller->GenerateSCSS();
         $this->assertGreaterThanOrEqual(5, substr_count($scss, "\n"));
         $lines = explode("\n", trim(normalizeLN($scss, "\n")));
-        foreach ($lines as $line) {
-            $this->assertRegExp('/\$(.+): (.+);/', $line);
-        }
+
+        $this->assertCount(12, $lines);
     }
 
     function testGenerateSCSSToFile() {
         $this->cleanUpFiles();
         $controller = ControllerRegistry::get(DesignSettingsController::class);
         $file = $controller->generateSCSSToFile();
-        $this->assertStringEndsWith("/content/generated/design_variables.scss", $file);
+        $this->assertStringEndsWith(
+                "/content/generated/design_variables.scss",
+                $file
+        );
         $this->assertFileExists($file);
 
-        $fileContent = $controller->removeCommentFromCss(file_get_contents($file));
+        $fileContent = file_get_contents($file);
 
-        $this->assertGreaterThanOrEqual(5, substr_count($fileContent, "\n"));
+        $this->assertGreaterThanOrEqual(
+                5,
+                substr_count($fileContent, "\n")
+        );
     }
 
     public function testGenerateSCSSInConstructor() {

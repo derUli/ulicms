@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 class Link extends Page {
 
-    public $redirection = "";
+    public $link_url = "";
     public $type = "link";
 
     public function save() {
@@ -20,7 +20,7 @@ class Link extends Page {
 
     protected function fillVars($result = null) {
         parent::fillVars($result);
-        $this->redirection = $result->redirection;
+        $this->link_url = $result->link_url;
     }
 
     public function update() {
@@ -29,9 +29,9 @@ class Link extends Page {
             return $this->create();
         }
         parent::update();
-        $sql = "update {prefix}content set redirection = ? where id = ?";
+        $sql = "update {prefix}content set link_url = ? where id = ?";
         $args = array(
-            $this->redirection,
+            $this->link_url,
             $this->id
         );
 

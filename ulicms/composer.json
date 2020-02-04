@@ -1,52 +1,55 @@
 {
-    "license": "BSD",
-    "authors": [{
-            "name": "Ulrich Schmidt",
-            "email": "support@ulicms.de",
-            "homepage": "http://www.ulicms.de",
-            "role": "Lead Developer"
+"license": "BSD",
+        "authors": [{
+        "name": "Ulrich Schmidt",
+                "email": "support@ulicms.de",
+                "homepage": "http://www.ulicms.de",
+                "role": "Lead Developer"
         }
-    ],
-    "support": {
+        ],
+        "support": {
         "email": "support@ulicms.de",
-        "issues": "https://github.com/derUli/ulicms/issues",
-        "source": "https://github.com/derUli/ulicms",
-        "docs": "https://www.ulicms.de/handbuecher.html",
-        "rss": "https://en.ulicms.de/blog_rss.php?s=aktuelles&lang=en"
-    },
-    "repositories": [
+                "issues": "https://github.com/derUli/ulicms/issues",
+                "source": "https://github.com/derUli/ulicms",
+                "docs": "https://www.ulicms.de/handbuecher.html",
+                "rss": "https://en.ulicms.de/blog_rss.php?s=aktuelles&lang=en"
+        },
+        "repositories": [
         {
-            "url": "https://github.com/derUli/html-minifier",
-            "type": "git"
+        "url": "https://github.com/derUli/html-minifier",
+                "type": "git"
         }
-    ],
-    "require": {
-        "php": ">=7.0",
-        "ext-mysqli": "*",
-        "ext-gd": "*",
-        "ext-json": "*",
-        "ext-mbstring": "*",
-        "ext-openssl": "*",
-        "ext-dom": "*",
-        "ext-libxml": "*",
-        "phpfastcache/phpfastcache": "*",
-        "phpgangsta/googleauthenticator": "dev-master",
-        "katzgrau/klogger": "dev-master",
-        "phpmailer/phpmailer": "*",
-        "deruli/html-minifier": "master-dev",
-        "leafo/scssphp": "*",
-        "chrisjean/php-ico": "*",
-        "willdurand/negotiation": "*",
-        "cocur/slugify": "*",
-        "matthiasmullie/minify": "*",
-        "rakit/validation": "*",
-        "nesbot/carbon": "*",
-        "mpdf/mpdf": "^8.0",
-		"symfony/polyfill-mbstring": "*",
-        "dereuromark/media-embed": "^0.5.0",
-        "jimmiw/php-time-ago": "^3.1"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^7.0"
-    }
+        ],
+        "require": {
+			"php": ">=7.2",
+			"ext-mysqli": "*",
+			"ext-gd": "*",
+			"ext-json": "*",
+			"ext-mbstring": "*",
+			"ext-openssl": "*",
+			"ext-dom": "*",
+			"ext-libxml": "*",
+			"phpfastcache/phpfastcache": "*",
+			"phpgangsta/googleauthenticator": "dev-master",
+			"katzgrau/klogger": "dev-master",
+			"phpmailer/phpmailer": "*",
+			"deruli/html-minifier": "master-dev",
+			"leafo/scssphp": "*",
+			"chrisjean/php-ico": "*",
+			"willdurand/negotiation": "*",
+			"cocur/slugify": "*",
+			"matthiasmullie/minify": "*",
+			"rakit/validation": "*",
+			"nesbot/carbon": "*",
+			"symfony/polyfill-mbstring": "*",
+			"dereuromark/media-embed": "*",
+			"jimmiw/php-time-ago": "*",
+			"consolidation/robo": "*",
+                "lasserafn/php-initial-avatar-generator": "^4.0",
+                "imagine/imagine": "^1.2"
+        },
+        "require-dev": {
+			"phpunit/phpunit": "^7.0",
+            "mpdf/mpdf": "^8.0"
+        }
 }

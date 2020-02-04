@@ -35,7 +35,8 @@ class TypeMapper {
     }
 
     public static function getModel($type): ?object {
-        if (!(isset(self::$mapping[$type]) and class_exists(self::$mapping[$type]))) {
+        if (!(isset(self::$mapping[$type])
+                and class_exists(self::$mapping[$type]))) {
             return null;
         }
         return new self::$mapping[$type]();
@@ -43,18 +44,18 @@ class TypeMapper {
 
     // custom modules may load their own content type models
     public static function loadMapping(): void {
-        $objectRegistry = [];
         $modules = getAllModules();
         foreach ($modules as $module) {
             $mappings = getModuleMeta($module, "type_classes");
 
-            if ($mappings) {
-                foreach ($mappings as $key => $value) {
-                    if (StringHelper::isNullOrEmpty($value)) {
-                        unset(self::$mapping[$key]);
-                    } else {
-                        self::$mapping[$key] = $value;
-                    }
+            if (!$mappings) {
+                continue;
+            }
+            foreach ($mappings as $key => $value) {
+                if (StringHelper::isNullOrEmpty($value)) {
+                    unset(self::$mapping[$key]);
+                } else {
+                    self::$mapping[$key] = $value;
                 }
             }
         }

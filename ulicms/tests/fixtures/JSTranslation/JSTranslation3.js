@@ -1,1 +1,0 @@
-<script id="my-script">ThisIsNotGoogleTranslator = {};ThisIsNotGoogleTranslator.PagesCount = "Count of page";ThisIsNotGoogleTranslator.Pages = "Pages";ThisIsNotGoogleTranslator.GibtsNicht = "GIBTS_NICHT";</script>

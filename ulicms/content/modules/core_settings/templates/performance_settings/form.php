@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Security\PermissionChecker;
+use UliCMS\Constants\RequestMethod;
 
 $permissionChecker = new PermissionChecker(get_user_id());
 
@@ -29,17 +30,39 @@ if (!$permissionChecker->hasPermission("performance_settings")) {
     <?php } ?>
     <p>
         <a
-            href="<?php echo ModuleHelper::buildActionURL("settings_categories"); ?>"
-            class="btn btn-default btn-back"><i class="fas fa-arrow-left"></i> <?php translate("back") ?></a>
+            href="<?php
+            echo ModuleHelper::buildActionURL(
+                    "settings_categories");
+            ?>"
+            class="btn btn-default btn-back">
+            <i class="fas fa-arrow-left"></i>
+            <?php translate("back") ?></a>
         <a
-            href="<?php echo ModuleHelper::buildMethodCallUrl("PerformanceSettingsController", "clearCache"); ?>"
-            class="btn btn-warning pull-right"><i class="fas fa-broom"></i> <?php translate("clear_cache"); ?></a>
+            href="<?php
+            echo ModuleHelper::buildMethodCallUrl(
+                    "PerformanceSettingsController",
+                    "clearCache");
+            ?>"
+            class="btn btn-warning pull-right">
+            <i class="fas fa-broom"></i>
+            <?php translate("clear_cache"); ?></a>
     </p>
     <h1><?php translate("performance"); ?></h1>
-    <?php echo ModuleHelper::buildMethodCallForm("PerformanceSettingsController", "save"); ?>
+    <?php
+    echo ModuleHelper::buildMethodCallForm(
+            "PerformanceSettingsController",
+            "save",
+            [],
+            RequestMethod::POST,
+            [
+                "id" => "form"
+            ]
+    );
+    ?>
     <h2><?php translate("page_cache"); ?></h2>
     <div class="label">
-        <label for="cache_enabled"><?php translate("cache_enabled"); ?>
+        <label for="cache_enabled">
+            <?php translate("cache_enabled"); ?>
         </label>
     </div>
     <div class="inputWrapper">
@@ -57,7 +80,7 @@ if (!$permissionChecker->hasPermission("performance_settings")) {
         ?>
     </div>
     <div class="inputWrapper">
-        <input type="number" name="cache_period" min="1" max="20160"
+        <input type="number" name="cache_period" min="0" max="20160"
                value="<?php
                echo $cache_period;
                ?>">
@@ -65,19 +88,22 @@ if (!$permissionChecker->hasPermission("performance_settings")) {
     </div>
     <p>
         <button type="submit" name="submit" class="btn btn-primary voffset3">
-            <i class="fa fa-save"></i> <?php translate("save_changes"); ?></button>
+            <i class="fa fa-save"></i>
+            <?php translate("save_changes"); ?>
+        </button>
     </p>
-    <script type="text/javascript">
-        $("#form").ajaxForm({beforeSubmit: function (e) {
-                $("#message").html("");
-                $("#loading").show();
-            },
-            success: function (e) {
-                $("#loading").hide();
-                $("#message").html("<span style=\"color:green;\"><?php translate("CHANGES_WAS_SAVED"); ?></span>");
-            }
-        });
-    </script>
     <?php
     echo ModuleHelper::endForm();
+
+    $translation = new JSTranslation();
+    $translation->addKey("changes_was_saved");
+    $translation->render();
+
+    enqueueScriptFile(
+            ModuleHelper::buildRessourcePath(
+                    "core_settings",
+                    "js/performance.js"
+            )
+    );
+    combinedScriptHtml();
 }

@@ -10,9 +10,9 @@ interface IDatasetPermissionChecker {
 
     public function __construct(int $user_id);
 
-    public function canRead(int $dataset);
+    public function canRead(int $dataset): bool;
 
-    public function canWrite(int $dataset);
+    public function canWrite(int $dataset): bool;
 
-    public function canDelete($dataset);
+    public function canDelete($dataset): bool;
 }

@@ -64,12 +64,13 @@ class SpamFilterConfiguration {
     public function setBadwords($val): void {
         if (is_string($val)) {
             $this->badwords = StringHelper::linesFromString($val);
-        } else if (is_array($this->badwords)) {
+        } else if (is_array($val)) {
             $this->badwords = $val;
-        } else if (is_null($this->badwords)) {
+        } else if (is_null($val)) {
             $this->badwords = [];
         } else {
-            throw new InvalidArgumentException("$val is not a valid value for badwords");
+            throw new InvalidArgumentException(var_dump_str($val) .
+                    " is not a valid value for badwords");
         }
     }
 
@@ -86,10 +87,11 @@ class SpamFilterConfiguration {
             $this->blockedCountries = $countries;
         } else if (is_array($val)) {
             $this->blockedCountries = $val;
-        } else if (is_null($this->badwords)) {
-            $this->badwords = [];
+        } else if (is_null($val)) {
+            $this->blockedCountries = [];
         } else {
-            throw new InvalidArgumentException("$val is not a valid value for badwords");
+            throw new InvalidArgumentException(var_dump_str($val) .
+                    " is not a valid value for badwords");
         }
     }
 

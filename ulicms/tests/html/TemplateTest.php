@@ -2,28 +2,35 @@
 
 use UliCMS\Exceptions\FileNotFoundException;
 use UliCMS\Utils\File;
+use function UliCMS\HTML\stringContainsHtml;
 
 class TemplateTest extends \PHPUnit\Framework\TestCase {
 
     private $savedSettings = [];
 
     public function setUp() {
+        Translation::loadAllModuleLanguageFiles("en");
         Flags::setNoCache(true);
         $this->cleanUp();
 
         $settings = array(
-            "motto",
-            "motto_de",
-            "motto_en",
-            "motto_fr",
+            "site_slogan",
+            "site_slogan_de",
+            "site_slogan_en",
+            "site_slogan_fr",
             "homepage_owner",
-            "footer_text"
+            "footer_text",
+            "domain_to_language"
         );
         foreach ($settings as $setting) {
             $this->savedSettings[$setting] = Settings::get($setting);
         }
-        $this->setMotto();
+        $this->setSiteSlogan();
 
+
+        $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
+        $_SERVER["SERVER_PORT"] = "80";
+        $_SERVER['HTTP_HOST'] = "example.org";
         $_SERVER["REQUEST_URI"] = "/other-url.html?param=value";
 
         require_once getLanguageFilePath("en");
@@ -38,26 +45,38 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         }
 
         Database::query("delete from {prefix}content where "
-                . "title like 'Test Page %' or slug ='testgetbodyclasses'",
+                . "title like 'Test Page %' or slug like 'testpage%' or slug"
+                . " like 'test-page%' or slug ='testgetbodyclasses'",
                 true);
-
-        unset($_SERVER["REQUEST_URI"]);
+        unset($_SERVER["SERVER_PROTOCOL"]);
+        unset($_SERVER['HTTP_HOST']);
+        unset($_SERVER['SERVER_PORT']);
+        unset($_SERVER['REQUEST_URI']);
+        unset($_SERVER['HTTPS']);
+        unset($_SESSION["language"]);
+        
+        Vars::delete("headline");
+        Vars::delete("title");
     }
 
     private function cleanUp() {
         unset($_SESSION["language"]);
-        unset($_GET["seite"]);
+        unset($_GET["slug"]);
         Settings::delete("video_width_100_percent");
         Settings::delete("hide_meta_generator");
         Settings::delete("disable_no_format_detection");
         unset($_SERVER["HTTP_USER_AGENT"]);
-        unset($_GET["seite"]);
+        unset($_GET["slug"]);
         unset($_SESSION["language"]);
 
         Vars::delete("id");
     }
 
     public function testRenderPartialSuccess() {
+        $this->assertEquals("Hello World!", Template::renderPartial("hello"));
+    }
+
+    public function testRenderPartialSuccessWithTheme() {
         $this->assertEquals("Hello World!", Template::renderPartial("hello",
                         "impro17"));
     }
@@ -67,19 +86,38 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
             $nothing = Template::renderPartial("nothing", "impro17");
             $this->fail("FileNotFoundException not thrown");
         } catch (FileNotFoundException $e) {
-            $this->assertNotNull("Partial not found test successfull");
+            $this->assertNotNull("Partial not found test successful");
         }
     }
 
     public function testGetHtml5Doctype() {
         $this->assertEquals("<!doctype html>", Template::getHtml5Doctype());
-        $this->assertEquals("<!doctype html>", get_html5_doctype());
+    }
+
+    public function testHtml5Doctype() {
+        ob_start();
+        Template::html5Doctype();
+        $this->assertEquals("<!doctype html>", ob_get_clean());
     }
 
     public function testGetYear() {
         $this->assertEquals(date("Y"), Template::getYear());
         $this->assertEquals(date("Y"), Template::getYear("Y"));
         $this->assertEquals(date("y"), Template::getYear("y"));
+    }
+
+    public function testYear() {
+        ob_start();
+        Template::year();
+        $this->assertEquals(date("Y"), ob_get_clean());
+
+        ob_start();
+        Template::year("Y");
+        $this->assertEquals(date("Y"), ob_get_clean());
+
+        ob_start();
+        Template::year("y");
+        $this->assertEquals(date("y"), ob_get_clean());
     }
 
     public function testGetOgHTMLPrefix() {
@@ -94,8 +132,16 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetBaseMetas() {
         $baseMetas = Template::getBaseMetas();
-        $this->assertTrue(str_contains('<meta http-equiv="content-type" content="text/html; charset=utf-8"/>', $baseMetas));
-        $this->assertTrue(str_contains('<meta charset="utf-8"/>', $baseMetas));
+        $this->assertTrue(
+                str_contains(
+                        '<meta http-equiv="content-type" content="text/html; charset=utf-8"/>',
+                        $baseMetas)
+        );
+        $this->assertTrue(
+                str_contains(
+                        '<meta charset="utf-8"/>', $baseMetas
+                )
+        );
     }
 
     public function testGetBaseMetasVideoWidth100Percent() {
@@ -135,30 +181,41 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue(str_contains($expected, $baseMetas));
     }
 
-    private function setMotto() {
-        Settings::set("motto", "Motto General");
-        Settings::set("motto_de", "Motto Deutsch");
-        Settings::set("motto_en", "Motto English");
-        Settings::delete("motto_fr");
+    private function setSiteSlogan() {
+        Settings::set("site_slogan", "SiteSlogan General");
+        Settings::set("site_slogan_de", "SiteSlogan Deutsch");
+        Settings::set("site_slogan_en", "SiteSlogan English");
+        Settings::delete("site_slogan_fr");
+    }
+
+    public function testGetSiteSloganWithoutLanguage() {
+        $_SESSION["language"] = "de";
+        $this->assertEquals("SiteSlogan Deutsch", Template::getSiteSlogan());
+
+        $_SESSION["language"] = "en";
+        $this->assertEquals("SiteSlogan English", Template::getSiteSlogan());
     }
 
     public function testGetMottoWithoutLanguage() {
         $_SESSION["language"] = "de";
-        $this->assertEquals("Motto Deutsch", Template::getMotto());
-
-        $_SESSION["language"] = "en";
-        $this->assertEquals("Motto English", Template::getMotto());
-        $this->cleanUp();
+        $this->assertEquals("SiteSlogan Deutsch", Template::getMotto());
     }
 
-    public function testGetMottoWithExistingLanguage() {
+    public function testMottoWithoutLanguage() {
+        $_SESSION["language"] = "de";
+
+        ob_start();
+        Template::motto();
+        $this->assertEquals("SiteSlogan Deutsch", ob_get_clean());
+    }
+
+    public function testGetSiteSloganWithExistingLanguage() {
         $_SESSION["language"] = "fr";
-        $this->assertEquals("Motto General", Template::getMotto());
-        $this->cleanUp();
+        $this->assertEquals("SiteSlogan General", Template::getSiteSlogan());
     }
 
-    public function testGetMottoWithNotExistingLanguage() {
-        $this->assertEquals("Motto General", Template::getMotto());
+    public function testGetSiteSloganWithNotExistingLanguage() {
+        $this->assertEquals("SiteSlogan General", Template::getSiteSlogan());
     }
 
     public function testGetjQueryScript() {
@@ -169,16 +226,44 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $this->assertContains($expected, Template::getjQueryScript());
     }
 
-    public function testGetContent() {
-        $_GET["seite"] = "lorem_ipsum";
+    public function testGetContentReturnsContent() {
+        $_GET["slug"] = "lorem_ipsum";
         $_SESSION["language"] = "de";
         $_GET["REQUEST_URI"] = "/lorem_ipsum.html";
 
         $content = Template::getContent();
 
-        $this->assertTrue(str_contains("Lorem ipsum dolor sit amet, " .
-                        "consetetur sadipscing elitr", $content));
-        $this->cleanUp();
+        $this->assertStringContainsString(
+                "Lorem ipsum dolor sit amet, " .
+                "consetetur sadipscing elitr", $content
+        );
+    }
+
+    public function testContentOutputsContent() {
+        $_GET["slug"] = "lorem_ipsum";
+        $_SESSION["language"] = "de";
+        $_GET["REQUEST_URI"] = "/lorem_ipsum.html";
+
+        ob_start();
+        Template::content();
+        $content = ob_get_clean();
+
+        $this->assertStringContainsString(
+                "Lorem ipsum dolor sit amet, consetetur sadipscing elitr",
+                $content
+        );
+    }
+
+    public function testGetContentReturnsNotFound() {
+        $_GET["slug"] = "gibts_nicht";
+        $_SESSION["language"] = "de";
+        $_GET["REQUEST_URI"] = "/gibts_nicht.html";
+
+        $content = Template::getContent();
+
+        $this->assertStringContainsString(
+                "This page doesn't exist.", $content
+        );
     }
 
     public function testGetLanguageSelection() {
@@ -192,14 +277,51 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         // TODO: Check if there are links in the returned html
     }
 
-    public function testGetPoweredBy() {
-        $this->assertTrue(str_contains("This page is powered by",
-                        Template::getPoweredByUliCMS()));
+    public function testGetLanguageSelectionWithDomain2LanguageMapping() {
+
+        $mappingLines = [
+            'example.de=>de',
+            'example.co.uk=>en'
+        ];
+
+        Settings::set("domain_to_language",
+                implode("\n", $mappingLines));
+        $html = Template::getLanguageSelection();
+        $this->assertTrue(str_contains("<ul class='language_selection'>",
+                        $html));
+
+        // By default there should be at least 2 languages
+        // german and english
+        $this->assertGreaterThanOrEqual(2, substr_count($html, "<li>"));
+
+        $this->assertStringContainsString("://example.de", $html);
+        $this->assertStringContainsString("://example.co.uk", $html);
+    }
+
+    public function testGetPoweredByUliCMS() {
+        $this->assertStringContainsString("This page is powered by",
+                Template::getPoweredByUliCMS());
+    }
+
+    public function testPoweredByUliCMS() {
+        ob_start();
+        Template::poweredByUliCMS();
+        $this->assertStringContainsString("This page is powered by",
+                ob_get_clean());
     }
 
     public function testGetHomepageOwner() {
         Settings::set("homepage_owner", "John Doe");
         $this->assertEquals("John Doe", Template::getHomepageOwner());
+    }
+
+    public function testHomepageOwner() {
+        Settings::set("homepage_owner", "John Doe");
+
+        ob_start();
+        Template::homepageOwner();
+
+        $this->assertEquals("John Doe", ob_get_clean());
     }
 
     public function testGetFooterText() {
@@ -209,6 +331,27 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
 
         $this->assertEquals("&copy; (C) {$year} by John Doe",
                 Template::getFooterText());
+    }
+
+    public function testFooter() {
+        ob_start();
+        Template::footer();
+        $html = ob_get_clean();
+        $this->assertStringContainsString("<script src", $html);
+        $this->assertStringContainsString(".js?time=", $html);
+    }
+
+    public function testFooterText() {
+        Settings::set("footer_text", "&copy; (C) [year] by John Doe");
+
+        $year = date("Y");
+
+        ob_start();
+        Template::footerText();
+        $this->assertEquals(
+                "&copy; (C) {$year} by John Doe",
+                ob_get_clean()
+        );
     }
 
     public function testGetContentWithPlaceholder() {
@@ -232,8 +375,9 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $page->group_id = $group_id;
         $page->save();
 
-        $_GET["seite"] = $page->slug;
         $_SESSION["language"] = $page->language;
+        $_GET["slug"] = $page->slug;
+
         $_GET["REQUEST_URI"] = "/{$page->slug}.html";
         $this->assertEquals("<p>Wir schreiben das Jahr " . date("Y") .
                 " des fliegenden Spaghettimonsters</p>",
@@ -242,9 +386,25 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetBodyClassesHome() {
         $_SESSION["language"] = "de";
-        $_GET["seite"] = get_frontpage();
-        $this->assertRegExp('/page-id-\d{1,19} home page(.+)/',
+        $_GET["slug"] = get_frontpage();
+        $this->assertRegExp('/page-id-\d+ home page(.+)/',
                 Template::getBodyClasses());
+
+        Vars::delete("id");
+        Vars::delete("active");
+    }
+
+    public function testBodyClassesHome() {
+        $_SESSION["language"] = "de";
+        $_GET["slug"] = get_frontpage();
+
+        ob_start();
+        Template::bodyClasses();
+
+        $this->assertRegExp(
+                '/page-id-\d+ home page(.+)/',
+                ob_get_clean()
+        );
 
         Vars::delete("id");
         Vars::delete("active");
@@ -253,7 +413,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
     public function testGetBodyClassesError403Active() {
         $page = new Page();
         $page->title = 'testgetbodyclasses';
-        $page->slug = 'testgetbodyclasses';
+        $page->slug = 'testpage-' . uniqid();
         $page->language = 'de';
         $page->content = "Hello World";
         $page->author_id = 1;
@@ -262,10 +422,10 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $page->active = 0;
         $page->save();
 
-        $_SESSION["language"] = "de";
-        $_GET["seite"] = "testgetbodyclasses";
+        $_SESSION["language"] = $page->language;
+        $_GET["slug"] = $page->slug;
 
-        $this->assertRegExp('/page-id-\d{1,19} error403 errorPage(.+)/',
+        $this->assertRegExp('/page-id-\d+ error403 errorPage(.+)/',
                 Template::getBodyClasses());
 
         $page->delete();
@@ -277,7 +437,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
     public function testGetBodyClassesError403CauseAccess() {
         $page = new Page();
         $page->title = 'testgetbodyclasses';
-        $page->slug = 'testgetbodyclasses';
+        $page->slug = 'testpage-' . uniqid();
         $page->language = 'de';
         $page->content = "Hello World";
         $page->author_id = 1;
@@ -286,10 +446,10 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $page->active = 1;
         $page->save();
 
-        $_SESSION["language"] = "de";
-        $_GET["seite"] = "testgetbodyclasses";
+        $_SESSION["language"] = $page->language;
+        $_GET["slug"] = $page->slug;
 
-        $this->assertRegExp('/page-id-\d{1,19} error403 errorPage(.+)/',
+        $this->assertRegExp('/page-id-\d+ error403 errorPage(.+)/',
                 Template::getBodyClasses());
 
         $page->delete();
@@ -300,7 +460,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetBodyClassesError404() {
         $_SESSION["language"] = "de";
-        $_GET["seite"] = "gibts-nicht";
+        $_GET["slug"] = "gibts-nicht";
         $this->assertRegExp('/error404 errorPage(.+)/',
                 Template::getBodyClasses());
 
@@ -338,11 +498,250 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetBodyClassesContainsModule() {
         $_SESSION["language"] = "de";
-        $_GET["seite"] = ModuleHelper::getFirstPageWithModule()->slug;
-        $this->assertRegExp('/page-id-\d{1,19} (.+)containsModule/',
+        $_GET["slug"] = ModuleHelper::getFirstPageWithModule()->slug;
+        $this->assertRegExp('/page-id-\d+ (.+)containsModule/',
                 Template::getBodyClasses());
         Vars::delete("id");
         Vars::delete("active");
+    }
+
+    public function testGetDocType() {
+        $this->assertEquals("<!doctype html>", Template::getDoctype());
+    }
+
+    public function testDocType() {
+        ob_start();
+        Template::doctype();
+        $this->assertEquals("<!doctype html>", ob_get_clean());
+    }
+
+    public function testOgHTMLPrefix() {
+        $_SESSION["language"] = "en";
+
+        ob_start();
+        Template::OgHTMLPrefix();
+        $this->assertEquals(
+                "<html prefix=\"og: http://ogp.me/ns#\" lang=\"en\">",
+                ob_get_clean()
+        );
+
+        $_SESSION["language"] = "de";
+        ob_start();
+        Template::OgHTMLPrefix();
+        $this->assertEquals(
+                "<html prefix=\"og: http://ogp.me/ns#\" lang=\"de\">",
+                ob_get_clean()
+        );
+        unset($_SESSION["language"]);
+    }
+
+    public function testGetBaseMetasForNonExistingPage() {
+        $_GET["slug"] = "gibts_echt_nicht";
+        $_SESSION["language"] = "de";
+
+        $this->assertNotEmpty(Template::getBaseMetas());
+    }
+
+    public function testEditButtonNotLoggedIn() {
+        ob_start();
+        Template::editButton();
+        $this->assertEmpty(ob_get_clean());
+    }
+
+    public function testGetHeadlineNotFound() {
+        $_GET["slug"] = "gibts_echt_nicht";
+        $_SESSION["language"] = "de";
+
+        $this->assertEquals(
+                "<h2>Page not found</h2>",
+                Template::getHeadline("<h2>%title%</h2>")
+        );
+    }
+    
+    public function testGetHeadlineReturnsNull(){
+        $manager = new UserManager();
+        $users = $manager->getAllUsers();
+        $user = $users[0];
+        $user_id = $user->getId();
+
+        $groups = Group::getAll();
+        $group = $groups[0];
+        $group_id = $group->getId();
+        
+        $page = new Page();
+        $page->title = "Test Page " . time();
+        $page->slug = "test-page-" . time();
+        $page->language = "de";
+        $page->menu = "not_in_menu";
+        $page->content = "<p>Wir schreiben das Jahr [year] des fliegenden " .
+                "Spaghettimonsters</p>";
+        $page->author_id = $user_id;
+        $page->group_id = $group_id;
+        $page->show_headline = false;
+        $page->save();
+        
+        $_GET["slug"] = $page->slug;
+        $_SESSION["language"] =  $page->language;
+        
+        $this->assertNull(Template::getHeadline());
+    }
+    
+     
+    public function testGetHeadlineReturnsTitle(){
+        $manager = new UserManager();
+        $users = $manager->getAllUsers();
+        $user = $users[0];
+        $user_id = $user->getId();
+
+        $groups = Group::getAll();
+        $group = $groups[0];
+        $group_id = $group->getId();
+        
+        $page = new Page();
+        $page->title = "Titel";
+        $page->slug = "test-page-" . time();
+        $page->language = "de";
+        $page->menu = "not_in_menu";
+        $page->content = "<p>Wir schreiben das Jahr [year] des fliegenden " .
+                "Spaghettimonsters</p>";
+        $page->author_id = $user_id;
+        $page->group_id = $group_id;
+        $page->save();
+        
+        $_GET["slug"] = $page->slug;
+        $_SESSION["language"] =  $page->language;
+        
+        $this->assertEquals("<h1>Titel</h1>", Template::getHeadline());
+    }
+    
+     public function testGetHeadlineReturnsHeadline(){
+        $manager = new UserManager();
+        $users = $manager->getAllUsers();
+        $user = $users[0];
+        $user_id = $user->getId();
+
+        $groups = Group::getAll();
+        $group = $groups[0];
+        $group_id = $group->getId();
+        
+        $page = new Page();
+        $page->title = "Titel";
+        $page->alternate_title = "Alternative Überschrift";
+        $page->slug = "test-page-" . time();
+        $page->language = "de";
+        $page->menu = "not_in_menu";
+        $page->content = "<p>Wir schreiben das Jahr [year] des fliegenden " .
+                "Spaghettimonsters</p>";
+        $page->author_id = $user_id;
+        $page->group_id = $group_id;
+        $page->save();
+        
+        $_GET["slug"] = $page->slug;
+        $_SESSION["language"] =  $page->language;
+        
+        $this->assertEquals("<h1>Alternative Überschrift</h1>",
+                Template::getHeadline());
+    }
+    
+    
+    public function testHeadlinePrintsString() {
+        $pages = ContentFactory::getAllRegular();
+
+        $first = $pages[0];
+
+        $_GET["slug"] = $first->slug;
+        $_SESSION["language"] = $first->language;
+
+        ob_start();
+        Template::headline("<h3>%title%</h3>");
+
+        $this->assertEquals("<h3>{$first->title}</h3>", ob_get_clean());
+    }
+    
+    
+
+    public function testComments() {
+        $_GET["slug"] = "gibts_echt_nicht";
+        $_SESSION["language"] = "de";
+
+        ob_start();
+        Template::comments();
+        $this->assertEmpty(ob_get_clean());
+    }
+
+    private function getPageWithCommentsEnabled() {
+        $manager = new UserManager();
+        $users = $manager->getAllUsers();
+        $user = $users[0];
+        $user_id = $user->getId();
+
+        $page = new Page();
+        $page->title = "Test Page " . time();
+        $page->slug = "test-page-" . time();
+        $page->language = "de";
+        $page->menu = "not_in_menu";
+        $page->content = "<p>Wir schreiben das Jahr [year] des fliegenden " .
+                "Spaghettimonsters</p>";
+
+        $user_id = $user->getId();
+        $groups = Group::getAll();
+        $group = $groups[0];
+        $group_id = $group->getId();
+
+        $page->author_id = $user_id;
+        $page->group_id = $group_id;
+        $page->comments_enabled = 1;
+
+        $page->save();
+
+        return $page;
+    }
+
+    public function testGetCommentsReturnsHtml() {
+        $page = $this->getPageWithCommentsEnabled();
+
+        $_GET["slug"] = $page->slug;
+        $_SESSION["language"] = $page->language;
+
+        $commentsController = ControllerRegistry::get("CommentsController");
+        $commentsController->beforeHtml();
+
+        $html = Template::getComments();
+        $this->assertTrue(stringContainsHtml($html));
+
+        $this->assertStringContainsString("Send comment", $html);
+        $this->assertStringContainsString("Your E-Mail Address", $html);
+    }
+    
+    public function testGetCommentsReturnsEmptyString(){
+        $_GET["slug"] = "gibts_echt_nicht";
+        $_SESSION["language"] = "de";
+        
+        $this->assertEmpty(Template::getComments());
+    }
+
+    public function testExecuteDefaultOrOwnTemplateOwnExists() {
+        $this->assertNotEmpty(Template::executeDefaultOrOwnTemplate("bottom.php"));
+    }
+
+    public function testExecuteDefaultOrOwnTemplateWithNonExistingFile() {
+        $this->expectException(FileNotFoundException::class);
+        Template::executeDefaultOrOwnTemplate("gibts_echt_nicht");
+    }
+
+    public function testExecuteModuleTemplateWithNonExisting() {
+        $this->expectException(FileNotFoundException::class);
+        Template::executeModuleTemplate("fortune2",
+                "gibts_echt_nicht");
+    }
+
+    public function testEscape() {
+        $input = "Hello <script>alert('xss')";
+        $expected = "Hello &lt;script&gt;alert(&#039;xss&#039;)";
+
+        ob_start();
+        Template::escape($input);
+        $this->assertEquals($expected, ob_get_clean());
     }
 
 }

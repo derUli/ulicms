@@ -50,7 +50,8 @@ class Category {
     }
 
     protected function insert(): void {
-        $sql = "INSERT INTO `{prefix}categories` (name, description) values (?, ?)";
+        $sql = "INSERT INTO `{prefix}categories` (name, description) "
+                . "values (?, ?)";
         $args = array(
             $this->getName(),
             $this->getDescription()
@@ -60,7 +61,8 @@ class Category {
     }
 
     protected function update(): void {
-        $sql = "update `{prefix}categories` set name = ?, description = ? where id = ?";
+        $sql = "update `{prefix}categories` set name = ?, "
+                . "description = ? where id = ?";
         $args = array(
             $this->getName(),
             $this->getDescription(),

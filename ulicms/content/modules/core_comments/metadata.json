@@ -19,5 +19,8 @@
         "CommentsController::getCommentText": "comments_manage",
         "CommentsController::filterComments": "comments_manage",
         "CommentsController::doAction": "comments_manage"
-    }
+    },
+	"dependencies": [
+		"core_content"
+	]
 }

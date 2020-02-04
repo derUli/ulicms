@@ -34,7 +34,8 @@ class Audio_Page extends Page {
             return $this->create();
         }
         parent::update();
-        $sql = "update {prefix}content set audio = ?, text_position = ? where id = ?";
+        $sql = "update {prefix}content set audio = ?, "
+                . "text_position = ? where id = ?";
         $args = array(
             $this->audio,
             $this->text_position,

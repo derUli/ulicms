@@ -1,33 +1,37 @@
 <?php
 
+declare(strict_types=1);
+
 use UliCMS\Models\Content\Comment;
-use UliCMS\Exceptions\FileNotFoundException;
+use UliCMS\Exceptions\DatasetNotFoundException;
 use UliCMS\HTML as HTML;
 use UliCMS\Exceptions\NotImplementedException;
 use UliCMS\Constants\CommentStatus;
 use UliCMS\Utils\CacheUtil;
+use zz\Html\HTMLMinify;
 
 class CommentsController extends MainClass {
 
-    public function beforeHtml() {
+    public function beforeHtml(): void {
         Vars::set("comments_enabled", false);
 
         if (is_200()) {
             $page = ContentFactory::getCurrentPage();
 
-            // currently it's not supported to cache pages where comments are enabled
-            // This is a limitation of UliCMS caching system and will get fixed in a future
-            // release of UliCMS
+            // currently it's not supported to cache pages
+            // where comments are enabled
+            // This is a limitation of UliCMS caching system and will get fixed
+            // in a future release of UliCMS
             if ($page->areCommentsEnabled()) {
                 Flags::setNoCache(true);
                 Vars::set("comments_enabled", true);
             }
-        Vars::set("content_id", $page->id);
+            Vars::set("content_id", $page->id);
         }
     }
 
     // This method handles posted comments
-    public function postComment() {
+    public function postComment(): void {
 
         // check if DSGVO checkbox is checked
         $checkbox = new PrivacyCheckbox(getCurrentLanguage(true));
@@ -39,7 +43,7 @@ class CommentsController extends MainClass {
         $content = null;
         try {
             $content = ContentFactory::getByID($content_id);
-        } catch (FileNotFoundException $e) {
+        } catch (DatasetNotFoundException $e) {
             ExceptionResult(get_translation("no_such_content"));
         }
 
@@ -54,8 +58,10 @@ class CommentsController extends MainClass {
         $comment->setIp(Request::getIp());
         $comment->setUserAgent(get_useragent());
 
-        // if comments must be approved, set the comment status to pending, else to published
-        $status = Settings::get("comments_must_be_approved") ? CommentStatus::PENDING : CommentStatus::PUBLISHED;
+        // if comments must be approved, set the comment status to pending,
+        // else to published
+        $status = Settings::get("comments_must_be_approved") ?
+                CommentStatus::PENDING : CommentStatus::PUBLISHED;
 
         // show error if not all required fields are filled
         if (!$comment->getAuthorName() or ! $comment->getText()) {
@@ -69,7 +75,8 @@ class CommentsController extends MainClass {
 
         $comment->setStatus($status);
 
-        // if ip login is disabled (which is a legal must in countries of the european union)
+        // if ip login is disabled (which is a legal must in countries
+        // of the european union)
         // unset the ip field
         if (!Settings::get("log_ip")) {
             $comment->setIp(null);
@@ -82,28 +89,44 @@ class CommentsController extends MainClass {
         CacheUtil::clearPageCache();
 
         // Redirect to the page and show a message to the user
-        Response::redirect(ModuleHelper::getFullPageURLByID($content_id, "comment_published=" . $status));
+        Response::redirect(
+                ModuleHelper::getFullPageURLByID(
+                        $content_id,
+                        "comment_published=" . $status
+                )
+        );
     }
 
-    public function getCommentText() {
+    public function getCommentText(): void {
         $id = Request::getVar("id");
         try {
             $comment = new Comment($id);
             $comment->setRead(true);
             $comment->save();
-            HtmlResult(StringHelper::makeLinksClickable(HTML\text(trim($comment->getText()))));
-        } catch (FileNotFoundException $e) {
+            HtmlResult(
+                    StringHelper::makeLinksClickable(
+                            HTML\text(trim($comment->getText()))
+                    ),
+                    HttpStatusCode::OK,
+                    HTMLMinify::OPTIMIZATION_ADVANCED
+            );
+        } catch (DatasetNotFoundException $e) {
             HTMLResult(get_translation("not_found"), 404);
         }
     }
 
     // this returns the default status for new comments
-    public function getDefaultStatus() {
-        $defaultStatus = Settings::get("comments_must_be_approved") ? CommentStatus::PENDING : CommentStatus::PUBLISHED;
+    public function getDefaultStatus(): string {
+        $defaultStatus = Settings::get("comments_must_be_approved") ?
+                CommentStatus::PENDING : CommentStatus::PUBLISHED;
         return $defaultStatus;
     }
 
-    public function getResults($status = null, $content_id = null, $limit = 0) {
+    public function getResults(
+            ?string $status = null,
+            ?int $content_id = null,
+            ?int $limit = 0
+    ): array {
         $results = [];
         if ($status) {
             $results = Comment::getAllByStatus($status, $content_id);
@@ -117,7 +140,7 @@ class CommentsController extends MainClass {
     }
 
     // filter and show the comments to the comment moderation
-    public function filterComments() {
+    public function filterComments(): void {
         // get arguments from the URL
         $status = Request::getVar("status", null, "str");
         $content_id = Request::getVar("content_id", null, "int");
@@ -131,7 +154,7 @@ class CommentsController extends MainClass {
     }
 
     // get the configured default limit or if is set the default value
-    public function getDefaultLimit() {
+    public function getDefaultLimit(): int {
         $limit = 100;
         if (Settings::get("comments_default_limit")) {
             $limit = intval(Settings::get("comments_default_limit"));
@@ -139,7 +162,7 @@ class CommentsController extends MainClass {
         return $limit;
     }
 
-    public function doAction() {
+    public function doAction(): void {
         // post arguments
         $comments = Request::getVar("comments", []);
         $action = Request::getVar("action", null, "str");
@@ -171,7 +194,9 @@ class CommentsController extends MainClass {
                         $comment->delete();
                         break;
                     default:
-                        throw new NotImplementedException("comment action not implemented");
+                        throw new NotImplementedException(
+                                "comment action not implemented"
+                        );
                 }
 
 
@@ -186,7 +211,8 @@ class CommentsController extends MainClass {
         }
 
         // referrer is from a hidden field on the form
-        // Append jumpto=comments to the url to jump to the comment table after redirect
+        // Append jumpto=comments to the url to jump to the comment
+        // table after redirect
         // It's inpossible to append an anchor to the url on a http redirect
         // a javascript in util.js performs the jump to the anchor
         $referrer = Request::getVar("referrer");

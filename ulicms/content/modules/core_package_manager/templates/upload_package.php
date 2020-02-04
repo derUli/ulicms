@@ -23,7 +23,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                     $pkg = new PackageManager();
                     if ($pkg->installPackage($file_in_tmp, false)) {
                         @unlink($file_in_tmp);
-                        echo "<p style='color:green'>" . get_translation("PACKAGE_SUCCESSFULL_UPLOADED", array(
+                        echo "<p style='color:green'>" . get_translation("PACKAGE_SUCCESSFULLY_UPLOADED", array(
                             "%file%" => $_FILES['file']['name']
                         )) . "</p>";
                     } else {

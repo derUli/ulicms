@@ -16,10 +16,14 @@ class Logger {
             @mkdir($path, 0777, true);
         }
         if (is_dir($this->path)) {
-            $this->logger = new Katzgrau\KLogger\Logger($this->path, Psr\Log\LogLevel::DEBUG, array(
+            $this->logger = new Katzgrau\KLogger\Logger(
+                    $this->path,
+                    Psr\Log\LogLevel::DEBUG,
+                    [
                 "extension" => "log",
                 "prefix" => "{$environment}_"
-            ));
+                    ]
+            );
             $cfg = new CMSConfig();
             // Option fix_log_permissions
             if (is_true($cfg->fix_log_permissions)) {

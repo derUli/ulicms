@@ -1,6 +1,11 @@
 <?php
 
+use UliCMS\Models\Content\Language;
+
 class ApiTest extends \PHPUnit\Framework\TestCase {
+
+    private $initialUser;
+    private $additionalMenus;
 
     public function setUp() {
         $this->cleanUp();
@@ -8,16 +13,48 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
 
         $moduleManager = new ModuleManager();
         $moduleManager->sync();
+
+        $userQuery = Database::query("select id, html_editor "
+                        . "from {prefix}users order by id asc limit 1", true);
+
+        $this->initialUser = Database::fetchObject($userQuery);
+        $this->additionalMenus = Settings::get("additional_menus");
+
+        // call this method, which is an alias for CacheUtil::clearCache()
+        // to have it covered
+        clearCache();
+
+        $avatarsDirectory = Path::resolve("ULICMS_ROOT/content/avatars/");
+        if (!is_dir($avatarsDirectory)) {
+            mkdir($avatarsDirectory, 0777, true);
+        }
     }
 
     public function tearDown() {
+        chdir(Path::resolve("ULICMS_ROOT"));
+
+        Flags::setNoCache(false);
 
         Database::query("delete from {prefix}content where title like 'Unit Test%'", true);
         $this->cleanUp();
         Database::query("delete from {prefix}users where username like 'testuser-%'", true);
+        @session_destroy();
+
+        $user = new User(
+                intval($this->initialUser->id)
+        );
+        $user->setHtmlEditor($this->initialUser->html_editor);
+        $user->save();
+        Settings::set("additional_menus", $this->additionalMenus);
+
+        unset($_SERVER["SERVER_PROTOCOL"]);
+        unset($_SERVER['HTTP_HOST']);
+        unset($_SERVER['SERVER_PORT']);
+        unset($_SERVER['HTTPS']);
+        unset($_SERVER['REQUEST_URI']);
+        unset($_GET["slug"]);
         unset($_SESSION["login_id"]);
         unset($_SESSION["language"]);
-        @session_destroy();
     }
 
     public function cleanUp() {
@@ -25,8 +62,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         Settings::set("maintenance_mode", "0");
         chdir(Path::resolve("ULICMS_ROOT"));
         set_format("html");
-        unset($_SESSION["csrf_token"]);
-        unset($_REQUEST["csrf_token"]);
     }
 
     public function testRemovePrefix() {
@@ -72,6 +107,17 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull(getModuleMeta("not_a_module"));
         $this->assertNull(getModuleMeta("not_a_module", "version"));
         $this->assertNull(getModuleMeta("core_home", "not_here"));
+
+        $meta = getModuleMeta("Mobile_Detect");
+        $this->assertIsArray($meta);
+        $this->assertEquals("2.8.34", $meta["version"]);
+        $this->assertEquals(false, $meta["embed"]);
+    }
+
+    public function testGetThemeMeta() {
+        $meta = getThemeMeta("impro17");
+        $this->assertIsArray($meta);
+        $this->assertEquals("2.1.3", $meta["version"]);
     }
 
     public function testBool2YesNo() {
@@ -90,22 +136,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("text/plain", get_mime(Path::resolve("ULICMS_ROOT/.htaccess")));
         $this->assertEquals("image/gif", get_mime(Path::resolve("ULICMS_ROOT/admin/gfx/edit.gif")));
         $this->assertEquals("image/png", get_mime(Path::resolve("ULICMS_ROOT/admin/gfx/edit.png")));
-    }
-
-    public function testVarIsType() {
-        $this->assertTrue(var_is_type(123, "numeric", true));
-        $this->assertTrue(var_is_type(null, "numeric", false));
-        $this->assertFalse(var_is_type(null, "numeric", true));
-        $this->assertFalse(var_is_type("", "numeric", true));
-        $this->assertTrue(var_is_type("", "numeric", false));
-    }
-
-    public function testStrContainsTrue() {
-        $this->assertTrue(str_contains("Ananas", "Ich esse gerne Ananas."));
-    }
-
-    public function testStrContainsFalse() {
-        $this->assertFalse(str_contains("Tomaten", "Ich esse gerne Ananas."));
     }
 
     public function testGetActionIsSet() {
@@ -134,30 +164,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("node_modules/jquery/dist/jquery.min.js", get_jquery_url());
     }
 
-    public function testCheckCsrfTokenNoToken() {
-        unset($_SESSION["csrf_token"]);
-        $this->assertFalse(check_csrf_token());
-    }
-
-    public function testCheckCsrfTokenValid() {
-        $token = get_csrf_token();
-        $this->assertNotNull($token);
-
-        $_REQUEST["csrf_token"] = $token;
-
-        $this->assertTrue(check_csrf_token());
-
-        unset($_SESSION["csrf_token"]);
-        unset($_REQUEST["csrf_token"]);
-    }
-
-    public function testCheckCsrfTokenInvalid() {
-        $token = get_csrf_token();
-        $_REQUEST["csrf_token"] = "thisisnotthetoken";
-        $this->assertFalse(check_csrf_token());
-        unset($_SESSION["csrf_token"]);
-    }
-
     public function testPreparePlainTextforHTMLOutput() {
         $input = "This is\na\n<Textfile>.";
         $expected = "This is<br />\na<br />\n&lt;Textfile&gt;.";
@@ -175,7 +181,10 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testSplitAndTrim() {
-        $input = "Max; Muster; max@muster.de ; Musterstadt";
+        $input = "Max;
+        Muster;
+        max@muster.de;
+        Musterstadt";
         $result = splitAndTrim($input);
         $this->assertEquals("Max", $result[0]);
         $this->assertEquals("Muster", $result[1]);
@@ -190,50 +199,36 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetAllModules() {
+        Vars::delete("allModules");
+        $modules = getAllModules();
         $modules = getAllModules();
         $this->assertContains("core_content", $modules);
         $this->assertContains("slicknav", $modules);
         $this->assertContains("bootstrap", $modules);
     }
 
-    public function testGetPageSlugByID() {
-        $allPages = ContentFactory::getAll();
-        $first = $allPages[0];
-        $this->assertEquals($first->slug, getPageSlugByID($first->id));
-        $this->assertNull(getPageSlugByID(PHP_INT_MAX));
-    }
-
-    public function testGetPageIDBySlug() {
-        $allPages = ContentFactory::getAll();
-        $first = $allPages[0];
-        $this->assertEquals($first->id, getPageIDBySlug($first->slug));
-        $this->assertNull(getPageIDBySlug("ich-existiere-wirklich-nicht"));
-    }
-
-    public function testGetPageTitleByID() {
-        $allPages = ContentFactory::getAll();
-        $first = $allPages[0];
-        $this->assertEquals($first->title, getPageTitleByID($first->id));
-        $this->assertEquals("[" . get_translation("none") . "]", getPageTitleByID(PHP_INT_MAX));
-    }
-
     public function testGetPreferredLanguage() {
-        $acceptLanguageHeader1 = "Accept-Language: da, en-gb;q=0.8, en;q=0.7, de;q=0.5";
+        $acceptLanguageHeader1 = "Accept-Language: da, en - gb;
+        q = 0.8, en;
+        q = 0.7, de;
+        q = 0.5";
         $this->assertEquals("en", get_prefered_language(array("de", "en"), $acceptLanguageHeader1));
 
-        $acceptLanguageHeader2 = "Accept-Language: da, en-gb;q=0.8, en;q=0.7, de;q=0.9";
+        $acceptLanguageHeader2 = "Accept-Language: da, en - gb;
+        q = 0.8, en;
+        q = 0.7, de;
+        q = 0.9";
         $this->assertEquals("de", get_prefered_language(array("de", "en"), $acceptLanguageHeader2));
     }
 
-    public function testGetHtmlEditorReturnsNull() {
+    public function testGetHtmlEditorNotLoggedInReturnsCkeditor() {
         if (session_id()) {
             @session_destroy();
         }
-        $this->assertNull(get_html_editor());
+        $this->assertEquals("ckeditor", get_html_editor());
     }
 
     public function testGetHtmlEditorReturnsCKEditor() {
-
         $user = new User();
         $user->setUsername("testuser-1");
         $user->setPassword(rand_string(23));
@@ -263,64 +258,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         @session_destroy();
     }
 
-    public function testIsBlankReturnsTrue() {
-        $this->assertTrue(is_blank(""));
-        $this->assertTrue(is_blank("  "));
-        $this->assertTrue(is_blank(false));
-        $this->assertTrue(is_blank(null));
-        $this->assertTrue(is_blank(0));
-        $this->assertTrue(is_blank([]));
-        $this->assertTrue(is_blank("0"));
-        $this->assertTrue(is_blank($notDefined));
-    }
-
-    public function testIsBlankReturnsFalse() {
-        $this->assertFalse(is_blank(" hallo welt "));
-        $this->assertFalse(is_blank(13));
-        $this->assertFalse(is_blank(true));
-        $this->assertFalse(is_blank(array("foo", "bar")));
-        $this->assertFalse(is_blank("13"));
-    }
-
-    public function testIsPresentReturnsTrue() {
-        $this->assertTrue(is_present(" hallo welt "));
-        $this->assertTrue(is_present(13));
-        $this->assertTrue(is_present(true));
-        $this->assertTrue(is_present(array("foo", "bar")));
-        $this->assertTrue(is_present("13"));
-    }
-
-    public function testIsPresentReturnsFalse() {
-        $this->assertFalse(is_present(""));
-        $this->assertFalse(is_present("  "));
-        $this->assertFalse(is_present(false));
-        $this->assertFalse(is_present(null));
-        $this->assertFalse(is_present(0));
-        $this->assertFalse(is_present([]));
-        $this->assertFalse(is_present("0"));
-        $this->assertFalse(is_present($undefinedVar));
-    }
-
-    public function testStartsWithReturnsTrue() {
-        $this->assertTrue(startsWith("hello world", "hello"));
-        $this->assertTrue(startsWith("hello world", "Hello", false));
-    }
-
-    public function testStartsWithReturnsFalse() {
-        $this->assertFalse(startsWith("hello world", "bye"));
-        $this->assertFalse(startsWith("hello world", "Hello"));
-    }
-
-    public function testEndsWithReturnsTrue() {
-        $this->assertTrue(endsWith("hello world", "world"));
-        $this->assertTrue(endsWith("hello world", "World", false));
-    }
-
-    public function testEndsWithReturnsFalse() {
-        $this->assertFalse(endsWith("hello world", "you"));
-        $this->assertFalse(endsWith("hello world", "World"));
-    }
-
     public function testIdefine() {
         $this->assertFalse(defined("test_hello"));
 
@@ -329,39 +266,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
 
         $this->assertFalse(idefine("TEST_HELLO", "Uli"));
         $this->assertEquals("World", TEST_HELLO);
-    }
-
-    public function testFasterInArrayReturnsTrue() {
-        $array = array("hello", "world", 123);
-        $this->assertTrue(faster_in_array("world", $array));
-        $this->assertTrue(faster_in_array(123, $array));
-    }
-
-    public function testFasterInArrayReturnsFalse() {
-        $array = array("hello", "world", 123);
-        $this->assertFalse(faster_in_array("germany", $array));
-        $this->assertFalse(faster_in_array(789, $array));
-    }
-
-    public function testGetAllSlugs() {
-        $slugs = getAllSlugs();
-        $this->assertTrue(in_array("willkommen", $slugs));
-        $this->assertTrue(in_array("welcome", $slugs));
-        $this->assertTrue(in_array("lorem_ipsum", $slugs));
-    }
-
-    public function testGetAllSlugsByLanguage() {
-        $germanSlugs = getAllSlugs("de");
-        $this->assertTrue(in_array("willkommen", $germanSlugs));
-        $this->assertFalse(in_array("welcome", $germanSlugs));
-        $this->assertTrue(in_array("glueckskeks", $germanSlugs));
-        $this->assertFalse(in_array("fortune", $germanSlugs));
-
-        $englishSlugs = getAllSlugs("en");
-        $this->assertTrue(in_array("welcome", $englishSlugs));
-        $this->assertFalse(in_array("willkommen", $englishSlugs));
-        $this->assertTrue(in_array("fortune", $englishSlugs));
-        $this->assertFalse(in_array("glueckskeks", $englishSlugs));
     }
 
     public function testIsAdminReturnsFalse() {
@@ -400,7 +304,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testCmsVersion() {
-        $this->assertTrue(version_compare(cms_version(), "2019.2",
+        $this->assertTrue(version_compare(cms_version(), "2019.4",
                         ">"));
     }
 
@@ -417,7 +321,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(isModuleInstalled("not_a_module"));
     }
 
-    public function testFuncEnabled() {
+    public function testFuncEnabledReturnsTrue() {
         $enabled = func_enabled("mysqli_connect");
         $this->assertEquals("mysqli_connect() is allow to use", $enabled["m"]);
         $this->assertEquals(1, $enabled["s"]);
@@ -427,15 +331,10 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
 
         $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
         $_SERVER["SERVER_PORT"] = "80";
-        $_SERVER['SERVER_NAME'] = "example.org";
+        $_SERVER['HTTP_HOST'] = "example.org";
         $_SERVER['REQUEST_URI'] = "/foobar/foo.html";
 
         $this->assertEquals("http://example.org/foobar", getBaseFolderURL());
-
-        unset($_SERVER["SERVER_PROTOCOL"]);
-        unset($_SERVER['SERVER_NAME']);
-        unset($_SERVER['SERVER_PORT']);
-        unset($_SERVER['REQUEST_URI']);
     }
 
     public function testGetBaseFolderUrlWithFilenameInUrlAndHttps() {
@@ -443,13 +342,13 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
         $_SERVER["SERVER_PORT"] = "443";
         $_SERVER["HTTPS"] = "on";
-        $_SERVER['SERVER_NAME'] = "example.org";
+        $_SERVER['HTTP_HOST'] = "example.org";
         $_SERVER['REQUEST_URI'] = "/foobar/foo.html";
 
         $this->assertEquals("https://example.org/foobar", getBaseFolderURL());
 
         unset($_SERVER["SERVER_PROTOCOL"]);
-        unset($_SERVER['SERVER_NAME']);
+        unset($_SERVER['HTTP_HOST']);
         unset($_SERVER['SERVER_PORT']);
         unset($_SERVER['REQUEST_URI']);
         unset($_SERVER['HTTPS']);
@@ -460,13 +359,13 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
         $_SERVER["SERVER_PORT"] = "8080";
         $_SERVER["HTTPS"] = "on";
-        $_SERVER['SERVER_NAME'] = "example.org";
+        $_SERVER['HTTP_HOST'] = "example.org";
         $_SERVER['REQUEST_URI'] = "/foobar/foo.html";
 
         $this->assertEquals("https://example.org:8080/foobar", getBaseFolderURL());
 
         unset($_SERVER["SERVER_PROTOCOL"]);
-        unset($_SERVER['SERVER_NAME']);
+        unset($_SERVER['HTTP_HOST']);
         unset($_SERVER['SERVER_PORT']);
         unset($_SERVER['REQUEST_URI']);
         unset($_SERVER['HTTPS']);
@@ -476,13 +375,13 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
 
         $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
         $_SERVER["SERVER_PORT"] = "80";
-        $_SERVER['SERVER_NAME'] = "example.org";
+        $_SERVER['HTTP_HOST'] = "example.org";
         $_SERVER['REQUEST_URI'] = "/foobar/";
 
         $this->assertEquals("http://example.org/foobar", getBaseFolderURL());
 
         unset($_SERVER["SERVER_PROTOCOL"]);
-        unset($_SERVER['SERVER_NAME']);
+        unset($_SERVER['HTTP_HOST']);
         unset($_SERVER['SERVER_PORT']);
         unset($_SERVER['REQUEST_URI']);
     }
@@ -491,14 +390,14 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
         $_SERVER["SERVER_PORT"] = "8080";
         $_SERVER["HTTPS"] = "on";
-        $_SERVER['SERVER_NAME'] = "example.org";
+        $_SERVER['HTTP_HOST'] = "example.org";
         $_SERVER['REQUEST_URI'] = "/foobar/foo.html?hello=world";
 
 
         $this->assertEquals("https://example.org:8080/foobar/foo.html?hello=world", getCurrentURL());
 
         unset($_SERVER["SERVER_PROTOCOL"]);
-        unset($_SERVER['SERVER_NAME']);
+        unset($_SERVER['HTTP_HOST']);
         unset($_SERVER['SERVER_PORT']);
         unset($_SERVER['REQUEST_URI']);
         unset($_SERVER['HTTPS']);
@@ -510,6 +409,39 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetGravatarReturnsUrl() {
+        $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
+        $_SERVER["SERVER_PORT"] = "8080";
+        $_SERVER["HTTPS"] = "on";
+        $_SERVER['HTTP_HOST'] = "example.org";
+        $_SERVER['REQUEST_URI'] = "/foobar/foo.html?hello=world";
+
+        $user = new User();
+        $user->setUsername("testuser-1");
+        $user->setEmail('foo@bar.de');
+        $user->setPassword(rand_string(23));
+        $user->setLastname("Beutlin");
+        $user->setFirstname("Bilbo");
+        $user->setHTMLEditor("ckeditor");
+        $user->save();
+
+        $imageFile = Path::resolve(
+                        "ULICMS_ROOT/admin/gfx/apple-touch-icon-152x152.png"
+        );
+        $user->processAvatar($imageFile);
+
+        $this->assertEquals("content/avatars/user-" . $user->getId() . ".png",
+                get_gravatar("foo@bar.de"));
+
+        $user->delete();
+
+        unset($_SERVER["SERVER_PROTOCOL"]);
+        unset($_SERVER['HTTP_HOST']);
+        unset($_SERVER['SERVER_PORT']);
+        unset($_SERVER['REQUEST_URI']);
+        unset($_SERVER['HTTPS']);
+    }
+
+    public function testGetGravatarReturnsPlaceholderUrl() {
         $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
         $_SERVER["SERVER_PORT"] = "8080";
         $_SERVER["HTTPS"] = "on";
@@ -536,6 +468,27 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(
                 '<img src="https://example.org/foobar/admin/gfx/no_avatar.png" />',
                 get_gravatar("foo@bar.de", 80, 'mm', 'g', true)
+        );
+        unset($_SERVER["SERVER_PROTOCOL"]);
+        unset($_SERVER['HTTP_HOST']);
+        unset($_SERVER['SERVER_PORT']);
+        unset($_SERVER['REQUEST_URI']);
+        unset($_SERVER['HTTPS']);
+    }
+
+    public function testGetGravatarWithHtmlAttributesReturnsImage() {
+        $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
+        $_SERVER["SERVER_PORT"] = "8080";
+        $_SERVER["HTTPS"] = "on";
+        $_SERVER['HTTP_HOST'] = "example.org";
+        $_SERVER['REQUEST_URI'] = "/foobar/foo.html?hello=world";
+
+        $this->assertEquals(
+                '<img src="https://example.org/foobar/admin/gfx/no_avatar.png" '
+                . 'class="gravatar" />',
+                get_gravatar("foo@bar.de", 80, 'mm', 'g', true,
+                        ["class" => "gravatar"]
+                )
         );
         unset($_SERVER["SERVER_PROTOCOL"]);
         unset($_SERVER['HTTP_HOST']);
@@ -634,6 +587,25 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertStringMatchesFormat('Foo %d Bar [module=fortune2]', replaceOtherShortCodes('Foo [year] Bar [module=fortune2]'));
     }
 
+    public function testContainsModuleWithoutArgumentsReturnsTrue() {
+
+        $page = new Module_Page();
+        $page->title = "Unit Test " . uniqid();
+        $page->slug = "unit-test-" . uniqid();
+        $page->menu = "none";
+        $page->language = "de";
+        $page->article_date = 1413821696;
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->module = "fortune2";
+        $page->content = "Hello World";
+        $page->save();
+
+        $_SESSION["language"] = "de";
+        $_GET["slug"] = $page->slug;
+        $this->assertTrue(containsModule());
+    }
+
     public function testContainsModuleReturnsTrue() {
         $page = new Module_Page();
         $page->title = "Unit Test " . uniqid();
@@ -718,10 +690,10 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testBuildSEOUrlWithoutAnythingNoPageSpecified() {
-        unset($_GET["seite"]);
+        unset($_GET["slug"]);
         unset($_GET["html"]);
 
-        $this->assertEquals(get_frontpage() . ".html", buildSEOUrl());
+        $this->assertEquals("./", buildSEOUrl());
     }
 
     public function testBuildSEOUrlWithoutAnything() {
@@ -733,16 +705,344 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("foobar.html", buildSEOUrl("foobar"));
     }
 
+    public function testBuildSEOUrlWithPageFromAdminDir() {
+        chdir(Path::resolve("ULICMS_ROOT/admin"));
+        $this->assertEquals("../foobar.html", buildSEOUrl("foobar"));
+    }
+
     public function testBuildSEOUrlWithPageAndRedirection() {
         $this->assertEquals("#", buildSEOUrl("foobar", "#"));
 
-        $this->assertEquals("https://google.com", buildSEOUrl("foobar",
-                        "https://google.com"));
+        $this->assertEquals("https://google.com", buildSEOUrl("foobar", "https://google.com"));
     }
 
-    public function testBuildSEOUrlWithPageAnd() {
+    public function testBuildSEOUrlWithPageAndType() {
         $this->assertEquals("foobar.txt",
                 buildSEOUrl("foobar", null, "txt"));
+    }
+
+    public function testGetAllLanguagesFiltered() {
+        $language = new Language();
+        $language->loadByLanguageCode("en");
+
+        $group = new Group();
+        $group->setName("Testgroup");
+        $group->setLanguages(
+                [
+                    $language
+                ]
+        );
+        $group->save();
+
+        $user = new User();
+        $user->setUsername("testuser-1");
+        $user->setPassword(rand_string(23));
+        $user->setLastname("Beutlin");
+        $user->setFirstname("Bilbo");
+        $user->setHTMLEditor("ckeditor");
+        $user->setPrimaryGroup($group);
+        $user->save();
+
+        register_session(
+                getUserById($user->getId())
+        );
+        $languages = getAllLanguages(true);
+
+        $this->assertNotContains("de", $languages);
+        $this->assertContains("en", $languages);
+        $user->delete();
+        $group->delete();
+    }
+
+    public function testGetAllLanguagesNotFiltered() {
+        $languages = getAllLanguages();
+        $this->assertGreaterThanOrEqual(1, count($languages));
+    }
+
+    public function testVarDumpStrReturnsStringWithOneVar() {
+        $output = var_dump_str(new User());
+
+        $expected = file_get_contents(
+                Path::resolve("ULICMS_ROOT/tests/fixtures/var_dump_str.txt"
+                )
+        );
+
+        $this->assertStringContainsString(
+                normalizeLN($expected),
+                normalizeLN($output)
+        );
+    }
+
+    public function testVarDumpStrWithoutAnything() {
+        $this->assertEmpty(var_dump_str());
+    }
+
+    public function testArrayKeep() {
+        $input = [
+            "hello" => "world",
+            "foo" => "bar",
+            "cat" => "dog",
+            "pig" => "chicken"
+        ];
+
+        $keys = [
+            "cat",
+            "pig"
+        ];
+
+
+        $expected = [
+            "cat" => "dog",
+            "pig" => "chicken"
+        ];
+
+        $this->assertEquals($expected, array_keep($input, $keys));
+    }
+
+    public function testGetAllMenus() {
+        $menus = getAllMenus();
+        $this->assertContains("top", $menus);
+        $this->assertContains("not_in_menu", $menus);
+        $this->assertNotContains("foo", $menus);
+        $this->assertNotContains("bar", $menus);
+    }
+
+    public function testGetAllMenusWithAdditional() {
+        Settings::set("additional_menus", "foo;bar");
+
+        $menus = getAllMenus(false, false);
+
+        $this->assertContains("top", $menus);
+        $this->assertContains("not_in_menu", $menus);
+        $this->assertContains("foo", $menus);
+        $this->assertContains("bar", $menus);
+
+        getAllMenus();
+    }
+
+    public function testGetAllMenusWithAdditionalOnlyUsed() {
+        Settings::set("additional_menus", "foo;bar");
+
+        $menus = getAllMenus(true, false);
+        $this->assertContains("top", $menus);
+        $this->assertContains("not_in_menu", $menus);
+        $this->assertNotContains("foo", $menus);
+        $this->assertNotContains("bar", $menus);
+    }
+
+    public function testEach() {
+        $arr = array(
+            "foo" => "bar",
+            "hello" => "world"
+        );
+
+        @$output = each($arr);
+        $this->assertCount(4, $output);
+    }
+
+    public function testMyEach() {
+        $arr = array(
+            "foo" => "bar",
+            "hello" => "world"
+        );
+        $this->assertCount(4, myEach($arr));
+    }
+
+    public function testGetLangConfig() {
+        Settings::setLanguageSetting("my_setting", "Lampukisch");
+        Settings::setLanguageSetting("my_setting", "Germanisch", "de");
+        Settings::setLanguageSetting("my_setting", "Angelsächisch", "en");
+
+        $this->assertEquals("Lampukisch", get_lang_config("my_setting", "fr"));
+        $this->assertEquals("Germanisch", get_lang_config("my_setting", "de"));
+        $this->assertEquals("Angelsächisch", get_lang_config("my_setting", "en"));
+    }
+
+    public function testGetUsedPostTypes() {
+        $postTypes = get_used_post_types();
+        $this->assertContains("page", $postTypes);
+    }
+
+    public function testGetLanguageNameByCodeReturnsName() {
+        $this->assertEquals("Deutsch", getLanguageNameByCode("de"));
+        $this->assertEquals("English", getLanguageNameByCode("en"));
+    }
+
+    public function testGetLanguageNameByCodeReturnsCode() {
+        $this->assertEquals("gibts_nicht",
+                getLanguageNameByCode("gibts_nicht"));
+    }
+
+    public function testGetAvailableBackendLanguages() {
+        $this->assertContains("de", getAvailableBackendLanguages());
+        $this->assertContains("en", getAvailableBackendLanguages());
+    }
+
+    public function testAddHook() {
+        @$this->assertNull(add_hook("gibts_nicht"));
+    }
+
+    public function testJsonReadableEncode() {
+        $data = [
+            "foo" => "bar",
+            "hello" => "world",
+            "animals" => ["cat", "dog", "pig"],
+            "number" => 123,
+            "boolean" => true,
+            "null" => null
+        ];
+        $expected = file_get_contents(
+                Path::resolve(
+                        "ULICMS_ROOT/tests/fixtures/json_readable_encode.txt"
+                )
+        );
+        $output = json_readable_encode($data);
+
+        $this->assertEquals(
+                normalizeLN($expected),
+                normalizeLN($output)
+        );
+    }
+
+    public function testGetSystemLanguageReturnsSystemLanguageFromSession() {
+        $_SESSION["system_language"] = "de";
+        $_SESSION["language"] = "en";
+        $this->assertEquals("de", getSystemLanguage());
+    }
+
+    public function testGetSystemLanguageReturnsFrontendLanguageFromSession() {
+        $_SESSION["language"] = "en";
+        $this->assertEquals("en", getSystemLanguage());
+    }
+
+    public function testGetSystemLanguageReturnsSystemLanguageFromSetting() {
+        unset($_SESSION["language"]);
+        unset($_SESSION["system_language"]);
+        $system_language = Settings::get("system_language");
+        Settings::set("system_language", "en");
+        $this->assertEquals("en", getSystemLanguage());
+
+        Settings::set("system_language", $system_language);
+    }
+
+    public function testGetSystemLanguageReturnsDe() {
+        $system_language = Settings::get("system_language");
+
+        Settings::delete("system_language");
+
+        $this->assertEquals("de", getSystemLanguage());
+
+        Settings::set("system_language", $system_language);
+    }
+
+    public function testGetModuleUninstallScriptPath() {
+        $this->assertStringEndsWith("content/modules/my_module/my_module_uninstall.php", getModuleUninstallScriptPath("my_module"));
+    }
+
+    public function testGetModuleUninstallScriptPath2() {
+        $this->assertStringEndsWith("content/modules/my_module/uninstall.php", getModuleUninstallScriptPath2("my_module"));
+    }
+
+    public function testGetFieldsForCustomType() {
+        $this->assertCount(0, getFieldsForCustomType("gibts_nicht"));
+    }
+
+    public function testGetOnlineUsersReturnsEmptyArray() {
+        $usersOnline = getOnlineUsers();
+        $this->assertCount(0, $usersOnline);
+    }
+
+    public function testGetOnlineUsersReturnsArrayWith2Items() {
+        $user1 = new User();
+        $user1->setUsername("testuser-1");
+        $user1->setPassword(rand_string(23));
+        $user1->setLastname("Beutlin");
+        $user1->setFirstname("Bilbo");
+        $user1->setHTMLEditor("ckeditor");
+        $user1->save();
+        $user1->setLastAction(time() - 10);
+
+        $user2 = new User();
+        $user2->setUsername("testuser-2");
+        $user2->setPassword(rand_string(23));
+        $user2->setLastname("Duck");
+        $user2->setFirstname("Donald");
+        $user2->setHTMLEditor("ckeditor");
+        $user2->save();
+        $user2->setLastAction(time() - 10);
+
+        $usersOnline = getOnlineUsers();
+        $this->assertCount(2, $usersOnline);
+
+        $user1->delete();
+        $user2->delete();
+    }
+
+    public function testGetShortlink() {
+        $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
+        $_SERVER["SERVER_PORT"] = "443";
+        $_SERVER["HTTPS"] = "on";
+        $_SERVER['HTTP_HOST'] = "example.org";
+        $_SERVER['REQUEST_URI'] = "/foobar/foo.html";
+
+        $pages = ContentFactory::getAll();
+
+        $expected = "/?goid=" . $pages[0]->getId();
+        $shortlink = get_shortlink($pages[0]->getId());
+
+        $this->assertEquals(
+                "https://example.org/foobar/?goid=1",
+                $shortlink
+        );
+    }
+
+    public function testGetCanonical() {
+        $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
+        $_SERVER["SERVER_PORT"] = "443";
+        $_SERVER["HTTPS"] = "on";
+        $_SERVER['HTTP_HOST'] = "example.org";
+        $_SERVER['REQUEST_URI'] = "/foobar/foo.html";
+
+        $_GET["slug"] = "hello_world";
+
+        $this->assertEquals(
+                "https://example.org/foobar/hello_world.html",
+                get_canonical()
+        );
+    }
+
+    // XXX: Whats the purpose of this method?
+    public function testGetModuleAdminSelfPath() {
+        $_SERVER["REQUEST_URI"] = "/foo/?bar=\"hello\"";
+        $this->assertEquals("/foo/?bar=&quot;hello&quot;", getModuleAdminSelfPath());
+    }
+
+    public function testRootDirectory() {
+        $_SERVER['HTTP_HOST'] = "company.com";
+        $_SERVER["REQUEST_URI"] = "/subdir/foo.png";
+
+        $this->assertEquals("http://company.com/subdir/", rootDirectory());
+    }
+
+    public function testGetModuleAdminFilePath() {
+        $this->assertStringEndsWith(
+                "/content/modules/my_module/my_module_admin.php", getModuleAdminFilePath("my_module")
+        );
+    }
+
+    public function testGetModuleAdminFilePath2() {
+        $this->assertStringEndsWith(
+                "/content/modules/my_module/admin.php",
+                getModuleAdminFilePath2("my_module")
+        );
+    }
+
+    public function testNoCacheWithTrue() {
+        $this->assertFalse(Flags::getNoCache());
+
+        no_cache(true);
+
+        $this->assertTrue(Flags::getNoCache());
     }
 
 }

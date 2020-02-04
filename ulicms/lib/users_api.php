@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 use UliCMS\Security\TwoFactorAuthentication;
 
-// this ffile contains functions for managing user accounts
+// this file contains functions for managing user accounts
 function getUsers(): array {
     $users = [];
-    $result = Database::query("SELECT id, username FROM " . tbname("users") . " ORDER by username");
+    $result = Database::query("SELECT id, username FROM " . tbname("users") .
+                    " ORDER by username");
     while ($row = db_fetch_assoc($result)) {
         $users[] = $row;
     }
@@ -30,7 +31,7 @@ function getUsersOnline(): array {
 
 function changePassword($password, $userId) {
     $user = new User($userId);
-    if (!$user->getId()) {
+    if (!$user->isPersistent()) {
         return false;
     }
     $user->setPassword($password);
@@ -39,7 +40,8 @@ function changePassword($password, $userId) {
 }
 
 function getUserByName(string $name): ?array {
-    $result = Database::query("SELECT * FROM " . tbname("users") . " WHERE username='" . Database::escapeValue($name, DB_TYPE_STRING) . "'");
+    $result = Database::query("SELECT * FROM " . tbname("users") .
+                    " WHERE username='" . Database::escapeValue($name, DB_TYPE_STRING) . "'");
     if (db_num_rows($result) > 0) {
         return db_fetch_assoc($result);
     }
@@ -47,7 +49,8 @@ function getUserByName(string $name): ?array {
 }
 
 function getUserById($id): ?array {
-    $result = Database::query("SELECT * FROM " . tbname("users") . " WHERE id = " . intval($id));
+    $result = Database::query("SELECT * FROM " . tbname("users") .
+                    " WHERE id = " . intval($id));
     if (db_num_rows($result) > 0) {
         return db_fetch_assoc($result);
     }
@@ -81,7 +84,11 @@ function register_session(array $user, bool $redirect = true): void {
     $userDataset->registerSession($redirect);
 }
 
-function validate_login(string $username, string $password, ?string $token = null): ?array {
+function validate_login(
+        string $username,
+        string $password,
+        ?string $token = null
+): ?array {
     $user = new User();
     $user->loadByUsername($username);
 
@@ -100,12 +107,15 @@ function validate_login(string $username, string $password, ?string $token = nul
     if (!$user->checkPassword($password)) {
         $_REQUEST["error"] = get_translation("USER_OR_PASSWORD_INCORRECT");
 
-// Limit Login Attampts
-        $max_failed_logins_items = intval(Settings::get("max_failed_logins_items"));
+        // Limit Login Attampts
+        $max_failed_logins_items = intval(
+                Settings::get("max_failed_logins_items")
+        );
         $user->setFailedLogins($user->getFailedLogins() + 1);
         $user->save();
 
-        if ($max_failed_logins_items >= 1 && $user->getFailedLogins() >= $max_failed_logins_items) {
+        if ($max_failed_logins_items >= 1
+                and $user->getFailedLogins() >= $max_failed_logins_items) {
             $user->setLocked($user->getLocked());
             $user->save();
 
@@ -133,4 +143,57 @@ function is_logged_in(): bool {
 // Alias für is_logged_in
 function logged_in(): bool {
     return is_logged_in();
+}
+
+function getOnlineUsers(): array {
+    return getUsersOnline();
+}
+
+/**
+ * Gravatar support was removed due to legal issues with the GDPR.
+ * This method is still called get_gravatar() for compatiblity reasons
+ * If there is a registered user with the email address returns his avatar image file
+ * else returns the no avatar placeholder image
+ *
+ */
+function get_gravatar(
+        string $email,
+        int $s = 80,
+        string $d = 'mm',
+        string $r = 'g',
+        bool $img = false,
+        array $atts = []
+): string {
+    //
+    $url = ModuleHelper::getBaseUrl("/admin/gfx/no_avatar.png");
+
+    // If there is a user with this email address return it's avatar
+    $user = new User();
+    $user->loadByEmail($email);
+    if ($user->hasProcessedAvatar()) {
+        $url = $user->getAvatar();
+    }
+
+    $html = "";
+    if ($img) {
+        $html = '<img src="' . $url . '"';
+        foreach ($atts as $key => $val) {
+            $html .= ' ' . $key . '="' . $val . '"';
+        }
+        $html .= ' />';
+    }
+    return $img ? $html : $url;
+}
+
+// Gibt den für den derzeit eingeloggten User eingestellten HTML-Editor aus.
+// Wenn der Anwender nicht eingeloggt ist return null
+function get_html_editor(): ?string {
+    $user_id = get_user_id();
+
+    if (!$user_id) {
+        return "ckeditor";
+    }
+
+    $user = new User($user_id);
+    return $user->getHTMLEditor();
 }

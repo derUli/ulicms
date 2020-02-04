@@ -39,21 +39,24 @@ class HTMLInputTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('<input type="radio" name="my_field" value="1" checked="checked">', Input::radioButton("my_field", true));
     }
 
-    public function testListItem() {
-        $item = new ListItem("hello_world", "Hello World!");
-        $itemSelected = new ListItem("bye_bye", "Bye Bye!", true);
-
-        $this->assertEquals('<option value="hello_world">Hello World!</option>', $item->getHtml());
-        $this->assertEquals('<option value="bye_bye" selected>Bye Bye!</option>', $itemSelected->getHtml());
-    }
-
     public function testSingleSelect() {
         $options = array(
             new ListItem("windows", "Windows"),
             new ListItem("linux", "Linux"),
             new ListItem("mac", "macOS")
         );
-        $this->assertEquals('<select name="operating_system" size="1"><option value="windows">Windows</option><option value="linux">Linux</option><option value="mac">macOS</option></select>', Input::singleSelect("operating_system", null, $options));
+        $this->assertEquals(
+                '<select name="operating_system" size="1" class="my-class"><option value="windows">Windows</option><option value="linux">Linux</option><option value="mac">macOS</option></select>',
+                Input::singleSelect(
+                        "operating_system",
+                        null,
+                        $options,
+                        1,
+                        [
+                            "class" => "my-class"
+                        ]
+                )
+        );
     }
 
     public function testSingleSelectWithSelectedItem() {
@@ -80,14 +83,37 @@ class HTMLInputTest extends \PHPUnit\Framework\TestCase {
             new ListItem("linux", "Linux"),
             new ListItem("mac", "macOS")
         );
-        $this->assertEquals('<select name="operating_system" size="5" multiple><option value="windows" selected>Windows</option><option value="linux">Linux</option><option value="mac" selected>macOS</option></select>', Input::multiSelect("operating_system", array(
-                    "windows",
-                    "mac"
-                        ), $options));
+        $this->assertEquals(
+                '<select name="operating_system" size="4" class="foo" multiple><option value="windows" selected>Windows</option><option value="linux">Linux</option><option value="mac" selected>macOS</option></select>',
+                Input::multiSelect("operating_system",
+                        [
+                            "windows",
+                            "mac"
+                        ],
+                        $options,
+                        4,
+                        [
+                            "class" => "foo"
+                        ]
+                )
+        );
     }
 
     public function testFileWithoutAnything() {
         $this->assertEquals('<input type="file" name="my_file" value="">', Input::file("my_file"));
+    }
+
+    public function testFileWithHtmlAttributes() {
+        $this->assertEquals('<input type="file" name="my_file" value="" class="foo">',
+                Input::file(
+                        "my_file",
+                        false,
+                        null,
+                        [
+                            "class" => "foo"
+                        ]
+                )
+        );
     }
 
     public function testFileWithMultiple() {
@@ -107,6 +133,38 @@ class HTMLInputTest extends \PHPUnit\Framework\TestCase {
 
     public function testFileWithAcceptAsStringAndMultiple() {
         $this->assertEquals('<input type="file" name="my_file" value="" accept="application/pdf" multiple="multiple">', Input::file("my_file", true, "application/pdf"));
+    }
+
+    public function testEditorWithoutClass() {
+        $this->assertEquals(
+                '<textarea name="foo" rows="20" cols="70" id="foo" ' .
+                'class="ckeditor" data-mimetype="text/html">' .
+                '&lt;strong&gt;bar&lt;/strong</textarea>',
+                Input::editor(
+                        "foo",
+                        '<strong>bar</strong',
+                        20, 70,
+                        [
+                        ]
+                )
+        );
+    }
+
+    public function testEditorWithClass() {
+        $this->assertEquals(
+                '<textarea name="foo" rows="20" cols="70" ' .
+                'class="foo-class ckeditor" id="foo" ' .
+                'data-mimetype="text/html">' .
+                '&lt;strong&gt;bar&lt;/strong</textarea>',
+                Input::editor(
+                        "foo",
+                        '<strong>bar</strong',
+                        20, 70,
+                        [
+                            "class" => "foo-class"
+                        ]
+                )
+        );
     }
 
 }

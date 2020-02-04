@@ -14,6 +14,8 @@ if (file_exists("cms-config.php") and ! file_exists($configFile)) {
 
 require_once "init.php";
 
+use UliCMS\Packages\PatchManager;
+
 // "var" is old and should not be used in PHP >= 5
 // if the config file is writable replace "var" with "public"
 if (is_writable($configFile)) {
@@ -34,7 +36,10 @@ if (!file_exists($defaultConfig)) {
     rename($configFile, $defaultConfig);
 }
 
-copy(Path::resolve("ULICMS_ROOT/lib/CMSConfigSample.php"), Path::resolve("ULICMS_ROOT/CMSConfig.php"));
+copy(Path::resolve(
+                "ULICMS_ROOT/lib/CMSConfigSample.php"),
+        Path::resolve("ULICMS_ROOT/CMSConfig.php")
+);
 
 // no time limit to prevent a timeout while running sql migrations
 @set_time_limit(0);
@@ -46,9 +51,9 @@ $migrator->migrate();
 // Enable HTML Minifying
 Settings::register("minify_html", "1");
 
-// Patch Manager zurücksetzen
-$pkg = new PackageManager();
-$pkg->truncateInstalledPatches();
+// Reset tracking of installed patches
+$patchManager = new PatchManager();
+$patchManager->truncateInstalledPatches();
 
 // The line below will be uncommented by the mk-upgrade-package.py deploy script
 // The script will delete itself after execution.

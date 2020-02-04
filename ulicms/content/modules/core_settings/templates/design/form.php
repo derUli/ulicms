@@ -126,7 +126,7 @@ if (!$permissionChecker->hasPermission("design")) {
                                         ?>
                                         data-preview-url="<?php
                                         echo ModuleHelper::buildMethodCallUrl(DesignSettingsController::class, "getThemePreview",
-                                                "theme ={$th}");
+                                                "theme={$th}");
                                         ?>">
                                             <?php
                                             echo $th;

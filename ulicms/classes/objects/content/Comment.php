@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace UliCMS\Models\Content;
 
-use stdClass;
 use Database;
 use ContentFactory;
 use UliCMS\Constants\CommentStatus;
 use InvalidArgumentException;
 use Model;
 use StringHelper;
-use UliCMS\Exceptions\FileNotFoundException;
+use UliCMS\Exceptions\DatasetNotFoundException;
 use UliCMS\Security\SpamChecker\SpamFilterConfiguration;
 use UliCMS\Security\SpamChecker\CommentSpamChecker;
 
@@ -36,7 +35,8 @@ class Comment extends Model {
     public function loadByID($id) {
         $result = Database::selectAll("comments", [], "id=" . intval($id));
         if ($result == null or ! Database::any($result)) {
-            throw new FileNotFoundException("no comment with id " . intval($id));
+            throw new DatasetNotFoundException("no comment with id " .
+                    intval($id));
         }
         $this->fillVars($result);
     }
@@ -97,9 +97,6 @@ VALUES      ( ?,
     }
 
     protected function update() {
-        if (!$this->getDate()) {
-            $this->date = time();
-        }
         Database::pQuery("UPDATE `{prefix}comments` set
                          `content_id` = ?,
                          `author_name` = ?,
@@ -150,10 +147,7 @@ VALUES      ( ?,
         return $this->content_id;
     }
 
-    public function setContentId(?int $val): void {
-        if (!is_numeric($val)) {
-            throw new InvalidArgumentException("$val is not a number");
-        }
+    public function setContentId(int $val): void {
         $this->content_id = intval($val);
     }
 
@@ -162,7 +156,8 @@ VALUES      ( ?,
     }
 
     public function setAuthorName(?string $val): void {
-        $this->author_name = StringHelper::isNotNullOrWhitespace($val) ? strval($val) : null;
+        $this->author_name = StringHelper::isNotNullOrWhitespace($val) ?
+                strval($val) : null;
     }
 
     public function getAuthorEmail(): ?string {
@@ -170,7 +165,8 @@ VALUES      ( ?,
     }
 
     public function setAuthorEmail(?string $val): void {
-        $this->author_email = StringHelper::isNotNullOrWhitespace($val) ? strval($val) : null;
+        $this->author_email = StringHelper::isNotNullOrWhitespace($val) ?
+                strval($val) : null;
     }
 
     public function getAuthorUrl(): ?string {
@@ -189,7 +185,9 @@ VALUES      ( ?,
         if (is_string($val)) {
             $val = strtotime($val);
         } else if (!is_numeric($val)) {
-            throw new InvalidArgumentException("$val is not an integer timestamp");
+            throw new InvalidArgumentException(
+                    var_dump_str($val) . " is not an integer timestamp"
+            );
         }
         $this->date = intval($val);
     }
@@ -199,17 +197,15 @@ VALUES      ( ?,
     }
 
     public function setText(?string $val): void {
-        $this->text = StringHelper::isNotNullOrWhitespace($val) ? strval($val) : null;
+        $this->text = StringHelper::isNotNullOrWhitespace($val) ?
+                strval($val) : null;
     }
 
     public function getStatus() {
         return $this->status;
     }
 
-    public function setStatus(?string $val): void {
-        if (!is_string($val)) {
-            throw new InvalidArgumentException("$val is not a status string");
-        }
+    public function setStatus(string $val): void {
         $this->status = $val;
     }
 
@@ -218,7 +214,8 @@ VALUES      ( ?,
     }
 
     public function setIp(?string $val): void {
-        $this->ip = StringHelper::isNotNullOrWhitespace($val) ? strval($val) : null;
+        $this->ip = StringHelper::isNotNullOrWhitespace($val) ?
+                strval($val) : null;
     }
 
     public function getUserAgent(): ?string {
@@ -226,7 +223,8 @@ VALUES      ( ?,
     }
 
     public function setUserAgent(?string $val): void {
-        $this->useragent = StringHelper::isNotNullOrWhitespace($val) ? strval($val) : null;
+        $this->useragent = StringHelper::isNotNullOrWhitespace($val) ?
+                strval($val) : null;
     }
 
     // returns the content where this comment is attached
@@ -240,7 +238,8 @@ VALUES      ( ?,
     // returns all comments for a content by content_id
     public static function getAllByContentId(int $content_id,
             string $order_by = "date desc"): array {
-        return self::getAllDatasets(self::TABLE_NAME, self::class, $order_by, "content_id = " . intval($content_id));
+        return self::getAllDatasets(self::TABLE_NAME, self::class, $order_by,
+                        "content_id = " . intval($content_id));
     }
 
     public static function getAllByStatus(string $status,
@@ -250,7 +249,11 @@ VALUES      ( ?,
         if ($content_id) {
             $where .= " and content_id = " . intval($content_id);
         }
-        return self::getAllDatasets(self::TABLE_NAME, self::class, $order, $where);
+        return self::getAllDatasets(
+                        self::TABLE_NAME,
+                        self::class,
+                        $order,
+                        $where);
     }
 
     public static function getAll(string $order = "id desc"): array {
@@ -260,7 +263,8 @@ VALUES      ( ?,
     // returns unread comments count to display at the comments icon
     // left to the hamburger menu
     public static function getUnreadCount(): int {
-        $result = Database::pQuery("select count(id) as amount from {prefix}comments where `read` = ?",
+        $result = Database::pQuery("select count(id) as amount from "
+                        . "{prefix}comments where `read` = ?",
                         [false], true);
         $dataset = Database::fetchObject($result);
         return intval($dataset->amount);
@@ -268,7 +272,8 @@ VALUES      ( ?,
 
     // returns the count of all read comments
     public static function getReadCount(): ?int {
-        $result = Database::pQuery("select count(id) as amount from {prefix}comments where `read` = ?",
+        $result = Database::pQuery("select count(id) as amount from "
+                        . "{prefix}comments where `read` = ?",
                         [true], true);
         $dataset = Database::fetchObject($result);
         return intval($dataset->amount);
@@ -276,17 +281,21 @@ VALUES      ( ?,
 
     // returns the count of all comments
     public static function getAllCount(): ?int {
-        $result = Database::pQuery("select count(id) as amount from {prefix}comments", [], true);
+        $result = Database::pQuery("select count(id) as amount from "
+                        . "{prefix}comments", [], true);
         $dataset = Database::fetchObject($result);
         return intval($dataset->amount);
     }
 
     // As enforces by the GDPR of the EU
     // it is not allowed to permanently save ips
-    // however it may be required to save ips temporarly to defend the system against bad bots
+    // however it may be required to save ips temporarly
+    // to defend the system against bad bots
     // this method deletes ip addresses of comments after 48 hours
     public static function deleteIpsAfter48Hours(bool $keepSpamIps = false): int {
-        $sql = "update {prefix}comments set ip = null WHERE date < FROM_UNIXTIME(UNIX_TIMESTAMP(NOW() - INTERVAL 2 DAY)) and ip is not null";
+        $sql = "update {prefix}comments set ip = null WHERE date < "
+                . "FROM_UNIXTIME(UNIX_TIMESTAMP(NOW() - INTERVAL 2 DAY)) "
+                . "and ip is not null";
         if ($keepSpamIps) {
             $sql .= " and status <> 'spam'";
         }

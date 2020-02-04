@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 use UliCMS\Utils\CacheUtil;
 
 class FaviconController extends Controller {
 
-    public function doUpload() {
+    public function doUpload(): void {
         // Favicon Upload
         if (!empty($_FILES['favicon_upload_file']['name'])) {
             if (!is_dir("../content/images")) {
@@ -17,10 +19,11 @@ class FaviconController extends Controller {
             $extension = file_extension($filename);
 
             if (startsWith($type, "image/")) {
-                $new_filename = ULICMS_DATA_STORAGE_ROOT . "/content/images/favicon.ico";
+                $new_filename = ULICMS_DATA_STORAGE_ROOT
+                        . "/content/images/favicon.ico";
 
                 do_event("before_upload_favicon");
-                // move_uploaded_file ( $favicon_upload_file ['tmp_name'], $new_filename );
+
                 $source = $favicon_upload_file['tmp_name'];
                 $destination = $new_filename;
 
@@ -44,7 +47,8 @@ class FaviconController extends Controller {
                 $ico_lib->save_ico($destination);
 
                 // Google Cloud: make file public
-                if (startsWith(ULICMS_DATA_STORAGE_ROOT, "gs://") and class_exists("GoogleCloudHelper")) {
+                if (startsWith(ULICMS_DATA_STORAGE_ROOT, "gs://")
+                        and class_exists("GoogleCloudHelper")) {
                     GoogleCloudHelper::changeFileVisiblity($destination, true);
                 }
 
@@ -54,7 +58,12 @@ class FaviconController extends Controller {
 
                 Request::redirect(ModuleHelper::buildActionURL("favicon"));
             } else {
-                Request::redirect(ModuleHelper::buildActionURL("favicon", "error=UPLOAD_WRONG_FILE_FORMAT"));
+                Request::redirect(
+                        ModuleHelper::buildActionURL(
+                                "favicon",
+                                "error=UPLOAD_WRONG_FILE_FORMAT"
+                        )
+                );
             }
         }
     }

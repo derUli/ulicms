@@ -37,10 +37,10 @@ do_event("custom_lang_" . $syslang);
 do_event("after_custom_lang");
 
 // Cross-Site-Request-Forgery Protection
-if (logged_in() and $_SERVER["REQUEST_METHOD"] == "POST" and ! isset($_REQUEST["ajax_cmd"]) and ! defined("NO_ANTI_CSRF")) {
-    if (!check_csrf_token()) {
-        ExceptionResult("This is probably a CSRF attack!", HttpStatusCode::FORBIDDEN);
-    }
+if ((logged_in()
+        and Request::isPost()
+        and ! defined("NO_ANTI_CSRF")) and ! check_csrf_token()) {
+    ExceptionResult("This is probably a CSRF attack!", HttpStatusCode::FORBIDDEN);
 }
 
 // set locale for date formats and other stuff
@@ -64,11 +64,6 @@ if (is_logged_in()) {
 }
 
 header("Content-Type: text/html; charset=UTF-8");
-
-// TODO: Ajax Handlers are deprcated since 2019.3 and will get removed in 2020.1
-
-do_event("before_ajax_handler");
-do_event("after_ajax_handler");
 
 // run controller methods if called
 do_event("before_backend_run_methods");

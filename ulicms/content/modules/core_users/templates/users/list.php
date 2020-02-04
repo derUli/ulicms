@@ -1,4 +1,7 @@
 <?php
+
+use function UliCMS\HTML\imageTag;
+
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("users")) {
     if (!isset($_SESSION["admins_filter_group"])) {
@@ -45,37 +48,58 @@ if ($permissionChecker->hasPermission("users")) {
             <table class="tablesorter">
                 <thead>
                     <tr style="font-weight: bold;">
-                        <th style="width: 40px;">ID</th>
+                        <th class="no-sort"></th>
                         <th><?php translate("username"); ?></th>
                         <th class="hide-on-mobile"><?php translate("lastname"); ?></th>
                         <th class="hide-on-mobile"><?php translate("firstname"); ?></th>
                         <th class="hide-on-mobile"><?php translate("email"); ?></th>
                         <th class="hide-on-mobile"><?php translate("primary_group"); ?></th>
-                            <?php if ($permissionChecker->hasPermission("users_edit")) { ?>
-                            <td><?php translate("edit"); ?></td>
-                            <td><span><?php translate("delete"); ?> </span></td>
+                        <?php if ($permissionChecker->hasPermission("users_edit")) { ?>
+                            <td class="no-sort text-center">
+                                <?php translate("edit"); ?>
+                            </td>
+                            <td class="no-sort text-center">
+                                <?php translate("delete"); ?>
+                            </td>
                         <?php } ?>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    foreach ($users as $row) {
+                    foreach ($users as $user) {
                         $group = "[" . get_translation("none") . "]";
-                        if ($row->getGroupId()) {
-                            $group = $permissionChecker->getPermissionQueryResult($row->getGroupId());
+                        if ($user->getGroupId()) {
+                            $group = $permissionChecker->getPermissionQueryResult($user->getGroupId());
                             $group = $group["name"];
                         }
                         ?>
                         <?php
-                        echo '<tr id="dataset-' . $row->getId() . '">';
-                        echo "<td style=\"width:40px;\">" . $row->getId() . "</td>";
+                        $avatar = imageTag(
+                                $user->getAvatar(),
+                                [
+                                    "class" => "avatar has-pointer",
+                                    "alt" => get_translation("show_in_original_size"),
+                                    "title" => get_translation("show_in_original_size"),
+                                    "data-name" => _esc($user->getUserName())
+                                ]
+                        );
+                        echo '<tr id="dataset-' . $user->getId() . '">';
+                        echo '<td class="text-center">' . $avatar . "</td>";
                         echo "<td>";
-                        esc($row->getUsername()) . "</td>";
-                        echo "<td class=\"hide-on-mobile\">" . _esc($row->getLastName()) . "</td>";
-                        echo "<td class=\"hide-on-mobile\">" . _esc($row->getFirstname()) . "</td>";
-                        echo "<td class=\"hide-on-mobile\">" . _esc($row->getEmail()) . "</td>";
+
+                        esc($user->getUsername()) . "</td>";
+                        echo "<td class=\"hide-on-mobile\">" .
+                        _esc($user->getLastName()) .
+                        "</td>";
+
+                        echo "<td class=\"hide-on-mobile\">" .
+                        _esc($user->getFirstname()) .
+                        "</td>";
+
+                        echo "<td class=\"hide-on-mobile\">" .
+                        _esc($user->getEmail()) . "</td>";
                         echo "<td class=\"hide-on-mobile\">";
-                        $id = $row->getGroupId();
+                        $id = $user->getGroupId();
                         if ($id and $permissionChecker->hasPermission("groups_edit")) {
                             $url = ModuleHelper::buildActionURL("groups", "edit=$id");
                             echo '<a href="' . Template::getEscape($url) . '">';
@@ -87,12 +111,12 @@ if ($permissionChecker->hasPermission("users")) {
                         }
                         echo "</td>";
                         if ($permissionChecker->hasPermission("users_edit")) {
-                            echo "<td class=\"text-center\">" . '<a href="index.php?action=admin_edit&id=' . $row->getId() . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . get_translation("edit") . '" title="' . get_translation("edit") . '"></a></td>';
+                            echo "<td class=\"text-center\">" . '<a href="index.php?action=admin_edit&id=' . $user->getId() . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . get_translation("edit") . '" title="' . get_translation("edit") . '"></a></td>';
 
-                            if ($row->getId() == $_SESSION["login_id"]) {
+                            if ($user->getId() == $_SESSION["login_id"]) {
                                 echo "<td class=\"text-center\"></td>";
                             } else {
-                                echo "<td class=\"text-center\">" . '<form action="index.php?sClass=UserController&sMethod=delete&id=' . $row->getId() . '" method="post" class="delete-form">' . get_csrf_token_html() . '<input type="image" class="mobile-big-image" src="gfx/delete.gif"></form></td>';
+                                echo "<td class=\"text-center\">" . '<form action="index.php?sClass=UserController&sMethod=delete&id=' . $user->getId() . '" method="post" class="delete-form">' . get_csrf_token_html() . '<input type="image" class="mobile-big-image" src="gfx/delete.gif"></form></td>';
                             }
                         }
                         echo '</tr>';
@@ -111,3 +135,10 @@ $translation = new JSTranslation(array(
     "ask_for_delete"
         ));
 $translation->render();
+
+enqueueScriptFile(
+        ModuleHelper::buildRessourcePath(
+                "core_users", "js/list.js")
+);
+
+combinedScriptHtml();

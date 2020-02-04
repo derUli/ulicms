@@ -30,14 +30,16 @@ class NumberFormatHelper extends Helper {
         return $bytes;
     }
 
-    // use this to convert an integer timestamp to use it for a html5 datetime-local input
-    public static function timestampToHtml5Datetime(?int $timestamp = null): string {
+    // use this to convert an integer timestamp to use it
+    // for a html5 datetime-local input
+    public static function timestampToHtml5Datetime(
+            ?int $timestamp = null
+    ): string {
         $time = !is_null($timestamp) ? $timestamp : time();
         return date("Y-m-d\TH:i", $time);
     }
 
     // Use this to format the time at "Online since"
-    // Todo: use a packagist package to format relative times
     public static function formatTime(int $time): string {
         $dateTime = new DateTime();
         $dateTime->setTimestamp($time);

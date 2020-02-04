@@ -1,6 +1,13 @@
 <?php
 
-require_once dirname(__FILE__) . "/CSVCreator.php";
-require_once dirname(__FILE__) . "/JSONCreator.php";
-require_once dirname(__FILE__) . "/PDFCreator.php";
-require_once dirname(__FILE__) . "/PlainTextCreator.php";
+$classes = [
+    "CSVCreator",
+    "JSONCreator",
+    "PDFCreator",
+    "PlainTextCreator"
+];
+
+foreach ($classes as $class) {
+    require_once dirname(__file__) . "/$class.php";
+}
+

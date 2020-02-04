@@ -2,7 +2,8 @@
 
 class Article extends Page {
 
-    // FIXME: Variablen alle private machen und getter und setter implementieren
+    // FIXME: Variablen alle private machen
+    // und getter und setter implementieren
     public $article_author_name = "";
     public $article_author_email = "";
     public $article_date = null;
@@ -58,7 +59,7 @@ excerpt = ? where id = ?";
             $this->excerpt,
             $this->id
         );
-        Database::pQuery($sql, $args, true);
+        return Database::pQuery($sql, $args, true);
     }
 
 }

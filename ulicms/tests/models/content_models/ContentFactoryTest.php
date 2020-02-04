@@ -2,11 +2,24 @@
 
 use UliCMS\Models\Content\TypeMapper;
 use UliCMS\Exceptions\UnknownContentTypeException;
+use UliCMS\Models\Content\Comment;
+use UliCMS\Models\Content\Category;
 
 class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
 
+    public function setUp() {
+        LoggerRegistry::register(
+                "exception_log",
+                new Logger(Path::resolve("ULICMS_LOG/exception_log"))
+        );
+    }
+
     public function tearDown() {
-        Database::deleteFrom("content", "type = 'gibts_nicht'");
+        Database::deleteFrom("content", "type = 'gibts_nicht' or slug like 'unit-test-%'");
+        Database::deleteFrom("categories", "name like 'The Test%'");
+        Database::deleteFrom("users", "username like 'testuser%'");
+
+        LoggerRegistry::unregister("exception_log");
     }
 
     public function testGetAllbyType() {
@@ -149,6 +162,211 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
 
         foreach ($disabled as $element) {
             $this->assertEquals(0, $element->active);
+        }
+    }
+
+    public function testGetAllWithComments() {
+        $page = new Page();
+        $page->title = 'Unit Test ' . time();
+        $page->slug = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "Some Text";
+        $page->comments_enabled = true;
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->save();
+
+        $comment = new Comment();
+        $comment->setContentId($page->id);
+        $comment->setAuthorName("John Doe");
+        $comment->setAuthorEmail("john@doe.de");
+        $comment->setAuthorUrl("http://john-doe.de");
+        $comment->setIp("123.123.123.123");
+        $comment->setUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36");
+        $comment->setText("Unit Test 1");
+        $comment->setRead(true);
+
+        $time = time();
+        $comment->setDate($time);
+
+        $comment->save();
+
+        $this->assertGreaterThanOrEqual(1, ContentFactory::getAllWithComments());
+    }
+
+    public function testFilterByCategory() {
+
+        $category1 = new Category();
+        $category1->setName("The Test 1 ");
+        $category1->save();
+
+
+        $category2 = new Category();
+        $category2->setName("The Test 2");
+        $category2->save();
+
+        $contentDatasets = [];
+
+        for ($i = 1; $i <= 7; $i++) {
+            $page = new Page();
+            $page->title = 'Unit Test ' . time();
+            $page->slug = 'unit-test-' . time() . "-$i";
+            $page->language = 'de';
+            $page->content = "Some Text";
+            $page->comments_enabled = true;
+            $page->author_id = 1;
+            $page->group_id = 1;
+            $page->category_id = $category1->getId();
+            $page->save();
+            $contentDatasets[] = $page;
+        }
+
+        for ($i = 1; $i <= 3; $i++) {
+            $page = new Page();
+            $page->title = 'Unit Test ' . time();
+            $page->slug = 'unit-test-' . time() . "-$i-zwei";
+            $page->language = 'de';
+            $page->content = "Some Text";
+            $page->comments_enabled = true;
+            $page->author_id = 1;
+            $page->group_id = 1;
+            $page->category_id = $category2->getId();
+            $page->save();
+            $contentDatasets[] = $page;
+        }
+
+        $this->assertCount(10, $contentDatasets);
+
+        $filteredContent = ContentFactory::filterByCategory($contentDatasets, $category1->getId());
+        $this->assertCount(7, $filteredContent);
+
+        $filteredContent = ContentFactory::filterByCategory($contentDatasets, $category2->getId());
+        $this->assertCount(3, $filteredContent);
+    }
+
+    public function testFilterByAutor() {
+
+        $testUser1 = new User();
+        $testUser1->setUsername("testuser1");
+        $testUser1->setLastname("Doe");
+        $testUser1->setFirstname("John");
+        $testUser1->setPassword("foobar");
+        $testUser1->save();
+
+        $testUser2 = new User();
+        $testUser2->setUsername("testuser2");
+        $testUser2->setLastname("Doe");
+        $testUser2->setFirstname("Jane");
+        $testUser2->setPassword("foobar");
+        $testUser2->save();
+
+        $contentDatasets = [];
+
+        for ($i = 1; $i <= 8; $i++) {
+            $page = new Page();
+            $page->title = 'Unit Test ' . time();
+            $page->slug = 'unit-test-' . time() . "-$i";
+            $page->language = 'de';
+            $page->content = "Some Text";
+            $page->comments_enabled = true;
+            $page->author_id = $testUser1->getId();
+            $page->group_id = 1;
+            $page->category_id = 1;
+            $page->save();
+            $contentDatasets[] = $page;
+        }
+
+        for ($i = 1; $i <= 4; $i++) {
+            $page = new Page();
+            $page->title = 'Unit Test ' . time();
+            $page->slug = 'unit-test-' . time() . "-$i-zwei";
+            $page->language = 'de';
+            $page->content = "Some Text";
+            $page->comments_enabled = true;
+            $page->author_id = $testUser2->getId();
+            $page->group_id = 1;
+            $page->category_id = 1;
+            $page->save();
+            $contentDatasets[] = $page;
+        }
+
+        $this->assertCount(12, $contentDatasets);
+
+        $filteredContent = ContentFactory::filterByAuthor($contentDatasets, $testUser1->getId());
+        $this->assertCount(8, $filteredContent);
+
+        $filteredContent = ContentFactory::filterByAuthor($contentDatasets, $testUser2->getId());
+        $this->assertCount(4, $filteredContent);
+    }
+
+    public function testFilterByLastChangeBy() {
+
+        $testUser1 = new User();
+        $testUser1->setUsername("testuser1");
+        $testUser1->setLastname("Doe");
+        $testUser1->setFirstname("John");
+        $testUser1->setPassword("foobar");
+        $testUser1->save();
+
+        $testUser2 = new User();
+        $testUser2->setUsername("testuser2");
+        $testUser2->setLastname("Doe");
+        $testUser2->setFirstname("Jane");
+        $testUser2->setPassword("foobar");
+        $testUser2->save();
+
+        $contentDatasets = [];
+
+        for ($i = 1; $i <= 5; $i++) {
+            $page = new Page();
+            $page->title = 'Unit Test ' . time();
+            $page->slug = 'unit-test-' . time() . "-$i";
+            $page->language = 'de';
+            $page->content = "Some Text";
+            $page->comments_enabled = true;
+            $page->author_id = $testUser1->getId();
+            $page->lastchangeby = $testUser1->getId();
+            $page->group_id = 1;
+            $page->category_id = 1;
+            $page->save();
+            $contentDatasets[] = $page;
+        }
+
+        for ($i = 1; $i <= 3; $i++) {
+            $page = new Page();
+            $page->title = 'Unit Test ' . time();
+            $page->slug = 'unit-test-' . time() . "-$i-zwei";
+            $page->language = 'de';
+            $page->content = "Some Text";
+            $page->comments_enabled = true;
+            $page->author_id = $testUser2->getId();
+            $page->lastchangeby = $testUser2->getId();
+            $page->group_id = 1;
+            $page->category_id = 1;
+            $page->save();
+            $contentDatasets[] = $page;
+        }
+
+        $this->assertCount(8, $contentDatasets);
+
+        $filteredContent = ContentFactory::filterByLastChangeBy($contentDatasets, $testUser1->getId());
+        $this->assertCount(5, $filteredContent);
+
+        $filteredContent = ContentFactory::filterByLastChangeBy($contentDatasets, $testUser2->getId());
+        $this->assertCount(3, $filteredContent);
+    }
+
+    public function testGetForFilter() {
+        $contents = ContentFactory::getForFilter("de", 1, "top",
+                        5, "title", "asc", "module", 4);
+
+        $this->assertIsArray($contents);
+        $this->assertLessThanOrEqual(4, count($contents));
+
+        foreach ($contents as $content) {
+            $this->assertEquals("de", $content->language);
+            $this->assertEquals("top", $content->menu);
+            $this->assertInstanceOf(Module_Page::class, $content);
         }
     }
 

@@ -4,52 +4,44 @@ declare(strict_types=1);
 
 class UliCMSVersion {
 
-    function __construct() {
-        $this->version = "Tidy Guanako";
-        $this->releaseYear = 2019;
-        $this->buildDate = 0; // {InsertBuildDate}
-        $this->internalVersion = Array(
-            2019,
-            4
-        );
-        $this->update = "";
-        $this->developmentVersion = false;
-    }
+	function __construct() {
+		$this->codename = "Lurking Anaconda";
+		$this->releaseYear = 2020;
+		$this->buildDate = 0; // {InsertBuildDate}
+		$this->internalVersion = [
+			2020,
+			1
+		];
 
-    public function getReleaseYear(): string {
-        return strval($this->releaseYear);
-    }
+		$this->update = "";
+	}
 
-    // Gibt den Codenamen der UliCMS Version zurück (z.B. 2013R2)
-    public function getVersion(): string {
-        return $this->version;
-    }
+	public function getReleaseYear(): string {
+		return strval($this->releaseYear);
+	}
 
-    public function getUpdate(): string {
-        return $this->update;
-    }
+	//  returns the codename of this UliCMS release
+	public function getCodeName(): string {
+		return $this->codename;
+	}
 
-    public function getDevelopmentVersion(): bool {
-        return $this->developmentVersion;
-    }
+	// returns the version number
+	public function getInternalVersion(): array {
+		return $this->internalVersion;
+	}
 
-    // Gibt die interne Versionsnummer als Array mit Integer-Datentyp zurück
-    public function getInternalVersion(): array {
-        return $this->internalVersion;
-    }
+	// Returns the full version number as string
+	public function getInternalVersionAsString(): string {
+		return implode(".", $this->internalVersion);
+	}
 
-    // Gibt die interne Versionsnummer als String mit Integer-Datentyp zurück
-    public function getInternalVersionAsString(): string {
-        return implode(".", $this->internalVersion);
-    }
+	public function getBuildTimestamp(): int {
+		return $this->buildDate;
+	}
 
-    public function getBuildTimestamp(): int {
-        return $this->buildDate;
-    }
-
-    public function getBuildDate(): string {
-        return strftime("%x %X", $this->getBuildTimestamp());
-    }
+	public function getBuildDate(): string {
+		return strftime("%x %X", $this->getBuildTimestamp());
+	}
 
 }
 

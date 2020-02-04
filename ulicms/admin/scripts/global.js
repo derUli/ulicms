@@ -1,13 +1,27 @@
 /* global bootbox, PasswordSecurityTranslation, MenuTranslation */
 
 // Internet Exploder caches AJAX requests by default
-$(document).ready(() =>
-    $.ajaxSetup({cache: false})
-);
+$(document).ready(() => {
+    $.ajaxSetup({cache: false});
+
+    const token = $("body").data("csrf-token");
+
+    $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
+        if (options.type.toLowerCase() === "post") {
+            // initialize `data` to empty string if it does not exist
+            options.data = options.data || "";
+
+            // add leading ampersand if `data` is non-empty
+            options.data += options.data ? "&" : "";
+
+            // add _token entry
+            options.data += "csrf_token=" + encodeURIComponent(token);
+        }
+    });
+});
 
 $(() => {
     const language = $("html").data("select2-language");
-
     bootbox.setDefaults({
         locale: $("html").data("select2-language")
     });
@@ -25,17 +39,14 @@ $(() => {
             $("#menu-clear-cache-loading").hide();
         });
     });
-
     // Add bootstrap css class to tablesorter
     $.extend($.fn.dataTableExt.oStdClasses, {
         sFilterInput: "form-control",
         sLengthSelect: "form-control"
     });
-
     $(".select-on-click").click((event) =>
         $(event.target).select()
     );
-
     // Disabled a link-buttons must not be clickable
     $("a").click((event) => {
         const target = $(event.currentTarget);
@@ -43,9 +54,7 @@ $(() => {
             event.preventDefault();
         }
     });
-
     initDataTables("body");
-
     // password security check
     if (typeof $(".password-security-check").password !== "undefined") {
         $(".password-security-check").password({
@@ -64,7 +73,7 @@ $(() => {
             minimumLength: 4 // minimum password length (below this threshold, the score is 0)
         });
     }
-    // Links to upcoming features
+// Links to upcoming features
 
     $(".coming-soon").click((event) => {
         event.preventDefault();
@@ -72,7 +81,6 @@ $(() => {
     });
     // Showing a link in an alert box
     initRemoteAlerts("body");
-
     // There is a bug in iOS Safari's implementation of datetime-local
     // Safari appends a timezone to value on change while the
     // validation only accepts value without timezone
@@ -86,8 +94,8 @@ $(() => {
         );
     }
 
-    // dynamically add class form-control to all form elements to
-    // make inputs prettier
+// dynamically add class form-control to all form elements to
+// make inputs prettier
     $("input, select, textarea")
             .not("input[type=checkbox]")
             .not("input[type=radio]")
@@ -96,7 +104,6 @@ $(() => {
             .not("input[type=reset]")
             .not("input[type=image]")
             .addClass("form-control");
-
     // override save shortcut to trigger submit button
     if ($("form button[type=submit], form input[type=submit]").length) {
         document.addEventListener(
@@ -113,25 +120,21 @@ $(() => {
         }, false);
     }
 
-    // prettier select-boxes
+// prettier select-boxes
     $("select").select2({
         width: "100%",
         language: language
     });
-
     // Toggle switches for some checkboxes
     $(".js-switch").bootstrapToggle({
         on: MenuTranslation.On,
         off: MenuTranslation.Off
     });
-
     $.datetimepicker.setLocale(language);
-
     $(".datepicker").datetimepicker({
         format: "Y-m-d",
         timepicker: false
     });
-
     // User has to confirm logout
     $("a.backend-menu-item-logout").click((event) => {
         event.preventDefault();
@@ -141,5 +144,21 @@ $(() => {
                 location.href = url;
             }
         });
+    });
+
+    // show a scroll-to-top arrow
+    // if the scroll viewport isn't at top of the page
+    $(window).scroll(() => {
+        if ($(window).scrollTop() > 0) {
+            $("#scroll-to-top").fadeIn();
+        } else {
+            $("#scroll-to-top").fadeOut();
+        }
+    });
+
+    // scroll to top arrow at bottom right
+    $("#scroll-to-top").click((event) => {
+		event.preventDefault();
+        zenscroll.toY(0);
     });
 });

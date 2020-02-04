@@ -2,75 +2,174 @@
 
 class ModuleManagerTest extends \PHPUnit\Framework\TestCase {
 
-    const sampleName1 = "mymodule1";
-    const sampleName2 = "mymodule2";
-    const sampleVersion1 = "1.0";
-    const sampleVersion2 = "2.0";
+	const sampleName1 = "mymodule1";
+	const sampleName2 = "mymodule2";
+	const sampleVersion1 = "1.0";
+	const sampleVersion2 = "2.0";
 
-    public function testCreateAndEditModule1() {
-        $manager = new ModuleManager();
+	private $oneclick_upgrade_channel;
 
-        $module = new Module();
-        $module->setName(self::sampleName1);
-        $module->setVersion(self::sampleVersion1);
-        $module->save();
+	public function setUp() {
+		$this->oneclick_upgrade_channel = Settings::get("oneclick_upgrade_channel");
 
-        $allModules = $manager->getAllModuleNames();
+		Database::truncateTable("modules");
+	}
 
-        $this->assertTrue(faster_in_array(self::sampleName1, $allModules));
+	public function tearDown() {
+		$moduleManager = new ModuleManager();
+		$moduleManager->sync();
 
-        $module = new Module(self::sampleName1);
-        $this->assertEquals(self::sampleName1, $module->getName());
-        $this->assertEquals(self::sampleVersion1, $module->getVersion());
-        $this->assertFalse($module->isEnabled());
-        $module->setVersion(self::sampleVersion2);
-        $module->save();
+		$module = new Module("fortune2");
+		$module->enable();
 
-        $module = new Module(self::sampleName1);
-        $this->assertEquals(self::sampleVersion2, $module->getVersion());
-        $module->enable();
+		Settings::set("oneclick_upgrade_channel", $this->oneclick_upgrade_channel);
+	}
 
-        $module = new Module(self::sampleName1);
+	public function testCreateAndEditModule1() {
+		$manager = new ModuleManager();
 
-        $this->assertTrue($module->isEnabled());
-        $module->disable();
+		$module = new Module();
+		$module->setName(self::sampleName1);
+		$module->setVersion(self::sampleVersion1);
+		$module->save();
 
-        $module = new Module(self::sampleName1);
-        $this->assertFalse($module->isEnabled());
+		$allModules = $manager->getAllModuleNames();
 
-        $module = new Module(self::sampleName1);
+		$this->assertTrue(faster_in_array(self::sampleName1, $allModules));
 
-        $module = new Module();
-        $module->setName(self::sampleName2);
-        $module->setVersion(self::sampleVersion2);
-        $module->save();
+		$module = new Module(self::sampleName1);
+		$this->assertEquals(self::sampleName1, $module->getName());
+		$this->assertEquals(self::sampleVersion1, $module->getVersion());
+		$this->assertFalse($module->isEnabled());
+		$module->setVersion(self::sampleVersion2);
+		$module->save();
 
-        $allModules = $manager->getAllModuleNames();
+		$module = new Module(self::sampleName1);
+		$this->assertEquals(self::sampleVersion2, $module->getVersion());
+		$module->enable();
 
-        $this->assertTrue(faster_in_array(self::sampleName1, $allModules));
-        $this->assertTrue(faster_in_array(self::sampleName2, $allModules));
+		$module = new Module(self::sampleName1);
 
-        $module = new Module(self::sampleName1);
-        $module->delete();
+		$this->assertTrue($module->isEnabled());
+		$module->disable();
 
-        $allModules = $manager->getAllModuleNames();
-        $this->assertFalse(faster_in_array(self::sampleName1, $allModules));
+		$module = new Module(self::sampleName1);
+		$this->assertFalse($module->isEnabled());
 
-        $module = new Module(self::sampleName2);
-        $module->delete();
+		$module = new Module(self::sampleName1);
 
-        $allModules = $manager->getAllModuleNames();
-        $this->assertFalse(faster_in_array(self::sampleName2, $allModules));
-    }
+		$module = new Module();
+		$module->setName(self::sampleName2);
+		$module->setVersion(self::sampleVersion2);
+		$module->save();
 
-    public function testInitialSync() {
-        $manager = new ModuleManager();
+		$allModules = $manager->getAllModuleNames();
 
-        Database::query("truncate table {prefix}modules", true);
-        $this->assertEquals(0, count($manager->getAllModules()));
-        $manager->sync();
-        $this->assertGreaterThanOrEqual(19, count($manager->getAllModules()));
-        $this->assertEquals(count(getAllModules()), count($manager->getAllModules()));
-    }
+		$this->assertTrue(faster_in_array(self::sampleName1, $allModules));
+		$this->assertTrue(faster_in_array(self::sampleName2, $allModules));
+
+		$module = new Module(self::sampleName1);
+		$module->delete();
+
+		$allModules = $manager->getAllModuleNames();
+		$this->assertFalse(faster_in_array(self::sampleName1, $allModules));
+
+		$module = new Module(self::sampleName2);
+		$module->delete();
+
+		$allModules = $manager->getAllModuleNames();
+		$this->assertFalse(faster_in_array(self::sampleName2, $allModules));
+	}
+
+	public function testInitialSync() {
+		$manager = new ModuleManager();
+
+		Database::query("truncate table {prefix}modules", true);
+		$this->assertEquals(0, count($manager->getAllModules()));
+		$manager->sync();
+		$this->assertGreaterThanOrEqual(19, count($manager->getAllModules()));
+		$this->assertEquals(count(getAllModules()), count($manager->getAllModules()));
+	}
+
+	public function testGetDisabledModuleNames() {
+
+		$moduleManager = new ModuleManager();
+		$moduleManager->sync();
+
+		$module = new Module("fortune2");
+		$module->disable();
+
+		$manager = new ModuleManager();
+		$this->assertContains("fortune2", $manager->getDisabledModuleNames());
+
+		$module->enable();
+
+		$this->assertNotContains("fortune2",
+				$manager->getDisabledModuleNames());
+	}
+
+	public function testRemoveDeletedModules() {
+
+		$moduleManager = new ModuleManager();
+		$moduleManager->sync();
+
+		$module = new Module();
+		$module->setName("wurde_geloescht");
+		$module->setVersion("1.0");
+		$module->save();
+
+		$this->assertContains("wurde_geloescht", $moduleManager->getAllModuleNames());
+		$moduleManager->sync();
+
+		$this->assertNotContains("wurde_geloescht", $moduleManager->getAllModuleNames());
+	}
+
+	public function testUpdateModuleVersion() {
+
+		$moduleManager = new ModuleManager();
+		$moduleManager->sync();
+
+		$module = new Module("Mobile_Detect");
+		$module->setVersion("1.0");
+		$module->save();
+
+		$this->assertEquals("1.0", $module->getVersion());
+
+		$moduleManager->sync();
+
+		$module = new Module("Mobile_Detect");
+		$this->assertEquals("2.8.34", $module->getVersion());
+	}
+
+	public function testInitModulesDefaultSettings() {
+		Settings::delete("oneclick_upgrade_channel");
+
+		$this->assertNull(Settings::get("oneclick_upgrade_channel"));
+
+		$moduleManager = new ModuleManager();
+		$moduleManager->sync();
+
+		$this->assertEquals("slow", Settings::get("oneclick_upgrade_channel"));
+	}
+
+	public function testGetDependencies() {
+		$moduleManager = new ModuleManager();
+		$moduleManager->sync();
+
+		$this->assertContains(
+				"core_content",
+				$moduleManager->getDependencies("core_comments")
+		);
+	}
+
+	public function testGetDependentModules() {
+		$moduleManager = new ModuleManager();
+		$moduleManager->sync();
+
+		$this->assertContains(
+				"core_comments",
+				$moduleManager->getDependentModules("core_content")
+		);
+	}
 
 }

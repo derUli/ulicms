@@ -35,7 +35,8 @@ class Video_Page extends Page {
             return $this->create();
         }
         parent::update();
-        $sql = "update {prefix}content set video = ?, text_position = ? where id = ?";
+        $sql = "update {prefix}content set video = ?, text_position = ? "
+                . "where id = ?";
         $args = array(
             $this->video,
             $this->text_position,

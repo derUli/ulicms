@@ -4,7 +4,7 @@ function jumbotron_get_menu($name = "top", $parent_id = null, $recursive = true,
     $html = "";
     $name = db_escape($name);
     $language = $_SESSION["language"];
-    $sql = "SELECT id, slug, access, redirection, title, alternate_title, menu_image, target, type, position FROM " . tbname("content") . " WHERE menu='$name' AND language = '$language' AND active = 1 AND `deleted_at` IS NULL AND parent_id ";
+    $sql = "SELECT id, slug, access, link_url, title, alternate_title, menu_image, target, type, position FROM " . tbname("content") . " WHERE menu='$name' AND language = '$language' AND active = 1 AND `deleted_at` IS NULL AND parent_id ";
 
     if (is_null($parent_id)) {
         $sql .= " IS NULL ";
@@ -12,6 +12,7 @@ function jumbotron_get_menu($name = "top", $parent_id = null, $recursive = true,
         $sql .= " = " . intval($parent_id) . " ";
     }
     $sql .= " ORDER by " . $order;
+
     $result = db_query($sql);
 
     if (db_num_rows($result) == 0) {
@@ -58,7 +59,7 @@ function jumbotron_get_menu($name = "top", $parent_id = null, $recursive = true,
             }
 
             // if content has type link or node url is the target url else build seo url
-            $url = ($row->type == "link" or $row->type == "node") ? $row->redirection : buildSEOUrl($row->slug);
+            $url = ($row->type == "link" or $row->type == "node") ? $row->link_url : buildSEOUrl($row->slug);
             $url = Template::getEscape($url);
 
             if (get_requested_pagename() != $row->slug) {

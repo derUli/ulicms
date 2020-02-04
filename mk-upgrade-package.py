@@ -39,7 +39,8 @@ def main():
               "comments", "*~", ".settings", ".project", ".buildpath",
               "tests", "run-tests.sh", "run-tests.bat",
               "run-tests.xampp.mac.sh", ".pydevproject", "CMSConfig.php", "log",
-              "configurations", ".phpunit.result.cache", "nbproject"]
+              "configurations", ".phpunit.result.cache", "nbproject", "report", 
+              "avatars"]
     if not args.with_config_js:
         ignore.append("config.js")
 

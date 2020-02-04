@@ -114,4 +114,44 @@ Noch mehr Text <a href="http://www.ulicms.de" rel="nofollow" target="_blank">htt
         $this->assertFalse(StringHelper::isLowerCase("Das ist Nicht Lowercase"));
     }
 
+    public function testGetExcerptReturnsShortedString() {
+        $this->assertEquals("Lorem Ipsum...",
+                StringHelper::getExcerpt(
+                        "Lorem Ipsum sit dor amet usw.", 0, 16));
+    }
+
+    public function testGetExcerptReturnsFullString() {
+        $this->assertEquals("Lorem Ipsum sit dor amet usw.",
+                StringHelper::getExcerpt(
+                        "Lorem Ipsum sit dor amet usw.", 0, 100));
+    }
+
+    public function testRealHtmlSpecialChars() {
+        $this->assertEquals("&lt;script&gt;alert(&#039;xss&#039;)&lt;/script&gt;",
+                StringHelper::realHtmlSpecialchars("<script>alert('xss')</script>")
+        );
+    }
+
+    public function testKeywordsFromString() {
+        $input = file_get_contents(
+                Path::resolve("ULICMS_ROOT/tests/fixtures/lorem_ipsum.txt"));
+
+        $keywords = StringHelper::keywordsFromString($input);
+        $this->assertCount(74, $keywords);
+        $this->assertEquals(7, $keywords["Lorem"]);
+        $this->assertEquals(14, $keywords["et"]);
+        $this->assertEquals(7, $keywords["ipsum"]);
+        $this->assertEquals(5, $keywords["dolore"]);
+    }
+
+    public function testIsEmptyReturnsTrue() {
+        $this->assertTrue(StringHelper::isEmpty(""));
+        $this->assertTrue(StringHelper::isEmpty("    "));
+    }
+
+    public function testIsEmptyReturnsFalse() {
+        $this->assertFalse(StringHelper::isEmpty("nicht"));
+        $this->assertFalse(StringHelper::isEmpty(" nicht leer   "));
+    }
+
 }

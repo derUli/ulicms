@@ -251,7 +251,7 @@ if (!$permissionChecker->hasPermission("other")) {
                 </div>
             </div>
         </div>
-        <script type="text/javascript">
+        <script>
     <?php
 // FIXME: Extract this code to an external script
     if ($smtp_auth) {
@@ -268,7 +268,7 @@ if (!$permissionChecker->hasPermission("other")) {
                 }
             });
         </script>
-        <script type="text/javascript">
+        <script>
     <?php
 // FIXME: Extract this code to an external script
     if ($email_mode == EmailModes::PHPMAILER) {
@@ -301,7 +301,7 @@ if (!$permissionChecker->hasPermission("other")) {
         <?php translate("save_changes"); ?>
     </button>
     <?php echo ModuleHelper::endForm(); ?>
-    <script type="text/javascript">
+    <script>
         $("#other_settings").ajaxForm({beforeSubmit: function (e) {
                 $("#message").html("");
                 $("#loading").show();

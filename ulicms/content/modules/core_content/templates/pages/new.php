@@ -7,12 +7,15 @@ use UliCMS\Models\Content\Categories;
 use UliCMS\Models\Content\Language;
 use UliCMS\Models\Content\Types\DefaultContentTypes;
 use UliCMS\Helpers\NumberFormatHelper;
+use UliCMS\CoreContent\UIUtils;
+use UliCMS\HTML\Input;
 
 $parent_id = Request::getVar("parent_id", null, "int");
 
 $permissionChecker = new ACL();
 $groups = db_query("SELECT id, name from " . tbname("groups"));
-if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermission("pages_create")) {
+if ($permissionChecker->hasPermission("pages")
+        and $permissionChecker->hasPermission("pages_create")) {
 
     $editor = get_html_editor();
 
@@ -39,14 +42,21 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                 "id" => "pageform",
                 "style" => "display:none",
                 "class" => "pageform main-form",
-                "data-get-content-types-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "getContentTypes"),
-                "data-slug-free-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "checkSlugFree"),
-                "data-parent-pages-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "filterParentPages")
+                "data-get-content-types-url" =>
+                ModuleHelper::buildMethodCallUrl(PageController::class,
+                        "getContentTypes"),
+                "data-slug-free-url" =>
+                ModuleHelper::buildMethodCallUrl(PageController::class,
+                        "checkSlugFree"),
+                "data-parent-pages-url" =>
+                ModuleHelper::buildMethodCallUrl(PageController::class,
+                        "filterParentPages")
     ));
     ?>
     <p>
         <a href="<?php echo ModuleHelper::buildActionURL("pages"); ?>"
-           class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
+           class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i>
+            <?php translate("back") ?></a>
     </p>
     <input type="hidden" name="add" value="add">
     <div id="accordion-container">
@@ -55,17 +65,39 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
             <strong><?php
                 translate("permalink");
                 ?>*
-            </strong><br /> <input type="text" name="slug" id="slug"
-                                   required="required" value=""> <br /> <strong><?php
-                                       translate("page_title");
-                                       ?>*
-            </strong><br /> <input type="text" required="required"
-                                   name="title" value="" onkeyup="suggestSlug(this.value)">
+            </strong>
+            <br />
+            <input type="text" name="slug" id="slug"
+                   required="required" value="">
+            <small>
+                <?php translate("auto_generated_from_title"); ?>
+            </small>
+            <br />
+            <br />
+            <strong>
+                <?php
+                translate("page_title");
+                ?>*
+            </strong>
+            <br />
+            <input type="text" required="required"
+                   name="title" value="" onkeyup="suggestSlug(this.value)">
             <div class="typedep hide-on-snippet hide-on-non-regular">
-                <br /> <strong><?php translate("alternate_title"); ?>
-                </strong><br /> <input type="text" name="alternate_title" value=""> <small><?php translate("ALTERNATE_TITLE_INFO"); ?>
-                </small> <br /> <br /> <strong><?php translate("show_headline"); ?></strong>
-                <br /> <select name="show_headline">
+                <br />
+                <strong>
+                    <?php translate("alternate_title"); ?>
+                </strong>
+                <br />
+                <input type="text" name="alternate_title" value="">
+                <small>
+                    <?php translate("ALTERNATE_TITLE_INFO"); ?>
+                </small>
+                <br />
+                <br />
+                <strong><?php translate("show_headline"); ?></strong>
+
+                <br />
+                <select name="show_headline">
                     <option value="1" selected><?php translate("yes"); ?></option>
                     <option value="0"><?php translate("no"); ?></option>
                 </select>
@@ -226,7 +258,8 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
         <h2 class="accordion-header"><?php translate("link_url"); ?></h2>
         <div class="accordion-content">
             <strong><?php translate("link_url"); ?>
-            </strong><br /> <input type="text" name="redirection" value="">
+            </strong>
+            <br /> <input type="text" name="link_url" value="">
         </div>
     </div>
     <div class="typedep" id="tab-language-link" style="display: none;">
@@ -248,10 +281,26 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
     <div class="typedep" id="tab-metadata">
         <h2 class="accordion-header"><?php translate("metadata"); ?></h2>
         <div class="accordion-content">
-            <strong><?php translate("meta_description"); ?>
-            </strong><br /> <input type="text" name="meta_description" value=''
-                                   maxlength="200"> <br /> <strong><?php translate("meta_keywords"); ?>
-            </strong><br /> <input type="text" name="meta_keywords" value='' maxlength="200" placeholder="<?php translate("comma_separated"); ?>">
+            <strong>
+                <?php translate("meta_description"); ?>
+            </strong>
+            <br />
+            <input type="text" name="meta_description" value=''
+                   maxlength="200">
+            <br />
+            <strong>
+                <?php translate("meta_keywords"); ?>
+            </strong>
+            <br />
+            <input type="text" name="meta_keywords" value='' maxlength="200" placeholder="<?php translate("comma_separated"); ?>">
+            <br/>
+            <strong>
+                <?php translate("robots"); ?>
+            </strong>
+            <?php
+            echo Input::singleSelect("robots", null,
+                    UIUtils::getRobotsListItems());
+            ?>
             <div class="typedep" id="article-metadata">
                 <br /> <strong><?php translate("author_name"); ?></strong><br /> <input
                     type="text" name="article_author_name" value="" maxlength="80"> <br />
@@ -276,7 +325,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                        value="<?php esc($og_image); ?>"
                        style="cursor: pointer" /> <a href="#"
                        onclick="$('#og_image').val('');
-                                   return false;"
+                               return false;"
                        class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?></a>
             </div>
         </div>
@@ -389,7 +438,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
             </strong> <select name="list_order_direction">
                 <option value="asc"><?php translate("asc"); ?></option>
                 <option value="desc"><?php translate("desc"); ?></option>
-            </select> <br /> <br /> <strong><?php translate("limit"); ?></strong>
+            </select> <br /> <br /> <strong><?php translate("entries_per_page"); ?></strong>
             <input type="number" min="0" name="limit" step="1" value="0"> <br />
             <strong><?php translate("use_pagination"); ?></strong><br /> <select
                 name="list_use_pagination">
@@ -466,7 +515,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
                    readonly="readonly" class="kcfinder"
                    value="" style="cursor: pointer" maxlength="255" /> <a href="#"
                    onclick="$('#article_image').val('');
-                               return false;"
+                           return false;"
                    class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?></a>
         </div>
     </div>
@@ -563,7 +612,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
 
     BackendHelper::enqueueEditorScripts();
 
-    enqueueScriptFile(ModuleHelper::buildRessourcePath("core_content", "js/pages/page.js"));
+    enqueueScriptFile(ModuleHelper::buildRessourcePath("core_content", "js/pages/form.js"));
 
     combinedScriptHtml();
 

@@ -39,10 +39,13 @@ class ActionRegistry {
                 if (faster_in_array($module, $disabledModules)) {
                     continue;
                 }
-                $cActions = getModuleMeta($module, "views") ? getModuleMeta($module, "views") : getModuleMeta($module, "actions");
+                $cActions = getModuleMeta($module, "views") ?
+                        getModuleMeta($module, "views") :
+                        getModuleMeta($module, "actions");
                 if ($cActions) {
                     foreach ($cActions as $key => $value) {
-                        $path = getModulePath($module, true) . trim($value, "/");
+                        $path = getModulePath($module, true) .
+                                trim($value, "/");
                         if (!endsWith($path, ".php")) {
                             $path .= ".php";
                         }
@@ -50,7 +53,10 @@ class ActionRegistry {
                         if (file_exists($path)) {
                             self::$actions[$key] = $path;
                         } else {
-                            throw new FileNotFoundException("Module {$module}: File '{$path}' not found.");
+                            throw new FileNotFoundException(
+                                    "Module {$module}: "
+                                    . "File '{$path}' not found."
+                            );
                         }
                     }
                 }
@@ -80,7 +86,8 @@ class ActionRegistry {
 
     public static function getActionPermission(string $action): ?string {
         $permission = null;
-        if (isset(self::$actionPermissions[$action]) and is_string(self::$actionPermissions[$action])) {
+        if (isset(self::$actionPermissions[$action]) and
+                is_string(self::$actionPermissions[$action])) {
             $permission = self::$actionPermissions[$action];
         }
         return $permission;
@@ -100,7 +107,10 @@ class ActionRegistry {
         }
     }
 
-    public static function assignControllerToAction(string $action, string $controller): void {
+    public static function assignControllerToAction(
+            string $action,
+            string $controller
+    ): void {
         self::$assignedControllers[$action] = $controller;
     }
 
@@ -109,7 +119,9 @@ class ActionRegistry {
 
         $action = get_action();
         if ($action and isset(self::$assignedControllers[$action])) {
-            return ControllerRegistry::get(self::$assignedControllers[$action]);
+            return ControllerRegistry::get(
+                            self::$assignedControllers[$action]
+            );
         }
         return null;
     }

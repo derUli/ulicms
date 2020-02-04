@@ -8,9 +8,10 @@ class RequestTest extends \PHPUnit\Framework\TestCase {
         unset($_SERVER["HTTP_USER_AGENT"]);
         unset($_SERVER["REQUEST_URI"]);
         unset($_SERVER["SERVER_PORT"]);
-        unset($_SERVER['REMOTE_ADDR']);
-        unset($_SERVER['REMOTE_ADDR']);
-        unset($_SERVER['X_FORWARDED']);
+        unset($_SERVER["REMOTE_ADDR"]);
+        unset($_SERVER["REMOTE_ADDR"]);
+        unset($_SERVER["X_FORWARDED"]);
+        unset($_SERVER["HTTP_X_FORWARDED_HOST"]);
     }
 
     public function testGetVar() {
@@ -18,6 +19,11 @@ class RequestTest extends \PHPUnit\Framework\TestCase {
         $_GET["var1"] = "that";
         $_GET["var2"] = "123";
         $_POST["var3"] = "1.5";
+
+        $_GET["var4"] = "true";
+        $_GET["var5"] = "false";
+        $_GET["var6"] = "3";
+
         $this->assertEquals("this", Request::getVar("var1"));
         $this->assertEquals("this", Request::getVar("var1"));
         $this->assertEquals(null, Request::getVar("nothing"));
@@ -28,6 +34,10 @@ class RequestTest extends \PHPUnit\Framework\TestCase {
 
         $this->assertEquals(123.0, Request::getVar("var2", null, "float"));
         $this->assertEquals(1, Request::getVar("var3", null, "int"));
+
+        $this->assertEquals(1, Request::getVar("var4", null, "bool"));
+        $this->assertEquals(0, Request::getVar("var5", null, "bool"));
+        $this->assertEquals(1, Request::getVar("var6", null, "bool"));
     }
 
     public function testHasVarReturnsTrue() {
@@ -61,12 +71,30 @@ class RequestTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue(Request::isHead());
     }
 
+    public function testGetRequestMethod() {
+        $_SERVER["REQUEST_METHOD"] = "GET";
+        $this->assertEquals("get", get_request_method());
+        $this->assertTrue(Request::isGet());
+        $this->assertFalse(Request::isPost());
+        $this->assertFalse(Request::isHead());
+        $_SERVER["REQUEST_METHOD"] = "POST";
+        $this->assertEquals("post", get_request_method());
+        $this->assertFalse(Request::isGet());
+        $this->assertTrue(Request::isPost());
+        $this->assertFalse(Request::isHead());
+        $_SERVER["REQUEST_METHOD"] = "HEAD";
+        $this->assertEquals("head", get_request_method());
+        $this->assertFalse(Request::isGet());
+        $this->assertFalse(Request::isPost());
+        $this->assertTrue(Request::isHead());
+    }
+
     public function testIsAjaxRequest() {
-        unset($_SERVER['HTTP_X_REQUESTED_WITH']);
+        unset($_SERVER["HTTP_X_REQUESTED_WITH"]);
         $this->assertFalse(Request::isAjaxRequest());
-        $_SERVER['HTTP_X_REQUESTED_WITH'] = "XMLHttpRequest";
+        $_SERVER["HTTP_X_REQUESTED_WITH"] = "XMLHttpRequest";
         $this->assertTrue(Request::isAjaxRequest());
-        unset($_SERVER['HTTP_X_REQUESTED_WITH']);
+        unset($_SERVER["HTTP_X_REQUESTED_WITH"]);
     }
 
     public function testGetDomain() {
@@ -77,6 +105,12 @@ class RequestTest extends \PHPUnit\Framework\TestCase {
         $_SERVER["HTTP_HOST"] = "en.ulicms.de";
         $this->assertEquals("en.ulicms.de", Request::getDomain());
         $this->assertEquals("en.ulicms.de", get_domain());
+    }
+
+    public function testGetStatusCodeByNumber() {
+        $this->assertEquals("200 OK", getStatusCodeByNumber(200));
+        $this->assertEquals("404 Not Found", getStatusCodeByNumber(404));
+        $this->assertEquals("418 I'm a teapot", getStatusCodeByNumber(418));
     }
 
     public function testGetReferrer() {
@@ -132,15 +166,53 @@ class RequestTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetIp() {
-        $_SERVER['REMOTE_ADDR'] = "123.123.123.123";
+        $_SERVER["REMOTE_ADDR"] = "123.123.123.123";
         $this->assertEquals("123.123.123.123", Request::getIp());
     }
 
     public function testGetIpWithProxy() {
-        $_SERVER['REMOTE_ADDR'] = "123.123.123.123";
-        $_SERVER['X_FORWARDED'] = "111.111.111.111";
+        $_SERVER["REMOTE_ADDR"] = "123.123.123.123";
+        $_SERVER["X_FORWARDED"] = "111.111.111.111";
 
         $this->assertEquals("111.111.111.111", Request::getIp());
+    }
+
+    public function testSiteProtocolExpectHttp() {
+        $_SERVER["SERVER_PORT"] = 80;
+        ob_start();
+        site_protocol();
+        $this->assertEquals("http://", ob_get_clean());
+    }
+
+    public function testSiteProtocolExpectHttps() {
+        $_SERVER["SERVER_PORT"] = 443;
+        ob_start();
+        site_protocol();
+        $this->assertEquals("https://", ob_get_clean());
+    }
+
+    public function testIsSSLReturnsFalse() {
+        $_SERVER["SERVER_PORT"] = 80;
+        $this->assertFalse(is_ssl());
+    }
+
+    public function testIsSSLReturnsTrue() {
+        $_SERVER["SERVER_PORT"] = 443;
+        $this->assertTrue(is_ssl());
+    }
+
+    public function testIsHeaderSentReturnsTrue() {
+        $this->assertTrue(
+                Request::isHeaderSent("Content-Type",
+                        [
+                            "Content-Type: text/plain"
+                        ]
+                )
+        );
+    }
+
+    public function testIsHeaderSentReturnsFalse() {
+        $this->assertFalse(Request::isHeaderSent("Foobar"));
     }
 
 }

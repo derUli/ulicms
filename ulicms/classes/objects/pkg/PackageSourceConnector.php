@@ -17,13 +17,18 @@ class PackageSourceConnector {
         if (!$packageSourceUrl) {
             $packageSourceUrl = Settings::get("pkg_src");
         }
-        $packageSourceUrl = str_replace("{version}", cms_version(), $packageSourceUrl);
+        $packageSourceUrl = str_replace(
+                "{version}",
+                cms_version(),
+                $packageSourceUrl);
         $packageSourceUrl .= "index.json";
         $this->packageSourceUrl = $packageSourceUrl;
     }
 
     public function fetch(bool $forceUpdate = false): bool {
-        $json = file_get_contents_wrapper($this->packageSourceUrl, $forceUpdate);
+        $json = file_get_contents_wrapper(
+                $this->packageSourceUrl,
+                $forceUpdate);
         if (!$json) {
             return false;
         }

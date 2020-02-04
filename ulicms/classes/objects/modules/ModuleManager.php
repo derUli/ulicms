@@ -44,7 +44,10 @@ class ModuleManager {
         return $modules;
     }
 
-    public function getDependencies(?string $module, array $allDeps = []): array {
+    public function getDependencies(
+            ?string $module,
+            array $allDeps = []
+    ): array {
         $dependencies = getModuleMeta($module, "dependencies");
         if ($dependencies) {
             foreach ($dependencies as $dep) {
@@ -56,7 +59,10 @@ class ModuleManager {
         return $allDeps;
     }
 
-    public function getDependentModules(?string $module, array $allDeps = []): array {
+    public function getDependentModules(
+            ?string $module,
+            array $allDeps = []
+    ): array {
         $allModules = $this->getEnabledModuleNames();
         foreach ($allModules as $mod) {
             $dependencies = getModuleMeta($mod, "dependencies");
@@ -69,7 +75,8 @@ class ModuleManager {
         return $allDeps;
     }
 
-    // Diese Funktion synchronisiert die modules in der Datenbank mit den modules im Modulordner
+    // Diese Funktion synchronisiert die modules in der Datenbank
+    // mit den modules im Modulordner
     // - Neue Module werden erfassen
     // - Versionsupdates erfassen
     // - Nicht mehr vorhandene Module aus Datenbank löschen
@@ -78,6 +85,8 @@ class ModuleManager {
     public function sync(): void {
         $this->removeDeletedModules();
         $this->addNewModules();
+
+        $this->initModulesDefaultSettings();
     }
 
     // remove modules from database which aren't installed anymore
@@ -98,8 +107,12 @@ class ModuleManager {
     protected function addNewModules() {
         $realModules = getAllModules();
         $dataBaseModules = $this->getAllModuleNames();
+
+        $newModules = [];
+
         // Settings aller aktiven Module auslesen und registrieren
         foreach ($realModules as $realModule) {
+
             $version = getModuleMeta($realModule, "version");
             if (faster_in_array($realModule, $dataBaseModules)) {
                 $this->updateModuleVersion($version, $realModule);
@@ -109,11 +122,19 @@ class ModuleManager {
             $module->setName($realModule);
             $module->setVersion($version);
             $module->save();
+            $newModules[] = $module;
+            $module->enable();
+        }
+
+        // try again to enable modules since the first enable
+        // of a module would fail if it dependencies modules are not enabled yet
+        foreach ($newModules as $module) {
             $module->enable();
         }
     }
 
-    // modules may define default values for it's settings in it's metadata file
+    // modules may define default values for it's settings in it's
+    // metadata file
     protected function initModulesDefaultSettings(): void {
         $enabledModules = $this->getEnabledModuleNames();
         foreach ($enabledModules as $module) {
@@ -127,9 +148,13 @@ class ModuleManager {
         }
     }
 
-    // if the installed version of the module is different from the one stored in the database
+    // if the installed version of the module is different from the one
+    // stored in the database
     // update the version number in the database
-    protected function updateModuleVersion(?string $version, string $realModule): void {
+    protected function updateModuleVersion(
+            ?string $version,
+            string $realModule
+    ): void {
 
         $module = new Module($realModule);
         if ($module->getVersion() !== $version) {

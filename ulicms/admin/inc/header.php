@@ -45,6 +45,7 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
             "../node_modules/bootbox/bootbox.min.js",
             $select2TranslationFile,
             "../node_modules/datatables/media/js/jquery.dataTables.min.js",
+            "../node_modules/zenscroll/zenscroll-min.js",
             "../lib/js/global.js",
         );
         ?>
@@ -62,7 +63,6 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
 
         require "inc/touch_icons.php";
         ?>
-
         <link rel="stylesheet" type="text/css"
               href="scripts/vallenato/vallenato.css" />
         <link rel="stylesheet" type="text/css"
@@ -102,12 +102,16 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
         $cssClasses .= "no-action";
     }
     ?>
-    <body class="<?php esc($cssClasses); ?>"
-          data-datatables-translation="<?php echo DataTablesHelper::getLanguageFileURL(getSystemLanguage()); ?>"
-          data-ckeditor-skin="<?php esc(Settings::get("ckeditor_skin")); ?>">
-              <?php
-              do_event("after_backend_header");
-              ?>
+    <body
+        class="<?php esc($cssClasses); ?>"
+        data-datatables-translation="<?php echo DataTablesHelper::getLanguageFileURL(getSystemLanguage()); ?>"
+        data-ckeditor-skin="<?php esc(Settings::get("ckeditor_skin")); ?>"
+        data-csrf-token="<?php esc(get_csrf_token()); ?>"
+        data-ckeditor-links-action-url="<?php echo ModuleHelper::buildMethodCallUrl(PageController::class, "getCKEditorLinkList"); ?>"
+        >
+            <?php
+            do_event("after_backend_header");
+            ?>
         <div
             class="container main <?php
             if (get_action()) {
@@ -127,7 +131,7 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
                         ?>
                         <div class="row pull-right top-right-icons">
                             <div class="<?php esc($colClass); ?>">
-                                <a href="#" id="menu-clear-cache"
+                                <a href="#" class="has-pointer" id="menu-clear-cache"
                                    data-url="<?php echo ModuleHelper::buildMethodCallUrl("PerformanceSettingsController", "clearCache", "clear_cache=1"); ?>">
                                     <i class="fas fa-broom"></i></a>
                                 <a href="#" id="menu-clear-cache-loading" style="display: none;"><i class="fa fa-spinner fa-spin"></i></a>
@@ -150,7 +154,7 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
                                 </div>
                             <?php } ?>
                             <div class="<?php esc($colClass); ?>">
-                                <a id="menu-toggle"><i class="fa fa-bars"></i> </a>
+                                <a id="menu-toggle" class="has-pointer"><i class="fa fa-bars"></i> </a>
                             </div>
                         </div>
                     <?php } ?>

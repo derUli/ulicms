@@ -182,7 +182,7 @@ add_translation("INSTALLED_DESIGNS_INFO", "Hier finden Sie eine Auflistung der i
 
 // Grundeinstellungen
 add_translation("HOMEPAGE_TITLE", "Titel der Website");
-add_translation("MOTTO", "Motto der Homepage");
+add_translation("site_slogan", "Motto der Homepage");
 add_translation("HOMEPAGE_OWNER", "Inhaber der Website");
 add_translation("HIDE_LOGO", "Logo ausblenden");
 add_translation("OWNER_MAILADRESS", "E-Mail Adresse des Administrators");
@@ -303,9 +303,9 @@ add_translation("PHARDATA_NOT_AVAILABLE", "Eine für das Entpacken der Pakete be
 Bitte aktualisieren Sie die Serversoftware auf PHP Version 5.3.0 oder neuer.");
 add_translation("NOTHING_TO_DO", "Nichts zu tun.");
 add_translation("DOWNLOAD_FAILED", "Download fehlgeschlagen (%pkg%)");
-add_translation("INSTALLATION_SUCCESSFULL", "Installation erfolgreich (%pkg%)");
+add_translation("INSTALLATION_SUCCESSFUL", "Installation erfolgreich (%pkg%)");
 add_translation("EXTRACTION_OF_PACKAGE_FAILED", "Entpacken der Datei fehlgeschlagen (%pkg%)");
-add_translation("PACKAGE_SUCCESSFULL_UPLOADED", "Das Paket \"%file%\" wurde erfolgreich installiert.");
+add_translation("PACKAGE_SUCCESSFULLY_UPLOADED", "Das Paket \"%file%\" wurde erfolgreich installiert.");
 add_translation("UPLOAD_FAILED", "Dateiupload fehlgeschlagen!");
 
 // Info
@@ -331,18 +331,6 @@ add_translation("ADMINS", "Admin");
 
 add_translation("TARGET_SELF", "In diesem Fenster");
 add_translation("TARGET_BLANK", "In einem neuen Fenster");
-
-// Import
-add_translation("JSON_IMPORT", "JSON Import");
-add_translation("IMPORT_INTO_TABLE", "Importe in Tabelle");
-add_translation("DO_IMPORT", "Importieren");
-add_translation("IMPORT_INTO_TABLE_SUCCESSFULL", "Import in Tabelle %table% erfolgreich!");
-add_translation("NOT_A_JSON_FILE", "Diese Datei ist nicht im JSON Format!");
-
-// Export
-add_translation("JSON_EXPORT", "JSON Export");
-add_translation("EXPORT_INTO_TABLE", "Exportiere Tabelle");
-add_translation("DO_EXPORT", "Exportieren");
 
 // Shortcuts
 add_translation("ONLY_IN_BACKEND", "Nur im Backend");
@@ -452,7 +440,7 @@ add_translation("RESET_PASSWORD_SUBJECT", "Passwort zurücksetzen");
 add_translation("RESET_PASSWORD", "Passwort zurücksetzen");
 
 add_translation("NO_SUCH_USER", "Es existiert kein Benutzerkonto mit diesem Namen.");
-add_translation("PASSWORD_RESET_SUCCESSFULL", "Sie bekommen demnächst eine E-Mail mit einem Link zum Zurücksetzen des Passworts zugeschickt.");
+add_translation("PASSWORD_RESET_SUCCESSFUL", "Sie bekommen demnächst eine E-Mail mit einem Link zum Zurücksetzen des Passworts zugeschickt.");
 
 add_translation("ENABLE_PASSWORD_RESET", "Passwort kann zurückgesetzt werden");
 
@@ -565,7 +553,7 @@ add_translation("MAX_FAILED_LOGIN_ITEMS", "Benutzer-Accounts nach X fehlgeschlag
 add_translation("NO_MOBILE_DESIGN_ON_TABLET", "Das Design für Mobilgeräte nicht auf Tablets verwenden");
 
 add_translation("TITLE_AND_HEADLINE", "Titel und Überschrift");
-add_translation("MENU_ENTRY", "Menü Eintrag");
+add_translation("MENU_ENTRY", "Menüeintrag");
 add_translation("VISIBILITY", "Sichtbarkeit");
 
 // Typ
@@ -586,7 +574,7 @@ add_translation("ORDER_DIRECTION", "Sotieren Reihenfolge");
 add_translation("ASC", "Aufsteigend");
 add_translation("DESC", "Absteigend");
 
-add_translation("LIMIT", "Limit");
+add_translation("LIMIT", "Einträge je Seite");
 
 // Inhaltstyp "Link"
 add_translation("LINK", "Link");
@@ -756,5 +744,9 @@ add_translation("all", "Alle");
 add_translation("disabled_functions", "Deaktivierte Funktionen");
 
 add_translation("unsupported_output_format", "Nicht unterstütztes Ausgabeformat: %format%");
+
+add_translation("mpdf_not_installed", "mPDF ist nicht installiert.\n"
+        . "Bitte installieren Sie mPDF von %link% um das PDF-Ausgabe "
+        . "Feature nutzen zu können.");
 
 do_event("lang_de");

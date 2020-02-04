@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Utils\File;
+use UliCMS\Exceptions\DatasetNotFoundException;
 
 class ComparisonsTest extends \PHPUnit\Framework\TestCase {
 
@@ -76,6 +77,9 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase {
     public function testIsMaintenanceModeOff() {
         Settings::set("maintenance_mode", "0");
         $this->assertFalse(isMaintenanceMode());
+
+        Settings::delete("maintenance_mode");
+        $this->assertFalse(isMaintenanceMode());
     }
 
     public function testIsFalse() {
@@ -145,6 +149,116 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(is_decimal("666"));
         $this->assertFalse(is_decimal("foobar"));
         $this->assertFalse(is_decimal("0"));
+    }
+
+    public function testIsBlankReturnsTrue() {
+        $this->assertTrue(is_blank(""));
+        $this->assertTrue(is_blank(" "));
+        $this->assertTrue(is_blank(false));
+        $this->assertTrue(is_blank(null));
+        $this->assertTrue(is_blank(0));
+        $this->assertTrue(is_blank([]));
+        $this->assertTrue(is_blank("0"));
+        $this->assertTrue(is_blank($notDefined));
+    }
+
+    public function testIsBlankReturnsFalse() {
+        $this->assertFalse(is_blank(" hallo welt "));
+        $this->assertFalse(is_blank(13));
+        $this->assertFalse(is_blank(true));
+        $this->assertFalse(is_blank(array("foo", "bar")));
+        $this->assertFalse(is_blank("13"));
+    }
+
+    public function testIsPresentReturnsTrue() {
+        $this->assertTrue(is_present(" hallo welt "));
+        $this->assertTrue(is_present(13));
+        $this->assertTrue(is_present(true));
+        $this->assertTrue(is_present(array("foo", "bar")));
+        $this->assertTrue(is_present("13"));
+    }
+
+    public function testIsPresentReturnsFalse() {
+        $this->assertFalse(is_present(""));
+        $this->assertFalse(is_present(" "));
+        $this->assertFalse(is_present(false));
+        $this->assertFalse(is_present(null));
+        $this->assertFalse(is_present(0));
+        $this->assertFalse(is_present([]));
+        $this->assertFalse(is_present("0"));
+        $this->assertFalse(is_present($undefinedVar));
+    }
+
+    public function testStartsWithReturnsTrue() {
+        $this->assertTrue(startsWith("hello world", "hello"));
+        $this->assertTrue(startsWith("hello world", "Hello", false));
+    }
+
+    public function testStartsWithReturnsFalse() {
+        $this->assertFalse(startsWith("hello world", "bye"));
+        $this->assertFalse(startsWith("hello world", "Hello"));
+    }
+
+    public function testEndsWithReturnsTrue() {
+        $this->assertTrue(endsWith("hello world", "world"));
+        $this->assertTrue(endsWith("hello world", "World", false));
+    }
+
+    public function testEndsWithReturnsFalse() {
+        $this->assertFalse(endsWith("hello world", "you"));
+        $this->assertFalse(endsWith("hello world", "World"));
+    }
+
+    public function testFasterInArrayReturnsTrue() {
+        $array = array("hello", "world", 123);
+        $this->assertTrue(faster_in_array("world", $array));
+        $this->assertTrue(faster_in_array(123, $array));
+    }
+
+    public function testFasterInArrayReturnsFalse() {
+        $array = array("hello", "world", 123);
+        $this->assertFalse(faster_in_array("germany", $array));
+        $this->assertFalse(faster_in_array(789, $array));
+        $this->assertFalse(faster_in_array(789, "not-an-array"));
+    }
+
+    public function testVarIsType() {
+        $this->assertTrue(var_is_type(123, "numeric", true));
+        $this->assertTrue(var_is_type(null, "numeric", false));
+        $this->assertFalse(var_is_type(null, "numeric", true));
+        $this->assertFalse(var_is_type("", "numeric", true));
+        $this->assertTrue(var_is_type("", "numeric", false));
+
+        $this->assertFalse(var_is_type("nicht leer", "typ_der_nicht_existiert", true));
+    }
+
+    public function testStrContainsTrue() {
+        $this->assertTrue(str_contains("Ananas", "Ich esse gerne Ananas."));
+    }
+
+    public function testStrContainsFalse() {
+        $this->assertFalse(str_contains("Tomaten", "Ich esse gerne Ananas."));
+    }
+
+    public function testIsNightReturnsTrue() {
+        $this->assertTrue(is_night(1570404356));
+    }
+
+    public function testIsNightReturnsFalse() {
+        $this->assertFalse(is_night(1570389956));
+    }
+
+    public function testIsNightWithoutTimeReturnsBool() {
+        $this->assertIsBool(is_night());
+    }
+
+    public function testIsDebugMode() {
+        $this->assertIsBool(is_debug_mode());
+    }
+
+    public function testGetByIdThrowsException() {
+        $this->expectException(DatasetNotFoundException::class);
+        ContentFactory::getByID(PHP_INT_MAX);
     }
 
 }

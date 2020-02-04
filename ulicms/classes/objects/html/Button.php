@@ -10,7 +10,6 @@ use ModuleHelper;
 // This class contains helper methods to build Bootstrap buttons
 // see https://getbootstrap.com/docs/3.3/components/
 class Button {
-
     public static function button(string $text,
             string $type = ButtonType::BUTTON_SUBMIT,
             array $htmlAttributes = [],
@@ -24,7 +23,9 @@ class Button {
             $htmlAttributes["class"] = ButtonType::TYPE_BASIC;
         }
 
-        $attributesHtml = ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes);
+        $attributesHtml = ModuleHelper::buildHTMLAttributesFromArray(
+                        $htmlAttributes
+        );
         return "<button {$attributesHtml}>{$text}</button>";
     }
 

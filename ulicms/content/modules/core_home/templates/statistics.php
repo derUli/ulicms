@@ -42,15 +42,5 @@ $model = $controller->getModel();
         <?php
     }
     ?>
-    <?php
-    if (!is_null($model->guestbookEntryCount)) {
-        ?>
-        <tr>
-            <td><?php translate("GUESTBOOK_ENTRIES"); ?></td>
-            <td><?php echo $model->guestbookEntryCount; ?></td>
-        </tr>
-        <?php
-    }
-    ?>
 </table>
 

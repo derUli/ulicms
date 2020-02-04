@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 use UliCMS\Utils\CacheUtil;
 
 class MetaKeywordsController extends Controller {
 
-    public function savePost() {
+    public function savePost(): void {
         $languages = getAllLanguages();
         for ($i = 0; $i < count($languages); $i ++) {
             $lang = $languages[$i];

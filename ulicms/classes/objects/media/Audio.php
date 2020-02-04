@@ -15,9 +15,9 @@ use function get_translation;
 
 // html5 format support of browser are different
 // UliCMS allows *.mp3 and *.ogg file uploads for audio
-// *.ogg is used by browsers which are not allowed to include a *.mp3 codec due legal reasons
+// *.ogg is used by browsers which are not allowed to include
+// a *.mp3 codec due legal reasons
 class Audio extends Model {
-
     private $name = null;
     private $mp3_file = null;
     private $ogg_file = null;
@@ -48,7 +48,8 @@ class Audio extends Model {
     }
 
     public function loadById($id) {
-        $result = Database::pQuery("select * from `{prefix}audio` where id = ?", array(
+        $result = Database::pQuery("select * from `{prefix}audio` "
+                        . "where id = ?", array(
                     intval($id)
                         ), true);
         if (!Database::any($result)) {
@@ -93,7 +94,8 @@ class Audio extends Model {
             $this->updated
         );
         $sql = "insert into `{prefix}audio`
-				(name, mp3_file, ogg_file, category_id, created, updated)
+				(name, mp3_file, ogg_file, category_id,
+                                created, updated)
 				values (?, ?, ?, ?, ?, ?)";
         Database::pQuery($sql, $args, true);
         $this->setID(Database::getLastInsertID());
@@ -110,7 +112,8 @@ class Audio extends Model {
             $this->getID()
         );
         $sql = "update `{prefix}audio` set
-				name = ?, mp3_file = ?, ogg_file = ?, category_id = ?, updated = ?
+				name = ?, mp3_file = ?, ogg_file = ?,
+                                category_id = ?, updated = ?
 				where id = ?";
         Database::pQuery($sql, $args, true);
     }
@@ -144,15 +147,18 @@ class Audio extends Model {
     }
 
     public function setName(?string $val): void {
-        $this->name = StringHelper::isNotNullOrWhitespace($val) ? strval($val) : null;
+        $this->name = StringHelper::isNotNullOrWhitespace($val) ?
+                strval($val) : null;
     }
 
     public function setMP3File(?string $val): void {
-        $this->mp3_file = StringHelper::isNotNullOrWhitespace($val) ? strval($val) : null;
+        $this->mp3_file = StringHelper::isNotNullOrWhitespace($val) ?
+                strval($val) : null;
     }
 
     public function setOGGFile(?string $val): void {
-        $this->ogg_file = StringHelper::isNotNullOrWhitespace($val) ? strval($val) : null;
+        $this->ogg_file = StringHelper::isNotNullOrWhitespace($val) ?
+                strval($val) : null;
     }
 
     public function setCategoryId(?int $val): void {
@@ -169,11 +175,17 @@ class Audio extends Model {
         if ($this->getId()) {
             if ($deletePhysical) {
                 if ($this->getMP3File()) {
-                    $file = Path::resolve("ULICMS_DATA_STORAGE_ROOT/content/audio/" . basename($this->getMP3File()));
+                    $file = Path::resolve(
+                                    "ULICMS_DATA_STORAGE_ROOT/content/audio/" .
+                                    basename($this->getMP3File())
+                    );
                     File::deleteIfExists($file);
                 }
                 if ($this->getOggFile()) {
-                    $file = Path::resolve("ULICMS_DATA_STORAGE_ROOT/content/audio/" . basename($this->getOggFile()));
+                    $file = Path::resolve(
+                                    "ULICMS_DATA_STORAGE_ROOT/content/audio/" .
+                                    basename($this->getOggFile())
+                    );
                     File::deleteIfExists($file);
                 }
             }
@@ -188,19 +200,24 @@ class Audio extends Model {
     public function render(): string {
         $audio_dir = self::AUDIO_DIR;
         if (defined("ULICMS_DATA_STORAGE_URL")) {
-            $audio_dir = Path::resolve("ULICMS_DATA_STORAGE_URL/$audio_dir") . "/";
+            $audio_dir = Path::resolve("ULICMS_DATA_STORAGE_URL/$audio_dir") .
+                    "/";
         }
         $html = '<audio controls>';
         if (!empty($this->mp3_file)) {
-            $html .= '<source src="' . $audio_dir . _esc($this->mp3_file) . '" type="audio/mp3">';
+            $html .= '<source src="' . $audio_dir . _esc($this->mp3_file) .
+                    '" type="audio/mp3">';
         }
         if (!empty($this->ogg_file)) {
-            $html .= '<source src="' . $audio_dir . _esc($this->ogg_file) . '" type="audio/ogg">';
+            $html .= '<source src="' . $audio_dir . _esc($this->ogg_file) .
+                    '" type="audio/ogg">';
         }
         $html .= get_translation("no_html5");
         if (!empty($this->mp3_file) or ! empty($this->ogg_file)) {
-            $preferred = !empty($this->mp3_file) ? $this->mp3_file : $this->ogg_file;
-            $html .= '<br/><a href="' . self::AUDIO_DIR . $preferred . '">' . get_translation("DOWNLOAD_AUDIO_INSTEAD") . '</a>';
+            $preferred = !empty($this->mp3_file) ?
+                    $this->mp3_file : $this->ogg_file;
+            $html .= '<br/><a href="' . self::AUDIO_DIR . $preferred . '">' .
+                    get_translation("DOWNLOAD_AUDIO_INSTEAD") . '</a>';
         }
 
         $html .= '</audio>';

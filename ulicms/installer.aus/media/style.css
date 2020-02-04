@@ -9,6 +9,10 @@ body {
     width: 100%;
 }
 
+progress{
+    width: 100%;
+}
+
 #header {
     padding-top: 10px;
     border: 1px solid #b7b7b7;

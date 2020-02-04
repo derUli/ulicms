@@ -5,7 +5,7 @@ declare(strict_types=1);
 class Request {
 
     public static function getPort(): ?int {
-        return isset($_SERVER['SERVER_PORT']) ? $_SERVER['SERVER_PORT'] : null;
+        return isset($_SERVER['SERVER_PORT']) ? intval($_SERVER['SERVER_PORT']) : null;
     }
 
     public static function getProtocol(?string $suffix = null): string {
@@ -30,7 +30,12 @@ class Request {
         if ($value !== null) {
             switch ($convert) {
                 case "bool":
-                    $value = intval($value);
+                    if ($value === "true") {
+                        $value = true;
+                    } else if ($value === "false") {
+                        $value = false;
+                    }
+                    $value = intval(boolval($value));
                     break;
                 case "int":
                     $value = intval($value);
@@ -126,8 +131,8 @@ class Request {
         return $_SERVER['REMOTE_ADDR'];
     }
 
-    public static function isHeaderSent(string $header): bool {
-        $headers = headers_list();
+    public static function isHeaderSent(string $header, ?array $headers = null): bool {
+        $headers = !$headers ?  headers_list() : $headers;
         $header = trim($header, ': ');
         $result = false;
 
@@ -141,7 +146,10 @@ class Request {
     }
 
     public static function isAjaxRequest(): bool {
-        return (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
+        return (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) and
+                strtolower(
+                        $_SERVER['HTTP_X_REQUESTED_WITH']
+                ) == 'xmlhttprequest');
     }
 
     public static function getDomain(): ?string {
@@ -164,7 +172,8 @@ class Request {
     }
 
     public static function getRequestUri(): ?string {
-        return isset($_SERVER["REQUEST_URI"]) ? $_SERVER["REQUEST_URI"] : null;
+        return isset($_SERVER["REQUEST_URI"]) ?
+                $_SERVER["REQUEST_URI"] : null;
     }
 
 }

@@ -2,86 +2,132 @@
 
 class ControllerRegistryTest extends \PHPUnit\Framework\TestCase {
 
-    public function setUp() {
-        if (session_id()) {
-            session_destroy();
-        }
-        @session_start();
-        ActionRegistry::loadModuleActionAssignment();
-    }
+	public function setUp() {
+		ControllerRegistry::loadModuleControllers();
 
-    public function tearDown() {
-        if (session_id()) {
-            @session_destroy();
-        }
+		if (session_id()) {
+			session_destroy();
+		}
+		@session_start();
+		ActionRegistry::loadModuleActionAssignment();
+	}
 
-        Database::query("delete from {prefix}users where username like 'testuser-%'", true);
-    }
+	public function tearDown() {
+		if (session_id()) {
+			@session_destroy();
+		}
 
-    public function testGetWithClassNameReturnsController() {
-        $this->assertInstanceOf(CommentsController::class,
-                ControllerRegistry::get("CommentsController"));
-    }
+		Database::query("delete from {prefix}users where username like 'testuser-%'", true);
+		unset($_REQUEST["sClass"]);
+		unset($_REQUEST["sMethod"]);
+		unset($_SERVER["REQUEST_METHOD"]);
+	}
 
-    public function testGetWithActionReturnsController() {
-        BackendHelper::setAction("audio");
-        $this->assertInstanceOf(AudioController::class,
-                ControllerRegistry::get()
-        );
+	public function testGetWithClassNameReturnsController() {
+		$this->assertInstanceOf(CommentsController::class,
+				ControllerRegistry::get("CommentsController"));
+	}
 
-        BackendHelper::setAction("home");
-    }
+	public function testGetWithClassNameReturnsNull() {
+		$this->assertNull(ControllerRegistry::get("GibtsNichtController"));
+	}
 
-    public function testGetWithNonExistingActionReturnsNull() {
-        BackendHelper::setAction("pages");
-        $this->assertNull(
-                ControllerRegistry::get()
-        );
+	public function testGetWithActionReturnsController() {
+		BackendHelper::setAction("audio");
+		$this->assertInstanceOf(AudioController::class,
+				ControllerRegistry::get()
+		);
 
-        BackendHelper::setAction("home");
-    }
+		BackendHelper::setAction("home");
+	}
 
-    public function testGetReturnsNull() {
-        BackendHelper::setAction("info");
-        $this->assertNull(
-                ControllerRegistry::get()
-        );
-    }
+	public function testGetWithNonExistingActionReturnsNull() {
+		BackendHelper::setAction("pages");
+		$this->assertNull(
+				ControllerRegistry::get()
+		);
 
-    public function testUserCanCallNotLoggedIn() {
-        $this->assertFalse(
-                ControllerRegistry::userCanCall("PageController", "createPost")
-        );
-    }
+		BackendHelper::setAction("home");
+	}
 
-    public function testUserCanCallReturnsTrue() {
-        $user = new User();
-        $user->setUsername("testuser-nicht-admin");
-        $user->setLastname("Admin");
-        $user->setFirstname("Nicht");
-        $user->setPassword(uniqid());
-        $user->setAdmin(true);
-        $user->save();
+	public function testGetReturnsNull() {
+		BackendHelper::setAction("info");
+		$this->assertNull(
+				ControllerRegistry::get()
+		);
+	}
 
-        $_SESSION["login_id"] = $user->getId();
+	public function testUserCanCallNotLoggedIn() {
+		$this->assertFalse(
+				ControllerRegistry::userCanCall("PageController", "createPost")
+		);
+	}
 
-        $this->assertTrue(ControllerRegistry::userCanCall("PageController", "createPost"));
-        unset($_SESSION["login_id"]);
-    }
+	public function testUserCanCallReturnsTrue() {
+		$user = new User();
+		$user->setUsername("testuser-nicht-admin");
+		$user->setLastname("Admin");
+		$user->setFirstname("Nicht");
+		$user->setPassword(uniqid());
+		$user->setAdmin(true);
+		$user->save();
 
-    public function testUserCanCallReturnsFalse() {
-        $user = new User();
-        $user->setUsername("testuser-nicht-admin");
-        $user->setLastname("Admin");
-        $user->setFirstname("Nicht");
-        $user->setPassword(uniqid());
-        $user->setAdmin(false);
-        $user->save();
+		$_SESSION["login_id"] = $user->getId();
 
-        $_SESSION["login_id"] = $user->getId();
+		$this->assertTrue(ControllerRegistry::userCanCall("PageController", "createPost"));
+		unset($_SESSION["login_id"]);
+	}
 
-        $this->assertFalse(ControllerRegistry::userCanCall("PageController", "createPost"));
-        unset($_SESSION["login_id"]);
-    }
+	public function testUserCanCallReturnsFalse() {
+		$user = new User();
+		$user->setUsername("testuser-nicht-admin");
+		$user->setLastname("Admin");
+		$user->setFirstname("Nicht");
+		$user->setPassword(uniqid());
+		$user->setAdmin(false);
+		$user->save();
+
+		$_SESSION["login_id"] = $user->getId();
+
+		$this->assertFalse(ControllerRegistry::userCanCall("PageController", "createPost"));
+		unset($_SESSION["login_id"]);
+	}
+
+	public function testUserCanCallWildCard() {
+		$user = new User();
+		$user->setUsername("testuser-nicht-admin");
+		$user->setLastname("Admin");
+		$user->setFirstname("Nicht");
+		$user->setPassword(uniqid());
+		$user->setAdmin(false);
+		$user->save();
+
+		$_SESSION["login_id"] = $user->getId();
+
+		$this->assertFalse(
+				ControllerRegistry::userCanCall(
+						"HomeController", "newsfeed")
+		);
+		unset($_SESSION["login_id"]);
+	}
+
+	public function testRunMethodsWithNonExistingClassName() {
+		$_REQUEST["sClass"] = "GibtsNichtController";
+		$_REQUEST["sMethod"] = "puke";
+
+		$this->expectException(BadMethodCallException::class);
+		ControllerRegistry::runMethods();
+	}
+
+	public function testRunMethods() {
+		$_REQUEST["sClass"] = "Fortune";
+		$_REQUEST["sMethod"] = "helloWorld";
+		$_SERVER["REQUEST_METHOD"] = "GET";
+
+		ob_start();
+		ControllerRegistry::runMethods();
+
+		$this->assertEquals('Hello World!', ob_get_clean());
+	}
 
 }

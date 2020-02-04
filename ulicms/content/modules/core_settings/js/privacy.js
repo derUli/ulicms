@@ -1,5 +1,20 @@
 // Script for the "privacy settings" page
 $(() => {
+	$("form#privacy_form")
+        .ajaxForm(
+                {
+                    beforeSubmit: () => {
+                        $("#message").html("");
+                        $("#loading").show();
+                    },
+                    success: () => {
+                        $("#loading").hide();
+                        $("#message")
+                                .html(`<span style="color:green;">
+                        ${Translation.ChangesWasSaved}
+                </span>`);
+                    }
+                });
     // Change language
     // Privacy settings are language specific
     $("select#language").change(

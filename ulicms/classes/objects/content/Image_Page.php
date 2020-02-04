@@ -31,7 +31,8 @@ class Image_Page extends Page {
             return $this->create();
         }
         parent::update();
-        $sql = "update {prefix}content set image_url = ?, text_position = ? where id = ?";
+        $sql = "update {prefix}content set image_url = ?, text_position = ? "
+                . "where id = ?";
         $args = array(
             $this->image_url,
             $this->text_position,

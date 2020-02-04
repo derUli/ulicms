@@ -10,8 +10,10 @@ function replaceAudioTags(string $txt): ?string {
     if (defined("ULICMS_DATA_STORAGE_URL")) {
         $audio_dir = Path::resolve("ULICMS_DATA_STORAGE_URL/$audio_dir") . "/";
     }
-    // Ich weiß, dass das eigentlich einfacher mit einem regulären Ausdruck geht, aber ich kann keine reguläre Ausdrücke.
-    // Reguläre Ausdrücke sehen für mich so aus, als wäre eine Katze über die Tastatur gelaufen.
+    // Ich weiß, dass das eigentlich einfacher mit einem
+    // regulären Ausdruck geht, aber ich kann keine reguläre Ausdrücke.
+    // Reguläre Ausdrücke sehen für mich so aus, als wäre
+    // eine Katze über die Tastatur gelaufen.
     $contains = strpos($txt, "[audio id=") !== FALSE;
 
     if (!$contains) {
@@ -40,9 +42,11 @@ function replaceVideoTags(string $txt): string {
         $video_dir = Path::resolve("ULICMS_DATA_STORAGE_URL/$video_dir") . "/";
     }
 
-    // Ich weiß, dass das eigentlich einfacher mit einem regulären Ausdruck geht, aber ich kann keine reguläre Ausdrücke.
-    // Reguläre Ausdrücke sehen für mich so aus, als wäre eine Katze über die Tastatur gelaufen.
-    $contains = strpos($txt, "[video id=") !== FALSE;
+    // Ich weiß, dass das eigentlich einfacher mit einem
+    // regulären Ausdruck geht, aber ich kann keine reguläre Ausdrücke.
+    // Reguläre Ausdrücke sehen für mich so aus, als wäre
+    // eine Katze über die Tastatur gelaufen.
+    $contains = strpos($txt, "[video id=") !== false;
 
     if (!$contains) {
         return $txt;

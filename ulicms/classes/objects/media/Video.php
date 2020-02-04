@@ -16,7 +16,6 @@ use function get_translation;
 // html5 format support of browser are different
 // UliCMS allows *.mp4, *.ogv and *.webm file uploads for video
 class Video extends Model {
-
     private $name = null;
     private $mp4_file = null;
     private $ogg_file = null;
@@ -50,7 +49,8 @@ class Video extends Model {
     }
 
     public function loadById($id): void {
-        $result = Database::pQuery("select * from `{prefix}videos` where id = ?", array(
+        $result = Database::pQuery("select * from `{prefix}videos` "
+                        . "where id = ?", array(
                     intval($id)
                         ), true);
         if (!Database::any($result)) {
@@ -69,8 +69,8 @@ class Video extends Model {
             $this->webm_file = $result->webm_file;
             $this->setCategoryId($result->category_id ?
                             intval($result->category_id) : null);
-            $this->created = $result->created;
-            $this->updated = $result->updated;
+            $this->created = intval($result->created);
+            $this->updated = intval($result->updated);
             $this->width = intval($result->width);
             $this->height = intval($result->height);
         } else {
@@ -167,15 +167,17 @@ class Video extends Model {
     }
 
     public function getCreated(): int {
-        return $this->created;
+        return intval($this->created);
     }
 
     public function getUpdated(): ?int {
-        return $this->updated;
+        return !is_null($this->updated) ?
+                intval($this->updated) : null;
     }
 
     public function setName(?string $val): void {
-        $this->name = StringHelper::isNotNullOrWhitespace($val) ? strval($val) : null;
+        $this->name = StringHelper::isNotNullOrWhitespace($val) ?
+                strval($val) : null;
     }
 
     public function setCategoryId(?int $val): void {
@@ -192,21 +194,31 @@ class Video extends Model {
         if ($this->getId()) {
             if ($deletePhysical) {
                 if ($this->getMp4File()) {
-                    $file = Path::resolve("ULICMS_DATA_STORAGE_ROOT/content/videos/" . basename($this->getMP4File()));
+                    $file = Path::resolve(
+                                    "ULICMS_DATA_STORAGE_ROOT/content/videos/" .
+                                    basename($this->getMP4File())
+                    );
                     File::deleteIfExists($file);
                 }
                 if ($this->getOggFile()) {
-                    $file = Path::resolve("ULICMS_DATA_STORAGE_ROOT/content/videos/" . basename($this->getOggFile()));
+                    $file = Path::resolve(
+                                    "ULICMS_DATA_STORAGE_ROOT/content/videos/" .
+                                    basename($this->getOggFile())
+                    );
                     File::deleteIfExists($file);
                 }
                 if ($this->getWebmFile()) {
-                    $file = Path::resolve("ULICMS_DATA_STORAGE_ROOT/content/videos/" . basename($this->getWebmFile()));
+                    $file = Path::resolve(
+                                    "ULICMS_DATA_STORAGE_ROOT/content/videos/" .
+                                    basename($this->getWebmFile())
+                    );
                     File::deleteIfExists($file);
                 }
             }
-            Database::pQuery("delete from `{prefix}videos` where id = ?", array(
-                $this->getID()
-                    ), true);
+            Database::pQuery("delete from `{prefix}videos` where id = ?",
+                    [
+                        $this->getID()
+                    ], true);
             $this->fillVars(null);
         }
     }
@@ -215,22 +227,30 @@ class Video extends Model {
     public function render(): string {
         $video_dir = self::VIDEO_DIR;
         if (defined("ULICMS_DATA_STORAGE_URL")) {
-            $video_dir = Path::resolve("ULICMS_DATA_STORAGE_URL/$video_dir") . "/";
+            $video_dir = Path::resolve("ULICMS_DATA_STORAGE_URL/$video_dir") .
+                    "/";
         }
-        $html = '<video width="' . $this->width . '" height="' . $this->height . '" controls>';
+        $html = '<video width="' . $this->width . '" height="' .
+                $this->height . '" controls>';
         if (!empty($this->mp4_file)) {
             $html .= '<source src="' . $video_dir . _esc($this->mp4_file) . '" type="video/mp4">';
         }
         if (!empty($this->ogg_file)) {
-            $html .= '<source src="' . $video_dir . _esc($this->ogg_file) . '" type="video/ogg">';
+            $html .= '<source src="' . $video_dir . _esc($this->ogg_file) .
+                    '" type="video/ogg">';
         }
         if (!empty($this->webm_file)) {
-            $html .= '<source src="' . $video_dir . _esc($this->webm_file) . '" type="video/webm">';
+            $html .= '<source src="' . $video_dir . _esc($this->webm_file) .
+                    '" type="video/webm">';
         }
         $html .= get_translation("no_html5");
-        if (!empty($this->mp4_file) or ! empty($this->ogg_file) or ! empty($this->webm_file)) {
-            $preferred = (!empty($this->mp4_file) ? $this->mp4_file : (!empty($this->ogg_file) ? $this->ogg_file : $this->webm_file));
-            $html .= '<br/><a href="' . $video_dir . $preferred . '">' . get_translation("DOWNLOAD_VIDEO_INSTEAD") . '</a>';
+        if (!empty($this->mp4_file) or ! empty($this->ogg_file)
+                or ! empty($this->webm_file)) {
+            $preferred = (!empty($this->mp4_file) ?
+                    $this->mp4_file : (!empty($this->ogg_file) ?
+                    $this->ogg_file : $this->webm_file));
+            $html .= '<br/><a href="' . $video_dir . $preferred . '">' .
+                    get_translation("DOWNLOAD_VIDEO_INSTEAD") . '</a>';
         }
         $html .= "</video>";
         return $html;

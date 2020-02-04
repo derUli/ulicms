@@ -8,15 +8,19 @@ class CustomData {
 
     private static $defaults = [];
 
-    public static function get(?string $page = null) {
+    public static function get(?string $page = null): ?array {
         if (!$page) {
             $page = get_requested_pagename();
         }
-        $sql = "SELECT `custom_data` FROM " . tbname("content") . " WHERE slug='" . Database::escapeValue($page) . "'  AND language='" . Database::escapeValue($_SESSION["language"]) . "'";
+        
+        $sql = "SELECT `custom_data` FROM " . tbname("content") .
+                " WHERE slug='" . Database::escapeValue($page) .
+                "' AND language='" .
+                Database::escapeValue($_SESSION["language"]) . "'";
         $result = Database::query($sql);
         if (Database::getNumRows($result) > 0) {
             $dataset = Database::fetchObject($result);
-            return json_decode($dataset->custom_data, true);
+            return is_json($dataset->custom_data) ? json_decode($dataset->custom_data, true) : [];
         }
         return null;
     }
@@ -31,28 +35,37 @@ class CustomData {
         }
         $data[$var] = $value;
         $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-        Database::query("UPDATE " . tbname("content") . " SET custom_data = '" . Database::escapeValue($json) . "' WHERE slug='" . Database::escapeValue($page) . "'");
+        Database::query("UPDATE " . tbname("content") .
+                        " SET custom_data = '" .
+                        Database::escapeValue($json) .
+                        "' WHERE slug='" . Database::escapeValue($page) . "'") .
+                "' AND language='" .
+                Database::escapeValue($_SESSION["language"]) . "'";
     }
 
-    public static function delete(?string $var = null, ?string $page = null) {
+    public static function delete(
+            ?string $var = null, ?string $page = null)
+    : void {
         if (!$page) {
             $page = get_requested_pagename();
         }
+
         $data = self::get($page);
-        if (is_null($data)) {
+        if (is_null($data) or ! $var) {
             $data = [];
         }
         // Wenn $var gesetzt ist, nur $var aus custom_data löschen
-        if ($var) {
-            if (isset($data[$var])) {
-                unset($data[$var]);
-            }
-        } else {
-            // Wenn $var nicht gesetzt ist, alle Werte von custom_data löschen
-            $data = [];
+        if ($var and isset($data[$var])) {
+            unset($data[$var]);
         }
+
         $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-        Database::query("UPDATE " . tbname("content") . " SET custom_data = '" . Database::escapeValue($json) . "' WHERE slug='" . Database::escapeValue($page) . "'");
+
+        Database::query("UPDATE " . tbname("content") . " SET custom_data = '"
+                        . Database::escapeValue($json)
+                        . "' WHERE slug='" . Database::escapeValue($page) . "' " 
+                . "AND language='" .
+                Database::escapeValue($_SESSION["language"]) . "'");
     }
 
     public static function getCustomDataOrSetting(string $name) {

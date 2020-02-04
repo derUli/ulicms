@@ -35,6 +35,14 @@ class ActionRegistryTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull(ActionRegistry::getController());
     }
 
+    public function testGetControllerByCurrentActionReturnsController() {
+        ActionRegistry::assignControllerToAction("foobar",
+                HistoryController::class);
+
+        BackendHelper::setAction("foobar");
+        $this->assertInstanceOf(HistoryController::class, ActionRegistry::getController());
+    }
+
     public function testGetActions() {
         $actions = ActionRegistry::getActions();
         $this->assertGreaterThanOrEqual(60, count($actions));

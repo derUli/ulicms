@@ -12,7 +12,14 @@ class MenuEntry {
     private $children = [];
     private $newWindow = false;
 
-    public function __construct(string $title, string $link, string $identifier, $permissions = null, array $children = [], bool $newWindow = false) {
+    public function __construct(
+            string $title,
+            string $link,
+            string $identifier,
+            $permissions = null,
+            array $children = [],
+            bool $newWindow = false
+    ) {
         $this->title = $title;
         $this->link = $link;
         $this->identifier = $identifier;
@@ -57,7 +64,7 @@ class MenuEntry {
         return (count($this->children) > 0);
     }
 
-    public function addChild(array $children): void {
+    public function addChildren(array $children): void {
         $this->children[] = $children;
     }
 
@@ -86,7 +93,9 @@ class MenuEntry {
         if (is_array($this->permissions) and count($this->permissions) > 0) {
             $isPermitted = false;
             foreach ($this->permissions as $permission) {
-                if (is_string($permission) and ! empty($permission) and $acl->hasPermission($permission)) {
+                if (is_string($permission)
+                        and ! empty($permission)
+                        and $acl->hasPermission($permission)) {
                     $isPermitted = true;
                 }
             }
@@ -99,16 +108,15 @@ class MenuEntry {
     // render a single menu item
     public function render(): string {
         $html = "<li>";
-        $targetString = '';
-        if ($this->getNewWindow()) {
-            $targetString = ' target="_blank" ';
+        $targetString = $this->getNewWindow() ? "_blank" : "_self";
+        $cssClasses = "backend-menu-item-{$this->getIdentifier()}";
+        if (get_action() == $this->getIdentifier()) {
+
+            $cssClasses .= " active";
         }
-        $cssClassString = "class=\"backend-menu-item-{$this->getIdentifier()}\"";
-        if ($this->getIdentifier() == get_action()) {
-            $html .= '<a href="' . $this->getLink() . '" class="active"' . $targetString . $cssClassString . '>';
-        } else {
-            $html .= '<a href="' . $this->getLink() . '"' . $targetString . $cssClassString . '>';
-        }
+        $html .= "<a href=\"{$this->getLink()}\" "
+                . "target=\"{$targetString}\" class=\"{$cssClasses}\">";
+
         $html .= $this->getTitle();
         $html .= "</a>";
         $html .= "</li>";

@@ -1,4 +1,6 @@
 <?php
+use UliCMS\Constants\RequestMethod;
+
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("privacy_settings")) {
     $currentLanguage = Request::getVar("language");
@@ -30,7 +32,12 @@ if ($permissionChecker->hasPermission("privacy_settings")) {
             <h2 class="accordion-header"><?php translate("dsgvo_checkbox"); ?></h2>
             <div class="accordion-content">
                 <?php
-                echo ModuleHelper::buildMethodCallForm("PrivacyController", "save", [], "post", array(
+                echo ModuleHelper::buildMethodCallForm(
+				"PrivacyController",
+				"save",
+				[], 
+				RequestMethod::POST,
+				array(
                     "id" => "privacy_form"
                 ));
                 ?>
@@ -134,6 +141,10 @@ if ($permissionChecker->hasPermission("privacy_settings")) {
             <i class="fas fa-save"></i> <?php translate("save_changes"); ?></button>
     </p>
     <?php
+	$translation = new JSTranslation();
+    $translation->addKey("changes_was_saved");
+    $translation->render();
+	
     BackendHelper::enqueueEditorScripts();
     enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/privacy.js"));
     combinedScriptHtml();

@@ -5,7 +5,8 @@ use UliCMS\Models\Content\Advertisement\Banner;
 use UliCMS\Models\Content\Categories;
 
 $permissionChecker = new ACL();
-if ($permissionChecker->hasPermission("banners") and $permissionChecker->hasPermission("banners_edit")) {
+if ($permissionChecker->hasPermission("banners")
+        and $permissionChecker->hasPermission("banners_edit")) {
     $banner = intval($_GET["banner"]);
     $row = new Banner();
     $row->loadByID($banner);
@@ -13,12 +14,19 @@ if ($permissionChecker->hasPermission("banners") and $permissionChecker->hasPerm
         ?>
         <p>
             <a href="<?php echo ModuleHelper::buildActionURL("banner"); ?>"
-               class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
+               class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i>
+                <?php translate("back") ?></a>
         </p>
         <?php
-        echo ModuleHelper::buildMethodCallForm("BannerController", "update", [], RequestMethod::POST, array(
-            "autocomplete" => "off"
-        ));
+        echo ModuleHelper::buildMethodCallForm(
+                "BannerController",
+                "update",
+                [],
+                RequestMethod::POST,
+                [
+                    "autocomplete" => "off"
+                ]
+        );
         ?>
         <h4><?php translate("preview"); ?></h4>
         <?php
@@ -57,8 +65,10 @@ if ($permissionChecker->hasPermission("banners") and $permissionChecker->hasPerm
             }
             ?>
                    id="radio_gif" name="type" value="gif"
-                   onclick="$('#type_gif').slideDown();$('#type_html').slideUp();"> <label
-                   for="radio_gif"><?php translate("gif_banner"); ?></label>
+                   onclick="$('#type_gif').slideDown();
+                           $('#type_html').slideUp();">
+            <label
+                for="radio_gif"><?php translate("gif_banner"); ?></label>
         </p>
         <fieldset id="type_gif" style="<?php
         if ($row->getType() != "gif") {
@@ -73,10 +83,12 @@ if ($permissionChecker->hasPermission("banners") and $permissionChecker->hasPerm
                                    Template::escape($row->getName());
                                    ?>"> <br /> <strong><?php
                                        translate("IMAGE_URL");
-                                       ?></strong><br /> <input type="text" name="image_url"
-                                   value="<?php
-                                   Template::escape($row->getImageUrl());
-                                   ?>"> <br /> <strong><?php translate("link_url"); ?></strong><br />
+                                       ?></strong><br />
+            <input type="text" name="image_url"
+                   value="<?php
+                   Template::escape($row->getImageUrl());
+                   ?>"> <br /> <strong><?php translate("link_url"); ?></strong>
+            <br />
             <input type="text" name="link_url"
                    value="<?php
                    Template::escape($row->getLinkUrl());
@@ -106,8 +118,12 @@ if ($permissionChecker->hasPermission("banners") and $permissionChecker->hasPerm
         <p>
             <strong><?php translate("enabled"); ?></strong><br /> <select
                 name="enabled">
-                <option value="1" <?php if ($row->getEnabled()) echo "selected"; ?>><?php translate("yes"); ?></option>
-                <option value="0" <?php if (!$row->getEnabled()) echo "selected"; ?>><?php translate("no"); ?></option>
+                <option value="1"
+                        <?php if ($row->getEnabled()) echo "selected"; ?>>
+                    <?php translate("yes"); ?></option>
+                <option value="0"
+                        <?php if (!$row->getEnabled()) echo "selected"; ?>>
+                    <?php translate("no"); ?></option>
             </select>
         </p>
         <p>
@@ -116,9 +132,12 @@ if ($permissionChecker->hasPermission("banners") and $permissionChecker->hasPerm
                 value="<?php esc($row->getDateFrom()); ?>">
         </p>
         <p>
-            <strong><?php translate("date_to"); ?></strong><br /> <input type="text"
-                                                                         class="datepicker" name="date_to"
-                                                                         value="<?php esc($row->getDateTo()); ?>">
+            <strong><?php translate("date_to"); ?></strong><br />
+            <input
+                type="text"
+                class="datepicker"
+                name="date_to"
+                value="<?php esc($row->getDateTo()); ?>">
         </p>
         <strong><?php translate("language"); ?></strong>
         <br />
@@ -128,16 +147,19 @@ if ($permissionChecker->hasPermission("banners") and $permissionChecker->hasPerm
             $page_language = $row->getLanguage();
 
             if ($page_language === "all") {
-                echo "<option value='all' selected='selected'>" . get_translation("every") . "</option>";
+                echo "<option value='all' selected='selected'>" .
+                get_translation("every") . "</option>";
             } else {
                 echo "<option value='all'>" . get_translation("every") . "</option>";
             }
 
             for ($j = 0; $j < count($languages); $j ++) {
                 if ($languages[$j] === $page_language) {
-                    echo "<option value='" . $languages[$j] . "' selected>" . getLanguageNameByCode($languages[$j]) . "</option>";
+                    echo "<option value='" . $languages[$j] . "' selected>" .
+                    getLanguageNameByCode($languages[$j]) . "</option>";
                 } else {
-                    echo "<option value='" . $languages[$j] . "'>" . getLanguageNameByCode($languages[$j]) . "</option>";
+                    echo "<option value='" . $languages[$j] . "'>" .
+                    getLanguageNameByCode($languages[$j]) . "</option>";
                 }
             }
 

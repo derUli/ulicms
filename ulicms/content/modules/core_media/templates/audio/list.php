@@ -39,9 +39,11 @@ if ($permissionChecker->hasPermission("audio")) {
     <br />
     <?php if ($permissionChecker->hasPermission("audio_create")) { ?>
         <p>
-            <a href="index.php?action=add_audio" class="btn btn-default"><i class="fa fa-upload"></i> <?php
-                translate("upload_audio");
-                ?></a>
+            <a href="index.php?action=add_audio"
+               class="btn btn-default"><i class="fa fa-upload"></i>
+                   <?php
+                   translate("upload_audio");
+                   ?></a>
         </p>
     <?php } ?>
     <div class="scroll">
@@ -65,9 +67,13 @@ if ($permissionChecker->hasPermission("audio")) {
                         ?>
                     </th>
 
-                    <?php if ($permissionChecker->hasPermission("audio_edit")) { ?>
-                        <td></td>
-                        <td></td>
+                    <?php
+                    if ($permissionChecker->hasPermission(
+                                    "audio_edit"
+                            )) {
+                        ?>
+                        <td class="no-sort"></td>
+                        <td class="no-sort"></td>
                     <?php } ?>
                 </tr>
 
@@ -93,24 +99,38 @@ if ($permissionChecker->hasPermission("audio")) {
                             esc(basename($row->mp3_file));
                             ?>
                         </td>
-                        <?php if ($permissionChecker->hasPermission("audio_edit")) { ?>
-                            <td><a
+                        <?php
+                        if ($permissionChecker->hasPermission(
+                                        "audio_edit")
+                        ) {
+                            ?>
+                            <td>
+                                <a
                                     href="index.php?action=edit_audio&id=<?php
                                     echo $row->id;
-                                    ?>"><img src="gfx/edit.png" class="mobile-big-image"
-                                       alt="<?php
-                                       translate("edit");
-                                       ?>"
-                                       title="<?php
-                                       translate("edit");
-                                       ?>"> </a></td>
-                            <td><form
+                                    ?>"><img
+                                        src="gfx/edit.png"
+                                        class="mobile-big-image"
+                                        alt="<?php
+                                        translate("edit");
+                                        ?>"
+                                        title="<?php
+                                        translate("edit");
+                                        ?>"> </a>
+                            </td>
+                            <td>
+                                <form
                                     action="?sClass=AudioController&sMethod=delete&delete=<?php echo $row->id; ?>"
-                                    method="post" class="delete-form"><?php csrf_token_html(); ?><input
-                                        type="image" src="gfx/delete.png" class="mobile-big-image"
+                                    method="post"
+                                    class="delete-form">
+                                        <?php csrf_token_html(); ?>
+                                    <input
+                                        type="image" src="gfx/delete.png"
+                                        class="mobile-big-image"
                                         alt="<?php translate("delete"); ?>"
                                         title="<?php translate("delete"); ?>">
-                                </form></td>
+                                </form>
+                            </td>
                         <?php } ?>
                     </tr>
                 <?php } ?>
@@ -118,7 +138,10 @@ if ($permissionChecker->hasPermission("audio")) {
         </table>
     </div>
     <?php
-    enqueueScriptFile(ModuleHelper::buildModuleRessourcePath("core_media", "js/audio.js"));
+    enqueueScriptFile(ModuleHelper::buildModuleRessourcePath
+                    ("core_media",
+                    "js/audio.js")
+    );
     combinedScriptHtml();
     ?>
     <?php

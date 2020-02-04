@@ -1,0 +1,8 @@
+<div class="custom-field" 
+ data-field-name="my_field">
+<p>
+<strong>E-Mail </strong><br />
+<input type="email" 
+ name="my_field" value="foo@bar.de" />
+</p>
+</div>

@@ -1,13 +1,15 @@
 <?php
 
 use UliCMS\Security\Encryption;
+use UliCMS\Exceptions\NotImplementedException;
+use UliCMS\Utils\CacheUtil;
 
 class UserTest extends \PHPUnit\Framework\TestCase {
 
     private $otherGroup;
 
     public function setUp() {
-
+        CacheUtil::clearAvatars(true);
         $_SERVER["REQUEST_URI"] = "/other-url.html?param=value";
 
         require_once getLanguageFilePath("en");
@@ -21,14 +23,30 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $group->setName("Other Group");
         $group->save();
         $this->otherGroup = $group;
+
+        $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
+        $_SERVER["SERVER_PORT"] = "80";
+        $_SERVER['HTTP_HOST'] = "example.org";
+        $_SERVER['REQUEST_URI'] = "/foobar/foo.html";
     }
 
     public function tearDown() {
+        CacheUtil::clearAvatars(true);
         $this->setUp();
-        Database::pQuery("delete from `{prefix}groups` where name = ?", array(
-            "Other Group"
-                ), true);
+        Database::pQuery(
+                "delete from `{prefix}groups` "
+                . "where name like ? or name like ?",
+                [
+                    "Other Grou%",
+                    "Main Group"
+                ],
+                true
+        );
         unset($_SERVER["REQUEST_URI"]);
+        unset($_SERVER["SERVER_PROTOCOL"]);
+        unset($_SERVER['HTTP_HOST']);
+        unset($_SERVER['SERVER_PORT']);
+        unset($_SERVER['HTTPS']);
     }
 
     public function testCreateAndDeleteUser() {
@@ -42,6 +60,7 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $user->setHomepage("http://www.google.de");
         $user->setDefaultLanguage("fr");
         $user->setHTMLEditor("ckeditor");
+        $user->setFailedLogins(0);
 
         $user->setAboutMe("hello world");
         $lastLogin = time();
@@ -52,15 +71,20 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $user->loadByUsername("max_muster");
         $this->assertEquals("max_muster", $user->getUsername());
         $this->assertEquals("Max", $user->getFirstname());
-        $this->assertEquals("fr", $user->getDefaultLanguage());
         $this->assertEquals("Muster", $user->getLastname());
+        $this->assertEquals("Max Muster", $user->getFullName());
+
+        $this->assertEquals("fr", $user->getDefaultLanguage());
         $this->assertEquals("max@muster.de", $user->getEmail());
         $this->assertEquals(1, $user->getGroupId());
         $this->assertEquals(1, $user->getGroup()
                         ->getId());
         $this->assertEquals("Administrator", $user->getGroup()
                         ->getName());
-        $this->assertEquals(Encryption::hashPassword("password123"), $user->getPassword());
+        $this->assertEquals(
+                Encryption::hashPassword("password123"),
+                $user->getPassword()
+        );
         $this->assertEquals($lastLogin, $user->getLastLogin());
         $this->assertEquals("http://www.google.de", $user->getHomepage());
         $this->assertEquals("ckeditor", $user->getHTMLEditor());
@@ -91,7 +115,10 @@ class UserTest extends \PHPUnit\Framework\TestCase {
 
         // This always returns the URL of an placeholder image
         // since the new avatar feature is not implemented yet
-        $this->assertTrue(endsWith($user->getAvatar(), "/admin/gfx/no_avatar.png"));
+        $this->assertStringEndsWith(
+                "content/avatars/77845dbfbccaebb3f1ccd497e9c47466.png",
+                $user->getAvatar()
+        );
 
         $user->delete();
 
@@ -143,7 +170,10 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $user->setPassword("secret");
 
         $message = $user->getWelcomeMailText("secret");
-        $this->assertStringContainsString("An administrator created a user account for you", $message);
+        $this->assertStringContainsString(
+                "An administrator created a user account for you",
+                $message
+        );
         $this->assertStringContainsString("Hello John", $message);
         $this->assertStringContainsString("Username: john.doe", $message);
         $this->assertStringContainsString("Password: secret", $message);
@@ -216,8 +246,14 @@ class UserTest extends \PHPUnit\Framework\TestCase {
 
         $this->assertInstanceOf(User::class, $userFromSession);
         $this->assertEquals($userFromSession->getId(), $user->getId());
-        $this->assertEquals($userFromSession->getUsername(), $user->getUsername());
-        $this->assertEquals($userFromSession->getLastname(), $user->getLastname());
+        $this->assertEquals(
+                $userFromSession->getUsername(),
+                $user->getUsername()
+        );
+        $this->assertEquals(
+                $userFromSession->getLastname(),
+                $user->getLastname()
+        );
 
         @session_destroy();
     }
@@ -257,6 +293,271 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals($user->getUsername(), $sessionData["ulicms_login"]);
 
         $this->assertEquals($user->getLastname(), $sessionData["lastname"]);
+    }
+
+    public function testGetAllGroupsReturnsEmptyArray() {
+        $user = new User();
+        $user->setUsername("john-doe");
+        $user->setFirstname("John");
+        $user->setLastname("Doe");
+        $user->setPassword("password123");
+        $user->setEmail("john@doe.com");
+        $user->save();
+
+        $this->assertCount(0, $user->getAllGroups());
+
+        $user->delete();
+    }
+
+    public function testGetAllGroupsReturnsGroups() {
+
+        $user = new User();
+        $user->setUsername("john-doe");
+        $user->setFirstname("John");
+        $user->setLastname("Doe");
+        $user->setPassword("password123");
+        $user->setEmail("john@doe.com");
+
+        $group1 = new Group();
+        $group1->setName("Main Group");
+        $group1->save();
+
+        $group2 = new Group();
+        $group2->setName("Other Group 1");
+        $group2->save();
+
+        $group3 = new Group();
+        $group3->setName("Other Group 2");
+        $group3->save();
+
+        $user->setPrimaryGroup($group1);
+        $user->setSecondaryGroups([$group2, $group3]);
+        $user->save();
+
+        $allGroups = $user->getAllGroups();
+        $this->assertCount(3, $allGroups);
+
+        $this->assertEquals($allGroups[0]->getName(),
+                "Main Group"
+        );
+        $this->assertEquals($allGroups[1]->getName(),
+                "Other Group 1"
+        );
+        $this->assertEquals($allGroups[2]->getName(),
+                "Other Group 2"
+        );
+
+        $user->delete();
+    }
+
+    public function testGetPasswordChanged() {
+        $user = new User();
+        $user->setPassword("top-secret");
+        $this->assertRegExp(
+                '/\d+-\d+-\d+ \d+:\d+:\d+/',
+                $user->getPasswordChanged()
+        );
+    }
+
+    public function testSetAndGetLastAction() {
+        $user = new User();
+        $user->setUsername("john-doe");
+        $user->setFirstname("John");
+        $user->setLastname("Doe");
+        $user->setPassword("password123");
+        $user->setEmail("john@doe.com");
+        // does nothing because the dataset is not saved yet
+        $user->setLastAction(null);
+        $user->save();
+
+        // is zero until the user does something
+        $this->assertEquals(0, $user->getLastAction());
+
+        $time = time();
+        $user->setLastAction($time);
+        $this->assertEquals($time, $user->getLastAction());
+
+        $user->setLastAction(null);
+        $this->assertEquals(0, $user->getLastAction());
+
+        $user->delete();
+    }
+
+    public function testRemoveSecondaryGroup() {
+
+        $group1 = new Group();
+        $group1->setName("Group1");
+        $group1->setId(123);
+
+        $group2 = new Group();
+        $group2->setName("Group2");
+        $group2->setId(456);
+
+        $user = new User();
+        $user->setSecondaryGroups([$group1, $group2]);
+
+        $this->assertCount(2, $user->getSecondaryGroups());
+
+        $user->removeSecondaryGroup($group1);
+
+        $this->assertCount(1, $user->getSecondaryGroups());
+        $this->assertEquals(
+                "Group2",
+                $user->getSecondaryGroups()[0]->getName()
+        );
+    }
+
+    public function testSetHtmlEditorToNonSupported() {
+        $user = new User();
+
+        $user->setHTMLEditor("codemirror");
+        $this->assertEquals("codemirror", $user->getHTMLEditor());
+
+        // there is no "super_editor" so UliCMS sets html_editor
+        // to the default value
+        $user->setHTMLEditor("super_editor");
+        $this->assertEquals("ckeditor", $user->getHTMLEditor());
+    }
+
+    public function testIncreaseAndResetFailedLogins() {
+        $user = new User();
+        $user->setUsername("john-doe");
+        $user->setFirstname("John");
+        $user->setLastname("Doe");
+        $user->setPassword("password123");
+        $user->setEmail("john@doe.com");
+
+        // does nothing because the dataset is not saved yet
+        $user->setFailedLogins(3);
+        $user->increaseFailedLogins();
+        $user->resetFailedLogins();
+
+        $user->save();
+        $user->setFailedLogins(1);
+
+        for ($i = 1; $i <= 3; $i++) {
+            $user->increaseFailedLogins();
+        }
+
+        $this->assertEquals(4, $user->getFailedLogins());
+
+        $user->resetFailedLogins();
+        $this->assertEquals(0, $user->getFailedLogins());
+
+        $user->delete();
+    }
+
+    public function testResetPassword() {
+        $user = new User();
+        $user->setUsername("john-doe");
+        $user->setFirstname("John");
+        $user->setLastname("Doe");
+        $user->setPassword("password123");
+        $user->setEmail("john@doe.invalid");
+
+        // does nothing because the dataset is not saved yet
+        $user->setFailedLogins(3);
+        $user->increaseFailedLogins();
+        $user->resetFailedLogins();
+
+        $user->saveAndSendMail("quak");
+
+        $passwordReset = new PasswordReset();
+        $this->assertCount(
+                0,
+                $passwordReset->getAllTokensByUserId($user->getId())
+        );
+
+        $user->resetPassword();
+        $this->assertCount(
+                1,
+                $passwordReset->getAllTokensByUserId($user->getId())
+        );
+
+        $user->delete();
+    }
+
+    public function testGetFullNameReturnsFullName() {
+
+        $user = new User();
+        $user->setFirstname("John");
+        $user->setLastname("Doe");
+        $this->assertEquals("John Doe", $user->getFullName());
+    }
+
+    public function testGetFullNameReturnsEmptyString() {
+
+        $user = new User();
+        $this->assertEmpty($user->getFullName());
+    }
+
+    public function testGetAvatarReturnsFallback() {
+        $user = new User();
+        $this->assertStringEndsWith(
+                "admin/gfx/no_avatar.png",
+                $user->getAvatar()
+        );
+    }
+
+    public function testGetPermissionCheckerReturnsTrue() {
+        $user = new User();
+        $user->setUsername("john-doe");
+        $user->setFirstname("John");
+        $user->setLastname("Doe");
+        $user->setPassword("password123");
+        $user->setEmail("john@doe.invalid");
+        $user->setAdmin(true);
+        $user->save();
+
+        $permissionChecker = $user->getPermissionChecker();
+        $this->assertTrue($permissionChecker->hasPermission("design"));
+
+        $user->delete();
+    }
+
+    public function testGetPermissionCheckerReturnsFalse() {
+        $user = new User();
+
+        $permissionChecker = $user->getPermissionChecker();
+        $this->assertFalse($permissionChecker->hasPermission("design"));
+    }
+
+    public function testHasPermissionReturnsFalse() {
+        $user = new User();
+        $this->assertFalse($user->hasPermission("design"));
+    }
+
+    public function testProcessAvatar() {
+        $inputFile = Path::resolve(
+                        "ULICMS_ROOT/admin/gfx/apple-touch-icon-120x120.png"
+        );
+
+        $user = new User();
+        $user->setUsername("john-doe");
+        $user->setFirstname("John");
+        $user->setLastname("Doe");
+        $user->setPassword("password123");
+        $user->setEmail("john@doe.invalid");
+        $user->setAdmin(true);
+        $user->save();
+
+        $this->assertStringEndsNotWith(
+                "/user-" . $user->getId() . ".png",
+                $user->getAvatar()
+        );
+
+        $this->assertFalse($user->hasProcessedAvatar());
+        $this->assertFalse($user->removeAvatar());
+        $user->setAvatar($inputFile);
+
+        $this->assertStringEndsWith(
+                "user-" . $user->getId() . ".png",
+                $user->getAvatar()
+        );
+
+        $this->assertTrue($user->hasProcessedAvatar());
+        $this->assertTrue($user->removeAvatar());
+        $this->assertFalse($user->hasProcessedAvatar());
     }
 
 }
