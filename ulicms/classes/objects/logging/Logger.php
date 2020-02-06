@@ -26,7 +26,7 @@ class Logger {
             );
             $cfg = new CMSConfig();
             // Option fix_log_permissions
-            if (is_true($cfg->fix_log_permissions)) {
+            if (isset($cfg->fix_log_permissions) and is_true($cfg->fix_log_permissions)) {
                 $files = glob($this->path . "/log_*.log");
                 foreach ($files as $file) {
                     @chmod($file, 0777);

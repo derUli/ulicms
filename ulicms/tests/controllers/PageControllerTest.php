@@ -5,11 +5,11 @@ use UliCMS\Exceptions\NotImplementedException;
 class PageControllerTest extends \PHPUnit\Framework\TestCase {
 
     public function setUp() {
-        unset($_SESSION["pages_list_view"]);
+        $_SESSION = [];
     }
 
     public function tearDown() {
-        unset($_SESSION["pages_list_view"]);
+        $_SESSION = [];
     }
 
     public function testGetPagesListViewNotSetReturnsDefault() {

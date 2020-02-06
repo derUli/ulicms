@@ -35,7 +35,7 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
             );
         }
 
-        $this->assertEquals($data["recordsTotal"], $data["recordsFiltered"]);
+        $this->assertEquals($data2["recordsTotal"], $data2["recordsFiltered"]);
     }
 
     public function testGetDataFiltered() {

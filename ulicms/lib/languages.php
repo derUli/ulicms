@@ -115,7 +115,7 @@ function getLanguageNameByCode(string $code): string {
 function setLocaleByLanguage(): array {
     $locale = [];
 
-    $var = is_admin_dir() ?
+    $var = (is_admin_dir() and isset($_SESSION["system_language"])) ?
             "locale_" . $_SESSION["system_language"] :
             "locale_" . $_SESSION["language"];
 

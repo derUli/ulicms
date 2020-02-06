@@ -485,7 +485,6 @@ class User extends Model {
         if (is_null($this->id)) {
             return;
         }
-        $time = intval($time);
         $sql = "update {prefix}users set failed_logins = ? where id = ?";
         $args = array(
             $amount,

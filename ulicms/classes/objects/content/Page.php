@@ -79,7 +79,7 @@ class Page extends Content {
         $this->deleted_at = $result->deleted_at;
         $this->theme = $result->theme;
         $this->robots = $result->robots;
-        if ($this->customData === null) {
+        if ($this->custom_data === null) {
             $this->custom_data = [];
         }
         $this->custom_data = json_decode($result->custom_data, false);

@@ -180,7 +180,7 @@ $config = new CMSConfig();
 // else use default error_reporting from php.ini
 if ((defined("ULICMS_DEBUG") and ULICMS_DEBUG)
 		or ( isset($config->debug) and $config->debug)) {
-	error_reporting(E_ALL ^ E_NOTICE);
+	error_reporting(E_ALL);
 } else {
 	error_reporting(0);
 }
@@ -268,25 +268,25 @@ Translation::init();
 
 if (class_exists("Path")) {
 
-	if (is_true($config->exception_logging)) {
+	if (isset($config->exception_logging) and is_true($config->exception_logging)) {
 		LoggerRegistry::register(
 				"exception_log",
 				new Logger(Path::resolve("ULICMS_LOG/exception_log"))
 		);
 	}
-	if (is_true($config->query_logging)) {
+	if (isset($config->query_logging) and is_true($config->query_logging)) {
 		LoggerRegistry::register(
 				"sql_log",
 				new Logger(Path::resolve("ULICMS_LOG/sql_log"))
 		);
 	}
-	if (is_true($config->phpmailer_logging)) {
+	if (isset($config->phpmailer_logging) and is_true($config->phpmailer_logging)) {
 		LoggerRegistry::register(
 				"phpmailer_log",
 				new Logger(Path::resolve("ULICMS_LOG/phpmailer_log"))
 		);
 	}
-	if (is_true($config->audit_log)) {
+	if (isset($config->audit_log) and is_true($config->audit_log)) {
 		LoggerRegistry::register(
 				"audit_log",
 				new Logger(Path::resolve("ULICMS_LOG/audit_log"))
@@ -341,7 +341,7 @@ if (!$connection) {
 
 $path_to_installer = dirname(__file__) . "/installer/installer.php";
 
-if (is_true($config->dbmigrator_auto_migrate)) {
+if (isset($config->dbmigrator_auto_migrate) and is_true($config->dbmigrator_auto_migrate)) {
 	$additionalSql = is_array($config->dbmigrator_initial_sql_files) ?
 			$config->dbmigrator_initial_sql_files : [];
 	if (isCLI()) {
@@ -430,10 +430,10 @@ function shutdown_function() {
 	do_event("shutdown");
 
 	$cfg = new CMSConfig();
-	if (is_true($cfg->show_render_time) and ! Request::isAjaxRequest()) {
+	if (isset($cfg->show_render_time) and is_true($cfg->show_render_time) and ! Request::isAjaxRequest()) {
 		echo "\n\n<!--" . (microtime(true) - START_TIME) . "-->";
 	}
-	if (is_true($cfg->dbmigrator_drop_database_on_shutdown)) {
+	if (isset($cfg->dbmigrator_drop_database_on_shutdown) and is_true($cfg->dbmigrator_drop_database_on_shutdown)) {
 		if (isCLI()) {
 			Database::setEchoQueries(true);
 		}
