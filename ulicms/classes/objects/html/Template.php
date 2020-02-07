@@ -531,11 +531,12 @@ color: " . Settings::get("body-text-color") . ";
         $data = CustomData::get();
         // it's possible to disable shortcodes for a page
         // define "disable_shortcodes in custom data / json
-        if (isset($data["disable_shortcodes"]) and is_false($data["disable_shortcodes"])) {
+        if (!(isset($data["disable_shortcodes"]) and is_true($data["disable_shortcodes"]))) {
             $htmlContent = replaceShortcodesWithModules($htmlContent);
-            $htmlContent = apply_filter($htmlContent, "content");
+            $htmlContent = replaceOtherShortCodes($htmlContent);
         }
-        return $htmlContent;
+        $htmlContent = apply_filter($htmlContent, "content");
+        return trim($htmlContent);
     }
 
     public static function languageSelection() {

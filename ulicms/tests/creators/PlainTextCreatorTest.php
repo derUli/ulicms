@@ -45,7 +45,8 @@ class PlainTextCreatorTest extends \PHPUnit\Framework\TestCase {
         $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (Windows NT 6.1; "
                 . "Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
                 . "Chrome/63.0.3239.132 Safari/537.36";
-        $expected = normalizeLN(file_get_contents(
+        $expected = normalizeLN(
+                file_get_contents(
                         Path::resolve(
                                 "ULICMS_ROOT/tests/fixtures/creators/plain.txt"
                         )
@@ -53,8 +54,8 @@ class PlainTextCreatorTest extends \PHPUnit\Framework\TestCase {
         );
         $creator = new PlainTextCreator();
 
-        $this->assertEquals($expected, $creator->render());
-        $this->assertEquals($expected, $creator->render());
+        $this->assertEquals($expected, normalizeLN($creator->render()));
+        $this->assertEquals($expected, normalizeLN($creator->render()));
     }
 
     public function testRenderWithTextPositionBefore() {

@@ -23,7 +23,6 @@ class JSONCreator {
     public function render(): string {
         $cacheUid = CacheUtil::getCurrentUid();
 
-
         $adapter = CacheUtil::getAdapter();
         // if it is in cache return it from cache
         if ($adapter and $adapter->get($cacheUid)) {
@@ -34,11 +33,8 @@ class JSONCreator {
         $this->renderContent();
 
         $data = [];
-        $this->content = str_replace("\r\n", "\n", $this->content);
-        $this->content = str_replace("\r", "\n", $this->content);
-        $this->content = str_replace("\n", "\r\n", $this->content);
         $data["title"] = $this->title;
-        $data["content"] = $this->content;
+        $data["content"] = trim($this->content);
         $data["meta_description"] = get_meta_description();
         $data["meta_keywords"] = get_meta_keywords();
         $json_string = json_encode(
@@ -48,7 +44,7 @@ class JSONCreator {
         if ($adapter) {
             $adapter->set($cacheUid, $json_string);
         }
-        return $json_string;
+        return trim($json_string);
     }
 
 }
