@@ -14,8 +14,10 @@ class UrlHelper extends \Helper {
         if (!empty($parsedUri["port"])) {
             $hostWithPort .= ":" . $parsedUri["port"];
         }
+		
+		$path = isset($parsedUri["path"]) ? $parsedUri["path"] : "";
         return $parsedUri["scheme"] . "://" . $hostWithPort
-                . $parsedUri["path"];
+                . $path;
     }
 
 }

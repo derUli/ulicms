@@ -64,9 +64,10 @@ class ACL {
 	}
 
 	public function getPermissionQueryResult(?int $id = null): ?array {
+		$group_id = null;
 		if ($id) {
 			$group_id = $id;
-		} else {
+		} else if(isset($_SESSION["group_id"])){
 			$group_id = $_SESSION["group_id"];
 		}
 		if (!$group_id) {

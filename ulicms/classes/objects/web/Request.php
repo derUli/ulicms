@@ -90,11 +90,8 @@ class Request {
 
     public static function isSSL(): bool {
         return (!empty($_SERVER['HTTPS']) and
-                $_SERVER['HTTPS'] !== 'off' ||
-                (
-                isset($_SERVER['SERVER_PORT']) and
-                $_SERVER['SERVER_PORT'] == 443)
-                );
+                $_SERVER['HTTPS'] !== 'off') ||
+                (self::getPort() === 443);
     }
 
     private static function getProxyHeaders(): array {

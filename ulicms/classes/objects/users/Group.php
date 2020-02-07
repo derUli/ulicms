@@ -196,7 +196,7 @@ class Group {
     public function hasPermission(string $name): bool {
         return (
                 isset($this->permissions[$name]) and
-                isset($this->permissions[$name])
+                $this->permissions[$name]
                 );
     }
 

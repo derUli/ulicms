@@ -1,9 +1,12 @@
 <?php
 
 class ACLTest extends \PHPUnit\Framework\TestCase {
-
+    public function setUp() {
+        $_SESSION = [];
+    }
+	
     public function tearDown() {
-        unset($_SESSION["group_id"]);
+        $_SESSION = [];
     }
 
     public function testGetAllGroups() {
