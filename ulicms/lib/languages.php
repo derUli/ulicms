@@ -117,7 +117,7 @@ function setLocaleByLanguage(): array {
 
     $var = (is_admin_dir() and isset($_SESSION["system_language"])) ?
             "locale_" . $_SESSION["system_language"] :
-            "locale_" . $_SESSION["language"];
+            "locale_" . getDefaultLanguage();
 
     $localeSetting = Settings::get($var) ?
             Settings::get($var) : Settings::get("locale");

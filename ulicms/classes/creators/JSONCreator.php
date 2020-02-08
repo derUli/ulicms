@@ -17,7 +17,9 @@ class JSONCreator {
         $this->title = get_title();
         ob_start();
         content();
-        $this->content = ob_get_clean();
+        $this->content = trim(
+                normalizeLN(ob_get_clean())
+        );
     }
 
     public function render(): string {
@@ -34,7 +36,7 @@ class JSONCreator {
 
         $data = [];
         $data["title"] = $this->title;
-        $data["content"] = trim($this->content);
+        $data["content"] = $this->content;
         $data["meta_description"] = get_meta_description();
         $data["meta_keywords"] = get_meta_keywords();
         $json_string = json_encode(

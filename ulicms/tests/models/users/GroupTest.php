@@ -25,7 +25,6 @@ class GroupTest extends \PHPUnit\Framework\TestCase {
 			Settings::set($key, $value);
 		}
 		@session_destroy();
-		unset($_SESSION["login_id"]);
 	}
 
 	public function testCreateGroup() {
