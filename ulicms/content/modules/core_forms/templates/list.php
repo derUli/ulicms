@@ -48,7 +48,7 @@ if (!$permissionChecker->hasPermission("forms")) {
                                     ?>"><img src="gfx/edit.png" class="mobile-big-image"
                                        alt="<?php translate("edit"); ?>"
                                        title="<?php translate("edit"); ?>"></a></td>
-                            <td class="text-center"
+                            <td class="text-center">
                             <?php echo ModuleHelper::deleteButton(ModuleHelper::buildMethodCallUrl("FormController", "delete"), array("del" => $form ["id"])); ?>
                         </td>
                     <?php } ?>

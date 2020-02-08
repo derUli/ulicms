@@ -756,7 +756,10 @@ form.page-list-filters {
     margin-bottom: 10px;
 }
 table.dataTable {
-    width: 100% !important;
+    // for reasons there is always a horizontal scrollbar in Firefox
+    // if we don't subtract 2px
+    // what the hell are these 2px?!
+    width: calc(100% - 2px) !important;
     position: relative;
     top: 5px;
     tbody, thead {
