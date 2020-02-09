@@ -19,7 +19,7 @@ if (!$admin_logo) {
     $admin_logo = "gfx/logo.png";
 }
 
-$error = isset($_REQUEST["error"]) and !empty($_REQUEST["error"]) ? $_REQUEST["error"] : null;
+$error = (isset($_REQUEST["error"]) and !empty($_REQUEST["error"])) ? $_REQUEST["error"] : null;
 
 $login_welcome_text = get_lang_config("login_welcome_text", $default_language);
 ?>

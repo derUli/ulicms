@@ -86,7 +86,7 @@ class Template {
     public static function getHomepageOwner(): string {
         $homepage_title = Settings::getLanguageSetting(
                         "homepage_owner",
-                        getDefaultLanguage()
+                        getFrontendLanguage()
         );
         return _esc($homepage_title);
     }
@@ -177,7 +177,7 @@ class Template {
     public static function getSiteSlogan(): string {
         // Existiert ein Motto für diese Sprache?
         // z.B. site_slogan_en
-        $site_slogan = Settings::get("site_slogan_" . getDefaultLanguage());
+        $site_slogan = Settings::get("site_slogan_" . getFrontendLanguage());
 
         // Ansonsten Standard Motto
         if (!$site_slogan) {
@@ -501,7 +501,7 @@ color: " . Settings::get("body-text-color") . ";
                 db_query("UPDATE " . tbname("content") .
                         " SET views = views + 1 WHERE slug='" .
                         Database::escapeValue($_GET["slug"]) .
-                        "' AND language='" . db_escape(getDefaultLanguage())
+                        "' AND language='" . db_escape(getFrontendLanguage())
                         . "'");
             }
         } else if (is_404()) {

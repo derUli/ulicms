@@ -73,7 +73,7 @@ function register_translation(string $key, string $value): void {
     idefine($key, $value);
 }
 
-function getDefaultLanguage(){
+function getFrontendLanguage(){
     $domainLanguage = get_domain() ? 
             getDomainByLanguage(get_domain()) : null;
     $fallbackLanguage = $domainLanguage ?
