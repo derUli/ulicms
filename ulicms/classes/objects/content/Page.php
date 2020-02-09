@@ -224,7 +224,7 @@ class Page extends Content {
 
         $json = json_encode(
                 $this->custom_data,
-                JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_FORCE_OBJECT
+                JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
         );
 
         $sql .= "'" . Database::escapeValue($json) . "',";
@@ -329,7 +329,7 @@ class Page extends Content {
 
         $json = json_encode(
                 $this->custom_data,
-                JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_FORCE_OBJECT
+                JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
         );
 
         $sql .= "custom_data='" . Database::escapeValue($json) . "',";
