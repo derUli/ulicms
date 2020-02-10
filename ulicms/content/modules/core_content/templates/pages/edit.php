@@ -522,7 +522,7 @@ if ($permissionChecker->hasPermission("pages")) {
 									echo 'selected="selected"';
 								}
 								?>
-									value="NULL">
+									value="">
 									[
 									<?php
 									translate("every");
@@ -537,7 +537,7 @@ if ($permissionChecker->hasPermission("pages")) {
 										echo $page["id"];
 										?>"
 										<?php
-										if ($list_data->parent_id === $page["id"]) {
+										if ($list_data->parent_id === intval($page["id"])) {
 											echo 'selected="selected"';
 										}
 										?>>
