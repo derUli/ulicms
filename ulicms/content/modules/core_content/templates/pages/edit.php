@@ -501,7 +501,8 @@ if ($permissionChecker->hasPermission("pages")) {
 							<br /> <br /> <strong><?php
 								translate("menu");
 								?>
-							</strong><br /> <select name="list_menu" size=1>
+							</strong><br />
+							<select name="list_menu" size="1">
 								<option value="">[<?php translate("every"); ?>]</option>
 								<?php
 								foreach (getAllMenus() as $menu) {
