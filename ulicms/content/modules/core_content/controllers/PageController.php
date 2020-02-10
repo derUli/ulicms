@@ -122,7 +122,7 @@ class PageController extends Controller {
                 Request::getVar("custom_data", "{}", "str"),
                 false
         );
-		
+
         $model->theme = Request::getVar("theme", NULL, "str");
 
         if ($model instanceof Node) {
@@ -368,7 +368,7 @@ class PageController extends Controller {
 
         $current_version_date = date(
                 "Y-m-d H:i:s",
-                intval( $current_version->lastmodified)
+                intval($current_version->lastmodified)
         );
         $old_version_date = $old_version->date;
 
@@ -458,7 +458,7 @@ class PageController extends Controller {
                         echo "selected";
                     }
                     ?>>
-                    <?php
+                        <?php
                         echo esc($page["title"]);
                         ?>
                 (ID: <?php echo $page["id"]; ?>)

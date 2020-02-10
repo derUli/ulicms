@@ -181,7 +181,7 @@ CREATE TABLE `{prefix}lists` (
   `content_id` int(11) NOT NULL,
   `language` varchar(50) DEFAULT NULL,
   `category_id` int(11) DEFAULT NULL,
-  `menu` varchar(10) DEFAULT NULL,
+  `menu` varchar(10) NOT NULL,
   `parent_id` int(11) DEFAULT NULL,
   `order_by` varchar(30) DEFAULT 'title',
   `order_direction` varchar(30) DEFAULT 'asc',

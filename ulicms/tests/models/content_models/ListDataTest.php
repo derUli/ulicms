@@ -32,7 +32,7 @@ class ListDataTest extends \PHPUnit\Framework\TestCase {
 
         $this->assertEquals("de", $loaded->language);
         $this->assertEquals(1, $loaded->category_id);
-        $this->assertEquals("top", $loaded->menu);
+        $this->assertEquals("not_in_menu", $loaded->menu);
         $this->assertEquals(5, $loaded->parent_id);
         $this->assertTrue($loaded->use_pagination);
         $this->assertEquals(4, $loaded->limit);
@@ -110,7 +110,7 @@ class ListDataTest extends \PHPUnit\Framework\TestCase {
         $listData = new List_Data($contentId);
         $listData->language = "de";
         $listData->category_id = 1;
-        $listData->menu = "top";
+        $listData->menu = "not_in_menu";
         $listData->parent_id = 5;
         $listData->use_pagination = true;
         $listData->limit = 4;
