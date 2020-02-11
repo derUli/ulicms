@@ -122,7 +122,7 @@ class PageController extends Controller {
                 Request::getVar("custom_data", "{}", "str"),
                 false
         );
-		
+
         $model->theme = Request::getVar("theme", NULL, "str");
 
         if ($model instanceof Node) {

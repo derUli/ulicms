@@ -65,17 +65,17 @@ if (!$permissionChecker->hasPermission("forms")) {
                                 echo ModuleHelper::deleteButton(
                                         ModuleHelper::buildMethodCallUrl(
                                                 "FormController",
-                                                "delete"),
+                                                "delete"
+                                        ),
                                         ["del" => $form ["id"]]
-                                
-								);
+                                );
                                 ?>
-                        </td>
+                            </td>
+                        <?php } ?>
+                    </tr>
                 <?php } ?>
-                </tr>
-    <?php } ?>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
     </div>
     <?php
     $translation = new JSTranslation();

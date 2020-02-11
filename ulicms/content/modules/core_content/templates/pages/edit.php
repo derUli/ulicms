@@ -305,7 +305,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                    ?>"
                                    style="cursor: pointer" /> <a href="#"
                                    onclick="$('#menu_image').val('');
-                                                                                       return false;"
+                                           return false;"
                                    class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?> </a>
                         </div></div>
                     <div class="typedep" id="tab-link">
@@ -406,7 +406,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                        ?>"
                                        style="cursor: pointer" /> <a href="#"
                                        onclick="$('#og_image').val('');
-                                                                                               return false;"
+                                               return false;"
                                        class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?>
                                 </a>
                                 <?php
@@ -501,7 +501,8 @@ if ($permissionChecker->hasPermission("pages")) {
                             <br /> <br /> <strong><?php
                                 translate("menu");
                                 ?>
-                            </strong><br /> <select name="list_menu" size=1>
+                            </strong><br />
+                            <select name="list_menu" size="1">
                                 <option value="">[<?php translate("every"); ?>]</option>
                                 <?php
                                 foreach (getAllMenus() as $menu) {
@@ -522,7 +523,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                     echo 'selected="selected"';
                                 }
                                 ?>
-                                    value="NULL">
+                                    value="">
                                     [
                                     <?php
                                     translate("every");
@@ -537,7 +538,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                         echo $page["id"];
                                         ?>"
                                         <?php
-                                        if ($list_data->parent_id === $page["id"]) {
+                                        if ($list_data->parent_id === intval($page["id"])) {
                                             echo 'selected="selected"';
                                         }
                                         ?>>
@@ -634,7 +635,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                    value="<?php Template::escape($row->image_url); ?>"
                                    style="cursor: pointer" /> <a href="#"
                                    onclick="$('#menu_image').val('');
-                                                                                       return false;"
+                                           return false;"
                                    class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?>
                             </a>
                         </div>
@@ -669,7 +670,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                    value="<?php echo _esc($row->article_image); ?>"
                                    style="cursor: pointer" maxlength="255" /> <a href="#"
                                    onclick="$('#article_image').val('');
-                                                                                       return false;"
+                                           return false;"
                                    class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?></a>
                         </div>
                     </div>
@@ -874,7 +875,7 @@ if ($permissionChecker->hasPermission("pages")) {
                 <div class="row">
                     <div class="col-xs-6">
                         <button type="submit" class="btn btn-primary">
-                            <i class="far fa-save"></i> <?php translate("save"); ?></button>
+                            <i class="far fa-save"></i> <?php translate("save_changes"); ?></button>
                     </div>
                     <div class="col-xs-6 text-right">
                         <button class="typedep btn btn-info" type="button" id="btn-view-page">
