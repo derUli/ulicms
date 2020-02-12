@@ -453,8 +453,8 @@ class PageController extends Controller {
         foreach ($pages as $key => $page) {
             ?>
             <option value="<?php
-            echo $page["id"];
-            ?>" <?php
+                    echo $page["id"];
+                    ?>" <?php
                     if ($page["id"] == $parent_id) {
                         echo "selected";
                     }
