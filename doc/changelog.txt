@@ -12,6 +12,9 @@ Neue API-Methoden:
 Entfernte API-Methoden:
 * "kama" CKEditor Skin entfernt
 
+Fehlerkorrekturen:
+* Speichern des Inhaltstyps "Liste" korrigiert
+
 ===== Neues in UliCMS 2020.1 =====
 
 Neue Features:
