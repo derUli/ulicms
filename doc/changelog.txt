@@ -13,6 +13,7 @@ Entfernte API-Methoden:
 
 Fehlerkorrekturen:
 * Speichern des Inhaltstyps "Liste" korrigiert
+* impro17: Pagination von Listen korrigiert
 
 ===== Neues in UliCMS 2020.1 =====
 

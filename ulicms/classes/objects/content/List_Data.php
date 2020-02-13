@@ -20,7 +20,7 @@ class List_Data extends Model {
 
     // apply the filter conditions of this list
     // returns array of contents
-    public function filter(): array {
+    public function filter(?int $offset = null): array {
         $limit = $this->use_pagination ? $this->limit : null;
 
         return ContentFactory::getForFilter(
@@ -31,7 +31,8 @@ class List_Data extends Model {
                         $this->order_by,
                         $this->order_direction,
                         $this->type,
-                        $limit
+                        $limit,
+                        $offset
         );
     }
 
