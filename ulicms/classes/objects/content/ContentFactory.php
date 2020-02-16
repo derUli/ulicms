@@ -182,7 +182,7 @@ class ContentFactory {
             string $order_by = "title",
             string $order_direction = "asc",
             ?string $type = null,
-            ?string $limit = null,
+            ?int $limit = null,
             ?int $offset = null
     ): array {
         $datasets = [];

@@ -18,9 +18,21 @@ class List_Data extends Model {
     public $use_pagination = false;
     public $type = null;
 
+    public function filter(?int $offset = null): array {
+        return $this->filterPaginated($offset);
+    }
+
+    public function hasMore(int $offset = 0): bool {
+        return count(
+                $this->filterPaginated(
+                        $offset + intval($this->limit)
+                )
+        ) > 0;
+    }
+
     // apply the filter conditions of this list
     // returns array of contents
-    public function filter(?int $offset = null): array {
+    public function filterPaginated(?int $offset = null): array {
         $limit = $this->use_pagination ? $this->limit : null;
 
         return ContentFactory::getForFilter(
@@ -33,6 +45,20 @@ class List_Data extends Model {
                         $this->type,
                         $limit,
                         $offset
+        );
+    }
+
+    // apply the filter conditions of this list
+    // returns array of contents
+    public function filterAll(): array {
+        return ContentFactory::getForFilter(
+                        $this->language,
+                        $this->category_id,
+                        $this->menu,
+                        $this->parent_id,
+                        $this->order_by,
+                        $this->order_direction,
+                        $this->type
         );
     }
 

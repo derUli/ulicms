@@ -8,6 +8,10 @@ Neue Features:
 Neue API-Methoden:
 * BackendHelper::getCKEditorSkins(): array
 * getDefaultLanguage(): string
+* ListData->filterPaginated(?int $offset = null): array
+* ListData->filterAll(): array
+* ListData->hasMore(int $offset = 0): bool
+
 
 Entfernte API-Methoden:
 * "kama" CKEditor Skin entfernt
