@@ -12,13 +12,14 @@ Neue API-Methoden:
 * ListData->filterAll(): array
 * ListData->hasMore(int $offset = 0): bool
 
-
 Entfernte API-Methoden:
 * "kama" CKEditor Skin entfernt
 
 Fehlerkorrekturen:
 * Speichern des Inhaltstyps "Liste" korrigiert
 * impro17: Pagination von Listen korrigiert
+* Versionen vergleichen ist wieder funktional
+* Kontaktformulare können wieder gelöscht werden
 
 ===== Neues in UliCMS 2020.1 =====
 
