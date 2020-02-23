@@ -20,6 +20,9 @@ Fehlerkorrekturen:
 * impro17: Pagination von Listen korrigiert
 * Versionen vergleichen ist wieder funktional
 * Kontaktformulare können wieder gelöscht werden
+* Pakete: 
+  Wenn keine Embed-Module installiert sind, wurden die Modul-Buttons 
+  nicht mehr angezeigt. Dieser Fehler wurde korrigiert
 
 ===== Neues in UliCMS 2020.1 =====
 

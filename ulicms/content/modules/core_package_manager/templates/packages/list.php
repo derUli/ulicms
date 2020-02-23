@@ -69,6 +69,8 @@ if ($permissionChecker->hasPermission("list_packages")) {
 												"class" => "select-on-click"]);
 								}
 								?></td>
+								
+						<?php } ?>
 							<td class="actions">
 								<div class="btn-toolbar">
 									<span class="btn btn-info btn-sm remote-alert icon"
@@ -112,7 +114,6 @@ if ($permissionChecker->hasPermission("list_packages")) {
 									?>
 								</div>
 							</td>
-						<?php } ?>
 					</tr>
 				<?php } ?>
 			</tbody>
