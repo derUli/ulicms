@@ -228,6 +228,11 @@ function containsModule(?string $page = null, ?string $module = null): bool {
 
     $result = db_query("SELECT content, module, `type` FROM " .
             tbname("content") . " WHERE slug = '" . db_escape($page) . "'");
+    
+    if(!Database::any($result)){
+        return false;
+    }
+    
     $dataset = db_fetch_assoc($result);
     $content = $dataset["content"];
     $content = str_replace("&quot;", "\"", $content);

@@ -383,7 +383,8 @@ function language_selection(): void {
 
 function get_category(): ?string {
     $current_page = get_page();
-    if (!$current_page["category_id"]) {
+    if (!(isset($current_page["category_id"]) and
+            $current_page["category_id"])) {
         return null;
     }
     return Categories::getCategoryById(intval($current_page["category_id"]));
