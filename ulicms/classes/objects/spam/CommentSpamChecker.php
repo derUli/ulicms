@@ -94,19 +94,13 @@ class CommentSpamChecker implements ISpamChecker {
         // If the option "Check DNS MX Entry of email addresses" is enabled check the mail domain
         $email = $this->comment->getAuthorEmail();
         $checkMxOfEmailAddress = $this->spamFilterConfiguration->getCheckMxOfMailAddress();
-
         if (StringHelper::isNotNullOrWhitespace($email) &&
                 $checkMxOfEmailAddress) {
             if (!AntiSpamHelper::checkMailDomain($email)) {
-                 getmxrr($email, $hostnames);
-                         
                 $this->errors[] = new SpamDetectionResult(
                         get_translation("author_email"),
-                        get_translation("mail_address_has_invalid_mx_entry",
-                                [
-                                    "%hostname%" => implode(", ", $hostnames)
-                                ]
-                ));
+                        get_translation("mail_address_has_invalid_mx_entry")
+                );
             }
         }
         // If the option "Disallow Chinese Chars" is enabled,

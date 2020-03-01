@@ -773,7 +773,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $output = var_dump_str(new User());
 
         $this->assertStringContainsString(
-                "class User",
+                "User",
                 normalizeLN($output)
         );
         $this->assertStringContainsString(
