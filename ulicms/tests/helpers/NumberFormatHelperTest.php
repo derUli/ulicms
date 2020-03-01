@@ -30,7 +30,7 @@ class NumberFormatHelperTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testFormatTime() {
-        $number = time() - (60 * 60 * 24 * 365 * 2);
+        $number = time() - (60 * 60 * 24 * 367 * 2);
         $this->assertEquals("vor über 2 Jahren", NumberFormatHelper::formatTime($number));
     }
 

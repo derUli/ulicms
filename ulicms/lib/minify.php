@@ -204,7 +204,7 @@ function combined_script_html(): void {
 
 function getCombinedScriptHtml(): string {
 	$cfg = new CMSConfig();
-	if (is_true($cfg->no_minify)) {
+	if (isset($cfg->no_minify) and is_true($cfg->no_minify)) {
 		foreach (Vars::get("script_queue") as $script) {
 			$html .= Script::fromFile($script);
 		}
@@ -243,7 +243,7 @@ function getCombinedStylesheetHTML(): ?string {
 	if (!Vars::get("stylesheet_queue")) {
 		return null;
 	}
-	if (is_true($cfg->no_minify)) {
+	if (isset($cfg->no_minify) and is_true($cfg->no_minify)) {
 		foreach (Vars::get("stylesheet_queue") as $stylesheet) {
 			$type = pathinfo($stylesheet, PATHINFO_EXTENSION);
 			if ($type == "css") {

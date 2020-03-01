@@ -16,9 +16,9 @@ class PlainTextCreator {
     protected function renderContent(): void {
         ob_start();
         echo get_title();
-        echo "\r\n";
-        echo "\r\n";
-
+        
+        echo "\r\n\r\n";
+        
         $text_position = get_text_position();
         if ($text_position == "after") {
             Template::outputContentElement();
@@ -28,6 +28,17 @@ class PlainTextCreator {
             Template::outputContentElement();
         }
         $this->content = ob_get_clean();
+        
+        // clean up html stuff
+        $this->content = br2nlr($this->content);
+        $this->content = strip_tags($this->content);
+        $this->content = normalizeLN($this->content);
+        $this->content = unhtmlspecialchars($this->content);
+        $this->content = preg_replace_callback(
+                '/&#([0-9a-fx]+);/mi',
+                'replace_num_entity',
+                $this->content
+        );
     }
 
     public function render(): string {
@@ -42,19 +53,6 @@ class PlainTextCreator {
         // if the generated txt is not in cache yet
         // generate it
         $this->renderContent();
-
-        // clean up html stuff
-        $this->content = br2nlr($this->content);
-        $this->content = strip_tags($this->content);
-        $this->content = str_replace("\r\n", "\n", $this->content);
-        $this->content = str_replace("\r", "\n", $this->content);
-        $this->content = str_replace("\n", "\r\n", $this->content);
-        $this->content = unhtmlspecialchars($this->content);
-        $this->content = preg_replace_callback(
-                '/&#([0-9a-fx]+);/mi',
-                'replace_num_entity',
-                $this->content
-        );
 
         // save this in cache
         if ($adapter) {

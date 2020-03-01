@@ -21,7 +21,9 @@ class TranslationTest extends \PHPUnit\Framework\TestCase {
                         [
                             "%firstname%" => "John",
                             "%lastname%" => "Doe"
-        ]));
+                        ]
+                )
+        );
     }
 
     public function testGetSecureTranslation() {

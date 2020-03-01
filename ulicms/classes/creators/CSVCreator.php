@@ -27,7 +27,11 @@ class CSVCreator {
         }
 
         $this->content = ob_get_clean();
+        $this->content = trim($this->content);
+        $this->content = normalizeLN($this->content, "\n");
+        $this->content = str_replace("\r\n", "\\r\\n", $this->content);
     }
+    
 
     // get data nested array for csv lines
     private function getData(): array {
@@ -39,9 +43,6 @@ class CSVCreator {
             "Tags",
             "Author"
         ];
-        $this->content = str_replace("\r\n", "\n", $this->content);
-        $this->content = str_replace("\r", "\n", $this->content);
-        $this->content = str_replace("\n", " ", $this->content);
         $data[] = [
             $this->title,
             $this->content,
@@ -65,13 +66,12 @@ class CSVCreator {
         $data = $this->getData();
 
         $csv_string = getCSV($data[0]);
-        $csv_string .= getCSV($data[1]);
-        
+        $csv_string .= getCSV($data[1]);       
 
         if ($adapter) {
             $adapter->set($cacheUid, $csv_string);
         }
-        return $csv_string;
+        return trim($csv_string);
     }
 
 }

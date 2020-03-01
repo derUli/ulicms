@@ -10,12 +10,10 @@ class SettingsTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function tearDown() {
-
 		Settings::delete("my_setting");
 		Settings::delete("my_setting_de");
 		Settings::delete("my_setting_en");
 		LoggerRegistry::unregister("audit_log");
-		unset($_SESSION["login_id"]);
 	}
 
 	public function testSettingsOld() {

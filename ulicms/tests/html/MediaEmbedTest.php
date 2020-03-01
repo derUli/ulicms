@@ -13,6 +13,16 @@
  */
 class MediaEmbedTest extends \PHPUnit\Framework\TestCase {
 
+    public function setUp() {
+        $_SESSION = [
+            "language" => "de"
+        ];
+    }
+
+    public function tearDown() {
+        $_SESSION = [];
+    }
+
     public function testReplaceLinks() {
         $input = file_get_contents("tests/fixtures/AutoEmbed/input.html");
         $expected = file_get_contents("tests/fixtures/AutoEmbed/expected.html");

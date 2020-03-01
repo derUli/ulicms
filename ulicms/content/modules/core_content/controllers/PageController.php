@@ -405,7 +405,8 @@ class PageController extends Controller {
         if ($this->checkIfSlugIsFree(
                         $_REQUEST["slug"],
                         $_REQUEST["language"],
-                        intval($_REQUEST["id"])
+                        isset($_REQUEST["id"]) ?
+                                intval($_REQUEST["id"]) : 0
                 )) {
             TextResult("yes");
         }
@@ -452,8 +453,8 @@ class PageController extends Controller {
         foreach ($pages as $key => $page) {
             ?>
             <option value="<?php
-            echo $page["id"];
-            ?>" <?php
+                    echo $page["id"];
+                    ?>" <?php
                     if ($page["id"] == $parent_id) {
                         echo "selected";
                     }
