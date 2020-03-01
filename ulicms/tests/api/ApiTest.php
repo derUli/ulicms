@@ -54,16 +54,15 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
             'HTTPS',
             'REQUEST_URI',
             'slug'
-            
         ];
-        
-        foreach($serverKeys as $key){
-            if(isset($_SERVER[$key])){
+
+        foreach ($serverKeys as $key) {
+            if (isset($_SERVER[$key])) {
                 unset($_SERVER[$key]);
             }
         }
-       
-        if(isset($_GET["slug"])){
+
+        if (isset($_GET["slug"])) {
             unset($_GET["slug"]);
         }
     }
@@ -773,14 +772,29 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
     public function testVarDumpStrReturnsStringWithOneVar() {
         $output = var_dump_str(new User());
 
-        $expected = file_get_contents(
-                Path::resolve("ULICMS_ROOT/tests/fixtures/var_dump_str.txt"
-                )
-        );
-
         $this->assertStringContainsString(
-                normalizeLN($expected),
+                "class User",
                 normalizeLN($output)
+        );
+        $this->assertStringContainsString(
+                "id",
+                $output
+        );
+        $this->assertStringContainsString(
+                "firstname",
+                $output
+        );
+        $this->assertStringContainsString(
+                "lastname",
+                $output
+        );
+        $this->assertStringContainsString(
+                "secondary_groups",
+                $output
+        );
+        $this->assertStringContainsString(
+                "NULL",
+                $output
         );
     }
 
@@ -927,13 +941,12 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetSystemLanguageReturnsSystemLanguageFromSetting() {
-        
-        if(isset($_SESSION)){
-            foreach($_SESSION as $key=>$value){
+        if (isset($_SESSION)) {
+            foreach ($_SESSION as $key => $value) {
                 unset($_SESSION[$key]);
             }
         }
-        
+
         $system_language = Settings::get("system_language");
         Settings::set("system_language", "en");
         $this->assertEquals("en", getSystemLanguage());
