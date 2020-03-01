@@ -128,9 +128,11 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
                     echo '<option value="' . $languages[$i] . '">' . getLanguageNameByCode($languages[$i]) . '</option>';
                 }
                 ?>
-            </select></div><br />
+            </select></div>
+        <br />
         <button type="submit" class="btn btn-primary">
-            <i class="fa fa-save"></i> <?php translate("create_user"); ?></button>
+            <i class="fa fa-save"></i> 
+            <?php translate("save"); ?></button>
     </form>
     <?php
     $translation = new JSTranslation([], "UserTranslation");

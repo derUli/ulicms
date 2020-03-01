@@ -98,11 +98,13 @@ class CommentSpamChecker implements ISpamChecker {
         if (StringHelper::isNotNullOrWhitespace($email) &&
                 $checkMxOfEmailAddress) {
             if (!AntiSpamHelper::checkMailDomain($email)) {
+                 getmxrr($email, $hostnames);
+                         
                 $this->errors[] = new SpamDetectionResult(
                         get_translation("author_email"),
                         get_translation("mail_address_has_invalid_mx_entry",
                                 [
-                                    "%hostname%" => $hostname
+                                    "%hostname%" => implode(", ", $hostnames)
                                 ]
                 ));
             }

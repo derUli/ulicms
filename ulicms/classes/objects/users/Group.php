@@ -194,8 +194,10 @@ class Group {
     }
 
     public function hasPermission(string $name): bool {
-        return (in_array($name, $this->permissions)
-                and $this->permissions[$name]);
+        return (
+                isset($this->permissions[$name]) and
+                $this->permissions[$name]
+                );
     }
 
     public function removePermission(string $name): void {

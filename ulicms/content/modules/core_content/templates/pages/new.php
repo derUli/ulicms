@@ -395,7 +395,7 @@ if ($permissionChecker->hasPermission("pages")
                 ?>
             </select> <br /> <br /> <strong><?php translate("parent_id"); ?>
             </strong><br /> <select name="list_parent" size=1>
-                <option selected="selected" value="NULL">
+                <option selected="selected" value="">
                     [
                     <?php
                     translate("every");

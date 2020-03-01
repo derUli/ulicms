@@ -60,21 +60,22 @@ if (!$permissionChecker->hasPermission("forms")) {
                                        alt="<?php translate("edit"); ?>"
                                        title="<?php translate("edit"); ?>"></a>
                             </td>
-                            <td class="text-center"
+                            <td class="text-center">
                                 <?php
                                 echo ModuleHelper::deleteButton(
                                         ModuleHelper::buildMethodCallUrl(
                                                 "FormController",
-                                                "delete"),
-                                        ["del" => $form ["id"]
-                                ]);
+                                                "delete"
+                                        ),
+                                        ["del" => $form ["id"]]
+                                );
                                 ?>
-                        </td>
+                            </td>
+                        <?php } ?>
+                    </tr>
                 <?php } ?>
-                </tr>
-    <?php } ?>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
     </div>
     <?php
     $translation = new JSTranslation();

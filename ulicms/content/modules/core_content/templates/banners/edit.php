@@ -66,7 +66,7 @@ if ($permissionChecker->hasPermission("banners")
             ?>
                    id="radio_gif" name="type" value="gif"
                    onclick="$('#type_gif').slideDown();
-                           $('#type_html').slideUp();">
+                                   $('#type_html').slideUp();">
             <label
                 for="radio_gif"><?php translate("gif_banner"); ?></label>
         </p>
@@ -176,7 +176,8 @@ if ($permissionChecker->hasPermission("banners")
         <br />
         <br />
         <button type="submit" class="btn btn-primary">
-            <i class="fa fa-save"></i> <?php translate("save_changes"); ?></button>
+            <i class="fa fa-save"></i>
+            <?php translate("save"); ?></button>
         </form>
         <?php
     }

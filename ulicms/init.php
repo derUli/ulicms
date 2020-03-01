@@ -1,5 +1,7 @@
 <?php
 
+require_once dirname(__file__) . "/classes/exceptions/load.php";
+
 use UliCMS\Exceptions\AccessDeniedException;
 use UliCMS\Exceptions\ConnectionFailedException;
 use UliCMS\Exceptions\FileNotFoundException;
@@ -75,7 +77,6 @@ require_once dirname(__file__) . "/classes/objects/content/types/fields/FileFile
 require_once dirname(__file__) . "/classes/objects/content/types/fields/FileImage.php";
 require_once dirname(__file__) . "/classes/objects/pkg/load.php";
 require_once dirname(__file__) . "/classes/helpers/load.php";
-require_once dirname(__file__) . "/classes/exceptions/load.php";
 require_once dirname(__file__) . "/classes/objects/registry/load.php";
 require_once dirname(__file__) . "/classes/objects/logging/load.php";
 require_once dirname(__file__) . "/classes/objects/html/load.php";
@@ -179,7 +180,7 @@ $config = new CMSConfig();
 // else use default error_reporting from php.ini
 if ((defined("ULICMS_DEBUG") and ULICMS_DEBUG)
 		or ( isset($config->debug) and $config->debug)) {
-	error_reporting(E_ALL ^ E_NOTICE);
+	error_reporting(E_ALL);
 } else {
 	error_reporting(0);
 }
@@ -267,25 +268,25 @@ Translation::init();
 
 if (class_exists("Path")) {
 
-	if (is_true($config->exception_logging)) {
+	if (isset($config->exception_logging) and is_true($config->exception_logging)) {
 		LoggerRegistry::register(
 				"exception_log",
 				new Logger(Path::resolve("ULICMS_LOG/exception_log"))
 		);
 	}
-	if (is_true($config->query_logging)) {
+	if (isset($config->query_logging) and is_true($config->query_logging)) {
 		LoggerRegistry::register(
 				"sql_log",
 				new Logger(Path::resolve("ULICMS_LOG/sql_log"))
 		);
 	}
-	if (is_true($config->phpmailer_logging)) {
+	if (isset($config->phpmailer_logging) and is_true($config->phpmailer_logging)) {
 		LoggerRegistry::register(
 				"phpmailer_log",
 				new Logger(Path::resolve("ULICMS_LOG/phpmailer_log"))
 		);
 	}
-	if (is_true($config->audit_log)) {
+	if (isset($config->audit_log) and is_true($config->audit_log)) {
 		LoggerRegistry::register(
 				"audit_log",
 				new Logger(Path::resolve("ULICMS_LOG/audit_log"))
@@ -340,7 +341,7 @@ if (!$connection) {
 
 $path_to_installer = dirname(__file__) . "/installer/installer.php";
 
-if (is_true($config->dbmigrator_auto_migrate)) {
+if (isset($config->dbmigrator_auto_migrate) and is_true($config->dbmigrator_auto_migrate)) {
 	$additionalSql = is_array($config->dbmigrator_initial_sql_files) ?
 			$config->dbmigrator_initial_sql_files : [];
 	if (isCLI()) {
@@ -387,10 +388,10 @@ if ($memory_limit) {
 
 $cache_period = Settings::get("cache_period");
 
-// Prüfen ob Cache Gültigkeitsdauer gesetzt ist.
-// Ansonsten auf Standardwert setzen
-if ($cache_period === false) {
-	setconfig("cache_period", ONE_DAY_IN_SECONDS);
+// by Check if the cache expiry is set.
+// if not initialize setting with default value
+if ($cache_period === null) {
+	Settings::set("cache_period", strval(ONE_DAY_IN_SECONDS));
 	define("CACHE_PERIOD", ONE_DAY_IN_SECONDS);
 } else {
 	define("CACHE_PERIOD", $cache_period);
@@ -429,10 +430,10 @@ function shutdown_function() {
 	do_event("shutdown");
 
 	$cfg = new CMSConfig();
-	if (is_true($cfg->show_render_time) and ! Request::isAjaxRequest()) {
+	if (isset($cfg->show_render_time) and is_true($cfg->show_render_time) and ! Request::isAjaxRequest()) {
 		echo "\n\n<!--" . (microtime(true) - START_TIME) . "-->";
 	}
-	if (is_true($cfg->dbmigrator_drop_database_on_shutdown)) {
+	if (isset($cfg->dbmigrator_drop_database_on_shutdown) and is_true($cfg->dbmigrator_drop_database_on_shutdown)) {
 		if (isCLI()) {
 			Database::setEchoQueries(true);
 		}

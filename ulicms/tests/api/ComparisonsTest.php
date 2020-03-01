@@ -6,24 +6,19 @@ use UliCMS\Exceptions\DatasetNotFoundException;
 class ComparisonsTest extends \PHPUnit\Framework\TestCase {
 
     public function setUp() {
-        $this->cleanUp();
         @session_start();
     }
 
     public function tearDown() {
-        $this->cleanUp();
         Database::query("delete from {prefix}users where username like 'testuser-%'", true);
-        unset($_SESSION["login_id"]);
         @session_destroy();
-    }
 
-    public function cleanUp() {
-        unset($_REQUEST["action"]);
+        if (isset($_REQUEST["action"])) {
+            unset($_REQUEST["action"]);
+        }
         Settings::set("maintenance_mode", "0");
         chdir(Path::resolve("ULICMS_ROOT"));
         set_format("html");
-        unset($_SESSION["csrf_token"]);
-        unset($_REQUEST["csrf_token"]);
     }
 
     // in the test environment this returns always true
@@ -54,7 +49,6 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase {
     public function testIsTrue() {
         $this->assertTrue(is_true(true));
         $this->assertTrue(is_true(1));
-        $this->assertFalse(is_true($nothing));
         $this->assertFalse(is_true(false));
         $this->assertFalse(is_true(0));
     }
@@ -85,7 +79,6 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase {
     public function testIsFalse() {
         $this->assertFalse(is_false(true));
         $this->assertFalse(is_false(1));
-        $this->assertTrue(is_false($nothing));
         $this->assertTrue(is_false(false));
         $this->assertTrue(is_false(0));
     }
@@ -159,7 +152,6 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue(is_blank(0));
         $this->assertTrue(is_blank([]));
         $this->assertTrue(is_blank("0"));
-        $this->assertTrue(is_blank($notDefined));
     }
 
     public function testIsBlankReturnsFalse() {
@@ -186,7 +178,6 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(is_present(0));
         $this->assertFalse(is_present([]));
         $this->assertFalse(is_present("0"));
-        $this->assertFalse(is_present($undefinedVar));
     }
 
     public function testStartsWithReturnsTrue() {

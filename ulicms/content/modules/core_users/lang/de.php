@@ -6,3 +6,4 @@ add_translation("upload_new_avatar", "Neuen Avatar hochladen");
 add_translation("avatar_image", "Avatar Grafik");
 add_translation("avatar_upload_failed", "Avatar Upload fehlgeschlagen.");
 add_translation("show_in_original_size", "In Originalgröße anzeigen");
+add_translation("delete_avatar", "Avatar entfernen");

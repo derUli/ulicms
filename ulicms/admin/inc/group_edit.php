@@ -87,7 +87,9 @@ if (!$permissionChecker->hasPermission("groups")) {
         </fieldset>
         <div class="form-group voffset2">
             <button name="edit_group" type="submit" class="btn btn-primary">
-                <i class="fa fa-save"></i> <?php translate("save_changes"); ?></button>
+                <i class="fa fa-save"></i> 
+                <?php translate("save"); ?>
+            </button>
         </div>
     </form>
     <?php

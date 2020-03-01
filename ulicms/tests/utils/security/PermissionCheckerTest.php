@@ -11,6 +11,7 @@ class PermissionCheckerTest extends \PHPUnit\Framework\TestCase {
     private $testGroup3;
 
     public function setUp() {
+		$_SESSION = [];
         $group1 = new Group();
         $group1->setName("TestGroup1");
         $group1->addPermission("info", true);

@@ -97,7 +97,7 @@ if ($permissionChecker->hasPermission("banners")
     <p>
         <button type="submit" class="btn btn-primary">
             <i class="fa fa-save"></i>
-            <?php translate("add_banner"); ?></button>
+            <?php translate("save"); ?></button>
     </p>
     <?php
     echo ModuleHelper::endForm();

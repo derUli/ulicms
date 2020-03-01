@@ -11,7 +11,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
     public function setUp() {
         Translation::loadAllModuleLanguageFiles("en");
         Flags::setNoCache(true);
-        $this->cleanUp();
+        
 
         $settings = array(
             "site_slogan",
@@ -32,13 +32,14 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $_SERVER["SERVER_PORT"] = "80";
         $_SERVER['HTTP_HOST'] = "example.org";
         $_SERVER["REQUEST_URI"] = "/other-url.html?param=value";
+        $_SESSION = [];
+        $_GET = [];
 
         require_once getLanguageFilePath("en");
     }
 
     public function tearDown() {
         Flags::setNoCache(false);
-        $this->cleanUp();
 
         foreach ($this->savedSettings as $key => $value) {
             Settings::set($key, $value);
@@ -47,28 +48,13 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         Database::query("delete from {prefix}content where "
                 . "title like 'Test Page %' or slug like 'testpage%' or slug"
                 . " like 'test-page%' or slug ='testgetbodyclasses'",
-                true);
-        unset($_SERVER["SERVER_PROTOCOL"]);
-        unset($_SERVER['HTTP_HOST']);
-        unset($_SERVER['SERVER_PORT']);
-        unset($_SERVER['REQUEST_URI']);
-        unset($_SERVER['HTTPS']);
-        unset($_SESSION["language"]);
-        
+                true);        
         Vars::delete("headline");
         Vars::delete("title");
-    }
-
-    private function cleanUp() {
-        unset($_SESSION["language"]);
-        unset($_GET["slug"]);
+        
         Settings::delete("video_width_100_percent");
         Settings::delete("hide_meta_generator");
         Settings::delete("disable_no_format_detection");
-        unset($_SERVER["HTTP_USER_AGENT"]);
-        unset($_GET["slug"]);
-        unset($_SESSION["language"]);
-
         Vars::delete("id");
     }
 

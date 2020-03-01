@@ -89,9 +89,9 @@ class Request {
     }
 
     public static function isSSL(): bool {
-        return (!empty($_SERVER['HTTPS']) &&
-                $_SERVER['HTTPS'] !== 'off' ||
-                $_SERVER['SERVER_PORT'] == 443);
+        return (!empty($_SERVER['HTTPS']) and
+                $_SERVER['HTTPS'] !== 'off') ||
+                (self::getPort() === 443);
     }
 
     private static function getProxyHeaders(): array {
@@ -132,7 +132,7 @@ class Request {
     }
 
     public static function isHeaderSent(string $header, ?array $headers = null): bool {
-        $headers = !$headers ?  headers_list() : $headers;
+        $headers = !$headers ? headers_list() : $headers;
         $header = trim($header, ': ');
         $result = false;
 

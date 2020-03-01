@@ -67,14 +67,16 @@ if (!$permissionChecker->hasPermission("forms")
                             $page["title"]
                     );
                     ?></option>
-    <?php } ?>
+            <?php } ?>
 
 
         </select>
     </p>
     <p>
         <button name="create_form" type="submit" class="btn btn-primary">
-            <i class="fas fa-save"></i> <?php translate("create"); ?></button>
+            <i class="fas fa-save"></i>
+            <?php translate("save"); ?>
+        </button>
     </p>
     <?php
     echo ModuleHelper::endForm();

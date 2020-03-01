@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-use UliCMS\Utils\File;
-
 class Path {
 
     // resolves a path including placeholder constants such as ULICMS_ROOT

@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 use UliCMS\CoreContent\Models\ViewModels\DiffViewModel;
@@ -123,6 +122,7 @@ class PageController extends Controller {
                 Request::getVar("custom_data", "{}", "str"),
                 false
         );
+
         $model->theme = Request::getVar("theme", NULL, "str");
 
         if ($model instanceof Node) {
@@ -209,10 +209,10 @@ class PageController extends Controller {
             $model->getPermissions()->setEditRestriction(
                     $object,
                     boolval(
-					Request::getVar(
-                            "only_{$object}_can_edit", false, "bool"
+                            Request::getVar(
+                                    "only_{$object}_can_edit", false, "bool"
+                            )
                     )
-				)
             );
         }
 
@@ -368,7 +368,7 @@ class PageController extends Controller {
 
         $current_version_date = date(
                 "Y-m-d H:i:s",
-                $current_version->lastmodified
+                intval($current_version->lastmodified)
         );
         $old_version_date = $old_version->date;
 
@@ -405,7 +405,8 @@ class PageController extends Controller {
         if ($this->checkIfSlugIsFree(
                         $_REQUEST["slug"],
                         $_REQUEST["language"],
-                        intval($_REQUEST["id"])
+                        isset($_REQUEST["id"]) ?
+                                intval($_REQUEST["id"]) : 0
                 )) {
             TextResult("yes");
         }
@@ -452,13 +453,13 @@ class PageController extends Controller {
         foreach ($pages as $key => $page) {
             ?>
             <option value="<?php
-            echo $page["id"];
-            ?>" <?php
+                    echo $page["id"];
+                    ?>" <?php
                     if ($page["id"] == $parent_id) {
                         echo "selected";
                     }
                     ?>>
-                    <?php
+                        <?php
                         echo esc($page["title"]);
                         ?>
                 (ID: <?php echo $page["id"]; ?>)

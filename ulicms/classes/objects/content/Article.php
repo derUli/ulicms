@@ -19,7 +19,7 @@ class Article extends Page {
         $this->article_author_name = $result->article_author_name;
         $this->article_image = $result->article_image;
         $this->article_date = strtotime($result->article_date);
-        $this->excerpt = $result->expert;
+        $this->excerpt = $result->excerpt;
     }
 
     public function save() {

@@ -703,8 +703,9 @@ class browser extends uploader {
             $img->close();
 
             $stat = stat($file);
-            if ($stat === false)
+            if ($stat === false){
                 continue;
+            }
             $name = basename($file);
             $ext = file::getExtension($file);
             $bigIcon = file_exists("themes/{$this->config['theme']}/img/files/big/$ext.png");
@@ -714,7 +715,7 @@ class browser extends uploader {
                 'name' => stripcslashes($name),
                 'size' => $stat ['size'],
                 'mtime' => $stat ['mtime'],
-                'date' => @strftime($this->dateTimeSmall, $stat ['mtime']),
+                'date' => strftime($this->dateTimeSmall, $stat ['mtime']),
                 'readable' => is_readable($file),
                 'writable' => file::isWritable($file),
                 'bigIcon' => $bigIcon,

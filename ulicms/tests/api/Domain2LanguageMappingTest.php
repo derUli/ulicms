@@ -3,13 +3,13 @@
 class Domain2LanguageMappingTest extends \PHPUnit\Framework\TestCase {
 
     private $originalMapping;
-    private $originalHTTPHost;
 
     public function setUp() {
+        $_SERVER = [];
+        
         @session_start();
         $this->originalMapping = Settings::get("domain_to_language");
         $testData = file_get_contents(Path::resolve("ULICMS_ROOT/tests/fixtures/domain2language.txt"));
-        $this->originalHTTPHost = $_SERVER["HTTP_HOST"];
         Settings::set("domain_to_language", $testData);
     }
 
@@ -17,8 +17,8 @@ class Domain2LanguageMappingTest extends \PHPUnit\Framework\TestCase {
         chdir(ULICMS_ROOT);
 
         Settings::set("domain_to_language", $this->originalMapping);
-        $_SERVER["HTTP_HOST"] = $this->originalHTTPHost;
-        unset($_SERVER["language"]);
+       
+        @session_destroy();
     }
 
     public function testGetLanguageByDomain() {
