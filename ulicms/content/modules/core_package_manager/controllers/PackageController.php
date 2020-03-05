@@ -69,7 +69,7 @@ class PackageController extends MainClass {
         if (uninstall_module($name, $type)) {
             $this->redirectToPackageView();
         } else {
-            $errorMessage = get_translation("removing_package_failed", array(
+            $errorMessage = get_secure_translation("removing_package_failed", array(
                 "%name%" => $name
             ));
             ExceptionResult($errorMessage, HttpStatusCode::INTERNAL_SERVER_ERROR);
@@ -82,7 +82,7 @@ class PackageController extends MainClass {
         if (uninstall_module($name, $type)) {
             $this->redirectToPackageView();
         } else {
-            $errorMessage = get_translation("removing_package_failed", array(
+            $errorMessage = get_secure_translation("removing_package_failed", array(
                 "%name%" => $name
             ));
             ExceptionResult($errorMessage, HttpStatusCode::INTERNAL_SERVER_ERROR);
