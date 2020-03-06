@@ -4,6 +4,7 @@ Neue Features:
 * CKEditor auf Version 4.13.1 aktualisiert
 * Höhe des CKEditor Eingabefelds wird nun beibehalten
 * Der User-Avatar kann jetzt entfernt werden
+* Seitenverwaltung: Suche nach Sprachen möglich
 
 Neue API-Methoden:
 * BackendHelper::getCKEditorSkins(): array
@@ -23,6 +24,9 @@ Fehlerkorrekturen:
 * Pakete:
   Wenn keine Embed-Module installiert sind, wurden die Modul-Buttons
   nicht mehr angezeigt. Dieser Fehler wurde korrigiert
+
+Sicherheit:
+* XSS im PackageController behoben (gefunden von Ngo Van Thien, Sun* Inc)
 
 ===== Neues in UliCMS 2020.1 =====
 
@@ -78,9 +82,6 @@ Entfernte Features:
 Fehlerkorrekturen:
 * Beim Bearbeiten eines Benutzers wird das Passwort nicht mehr geleert, wenn man kein neues eingegeben hat.
 * PackageController->getPackageDownloadUrl() gab immer null zurück.
-
-Sicherheit:
-* XSS im PackageController behoben
 
 ===== Neues in UliCMS 2019.4 =====
 
