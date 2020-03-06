@@ -44,14 +44,15 @@ class PageTableRenderer {
         $result["data"] = [];
 
         $columns = [
-            "id",
-            "title",
-            "menu",
-            "position",
-            "parent_id",
-            "active",
-            "language",
-            "deleted_at"
+            "c.id as id",
+            "c.title as title",
+            "c.menu as menu",
+            "c.position as position",
+            "c.parent_id as parent_id",
+            "c.active as active",
+            "c.language as language",
+            "c.deleted_at as deleted_at",
+            "c.language as language"
         ];
 
         $orderColumns = [
@@ -69,7 +70,7 @@ class PageTableRenderer {
             $sortDirection = (isset($order["dir"]) and $order["dir"] === "desc") ? "desc" : "asc";
             $columnNumber = isset($order["column"]) ? intval($order["column"]) : 0;
             if ($columnNumber >= 0 and $columnNumber < count($orderColumns)) {
-                $sortColumn = $orderColumns[$columnNumber];
+                $sortColumn = "c.".$orderColumns[$columnNumber];
             }
         }
 
@@ -89,15 +90,17 @@ class PageTableRenderer {
 
         // show all deleted or all not deleted pages (recycle bin)
         $where = $view === "default" ?
-                "deleted_at is null" : "deleted_at is not null";
+                "c.deleted_at is null" : "c.deleted_at is not null";
 
         // filter pages by languages assigned to the user's groups
         if (count($languages)) {
             $where .= " and language in (" . implode(",", $languages) . ")";
         }
+        
+        $joins = "c left join {prefix}languages l on l.language_code = c.language";
 
         // get total pages count for this user
-        $countSql = "select count(id) as count from {prefix}content "
+        $countSql = "select count(c.id) as count from {prefix}content $joins "
                 . "where $where";
         $countResult = Database::query($countSql, true);
         $countData = Database::fetchObject($countResult);
@@ -107,13 +110,16 @@ class PageTableRenderer {
             $placeHolderString = "%" . Database::escapeValue(
                             strtolower($search)
                     ) . "%";
-            $where .= " and lower(title) like '{$placeHolderString}'";
+            $where .= " and lower(title) like '{$placeHolderString}' "
+            . "or lower(l.language_code) like '{$placeHolderString}' "
+            . "or lower(l.name) like '{$placeHolderString}'";
         }
 
-        $where .= " order by $sortColumn $sortDirection";
+        $where .= " order by l.name, $sortColumn $sortDirection";
 
+        
         // get filtered pages count
-        $countSql = "select count(id) as count from {prefix}content "
+        $countSql = "select count(c.id) as count from {prefix}content $joins "
                 . "where $where";
         $countResult = Database::query($countSql, true);
         $countData = Database::fetchObject($countResult);
@@ -122,7 +128,10 @@ class PageTableRenderer {
         // query only datasets for the current page
         // to have a good performance
         $where .= " limit $length offset $start";
-        $resultsForPage = Database::selectAll("content", $columns, $where);
+
+
+        $resultsForPage = Database::selectAll("content", $columns, $where, [], 
+                true, "", $joins);
 
         $result["data"] = $this->fetchResults($resultsForPage, $user);
         // this is required by DataTables to ensure that always the result

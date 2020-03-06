@@ -79,6 +79,9 @@ Fehlerkorrekturen:
 * Beim Bearbeiten eines Benutzers wird das Passwort nicht mehr geleert, wenn man kein neues eingegeben hat.
 * PackageController->getPackageDownloadUrl() gab immer null zurück.
 
+Sicherheit:
+* XSS im PackageController behoben
+
 ===== Neues in UliCMS 2019.4 =====
 
 Neue Features:

@@ -38,6 +38,26 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals($data2["recordsTotal"], $data2["recordsFiltered"]);
     }
 
+    public function testgetDataFilterByLanguage() {
+        $manager = new UserManager();
+        $user = $manager->getAllUsers("admin desc")[0];
+
+        $renderer = new PageTableRenderer($user);
+        $data = $renderer->getData(0, 900, 1, "deutsch");
+
+        $germanContent = ContentFactory::getAllByLanguage("de");
+        $englishContent = ContentFactory::getAllByLanguage("en");
+
+        $this->assertGreaterThanOrEqual(
+                count($germanContent),
+                count($data["data"])
+        );
+        $this->assertLessThan(
+                count($germanContent) + count($englishContent),
+                count($data["data"])
+        );
+    }
+
     public function testGetDataFiltered() {
         $manager = new UserManager();
         $user = $manager->getAllUsers("admin desc")[0];
