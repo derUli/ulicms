@@ -13,7 +13,7 @@ Neue API-Methoden:
 * ListData->filterAll(): array
 * ListData->hasMore(int $offset = 0): bool
 
-Entfernte API-Methoden:
+Entfernte Features:
 * "kama" CKEditor Skin entfernt
 
 Fehlerkorrekturen:
