@@ -1,0 +1,15 @@
+<?php
+namespace UliCMS\Security\XSSProtection;
+
+// like PHP's strip_tags
+// But remove also inline javascript code
+function stripTags($input, $allowed = null){
+    $output = strip_tags($input, $allowed);
+    
+    // if <script> isn't allowed then remove also inline event handler
+    // such as onerror, onmouseover and onclik
+    if(!($allowed and str_contains("<script>", strtolower($allowed)))){
+        $output = preg_replace('/\bon\w+=\S+(?=.*>)/i', "", $output);
+    }
+    return $output;
+}
