@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace UliCMS\Creators;
 
 use Template;
+use ContentFactory;
 use UliCMS\Utils\CacheUtil;
 
 // this class renders a page as plain text
@@ -15,10 +16,20 @@ class PlainTextCreator {
     // render html content to string
     protected function renderContent(): void {
         ob_start();
-        echo get_title();
-        
-        echo "\r\n\r\n";
-        
+
+        try {
+            $content = ContentFactory::getCurrentPage();
+            $showHeadline = $content->getShowHeadline();
+        } catch (Exception $e) {
+            $showHeadline = true;
+        }
+
+        // print headline only if it is enabled for the current page
+        if ($showHeadline) {
+            echo get_title();
+            echo "\r\n\r\n";
+        }
+
         $text_position = get_text_position();
         if ($text_position == "after") {
             Template::outputContentElement();
@@ -28,7 +39,7 @@ class PlainTextCreator {
             Template::outputContentElement();
         }
         $this->content = ob_get_clean();
-        
+
         // clean up html stuff
         $this->content = br2nlr($this->content);
         $this->content = strip_tags($this->content);
