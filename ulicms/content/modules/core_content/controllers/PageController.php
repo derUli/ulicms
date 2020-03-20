@@ -5,10 +5,12 @@ use UliCMS\Models\Content\VCS;
 use UliCMS\Models\Content\Types\DefaultContentTypes;
 use Rakit\Validation\Validator;
 use UliCMS\Security\PermissionChecker;
+use function UliCMS\Security\XSSProtection\stripTags;
 use UliCMS\Models\Content\TypeMapper;
 use UliCMS\Constants\LinkTarget;
 use UliCMS\Utils\CacheUtil;
 use function UliCMS\HTML\stringContainsHtml;
+use const UliCMS\Constants\HTML5_ALLOWED_TAGS;
 
 class PageController extends Controller {
 
@@ -74,9 +76,15 @@ class PageController extends Controller {
         $model->content = Request::getVar("content");
 
         $group = Group::getCurrentGroup();
-        if (Stringhelper::isNotNullOrWhitespace($group->getAllowableTags())) {
-            $model->content = strip_tags($model->content, $group->getAllowableTags());
+
+        $allowedTags = $group ?
+                $group->getAllowableTags() : HTML5_ALLOWED_TAGS;
+
+        // remove all html tags except the explicitly allowed tags
+        if (Stringhelper::isNotNullOrWhitespace($allowedTags)) {
+            $model->content = stripTags($model->content, $allowedTags);
         }
+
         $model->category_id = Request::getVar("category_id", 1, "int");
         $model->redirection = Request::getVar("redirection", NULL, "str");
         $model->menu = Request::getVar("menu", "not_in_menu", "str");
@@ -376,7 +384,7 @@ class PageController extends Controller {
             echo $page["id"];
             ?>"
                     <?php if ($page["id"] == $parent_id) echo "selected"; ?>>
-                        <?php
+                    <?php
                         echo esc($page["title"]);
                         ?>
                 (ID:
