@@ -107,10 +107,13 @@ class PageController extends Controller {
         $model->hidden = Request::getVar("hidden", false, "bool");
         $model->content = Request::getVar("content");
 
-        $group = Group::getCurrentGroup();
+        $user = User::fromSessionData();
+        $groupCollection = $user->getGroupCollection();
         
-        $allowedTags = $group ?
-                $group->getAllowableTags() : HTML5_ALLOWED_TAGS;
+        
+        // get allowed tags of all groups assigned to the current user
+        $allowedTags = $groupCollection ?
+                $groupCollection->getAllowableTags() : HTML5_ALLOWED_TAGS;
         
         // remove all html tags except the explicitly allowed tags
         if (Stringhelper::isNotNullOrWhitespace($allowedTags)) {

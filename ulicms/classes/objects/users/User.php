@@ -6,6 +6,7 @@ use LasseRafn\InitialAvatarGenerator\InitialAvatar;
 use UliCMS\Exceptions\NotImplementedException;
 use UliCMS\Security\PermissionChecker;
 use UliCMS\Security\Encryption;
+use UliCMS\Models\Users\GroupCollection;
 
 class User extends Model {
 
@@ -578,6 +579,10 @@ class User extends Model {
         $groups = array_merge($primaryGroup, $secondaryGroups);
         $groups = array_filter($groups);
         return array_values($groups);
+    }
+    
+    public function getGroupCollection(): GroupCollection{
+        return new GroupCollection($this);
     }
 
     public function addSecondaryGroup($val): void {

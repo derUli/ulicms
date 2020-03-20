@@ -3,6 +3,7 @@
 use UliCMS\Security\Encryption;
 use UliCMS\Exceptions\NotImplementedException;
 use UliCMS\Utils\CacheUtil;
+use UliCMS\Models\Users\GroupCollection;
 
 class UserTest extends \PHPUnit\Framework\TestCase {
 
@@ -558,6 +559,35 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue($user->hasProcessedAvatar());
         $this->assertTrue($user->removeAvatar());
         $this->assertFalse($user->hasProcessedAvatar());
+    }
+
+    public function testGetGroupCollection() {
+        $user = $this->getTestUser();
+        $collection = $user->getGroupCollection();
+        $this->assertInstanceOf(GroupCollection::class, $collection);
+
+        $this->assertEquals(
+                "<div><foo><img><p><span><strong><video>",
+                $collection->getAllowableTags()
+        );
+    }
+
+    private function getTestUser(): User {
+        $user = new User();
+
+        $group1 = new Group();
+        $group1->setAllowableTags("<p><div><strong><span><img>");
+
+        $group2 = new Group();
+        $group2->setAllowableTags("<p><img><foo>");
+
+        $group3 = new Group();
+        $group3->setAllowableTags("<video><audio");
+
+        $user->setPrimaryGroup($group1);
+        $user->setSecondaryGroups([$group2, $group3]);
+
+        return $user;
     }
 
 }
