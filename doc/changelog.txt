@@ -2,9 +2,10 @@
 
 Neue Features:
 * CKEditor auf Version 4.13.1 aktualisiert
-* Höhe des CKEditor Eingabefelds wird nun beibehalten
-* Der User-Avatar kann jetzt entfernt werden
+* Höhe des CKEditor Eingabefelds wird beibehalten
+* User-Avatar kann jetzt entfernt werden
 * Seitenverwaltung: Suche nach Sprachen möglich
+* Erlaubte HTML-Tags aller Gruppen des Benutzers werden akzeptiert
 
 Neue API-Methoden:
 * BackendHelper::getCKEditorSkins(): array
@@ -12,6 +13,7 @@ Neue API-Methoden:
 * ListData->filterPaginated(?int $offset = null): array
 * ListData->filterAll(): array
 * ListData->hasMore(int $offset = 0): bool
+* User->getGroupCollection(): GroupCollection
 
 Entfernte Features:
 * "kama" CKEditor Skin entfernt
