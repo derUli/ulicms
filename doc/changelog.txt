@@ -4,7 +4,6 @@ Neue Features:
 * CKEditor auf Version 4.13.1 aktualisiert
 * Höhe des CKEditor Eingabefelds wird beibehalten
 * User-Avatar kann jetzt entfernt werden
-* Seitenverwaltung: Suche nach Sprachen möglich
 * Erlaubte HTML-Tags aller Gruppen des Benutzers werden akzeptiert
 
 Neue API-Methoden:
