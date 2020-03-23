@@ -3,7 +3,9 @@
 use UliCMS\CoreContent\PageTableRenderer;
 
 class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
-
+public function setUp(){
+    include_once getLanguageFilePath("en");
+}
     public function testGetDataReturns3Items() {
         $manager = new UserManager();
         $user = $manager->getAllUsers("admin desc")[0];
@@ -38,26 +40,6 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals($data2["recordsTotal"], $data2["recordsFiltered"]);
     }
 
-    public function testgetDataFilterByLanguage() {
-        $manager = new UserManager();
-        $user = $manager->getAllUsers("admin desc")[0];
-
-        $renderer = new PageTableRenderer($user);
-        $data = $renderer->getData(0, 900, 1, "deutsch");
-
-        $germanContent = ContentFactory::getAllByLanguage("de");
-        $englishContent = ContentFactory::getAllByLanguage("en");
-
-        $this->assertGreaterThanOrEqual(
-                count($germanContent),
-                count($data["data"])
-        );
-        $this->assertLessThan(
-                count($germanContent) + count($englishContent),
-                count($data["data"])
-        );
-    }
-
     public function testGetDataFiltered() {
         $manager = new UserManager();
         $user = $manager->getAllUsers("admin desc")[0];
@@ -69,6 +51,179 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
 
         foreach ($data["data"] as $dataset) {
             $this->assertStringContainsStringIgnoringCase("lorem", $dataset[0]);
+        }
+    }
+
+    public function testGetDataFilterByLanguageAndType() {
+        $manager = new UserManager();
+        $user = $manager->getAllUsers("admin desc")[0];
+
+        $renderer = new PageTableRenderer($user);
+
+        $filters = [
+            "type" => "module"
+        ];
+
+        $withoutLanguageFilter = $renderer->getData(0, 20, 123, "", $filters);
+
+        $filters["language"] = "de";
+        $data = $renderer->getData(0, 20, 123, "", $filters);
+
+        $this->assertGreaterThanOrEqual(1, count($data["data"]));
+        $this->assertGreaterThan(
+                count($data["data"]),
+                count($withoutLanguageFilter["data"])
+        );
+    }
+    
+    
+    public function testGetDataFilterByParentIdNoParent() {
+        $manager = new UserManager();
+        $user = $manager->getAllUsers("admin desc")[0];
+
+        $renderer = new PageTableRenderer($user);
+
+        $data = $renderer->getData(0,
+                20,
+                123,
+                "",
+                [
+                    "parent_id" => 0
+                ]
+        );
+        
+        foreach($data["data"] as $dataset){
+            $this->assertEquals("[None]", $dataset[3]);
+        }
+    }
+        
+    public function testGetDataFilterByParentIdWithParent() {
+        $manager = new UserManager();
+        $user = $manager->getAllUsers("admin desc")[0];
+
+        $renderer = new PageTableRenderer($user);
+        
+        $parentPage = ContentFactory::getBySlugAndLanguage("modules", "en");
+        
+        $data = $renderer->getData(0,
+                20,
+                123,
+                "",
+                [
+                    "parent_id" => $parentPage->getID()
+                ]
+        );
+        
+        
+        $this->assertGreaterThanOrEqual(2, count($data["data"]));
+        
+        foreach($data["data"] as $dataset){
+            $this->assertEquals("Modules", $dataset[3]);
+        }
+    }
+
+    public function testGetDataFilterByCategoryId() {
+        $manager = new UserManager();
+        $user = $manager->getAllUsers("admin desc")[0];
+
+        $renderer = new PageTableRenderer($user);
+
+        $categoryGeneralData = $renderer->getData(0,
+                20,
+                123,
+                "",
+                [
+                    "category_id" => 1
+                ]
+        );
+        $nonExistingCategory = $renderer->getData(0,
+                20,
+                123,
+                "",
+                [
+                    "category_id" => PHP_INT_MAX
+                ]
+        );
+        $this->assertGreaterThanOrEqual(1, count($categoryGeneralData["data"]));
+        $this->assertCount(0, $nonExistingCategory["data"]);
+    }
+
+    public function testGetDataFilterByApproved() {
+        $manager = new UserManager();
+        $user = $manager->getAllUsers("admin desc")[0];
+
+        $renderer = new PageTableRenderer($user);
+
+        $approvedData = $renderer->getData(0,
+                20,
+                123,
+                "",
+                [
+                    "approved" => 1
+                ]
+        );
+        $notApprovedData = $renderer->getData(0,
+                20,
+                123,
+                "",
+                [
+                    "approved" => 0
+                ]
+        );
+        $this->assertGreaterThanOrEqual(1, count($approvedData["data"]));
+        $this->assertNotEquals(count($approvedData["data"]), $notApprovedData["data"]);
+    }
+
+    public function testGetDataFilterByMenu() {
+        $manager = new UserManager();
+        $user = $manager->getAllUsers("admin desc")[0];
+
+        $renderer = new PageTableRenderer($user);
+
+        $data = $renderer->getData(0,
+                20,
+                123,
+                "",
+                [
+                    "menu" => "top"
+                ]
+        );
+
+        foreach ($data["data"] as $dataset) {
+            $this->assertEquals("Top", $dataset[1]);
+        }
+    }
+
+    public function testGetDataFilterActive() {
+        $manager = new UserManager();
+        $user = $manager->getAllUsers("admin desc")[0];
+
+        $renderer = new PageTableRenderer($user);
+
+        $dataActive = $renderer->getData(0,
+                20,
+                123,
+                "",
+                [
+                    "active" => 1
+                ]
+        );
+
+        foreach ($dataActive["data"] as $dataset) {
+            $this->assertEquals("Yes", $dataset[4]);
+        }
+
+        $dataInactive = $renderer->getData(0,
+                20,
+                123,
+                "",
+                [
+                    "active" => 0
+                ]
+        );
+
+        foreach ($dataInactive["data"] as $dataset) {
+            $this->assertEquals("No", $dataset[4]);
         }
     }
 

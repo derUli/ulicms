@@ -483,6 +483,7 @@ class PageController extends Controller {
         $length = Request::getVar("length", 25, "int");
         $draw = Request::getVar("draw", 1, "int");
         $search = $_REQUEST["search"]["value"];
+        $filters = is_array($_REQUEST["filters"]) ? $_REQUEST["filters"] : [];
 
         // if the client requested sorting apply it
         $order = is_array($_REQUEST["order"]) ? $_REQUEST["order"][0] : null;
@@ -494,6 +495,7 @@ class PageController extends Controller {
                 $length,
                 $draw,
                 $search,
+                $filters,
                 $this->getPagesListView(),
                 $order
         );

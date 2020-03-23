@@ -159,9 +159,7 @@ const prepareSearchData = (data) => {
         approved: approved,
         language: language,
         menu: menu,
-        active: active,
-        foo: "bar"
-        
+        active: active
     };
 
     console.log('search data', data);

@@ -37,6 +37,7 @@ class PageTableRenderer {
             int $length = 10,
             int $draw = 1,
             ?string $search = null,
+            array $filters = [],
             string $view = "default",
             ?array $order = null
     ): array {
@@ -44,15 +45,15 @@ class PageTableRenderer {
         $result["data"] = [];
 
         $columns = [
-            "c.id as id",
-            "c.title as title",
-            "c.menu as menu",
-            "c.position as position",
-            "c.parent_id as parent_id",
-            "c.active as active",
-            "c.language as language",
-            "c.deleted_at as deleted_at",
-            "c.language as language"
+            "id",
+            "title",
+            "menu",
+            "position",
+            "parent_id",
+            "active",
+            "language",
+            "deleted_at",
+            "language"
         ];
 
         $orderColumns = [
@@ -70,7 +71,7 @@ class PageTableRenderer {
             $sortDirection = (isset($order["dir"]) and $order["dir"] === "desc") ? "desc" : "asc";
             $columnNumber = isset($order["column"]) ? intval($order["column"]) : 0;
             if ($columnNumber >= 0 and $columnNumber < count($orderColumns)) {
-                $sortColumn = "c.".$orderColumns[$columnNumber];
+                $sortColumn = $orderColumns[$columnNumber];
             }
         }
 
@@ -90,17 +91,15 @@ class PageTableRenderer {
 
         // show all deleted or all not deleted pages (recycle bin)
         $where = $view === "default" ?
-                "c.deleted_at is null" : "c.deleted_at is not null";
+                "deleted_at is null" : "deleted_at is not null";
 
         // filter pages by languages assigned to the user's groups
         if (count($languages)) {
             $where .= " and language in (" . implode(",", $languages) . ")";
         }
-        
-        $joins = "c left join {prefix}languages l on l.language_code = c.language";
 
         // get total pages count for this user
-        $countSql = "select count(c.id) as count from {prefix}content $joins "
+        $countSql = "select count(id) as count from {prefix}content "
                 . "where $where";
         $countResult = Database::query($countSql, true);
         $countData = Database::fetchObject($countResult);
@@ -110,17 +109,16 @@ class PageTableRenderer {
             $placeHolderString = "%" . Database::escapeValue(
                             strtolower($search)
                     ) . "%";
-            $where .= " and lower(title) like '{$placeHolderString}' "
-            . "or lower(l.language_code) like '{$placeHolderString}' "
-            . "or lower(l.name) like '{$placeHolderString}'";
+            $where .= " and lower(title) like '{$placeHolderString}'";
         }
 
-        $where .= " order by l.name, $sortColumn $sortDirection";
+        $where = $this->buildFilterSQL($where, $filters);
+        $where .= " order by $sortColumn $sortDirection";        
 
-        
         // get filtered pages count
-        $countSql = "select count(c.id) as count from {prefix}content $joins "
+        $countSql = "select count(id) as count from {prefix}content "
                 . "where $where";
+        
         $countResult = Database::query($countSql, true);
         $countData = Database::fetchObject($countResult);
         $filteredCount = $countData->count;
@@ -129,9 +127,8 @@ class PageTableRenderer {
         // to have a good performance
         $where .= " limit $length offset $start";
 
-
-        $resultsForPage = Database::selectAll("content", $columns, $where, [], 
-                true, "", $joins);
+        $resultsForPage = Database::selectAll("content", $columns, $where, [],
+                        true, "");
 
         $result["data"] = $this->fetchResults($resultsForPage, $user);
         // this is required by DataTables to ensure that always the result
@@ -145,6 +142,55 @@ class PageTableRenderer {
         $result["recordsFiltered"] = $search ? $filteredCount : $totalCount;
 
         return $result;
+    }
+
+    protected function buildFilterSQL($where, $filters): string {
+        if (isset($filters["type"]) and!empty($filters["type"])) {
+            $where .= " and type ='" .
+                    Database::escapeValue($filters["type"]) .
+                    "'";
+        }
+
+        if (isset($filters["category_id"]) and
+                is_numeric($filters["category_id"])) {
+            $where .= " and category_id =" . intval($filters["category_id"]);
+        }
+
+        if (isset($filters["parent_id"]) and
+                is_numeric($filters["parent_id"])) {
+            $parent_id = intval($filters["parent_id"]);
+
+            if ($parent_id > 0) {
+                $where .= " and parent_id =" . intval($filters["parent_id"]);
+            } else {
+                $where .= " and parent_id is null";
+            }
+        }
+        
+        if (isset($filters["approved"]) and
+                is_numeric($filters["approved"])) {
+            $where .= " and approved =" . intval($filters["approved"]);
+        }
+
+        if (isset($filters["language"]) and
+                !empty($filters["language"])) {
+            $where .= " and language ='" .
+                    Database::escapeValue($filters["language"]) .
+                    "'";
+        }
+
+        if (isset($filters["menu"]) and
+                !empty($filters["menu"])) {
+            $where .= " and menu ='";
+            $where .= Database::escapeValue($filters["menu"]) . "'";
+        }
+
+        if (isset($filters["active"]) and
+                is_numeric($filters["active"])) {
+            $where .= " and active ='" . intval($filters["active"]) ."'";
+        }
+        
+        return $where;
     }
 
     // fetch all datasets of mysqli result
