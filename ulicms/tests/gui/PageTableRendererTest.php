@@ -3,9 +3,11 @@
 use UliCMS\CoreContent\PageTableRenderer;
 
 class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
-public function setUp(){
-    include_once getLanguageFilePath("en");
-}
+
+    public function setUp() {
+        include_once getLanguageFilePath("en");
+    }
+
     public function testGetDataReturns3Items() {
         $manager = new UserManager();
         $user = $manager->getAllUsers("admin desc")[0];
@@ -46,8 +48,11 @@ public function setUp(){
 
         $renderer = new PageTableRenderer($user);
         $data = $renderer->getData(0, 10, 123, "lorem");
-        $this->assertLessThan($data["recordsTotal"],
-                $data["recordsFiltered"]);
+
+        $this->assertLessThan(
+                $data["recordsTotal"],
+                $data["recordsFiltered"]
+        );
 
         foreach ($data["data"] as $dataset) {
             $this->assertStringContainsStringIgnoringCase("lorem", $dataset[0]);
@@ -69,14 +74,18 @@ public function setUp(){
         $filters["language"] = "de";
         $data = $renderer->getData(0, 20, 123, "", $filters);
 
+        $this->assertLessThan(
+                $data["recordsTotal"],
+                $data["recordsFiltered"]
+        );
+
         $this->assertGreaterThanOrEqual(1, count($data["data"]));
         $this->assertGreaterThan(
                 count($data["data"]),
                 count($withoutLanguageFilter["data"])
         );
     }
-    
-    
+
     public function testGetDataFilterByParentIdNoParent() {
         $manager = new UserManager();
         $user = $manager->getAllUsers("admin desc")[0];
@@ -91,20 +100,25 @@ public function setUp(){
                     "parent_id" => 0
                 ]
         );
-        
-        foreach($data["data"] as $dataset){
+
+        $this->assertLessThan(
+                $data["recordsTotal"],
+                $data["recordsFiltered"]
+        );
+
+        foreach ($data["data"] as $dataset) {
             $this->assertEquals("[None]", $dataset[3]);
         }
     }
-        
+
     public function testGetDataFilterByParentIdWithParent() {
         $manager = new UserManager();
         $user = $manager->getAllUsers("admin desc")[0];
 
         $renderer = new PageTableRenderer($user);
-        
+
         $parentPage = ContentFactory::getBySlugAndLanguage("modules", "en");
-        
+
         $data = $renderer->getData(0,
                 20,
                 123,
@@ -113,11 +127,16 @@ public function setUp(){
                     "parent_id" => $parentPage->getID()
                 ]
         );
-        
-        
+
+
         $this->assertGreaterThanOrEqual(2, count($data["data"]));
-        
-        foreach($data["data"] as $dataset){
+
+        $this->assertLessThan(
+                $data["recordsTotal"],
+                $data["recordsFiltered"]
+        );
+
+        foreach ($data["data"] as $dataset) {
             $this->assertEquals("Modules", $dataset[3]);
         }
     }
@@ -144,6 +163,7 @@ public function setUp(){
                     "category_id" => PHP_INT_MAX
                 ]
         );
+
         $this->assertGreaterThanOrEqual(1, count($categoryGeneralData["data"]));
         $this->assertCount(0, $nonExistingCategory["data"]);
     }

@@ -138,8 +138,10 @@ class PageTableRenderer {
         // Total count of pages shown to the user
         $result["recordsTotal"] = $totalCount;
 
+        $filterNames = array_keys($filters);
         // Filtered page count if the user apply filters, else total page count
-        $result["recordsFiltered"] = $search ? $filteredCount : $totalCount;
+        $result["recordsFiltered"] = ($search or count($filterNames)) ? 
+                $filteredCount : $totalCount;
 
         return $result;
     }
