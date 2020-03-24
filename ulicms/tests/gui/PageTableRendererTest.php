@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\CoreContent\PageTableRenderer;
+use UliCMS\Models\Content\Language;
 
 class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
 
@@ -57,6 +58,33 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
         foreach ($data["data"] as $dataset) {
             $this->assertStringContainsStringIgnoringCase("lorem", $dataset[0]);
         }
+    }
+    
+    public function testGetDataFilterLanguagesByGroup(){
+        $manager = new UserManager();
+        $user = $manager->getAllUsers("admin desc")[0];
+        
+        $allDataRenderer = new PageTableRenderer($user);
+        $allData = $allDataRenderer->getData(0, 20, 123, "");
+              
+        $german = new Language();
+        $german->loadByLanguageCode("de");
+       
+        $group = new Group();
+        $group->setLanguages([$german]);
+        
+        $user->setPrimaryGroup($group);
+        
+        $filteredDataRenderer = new PageTableRenderer($user);
+        $filteredData = $filteredDataRenderer->getData(0, 20, 123, "");
+        
+        $this->assertGreaterThan(0, $allData["data"]);
+        $this->assertGreaterThan(0, $filteredData["data"]);
+        
+        $this->assertLessThan(
+                count($allData["data"]),
+                count($filteredData["data"]));
+
     }
 
     public function testGetDataFilterByLanguageAndType() {
@@ -125,7 +153,9 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
                 "",
                 [
                     "parent_id" => $parentPage->getID()
-                ]
+                ],
+                "default",
+                ["id"]
         );
 
 

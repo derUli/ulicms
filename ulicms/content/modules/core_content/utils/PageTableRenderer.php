@@ -225,16 +225,8 @@ class PageTableRenderer {
             _esc($dataset->title),
             _esc(get_translation($dataset->menu)),
             _esc($dataset->position),
-            _esc(getPageTitleByID(
-                            intval(
-                                    $dataset->parent_id)
-                    )
-            ),
-            bool2YesNo(
-                    boolval(
-                            $dataset->active
-                    )
-            ),
+            _esc(getPageTitleByID(intval($dataset->parent_id))),
+            bool2YesNo(boolval($dataset->active)),
             $viewButton,
             $editButton,
             !$dataset->deleted_at ? $deleteButton : $undeleteButton
