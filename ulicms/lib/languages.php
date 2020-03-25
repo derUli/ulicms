@@ -170,6 +170,7 @@ function getAllLanguages($filtered = false): array {
             return $result;
         }
     }
+    
     if (!is_null(Vars::get("all_languages"))) {
         return Vars::get("all_languages");
     }

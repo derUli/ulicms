@@ -35,6 +35,7 @@
                 "PageController::checkSlugFree": "pages",
                 "PageController::getPages": "pages",
                 "PageController::filterParentPages": "pages",
+                "PageControlle::getParentSelection": "pages",
                 "PageController::getCKEditorLinkList": "",
                 "CategoryController::createPost": "categories_create",
                 "CategoryController::updatePost": "categories_edit",

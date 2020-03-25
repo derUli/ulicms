@@ -2,7 +2,7 @@
     "name": "ulicms",
     "description": "Open Source Content Management System",
     "dependencies": {
-        "@fortawesome/fontawesome-free": "^5.12.1",
+        "@fortawesome/fontawesome-free": "^5.13.0",
         "bootbox": "4.x",
         "bootstrap": "3.x",
         "bootstrap-toggle": "2.x",
@@ -12,7 +12,7 @@
         "jquery-datetimepicker": "*",
         "jquery-form": "*",
         "jscolor-picker": "*",
-        "password-strength-meter": "*",
+        "password-strength-meter": "^2.1.0",
         "select2": "^4.0.13",
         "slug": "^2.1.1",
         "zenscroll": "*"

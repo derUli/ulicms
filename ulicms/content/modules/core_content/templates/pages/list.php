@@ -91,6 +91,7 @@ if ($permissionChecker->hasPermission("pages")) {
             </table>
         </div>
     </div>
+    
     <?php
     enqueueScriptFile(ModuleHelper::buildRessourcePath(
                     "core_content",

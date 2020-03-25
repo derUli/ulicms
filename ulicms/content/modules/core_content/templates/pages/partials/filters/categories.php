@@ -1,7 +1,8 @@
-<?php 
-use UliCMS\Models\Content\Categories;
-?>
-
-<?php translate("category"); ?>
 <?php
-echo Categories::getHTMLSelect(null, true, "filter_category");
+
+use UliCMS\HTML\Input;
+
+$controller = ControllerRegistry::get("PageController");
+
+translate("category");
+echo Input::singleSelect("filter_category", null, $controller->getCategorySelection());

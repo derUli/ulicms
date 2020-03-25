@@ -46,7 +46,7 @@ class HTMLInputTest extends \PHPUnit\Framework\TestCase {
             new ListItem("mac", "macOS")
         );
         $this->assertEquals(
-                '<select name="operating_system" size="1" class="my-class"><option value="windows">Windows</option><option value="linux">Linux</option><option value="mac">macOS</option></select>',
+                '<select name="operating_system" size="1" class="my-class" id="operating_system"><option value="windows">Windows</option><option value="linux">Linux</option><option value="mac">macOS</option></select>',
                 Input::singleSelect(
                         "operating_system",
                         null,
@@ -65,7 +65,7 @@ class HTMLInputTest extends \PHPUnit\Framework\TestCase {
             new ListItem("linux", "Linux"),
             new ListItem("mac", "macOS")
         );
-        $this->assertEquals('<select name="operating_system" size="5"><option value="windows">Windows</option><option value="linux" selected>Linux</option><option value="mac">macOS</option></select>', Input::singleSelect("operating_system", "linux", $options, 5));
+        $this->assertEquals('<select name="operating_system" size="5" id="operating_system"><option value="windows">Windows</option><option value="linux" selected>Linux</option><option value="mac">macOS</option></select>', Input::singleSelect("operating_system", "linux", $options, 5));
     }
 
     public function testMultiSelect() {

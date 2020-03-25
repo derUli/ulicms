@@ -1,7 +1,6 @@
 <?php
 declare(strict_types=1);
 
-use UliCMS\Models\Content\Language;
 use UliCMS\CoreContent\Models\ViewModels\DiffViewModel;
 use UliCMS\CoreContent\PageTableRenderer;
 use UliCMS\Models\Content\VCS;
@@ -472,7 +471,11 @@ class PageController extends Controller {
                         <?php
                         echo esc($page["title"]);
                         ?>
-                (ID: <?php echo $page["id"]; ?>)
+                        <?php if (!Request::getVar("no_id")) {
+                            ?>
+                    }
+                    (ID: <?php echo $page["id"]; ?>)
+                <?php } ?>
             </option>
             <?php
         }
@@ -545,15 +548,28 @@ class PageController extends Controller {
         $settingsName = "user/" . get_user_id() . "/show_filters";
         if (Settings::get($settingsName)) {
             Settings::delete($settingsName);
+            JsonResult(false);
         } else {
             Settings::set($settingsName, "1");
+            JsonResult(true);
         }
-        HTTPStatusCodeResult(HttpStatusCode::OK);
+    }
+
+    protected function getGroupAssignedLanguages(): array {
+        $permissionChecker = new PermissionChecker(get_user_id());
+        return array_map(
+                function($lang) {
+            return $lang->getLanguageCode();
+        },
+                $permissionChecker->getLanguages());
     }
 
     public function getLanguageSelection(): array {
-        $languages = getAllLanguages(true);
+        $languages = getAllUsedLanguages();
+
         $selectItems = [];
+
+        $userLanguages = $this->getGroupAssignedLanguages();
 
         $selectItems[] = new ListItem(null, "[" . get_translation("all") . "]");
         foreach ($languages as $language) {
@@ -562,6 +578,10 @@ class PageController extends Controller {
                     $language,
                     getLanguageNameByCode($language)
             );
+            if (count($userLanguages) and!in_array($language, $userLanguages)) {
+                continue;
+            }
+
             $selectItems[] = $item;
         }
         return $selectItems;
@@ -583,7 +603,7 @@ class PageController extends Controller {
     }
 
     public function getMenuSelection(): array {
-        $menus = getAllMenus(true, true);
+        $menus = get_all_used_menus();
         $selectItems = [];
         $selectItems[] = new ListItem(null, "[" . get_translation("all") . "]");
 
@@ -597,11 +617,51 @@ class PageController extends Controller {
         return $selectItems;
     }
 
+    public function getCategorySelection(): array {
+        $selectItems = [];
+        $selectItems[] = new ListItem(null, "[" . get_translation("all") . "]");
+
+        $query = Database::selectAll(
+                        "categories",
+                        ["id", "name"],
+                        "id in (select category_id from {prefix}content)",
+                        [],
+                        true,
+                        "name"
+        );
+
+        while ($row = Database::fetchObject($query)) {
+            $selectItems[] = new ListItem($row->id, $row->name);
+        }
+        return $selectItems;
+    }
+
     public function getParentSelection(): array {
+        $language = Request::getVar("language");
+        $menu = Request::getVar("menu");
+        $where = "parent_id is not null";
+
+        if ($menu) {
+            $where .= " and menu = '" . Database::escapeValue($menu) . "'";
+        }
+
+        if ($language) {
+            $where .= " and language = '" . Database::escapeValue($language) . "'";
+        }
+
+        $groupLanguages = $this->getGroupAssignedLanguages();
+        if (count($groupLanguages)) {
+            $groupLanguages = array_map(function($lang) {
+                return "'" . Database::escapeValue($lang) . "'";
+            }
+                    , $groupLanguages);
+            $where .= " and language in (" . implode(",", $groupLanguages) . ")";
+        }
+
         $query = Database::selectAll(
                         "content",
                         ["distinct parent_id as id"],
-                        "parent_id is not null"
+                        $where
         );
         $parentIds = [];
         while ($row = Database::fetchObject($query)) {
@@ -617,9 +677,9 @@ class PageController extends Controller {
                     $parentId,
                     _esc(getPageTitleByID($parentId))
             );
-            $selectItems[] = $item;
+            $selectItems[] = $item->getHtml();
         }
-        return $selectItems;
+        HTMLResult(implode("", $selectItems));
     }
 
     public function getBooleanSelection(): array {
