@@ -113,12 +113,12 @@ class PageTableRenderer {
         }
 
         $where = $this->buildFilterSQL($where, $filters);
-        $where .= " order by $sortColumn $sortDirection";        
+        $where .= " order by $sortColumn $sortDirection";
 
         // get filtered pages count
         $countSql = "select count(id) as count from {prefix}content "
                 . "where $where";
-        
+
         $countResult = Database::query($countSql, true);
         $countData = Database::fetchObject($countResult);
         $filteredCount = $countData->count;
@@ -140,7 +140,7 @@ class PageTableRenderer {
 
         $filterNames = array_keys($filters);
         // Filtered page count if the user apply filters, else total page count
-        $result["recordsFiltered"] = ($search or count($filterNames)) ? 
+        $result["recordsFiltered"] = ($search or count($filterNames)) ?
                 $filteredCount : $totalCount;
 
         return $result;
@@ -154,7 +154,8 @@ class PageTableRenderer {
         }
 
         if (isset($filters["category_id"]) and
-                is_numeric($filters["category_id"])) {
+                is_numeric($filters["category_id"]) and
+                $filters["category_id"] > 0) {
             $where .= " and category_id =" . intval($filters["category_id"]);
         }
 
@@ -168,7 +169,7 @@ class PageTableRenderer {
                 $where .= " and parent_id is null";
             }
         }
-        
+
         if (isset($filters["approved"]) and
                 is_numeric($filters["approved"])) {
             $where .= " and approved =" . intval($filters["approved"]);
@@ -189,9 +190,9 @@ class PageTableRenderer {
 
         if (isset($filters["active"]) and
                 is_numeric($filters["active"])) {
-            $where .= " and active ='" . intval($filters["active"]) ."'";
+            $where .= " and active ='" . intval($filters["active"]) . "'";
         }
-        
+
         return $where;
     }
 

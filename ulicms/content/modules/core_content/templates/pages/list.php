@@ -15,6 +15,14 @@ if ($permissionChecker->hasPermission("pages")) {
     ?>
     <h2><?php translate("pages"); ?></h2>
     <p><?php translate("pages_infotext"); ?></p>
+
+    <?php
+    echo Template::executeModuleTemplate(
+            "core_content",
+            "pages/partials/filters/filters.php"
+    );
+    ?>
+
     <div id="page-list">
         <?php if ($controller->getPagesListView() === "default") { ?>
             <div class="row">

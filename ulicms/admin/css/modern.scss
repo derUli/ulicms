@@ -750,10 +750,14 @@ input[type="checkbox"]{
 .select2-selection__arrow {
     min-height: 34px !important;
 }
-form.page-list-filters {
+.filter-wrapper{
     margin-top: 10px;
     margin-bottom: 10px;
+    .filters > .row{
+        margin-bottom: 10px
+    }
 }
+
 .x-results-found {
     margin-top: 10px;
     margin-bottom: 10px;

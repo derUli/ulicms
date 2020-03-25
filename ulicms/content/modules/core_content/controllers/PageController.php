@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use UliCMS\Models\Content\Language;
 use UliCMS\CoreContent\Models\ViewModels\DiffViewModel;
 use UliCMS\CoreContent\PageTableRenderer;
 use UliCMS\Models\Content\VCS;
@@ -14,6 +15,7 @@ use UliCMS\Utils\CacheUtil;
 use zz\Html\HTMLMinify;
 use function UliCMS\HTML\stringContainsHtml;
 use const UliCMS\Constants\HTML5_ALLOWED_TAGS;
+use UliCMS\HTML\ListItem;
 
 class PageController extends Controller {
 
@@ -109,17 +111,17 @@ class PageController extends Controller {
 
         $user = User::fromSessionData();
         $groupCollection = $user->getGroupCollection();
-        
-        
+
+
         // get allowed tags of all groups assigned to the current user
         $allowedTags = $groupCollection ?
                 $groupCollection->getAllowableTags() : HTML5_ALLOWED_TAGS;
-        
+
         // remove all html tags except the explicitly allowed tags
         if (Stringhelper::isNotNullOrWhitespace($allowedTags)) {
             $model->content = stripTags($model->content, $allowedTags);
         }
-        
+
         $model->category_id = Request::getVar("category_id", 1, "int");
         $model->link_url = Request::getVar("link_url", NULL, "str");
         $model->menu = Request::getVar("menu", "not_in_menu", "str");
@@ -461,8 +463,8 @@ class PageController extends Controller {
         foreach ($pages as $key => $page) {
             ?>
             <option value="<?php
-                    echo $page["id"];
-                    ?>" <?php
+            echo $page["id"];
+            ?>" <?php
                     if ($page["id"] == $parent_id) {
                         echo "selected";
                     }
@@ -537,6 +539,95 @@ class PageController extends Controller {
     public function getCKEditorLinkList(): void {
         $data = getAllPagesWithTitle();
         JSONResult($data, HttpStatusCode::OK, true);
+    }
+
+    public function toggleFilters(): void {
+        $settingsName = "user/" . get_user_id() . "/show_filters";
+        if (Settings::get($settingsName)) {
+            Settings::delete($settingsName);
+        } else {
+            Settings::set($settingsName, "1");
+        }
+        HTTPStatusCodeResult(HttpStatusCode::OK);
+    }
+
+    public function getLanguageSelection(): array {
+        $languages = getAllLanguages(true);
+        $selectItems = [];
+
+        $selectItems[] = new ListItem(null, "[" . get_translation("all") . "]");
+        foreach ($languages as $language) {
+
+            $item = new ListItem(
+                    $language,
+                    getLanguageNameByCode($language)
+            );
+            $selectItems[] = $item;
+        }
+        return $selectItems;
+    }
+
+    public function getTypeSelection(): array {
+        $types = get_used_post_types();
+        $selectItems = [];
+        $selectItems[] = new ListItem(null, "[" . get_translation("all") . "]");
+
+        foreach ($types as $type) {
+            $item = new ListItem(
+                    $type,
+                    get_translation($type)
+            );
+            $selectItems[] = $item;
+        }
+        return $selectItems;
+    }
+
+    public function getMenuSelection(): array {
+        $menus = getAllMenus(true, true);
+        $selectItems = [];
+        $selectItems[] = new ListItem(null, "[" . get_translation("all") . "]");
+
+        foreach ($menus as $menu) {
+            $item = new ListItem(
+                    $menu,
+                    get_translation($menu)
+            );
+            $selectItems[] = $item;
+        }
+        return $selectItems;
+    }
+
+    public function getParentSelection(): array {
+        $query = Database::selectAll(
+                        "content",
+                        ["distinct parent_id as id"],
+                        "parent_id is not null"
+        );
+        $parentIds = [];
+        while ($row = Database::fetchObject($query)) {
+
+            $parentIds[] = intval($row->id);
+        }
+
+        $selectItems = [];
+        $selectItems[] = new ListItem(null, "[" . get_translation("all") . "]");
+
+        foreach ($parentIds as $parentId) {
+            $item = new ListItem(
+                    $parentId,
+                    _esc(getPageTitleByID($parentId))
+            );
+            $selectItems[] = $item;
+        }
+        return $selectItems;
+    }
+
+    public function getBooleanSelection(): array {
+        return [
+            new ListItem(null, "[" . get_translation("all") . "]"),
+            new ListItem("1", get_translation("yes")),
+            new ListItem("0", get_translation("no"))
+        ];
     }
 
 }

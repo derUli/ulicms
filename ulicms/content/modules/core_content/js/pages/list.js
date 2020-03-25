@@ -12,4 +12,16 @@ $(() => {
             }
         });
     });
+
+    $("#show_filters").change((event) => {
+        const url = $(event.target).data("url");
+        $(".filters").slideToggle();
+
+        $.ajax({
+            method: "get",
+            url: url,
+            error: (xhr) =>
+                alert(xhr.responseText)
+        });
+    });
 });

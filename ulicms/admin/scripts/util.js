@@ -143,13 +143,13 @@ dataTableDrawCallback = (settings) => {
 };
 
 const prepareSearchData = (data) => {
-    const type = $(".filter#type").val();
-    const categoryId = $(".filter#category_id").val();
-    const parentId = $(".filter#parent_id").val();
-    const approved = $(".filter#approved").val();
-    const language = $(".filter#language").val();
-    const menu = $(".filter#menu").val();
-    const active = $(".filter#active").val();
+    const type = $("#filter_type").val();
+    const categoryId = $("#filter_category").val();
+    const parentId = $("#filter_parent").val();
+    const approved = $("#filter_approved").val();
+    const language = $("#filter_language").val();
+    const menu = $("#filter_menu").val();
+    const active = $("#filter_active").val();
     
     // TODO: reimplement all filters
     data.filters = {

@@ -142,6 +142,11 @@ class Input {
         foreach ($htmlAttributes as $key => $val) {
             $attributes[$key] = $val;
         }
+        
+        if(!isset($attributes["id"])){
+            $attributes["id"] = $name;
+        }
+        
         $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);
 
         $html = "<select $attribHTML>";
