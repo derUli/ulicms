@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4c7a7ee159073419c0d477db26c49a66",
+    "content-hash": "33fdf4a20bbda4070b67674945c61dd7",
     "packages": [
         {
             "name": "chrisjean/php-ico",
@@ -1647,31 +1647,28 @@
         },
         {
             "name": "phpfastcache/phpfastcache",
-            "version": "8.0.0",
+            "version": "7.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPSocialNetwork/phpfastcache.git",
-                "reference": "7a55eedda16a53c1a97161354718e690e2b6067e"
+                "reference": "11c7b17a824925c2b99dce10df15ba67cbef132a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPSocialNetwork/phpfastcache/zipball/7a55eedda16a53c1a97161354718e690e2b6067e",
-                "reference": "7a55eedda16a53c1a97161354718e690e2b6067e",
+                "url": "https://api.github.com/repos/PHPSocialNetwork/phpfastcache/zipball/11c7b17a824925c2b99dce10df15ba67cbef132a",
+                "reference": "11c7b17a824925c2b99dce10df15ba67cbef132a",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "ext-mbstring": "*",
-                "php": ">=7.3",
+                "php": ">=7.0",
                 "psr/cache": "~1.0.0",
                 "psr/simple-cache": "~1.0.0"
             },
             "conflict": {
                 "basho/riak": "*",
                 "doctrine/couchdb": "*"
-            },
-            "require-dev": {
-                "league/climate": "^3.5"
             },
             "suggest": {
                 "ext-apc": "*",
@@ -1746,7 +1743,7 @@
                 "zend memory cache",
                 "zend server"
             ],
-            "time": "2020-03-22T22:36:21+00:00"
+            "time": "2019-09-15T15:11:18+00:00"
         },
         {
             "name": "phpgangsta/googleauthenticator",

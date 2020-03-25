@@ -30,7 +30,7 @@
       "ext-openssl": "*",
       "ext-dom": "*",
       "ext-libxml": "*",
-      "phpfastcache/phpfastcache": "*",
+      "phpfastcache/phpfastcache": "7.*",
       "phpgangsta/googleauthenticator": "dev-master",
       "katzgrau/klogger": "dev-master",
       "phpmailer/phpmailer": "*",
