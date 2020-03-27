@@ -143,6 +143,11 @@ dataTableDrawCallback = (settings) => {
 };
 
 const prepareSearchData = (data) => {
+    data.filters = buildFiltersObject();
+    console.log('search data', data);
+};
+
+const buildFiltersObject = () => {
     const type = $("#filter_type").val();
     const categoryId = $("#filter_category").val();
     const parentId = $("#filter_parent").val();
@@ -152,7 +157,7 @@ const prepareSearchData = (data) => {
     const active = $("#filter_active").val();
     
     // TODO: reimplement all filters
-    data.filters = {
+    return {
         type,
         category_id: categoryId,
         parent_id: parentId,
@@ -161,9 +166,7 @@ const prepareSearchData = (data) => {
         menu: menu,
         active: active
     };
-
-    console.log('search data', data);
-};
+}
 
 initDataTables = (rootElement) => {
     // Sortable and searchable tables
@@ -196,7 +199,7 @@ initDataTables = (rootElement) => {
                 localStorage.setItem(
                         "DataTables_" + action + "_"
                         + settings.sInstance, JSON.stringify(data)
-                        );
+                )
             },
             stateLoadCallback: (settings) =>
                 JSON.parse(
