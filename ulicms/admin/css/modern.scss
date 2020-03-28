@@ -432,8 +432,8 @@ div#message_page_edit {
     display: none;
 }
 div.inPageMessage {
-    margin-bottom: 20px;
-    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-top: 10px;
     height: 24px;
 }
 #login {
@@ -527,19 +527,26 @@ div#google-fonts {
     word-wrap: break-word;
 }
 
-.accordion-content {    
+.accordion-content {
     h1, h2, h3, h4, h5, h6{
         margin-top: 10px;
         margin-bottom: 10px;
     }
-    
+
+    &.motd-tab, &.news-tab {
+        p:last-child {
+            margin: 0 !important;
+        }
+    }
+
     padding: 5px 10px;
     width: auto !important;
     word-wrap: break-word;
     overflow-x: auto;
 
-    .checkbox, .radio{
+    .checkbox, .radio, ol, ul{
         margin-top: 0;
+        margin-bottom: 0;
     }
 }
 
@@ -581,19 +588,23 @@ div#login-welcome-text {
     max-width: 100%;
 }
 
+#page-list {
+    .dataTables_wrapper {
+        margin-bottom: 40px;
+    }
+}
 .pageform {
-    .field, .help {
-        margin-bottom: 5px;
-    }
-    .field-label {
-        display: block;
-    }
     #accordion-container {
         margin-bottom: 10px;
     }
     .img-thumbnail {
         margin-bottom: 5px;
     }
+}
+
+#accordion-container{
+    padding:0;
+    border: none;
 }
 
 .mainmenu {
@@ -661,8 +672,15 @@ div#login-welcome-text {
 }
 
 .main-content{
-    > .btn-toolbar { 
+    > .btn-toolbar {
         margin-top: 10px;
+    }
+
+    .field, .help {
+        margin-bottom: 5px;
+    }
+    .field-label {
+        display: block;
     }
 }
 
@@ -675,7 +693,8 @@ div#login-welcome-text {
     width: 37.5px;
 }
 h1, h2, h3, h4, h5, h6 {
-    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     word-break: break-word;
 }
 
@@ -819,7 +838,6 @@ table.dataTable {
     margin-top: 10px;
 }
 .dataTables_wrapper {
-    margin-bottom: 40px;
     .dataTables_processing{
         z-index: 30;
         background: none;
@@ -831,6 +849,7 @@ table.dataTable {
     }
 }
 .top-bar {
+    margin-top: 10px;
     margin-bottom: 10px;
 }
 kbd {

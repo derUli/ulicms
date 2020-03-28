@@ -27,7 +27,7 @@ if ($permissionChecker->hasPermission("dashboard")) {
             ?>
             <h2 class="accordion-header">
                 <?php translate("motd"); ?></h2>
-            <div class="accordion-content">
+            <div class="accordion-content motd-tab">
                 <?php
                 echo $motd;
                 ?>
@@ -64,7 +64,7 @@ if ($permissionChecker->hasPermission("dashboard")) {
 
                 <h2 class="accordion-header" >
                     <?php translate("ulicms_news"); ?></h2>
-                <div class="accordion-content">
+                <div class="accordion-content news-tab">
                     <?php require "inc/loadspinner.php"; ?>
                 </div>
             </div>

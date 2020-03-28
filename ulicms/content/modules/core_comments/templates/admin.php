@@ -65,19 +65,19 @@ echo ModuleHelper::buildMethodCallForm(
 		[],
 		"get");
 ?>
-<div class="form-group">
+<div class="field">
     <label for="status"><?php translate("status"); ?></label>
 	<?php
 	echo Input::singleSelect("status", $selectedStatus, $stati, 1);
 	?>
 </div>
-<div class="form-group">
+<div class="field">
     <label for="status"><?php translate("contents"); ?></label>
 	<?php
 	echo Input::singleSelect("content_id", $content_id, $contentSelect, 1);
 	?>
 </div>
-<div class="form-group">
+<div class="field">
     <label for="status"><?php translate("limit_results"); ?></label>
 	<?php
 	echo Input::textBox("limit", $limit, "number", array(
@@ -86,10 +86,10 @@ echo ModuleHelper::buildMethodCallForm(
 	));
 	?>
 </div>
-<p>
+<div class="voffset2">
     <button type="submit" class="btn btn-primary">
         <i class="fas fa-search"></i> <?php translate("search"); ?></button>
-</p>
+</div>
 <?php echo ModuleHelper::endForm(); ?>
 <?php
 echo ModuleHelper::buildMethodCallForm(

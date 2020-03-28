@@ -1,7 +1,6 @@
-<div class="custom-field" 
+<div class="custom-field field" 
  data-field-name="zip_codes">
-<p>
-<strong>zip_codes </strong><br />
+<strong class="field-label">zip_codes </strong>
 <select name="zip_codes" 
 >
 <option value="38102" 
@@ -15,6 +14,5 @@
 <option value="38116" 
 >Kanzlerfeld</option>
 </select>
-<br /> <small>hold_ctrl_to_select_multiple</small>
-</p>
+<small>hold_ctrl_to_select_multiple</small>
 </div>

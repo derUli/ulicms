@@ -743,9 +743,8 @@ if ($permissionChecker->hasPermission("pages")
                 </select>
             </div>
             <div class="typedep" id="custom_data_json">
-
-                <div class="field">
                     <?php do_event("before_custom_data_json"); ?>
+                <div class="field">
                     <strong class="field-label"><?php translate("custom_data_json"); ?></strong>
                     <textarea name="custom_data" style="width: 100%; height: 200px;"
                               cols=80 rows=10

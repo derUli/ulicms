@@ -19,9 +19,7 @@ if (is_null($value)) {
                }
                ?>> <label
                for="cb_<?php Template::escape(ViewBag::get("field_name")); ?>"><?php translate($field->title); ?> <?php if ($field->required) echo "*"; ?></label>
-
         <?php if ($field->helpText) { ?>
-
             <small><?php translate($field->helpText); ?></small>
         <?php } ?>
     </div>
