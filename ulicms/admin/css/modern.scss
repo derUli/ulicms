@@ -600,7 +600,7 @@ div#login-welcome-text {
     background-color: $background_color_8;
     color: $color_9;
     display: none;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     ul {
         li {
             margin-bottom:0;
@@ -657,6 +657,12 @@ div#login-welcome-text {
             text-decoration: none;
             background-color: $background_color_4;
         }
+    }
+}
+
+.main-content{
+    > .btn-toolbar { 
+        margin-top: 10px;
     }
 }
 
