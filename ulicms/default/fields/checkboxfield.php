@@ -5,9 +5,9 @@ if (is_null($value)) {
     $value = $field->defaultValue;
 }
 ?>
-<div class="custom-field"
+<div class="custom-field field"
      data-field-name="<?php Template::escape($field->name); ?>">
-    <p>
+    <div>
         <input type="checkbox"
                name="<?php Template::escape(ViewBag::get("field_name")); ?>"
                id="cb_<?php Template::escape(ViewBag::get("field_name")); ?>"
@@ -21,7 +21,8 @@ if (is_null($value)) {
                for="cb_<?php Template::escape(ViewBag::get("field_name")); ?>"><?php translate($field->title); ?> <?php if ($field->required) echo "*"; ?></label>
 
         <?php if ($field->helpText) { ?>
-            <br /> <small><?php translate($field->helpText); ?></small>
+
+            <small><?php translate($field->helpText); ?></small>
         <?php } ?>
-    </p>
+    </div>
 </div>

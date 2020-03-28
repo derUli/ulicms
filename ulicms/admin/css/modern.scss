@@ -591,19 +591,8 @@ div#login-welcome-text {
     #accordion-container {
         margin-bottom: 10px;
     }
-}
-.main-content {
-    margin-top: 15px;
-
-    ul:not(.select2-selection__rendered),
-    ol:not(.select2-selection__rendered){
-        li{
-            margin-bottom:10px;
-        }
-    }
-
-    a.btn-default {
-        color: $color_10;
+    .img-thumbnail {
+        margin-bottom: 5px;
     }
 }
 
@@ -775,6 +764,9 @@ input[type="checkbox"]{
 .select2-container {
     .select2-selection--single {
         min-height: 34px !important;
+    }
+    .select2-selection--multiple {
+        min-height: 46px !important;
     }
 }
 .select2-selection__arrow {
