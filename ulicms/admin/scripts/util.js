@@ -155,7 +155,7 @@ const buildFiltersObject = () => {
     const language = $("#filter_language").val();
     const menu = $("#filter_menu").val();
     const active = $("#filter_active").val();
-    
+
     // TODO: reimplement all filters
     return {
         type,
@@ -199,7 +199,7 @@ initDataTables = (rootElement) => {
                 localStorage.setItem(
                         "DataTables_" + action + "_"
                         + settings.sInstance, JSON.stringify(data)
-                )
+                        )
             },
             stateLoadCallback: (settings) =>
                 JSON.parse(

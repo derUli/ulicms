@@ -130,7 +130,7 @@ $(() => {
         on: MenuTranslation.On,
         off: MenuTranslation.Off
     });
-    
+
     // bootstrap-toggle doesn't react to click on the label of a toggle switch
     // This is a long standing issue that is still not fixed.
     // https://github.com/minhur/bootstrap-toggle/issues/23
@@ -139,12 +139,12 @@ $(() => {
     $(".js-switch-label").click((event) => {
         const target = $(event.target);
         const theSwitch = target.closest('.checkbox').find(".js-switch");
-        if(theSwitch && theSwitch.length){
-             theSwitch.bootstrapToggle('toggle');
+        if (theSwitch && theSwitch.length) {
+            theSwitch.bootstrapToggle('toggle');
         }
-        
+
     });
-    
+
     $.datetimepicker.setLocale(language);
     $(".datepicker").datetimepicker({
         format: "Y-m-d",
@@ -173,7 +173,7 @@ $(() => {
 
     // scroll to top arrow at bottom right
     $("#scroll-to-top").click((event) => {
-		event.preventDefault();
+        event.preventDefault();
         zenscroll.toY(0);
     });
 });
