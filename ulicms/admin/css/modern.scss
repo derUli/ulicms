@@ -129,7 +129,7 @@ img.responsive-image,
     height: auto;
 }
 .CodeMirror {
-    margin-bottom: 20px;
+    margin-bottom: 0px;
     border: 1px solid #eee;
     height: auto !important;
     overflow: hidden;
@@ -520,11 +520,23 @@ div#google-fonts {
         margin-top: 10px;
     }
 }
-.accordion-content {
+.accordion-header {
+    padding: 5px 10px;
+    font-size: 16px;
+    width: auto !important;
+    word-wrap: break-word;
+}
+
+.accordion-content {    
+    h1, h2, h3, h4, h5, h6{
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    
+    padding: 5px 10px;
     width: auto !important;
     word-wrap: break-word;
     overflow-x: auto;
-    padding: 15px;
 
     .checkbox, .radio{
         margin-top: 0;
@@ -535,10 +547,6 @@ div#google-fonts {
     margin-right: 10px;
 }
 
-.accordion-header {
-    width: auto !important;
-    word-wrap: break-word;
-}
 div#login-welcome-text {
     border: solid 1px #ededed;
     padding: 10px;
@@ -572,20 +580,33 @@ div#login-welcome-text {
 .ulicms-logo {
     max-width: 100%;
 }
+
+.pageform {
+    .field, .help {
+        margin-bottom: 5px;
+    }
+    .field-label {
+        display: block;
+    }
+    #accordion-container {
+        margin-bottom: 10px;
+    }
+}
 .main-content {
     margin-top: 15px;
 
-    li{
-        margin-bottom:10px;
+    ul:not(.select2-selection__rendered),
+    ol:not(.select2-selection__rendered){
+        li{
+            margin-bottom:10px;
+        }
     }
 
     a.btn-default {
         color: $color_10;
     }
 }
-h2.accordion-header {
-    font-size: 20px;
-}
+
 .mainmenu {
     background-color: $background_color_8;
     color: $color_9;
