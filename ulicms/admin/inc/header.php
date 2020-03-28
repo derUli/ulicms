@@ -118,7 +118,7 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
                 echo 'action-' . Template::getEscape(get_action());
             }
             ?>">
-            <div class="row">
+            <div class="row menubar">
                 <div class="col-xs-7">
                     <a href="../" title="<?php translate("goto_frontend"); ?>"><img
                             src="<?php Template::escape($admin_logo); ?>" alt="UliCMS"

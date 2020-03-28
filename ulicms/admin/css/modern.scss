@@ -102,11 +102,24 @@ fieldset[disabled] {
         color: $color_2 !important;
     }
 }
+.menubar{
+    margin-bottom: 10px;
+}
 .btn-toolbar {
     .btn {
         margin-left: 5px;
     }
 }
+
+.button-menu{
+    margin-top: 10px;
+    a{
+        width: fit-content;
+        display: block;
+        margin-bottom: 15px;
+    }
+}
+
 .toggle-module-form {
     .btn {
         min-width: 58px;
@@ -554,6 +567,10 @@ div#google-fonts {
     margin-right: 10px;
 }
 
+hr {
+    margin: 5px 0;
+}
+
 div#login-welcome-text {
     border: solid 1px #ededed;
     padding: 10px;
@@ -818,12 +835,10 @@ table.dataTable {
     position: relative;
     top: 5px;
     tbody, thead {
-        th {
-            padding: 8px 18px !important;
+        th, td {
+            padding: 5px !important;
         }
-        td {
-            padding: 8px 18px !important;
-        }
+
     }
     tr.unread{
         background-color: #fcf8e3;

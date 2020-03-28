@@ -56,7 +56,7 @@ if ($permissionChecker->hasPermission("install_packages")) {
                                     ?>
                                 </td>
                                 <td>
-                                    <a href="#" class="btn btn-info btn-sm remote-alert icon"
+                                    <a href="#" class="btn btn-info btn-sm remote-alert"
                                        title="<?php translate("info"); ?>"
                                        data-url="<?php echo ModuleHelper::buildMethodCallUrl(PackageController::class, "getPackageLicense", "name={$package->name}"); ?>">
                                         <i class="fas fa-balance-scale"></i>

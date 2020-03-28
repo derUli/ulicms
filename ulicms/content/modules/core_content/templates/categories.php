@@ -44,7 +44,6 @@ if (!$permissionChecker->hasPermission("categories")) {
                     class="fa fa-plus"></i>
         <?php translate("create_category"); ?></a>
         </div>
-        <div class="field"><?php BackendHelper::formatDatasetCount(count($categories)); ?></div>
         <?php
     }
     ?>

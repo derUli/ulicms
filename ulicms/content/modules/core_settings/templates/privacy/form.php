@@ -1,5 +1,7 @@
 <?php
+
 use UliCMS\Constants\RequestMethod;
+use UliCMS\HTML\Alert;
 
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("privacy_settings")) {
@@ -15,17 +17,16 @@ if ($permissionChecker->hasPermission("privacy_settings")) {
     $languages = getAllLanguages(true);
     ?>
     <div>
-        <p>
-            <a
-                href="<?php echo ModuleHelper::buildActionURL("settings_categories"); ?>"
-                class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
-        </p>	<?php
-        if (Request::getVar("save")) {
+        <a
+            href="<?php echo ModuleHelper::buildActionURL("settings_categories"); ?>"
+            class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
+            <?php
+            if (Request::getVar("save")) {
+                echo Alert::success(
+                        get_translation("changes_was_saved")
+                );
+            }
             ?>
-            <div class="alert alert-success">
-                <?php translate("changes_was_saved"); ?>
-            </div>
-        <?php } ?>
         <h2><?php translate("privacy"); ?></h2>
 
         <div id="accordion-container">
@@ -33,15 +34,15 @@ if ($permissionChecker->hasPermission("privacy_settings")) {
             <div class="accordion-content">
                 <?php
                 echo ModuleHelper::buildMethodCallForm(
-				"PrivacyController",
-				"save",
-				[], 
-				RequestMethod::POST,
-				array(
-                    "id" => "privacy_form"
+                        "PrivacyController",
+                        "save",
+                        [],
+                        RequestMethod::POST,
+                        array(
+                            "id" => "privacy_form"
                 ));
                 ?>
-                <p>
+                <div class="field">
                     <strong><?php translate("language"); ?></strong> <br /> <select
                         name="language" id="language">
                             <?php
@@ -56,17 +57,17 @@ if ($permissionChecker->hasPermission("privacy_settings")) {
                                 <?php } ?>
 
                     </select>
-                </p>
+                </div>
                 <?php
                 csrf_token_html();
                 ?>
-                <p>
+                <div class="field">
                     <input type="checkbox" id="privacy_policy_checkbox_enable"
                            name="privacy_policy_checkbox_enable" value="1"
                            class="js-switch"
                            <?php if ($privacy_policy_checkbox_enable) echo "checked"; ?>> <label
                            for="privacy_policy_checkbox_enable"><?php translate("privacy_policy_checkbox_enable"); ?></label>
-                </p>
+                </div>
                 <?php
                 $editor = get_html_editor();
                 ?>
@@ -85,66 +86,75 @@ if ($permissionChecker->hasPermission("privacy_settings")) {
             </h2>
 
             <div class="accordion-content">
-                <div class="label">
-                    <label for="log_ip"> <?php
-                        translate("LOG_IP_ADDRESSES");
+                <div class="field">
+                    <div class="field-label">
+                        <label for="log_ip"> <?php
+                            translate("LOG_IP_ADDRESSES");
+                            ?>
+                        </label>
+                    </div>
+                    <div class="inputWrapper">
+                        <input type="checkbox" id="log_ip" name="log_ip"
+                               class="js-switch"
+                               <?php
+                               if ($log_ip) {
+                                   echo "checked ";
+                               }
+                               ?>>
+                    </div>
+                    <small>
+                        <?php
+                        translate("LOG_IP_ADDRESSES_NOTICE");
                         ?>
-                    </label>
+                    </small>
                 </div>
-                <div class="inputWrapper">
-                    <input type="checkbox" id="log_ip" name="log_ip"
-                           class="js-switch"
-                           <?php
-                           if ($log_ip) {
-                               echo "checked ";
-                           }
-                           ?>>
-                </div>
-                <?php
-                translate("LOG_IP_ADDRESSES_NOTICE");
-                ?>
                 <hr />
-                <div class="label">
-                    <label for="delete_ips_after_48_hours">
-                        <?php translate("DELETE_IPS_AFTER_48_HOURS"); ?>
-                    </label>
+                <div class="field">
+                    <div class="field-label">
+                        <label for="delete_ips_after_48_hours">
+                            <?php translate("DELETE_IPS_AFTER_48_HOURS"); ?>
+                        </label>
+                    </div>
+                    <div class="inputWrapper">
+                        <input type="checkbox" id="delete_ips_after_48_hours"
+                               name="delete_ips_after_48_hours"
+                               class="js-switch"
+                               <?php
+                               if ($delete_ips_after_48_hours) {
+                                   echo "checked ";
+                               }
+                               ?>>
+                    </div>
                 </div>
-                <div class="inputWrapper">
-                    <input type="checkbox" id="delete_ips_after_48_hours"
-                           name="delete_ips_after_48_hours"
-                           class="js-switch"
-                           <?php
-                           if ($delete_ips_after_48_hours) {
-                               echo "checked ";
-                           }
-                           ?>>
-                </div>
-                <div class="label">
-                    <label for="keep_spam_ips">
-                        <?php translate("keep_spam_ips"); ?>
-                    </label>
-                </div>
-                <div class="inputWrapper">
-                    <input type="checkbox" id="keep_spam_ips" name="keep_spam_ips"
-                           class="js-switch"
-                           <?php
-                           if ($keep_spam_ips) {
-                               echo "checked ";
-                           }
-                           ?>>
+                <div class="field">
+                    <div class="field-label">
+                        <label for="keep_spam_ips">
+                            <?php translate("keep_spam_ips"); ?>
+                        </label>
+                    </div>
+                    <div class="inputWrapper">
+                        <input type="checkbox" id="keep_spam_ips" name="keep_spam_ips"
+                               class="js-switch"
+                               <?php
+                               if ($keep_spam_ips) {
+                                   echo "checked ";
+                               }
+                               ?>>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <p>
-        <button type="submit" class="btn btn-primary voffset2">
-            <i class="fas fa-save"></i> <?php translate("save_changes"); ?></button>
-    </p>
+    <div class="voffset2">
+        <button type="submit" class="btn btn-primary">
+            <i class="fas fa-save"></i> 
+            <?php translate("save_changes"); ?></button>
+    </div>
     <?php
-	$translation = new JSTranslation();
+    $translation = new JSTranslation();
     $translation->addKey("changes_was_saved");
     $translation->render();
-	
+
     BackendHelper::enqueueEditorScripts();
     enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/privacy.js"));
     combinedScriptHtml();

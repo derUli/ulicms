@@ -9,10 +9,12 @@ $languages = Language::getAllLanguages();
 ?>
 <form action="?action=groups" method="post">
     <?php csrf_token_html(); ?>
-    <p>
-        <strong><?php translate("name"); ?>*</strong> <input type="text"
-                                                             required="required" name="name" value="">
-    </p>
+    <div class="field">
+        <strong class="field-label">
+            <?php translate("name"); ?>*
+        </strong>
+        <input type="text" required="required" name="name" value="">
+    </div>
     <h3><?php translate("permissions"); ?></h3>
     <fieldset>
         <div class="checkbox">
@@ -20,8 +22,7 @@ $languages = Language::getAllLanguages();
                 <input id="checkall" type="checkbox" class="checkall">
                 <?php translate("select_all"); ?></label>
         </div>
-
-        <div class="voffset3">
+        <div class="voffset1">
             <?php
             foreach ($all_permissions as $key => $value) {
                 ?>
@@ -37,9 +38,8 @@ $languages = Language::getAllLanguages();
             <?php } ?>
         </div>
     </fieldset>
-    <h4><?php translate("languages"); ?></h4>
+    <h3><?php translate("languages"); ?></h3>
     <fieldset>
-
         <?php foreach ($languages as $lang) { ?>
             <div class="checkbox">
                 <label>
@@ -50,16 +50,15 @@ $languages = Language::getAllLanguages();
             </div>
         <?php } ?>
     </fieldset>
-    <h4><?php translate("allowable_tags"); ?></h4>
+    <h3><?php translate("allowable_tags"); ?></h3>
     <input type="text" name="allowable_tags"
-           value="<?php Template::escape(HTML5_ALLOWED_TAGS); ?>"><br /> <small><?php translate("allowable_tags_help"); ?></small>
-    <br /> <br />
-    <p>
+           value="<?php Template::escape(HTML5_ALLOWED_TAGS); ?>"> <small><?php translate("allowable_tags_help"); ?></small>
+    <div class="voffset2">
         <button name="add_group" type="submit" class="btn btn-primary">
             <i class="fa fa-save"></i>
             <?php translate("save"); ?>
         </button>
-    </p>
+    </div>
 </form>
 <?php
 enqueueScriptFile("scripts/group.js");

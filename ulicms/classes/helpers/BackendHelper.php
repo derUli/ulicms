@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 class BackendHelper extends Helper {
 
+    // TODO: This obsolete remove this
+    // make sure that no packages depend on this
     // Format dataset count singular / prual
     // one dataset found or 123 datasets found
     public static function formatDatasetCount(int $count): void {

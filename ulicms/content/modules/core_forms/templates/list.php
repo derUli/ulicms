@@ -14,7 +14,6 @@ if (!$permissionChecker->hasPermission("forms")) {
                     class="fa fa-plus"></i> <?php translate("create_form"); ?></a>
         </p>
     <?php } ?>
-    <p><?php BackendHelper::formatDatasetCount(count($forms)); ?></p>
     <div class="scroll">
         <table id="form-list" class="tablesorter">
             <thead>

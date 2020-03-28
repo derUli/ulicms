@@ -15,21 +15,19 @@ if ($permissionChecker->hasPermission("settings_simple")
         or $permissionChecker->hasPermission("languages")
         or $permissionChecker->hasPermission("other")) {
     ?>
-    <p>
+    <div class="button-menu">
         <?php
         if ($permissionChecker->hasPermission("settings_simple")) {
             ?>
             <a href="index.php?action=settings_simple" class="btn btn-default"><i
-                    class="fas fa-tools"></i> <?php translate("general_settings"); ?></a> <br />
-            <br />
-            <?php
-        }
-        ?>
-        <?php
-        if ($permissionChecker->hasPermission("design")) {
+                    class="fas fa-tools"></i> <?php translate("general_settings"); ?></a>                         <?php
+            }
             ?>
+            <?php
+            if ($permissionChecker->hasPermission("design")) {
+                ?>
             <a href="index.php?action=design" class="btn btn-default"><i
-                    class="fas fa-tools"></i> <?php translate("design"); ?></a> <br /> <br />
+                    class="fas fa-tools"></i> <?php translate("design"); ?></a> 
                 <?php
             }
             ?>
@@ -37,16 +35,14 @@ if ($permissionChecker->hasPermission("settings_simple")
             if ($permissionChecker->hasPermission("spam_filter")) {
                 ?>
             <a href="index.php?action=spam_filter" class="btn btn-default"><i
-                    class="fas fa-tools"></i> <?php translate("spamfilter"); ?></a> <br />
-            <br />
-            <?php
-        }
-        ?>
-        <?php
-        if ($permissionChecker->hasPermission("privacy_settings")) {
+                    class="fas fa-tools"></i> <?php translate("spamfilter"); ?></a>                         <?php
+            }
             ?>
+            <?php
+            if ($permissionChecker->hasPermission("privacy_settings")) {
+                ?>
             <a href="?action=privacy_settings" class="btn btn-default"><i
-                    class="fas fa-tools"></i> <?php translate("privacy"); ?></a><br /> <br />
+                    class="fas fa-tools"></i> <?php translate("privacy"); ?></a>
                 <?php
             }
             ?>
@@ -57,7 +53,7 @@ if ($permissionChecker->hasPermission("settings_simple")
                 href="<?php echo ModuleHelper::buildActionURL("performance_settings"); ?>"
                 class="btn btn-default"><i class="fas fa-tools"></i> <?php
                     translate("performance");
-                    ?></a> <br /> <br />
+                    ?></a> 
             <?php
         }
         ?>
@@ -68,7 +64,7 @@ if ($permissionChecker->hasPermission("settings_simple")
                 href="<?php echo ModuleHelper::buildActionURL("community_settings"); ?>"
                 class="btn btn-default"><i class="fas fa-tools"></i> <?php
                     translate("comments");
-                    ?></a> <br /> <br />
+                    ?></a> 
             <?php
         }
         ?>
@@ -76,7 +72,7 @@ if ($permissionChecker->hasPermission("settings_simple")
         if ($permissionChecker->hasPermission("motd")) {
             ?>
             <a href="index.php?action=motd" class="btn btn-default"><i
-                    class="fas fa-tools"></i> <?php translate("motd"); ?></a> <br /> <br />
+                    class="fas fa-tools"></i> <?php translate("motd"); ?></a> 
                 <?php
             }
             ?>
@@ -84,7 +80,7 @@ if ($permissionChecker->hasPermission("settings_simple")
             if ($permissionChecker->hasPermission("languages")) {
                 ?>
             <a href="index.php?action=languages" class="btn btn-default"><i
-                    class="fas fa-tools"></i> <?php translate("languages"); ?></a> <br /> <br />
+                    class="fas fa-tools"></i> <?php translate("languages"); ?></a> 
                 <?php
             }
             ?>
@@ -96,7 +92,7 @@ if ($permissionChecker->hasPermission("settings_simple")
                 <?php
             }
             ?>
-    </p>
+    </div>
     <?php
 } else {
     noPerms();

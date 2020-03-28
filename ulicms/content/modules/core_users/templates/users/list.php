@@ -33,7 +33,7 @@ if ($permissionChecker->hasPermission("users")) {
                 <?php translate("create_user"); ?></a>
         </div>
     <?php } ?>
-    <form action="index.php" method="get" class="voffset">
+    <form action="index.php" method="get" class="voffset2">
         <strong>
             <?php translate("primary_group"); ?>
         </strong>
@@ -49,11 +49,9 @@ if ($permissionChecker->hasPermission("users")) {
                     value="<?php Template::escape($group->getId()); ?>"><?php Template::escape($group->getName()); ?></option>
                 <?php } ?>
         </select>
-    </form>
-
-    <p><?php BackendHelper::formatDatasetCount(count($users)); ?></p>
+    </form>    
     <?php if (count($users) > 0) { ?>
-        <div class="scroll">
+        <div class="scroll voffset2">
             <table class="tablesorter">
                 <thead>
                     <tr style="font-weight: bold;">

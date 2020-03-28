@@ -7,15 +7,14 @@ if ($permissionChecker->hasPermission("pages")
         or $permissionChecker->hasPermission("forms")) {
     ?>
     <h2><?php translate("contents"); ?></h2>
-    <p>
-        <strong><?php translate("select_content_type"); ?> </strong><br />
-        <br />
+    <strong><?php translate("select_content_type"); ?> </strong>
+    <div class="button-menu">
         <?php
         if ($permissionChecker->hasPermission("pages")) {
             ?>
             <a href="index.php?action=pages" class="btn btn-default"><i
                     class="fas fa-book"></i> <?php translate("pages"); ?></a>
-            <br />
+
             <?php
         }
         ?>
@@ -24,7 +23,7 @@ if ($permissionChecker->hasPermission("pages")
             ?>
             <a href="?action=comments_manage" class="btn btn-default voffset2"><i
                     class="fa fa-comments" aria-hidden="true"></i>
-                <?php translate("comments"); ?></a><br />
+                <?php translate("comments"); ?></a>
             <?php
         }
         ?>
@@ -34,7 +33,7 @@ if ($permissionChecker->hasPermission("pages")
                     class="fab fa-wpforms" aria-hidden="true"></i>
                     <?php
                     translate("forms");
-                    ?></a> <br />
+                    ?></a> 
             <?php
         }
         if ($permissionChecker->hasPermission("banners")) {
@@ -42,7 +41,7 @@ if ($permissionChecker->hasPermission("pages")
             <a href="index.php?action=banner"
                class="btn btn-default voffset2"><i
                     class="fas fa-bullhorn"></i>
-                <?php translate("advertisements"); ?></a><br />
+                <?php translate("advertisements"); ?></a>
 
             <?php
         }
@@ -52,11 +51,12 @@ if ($permissionChecker->hasPermission("pages")
                class="btn btn-default voffset2"><i
                     class="fa fa-list-alt" aria-hidden="true"></i>
                 <?php translate("categories"); ?></a>
-            <br />
-            <br />
-            <?php
-        }
-        do_event("content_type_list_entry");
-    } else {
-        noPerms();
+        <?php
     }
+    ?>
+        </div>
+        <?php
+    do_event("content_type_list_entry");
+} else {
+    noPerms();
+}

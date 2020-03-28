@@ -42,8 +42,6 @@ if ($permissionChecker->hasPermission("banners")) {
         echo Categories::getHTMLSelect($_SESSION["filter_category"], true);
         ?>
     </div>
-
-    <p><?php BackendHelper::formatDatasetCount(count($banners)); ?></p>
     <div class="scroll">
         <table class="tablesorter">
             <thead>

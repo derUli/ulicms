@@ -1,4 +1,5 @@
 <?php
+use UliCMS\HTML\Alert;
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("settings_simple")) {
     $controller = ControllerRegistry::get();
@@ -14,7 +15,6 @@ if ($permissionChecker->hasPermission("settings_simple")) {
             class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
     </p>
     <h2><?php translate("general_settings"); ?></h2>
-    <p>Hier können Sie die Einstellungen für Ihre Internetseite verändern.</p>
     <?php
     echo ModuleHelper::buildMethodCallForm("SimpleSettingsController", "save", [], "post", array(
         "id" => "settings_simple"

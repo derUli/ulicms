@@ -1,9 +1,12 @@
 <?php
+
+use UliCMS\HTML\Alert;
+
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("open_graph")) {
     $og_image = Settings::get("og_image");
     $og_url = "";
-    if (!empty($og_image) and ! startsWith($og_image, "http")) {
+    if (!empty($og_image) and!startsWith($og_image, "http")) {
         $og_url = get_protocol_and_domain() . $og_image;
     }
     ?>
@@ -12,7 +15,11 @@ if ($permissionChecker->hasPermission("open_graph")) {
            class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
     </p>
     <h1><?php translate("open_graph"); ?></h1>
-    <p><?php translate("og_defaults_help"); ?></p>
+    <?php
+    echo Alert::info(
+            get_translation("og_defaults_help")
+    );
+    ?>
     <?php
     echo ModuleHelper::buildMethodCallForm("OpenGraphController", "save", [], "post", array(
         "id" => "open_graph"
@@ -29,7 +36,7 @@ if ($permissionChecker->hasPermission("open_graph")) {
                         <img class="small-preview-image"
                              src="<?php esc($og_url); ?>" />
                     </div>
-                <?php } ?>
+    <?php } ?>
                 <p>
                     <input type="text" id="og_image" name="og_image" readonly="readonly"
                            onclick="openMenuImageSelectWindow(this)"
