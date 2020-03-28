@@ -1,9 +1,11 @@
 <?php
 csrf_token_html();
-$show_filters = Settings::get("user/" . get_user_id() . "/show_filters");
+// The filter features are disabled in this release
+// $show_filters = Settings::get("user/" . get_user_id() . "/show_filters");
+$show_filters = false;
 ?>
 <div
-    class="filter-wrapper"
+    class="filter-wrapper has-not-allowed"
     data-parent-pages-url="<?php
     echo
     ModuleHelper::buildMethodCallUrl(
@@ -16,7 +18,7 @@ $show_filters = Settings::get("user/" . get_user_id() . "/show_filters");
     <div class="checkbox">
         <label><input type="checkbox" class="js-switch" name="show_filters" id="show_filters"
                       value="1" data-url="<?php echo ModuleHelper::buildMethodCallUrl(PageController::class, "toggleFilters"); ?>"
-
+                      disabled
                       <?php if ($show_filters) echo "checked"; ?>>
             <span class="js-switch-label">
                 <?php translate("show_filters"); ?>

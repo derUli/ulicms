@@ -471,9 +471,9 @@ class PageController extends Controller {
                         <?php
                         echo esc($page["title"]);
                         ?>
-                        <?php if (!Request::getVar("no_id")) {
-                            ?>
-                    }
+
+                <?php if (!Request::getVar("no_id")) {
+                    ?>
                     (ID: <?php echo $page["id"]; ?>)
                 <?php } ?>
             </option>

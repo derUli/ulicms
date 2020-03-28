@@ -382,7 +382,9 @@ if ($permissionChecker->hasPermission("pages")) {
                                         );
                                     }
                                     ?>"
-                                    step=any> <br /> <br /> <strong><?php translate("excerpt"); ?></strong>
+                                    step="any"> 
+                                <br />
+                                <strong><?php translate("excerpt"); ?></strong>
                                 <textarea name="excerpt" id="excerpt" rows="5" cols="80" class="<?php esc($editor); ?>" data-mimetype="text/html" ><?php echo _esc($row->excerpt); ?></textarea>
                             </div>
                             <div class="typedep" id="tab-og" style="display: none">

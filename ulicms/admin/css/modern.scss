@@ -39,6 +39,7 @@ body {
     -ms-overflow-style: scrollbar;
 }
 
+// pointer mouse cursor
 .has-pointer,
 input.kcfinder,
 input[type="button"],
@@ -47,6 +48,14 @@ input[type="reset"],
 input[type="image"],
 button {
     cursor: pointer
+}
+
+// not allowed mouse cursor
+.has-not-allowed {
+    cursor: not-allowed !important;
+    * {
+        pointer-events: none;
+    }
 }
 
 .centered{

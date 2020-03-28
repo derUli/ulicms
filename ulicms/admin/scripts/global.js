@@ -1,4 +1,4 @@
-/* global bootbox, PasswordSecurityTranslation, MenuTranslation */
+/* global bootbox, PasswordSecurityTranslation, MenuTranslation, zenscroll */
 
 // Internet Exploder caches AJAX requests by default
 $(document).ready(() => {
@@ -73,7 +73,7 @@ $(() => {
             minimumLength: 4 // minimum password length (below this threshold, the score is 0)
         });
     }
-// Links to upcoming features
+    // Links to upcoming features
 
     $(".coming-soon").click((event) => {
         event.preventDefault();
@@ -175,5 +175,13 @@ $(() => {
     $("#scroll-to-top").click((event) => {
         event.preventDefault();
         zenscroll.toY(0);
+    });
+    
+    $(".more-options-toggle").click((event) => {
+        const target = $(event.target);
+        const toggleTarget = $(target.data("target"));
+        
+        toggleTarget.slideToggle()
+        
     });
 });
