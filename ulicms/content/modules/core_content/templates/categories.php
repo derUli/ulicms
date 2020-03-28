@@ -1,6 +1,8 @@
 <?php
 
+// TODO: refactor this file into multiple files
 use UliCMS\Models\Content\Categories;
+use UliCMS\HTML\Alert;
 
 $permissionChecker = new ACL();
 if (!$permissionChecker->hasPermission("categories")) {
@@ -21,7 +23,7 @@ if (!$permissionChecker->hasPermission("categories")) {
     $categories = Categories::getAllCategories($order);
     ?>
     <?php
-    if (!isset($_GET["add"]) and ! isset($_GET["edit"])
+    if (!isset($_GET["add"]) and!isset($_GET["edit"])
             and $permissionChecker->hasPermission("categories_create")) {
         ?>
         <?php
@@ -32,40 +34,44 @@ if (!$permissionChecker->hasPermission("categories")) {
         ?>
 
         <h2><?php translate("categories"); ?></h2>
-        <p><?php translate("categories_infotext"); ?></p>
-        <p>
+        <?php
+        echo Alert::info(
+                get_translation("categories_infotext")
+        );
+        ?>
+        <div class="field">
             <a href="?action=categories&add" class="btn btn-default"><i
                     class="fa fa-plus"></i>
-                <?php translate("create_category"); ?></a>
-        </p>
-        <p><?php BackendHelper::formatDatasetCount(count($categories)); ?></p>
+        <?php translate("create_category"); ?></a>
+        </div>
+        <div class="field"><?php BackendHelper::formatDatasetCount(count($categories)); ?></div>
         <?php
     }
     ?>
     <?php
-    if (count($categories) > 0 and ! isset($_GET["add"])
-            and ! isset($_GET["edit"])) {
+    if (count($categories) > 0 and!isset($_GET["add"])
+            and!isset($_GET["edit"])) {
         ?>
         <div class="scroll">
             <table class="tablesorter">
                 <thead>
                     <tr>
                         <th style="min-width: 50px;">
-                            <?php translate("id"); ?>
+        <?php translate("id"); ?>
                         </th>
 
                         <th style="min-width: 200px;">
                             <?php translate("name"); ?>
                         </th>
                         <th style="min-width: 200px;" class="hide-on-mobile">
-                            <?php translate("description"); ?>
+                        <?php translate("description"); ?>
                         </th>
                         <?php
                         if ($permissionChecker->hasPermission("categories_edit")) {
                             ?>
                             <td class="no-sort"></td>
                             <td class="no-sort"></td>
-                        <?php } ?>
+        <?php } ?>
                     </tr>
                 </thead>
                 <tbody>
@@ -74,11 +80,11 @@ if (!$permissionChecker->hasPermission("categories")) {
                         ?>
                         <tr id="dataset-<?php echo $category->getID(); ?>">
                             <td><?php
-                                echo $category->getId();
-                                ?></td>
+                    echo $category->getId();
+                        ?></td>
                             <td style="padding-right: 20px;"><?php
-                                esc($category->getName());
-                                ?></td>
+                    esc($category->getName());
+                    ?></td>
                             <td style="padding-right: 20px;"
                                 class="hide-on-mobile">
                                     <?php
@@ -102,18 +108,18 @@ if (!$permissionChecker->hasPermission("categories")) {
                                     ?>
                                     <td class="text-center"><form
                                             action="?sClass=CategoryController&sMethod=delete&del=<?php
-                                            echo $category->getId();
-                                            ?>"
+                                    echo $category->getId();
+                                    ?>"
                                             method="post"
                                             class="delete-form"><?php csrf_token_html(); ?><input
                                                 type="image"
                                                 class="mobile-big-image" src="gfx/delete.gif"
                                                 alt="<?php
-                                                translate("delete");
-                                                ?>"
+                                    translate("delete");
+                                    ?>"
                                                 title="<?php
-                                                translate("delete");
-                                                ?>">
+                            translate("delete");
+                                    ?>">
                                         </form></td>
                                     <?php
                                 } else {
@@ -127,16 +133,16 @@ if (!$permissionChecker->hasPermission("categories")) {
                                            ?>')"><img
                                                 class="mobile-big-image" src="gfx/delete.gif"
                                                 alt="<?php
-                                                translate("delete");
-                                                ?>"
+                                           translate("delete");
+                                           ?>"
                                                 title="<?php
-                                                translate("delete");
-                                                ?>"> </a>
+                            translate("delete");
+                                           ?>"> </a>
                                     </td>
                                     <?php
                                 }
                                 ?>
-                            <?php } ?>
+                        <?php } ?>
                         </tr>
                         <?php
                     }
@@ -152,11 +158,12 @@ if (!$permissionChecker->hasPermission("categories")) {
     } else if (isset($_GET["add"])) {
         if ($permissionChecker->hasPermission("categories_create")) {
             ?>
-            <p>
+            <div class="btn-toolbar">
                 <a href="<?php echo ModuleHelper::buildActionURL("categories"); ?>"
-                   class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i>
-                    <?php translate("back") ?></a>
-            </p>
+                   class="btn btn-default btn-back">
+                    <i class="fa fa-arrow-left"></i>
+            <?php translate("back") ?></a>
+            </div>
             <h2><?php translate("create_category"); ?></h2>
             <?php
             echo ModuleHelper::buildMethodCallForm(
@@ -164,34 +171,35 @@ if (!$permissionChecker->hasPermission("categories")) {
                     "create"
             );
             ?>
-            <p>
+            <div class="field">
                 <strong><?php translate("name"); ?>*</strong>
                 <input type="text"
                        name="name" value="" required>
-            </p>
+            </div>
 
-            <p>
+            <div class="field">
                 <strong><?php translate("description"); ?></strong>
                 <br />
                 <textarea cols="50" name="description" rows="5" maxlength="255"></textarea>
-            </p>
-            <p>
+            </div>
+            <div class="voffset2">
                 <button type="submit" name="create" class="btn btn-primary">
                     <i class="fa fa-save"></i>
-                    <?php translate("save"); ?>
+            <?php translate("save"); ?>
                 </button>
-            </p>
+            </div>
             <?php echo ModuleHelper::endForm(); ?><?php
         } else {
             noPerms();
         }
     } else if (isset($_GET["edit"])) {
         if ($permissionChecker->hasPermission("categories_edit")) {
-            ?><p>
+            ?><div class="btn-toolbar">
                 <a href="<?php echo ModuleHelper::buildActionURL("categories"); ?>"
-                   class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i>
-                    <?php translate("back") ?></a>
-            </p>
+                   class="btn btn-default btn-back">
+                    <i class="fa fa-arrow-left"></i>
+            <?php translate("back") ?></a>
+            </div>
             <h2><?php translate("edit_category"); ?></h2>
             <?php
             echo ModuleHelper::buildMethodCallForm(
@@ -201,16 +209,15 @@ if (!$permissionChecker->hasPermission("categories")) {
             ?>
             <input type="hidden" name="id"
                    value="<?php echo intval($_GET["edit"]) ?>">
-            <p>
+            <div class="field">
                 <strong><?php translate("name"); ?>*</strong>
                 <input type="text"
                        name="name" required
                        value="<?php
-                       echo Categories::getCategoryById(intval($_GET["edit"]));
-                       ?>">
-            </p>
-            <p>
-
+            echo Categories::getCategoryById(intval($_GET["edit"]));
+            ?>">
+            </div>
+            <div class="field">
                 <strong><?php translate("description"); ?></strong> <br />
                 <textarea cols="50" name="description" rows="5"
                           maxlength="255"><?php
@@ -220,13 +227,13 @@ if (!$permissionChecker->hasPermission("categories")) {
                                       )
                               );
                               ?></textarea>
-            </p>
-            <p>
+            </div>
+            <div class="voffset2">
                 <button type="submit" name="update" class="btn btn-primary">
                     <i class="fa fa-save"></i> <?php
-                    translate("save");
-                    ?></button>
-            </p>
+                              translate("save");
+                              ?></button>
+            </div>
             </form>
             <?php
         } else {
