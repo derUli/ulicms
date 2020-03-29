@@ -69,7 +69,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                     <tr>
                         <td></td>
                         <td><img src="data:<?php Template::escape($screenshot); ?>"
-                                 alt="Screenshot" class="responsive-image"></td>
+                                 alt="Screenshot" class="img-responsive"></td>
                     </tr>
                 <?php } ?>
                 <?php

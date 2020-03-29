@@ -150,7 +150,7 @@ if ($permissionChecker->hasPermission("pages")
                 <div class="field">
                     <strong class="field-label">
                         <?php translate("menu"); ?>
-                        <span style="cursor: help;"
+                        <span class="has-help"
                               onclick="$('div#menu_help').slideToggle()"><i class="fa fa-question-circle text-info" aria-hidden="true"></i></span>
                     </strong>
                     <select
@@ -173,7 +173,7 @@ if ($permissionChecker->hasPermission("pages")
                 <div class="field">
                     <strong class="field-label">
                         <?php translate("position"); ?>
-                        <span style="cursor: help;"
+                        <span class="has-help"
                               onclick="$('div#position_help').slideToggle()">
                             <i class="fa fa-question-circle text-info" aria-hidden="true"></i></span>
                     </strong>

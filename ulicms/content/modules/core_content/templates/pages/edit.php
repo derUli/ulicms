@@ -207,7 +207,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                 <strong class="field-label">
                                     <?php translate("menu"); ?>
                                     <span
-                                        style="cursor: help;" onclick="$('div#menu_help').slideToggle()"><i class="fa fa-question-circle text-info" aria-hidden="true"></i></span>
+                                        class="has-help" onclick="$('div#menu_help').slideToggle()"><i class="fa fa-question-circle text-info" aria-hidden="true"></i></span>
                                 </strong>
                                 <select name="menu" size=1>
                                     <?php
@@ -238,7 +238,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                 <strong class="field-label">
                                     <?php translate("position"); ?>
                                     <span
-                                        style="cursor: help;"
+                                        class="has-help"
                                         onclick="$('div#position_help').slideToggle()"><i class="fa fa-question-circle text-info" aria-hidden="true"></i></span>
                                 </strong>
                                 <input
@@ -1120,7 +1120,7 @@ if ($permissionChecker->hasPermission("pages")) {
                         </p>
                     <?php } ?>	</div>
                 <div class="inPageMessage">
-                    <div id="message_page_edit" class="inPageMessage"></div>
+                    <div id="message-page-edit" class="inPageMessage"></div>
                     <img class="loading" src="gfx/loading.gif" alt="Wird gespeichert...">
                 </div>
                 <div class="row">

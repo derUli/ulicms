@@ -7,6 +7,7 @@
 </h3>
 <p>
     <img
+        class="img-responsive"
         src="media/chmod_<?php
         echo htmlspecialchars(InstallerController::getLanguage());
         ?>.png"

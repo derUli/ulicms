@@ -10,7 +10,7 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
            class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
     </div>
     <form action="index.php?sClass=UserController&sMethod=create"
-          method="post" id="edit_user" class="voffset2">
+          method="post" id="edit-user" class="voffset2">
               <?php csrf_token_html(); ?>
         <input type="hidden" name="add_admin" value="add_admin">
         <div class="field">

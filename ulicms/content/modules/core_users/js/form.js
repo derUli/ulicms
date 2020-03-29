@@ -38,11 +38,11 @@ submitPasswordForm = (event) => {
 		);
 		return false;
 	}
-	$("form#edit_user").off("submit").submit();
+	$("form#edit-user").off("submit").submit();
 };
 
 $(() => {
 	$("#password").on("blur", validatePasswords);
 	$("#password_repeat").on("blur", validatePasswords);
-	$("form#edit_user").on("submit", submitPasswordForm);
+	$("form#edit-user").on("submit", submitPasswordForm);
 });

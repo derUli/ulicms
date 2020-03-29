@@ -1,4 +1,5 @@
 <?php
+use UliCMS\HTML\Alert;
 $permissionChecker = new ACL();
 
 $controller = ControllerRegistry::get();
@@ -29,7 +30,7 @@ if ($permissionChecker->hasPermission("dashboard")) {
                 <?php translate("motd"); ?></h2>
             <div class="accordion-content motd-tab">
                 <?php
-                echo $motd;
+                echo Alert::info($motd, "", true);
                 ?>
             </div>
         <?php } ?>

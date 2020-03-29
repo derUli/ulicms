@@ -38,7 +38,7 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
         <?php
         echo ModuleHelper::buildMethodCallUploadForm(UserController::class, "update", [], RequestMethod::POST,
                 [
-                    "id" => "edit_user",
+                    "id" => "edit-user",
                     "class" => "field"
         ]);
         ?>
