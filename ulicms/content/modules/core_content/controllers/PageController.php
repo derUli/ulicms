@@ -636,9 +636,10 @@ class PageController extends Controller {
         return $selectItems;
     }
 
-    public function getParentSelection(): array {
-        $language = Request::getVar("language");
-        $menu = Request::getVar("menu");
+    public function getParentIds(
+            ?string $language = null,
+            ?string $menu = null
+    ): array {
         $where = "parent_id is not null";
 
         if ($menu) {
@@ -648,6 +649,7 @@ class PageController extends Controller {
         if ($language) {
             $where .= " and language = '" . Database::escapeValue($language) . "'";
         }
+        
 
         $groupLanguages = $this->getGroupAssignedLanguages();
         if (count($groupLanguages)) {
@@ -668,6 +670,14 @@ class PageController extends Controller {
 
             $parentIds[] = intval($row->id);
         }
+        return $parentIds;
+    }
+
+    public function getParentSelection(): void {
+        $language = Request::getVar("language", null, "str");
+        $menu = Request::getVar("menu", null, "str");
+
+        $parentIds = $this->getParentIds($language, $menu);
 
         $selectItems = [];
         $selectItems[] = new ListItem(null, "[" . get_translation("all") . "]");

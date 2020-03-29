@@ -20,4 +20,22 @@ class UliCMSVersionTest extends \PHPUnit\Framework\TestCase {
         $this->assertGreaterThanOrEqual(16, strlen($date));
     }
 
+    public function testModuleVersions() {
+        $modules = getAllModules();
+        $ulicmsVersion = (new UliCMSVersion())->getInternalVersionAsString();
+
+        foreach ($modules as $module) {
+            $moduleVersion = getModuleMeta($module, "version");
+            $this->assertNotEmpty($moduleVersion);
+            if(startsWith($module, "core_")){
+                $this->assertTrue(
+                        version_compare(
+                                $moduleVersion,
+                                $ulicmsVersion,
+                                ">="
+                                ), "$module has a bad version $moduleVersion");
+            }
+        }
+    }
+
 }

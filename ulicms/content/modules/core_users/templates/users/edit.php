@@ -221,36 +221,33 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
             </select>
         </div>
         <div class="checkbox block">
-            <div class="field">
-                <label>
-                    <input type="checkbox" value="1"
-                           class="js-switch"
-                           <?php
-                           if ($row->require_password_change) {
-                               echo "checked";
-                           }
-                           ?>
-                           name="require_password_change" id="require_password_change"><?php
-                           translate("REQUIRE_PASSWORD_CHANGE_ON_NEXT_LOGIN");
-                           ?> </label>
-            </div>
+            <label>
+                <input type="checkbox" value="1"
+                       class="js-switch"
+                       <?php
+                       if ($row->require_password_change) {
+                           echo "checked";
+                       }
+                       ?>
+                       name="require_password_change" id="require_password_change"><?php
+                       translate("REQUIRE_PASSWORD_CHANGE_ON_NEXT_LOGIN");
+                       ?> </label>
         </div>
         <?php
         if ($permissionChecker->hasPermission("users")) {
             ?>
-            <div class="checkbox block">
-                <div class="field">
-                    <label> <input type="checkbox" value="1" name="admin" id="admin"
-                                   class="js-switch"
-                                   <?php
-                                   if ($row->admin) {
-                                       echo "checked";
-                                   }
-                                   ?>> <?php translate("is_admin"); ?></label> <span style="cursor: help;"
-                                                                    onclick="$('div#is_admin').slideToggle()">
-                        <i class="fa fa-question-circle text-info" aria-hidden="true"></i>
-                    </span>
-                </div>
+            <div class="checkbox block field">
+                <label> <input type="checkbox" value="1" name="admin" id="admin"
+                               class="js-switch"
+                               <?php
+                               if ($row->admin) {
+                                   echo "checked";
+                               }
+                               ?>> <?php translate("is_admin"); ?></label>
+                <span class="has-help"
+                      onclick="$('div#is_admin').slideToggle()">
+                    <i class="fa fa-question-circle text-info" aria-hidden="true"></i>
+                </span>
             </div>
             <div id="is_admin" class="help" style="display: none">
                 <?php
@@ -258,18 +255,16 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
                 ?>
             </div>
             <div class="checkbox block">
-                <div class="field">
-                    <label> <input type="checkbox" value="1" name="locked"
-                                   id="locked"
-                                   class="js-switch"
-                                   <?php
-                                   if ($row->locked) {
-                                       echo "checked";
-                                   }
-                                   ?>> <?php
-                                   translate("locked");
-                                   ?> </label>
-                </div>
+                <label> <input type="checkbox" value="1" name="locked"
+                               id="locked"
+                               class="js-switch"
+                               <?php
+                               if ($row->locked) {
+                                   echo "checked";
+                               }
+                               ?>> <?php
+                               translate("locked");
+                               ?> </label>
             </div>
             <?php
         } else {

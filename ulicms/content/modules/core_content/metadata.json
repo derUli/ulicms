@@ -1,47 +1,67 @@
 {
-"source": "core",
-        "version": "2020.2",
-        "embed": false,
-        "actions": {
+    "source": "core",
+    "version": "2020.2",
+    "embed": false,
+    "custom_acl": 
+            [
+                "pages",
+                "pages_activate_own",
+                "pages_activate_others",
+                "pages_edit_own",
+                "pages_edit_others",
+                "pages_change_owner",
+                "pages_create",
+                "pages_show_positions",
+                "pages_edit_permissions",
+                "default_access_restrictions_edit",
+                "banners",
+                "banners_create",
+                "banners_edit",
+                "categories",
+                "categories_create",
+                "categories_edit"
+            ],
+    "actions": {
         "contents": "templates/contents.php",
-                "pages": "templates/pages/list.php",
-                "pages_new": "templates/pages/new.php",
-                "pages_edit": "templates/pages/edit.php",
-                "categories": "templates/categories.php",
-                "banner": "templates/banners/list.php",
-                "banner_new": "templates/banners/new.php",
-                "banner_edit": "templates/banners/edit.php"
-        },
-        "controllers": {
+        "pages": "templates/pages/list.php",
+        "pages_new": "templates/pages/new.php",
+        "pages_edit": "templates/pages/edit.php",
+        "categories": "templates/categories.php",
+        "banner": "templates/banners/list.php",
+        "banner_new": "templates/banners/new.php",
+        "banner_edit": "templates/banners/edit.php"
+    },
+    "controllers": {
         "PageController": "controllers/PageController.php",
-                "CategoryController": "controllers/CategoryController.php",
-                "BannerController": "controllers/BannerController.php"
-        },
-        "objects": {
+        "CategoryController": "controllers/CategoryController.php",
+        "BannerController": "controllers/BannerController.php"
+    },
+    "objects": {
         "UliCMS\\CoreContent\\Models\\ViewModels\\DiffViewModel": "models/DiffViewModel.php",
-                "UliCMS\\CoreContent\\PageTableRenderer" : "utils/PageTableRenderer.php",
-                "UliCMS\\CoreContent\\Partials\\ViewButtonRenderer" : "utils/buttons/ViewButtonRenderer.php", "UliCMS\\CoreContent\\Partials\\EditButtonRenderer" : "utils/buttons/EditButtonRenderer.php",
-                "UliCMS\\CoreContent\\Partials\\DeleteButtonRenderer" : "utils/buttons/DeleteButtonRenderer.php",
-                "UliCMS\\CoreContent\\Partials\\UnDeleteButtonRenderer" : "utils/buttons/UnDeleteButtonRenderer.php",
-				"UliCMS\\CoreContent\\UIUtils": "utils/UIUtils.php"
-        },
-        "controller_function_permissions": {
+        "UliCMS\\CoreContent\\PageTableRenderer": "utils/PageTableRenderer.php",
+        "UliCMS\\CoreContent\\Partials\\ViewButtonRenderer": "utils/buttons/ViewButtonRenderer.php",
+        "UliCMS\\CoreContent\\Partials\\EditButtonRenderer": "utils/buttons/EditButtonRenderer.php",
+        "UliCMS\\CoreContent\\Partials\\DeleteButtonRenderer": "utils/buttons/DeleteButtonRenderer.php",
+        "UliCMS\\CoreContent\\Partials\\UnDeleteButtonRenderer": "utils/buttons/UnDeleteButtonRenderer.php",
+        "UliCMS\\CoreContent\\UIUtils": "utils/UIUtils.php"
+    },
+    "controller_function_permissions": {
         "PageController::createPost": "pages_create",
-                "PageController::editPost": "pages",
-                "PageController::undeletePost": "pages",
-                "PageController::empyTrash": "pages",
-                "PageController::toggleFilters": "pages",
-                "PageController::toggleShowPositions": "pages_show_positions",
-                "PageController::checkSlugFree": "pages",
-                "PageController::getPages": "pages",
-                "PageController::filterParentPages": "pages",
-                "PageControlle::getParentSelection": "pages",
-                "PageController::getCKEditorLinkList": "",
-                "CategoryController::createPost": "categories_create",
-                "CategoryController::updatePost": "categories_edit",
-                "CategoryController::deletePost": "categories",
-                "BannerController::deletePost": "banners",
-                "BannerController::createPost": "banners",
-                "BannerController::updatePost": "banners"
-        }
+        "PageController::editPost": "pages",
+        "PageController::undeletePost": "pages",
+        "PageController::empyTrash": "pages",
+        "PageController::toggleFilters": "pages",
+        "PageController::toggleShowPositions": "pages_show_positions",
+        "PageController::checkSlugFree": "pages",
+        "PageController::getPages": "pages",
+        "PageController::filterParentPages": "pages",
+        "PageControlle::getParentSelection": "pages",
+        "PageController::getCKEditorLinkList": "",
+        "CategoryController::createPost": "categories_create",
+        "CategoryController::updatePost": "categories_edit",
+        "CategoryController::deletePost": "categories",
+        "BannerController::deletePost": "banners",
+        "BannerController::createPost": "banners",
+        "BannerController::updatePost": "banners"
+    }
 }

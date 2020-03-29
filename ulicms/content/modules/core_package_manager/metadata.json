@@ -1,6 +1,6 @@
 {
     "source": "core",
-    "version": "2019.2",
+    "version": "2020.2",
     "embed": false,
     "controllers": {
         "PkgInfoController": "controllers/PkgInfoController.php",
@@ -26,7 +26,12 @@
         "ThemeInfoViewModel": "objects/ThemeInfoViewModel.php"
     },
     "custom_acl": [
-        "enable_disable_module"
+        "enable_disable_module",
+        "list_packages",
+        "install_packages",
+        "upload_patches",
+        "remove_packages",
+        "module_settings"
     ],
     "controller_function_permissions": {
         "PkgInfoController::install": "install_packages",

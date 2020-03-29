@@ -111,33 +111,26 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
             </select>
         </div>
         <div class="checkbox block">
-            <div class="field">
-                <label>
-                    <input type="checkbox" value="1"
-                           name="require_password_change"
-                           id="require_password_change"
-                           class="js-switch"><?php translate("REQUIRE_PASSWORD_CHANGE_ON_NEXT_LOGIN"); ?> </label>
-            </div>
+            <label>
+                <input type="checkbox" value="1"
+                       name="require_password_change"
+                       id="require_password_change"
+                       class="js-switch"><?php translate("REQUIRE_PASSWORD_CHANGE_ON_NEXT_LOGIN"); ?> </label>
         </div>
         <div class="checkbox block">
-            <div class="field">
-                <label><input type="checkbox" id="send_mail" name="send_mail"
-                              value="sendmail"
-                              class="js-switch">
-                    <?php translate("SEND_LOGINDATA_BY_MAIL"); ?></label>
-            </div>
+            <label><input type="checkbox" id="send_mail" name="send_mail"
+                          value="sendmail"
+                          class="js-switch">
+                <?php translate("SEND_LOGINDATA_BY_MAIL"); ?></label>
         </div>
         <div class="checkbox block">
-            <div class="field">
-                <label><input type="checkbox" value="1" name="admin" id="admin"
-                              class="js-switch">
-
-                    <?php translate("is_admin"); ?> </label>
-                <span
-                    style="cursor: help;" onclick="$('div#is_admin').slideToggle()">
-                    <i class="fa fa-question-circle text-info" aria-hidden="true"></i>
-                </span>
-            </div>
+            <label><input type="checkbox" value="1" name="admin" id="admin"
+                          class="js-switch">
+                <?php translate("is_admin"); ?> </label>
+            <span class="has-help"
+                  onclick="$('div#is_admin').slideToggle()">
+                <i class="fa fa-question-circle text-info" aria-hidden="true"></i>
+            </span>
         </div>
         <div id="is_admin" class="help" style="display: none">
             <?php

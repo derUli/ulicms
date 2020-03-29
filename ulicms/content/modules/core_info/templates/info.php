@@ -23,7 +23,7 @@ if (!$permissionChecker->hasPermission("info")) {
         <a href="http://www.ulicms.de" target="_blank">UliCMS</a> &copy; 2011 -
         <?php cms_release_year(); ?> by Ulrich Schmidt<br /> <a
             href="http://www.ckeditor.com" target="_blank">CKEditor</a> &copy;
-        2003 - 2019 by CKSource<br />
+        2003 - 2020 by CKSource<br />
         <a href="http://kcfinder.sunhater.com/" target="_blank">KCFinder</a>
         Copyright ©2010 - 2014 Pavel Tzonkov<br />
         Copyright 2005, 2014 jQuery Foundation, Inc. and other contributors
@@ -46,8 +46,7 @@ if (!$permissionChecker->hasPermission("info")) {
             href="http://www.phpgangsta.de/2-faktor-authentifizierung-mit-dem-google-authenticator"
             target="_blank">GoogleAuthenticator</a> Copyright (c) 2012, Michael
         Kliewe<br /> <a href="http://www.phpfastcache.com/" target="_blank">Phpfastcache</a>
-        Copyright (c) 2016 <br /> <a href="https://github.com/Athari/YaLinqo"
-                                     target="_blank">YaLinqo</a> Copyright © 2012–2016, Alexander Prokhorov
+        Copyright (c) 2016
     </p>
     <div>
         Icon made by <a href="http://www.freepik.com" title="Freepik">Freepik</a>
@@ -105,6 +104,12 @@ if (!$permissionChecker->hasPermission("info")) {
         <a href="http://www.ulicms.de/kontakt.html" target="_blank"
            class="btn btn-info" role="button"><i class="fas fa-envelope"></i>
             Feedback</a>
+
+        <a href="#" class="btn btn-info remote-alert"
+           data-url="<?php echo ModuleHelper::buildMethodCallUrl(InfoController::class, "changelog"); ?>">
+           <i class="fab fa-readme"></i>
+            Changelog
+        </a>
     </div>
     <?php
 }
