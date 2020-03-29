@@ -26,7 +26,6 @@ class InfoController extends MainClass {
                         15,
                         80,
                         [
-                            "class" => "full-width",
                             "readonly" => "readonly"
                         ]
         );

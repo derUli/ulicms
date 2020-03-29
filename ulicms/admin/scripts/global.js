@@ -30,7 +30,10 @@ $(() => {
         $(".mainmenu").slideToggle()
     );
     // clear-cache shortcut icon
-    $("#menu-clear-cache").click(() => {
+    $("#menu-clear-cache").click((event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        
         $("#menu-clear-cache").hide();
         $("#menu-clear-cache-loading").show();
         const url = $("#menu-clear-cache").data("url");

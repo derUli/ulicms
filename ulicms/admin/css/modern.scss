@@ -25,7 +25,7 @@ $background_color_8: black;
 
 // impulse based scrolling on touch devices (e.g. iPad)
 // see https://developer.mozilla.org/de/docs/Web/CSS/-webkit-overflow-scrolling
-*{
+* {
     -webkit-overflow-scrolling: touch !important;
 }
 
@@ -59,11 +59,11 @@ button {
     }
 }
 
-.centered{
+.centered {
     margin:auto
 }
 
-#scroll-to-top{
+#scroll-to-top {
     position: fixed;
     bottom: 10px;
     right: 10px;
@@ -89,16 +89,13 @@ body.modal-open {
         font-weight: bold;
     }
 
-    hr{
+    hr {
         margin-bottom: 10px;
         margin-top: 10px;
     }
 }
 
-.form-control[disabled] {
-    background-color: $default-disable-background-color;
-}
-
+.form-control[disabled],
 .form-control[readonly] {
     background-color: $default-disable-background-color;
 }
@@ -120,7 +117,7 @@ fieldset[disabled] {
     }
 }
 
-.menubar{
+.menubar {
     margin-bottom: 10px;
 }
 
@@ -130,10 +127,10 @@ fieldset[disabled] {
     }
 }
 
-.button-menu{
+.button-menu {
     margin-top: 10px;
 
-    a{
+    a {
         width: fit-content;
         display: block;
         margin-bottom: 15px;
@@ -146,8 +143,8 @@ fieldset[disabled] {
     }
 }
 
-.block{
-    display:block;
+.block {
+    display: block;
 }
 
 .inline-block {
@@ -189,7 +186,7 @@ img {
     border: 0px;
 }
 
-.ulicms_error {
+.ulicms-error {
     color: $red-color;
     background-color: $background_color_3;
     border: solid rgb(230, 230, 230) 1px;
@@ -406,46 +403,13 @@ button {
     padding: 10px;
 }
 
-input[type="text"] {
+input:not([type="submit"]):not([type="reset"]):not([type="button"]),
+select, textarea {
     width: 100%;
 }
 
-input[type="password"] {
-    width: 100%;
-}
-
-input[type="email"] {
-    width: 100%;
-}
-
-input[type="number"] {
-    width: 100%;
-}
-
-input[type="phone"] {
-    width: 100%;
-}
-
-input[type="color"] {
-    width: 100%;
-}
-
-input.color {
-    width: 100%;
-}
-
-select {
-    width: 100%;
+select, textarea {
     border: solid 1px #ededed;
-}
-
-textarea {
-    width: 100%;
-    border: solid 1px #ededed;
-}
-
-input[type="url"] {
-    width: 100%;
 }
 
 table.tablesorter {
@@ -637,7 +601,7 @@ div#google-fonts {
     width: auto !important;
     word-wrap: break-word;
     overflow-x: auto;
-    h1, h2, h3, h4, h5, h6{
+    h1, h2, h3, h4, h5, h6 {
         margin-top: 10px;
         margin-bottom: 10px;
     }
@@ -649,14 +613,14 @@ div#google-fonts {
     }
 
     &.users-online-tab {
-        ul{
+        ul {
             margin-left: 0;
             padding-left: 20px;
         }
     }
 
 
-    .checkbox, .radio, ol, ul{
+    .checkbox, .radio, ol, ul {
         margin-top: 0;
         margin-bottom: 0;
     }
@@ -707,14 +671,6 @@ div#login-welcome-text {
     width:100%;
 }
 
-.full-width{
-    width: 100%;
-}
-
-.ulicms-logo {
-    max-width: 100%;
-}
-
 #page-list {
     .dataTables_wrapper {
         margin-bottom: 40px;
@@ -732,7 +688,7 @@ div#login-welcome-text {
 }
 
 form#edit_user {
-    .checkbox.block{
+    .checkbox.block {
         margin-bottom: 5px;
         margin-top: 5px;
     }
@@ -817,12 +773,12 @@ form#edit_user {
     }
 }
 
-.has-help{
+.has-help {
     cursor: help;
     margin-left: 5px;
 }
 
-.main-content{
+.main-content {
     > .btn-toolbar {
         margin-top: 10px;
     }
@@ -841,7 +797,7 @@ form#edit_user {
     display: inline-block;
     width: 37.5px;
 }
-#menu-clear-cache-loading{
+#menu-clear-cache-loading {
     display: inline-block;
     width: 37.5px;
 }
@@ -856,15 +812,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 input[type="radio"],
-input[type="checkbox"]{
+input[type="checkbox"] {
     margin-right: 5px;
 }
 
-.nomargin{
+.nomargin {
     margin:0 !important;
 }
 
-.minimal-margin-bottom{
+.minimal-margin-bottom {
     margin-top:0;
     margin-bottom:5px;
 }
@@ -913,7 +869,7 @@ input[type="checkbox"]{
     margin-top: 150px!important;
 }
 
-.margin-left-10{
+.margin-left-10 {
     margin-left:10px !important;
 }
 
@@ -923,11 +879,11 @@ input[type="checkbox"]{
 
 @media only screen and (min-width: 375px) {
 
-    .btn-group .btn{
+    .btn-group .btn {
         margin-right: 10px;
     }
 
-    .btn-group .btn:last-child{
+    .btn-group .btn:last-child {
         margin-right: 0;
     }
 }
@@ -966,11 +922,11 @@ input[type="checkbox"]{
     min-height: 34px !important;
 }
 
-.filter-wrapper{
+.filter-wrapper {
     margin-top: 15px;
     margin-bottom: 15px;
 
-    .filters > .row{
+    .filters > .row {
         margin-bottom: 10px
     }
 }
@@ -995,11 +951,11 @@ table.dataTable {
 
     }
 
-    tr.unread{
+    tr.unread {
         background-color: #fcf8e3;
     }
 
-    .no-sort{
+    .no-sort {
         background: none !important;
         cursor: default;
     }
@@ -1011,7 +967,7 @@ table.dataTable {
 }
 
 .dataTables_wrapper {
-    .dataTables_processing{
+    .dataTables_processing {
         z-index: 30;
         background: none;
     }
@@ -1188,8 +1144,8 @@ pre {
 
 @media (max-width: 640px) {
     .dataTables_length,
-    .dataTables_filter{
-        label{
+    .dataTables_filter {
+        label {
             width: 100%;
         }
     }
@@ -1210,19 +1166,19 @@ pre {
     }
 }
 
-.comment-counter{
+.comment-counter {
     position:relative;
 
-    a{
+    a {
         display:block;
     }
 
-    .fa-comments{
+    .fa-comments {
         z-index:1;
 
     }
 
-    .count{
+    .count {
         display:inline-block;
         position:absolute;
         right:0;
@@ -1236,17 +1192,17 @@ pre {
     }
 }
 
-.comment-link{
+.comment-link {
     font-weight: 500;
 }
 
-.comment-link:hover{
+.comment-link:hover {
     text-decoration: underline;
 }
 
-#designForm{
-    .preview{
-        img{
+#designForm {
+    .preview {
+        img {
             max-height: 50vh;
             max-width: 100%;
         }
@@ -1258,7 +1214,7 @@ pre {
     height: 40px;
 }
 
-iframe.kcfinder{
+iframe.kcfinder {
     border: 0;
     width: 100%;
     height: calc(100vh - 290px);
