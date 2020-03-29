@@ -1,6 +1,8 @@
 <?php
 
 use UliCMS\HTML\Alert;
+use const UliCMS\Constants\HTML5_ALLOWED_TAGS;
+use function UliCMS\Security\XSSProtection\stripTags;
 
 $permissionChecker = new ACL();
 
@@ -27,6 +29,7 @@ if ($permissionChecker->hasPermission("dashboard")) {
         <?php
         $motd = get_lang_config("motd", getSystemLanguage());
         if ($motd or strlen($motd) > 10) {
+            $motd = stripTags($motd, HTML5_ALLOWED_TAGS);
             ?>
             <h2 class="accordion-header">
                 <?php translate("motd"); ?></h2>
@@ -36,13 +39,13 @@ if ($permissionChecker->hasPermission("dashboard")) {
                 ?>
             </div>
         <?php } ?>
-    <?php if (!Settings::get("disable_core_patch_check")) {
-        ?>
+        <?php if (!Settings::get("disable_core_patch_check")) {
+            ?>
 
             <div id="patch-notification" style="display: none;"
                  data-url="<?php echo ModuleHelper::buildMethodCallUrl(UpdateCheckController::class, "patchCheck"); ?>">
                 <h2 class="accordion-header">
-        <?php translate("there_are_patches_available"); ?>
+                    <?php translate("there_are_patches_available"); ?>
                 </h2>
                 <div class="accordion-content" id="patch-message"></div>
             </div>
@@ -56,7 +59,7 @@ if ($permissionChecker->hasPermission("dashboard")) {
             <div class="accordion-content">
                 <a
                     href="<?php echo ModuleHelper::buildActionURL("do_post_install"); ?>">
-            <?php translate("there_are_unfinished_package_installations"); ?></a>
+                    <?php translate("there_are_unfinished_package_installations"); ?></a>
             </div>
         <?php } ?>
         <?php
@@ -68,11 +71,11 @@ if ($permissionChecker->hasPermission("dashboard")) {
                 <h2 class="accordion-header" >
                     <?php translate("ulicms_news"); ?></h2>
                 <div class="accordion-content news-tab">
-            <?php require "inc/loadspinner.php"; ?>
+                    <?php require "inc/loadspinner.php"; ?>
                 </div>
             </div>
-    <?php } ?>
-    <?php if ($permissionChecker->hasPermission("pages_show_positions")) { ?>
+        <?php } ?>
+        <?php if ($permissionChecker->hasPermission("pages_show_positions")) { ?>
             <h2 class="accordion-header"><?php translate("helper_utils"); ?></h2>
             <div class="accordion-content">
                 <form action="#" class="checkbox">
@@ -84,17 +87,17 @@ if ($permissionChecker->hasPermission("dashboard")) {
                                if (Settings::get("user/" . get_user_id() . "/show_positions"))
                                    echo "checked";
                                ?>>
-        <?php translate("show_positions_in_menus"); ?></label>
+                        <?php translate("show_positions_in_menus"); ?></label>
                     </label>
                 </form>
             </div>
-                <?php } ?>
+        <?php } ?>
         <div class="has-ajax-content" data-url="<?php echo ModuleHelper::buildMethodCallUrl(HomeController::class, "statistics"); ?>">
             <h2 class="accordion-header">
                 <?php translate("statistics"); ?>
             </h2>
             <div class="accordion-content">
-    <?php require "inc/loadspinner.php"; ?>
+                <?php require "inc/loadspinner.php"; ?>
             </div>
         </div>
         <div class="has-ajax-content always-update" data-url="<?php echo ModuleHelper::buildMethodCallUrl(HomeController::class, "onlineUsers"); ?>">
@@ -102,7 +105,7 @@ if ($permissionChecker->hasPermission("dashboard")) {
                 <?php translate("online_now"); ?>
             </h2>
             <div class="accordion-content users-online-tab">
-    <?php require "inc/loadspinner.php"; ?>
+                <?php require "inc/loadspinner.php"; ?>
             </div>
         </div>
         <div class="has-ajax-content" data-url="<?php echo ModuleHelper::buildMethodCallUrl(HomeController::class, "topPages"); ?>">
@@ -110,13 +113,13 @@ if ($permissionChecker->hasPermission("dashboard")) {
                 <?php translate("top_pages"); ?>
             </h2>
             <div class="accordion-content">
-    <?php require "inc/loadspinner.php"; ?>
+                <?php require "inc/loadspinner.php"; ?>
             </div>
         </div>
         <div class="has-ajax-content" data-url="<?php echo ModuleHelper::buildMethodCallUrl(HomeController::class, "lastUpdatedPages"); ?>">
             <h2 class="accordion-header"><?php translate("last_changes"); ?></h2>
             <div class="accordion-content">
-        <?php require "inc/loadspinner.php"; ?>
+                <?php require "inc/loadspinner.php"; ?>
             </div>
         </div>
         <?php
@@ -128,8 +131,6 @@ if ($permissionChecker->hasPermission("dashboard")) {
         enqueueScriptFile(ModuleHelper::buildModuleRessourcePath("core_home", "js/dashboard.js"));
         combinedScriptHtml();
     }
-    ?>
-    <?php
 } else {
     noPerms();
 }
