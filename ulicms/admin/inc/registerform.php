@@ -46,14 +46,13 @@ if (Settings::get("visitors_can_register") == "off" or!Settings::get("visitors_c
     <p>
         <a href="./" class="btn btn-default btn-back">
             <i class="fa fa-arrow-left"></i>
-                <?php
-                translate("back_to_login");
-                ?></a>
+            <?php
+            translate("back_to_login");
+            ?></a>
     </p>
     <h1>
         <?php translate("registration"); ?>
     </h1>
-
     <?php
     do_event("before_register_form");
     ?>
@@ -77,7 +76,6 @@ if (Settings::get("visitors_can_register") == "off" or!Settings::get("visitors_c
             <input type="text" required="required"
                    name="username" value="">
         </div>
-
         <div class="field">
             <strong class="field-label">
                 <?php translate("lastname") ?>
@@ -85,7 +83,6 @@ if (Settings::get("visitors_can_register") == "off" or!Settings::get("visitors_c
             <input type="text" required="required"
                    name="lastname" value="">
         </div>
-
         <div class="field">
             <strong class="field-label">
                 <?php translate("firstname"); ?>
@@ -93,7 +90,6 @@ if (Settings::get("visitors_can_register") == "off" or!Settings::get("visitors_c
             <input type="text" required="required"
                    name="firstname" value="">
         </div>
-
         <div class="field">
             <strong class="field-label">
                 <?php translate("email"); ?>
@@ -131,7 +127,6 @@ if (Settings::get("visitors_can_register") == "off" or!Settings::get("visitors_c
     <?php
     enqueueScriptFile("../node_modules/password-strength-meter/dist/password.min.js");
     combinedScriptHtml();
-    ?>
-    <?php
+
     do_event("after_register_form");
 }

@@ -3,9 +3,10 @@ $(() => {
         if ($(event.currentTarget).hasClass("loaded")) {
             return;
         }
+
         const url = $(event.currentTarget).data("url");
-        console.log($(event.currentTarget))
         $(event.currentTarget).find(".accordion-content").load(url);
+
         if (!$(event.currentTarget).hasClass("always-update")) {
             $($(event.currentTarget)).addClass("loaded");
         }

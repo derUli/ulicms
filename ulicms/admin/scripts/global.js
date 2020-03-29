@@ -25,15 +25,17 @@ $(() => {
     bootbox.setDefaults({
         locale: $("html").data("select2-language")
     });
+
     // toggle hamburger menu
     $("#menu-toggle").click(() =>
         $(".mainmenu").slideToggle()
     );
+
     // clear-cache shortcut icon
     $("#menu-clear-cache").click((event) => {
         event.preventDefault();
         event.stopPropagation();
-        
+
         $("#menu-clear-cache").hide();
         $("#menu-clear-cache-loading").show();
         const url = $("#menu-clear-cache").data("url");
@@ -42,14 +44,17 @@ $(() => {
             $("#menu-clear-cache-loading").hide();
         });
     });
+
     // Add bootstrap css class to tablesorter
     $.extend($.fn.dataTableExt.oStdClasses, {
         sFilterInput: "form-control",
         sLengthSelect: "form-control"
     });
+
     $(".select-on-click").click((event) =>
         $(event.target).select()
     );
+
     // Disabled a link-buttons must not be clickable
     $("a").click((event) => {
         const target = $(event.currentTarget);
@@ -57,7 +62,9 @@ $(() => {
             event.preventDefault();
         }
     });
+
     initDataTables("body");
+    
     // password security check
     if (typeof $(".password-security-check").password !== "undefined") {
         $(".password-security-check").password({
@@ -128,6 +135,7 @@ $(() => {
         width: "100%",
         language: language
     });
+
     // Toggle switches for some checkboxes
     $(".js-switch").bootstrapToggle({
         on: MenuTranslation.On,
@@ -153,6 +161,7 @@ $(() => {
         format: "Y-m-d",
         timepicker: false
     });
+
     // User has to confirm logout
     $("a.backend-menu-item-logout").click((event) => {
         event.preventDefault();
@@ -177,14 +186,16 @@ $(() => {
     // scroll to top arrow at bottom right
     $("#scroll-to-top").click((event) => {
         event.preventDefault();
+        event.stopPropagation();
+
         zenscroll.toY(0);
     });
-    
+
     $(".more-options-toggle").click((event) => {
         const target = $(event.target);
         const toggleTarget = $(target.data("target"));
-        
+
         toggleTarget.slideToggle()
-        
+
     });
 });

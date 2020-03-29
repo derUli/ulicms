@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Services\Connectors\PackageSourceConnector;
+
 class UliCMSVersionTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetCodeName() {
@@ -27,13 +29,32 @@ class UliCMSVersionTest extends \PHPUnit\Framework\TestCase {
         foreach ($modules as $module) {
             $moduleVersion = getModuleMeta($module, "version");
             $this->assertNotEmpty($moduleVersion);
-            if(startsWith($module, "core_")){
+            if (startsWith($module, "core_")) {
                 $this->assertTrue(
                         version_compare(
                                 $moduleVersion,
                                 $ulicmsVersion,
                                 ">="
-                                ), "$module has a bad version $moduleVersion");
+                        ), "$module has a bad version $moduleVersion");
+            }
+        }
+    }
+
+    public function testCompareModuleVersionsWithPackageSource() {
+        $modules = getAllModules();
+        $connector = new PackageSourceConnector();
+        foreach ($modules as $module) {
+            $installedVersion = getModuleMeta($module, "version");
+            $availableVersion = $connector->getVersionOfPackage($module);
+
+            if ($availableVersion) {
+                $this->assertTrue(
+                        version_compare($availableVersion,
+                                $installedVersion,
+                                ">="),
+                        "$module $availableVersion in the package source "
+                        . "is not at least equal to "
+                        . "the installed version $module $installedVersion");
             }
         }
     }

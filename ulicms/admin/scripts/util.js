@@ -11,6 +11,7 @@ $(() => {
             checkSelectAllIfAllChecked(item, group);
         }
     });
+
     // scroll to the given anchor
     const params = new URLSearchParams(location.search);
     const jumpTo = params.get('jumpto');
@@ -20,13 +21,13 @@ $(() => {
 });
 
 // scrolls to an anchor with animation
-scrollToAnchor = (aid) => {
+const scrollToAnchor = (aid) => {
     const aTag = $("a[name='" + aid + "']");
     $('html,body').animate({
         scrollTop: aTag.offset().top
     }, 'slow');
 };
-refreshCodeMirrors = () => {
+const refreshCodeMirrors = () => {
     $('.CodeMirror').each((i, el) =>
         el.CodeMirror.refresh()
     );
@@ -34,11 +35,12 @@ refreshCodeMirrors = () => {
 
 // shakes a div (animation)
 // This is used when login fails
-shake = (div) => {
+const shake = (div) => {
     const interval = 100;
     const distance = 10;
     const times = 4;
     $(div).css('position', 'relative');
+
     for (let iter = 0; iter < (times + 1); iter++) {
         $(div).animate({
             left: ((iter % 2 === 0 ? distance : distance * -1))
@@ -52,7 +54,7 @@ shake = (div) => {
 
 // this bind an event to a checkbox to toggle a password field between clear
 // text and stars
-bindTogglePassword = (inputField, checkboxField) => {
+const bindTogglePassword = (inputField, checkboxField) => {
     const input = $(inputField);
     const checkbox = $(checkboxField);
     $(checkbox).click(() => {
@@ -63,13 +65,14 @@ bindTogglePassword = (inputField, checkboxField) => {
         }
     });
 };
-checkboxChecked = (event) => {
+
+const checkboxChecked = (event) => {
     const item = $(event.currentTarget).data("select-all-checkbox");
     const group = $(event.currentTarget).data("checkbox-group");
     checkSelectAllIfAllChecked(item, group);
 };
 
-checkSelectAllIfAllChecked = (item, group) => {
+const checkSelectAllIfAllChecked = (item, group) => {
     if (!item) {
         return;
     }
@@ -82,20 +85,24 @@ checkSelectAllIfAllChecked = (item, group) => {
     // check the "Select All" Checkbox, else uncheck it
     $(item).prop("checked", allSelected);
 };
-selectAllChecked = (event) => {
+
+const selectAllChecked = (event) => {
     const selectAllCheckbox = $(event.target);
     const target = $(selectAllCheckbox).data("target");
     $(target).prop("checked",
             $(selectAllCheckbox).
             is(":checked")).change();
 };
-setWaitCursor = () => {
+
+const setWaitCursor = () => {
     $('body').css('cursor', 'progress');
 };
-setDefaultCursor = () => {
+
+const setDefaultCursor = () => {
     $('body').css('cursor', 'auto');
 };
-initRemoteAlerts = (rootElement) => {
+
+const initRemoteAlerts = (rootElement) => {
     $(rootElement).find(".remote-alert").click((event) => {
         event.preventDefault();
         setWaitCursor();
@@ -106,7 +113,8 @@ initRemoteAlerts = (rootElement) => {
         });
     });
 };
-dataTableDrawCallback = (settings) => {
+
+const dataTableDrawCallback = (settings) => {
     $(`#${settings.sInstance}`).find("a.btn").click(
             (event) => {
         const target = $(event.currentTarget);
@@ -117,6 +125,7 @@ dataTableDrawCallback = (settings) => {
             return;
         }
     });
+
     $(`#${settings.sInstance}`).find("a.delete-icon").click((event) => {
         event.preventDefault();
         const target = $(event.currentTarget);
@@ -166,9 +175,9 @@ const buildFiltersObject = () => {
         menu: menu,
         active: active
     };
-}
+};
 
-initDataTables = (rootElement) => {
+const initDataTables = (rootElement) => {
     // Sortable and searchable tables
     // Internet Exploder doesn't support URLSearchParams,
     // but which caveman are still using IE?
@@ -180,6 +189,7 @@ initDataTables = (rootElement) => {
     $(rootElement).find(".tablesorter").each((index, element) => {
         const table = $(element);
         const url = table.data("url");
+
         $(element).DataTable({
             language: {
                 url: $("body").data("datatables-translation")

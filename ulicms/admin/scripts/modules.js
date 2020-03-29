@@ -1,6 +1,6 @@
 /* global Translation */
 
-uninstallModule = (url, name) => {
+const uninstallModule = (url, name) => {
     if (confirm(Translation.AskForUninstallPackage.replace("%name%", name))) {
         $.ajax({
             url: url,
@@ -11,7 +11,7 @@ uninstallModule = (url, name) => {
     }
     return false;
 };
-uninstallTheme = (url, name) => {
+const uninstallTheme = (url, name) => {
     if (confirm(Translation.AskForUninstallPackage.replace("%name%", "theme-"
             + name))) {
         $.ajax({
@@ -22,6 +22,7 @@ uninstallTheme = (url, name) => {
     }
     return false;
 };
+
 $("form#truncate_installed_patches").ajaxForm(
         {
             success: () =>

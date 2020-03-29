@@ -22,7 +22,7 @@ class InfoControllerTest extends \PHPUnit\Framework\TestCase {
                 );
         $this->assertStringContainsString(
                 '<textarea name="changelog" rows="15" cols="80" '
-                . 'class="full-width" readonly="readonly">', 
+                . 'readonly="readonly">', 
                 $controller->getChangelogInTextarea()
                 );
     }

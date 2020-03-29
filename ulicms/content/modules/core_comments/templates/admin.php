@@ -189,7 +189,6 @@ echo ModuleHelper::buildMethodCallForm(
 </div>
 <?php
 echo ModuleHelper::endForm();
-
 enqueueScriptFile(ModuleHelper::buildRessourcePath(
 				"core_comments",
 				"js/admin.js"));

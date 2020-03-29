@@ -8,10 +8,11 @@ $(() => {
                 + $("select#language option:selected").val();
         location.replace(url);
     });
+
     // expand privacy policy checkbox options when enabled
     $("#privacy_policy_checkbox_enable").change((event) => {
         const checked = $(event.currentTarget).is(":checked");
-		
+
         if (checked) {
             $("#privacy_policy_checkbox_text_container").slideDown();
             // CodeMirror is not correctly initialized if initially hidden. Reinitialize the CodeMirror Editor after toggling the editor
