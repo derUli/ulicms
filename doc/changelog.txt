@@ -14,6 +14,9 @@ Neue API-Methoden:
 * ListData->hasMore(int $offset = 0): bool
 * User->getGroupCollection(): GroupCollection
 
+Entfernte API-Methoden:
+* BackendHelper::formatDatasetCount(int $count): void
+
 Entfernte Features:
 * "kama" CKEditor Skin entfernt
 

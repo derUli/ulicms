@@ -341,7 +341,7 @@ table {
     }
     th {
         td {
-            padding: 5px;
+            padding: 3px;
         }
     }
 }
@@ -552,6 +552,14 @@ div#google-fonts {
         }
     }
 
+
+
+    &.users-online-tab {
+        ul{
+            margin-left: 0;
+            padding-left: 20px;
+        }
+    }
     padding: 5px 10px;
     width: auto !important;
     word-wrap: break-word;
@@ -836,7 +844,7 @@ table.dataTable {
     top: 5px;
     tbody, thead {
         th, td {
-            padding: 5px !important;
+            padding: 3px !important;
         }
 
     }

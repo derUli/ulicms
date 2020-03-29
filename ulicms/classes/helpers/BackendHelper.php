@@ -4,20 +4,6 @@ declare(strict_types=1);
 
 class BackendHelper extends Helper {
 
-    // TODO: This obsolete remove this
-    // make sure that no packages depend on this
-    // Format dataset count singular / prual
-    // one dataset found or 123 datasets found
-    public static function formatDatasetCount(int $count): void {
-        if ($count == 1) {
-            translate("ONE_DATASET_FOUND");
-        } else {
-            translate("X_DATASETS_FOUND", array(
-                "%x" => $count
-            ));
-        }
-    }
-
     // returns the current backend action or "home" if not specified
     public static function getAction(): string {
         return isset($_REQUEST["action"]) ? $_REQUEST["action"] : "home";
@@ -65,19 +51,19 @@ class BackendHelper extends Helper {
                         "js/pages/init-codemirror.js"
         ));
     }
-    public static function getCKEditorSkins(): array{
+
+    public static function getCKEditorSkins(): array {
         $skins = [];
         $dir = Path::resolve("ULICMS_ROOT/admin/ckeditor/skins");
         $folders = find_all_folders($dir);
-        
-        foreach($folders as $folder){
+
+        foreach ($folders as $folder) {
             $cssFile = "$folder/editor.css";
-            if(file_exists(($cssFile))){
+            if (file_exists(($cssFile))) {
                 $skins[] = basename($folder);
             }
         }
         return $skins;
-        
     }
 
 }

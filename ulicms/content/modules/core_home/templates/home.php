@@ -98,7 +98,7 @@ if ($permissionChecker->hasPermission("dashboard")) {
             <h2 class="accordion-header">
                 <?php translate("online_now"); ?>
             </h2>
-            <div class="accordion-content">
+            <div class="accordion-content users-online-tab">
                 <?php require "inc/loadspinner.php"; ?>
             </div>
         </div>
