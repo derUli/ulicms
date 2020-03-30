@@ -105,6 +105,8 @@ const setDefaultCursor = () => {
 const initRemoteAlerts = (rootElement) => {
     $(rootElement).find(".remote-alert").click((event) => {
         event.preventDefault();
+        event.stopPropagation();
+        
         setWaitCursor();
         const url = $(event.currentTarget).data("url");
         $.get(url, (result) => {

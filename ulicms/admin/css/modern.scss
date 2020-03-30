@@ -828,6 +828,15 @@ pre,
     border-radius: 0 !important;
 }
 
+.centered {
+    margin: auto;
+}
+
+.theme-preview {
+    margin: auto;
+    max-height: 80vh;
+}
+
 .nav-tabs, .nav-pills {
     a {
         border-radius: 0 !important;

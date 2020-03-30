@@ -23,7 +23,7 @@ class InfoController extends MainClass {
         return Input::textarea(
                         "changelog",
                         $this->fetchChangelog(),
-                        15,
+                        10,
                         80,
                         [
                             "readonly" => "readonly"
