@@ -133,12 +133,15 @@ const dataTableDrawCallback = (settings) => {
                 target.attr("disabled")) &&
                 target.attr("href").length > 1) {
             event.preventDefault();
+            event.stopPropagation();
             return;
         }
     });
 
     $(`#${settings.sInstance}`).find("a.delete-icon").click((event) => {
         event.preventDefault();
+        event.stopPropagation();
+        
         const target = $(event.currentTarget);
         const confirmMessage = target.data("confirm");
         const url = target.data("url");
