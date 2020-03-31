@@ -29,14 +29,13 @@ if (!$permissionChecker->hasPermission("install_packages")) {
             $build_date = $pkg->getProperty("build_date");
             $screenshot = $pkg->getProperty("screenshot");
             $size = intval($pkg->getSize());
-            $size = NumberFormatHelper::formatSizeUnits($size);
             ?>
             <p>
                 <a href="<?php echo ModuleHelper::buildActionURL("upload_package"); ?>"
                    class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
             </p>
             <h1><?php
-                Template::escape($id);
+               esc($id);
                 ?></h1>
             <table>
                 <?php
@@ -44,23 +43,23 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                     ?>
                     <tr>
                         <td><strong><?php translate("name") ?></strong></td>
-                        <td><?php Template::escape($name) ?></td>
+                        <td><?php esc($name) ?></td>
                     </tr>
                 <?php } ?>
                 <tr>
                     <td><strong><?php translate("version") ?></strong></td>
-                    <td><?php Template::escape($version) ?></td>
+                    <td><?php esc($version) ?></td>
                 </tr>
                 <tr>
                     <td><strong><?php translate("size") ?></strong></td>
-                    <td><?php Template::escape($size) ?></td>
+                    <td><?php echo NumberFormatHelper::formatSizeUnits($size);?></td>
                 </tr>
                 <?php
                 if ($build_date) {
                     ?>
                     <tr>
                         <td><strong><?php translate("build_date") ?></strong></td>
-                        <td><?php Template::escape(strftime("%x %X", $build_date)); ?></td>
+                        <td><?php esc(strftime("%x %X", $build_date)); ?></td>
                     </tr>
                 <?php } ?>
                 <?php
@@ -68,7 +67,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                     ?>
                     <tr>
                         <td></td>
-                        <td><img src="data:<?php Template::escape($screenshot); ?>"
+                        <td><img src="data:<?php esc($screenshot); ?>"
                                  alt="Screenshot" class="img-responsive"></td>
                     </tr>
                 <?php } ?>
@@ -77,7 +76,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                     ?>
                     <tr>
                         <td><strong><?php translate("description") ?></strong></td>
-                        <td><?php Template::escape($description); ?></td>
+                        <td><?php esc($description); ?></td>
 
                     </tr>
                 <?php } ?>
@@ -86,7 +85,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                     ?>
                     <tr>
                         <td><strong><?php translate("compatible_from") ?></strong></td>
-                        <td>UliCMS <?php Template::escape($compatible_from); ?></td>
+                        <td>UliCMS <?php esc($compatible_from); ?></td>
 
                     </tr>
                 <?php } ?>
@@ -95,7 +94,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                     ?>
                     <tr>
                         <td><strong><?php translate("compatible_to") ?></strong></td>
-                        <td>UliCMS <?php Template::escape($compatible_to); ?></td>
+                        <td>UliCMS <?php esc($compatible_to); ?></td>
                     </tr>
                 <?php } ?>
                 <?php
@@ -103,7 +102,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                     ?>
                     <tr>
                         <td><strong><?php translate("min_php_version") ?></strong></td>
-                        <td><?php Template::escape($min_php_version); ?></td>
+                        <td><?php esc($min_php_version); ?></td>
                     </tr>
                 <?php } ?>
                 <?php
@@ -111,7 +110,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                     ?>
                     <tr>
                         <td><strong><?php translate("max_php_version") ?></strong></td>
-                        <td><?php Template::escape($max_php_version); ?></td>
+                        <td><?php esc($max_php_version); ?></td>
                     </tr>
                 <?php } ?>
                 <?php if ($required_php_extensions) { ?>
@@ -120,7 +119,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                         <td><?php
                             foreach ($required_php_extensions as $extension) {
                                 ?>
-                                <?php Template::escape($extension); ?><br />
+                                <?php esc($extension); ?><br />
                             <?php } ?></td>
                     </tr>
                     <?php
@@ -131,7 +130,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                     ?>
                     <tr>
                         <td><strong><?php translate("min_mysql_version") ?></strong></td>
-                        <td><?php Template::escape($min_mysql_version); ?></td>
+                        <td><?php esc($min_mysql_version); ?></td>
                     </tr>
                 <?php } ?>
 
@@ -140,7 +139,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                     ?>
                     <tr>
                         <td><strong><?php translate("max_mysql_version") ?></strong></td>
-                        <td><?php Template::escape($max_mysql_version); ?></td>
+                        <td><?php esc($max_mysql_version); ?></td>
                     </tr>
                 <?php } ?>
                 <?php
@@ -151,7 +150,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                         <td><?php
                             foreach ($dependencies as $dep) {
                                 ?>
-                                <?php Template::escape($dep); ?><br />
+                                <?php esc($dep); ?><br />
                             <?php } ?></td>
                     </tr>
                 <?php } ?>

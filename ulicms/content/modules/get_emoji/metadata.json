@@ -1,9 +1,0 @@
-{
-    "version": "1.0.0",
-    "embed": false,
-    "source": "extend",
-    "controllers": {
-        "GetEmojiController": "controllers/GetEmojiController"
-    },
-    "main_class": "GetEmojiController"
-}
