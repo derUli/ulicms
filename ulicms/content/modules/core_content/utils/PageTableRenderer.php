@@ -88,10 +88,9 @@ class PageTableRenderer {
                         . "'";
             }
         }
-
         // show all deleted or all not deleted pages (recycle bin)
-        $where = $view === "default" ?
-                "deleted_at is null" : "deleted_at is not null";
+        $where = $view == "default" ?
+                "deleted_at is null " : "deleted_at is not null ";
 
         // filter pages by languages assigned to the user's groups
         if (count($languages)) {

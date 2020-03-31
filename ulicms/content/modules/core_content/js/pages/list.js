@@ -52,7 +52,9 @@ const bindSelectOnChange = () => {
         const target = event.target;
         const dataTable = $(".tablesorter").DataTable();
         dataTable.ajax.reload();
-
+        
+        dataTable.page(1);
+        
         localStorage.setItem(
                 'pageFilters',
                 JSON.stringify(buildFiltersObject())

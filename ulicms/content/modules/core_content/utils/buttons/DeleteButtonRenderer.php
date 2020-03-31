@@ -31,7 +31,8 @@ class DeleteButtonRenderer {
 
         $url = "#";
         $message = get_secure_translation("confirm_delete_page",
-                ["%title%" => getPageTitleByID($pageId)
+                [
+                    "%title%" => getPageTitleByID($pageId)
                 ]
         );
         $attributes = [
@@ -39,7 +40,7 @@ class DeleteButtonRenderer {
             "data-url" => ModuleHelper::buildMethodCallUrl(
                     PageController::class,
                     "delete",
-                    "page={$pageId}csrf_token=" . get_csrf_token()
+                    "id={$pageId}&csrf_token=" . get_csrf_token()
             ),
             "class" => "delete-icon"
         ];

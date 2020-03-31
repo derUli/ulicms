@@ -62,12 +62,11 @@ class PageController extends Controller {
     }
 
     public function editPost(): void {
-
         $this->validateInput();
 
         $permissionChecker = new PermissionChecker(get_user_id());
         $model = TypeMapper::getModel(Request::getVar("type"));
-        $model->loadById(Request::getVar("page_id"));
+        $model->loadById(Request::getVar("page_id", null, "int"));
 
         $model->type = Request::getVar("type");
 
@@ -110,7 +109,6 @@ class PageController extends Controller {
 
         $user = User::fromSessionData();
         $groupCollection = $user->getGroupCollection();
-
 
         // get allowed tags of all groups assigned to the current user
         $allowedTags = $groupCollection ?
@@ -305,9 +303,9 @@ class PageController extends Controller {
     }
 
     public function undeletePost(): void {
-        $page = Request::getVar("page");
+        $id = Request::getVar("id", null, "int");
         do_event("before_undelete_page");
-        $content = ContentFactory::getByID($page);
+        $content = ContentFactory::getByID($id);
         if ($content->id === null) {
             ExceptionResult(get_translation("not_found"));
         }
@@ -323,8 +321,9 @@ class PageController extends Controller {
     }
 
     public function deletePost(): void {
-        $page = Request::getVar("page");
+        $page = Request::getVar("id", null, "int");
         do_event("before_delete_page");
+        
         $content = ContentFactory::getByID($page);
         if ($content->id === null) {
             ExceptionResult(get_translation("not_found"));

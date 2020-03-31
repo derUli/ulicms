@@ -117,9 +117,18 @@ const initRemoteAlerts = (rootElement) => {
 };
 
 const dataTableDrawCallback = (settings) => {
+    // if the current page doesn't exists go to the last existing page
+    const table = $(`#${settings.sInstance}`).DataTable();
+    const totalPageCount = table.page.info().pages;
+    const currentPage = table.page() + 1;
+    if(currentPage > totalPageCount){
+         table.page(totalPageCount);
+    }
+        
     $(`#${settings.sInstance}`).find("a.btn").click(
             (event) => {
         const target = $(event.currentTarget);
+        
         if ((target.hasClass("disabled") ||
                 target.attr("disabled")) &&
                 target.attr("href").length > 1) {
@@ -198,6 +207,9 @@ const initDataTables = (rootElement) => {
             },
             processing: !!url,
             serverSide: !!url,
+            search: (event) => {
+                $(event.target).DataTable().page(1);
+            },
             ajax: url ? {
                 url,
                 type: 'GET',
@@ -211,7 +223,7 @@ const initDataTables = (rootElement) => {
                 localStorage.setItem(
                         "DataTables_" + action + "_"
                         + settings.sInstance, JSON.stringify(data)
-                        )
+                        );
             },
             stateLoadCallback: (settings) =>
                 JSON.parse(
