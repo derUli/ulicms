@@ -311,7 +311,7 @@ class User extends Model {
     }
 
     public function getFullName(): string {
-        return (!empty($this->firstname) and ! empty($this->lastname)) ?
+        return (!empty($this->firstname) and!empty($this->lastname)) ?
                 "{$this->firstname} {$this->lastname}" : "";
     }
 
@@ -580,8 +580,8 @@ class User extends Model {
         $groups = array_filter($groups);
         return array_values($groups);
     }
-    
-    public function getGroupCollection(): GroupCollection{
+
+    public function getGroupCollection(): GroupCollection {
         return new GroupCollection($this);
     }
 
@@ -683,6 +683,19 @@ class User extends Model {
     public function hasProcessedAvatar(): bool {
         return ($this->getProcessedAvatarPath() and
                 file_exists($this->getProcessedAvatarPath()));
+    }
+
+    public static function getOnlineUsers() {
+        $query = Database::selectAll(
+                        "users",
+                        ["id"],
+                        "last_action > " . (time() - 300) . " ORDER BY username");
+
+        $users = [];
+        while ($row = Database::fetchObject($query)) {
+            $users[] = new self($row->id);
+        }
+        return $users;
     }
 
 }
