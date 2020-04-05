@@ -64,7 +64,7 @@ if ($permissionChecker->hasPermission("pages")) {
         $can_edit_this = $checker->canWrite($row->id);
 
         $languageAssignment = getAllLanguages(true);
-        if (count($languageAssignment) > 0 and!in_array($row->language, $languageAssignment)) {
+        if (count($languageAssignment) > 0 and !in_array($row->language, $languageAssignment)) {
             $can_edit_this = false;
         }
 
@@ -1036,7 +1036,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                             echo $th;
                                             ?>"
                                             <?php
-                                            if (!is_null($row->theme) and!empty($row->theme) and $row->theme == $th)
+                                            if (!is_null($row->theme) and !empty($row->theme) and $row->theme == $th)
                                                 echo "selected";
                                             ?>>
                                                 <?php

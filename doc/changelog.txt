@@ -17,6 +17,7 @@ Neue API-Methoden:
 * User->getGroupCollection(): GroupCollection
 * User->isOnline(): bool
 * User->isCurrent(): bool
+* ArrayHelper::getValueOrDefault(?array $input, $key, $default)
 
 Entfernte API-Methoden:
 * BackendHelper::formatDatasetCount(int $count): void

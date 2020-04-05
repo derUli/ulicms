@@ -23,7 +23,7 @@ if (!$permissionChecker->hasPermission("categories")) {
     $categories = Categories::getAllCategories($order);
     ?>
     <?php
-    if (!isset($_GET["add"]) and!isset($_GET["edit"])
+    if (!isset($_GET["add"]) and !isset($_GET["edit"])
             and $permissionChecker->hasPermission("categories_create")) {
         ?>
         <?php
@@ -48,8 +48,8 @@ if (!$permissionChecker->hasPermission("categories")) {
     }
     ?>
     <?php
-    if (count($categories) > 0 and!isset($_GET["add"])
-            and!isset($_GET["edit"])) {
+    if (count($categories) > 0 and !isset($_GET["add"])
+            and !isset($_GET["edit"])) {
         ?>
         <div class="scroll">
             <table class="tablesorter">

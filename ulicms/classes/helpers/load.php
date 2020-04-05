@@ -8,7 +8,8 @@ $classes = array(
     "NumberFormatHelper",
     "StringHelper",
     "UrlHelper",
-    "DataTablesHelper"
+    "DataTablesHelper",
+    "TestHelper"
 );
 foreach ($classes as $class) {
     require_once dirname(__file__) . "/$class.php";

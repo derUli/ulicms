@@ -1,5 +1,5 @@
 <?php
-if (Settings::get("visitors_can_register") == "off" or!Settings::get("visitors_can_register")) {
+if (Settings::get("visitors_can_register") == "off" or !Settings::get("visitors_can_register")) {
     translate("FUNCTION_IS_DISABLED");
 } else {
     // TODO: Move logic to RegistrationController
@@ -8,7 +8,7 @@ if (Settings::get("visitors_can_register") == "off" or!Settings::get("visitors_c
 
     $errors = false;
     if (isset($_POST["register_user"])) {
-        if ($checkbox->isEnabled() and!$checkbox->isChecked()) {
+        if ($checkbox->isEnabled() and !$checkbox->isChecked()) {
             echo "<p style='color:red;'>" . get_translation("please_accept_privacy_conditions") . "</p>";
         } else if (empty($_POST["username"]) or empty($_POST["password"]) or empty($_POST["firstname"]) or empty($_POST["lastname"])) {
             echo "<p style='color:red;'>" . get_translation("FILL_ALL_FIELDS") . "</p>";

@@ -3,7 +3,7 @@
 use UliCMS\Models\Content\Categories;
 
 $permissionChecker = new ACL();
-if (!$permissionChecker->hasPermission("forms") or!$permissionChecker->hasPermission("forms_edit")) {
+if (!$permissionChecker->hasPermission("forms") or !$permissionChecker->hasPermission("forms_edit")) {
     noPerms();
 } else {
     $forms = Forms::getAllForms();

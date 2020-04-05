@@ -577,7 +577,7 @@ class PageController extends Controller {
                     $language,
                     getLanguageNameByCode($language)
             );
-            if (count($userLanguages) and!in_array($language, $userLanguages)) {
+            if (count($userLanguages) and !in_array($language, $userLanguages)) {
                 continue;
             }
 

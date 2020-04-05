@@ -146,7 +146,7 @@ class PageTableRenderer {
     }
 
     protected function buildFilterSQL($where, $filters): string {
-        if (isset($filters["type"]) and!empty($filters["type"])) {
+        if (isset($filters["type"]) and !empty($filters["type"])) {
             $where .= " and type ='" .
                     Database::escapeValue($filters["type"]) .
                     "'";

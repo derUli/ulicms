@@ -311,7 +311,7 @@ class User extends Model {
     }
 
     public function getFullName(): string {
-        return (!empty($this->firstname) and!empty($this->lastname)) ?
+        return (!empty($this->firstname) and !empty($this->lastname)) ?
                 "{$this->firstname} {$this->lastname}" : "";
     }
 
