@@ -685,7 +685,22 @@ class User extends Model {
                 file_exists($this->getProcessedAvatarPath()));
     }
 
-    public static function getOnlineUsers() {
+    public function isOnline(): bool {
+        $onlineUsers = self::getOnlineUsers();
+        
+        foreach ($onlineUsers as $user) {
+            if ($user->getUserName() == $this->getUsername()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function isCurrent(): bool {
+        return $this->getId() and $this->getId() == get_user_id();
+    }
+
+    public static function getOnlineUsers(): array {
         $query = Database::selectAll(
                         "users",
                         ["id"],

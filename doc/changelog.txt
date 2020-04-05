@@ -15,6 +15,8 @@ Neue API-Methoden:
 * ListData->filterAll(): array
 * ListData->hasMore(int $offset = 0): bool
 * User->getGroupCollection(): GroupCollection
+* User->isOnline(): bool
+* User->isCurrent(): bool
 
 Entfernte API-Methoden:
 * BackendHelper::formatDatasetCount(int $count): void
