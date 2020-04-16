@@ -40,7 +40,7 @@
     <input type="hidden" name="submit_form" value="TryConnect">
     <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> <?php echo TRANSLATION_CONNECT; ?></button>
     <div id="loading">
-        <img src="../admin/gfx/loading.gif" alt="Loading">
+        <img src="../admin/gfx/loading.gif" alt="Loading" class="img-responsive">
     </div>
 
     <div id="error-message"></div>

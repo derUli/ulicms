@@ -1,4 +1,9 @@
 <?php
+
+use UliCMS\HTML\Alert;
+use const UliCMS\Constants\HTML5_ALLOWED_TAGS;
+use function UliCMS\Security\XSSProtection\stripTags;
+
 $permissionChecker = new ACL();
 
 $controller = ControllerRegistry::get();
@@ -24,12 +29,13 @@ if ($permissionChecker->hasPermission("dashboard")) {
         <?php
         $motd = get_lang_config("motd", getSystemLanguage());
         if ($motd or strlen($motd) > 10) {
+            $motd = stripTags($motd, HTML5_ALLOWED_TAGS);
             ?>
             <h2 class="accordion-header">
                 <?php translate("motd"); ?></h2>
-            <div class="accordion-content">
+            <div class="accordion-content motd-tab">
                 <?php
-                echo $motd;
+                echo Alert::info($motd, "", true);
                 ?>
             </div>
         <?php } ?>
@@ -64,7 +70,7 @@ if ($permissionChecker->hasPermission("dashboard")) {
 
                 <h2 class="accordion-header" >
                     <?php translate("ulicms_news"); ?></h2>
-                <div class="accordion-content">
+                <div class="accordion-content news-tab">
                     <?php require "inc/loadspinner.php"; ?>
                 </div>
             </div>
@@ -98,7 +104,7 @@ if ($permissionChecker->hasPermission("dashboard")) {
             <h2 class="accordion-header">
                 <?php translate("online_now"); ?>
             </h2>
-            <div class="accordion-content">
+            <div class="accordion-content users-online-tab">
                 <?php require "inc/loadspinner.php"; ?>
             </div>
         </div>
@@ -125,8 +131,6 @@ if ($permissionChecker->hasPermission("dashboard")) {
         enqueueScriptFile(ModuleHelper::buildModuleRessourcePath("core_home", "js/dashboard.js"));
         combinedScriptHtml();
     }
-    ?>
-    <?php
 } else {
     noPerms();
 }

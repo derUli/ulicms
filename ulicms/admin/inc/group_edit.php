@@ -28,20 +28,22 @@ if (!$permissionChecker->hasPermission("groups")) {
     <form action="?action=groups" method="post">
         <?php csrf_token_html(); ?>
         <input type="hidden" name="id" value="<?php echo $id; ?>">
-        <p>
-            <strong><?php translate("name"); ?>*</strong>
+        <div class="field">
+            <strong class="field-label">
+                <?php translate("name"); ?>*
+            </strong>
             <input type="text" required="required" name="name"
                    value="<?php echo $groupName; ?>">
-        </p>
-        <h3 class="minimal-margin-bottom"><?php translate("permissions"); ?></h3>
+        </div>
+        <h3><?php translate("permissions"); ?></h3>
         <fieldset>
-            <div class="checkbox">
+            <div class="checkbox field">
                 <label>
                     <input id="select-all" type="checkbox" class="checkall">
                     <?php translate("select_all"); ?>
                 </label>
             </div>
-            <div class="voffset3">
+            <div class="voffset1">
                 <?php
                 foreach ($all_permissions as $key => $value) {
                     ?>
@@ -61,7 +63,7 @@ if (!$permissionChecker->hasPermission("groups")) {
                 ?>
             </div>
         </fieldset>
-        <h4 class="minimal-margin-bottom"><?php translate("languages"); ?></h4>
+        <h3><?php translate("languages"); ?></h3>
         <fieldset>
             <?php foreach ($languages as $lang) { ?>
                 <div class="checkbox">
@@ -79,15 +81,17 @@ if (!$permissionChecker->hasPermission("groups")) {
                 </div>
             <?php } ?>
         </fieldset>
-        <h4 class="minimal-margin-bottom"><?php translate("allowable_tags"); ?></h4>
+        <h3><?php translate("allowable_tags"); ?></h3>
         <fieldset>
             <input type="text" name="allowable_tags"
                    value="<?php Template::escape($group->getAllowableTags()); ?>">
             <small><?php translate("allowable_tags_help"); ?></small>
         </fieldset>
-        <div class="form-group voffset2">
+        <div class="voffset2">
             <button name="edit_group" type="submit" class="btn btn-primary">
-                <i class="fa fa-save"></i> <?php translate("save_changes"); ?></button>
+                <i class="fa fa-save"></i>
+                <?php translate("save"); ?>
+            </button>
         </div>
     </form>
     <?php

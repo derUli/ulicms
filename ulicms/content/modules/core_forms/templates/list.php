@@ -14,7 +14,6 @@ if (!$permissionChecker->hasPermission("forms")) {
                     class="fa fa-plus"></i> <?php translate("create_form"); ?></a>
         </p>
     <?php } ?>
-    <p><?php BackendHelper::formatDatasetCount(count($forms)); ?></p>
     <div class="scroll">
         <table id="form-list" class="tablesorter">
             <thead>
@@ -60,21 +59,22 @@ if (!$permissionChecker->hasPermission("forms")) {
                                        alt="<?php translate("edit"); ?>"
                                        title="<?php translate("edit"); ?>"></a>
                             </td>
-                            <td class="text-center"
+                            <td class="text-center">
                                 <?php
                                 echo ModuleHelper::deleteButton(
                                         ModuleHelper::buildMethodCallUrl(
                                                 "FormController",
-                                                "delete"),
-                                        ["del" => $form ["id"]
-                                ]);
+                                                "delete"
+                                        ),
+                                        ["del" => $form ["id"]]
+                                );
                                 ?>
-                        </td>
+                            </td>
+                        <?php } ?>
+                    </tr>
                 <?php } ?>
-                </tr>
-    <?php } ?>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
     </div>
     <?php
     $translation = new JSTranslation();

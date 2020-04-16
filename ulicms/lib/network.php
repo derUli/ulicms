@@ -28,19 +28,26 @@ function get_ip(): string {
 }
 
 function get_host(): string {
-    if ($host = $_SERVER['HTTP_X_FORWARDED_HOST']) {
+    if (isset($_SERVER['HTTP_X_FORWARDED_HOST'])) {
+		$host = $_SERVER['HTTP_X_FORWARDED_HOST'];
         $elements = explode(',', $host);
         $host = trim(end($elements));
     } else {
-        if (!$host = $_SERVER['HTTP_HOST']) {
-            if (!$host = $_SERVER['SERVER_NAME']) {
-                $host = !empty($_SERVER['SERVER_ADDR']) ?
-                        $_SERVER['SERVER_ADDR'] : '';
-            }
-        }
-    }
+		$vars = [
+			"HTTP_HOST",
+			"SERVER_NAME",
+			"SERVER_ADDR"
+		];
 
-// Remove port number from host
+		foreach($vars as $var){
+			if(isset($_SERVER[$var]) and !empty($_SERVER[$var])){
+				$host = $_SERVER[$var];
+				break;
+			}
+		}
+	}
+
+	// Remove port number from host
     $host = preg_replace('/:\d+$/', '', $host);
 
     return trim($host);

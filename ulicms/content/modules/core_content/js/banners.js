@@ -8,6 +8,7 @@ $(() => {
         location.replace("index.php?action=banner&filter_category="
                 + valueSelected);
     });
+    
     // delete button
     $("form.delete-form").ajaxForm({
         success: (responseText, statusText, xhr, $form) => {

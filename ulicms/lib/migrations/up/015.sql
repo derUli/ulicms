@@ -1,4 +1,3 @@
-
 ALTER TABLE `{prefix}banner`
 CHANGE `name` `name` text NULL,
 CHANGE `link_url` `link_url` text NULL,

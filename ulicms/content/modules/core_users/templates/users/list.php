@@ -1,6 +1,7 @@
 <?php
 
 use function UliCMS\HTML\imageTag;
+use UliCMS\HTML\Alert;
 
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("users")) {
@@ -21,14 +22,22 @@ if ($permissionChecker->hasPermission("users")) {
     <?php echo Template::executeModuleTemplate("core_users", "icons.php"); ?>
     <h2><?php translate("users"); ?></h2>
     <?php if ($permissionChecker->hasPermission("users_create")) { ?>
-        <p>
-            <?php translate("users_infotext"); ?>
-            <br /> <br /> <a href="index.php?action=admin_new&ref=admins"
-                             class="btn btn-default"><i class="fa fa-plus"></i> <?php translate("create_user"); ?></a><br />
-        </p>
+        <?php
+        echo Alert::info(
+                get_translation("users_infotext")
+        );
+        ?>
+        <div class="voffset2">    
+            <a href="index.php?action=admin_new&ref=admins"
+               class="btn btn-default"><i class="fa fa-plus"></i> 
+                <?php translate("create_user"); ?></a>
+        </div>
     <?php } ?>
-    <form action="index.php" method="get" class="voffset3-5">    <strong><?php translate("primary_group"); ?></strong>
-        <br />
+    <form action="index.php" method="get" class="voffset2">
+        <strong>
+            <?php translate("primary_group"); ?>
+        </strong>
+
         <input type="hidden" name="action" value="admins"> <select
             name="admins_filter_group" size="1"
             onchange="$(this).closest('form').submit();">
@@ -40,11 +49,9 @@ if ($permissionChecker->hasPermission("users")) {
                     value="<?php Template::escape($group->getId()); ?>"><?php Template::escape($group->getName()); ?></option>
                 <?php } ?>
         </select>
-    </form>
-    <br />
-    <p><?php BackendHelper::formatDatasetCount(count($users)); ?></p>
+    </form>    
     <?php if (count($users) > 0) { ?>
-        <div class="scroll">
+        <div class="scroll voffset2">
             <table class="tablesorter">
                 <thead>
                     <tr style="font-weight: bold;">

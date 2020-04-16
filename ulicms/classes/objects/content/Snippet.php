@@ -11,7 +11,7 @@ class Snippet extends Page {
     protected function fillVars($result = null) {
         parent::fillVars($result);
         $this->type = "snippet";
-        $this->mehu = "not_in_menu";
+        $this->menu = "not_in_menu";
         $this->hidden = true;
     }
 

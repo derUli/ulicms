@@ -3,6 +3,7 @@
 use UliCMS\Security\Encryption;
 use UliCMS\Exceptions\NotImplementedException;
 use UliCMS\Utils\CacheUtil;
+use UliCMS\Models\Users\GroupCollection;
 
 class UserTest extends \PHPUnit\Framework\TestCase {
 
@@ -32,6 +33,8 @@ class UserTest extends \PHPUnit\Framework\TestCase {
 
     public function tearDown() {
         CacheUtil::clearAvatars(true);
+        $_SESSION = [];
+
         $this->setUp();
         Database::pQuery(
                 "delete from `{prefix}groups` "
@@ -47,6 +50,9 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         unset($_SERVER['HTTP_HOST']);
         unset($_SERVER['SERVER_PORT']);
         unset($_SERVER['HTTPS']);
+
+        $user = $this->getFirstUser();
+        $user->setLastAction(null);
     }
 
     public function testCreateAndDeleteUser() {
@@ -558,6 +564,72 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue($user->hasProcessedAvatar());
         $this->assertTrue($user->removeAvatar());
         $this->assertFalse($user->hasProcessedAvatar());
+    }
+
+    public function testGetGroupCollection() {
+        $user = $this->getTestUser();
+        $collection = $user->getGroupCollection();
+        $this->assertInstanceOf(GroupCollection::class, $collection);
+
+        $this->assertEquals(
+                "<div><foo><img><p><span><strong><video>",
+                $collection->getAllowableTags()
+        );
+    }
+
+    protected function getTestUser(): User {
+        $user = new User();
+
+        $group1 = new Group();
+        $group1->setAllowableTags("<p><div><strong><span><img>");
+
+        $group2 = new Group();
+        $group2->setAllowableTags("<p><img><foo>");
+
+        $group3 = new Group();
+        $group3->setAllowableTags("<video><audio");
+
+        $user->setPrimaryGroup($group1);
+        $user->setSecondaryGroups([$group2, $group3]);
+
+        return $user;
+    }
+
+    public function testIsCurrentReturnsTrue() {
+        $_SESSION["login_id"] = 123;
+
+        $user = new User();
+        $user->setId(123);
+
+        $this->assertTrue($user->isCurrent());
+    }
+
+    public function testIsCurrentReturnsFalse() {
+        $_SESSION["login_id"] = PHP_INT_MAX;
+
+        $user = new User();
+        $user->setId(123);
+
+        $this->assertFalse($user->isCurrent());
+    }
+
+    public function testIsOnlineReturnsTrue() {
+        $user = $this->getFirstUser();
+
+        $user->setLastAction(time());
+
+        $this->assertTrue($user->isOnline());
+    }
+
+    public function testIsOnlineReturnsFalse() {
+        $user = $this->getFirstUser();
+        $user->setLastAction(12);
+        $this->assertFalse($user->isOnline());
+    }
+
+    protected function getFirstUser(): User {
+        $manager = new UserManager();
+        return $manager->getAllUsers()[0];
     }
 
 }

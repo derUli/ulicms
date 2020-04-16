@@ -19,44 +19,59 @@ if ($permissionChecker->hasPermission("audio")
               method="post">
                   <?php csrf_token_html(); ?>
             <input type="hidden" name="id" value="<?php echo $dataset->id; ?>">
+            
             <input
-                type="hidden" name="update" value="update"> <strong><?php translate("name"); ?>*
-            </strong><br /> <input type="text" name="name"
-                                   value="<?php echo _esc($dataset->name); ?>"
-                                   maxlength="255" required />
-            <br />
-            <strong><?php translate("category"); ?></strong>
-            <br />
-            <?php echo Categories::getHTMLSelect($dataset->category_id); ?>
-            <br /> <br /> <strong><?php echo translate("audio_ogg"); ?>
-            </strong><br /> <input name="ogg_file" type="text"
-                                   value="<?php
-                                   echo _esc(
-                                           $dataset->ogg_file
-                                   );
-                                   ?>">
-            <br />
-            <strong><?php translate("audio_mp3"); ?>
+                type="hidden" name="update" value="update"> 
+            <div class="field">
+            <strong class="field-label">
+                <?php translate("name"); ?>*
+            </strong>            
+            <input type="text" name="name"
+                   value="<?php echo _esc($dataset->name); ?>"
+                   maxlength="255" required />
+            
+            </div>
+             <div class="field">
+            <strong class="field-label">
+                <?php translate("category"); ?>
             </strong>
-            <br />
-            <input name="mp3_file" type="text"
+            <?php echo Categories::getHTMLSelect($dataset->category_id); ?>
+             </div>
+             <div class="field">
+            <strong class="field-label">
+                <?php echo translate("audio_ogg"); ?>
+            </strong>
+            <input name="ogg_file" type="text"
+                   value="<?php
+                   echo _esc(
+                           $dataset->ogg_file
+                   );
+                   ?>">
+             </div>
+             <div class="field">
+            <strong class="field-label">
+                <?php translate("audio_mp3"); ?>
+            </strong>
+            <input name="mp3_file" type="text" readonly
                    value="<?php
                    echo _esc(
                            $dataset->mp3_file
                    );
                    ?>">
-            <br />
-            <strong>
+             </div>
+             <div class="field">
+            <strong class="field-label">
                 <?php translate("insert_this_code_into_a_page"); ?>
             </strong>
-            <br />
-            <input type="text" name="code"
+            <input type="text" name="code" readonly
                    value="[audio id=<?php echo $dataset->id; ?>]"
                    class="select-on-click" readonly>
-            <br />
+             </div>
+            <div class="voffset2">
             <button type="submit" class="btn btn-primary">
                 <i class="fa fa-save"></i>
-                <?php translate("SAVE_CHANGES"); ?>
+                <?php translate("save"); ?>
+            </div>
             </button>
         </form>
         <?php

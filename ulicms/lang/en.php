@@ -724,10 +724,6 @@ add_translation("secondary_groups", "Secondary Groups");
 add_translation("on", "On");
 add_translation("off", "Off");
 
-add_translation("php_upgrade_notice", "You're using an outdated PHP version.\n" .
-        "You should use at least PHP 7.2.\n" .
-        "Please ask your system administrator or provider for an upgrade of the PHP version.");
-
 add_translation("hello_x", "Hello %x%");
 add_translation("admin_created_an_account", "An administrator created a user account for you at the website %url%.");
 add_translation("here_are_your_credentials", "Here are your credentials:");

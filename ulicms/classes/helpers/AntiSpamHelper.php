@@ -107,8 +107,12 @@ class AntiSpamHelper extends Helper {
 
     // returns true if this is a bot, based on a static useragent list
     public static function checkForBot(?string $useragent = null): bool {
-        if (!$useragent) {
+        if (!$useragent and isset($_SERVER['HTTP_USER_AGENT'])) {
             $useragent = $_SERVER['HTTP_USER_AGENT'];
+        }
+        
+        if(!$useragent){
+            return false;
         }
         $bots = [
             "Indy",

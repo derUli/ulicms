@@ -48,7 +48,7 @@ class UnDeleteButtonRendererTest extends \PHPUnit\Framework\TestCase {
                 '<i class="fas fa-trash-restore', $html
         );
         $this->assertStringContainsString(
-                'data-url="index.php?sClass=PageController&amp;sMethod=undelete&amp;page=',
+                'data-url="index.php?sClass=PageController&amp;sMethod=undelete&amp;id=',
                 $html
         );
     }

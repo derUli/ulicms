@@ -345,13 +345,16 @@ class Database {
             array $columns = [],
             string $where = "",
             array $args = [],
-            bool $prefix = true,
-            string $order = ""
+            bool $replacePrefix = true,
+            string $order = "",
+            string $joins = ""
     ): ?mysqli_result {
-        if ($prefix) {
+        
+        if($replacePrefix){
             $table = tbname($table);
         }
         $table = self::escapeName($table);
+        
         if (count($columns) == 0) {
             $columns[] = "*";
         }
@@ -359,14 +362,19 @@ class Database {
         $columns_sql = implode(", ", $columns);
 
         $sql = "select $columns_sql from $table";
+        
+        if (StringHelper::isNotNullOrWhitespace($joins)) {
+            $sql .= " $joins ";
+        }
 
-        if (StringHelper::isNotNullOrEmpty($where)) {
+        if (StringHelper::isNotNullOrWhitespace($where)) {
             $sql .= " where $where ";
         }
-        if (StringHelper::isNotNullOrEmpty($order)) {
-            $sql .= " order by {$order}";
+        
+        if (StringHelper::isNotNullOrWhitespace($order)) {
+            $sql .= " order by $order";
         }
-        return self::pQuery($sql, $args);
+        return self::pQuery($sql, $args, $replacePrefix);
     }
 
     public static function escapeName(string $name): string {

@@ -36,7 +36,7 @@ class Categories {
 
     // builds a html category select box
     public static function getHTMLSelect(
-            int $default = 1,
+            ?int $default = 1,
             bool $allowNull = false,
             string $name = 'category_id'
     ): string {

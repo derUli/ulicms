@@ -1,3 +1,43 @@
+===== Neues in UliCMS 2020.2 =====
+
+Neue Features:
+* Backend optisch überarbeitet
+* CKEditor auf Version 4.13.1 aktualisiert
+* Höhe des CKEditor Eingabefelds wird beibehalten
+* User-Avatar kann jetzt entfernt werden
+* Erlaubte HTML-Tags aller Gruppen des Benutzers werden akzeptiert
+* Changelog kann nun eingesehen werden
+
+Neue API-Methoden:
+* BackendHelper::getCKEditorSkins(): array
+* getDefaultLanguage(): string
+* ListData->filterPaginated(?int $offset = null): array
+* ListData->filterAll(): array
+* ListData->hasMore(int $offset = 0): bool
+* User->getGroupCollection(): GroupCollection
+* User->isOnline(): bool
+* User->isCurrent(): bool
+* ArrayHelper::getValueOrDefault(?array $input, $key, $default)
+
+Entfernte API-Methoden:
+* BackendHelper::formatDatasetCount(int $count): void
+
+Entfernte Features:
+* "kama" CKEditor Skin entfernt
+
+Fehlerkorrekturen:
+* Speichern des Inhaltstyps "Liste" korrigiert
+* impro17: Pagination von Listen korrigiert
+* Versionen vergleichen ist wieder funktional
+* Kontaktformulare können wieder gelöscht werden
+* Pakete:
+  Wenn keine Embed-Module installiert sind, wurden die Modul-Buttons
+  nicht mehr angezeigt. Dieser Fehler wurde korrigiert
+
+Sicherheit:
+* XSS im PackageController behoben (gefunden von Ngo Van Thien, Sun* Inc)
+* XSS im PageController behoben (gefunden von Ngo Van Thien, Sun* Inc)
+
 ===== Neues in UliCMS 2020.1 =====
 
 Neue Features:
@@ -22,7 +62,6 @@ Neue API-Methoden:
 * TwoFactorAuthentication::enable(): void
 * TwoFactorAuthentication::disable(): void
 * TwoFactorAuthentication::toggle(): void
-
 
 Entfernte API-Methoden:
 * Settings::output(string $key, ?string $type = 'str'): void
@@ -49,7 +88,7 @@ Entfernte Features:
   Diese Features werden in den nächsten UliCMS Releases erneut integriert werden.
 * mPDF wurde aus den Composer Abhängigkeiten entfernt.
   Wenn die PDF-Ausgabe genutzt werden soll, muss dafür das mPDF Paket von https://extend.ulicms.de/mPDF.html installiert werden
-  
+
 Fehlerkorrekturen:
 * Beim Bearbeiten eines Benutzers wird das Passwort nicht mehr geleert, wenn man kein neues eingegeben hat.
 * PackageController->getPackageDownloadUrl() gab immer null zurück.

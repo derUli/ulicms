@@ -24,8 +24,8 @@ $(() => {
     // AJAX submit page edit form
     $("#pageform-edit").ajaxForm({
         beforeSubmit: () => {
-            $("#message_page_edit").html("");
-            $("#message_page_edit").hide();
+            $("#message-page-edit").html("");
+            $("#message-page-edit").hide();
             $(".loading").show();
         },
         beforeSerialize: () => {
@@ -37,12 +37,12 @@ $(() => {
         },
         success: () => {
             $(".loading").hide();
-            $("#message_page_edit").html(
+            $("#message-page-edit").html(
                     `<span style="color:green;">
                         ${Translation.PageSaved}
                      </span>`
                     );
-            $("#message_page_edit").show();
+            $("#message-page-edit").show();
         }
     });
 

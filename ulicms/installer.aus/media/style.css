@@ -5,11 +5,7 @@ body {
     font-size: 15px;
 }
 
-#license {
-    width: 100%;
-}
-
-progress{
+#license, progress {
     width: 100%;
 }
 
@@ -22,7 +18,7 @@ progress{
 
 #main {
     padding-bottom: 30px;
-    word-break: break-word;
+    word-wrap: break-word
 }
 
 #my-container {
@@ -52,7 +48,7 @@ a.current-item {
     margin-bottom: 5px;
 }
 
-select {
+select, input:not([type="checkbox"]):not([type="radio"]) {
     width: 100%;
 }
 
@@ -61,142 +57,36 @@ select {
     margin-top: 20px;
 }
 
-img {
-    max-width: 100%;
-}
-
-kbd {
-    border-radius: 0 !important;
-}
-
-pre {
-    border-radius: 0 !important;
-}
-
-.img-rounded {
-    border-radius: 0 !important;
-}
-
-.img-thumbnail {
-    border-radius: 0 !important;
-}
-
-.img-circle {
-    border-radius: 0 !important;
-}
-
-.form-control {
-    border-radius: 0 !important;
-}
-
-.btn {
-    border-radius: 0 !important;
-}
-
-.btn-link {
-    border-radius: 0 !important;
-}
-
-.dropdown-menu {
-    border-radius: 0 !important;
-}
-
-.list-group-item {
-    border-radius: 0 !important;
-}
-
-.input-group-addon {
-    border-radius: 0 !important;
-}
-
-.input-group-btn {
-    border-radius: 0 !important;
-}
-
-.nav-tabs a {
-    border-radius: 0 !important;
-}
-
-.nav-pills a {
-    border-radius: 0 !important;
-}
-
-.navbar {
-    border-radius: 0 !important;
-}
-
-.navbar-toggle {
-    border-radius: 0 !important;
-}
-
-.icon-bar {
-    border-radius: 0 !important;
-}
-
-.breadcrumb {
-    border-radius: 0 !important;
-}
-
-.pagination {
-    border-radius: 0 !important;
-}
-
-.pager * {
-    border-radius: 0 !important;
-}
-
-.badge {
-    border-radius: 0 !important;
-}
-
-.jumbotron {
-    border-radius: 0 !important;
-}
-
-.thumbnail {
-    border-radius: 0 !important;
-}
-
-.alert {
-    border-radius: 0 !important;
-}
-
-.progress {
-    border-radius: 0 !important;
-}
-
-.panel {
-    border-radius: 0 !important;
-}
-
-.well {
-    border-radius: 0 !important;
-}
-
-.modal-content {
-    border-radius: 0 !important;
-}
-
-.tooltip-inner {
-    border-radius: 0 !important;
-}
-
-.popover {
-    border-radius: 0 !important;
-}
-
-.popover-title {
-    border-radius: 0 !important;
-}
-
-.carousel-indicators li {
-    border-radius: 0 !important;
-}
-
-[class^=select2] {
-    border-radius: 0 !important;
-}
-
-.paginate_button {
+kbd,
+pre,
+.img-rounded,
+.img-thumbnail,
+.img-circle,
+.form-control,
+.btn,
+.btn-link,
+.dropdown-menu,
+.list-group-item,
+.input-group-addon,
+.input-group-btn,
+.navbar,
+.navbar-toggle,
+.icon-bar,
+.breadcrumb,
+.pagination,
+.progress,
+.badge,
+.jumbotron,
+.thumbnail,
+.panel,
+.well,
+.modal-content,
+.tooltip-inner,
+.popover,
+.popover-title,
+.alert,
+.paginate_button,
+*[class^="select2"]
+{
     border-radius: 0 !important;
 }

@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Helpers\TestHelper;
+
 class SystemRequirementsTest extends \PHPUnit\Framework\TestCase {
 
 	public function testPhpVersion() {
@@ -49,5 +51,12 @@ class SystemRequirementsTest extends \PHPUnit\Framework\TestCase {
 	public function testConnectToUliCMSServices() {
 		$this->assertNotNull(file_get_contents_wrapper("https://www.ulicms.de/", true));
 	}
+        
+    public function testPhpIcoInstalled() {
+        $this->assertTrue(class_exists("PHP_ICO"));
+    }
 
+    public function testIsRunningPHPUnit(){
+        $this->assertTrue(TestHelper::isRunningPHPUnit());
+    }
 }

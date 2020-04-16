@@ -24,79 +24,80 @@ if ($permissionChecker->hasPermission("languages")) {
                 <td><input type="text" name="name" maxlength="100" required></td>
             </tr>
         </table>
-        <button type="submit" class="btn btn-primary voffset2">
-            <i class="fa fa-plus"></i> <?php translate("add_language"); ?></button>
+        <div>
+            <button type="submit" class="btn btn-primary voffset2">
+                <i class="fa fa-plus"></i> <?php translate("add_language"); ?></button>
+        </div>
     </div>
     <?php echo ModuleHelper::endForm(); ?>
-    <br>
-    <div class="seperator"></div>
-    <br>
-    <p><?php BackendHelper::formatDatasetCount(count($languages)); ?></p>
+
     <?php
     if (count($languages) > 0) {
         ?>
-        <table class="tablesorter">
-            <thead>
-                <tr>
-                    <th>
-                        <strong><?php translate("language_shortcode"); ?></strong>
-                    </th>
-                    <th>
-                        <strong><?php translate("full_name"); ?></strong>
-                    </th>
-                    <th class="no-sort">
-                        <strong><?php translate("standard"); ?></strong>
-                    </th>
-                    <th class="no-sort"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                foreach ($languages as $language) {
-                    ?>
-                    <tr id="dataset-<?php echo $language->getID(); ?>">
-                        <td>
-                            <?php esc($language->getLanguageCode()); ?>
-                        </td>
-                        <td>
-                            <?php esc($language->getName()); ?>
-                        </td>
-                        <td class="text-bold">
-                            <?php
-                            if ($language->getLanguageCode() !== Settings::get("default_language")) {
-                                ?>
-                                <a class="btn btn-primary btn-make-default"
-                                   href="<?php
-                                   echo ModuleHelper::buildMethodCallUrl("LanguageController", "setDefaultLanguage",
-                                           ModuleHelper::buildQueryString(
-                                                   array("default" => $language->getLanguageCode()
-                                                   )
-                                           )
-                                   );
-                                   ?>"
-                                   data-message="<?php
-                                   translate("REALLY_MAKE_DEFAULT_LANGUAGE",
-                                           array(
-                                               "%name%" => $language->getName())
-                                   );
-                                   ?>">
-                                    <i class="fas fa-language"></i>
-                                    <?php translate("make_default"); ?>
-                                </a>
-                            <?php } else { ?>
-                                <i class="fas fa-check text-success"></i>
-                            <?php } ?>
-                        </td>
-                        <td>
-                            <?php
-                            echo ModuleHelper::deleteButton(ModuleHelper::buildMethodCallUrl(LanguageController::class, "delete"),
-                                    ["id" => $language->getID()]);
-                            ?>
-                        </td>
+        <div class="voffset2">
+            <table class="tablesorter">
+                <thead>
+                    <tr>
+                        <th>
+                            <strong><?php translate("language_shortcode"); ?></strong>
+                        </th>
+                        <th>
+                            <strong><?php translate("full_name"); ?></strong>
+                        </th>
+                        <th class="no-sort">
+                            <strong><?php translate("standard"); ?></strong>
+                        </th>
+                        <th class="no-sort"></th>
                     </tr>
-                <?php } ?>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <?php
+                    foreach ($languages as $language) {
+                        ?>
+                        <tr id="dataset-<?php echo $language->getID(); ?>">
+                            <td>
+                                <?php esc($language->getLanguageCode()); ?>
+                            </td>
+                            <td>
+                                <?php esc($language->getName()); ?>
+                            </td>
+                            <td class="text-bold">
+                                <?php
+                                if ($language->getLanguageCode() !== Settings::get("default_language")) {
+                                    ?>
+                                    <a class="btn btn-primary btn-make-default"
+                                       href="<?php
+                                       echo ModuleHelper::buildMethodCallUrl("LanguageController", "setDefaultLanguage",
+                                               ModuleHelper::buildQueryString(
+                                                       array("default" => $language->getLanguageCode()
+                                                       )
+                                               )
+                                       );
+                                       ?>"
+                                       data-message="<?php
+                                       translate("REALLY_MAKE_DEFAULT_LANGUAGE",
+                                               array(
+                                                   "%name%" => $language->getName())
+                                       );
+                                       ?>">
+                                        <i class="fas fa-language"></i>
+                                        <?php translate("make_default"); ?>
+                                    </a>
+                                <?php } else { ?>
+                                    <i class="fas fa-check text-success"></i>
+                                <?php } ?>
+                            </td>
+                            <td>
+                                <?php
+                                echo ModuleHelper::deleteButton(ModuleHelper::buildMethodCallUrl(LanguageController::class, "delete"),
+                                        ["id" => $language->getID()]);
+                                ?>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
         <?php
         enqueueScriptFile(
                 ModuleHelper::buildModuleRessourcePath("core_settings",

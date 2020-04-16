@@ -2,7 +2,6 @@
 $(() => {
     $("form.delete-form").ajaxForm({
         success: (responseText, statusText, xhr, $form) => {
-
             const action = $($form).attr("action");
             const params = new URLSearchParams(action);
             const id = params.get("del");

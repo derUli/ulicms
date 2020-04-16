@@ -13,7 +13,7 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function tearDown() {
-        unset($_POST["my_homepage_url"]);
+        $_POST = [];
     }
 
     public function testConstructor() {

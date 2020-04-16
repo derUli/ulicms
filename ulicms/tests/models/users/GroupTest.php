@@ -25,7 +25,6 @@ class GroupTest extends \PHPUnit\Framework\TestCase {
 			Settings::set($key, $value);
 		}
 		@session_destroy();
-		unset($_SESSION["login_id"]);
 	}
 
 	public function testCreateGroup() {
@@ -41,7 +40,7 @@ class GroupTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals($oldID, $group->getId());
 		$this->assertEquals("bla", $group->getName());
 		$this->assertTrue(is_array($group->getPermissions()));
-		$this->assertTrue(count($group->getPermissions()) >= 2);
+		$this->assertTrue(count($group->getPermissions()) >= 66);
 
 		$group->setName("Hello");
 		$group->save();

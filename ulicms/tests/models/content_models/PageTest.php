@@ -713,7 +713,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
 		$page->comments_enabled = false;
 		$page->author_id = 1;
 		$page->group_id = 1;
-		$page->save();
+		$page->custom_data = new stdClass();
 		$page->save();
 
 		$raw = Database::fetchFirst(Database::selectAll("content", array("custom_data"), "id = {$page->id}"));

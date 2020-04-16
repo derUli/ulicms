@@ -1,7 +1,11 @@
 {
     "source": "core",
-    "version": "2019.3",
+    "version": "2020.2",
     "embed": false,
+    "custom_acl": 
+            [
+                "dashboard"
+            ],
     "actions": {
         "home": "templates/home.php"
     },

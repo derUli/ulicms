@@ -1,5 +1,5 @@
 <?php
-if (Settings::get("visitors_can_register") == "off" or ! Settings::get("visitors_can_register")) {
+if (Settings::get("visitors_can_register") == "off" or !Settings::get("visitors_can_register")) {
     translate("FUNCTION_IS_DISABLED");
 } else {
     // TODO: Move logic to RegistrationController
@@ -8,7 +8,7 @@ if (Settings::get("visitors_can_register") == "off" or ! Settings::get("visitors
 
     $errors = false;
     if (isset($_POST["register_user"])) {
-        if ($checkbox->isEnabled() and ! $checkbox->isChecked()) {
+        if ($checkbox->isEnabled() and !$checkbox->isChecked()) {
             echo "<p style='color:red;'>" . get_translation("please_accept_privacy_conditions") . "</p>";
         } else if (empty($_POST["username"]) or empty($_POST["password"]) or empty($_POST["firstname"]) or empty($_POST["lastname"])) {
             echo "<p style='color:red;'>" . get_translation("FILL_ALL_FIELDS") . "</p>";
@@ -44,15 +44,15 @@ if (Settings::get("visitors_can_register") == "off" or ! Settings::get("visitors
     do_event("before_register_form_title");
     ?>
     <p>
-        <a href="./" class="btn btn-default btn-back"><i
-                class="fa fa-arrow-left"></i> <?php
-                translate("back_to_login");
-                ?></a>
+        <a href="./" class="btn btn-default btn-back">
+            <i class="fa fa-arrow-left"></i>
+            <?php
+            translate("back_to_login");
+            ?></a>
     </p>
     <h1>
         <?php translate("registration"); ?>
     </h1>
-
     <?php
     do_event("before_register_form");
     ?>
@@ -69,26 +69,57 @@ if (Settings::get("visitors_can_register") == "off" or ! Settings::get("visitors
                    <?php
                }
                ?>
-        <strong><?php translate("username"); ?>
-        </strong><br /> <input type="text" required="required"
-                               name="username" value=""> <br /> <strong><?php translate("lastname") ?>
-        </strong><br /> <input type="text" required="required"
-                               name="lastname" value=""> <br /> <strong><?php translate("firstname"); ?>
-        </strong><br /> <input type="text" required="required"
-                               name="firstname" value=""><br /> <strong><?php translate("email"); ?>
-        </strong><br /> <input type="email" required="required"
-                               name="email" value=""><br /> <strong><?php translate("password"); ?>
-        </strong><br /> <input type="password" required="required"
-                               name="password" value="" autocomplete="new-password"
-                               class="password-security-check"><br /> <strong><?php translate("password_repeat"); ?>
-        </strong><br /> <input type="password" required="required"
-                               name="password_repeat" value="" autocomplete="new-password">
-                               <?php do_event("register_form_field"); ?>
-        <div class="privacy-checkbox">
+        <div class="field">
+            <strong class="field-label">
+                <?php translate("username"); ?>
+            </strong>
+            <input type="text" required="required"
+                   name="username" value="">
+        </div>
+        <div class="field">
+            <strong class="field-label">
+                <?php translate("lastname") ?>
+            </strong>
+            <input type="text" required="required"
+                   name="lastname" value="">
+        </div>
+        <div class="field">
+            <strong class="field-label">
+                <?php translate("firstname"); ?>
+            </strong>
+            <input type="text" required="required"
+                   name="firstname" value="">
+        </div>
+        <div class="field">
+            <strong class="field-label">
+                <?php translate("email"); ?>
+            </strong>
+            <input type="email" required="required"
+                   name="email" value="">
+        </div>
+        <div class="field">
+            <strong class="field-label">
+                <?php translate("password"); ?>
+            </strong>
+            <input type="password" required="required"
+                   name="password" value="" autocomplete="new-password"
+                   class="password-security-check">
+        </div>
+        <div class="field">
+            <strong class="field-label">
+                <?php translate("password_repeat"); ?>
+            </strong>
+            <input type="password" required="required"
+                   name="password_repeat" value=""
+                   autocomplete="new-password">
+        </div>
+        <?php do_event("register_form_field"); ?>
+        <div class="privacy-checkbox field">
             <?php
             echo $checkbox->render();
-            ?></div>
-        <p class="voffset3">
+            ?>
+        </div>
+        <p class="voffset2">
             <button type="submit" class="btn btn-primary">
                 <i class="fas fa-user-plus"></i> <?php translate("register"); ?></button>
         </p>
@@ -96,7 +127,6 @@ if (Settings::get("visitors_can_register") == "off" or ! Settings::get("visitors
     <?php
     enqueueScriptFile("../node_modules/password-strength-meter/dist/password.min.js");
     combinedScriptHtml();
-    ?>
-    <?php
+
     do_event("after_register_form");
 }

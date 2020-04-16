@@ -14,9 +14,10 @@ if ($permissionChecker->hasPermission("list_packages")) {
 	$anyEmbedModules = count(ModuleHelper::getAllEmbedModules()) > 0;
 	?>
 
-	<p><a href="?action=install_method" class="btn btn-warning"><i
+	<div class="btn-toolbar">
+            <a href="?action=install_method" class="btn btn-warning"><i
 				class="fa fa-plus"></i> <?php translate("install_package"); ?></a>
-	</p>
+	</div>
 	<h2><?php translate("installed_modules"); ?></h2>
 	<div class="scroll">
 		<table class="tablesorter">
@@ -69,6 +70,8 @@ if ($permissionChecker->hasPermission("list_packages")) {
 												"class" => "select-on-click"]);
 								}
 								?></td>
+								
+						<?php } ?>
 							<td class="actions">
 								<div class="btn-toolbar">
 									<span class="btn btn-info btn-sm remote-alert icon"
@@ -112,7 +115,6 @@ if ($permissionChecker->hasPermission("list_packages")) {
 									?>
 								</div>
 							</td>
-						<?php } ?>
 					</tr>
 				<?php } ?>
 			</tbody>

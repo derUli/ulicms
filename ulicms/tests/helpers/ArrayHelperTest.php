@@ -181,4 +181,23 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
                 ArrayHelper::flatten("ulicms"));
     }
 
+    public function testGetValueOrDefaultWithNullReturnsDefault() {
+        $this->assertEquals("foobar",
+                ArrayHelper::getValueOrDefault(null, "hello", "foobar"));
+    }
+
+    public function testGetValueOrDefaultWithArrayReturnsDefault() {
+        $this->assertEquals("foobar",
+                ArrayHelper::getValueOrDefault(
+                        ["gibts" => "not"], "hello", "foobar")
+        );
+    }
+
+    public function testGetValueOrDefaultWithArrayReturnsValue() {
+        $this->assertEquals("world",
+                ArrayHelper::getValueOrDefault(
+                        ["hello" => "world"], "hello", "foobar")
+        );
+    }
+
 }

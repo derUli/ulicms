@@ -1,11 +1,11 @@
 <?php
 
 class NetworkTest extends \PHPUnit\Framework\TestCase {
-
+    public function setUp(){
+        $_SERVER = [];
+	}
     public function tearDown() {
-        unset($_SERVER["HTTP_HOST"]);
-        unset($_SERVER["SERVER_NAME"]);
-        unset($_SERVER["HTTP_X_FORWARDED_HOST"]);
+        $_SERVER = [];
     }
 
     public function testGetHostWithoutProxyReturnsHttpHost() {

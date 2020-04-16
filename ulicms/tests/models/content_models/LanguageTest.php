@@ -8,13 +8,15 @@ class LanguageTest extends \PHPUnit\Framework\TestCase {
 
 	public function setUp() {
 		$this->initialDefaultLanguage = Settings::get("default_language");
-		$this->tearDown();
 
 		Settings::set("default_language", "de");
+                
+                $_SESSION["language"] = [];
 	}
 
 	public function tearDown() {
-		unset($_SESSION["language"]);
+		
+                $_SESSION["language"] = [];
 
 		$sql = "delete from `{prefix}languages` where language_code <> 'de' and language_code <> 'en'";
 		Database::query($sql, true);

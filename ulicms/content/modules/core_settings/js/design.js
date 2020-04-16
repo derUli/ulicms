@@ -4,7 +4,7 @@
 
 // show a message if a "design for mobile devices" is set but
 // Mobile_Detect is not installed
-initMobileDetectNotice = () => {
+const initMobileDetectNotice = () => {
     if ($("select[name='mobile_theme']").val() !== ""
             && $("#mobile_detect_notice").data("installed") === false) {
         $("#mobile_detect_notice").slideDown();
@@ -13,9 +13,8 @@ initMobileDetectNotice = () => {
     }
 };
 
-loadThemePreview = (selectField) => {
+const loadThemePreview = (selectField) => {
     const url = $(selectField).find("option:selected").data("preview-url");
-
     const targetElement = $($(selectField).data("preview-target-element"));
 
     if (!url) {
@@ -43,12 +42,14 @@ loadThemePreview = (selectField) => {
 };
 
 // show a privacy warning if a google font is selected
-updateFontPreview = () => {
+const updateFontPreview = () => {
     const fontFamily = $("select#default_font").val();
     const fontSize = $("select#font-size").val();
     const googleFont = $("#google-fonts select").val();
+
     if (fontFamily === "google") {
         $("div#google-fonts").slideDown();
+
         const url = $("#font-preview").data("google-font-url") +
                 encodeURIComponent(googleFont);
         if ($("#google-font-loader").length) {
@@ -71,10 +72,8 @@ updateFontPreview = () => {
 $(() => {
     $("#mobile_detect_notice").hide();
     initMobileDetectNotice();
-    $("select[name='mobile_theme']").change(() => {
-        initMobileDetectNotice();
-    });
 
+    $("select[name='mobile_theme']").change(initMobileDetectNotice);
     $("select#default_font, select#font-size, #google-fonts select")
             .change(updateFontPreview);
 

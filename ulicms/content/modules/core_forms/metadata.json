@@ -1,9 +1,15 @@
 {
-    "version": "2019.2",
+    "version": "2020.2",
     "source": "core",
     "embed": false,
     "shy": false,
     "main_class": "CoreForms",
+    "custom_acl":
+            [
+                "forms",
+                "forms_create",
+                "forms_edit"
+            ],
     "controllers": {
         "CoreForms": "controllers/CoreForms.php",
         "FormController": "controllers/FormController.php"

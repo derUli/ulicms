@@ -2,9 +2,13 @@
 
 class CsrfTokenTest extends \PHPUnit\Framework\TestCase {
 
+	public function setUp(){
+			$_SESSION = [];
+			$_REQUEST = [];
+	}
     public function tearDown() {
-        unset($_SESSION["csrf_token"]);
-        unset($_REQUEST["csrf_token"]);
+        $_SESSION = [];
+        $_REQUEST = [];
     }
 
     public function testCheckCsrfTokenValid() {
@@ -14,20 +18,15 @@ class CsrfTokenTest extends \PHPUnit\Framework\TestCase {
         $_REQUEST["csrf_token"] = $token;
 
         $this->assertTrue(check_csrf_token());
-
-        unset($_SESSION["csrf_token"]);
-        unset($_REQUEST["csrf_token"]);
     }
 
     public function testCheckCsrfTokenInvalid() {
         $token = get_csrf_token();
         $_REQUEST["csrf_token"] = "thisisnotthetoken";
         $this->assertFalse(check_csrf_token());
-        unset($_SESSION["csrf_token"]);
     }
 
     public function testCheckCsrfTokenNoToken() {
-        unset($_SESSION["csrf_token"]);
         $this->assertFalse(check_csrf_token());
     }
 

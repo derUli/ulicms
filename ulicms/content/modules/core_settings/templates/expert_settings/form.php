@@ -12,24 +12,28 @@ if ($permissionChecker->hasPermission("expert_settings") and $permissionChecker-
     }
     ?>
     <?php echo ModuleHelper::buildMethodCallForm("ExpertSettingsController", "save"); ?>
-    <p>
-        <a href="<?php echo ModuleHelper::buildActionURL("other_settings"); ?>"
-           class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
-    </p>
-    <strong><?php translate("option"); ?></strong>
-    <br />
-    <input type="text" name="name" value="<?php Template::escape($name) ?>"
-    <?php if ($name) echo "readonly"; ?>
-           >
-    <br />
-    <br />
-    <strong><?php translate("value"); ?>
-    </strong>
-    <br />
-    <textarea name="value" rows=15 cols=80><?php Template::escape($value); ?></textarea>
-    <br />
-    <br />
-    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> <?php translate("create_option"); ?></button>
+    <a href="<?php echo ModuleHelper::buildActionURL("other_settings"); ?>"
+       class="btn btn-default btn-back">
+        <i class="fa fa-arrow-left"></i>
+        <?php translate("back") ?>
+    </a>
+    <div class="field">
+        <strong><?php translate("option"); ?></strong>
+        <input type="text" name="name" value="<?php esc($name) ?>"
+        <?php if ($name) echo "readonly"; ?>
+               >
+    </div>
+    <div class="field">
+        <strong><?php translate("value"); ?>
+        </strong>
+        <textarea name="value" rows=15 cols=80><?php esc($value); ?></textarea>
+    </div>
+    <div class="voffset2">
+        <button type="submit" class="btn btn-primary">
+            <i class="fa fa-save"></i>
+            <?php translate("create_option"); ?>
+        </button>
+    </div>
     <?php
     echo ModuleHelper::endForm();
 } else {

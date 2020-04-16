@@ -3,27 +3,30 @@ $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("motd")) {
     $editor = get_html_editor();
     ?>
-    <p>
+    <div class="field">
         <a
             href="<?php echo ModuleHelper::buildActionURL("settings_categories"); ?>"
             class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
-    </p>
+    </div>
     <h2><?php translate("motd"); ?></h2>
     <?php
     $languages = getAllLanguages(true);
     if (Request::getVar("save")) {
         ?>
-        <p>
+        <div class="field">
             <?php translate("motd_was_changed"); ?>
-        </p>
+        </div>
     <?php } ?>
     <?php
     echo ModuleHelper::buildMethodCallForm("MOTDController", "save", [], "post", array(
         "id" => "motd_form"
     ));
     ?>
-    <p>
-        <strong><?php translate("language"); ?></strong> <br /> <select
+    <div class="field">
+        <strong class="field-label">
+            <?php translate("language"); ?>
+        </strong> 
+        <select
             name="language" id="language">
             <option value=""
             <?php
@@ -42,19 +45,21 @@ if ($permissionChecker->hasPermission("motd")) {
                 ?>><?php Template::escape(getLanguageNameByCode($language)); ?></option>
                     <?php } ?>
         </select>
-    </p>
+    </div>
     <?php
     csrf_token_html();
     ?>
-    <p>
+    <div class="field">
         <textarea class="<?php esc($editor); ?>" data-mimetype="text/html"
                   name="motd" id="motd" cols=60 rows=15><?php
                       esc(Request::getVar("language") ? Settings::get("motd_" . Request::getVar("language")) : Settings::get("motd"));
                       ?></textarea>
-    </p>
-    <button type="submit" name="motd_submit"
-            class="btn btn-primary voffset2">
-        <i class="fa fa-save"></i> <?php translate("save_changes"); ?></button>
+    </div>
+    <div class="voffset2">
+        <button type="submit" name="motd_submit"
+                class="btn btn-primary ">
+            <i class="fa fa-save"></i> <?php translate("save_changes"); ?></button>
+    </div>
     <?php
     $translation = new JSTranslation();
     $translation->addKey("changes_was_saved");

@@ -2,7 +2,7 @@
    class="btn btn-info" role="button"><i class="fa fa-arrow-left"></i>
     <?php translate("back") ?></a>
 <h2><?php translate("license"); ?></h2>
-Copyright (c) 2011 - 2019, Ulrich Schmidt
+Copyright (c) 2011 - 2020, Ulrich Schmidt
 <br>
 All rights reserved.
 <p>Redistribution and use in source and binary forms, with or without

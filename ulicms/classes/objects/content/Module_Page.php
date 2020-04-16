@@ -5,6 +5,7 @@ class Module_Page extends Page {
 
     public $type = "module";
     public $module = null;
+    public $text_position = 'after';
 
     protected function fillVars($result = null) {
         parent::fillVars($result);

@@ -9,57 +9,77 @@ if (!$permissionChecker->hasPermission("forms")
 } else {
     $forms = Forms::getAllForms();
     $pages = getAllPages();
-    ?><p>
+    ?><div class="field">
         <a href="<?php echo ModuleHelper::buildActionURL("forms"); ?>"
            class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i>
             <?php translate("back") ?></a>
-    </p>
+    </div>
     <h1><?php translate("create_form"); ?></h1>
     <?php echo ModuleHelper::buildMethodCallForm("FormController", "create"); ?>
-    <p>
-        <strong><?php translate("name"); ?>*</strong><br />
+    <div class="field">
+        <strong class="field-label"><?php translate("name"); ?>*</strong>
         <input type="text" value="" name="name" required />
-    </p>
-    <p>
-        <strong><?php translate("enabled"); ?></strong><br /> <select
+    </div>
+    <div class="field">
+        <strong class="field-label">
+            <?php translate("enabled"); ?>
+        </strong>
+        <select
             name="enabled">
             <option value="1" selected><?php translate("yes"); ?></option>
             <option value="0"><?php translate("no"); ?></option>
         </select>
-    </p>
+    </div>
 
-    <p>
-        <strong><?php translate("email_to"); ?>*</strong><br /> <input
+    <div class="field">
+        <strong class="field-label">
+            <?php translate("email_to"); ?>*
+        </strong>
+        <input
             type="email" value="" name="email_to" required />
-    </p>
+    </div>
 
-    <p>
-        <strong><?php translate("subject"); ?>*</strong><br /> <input
+    <div class="field">
+        <strong class="field-label">
+            <?php translate("subject"); ?>*
+        </strong>
+        <input
             type="text" value="" name="subject" required />
-    </p>
-    <p>
-        <strong><?php translate("category"); ?></strong><br />
+    </div>
+    <div class="field">
+        <strong class="field-label">
+            <?php translate("category"); ?>
+        </strong>
         <?php
         echo Categories::getHTMLSelect();
-        ?></p>
+        ?></div>
 
-    <p>
-        <strong><?php translate("fields"); ?></strong><br />
+    <div class="field">
+        <strong class="field-label">
+            <?php translate("fields"); ?>
+        </strong>
         <textarea name="fields" rows="10"></textarea>
-    </p>
-    <p>
-        <strong><?php translate("required_fields"); ?></strong><br />
+    </div>
+    <div class="field">
+        <strong class="field-label">
+            <?php translate("required_fields"); ?>
+        </strong>
         <textarea name="required_fields" rows="10"></textarea>
-    </p>
+    </div>
 
-    <p>
-        <strong><?php translate("mail_from_field"); ?></strong><br /> <input
+    <div class="field">
+        <strong class="field-label">
+            <?php translate("mail_from_field"); ?>
+        </strong>
+        <input
             type="text" value="" name="mail_from_field" />
-    </p>
+    </div>
 
 
-    <p>
-        <strong><?php translate("target_page_id"); ?></strong><br /> <select
+    <div class="field">
+        <strong class="field-label">
+            <?php translate("target_page_id"); ?></strong>
+        <select
             name="target_page_id">
                 <?php foreach ($pages as $page) { ?>
                 <option value="<?php echo $page["id"]; ?>"><?php
@@ -67,15 +87,15 @@ if (!$permissionChecker->hasPermission("forms")
                             $page["title"]
                     );
                     ?></option>
-    <?php } ?>
-
-
+            <?php } ?>
         </select>
-    </p>
-    <p>
+    </div>
+    <div class="voffset2">
         <button name="create_form" type="submit" class="btn btn-primary">
-            <i class="fas fa-save"></i> <?php translate("create"); ?></button>
-    </p>
+            <i class="fas fa-save"></i>
+            <?php translate("save"); ?>
+        </button>
+    </div>
     <?php
     echo ModuleHelper::endForm();
 }

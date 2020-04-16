@@ -12,25 +12,27 @@ if ($commentableContentTypeSettings) {
     $commentableContentTypes = splitAndTrim($commentableContentTypeSettings);
 }
 ?>
-<p>
     <a
         href="<?php echo ModuleHelper::buildActionURL("settings_categories"); ?>"
         class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
-</p>
+
 <?php if (Request::getVar("save")) { ?>
-    <div class="alert alert-success alert-dismissable fade in">
+    <div class="alert alert-success alert-dismissable fade in voffset3">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <?php translate("changes_was_saved") ?>
     </div>
 <?php } ?>
 <?php echo ModuleHelper::buildMethodCallForm(CommunitySettingsController::class, "save"); ?>
 <h1><?php translate("comments") ?></h1>
+<div class="field">
 <div class="checkbox">
     <label><?php
         echo UliCMS\HTML\Input::checkBox("comments_enabled", boolval(Settings::get("comments_enabled")), "1",
                 array("class" => "js-switch"));
         ?><?php translate("comments_enabled") ?></label>
 </div>
+</div>
+<div class="field">
 <div class="checkbox">
     <label><?php
         echo UliCMS\HTML\Input::checkBox("comments_must_be_approved", boolval(Settings::get("comments_must_be_approved")),
@@ -38,15 +40,16 @@ if ($commentableContentTypeSettings) {
                 array("class" => "js-switch"));
         ?><?php translate("comments_must_be_approved") ?></label>
 </div>
-<div class="form-group">
+</div>
+<div class="field">
     <label for="commentable_content_types[]"><?php translate("commentable_content_types") ?></label>
     <?php
     echo UliCMS\HTML\Input::multiSelect("commentable_content_types[]", $commentableContentTypes, $typeSelection, 5);
     ?>
 </div>
-<p>
+<div class="voffset2">
     <button type="submit" class="btn btn-primary">
         <i class="fa fa-save"></i> <?php translate("save"); ?></button>
-</p>
+</div>
 <?php
 echo ModuleHelper::endForm();

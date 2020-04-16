@@ -6,6 +6,7 @@ use LasseRafn\InitialAvatarGenerator\InitialAvatar;
 use UliCMS\Exceptions\NotImplementedException;
 use UliCMS\Security\PermissionChecker;
 use UliCMS\Security\Encryption;
+use UliCMS\Models\Users\GroupCollection;
 
 class User extends Model {
 
@@ -310,7 +311,7 @@ class User extends Model {
     }
 
     public function getFullName(): string {
-        return (!empty($this->firstname) and ! empty($this->lastname)) ?
+        return (!empty($this->firstname) and !empty($this->lastname)) ?
                 "{$this->firstname} {$this->lastname}" : "";
     }
 
@@ -458,7 +459,6 @@ class User extends Model {
         if (is_null($this->id)) {
             return;
         }
-        $time = intval($time);
         $sql = "update {prefix}users set failed_logins = failed_logins + 1 "
                 . "where id = ?";
         $args = array(
@@ -471,7 +471,6 @@ class User extends Model {
         if (is_null($this->id)) {
             return;
         }
-        $time = intval($time);
         $sql = "update {prefix}users set failed_logins = ? "
                 . "where id = ?";
         $args = array(
@@ -485,7 +484,6 @@ class User extends Model {
         if (is_null($this->id)) {
             return;
         }
-        $time = intval($time);
         $sql = "update {prefix}users set failed_logins = ? where id = ?";
         $args = array(
             $amount,
@@ -581,6 +579,10 @@ class User extends Model {
         $groups = array_merge($primaryGroup, $secondaryGroups);
         $groups = array_filter($groups);
         return array_values($groups);
+    }
+
+    public function getGroupCollection(): GroupCollection {
+        return new GroupCollection($this);
     }
 
     public function addSecondaryGroup($val): void {
@@ -681,6 +683,34 @@ class User extends Model {
     public function hasProcessedAvatar(): bool {
         return ($this->getProcessedAvatarPath() and
                 file_exists($this->getProcessedAvatarPath()));
+    }
+
+    public function isOnline(): bool {
+        $onlineUsers = self::getOnlineUsers();
+        
+        foreach ($onlineUsers as $user) {
+            if ($user->getUserName() == $this->getUsername()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function isCurrent(): bool {
+        return $this->getId() and $this->getId() == get_user_id();
+    }
+
+    public static function getOnlineUsers(): array {
+        $query = Database::selectAll(
+                        "users",
+                        ["id"],
+                        "last_action > " . (time() - 300) . " ORDER BY username");
+
+        $users = [];
+        while ($row = Database::fetchObject($query)) {
+            $users[] = new self($row->id);
+        }
+        return $users;
     }
 
 }

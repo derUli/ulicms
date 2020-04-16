@@ -73,10 +73,13 @@ class HomeController extends Controller {
     }
 
     public function onlineUsers(): void {
+        ViewBag::set("users", User::getOnlineUsers());
+        
         $html = Template::executeModuleTemplate("core_home", "online_users.php");
         $options = array(
             'optimizationLevel' => HTMLMinify::OPTIMIZATION_ADVANCED
         );
+
         $HTMLMinify = new HTMLMinify($html, $options);
         $html = $HTMLMinify->process();
         HtmlResult($html);

@@ -28,26 +28,26 @@ if (!$permissionChecker->hasPermission("performance_settings")) {
             <?php translate("changes_was_saved"); ?>
         </div>
     <?php } ?>
-    <p>
-        <a
-            href="<?php
-            echo ModuleHelper::buildActionURL(
-                    "settings_categories");
-            ?>"
-            class="btn btn-default btn-back">
-            <i class="fas fa-arrow-left"></i>
-            <?php translate("back") ?></a>
-        <a
-            href="<?php
-            echo ModuleHelper::buildMethodCallUrl(
-                    "PerformanceSettingsController",
-                    "clearCache");
-            ?>"
-            class="btn btn-warning pull-right">
-            <i class="fas fa-broom"></i>
-            <?php translate("clear_cache"); ?></a>
-    </p>
-    <h1><?php translate("performance"); ?></h1>
+
+    <a
+        href="<?php
+        echo ModuleHelper::buildActionURL(
+                "settings_categories");
+        ?>"
+        class="btn btn-default btn-back">
+        <i class="fas fa-arrow-left"></i>
+        <?php translate("back") ?></a>
+    <a
+        href="<?php
+        echo ModuleHelper::buildMethodCallUrl(
+                "PerformanceSettingsController",
+                "clearCache");
+        ?>"
+        class="btn btn-warning pull-right">
+        <i class="fas fa-broom"></i>
+        <?php translate("clear_cache"); ?></a>
+
+    <h2><?php translate("performance"); ?></h2>
     <?php
     echo ModuleHelper::buildMethodCallForm(
             "PerformanceSettingsController",
@@ -59,39 +59,43 @@ if (!$permissionChecker->hasPermission("performance_settings")) {
             ]
     );
     ?>
-    <h2><?php translate("page_cache"); ?></h2>
-    <div class="label">
-        <label for="cache_enabled">
-            <?php translate("cache_enabled"); ?>
-        </label>
+    <h3><?php translate("page_cache"); ?></h3>
+    <div class="field">
+        <div class="label">
+            <label for="cache_enabled">
+                <?php translate("cache_enabled"); ?>
+            </label>
+        </div>
+        <div class="inputWrapper">
+            <input type="checkbox" id="cache_enabled" name="cache_enabled"
+                   class="js-switch"
+                   value="cache_enabled"
+                   <?php
+                   if ($cache_enabled)
+                       echo " checked=\"checked\"";
+                   ?>>
+        </div>
     </div>
-    <div class="inputWrapper">
-        <input type="checkbox" id="cache_enabled" name="cache_enabled"
-               class="js-switch"
-               value="cache_enabled"
-               <?php
-               if ($cache_enabled)
-                   echo " checked=\"checked\"";
-               ?>>
+    <div class="field">
+        <div class="label">
+            <?php
+            translate("CACHE_VALIDATION_DURATION");
+            ?>
+        </div>
+        <div class="inputWrapper">
+            <input type="number" name="cache_period" min="0" max="20160"
+                   value="<?php
+                   echo $cache_period;
+                   ?>">
+                   <?php translate("minutes"); ?>
+        </div>
     </div>
-    <div class="label">
-        <?php
-        translate("CACHE_VALIDATION_DURATION");
-        ?>
-    </div>
-    <div class="inputWrapper">
-        <input type="number" name="cache_period" min="0" max="20160"
-               value="<?php
-               echo $cache_period;
-               ?>">
-               <?php translate("minutes"); ?>
-    </div>
-    <p>
-        <button type="submit" name="submit" class="btn btn-primary voffset3">
+    <div class="voffset2">
+        <button type="submit" name="submit" class="btn btn-primary">
             <i class="fa fa-save"></i>
             <?php translate("save_changes"); ?>
         </button>
-    </p>
+    </div>
     <?php
     echo ModuleHelper::endForm();
 

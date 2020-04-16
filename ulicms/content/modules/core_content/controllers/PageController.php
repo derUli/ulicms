@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 use UliCMS\CoreContent\Models\ViewModels\DiffViewModel;
@@ -8,11 +7,14 @@ use UliCMS\Models\Content\VCS;
 use UliCMS\Models\Content\Types\DefaultContentTypes;
 use Rakit\Validation\Validator;
 use UliCMS\Security\PermissionChecker;
+use function UliCMS\Security\XSSProtection\stripTags;
 use UliCMS\Models\Content\TypeMapper;
 use UliCMS\Constants\LinkTarget;
 use UliCMS\Utils\CacheUtil;
 use zz\Html\HTMLMinify;
 use function UliCMS\HTML\stringContainsHtml;
+use const UliCMS\Constants\HTML5_ALLOWED_TAGS;
+use UliCMS\HTML\ListItem;
 
 class PageController extends Controller {
 
@@ -60,12 +62,11 @@ class PageController extends Controller {
     }
 
     public function editPost(): void {
-
         $this->validateInput();
 
         $permissionChecker = new PermissionChecker(get_user_id());
         $model = TypeMapper::getModel(Request::getVar("type"));
-        $model->loadById(Request::getVar("page_id"));
+        $model->loadById(Request::getVar("page_id", null, "int"));
 
         $model->type = Request::getVar("type");
 
@@ -106,13 +107,18 @@ class PageController extends Controller {
         $model->hidden = Request::getVar("hidden", false, "bool");
         $model->content = Request::getVar("content");
 
-        $group = Group::getCurrentGroup();
-        if (Stringhelper::isNotNullOrWhitespace($group->getAllowableTags())) {
-            $model->content = strip_tags(
-                    $model->content,
-                    $group->getAllowableTags()
-            );
+        $user = User::fromSessionData();
+        $groupCollection = $user->getGroupCollection();
+
+        // get allowed tags of all groups assigned to the current user
+        $allowedTags = $groupCollection ?
+                $groupCollection->getAllowableTags() : HTML5_ALLOWED_TAGS;
+
+        // remove all html tags except the explicitly allowed tags
+        if (Stringhelper::isNotNullOrWhitespace($allowedTags)) {
+            $model->content = stripTags($model->content, $allowedTags);
         }
+
         $model->category_id = Request::getVar("category_id", 1, "int");
         $model->link_url = Request::getVar("link_url", NULL, "str");
         $model->menu = Request::getVar("menu", "not_in_menu", "str");
@@ -123,6 +129,7 @@ class PageController extends Controller {
                 Request::getVar("custom_data", "{}", "str"),
                 false
         );
+
         $model->theme = Request::getVar("theme", NULL, "str");
 
         if ($model instanceof Node) {
@@ -209,10 +216,10 @@ class PageController extends Controller {
             $model->getPermissions()->setEditRestriction(
                     $object,
                     boolval(
-					Request::getVar(
-                            "only_{$object}_can_edit", false, "bool"
+                            Request::getVar(
+                                    "only_{$object}_can_edit", false, "bool"
+                            )
                     )
-				)
             );
         }
 
@@ -296,9 +303,9 @@ class PageController extends Controller {
     }
 
     public function undeletePost(): void {
-        $page = Request::getVar("page");
+        $id = Request::getVar("id", null, "int");
         do_event("before_undelete_page");
-        $content = ContentFactory::getByID($page);
+        $content = ContentFactory::getByID($id);
         if ($content->id === null) {
             ExceptionResult(get_translation("not_found"));
         }
@@ -314,8 +321,9 @@ class PageController extends Controller {
     }
 
     public function deletePost(): void {
-        $page = Request::getVar("page");
+        $page = Request::getVar("id", null, "int");
         do_event("before_delete_page");
+        
         $content = ContentFactory::getByID($page);
         if ($content->id === null) {
             ExceptionResult(get_translation("not_found"));
@@ -405,7 +413,8 @@ class PageController extends Controller {
         if ($this->checkIfSlugIsFree(
                         $_REQUEST["slug"],
                         $_REQUEST["language"],
-                        intval($_REQUEST["id"])
+                        isset($_REQUEST["id"]) ?
+                                intval($_REQUEST["id"]) : 0
                 )) {
             TextResult("yes");
         }
@@ -458,10 +467,14 @@ class PageController extends Controller {
                         echo "selected";
                     }
                     ?>>
-                    <?php
+                        <?php
                         echo esc($page["title"]);
                         ?>
-                (ID: <?php echo $page["id"]; ?>)
+
+                <?php if (!Request::getVar("no_id")) {
+                    ?>
+                    (ID: <?php echo $page["id"]; ?>)
+                <?php } ?>
             </option>
             <?php
         }
@@ -474,6 +487,7 @@ class PageController extends Controller {
         $length = Request::getVar("length", 25, "int");
         $draw = Request::getVar("draw", 1, "int");
         $search = $_REQUEST["search"]["value"];
+        $filters = is_array($_REQUEST["filters"]) ? $_REQUEST["filters"] : [];
 
         // if the client requested sorting apply it
         $order = is_array($_REQUEST["order"]) ? $_REQUEST["order"][0] : null;
@@ -485,6 +499,7 @@ class PageController extends Controller {
                 $length,
                 $draw,
                 $search,
+                $filters,
                 $this->getPagesListView(),
                 $order
         );
@@ -526,6 +541,162 @@ class PageController extends Controller {
     public function getCKEditorLinkList(): void {
         $data = getAllPagesWithTitle();
         JSONResult($data, HttpStatusCode::OK, true);
+    }
+
+    public function toggleFilters(): void {
+        $settingsName = "user/" . get_user_id() . "/show_filters";
+        if (Settings::get($settingsName)) {
+            Settings::delete($settingsName);
+            JsonResult(false);
+        } else {
+            Settings::set($settingsName, "1");
+            JsonResult(true);
+        }
+    }
+
+    protected function getGroupAssignedLanguages(): array {
+        $permissionChecker = new PermissionChecker(get_user_id());
+        return array_map(
+                function($lang) {
+            return $lang->getLanguageCode();
+        },
+                $permissionChecker->getLanguages());
+    }
+
+    public function getLanguageSelection(): array {
+        $languages = getAllUsedLanguages();
+
+        $selectItems = [];
+
+        $userLanguages = $this->getGroupAssignedLanguages();
+
+        $selectItems[] = new ListItem(null, "[" . get_translation("all") . "]");
+        foreach ($languages as $language) {
+
+            $item = new ListItem(
+                    $language,
+                    getLanguageNameByCode($language)
+            );
+            if (count($userLanguages) and !in_array($language, $userLanguages)) {
+                continue;
+            }
+
+            $selectItems[] = $item;
+        }
+        return $selectItems;
+    }
+
+    public function getTypeSelection(): array {
+        $types = get_used_post_types();
+        $selectItems = [];
+        $selectItems[] = new ListItem(null, "[" . get_translation("all") . "]");
+
+        foreach ($types as $type) {
+            $item = new ListItem(
+                    $type,
+                    get_translation($type)
+            );
+            $selectItems[] = $item;
+        }
+        return $selectItems;
+    }
+
+    public function getMenuSelection(): array {
+        $menus = get_all_used_menus();
+        $selectItems = [];
+        $selectItems[] = new ListItem(null, "[" . get_translation("all") . "]");
+
+        foreach ($menus as $menu) {
+            $item = new ListItem(
+                    $menu,
+                    get_translation($menu)
+            );
+            $selectItems[] = $item;
+        }
+        return $selectItems;
+    }
+
+    public function getCategorySelection(): array {
+        $selectItems = [];
+        $selectItems[] = new ListItem(null, "[" . get_translation("all") . "]");
+
+        $query = Database::selectAll(
+                        "categories",
+                        ["id", "name"],
+                        "id in (select category_id from {prefix}content)",
+                        [],
+                        true,
+                        "name"
+        );
+
+        while ($row = Database::fetchObject($query)) {
+            $selectItems[] = new ListItem($row->id, $row->name);
+        }
+        return $selectItems;
+    }
+
+    public function getParentIds(
+            ?string $language = null,
+            ?string $menu = null
+    ): array {
+        $where = "parent_id is not null";
+
+        if ($menu) {
+            $where .= " and menu = '" . Database::escapeValue($menu) . "'";
+        }
+
+        if ($language) {
+            $where .= " and language = '" . Database::escapeValue($language) . "'";
+        }
+        
+
+        $groupLanguages = $this->getGroupAssignedLanguages();
+        if (count($groupLanguages)) {
+            $groupLanguages = array_map(function($lang) {
+                return "'" . Database::escapeValue($lang) . "'";
+            }
+                    , $groupLanguages);
+            $where .= " and language in (" . implode(",", $groupLanguages) . ")";
+        }
+
+        $query = Database::selectAll(
+                        "content",
+                        ["distinct parent_id as id"],
+                        $where
+        );
+        $parentIds = [];
+        while ($row = Database::fetchObject($query)) {
+
+            $parentIds[] = intval($row->id);
+        }
+        return $parentIds;
+    }
+
+    public function getParentSelection(): void {
+        $language = Request::getVar("language", null, "str");
+        $menu = Request::getVar("menu", null, "str");
+
+        $parentIds = $this->getParentIds($language, $menu);
+
+        $selectItems = [];
+        $selectItems[] = new ListItem(null, "[" . get_translation("all") . "]");
+
+        foreach ($parentIds as $parentId) {
+            $item = new ListItem(
+                    $parentId,
+                    _esc(getPageTitleByID($parentId))
+            );
+            $selectItems[] = $item->getHtml();
+        }
+        HTMLResult(implode("", $selectItems));
+    }
+
+    public function getBooleanSelection(): array {
+        return [
+            new ListItem(null, "[" . get_translation("all") . "]"),
+            new ListItem("1", get_translation("yes")),
+            new ListItem("0", get_translation("no"))
+        ];
     }
 
 }

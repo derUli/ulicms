@@ -1,12 +1,12 @@
 /* global Translation */
 
 $(() => {
-    $("select#language").change(
-            () => {
+    $("select#language").change(() => {
         const url = "index.php?action=motd&language="
                 + $("select#language option:selected").val();
         location.replace(url);
     });
+
     $("#motd_form").ajaxForm(
             {
                 beforeSubmit: () => {

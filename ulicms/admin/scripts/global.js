@@ -1,4 +1,4 @@
-/* global bootbox, PasswordSecurityTranslation, MenuTranslation */
+/* global bootbox, PasswordSecurityTranslation, MenuTranslation, zenscroll */
 
 // Internet Exploder caches AJAX requests by default
 $(document).ready(() => {
@@ -25,12 +25,17 @@ $(() => {
     bootbox.setDefaults({
         locale: $("html").data("select2-language")
     });
+
     // toggle hamburger menu
     $("#menu-toggle").click(() =>
         $(".mainmenu").slideToggle()
     );
+
     // clear-cache shortcut icon
-    $("#menu-clear-cache").click(() => {
+    $("#menu-clear-cache").click((event) => {
+        event.preventDefault();
+        event.stopPropagation();
+
         $("#menu-clear-cache").hide();
         $("#menu-clear-cache-loading").show();
         const url = $("#menu-clear-cache").data("url");
@@ -39,14 +44,17 @@ $(() => {
             $("#menu-clear-cache-loading").hide();
         });
     });
+
     // Add bootstrap css class to tablesorter
     $.extend($.fn.dataTableExt.oStdClasses, {
         sFilterInput: "form-control",
         sLengthSelect: "form-control"
     });
+
     $(".select-on-click").click((event) =>
         $(event.target).select()
     );
+
     // Disabled a link-buttons must not be clickable
     $("a").click((event) => {
         const target = $(event.currentTarget);
@@ -54,7 +62,9 @@ $(() => {
             event.preventDefault();
         }
     });
+
     initDataTables("body");
+    
     // password security check
     if (typeof $(".password-security-check").password !== "undefined") {
         $(".password-security-check").password({
@@ -73,7 +83,7 @@ $(() => {
             minimumLength: 4 // minimum password length (below this threshold, the score is 0)
         });
     }
-// Links to upcoming features
+    // Links to upcoming features
 
     $(".coming-soon").click((event) => {
         event.preventDefault();
@@ -125,16 +135,33 @@ $(() => {
         width: "100%",
         language: language
     });
+
     // Toggle switches for some checkboxes
     $(".js-switch").bootstrapToggle({
         on: MenuTranslation.On,
         off: MenuTranslation.Off
     });
+
+    // bootstrap-toggle doesn't react to click on the label of a toggle switch
+    // This is a long standing issue that is still not fixed.
+    // https://github.com/minhur/bootstrap-toggle/issues/23
+    // just wrap the clickable text in an element with this css class
+    // to make it clickable
+    $(".js-switch-label").click((event) => {
+        const target = $(event.target);
+        const theSwitch = target.closest('.checkbox').find(".js-switch");
+        if (theSwitch && theSwitch.length) {
+            theSwitch.bootstrapToggle('toggle');
+        }
+
+    });
+
     $.datetimepicker.setLocale(language);
     $(".datepicker").datetimepicker({
         format: "Y-m-d",
         timepicker: false
     });
+
     // User has to confirm logout
     $("a.backend-menu-item-logout").click((event) => {
         event.preventDefault();
@@ -158,7 +185,17 @@ $(() => {
 
     // scroll to top arrow at bottom right
     $("#scroll-to-top").click((event) => {
-		event.preventDefault();
+        event.preventDefault();
+        event.stopPropagation();
+
         zenscroll.toY(0);
+    });
+
+    $(".more-options-toggle").click((event) => {
+        const target = $(event.target);
+        const toggleTarget = $(target.data("target"));
+
+        toggleTarget.slideToggle()
+
     });
 });

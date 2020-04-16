@@ -85,7 +85,8 @@ class Template {
 
     public static function getHomepageOwner(): string {
         $homepage_title = Settings::getLanguageSetting(
-                        "homepage_owner", $_SESSION["language"]
+                        "homepage_owner",
+                        getFrontendLanguage()
         );
         return _esc($homepage_title);
     }
@@ -176,7 +177,7 @@ class Template {
     public static function getSiteSlogan(): string {
         // Existiert ein Motto für diese Sprache?
         // z.B. site_slogan_en
-        $site_slogan = Settings::get("site_slogan_" . $_SESSION["language"]);
+        $site_slogan = Settings::get("site_slogan_" . getFrontendLanguage());
 
         // Ansonsten Standard Motto
         if (!$site_slogan) {
@@ -500,7 +501,7 @@ color: " . Settings::get("body-text-color") . ";
                 db_query("UPDATE " . tbname("content") .
                         " SET views = views + 1 WHERE slug='" .
                         Database::escapeValue($_GET["slug"]) .
-                        "' AND language='" . db_escape($_SESSION["language"])
+                        "' AND language='" . db_escape(getFrontendLanguage())
                         . "'");
             }
         } else if (is_404()) {
@@ -530,11 +531,12 @@ color: " . Settings::get("body-text-color") . ";
         $data = CustomData::get();
         // it's possible to disable shortcodes for a page
         // define "disable_shortcodes in custom data / json
-        if (is_false($data["disable_shortcodes"])) {
+        if (!(isset($data["disable_shortcodes"]) and is_true($data["disable_shortcodes"]))) {
             $htmlContent = replaceShortcodesWithModules($htmlContent);
-            $htmlContent = apply_filter($htmlContent, "content");
+            $htmlContent = replaceOtherShortCodes($htmlContent);
         }
-        return $htmlContent;
+        $htmlContent = apply_filter($htmlContent, "content");
+        return trim($htmlContent);
     }
 
     public static function languageSelection() {
@@ -573,7 +575,7 @@ color: " . Settings::get("body-text-color") . ";
         if (!is_200()) {
             return "";
         }
-        
+
         return Template::executeModuleTemplate(
                         "core_comments",
                         "comments.php"
