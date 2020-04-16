@@ -746,4 +746,7 @@ add_translation("unsupported_output_format",
 add_translation("mpdf_not_installed", "mPDF is not installed.\n"
         . "Please install mPDF from %link% to use the pdf output feature.");
 
+add_translation("copied_to_clipboard_success", "Copied to clipboard.");
+add_translation("copied_to_clipboard_failed", "Copy To clipboard failed.");
+
 do_event("lang_en");

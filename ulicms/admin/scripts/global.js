@@ -1,4 +1,4 @@
-/* global bootbox, PasswordSecurityTranslation, MenuTranslation, zenscroll */
+/* global bootbox, PasswordSecurityTranslation, MenuTranslation, zenscroll, vanillaToast, GlobalTranslation */
 
 // Internet Exploder caches AJAX requests by default
 $(document).ready(() => {
@@ -51,9 +51,18 @@ $(() => {
         sLengthSelect: "form-control"
     });
 
-    $(".select-on-click").click((event) =>
-        $(event.target).select()
-    );
+    // copy text from input to clipboard on click
+    $(".select-on-click").click((event) => {
+        const target = $(event.target);
+        copyTextToClipboard(
+                target.value,
+                () => vanillaToast.success(GlobalTranslation.CopiedToClipboardSuccess),
+                () => {
+            vanillaToast.error(GlobalTranslation.CopiedToClipboardFailed);
+            target.select();
+        }
+        );
+    });
 
     // Disabled a link-buttons must not be clickable
     $("a").click((event) => {
@@ -64,7 +73,7 @@ $(() => {
     });
 
     initDataTables("body");
-    
+
     // password security check
     if (typeof $(".password-security-check").password !== "undefined") {
         $(".password-security-check").password({

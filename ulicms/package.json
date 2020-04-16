@@ -15,6 +15,7 @@
         "password-strength-meter": "^2.1.0",
         "select2": "^4.0.13",
         "slug": "^2.1.1",
+        "vanilla-toast": "^0.5.0",
         "zenscroll": "*"
     },
     "license": "The BSD License",

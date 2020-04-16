@@ -13,7 +13,9 @@ $menuTranslation->render();
 
 $globalTranslation = new JsTranslation(
         [
-    "all"
+    "all",
+            "copied_to_clipboard_success",
+            "copied_to_clipboard_failed"
         ],
         "GlobalTranslation"
 );

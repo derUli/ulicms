@@ -455,7 +455,7 @@ div#google-fonts {
         .online-users {
             .online-user {
                 margin: 0 0 5px 0;
-                
+
                 &:last-child {
                     margin-bottom: 0;
                 }
@@ -970,4 +970,8 @@ iframe.kcfinder {
     border: 0;
     width: 100%;
     height: calc(100vh - 290px);
+}
+
+#vanilla-toast {
+    font-size: 1em;
 }

@@ -745,4 +745,7 @@ add_translation("mpdf_not_installed", "mPDF ist nicht installiert.\n"
         . "Bitte installieren Sie mPDF von %link% um das PDF-Ausgabe "
         . "Feature nutzen zu können.");
 
+add_translation("copied_to_clipboard_success", "Text wurde in die Zwischenablage kopiert.");
+add_translation("copied_to_clipboard_failed", "Kopieren des Textes fehlgeschlagen.");
+
 do_event("lang_de");

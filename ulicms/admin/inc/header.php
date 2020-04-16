@@ -33,6 +33,7 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
         ?>
         <?php
         $scripts = array(
+            "../node_modules/vanilla-toast/vanilla-toast.js",
             "../node_modules/jquery/dist/jquery.min.js",
             "../node_modules/jquery-datetimepicker/build/jquery.datetimepicker.full.js",
             "../node_modules/jquery-form/dist/jquery.form.min.js",
@@ -72,11 +73,13 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
               <?php
               $styles[] = "../node_modules/bootstrap/dist/css/bootstrap.min.css";
               $styles[] = "../node_modules/codemirror-minified/lib/codemirror.css";
+              $styles[] = "../node_modules/vanilla-toast/vanilla-toast.css";
               $styles[] = "css/modern.scss";
               $styles[] = "../node_modules/bootstrap-toggle/css/bootstrap-toggle.min.css";
               $styles[] = "../node_modules/select2/dist/css/select2.min.css";
               $styles[] = "../node_modules/jquery-datetimepicker/build/jquery.datetimepicker.min.css";
 
+              
               foreach ($styles as $style) {
                   enqueueStylesheet($style);
               }
