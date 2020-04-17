@@ -1,3 +1,7 @@
+===== Neues in UliCMS 2020.2.1 =====
+* Shortcodes von Modulen werden automatisch in die Zwischenablage kopiert
+* Seitenfilter Featurea aktiviert (experimentiell)
+
 ===== Neues in UliCMS 2020.2 =====
 
 Neue Features:

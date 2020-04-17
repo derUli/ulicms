@@ -7,9 +7,25 @@ class InfoController extends MainClass {
     const CHANGELOG_URL = "https://raw.githubusercontent.com/derUli/ulicms/master/doc/changelog.txt";
 
     public function changelog() {
-        HTMLResult("<h1 class=\"modal-headline\">Changelog</h1>
-            <hr/>
-            {$this->getChangelogInTextarea()}"
+        ViewBag::set(
+                "textarea_with_changelog",
+                $this->getChangelogInTextarea()
+        );
+        
+        HTMLResult(
+                Template::executeModuleTemplate(
+                        "core_info",
+                        "changelog.php"
+                )
+        );
+    }
+
+    public function license() {
+        HTMLResult(
+                Template::executeModuleTemplate(
+                        "core_info",
+                        "license.php"
+                )
         );
     }
 

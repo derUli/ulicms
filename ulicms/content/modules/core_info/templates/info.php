@@ -93,21 +93,30 @@ if (!$permissionChecker->hasPermission("info")) {
         is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"
                           title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
     </div>
-    <br />
-    <div class="btn-group">
+    <div class="btn-group voffset2">
         <a href="http://www.ulicms.de" target="_blank" class="btn btn-info"
            role="button"><i class="fa fa-globe" aria-hidden="true"></i> UliCMS
             Portal</a>
-        <a href="index.php?action=license" class="btn btn-info" role="button"><i
-                class="fa fa-info-circle" aria-hidden="true"></i>
-            <?php translate("license") ?></a>
+        <a
+            href="index.php?action=license"
+            class="btn btn-info remote-alert"
+            remote-alert"
+            data-url="<?php
+            echo ModuleHelper::buildMethodCallUrl(
+                    InfoController::class,
+                    "license"
+            );
+            ?>"
+            role="button"
+            ><i class="fa fa-info-circle" aria-hidden="true"></i>
+        <?php translate("license") ?></a>
         <a href="http://www.ulicms.de/kontakt.html" target="_blank"
            class="btn btn-info" role="button"><i class="fas fa-envelope"></i>
             Feedback</a>
 
         <a href="#" class="btn btn-info remote-alert"
            data-url="<?php echo ModuleHelper::buildMethodCallUrl(InfoController::class, "changelog"); ?>">
-           <i class="fab fa-readme"></i>
+            <i class="fab fa-readme"></i>
             Changelog
         </a>
     </div>

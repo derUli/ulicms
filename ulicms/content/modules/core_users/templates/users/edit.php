@@ -55,7 +55,7 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
             ?>
             <?php if ($user->hasProcessedAvatar()) {
                 ?>
-                <div class="checkbox field">
+                <div class="checkbox field voffset1">
                     <label>
                         <?php
                         echo UliCMS\HTML\Input::checkBox("delete_avatar", false, "1",
@@ -70,7 +70,7 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
                value="<?php
                echo $row->id;
                ?>">
-        <div class="field">
+        <div class="field voffset1">
             <strong class="field-label">
                 <?php translate("username"); ?>*
             </strong>

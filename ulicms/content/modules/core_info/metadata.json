@@ -9,11 +9,11 @@
         "info"
     ],
     "controller_function_permissions": {
-        "InfoController::changelog": "info"
+        "InfoController::changelog": "info",
+        "InfoController::license": "info"
     },
     "main_class": "InfoController",
     "actions": {
-        "info": "templates/info.php",
-        "license": "templates/license.php"
+        "info": "templates/info.php"
     }
 }
