@@ -43,7 +43,7 @@ class JSONCreator {
 
         $json_string = json_encode(
                 $data,
-                JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_FORCE_OBJECT
+                JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
         );
 
         if ($adapter) {
