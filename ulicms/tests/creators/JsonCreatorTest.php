@@ -16,6 +16,8 @@ class JsonCreatorTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function tearDown() {
+        clearCache();
+        
         if ($this->cacheDisabledOriginal) {
             Settings::set("cache_disabled", "yes");
         } else {
@@ -25,8 +27,8 @@ class JsonCreatorTest extends \PHPUnit\Framework\TestCase {
         Settings::set("cache_period", $this->cachePeriodOriginal);
 
         CacheUtil::resetAdapater();
-
-        unset($_SESSION["language"]);
+        
+              unset($_SESSION["language"]);
         unset($_GET["slug"]);
         unset($_SERVER["HTTP_USER_AGENT"]);
         unset($_SERVER["REQUEST_URI"]);

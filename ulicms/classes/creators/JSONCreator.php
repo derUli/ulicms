@@ -4,7 +4,11 @@ declare(strict_types=1);
 
 namespace UliCMS\Creators;
 
+use stdClass;
+use ContentFactory;
 use UliCMS\Utils\CacheUtil;
+use UliCMS\Exceptions\DatasetNotFoundException;
+use Page;
 
 // this class renders a content as csv
 class JSONCreator {
@@ -34,12 +38,25 @@ class JSONCreator {
         // generate the json
         $this->renderContent();
 
-        $data = [];
-        $data["title"] = $this->title;
-        $data["content"] = $this->content;
-        $data["meta_description"] = get_meta_description();
-        $data["meta_keywords"] = get_meta_keywords();
-        $data["data"] = get_custom_data();
+        $data = new stdClass;
+        $data->title = $this->title;
+        $data->content = $this->content;
+        $data->meta_description = get_meta_description();
+        $data->meta_keywords = get_meta_keywords();
+
+        try{
+        $page = ContentFactory::getBySlugAndLanguage(
+                        get_requested_pagename(),
+                        getCurrentLanguage(true)
+        );
+        } catch(DatasetNotFoundException $e){
+            $page = new Page();
+        }
+        
+        $data->data = $page->custom_data ? json_decode(
+                json_encode($page->custom_data,
+                        JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES),
+        ) : new stdClass();
 
         $json_string = json_encode(
                 $data,
