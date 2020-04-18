@@ -4,10 +4,10 @@ require_once "init.php";
 
 use UliCMS\Models\Content\Language;
 use UliCMS\Utils\CacheUtil;
-use UliCMS\Creators\CSVCreator;
-use UliCMS\Creators\JSONCreator;
-use UliCMS\Creators\PDFCreator;
-use UliCMS\Creators\PlainTextCreator;
+use UliCMS\Renderers\CsvRenderer;
+use UliCMS\Renderers\JsonRenderer;
+use UliCMS\Renderers\PdfRenderer;
+use UliCMS\Renderers\PlainTextRenderer;
 
 global $connection;
 
@@ -145,16 +145,16 @@ header($_SERVER["SERVER_PROTOCOL"] . " " . $status);
 if ($format == "html") {
     header("Content-Type: text/html; charset=utf-8");
 } else if ($format == "pdf") {
-    $pdf = new PDFCreator();
+    $pdf = new PdfRenderer();
     Result($pdf->render(), HttpStatusCode::OK, "application/pdf");
 } else if ($format == "csv") {
-    $csv = new CSVCreator();
+    $csv = new CsvRenderer();
     Result($csv->render(), HttpStatusCode::OK, "text/csv");
 } else if ($format == "json") {
-    $json = new JSONCreator();
+    $json = new JsonRenderer();
     RawJSONResult($json->render());
 } else if ($format == "txt") {
-    $plain = new PlainTextCreator();
+    $plain = new PlainTextRenderer();
     TextResult($plain->render());
 } else {
     ExceptionResult(

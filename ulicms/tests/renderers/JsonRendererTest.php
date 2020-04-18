@@ -1,9 +1,9 @@
 <?php
 
-use UliCMS\Creators\JSONCreator;
+use UliCMS\Renderers\JsonRenderer;
 use UliCMS\Utils\CacheUtil;
 
-class JsonCreatorTest extends \PHPUnit\Framework\TestCase {
+class JsonRendererTest extends \PHPUnit\Framework\TestCase {
 
     private $cacheDisabledOriginal;
     private $cachePeriodOriginal;
@@ -17,7 +17,7 @@ class JsonCreatorTest extends \PHPUnit\Framework\TestCase {
 
     public function tearDown() {
         clearCache();
-        
+
         if ($this->cacheDisabledOriginal) {
             Settings::set("cache_disabled", "yes");
         } else {
@@ -27,8 +27,8 @@ class JsonCreatorTest extends \PHPUnit\Framework\TestCase {
         Settings::set("cache_period", $this->cachePeriodOriginal);
 
         CacheUtil::resetAdapater();
-        
-              unset($_SESSION["language"]);
+
+        unset($_SESSION["language"]);
         unset($_GET["slug"]);
         unset($_SERVER["HTTP_USER_AGENT"]);
         unset($_SERVER["REQUEST_URI"]);
@@ -45,18 +45,18 @@ class JsonCreatorTest extends \PHPUnit\Framework\TestCase {
                 . "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 "
                 . "Safari/537.36";
         $expected = file_get_contents(
-                Path::resolve("ULICMS_ROOT/tests/fixtures/creators/json.json")
+                Path::resolve("ULICMS_ROOT/tests/fixtures/renderers/json.json")
         );
-        $creator = new JSONCreator();
+        $renderer = new JsonRenderer();
 
         $this->assertEquals(
                 normalizeLN($expected),
-                normalizeLN($creator->render())
+                normalizeLN($renderer->render())
         );
 
         $this->assertEquals(
                 normalizeLN($expected),
-                normalizeLN($creator->render())
+                normalizeLN($renderer->render())
         );
     }
 

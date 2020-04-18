@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace UliCMS\Creators;
+namespace UliCMS\Renderers;
 
 use Template;
 use ContentFactory;
 use UliCMS\Utils\CacheUtil;
 
 // this class renders a page as plain text
-class PlainTextCreator {
+class PlainTextRenderer {
 
     public $content = null;
 

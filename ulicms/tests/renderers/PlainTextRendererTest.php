@@ -1,9 +1,9 @@
 <?php
 
-use UliCMS\Creators\PlainTextCreator;
+use UliCMS\Renderers\PlainTextRenderer;
 use UliCMS\Utils\CacheUtil;
 
-class PlainTextCreatorTest extends \PHPUnit\Framework\TestCase {
+class PlainTextRendererTest extends \PHPUnit\Framework\TestCase {
 
     private $cacheDisabledOriginal;
     private $cachePeriodOriginal;
@@ -50,14 +50,14 @@ class PlainTextCreatorTest extends \PHPUnit\Framework\TestCase {
         $expected = normalizeLN(
                 file_get_contents(
                         Path::resolve(
-                                "ULICMS_ROOT/tests/fixtures/creators/plain.txt"
+                                "ULICMS_ROOT/tests/fixtures/renderers/plain.txt"
                         )
                 )
         );
-        $creator = new PlainTextCreator();
+        $renderer = new PlainTextRenderer();
 
-        $this->assertEquals($expected, normalizeLN($creator->render()));
-        $this->assertEquals($expected, normalizeLN($creator->render()));
+        $this->assertEquals($expected, normalizeLN($renderer->render()));
+        $this->assertEquals($expected, normalizeLN($renderer->render()));
     }
 
     public function testRenderWithHeadlineEnabled() {
@@ -85,9 +85,9 @@ class PlainTextCreatorTest extends \PHPUnit\Framework\TestCase {
                 . "Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
                 . "Chrome/63.0.3239.132 Safari/537.36";
 
-        $creator = new PlainTextCreator();
+        $renderer = new PlainTextRenderer();
 
-        $output = $creator->render();
+        $output = $renderer->render();
         
         $this->assertStringContainsString("The Headline", $output);
         $this->assertStringContainsString("Content", $output);
@@ -119,8 +119,8 @@ class PlainTextCreatorTest extends \PHPUnit\Framework\TestCase {
                 . "Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
                 . "Chrome/63.0.3239.132 Safari/537.36";
 
-        $creator = new PlainTextCreator();
-        $output = $creator->render();
+        $renderer = new PlainTextRenderer();
+        $output = $renderer->render();
         
         $this->assertStringNotContainsString("The Headline", $output);
         $this->assertStringContainsString("Content", $output);
@@ -150,10 +150,10 @@ class PlainTextCreatorTest extends \PHPUnit\Framework\TestCase {
                 . "Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
                 . "Chrome/63.0.3239.132 Safari/537.36";
 
-        $creator = new PlainTextCreator();
+        $renderer = new PlainTextRenderer();
 
-        $output = $creator->render();
-        $output = $creator->render();
+        $output = $renderer->render();
+        $output = $renderer->render();
 
         $this->assertIsString($output);
         $this->assertNotEmpty($output);
@@ -183,10 +183,10 @@ class PlainTextCreatorTest extends \PHPUnit\Framework\TestCase {
                 . "Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
                 . "Chrome/63.0.3239.132 Safari/537.36";
 
-        $creator = new PlainTextCreator();
+        $renderer = new PlainTextRenderer();
 
-        $output = $creator->render();
-        $output = $creator->render();
+        $output = $renderer->render();
+        $output = $renderer->render();
 
         $this->assertIsString($output);
         $this->assertNotEmpty($output);

@@ -241,7 +241,7 @@ function splitAndTrim(string $str): array {
 }
 
 // this magic method replaces html num entities with the character
-// used in PlainTextCreator
+// used in PlainTextRenderer
 function replace_num_entity($ord): string {
     $ord = $ord[1];
     if (preg_match('/^x([0-9a-f]+)$/i', $ord, $match)) {

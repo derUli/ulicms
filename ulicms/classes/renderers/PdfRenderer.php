@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace UliCMS\Creators;
+namespace UliCMS\Renderers;
 
 use Template;
 use Mpdf\Mpdf;
@@ -11,7 +11,7 @@ use StringHelper;
 use ContentFactory;
 
 // this class renders a page as pdf using mPDF
-class PDFCreator {
+class PdfRenderer {
 
     public $content = null;
 

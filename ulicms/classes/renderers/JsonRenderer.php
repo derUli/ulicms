@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace UliCMS\Creators;
+namespace UliCMS\Renderers;
 
 use stdClass;
 use ContentFactory;
@@ -11,7 +11,7 @@ use UliCMS\Exceptions\DatasetNotFoundException;
 use Page;
 
 // this class renders a content as csv
-class JSONCreator {
+class JsonRenderer {
 
     public $target_file = null;
     public $content = null;

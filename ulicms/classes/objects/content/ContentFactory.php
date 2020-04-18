@@ -18,7 +18,6 @@ class ContentFactory {
     }
 
     public static function getByID(int $id): ?Content {
-        $id = intval($id);
         $result = Database::query("SELECT `id`, `type` FROM `" .
                         tbname("content") . "` where id = " . $id);
         if (Database::getNumRows($result) > 0) {

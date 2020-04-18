@@ -196,7 +196,7 @@ if (isset($config->data_storage_root)
     define("ULICMS_DATA_STORAGE_ROOT", ULICMS_ROOT);
 }
 
-require_once dirname(__file__) . "/classes/creators/load.php";
+require_once dirname(__file__) . "/classes/renderers/load.php";
 
 // this enables us to set an base url for statis ressources such as images
 // stored in ULICMS_DATA_STORAGE_ROOT

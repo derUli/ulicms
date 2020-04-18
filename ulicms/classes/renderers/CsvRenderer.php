@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace UliCMS\Creators;
+namespace UliCMS\Renderers;
 
 use Template;
 use UliCMS\Utils\CacheUtil;
 
 // this class renders a content as csv
-class CSVCreator {
+class CsvRenderer {
 
     public $content = null;
     public $title = null;

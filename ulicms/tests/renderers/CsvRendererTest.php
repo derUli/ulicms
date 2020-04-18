@@ -1,9 +1,9 @@
 <?php
 
-use UliCMS\Creators\PDFCreator;
+use UliCMS\Renderers\CsvRenderer;
 use UliCMS\Utils\CacheUtil;
 
-class PDFCreatorTest extends \PHPUnit\Framework\TestCase {
+class CsvRendererTest extends \PHPUnit\Framework\TestCase {
 
     private $cacheDisabledOriginal;
     private $cachePeriodOriginal;
@@ -12,11 +12,12 @@ class PDFCreatorTest extends \PHPUnit\Framework\TestCase {
         $this->cacheDisabledOriginal = Settings::get("cache_disabled");
         $this->cachePeriodOriginal = Settings::get("cache_period");
         Settings::delete("cache_disabled");
+        $_SERVER["REQUEST_URI"] = "/other-url.csv?param=value";
     }
 
     public function tearDown() {
-        CacheUtil::resetAdapater();
         CacheUtil::clearPageCache();
+        CacheUtil::resetAdapater();
         Database::query("delete from {prefix}content where title like 'Unit Test%'", true);
 
         if ($this->cacheDisabledOriginal) {
@@ -24,6 +25,7 @@ class PDFCreatorTest extends \PHPUnit\Framework\TestCase {
         } else {
             Settings::delete("cache_disabled");
         }
+
         Settings::set("cache_period", $this->cachePeriodOriginal);
 
         unset($_SESSION["language"]);
@@ -31,6 +33,29 @@ class PDFCreatorTest extends \PHPUnit\Framework\TestCase {
         unset($_SERVER["HTTP_USER_AGENT"]);
         unset($_SERVER["REQUEST_URI"]);
         unset($_SESSION["logged_in"]);
+    }
+
+    public function testRender() {
+        Settings::delete("cache_disabled");
+        Settings::set("cache_period", "500");
+
+        $_GET["slug"] = "lorem_ipsum";
+        $_SESSION["language"] = "de";
+        $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36";
+
+        $expected = file_get_contents(
+                Path::resolve("ULICMS_ROOT/tests/fixtures/renderers/csv.csv")
+        );
+        $renderer = new CsvRenderer();
+        
+        $this->assertEquals(
+                normalizeLN($expected),
+                normalizeLN($renderer->render())
+        );      
+        $this->assertEquals(
+                normalizeLN($expected),
+                normalizeLN($renderer->render())
+        );
     }
 
     public function testRenderWithTextPositionBefore() {
@@ -46,9 +71,9 @@ class PDFCreatorTest extends \PHPUnit\Framework\TestCase {
         $modulePage->text_position = 'before';
         $modulePage->save();
 
-        $_SERVER["REQUEST_URI"] = "/one-url.pdf?param=value";
+        $_SERVER["REQUEST_URI"] = "/one-url.csv?param=value";
         Settings::delete("cache_disabled");
-        Settings::set("cache_period", 500);
+        Settings::set("cache_period", "500");
 
         $_GET["slug"] = "lorem_ipsum";
         $_SESSION["language"] = "de";
@@ -56,17 +81,17 @@ class PDFCreatorTest extends \PHPUnit\Framework\TestCase {
                 . "Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
                 . "Chrome/63.0.3239.132 Safari/537.36";
 
-        $creator = new PDFCreator();
+        $renderer = new CsvRenderer();
 
-        $output = $creator->render();
-        $output = $creator->render();
+        $output = $renderer->render();
+        $output = $renderer->render();
 
-        $this->assertStringStartsWith("%PDF-1.4", $output);
+        $this->assertCount(8, str_getcsv($output));
     }
 
     public function testRenderWithTextPositionAfter() {
+        $_SERVER["REQUEST_URI"] = "/url-two.csv?param=value&foo=bar";
 
-        $_SERVER["REQUEST_URI"] = "/url-two.pdf?param=value&foo=bar";
         $modulePage = new Module_Page();
         $modulePage->title = "Unit Test Article";
         $modulePage->slug = "unit-test-" . uniqid();
@@ -80,7 +105,7 @@ class PDFCreatorTest extends \PHPUnit\Framework\TestCase {
         $modulePage->save();
 
         Settings::delete("cache_disabled");
-        Settings::set("cache_period", 500);
+        Settings::set("cache_period", "500");
 
         $_GET["slug"] = $modulePage->slug;
         $_SESSION["language"] = "de";
@@ -88,12 +113,12 @@ class PDFCreatorTest extends \PHPUnit\Framework\TestCase {
                 . "Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
                 . "Chrome/63.0.3239.132 Safari/537.36";
 
-        $creator = new PDFCreator();
+        $renderer = new CsvRenderer();
 
-        $output = $creator->render();
-        $output = $creator->render();
+        $output = $renderer->render();
+        $output = $renderer->render();
 
-        $this->assertStringStartsWith("%PDF-1.4", $output);
+        $this->assertCount(8, str_getcsv($output));
     }
 
 }

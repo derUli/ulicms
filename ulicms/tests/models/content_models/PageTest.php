@@ -36,21 +36,20 @@ class PageTest extends \PHPUnit\Framework\TestCase {
 			"frontpage_de",
 			"frontpage_en"
 		);
+                
 		foreach ($settings as $setting) {
 			$this->savedSettings[$setting] = Settings::get($setting);
 		}
-
-		$this->cleanUp();
 	}
 
 	public function tearDown() {
 		@session_destroy();
-		$this->cleanUp();
 
-		unset($_SERVER['HTTP_HOST']);
-		unset($_SERVER["REQUEST_URI"]);
-		unset($_GET["id"]);
-
+                $_SERVER = [];
+                $_GET = [];
+                $_POST = [];
+                $_REQUEST = [];
+		
 		if ($this->commentsInitialEnabled) {
 			Settings::set("comments_enabled", "1");
 		} else {
@@ -64,18 +63,15 @@ class PageTest extends \PHPUnit\Framework\TestCase {
 		foreach ($this->savedSettings as $key => $value) {
 			Settings::set($key, $value);
 		}
-	}
-
-	private function cleanUp() {
-		Database::query("delete from {prefix}content where slug = 'testdisableshortcodes' or title like 'Unit Test%' or slug like"
-				. "'unit-test%'", true);
+                Database::query("delete from {prefix}content where slug = 'testdisableshortcodes' or title like 'Unit Test%' or slug like"
+				. "'unit-test%' or slug = 'testDisableShortcodesFalse'", true);
 
 		Settings::delete("comments_enabled");
 		Settings::delete("commentable_content_types");
 
-		Vars::delete("id");
+		Vars::clear();
 	}
-
+        
 	public function testGetEmbeddedModulesPage() {
 		$page = new Page();
 		$page->content = $this->ipsum;
@@ -128,10 +124,6 @@ class PageTest extends \PHPUnit\Framework\TestCase {
 		$this->assertStringNotContainsString(get_csrf_token_html(), get_content());
 		$this->assertStringContainsString("[csrf_token_html]", get_content());
 
-		$this->cleanUp();
-
-		unset($_SESSION["language"]);
-		unset($_GET["slug"]);
 	}
 
 	public function testDisableShortcodesFalse() {
@@ -150,11 +142,6 @@ class PageTest extends \PHPUnit\Framework\TestCase {
 
 		$this->assertStringContainsString(get_csrf_token_html(), get_content());
 		$this->assertStringNotContainsString("[csrf_token_html]", get_content());
-
-		$this->cleanUp();
-
-		unset($_SESSION["language"]);
-		unset($_GET["slug"]);
 	}
 
 	public function testGetShowHeadlineReturnsTrue() {
@@ -242,10 +229,6 @@ class PageTest extends \PHPUnit\Framework\TestCase {
 
 		$this->assertStringContainsString(get_csrf_token_html(), get_content());
 		$this->assertStringNotContainsString("[csrf_token_html]", get_content());
-		$this->cleanUp();
-
-		unset($_SESSION["language"]);
-		unset($_GET["slug"]);
 	}
 
 	public function testCreatePageWithCommentsEnabledTrue() {
@@ -263,8 +246,6 @@ class PageTest extends \PHPUnit\Framework\TestCase {
 
 		$page = new Page($page->id);
 		$this->assertTrue($page->comments_enabled);
-
-		$this->cleanUp();
 	}
 
 	public function testCreatePageWithCommentsEnabledFalse() {
@@ -282,8 +263,6 @@ class PageTest extends \PHPUnit\Framework\TestCase {
 
 		$page = new Page($page->id);
 		$this->assertFalse($page->comments_enabled);
-
-		$this->cleanUp();
 	}
 
 	public function testCreatePageWithCommentsEnabledNull() {
@@ -301,8 +280,6 @@ class PageTest extends \PHPUnit\Framework\TestCase {
 
 		$page = new Page($page->id);
 		$this->assertNull($page->comments_enabled);
-
-		$this->cleanUp();
 	}
 
 	public function testUpdatePageWithCommentsEnabledTrue() {
@@ -322,8 +299,6 @@ class PageTest extends \PHPUnit\Framework\TestCase {
 
 		$page = new Page($page->id);
 		$this->assertTrue($page->comments_enabled);
-
-		$this->cleanUp();
 	}
 
 	public function testUpdatePageWithCommentsEnabledFalse() {
@@ -344,8 +319,6 @@ class PageTest extends \PHPUnit\Framework\TestCase {
 
 		$page = new Page($page->id);
 		$this->assertFalse($page->comments_enabled);
-
-		$this->cleanUp();
 	}
 
 	public function testUpdatePageWithCommentsEnabledNull() {
@@ -366,8 +339,6 @@ class PageTest extends \PHPUnit\Framework\TestCase {
 
 		$page = new Page($page->id);
 		$this->assertNull($page->comments_enabled);
-
-		$this->cleanUp();
 	}
 
 	public function testAreCommentsEnabledPageTrue() {
@@ -389,7 +360,6 @@ class PageTest extends \PHPUnit\Framework\TestCase {
 		Settings::set("comments_enabled", "1");
 
 		$this->assertTrue($page->areCommentsEnabled());
-		$this->cleanUp();
 	}
 
 	public function testAreCommentsEnabledSettingsFalse() {
@@ -438,8 +408,6 @@ class PageTest extends \PHPUnit\Framework\TestCase {
 		$comment->save();
 
 		$this->assertTrue($page->hasComments());
-
-		$this->cleanUp();
 	}
 
 	public function testHasCommentsReturnFalse() {
@@ -454,8 +422,6 @@ class PageTest extends \PHPUnit\Framework\TestCase {
 		$page->save();
 
 		$this->assertFalse($page->hasComments());
-
-		$this->cleanUp();
 	}
 
 	public function testIsDeletedReturnsFalse() {
@@ -552,8 +518,6 @@ class PageTest extends \PHPUnit\Framework\TestCase {
 		$this->assertCount(2, $page->getComments());
 		$this->assertEquals("Kommentar 1", $page->getComments("date asc")[0]->getText());
 		$this->assertEquals("Kommentar 2", $page->getComments("date asc")[1]->getText());
-
-		$this->cleanUp();
 	}
 
 	public function testGetCommentsReturnsEmptyArray() {
@@ -568,8 +532,6 @@ class PageTest extends \PHPUnit\Framework\TestCase {
 		$page->save();
 
 		$this->assertCount(0, $page->getComments());
-
-		$this->cleanUp();
 	}
 
 	public function testGetUrlWithSuffix() {
@@ -589,8 +551,6 @@ class PageTest extends \PHPUnit\Framework\TestCase {
 
 		$this->assertStringContainsString("{$page->slug}.html", $url);
 		$this->assertStringEndsWith("foo=bar&hello=world", $url);
-
-		$this->cleanUp();
 	}
 
 	public function testGetUrlWithoutSuffix() {
@@ -609,8 +569,6 @@ class PageTest extends \PHPUnit\Framework\TestCase {
 		$this->assertStringContainsString("//company.com", $url);
 
 		$this->assertStringContainsString("{$page->slug}.html", $url);
-
-		$this->cleanUp();
 	}
 
 	public function testIncludeShortcodeShouldIncludeOtherPages() {
@@ -628,8 +586,6 @@ class PageTest extends \PHPUnit\Framework\TestCase {
 		Vars::set("id", time());
 
 		$this->assertEquals("This is even more text", replaceShortcodesWithModules($shortcode));
-
-		$this->cleanUp();
 	}
 
 	public function testIncludeShortcodeShouldNotIncludeItself() {
@@ -648,8 +604,6 @@ class PageTest extends \PHPUnit\Framework\TestCase {
 		Vars::set("id", $page->id);
 
 		$this->assertEquals($shortcode, replaceShortcodesWithModules($shortcode));
-
-		$this->cleanUp();
 	}
 
 	public function testCreatePageWithMetaDescriptionNull() {
@@ -671,8 +625,6 @@ class PageTest extends \PHPUnit\Framework\TestCase {
 		$this->assertNull($page->meta_description);
 		$this->assertNull($page->meta_keywords);
 		$this->assertNull($page->robots);
-
-		$this->cleanUp();
 	}
 
 	public function testUpdatePageWithMetaDescriptionNull() {
@@ -700,8 +652,6 @@ class PageTest extends \PHPUnit\Framework\TestCase {
 		$page = new Page($page->id);
 		$this->assertNull($page->meta_description);
 		$this->assertNull($page->meta_keywords);
-
-		$this->cleanUp();
 	}
 
 	public function testCustomDataJsonIsObjectByDefault() {
@@ -961,8 +911,6 @@ class PageTest extends \PHPUnit\Framework\TestCase {
 
 		$page = new Page($page->id);
 		$this->assertEquals("noindex, nofollow", $page->robots);
-
-		$this->cleanUp();
 	}
 
 	public function testLoadByIdThrowsException() {
