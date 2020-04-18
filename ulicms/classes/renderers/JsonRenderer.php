@@ -55,7 +55,7 @@ class JsonRenderer {
         
         $data->data = $page->custom_data ? json_decode(
                 json_encode($page->custom_data,
-                        JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES),
+                        JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)
         ) : new stdClass();
 
         $json_string = json_encode(
