@@ -11,7 +11,7 @@ class ControllerRegistry {
 
 	// load and initialize all module controllers
 	public static function loadModuleControllers(): void {
-		if (!defined("KCFINDER_PAGE")) {
+		if (!defined("RESPONSIVE_FM")) {
 			$controllerRegistry = [];
 			$modules = getAllModules();
 			$disabledModules = Vars::get("disabledModules");

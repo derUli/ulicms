@@ -130,7 +130,7 @@
                 <directory>shell</directory>
             </exclude>
             <exclude>
-                <directory>admin/kcfinder/</directory>
+                <directory>admin/fm/</directory>
             </exclude>
 
             <exclude>

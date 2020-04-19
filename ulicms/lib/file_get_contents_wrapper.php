@@ -104,14 +104,16 @@ function curl_url_exists(string $url): bool {
 	return $http_code >= 200 and $http_code < 400;
 }
 
-function url_exists(string $url): bool {
-	if (function_exists("curl_init") and
-			startsWith($url, "http")) {
-		return curl_url_exists($url);
-	}
+if(!defined("RESPONSIVE_FM")){
+	function url_exists(string $url): bool {
+		if (function_exists("curl_init") and
+				startsWith($url, "http")) {
+			return curl_url_exists($url);
+		}
 
-	if (@file_get_contents($url, FALSE, NULL, 0, 0) === false) {
-		return false;
+		if (@file_get_contents($url, FALSE, NULL, 0, 0) === false) {
+			return false;
+		}
+		return true;
 	}
-	return true;
 }

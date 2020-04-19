@@ -20,7 +20,7 @@ class HelperRegistry {
 	// TODO: This code works but looks like crap
 	// refactor it and split it into multiple small methods
 	public static function loadModuleHelpers(): void {
-		if (!defined("KCFINDER_PAGE")) {
+		if (!defined("RESPONSIVE_FM")) {
 			$helperRegistry = [];
 			$modules = getAllModules();
 			$disabledModules = Vars::get("disabledModules");

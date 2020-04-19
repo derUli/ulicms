@@ -198,6 +198,7 @@ bindEvents = () => {
     refreshFieldThumbnails();
     $("input.kcfinder").on("click", (event) => {
         const field = $(event.target);
+        
         const name = $(field).data("kcfinder-name")
                 ? $(field).data("kcfinder-name")
                 : "kcfinder_textbox";
@@ -205,18 +206,11 @@ bindEvents = () => {
                 ? $(field).data("kcfinder-type")
                 : "images";
 
-        window.KCFinder = {
-            callBack: (url) => {
-                field.val(url);
-                window.KCFinder = null;
-                refreshFieldThumbnails();
-            }
-        };
         window.open(
-                "kcfinder/browse.php?type=" +
+                "fm/dialog.php?fldr=" +
                 type +
-                "&langCode=" +
-                $("html").data("select2-language"),
+                "&editor=ckeditor&type=2&langCode=" +
+                $("html").data("select2-language") + "&popup=1&field_id=" + field.attr("name"),
                 name,
                 "status=0, toolbar=0, location=0, menubar=0, directories=0, " +
                 "resizable=1, scrollbars=0, width=800, height=600"

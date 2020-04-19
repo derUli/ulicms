@@ -22,7 +22,7 @@ class ActionRegistry {
     public static function loadModuleActions(): void {
         self::$actions = [];
 
-        if (!defined("KCFINDER_PAGE")) {
+        if (!defined("RESPONSIVE_FM")) {
             $coreActions = self::getDefaultCoreActions();
             foreach ($coreActions as $action => $file) {
                 $path = $file;

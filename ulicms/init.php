@@ -424,9 +424,6 @@ if (isset($_SESSION["session_begin"])) {
 }
 
 function shutdown_function() {
-    // don't execute shutdown hook on kcfinder page (media)
-    // since the "Path" class has a naming conflict with the same named
-    // class of KCFinder
     do_event("shutdown");
 
     $cfg = new CMSConfig();

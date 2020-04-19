@@ -39,10 +39,10 @@ function do_event(
         string $name,
         string $runs = ModuleEventConstants::RUNS_ONCE
 ): void {
-// don't run this code on kcfinder page (media)
-// since the "Path" class has a naming conflict with the same named
-// class of KCFinder
-    if (defined("KCFINDER_PAGE")) {
+    // don't run this code on kcfinder page (media)
+    // since the "Path" class has a naming conflict with the same named
+    // class of KCFinder
+    if (defined("RESPONSIVE_FM")) {
         return;
     }
     $modules = getAllModules();

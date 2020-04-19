@@ -9,7 +9,7 @@ class ModelRegistry {
 
     // TODO: refactor this and split int into multiple method s
     public static function loadModuleModels(): void {
-        if (!defined("KCFINDER_PAGE")) {
+        if (!defined("RESPONSIVE_FM")) {
             $modelRegistry = [];
             $modules = getAllModules();
             $disabledModules = Vars::get("disabledModules");
