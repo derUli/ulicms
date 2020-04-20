@@ -14,7 +14,7 @@ if ($permissionChecker->hasPermission($_GET["action"])) {
                 )
         );
         ?>&lang=<?php esc(getSystemLanguage()); ?>"
-        class="kcfinder"></iframe>
+        class="fm"></iframe>
     <?php
 } else {
     noPerms();

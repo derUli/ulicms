@@ -24,8 +24,9 @@ if (!$permissionChecker->hasPermission("info")) {
         <?php cms_release_year(); ?> by Ulrich Schmidt<br /> <a
             href="http://www.ckeditor.com" target="_blank">CKEditor</a> &copy;
         2003 - 2020 by CKSource<br />
-        <a href="http://kcfinder.sunhater.com/" target="_blank">KCFinder</a>
-        Copyright ©2010 - 2014 Pavel Tzonkov<br />
+        <?php
+        // FIXME: Replace with Responsive File Manager copyright
+        ?>
         Copyright 2005, 2014 jQuery Foundation, Inc. and other contributors
         <br />
         <a href="http://codemirror.net/" target="_blank">CodeMirror</a>
@@ -109,7 +110,7 @@ if (!$permissionChecker->hasPermission("info")) {
             ?>"
             role="button"
             ><i class="fa fa-info-circle" aria-hidden="true"></i>
-        <?php translate("license") ?></a>
+            <?php translate("license") ?></a>
         <a href="http://www.ulicms.de/kontakt.html" target="_blank"
            class="btn btn-info" role="button"><i class="fas fa-envelope"></i>
             Feedback</a>

@@ -865,14 +865,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertCount(4, $output);
     }
 
-    public function testMyEach() {
-        $arr = array(
-            "foo" => "bar",
-            "hello" => "world"
-        );
-        $this->assertCount(4, myEach($arr));
-    }
-
     public function testGetLangConfig() {
         Settings::setLanguageSetting("my_setting", "Lampukisch");
         Settings::setLanguageSetting("my_setting", "Germanisch", "de");

@@ -45,8 +45,8 @@ body {
 
 // pointer mouse cursor
 .has-pointer,
-input.kcfinder,
-input.kcfinder,
+input.fm,
+input.fm,
 input[type="button"],
 input[type="submit"],
 input[type="reset"],
@@ -968,7 +968,7 @@ pre,
     height: 40px;
 }
 
-iframe.kcfinder {
+iframe.fm {
     border: 0;
     width: 100%;
     height: calc(100vh - 290px);

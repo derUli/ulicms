@@ -10,7 +10,7 @@ class FileFile extends CustomField {
         ViewBag::set("field_name", !is_null($this->contentType) ?
                         $this->contentType . "_" . $this->name : $this->name);
 
-        ViewBag::set("kcfinder_type", "files");
+        ViewBag::set("fm_type", "files");
 
         return Template::executeDefaultOrOwnTemplate("fields/file.php");
     }

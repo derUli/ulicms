@@ -452,10 +452,6 @@ if (!is_ssl() and $enforce_https) {
 $moduleManager = new ModuleManager();
 Vars::set("disabledModules", $moduleManager->getDisabledModuleNames());
 
-// don't load module stuff on kcfinder page (media)
-// since the "Path" class has a naming conflict with the same named
-// class of KCFinder
-
 ModelRegistry::loadModuleModels();
 
 TypeMapper::loadMapping();

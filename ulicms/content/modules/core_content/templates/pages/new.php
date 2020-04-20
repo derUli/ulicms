@@ -284,7 +284,7 @@ if ($permissionChecker->hasPermission("pages")
                 </strong>
 
                 <input type="text" id="menu_image" name="menu_image"
-                       readonly="readonly" class="kcfinder"
+                       readonly="readonly" class="fm"
                        value="" style="cursor: pointer" /> <a href="#"
                        onclick="$('#menu_image').val('');return false;"
                        class="btn btn-default voffset2" class="btn btn-default"><i
@@ -393,7 +393,7 @@ if ($permissionChecker->hasPermission("pages")
                     <div class="field">
                         <strong class="field-label"><?php translate("image"); ?></strong>
                         <input type="text" id="og_image" name="og_image" readonly="readonly"
-                               class="kcfinder"
+                               class="fm"
                                value="<?php esc($og_image); ?>"
                                style="cursor: pointer" /> <a href="#"
                                onclick="$('#og_image').val('');
@@ -620,7 +620,7 @@ if ($permissionChecker->hasPermission("pages")
             <h2 class="accordion-header"><?php translate("image"); ?></h2>
             <div class="accordion-content">
                 <input type="text" id="image_url" name="image_url"
-                       readonly="readonly" class="kcfinder"
+                       readonly="readonly" class="fm"
                        value="" style="cursor: pointer" /> <a href="#"
                        onclick="$('#menu_image').val('');return false;"
                        class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php
@@ -652,7 +652,7 @@ if ($permissionChecker->hasPermission("pages")
                     </strong>
 
                     <input type="text" id="article_image" name="article_image"
-                           readonly="readonly" class="kcfinder"
+                           readonly="readonly" class="fm"
                            value="" style="cursor: pointer" maxlength="255" /> <a href="#"
                            onclick="$('#article_image').val('');
                                        return false;"

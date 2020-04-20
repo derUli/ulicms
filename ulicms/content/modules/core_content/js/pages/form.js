@@ -165,9 +165,9 @@ showAndHideFieldsByType = () => {
 let AllTypes = {};
 
 // this shows a thumbnail of the selected file on text inputs with
-// kcfinder image uploader attached
+// fm image uploader attached
 refreshFieldThumbnails = () => {
-    $("input.kcfinder[data-kcfinder-type=images]").each((index, element) => {
+    $("input.fm[data-fm-type=images]").each((index, element) => {
         const id = $(element).attr("name");
         if ($(element).val().length > 0) {
             $("img#thumbnail-" + id).attr("src", $(element).val());
@@ -196,14 +196,14 @@ bindEvents = () => {
     });
 
     refreshFieldThumbnails();
-    $("input.kcfinder").on("click", (event) => {
+    $("input.fm").on("click", (event) => {
         const field = $(event.target);
         
-        const name = $(field).data("kcfinder-name")
-                ? $(field).data("kcfinder-name")
-                : "kcfinder_textbox";
-        const type = $(field).data("kcfinder-type")
-                ? $(field).data("kcfinder-type")
+        const name = $(field).data("fm-name")
+                ? $(field).data("fm-name")
+                : "fm_textbox";
+        const type = $(field).data("fm-type")
+                ? $(field).data("fm-type")
                 : "images";
 
         window.open(
@@ -221,7 +221,7 @@ bindEvents = () => {
 unbindEvents = () => {
     $('input[name="type"]').off("change");
     $("select[name='menu']").off("change");
-    $("input.kcfinder").off("click");
+    $("input.fm").off("click");
     $(".clear-field").off("click");
 };
 

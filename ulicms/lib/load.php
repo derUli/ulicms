@@ -2,8 +2,7 @@
 
 declare(strict_types=1);
 
-$files = array(
-    "polyfill",
+$files = [
     "path",
     "url",
     "types",
@@ -34,7 +33,7 @@ $files = array(
     "translation",
     "html5_media",
     "custom_data"
-);
+];
 
 foreach ($files as $file) {
     require_once dirname(__file__) . "/$file.php";

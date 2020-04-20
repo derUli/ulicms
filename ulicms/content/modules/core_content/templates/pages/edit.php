@@ -373,7 +373,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                 </strong>
 
                                 <input type="text" id="menu_image" name="menu_image"
-                                       readonly="readonly" class="kcfinder"
+                                       readonly="readonly" class="fm"
                                        value="<?php
                                        esc($row->menu_image);
                                        ?>"
@@ -533,7 +533,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                     <strong class="field-label"><?php translate("type"); ?>
                                     </strong>
                                     <input type="text" id="og_image" name="og_image"
-                                           readonly="readonly" class="kcfinder"
+                                           readonly="readonly" class="fm"
                                            value="<?php
                                            esc($row->og_image);
                                            ?>"
@@ -826,7 +826,7 @@ if ($permissionChecker->hasPermission("pages")) {
                             <div class="field">
                                 <input type="text" id="image_url" name="image_url"
                                        readonly="readonly"
-                                       class="kcfinder"
+                                       class="fm"
                                        value="<?php Template::escape($row->image_url); ?>"
                                        style="cursor: pointer" /> <a href="#"
                                        onclick="$('#image_url').val('');
@@ -870,7 +870,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                     <?php translate("article_image"); ?>
                                 </strong>
                                 <input type="text" id="article_image" name="article_image"
-                                       readonly="readonly" class="kcfinder"
+                                       readonly="readonly" class="fm"
                                        value="<?php echo _esc($row->article_image); ?>"
                                        style="cursor: pointer" maxlength="255" /> <a href="#"
                                        onclick="$('#article_image').val('');
