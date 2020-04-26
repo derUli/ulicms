@@ -8,7 +8,7 @@ if (session_id() == '') {
 }
 
 $acl = new ACL();
-$permissions = ["images", "files"];
+$permissions = ["files"];
 
 $isPermitted = false;
 foreach ($permissions as $permission) {

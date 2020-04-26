@@ -10,7 +10,6 @@
     ));
     $entries[] = new MenuEntry('<i class="fa fa-file-image" aria-hidden="true"></i> ' . get_translation("media"), "?action=media", "media", array(
         "files",
-        "images",
         "videos",
         "audio"
     ));

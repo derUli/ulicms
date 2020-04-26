@@ -4,7 +4,6 @@
     "embed": false,
     "custom_acl": 
             [
-                "images",
                 "files",
                 "videos",
                 "videos_create",

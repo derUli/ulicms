@@ -4,7 +4,6 @@ use UliCMS\Security\PermissionChecker;
 
 $currentAction = BackendHelper::getAction();
 $icons = array(
-    "images" => "fas fa-images",
     "files" => "fa fa-file",
     "videos" => "fa fa-file-video",
     "audio" => "fa fa-file-audio"

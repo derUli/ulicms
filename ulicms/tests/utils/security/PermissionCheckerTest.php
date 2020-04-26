@@ -27,7 +27,7 @@ class PermissionCheckerTest extends \PHPUnit\Framework\TestCase {
 
         $group3 = new Group();
         $group3->setName("TestGroup3");
-        $group3->addPermission("images", true);
+        $group3->addPermission("files", true);
 
         $lang = new Language();
         $lang->loadByLanguageCode("en");
@@ -83,14 +83,14 @@ class PermissionCheckerTest extends \PHPUnit\Framework\TestCase {
         $permissionChecker = new PermissionChecker($this->testUser->getId());
         $this->assertTrue($permissionChecker->hasPermission("info"));
         $this->assertTrue($permissionChecker->hasPermission("pages"));
-        $this->assertTrue($permissionChecker->hasPermission("images"));
+        $this->assertTrue($permissionChecker->hasPermission("files"));
         $this->assertTrue($permissionChecker->hasPermission("design"));
     }
 
     public function testUserHasPermissionWithUserReturnsTrue() {
         $this->assertTrue($this->testUser->hasPermission("info"));
         $this->assertTrue($this->testUser->hasPermission("pages"));
-        $this->assertTrue($this->testUser->hasPermission("images"));
+        $this->assertTrue($this->testUser->hasPermission("files"));
         $this->assertTrue($this->testUser->hasPermission("design"));
     }
 

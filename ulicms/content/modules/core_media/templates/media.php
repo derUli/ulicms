@@ -1,7 +1,9 @@
 <?php
 $permissionChecker = new ACL();
 
-if ($permissionChecker->hasPermission("images") or $permissionChecker->hasPermission("videos") or $permissionChecker->hasPermission("audio") or $permissionChecker->hasPermission("files")) {
+if ($permissionChecker->hasPermission("videos") or
+        $permissionChecker->hasPermission("audio") or
+        $permissionChecker->hasPermission("files")) {
     ?>
     <h2>
         <?php translate("media"); ?>
@@ -10,18 +12,6 @@ if ($permissionChecker->hasPermission("images") or $permissionChecker->hasPermis
     </strong>
     <br />
     <br />
-    <?php
-    if ($permissionChecker->hasPermission("images")) {
-        ?>
-        <a href="index.php?action=images" class="btn btn-default"><i
-                class="fas fa-images"></i>
-                <?php translate("images"); ?>
-        </a>
-        <br />
-        <br />
-        <?php
-    }
-    ?>
     <?php
     if ($permissionChecker->hasPermission("files")) {
         ?>
