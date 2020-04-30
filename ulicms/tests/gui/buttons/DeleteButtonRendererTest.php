@@ -48,7 +48,7 @@ class DeleteButtonRendererTest extends \PHPUnit\Framework\TestCase {
                 '<i class="fa fa-trash', $html
         );
         $this->assertStringContainsString(
-                'data-url="index.php?sClass=PageController&amp;sMethod=delete&amp;page=',
+                'data-url="index.php?sClass=PageController&amp;sMethod=delete&amp;id=',
                 $html
         );
     }

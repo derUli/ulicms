@@ -1,8 +1,0 @@
-  ["id":protected]=>
-  NULL
-  ["username":"User":private]=>
-  NULL
-  ["lastname":"User":private]=>
-  string(0) ""
-  ["firstname":"User":private]=>
-  string(0) ""

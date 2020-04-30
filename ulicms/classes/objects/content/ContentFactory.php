@@ -182,7 +182,8 @@ class ContentFactory {
             string $order_by = "title",
             string $order_direction = "asc",
             ?string $type = null,
-            ?string $limit = null
+            ?int $limit = null,
+            ?int $offset = null
     ): array {
         $datasets = [];
         $sql = "select id, `type` from " . tbname("content") .
@@ -221,6 +222,9 @@ class ContentFactory {
 
         if (!is_null($limit) and $limit > 0) {
             $sql .= " limit " . $limit;
+        }
+        if (!is_null($offset)) {
+            $sql .= " offset " . $offset;
         }
 
         $result = Database::query($sql) or die(Database::error());

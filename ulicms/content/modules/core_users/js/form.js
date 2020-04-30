@@ -4,7 +4,7 @@
 
 // check if password field and password repeat are equal
 // then colorize the inputs
-validatePasswords = () => {
+const validatePasswords = () => {
 	const field1 = $("#password");
 	const field2 = $("#password_repeat");
 
@@ -29,8 +29,9 @@ validatePasswords = () => {
 	}
 };
 
-submitPasswordForm = (event) => {
+const submitPasswordForm = (event) => {
 	event.preventDefault();
+        
 	validatePasswords(event);
 	if ($("#password").hasClass("invalid")) {
 		bootbox.alert(UserTranslation.PasswordsNotEqual,
@@ -38,11 +39,11 @@ submitPasswordForm = (event) => {
 		);
 		return false;
 	}
-	$("form#edit_user").off("submit").submit();
+	$("form#edit-user").off("submit").submit();
 };
 
 $(() => {
 	$("#password").on("blur", validatePasswords);
 	$("#password_repeat").on("blur", validatePasswords);
-	$("form#edit_user").on("submit", submitPasswordForm);
+	$("form#edit-user").on("submit", submitPasswordForm);
 });

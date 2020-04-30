@@ -6,16 +6,14 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase {
         @session_start();
         $_SESSION["language"] = "en";
         require_once getLanguageFilePath("en");
+        $_SERVER = [];
         $_SERVER["REQUEST_URI"] = "/other-url.html?param=value";
     }
 
     public function tearDown() {
         chdir(ULICMS_ROOT);
-        unset($_SERVER['HTTP_HOST']);
-        unset($_SERVER['HTTPS']);
-        unset($_SESSION["language"]);
-        unset($_SERVER["REQUEST_URI"]);
-        unset($_SERVER["REQUEST_URI"]);
+        
+        $_SERVER = [];
 
         Database::deleteFrom("content", "title like 'Unit Test%'");
 

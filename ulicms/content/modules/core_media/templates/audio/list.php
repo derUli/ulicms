@@ -33,20 +33,20 @@ if ($permissionChecker->hasPermission("audio")) {
         translate("audio");
         ?>
     </h1>
+<div class="field">
     <?php translate("category"); ?>
     <?php echo Categories::getHTMLSelect($_SESSION ["filter_category"], true); ?>
-    <br />
-    <br />
+</div>
     <?php if ($permissionChecker->hasPermission("audio_create")) { ?>
-        <p>
+        <div class="voffset2">
             <a href="index.php?action=add_audio"
                class="btn btn-default"><i class="fa fa-upload"></i>
                    <?php
                    translate("upload_audio");
                    ?></a>
-        </p>
+        </div>
     <?php } ?>
-    <div class="scroll">
+    <div class="scroll voffset2">
         <table class="tablesorter">
             <thead>
                 <tr>

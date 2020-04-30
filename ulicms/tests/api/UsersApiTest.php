@@ -12,8 +12,6 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase {
     public function setUp() {
         @session_destroy();
         @session_start();
-        unset($_SESSION["login_id"]);
-        unset($_SESSION["logged_in"]);
 
         $group = new Group();
         $group->setName("testgroup");
@@ -55,10 +53,6 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function tearDown() {
-        unset($_SESSION["login_id"]);
-        unset($_SESSION["logged_in"]);
-        unset($_REQUEST["error"]);
-
         $this->testGroup->delete();
         $this->testUser->delete();
 
@@ -69,6 +63,8 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase {
         $user = new User();
         $user->loadByUsername("testuser3");
         $user->delete();
+
+		$_SESSION = [];
 
         @session_destroy();
 
@@ -84,7 +80,6 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase {
     public function testGetUserIdUserIsLoggedIn() {
         $_SESSION["login_id"] = 123;
         $this->assertEquals(123, get_user_id());
-        unset($_SESSION["login_id"]);
     }
 
     public function testGetUserIdUserIsNotLoggedIn() {
@@ -94,7 +89,6 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase {
     public function testGetUserGroupReturnsGroupId() {
         $_SESSION["group_id"] = 666;
         $this->assertEquals(666, get_group_id());
-        unset($_SESSION["group_id"]);
     }
 
     public function testGetUserGroupReturnsZero() {
@@ -115,7 +109,6 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testIsLoggedInFalse() {
-        unset($_SESSION["logged_in"]);
         $this->assertFalse(is_logged_in());
     }
 
@@ -125,7 +118,6 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testLoggedInFalse() {
-        unset($_SESSION["logged_in"]);
         $this->assertFalse(logged_in());
     }
 

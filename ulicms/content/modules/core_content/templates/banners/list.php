@@ -2,6 +2,7 @@
 
 use UliCMS\Models\Content\Advertisement\Banners;
 use UliCMS\Models\Content\Categories;
+use UliCMS\HTML\Alert;
 
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("banners")) {
@@ -20,23 +21,27 @@ if ($permissionChecker->hasPermission("banners")) {
     <?php echo Template::executeModuleTemplate("core_content", "icons.php"); ?>
 
     <h2><?php translate("advertisements"); ?></h2>
-    <p>
-        <?php translate("advertisement_infotext"); ?>
-        <?php
-        if ($permissionChecker->hasPermission("banners_create")) {
-            ?><br /> <br /> <a href="index.php?action=banner_new"
-                             class="btn btn-default"><i class="fa fa-plus"></i>
-                                 <?php translate("add_advertisement"); ?>
-            </a><br />
-        <?php } ?>
-    </p>
-    <p><?php translate("category"); ?>
+    <?php
+    echo Alert::info(
+            get_translation("advertisement_infotext")
+    );
+    ?>
+
+    <?php
+    if ($permissionChecker->hasPermission("banners_create")) {
+        ?>
+    <div class="field"><a href="index.php?action=banner_new"
+                         class="btn btn-default"><i class="fa fa-plus"></i>
+                             <?php translate("add_advertisement"); ?>
+        </a>
+    </div>
+    <?php } ?>
+    <div class="field">
+        <?php translate("category"); ?>
         <?php
         echo Categories::getHTMLSelect($_SESSION["filter_category"], true);
         ?>
-    </p>
-
-    <p><?php BackendHelper::formatDatasetCount(count($banners)); ?></p>
+    </div>
     <div class="scroll">
         <table class="tablesorter">
             <thead>

@@ -70,6 +70,11 @@ class Form {
             array $otherVars = [],
             array $htmlAttributes = []) {
         $html = "";
+
+        if (!isset($htmlAttributes["class"])) {
+            $htmlAttributes["class"] = "";
+        }
+
         $htmlAttributes["class"] = trim("delete-form " . $htmlAttributes["class"]);
 
         $attribhtml = StringHelper::isNotNullOrWhitespace(

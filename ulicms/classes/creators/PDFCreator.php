@@ -8,6 +8,7 @@ use Template;
 use Mpdf\Mpdf;
 use UliCMS\Utils\CacheUtil;
 use StringHelper;
+use ContentFactory;
 
 // this class renders a page as pdf using mPDF
 class PDFCreator {
@@ -17,7 +18,19 @@ class PDFCreator {
     // renders the content html to class variable
     protected function renderContent(): void {
         ob_start();
-        echo "<h1>" . get_title() . "</h1>";
+
+        try {
+            $content = ContentFactory::getCurrentPage();
+            $showHeadline = $content->getShowHeadline();
+        } catch (Exception $e) {
+            $showHeadline = true;
+        }
+
+        // print headline only if it is enabled for the current page
+        if ($showHeadline) {
+            echo "<h1>" . get_title() . "</h1>";
+        }
+
         $text_position = get_text_position();
         if ($text_position == "after") {
             Template::outputContentElement();

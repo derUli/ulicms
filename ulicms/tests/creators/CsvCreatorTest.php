@@ -47,9 +47,15 @@ class CsvCreatorTest extends \PHPUnit\Framework\TestCase {
                 Path::resolve("ULICMS_ROOT/tests/fixtures/creators/csv.csv")
         );
         $creator = new CSVCreator();
-
-        $this->assertEquals($expected, $creator->render());
-        $this->assertEquals($expected, $creator->render());
+        
+        $this->assertEquals(
+                normalizeLN($expected),
+                normalizeLN($creator->render())
+        );      
+        $this->assertEquals(
+                normalizeLN($expected),
+                normalizeLN($creator->render())
+        );
     }
 
     public function testRenderWithTextPositionBefore() {

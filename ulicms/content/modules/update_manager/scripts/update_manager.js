@@ -1,9 +1,9 @@
 /* global bootbox */
 
 $(() => {
-    $("form#update-manager").submit(
-            (event) => {
+    $("form#update-manager").submit((event) => {
         event.preventDefault();
+
         const packages = $('form#update-manager .package:checked').map(
                 (_, el) => $(el).val()
         ).get();

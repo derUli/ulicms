@@ -3,6 +3,7 @@
 $(() => {
 	$(".avatar").click((event) => {
 		const target = $(event.currentTarget);
+                
 		const img = document.createElement("img");
 		img.src = target.attr("src");
 

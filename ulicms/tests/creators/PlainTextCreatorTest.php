@@ -17,7 +17,8 @@ class PlainTextCreatorTest extends \PHPUnit\Framework\TestCase {
 
     public function tearDown() {
         CacheUtil::clearPageCache();
-        Database::query("delete from {prefix}content where title like 'Unit Test%'", true);
+        Database::query("delete from {prefix}content where title "
+                . "like 'Unit Test%' or slug like 'unit-test%'", true);
 
         if ($this->cacheDisabledOriginal) {
             Settings::set("cache_disabled", "yes");
@@ -25,7 +26,7 @@ class PlainTextCreatorTest extends \PHPUnit\Framework\TestCase {
             Settings::delete("cache_disabled");
         }
         Settings::set("cache_period", $this->cachePeriodOriginal);
-        
+
         CacheUtil::resetAdapater();
 
         unset($_SESSION["language"]);
@@ -33,19 +34,21 @@ class PlainTextCreatorTest extends \PHPUnit\Framework\TestCase {
         unset($_SERVER["HTTP_USER_AGENT"]);
         unset($_SERVER["REQUEST_URI"]);
         unset($_SESSION["logged_in"]);
+        Vars::clear();
     }
 
     public function testRender() {
         Settings::delete("cache_disabled");
         Settings::set("cache_period", "500");
         CacheUtil::resetAdapater();
-        
+
         $_GET["slug"] = "lorem_ipsum";
         $_SESSION["language"] = "de";
         $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (Windows NT 6.1; "
                 . "Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
                 . "Chrome/63.0.3239.132 Safari/537.36";
-        $expected = normalizeLN(file_get_contents(
+        $expected = normalizeLN(
+                file_get_contents(
                         Path::resolve(
                                 "ULICMS_ROOT/tests/fixtures/creators/plain.txt"
                         )
@@ -53,8 +56,74 @@ class PlainTextCreatorTest extends \PHPUnit\Framework\TestCase {
         );
         $creator = new PlainTextCreator();
 
-        $this->assertEquals($expected, $creator->render());
-        $this->assertEquals($expected, $creator->render());
+        $this->assertEquals($expected, normalizeLN($creator->render()));
+        $this->assertEquals($expected, normalizeLN($creator->render()));
+    }
+
+    public function testRenderWithHeadlineEnabled() {
+        $page = new Page();
+        $page->title = "The Headline";
+        $page->content = "Content";
+        $page->slug = "unit-test-" . uniqid();
+        $page->menu = "none";
+        $page->language = "de";
+        $page->article_date = 1413821696;
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->show_headline = true;
+        $page->text_position = 'before';
+        $page->save();
+
+        $_SERVER["REQUEST_URI"] = "/one-url.txt?param=123";
+        Settings::delete("cache_disabled");
+        Settings::set("cache_period", 500);
+
+        $_GET["slug"] = $page->slug;
+        $_SESSION["language"] = $page->language;
+        
+        $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (Windows NT 6.1; "
+                . "Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
+                . "Chrome/63.0.3239.132 Safari/537.36";
+
+        $creator = new PlainTextCreator();
+
+        $output = $creator->render();
+        
+        $this->assertStringContainsString("The Headline", $output);
+        $this->assertStringContainsString("Content", $output);
+    }
+    
+    
+    public function testRenderWithHeadlineDisabled() {
+        $page = new Page();
+        $page->title = "The Headline";
+        $page->content = "Content";
+        $page->slug = "unit-test-" . uniqid();
+        $page->menu = "none";
+        $page->language = "de";
+        $page->article_date = 1413821696;
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->show_headline = false;
+        $page->text_position = 'before';
+        $page->save();
+
+        $_SERVER["REQUEST_URI"] = "/one-url.txt?param=456";
+        Settings::delete("cache_disabled");
+        Settings::set("cache_period", 500);
+
+        $_GET["slug"] = $page->slug;
+        $_SESSION["language"] = $page->language;
+        
+        $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (Windows NT 6.1; "
+                . "Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
+                . "Chrome/63.0.3239.132 Safari/537.36";
+
+        $creator = new PlainTextCreator();
+        $output = $creator->render();
+        
+        $this->assertStringNotContainsString("The Headline", $output);
+        $this->assertStringContainsString("Content", $output);
     }
 
     public function testRenderWithTextPositionBefore() {

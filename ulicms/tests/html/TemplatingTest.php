@@ -410,15 +410,20 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         ob_start();
         random_banner();
         $banner1 = ob_get_clean();
-
-        ob_start();
-        random_banner();
-        $banner2 = ob_get_clean();
-
         $this->assertNotEmpty($banner1);
-        $this->assertNotEmpty($banner2);
+        
+        for($i = 0; $i <= 3; $i++ ){
+            ob_start();
+            random_banner();
+            $banner2 = ob_get_clean();
+            
+            if($banner2 !== $banner1){
+                $this->assertNotEmpty($banner2);
+                return;
+            }
+        }
 
-        $this->assertNotEquals($banner1, $banner2);
+        $this->fail("Test failed");
     }
 
     public function testLanguageSelection() {

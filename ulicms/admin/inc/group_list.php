@@ -18,16 +18,15 @@ if (isset($_REQUEST["sort"]) and faster_in_array($_REQUEST["sort"], array(
 ?>
 
 <?php if ($permissionChecker->hasPermission("groups_create")) { ?>
-    <p>
+    <div class="btn-toolbar field">
         <a href="?action=groups&add=add" class="btn btn-default"> <i
                 class="fa fa-plus"></i> <?php translate("create_group"); ?></a>
-    </p>
+    </div>
 <?php } ?>
-<p><?php BackendHelper::formatDatasetCount(count($groups)); ?></p>
 <?php
 if (count($groups) > 0) {
     ?>
-    <div class="scroll">
+    <div class="scroll voffset2">
         <table class="tablesorter">
             <thead>
                 <tr>

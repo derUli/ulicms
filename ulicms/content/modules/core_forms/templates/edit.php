@@ -3,7 +3,7 @@
 use UliCMS\Models\Content\Categories;
 
 $permissionChecker = new ACL();
-if (!$permissionChecker->hasPermission("forms") or ! $permissionChecker->hasPermission("forms_edit")) {
+if (!$permissionChecker->hasPermission("forms") or !$permissionChecker->hasPermission("forms_edit")) {
     noPerms();
 } else {
     $forms = Forms::getAllForms();
@@ -12,11 +12,11 @@ if (!$permissionChecker->hasPermission("forms") or ! $permissionChecker->hasPerm
     $form = Forms::getFormByID($id);
     if ($form) {
         ?>
-        <p>
+        <div class="field">
             <a href="<?php echo ModuleHelper::buildActionURL("forms"); ?>"
                class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i>
                 <?php translate("back") ?></a>
-        </p>
+        </div>
         <h1><?php translate("edit_form"); ?></h1>
         <?php
         echo ModuleHelper::buildMethodCallForm(
@@ -25,14 +25,19 @@ if (!$permissionChecker->hasPermission("forms") or ! $permissionChecker->hasPerm
         );
         ?>
         <input type="hidden" name="id" value="<?php echo $id; ?>" />
-        <p>
-            <strong><?php translate("name"); ?>*</strong><br />
+        <div class="field">
+            <strong class="field-label">
+                <?php translate("name"); ?>*
+            </strong>
             <input type="text"
                    value="<?php esc($form["name"]); ?>" name="name"
                    required />
-        </p>
-        <p>
-            <strong><?php translate("enabled"); ?></strong><br /> <select
+        </div>
+        <div class="field">
+            <strong class="field-label">
+                <?php translate("enabled"); ?>
+            </strong>
+            <select
                 name="enabled">
                 <option value="1"
                         <?php if ($form["enabled"]) echo "selected"; ?>>
@@ -43,48 +48,65 @@ if (!$permissionChecker->hasPermission("forms") or ! $permissionChecker->hasPerm
                             <?php translate("no"); ?>
                 </option>
             </select>
-        </p>
-        <p>
-            <strong><?php translate("email_to"); ?>*</strong><br /> <input
+        </div>
+        <div class="field">
+            <strong class="field-label">
+                <?php translate("email_to"); ?>*
+            </strong>
+            <input
                 type="email" value="<?php esc($form["email_to"]); ?>"
                 name="email_to" required />
-        </p>
-        <p>
-            <strong><?php translate("subject"); ?>*</strong><br /> <input
+        </div>
+        <div class="field">
+            <strong class="field-label">
+                <?php translate("subject"); ?>*
+            </strong>
+            <input
                 type="text" value="<?php esc($form["subject"]); ?>"
                 name="subject" required />
-        </p>
-        <p>
-            <strong><?php translate("category"); ?></strong><br />
+        </div>
+        <div class="field">
+            <strong class="field-label">
+                <?php translate("category"); ?>
+            </strong>
             <?php
             echo Categories::getHTMLSelect($form["category_id"]);
-            ?></p>
+            ?>
+        </div>
 
-        <p>
-            <strong><?php translate("fields"); ?></strong><br />
+        <div class="field">
+            <strong class="field-label">
+                <?php translate("fields"); ?>
+            </strong>
             <textarea name="fields" rows="10"><?php
                 esc(
                         $form["fields"]
                 );
                 ?></textarea>
-        </p>
-        <p>
-            <strong><?php translate("required_fields"); ?></strong><br />
+        </div>
+        <div class="field">
+            <strong class="field-label">
+                <?php translate("required_fields"); ?>
+            </strong>
             <textarea name="required_fields" rows="10"><?php
                 esc(
                         $form["required_fields"]
                 );
                 ?></textarea>
-        </p>
-        <p>
-            <strong><?php translate("mail_from_field"); ?></strong>
-            <br /> <input
+        </div>
+        <div class="field">
+            <strong class="field-label">
+                <?php translate("mail_from_field"); ?>
+            </strong>
+             <input
                 type="text"
                 value="<?php esc($form["mail_from_field"]); ?>"
                 name="mail_from_field" />
-        </p>
-        <p>
-            <strong><?php translate("target_page_id"); ?></strong><br />
+        </div>
+        <div class="field">
+            <strong class="field-label">
+                <?php translate("target_page_id"); ?>
+            </strong>
             <select
                 name="target_page_id">
                     <?php foreach ($pages as $page) { ?>
@@ -96,13 +118,13 @@ if (!$permissionChecker->hasPermission("forms") or ! $permissionChecker->hasPerm
                     ?>><?php esc($page["title"]); ?></option>
                         <?php } ?>
             </select>
-        </p>
-        <p>
+        </div>
+        <div class="voffset2">
             <button name="edit_form" type="submit" class="btn btn-primary">
                 <i class="fas fa-save"></i>
                 <?php translate("save"); ?>
             </button>
-        </p>
+        </div>
         <?php
         echo ModuleHelper::endForm();
     }

@@ -6,8 +6,8 @@ $(() => {
         const valueSelected = $('#category').val();
         location.replace("index.php?action=audio&filter_category="
                 + valueSelected);
-
     });
+    
     const ajaxOptions = {
         success: (responseText, statusText, xhr, $form) => {
             const action = $($form).attr("action");
@@ -19,6 +19,5 @@ $(() => {
             $(tr).fadeOut();
         }
     };
-
     $("form.delete-form").ajaxForm(ajaxOptions);
 });

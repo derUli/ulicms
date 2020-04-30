@@ -14,21 +14,58 @@ if ($permissionChecker->hasPermission("videos") and $permissionChecker->hasPermi
           method="post" enctype="multipart/form-data">
         <input type="hidden" name="add" value="add">
         <?php csrf_token_html(); ?>
-        <strong><?php translate("name"); ?>*
-        </strong><br /> <input type="text" name="name" value="" maxlength="255"
-                               required /> <br /> <strong><?php translate("category"); ?>
-        </strong><br />
-        <?php echo Categories::getHTMLSelect(); ?>
+        <div class="field">
+            <strong class="field-label">
+                <?php translate("name"); ?>*
+            </strong>
+            <input type="text" name="name" value="" maxlength="255"
+                   required /> 
+        </div>
+        <div class="field">
+            <strong class="field-label">
+                <?php translate("category"); ?>
+            </strong>
+            <?php echo Categories::getHTMLSelect(); ?>
+        </div>
+        <div class="field">
+            <strong class="field-label">
+                <?php echo translate("video_ogg"); ?>
+            </strong>
+            <input name="ogg_file" type="file">
+        </div>
+        <div class="field">
 
-        <br /> <br /> <strong><?php echo translate("video_ogg"); ?>
-        </strong><br /> <input name="ogg_file" type="file"><br /> <strong><?php echo translate("video_webm"); ?>
-        </strong><br /> <input name="webm_file" type="file"><br /> <strong><?php echo translate("video_mp4"); ?>
-        </strong><br /> <input name="mp4_file" type="file"><br /> <strong><?php translate("width"); ?>
-        </strong><br /> <input type="number" name="width" value="1280" step="1">
-        <br /> <strong><?php translate("height"); ?></strong><br /> <input
-            type="number" name="height" value="720" step="1"> <br />
-        <button type="submit" class="btn btn-primary">
-            <i class="fas fa-upload"></i> <?php translate("UPLOAD_VIDEO"); ?></button>
+            <strong class="field-label">
+                <?php echo translate("video_webm"); ?>
+            </strong>
+            <input name="webm_file" type="file">
+        </div>
+        <div class="field">
+
+            <strong class="field-label">
+                <?php echo translate("video_mp4"); ?>
+            </strong>
+            <input name="mp4_file" type="file">
+        </div>
+        <div class="field">
+
+            <strong class="field-label">
+                <?php translate("width"); ?>
+            </strong>
+            <input type="number" name="width" value="1280" step="1">
+        </div>
+        <div class="field">
+            <strong class="field-label">
+                <?php translate("height"); ?></strong>
+            <input
+                type="number" name="height" value="720" step="1"> 
+        </div>
+        <div class="voffset2">
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-upload"></i>
+                <?php translate("UPLOAD_VIDEO"); ?>
+            </button>
+        </div>
     </form>
     <?php
 } else {

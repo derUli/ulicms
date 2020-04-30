@@ -95,15 +95,16 @@ class ControllerRegistry {
 
 		$wildcardMethodIdentifier = $sClass . "::*";
 
-		if (!is_blank(
-						self::$controller_function_permissions[$methodIdentifier])
+		if (
+                        isset(self::$controller_function_permissions[$methodIdentifier]) and 
+                        !is_blank( self::$controller_function_permissions[$methodIdentifier])
 		) {
 			$allowed = $acl->hasPermission(
 					self::$controller_function_permissions[$methodIdentifier]
 			);
-		} else if (!is_blank(
-						self::$controller_function_permissions[$wildcardMethodIdentifier])
-		) {
+		} else if (
+                        isset(self::$controller_function_permissions[$wildcardMethodIdentifier]) and
+                        !is_blank(self::$controller_function_permissions[$wildcardMethodIdentifier])) {
 			$allowed = $acl->hasPermission(
 					self::$controller_function_permissions[$wildcardMethodIdentifier]
 			);

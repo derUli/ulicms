@@ -39,7 +39,7 @@ class UnDeleteButtonRenderer {
             "data-url" => ModuleHelper::buildMethodCallUrl(
                     PageController::class,
                     "undelete",
-                    "page={$pageId}csrf_token=" . get_csrf_token()
+                    "id={$pageId}csrf_token=" . get_csrf_token()
             ),
             "class" => "delete-icon"
         ];

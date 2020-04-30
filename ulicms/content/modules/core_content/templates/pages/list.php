@@ -3,6 +3,7 @@
 // TODO: This is old code before the switch to MVC architecture
 // This should be rewritten with MVC pattern and using partial views
 use UliCMS\Security\PermissionChecker;
+use UliCMS\HTML\Alert;
 
 $controller = ControllerRegistry::get(PageController::class);
 
@@ -14,7 +15,19 @@ if ($permissionChecker->hasPermission("pages")) {
     echo Template::executeModuleTemplate("core_content", "icons.php");
     ?>
     <h2><?php translate("pages"); ?></h2>
-    <p><?php translate("pages_infotext"); ?></p>
+    <?php
+    echo Alert::info(
+            get_translation("pages_infotext")
+    );
+    ?>
+
+    <?php
+    echo Template::executeModuleTemplate(
+            "core_content",
+            "pages/partials/filters/filters.php"
+    );
+    ?>
+
     <div id="page-list">
         <?php if ($controller->getPagesListView() === "default") { ?>
             <div class="row">
@@ -83,6 +96,7 @@ if ($permissionChecker->hasPermission("pages")) {
             </table>
         </div>
     </div>
+
     <?php
     enqueueScriptFile(ModuleHelper::buildRessourcePath(
                     "core_content",

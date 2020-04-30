@@ -5,13 +5,13 @@ if (is_null($value)) {
     $value = $field->defaultValue;
 }
 ?>
-<div class="custom-field"
+<div class="custom-field field"
      data-field-name="<?php Template::escape($field->name); ?>">
     <img src="gfx/preview.png" class="img-thumbnail"
          id="thumbnail-<?php Template::escape(ViewBag::get("field_name")); ?>"
          style="display: none">
-    <p>
-        <strong><?php translate($field->title); ?> <?php if ($field->required) echo "*"; ?></strong><br />
+    <div class="field">
+        <strong class="field-label"><?php translate($field->title); ?> <?php if ($field->required) echo "*"; ?></strong>
         <input type="text"
                name="<?php Template::escape(ViewBag::get("field_name")); ?>"
                id="field-<?php Template::escape(ViewBag::get("field_name")); ?>"
@@ -20,15 +20,13 @@ if (is_null($value)) {
                <?php if ($field->required) echo "required"; ?>
                <?php echo ModuleHelper::buildHTMLAttributesFromArray($field->htmlAttributes); ?>
                readonly>
-    </p>
-
-    <div class="voffset2">
+    </div>
+    <div class="field">
         <a href="#" class="btn btn-default clear-field"
            data-for="#field-<?php Template::escape(ViewBag::get("field_name")); ?>"
            class="btn btn-default"><i class="fa fa-eraser"></i> <?php translate("clear") ?></a>
-
         <?php if ($field->helpText) { ?>
-            <br /> <small><?php translate($field->helpText); ?></small>
+            <small><?php translate($field->helpText); ?></small>
         <?php } ?>
     </div>
 </div>

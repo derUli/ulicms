@@ -115,9 +115,9 @@ function getLanguageNameByCode(string $code): string {
 function setLocaleByLanguage(): array {
     $locale = [];
 
-    $var = is_admin_dir() ?
+    $var = (is_admin_dir() and isset($_SESSION["system_language"])) ?
             "locale_" . $_SESSION["system_language"] :
-            "locale_" . $_SESSION["language"];
+            "locale_" . getFrontendLanguage();
 
     $localeSetting = Settings::get($var) ?
             Settings::get($var) : Settings::get("locale");
@@ -170,6 +170,7 @@ function getAllLanguages($filtered = false): array {
             return $result;
         }
     }
+    
     if (!is_null(Vars::get("all_languages"))) {
         return Vars::get("all_languages");
     }

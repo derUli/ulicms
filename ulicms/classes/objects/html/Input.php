@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace UliCMS\HTML;
 
+use Path;
 use ModuleHelper;
 use Template;
 
@@ -141,6 +142,11 @@ class Input {
         foreach ($htmlAttributes as $key => $val) {
             $attributes[$key] = $val;
         }
+        
+        if(!isset($attributes["id"])){
+            $attributes["id"] = $name;
+        }
+        
         $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);
 
         $html = "<select $attribHTML>";
@@ -178,5 +184,6 @@ class Input {
         $html .= '</select>';
         return $html;
     }
+    
 
 }

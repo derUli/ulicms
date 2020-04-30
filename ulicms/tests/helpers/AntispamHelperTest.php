@@ -14,8 +14,7 @@ class AntispamHelperTest extends \PHPUnit\Framework\TestCase {
 
 	public function tearDown() {
 		Settings::set("country_blacklist", $this->initialCountryBlacklist);
-		unset($_SERVER["REMOTE_ADDR"]);
-		unset($_SERVER['HTTP_USER_AGENT']);
+		$_SERVER = [];
 		Settings::set("spamfilter_enabled", "yes");
 	}
 

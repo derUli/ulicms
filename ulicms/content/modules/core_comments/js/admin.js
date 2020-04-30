@@ -11,6 +11,7 @@ $(() => {
             url: url,
             success: (result) => {
                 const unread = $(event.target).closest(".unread");
+                
                 if (unread.length) {
                     unread.removeClass("unread");
                     const commentCounter = $(".comment-counter .count");

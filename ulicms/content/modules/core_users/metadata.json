@@ -1,7 +1,16 @@
 {
     "source": "core",
-    "version": "2019.3",
+    "version": "2020.2",
     "embed": false,
+    "custom_acl": 
+            [
+                "users",
+                "users_create",
+                "users_edit",
+                "groups",
+                "groups_create",
+                "groups_edit"        
+            ],
     "actions": {
         "admins": "templates/users/list.php",
         "admin_new": "templates/users/new.php",

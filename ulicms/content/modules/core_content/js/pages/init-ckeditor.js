@@ -13,10 +13,24 @@ $(() => {
         CKEDITOR.instances[name].destroy();
         const editor = CKEDITOR.replace(id,
                 {
-                    skin: $("body").data("ckeditor-skin")}
+                    skin: $("body").data("ckeditor-skin")
+                }
         );
         editor.on("instanceReady", ({editor}) =>
         {
+            // update ckeditor height if the height
+            // was saved in the local storage
+            const ckeditorHeight = localStorage.getItem("ckeditorHeight");
+            if (ckeditorHeight) {
+                editor.resize('100%', ckeditorHeight, true);
+            }
+            // save editor height on resize
+            editor.on('resize', (event) => {
+                localStorage.setItem(
+                        "ckeditorHeight",
+                        event.data.contentsHeight
+                        );
+            });
             editor.document.on("keyup", CKCHANGED);
             editor.document.on("paste", CKCHANGED);
 
@@ -59,13 +73,14 @@ $(() => {
             submitted = 1;
         });
     });
-});
 
-window.onbeforeunload = () =>
-        {
-            if (typeof formChanged !== "undefined" && formChanged === 1
-                    && submitted === 0) {
-                return PageTranslation.ConfirmExitWithoutSave;
-            }
-            return;
-        };
+    $(window).on('beforeunload', () =>
+    {
+        if (typeof formChanged !== "undefined" && formChanged === 1
+                && submitted === 0) {
+            return PageTranslation.ConfirmExitWithoutSave;
+        }
+        return;
+    }
+    );
+});

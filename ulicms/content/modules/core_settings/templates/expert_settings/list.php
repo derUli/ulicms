@@ -15,7 +15,6 @@ if ($permissionChecker->hasPermission("expert_settings")) {
                class="btn btn-default"><i class="fa fa-plus"></i> <?php translate("create_option"); ?></a>
         </p>
     <?php } ?>
-    <p><?php BackendHelper::formatDatasetCount(count($data)); ?></p>
     <?php
     if (count($data) > 0) {
         ?>

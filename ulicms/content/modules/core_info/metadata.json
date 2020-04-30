@@ -1,7 +1,17 @@
 {
     "source": "core",
-    "version": "2019.2",
+    "version": "2020.2",
     "embed": false,
+    "controllers": {
+        "InfoController": "controllers/InfoController"
+    },
+    "custom_acl": [
+        "info"
+    ],
+    "controller_function_permissions": {
+        "InfoController::changelog": "info"
+    },
+    "main_class": "InfoController",
     "actions": {
         "info": "templates/info.php",
         "license": "templates/license.php"

@@ -118,11 +118,11 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
                 echo 'action-' . Template::getEscape(get_action());
             }
             ?>">
-            <div class="row">
+            <div class="row menubar">
                 <div class="col-xs-7">
                     <a href="../" title="<?php translate("goto_frontend"); ?>"><img
                             src="<?php Template::escape($admin_logo); ?>" alt="UliCMS"
-                            class="ulicms-logo"></a>
+                            class="img-responsive"></a>
                 </div>
                 <div class="col-xs-5 menu-container">
                     <?php
@@ -161,8 +161,4 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
                 </div>
             </div>
             <div class="main-content">
-                <?php
-                if (is_logged_in() and version_compare(phpversion(), '7.2', '<')) {
-                    require_once "inc/php_upgrade.php";
-                }
-
+                

@@ -70,7 +70,7 @@ if (!$searchPage) {
                     logo();
                 }
                 ?>
-                <p class="lead"><?php echo Settings::get("motd"); ?></p>
+                <div class="lead"><?php echo Settings::get("motd"); ?></div>
                 <p>
                     <a class="btn btn-lg btn-success" href="admin/" role="button"><?php translate("login") ?></a>
                 </p>

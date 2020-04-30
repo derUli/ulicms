@@ -26,7 +26,7 @@ class ArrayHelper extends Helper {
                 break;
             }
             $tmpArray[$key] = $value;
-            $originalIndex ++;
+            $originalIndex++;
         }
         array_splice($input, 0, $originalIndex, $tmpArray);
         return $input;
@@ -45,7 +45,7 @@ class ArrayHelper extends Helper {
         $originalIndex = 0;
         foreach ($input as $key => $value) {
             $tmpArray[$key] = $value;
-            $originalIndex ++;
+            $originalIndex++;
             if ($key === $index) {
                 $tmpArray[] = $element;
                 break;
@@ -80,7 +80,7 @@ class ArrayHelper extends Helper {
     }
 
     // flatten a nested array structure to one layer
-    public static function flatten($input) {
+    public static function flatten($input): array {
         if (!is_array($input)) {
             // nothing to do if it's not an array
             return [$input];
@@ -93,6 +93,14 @@ class ArrayHelper extends Helper {
         }
 
         return $result;
+    }
+
+    public static function getValueOrDefault(?array $input, $key, $default) {
+        if (!$input) {
+            return $default;
+        }
+
+        return isset($input[$key]) ? $input[$key] : $default;
     }
 
 }

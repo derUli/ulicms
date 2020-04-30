@@ -37,7 +37,7 @@ function getAllMenus(
     if ($only_used) {
         $used = get_all_used_menus();
         $new_menus = [];
-        for ($i = 0; $i <= count($menus); $i ++) {
+        for ($i = 0; $i < count($menus); $i ++) {
             if (faster_in_array($menus[$i], $used)) {
                 $new_menus[] = $menus[$i];
             }
