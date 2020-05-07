@@ -1,4 +1,11 @@
+===== Neues in UliCMS 2020.2.2 =====
+
+Neue Features:
+* Neuer Dateimanager: RESPONSIVE filemanager
+
 ===== Neues in UliCMS 2020.2.1 =====
+
+Neue Features:
 * Shortcodes von Modulen werden automatisch in die Zwischenablage kopiert
 * Seitenfilter Feature aktiviert (experimentiell)
 
