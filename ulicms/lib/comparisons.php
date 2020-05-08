@@ -14,7 +14,7 @@ function faster_in_array($needle, $haystack): bool {
 
 // is $val a decimal number or a integer?
 function is_decimal($val): bool {
-    return is_numeric($val) and ! ctype_digit(strval($val));
+    return is_numeric($val) && !ctype_digit(strval($val));
 }
 
 function is_zero($val): bool {
@@ -130,6 +130,10 @@ function is_crawler(?string $useragent = null): bool {
     if (is_null($useragent)) {
         $useragent = $_SERVER['HTTP_USER_AGENT'];
     }
+    if(is_null($useragent)){
+        return false;
+    }
+    
     $isCrawler = apply_filter($useragent, "is_crawler");
     if (is_bool($isCrawler) or is_int($isCrawler)) {
         return boolval($isCrawler);
@@ -147,21 +151,21 @@ function is_crawler(?string $useragent = null): bool {
 // Nutzt nun die Klasse Mobile_Detect
 function is_mobile(): bool {
     $result = false;
-    
+
     if (class_exists("Mobile_Detect")) {
         $detect = new Mobile_Detect();
         $result = $detect->isMobile();
     }
-    
+
     if (Settings::get("no_mobile_design_on_tablet")
             and $result and $detect->isTablet()) {
         $result = false;
     }
-    
+
     if (function_exists("apply_filter")) {
         $result = apply_filter($result, "is_mobile");
     }
-    
+
     return $result;
 }
 
@@ -176,7 +180,7 @@ function isMaintenanceMode(): bool {
 
 function is_tablet(): bool {
     $result = false;
-    
+
     if (class_exists("Mobile_Detect")) {
         $detect = new Mobile_Detect();
         $result = $detect->isTablet();
@@ -243,4 +247,8 @@ function var_is_type($var, $type, $required = false): bool {
 // returns true if $needle is a substring of $haystack
 function str_contains($needle, $haystack): bool {
     return strpos($haystack, $needle) !== false;
+}
+
+function is_version_number(?string $input): bool {
+    return ($input and version_compare($input, '0.0.1', '>='));
 }

@@ -252,4 +252,17 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase {
         ContentFactory::getByID(PHP_INT_MAX);
     }
 
+    public function testIsVersionNumberReturnsTrue() {
+        $this->assertTrue(is_version_number("1.0"));
+        $this->assertTrue(is_version_number("123"));
+        $this->assertTrue(is_version_number("2.0.3"));
+        $this->assertTrue(is_version_number("2.0.3beta"));
+    }
+
+    public function testIsVersionNumberReturnsFalse() {
+        $this->assertFalse(is_version_number("keine version"));
+        $this->assertFalse(is_version_number("null"));
+        $this->assertFalse(is_version_number("beta"));
+    }
+
 }

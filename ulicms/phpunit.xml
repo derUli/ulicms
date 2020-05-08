@@ -123,6 +123,9 @@
             <exclude>
                 <directory>content/modules/core_help/lang</directory>
             </exclude>
+             <exclude>
+                <directory>content/modules/cusom_types_example</directory>
+            </exclude>
             <exclude>
                 <directory>tests/</directory>
             </exclude>

@@ -34,11 +34,14 @@ class ModuleManager {
         return $modules;
     }
 
-    public function getAllModuleNames(): array {
+    public function getAllModuleNames(?string $source = null): array {
         $modules = [];
         $sql = "select name from {prefix}modules";
         $result = Database::query($sql, true);
         while ($row = Database::fetchObject($result)) {
+            if($source and getModuleMeta($row->name, "source") != $source){
+                continue;
+            }
             $modules [] = $row->name;
         }
         return $modules;

@@ -184,18 +184,108 @@ class RoboFile extends \Robo\Tasks {
 
     /**
      * List all installed modules and their version numbers
+     * @param string $modules one or more modules
      */
-    public function modulesList() {
-        $modules = getAllModules();
+    public function modulesList(array $modules) {
+        $modules = count($modules) ?
+                $this->replaceModulePlaceholders($modules) : getAllModules();
         if (count($modules) > 0) {
-            for ($i = 0; $i < count($modules); $i ++) {
-                $version = getModuleMeta($modules[$i], "version");
-                $line = $modules[$i];
-                if ($version !== null) {
-                    $line .= " $version";
-                }
-                $this->writeln($line);
+            for ($i = 0; $i < count($modules); $i++) {
+                $this->writeln($this->getModuleInfo($modules[$i]));
             }
+        }
+    }
+
+    private function getModuleInfo(string $name): string {
+        $version = getModuleMeta($name, "version");
+        $line = $name;
+
+        if ($version !== null) {
+            $line .= " $version";
+        }
+        $module = new Module($name);
+        $status = $module->isEnabled() ? "enabled" : "disabled";
+        $line .= " ($status)";
+        return $line;
+    }
+
+    /**
+     * toggles one or more modules
+     * @param array $modules one or more modules
+     */
+    public function modulesToggle(array $modules) {
+        $modules = $this->replaceModulePlaceholders($modules);
+
+        foreach ($modules as $name) {
+            $module = new Module($name);
+
+            $module->toggleEnabled();
+            $this->writeln($this->getModuleInfo($name));
+        }
+    }
+
+    private function replaceModulePlaceholders(array $modules): array {
+        $manager = new ModuleManager();
+        $manager->sync();
+        $outModules = [];
+
+        foreach ($modules as $name) {
+            if (strtolower($name) == "[all]") {
+                $outModules = array_merge(
+                        $outModules, $manager->getAllModuleNames()
+                );
+            } else if (strtolower($name) == "[core]") {
+                $outModules = array_merge(
+                        $outModules, $manager->getAllModuleNames("core")
+                );
+            } else if (strtolower($name) == "[extend]") {
+                $outModules = array_merge($outModules, $manager->getAllModuleNames("extend"));
+            } else if (strtolower($name) == "[pkgsrc]") {
+                $outModules = array_merge(
+                        $outModules, $manager->getAllModuleNames("pkgsrc")
+                );
+            } else {
+                $outModules[] = $name;
+            }
+        }
+        return $outModules;
+    }
+
+    /**
+     * enables one or more modules
+     * @param array $modules one or more modules
+     */
+    public function modulesEnable(array $modules) {
+        $modules = $this->replaceModulePlaceholders($modules);
+
+        foreach ($modules as $name) {
+            $module = new Module($name);
+
+            $module->enable();
+            $this->writeln($this->getModuleInfo($name));
+        }
+    }
+
+    /**
+     * disables one or more modules
+     * @param array $modules one or more modules
+     */
+    public function modulesDisable(array $modules) {
+        $modules = $this->replaceModulePlaceholders($modules);
+
+        foreach ($modules as $name) {
+            if (strtolower($name) == "[all]") {
+                $modules = $manager->getAllModuleNames();
+                break;
+            }
+        }
+
+        $manager = new ModuleManager();
+        $manager->sync();
+        foreach ($modules as $name) {
+            $module = new Module($name);
+            $module->disable();
+            $this->writeln($this->getModuleInfo($name));
         }
     }
 
@@ -219,7 +309,7 @@ class RoboFile extends \Robo\Tasks {
     public function themesList() {
         $theme = getAllThemes();
         if (count($theme) > 0) {
-            for ($i = 0; $i < count($theme); $i ++) {
+            for ($i = 0; $i < count($theme); $i++) {
                 $version = getThemeMeta($theme[$i], "version");
                 $line = $theme[$i];
                 if ($version !== null) {
@@ -345,13 +435,13 @@ class RoboFile extends \Robo\Tasks {
         $patchManager = new PatchManager();
         $patchManager->truncateInstalledPatches();
     }
-	
-	/**
+
+    /**
      * Sync installed modules with database
      */
     public function modulesSync(): void {
         $modules = new ModuleManager();
-		$modules->sync();
+        $modules->sync();
     }
 
     /**

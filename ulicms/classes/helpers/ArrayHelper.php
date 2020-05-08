@@ -102,5 +102,20 @@ class ArrayHelper extends Helper {
 
         return isset($input[$key]) ? $input[$key] : $default;
     }
-
+    
+    public static function hasMultipleKays(?array $input, array $keys): bool {
+            if (!$input){
+                return false;
+            }
+            
+            $hasKeys = true;
+            
+            foreach($keys as $key){
+                if(!array_key_exists($key, $input)){
+                    $hasKeys = false;
+                }
+            }
+            return $hasKeys;
+            
+}
 }

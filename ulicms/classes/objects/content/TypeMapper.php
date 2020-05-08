@@ -7,8 +7,7 @@ declare(strict_types=1);
 // content
 
 namespace UliCMS\Models\Content;
-
-use function getAllModules;
+use ModuleManager;
 use function getModuleMeta;
 use StringHelper;
 
@@ -44,7 +43,8 @@ class TypeMapper {
 
     // custom modules may load their own content type models
     public static function loadMapping(): void {
-        $modules = getAllModules();
+        $manager = new ModuleManager();
+        $modules = $manager->getEnabledModuleNames();
         foreach ($modules as $module) {
             $mappings = getModuleMeta($module, "type_classes");
 

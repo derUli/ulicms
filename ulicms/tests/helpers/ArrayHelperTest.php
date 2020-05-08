@@ -200,4 +200,49 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
+    private function getArrayTestData(): array {
+        return [
+            "foo" => "bar",
+            "hello" => "world",
+            "fire" => "water",
+            "metal" => "rock"
+        ];
+    }
+
+    public function testArrayHasMultipleKeysReturnsTrue() {
+        $this->assertTrue(
+                ArrayHelper::hasMultipleKays(
+                        $this->getArrayTestData(),
+                        [
+                            "foo",
+                            "fire"
+                        ]
+                )
+        );
+    }
+
+    public function testArrayHasMultipleKeysReturnsFalse() {
+        $this->assertFalse(
+                ArrayHelper::hasMultipleKays(
+                        $this->getArrayTestData(),
+                        [
+                            "foo",
+                            "fire",
+                            "nope"
+                            ]
+                        )
+        );
+        
+           $this->assertFalse(
+                ArrayHelper::hasMultipleKays(
+                       null,
+                        [
+                            "foo",
+                            "fire",
+                            "nope"
+                            ]
+                        )
+        );
+    }
+
 }

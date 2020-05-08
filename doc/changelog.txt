@@ -2,6 +2,11 @@
 
 Neue Features:
 * Neuer Dateimanager: RESPONSIVE filemanager
+* Neue Robo Tasks zur Verwaltung von Modulen
+
+Neue API-methoden
+* is_version_number(string? $input): bool
+* ArrayHelper::hasMultipleKays(?array $input, array $keys): bool
 
 ===== Neues in UliCMS 2020.2.1 =====
 
