@@ -189,6 +189,7 @@ bindEvents = () => {
             });
     $(".clear-field").on("click", (event) => {
         event.preventDefault();
+        event.stopPropagation()
         const element = $(event.target);
         const linkFor = $(element).data("for");
         $(linkFor).val("");
@@ -198,10 +199,11 @@ bindEvents = () => {
     refreshFieldThumbnails();
     $("input.fm").on("click", (event) => {
         const field = $(event.target);
-        
-        const name = $(field).data("fm-name")
-                ? $(field).data("fm-name")
-                : "fm_textbox";
+
+        const name = $(field).attr("id")
+                ? $(field).attr("id")
+                : $(field).attr("name")
+
         const type = $(field).data("fm-type")
                 ? $(field).data("fm-type")
                 : "images";
@@ -210,7 +212,7 @@ bindEvents = () => {
                 "fm/dialog.php?fldr=" +
                 type +
                 "&editor=ckeditor&type=2&langCode=" +
-                $("html").data("select2-language") + "&popup=1&field_id=" + field.attr("name"),
+                $("html").data("select2-language") + "&popup=1&field_id=" + field.attr("id"),
                 name,
                 "status=0, toolbar=0, location=0, menubar=0, directories=0, " +
                 "resizable=1, scrollbars=0, width=800, height=600"
