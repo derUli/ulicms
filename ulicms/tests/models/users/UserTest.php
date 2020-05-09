@@ -17,9 +17,11 @@ class UserTest extends \PHPUnit\Framework\TestCase {
 
         $user = new User();
         $user->loadByUsername("max_muster");
+        
         if (!is_null($user->getId())) {
             $user->delete();
         }
+        
         $group = new Group();
         $group->setName("Other Group");
         $group->save();
@@ -492,11 +494,39 @@ class UserTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetFullNameReturnsEmptyString() {
-
         $user = new User();
         $this->assertEmpty($user->getFullName());
     }
+    
+    public function testGetDisplayNameReturnsFullName(){
+        $user = new User();
+        $user->setFirstname("John");
+        $user->setLastname("Doe");
+        $user->setUsername("johndoe");
+        $this->assertEquals("John Doe", $user->getDisplayName());
+    }
 
+        public function testGetDisplayNameReturnsUsername(){
+        $user = new User();
+        $user->setUsername("johndoe");
+        $this->assertEquals("johndoe", $user->getDisplayName());
+    }
+        public function testGetDisplayNameReturnsFirstName(){
+        $user = new User();
+        $user->setFirstname("John");
+        $user->setUsername("johndoe");
+        $this->assertEquals("John", $user->getDisplayName());
+    }
+        public function testGetDisplayNameReturnsLastName(){
+        $user = new User();
+        $user->setLastname("Doe");
+        $user->setUsername("johndoe");
+        $this->assertEquals("Doe", $user->getDisplayName());
+    }
+        public function testGetDisplayNameReturnsEmptyString(){
+        $user = new User();
+        $this->assertEquals("", $user->getFullName());
+    }
     public function testGetAvatarReturnsFallback() {
         $user = new User();
         $this->assertStringEndsWith(

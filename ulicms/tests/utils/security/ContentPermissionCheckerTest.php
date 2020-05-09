@@ -14,8 +14,8 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase {
         $this->testGroup1 = new Group();
         $this->testGroup1->setName("testgroup1");
         $this->testGroup1->addPermission("pages", true);
-        $this->testGroup1->addPermission("pages_activate_others", true);
-        $this->testGroup1->addPermission("pages_activate_own", true);
+        $this->testGroup1->addPermission("pages_approve_others", true);
+        $this->testGroup1->addPermission("pages_approve_own", true);
         $this->testGroup1->addPermission("pages_change_owner", true);
         $this->testGroup1->addPermission("pages_create", true);
         $this->testGroup1->addPermission("pages_edit_others", true);
@@ -27,8 +27,8 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase {
         $this->testGroup2 = new Group();
         $this->testGroup2->setName("testgroup2");
         $this->testGroup2->addPermission("pages", true);
-        $this->testGroup2->addPermission("pages_activate_others", true);
-        $this->testGroup2->addPermission("pages_activate_own", true);
+        $this->testGroup2->addPermission("pages_approve_others", true);
+        $this->testGroup2->addPermission("pages_approve_own", true);
         $this->testGroup2->addPermission("pages_change_owner", true);
         $this->testGroup2->addPermission("pages_create", true);
         $this->testGroup2->addPermission("pages_edit_others", true);

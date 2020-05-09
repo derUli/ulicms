@@ -5,8 +5,8 @@
     "custom_acl": 
             [
                 "pages",
-                "pages_activate_own",
-                "pages_activate_others",
+                "pages_approve_own",
+                "pages_approve_others",
                 "pages_edit_own",
                 "pages_edit_others",
                 "pages_change_owner",

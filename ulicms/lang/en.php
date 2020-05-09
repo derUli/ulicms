@@ -21,7 +21,7 @@ add_translation("DATE", "Date");
 add_translation("DONE_BY", "Done by");
 
 add_translation("EDIT_PROFILE", "Edit Profile");
-add_translation("HELLO_NAME", "Hello %firstname% %lastname%!");
+add_translation("HELLO_NAME", "Hello %name%!");
 
 // Admin Menü Navigation
 add_translation("WELCOME", "Welcome");

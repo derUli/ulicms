@@ -103,7 +103,26 @@ class PageController extends Controller {
         );
         $model->title = Request::getVar("title");
         $model->alternate_title = Request::getVar("alternate_title");
-        $model->active = Request::getVar("active", true, "bool");
+
+        $model->author_id = $userId ? $userId : get_user_id();
+
+        // if the user is not permitted to change page status
+        // then select2 is disabled which causes the "active" value
+        // to not be submitted
+        // In this case set active to false on create page
+        // and don't change it's value on update
+        if (!$model->isPersistent()) {
+            $model->active = Request::hasVar("active") ?
+                    Request::getVar("active", true, "bool") : false;
+            $model->approved = Request::hasVar("active");
+        } else if (Request::hasVar("active")) {
+            $model->active = Request::getVar("active", true, "bool");
+            if($model->active){
+                $model->approved = true;
+            }
+            
+        }
+
         $model->hidden = Request::getVar("hidden", false, "bool");
         $model->content = Request::getVar("content");
 
@@ -178,20 +197,14 @@ class PageController extends Controller {
                         "str"
         );
 
-        $pages_activate_own = $permissionChecker->hasPermission(
-                "pages_activate_own"
+        $pages_approve_own = $permissionChecker->hasPermission(
+                "pages_approve_own"
         );
 
         if ($model instanceof Image_Page) {
             $model->image_url = Request::getVar("image_url", null, "str");
         }
 
-        $approved = 1;
-        if (!$pages_activate_own and $model->active == 0) {
-            $approved = 0;
-        }
-
-        $model->approved = !$pages_activate_own and $model->active == 0;
 
         if ($model instanceof Article) {
             $model->article_author_name = Request::getVar(
@@ -230,7 +243,6 @@ class PageController extends Controller {
                 Request::getVar("comments_enabled", false, "bool") : null;
 
         $model->show_headline = Request::getVar("show_headline", 1, "bool");
-        $model->author_id = $userId ? $userId : get_user_id();
         $model->group_id = $groupId ? $groupId : get_group_id();
 
         do_event("before_create_page");
@@ -323,7 +335,7 @@ class PageController extends Controller {
     public function deletePost(): void {
         $page = Request::getVar("id", null, "int");
         do_event("before_delete_page");
-        
+
         $content = ContentFactory::getByID($page);
         if ($content->id === null) {
             ExceptionResult(get_translation("not_found"));
@@ -577,7 +589,7 @@ class PageController extends Controller {
                     $language,
                     getLanguageNameByCode($language)
             );
-            if (count($userLanguages) and !in_array($language, $userLanguages)) {
+            if (count($userLanguages) and!in_array($language, $userLanguages)) {
                 continue;
             }
 
@@ -648,7 +660,7 @@ class PageController extends Controller {
         if ($language) {
             $where .= " and language = '" . Database::escapeValue($language) . "'";
         }
-        
+
 
         $groupLanguages = $this->getGroupAssignedLanguages();
         if (count($groupLanguages)) {

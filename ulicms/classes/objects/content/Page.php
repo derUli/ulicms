@@ -17,6 +17,7 @@ class Page extends Content {
     public $language = "de";
     public $menu_image = null;
     public $active = 1;
+    public $approved = 1;
     public $created = 0;
     public $lastmodified = 0;
     public $author_id = null;
@@ -64,6 +65,7 @@ class Page extends Content {
         $this->language = $result->language;
         $this->menu_image = $result->menu_image;
         $this->active = $result->active;
+        $this->approved = $result->approved;
         $this->created = $result->created;
         $this->lastmodified = $result->lastmodified;
         $this->author_id = $result->author_id;
@@ -144,7 +146,8 @@ class Page extends Content {
     public function create() {
         $sql = "INSERT INTO `" . tbname("content") . "` (slug, title,
             alternate_title, target, category_id,
-				content, language, menu_image, active, created,
+				content, language, menu_image, active,
+                                approved, created,
                                 lastmodified, author_id,
 				`group_id`, lastchangeby, views, menu, position,
                                 parent_id, access, meta_description,
@@ -169,6 +172,7 @@ class Page extends Content {
         }
 
         $sql .= intval($this->active) . ",";
+        $sql .= intval($this->approved) . ",";
         $this->created = time();
         $this->lastmodified = $this->created;
         $sql .= intval($this->created) . ",";
@@ -277,6 +281,7 @@ class Page extends Content {
         }
 
         $sql .= "active=" . intval($this->active) . ",";
+        $sql .= "approved=" . intval($this->approved) . ",";
         $sql .= "lastmodified=" . intval($this->lastmodified) . ",";
         $sql .= "author_id=" . intval($this->author_id) . ",";
         $sql .= "`group_id`=" . intval($this->group_id) . ",";

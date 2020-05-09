@@ -12,13 +12,14 @@ $model = $controller->getModel();
 // no patch check in google cloud
 $runningInGoogleCloud = class_exists("GoogleCloudHelper") ? GoogleCloudHelper::isProduction() : false;
 if ($permissionChecker->hasPermission("dashboard")) {
+
+    $user = User::fromSessionData();
     ?>
     <p>
         <?php
-        $str = get_translation("hello_name");
-        $str = str_ireplace("%firstname%", $_SESSION["firstname"], $str);
-        $str = str_ireplace("%lastname%", $_SESSION["lastname"], $str);
-        esc($str);
+        secure_translation("hello_name",
+                ["%name%" => $user->getDisplayName()]
+        );
         ?> </p>
     <p>
         <a
@@ -41,7 +42,6 @@ if ($permissionChecker->hasPermission("dashboard")) {
         <?php } ?>
         <?php if (!Settings::get("disable_core_patch_check")) {
             ?>
-
             <div id="patch-notification" style="display: none;"
                  data-url="<?php echo ModuleHelper::buildMethodCallUrl(UpdateCheckController::class, "patchCheck"); ?>">
                 <h2 class="accordion-header">

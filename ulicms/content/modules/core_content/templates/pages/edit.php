@@ -40,22 +40,28 @@ if ($permissionChecker->hasPermission("pages")) {
 
     $types = get_available_post_types();
 
-    $pages_activate_own = $permissionChecker->hasPermission("pages_activate_own");
-    $pages_activate_others = $permissionChecker->hasPermission("pages_activate_others");
+    $pages_approve_own = $permissionChecker->hasPermission("pages_approve_own");
+    $pages_approve_others = $permissionChecker->hasPermission("pages_approve_others");
 
     while ($row = db_fetch_object($result)) {
         $list_data = new List_Data($row->id);
+        $is_owner = $row->author_id == get_user_id();
 
-        $author_id = $row->author_id;
+        // TODO: refactor this into a method
+        // Can the current user change the value of "active"?
+        // If the page is not approved yet, then only permitted users 
+        // can activate it
+        // On first activation of a page it's status is set to approved.
+        // If the page was initially approved then any user with 
+        // edit permissions can change it.
+        $canActivateThis = false;
 
-        $is_owner = $author_id == get_user_id();
-
-        $can_active_this = false;
-
-        if ($is_owner and $pages_activate_own) {
-            $can_active_this = true;
-        } else if (!$is_owner and $pages_activate_others) {
-            $can_active_this = true;
+        if ($row->approved) {
+            $canActivateThis = true;
+        } else if ($is_owner and $pages_approve_own) {
+            $canActivateThis = true;
+        } else if (!$is_owner and $pages_approve_others) {
+            $canActivateThis = true;
         }
 
         $owner_group = $row->group_id;
@@ -64,7 +70,7 @@ if ($permissionChecker->hasPermission("pages")) {
         $can_edit_this = $checker->canWrite($row->id);
 
         $languageAssignment = getAllLanguages(true);
-        if (count($languageAssignment) > 0 and !in_array($row->language, $languageAssignment)) {
+        if (count($languageAssignment) > 0 and!in_array($row->language, $languageAssignment)) {
             $can_edit_this = false;
         }
 
@@ -299,7 +305,7 @@ if ($permissionChecker->hasPermission("pages")) {
                             </strong>
                             <select
                                 name="active" size=1
-                                <?php if (!$can_active_this) echo "disabled"; ?>>
+                                <?php if (!$canActivateThis) echo "disabled"; ?>>
                                 <option value="1"
                                 <?php
                                 if ($row->active == 1) {
@@ -1036,7 +1042,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                             echo $th;
                                             ?>"
                                             <?php
-                                            if (!is_null($row->theme) and !empty($row->theme) and $row->theme == $th)
+                                            if (!is_null($row->theme) and!empty($row->theme) and $row->theme == $th)
                                                 echo "selected";
                                             ?>>
                                                 <?php

@@ -28,7 +28,7 @@ if ($permissionChecker->hasPermission("pages")
     $sql = "SELECT id, name FROM " . tbname("audio");
     $audios = Database::query($sql);
 
-    $pages_activate_own = $permissionChecker->hasPermission("pages_activate_own");
+    $pages_approve_own = $permissionChecker->hasPermission("pages_approve_own");
 
     $types = get_available_post_types();
     ?>
@@ -247,11 +247,11 @@ if ($permissionChecker->hasPermission("pages")
                     <?php translate("activated"); ?>
                 </strong>
                 <select name="active" size=1
-                        <?php if (!$pages_activate_own) echo "disabled"; ?>>
+                        <?php if (!$pages_approve_own) echo "disabled"; ?>>
                     <option value="1">
                         <?php translate("enabled"); ?>
                     </option>
-                    <option value="0" <?php if (!$pages_activate_own) echo "selected"; ?>>
+                    <option value="0" <?php if (!$pages_approve_own) echo "selected"; ?>>
                         <?php translate("disabled"); ?>
                     </option>
                 </select>

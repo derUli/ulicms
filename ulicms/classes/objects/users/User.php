@@ -311,8 +311,12 @@ class User extends Model {
     }
 
     public function getFullName(): string {
-        return (!empty($this->firstname) and !empty($this->lastname)) ?
-                "{$this->firstname} {$this->lastname}" : "";
+        return trim("{$this->firstname} {$this->lastname}");
+    }
+
+    public function getDisplayName() {
+        return is_present($this->getFullName()) ? $this->getFullName() :
+        $this->getUsername();
     }
 
     public function checkPassword(string $password): bool {
@@ -514,7 +518,11 @@ class User extends Model {
     // users name. if the user isn't logged in, returns the default
     // no avatar pic
     public function getAvatar(): ?string {
-        $avatarUrl = ModuleHelper::getBaseUrl("/admin/gfx/no_avatar.png");
+        $avatarUrl = ModuleHelper::getBaseUrl(
+                        !is_admin_dir() ?
+                        "/admin/gfx/no_avatar.png" : "/gfx/no_avatar.png"
+        );
+
         $userAvatarDirectory = Path::resolve("ULICMS_CONTENT/avatars");
 
         if (!file_exists($userAvatarDirectory)) {
@@ -687,7 +695,7 @@ class User extends Model {
 
     public function isOnline(): bool {
         $onlineUsers = self::getOnlineUsers();
-        
+
         foreach ($onlineUsers as $user) {
             if ($user->getUserName() == $this->getUsername()) {
                 return true;

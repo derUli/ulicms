@@ -8,6 +8,9 @@ Neue API-methoden
 * is_version_number(string? $input): bool
 * ArrayHelper::hasMultipleKays(?array $input, array $keys): bool
 
+Fehlerkorrekturen:
+* Freigabe-Workflows für Seiten repariert
+
 ===== Neues in UliCMS 2020.2.1 =====
 
 Neue Features:
