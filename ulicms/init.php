@@ -138,11 +138,11 @@ function exception_handler($exception) {
     $httpStatus = $exception instanceof AccessDeniedException ?
             HttpStatusCode::FORBIDDEN : HttpStatusCode::INTERNAL_SERVER_ERROR;
     if (function_exists("HTMLResult") and class_exists("Template")
-            and ! headers_sent() and function_exists("get_theme")) {
+            and!headers_sent() and function_exists("get_theme")) {
         ViewBag::set("exception", nl2br(_esc($exception)));
         HTMLResult(Template::executeDefaultOrOwnTemplate("exception.php"), $httpStatus);
     }
-    if (function_exists("HTMLResult") and ! headers_sent()) {
+    if (function_exists("HTMLResult") and!headers_sent()) {
         HTMLResult($message, $httpStatus);
     } else {
         echo "{$message}\n";
@@ -167,7 +167,7 @@ if (php_sapi_name() != "cli") {
 }
 
 // Backwards compatiblity for modules using the old config class name
-if (class_exists("CMSConfig") and ! class_exists("config")) {
+if (class_exists("CMSConfig") and!class_exists("config")) {
     class_alias("CMSConfig", "config");
 }
 
@@ -188,7 +188,7 @@ if ((defined("ULICMS_DEBUG") and ULICMS_DEBUG)
 // this enables us to use stuff like Docker containers where data gets lost
 // after stopping the container
 if (isset($config->data_storage_root)
-        and ! is_null($config->data_storage_root)) {
+        and!is_null($config->data_storage_root)) {
     define("ULICMS_DATA_STORAGE_ROOT", $config->data_storage_root);
 } else {
     define("ULICMS_DATA_STORAGE_ROOT", ULICMS_ROOT);
@@ -199,7 +199,7 @@ require_once dirname(__file__) . "/classes/renderers/load.php";
 // this enables us to set an base url for statis ressources such as images
 // stored in ULICMS_DATA_STORAGE_ROOT
 if (isset($config->data_storage_url)
-        and ! is_null($config->data_storage_url)) {
+        and!is_null($config->data_storage_url)) {
     define("ULICMS_DATA_STORAGE_URL", $config->data_storage_url);
 }
 
@@ -425,7 +425,7 @@ function shutdown_function() {
     do_event("shutdown");
 
     $cfg = new CMSConfig();
-    if (isset($cfg->show_render_time) and is_true($cfg->show_render_time) and ! Request::isAjaxRequest()) {
+    if (isset($cfg->show_render_time) and is_true($cfg->show_render_time) and!Request::isAjaxRequest()) {
         echo "\n\n<!--" . (microtime(true) - START_TIME) . "-->";
     }
     if (isset($cfg->dbmigrator_drop_database_on_shutdown) and is_true($cfg->dbmigrator_drop_database_on_shutdown)) {
@@ -438,6 +438,19 @@ function shutdown_function() {
 }
 
 register_shutdown_function("shutdown_function");
+
+$patchManager = new PatchManager();
+$installed_patches = $patchManager->getInstalledPatchNames();
+$installed_patches = implode(";", $installed_patches);
+$version = new UliCMSVersion();
+
+define("PATCH_CHECK_URL", "https://patches.ulicms.de/?v=" .
+        urlencode(implode(".", $version->getInternalVersion())) . "&installed_patches=" . urlencode($installed_patches));
+
+$defaultMenu = isset($config->default_menu) && !empty($config->default_menu) ?
+        $config->default_menu : 'not_in_menu';
+
+define("DEFAULT_MENU", $defaultMenu);
 
 $enforce_https = Settings::get("enforce_https");
 
@@ -460,15 +473,3 @@ require_once dirname(__file__) . "/lib/templating.php";
 do_event("before_init");
 do_event("init");
 do_event("after_init");
-
-$patchManager = new PatchManager();
-
-$installed_patches = $patchManager->getInstalledPatchNames();
-$installed_patches = implode(";", $installed_patches);
-
-$version = new UliCMSVersion();
-
-if (!defined("PATCH_CHECK_URL")) {
-    define("PATCH_CHECK_URL", "https://patches.ulicms.de/?v=" .
-            urlencode(implode(".", $version->getInternalVersion())) . "&installed_patches=" . urlencode($installed_patches));
-}

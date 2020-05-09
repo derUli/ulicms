@@ -10,5 +10,6 @@ class CMSConfig extends BaseConfig {
     public $debug = false;
     public $exception_logging = true;
     public $log_requests = false;
+    public $default_menu = "not_in_menu";
 
 }

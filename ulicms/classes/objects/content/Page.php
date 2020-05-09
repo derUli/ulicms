@@ -24,7 +24,7 @@ class Page extends Content {
     public $group_id = null;
     public $lastchangeby = 1;
     public $views = 0;
-    public $menu = "top";
+    public $menu = DEFAULT_MENU;
     public $position = 0;
     public $cache_control = "auto";
     public $parent_id = null;

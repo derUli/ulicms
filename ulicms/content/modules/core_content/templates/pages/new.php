@@ -159,7 +159,7 @@ if ($permissionChecker->hasPermission("pages")
                             foreach (getAllMenus() as $menu) {
                                 ?>
                             <option value="<?php echo $menu ?>"
-                                    <?php if ($menu == "top") echo "selected"; ?>>
+                                    <?php if ($menu == DEFAULT_MENU) echo "selected"; ?>>
                                 <?php translate($menu); ?></option>
                             <?php
                         }

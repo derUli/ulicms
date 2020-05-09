@@ -3,6 +3,7 @@
 Neue Features:
 * Neuer Dateimanager: RESPONSIVE filemanager
 * Neue Robo Tasks zur Verwaltung von Modulen
+* Standardmenü ist nun konfigurierbar
 
 Neue API-methoden
 * is_version_number(string? $input): bool

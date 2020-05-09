@@ -19,8 +19,7 @@ class TranslationTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("Hello John Doe!",
                 get_translation("hello_name",
                         [
-                            "%firstname%" => "John",
-                            "%lastname%" => "Doe"
+                            "%name%" => "John Doe"
                         ]
                 )
         );
@@ -59,11 +58,10 @@ Anschließend werden statt die Inhalte immer wieder aus der Datenbank zu laden, 
     public function testGetSecureTranslationWithPlaceholders() {
 
         $this->assertEquals(_esc("Hello <script>alert('xss');</script>John " .
-                        "Doe<script>alert('xss');</script>!"),
+                        "Doe!"),
                 get_secure_translation("hello_name",
                         [
-                            "%firstname%" => "<script>alert('xss');</script>John",
-                            "%lastname%" => "Doe<script>alert('xss');</script>"
+                            "%name%" => "<script>alert('xss');</script>John Doe",
         ]));
     }
 
@@ -76,8 +74,7 @@ Anschließend werden statt die Inhalte immer wieder aus der Datenbank zu laden, 
         $this->assertEquals("Hello John Doe!",
                 _t("hello_name",
                         [
-                            "%firstname%" => "John",
-                            "%lastname%" => "Doe"
+                            "%name%" => "John Doe"
         ]));
     }
 
@@ -92,8 +89,7 @@ Anschließend werden statt die Inhalte immer wieder aus der Datenbank zu laden, 
         ob_start();
         t("hello_name",
                 [
-                    "%firstname%" => "John",
-                    "%lastname%" => "Doe"
+                    "%name%" => "John Doe"
         ]);
         $output = ob_get_clean();
         $this->assertEquals("Hello John Doe!", $output);
