@@ -81,9 +81,7 @@ require_once dirname(__file__) . "/classes/objects/registry/load.php";
 require_once dirname(__file__) . "/classes/objects/logging/load.php";
 require_once dirname(__file__) . "/classes/objects/html/load.php";
 require_once dirname(__file__) . "/classes/objects/content/TypeMapper.php";
-
 require_once dirname(__file__) . "/classes/objects/database/load.php";
-require_once dirname(__file__) . "/classes/objects/html/Template.php";
 require_once dirname(__file__) . "/classes/objects/security/load.php";
 require_once dirname(__file__) . "/classes/objects/files/load.php";
 require_once dirname(__file__) . "/classes/objects/spam/load.php";
