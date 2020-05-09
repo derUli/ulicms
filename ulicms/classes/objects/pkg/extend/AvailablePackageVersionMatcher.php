@@ -44,11 +44,7 @@ class AvailablePackageVersionMatcher {
     }
     public function getAllVersions(): array{
         $releases = $this->versionData;
-        $ulicmsVersionInfo = new UliCMSVersion();
-
-        $ulicmsVersion = $ulicmsVersion ?
-                $ulicmsVersion : $ulicmsVersionInfo->getInternalVersionAsString();
-
+        
         usort($releases, function($a, $b) {
             return version_compare($a["version"], $b["version"], "<");
         });

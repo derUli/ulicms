@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use UliCMS\Packages\PatchManager;
+use UliCMS\Services\Connectors\eXtend\AvailablePackageVersionMatcher;
 use UliCMS\Utils\CacheUtil;
 
 /**
@@ -300,6 +301,25 @@ class RoboFile extends \Robo\Tasks {
             } else {
                 $this->writeln("Removing  $module failed.");
             }
+        }
+    }
+
+    /**
+     * get available versions of a module from eXtend
+     * @param array $modules one or more modules
+     */
+    public function modulesGetPackageVersions(array $modules) {
+        $modules = $this->replaceModulePlaceholders($modules);
+
+        foreach ($modules as $module) {
+            $url = "https://extend.ulicms.de/{$module}.json";
+            $json = file_get_contents_wrapper($url, true);
+            $data = json_decode($json, true);
+            $releases = $data["data"];
+            $checker = new AvailablePackageVersionMatcher($releases);
+            $this->writeln(
+                    var_dump_str($checker->getCompatibleVersions())
+            );
         }
     }
 
