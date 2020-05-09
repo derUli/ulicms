@@ -529,11 +529,11 @@ class User extends Model {
             mkdir($userAvatarDirectory, 0777, true);
         }
 
-        if (file_exists($userAvatarDirectory) and $this->getFullName()) {
+        if (file_exists($userAvatarDirectory)) {
             $avatarImageFile1 = Path::Resolve("$userAvatarDirectory/user-" .
                             $this->getId() . ".png");
             $avatarImageFile2 = Path::Resolve("$userAvatarDirectory/" .
-                            md5($this->getFullName()) . ".png");
+                            md5($this->getDisplayName()) . ".png");
 
             $url = !is_admin_dir() ?
                     "content/avatars/user-" . $this->getId() . ".png" :
@@ -552,7 +552,7 @@ class User extends Model {
     protected function generateAvatar(string $avatarImageFile): string {
         if (!file_exists($avatarImageFile)) {
             $avatar = new InitialAvatar();
-            $image = $avatar->name($this->getFullName())->
+            $image = $avatar->name($this->getDisplayName())->
                             rounded()->smooth()->
                             autoFont()->fontSize(0.35)->
                             size(40)->generate();
@@ -560,8 +560,8 @@ class User extends Model {
         }
 
         $url = !is_admin_dir() ?
-                "content/avatars/" . md5($this->getFullName()) . ".png" :
-                "../content/avatars/" . md5($this->getFullName()) . ".png";
+                "content/avatars/" . md5($this->getDisplayName()) . ".png" :
+                "../content/avatars/" . md5($this->getDisplayName()) . ".png";
 
         $avatarUrl = $url;
 
