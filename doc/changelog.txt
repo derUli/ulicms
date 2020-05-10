@@ -4,11 +4,12 @@ Neue Features:
 * Neuer Dateimanager: RESPONSIVE filemanager
 * Neue Robo Tasks zur Verwaltung von Modulen
 * Vorausgewähltes Menü und vorausgewählter Inhaltstyp konfigurierbar
-*  
 
 Neue API-methoden
 * is_version_number(string? $input): bool
 * ArrayHelper::hasMultipleKays(?array $input, array $keys): bool
+* UliCMS\HTML\_nbsp(string $text = " "): string
+* UliCMS\HTML\nbsp(string $text = " "): void
 
 Fehlerkorrekturen:
 * Freigabe-Workflows für Seiten repariert
