@@ -304,7 +304,7 @@ class User extends Model {
         $passwordReset->sendMail(
                 $token,
                 $this->getEmail(),
-                "xxx.xxx.xxx.xxx",
+                get_ip(),
                 $this->getFirstname(),
                 $this->getLastname()
         );
@@ -314,9 +314,10 @@ class User extends Model {
         return trim("{$this->firstname} {$this->lastname}");
     }
 
-    public function getDisplayName() {
-        return is_present($this->getFullName()) ? $this->getFullName() :
+    public function getDisplayName(): string {
+        $name = is_present($this->getFullName()) ? $this->getFullName() :
         $this->getUsername();
+        return $name ?? "";
     }
 
     public function checkPassword(string $password): bool {
@@ -529,7 +530,7 @@ class User extends Model {
             mkdir($userAvatarDirectory, 0777, true);
         }
 
-        if (file_exists($userAvatarDirectory)) {
+        if (file_exists($userAvatarDirectory) and $this->getDisplayName()) {
             $avatarImageFile1 = Path::Resolve("$userAvatarDirectory/user-" .
                             $this->getId() . ".png");
             $avatarImageFile2 = Path::Resolve("$userAvatarDirectory/" .

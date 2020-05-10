@@ -13,6 +13,7 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         CacheUtil::clearAvatars(true);
         $_SERVER["REQUEST_URI"] = "/other-url.html?param=value";
 
+        $_SERVER["REMOTE_ADDR"] = "123.123.123.123";
         require_once getLanguageFilePath("en");
 
         $user = new User();
@@ -47,6 +48,7 @@ class UserTest extends \PHPUnit\Framework\TestCase {
                 ],
                 true
         );
+        unset($_SERVER["REMOTE_ADDR"]);
         unset($_SERVER["REQUEST_URI"]);
         unset($_SERVER["SERVER_PROTOCOL"]);
         unset($_SERVER['HTTP_HOST']);
