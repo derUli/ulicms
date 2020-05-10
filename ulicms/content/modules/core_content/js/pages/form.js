@@ -74,6 +74,10 @@ showAndHideFieldsByTypeWithoutEffects = () => {
     const type = $("input[name=type]:checked").val();
 
     $(".typedep").hide();
+    if (typeof AllTypes[type] === 'undefined') {
+        return;
+    }
+
     const typeData = AllTypes[type];
     const show = typeData["show"];
 

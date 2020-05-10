@@ -108,6 +108,10 @@ $(() => {
 
     const isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
     if (isSafari) {
+        $("input[type='datetime-local']").map((element) =>
+            $(element).val($(element).val().substr(0, 16))
+        );
+
         $("input[type='datetime-local']").change((event) =>
             event.target.value = event.target.value.substr(0, 16)
         );

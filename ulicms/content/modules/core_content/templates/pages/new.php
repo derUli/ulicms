@@ -111,7 +111,7 @@ if ($permissionChecker->hasPermission("pages")
                     <input type="radio" name="type" id="type_<?php echo $type; ?>"
                            value="<?php echo $type; ?>"
                            <?php
-                           if ($type == "page") {
+                           if ($type == DEFAULT_CONTENT_TYPE) {
                                echo "checked";
                            }
                            ?>> <label
