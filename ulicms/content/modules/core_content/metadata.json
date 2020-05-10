@@ -52,7 +52,7 @@
         "PageController::empyTrash": "pages",
         "PageController::toggleFilters": "pages",
         "PageController::toggleShowPositions": "pages_show_positions",
-        "PageController::checkSlugFree": "pages",
+        "PageController::nextFreeSlug": "pages",
         "PageController::getPages": "pages",
         "PageController::filterParentPages": "pages",
         "PageControlle::getParentSelection": "pages",

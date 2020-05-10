@@ -1,4 +1,6 @@
 // Script for new page and edit page form
+
+window.slugChecking = false;
 $(() => {
     const url = $(".main-form")
             .first()
@@ -47,7 +49,8 @@ $(() => {
     });
 
     // check if a slug is free on changing system title or menu
-    $("input[name='slug']").keyup(() => slugOrLanguageChanged());
+    $("input[name='slug']").blur(() => slugOrLanguageChanged());
+    $("input[name='title']").blur(() => slugOrLanguageChanged());
 
     $("select[name='menu']").change(() => filterParentPages());
 
@@ -240,6 +243,10 @@ suggestSlug = (text) => {
 // this checks if a slug is free within the selected language
 // the combination of slug + language must be unique
 slugOrLanguageChanged = () => {
+    if(window.slugChecking){
+        return;
+    }
+    window.slugChecking = true;
     const id_field = $("input[name='page_id']");
     let myid = 0;
     if (id_field) {
@@ -258,13 +265,10 @@ slugOrLanguageChanged = () => {
             .data("slug-free-url");
 
     $.get(url, data, function (text) {
-        if (text === "yes") {
-            $("input[name='slug']").removeClass("error-field");
-            $("select[name='language']").removeClass("error-field");
-        } else {
-            $("input[name='slug']").addClass("error-field");
-            $("select[name='language']").addClass("error-field");
+        if(text.length > $("input[name='slug']").val().length){ 
+            document.querySelector("input[name='slug']").value = text;
         }
+        window.slugChecking = false;
     });
 
 };

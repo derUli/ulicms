@@ -47,7 +47,7 @@ if ($permissionChecker->hasPermission("pages")
                         "getContentTypes"),
                 "data-slug-free-url" =>
                 ModuleHelper::buildMethodCallUrl(PageController::class,
-                        "checkSlugFree"),
+                        "nextFreeSlug"),
                 "data-parent-pages-url" =>
                 ModuleHelper::buildMethodCallUrl(PageController::class,
                         "filterParentPages")

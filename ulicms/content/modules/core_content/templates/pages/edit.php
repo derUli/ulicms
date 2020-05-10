@@ -102,7 +102,7 @@ if ($permissionChecker->hasPermission("pages")) {
                     "id" => "pageform-edit",
                     "class" => "pageform main-form",
                     "data-get-content-types-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "getContentTypes"),
-                    "data-slug-free-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "checkSlugFree"),
+                    "data-slug-free-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "nextFreeSlug"),
                     "data-parent-pages-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "filterParentPages")
                 ));
                 ?>
