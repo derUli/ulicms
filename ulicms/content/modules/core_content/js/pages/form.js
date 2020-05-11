@@ -243,7 +243,7 @@ suggestSlug = (text) => {
 // this checks if a slug is free within the selected language
 // the combination of slug + language must be unique
 slugOrLanguageChanged = () => {
-    if(window.slugChecking){
+    if (window.slugChecking) {
         return;
     }
     window.slugChecking = true;
@@ -265,12 +265,11 @@ slugOrLanguageChanged = () => {
             .data("slug-free-url");
 
     $.get(url, data, function (text) {
-        if(text.length > $("input[name='slug']").val().length){ 
-            document.querySelector("input[name='slug']").value = text;
+        if (text.length > $("input[name='slug']").val().length) {
+            $("input[name='slug']").val(text);
         }
         window.slugChecking = false;
     });
-
 };
 
 // filter parent pages by selected language and menu
