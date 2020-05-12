@@ -108,6 +108,9 @@
             <exclude>
                 <file>classes/objects/web/load.php</file>
             </exclude>
+              <exclude>
+                <directory>content/modules.aus/</directory>
+            </exclude>
             <exclude>
                 <directory>content/modules/core_comments/lang</directory>
             </exclude>
