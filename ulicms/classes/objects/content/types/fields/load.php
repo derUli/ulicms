@@ -4,6 +4,7 @@ $classes = [
     "CustomField",
     "TextField",
     "MultilineTextField",
+    "UrlField",
     "EmailField",
     "MonthField",
     "DatetimeField",

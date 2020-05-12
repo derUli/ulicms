@@ -5,6 +5,7 @@ Neue Features:
 * Neue Robo Tasks zur Verwaltung von Modulen
 * Vorausgewähltes Menü und vorausgewählter Inhaltstyp konfigurierbar
 * Doppelte Slugs werden nun verhindert
+* Neuer CustomField-Typ "UrlField"
 
 Neue API-methoden
 * is_version_number(string? $input): bool
