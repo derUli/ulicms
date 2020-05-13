@@ -99,11 +99,11 @@ showAndHideFieldsByTypeWithoutEffects = () => {
 
     $(".custom-field-tab").each((index, el) => {
         if ($(el).data("type") === $("input[name='type']:checked").val()) {
-            $(el).find("input, select, button, submit").prop("disabled", false);
+            $(el).find("input, select, checkbox, radio, button, submit").prop("disabled", false);
             $(el).show();
         } else {
             $(el).hide();
-            $(el).find("input, select, button, submit").prop("disabled", true);
+            $(el).find("input, select, checkbox, radio, button, submit").prop("disabled", true);
         }
     });
 
