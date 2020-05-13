@@ -45,7 +45,7 @@ class HelperRegistry {
 					require_once $value;
 				} else {
 					throw new FileNotFoundException("Module {$module}: "
-							. "File '{$path}' not found.");
+							. "File '{$value}' not found.");
 				}
 				if (class_exists($key)) {
 					$classInstance = new $key();

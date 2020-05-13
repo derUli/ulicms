@@ -35,7 +35,7 @@ class ModelRegistry {
                     require $value;
                 } else {
                     throw new FileNotFoundException("Module {$module}: "
-                            . "File '{$path}' not found.");
+                            . "File '{$value}' not found.");
                 }
             }
         }
