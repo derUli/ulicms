@@ -49,10 +49,10 @@ if ($permissionChecker->hasPermission("pages")) {
 
         // TODO: refactor this into a method
         // Can the current user change the value of "active"?
-        // If the page is not approved yet, then only permitted users 
+        // If the page is not approved yet, then only permitted users
         // can activate it
         // On first activation of a page it's status is set to approved.
-        // If the page was initially approved then any user with 
+        // If the page was initially approved then any user with
         // edit permissions can change it.
         $canActivateThis = false;
 
@@ -385,7 +385,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                        ?>"
                                        style="cursor: pointer" /> <a href="#"
                                        onclick="$('#menu_image').val('');
-                                                           return false;"
+                                               return false;"
                                        class="btn btn-default voffset2">
                                     <i class="fa fa-eraser"></i> <?php translate("clear"); ?> </a>
                             </div>
@@ -545,7 +545,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                            ?>"
                                            style="cursor: pointer" /> <a href="#"
                                            onclick="$('#og_image').val('');
-                                                               return false;"
+                                                   return false;"
                                            class="btn btn-default voffset2">
                                         <i class="fa fa-eraser"></i>
                                         <?php translate("clear"); ?>
@@ -836,7 +836,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                        value="<?php Template::escape($row->image_url); ?>"
                                        style="cursor: pointer" /> <a href="#"
                                        onclick="$('#image_url').val('');
-                                                           return false;"
+                                               return false;"
                                        class="btn btn-default voffset2"><i class="fa fa-eraser"></i>
                                            <?php translate("clear"); ?>
                                 </a>
@@ -880,7 +880,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                        value="<?php echo _esc($row->article_image); ?>"
                                        style="cursor: pointer" maxlength="255" /> <a href="#"
                                        onclick="$('#article_image').val('');
-                                                           return false;"
+                                               return false;"
                                        class="btn btn-default voffset2">
                                     <i class="fa fa-eraser"></i>
                                     <?php translate("clear"); ?></a>
@@ -1131,7 +1131,7 @@ if ($permissionChecker->hasPermission("pages")) {
                 </div>
                 <div class="row">
                     <div class="col-xs-6">
-                        <button type="submit" class="btn btn-primary">
+                        <button type="button" class="btn btn-primary" id="btn-submit">
                             <i class="far fa-save"></i> <?php translate("save_changes"); ?></button>
                     </div>
                     <div class="col-xs-6 text-right">
@@ -1142,11 +1142,13 @@ if ($permissionChecker->hasPermission("pages")) {
                 <?php
                 $translation = new JSTranslation([], "PageTranslation");
                 $translation->addKey("confirm_exit_without_save");
+                $translation->addKey("fill_all_required_fields");
                 $translation->render();
 
                 $translation = new JSTranslation();
                 $translation->addKey("ask_for_delete");
                 $translation->addKey("page_saved");
+                $translation->addKey("fill_all_required_fields");
                 $translation->render();
 
                 enqueueScriptFile("../node_modules/slug/slug.js");

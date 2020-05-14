@@ -23,6 +23,22 @@ $(() => {
     slugOrLanguageChanged();
     filterParentPages();
 
+    $("#btn-submit").click((event) => {
+        const form = $(event.target).closest("form");
+        if (form.get(0).reportValidity()) {
+            form.submit();
+        } else {
+            const hiddenInvalidElements = $(
+                    "input, select, checkbox, textarea, radio"
+                    ).filter(':hidden').toArray().
+                    filter((x) => !x.checkValidity());
+
+            if (hiddenInvalidElements.length) {
+                bootbox.alert(PageTranslation.FillAllRequiredFields);
+            }
+        }
+    });
+
     // AJAX submit page edit form
     $("#pageform-edit").ajaxForm({
         beforeSubmit: () => {

@@ -397,7 +397,7 @@ if ($permissionChecker->hasPermission("pages")
                                value="<?php esc($og_image); ?>"
                                style="cursor: pointer" /> <a href="#"
                                onclick="$('#og_image').val('');
-                                           return false;"
+                                       return false;"
                                class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?></a>
                     </div>
                 </div>
@@ -441,7 +441,7 @@ if ($permissionChecker->hasPermission("pages")
                             echo '<option value="' . $type . '">' . get_translation($type) . "</option>";
                         }
                         ?>
-                    </select> 
+                    </select>
                 </div>
 
                 <div class="field">
@@ -538,7 +538,7 @@ if ($permissionChecker->hasPermission("pages")
                 <div class="field">
                     <strong class="field-label">
                         <?php translate("order_direction"); ?>
-                    </strong> 
+                    </strong>
                     <select name="list_order_direction">
                         <option value="asc"><?php translate("asc"); ?></option>
                         <option value="desc"><?php translate("desc"); ?></option>
@@ -549,7 +549,7 @@ if ($permissionChecker->hasPermission("pages")
                     <strong class="field-label">
                         <?php translate("entries_per_page"); ?>
                     </strong>
-                    <input type="number" min="0" name="limit" step="1" value="0"> 
+                    <input type="number" min="0" name="limit" step="1" value="0">
                 </div>
 
                 <div class="field">
@@ -655,7 +655,7 @@ if ($permissionChecker->hasPermission("pages")
                            readonly="readonly" class="fm"
                            value="" style="cursor: pointer" maxlength="255" /> <a href="#"
                            onclick="$('#article_image').val('');
-                                       return false;"
+                                   return false;"
                            class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?></a>
                 </div>
             </div>
@@ -743,7 +743,7 @@ if ($permissionChecker->hasPermission("pages")
                 </select>
             </div>
             <div class="typedep" id="custom_data_json">
-                    <?php do_event("before_custom_data_json"); ?>
+                <?php do_event("before_custom_data_json"); ?>
                 <div class="field">
                     <strong class="field-label"><?php translate("custom_data_json"); ?></strong>
                     <textarea name="custom_data" style="width: 100%; height: 200px;"
@@ -764,11 +764,13 @@ if ($permissionChecker->hasPermission("pages")
     </div>
     <div class="inPageMessage"></div>
     <input type="hidden" name="add_page" value="add_page">
-    <button type="submit" class="btn btn-primary">
-        <i class="far fa-save"></i> <?php translate("save"); ?></button>
+    <button type="button" class="btn btn-primary" id="btn-submit">
+        <i class="far fa-save"></i> <?php translate("save"); ?>
+    </button>
     <?php
     $translation = new JSTranslation([], "PageTranslation");
     $translation->addKey("confirm_exit_without_save");
+    $translation->addKey("fill_all_required_fields");
     $translation->render();
 
     enqueueScriptFile("../node_modules/slug/slug.js");

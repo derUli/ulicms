@@ -33,3 +33,5 @@ add_translation("robots", "Robots");
 add_translation("page_saved", "The page was saved.");
 
 add_translation("auto_generated_from_title", "Auto generated from title");
+
+add_translation("fill_all_required_fields", "Please fill all required fields.");
