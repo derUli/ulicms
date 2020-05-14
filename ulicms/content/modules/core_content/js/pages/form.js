@@ -23,12 +23,18 @@ $(() => {
     slugOrLanguageChanged();
     filterParentPages();
 
-    $("#btn-submit").click((event) => {
+    $(".new-page-form #btn-submit").click((event) => {
         const form = $(event.target).closest("form");
-        if (form.get(0).reportValidity()) {
+
+        event.preventDefault();
+        event.stopPropagation();
+            
+        if (!form.hasClass("edit-page-form") && form.get(0).reportValidity()) {
+            $(window).off("beforeunload");
+            $(form).off("submit");
             form.submit();
         } else {
-            const hiddenInvalidElements = $(
+            const hiddenInvalidElements = form.find(
                     "input, select, checkbox, textarea, radio"
                     ).filter(':hidden').toArray().
                     filter((x) => !x.checkValidity());
@@ -40,7 +46,7 @@ $(() => {
     });
 
     // AJAX submit page edit form
-    $("#pageform-edit").ajaxForm({
+    $(".edit-page-form").ajaxForm({
         beforeSubmit: () => {
             $("#message-page-edit").html("");
             $("#message-page-edit").hide();

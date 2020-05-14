@@ -41,7 +41,7 @@ if ($permissionChecker->hasPermission("pages")
                 "name" => "newpageform",
                 "id" => "pageform",
                 "style" => "display:none",
-                "class" => "pageform main-form",
+                "class" => "pageform main-form new-page-form",
                 "data-get-content-types-url" =>
                 ModuleHelper::buildMethodCallUrl(PageController::class,
                         "getContentTypes"),
@@ -764,7 +764,7 @@ if ($permissionChecker->hasPermission("pages")
     </div>
     <div class="inPageMessage"></div>
     <input type="hidden" name="add_page" value="add_page">
-    <button type="button" class="btn btn-primary" id="btn-submit">
+    <button type="submit" class="btn btn-primary btn-new" id="btn-submit">
         <i class="far fa-save"></i> <?php translate("save"); ?>
     </button>
     <?php

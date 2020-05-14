@@ -100,7 +100,7 @@ if ($permissionChecker->hasPermission("pages")) {
                 <?php
                 echo ModuleHelper::buildMethodCallForm("PageController", "edit", [], "post", array(
                     "id" => "pageform-edit",
-                    "class" => "pageform main-form",
+                        "class" => "pageform main-form edit-page-form",
                     "data-get-content-types-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "getContentTypes"),
                     "data-slug-free-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "nextFreeSlug"),
                     "data-parent-pages-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "filterParentPages")
@@ -1131,7 +1131,7 @@ if ($permissionChecker->hasPermission("pages")) {
                 </div>
                 <div class="row">
                     <div class="col-xs-6">
-                        <button type="button" class="btn btn-primary" id="btn-submit">
+                        <button type="submit" class="btn btn-primary" id="btn-submit">
                             <i class="far fa-save"></i> <?php translate("save_changes"); ?></button>
                     </div>
                     <div class="col-xs-6 text-right">
