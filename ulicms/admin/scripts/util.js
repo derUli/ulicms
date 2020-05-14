@@ -27,6 +27,7 @@ const scrollToAnchor = (aid) => {
         scrollTop: aTag.offset().top
     }, 'slow');
 };
+
 const refreshCodeMirrors = () => {
     $('.CodeMirror').each((i, el) =>
         el.CodeMirror.refresh()
