@@ -1,13 +1,6 @@
 // Script for new page and edit page form
 
 window.slugChecking = false;
-window.allConstants = {
-    allInputs: 'input, select, textarea, checkbox, radio, button, submit'
-};
-/* global Translation, formChanged, submitted, bootbox, instance, CKEDITOR, allConstants */
-
-window.AllTypes = {};
-
 $(() => {
     const url = $(".main-form")
             .first()
@@ -30,58 +23,6 @@ $(() => {
     slugOrLanguageChanged();
     filterParentPages();
 
-    $("#btn-submit").click((event) => {
-        const form = $(event.target).closest("form");
-        // Check if form is valid
-        const formIsValid = form.get(0).checkValidity();
-        // If is valid do submit
-        if (formIsValid) {
-            form.submit();
-            return;
-        }
-
-        const accordionContents = $(".accordion-content");
-        const accordionHeaders = $(".accordion-header").toArray();
-
-        let firstInvalidField = null;
-        let fieldAccordionIndex = null;
-        let accordionIsVisible = false;
-        accordionContents.each((accordionIndex, accordionElement) => {
-            if (firstInvalidField) {
-                return;
-            }
-            const inputs = $(accordionElement)
-                    .find(window.allConstants.allInputs).toArray();
-            const invalidInputs = inputs.filter((x) => !x.checkValidity());
-            if (invalidInputs.length) {
-                const firstInvalidInput = invalidInputs[0];
-                firstInvalidField = invalidInputs[0];
-                fieldAccordionIndex = accordionIndex;
-                accordionIsVisible = $(accordionElement).hasClass("open-content");
-                return;
-            }
-        });
-
-        if (!firstInvalidField) {
-            return;
-        }
-
-        if (firstInvalidField && fieldAccordionIndex !== null && !accordionIsVisible) {
-            accordionHeaders[fieldAccordionIndex].click();
-        } else if(!accordionIsVisible && firstInvalidField){
-             firstInvalidField.reportValidity();
-             return;
-        }
-
-        setTimeout(() => {
-            zenscroll.to(
-                   accordionHeaders[fieldAccordionIndex],
-           500,
-           () => firstInvalidField.reportValidity()
-                   );
-    }, 200);
-    });
-    
     // AJAX submit page edit form
     $("#pageform-edit").ajaxForm({
         beforeSubmit: () => {
@@ -158,11 +99,11 @@ showAndHideFieldsByTypeWithoutEffects = () => {
 
     $(".custom-field-tab").each((index, el) => {
         if ($(el).data("type") === $("input[name='type']:checked").val()) {
-            $(el).find(allConstants.allInputs).prop("disabled", false);
+            $(el).find("input, select, checkbox, radio, button, submit").prop("disabled", false);
             $(el).show();
         } else {
             $(el).hide();
-            $(el).find(allConstants.allInputs).prop("disabled", true);
+            $(el).find("input, select, checkbox, radio, button, submit").prop("disabled", true);
         }
     });
 
@@ -207,10 +148,10 @@ showAndHideFieldsByType = () => {
     $(".custom-field-tab").each((index, el) => {
         if ($(el).data("type") === $("input[name='type']:checked").val()) {
             $(el).slideDown();
-            $(el).find(allConstants.allInputs).prop("disabled", false);
+            $(el).find("input, select, button, submit").prop("disabled", false);
         } else {
             $(el).slideUp();
-            $(el).find(allConstants.allInputs).prop("disabled", true);
+            $(el).find("input, select, button, submit").prop("disabled", true);
         }
     });
 
@@ -228,6 +169,11 @@ showAndHideFieldsByType = () => {
         $("#menu_image_div").slideDown();
     }
 };
+
+
+/* global Translation, formChanged, submitted, bootbox, instance, CKEDITOR */
+
+let AllTypes = {};
 
 // this shows a thumbnail of the selected file on text inputs with
 // fm image uploader attached
