@@ -66,7 +66,7 @@ function file_get_contents_wrapper(
 	$runningInGoogleCloud = class_exists("GoogleCloudHelper") ?
 			GoogleCloudHelper::isProduction() : false;
 
-	if (function_exists("curl_init") and is_url($url) and ! $runningInGoogleCloud) {
+	if (function_exists("curl_init") and is_url($url) && !$runningInGoogleCloud) {
 		$content = file_get_contents_curl($url);
 	} else if (ini_get("allow_url_fopen")) {
 		ini_set("default_socket_timeout", 5);
@@ -80,7 +80,7 @@ function file_get_contents_wrapper(
 		);
 	}
 
-	if (is_dir($cache_folder) and is_url($url) and ! $no_cache) {
+	if (is_dir($cache_folder) and is_url($url) && !$no_cache) {
 		file_put_contents($cache_path, $content);
 	}
 

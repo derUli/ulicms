@@ -168,7 +168,7 @@ class CommentsController extends MainClass {
         $action = Request::getVar("action", null, "str");
 
         // if we have comments and an action
-        if (is_array($comments) and ! empty($action)) {
+        if (is_array($comments) && !empty($action)) {
             // do the selected action for each comment
             foreach ($comments as $id) {
                 $comment = new Comment($id);

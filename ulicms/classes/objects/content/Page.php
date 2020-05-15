@@ -443,7 +443,7 @@ class Page extends Content {
                 );
 
                 if (count($commentable_content_types) > 0
-                        and ! faster_in_array($this->type,
+                        && !faster_in_array($this->type,
                                 $commentable_content_types)) {
                     $commentsEnabled = false;
                 }

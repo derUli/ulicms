@@ -126,11 +126,11 @@ function exception_handler($exception) {
     $httpStatus = $exception instanceof AccessDeniedException ?
             HttpStatusCode::FORBIDDEN : HttpStatusCode::INTERNAL_SERVER_ERROR;
     if (function_exists("HTMLResult") and class_exists("Template")
-            and!headers_sent() and function_exists("get_theme")) {
+            && !headers_sent() and function_exists("get_theme")) {
         ViewBag::set("exception", nl2br(_esc($exception)));
         HTMLResult(Template::executeDefaultOrOwnTemplate("exception.php"), $httpStatus);
     }
-    if (function_exists("HTMLResult") and!headers_sent()) {
+    if (function_exists("HTMLResult") && !headers_sent()) {
         HTMLResult($message, $httpStatus);
     } else {
         echo "{$message}\n";
@@ -155,7 +155,7 @@ if (php_sapi_name() != "cli") {
 }
 
 // Backwards compatiblity for modules using the old config class name
-if (class_exists("CMSConfig") and!class_exists("config")) {
+if (class_exists("CMSConfig") && !class_exists("config")) {
     class_alias("CMSConfig", "config");
 }
 
@@ -176,7 +176,7 @@ if ((defined("ULICMS_DEBUG") and ULICMS_DEBUG)
 // this enables us to use stuff like Docker containers where data gets lost
 // after stopping the container
 if (isset($config->data_storage_root)
-        and!is_null($config->data_storage_root)) {
+        && !is_null($config->data_storage_root)) {
     define("ULICMS_DATA_STORAGE_ROOT", $config->data_storage_root);
 } else {
     define("ULICMS_DATA_STORAGE_ROOT", ULICMS_ROOT);
@@ -187,7 +187,7 @@ require_once dirname(__file__) . "/classes/renderers/load.php";
 // this enables us to set an base url for statis ressources such as images
 // stored in ULICMS_DATA_STORAGE_ROOT
 if (isset($config->data_storage_url)
-        and!is_null($config->data_storage_url)) {
+        && !is_null($config->data_storage_url)) {
     define("ULICMS_DATA_STORAGE_URL", $config->data_storage_url);
 }
 
@@ -413,7 +413,7 @@ function shutdown_function() {
     do_event("shutdown");
 
     $cfg = new CMSConfig();
-    if (isset($cfg->show_render_time) and is_true($cfg->show_render_time) and!Request::isAjaxRequest()) {
+    if (isset($cfg->show_render_time) and is_true($cfg->show_render_time) && !Request::isAjaxRequest()) {
         echo "\n\n<!--" . (microtime(true) - START_TIME) . "-->";
     }
     if (isset($cfg->dbmigrator_drop_database_on_shutdown) and is_true($cfg->dbmigrator_drop_database_on_shutdown)) {

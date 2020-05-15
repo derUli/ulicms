@@ -3,7 +3,7 @@
 $configFile = "CMSConfig.php";
 
 // since UliCMS 2018.3 the config file has a new name
-if (file_exists("cms-config.php") and ! file_exists($configFile)) {
+if (file_exists("cms-config.php") && !file_exists($configFile)) {
     // update config file
     $content = file_get_contents("cms-config.php");
     $content = str_replace("class config", "class CMSConfig", $content);

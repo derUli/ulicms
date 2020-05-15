@@ -38,8 +38,8 @@ do_event("after_custom_lang");
 
 // Cross-Site-Request-Forgery Protection
 if ((logged_in()
-        and Request::isPost()
-        and ! defined("NO_ANTI_CSRF")) and ! check_csrf_token()) {
+        && Request::isPost()
+        && !defined("NO_ANTI_CSRF")) && !check_csrf_token()) {
     ExceptionResult("This is probably a CSRF attack!", HttpStatusCode::FORBIDDEN);
 }
 
@@ -52,7 +52,7 @@ do_event("after_set_locale_by_language");
 // configuration file
 // reject access to the backend if the client's ip is not whitelisted
 $cfg = new CMSConfig();
-if (isset($cfg->ip_whitelist) and is_array($cfg->ip_whitelist) and count($cfg->ip_whitelist) > 0 and ! faster_in_array(get_ip(), $cfg->ip_whitelist)) {
+if (isset($cfg->ip_whitelist) && is_array($cfg->ip_whitelist) && count($cfg->ip_whitelist) > 0 && !faster_in_array(get_ip(), $cfg->ip_whitelist)) {
     ExceptionResult(get_translation("login_from_ip_not_allowed"));
     die();
 }

@@ -126,7 +126,7 @@ if (!$permissionChecker->hasPermission("groups")) {
     }
     ?>
     <?php
-    if (!isset($_GET["add"]) and ! isset($_GET["edit"])) {
+    if (!isset($_GET["add"]) && !isset($_GET["edit"])) {
         require "inc/group_list.php";
     } else if (isset($_GET["add"])) {
         if ($permissionChecker->hasPermission("groups_create")) {

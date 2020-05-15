@@ -99,14 +99,14 @@ class MenuEntry {
     // check if the user has permissions to access this menu entry
     public function userHasPermission(): bool {
         $acl = new ACL();
-        if (is_string($this->permissions) and!empty($this->permissions)) {
+        if (is_string($this->permissions) && !empty($this->permissions)) {
             return $acl->hasPermission($this->permissions);
         }
         if (is_array($this->permissions) and count($this->permissions) > 0) {
             $isPermitted = false;
             foreach ($this->permissions as $permission) {
                 if (is_string($permission)
-                        and!empty($permission)
+                        && !empty($permission)
                         and $acl->hasPermission($permission)) {
                     $isPermitted = true;
                 }

@@ -50,7 +50,7 @@ Translation::includeCustomLangFile($_SESSION["language"]);
 Translation::loadCurrentThemeLanguageFiles($_SESSION["language"]);
 do_event("custom_lang_" . $_SESSION["language"]);
 
-if (Request::isPost() and ! defined("NO_ANTI_CSRF")) {
+if (Request::isPost() && !defined("NO_ANTI_CSRF")) {
     if (!check_csrf_token()) {
         die("This is probably a CSRF attack!");
     }
@@ -95,7 +95,7 @@ if (isMaintenanceMode()) {
     die();
 }
 
-if (isset($_GET["format"]) and ! empty($_GET["format"])) {
+if (isset($_GET["format"]) && !empty($_GET["format"])) {
     $format = trim($_GET["format"]);
 } else {
     $format = "html";
@@ -211,7 +211,7 @@ do_event("before_html");
 
 $cacheAdapter = null;
 if (CacheUtil::isCacheEnabled() and Request::isGet()
-        and ! Flags::getNoCache()) {
+        && !Flags::getNoCache()) {
     $cacheAdapter = CacheUtil::getAdapter();
 }
 $uid = CacheUtil::getCurrentUid();
@@ -296,7 +296,7 @@ if ($cacheAdapter or Settings::get("minify_html")) {
 
     echo $generatedHtml;
 
-    if ($cacheAdapter and ! defined("EXCEPTION_OCCURRED")) {
+    if ($cacheAdapter && !defined("EXCEPTION_OCCURRED")) {
         $cacheAdapter->set($uid, $generatedHtml, CacheUtil::getCachePeriod());
     }
 }

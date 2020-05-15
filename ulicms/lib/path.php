@@ -38,7 +38,7 @@ function getModulePath($module, $abspath = false): string {
                         "ULICMS_DATA_STORAGE_ROOT/content/modules/$module"
                 ) . "/";
     }
-    if (ULICMS_ROOT == ULICMS_DATA_STORAGE_ROOT and ! defined("ULICMS_DATA_STORAGE_URL")) {
+    if (ULICMS_ROOT == ULICMS_DATA_STORAGE_ROOT && !defined("ULICMS_DATA_STORAGE_URL")) {
         // Frontend Directory
         if (file_exists("CMSConfig.php")) {
             $module_folder = "content/modules/";

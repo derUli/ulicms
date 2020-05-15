@@ -34,7 +34,7 @@ class CategoryController extends Controller {
     }
 
     public function updatePost(): void {
-        if (!empty($_REQUEST["name"]) and ! empty($_REQUEST["id"])) {
+        if (!empty($_REQUEST["name"]) && !empty($_REQUEST["id"])) {
             Categories::updateCategory(
                     intval($_REQUEST["id"]),
                     $_REQUEST["name"],

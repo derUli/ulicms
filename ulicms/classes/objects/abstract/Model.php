@@ -102,7 +102,7 @@ class Model {
                 
 		$isXyzFunction = "is_" . $type;
 		if (function_exists($isXyzFunction)
-				and ! var_is_type($value, $type, $required)) {
+				&& !var_is_type($value, $type, $required)) {
 			throw new InvalidArgumentException("\"{$value}\" is not of type {$type}.");
 		} else if (class_exists($type) and $value instanceof $type) {
 			$dumpedValue = var_dump_str($value);

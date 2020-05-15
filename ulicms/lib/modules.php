@@ -17,7 +17,7 @@ function getModuleMeta($module, $attrib = null) {
     $data = file_get_contents($metadata_file);
     $json = json_decode($data, true);
 
-    if ($attrib and ! isset($json[$attrib])) {
+    if ($attrib && !isset($json[$attrib])) {
         return null;
     }
     return $attrib ? $json[$attrib] : $json;
@@ -230,7 +230,7 @@ function containsModule(?string $page = null, ?string $module = null): bool {
     $dataset = db_fetch_assoc($result);
     $content = $dataset["content"];
     $content = str_replace("&quot;", "\"", $content);
-    if (!is_null($dataset["module"]) and ! empty($dataset["module"])
+    if (!is_null($dataset["module"]) && !empty($dataset["module"])
             and $dataset["type"] == "module") {
         if (!$module or ( $module and $dataset["module"] == $module)) {
             Vars::set("page_" . $page . "_contains_" . $module, true);

@@ -14,7 +14,7 @@ class ModuleHelper extends Helper {
             ?string $suffix = null
     ): string {
         $url = "?action=module_settings&module=" . $module;
-        if ($suffix !== null and ! empty($suffix)) {
+        if ($suffix !== null && !empty($suffix)) {
             $url .= "&" . $suffix;
         }
         $url = rtrim($url, "&");
@@ -59,7 +59,7 @@ class ModuleHelper extends Helper {
             $content = str_replace("&quot;", "\"", $content);
 
             // TODO: refactor this if-hell
-            if (!is_null($dataset->module) and ! empty($dataset->module) and $dataset->type == "module") {
+            if (!is_null($dataset->module) && !empty($dataset->module) and $dataset->type == "module") {
                 if (!$module or ( $module and $dataset->module == $module)) {
                     return $dataset;
                 }
@@ -83,7 +83,7 @@ class ModuleHelper extends Helper {
             bool $prependSuffixIfRequired = false
     ): string {
         $url = "?action=" . $action;
-        if ($suffix !== null and ! empty($suffix)) {
+        if ($suffix !== null && !empty($suffix)) {
             $url .= "&" . $suffix;
         }
         if (!is_admin_dir() and $prependSuffixIfRequired) {
@@ -112,7 +112,7 @@ class ModuleHelper extends Helper {
                 $embed_attrib = $meta_attr;
             }
 
-            if (!file_exists($noembedfile1) and ! file_exists($noembedfile2)
+            if (!file_exists($noembedfile1) && !file_exists($noembedfile2)
                     and $embed_attrib) {
                 $retval[] = $module;
             }

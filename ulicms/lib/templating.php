@@ -47,16 +47,16 @@ function get_og_tags(?string $slug = null): string {
             $og_image = Settings::get("og_image");
         }
 
-        if (!empty($og_image) and ! startsWith($og_image, "http")) {
+        if (!empty($og_image) && !startsWith($og_image, "http")) {
             $og_image = ModuleHelper::getBaseUrl() . ltrim($og_image, "/");
         }
         $page = get_page($slug);
         if (empty($og_image)
-                and ! StringHelper::isNullOrWhitespace($page["article_image"])) {
+                && !StringHelper::isNullOrWhitespace($page["article_image"])) {
 
             $og_image = ltrim($page["article_image"], "/");
         }
-        if (!empty($og_image) and ! startsWith($og_image, "http")) {
+        if (!empty($og_image) && !startsWith($og_image, "http")) {
             $og_image = ModuleHelper::getBaseUrl() . ltrim($og_image, "/");
         }
         if (is_null($og_description) or empty($og_description)) {
@@ -338,7 +338,7 @@ function get_redirection(?string $page = null): ?string {
     $redirection = null;
     if (db_num_rows($result) > 0) {
         $dataset = db_fetch_object($result);
-        if (!empty($dataset->link_url) and ! is_null($dataset->link_url)) {
+        if (!empty($dataset->link_url) && !is_null($dataset->link_url)) {
             $redirection = $dataset->link_url;
         }
     }
@@ -534,7 +534,7 @@ function get_title(?string $slug = null, bool $headline = false): ?string {
     if (db_num_rows($result) > 0) {
         while ($row = db_fetch_object($result)) {
             if ($headline and isset($row->alternate_title)
-                    and ! empty($row->alternate_title)) {
+                    && !empty($row->alternate_title)) {
                 $title = $row->alternate_title;
             } else {
                 $title = $row->title;
@@ -803,7 +803,7 @@ function get_menu(
             } else {
                 $html .= "<a class='menu_active_link" . rtrim($additional_classes) . "' href='" . $url . "' target='" . $row->target . "'>";
             }
-            if (!is_null($row->menu_image) and ! empty($row->menu_image)) {
+            if (!is_null($row->menu_image) && !empty($row->menu_image)) {
                 $html .= '<img src="' . $row->menu_image . '" alt="' . _esc($title) . '"/>';
             } else {
                 $html .= _esc($title);
@@ -899,10 +899,10 @@ function checkforAccessForDevice(string $access): bool {
     if (faster_in_array("mobile", $access) and is_mobile()) {
         $allowed = true;
     }
-    if (faster_in_array("desktop", $access) and ! is_mobile()) {
+    if (faster_in_array("desktop", $access) && !is_mobile()) {
         $allowed = true;
     }
-    if (!faster_in_array("mobile", $access) and ! faster_in_array("desktop", $access)) {
+    if (!faster_in_array("mobile", $access) && !faster_in_array("desktop", $access)) {
         $allowed = true;
     }
     return $allowed;
@@ -944,7 +944,7 @@ function check_status(): string {
         $_GET["slug"] = get_frontpage();
     }
 
-    if (!is_active() and ! is_logged_in()) {
+    if (!is_active() && !is_logged_in()) {
         return "403 Forbidden";
     }
 

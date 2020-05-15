@@ -8,7 +8,7 @@ class InstallerController {
 
     public static function getStep() {
         $step = 1;
-        if (isset($_REQUEST["step"]) and ! empty($_REQUEST["step"])) {
+        if (isset($_REQUEST["step"]) && !empty($_REQUEST["step"])) {
             $step = intval($_REQUEST["step"]);
         }
         if ($step > 9) {
@@ -60,7 +60,7 @@ class InstallerController {
     }
 
     public static function getLanguage() {
-        if (isset($_SESSION["language"]) and ! empty($_SESSION["language"])) {
+        if (isset($_SESSION["language"]) && !empty($_SESSION["language"])) {
             return basename($_SESSION["language"]);
         } else {
             $_SESSION["language"] = "en";

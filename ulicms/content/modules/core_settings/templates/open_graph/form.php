@@ -6,7 +6,7 @@ $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("open_graph")) {
     $og_image = Settings::get("og_image");
     $og_url = "";
-    if (!empty($og_image) and!startsWith($og_image, "http")) {
+    if (!empty($og_image) && !startsWith($og_image, "http")) {
         $og_url = "..${og_image}";
     }
     ?>

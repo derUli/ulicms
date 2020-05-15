@@ -28,7 +28,7 @@ class CacheUtil {
     // or $force is true
     // else returns null
     public static function getAdapter(bool $force = false): ?Psr16Adapter {
-        if (!self::isCacheEnabled() and ! $force) {
+        if (!self::isCacheEnabled() && !$force) {
             return null;
         }
 

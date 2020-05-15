@@ -9,7 +9,7 @@ $permissionChecker = new ACL();
 // no patch check in google cloud
 $runningInGoogleCloud = class_exists("GoogleCloudHelper") ? GoogleCloudHelper::isProduction() : false;
 
-if ($permissionChecker->hasPermission("update_system") and ! $runningInGoogleCloud) {
+if ($permissionChecker->hasPermission("update_system") && !$runningInGoogleCloud) {
     ?>
     <p>
         <a href="<?php echo ModuleHelper::buildActionURL("home"); ?>"

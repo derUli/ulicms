@@ -14,7 +14,7 @@ $article_image = getTemplateDirPath("impro17") . "images/nopic.jpg";
 </time>
 </p>
 <?php
-if ($meta and ! empty($meta->article_image)) {
+if ($meta && !empty($meta->article_image)) {
     $article_image = $meta->article_image;
 }
 ?><p>

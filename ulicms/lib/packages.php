@@ -13,7 +13,7 @@ function getAllThemes(): array {
 // TODO: dies in die PackageManager Klasse verschieben
 function uninstall_module(string $name, string $type = "module"): bool {
     $acl = new ACL();
-    if (!$acl->hasPermission("install_packages") and ! isCLI()) {
+    if (!$acl->hasPermission("install_packages") && !isCLI()) {
         return false;
     }
 

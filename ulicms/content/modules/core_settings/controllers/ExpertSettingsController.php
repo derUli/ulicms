@@ -11,7 +11,7 @@ class ExpertSettingsController extends Controller {
     public function save(): void {
         $name = Request::getVar("name");
         $value = Request::getVar("value");
-        if (StringHelper::isNotNullOrWhitespace($name) and ! is_null($value)) {
+        if (StringHelper::isNotNullOrWhitespace($name) && !is_null($value)) {
             Settings::set($name, $value);
         }
 

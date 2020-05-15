@@ -32,7 +32,7 @@ abstract class Controller {
 		$sClass = $_REQUEST["sClass"];
 		if (isset($_REQUEST["sMethod"])
 				and StringHelper::isNotNullOrEmpty($_REQUEST["sMethod"])
-				and ! faster_in_array(
+				&& !faster_in_array(
 						$_REQUEST["sMethod"],
 						$this->blacklist)
 		) {
@@ -58,7 +58,7 @@ abstract class Controller {
 			// if there is a method, it is public and the user has the required
 			// permissions, call it
 			if (method_exists($this, $sMethodWithRequestType)
-					and ! startsWith($sMethodWithRequestType, "_")
+					&& !startsWith($sMethodWithRequestType, "_")
 					and $reflectionWithRequestType
 					and $reflectionWithRequestType->isPublic()) {
 				if (ControllerRegistry::userCanCall(
@@ -72,7 +72,7 @@ abstract class Controller {
 					);
 				}
 			} else if (method_exists($this, $sMethod)
-					and ! startsWith($sMethod, "_")
+					&& !startsWith($sMethod, "_")
 					and $reflection and $reflection->isPublic()) {
 				if (ControllerRegistry::userCanCall($sClass, $sMethod)) {
 					$this->$sMethod();

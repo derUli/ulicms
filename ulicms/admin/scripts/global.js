@@ -31,7 +31,7 @@ $(() => {
         $(".mainmenu").slideToggle()
     );
 
-    $(".mainmenu a.is-ajax").click((event) => {
+    $("a.is-ajax").click((event) => {
         event.preventDefault();
         event.stopPropagation();
         const target = $(event.target);

@@ -6,7 +6,7 @@ if (Settings::get("disable_password_reset")) {
     <?php
     $messame = null;
     $color = "danger";
-    if (isset($_POST["username"]) and ! empty($_POST["username"])) {
+    if (isset($_POST["username"]) && !empty($_POST["username"])) {
         $username = $_POST["username"];
         $user = getUserByName($username);
         if ($user) {

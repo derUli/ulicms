@@ -124,7 +124,7 @@ function validate_login(
         return null;
     }
 
-    if (TwoFactorAuthentication::isEnabled() and ! $auth->checkCode($token)) {
+    if (TwoFactorAuthentication::isEnabled() && !$auth->checkCode($token)) {
         $_REQUEST["error"] = get_translation("confirmation_code_wrong");
         return null;
     }

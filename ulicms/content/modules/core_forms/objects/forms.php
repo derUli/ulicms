@@ -100,7 +100,7 @@ class Forms {
             );
             foreach ($required_fields as $field) {
                 $fieldName = isset($fields[$field]) ? $fields[$field] : $field;
-                if (!(isset($_POST[$field]) and ! empty($_POST[$field]))) {
+                if (!(isset($_POST[$field]) && !empty($_POST[$field]))) {
                     ViewBag::set("exception", get_translation(
                                     "please_fill_all_required_fields",
                                     [
@@ -145,7 +145,7 @@ class Forms {
             // if dns mx check is enabled check the mail domain
             if (!StringHelper::isNullOrEmpty($email_from)
                     and Settings::get("check_mx_of_mail_address")
-                    and ! AntiSpamHelper::checkMailDomain($email_from)) {
+                    && !AntiSpamHelper::checkMailDomain($email_from)) {
                 ExceptionResult(
                         get_translation("mail_address_has_invalid_mx_entry"),
                         HttpStatusCode::BAD_REQUEST
