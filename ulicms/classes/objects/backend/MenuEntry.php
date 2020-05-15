@@ -126,8 +126,10 @@ class MenuEntry {
             $cssClasses .= " active";
         }
         
-         $cssClasses .= $this->getIsAjax() && !$this->getNewWindow() ?
+        if($this->getIdentifier() !== "logout"){
+           $cssClasses .= $this->getIsAjax() && !$this->getNewWindow() ?
                 " is-ajax" : " is-not-ajax";
+        }
         
 
         $html .= "<a href=\"{$this->getLink()}\" "
