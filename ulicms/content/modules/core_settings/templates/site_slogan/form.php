@@ -70,10 +70,10 @@ if ($permissionChecker->hasPermission("settings_simple")) {
             },
             success: function (e) {
                 $("#loading").hide();
+                // FIXME: missing translation, extract to js file.
                 $("#message").html("<span style=\"color:green;\">Die Einstellungen wurden gespeichert.</span>");
             }
         });
-
     </script>
     <?php
 } else {

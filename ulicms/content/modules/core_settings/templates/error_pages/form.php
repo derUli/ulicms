@@ -2,6 +2,7 @@
 
 use UliCMS\HTML\Input;
 use UliCMS\HTML\ListItem;
+use UliCMS\Constants\RequestMethod;
 
 $languages = getAllLanguages();
 $errorCodes = array(
@@ -19,7 +20,15 @@ $errorCodes = array(
 
 <h1><?php translate("error_pages"); ?></h1>
 <?php
-echo ModuleHelper::buildMethodCallForm(ErrorPagesController::class, "save");
+echo ModuleHelper::buildMethodCallForm(
+        ErrorPagesController::class,
+        "save",
+        [],
+        RequestMethod::POST,
+        [
+            "id" => "error_pages_form"
+        ]
+        );
 ?>
 <?php foreach ($errorCodes as $code => $error) {
     ?>
@@ -27,8 +36,10 @@ echo ModuleHelper::buildMethodCallForm(ErrorPagesController::class, "save");
     <table class="tablesorter">
         <thead>
             <tr>
-                <th><?php translate("language"); ?></th>
-                <th><?php translate("page"); ?></th>
+                <th>
+                    <?php translate("language"); ?>
+                </th>
+                <th style="width: 50%"><?php translate("page"); ?></th>
             </tr>
         </thead>
         <tbody>
@@ -66,3 +77,10 @@ echo ModuleHelper::buildMethodCallForm(ErrorPagesController::class, "save");
 </button>
 <?php
 echo ModuleHelper::endForm();
+
+$translation = new JSTranslation();
+$translation->addKey("changes_was_saved");
+$translation->render();
+
+enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/error_pages.js"));
+combinedScriptHtml();
