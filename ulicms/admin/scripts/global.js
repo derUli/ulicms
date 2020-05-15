@@ -31,8 +31,13 @@ $(() => {
         $(".mainmenu").slideToggle()
     );
 
-    $(".mainmenu a.is-not-ajax").click((event) => {
+    $(".mainmenu a.is-not-ajax").click((event) => {                     
         $(".mainmenu").hide();
+        
+        if(event.target.target === "_blank") {
+            return
+        }
+        
         $("#main-backend-content, #message").hide();
         $("#main-content-loadspinner").show();
     });
