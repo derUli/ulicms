@@ -126,10 +126,9 @@ class MenuEntry {
             $cssClasses .= " active";
         }
         
-        if(!$this->getNewWindow()){
-            $cssClasses .= $this->getIsAjax() ?
+         $$cssClasses .= $this->getIsAjax() && !$this->getNewWindow() ?
                 " is-ajax" : " is-not-ajax";
-        }
+        
 
         $html .= "<a href=\"{$this->getLink()}\" "
                 . "target=\"{$targetString}\" class=\"{$cssClasses}\">";
