@@ -6,6 +6,7 @@ Neue Features:
 * Vorausgewähltes Menü und vorausgewählter Inhaltstyp konfigurierbar
 * Doppelte Slugs werden nun verhindert
 * Neuer CustomField-Typ "UrlField"
+* Performance-Verbesserungen an einigen Stellen
 
 Neue API-methoden
 * is_version_number(string? $input): bool
@@ -15,6 +16,7 @@ Neue API-methoden
 
 Fehlerkorrekturen:
 * Freigabe-Workflows für Seiten repariert
+* "Nachricht des Tages" wurde nicht korrekt gespeichert
 
 ===== Neues in UliCMS 2020.2.1 =====
 

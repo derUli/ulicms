@@ -39,7 +39,7 @@ $(() => {
 
         $(".mainmenu").hide();
 
-        $("#main-backend-content").hide();
+        $("#main-backend-content, #message").hide();
         $("#main-content-loadspinner").show();
 
         $("#content-container").load(url, (response, status, xhr) => {

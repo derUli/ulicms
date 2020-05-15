@@ -10,9 +10,7 @@ $(() => {
                 },
                 beforeSerialize: () => {
                     /* Before serialize */
-                    for (instance in CKEDITOR.instances) {
-                        CKEDITOR.instances[instance].updateElement();
-                    }
+                    updateCKEditors();
                     return true;
                 },
                 success: () => {

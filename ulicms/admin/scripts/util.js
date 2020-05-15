@@ -33,6 +33,16 @@ const refreshCodeMirrors = () => {
     );
 };
 
+const updateCKEditors = () => {
+    if (typeof CKEDITOR === "undefined") {
+        return;
+    }
+
+    for (instance in CKEDITOR.instances) {
+        CKEDITOR.instances[instance].updateElement();
+    }
+}
+
 const copyTextToClipboard = (
         text,
         successCallback = null,
