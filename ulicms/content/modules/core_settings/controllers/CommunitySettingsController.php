@@ -29,8 +29,10 @@ class CommunitySettingsController extends Controller {
 
         CacheUtil::clearPageCache();
 
-        Response::redirect(
-                ModuleHelper::buildActionURL("community_settings", "save=1")
+        Response::sendHttpStatusCodeResultIfAjax(
+                HttpStatusCode::OK,
+                ModuleHelper::buildActionURL("community_settings", "save=1"
+                        )
         );
     }
 

@@ -13,6 +13,15 @@ $(() => {
                     $("#message").html("");
                     $("#loading").show();
                 },
+                // FIXME: this is copy and paste code
+                // move this to a util method
+                beforeSerialize: () => {
+                    /* Before serialize */
+                    for (instance in CKEDITOR.instances) {
+                        CKEDITOR.instances[instance].updateElement();
+                    }
+                    return true;
+                },
                 success: () => {
                     $("#loading").hide();
                     $("#message").html(
