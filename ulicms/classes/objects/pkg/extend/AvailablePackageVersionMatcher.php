@@ -27,7 +27,7 @@ class AvailablePackageVersionMatcher {
                 $parsedVersionData["versions"] : [];
 
         foreach ($versions as $version) {
-            if (ArrayHelper::hasMultipleKays(
+            if (ArrayHelper::hasMultipleKeys(
                             $version,
                             [
                                 "version",

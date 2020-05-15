@@ -103,7 +103,7 @@ class ArrayHelper extends Helper {
         return isset($input[$key]) ? $input[$key] : $default;
     }
     
-    public static function hasMultipleKays(?array $input, array $keys): bool {
+    public static function hasMultipleKeys(?array $input, array $keys): bool {
             if (!$input){
                 return false;
             }

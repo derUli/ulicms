@@ -211,7 +211,7 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
 
     public function testArrayHasMultipleKeysReturnsTrue() {
         $this->assertTrue(
-                ArrayHelper::hasMultipleKays(
+                ArrayHelper::hasMultipleKeys(
                         $this->getArrayTestData(),
                         [
                             "foo",
@@ -223,7 +223,7 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
 
     public function testArrayHasMultipleKeysReturnsFalse() {
         $this->assertFalse(
-                ArrayHelper::hasMultipleKays(
+                ArrayHelper::hasMultipleKeys(
                         $this->getArrayTestData(),
                         [
                             "foo",
@@ -234,7 +234,7 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
         );
         
            $this->assertFalse(
-                ArrayHelper::hasMultipleKays(
+                ArrayHelper::hasMultipleKeys(
                        null,
                         [
                             "foo",
