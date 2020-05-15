@@ -64,7 +64,10 @@ $(() => {
                 bootbox.alert(
                         $('<div/>').text(msg).html()
                         );
-            }
+            } else if(isMenuEntry) {
+               mainMenu.find("a").removeClass("active");
+                target.addClass("active");
+             }
         });
     });
 
