@@ -31,6 +31,12 @@ $(() => {
         $(".mainmenu").slideToggle()
     );
 
+    $(".mainmenu a.is-not-ajax").click((event) => {
+        $(".mainmenu").hide();
+        $("#main-backend-content, #message").hide();
+        $("#main-content-loadspinner").show();
+    });
+
     $("a.is-ajax").click((event) => {
         event.preventDefault();
         event.stopPropagation();

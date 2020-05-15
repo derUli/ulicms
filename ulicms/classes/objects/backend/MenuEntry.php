@@ -105,8 +105,7 @@ class MenuEntry {
         if (is_array($this->permissions) and count($this->permissions) > 0) {
             $isPermitted = false;
             foreach ($this->permissions as $permission) {
-                if (is_string($permission)
-                        && !empty($permission)
+                if (is_string($permission) && !empty($permission)
                         and $acl->hasPermission($permission)) {
                     $isPermitted = true;
                 }
@@ -119,16 +118,17 @@ class MenuEntry {
 
     // render a single menu item
     public function render(): string {
-        
+
         $html = "<li>";
         $targetString = $this->getNewWindow() ? "_blank" : "_self";
         $cssClasses = "backend-menu-item-{$this->getIdentifier()}";
         if (get_action() == $this->getIdentifier()) {
             $cssClasses .= " active";
         }
-        if($this->getIsAjax()){
-            $cssClasses .= " is-ajax";
-        }
+        
+        $cssClasses .= $this->getIsAjax() ?
+                " is-ajax" : " is-not-ajax";
+
         $html .= "<a href=\"{$this->getLink()}\" "
                 . "target=\"{$targetString}\" class=\"{$cssClasses}\">";
 
