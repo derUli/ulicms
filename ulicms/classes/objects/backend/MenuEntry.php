@@ -126,7 +126,7 @@ class MenuEntry {
             $cssClasses .= " active";
         }
         
-         $$cssClasses .= $this->getIsAjax() && !$this->getNewWindow() ?
+         $cssClasses .= $this->getIsAjax() && !$this->getNewWindow() ?
                 " is-ajax" : " is-not-ajax";
         
 
