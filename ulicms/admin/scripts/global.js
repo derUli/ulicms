@@ -212,6 +212,7 @@ $(() => {
     // User has to confirm logout
     $("a.backend-menu-item-logout").click((event) => {
         event.preventDefault();
+            $(".mainmenu").hide();
         const url = $(event.target).attr("href");
         bootbox.confirm(`${MenuTranslation.Logout}?`, (result) => {
             if (result) {
