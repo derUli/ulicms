@@ -50,7 +50,7 @@
             '<i class="fas fa-box"></i> '
             . get_translation("packages"),
             ModuleHelper::buildActionURL("packages"),
-            "modules",
+            "packages",
             "list_packages"
     );
 
