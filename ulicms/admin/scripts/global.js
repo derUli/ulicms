@@ -47,7 +47,10 @@ $(() => {
         event.stopPropagation();
         const target = $(event.target);
         const url = target.attr("href");
-
+            
+        const mainMenu = $(".mainmenu");
+        const isMenuEntry = mainMenu.contains(target);
+     
         $(".mainmenu").hide();
 
         $("#main-backend-content, #message").hide();
