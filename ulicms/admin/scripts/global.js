@@ -49,7 +49,7 @@ $(() => {
         const url = target.attr("href");
             
         const mainMenu = $(".mainmenu");
-        const isMenuEntry = mainMenu.contains(target);
+        const isMenuEntry = mainMenu.has(target);
      
         $(".mainmenu").hide();
 
