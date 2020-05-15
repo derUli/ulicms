@@ -11,6 +11,7 @@ class MenuEntry {
     private $permissions;
     private $children = [];
     private $newWindow = false;
+    private $isAjax = false;
 
     public function __construct(
             string $title,
@@ -27,6 +28,7 @@ class MenuEntry {
         $this->permissions = $permissions;
         $this->children = $children;
         $this->newWindow = $newWindow;
+        $this->isAjax = $isAjax;
     }
 
     public function getTitle(): string {
@@ -34,7 +36,8 @@ class MenuEntry {
     }
 
     public function getLink(): string {
-        return $this->link;
+        return !$this->getIsAjax() ?
+                $this->link : "$this->link&only_content=true";
     }
 
     public function getIdentifier(): string {
@@ -85,17 +88,25 @@ class MenuEntry {
         $this->newWindow = $val;
     }
 
+    public function getIsAjax(): bool {
+        return $this->isAjax;
+    }
+
+    public function setIsAjax(bool $val): void {
+        $this->isAjax = $val;
+    }
+
     // check if the user has permissions to access this menu entry
     public function userHasPermission(): bool {
         $acl = new ACL();
-        if (is_string($this->permissions) and ! empty($this->permissions)) {
+        if (is_string($this->permissions) and!empty($this->permissions)) {
             return $acl->hasPermission($this->permissions);
         }
         if (is_array($this->permissions) and count($this->permissions) > 0) {
             $isPermitted = false;
             foreach ($this->permissions as $permission) {
                 if (is_string($permission)
-                        and ! empty($permission)
+                        and!empty($permission)
                         and $acl->hasPermission($permission)) {
                     $isPermitted = true;
                 }
@@ -108,12 +119,15 @@ class MenuEntry {
 
     // render a single menu item
     public function render(): string {
+        
         $html = "<li>";
         $targetString = $this->getNewWindow() ? "_blank" : "_self";
         $cssClasses = "backend-menu-item-{$this->getIdentifier()}";
         if (get_action() == $this->getIdentifier()) {
-
             $cssClasses .= " active";
+        }
+        if($this->getIsAjax()){
+            $cssClasses .= " is-ajax";
         }
         $html .= "<a href=\"{$this->getLink()}\" "
                 . "target=\"{$targetString}\" class=\"{$cssClasses}\">";

@@ -31,6 +31,29 @@ $(() => {
         $(".mainmenu").slideToggle()
     );
 
+    $(".mainmenu a.is-ajax").click((event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        const target = $(event.target);
+        const url = target.attr("href");
+
+        $(".mainmenu").hide();
+
+        $("#main-backend-content").hide();
+        $("#main-content-loadspinner").show();
+
+        $("#content-container").load(url, (response, status, xhr) => {
+            $("#main-backend-content").show();
+            $("#main-content-loadspinner").hide();
+            if (status === "error") {
+                const msg = `${xhr.status} ${xhr.statusText}`;
+                bootbox.alert(
+                        $('<div/>').text(msg).html()
+                        );
+            }
+        });
+    });
+
     // clear-cache shortcut icon
     $("#menu-clear-cache").click((event) => {
         event.preventDefault();

@@ -19,7 +19,10 @@
         "pages",
         "forms",
         "banners"
-            ]
+            ],
+            [],
+            false,
+            true
     );
     $entries[] = new MenuEntry(
             '<i class="fa fa-file-image" aria-hidden="true"></i> '
@@ -30,7 +33,10 @@
         "files",
         "videos",
         "audio"
-            ]
+            ],
+            [],
+            false,
+            true
     );
     $entries[] = new MenuEntry(
             '<i class="fa fa-user" aria-hidden="true"></i> '
@@ -54,7 +60,10 @@
                 . get_translation("update"),
                 "?action=system_update",
                 "update_system",
-                "update_system"
+                "update_system",
+                [],
+                false,
+                true
         );
     }
 
@@ -73,7 +82,10 @@
         "languages",
         "other",
         "expert_settings"
-            ]
+            ],
+            [],
+            false,
+            true
     );
     $entries[] = new MenuEntry(
             '<i class="fa fa-info-circle" aria-hidden="true"></i> '

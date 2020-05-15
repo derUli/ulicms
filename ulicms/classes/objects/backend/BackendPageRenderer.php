@@ -56,9 +56,9 @@ class BackendPageRenderer {
         }
 
         if (!is_logged_in()) {
-            $this->handleNotLoggedIn();
+            $this->handleNotLoggedIn($onlyContent);
         } else {
-            $this->handleLoggedIn();
+            $this->handleLoggedIn($onlyContent);
         }
 
         
@@ -76,7 +76,7 @@ class BackendPageRenderer {
 
     // this method handles access to the features that are
     // accesible for non authenticated users
-    protected function handleNotLoggedIn(): void {
+    protected function handleNotLoggedIn($onlyContent = 0): void {
 
         ActionRegistry::loadModuleActions();
         $actions = ActionRegistry::getActions();
@@ -109,10 +109,12 @@ class BackendPageRenderer {
     }
 
     // this method handles all actions by authenticated users
-    protected function handleLoggedIn(): void {
+    protected function handleLoggedIn($onlyContent = 0): void {
         $permissionChecker = new PermissionChecker(get_user_id());
 
-        require_once "inc/adminmenu.php";
+        if(!$onlyContent){
+            require_once "inc/adminmenu.php";
+        }
 
         ActionRegistry::loadModuleActions();
         $actions = ActionRegistry::getActions();
