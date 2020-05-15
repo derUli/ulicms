@@ -9,7 +9,7 @@ Neue Features:
 
 Neue API-methoden
 * is_version_number(string? $input): bool
-* ArrayHelper::hasMultipleKays(?array $input, array $keys): bool
+* ArrayHelper::hasMultipleKeys(?array $input, array $keys): bool
 * UliCMS\HTML\_nbsp(string $text = " "): string
 * UliCMS\HTML\nbsp(string $text = " "): void
 
