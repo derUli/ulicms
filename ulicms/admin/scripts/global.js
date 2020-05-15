@@ -45,6 +45,7 @@ $(() => {
     $("a.is-ajax").click((event) => {
         event.preventDefault();
         event.stopPropagation();
+        
         const target = $(event.target);
         const url = target.attr("href");
             
