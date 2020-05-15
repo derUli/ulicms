@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace UliCMS\Backend;
 
+use Template;
+use Vars;
+use Request;
 use StringHelper;
 use ActionRegistry;
 use Settings;
 use zz\Html\HTMLMinify;
 use UliCMS\Security\PermissionChecker;
-
 // This class renders a backend page
 // if you set a model from a model
 // you can get it with this code in your template
@@ -47,7 +49,11 @@ class BackendPageRenderer {
             ob_start();
         }
 
-        require "inc/header.php";
+        $onlyContent = Request::getVar("only_content", false, 'bool');
+        
+        if(!$onlyContent){
+            require "inc/header.php";
+        }
 
         if (!is_logged_in()) {
             $this->handleNotLoggedIn();
@@ -55,10 +61,11 @@ class BackendPageRenderer {
             $this->handleLoggedIn();
         }
 
-        do_event("admin_footer");
-
-        require_once "inc/footer.php";
-
+        
+        if(!$onlyContent){
+            do_event("admin_footer");
+            require_once "inc/footer.php";
+        }
         if (Settings::get("minify_html")) {
             $this->outputMinified();
         }
@@ -79,7 +86,10 @@ class BackendPageRenderer {
                             $this->getAction()
             );
             if ($action_permission and $action_permission === "*") {
-                require_once $actions[$this->getAction()];
+                Vars::set("action_filename", $actions[$this->getAction()]);
+                echo Template::executeDefaultOrOwnTemplate(
+                        "backend/container.php"
+                );
             }
         }
 
@@ -98,7 +108,7 @@ class BackendPageRenderer {
         }
     }
 
-// this method handles all actions by authenticated users
+    // this method handles all actions by authenticated users
     protected function handleLoggedIn(): void {
         $permissionChecker = new PermissionChecker(get_user_id());
 
@@ -120,7 +130,10 @@ class BackendPageRenderer {
                     $requiredPermission
                     and $permissionChecker->hasPermission($requiredPermission))
             ) {
-                require_once $actions[$this->getAction()];
+                Vars::set("action_filename", $actions[$this->getAction()]);
+                echo Template::executeDefaultOrOwnTemplate(
+                        "backend/container.php"
+                );
             } else {
                 noPerms();
             }

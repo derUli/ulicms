@@ -54,7 +54,6 @@ require_once dirname(__file__) . "/classes/objects/abstract/load.php";
 require_once dirname(__file__) . "/classes/objects/constants/load.php";
 require_once dirname(__file__) . "/classes/objects/storages/load.php";
 require_once dirname(__file__) . "/classes/objects/modules/load.php";
-require_once dirname(__file__) . "/classes/objects/backend/load.php";
 require_once dirname(__file__) . "/classes/objects/settings/load.php";
 require_once dirname(__file__) . "/classes/objects/web/load.php";
 require_once dirname(__file__) . "/classes/objects/content/Categories.php";
@@ -99,6 +98,7 @@ require_once dirname(__file__) . "/classes/objects/content/ContentFactory.php";
 require_once dirname(__file__) . "/classes/objects/content/CustomFields.php";
 require_once dirname(__file__) . "/classes/objects/content/Results.php";
 require_once dirname(__file__) . "/classes/objects/media/load.php";
+require_once dirname(__file__) . "/classes/objects/backend/load.php";
 
 require_once dirname(__file__) . "/UliCMSVersion.php";
 

@@ -18,7 +18,8 @@ class MenuEntry {
             string $identifier,
             $permissions = null,
             array $children = [],
-            bool $newWindow = false
+            bool $newWindow = false,
+            bool $isAjax = false
     ) {
         $this->title = $title;
         $this->link = $link;
