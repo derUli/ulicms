@@ -748,4 +748,12 @@ add_translation("mpdf_not_installed", "mPDF ist nicht installiert.\n"
 add_translation("copied_to_clipboard_success", "Text wurde in die Zwischenablage kopiert.");
 add_translation("copied_to_clipboard_failed", "Kopieren des Textes fehlgeschlagen.");
 
+add_translation(
+        "unsupported_browser",
+        "Sie benutzen den Browser %browser% welcher von UliCMS nicht unterstützt wird.\n".
+        "Bitte verwenden Sie einen der unterstützen Browser.\n\n".
+        "Welche Browser von UliCMS unterstützt werden, erfahren Sie unter:\n".
+        "https://www.ulicms.de");
+
 do_event("lang_de");
+

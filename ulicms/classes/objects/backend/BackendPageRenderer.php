@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace UliCMS\Backend;
 
+use UliCMS\Backend\Utils\BrowserCompatiblityChecker;
 use Template;
 use Vars;
 use Request;
@@ -12,6 +13,8 @@ use ActionRegistry;
 use Settings;
 use zz\Html\HTMLMinify;
 use UliCMS\Security\PermissionChecker;
+use UliCMS\HTML\Alert;
+
 // This class renders a backend page
 // if you set a model from a model
 // you can get it with this code in your template
@@ -50,19 +53,26 @@ class BackendPageRenderer {
         }
 
         $onlyContent = Request::getVar("only_content", false, 'bool');
-        
-        if(!$onlyContent){
+
+        if (!$onlyContent) {
             require "inc/header.php";
         }
 
-        if (!is_logged_in()) {
+        $isCompatible = true;
+        if (Request::getUserAgent()) {
+            $checker = new BrowserCompatiblityChecker(Request::getUserAgent());
+            $isCompatible = $checker->isCompatible();
+        }
+
+        if (!$isCompatible) {
+            $this->showUnsupportedBrowser($checker);
+        } else if (!is_logged_in()) {
             $this->handleNotLoggedIn($onlyContent);
         } else {
             $this->handleLoggedIn($onlyContent);
         }
 
-        
-        if(!$onlyContent){
+        if (!$onlyContent) {
             do_event("admin_footer");
             require_once "inc/footer.php";
         }
@@ -72,6 +82,22 @@ class BackendPageRenderer {
 
         $this->doCronEvents();
         exit();
+    }
+
+    protected function showUnsupportedBrowser($checker) {
+        echo Alert::danger(
+                make_links_clickable(
+                        nl2br(get_secure_translation(
+                                        "unsupported_browser",
+                                        [
+                                            "%browser%" => $checker->getUnsupportedBrowserName()
+                                        ]
+                        ))
+                )
+                ,
+                "",
+                true
+        );
     }
 
     // this method handles access to the features that are
@@ -112,7 +138,7 @@ class BackendPageRenderer {
     protected function handleLoggedIn($onlyContent = 0): void {
         $permissionChecker = new PermissionChecker(get_user_id());
 
-        if(!$onlyContent){
+        if (!$onlyContent) {
             require_once "inc/adminmenu.php";
         }
 

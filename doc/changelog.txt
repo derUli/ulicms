@@ -6,7 +6,8 @@ Neue Features:
 * Vorausgewähltes Menü und vorausgewählter Inhaltstyp konfigurierbar
 * Doppelte Slugs werden nun verhindert
 * Neuer CustomField-Typ "UrlField"
-* Performance-Verbesserungen an einigen Stellen
+* Performance-Verbesserungen durchgeführt
+* Meldung bei nicht unterstützten Browsern
 
 Neue API-methoden
 * is_version_number(string? $input): bool
