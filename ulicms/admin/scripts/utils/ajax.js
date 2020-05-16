@@ -12,29 +12,57 @@ const bindAjaxLinks = (root) => {
     $(root).find("a.is-ajax").click((event) => {
         event.preventDefault();
         event.stopPropagation();
+
         const target = $(event.currentTarget);
-        const url = `${target.attr("href")}&only_content=true`;
+        const originalUrl = target.attr("href");
+        const url = `${originalUrl}&only_content=true`;
+
         const mainMenu = $(".mainmenu");
         const isMenuEntry = mainMenu.has(target);
-        $(".mainmenu").hide();
+
+        mainMenu.hide();
         $("#main-backend-content, #message").hide();
         $("#main-content-loadspinner").show();
-        $("#content-container").load(url, (response, status, xhr) => {
+
+        const contentContainer = $("#content-container");
+        $(contentContainer).load(url, (response, status, xhr) => {
             $("#main-backend-content").show();
             $("#main-content-loadspinner").hide();
             if (status === "error") {
                 const msg = `${xhr.status} ${xhr.statusText}`;
                 bootbox.alert(
-                        $('<div/>').text(msg).html()
-                        );
+                        $('<div/>').text(msg).html());
+                return;
             } else if (isMenuEntry) {
                 mainMenu.find("a").removeClass("active");
                 target.addClass("active");
-                bindAjaxLinks($("#content-container"));
             }
+            history.pushState({ajaxUrl: url}, document.title, originalUrl);
+            bindContentEvents(contentContainer);
         });
     });
 };
+
+const ajaxGoTo = (url) => {
+    const contentContainer = $("#content-container");
+    $(contentContainer).load(url, (response, status, xhr) => {
+        if (status === "error") {
+            const msg = `${xhr.status} ${xhr.statusText}`;
+            bootbox.alert(
+                    $('<div/>').text(msg).html());
+            return;
+        }
+        bindContentEvents(contentContainer);
+    });
+}
+
+const bindContentEvents = (contentContainer) => {
+    bindAjaxLinks(contentContainer);
+    initRemoteAlerts(contentContainer);
+    initSelect2(contentContainer);
+    addCssClassToInputs(contentContainer);
+    initBootstrapToggle(contentContainer);
+}
 
 const initRemoteAlerts = (rootElement) => {
     $(rootElement).find(".remote-alert").click((event) => {

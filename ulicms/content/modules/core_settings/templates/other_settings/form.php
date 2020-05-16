@@ -137,8 +137,13 @@ if (!$permissionChecker->hasPermission("other")) {
                 ?>
                 <h2><?php translate("DEFAULT_ACCESS_RESTRICTIONS"); ?></h2>
                 <a
-                    href="<?php echo ModuleHelper::buildActionURL("default_access_restrictions"); ?>"
-                    class="btn btn-default"><i class="fas fa-tools"></i>
+                    href="<?php
+                    echo ModuleHelper::buildActionURL(
+                            "default_access_restrictions"
+                    );
+                    ?>"
+                    class="btn btn-default"
+                    > <i class="fas fa-tools"></i>
                     <?php translate("view"); ?></a>
                 <?php
             }

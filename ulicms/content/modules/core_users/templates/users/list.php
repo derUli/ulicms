@@ -29,7 +29,8 @@ if ($permissionChecker->hasPermission("users")) {
         ?>
         <div class="voffset2">    
             <a href="index.php?action=admin_new&ref=admins"
-               class="btn btn-default"><i class="fa fa-plus"></i> 
+               class="btn btn-default is-not-ajax">
+                <i class="fa fa-plus"></i> 
                 <?php translate("create_user"); ?></a>
         </div>
     <?php } ?>

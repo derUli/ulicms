@@ -11,8 +11,10 @@ if ($permissionChecker->hasPermission("expert_settings")) {
         </p>
         <h1><?php translate("settings") ?></h1>
         <p>
-            <a href="<?php echo ModuleHelper::buildActionURL("settings_edit"); ?>"
-               class="btn btn-default"><i class="fa fa-plus"></i> <?php translate("create_option"); ?></a>
+            <a
+                href="<?php echo ModuleHelper::buildActionURL("settings_edit"); ?>"
+                class="btn btn-default is-ajax"
+                ><i class="fa fa-plus"></i> <?php translate("create_option"); ?></a>
         </p>
     <?php } ?>
     <?php
@@ -39,7 +41,15 @@ if ($permissionChecker->hasPermission("expert_settings")) {
                             <td><?php Template::escape($row->value); ?></td>
                             <?php if ($permissionChecker->hasPermission("expert_settings_edit")) { ?>
                                 <td class="text-center"><a
-                                        href="<?php echo ModuleHelper::buildActionURL("settings_edit", "name=" . Template::getEscape($row->name)); ?>"><img
+                                        href="<?php
+                                        echo ModuleHelper::buildActionURL(
+                                                "settings_edit",
+                                                "name=" .
+                                                Template::getEscape($row->name)
+                                        );
+                                        ?>"
+                                        class="is-ajax"
+                                        ><img
                                             src="gfx/edit.png" alt="<?php translate("edit"); ?>"
                                             title="<?php translate("edit"); ?>"></a></td>
                                 <td class="text-center">

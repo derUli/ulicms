@@ -64,7 +64,7 @@ class CommentsController extends MainClass {
                 CommentStatus::PENDING : CommentStatus::PUBLISHED;
 
         // show error if not all required fields are filled
-        if (!$comment->getAuthorName() or ! $comment->getText()) {
+        if (!$comment->getAuthorName() or!$comment->getText()) {
             ExceptionResult(get_translation("fill_all_fields"));
         }
 
@@ -214,7 +214,7 @@ class CommentsController extends MainClass {
         // Append jumpto=comments to the url to jump to the comment
         // table after redirect
         // It's inpossible to append an anchor to the url on a http redirect
-        // a javascript in util.js performs the jump to the anchor
+        // a javascript in fx.js performs the jump to the anchor
         $referrer = Request::getVar("referrer");
         if (!str_contains("jumpto=comments", $referrer)) {
             if (!str_contains("?", $referrer)) {

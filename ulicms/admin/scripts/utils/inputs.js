@@ -39,3 +39,38 @@ const selectAllChecked = (event) => {
             $(selectAllCheckbox).
             is(":checked")).change();
 };
+
+// dynamically add class form-control to all form elements to
+// make inputs prettier
+const addCssClassToInputs = (container) => {
+    // dynamically add class form-control to all form elements to
+    // make inputs prettier
+    $(container).find("input, select, textarea")
+            .not("input[type=checkbox]")
+            .not("input[type=radio]")
+            .not("input[type=button]")
+            .not("input[type=submit]")
+            .not("input[type=reset]")
+            .not("input[type=image]")
+            .addClass("form-control");
+};
+
+const getSelect2Language = () => {
+    return $("html").data("select2-language");
+};
+
+const initSelect2 = (container) => {
+    // prettier select-boxes
+    $(container).find("select").select2({
+        width: "100%",
+        language: getSelect2Language()
+    });
+};
+
+const initBootstrapToggle = (container) => {
+     // Toggle switches for some checkboxes
+    $(container).find(".js-switch").bootstrapToggle({
+        on: MenuTranslation.On,
+        off: MenuTranslation.Off
+    });
+}

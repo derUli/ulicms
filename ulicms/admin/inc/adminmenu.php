@@ -88,7 +88,10 @@
             . get_translation("info"),
             "?action=info",
             "info",
-            "info"
+            "info",
+            [],
+            false,
+            true
     );
     $logoutUrl = ModuleHelper::buildMethodCallUrl(
                     SessionManager::class,
