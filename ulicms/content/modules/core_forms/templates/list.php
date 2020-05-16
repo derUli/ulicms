@@ -10,7 +10,10 @@ if (!$permissionChecker->hasPermission("forms")) {
     <h1><?php translate("forms"); ?></h1>
     <?php if ($permissionChecker->hasPermission("forms_create")) { ?>
         <p>
-            <a href="index.php?action=forms_new" class="btn btn-default"><i
+            <a
+                href="index.php?action=forms_new"
+                class="btn btn-default is-ajax"
+                ><i
                     class="fa fa-plus"></i> <?php translate("create_form"); ?></a>
         </p>
     <?php } ?>
@@ -55,7 +58,8 @@ if (!$permissionChecker->hasPermission("forms")) {
                                 <a
                                     href="?action=forms_edit&id=<?php
                                     echo $form["id"];
-                                    ?>"><img src="gfx/edit.png" class="mobile-big-image"
+                                    ?>" class="is-ajax"
+                                    ><img src="gfx/edit.png" class="mobile-big-image"
                                        alt="<?php translate("edit"); ?>"
                                        title="<?php translate("edit"); ?>"></a>
                             </td>
