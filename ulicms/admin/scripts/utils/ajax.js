@@ -5,8 +5,7 @@ const bindAjaxLinks = (root) => {
             return;
         }
 
-        $("#main-backend-content, #message").hide();
-        $("#main-content-loadspinner").show();
+        ajaxLoadSpinner.show();
     });
 
     $(root).find("a.is-ajax").click((event) => {
@@ -21,13 +20,11 @@ const bindAjaxLinks = (root) => {
         const isMenuEntry = mainMenu.has(target);
 
         mainMenu.hide();
-        $("#main-backend-content, #message").hide();
-        $("#main-content-loadspinner").show();
+        ajaxLoadSpinner.show();
 
         const contentContainer = $("#content-container");
         $(contentContainer).load(url, (response, status, xhr) => {
-            $("#main-backend-content").show();
-            $("#main-content-loadspinner").hide();
+            ajaxLoadSpinner.hide();
             if (status === "error") {
                 const msg = `${xhr.status} ${xhr.statusText}`;
                 bootbox.alert(
@@ -69,7 +66,7 @@ const bindContentEvents = (contentContainer) => {
     initSelect2(contentContainer);
     addCssClassToInputs(contentContainer);
     initBootstrapToggle(contentContainer);
-}
+};
 
 const initRemoteAlerts = (rootElement) => {
     $(rootElement).find(".remote-alert").click((event) => {
@@ -84,3 +81,14 @@ const initRemoteAlerts = (rootElement) => {
         });
     });
 };
+
+const ajaxLoadSpinner = {
+    show: () => {
+        $("#main-content-loadspinner, #message").show();
+        $("#main-backend-content").hide();
+    },
+    hide: () => {
+        $("#main-content-loadspinner, #message").hide();
+        $("#main-backend-content").show();
+    }
+}

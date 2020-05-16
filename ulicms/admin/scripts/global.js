@@ -41,8 +41,7 @@ $(() => {
         // if there is no state this history entry
         // was a full page reload
         if (!state) {
-            $("#main-content-loadspinner").show();
-            $("#main-backend-content").hide();
+            ajaxLoadSpinner.show();
             location.replace(document.location);
             return;
         }
@@ -57,8 +56,7 @@ $(() => {
         // then this history entry was a full page reload
         // Then reload page
 
-        $("#main-content-loadspinner").show();
-        $("#main-backend-content").hide();
+        ajaxLoadSpinner.show();
         location.replace(window.location.href);
     });
 
