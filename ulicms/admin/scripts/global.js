@@ -19,14 +19,14 @@ $(() => {
     bootbox.setDefaults({
         locale: $("html").data("select2-language")
     });
-    
+
     // toggle hamburger menu
     $("#menu-toggle").click(() =>
         $(".mainmenu").slideToggle()
     );
-   
-   bindAjaxLinks("body");
-    
+
+    bindAjaxLinks("body");
+
     // clear-cache shortcut icon
     $("#menu-clear-cache").click((event) => {
         event.preventDefault();
@@ -128,6 +128,25 @@ $(() => {
             }
         }, false);
     }
+
+    $("input[type=checkbox] .select-all").change(selectAllChecked);
+    $("input[type=checkbox]").change(checkboxChecked);
+    // check "Select All" checkbox if all checkboxes of this group are checked
+    $("input[type=checkbox]").each((index, target) => {
+        const item = $(target).data("select-all-checkbox");
+        const group = $(target).data("checkbox-group");
+        if (item !== null && group !== null) {
+            checkSelectAllIfAllChecked(item, group);
+        }
+    });
+
+    // scroll to the given anchor
+    const params = new URLSearchParams(location.search);
+    const jumpTo = params.get('jumpto');
+    if (jumpTo && jumpTo.length > 0) {
+        location.href = "#" + jumpTo;
+    }
+
 // prettier select-boxes
     $("select").select2({
         width: "100%",

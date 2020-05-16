@@ -7,7 +7,7 @@ $(() => {
 	);
 });
 
-isTouchDevice = () => {
+const isTouchDevice = () => {
 	const prefixes = ' -webkit- -moz- -o- -ms- '.split(' ');
 	const mq = (query) => {
 		return window.matchMedia(query).matches;
