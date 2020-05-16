@@ -10,7 +10,8 @@ if (!$permissionChecker->hasPermission("install_packages")) {
     ?>
     <p>
         <a href="<?php echo ModuleHelper::buildActionURL("install_method"); ?>"
-           class="btn btn-default btn-back"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+           class="btn btn-default btn-back is-ajax">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i>
             <?php translate("back") ?></a>
     </p>
     <?php
@@ -49,8 +50,15 @@ if (!$permissionChecker->hasPermission("install_packages")) {
               <?php
               csrf_token_html();
               ?>
-        <input type="file" name="file"><br /> <br />
-        <button type="submit" class="btn btn-warning"><i class="fa fa-upload" aria-hidden="true"></i> <?php translate("install_package"); ?></button>
+        <p>
+            <input type="file" name="file" class="form-control" required>
+        </p>
+        <p>
+            <button type="submit" class="btn btn-warning">
+                <i class="fa fa-upload" aria-hidden="true"></i>
+                <?php translate("install_package"); ?>
+            </button>
+        </p>
     </form>
     <?php
 }

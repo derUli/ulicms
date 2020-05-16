@@ -14,8 +14,11 @@ if ($permissionChecker->hasPermission("videos") or
     <?php
     if ($permissionChecker->hasPermission("files")) {
         ?>
-        <a href="index.php?action=files" class="btn btn-default is-ajax"><i
-                class="fas fa-file"></i> <?php translate("files"); ?>
+        <a
+            href="index.php?action=files"
+            class="btn btn-default is-ajax"
+            ><i
+                class="fas fa-file is-ajax"></i> <?php translate("files"); ?>
         </a>
         <br />
         <br />

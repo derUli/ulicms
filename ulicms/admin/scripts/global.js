@@ -19,43 +19,14 @@ $(() => {
     bootbox.setDefaults({
         locale: $("html").data("select2-language")
     });
+    
     // toggle hamburger menu
     $("#menu-toggle").click(() =>
         $(".mainmenu").slideToggle()
     );
-    $(".mainmenu a.is-not-ajax").click((event) => {
-        $(".mainmenu").hide();
-        if (event.target.target === "_blank") {
-            return
-        }
-        $("#main-backend-content, #message").hide();
-        $("#main-content-loadspinner").show();
-    });
-
-    $("a.is-ajax").click((event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        const target = $(event.currentTarget);
-        const url = `${target.attr("href")}&only_content=true`;
-        const mainMenu = $(".mainmenu");
-        const isMenuEntry = mainMenu.has(target);
-        $(".mainmenu").hide();
-        $("#main-backend-content, #message").hide();
-        $("#main-content-loadspinner").show();
-        $("#content-container").load(url, (response, status, xhr) => {
-            $("#main-backend-content").show();
-            $("#main-content-loadspinner").hide();
-            if (status === "error") {
-                const msg = `${xhr.status} ${xhr.statusText}`;
-                bootbox.alert(
-                        $('<div/>').text(msg).html()
-                        );
-            } else if (isMenuEntry) {
-                mainMenu.find("a").removeClass("active");
-                target.addClass("active");
-            }
-        });
-    });
+   
+   bindAjaxLinks("body");
+    
     // clear-cache shortcut icon
     $("#menu-clear-cache").click((event) => {
         event.preventDefault();

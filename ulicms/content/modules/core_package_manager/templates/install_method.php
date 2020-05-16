@@ -12,7 +12,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
     </p>
     <h1><?php translate("install_package"); ?></h1>
     <p>
-        <a href="?action=upload_package" class="btn btn-default">
+        <a href="?action=upload_package" class="btn btn-default is-ajax">
             <i class="fa fa-upload"></i> <?php translate("upload_file"); ?>
         </a>
     </p>

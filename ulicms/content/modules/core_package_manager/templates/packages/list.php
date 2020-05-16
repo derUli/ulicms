@@ -15,7 +15,7 @@ if ($permissionChecker->hasPermission("list_packages")) {
     ?>
 
     <div class="btn-toolbar">
-        <a href="?action=install_method" class="btn btn-warning"><i
+        <a href="?action=install_method" class="btn btn-warning is-ajax"><i
                 class="fa fa-plus"></i> <?php translate("install_package"); ?></a>
     </div>
     <h2><?php translate("installed_modules"); ?></h2>
@@ -260,7 +260,9 @@ if ($permissionChecker->hasPermission("list_packages")) {
         <div class="row">
             <div class="col-xs-6">
                 <p>
-                    <a href="index.php?action=upload_patches" class="btn btn-warning"><i
+                    <a href="index.php?action=upload_patches"
+                       class="btn btn-warning is-ajax"
+                       ><i
                             class="fa fa-plus"></i> <?php translate("INSTALL_PATCH_FROM_FILE"); ?></a>
                 </p>
             </div>

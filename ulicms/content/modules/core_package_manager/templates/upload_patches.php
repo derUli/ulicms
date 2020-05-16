@@ -27,7 +27,10 @@ if (!$permissionChecker->hasPermission("upload_patches")) {
 	}
 	?>
 	<p>
-		<a href="<?php esc($backUrl); ?>" class="btn btn-default btn-back">
+		<a
+                    href="<?php esc($backUrl); ?>"
+                   class="btn btn-default btn-back is-not-ajax"
+                   >
 			<i class="fa fa-arrow-left" aria-hidden="true"></i>
 			<?php translate("back") ?></a>
 	</p>
@@ -37,15 +40,32 @@ if (!$permissionChecker->hasPermission("upload_patches")) {
 			  <?php csrf_token_html(); ?>
 		<p>
 			<strong><?php translate("name"); ?></strong> <br />
-			<input type="text" name="name" value="" required />
+			<input
+                            type="text"
+                            name="name"
+                            value=""
+                            required
+                            class="form-control"
+                            />
 		</p>
 		<p>
 			<strong><?php translate("description"); ?></strong> <br />
-			<input type="text" name="description" value="" required />
+			<input
+                            type="text"
+                            name="description"
+                            value=""
+                            required 
+                            class="form-control"
+                            />
 		</p>
 		<p>
 			<strong><?php translate("file"); ?></strong> <br />
-			<input name="file" type="file" required />
+			<input
+                            name="file"
+                            type="file"
+                            required
+                            class="form-control"
+                            />
 		</p>
 		<p>
 			<button type="submit" class="btn btn-warning" name="upload_patch">
