@@ -42,13 +42,7 @@ $passwordSecurityTranslation->render();
     <br />
 </div>
 </div>
-<div id="footer">
-    <?php do_event("admin_copyright_footer_left"); ?>
-    &copy; 2011 - <?php cms_release_year(); ?> by <a
-        href="http://www.ulicms.de" target="_blank">UliCMS</a>
-
-    <?php do_event("admin_copyright_footer_right"); ?>
-</div>
+<?php do_event("admin_copyright_footer_left"); ?>
 </div>
 <a href="#" id="scroll-to-top" class="has-pointer">
     <?php echo icon("fas fa-arrow-circle-up"); ?>
