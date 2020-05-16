@@ -2,9 +2,9 @@
 // Internet Exploder caches AJAX requests by default
 $(document).ready(() => {
     const body = $("body");
-    
+
     $.ajaxSetup({cache: false});
-    
+
     const token = $(body).data("csrf-token");
     $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
         if (options.type.toLowerCase() === "post") {
@@ -41,6 +41,8 @@ $(() => {
         // if there is no state this history entry
         // was a full page reload
         if (!state) {
+            $("#main-content-loadspinner").show();
+            $("#main-backend-content").hide();
             location.replace(document.location);
             return;
         }
@@ -54,6 +56,9 @@ $(() => {
         // If there is a state but no ajax URL
         // then this history entry was a full page reload
         // Then reload page
+
+        $("#main-content-loadspinner").show();
+        $("#main-backend-content").hide();
         location.replace(window.location.href);
     });
 
