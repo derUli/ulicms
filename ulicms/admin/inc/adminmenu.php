@@ -2,7 +2,6 @@
     <?php
     $menu = new AdminMenu();
     $entries = [];
-
     $entries[] = new MenuEntry(
             '<i class="fa fa-home" aria-hidden="true"></i> '
             . get_translation("welcome"),
@@ -45,7 +44,6 @@
             "admins",
             "users"
     );
-
     $entries[] = new MenuEntry(
             '<i class="fas fa-box"></i> '
             . get_translation("packages"),
@@ -53,7 +51,6 @@
             "packages",
             "list_packages"
     );
-
     if (file_exists(Path::resolve("ULICMS_ROOT/update.php"))) {
         $entries[] = new MenuEntry(
                 '<i class="fas fa-sync"></i> '
@@ -66,7 +63,6 @@
                 true
         );
     }
-
     $entries[] = new MenuEntry(
             '<i class="fas fa-tools"></i> '
             . get_translation("settings"),
@@ -94,19 +90,16 @@
             "info",
             "info"
     );
-
     $logoutUrl = ModuleHelper::buildMethodCallUrl(
                     SessionManager::class,
                     "logout"
     );
-
     $entries[] = new MenuEntry(
             '<i class="fa fa-sign-out-alt"></i> '
             . get_translation("logout"),
             $logoutUrl,
             "logout"
     );
-
     $entries = apply_filter($entries, "admin_menu_entries");
     $menu->setChildren($entries);
     echo $menu->render();

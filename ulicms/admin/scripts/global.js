@@ -1,43 +1,33 @@
 /* global bootbox, PasswordSecurityTranslation, MenuTranslation, zenscroll, vanillaToast, GlobalTranslation */
-
 // Internet Exploder caches AJAX requests by default
 $(document).ready(() => {
     $.ajaxSetup({cache: false});
-
     const token = $("body").data("csrf-token");
-
     $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
         if (options.type.toLowerCase() === "post") {
             // initialize `data` to empty string if it does not exist
             options.data = options.data || "";
-
             // add leading ampersand if `data` is non-empty
             options.data += options.data ? "&" : "";
-
             // add _token entry
             options.data += "csrf_token=" + encodeURIComponent(token);
         }
     });
 });
-
 $(() => {
     const language = $("html").data("select2-language");
     bootbox.setDefaults({
         locale: $("html").data("select2-language")
     });
-
     // toggle hamburger menu
     $("#menu-toggle").click(() =>
         $(".mainmenu").slideToggle()
     );
-
-    $(".mainmenu a.is-not-ajax").click((event) => {                     
+    $(".mainmenu a.is-not-ajax").click((event) => {
         $(".mainmenu").hide();
-        
-        if(event.target.target === "_blank") {
+        if (event.target.target === "_blank") {
             return
         }
-        
         $("#main-backend-content, #message").hide();
         $("#main-content-loadspinner").show();
     });
@@ -45,18 +35,13 @@ $(() => {
     $("a.is-ajax").click((event) => {
         event.preventDefault();
         event.stopPropagation();
-        
-        const target = $(event.target);
-        const url = target.attr("href");
-            
+        const target = $(event.currentTarget);
+        const url = `${target.attr("href")}&only_content=true`;
         const mainMenu = $(".mainmenu");
         const isMenuEntry = mainMenu.has(target);
-     
         $(".mainmenu").hide();
-
         $("#main-backend-content, #message").hide();
         $("#main-content-loadspinner").show();
-
         $("#content-container").load(url, (response, status, xhr) => {
             $("#main-backend-content").show();
             $("#main-content-loadspinner").hide();
@@ -65,18 +50,16 @@ $(() => {
                 bootbox.alert(
                         $('<div/>').text(msg).html()
                         );
-            } else if(isMenuEntry) {
-               mainMenu.find("a").removeClass("active");
+            } else if (isMenuEntry) {
+                mainMenu.find("a").removeClass("active");
                 target.addClass("active");
-             }
+            }
         });
     });
-
     // clear-cache shortcut icon
     $("#menu-clear-cache").click((event) => {
         event.preventDefault();
         event.stopPropagation();
-
         $("#menu-clear-cache").hide();
         $("#menu-clear-cache-loading").show();
         const url = $("#menu-clear-cache").data("url");
@@ -85,13 +68,11 @@ $(() => {
             $("#menu-clear-cache-loading").hide();
         });
     });
-
     // Add bootstrap css class to tablesorter
     $.extend($.fn.dataTableExt.oStdClasses, {
         sFilterInput: "form-control",
         sLengthSelect: "form-control"
     });
-
     // copy text from input to clipboard on click
     $(".select-on-click").click((event) => {
         const target = $(event.target);
@@ -104,7 +85,6 @@ $(() => {
         }
         );
     });
-
     // Disabled a link-buttons must not be clickable
     $("a").click((event) => {
         const target = $(event.currentTarget);
@@ -112,9 +92,7 @@ $(() => {
             event.preventDefault();
         }
     });
-
     initDataTables("body");
-
     // password security check
     if (typeof $(".password-security-check").password !== "undefined") {
         $(".password-security-check").password({
@@ -134,7 +112,6 @@ $(() => {
         });
     }
     // Links to upcoming features
-
     $(".coming-soon").click((event) => {
         event.preventDefault();
         bootbox.alert("Coming Soon!");
@@ -146,18 +123,15 @@ $(() => {
     // validation only accepts value without timezone
     // remove the timezone from the datetime value
     // https://www.reddit.com/r/webdev/comments/6pxfn3/ios_datetimelocal_inputs_broken_universally/
-
     const isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
     if (isSafari) {
         $("input[type='datetime-local']").map((element) =>
             $(element).val($(element).val().substr(0, 16))
         );
-
         $("input[type='datetime-local']").change((event) =>
             event.target.value = event.target.value.substr(0, 16)
         );
     }
-
 // dynamically add class form-control to all form elements to
 // make inputs prettier
     $("input, select, textarea")
@@ -183,19 +157,16 @@ $(() => {
             }
         }, false);
     }
-
 // prettier select-boxes
     $("select").select2({
         width: "100%",
         language: language
     });
-
     // Toggle switches for some checkboxes
     $(".js-switch").bootstrapToggle({
         on: MenuTranslation.On,
         off: MenuTranslation.Off
     });
-
     // bootstrap-toggle doesn't react to click on the label of a toggle switch
     // This is a long standing issue that is still not fixed.
     // https://github.com/minhur/bootstrap-toggle/issues/23
@@ -207,19 +178,16 @@ $(() => {
         if (theSwitch && theSwitch.length) {
             theSwitch.bootstrapToggle('toggle');
         }
-
     });
-
     $.datetimepicker.setLocale(language);
     $(".datepicker").datetimepicker({
         format: "Y-m-d",
         timepicker: false
     });
-
     // User has to confirm logout
     $("a.backend-menu-item-logout").click((event) => {
         event.preventDefault();
-            $(".mainmenu").hide();
+        $(".mainmenu").hide();
         const url = $(event.target).attr("href");
         bootbox.confirm(`${MenuTranslation.Logout}?`, (result) => {
             if (result) {
@@ -227,7 +195,6 @@ $(() => {
             }
         });
     });
-
     // show a scroll-to-top arrow
     // if the scroll viewport isn't at top of the page
     $(window).scroll(() => {
@@ -237,20 +204,15 @@ $(() => {
             $("#scroll-to-top").fadeOut();
         }
     });
-
     // scroll to top arrow at bottom right
     $("#scroll-to-top").click((event) => {
         event.preventDefault();
         event.stopPropagation();
-
         zenscroll.toY(0);
     });
-
     $(".more-options-toggle").click((event) => {
         const target = $(event.target);
         const toggleTarget = $(target.data("target"));
-
         toggleTarget.slideToggle()
-
     });
 });

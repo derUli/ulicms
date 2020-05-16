@@ -51,11 +51,11 @@ if ($permissionChecker->hasPermission("pages")
                class="btn btn-default voffset2"><i
                     class="fa fa-list-alt" aria-hidden="true"></i>
                 <?php translate("categories"); ?></a>
-        <?php
-    }
-    ?>
-        </div>
-        <?php
+                <?php
+            }
+            ?>
+    </div>
+    <?php
     do_event("content_type_list_entry");
 } else {
     noPerms();

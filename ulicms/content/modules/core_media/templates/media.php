@@ -1,6 +1,5 @@
 <?php
 $permissionChecker = new ACL();
-
 if ($permissionChecker->hasPermission("videos") or
         $permissionChecker->hasPermission("audio") or
         $permissionChecker->hasPermission("files")) {
@@ -15,7 +14,7 @@ if ($permissionChecker->hasPermission("videos") or
     <?php
     if ($permissionChecker->hasPermission("files")) {
         ?>
-        <a href="index.php?action=files" class="btn btn-default"><i
+        <a href="index.php?action=files" class="btn btn-default is-ajax"><i
                 class="fas fa-file"></i> <?php translate("files"); ?>
         </a>
         <br />

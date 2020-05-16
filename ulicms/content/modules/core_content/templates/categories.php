@@ -19,7 +19,6 @@ if (!$permissionChecker->hasPermission("categories")) {
     } else {
         $order = "id";
     }
-
     $categories = Categories::getAllCategories($order);
     ?>
     <?php
@@ -32,7 +31,6 @@ if (!$permissionChecker->hasPermission("categories")) {
                 "icons.php"
         );
         ?>
-
         <h2><?php translate("categories"); ?></h2>
         <?php
         echo Alert::info(
@@ -40,7 +38,7 @@ if (!$permissionChecker->hasPermission("categories")) {
         );
         ?>
         <div class="field">
-            <a href="?action=categories&add&only_content=true"
+            <a href="?action=categories&add"
                class="btn btn-default is-ajax"
                ><i
                     class="fa fa-plus"></i>
@@ -50,8 +48,7 @@ if (!$permissionChecker->hasPermission("categories")) {
     }
     ?>
     <?php
-    if (count($categories) > 0 && !isset($_GET["add"])
-            && !isset($_GET["edit"])) {
+    if (count($categories) > 0 && !isset($_GET["add"]) && !isset($_GET["edit"])) {
         ?>
         <div class="scroll">
             <table class="tablesorter">
@@ -60,7 +57,6 @@ if (!$permissionChecker->hasPermission("categories")) {
                         <th style="min-width: 50px;">
                             <?php translate("id"); ?>
                         </th>
-
                         <th style="min-width: 200px;">
                             <?php translate("name"); ?>
                         </th>
@@ -98,7 +94,9 @@ if (!$permissionChecker->hasPermission("categories")) {
                                     )) {
                                 ?>
                                 <td class="text-center"><a
-                                        href="?action=categories&edit=<?php echo $category->getID(); ?>"><img
+                                        href="?action=categories&edit=<?php echo $category->getID(); ?>"
+                                        class="is-ajax">
+                                        <img
                                             src="gfx/edit.png"
                                             class="mobile-big-image"
                                             alt="<?php translate("edit"); ?>"
@@ -182,7 +180,6 @@ if (!$permissionChecker->hasPermission("categories")) {
                     class="form-control"
                     >
             </div>
-
             <div class="field">
                 <strong><?php translate("description"); ?></strong>
                 <br />
@@ -260,7 +257,6 @@ if (!$permissionChecker->hasPermission("categories")) {
         }
     }
 }
-
 $translation = new JSTranslation(array(
     "ask_for_delete"
         ));
