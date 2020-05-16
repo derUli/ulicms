@@ -5,7 +5,7 @@ use UliCMS\Constants\RequestMethod;
 <p>
     <a
         href="<?php echo ModuleHelper::buildActionURL("design"); ?>"
-        class="btn btn-default btn-back"><i class="fas fa-arrow-left"></i> <?php translate("back") ?></a>
+        class="btn btn-default btn-back is-not-ajax"><i class="fas fa-arrow-left"></i> <?php translate("back") ?></a>
 </p>
 <h1><?php translate("edit_footer_text"); ?></h1>
 <?php

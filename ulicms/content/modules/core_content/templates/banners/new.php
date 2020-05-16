@@ -21,7 +21,7 @@ if ($permissionChecker->hasPermission("banners")
     ?>
     <div class="field">
         <a href="<?php echo ModuleHelper::buildActionURL("banner"); ?>"
-           class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i>
+           class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i>
             <?php translate("back") ?></a>
     </div>
 

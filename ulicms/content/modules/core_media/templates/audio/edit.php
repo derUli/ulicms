@@ -11,7 +11,7 @@ if ($permissionChecker->hasPermission("audio")
         $dataset = db_fetch_object($result);
         ?><p>
             <a href="<?php echo ModuleHelper::buildActionURL("audio"); ?>"
-               class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i>
+               class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i>
                 <?php translate("back") ?></a>
         </p>
         <h1><?php translate("UPLOAD_AUDIO"); ?></h1>

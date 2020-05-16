@@ -84,7 +84,7 @@ if ($permissionChecker->hasPermission("pages")) {
             <div class="pageform" style="display: none">
                 <div class="top-bar">
                     <a href="<?php echo ModuleHelper::buildActionURL("pages"); ?>"
-                       class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
+                       class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
                        <?php
                        echo ModuleHelper::buildMethodCallButton("PageController", "delete", '<i class="fas fa-trash"></i> ' . get_translation("delete"), array(
                            "class" => "btn btn-danger",

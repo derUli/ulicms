@@ -13,7 +13,7 @@ if ($permissionChecker->hasPermission("expert_settings") and $permissionChecker-
     ?>
     <?php echo ModuleHelper::buildMethodCallForm("ExpertSettingsController", "save"); ?>
     <a href="<?php echo ModuleHelper::buildActionURL("other_settings"); ?>"
-       class="btn btn-default btn-back">
+       class="btn btn-default btn-back is-not-ajax">
         <i class="fa fa-arrow-left"></i>
         <?php translate("back") ?>
     </a>

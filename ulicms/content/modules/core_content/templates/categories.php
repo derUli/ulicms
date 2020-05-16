@@ -159,7 +159,7 @@ if (!$permissionChecker->hasPermission("categories")) {
             ?>
             <div class="btn-toolbar">
                 <a href="<?php echo ModuleHelper::buildActionURL("categories"); ?>"
-                   class="btn btn-default btn-back">
+                   class="btn btn-default btn-back is-not-ajax">
                     <i class="fa fa-arrow-left"></i>
                     <?php translate("back") ?></a>
             </div>
@@ -205,7 +205,7 @@ if (!$permissionChecker->hasPermission("categories")) {
         if ($permissionChecker->hasPermission("categories_edit")) {
             ?><div class="btn-toolbar">
                 <a href="<?php echo ModuleHelper::buildActionURL("categories"); ?>"
-                   class="btn btn-default btn-back">
+                   class="btn btn-default btn-back is-not-ajax">
                     <i class="fa fa-arrow-left"></i>
                     <?php translate("back") ?></a>
             </div>

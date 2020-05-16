@@ -18,7 +18,7 @@ if ($permissionChecker->hasPermission("videos") or
             href="index.php?action=files"
             class="btn btn-default is-ajax"
             ><i
-                class="fas fa-file is-ajax"></i> <?php translate("files"); ?>
+                class="fas fa-file"></i> <?php translate("files"); ?>
         </a>
         <br />
         <br />
@@ -28,7 +28,7 @@ if ($permissionChecker->hasPermission("videos") or
     <?php
     if ($permissionChecker->hasPermission("videos")) {
         ?>
-        <a href="index.php?action=videos" class="btn btn-default"><i
+        <a href="index.php?action=videos" class="btn btn-default is-not-ajax"><i
                 class="fas fa-file-video"></i> <?php translate("videos"); ?>
         </a>
         <br />
@@ -39,7 +39,7 @@ if ($permissionChecker->hasPermission("videos") or
     <?php
     if ($permissionChecker->hasPermission("audio")) {
         ?>
-        <a href="index.php?action=audio" class="btn btn-default"> <i
+        <a href="index.php?action=audio" class="btn btn-default is-not-ajax"> <i
                 class="fas fa-file-audio"></i> <?php translate("audio"); ?>
         </a>
         <?php

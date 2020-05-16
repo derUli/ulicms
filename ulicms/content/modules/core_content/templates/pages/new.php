@@ -55,7 +55,7 @@ if ($permissionChecker->hasPermission("pages")
     ?>
     <p>
         <a href="<?php echo ModuleHelper::buildActionURL("pages"); ?>"
-           class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i>
+           class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i>
             <?php translate("back") ?></a>
     </p>
     <input type="hidden" name="add" value="add">

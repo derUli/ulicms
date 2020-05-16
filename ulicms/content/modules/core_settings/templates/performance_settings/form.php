@@ -34,7 +34,7 @@ if (!$permissionChecker->hasPermission("performance_settings")) {
         echo ModuleHelper::buildActionURL(
                 "settings_categories");
         ?>"
-        class="btn btn-default btn-back">
+        class="btn btn-default btn-back is-not-ajax">
         <i class="fas fa-arrow-left"></i>
         <?php translate("back") ?></a>
     <a

@@ -63,7 +63,7 @@ if (!$permissionChecker->hasPermission("other")) {
     ?>
     <a
         href="<?php echo ModuleHelper::buildActionURL("settings_categories"); ?>"
-        class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
+        class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
     <div id="accordion-container">
         <h2 class="accordion-header">
             <?php translate("DOMAIN2LANGUAGE_MAPPING"); ?>
@@ -142,7 +142,7 @@ if (!$permissionChecker->hasPermission("other")) {
                             "default_access_restrictions"
                     );
                     ?>"
-                    class="btn btn-default"
+                    class="btn btn-default is-not-ajax"
                     > <i class="fas fa-tools"></i>
                     <?php translate("view"); ?></a>
                 <?php

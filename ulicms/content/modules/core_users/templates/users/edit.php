@@ -20,7 +20,7 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
     ?>
     <div class="btn-toolbar">
         <a href="<?php echo $backUrl; ?>"
-           class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
+           class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
     </div>
     <?php
     while ($row = db_fetch_object($result)) {

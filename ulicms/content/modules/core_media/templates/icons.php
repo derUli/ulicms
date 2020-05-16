@@ -28,7 +28,7 @@ $notSelectedButton = "btn btn-default"
                class="<?php
                echo $action == $currentAction ?
                        $selectedButton : $notSelectedButton;
-               echo $action == "files" ? " is-ajax" : "";
+               echo $action == "files" ? " is-ajax" : " is-not-ajax";
                ?>">
                 <i class="<?php echo $cssClass ?>"></i>
                 <span class="hide-on-820">

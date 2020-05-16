@@ -1,8 +1,11 @@
 /* global bootbox, PasswordSecurityTranslation, MenuTranslation, zenscroll, vanillaToast, GlobalTranslation */
 // Internet Exploder caches AJAX requests by default
 $(document).ready(() => {
+    const body = $("body");
+    
     $.ajaxSetup({cache: false});
-    const token = $("body").data("csrf-token");
+    
+    const token = $(body).data("csrf-token");
     $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
         if (options.type.toLowerCase() === "post") {
             // initialize `data` to empty string if it does not exist
@@ -16,6 +19,7 @@ $(document).ready(() => {
 });
 
 $(() => {
+    const body = $("body");
     const language = $("html").data("select2-language");
     bootbox.setDefaults({
         locale: $("html").data("select2-language")
@@ -26,14 +30,31 @@ $(() => {
         $(".mainmenu").slideToggle()
     );
 
-    bindAjaxLinks("body");
-    
-    $(window).bind('popstate', function(event) {
+    bindAjaxLinks(body);
+
+    // handle browser back events (Required for ajax loaded pages)
+    $(window).bind('popstate', (event) => {
         const state = event.originalEvent.state;
-        if(typeof state.ajaxUrl === 'string'){
-            console.log('go back to', state);
-            ajaxGoTo(state.ajaxUrl)
+
+        console.log('popstate', state);
+
+        // if there is no state this history entry
+        // was a full page reload
+        if (!state) {
+            location.replace(document.location);
+            return;
         }
+        // if this page was loaded by ajax
+        // use ajax again
+        if (typeof state.ajaxUrl === 'string') {
+            console.log('go back to', state.ajaxUrl);
+            ajaxGoTo(state.ajaxUrl);
+            return;
+        }
+        // If there is a state but no ajax URL
+        // then this history entry was a full page reload
+        // Then reload page
+        location.replace(window.location.href);
     });
 
     // clear-cache shortcut icon
@@ -76,26 +97,8 @@ $(() => {
         }
     });
 
-    initDataTables("body");
-
-    // password security check
-    if (typeof $(".password-security-check").password !== "undefined") {
-        $(".password-security-check").password({
-            shortPass: PasswordSecurityTranslation.ShortPass,
-            badPass: PasswordSecurityTranslation.BadPass,
-            goodPass: PasswordSecurityTranslation.GoodPass,
-            strongPass: PasswordSecurityTranslation.StrongPass,
-            containsUsername: PasswordSecurityTranslation.ContainsUsername,
-            enterPass: PasswordSecurityTranslation.EnterPass,
-            showPercent: false,
-            showText: true,
-            animate: true,
-            animateSpeed: "fast",
-            username: $("[name=username]").length ? $("[name=username]") : false,
-            usernamePartialMatch: true,
-            minimumLength: 4
-        });
-    }
+    initDataTables(body);
+    initPasswordSecurityCheck(body);
 
     // Links to upcoming features
     $(".coming-soon").click((event) => {
@@ -104,7 +107,7 @@ $(() => {
     });
 
     // Showing a link in an alert box
-    initRemoteAlerts("body");
+    initRemoteAlerts(body);
 
     // There is a bug in iOS Safari's implementation of datetime-local
     // Safari appends a timezone to value on change while the
@@ -123,7 +126,7 @@ $(() => {
     }
 
 
-    addCssClassToInputs($("body"));
+    addCssClassToInputs($(body));
 
     // override save shortcut to trigger submit button
     if ($("form button[type=submit], form input[type=submit]").length) {
@@ -159,26 +162,15 @@ $(() => {
         location.href = "#" + jumpTo;
     }
 
-    initSelect2("body");
-    initBootstrapToggle("body");   
+    initSelect2(body);
+    initBootstrapToggle(body);
 
-    // bootstrap-toggle doesn't react to click on the label of a toggle switch
-    // This is a long standing issue that is still not fixed.
-    // https://github.com/minhur/bootstrap-toggle/issues/23
-    // just wrap the clickable text in an element with this css class
-    // to make it clickable
-    $(".js-switch-label").click((event) => {
-        const target = $(event.target);
-        const theSwitch = target.closest('.checkbox').find(".js-switch");
-        if (theSwitch && theSwitch.length) {
-            theSwitch.bootstrapToggle('toggle');
-        }
-    });
     $.datetimepicker.setLocale(language);
     $(".datepicker").datetimepicker({
         format: "Y-m-d",
         timepicker: false
     });
+
     // User has to confirm logout
     $("a.backend-menu-item-logout").click((event) => {
         event.preventDefault();
@@ -190,6 +182,7 @@ $(() => {
             }
         });
     });
+
     // show a scroll-to-top arrow
     // if the scroll viewport isn't at top of the page
     $(window).scroll(() => {
@@ -199,15 +192,12 @@ $(() => {
             $("#scroll-to-top").fadeOut();
         }
     });
+
     // scroll to top arrow at bottom right
     $("#scroll-to-top").click((event) => {
         event.preventDefault();
         event.stopPropagation();
         zenscroll.toY(0);
     });
-    $(".more-options-toggle").click((event) => {
-        const target = $(event.target);
-        const toggleTarget = $(target.data("target"));
-        toggleTarget.slideToggle()
-    });
+
 });

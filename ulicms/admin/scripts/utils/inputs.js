@@ -73,4 +73,37 @@ const initBootstrapToggle = (container) => {
         on: MenuTranslation.On,
         off: MenuTranslation.Off
     });
+    
+        // bootstrap-toggle doesn't react to click on the label of a toggle switch
+    // This is a long standing issue that is still not fixed.
+    // https://github.com/minhur/bootstrap-toggle/issues/23
+    // just wrap the clickable text in an element with this css class
+    // to make it clickable
+    $(container).find(".js-switch-label").click((event) => {
+        const target = $(event.target);
+        const theSwitch = target.closest('.checkbox').find(".js-switch");
+        if (theSwitch && theSwitch.length) {
+            theSwitch.bootstrapToggle('toggle');
+        }
+    });};
+
+const initPasswordSecurityCheck = (container) => {
+        // password security check
+    if (typeof $(".password-security-check").password !== "undefined") {
+        $(".password-security-check").password({
+            shortPass: PasswordSecurityTranslation.ShortPass,
+            badPass: PasswordSecurityTranslation.BadPass,
+            goodPass: PasswordSecurityTranslation.GoodPass,
+            strongPass: PasswordSecurityTranslation.StrongPass,
+            containsUsername: PasswordSecurityTranslation.ContainsUsername,
+            enterPass: PasswordSecurityTranslation.EnterPass,
+            showPercent: false,
+            showText: true,
+            animate: true,
+            animateSpeed: "fast",
+            username: $("[name=username]").length ? $("[name=username]") : false,
+            usernamePartialMatch: true,
+            minimumLength: 4
+        });
+    }
 }

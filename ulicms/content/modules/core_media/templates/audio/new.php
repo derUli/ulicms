@@ -8,7 +8,7 @@ if ($permissionChecker->hasPermission("audio")
     ?>
     <div class="btn-toolbar">
         <a href="<?php echo ModuleHelper::buildActionURL("audio"); ?>"
-           class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i>
+           class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i>
             <?php translate("back") ?></a>
     </div>
     <h1><?php translate("UPLOAD_AUDIO"); ?>

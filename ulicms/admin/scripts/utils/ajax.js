@@ -44,17 +44,24 @@ const bindAjaxLinks = (root) => {
 };
 
 const ajaxGoTo = (url) => {
+    $("#main-backend-content, #message").hide();
+    $("#main-content-loadspinner").show();
     const contentContainer = $("#content-container");
     $(contentContainer).load(url, (response, status, xhr) => {
+
+        $("#main-backend-content").show();
+        $("#main-content-loadspinner").hide();
+
         if (status === "error") {
             const msg = `${xhr.status} ${xhr.statusText}`;
             bootbox.alert(
                     $('<div/>').text(msg).html());
             return;
         }
+
         bindContentEvents(contentContainer);
     });
-}
+};
 
 const bindContentEvents = (contentContainer) => {
     bindAjaxLinks(contentContainer);

@@ -12,7 +12,7 @@ if ($permissionChecker->hasPermission("videos")
         ?>
         <div class="field">
             <a href="<?php echo ModuleHelper::buildActionURL("videos"); ?>"
-               class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i>
+               class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i>
                 <?php translate("back") ?></a>
         </div>
         <h1><?php translate("UPLOAD_VIDEO"); ?></h1>

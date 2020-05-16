@@ -17,7 +17,9 @@ if ($commentableContentTypeSettings) {
 ?>
 <a
     href="<?php echo ModuleHelper::buildActionURL("settings_categories"); ?>"
-    class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
+    class="btn btn-default btn-back is-not-ajax">
+    <i class="fa fa-arrow-left"></i> <?php translate("back") ?>
+</a>
 
 <?php if (Request::getVar("save")) { ?>
     <div class="alert alert-success alert-dismissable fade in voffset3">

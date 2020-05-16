@@ -19,7 +19,7 @@ if ($permissionChecker->hasPermission("privacy_settings")) {
     <div class="field">
         <a
             href="<?php echo ModuleHelper::buildActionURL("settings_categories"); ?>"
-            class="btn btn-default btn-back">
+            class="btn btn-default btn-back is-not-ajax">
             <i class="fa fa-arrow-left"></i>
             <?php translate("back") ?>
         </a>

@@ -12,7 +12,7 @@ if ($permissionChecker->hasPermission("open_graph")) {
     ?>
     <p>
         <a href="<?php echo ModuleHelper::buildActionURL("settings_simple"); ?>"
-           class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
+           class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
     </p>
     <h1><?php translate("open_graph"); ?></h1>
     <?php

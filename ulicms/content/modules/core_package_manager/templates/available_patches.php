@@ -13,7 +13,7 @@ if ($permissionChecker->hasPermission("update_system") && !$runningInGoogleCloud
     ?>
     <p>
         <a href="<?php echo ModuleHelper::buildActionURL("home"); ?>"
-           class="btn btn-default btn-back"><i class="fa fa-arrow-left" aria-hidden="true"></i> <?php translate("back") ?></a>
+           class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left" aria-hidden="true"></i> <?php translate("back") ?></a>
     </p>
     <h1><?php translate("available_patches"); ?></h1>
     <div class="alert alert-info"><?php translate("patches_will_fix_errors"); ?></div>
