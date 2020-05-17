@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace UliCMS\Helpers;
 
 use Helper;
-use Datetime;
 use Westsworld\TimeAgo;
 
 class NumberFormatHelper extends Helper {
@@ -36,7 +35,7 @@ class NumberFormatHelper extends Helper {
             ?int $timestamp = null
     ): string {
         $time = !is_null($timestamp) ? $timestamp : time();
-        return date("Y-m-d H:i:s", $time);
+        return date("Y-m-d H:i", $time);
     }
     
     // use this to convert an integer timestamp to use it
