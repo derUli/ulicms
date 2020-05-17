@@ -31,13 +31,47 @@ class NumberFormatHelperTest extends \PHPUnit\Framework\TestCase {
 
     public function testFormatTime() {
         $number = time() - (60 * 60 * 24 * 367 * 2);
-        $this->assertEquals("vor über 2 Jahren", NumberFormatHelper::formatTime($number));
+        $this->assertEquals(
+                "vor über 2 Jahren",
+                NumberFormatHelper::formatTime($number)
+                );
     }
 
     public function testTimestampToHtml5Datetime() {
-        $this->assertEquals("2019-09-10T14:25", NumberFormatHelper::timestampToHtml5Datetime(1568118319));
+        $this->assertEquals(
+                "2019-09-10T14:25",
+                NumberFormatHelper::timestampToHtml5Datetime(1568118319)
+                );
+        $this->assertRegExp(
+                '/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})$/',
+                NumberFormatHelper::timestampToHtml5Datetime()
+                );
+    }
 
-        $this->assertRegExp('/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})$/', NumberFormatHelper::timestampToHtml5Datetime());
+    public function testTimestampToSqlDateWithoutArgs() {
+                $this->assertRegExp(
+                '/^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2})$/',
+                NumberFormatHelper::timestampToSqlDate()
+                );
+    }
+
+    public function testTimestampToSqlDateWithTimestamp() {
+        $timestamp = 1568118319;
+        $this->assertEquals(
+                "2019-09-10 14:25",
+                NumberFormatHelper::timestampToSqlDate($timestamp)
+        );
+    }
+
+    public function testTimestampToSqlDateWithTimestampAndFormat() {
+        $timestamp = 1568118319;
+        $this->assertEquals(
+                "2019-09-10 14:25:19",
+                NumberFormatHelper::timestampToSqlDate(
+                        $timestamp,
+                        NumberFormatHelper::SQL_DATE_WITH_SECONDS
+                )
+        );
     }
 
 }

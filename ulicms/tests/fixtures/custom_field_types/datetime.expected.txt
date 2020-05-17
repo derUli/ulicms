@@ -1,6 +1,6 @@
 <div class="custom-field field" 
  data-field-name="my_field">
 <strong class="field-label">Date </strong>
-<input type="datetime-local" 
- name="my_field" value="1996-12-19T16:39:57-08:00" />
+<input type="text" 
+ class="datetimepicker" name="my_field" value="2020-05-17 11:51" />
 </div>

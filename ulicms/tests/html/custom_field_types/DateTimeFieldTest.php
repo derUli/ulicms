@@ -10,11 +10,9 @@ class DateTimeFieldTest extends \PHPUnit\Framework\TestCase {
         $field = new DatetimeField();
         $field->name = "my_field";
         $field->title = "date";
-        $rendered = $field->render("1996-12-19T16:39:57-08:00");
+        $rendered = $field->render("2020-05-17 11:51");
 
         $expectedFile = Path::resolve("ULICMS_ROOT/tests/fixtures/custom_field_types/datetime.expected.txt");
-
-        // file_put_contents($expectedFile, $rendered);
 
         $expected = file_get_contents($expectedFile);
         $this->assertEquals(normalizeLN($expected), normalizeLN($rendered));

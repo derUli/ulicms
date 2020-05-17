@@ -6,8 +6,12 @@ namespace UliCMS\Helpers;
 
 use Helper;
 use Westsworld\TimeAgo;
+use DateTime;
 
 class NumberFormatHelper extends Helper {
+    
+    const SQL_DATE_WITH_SECONDS = "Y-m-d H:i:s";
+    const SQL_DATE_WITHOUT_SECONDS = "Y-m-d H:i";
 
     // This method formats bytes in a human readable format
     // Snippet from PHP Share: http://www.phpshare.org
@@ -32,10 +36,11 @@ class NumberFormatHelper extends Helper {
         // use this to convert an integer timestamp to use it
     // for a html5 datetime-local input
     public static function timestampToSqlDate(
-            ?int $timestamp = null
+            ?int $timestamp = null,
+            string $format = self::SQL_DATE_WITHOUT_SECONDS
     ): string {
         $time = !is_null($timestamp) ? $timestamp : time();
-        return date("Y-m-d H:i", $time);
+        return date($format, $time);
     }
     
     // use this to convert an integer timestamp to use it
