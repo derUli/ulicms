@@ -31,18 +31,21 @@ class UnDeleteButtonRenderer {
 
         $url = "#";
         $message = get_secure_translation("confirm_undelete_page",
-                ["%title%" => getPageTitleByID($pageId)
+                [
+                    "%title%" => getPageTitleByID($pageId)
                 ]
+        );
+        $actionUrl = ModuleHelper::buildMethodCallUrl(
+                        PageController::class,
+                        "undelete",
+                        "id={$pageId}csrf_token=" . get_csrf_token()
         );
         $attributes = [
             "data-confirm" => $message,
-            "data-url" => ModuleHelper::buildMethodCallUrl(
-                    PageController::class,
-                    "undelete",
-                    "id={$pageId}csrf_token=" . get_csrf_token()
-            ),
+            "data-url" => $actionUrl,
             "class" => "delete-icon"
         ];
+        
         $link = link($url, $icon, true, null, $attributes);
         ViewBag::set("button", $link);
 
