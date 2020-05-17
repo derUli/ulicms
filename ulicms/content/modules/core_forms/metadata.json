@@ -3,7 +3,7 @@
     "source": "core",
     "embed": false,
     "shy": false,
-    "main_class": "CoreForms",
+    "main_class": "CoreFormsController",
     "custom_acl":
             [
                 "forms",
@@ -11,7 +11,7 @@
                 "forms_edit"
             ],
     "controllers": {
-        "CoreForms": "controllers/CoreForms.php",
+        "CoreFormsController": "controllers/CoreFormsController.php",
         "FormController": "controllers/FormController.php"
     },
     "actions": {
