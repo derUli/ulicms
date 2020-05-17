@@ -136,8 +136,7 @@ class MenuEntryTest extends \PHPUnit\Framework\TestCase {
         $this->permittedUser->registerSession(false);
         $this->assertTrue($menuEntry->userHasPermission());
     }
-    
-    
+
     public function testUserHasPermissionReturnsTrueWithoutPermissions() {
         $menuEntry = $this->constructMenuEntryWithoutChildren();
 
@@ -145,14 +144,13 @@ class MenuEntryTest extends \PHPUnit\Framework\TestCase {
         $menuEntry->setPermissions(null);
         $this->assertTrue($menuEntry->userHasPermission());
     }
-    
+
     public function testUserHasPermissionReturnsFalse() {
         $menuEntry = $this->constructMenuEntryWithoutChildren();
 
         $menuEntry->setPermissions("foobar");
         $this->notPermittedUser->registerSession(false);
         $this->assertFalse($menuEntry->userHasPermission());
-        
     }
 
     public function testRender() {
@@ -192,6 +190,17 @@ class MenuEntryTest extends \PHPUnit\Framework\TestCase {
                 )
         );
         $this->assertEquals($inputExpected, $menuEntry->render());
+    }
+
+    public function testSetIsAjax() {
+        $menuEntry = $this->constructMenuEntryWithoutChildren();
+        $this->assertFalse($menuEntry->getIsAjax());
+
+        $menuEntry->setIsAjax(true);
+        $this->assertTrue($menuEntry->getIsAjax());
+
+        $menuEntry->setIsAjax(false);
+        $this->assertFalse($menuEntry->getIsAjax());
     }
 
 }
