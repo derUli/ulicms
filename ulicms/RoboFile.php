@@ -510,4 +510,17 @@ class RoboFile extends \Robo\Tasks {
         }
     }
 
+    /**
+     * Run PHPUnit Tests
+     * @param string $testFile test file to run
+     */
+    public function testsRun(?string $testFile = null) {
+        $phpunitTask = $this->taskPHPUnit();
+        if ($testFile) {
+            $phpunitTask = $phpunitTask->file($testFile);
+        }
+
+        $phpunitTask->run();
+    }
+
 }

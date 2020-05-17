@@ -9,11 +9,20 @@ use Mpdf\Mpdf;
 use UliCMS\Utils\CacheUtil;
 use StringHelper;
 use ContentFactory;
+use UliCMS\Exceptions\DatasetNotFoundException;
 
 // this class renders a page as pdf using mPDF
 class PdfRenderer {
 
-    public $content = null;
+    public $isMpdfInstalled = false;
+
+    public function __construct() {
+        $this->isMpdfInstalled = $this->checkIfMpdfIsInstalled();
+    }
+
+    protected function checkIfMpdfIsInstalled(): bool {
+        return class_exists('Mpdf\Mpdf');
+    }
 
     // renders the content html to class variable
     protected function renderContent(): void {
@@ -22,7 +31,7 @@ class PdfRenderer {
         try {
             $content = ContentFactory::getCurrentPage();
             $showHeadline = $content->getShowHeadline();
-        } catch (Exception $e) {
+        } catch (DatasetNotFoundException $e) {
             $showHeadline = true;
         }
 
@@ -42,19 +51,27 @@ class PdfRenderer {
         $this->content = ob_get_clean();
     }
 
+    public function outputMpdfNotInstalled(): string {
+        $clickableLink = StringHelper::makeLinksClickable(
+                        "https://extend.ulicms.de/mPDF.html"
+        );
+
+        $message = get_translation("mpdf_not_installed",
+                [
+                    "%link%" => $clickableLink
+                ]
+        );
+        ExceptionResult($message);
+        return $message;
+    }
+
     // renders the pdf and returns the pdf binary data as string
     public function render(): string {
 
         // The Mpdf module is required to render pdf files
         // if it is not installed shown an error message to the user
-        if (!class_exists('\Mpdf\Mpdf')) {
-            ExceptionResult(
-                    get_translation("mpdf_not_installed",
-                            ["%link%" => StringHelper::makeLinksClickable(
-                                        "https://extend.ulicms.de/mPDF.html"
-                                )]
-                    )
-            );
+        if (!$this->isMpdfInstalled) {
+            return $this->outputMpdfNotInstalled();
         }
 
         $cacheUid = CacheUtil::getCurrentUid();

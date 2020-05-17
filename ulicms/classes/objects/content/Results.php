@@ -6,6 +6,7 @@ declare(strict_types=1);
 
 use zz\Html\HTMLMinify;
 use UliCMS\Backend\BackendPageRenderer;
+use UliCMS\Helpers\TestHelper;
 
 function JSONResult($data, int $status = 200, $compact = true): void {
     Response::sendStatusHeader($status);
@@ -81,14 +82,17 @@ function ExceptionResult(string $message, int $status = 500): void {
     $content = Template::executeDefaultOrOwnTemplate("exception.php");
 
     $size = getStringLengthInBytes($content);
-
-    header($_SERVER ["SERVER_PROTOCOL"] . " "
-            . getStatusCodeByNumber(intval($status)));
-    header("Content-Type: text/html; charset=UTF-8");
-    header("Content-length: $size");
+    if (!TestHelper::isRunningPHPUnit()) {
+        header($_SERVER ["SERVER_PROTOCOL"] . " "
+                . getStatusCodeByNumber(intval($status)));
+        header("Content-Type: text/html; charset=UTF-8");
+        header("Content-length: $size");
+    }
 
     echo $content;
-    exit();
+    if (!TestHelper::isRunningPHPUnit()) {
+        exit();
+    }
 }
 
 function ActionResult(string $action, $model = null): void {

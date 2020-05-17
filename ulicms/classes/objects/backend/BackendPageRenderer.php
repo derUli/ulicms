@@ -84,20 +84,17 @@ class BackendPageRenderer {
         exit();
     }
 
-    protected function showUnsupportedBrowser($checker) {
-        echo Alert::danger(
-                make_links_clickable(
-                        nl2br(get_secure_translation(
-                                        "unsupported_browser",
-                                        [
-                                            "%browser%" => $checker->getUnsupportedBrowserName()
-                                        ]
-                        ))
+    public function showUnsupportedBrowser($checker) {
+        $message = nl2br(get_secure_translation(
+                        "unsupported_browser",
+                        [
+                            "%browser%" => $checker->getUnsupportedBrowserName()
+                        ]
                 )
-                ,
-                "",
-                true
         );
+        $message = make_links_clickable($message);
+        
+        echo Alert::danger($message, "", true);
     }
 
     // this method handles access to the features that are

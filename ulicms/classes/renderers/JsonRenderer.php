@@ -21,9 +21,8 @@ class JsonRenderer {
         $this->title = get_title();
         ob_start();
         content();
-        $this->content = trim(
-                normalizeLN(ob_get_clean())
-        );
+        $content = normalizeLN(ob_get_clean());
+        $this->content = trim($content);
     }
 
     public function render(): string {

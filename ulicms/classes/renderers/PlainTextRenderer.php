@@ -7,6 +7,7 @@ namespace UliCMS\Renderers;
 use Template;
 use ContentFactory;
 use UliCMS\Utils\CacheUtil;
+use UliCMS\Exceptions\DatasetNotFoundException;
 
 // this class renders a page as plain text
 class PlainTextRenderer {
@@ -20,7 +21,7 @@ class PlainTextRenderer {
         try {
             $content = ContentFactory::getCurrentPage();
             $showHeadline = $content->getShowHeadline();
-        } catch (Exception $e) {
+        } catch (DatasetNotFoundException $e) {
             $showHeadline = true;
         }
 
