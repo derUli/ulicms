@@ -166,7 +166,7 @@ class DesignSettingsController extends Controller {
         $content = file_get_contents($file);
         $xml = new SimpleXMLElement($content);
         foreach ($xml->body->outline as $outline) {
-            $fonts[] = $outline["text"];
+            $fonts[] = strval($outline["text"]);
         }
         return $fonts;
     }
