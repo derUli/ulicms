@@ -153,7 +153,7 @@ class ModuleHelper extends Helper {
         }
 
         if (file_exists($noembedfile1) or file_exists($noembedfile2)
-                or ! $embed_attrib) {
+                || !$embed_attrib) {
             $retval = false;
         }
         return $retval;
@@ -184,22 +184,26 @@ class ModuleHelper extends Helper {
     public static function getFullPageURLByID(
             ?int $page_id = null,
             ?string $suffix = null
-    ): string {
+    ): ?string {
         if (!$page_id) {
             $page_id = get_id();
         }
+
         if (!$page_id) {
             return null;
         }
+
         $page = ContentFactory::getByID($page_id);
         if (is_null($page->id)) {
             return null;
         }
+
         if ($page instanceof Language_Link) {
             $language = new Language($page->link_to_language);
             if (!is_null($language->getID()) and StringHelper::isNotNullOrWhitespace($language->getLanguageLink()))
                 return $language->getLanguageLink();
         }
+
         $domain = getDomainByLanguage($page->language);
         $dirname = dirname(get_request_uri());
 
@@ -208,9 +212,11 @@ class ModuleHelper extends Helper {
         if (is_admin_dir()) {
             $dirname = dirname(dirname($dirname . "/.."));
         }
+
         if (!startsWith($dirname, "/")) {
             $dirname = "/" . $dirname;
         }
+
         if (!endsWith($dirname, "/")) {
             $dirname = $dirname . "/";
         }
@@ -220,6 +226,8 @@ class ModuleHelper extends Helper {
 
         $currentLanguage = isset($_SESSION["language"]) ?
                 $_SESSION["language"] : Settings::get("default_language");
+        
+        // Todo: Too much if's refactor this code
         if ($domain) {
             $url = get_site_protocol() . $domain .
                     $dirname . $page->slug . ".html";

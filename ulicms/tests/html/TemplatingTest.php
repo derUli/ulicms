@@ -64,22 +64,26 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetRequestedPageNameWithSlugSet() {
         $_GET ["slug"] = "foobar";
+        $this->assertEquals("foobar", get_slug());
         $this->assertEquals("foobar", get_requested_pagename());
         $this->cleanUp();
     }
 
     public function testGetRequestedPageNameWithoutSlug() {
         $this->cleanUp();
+        $this->assertEquals(get_frontpage(), get_slug());
         $this->assertEquals(get_frontpage(), get_requested_pagename());
     }
 
     public function testGetRequestedPageNameWithNull() {
         $_GET ["slug"] = null;
+        $this->assertEquals(get_frontpage(), get_slug());
         $this->assertEquals(get_frontpage(), get_requested_pagename());
     }
 
     public function testGetRequestedPageNameWithEmptyString() {
         $_GET ["slug"] = "";
+        $this->assertEquals(get_frontpage(), get_slug());
         $this->assertEquals(get_frontpage(), get_requested_pagename());
     }
 
@@ -155,7 +159,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
 
     public function testSetRequestedPageName() {
         set_requested_pagename("my-slug", "en", "pdf");
-        $this->assertEquals("my-slug", get_requested_pagename());
+        $this->assertEquals("my-slug", get_slug());
         $this->assertEquals("en", Request::getVar("language"));
         $this->assertEquals("pdf", get_format());
     }
@@ -163,7 +167,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
     public function testSetRequestedPageNameWithoutLanguage() {
         set_requested_pagename("my-slug");
 
-        $this->assertEquals("my-slug", get_requested_pagename());
+        $this->assertEquals("my-slug", get_slug());
         $this->assertEquals("de", $_SESSION["language"]);
     }
 

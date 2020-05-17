@@ -83,7 +83,7 @@ function buildSEOUrl(
         return $redirection;
     }
     if (!$page) {
-        $page = get_requested_pagename();
+        $page = get_slug();
     }
 
     if (!$format) {

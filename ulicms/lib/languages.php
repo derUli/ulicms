@@ -140,7 +140,7 @@ function getCurrentLanguage($current = false): string {
     }
     if ($current) {
         $result = db_query("SELECT language FROM " . tbname("content") .
-                " WHERE slug='" . get_requested_pagename() . "'");
+                " WHERE slug='" . get_slug() . "'");
         if (db_num_rows($result) > 0) {
             $dataset = db_fetch_object($result);
             $language = $dataset->language;

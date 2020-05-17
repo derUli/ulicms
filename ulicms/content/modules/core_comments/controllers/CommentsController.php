@@ -64,7 +64,7 @@ class CommentsController extends MainClass {
                 CommentStatus::PENDING : CommentStatus::PUBLISHED;
 
         // show error if not all required fields are filled
-        if (!$comment->getAuthorName() or!$comment->getText()) {
+        if (!$comment->getAuthorName() || !$comment->getText()) {
             ExceptionResult(get_translation("fill_all_fields"));
         }
 

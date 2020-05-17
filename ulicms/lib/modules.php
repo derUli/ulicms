@@ -213,7 +213,7 @@ function replaceOtherShortCodes(string $string): string {
 // Check if site contains a module
 function containsModule(?string $page = null, ?string $module = null): bool {
     if (is_null($page)) {
-        $page = get_requested_pagename();
+        $page = get_slug();
     }
 
     if (!is_null(Vars::get("page_" . $page . "_contains_" . $module))) {

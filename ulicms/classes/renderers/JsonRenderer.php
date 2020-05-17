@@ -45,7 +45,7 @@ class JsonRenderer {
 
         try{
         $page = ContentFactory::getBySlugAndLanguage(
-                        get_requested_pagename(),
+                        get_slug(),
                         getCurrentLanguage(true)
         );
         } catch(DatasetNotFoundException $e){

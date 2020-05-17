@@ -201,6 +201,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("max@muster.de", $result[2]);
         $this->assertEquals("Musterstadt", $result[3]);
     }
+    
 
     public function testGetAllThemes() {
         $themes = getAllThemes();

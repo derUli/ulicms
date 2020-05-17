@@ -10,7 +10,7 @@ class CustomData {
 
     public static function get(?string $page = null): ?array {
         if (!$page) {
-            $page = get_requested_pagename();
+            $page = get_slug();
         }
         
         $sql = "SELECT `custom_data` FROM " . tbname("content") .
@@ -27,7 +27,7 @@ class CustomData {
 
     public static function set(string $var, $value, ?string $page = null): void {
         if (!$page) {
-            $page = get_requested_pagename();
+            $page = get_slug();
         }
         $data = self::get($page);
         if (is_null($data)) {
@@ -47,7 +47,7 @@ class CustomData {
             ?string $var = null, ?string $page = null)
     : void {
         if (!$page) {
-            $page = get_requested_pagename();
+            $page = get_slug();
         }
 
         $data = self::get($page);

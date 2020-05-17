@@ -53,7 +53,7 @@ if ($permissionChecker->hasPermission("list_packages")) {
                         <td><a
                                 href="<?php esc(ModuleHelper::buildAdminURL($module->getName())); ?>"
                                 class="<?php esc($btnClass); ?>"
-                                <?php if (!$hasAdminPage or!$isEnabled) echo "disabled"; ?>
+                                <?php if (!$hasAdminPage || !$isEnabled) echo "disabled"; ?>
                                 data-btn-for="<?php esc($module->getName()); ?>"><i
                                     class="fas fa-tools"></i> <?php esc($module->getName()); ?> </a>
                                 <?php if (!$userIsPermitted and $hasAdminPage) { ?>

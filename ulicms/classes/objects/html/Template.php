@@ -20,7 +20,7 @@ class Template {
         $str .= (is_403() ? "error403 " : "");
         $str .= ((is_404() or is_403()) ? "errorPage " : "page ");
         $str .= (is_mobile() ? "mobile " : "desktop ");
-        $str .= (containsModule(get_requested_pagename()) ?
+        $str .= (containsModule(get_slug()) ?
                 " containsModule " : "");
 
         $str = trim($str);
@@ -493,7 +493,7 @@ color: " . Settings::get("body-text-color") . ";
         $content = null;
         if (is_200()) {
             $content = ContentFactory::getBySlugAndLanguage(
-                            get_requested_pagename(),
+                            get_slug(),
                             getCurrentLanguage()
             );
 
