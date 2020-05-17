@@ -490,11 +490,15 @@ if ($permissionChecker->hasPermission("pages")) {
 
 
                                 <div class="field">
-                                    <strong class="field-label"><?php translate("article_date"); ?></strong> <input
-                                        name="article_date" type="datetime-local"
+                                    <strong class="field-label">
+                                        <?php translate("article_date"); ?>
+                                    </strong> 
+                                    <input
+                                        name="article_date" type="text"
+                                        class="datetimepicker"
                                         value="<?php
                                         if (StringHelper::isNotNullOrEmpty($row->article_date)) {
-                                            echo NumberFormatHelper::timestampToHtml5Datetime(
+                                            echo NumberFormatHelper::timestampToSqlDate(
                                                     strtotime($row->article_date)
                                             );
                                         }

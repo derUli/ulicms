@@ -30,6 +30,15 @@ class NumberFormatHelper extends Helper {
         return $bytes;
     }
 
+        // use this to convert an integer timestamp to use it
+    // for a html5 datetime-local input
+    public static function timestampToSqlDate(
+            ?int $timestamp = null
+    ): string {
+        $time = !is_null($timestamp) ? $timestamp : time();
+        return date("Y-m-d H:i:s", $time);
+    }
+    
     // use this to convert an integer timestamp to use it
     // for a html5 datetime-local input
     public static function timestampToHtml5Datetime(

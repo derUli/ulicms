@@ -169,10 +169,17 @@ $(() => {
     initBootstrapToggle(body);
 
     $.datetimepicker.setLocale(language);
+    
     $(".datepicker").datetimepicker({
         format: "Y-m-d",
         timepicker: false
     });
+
+    $(".datetimepicker").datetimepicker({
+        format: "Y-m-d h:m",
+        timepicker: true
+    });
+
 
     // User has to confirm logout
     $("a.backend-menu-item-logout").click((event) => {

@@ -217,8 +217,9 @@ class PageController extends Controller {
             );
             $model->article_date = Request::getVar("article_date") ?
                     strtotime(
-                            Request::getVar("article_image")
+                            Request::getVar("article_date")
                     ) : null;
+            
             $model->excerpt = Request::getVar("excerpt");
         }
 
