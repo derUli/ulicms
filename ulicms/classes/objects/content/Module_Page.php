@@ -49,7 +49,7 @@ class Module_Page extends Page {
             $retval = true;
         }
         if ($this->module !== null && !empty($this->module)) {
-            if (($module and $this->module == $module) or ! $module) {
+            if (($module and $this->module == $module) || !$module) {
                 $retval = true;
             }
         }

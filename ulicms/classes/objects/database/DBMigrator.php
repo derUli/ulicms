@@ -108,7 +108,7 @@ class DBMigrator {
                     while (mysqli_more_results(Database::getConnection())) {
                         mysqli_next_result(Database::getConnection());
                     }
-                    if ($success or ! $this->strictMode) {
+                    if ($success || !$this->strictMode) {
                         $sql = "DELETE FROM {prefix}dbtrack "
                                 . "where component = ? and name = ?";
                         Database::pQuery($sql, $args, true);

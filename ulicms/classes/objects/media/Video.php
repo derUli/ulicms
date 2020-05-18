@@ -244,8 +244,8 @@ class Video extends Model {
                     '" type="video/webm">';
         }
         $html .= get_translation("no_html5");
-        if (!empty($this->mp4_file) or ! empty($this->ogg_file)
-                or ! empty($this->webm_file)) {
+        if (!empty($this->mp4_file) || !empty($this->ogg_file)
+                || !empty($this->webm_file)) {
             $preferred = (!empty($this->mp4_file) ?
                     $this->mp4_file : (!empty($this->ogg_file) ?
                     $this->ogg_file : $this->webm_file));

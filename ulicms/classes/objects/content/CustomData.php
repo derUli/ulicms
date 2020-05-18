@@ -51,7 +51,7 @@ class CustomData {
         }
 
         $data = self::get($page);
-        if (is_null($data) or ! $var) {
+        if (is_null($data) || !$var) {
             $data = [];
         }
         // Wenn $var gesetzt ist, nur $var aus custom_data löschen

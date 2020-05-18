@@ -213,7 +213,7 @@ class Audio extends Model {
                     '" type="audio/ogg">';
         }
         $html .= get_translation("no_html5");
-        if (!empty($this->mp3_file) or ! empty($this->ogg_file)) {
+        if (!empty($this->mp3_file) || !empty($this->ogg_file)) {
             $preferred = !empty($this->mp3_file) ?
                     $this->mp3_file : $this->ogg_file;
             $html .= '<br/><a href="' . self::AUDIO_DIR . $preferred . '">' .

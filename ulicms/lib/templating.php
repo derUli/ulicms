@@ -948,7 +948,7 @@ function check_status(): string {
     }
 
     $test = isset($_GET["slug"]) ? get_page($_GET["slug"]) : null;
-    if (!$test or ! is_null($test["deleted_at"])) {
+    if (!$test || !is_null($test["deleted_at"])) {
         no_cache();
         return "404 Not Found";
     }

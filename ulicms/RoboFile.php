@@ -494,7 +494,8 @@ class RoboFile extends \Robo\Tasks {
 
         $filteredPatches = [];
         foreach ($availablePatches as $patch) {
-            if (faster_in_array($patch->name, $patchesToInstall) or faster_in_array("all", $patchesToInstall)) {
+            if (faster_in_array($patch->name, $patchesToInstall) ||
+                    faster_in_array("all", $patchesToInstall)) {
                 $filteredPatches[] = $patch;
             }
         }

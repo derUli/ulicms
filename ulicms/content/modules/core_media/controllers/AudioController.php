@@ -65,7 +65,7 @@ class AudioController extends Controller {
         $mp3_file_value = db_escape($mp3_file_value);
         $timestamp = time();
 
-        if (!empty($ogg_file_value) or ! empty($mp3_file_value)) {
+        if (!empty($ogg_file_value) || !empty($mp3_file_value)) {
             db_query("INSERT INTO " . tbname("audio") .
                     " (name, ogg_file, mp3_file, created, category_id, "
                     . "`updated`) VALUES ('$name', '$ogg_file_value', "
