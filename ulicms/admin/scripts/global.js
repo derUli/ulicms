@@ -145,14 +145,17 @@ $(() => {
     const params = new URLSearchParams(location.search);
     const jumpTo = params.get('jumpto');
     if (jumpTo && jumpTo.length > 0) {
-        location.href = "#" + jumpTo;
+        const anchor = document.querySelector(`#${jumpTo}`);
+        if (anchor) {
+            zenscroll.to(anchor);
+        }
     }
 
     initSelect2(body);
     initBootstrapToggle(body);
 
     $.datetimepicker.setLocale(language);
-    
+
     $(".datepicker").datetimepicker({
         format: "Y-m-d",
         timepicker: false
@@ -162,7 +165,7 @@ $(() => {
     $(".datetimepicker").datetimepicker({
         format: "Y-m-d H:m",
         timepicker: true,
-                stepping: 15
+        stepping: 15
 
     });
 

@@ -18,6 +18,7 @@ use function get_translation;
 // *.ogg is used by browsers which are not allowed to include
 // a *.mp3 codec due legal reasons
 class Audio extends Model {
+
     private $name = null;
     private $mp3_file = null;
     private $ogg_file = null;
@@ -196,22 +197,31 @@ class Audio extends Model {
         }
     }
 
-    // render HTML5 <audio> tag
-    public function render(): string {
-        $audio_dir = self::AUDIO_DIR;
+    protected function getAudioDir(): string {
+        $audioDir = self::AUDIO_DIR;
         if (defined("ULICMS_DATA_STORAGE_URL")) {
-            $audio_dir = Path::resolve("ULICMS_DATA_STORAGE_URL/$audio_dir") .
+            $audioDir = Path::resolve("ULICMS_DATA_STORAGE_URL/$audioDir") .
                     "/";
         }
+        return $audioDir;
+    }
+
+    // render HTML5 <audio> tag
+    public function render(): string {
+        $audioDir = $this->getAudioDir();
+
         $html = '<audio controls>';
+
         if (!empty($this->mp3_file)) {
-            $html .= '<source src="' . $audio_dir . _esc($this->mp3_file) .
+            $html .= '<source src="' . $audioDir . _esc($this->mp3_file) .
                     '" type="audio/mp3">';
         }
+
         if (!empty($this->ogg_file)) {
-            $html .= '<source src="' . $audio_dir . _esc($this->ogg_file) .
+            $html .= '<source src="' . $audioDir . _esc($this->ogg_file) .
                     '" type="audio/ogg">';
         }
+
         $html .= get_translation("no_html5");
         if (!empty($this->mp3_file) || !empty($this->ogg_file)) {
             $preferred = !empty($this->mp3_file) ?

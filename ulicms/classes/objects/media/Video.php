@@ -16,6 +16,7 @@ use function get_translation;
 // html5 format support of browser are different
 // UliCMS allows *.mp4, *.ogv and *.webm file uploads for video
 class Video extends Model {
+
     private $name = null;
     private $mp4_file = null;
     private $ogg_file = null;
@@ -223,33 +224,42 @@ class Video extends Model {
         }
     }
 
-    // render HTML5 <video> tag
-    public function render(): string {
-        $video_dir = self::VIDEO_DIR;
+    protected function getVideoDir(): string {
+        $videoDir = self::VIDEO_DIR;
         if (defined("ULICMS_DATA_STORAGE_URL")) {
-            $video_dir = Path::resolve("ULICMS_DATA_STORAGE_URL/$video_dir") .
+            $videoDir = Path::resolve("ULICMS_DATA_STORAGE_URL/$videoDir") .
                     "/";
         }
+        return $videoDir;
+    }
+
+    // render HTML5 <video> tag
+    public function render(): string {
+        $videoDir = $this->getVideoDir();
+
         $html = '<video width="' . $this->width . '" height="' .
                 $this->height . '" controls>';
+
         if (!empty($this->mp4_file)) {
-            $html .= '<source src="' . $video_dir . _esc($this->mp4_file) . '" type="video/mp4">';
+            $html .= '<source src="' . $videoDir . _esc($this->mp4_file) . '" type="video/mp4">';
         }
+
         if (!empty($this->ogg_file)) {
-            $html .= '<source src="' . $video_dir . _esc($this->ogg_file) .
+            $html .= '<source src="' . $videoDir . _esc($this->ogg_file) .
                     '" type="video/ogg">';
         }
+
         if (!empty($this->webm_file)) {
-            $html .= '<source src="' . $video_dir . _esc($this->webm_file) .
+            $html .= '<source src="' . $videoDir . _esc($this->webm_file) .
                     '" type="video/webm">';
         }
+
         $html .= get_translation("no_html5");
-        if (!empty($this->mp4_file) || !empty($this->ogg_file)
-                || !empty($this->webm_file)) {
+        if (!empty($this->mp4_file) || !empty($this->ogg_file) || !empty($this->webm_file)) {
             $preferred = (!empty($this->mp4_file) ?
                     $this->mp4_file : (!empty($this->ogg_file) ?
                     $this->ogg_file : $this->webm_file));
-            $html .= '<br/><a href="' . $video_dir . $preferred . '">' .
+            $html .= '<br/><a href="' . $videoDir . $preferred . '">' .
                     get_translation("DOWNLOAD_VIDEO_INSTEAD") . '</a>';
         }
         $html .= "</video>";
