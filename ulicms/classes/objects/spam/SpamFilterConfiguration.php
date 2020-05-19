@@ -41,10 +41,9 @@ class SpamFilterConfiguration {
         $settings->setRejectRequestsFromBots(
                 boolval(Settings::get("reject_requests_from_bots"))
         );
-        $settings->setCheckMxOfMailAddress(
-                boolval(
-                        Settings::get("check_mx_of_mail_address"))
-        );
+
+        $checkMx =  boolval(Settings::get("check_mx_of_mail_address"));
+        $settings->setCheckMxOfMailAddress($checkMx);
 
         return $settings;
     }

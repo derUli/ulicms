@@ -398,10 +398,9 @@ class Template {
                 . _esc($keywords) . '"/>';
             }
         }
-        $description = get_meta_description();
-        if (!$description) {
-            $description = Settings::get("meta_description");
-        }
+        $description = get_meta_description() ?
+                get_meta_description() : Settings::get("meta_description");
+        
         if ($description != "" && $description != false) {
             $description = apply_filter($description, "meta_description");
             $$description = _esc($description);

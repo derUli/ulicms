@@ -3,7 +3,6 @@
 use UliCMS\Security\SpamChecker\SpamFilterConfiguration;
 
 class SpamFilterConfigurationTest extends \PHPUnit\Framework\TestCase {
-
 	public function testSetSpamfilterEnabled() {
 		$configuration = new SpamFilterConfiguration();
 		$this->assertTrue($configuration->getSpamFilterEnabled());
