@@ -6,12 +6,13 @@ use UliCMS\Packages\PatchManager;
 use UliCMS\Services\Connectors\eXtend\AvailablePackageVersionMatcher;
 use UliCMS\Utils\CacheUtil;
 
+use \Robo\Tasks;
 /**
  * This is project's console commands configuration for Robo task runner.
  *
  * @see http://robo.li/
  */
-class RoboFile extends \Robo\Tasks {
+class RoboFile extends Tasks {
 
     public function __construct() {
         require_once dirname(__FILE__) . "/init.php";
@@ -49,7 +50,7 @@ class RoboFile extends \Robo\Tasks {
      * List all settings
      */
     public function settingsList(): void {
-// show all settings
+        // show all settings
         $settings = Settings::getAll();
         foreach ($settings as $setting) {
             if (empty($setting->name)) {

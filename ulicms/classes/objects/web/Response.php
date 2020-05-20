@@ -48,7 +48,6 @@ if (!defined("RESPONSIVE_FM")) {
             echo "<noscript><p>" . get_translation("jsredirect_noscript", array(
                 "%url%" => Template::getEscape($url)
             )) . "</p></noscript>";
-            exit();
         }
 
         public static function getSafeRedirectURL(string $url,
