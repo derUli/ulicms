@@ -291,9 +291,9 @@ class RoboFile extends Tasks {
     public function modulesRemove(array $modules) {
         foreach ($modules as $module) {
             if (uninstall_module($module, "module")) {
-                $this->writeln("Package $module removed");
+                $this->writeln("Package $module removed.");
             } else {
-                $this->writeln("Removing  $module failed.");
+                $this->writeln("Removing $module failed.");
             }
         }
     }
@@ -343,7 +343,7 @@ class RoboFile extends Tasks {
             if (uninstall_module($theme, "theme")) {
                 $this->writeln("Package $theme removed");
             } else {
-                $this->writeln("Removing  $theme failed.");
+                $this->writeln("Removing $theme failed.");
             }
         }
     }

@@ -15,4 +15,15 @@ class RoboThemesTest extends RoboBaseTest {
         $this->assertStringContainsString("impro17 2.1.4", $output);
     }
 
+    public function testModulesRemoveReturnsError() {
+        $actual = $this->runRoboCommand(
+                [
+                    "themes:remove",
+                    "foobar1",
+                    "foobar2"
+                ]
+        );
+        $this->assertStringContainsString("Removing foobar1 failed.", $actual);
+        $this->assertStringContainsString("Removing foobar2 failed.", $actual);
+    }
 }

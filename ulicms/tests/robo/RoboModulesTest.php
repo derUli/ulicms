@@ -68,7 +68,8 @@ class RoboModulesTest extends RoboBaseTest {
         );
 
         $actual = $this->runRoboCommand(
-                ["modules:get-package-versions",
+                [
+                    "modules:get-package-versions",
                     "ldap_login"
                 ]
         );
@@ -77,14 +78,16 @@ class RoboModulesTest extends RoboBaseTest {
 
     public function testModulesEnableAndDisable() {
         $actual = $this->runRoboCommand(
-                ["modules:enable",
+                [
+                    "modules:enable",
                     "fortune2"
                 ]
         );
         $this->assertEquals("fortune2 0.2.1 (enabled)", $actual);
 
         $actual = $this->runRoboCommand(
-                ["modules:disable",
+                [
+                    "modules:disable",
                     "fortune2"
                 ]
         );
@@ -93,24 +96,39 @@ class RoboModulesTest extends RoboBaseTest {
 
     public function testModulesToggle() {
         $this->runRoboCommand(
-                ["modules:enable",
+                [
+                    "modules:enable",
                     "fortune2"
                 ]
         );
 
         $actual = $this->runRoboCommand(
-                ["modules:toggle",
+                [
+                    "modules:toggle",
                     "fortune2"
                 ]
         );
         $this->assertEquals("fortune2 0.2.1 (disabled)", $actual);
 
         $actual = $this->runRoboCommand(
-                ["modules:toggle",
+                [
+                    "modules:toggle",
                     "fortune2"
                 ]
         );
         $this->assertEquals("fortune2 0.2.1 (enabled)", $actual);
+    }
+
+    public function testModulesRemoveReturnsError() {
+        $actual = $this->runRoboCommand(
+                [
+                    "modules:remove",
+                    "foobar1",
+                    "foobar2"
+                ]
+        );
+        $this->assertStringContainsString("Removing foobar1 failed.", $actual);
+        $this->assertStringContainsString("Removing foobar2 failed.", $actual);
     }
 
 }
