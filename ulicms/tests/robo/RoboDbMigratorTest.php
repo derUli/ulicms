@@ -3,11 +3,7 @@
 require_once __DIR__ . "/RoboTestFile.php";
 require_once __DIR__ . "/RoboBaseTest.php";
 
-use League\Container\ContainerAwareInterface;
-use League\Container\ContainerAwareTrait;
-use Robo\TaskAccessor;
-
-class DbMigratorRoboTest extends RoboBaseTest {
+class RoboDbMigratorTest extends RoboBaseTest {
 
     public function testDbMigratorList() {
         $output = $this->runRoboCommand(["dbmigrator:list", "core"]);

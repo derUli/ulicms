@@ -3,12 +3,8 @@
 require_once __DIR__ . "/RoboTestFile.php";
 require_once __DIR__ . "/RoboBaseTest.php";
 
-use League\Container\ContainerAwareInterface;
-use League\Container\ContainerAwareTrait;
-use Robo\TaskAccessor;
-
-class TruncateRoboTest extends RoboBaseTest {
-
+class RoboTruncateTest extends RoboBaseTest {
+    
     public function testTruncateHistory() {
         $this->runRoboCommand(["truncate:history"]);
         $query = Database::selectAll("history", ["id"]);
