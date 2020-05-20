@@ -19,7 +19,7 @@ class RoboSettingsTest extends RoboBaseTest {
         Settings::set("", "");
         Settings::set("foo2", "");
         $output = $this->runRoboCommand(["settings:list"]);
-        $this->assertGreaterThanOrEqual(80, substr_count($output, "\n"));
+        $this->assertGreaterThanOrEqual(79, substr_count($output, "\n"));
         $allSettings = Settings::getAll();
         foreach ($allSettings as $setting) {
             if (!$setting->name) {
