@@ -3,18 +3,16 @@
 require_once __DIR__ . "/RoboTestFile.php";
 require_once __DIR__ . "/RoboBaseTest.php";
 
-use League\Container\ContainerAwareInterface;
-use League\Container\ContainerAwareTrait;
-use Robo\TaskAccessor;
-
-class ThemesRoboTest extends RoboBaseTest {
+class PackageRoboTest extends RoboBaseTest {
     public function setUp() {
         $this->runRoboCommand(["modules:sync"]);
-        $this->runRoboCommand(["cache:clear"]);
     }
     
     public function testThemesList() {
-        $output = $this->runRoboCommand(["themes:list"]);
+        $output = $this->runRoboCommand(["packages:list"]);
+
+        $this->assertEquals(13, substr_count($output, "core_"));
+
         $this->assertStringContainsString("2020 1.0.1", $output);
         $this->assertStringContainsString("impro17 2.1.4", $output);
     }

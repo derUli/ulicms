@@ -22,7 +22,7 @@ class RoboSettingsTest extends RoboBaseTest {
         $this->assertGreaterThanOrEqual(80, substr_count($output, "\n"));
         $allSettings = Settings::getAll();
         foreach ($allSettings as $setting) {
-            if(!$setting->name){
+            if (!$setting->name) {
                 continue;
             }
 
@@ -42,6 +42,29 @@ class RoboSettingsTest extends RoboBaseTest {
     public function testSettingsPrintsNull() {
         $output = $this->runRoboCommand(["settings:get", "gibts_nicht"]);
         $this->assertStringContainsString("[NULL]", $output);
+    }
+
+    public function testSettingsSetToValue() {
+
+        $this->runRoboCommand(
+                [
+                    "settings:set",
+                    "foo1",
+                    "Moin Moin"]
+        );
+
+        $this->assertEquals(
+                "Moin Moin",
+                Settings::get("foo1")
+        );
+
+        $this->runRoboCommand(
+                [
+                    "settings:set",
+                    "foo1",
+                    "[null]"]
+        );
+        $this->assertNull(Settings::get("foo1"));
     }
 
 }

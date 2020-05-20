@@ -144,10 +144,10 @@ class RoboFile extends Tasks {
      */
     public function packagesList() {
         $this->writeln("Modules:");
-        $this->modulesList();
+        $this->modulesList([]);
         $this->writeln("");
         $this->writeln("Themes:");
-        $this->themesList();
+        $this->themesList([]);
     }
 
     /**

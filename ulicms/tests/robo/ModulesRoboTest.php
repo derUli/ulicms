@@ -9,14 +9,32 @@ use Robo\TaskAccessor;
 
 class ModulesRoboTest extends RoboBaseTest {
 
-    public function testThemesList() {
+    public function setUp() {
+        $this->runRoboCommand(["modules:sync"]);
+    }
+
+    public function testModulesList() {
         $output = $this->runRoboCommand(["modules:list"]);
 
         $this->assertEquals(13, substr_count($output, "core_"));
-        $this->assertEquals(
-                count(getAllModules()),
-                substr_count($output, "\n") - 1 
+        foreach (getAllModules() as $module) {
+            $this->assertStringContainsString($module, $output);
+        }
+    }
+
+    public function testModulesGetPackageVersions() {
+        $expected = file_get_contents(
+                Path::resolve(
+                        "ULICMS_ROOT/tests/fixtures/robo/modulesGetPackageVersions.expected.txt"
+                )
         );
+
+        $actual = $this->runRoboCommand(
+                ["modules:get-package-versions",
+                    "ldap_login"
+                ]
+        );
+        $this->assertEquals($expected, $actual);
     }
 
 }
