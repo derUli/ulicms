@@ -6,9 +6,6 @@ use UliCMS\Helpers\TestHelper;
 class CoreSecurityController extends MainClass {
 
     public function beforeInit(): void {
-        if(TestHelper::isRunningPHPUnit()){
-            return;
-        }
         
         $x_frame_options = settings::get("x_frame_options");
         
