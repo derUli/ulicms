@@ -33,8 +33,6 @@ class MailerTest extends \PHPUnit\Framework\TestCase {
     public function tearDown() {
         LoggerRegistry::unregister("phpmailer_log");
         
-        Settings::set("email_mode", $this->initialSettings["email_mode"]);
-
         foreach ($this->initialSettings as $key => $value) {
             Settings::set($key, $value);
         }
