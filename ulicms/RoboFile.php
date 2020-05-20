@@ -275,13 +275,6 @@ class RoboFile extends Tasks {
     public function modulesDisable(array $modules) {
         $modules = $this->replaceModulePlaceholders($modules);
 
-        foreach ($modules as $name) {
-            if (strtolower($name) == "[all]") {
-                $modules = $manager->getAllModuleNames();
-                break;
-            }
-        }
-
         $manager = new ModuleManager();
         $manager->sync();
         foreach ($modules as $name) {

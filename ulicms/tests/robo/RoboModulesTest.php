@@ -42,7 +42,7 @@ class RoboModulesTest extends RoboBaseTest {
         $output = $this->runRoboCommand(["modules:list", "[extend]"]);
         $this->assertStringNotContainsString("update_manager_dashboard", $output);
         $this->assertStringNotContainsString("core_", $output);
-        
+
         $this->assertStringContainsString("Mobile_Detect", $output);
         $this->assertStringContainsString("extend_upgrade_helper", $output);
         $this->assertStringContainsString("fortune2", $output);
@@ -73,6 +73,44 @@ class RoboModulesTest extends RoboBaseTest {
                 ]
         );
         $this->assertEquals($expected, $actual);
+    }
+
+    public function testModulesEnableAndDisable() {
+        $actual = $this->runRoboCommand(
+                ["modules:enable",
+                    "fortune2"
+                ]
+        );
+        $this->assertEquals("fortune2 0.2.1 (enabled)", $actual);
+
+        $actual = $this->runRoboCommand(
+                ["modules:disable",
+                    "fortune2"
+                ]
+        );
+        $this->assertEquals("fortune2 0.2.1 (disabled)", $actual);
+    }
+
+    public function testModulesToggle() {
+        $this->runRoboCommand(
+                ["modules:enable",
+                    "fortune2"
+                ]
+        );
+
+        $actual = $this->runRoboCommand(
+                ["modules:toggle",
+                    "fortune2"
+                ]
+        );
+        $this->assertEquals("fortune2 0.2.1 (disabled)", $actual);
+
+        $actual = $this->runRoboCommand(
+                ["modules:toggle",
+                    "fortune2"
+                ]
+        );
+        $this->assertEquals("fortune2 0.2.1 (enabled)", $actual);
     }
 
 }
