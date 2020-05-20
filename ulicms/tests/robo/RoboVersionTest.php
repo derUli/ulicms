@@ -9,8 +9,6 @@ use Robo\TaskAccessor;
 
 class RoboVersionTest extends RoboBaseTest {
 
-    use TaskAccessor;
-    use ContainerAwareTrait;
 
     public function testVersion() {
         $output = $this->runRoboCommand(["version"]);

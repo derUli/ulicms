@@ -10,7 +10,7 @@ abstract class RoboBaseTest extends \PHPUnit\Framework\TestCase{
        array_unshift($command, "vendor/bin/robo");
        ob_start();
        $runner->execute($command);
-       return ob_get_clean();
+       return trim(ob_get_clean());
     }
 
 }
