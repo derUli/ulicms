@@ -47,7 +47,6 @@ if (file_exists($composerAutoloadFile)) {
     );
 }
 
-
 require_once dirname(__file__) . "/lib/load.php";
 require_once dirname(__file__) . "/classes/objects/privacy/load.php";
 require_once dirname(__file__) . "/classes/objects/abstract/load.php";

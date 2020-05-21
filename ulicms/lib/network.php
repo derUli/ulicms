@@ -95,5 +95,6 @@ function ulicms_mail(string $to,
 }
 
 function send_header(string $header): bool {
-    return Response::sendHeader($header);
+    
+    return class_exists("Response") ? Response::sendHeader($header) : false ;
 }
