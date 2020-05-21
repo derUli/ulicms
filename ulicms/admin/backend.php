@@ -63,7 +63,7 @@ if (is_logged_in()) {
     db_query("UPDATE " . tbname("users") . " SET last_action = " . time() . " WHERE id = " . get_user_id());
 }
 
-header("Content-Type: text/html; charset=UTF-8");
+send_header("Content-Type: text/html; charset=UTF-8");
 
 // run controller methods if called
 do_event("before_backend_run_methods");

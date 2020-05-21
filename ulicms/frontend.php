@@ -72,7 +72,7 @@ $status = check_status();
 
 if (Settings::get("redirection")) {
     do_event("before_global_redirection");
-    header("Location: " . Settings::get("redirection"));
+    send_header("Location: " . Settings::get("redirection"));
     exit();
 }
 
@@ -81,11 +81,11 @@ $theme = get_theme();
 if (isMaintenanceMode()) {
     do_event("before_maintenance_message");
     // Sende HTTP Status 503 und Retry-After im Wartungsmodus
-    header($_SERVER["SERVER_PROTOCOL"] .
+    send_header($_SERVER["SERVER_PROTOCOL"] .
             " 503 Service Temporarily Unavailable");
-    header('Status: 503 Service Temporarily Unavailable');
-    header('Retry-After: 60');
-    header("Content-Type: text/html; charset=utf-8");
+    send_header('Status: 503 Service Temporarily Unavailable');
+    send_header('Retry-After: 60');
+    send_header("Content-Type: text/html; charset=utf-8");
     if (file_exists(getTemplateDirPath($theme) . "maintenance.php")) {
         require_once getTemplateDirPath($theme) . "maintenance.php";
     } else {
@@ -140,10 +140,10 @@ if (isset($_GET["goid"])) {
 
 ControllerRegistry::runMethods();
 
-header($_SERVER["SERVER_PROTOCOL"] . " " . $status);
+send_header($_SERVER["SERVER_PROTOCOL"] . " " . $status);
 
 if ($format == "html") {
-    header("Content-Type: text/html; charset=utf-8");
+    send_header("Content-Type: text/html; charset=utf-8");
 } else if ($format == "pdf") {
     $pdf = new PdfRenderer();
     Result($pdf->render(), HttpStatusCode::OK, "application/pdf");

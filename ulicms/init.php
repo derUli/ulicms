@@ -144,7 +144,7 @@ $path_to_config = dirname(__file__) . "/CMSConfig.php";
 if (file_exists($path_to_config)) {
     require_once $path_to_config;
 } else if (is_dir("installer")) {
-    header("Location: installer/");
+    send_header("Location: installer/");
     exit();
 } else {
     throw new Exception("Can't require CMSConfig.php. Starting installer failed, too.");
@@ -352,7 +352,9 @@ if (!Settings::get("session_name")) {
     Settings::set("session_name", uniqid() . "_SESSION");
 }
 
-@session_name(Settings::get("session_name"));
+if(!headers_sent()){
+    @session_name(Settings::get("session_name"));
+}
 
 $useragent = Settings::get("useragent");
 
@@ -363,7 +365,7 @@ define("ULICMS_USERAGENT", $useragent ?
 @ini_set('user_agent', ULICMS_USERAGENT);
 
 if (!Settings::get("hide_meta_generator")) {
-    @header('X-Powered-By: UliCMS Release ' . cms_version());
+    @send_header('X-Powered-By: UliCMS Release ' . cms_version());
 }
 
 $memory_limit = Settings::get("memory_limit");
@@ -402,7 +404,7 @@ $session_timeout = 60 * intval(Settings::get("session_timeout"));
 if (isset($_SESSION["session_begin"])) {
     if (time() - $_SESSION["session_begin"] > $session_timeout) {
         session_destroy();
-        header("Location: ./");
+        send_header("Location: ./");
         exit();
     } else {
         $_SESSION["session_begin"] = time();
@@ -447,7 +449,7 @@ define("DEFAULT_CONTENT_TYPE", $defaultContentType);
 $enforce_https = Settings::get("enforce_https");
 
 if (!is_ssl() and $enforce_https) {
-    header("Location: https://" . $_SERVER["HTTP_HOST"] .
+    send_header("Location: https://" . $_SERVER["HTTP_HOST"] .
             $_SERVER["REQUEST_URI"]);
     exit();
 }
