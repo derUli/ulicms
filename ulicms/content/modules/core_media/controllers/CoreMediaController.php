@@ -18,6 +18,11 @@ class CoreMediaController extends MainClass {
 
     // This method replaces links to media services like youtube with embedded media
     public function replaceLinks(string $input): string {
+
+        if (empty($input)) {
+            return $input;
+        }
+
         $content = mb_convert_encoding($input, 'HTML-ENTITIES', "UTF-8");
 
         $dom = new DOMDocument();

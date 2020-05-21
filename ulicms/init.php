@@ -352,9 +352,7 @@ if (!Settings::get("session_name")) {
     Settings::set("session_name", uniqid() . "_SESSION");
 }
 
-if(!headers_sent()){
-    @session_name(Settings::get("session_name"));
-}
+@session_name(Settings::get("session_name"));
 
 $useragent = Settings::get("useragent");
 
