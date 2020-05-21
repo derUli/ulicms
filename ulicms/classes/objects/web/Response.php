@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use UliCMS\Helpers\TestHelper;
+
 if (!defined("RESPONSIVE_FM")) {
 
     class Response {
@@ -155,6 +157,15 @@ if (!defined("RESPONSIVE_FM")) {
                 510 => 'Not Extended'
             );
             return $nr . " " . $http_codes[$nr];
+        }
+
+        public static function sendHeader(string $header): bool {
+            if (headers_sent()) {
+                return false;
+            }
+
+            header($header);
+            return true;
         }
 
     }
