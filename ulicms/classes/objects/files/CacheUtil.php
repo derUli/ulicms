@@ -7,6 +7,7 @@ namespace UliCMS\Utils;
 use Path;
 use Settings;
 use Phpfastcache\Helper\Psr16Adapter;
+use Phpfastcache\CacheManager;
 use Phpfastcache\Config\ConfigurationOption;
 use ModuleManager;
 use function do_event;
@@ -57,7 +58,7 @@ class CacheUtil {
     public static function resetAdapater(){
         CacheManager::clearInstances();
         self::$adapter = null;
-        @self::getAdapter(true);
+        self::getAdapter(true);
     }
 
     // returns true if caching is enabled
