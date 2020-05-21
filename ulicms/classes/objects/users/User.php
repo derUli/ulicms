@@ -521,7 +521,7 @@ class User extends Model {
     public function getAvatar(): ?string {
         $avatarUrl = ModuleHelper::getBaseUrl(
                         !is_admin_dir() ?
-                        "/admin/gfx/no_avatar.png" : "/gfx/no_avatar.png"
+                         "/admin/gfx/no_avatar.png" : "/gfx/no_avatar.png"
         );
 
         $userAvatarDirectory = Path::resolve("ULICMS_CONTENT/avatars");

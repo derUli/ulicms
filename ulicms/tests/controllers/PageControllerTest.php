@@ -215,4 +215,14 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
+    public function testGetContentTypes() {
+        $controller = new PageController();
+
+        $actual = $controller->_getContentTypes();
+        $expected = file_get_contents(
+                Path::resolve("ULICMS_ROOT/tests/fixtures/getContentTypes.expected.json"));
+
+        $this->assertEquals(normalizeLN($expected), normalizeLN($actual));
+    }
+
 }

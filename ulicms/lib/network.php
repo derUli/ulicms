@@ -94,6 +94,6 @@ function ulicms_mail(string $to,
     return Mailer::send($to, $subject, $message, $headers);
 }
 
-function send_header(string $header): bool{
+function send_header(string $header): bool {
     return Response::sendHeader($header);
 }

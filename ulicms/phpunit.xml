@@ -164,7 +164,10 @@
                 <directory>content/modules/core_content/lang</directory>
             </exclude>
             <exclude>
-                <directory>lang/</directory>
+                <directory>content/modules/core_info/lang</directory>
+            </exclude>
+            <exclude>
+                <directory>lang</directory>
             </exclude>
             <exclude>
                 <directory>content/modules/core_package_manager/lang</directory>

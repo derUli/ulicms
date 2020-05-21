@@ -160,7 +160,7 @@ if (!defined("RESPONSIVE_FM")) {
         }
 
         public static function sendHeader(string $header): bool {
-            if (headers_sent()) {
+            if (headers_sent() || isCLI()) {
                 return false;
             }
 

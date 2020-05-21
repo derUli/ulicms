@@ -9,7 +9,7 @@ class InfoController extends MainClass {
     public function changelog() {
         ViewBag::set(
                 "textarea_with_changelog",
-                $this->getChangelogInTextarea()
+                $this->_getChangelogInTextarea()
         );
         
         HTMLResult(
@@ -29,16 +29,16 @@ class InfoController extends MainClass {
         );
     }
 
-    public function fetchChangelog() {
+    public function _fetchChangelog() {
         $changelog = file_get_contents_wrapper(self::CHANGELOG_URL);
 
         return ($changelog ? trim($changelog) : get_translation("fetch_failed"));
     }
 
-    public function getChangelogInTextarea() {
+    public function _getChangelogInTextarea() {
         return Input::textarea(
                         "changelog",
-                        $this->fetchChangelog(),
+                        $this->_fetchChangelog(),
                         10,
                         80,
                         [

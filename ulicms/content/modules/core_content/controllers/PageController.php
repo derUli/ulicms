@@ -364,12 +364,15 @@ class PageController extends Controller {
     }
 
     public function getContentTypes(): void {
-        $json = json_encode(
+        $json = $this->_getContentTypes();
+        RawJSONResult($json);
+    }
+
+    public function _getContentTypes(): string {
+        return json_encode(
                 DefaultContentTypes::getAll(),
                 JSON_UNESCAPED_SLASHES
         );
-
-        RawJSONResult($json);
     }
 
     public function diffContents(
@@ -490,8 +493,8 @@ class PageController extends Controller {
         foreach ($pages as $key => $page) {
             ?>
             <option value="<?php
-            echo $page["id"];
-            ?>" <?php
+                    echo $page["id"];
+                    ?>" <?php
                     if ($page["id"] == $parent_id) {
                         echo "selected";
                     }
@@ -503,7 +506,7 @@ class PageController extends Controller {
                 <?php if (!Request::getVar("no_id")) {
                     ?>
                     (ID: <?php echo $page["id"]; ?>)
-                <?php } ?>
+            <?php } ?>
             </option>
             <?php
         }

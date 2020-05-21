@@ -5,15 +5,14 @@ class ControllerRegistryTest extends \PHPUnit\Framework\TestCase {
     public function setUp() {
         ControllerRegistry::loadModuleControllers();
 
-        if (session_id()) {
-            session_destroy();
+        if(!session_id() && !headers_sent()){
+            @session_start();
         }
-        @session_start();
         ActionRegistry::loadModuleActionAssignment();
     }
 
     public function tearDown() {
-        if (session_id()) {
+        if(session_id() && !headers_sent()){
             @session_destroy();
         }
 
