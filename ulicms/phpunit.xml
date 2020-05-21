@@ -52,10 +52,13 @@
                 <directory>classes/exceptions</directory>
             </exclude>
             <exclude>
-                <file>classes/creators/load.php</file>
+                <file>classes/renderers/load.php</file>
             </exclude>
             <exclude>
                 <file>classes/objects/backend/load.php</file>
+            </exclude>
+            <exclude>
+                <file>classes/objects/content/types/fields/load.php</file>
             </exclude>
             <exclude>
                 <file>classes/objects/registry/load.php</file>
@@ -111,7 +114,7 @@
             <exclude>
                 <directory>content/better_cron</directory>
             </exclude>
-              <exclude>
+            <exclude>
                 <directory>content/modules.aus</directory>
             </exclude>
             <exclude>
@@ -129,7 +132,7 @@
             <exclude>
                 <directory>content/modules/core_help/lang</directory>
             </exclude>
-             <exclude>
+            <exclude>
                 <directory>content/modules/better_cron/templates</directory>
             </exclude>
             <exclude>

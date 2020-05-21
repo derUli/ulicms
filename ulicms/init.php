@@ -163,7 +163,7 @@ global $config;
 $config = new CMSConfig();
 
 // IF ULICMS_DEBUG is defined then display all errors except E_NOTICE,
-// else use default error_reporting from php.ini
+// else disable error_reporting from php.ini
 if ((defined("ULICMS_DEBUG") and ULICMS_DEBUG)
         or ( isset($config->debug) and $config->debug)) {
     error_reporting(E_ALL ^ E_NOTICE);
