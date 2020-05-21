@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Models\Content\Language;
+use UliCMS\Exceptions\NotImplementedException;
 
 class PageControllerTest extends \PHPUnit\Framework\TestCase {
 
@@ -9,13 +10,14 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function tearDown() {
+        $_SESSION = [];
         $manager = new UserManager();
         $user = $manager->getAllUsers("admin desc")[0];
         $user->setSecondaryGroups([]);
         $user->save();
     }
 
-    public function test_getPagesListViewNotSetReturnsDefault() {
+    public function testGetPagesListViewNotSetReturnsDefault() {
         $controller = ControllerRegistry::get(PageController::class);
         $this->assertEquals("default", $controller->_getPagesListView());
     }
@@ -34,21 +36,21 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("recycle_bin", $controller->_getPagesListView());
     }
 
-    public function test_checkIfSlugIsFreeReturnsTrue() {
+    public function testcheckIfSlugIsFreeReturnsTrue() {
         $controller = ControllerRegistry::get(PageController::class);
         $this->assertTrue(
                 $controller->_checkIfSlugIsFree(uniqid(), "de", PHP_INT_MAX)
         );
     }
 
-    public function test_checkIfSlugIsFreeWithEmptyReturnsTrue() {
+    public function testcheckIfSlugIsFreeWithEmptyReturnsTrue() {
         $controller = ControllerRegistry::get(PageController::class);
         $this->assertTrue(
                 $controller->_checkIfSlugIsFree("", "de", PHP_INT_MAX)
         );
     }
 
-    public function test_checkIfSlugIsFreeReturnsFalse() {
+    public function testcheckIfSlugIsFreeReturnsFalse() {
         $allSlugs = getAllSlugs("de");
         $controller = ControllerRegistry::get(PageController::class);
         $this->assertFalse(
@@ -56,7 +58,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function test_getBooleanSelection() {
+    public function testGetBooleanSelection() {
         $controller = ControllerRegistry::get(PageController::class);
 
         $items = $controller->_getBooleanSelection();
@@ -67,7 +69,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function test_getCategorySelection() {
+    public function testGetCategorySelection() {
         $controller = ControllerRegistry::get(PageController::class);
 
         $items = $controller->_getCategorySelection();
@@ -95,7 +97,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function test_getMenuSelection() {
+    public function testGetMenuSelection() {
         $controller = ControllerRegistry::get(PageController::class);
 
         $items = $controller->_getMenuSelection();
@@ -109,7 +111,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function test_getTypeSelection() {
+    public function testGetTypeSelection() {
         $controller = ControllerRegistry::get(PageController::class);
 
         $items = $controller->_getTypeSelection();
@@ -123,7 +125,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function test_getLanguageSelection() {
+    public function testGetLanguageSelection() {
         $controller = ControllerRegistry::get(PageController::class);
 
         $items = $controller->_getLanguageSelection();
@@ -137,7 +139,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function test_getLanguageSelectionGroupAssigned() {
+    public function testGetLanguageSelectionGroupAssigned() {
         $user = $this->getTestUser();
         $_SESSION["login_id"] = $user->getId();
 
@@ -166,9 +168,8 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
         return $user;
     }
 
-    public function test_getParentIds() {
+    public function testGetParentIds() {
         $controller = ControllerRegistry::get(PageController::class);
-
         $parentIds = $controller->_getParentIds();
 
         $this->assertGreaterThanOrEqual(4, count($parentIds));
@@ -178,7 +179,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function test_getParentIdsWithLanguageAndMenu() {
+    public function testGetParentIdsWithLanguageAndMenu() {
         $controller = ControllerRegistry::get(PageController::class);
 
         $parentIds = $controller->_getParentIds("en", "top");
@@ -194,7 +195,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function test_getParentIdsWithRestrictedGroups() {
+    public function testGetParentIdsWithRestrictedGroups() {
         $controller = ControllerRegistry::get(PageController::class);
         $allIds = $parentIds = $controller->_getParentIds();
 
@@ -223,6 +224,50 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
                 Path::resolve("ULICMS_ROOT/tests/fixtures/getContentTypes.expected.json"));
 
         $this->assertEquals(normalizeLN($expected), normalizeLN($actual));
+    }
+
+    public function testToggleFilters() {
+        $_SESSION["login_id"] = 666;
+        $controller = new PageController();
+
+        $this->assertTrue($controller->_toggleFilters());
+        $this->assertFalse($controller->_toggleFilters());
+    }
+
+    public function testToggleShowPositions() {
+        $_SESSION["login_id"] = 666;
+        $controller = new PageController();
+
+        $this->assertTrue($controller->_toggleShowPositions());
+        $this->assertFalse($controller->_toggleShowPositions());
+    }
+
+    public function testPages() {
+        $controller = new PageController();
+        $controller->_pages();
+        $this->assertEquals("default", $_SESSION["pages_list_view"]);
+    }
+
+    public function testRecycleBin() {
+        $controller = new PageController();
+        $controller->_recycleBin();
+        $this->assertEquals("recycle_bin", $_SESSION["pages_list_view"]);
+    }
+
+    public function testGetCKEditorLinkList() {
+        $controller = new PageController();
+        $links = $controller->_getCKEditorLinkList();
+        $this->assertGreaterThanOrEqual(1, count($links));
+
+        foreach ($links as $link) {
+            $this->assertCount(2, $link);
+            $this->assertNotEmpty($link[0]);
+            $this->assertStringContainsString(".html", $link[1]);
+        }
+    }
+
+    public function testDiffContents() {
+        throw new NotImplementedException();
     }
 
 }

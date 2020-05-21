@@ -25,17 +25,23 @@ class PageController extends Controller {
     }
 
     public function recycleBin(): void {
-        $_SESSION["pages_list_view"] = "recycle_bin";
-
+        $this->_recycleBin();
         $url = ModuleHelper::buildActionURL("pages");
         Request::redirect($url);
     }
 
-    public function pages(): void {
-        $_SESSION["pages_list_view"] = "default";
+    public function _recycleBin(): void {
+        $_SESSION["pages_list_view"] = "recycle_bin";
+    }
 
+    public function pages(): void {
+        $this->_pages();
         $url = ModuleHelper::buildActionURL("pages");
         Request::redirect($url);
+    }
+
+    public function _pages(): void {
+        $_SESSION["pages_list_view"] = "default";
     }
 
     public function createPost(): void {
@@ -195,10 +201,6 @@ class PageController extends Controller {
                         "text_position",
                         "before",
                         "str"
-        );
-
-        $pages_approve_own = $permissionChecker->hasPermission(
-                "pages_approve_own"
         );
 
         if ($model instanceof Image_Page) {
@@ -416,13 +418,19 @@ class PageController extends Controller {
     }
 
     public function toggleShowPositions(): void {
+        $this->_toggleFilters();
+        HTTPStatusCodeResult(HttpStatusCode::OK);
+    }
+
+    public function _toggleShowPositions(): bool {
         $settingsName = "user/" . get_user_id() . "/show_positions";
         if (Settings::get($settingsName)) {
             Settings::delete($settingsName);
+            return false;
         } else {
             Settings::set($settingsName, "1");
+            return true;
         }
-        HTTPStatusCodeResult(HttpStatusCode::OK);
     }
 
     public function nextFreeSlug(): void {
@@ -492,8 +500,8 @@ class PageController extends Controller {
         foreach ($pages as $key => $page) {
             ?>
             <option value="<?php
-            echo $page["id"];
-            ?>" <?php
+                    echo $page["id"];
+                    ?>" <?php
                     if ($page["id"] == $parent_id) {
                         echo "selected";
                     }
@@ -505,7 +513,7 @@ class PageController extends Controller {
                 <?php if (!Request::getVar("no_id")) {
                     ?>
                     (ID: <?php echo $page["id"]; ?>)
-                <?php } ?>
+            <?php } ?>
             </option>
             <?php
         }
@@ -570,18 +578,26 @@ class PageController extends Controller {
     // this is used for the Link feature of the CKEditor
     // The user can select an internal page from a dropdown list for linking
     public function getCKEditorLinkList(): void {
-        $data = getAllPagesWithTitle();
+        $data = $this->_getCKEditorLinkList();
         JSONResult($data, HttpStatusCode::OK, true);
+    }
+    
+    public function _getCKEditorLinkList(): array {
+        return getAllPagesWithTitle();
     }
 
     public function toggleFilters(): void {
+        JSONResult($this->toggleFilters());
+    }
+
+    public function _toggleFilters(): bool {
         $settingsName = "user/" . get_user_id() . "/show_filters";
         if (Settings::get($settingsName)) {
             Settings::delete($settingsName);
-            JsonResult(false);
+            return false;
         } else {
             Settings::set($settingsName, "1");
-            JsonResult(true);
+            return true;
         }
     }
 

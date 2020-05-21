@@ -16,7 +16,7 @@ class InfoControllerTest extends \PHPUnit\Framework\TestCase {
                 $controller->_fetchChangelog());
     }
 
-    public function testgetChangelogInTextarea() {
+    public function testGetChangelogInTextarea() {
         $controller = new InfoController();
 
         $this->assertStringContainsString(
