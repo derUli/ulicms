@@ -44,4 +44,11 @@ class RoboPackageTest extends RoboBaseTest {
         $this->assertEquals("File magic-1.0.sin not found!", $output);
     }
 
+    public function testPackagesInstallReturnsError() {
+        $output = $this->runRoboCommand(
+                ["package:install", "../magic-1.0.sin"]
+        );
+        $this->assertEquals("Can't open ../magic-1.0.sin. File doesn't exists.", $output);
+    }
+
 }

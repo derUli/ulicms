@@ -156,7 +156,7 @@ class RoboFile extends Tasks {
      */
     public function packageInstall($file): void {
         if (!is_file($file)) {
-            $this->writeln("Can't open $file. File doesn't exists");
+            $this->writeln("Can't open $file. File doesn't exists.");
             return;
         }
 
