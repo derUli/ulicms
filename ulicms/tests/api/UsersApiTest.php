@@ -10,9 +10,7 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase {
     private $maxFailedLoginItems;
 
     public function setUp() {
-        @session_destroy();
-        @session_start();
-
+                
         $group = new Group();
         $group->setName("testgroup");
         $group->save();
@@ -66,8 +64,7 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase {
 
 		$_SESSION = [];
 
-        @session_destroy();
-
+        
         if ($this->twoFactorEnabled) {
             TwoFactorAuthentication::disable();
         } else {

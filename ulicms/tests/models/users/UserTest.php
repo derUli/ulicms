@@ -227,16 +227,14 @@ class UserTest extends \PHPUnit\Framework\TestCase {
 
     public function testFromSessionDataWithInvalidIdReturnsEmptyUser() {
 
-        @session_start();
-
+        
         $_SESSION["login_id"] = PHP_INT_MAX;
         $userFromSession = User::fromSessionData();
         $this->assertInstanceOf(User::class, $userFromSession);
         $this->assertNull($userFromSession->getId());
         $this->assertNull($userFromSession->getUsername());
 
-        @session_destroy();
-    }
+            }
 
     public function testFromSessionDataWithoutSessionReturnsNull() {
 
@@ -248,8 +246,7 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $manager = new UserManager();
         $users = $manager->getLockedUsers(false);
         $user = $users[0];
-        @session_start();
-
+        
         $_SESSION["login_id"] = $user->getId();
 
         $userFromSession = User::fromSessionData();
@@ -265,8 +262,7 @@ class UserTest extends \PHPUnit\Framework\TestCase {
                 $user->getLastname()
         );
 
-        @session_destroy();
-    }
+            }
 
     public function testRegisterSessionRegistersSession() {
         $manager = new UserManager();
@@ -278,8 +274,7 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(get_user_id(), $user->getId());
         $this->assertEquals($user->getUsername(), $_SESSION["ulicms_login"]);
         $this->assertNotNull(session_id());
-        @session_destroy();
-    }
+            }
 
     public function testRegisterSessionThrowError() {
         $this->expectException(BadMethodCallException::class);

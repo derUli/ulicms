@@ -18,8 +18,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
     private $savedSettings = [];
 
     public function setUp() {
-        @session_start();
-
+        
         $manager = new UserManager();
         $users = $manager->getAllUsers();
         $this->user = $users[0];
@@ -43,8 +42,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function tearDown() {
-        @session_destroy();
-
+        
         $_SERVER = [];
         $_GET = [];
         $_POST = [];

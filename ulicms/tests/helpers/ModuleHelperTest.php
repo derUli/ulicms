@@ -3,8 +3,7 @@
 class ModuleHelperTest extends \PHPUnit\Framework\TestCase {
 
     public function setUp() {
-        @session_start();
-        $_SESSION["language"] = "en";
+                $_SESSION["language"] = "en";
         require_once getLanguageFilePath("en");
         $_SERVER = [];
         $_SERVER["REQUEST_URI"] = "/other-url.html?param=value";
@@ -17,8 +16,7 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase {
 
         Database::deleteFrom("content", "title like 'Unit Test%'");
 
-        @session_destroy();
-    }
+            }
 
     private function getPageWithShortcode(): Page {
         $page = new Page();

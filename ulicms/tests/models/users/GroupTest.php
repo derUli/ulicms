@@ -15,8 +15,7 @@ class GroupTest extends \PHPUnit\Framework\TestCase {
 
 		require_once getLanguageFilePath("en");
 
-		@session_start();
-	}
+			}
 
 	public function tearDown() {
 		Database::query("delete from `{prefix}groups` where name = 'bla'", true);
@@ -24,8 +23,7 @@ class GroupTest extends \PHPUnit\Framework\TestCase {
 		foreach ($this->savedSettings as $key => $value) {
 			Settings::set($key, $value);
 		}
-		@session_destroy();
-	}
+			}
 
 	public function testCreateGroup() {
 		$group = new Group();
