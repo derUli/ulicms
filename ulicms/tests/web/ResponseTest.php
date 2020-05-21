@@ -1,8 +1,11 @@
 <?php
 
+use UliCMS\Helpers\TestHelper;
+
 class ResponseTest extends \PHPUnit\Framework\TestCase {
 
     public function setUp() {
+        require_once getLanguageFilePath("en");
         $_SERVER["HTTP_HOST"] = "ulicms.de";
         $_SERVER["REQUEST_URI"] = "/";
         $_SESSION["language"] = "en";
@@ -32,6 +35,18 @@ class ResponseTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("https://google.de", Response::getSafeRedirectURL("https://google.de", array(
                     "google.de"
         )));
+    }
+
+    public function testJavascriptRedirect() {
+        $expected = file_get_contents(
+                Path::resolve("tests/fixtures/javascriptRedirect.expected.txt")
+        );
+
+        $actual = TestHelper::getOutput(function() {
+                    Response::javascriptRedirect("https://google.de");
+                });
+
+                $this->assertEquals($expected, $actual);
     }
 
 }

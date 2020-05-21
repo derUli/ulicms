@@ -34,7 +34,7 @@ class Comment extends Model {
 
     public function loadByID($id) {
         $result = Database::selectAll("comments", [], "id=" . intval($id));
-        if ($result == null or ! Database::any($result)) {
+        if ($result == null || !Database::any($result)) {
             throw new DatasetNotFoundException("no comment with id " .
                     intval($id));
         }

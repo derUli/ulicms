@@ -1,5 +1,5 @@
 <?php
-if (Settings::get("visitors_can_register") == "off" or !Settings::get("visitors_can_register")) {
+if (Settings::get("visitors_can_register") == "off" || !Settings::get("visitors_can_register")) {
     translate("FUNCTION_IS_DISABLED");
 } else {
     // TODO: Move logic to RegistrationController

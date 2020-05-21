@@ -9,10 +9,15 @@ class PlainTextRendererTest extends \PHPUnit\Framework\TestCase {
     private $cachePeriodOriginal;
 
     public function setUp() {
+        require_once getLanguageFilePath("en");
+
         $this->cacheDisabledOriginal = Settings::get("cache_disabled");
         $this->cachePeriodOriginal = Settings::get("cache_period");
         Settings::delete("cache_disabled");
-        $_SERVER["REQUEST_URI"] = "/other-url.txt?param=value";
+        $_SERVER["REQUEST_URI"] = "/other-url.txt?param=value"; #
+        $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (Windows NT 6.1; "
+                . "Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
+                . "Chrome/63.0.3239.132 Safari/537.36";
     }
 
     public function tearDown() {
@@ -44,9 +49,7 @@ class PlainTextRendererTest extends \PHPUnit\Framework\TestCase {
 
         $_GET["slug"] = "lorem_ipsum";
         $_SESSION["language"] = "de";
-        $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (Windows NT 6.1; "
-                . "Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
-                . "Chrome/63.0.3239.132 Safari/537.36";
+
         $expected = normalizeLN(
                 file_get_contents(
                         Path::resolve(
@@ -80,20 +83,15 @@ class PlainTextRendererTest extends \PHPUnit\Framework\TestCase {
 
         $_GET["slug"] = $page->slug;
         $_SESSION["language"] = $page->language;
-        
-        $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (Windows NT 6.1; "
-                . "Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
-                . "Chrome/63.0.3239.132 Safari/537.36";
 
         $renderer = new PlainTextRenderer();
 
         $output = $renderer->render();
-        
+
         $this->assertStringContainsString("The Headline", $output);
         $this->assertStringContainsString("Content", $output);
     }
-    
-    
+
     public function testRenderWithHeadlineDisabled() {
         $page = new Page();
         $page->title = "The Headline";
@@ -114,14 +112,10 @@ class PlainTextRendererTest extends \PHPUnit\Framework\TestCase {
 
         $_GET["slug"] = $page->slug;
         $_SESSION["language"] = $page->language;
-        
-        $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (Windows NT 6.1; "
-                . "Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
-                . "Chrome/63.0.3239.132 Safari/537.36";
 
         $renderer = new PlainTextRenderer();
         $output = $renderer->render();
-        
+
         $this->assertStringNotContainsString("The Headline", $output);
         $this->assertStringContainsString("Content", $output);
     }
@@ -146,9 +140,6 @@ class PlainTextRendererTest extends \PHPUnit\Framework\TestCase {
         $_GET["slug"] = "lorem_ipsum";
 
         $_SESSION["language"] = "de";
-        $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (Windows NT 6.1; "
-                . "Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
-                . "Chrome/63.0.3239.132 Safari/537.36";
 
         $renderer = new PlainTextRenderer();
 
@@ -179,9 +170,6 @@ class PlainTextRendererTest extends \PHPUnit\Framework\TestCase {
 
         $_GET["slug"] = $modulePage->slug;
         $_SESSION["language"] = "de";
-        $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (Windows NT 6.1; "
-                . "Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
-                . "Chrome/63.0.3239.132 Safari/537.36";
 
         $renderer = new PlainTextRenderer();
 
@@ -190,6 +178,16 @@ class PlainTextRendererTest extends \PHPUnit\Framework\TestCase {
 
         $this->assertIsString($output);
         $this->assertNotEmpty($output);
+    }
+
+    public function testRenderNonExisting() {
+        $_GET["slug"] = 'gibts_nicht';
+        $_SESSION["language"] = "de";
+
+        $renderer = new PlainTextRenderer();
+        $output = $renderer->render();
+        $this->assertStringContainsString("Page not found", $output);
+        $this->assertStringContainsString("This page doesn't exist.", $output);
     }
 
 }

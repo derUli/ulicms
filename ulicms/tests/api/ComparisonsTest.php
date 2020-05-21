@@ -7,15 +7,18 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase {
 
     public function setUp() {
         @session_start();
+        
+        $_SERVER = [];
+        $_REQUEST = [];
     }
 
     public function tearDown() {
         Database::query("delete from {prefix}users where username like 'testuser-%'", true);
         @session_destroy();
+        
+        $_SERVER = [];
+        $_REQUEST = [];
 
-        if (isset($_REQUEST["action"])) {
-            unset($_REQUEST["action"]);
-        }
         Settings::set("maintenance_mode", "0");
         chdir(Path::resolve("ULICMS_ROOT"));
         set_format("html");
@@ -29,10 +32,12 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase {
 
     public function testIsCrawler() {
         $pkg = new PackageManager();
+        
         if (!faster_in_array("CrawlerDetect", $pkg->getInstalledModules())) {
             $this->assertNotNull("CrawlerDetect is not installed. Skip this test");
             return;
         }
+        
         $useragents = array(
             "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)" => true,
             "Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)" => true,
@@ -46,6 +51,19 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
+    public function testIsCrawlerWithoutUseragent(){
+        unset($_SERVER["HTTP_USER_AGENT"]);
+           $this->assertFalse(
+                is_crawler()
+        );
+    }
+      public function testIsCrawlerWithUseragentFromSession(){
+        $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)";
+           $this->assertTrue(
+                is_crawler()
+        );
+    }
+    
     public function testIsTrue() {
         $this->assertTrue(is_true(true));
         $this->assertTrue(is_true(1));

@@ -142,7 +142,7 @@ function get_ID(): ?int {
         return Vars::get("id");
     }
 
-    $page = get_requested_pagename();
+    $page = get_slug();
 
     $dataset = null;
 
@@ -163,7 +163,7 @@ function is_active(): bool {
         return Vars::get("active");
     }
 	
-    $page = get_requested_pagename();
+    $page = get_slug();
     
     $dataset = boolval(1);
     $sql = "SELECT `active` FROM " . tbname("content")
@@ -181,7 +181,7 @@ function is_active(): bool {
 function get_type(?string $slug = null, ?string $language = null): ?string {
 
     if (!$slug) {
-        $slug = get_requested_pagename();
+        $slug = get_slug();
     }
 
     if (!$language) {
@@ -208,7 +208,7 @@ function get_type(?string $slug = null, ?string $language = null): ?string {
 
 function get_article_meta(?string $page = null): ?object {
     if (!$page) {
-        $page = get_requested_pagename();
+        $page = get_slug();
     }
 
     $dataset = null;
@@ -234,7 +234,7 @@ function get_cache_control(): string {
     if (!is_null(Vars::get("cache_control"))) {
         return Vars::get("cache_control");
     }
-    $page = get_requested_pagename();
+    $page = get_slug();
 
     $cacheControl = "auto";
     $sql = "SELECT `cache_control` FROM " . tbname("content") . " WHERE slug='" . db_escape($page) . "'  AND language='" . db_escape(getFrontendLanguage()) . "'";
@@ -251,7 +251,7 @@ function get_cache_control(): string {
 }
 
 function get_text_position(): string {
-    $page = get_requested_pagename();
+    $page = get_slug();
 
     $dataset = null;
     $sql = "SELECT `text_position` FROM " . tbname("content") .
@@ -270,7 +270,7 @@ function get_text_position(): string {
 
 function get_category_id(string $page = null): ?int {
     if (!$page) {
-        $page = get_requested_pagename();
+        $page = get_slug();
     }
     $dataset = null;
     $sql = "SELECT `category_id` FROM " . tbname("content") .
@@ -290,7 +290,7 @@ function category_id(?string $page = null): void {
 
 function get_parent(string $page = null): ?int {
     if (!$page) {
-        $page = get_requested_pagename();
+        $page = get_slug();
     }
     $parent_id = null;
     $sql = "SELECT `parent_id` FROM " . tbname("content") . " WHERE slug='"
@@ -311,7 +311,7 @@ function include_jquery(): void {
 function get_access(?string $page = null): array {
     $access = [];
     if (!$page) {
-        $page = get_requested_pagename();
+        $page = get_slug();
     }
 
     $sql = "SELECT `access` FROM " . tbname("content") .
@@ -328,7 +328,7 @@ function get_access(?string $page = null): array {
 
 function get_redirection(?string $page = null): ?string {
     if (!$page) {
-        $page = get_requested_pagename();
+        $page = get_slug();
     }
     $sql = "SELECT `link_url` FROM " . tbname("content") .
             " WHERE slug='" . db_escape($page) . "'  AND language='" .
@@ -347,7 +347,7 @@ function get_redirection(?string $page = null): ?string {
 
 function get_theme(?string $page = null): ?string {
     if (!$page) {
-        $page = get_requested_pagename();
+        $page = get_slug();
     }
 
     if (!is_null(Vars::get("theme_" . $page))) {
@@ -626,13 +626,12 @@ function get_frontpage(): ?string {
     return Settings::get("frontpage");
 }
 
-function get_requested_pagename(): string {
-    $value = get_frontpage();
+function get_slug(): string {
+    return !empty($_GET["slug"]) ? $_GET["slug"] : get_frontpage();
+}
 
-    if (isset($_GET["slug"]) and StringHelper::isNotNullOrWhitespace($_GET["slug"])) {
-        $value = $_GET["slug"];
-    }
-    return Database::escapeValue($value);
+function get_requested_pagename(): string {
+    return get_slug();
 }
 
 function set_requested_pagename(
@@ -653,7 +652,7 @@ function set_requested_pagename(
 }
 
 function is_home(): bool {
-    return get_requested_pagename() === get_frontpage();
+    return get_slug() === get_frontpage();
 }
 
 function is_frontpage(): bool {
@@ -720,7 +719,7 @@ function parent_item_contains_current_page(?int $id): bool {
 
     $tree = buildtree($data, $id);
     foreach ($tree as $key) {
-        if ($key["slug"] == get_requested_pagename()) {
+        if ($key["slug"] == get_slug()) {
             $retval = true;
         }
     }
@@ -773,7 +772,7 @@ function get_menu(
                 $additional_classes .= "contains-current-page ";
             }
 
-            if (get_requested_pagename() != $row->slug) {
+            if (get_slug() != $row->slug) {
                 $html .= "  <li class='" . trim($additional_classes) . "'>";
             } else {
                 $html .= "  <li class='menu_active_list_item" . rtrim($additional_classes) . "'>";
@@ -798,7 +797,7 @@ function get_menu(
             $url = ($row->type == "link" or $row->type == "node") ? $row->link_url : buildSEOUrl($row->slug);
             $url = Template::getEscape($url);
 
-            if (get_requested_pagename() != $row->slug) {
+            if (get_slug() != $row->slug) {
                 $html .= "<a href='" . $url . "' target='" . $row->target . "' class='" . trim($additional_classes) . "'>";
             } else {
                 $html .= "<a class='menu_active_link" . rtrim($additional_classes) . "' href='" . $url . "' target='" . $row->target . "'>";
@@ -949,7 +948,7 @@ function check_status(): string {
     }
 
     $test = isset($_GET["slug"]) ? get_page($_GET["slug"]) : null;
-    if (!$test or ! is_null($test["deleted_at"])) {
+    if (!$test || !is_null($test["deleted_at"])) {
         no_cache();
         return "404 Not Found";
     }

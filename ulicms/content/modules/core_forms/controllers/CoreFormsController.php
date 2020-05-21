@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-class CoreForms extends Controller {
+class CoreFormsController extends Controller {
 
     protected function incSpamCount(): void{
         Settings::set(

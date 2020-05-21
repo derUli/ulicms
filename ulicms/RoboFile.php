@@ -6,12 +6,13 @@ use UliCMS\Packages\PatchManager;
 use UliCMS\Services\Connectors\eXtend\AvailablePackageVersionMatcher;
 use UliCMS\Utils\CacheUtil;
 
+use \Robo\Tasks;
 /**
  * This is project's console commands configuration for Robo task runner.
  *
  * @see http://robo.li/
  */
-class RoboFile extends \Robo\Tasks {
+class RoboFile extends Tasks {
 
     public function __construct() {
         require_once dirname(__FILE__) . "/init.php";
@@ -49,7 +50,7 @@ class RoboFile extends \Robo\Tasks {
      * List all settings
      */
     public function settingsList(): void {
-// show all settings
+        // show all settings
         $settings = Settings::getAll();
         foreach ($settings as $setting) {
             if (empty($setting->name)) {
@@ -143,10 +144,10 @@ class RoboFile extends \Robo\Tasks {
      */
     public function packagesList() {
         $this->writeln("Modules:");
-        $this->modulesList();
+        $this->modulesList([]);
         $this->writeln("");
         $this->writeln("Themes:");
-        $this->themesList();
+        $this->themesList([]);
     }
 
     /**
@@ -274,13 +275,6 @@ class RoboFile extends \Robo\Tasks {
     public function modulesDisable(array $modules) {
         $modules = $this->replaceModulePlaceholders($modules);
 
-        foreach ($modules as $name) {
-            if (strtolower($name) == "[all]") {
-                $modules = $manager->getAllModuleNames();
-                break;
-            }
-        }
-
         $manager = new ModuleManager();
         $manager->sync();
         foreach ($modules as $name) {
@@ -297,9 +291,9 @@ class RoboFile extends \Robo\Tasks {
     public function modulesRemove(array $modules) {
         foreach ($modules as $module) {
             if (uninstall_module($module, "module")) {
-                $this->writeln("Package $module removed");
+                $this->writeln("Package $module removed.");
             } else {
-                $this->writeln("Removing  $module failed.");
+                $this->writeln("Removing $module failed.");
             }
         }
     }
@@ -349,7 +343,7 @@ class RoboFile extends \Robo\Tasks {
             if (uninstall_module($theme, "theme")) {
                 $this->writeln("Package $theme removed");
             } else {
-                $this->writeln("Removing  $theme failed.");
+                $this->writeln("Removing $theme failed.");
             }
         }
     }
@@ -494,7 +488,8 @@ class RoboFile extends \Robo\Tasks {
 
         $filteredPatches = [];
         foreach ($availablePatches as $patch) {
-            if (faster_in_array($patch->name, $patchesToInstall) or faster_in_array("all", $patchesToInstall)) {
+            if (faster_in_array($patch->name, $patchesToInstall) ||
+                    faster_in_array("all", $patchesToInstall)) {
                 $filteredPatches[] = $patch;
             }
         }
@@ -508,6 +503,19 @@ class RoboFile extends \Robo\Tasks {
                 exit(1);
             }
         }
+    }
+
+    /**
+     * Run PHPUnit Tests
+     * @param string $testFile test file to run
+     */
+    public function testsRun(?string $testFile = null) {
+        $phpunitTask = $this->taskPHPUnit();
+        if ($testFile) {
+            $phpunitTask = $phpunitTask->file($testFile);
+        }
+
+        $phpunitTask->run();
     }
 
 }

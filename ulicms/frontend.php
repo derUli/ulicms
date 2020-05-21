@@ -185,7 +185,7 @@ if (file_exists(getTemplateDirPath($theme, true) . "functions.php")) {
 
 do_event("after_functions");
 
-$hasModul = containsModule(get_requested_pagename());
+$hasModul = containsModule(get_slug());
 
 $cache_control = get_cache_control();
 switch ($cache_control) {

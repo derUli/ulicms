@@ -1,11 +1,14 @@
 <?php
 
 declare(strict_types=1);
+use UliCMS\Helpers\TestHelper;
 
 class CoreSecurityController extends MainClass {
 
     public function beforeInit(): void {
+        
         $x_frame_options = settings::get("x_frame_options");
+        
         $allowedOptions = array(
             "DENY",
             "SAMEORIGIN"

@@ -6,13 +6,14 @@ use UliCMS\Utils\CacheUtil;
 
 // Alternative PHP Cache leeren, sofern installiert und aktiv
 function clearAPCCache(): bool {
-    if (!function_exists("apc_clear_cache")) {
-        return false;
+    $success = false;
+    if (function_exists("apc_clear_cache")) {
+        apc_clear_cache();
+        apc_clear_cache('user');
+        apc_clear_cache('opcode');
+        $success = true;
     }
-    apc_clear_cache();
-    apc_clear_cache('user');
-    apc_clear_cache('opcode');
-    return true;
+    return $success;
 }
 
 // Alle Caches leeren

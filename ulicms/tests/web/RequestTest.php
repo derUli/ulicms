@@ -1,8 +1,11 @@
 <?php
 
+use UliCMS\Helpers\TestHelper;
+
 class RequestTest extends \PHPUnit\Framework\TestCase {
 
     public function tearDown() {
+        require_once getLanguageFilePath("en");
         unset($_SERVER["HTTP_HOST"]);
         unset($_SERVER["HTTP_REFERRER"]);
         unset($_SERVER["HTTP_USER_AGENT"]);
@@ -213,6 +216,17 @@ class RequestTest extends \PHPUnit\Framework\TestCase {
 
     public function testIsHeaderSentReturnsFalse() {
         $this->assertFalse(Request::isHeaderSent("Foobar"));
+    }
+       public function testJavascriptRedirect() {
+        $expected = file_get_contents(
+                Path::resolve("tests/fixtures/javascriptRedirect.expected.txt")
+        );
+
+        $actual = TestHelper::getOutput(function() {
+                    Request::javascriptRedirect("https://google.de");
+                });
+
+                $this->assertEquals($expected, $actual);
     }
 
 }

@@ -20,7 +20,7 @@ class Template {
         $str .= (is_403() ? "error403 " : "");
         $str .= ((is_404() or is_403()) ? "errorPage " : "page ");
         $str .= (is_mobile() ? "mobile " : "desktop ");
-        $str .= (containsModule(get_requested_pagename()) ?
+        $str .= (containsModule(get_slug()) ?
                 " containsModule " : "");
 
         $str = trim($str);
@@ -398,10 +398,9 @@ class Template {
                 . _esc($keywords) . '"/>';
             }
         }
-        $description = get_meta_description();
-        if (!$description) {
-            $description = Settings::get("meta_description");
-        }
+        $description = get_meta_description() ?
+                get_meta_description() : Settings::get("meta_description");
+        
         if ($description != "" && $description != false) {
             $description = apply_filter($description, "meta_description");
             $$description = _esc($description);
@@ -493,7 +492,7 @@ color: " . Settings::get("body-text-color") . ";
         $content = null;
         if (is_200()) {
             $content = ContentFactory::getBySlugAndLanguage(
-                            get_requested_pagename(),
+                            get_slug(),
                             getCurrentLanguage()
             );
 

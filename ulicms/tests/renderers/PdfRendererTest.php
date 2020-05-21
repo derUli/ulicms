@@ -2,6 +2,7 @@
 
 use UliCMS\Renderers\PdfRenderer;
 use UliCMS\Utils\CacheUtil;
+use function UliCMS\HTML\stringContainsHtml;
 
 class PdfRendererTest extends \PHPUnit\Framework\TestCase {
 
@@ -9,14 +10,21 @@ class PdfRendererTest extends \PHPUnit\Framework\TestCase {
     private $cachePeriodOriginal;
 
     public function setUp() {
+        require_once getLanguageFilePath("en");
+
+        $_SESSION["language"] = "de";
+        $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (Windows NT 6.1; "
+                . "Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
+                . "Chrome/63.0.3239.132 Safari/537.36";
+
         $this->cacheDisabledOriginal = Settings::get("cache_disabled");
         $this->cachePeriodOriginal = Settings::get("cache_period");
         Settings::delete("cache_disabled");
     }
 
     public function tearDown() {
-        CacheUtil::resetAdapater();
         CacheUtil::clearPageCache();
+        CacheUtil::resetAdapater();
         Database::query("delete from {prefix}content where title like 'Unit Test%'", true);
 
         if ($this->cacheDisabledOriginal) {
@@ -51,10 +59,6 @@ class PdfRendererTest extends \PHPUnit\Framework\TestCase {
         Settings::set("cache_period", 500);
 
         $_GET["slug"] = "lorem_ipsum";
-        $_SESSION["language"] = "de";
-        $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (Windows NT 6.1; "
-                . "Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
-                . "Chrome/63.0.3239.132 Safari/537.36";
 
         $renderer = new PdfRenderer();
 
@@ -83,10 +87,6 @@ class PdfRendererTest extends \PHPUnit\Framework\TestCase {
         Settings::set("cache_period", 500);
 
         $_GET["slug"] = $modulePage->slug;
-        $_SESSION["language"] = "de";
-        $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (Windows NT 6.1; "
-                . "Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
-                . "Chrome/63.0.3239.132 Safari/537.36";
 
         $renderer = new PdfRenderer();
 
@@ -94,6 +94,26 @@ class PdfRendererTest extends \PHPUnit\Framework\TestCase {
         $output = $renderer->render();
 
         $this->assertStringStartsWith("%PDF-1.4", $output);
+    }
+
+    public function testRenderNonExisting() {
+        $_GET["slug"] = 'gibts_nicht';
+
+        $renderer = new PdfRenderer();
+        $output = $renderer->render();
+        $this->assertStringStartsWith("%PDF-1.4", $output);
+
+        // TODO: check if the PDF contains the page not found title
+    }
+
+    public function testRenderWithoutMpdfInstalled() {
+        ob_start();
+        $renderer = new PdfRenderer();
+        $renderer->isMpdfInstalled = false;
+        $renderer->render();
+        $output = ob_get_clean();
+        $this->assertTrue(stringContainsHtml($output));
+        $this->assertStringContainsString("mPDF is not installed", $output);
     }
 
 }

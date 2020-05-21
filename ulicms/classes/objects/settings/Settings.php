@@ -183,6 +183,11 @@ class Settings {
                 continue;
             }
             $splitted = explode("=>", $line);
+            
+            if(count($splitted) < 2 ){
+                continue;
+            }
+            
             $splitted = array_map('trim', $splitted);
             $key = $splitted[0];
             $value = $splitted[1];

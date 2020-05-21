@@ -12,11 +12,6 @@ class Forms {
         return $retval;
     }
 
-    public static function deleteForm($id) {
-        $id = intval($id);
-        return db_query("DELETE FROM " . tbname("forms") . " WHERE id = $id");
-    }
-
     public static function createForm(
             $name,
             $email_to,
@@ -39,16 +34,17 @@ class Forms {
         $target_page_id = intval($target_page_id);
         $created = time();
         $updated = time();
-
-        return Database::query("INSERT INTO `" . tbname("forms") .
-                        "` (name, email_to, subject, category_id, `fields`,
+        $sql = "INSERT INTO `{prefix}forms`
+            (name, email_to, subject, category_id, `fields`,
                             `required_fields`, mail_from_field, target_page_id,
                             `created`, `updated`, `enabled`)
                                      values
                                     ('$name', '$email_to', '$subject', "
-                        . "$category_id, '$fields', '$required_fields', "
-                        . "'$mail_from_field', $target_page_id, $created, "
-                        . "$updated, $enabled)", false);
+                . "$category_id, '$fields', '$required_fields', "
+                . "'$mail_from_field', $target_page_id, $created, "
+                . "$updated, $enabled)";
+
+        return Database::query($sql, true);
     }
 
     public static function editForm($id, $name, $email_to, $subject, $category_id, $fields, $required_fields, $mail_from_field, $target_page_id, $enabled) {
@@ -144,8 +140,7 @@ class Forms {
 
             // if dns mx check is enabled check the mail domain
             if (!StringHelper::isNullOrEmpty($email_from)
-                    and Settings::get("check_mx_of_mail_address")
-                    && !AntiSpamHelper::checkMailDomain($email_from)) {
+                    and Settings::get("check_mx_of_mail_address") && !AntiSpamHelper::checkMailDomain($email_from)) {
                 ExceptionResult(
                         get_translation("mail_address_has_invalid_mx_entry"),
                         HttpStatusCode::BAD_REQUEST
@@ -174,6 +169,11 @@ class Forms {
             }
         }
         return $retval;
+    }
+
+    public static function deleteForm($id) {
+        $id = intval($id);
+        return db_query("DELETE FROM " . tbname("forms") . " WHERE id = $id");
     }
 
 }

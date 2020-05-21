@@ -127,13 +127,13 @@ function is_desktop(): bool {
 }
 
 function is_crawler(?string $useragent = null): bool {
-    if (is_null($useragent)) {
-        $useragent = $_SERVER['HTTP_USER_AGENT'];
-    }
-    if(is_null($useragent)){
+    if (!$useragent && Request::getUserAgent()) {
+        $useragent = Request::getUserAgent();
+    } 
+    if (!$useragent) {
         return false;
     }
-    
+
     $isCrawler = apply_filter($useragent, "is_crawler");
     if (is_bool($isCrawler) or is_int($isCrawler)) {
         return boolval($isCrawler);

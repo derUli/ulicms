@@ -9,6 +9,13 @@ class CsvRendererTest extends \PHPUnit\Framework\TestCase {
     private $cachePeriodOriginal;
 
     public function setUp() {
+        require_once getLanguageFilePath("en");
+
+        $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (Windows NT 6.1; "
+                . "Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
+                . "Chrome/63.0.3239.132 Safari/537.36";
+        $_SESSION["language"] = "de";
+
         $this->cacheDisabledOriginal = Settings::get("cache_disabled");
         $this->cachePeriodOriginal = Settings::get("cache_period");
         Settings::delete("cache_disabled");
@@ -40,18 +47,16 @@ class CsvRendererTest extends \PHPUnit\Framework\TestCase {
         Settings::set("cache_period", "500");
 
         $_GET["slug"] = "lorem_ipsum";
-        $_SESSION["language"] = "de";
-        $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36";
 
         $expected = file_get_contents(
                 Path::resolve("ULICMS_ROOT/tests/fixtures/renderers/csv.csv")
         );
         $renderer = new CsvRenderer();
-        
+
         $this->assertEquals(
                 normalizeLN($expected),
                 normalizeLN($renderer->render())
-        );      
+        );
         $this->assertEquals(
                 normalizeLN($expected),
                 normalizeLN($renderer->render())
@@ -76,10 +81,6 @@ class CsvRendererTest extends \PHPUnit\Framework\TestCase {
         Settings::set("cache_period", "500");
 
         $_GET["slug"] = "lorem_ipsum";
-        $_SESSION["language"] = "de";
-        $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (Windows NT 6.1; "
-                . "Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
-                . "Chrome/63.0.3239.132 Safari/537.36";
 
         $renderer = new CsvRenderer();
 
@@ -108,10 +109,6 @@ class CsvRendererTest extends \PHPUnit\Framework\TestCase {
         Settings::set("cache_period", "500");
 
         $_GET["slug"] = $modulePage->slug;
-        $_SESSION["language"] = "de";
-        $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (Windows NT 6.1; "
-                . "Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
-                . "Chrome/63.0.3239.132 Safari/537.36";
 
         $renderer = new CsvRenderer();
 
@@ -119,6 +116,15 @@ class CsvRendererTest extends \PHPUnit\Framework\TestCase {
         $output = $renderer->render();
 
         $this->assertCount(8, str_getcsv($output));
+    }
+
+    public function testRenderNonExisting() {
+        $_GET["slug"] = 'gibts_nicht';
+
+        $renderer = new CsvRenderer();
+        $output = $renderer->render();
+        $this->assertStringContainsString("Title,Content,Description,Tags,Author", $output);
+        $this->assertStringContainsString("This page doesn't exist.", $output);
     }
 
 }

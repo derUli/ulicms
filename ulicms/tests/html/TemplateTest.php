@@ -12,7 +12,6 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         Translation::loadAllModuleLanguageFiles("en");
         Flags::setNoCache(true);
         
-
         $settings = array(
             "site_slogan",
             "site_slogan_de",

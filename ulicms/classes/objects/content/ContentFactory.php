@@ -11,9 +11,11 @@ class ContentFactory {
 
     // this methods returns the model of the current page
     public static function getCurrentPage(): ?Content {
+        $slug = get_slug();
+        $language = getCurrentLanguage(true);
         return ContentFactory::getBySlugAndLanguage(
-                        get_requested_pagename(),
-                        getCurrentLanguage(true)
+                        get_slug(),
+                        $language
         );
     }
 

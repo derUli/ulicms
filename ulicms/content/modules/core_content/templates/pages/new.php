@@ -364,8 +364,10 @@ if ($permissionChecker->hasPermission("pages")
                             <?php translate("article_date"); ?>
                         </strong>
                         <input
-                            name="article_date" type="datetime-local"
-                            value="<?php echo NumberFormatHelper::timestampToHtml5Datetime(); ?>" step="any">
+                            name="article_date" type="text"
+                            class="datetimepicker"
+                            value="<?php echo NumberFormatHelper::timestampToSqlDate(); ?>" step="any"
+                            >
                     </div>
 
                     <div class="field">

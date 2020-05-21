@@ -99,8 +99,8 @@ class VideoController extends Controller {
             $height = intval($_POST ["height"]);
             $timestamp = time();
 
-            if (!empty($ogg_file_value) or ! empty($mp4_file_value)
-                    or ! empty($webm_file_value)) {
+            if (!empty($ogg_file_value) || !empty($mp4_file_value)
+                    || !empty($webm_file_value)) {
                 db_query("INSERT INTO " . tbname("videos") .
                         " (name, ogg_file, webm_file, mp4_file, width, "
                         . "height, created, category_id, `updated`) "
