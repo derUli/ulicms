@@ -8,7 +8,7 @@ class CoreMediaControllerTest extends \PHPUnit\Framework\TestCase {
         $input = $this->getExampleHtml();
 
         $controller = new CoreMediaController();
-        $actual = $controller->replaceLinks($input);
+        $actual = $controller->_replaceLinks($input);
         $expected = file_get_contents(
                 Path::resolve(
                         "ULICMS_ROOT/tests/fixtures/embed-media.expected.txt"
@@ -42,6 +42,12 @@ class CoreMediaControllerTest extends \PHPUnit\Framework\TestCase {
         }, $urls);
 
         return implode("\n", $links);
+    }
+    
+    public function testReplaceLinksWithEmpty(){
+        $controller = new CoreMediaController();
+        $output = $controller->_replaceLinks("");
+        $this->assertEmpty($output);
     }
 
 }

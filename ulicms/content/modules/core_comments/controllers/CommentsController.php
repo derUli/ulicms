@@ -116,13 +116,13 @@ class CommentsController extends MainClass {
     }
 
     // this returns the default status for new comments
-    public function getDefaultStatus(): string {
+    public function _getDefaultStatus(): string {
         $defaultStatus = Settings::get("comments_must_be_approved") ?
                 CommentStatus::PENDING : CommentStatus::PUBLISHED;
         return $defaultStatus;
     }
 
-    public function getResults(
+    public function _getResults(
             ?string $status = null,
             ?int $content_id = null,
             ?int $limit = 0
@@ -133,7 +133,7 @@ class CommentsController extends MainClass {
         } else if ($content_id) {
             $results = Comment::getAllByContentId($content_id);
         } else {
-            $status = $this->getDefaultStatus();
+            $status = $this->_getDefaultStatus();
             $results = Comment::getAllByStatus($status);
         }
         return $results;
@@ -144,17 +144,17 @@ class CommentsController extends MainClass {
         // get arguments from the URL
         $status = Request::getVar("status", null, "str");
         $content_id = Request::getVar("content_id", null, "int");
-        $limit = Request::getVar("limit", $this->getDefaultLimit(), "int");
+        $limit = Request::getVar("limit", $this->_getDefaultLimit(), "int");
 
         // do the search query
-        $results = $this->getResults($status, $content_id, $limit);
+        $results = $this->_getResults($status, $content_id, $limit);
 
         // output the comment backend page to the user
         ActionResult("comments_manage", $results);
     }
 
     // get the configured default limit or if is set the default value
-    public function getDefaultLimit(): int {
+    public function _getDefaultLimit(): int {
         $limit = 100;
         if (Settings::get("comments_default_limit")) {
             $limit = intval(Settings::get("comments_default_limit"));
@@ -198,8 +198,6 @@ class CommentsController extends MainClass {
                                 "comment action not implemented"
                         );
                 }
-
-
 
                 // if action is not delete save it
                 if ($action != "delete") {

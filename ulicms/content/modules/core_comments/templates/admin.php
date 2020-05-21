@@ -6,15 +6,15 @@ use UliCMS\HTML\ListItem;
 use UliCMS\Constants\CommentStatus;
 
 $controller = ModuleHelper::getMainController("core_comments");
-$defaultStatus = $controller->getDefaultStatus();
+$defaultStatus = $controller->_getDefaultStatus();
 
 $selectedStatus = Request::getVar("status", $defaultStatus, "str");
 $content_id = Request::getVar("content_id", 0, "int");
-$limit = Request::getVar("limit", $controller->getDefaultLimit(), "int");
+$limit = Request::getVar("limit", $controller->_getDefaultLimit(), "int");
 
 $comments = is_array(BackendPageRenderer::getModel()) ?
 		BackendPageRenderer::getModel() :
-		$controller->getResults($selectedStatus, $content_id, $limit);
+		$controller->_getResults($selectedStatus, $content_id, $limit);
 
 $stati = array(
 	new ListItem(

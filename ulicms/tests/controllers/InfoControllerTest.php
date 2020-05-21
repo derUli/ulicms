@@ -31,4 +31,17 @@ class InfoControllerTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
+    public function testChangelog() {
+        $controller = new InfoController();
+        $output = $controller->_changelog();
+        $this->assertStringContainsString("Neues in UliCMS 2020", $output);
+        $this->assertStringContainsString("Neue Features", $output);
+    }
+
+    public function testLicense() {
+        $controller = new InfoController();
+        $output = $controller->_license();
+        $this->assertStringContainsString("All rights reserved.", $output);
+    }
+
 }
