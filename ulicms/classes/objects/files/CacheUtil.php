@@ -55,6 +55,7 @@ class CacheUtil {
         return self::$adapter;
     }
     public static function resetAdapater(){
+        CacheManager::clearInstances();
         self::$adapter = null;
         @self::getAdapter(true);
     }

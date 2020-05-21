@@ -13,7 +13,7 @@ class CoreMediaController extends MainClass {
                 is_true($data["disable_media_embed"]
         ));
 
-        return $mediaEmbedEnabled ? $this->replaceLinks($input) : $input;
+        return $mediaEmbedEnabled && !empty($input) ? $this->replaceLinks($input) : $input;
     }
 
     // This method replaces links to media services like youtube with embedded media

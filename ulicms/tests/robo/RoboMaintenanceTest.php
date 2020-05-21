@@ -3,7 +3,6 @@
 require_once __DIR__ . "/RoboTestFile.php";
 require_once __DIR__ . "/RoboBaseTest.php";
 
-
 class RoboMaintenanceTest extends RoboBaseTest {
 
     public function testMaintenanceStatus() {
