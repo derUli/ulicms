@@ -15,51 +15,51 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
         $user->save();
     }
 
-    public function testGetPagesListViewNotSetReturnsDefault() {
+    public function test_getPagesListViewNotSetReturnsDefault() {
         $controller = ControllerRegistry::get(PageController::class);
-        $this->assertEquals("default", $controller->getPagesListView());
+        $this->assertEquals("default", $controller->_getPagesListView());
     }
 
     public function testGetPagesListReturnsDefault() {
         $_SESSION["pages_list_view"] = "default";
 
         $controller = ControllerRegistry::get(PageController::class);
-        $this->assertEquals("default", $controller->getPagesListView());
+        $this->assertEquals("default", $controller->_getPagesListView());
     }
 
     public function testGetPagesListReturnsRecycleBin() {
         $_SESSION["pages_list_view"] = "recycle_bin";
 
         $controller = ControllerRegistry::get(PageController::class);
-        $this->assertEquals("recycle_bin", $controller->getPagesListView());
+        $this->assertEquals("recycle_bin", $controller->_getPagesListView());
     }
 
-    public function testCheckIfSlugIsFreeReturnsTrue() {
+    public function test_checkIfSlugIsFreeReturnsTrue() {
         $controller = ControllerRegistry::get(PageController::class);
         $this->assertTrue(
-                $controller->checkIfSlugIsFree(uniqid(), "de", PHP_INT_MAX)
+                $controller->_checkIfSlugIsFree(uniqid(), "de", PHP_INT_MAX)
         );
     }
 
-    public function testCheckIfSlugIsFreeWithEmptyReturnsTrue() {
+    public function test_checkIfSlugIsFreeWithEmptyReturnsTrue() {
         $controller = ControllerRegistry::get(PageController::class);
         $this->assertTrue(
-                $controller->checkIfSlugIsFree("", "de", PHP_INT_MAX)
+                $controller->_checkIfSlugIsFree("", "de", PHP_INT_MAX)
         );
     }
 
-    public function testCheckIfSlugIsFreeReturnsFalse() {
+    public function test_checkIfSlugIsFreeReturnsFalse() {
         $allSlugs = getAllSlugs("de");
         $controller = ControllerRegistry::get(PageController::class);
         $this->assertFalse(
-                $controller->checkIfSlugIsFree($allSlugs[0], "de", PHP_INT_MAX)
+                $controller->_checkIfSlugIsFree($allSlugs[0], "de", PHP_INT_MAX)
         );
     }
 
-    public function testGetBooleanSelection() {
+    public function test_getBooleanSelection() {
         $controller = ControllerRegistry::get(PageController::class);
 
-        $items = $controller->getBooleanSelection();
+        $items = $controller->_getBooleanSelection();
         $this->assertCount(3, $items);
 
         foreach ($items as $item) {
@@ -67,10 +67,10 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetCategorySelection() {
+    public function test_getCategorySelection() {
         $controller = ControllerRegistry::get(PageController::class);
 
-        $items = $controller->getCategorySelection();
+        $items = $controller->_getCategorySelection();
         $this->assertGreaterThanOrEqual(2, count($items));
 
         $this->assertNull($items[0]->getValue());
@@ -84,7 +84,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
     public function testGetParentSelection() {
         $controller = ControllerRegistry::get(PageController::class);
 
-        $items = $controller->getCategorySelection();
+        $items = $controller->_getCategorySelection();
         $this->assertGreaterThanOrEqual(2, count($items));
 
         $this->assertNull($items[0]->getValue());
@@ -95,10 +95,10 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetMenuSelection() {
+    public function test_getMenuSelection() {
         $controller = ControllerRegistry::get(PageController::class);
 
-        $items = $controller->getMenuSelection();
+        $items = $controller->_getMenuSelection();
         $this->assertGreaterThanOrEqual(2, count($items));
 
         $this->assertNull($items[0]->getValue());
@@ -109,10 +109,10 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetTypeSelection() {
+    public function test_getTypeSelection() {
         $controller = ControllerRegistry::get(PageController::class);
 
-        $items = $controller->getTypeSelection();
+        $items = $controller->_getTypeSelection();
         $this->assertGreaterThanOrEqual(2, count($items));
 
         $this->assertNull($items[0]->getValue());
@@ -123,10 +123,10 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetLanguageSelection() {
+    public function test_getLanguageSelection() {
         $controller = ControllerRegistry::get(PageController::class);
 
-        $items = $controller->getLanguageSelection();
+        $items = $controller->_getLanguageSelection();
         $this->assertGreaterThanOrEqual(2, count($items));
 
         $this->assertNull($items[0]->getValue());
@@ -137,13 +137,13 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetLanguageSelectionGroupAssigned() {
+    public function test_getLanguageSelectionGroupAssigned() {
         $user = $this->getTestUser();
         $_SESSION["login_id"] = $user->getId();
 
         $controller = ControllerRegistry::get(PageController::class);
 
-        $items = $controller->getLanguageSelection();
+        $items = $controller->_getLanguageSelection();
         $this->assertCount(2, $items);
     }
 
@@ -166,10 +166,10 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
         return $user;
     }
 
-    public function testGetParentIds() {
+    public function test_getParentIds() {
         $controller = ControllerRegistry::get(PageController::class);
 
-        $parentIds = $controller->getParentIds();
+        $parentIds = $controller->_getParentIds();
 
         $this->assertGreaterThanOrEqual(4, count($parentIds));
 
@@ -178,15 +178,15 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetParentIdsWithLanguageAndMenu() {
+    public function test_getParentIdsWithLanguageAndMenu() {
         $controller = ControllerRegistry::get(PageController::class);
 
-        $parentIds = $controller->getParentIds("en", "top");
+        $parentIds = $controller->_getParentIds("en", "top");
 
         $this->assertGreaterThanOrEqual(2, count($parentIds));
 
         $this->assertLessThan(
-                count($controller->getParentIds()
+                count($controller->_getParentIds()
                 ), count($parentIds));
 
         foreach ($parentIds as $id) {
@@ -194,16 +194,16 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetparentIdsWithRestrictedGroups() {
+    public function test_getParentIdsWithRestrictedGroups() {
         $controller = ControllerRegistry::get(PageController::class);
-        $allIds = $parentIds = $controller->getParentIds();
+        $allIds = $parentIds = $controller->_getParentIds();
 
         $user = $this->getTestUser();
         $_SESSION["login_id"] = $user->getId();
 
         $controller = ControllerRegistry::get(PageController::class);
 
-        $parentIds = $controller->getParentIds();
+        $parentIds = $controller->_getParentIds();
 
         $this->assertGreaterThanOrEqual(2, count($parentIds));
 

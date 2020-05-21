@@ -555,7 +555,7 @@ color: " . Settings::get("body-text-color") . ";
         echo "</ul>";
     }
 
-    public static function getLanguageSelection(): string {
+    public static function _getLanguageSelection(): string {
         ob_start();
         self::languageSelection();
         return ob_get_clean();

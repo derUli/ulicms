@@ -1,7 +1,7 @@
 <?php
 $permissionChecker = new ACL ();
 if ($permissionChecker->hasPermission("pages")) {
-    $diff = ControllerRegistry::get("PageController")->diffContents();
+    $diff = ControllerRegistry::get("PageController")->_diffContents();
     ?>
     <p>
         <a

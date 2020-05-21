@@ -251,8 +251,8 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testGetLanguageSelection() {
-        $html = Template::getLanguageSelection();
+    public function test_getLanguageSelection() {
+        $html = Template::_getLanguageSelection();
         $this->assertTrue(str_contains("<ul class='language_selection'>",
                         $html));
 
@@ -262,7 +262,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         // TODO: Check if there are links in the returned html
     }
 
-    public function testGetLanguageSelectionWithDomain2LanguageMapping() {
+    public function test_getLanguageSelectionWithDomain2LanguageMapping() {
 
         $mappingLines = [
             'example.de=>de',
@@ -271,7 +271,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
 
         Settings::set("domain_to_language",
                 implode("\n", $mappingLines));
-        $html = Template::getLanguageSelection();
+        $html = Template::_getLanguageSelection();
         $this->assertTrue(str_contains("<ul class='language_selection'>",
                         $html));
 
