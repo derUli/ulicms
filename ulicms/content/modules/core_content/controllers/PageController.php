@@ -356,13 +356,16 @@ class PageController extends Controller {
     }
 
     public function emptyTrash(): void {
-        do_event("before_empty_trash");
+        $this->_emptyTrash();
+        Request::redirect(ModuleHelper::buildActionURL("pages"));
+    }
+    
+    public function _emptyTrash(): void {
+           do_event("before_empty_trash");
         Content::emptyTrash();
         do_event("after_empty_trash");
 
         CacheUtil::clearPageCache();
-
-        Request::redirect(ModuleHelper::buildActionURL("pages"));
     }
 
     public function getContentTypes(): void {
@@ -378,42 +381,39 @@ class PageController extends Controller {
     }
 
     public function _diffContents(
-            ?int $history_id = null,
-            ?int $content_id = null
+            ?int $historyId = null,
+            ?int $contentId = null
     ): DiffViewModel {
-        $history_id = intval(!$history_id ?
-                $_GET ["history_id"] : $history_id);
-        $content_id = intval(!$content_id ?
-                $_GET ["content_id"] : $content_id);
+        $historyId = $historyId ? $historyId : intval($_GET ["history_id"]);
+        $contentId = $contentId ? $contentId : intval($_GET ["content_id"]);
 
-        $current_version = getPageByID($content_id);
-        $old_version = VCS::getRevisionByID($history_id);
-
-        $from_text = $current_version->content;
-        $to_text = $old_version->content;
+        $currentVersion = getPageByID($contentId);
+        $oldVersion = VCS::getRevisionByID($historyId);
+        $fromText = $currentVersion->content;
+        $toText = $oldVersion->content;
 
         $current_version_date = date(
                 "Y-m-d H:i:s",
-                intval($current_version->lastmodified)
+                intval($currentVersion->lastmodified)
         );
-        $old_version_date = $old_version->date;
+        $oldVersionData = $oldVersion->date;
 
-        $from_text = mb_convert_encoding($from_text, 'HTML-ENTITIES', 'UTF-8');
-        $to_text = mb_convert_encoding($to_text, 'HTML-ENTITIES', 'UTF-8');
+        $fromText = mb_convert_encoding($fromText, 'HTML-ENTITIES', 'UTF-8');
+        $toText = mb_convert_encoding($toText, 'HTML-ENTITIES', 'UTF-8');
         $opcodes = FineDiff::getDiffOpcodes(
-                        $from_text,
-                        $to_text,
+                        $fromText,
+                        $toText,
                         FineDiff::$wordGranularity
         );
 
-        $html = FineDiff::renderDiffToHTMLFromOpcodes($from_text, $opcodes);
+        $html = FineDiff::renderDiffToHTMLFromOpcodes($fromText, $opcodes);
 
         return new DiffViewModel(
                 $html,
                 $current_version_date,
-                $old_version_date,
-                $content_id,
-                $history_id
+                $oldVersionData,
+                $contentId,
+                $historyId
         );
     }
 

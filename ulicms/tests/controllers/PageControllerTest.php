@@ -1,7 +1,7 @@
 <?php
 
 use UliCMS\Models\Content\Language;
-use UliCMS\Exceptions\NotImplementedException;
+use UliCMS\Models\Content\VCS;
 
 class PageControllerTest extends \PHPUnit\Framework\TestCase {
 
@@ -15,6 +15,8 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
         $user = $manager->getAllUsers("admin desc")[0];
         $user->setSecondaryGroups([]);
         $user->save();
+
+        //Database::deleteFrom("content", "slug like 'unit-test-'");
     }
 
     public function testGetPagesListViewNotSetReturnsDefault() {
@@ -266,8 +268,72 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
+    public function testEmptyTrash() {
+        $this->createDeletedPage();
+
+        $deleted = Content::getAllDatasets("content", "Page", "id", "deleted_at is not null");
+        $this->assertGreaterThanOrEqual(1, count($deleted));
+
+        $controller = new PageController();
+        $controller->_emptyTrash();
+
+        $deleted = Content::getAllDatasets("content", "Page", "id", "deleted_at is not null");
+        $this->assertCount(0, $deleted);
+    }
+
+    protected function createDeletedPage() {
+        $page = new Page();
+        $page->title = 'Unit Test ' . time();
+        $page->slug = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "Some Text";
+        $page->comments_enabled = true;
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->save();
+        $page->delete();
+    }
+
     public function testDiffContents() {
-        throw new NotImplementedException();
+        $testDiff = $this->createTestDiff();
+
+        $controller = new PageController();
+        $diff = $controller->_diffContents(
+                $testDiff->history_id,
+                $testDiff->content_id
+        );
+        
+        $this->assertEquals(
+                "<del>Old Text 1</del><ins>New Text</ins>", 
+                $diff->html
+                );
+        $this->assertEquals(19, strlen($diff->current_version_date));
+        $this->assertEquals(19, strlen($diff->old_version_date));
+        $this->assertGreaterThanOrEqual(1, $diff->content_id);
+        $this->assertGreaterThanOrEqual(1, $diff->history_id);
+    }
+
+    protected function createTestDiff(): object {
+        $page = new Page();
+        $page->title = 'Unit Test ' . time();
+        $page->slug = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "Old Text 1";
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->save();
+        
+        $manager = new UserManager();
+        
+        $user = $manager->getAllUsers()[0];
+        VCS::createRevision($page->getID(), "New Text", $user->getId());
+        $historyId = Database::getLastInsertID();
+
+        $result = new stdClass();
+        $result->content_id = $page->getID();
+        $result->history_id = $historyId;
+        
+        return $result;
     }
 
 }

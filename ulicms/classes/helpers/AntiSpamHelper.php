@@ -22,6 +22,10 @@ class AntiSpamHelper extends Helper {
             $country_blacklist = array_filter($country_blacklist);
         }
 
+        if (!filter_var($ip, FILTER_VALIDATE_IP)) {
+            return false;
+        }
+
         @$hostname = gethostbyaddr($ip);
 
         if (!$hostname) {
@@ -30,7 +34,7 @@ class AntiSpamHelper extends Helper {
 
         $hostname = strtolower($hostname);
 
-        for ($i = 0; $i < count($country_blacklist); $i ++) {
+        for ($i = 0; $i < count($country_blacklist); $i++) {
             $ending = "." . $country_blacklist[$i];
             if (endsWith($hostname, $ending)) {
                 return true;
@@ -90,7 +94,7 @@ class AntiSpamHelper extends Helper {
                             true
             );
         }
-        for ($i = 0; $i < count($words_blacklist); $i ++) {
+        for ($i = 0; $i < count($words_blacklist); $i++) {
             $word = strtolower($words_blacklist[$i]);
             if (strpos(strtolower($str), $word) !== false) {
                 return $words_blacklist[$i];
@@ -110,8 +114,8 @@ class AntiSpamHelper extends Helper {
         if (!$useragent and isset($_SERVER['HTTP_USER_AGENT'])) {
             $useragent = $_SERVER['HTTP_USER_AGENT'];
         }
-        
-        if(!$useragent){
+
+        if (!$useragent) {
             return false;
         }
         $bots = [
