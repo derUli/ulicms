@@ -50,7 +50,7 @@ class PageController extends Controller {
         $permissionChecker = new PermissionChecker(get_user_id());
         $model = TypeMapper::getModel(Request::getVar("type"));
 
-        $this->_fillAndSaveMode($model, $permissionChecker);
+        $this->_fillAndSaveModel($model, $permissionChecker);
 
         do_event("after_create_page");
 
@@ -79,7 +79,7 @@ class PageController extends Controller {
         $authorId = Request::getVar("author_id", $model->author_id, "int");
         $groupId = Request::getVar("group_id", $model->group_id, "int");
 
-        $this->_fillAndSaveMode($model, $permissionChecker, $authorId, $groupId);
+        $this->_fillAndSaveModel($model, $permissionChecker, $authorId, $groupId);
 
         do_event("after_edit_page");
 
@@ -95,7 +95,7 @@ class PageController extends Controller {
 
     // TODO: This method is too long
     // Split this in multiple methods
-    private function _fillAndSaveMode(
+    private function _fillAndSaveModel(
             $model,
             PermissionChecker $permissionChecker,
             ?int $userId = null,
