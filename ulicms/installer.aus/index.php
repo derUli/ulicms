@@ -1,7 +1,6 @@
 <?php
 
 session_start();
-setcookie(session_name(), session_id());
 error_reporting(E_ALL ^ E_NOTICE);
 
 date_default_timezone_set("Europe/Berlin");

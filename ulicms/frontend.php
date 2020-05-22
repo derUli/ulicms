@@ -14,8 +14,7 @@ global $connection;
 do_event("before_session_start");
 
 // initialize session
-@session_start();
-// $_COOKIE[session_name()] = session_id();
+UliCMS\Utils\Session\sessionStart();
 
 do_event("after_session_start");
 

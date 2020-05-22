@@ -6,8 +6,8 @@ class Domain2LanguageMappingTest extends \PHPUnit\Framework\TestCase {
 
     public function setUp() {
         $_SERVER = [];
-        
-                $this->originalMapping = Settings::get("domain_to_language");
+
+        $this->originalMapping = Settings::get("domain_to_language");
         $testData = file_get_contents(Path::resolve("ULICMS_ROOT/tests/fixtures/domain2language.txt"));
         Settings::set("domain_to_language", $testData);
     }
@@ -16,8 +16,7 @@ class Domain2LanguageMappingTest extends \PHPUnit\Framework\TestCase {
         chdir(ULICMS_ROOT);
 
         Settings::set("domain_to_language", $this->originalMapping);
-       
-            }
+    }
 
     public function testGetLanguageByDomain() {
         $this->assertEquals("de", getLanguageByDomain("www.domain.de"));

@@ -126,20 +126,25 @@ class File {
 
     public static function sureRemoveDir(
             string $dir, bool $deleteMe = true
-            ): void {
-        if(!is_dir($dir)){
+    ): void {
+        if (!is_dir($dir)) {
             return;
         }
-        
+
         if (!$dh = @opendir($dir)) {
             return;
         }
+
         while (false !== ($obj = readdir($dh))) {
             if ($obj == '.' || $obj == '..') {
                 continue;
             }
-            if (!@unlink($dir . '/' . $obj)) {
-                sureRemoveDir($dir . '/' . $obj, true);
+            $path = "$dir/$obj";
+            
+            if (is_dir($path)) {
+                sureRemoveDir($path, true);
+            } else if(is_file($path)){
+                unlink($path);
             }
         }
 

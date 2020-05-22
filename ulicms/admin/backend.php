@@ -6,9 +6,7 @@ require_once "../init.php";
 
 use UliCMS\Backend\BackendPageRenderer;
 
-@session_start();
-
-// $_COOKIE[session_name()] = session_id();
+UliCMS\Utils\Session\sessionStart();
 
 do_event("after_session_start");
 

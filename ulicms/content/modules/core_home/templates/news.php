@@ -1,7 +1,7 @@
 <?php
 
 if (!Settings::get("disable_ulicms_newsfeed")) {
-    @session_start();
+    UliCMS\Utils\Session\sessionStart();
     $rss = new DOMDocument();
     $feeds = [];
     $feeds["de"] = "https://www.ulicms.de/blog_rss.php?s=aktuelles&lang=de";
