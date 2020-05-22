@@ -301,7 +301,7 @@ class PageController extends Controller {
     }
 
     public function undeletePost(): void {
-        $page = Request::getVar("page");
+        $page = Request::getVar("page", null, "int");
         do_event("before_undelete_page");
         $content = ContentFactory::getByID($page);
         if ($content->id === null) {
@@ -319,7 +319,7 @@ class PageController extends Controller {
     }
 
     public function deletePost(): void {
-        $page = Request::getVar("page");
+        $page = Request::getVar("page", null, "int");
         do_event("before_delete_page");
         $content = ContentFactory::getByID($page);
         if ($content->id === null) {
