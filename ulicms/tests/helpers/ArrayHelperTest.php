@@ -122,17 +122,17 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
         )));
     }
 
-    public function testgetSingleWithEmptyArray() {
+    public function testGetSingleWithEmptyArray() {
         $this->assertNull(ArrayHelper::getSingle([]));
     }
 
-    public function testgetSingleWithOneItem() {
+    public function testGetSingleWithOneItem() {
         $this->assertEquals("foo", ArrayHelper::getSingle(array(
                     "foo"
         )));
     }
 
-    public function testgetSingleWithTwoItems() {
+    public function testGetSingleWithTwoItems() {
         $this->assertNull(ArrayHelper::getSingle(array(
                     "foo",
                     "bar"

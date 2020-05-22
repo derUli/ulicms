@@ -9,8 +9,8 @@ add_translation("TOP_PAGES", "Top pages");
 add_translation("LAST_CHANGES", "Last changes");
 
 add_translation("SITE_ONLINE_SINCE", "Site online since");
-add_translation("PAGES_COUNT", "Count of page");
-add_translation("REGISTERED_USERS_COUNT", "Amount of users");
+add_translation("PAGES_COUNT", "Count of pages");
+add_translation("REGISTERED_USERS_COUNT", "Amount of Users");
 add_translation("BLOCKED_SPAM_MAILS", "refused spam messages");
 add_translation("GUESTBOOK_ENTRIES", "guestbook entries");
 

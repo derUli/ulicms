@@ -34,7 +34,7 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase {
         Settings::set("comments_must_be_approved", "1");
         $this->assertEquals(
                 CommentStatus::PENDING,
-                $controller->getDefaultStatus()
+                $controller->_getDefaultStatus()
         );
     }
 
@@ -44,7 +44,7 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase {
         $controller = new CommentsController();
         $this->assertEquals(
                 CommentStatus::PUBLISHED,
-                $controller->getDefaultStatus()
+                $controller->_getDefaultStatus()
         );
     }
 
@@ -52,21 +52,21 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase {
         $controller = new CommentsController();
         $this->assertCount(
                 0,
-                $controller->getResults(
+                $controller->_getResults(
                         CommentStatus::SPAM,
                         PHP_INT_MAX
                 )
         );
         $this->assertCount(
                 0,
-                $controller->getResults(
+                $controller->_getResults(
                         null,
                         PHP_INT_MAX
                 )
         );
         $this->assertCount(
                 0,
-                $controller->getResults(
+                $controller->_getResults(
                         null,
                         null,
                         null
@@ -76,9 +76,9 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetDefaultLimit() {
         Settings::set("comments_default_limit", "123");
-        
+
         $controller = new CommentsController();
-        $this->assertEquals(123, $controller->getDefaultLimit());
+        $this->assertEquals(123, $controller->_getDefaultLimit());
     }
 
 }

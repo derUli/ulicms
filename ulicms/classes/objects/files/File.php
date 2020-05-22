@@ -127,6 +127,10 @@ class File {
     public static function sureRemoveDir(
             string $dir, bool $deleteMe = true
             ): void {
+        if(!is_dir($dir)){
+            return;
+        }
+        
         if (!$dh = @opendir($dir)) {
             return;
         }

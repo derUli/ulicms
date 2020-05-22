@@ -9,6 +9,13 @@ class RoboPackageTest extends RoboBaseTest {
         $this->runRoboCommand(["modules:sync"]);
     }
 
+    public function tearDown() {
+        $moduleDir = Path::resolve("ULICMS_ROOT/content/modules/hello_world");
+        if (is_dir($moduleDir)) {
+            sureRemoveDir($moduleDir);
+        }
+    }
+
     public function testPackagesList() {
         $output = $this->runRoboCommand(["packages:list"]);
 
@@ -42,6 +49,75 @@ class RoboPackageTest extends RoboBaseTest {
                 ["package:examine", "../magic-1.0.sin"]
         );
         $this->assertEquals("File magic-1.0.sin not found!", $output);
+    }
+
+    public function testPackagesInstallReturnsError() {
+        $output = $this->runRoboCommand(
+                ["package:install", "../magic-1.0.sin"]
+        );
+        $this->assertEquals("Can't open ../magic-1.0.sin. File doesn't exists.", $output);
+    }
+
+    public function testPackageInstallWithSinFile() {
+        $packageFile = Path::resolve(
+                        "ULICMS_ROOT/tests/fixtures/hello_world-1.0.sin"
+        );
+        $installOutput = $this->runRoboCommand(
+                ["package:install", $packageFile]
+        );
+        $this->assertEquals(
+                "Package hello_world-1.0.sin successfully installed",
+                $installOutput
+        );
+
+        Vars::delete("allModules");
+        $this->assertContains("hello_world", getAllModules());
+
+        $removeOutput = $this->runRoboCommand(
+                ["modules:remove", "hello_world"]
+        );
+
+        Vars::delete("allModules");
+        $this->assertEquals("Package hello_world removed.", $removeOutput);
+        $this->assertNotContains("hello_world", getAllModules());
+    }
+
+    public function testPackageInstallWithTarGzFile() {
+        $packageFile = Path::resolve(
+                        "ULICMS_ROOT/tests/fixtures/hello_world-1.0.tar.gz"
+        );
+        $installOutput = $this->runRoboCommand(
+                ["package:install", $packageFile]
+        );
+        $this->assertEquals(
+                "Package hello_world-1.0.tar.gz successfully installed",
+                $installOutput
+        );
+
+        Vars::delete("allModules");
+        $this->assertContains("hello_world", getAllModules());
+    }
+
+    public function testPackageInstallReturnsError() {
+        $packageFile = Path::resolve(
+                        "ULICMS_ROOT/tests/fixtures/error-1.0.sin"
+        );
+        $output = $this->runRoboCommand(
+                ["package:install", $packageFile]
+        );
+
+        $this->assertStringContainsString(
+                "Installation of package error-1.0.sin failed.",
+                $output
+        );
+        $this->assertStringContainsString(
+                "Depedency foobar is not installed.",
+                $output
+        );
+        $this->assertStringContainsString(
+                "The package is not with your UliCMS Version compatible.",
+                $output
+        );
     }
 
 }

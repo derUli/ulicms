@@ -21,7 +21,7 @@ class CoreUpgradeController extends Controller {
 		$this->checkURL = $url;
 	}
 
-	public function getJSON(): ?string {
+	public function getJSON(): ?object {
 		$data = file_get_contents_wrapper($this->getCheckURL(), true);
 		if (!$data) {
 			return null;

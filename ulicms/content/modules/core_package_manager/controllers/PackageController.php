@@ -28,7 +28,7 @@ class PackageController extends MainClass {
 		$model->manufacturerUrl = getModuleMeta($name, "manufacturer_url");
 		$model->source = getModuleMeta($name, "source");
 		$model->source_url = $model->source === "extend" ?
-				$this->getPackageDownloadUrl($model->name) : null;
+				$this->_getPackageDownloadUrl($model->name) : null;
 
 		$model->customPermissions = is_array(
 						getModuleMeta($name, "custom_acl")
@@ -43,7 +43,7 @@ class PackageController extends MainClass {
 		HTMLResult($html);
 	}
 
-	public function getPackageDownloadUrl(string $package): ?string {
+	public function _getPackageDownloadUrl(string $package): ?string {
 		$url = "https://extend.ulicms.de/{$package}.html";
 		return url_exists($url) ? $url : null;
 	}
@@ -61,7 +61,7 @@ class PackageController extends MainClass {
 		$model->manufacturerUrl = getThemeMeta($name, "manufacturer_url");
 		$model->source = getThemeMeta($name, "source");
 		$model->source_url = $model->source === "extend" ?
-				$this->getPackageDownloadUrl($model->name) : null;
+				$this->_getPackageDownloadUrl($model->name) : null;
 
 		$model->disableFunctions = is_array(
 						getThemeMeta($name, "disable_functions")

@@ -7,9 +7,9 @@
     cacheResult="false"
     cacheTokens="false"
     colors="false"
-    convertErrorsToExceptions="false"
-    convertNoticesToExceptions="true"
-    convertWarningsToExceptions="true"
+    convertErrorsToExceptions="true"
+    convertNoticesToExceptions="false"
+    convertWarningsToExceptions="false"
     forceCoversAnnotation="false"
     processIsolation="false"
     stopOnError="false"
@@ -52,10 +52,13 @@
                 <directory>classes/exceptions</directory>
             </exclude>
             <exclude>
-                <file>classes/creators/load.php</file>
+                <file>classes/renderers/load.php</file>
             </exclude>
             <exclude>
                 <file>classes/objects/backend/load.php</file>
+            </exclude>
+            <exclude>
+                <file>classes/objects/content/types/fields/load.php</file>
             </exclude>
             <exclude>
                 <file>classes/objects/registry/load.php</file>
@@ -111,7 +114,7 @@
             <exclude>
                 <directory>content/better_cron</directory>
             </exclude>
-              <exclude>
+            <exclude>
                 <directory>content/modules.aus</directory>
             </exclude>
             <exclude>
@@ -129,7 +132,7 @@
             <exclude>
                 <directory>content/modules/core_help/lang</directory>
             </exclude>
-             <exclude>
+            <exclude>
                 <directory>content/modules/better_cron/templates</directory>
             </exclude>
             <exclude>
@@ -161,7 +164,10 @@
                 <directory>content/modules/core_content/lang</directory>
             </exclude>
             <exclude>
-                <directory>lang/</directory>
+                <directory>content/modules/core_info/lang</directory>
+            </exclude>
+            <exclude>
+                <directory>lang</directory>
             </exclude>
             <exclude>
                 <directory>content/modules/core_package_manager/lang</directory>

@@ -30,7 +30,7 @@ if (!Settings::get("disable_ulicms_newsfeed")) {
 
         $limit = 5;
 
-        header("Content-Type: text/html; charset=UTF-8");
+        send_header("Content-Type: text/html; charset=UTF-8");
         for ($x = 0; $x < $limit; $x ++) {
             $title = str_replace(' & ', ' &amp; ', $feed[$x]['title']);
             $link = $feed[$x]['link'];

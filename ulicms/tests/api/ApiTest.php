@@ -9,8 +9,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
 
     public function setUp() {
         $this->cleanUp();
-        @session_start();
-
+        
         $moduleManager = new ModuleManager();
         $moduleManager->sync();
 
@@ -38,8 +37,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         Database::query("delete from {prefix}content where title like 'Unit Test%'", true);
         $this->cleanUp();
         Database::query("delete from {prefix}users where username like 'testuser-%'", true);
-        @session_destroy();
-
+        
         $user = new User(
                 intval($this->initialUser->id)
         );
@@ -234,8 +232,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetHtmlEditorNotLoggedInReturnsCkeditor() {
         if (session_id()) {
-            @session_destroy();
-        }
+                    }
         $this->assertEquals("ckeditor", get_html_editor());
     }
 
@@ -248,11 +245,9 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $user->setHTMLEditor("ckeditor");
         $user->save();
 
-        @session_start();
-        register_session(getUserByName(("testuser-1")), false);
+                register_session(getUserByName(("testuser-1")), false);
         $this->assertEquals("ckeditor", get_html_editor());
-        @session_destroy();
-    }
+            }
 
     public function testGetHtmlEditorReturnsCodeMirror() {
         $user = new User();
@@ -263,11 +258,9 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $user->setHTMLEditor("codemirror");
         $user->save();
 
-        @session_start();
-        register_session(getUserByName(("testuser-2")), false);
+                register_session(getUserByName(("testuser-2")), false);
         $this->assertEquals("codemirror", get_html_editor());
-        @session_destroy();
-    }
+            }
 
     public function testIdefine() {
         $this->assertFalse(defined("test_hello"));

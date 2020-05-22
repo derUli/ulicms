@@ -31,8 +31,7 @@ class CacheUtilTest extends \PHPUnit\Framework\TestCase {
         $this->cacheDisabledOriginal = Settings::get("cache_disabled");
         $this->cachePeriodOriginal = Settings::get("cache_period");
         Settings::delete("cache_disabled");
-        @session_start();
-    }
+            }
 
     public function tearDown() {
         if ($this->cacheDisabledOriginal) {
@@ -40,8 +39,7 @@ class CacheUtilTest extends \PHPUnit\Framework\TestCase {
         } else {
             Settings::delete("cache_disabled");
         }
-       @session_destroy();
-        Settings::set("cache_period", $this->cachePeriodOriginal);
+               Settings::set("cache_period", $this->cachePeriodOriginal);
     }
 
     public function testIsCacheEnabled() {

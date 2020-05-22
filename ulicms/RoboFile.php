@@ -5,8 +5,8 @@ declare(strict_types=1);
 use UliCMS\Packages\PatchManager;
 use UliCMS\Services\Connectors\eXtend\AvailablePackageVersionMatcher;
 use UliCMS\Utils\CacheUtil;
-
 use \Robo\Tasks;
+
 /**
  * This is project's console commands configuration for Robo task runner.
  *
@@ -16,6 +16,7 @@ class RoboFile extends Tasks {
 
     public function __construct() {
         require_once dirname(__FILE__) . "/init.php";
+        require_once getLanguageFilePath("en");
     }
 
     /**
@@ -156,7 +157,7 @@ class RoboFile extends Tasks {
      */
     public function packageInstall($file): void {
         if (!is_file($file)) {
-            $this->writeln("Can't open $file. File doesn't exists");
+            $this->writeln("Can't open $file. File doesn't exists.");
             return;
         }
 
@@ -175,7 +176,7 @@ class RoboFile extends Tasks {
             return;
         } else {
             $this->writeln('Installation of package '
-                    . basename($file) . " failed");
+                    . basename($file) . " failed.");
         }
         if ($pkg instanceof SinPackageInstaller) {
             foreach ($pkg->getErrors() as $error) {

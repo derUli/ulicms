@@ -44,10 +44,10 @@ class JsonRenderer {
         $data->meta_keywords = get_meta_keywords();
 
         try{
-        $page = ContentFactory::getBySlugAndLanguage(
-                        get_slug(),
-                        getCurrentLanguage(true)
-        );
+            $page = ContentFactory::getBySlugAndLanguage(
+                            get_slug(),
+                            getCurrentLanguage(true)
+            );
         } catch(DatasetNotFoundException $e){
             $page = new Page();
         }

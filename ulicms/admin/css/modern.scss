@@ -282,7 +282,7 @@ button {
     padding: 10px;
 }
 
-input:not([type="submit"]):not([type="reset"]):not([type="button"]):not([type="radio"]):not([type="checkbox"]),
+input:not([type="submit"]):not([type="reset"]):not([type="button"]):not([type="radio"]):not([type="checkbox"]):not([type="image"]),
 select, textarea {
     width: 100%;
 }

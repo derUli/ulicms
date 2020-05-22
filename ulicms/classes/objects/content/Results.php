@@ -15,8 +15,8 @@ function JSONResult($data, int $status = 200, $compact = true): void {
             json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
     // get string size in Byte
     $size = getStringLengthInBytes($json);
-    header('Content-Type: application/json');
-    header("Content-length: $size");
+    send_header('Content-Type: application/json');
+    send_header("Content-length: $size");
     echo $json;
     exit();
 }
@@ -24,8 +24,8 @@ function JSONResult($data, int $status = 200, $compact = true): void {
 function RawJSONResult(string $data, int $status = 200): void {
     Response::sendStatusHeader($status);
     $size = getStringLengthInBytes($data);
-    header('Content-Type: application/json');
-    header("Content-length: $size");
+    send_header('Content-Type: application/json');
+    send_header("Content-length: $size");
     echo $data;
     exit();
 }
@@ -38,8 +38,8 @@ function HTMLResult(
     Response::sendStatusHeader($status);
     $data = optimizeHtml($data, $optimizationLevel);
     $size = getStringLengthInBytes($data);
-    header('Content-Type: text/html; charset=UTF-8');
-    header("Content-length: $size");
+    send_header('Content-Type: text/html; charset=UTF-8');
+    send_header("Content-length: $size");
     echo $data;
     exit();
 }
@@ -47,8 +47,8 @@ function HTMLResult(
 function TextResult(string $data, int $status = 200): void {
     Response::sendStatusHeader($status);
     $size = getStringLengthInBytes($data);
-    header('Content-Type: text/plain; charset=utf-8');
-    header("Content-length: $size");
+    send_header('Content-Type: text/plain; charset=utf-8');
+    send_header("Content-length: $size");
     die($data);
 }
 
@@ -56,9 +56,9 @@ function Result(string $data, int $status = 200, ?string $type = null): void {
     Response::sendStatusHeader($status);
     $size = getStringLengthInBytes($data);
     if ($type) {
-        header("Content-Type: $type");
+        send_header("Content-Type: $type");
     }
-    header("Content-length: $size");
+    send_header("Content-length: $size");
     die($data);
 }
 
@@ -73,7 +73,7 @@ function HTTPStatusCodeResult(
         $header = $_SERVER ["SERVER_PROTOCOL"] . " " .
                 intval($status) . " " . $description;
     }
-    header($header);
+    send_header($header);
     exit();
 }
 
@@ -83,10 +83,10 @@ function ExceptionResult(string $message, int $status = 500): void {
 
     $size = getStringLengthInBytes($content);
     if (!TestHelper::isRunningPHPUnit()) {
-        header($_SERVER ["SERVER_PROTOCOL"] . " "
+        send_header($_SERVER ["SERVER_PROTOCOL"] . " "
                 . getStatusCodeByNumber(intval($status)));
-        header("Content-Type: text/html; charset=UTF-8");
-        header("Content-length: $size");
+        send_header("Content-Type: text/html; charset=UTF-8");
+        send_header("Content-length: $size");
     }
 
     echo $content;

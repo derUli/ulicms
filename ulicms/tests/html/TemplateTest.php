@@ -252,7 +252,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetLanguageSelection() {
-        $html = Template::getLanguageSelection();
+        $html = Template::_getLanguageSelection();
         $this->assertTrue(str_contains("<ul class='language_selection'>",
                         $html));
 
@@ -271,7 +271,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
 
         Settings::set("domain_to_language",
                 implode("\n", $mappingLines));
-        $html = Template::getLanguageSelection();
+        $html = Template::_getLanguageSelection();
         $this->assertTrue(str_contains("<ul class='language_selection'>",
                         $html));
 

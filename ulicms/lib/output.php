@@ -14,17 +14,12 @@ function fcflush(): void {
     if ($output_handler === null) {
         $output_handler = @ini_get('output_handler');
     }
-    if ($output_handler == 'ob_gzhandler') {
-        // forcing a flush with this is very bad
-        return;
-    }
-    flush();
-    if (function_exists('ob_flush') and function_exists('ob_get_length')
-            and ob_get_length() !== false) {
-        ob_flush();
-    } else if (function_exists('ob_end_flush') and function_exists('ob_start')
-            and function_exists('ob_get_length') and ob_get_length() !== FALSE) {
-        @ob_end_flush();
-        @ob_start();
+    if ($output_handler !== 'ob_gzhandler') {
+
+
+        flush();
+        if (ob_get_length() !== false) {
+            ob_flush();
+        }
     }
 }

@@ -7,13 +7,13 @@ class PackageControllerTest extends \PHPUnit\Framework\TestCase {
 
 		$this->assertEquals(
 				"https://extend.ulicms.de/fortune2.html",
-				$controller->getPackageDownloadUrl("fortune2")
+				$controller->_getPackageDownloadUrl("fortune2")
 		);
 
 
 		$this->assertEquals(
 				"https://extend.ulicms.de/mail_queue.html",
-				$controller->getPackageDownloadUrl("mail_queue")
+				$controller->_getPackageDownloadUrl("mail_queue")
 		);
 	}
 
@@ -21,8 +21,8 @@ class PackageControllerTest extends \PHPUnit\Framework\TestCase {
 
 		$controller = ControllerRegistry::get(PackageController::class);
 
-		$this->assertNull($controller->getPackageDownloadUrl("gibts_nicht"));
-		$this->assertNull($controller->getPackageDownloadUrl(""));
+		$this->assertNull($controller->_getPackageDownloadUrl("gibts_nicht"));
+		$this->assertNull($controller->_getPackageDownloadUrl(""));
 	}
 
 }

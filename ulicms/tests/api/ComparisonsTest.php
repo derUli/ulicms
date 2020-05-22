@@ -6,16 +6,14 @@ use UliCMS\Exceptions\DatasetNotFoundException;
 class ComparisonsTest extends \PHPUnit\Framework\TestCase {
 
     public function setUp() {
-        @session_start();
-        
+                
         $_SERVER = [];
         $_REQUEST = [];
     }
 
     public function tearDown() {
         Database::query("delete from {prefix}users where username like 'testuser-%'", true);
-        @session_destroy();
-        
+                
         $_SERVER = [];
         $_REQUEST = [];
 

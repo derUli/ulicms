@@ -21,8 +21,7 @@ class HtmlFieldTest extends \PHPUnit\Framework\TestCase {
 
     public function tearDown() {
         $this->testUser->delete();
-        @session_destroy();
-    }
+            }
 
     public function testRender() {
 

@@ -29,7 +29,7 @@ if ($permissionChecker->hasPermission("pages")) {
     ?>
 
     <div id="page-list">
-        <?php if ($controller->getPagesListView() === "default") { ?>
+        <?php if ($controller->_getPagesListView() === "default") { ?>
             <div class="row">
                 <div class="col-xs-6">
                     <a href="index.php?action=pages_new" class="btn btn-primary"><i
@@ -40,7 +40,7 @@ if ($permissionChecker->hasPermission("pages")) {
                             class="fa fa-trash"></i> <?php translate("recycle_bin"); ?></a>
                 </div>
             </div>
-        <?php } else if ($controller->getPagesListView() === "recycle_bin") {
+        <?php } else if ($controller->_getPagesListView() === "recycle_bin") {
             ?>
             <div class="row">
                 <div class="col-xs-6">
@@ -85,7 +85,7 @@ if ($permissionChecker->hasPermission("pages")) {
                         </td>
                         <td class="no-sort text-center"><?php
                             translate(
-                                    $controller->getPagesListView() === "default" ? "delete" : "restore"
+                                    $controller->_getPagesListView() === "default" ? "delete" : "restore"
                             );
                             ?>
                         </td>

@@ -20,22 +20,28 @@ class PageController extends Controller {
 
     const MODULE_NAME = "core_content";
 
-    public function getPagesListView(): string {
+    public function _getPagesListView(): string {
         return $_SESSION["pages_list_view"] ?? "default";
     }
 
     public function recycleBin(): void {
-        $_SESSION["pages_list_view"] = "recycle_bin";
-
+        $this->_recycleBin();
         $url = ModuleHelper::buildActionURL("pages");
         Request::redirect($url);
     }
 
-    public function pages(): void {
-        $_SESSION["pages_list_view"] = "default";
+    public function _recycleBin(): void {
+        $_SESSION["pages_list_view"] = "recycle_bin";
+    }
 
+    public function pages(): void {
+        $this->_pages();
         $url = ModuleHelper::buildActionURL("pages");
         Request::redirect($url);
+    }
+
+    public function _pages(): void {
+        $_SESSION["pages_list_view"] = "default";
     }
 
     public function createPost(): void {
@@ -44,7 +50,7 @@ class PageController extends Controller {
         $permissionChecker = new PermissionChecker(get_user_id());
         $model = TypeMapper::getModel(Request::getVar("type"));
 
-        $this->fillAndSaveModel($model, $permissionChecker);
+        $this->_fillAndSaveMode($model, $permissionChecker);
 
         do_event("after_create_page");
 
@@ -73,7 +79,7 @@ class PageController extends Controller {
         $authorId = Request::getVar("author_id", $model->author_id, "int");
         $groupId = Request::getVar("group_id", $model->group_id, "int");
 
-        $this->fillAndSaveModel($model, $permissionChecker, $authorId, $groupId);
+        $this->_fillAndSaveMode($model, $permissionChecker, $authorId, $groupId);
 
         do_event("after_edit_page");
 
@@ -89,7 +95,7 @@ class PageController extends Controller {
 
     // TODO: This method is too long
     // Split this in multiple methods
-    private function fillAndSaveModel(
+    private function _fillAndSaveMode(
             $model,
             PermissionChecker $permissionChecker,
             ?int $userId = null,
@@ -195,10 +201,6 @@ class PageController extends Controller {
                         "text_position",
                         "before",
                         "str"
-        );
-
-        $pages_approve_own = $permissionChecker->hasPermission(
-                "pages_approve_own"
         );
 
         if ($model instanceof Image_Page) {
@@ -364,15 +366,18 @@ class PageController extends Controller {
     }
 
     public function getContentTypes(): void {
-        $json = json_encode(
-                DefaultContentTypes::getAll(),
-                JSON_UNESCAPED_SLASHES
-        );
-
+        $json = $this->_getContentTypes();
         RawJSONResult($json);
     }
 
-    public function diffContents(
+    public function _getContentTypes(): string {
+        return json_encode(
+                DefaultContentTypes::getAll(),
+                JSON_UNESCAPED_SLASHES
+        );
+    }
+
+    public function _diffContents(
             ?int $history_id = null,
             ?int $content_id = null
     ): DiffViewModel {
@@ -413,20 +418,26 @@ class PageController extends Controller {
     }
 
     public function toggleShowPositions(): void {
+        $this->_toggleFilters();
+        HTTPStatusCodeResult(HttpStatusCode::OK);
+    }
+
+    public function _toggleShowPositions(): bool {
         $settingsName = "user/" . get_user_id() . "/show_positions";
         if (Settings::get($settingsName)) {
             Settings::delete($settingsName);
+            return false;
         } else {
             Settings::set($settingsName, "1");
+            return true;
         }
-        HTTPStatusCodeResult(HttpStatusCode::OK);
     }
 
     public function nextFreeSlug(): void {
         $originalSlug = $_REQUEST["slug"];
         $slug = $originalSlug;
 
-        if ($this->checkIfSlugIsFree(
+        if ($this->_checkIfSlugIsFree(
                         $slug,
                         $_REQUEST["language"],
                         isset($_REQUEST["id"]) ?
@@ -437,7 +448,7 @@ class PageController extends Controller {
             $counter = 1;
             while (true) {
                 $slug = "{$originalSlug}-$counter";
-                if ($this->checkIfSlugIsFree(
+                if ($this->_checkIfSlugIsFree(
                                 $slug,
                                 $_REQUEST["language"],
                                 isset($_REQUEST["id"]) ?
@@ -453,8 +464,7 @@ class PageController extends Controller {
     // returns true if this slug is unused in a language
     // if $id is set the content with the id will be excluded from this check
     // to prevent the slug field to be marked as error when editing a page
-
-    public function checkIfSlugIsFree(
+    public function _checkIfSlugIsFree(
             string $slug,
             string $language,
             int $id
@@ -490,8 +500,8 @@ class PageController extends Controller {
         foreach ($pages as $key => $page) {
             ?>
             <option value="<?php
-            echo $page["id"];
-            ?>" <?php
+                    echo $page["id"];
+                    ?>" <?php
                     if ($page["id"] == $parent_id) {
                         echo "selected";
                     }
@@ -503,7 +513,7 @@ class PageController extends Controller {
                 <?php if (!Request::getVar("no_id")) {
                     ?>
                     (ID: <?php echo $page["id"]; ?>)
-                <?php } ?>
+            <?php } ?>
             </option>
             <?php
         }
@@ -529,7 +539,7 @@ class PageController extends Controller {
                 $draw,
                 $search,
                 $filters,
-                $this->getPagesListView(),
+                $this->_getPagesListView(),
                 $order
         );
 
@@ -568,22 +578,30 @@ class PageController extends Controller {
     // this is used for the Link feature of the CKEditor
     // The user can select an internal page from a dropdown list for linking
     public function getCKEditorLinkList(): void {
-        $data = getAllPagesWithTitle();
+        $data = $this->_getCKEditorLinkList();
         JSONResult($data, HttpStatusCode::OK, true);
+    }
+    
+    public function _getCKEditorLinkList(): array {
+        return getAllPagesWithTitle();
     }
 
     public function toggleFilters(): void {
+        JSONResult($this->toggleFilters());
+    }
+
+    public function _toggleFilters(): bool {
         $settingsName = "user/" . get_user_id() . "/show_filters";
         if (Settings::get($settingsName)) {
             Settings::delete($settingsName);
-            JsonResult(false);
+            return false;
         } else {
             Settings::set($settingsName, "1");
-            JsonResult(true);
+            return true;
         }
     }
 
-    protected function getGroupAssignedLanguages(): array {
+    protected function _getGroupAssignedLanguages(): array {
         $permissionChecker = new PermissionChecker(get_user_id());
         return array_map(
                 function($lang) {
@@ -592,12 +610,12 @@ class PageController extends Controller {
                 $permissionChecker->getLanguages());
     }
 
-    public function getLanguageSelection(): array {
+    public function _getLanguageSelection(): array {
         $languages = getAllUsedLanguages();
 
         $selectItems = [];
 
-        $userLanguages = $this->getGroupAssignedLanguages();
+        $userLanguages = $this->_getGroupAssignedLanguages();
 
         $selectItems[] = new ListItem(null, "[" . get_translation("all") . "]");
         foreach ($languages as $language) {
@@ -615,7 +633,7 @@ class PageController extends Controller {
         return $selectItems;
     }
 
-    public function getTypeSelection(): array {
+    public function _getTypeSelection(): array {
         $types = get_used_post_types();
         $selectItems = [];
         $selectItems[] = new ListItem(null, "[" . get_translation("all") . "]");
@@ -630,7 +648,7 @@ class PageController extends Controller {
         return $selectItems;
     }
 
-    public function getMenuSelection(): array {
+    public function _getMenuSelection(): array {
         $menus = get_all_used_menus();
         $selectItems = [];
         $selectItems[] = new ListItem(null, "[" . get_translation("all") . "]");
@@ -645,7 +663,7 @@ class PageController extends Controller {
         return $selectItems;
     }
 
-    public function getCategorySelection(): array {
+    public function _getCategorySelection(): array {
         $selectItems = [];
         $selectItems[] = new ListItem(null, "[" . get_translation("all") . "]");
 
@@ -664,7 +682,7 @@ class PageController extends Controller {
         return $selectItems;
     }
 
-    public function getParentIds(
+    public function _getParentIds(
             ?string $language = null,
             ?string $menu = null
     ): array {
@@ -679,7 +697,7 @@ class PageController extends Controller {
         }
 
 
-        $groupLanguages = $this->getGroupAssignedLanguages();
+        $groupLanguages = $this->_getGroupAssignedLanguages();
         if (count($groupLanguages)) {
             $groupLanguages = array_map(function($lang) {
                 return "'" . Database::escapeValue($lang) . "'";
@@ -705,7 +723,7 @@ class PageController extends Controller {
         $language = Request::getVar("language", null, "str");
         $menu = Request::getVar("menu", null, "str");
 
-        $parentIds = $this->getParentIds($language, $menu);
+        $parentIds = $this->_getParentIds($language, $menu);
 
         $selectItems = [];
         $selectItems[] = new ListItem(null, "[" . get_translation("all") . "]");
@@ -720,7 +738,7 @@ class PageController extends Controller {
         HTMLResult(implode("", $selectItems));
     }
 
-    public function getBooleanSelection(): array {
+    public function _getBooleanSelection(): array {
         return [
             new ListItem(null, "[" . get_translation("all") . "]"),
             new ListItem("1", get_translation("yes")),
