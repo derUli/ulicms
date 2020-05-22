@@ -99,7 +99,18 @@ class BrowserCompatiblityCheckerTest extends \PHPUnit\Framework\TestCase {
                 "w3m",
                 $checker->getUnsupportedBrowserName()
         );
+    } 
+    public function testDillo() {
+        $checker = new BrowserCompatiblityChecker(
+                "Dillo/3.0.5	"
+        );
+        $this->assertFalse($checker->isCompatible());
+        $this->assertEquals(
+                "Dillo",
+                $checker->getUnsupportedBrowserName()
+        );
     }
+
 
     public function testOpera() {
         $checker = new BrowserCompatiblityChecker(

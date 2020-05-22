@@ -359,9 +359,9 @@ class PageController extends Controller {
         $this->_emptyTrash();
         Request::redirect(ModuleHelper::buildActionURL("pages"));
     }
-    
+
     public function _emptyTrash(): void {
-           do_event("before_empty_trash");
+        do_event("before_empty_trash");
         Content::emptyTrash();
         do_event("after_empty_trash");
 
@@ -500,8 +500,8 @@ class PageController extends Controller {
         foreach ($pages as $key => $page) {
             ?>
             <option value="<?php
-                    echo $page["id"];
-                    ?>" <?php
+            echo $page["id"];
+            ?>" <?php
                     if ($page["id"] == $parent_id) {
                         echo "selected";
                     }
@@ -513,7 +513,7 @@ class PageController extends Controller {
                 <?php if (!Request::getVar("no_id")) {
                     ?>
                     (ID: <?php echo $page["id"]; ?>)
-            <?php } ?>
+                <?php } ?>
             </option>
             <?php
         }
@@ -548,6 +548,13 @@ class PageController extends Controller {
     }
 
     protected function validateInput(): void {
+        $validationErrors = $this->_validateInput();
+        if ($validationErrors) {
+            ExceptionResult($validationErrors, HttpStatusCode::UNPROCESSABLE_ENTITY);
+        }
+    }
+
+    public function _validateInput(): ?string {
         $validator = new Validator();
         $validation = $validator->make($_POST + $_FILES, [
             'slug' => 'required',
@@ -561,8 +568,9 @@ class PageController extends Controller {
         $errors = $validation->errors()->all('<li>:message</li>');
 
         // Fix for security issue CVE-2019-11398
-        if (stringContainsHtml($_POST["slug"])) {
-            ExceptionResult(get_translation("no_html_allowed"));
+        if (Request::hasVar("slug") &&
+                stringContainsHtml(Request::getVar("slug"))) {
+            return get_translation("no_html_allowed");
         }
 
         if ($validation->fails()) {
@@ -571,8 +579,9 @@ class PageController extends Controller {
                 $html .= $error;
             }
             $html .= '</ul>';
-            ExceptionResult($html, HttpStatusCode::UNPROCESSABLE_ENTITY);
+            return $html;
         }
+        return null;
     }
 
     // this is used for the Link feature of the CKEditor
@@ -581,7 +590,7 @@ class PageController extends Controller {
         $data = $this->_getCKEditorLinkList();
         JSONResult($data, HttpStatusCode::OK, true);
     }
-    
+
     public function _getCKEditorLinkList(): array {
         return getAllPagesWithTitle();
     }

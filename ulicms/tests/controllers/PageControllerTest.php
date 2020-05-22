@@ -6,10 +6,15 @@ use UliCMS\Models\Content\VCS;
 class PageControllerTest extends \PHPUnit\Framework\TestCase {
 
     public function setUp() {
+        require_once getLanguageFilePath("en");
+        Translation::loadAllModuleLanguageFiles("en");
+
         $_SESSION = [];
+        $_POST = [];
     }
 
     public function tearDown() {
+        $_POST = [];
         $_SESSION = [];
         $manager = new UserManager();
         $user = $manager->getAllUsers("admin desc")[0];
@@ -302,11 +307,11 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
                 $testDiff->history_id,
                 $testDiff->content_id
         );
-        
+
         $this->assertEquals(
-                "<del>Old Text 1</del><ins>New Text</ins>", 
+                "<del>Old Text 1</del><ins>New Text</ins>",
                 $diff->html
-                );
+        );
         $this->assertEquals(19, strlen($diff->current_version_date));
         $this->assertEquals(19, strlen($diff->old_version_date));
         $this->assertGreaterThanOrEqual(1, $diff->content_id);
@@ -322,9 +327,9 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
         $page->author_id = 1;
         $page->group_id = 1;
         $page->save();
-        
+
         $manager = new UserManager();
-        
+
         $user = $manager->getAllUsers()[0];
         VCS::createRevision($page->getID(), "New Text", $user->getId());
         $historyId = Database::getLastInsertID();
@@ -332,8 +337,41 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
         $result = new stdClass();
         $result->content_id = $page->getID();
         $result->history_id = $historyId;
-        
+
         return $result;
+    }
+
+    public function testValidateInputReturnsErrors() {
+        $controller = new PageController();
+        $errors = $controller->_validateInput();
+
+        $this->assertStringContainsString("<ul>"
+                . "<li>The Slug is required</li>"
+                . "<li>The Title is required</li>"
+                . "<li>The Language is required</li>"
+                . "<li>The Position is required</li>"
+                . "<li>The Menu is required</li>"
+                . "</ul>", $errors);
+    }
+
+    public function testValidateInputSlugXSS() {
+        $_POST["slug"] = "<script>alert(\"xss\")</script";
+
+        $controller = new PageController();
+        $errors = $controller->_validateInput();
+        $this->assertEquals("String must not contain HTML.", $errors);
+    }
+
+    public function testValidateInputOk() {
+        $_POST["slug"] = "foo-bar";
+        $_POST["title"] = "Foobar";
+        $_POST["position"] = "123";
+        $_POST["menu"] = "top";
+        $_POST["language"] = "de";
+
+        $controller = new PageController();
+        $errors = $controller->_validateInput();
+        $this->assertNull($errors);
     }
 
 }

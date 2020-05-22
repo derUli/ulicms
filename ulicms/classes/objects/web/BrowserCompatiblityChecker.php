@@ -26,6 +26,8 @@ class BrowserCompatiblityChecker {
             $this->unsupportedBrowserName = "Links";
         } else if ($this->isW3M()) {
             $this->unsupportedBrowserName = "w3m";
+        } else if ($this->isDillo()) {
+            $this->unsupportedBrowserName = "Dillo";
         }
 
         return empty($this->unsupportedBrowserName);
@@ -47,18 +49,22 @@ class BrowserCompatiblityChecker {
     public function isELinks(): bool {
         return strpos($this->useragent, 'ELinks/') !== false;
     }
-    
+
     public function isOperaMini(): bool {
         return strpos($this->useragent, 'Opera Mini') !== false;
     }
 
     public function isLinks(): bool {
         return strpos($this->useragent, 'Links (2') !== false ||
-        strpos($this->useragent, 'Links (1') !== false;
+                strpos($this->useragent, 'Links (1') !== false;
     }
-    
+
     public function isW3M(): bool {
         return strpos($this->useragent, 'w3m/') !== false;
+    }
+
+    public function isDillo(): bool {
+        return strpos($this->useragent, 'Dillo') !== false;
     }
 
 }
