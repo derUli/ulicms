@@ -27,12 +27,12 @@ class RoboPackageTest extends RoboBaseTest {
 
     public function testPackageExamineReturnsData() {
         $packageFile = Path::resolve(
-                        "ULICMS_ROOT/tests/fixtures/lock_inactive_users-1.0.1.sin"
+                        "ULICMS_ROOT/tests/fixtures/packages/lock_inactive_users-1.0.1.sin"
         );
 
         $expected = file_get_contents(
                 Path::resolve(
-                        "ULICMS_ROOT/tests/fixtures/packageExamine.expected.txt"
+                        "ULICMS_ROOT/tests/fixtures/packages/packageExamine.expected.txt"
                 )
         );
 
@@ -60,7 +60,7 @@ class RoboPackageTest extends RoboBaseTest {
 
     public function testPackageInstallWithSinFile() {
         $packageFile = Path::resolve(
-                        "ULICMS_ROOT/tests/fixtures/hello_world-1.0.sin"
+                        "ULICMS_ROOT/tests/fixtures/packages/hello_world-1.0.sin"
         );
         $installOutput = $this->runRoboCommand(
                 ["package:install", $packageFile]
@@ -84,7 +84,7 @@ class RoboPackageTest extends RoboBaseTest {
 
     public function testPackageInstallWithTarGzFile() {
         $packageFile = Path::resolve(
-                        "ULICMS_ROOT/tests/fixtures/hello_world-1.0.tar.gz"
+                        "ULICMS_ROOT/tests/fixtures/packages/hello_world-1.0.tar.gz"
         );
         $installOutput = $this->runRoboCommand(
                 ["package:install", $packageFile]
@@ -100,7 +100,7 @@ class RoboPackageTest extends RoboBaseTest {
 
     public function testPackageInstallReturnsError() {
         $packageFile = Path::resolve(
-                        "ULICMS_ROOT/tests/fixtures/error-1.0.sin"
+                        "ULICMS_ROOT/tests/fixtures/packages/error-1.0.sin"
         );
         $output = $this->runRoboCommand(
                 ["package:install", $packageFile]

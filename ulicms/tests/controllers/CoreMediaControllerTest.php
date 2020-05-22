@@ -14,7 +14,7 @@ class CoreMediaControllerTest extends \PHPUnit\Framework\TestCase {
                         "ULICMS_ROOT/tests/fixtures/embed-media.expected.txt"
                 )
         );
-        $this->assertEquals($actual, $expected);
+        $this->assertEquals(normalizeLN($actual), normalizeLN($expected));
     }
 
     public function testBeforeContentFilterEnabled() {
@@ -27,7 +27,7 @@ class CoreMediaControllerTest extends \PHPUnit\Framework\TestCase {
                         "ULICMS_ROOT/tests/fixtures/embed-media.expected.txt"
                 )
         );
-        $this->assertEquals($actual, $expected);
+        $this->assertEquals(normalizeLN($actual), normalizeLN($expected));
     }
     
     private function getExampleHtml() {

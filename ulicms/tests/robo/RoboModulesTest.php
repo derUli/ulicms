@@ -73,7 +73,7 @@ class RoboModulesTest extends RoboBaseTest {
                     "ldap_login"
                 ]
         );
-        $this->assertEquals($expected, $actual);
+        $this->assertEquals(normalizeLN($expected), normalizeLN($actual));
     }
 
     public function testModulesEnableAndDisable() {

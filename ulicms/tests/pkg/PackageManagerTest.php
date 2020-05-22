@@ -11,7 +11,7 @@ class PackageManagerTest extends \PHPUnit\Framework\TestCase {
 
     public function testIsInstalledModuleReturnsTrue() {
         $packageManager = new PackageManager();
-        $this->assertTrue($packageManager->isInstalled("core_home", PackageTypes::TYPE_MODULE));
+        $this->assertTrue($packageManager->isInstalled("core_home",PackageTypes::TYPE_MODULE));
     }
 
     public function testIsInstalledModuleReturnsFalse() {

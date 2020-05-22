@@ -11,7 +11,7 @@ class SinPackageInstallerTest extends \PHPUnit\Framework\TestCase {
 	private function getSinPackageInstaller($file) {
 		return new SinPackageInstaller(
 				Path::resolve(
-						"ULICMS_ROOT/tests/fixtures/{$file}"
+						"ULICMS_ROOT/tests/fixtures/packages/{$file}"
 				)
 		);
 	}
