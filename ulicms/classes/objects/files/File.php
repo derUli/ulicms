@@ -140,10 +140,10 @@ class File {
                 continue;
             }
             $path = "$dir/$obj";
-            
+
             if (is_dir($path)) {
                 sureRemoveDir($path, true);
-            } else if(is_file($path)){
+            } else if (is_file($path)) {
                 unlink($path);
             }
         }

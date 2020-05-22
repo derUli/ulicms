@@ -13,7 +13,7 @@ function sessionName(?string $name = null): string {
         return session_name();
     }
 
-    return !headers_sent() ? session_name($name) : '';
+    return !headers_sent() ? session_name($name) : sessionName();
 }
 
 function sessionDestroy(): bool {

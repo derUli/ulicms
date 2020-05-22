@@ -16,16 +16,29 @@ class RoboThemesTest extends RoboBaseTest {
         $this->assertStringContainsString("impro17 2.1.4", $output);
     }
 
-    public function testModulesRemoveReturnsError() {
+    public function testThemesRemove() {
+        $packageFile = Path::resolve(
+                        "ULICMS_ROOT/tests/fixtures/packages/theme-2017-1.1.1.tar.gz"
+        );
+        $output = $this->runRoboCommand(
+                ["package:install", $packageFile]
+        );
+
+        $this->assertContains("2017", getAllThemes());
+
         $actual = $this->runRoboCommand(
                 [
                     "themes:remove",
-                    "foobar1",
-                    "foobar2"
+                    "2017",
+                    "foobar"
                 ]
         );
-        $this->assertStringContainsString("Removing foobar1 failed.", $actual);
-        $this->assertStringContainsString("Removing foobar2 failed.", $actual);
+        
+        
+        $this->assertNotContains("2017", getAllThemes());
+
+        $this->assertStringContainsString("Package 2017 removed.", $actual);
+        $this->assertStringContainsString("Removing foobar failed.", $actual);
     }
 
 }

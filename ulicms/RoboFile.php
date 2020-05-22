@@ -342,7 +342,7 @@ class RoboFile extends Tasks {
     public function themesRemove(array $themes) {
         foreach ($themes as $theme) {
             if (uninstall_module($theme, "theme")) {
-                $this->writeln("Package $theme removed");
+                $this->writeln("Package $theme removed.");
             } else {
                 $this->writeln("Removing $theme failed.");
             }
@@ -500,7 +500,7 @@ class RoboFile extends Tasks {
             if ($patch->install()) {
                 $this->writeln("Patch {$patch->name} applied");
             } else {
-                $this->writeln("Installation of patch {$patch->name} failed");
+                $this->writeln("Installation of patch {$patch->name} failed.");
                 exit(1);
             }
         }
