@@ -403,7 +403,7 @@ class RoboFile extends Tasks {
     public function dbmigratorReset(?string $component = null): void {
         Database::setEchoQueries(true);
 
-        $migrator = new DBMigrator($component, getcwd());
+        $migrator = new DBMigrator($component ? $component : "[all]", getcwd());
         if ($component) {
             $migrator->resetDBTrack();
         } else {

@@ -226,11 +226,11 @@ class Video extends Model {
 
     protected function getVideoDir(): string {
         $videoDir = self::VIDEO_DIR;
-        if (defined("ULICMS_DATA_STORAGE_URL")) {
-            $videoDir = Path::resolve("ULICMS_DATA_STORAGE_URL/$videoDir") .
-                    "/";
-        }
-        return $videoDir;
+
+        $storageUrl = defined("ULICMS_DATA_STORAGE_URL") ?
+                Path::resolve("ULICMS_DATA_STORAGE_URL/$videoDir") . "/" : null;
+
+        return defined("ULICMS_DATA_STORAGE_URL") ? $storageUrl : $videoDir;
     }
 
     // render HTML5 <video> tag
