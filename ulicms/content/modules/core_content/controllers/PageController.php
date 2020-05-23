@@ -601,7 +601,7 @@ class PageController extends Controller {
     }
 
     public function toggleFilters(): void {
-        JSONResult($this->toggleFilters());
+        JSONResult($this->_toggleFilters());
     }
 
     public function _toggleFilters(): bool {
