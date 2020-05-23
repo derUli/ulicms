@@ -11,10 +11,12 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
 
         $_SESSION = [];
         $_POST = [];
+        $_GET = [];
     }
 
     public function tearDown() {
         $_POST = [];
+        $_GET = [];
         $_SESSION = [];
         $manager = new UserManager();
         $user = $manager->getAllUsers("admin desc")[0];
@@ -372,6 +374,28 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
         $controller = new PageController();
         $errors = $controller->_validateInput();
         $this->assertNull($errors);
+    }
+
+    public function testGetPages() {
+        $user = $this->getTestUser();
+        $_SESSION["login_id"] = $user->getId();
+
+        $_GET = [
+            "start" => "0",
+            "length" => "5",
+            "draw" => "123"
+        ];
+        $controller = new PageController();
+
+        $response = $controller->_getPages();
+
+        $this->assertCount(5, $response["data"]);
+        $this->assertEquals(123, $response["draw"]);
+        $this->assertGreaterThanOrEqual(5, $response["recordsFiltered"]);
+        $this->assertEquals(
+                $response["recordsFiltered"],
+                $response["recordsTotal"]
+        );
     }
 
 }

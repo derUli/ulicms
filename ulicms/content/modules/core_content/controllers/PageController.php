@@ -522,6 +522,12 @@ class PageController extends Controller {
     }
 
     public function getPages(): void {
+        $data = $this->_getPages();
+        $json = json_encode($data, JSON_UNESCAPED_SLASHES);
+        RawJSONResult($json);
+    }
+
+    public function _getPages(): array {
         $start = Request::getVar("start", 0, "int");
         $length = Request::getVar("length", 25, "int");
         $draw = Request::getVar("draw", 1, "int");
@@ -542,9 +548,7 @@ class PageController extends Controller {
                 $this->_getPagesListView(),
                 $order
         );
-
-        $json = json_encode($data, JSON_UNESCAPED_SLASHES);
-        RawJSONResult($json);
+        return $data;
     }
 
     protected function validateInput(): void {

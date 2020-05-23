@@ -250,7 +250,7 @@ if ($permissionChecker->hasPermission("list_packages")) {
     <?php if ($permissionChecker->hasPermission("patch_management")) { ?>
         <h2><?php translate("installed_patches"); ?></h2>
         <?php
-        echo ModuleHelper::buildMethodCallForm(PackageController::class, "truncatedInstalledPatches", array(
+        echo ModuleHelper::buildMethodCallForm(PackageController::class, "truncateInstalledPatches", array(
             "name" => $theme
                 ), RequestMethod::POST, array(
             "id" => "truncate-installed-patches",

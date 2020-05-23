@@ -28,7 +28,7 @@ class AntiSpamHelper extends Helper {
 
         @$hostname = gethostbyaddr($ip);
 
-        if (!$hostname) {
+        if (!$hostname || $hostname === $ip) {
             return false;
         }
 
