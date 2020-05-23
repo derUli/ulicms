@@ -418,12 +418,13 @@ class PageController extends Controller {
     }
 
     public function toggleShowPositions(): void {
-        $this->_toggleFilters();
+        $this->_toggleShowPositions();
         HTTPStatusCodeResult(HttpStatusCode::OK);
     }
 
     public function _toggleShowPositions(): bool {
         $settingsName = "user/" . get_user_id() . "/show_positions";
+        var_dump($settingsName);
         if (Settings::get($settingsName)) {
             Settings::delete($settingsName);
             return false;
