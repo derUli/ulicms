@@ -6,7 +6,8 @@ function cleanString(string $string, string $separator = '-'): string {
     return StringHelper::cleanString($string, $separator);
 }
 
-if(!defined("RESPONSIVE_FM")){
+if (!defined("RESPONSIVE_FM")) {
+
     function sanitize(array & $array): void {
         foreach ($array as & $data) {
             $data = str_ireplace(array(
@@ -17,6 +18,7 @@ if(!defined("RESPONSIVE_FM")){
                     ), '', stripslashes($data));
         }
     }
+
 }
 
 // TODO: Deprecate this
@@ -114,7 +116,7 @@ function keywordsFromString(string $text): array {
             $return[$word] = 1;
         } else {
             // wenn schon vorhanden
-            $return[$word] ++;
+            $return[$word]++;
         }
     }
 
@@ -135,20 +137,6 @@ function stringOrNull($val): ?string {
 
 function strbool($value): string {
     return($value) ? 'true' : 'false';
-}
-
-function isNullOrEmpty($variable): bool {
-    trigger_error("global function isNullOrEmpty() is deprecated. "
-            . "Plese use StringHelper::isNullOrEmpty() instead."
-            , E_USER_WARNING);
-    return is_blank($variable);
-}
-
-function isNotNullOrEmpty($variable): bool {
-    trigger_error("global function isNotNullOrEmpty() is deprecated. "
-            . "Plese use StringHelper::isNotNullOrEmpty() instead.", E_USER_WARNING
-    );
-    return is_present($variable);
 }
 
 function convertLineEndingsToLN(string $s): string {
@@ -290,7 +278,7 @@ function replace_num_entity($ord): string {
             }
     }
 
-    for ($i = 0; $i < $no_bytes; $i ++) {
+    for ($i = 0; $i < $no_bytes; $i++) {
         $byte[$no_bytes - $i - 1] = (
                 ($ord & (63 * pow(2, 6 * $i))) / pow(2, 6 * $i)) &
                 63 | 128;
@@ -299,7 +287,7 @@ function replace_num_entity($ord): string {
     $byte[0] = ($byte[0] & $prefix[0]) | $prefix[1];
 
     $ret = '';
-    for ($i = 0; $i < $no_bytes; $i ++) {
+    for ($i = 0; $i < $no_bytes; $i++) {
         $ret .= chr($byte[$i]);
     }
 

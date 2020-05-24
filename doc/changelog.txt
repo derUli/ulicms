@@ -1,5 +1,11 @@
 ===== Neues in UliCMS 2020.2.2 =====
 
+Entfernte API-Methoden:
+* \isNullOrEmpty($variable): bool
+* \isNotNullOrEmpty($variable): bool
+
+===== Neues in UliCMS 2020.2.2 =====
+
 Neue Features:
 * Neuer Dateimanager: RESPONSIVE filemanager
 * Neue Robo Tasks zur Verwaltung von Modulen

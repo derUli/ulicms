@@ -12,11 +12,13 @@ class CustomData {
         if (!$page) {
             $page = get_slug();
         }
-        
+
+        $language = getCurrentLanguage();
+
         $sql = "SELECT `custom_data` FROM " . tbname("content") .
                 " WHERE slug='" . Database::escapeValue($page) .
                 "' AND language='" .
-                Database::escapeValue($_SESSION["language"]) . "'";
+                Database::escapeValue($language) . "'";
         $result = Database::query($sql);
         if (Database::getNumRows($result) > 0) {
             $dataset = Database::fetchObject($result);
@@ -62,8 +64,8 @@ class CustomData {
         $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
         Database::query("UPDATE " . tbname("content") . " SET custom_data = '"
-                        . Database::escapeValue($json)
-                        . "' WHERE slug='" . Database::escapeValue($page) . "' " 
+                . Database::escapeValue($json)
+                . "' WHERE slug='" . Database::escapeValue($page) . "' "
                 . "AND language='" .
                 Database::escapeValue($_SESSION["language"]) . "'");
     }

@@ -531,11 +531,15 @@ class PageController extends Controller {
         $start = Request::getVar("start", 0, "int");
         $length = Request::getVar("length", 25, "int");
         $draw = Request::getVar("draw", 1, "int");
-        $search = $_REQUEST["search"]["value"];
-        $filters = is_array($_REQUEST["filters"]) ? $_REQUEST["filters"] : [];
+        $search = isset($_REQUEST["search"]) &&
+                isset($_REQUEST["search"]["value"]) ?
+                $_REQUEST["search"]["value"] : null;
+        $filters = isset($_REQUEST["filters"]) &&
+                is_array($_REQUEST["filters"]) ? $_REQUEST["filters"] : [];
 
         // if the client requested sorting apply it
-        $order = is_array($_REQUEST["order"]) ? $_REQUEST["order"][0] : null;
+        $order = isset($_REQUEST["order"]) && is_array($_REQUEST["order"]) ?
+                $_REQUEST["order"][0] : null;
 
         $renderer = new PageTableRenderer();
 

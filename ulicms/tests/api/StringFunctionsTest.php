@@ -174,42 +174,4 @@ Noch mehr Text <a href="http://www.ulicms.de" rel="nofollow" target="_blank">htt
                 getExcerpt("Lorem Ipsum sit dor amet usw.", 0, 16));
     }
 
-    public function testIsBlankReturnsTrue() {
-        $this->assertTrue(@isNullOrEmpty(""));
-        $this->assertTrue(@isNullOrEmpty(" "));
-        $this->assertTrue(@isNullOrEmpty(false));
-        $this->assertTrue(@isNullOrEmpty(null));
-        $this->assertTrue(@isNullOrEmpty(0));
-        $this->assertTrue(@isNullOrEmpty([]));
-        $this->assertTrue(@isNullOrEmpty("0"));
-        $this->assertTrue(@isNullOrEmpty($notDefined));
-    }
-
-    public function testIsBlankReturnsFalse() {
-        $this->assertFalse(@isNullOrEmpty(" hallo welt "));
-        $this->assertFalse(@isNullOrEmpty(13));
-        $this->assertFalse(@isNullOrEmpty(true));
-        $this->assertFalse(@isNullOrEmpty(array("foo", "bar")));
-        $this->assertFalse(@isNullOrEmpty("13"));
-    }
-
-    public function testIsPresentReturnsTrue() {
-        $this->assertTrue(@isNotNullOrEmpty(" hallo welt "));
-        $this->assertTrue(@isNotNullOrEmpty(13));
-        $this->assertTrue(@isNotNullOrEmpty(true));
-        $this->assertTrue(@isNotNullOrEmpty(array("foo", "bar")));
-        $this->assertTrue(@isNotNullOrEmpty("13"));
-    }
-
-    public function testIsPresentReturnsFalse() {
-        $this->assertFalse(@isNotNullOrEmpty(""));
-        $this->assertFalse(@isNotNullOrEmpty(" "));
-        $this->assertFalse(@isNotNullOrEmpty(false));
-        $this->assertFalse(@isNotNullOrEmpty(null));
-        $this->assertFalse(@isNotNullOrEmpty(0));
-        $this->assertFalse(@isNotNullOrEmpty([]));
-        $this->assertFalse(@isNotNullOrEmpty("0"));
-        $this->assertFalse(@isNotNullOrEmpty($undefinedVar));
-    }
-
 }
