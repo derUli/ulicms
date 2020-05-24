@@ -45,8 +45,6 @@ class PageController extends Controller {
     }
 
     public function createPost(): void {
-        $this->validateInput();
-
         $permissionChecker = new PermissionChecker(get_user_id());
         $model = TypeMapper::getModel(Request::getVar("type"));
 
@@ -68,8 +66,6 @@ class PageController extends Controller {
     }
 
     public function editPost(): void {
-        $this->validateInput();
-
         $permissionChecker = new PermissionChecker(get_user_id());
         $model = TypeMapper::getModel(Request::getVar("type"));
         $model->loadById(Request::getVar("page_id", null, "int"));
@@ -101,6 +97,8 @@ class PageController extends Controller {
             ?int $userId = null,
             ?int $groupId = null
     ): void {
+        $this->validateInput();
+
         $model->slug = Request::getVar(
                         "slug",
                         StringHelper::cleanString(
@@ -434,31 +432,36 @@ class PageController extends Controller {
     }
 
     public function nextFreeSlug(): void {
-        $originalSlug = $_REQUEST["slug"];
-        $slug = $originalSlug;
+        $slug = $_REQUEST["slug"];
+        $language = $_REQUEST["language"];
+        $id = isset($_REQUEST["id"]) ?
+                intval($_REQUEST["id"]) : 0;
 
-        if ($this->_checkIfSlugIsFree(
+        TextResult($this->_nextFreeSlug($slug, $language, $id));
+    }
+
+    // TODO: move this to the Content class
+    public function _nextFreeSlug(
+            string $originalSlug,
+            string $language,
+            int $id
+    ): string {
+        $slug = $originalSlug;
+        if (!$this->_checkIfSlugIsFree(
                         $slug,
-                        $_REQUEST["language"],
-                        isset($_REQUEST["id"]) ?
-                                intval($_REQUEST["id"]) : 0
+                        $language,
+                        $id
                 )) {
-            TextResult($slug);
-        } else {
-            $counter = 1;
+            $counter = 2;
             while (true) {
                 $slug = "{$originalSlug}-$counter";
-                if ($this->_checkIfSlugIsFree(
-                                $slug,
-                                $_REQUEST["language"],
-                                isset($_REQUEST["id"]) ?
-                                        intval($_REQUEST["id"]) : 0
-                        )) {
-                    TextResult($slug);
+                if ($this->_checkIfSlugIsFree($slug, $language, $id)) {
+                    break;
                 }
                 $counter++;
             }
         }
+        return $slug;
     }
 
     // returns true if this slug is unused in a language
@@ -501,7 +504,6 @@ class PageController extends Controller {
             ?int $parent_id = null
     ): string {
         ob_start();
-        
         ?>
         <option selected="selected" value="NULL">
             [<?php translate("none"); ?>]
@@ -528,7 +530,7 @@ class PageController extends Controller {
             </option>
             <?php
         }
-        
+
         return ob_get_clean();
     }
 

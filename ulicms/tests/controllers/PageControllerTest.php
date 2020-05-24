@@ -274,6 +274,23 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertCount(0, $deleted);
     }
 
+    protected function createTestPages() {
+        $slugs = ["unit-test", "unit-test-2", "unit-test-3"];
+
+        foreach ($slugs as $slug) {
+            $page = new Page();
+            $page->title = 'Unit Test ' . time();
+            $page->slug = $slug;
+            $page->language = 'de';
+            $page->content = "Some Text";
+            $page->comments_enabled = true;
+            $page->author_id = 1;
+            $page->group_id = 1;
+            $page->save();
+            $page->delete();
+        }
+    }
+
     protected function createDeletedPage() {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
@@ -411,6 +428,19 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
 
         $output = $controller->_filterParentPages("en", "top", $parent->getID());
         $this->assertGreaterThanOrEqual(10, substr_count($output, "<option"));
+    }
+
+    public function testNextFreeSlugReturnsSlug() {
+        $controller = new PageController();
+        $slug = $controller->_nextFreeSlug("ziemlich-neu", "de", 0);
+        $this->assertEquals("ziemlich-neu", $slug);
+    }
+
+    public function testNextFreeSlugReturnsSlugWithSuffix() {
+        $this->createTestPages();
+        $controller = new PageController();
+        $slug = $controller->_nextFreeSlug("unit-test", "de", 0);
+        $this->assertEquals("unit-test-4", $slug);
     }
 
 }
