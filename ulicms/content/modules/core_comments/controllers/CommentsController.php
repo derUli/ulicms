@@ -98,20 +98,24 @@ class CommentsController extends MainClass {
     }
 
     public function getCommentText(): void {
-        $id = Request::getVar("id");
+        $id = Request::getVar("id", 0, "int");
+        $text = $this->_getCommentText($id);
+        if ($text) {
+            HtmlResult($text, HttpStatusCode::OK, HTMLMinify::OPTIMIZATION_ADVANCED);
+        }
+        HTMLResult(get_translation("not_found"), 404);
+    }
+
+    public function _getCommentText(int $id): ?string {
         try {
             $comment = new Comment($id);
             $comment->setRead(true);
             $comment->save();
-            HtmlResult(
-                    StringHelper::makeLinksClickable(
+            return StringHelper::makeLinksClickable(
                             HTML\text(trim($comment->getText()))
-                    ),
-                    HttpStatusCode::OK,
-                    HTMLMinify::OPTIMIZATION_ADVANCED
             );
         } catch (DatasetNotFoundException $e) {
-            HTMLResult(get_translation("not_found"), 404);
+            return null;
         }
     }
 
@@ -146,11 +150,18 @@ class CommentsController extends MainClass {
         $content_id = Request::getVar("content_id", null, "int");
         $limit = Request::getVar("limit", $this->_getDefaultLimit(), "int");
 
-        // do the search query
-        $results = $this->_getResults($status, $content_id, $limit);
-
+        $results = $this->_filterComments($status, $content_id, $limit);
         // output the comment backend page to the user
         ActionResult("comments_manage", $results);
+    }
+
+    public function _filterComments(
+            ?string $status = null,
+            ?int $content_id = null,
+            ?string $limit = null
+    ): array {
+        // do the search query
+        return $this->_getResults($status, $content_id, $limit);
     }
 
     // get the configured default limit or if is set the default value
