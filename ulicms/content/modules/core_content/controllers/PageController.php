@@ -484,13 +484,24 @@ class PageController extends Controller {
         return (Database::getNumRows($result) <= 0);
     }
 
-    // FIXME: There should be no html code in controller
     public function filterParentPages(): void {
         $lang = $_REQUEST["mlang"];
         $menu = $_REQUEST["mmenu"];
-        $parent_id = $_REQUEST["mparent"];
+        $parent_id = Request::getVar("mparent", null, "int");
 
+        $html = $this->_filterParentPages($lang, $menu, $parent_id);
+        HTMLResult($html, HttpStatusCode::OK,
+                HTMLMinify::OPTIMIZATION_ADVANCED);
+    }
+
+    // FIXME: There should be no html code in controller
+    public function _filterParentPages(
+            ?string $lang = null,
+            ?string $menu = null,
+            ?int $parent_id = null
+    ): string {
         ob_start();
+        
         ?>
         <option selected="selected" value="NULL">
             [<?php translate("none"); ?>]
@@ -517,8 +528,8 @@ class PageController extends Controller {
             </option>
             <?php
         }
-        HTMLResult(ob_get_clean(), HttpStatusCode::OK,
-                HTMLMinify::OPTIMIZATION_ADVANCED);
+        
+        return ob_get_clean();
     }
 
     public function getPages(): void {

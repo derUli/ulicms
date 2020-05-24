@@ -247,6 +247,7 @@ class ContentFactory {
         $sql = "SELECT id, `type` FROM " . tbname("content") .
                 " where `menu` = '$menu' and language = '$language' "
                 . "ORDER BY $order";
+
         $result = Database::query($sql);
         while ($row = Database::fetchObject($result)) {
             $datasets[] = self::getContentObjectByID($row);

@@ -385,9 +385,14 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetParentSelection() {
+        $parent = ContentFactory::getBySlugAndLanguage("google", "en");
         $controller = new PageController();
-        $output = $controller->_getParentSelection("en", "top");
-        
+        $output = $controller->_getParentSelection(
+                "en",
+                "top",
+                $parent->getId()
+        );
+
         $this->assertStringContainsString
                 (
                 "<option value=\"\">[All]</option>",
@@ -398,6 +403,14 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
                 $output
         );
         $this->assertGreaterThanOrEqual(3, substr_count($output, "<option"));
+    }
+
+    public function testFilterParentPages() {
+        $parent = ContentFactory::getBySlugAndLanguage("google", "en");
+        $controller = new PageController();
+
+        $output = $controller->_filterParentPages("en", "top", $parent->getID());
+        $this->assertGreaterThanOrEqual(10, substr_count($output, "<option"));
     }
 
 }

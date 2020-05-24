@@ -51,8 +51,8 @@ function get_og_tags(?string $slug = null): string {
             $og_image = ModuleHelper::getBaseUrl() . ltrim($og_image, "/");
         }
         $page = get_page($slug);
-        if (empty($og_image)
-                && !StringHelper::isNullOrWhitespace($page["article_image"])) {
+        if (empty($og_image) &&
+                !StringHelper::isNullOrWhitespace($page["article_image"])) {
 
             $og_image = ltrim($page["article_image"], "/");
         }
@@ -162,9 +162,9 @@ function is_active(): bool {
     if (!is_null(Vars::get("active"))) {
         return Vars::get("active");
     }
-	
+
     $page = get_slug();
-    
+
     $dataset = boolval(1);
     $sql = "SELECT `active` FROM " . tbname("content")
             . " WHERE slug='" . db_escape($page) . "'  AND language='" .
@@ -237,10 +237,12 @@ function get_cache_control(): string {
     $page = get_slug();
 
     $cacheControl = "auto";
-    $sql = "SELECT `cache_control` FROM " . tbname("content") . " WHERE slug='" . db_escape($page) . "'  AND language='" . db_escape(getFrontendLanguage()) . "'";
+    $sql = "SELECT `cache_control` FROM " . tbname("content") .
+            " WHERE slug='" . db_escape($page) . "'  AND language='" .
+            db_escape(getFrontendLanguage()) . "'";
     $result = db_query($sql);
     $dataset = null;
-    
+
     if ($result and db_num_rows($result) > 0) {
         $dataset = db_fetch_object($result);
         $cacheControl = $dataset->cache_control ? $dataset->cache_control : $cacheControl;
@@ -375,7 +377,6 @@ function get_theme(?string $page = null): ?string {
     Vars::set("theme_" . $page, $theme);
     return $theme;
 }
-
 
 function language_selection(): void {
     Template::languageSelection();
@@ -533,8 +534,7 @@ function get_title(?string $slug = null, bool $headline = false): ?string {
 
     if (db_num_rows($result) > 0) {
         while ($row = db_fetch_object($result)) {
-            if ($headline and isset($row->alternate_title)
-                    && !empty($row->alternate_title)) {
+            if ($headline and isset($row->alternate_title) && !empty($row->alternate_title)) {
                 $title = $row->alternate_title;
             } else {
                 $title = $row->title;
@@ -564,7 +564,7 @@ function headline(?string $ipage = null): void {
 function apply_filter($text, string $type) {
     $modules = getAllModules();
     $disabledModules = Vars::get("disabledModules");
-    for ($i = 0; $i < count($modules); $i ++) {
+    for ($i = 0; $i < count($modules); $i++) {
         if (faster_in_array($modules[$i], $disabledModules)) {
             continue;
         }
@@ -865,7 +865,7 @@ function get_head(): string {
 
 function get_page(?string $slug = ''): ?array {
     if (empty($slug)) {
-        $slug = isset($_GET["slug"]) ? $_GET["slug"] :  "";
+        $slug = isset($_GET["slug"]) ? $_GET["slug"] : "";
     }
     if (empty($slug)) {
         $slug = get_frontpage();
@@ -919,7 +919,7 @@ function checkAccess(string $access = ""): ?string {
     if (faster_in_array("registered", $access) and is_logged_in()) {
         return "registered";
     }
-    for ($i = 0; $i < count($access); $i ++) {
+    for ($i = 0; $i < count($access); $i++) {
         if (is_numeric($access[$i]) and isset($_SESSION["group_id"]) and $access[$i] == $_SESSION["group_id"]) {
             return $access[$i];
         }
@@ -939,7 +939,7 @@ function check_status(): string {
     if (get_type() == "snippet") {
         return "403 Forbidden";
     }
-    if (!(isset($_GET["slug"]) and !empty($_GET["slug"]))) {
+    if (!(isset($_GET["slug"]) and!empty($_GET["slug"]))) {
         $_GET["slug"] = get_frontpage();
     }
 
