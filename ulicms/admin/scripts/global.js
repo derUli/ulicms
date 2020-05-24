@@ -163,10 +163,9 @@ $(() => {
 
     $(".datetimepicker").prop("readonly", true);
     $(".datetimepicker").datetimepicker({
-        format: "Y-m-d H:m",
+        format: "Y-m-d H:i",
         timepicker: true,
         stepping: 15
-
     });
 
 
