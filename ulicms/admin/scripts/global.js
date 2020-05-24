@@ -165,7 +165,7 @@ $(() => {
     $(".datetimepicker").datetimepicker({
         format: "Y-m-d H:i",
         timepicker: true,
-        step: 5
+        step: 30
     });
 
 
