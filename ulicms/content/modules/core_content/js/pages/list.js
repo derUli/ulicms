@@ -43,8 +43,7 @@ $(() => {
     loadParentPages().then(() => {
         loadFiltersFromlocalStorage();
         bindSelectOnChange();
-    }
-    );
+    });
 });
 
 const bindSelectOnChange = () => {
