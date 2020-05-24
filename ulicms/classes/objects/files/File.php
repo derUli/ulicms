@@ -131,9 +131,7 @@ class File {
             return;
         }
 
-        if (!$dh = @opendir($dir)) {
-            return;
-        }
+        $dh = opendir($dir);
 
         while (false !== ($obj = readdir($dh))) {
             if ($obj == '.' || $obj == '..') {

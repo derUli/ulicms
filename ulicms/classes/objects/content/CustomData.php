@@ -8,7 +8,7 @@ class CustomData {
 
     private static $defaults = [];
 
-    public static function get(?string $page = null): ?array {
+    public static function get(?string $page = null): array {
         if (!$page) {
             $page = get_slug();
         }
@@ -24,7 +24,7 @@ class CustomData {
             $dataset = Database::fetchObject($result);
             return is_json($dataset->custom_data) ? json_decode($dataset->custom_data, true) : [];
         }
-        return null;
+        return [];
     }
 
     public static function set(string $var, $value, ?string $page = null): void {
@@ -32,10 +32,8 @@ class CustomData {
             $page = get_slug();
         }
         $data = self::get($page);
-        if (is_null($data)) {
-            $data = [];
-        }
         $data[$var] = $value;
+
         $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
         Database::query("UPDATE " . tbname("content") .
                         " SET custom_data = '" .

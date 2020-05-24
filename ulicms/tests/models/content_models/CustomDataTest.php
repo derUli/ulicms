@@ -22,8 +22,9 @@ class CustomDataTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("text1", CustomData::getCustomDataOrSetting("my_value"));
     }
 
-    public function testGetReturnsNull() {
-        $this->assertNull(
+    public function testGetReturnsEmpty() {
+        $this->assertEquals(
+                [],
                 CustomData::get("gibts_echt_nicht")
         );
     }
@@ -34,10 +35,8 @@ class CustomDataTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue(is_json($json));
     }
 
-    public function testGetDefaultReturnsNull() {
-        $this->assertNull(
-                CustomData::getDefault("unknown_type")
-        );
+    public function testGetDefaultReturnsEmptyArray() {
+        $this->assertNull(CustomData::getDefault("unknown_type"));
     }
 
     public function testGetDefaultReturnsArray() {

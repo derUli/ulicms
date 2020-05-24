@@ -77,14 +77,15 @@ class Form {
 
         $htmlAttributes["class"] = trim("delete-form " . $htmlAttributes["class"]);
 
-        $attribhtml = StringHelper::isNotNullOrWhitespace(
-                        ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes)) ?
-                " " . ModuleHelper::buildHTMLAttributesFromArray(
-                        $htmlAttributes
-                ) : "";
+        $htmlAttributesString = ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes);
+        $attribHtml = "";
+        
+        if(!empty($htmlAttributes)){
+            $attribHtml .= " $htmlAttributesString";
+        }
 
         $html .= '<form action="' . _esc($url) . '" method="' .
-                RequestMethod::POST . '"' . $attribhtml . '>';
+                RequestMethod::POST . '"' . $attribHtml . '>';
         $html .= get_csrf_token_html();
         foreach ($otherVars as $key => $value) {
             $html .= '<input type="hidden" name="' . Template::getEscape($key)

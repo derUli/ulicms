@@ -43,19 +43,28 @@ class CacheUtil {
         );
 
         // Auto Detect which caching driver to use
-        $driver = "files";
-        if (extension_loaded("apcu") && ini_get("apc.enabled")) {
-            $driver = "apcu";
-        } else if (function_exists("sqlite_open")) {
-            $driver = "sqlite";
-        }
+
+        $driver = self::getDriverName();
 
         self::$adapter = new Psr16Adapter($driver,
                 new ConfigurationOption($cacheConfig));
 
         return self::$adapter;
     }
-    public static function resetAdapater(){
+
+    protected static function getDriverName(): string {
+        $driver = "files";
+
+        if (extension_loaded("apcu") && ini_get("apc.enabled")) {
+            $driver = "apcu";
+        } else if (function_exists("sqlite_open")) {
+            $driver = "sqlite";
+        }
+
+        return apply_filter($driver, 'cache_driver_name');
+    }
+
+    public static function resetAdapater() {
         CacheManager::clearInstances();
         self::$adapter = null;
         self::getAdapter(true);

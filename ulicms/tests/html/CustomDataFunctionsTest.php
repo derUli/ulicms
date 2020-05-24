@@ -17,7 +17,7 @@ class CustomDataFunctionsText extends \PHPUnit\Framework\TestCase {
     }
 
     public function testSetAndGetCustomData() {
-        $this->assertNull(get_custom_data("hello"));
+        $this->assertEquals([], get_custom_data("hello"));
         set_custom_data("hello", "world");
 
         $this->assertEquals(
@@ -26,14 +26,11 @@ class CustomDataFunctionsText extends \PHPUnit\Framework\TestCase {
         );
 
         delete_custom_data();
-        $this->assertEquals(
-                [], get_custom_data());
+        $this->assertEquals([], get_custom_data());
     }
 
     public function testGetReturnsNull() {
-        $this->assertNull(
-                get_custom_data("gibts_echt_nicht")
-        );
+        $this->assertEquals([], get_custom_data("gibts_echt_nicht"));
     }
 
 }

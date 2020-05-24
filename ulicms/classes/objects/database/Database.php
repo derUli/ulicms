@@ -184,7 +184,7 @@ class Database {
                     $value = "'" . self::escapeValue($value) . "'";
                 }
                 $preparedQuery .= $value;
-                $i ++;
+                $i++;
             }
         }
         return Database::query($preparedQuery, $replacePrefix);
@@ -346,15 +346,14 @@ class Database {
             string $where = "",
             array $args = [],
             bool $replacePrefix = true,
-            string $order = "",
-            string $joins = ""
+            string $order = ""
     ): ?mysqli_result {
-        
-        if($replacePrefix){
+
+        if ($replacePrefix) {
             $table = tbname($table);
         }
         $table = self::escapeName($table);
-        
+
         if (count($columns) == 0) {
             $columns[] = "*";
         }
@@ -362,15 +361,11 @@ class Database {
         $columns_sql = implode(", ", $columns);
 
         $sql = "select $columns_sql from $table";
-        
-        if (StringHelper::isNotNullOrWhitespace($joins)) {
-            $sql .= " $joins ";
-        }
 
         if (StringHelper::isNotNullOrWhitespace($where)) {
             $sql .= " where $where ";
         }
-        
+
         if (StringHelper::isNotNullOrWhitespace($order)) {
             $sql .= " order by $order";
         }
@@ -521,7 +516,7 @@ class Database {
         $result = Database::query("SELECT * FROM $table limit 1");
         $fields_num = self::getNumFieldCount();
         if ($fields_num > 0) {
-            for ($i = 0; $i < $fields_num; $i ++) {
+            for ($i = 0; $i < $fields_num; $i++) {
                 $field = db_fetch_field($result);
                 $retval[] = $field->name;
             }

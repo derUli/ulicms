@@ -59,7 +59,11 @@ class SettingsTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testMappingStringToArray() {
-		$mappingString = "company.de => de\r\n" . "#This is a comment => This should be ignored\r\n" . "company.co.uk => en \r\n" . "company.fr=>fr";
+		$mappingString = "company.de => de\r\n" . 
+                        "#This is a comment => This should be ignored\r\n" . 
+                        "company.co.uk => en \r\n" . 
+                        "company.fr=>fr\r\n" .
+                        "foobar";
 		$mapped = Settings::mappingStringToArray($mappingString);
 		$this->assertEquals(3, count($mapped));
 		$this->assertEquals("de", $mapped["company.de"]);
