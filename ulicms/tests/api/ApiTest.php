@@ -849,16 +849,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertNotContains("bar", $menus);
     }
 
-    public function testEach() {
-        $arr = array(
-            "foo" => "bar",
-            "hello" => "world"
-        );
-
-        @$output = each($arr);
-        $this->assertCount(4, $output);
-    }
-
     public function testGetLangConfig() {
         Settings::setLanguageSetting("my_setting", "Lampukisch");
         Settings::setLanguageSetting("my_setting", "Germanisch", "de");
@@ -887,10 +877,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
     public function testGetAvailableBackendLanguages() {
         $this->assertContains("de", getAvailableBackendLanguages());
         $this->assertContains("en", getAvailableBackendLanguages());
-    }
-
-    public function testAddHook() {
-        @$this->assertNull(add_hook("gibts_nicht"));
     }
 
     public function testJsonReadableEncode() {

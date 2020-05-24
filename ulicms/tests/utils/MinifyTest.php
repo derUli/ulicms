@@ -54,54 +54,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         $this->assertCount(0, Vars::get("script_queue"));
     }
 
-    public function testGetCombinedScriptHtml() {
-        $files = array(
-            "node_modules/jquery/dist/jquery.js",
-            "admin/scripts/global.js",
-            "node_modules/bootbox/bootbox.js"
-        );
-
-        foreach ($files as $file) {
-            enqueueScriptFile($file);
-        }
-
-        @$html = get_combined_script_html();
-        $this->assertStringStartsWith(
-                '<script src="content/cache/scripts/',
-                $html
-        );
-        $this->assertContains(".js?time=", $html);
-        $this->assertStringEndsWith('type="text/javascript"></script>', $html);
-
-        $this->assertCount(0, Vars::get("script_queue"));
-    }
-
-    public function testCombinedScriptHTML() {
-        $files = array(
-            "node_modules/jquery/dist/jquery.js",
-            "admin/scripts/global.js",
-            "node_modules/bootbox/bootbox.js"
-        );
-
-        foreach ($files as $file) {
-            enqueueScriptFile($file);
-        }
-
-        ob_start();
-        @combined_script_html();
-        $html = ob_get_clean();
-
-        $this->assertStringStartsWith(
-                '<script src="content/cache/scripts/',
-                $html
-        );
-        $this->assertContains(".js?time=", $html);
-        $this->assertStringEndsWith('type="text/javascript"></script>', $html);
-
-        $this->assertCount(0, Vars::get("script_queue"));
-        
-    }
-  public function testCombinedScriptHTMLDeprecated() {
+    public function testCombinedScriptHTMLDeprecated() {
         $files = array(
             "node_modules/jquery/dist/jquery.js",
             "admin/scripts/global.js",
@@ -124,8 +77,8 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         $this->assertStringEndsWith('type="text/javascript"></script>', $html);
 
         $this->assertCount(0, Vars::get("script_queue"));
-        
     }
+
     public function testStylesheetQueue() {
         $filemtime = 0;
         $files = array(
@@ -181,26 +134,6 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         ob_start();
         combinedStylesheetHtml();
         $html = ob_get_clean();
-        $this->assertStringStartsWith('<link rel="stylesheet" href="', $html);
-        $this->assertContains(".css?time=", $html);
-        $this->assertStringEndsWith('" type="text/css"/>', $html);
-
-        $this->assertCount(0, Vars::get("script_queue"));
-    }
-
-    public function testGetCombinedStylesheetHtml() {
-        $files = array(
-            "lib/css/core.scss",
-            "node_modules/bootstrap/dist/css/bootstrap.css",
-            "node_modules/bootstrap/dist/css/bootstrap-theme.css",
-            "admin/css/modern.scss"
-        );
-
-        foreach ($files as $file) {
-            enqueueStylesheet($file);
-        }
-
-        @$html = get_combined_stylesheet_html();
         $this->assertStringStartsWith('<link rel="stylesheet" href="', $html);
         $this->assertContains(".css?time=", $html);
         $this->assertStringEndsWith('" type="text/css"/>', $html);

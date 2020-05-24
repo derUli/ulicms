@@ -51,7 +51,6 @@ after_banner_delete
 before_edit_banner
 after_edit_banner
 before_create_page
-add_hook
 after_create_page
 before_edit_page
 after_edit_page

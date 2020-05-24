@@ -3,6 +3,10 @@
 Entfernte API-Methoden:
 * \isNullOrEmpty($variable): bool
 * \isNotNullOrEmpty($variable): bool
+* \add_hook(string $name, string $runs = ModuleEventConstants::RUNS_ONCE): void
+* \combined_script_html(): void
+* \get_combined_script_html(): string 
+* \get_combined_stylesheet_html(): string 
 
 ===== Neues in UliCMS 2020.2.2 =====
 

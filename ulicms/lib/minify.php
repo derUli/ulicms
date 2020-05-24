@@ -197,11 +197,6 @@ function combinedScriptHtml(): void {
 	echo getCombinedScriptHtml();
 }
 
-function combined_script_html(): void {
-	trigger_error("combined_script_html is deprecated", E_USER_DEPRECATED);
-	echo getCombinedScriptHtml();
-}
-
 function getCombinedScriptHtml(): string {
 	$cfg = new CMSConfig();
 	if (isset($cfg->no_minify) and is_true($cfg->no_minify)) {
@@ -216,11 +211,6 @@ function getCombinedScriptHtml(): string {
 
 	resetScriptQueue();
 	return $html;
-}
-
-function get_combined_script_html(): string {
-	trigger_error("combined_script_html is deprecated", E_USER_DEPRECATED);
-	return getCombinedScriptHtml();
 }
 
 // Ab hier Stylesheet Funktionen
@@ -266,12 +256,4 @@ function getCombinedStylesheetHTML(): ?string {
 
 function combinedStylesheetHtml(): void {
 	echo getCombinedStylesheetHTML();
-}
-
-function get_combined_stylesheet_html(): string {
-	trigger_error(
-			"get_combined_stylesheet_html is deprecated",
-			E_USER_DEPRECATED
-	);
-	return getCombinedStylesheetHTML();
 }

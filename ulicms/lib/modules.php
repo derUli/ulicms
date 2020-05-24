@@ -23,18 +23,6 @@ function getModuleMeta($module, $attrib = null) {
     return $attrib ? $json[$attrib] : $json;
 }
 
-// DEPRECATED:
-// This function may be removed in future releases of UliCMS
-// Use do_event()
-function add_hook(
-        string $name,
-        string $runs = ModuleEventConstants::RUNS_ONCE
-): void {
-    trigger_error("add_hook() is deprecated. Please use do_event().",
-            E_USER_DEPRECATED);
-    do_event($name, $runs);
-}
-
 function do_event(
         string $name,
         string $runs = ModuleEventConstants::RUNS_ONCE
