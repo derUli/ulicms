@@ -7,7 +7,7 @@ class InfoController extends MainClass {
     const CHANGELOG_URL = "https://raw.githubusercontent.com/derUli/ulicms/master/doc/changelog.txt";
 
     public function changelog() {
-        HTMLResult($this->changelog());
+        HTMLResult($this->_changelog());
     }
 
     public function _changelog(): string {
