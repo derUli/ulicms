@@ -713,7 +713,6 @@ class PageController extends Controller {
             $where .= " and language = '" . Database::escapeValue($language) . "'";
         }
 
-
         $groupLanguages = $this->_getGroupAssignedLanguages();
         if (count($groupLanguages)) {
             $groupLanguages = array_map(function($lang) {
@@ -740,6 +739,14 @@ class PageController extends Controller {
         $language = Request::getVar("language", null, "str");
         $menu = Request::getVar("menu", null, "str");
 
+        $html = $this->_getParentSelection($language, $menu);
+        HTMLResult($html);
+    }
+
+    public function _getParentSelection(
+            ?string $language = null,
+            ?string $menu = null
+    ): string {
         $parentIds = $this->_getParentIds($language, $menu);
 
         $selectItems = [];
@@ -752,7 +759,7 @@ class PageController extends Controller {
             );
             $selectItems[] = $item->getHtml();
         }
-        HTMLResult(implode("", $selectItems));
+        return implode("", $selectItems);
     }
 
     public function _getBooleanSelection(): array {

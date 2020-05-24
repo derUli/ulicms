@@ -79,21 +79,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetCategorySelection() {
-        $controller = ControllerRegistry::get(PageController::class);
-
-        $items = $controller->_getCategorySelection();
-        $this->assertGreaterThanOrEqual(2, count($items));
-
-        $this->assertNull($items[0]->getValue());
-        $this->assertGreaterThanOrEqual(1, $items[1]->getValue());
-
-        foreach ($items as $item) {
-            $this->assertNotEmpty($item->getText());
-        }
-    }
-
-    public function testGetParentSelection() {
-        $controller = ControllerRegistry::get(PageController::class);
+        $controller = new PageController();
 
         $items = $controller->_getCategorySelection();
         $this->assertGreaterThanOrEqual(2, count($items));
@@ -396,6 +382,22 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
                 $response["recordsFiltered"],
                 $response["recordsTotal"]
         );
+    }
+
+    public function testGetParentSelection() {
+        $controller = new PageController();
+        $output = $controller->_getParentSelection("en", "top");
+        
+        $this->assertStringContainsString
+                (
+                "<option value=\"\">[All]</option>",
+                $output
+        );
+        $this->assertStringContainsString(
+                "<option value=\"12\">Modules</option>",
+                $output
+        );
+        $this->assertGreaterThanOrEqual(3, substr_count($output, "<option"));
     }
 
 }
