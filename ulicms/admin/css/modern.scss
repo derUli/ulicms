@@ -75,12 +75,12 @@ button,
 
 #scroll-to-top {
     position: fixed;
-    bottom: 10px;
-    right: 10px;
-    padding: 10px;
+    bottom: 5px;
+    right: 20px;
+    padding: 0;
     display: none;
     font-size: 32px;
-    z-index: 5
+    z-index: 5;
 }
 
 button:disabled, .disabled {
@@ -533,6 +533,7 @@ div#login-welcome-text {
 
 .main {
     margin-top: 10px;
+    margin-bottom: 20px;
     width:100%;
 }
 
