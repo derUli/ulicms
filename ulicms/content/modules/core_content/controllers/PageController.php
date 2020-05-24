@@ -424,7 +424,6 @@ class PageController extends Controller {
 
     public function _toggleShowPositions(): bool {
         $settingsName = "user/" . get_user_id() . "/show_positions";
-        var_dump($settingsName);
         if (Settings::get($settingsName)) {
             Settings::delete($settingsName);
             return false;

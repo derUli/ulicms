@@ -164,27 +164,4 @@ class DBMigratorTest extends \PHPUnit\Framework\TestCase {
 		$this->expectException(SqlException::class);
 		$dbmigrator->rollback();
 	}
-
-	public function testResetDbTrackAll() {
-		$config = new CMSConfig();
-		if (is_false($config->dbmigrator_drop_database_on_shutdown)) {
-			$this->markTestSkipped();
-		}
-
-		$dbmigrator = new DBMigrator("dbmigrator_test",
-				Path::resolve(self::DB_MIGRATOR_FAILED_UP_DIR)
-		);
-		$this->assertGreaterThanOrEqual(1,
-				Database::getNumRows(
-						Database::selectAll("dbtrack")
-				)
-		);
-		$dbmigrator->resetDBTrackAll();
-		$this->assertEquals(0,
-				Database::getNumRows(
-						Database::selectAll("dbtrack")
-				)
-		);
-	}
-
 }
