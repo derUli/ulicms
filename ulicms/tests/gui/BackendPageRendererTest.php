@@ -35,7 +35,7 @@ class BackendPageRendererTest extends \PHPUnit\Framework\TestCase {
 
     public function testShowUnsupportedBrowser() {
         $output = TestHelper::getOutput(function() {
-                $checker = new BrowserCompatiblityChecker(
+                    $checker = new BrowserCompatiblityChecker(
                             "Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; "
                             . ".NET4.0C; .NET4.0E; .NET CLR 2.0.50727; .NET CLR 3.0.30729; "
                             . ".NET CLR 3.5.30729; Zoom 3.6.0; rv:11.0) like Gecko"
@@ -49,6 +49,21 @@ class BackendPageRendererTest extends \PHPUnit\Framework\TestCase {
                 "Your are using the unsupported browser Microsoft Internet Explorer",
                 $output
         );
+    }
+
+    public function testOutputMininified() {
+        $output = TestHelper::getOutput(function() {
+                    $renderer = new BackendPageRenderer("foo");
+                    ob_start();
+                    echo "<div     class=\"hello\"> Hello    World</div>  ";
+                    $renderer->outputMinified();
+            });
+            
+        
+        $renderer = new BackendPageRenderer("foo");
+        $renderer->doCronEvents();
+        
+        $this->assertEquals('<div class="hello">Hello World</div>', $output);
     }
 
 }

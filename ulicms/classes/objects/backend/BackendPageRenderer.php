@@ -52,7 +52,9 @@ class BackendPageRenderer {
             ob_start();
         }
 
-        $onlyContent = Request::getVar("only_content", false, 'bool');
+        $onlyContent = boolval(
+                Request::getVar("only_content", false, 'bool')
+        );
 
         if (!$onlyContent) {
             require "inc/header.php";
@@ -93,14 +95,13 @@ class BackendPageRenderer {
                 )
         );
         $message = make_links_clickable($message);
-        
+
         echo Alert::danger($message, "", true);
     }
 
     // this method handles access to the features that are
     // accesible for non authenticated users
-    protected function handleNotLoggedIn($onlyContent = 0): void {
-
+    protected function handleNotLoggedIn(bool $onlyContent = false): void {
         ActionRegistry::loadModuleActions();
         $actions = ActionRegistry::getActions();
 
@@ -132,7 +133,7 @@ class BackendPageRenderer {
     }
 
     // this method handles all actions by authenticated users
-    protected function handleLoggedIn($onlyContent = 0): void {
+    protected function handleLoggedIn(bool $onlyContent = false): void {
         $permissionChecker = new PermissionChecker(get_user_id());
 
         if (!$onlyContent) {
@@ -168,7 +169,7 @@ class BackendPageRenderer {
     }
 
     // minify html output
-    protected function outputMinified(): void {
+    public function outputMinified(): void {
         $generatedHtml = ob_get_clean();
         $options = array(
             'optimizationLevel' => HTMLMinify::OPTIMIZATION_ADVANCED
@@ -183,7 +184,7 @@ class BackendPageRenderer {
     }
 
     // run cron events of modules
-    protected function doCronEvents(): void {
+    public function doCronEvents(): void {
         do_event("before_admin_cron");
         do_event("admin_cron");
         do_event("after_admin_cron");
