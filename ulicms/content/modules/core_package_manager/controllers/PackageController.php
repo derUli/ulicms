@@ -21,6 +21,11 @@ class PackageController extends MainClass {
             TextResult(get_translation("not_found"));
             return;
         }
+        $html = $this->_getModuleInfo($name);
+        HTMLResult($html);
+    }
+
+    public function _getModuleInfo(string $name): string {
         $model = new ModuleInfoViewModel ();
         $model->name = $name;
         $model->version = getModuleMeta($name, "version");
@@ -29,18 +34,18 @@ class PackageController extends MainClass {
         $model->source = getModuleMeta($name, "source");
         $model->source_url = $model->source === "extend" ?
                 $this->_getPackageDownloadUrl($model->name) : null;
-
         $model->customPermissions = is_array(
                         getModuleMeta($name, "custom_acl")
                 ) ? getModuleMeta($name, "custom_acl") : [];
         $model->adminPermission = getModuleMeta($name, "admin_permission");
+
         natcasesort($model->customPermissions);
         ViewBag::set("model", $model);
-        $html = Template::executeModuleTemplate(
+
+        return Template::executeModuleTemplate(
                         self::MODULE_NAME,
                         "packages/info/module.php"
         );
-        HTMLResult($html);
     }
 
     public function _getPackageDownloadUrl(string $package): ?string {
@@ -54,6 +59,11 @@ class PackageController extends MainClass {
             TextResult(get_translation("not_found"));
             return;
         }
+        $html = $this->_getThemeInfo($name);
+        HTMLResult($html);
+    }
+
+    public function _getThemeInfo(string $name) {
         $model = new ThemeInfoViewModel ();
         $model->name = $name;
         $model->version = getThemeMeta($name, "version");
@@ -66,13 +76,15 @@ class PackageController extends MainClass {
         $model->disableFunctions = is_array(
                         getThemeMeta($name, "disable_functions")
                 ) ? getThemeMeta($name, "disable_functions") : [];
+
         natcasesort($model->disableFunctions);
+
         ViewBag::set("model", $model);
-        $html = Template::executeModuleTemplate(
+
+        return Template::executeModuleTemplate(
                         self::MODULE_NAME,
                         "packages/info/theme.php"
         );
-        HTMLResult($html);
     }
 
     public function redirectToPackageView(): void {
@@ -159,12 +171,19 @@ class PackageController extends MainClass {
         if (!$name) {
             HTTPStatusCodeResult(HttpStatusCode::UNPROCESSABLE_ENTITY);
         }
-        $connector = new PackageSourceConnector();
-        $license = $connector->getLicenseOfPackage($name);
+
+        $license = $this->_getPackageLicense($name);
+
         if (!$license) {
             HTTPStatusCodeResult(HttpStatusCode::NOT_FOUND);
         }
-        HTMLResult(text($license));
+        HTMLResult($license);
+    }
+
+    public function _getPackageLicense(string $name): ?string {
+        $connector = new PackageSourceConnector();
+        $license = $connector->getLicenseOfPackage($name);
+        return $license ? text($license) : null;
     }
 
 }

@@ -20,6 +20,7 @@ class PackageControllerTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function tearDown() {
+        ViewBag::delete("model");
         $this->testUser->delete();
         $_SESSION = [];
     }
@@ -64,6 +65,56 @@ class PackageControllerTest extends \PHPUnit\Framework\TestCase {
 
         $this->assertStringContainsString("android_toolbar_color-1.2", $output);
         $this->assertStringContainsString("bootstrap-3.3.7", $output);
+    }
+
+    public function testGetModuleInfo() {
+        $controller = new PackageController();
+        $output = $controller->_getModuleInfo("fortune2");
+
+        $this->assertStringContainsString(
+                "<h3>fortune2</h3>",
+                $output
+        );
+        $this->assertStringContainsString(
+                "<li>fortune2_post",
+                $output
+        );
+        $this->assertStringContainsString(
+                '<a href="https://extend.ulicms.de/fortune2.html" '
+                . 'target="_blank">extend</a>',
+                $output
+        );
+    }
+
+    public function testGetThemeInfo() {
+        $controller = new PackageController();
+        $output = $controller->_getThemeInfo("impro17");
+
+        $this->assertStringContainsString(
+                "<h3>impro17</h3>",
+                $output
+        );
+        $this->assertStringContainsString(
+                "<li>output_design_settings_styles</li>",
+                $output
+        );
+        $this->assertStringContainsString(
+                '<a href="https://extend.ulicms.de/impro17.html" '
+                . 'target="_blank">extend</a>',
+                $output
+        );
+    }
+
+    public function testGetLicenseReturnsString() {
+        $controller = new PackageController();
+        $output = $controller->_getPackageLicense("adminer");
+        $this->assertStringContainsString("Apache License or GPL2", $output);
+    }
+
+    public function testGetLicenseReturnsNull() {
+        $controller = new PackageController();
+        $output = $controller->_getPackageLicense("magic_package");
+        $this->assertNull($output);
     }
 
 }
