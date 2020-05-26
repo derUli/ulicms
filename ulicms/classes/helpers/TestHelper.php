@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace UliCMS\Helpers;
 
 use Closure;
-
 use Exception;
 
 class TestHelper extends \Helper {
@@ -24,6 +23,10 @@ class TestHelper extends \Helper {
             ob_get_clean();
             throw $e;
         }
+    }
+
+    public static function isWindowsServer(): bool {
+        return defined("PHP_WINDOWS_VERSION_MAJOR");
     }
 
 }

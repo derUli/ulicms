@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Helpers\TestHelper;
+
 class LoggerTest extends \PHPUnit\Framework\TestCase {
 
     public function setUp() {
@@ -82,6 +84,25 @@ class LoggerTest extends \PHPUnit\Framework\TestCase {
         $this->assertStringContainsString($expected, $file_content);
 
         LoggerRegistry::unregister("test_log");
+    }
+
+    public function testFixLogPermissions() {
+        $cfg = new CMSConfig();
+        $cfg->fix_log_permissions = true;
+        
+        $logger = new Logger(Path::resolve("ULICMS_LOG/test_log"), $cfg);
+
+        $logger->debug("Test");
+
+        clearstatcache();
+        
+        $path = $logger->getPath();
+        
+        if(TestHelper::isWindowsServer()){
+            $this->assertTrue(is_writable($path));
+        } else {
+            $this->assertEquals(0777, fileperms($path));
+        }
     }
 
 }

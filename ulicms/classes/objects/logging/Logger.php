@@ -8,7 +8,8 @@ class Logger {
     private $path;
     private $logger;
 
-    public function __construct(string $path) {
+    public function __construct(string $path, ?CMSConfig $cmsConfig = null) {
+        $cfg = $cmsConfig ? $cmsConfig : new CMSConfig();
         $environment = get_environment();
         $this->path = $path;
         // if the directory doesn't exist, create it.
@@ -24,13 +25,20 @@ class Logger {
                 "prefix" => "{$environment}_"
                     ]
             );
-            $cfg = new CMSConfig();
-            // Option fix_log_permissions
-            if (isset($cfg->fix_log_permissions) and is_true($cfg->fix_log_permissions)) {
-                $files = glob($this->path . "/log_*.log");
-                foreach ($files as $file) {
-                    @chmod($file, 0777);
-                }
+            $this->fixLogPermissions($cfg);
+        }
+    }
+
+    public function getPath(): string {
+        return $this->path;
+    }
+
+    protected function FixLogPermissions(CMSConfig $cfg) {
+        // Option fix_log_permissions
+        if (isset($cfg->fix_log_permissions) and is_true($cfg->fix_log_permissions)) {
+            $files = glob($this->path . "/*.log");
+            foreach ($files as $file) {
+                chmod($file, 0777);
             }
         }
     }

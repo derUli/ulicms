@@ -101,8 +101,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetError() {
 
-        LoggerRegistry::register("sql_log", new Logger(
-                        ULICMS_LOG, "sql_log"));
+        LoggerRegistry::register("sql_log", new Logger(ULICMS_LOG));
         try {
             // this sql fails always
             $result = Database::query("select devil from hell", true);
@@ -542,8 +541,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         Database::setEchoQueries(true);
         ob_start();
 
-        LoggerRegistry::register("sql_log", new Logger(
-                        ULICMS_LOG, "sql_log"));
+        LoggerRegistry::register("sql_log", new Logger(ULICMS_LOG));
 
         Database::multiQuery(
                 "select * from {prefix}settings; select 'foo' as bar;"
