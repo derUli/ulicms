@@ -20,6 +20,7 @@ class PackageControllerTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function tearDown() {
+        Vars::delete("allModules");
         $module = new Module("fortune2");
         $module->enable();
 
@@ -166,6 +167,36 @@ class PackageControllerTest extends \PHPUnit\Framework\TestCase {
         $installer->installPackage($packageFile);
 
         $this->assertContains("2017", getAllThemes());
+    }
+
+    public function testUninstallModuleReturnsTrue() {
+        $this->installHelloWorld();
+
+        $controller = new PackageController();
+        $success = $controller->_uninstallModule("hello_world");
+
+        Vars::delete("allModules");
+        $this->assertTrue($success);
+        $this->assertNotContains("hello_world", getAllModules());
+    }
+
+    public function testUninstallModuleReturnsFalse() {
+        $controller = new PackageController();
+        $success = $controller->_uninstallModule("augenkrebs");
+        $this->assertFalse($success);
+    }
+
+    protected function installHelloWorld() {
+        $packageFile = Path::resolve(
+                        "ULICMS_ROOT/tests/fixtures/packages/hello_world-1.0.sin"
+        );
+
+        $installer = new SinPackageInstaller($packageFile);
+        $installer->installPackage();
+
+        Vars::delete("allModules");
+
+        $this->assertContains("hello_world", getAllModules());
     }
 
 }

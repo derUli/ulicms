@@ -24,7 +24,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
         $user->setSecondaryGroups([]);
         $user->save();
 
-        Database::deleteFrom("content", "slug like 'unit-test-'");
+        Database::deleteFrom("content", "slug like 'unit-test-%'");
     }
 
     public function testGetPagesListViewNotSetReturnsDefault() {
