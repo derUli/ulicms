@@ -96,8 +96,7 @@ class PackageController extends MainClass {
 
     public function uninstallModule(): void {
         $name = Request::getVar("name");
-        $type = "module";
-        if (uninstall_module($name, $type)) {
+        if ($this->_uninstallModule($name)) {
             $this->redirectToPackageView();
         } else {
             $errorMessage = get_secure_translation("removing_package_failed",
@@ -107,6 +106,14 @@ class PackageController extends MainClass {
             );
             ExceptionResult($errorMessage, HttpStatusCode::INTERNAL_SERVER_ERROR);
         }
+    }
+
+    public function _uninstallModule(string $name): bool {
+        $type = "module";
+        if (uninstall_module($name, $type)) {
+            return true;
+        }
+        return false;
     }
 
     public function uninstallTheme(): void {
@@ -125,7 +132,6 @@ class PackageController extends MainClass {
     }
 
     public function _uninstallTheme(string $name): bool {
-        
         if (uninstall_module($name, "theme")) {
             return true;
         }
