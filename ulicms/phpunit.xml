@@ -136,6 +136,9 @@
                 <directory>content/modules/better_cron/templates</directory>
             </exclude>
             <exclude>
+                <directory>content/modules/timezones/templates</directory>
+            </exclude>
+            <exclude>
                 <directory>tests/</directory>
             </exclude>
             <exclude>

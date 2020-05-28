@@ -20,7 +20,7 @@ class RoboThemesTest extends RoboBaseTest {
         $packageFile = Path::resolve(
                         "ULICMS_ROOT/tests/fixtures/packages/theme-2017-1.1.1.tar.gz"
         );
-        $output = $this->runRoboCommand(
+        $this->runRoboCommand(
                 ["package:install", $packageFile]
         );
 

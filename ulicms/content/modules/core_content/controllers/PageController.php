@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use UliCMS\Exceptions\DatasetNotFoundException;
 use UliCMS\CoreContent\Models\ViewModels\DiffViewModel;
 use UliCMS\CoreContent\PageTableRenderer;
 use UliCMS\Models\Content\VCS;
@@ -318,14 +319,23 @@ class PageController extends Controller {
     public function undeletePost(): void {
         $id = Request::getVar("id", null, "int");
         do_event("before_undelete_page");
-        $content = ContentFactory::getByID($id);
-        if ($content->id === null) {
-            ExceptionResult(get_translation("not_found"));
-        }
-        $content->undelete();
-        do_event("after_undelete_page");
 
-        CacheUtil::clearPageCache();
+        if (!$id) {
+            ExceptionResult(
+                    get_translation("not_found"),
+                    HttpStatusCode::UNPROCESSABLE_ENTITY
+            );
+            return;
+        }
+
+        if (!$this->_undeletePost($id)) {
+            ExceptionResult(
+                    get_translation("not_found"),
+                    HttpStatusCode::NOT_FOUND
+            );
+
+            return;
+        }
 
         Response::sendHttpStatusCodeResultIfAjax(
                 HTTPStatusCode::OK,
@@ -333,24 +343,61 @@ class PageController extends Controller {
         );
     }
 
-    public function deletePost(): void {
-        $page = Request::getVar("id", null, "int");
-        do_event("before_delete_page");
-
-        $content = ContentFactory::getByID($page);
-        if ($content->id === null) {
-            ExceptionResult(get_translation("not_found"));
+    public function _undeletePost(int $id): bool {
+        try {
+            $content = ContentFactory::getByID($id);
+        } catch (DatasetNotFoundException $e) {
+            return false;
         }
-        $content->delete();
 
-        do_event("after_delete_page");
+        $content->undelete();
+
+        do_event("after_undelete_page");
 
         CacheUtil::clearPageCache();
+        return !$content->isDeleted();
+    }
+
+    public function deletePost(): void {
+        $id = Request::getVar("id", null, "int");
+        do_event("before_delete_page");
+
+        if (!$id) {
+            ExceptionResult(
+                    get_translation("not_found"),
+                    HttpStatusCode::UNPROCESSABLE_ENTITY
+            );
+            return;
+        }
+
+        if (!$this->_deletePost($id)) {
+            ExceptionResult(
+                    get_translation("not_found"),
+                    HttpStatusCode::NOT_FOUND
+            );
+
+            return;
+        }
 
         Response::sendHttpStatusCodeResultIfAjax(
                 HTTPStatusCode::OK,
                 ModuleHelper::buildActionURL("pages")
         );
+    }
+
+    public function _deletePost(int $id): bool {
+        try {
+            $content = ContentFactory::getByID($id);
+        } catch (DatasetNotFoundException $e) {
+            return false;
+        }
+
+        $content->delete();
+
+        do_event("after_delete_page");
+
+        CacheUtil::clearPageCache();
+        return $content->isDeleted();
     }
 
     public function emptyTrash(): void {

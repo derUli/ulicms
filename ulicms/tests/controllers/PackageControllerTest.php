@@ -20,6 +20,9 @@ class PackageControllerTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function tearDown() {
+        $module = new Module("fortune2");
+        $module->enable();
+
         ViewBag::delete("model");
         $this->testUser->delete();
         $_SESSION = [];
@@ -115,6 +118,54 @@ class PackageControllerTest extends \PHPUnit\Framework\TestCase {
         $controller = new PackageController();
         $output = $controller->_getPackageLicense("magic_package");
         $this->assertNull($output);
+    }
+
+    public function testToggleModule() {
+        $module = new Module("fortune2");
+        $module->disable();
+
+        $controller = new PackageController();
+        $this->assertEquals(
+                [
+                    "name" => "fortune2",
+                    "enabled" => true
+                ],
+                $controller->_toggleModule("fortune2")
+        );
+        $this->assertEquals(
+                [
+                    "name" => "fortune2",
+                    "enabled" => false
+                ],
+                $controller->_toggleModule("fortune2")
+        );
+    }
+
+    public function testUninstallThemeReturnsTrue() {
+        $this->installTheme2017();
+
+        $controller = new PackageController();
+        $success = $controller->_uninstallTheme("2017");
+
+        $this->assertTrue($success);
+        $this->assertNotContains("2017", getAllThemes());
+    }
+
+    public function testUninstallThemeReturnsFalse() {
+        $controller = new PackageController();
+        $success = $controller->_uninstallTheme("augenkrebs");
+        $this->assertFalse($success);
+    }
+
+    protected function installTheme2017() {
+        $packageFile = Path::resolve(
+                        "ULICMS_ROOT/tests/fixtures/packages/theme-2017-1.1.1.tar.gz"
+        );
+
+        $installer = new PackageManager();
+        $installer->installPackage($packageFile);
+
+        $this->assertContains("2017", getAllThemes());
     }
 
 }

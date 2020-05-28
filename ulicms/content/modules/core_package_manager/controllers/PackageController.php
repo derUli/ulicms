@@ -111,8 +111,7 @@ class PackageController extends MainClass {
 
     public function uninstallTheme(): void {
         $name = Request::getVar("name");
-        $type = "theme";
-        if (uninstall_module($name, $type)) {
+        if ($this->_uninstallTheme($name)) {
             $this->redirectToPackageView();
         } else {
             $errorMessage = get_secure_translation("removing_package_failed", array(
@@ -125,9 +124,21 @@ class PackageController extends MainClass {
         }
     }
 
-    public function toggleModule(): void {
-        $name = Request::getVar("name");
+    public function _uninstallTheme(string $name): bool {
+        
+        if (uninstall_module($name, "theme")) {
+            return true;
+        }
+        return false;
+    }
 
+    public function toggleModule(): void {
+        $name = Request::getVar("name", "", "str");
+        $state = $this->_toggleModule($name);
+        JSONResult($state);
+    }
+
+    public function _toggleModule(string $name) {
         $module = new Module($name);
         $oldState = $module->isEnabled();
         $newState = false;
@@ -139,10 +150,11 @@ class PackageController extends MainClass {
             $newState = true;
         }
         $module->save();
-        JSONResult(array(
+
+        return [
             "name" => $name,
             "enabled" => $newState
-        ));
+        ];
     }
 
     public function truncateInstalledPatches(): void {

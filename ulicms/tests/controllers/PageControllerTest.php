@@ -18,12 +18,13 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
         $_POST = [];
         $_GET = [];
         $_SESSION = [];
+
         $manager = new UserManager();
         $user = $manager->getAllUsers("admin desc")[0];
         $user->setSecondaryGroups([]);
         $user->save();
 
-        //Database::deleteFrom("content", "slug like 'unit-test-'");
+        Database::deleteFrom("content", "slug like 'unit-test-'");
     }
 
     public function testGetPagesListViewNotSetReturnsDefault() {
@@ -274,7 +275,8 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertCount(0, $deleted);
     }
 
-    protected function createTestPages() {
+    protected function createTestPages(): array {
+        $pages = [];
         $slugs = ["unit-test", "unit-test-2", "unit-test-3"];
 
         foreach ($slugs as $slug) {
@@ -287,11 +289,12 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
             $page->author_id = 1;
             $page->group_id = 1;
             $page->save();
-            $page->delete();
+            $pages[] = $page;
         }
+        return $pages;
     }
 
-    protected function createDeletedPage() {
+    protected function createDeletedPage(): Page {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
         $page->slug = 'unit-test-' . time();
@@ -302,6 +305,8 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
         $page->group_id = 1;
         $page->save();
         $page->delete();
+
+        return $page;
     }
 
     public function testDiffContents() {
@@ -438,9 +443,38 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
 
     public function testNextFreeSlugReturnsSlugWithSuffix() {
         $this->createTestPages();
+
         $controller = new PageController();
         $slug = $controller->_nextFreeSlug("unit-test", "de", 0);
         $this->assertEquals("unit-test-4", $slug);
+    }
+
+    public function testDeletePageReturnsTrue() {
+        $pages = $this->createTestPages();
+
+        $controller = new PageController();
+        $success = $controller->_deletePost($pages[0]->getID());
+        $this->assertTrue($success);
+    }
+
+    public function testDeletePageReturnsFalse() {
+        $controller = new PageController();
+        $success = $controller->_deletePost(PHP_INT_MAX);
+        $this->assertFalse($success);
+    }
+
+    public function testUnDeletePageReturnsTrue() {
+        $page = $this->createDeletedPage();
+
+        $controller = new PageController();
+        $success = $controller->_undeletePost($page->getID());
+        $this->assertTrue($success);
+    }
+
+    public function testUnDeletePageReturnsFalse() {
+        $controller = new PageController();
+        $success = $controller->_undeletePost(PHP_INT_MAX);
+        $this->assertFalse($success);
     }
 
 }
