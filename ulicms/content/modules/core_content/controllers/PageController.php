@@ -46,17 +46,8 @@ class PageController extends Controller {
     }
 
     public function createPost(): void {
-        $permissionChecker = new PermissionChecker(get_user_id());
-        $model = TypeMapper::getModel(Request::getVar("type"));
-
-        $this->_fillAndSaveModel($model, $permissionChecker);
-
-        do_event("after_create_page");
-
-        CacheUtil::clearPageCache();
-
-        if ($permissionChecker->hasPermission("pages_edit_own")
-                and $model->getID()) {
+        $model = $this->_createPost();
+        if ($model && $model->isPersistent()) {
             Request::redirect(ModuleHelper::buildActionURL(
                             "pages_edit",
                             "page={$model->getID()}")
@@ -64,6 +55,25 @@ class PageController extends Controller {
         }
 
         Request::redirect(ModuleHelper::buildActionURL("pages"));
+    }
+
+    public function _createPost(): ?Content {
+        $permissionChecker = new PermissionChecker(get_user_id());
+        $model = TypeMapper::getModel(Request::getVar("type"));
+
+        if ($model) {
+            $this->_fillAndSaveModel($model, $permissionChecker);
+        }
+
+        do_event("after_create_page");
+
+        CacheUtil::clearPageCache();
+
+        if ($model && $permissionChecker->hasPermission("pages_edit_own") && $model->getID()) {
+            return $model;
+        }
+
+        return null;
     }
 
     public function editPost(): void {
@@ -99,6 +109,7 @@ class PageController extends Controller {
             ?int $groupId = null
     ): void {
         $this->validateInput();
+
 
         $model->slug = Request::getVar(
                         "slug",
@@ -566,7 +577,7 @@ class PageController extends Controller {
                         echo "selected";
                     }
                     ?>>
-                        <?php
+                    <?php
                         echo esc($page["title"]);
                         ?>
 

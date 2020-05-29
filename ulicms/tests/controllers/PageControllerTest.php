@@ -145,7 +145,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertCount(2, $items);
     }
 
-    public function getTestUser() {
+    public function getTestUser(): User {
         $manager = new UserManager();
         $user = $manager->getAllUsers("admin desc")[0];
 
@@ -475,6 +475,43 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
         $controller = new PageController();
         $success = $controller->_undeletePost(PHP_INT_MAX);
         $this->assertFalse($success);
+    }
+
+    public function testCreatePostReturnsModel() {
+        $testUser = $this->getTestUser();
+        $_SESSION["login_id"] = $testUser->getID();
+
+        $_POST["title"] = "foobar";
+        $_POST["slug"] = "unit-test-foobar";
+        $_POST["type"] = "page";
+        $_POST["content"] = "<p>Foo Content</p>";
+        $_POST["position"] = "123";
+        $_POST["menu"] = "not_in_menu";
+        $_POST["language"] = "de";
+
+        $controller = new PageController();
+        $content = $controller->_createPost();
+
+        $this->assertInstanceOf(Content::class, $content);
+        $this->assertTrue($content->isPersistent());
+    }
+
+    public function testCreatePostReturnsNull() {
+        $_SESSION["login_id"] = PHP_INT_MAX;
+
+        $_POST["title"] = "foobar";
+        $_POST["slug"] = "unit-test-foobar";
+        $_POST["type"] = "no_type";
+        $_POST["content"] = "<p>Foo Content</p>";
+        $_POST["position"] = "123";
+        $_POST["menu"] = "not_in_menu";
+        $_POST["language"] = "de";
+
+        $controller = new PageController();
+        $content = $controller->_createPost();
+
+        $this->assertNull($content);
+
     }
 
 }
