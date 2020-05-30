@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use UliCMS\Exceptions\DatasetNotFoundException;
 use UliCMS\Constants\AuditLog;
 use UliCMS\Models\Content\Advertisement\Banner;
 use UliCMS\Utils\CacheUtil;
@@ -84,8 +85,20 @@ class BannerController extends Controller {
     }
 
     public function deletePost(): void {
-        $id = intval($_GET["banner"]);
-        $banner = new Banner($id);
+        $id = Request::getVat("banner", 0, "int");
+
+        $this->_deletePost($id);
+        // Todo: handle errors
+        Request::redirect(ModuleHelper::buildActionURL("banner"));
+    }
+
+    public function _deletePost(int $id): bool {
+        try {
+            $banner = new Banner($id);
+        } catch (DatasetNotFoundException $e) {
+            return false;
+        }
+
         do_event("before_banner_delete");
         $banner->delete();
 
@@ -100,7 +113,7 @@ class BannerController extends Controller {
 
         CacheUtil::clearPageCache();
 
-        Request::redirect(ModuleHelper::buildActionURL("banner"));
+        return !$banner->isPersistent();
     }
 
 }
