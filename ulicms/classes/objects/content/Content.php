@@ -9,7 +9,7 @@ abstract class Content extends Model {
 	abstract protected function loadBySlugAndLanguage($name, $language);
 
 	public function getShowHeadline(): bool {
-		return $this->show_headline;
+		return  boolval($this->show_headline);
 	}
 
 	public static function emptyTrash(): void {

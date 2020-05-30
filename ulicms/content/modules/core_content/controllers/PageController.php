@@ -48,9 +48,11 @@ class PageController extends Controller {
     public function createPost(): void {
         $model = $this->_createPost();
         if ($model && $model->isPersistent()) {
-            Request::redirect(ModuleHelper::buildActionURL(
+            Request::redirect(
+                    ModuleHelper::buildActionURL(
                             "pages_edit",
-                            "page={$model->getID()}")
+                            "page={$model->getID()}"
+                    )
             );
         }
 
@@ -77,9 +79,33 @@ class PageController extends Controller {
     }
 
     public function editPost(): void {
+        $success = $this->_editPost();
+
+        $id = Request::getVar("page_id", null, "int"); #
+        $url = ModuleHelper::buildActionURL(
+                        "pages_edit",
+                        "page={$id}"
+        );
+
+        $httpStatus = $success ?
+                HttpStatusCode::OK : HttpStatusCode::UNPROCESSABLE_ENTITY;
+        Response::sendHttpStatusCodeResultIfAjax(
+                $httpStatus,
+                $url
+        );
+    }
+
+    public function _editPost(): bool {
         $permissionChecker = new PermissionChecker(get_user_id());
         $model = TypeMapper::getModel(Request::getVar("type"));
-        $model->loadById(Request::getVar("page_id", null, "int"));
+        if (!$model) {
+            return false;
+        }
+        try {
+            $model->loadById(Request::getVar("page_id", null, "int"));
+        } catch (DatasetNotFoundException $e) {
+            return false;
+        }
 
         $model->type = Request::getVar("type");
 
@@ -92,17 +118,12 @@ class PageController extends Controller {
 
         CacheUtil::clearPageCache();
 
-        // if called by ajax return no content to improve performance
-        if (Request::isAjaxRequest()) {
-            HTTPStatusCodeResult(HttpStatusCode::OK);
-        }
-
-        Response::redirect(ModuleHelper::buildActionURL("pages"));
+        return !$model->hasChanges();
     }
 
     // TODO: This method is too long
     // Split this in multiple methods
-    private function _fillAndSaveModel(
+    protected function _fillAndSaveModel(
             $model,
             PermissionChecker $permissionChecker,
             ?int $userId = null,
@@ -111,13 +132,7 @@ class PageController extends Controller {
         $this->validateInput();
 
 
-        $model->slug = Request::getVar(
-                        "slug",
-                        StringHelper::cleanString(
-                                Request::getVar("title")
-                        ),
-                        "str"
-        );
+        $model->slug = Request::getVar("slug", "", "str");
         $model->title = Request::getVar("title");
         $model->alternate_title = Request::getVar("alternate_title");
 
@@ -175,7 +190,8 @@ class PageController extends Controller {
 
         $parent_id = Request::getVar("parent_id", null, "str");
         $model->parent_id = intval($parent_id) > 0 ? intval($parent_id) : null;
-        if (Request::getVar("access")) {
+
+        if (Request::hasVar("access")) {
             $model->access = implode(",", Request::getVar("access"));
         }
 
@@ -229,9 +245,7 @@ class PageController extends Controller {
                             "article_image"
             );
             $model->article_date = Request::getVar("article_date") ?
-                    strtotime(
-                            Request::getVar("article_date")
-                    ) : null;
+                    strtotime(Request::getVar("article_date")) : null;
 
             $model->excerpt = Request::getVar("excerpt");
         }
@@ -239,13 +253,12 @@ class PageController extends Controller {
 
         $permissionObjects = array("admins", "group", "owner", "others");
         foreach ($permissionObjects as $object) {
+            $permission = Request::getVar(
+                            "only_{$object}_can_edit", false, "bool"
+            );
             $model->getPermissions()->setEditRestriction(
                     $object,
-                    boolval(
-                            Request::getVar(
-                                    "only_{$object}_can_edit", false, "bool"
-                            )
-                    )
+                    boolval($permission)
             );
         }
 
@@ -577,7 +590,7 @@ class PageController extends Controller {
                         echo "selected";
                     }
                     ?>>
-                    <?php
+                        <?php
                         echo esc($page["title"]);
                         ?>
 

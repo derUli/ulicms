@@ -511,7 +511,82 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
         $content = $controller->_createPost();
 
         $this->assertNull($content);
+    }
 
+    public function testEditPostSuccessReturnsTrue() {
+        $pages = $this->createTestPages();
+
+        $types = [
+            "page",
+            "node",
+            "module",
+            "video",
+            "audio",
+            "image",
+            "article",
+            "list"
+        ];
+        foreach ($types as $type) {
+            $testUser = $this->getTestUser();
+            $_SESSION["login_id"] = $testUser->getID();
+
+            $_POST["page_id"] = $pages[0]->getId();
+            $_POST["title"] = "foobar";
+            $_POST["slug"] = "unit-test-foobar";
+            $_POST["type"] = $type;
+            $_POST["content"] = "<p>New Content</p>";
+            $_POST["position"] = "123";
+
+            $_POST["article_date"] = UliCMS\Helpers\NumberFormatHelper::timestampToSqlDate();
+
+            $_POST["menu"] = "not_in_menu";
+            $_POST["language"] = "de";
+            $_POST["active"] = "1";
+            $_POST["access"] = ["all"];
+
+            $controller = new PageController();
+            $success = $controller->_editPost();
+
+            $this->assertTrue($success, "saving content of type $type failed");
+        }
+    }
+
+    public function testEditPostNotFoundReturnsFalse() {
+        $testUser = $this->getTestUser();
+        $_SESSION["login_id"] = $testUser->getID();
+
+        $_POST["page_id"] = PHP_INT_MAX;
+        $_POST["title"] = "foobar";
+        $_POST["slug"] = "unit-test-foobar";
+        $_POST["type"] = "page";
+        $_POST["content"] = "<p>Foo Content</p>";
+        $_POST["position"] = "123";
+        $_POST["menu"] = "not_in_menu";
+        $_POST["language"] = "de";
+
+        $controller = new PageController();
+        $success = $controller->_editPost();
+
+        $this->assertFalse($success);
+    }
+
+    public function testEditPostInvalidTypeReturnsFalse() {
+        $testUser = $this->getTestUser();
+        $_SESSION["login_id"] = $testUser->getID();
+
+        $_POST["id"] = PHP_INT_MAX;
+        $_POST["title"] = "foobar";
+        $_POST["slug"] = "unit-test-foobar";
+        $_POST["type"] = "magic_content";
+        $_POST["content"] = "<p>Foo Content</p>";
+        $_POST["position"] = "123";
+        $_POST["menu"] = "not_in_menu";
+        $_POST["language"] = "de";
+
+        $controller = new PageController();
+        $success = $controller->_editPost();
+
+        $this->assertFalse($success);
     }
 
 }
