@@ -16,21 +16,27 @@ class CategoryController extends Controller {
 
     public function createPost(): void {
         $logger = LoggerRegistry::get("audit_log");
-
-        if (!empty($_REQUEST["name"])) {
-            Categories::addCategory(
-                    $_REQUEST["name"],
-                    $_REQUEST["description"]
-            );
-            if ($this->logger) {
+        
+        $name = Request::getVar("name", "", "str");
+        $description = Request::getVar("description", "", "str");
+        
+        // TODO: validate required fields
+        Categories::addCategory($name, $description);
+        
+        Request::redirect(ModuleHelper::buildActionURL("categories"));
+    }
+    
+      public function _createPost(string $name, string $description): ?int {
+            $logger = LoggerRegistry::get("audit_log");
+            $categoryId = Categories::addCategory($name, $description);
+            if ($categoryId && $this->logger) {
                 $user = getUserById(get_user_id());
                 $name = isset($user["username"]) ?
                         $user["username"] : AuditLog::UNKNOWN;
                 $this->logger->debug("User $name - "
                         . "Created a new category ({$_REQUEST['name']})");
             }
-        }
-        Request::redirect(ModuleHelper::buildActionURL("categories"));
+        return $categoryId;
     }
 
     public function updatePost(): void {
