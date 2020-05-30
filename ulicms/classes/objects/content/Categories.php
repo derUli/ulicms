@@ -66,9 +66,10 @@ class Categories {
         return $html;
     }
 
-    public static function deleteCategory(int $id): void {
+    public static function deleteCategory(int $id): bool {
         $category = new Category($id);
         $category->delete();
+        return !$category->getID();
     }
 
     public static function getCategoryDescriptionById(?int $id): ?string {

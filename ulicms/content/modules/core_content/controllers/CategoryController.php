@@ -15,47 +15,52 @@ class CategoryController extends Controller {
     }
 
     public function createPost(): void {
-        $logger = LoggerRegistry::get("audit_log");
-        
         $name = Request::getVar("name", "", "str");
         $description = Request::getVar("description", "", "str");
-        
+
         // TODO: validate required fields
         Categories::addCategory($name, $description);
-        
+
         Request::redirect(ModuleHelper::buildActionURL("categories"));
-    }
-    
-      public function _createPost(string $name, string $description): ?int {
-            $logger = LoggerRegistry::get("audit_log");
-            $categoryId = Categories::addCategory($name, $description);
-            if ($categoryId && $this->logger) {
-                $user = getUserById(get_user_id());
-                $name = isset($user["username"]) ?
-                        $user["username"] : AuditLog::UNKNOWN;
-                $this->logger->debug("User $name - "
-                        . "Created a new category ({$_REQUEST['name']})");
-            }
-        return $categoryId;
     }
 
-    public function updatePost(): void {
-        if (!empty($_REQUEST["name"]) && !empty($_REQUEST["id"])) {
-            Categories::updateCategory(
-                    intval($_REQUEST["id"]),
-                    $_REQUEST["name"],
-                    $_REQUEST["description"]
-            );
-            if ($this->logger) {
-                $user = getUserById(get_user_id());
-                $name = isset($user["username"]) ?
-                        $user["username"] : AuditLog::UNKNOWN;
-                $this->logger->debug("User $name - Update category with id "
-                        . "({$_REQUEST['id']}) new title is "
-                        . "\"{$_REQUEST['name']}\"");
-            }
+    public function _createPost(string $name, string $description): ?int {
+        $logger = LoggerRegistry::get("audit_log");
+        $categoryId = Categories::addCategory($name, $description);
+        if ($categoryId && $this->logger) {
+            $user = getUserById(get_user_id());
+            $userName = isset($user["username"]) ?
+                    $user["username"] : AuditLog::UNKNOWN;
+            $this->logger->debug("User $userName - "
+                    . "Created a new category ({$name})");
         }
+        return $categoryId;
+    }
+    
+      public function updatePost(): void {
+        $id = Request::getVar("id", 0, "int");
+        $name = Request::getVar("name", "", "str");
+        $description = Request::getVar("description", "", "str");
+
+        // TODO: validate required fields
+        Categories::updateCategory($id, $name, $description);
+
         Request::redirect(ModuleHelper::buildActionURL("categories"));
+    }
+
+
+    public function _updatePost(int $id, string $name, string $description): ?int {
+        $updateId = Categories::updateCategory($id, $name, $description);
+        if ($this->logger) {
+            $user = getUserById(get_user_id());
+            $userName = isset($user["username"]) ?
+                    $user["username"] : AuditLog::UNKNOWN;
+            $this->logger->debug("User $userName - Update category with id "
+                    . "({$id}) new title is "
+                    . "\"{$name}\"");
+        }
+
+       return $updateId;
     }
 
     public function deletePost(): void {
@@ -71,6 +76,21 @@ class CategoryController extends Controller {
             }
         }
         Request::redirect(ModuleHelper::buildActionURL("categories"));
+    }
+    
+    public function _deletePost($id): bool {
+        $success = false;
+        if ($id != 1) {
+            $success = Categories::deleteCategory($id);
+            if ($this->logger) {
+                $user = getUserById(get_user_id());
+                $name = isset($user["username"]) ?
+                        $user["username"] : AuditLog::UNKNOWN;
+                $this->logger->debug("User $name - "
+                        . "delete category with id ({$id})");
+            }
+        }
+        return $success;
     }
 
 }
