@@ -151,14 +151,15 @@ class UserController extends Controller {
         $this->_deletePost($id);
         Request::redirect(ModuleHelper::buildActionURL("admins"));
     }
+
     public function _deletePost(int $id): bool {
         do_event("before_admin_delete");
 
         $user = new User($id);
-        if(!$user->isPersistent()){
+        if (!$user->isPersistent()) {
             return false;
         }
-        
+
         $user->delete();
 
         do_event("after_admin_delete");
