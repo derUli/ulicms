@@ -146,11 +146,19 @@ class UserController extends Controller {
     }
 
     public function deletePost(): void {
-        $id = intval($_GET["id"]);
+        $id = Request::getVar("id", 0, "int");
 
+        $this->_deletePost($id);
+        Request::redirect(ModuleHelper::buildActionURL("admins"));
+    }
+    public function _deletePost(int $id): bool {
         do_event("before_admin_delete");
 
         $user = new User($id);
+        if(!$user->isPersistent()){
+            return false;
+        }
+        
         $user->delete();
 
         do_event("after_admin_delete");
@@ -160,7 +168,7 @@ class UserController extends Controller {
             $name = isset($user["username"]) ? $user["username"] : AuditLog::UNKNOWN;
             $this->logger->debug("User $name - Deleted User with id ($id)");
         }
-        Request::redirect(ModuleHelper::buildActionURL("admins"));
+        return true;
     }
 
 }
