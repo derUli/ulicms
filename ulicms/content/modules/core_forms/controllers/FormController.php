@@ -79,15 +79,20 @@ class FormController extends Controller {
     }
 
     public function deletePost(): void {
-        $del = Request::getVar("del", 0, "int");
-        Forms::deleteForm($del);
+        $id = Request::getVar("del", 0, "int");
+        $this->_deletePost($id);
+        Request::redirect(ModuleHelper::buildActionURL("forms"));
+    }
+
+    public function _deletePost(int $id): bool {
+        $success = Forms::deleteForm($id);
         if ($this->logger) {
             $user = getUserById(get_user_id());
             $name = isset($user["username"]) ?
                     $user["username"] : AuditLog::UNKNOWN;
             $this->logger->debug("User $name - Deleted form with Id ({$del})");
         }
-        Request::redirect(ModuleHelper::buildActionURL("forms"));
+        return $success;
     }
 
 }
