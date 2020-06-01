@@ -2,6 +2,7 @@
 
 use UliCMS\Constants\CommentStatus;
 use UliCMS\Models\Content\Comment;
+use UliCMS\Exceptions\NotImplementedException;
 
 class CommentsControllerTest extends \PHPUnit\Framework\TestCase {
 
@@ -130,11 +131,89 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase {
     public function testFilterComments() {
         $page = $this->getTestComment();
         $controller = new CommentsController();
-        
+
         $comments = $controller->_filterComments(
                 CommentStatus::PUBLISHED, $page->getContentId());
 
         $this->assertCount(1, $comments);
+    }
+
+    public function testDoActionThrowsException() {
+        $controller = new CommentsController();
+
+        $this->expectException(NotImplementedException::class);
+        $comment = new Comment();
+        $controller->_doAction($comment, "do_magic");
+    }
+
+    public function testDoActionPublish() {
+        $controller = new CommentsController();
+
+        $comment = $this->getTestComment();
+        $updatedComment = $controller->_doAction($comment, "publish");
+
+        $this->assertEquals(CommentStatus::PUBLISHED, $updatedComment->getStatus());
+        $this->assertTrue($updatedComment->isRead());
+    }
+
+    public function testDoActionUnpublish() {
+        $controller = new CommentsController();
+
+        $comment = $this->getTestComment();
+        $updatedComment = $controller->_doAction($comment, "unpublish");
+
+        $this->assertEquals(CommentStatus::PENDING, $updatedComment->getStatus());
+    }
+
+    public function testDoActionMarkAsSpam() {
+        $controller = new CommentsController();
+
+        $comment = $this->getTestComment();
+        $updatedComment = $controller->_doAction($comment, "mark_as_spam");
+
+        $this->assertEquals(CommentStatus::SPAM, $updatedComment->getStatus());
+    }
+
+    public function testDoActionMarkAsRead() {
+        $controller = new CommentsController();
+
+        $comment = $this->getTestComment();
+        $updatedComment = $controller->_doAction($comment, "mark_as_read");
+
+        $this->assertTrue($updatedComment->isRead());
+    }
+
+    public function testDoActionsMarkAsRead() {
+        $controller = new CommentsController();
+
+        $commentIds = [
+            $this->getTestComment()->getId(),
+            $this->getTestComment()->getId(),
+        ];
+        $updatedComments = $controller->_doActions($commentIds, "mark_as_read");
+        $this->assertCount(2, $updatedComments);
+
+        foreach ($updatedComments as $comment) {
+            $this->assertTrue($comment->isRead());
+        }
+    }
+
+    public function testDoActionMarkAsUnread() {
+        $controller = new CommentsController();
+
+        $comment = $this->getTestComment();
+        $updatedComment = $controller->_doAction($comment, "mark_as_unread");
+
+        $this->assertFalse($updatedComment->isRead());
+    }
+
+    public function testDoActionDelete() {
+        $controller = new CommentsController();
+
+        $comment = $this->getTestComment();
+        $updatedComment = $controller->_doAction($comment, "delete");
+
+        $this->assertFalse($updatedComment->isPersistent());
     }
 
 }

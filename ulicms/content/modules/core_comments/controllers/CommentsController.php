@@ -158,7 +158,7 @@ class CommentsController extends MainClass {
     public function _filterComments(
             ?string $status = null,
             ?int $content_id = null,
-            ?string $limit = null
+            ?int $limit = null
     ): array {
         // do the search query
         return $this->_getResults($status, $content_id, $limit);
@@ -175,48 +175,13 @@ class CommentsController extends MainClass {
 
     public function doAction(): void {
         // post arguments
-        $comments = Request::getVar("comments", []);
+        $commentIds = Request::getVar("comments", []);
         $action = Request::getVar("action", null, "str");
 
         // if we have comments and an action
-        if (is_array($comments) && !empty($action)) {
+        if (is_array($commentIds) && !empty($action)) {
             // do the selected action for each comment
-            foreach ($comments as $id) {
-                $comment = new Comment($id);
-                switch ($action) {
-                    case "mark_as_spam":
-                        $comment->setStatus(CommentStatus::SPAM);
-                        $comment->setRead(true);
-                        break;
-                    case "publish":
-                        $comment->setStatus(CommentStatus::PUBLISHED);
-                        $comment->setRead(true);
-                        break;
-                    case "unpublish":
-                        $comment->setStatus(CommentStatus::PENDING);
-                        break;
-                    case "mark_as_read":
-                        $comment->setRead(true);
-                        break;
-                    case "mark_as_unread":
-                        $comment->setRead(false);
-                        break;
-                    case "delete":
-                        $comment->delete();
-                        break;
-                    default:
-                        throw new NotImplementedException(
-                                "comment action not implemented"
-                        );
-                }
-
-                // if action is not delete save it
-                if ($action != "delete") {
-                    $comment->save();
-                }
-
-                CacheUtil::clearPageCache();
-            }
+            $this->_doActions($commentIds, $action);
         }
 
         // referrer is from a hidden field on the form
@@ -234,6 +199,53 @@ class CommentsController extends MainClass {
             $referrer .= "jumpto=comments";
         }
         Request::redirect($referrer);
+    }
+
+    public function _doActions(array $commentIds, string $action): array {
+        $processedComments = [];
+
+        foreach ($commentIds as $id) {
+            $comment = new Comment($id);
+            $processedComments[] = $this->_doAction($comment, $action);
+        }
+        return $processedComments;
+    }
+
+    public function _doAction(Comment $comment, string $action): Comment {
+        switch ($action) {
+            case "mark_as_spam":
+                $comment->setStatus(CommentStatus::SPAM);
+                $comment->setRead(true);
+                break;
+            case "publish":
+                $comment->setStatus(CommentStatus::PUBLISHED);
+                $comment->setRead(true);
+                break;
+            case "unpublish":
+                $comment->setStatus(CommentStatus::PENDING);
+                break;
+            case "mark_as_read":
+                $comment->setRead(true);
+                break;
+            case "mark_as_unread":
+                $comment->setRead(false);
+                break;
+            case "delete":
+                $comment->delete();
+                break;
+            default:
+                throw new NotImplementedException(
+                        "comment action not implemented"
+                );
+        }
+        // if action is not delete save it
+        if ($action != "delete") {
+            $comment->save();
+        }
+
+        CacheUtil::clearPageCache();
+
+        return $comment;
     }
 
 }
