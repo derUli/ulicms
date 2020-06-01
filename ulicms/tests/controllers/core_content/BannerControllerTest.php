@@ -1,4 +1,5 @@
 <?php
+
 use UliCMS\Models\Content\Advertisement\Banner;
 use UliCMS\Exceptions\DatasetNotFoundException;
 
@@ -9,16 +10,56 @@ class BannerControllerTest extends \PHPUnit\Framework\TestCase {
                 "audit_log",
                 new Logger(Path::resolve("ULICMS_LOG/audit_log"))
         );
+
+        $_POST = [];
     }
 
     public function tearDown() {
+        $_POST = [];
+
         LoggerRegistry::unregister("audit_log");
         Database::pQuery(
-                "DELETE FROM `{prefix}banner` where html in (?)",
+                "DELETE FROM `{prefix}banner` where html in (?) or "
+                . "name = ?",
                 [
-                    "Werbung nervt"
+                    "Werbung nervt",
+                    "Nervige Werbung"
                 ]
                 , true);
+    }
+
+    public function testCreateReturnsModel() {
+        $this->setPostVars();
+
+        $controller = new BannerController();
+        $banner = $controller->_createPost();
+
+        $this->assertInstanceOf(Banner::class, $banner);
+        $this->assertGreaterThanOrEqual(1, $banner->getId());
+    }
+
+    protected function setPostVars() {
+        $_POST["banner_name"] = "Nervige Werbung";
+        $_POST["image_url"] = "";
+        $_POST["link_url"] = "";
+        $_POST["category_id"] = 1;
+        $_POST["type"] = "html";
+        $_POST["html"] = "Foo Bar";
+        $_POST["date_from"] = "";
+        $_POST["date_to"] = "";
+    }
+    
+      public function testUpdateReturnsModel() {
+        $this->setPostVars();
+        $controller = new BannerController();
+        $id = $controller->_createPost()->getId();
+        
+        $_POST["link_url"] = "https://google.com";
+        $banner = $controller->_updatePost($id);
+
+        $this->assertInstanceOf(Banner::class, $banner);
+        $this->assertGreaterThanOrEqual(1, $banner->getId());
+        $this->assertEquals("https://google.com", $banner->getLinkUrl());
     }
 
     public function testDeletePostReturnsTrue() {
@@ -30,7 +71,7 @@ class BannerControllerTest extends \PHPUnit\Framework\TestCase {
         $controller = new BannerController();
         $success = $controller->_deletePost($banner->getId());
         $this->assertTrue($success);
-        
+
         $this->expectException(DatasetNotFoundException::class);
         $banner->reload();
         $this->assertFalse($banner->isPersistent());

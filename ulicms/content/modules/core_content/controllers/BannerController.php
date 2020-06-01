@@ -17,6 +17,11 @@ class BannerController extends Controller {
     }
 
     public function createPost(): void {
+        $this->_createPost();
+        Request::redirect(ModuleHelper::buildActionURL("banner"));
+    }
+
+    public function _createPost(): Banner {
         do_event("before_create_banner");
 
         $banner = new Banner();
@@ -45,14 +50,20 @@ class BannerController extends Controller {
         do_event("after_create_banner");
 
         CacheUtil::clearPageCache();
+        return $banner;
+    }
+
+    public function updatePost(): void {
+        $this->_updatePost();
 
         Request::redirect(ModuleHelper::buildActionURL("banner"));
     }
 
-    public function updatePost(): void {
+    public function _updatePost(): Banner {
+        $id = intval($_POST["id"]);
+
         do_event("before_edit_banner");
 
-        $id = intval($_POST["id"]);
         $banner = new Banner($id);
         $banner->setName(strval($_POST["banner_name"]));
         $banner->setImageUrl(strval($_POST["image_url"]));
@@ -81,7 +92,7 @@ class BannerController extends Controller {
 
         CacheUtil::clearPageCache();
 
-        Request::redirect(ModuleHelper::buildActionURL("banner"));
+        return $banner;
     }
 
     public function deletePost(): void {
