@@ -1,4 +1,4 @@
-===== Neues in UliCMS 2020.2.2 =====
+===== Neues in UliCMS 2020.2.3 =====
 
 Entfernte API-Methoden:
 * \isNullOrEmpty($variable): bool
