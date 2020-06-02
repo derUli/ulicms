@@ -2,6 +2,7 @@
 
 use PHPMailer\PHPMailer\PHPMailer;
 use UliCMS\Constants\EmailModes;
+use PHPMailer\PHPMailer\SMTP;
 
 class MailerTest extends \PHPUnit\Framework\TestCase {
 
@@ -32,7 +33,7 @@ class MailerTest extends \PHPUnit\Framework\TestCase {
 
     public function tearDown() {
         LoggerRegistry::unregister("phpmailer_log");
-        
+
         foreach ($this->initialSettings as $key => $value) {
             Settings::set($key, $value);
         }
@@ -108,6 +109,8 @@ class MailerTest extends \PHPUnit\Framework\TestCase {
             "tls",
             "ssl"
         )));
+
+        $mailer->SMTPDebug = SMTP::DEBUG_LOWLEVEL;
         return $mailer;
     }
 
@@ -124,6 +127,13 @@ class MailerTest extends \PHPUnit\Framework\TestCase {
         $this->assertIsBool(
                 Mailer::sendWithPHPMailer("john@doe.invalid", "Testmail", "Hallo John!", $headers)
         );
+    }
+
+    public function testGetMailLogger() {
+        $logFunction = Mailer::getMailLogger();
+
+        $this->assertIsCallable($logFunction);
+        $logFunction("Hallo Welt", SMTP::DEBUG_CONNECTION);
     }
 
 }

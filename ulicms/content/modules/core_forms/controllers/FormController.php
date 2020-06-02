@@ -12,6 +12,11 @@ class FormController extends Controller {
     }
 
     public function createPost(): void {
+        $this->_createPost();
+        Request::redirect(ModuleHelper::buildActionURL("forms"));
+    }
+    
+    public function _createPost(): ?int {
         $name = $_POST["name"];
         $enabled = $_POST["enabled"];
         $email_to = $_POST["email_to"];
@@ -22,7 +27,7 @@ class FormController extends Controller {
         $mail_from_field = $_POST["mail_from_field"];
         $target_page_id = $_POST["target_page_id"];
 
-        Forms::createForm(
+        $success = Forms::createForm(
                 $name,
                 $email_to,
                 $subject,
@@ -33,17 +38,22 @@ class FormController extends Controller {
                 $target_page_id,
                 $enabled
         );
+        $id = $success ? Database::getLastInsertID() : null;
         if ($this->logger) {
             $user = getUserById(get_user_id());
             $name = isset($user["username"]) ?
                     $user["username"] : AuditLog::UNKNOWN;
             $this->logger->debug("User $name - Created a new form ({$name})");
         }
-
-        Request::redirect(ModuleHelper::buildActionURL("forms"));
+        return $id;
     }
 
     public function updatePost(): void {
+        $this->_updatePost();
+        Request::redirect(ModuleHelper::buildActionURL("forms"));
+    }
+    
+    public function _updatePost(): bool {
         $id = $_POST["id"];
         $name = $_POST["name"];
         $enabled = $_POST["enabled"];
@@ -68,14 +78,15 @@ class FormController extends Controller {
                 $target_page_id,
                 $enabled
         );
+        $affectedRows = Database::getAffectedRows();
+        
         if ($this->logger) {
             $user = getUserById(get_user_id());
             $name = isset($user["username"]) ?
                     $user["username"] : AuditLog::UNKNOWN;
             $this->logger->debug("User $name - Updated form with Id ({$id})");
         }
-
-        Request::redirect(ModuleHelper::buildActionURL("forms"));
+        return $affectedRows > 0;
     }
 
     public function deletePost(): void {
@@ -90,7 +101,7 @@ class FormController extends Controller {
             $user = getUserById(get_user_id());
             $name = isset($user["username"]) ?
                     $user["username"] : AuditLog::UNKNOWN;
-            $this->logger->debug("User $name - Deleted form with Id ({$del})");
+            $this->logger->debug("User $name - Deleted form with Id ({$id})");
         }
         return $success;
     }

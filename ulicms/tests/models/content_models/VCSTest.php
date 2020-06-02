@@ -53,10 +53,8 @@ class VCSTest extends \PHPUnit\Framework\TestCase {
         $page->save();
 
         VCS::createRevision($page->getID(), "New Text 1", 1);
-        $revisions = VCS::getRevisionsByContentID($page->getID());
-
         VCS::createRevision($page->getID(), "New Text 2", 1);
-        $revisions = VCS::getRevisionsByContentID($page->getID());
+        $revisions = VCS::getRevisionsByContentID($page->getID(), "id asc");
         $lastRevision = $revisions[1];
 
         $page = new Page($page->getID());

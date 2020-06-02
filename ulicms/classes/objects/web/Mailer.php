@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Exceptions\NotImplementedException;
+use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\PHPMailer;
 use UliCMS\Constants\EmailModes;
 
@@ -48,7 +48,7 @@ class Mailer {
         );
     }
 
-    protected static function getMailLogger(): Closure {
+    public static function getMailLogger(): Closure {
         return function ($str, $level) {
             $logger = LoggerRegistry::get("phpmailer_log");
             if ($logger) {
@@ -92,7 +92,7 @@ class Mailer {
             string $mode = EmailModes::INTERNAL
     ): ?PHPMailer {
         $mailer = new PHPMailer();
-        $mailer->SMTPDebug = 3;
+        $mailer->SMTPDebug = SMTP::DEBUG_CONNECTION;
 
         $mailer->Debugoutput = self::getMailLogger();
         
