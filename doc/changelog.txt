@@ -1,5 +1,8 @@
 ===== Neues in UliCMS 2020.2.3 =====
 
+API-Änderungen:
+* str_contains empfängt nun Parameter in vertauschter Reihenfolge
+
 Entfernte API-Methoden:
 * \isNullOrEmpty($variable): bool
 * \isNotNullOrEmpty($variable): bool
