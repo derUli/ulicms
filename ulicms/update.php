@@ -20,7 +20,7 @@ use UliCMS\Packages\PatchManager;
 // if the config file is writable replace "var" with "public"
 if (is_writable($configFile)) {
     $configContent = file_get_contents($configFile);
-    if (str_contains('var $', $configContent)) {
+    if (str_contains($configContent, 'var $')) {
         $configContent = str_ireplace('var $', 'public $', $configContent);
         file_put_contents($configFile, $configContent);
     }

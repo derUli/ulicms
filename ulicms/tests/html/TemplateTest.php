@@ -11,7 +11,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
     public function setUp() {
         Translation::loadAllModuleLanguageFiles("en");
         Flags::setNoCache(true);
-        
+
         $settings = array(
             "site_slogan",
             "site_slogan_de",
@@ -47,10 +47,10 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         Database::query("delete from {prefix}content where "
                 . "title like 'Test Page %' or slug like 'testpage%' or slug"
                 . " like 'test-page%' or slug ='testgetbodyclasses'",
-                true);        
+                true);
         Vars::delete("headline");
         Vars::delete("title");
-        
+
         Settings::delete("video_width_100_percent");
         Settings::delete("hide_meta_generator");
         Settings::delete("disable_no_format_detection");
@@ -119,12 +119,13 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $baseMetas = Template::getBaseMetas();
         $this->assertTrue(
                 str_contains(
-                        '<meta http-equiv="content-type" content="text/html; charset=utf-8"/>',
-                        $baseMetas)
+                        $baseMetas,
+                        '<meta http-equiv="content-type" content="text/html; charset=utf-8"/>'
+                )
         );
         $this->assertTrue(
                 str_contains(
-                        '<meta charset="utf-8"/>', $baseMetas
+                        $baseMetas, '<meta charset="utf-8"/>'
                 )
         );
     }
@@ -132,13 +133,13 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
     public function testGetBaseMetasVideoWidth100Percent() {
         Settings::set("video_width_100_percent", "1");
         $baseMetas = Template::getBaseMetas();
-        $this->assertTrue(str_contains("video {", $baseMetas));
-        $this->assertTrue(str_contains("width: 100% !important;", $baseMetas));
-        $this->assertTrue(str_contains("height: auto !important;", $baseMetas));
+        $this->assertTrue(str_contains($baseMetas, "video {"));
+        $this->assertTrue(str_contains($baseMetas, "width: 100% !important;"));
+        $this->assertTrue(str_contains($baseMetas, "height: auto !important;"));
 
         Settings::delete("video_width_100_percent");
         $baseMetas = Template::getBaseMetas();
-        $this->assertFalse(str_contains("video {", $baseMetas));
+        $this->assertFalse(str_contains($baseMetas, "video {"));
     }
 
     public function testGetBaseMetasHideMetaGenerator() {
@@ -147,11 +148,11 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
                 . cms_version() . '"/>';
 
         $baseMetas = Template::getBaseMetas();
-        $this->assertFalse(str_contains($expected, $baseMetas));
+        $this->assertFalse(str_contains($baseMetas, $expected));
 
         Settings::delete("hide_meta_generator");
         $baseMetas = Template::getBaseMetas();
-        $this->assertTrue(str_contains($expected, $baseMetas));
+        $this->assertTrue(str_contains($baseMetas, $expected));
     }
 
     public function testGetBaseMetasDisableNoFormatDetection() {
@@ -159,11 +160,11 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $expected = '<meta name="format-detection" content="telephone=no"/>';
 
         $baseMetas = Template::getBaseMetas();
-        $this->assertFalse(str_contains($expected, $baseMetas));
+        $this->assertFalse(str_contains($baseMetas, $expected));
 
         Settings::delete("disable_no_format_detection");
         $baseMetas = Template::getBaseMetas();
-        $this->assertTrue(str_contains($expected, $baseMetas));
+        $this->assertTrue(str_contains($baseMetas, $expected));
     }
 
     private function setSiteSlogan() {
@@ -253,8 +254,11 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetLanguageSelection() {
         $html = Template::_getLanguageSelection();
-        $this->assertTrue(str_contains("<ul class='language_selection'>",
-                        $html));
+        $this->assertTrue(
+                str_contains(
+                        $html,
+                        "<ul class='language_selection'>",
+        ));
 
         // By default there should be at least 2 languages
         // german and english
@@ -272,8 +276,11 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         Settings::set("domain_to_language",
                 implode("\n", $mappingLines));
         $html = Template::_getLanguageSelection();
-        $this->assertTrue(str_contains("<ul class='language_selection'>",
-                        $html));
+        $this->assertTrue(
+                str_contains(
+                        $html,
+                        "<ul class='language_selection'>"
+        ));
 
         // By default there should be at least 2 languages
         // german and english
@@ -542,8 +549,8 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
                 Template::getHeadline("<h2>%title%</h2>")
         );
     }
-    
-    public function testGetHeadlineReturnsNull(){
+
+    public function testGetHeadlineReturnsNull() {
         $manager = new UserManager();
         $users = $manager->getAllUsers();
         $user = $users[0];
@@ -552,7 +559,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $groups = Group::getAll();
         $group = $groups[0];
         $group_id = $group->getId();
-        
+
         $page = new Page();
         $page->title = "Test Page " . time();
         $page->slug = "test-page-" . time();
@@ -564,15 +571,14 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $page->group_id = $group_id;
         $page->show_headline = false;
         $page->save();
-        
+
         $_GET["slug"] = $page->slug;
-        $_SESSION["language"] =  $page->language;
-        
+        $_SESSION["language"] = $page->language;
+
         $this->assertNull(Template::getHeadline());
     }
-    
-     
-    public function testGetHeadlineReturnsTitle(){
+
+    public function testGetHeadlineReturnsTitle() {
         $manager = new UserManager();
         $users = $manager->getAllUsers();
         $user = $users[0];
@@ -581,7 +587,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $groups = Group::getAll();
         $group = $groups[0];
         $group_id = $group->getId();
-        
+
         $page = new Page();
         $page->title = "Titel";
         $page->slug = "test-page-" . time();
@@ -592,14 +598,14 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $page->author_id = $user_id;
         $page->group_id = $group_id;
         $page->save();
-        
+
         $_GET["slug"] = $page->slug;
-        $_SESSION["language"] =  $page->language;
-        
+        $_SESSION["language"] = $page->language;
+
         $this->assertEquals("<h1>Titel</h1>", Template::getHeadline());
     }
-    
-     public function testGetHeadlineReturnsHeadline(){
+
+    public function testGetHeadlineReturnsHeadline() {
         $manager = new UserManager();
         $users = $manager->getAllUsers();
         $user = $users[0];
@@ -608,7 +614,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $groups = Group::getAll();
         $group = $groups[0];
         $group_id = $group->getId();
-        
+
         $page = new Page();
         $page->title = "Titel";
         $page->alternate_title = "Alternative Überschrift";
@@ -620,15 +626,14 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $page->author_id = $user_id;
         $page->group_id = $group_id;
         $page->save();
-        
+
         $_GET["slug"] = $page->slug;
-        $_SESSION["language"] =  $page->language;
-        
+        $_SESSION["language"] = $page->language;
+
         $this->assertEquals("<h1>Alternative Überschrift</h1>",
                 Template::getHeadline());
     }
-    
-    
+
     public function testHeadlinePrintsString() {
         $pages = ContentFactory::getAllRegular();
 
@@ -642,8 +647,6 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
 
         $this->assertEquals("<h3>{$first->title}</h3>", ob_get_clean());
     }
-    
-    
 
     public function testComments() {
         $_GET["slug"] = "gibts_echt_nicht";
@@ -697,11 +700,11 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $this->assertStringContainsString("Send comment", $html);
         $this->assertStringContainsString("Your E-Mail Address", $html);
     }
-    
-    public function testGetCommentsReturnsEmptyString(){
+
+    public function testGetCommentsReturnsEmptyString() {
         $_GET["slug"] = "gibts_echt_nicht";
         $_SESSION["language"] = "de";
-        
+
         $this->assertEmpty(Template::getComments());
     }
 

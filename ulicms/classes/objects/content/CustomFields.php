@@ -123,7 +123,7 @@ class CustomFields {
             $value = $dataset->value;
             // if string contains double null bytes it is an array
             // FIXME: Use new boolean "array" Attribute
-            if (str_contains("\0\0", $value)) {
+            if (str_contains($value, "\0\0")) {
                 $value = explode("\0\0", $value);
             }
             return $value;

@@ -11,7 +11,7 @@ function stripTags(string $input, ?string $allowed = null): string{
     
     // if <script> isn't allowed then remove also inline event handlers
     // such as onerror, onmouseover and onclik
-    if(!($allowed and str_contains("<script>", strtolower($allowed)))){
+    if(!($allowed and str_contains(strtolower($allowed), "<script>"))){
         $output = preg_replace('/\bon\w+=\S+(?=.*>)/i', "", $output);
     }
     return $output;

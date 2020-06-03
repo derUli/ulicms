@@ -239,14 +239,6 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(var_is_type("nicht leer", "typ_der_nicht_existiert", true));
     }
 
-    public function testStrContainsTrue() {
-        $this->assertTrue(str_contains("Ananas", "Ich esse gerne Ananas."));
-    }
-
-    public function testStrContainsFalse() {
-        $this->assertFalse(str_contains("Tomaten", "Ich esse gerne Ananas."));
-    }
-
     public function testIsNightReturnsTrue() {
         $this->assertTrue(is_night(1570404356));
     }

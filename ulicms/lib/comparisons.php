@@ -244,11 +244,6 @@ function var_is_type($var, $type, $required = false): bool {
     return false;
 }
 
-// returns true if $needle is a substring of $haystack
-function str_contains($needle, $haystack): bool {
-    return strpos($haystack, $needle) !== false;
-}
-
 function is_version_number(?string $input): bool {
     return ($input and version_compare($input, '0.0.1', '>='));
 }

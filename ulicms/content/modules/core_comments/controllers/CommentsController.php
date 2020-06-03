@@ -190,8 +190,8 @@ class CommentsController extends MainClass {
         // It's inpossible to append an anchor to the url on a http redirect
         // a javascript in fx.js performs the jump to the anchor
         $referrer = Request::getVar("referrer");
-        if (!str_contains("jumpto=comments", $referrer)) {
-            if (!str_contains("?", $referrer)) {
+        if (!str_contains($referrer, "jumpto=comments")) {
+            if (!str_contains($referrer, "?")) {
                 $referrer .= "?";
             } else {
                 $referrer .= "&";

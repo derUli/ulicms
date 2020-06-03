@@ -289,8 +289,8 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
     public function testGetBaseMetas() {
         $baseMetas = get_base_metas();
 
-        $this->assertTrue(str_contains('<meta http-equiv="content-type" content="text/html; charset=utf-8"/>', $baseMetas));
-        $this->assertTrue(str_contains('<meta charset="utf-8"/>', $baseMetas));
+        $this->assertTrue(str_contains($baseMetas, '<meta http-equiv="content-type" content="text/html; charset=utf-8"/>'));
+        $this->assertTrue(str_contains($baseMetas, '<meta charset="utf-8"/>'));
     }
 
     public function testBaseMetas() {
@@ -298,8 +298,8 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         base_metas();
         $baseMetas = ob_get_clean();
 
-        $this->assertTrue(str_contains('<meta http-equiv="content-type" content="text/html; charset=utf-8"/>', $baseMetas));
-        $this->assertTrue(str_contains('<meta charset="utf-8"/>', $baseMetas));
+        $this->assertTrue(str_contains($baseMetas, '<meta http-equiv="content-type" content="text/html; charset=utf-8"/>'));
+        $this->assertTrue(str_contains($baseMetas, '<meta charset="utf-8"/>'));
     }
 
     public function testHead() {
@@ -307,14 +307,14 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         head();
         $baseMetas = ob_get_clean();
 
-        $this->assertTrue(str_contains('<meta http-equiv="content-type" content="text/html; charset=utf-8"/>', $baseMetas));
-        $this->assertTrue(str_contains('<meta charset="utf-8"/>', $baseMetas));
+        $this->assertTrue(str_contains($baseMetas, '<meta http-equiv="content-type" content="text/html; charset=utf-8"/>'));
+        $this->assertTrue(str_contains($baseMetas, '<meta charset="utf-8"/>'));
     }
 
     public function testGetHead() {
         $baseMetas = get_head();
-        $this->assertTrue(str_contains('<meta http-equiv="content-type" content="text/html; charset=utf-8"/>', $baseMetas));
-        $this->assertTrue(str_contains('<meta charset="utf-8"/>', $baseMetas));
+        $this->assertTrue(str_contains($baseMetas, '<meta http-equiv="content-type" content="text/html; charset=utf-8"/>'));
+        $this->assertTrue(str_contains($baseMetas, '<meta charset="utf-8"/>'));
     }
 
     public function testIs500ReturnsFalse() {
@@ -415,13 +415,13 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         random_banner();
         $banner1 = ob_get_clean();
         $this->assertNotEmpty($banner1);
-        
-        for($i = 0; $i <= 3; $i++ ){
+
+        for ($i = 0; $i <= 3; $i++) {
             ob_start();
             random_banner();
             $banner2 = ob_get_clean();
-            
-            if($banner2 !== $banner1){
+
+            if ($banner2 !== $banner1) {
                 $this->assertNotEmpty($banner2);
                 return;
             }
@@ -435,8 +435,12 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         language_selection();
         $html = ob_get_clean();
 
-        $this->assertTrue(str_contains("<ul class='language_selection'>",
-                        $html));
+        $this->assertTrue(
+                str_contains(
+                        $html,
+                        "<ul class='language_selection'>",
+                )
+        );
 
         // By default there should be at least 2 languages
         // german and english
