@@ -28,7 +28,7 @@ $(() => {
 
         event.preventDefault();
         event.stopPropagation();
-            
+
         if (!form.hasClass("edit-page-form") && form.get(0).reportValidity()) {
             $(window).off("beforeunload");
             $(form).off("submit");
@@ -245,7 +245,7 @@ bindEvents = () => {
                 $("html").data("select2-language") + "&popup=1&field_id=" + field.attr("id"),
                 name,
                 "status=0, toolbar=0, location=0, menubar=0, directories=0, " +
-                "resizable=1, scrollbars=0, width=800, height=600"
+                "resizable=1, scrollbars=0, width=850, height=600"
                 );
     });
 };
