@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 class CoreFormsController extends Controller {
 
-    protected function incSpamCount(): void{
-        Settings::set(
-                "contact_form_refused_spam_mails",
-                Settings::get("contact_form_refused_spam_mails") + 1
-        );
+    public function _incSpamCount(): int {
+        $newCount = intval(
+                Settings::get("contact_form_refused_spam_mails")
+                ) + 1;
+        Settings::set("contact_form_refused_spam_mails", $newCount);
+        return $newCount;
     }
 
     public function beforeHttpHeader(): void {
@@ -19,23 +20,23 @@ class CoreFormsController extends Controller {
             if (Settings::get("spamfilter_enabled") == "yes") {
                 // check if honeypot field is filled
                 if (!empty($_POST["my_homepage_url"])) {
-                    $this->incSpamCount();
+                    $this->_incSpamCount();
                     HTMLResult(get_translation("honeypot_is_not_empty"), 403);
                 }
                 foreach ($_POST as $key => $value) {
                     if (Settings::get("disallow_chinese_chars")
                             and AntiSpamHelper::isChinese($_POST[$key])) {
-                        $this->incSpamCount();
+                        $this->_incSpamCount();
                         HTMLResult(get_translation("chinese_chars_not_allowed"), 403);
                     }
                     if (Settings::get("disallow_cyrillic_chars")
                             and AntiSpamHelper::isCyrillic($_POST[$key])) {
-                        $this->incSpamCount();
+                        $this->_incSpamCount();
                         HTMLResult(get_translation("cyrillic_chars_not_allowed"), 403);
                     }
                     if (Settings::get("disallow_rtl_chars")
                             and AntiSpamHelper::isRtl($_POST[$key])) {
-                        $this->incSpamCount();
+                        $this->_incSpamCount();
                         HTMLResult(get_translation("rtl_chars_not_allowed"), 403);
                     }
 
@@ -43,7 +44,7 @@ class CoreFormsController extends Controller {
                                     $_POST[$key]
                     );
                     if ($badwordsCheck) {
-                        $this->incSpamCount();
+                        $this->_incSpamCount();
                         HTMLResult(get_translation(
                                         "request_contains_badword",
                                         [
@@ -54,7 +55,7 @@ class CoreFormsController extends Controller {
                 }
 
                 if (AntiSpamHelper::isCountryBlocked()) {
-                    $this->incSpamCount();
+                    $this->_incSpamCount();
                     $hostname = @gethostbyaddr(get_ip());
                     HTMLResult(get_translation("your_country_is_blocked", [
                         "%hostname%" => $hostname
@@ -62,7 +63,7 @@ class CoreFormsController extends Controller {
                 }
                 if (Settings::get("reject_requests_from_bots")
                         and AntiSpamHelper::checkForBot(get_useragent())) {
-                    $this->incSpamCount();
+                    $this->_incSpamCount();
                     HTMLResult(get_translation("bots_are_not_allowed", [
                         "%hostname%" => $hostname
                             ]), 403);

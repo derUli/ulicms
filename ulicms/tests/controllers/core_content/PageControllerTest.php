@@ -543,6 +543,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
             $_POST["language"] = "de";
             $_POST["active"] = "1";
             $_POST["access"] = ["all"];
+            
 
             $controller = new PageController();
             $success = $controller->_editPost();

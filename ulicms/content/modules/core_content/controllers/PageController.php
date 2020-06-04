@@ -278,36 +278,44 @@ class PageController extends Controller {
         $user_id = get_user_id();
         $content_id = $model->getId();
 
-        if ($model instanceof Content_List) {
-            $list_language = $_POST["list_language"];
+        if ($model instanceof Content_List) {            
+            $list_language = Request::getVar("list_language", "", "str");
             if (empty($list_language)) {
                 $list_language = null;
             }
-            $list_category = $_POST["list_category"];
+            
+            $list_category = Request::getVar("list_category", "", "str");
             if (empty($list_category)) {
                 $list_category = null;
             }
-
-            $list_menu = $_POST["list_menu"];
+            
+            $list_menu = Request::getVar("list_menu", "", "str");
             if (empty($list_menu)) {
                 $list_menu = null;
             }
 
-            $list_parent = $_POST["list_parent"];
+            $list_parent = Request::getVar("list_parent", "", "str");
             if (empty($list_parent)) {
                 $list_parent = null;
             }
 
-            $list_order_by = Database::escapeValue($_POST["list_order_by"]);
-            $list_order_direction = Database::escapeValue(
-                            $_POST["list_order_direction"]
+            $list_order_by = Database::escapeValue(
+                            Request::getVar("list_order_by", "id", "str")
             );
 
-            $list_use_pagination = intval($_POST["list_use_pagination"]);
+            $list_order_direction = Database::escapeValue(
+                            Request::getVar(
+                                    "list_order_direction",
+                                    "asc",
+                                    "str"
+                            )
+            );
 
-            $limit = intval($_POST["limit"]);
+            $list_use_pagination = Request::getVar("list_use_pagination", 0, "int");
 
-            $list_type = $_POST["list_type"];
+            $limit = Request::getVar("limit", 0, "int");
+            $list_type = Request::getVar("list_type", "null", "str");
+
             if (empty($list_type) or $list_type == "null") {
                 $list_type = null;
             }

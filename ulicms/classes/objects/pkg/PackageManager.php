@@ -87,35 +87,21 @@ class PackageManager {
     }
 
     public function getInstalledModules(): array {
-        $available_modules = [];
+        $availableModules = [];
 
-        $module_folder = Path::resolve(
-                        "ULICMS_DATA_STORAGE_ROOT/content/modules"
-                ) . "/";
-        $directory_content = scandir($module_folder);
+        $moduleFolder = Path::resolve("ULICMS_DATA_STORAGE_ROOT/content/modules");
+        $moduleDirectories = find_all_folders($moduleFolder);
 
-        natcasesort($directory_content);
-        for ($i = 0; $i < count($directory_content); $i ++) {
-            if (is_dir($module_folder . $directory_content[$i])) {
-                $module_init_file = $module_folder . $directory_content[$i] .
-                        "/" . $directory_content[$i] . "_main.php";
-                $module_init_file2 = $module_folder . $directory_content[$i] .
-                        "/" . "main.php";
-                $metadata_file = $module_folder . $directory_content[$i] .
-                        "/metadata.json";
-                if (file_exists($metadata_file)) {
-                    array_push($available_modules, $directory_content[$i]);
-                } else if ($directory_content[$i] != ".."
-                        and $directory_content[$i] != ".") {
-                    if (file_exists($module_init_file)
-                            or file_exists($module_init_file2)) {
-                        array_push($available_modules, $directory_content[$i]);
-                    }
-                }
+        natcasesort($moduleDirectories);
+        foreach ($moduleDirectories as $moduleDirectory) {
+            $metadataFile = "{$moduleDirectory}/metadata.json";
+
+            if (file_exists($metadataFile)) {
+                $availableModules [] = basename($moduleDirectory);
             }
         }
-        natcasesort($available_modules);
-        return $available_modules;
+        natcasesort($availableModules);
+        return $availableModules;
     }
 
     public function getInstalledThemes(): array {
@@ -126,10 +112,9 @@ class PackageManager {
 
         $folders = scanDir($templateDir);
         natcasesort($folders);
-        for ($i = 0; $i < count($folders); $i ++) {
+        for ($i = 0; $i < count($folders); $i++) {
             $f = $templateDir . $folders[$i] . "/";
-            if (is_dir($templateDir . $folders[$i])
-                    && !startsWith($folders[$i], ".")) {
+            if (is_dir($templateDir . $folders[$i]) && !startsWith($folders[$i], ".")) {
                 array_push($themes, $folders[$i]);
             }
         }

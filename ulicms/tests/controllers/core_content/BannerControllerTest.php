@@ -44,6 +44,8 @@ class BannerControllerTest extends \PHPUnit\Framework\TestCase {
         $_POST["link_url"] = "";
         $_POST["category_id"] = 1;
         $_POST["type"] = "html";
+        $_POST["language"] = "de";
+        $_POST["enabled"] = 1;
         $_POST["html"] = "Foo Bar";
         $_POST["date_from"] = "";
         $_POST["date_to"] = "";
@@ -53,9 +55,10 @@ class BannerControllerTest extends \PHPUnit\Framework\TestCase {
         $this->setPostVars();
         $controller = new BannerController();
         $id = $controller->_createPost()->getId();
+        $_POST["id"] = $id;
         
         $_POST["link_url"] = "https://google.com";
-        $banner = $controller->_updatePost($id);
+        $banner = $controller->_updatePost();
 
         $this->assertInstanceOf(Banner::class, $banner);
         $this->assertGreaterThanOrEqual(1, $banner->getId());
