@@ -10,6 +10,12 @@ class CustomFieldsTest extends \PHPUnit\Framework\TestCase {
             "{$type}_hello",
             intval($id)
                 ), true);
+
+        Vars::delete("id");
+
+        $_GET = [];
+        $_REQUEST = [];
+        $_POST = [];
     }
 
     private function getFirstPage() {
@@ -77,6 +83,24 @@ class CustomFieldsTest extends \PHPUnit\Framework\TestCase {
         CustomFields::set("foo", $value, $id, true);
 
         $this->assertEquals($value, CustomFields::get("foo", $id));
+    }
+
+    public function testSetAndGetFieldArrayWithoutId() {
+        $page = $this->getFirstPage();
+        set_requested_pagename($page->slug, $page->language);
+
+        CustomFields::set("foo", "bar", null, false);
+        $this->assertEquals("bar", CustomFields::get("foo", null, false));
+    }
+
+    public function testSetAndGetAllBooleanToTrueWithoutId() {
+        $page = $this->getFirstPage();
+        set_requested_pagename($page->slug, $page->language);
+
+        CustomFields::set("foo", "bar");
+        
+        $all = CustomFields::getAll();
+        $this->assertEquals("bar", $all["foo"]);
     }
 
 }

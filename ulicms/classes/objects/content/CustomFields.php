@@ -87,13 +87,14 @@ class CustomFields {
 
         while ($row = Database::fetchObject($result)) {
             $name = $row->name;
-
+            $value = $row->value;
             if ($removePrefix) {
                 $page = ContentFactory::getByID($content_id);
                 $prefix = "{$page->type}_";
                 $name = remove_prefix($name, $prefix);
             }
-            $fields[$name] = $row->value;
+
+            $fields[$name] = $value;
         }
         return $fields;
     }
@@ -106,11 +107,14 @@ class CustomFields {
         if (is_null($content_id)) {
             $content_id = get_ID();
         }
+        
+        $content_id = intval($content_id);
+        $page = ContentFactory::getByID($content_id);
+        
         if ($addPrefix) {
-            $page = ContentFactory::getByID($content_id);
             $name = "{$page->type}_{$name}";
         }
-        $content_id = intval($content_id);
+
         $args = array(
             $content_id,
             $name
