@@ -7,6 +7,7 @@ class TranslationTest extends \PHPUnit\Framework\TestCase {
         require_once getLanguageFilePath("en");
         Translation::loadAllModuleLanguageFiles("en");
         Translation::loadCurrentThemeLanguageFiles("en");
+        Translation::includeCustomLangFile("en");
     }
 
     public function testGetTranslation() {
