@@ -114,7 +114,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $page->author_id = 1;
         $page->group_id = 1;
         $page->custom_data["disable_shortcodes"] = true;
-        $page->save();
+        $page->update();
 
         $_SESSION["language"] = 'de';
         $_GET["slug"] = "testdisableshortcodes";
@@ -132,6 +132,10 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $page->author_id = 1;
         $page->group_id = 1;
         $page->custom_data["disable_shortcodes"] = false;
+        $page->menu_image = "foo.jpg";
+        $page->custom_data = null;
+        $page->save();
+        $page->custom_data = null;
         $page->save();
 
         $_SESSION["language"] = 'de';
