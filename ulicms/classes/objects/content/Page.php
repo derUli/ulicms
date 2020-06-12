@@ -48,6 +48,7 @@ class Page extends Content {
         if ($this->custom_data === null) {
             $this->custom_data = [];
         }
+
         $this->permissions = new PagePermissions();
         if ($id) {
             $this->loadByID($id);
@@ -81,6 +82,7 @@ class Page extends Content {
         $this->deleted_at = $result->deleted_at;
         $this->theme = $result->theme;
         $this->robots = $result->robots;
+
         if ($this->custom_data === null) {
             $this->custom_data = [];
         }
@@ -180,7 +182,7 @@ class Page extends Content {
         $sql .= intval($this->author_id) . ",";
         $sql .= intval($this->group_id) . ",";
         $sql .= intval($this->lastchangeby) . ",";
-        
+
         // Views
         $sql .= "0,";
 
@@ -391,7 +393,7 @@ class Page extends Content {
         $content = str_ireplace("&quot;", '"', $this->content);
         preg_match_all("/\[module=\"?([a-z_\-0-9]+)\"?]/i", $content, $match);
         if (count($match) > 0) {
-            for ($i = 0; $i < count($match[1]); $i ++) {
+            for ($i = 0; $i < count($match[1]); $i++) {
                 $id = unhtmlspecialchars($match[1][$i]);
                 if (!faster_in_array($id, $result)) {
                     $result[] = $id;
@@ -442,8 +444,7 @@ class Page extends Content {
                         $commentable_content_types
                 );
 
-                if (count($commentable_content_types) > 0
-                        && !faster_in_array($this->type,
+                if (count($commentable_content_types) > 0 && !faster_in_array($this->type,
                                 $commentable_content_types)) {
                     $commentsEnabled = false;
                 }

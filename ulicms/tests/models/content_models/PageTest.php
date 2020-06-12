@@ -9,7 +9,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
 
     private $user;
     private $commentsInitialEnabled;
-    private $initialCommentableContentTypes;
+    private $initialCommentablfeContentTypes;
     private $ipsum = 'Lorem ipsum dolor sit amet,
 		[module="fortune2"]
 		[module="test"]
@@ -18,7 +18,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
     private $savedSettings = [];
 
     public function setUp() {
-        
+
         $manager = new UserManager();
         $users = $manager->getAllUsers();
         $this->user = $users[0];
@@ -42,7 +42,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function tearDown() {
-        
+
         $_SERVER = [];
         $_GET = [];
         $_POST = [];
@@ -448,6 +448,20 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $page->author_id = 1;
         $page->group_id = 1;
         $page->save();
+        $page->delete();
+
+        $this->assertTrue($page->isDeleted());
+    }
+
+    public function testCreateDeleted() {
+        $page = new Page();
+        $page->title = 'Unit Test ' . time();
+        $page->slug = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "Some Text";
+        $page->comments_enabled = true;
+        $page->author_id = 1;
+        $page->group_id = 1;
         $page->delete();
 
         $this->assertTrue($page->isDeleted());
