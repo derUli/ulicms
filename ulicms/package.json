@@ -10,7 +10,7 @@
         "datatables": "*",
         "jquery": "^3.5.1",
         "jquery-datetimepicker": "*",
-        "jquery-form": "*",
+        "jquery-form": "^4.3.0",
         "jscolor-picker": "*",
         "password-strength-meter": "^2.1.0",
         "select2": "^4.0.13",

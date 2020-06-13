@@ -39,7 +39,7 @@ class UserManagerTest extends \PHPUnit\Framework\TestCase {
 		}
 	}
 
-	public function testGetLocked() {
+	public function testIsLocked() {
 		$manager = new UserManager();
 		$this->assertTrue(count($manager->getLockedUsers()) >= 3);
 

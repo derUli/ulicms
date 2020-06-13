@@ -1,7 +1,10 @@
 ===== Neues in UliCMS 2020.2.3 =====
 
 API-Änderungen:
-* str_contains empfängt nun Parameter in vertauschter Reihenfolge
+* str_contains() empfängt nun Parameter in vertauschter Reihenfolge
+* $user->getLocked() umbenannt in $user->isLocked()
+* $user->getAdmin() umbenannt in $user->isAdmin()
+
 
 Entfernte API-Methoden:
 * \isNullOrEmpty($variable): bool

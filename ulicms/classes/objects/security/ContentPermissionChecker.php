@@ -62,13 +62,13 @@ class ContentPermissionChecker implements IDatasetPermissionChecker {
         if ($groupCanEdit or $adminsCanEdit or $ownerCanEdit or $othersCanEdit) {
             if ($groupCanEdit and in_array($contentGroup, $groupIds)) {
                 $canEditThis = true;
-            } else if ($adminsCanEdit and $user->getAdmin()) {
+            } else if ($adminsCanEdit and $user->isAdmin()) {
                 $canEditThis = true;
             } else if ($ownerCanEdit and $isOwner
                     and $permissionChecker->hasPermission("pages_edit_own")) {
                 $canEditThis = true;
             } else if ($othersCanEdit && !in_array($contentGroup, $groupIds)
-                    && !$user->getAdmin() && !$isOwner) {
+                    && !$user->isAdmin() && !$isOwner) {
                 $canEditThis = true;
             }
         } else {
@@ -82,7 +82,7 @@ class ContentPermissionChecker implements IDatasetPermissionChecker {
         }
 
         // admins are gods
-        if ($user->getAdmin()) {
+        if ($user->isAdmin()) {
             $canEditThis = true;
         }
 

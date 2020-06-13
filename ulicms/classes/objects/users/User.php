@@ -419,7 +419,7 @@ class User extends Model {
         $this->require_password_change = boolval($val);
     }
 
-    public function getAdmin(): bool {
+    public function isAdmin(): bool {
         return boolval($this->admin);
     }
 
@@ -427,7 +427,7 @@ class User extends Model {
         $this->admin = boolval($val);
     }
 
-    public function getLocked(): bool {
+    public function isLocked(): bool {
         return boolval($this->locked);
     }
 

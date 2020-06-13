@@ -99,8 +99,8 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("http://www.google.de", $user->getHomepage());
         $this->assertEquals("ckeditor", $user->getHTMLEditor());
         $this->assertEquals(false, $user->getRequirePasswordChange());
-        $this->assertEquals(false, $user->getAdmin());
-        $this->assertEquals(false, $user->getLocked());
+        $this->assertEquals(false, $user->isAdmin());
+        $this->assertEquals(false, $user->isLocked());
         $this->assertEquals("hello world", $user->getAboutMe());
         $user->setHTMLEditor("codemirror");
         $user->setRequirePasswordChange(true);
@@ -118,8 +118,8 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $user->loadByUsername("max_muster");
         $this->assertEquals("codemirror", $user->getHTMLEditor());
 
-        $this->assertEquals(true, $user->getLocked());
-        $this->assertEquals(true, $user->getAdmin());
+        $this->assertEquals(true, $user->isLocked());
+        $this->assertEquals(true, $user->isAdmin());
         $this->assertEquals(true, $user->getRequirePasswordChange());
         $this->assertEquals("bye", $user->getAboutMe());
 

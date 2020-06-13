@@ -354,6 +354,22 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($page->areCommentsEnabled());
     }
 
+    public function testAreCommentsEnabledWithTypesReturnsTrue() {
+        Settings::set("comments_enabled", "1");
+        Settings::set("commentable_content_types", "page;article");
+        
+        $page = new Page();
+        $this->assertTrue($page->areCommentsEnabled());
+    }
+
+    public function testAreCommentsEnabledWithTypesReturnFalse() {
+        Settings::set("comments_enabled", "1");
+        Settings::set("commentable_content_types", "page;article");
+        
+        $page = new Image_Page();
+        $this->assertFalse($page->areCommentsEnabled());
+    }
+
     public function testAreCommentsEnabledSettingsTrue() {
         $page = new Page();
         $page->comments_enabled = null;

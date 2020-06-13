@@ -193,7 +193,7 @@ function is_admin(): bool {
     $user_id = get_user_id();
     if ($user_id) {
         $user = new User(get_user_id());
-        $isAdmin = $user->getAdmin();
+        $isAdmin = $user->isAdmin();
     }
     return $isAdmin;
 }

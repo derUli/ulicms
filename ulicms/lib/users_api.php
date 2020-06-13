@@ -94,7 +94,7 @@ function validate_login(
 
     $auth = new TwoFactorAuthentication();
 
-    if ($user->getLocked()) {
+    if ($user->isLocked()) {
         $_REQUEST["error"] = get_translation("YOUR_ACCOUNT_IS_LOCKED");
         return null;
     }
@@ -116,7 +116,7 @@ function validate_login(
 
         if ($max_failed_logins_items >= 1
                 and $user->getFailedLogins() >= $max_failed_logins_items) {
-            $user->setLocked($user->getLocked());
+            $user->setLocked($user->isLocked());
             $user->save();
 
             $_REQUEST["error"] = get_translation("YOUR_ACCOUNT_IS_LOCKED");
