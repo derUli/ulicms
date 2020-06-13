@@ -10,6 +10,7 @@ class Database {
 
     private static $connection = null;
     private static $echoQueries = false;
+    private static $schema_selected = false;
 
     // this is used to show sql queries while running the unit tests
     public static function setEchoQueries($echoQueries = true): void {
@@ -412,9 +413,14 @@ class Database {
 
     // Datenbank auswählen
     public static function select(string $schema): bool {
-        return mysqli_select_db(self::$connection, $schema);
+        $selected = mysqli_select_db(self::$connection, $schema);
+        self::$schema_selected = $selected;
+        return $selected;
     }
 
+    public static function isSchemaSelected(): bool {
+        return self::$schema_selected ;
+    }
     public static function getNumFieldCount(): ?int {
         return mysqli_field_count(self::$connection);
     }

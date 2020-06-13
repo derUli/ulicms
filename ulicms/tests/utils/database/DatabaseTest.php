@@ -18,6 +18,15 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue(Database::isConnected());
     }
 
+    public function testIsSchemaSelectedReturnsTrue() {
+        $this->assertTrue(Database::isSchemaSelected());
+    }
+
+    public function testIsSchemaSelectedReturnsFalse() {
+        Database::select("nothing");
+        $this->assertFalse(Database::isSchemaSelected());
+    }
+
     public function testIsConnectedReturnsFalse() {
         $oldConnection = Database::getConnection();
 

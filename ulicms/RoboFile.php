@@ -6,6 +6,7 @@ use UliCMS\Packages\PatchManager;
 use UliCMS\Services\Connectors\eXtend\AvailablePackageVersionMatcher;
 use UliCMS\Utils\CacheUtil;
 use \Robo\Tasks;
+use UliCMS\Exceptions\SqlException;
 
 /**
  * This is project's console commands configuration for Robo task runner.
@@ -15,8 +16,12 @@ use \Robo\Tasks;
 class RoboFile extends Tasks {
 
     public function __construct() {
-        require_once dirname(__FILE__) . "/init.php";
-        require_once getLanguageFilePath("en");
+        try {
+            require_once dirname(__FILE__) . "/init.php";
+            require_once getLanguageFilePath("en");
+        } catch (SqlException $e) {
+
+        }
     }
 
     /**
@@ -517,6 +522,54 @@ class RoboFile extends Tasks {
         }
 
         $phpunitTask->run();
+    }
+
+    /**
+     * Creates the application's database
+     */
+    public function databaseCreate() {
+        Database::setEchoQueries(true);
+        $cfg = new CMSConfig();
+        Database::createSchema($cfg->db_database);
+        Database::select($cfg->db_database);
+    }
+
+    /**
+     * Drop and recreate the application's database
+     */
+    public function databaseMigrate() {
+        Database::setEchoQueries(true);
+
+        $cfg = new CMSConfig();
+        $additionalSql = is_array($cfg->dbmigrator_initial_sql_files) ?
+                $cfg->dbmigrator_initial_sql_files : [];
+
+        Database::setupSchemaAndSelect(
+                $cfg->db_database,
+                $additionalSql
+        );
+    }
+
+    /**
+     * Drops the application's database
+     */
+    public function databaseDrop() {
+        $cfg = new CMSConfig();
+        Database::setEchoQueries(true);
+        if (Database::isConnected()) {
+            Database::dropSchema($cfg->db_database);
+        }
+    }
+
+    /**
+     * Creates and migrates the application's database
+     */
+    public function databaseReset() {
+        Database::setEchoQueries(true);
+
+        $this->databaseDrop();
+
+        $this->databaseMigrate();
     }
 
 }
