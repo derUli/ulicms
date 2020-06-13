@@ -216,12 +216,12 @@ class Database {
         }
 
         $table = self::escapeName($table);
-        return self::query("DROP TABLE $table");
+        return self::query("DROP TABLE IF EXISTS $table");
     }
 
     public static function dropSchema(string $schema): bool {
         $schema = self::escapeName($schema);
-        return self::query("DROP SCHEMA $schema");
+        return self::query("DROP SCHEMA IF EXISTS $schema ");
     }
 
     public static function selectMin(

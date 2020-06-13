@@ -4,8 +4,12 @@ require_once "RoboFile.php";
 
 class RoboTestFile extends RoboFile {
 
+    public function write($text) {
+        echo $text;
+    }
+
     public function writeln($text) {
-        echo $text . "\n";
+        $this->write("$text\n");
     }
 
 }

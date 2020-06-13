@@ -16,12 +16,24 @@ use UliCMS\Exceptions\SqlException;
 class RoboFile extends Tasks {
 
     public function __construct() {
-        try {
-            require_once dirname(__FILE__) . "/init.php";
-            require_once getLanguageFilePath("en");
-        } catch (SqlException $e) {
+        $this->initUliCMS();
+    }
 
+    protected function initUliCMS() {
+        try {
+            $this->initCore();
+        } catch (SqlException $e) {
+            $this->showException($e);
         }
+    }
+
+    public function showException(Exception $e) {
+        $this->writeln($e->getMessage());
+    }
+
+    protected function initCore() {
+        require_once dirname(__FILE__) . "/init.php";
+        require_once getLanguageFilePath("en");
     }
 
     /**
@@ -515,13 +527,13 @@ class RoboFile extends Tasks {
      * Run PHPUnit Tests
      * @param string $testFile test file to run
      */
-    public function testsRun(?string $testFile = null) {
-        $phpunitTask = $this->taskPHPUnit();
-        if ($testFile) {
-            $phpunitTask = $phpunitTask->file($testFile);
+    public function testsRun(string $testFile = "") {
+        $command = "vendor/bin/phpunit";
+        if (DIRSEP === "\\") {
+            $command = str_replace("/", "\\", $command);
         }
 
-        $phpunitTask->run();
+        system("$command $testFile");
     }
 
     /**
