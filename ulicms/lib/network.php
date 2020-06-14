@@ -29,25 +29,25 @@ function get_ip(): string {
 
 function get_host(): string {
     if (isset($_SERVER['HTTP_X_FORWARDED_HOST'])) {
-		$host = $_SERVER['HTTP_X_FORWARDED_HOST'];
+        $host = $_SERVER['HTTP_X_FORWARDED_HOST'];
         $elements = explode(',', $host);
         $host = trim(end($elements));
     } else {
-		$vars = [
-			"HTTP_HOST",
-			"SERVER_NAME",
-			"SERVER_ADDR"
-		];
+        $vars = [
+            "HTTP_HOST",
+            "SERVER_NAME",
+            "SERVER_ADDR"
+        ];
 
-		foreach($vars as $var){
-			if(isset($_SERVER[$var]) and !empty($_SERVER[$var])){
-				$host = $_SERVER[$var];
-				break;
-			}
-		}
-	}
+        foreach ($vars as $var) {
+            if (isset($_SERVER[$var]) and!empty($_SERVER[$var])) {
+                $host = $_SERVER[$var];
+                break;
+            }
+        }
+    }
 
-	// Remove port number from host
+    // Remove port number from host
     $host = preg_replace('/:\d+$/', '', $host);
 
     return trim($host);
@@ -95,6 +95,12 @@ function ulicms_mail(string $to,
 }
 
 function send_header(string $header): bool {
-    
-    return class_exists("Response") ? Response::sendHeader($header) : false ;
+    $headers = Vars::get("http_headers");
+    if (!in_array($header, $headers)) {
+        $headers[] = $header;
+    }
+
+    Vars::set("http_headers", $headers);
+
+    return class_exists("Response") ? Response::sendHeader($header) : false;
 }

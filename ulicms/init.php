@@ -139,6 +139,8 @@ function exception_handler($exception) {
 // if config exists require_config else redirect to installer
 $path_to_config = dirname(__file__) . "/CMSConfig.php";
 
+Vars::set("http_headers", []);
+
 // load config file
 if (file_exists($path_to_config)) {
     require_once $path_to_config;
