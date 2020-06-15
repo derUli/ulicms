@@ -107,7 +107,6 @@ class Template {
             string $module,
             string $template
     ): string {
-
         $retval = "";
         $originalTemplatePath = getModulePath($module, true) . "templates/" .
                 $template;
@@ -129,7 +128,6 @@ class Template {
                     . " not found!");
         }
         $retval = trim(ob_get_clean());
-
         return optimizeHtml($retval);
     }
 
@@ -145,17 +143,8 @@ class Template {
         if (Settings::get("logo_disabled") != "no") {
             return;
         }
-        if (!Settings::get("logo_image")) {
-            setconfig("logo_image", "");
-        }
-        if (!Settings::get("logo_disabled")) {
-            setconfig("logo_disabled", "no");
-        }
 
-        $logo_storage_url = defined("ULICMS_DATA_STORAGE_URL") ?
-                ULICMS_DATA_STORAGE_URL . "/content/images/" .
-                Settings::get("logo_image") : "content/images/" .
-                Settings::get("logo_image");
+        $logo_storage_url = self::getLogoUrl();
         $logo_storage_path = ULICMS_DATA_STORAGE_ROOT . "/content/images/" .
                 Settings::get("logo_image");
 
@@ -163,6 +152,13 @@ class Template {
             echo '<img class="website_logo" src="' . $logo_storage_url .
             '" alt="' . _esc(Settings::get("homepage_title")) . '"/>';
         }
+    }
+
+    public static function getLogoUrl(): string {
+        return defined("ULICMS_DATA_STORAGE_URL") ?
+                ULICMS_DATA_STORAGE_URL . "/content/images/" .
+                Settings::get("logo_image") : "content/images/" .
+                Settings::get("logo_image");
     }
 
     // get current year
@@ -400,7 +396,7 @@ class Template {
         }
         $description = get_meta_description() ?
                 get_meta_description() : Settings::get("meta_description");
-        
+
         if ($description != "" && $description != false) {
             $description = apply_filter($description, "meta_description");
             $$description = _esc($description);
@@ -489,17 +485,19 @@ color: " . Settings::get("body-text-color") . ";
                 )
         );
 
+        $slug = get_slug();
+
         $content = null;
         if (is_200()) {
             $content = ContentFactory::getBySlugAndLanguage(
-                            get_slug(),
+                            $slug,
                             getCurrentLanguage()
             );
 
             if (!is_logged_in()) {
                 db_query("UPDATE " . tbname("content") .
                         " SET views = views + 1 WHERE slug='" .
-                        Database::escapeValue($_GET["slug"]) .
+                        Database::escapeValue(get_slug()) .
                         "' AND language='" . db_escape(getFrontendLanguage())
                         . "'");
             }

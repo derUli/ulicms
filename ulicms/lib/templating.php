@@ -939,7 +939,7 @@ function check_status(): string {
     if (get_type() == "snippet") {
         return "403 Forbidden";
     }
-    if (!(isset($_GET["slug"]) and!empty($_GET["slug"]))) {
+    if (!(isset($_GET["slug"]) && !empty($_GET["slug"]))) {
         $_GET["slug"] = get_frontpage();
     }
 

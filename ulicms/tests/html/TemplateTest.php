@@ -2,6 +2,7 @@
 
 use UliCMS\Exceptions\FileNotFoundException;
 use UliCMS\Utils\File;
+use UliCMS\Helpers\TestHelper;
 use function UliCMS\HTML\stringContainsHtml;
 
 class TemplateTest extends \PHPUnit\Framework\TestCase {
@@ -19,6 +20,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
             "site_slogan_fr",
             "homepage_owner",
             "footer_text",
+            "logo_disabled",
             "domain_to_language"
         );
         foreach ($settings as $setting) {
@@ -216,7 +218,6 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $_GET["slug"] = "lorem_ipsum";
         $_SESSION["language"] = "de";
         $_GET["REQUEST_URI"] = "/lorem_ipsum.html";
-
         $content = Template::getContent();
 
         $this->assertStringContainsString(
@@ -730,6 +731,16 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         ob_start();
         Template::escape($input);
         $this->assertEquals($expected, ob_get_clean());
+    }
+
+    public function testLogoDisabled() {
+
+        $actual = TestHelper::getOutput(function() {
+                    Settings::set("logo_disabled", "yes");
+                    Template::logo();
+                });
+
+        $this->assertEmpty($actual);
     }
 
 }

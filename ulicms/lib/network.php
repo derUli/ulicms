@@ -40,7 +40,7 @@ function get_host(): string {
         ];
 
         foreach ($vars as $var) {
-            if (isset($_SERVER[$var]) and!empty($_SERVER[$var])) {
+            if (isset($_SERVER[$var]) && !empty($_SERVER[$var])) {
                 $host = $_SERVER[$var];
                 break;
             }
