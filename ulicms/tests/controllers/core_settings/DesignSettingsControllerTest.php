@@ -4,13 +4,31 @@ use UliCMS\Utils\File;
 
 class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase {
 
+    private $initialSettings = [];
+
     public function setUp() {
         $this->cleanUpFiles();
+
+        $settings = [
+            "mobile_theme",
+            "theme"
+        ];
+        foreach ($settings as $setting) {
+            $this->initialSettings[$setting] = Settings::get($setting);
+        }
     }
 
     public function tearDown() {
         $this->cleanUpFiles();
         Settings::delete("disable_custom_layout_options");
+
+        foreach ($this->initialSettings as $key => $value) {
+            if ($value === null) {
+                Settings::delete($key);
+            } else {
+                Settings::set($key, $value);
+            }
+        }
     }
 
     private function cleanUpFiles() {
@@ -65,7 +83,6 @@ class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGenerateSCSSInConstructor() {
-
         $this->cleanUpFiles();
 
         $file = Path::resolve("ULICMS_GENERATED/design_variables.scss");
@@ -104,6 +121,42 @@ class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertContains("Roboto", $fonts);
         $this->assertContains("Open Sans", $fonts);
         $this->assertContains("Lato", $fonts);
+    }
+
+    public function testGetThemePreviewReturnsPath() {
+        $controller = new DesignSettingsController();
+        $this->assertEquals(
+                'content/templates/impro17/screenshot.jpg',
+                $controller->_themePreview("impro17")
+        );
+    }
+
+    public function testThemePreviewReturnsNull() {
+        $controller = new DesignSettingsController();
+        $this->assertNull($controller->_themePreview("nothing"));
+    }
+
+    public function testSetDefaultTheme() {
+        $controller = new DesignSettingsController();
+        $this->assertNotEquals("foobar", Settings::get("theme"));
+
+        $controller->_setDefaultTheme("foobar");
+        $this->assertEquals("foobar", Settings::get("theme"));
+    }
+
+    public function testSetDefaultMobileThemeWithTheme() {
+        $controller = new DesignSettingsController();
+        $this->assertNotEquals("foobar", Settings::get("theme"));
+
+        $controller->_setDefaultMobileTheme("foobar");
+        $this->assertEquals("foobar", Settings::get("mobile_theme"));
+    }
+
+    public function testSetDefaultMobileThemeWithNull() {
+        $controller = new DesignSettingsController();
+        $controller->_setDefaultMobileTheme("foobar");
+        $controller->_setDefaultMobileTheme("foobar");
+        $this->assertNull(Settings::get("mobile_theme"));
     }
 
 }

@@ -210,7 +210,7 @@ if ($permissionChecker->hasPermission("list_packages")) {
                                           data-url="<?php
                                           echo ModuleHelper::buildMethodCallUrl(
                                                   DesignSettingsController::class,
-                                                  "getThemePreview",
+                                                  "themePreview",
                                                   "theme={$theme}");
                                           ?>"
                                           >

@@ -171,15 +171,14 @@ class DesignSettingsController extends Controller {
         return $fonts;
     }
 
-    public function getThemePreview(): void {
-        $theme = Request::getVar("theme", null, "str");
+    public function themePreview(): void {
+        $themeName = Request::getVar("theme", null, "str");
 
-        if (!$theme) {
+        if (!$themeName) {
             HTTPStatusCodeResult(HttpStatusCode::UNPROCESSABLE_ENTITY);
         }
 
-        $theme = new Theme($theme);
-        $screenshot = $theme->getScreenshotFile();
+        $screenshot = $this->_themePreview($themeName);
 
         if ($screenshot) {
             HTMLResult(
@@ -193,6 +192,12 @@ class DesignSettingsController extends Controller {
         }
 
         HTTPStatusCodeResult(HttpStatusCode::NOT_FOUND);
+    }
+
+    public function _themePreview(string $themeName): ?string {
+        $theme = new Theme($themeName);
+        $screenshot = $theme->getScreenshotFile();
+        return $screenshot;
     }
 
     public function generateSCSS(): ?string {
@@ -231,7 +236,7 @@ class DesignSettingsController extends Controller {
 
     public function setDefaultTheme(): void {
         $theme = Request::getVar("name");
-
+        $this->_setDefaultTheme($theme);
         Settings::set("theme", $theme);
 
         Response::sendHttpStatusCodeResultIfAjax(
@@ -240,19 +245,26 @@ class DesignSettingsController extends Controller {
         );
     }
 
+    public function _setDefaultTheme(?string $theme): void {
+        Settings::set("theme", $theme);
+    }
+
     public function setDefaultMobileTheme(): void {
         $theme = Request::getVar("name");
-
-        if ($theme !== Settings::get("mobile_theme")) {
-            Settings::set("mobile_theme", $theme);
-        } else {
-            Settings::delete("mobile_theme");
-        }
+        $this->_setDefaultMobileTheme($theme);
 
         Response::sendHttpStatusCodeResultIfAjax(
                 HTTPStatusCode::OK,
                 ModuleHelper::buildActionURL("packages")
         );
+    }
+
+    public function _setDefaultMobileTheme(?string $theme): void {
+        if ($theme !== Settings::get("mobile_theme")) {
+            Settings::set("mobile_theme", $theme);
+        } else {
+            Settings::delete("mobile_theme");
+        }
     }
 
 }

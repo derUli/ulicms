@@ -88,7 +88,7 @@ if (!$permissionChecker->hasPermission("design")) {
                                     }
                                     ?>
                                     data-preview-url="<?php
-                                    echo ModuleHelper::buildMethodCallUrl(DesignSettingsController::class, "getThemePreview",
+                                    echo ModuleHelper::buildMethodCallUrl(DesignSettingsController::class, "themePreview",
                                             "theme={$th}");
                                     ?>"
                                     >
@@ -134,7 +134,7 @@ if (!$permissionChecker->hasPermission("design")) {
                                         }
                                         ?>
                                         data-preview-url="<?php
-                                        echo ModuleHelper::buildMethodCallUrl(DesignSettingsController::class, "getThemePreview",
+                                        echo ModuleHelper::buildMethodCallUrl(DesignSettingsController::class, "themePreview",
                                                 "theme={$th}");
                                         ?>">
                                             <?php
