@@ -17,7 +17,7 @@ class DesignSettingsController extends Controller {
                         "ULICMS_GENERATED/design_variables.scss"
         );
         if (!file_exists($this->generatedSCSS)) {
-            $this->generateSCSSToFile();
+            $this->_generateSCSSToFile();
         }
     }
 
@@ -113,7 +113,7 @@ class DesignSettingsController extends Controller {
 
         CacheUtil::clearPageCache();
 
-        $this->generateSCSSToFile();
+        $this->_generateSCSSToFile();
         sureRemoveDir(Path::resolve("ULICMS_CACHE/stylesheets"), false);
 
         HTTPStatusCodeResult(HttpStatusCode::OK);
@@ -200,7 +200,7 @@ class DesignSettingsController extends Controller {
         return $screenshot;
     }
 
-    public function generateSCSS(): ?string {
+    public function _generateSCSS(): ?string {
         $settings = [
             "header-background-color" => Settings::get("header-background-color"),
             "body-text-color" => Settings::get("body-text-color"),
@@ -223,8 +223,8 @@ class DesignSettingsController extends Controller {
         return $output;
     }
 
-    public function generateSCSSToFile(): ?string {
-        $scss = $this->generateSCSS();
+    public function _generateSCSSToFile(): ?string {
+        $scss = $this->_generateSCSS();
 
         if ($scss) {
             $outputFile = $this->generatedSCSS;

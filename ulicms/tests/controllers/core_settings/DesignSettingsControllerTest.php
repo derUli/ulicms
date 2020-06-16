@@ -41,33 +41,33 @@ class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGenerateSCSS() {
+    public function test_generateSCSS() {
         $controller = ControllerRegistry::get(DesignSettingsController::class);
-        $scss = $controller->GenerateSCSS();
+        $scss = $controller->_generateSCSS();
         $this->assertGreaterThanOrEqual(5, substr_count($scss, "\n"));
         $lines = explode("\n", trim(normalizeLN($scss, "\n")));
 
         $this->assertCount(12, $lines);
     }
 
-    public function testGenerateSCSSReturnsNull() {
+    public function test_generateSCSSReturnsNull() {
         Settings::set("disable_custom_layout_options", "1");
         $controller = ControllerRegistry::get(DesignSettingsController::class);
-        $scss = $controller->GenerateSCSS();
+        $scss = $controller->_generateSCSS();
         $this->assertNull($scss);
     }
 
-    public function testGenerateSCSSToFileReturnsNull() {
+    public function test_generateSCSSToFileReturnsNull() {
         Settings::set("disable_custom_layout_options", "1");
         $controller = ControllerRegistry::get(DesignSettingsController::class);
-        $scss = $controller->generateSCSSToFile();
+        $scss = $controller->_generateSCSSToFile();
         $this->assertNull($scss);
     }
 
-    function testGenerateSCSSToFile() {
+    function test_generateSCSSToFile() {
         $this->cleanUpFiles();
         $controller = ControllerRegistry::get(DesignSettingsController::class);
-        $file = $controller->generateSCSSToFile();
+        $file = $controller->_generateSCSSToFile();
         $this->assertStringEndsWith(
                 "/content/generated/design_variables.scss",
                 $file
@@ -82,7 +82,7 @@ class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testGenerateSCSSInConstructor() {
+    public function test_generateSCSSInConstructor() {
         $this->cleanUpFiles();
 
         $file = Path::resolve("ULICMS_GENERATED/design_variables.scss");
@@ -90,7 +90,7 @@ class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase {
 
         $controller = new DesignSettingsController();
         $this->assertFileExists($file);
-        $this->assertEquals($controller->generateSCSS(),
+        $this->assertEquals($controller->_generateSCSS(),
                 file_get_contents($file));
     }
 
