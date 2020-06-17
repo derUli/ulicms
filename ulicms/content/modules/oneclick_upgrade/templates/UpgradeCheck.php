@@ -46,7 +46,10 @@ if ($permissionChecker->hasPermission("update_system")) {
                 <?php translate("upgrade_warning_notice"); ?>
             </div>
             <p>
-                <button type="submit" class="btn btn-danger"><?php translate("do_core_upgrade"); ?></button>
+                <button type="submit" class="btn btn-danger">
+                  <i class="fas fa-download"></i>
+                  <?php translate("do_core_upgrade"); ?>
+                </button>
             </p>
         <?php } ?>
     </form>

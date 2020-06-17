@@ -21,7 +21,7 @@ class CoreUpgradeController extends Controller {
 		$this->checkURL = $url;
 	}
 
-	public function getJSON(): ?string {
+	public function getJSON(): ?object {
 		$data = file_get_contents_wrapper($this->getCheckURL(), true);
 		if (!$data) {
 			return null;
@@ -46,9 +46,9 @@ class CoreUpgradeController extends Controller {
 
 	public function runUpgrade(bool $skipPermissions = false): ?bool {
 		@set_time_limit(0);
-		@ignore_user_abort(1);
+		@ignore_user_abort(true);
 		$acl = new ACL();
-		if ((!$skipPermissions and ( !$acl->hasPermission("update_system")) or ! $this->checkForUpgrades() or get_request_method() != "post")) {
+		if ((!$skipPermissions and ( !$acl->hasPermission("update_system")) || !$this->checkForUpgrades() or get_request_method() != "post")) {
 			return false;
 		}
 
