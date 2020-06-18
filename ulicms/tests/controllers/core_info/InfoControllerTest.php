@@ -44,4 +44,28 @@ class InfoControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertStringContainsString("All rights reserved.", $output);
     }
 
+    public function testGetComposerLegalInfo() {
+        $controller = new InfoController();
+        $legalInfo = $controller->_getComposerLegalInfo();
+        $this->assertStringContainsString(
+                "<h1>Project Licenses</h1>",
+                $legalInfo
+        );
+
+        $legalInfo = $controller->_getComposerLegalInfo();
+        $this->assertGreaterThanOrEqual(132000, strlen($legalInfo));
+    }
+
+    public function testGetNpmLegalInfo() {
+        $controller = new InfoController();
+        $npmLegalData = $controller->_getNpmLegalInfo();
+
+        $this->assertCount(15, $npmLegalData);
+
+        foreach ($npmLegalData as $package) {
+            $this->assertNotEmpty($package->name);
+            $this->assertNotEmpty($package->licenseType);
+        }
+    }
+
 }

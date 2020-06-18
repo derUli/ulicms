@@ -2,6 +2,7 @@
 
 use UliCMS\HTML\Input;
 use Michelf\MarkdownExtra;
+use zz\Html\HTMLMinify;
 
 class InfoController extends MainClass {
 
@@ -53,12 +54,25 @@ class InfoController extends MainClass {
     }
 
     public function _getComposerLegalInfo(): string {
-        $legalText = file_get_contents(
-                Path::resolve("ULICMS_ROOT/licenses.md")
-        );
+        $legalFile = Path::resolve("ULICMS_ROOT/licenses.md");
+        $lastModified = filemtime($legalFile);
+        
+        $cacheFile = Path::resolve("ULICMS_CACHE/legal-{$lastModified}.html");
+        
+        if(file_exists($cacheFile)){
+            return file_get_contents($cacheFile);
+        }
+        
+        $legalText = file_get_contents($legalFile);
+        
         $parser = new MarkdownExtra;
         $parser->hard_wrap = true;
-        return $parser->transform($legalText);
+        $parsed = $parser->transform($legalText);       
+        $parsed = optimizeHtml($parsed, HTMLMinify::OPTIMIZATION_ADVANCED);
+        
+        file_put_contents($cacheFile, $parsed);
+        
+        return $parsed;
     }
 
     public function _getNpmLegalInfo(): array {

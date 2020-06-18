@@ -6,6 +6,7 @@ $controller = new InfoController();
 $legalInfo = $controller->_getNpmLegalInfo();
 
 ?>
+<h1><?php translation("legal_npm");?></h1>
 <table class="tablesorter" style="width:100%">
         <thead>
             <tr>
