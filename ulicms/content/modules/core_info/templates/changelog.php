@@ -1,4 +1,18 @@
-<h1 class="modal-headline">Changelog</h1>
-<hr>
 <?php
-echo ViewBag::get("textarea_with_changelog");
+
+use function UliCMS\HTML\text;
+?>
+
+<a href="<?php echo ModuleHelper::buildActionURL("info"); ?>"
+   class="btn btn-default btn-back is-ajax"
+   ><i class="fa fa-arrow-left"></i>
+<?php translate("back") ?></a>
+
+<h1>
+<?php translate("changelog"); ?>
+</h1>
+<?php
+$controller = new InfoController();
+echo make_links_clickable(
+        text($controller->_fetchChangelog())
+);

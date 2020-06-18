@@ -11,10 +11,14 @@ const bindAjaxLinks = (root) => {
     $(root).find("a.is-ajax").click((event) => {
         event.preventDefault();
         event.stopPropagation();
-
+        
         const target = $(event.currentTarget);
         const originalUrl = target.attr("href");
-        const url = `${originalUrl}&only_content=true`;
+        let url = `${originalUrl}&only_content=true`;
+        
+        if(target.hasClass("full-minified")){
+            url += "&full_minified=true"
+        }
 
         const mainMenu = $(".mainmenu");
         const isMenuEntry = mainMenu.has(target);

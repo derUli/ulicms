@@ -8,14 +8,19 @@
     "custom_acl": [
         "info"
     ],
-    "controller_function_permissions": {
-        "InfoController::changelog": "info",
-        "InfoController::license": "info"
-    },
     "main_class": "InfoController",
     "actions": {
         "info": "templates/info.php",
+        "license": "templates/license.php",
         "legal_composer": "templates/legal/composer.php",
-        "legal_npm": "templates/legal/npm.php"
+        "legal_npm": "templates/legal/npm.php",
+        "changelog": "templates/changelog.php"
+    },
+    "action_permissions": {
+        "info": "info",
+        "license": "info",
+        "legal_composer": "info",
+        "legal_npm": "info",
+        "changelog": "info"
     }
 }

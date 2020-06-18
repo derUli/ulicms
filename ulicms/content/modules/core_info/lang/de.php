@@ -9,3 +9,4 @@ add_translation("license_type", "Lizenztype");
 add_translation("feedback", "Feedback");
 add_translation("changelog", "Versionshistorie");
 add_translation("legal", "Rechtliche Hinweise");
+add_translation("portal", "Portal");

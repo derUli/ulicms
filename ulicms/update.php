@@ -15,6 +15,7 @@ if (file_exists("cms-config.php") && !file_exists($configFile)) {
 require_once "init.php";
 
 use UliCMS\Packages\PatchManager;
+use UliCMS\Utils\CacheUtil;
 
 // "var" is old and should not be used in PHP >= 5
 // if the config file is writable replace "var" with "public"
@@ -54,6 +55,8 @@ Settings::register("minify_html", "1");
 // Reset tracking of installed patches
 $patchManager = new PatchManager();
 $patchManager->truncateInstalledPatches();
+
+CacheUtil::clearCache();
 
 // The line below will be uncommented by the mk-upgrade-package.py deploy script
 // The script will delete itself after execution.

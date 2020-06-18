@@ -1,22 +1,10 @@
 <?php
 
-use UliCMS\Security\PermissionChecker;
-
 $currentAction = BackendHelper::getAction();
 $icons = array(
     "legal_composer" => "fas fa-file-contract",
     "legal_npm" => "fas fa-file-contract",
 );
-
-$icons = array_filter($icons, function ($cssClass, $action) {
-    $permissions = array(
-        "legal_composer" => "info",
-        "legal_npm" => "info"
-    );
-
-    $permissionChecker = new PermissionChecker(get_user_id());
-    return $permissionChecker->hasPermission($permissions[$action]);
-}, ARRAY_FILTER_USE_BOTH);
 
 $selectedButton = "btn btn-primary";
 $notSelectedButton = "btn btn-default"
@@ -32,7 +20,7 @@ $notSelectedButton = "btn btn-default"
     <?php foreach ($icons as $action => $cssClass) { ?>
         <div class="btn-group" role="group">
             <a href="<?php echo ModuleHelper::buildActionURL($action); ?>"
-               class="<?php 
+               class="<?php
                echo $action == $currentAction ?
                        $selectedButton : $notSelectedButton;
                ?> is-ajax">
