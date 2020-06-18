@@ -113,12 +113,20 @@ if (!$permissionChecker->hasPermission("info")) {
             <?php translate("license") ?></a>
         <a href="http://www.ulicms.de/kontakt.html" target="_blank"
            class="btn btn-info" role="button"><i class="fas fa-envelope"></i>
-            Feedback</a>
+               <?php translate("feedback"); ?>
+        </a>
 
         <a href="#" class="btn btn-info remote-alert"
            data-url="<?php echo ModuleHelper::buildMethodCallUrl(InfoController::class, "changelog"); ?>">
             <i class="fab fa-readme"></i>
-            Changelog
+            <?php translate("changelog"); ?>
+
+        </a>
+        <a href="<?php echo ModuleHelper::buildActionURL("legal_composer"); ?>" 
+           class="btn btn-info is-ajax"
+           data-url="">
+            <i class="fas fa-file-contract"></i>
+            <?php translate("legal"); ?>
         </a>
     </div>
     <?php

@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\HTML\Input;
+use Michelf\MarkdownExtra;
 
 class InfoController extends MainClass {
 
@@ -49,6 +50,22 @@ class InfoController extends MainClass {
                             "readonly" => "readonly"
                         ]
         );
+    }
+
+    public function _getComposerLegalInfo(): string {
+        $legalText = file_get_contents(
+                Path::resolve("ULICMS_ROOT/licenses.md")
+        );
+        $parser = new MarkdownExtra;
+        $parser->hard_wrap = true;
+        return $parser->transform($legalText);
+    }
+
+    public function _getNpmLegalInfo(): array {
+        $legalJson = file_get_contents(
+                Path::resolve("ULICMS_ROOT/licenses.json")
+        );
+        return json_decode($legalJson);
     }
 
 }

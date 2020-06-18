@@ -36,6 +36,7 @@ const bindAjaxLinks = (root) => {
             }
             history.pushState({ajaxUrl: url}, document.title, originalUrl);
             bindContentEvents(contentContainer);
+            initDataTables(contentContainer);
         });
     });
 };

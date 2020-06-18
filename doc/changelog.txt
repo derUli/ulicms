@@ -1,7 +1,8 @@
 ===== Neues in UliCMS 2020.2.3 =====
 
 Neue Features:
-* Neuer database:* Robo Tasks
+* Neue database Robo Tasks
+* Rechtliche Hinweise hinzugefügt
 
 API-Änderungen:
 * str_contains() empfängt nun Parameter in vertauschter Reihenfolge

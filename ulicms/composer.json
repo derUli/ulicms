@@ -47,7 +47,8 @@
       "jimmiw/php-time-ago": "*",
       "consolidation/robo": "*",
       "lasserafn/php-initial-avatar-generator": "*",
-      "imagine/imagine": "*"
+      "imagine/imagine": "*",
+      "michelf/php-markdown": "^1.9"
    },
    "require-dev": {
       "phpunit/phpunit": "^7.0",

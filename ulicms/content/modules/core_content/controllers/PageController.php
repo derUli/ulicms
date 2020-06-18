@@ -278,17 +278,17 @@ class PageController extends Controller {
         $user_id = get_user_id();
         $content_id = $model->getId();
 
-        if ($model instanceof Content_List) {            
+        if ($model instanceof Content_List) {
             $list_language = Request::getVar("list_language", "", "str");
             if (empty($list_language)) {
                 $list_language = null;
             }
-            
+
             $list_category = Request::getVar("list_category", "", "str");
             if (empty($list_category)) {
                 $list_category = null;
             }
-            
+
             $list_menu = Request::getVar("list_menu", "", "str");
             if (empty($list_menu)) {
                 $list_menu = null;

@@ -76,6 +76,11 @@ def main():
     # TODO: is there are a way to specify a working dir like used for composer (code above)?
     os.chdir("ulicms")
     os.system("npm install --production")
+
+    # generate license files
+    os.system("php-legal-licenses generate --hide-version")
+    os.system("license-report --only=prod --output=json > licenses.json")
+
     os.chdir(old_cwd)
 
     archive_name = os.path.join(target, "..", os.path.basename(target) + ".zip")

@@ -14,6 +14,8 @@
     },
     "main_class": "InfoController",
     "actions": {
-        "info": "templates/info.php"
+        "info": "templates/info.php",
+        "legal_composer": "templates/legal/composer.php",
+        "legal_npm": "templates/legal/npm.php"
     }
 }
