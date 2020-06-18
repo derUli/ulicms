@@ -85,7 +85,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetLastError() {
         $this->expectException(SqlException::class);
-// this sql fails always
+        // this sql fails always
         $result = Database::query("select devil from hell", true);
         $this->assertFalse($result);
 
@@ -96,7 +96,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testError() {
-// this sql fails always
+        // this sql fails always
         try {
             $result = Database::query("select devil from hell", true);
             $this->assertFalse($result);
@@ -108,9 +108,13 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetError() {
+    protected function getSQLLogger(): Logger {
+        $path = Path::resolve("ULICMS_LOG/sql_exception");
+        return new Logger($path);
+    }
 
-        LoggerRegistry::register("sql_log", new Logger(ULICMS_LOG));
+    public function testGetError() {
+        LoggerRegistry::register("sql_log", $this->getSQLLogger());
         try {
             // this sql fails always
             $result = Database::query("select devil from hell", true);
@@ -550,7 +554,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         Database::setEchoQueries(true);
         ob_start();
 
-        LoggerRegistry::register("sql_log", new Logger(ULICMS_LOG));
+        LoggerRegistry::register("sql_log", $this->getSQLLogger());
 
         Database::multiQuery(
                 "select * from {prefix}settings; select 'foo' as bar;"
@@ -569,5 +573,4 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         ob_end_clean();
     }
 
-    // TODO: implement tests for other Database functions
 }
