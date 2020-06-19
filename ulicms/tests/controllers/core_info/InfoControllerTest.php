@@ -3,6 +3,7 @@
 class InfoControllerTest extends \PHPUnit\Framework\TestCase {
 
     public function setUp() {
+        Translation::loadAllModuleLanguageFiles("en");
         clearCache();
     }
 
@@ -20,7 +21,7 @@ class InfoControllerTest extends \PHPUnit\Framework\TestCase {
         $controller = new InfoController();
         $legalInfo = $controller->_getComposerLegalInfo();
         $this->assertStringContainsString(
-                "<h1>Project Licenses</h1>",
+                "<h1>Composer Licenses</h1>",
                 $legalInfo
         );
 

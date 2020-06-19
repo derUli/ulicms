@@ -29,6 +29,11 @@ class InfoController extends MainClass {
         $parser->hard_wrap = true;
         $parsed = $parser->transform($legalText);
 
+        $parsed = str_replace(
+                "<h1>Project Licenses</h1>",
+                "<h1>" . get_translation("legal_composer") . "</h1>",
+                $parsed);
+
         file_put_contents($cacheFile, $parsed);
 
         return $parsed;
@@ -38,6 +43,7 @@ class InfoController extends MainClass {
         $legalJson = file_get_contents(
                 Path::resolve("ULICMS_ROOT/licenses.json")
         );
+
         return json_decode($legalJson);
     }
 
