@@ -44,7 +44,7 @@ class ExtendUpgradeHelper extends Controller {
         
         return (
                 count($available) and
-                version_compare($available[0]["version"], $version, ">")
+                \UliCMS\Utils\VersionComparison\compare($available[0]["version"], $version, ">")
                 );
     }
 

@@ -14,7 +14,7 @@ class UpdateManager {
                 continue;
             }
             $status = $pkg->checkForNewerVersionOfPackage($module);
-            if ($status and version_compare($status, $version, '>')) {
+            if ($status and \UliCMS\Utils\VersionComparison\compare($status, $version, '>')) {
                 $retval[] = $module . "-" . $status;
             }
         }
@@ -27,7 +27,7 @@ class UpdateManager {
             }
             $theme = "theme-" . $theme;
             $status = $pkg->checkForNewerVersionOfPackage($theme);
-            if ($status and version_compare($status, $version, '>')) {
+            if ($status and \UliCMS\Utils\VersionComparison\compare($status, $version, '>')) {
                 $retval[] = $theme . "-" . $status;
             }
         }

@@ -31,7 +31,7 @@ class UliCMSVersionTest extends \PHPUnit\Framework\TestCase {
             $this->assertNotEmpty($moduleVersion);
             if (startsWith($module, "core_")) {
                 $this->assertTrue(
-                        version_compare(
+                        \UliCMS\Utils\VersionComparison\compare(
                                 $moduleVersion,
                                 $ulicmsVersion,
                                 ">="
@@ -49,7 +49,7 @@ class UliCMSVersionTest extends \PHPUnit\Framework\TestCase {
 
             if ($availableVersion) {
                 $this->assertTrue(
-                        version_compare($availableVersion,
+                        \UliCMS\Utils\VersionComparison\compare($availableVersion,
                                 $installedVersion,
                                 ">="),
                         "$module $availableVersion in the package source "

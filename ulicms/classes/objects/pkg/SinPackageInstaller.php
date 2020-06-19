@@ -86,12 +86,12 @@ class SinPackageInstaller {
         $version = $version->getInternalVersionAsString();
         $version_not_supported = false;
         if (isset($data["compatible_from"])
-                and StringHelper::isNotNullOrEmpty($data["compatible_from"]) && !version_compare($version, $data["compatible_from"], ">=")) {
+                and StringHelper::isNotNullOrEmpty($data["compatible_from"]) && !\UliCMS\Utils\VersionComparison\compare($version, $data["compatible_from"], ">=")) {
             $version_not_supported = true;
         }
 
         if (isset($data["compatible_to"])
-                and StringHelper::isNotNullOrEmpty($data["compatible_to"]) && !version_compare($version, $data["compatible_to"], "<=")) {
+                and StringHelper::isNotNullOrEmpty($data["compatible_to"]) && !\UliCMS\Utils\VersionComparison\compare($version, $data["compatible_to"], "<=")) {
 
             $version_not_supported = true;
         }
@@ -100,12 +100,12 @@ class SinPackageInstaller {
 
         // if package requires a specific php version check it
         if (isset($data["min_php_version"])
-                and StringHelper::isNotNullOrEmpty($data["min_php_version"]) && !version_compare(phpversion(), $data["min_php_version"], ">=")) {
+                and StringHelper::isNotNullOrEmpty($data["min_php_version"]) && !\UliCMS\Utils\VersionComparison\compare(phpversion(), $data["min_php_version"], ">=")) {
             $phpVersionSupported = false;
         }
 
         if (isset($data["max_php_version"])
-                and StringHelper::isNotNullOrEmpty($data["max_php_version"]) && !version_compare(phpversion(), $data["max_php_version"], "<=")) {
+                and StringHelper::isNotNullOrEmpty($data["max_php_version"]) && !\UliCMS\Utils\VersionComparison\compare(phpversion(), $data["max_php_version"], "<=")) {
             $phpVersionSupported = false;
         }
         if (!$phpVersionSupported) {
@@ -122,13 +122,13 @@ class SinPackageInstaller {
         // if package requires a specific mysql version check it
         if (isset($data["min_mysql_version"])
                 and StringHelper::isNotNullOrEmpty($data["min_mysql_version"])
-                && !version_compare($mysqlVersion, $data["min_mysql_version"], ">=")) {
+                && !\UliCMS\Utils\VersionComparison\compare($mysqlVersion, $data["min_mysql_version"], ">=")) {
             $mysqlVersionSupported = false;
         }
 
         if (isset($data["max_mysql_version"])
                 and StringHelper::isNotNullOrEmpty($data["max_mysql_version"])
-                && !version_compare($mysqlVersion, $data["max_mysql_version"], "<=")) {
+                && !\UliCMS\Utils\VersionComparison\compare($mysqlVersion, $data["max_mysql_version"], "<=")) {
             $mysqlVersionSupported = false;
         }
 

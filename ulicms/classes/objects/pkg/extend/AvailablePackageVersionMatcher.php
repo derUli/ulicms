@@ -46,10 +46,10 @@ class AvailablePackageVersionMatcher {
         $releases = $this->versionData;
         
         usort($releases, function($a, $b) {
-            return version_compare($a["version"], $b["version"], "<");
+            return \UliCMS\Utils\VersionComparison\compare($a["version"], $b["version"], "<");
         });
         usort($releases, function($a, $b) {
-            return version_compare($a["compatible_with"], $b["compatible_with"], "<");
+            return \UliCMS\Utils\VersionComparison\compare($a["compatible_with"], $b["compatible_with"], "<");
         });
 
        return $releases;
@@ -60,7 +60,7 @@ class AvailablePackageVersionMatcher {
         $suitableReleases = [];
 
         foreach ($releases as $release) {
-            $compatible = version_compare(
+            $compatible = \UliCMS\Utils\VersionComparison\compare(
                     $release["compatible_with"],
                     $ulicmsVersion,
                     ">="

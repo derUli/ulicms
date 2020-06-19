@@ -26,7 +26,7 @@ class DbFunctionsTest extends \PHPUnit\Framework\TestCase {
 	public function testGetServerVersion() {
 		$version = db_get_server_info();
 		$version = preg_replace('/[^0-9.].*/', '', $version);
-		$this->assertTrue(version_compare($version, "5.5.3", '>='));
+		$this->assertTrue(\UliCMS\Utils\VersionComparison\compare($version, "5.5.3", '>='));
 	}
 
 	public function testGetClientInfo() {
