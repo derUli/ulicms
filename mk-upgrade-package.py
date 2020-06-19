@@ -115,6 +115,7 @@ def main():
 
     os.system("php-legal-licenses generate --hide-version")
     os.system("license-report --only=prod --output=json > licenses.json")
+    shutil.copy("../doc/changelog.txt", "content/modules/core_info")
     
     os.chdir(old_cwd)
 

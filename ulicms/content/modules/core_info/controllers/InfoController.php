@@ -9,7 +9,7 @@ class InfoController extends MainClass {
     const CHANGELOG_URL = "https://raw.githubusercontent.com/derUli/ulicms/master/doc/changelog.txt";
 
     public function _fetchChangelog() {
-        $lines = file(self::CHANGELOG_URL);
+        $lines = $this->_getChangelogContent();
         $lines = array_map("trim", $lines);
         $lines = array_map("_esc", $lines);
         $lines = array_map("make_links_clickable", $lines);
@@ -18,7 +18,7 @@ class InfoController extends MainClass {
             if (startsWith($line, "+") || startsWith($line, "*") ||
                     startsWith($line, "-") || startsWith($line, "# ") ||
                     startsWith($line, "*")) {
-                $line = "&bull;&nbsp;". substr($line, 1);
+                $line = "&bull;&nbsp;" . substr($line, 1);
             } else if (startsWith($line, "=") && endsWith($line, "=")) {
                 $line = "<h3>" . trim(trim($line, "=")) . "</h3>";
             } else if (endsWith($line, ":")) {
@@ -36,6 +36,19 @@ class InfoController extends MainClass {
         $lines = array_filter($lines, "strlen");
         $text = nl2br(implode("", $lines));
         return ($text ? trim($text) : get_translation("fetch_failed"));
+    }
+
+    public function _getChangelogContent(): array {
+        $file = ModuleHelper::buildModuleRessourcePath(
+                        "core_info",
+                        "changelog.txt"
+        );
+
+        $content = is_file($file) ?
+                file_get_contents($file) :
+                file_get_contents_wrapper(self::CHANGELOG_URL);
+
+        return explode("\n", $content);
     }
 
     public function _getComposerLegalInfo(): string {
