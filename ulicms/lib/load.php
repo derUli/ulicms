@@ -32,7 +32,8 @@ $files = [
     "file_get_contents_wrapper",
     "translation",
     "html5_media",
-    "custom_data"
+    "custom_data",
+    "version_compare_functions"
 ];
 
 foreach ($files as $file) {

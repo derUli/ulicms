@@ -996,6 +996,13 @@ iframe.fm {
 }
 
 
-.changelog{
+.changelog {
     line-height: 2;
+    h3{
+        padding-top: 10px;
+        &:not(:first-child) {
+            margin-top: 10px;
+            border-top: 1px solid #e8e8e8;
+        }
+    }
 }
