@@ -9,8 +9,33 @@ class InfoController extends MainClass {
     const CHANGELOG_URL = "https://raw.githubusercontent.com/derUli/ulicms/master/doc/changelog.txt";
 
     public function _fetchChangelog() {
-        $changelog = file_get_contents_wrapper(self::CHANGELOG_URL);
-        return ($changelog ? trim($changelog) : get_translation("fetch_failed"));
+        $lines = file(self::CHANGELOG_URL);
+        $lines = array_map("trim", $lines);
+        $lines = array_map("_esc", $lines);
+        $lines = array_map("make_links_clickable", $lines);
+
+        $lines = array_map(function($line) {
+            if (startsWith($line, "+") || startsWith($line, "*") ||
+                    startsWith($line, "-") || startsWith($line, "# ") ||
+                    startsWith($line, "*")) {
+                $line = "&bull;&nbsp;". substr($line, 1);
+            } else if (startsWith($line, "=") && endsWith($line, "=")) {
+                $line = "<h3>" . trim(trim($line, "=")) . "</h3>";
+            } else if (endsWith($line, ":")) {
+                $line = "<strong>$line</strong>";
+            }
+            if (!str_contains($line, "<h")) {
+                $line .= "\n";
+            }
+
+            return $line;
+        }, $lines);
+
+
+        $lines = array_filter($lines, "trim");
+        $lines = array_filter($lines, "strlen");
+        $text = nl2br(implode("", $lines));
+        return ($text ? trim($text) : get_translation("fetch_failed"));
     }
 
     public function _getComposerLegalInfo(): string {

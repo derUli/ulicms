@@ -11,8 +11,9 @@ use function UliCMS\HTML\text;
 <h1>
 <?php translate("changelog"); ?>
 </h1>
+<div class="changelog">
 <?php
 $controller = new InfoController();
-echo make_links_clickable(
-        text($controller->_fetchChangelog())
-);
+echo $controller->_fetchChangelog();
+?>
+</div>
