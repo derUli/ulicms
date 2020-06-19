@@ -3,6 +3,8 @@
 use function UliCMS\Utils\VersionComparison\isEqual;
 use function UliCMS\Utils\VersionComparison\isGreater;
 use function UliCMS\Utils\VersionComparison\isLesser;
+use function UliCMS\Utils\VersionComparison\isGreaterOrEqual;
+use function UliCMS\Utils\VersionComparison\isLesserOrEqual;
 
 class VersionComparisonsTest extends \PHPUnit\Framework\TestCase {
 
@@ -32,6 +34,7 @@ class VersionComparisonsTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(isGreater("2020.1", "2020.2"));
         $this->assertFalse(isGreater("1.0.0", "1"));
     }
+
     public function testIsLesserReturnsTrue() {
         $this->assertTrue(isLesser("1.0", "1.1"));
         $this->assertTrue(isLesser("2020.2", "2020.2.3",));
@@ -42,6 +45,33 @@ class VersionComparisonsTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(isLesser("1.0", "1"));
         $this->assertFalse(isLesser("2020.2", "2020.1"));
         $this->assertFalse(isLesser("1", "1.0.0"));
+    }
+
+    public function testIsGreaterOrEqualReturnsTrue() {
+        $this->assertTrue(isGreaterOrEqual("2020.2", "2020.2"));
+        $this->assertTrue(isGreaterOrEqual("2020.2.0", "2020.2"));
+        $this->assertTrue(isGreaterOrEqual("1.1", "1.0"));
+        $this->assertTrue(isGreaterOrEqual("1.0.0", "1.0"));
+    }
+
+    public function testIsGreaterOrEqualReturnsFalse() {
+        $this->assertFalse(isGreaterOrEqual("2020.1", "2020.2"));
+        $this->assertFalse(isGreaterOrEqual("2020.2.0", "2020.3"));
+        $this->assertFalse(isGreaterOrEqual("1.0.0", "1.1"));
+    }
+
+    public function testIsLesserOrEqualReturnsTrue() {
+        $this->assertTrue(isLesserOrEqual("2020.2", "2020.2"));
+        $this->assertTrue(isLesserOrEqual("1.0", "1.0.0"));
+        $this->assertTrue(isLesserOrEqual("1.2", "1.5"));
+        $this->assertTrue(isLesserOrEqual("1.7.3", "1.7.5"));
+    }
+
+    public function testIsLesserOrEqualReturnsFalse() {
+        $this->assertFalse(isLesserOrEqual("2020.2", "2020.1"));
+        $this->assertFalse(isLesserOrEqual("2020.4", "2020.3"));
+        $this->assertFalse(isLesserOrEqual("1.5", "1.2"));
+        $this->assertFalse(isLesserOrEqual("1.7.5", "1.7.2"));
     }
 
 }

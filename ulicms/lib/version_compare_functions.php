@@ -13,21 +13,28 @@ function compare(
     $splitted1 = $fillUp[0];
     $splitted2 = $fillUp[1];
 
-    if ($operator === '=') {
+    if ($operator === "=") {
         return $splitted1 === $splitted2;
     }
 
-    for ($i = 0; $i < count($splitted1); $i++) {
-        $subver1 = $splitted1[$i];
-        $subver2 = $splitted2[$i];
 
-        if ($operator === '>' && $subver1 > $subver2) {
-            return true;
-        }
-        if ($operator === '<' && $subver1 < $subver2) {
-            return true;
-        }
+    if ($operator === '>' && $splitted1 > $splitted2) {
+        return true;
     }
+
+    if ($operator === '>=' && $splitted1 >= $splitted2) {
+        return true;
+    }
+
+
+    if ($operator === '<' && $splitted1 < $splitted2) {
+        return true;
+    }
+
+    if ($operator === '<=' && $splitted1 <= $splitted2) {
+        return true;
+    }
+
     return false;
 }
 
@@ -38,11 +45,25 @@ function isGreater(
     return compare($version1, $version2, ">");
 }
 
+function isGreaterOrEqual(
+        string $version1,
+        string $version2
+): bool {
+    return compare($version1, $version2, ">=");
+}
+
 function isLesser(
         string $version1,
         string $version2
 ): bool {
     return compare($version1, $version2, "<");
+}
+
+function isLesserOrEqual(
+        string $version1,
+        string $version2
+): bool {
+    return compare($version1, $version2, "<=");
 }
 
 function isEqual(
