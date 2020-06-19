@@ -34,7 +34,7 @@ class UliCMSVersionTest extends \PHPUnit\Framework\TestCase {
                         \UliCMS\Utils\VersionComparison\compare(
                                 $moduleVersion,
                                 $ulicmsVersion,
-                                ">="
+                                "="
                         ), "$module has a bad version $moduleVersion");
             }
         }
