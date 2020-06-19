@@ -754,6 +754,7 @@ add_translation(
         "Your are using the unsupported browser %browser%.\n".
         "You must be using a compatible browser to be able to access UliCMS.\n\n".
         "More information about compatible browsers at:\n".
-        "https://en.ulicms.de");
+        "https://www.ulicms.de/Welche-Browser-werden-von-UliCMS-unterstutzt.html"
+        );
 
 do_event("lang_en");
