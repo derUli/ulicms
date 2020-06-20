@@ -107,10 +107,10 @@ class CustomFields {
         if (is_null($content_id)) {
             $content_id = get_ID();
         }
-        
+
         $content_id = intval($content_id);
         $page = ContentFactory::getByID($content_id);
-        
+
         if ($addPrefix) {
             $name = "{$page->type}_{$name}";
         }

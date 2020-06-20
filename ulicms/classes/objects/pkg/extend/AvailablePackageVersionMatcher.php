@@ -13,7 +13,7 @@ class AvailablePackageVersionMatcher {
     public function __construct($versionData = null) {
         $this->loadData($versionData);
     }
-    
+
     public function loadData($versionData) {
         $this->versionData = [];
         if ($versionData === null) {
@@ -42,9 +42,10 @@ class AvailablePackageVersionMatcher {
             }
         }
     }
-    public function getAllVersions(): array{
+
+    public function getAllVersions(): array {
         $releases = $this->versionData;
-        
+
         usort($releases, function($a, $b) {
             return \UliCMS\Utils\VersionComparison\compare($a["version"], $b["version"], "<");
         });
@@ -52,24 +53,27 @@ class AvailablePackageVersionMatcher {
             return \UliCMS\Utils\VersionComparison\compare($a["compatible_with"], $b["compatible_with"], "<");
         });
 
-       return $releases;
+        return $releases;
     }
 
     public function getCompatibleVersions(?string $ulicmsVersion = null): array {
-        $releases = $this->getAllVersions();
+        $allReleases = $this->getAllVersions();
         $suitableReleases = [];
 
-        foreach ($releases as $release) {
+        foreach ($allReleases as $release) {
             $compatible = \UliCMS\Utils\VersionComparison\compare(
                     $release["compatible_with"],
                     $ulicmsVersion,
                     ">="
             );
+
             if ($compatible) {
                 $suitableReleases[] = $release;
             }
         }
-        
+        if (!count($suitableReleases)) {
+            $suitableReleases = $allReleases;
+        }
 
         return $suitableReleases;
     }

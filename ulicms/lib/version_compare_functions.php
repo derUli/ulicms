@@ -7,11 +7,7 @@ function compare(
         ?string $version2,
         string $operator = ">"
 ): bool {
-    if ($version1 === null || $version2 === null) {
-        return true;
-    }
-
-    $splitted1 = explode(".", $version1);
+     $splitted1 = explode(".", $version1);
     $splitted2 = explode(".", $version2);
     $fillUp = fillUpVersionNumbers($splitted1, $splitted2);
     $splitted1 = $fillUp[0];
@@ -19,6 +15,14 @@ function compare(
 
     if ($operator === "=") {
         return $splitted1 === $splitted2;
+    }
+
+    if ($version1 === null && $version2 === null) {
+        return true;
+    }
+
+    if($version1 !== null && $version2 === null){
+        return false;
     }
 
     if ($operator === '>' && $splitted1 > $splitted2) {

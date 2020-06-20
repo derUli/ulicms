@@ -7,6 +7,7 @@ declare(strict_types=1);
 // content
 
 namespace UliCMS\Models\Content;
+
 use ModuleManager;
 use function getModuleMeta;
 use StringHelper;
@@ -51,6 +52,7 @@ class TypeMapper {
             if (!$mappings) {
                 continue;
             }
+
             foreach ($mappings as $key => $value) {
                 if (StringHelper::isNullOrEmpty($value)) {
                     unset(self::$mapping[$key]);

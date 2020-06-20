@@ -45,7 +45,7 @@ class Banner extends Model {
 
     public function loadRandom(): void {
         $result = Database::query("SELECT * FROM `{prefix}banner` "
-                . "order by rand() LIMIT 1", true);
+                        . "order by rand() LIMIT 1", true);
         if (Database::getNumRows($result) > 0) {
             $dataset = Database::fetchObject($result);
             $this->fillVars($dataset);

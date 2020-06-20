@@ -21,5 +21,5 @@ class ColorField extends CustomField {
 
 // Alias
 class ColourField extends ColorField {
-
+    
 }

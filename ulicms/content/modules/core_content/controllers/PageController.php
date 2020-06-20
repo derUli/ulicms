@@ -217,10 +217,10 @@ class PageController extends Controller {
         }
 
         if ($model instanceof Video_Page) {
-            $model->video = Request::getVar("video", null, "str");
+            $model->video = Request::getVar("video", null, "int");
         }
         if ($model instanceof Audio_Page) {
-            $model->audio = Request::getVar("audio", null, "str");
+            $model->audio = Request::getVar("audio", null, "int");
         }
 
         $model->text_position = Request::getVar(

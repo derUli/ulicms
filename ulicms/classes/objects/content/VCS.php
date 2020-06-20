@@ -8,7 +8,6 @@ use function db_query;
 use function db_fetch_object;
 use function db_num_rows;
 use function db_escape;
-
 use Database;
 
 // Version Control System for pages
@@ -21,20 +20,20 @@ class VCS {
             int $user_id): bool {
 
         return Database::pQuery(
-                "INSERT INTO `{prefix}history` (content_id, content, user_id) "
-                . "VALUES(?, ?,?)",
-                [$content_id, $content, $user_id],
-                true
-                );
+                        "INSERT INTO `{prefix}history` (content_id, content, user_id) "
+                        . "VALUES(?, ?,?)",
+                        [$content_id, $content, $user_id],
+                        true
+        );
     }
 
     public static function getRevisionByID(int $history_id): ?object {
         $history_id = intval($history_id);
         $result = Database::pQuery(
-                "SELECT * FROM `{prefix}history` "
-                ."WHERE id = ?",
-                [$history_id],
-                true);
+                        "SELECT * FROM `{prefix}history` "
+                        . "WHERE id = ?",
+                        [$history_id],
+                        true);
         if (Database::getNumRows($result) > 0) {
             return Database::fetchObject($result);
         }

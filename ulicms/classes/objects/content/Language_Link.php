@@ -51,7 +51,7 @@ class Language_Link extends Page {
     public function isRegular(): bool {
         return false;
     }
-    
+
     public function getIcon(): string {
         return "fas fa-language";
     }

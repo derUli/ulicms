@@ -53,7 +53,7 @@ class Audio_Page extends Page {
     public function setAudio(?Audio $audio): void {
         $this->audio = $audio ? $audio->getID() : null;
     }
-    
+
     public function getIcon(): string {
         return "fas fa-volume-up";
     }

@@ -24,10 +24,10 @@ class Banners {
 
     public static function getByLanguage(
             string $language, string $order = "language"
-            ): array {
+    ): array {
         $datasets = [];
         $language = Database::escapeValue($language);
-        $sql = "SELECT id FROM " . tbname("banner") . 
+        $sql = "SELECT id FROM " . tbname("banner") .
                 " WHERE language = '$language' ORDER BY $order";
         $result = Database::query($sql);
         while ($row = Database::fetchObject($result)) {
@@ -40,7 +40,7 @@ class Banners {
 
     public static function getByCategory(
             ?int $category_id, string $order = "id"
-            ): array {
+    ): array {
         $category_id = intval($category_id);
         $datasets = [];
         $sql = "SELECT id FROM " . tbname("banner") .
@@ -56,10 +56,10 @@ class Banners {
 
     public static function getByType(
             string $type = "gif", string $order = "language"
-            ): array {
+    ): array {
         $type = Database::escapeValue($type);
         $datasets = [];
-        $sql = "SELECT id FROM " . tbname("banner") . 
+        $sql = "SELECT id FROM " . tbname("banner") .
                 " WHERE `type` = '$type' ORDER BY $order";
         $result = Database::query($sql);
         while ($row = Database::fetchObject($result)) {

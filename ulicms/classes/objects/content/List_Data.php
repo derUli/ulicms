@@ -24,10 +24,10 @@ class List_Data extends Model {
 
     public function hasMore(int $offset = 0): bool {
         return count(
-                $this->filterPaginated(
-                        $offset + intval($this->limit)
-                )
-        ) > 0;
+                        $this->filterPaginated(
+                                $offset + intval($this->limit)
+                        )
+                ) > 0;
     }
 
     // apply the filter conditions of this list
