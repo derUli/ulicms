@@ -54,5 +54,9 @@ class Video_Page extends Page {
     public function setVideo(?Video $video): void {
         $this->video = $video ? $video->getID() : null;
     }
+    
+    public function getIcon(): string {
+        return "fas fa-film";
+    }
 
 }

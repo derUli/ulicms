@@ -43,4 +43,8 @@ class Image_Page extends Page {
         return $result;
     }
 
+    public function getIcon(): string {
+        return "far fa-images";
+    }
+
 }

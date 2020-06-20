@@ -15,4 +15,8 @@ class Snippet extends Page {
         $this->hidden = true;
     }
 
+    public function getIcon(): string {
+        return "fas fa-sticky-note";
+    }
+
 }

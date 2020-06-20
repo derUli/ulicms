@@ -17,4 +17,8 @@ class Content_List extends Page {
         $this->listData = new List_Data($this->id);
     }
 
+    public function getIcon(): string {
+        return "fas fa-list-ul";
+    }
+
 }

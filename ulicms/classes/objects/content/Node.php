@@ -12,4 +12,8 @@ class Node extends Link {
         $this->link_url = "#";
     }
 
+    public function getIcon(): string {
+        return "far fa-folder";
+    }
+
 }

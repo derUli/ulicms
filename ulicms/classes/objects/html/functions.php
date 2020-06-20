@@ -70,7 +70,11 @@ function link(string $url,
 // Use this method to output font-awesome icons
 // e.g. icon("fas fa-cog");
 function icon(string $classes, array $htmlAttributes = []): string {
-    $htmlAttributes["class"] = $classes;
+    if (!isset($htmlAttributes["class"])) {
+        $htmlAttributes["class"] = $classes;
+    } else {
+        $htmlAttributes["class"] = "$classes {$htmlAttributes["class"]}";
+    }
 
     $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes);
     return "<i $attribHTML></i>";

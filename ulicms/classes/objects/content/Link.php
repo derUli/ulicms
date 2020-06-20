@@ -43,4 +43,8 @@ class Link extends Page {
         return false;
     }
 
+    public function getIcon(): string {
+        return "fas fa-link";
+    }
+
 }

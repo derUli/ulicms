@@ -62,4 +62,8 @@ excerpt = ? where id = ?";
         return Database::pQuery($sql, $args, true);
     }
 
+    public function getIcon(): string {
+        return "far fa-newspaper";
+    }
+
 }

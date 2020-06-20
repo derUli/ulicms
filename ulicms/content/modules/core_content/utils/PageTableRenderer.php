@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace UliCMS\CoreContent;
 
+use UliCMS\Models\Content\TypeMapper;
 use Database;
 use User;
 use UliCMS\CoreContent\Partials\ViewButtonRenderer;
 use UliCMS\CoreContent\Partials\EditButtonRenderer;
 use UliCMS\CoreContent\Partials\DeleteButtonRenderer;
 use UliCMS\CoreContent\Partials\UnDeleteButtonRenderer;
+use function UliCMS\HTML\icon;
 
 class PageTableRenderer {
 
@@ -53,7 +55,8 @@ class PageTableRenderer {
             "active",
             "language",
             "deleted_at",
-            "language"
+            "language",
+            "type"
         ];
 
         $orderColumns = [
@@ -146,7 +149,7 @@ class PageTableRenderer {
     }
 
     protected function buildFilterSQL($where, $filters): string {
-        if (isset($filters["type"]) and !empty($filters["type"])) {
+        if (isset($filters["type"]) and!empty($filters["type"])) {
             $where .= " and type ='" .
                     Database::escapeValue($filters["type"]) .
                     "'";
@@ -221,8 +224,12 @@ class PageTableRenderer {
         $deleteButton = $deleteButtonRenderer->render($id, $user);
         $undeleteButton = $undeleteButtonRenderer->render($id, $user);
 
+        $model = TypeMapper::getModel($dataset->type);
+        $title = icon($model->getIcon(), ["class" => "type-icon"]) .
+                " " . _esc($dataset->title);
+
         return [
-            _esc($dataset->title),
+            $title,
             _esc(get_translation($dataset->menu)),
             _esc($dataset->position),
             _esc(getPageTitleByID(intval($dataset->parent_id))),
