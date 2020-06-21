@@ -3,6 +3,7 @@
 Neue Features:
 * Neue database Robo Tasks
 * Rechtliche Hinweise hinzugefügt
+* Icons zur Seitenverwaltung hinzugefügt
 
 API-Änderungen:
 * str_contains() empfängt nun Parameter in vertauschter Reihenfolge

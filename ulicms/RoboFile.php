@@ -539,7 +539,7 @@ class RoboFile extends Tasks {
     /**
      * Creates the application's database
      */
-    public function databaseCreate() {
+    public function dbCreate() {
         Database::setEchoQueries(true);
         $cfg = new CMSConfig();
         Database::createSchema($cfg->db_database);
@@ -549,7 +549,7 @@ class RoboFile extends Tasks {
     /**
      * Drop and recreate the application's database
      */
-    public function databaseMigrate() {
+    public function dbMigrate() {
         Database::setEchoQueries(true);
 
         $cfg = new CMSConfig();
@@ -565,7 +565,7 @@ class RoboFile extends Tasks {
     /**
      * Drops the application's database
      */
-    public function databaseDrop() {
+    public function dbDrop() {
         $cfg = new CMSConfig();
         Database::setEchoQueries(true);
         if (Database::isConnected()) {
@@ -576,12 +576,12 @@ class RoboFile extends Tasks {
     /**
      * Creates and migrates the application's database
      */
-    public function databaseReset() {
+    public function dbReset() {
         Database::setEchoQueries(true);
 
-        $this->databaseDrop();
+        $this->dbDrop();
 
-        $this->databaseMigrate();
+        $this->dbMigrate();
     }
 
 }

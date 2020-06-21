@@ -9,7 +9,7 @@ class RoboDatabaseTest extends RoboBaseTest {
 
     public function tearDown() {
         if ($this->shouldDropDbOnShutdown()) {
-            $this->runRoboCommand(["database:reset"]);
+            $this->runRoboCommand(["db:reset"]);
         }
     }
 
@@ -27,12 +27,12 @@ class RoboDatabaseTest extends RoboBaseTest {
         if (!$this->shouldDropDbOnShutdown()) {
             $this->markTestSkipped();
         }
-        $actualDrop = $this->runRoboCommand(["database:drop"]);
+        $actualDrop = $this->runRoboCommand(["db:drop"]);
         $this->assertStringContainsString('DROP SCHEMA IF EXISTS `', $actualDrop);
 
         new RoboFile();
 
-        $actualCreate = $this->runRoboCommand(["database:create"]);
+        $actualCreate = $this->runRoboCommand(["db:create"]);
         $this->assertStringContainsString('CREATE DATABASE', $actualCreate);
     }
 
