@@ -1,3 +1,8 @@
+===== Neues in UliCMS 2020.2.4 =====
+
+Sonstige Änderungen:
+* database:* Robotasks in db:* umbenannt.
+
 ===== Neues in UliCMS 2020.2.3 =====
 
 Neue Features:
@@ -15,7 +20,7 @@ Entfernte API-Methoden:
 * \isNotNullOrEmpty($variable): bool
 * \add_hook(string $name, string $runs = ModuleEventConstants::RUNS_ONCE): void
 * \combined_script_html(): void
-* \get_combined_script_html(): string 
+* \get_combined_script_html(): string
 * \get_combined_stylesheet_html(): string
 
 ===== Neues in UliCMS 2020.2.2 =====

@@ -11,7 +11,7 @@ class UliCMSVersion {
         $this->internalVersion = [
             2020,
             2,
-            3
+            4
         ];
 
         $this->update = "";
