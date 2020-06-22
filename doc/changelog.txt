@@ -3,6 +3,9 @@
 Sonstige Änderungen:
 * database:* Robotasks in db:* umbenannt.
 
+Entfernte API-Methoden:
+* NumberFormatHelper::timestampToHtml5Datetime(?int $timestamp = null): string
+
 ===== Neues in UliCMS 2020.2.3 =====
 
 Neue Features:
