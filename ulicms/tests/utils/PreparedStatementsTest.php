@@ -1,6 +1,6 @@
 <?php
 
-class PreparedStatementTest extends \PHPUnit\Framework\TestCase {
+class PreparedStatementsTest extends \PHPUnit\Framework\TestCase {
 
     public function testPreparedStatements() {
         $result = Database::pQuery("SELECT ? as wert1, ? as wert2, ? as wert3, ? as wert4, ? as wert5, ? as wert6", array(

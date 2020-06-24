@@ -8,7 +8,7 @@ class CsvRendererTest extends \PHPUnit\Framework\TestCase {
     private $cacheDisabledOriginal;
     private $cachePeriodOriginal;
 
-    public function setUp() {
+    protected function setUp(): void {
         require_once getLanguageFilePath("en");
 
         $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (Windows NT 6.1; "
@@ -22,7 +22,7 @@ class CsvRendererTest extends \PHPUnit\Framework\TestCase {
         $_SERVER["REQUEST_URI"] = "/other-url.csv?param=value";
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         CacheUtil::clearPageCache();
         CacheUtil::resetAdapater();
         Database::query("delete from {prefix}content where title like 'Unit Test%'", true);

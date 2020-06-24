@@ -9,7 +9,7 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase {
     private $twoFactorEnabled = false;
     private $maxFailedLoginItems;
 
-    public function setUp() {
+    protected function setUp(): void {
                 
         $group = new Group();
         $group->setName("testgroup");
@@ -50,7 +50,7 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase {
         require_once getLanguageFilePath("en");
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         $this->testGroup->delete();
         $this->testUser->delete();
 

@@ -4,7 +4,7 @@ use UliCMS\Security\Permissions\PagePermissions;
 
 class PagePermissionsTest extends \PHPUnit\Framework\TestCase {
 
-	public function tearDown() {
+	protected function tearDown(): void {
 		$sql = "delete from `{prefix}content` where slug = ?";
 		$args = array(
 			"page_permission_test"

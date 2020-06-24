@@ -4,7 +4,7 @@ use UliCMS\Exceptions\SqlException;
 
 class DatabaseTest extends \PHPUnit\Framework\TestCase {
 
-    public function tearDown() {
+    protected function tearDown(): void {
         Database::setEchoQueries(false);
         Database::dropTable("test_table");
         Settings::delete("foo");

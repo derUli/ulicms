@@ -2,14 +2,14 @@
 
 class SettingsTest extends \PHPUnit\Framework\TestCase {
 
-	public function setUp() {
+	protected function setUp(): void {
 		LoggerRegistry::register(
 				"audit_log",
 				new Logger(Path::resolve("ULICMS_LOG/audit_log"))
 		);
 	}
 
-	public function tearDown() {
+	protected function tearDown(): void {
 		Settings::delete("my_setting");
 		Settings::delete("my_setting_de");
 		Settings::delete("my_setting_en");

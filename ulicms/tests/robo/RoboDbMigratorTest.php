@@ -5,7 +5,7 @@ require_once __DIR__ . "/RoboBaseTest.php";
 
 class RoboDbMigratorTest extends RoboBaseTest {
 
-    public function tearDown() {
+    protected function tearDown(): void {
         Database::dropTable("employees");
     }
 

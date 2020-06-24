@@ -5,7 +5,7 @@ use UliCMS\Models\Content\Language;
 
 class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
 
-    public function setUp() {
+    protected function setUp(): void {
         include_once getLanguageFilePath("en");
     }
 

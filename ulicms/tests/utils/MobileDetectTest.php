@@ -4,12 +4,12 @@ class MobileDetectTest extends \PHPUnit\Framework\TestCase {
 
     private $no_mobile_design_on_tablet = false;
 
-    public function setUp() {
+    protected function setUp(): void {
         $this->no_mobile_design_on_tablet = Settings::get("no_mobile_design_on_tablet");
         Settings::delete("no_mobile_design_on_tablet");
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         if ($this->no_mobile_design_on_tablet) {
             Settings::set("no_mobile_design_on_tablet", 1);
         } else {

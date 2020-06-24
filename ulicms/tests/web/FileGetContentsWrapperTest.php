@@ -11,11 +11,11 @@ class FileGetContentsWrapperTest extends \PHPUnit\Framework\TestCase {
     const UNIQID_URL = "http://test.ulicms.de/uniqid.php";
     const USER_AGENT_URL = "http://test.ulicms.de/useragent.php";
 
-    public function setUp() {
+    protected function setUp(): void {
         CacheUtil::clearCache();
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         CacheUtil::clearCache();
     }
 

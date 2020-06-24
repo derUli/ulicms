@@ -8,7 +8,7 @@ class MailerTest extends \PHPUnit\Framework\TestCase {
 
     private $initialSettings = [];
 
-    public function setUp() {
+    protected function setUp(): void {
         LoggerRegistry::register(
                 "phpmailer_log",
                 new Logger(Path::resolve("ULICMS_LOG/phpmailer_log"))
@@ -31,7 +31,7 @@ class MailerTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         LoggerRegistry::unregister("phpmailer_log");
 
         foreach ($this->initialSettings as $key => $value) {

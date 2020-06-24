@@ -4,7 +4,7 @@ use UliCMS\Models\Content\TypeMapper;
 
 class ContentTest extends \PHPUnit\Framework\TestCase {
 
-    public function tearDown() {
+    protected function tearDown(): void {
         Content::emptyTrash();
     }
 

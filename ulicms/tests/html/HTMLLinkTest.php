@@ -4,11 +4,11 @@ use UliCMS\HTML\Link as Link;
 
 class HTMLLinkTest extends \PHPUnit\Framework\TestCase {
 
-    public function setUp() {
+    protected function setUp(): void {
         chdir(Path::resolve("ULICMS_ROOT/admin"));
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         chdir(Path::resolve("ULICMS_ROOT"));
     }
 

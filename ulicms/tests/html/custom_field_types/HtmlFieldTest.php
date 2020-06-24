@@ -4,7 +4,7 @@ class HtmlFieldTest extends \PHPUnit\Framework\TestCase {
 
     private $testUser;
 
-    public function setUp() {
+    protected function setUp(): void {
         include_once getLanguageFilePath("en");
 
         $user = new User();
@@ -19,7 +19,7 @@ class HtmlFieldTest extends \PHPUnit\Framework\TestCase {
         $this->testUser = $user;
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         $this->testUser->delete();
             }
 

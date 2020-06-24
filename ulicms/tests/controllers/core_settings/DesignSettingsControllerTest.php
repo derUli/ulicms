@@ -6,7 +6,7 @@ class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase {
 
     private $initialSettings = [];
 
-    public function setUp() {
+    protected function setUp(): void {
         $this->cleanUpFiles();
 
         $settings = [
@@ -18,7 +18,7 @@ class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         $this->cleanUpFiles();
         Settings::delete("disable_custom_layout_options");
 
@@ -86,7 +86,7 @@ class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase {
         $this->cleanUpFiles();
 
         $file = Path::resolve("ULICMS_GENERATED/design_variables.scss");
-        $this->assertFileNotExists($file);
+        $this->assertFileDoesNotExist($file);
 
         $controller = new DesignSettingsController();
         $this->assertFileExists($file);

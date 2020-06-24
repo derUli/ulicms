@@ -4,7 +4,7 @@ use UliCMS\Constants\PackageTypes;
 
 class PackageManagerTest extends \PHPUnit\Framework\TestCase {
 
-    public function setUp() {
+    protected function setUp(): void {
         $moduleManager = new ModuleManager();
         $moduleManager->sync();
     }

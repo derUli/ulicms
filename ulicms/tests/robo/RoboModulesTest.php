@@ -5,7 +5,7 @@ require_once __DIR__ . "/RoboBaseTest.php";
 
 class RoboModulesTest extends RoboBaseTest {
 
-    public function setUp() {
+    protected function setUp(): void {
         $this->runRoboCommand(["modules:sync"]);
     }
 

@@ -2,13 +2,13 @@
 
 class VarsTest extends \PHPUnit\Framework\TestCase {
 
-    public function setUp() {
+    protected function setUp(): void {
         Vars::set("foo", "bar");
         Vars::set("john", "doe");
         Vars::set("hello", "world");
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         Vars::clear();
     }
 

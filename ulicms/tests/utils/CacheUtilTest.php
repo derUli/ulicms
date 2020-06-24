@@ -27,13 +27,13 @@ class CacheUtilTest extends \PHPUnit\Framework\TestCase {
     private $cacheDisabledOriginal;
     private $cachePeriodOriginal;
 
-    public function setUp() {
+    protected function setUp(): void {
         $this->cacheDisabledOriginal = Settings::get("cache_disabled");
         $this->cachePeriodOriginal = Settings::get("cache_period");
         Settings::delete("cache_disabled");
             }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         if ($this->cacheDisabledOriginal) {
             Settings::set("cache_disabled", "yes");
         } else {

@@ -7,7 +7,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
     private $initialUser;
     private $additionalMenus;
 
-    public function setUp() {
+    protected function setUp(): void {
         $this->cleanUp();
         
         $moduleManager = new ModuleManager();
@@ -29,7 +29,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         chdir(Path::resolve("ULICMS_ROOT"));
 
         Flags::setNoCache(false);

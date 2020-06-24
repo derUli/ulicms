@@ -10,7 +10,7 @@ class PermissionCheckerTest extends \PHPUnit\Framework\TestCase {
     private $testGroup2;
     private $testGroup3;
 
-    public function setUp() {
+    protected function setUp(): void {
 		$_SESSION = [];
         $group1 = new Group();
         $group1->setName("TestGroup1");
@@ -58,7 +58,7 @@ class PermissionCheckerTest extends \PHPUnit\Framework\TestCase {
         $this->testUser = $user;
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         $this->testUser->delete();
         $this->testGroup1->delete();
         $this->testGroup2->delete();

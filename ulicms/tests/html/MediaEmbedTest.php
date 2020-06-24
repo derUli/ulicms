@@ -2,13 +2,13 @@
 
 class MediaEmbedTest extends \PHPUnit\Framework\TestCase {
 
-    public function setUp() {
+    protected function setUp(): void {
         $_SESSION = [
             "language" => "de"
         ];
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         $_SESSION = [];
     }
 

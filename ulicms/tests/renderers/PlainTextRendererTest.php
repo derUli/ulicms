@@ -8,7 +8,7 @@ class PlainTextRendererTest extends \PHPUnit\Framework\TestCase {
     private $cacheDisabledOriginal;
     private $cachePeriodOriginal;
 
-    public function setUp() {
+    protected function setUp(): void {
         require_once getLanguageFilePath("en");
 
         $this->cacheDisabledOriginal = Settings::get("cache_disabled");
@@ -20,7 +20,7 @@ class PlainTextRendererTest extends \PHPUnit\Framework\TestCase {
                 . "Chrome/63.0.3239.132 Safari/537.36";
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         CacheUtil::clearPageCache();
         Database::query("delete from {prefix}content where title "
                 . "like 'Unit Test%' or slug like 'unit-test%'", true);

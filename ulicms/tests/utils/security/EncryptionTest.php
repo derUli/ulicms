@@ -6,11 +6,11 @@ class EncryptionTest extends \PHPUnit\Framework\TestCase {
 
     private $salt;
 
-    function setUp() {
+    protected function setUp(): void {
         $this->salt = Settings::get("password_salt");
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         Settings::set("password_salt", $this->salt);
     }
 

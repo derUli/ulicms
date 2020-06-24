@@ -2,7 +2,7 @@
 
 class ModuleTest extends \PHPUnit\Framework\TestCase {
 
-	public function setUp() {
+	protected function setUp(): void {
 		$manager = new ModuleManager();
 		$manager->sync();
 
@@ -10,7 +10,7 @@ class ModuleTest extends \PHPUnit\Framework\TestCase {
 		$module->enable();
 	}
 
-	public function tearDown() {
+	protected function tearDown(): void {
 		$manager = new ModuleManager();
 		$manager->sync();
 

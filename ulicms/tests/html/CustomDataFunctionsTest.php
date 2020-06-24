@@ -1,15 +1,13 @@
 <?php
 
-use UliCMS\Exceptions\NotImplementedException;
+class CustomDataFunctionsTest extends \PHPUnit\Framework\TestCase {
 
-class CustomDataFunctionsText extends \PHPUnit\Framework\TestCase {
-
-    public function setUp() {
+    protected function setUp(): void {
         $_GET["slug"] = "welcome";
         $_SESSION["language"] = "en";
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         Settings::delete("my_value");
         delete_custom_data("my_value");
         unset($_GET["slug"]);

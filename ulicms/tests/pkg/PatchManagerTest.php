@@ -4,7 +4,7 @@ use UliCMS\Packages\PatchManager;
 
 class PatchManagerTest extends \PHPUnit\Framework\TestCase {
 
-    public function setUp() {
+    protected function setUp(): void {
         for ($i = 1; $i <= 3; $i++) {
             Database::pQuery(
                     "insert into {prefix}installed_patches "
@@ -20,7 +20,7 @@ class PatchManagerTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         $patchManager = new PatchManager();
         $patchManager->truncateInstalledPatches();
     }

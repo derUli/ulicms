@@ -9,7 +9,7 @@ class UserTest extends \PHPUnit\Framework\TestCase {
 
     private $otherGroup;
 
-    public function setUp() {
+    protected function setUp(): void {
         CacheUtil::clearAvatars(true);
         $_SERVER["REQUEST_URI"] = "/other-url.html?param=value";
 
@@ -34,7 +34,7 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $_SERVER['REQUEST_URI'] = "/foobar/foo.html";
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         CacheUtil::clearAvatars(true);
         $_SESSION = [];
 
@@ -358,7 +358,7 @@ class UserTest extends \PHPUnit\Framework\TestCase {
     public function testGetPasswordChanged() {
         $user = new User();
         $user->setPassword("top-secret");
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
                 '/\d+-\d+-\d+ \d+:\d+:\d+/',
                 $user->getPasswordChanged()
         );

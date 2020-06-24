@@ -10,7 +10,7 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase {
     private $testGroup1;
     private $testGroup2;
 
-    public function setUp() {
+    protected function setUp(): void {
         $this->testGroup1 = new Group();
         $this->testGroup1->setName("testgroup1");
         $this->testGroup1->addPermission("pages", true);
@@ -68,7 +68,7 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase {
         $this->testUser3->save();
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         Database::query("delete from `{prefix}content` where slug like 'testpage%'", true);
 
         Database::query("delete from `{prefix}users` where username like 'testuser%'", true);

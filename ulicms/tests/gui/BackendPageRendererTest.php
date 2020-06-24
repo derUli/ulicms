@@ -6,7 +6,7 @@ use UliCMS\Helpers\TestHelper;
 
 class BackendPageRendererTest extends \PHPUnit\Framework\TestCase {
 
-    public function setUp() {
+    protected function setUp(): void {
         require_once getLanguageFilePath("en");
     }
 

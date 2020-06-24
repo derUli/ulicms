@@ -2,7 +2,7 @@
 
 class VideoPageTest extends \PHPUnit\Framework\TestCase {
 
-	public function tearDown() {
+	protected function tearDown(): void {
 		Database::query("delete from {prefix}content where title like 'Unit Test%'", true);
 	}
 

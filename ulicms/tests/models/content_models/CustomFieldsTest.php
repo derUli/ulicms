@@ -2,7 +2,7 @@
 
 class CustomFieldsTest extends \PHPUnit\Framework\TestCase {
 
-    public function tearDown() {
+    protected function tearDown(): void {
         $id = $this->getFirstPage()->id;
         $type = $this->getFirstPage()->type;
         Database::pQuery("delete from {prefix}custom_fields where name in (?, ?) and content_id = ?", array(

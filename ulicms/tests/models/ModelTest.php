@@ -5,7 +5,7 @@ use UliCMS\Exceptions\NotImplementedException;
 
 class ModelTest extends \PHPUnit\Framework\TestCase {
 
-    public function tearDown() {
+    protected function tearDown(): void {
         Database::pQuery("delete from {prefix}languages where language_code = ?", array("it"), true);
     }
 

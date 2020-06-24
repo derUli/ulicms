@@ -5,11 +5,11 @@ require_once __DIR__ . "/RoboBaseTest.php";
 
 class RoboPackageTest extends RoboBaseTest {
 
-    public function setUp() {
+    protected function setUp(): void {
         $this->runRoboCommand(["modules:sync"]);
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         $moduleDir = Path::resolve("ULICMS_ROOT/content/modules/hello_world");
         if (is_dir($moduleDir)) {
             sureRemoveDir($moduleDir);

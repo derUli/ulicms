@@ -4,7 +4,7 @@ class GroupTest extends \PHPUnit\Framework\TestCase {
 
 	private $savedSettings = [];
 
-	public function setUp() {
+	protected function setUp(): void {
 
 		$settings = array(
 			"default_acl_group"
@@ -17,7 +17,7 @@ class GroupTest extends \PHPUnit\Framework\TestCase {
 
 			}
 
-	public function tearDown() {
+	protected function tearDown(): void {
 		Database::query("delete from `{prefix}groups` where name = 'bla'", true);
 
 		foreach ($this->savedSettings as $key => $value) {

@@ -2,14 +2,14 @@
 
 class ModuleHelperTest extends \PHPUnit\Framework\TestCase {
 
-    public function setUp() {
+    protected function setUp(): void {
                 $_SESSION["language"] = "en";
         require_once getLanguageFilePath("en");
         $_SERVER = [];
         $_SERVER["REQUEST_URI"] = "/other-url.html?param=value";
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         chdir(ULICMS_ROOT);
         
         $_SERVER = [];

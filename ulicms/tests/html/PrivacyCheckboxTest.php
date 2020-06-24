@@ -7,14 +7,14 @@ class PrivacyCheckboxTest extends \PHPUnit\Framework\TestCase {
     private $privacy_policy_checkbox_text_de;
     private $privacy_policy_checkbox_text_en;
 
-    public function setUp() {
+    protected function setUp(): void {
         $this->privacy_policy_checkbox_enable_de = Settings::get("privacy_policy_checkbox_enable_de");
         $this->privacy_policy_checkbox_enable_en = Settings::get("privacy_policy_checkbox_enable_en");
         $this->privacy_policy_checkbox_text_de = Settings::get("privacy_policy_checkbox_text_de");
         $this->privacy_policy_checkbox_text_en = Settings::get("privacy_policy_checkbox_text_en");
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         if ($this->privacy_policy_checkbox_enable_de) {
             Settings::set("privacy_policy_checkbox_enable_de", "1");
         } else {

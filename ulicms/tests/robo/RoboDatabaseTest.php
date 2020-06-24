@@ -7,7 +7,7 @@ use UliCMS\Helpers\TestHelper;
 
 class RoboDatabaseTest extends RoboBaseTest {
 
-    public function tearDown() {
+    protected function tearDown(): void {
         if ($this->shouldDropDbOnShutdown()) {
             $this->runRoboCommand(["db:reset"]);
         }

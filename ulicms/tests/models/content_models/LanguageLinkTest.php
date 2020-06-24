@@ -4,7 +4,7 @@ use UliCMS\Models\Content\Language;
 
 class LanguageLinkTest extends \PHPUnit\Framework\TestCase {
 
-	public function tearDown() {
+	protected function tearDown(): void {
 		Database::deleteFrom("content", "slug like 'unit_test_%'");
 	}
 

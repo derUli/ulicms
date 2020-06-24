@@ -7,13 +7,13 @@ use UliCMS\Utils\CacheUtil;
 
 class CommentTest extends \PHPUnit\Framework\TestCase {
 
-    public function setUp() {
+    protected function setUp(): void {
         require_once getLanguageFilePath("en");
         require_once ModuleHelper::buildModuleRessourcePath("core_comments", "lang/en.php");
         require_once ModuleHelper::buildModuleRessourcePath("core_forms", "lang/en.php");
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         Database::deleteFrom("comments", "text like 'Unit Test%'");
         unset($_POST["my_homepage_url"]);
         CacheUtil::clearCache();

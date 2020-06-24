@@ -9,7 +9,7 @@ class BannersTest extends \PHPUnit\Framework\TestCase {
 	const HTML_TEXT1 = "My first Banner HTML";
 	const HTML_TEXT2 = "My second Banner HTML";
 
-	public function tearDown() {
+	protected function tearDown(): void {
 		Database::pQuery("DELETE FROM `{prefix}banner` where html in (? , ?)", array(
 			self::HTML_TEXT1,
 			self::HTML_TEXT2

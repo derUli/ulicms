@@ -219,17 +219,17 @@ class FilesTest extends \PHPUnit\Framework\TestCase {
         File::write($path1, "My File");
 
         $this->assertFileExists($path1);
-        $this->assertFileNotExists($path2);
+        $this->assertFileDoesNotExist($path2);
 
         File::rename($path1, $path2);
 
-        $this->assertFileNotExists($path1);
+        $this->assertFileDoesNotExist($path1);
         $this->assertFileExists($path2);
 
         File::delete($path2);
 
-        $this->assertFileNotExists($path1);
-        $this->assertFileNotExists($path2);
+        $this->assertFileDoesNotExist($path1);
+        $this->assertFileDoesNotExist($path2);
     }
 
     public function testLoadLinesAndTrim() {

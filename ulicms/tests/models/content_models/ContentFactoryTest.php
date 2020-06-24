@@ -7,14 +7,14 @@ use UliCMS\Models\Content\Category;
 
 class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
 
-    public function setUp() {
+    protected function setUp(): void {
         LoggerRegistry::register(
                 "exception_log",
                 new Logger(Path::resolve("ULICMS_LOG/exception_log"))
         );
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         Database::deleteFrom("content", "type = 'gibts_nicht' or slug like 'unit-test-%'");
         Database::deleteFrom("categories", "name like 'The Test%'");
         Database::deleteFrom("users", "username like 'testuser%'");

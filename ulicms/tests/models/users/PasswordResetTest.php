@@ -4,7 +4,7 @@ class PasswordResetTest extends \PHPUnit\Framework\TestCase {
 
 	private $testUserId;
 
-	public function setUp() {
+	protected function setUp(): void {
 		$manager = new UserManager();
 		$this->testUserId = intval(
 				$manager->getAllUsers()[0]->getId()
@@ -18,7 +18,7 @@ class PasswordResetTest extends \PHPUnit\Framework\TestCase {
 		$this->cleanUp();
 	}
 
-	public function tearDown() {
+	protected function tearDown(): void {
 		$this->cleanUp();
 		unset($_SERVER["SERVER_PROTOCOL"]);
 		unset($_SERVER['HTTP_HOST']);

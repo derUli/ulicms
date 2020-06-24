@@ -2,11 +2,11 @@
 
 class CsrfTokenTest extends \PHPUnit\Framework\TestCase {
 
-	public function setUp(){
+	protected function setUp(): void{
 			$_SESSION = [];
 			$_REQUEST = [];
 	}
-    public function tearDown() {
+    protected function tearDown(): void {
         $_SESSION = [];
         $_REQUEST = [];
     }

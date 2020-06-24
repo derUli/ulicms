@@ -2,7 +2,7 @@
 
 class UserManagerTest extends \PHPUnit\Framework\TestCase {
 
-	public function setUp() {
+	protected function setUp(): void {
 		$this->tearDown();
 		for ($i = 1; $i < 5; $i ++) {
 			$user = new User();
@@ -26,7 +26,7 @@ class UserManagerTest extends \PHPUnit\Framework\TestCase {
 		}
 	}
 
-	public function tearDown() {
+	protected function tearDown(): void {
 		for ($i = 1; $i < 5; $i ++) {
 			$user = new User();
 			$user->loadByUsername("locked_user_" . $i);

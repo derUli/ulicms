@@ -2,7 +2,7 @@
 
 class HomeControllerTest extends \PHPUnit\Framework\TestCase {
 
-    public function setUp() {
+    protected function setUp(): void {
         require_once getLanguageFilePath("en");
         Settings::set("installed_at", "1495362918");
 
@@ -13,7 +13,7 @@ class HomeControllerTest extends \PHPUnit\Framework\TestCase {
         $_SERVER['REQUEST_URI'] = "/foobar/foo.html";
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         Database::deleteFrom(
                 "users",
                 "username like 'online-%' or username like 'nicht-online-%'"

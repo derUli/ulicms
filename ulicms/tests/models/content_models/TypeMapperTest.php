@@ -4,7 +4,7 @@ use UliCMS\Models\Content\TypeMapper;
 
 class TypeMapperTest extends \PHPUnit\Framework\TestCase {
 
-	public function setUp() {
+	protected function setUp(): void {
 		TypeMapper::loadMapping();
 	}
 

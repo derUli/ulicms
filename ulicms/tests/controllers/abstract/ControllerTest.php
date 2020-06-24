@@ -4,14 +4,14 @@ use UliCMS\Exceptions\AccessDeniedException;
 
 class ControllerTest extends \PHPUnit\Framework\TestCase {
 
-    public function setUp() {
+    protected function setUp(): void {
         $_SERVER["REQUEST_METHOD"] = "POST";
         $_SESSION = [];
 
         Translation::loadAllModuleLanguageFiles("en");
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         $_REQUEST = [];
         $_SERVER = [];
         $_SESSION = [];

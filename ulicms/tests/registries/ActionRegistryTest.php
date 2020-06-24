@@ -2,11 +2,11 @@
 
 class ActionRegistryTest extends \PHPUnit\Framework\TestCase {
 
-    public function setUp() {
+    protected function setUp(): void {
         ActionRegistry::loadModuleActions();
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         BackendHelper::setAction("home");
     }
 

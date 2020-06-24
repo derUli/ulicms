@@ -5,7 +5,7 @@ use UliCMS\Exceptions\DatasetNotFoundException;
 
 class BannerControllerTest extends \PHPUnit\Framework\TestCase {
 
-    public function setUp() {
+    protected function setUp(): void {
         LoggerRegistry::register(
                 "audit_log",
                 new Logger(Path::resolve("ULICMS_LOG/audit_log"))
@@ -14,7 +14,7 @@ class BannerControllerTest extends \PHPUnit\Framework\TestCase {
         $_POST = [];
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         $_POST = [];
 
         LoggerRegistry::unregister("audit_log");

@@ -5,13 +5,13 @@ use UliCMS\Exceptions\DatasetNotFoundException;
 
 class ComparisonsTest extends \PHPUnit\Framework\TestCase {
 
-    public function setUp() {
+    protected function setUp(): void {
                 
         $_SERVER = [];
         $_REQUEST = [];
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         Database::query("delete from {prefix}users where username like 'testuser-%'", true);
                 
         $_SERVER = [];

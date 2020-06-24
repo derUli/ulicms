@@ -4,7 +4,7 @@ use UliCMS\Helpers\NumberFormatHelper;
 
 class NumberFormatHelperTest extends \PHPUnit\Framework\TestCase {
 
-    public function setUp() {
+    protected function setUp(): void {
         require_once getLanguageFilePath("en");
     }
 
@@ -61,7 +61,7 @@ class NumberFormatHelperTest extends \PHPUnit\Framework\TestCase {
 
 
     public function testTimestampToSqlDateWithoutArgs() {
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
                 '/^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2})$/',
                 NumberFormatHelper::timestampToSqlDate()
         );

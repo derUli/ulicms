@@ -2,7 +2,7 @@
 
 class FormsTest extends \PHPUnit\Framework\TestCase {
 
-    public function tearDown() {
+    protected function tearDown(): void {
         Database::query("delete from {prefix}forms where name like 'Unit Test%'", true);
     }
 

@@ -4,7 +4,7 @@ class Domain2LanguageMappingTest extends \PHPUnit\Framework\TestCase {
 
     private $originalMapping;
 
-    public function setUp() {
+    protected function setUp(): void {
         $_SERVER = [];
 
         $this->originalMapping = Settings::get("domain_to_language");
@@ -12,7 +12,7 @@ class Domain2LanguageMappingTest extends \PHPUnit\Framework\TestCase {
         Settings::set("domain_to_language", $testData);
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         chdir(ULICMS_ROOT);
 
         Settings::set("domain_to_language", $this->originalMapping);

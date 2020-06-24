@@ -2,13 +2,13 @@
 
 class ViewBagTest extends \PHPUnit\Framework\TestCase {
 
-    public function setUp() {
+    protected function setUp(): void {
         ViewBag::set("foo", "bar");
         ViewBag::set("john", "doe");
         ViewBag::set("hello", "world");
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         ViewBag::clear();
     }
 

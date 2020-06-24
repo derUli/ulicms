@@ -5,7 +5,7 @@ use UliCMS\Models\Content\Category;
 
 class AudioTest extends \PHPUnit\Framework\TestCase {
 
-	public function setUp() {
+	protected function setUp(): void {
 		require_once getLanguageFilePath("en");
 	}
 

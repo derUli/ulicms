@@ -9,7 +9,7 @@ use Robo\TaskAccessor;
 
 class RoboSettingsTest extends RoboBaseTest {
 
-    public function tearDown() {
+    protected function tearDown(): void {
         Settings::delete("foo1");
         Settings::delete("foo2");
         Settings::delete("");

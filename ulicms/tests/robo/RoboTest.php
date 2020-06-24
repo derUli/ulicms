@@ -5,7 +5,7 @@ require_once __DIR__ . "/RoboBaseTest.php";
 
 class RoboTest extends RoboBaseTest {
 
-    public function tearDown() {
+    protected function tearDown(): void {
         if ($this->shouldDropDbOnShutdown()) {
             $this->resetDb();
         }

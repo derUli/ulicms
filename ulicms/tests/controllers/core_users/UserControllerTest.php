@@ -2,7 +2,7 @@
 
 class UserControllerTest extends \PHPUnit\Framework\TestCase {
 
-    public function setUp() {
+    protected function setUp(): void {
         LoggerRegistry::register(
                 "audit_log",
                 new Logger(Path::resolve("ULICMS_LOG/audit_log"))
@@ -16,7 +16,7 @@ class UserControllerTest extends \PHPUnit\Framework\TestCase {
         ];
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         LoggerRegistry::unregister("audit_log");
         Database::deleteFrom("users", "username = 'testuser-ist-admin'");
 

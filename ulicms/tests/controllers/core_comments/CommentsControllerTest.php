@@ -9,7 +9,7 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase {
     private $initialCommentsMustBeApproved;
     private $initialCommentsDefaultLimit;
 
-    public function setUp() {
+    protected function setUp(): void {
         $this->initialCommentsMustBeApproved = Settings::get(
                         "comments_must_be_approved"
         );
@@ -18,7 +18,7 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         Database::deleteFrom("comments", "text like 'Unit Test%'");
 
         if (boolval($this->initialCommentsMustBeApproved)) {

@@ -9,7 +9,7 @@ class PdfRendererTest extends \PHPUnit\Framework\TestCase {
     private $cacheDisabledOriginal;
     private $cachePeriodOriginal;
 
-    public function setUp() {
+    protected function setUp(): void {
         require_once getLanguageFilePath("en");
 
         $_SESSION["language"] = "de";
@@ -22,7 +22,7 @@ class PdfRendererTest extends \PHPUnit\Framework\TestCase {
         Settings::delete("cache_disabled");
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         CacheUtil::clearPageCache();
         CacheUtil::resetAdapater();
         Database::query("delete from {prefix}content where title like 'Unit Test%'", true);

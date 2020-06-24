@@ -5,7 +5,7 @@ require_once __DIR__ . "/RoboBaseTest.php";
 
 class RoboPatchesTest extends RoboBaseTest {
 
-    public function setUp() {
+    protected function setUp(): void {
         $output = $this->runRoboCommand(["patches:truncate"]);
     }
 

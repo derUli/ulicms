@@ -10,7 +10,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
 
     const HTML_TEXT1 = "My first Banner HTML";
 
-    public function setUp() {
+    protected function setUp(): void {
         $this->initialMobileTheme = Settings::get("mobile_theme");
         $this->homepageOwner = Settings::get("homepage_owner");
         $this->initialDomainToLanguage = Settings::get("domain_to_language");
@@ -26,7 +26,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         UliCMS\Utils\Session\sessionStart();
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         $this->cleanUp();
 
         Settings::get("mobile_theme", $this->initialMobileTheme);
@@ -557,7 +557,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetTextPosition() {
-        $this->assertContains("before", get_text_position());
+        $this->assertStringContainsString("before", get_text_position());
     }
 
     public function testGetArticleMeta() {

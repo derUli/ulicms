@@ -9,7 +9,7 @@ class DBMigratorTest extends \PHPUnit\Framework\TestCase {
 	const DB_MIGRATOR_FAILED_UP_DIR = "ULICMS_ROOT/tests/fixtures/failed_migrations/up";
 	const DB_MIGRATOR_FAILED_DOWN_DIR = "ULICMS_ROOT/tests/fixtures/failed_migrations/down";
 
-	public function tearDown() {
+	protected function tearDown(): void {
 		Database::dropTable("employees");
 
 		$dbmigrator = new DBMigrator("dbmigrator_test", self::DB_MIGRATOR_UP_DIR);

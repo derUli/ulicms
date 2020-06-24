@@ -2,7 +2,7 @@
 
 class ControllerRegistryTest extends \PHPUnit\Framework\TestCase {
 
-    public function setUp() {
+    protected function setUp(): void {
         ControllerRegistry::loadModuleControllers();
 
         if(!session_id() && !headers_sent()){
@@ -10,7 +10,7 @@ class ControllerRegistryTest extends \PHPUnit\Framework\TestCase {
         ActionRegistry::loadModuleActionAssignment();
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         if(session_id() && !headers_sent()){
                     }
 

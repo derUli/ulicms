@@ -5,7 +5,7 @@ use UliCMS\Models\Content\VCS;
 
 class PageControllerTest extends \PHPUnit\Framework\TestCase {
 
-    public function setUp() {
+    protected function setUp(): void {
         require_once getLanguageFilePath("en");
         Translation::loadAllModuleLanguageFiles("en");
 
@@ -14,7 +14,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
         $_GET = [];
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         $_POST = [];
         $_GET = [];
         $_SESSION = [];

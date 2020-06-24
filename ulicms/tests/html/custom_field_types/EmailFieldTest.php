@@ -2,7 +2,7 @@
 
 class EmailFieldTest extends \PHPUnit\Framework\TestCase {
 
-    public function setUp() {
+    protected function setUp(): void {
         include_once getLanguageFilePath("en");
     }
 

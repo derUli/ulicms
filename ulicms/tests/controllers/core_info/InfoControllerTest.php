@@ -2,12 +2,12 @@
 
 class InfoControllerTest extends \PHPUnit\Framework\TestCase {
 
-    public function setUp() {
+    protected function setUp(): void {
         Translation::loadAllModuleLanguageFiles("en");
         clearCache();
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         clearCache();
     }
 

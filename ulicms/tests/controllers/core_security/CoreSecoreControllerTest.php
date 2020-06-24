@@ -5,14 +5,14 @@ class CoreSecoreControllerTest extends \PHPUnit\Framework\TestCase {
     private $initialEnableHsts = false;
     private $initialExpectCt = false;
     
-    public function setUp() {
+    protected function setUp(): void {
         Vars::get("http_headers", []);
         
         $this->initialEnableHsts = Settings::get("enable_hsts");
         $this->initialExpectCt = Settings::get("expect_ct");
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         Vars::get("http_headers", []);
         
         if($this->initialEnableHsts){

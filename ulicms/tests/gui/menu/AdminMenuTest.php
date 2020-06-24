@@ -6,7 +6,7 @@ class AdminMenuTest extends \PHPUnit\Framework\TestCase {
     private $limitedUser;
     private $testGroup;
 
-    public function setUp() {
+    protected function setUp(): void {
         $adminUser = new User();
         $adminUser->setUsername("testuser-admin");
         $adminUser->setLastname("Admin");
@@ -32,7 +32,7 @@ class AdminMenuTest extends \PHPUnit\Framework\TestCase {
         $this->limitedUser = $limitedUser;
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         $this->adminUser->delete();
         $this->limitedUser->delete();
         $this->testGroup->delete();

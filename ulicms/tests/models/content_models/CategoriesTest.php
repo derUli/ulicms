@@ -5,7 +5,7 @@ use UliCMS\Models\Content\Category;
 
 class CategoriesTest extends \PHPUnit\Framework\TestCase {
 
-	public function tearDown() {
+	protected function tearDown(): void {
 		Database::query(
 				"delete from {prefix}categories "
 				. "where name like 'Test Category %' ", true);

@@ -8,7 +8,7 @@ class JsonRendererTest extends \PHPUnit\Framework\TestCase {
     private $cacheDisabledOriginal;
     private $cachePeriodOriginal;
 
-    public function setUp() {
+    protected function setUp(): void {
         require_once getLanguageFilePath("en");
         $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) "
                 . "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 "
@@ -21,7 +21,7 @@ class JsonRendererTest extends \PHPUnit\Framework\TestCase {
         $_SESSION["language"] = "de";
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         CacheUtil::clearPageCache();
 
         if ($this->cacheDisabledOriginal) {

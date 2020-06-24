@@ -4,11 +4,11 @@ use UliCMS\Helpers\TestHelper;
 
 class LoggerTest extends \PHPUnit\Framework\TestCase {
 
-    public function setUp() {
+    protected function setUp(): void {
         sureRemoveDir(Path::resolve("ULICMS_LOG/test_log"), true);
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         sureRemoveDir(Path::resolve("ULICMS_LOG/test_log"), true);
     }
 

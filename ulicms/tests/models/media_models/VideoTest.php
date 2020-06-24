@@ -5,7 +5,7 @@ use UliCMS\Models\Content\Category;
 
 class VideoTest extends \PHPUnit\Framework\TestCase {
 
-	public function setUp() {
+	protected function setUp(): void {
 		require_once getLanguageFilePath("en");
 	}
 

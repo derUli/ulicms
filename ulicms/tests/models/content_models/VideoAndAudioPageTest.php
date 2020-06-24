@@ -5,7 +5,7 @@ use UliCMS\Models\Media\Audio;
 
 class VideoAndAudioPageTest extends \PHPUnit\Framework\TestCase {
 
-	public function tearDown() {
+	protected function tearDown(): void {
 		Database::deleteFrom("content", "slug='audio_page_test' or slug='video_page_test'");
 	}
 

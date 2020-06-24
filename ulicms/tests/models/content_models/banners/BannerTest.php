@@ -14,7 +14,7 @@ class BannerTest extends \PHPUnit\Framework\TestCase {
     const LINK_URL_TEXT1 = "http://www.google.de";
     const LINK_URL_TEXT2 = "http://www.yahoo.com";
 
-    public function tearDown() {
+    protected function tearDown(): void {
         Database::pQuery("DELETE FROM `{prefix}banner` where html in (? , ?)", array(
             self::HTML_TEXT1,
             self::HTML_TEXT2

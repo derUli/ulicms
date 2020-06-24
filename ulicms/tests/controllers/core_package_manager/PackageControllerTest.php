@@ -4,7 +4,7 @@ class PackageControllerTest extends \PHPUnit\Framework\TestCase {
 
     private $testUser = null;
 
-    public function setUp() {
+    protected function setUp(): void {
         $user = new User();
         $user->setUsername("test-admin");
         $user->setLastname("Admin");
@@ -19,7 +19,7 @@ class PackageControllerTest extends \PHPUnit\Framework\TestCase {
         ];
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         Vars::delete("allModules");
         $module = new Module("fortune2");
         $module->enable();

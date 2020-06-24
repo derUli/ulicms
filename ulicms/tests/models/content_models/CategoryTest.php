@@ -9,7 +9,7 @@ class CategoryTest extends \PHPUnit\Framework\TestCase {
 	const description1 = "Description 1";
 	const description2 = "Description 2";
 
-	public function setUp() {
+	protected function setUp(): void {
 		Database::pQuery("delete from `{prefix}categories`
 							where name = ? or name = ?", array(
 			self::name1,
@@ -17,7 +17,7 @@ class CategoryTest extends \PHPUnit\Framework\TestCase {
 				), true);
 	}
 
-	public function tearDown() {
+	protected function tearDown(): void {
 		$this->setUp();
 	}
 

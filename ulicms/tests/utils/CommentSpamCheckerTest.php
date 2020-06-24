@@ -6,13 +6,13 @@ use UliCMS\Security\SpamChecker\CommentSpamChecker;
 
 class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase {
 
-    public function setUp() {
+    protected function setUp(): void {
         require_once getLanguageFilePath("en");
         require_once ModuleHelper::buildModuleRessourcePath("core_comments", "lang/en.php");
         require_once ModuleHelper::buildModuleRessourcePath("core_forms", "lang/en.php");
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         $_POST = [];
     }
 

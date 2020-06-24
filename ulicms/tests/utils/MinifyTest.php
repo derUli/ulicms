@@ -5,7 +5,7 @@ use UliCMS\Utils\CacheUtil;
 
 class MinifyTest extends \PHPUnit\Framework\TestCase {
 
-    public function tearDown() {
+    protected function tearDown(): void {
         resetScriptQueue();
         resetStylesheetQueue();
 
@@ -48,7 +48,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
                 '<script src="content/cache/scripts/',
                 $html
         );
-        $this->assertContains(".js?time=", $html);
+        $this->assertStringContainsString(".js?time=", $html);
         $this->assertStringEndsWith('type="text/javascript"></script>', $html);
 
         $this->assertCount(0, Vars::get("script_queue"));
@@ -73,7 +73,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
                 '<script src="content/cache/scripts/',
                 $html
         );
-        $this->assertContains(".js?time=", $html);
+        $this->assertStringContainsString(".js?time=", $html);
         $this->assertStringEndsWith('type="text/javascript"></script>', $html);
 
         $this->assertCount(0, Vars::get("script_queue"));
@@ -112,7 +112,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
 
         $html = getCombinedStylesheetHTML();
         $this->assertStringStartsWith('<link rel="stylesheet" href="', $html);
-        $this->assertContains(".css?time=", $html);
+        $this->assertStringContainsString(".css?time=", $html);
         $this->assertStringEndsWith('" type="text/css"/>', $html);
 
         $this->assertCount(0, Vars::get("script_queue"));
@@ -135,7 +135,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         combinedStylesheetHtml();
         $html = ob_get_clean();
         $this->assertStringStartsWith('<link rel="stylesheet" href="', $html);
-        $this->assertContains(".css?time=", $html);
+        $this->assertStringContainsString(".css?time=", $html);
         $this->assertStringEndsWith('" type="text/css"/>', $html);
 
         $this->assertCount(0, Vars::get("script_queue"));

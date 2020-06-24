@@ -2,7 +2,7 @@
 
 class PkgInfoControllerTest extends \PHPUnit\Framework\TestCase {
 
-    public function setUp() {
+    protected function setUp(): void {
         Vars::delete("allModules");
 
         $source = Path::resolve(
@@ -16,7 +16,7 @@ class PkgInfoControllerTest extends \PHPUnit\Framework\TestCase {
         copy($source, $destination);
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         $destination = Path::resolve(
                         "ULICMS_TMP/hello_world-10.sin"
         );

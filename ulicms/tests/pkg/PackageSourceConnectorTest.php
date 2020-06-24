@@ -35,8 +35,8 @@ class PackageSourceConnectorTest extends \PHPUnit\Framework\TestCase {
     public function testGetPackageLicenseReturnsString() {
         $connector = new PackageSourceConnector(self::VALID_PACKAGE_SOURCE_URL);
         $license = $connector->getLicenseOfPackage("IXR_Library");
-        $this->assertContains("Copyright (c) 2010, Incutio Ltd.", $license);
-        $this->assertContains("Redistributions of source code must retain the above copyright notice", $license);
+        $this->assertStringContainsString("Copyright (c) 2010, Incutio Ltd.", $license);
+        $this->assertStringContainsString("Redistributions of source code must retain the above copyright notice", $license);
     }
 
     public function testGetPackageLicenseReturnsNull() {

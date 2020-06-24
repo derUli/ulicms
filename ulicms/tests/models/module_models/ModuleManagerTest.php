@@ -9,13 +9,13 @@ class ModuleManagerTest extends \PHPUnit\Framework\TestCase {
 
 	private $oneclick_upgrade_channel;
 
-	public function setUp() {
+	protected function setUp(): void {
 		$this->oneclick_upgrade_channel = Settings::get("oneclick_upgrade_channel");
 
 		Database::truncateTable("modules");
 	}
 
-	public function tearDown() {
+	protected function tearDown(): void {
 		$moduleManager = new ModuleManager();
 		$moduleManager->sync();
 

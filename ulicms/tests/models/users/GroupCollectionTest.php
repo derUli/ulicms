@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use UliCMS\Models\Users\GroupCollection;
 
-class GetGroupCollectionTest extends \PHPUnit\Framework\TestCase {
+class GroupCollectionTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetAllowedTags() {
         $user = $this->getTestUser();

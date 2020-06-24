@@ -6,13 +6,13 @@ class AntispamHelperTest extends \PHPUnit\Framework\TestCase {
 
     private $initialCountryBlacklist;
 
-    public function setUp() {
+    protected function setUp(): void {
         HelperRegistry::loadModuleHelpers();
         $this->initialCountryBlacklist = Settings::get("country_blacklist");
         Settings::set("spamfilter_enabled", "yes");
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         Settings::set("country_blacklist", $this->initialCountryBlacklist);
         $_SERVER = [];
         Settings::set("spamfilter_enabled", "yes");

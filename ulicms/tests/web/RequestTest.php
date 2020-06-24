@@ -4,7 +4,7 @@ use UliCMS\Helpers\TestHelper;
 
 class RequestTest extends \PHPUnit\Framework\TestCase {
 
-    public function tearDown() {
+    protected function tearDown(): void {
         require_once getLanguageFilePath("en");
         unset($_SERVER["HTTP_HOST"]);
         unset($_SERVER["HTTP_REFERRER"]);

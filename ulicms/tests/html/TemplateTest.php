@@ -9,7 +9,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
 
     private $savedSettings = [];
 
-    public function setUp() {
+    protected function setUp(): void {
         Translation::loadAllModuleLanguageFiles("en");
         Flags::setNoCache(true);
 
@@ -39,7 +39,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         require_once getLanguageFilePath("en");
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         Flags::setNoCache(false);
 
         foreach ($this->savedSettings as $key => $value) {
@@ -211,7 +211,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $time = File::getLastChanged($file);
         $expected = '<script src="' . $file . '?time=' . $time .
                 '" type="text/javascript"></script>';
-        $this->assertContains($expected, Template::getjQueryScript());
+        $this->assertStringContainsString($expected, Template::getjQueryScript());
     }
 
     public function testGetContentReturnsContent() {
@@ -380,7 +380,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
     public function testGetBodyClassesHome() {
         $_SESSION["language"] = "de";
         $_GET["slug"] = get_frontpage();
-        $this->assertRegExp('/page-id-\d+ home page(.+)/',
+        $this->assertMatchesRegularExpression('/page-id-\d+ home page(.+)/',
                 Template::getBodyClasses());
 
         Vars::delete("id");
@@ -394,7 +394,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         ob_start();
         Template::bodyClasses();
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
                 '/page-id-\d+ home page(.+)/',
                 ob_get_clean()
         );
@@ -418,7 +418,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $_SESSION["language"] = $page->language;
         $_GET["slug"] = $page->slug;
 
-        $this->assertRegExp('/page-id-\d+ error403 errorPage(.+)/',
+        $this->assertMatchesRegularExpression('/page-id-\d+ error403 errorPage(.+)/',
                 Template::getBodyClasses());
 
         $page->delete();
@@ -442,7 +442,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $_SESSION["language"] = $page->language;
         $_GET["slug"] = $page->slug;
 
-        $this->assertRegExp('/page-id-\d+ error403 errorPage(.+)/',
+        $this->assertMatchesRegularExpression('/page-id-\d+ error403 errorPage(.+)/',
                 Template::getBodyClasses());
 
         $page->delete();
@@ -454,7 +454,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
     public function testGetBodyClassesError404() {
         $_SESSION["language"] = "de";
         $_GET["slug"] = "gibts-nicht";
-        $this->assertRegExp('/error404 errorPage(.+)/',
+        $this->assertMatchesRegularExpression('/error404 errorPage(.+)/',
                 Template::getBodyClasses());
 
         Vars::delete("id");
@@ -492,7 +492,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
     public function testGetBodyClassesContainsModule() {
         $_SESSION["language"] = "de";
         $_GET["slug"] = ModuleHelper::getFirstPageWithModule()->slug;
-        $this->assertRegExp('/page-id-\d+ (.+)containsModule/',
+        $this->assertMatchesRegularExpression('/page-id-\d+ (.+)containsModule/',
                 Template::getBodyClasses());
         Vars::delete("id");
         Vars::delete("active");

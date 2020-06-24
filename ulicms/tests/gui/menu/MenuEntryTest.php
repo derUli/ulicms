@@ -8,7 +8,7 @@ class MenuEntryTest extends \PHPUnit\Framework\TestCase {
     private $notPermittedUser;
     private $testGroup;
 
-    public function setUp() {
+    protected function setUp(): void {
         $group = new Group();
         $group->addPermission("info", true);
         $group->save();
@@ -33,7 +33,7 @@ class MenuEntryTest extends \PHPUnit\Framework\TestCase {
         $this->notPermittedUser = $notPermittedUser;
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         $this->permittedUser->delete();
         $this->notPermittedUser->delete();
         $this->testGroup->delete();

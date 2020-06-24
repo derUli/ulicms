@@ -6,7 +6,7 @@ class TwoFactorAuthenticationTest extends \PHPUnit\Framework\TestCase {
 
     private $initialSettings = [];
 
-    public function setUp() {
+    protected function setUp(): void {
         $settings = [
             "twofactor_authentication",
             "ga_secret"
@@ -16,7 +16,7 @@ class TwoFactorAuthenticationTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
         TwoFactorAuthentication::disable();
         
         foreach ($this->initialSettings as $key => $value) {

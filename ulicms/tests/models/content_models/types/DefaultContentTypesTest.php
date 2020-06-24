@@ -4,7 +4,7 @@ use UliCMS\Models\Content\Types\DefaultContentTypes;
 
 class DefaultContentTypesTest extends \PHPUnit\Framework\TestCase {
 
-	public function setUp() {
+	protected function setUp(): void {
 		DefaultContentTypes::initTypes();
 	}
 

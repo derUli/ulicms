@@ -7,7 +7,7 @@ class LanguageTest extends \PHPUnit\Framework\TestCase {
     private $initialDefaultLanguage;
     private $initialDomain2LanguageMapping = null;
 
-    public function setUp() {
+    protected function setUp(): void {
         $this->initialDefaultLanguage = Settings::get("default_language");
 
         Settings::set("default_language", "de");
@@ -16,7 +16,7 @@ class LanguageTest extends \PHPUnit\Framework\TestCase {
         $this->initialDomain2LanguageMapping = Settings::get("domain_to_language");
     }
 
-    public function tearDown() {
+    protected function tearDown(): void {
 
         $_SESSION = [];
 
