@@ -4,19 +4,21 @@ declare(strict_types=1);
 
 use UliCMS\Models\Users\GroupCollection;
 
-class GroupCollectionTest extends \PHPUnit\Framework\TestCase {
-
-    public function testGetAllowedTags() {
+class GroupCollectionTest extends \PHPUnit\Framework\TestCase
+{
+    public function testGetAllowedTags()
+    {
         $user = $this->getTestUser();
         $collection = new GroupCollection($user);
 
         $this->assertEquals(
-                "<div><foo><img><p><span><strong><video>",
-                $collection->getAllowableTags()
+            "<div><foo><img><p><span><strong><video>",
+            $collection->getAllowableTags()
         );
     }
 
-    private function getTestUser(): User {
+    private function getTestUser(): User
+    {
         $user = new User();
 
         $group1 = new Group();
@@ -33,5 +35,4 @@ class GroupCollectionTest extends \PHPUnit\Framework\TestCase {
 
         return $user;
     }
-
 }

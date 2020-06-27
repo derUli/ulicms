@@ -9,11 +9,14 @@ use UliCMS\Utils\File;
 
 // generates HTML style tags
 // please use stylesheet queue instead of this methods if possible
-class Style {
-
-    public static function fromExternalFile(string $href,
-            ?string $media = null,
-            array $htmlAttributes = []): string {
+class Style
+{
+    public static function fromExternalFile(
+        string $href,
+        ?string $media = null,
+        array $htmlAttributes = []
+    ): string
+    {
         $attributes = array(
             "rel" => "stylesheet",
             "href" => $href,
@@ -33,9 +36,12 @@ class Style {
         return "<link {$attribHTML}/>";
     }
 
-    public static function fromString(?string $code,
-            ?string $media = null,
-            array $htmlAttributes = []): string {
+    public static function fromString(
+        ?string $code,
+        ?string $media = null,
+        array $htmlAttributes = []
+    ): string
+    {
         $attributes = array(
             "type" => "text/css"
         );
@@ -49,5 +55,4 @@ class Style {
 
         return "<style $attribHTML>" . $code . "</style>";
     }
-
 }

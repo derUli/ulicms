@@ -9,9 +9,11 @@ add_translation("show_positions_in_menus", "Zeige Positionen in Menüs");
 
 add_translation("show_filters", "Filter anzeigen");
 
-add_translation("confirm_exit_without_save",
-        "Wenn Sie diese Seite verlassen gehen nicht gespeicherte "
-        . "Änderungen verloren.");
+add_translation(
+    "confirm_exit_without_save",
+    "Wenn Sie diese Seite verlassen gehen nicht gespeicherte "
+        . "Änderungen verloren."
+);
 
 add_translation("date_from", "Datum von");
 add_translation("date_to", "Datum bis");
@@ -22,10 +24,14 @@ add_translation("page_type", "Seitentyp");
 
 add_translation("go_up", "Nach oben");
 
-add_translation("confirm_delete_page",
-        "Möchten Sie die Seite \"%title%\" wirklich löschen?");
-add_translation("confirm_undelete_page",
-        "Möchten Sie die Seite \"%title%\" wiederherstellen?");
+add_translation(
+    "confirm_delete_page",
+    "Möchten Sie die Seite \"%title%\" wirklich löschen?"
+);
+add_translation(
+    "confirm_undelete_page",
+    "Möchten Sie die Seite \"%title%\" wiederherstellen?"
+);
 
 add_translation("entries_per_page", "Einträge je Seite");
 

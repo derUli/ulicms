@@ -1,12 +1,13 @@
 <?php
 
-class AdminMenuTest extends \PHPUnit\Framework\TestCase {
-
+class AdminMenuTest extends \PHPUnit\Framework\TestCase
+{
     private $adminUser;
     private $limitedUser;
     private $testGroup;
 
-    protected function setUp(): void {
+    protected function setUp(): void
+    {
         $adminUser = new User();
         $adminUser->setUsername("testuser-admin");
         $adminUser->setLastname("Admin");
@@ -32,59 +33,87 @@ class AdminMenuTest extends \PHPUnit\Framework\TestCase {
         $this->limitedUser = $limitedUser;
     }
 
-    protected function tearDown(): void {
+    protected function tearDown(): void
+    {
         $this->adminUser->delete();
         $this->limitedUser->delete();
         $this->testGroup->delete();
     }
 
-    private function getMenuEntries() {
+    private function getMenuEntries()
+    {
         return [
-            new MenuEntry("Say Hello", "https://www.hello-world.com/",
-                    "say_hello", ["info", "dashboard"], [], true),
-            new MenuEntry("Google", "https://google.de",
-                    "google", ["google"], [], false),
-            new MenuEntry("UliCMS", "https://ulicms.de",
-                    "ulicms", [], [], false)
+            new MenuEntry(
+                "Say Hello",
+                "https://www.hello-world.com/",
+                "say_hello",
+                ["info", "dashboard"],
+                [],
+                true
+            ),
+            new MenuEntry(
+                "Google",
+                "https://google.de",
+                "google",
+                ["google"],
+                [],
+                false
+            ),
+            new MenuEntry(
+                "UliCMS",
+                "https://ulicms.de",
+                "ulicms",
+                [],
+                [],
+                false
+            )
         ];
     }
 
-    public function testGetChildren() {
+    public function testGetChildren()
+    {
         $menu = new AdminMenu($this->getMenuEntries());
         $this->assertEquals($this->getMenuEntries(), $menu->getChildren());
     }
 
-    public function testSetChildren() {
+    public function testSetChildren()
+    {
         $menu = new AdminMenu($this->getMenuEntries());
 
         $menu->setChildren(
-                [
-                    new MenuEntry("Foobar",
-                            "https://foobar.com",
-                            "foobar",
-                            [],
-                            [],
-                            false)
-        ]);
+            [
+                    new MenuEntry(
+                        "Foobar",
+                        "https://foobar.com",
+                        "foobar",
+                        [],
+                        [],
+                        false
+                    )
+        ]
+        );
         $this->assertCount(1, $menu->getChildren());
         $this->assertEquals("foobar", $menu->getChildren()[0]->getIdentifier());
     }
 
-    public function testHasChildrenReturnsTrue() {
+    public function testHasChildrenReturnsTrue()
+    {
         $menu = new AdminMenu($this->getMenuEntries());
         $this->assertTrue($menu->hasChildren());
     }
 
-    public function testHasChildrenReturnsFalse() {
+    public function testHasChildrenReturnsFalse()
+    {
         $menu = new AdminMenu($this->getMenuEntries());
         $menu->setChildren([]);
         $this->assertFalse($menu->hasChildren());
     }
 
-    public function testRenderAsAdmin() {
+    public function testRenderAsAdmin()
+    {
         $inputExpected = file_get_contents(
-                Path::resolve(
-                        "ULICMS_ROOT/tests/fixtures/menu/admin_menu/render_as_admin.html"
+            Path::resolve(
+                    "ULICMS_ROOT/tests/fixtures/menu/admin_menu/render_as_admin.html"
                 )
         );
         $menu = new AdminMenu($this->getMenuEntries());
@@ -93,10 +122,11 @@ class AdminMenuTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals($inputExpected, $menu->render());
     }
 
-    public function testRenderAsUserWithLimitedPermissions() {
+    public function testRenderAsUserWithLimitedPermissions()
+    {
         $inputExpected = file_get_contents(
-                Path::resolve(
-                        "ULICMS_ROOT/tests/fixtures/menu/admin_menu/render_as_user.html"
+            Path::resolve(
+                    "ULICMS_ROOT/tests/fixtures/menu/admin_menu/render_as_user.html"
                 )
         );
         $menu = new AdminMenu($this->getMenuEntries());
@@ -104,5 +134,4 @@ class AdminMenuTest extends \PHPUnit\Framework\TestCase {
 
         $this->assertEquals($inputExpected, $menu->render());
     }
-
 }

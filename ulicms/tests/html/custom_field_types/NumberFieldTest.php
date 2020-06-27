@@ -1,12 +1,14 @@
 <?php
 
-class NumberFieldTest extends \PHPUnit\Framework\TestCase {
-
-    protected function setUp(): void {
+class NumberFieldTest extends \PHPUnit\Framework\TestCase
+{
+    protected function setUp(): void
+    {
         include_once getLanguageFilePath("en");
     }
 
-    public function testRender() {
+    public function testRender()
+    {
         $field = new NumberField();
         $field->name = "my_field";
         $field->title = "users";
@@ -19,5 +21,4 @@ class NumberFieldTest extends \PHPUnit\Framework\TestCase {
         $expected = file_get_contents($expectedFile);
         $this->assertEquals(normalizeLN($expected), normalizeLN($rendered));
     }
-
 }

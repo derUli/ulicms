@@ -45,7 +45,7 @@ if (!$permissionChecker->hasPermission("groups")) {
             }
             $name = _esc($name);
         }
-    } else if (isset($_GET["delete"]) and Request::isPost()) {
+    } elseif (isset($_GET["delete"]) and Request::isPost()) {
         $id = intval($_GET["delete"]);
         $permissionChecker = new ACL();
         $permissionChecker->deleteGroup($id);
@@ -58,7 +58,7 @@ if (!$permissionChecker->hasPermission("groups")) {
             $userName = isset($user["username"]) ? $user["username"] : AuditLog::UNKNOWN;
             $logger->debug("User $name - Delete group with id ($id)");
         }
-    } else if (isset($_POST["edit_group"])) {
+    } elseif (isset($_POST["edit_group"])) {
         $permissionChecker = new ACL();
         $all_permissions = $permissionChecker->getDefaultACL(false, true);
 
@@ -98,8 +98,7 @@ if (!$permissionChecker->hasPermission("groups")) {
         if (isset($GLOBALS["permissions"])) {
             unset($GLOBALS["permissions"]);
         }
-    }
-    ?>
+    } ?>
     <?php echo Template::executeModuleTemplate("core_users", "icons.php"); ?>
     <h2><?php translation("groups"); ?></h2>
     <?php
@@ -123,24 +122,22 @@ if (!$permissionChecker->hasPermission("groups")) {
             <?php translate("group_was_deleted") ?>
         </div>
         <?php
-    }
-    ?>
+    } ?>
     <?php
     if (!isset($_GET["add"]) && !isset($_GET["edit"])) {
         require "inc/group_list.php";
-    } else if (isset($_GET["add"])) {
+    } elseif (isset($_GET["add"])) {
         if ($permissionChecker->hasPermission("groups_create")) {
             require "inc/group_add.php";
         } else {
             noPerms();
         }
-    } else if (isset($_GET["edit"])) {
+    } elseif (isset($_GET["edit"])) {
         if ($permissionChecker->hasPermission("groups_edit")) {
             require "inc/group_edit.php";
         } else {
             noPerms();
         }
-    }
-    ?>
+    } ?>
     <?php
 }

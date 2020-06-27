@@ -30,8 +30,7 @@ if ($permissionChecker->hasPermission("audio")) {
 
     <h1>
         <?php
-        translate("audio");
-        ?>
+        translate("audio"); ?>
     </h1>
 <div class="field">
     <?php translate("category"); ?>
@@ -51,30 +50,27 @@ if ($permissionChecker->hasPermission("audio")) {
             <thead>
                 <tr>
                     <th><?php
-                        translate("id");
-                        ?>
+                        translate("id"); ?>
                     </th>
                     <th><?php
-                        translate("name");
-                        ?>
+                        translate("name"); ?>
                     </th>
                     <th class="hide-on-mobile"><?php
-                        translate("OGG_FILE");
-                        ?>
+                        translate("OGG_FILE"); ?>
                     </th>
                     <th class="hide-on-mobile"><?php
-                        translate("MP3_FILE");
-                        ?>
+                        translate("MP3_FILE"); ?>
                     </th>
 
                     <?php
                     if ($permissionChecker->hasPermission(
-                                    "audio_edit"
-                            )) {
+                       "audio_edit"
+                   )) {
                         ?>
                         <td class="no-sort"></td>
                         <td class="no-sort"></td>
-                    <?php } ?>
+                    <?php
+                    } ?>
                 </tr>
 
             </thead>
@@ -84,39 +80,33 @@ if ($permissionChecker->hasPermission("audio")) {
                     ?>
                     <tr id="dataset-<?php echo $row->id; ?>">
                         <td><?php
-                            echo $row->id;
-                            ?>
+                            echo $row->id; ?>
                         </td>
                         <td><?php
-                            esc($row->name);
-                            ?>
+                            esc($row->name); ?>
                         </td>
                         <td class="hide-on-mobile"><?php
-                            esc(basename($row->ogg_file));
-                            ?>
+                            esc(basename($row->ogg_file)); ?>
                         </td>
                         <td class="hide-on-mobile"><?php
-                            esc(basename($row->mp3_file));
-                            ?>
+                            esc(basename($row->mp3_file)); ?>
                         </td>
                         <?php
                         if ($permissionChecker->hasPermission(
-                                        "audio_edit")
+                        "audio_edit"
+                    )
                         ) {
                             ?>
                             <td>
                                 <a
                                     href="index.php?action=edit_audio&id=<?php
-                                    echo $row->id;
-                                    ?>"><img
+                                    echo $row->id; ?>"><img
                                         src="gfx/edit.png"
                                         class="mobile-big-image"
                                         alt="<?php
-                                        translate("edit");
-                                        ?>"
+                                        translate("edit"); ?>"
                                         title="<?php
-                                        translate("edit");
-                                        ?>"> </a>
+                                        translate("edit"); ?>"> </a>
                             </td>
                             <td>
                                 <form
@@ -131,23 +121,26 @@ if ($permissionChecker->hasPermission("audio")) {
                                         title="<?php translate("delete"); ?>">
                                 </form>
                             </td>
-                        <?php } ?>
+                        <?php
+                        } ?>
                     </tr>
-                <?php } ?>
+                <?php
+                } ?>
             </tbody>
         </table>
     </div>
     <?php
-    enqueueScriptFile(ModuleHelper::buildModuleRessourcePath
-                    ("core_media",
-                    "js/audio.js")
-    );
-    combinedScriptHtml();
-    ?>
+    enqueueScriptFile(
+                                ModuleHelper::buildModuleRessourcePath(
+                                "core_media",
+                                "js/audio.js"
+                            )
+                            );
+    combinedScriptHtml(); ?>
     <?php
 } else {
-    noPerms();
-}
+        noPerms();
+    }
 
 $translation = new JSTranslation(array(
     "ask_for_delete"

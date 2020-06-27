@@ -7,14 +7,17 @@ namespace UliCMS\Helpers;
 use Closure;
 use Exception;
 
-class TestHelper extends \Helper {
+class TestHelper extends \Helper
+{
 
     // Check if PHP is running in context of a Unit test
-    public static function isRunningPHPUnit(): bool {
+    public static function isRunningPHPUnit(): bool
+    {
         return defined('PHPUNIT_COMPOSER_INSTALL') or defined('__PHPUNIT_PHAR__');
     }
 
-    public static function getOutput(Closure $method): string {
+    public static function getOutput(Closure $method): string
+    {
         ob_start();
         try {
             $method();
@@ -25,8 +28,8 @@ class TestHelper extends \Helper {
         }
     }
 
-    public static function isWindowsServer(): bool {
+    public static function isWindowsServer(): bool
+    {
         return defined("PHP_WINDOWS_VERSION_MAJOR");
     }
-
 }

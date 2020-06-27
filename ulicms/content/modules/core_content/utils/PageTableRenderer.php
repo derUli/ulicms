@@ -13,11 +13,12 @@ use UliCMS\CoreContent\Partials\DeleteButtonRenderer;
 use UliCMS\CoreContent\Partials\UnDeleteButtonRenderer;
 use function UliCMS\HTML\icon;
 
-class PageTableRenderer {
-
+class PageTableRenderer
+{
     private $user;
 
-    public function __construct($user = null) {
+    public function __construct($user = null)
+    {
         $this->user = !$user ? User::fromSessionData() : $user;
     }
 
@@ -35,13 +36,13 @@ class PageTableRenderer {
     // $order = order array with sorcolumn, and dir (direction)
     // returns an array of results
     public function getData(
-            int $start = 0,
-            int $length = 10,
-            int $draw = 1,
-            ?string $search = null,
-            array $filters = [],
-            string $view = "default",
-            ?array $order = null
+        int $start = 0,
+        int $length = 10,
+        int $draw = 1,
+        ?string $search = null,
+        array $filters = [],
+        string $view = "default",
+        ?array $order = null
     ): array {
         $result = [];
         $result["data"] = [];
@@ -109,8 +110,8 @@ class PageTableRenderer {
 
         if ($search) {
             $placeHolderString = "%" . Database::escapeValue(
-                            strtolower($search)
-                    ) . "%";
+                strtolower($search)
+            ) . "%";
             $where .= " and lower(title) like '{$placeHolderString}'";
         }
 
@@ -129,8 +130,14 @@ class PageTableRenderer {
         // to have a good performance
         $where .= " limit $length offset $start";
 
-        $resultsForPage = Database::selectAll("content", $columns, $where, [],
-                        true, "");
+        $resultsForPage = Database::selectAll(
+            "content",
+            $columns,
+            $where,
+            [],
+            true,
+            ""
+        );
 
         $result["data"] = $this->fetchResults($resultsForPage, $user);
         // this is required by DataTables to ensure that always the result
@@ -148,7 +155,8 @@ class PageTableRenderer {
         return $result;
     }
 
-    protected function buildFilterSQL($where, $filters): string {
+    protected function buildFilterSQL($where, $filters): string
+    {
         if (isset($filters["type"]) and!empty($filters["type"])) {
             $where .= " and type ='" .
                     Database::escapeValue($filters["type"]) .
@@ -199,7 +207,8 @@ class PageTableRenderer {
     }
 
     // fetch all datasets of mysqli result
-    protected function fetchResults(\mysqli_result $results, User $user) {
+    protected function fetchResults(\mysqli_result $results, User $user)
+    {
         $filteredResults = [];
 
         while ($row = Database::fetchObject($results)) {
@@ -210,7 +219,8 @@ class PageTableRenderer {
     }
 
     // builds an array which is used to show table data in frontend
-    protected function pageDatasetsToResponse(object $dataset, User $user) {
+    protected function pageDatasetsToResponse(object $dataset, User $user)
+    {
         $viewButtonRenderer = new ViewButtonRenderer();
         $editButtonRenderer = new EditButtonRenderer();
 
@@ -239,5 +249,4 @@ class PageTableRenderer {
             !$dataset->deleted_at ? $deleteButton : $undeleteButton
         ];
     }
-
 }

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace UliCMS\Constants;
 
 // Bootstrap 3.x Button Styles
-class ButtonType {
-
+class ButtonType
+{
     const BUTTON_BUTTON = "button";
     const BUTTON_SUBMIT = "submit";
     const BUTTON_RESET = "reset";
@@ -18,5 +18,4 @@ class ButtonType {
     const TYPE_WARNING = "btn btn-warning";
     const TYPE_DANGER = "btn btn-danger";
     const TYPE_LINK = "btn btn-link";
-
 }

@@ -16,16 +16,14 @@ if ($permissionChecker->hasPermission("banners")) {
         $banners = Banners::getAll();
     } else {
         $banners = Banners::getByCategory($_SESSION["filter_category"]);
-    }
-    ?>
+    } ?>
     <?php echo Template::executeModuleTemplate("core_content", "icons.php"); ?>
 
     <h2><?php translate("advertisements"); ?></h2>
     <?php
     echo Alert::info(
-            get_translation("advertisement_infotext")
-    );
-    ?>
+        get_translation("advertisement_infotext")
+    ); ?>
 
     <?php
     if ($permissionChecker->hasPermission("banners_create")) {
@@ -35,12 +33,12 @@ if ($permissionChecker->hasPermission("banners")) {
                              <?php translate("add_advertisement"); ?>
         </a>
     </div>
-    <?php } ?>
+    <?php
+    } ?>
     <div class="field">
         <?php translate("category"); ?>
         <?php
-        echo Categories::getHTMLSelect($_SESSION["filter_category"], true);
-        ?>
+        echo Categories::getHTMLSelect($_SESSION["filter_category"], true); ?>
     </div>
     <div class="scroll">
         <table class="tablesorter">
@@ -52,8 +50,8 @@ if ($permissionChecker->hasPermission("banners")) {
                     </th>
                     <?php
                     if ($permissionChecker->hasPermission(
-                                    "banners_edit"
-                            )) {
+            "banners_edit"
+        )) {
                         ?>
                         <td class="no-sort text-center">
                             <?php translate("edit"); ?>
@@ -61,7 +59,8 @@ if ($permissionChecker->hasPermission("banners")) {
                         <td class="no-sort text-center">
                             <?php translate("delete"); ?>
                         </td>
-                    <?php } ?>
+                    <?php
+                    } ?>
                 </tr>
             </thead>
             <tbody>
@@ -109,23 +108,23 @@ if ($permissionChecker->hasPermission("banners")) {
                         }
                         echo '</tr>';
                     }
-                }
-                ?>
+                } ?>
             </tbody>
         </table>
     </div>
     <?php
-    enqueueScriptFile(ModuleHelper::buildRessourcePath(
+    enqueueScriptFile(
+                    ModuleHelper::buildRessourcePath(
                     "core_content",
-                    "js/banners.js")
-    );
-    combinedScriptHtml();
-    ?>
+                    "js/banners.js"
+                )
+                );
+    combinedScriptHtml(); ?>
 
     <?php
 } else {
-    noPerms();
-}
+        noPerms();
+    }
 
 $translation = new JSTranslation(array(
     "ask_for_delete"

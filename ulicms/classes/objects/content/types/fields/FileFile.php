@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-class FileFile extends CustomField {
-
-    public function render($value = null): string {
+class FileFile extends CustomField
+{
+    public function render($value = null): string
+    {
         ViewBag::set("field", $this);
         ViewBag::set("field_value", $value);
         ViewBag::set("field_name", !is_null($this->contentType) ?
@@ -14,5 +15,4 @@ class FileFile extends CustomField {
 
         return Template::executeDefaultOrOwnTemplate("fields/file.php");
     }
-
 }

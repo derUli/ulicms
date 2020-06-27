@@ -2,7 +2,8 @@
 
 declare(strict_types=1);
 
-function var_dump_str(): string {
+function var_dump_str(): string
+{
     $argc = func_num_args();
     $argv = func_get_args();
 
@@ -18,7 +19,8 @@ function var_dump_str(): string {
 }
 
 // like json_encode() but human readable
-function json_readable_encode($in, $indent = 0): string {
+function json_readable_encode($in, $indent = 0): string
+{
     $_myself = __FUNCTION__;
     $_escape = function ($str) {
         return preg_replace("!([\b\t\n\r\f\"\\'])!", "\\\\\\1", $str);

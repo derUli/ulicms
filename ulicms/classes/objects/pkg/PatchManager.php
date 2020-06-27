@@ -12,12 +12,13 @@ use function recurse_copy;
 use ZipArchive;
 use StringHelper;
 
-class PatchManager {
-
-    public function getInstalledPatchNames(): array {
+class PatchManager
+{
+    public function getInstalledPatchNames(): array
+    {
         $retval = [];
         $result = Database::query(
-                        "SELECT name from " . tbname("installed_patches")
+            "SELECT name from " . tbname("installed_patches")
         );
         while ($row = Database::fetchObject($result)) {
             $retval[] = $row->name;
@@ -25,11 +26,13 @@ class PatchManager {
         return $retval;
     }
 
-    public function fetchPackageIndex(): ?string {
+    public function fetchPackageIndex(): ?string
+    {
         return file_get_contents_wrapper(PATCH_CHECK_URL, true);
     }
 
-    public function getAvailablePatches(): array {
+    public function getAvailablePatches(): array
+    {
         $patches = [];
         $indexData = $this->fetchPackageIndex();
         if (!$indexData) {
@@ -39,23 +42,25 @@ class PatchManager {
         foreach ($lines as $line) {
             $splittedLine = explode("|", $line);
             $patches[] = new Patch(
-                    $splittedLine[0],
-                    $splittedLine[1],
-                    $splittedLine[2],
-                    $splittedLine[3]
+                $splittedLine[0],
+                $splittedLine[1],
+                $splittedLine[2],
+                $splittedLine[3]
             );
         }
         return $patches;
     }
 
-    public function truncateInstalledPatches(): bool {
+    public function truncateInstalledPatches(): bool
+    {
         return Database::truncateTable("installed_patches");
     }
 
-    public function getInstalledPatches(): array {
+    public function getInstalledPatches(): array
+    {
         $retval = [];
         $result = Database::query(
-                        "SELECT * from " . tbname("installed_patches")
+            "SELECT * from " . tbname("installed_patches")
         );
         while ($row = Database::fetchObject($result)) {
             $retval[$row->name] = $row;
@@ -64,11 +69,11 @@ class PatchManager {
     }
 
     public function installPatch(
-            string $name,
-            string $description,
-            string $url,
-            bool $clear_cache = true,
-            ?string $checksum = null
+        string $name,
+        string $description,
+        string $url,
+        bool $clear_cache = true,
+        ?string $checksum = null
     ): bool {
         @set_time_limit(0);
         $test = $this->getInstalledPatchNames();
@@ -90,7 +95,7 @@ class PatchManager {
 
         file_put_contents($download_tmp, $download);
         $zip = new ZipArchive();
-        if ($zip->open($download_tmp) === TRUE) {
+        if ($zip->open($download_tmp) === true) {
             $zip->extractTo($tmp_dir);
             $patch_dir = $tmp_dir . "patch";
             $zip->close();
@@ -116,5 +121,4 @@ class PatchManager {
         }
         return false;
     }
-
 }

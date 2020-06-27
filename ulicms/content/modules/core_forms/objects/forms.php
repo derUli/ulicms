@@ -1,8 +1,9 @@
 <?php
 
-class Forms {
-
-    public static function getFormByID($id) {
+class Forms
+{
+    public static function getFormByID($id)
+    {
         $retval = null;
         $result = db_query("select * from `" . tbname("forms") . "` WHERE id = " . intval($id));
         if (db_num_rows($result) > 0) {
@@ -13,15 +14,15 @@ class Forms {
     }
 
     public static function createForm(
-            $name,
-            $email_to,
-            $subject,
-            $category_id,
-            $fields,
-            $required_fields,
-            $mail_from_field,
-            $target_page_id,
-            $enabled
+        $name,
+        $email_to,
+        $subject,
+        $category_id,
+        $fields,
+        $required_fields,
+        $mail_from_field,
+        $target_page_id,
+        $enabled
     ) {
         $name = db_escape($name);
         $enabled = intval($enabled);
@@ -47,7 +48,8 @@ class Forms {
         return Database::query($sql, true);
     }
 
-    public static function editForm($id, $name, $email_to, $subject, $category_id, $fields, $required_fields, $mail_from_field, $target_page_id, $enabled) {
+    public static function editForm($id, $name, $email_to, $subject, $category_id, $fields, $required_fields, $mail_from_field, $target_page_id, $enabled)
+    {
         $name = db_escape($name);
         $enabled = intval($enabled);
         $email_to = db_escape($email_to);
@@ -61,7 +63,7 @@ class Forms {
         $id = intval($id);
 
         return db_query(
-                "UPDATE `" . tbname("forms") . "` set name='$name', "
+            "UPDATE `" . tbname("forms") . "` set name='$name', "
                 . "email_to = '$email_to', subject = '$subject', "
                 . "category_id = $category_id, fields = '$fields', "
                 . "required_fields = '$required_fields', "
@@ -72,7 +74,8 @@ class Forms {
         );
     }
 
-    public static function getAllForms() {
+    public static function getAllForms()
+    {
         $retval = [];
         $result = db_query("select * from `" . tbname("forms") .
                 "` ORDER BY id");
@@ -85,26 +88,27 @@ class Forms {
         return $retval;
     }
 
-    public static function submitForm($id) {
+    public static function submitForm($id)
+    {
         $retval = false;
         $form = self::getFormByID($id);
         if ($form) {
             $fields = $form["fields"];
             $fields = Settings::mappingStringToArray($fields);
             $required_fields = StringHelper::linesFromString(
-                            $form["required_fields"]
+                $form["required_fields"]
             );
             foreach ($required_fields as $field) {
                 $fieldName = isset($fields[$field]) ? $fields[$field] : $field;
                 if (!(isset($_POST[$field]) && !empty($_POST[$field]))) {
                     ViewBag::set("exception", get_translation(
-                                    "please_fill_all_required_fields",
-                                    [
+                        "please_fill_all_required_fields",
+                        [
                                         "%field%" => _esc($fieldName)
                                     ]
                     ));
                     $html = Template::executeDefaultOrOwnTemplate(
-                                    "exception.php"
+                        "exception.php"
                     );
                     HTMLResult($html, HttpStatusCode::BAD_REQUEST);
                 }
@@ -142,14 +146,14 @@ class Forms {
             if (!StringHelper::isNullOrEmpty($email_from)
                     and Settings::get("check_mx_of_mail_address") && !AntiSpamHelper::checkMailDomain($email_from)) {
                 ExceptionResult(
-                        get_translation("mail_address_has_invalid_mx_entry"),
-                        HttpStatusCode::BAD_REQUEST
+                    get_translation("mail_address_has_invalid_mx_entry"),
+                    HttpStatusCode::BAD_REQUEST
                 );
             }
 
             $mail_from = StringHelper::isNotNullOrWhitespace(
-                            $mail_from_field
-                    ) ?
+                $mail_from_field
+            ) ?
                     [
                 $_POST[$mail_from_field]
                     ] : [
@@ -171,9 +175,9 @@ class Forms {
         return $retval;
     }
 
-    public static function deleteForm($id) {
+    public static function deleteForm($id)
+    {
         $id = intval($id);
         return db_query("DELETE FROM " . tbname("forms") . " WHERE id = $id");
     }
-
 }

@@ -13,11 +13,12 @@ use UliCMS\Security\ContentPermissionChecker;
 use function UliCMS\HTML\icon;
 use function UliCMS\HTML\link;
 
-class UnDeleteButtonRenderer {
-
+class UnDeleteButtonRenderer
+{
     const MODULE_NAME = "core_content";
 
-    public function render(int $pageId, User $user) {
+    public function render(int $pageId, User $user)
+    {
         $permitted = true;
 
         // check edit permissions
@@ -30,15 +31,16 @@ class UnDeleteButtonRenderer {
         $icon = icon("fas fa-trash-restore fa-2x");
 
         $url = "#";
-        $message = get_secure_translation("confirm_undelete_page",
-                [
+        $message = get_secure_translation(
+            "confirm_undelete_page",
+            [
                     "%title%" => getPageTitleByID($pageId)
                 ]
         );
         $actionUrl = ModuleHelper::buildMethodCallUrl(
-                        PageController::class,
-                        "undelete",
-                        "id={$pageId}csrf_token=" . get_csrf_token()
+            PageController::class,
+            "undelete",
+            "id={$pageId}csrf_token=" . get_csrf_token()
         );
         $attributes = [
             "data-confirm" => $message,
@@ -50,9 +52,8 @@ class UnDeleteButtonRenderer {
         ViewBag::set("button", $link);
 
         return $permitted ? Template::executeModuleTemplate(
-                        self::MODULE_NAME,
-                        "pages/partials/delete_button.php"
-                ) : "";
+            self::MODULE_NAME,
+            "pages/partials/delete_button.php"
+        ) : "";
     }
-
 }

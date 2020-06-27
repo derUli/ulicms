@@ -1,8 +1,9 @@
 <?php
 
-class CoreFormsControllerTest extends \PHPUnit\Framework\TestCase {
-
-    public function testIncSpamCount() {
+class CoreFormsControllerTest extends \PHPUnit\Framework\TestCase
+{
+    public function testIncSpamCount()
+    {
         $controller = new CoreFormsController();
         $initialCount = intval(Settings::get("contact_form_refused_spam_mails"));
 
@@ -14,8 +15,8 @@ class CoreFormsControllerTest extends \PHPUnit\Framework\TestCase {
         }
 
         $this->assertEquals(
-                $initialCount + 3,
-                intval(Settings::get("contact_form_refused_spam_mails")));
+            $initialCount + 3,
+            intval(Settings::get("contact_form_refused_spam_mails"))
+        );
     }
-
 }

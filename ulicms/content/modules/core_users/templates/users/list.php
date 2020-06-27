@@ -17,15 +17,14 @@ if ($permissionChecker->hasPermission("users")) {
     } else {
         $users = $manager->getAllUsers();
     }
-    $groups = Group::getAll();
-    ?>
+    $groups = Group::getAll(); ?>
     <?php echo Template::executeModuleTemplate("core_users", "icons.php"); ?>
     <h2><?php translate("users"); ?></h2>
     <?php if ($permissionChecker->hasPermission("users_create")) { ?>
         <?php
         echo Alert::info(
-                get_translation("users_infotext")
-        );
+        get_translation("users_infotext")
+    );
         ?>
         <div class="voffset2">    
             <a href="index.php?action=admin_new&ref=admins"
@@ -43,10 +42,14 @@ if ($permissionChecker->hasPermission("users")) {
             name="admins_filter_group" size="1"
             onchange="$(this).closest('form').submit();">
             <option value="0"
-                    <?php if ($_SESSION ["admins_filter_group"] <= 0) echo "selected"; ?>>[<?php translate("every"); ?>]</option>
+                    <?php if ($_SESSION ["admins_filter_group"] <= 0) {
+            echo "selected";
+        } ?>>[<?php translate("every"); ?>]</option>
                     <?php foreach ($groups as $group) { ?>
                 <option
-                <?php if ($group->getId() == $_SESSION ["admins_filter_group"]) echo "selected "; ?>
+                <?php if ($group->getId() == $_SESSION ["admins_filter_group"]) {
+            echo "selected ";
+        } ?>
                     value="<?php Template::escape($group->getId()); ?>"><?php Template::escape($group->getName()); ?></option>
                 <?php } ?>
         </select>
@@ -79,12 +82,11 @@ if ($permissionChecker->hasPermission("users")) {
                         if ($user->getGroupId()) {
                             $group = $permissionChecker->getPermissionQueryResult($user->getGroupId());
                             $group = $group["name"];
-                        }
-                        ?>
+                        } ?>
                         <?php
                         $avatar = imageTag(
-                                $user->getAvatar(),
-                                [
+                            $user->getAvatar(),
+                            [
                                     "class" => "avatar has-pointer",
                                     "alt" => get_translation("show_in_original_size"),
                                     "title" => get_translation("show_in_original_size"),
@@ -136,8 +138,8 @@ if ($permissionChecker->hasPermission("users")) {
     </div>
     <?php
 } else {
-    noPerms();
-}
+                        noPerms();
+                    }
 
 $translation = new JSTranslation(array(
     "ask_for_delete"
@@ -145,8 +147,10 @@ $translation = new JSTranslation(array(
 $translation->render();
 
 enqueueScriptFile(
-        ModuleHelper::buildRessourcePath(
-                "core_users", "js/list.js")
+    ModuleHelper::buildRessourcePath(
+            "core_users",
+            "js/list.js"
+        )
 );
 
 combinedScriptHtml();

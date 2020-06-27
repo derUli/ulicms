@@ -21,14 +21,14 @@ $errorCodes = array(
 <h1><?php translate("error_pages"); ?></h1>
 <?php
 echo ModuleHelper::buildMethodCallForm(
-        ErrorPagesController::class,
-        "save",
-        [],
-        RequestMethod::POST,
-        [
+                ErrorPagesController::class,
+                "save",
+                [],
+                RequestMethod::POST,
+                [
             "id" => "error_pages_form"
         ]
-        );
+            );
 ?>
 <?php foreach ($errorCodes as $code => $error) {
     ?>
@@ -48,24 +48,26 @@ echo ModuleHelper::buildMethodCallForm(
                 $pages = getAllPages($language, "title", true);
                 $items = array(new ListItem("-1", "[" . get_translation("standard") . "]"));
                 foreach ($pages as $page) {
-                    $items[] = new ListItem($page["id"],
-                            $page["title"]);
-                }
-                ?>
+                    $items[] = new ListItem(
+                        $page["id"],
+                        $page["title"]
+                    );
+                } ?>
                 <tr>
                     <td>
                         <?php esc(getLanguageNameByCode($language)); ?></td>
                     <td>
                         <?php
-                        echo Input::singleSelect("error_page[{$code}][{$language}]", Settings::getLanguageSetting("error_page_{$code}", $language),
-                                $items);
-                        ?>
+                        echo Input::singleSelect(
+                    "error_page[{$code}][{$language}]",
+                    Settings::getLanguageSetting("error_page_{$code}", $language),
+                    $items
+                ); ?>
 
                     </td>
                 </tr>
                 <?php
-            }
-            ?>
+            } ?>
         </tbody>
     </table>
     <?php

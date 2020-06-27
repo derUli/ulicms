@@ -3,21 +3,24 @@
 use UliCMS\Models\Content\Category;
 use UliCMS\Models\Content\Categories;
 
-class CategoryControllerTest extends \PHPUnit\Framework\TestCase {
-
-    protected function setUp(): void {
+class CategoryControllerTest extends \PHPUnit\Framework\TestCase
+{
+    protected function setUp(): void
+    {
         LoggerRegistry::register(
-                "audit_log",
-                new Logger(Path::resolve("ULICMS_LOG/audit_log"))
+            "audit_log",
+            new Logger(Path::resolve("ULICMS_LOG/audit_log"))
         );
     }
 
-    protected function tearDown(): void {
+    protected function tearDown(): void
+    {
         LoggerRegistry::unregister("audit_log");
         Database::deleteFrom("categories", "name like 'Unit Test%'");
     }
 
-    public function testCreateCategory() {
+    public function testCreateCategory()
+    {
         $name = "Unit Test " . time();
         $description = "Description " . time();
         $controller = new CategoryController();
@@ -30,16 +33,17 @@ class CategoryControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals($description, $banner->getDescription());
     }
 
-    public function testUpdateCategory() {
+    public function testUpdateCategory()
+    {
         $name = "Unit Test " . time();
         $description = "Description " . time();
         $createdId = Categories::addCategory($name, $description);
 
         $controller = new CategoryController();
         $updatedId = $controller->_updatePost(
-                $createdId,
-                "Unit Test New Name",
-                "New Description"
+            $createdId,
+            "Unit Test New Name",
+            "New Description"
         );
 
         $this->assertGreaterThan(1, $updatedId);
@@ -49,7 +53,8 @@ class CategoryControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("New Description", $banner->getDescription());
     }
     
-    public function testDeleteCategoryReturnsTrue() {
+    public function testDeleteCategoryReturnsTrue()
+    {
         $name = "Unit Test " . time();
         $description = "Description " . time();
         $createdId = Categories::addCategory($name, $description);
@@ -63,7 +68,8 @@ class CategoryControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull($category->getID());
     }
     // can't delete "General" category
-    public function testDeleteCategoryReturnsFalse() {
+    public function testDeleteCategoryReturnsFalse()
+    {
         $controller = new CategoryController();
         $success = $controller->_deletePost(1);
 
@@ -72,5 +78,4 @@ class CategoryControllerTest extends \PHPUnit\Framework\TestCase {
         $category = new Category(1);
         $this->assertEquals(1, $category->getID());
     }
-
 }

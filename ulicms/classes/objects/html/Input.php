@@ -9,12 +9,15 @@ use ModuleHelper;
 use Template;
 
 // this class contains methods to build input fields
-class Input {
-
-    public static function textBox(string $name,
-            $value,
-            string $type = "text",
-            array $htmlAttributes = []): string {
+class Input
+{
+    public static function textBox(
+        string $name,
+        $value,
+        string $type = "text",
+        array $htmlAttributes = []
+    ): string
+    {
         $attributes = array(
             "type" => $type,
             "name" => $name,
@@ -27,11 +30,14 @@ class Input {
         return "<input {$attribHTML}>";
     }
 
-    public static function textArea(string $name,
-            $value,
-            int $rows = 25,
-            int $cols = 80,
-            array $htmlAttributes = []): string {
+    public static function textArea(
+        string $name,
+        $value,
+        int $rows = 25,
+        int $cols = 80,
+        array $htmlAttributes = []
+    ): string
+    {
         $attributes = array(
             "name" => $name,
             "rows" => $rows,
@@ -47,12 +53,14 @@ class Input {
         return "<textarea {$attribHTML}>{$escapedValue}</textarea>";
     }
 
-    public static function editor(string $name,
-            $value,
-            int $rows = 25,
-            int $cols = 80,
-            array $htmlAttributes = []): string {
-
+    public static function editor(
+        string $name,
+        $value,
+        int $rows = 25,
+        int $cols = 80,
+        array $htmlAttributes = []
+    ): string
+    {
         if (!isset($htmlAttributes["id"])) {
             $htmlAttributes["id"] = $name;
         }
@@ -75,21 +83,28 @@ class Input {
      * 	<textarea name="content" id="content" cols=60 rows=20 class="<?php esc($editor); ?>" data-mimetype="text/html"
      *      */
 
-    public static function password(string $name,
-            $value,
-            array $htmlAttributes = []): string {
+    public static function password(
+        string $name,
+        $value,
+        array $htmlAttributes = []
+    ): string
+    {
         return self::textBox($name, $value, "password", $htmlAttributes);
     }
 
-    public static function file(string $name,
-            bool $multiple = false,
-            $accept = null, array $htmlAttributes = []): string {
+    public static function file(
+        string $name,
+        bool $multiple = false,
+        $accept = null,
+        array $htmlAttributes = []
+    ): string
+    {
         $attributes = array(
             "name" => $name
         );
         if (is_string($accept)) {
             $attributes["accept"] = Template::getEscape($accept);
-        } else if (is_array($accept)) {
+        } elseif (is_array($accept)) {
             $accept = join(", ", $accept);
             $attributes["accept"] = Template::getEscape($accept);
         }
@@ -104,37 +119,49 @@ class Input {
         return self::textBox($name, "", "file", $attributes);
     }
 
-    public static function hidden(string $name,
-            $value,
-            array $htmlAttributes = []): string {
+    public static function hidden(
+        string $name,
+        $value,
+        array $htmlAttributes = []
+    ): string
+    {
         return self::textBox($name, $value, "hidden", $htmlAttributes);
     }
 
-    public static function checkBox(string $name,
-            bool $checked = false,
-            $value = "1",
-            array $htmlAttributes = []): string {
+    public static function checkBox(
+        string $name,
+        bool $checked = false,
+        $value = "1",
+        array $htmlAttributes = []
+    ): string
+    {
         if ($checked) {
             $htmlAttributes["checked"] = "checked";
         }
         return self::textBox($name, $value, "checkbox", $htmlAttributes);
     }
 
-    public static function radioButton(string $name,
-            bool $checked = false,
-            $value = "1",
-            array $htmlAttributes = []): string {
+    public static function radioButton(
+        string $name,
+        bool $checked = false,
+        $value = "1",
+        array $htmlAttributes = []
+    ): string
+    {
         if ($checked) {
             $htmlAttributes["checked"] = "checked";
         }
         return self::textBox($name, $value, "radio", $htmlAttributes);
     }
 
-    public static function singleSelect(string $name,
-            $value = null,
-            array $options = [],
-            int $size = 1,
-            array $htmlAttributes = []): string {
+    public static function singleSelect(
+        string $name,
+        $value = null,
+        array $options = [],
+        int $size = 1,
+        array $htmlAttributes = []
+    ): string
+    {
         $attributes = array(
             "name" => $name,
             "size" => $size
@@ -143,7 +170,7 @@ class Input {
             $attributes[$key] = $val;
         }
         
-        if(!isset($attributes["id"])){
+        if (!isset($attributes["id"])) {
             $attributes["id"] = $name;
         }
         
@@ -160,11 +187,14 @@ class Input {
         return $html;
     }
 
-    public static function multiSelect(string $name,
-            $value = null,
-            array $options = [],
-            int $size = 5,
-            array $htmlAttributes = []): string {
+    public static function multiSelect(
+        string $name,
+        $value = null,
+        array $options = [],
+        int $size = 5,
+        array $htmlAttributes = []
+    ): string
+    {
         $attributes = array(
             "name" => $name,
             "size" => $size
@@ -184,6 +214,4 @@ class Input {
         $html .= '</select>';
         return $html;
     }
-    
-
 }

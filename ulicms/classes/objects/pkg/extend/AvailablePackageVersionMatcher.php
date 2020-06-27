@@ -6,15 +6,17 @@ use function is_version_number;
 use UliCMS\Helpers\ArrayHelper;
 use UliCMSVersion;
 
-class AvailablePackageVersionMatcher {
-
+class AvailablePackageVersionMatcher
+{
     private $versionData = [];
 
-    public function __construct($versionData = null) {
+    public function __construct($versionData = null)
+    {
         $this->loadData($versionData);
     }
 
-    public function loadData($versionData) {
+    public function loadData($versionData)
+    {
         $this->versionData = [];
         if ($versionData === null) {
             return;
@@ -28,13 +30,13 @@ class AvailablePackageVersionMatcher {
 
         foreach ($versions as $version) {
             if (ArrayHelper::hasMultipleKeys(
-                            $version,
-                            [
+                $version,
+                [
                                 "version",
                                 "compatible_with",
                                 "file"
                             ]
-                    ) and
+            ) and
                     is_version_number($version["version"]) and
                     is_version_number($version["compatible_with"])
             ) {
@@ -43,28 +45,30 @@ class AvailablePackageVersionMatcher {
         }
     }
 
-    public function getAllVersions(): array {
+    public function getAllVersions(): array
+    {
         $releases = $this->versionData;
 
-        usort($releases, function($a, $b) {
+        usort($releases, function ($a, $b) {
             return \UliCMS\Utils\VersionComparison\compare($a["version"], $b["version"], "<");
         });
-        usort($releases, function($a, $b) {
+        usort($releases, function ($a, $b) {
             return \UliCMS\Utils\VersionComparison\compare($a["compatible_with"], $b["compatible_with"], "<");
         });
 
         return $releases;
     }
 
-    public function getCompatibleVersions(?string $ulicmsVersion = null): array {
+    public function getCompatibleVersions(?string $ulicmsVersion = null): array
+    {
         $allReleases = $this->getAllVersions();
         $suitableReleases = [];
 
         foreach ($allReleases as $release) {
             $compatible = \UliCMS\Utils\VersionComparison\compare(
-                    $release["compatible_with"],
-                    $ulicmsVersion,
-                    ">="
+                $release["compatible_with"],
+                $ulicmsVersion,
+                ">="
             );
 
             if ($compatible) {
@@ -77,5 +81,4 @@ class AvailablePackageVersionMatcher {
 
         return $suitableReleases;
     }
-
 }

@@ -3,13 +3,15 @@
 use UliCMS\CoreContent\PageTableRenderer;
 use UliCMS\Models\Content\Language;
 
-class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
-
-    protected function setUp(): void {
+class PageTableRendererTest extends \PHPUnit\Framework\TestCase
+{
+    protected function setUp(): void
+    {
         include_once getLanguageFilePath("en");
     }
 
-    public function testGetDataReturns3Items() {
+    public function testGetDataReturns3Items()
+    {
         $manager = new UserManager();
         $user = $manager->getAllUsers("admin desc")[0];
 
@@ -22,7 +24,8 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals($data["recordsTotal"], $data["recordsFiltered"]);
     }
 
-    public function testGetDataReturnsOther3Items() {
+    public function testGetDataReturnsOther3Items()
+    {
         $manager = new UserManager();
         $user = $manager->getAllUsers("admin desc")[0];
 
@@ -35,15 +38,16 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
 
         for ($i = 0; $i < count($data2["data"]); $i++) {
             $this->assertNotEquals(
-                    $data1["data"][$i][0],
-                    $data2["data"][$i][0]
+                $data1["data"][$i][0],
+                $data2["data"][$i][0]
             );
         }
 
         $this->assertEquals($data2["recordsTotal"], $data2["recordsFiltered"]);
     }
 
-    public function testGetDataFiltered() {
+    public function testGetDataFiltered()
+    {
         $manager = new UserManager();
         $user = $manager->getAllUsers("admin desc")[0];
 
@@ -51,8 +55,8 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
         $data = $renderer->getData(0, 10, 123, "lorem");
 
         $this->assertLessThan(
-                $data["recordsTotal"],
-                $data["recordsFiltered"]
+            $data["recordsTotal"],
+            $data["recordsFiltered"]
         );
 
         foreach ($data["data"] as $dataset) {
@@ -60,7 +64,8 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
         }
     }
     
-    public function testGetDataFilterLanguagesByGroup(){
+    public function testGetDataFilterLanguagesByGroup()
+    {
         $manager = new UserManager();
         $user = $manager->getAllUsers("admin desc")[0];
         
@@ -82,12 +87,13 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
         $this->assertGreaterThan(0, $filteredData["data"]);
         
         $this->assertLessThan(
-                count($allData["data"]),
-                count($filteredData["data"]));
-
+            count($allData["data"]),
+            count($filteredData["data"])
+        );
     }
 
-    public function testGetDataFilterByLanguageAndType() {
+    public function testGetDataFilterByLanguageAndType()
+    {
         $manager = new UserManager();
         $user = $manager->getAllUsers("admin desc")[0];
 
@@ -103,35 +109,37 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
         $data = $renderer->getData(0, 20, 123, "", $filters);
 
         $this->assertLessThan(
-                $data["recordsTotal"],
-                $data["recordsFiltered"]
+            $data["recordsTotal"],
+            $data["recordsFiltered"]
         );
 
         $this->assertGreaterThanOrEqual(1, count($data["data"]));
         $this->assertGreaterThan(
-                count($data["data"]),
-                count($withoutLanguageFilter["data"])
+            count($data["data"]),
+            count($withoutLanguageFilter["data"])
         );
     }
 
-    public function testGetDataFilterByParentIdNoParent() {
+    public function testGetDataFilterByParentIdNoParent()
+    {
         $manager = new UserManager();
         $user = $manager->getAllUsers("admin desc")[0];
 
         $renderer = new PageTableRenderer($user);
 
-        $data = $renderer->getData(0,
-                20,
-                123,
-                "",
-                [
+        $data = $renderer->getData(
+            0,
+            20,
+            123,
+            "",
+            [
                     "parent_id" => 0
                 ]
         );
 
         $this->assertLessThan(
-                $data["recordsTotal"],
-                $data["recordsFiltered"]
+            $data["recordsTotal"],
+            $data["recordsFiltered"]
         );
 
         foreach ($data["data"] as $dataset) {
@@ -139,7 +147,8 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetDataFilterByParentIdWithParent() {
+    public function testGetDataFilterByParentIdWithParent()
+    {
         $manager = new UserManager();
         $user = $manager->getAllUsers("admin desc")[0];
 
@@ -147,23 +156,24 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
 
         $parentPage = ContentFactory::getBySlugAndLanguage("modules", "en");
 
-        $data = $renderer->getData(0,
-                20,
-                123,
-                "",
-                [
+        $data = $renderer->getData(
+            0,
+            20,
+            123,
+            "",
+            [
                     "parent_id" => $parentPage->getID()
                 ],
-                "default",
-                ["id"]
+            "default",
+            ["id"]
         );
 
 
         $this->assertGreaterThanOrEqual(2, count($data["data"]));
 
         $this->assertLessThan(
-                $data["recordsTotal"],
-                $data["recordsFiltered"]
+            $data["recordsTotal"],
+            $data["recordsFiltered"]
         );
 
         foreach ($data["data"] as $dataset) {
@@ -171,25 +181,28 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetDataFilterByCategoryId() {
+    public function testGetDataFilterByCategoryId()
+    {
         $manager = new UserManager();
         $user = $manager->getAllUsers("admin desc")[0];
 
         $renderer = new PageTableRenderer($user);
 
-        $categoryGeneralData = $renderer->getData(0,
-                20,
-                123,
-                "",
-                [
+        $categoryGeneralData = $renderer->getData(
+            0,
+            20,
+            123,
+            "",
+            [
                     "category_id" => 1
                 ]
         );
-        $nonExistingCategory = $renderer->getData(0,
-                20,
-                123,
-                "",
-                [
+        $nonExistingCategory = $renderer->getData(
+            0,
+            20,
+            123,
+            "",
+            [
                     "category_id" => PHP_INT_MAX
                 ]
         );
@@ -198,25 +211,28 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
         $this->assertCount(0, $nonExistingCategory["data"]);
     }
 
-    public function testGetDataFilterByApproved() {
+    public function testGetDataFilterByApproved()
+    {
         $manager = new UserManager();
         $user = $manager->getAllUsers("admin desc")[0];
 
         $renderer = new PageTableRenderer($user);
 
-        $approvedData = $renderer->getData(0,
-                20,
-                123,
-                "",
-                [
+        $approvedData = $renderer->getData(
+            0,
+            20,
+            123,
+            "",
+            [
                     "approved" => 1
                 ]
         );
-        $notApprovedData = $renderer->getData(0,
-                20,
-                123,
-                "",
-                [
+        $notApprovedData = $renderer->getData(
+            0,
+            20,
+            123,
+            "",
+            [
                     "approved" => 0
                 ]
         );
@@ -224,17 +240,19 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
         $this->assertNotEquals(count($approvedData["data"]), $notApprovedData["data"]);
     }
 
-    public function testGetDataFilterByMenu() {
+    public function testGetDataFilterByMenu()
+    {
         $manager = new UserManager();
         $user = $manager->getAllUsers("admin desc")[0];
 
         $renderer = new PageTableRenderer($user);
 
-        $data = $renderer->getData(0,
-                20,
-                123,
-                "",
-                [
+        $data = $renderer->getData(
+            0,
+            20,
+            123,
+            "",
+            [
                     "menu" => "top"
                 ]
         );
@@ -244,17 +262,19 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetDataFilterActive() {
+    public function testGetDataFilterActive()
+    {
         $manager = new UserManager();
         $user = $manager->getAllUsers("admin desc")[0];
 
         $renderer = new PageTableRenderer($user);
 
-        $dataActive = $renderer->getData(0,
-                20,
-                123,
-                "",
-                [
+        $dataActive = $renderer->getData(
+            0,
+            20,
+            123,
+            "",
+            [
                     "active" => 1
                 ]
         );
@@ -263,11 +283,12 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
             $this->assertEquals("Yes", $dataset[4]);
         }
 
-        $dataInactive = $renderer->getData(0,
-                20,
-                123,
-                "",
-                [
+        $dataInactive = $renderer->getData(
+            0,
+            20,
+            123,
+            "",
+            [
                     "active" => 0
                 ]
         );
@@ -277,23 +298,27 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetDataFilteredWithStart() {
+    public function testGetDataFilteredWithStart()
+    {
         $manager = new UserManager();
         $user = $manager->getAllUsers("admin desc")[0];
 
         $renderer = new PageTableRenderer($user);
         $data = $renderer->getData(1, 1, 123, "lorem");
-        $this->assertLessThan($data["recordsTotal"],
-                $data["recordsFiltered"]);
+        $this->assertLessThan(
+            $data["recordsTotal"],
+            $data["recordsFiltered"]
+        );
 
         $this->assertCount(1, $data["data"]);
 
-        $this->assertGreaterThan(1,
-                $data["recordsFiltered"]);
+        $this->assertGreaterThan(
+            1,
+            $data["recordsFiltered"]
+        );
 
         foreach ($data["data"] as $dataset) {
             $this->assertStringContainsStringIgnoringCase("lorem", $dataset[0]);
         }
     }
-
 }

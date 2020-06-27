@@ -4,12 +4,13 @@ use UliCMS\Renderers\PdfRenderer;
 use UliCMS\Utils\CacheUtil;
 use function UliCMS\HTML\stringContainsHtml;
 
-class PdfRendererTest extends \PHPUnit\Framework\TestCase {
-
+class PdfRendererTest extends \PHPUnit\Framework\TestCase
+{
     private $cacheDisabledOriginal;
     private $cachePeriodOriginal;
 
-    protected function setUp(): void {
+    protected function setUp(): void
+    {
         require_once getLanguageFilePath("en");
 
         $_SESSION["language"] = "de";
@@ -22,7 +23,8 @@ class PdfRendererTest extends \PHPUnit\Framework\TestCase {
         Settings::delete("cache_disabled");
     }
 
-    protected function tearDown(): void {
+    protected function tearDown(): void
+    {
         CacheUtil::clearPageCache();
         CacheUtil::resetAdapater();
         Database::query("delete from {prefix}content where title like 'Unit Test%'", true);
@@ -41,7 +43,8 @@ class PdfRendererTest extends \PHPUnit\Framework\TestCase {
         unset($_SESSION["logged_in"]);
     }
 
-    public function testRenderWithTextPositionBefore() {
+    public function testRenderWithTextPositionBefore()
+    {
         $modulePage = new Module_Page();
         $modulePage->title = "Unit Test Article";
         $modulePage->slug = "unit-test-" . uniqid();
@@ -68,8 +71,8 @@ class PdfRendererTest extends \PHPUnit\Framework\TestCase {
         $this->assertStringStartsWith("%PDF-1.4", $output);
     }
 
-    public function testRenderWithTextPositionAfter() {
-
+    public function testRenderWithTextPositionAfter()
+    {
         $_SERVER["REQUEST_URI"] = "/url-two.pdf?param=value&foo=bar";
         $modulePage = new Module_Page();
         $modulePage->title = "Unit Test Article";
@@ -96,7 +99,8 @@ class PdfRendererTest extends \PHPUnit\Framework\TestCase {
         $this->assertStringStartsWith("%PDF-1.4", $output);
     }
 
-    public function testRenderNonExisting() {
+    public function testRenderNonExisting()
+    {
         $_GET["slug"] = 'gibts_nicht';
 
         $renderer = new PdfRenderer();
@@ -106,7 +110,8 @@ class PdfRendererTest extends \PHPUnit\Framework\TestCase {
         // TODO: check if the PDF contains the page not found title
     }
 
-    public function testRenderWithoutMpdfInstalled() {
+    public function testRenderWithoutMpdfInstalled()
+    {
         ob_start();
         $renderer = new PdfRenderer();
         $renderer->isMpdfInstalled = false;
@@ -115,5 +120,4 @@ class PdfRendererTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue(stringContainsHtml($output));
         $this->assertStringContainsString("mPDF is not installed", $output);
     }
-
 }

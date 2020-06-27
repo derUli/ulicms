@@ -3,17 +3,20 @@
 declare(strict_types=1);
 
 // returns version number of UliCMS Core
-function cms_version(): string {
+function cms_version(): string
+{
     $v = new UliCMSVersion();
     return implode(".", $v->getInternalVersion());
 }
 
-function get_environment(): string {
+function get_environment(): string
+{
     return getenv("ULICMS_ENVIRONMENT") ?
             getenv("ULICMS_ENVIRONMENT") : "default";
 }
 
-function func_enabled(string $func): array {
+function func_enabled(string $func): array
+{
     $disabled = explode(',', ini_get('disable_functions'));
     foreach ($disabled as $disableFunction) {
         $is_disabled[] = trim($disableFunction);
@@ -28,4 +31,3 @@ function func_enabled(string $func): array {
     }
     return $it_is_disabled;
 }
-

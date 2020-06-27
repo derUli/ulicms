@@ -2,41 +2,48 @@
 
 use UliCMS\Constants\PackageTypes;
 
-class PackageManagerTest extends \PHPUnit\Framework\TestCase {
-
-    protected function setUp(): void {
+class PackageManagerTest extends \PHPUnit\Framework\TestCase
+{
+    protected function setUp(): void
+    {
         $moduleManager = new ModuleManager();
         $moduleManager->sync();
     }
 
-    public function testIsInstalledModuleReturnsTrue() {
+    public function testIsInstalledModuleReturnsTrue()
+    {
         $packageManager = new PackageManager();
-        $this->assertTrue($packageManager->isInstalled("core_home",PackageTypes::TYPE_MODULE));
+        $this->assertTrue($packageManager->isInstalled("core_home", PackageTypes::TYPE_MODULE));
     }
 
-    public function testIsInstalledModuleReturnsFalse() {
+    public function testIsInstalledModuleReturnsFalse()
+    {
         $packageManager = new PackageManager();
         $this->assertFalse($packageManager->isInstalled("do_nothing", PackageTypes::TYPE_MODULE));
     }
 
-    public function testIsInstalledModuleThrowsException() {
+    public function testIsInstalledModuleThrowsException()
+    {
         $packageManager = new PackageManager();
         $this->expectException(BadMethodCallException::class);
         $packageManager->isInstalled("fortune2", "invalid_type");
     }
 
-    public function testIsInstalledThemeReturnsTrue() {
+    public function testIsInstalledThemeReturnsTrue()
+    {
         $packageManager = new PackageManager();
         $this->assertTrue($packageManager->isInstalled("impro17", PackageTypes::TYPE_THEME));
         $this->assertTrue($packageManager->isInstalled("2020", PackageTypes::TYPE_THEME));
     }
 
-    public function testIsInstalledThemeReturnsFalse() {
+    public function testIsInstalledThemeReturnsFalse()
+    {
         $packageManager = new PackageManager();
         $this->assertFalse($packageManager->isInstalled("my_ugly_theme", PackageTypes::TYPE_THEME));
     }
 
-    public function testSplitPackageName() {
+    public function testSplitPackageName()
+    {
         $packageManager = new PackageManager();
         $input = "foo-bar-2.0";
         $expected = [
@@ -46,18 +53,21 @@ class PackageManagerTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals($expected, $packageManager->splitPackageName($input));
     }
 
-    public function testCheckForNewerVersionPackageReturnsFalse() {
+    public function testCheckForNewerVersionPackageReturnsFalse()
+    {
         $packageManager = new PackageManager();
         $this->assertEquals(
-                "3.3.7",
-                $packageManager->checkForNewerVersionOfPackage("bootstrap")
+            "3.3.7",
+            $packageManager->checkForNewerVersionOfPackage("bootstrap")
         );
     }
 
-    public function testGetInstalledPackagesWithTypeModules() {
+    public function testGetInstalledPackagesWithTypeModules()
+    {
         $packageManager = new PackageManager();
         $packages = $packageManager->getInstalledPackages(
-                PackageTypes::TYPE_MODULE);
+            PackageTypes::TYPE_MODULE
+        );
 
         $this->greaterThanOrEqual(21, count($packages));
 
@@ -66,20 +76,23 @@ class PackageManagerTest extends \PHPUnit\Framework\TestCase {
         $this->assertContains("fortune2", $packages);
     }
 
-    public function testGetInstalledPackagesWithTypeThemes() {
+    public function testGetInstalledPackagesWithTypeThemes()
+    {
         $packageManager = new PackageManager();
         $packages = $packageManager->getInstalledPackages(
-                PackageTypes::TYPE_THEME);
+            PackageTypes::TYPE_THEME
+        );
         $this->assertContains("impro17", $packages);
 
         $this->assertContains("2020", $packages);
     }
 
-    public function testGetInstalledPackagesWithTypeInvalid() {
+    public function testGetInstalledPackagesWithTypeInvalid()
+    {
         $packageManager = new PackageManager();
         $this->expectException(BadMethodCallException::class);
         $packageManager->getInstalledPackages(
-                "invalid_type");
+            "invalid_type"
+        );
     }
-
 }

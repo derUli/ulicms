@@ -3,7 +3,8 @@
 declare(strict_types=1);
 
 // Schriftgrößen zurückgeben
-function getFontSizes(): array {
+function getFontSizes(): array
+{
     global $sizes;
     $sizes = [];
     for ($i = 6; $i <= 80; $i ++) {
@@ -15,7 +16,8 @@ function getFontSizes(): array {
     return $sizes;
 }
 
-function getThemeMeta(string $theme, string $attrib = null) {
+function getThemeMeta(string $theme, string $attrib = null)
+{
     $retval = null;
     $metadata_file = getTemplateDirPath($theme, true) . "metadata.json";
     if (file_exists($metadata_file)) {

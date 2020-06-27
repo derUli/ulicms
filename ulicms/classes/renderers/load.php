@@ -10,4 +10,3 @@ $classes = [
 foreach ($classes as $class) {
     require_once dirname(__file__) . "/{$class}Renderer.php";
 }
-

@@ -29,8 +29,10 @@ $model = ViewBag::get("model");
         <strong><?php translate("source"); ?>: </strong>
         <?php
         echo $model->source_url ?
-                Link::link($model->source_url, get_secure_translation($model->source),
-                        ["target" => UliCMS\Constants\LinkTarget::TARGET_BLANK]
+                Link::link(
+                    $model->source_url,
+                    get_secure_translation($model->source),
+                    ["target" => UliCMS\Constants\LinkTarget::TARGET_BLANK]
                 ) :
                 get_secure_translation($model->source);
         ?>
@@ -51,6 +53,3 @@ $model = ViewBag::get("model");
     </p>
     <?php
 }
-
-
-

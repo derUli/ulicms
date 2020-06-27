@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 use UliCMS\Utils\CacheUtil;
 
-class FaviconController extends Controller {
-
-    public function doUpload(): void {
+class FaviconController extends Controller
+{
+    public function doUpload(): void
+    {
         // Favicon Upload
         if (!empty($_FILES['favicon_upload_file']['name'])) {
             if (!is_dir("../content/images")) {
@@ -59,13 +60,12 @@ class FaviconController extends Controller {
                 Request::redirect(ModuleHelper::buildActionURL("favicon"));
             } else {
                 Request::redirect(
-                        ModuleHelper::buildActionURL(
-                                "favicon",
-                                "error=UPLOAD_WRONG_FILE_FORMAT"
+                    ModuleHelper::buildActionURL(
+                            "favicon",
+                            "error=UPLOAD_WRONG_FILE_FORMAT"
                         )
                 );
             }
         }
     }
-
 }

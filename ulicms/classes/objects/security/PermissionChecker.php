@@ -7,24 +7,26 @@ namespace UliCMS\Security;
 use User;
 
 // class for permission checks
-class PermissionChecker {
-
+class PermissionChecker
+{
     private $user_id;
 
-    public function __construct(?int $user_id = null) {
+    public function __construct(?int $user_id = null)
+    {
         // if ($user_id == null) {
         // $user_id = get_user_id();
         // }
         $this->user_id = $user_id;
     }
 
-    public function hasPermission(string $permission): bool {
+    public function hasPermission(string $permission): bool
+    {
         // If the user is not logged in he has no permissions on anything
         if (!$this->user_id) {
             return false;
         }
         $user = new User($this->user_id);
-		
+        
         // If the "Is Admin" flag is set the user has full access
         // to the whole system
         if ($user->isAdmin()) {
@@ -45,7 +47,8 @@ class PermissionChecker {
         return false;
     }
 
-    private function getUserGroups(User $user): array {
+    private function getUserGroups(User $user): array
+    {
         // Collect primary group and secondary groups of the user
         $groups = [];
         if ($user->getGroup()) {
@@ -57,7 +60,8 @@ class PermissionChecker {
         return $groups;
     }
 
-    public function getLanguages(): array {
+    public function getLanguages(): array
+    {
         $user = new User($this->user_id);
         $groups = $this->getUserGroups($user);
 
@@ -70,12 +74,13 @@ class PermissionChecker {
         return $languages;
     }
 
-    public function getUserId(): ?int {
+    public function getUserId(): ?int
+    {
         return $this->user_id;
     }
 
-    public function setUserId(?int $val): void {
+    public function setUserId(?int $val): void
+    {
         $this->user_id = is_numeric($val) ? intval($val) : null;
     }
-
 }

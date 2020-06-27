@@ -3,13 +3,15 @@
 use UliCMS\Models\Content\Language;
 use UliCMS\Exceptions\NotImplementedException;
 
-class ModelTest extends \PHPUnit\Framework\TestCase {
-
-    protected function tearDown(): void {
+class ModelTest extends \PHPUnit\Framework\TestCase
+{
+    protected function tearDown(): void
+    {
         Database::pQuery("delete from {prefix}languages where language_code = ?", array("it"), true);
     }
 
-    public function testIsPersistent() {
+    public function testIsPersistent()
+    {
         $language = new Language();
         $language->setLanguageCode("it");
         $language->setName("Italiano");
@@ -22,7 +24,8 @@ class ModelTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($language->isPersistent());
     }
 
-    public function testHasChanges() {
+    public function testHasChanges()
+    {
         $language = new Language();
 
         $this->assertFalse($language->hasChanges());
@@ -45,78 +48,91 @@ class ModelTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($language->hasChanges());
     }
 
-    public function testLoadByIdThrowsException() {
+    public function testLoadByIdThrowsException()
+    {
         $this->expectException(NotImplementedException::class);
         $model = new Model();
         $model->loadByID(123);
     }
 
-    public function testSaveThrowsException() {
+    public function testSaveThrowsException()
+    {
         $this->expectException(NotImplementedException::class);
         $model = new Model();
 
         $model->save();
     }
 
-    public function testInsertThrowsNotImplementedException() {
+    public function testInsertThrowsNotImplementedException()
+    {
         $this->expectException(NotImplementedException::class);
         $model = new Model();
         $model->save();
     }
 
-    public function testUpdateThrowsNotImplementedException() {
+    public function testUpdateThrowsNotImplementedException()
+    {
         $this->expectException(NotImplementedException::class);
         $model = new Model();
         $model->setID(123);
         $model->save();
     }
 
-    public function testDeleteThrowsNotImplementedException() {
+    public function testDeleteThrowsNotImplementedException()
+    {
         $this->expectException(NotImplementedException::class);
         $model = new Model();
         $model->delete();
     }
 
-    public function testFillVarsThrowNotImplementedException() {
+    public function testFillVarsThrowNotImplementedException()
+    {
         $this->expectException(NotImplementedException::class);
         $model = new TestModel();
         $model->doFillVars();
     }
 
-    public function testCheckValueTypeWithRequiredNotFilled() {
+    public function testCheckValueTypeWithRequiredNotFilled()
+    {
         $this->expectException("InvalidArgumentException");
         Model::checkValueType(null, "str", true);
     }
 
-    public function testCheckValueTypeWithoutType() {
+    public function testCheckValueTypeWithoutType()
+    {
         $this->assertTrue(
-                Model::checkValueType("foo", null, false)
+            Model::checkValueType("foo", null, false)
         );
     }
 
-    public function testCheckValueWithString() {
+    public function testCheckValueWithString()
+    {
         $this->assertTrue(
-                Model::checkValueType("ein-string", "string", true)
+            Model::checkValueType("ein-string", "string", true)
         );
     }
 
-    public function testCheckValueWithInt() {
+    public function testCheckValueWithInt()
+    {
         $this->expectException("InvalidArgumentException");
         Model::checkValueType(123, "string", true);
     }
 
-    public function testCheckValueTypeWithNull() {
+    public function testCheckValueTypeWithNull()
+    {
         $this->assertTrue(
-                Model::checkValueType(null, "str", false)
+            Model::checkValueType(null, "str", false)
         );
     }
 
-    public function testCheckValueTypeWithInvalidClass() {
+    public function testCheckValueTypeWithInvalidClass()
+    {
         $this->expectException("InvalidArgumentException");
         Model::checkValueType(new Image_Page(), "Page", false);
     }
 
-    public function testReloadReturnsTrue() {
+    public function testReloadReturnsTrue()
+    {
         $language = new Language();
         $language->loadByLanguageCode("de");
 
@@ -127,17 +143,17 @@ class ModelTest extends \PHPUnit\Framework\TestCase {
         $this->assertNotEquals("Germanisch", $language->getName());
     }
 
-    public function testReloadReturnsFalse() {
+    public function testReloadReturnsFalse()
+    {
         $language = new Language();
         $this->assertFalse($language->reload());
     }
-
 }
 
-class TestModel extends Model {
-
-    public function doFillVars($result = null) {
+class TestModel extends Model
+{
+    public function doFillVars($result = null)
+    {
         $this->fillVars($result);
     }
-
 }

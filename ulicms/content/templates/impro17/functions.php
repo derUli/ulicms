@@ -1,6 +1,7 @@
 <?php
 
-function jumbotron_get_menu($name = "top", $parent_id = null, $recursive = true, $order = "position") {
+function jumbotron_get_menu($name = "top", $parent_id = null, $recursive = true, $order = "position")
+{
     $html = "";
     $name = db_escape($name);
     $language = $_SESSION["language"];

@@ -24,7 +24,6 @@ $lang = InstallerController::getLanguage();
 InstallerController::loadLanguageFile($lang);
 
 if (isset($_REQUEST["submit_form"])) {
-
     if (method_exists("InstallerController", "submit" . $_REQUEST["submit_form"])) {
         call_user_func("InstallerController::submit" . $_REQUEST["submit_form"]);
     }

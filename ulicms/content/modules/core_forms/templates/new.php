@@ -8,8 +8,7 @@ if (!$permissionChecker->hasPermission("forms")
     noPerms();
 } else {
     $forms = Forms::getAllForms();
-    $pages = getAllPages();
-    ?><div class="field">
+    $pages = getAllPages(); ?><div class="field">
         <a href="<?php echo ModuleHelper::buildActionURL("forms"); ?>"
            class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i>
             <?php translate("back") ?></a>
@@ -51,8 +50,7 @@ if (!$permissionChecker->hasPermission("forms")
             <?php translate("category"); ?>
         </strong>
         <?php
-        echo Categories::getHTMLSelect();
-        ?></div>
+        echo Categories::getHTMLSelect(); ?></div>
 
     <div class="field">
         <strong class="field-label">
@@ -84,8 +82,8 @@ if (!$permissionChecker->hasPermission("forms")
                 <?php foreach ($pages as $page) { ?>
                 <option value="<?php echo $page["id"]; ?>"><?php
                     esc(
-                            $page["title"]
-                    );
+        $page["title"]
+    );
                     ?></option>
             <?php } ?>
         </select>

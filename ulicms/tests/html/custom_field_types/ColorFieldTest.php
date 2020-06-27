@@ -1,13 +1,15 @@
 <?php
 
-class ColorFieldTest extends \PHPUnit\Framework\TestCase {
-
-    protected function setUp(): void {
+class ColorFieldTest extends \PHPUnit\Framework\TestCase
+{
+    protected function setUp(): void
+    {
         include_once getLanguageFilePath("en");
     }
 
-    public function testRender() {
-        $field = new ColorField ();
+    public function testRender()
+    {
+        $field = new ColorField();
         $field->name = "my_field";
         $field->title = "design";
         $rendered = $field->render("FFC0CB");
@@ -19,5 +21,4 @@ class ColorFieldTest extends \PHPUnit\Framework\TestCase {
         $expected = file_get_contents($expectedFile);
         $this->assertEquals(normalizeLN($expected), normalizeLN($rendered));
     }
-
 }

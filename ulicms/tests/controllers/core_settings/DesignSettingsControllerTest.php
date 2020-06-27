@@ -2,11 +2,12 @@
 
 use UliCMS\Utils\File;
 
-class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase {
-
+class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase
+{
     private $initialSettings = [];
 
-    protected function setUp(): void {
+    protected function setUp(): void
+    {
         $this->cleanUpFiles();
 
         $settings = [
@@ -18,7 +19,8 @@ class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    protected function tearDown(): void {
+    protected function tearDown(): void
+    {
         $this->cleanUpFiles();
         Settings::delete("disable_custom_layout_options");
 
@@ -31,7 +33,8 @@ class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    private function cleanUpFiles() {
+    private function cleanUpFiles()
+    {
         $filesToDelete = [
             "ULICMS_GENERATED/design_variables.scss"
         ];
@@ -41,7 +44,8 @@ class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function test_generateSCSS() {
+    public function test_generateSCSS()
+    {
         $controller = ControllerRegistry::get(DesignSettingsController::class);
         $scss = $controller->_generateSCSS();
         $this->assertGreaterThanOrEqual(5, substr_count($scss, "\n"));
@@ -50,39 +54,43 @@ class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertCount(12, $lines);
     }
 
-    public function test_generateSCSSReturnsNull() {
+    public function test_generateSCSSReturnsNull()
+    {
         Settings::set("disable_custom_layout_options", "1");
         $controller = ControllerRegistry::get(DesignSettingsController::class);
         $scss = $controller->_generateSCSS();
         $this->assertNull($scss);
     }
 
-    public function test_generateSCSSToFileReturnsNull() {
+    public function test_generateSCSSToFileReturnsNull()
+    {
         Settings::set("disable_custom_layout_options", "1");
         $controller = ControllerRegistry::get(DesignSettingsController::class);
         $scss = $controller->_generateSCSSToFile();
         $this->assertNull($scss);
     }
 
-    function test_generateSCSSToFile() {
+    public function test_generateSCSSToFile()
+    {
         $this->cleanUpFiles();
         $controller = ControllerRegistry::get(DesignSettingsController::class);
         $file = $controller->_generateSCSSToFile();
         $this->assertStringEndsWith(
-                "/content/generated/design_variables.scss",
-                $file
+            "/content/generated/design_variables.scss",
+            $file
         );
         $this->assertFileExists($file);
 
         $fileContent = file_get_contents($file);
 
         $this->assertGreaterThanOrEqual(
-                5,
-                substr_count($fileContent, "\n")
+            5,
+            substr_count($fileContent, "\n")
         );
     }
 
-    public function test_generateSCSSInConstructor() {
+    public function test_generateSCSSInConstructor()
+    {
         $this->cleanUpFiles();
 
         $file = Path::resolve("ULICMS_GENERATED/design_variables.scss");
@@ -90,16 +98,19 @@ class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase {
 
         $controller = new DesignSettingsController();
         $this->assertFileExists($file);
-        $this->assertEquals($controller->_generateSCSS(),
-                file_get_contents($file));
+        $this->assertEquals(
+            $controller->_generateSCSS(),
+            file_get_contents($file)
+        );
     }
 
-    public function testGetFontFamilys() {
+    public function testGetFontFamilys()
+    {
         $controller = new DesignSettingsController();
         $fonts = $controller->getFontFamilys();
         $this->assertEquals(
-                "Arial, 'Helvetica Neue', Helvetica, sans-serif",
-                $fonts["Arial"]
+            "Arial, 'Helvetica Neue', Helvetica, sans-serif",
+            $fonts["Arial"]
         );
         $this->assertGreaterThanOrEqual(21, count($fonts));
         foreach ($fonts as $name => $family) {
@@ -108,7 +119,8 @@ class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetGoogleFonts() {
+    public function testGetGoogleFonts()
+    {
         $controller = new DesignSettingsController();
         $fonts = $controller->getGoogleFonts();
         $this->assertCount(732, $fonts);
@@ -123,20 +135,23 @@ class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertContains("Lato", $fonts);
     }
 
-    public function testGetThemePreviewReturnsPath() {
+    public function testGetThemePreviewReturnsPath()
+    {
         $controller = new DesignSettingsController();
         $this->assertEquals(
-                'content/templates/impro17/screenshot.jpg',
-                $controller->_themePreview("impro17")
+            'content/templates/impro17/screenshot.jpg',
+            $controller->_themePreview("impro17")
         );
     }
 
-    public function testThemePreviewReturnsNull() {
+    public function testThemePreviewReturnsNull()
+    {
         $controller = new DesignSettingsController();
         $this->assertNull($controller->_themePreview("nothing"));
     }
 
-    public function testSetDefaultTheme() {
+    public function testSetDefaultTheme()
+    {
         $controller = new DesignSettingsController();
         $this->assertNotEquals("foobar", Settings::get("theme"));
 
@@ -144,7 +159,8 @@ class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("foobar", Settings::get("theme"));
     }
 
-    public function testSetDefaultMobileThemeWithTheme() {
+    public function testSetDefaultMobileThemeWithTheme()
+    {
         $controller = new DesignSettingsController();
         $this->assertNotEquals("foobar", Settings::get("theme"));
 
@@ -152,11 +168,11 @@ class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("foobar", Settings::get("mobile_theme"));
     }
 
-    public function testSetDefaultMobileThemeWithNull() {
+    public function testSetDefaultMobileThemeWithNull()
+    {
         $controller = new DesignSettingsController();
         $controller->_setDefaultMobileTheme("foobar");
         $controller->_setDefaultMobileTheme("foobar");
         $this->assertNull(Settings::get("mobile_theme"));
     }
-
 }

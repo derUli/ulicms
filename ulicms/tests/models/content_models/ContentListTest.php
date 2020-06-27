@@ -1,14 +1,16 @@
 
 <?php
 
-class ContentListTest extends \PHPUnit\Framework\TestCase {
-
-    protected function tearDown(): void {
+class ContentListTest extends \PHPUnit\Framework\TestCase
+{
+    protected function tearDown(): void
+    {
         Database::query("delete from {prefix}content where title like 'Unit Test%'", true);
     }
 
-    public function testCreateContentList() {
-        $contentList = new Content_List ();
+    public function testCreateContentList()
+    {
+        $contentList = new Content_List();
         $contentList->title = "Unit Test Article";
         $contentList->slug = "unit test";
         $contentList->menu = "none";
@@ -22,5 +24,4 @@ class ContentListTest extends \PHPUnit\Framework\TestCase {
 
         $this->assertInstanceOf(List_Data::class, $loadedContentList->listData);
     }
-
 }

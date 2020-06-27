@@ -10,11 +10,11 @@ if (Settings::get("visitors_can_register") == "off" || !Settings::get("visitors_
     if (isset($_POST["register_user"])) {
         if ($checkbox->isEnabled() and !$checkbox->isChecked()) {
             echo "<p style='color:red;'>" . get_translation("please_accept_privacy_conditions") . "</p>";
-        } else if (empty($_POST["username"]) or empty($_POST["password"]) or empty($_POST["firstname"]) or empty($_POST["lastname"])) {
+        } elseif (empty($_POST["username"]) or empty($_POST["password"]) or empty($_POST["firstname"]) or empty($_POST["lastname"])) {
             echo "<p style='color:red;'>" . get_translation("FILL_ALL_FIELDS") . "</p>";
-        } else if (user_exists($_POST["username"])) {
+        } elseif (user_exists($_POST["username"])) {
             echo "<p style='color:red;'>" . get_translation("USERNAME_ALREADY_EXISTS") . "</p>";
-        } else if ($_POST["password"] != $_POST["password_repeat"]) {
+        } elseif ($_POST["password"] != $_POST["password_repeat"]) {
             echo "<p style='color:red;'>" . get_translation("PASSWORD_REPEAT_IS_WRONG") . "</p>";
         } else {
             do_event("before_user_registration");
@@ -25,7 +25,7 @@ if (Settings::get("visitors_can_register") == "off" || !Settings::get("visitors_
             $user->setFirstname($_POST["firstname"]);
             $user->setEmail($_POST["email"]);
             $user->setPassword($_POST["password"]);
-            $user->setPrimaryGroupId(Settings::get("default_acl_group") ? Settings::get("default_acl_group") : null );
+            $user->setPrimaryGroupId(Settings::get("default_acl_group") ? Settings::get("default_acl_group") : null);
             $user->save();
 
             do_event("after_user_registration");
@@ -38,28 +38,23 @@ if (Settings::get("visitors_can_register") == "off" || !Settings::get("visitors_
             }
             echo "<p><a href='$go'>" . get_translation("continue_here") . "</a></p>";
         }
-    }
-    ?>
+    } ?>
     <?php
-    do_event("before_register_form_title");
-    ?>
+    do_event("before_register_form_title"); ?>
     <p>
         <a href="./" class="btn btn-default btn-back is-not-ajax">
             <i class="fa fa-arrow-left"></i>
             <?php
-            translate("back_to_login");
-            ?></a>
+            translate("back_to_login"); ?></a>
     </p>
     <h1>
         <?php translate("registration"); ?>
     </h1>
     <?php
-    do_event("before_register_form");
-    ?>
+    do_event("before_register_form"); ?>
     <form action="index.php?register=register" method="post">
         <?php
-        csrf_token_html();
-        ?>
+        csrf_token_html(); ?>
         <input type="hidden" name="register_user" value="add_admin">
         <?php
         if (!empty($_REQUEST["go"])) {
@@ -67,8 +62,7 @@ if (Settings::get("visitors_can_register") == "off" || !Settings::get("visitors_
             <input type="hidden" name="go"
                    value='<?php esc($_REQUEST["go"]) ?>'>
                    <?php
-               }
-               ?>
+        } ?>
         <div class="field">
             <strong class="field-label">
                 <?php translate("username"); ?>
@@ -116,8 +110,7 @@ if (Settings::get("visitors_can_register") == "off" || !Settings::get("visitors_
         <?php do_event("register_form_field"); ?>
         <div class="privacy-checkbox field">
             <?php
-            echo $checkbox->render();
-            ?>
+            echo $checkbox->render(); ?>
         </div>
         <p class="voffset2">
             <button type="submit" class="btn btn-primary">

@@ -1,12 +1,14 @@
 <?php
 
-class DateTimeFieldTest extends \PHPUnit\Framework\TestCase {
-
-    protected function setUp(): void {
+class DateTimeFieldTest extends \PHPUnit\Framework\TestCase
+{
+    protected function setUp(): void
+    {
         include_once getLanguageFilePath("en");
     }
 
-    public function testRender() {
+    public function testRender()
+    {
         $field = new DatetimeField();
         $field->name = "my_field";
         $field->title = "date";
@@ -17,5 +19,4 @@ class DateTimeFieldTest extends \PHPUnit\Framework\TestCase {
         $expected = file_get_contents($expectedFile);
         $this->assertEquals(normalizeLN($expected), normalizeLN($rendered));
     }
-
 }

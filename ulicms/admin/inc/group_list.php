@@ -57,12 +57,10 @@ if (count($groups) > 0) {
                                 } else {
                                     ?> <a
                                         href="?action=groups&standard=<?php
-                                        echo $id;
-                                        ?>"><span style="color: red; font-weight: bold;"
+                                        echo $id; ?>"><span style="color: red; font-weight: bold;"
                                             onclick='return confirm("<?php
-                                            echo str_ireplace("%name%", $name, get_translation("make_group_default"));
-                                            ?>")'><?php translate("no"); ?> </span> </a> <?php
-                                    }
+                                            echo str_ireplace("%name%", $name, get_translation("make_group_default")); ?>")'><?php translate("no"); ?> </span> </a> <?php
+                                }
                                     ?>
                             </td>
                             <td><a
@@ -97,8 +95,7 @@ if (count($groups) > 0) {
 
 
                     <?php
-                }
-                ?>
+                } ?>
 
             </tbody>
         </table>

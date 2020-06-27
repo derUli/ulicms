@@ -8,12 +8,13 @@ use Template;
 use UliCMS\Utils\CacheUtil;
 
 // this class renders a content as csv
-class CsvRenderer {
-
+class CsvRenderer
+{
     public $content = null;
     public $title = null;
 
-    protected function renderContent() {
+    protected function renderContent()
+    {
         $this->title = get_title();
         ob_start();
 
@@ -34,7 +35,8 @@ class CsvRenderer {
     
 
     // get data nested array for csv lines
-    private function getData(): array {
+    private function getData(): array
+    {
         $data = [];
         $data[] = [
             "Title",
@@ -52,7 +54,8 @@ class CsvRenderer {
         return $data;
     }
 
-    public function render(): string {
+    public function render(): string
+    {
         $cacheUid = CacheUtil::getCurrentUid();
         $adapter = CacheUtil::getAdapter();
         
@@ -66,12 +69,11 @@ class CsvRenderer {
         $data = $this->getData();
 
         $csv_string = getCSV($data[0]);
-        $csv_string .= getCSV($data[1]);       
+        $csv_string .= getCSV($data[1]);
 
         if ($adapter) {
             $adapter->set($cacheUid, $csv_string);
         }
         return trim($csv_string);
     }
-
 }

@@ -1,66 +1,67 @@
 <?php
 
-class ImagePageTest extends \PHPUnit\Framework\TestCase {
+class ImagePageTest extends \PHPUnit\Framework\TestCase
+{
+    protected function tearDown(): void
+    {
+        Database::deleteFrom("content", "slug like 'unit_test_%'");
+    }
 
-	protected function tearDown(): void {
-		Database::deleteFrom("content", "slug like 'unit_test_%'");
-	}
+    public function testCreateUpdateAndDeleteLink()
+    {
+        $imagePage = new Image_Page();
+        $imagePage->title = "Unit Test Link";
+        $imagePage->slug = "unit_test_" . uniqid();
+        $imagePage->menu = "none";
+        $imagePage->language = "de";
+        $imagePage->author_id = 1;
+        $imagePage->group_id = 1;
+        $imagePage->image_url = "foo.jpg";
+        $imagePage->save();
 
-	public function testCreateUpdateAndDeleteLink() {
+        $id = $imagePage->getID();
 
-		$imagePage = new Image_Page();
-		$imagePage->title = "Unit Test Link";
-		$imagePage->slug = "unit_test_" . uniqid();
-		$imagePage->menu = "none";
-		$imagePage->language = "de";
-		$imagePage->author_id = 1;
-		$imagePage->group_id = 1;
-		$imagePage->image_url = "foo.jpg";
-		$imagePage->save();
+        $loadedImagePage = new Image_Page($id);
 
-		$id = $imagePage->getID();
+        $this->assertIsNumeric($loadedImagePage->getID());
+        $this->assertEquals("Unit Test Link", $loadedImagePage->title);
+        $this->assertStringStartsWith("unit_test_", $loadedImagePage->slug);
+        $this->assertEquals("none", $loadedImagePage->menu);
+        $this->assertEquals("de", $loadedImagePage->language);
+        $this->assertEquals(
+            "foo.jpg",
+            $loadedImagePage->image_url
+        );
 
-		$loadedImagePage = new Image_Page($id);
+        $this->assertEquals("image", $loadedImagePage->type);
 
-		$this->assertIsNumeric($loadedImagePage->getID());
-		$this->assertEquals("Unit Test Link", $loadedImagePage->title);
-		$this->assertStringStartsWith("unit_test_", $loadedImagePage->slug);
-		$this->assertEquals("none", $loadedImagePage->menu);
-		$this->assertEquals("de", $loadedImagePage->language);
-		$this->assertEquals(
-				"foo.jpg",
-				$loadedImagePage->image_url
-		);
+        $loadedImagePage->title = "Unit Test Updated Link";
+        $loadedImagePage->image_url = "cats.png";
+        $loadedImagePage->save();
 
-		$this->assertEquals("image", $loadedImagePage->type);
+        $loadedImagePage = new Image_Page($id);
 
-		$loadedImagePage->title = "Unit Test Updated Link";
-		$loadedImagePage->image_url = "cats.png";
-		$loadedImagePage->save();
+        $this->assertEquals("Unit Test Updated Link", $loadedImagePage->title);
+        $this->assertEquals("cats.png", $loadedImagePage->image_url);
+    }
 
-		$loadedImagePage = new Image_Page($id);
+    public function testUpdateCreatesDataset()
+    {
+        $imagePage = new Image_Page();
+        $imagePage->title = "Unit Test Link";
+        $imagePage->slug = "unit_test_" . uniqid();
+        $imagePage->menu = "none";
+        $imagePage->language = "de";
+        $imagePage->author_id = 1;
+        $imagePage->group_id = 1;
+        $imagePage->image_url = "foo.jpg";
 
-		$this->assertEquals("Unit Test Updated Link", $loadedImagePage->title);
-		$this->assertEquals("cats.png", $loadedImagePage->image_url);
-	}
+        $this->assertNull($imagePage->getID());
+        $this->assertFalse($imagePage->isPersistent());
 
-	public function testUpdateCreatesDataset() {
-		$imagePage = new Image_Page();
-		$imagePage->title = "Unit Test Link";
-		$imagePage->slug = "unit_test_" . uniqid();
-		$imagePage->menu = "none";
-		$imagePage->language = "de";
-		$imagePage->author_id = 1;
-		$imagePage->group_id = 1;
-		$imagePage->image_url = "foo.jpg";
+        $imagePage->update();
 
-		$this->assertNull($imagePage->getID());
-		$this->assertFalse($imagePage->isPersistent());
-
-		$imagePage->update();
-
-		$this->assertTrue($imagePage->isPersistent());
-		$this->assertIsNumeric($imagePage->getID());
-	}
-
+        $this->assertTrue($imagePage->isPersistent());
+        $this->assertIsNumeric($imagePage->getID());
+    }
 }

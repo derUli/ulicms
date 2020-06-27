@@ -43,20 +43,21 @@ $notSelectedButton = "btn btn-default"
     <?php foreach ($icons as $action => $cssClass) { ?>
         <div class="btn-group" role="group">
             <a href="<?php echo ModuleHelper::buildActionURL($action); ?>"
-               class="<?php 
+               class="<?php
                echo $action == $currentAction ?
                        $selectedButton : $notSelectedButton;
                ?> is-not-ajax">
                 <i class="<?php echo $cssClass ?>"></i>
                 <span class="hide-on-820">
                     <?php
-                    (isset($specialLabels[$action]) ?
+                    (
+                   isset($specialLabels[$action]) ?
                                     esc(
-                                            $specialLabels[$action]
+                                        $specialLabels[$action]
                                     ) : translate(
-                                            $action
+                                        $action
                                     )
-                            );
+               );
                     ?></span>
             </a>
         </div>

@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-class UliCMSVersion {
-
-    function __construct() {
+class UliCMSVersion
+{
+    public function __construct()
+    {
         $this->codename = "Climbing Sloth";
         $this->releaseYear = 2020;
         $this->buildDate = 0; // {InsertBuildDate}
@@ -17,33 +18,38 @@ class UliCMSVersion {
         $this->update = "";
     }
 
-    public function getReleaseYear(): string {
+    public function getReleaseYear(): string
+    {
         return strval($this->releaseYear);
     }
 
     //  returns the codename of this UliCMS release
-    public function getCodeName(): string {
+    public function getCodeName(): string
+    {
         return $this->codename;
     }
 
     // returns the version number
-    public function getInternalVersion(): array {
+    public function getInternalVersion(): array
+    {
         return $this->internalVersion;
     }
 
     // Returns the full version number as string
-    public function getInternalVersionAsString(): string {
+    public function getInternalVersionAsString(): string
+    {
         return implode(".", $this->internalVersion);
     }
 
-    public function getBuildTimestamp(): int {
+    public function getBuildTimestamp(): int
+    {
         return $this->buildDate;
     }
 
-    public function getBuildDate(): string {
+    public function getBuildDate(): string
+    {
         return strftime("%x %X", $this->getBuildTimestamp());
     }
-
 }
 
 // For backwards compatiblity

@@ -53,6 +53,8 @@
    "require-dev": {
       "spatie/phpunit-snapshot-assertions": "^4.2",
       "phpunit/phpunit": "^9.0",
-      "mpdf/mpdf": "^8.0"
+      "mpdf/mpdf": "^8.0",
+      "friendsofphp/php-cs-fixer": "^2.16",
+      "overtrue/phplint": "^2.0"
    }
 }

@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-class UrlField extends CustomField {
-
-    public function render($value = null): string {
+class UrlField extends CustomField
+{
+    public function render($value = null): string
+    {
         ViewBag::set("field", $this);
         ViewBag::set("field_value", $value);
         ViewBag::set("field_name", !is_null($this->contentType) ?
@@ -12,5 +13,4 @@ class UrlField extends CustomField {
 
         return Template::executeDefaultOrOwnTemplate("fields/url.php");
     }
-
 }

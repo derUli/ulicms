@@ -1,49 +1,63 @@
 <?php
 
-class ActionRegistryTest extends \PHPUnit\Framework\TestCase {
-
-    protected function setUp(): void {
+class ActionRegistryTest extends \PHPUnit\Framework\TestCase
+{
+    protected function setUp(): void
+    {
         ActionRegistry::loadModuleActions();
     }
 
-    protected function tearDown(): void {
+    protected function tearDown(): void
+    {
         BackendHelper::setAction("home");
     }
 
-    public function testGetDefaultCoreActions() {
+    public function testGetDefaultCoreActions()
+    {
         $this->assertArrayHasKey("module_settings", ActionRegistry::getDefaultCoreActions());
     }
 
-    public function testGetActionPermission() {
+    public function testGetActionPermission()
+    {
         $this->assertEquals("community_settings", ActionRegistry::getActionPermission("community_settings"));
 
         $this->assertNull(ActionRegistry::getActionPermission("my_magic_action"));
     }
 
-    public function testGetControllerReturnsControllerName() {
+    public function testGetControllerReturnsControllerName()
+    {
         BackendHelper::setAction("videos");
-        $this->assertInstanceOf(VideoController::class,
-                ActionRegistry::getController());
+        $this->assertInstanceOf(
+            VideoController::class,
+            ActionRegistry::getController()
+        );
 
         BackendHelper::setAction("home");
-        $this->assertInstanceOf(HomeController::class,
-                ActionRegistry::getController());
+        $this->assertInstanceOf(
+            HomeController::class,
+            ActionRegistry::getController()
+        );
     }
 
-    public function testGetControllerReturnsNull() {
+    public function testGetControllerReturnsNull()
+    {
         BackendHelper::setAction("my_little_pony");
         $this->assertNull(ActionRegistry::getController());
     }
 
-    public function testGetControllerByCurrentActionReturnsController() {
-        ActionRegistry::assignControllerToAction("foobar",
-                HistoryController::class);
+    public function testGetControllerByCurrentActionReturnsController()
+    {
+        ActionRegistry::assignControllerToAction(
+            "foobar",
+            HistoryController::class
+        );
 
         BackendHelper::setAction("foobar");
         $this->assertInstanceOf(HistoryController::class, ActionRegistry::getController());
     }
 
-    public function testGetActions() {
+    public function testGetActions()
+    {
         $actions = ActionRegistry::getActions();
         $this->assertGreaterThanOrEqual(60, count($actions));
         $this->assertStringEndsWith("content/modules/core_content/templates/contents.php", $actions["contents"]);
@@ -53,10 +67,10 @@ class ActionRegistryTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetAction() {
+    public function testGetAction()
+    {
         $file = ActionRegistry::getAction("comments_manage");
         $this->assertStringEndsWith("content/modules/core_comments/templates/admin.php", $file);
         $this->assertFileExists($file);
     }
-
 }

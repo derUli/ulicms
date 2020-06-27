@@ -1,9 +1,10 @@
 <?php
 
-class SelectFieldTest extends \PHPUnit\Framework\TestCase {
-
-    public function testRenderSingleSelectField() {
-        $field = new SelectField ();
+class SelectFieldTest extends \PHPUnit\Framework\TestCase
+{
+    public function testRenderSingleSelectField()
+    {
+        $field = new SelectField();
         $field->name = "zip_codes";
         $field->title = "zip_codes";
         $field->helpText = "hold_ctrl_to_select_multiple";
@@ -12,18 +13,20 @@ class SelectFieldTest extends \PHPUnit\Framework\TestCase {
         $html = $field->render();
 
         $expected = file_get_contents(
-                Path::resolve("ULICMS_ROOT/tests/fixtures/custom_field_types/select_field.expected.txt"
+            Path::resolve(
+                    "ULICMS_ROOT/tests/fixtures/custom_field_types/select_field.expected.txt"
                 )
         );
 
         $this->assertEquals(
-                normalizeLN($expected),
-                normalizeLN($html)
+            normalizeLN($expected),
+            normalizeLN($html)
         );
     }
 
-    public function testRenderMultiSelectField() {
-        $field = new MultiSelectField ();
+    public function testRenderMultiSelectField()
+    {
+        $field = new MultiSelectField();
         $field->name = "zip_codes";
         $field->title = "zip_codes";
         $field->helpText = "hold_ctrl_to_select_multiple";
@@ -32,18 +35,19 @@ class SelectFieldTest extends \PHPUnit\Framework\TestCase {
         $html = $field->render();
 
         $expected = file_get_contents(
-                Path::resolve(
-                        "ULICMS_ROOT/tests/fixtures/custom_field_types/multi_select_field.expected.txt"
+            Path::resolve(
+                    "ULICMS_ROOT/tests/fixtures/custom_field_types/multi_select_field.expected.txt"
                 )
         );
 
         $this->assertEquals(
-                normalizeLN($expected),
-                normalizeLN($html)
+            normalizeLN($expected),
+            normalizeLN($html)
         );
     }
 
-    private function getOptions(): array {
+    private function getOptions(): array
+    {
         return [
             "38102" => "Braunschweig",
             "38104" => "Gliesmarode",
@@ -52,5 +56,4 @@ class SelectFieldTest extends \PHPUnit\Framework\TestCase {
             "38116" => "Kanzlerfeld"
         ];
     }
-
 }

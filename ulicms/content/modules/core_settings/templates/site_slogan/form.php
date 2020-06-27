@@ -10,8 +10,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
         if (!$site_slogans[$lang]) {
             $site_slogans[$lang] = Settings::get("site_slogan");
         }
-    }
-    ?><p>
+    } ?><p>
         <a href="<?php echo ModuleHelper::buildActionURL("settings_simple"); ?>"
            class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
     </p>
@@ -21,13 +20,11 @@ if ($permissionChecker->hasPermission("settings_simple")) {
     <?php
     echo ModuleHelper::buildMethodCallForm("SiteSloganController", "save", [], "post", array(
         "id" => "site_slogan_settings"
-    ));
-    ?>
+    )); ?>
     <table>
         <tr>
             <td style="min-width: 100px;"><strong><?php
-                    translate("language");
-                    ?>
+                    translate("language"); ?>
                 </strong></td>
             <td>
                 <strong><?php translate("site_slogan"); ?></strong>
@@ -35,29 +32,24 @@ if ($permissionChecker->hasPermission("settings_simple")) {
         </tr>
         <?php
         for ($n = 0; $n < count($languages); $n ++) {
-            $lang = $languages[$n];
-            ?>
+            $lang = $languages[$n]; ?>
             <tr>
                 <td><?php
-                    esc(getLanguageNameByCode($lang));
-                    ?></td>
+                    esc(getLanguageNameByCode($lang)); ?></td>
                 <td><input
                         name="site_slogan_<?php
-                        esc($lang);
-                        ?>"
+                        esc($lang); ?>"
                         value="<?php
-                        esc($site_slogans[$lang]);
-                        ?>"></td>
+                        esc($site_slogans[$lang]); ?>"></td>
                     <?php
-                }
-                ?>
+        } ?>
         </tr>
         <tr>
             <td></td>
             <td class="text-center">
                 <button type="submit" name="submit" class="btn btn-primary">
                     <i class="fa fa-save"></i> 
-                    <?php translate("save_changes");?>
+                    <?php translate("save_changes"); ?>
                 </button>
             </td>
         </tr>
@@ -77,5 +69,5 @@ if ($permissionChecker->hasPermission("settings_simple")) {
     </script>
     <?php
 } else {
-    noPerms();
-}
+            noPerms();
+        }
