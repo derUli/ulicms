@@ -1,5 +1,4 @@
 <?php
-
 require_once dirname(__file__) . "/classes/exceptions/load.php";
 
 use UliCMS\Exceptions\AccessDeniedException;
