@@ -80,8 +80,8 @@ if ($permissionChecker->hasPermission("pages")) {
                         </td>
                         <td class="no-sort text-center"><?php
                             translate(
-                        $controller->_getPagesListView() === "default" ? "delete" : "restore"
-                    ); ?>
+            $controller->_getPagesListView() === "default" ? "delete" : "restore"
+        ); ?>
                         </td>
                     </tr>
                 </thead>
@@ -93,11 +93,11 @@ if ($permissionChecker->hasPermission("pages")) {
 
     <?php
     enqueueScriptFile(
-                                ModuleHelper::buildRessourcePath(
-                                "core_content",
-                                "js/pages/list.js"
-                            )
-                            );
+                        ModuleHelper::buildRessourcePath(
+                                    "core_content",
+                                    "js/pages/list.js"
+                                )
+                    );
     combinedScriptHtml();
     $translation = new JSTranslation();
     $translation->addKey("ask_for_delete");

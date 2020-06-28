@@ -56,16 +56,16 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(
             "content/modules/my_module/js/coolscript.js",
             ModuleHelper::buildModuleRessourcePath(
-                    "my_module",
-                    "js/coolscript.js"
-                )
+                "my_module",
+                "js/coolscript.js"
+            )
         );
         $this->assertEquals(
             "content/modules/other_module/test.css",
             ModuleHelper::buildModuleRessourcePath(
-                    "other_module",
-                    "test.css"
-                )
+                "other_module",
+                "test.css"
+            )
         );
     }
 
@@ -74,9 +74,9 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(
             "?action=module_settings&module=my_module&var1=hallo&var2=welt",
             ModuleHelper::buildAdminURL(
-                    "my_module",
-                    "var1=hallo&var2=welt"
-                )
+                "my_module",
+                "var1=hallo&var2=welt"
+            )
         );
         $this->assertEquals(
             "?action=module_settings&module=other_module",

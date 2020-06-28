@@ -61,9 +61,9 @@ class FaviconController extends Controller
             } else {
                 Request::redirect(
                     ModuleHelper::buildActionURL(
-                            "favicon",
-                            "error=UPLOAD_WRONG_FILE_FORMAT"
-                        )
+                        "favicon",
+                        "error=UPLOAD_WRONG_FILE_FORMAT"
+                    )
                 );
             }
         }

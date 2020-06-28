@@ -6,8 +6,7 @@ function getTemplateDirPath(
     string $sub = "default",
     bool $abspath = false
 ):
- string
-{
+ string {
     if ($abspath) {
         $templateDir = Path::resolve(
             "ULICMS_DATA_STORAGE_ROOT/content/templates/"

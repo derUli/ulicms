@@ -32,8 +32,7 @@ class UserManager
     public function getLockedUsers(
         bool $locked = true,
         string $order = "id"
-    ): array
-    {
+    ): array {
         $users = [];
         $sql = "select id from {prefix}users where `locked` = ? "
                 . "order by $order";

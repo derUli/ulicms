@@ -16,8 +16,7 @@ class Button
         string $type = ButtonType::BUTTON_SUBMIT,
         array $htmlAttributes = [],
         bool $allowHtml = false
-    ): string
-    {
+    ): string {
         if (!$allowHtml) {
             $text = _esc($text);
         }
@@ -38,8 +37,7 @@ class Button
         string $type = ButtonType::BUTTON_SUBMIT,
         array $htmlAttributes = [],
         bool $allowHtml = false
-    ): string
-    {
+    ): string {
         if (!isset($htmlAttributes["class"])) {
             $htmlAttributes["class"] = ButtonType::TYPE_DEFAULT;
         }
@@ -52,8 +50,7 @@ class Button
         string $type = ButtonType::BUTTON_SUBMIT,
         array $htmlAttributes = [],
         bool $allowHtml = false
-    ): string
-    {
+    ): string {
         if (!isset($htmlAttributes["class"])) {
             $htmlAttributes["class"] = ButtonType::TYPE_PRIMARY;
         }
@@ -66,8 +63,7 @@ class Button
         string $type = ButtonType::BUTTON_SUBMIT,
         array $htmlAttributes = [],
         bool $allowHtml = false
-    )
-    {
+    ) {
         if (!isset($htmlAttributes["class"])) {
             $htmlAttributes["class"] = ButtonType::TYPE_SUCCESS;
         }
@@ -80,8 +76,7 @@ class Button
         string $type = ButtonType::BUTTON_SUBMIT,
         array $htmlAttributes = [],
         bool $allowHtml = false
-    ): string
-    {
+    ): string {
         if (!isset($htmlAttributes["class"])) {
             $htmlAttributes["class"] = ButtonType::TYPE_INFO;
         }
@@ -94,8 +89,7 @@ class Button
         string $type = ButtonType::BUTTON_SUBMIT,
         array $htmlAttributes = [],
         bool $allowHtml = false
-    ): string
-    {
+    ): string {
         if (!isset($htmlAttributes["class"])) {
             $htmlAttributes["class"] = ButtonType::TYPE_WARNING;
         }
@@ -108,8 +102,7 @@ class Button
         string $type = ButtonType::BUTTON_SUBMIT,
         array $htmlAttributes = [],
         bool $allowHtml = false
-    ): string
-    {
+    ): string {
         if (!isset($htmlAttributes["class"])) {
             $htmlAttributes["class"] = ButtonType::TYPE_DANGER;
         }
@@ -122,8 +115,7 @@ class Button
         string $type = ButtonType::BUTTON_SUBMIT,
         array $htmlAttributes = [],
         bool $allowHtml = false
-    ): string
-    {
+    ): string {
         if (!isset($htmlAttributes["class"])) {
             $htmlAttributes["class"] = ButtonType::TYPE_LINK;
         }

@@ -121,14 +121,14 @@ class HtmlFunctionsTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(
             '<a data-hello="world" class="btn btn-info awesome-button" href="https://www.google.de"><i class="fa fa fa-google"></i></a>',
             buttonLink(
-                    "https://www.google.de",
-                    icon("fa fa fa-google"),
-                    ButtonType::TYPE_INFO,
-                    true,
-                    null,
-                    array("data-hello" => "world",
+                "https://www.google.de",
+                icon("fa fa fa-google"),
+                ButtonType::TYPE_INFO,
+                true,
+                null,
+                array("data-hello" => "world",
                             "class" => "awesome-button")
-                )
+            )
         );
     }
 

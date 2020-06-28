@@ -11,8 +11,7 @@ class AntiSpamHelper extends Helper
     public static function isCountryBlocked(
         ?string $ip = null,
         ?array $country_blacklist = null
-    ): bool
-    {
+    ): bool {
         if (is_null($ip)) {
             $ip = get_ip();
         }

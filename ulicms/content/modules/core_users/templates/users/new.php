@@ -159,9 +159,9 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
     $translation->render();
     enqueueScriptFile(
         ModuleHelper::buildRessourcePath(
-                "core_users",
-                "js/users.js"
-            )
+            "core_users",
+            "js/users.js"
+        )
     );
     enqueueScriptFile("../node_modules/password-strength-meter/dist/password.min.js");
     combinedScriptHtml();

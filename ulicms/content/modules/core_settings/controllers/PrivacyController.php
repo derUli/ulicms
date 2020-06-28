@@ -46,9 +46,9 @@ class PrivacyController extends Controller
         Settings::set(
             $varName,
             Request::getVar(
-                    "privacy_policy_checkbox_text",
-                    ""
-                )
+                "privacy_policy_checkbox_text",
+                ""
+            )
         );
 
         CacheUtil::clearPageCache();

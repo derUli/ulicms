@@ -106,8 +106,7 @@ function ulicms_mail(
     string $subject,
     string $message,
     ?string $headers = ""
-): bool
-{
+): bool {
     return Mailer::send($to, $subject, $message, $headers);
 }
 

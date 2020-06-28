@@ -142,10 +142,10 @@ Noch mehr Text <a href="http://www.ulicms.de" rel="nofollow" target="_blank">htt
         $this->assertEquals(
             "Lorem Ipsum...",
             StringHelper::getExcerpt(
-                    "Lorem Ipsum sit dor amet usw.",
-                    0,
-                    16
-                )
+                "Lorem Ipsum sit dor amet usw.",
+                0,
+                16
+            )
         );
     }
 
@@ -154,10 +154,10 @@ Noch mehr Text <a href="http://www.ulicms.de" rel="nofollow" target="_blank">htt
         $this->assertEquals(
             "Lorem Ipsum sit dor amet usw.",
             StringHelper::getExcerpt(
-                    "Lorem Ipsum sit dor amet usw.",
-                    0,
-                    100
-                )
+                "Lorem Ipsum sit dor amet usw.",
+                0,
+                100
+            )
         );
     }
 

@@ -113,8 +113,8 @@ class AdminMenuTest extends \PHPUnit\Framework\TestCase
     {
         $inputExpected = file_get_contents(
             Path::resolve(
-                    "ULICMS_ROOT/tests/fixtures/menu/admin_menu/render_as_admin.html"
-                )
+                "ULICMS_ROOT/tests/fixtures/menu/admin_menu/render_as_admin.html"
+            )
         );
         $menu = new AdminMenu($this->getMenuEntries());
 
@@ -126,8 +126,8 @@ class AdminMenuTest extends \PHPUnit\Framework\TestCase
     {
         $inputExpected = file_get_contents(
             Path::resolve(
-                    "ULICMS_ROOT/tests/fixtures/menu/admin_menu/render_as_user.html"
-                )
+                "ULICMS_ROOT/tests/fixtures/menu/admin_menu/render_as_user.html"
+            )
         );
         $menu = new AdminMenu($this->getMenuEntries());
         $this->limitedUser->registerSession(false);

@@ -529,9 +529,9 @@ class Page extends Content
     {
         $errorPage403 = intval(
             Settings::getLanguageSetting(
-            "error_page_403",
-            $this->language
-        )
+                "error_page_403",
+                $this->language
+            )
         );
         return $this->getID() && $this->getID() == $errorPage403;
     }
@@ -541,9 +541,9 @@ class Page extends Content
     {
         $errorPage404 = intval(
             Settings::getLanguageSetting(
-                    "error_page_404",
-                    $this->language
-                )
+                "error_page_404",
+                $this->language
+            )
         );
         return $this->getID() && $this->getID() == $errorPage404;
     }

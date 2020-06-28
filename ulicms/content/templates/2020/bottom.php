@@ -1,14 +1,14 @@
 <?php
 enqueueScriptFile(
     getTemplateDirPath(
-            get_theme()
-        ) .
+        get_theme()
+    ) .
         "node_modules/fullpage.js/dist/fullpage.min.js"
 );
 enqueueScriptFile(
     getTemplateDirPath(
-            get_theme()
-        ) .
+        get_theme()
+    ) .
         "js/main.js"
 );
 Template::footer();

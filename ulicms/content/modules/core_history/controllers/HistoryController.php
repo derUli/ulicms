@@ -19,9 +19,9 @@ class HistoryController extends Controller
 
                 Request::redirect(
                     ModuleHelper::buildActionURL(
-                            "pages_edit",
-                            "page=" . $revision->content_id
-                        )
+                        "pages_edit",
+                        "page=" . $revision->content_id
+                    )
                 );
             } else {
                 ExceptionResult(
@@ -31,9 +31,9 @@ class HistoryController extends Controller
         } else {
             ExceptionResult(
                 get_translation(
-                        "UNPROCESSABLE_ENTITY",
-                        HttpStatusCode::UNPROCESSABLE_ENTITY
-                    )
+                    "UNPROCESSABLE_ENTITY",
+                    HttpStatusCode::UNPROCESSABLE_ENTITY
+                )
             );
         }
     }

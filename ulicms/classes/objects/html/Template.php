@@ -507,15 +507,15 @@ color: " . Settings::get("body-text-color") . ";
 
         $errorPage403 = intval(
             Settings::getLanguageSetting(
-                    "error_page_403",
-                    getCurrentLanguage()
-                )
+                "error_page_403",
+                getCurrentLanguage()
+            )
         );
         $errorPage404 = intval(
             Settings::getLanguageSetting(
-                    "error_page_404",
-                    getCurrentLanguage()
-                )
+                "error_page_404",
+                getCurrentLanguage()
+            )
         );
 
         $slug = get_slug();

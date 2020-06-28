@@ -188,11 +188,11 @@ class DesignSettingsController extends Controller
         if ($screenshot) {
             HTMLResult(
                 UliCMS\HTML\imageTag(
-                        $screenshot,
-                        [
+                    $screenshot,
+                    [
                                 "class" => "img-responsive theme-preview"
                             ]
-                    )
+                )
             );
         }
 

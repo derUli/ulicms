@@ -148,9 +148,9 @@ $translation->render();
 
 enqueueScriptFile(
     ModuleHelper::buildRessourcePath(
-            "core_users",
-            "js/list.js"
-        )
+        "core_users",
+        "js/list.js"
+    )
 );
 
 combinedScriptHtml();

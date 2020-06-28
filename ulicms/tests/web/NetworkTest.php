@@ -42,10 +42,10 @@ class NetworkTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertIsBool(
             ulicms_mail(
-                    "nobody@mail.invali",
-                    "My subject",
-                    "Hello World"
-                )
+                "nobody@mail.invali",
+                "My subject",
+                "Hello World"
+            )
         );
     }
 }

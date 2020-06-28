@@ -20,14 +20,14 @@ $frontpagePhoto = file_exists($frontpagePhotoFile) ? UliCMS\HTML\imageTag(
     og_tags();
     enqueueStylesheet(
         getTemplateDirPath(
-                get_theme()
-            ) .
+            get_theme()
+        ) .
             "node_modules/fullpage.js/dist/fullpage.min.css"
     );
     enqueueStylesheet(
         getTemplateDirPath(
-                get_theme()
-            ) .
+            get_theme()
+        ) .
             "css/main.scss"
     );
     combinedStylesheetHtml();

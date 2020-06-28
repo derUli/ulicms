@@ -57,11 +57,11 @@ function getBaseFolderURL(?string $suffix = null): string
             str_replace("\\", "/", $suffix) : str_replace("\\", "/", $path);
     return trim(
         rtrim(
-                $protocol . "://"
+            $protocol . "://"
                     . $_SERVER['HTTP_HOST'] . $port
                     .
                     $suffix
-            ),
+        ),
         "/"
     );
 }

@@ -58,9 +58,9 @@ function oneclick_upgrade_admin()
     <?php
     enqueueScriptFile(
                         ModuleHelper::buildRessourcePath(
-                "oneclick_upgrade",
-                "js/settings.js"
-            )
+                            "oneclick_upgrade",
+                            "js/settings.js"
+                        )
                     );
     combinedScriptHtml();
 }

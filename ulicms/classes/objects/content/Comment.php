@@ -264,8 +264,7 @@ VALUES      ( ?,
     public static function getAllByContentId(
         int $content_id,
         string $order_by = "date desc"
-    ): array
-    {
+    ): array {
         return self::getAllDatasets(
             self::TABLE_NAME,
             self::class,
@@ -278,8 +277,7 @@ VALUES      ( ?,
         string $status,
         ?int $content_id = null,
         string $order = "date desc"
-    ): array
-    {
+    ): array {
         $where = "status = '" . Database::escapeValue($status) . "'";
         if ($content_id) {
             $where .= " and content_id = " . intval($content_id);
@@ -354,8 +352,7 @@ VALUES      ( ?,
     public static function checkIfCommentWithIpExists(
         ?string $ip,
         string $status = CommentStatus::SPAM
-    ): bool
-    {
+    ): bool {
         $sql = "select ip from {prefix}comments where ip = ?";
         $args = array(
             strval($ip)

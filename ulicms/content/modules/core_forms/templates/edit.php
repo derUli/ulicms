@@ -91,8 +91,8 @@ if (!$permissionChecker->hasPermission("forms") || !$permissionChecker->hasPermi
             </strong>
             <textarea class="form-control" name="required_fields" rows="10"><?php
                 esc(
-                    $form["required_fields"]
-                ); ?></textarea>
+            $form["required_fields"]
+        ); ?></textarea>
         </div>
         <div class="field">
             <strong class="field-label">

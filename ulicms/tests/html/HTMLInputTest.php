@@ -55,14 +55,14 @@ class HTMLInputTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(
             '<select name="operating_system" size="1" class="my-class" id="operating_system"><option value="windows">Windows</option><option value="linux">Linux</option><option value="mac">macOS</option></select>',
             Input::singleSelect(
-                    "operating_system",
-                    null,
-                    $options,
-                    1,
-                    [
+                "operating_system",
+                null,
+                $options,
+                1,
+                [
                             "class" => "my-class"
                         ]
-                )
+            )
         );
     }
 
@@ -96,17 +96,17 @@ class HTMLInputTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(
             '<select name="operating_system" size="4" class="foo" multiple><option value="windows" selected>Windows</option><option value="linux">Linux</option><option value="mac" selected>macOS</option></select>',
             Input::multiSelect(
-                    "operating_system",
-                    [
+                "operating_system",
+                [
                             "windows",
                             "mac"
                         ],
-                    $options,
-                    4,
-                    [
+                $options,
+                4,
+                [
                             "class" => "foo"
                         ]
-                )
+            )
         );
     }
 
@@ -120,13 +120,13 @@ class HTMLInputTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(
             '<input type="file" name="my_file" value="" class="foo">',
             Input::file(
-                    "my_file",
-                    false,
-                    null,
-                    [
+                "my_file",
+                false,
+                null,
+                [
                             "class" => "foo"
                         ]
-                )
+            )
         );
     }
 
@@ -160,13 +160,13 @@ class HTMLInputTest extends \PHPUnit\Framework\TestCase
                 'class="ckeditor" data-mimetype="text/html">' .
                 '&lt;strong&gt;bar&lt;/strong</textarea>',
             Input::editor(
-                    "foo",
-                    '<strong>bar</strong',
-                    20,
-                    70,
-                    [
+                "foo",
+                '<strong>bar</strong',
+                20,
+                70,
+                [
                         ]
-                )
+            )
         );
     }
 
@@ -178,14 +178,14 @@ class HTMLInputTest extends \PHPUnit\Framework\TestCase
                 'data-mimetype="text/html">' .
                 '&lt;strong&gt;bar&lt;/strong</textarea>',
             Input::editor(
-                    "foo",
-                    '<strong>bar</strong',
-                    20,
-                    70,
-                    [
+                "foo",
+                '<strong>bar</strong',
+                20,
+                70,
+                [
                             "class" => "foo-class"
                         ]
-                )
+            )
         );
     }
 }

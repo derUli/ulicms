@@ -17,8 +17,7 @@ function resetScriptQueue(): void
 function optimizeHtml(
     string $html,
     int $level = HTMLMinify::OPTIMIZATION_SIMPLE
-): string
-{
+): string {
     if (Database::isConnected() and Settings::get("minify_html")) {
         $options = array(
             'optimizationLevel' => $level

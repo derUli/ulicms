@@ -541,15 +541,15 @@ function get_title(?string $slug = null, bool $headline = false): ?string
 
     $errorPage403 = intval(
         Settings::getLanguageSetting(
-        "error_page_403",
-        getCurrentLanguage()
-    )
+            "error_page_403",
+            getCurrentLanguage()
+        )
     );
     $errorPage404 = intval(
         Settings::getLanguageSetting(
-        "error_page_404",
-        getCurrentLanguage()
-    )
+            "error_page_404",
+            getCurrentLanguage()
+        )
     );
 
     if (is_404()) {
@@ -754,8 +754,8 @@ function buildtree(
             $tree[$row['id']]['children'] = buildtree(
                 $src_arr,
                 intval(
-                        $row['id']
-                    )
+                    $row['id']
+                )
             );
         }
     }

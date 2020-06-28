@@ -44,8 +44,7 @@ function buttonLink(
     bool $allowHtml = false,
     ?string $target = null,
     array $htmlAttributes = []
-): string
-{
+): string {
     if (!isset($htmlAttributes["class"])) {
         $htmlAttributes["class"] = $type;
     } else {
@@ -61,8 +60,7 @@ function link(
     bool $allowHtml = false,
     ?string $target = null,
     array $htmlAttributes = []
-): string
-{
+): string {
     $htmlAttributes["href"] = $url;
     if (is_present($target)) {
         $htmlAttributes["target"] = $target;

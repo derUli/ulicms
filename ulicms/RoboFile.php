@@ -407,8 +407,7 @@ class RoboFile extends Tasks
         string $component,
         string $directory,
         ?string $stop = null
-    ): void
-    {
+    ): void {
         $folder = Path::resolve($directory . "/up");
 
         $migrator = new DBMigrator($component, $folder);

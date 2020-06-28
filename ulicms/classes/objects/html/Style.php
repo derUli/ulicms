@@ -15,8 +15,7 @@ class Style
         string $href,
         ?string $media = null,
         array $htmlAttributes = []
-    ): string
-    {
+    ): string {
         $attributes = array(
             "rel" => "stylesheet",
             "href" => $href,
@@ -40,8 +39,7 @@ class Style
         ?string $code,
         ?string $media = null,
         array $htmlAttributes = []
-    ): string
-    {
+    ): string {
         $attributes = array(
             "type" => "text/css"
         );

@@ -12,8 +12,8 @@ class CoreMediaControllerTest extends \PHPUnit\Framework\TestCase
         $actual = $controller->_replaceLinks($input);
         $expected = file_get_contents(
             Path::resolve(
-                    "ULICMS_ROOT/tests/fixtures/embed-media.expected.txt"
-                )
+                "ULICMS_ROOT/tests/fixtures/embed-media.expected.txt"
+            )
         );
         $this->assertEquals(normalizeLN($actual), normalizeLN($expected));
     }
@@ -26,8 +26,8 @@ class CoreMediaControllerTest extends \PHPUnit\Framework\TestCase
         $actual = $controller->beforeContentFilter($input);
         $expected = file_get_contents(
             Path::resolve(
-                    "ULICMS_ROOT/tests/fixtures/embed-media.expected.txt"
-                )
+                "ULICMS_ROOT/tests/fixtures/embed-media.expected.txt"
+            )
         );
         $this->assertEquals(normalizeLN($actual), normalizeLN($expected));
     }

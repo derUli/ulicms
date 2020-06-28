@@ -18,8 +18,7 @@ class Form
         array $otherVars = [],
         string $requestMethod = RequestMethod::POST,
         array $htmlAttributes = []
-    ): string
-    {
+    ): string {
         $html = "";
         $attribhtml = StringHelper::isNotNullOrWhitespace(
             ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes)
@@ -53,8 +52,7 @@ class Form
         array $otherVars = [],
         array $formAttributes = [],
         string $requestMethod = RequestMethod::POST
-    ): string
-    {
+    ): string {
         $html = ModuleHelper::buildMethodCallForm(
             $sClass,
             $sMethod,
@@ -76,8 +74,7 @@ class Form
         string $url,
         array $otherVars = [],
         array $htmlAttributes = []
-    )
-    {
+    ) {
         $html = "";
 
         if (!isset($htmlAttributes["class"])) {

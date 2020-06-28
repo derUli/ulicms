@@ -70,8 +70,8 @@ class RoboModulesTest extends RoboBaseTest
     {
         $expected = file_get_contents(
             Path::resolve(
-                    "ULICMS_ROOT/tests/fixtures/robo/modulesGetPackageVersions.expected.txt"
-                )
+                "ULICMS_ROOT/tests/fixtures/robo/modulesGetPackageVersions.expected.txt"
+            )
         );
 
         $actual = $this->runRoboCommand(

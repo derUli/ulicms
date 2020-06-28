@@ -140,15 +140,15 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         $baseMetas = Template::getBaseMetas();
         $this->assertTrue(
             str_contains(
-                    $baseMetas,
-                    '<meta http-equiv="content-type" content="text/html; charset=utf-8"/>'
-                )
+                $baseMetas,
+                '<meta http-equiv="content-type" content="text/html; charset=utf-8"/>'
+            )
         );
         $this->assertTrue(
             str_contains(
-                    $baseMetas,
-                    '<meta charset="utf-8"/>'
-                )
+                $baseMetas,
+                '<meta charset="utf-8"/>'
+            )
         );
     }
 
@@ -293,9 +293,9 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         $html = Template::_getLanguageSelection();
         $this->assertTrue(
             str_contains(
-                    $html,
-                    "<ul class='language_selection'>",
-                )
+                $html,
+                "<ul class='language_selection'>",
+            )
         );
 
         // By default there should be at least 2 languages
@@ -318,9 +318,9 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         $html = Template::_getLanguageSelection();
         $this->assertTrue(
             str_contains(
-                    $html,
-                    "<ul class='language_selection'>"
-                )
+                $html,
+                "<ul class='language_selection'>"
+            )
         );
 
         // By default there should be at least 2 languages

@@ -538,13 +538,13 @@ class ApiTest extends \PHPUnit\Framework\TestCase
             '<img src="https://example.org/foobar/admin/gfx/no_avatar.png" '
                 . 'class="gravatar" />',
             get_gravatar(
-                    "foo@bar.de",
-                    80,
-                    'mm',
-                    'g',
-                    true,
-                    ["class" => "gravatar"]
-                )
+                "foo@bar.de",
+                80,
+                'mm',
+                'g',
+                true,
+                ["class" => "gravatar"]
+            )
         );
         unset($_SERVER["SERVER_PROTOCOL"]);
         unset($_SERVER['HTTP_HOST']);
@@ -557,13 +557,13 @@ class ApiTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertTrue(
             stringContainsShortCodes(
-            'Foo [module=hello_world] Bar'
-        )
+                'Foo [module=hello_world] Bar'
+            )
         );
         $this->assertTrue(
             stringContainsShortCodes(
-            'Foo [module="hello_world"] Bar'
-        )
+                'Foo [module="hello_world"] Bar'
+            )
         );
     }
 
@@ -571,13 +571,13 @@ class ApiTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertFalse(
             stringContainsShortCodes(
-            '[module=hello_world '
-        )
+                '[module=hello_world '
+            )
         );
         $this->assertFalse(
             stringContainsShortCodes(
-            'nic-code'
-        )
+                'nic-code'
+            )
         );
     }
 
@@ -585,15 +585,15 @@ class ApiTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertTrue(
             stringContainsShortCodes(
-            'Foo [module=hello_world] Bar',
-            'hello_world'
-        )
+                'Foo [module=hello_world] Bar',
+                'hello_world'
+            )
         );
         $this->assertTrue(
             stringContainsShortCodes(
-            'Foo [module="hello_world"] Bar',
-            'hello_world'
-        )
+                'Foo [module="hello_world"] Bar',
+                'hello_world'
+            )
         );
     }
 
@@ -601,15 +601,15 @@ class ApiTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertFalse(
             stringContainsShortCodes(
-            'Foo [module="hello_world"] Bar',
-            'berlin'
-        )
+                'Foo [module="hello_world"] Bar',
+                'berlin'
+            )
         );
         $this->assertFalse(
             stringContainsShortCodes(
-            'Foo [module=hello_world] Bar',
-            'berlin'
-        )
+                'Foo [module=hello_world] Bar',
+                'berlin'
+            )
         );
     }
 
@@ -997,8 +997,8 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         ];
         $expected = file_get_contents(
             Path::resolve(
-                    "ULICMS_ROOT/tests/fixtures/json_readable_encode.txt"
-                )
+                "ULICMS_ROOT/tests/fixtures/json_readable_encode.txt"
+            )
         );
         $output = json_readable_encode($data);
 

@@ -40,10 +40,10 @@ class LogoUploadController extends Controller
         Settings::set(
             "logo_disabled",
             Request::getVar(
-                    "logo_disabled",
-                    "no",
-                    "str"
-                )
+                "logo_disabled",
+                "no",
+                "str"
+            )
         );
 
         CacheUtil::clearPageCache();

@@ -37,11 +37,11 @@ class DefaultContentTypesTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertEquals(
             file_get_contents(
-                    Path::resolve(
-                            "ULICMS_ROOT/tests/fixtures/json" .
+                Path::resolve(
+                        "ULICMS_ROOT/tests/fixtures/json" .
                                 "/defaultContentTypes.json"
-                        )
-                ),
+                    )
+            ),
             DefaultContentTypes::toJSON()
         );
     }

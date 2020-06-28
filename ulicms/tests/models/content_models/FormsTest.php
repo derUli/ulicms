@@ -194,8 +194,8 @@ class FormsTest extends \PHPUnit\Framework\TestCase
             "message",
             "email",
             intval(
-                    $page1->id
-                ),
+                $page1->id
+            ),
             false
         );
         $id1 = Database::getInsertID();

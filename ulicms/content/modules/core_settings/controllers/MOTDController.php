@@ -23,15 +23,15 @@ class MOTDController extends Controller
 
         Request::redirect(
             ModuleHelper::buildActionURL(
-            "motd",
-            ModuleHelper::buildQueryString(
-                            [
+                "motd",
+                ModuleHelper::buildQueryString(
+                [
                                     "save" => "1",
                                     "language" => Request::getVar("language")
                                 ],
-                            false
-                        )
-        )
+                false
+            )
+            )
         );
     }
 }

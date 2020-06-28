@@ -82,8 +82,8 @@ $translation->render();
 
 enqueueScriptFile(
     ModuleHelper::buildRessourcePath(
-            "core_settings",
-            "js/community_settings.js"
-        )
+        "core_settings",
+        "js/community_settings.js"
+    )
 );
 combinedScriptHtml();

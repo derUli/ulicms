@@ -45,8 +45,8 @@ class GroupCollection
     {
         $tags = array_map(
             function ($tag) {
-                    return "<{$tag}>";
-                },
+                return "<{$tag}>";
+            },
             $tags
         );
 

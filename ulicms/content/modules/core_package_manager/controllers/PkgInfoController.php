@@ -12,9 +12,9 @@ class PkgInfoController extends Controller
             $this->_installPost($file);
             Request::redirect(
                 ModuleHelper::buildActionURL(
-                        "sin_package_install_ok",
-                        "file=$file"
-                    )
+                    "sin_package_install_ok",
+                    "file=$file"
+                )
             );
         }
     }

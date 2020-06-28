@@ -96,11 +96,11 @@ class BackendPageRenderer
     {
         $message = nl2br(
             get_secure_translation(
-            "unsupported_browser",
-            [
+                "unsupported_browser",
+                [
                             "%browser%" => $checker->getUnsupportedBrowserName()
                         ]
-        )
+            )
         );
         $message = make_links_clickable($message);
 

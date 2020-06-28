@@ -37,8 +37,8 @@ $translation->render();
 
 enqueueScriptFile(
     ModuleHelper::buildRessourcePath(
-            "core_settings",
-            "js/footer_text.js"
-        )
+        "core_settings",
+        "js/footer_text.js"
+    )
 );
 combinedScriptHtml();

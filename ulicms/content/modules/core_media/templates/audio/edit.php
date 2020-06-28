@@ -53,8 +53,8 @@ if ($permissionChecker->hasPermission("audio")
             <input name="mp3_file" type="text" readonly
                    value="<?php
                    echo _esc(
-                       $dataset->mp3_file
-                   ); ?>">
+            $dataset->mp3_file
+        ); ?>">
              </div>
              <div class="field">
             <strong class="field-label">

@@ -48,9 +48,9 @@ function update_manager_admin()
     <?php
     enqueueScriptFile(
                 ModuleHelper::buildRessourcePath(
-                "update_manager",
-                "scripts/update_manager.js"
-            )
+                    "update_manager",
+                    "scripts/update_manager.js"
+                )
             );
     combinedScriptHtml();
 }

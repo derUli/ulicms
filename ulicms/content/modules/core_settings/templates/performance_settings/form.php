@@ -41,9 +41,9 @@ if (!$permissionChecker->hasPermission("performance_settings")) {
     <a
         href="<?php
         echo ModuleHelper::buildMethodCallUrl(
-                    "PerformanceSettingsController",
-                    "clearCache"
-                ); ?>"
+            "PerformanceSettingsController",
+            "clearCache"
+        ); ?>"
         class="btn btn-warning pull-right">
         <i class="fas fa-broom"></i>
         <?php translate("clear_cache"); ?></a>
@@ -103,9 +103,9 @@ if (!$permissionChecker->hasPermission("performance_settings")) {
 
     enqueueScriptFile(
         ModuleHelper::buildRessourcePath(
-                "core_settings",
-                "js/performance.js"
-            )
+            "core_settings",
+            "js/performance.js"
+        )
     );
     combinedScriptHtml();
 }

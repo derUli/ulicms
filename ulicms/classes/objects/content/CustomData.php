@@ -49,8 +49,7 @@ class CustomData
         ?string $var = null,
         ?string $page = null
     )
-    : void
-    {
+    : void {
         if (!$page) {
             $page = get_slug();
         }

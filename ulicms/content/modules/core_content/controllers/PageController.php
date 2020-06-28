@@ -56,9 +56,9 @@ class PageController extends Controller
         if ($model && $model->isPersistent()) {
             Request::redirect(
                 ModuleHelper::buildActionURL(
-                        "pages_edit",
-                        "page={$model->getID()}"
-                    )
+                    "pages_edit",
+                    "page={$model->getID()}"
+                )
             );
         }
 
@@ -316,10 +316,10 @@ class PageController extends Controller
 
             $list_order_direction = Database::escapeValue(
                 Request::getVar(
-                                "list_order_direction",
-                                "asc",
-                                "str"
-                            )
+                    "list_order_direction",
+                    "asc",
+                    "str"
+                )
             );
 
             $list_use_pagination = Request::getVar("list_use_pagination", 0, "int");
@@ -749,8 +749,8 @@ class PageController extends Controller
         $permissionChecker = new PermissionChecker(get_user_id());
         return array_map(
             function ($lang) {
-                    return $lang->getLanguageCode();
-                },
+                return $lang->getLanguageCode();
+            },
             $permissionChecker->getLanguages()
         );
     }

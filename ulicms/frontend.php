@@ -159,11 +159,11 @@ if ($format == "html") {
 } else {
     ExceptionResult(
         get_secure_translation(
-                "unsupported_output_format",
-                [
+            "unsupported_output_format",
+            [
                         "%format%" => $format
                     ]
-            )
+        )
     );
 }
 

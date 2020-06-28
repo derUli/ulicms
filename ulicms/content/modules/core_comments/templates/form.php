@@ -71,13 +71,13 @@ if (Vars::get("comments_enabled")) {
             <div>
                 <?php
                 echo UliCMS\HTML\Input::textBox(
-                    "author_email",
-                    "",
-                    "email",
-                    [
+            "author_email",
+            "",
+            "email",
+            [
                             "class" => "form-control"
                         ]
-                ); ?>
+        ); ?>
             </div>
         </div>
         <label for="author_url"><?php translate("your_website") ?></label>

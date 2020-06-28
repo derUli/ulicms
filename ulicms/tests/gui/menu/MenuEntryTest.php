@@ -186,8 +186,8 @@ class MenuEntryTest extends \PHPUnit\Framework\TestCase
 
         $inputExpected = file_get_contents(
             Path::resolve(
-                    "ULICMS_ROOT/tests/fixtures/menu/menu_entry/render.html"
-                )
+                "ULICMS_ROOT/tests/fixtures/menu/menu_entry/render.html"
+            )
         );
         $this->assertEquals($inputExpected, $menuEntry->render());
     }
@@ -200,8 +200,8 @@ class MenuEntryTest extends \PHPUnit\Framework\TestCase
 
         $inputExpected = file_get_contents(
             Path::resolve(
-                    "ULICMS_ROOT/tests/fixtures/menu/menu_entry/render_with_new_window.html"
-                )
+                "ULICMS_ROOT/tests/fixtures/menu/menu_entry/render_with_new_window.html"
+            )
         );
         $this->assertEquals($inputExpected, $menuEntry->render());
     }
@@ -215,8 +215,8 @@ class MenuEntryTest extends \PHPUnit\Framework\TestCase
 
         $inputExpected = file_get_contents(
             Path::resolve(
-                    "ULICMS_ROOT/tests/fixtures/menu/menu_entry/render_current_page.html"
-                )
+                "ULICMS_ROOT/tests/fixtures/menu/menu_entry/render_current_page.html"
+            )
         );
         $this->assertEquals($inputExpected, $menuEntry->render());
     }

@@ -17,22 +17,22 @@ class Html5MediaTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(
             "Foo {$audio->render()} Bar",
             replaceAudioTags(
-                    "Foo [audio id={$audio->getId()}] Bar"
-                )
+                "Foo [audio id={$audio->getId()}] Bar"
+            )
         );
 
         $this->assertEquals(
             "Foo {$audio->render()} Bar",
             replaceAudioTags(
-                    "Foo [audio id=\"{$audio->getId()}\"] Bar"
-                )
+                "Foo [audio id=\"{$audio->getId()}\"] Bar"
+            )
         );
 
         $this->assertEquals(
             "Foo {$audio->render()} Bar",
             replaceAudioTags(
-                    "Foo [audio id=&quot;{$audio->getId()}&quot;] Bar"
-                )
+                "Foo [audio id=&quot;{$audio->getId()}&quot;] Bar"
+            )
         );
 
         $audio->delete();
@@ -44,21 +44,21 @@ class Html5MediaTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(
             "Foo [audio id={$intMax}] Bar",
             replaceAudioTags(
-                    "Foo [audio id=$intMax] Bar"
-                )
+                "Foo [audio id=$intMax] Bar"
+            )
         );
 
         $this->assertEquals(
             "Foo [audio id=\"{$intMax}\"] Bar",
             replaceAudioTags(
-                    "Foo [audio id=\"$intMax\"] Bar"
-                )
+                "Foo [audio id=\"$intMax\"] Bar"
+            )
         );
         $this->assertEquals(
             "Foo [audio id=&quot;{$intMax}]&quot; Bar",
             replaceAudioTags(
-                    "Foo [audio id=&quot;$intMax]&quot; Bar"
-                )
+                "Foo [audio id=&quot;$intMax]&quot; Bar"
+            )
         );
     }
 
@@ -67,8 +67,8 @@ class Html5MediaTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(
             "Foo Hello World Bar",
             replaceAudioTags(
-                    "Foo Hello World Bar"
-                )
+                "Foo Hello World Bar"
+            )
         );
     }
 
@@ -87,22 +87,22 @@ class Html5MediaTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(
             "Foo {$video->render()} Bar",
             replaceVideoTags(
-                    "Foo [video id={$video->getId()}] Bar"
-                )
+                "Foo [video id={$video->getId()}] Bar"
+            )
         );
 
         $this->assertEquals(
             "Foo {$video->render()} Bar",
             replaceVideoTags(
-                    "Foo [video id=\"{$video->getId()}\"] Bar"
-                )
+                "Foo [video id=\"{$video->getId()}\"] Bar"
+            )
         );
 
         $this->assertEquals(
             "Foo {$video->render()} Bar",
             replaceVideoTags(
-                    "Foo [video id=&quot;{$video->getId()}&quot;] Bar"
-                )
+                "Foo [video id=&quot;{$video->getId()}&quot;] Bar"
+            )
         );
 
         $video->delete();
@@ -114,21 +114,21 @@ class Html5MediaTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(
             "Foo [video id={$intMax}] Bar",
             replaceVideoTags(
-                    "Foo [video id=$intMax] Bar"
-                )
+                "Foo [video id=$intMax] Bar"
+            )
         );
 
         $this->assertEquals(
             "Foo [video id=\"{$intMax}\"] Bar",
             replaceVideoTags(
-                    "Foo [video id=\"$intMax\"] Bar"
-                )
+                "Foo [video id=\"$intMax\"] Bar"
+            )
         );
         $this->assertEquals(
             "Foo [video id=&quot;{$intMax}]&quot; Bar",
             replaceVideoTags(
-                    "Foo [video id=&quot;$intMax]&quot; Bar"
-                )
+                "Foo [video id=&quot;$intMax]&quot; Bar"
+            )
         );
     }
 
@@ -137,8 +137,8 @@ class Html5MediaTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(
             "Foo Hello World Bar",
             replaceVideoTags(
-                    "Foo Hello World Bar"
-                )
+                "Foo Hello World Bar"
+            )
         );
     }
 }

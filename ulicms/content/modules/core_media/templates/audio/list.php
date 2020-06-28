@@ -132,9 +132,9 @@ if ($permissionChecker->hasPermission("audio")) {
     <?php
     enqueueScriptFile(
                                 ModuleHelper::buildModuleRessourcePath(
-                                "core_media",
-                                "js/audio.js"
-                            )
+                                    "core_media",
+                                    "js/audio.js"
+                                )
                             );
     combinedScriptHtml(); ?>
     <?php

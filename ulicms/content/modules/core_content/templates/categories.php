@@ -222,8 +222,8 @@ if (!$permissionChecker->hasPermission("categories")) {
                     maxlength="255"><?php
                         esc(
                 Categories::getCategoryDescriptionById(
-                                    intval($_GET["edit"])
-                                )
+                    intval($_GET["edit"])
+                )
             ); ?></textarea>
             </div>
             <div class="voffset2">

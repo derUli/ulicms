@@ -232,11 +232,11 @@ class RequestTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertTrue(
             Request::isHeaderSent(
-                    "Content-Type",
-                    [
+                "Content-Type",
+                [
                             "Content-Type: text/plain"
                         ]
-                )
+            )
         );
     }
 

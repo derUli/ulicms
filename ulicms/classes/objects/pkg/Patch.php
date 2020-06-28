@@ -18,8 +18,7 @@ class Patch
         string $description,
         string $url,
         ?string $hash = null
-    )
-    {
+    ) {
         $this->name = $name;
         $this->description = $description;
         $this->url = $url;

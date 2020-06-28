@@ -41,16 +41,16 @@ class HomeControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertGreaterThanOrEqual(
             5,
             substr_count(
-                    $html,
-                    '<a href'
-                )
+                $html,
+                '<a href'
+            )
         );
         $this->assertGreaterThanOrEqual(
             5,
             substr_count(
-                    $html,
-                    'ulicms.de/?single='
-                )
+                $html,
+                'ulicms.de/?single='
+            )
         );
     }
 
@@ -61,9 +61,9 @@ class HomeControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(
             6,
             substr_count(
-                    $html,
-                    '<tr'
-                )
+                $html,
+                '<tr'
+            )
         );
     }
 
@@ -74,9 +74,9 @@ class HomeControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(
             6,
             substr_count(
-                    $html,
-                    '<tr'
-                )
+                $html,
+                '<tr'
+            )
         );
     }
 

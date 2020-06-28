@@ -25,8 +25,8 @@ class FileGetContentsWrapperTest extends \PHPUnit\Framework\TestCase
     {
         $fileContent = file_get_contents_wrapper(
             Path::resolve(
-                    "ULICMS_ROOT/tests/fixtures/lorem_ipsum.txt"
-                )
+                "ULICMS_ROOT/tests/fixtures/lorem_ipsum.txt"
+            )
         );
         $this->assertStringContainsString("Lorem ipsum", $fileContent);
     }

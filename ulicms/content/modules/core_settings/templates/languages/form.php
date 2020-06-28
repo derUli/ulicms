@@ -70,16 +70,16 @@ if ($permissionChecker->hasPermission("languages")) {
                                         "LanguageController",
                                         "setDefaultLanguage",
                                         ModuleHelper::buildQueryString(
-                                                   array("default" => $language->getLanguageCode()
+                                            array("default" => $language->getLanguageCode()
                                                        )
-                                               )
+                                        )
                                     ); ?>"
                                        data-message="<?php
                                        translate(
-                                           "REALLY_MAKE_DEFAULT_LANGUAGE",
-                                           array(
+                                        "REALLY_MAKE_DEFAULT_LANGUAGE",
+                                        array(
                                                    "%name%" => $language->getName())
-                                       ); ?>">
+                                    ); ?>">
                                         <i class="fas fa-language"></i>
                                         <?php translate("make_default"); ?>
                                     </a>
@@ -103,11 +103,11 @@ if ($permissionChecker->hasPermission("languages")) {
         </div>
         <?php
         enqueueScriptFile(
-                                            ModuleHelper::buildModuleRessourcePath(
-                    "core_settings",
-                    "js/languages.js"
-                )
-                                        );
+                                           ModuleHelper::buildModuleRessourcePath(
+                                                "core_settings",
+                                                "js/languages.js"
+                                            )
+                                       );
         combinedScriptHtml();
     }
 } else {

@@ -93,9 +93,9 @@ class CommentsController extends MainClass
         // Redirect to the page and show a message to the user
         Response::redirect(
             ModuleHelper::getFullPageURLByID(
-                    $content_id,
-                    "comment_published=" . $status
-                )
+                $content_id,
+                "comment_published=" . $status
+            )
         );
     }
 

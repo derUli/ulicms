@@ -14,8 +14,8 @@ class NumberFormatHelperTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(
             "64.05 GB",
             NumberFormatHelper::formatSizeUnits(
-                    floatval((64 * 1024 * 1024 * 1024) + (55 * 1024 * 1024))
-                )
+                floatval((64 * 1024 * 1024 * 1024) + (55 * 1024 * 1024))
+            )
         );
     }
 
@@ -24,8 +24,8 @@ class NumberFormatHelperTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(
             "64.05 MB",
             NumberFormatHelper::formatSizeUnits(
-                    floatval((64 * 1024 * 1024) + (55 * 1024))
-                )
+                floatval((64 * 1024 * 1024) + (55 * 1024))
+            )
         );
     }
 
@@ -90,9 +90,9 @@ class NumberFormatHelperTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(
             "2019-09-10 14:25:19",
             NumberFormatHelper::timestampToSqlDate(
-                    $timestamp,
-                    NumberFormatHelper::SQL_DATE_WITH_SECONDS
-                )
+                $timestamp,
+                NumberFormatHelper::SQL_DATE_WITH_SECONDS
+            )
         );
     }
 }

@@ -18,8 +18,7 @@ class VCS
         int $content_id,
         string $content,
         int $user_id
-    ): bool
-    {
+    ): bool {
         return Database::pQuery(
             "INSERT INTO `{prefix}history` (content_id, content, user_id) "
                         . "VALUES(?, ?,?)",

@@ -16,8 +16,7 @@ class Script
         bool $async = false,
         bool $defer = false,
         array $htmlAttributes = []
-    ): string
-    {
+    ): string {
         $attributes = array(
             "src" => $file,
             "type" => "text/javascript"
@@ -45,8 +44,7 @@ class Script
         bool $async = false,
         bool $defer = false,
         array $htmlAttributes = []
-    ): string
-    {
+    ): string {
         $attributes = array(
             "type" => "text/javascript"
         );

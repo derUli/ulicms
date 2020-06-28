@@ -137,9 +137,9 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(
             "module",
             get_type(
-                    $content1->slug,
-                    $content1->language
-                )
+                $content1->slug,
+                $content1->language
+            )
         );
 
         $content1->type = "video";
@@ -149,9 +149,9 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(
             "module",
             get_type(
-                    $content1->slug,
-                    $content1->language
-                )
+                $content1->slug,
+                $content1->language
+            )
         );
         // unset the cached type
         Vars::delete("type_{$content1->slug}_{$content1->language}");
@@ -160,9 +160,9 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(
             "video",
             get_type(
-                    $content1->slug,
-                    $content1->language
-                )
+                $content1->slug,
+                $content1->language
+            )
         );
 
         $content2 = new Article();
@@ -179,9 +179,9 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(
             "article",
             get_type(
-                    $content2->slug,
-                    $content2->language
-                )
+                $content2->slug,
+                $content2->language
+            )
         );
     }
 
@@ -501,9 +501,9 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
 
         $this->assertTrue(
             str_contains(
-                    $html,
-                    "<ul class='language_selection'>",
-                )
+                $html,
+                "<ul class='language_selection'>",
+            )
         );
 
         // By default there should be at least 2 languages
@@ -961,8 +961,8 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
 
         $this->assertTrue(
             parent_item_contains_current_page(
-                    $page->getId()
-                )
+                $page->getId()
+            )
         );
     }
 

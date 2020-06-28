@@ -39,8 +39,8 @@ if (!file_exists($defaultConfig)) {
 
 copy(
     Path::resolve(
-    "ULICMS_ROOT/lib/CMSConfigSample.php"
-),
+        "ULICMS_ROOT/lib/CMSConfigSample.php"
+    ),
     Path::resolve("ULICMS_ROOT/CMSConfig.php")
 );
 

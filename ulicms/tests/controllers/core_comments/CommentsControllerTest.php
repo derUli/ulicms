@@ -62,24 +62,24 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertCount(
             0,
             $controller->_getResults(
-                    CommentStatus::SPAM,
-                    PHP_INT_MAX
-                )
+                CommentStatus::SPAM,
+                PHP_INT_MAX
+            )
         );
         $this->assertCount(
             0,
             $controller->_getResults(
-                    null,
-                    PHP_INT_MAX
-                )
+                null,
+                PHP_INT_MAX
+            )
         );
         $this->assertCount(
             0,
             $controller->_getResults(
-                    null,
-                    null,
-                    null
-                )
+                null,
+                null,
+                null
+            )
         );
     }
 

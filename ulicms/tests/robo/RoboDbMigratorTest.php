@@ -106,8 +106,8 @@ class RoboDbMigratorTest extends RoboBaseTest
         $this->assertEquals(
             0,
             Database::getNumRows(
-                    Database::selectAll("dbtrack")
-                )
+                Database::selectAll("dbtrack")
+            )
         );
     }
 }

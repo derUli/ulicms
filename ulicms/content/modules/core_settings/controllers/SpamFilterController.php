@@ -55,10 +55,10 @@ class SpamFilterController extends Controller
         Settings::set(
             "min_time_to_fill_form",
             Request::getVar(
-                    "min_time_to_fill_form",
-                    0,
-                    "int"
-                )
+                "min_time_to_fill_form",
+                0,
+                "int"
+            )
         );
 
         do_event("after_save_spamfilter_settings");

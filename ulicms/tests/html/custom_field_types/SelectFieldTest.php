@@ -14,8 +14,8 @@ class SelectFieldTest extends \PHPUnit\Framework\TestCase
 
         $expected = file_get_contents(
             Path::resolve(
-                    "ULICMS_ROOT/tests/fixtures/custom_field_types/select_field.expected.txt"
-                )
+                "ULICMS_ROOT/tests/fixtures/custom_field_types/select_field.expected.txt"
+            )
         );
 
         $this->assertEquals(
@@ -36,8 +36,8 @@ class SelectFieldTest extends \PHPUnit\Framework\TestCase
 
         $expected = file_get_contents(
             Path::resolve(
-                    "ULICMS_ROOT/tests/fixtures/custom_field_types/multi_select_field.expected.txt"
-                )
+                "ULICMS_ROOT/tests/fixtures/custom_field_types/multi_select_field.expected.txt"
+            )
         );
 
         $this->assertEquals(

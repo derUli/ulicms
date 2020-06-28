@@ -36,8 +36,8 @@ class RoboPackageTest extends RoboBaseTest
 
         $expected = file_get_contents(
             Path::resolve(
-                    "ULICMS_ROOT/tests/fixtures/packages/packageExamine.expected.txt"
-                )
+                "ULICMS_ROOT/tests/fixtures/packages/packageExamine.expected.txt"
+            )
         );
 
         $output = $this->runRoboCommand(["package:examine", $packageFile]);

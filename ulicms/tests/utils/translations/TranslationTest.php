@@ -25,11 +25,11 @@ class TranslationTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(
             "Hello John Doe!",
             get_translation(
-                    "hello_name",
-                    [
+                "hello_name",
+                [
                             "%name%" => "John Doe"
                         ]
-                )
+            )
         );
     }
 
@@ -78,11 +78,11 @@ Anschließend werden statt die Inhalte immer wieder aus der Datenbank zu laden, 
             _esc("Hello <script>alert('xss');</script>John " .
                         "Doe!"),
             get_secure_translation(
-                    "hello_name",
-                    [
+                "hello_name",
+                [
                             "%name%" => "<script>alert('xss');</script>John Doe",
         ]
-                )
+            )
         );
     }
 
@@ -99,11 +99,11 @@ Anschließend werden statt die Inhalte immer wieder aus der Datenbank zu laden, 
         $this->assertEquals(
             "Hello John Doe!",
             _t(
-                    "hello_name",
-                    [
+                "hello_name",
+                [
                             "%name%" => "John Doe"
         ]
-                )
+            )
         );
     }
 

@@ -215,10 +215,10 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(
             "foobar",
             ArrayHelper::getValueOrDefault(
-                    ["gibts" => "not"],
-                    "hello",
-                    "foobar"
-                )
+                ["gibts" => "not"],
+                "hello",
+                "foobar"
+            )
         );
     }
 
@@ -227,10 +227,10 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(
             "world",
             ArrayHelper::getValueOrDefault(
-                    ["hello" => "world"],
-                    "hello",
-                    "foobar"
-                )
+                ["hello" => "world"],
+                "hello",
+                "foobar"
+            )
         );
     }
 
@@ -248,12 +248,12 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertTrue(
             ArrayHelper::hasMultipleKeys(
-                    $this->getArrayTestData(),
-                    [
+                $this->getArrayTestData(),
+                [
                             "foo",
                             "fire"
                         ]
-                )
+            )
         );
     }
 
@@ -261,24 +261,24 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertFalse(
             ArrayHelper::hasMultipleKeys(
-                    $this->getArrayTestData(),
-                    [
+                $this->getArrayTestData(),
+                [
                             "foo",
                             "fire",
                             "nope"
                             ]
-                )
+            )
         );
         
         $this->assertFalse(
             ArrayHelper::hasMultipleKeys(
-                    null,
-                    [
+                null,
+                [
                             "foo",
                             "fire",
                             "nope"
                             ]
-                )
+            )
         );
     }
 }

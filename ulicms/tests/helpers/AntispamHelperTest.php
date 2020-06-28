@@ -125,9 +125,9 @@ class AntispamHelperTest extends \PHPUnit\Framework\TestCase
 
         $this->assertFalse(
             AntiSpamHelper::isCountryBlocked(
-                    "175.45.176.0",
-                    ["kp"]
-                )
+                "175.45.176.0",
+                ["kp"]
+            )
         );
     }
 

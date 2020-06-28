@@ -13,8 +13,7 @@ class Link
         string $href,
         string $text,
         array $htmlAttributes = []
-    ): string
-    {
+    ): string {
         $attributes = array(
             "href" => $href
         );
@@ -32,8 +31,7 @@ class Link
         string $text,
         ?string $suffix = null,
         array $htmlAttributes = []
-    ): string
-    {
+    ): string {
         $attributes = array(
             "href" => ModuleHelper::buildActionURL($action, $suffix, true)
         );

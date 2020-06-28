@@ -77,8 +77,8 @@ if ($permissionChecker->hasPermission("videos")
                 <strong class="field-label">
                     <?php
                     translate(
-                           "insert_this_code_into_a_page"
-                       ); ?>
+            "insert_this_code_into_a_page"
+        ); ?>
                 </strong>
                 <input type="text" name="code"
                        value="[video id=<?php echo $dataset->id; ?>]"

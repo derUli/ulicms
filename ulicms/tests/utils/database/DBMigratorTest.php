@@ -65,12 +65,12 @@ class DBMigratorTest extends \PHPUnit\Framework\TestCase
 
         $this->assertTrue(
             Database::any(
-                    Database::selectAll(
-                            "dbtrack",
-                            ["id"],
-                            "component = 'dbmigrator_test'"
-                        )
-                )
+                Database::selectAll(
+                        "dbtrack",
+                        ["id"],
+                        "component = 'dbmigrator_test'"
+                    )
+            )
         );
 
         $dbmigrator = new DBMigrator("dbmigrator_test", self::DB_MIGRATOR_UP_DIR);
@@ -78,12 +78,12 @@ class DBMigratorTest extends \PHPUnit\Framework\TestCase
 
         $this->assertFalse(
             Database::any(
-                    Database::selectAll(
-                            "dbtrack",
-                            ["id"],
-                            "component = 'dbmigrator_test'"
-                        )
-                )
+                Database::selectAll(
+                        "dbtrack",
+                        ["id"],
+                        "component = 'dbmigrator_test'"
+                    )
+            )
         );
     }
 

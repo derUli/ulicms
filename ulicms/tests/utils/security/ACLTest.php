@@ -59,12 +59,12 @@ class ACLTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(
             $id,
             $acl->updateGroup(
-                    $id,
-                    "Test-Gruppe " . uniqid() . " umbenannt",
-                    [
+                $id,
+                "Test-Gruppe " . uniqid() . " umbenannt",
+                [
                             "hello" => false
                         ]
-                )
+            )
         );
         $acl->deleteGroup($id);
     }

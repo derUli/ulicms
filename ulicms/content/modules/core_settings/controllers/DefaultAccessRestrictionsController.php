@@ -25,9 +25,9 @@ class DefaultAccessRestrictionsController extends Controller
         Response::sendHttpStatusCodeResultIfAjax(
             HttpStatusCode::OK,
             ModuleHelper::buildActionURL(
-                    "default_access_restrictions",
-                    "submit_form=1"
-                )
+                "default_access_restrictions",
+                "submit_form=1"
+            )
         );
     }
 }

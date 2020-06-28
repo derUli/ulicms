@@ -202,28 +202,28 @@ if ($permissionChecker->hasPermission("list_packages")) {
                                       title="<?php translate("info"); ?>"
                                       data-url="<?php
                                       echo ModuleHelper::buildMethodCallUrl(
-                                                "PackageController",
-                                                "getThemeInfo",
-                                                "name={$theme}"
-                                            ); ?>"
+                                            "PackageController",
+                                            "getThemeInfo",
+                                            "name={$theme}"
+                                        ); ?>"
                                       >
                                     <i class="fa fa-info-circle" aria-hidden="true"></i>
                                 </span>
                                 <?php if ($theTheme->hasScreenshot()) {
-                                                  ?>
+                                                ?>
                                     <span class="btn btn-info btn-sm remote-alert icon"
                                           title="<?php translate("show_preview"); ?>"
                                           data-url="<?php
                                           echo ModuleHelper::buildMethodCallUrl(
-                                                      DesignSettingsController::class,
-                                                      "themePreview",
-                                                      "theme={$theme}"
-                                                  ); ?>"
+                                                    DesignSettingsController::class,
+                                                    "themePreview",
+                                                    "theme={$theme}"
+                                                ); ?>"
                                           >
                                         <i class="far fa-image"></i>
                                     </span>
                                 <?php
-                                              } ?>
+                                            } ?>
                                 <?php
                                 if ($permissionChecker->hasPermission("remove_packages") and getModuleMeta($module->getName(), "source") != "core") {
                                     echo ModuleHelper::buildMethodCallForm(PackageController::class, "uninstallTheme", array(

@@ -35,40 +35,40 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
         </div>
         <?php
         echo ModuleHelper::buildMethodCallUploadForm(
-                UserController::class,
-                "update",
-                [],
-                RequestMethod::POST,
-                [
+            UserController::class,
+            "update",
+            [],
+            RequestMethod::POST,
+            [
                     "id" => "edit-user",
                     "class" => "field"
         ]
-            ); ?>
+        ); ?>
         <div class="field">
             <label for="avatar">
                 <?php t("upload_new_avatar"); ?>
             </label>
             <?php
             echo Input::file(
-            "avatar",
-            false,
-            "image/*"
-        ); ?>
+                "avatar",
+                false,
+                "image/*"
+            ); ?>
             <?php if ($user->hasProcessedAvatar()) {
-                ?>
+            ?>
                 <div class="checkbox field voffset1">
                     <label>
                         <?php
                         echo UliCMS\HTML\Input::checkBox(
-                    "delete_avatar",
-                    false,
-                    "1",
-                    array("class" => "js-switch")
-                ); ?><?php translate("delete_avatar") ?>
+                "delete_avatar",
+                false,
+                "1",
+                array("class" => "js-switch")
+            ); ?><?php translate("delete_avatar") ?>
                     </label>
                 </div>
             <?php
-            } ?>
+        } ?>
         </div>
         <input type="hidden" name="edit_admin"
                value="edit_admin"> <input type="hidden" name="id"
@@ -300,9 +300,9 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
 
     enqueueScriptFile(
         ModuleHelper::buildRessourcePath(
-                "core_users",
-                "js/form.js"
-            )
+            "core_users",
+            "js/form.js"
+        )
     );
     enqueueScriptFile("../node_modules/password-strength-meter/dist/password.min.js");
     combinedScriptHtml();

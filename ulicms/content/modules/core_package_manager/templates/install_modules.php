@@ -86,7 +86,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
 
             // Disabled because this caused issues
             // with the stylesheet queue on this page
-            //clearCache (); ?>
+            //clearCache ();?>
             <p>
                 <a
                     href="<?php echo ModuleHelper::buildActionURL("available_modules"); ?>"

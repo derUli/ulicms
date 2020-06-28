@@ -16,13 +16,13 @@ if ($permissionChecker->hasPermission("pages")) {
     <h1><?php translate("diff"); ?></h1>
     <p><?php
         translate(
-                        "COMPARE_VERSION_FROM_TO",
-                        [
+        "COMPARE_VERSION_FROM_TO",
+        [
                     "%current%" =>
                     $diff->current_version_date,
                     "%old_version%" => $diff->old_version_date
                 ]
-                    ); ?></p>
+    ); ?></p>
 
     <div class="diff">
         <?php echo nl2br($diff->html); ?>
@@ -31,11 +31,11 @@ if ($permissionChecker->hasPermission("pages")) {
         <a
             href="<?php
             echo ModuleHelper::buildMethodCallUrl(
-            "HistoryController",
-            "doRestore",
-            "version_id=" .
+                        "HistoryController",
+                        "doRestore",
+                        "version_id=" .
                     $diff->history_id
-        )
+                    )
             ?>"
             class="btn btn-danger voffset3"
             onclick="return confirm(

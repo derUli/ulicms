@@ -16,8 +16,7 @@ class Input
         $value,
         string $type = "text",
         array $htmlAttributes = []
-    ): string
-    {
+    ): string {
         $attributes = array(
             "type" => $type,
             "name" => $name,
@@ -36,8 +35,7 @@ class Input
         int $rows = 25,
         int $cols = 80,
         array $htmlAttributes = []
-    ): string
-    {
+    ): string {
         $attributes = array(
             "name" => $name,
             "rows" => $rows,
@@ -59,8 +57,7 @@ class Input
         int $rows = 25,
         int $cols = 80,
         array $htmlAttributes = []
-    ): string
-    {
+    ): string {
         if (!isset($htmlAttributes["id"])) {
             $htmlAttributes["id"] = $name;
         }
@@ -87,8 +84,7 @@ class Input
         string $name,
         $value,
         array $htmlAttributes = []
-    ): string
-    {
+    ): string {
         return self::textBox($name, $value, "password", $htmlAttributes);
     }
 
@@ -97,8 +93,7 @@ class Input
         bool $multiple = false,
         $accept = null,
         array $htmlAttributes = []
-    ): string
-    {
+    ): string {
         $attributes = array(
             "name" => $name
         );
@@ -123,8 +118,7 @@ class Input
         string $name,
         $value,
         array $htmlAttributes = []
-    ): string
-    {
+    ): string {
         return self::textBox($name, $value, "hidden", $htmlAttributes);
     }
 
@@ -133,8 +127,7 @@ class Input
         bool $checked = false,
         $value = "1",
         array $htmlAttributes = []
-    ): string
-    {
+    ): string {
         if ($checked) {
             $htmlAttributes["checked"] = "checked";
         }
@@ -146,8 +139,7 @@ class Input
         bool $checked = false,
         $value = "1",
         array $htmlAttributes = []
-    ): string
-    {
+    ): string {
         if ($checked) {
             $htmlAttributes["checked"] = "checked";
         }
@@ -160,8 +152,7 @@ class Input
         array $options = [],
         int $size = 1,
         array $htmlAttributes = []
-    ): string
-    {
+    ): string {
         $attributes = array(
             "name" => $name,
             "size" => $size
@@ -193,8 +184,7 @@ class Input
         array $options = [],
         int $size = 5,
         array $htmlAttributes = []
-    ): string
-    {
+    ): string {
         $attributes = array(
             "name" => $name,
             "size" => $size

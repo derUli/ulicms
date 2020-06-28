@@ -23,8 +23,7 @@ class Request
         string $name,
         $default = null,
         ?string $convert = ""
-    )
-    {
+    ) {
         $value = $default;
         if (isset($_POST[$name])) {
             $value = $_POST[$name];
@@ -71,15 +70,13 @@ class Request
     public static function redirect(
         string $url = "http://www.ulicms.de",
         int $status = 302
-    ): void
-    {
+    ): void {
         Response::redirect($url, $status);
     }
 
     public static function javascriptRedirect(
         string $url = "http://www.ulicms.de"
-    ): void
-    {
+    ): void {
         Response::javascriptRedirect($url);
     }
 

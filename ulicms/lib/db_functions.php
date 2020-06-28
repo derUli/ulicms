@@ -72,8 +72,7 @@ function db_connect(
     int $port = 3306,
     ?string $socket = null,
     bool $db_strict_mode = false
-): ?object
-{
+): ?object {
     return Database::connect($server, $user, $password, $port, $socket, $db_strict_mode);
 }
 

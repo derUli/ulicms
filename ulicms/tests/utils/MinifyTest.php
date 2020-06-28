@@ -201,10 +201,10 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
         $this->assertCount(1, getSCSSImportPaths());
         $this->assertEquals(
             str_replace(
-                    "\\",
-                    "/",
-                    ULICMS_ROOT
-                ),
+                "\\",
+                "/",
+                ULICMS_ROOT
+            ),
             getSCSSImportPaths()[0]
         );
     }
@@ -234,8 +234,8 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
         );
         $code = compileSCSS(
             Path::resolve(
-                    "ULICMS_ROOT/lib/css/core.scss"
-                )
+                "ULICMS_ROOT/lib/css/core.scss"
+            )
         );
         $this->assertStringContainsString(".antispam_honeypot", $code);
         $this->assertStringContainsString("span.blog_article_next", $code);
@@ -245,8 +245,8 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
     {
         sureRemoveDir(
             Path::resolve(
-                    "ULICMS_ROOT/content/cache/stylesheets"
-                )
+                "ULICMS_ROOT/content/cache/stylesheets"
+            )
         );
         setSCSSImportPaths(
             [
@@ -256,8 +256,8 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
         );
         $filename = compileSCSSToFile(
             Path::resolve(
-                    "ULICMS_ROOT/lib/css/core.scss"
-                )
+                "ULICMS_ROOT/lib/css/core.scss"
+            )
         );
 
         $this->assertStringEndsWith(".css", $filename);

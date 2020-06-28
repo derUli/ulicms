@@ -117,9 +117,9 @@ class ControllerRegistryTest extends \PHPUnit\Framework\TestCase
 
         $this->assertFalse(
             ControllerRegistry::userCanCall(
-                    "HomeController",
-                    "newsfeed"
-                )
+                "HomeController",
+                "newsfeed"
+            )
         );
         unset($_SESSION["login_id"]);
     }

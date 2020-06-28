@@ -142,8 +142,7 @@ class ContentFactory
         string $menu,
         string $order = "id"
     ):
-    array
-    {
+    array {
         $menu = Database::escapeValue($menu);
         $datasets = [];
         $sql = "SELECT id, `type` FROM " . tbname("content") .
@@ -159,8 +158,7 @@ class ContentFactory
         string $type,
         string $order = "id"
     ):
-    array
-    {
+    array {
         $type = Database::escapeValue($type);
         $datasets = [];
         $sql = "SELECT id, `type` FROM " . tbname("content")

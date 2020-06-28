@@ -12,10 +12,10 @@ class StringHelper extends Helper
     {
         return normalizeLN(
             preg_replace(
-                    "/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/",
-                    "\n",
-                    $input
-                ),
+                "/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/",
+                "\n",
+                $input
+            ),
             "\n"
         );
     }

@@ -66,16 +66,16 @@ function multi_explode(array $delimiters, string $string): array
     return explode(
         $delimiters[0],
         strtr(
-                $string,
-                array_combine(
-                        array_slice($delimiters, 1),
-                        array_fill(
-                                0,
-                                count($delimiters) - 1,
-                                array_shift($delimiters)
-                            )
-                    )
-            )
+            $string,
+            array_combine(
+                    array_slice($delimiters, 1),
+                    array_fill(
+                            0,
+                            count($delimiters) - 1,
+                            array_shift($delimiters)
+                        )
+                )
+        )
     );
 }
 
@@ -181,8 +181,7 @@ function str_replace_nth(
     string $replace,
     string $subject,
     int $nth
-): string
-{
+): string {
     $found = preg_match_all('/' .
             preg_quote($search) . '/', $subject, $matches, PREG_OFFSET_CAPTURE);
     if (false !== $found && $found > $nth) {

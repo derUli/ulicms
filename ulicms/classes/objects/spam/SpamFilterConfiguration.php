@@ -35,13 +35,13 @@ class SpamFilterConfiguration
         );
         $settings->setDisallowCyrillicChars(
             boolval(
-            Settings::get("disallow_cyrillic_chars")
-        )
+                Settings::get("disallow_cyrillic_chars")
+            )
         );
         $settings->setDisallowRtlChars(
             boolval(
-                    Settings::get("disallow_rtl_chars")
-                )
+                Settings::get("disallow_rtl_chars")
+            )
         );
         $settings->setRejectRequestsFromBots(
             boolval(Settings::get("reject_requests_from_bots"))

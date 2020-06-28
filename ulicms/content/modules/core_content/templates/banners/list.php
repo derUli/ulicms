@@ -115,9 +115,9 @@ if ($permissionChecker->hasPermission("banners")) {
     <?php
     enqueueScriptFile(
                     ModuleHelper::buildRessourcePath(
-                    "core_content",
-                    "js/banners.js"
-                )
+                        "core_content",
+                        "js/banners.js"
+                    )
                 );
     combinedScriptHtml(); ?>
 

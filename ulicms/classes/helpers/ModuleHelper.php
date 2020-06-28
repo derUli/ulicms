@@ -333,8 +333,7 @@ class ModuleHelper extends Helper
         array $otherVars = [],
         array $formAttributes = [],
         string $requestMethod = RequestMethod::POST
-    ): string
-    {
+    ): string {
         return Form::buildMethodCallButton(
             $sClass,
             $sMethod,

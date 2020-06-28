@@ -31,9 +31,9 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals(
             file_get_contents(
-                    ULICMS_ROOT .
+                ULICMS_ROOT .
                         "/tests/fixtures/JSTranslation/JSTranslation1.html"
-                ),
+            ),
             $translation->getJS()
         );
     }
@@ -49,9 +49,9 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals(
             file_get_contents(
-                    ULICMS_ROOT .
+                ULICMS_ROOT .
                         "/tests/fixtures/JSTranslation/JSTranslation2.html"
-                ),
+            ),
             $translation->getJS()
         );
     }
@@ -67,8 +67,8 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals(
             file_get_contents(
-                    ULICMS_ROOT . "/tests/fixtures/JSTranslation/JSTranslation3.html"
-                ),
+                ULICMS_ROOT . "/tests/fixtures/JSTranslation/JSTranslation3.html"
+            ),
             $translation->getJS('<script id="my-script">{code}</script>')
         )
         ;
@@ -88,9 +88,9 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals(
             file_get_contents(
-                    ULICMS_ROOT .
+                ULICMS_ROOT .
                         "/tests/fixtures/JSTranslation/JSTranslation1.html"
-                ),
+            ),
             $output
         );
     }
@@ -109,9 +109,9 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals(
             file_get_contents(
-                    ULICMS_ROOT .
+                ULICMS_ROOT .
                         "/tests/fixtures/JSTranslation/JSTranslation1.html"
-                ),
+            ),
             $output
         );
     }
@@ -130,9 +130,9 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(
             $output,
             file_get_contents(
-                    ULICMS_ROOT .
+                ULICMS_ROOT .
                         "/tests/fixtures/JSTranslation/JSTranslation2.html"
-                )
+            )
         );
     }
 
@@ -152,9 +152,9 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(
             $output,
             file_get_contents(
-                    ULICMS_ROOT .
+                ULICMS_ROOT .
                         "/tests/fixtures/JSTranslation/JSTranslation3.html"
-                )
+            )
         );
     }
 

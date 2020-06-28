@@ -501,8 +501,7 @@ class Database
     public static function tableExists(
         string $table,
         bool $prefix = true
-    ): bool
-    {
+    ): bool {
         $tableName = $prefix ? tbname($table) : $table;
         return faster_in_array($tableName, self::getAllTables());
     }

@@ -39,8 +39,7 @@ class Alert
         string $text,
         string $cssClasses = "",
         bool $allowHtml = false
-    ): string
-    {
+    ): string {
         return self::alert($text, "alert-warning {$cssClasses}", $allowHtml);
     }
 
@@ -48,8 +47,7 @@ class Alert
         string $text,
         string $cssClasses = "",
         bool $allowHtml = false
-    ): string
-    {
+    ): string {
         return self::alert($text, "alert-success {$cssClasses}", $allowHtml);
     }
 }

@@ -21,9 +21,9 @@ class PrivacyCheckbox
     {
         return boolval(
             Settings::get(
-                    "privacy_policy_checkbox_enable_{$this->language}",
-                    "bool"
-                )
+                "privacy_policy_checkbox_enable_{$this->language}",
+                "bool"
+            )
         );
     }
 
@@ -38,10 +38,10 @@ class PrivacyCheckbox
     {
         return StringHelper::isNotNullOrWhitespace(
             Request::getVar(
-                            $this->getCheckboxName(),
-                            "",
-                            "str"
-                        )
+                $this->getCheckboxName(),
+                "",
+                "str"
+            )
         );
     }
 
