@@ -14,7 +14,7 @@ $legalInfo = $controller->_getNpmLegalInfo();
     </thead>
     <tbody>
         <?php foreach ($legalInfo as $package) {
-            ?>
+    ?>
             <tr>
                 <td>
                     <?php esc($package->name); ?>
@@ -25,7 +25,7 @@ $legalInfo = $controller->_getNpmLegalInfo();
                 </td>
             </tr>
             <?php
-        }
+}
         ?>
     </tbody>
 </tfoot>

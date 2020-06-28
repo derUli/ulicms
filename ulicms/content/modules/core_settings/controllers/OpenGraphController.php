@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 use UliCMS\Utils\CacheUtil;
 
-class OpenGraphController extends Controller {
-
-    public function savePost(): void {
+class OpenGraphController extends Controller
+{
+    public function savePost(): void
+    {
         if (isset($_POST["og_image"])) {
             Settings::set("og_image", $_POST["og_image"]);
         }
@@ -19,5 +20,4 @@ class OpenGraphController extends Controller {
         }
         Request::redirect(ModuleHelper::buildActionURL("open_graph"));
     }
-
 }

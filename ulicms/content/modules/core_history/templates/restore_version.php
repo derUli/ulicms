@@ -2,11 +2,10 @@
 
 use UliCMS\Models\Content\VCS;
 
-$permissionChecker = new ACL ();
+$permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("pages")) {
     $content_id = intval($_GET ["content_id"]);
-    $revisions = VCS::getRevisionsByContentID($content_id);
-    ?>
+    $revisions = VCS::getRevisionsByContentID($content_id); ?>
     <p>
         <a
             href="<?php echo ModuleHelper::buildActionURL("pages_edit", "page=" . $content_id); ?>"
@@ -27,18 +26,16 @@ if ($permissionChecker->hasPermission("pages")) {
             <tbody>
                 <?php
                 foreach ($revisions as $revision) {
-                    $view_diff_link = "index.php?action=view_diff&content_id=" . $revision->content_id . "&history_id=" . $revision->id;
-                    ?>
+                    $view_diff_link = "index.php?action=view_diff&content_id=" . $revision->content_id . "&history_id=" . $revision->id; ?>
                     <tr>
                         <td><?php echo intval($revision->id); ?></td>
                         <td><a href="<?php echo $view_diff_link; ?>" class="btn btn-info"
                                target="_blank"><i class="fas fa-eye"></i> <?php translate("view_diff"); ?></a></td>
                         <td><?php
                             $user = getUserById($revision->user_id);
-                            if ($user and isset($user ["username"])) {
-                                esc($user ["username"]);
-                            }
-                            ?></td>
+                    if ($user and isset($user ["username"])) {
+                        esc($user ["username"]);
+                    } ?></td>
                         <td><?php echo $revision->date; ?></td>
                         <td><a
                                 href="<?php echo ModuleHelper::buildMethodCallUrl("HistoryController", "doRestore", "version_id=" . $revision->id); ?>"
@@ -47,11 +44,12 @@ if ($permissionChecker->hasPermission("pages")) {
                                 <?php translate("restore"); ?></a>
                         </td>
                     </tr>
-                <?php } ?>
+                <?php
+                } ?>
             </tbody>
         </table>
     </div>
     <?php
 } else {
-    noPerms();
-}
+                    noPerms();
+                }

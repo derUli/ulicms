@@ -3,8 +3,7 @@ $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermission("users_create")) {
     $languages = getAvailableBackendLanguages();
     $default_language = getSystemLanguage();
-    $ref = _esc(Request::getVar("ref", "home"));
-    ?>
+    $ref = _esc(Request::getVar("ref", "home")); ?>
     <div class="btn-toolbar">
         <a href="<?php echo ModuleHelper::buildActionURL("admins"); ?>"
            class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
@@ -59,9 +58,8 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
         </div>
         <?php
         $permissionChecker = new ACL();
-        $allGroups = $permissionChecker->getAllGroups();
-        asort($allGroups);
-        ?>
+    $allGroups = $permissionChecker->getAllGroups();
+    asort($allGroups); ?>
         <div class="field">
             <strong class="field-label">
                 <?php translate("primary_group"); ?>
@@ -72,24 +70,20 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
                 <?php
                 if ($row->group_id === null) {
                     echo "selected";
-                }
-                ?>>[<?php translate("none"); ?>]</option>
+                } ?>>[<?php translate("none"); ?>]</option>
                         <?php
                         foreach ($allGroups as $key => $value) {
                             ?>
                     <option value="<?php
-                    echo $key;
-                    ?>"
+                    echo $key; ?>"
                             <?php
                             if (Settings::get("default_acl_group") == $key) {
                                 echo "selected";
-                            }
-                            ?>>
+                            } ?>>
                                 <?php echo _esc($value) ?>
                     </option>
                     <?php
-                }
-                ?>
+                        } ?>
             </select>
         </div>
         <div class="field">
@@ -101,13 +95,11 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
                 foreach ($allGroups as $key => $value) {
                     ?>
                     <option value="<?php
-                    echo $key;
-                    ?>">
+                    echo $key; ?>">
                                 <?php echo _esc($value) ?>
                     </option>
                     <?php
-                }
-                ?>
+                } ?>
             </select>
         </div>
         <div class="checkbox block">
@@ -134,8 +126,7 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
         </div>
         <div id="is_admin" class="help" style="display: none">
             <?php
-            echo nl2br(get_translation("HELP_IS_ADMIN"));
-            ?>
+            echo nl2br(get_translation("HELP_IS_ADMIN")); ?>
         </div>
         <div class="checkbox block">
             <div class="field">
@@ -153,8 +144,7 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
                 <?php
                 for ($i = 0; $i < count($languages); $i++) {
                     echo '<option value="' . $languages[$i] . '">' . getLanguageNameByCode($languages[$i]) . '</option>';
-                }
-                ?>
+                } ?>
             </select>
         </div>
         <div class="voffset2">
@@ -168,8 +158,10 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
     $translation->addKey("passwords_not_equal");
     $translation->render();
     enqueueScriptFile(
-            ModuleHelper::buildRessourcePath(
-                    "core_users", "js/users.js")
+        ModuleHelper::buildRessourcePath(
+            "core_users",
+            "js/users.js"
+        )
     );
     enqueueScriptFile("../node_modules/password-strength-meter/dist/password.min.js");
     combinedScriptHtml();

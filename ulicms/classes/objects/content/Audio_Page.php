@@ -5,19 +5,21 @@ use UliCMS\Models\Media\Audio;
 // audio pages are pages that are linked to audio files
 // audio files are played with html5
 
-class Audio_Page extends Page {
-
+class Audio_Page extends Page
+{
     public $audio = null;
     public $type = "audio";
     public $text_position = "after";
 
-    protected function fillVars($result = null) {
+    protected function fillVars($result = null)
+    {
         parent::fillVars($result);
         $this->audio = $result->audio;
         $this->text_position = $result->text_position;
     }
 
-    public function save() {
+    public function save()
+    {
         $retval = null;
         if ($this->id === null) {
             $retval = $this->create();
@@ -28,7 +30,8 @@ class Audio_Page extends Page {
         return $retval;
     }
 
-    public function update() {
+    public function update()
+    {
         $result = null;
         if ($this->id === null) {
             return $this->create();
@@ -46,16 +49,18 @@ class Audio_Page extends Page {
         return $result;
     }
 
-    public function getAudio(): ?Audio {
+    public function getAudio(): ?Audio
+    {
         return $this->audio ? new Audio($this->audio) : null;
     }
 
-    public function setAudio(?Audio $audio): void {
+    public function setAudio(?Audio $audio): void
+    {
         $this->audio = $audio ? $audio->getID() : null;
     }
 
-    public function getIcon(): string {
+    public function getIcon(): string
+    {
         return "fas fa-volume-up";
     }
-
 }

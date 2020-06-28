@@ -2,9 +2,10 @@
 
 use function UliCMS\Security\XSSProtection\stripTags;
 
-class XSSProtectionTest extends \PHPUnit\Framework\TestCase {
-
-    public function testStripTagsStripsInlineEvents() {
+class XSSProtectionTest extends \PHPUnit\Framework\TestCase
+{
+    public function testStripTagsStripsInlineEvents()
+    {
         $input = '<img onerror="alert(document.cookie);" src="foo.jpg"> '
                 . '<p class="my-class" id="hello" onerror="foo" ' .
                 'ONMouseover="foo">Foo Bar</p><div>moin</div>'
@@ -13,7 +14,8 @@ class XSSProtectionTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals($expected, stripTags($input));
     }
 
-    public function testStripTagsWithTagsStripsInlineEvents() {
+    public function testStripTagsWithTagsStripsInlineEvents()
+    {
         $input = '<img onerror="alert(document.cookie);" src="foo.jpg"> '
                 . '<p class="my-class" id="hello" onerror="foo" ' .
                 'ONMouseover="foo">Foo Bar</p><div>moin</div>'
@@ -23,7 +25,8 @@ class XSSProtectionTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals($expected, stripTags($input, "<p><img>"));
     }
 
-    public function testStripTagsWithScriptsAllowed() {
+    public function testStripTagsWithScriptsAllowed()
+    {
         $input = '<img onerror="alert(document.cookie);" src="foo.jpg"> '
                 . '<p class="my-class" id="hello" onerror="foo" ' .
                 'ONMouseover="foo">Foo Bar</p><div>moin</div>'
@@ -32,5 +35,4 @@ class XSSProtectionTest extends \PHPUnit\Framework\TestCase {
                 'Foo Barmoin<script>hax0r!</script>';
         $this->assertEquals($expected, stripTags($input, "<img><script>"));
     }
-
 }

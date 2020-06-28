@@ -61,7 +61,8 @@ if (!$searchPage) {
                            autosave="<?php echo md5($_SERVER ["SERVER_NAME"]); ?>"
                            placeholder="<?php translate("search"); ?>...">
                 </form>
-            <?php } ?>
+            <?php
+            } ?>
         </div>
         <?php if (is_frontpage()) { ?>
             <div class="jumbotron">

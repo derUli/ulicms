@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 use UliCMS\Utils\CacheUtil;
 
-class FrontPageSettingsController extends Controller {
-
-    public function savePost(): void {
+class FrontPageSettingsController extends Controller
+{
+    public function savePost(): void
+    {
         $languages = getAllLanguages();
         for ($i = 0; $i < count($languages); $i ++) {
             $lang = $languages[$i];
@@ -25,5 +26,4 @@ class FrontPageSettingsController extends Controller {
         }
         Request::redirect(ModuleHelper::buildActionURL("frontpage_settings"));
     }
-
 }

@@ -25,8 +25,8 @@ $languages = getAllLanguages();
 if (!empty($_GET["language"])
         and faster_in_array($_GET["language"], $languages)) {
     $_SESSION["language"] = Database::escapeValue(
-                    $_GET["language"],
-                    DB_TYPE_STRING
+        $_GET["language"],
+        DB_TYPE_STRING
     );
 }
 
@@ -39,7 +39,7 @@ setLocaleByLanguage();
 if (faster_in_array($_SESSION["language"], $languages)
         and file_exists(getLanguageFilePath($_SESSION["language"]))) {
     require_once getLanguageFilePath($_SESSION["language"]);
-} else if (file_exists(getLanguageFilePath("en"))) {
+} elseif (file_exists(getLanguageFilePath("en"))) {
     require getLanguageFilePath("en");
 }
 
@@ -106,7 +106,7 @@ do_event("before_http_header");
 
 $redirection = get_redirection();
 
-if ($redirection and ( is_active() or is_logged_in())) {
+if ($redirection and (is_active() or is_logged_in())) {
     Request::redirect($redirection, 302);
 }
 if (get_ID()) {
@@ -116,7 +116,8 @@ if (get_ID()) {
             $language = new Language($page->link_to_language);
             if (!is_null($language->getID())
                     and StringHelper::isNotNullOrWhitespace(
-                            $language->getLanguageLink())
+                        $language->getLanguageLink()
+                    )
             ) {
                 Request::redirect($language->getLanguageLink());
             }
@@ -143,25 +144,26 @@ send_header($_SERVER["SERVER_PROTOCOL"] . " " . $status);
 
 if ($format == "html") {
     send_header("Content-Type: text/html; charset=utf-8");
-} else if ($format == "pdf") {
+} elseif ($format == "pdf") {
     $pdf = new PdfRenderer();
     Result($pdf->render(), HttpStatusCode::OK, "application/pdf");
-} else if ($format == "csv") {
+} elseif ($format == "csv") {
     $csv = new CsvRenderer();
     Result($csv->render(), HttpStatusCode::OK, "text/csv");
-} else if ($format == "json") {
+} elseif ($format == "json") {
     $json = new JsonRenderer();
     RawJSONResult($json->render());
-} else if ($format == "txt") {
+} elseif ($format == "txt") {
     $plain = new PlainTextRenderer();
     TextResult($plain->render());
 } else {
     ExceptionResult(
-            get_secure_translation("unsupported_output_format",
-                    [
+        get_secure_translation(
+            "unsupported_output_format",
+            [
                         "%format%" => $format
                     ]
-            )
+        )
     );
 }
 
@@ -309,4 +311,3 @@ if (!Settings::get("no_auto_cron")) {
 }
 
 exit();
-

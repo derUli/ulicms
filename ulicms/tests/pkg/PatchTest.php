@@ -2,14 +2,15 @@
 
 use UliCMS\Packages\Patch;
 
-class PatchTest extends \PHPUnit\Framework\TestCase {
-
-    public function testConstructor() {
+class PatchTest extends \PHPUnit\Framework\TestCase
+{
+    public function testConstructor()
+    {
         $patch = new Patch(
-                "foobar",
-                "This is a patch",
-                "https://example.org/foobar.tar.gz",
-                "90df380195f530f4ef72d9b73fe4708e"
+            "foobar",
+            "This is a patch",
+            "https://example.org/foobar.tar.gz",
+            "90df380195f530f4ef72d9b73fe4708e"
         );
 
         $this->assertEquals("foobar", $patch->name);
@@ -18,26 +19,28 @@ class PatchTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("90df380195f530f4ef72d9b73fe4708e", $patch->hash);
     }
 
-    public function testToLine() {
+    public function testToLine()
+    {
         $patch = new Patch(
-                "foobar",
-                "This is a patch",
-                "https://example.org/foobar.tar.gz",
-                "90df380195f530f4ef72d9b73fe4708e"
+            "foobar",
+            "This is a patch",
+            "https://example.org/foobar.tar.gz",
+            "90df380195f530f4ef72d9b73fe4708e"
         );
 
         $this->assertEquals(
-                "foobar|"
+            "foobar|"
                 . "This is a patch|"
                 . "https://example.org/foobar.tar.gz|"
                 . "90df380195f530f4ef72d9b73fe4708e",
-                $patch->toLine()
+            $patch->toLine()
         );
     }
 
-    public function testFromLine() {
+    public function testFromLine()
+    {
         $patch = Patch::fromLine(
-                        "foobar|"
+            "foobar|"
                         . "This is a patch|"
                         . "https://example.org/foobar.tar.gz|"
                         . "90df380195f530f4ef72d9b73fe4708e"
@@ -49,14 +52,14 @@ class PatchTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("90df380195f530f4ef72d9b73fe4708e", $patch->hash);
     }
 
-    public function testInstallRetursFalse() {
+    public function testInstallRetursFalse()
+    {
         $patch = new Patch(
-                "foobar",
-                "This is a patch",
-                "https://example.org/foobar.tar.gz",
-                "90df380195f530f4ef72d9b73fe4708e"
+            "foobar",
+            "This is a patch",
+            "https://example.org/foobar.tar.gz",
+            "90df380195f530f4ef72d9b73fe4708e"
         );
         $this->assertFalse($patch->install());
     }
-
 }

@@ -1,5 +1,6 @@
 <?php
 
-function slicknav_render() {
+function slicknav_render()
+{
     return "";
 }

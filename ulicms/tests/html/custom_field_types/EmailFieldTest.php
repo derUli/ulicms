@@ -1,13 +1,15 @@
 <?php
 
-class EmailFieldTest extends \PHPUnit\Framework\TestCase {
-
-    public function setUp() {
+class EmailFieldTest extends \PHPUnit\Framework\TestCase
+{
+    protected function setUp(): void
+    {
         include_once getLanguageFilePath("en");
     }
 
-    public function testRender() {
-        $field = new EmailField ();
+    public function testRender()
+    {
+        $field = new EmailField();
         $field->name = "my_field";
         $field->title = "email";
         $rendered = $field->render("foo@bar.de");
@@ -19,5 +21,4 @@ class EmailFieldTest extends \PHPUnit\Framework\TestCase {
         $expected = file_get_contents($expectedFile);
         $this->assertEquals(normalizeLN($expected), normalizeLN($rendered));
     }
-
 }

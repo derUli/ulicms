@@ -1,5 +1,4 @@
 <?php
-
 require_once dirname(__file__) . "/classes/exceptions/load.php";
 
 use UliCMS\Exceptions\AccessDeniedException;
@@ -42,7 +41,7 @@ if (file_exists($composerAutoloadFile)) {
     require_once $composerAutoloadFile;
 } else {
     throw new FileNotFoundException(
-            "autoload.php not found. "
+        "autoload.php not found. "
             . "Please run \"./composer install\" to install dependecies."
     );
 }
@@ -107,7 +106,8 @@ if (file_exists($mobile_detect_as_module)) {
     require_once $mobile_detect_as_module;
 }
 
-function exception_handler($exception) {
+function exception_handler($exception)
+{
     if (!defined("EXCEPTION_OCCURRED")) {
         define("EXCEPTION_OCCURRED", true);
     }
@@ -144,7 +144,7 @@ Vars::set("http_headers", []);
 // load config file
 if (file_exists($path_to_config)) {
     require_once $path_to_config;
-} else if (is_dir("installer")) {
+} elseif (is_dir("installer")) {
     send_header("Location: installer/");
     exit();
 } else {
@@ -166,7 +166,7 @@ $config = new CMSConfig();
 // IF ULICMS_DEBUG is defined then display all errors except E_NOTICE,
 // else disable error_reporting from php.ini
 if ((defined("ULICMS_DEBUG") and ULICMS_DEBUG)
-        or ( isset($config->debug) and $config->debug)) {
+        or (isset($config->debug) and $config->debug)) {
     error_reporting(E_ALL ^ E_NOTICE);
 } else {
     error_reporting(0);
@@ -254,29 +254,28 @@ if (isset($config->memory_limit)) {
 Translation::init();
 
 if (class_exists("Path")) {
-
     if (isset($config->exception_logging) and is_true($config->exception_logging)) {
         LoggerRegistry::register(
-                "exception_log",
-                new Logger(Path::resolve("ULICMS_LOG/exception_log"))
+            "exception_log",
+            new Logger(Path::resolve("ULICMS_LOG/exception_log"))
         );
     }
     if (isset($config->query_logging) and is_true($config->query_logging)) {
         LoggerRegistry::register(
-                "sql_log",
-                new Logger(Path::resolve("ULICMS_LOG/sql_log"))
+            "sql_log",
+            new Logger(Path::resolve("ULICMS_LOG/sql_log"))
         );
     }
     if (isset($config->phpmailer_logging) and is_true($config->phpmailer_logging)) {
         LoggerRegistry::register(
-                "phpmailer_log",
-                new Logger(Path::resolve("ULICMS_LOG/phpmailer_log"))
+            "phpmailer_log",
+            new Logger(Path::resolve("ULICMS_LOG/phpmailer_log"))
         );
     }
     if (isset($config->audit_log) and is_true($config->audit_log)) {
         LoggerRegistry::register(
-                "audit_log",
-                new Logger(Path::resolve("ULICMS_LOG/audit_log"))
+            "audit_log",
+            new Logger(Path::resolve("ULICMS_LOG/audit_log"))
         );
     }
 }
@@ -288,7 +287,8 @@ define('CRLF', "\r\n"); // carriage return and line feed; Windows
 define('BR', '<br />' . LF); // HTML Break
 define("ONE_DAY_IN_SECONDS", 60 * 60 * 24);
 
-function noPerms() {
+function noPerms()
+{
     echo "<div class=\"alert alert-danger\">"
     . get_translation("no_permissions") . "</div>";
     $logger = LoggerRegistry::get("audit_log");
@@ -314,12 +314,12 @@ $db_strict_mode = isset($config->db_strict_mode) ?
         boolval($config->db_strict_mode) : false;
 
 @$connection = Database::connect(
-                $config->db_server,
-                $config->db_user,
-                $config->db_password,
-                $db_port,
-                $db_socket,
-                $db_strict_mode
+    $config->db_server,
+    $config->db_user,
+    $config->db_password,
+    $db_port,
+    $db_socket,
+    $db_strict_mode
 );
 
 if (!$connection) {
@@ -335,8 +335,8 @@ if (isset($config->dbmigrator_auto_migrate) and is_true($config->dbmigrator_auto
         Database::setEchoQueries(true);
     }
     $select = Database::setupSchemaAndSelect(
-                    $config->db_database,
-                    $additionalSql
+        $config->db_database,
+        $additionalSql
     );
 } else {
     $select = Database::select($config->db_database);
@@ -357,7 +357,9 @@ UliCMS\Utils\Session\sessionName(Settings::get("session_name"));
 
 $useragent = Settings::get("useragent");
 
-define("ULICMS_USERAGENT", $useragent ?
+define(
+    "ULICMS_USERAGENT",
+    $useragent ?
                 $useragent : "UliCMS Release " . cms_version()
 );
 
@@ -410,7 +412,8 @@ if (isset($_SESSION["session_begin"])) {
     }
 }
 
-function shutdown_function() {
+function shutdown_function()
+{
     do_event("shutdown");
 
     $cfg = new CMSConfig();

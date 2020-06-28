@@ -1,13 +1,12 @@
 <?php
 // TODO: Refactor this, move business logic to controller
-$permissionChecker = new ACL ();
-$pkg = new PackageManager ();
+$permissionChecker = new ACL();
+$pkg = new PackageManager();
 if (!$permissionChecker->hasPermission("install_packages")) {
     noPerms();
 } else {
     $pkg_src = Settings::get("pkg_src");
-    @set_time_limit(0);
-    ?>
+    @set_time_limit(0); ?>
     <p>
         <a
             href="<?php echo ModuleHelper::buildMethodCallUrl(PackageController::class, "redirectToPackageView"); ?>"
@@ -21,14 +20,14 @@ if (!$permissionChecker->hasPermission("install_packages")) {
             <strong><?php translation("error"); ?></strong> <br />
             <?php translate("pkgsrc_not_defined"); ?></p>
         <?php
-    } else if (!class_exists("PharData")) {
+    } elseif (!class_exists("PharData")) {
         ?>
         <p>
             <strong><?php translate("error"); ?></strong> <br />
             <?php translate("phardata_not_available"); ?></p>
         <?php
     } else {
-        $version = new UliCMSVersion ();
+        $version = new UliCMSVersion();
         $internalVersion = implode(".", $version->getInternalVersion());
         $pkg_src = str_replace("{version}", $internalVersion, $pkg_src);
 
@@ -87,8 +86,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
 
             // Disabled because this caused issues
             // with the stylesheet queue on this page
-            //clearCache ();
-            ?>
+            //clearCache ();?>
             <p>
                 <a
                     href="<?php echo ModuleHelper::buildActionURL("available_modules"); ?>"

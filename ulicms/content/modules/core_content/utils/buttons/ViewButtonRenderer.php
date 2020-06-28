@@ -12,11 +12,12 @@ use UliCMS\Security\ContentPermissionChecker;
 use function UliCMS\HTML\icon;
 use function UliCMS\HTML\link;
 
-class ViewButtonRenderer {
-
+class ViewButtonRenderer
+{
     const MODULE_NAME = "core_content";
 
-    public function render(int $pageId, User $user) {
+    public function render(int $pageId, User $user)
+    {
         $permitted = true;
 
         $content = ContentFactory::getByID($pageId);
@@ -37,8 +38,9 @@ class ViewButtonRenderer {
         $link = link($url, $icon, true);
         ViewBag::set("button", $link);
         return $permitted ?
-                Template::executeModuleTemplate(self::MODULE_NAME,
-                        "pages/partials/view_button.php") : "";
+                Template::executeModuleTemplate(
+                    self::MODULE_NAME,
+                    "pages/partials/view_button.php"
+                ) : "";
     }
-
 }

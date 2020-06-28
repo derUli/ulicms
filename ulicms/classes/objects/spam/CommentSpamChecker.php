@@ -9,16 +9,16 @@ use AntiSpamHelper;
 use Request;
 use UliCMS\Models\Content\Comment;
 
-class CommentSpamChecker implements ISpamChecker {
-
+class CommentSpamChecker implements ISpamChecker
+{
     private $comment;
     private $spamFilterConfiguration;
 
     // Constructor takes the Comment to check and
     // the SpamFilterFonuration
     public function __construct(
-            Comment $comment,
-            SpamFilterConfiguration $spamFilterConfiguration
+        Comment $comment,
+        SpamFilterConfiguration $spamFilterConfiguration
     ) {
         $this->comment = $comment;
         $this->spamFilterConfiguration = $spamFilterConfiguration;
@@ -26,15 +26,18 @@ class CommentSpamChecker implements ISpamChecker {
 
     private $errors = [];
 
-    public function clearErrors(): void {
+    public function clearErrors(): void
+    {
         $this->errors = [];
     }
 
-    public function isSpam(): bool {
+    public function isSpam(): bool
+    {
         return count($this->errors) > 0;
     }
 
-    public function doSpamCheck(): bool {
+    public function doSpamCheck(): bool
+    {
         $this->clearErrors();
 
         // Abort here if the spam filter is disabled
@@ -55,8 +58,8 @@ class CommentSpamChecker implements ISpamChecker {
         // check if Antispam Honeypot is not empty
         if (StringHelper::isNotNullOrEmpty(Request::getVar("my_homepage_url"))) {
             $this->errors[] = new SpamDetectionResult(
-                    get_translation("honeypot"),
-                    get_translation("honeypot_is_not_empty")
+                get_translation("honeypot"),
+                get_translation("honeypot_is_not_empty")
             );
         }
 
@@ -66,12 +69,15 @@ class CommentSpamChecker implements ISpamChecker {
                 $badword = AntispamHelper::containsBadwords($value, $badwords);
                 if ($badword !== null) {
                     $this->errors[] = new SpamDetectionResult(
-                            get_translation($field),
-                            get_translation("comment_contains_badword",
-                                    [
+                        get_translation($field),
+                        get_translation(
+                            "comment_contains_badword",
+                            [
                                         "%field%" => get_translation($field),
                                         "%word%" => $badword
-                    ]));
+                    ]
+                        )
+                    );
                 }
             }
         }
@@ -84,10 +90,11 @@ class CommentSpamChecker implements ISpamChecker {
                 $rejectRequestsFromBots) {
             if (AntiSpamHelper::checkForBot($useragent)) {
                 $this->errors[] = new SpamDetectionResult(
-                        get_translation("useragent"),
-                        get_translation("bots_are_not_allowed", array(
+                    get_translation("useragent"),
+                    get_translation("bots_are_not_allowed", array(
                             "%useragent%" => $useragent
-                )));
+                ))
+                );
             }
         }
 
@@ -98,8 +105,8 @@ class CommentSpamChecker implements ISpamChecker {
                 $checkMxOfEmailAddress) {
             if (!AntiSpamHelper::checkMailDomain($email)) {
                 $this->errors[] = new SpamDetectionResult(
-                        get_translation("author_email"),
-                        get_translation("mail_address_has_invalid_mx_entry")
+                    get_translation("author_email"),
+                    get_translation("mail_address_has_invalid_mx_entry")
                 );
             }
         }
@@ -110,12 +117,14 @@ class CommentSpamChecker implements ISpamChecker {
                 if ($value != null) {
                     if (AntiSpamHelper::isChinese($value)) {
                         $this->errors[] = new SpamDetectionResult(
-                                get_translation($field),
-                                get_translation("chinese_chars_not_allowed",
-                                        [
+                            get_translation($field),
+                            get_translation(
+                                "chinese_chars_not_allowed",
+                                [
                                             "%field%" => get_translation($field)
                                         ]
-                        ));
+                            )
+                        );
                     }
                 }
             }
@@ -126,12 +135,14 @@ class CommentSpamChecker implements ISpamChecker {
                 if ($value != null) {
                     if (AntiSpamHelper::isCyrillic($value)) {
                         $this->errors[] = new SpamDetectionResult(
-                                get_translation($field),
-                                get_translation("cyrillic_chars_not_allowed",
-                                        [
+                            get_translation($field),
+                            get_translation(
+                                "cyrillic_chars_not_allowed",
+                                [
                                             "%field%" => get_translation($field)
                                         ]
-                        ));
+                            )
+                        );
                     }
                 }
             }
@@ -143,10 +154,11 @@ class CommentSpamChecker implements ISpamChecker {
                 if ($value != null) {
                     if (AntiSpamHelper::isRtl($value)) {
                         $this->errors[] = new SpamDetectionResult(
-                                get_translation($field),
-                                get_translation("rtl_chars_not_allowed", [
+                            get_translation($field),
+                            get_translation("rtl_chars_not_allowed", [
                                     "%field%" => get_translation($field)
-                        ]));
+                        ])
+                        );
                     }
                 }
             }
@@ -159,19 +171,21 @@ class CommentSpamChecker implements ISpamChecker {
         if (!is_null($ip) && AntiSpamHelper::isCountryBlocked($ip, $countries)) {
             $hostname = @gethostbyaddr($ip);
             $this->errors[] = new SpamDetectionResult(
-                    get_translation("ip_address"),
-                    get_translation("your_country_is_blocked",
-                            [
+                get_translation("ip_address"),
+                get_translation(
+                    "your_country_is_blocked",
+                    [
                                 "%hostname%" => $hostname
                             ]
-            ));
+                )
+            );
         }
         // return true if the comment is detected as spam
         return $this->isSpam();
     }
 
-    public function getErrors(): array {
+    public function getErrors(): array
+    {
         return $this->errors;
     }
-
 }

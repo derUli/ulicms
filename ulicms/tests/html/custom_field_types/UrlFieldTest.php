@@ -1,12 +1,14 @@
 <?php
 
-class UrlFieldTest extends \PHPUnit\Framework\TestCase {
-
-    public function setUp() {
+class UrlFieldTest extends \PHPUnit\Framework\TestCase
+{
+    protected function setUp(): void
+    {
         include_once getLanguageFilePath("en");
     }
 
-    public function testRender() {
+    public function testRender()
+    {
         $field = new UrlField();
         $field->name = "my_field";
         $field->title = "username";
@@ -16,5 +18,4 @@ class UrlFieldTest extends \PHPUnit\Framework\TestCase {
         $expected = file_get_contents($expectedFile);
         $this->assertEquals(normalizeLN($expected), normalizeLN($rendered));
     }
-
 }

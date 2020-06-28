@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace UliCMS\Constants;
 
 // use this constants if you have to compare request methods
-class RequestMethod {
-
+class RequestMethod
+{
     const POST = "post";
     const GET = "get";
     const HEAD = "head";
@@ -15,5 +15,4 @@ class RequestMethod {
     const CONNECT = "connect";
     const OPTIONS = "option";
     const TRACE = "trace";
-
 }

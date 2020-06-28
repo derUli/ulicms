@@ -5,16 +5,18 @@ require_once __DIR__ . "/RoboBaseTest.php";
 
 use UliCMS\Helpers\TestHelper;
 
-class RoboDatabaseTest extends RoboBaseTest {
-
-    public function tearDown() {
+class RoboDatabaseTest extends RoboBaseTest
+{
+    protected function tearDown(): void
+    {
         if ($this->shouldDropDbOnShutdown()) {
             $this->runRoboCommand(["db:reset"]);
         }
     }
 
-    public function testShowException() {
-        $actual = TestHelper::getOutput(function(){
+    public function testShowException()
+    {
+        $actual = TestHelper::getOutput(function () {
             $actual = new BadMethodCallException("This is an error");
             $robo = new RoboTestFile();
             $robo->showException($actual);
@@ -23,7 +25,8 @@ class RoboDatabaseTest extends RoboBaseTest {
         $this->assertStringContainsString("This is an error", $actual);
     }
 
-    public function testCreateAlreadyExists() {
+    public function testCreateAlreadyExists()
+    {
         if (!$this->shouldDropDbOnShutdown()) {
             $this->markTestSkipped();
         }
@@ -35,5 +38,4 @@ class RoboDatabaseTest extends RoboBaseTest {
         $actualCreate = $this->runRoboCommand(["db:create"]);
         $this->assertStringContainsString('CREATE DATABASE', $actualCreate);
     }
-
 }

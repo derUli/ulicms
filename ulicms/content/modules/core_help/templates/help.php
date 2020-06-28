@@ -1,7 +1,7 @@
 <?php
 
 switch ($_GET ["help"]) {
-    case "patch_install" :
+    case "patch_install":
         translate("PATCH_INSTALL_HELP");
         break;
     default:

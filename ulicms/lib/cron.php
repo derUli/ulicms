@@ -3,7 +3,6 @@
 use UliCMS\Models\Content\Comment;
 
 if (!defined("LOADED_LANGUAGE_FILE")) {
-
     setLanguageByDomain();
 
     $languages = getAllLanguages();
@@ -15,8 +14,8 @@ if (!defined("LOADED_LANGUAGE_FILE")) {
     if (!empty($_GET["language"])
             and faster_in_array($_GET["language"], $languages)) {
         $_SESSION["language"] = Database::escapeValue(
-                        $_GET["language"],
-                        DB_TYPE_STRING
+            $_GET["language"],
+            DB_TYPE_STRING
         );
     }
 
@@ -29,7 +28,7 @@ if (!defined("LOADED_LANGUAGE_FILE")) {
     if (faster_in_array($_SESSION["language"], $languages) and
             file_exists(getLanguageFilePath($_SESSION["language"]))) {
         require_once getLanguageFilePath($_SESSION["language"]);
-    } else if (file_exists(getLanguageFilePath("en"))) {
+    } elseif (file_exists(getLanguageFilePath("en"))) {
         require getLanguageFilePath("en");
     }
 

@@ -30,7 +30,7 @@ if (isset($_GET['file']) && !checkRelativePath($_GET['file'])) {
 }
 
 //check $_POST['file']
-if(isset($_POST['path']) && !checkRelativePath($_POST['path'])) {
+if (isset($_POST['path']) && !checkRelativePath($_POST['path'])) {
     response(trans('wrong path').AddErrorLocation())->send();
     exit;
 }
@@ -73,13 +73,12 @@ if (isset($_GET['action'])) {
                 $_SESSION['RF']["sort_by"] = $_GET['sort_by'];
             }
 
-			if (isset($_GET['descending']))
-			{
-				$_SESSION['RF']["descending"] = $_GET['descending'];
-			}
-			break;
-		case 'save_img':
-			$info = pathinfo($_POST['name']);
+            if (isset($_GET['descending'])) {
+                $_SESSION['RF']["descending"] = $_GET['descending'];
+            }
+            break;
+        case 'save_img':
+            $info = pathinfo($_POST['name']);
             $image_data = $_POST['url'];
 
             if (preg_match('/^data:image\/(\w+);base64,/', $image_data, $type)) {
@@ -90,7 +89,7 @@ if (isset($_GET['action'])) {
 
                 if ($image_data === false) {
                     response(trans('TUI_Decode_Failed').AddErrorLocation())->send();
-                exit;
+                    exit;
                 }
             } else {
                 response(trans('').AddErrorLocation())->send();
@@ -228,22 +227,22 @@ if (isset($_GET['action'])) {
             }
 
 
-			break;
-		case 'media_preview':
-			if(isset($_GET['file'])){
-				$_GET['file'] = sanitize($_GET['file']);
-			}
-			if(isset($_GET['title'])){
-				$_GET['title'] = sanitize($_GET['title']);
-			}
-			if($ftp){
-				$preview_file = $config['ftp_base_url'].$config['upload_dir'] . $_GET['file'];
-			}else{
-				$preview_file = $config['current_path'] . $_GET["file"];
-			}
-			$info = pathinfo($preview_file);
-			ob_start();
-			?>
+            break;
+        case 'media_preview':
+            if (isset($_GET['file'])) {
+                $_GET['file'] = sanitize($_GET['file']);
+            }
+            if (isset($_GET['title'])) {
+                $_GET['title'] = sanitize($_GET['title']);
+            }
+            if ($ftp) {
+                $preview_file = $config['ftp_base_url'].$config['upload_dir'] . $_GET['file'];
+            } else {
+                $preview_file = $config['current_path'] . $_GET["file"];
+            }
+            $info = pathinfo($preview_file);
+            ob_start();
+            ?>
 			<div id="jp_container_1" class="jp-video" style="margin:0 auto;">
 				<div class="jp-type-single">
 				<div id="jquery_jplayer_1" class="jp-jplayer"></div>
@@ -291,7 +290,7 @@ if (isset($_GET['action'])) {
 				</div>
 				</div>
 			</div>
-			<?php if(in_array(strtolower($info['extension']), $config['ext_music'])): ?>
+			<?php if (in_array(strtolower($info['extension']), $config['ext_music'])): ?>
 
             <script type="text/javascript">
                 $(document).ready(function () {
@@ -626,21 +625,20 @@ if (isset($_GET['action'])) {
                         $url_file = $config['base_url'] . $config['upload_dir'] . str_replace($config['current_path'], '', $_GET["file"]);
                     }
 
-					$googledoc_url = urlencode($url_file);
-					$ret = "<iframe src=\"https://docs.google.com/viewer?url=" . $url_file . "&embedded=true\" class=\"google-iframe\"></iframe>";
-				}
-			}else{
-				$data = stripslashes(htmlspecialchars(file_get_contents($selected_file)));
-				if(in_array($info['extension'],array('html','html'))){
-					$ret = '<script src="https://cdn.ckeditor.com/ckeditor5/12.1.0/classic/ckeditor.js"></script><textarea id="textfile_edit_area" style="width:100%;height:300px;">'.$data.'</textarea><script>setTimeout(function(){ ClassicEditor.create( document.querySelector( "#textfile_edit_area" )).catch( function(error){ console.error( error ); } );  }, 500);</script>';
-				}else{
-					$ret = '<textarea id="textfile_edit_area" style="width:100%;height:300px;">'.$data.'</textarea>';
-				}
+                    $googledoc_url = urlencode($url_file);
+                    $ret = "<iframe src=\"https://docs.google.com/viewer?url=" . $url_file . "&embedded=true\" class=\"google-iframe\"></iframe>";
+                }
+            } else {
+                $data = stripslashes(htmlspecialchars(file_get_contents($selected_file)));
+                if (in_array($info['extension'], array('html','html'))) {
+                    $ret = '<script src="https://cdn.ckeditor.com/ckeditor5/12.1.0/classic/ckeditor.js"></script><textarea id="textfile_edit_area" style="width:100%;height:300px;">'.$data.'</textarea><script>setTimeout(function(){ ClassicEditor.create( document.querySelector( "#textfile_edit_area" )).catch( function(error){ console.error( error ); } );  }, 500);</script>';
+                } else {
+                    $ret = '<textarea id="textfile_edit_area" style="width:100%;height:300px;">'.$data.'</textarea>';
+                }
+            }
 
-			}
-
-			response($ret)->send();
-			exit;
+            response($ret)->send();
+            exit;
 
             break;
         default:

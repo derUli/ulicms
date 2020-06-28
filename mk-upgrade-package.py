@@ -40,7 +40,7 @@ def main():
               "tests", "run-tests.sh", "run-tests.bat",
               "run-tests.xampp.mac.sh", ".pydevproject", "CMSConfig.php", "log",
               "configurations", ".phpunit.result.cache", "nbproject", "report", 
-              "avatars"]
+              "avatars", ".php_cs.cache", ".php_cs.dist", ".phplint-cache"]
     if not args.with_config_js:
         ignore.append("config.js")
 

@@ -1,6 +1,7 @@
 <?php
 
 use function UliCMS\HTML\text;
+
 ?>
 
 <a href="<?php echo ModuleHelper::buildActionURL("info"); ?>"

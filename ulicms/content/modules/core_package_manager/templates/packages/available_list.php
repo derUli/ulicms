@@ -6,15 +6,14 @@
 // Implement a backend action which fetches the index of the package source
 use UliCMS\Services\Connectors\PackageSourceConnector;
 
-$permissionChecker = new ACL ();
+$permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("install_packages")) {
     if (!Settings::get("pkg_src")) {
         ?>
         <p>
             <strong><?php translate("error"); ?> </strong> <br />
             <?php
-            translate("pkgsrc_not_defined");
-            ?>
+            translate("pkgsrc_not_defined"); ?>
         </p>
         <?php
     } else {
@@ -52,8 +51,7 @@ if ($permissionChecker->hasPermission("install_packages")) {
                                 <td><?php
                                     echo StringHelper::isNotNullOrWhitespace($package->description) ?
                                             nl2br($package->description) :
-                                            get_translation("no_description_available");
-                                    ?>
+                                            get_translation("no_description_available"); ?>
                                 </td>
                                 <td>
                                     <a href="#" class="btn btn-info btn-sm remote-alert"
@@ -70,7 +68,8 @@ if ($permissionChecker->hasPermission("install_packages")) {
                                     </a>
                                 </td>
                             </tr>
-                        <?php } ?>
+                        <?php
+                        } ?>
                     </tbody>
                 </table>
             </div>

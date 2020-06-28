@@ -1,7 +1,7 @@
 <?php
 
-class ThemeInfoViewModel {
-
+class ThemeInfoViewModel
+{
     public $name;
     public $version;
     public $source;
@@ -9,5 +9,4 @@ class ThemeInfoViewModel {
     public $manufacturerName;
     public $manufacturerUrl;
     public $disableFunctions;
-
 }

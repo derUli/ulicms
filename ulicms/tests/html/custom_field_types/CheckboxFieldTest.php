@@ -1,12 +1,14 @@
 <?php
 
-class CheckboxFieldTest extends \PHPUnit\Framework\TestCase {
-
-    public function setUp() {
+class CheckboxFieldTest extends \PHPUnit\Framework\TestCase
+{
+    protected function setUp(): void
+    {
         include_once getLanguageFilePath("en");
     }
 
-    public function testRender() {
+    public function testRender()
+    {
         $field = new CheckboxField();
         $field->name = "my_field";
         $field->title = "enabld";
@@ -19,5 +21,4 @@ class CheckboxFieldTest extends \PHPUnit\Framework\TestCase {
         $expected = file_get_contents($expectedFile);
         $this->assertEquals(normalizeLN($expected), normalizeLN($rendered));
     }
-
 }

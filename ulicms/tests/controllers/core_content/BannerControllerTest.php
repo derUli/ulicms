@@ -3,32 +3,36 @@
 use UliCMS\Models\Content\Advertisement\Banner;
 use UliCMS\Exceptions\DatasetNotFoundException;
 
-class BannerControllerTest extends \PHPUnit\Framework\TestCase {
-
-    public function setUp() {
+class BannerControllerTest extends \PHPUnit\Framework\TestCase
+{
+    protected function setUp(): void
+    {
         LoggerRegistry::register(
-                "audit_log",
-                new Logger(Path::resolve("ULICMS_LOG/audit_log"))
+            "audit_log",
+            new Logger(Path::resolve("ULICMS_LOG/audit_log"))
         );
 
         $_POST = [];
     }
 
-    public function tearDown() {
+    protected function tearDown(): void
+    {
         $_POST = [];
 
         LoggerRegistry::unregister("audit_log");
         Database::pQuery(
-                "DELETE FROM `{prefix}banner` where html in (?) or "
+            "DELETE FROM `{prefix}banner` where html in (?) or "
                 . "name = ?",
-                [
+            [
                     "Werbung nervt",
                     "Nervige Werbung"
-                ]
-                , true);
+                ],
+            true
+        );
     }
 
-    public function testCreateReturnsModel() {
+    public function testCreateReturnsModel()
+    {
         $this->setPostVars();
 
         $controller = new BannerController();
@@ -38,7 +42,8 @@ class BannerControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertGreaterThanOrEqual(1, $banner->getId());
     }
 
-    protected function setPostVars() {
+    protected function setPostVars()
+    {
         $_POST["banner_name"] = "Nervige Werbung";
         $_POST["image_url"] = "";
         $_POST["link_url"] = "";
@@ -51,7 +56,8 @@ class BannerControllerTest extends \PHPUnit\Framework\TestCase {
         $_POST["date_to"] = "";
     }
     
-      public function testUpdateReturnsModel() {
+    public function testUpdateReturnsModel()
+    {
         $this->setPostVars();
         $controller = new BannerController();
         $id = $controller->_createPost()->getId();
@@ -65,7 +71,8 @@ class BannerControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("https://google.com", $banner->getLinkUrl());
     }
 
-    public function testDeletePostReturnsTrue() {
+    public function testDeletePostReturnsTrue()
+    {
         $banner = new Banner();
         $banner->setType("html");
         $banner->setHtml("Werbung nervt");
@@ -80,10 +87,10 @@ class BannerControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($banner->isPersistent());
     }
 
-    public function testDeletePostReturnsFalse() {
+    public function testDeletePostReturnsFalse()
+    {
         $controller = new BannerController();
         $success = $controller->_deletePost(PHP_INT_MAX);
         $this->assertFalse($success);
     }
-
 }

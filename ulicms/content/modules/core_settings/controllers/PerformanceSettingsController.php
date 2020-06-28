@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-class PerformanceSettingsController extends Controller {
-
-    public function savePost(): void {
+class PerformanceSettingsController extends Controller
+{
+    public function savePost(): void
+    {
         if (isset($_POST["cache_enabled"])) {
             Settings::delete("cache_disabled");
         } else {
@@ -16,7 +17,8 @@ class PerformanceSettingsController extends Controller {
         Response::redirect(ModuleHelper::buildActionUrl("performance_settings", "save=1"));
     }
 
-    public function clearCache(): void {
+    public function clearCache(): void
+    {
         if (!is_logged_in()) {
             Request::redirect("index.php");
         }
@@ -28,5 +30,4 @@ class PerformanceSettingsController extends Controller {
         }
         Request::redirect(ModuleHelper::buildActionURL("performance_settings", "clear_cache=1"));
     }
-
 }

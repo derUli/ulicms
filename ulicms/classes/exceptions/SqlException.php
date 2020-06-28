@@ -4,6 +4,6 @@ namespace UliCMS\Exceptions;
 
 use UliCMS\Exceptions\DatabaseException;
 
-class SqlException extends DatabaseException {
-
+class SqlException extends DatabaseException
+{
 }

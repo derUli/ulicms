@@ -2,83 +2,93 @@
 
 use UliCMS\CoreContent\Partials\ViewButtonRenderer;
 
-class ViewButtonRendererTest extends \PHPUnit\Framework\TestCase {
+class ViewButtonRendererTest extends \PHPUnit\Framework\TestCase
+{
+    private $user;
 
-	private $user;
+    protected function setUp(): void
+    {
+        $user = new User();
+        $user->setUsername("paul.panzer");
+        $user->setLastname("Panzer");
+        $user->setFirstname("Paul");
+        $user->setPassword("secret");
+        $user->setEmail("paul@panzer.de");
+        $user->save();
 
-	public function setUp() {
-		$user = new User();
-		$user->setUsername("paul.panzer");
-		$user->setLastname("Panzer");
-		$user->setFirstname("Paul");
-		$user->setPassword("secret");
-		$user->setEmail("paul@panzer.de");
-		$user->save();
+        $this->user = $user;
+    }
 
-		$this->user = $user;
-	}
+    protected function tearDown(): void
+    {
+        $this->user->delete();
+        Database::query("delete from {prefix}content where title like 'Test Page%'", true);
+    }
 
-	public function tearDown() {
-		$this->user->delete();
-		Database::query("delete from {prefix}content where title like 'Test Page%'", true);
-	}
+    public function testRenderReturnsHtml()
+    {
+        $allGroups = Group::getAll();
 
-	public function testRenderReturnsHtml() {
-		$allGroups = Group::getAll();
+        $page = new Page();
+        $page->slug = uniqid();
+        $page->title = "Test Page " . uniqid();
+        $page->author_id = $this->user->getId();
+        $page->group_id = $allGroups[0]->getId();
+        $page->save();
 
-		$page = new Page();
-		$page->slug = uniqid();
-		$page->title = "Test Page " . uniqid();
-		$page->author_id = $this->user->getId();
-		$page->group_id = $allGroups[0]->getId();
-		$page->save();
+        $render = new ViewButtonRenderer();
 
-		$render = new ViewButtonRenderer();
+        $html = $render->render(
+            $page->getID(),
+            $this->user
+        );
 
-		$html = $render->render($page->getID(),
-				$this->user);
+        $this->assertStringContainsString(
+            '<i class="fa fa-eye',
+            $html
+        );
+        $this->assertStringContainsString(
+            '?goid=',
+            $html
+        );
+    }
 
-		$this->assertStringContainsString(
-				'<i class="fa fa-eye', $html
-		);
-		$this->assertStringContainsString(
-				'?goid=', $html
-		);
-	}
+    public function testRenderNonRegularReturnsNothing()
+    {
+        $allGroups = Group::getAll();
 
-	public function testRenderNonRegularReturnsNothing() {
+        $page = new Node();
+        $page->slug = uniqid();
+        $page->title = "Test Page " . uniqid();
+        $page->author_id = $this->user->getId();
+        $page->group_id = $allGroups[0]->getId();
+        $page->save();
 
-		$allGroups = Group::getAll();
+        $render = new ViewButtonRenderer();
 
-		$page = new Node();
-		$page->slug = uniqid();
-		$page->title = "Test Page " . uniqid();
-		$page->author_id = $this->user->getId();
-		$page->group_id = $allGroups[0]->getId();
-		$page->save();
+        $this->assertEmpty($render->render(
+            $page->getID(),
+            $this->user
+        ));
+    }
 
-		$render = new ViewButtonRenderer();
+    public function testRenderCanNotReadReturnsNothing()
+    {
+        $allGroups = Group::getAll();
 
-		$this->assertEmpty($render->render($page->getID(),
-						$this->user));
-	}
+        $page = new Page();
+        $page->slug = uniqid();
+        $page->title = "Test Page " . uniqid();
+        $page->author_id = $this->user->getId();
+        $page->group_id = $allGroups[0]->getId();
+        $page->access = strval(PHP_INT_MAX);
+        $page->save();
 
-	public function testRenderCanNotReadReturnsNothing() {
+        $render = new ViewButtonRenderer();
 
-		$allGroups = Group::getAll();
-
-		$page = new Page();
-		$page->slug = uniqid();
-		$page->title = "Test Page " . uniqid();
-		$page->author_id = $this->user->getId();
-		$page->group_id = $allGroups[0]->getId();
-		$page->access = strval(PHP_INT_MAX);
-		$page->save();
-
-		$render = new ViewButtonRenderer();
-
-		$this->assertEmpty($render->render($page->getID(),
-						$this->user));
-	}
-
+        $this->assertEmpty($render->render(
+            $page->getID(),
+            $this->user
+        ));
+    }
 }

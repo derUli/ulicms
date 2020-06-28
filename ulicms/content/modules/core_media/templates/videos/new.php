@@ -69,5 +69,5 @@ if ($permissionChecker->hasPermission("videos") and $permissionChecker->hasPermi
     </form>
     <?php
 } else {
-    noPerms();
-}
+        noPerms();
+    }

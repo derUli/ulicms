@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Constants\RequestMethod;
+
 ?>
 <p>
     <a
@@ -10,11 +11,11 @@ use UliCMS\Constants\RequestMethod;
 <h1><?php translate("edit_footer_text"); ?></h1>
 <?php
 echo ModuleHelper::buildMethodCallForm(
-        FooterTextController::class,
-        "save",
-        [],
-        RequestMethod::POST,
-        [
+    FooterTextController::class,
+    "save",
+    [],
+    RequestMethod::POST,
+    [
             "id" => "footer_text_form"
         ]
 );
@@ -35,9 +36,9 @@ $translation->addKey("changes_was_saved");
 $translation->render();
 
 enqueueScriptFile(
-        ModuleHelper::buildRessourcePath(
-                "core_settings",
-                "js/footer_text.js"
-        )
+    ModuleHelper::buildRessourcePath(
+        "core_settings",
+        "js/footer_text.js"
+    )
 );
 combinedScriptHtml();

@@ -11,13 +11,17 @@ if (is_null($value)) {
          id="thumbnail-<?php Template::escape(ViewBag::get("field_name")); ?>"
          style="display: none">
     <div class="field">
-        <strong class="field-label"><?php translate($field->title); ?> <?php if ($field->required) echo "*"; ?></strong>
+        <strong class="field-label"><?php translate($field->title); ?> <?php if ($field->required) {
+    echo "*";
+} ?></strong>
         <input type="text"
                name="<?php Template::escape(ViewBag::get("field_name")); ?>"
                id="field-<?php Template::escape(ViewBag::get("field_name")); ?>"
                value="<?php Template::escape($value); ?>" class="fm"
                data-fm-type="<?php ViewBag::get("fm_type") ? esc(ViewBag::get("fm_type")) : "files" ?>"
-               <?php if ($field->required) echo "required"; ?>
+               <?php if ($field->required) {
+    echo "required";
+} ?>
                <?php echo ModuleHelper::buildHTMLAttributesFromArray($field->htmlAttributes); ?>
                readonly>
     </div>

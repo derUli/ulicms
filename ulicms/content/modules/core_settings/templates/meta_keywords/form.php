@@ -7,10 +7,10 @@ if ($permissionChecker->hasPermission("settings_simple")) {
         $lang = $languages[$i];
         $metaKeywords[$lang] = Settings::get("meta_keywords_" . $lang);
 
-        if (!$metaKeywords[$lang])
+        if (!$metaKeywords[$lang]) {
             $metaKeywords[$lang] = Settings::get("meta_keywords");
-    }
-    ?>
+        }
+    } ?>
     <p>
         <a href="<?php echo ModuleHelper::buildActionURL("settings_simple"); ?>"
            class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
@@ -19,8 +19,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
     <?php
     echo ModuleHelper::buildMethodCallForm("MetaKeywordsController", "save", [], "post", array(
         "id" => "meta_keywords_settings"
-    ));
-    ?>
+    )); ?>
     <table>
         <tr>
             <td style="min-width: 100px;"><strong>
@@ -32,23 +31,19 @@ if ($permissionChecker->hasPermission("settings_simple")) {
         </tr>
         <?php
         for ($n = 0; $n < count($languages); $n ++) {
-            $lang = $languages[$n];
-            ?>
+            $lang = $languages[$n]; ?>
             <tr>
                 <td>
                     <?php esc(getLanguageNameByCode($lang)); ?>
                 </td>
                 <td><input
                         name="meta_keywords_<?php
-                        esc($lang);
-                        ?>"
+                        esc($lang); ?>"
                         value="<?php
-                        esc($metaKeywords[$lang]);
-                        ?>"></td>
+                        esc($metaKeywords[$lang]); ?>"></td>
             </tr>
             <?php
-        }
-        ?>
+        } ?>
         <tr>
             <td></td>
             <td class="text-center">

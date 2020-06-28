@@ -1,8 +1,9 @@
 <?php
 
-class SimpleSettingsControllerTest extends \PHPUnit\Framework\TestCase {
-
-    public function testGetTimezones() {
+class SimpleSettingsControllerTest extends \PHPUnit\Framework\TestCase
+{
+    public function testGetTimezones()
+    {
         $controller = ControllerRegistry::get("SimpleSettingsController");
 
         $timezones = $controller->getTimezones();
@@ -11,5 +12,4 @@ class SimpleSettingsControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertContains("Asia/Tokyo", $timezones);
         $this->assertContains("Australia/Sydney", $timezones);
     }
-
 }

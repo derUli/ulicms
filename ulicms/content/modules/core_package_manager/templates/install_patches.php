@@ -6,8 +6,7 @@ use UliCMS\Packages\Patch;
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("update_system")) {
     // No time limit
-    @set_time_limit(0);
-    ?>
+    @set_time_limit(0); ?>
     <p>
         <a
             href="<?php echo ModuleHelper::buildActionURL("available_patches"); ?>"

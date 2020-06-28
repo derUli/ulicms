@@ -5,27 +5,29 @@ declare(strict_types=1);
 use UliCMS\Utils\CacheUtil;
 use UliCMS\Packages\Theme;
 
-class DesignSettingsController extends Controller {
-
+class DesignSettingsController extends Controller
+{
     private $moduleName = "core_settings";
     protected $generatedSCSS;
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         // generate scss file for design settings if it doesn't exist.
         $this->generatedSCSS = Path::resolve(
-                        "ULICMS_GENERATED/design_variables.scss"
+            "ULICMS_GENERATED/design_variables.scss"
         );
         if (!file_exists($this->generatedSCSS)) {
             $this->_generateSCSSToFile();
         }
     }
 
-    public function savePost(): void {
+    public function savePost(): void
+    {
         if (!isset($_REQUEST["disable_custom_layout_options"])) {
             Settings::set(
-                    "disable_custom_layout_options",
-                    "disable"
+                "disable_custom_layout_options",
+                "disable"
             );
         } else {
             Settings::delete("disable_custom_layout_options");
@@ -33,8 +35,8 @@ class DesignSettingsController extends Controller {
 
         if (isset($_REQUEST["no_mobile_design_on_tablet"])) {
             Settings::set(
-                    "no_mobile_design_on_tablet",
-                    "no_mobile_design_on_tablet"
+                "no_mobile_design_on_tablet",
+                "no_mobile_design_on_tablet"
             );
         } else {
             Settings::delete("no_mobile_design_on_tablet");
@@ -59,9 +61,9 @@ class DesignSettingsController extends Controller {
 
         // Wenn Formular abgesendet wurde, Wert Speichern
         $themes = getAllThemes();
-        if (empty($_REQUEST["mobile_theme"]))
+        if (empty($_REQUEST["mobile_theme"])) {
             Settings::delete("mobile_theme");
-        else if (faster_in_array($_REQUEST["mobile_theme"], $themes)) {
+        } elseif (faster_in_array($_REQUEST["mobile_theme"], $themes)) {
             Settings::set("mobile_theme", $_REQUEST["mobile_theme"]);
             $mobile_theme = $_REQUEST["mobile_theme"];
         }
@@ -90,8 +92,8 @@ class DesignSettingsController extends Controller {
         if (Settings::get("header-background-color") != $_REQUEST["header-background-color"]
         ) {
             Settings::set(
-                    "header-background-color",
-                    $_REQUEST["header-background-color"]
+                "header-background-color",
+                $_REQUEST["header-background-color"]
             );
         }
 
@@ -106,8 +108,8 @@ class DesignSettingsController extends Controller {
         if (Settings::get("body-background-color") != $_REQUEST["body-background-color"]
         ) {
             Settings::set(
-                    "body-background-color",
-                    $_REQUEST["body-background-color"]
+                "body-background-color",
+                $_REQUEST["body-background-color"]
             );
         }
 
@@ -119,7 +121,8 @@ class DesignSettingsController extends Controller {
         HTTPStatusCodeResult(HttpStatusCode::OK);
     }
 
-    public function getFontFamilys(): array {
+    public function getFontFamilys(): array
+    {
         global $fonts;
         $fonts = [];
         $fonts["Times New Roman"] = "TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif";
@@ -157,11 +160,12 @@ class DesignSettingsController extends Controller {
         return $fonts;
     }
 
-    public function getGoogleFonts(): array {
+    public function getGoogleFonts(): array
+    {
         $fonts = [];
         $file = ModuleHelper::buildModuleRessourcePath(
-                        $this->moduleName,
-                        "data/webFontNames.opml"
+            $this->moduleName,
+            "data/webFontNames.opml"
         );
         $content = file_get_contents($file);
         $xml = new SimpleXMLElement($content);
@@ -171,7 +175,8 @@ class DesignSettingsController extends Controller {
         return $fonts;
     }
 
-    public function themePreview(): void {
+    public function themePreview(): void
+    {
         $themeName = Request::getVar("theme", null, "str");
 
         if (!$themeName) {
@@ -182,25 +187,27 @@ class DesignSettingsController extends Controller {
 
         if ($screenshot) {
             HTMLResult(
-                    UliCMS\HTML\imageTag(
-                            $screenshot,
-                            [
+                UliCMS\HTML\imageTag(
+                    $screenshot,
+                    [
                                 "class" => "img-responsive theme-preview"
                             ]
-                    )
+                )
             );
         }
 
         HTTPStatusCodeResult(HttpStatusCode::NOT_FOUND);
     }
 
-    public function _themePreview(string $themeName): ?string {
+    public function _themePreview(string $themeName): ?string
+    {
         $theme = new Theme($themeName);
         $screenshot = $theme->getScreenshotFile();
         return $screenshot;
     }
 
-    public function _generateSCSS(): ?string {
+    public function _generateSCSS(): ?string
+    {
         $settings = [
             "header-background-color" => Settings::get("header-background-color"),
             "body-text-color" => Settings::get("body-text-color"),
@@ -223,7 +230,8 @@ class DesignSettingsController extends Controller {
         return $output;
     }
 
-    public function _generateSCSSToFile(): ?string {
+    public function _generateSCSSToFile(): ?string
+    {
         $scss = $this->_generateSCSS();
 
         if ($scss) {
@@ -234,37 +242,40 @@ class DesignSettingsController extends Controller {
         return null;
     }
 
-    public function setDefaultTheme(): void {
+    public function setDefaultTheme(): void
+    {
         $theme = Request::getVar("name");
         $this->_setDefaultTheme($theme);
         Settings::set("theme", $theme);
 
         Response::sendHttpStatusCodeResultIfAjax(
-                HTTPStatusCode::OK,
-                ModuleHelper::buildActionURL("packages")
+            HTTPStatusCode::OK,
+            ModuleHelper::buildActionURL("packages")
         );
     }
 
-    public function _setDefaultTheme(?string $theme): void {
+    public function _setDefaultTheme(?string $theme): void
+    {
         Settings::set("theme", $theme);
     }
 
-    public function setDefaultMobileTheme(): void {
+    public function setDefaultMobileTheme(): void
+    {
         $theme = Request::getVar("name");
         $this->_setDefaultMobileTheme($theme);
 
         Response::sendHttpStatusCodeResultIfAjax(
-                HTTPStatusCode::OK,
-                ModuleHelper::buildActionURL("packages")
+            HTTPStatusCode::OK,
+            ModuleHelper::buildActionURL("packages")
         );
     }
 
-    public function _setDefaultMobileTheme(?string $theme): void {
+    public function _setDefaultMobileTheme(?string $theme): void
+    {
         if ($theme !== Settings::get("mobile_theme")) {
             Settings::set("mobile_theme", $theme);
         } else {
             Settings::delete("mobile_theme");
         }
     }
-
 }

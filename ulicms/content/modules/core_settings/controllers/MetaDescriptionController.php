@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 use UliCMS\Utils\CacheUtil;
 
-class MetaDescriptionController extends Controller {
-
-    public function savePost(): void {
+class MetaDescriptionController extends Controller
+{
+    public function savePost(): void
+    {
         $languages = getAllLanguages();
         for ($i = 0; $i < count($languages); $i ++) {
             $lang = $languages[$i];
@@ -28,5 +29,4 @@ class MetaDescriptionController extends Controller {
 
         Request::redirect(ModuleHelper::buildActionURL("meta_description"));
     }
-
 }

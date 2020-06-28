@@ -1,10 +1,11 @@
 <?php
 
-class HtmlFieldTest extends \PHPUnit\Framework\TestCase {
-
+class HtmlFieldTest extends \PHPUnit\Framework\TestCase
+{
     private $testUser;
 
-    public function setUp() {
+    protected function setUp(): void
+    {
         include_once getLanguageFilePath("en");
 
         $user = new User();
@@ -19,12 +20,13 @@ class HtmlFieldTest extends \PHPUnit\Framework\TestCase {
         $this->testUser = $user;
     }
 
-    public function tearDown() {
+    protected function tearDown(): void
+    {
         $this->testUser->delete();
-            }
+    }
 
-    public function testRender() {
-
+    public function testRender()
+    {
         $this->testUser->registerSession();
 
         $field = new HtmlField();
@@ -39,5 +41,4 @@ class HtmlFieldTest extends \PHPUnit\Framework\TestCase {
         $expected = file_get_contents($expectedFile);
         $this->assertEquals(normalizeLN($expected), normalizeLN($rendered));
     }
-
 }

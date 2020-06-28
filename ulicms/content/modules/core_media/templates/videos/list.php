@@ -31,14 +31,12 @@ if ($permissionChecker->hasPermission("videos")) {
 
     <h1>
         <?php
-        translate("videos");
-        ?>
+        translate("videos"); ?>
     </h1>
     <div class="field">
         <?php translate("category"); ?>
         <?php
-        echo Categories::getHTMLSelect($_SESSION["filter_category"], true);
-        ?>
+        echo Categories::getHTMLSelect($_SESSION["filter_category"], true); ?>
     </div>
     <?php if ($permissionChecker->hasPermission("videos_create")) { ?>
         <div class="voffset2">
@@ -53,24 +51,19 @@ if ($permissionChecker->hasPermission("videos")) {
             <thead>
                 <tr>
                     <th><?php
-                        translate("id");
-                        ?>
+                        translate("id"); ?>
                     </th>
                     <th><?php
-                        translate("name");
-                        ?>
+                        translate("name"); ?>
                     </th>
                     <th class="hide-on-mobile"><?php
-                        translate("ogg_file");
-                        ?>
+                        translate("ogg_file"); ?>
                     </th>
                     <th class="hide-on-mobile"><?php
-                        translate("webm_file");
-                        ?>
+                        translate("webm_file"); ?>
                     </th>
                     <th class="hide-on-mobile"><?php
-                        translate("mp4_file");
-                        ?>
+                        translate("mp4_file"); ?>
                     </th>
                     <?php if ($permissionChecker->hasPermission("videos_edit")) { ?>
                         <td class="no-sort"></td>
@@ -84,24 +77,19 @@ if ($permissionChecker->hasPermission("videos")) {
                     ?>
                     <tr id="dataset-<?php echo $row->id; ?>">
                         <td><?php
-                            echo $row->id;
-                            ?>
+                            echo $row->id; ?>
                         </td>
                         <td><?php
-                            esc($row->name);
-                            ?>
+                            esc($row->name); ?>
                         </td>
                         <td class="hide-on-mobile"><?php
-                            esc(basename($row->ogg_file));
-                            ?>
+                            esc(basename($row->ogg_file)); ?>
                         </td>
                         <td class="hide-on-mobile"><?php
-                            esc(basename($row->webm_file));
-                            ?>
+                            esc(basename($row->webm_file)); ?>
                         </td>
                         <td class="hide-on-mobile"><?php
-                            esc(basename($row->mp4_file));
-                            ?>
+                            esc(basename($row->mp4_file)); ?>
                         </td>
                         <?php if ($permissionChecker->hasPermission("videos_edit")) { ?>
                             <td><a
@@ -129,19 +117,17 @@ if ($permissionChecker->hasPermission("videos")) {
                         <?php } ?>
                     </tr>
                     <?php
-                }
-                ?>
+                } ?>
             </tbody>
         </table>
     </div>
     <?php
     enqueueScriptFile(ModuleHelper::buildModuleRessourcePath("core_media", "js/video.js"));
-    combinedScriptHtml();
-    ?>
+    combinedScriptHtml(); ?>
     <?php
 } else {
-    noPerms();
-}
+        noPerms();
+    }
 
 $translation = new JSTranslation(array(
     "ask_for_delete"

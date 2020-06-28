@@ -2,16 +2,18 @@
 
 use UliCMS\Exceptions\AccessDeniedException;
 
-class ControllerTest extends \PHPUnit\Framework\TestCase {
-
-    public function setUp() {
+class ControllerTest extends \PHPUnit\Framework\TestCase
+{
+    protected function setUp(): void
+    {
         $_SERVER["REQUEST_METHOD"] = "POST";
         $_SESSION = [];
 
         Translation::loadAllModuleLanguageFiles("en");
     }
 
-    public function tearDown() {
+    protected function tearDown(): void
+    {
         $_REQUEST = [];
         $_SERVER = [];
         $_SESSION = [];
@@ -19,7 +21,8 @@ class ControllerTest extends \PHPUnit\Framework\TestCase {
         Database::deleteFrom("users", "username like 'testuser-%'");
     }
 
-    public function testCallNonExistingMethod() {
+    public function testCallNonExistingMethod()
+    {
         $controller = new PageController();
 
         $_REQUEST["sClass"] = PageController::class;
@@ -30,7 +33,8 @@ class ControllerTest extends \PHPUnit\Framework\TestCase {
         $controller->runCommand();
     }
 
-    public function testCallExistingPostMethodAccessDenied() {
+    public function testCallExistingPostMethodAccessDenied()
+    {
         $controller = new PageController();
 
         $_REQUEST["sClass"] = PageController::class;
@@ -40,7 +44,8 @@ class ControllerTest extends \PHPUnit\Framework\TestCase {
         $controller->runCommand();
     }
 
-    public function testCallExistingMethodAccessDenied() {
+    public function testCallExistingMethodAccessDenied()
+    {
         $controller = new PageController();
 
         $_REQUEST["sClass"] = PageController::class;
@@ -50,7 +55,8 @@ class ControllerTest extends \PHPUnit\Framework\TestCase {
         $controller->runCommand();
     }
 
-    public function testCallPostMethod() {
+    public function testCallPostMethod()
+    {
         $user = $this->getAdminUser();
         $_SESSION["login_id"] = $user->getId();
 
@@ -62,12 +68,13 @@ class ControllerTest extends \PHPUnit\Framework\TestCase {
         $controller->runCommand();
 
         $this->assertEquals(
-                "This is POST answer.",
-                ViewBag::get("sample_text")
+            "This is POST answer.",
+            ViewBag::get("sample_text")
         );
     }
 
-    public function testCallHeadMethod() {
+    public function testCallHeadMethod()
+    {
         $user = $this->getAdminUser();
         $_SESSION["login_id"] = $user->getId();
 
@@ -80,12 +87,13 @@ class ControllerTest extends \PHPUnit\Framework\TestCase {
         $controller->runCommand();
 
         $this->assertEquals(
-                "Unkwown Request Method",
-                ViewBag::get("sample_text")
+            "Unkwown Request Method",
+            ViewBag::get("sample_text")
         );
     }
 
-    protected function getAdminUser(): User {
+    protected function getAdminUser(): User
+    {
         $user = new User();
         $user->setUsername("testuser-ist-admin");
         $user->setLastname("Admin");
@@ -95,5 +103,4 @@ class ControllerTest extends \PHPUnit\Framework\TestCase {
         $user->save();
         return $user;
     }
-
 }

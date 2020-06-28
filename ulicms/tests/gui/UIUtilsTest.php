@@ -2,9 +2,10 @@
 
 use UliCMS\CoreContent\UIUtils;
 
-class UIUtilsTest extends \PHPUnit\Framework\TestCase {
-
-    public function testGetRobotsListItems() {
+class UIUtilsTest extends \PHPUnit\Framework\TestCase
+{
+    public function testGetRobotsListItems()
+    {
         $items = UIUtils::getRobotsListItems();
 
         $this->assertCount(5, $items);
@@ -19,11 +20,11 @@ class UIUtilsTest extends \PHPUnit\Framework\TestCase {
             $this->assertNotEmpty($items[$i]->getText());
             $countNoItems += intval(str_contains($items[$i]->getValue(), "no"));
             $countItems += intval(
-                    !str_contains($items[$i]->getValue(), "no"));
+                !str_contains($items[$i]->getValue(), "no")
+            );
         }
 
         $this->assertEquals(1, $countItems);
         $this->assertEquals(3, $countNoItems);
     }
-
 }

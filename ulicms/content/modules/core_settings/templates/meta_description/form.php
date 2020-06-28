@@ -9,8 +9,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
         if (!$meta_descriptions[$lang]) {
             $meta_descriptions[$lang] = Settings::get("meta_description");
         }
-    }
-    ?>
+    } ?>
     <p>
         <a href="<?php echo ModuleHelper::buildActionURL("settings_simple"); ?>"
            class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
@@ -19,8 +18,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
     <?php
     echo ModuleHelper::buildMethodCallForm("MetaDescriptionController", "save", [], "post", array(
         "id" => "meta_description_settings"
-    ));
-    ?>
+    )); ?>
     <table style="border: 0">
         <tr>
             <td style="min-width: 100px;"><strong><?php translate("language"); ?>
@@ -30,23 +28,19 @@ if ($permissionChecker->hasPermission("settings_simple")) {
         </tr>
         <?php
         for ($n = 0; $n < count($languages); $n ++) {
-            $lang = $languages[$n];
-            ?>
+            $lang = $languages[$n]; ?>
             <tr>
                 <td>
                     <?php esc(getLanguageNameByCode($lang)); ?>
                 </td>
                 <td><input
                         name="meta_description_<?php
-                        esc($lang);
-                        ?>"
+                        esc($lang); ?>"
                         value="<?php
-                        esc($meta_descriptions[$lang]);
-                        ?>"></td>
+                        esc($meta_descriptions[$lang]); ?>"></td>
             </tr>
             <?php
-        }
-        ?>
+        } ?>
         <tr>
             <td></td>
             <td class="text-center">

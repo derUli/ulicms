@@ -8,7 +8,8 @@ use zz\Html\HTMLMinify;
 use UliCMS\Backend\BackendPageRenderer;
 use UliCMS\Helpers\TestHelper;
 
-function JSONResult($data, int $status = 200, $compact = true): void {
+function JSONResult($data, int $status = 200, $compact = true): void
+{
     Response::sendStatusHeader($status);
     $json = $compact ?
             json_encode($data, JSON_UNESCAPED_SLASHES) :
@@ -21,7 +22,8 @@ function JSONResult($data, int $status = 200, $compact = true): void {
     exit();
 }
 
-function RawJSONResult(string $data, int $status = 200): void {
+function RawJSONResult(string $data, int $status = 200): void
+{
     Response::sendStatusHeader($status);
     $size = getStringLengthInBytes($data);
     send_header('Content-Type: application/json');
@@ -31,9 +33,9 @@ function RawJSONResult(string $data, int $status = 200): void {
 }
 
 function HTMLResult(
-        string $data,
-        int $status = 200,
-        int $optimizationLevel = HTMLMinify::OPTIMIZATION_SIMPLE
+    string $data,
+    int $status = 200,
+    int $optimizationLevel = HTMLMinify::OPTIMIZATION_SIMPLE
 ): void {
     Response::sendStatusHeader($status);
     $data = optimizeHtml($data, $optimizationLevel);
@@ -44,7 +46,8 @@ function HTMLResult(
     exit();
 }
 
-function TextResult(string $data, int $status = 200): void {
+function TextResult(string $data, int $status = 200): void
+{
     Response::sendStatusHeader($status);
     $size = getStringLengthInBytes($data);
     send_header('Content-Type: text/plain; charset=utf-8');
@@ -52,7 +55,8 @@ function TextResult(string $data, int $status = 200): void {
     die($data);
 }
 
-function Result(string $data, int $status = 200, ?string $type = null): void {
+function Result(string $data, int $status = 200, ?string $type = null): void
+{
     Response::sendStatusHeader($status);
     $size = getStringLengthInBytes($data);
     if ($type) {
@@ -63,8 +67,8 @@ function Result(string $data, int $status = 200, ?string $type = null): void {
 }
 
 function HTTPStatusCodeResult(
-        int $status,
-        ?string $description = null
+    int $status,
+    ?string $description = null
 ): void {
     $header = $_SERVER ["SERVER_PROTOCOL"] . " "
             . getStatusCodeByNumber(intval($status));
@@ -77,7 +81,8 @@ function HTTPStatusCodeResult(
     exit();
 }
 
-function ExceptionResult(string $message, int $status = 500): void {
+function ExceptionResult(string $message, int $status = 500): void
+{
     ViewBag::set("exception", nl2br($message));
     $content = Template::executeDefaultOrOwnTemplate("exception.php");
 
@@ -95,7 +100,8 @@ function ExceptionResult(string $message, int $status = 500): void {
     }
 }
 
-function ActionResult(string $action, $model = null): void {
+function ActionResult(string $action, $model = null): void
+{
     $renderer = new BackendPageRenderer($action, $model);
     $renderer->render();
 }

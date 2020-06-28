@@ -11,20 +11,24 @@ use UliCMS\Utils\File;
 // use this to output a string as html
 // html specialchars are encoded, line breaks are replaced with
 // <br>
-function text($str) {
+function text($str)
+{
     return \nl2br(\_esc($str));
 }
 
-function _nbsp(string $text = " "): string {
+function _nbsp(string $text = " "): string
+{
     return str_replace(" ", "&nbsp;", _esc($text));
 }
 
-function nbsp(string $text = " "): void {
+function nbsp(string $text = " "): void
+{
     echo _nbsp($text);
 }
 
 // generates a html img tag
-function imageTag(string $file, array $htmlAttributes = []): string {
+function imageTag(string $file, array $htmlAttributes = []): string
+{
     if (!isset($htmlAttributes["src"])) {
         $htmlAttributes["src"] = $file;
     }
@@ -33,12 +37,14 @@ function imageTag(string $file, array $htmlAttributes = []): string {
 }
 
 // generates a html link which looks like a button
-function buttonLink(string $url,
-        string $text,
-        ?string $type = null,
-        bool $allowHtml = false,
-        ?string $target = null,
-        array $htmlAttributes = []): string {
+function buttonLink(
+    string $url,
+    string $text,
+    ?string $type = null,
+    bool $allowHtml = false,
+    ?string $target = null,
+    array $htmlAttributes = []
+): string {
     if (!isset($htmlAttributes["class"])) {
         $htmlAttributes["class"] = $type;
     } else {
@@ -48,11 +54,13 @@ function buttonLink(string $url,
 }
 
 // generates a html link
-function link(string $url,
-        string $text,
-        bool $allowHtml = false,
-        ?string $target = null,
-        array $htmlAttributes = []): string {
+function link(
+    string $url,
+    string $text,
+    bool $allowHtml = false,
+    ?string $target = null,
+    array $htmlAttributes = []
+): string {
     $htmlAttributes["href"] = $url;
     if (is_present($target)) {
         $htmlAttributes["target"] = $target;
@@ -69,7 +77,8 @@ function link(string $url,
 
 // Use this method to output font-awesome icons
 // e.g. icon("fas fa-cog");
-function icon(string $classes, array $htmlAttributes = []): string {
+function icon(string $classes, array $htmlAttributes = []): string
+{
     if (!isset($htmlAttributes["class"])) {
         $htmlAttributes["class"] = $classes;
     } else {
@@ -81,8 +90,8 @@ function icon(string $classes, array $htmlAttributes = []): string {
 }
 
 // embed an image as base64 data URI
-function imageTagInline(string $file, array $htmlAttributes = []): string {
-
+function imageTagInline(string $file, array $htmlAttributes = []): string
+{
     $url = File::toDataUri($file);
     if (!$url) {
         throw new FileNotFoundException("Image {$file} not found");
@@ -92,6 +101,7 @@ function imageTagInline(string $file, array $htmlAttributes = []): string {
 }
 
 // returns true if the string contains html codes
-function stringContainsHtml(string $string): bool {
+function stringContainsHtml(string $string): bool
+{
     return $string != strip_tags($string);
 }

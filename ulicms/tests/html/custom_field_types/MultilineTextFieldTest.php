@@ -1,12 +1,14 @@
 <?php
 
-class MultilineTextFieldTest extends \PHPUnit\Framework\TestCase {
-
-    public function setUp() {
+class MultilineTextFieldTest extends \PHPUnit\Framework\TestCase
+{
+    protected function setUp(): void
+    {
         include_once getLanguageFilePath("en");
     }
 
-    public function testRender() {
+    public function testRender()
+    {
         $field = new MultilineTextField();
         $field->name = "my_field";
         $field->title = "users";
@@ -19,5 +21,4 @@ class MultilineTextFieldTest extends \PHPUnit\Framework\TestCase {
         $expected = file_get_contents($expectedFile);
         $this->assertEquals(normalizeLN($expected), normalizeLN($rendered));
     }
-
 }

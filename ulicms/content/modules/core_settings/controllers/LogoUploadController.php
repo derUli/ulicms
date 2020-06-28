@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 use UliCMS\Utils\CacheUtil;
 
-class LogoUploadController extends Controller {
-
-    public function upload(): void {
+class LogoUploadController extends Controller
+{
+    public function upload(): void
+    {
         // Logo Upload
         if (!empty($_FILES['logo_upload_file']['name'])) {
             $logo_upload = $_FILES['logo_upload_file'];
@@ -37,17 +38,16 @@ class LogoUploadController extends Controller {
         }
 
         Settings::set(
+            "logo_disabled",
+            Request::getVar(
                 "logo_disabled",
-                Request::getVar(
-                        "logo_disabled",
-                        "no",
-                        "str"
-                )
+                "no",
+                "str"
+            )
         );
 
         CacheUtil::clearPageCache();
 
         Request::redirect(ModuleHelper::buildActionURL("logo_upload"));
     }
-
 }

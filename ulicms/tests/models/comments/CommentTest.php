@@ -5,22 +5,25 @@ use UliCMS\Constants\CommentStatus;
 use UliCMS\Exceptions\DatasetNotFoundException;
 use UliCMS\Utils\CacheUtil;
 
-class CommentTest extends \PHPUnit\Framework\TestCase {
-
-    public function setUp() {
+class CommentTest extends \PHPUnit\Framework\TestCase
+{
+    protected function setUp(): void
+    {
         require_once getLanguageFilePath("en");
         require_once ModuleHelper::buildModuleRessourcePath("core_comments", "lang/en.php");
         require_once ModuleHelper::buildModuleRessourcePath("core_forms", "lang/en.php");
     }
 
-    public function tearDown() {
+    protected function tearDown(): void
+    {
         Database::deleteFrom("comments", "text like 'Unit Test%'");
         unset($_POST["my_homepage_url"]);
         CacheUtil::clearCache();
         Database::query("update {prefix}comments set ip = null", true);
     }
 
-    public function tesSetDateInvalidArgument() {
+    public function tesSetDateInvalidArgument()
+    {
         $comment = new Comment();
         try {
             $comment->setDate("foo");
@@ -30,7 +33,8 @@ class CommentTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetUnreadCount() {
+    public function testGetUnreadCount()
+    {
         $content = ContentFactory::getAll();
         $first = $content[0];
         $second = $content[1];
@@ -52,7 +56,8 @@ class CommentTest extends \PHPUnit\Framework\TestCase {
         $this->assertGreaterThanOrEqual(1, Comment::getUnreadCount());
     }
 
-    public function testGetReadCount() {
+    public function testGetReadCount()
+    {
         $content = ContentFactory::getAll();
         $first = $content[0];
         $second = $content[1];
@@ -75,7 +80,8 @@ class CommentTest extends \PHPUnit\Framework\TestCase {
         $this->assertGreaterThanOrEqual(1, Comment::getReadCount());
     }
 
-    public function testGetAllCount() {
+    public function testGetAllCount()
+    {
         $content = ContentFactory::getAll();
         $first = $content[0];
         $second = $content[1];
@@ -115,7 +121,8 @@ class CommentTest extends \PHPUnit\Framework\TestCase {
         $this->assertGreaterThanOrEqual(1, Comment::getAllCount());
     }
 
-    public function testIsSpamNull() {
+    public function testIsSpamNull()
+    {
         $comment = new Comment();
         $comment->setAuthorName("John Doe");
         $comment->setAuthorEmail("john@doe.de");
@@ -128,7 +135,8 @@ class CommentTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull($comment->isSpam());
     }
 
-    public function testIsSpamError() {
+    public function testIsSpamError()
+    {
         $_POST["my_homepage_url"] = "http://www.ulicms.de";
 
         $comment = new Comment();
@@ -154,7 +162,8 @@ class CommentTest extends \PHPUnit\Framework\TestCase {
         unset($_POST["my_homepage_url"]);
     }
 
-    public function testCreateUpdateAndDelete() {
+    public function testCreateUpdateAndDelete()
+    {
         $content = ContentFactory::getAll();
         $first = $content[0];
         $second = $content[1];
@@ -226,7 +235,8 @@ class CommentTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetContentWithContentId() {
+    public function testGetContentWithContentId()
+    {
         $contents = ContentFactory::getAll();
         $first = $contents[0];
 
@@ -238,12 +248,14 @@ class CommentTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals($first->id, $content->getId());
     }
 
-    public function testGetContentWithNull() {
+    public function testGetContentWithNull()
+    {
         $comment = new Comment();
         $this->assertNull($comment->getContent());
     }
 
-    public function testGetAll() {
+    public function testGetAll()
+    {
         $contents = ContentFactory::getAll();
         $first = $contents[0];
 
@@ -287,7 +299,8 @@ class CommentTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetAllByContentId() {
+    public function testGetAllByContentId()
+    {
         $contents = ContentFactory::getAll();
         $last = array_pop($contents);
 
@@ -354,7 +367,8 @@ class CommentTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("Unit Test 4", $comment->getText());
     }
 
-    public function testGetAllcoByStatus() {
+    public function testGetAllcoByStatus()
+    {
         $contents = ContentFactory::getAll();
         $last = array_pop($contents);
         $comment = new Comment();
@@ -416,37 +430,43 @@ class CommentTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testSetUrlWithFullUrl() {
+    public function testSetUrlWithFullUrl()
+    {
         $comment = new Comment();
         $comment->setAuthorUrl("https://www.ulicms.de");
         $this->assertEquals("https://www.ulicms.de", $comment->getAuthorUrl());
     }
 
-    public function testSetUrlWithNoUrl() {
+    public function testSetUrlWithNoUrl()
+    {
         $comment = new Comment();
         $comment->setAuthorUrl("this is not an url");
         $this->assertNull($comment->getAuthorUrl());
     }
 
-    public function testSetUrlWithIncompleteHttpUrl() {
+    public function testSetUrlWithIncompleteHttpUrl()
+    {
         $comment = new Comment();
         $comment->setAuthorUrl("http://");
         $this->assertNull($comment->getAuthorUrl());
     }
 
-    public function testSetUrlWithIncompleteHttpsUrl() {
+    public function testSetUrlWithIncompleteHttpsUrl()
+    {
         $comment = new Comment();
         $comment->setAuthorUrl("https://");
         $this->assertNull($comment->getAuthorUrl());
     }
 
-    public function testSetUrlWithIncompleteFtpUrl() {
+    public function testSetUrlWithIncompleteFtpUrl()
+    {
         $comment = new Comment();
         $comment->setAuthorUrl("ftp://");
         $this->assertNull($comment->getAuthorUrl());
     }
 
-    public function testCheckIfCommentWithIpExistsTrue() {
+    public function testCheckIfCommentWithIpExistsTrue()
+    {
         $content = ContentFactory::getAll();
         $first = $content[0];
 
@@ -473,54 +493,60 @@ class CommentTest extends \PHPUnit\Framework\TestCase {
         $comment->delete();
     }
 
-    public function testCheckIfCommentWithIpExistsFalse() {
+    public function testCheckIfCommentWithIpExistsFalse()
+    {
         $this->assertFalse(Comment::checkIfCommentWithIpExists("111.111.111.111", CommentStatus::SPAM));
         $this->assertFalse(Comment::checkIfCommentWithIpExists("111.111.111.111", CommentStatus::PUBLISHED));
         $this->assertFalse(Comment::checkIfCommentWithIpExists("111.111.111.111", CommentStatus::PENDING));
     }
 
-    public function testDataWithInvalidValueThrowsException() {
+    public function testDataWithInvalidValueThrowsException()
+    {
         $this->expectException("InvalidArgumentException");
         $comment = new Comment();
         $comment->setDate(new UliCMSVersion());
     }
 
-    public function testDeleteIps() {
+    public function testDeleteIps()
+    {
         $this->createComments();
         $this->assertEquals(6, Comment::deleteIpsAfter48Hours());
         $this->assertEquals(3, $this->countIpsInDatabase());
     }
 
-    public function testDeleteIpsKeepSpamIps() {
+    public function testDeleteIpsKeepSpamIps()
+    {
         $this->createComments();
         $this->assertEquals(3, Comment::deleteIpsAfter48Hours(true));
         $this->assertEquals(6, $this->countIpsInDatabase());
     }
 
-    protected function createComments() {
+    protected function createComments()
+    {
         $content = ContentFactory::getAll();
         $first = $content[0];
 
         $this->createComment(
-                $first->id,
-                CommentStatus::SPAM,
-                1587888906
+            $first->id,
+            CommentStatus::SPAM,
+            1587888906
         );
 
         $this->createComment(
-                $first->id,
-                CommentStatus::PUBLISHED,
-                1587888906
+            $first->id,
+            CommentStatus::PUBLISHED,
+            1587888906
         );
 
         $this->createComment(
-                $first->id,
-                CommentStatus::PUBLISHED,
-                time() - 100
+            $first->id,
+            CommentStatus::PUBLISHED,
+            time() - 100
         );
     }
 
-    protected function createComment($contentId, $status, $timestamp) {
+    protected function createComment($contentId, $status, $timestamp)
+    {
         for ($i = 1; $i <= 3; $i++) {
             $comment = new Comment();
             $comment->setContentId($contentId);
@@ -536,9 +562,9 @@ class CommentTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    protected function countIpsInDatabase(): int {
+    protected function countIpsInDatabase(): int
+    {
         $query = Database::selectAll("comments", ["id"], "ip is not null");
         return Database::getNumROws($query);
     }
-
 }

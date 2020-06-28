@@ -2,20 +2,22 @@
 
 declare(strict_types=1);
 
-class CoreFormsController extends Controller {
-
-    public function _incSpamCount(): int {
+class CoreFormsController extends Controller
+{
+    public function _incSpamCount(): int
+    {
         $newCount = intval(
-                Settings::get("contact_form_refused_spam_mails")
-                ) + 1;
+            Settings::get("contact_form_refused_spam_mails")
+        ) + 1;
         Settings::set("contact_form_refused_spam_mails", $newCount);
         return $newCount;
     }
 
-    public function beforeHttpHeader(): void {
+    public function beforeHttpHeader(): void
+    {
         if (StringHelper::isNotNullOrWhitespace(
-                        Request::getVar("submit-cms-form")
-                ) and Request::isPost()) {
+            Request::getVar("submit-cms-form")
+        ) and Request::isPost()) {
             // apply spam filter if enabled
             if (Settings::get("spamfilter_enabled") == "yes") {
                 // check if honeypot field is filled
@@ -41,16 +43,16 @@ class CoreFormsController extends Controller {
                     }
 
                     $badwordsCheck = AntiSpamHelper::containsBadwords(
-                                    $_POST[$key]
+                        $_POST[$key]
                     );
                     if ($badwordsCheck) {
                         $this->_incSpamCount();
                         HTMLResult(get_translation(
-                                        "request_contains_badword",
-                                        [
+                            "request_contains_badword",
+                            [
                                             "%word%" => $badwordsCheck
                                         ]
-                                ), 403);
+                        ), 403);
                     }
                 }
 
@@ -73,5 +75,4 @@ class CoreFormsController extends Controller {
             Forms::submitForm($form_id);
         }
     }
-
 }

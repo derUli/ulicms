@@ -3,9 +3,10 @@
 use UliCMS\Exceptions\SCSSCompileException;
 use UliCMS\Utils\CacheUtil;
 
-class MinifyTest extends \PHPUnit\Framework\TestCase {
-
-    public function tearDown() {
+class MinifyTest extends \PHPUnit\Framework\TestCase
+{
+    protected function tearDown(): void
+    {
         resetScriptQueue();
         resetStylesheetQueue();
 
@@ -13,7 +14,8 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         Vars::delete("css_include_paths");
     }
 
-    public function testScriptQueue() {
+    public function testScriptQueue()
+    {
         $filemtime = 0;
         $files = array(
             "node_modules/jquery/dist/jquery.js",
@@ -28,12 +30,12 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         }
         $this->assertCount(3, Vars::get("script_queue"));
         $this->assertEquals(
-                "node_modules/jquery/dist/jquery.js",
-                Vars::get("script_queue")[0]
+            "node_modules/jquery/dist/jquery.js",
+            Vars::get("script_queue")[0]
         );
         $this->assertEquals(
-                "node_modules/bootbox/bootbox.js",
-                Vars::get("script_queue")[2]
+            "node_modules/bootbox/bootbox.js",
+            Vars::get("script_queue")[2]
         );
 
         resetScriptQueue();
@@ -45,16 +47,17 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
 
         $html = getCombinedScriptHtml();
         $this->assertStringStartsWith(
-                '<script src="content/cache/scripts/',
-                $html
+            '<script src="content/cache/scripts/',
+            $html
         );
-        $this->assertContains(".js?time=", $html);
+        $this->assertStringContainsString(".js?time=", $html);
         $this->assertStringEndsWith('type="text/javascript"></script>', $html);
 
         $this->assertCount(0, Vars::get("script_queue"));
     }
 
-    public function testCombinedScriptHTMLDeprecated() {
+    public function testCombinedScriptHTMLDeprecated()
+    {
         $files = array(
             "node_modules/jquery/dist/jquery.js",
             "admin/scripts/global.js",
@@ -70,16 +73,17 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         $html = ob_get_clean();
 
         $this->assertStringStartsWith(
-                '<script src="content/cache/scripts/',
-                $html
+            '<script src="content/cache/scripts/',
+            $html
         );
-        $this->assertContains(".js?time=", $html);
+        $this->assertStringContainsString(".js?time=", $html);
         $this->assertStringEndsWith('type="text/javascript"></script>', $html);
 
         $this->assertCount(0, Vars::get("script_queue"));
     }
 
-    public function testStylesheetQueue() {
+    public function testStylesheetQueue()
+    {
         $filemtime = 0;
         $files = array(
             "lib/css/core.scss",
@@ -95,12 +99,12 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         }
         $this->assertCount(4, Vars::get("stylesheet_queue"));
         $this->assertEquals(
-                "node_modules/bootstrap/dist/css/bootstrap.css",
-                Vars::get("stylesheet_queue")[1]
+            "node_modules/bootstrap/dist/css/bootstrap.css",
+            Vars::get("stylesheet_queue")[1]
         );
         $this->assertEquals(
-                "node_modules/bootstrap/dist/css/bootstrap-theme.css",
-                Vars::get("stylesheet_queue")[2]
+            "node_modules/bootstrap/dist/css/bootstrap-theme.css",
+            Vars::get("stylesheet_queue")[2]
         );
 
         resetStylesheetQueue();
@@ -112,13 +116,14 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
 
         $html = getCombinedStylesheetHTML();
         $this->assertStringStartsWith('<link rel="stylesheet" href="', $html);
-        $this->assertContains(".css?time=", $html);
+        $this->assertStringContainsString(".css?time=", $html);
         $this->assertStringEndsWith('" type="text/css"/>', $html);
 
         $this->assertCount(0, Vars::get("script_queue"));
     }
 
-    public function testCombinedStylesheetHtml() {
+    public function testCombinedStylesheetHtml()
+    {
         $filemtime = 0;
         $files = array(
             "lib/css/core.scss",
@@ -135,13 +140,14 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         combinedStylesheetHtml();
         $html = ob_get_clean();
         $this->assertStringStartsWith('<link rel="stylesheet" href="', $html);
-        $this->assertContains(".css?time=", $html);
+        $this->assertStringContainsString(".css?time=", $html);
         $this->assertStringEndsWith('" type="text/css"/>', $html);
 
         $this->assertCount(0, Vars::get("script_queue"));
     }
 
-    public function testMinifySCSSExpectCSS() {
+    public function testMinifySCSSExpectCSS()
+    {
         unsetSCSSImportPaths();
         CacheUtil::getAdapter(true)->clear();
         $styles = array(
@@ -159,7 +165,8 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals($expected, $real);
     }
 
-    public function testMinifySCSSThrowsException() {
+    public function testMinifySCSSThrowsException()
+    {
         unsetSCSSImportPaths();
         CacheUtil::getAdapter(true)->clear();
         $style = "tests/fixtures/scss/fail.scss";
@@ -170,19 +177,20 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
             $this->fail("Expected exception not thrown");
         } catch (SCSSCompileException $e) {
             $this->assertStringStartsWith(
-                    "Compilation of tests/fixtures/scss/fail.scss failed: parse error: failed at",
-                    $e->getMessage()
+                "Compilation of tests/fixtures/scss/fail.scss failed: parse error: failed at",
+                $e->getMessage()
             );
             $this->assertStringEndsWith(
-                    "(stdin) on line 5, at column 5",
-                    $e->getMessage()
+                "(stdin) on line 5, at column 5",
+                $e->getMessage()
             );
         } finally {
             resetStylesheetQueue();
         }
     }
 
-    public function testSetSCSSImportPathsToNull() {
+    public function testSetSCSSImportPathsToNull()
+    {
         $paths = array(
             "folder1/foo/bar",
             "folder2/another/folder"
@@ -192,12 +200,17 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         setSCSSImportPaths(null);
         $this->assertCount(1, getSCSSImportPaths());
         $this->assertEquals(
-                str_replace(
-                        "\\", "/", ULICMS_ROOT
-                ), getSCSSImportPaths()[0]);
+            str_replace(
+                "\\",
+                "/",
+                ULICMS_ROOT
+            ),
+            getSCSSImportPaths()[0]
+        );
     }
 
-    public function testSetAndGetSCSSImportPaths() {
+    public function testSetAndGetSCSSImportPaths()
+    {
         $paths = [
             "folder1/foo/bar",
             "folder2/another/folder"
@@ -211,36 +224,40 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull(getSCSSImportPaths());
     }
 
-    public function testCompileSCSS() {
+    public function testCompileSCSS()
+    {
         setSCSSImportPaths(
-                [
+            [
                     "folder1/foo/bar",
                     "folder2/another/folder"
                 ]
         );
         $code = compileSCSS(
-                Path::resolve(
-                        "ULICMS_ROOT/lib/css/core.scss")
+            Path::resolve(
+                "ULICMS_ROOT/lib/css/core.scss"
+            )
         );
         $this->assertStringContainsString(".antispam_honeypot", $code);
         $this->assertStringContainsString("span.blog_article_next", $code);
     }
 
-    public function testCompileSCSSToFile() {
+    public function testCompileSCSSToFile()
+    {
         sureRemoveDir(
-                Path::resolve(
-                        "ULICMS_ROOT/content/cache/stylesheets"
-                )
+            Path::resolve(
+                "ULICMS_ROOT/content/cache/stylesheets"
+            )
         );
         setSCSSImportPaths(
-                [
+            [
                     "folder1/foo/bar",
                     "folder2/another/folder"
                 ]
         );
         $filename = compileSCSSToFile(
-                Path::resolve(
-                        "ULICMS_ROOT/lib/css/core.scss")
+            Path::resolve(
+                "ULICMS_ROOT/lib/css/core.scss"
+            )
         );
 
         $this->assertStringEndsWith(".css", $filename);
@@ -250,21 +267,23 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         $this->assertStringContainsString("span.blog_article_next", $code);
     }
 
-    public function testGetAllCombinedHtml() {
+    public function testGetAllCombinedHtml()
+    {
         $this->enqeueStuff();
         $html = get_all_combined_html();
 
         $this->assertStringContainsString(
-                '<script src="content/cache/scripts/',
-                $html
+            '<script src="content/cache/scripts/',
+            $html
         );
         $this->assertStringContainsString(
-                '<link rel="stylesheet" href="content/cache/stylesheets/',
-                $html
+            '<link rel="stylesheet" href="content/cache/stylesheets/',
+            $html
         );
     }
 
-    private function enqeueStuff() {
+    private function enqeueStuff()
+    {
         $files = array(
             "node_modules/jquery/dist/jquery.js",
             "admin/scripts/global.js",
@@ -285,7 +304,8 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testAllCombinedHtml() {
+    public function testAllCombinedHtml()
+    {
         $this->enqeueStuff();
 
         ob_start();
@@ -293,13 +313,12 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         $html = ob_get_clean();
 
         $this->assertStringContainsString(
-                '<script src="content/cache/scripts/',
-                $html
+            '<script src="content/cache/scripts/',
+            $html
         );
         $this->assertStringContainsString(
-                '<link rel="stylesheet" href="content/cache/stylesheets/',
-                $html
+            '<link rel="stylesheet" href="content/cache/stylesheets/',
+            $html
         );
     }
-
 }

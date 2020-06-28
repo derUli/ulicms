@@ -17,8 +17,8 @@ use UliCMS\Security\SpamChecker\CommentSpamChecker;
 // TODO: Comment public static functions
 // This class is a comment model class
 // Users can post comments to content types were comments are enabled
-class Comment extends Model {
-
+class Comment extends Model
+{
     private $content_id;
     private $author_name;
     private $author_email;
@@ -32,7 +32,8 @@ class Comment extends Model {
 
     const TABLE_NAME = "comments";
 
-    public function loadByID($id) {
+    public function loadByID($id)
+    {
         $result = Database::selectAll("comments", [], "id=" . intval($id));
         if ($result == null || !Database::any($result)) {
             throw new DatasetNotFoundException("no comment with id " .
@@ -41,7 +42,8 @@ class Comment extends Model {
         $this->fillVars($result);
     }
 
-    public function fillVars($result = null) {
+    public function fillVars($result = null)
+    {
         $data = Database::fetchObject($result);
         $this->setID(intval($data->id));
         $this->setContentId(intval($data->content_id));
@@ -56,7 +58,8 @@ class Comment extends Model {
         $this->setRead(boolval($data->read));
     }
 
-    protected function insert() {
+    protected function insert()
+    {
         if (!$this->getDate()) {
             $this->date = time();
         }
@@ -96,7 +99,8 @@ VALUES      ( ?,
         $this->setID(Database::getLastInsertID());
     }
 
-    protected function update() {
+    protected function update()
+    {
         Database::pQuery("UPDATE `{prefix}comments` set
                          `content_id` = ?,
                          `author_name` = ?,
@@ -123,7 +127,8 @@ VALUES      ( ?,
                 ), true);
     }
 
-    public function delete() {
+    public function delete()
+    {
         Database::deleteFrom("comments", "id = " . $this->getID());
         $this->setID(null);
     }
@@ -133,7 +138,8 @@ VALUES      ( ?,
     // of SpamDetectionResults
     // if the comment contains no spam the function
     // returns null
-    public function isSpam(): ?array {
+    public function isSpam(): ?array
+    {
         $configuration = SpamFilterConfiguration::fromSettings();
         $checker = new CommentSpamChecker($this, $configuration);
         $result = null;
@@ -143,92 +149,111 @@ VALUES      ( ?,
         return $result;
     }
 
-    public function getContentId(): ?int {
+    public function getContentId(): ?int
+    {
         return $this->content_id;
     }
 
-    public function setContentId(int $val): void {
+    public function setContentId(int $val): void
+    {
         $this->content_id = intval($val);
     }
 
-    public function getAuthorName(): ?string {
+    public function getAuthorName(): ?string
+    {
         return $this->author_name;
     }
 
-    public function setAuthorName(?string $val): void {
+    public function setAuthorName(?string $val): void
+    {
         $this->author_name = StringHelper::isNotNullOrWhitespace($val) ?
                 strval($val) : null;
     }
 
-    public function getAuthorEmail(): ?string {
+    public function getAuthorEmail(): ?string
+    {
         return $this->author_email;
     }
 
-    public function setAuthorEmail(?string $val): void {
+    public function setAuthorEmail(?string $val): void
+    {
         $this->author_email = StringHelper::isNotNullOrWhitespace($val) ?
                 strval($val) : null;
     }
 
-    public function getAuthorUrl(): ?string {
+    public function getAuthorUrl(): ?string
+    {
         return $this->author_url;
     }
 
-    public function setAuthorUrl(?string $val): void {
+    public function setAuthorUrl(?string $val): void
+    {
         $this->author_url = is_url($val) ? strval($val) : null;
     }
 
-    public function getDate() {
+    public function getDate()
+    {
         return $this->date;
     }
 
-    public function setDate($val): void {
+    public function setDate($val): void
+    {
         if (is_string($val)) {
             $val = strtotime($val);
-        } else if (!is_numeric($val)) {
+        } elseif (!is_numeric($val)) {
             throw new InvalidArgumentException(
-                    var_dump_str($val) . " is not an integer timestamp"
+                var_dump_str($val) . " is not an integer timestamp"
             );
         }
         $this->date = intval($val);
     }
 
-    public function getText(): ?string {
+    public function getText(): ?string
+    {
         return $this->text;
     }
 
-    public function setText(?string $val): void {
+    public function setText(?string $val): void
+    {
         $this->text = StringHelper::isNotNullOrWhitespace($val) ?
                 strval($val) : null;
     }
 
-    public function getStatus() {
+    public function getStatus()
+    {
         return $this->status;
     }
 
-    public function setStatus(string $val): void {
+    public function setStatus(string $val): void
+    {
         $this->status = $val;
     }
 
-    public function getIp(): ?string {
+    public function getIp(): ?string
+    {
         return $this->ip;
     }
 
-    public function setIp(?string $val): void {
+    public function setIp(?string $val): void
+    {
         $this->ip = StringHelper::isNotNullOrWhitespace($val) ?
                 strval($val) : null;
     }
 
-    public function getUserAgent(): ?string {
+    public function getUserAgent(): ?string
+    {
         return $this->useragent;
     }
 
-    public function setUserAgent(?string $val): void {
+    public function setUserAgent(?string $val): void
+    {
         $this->useragent = StringHelper::isNotNullOrWhitespace($val) ?
                 strval($val) : null;
     }
 
     // returns the content where this comment is attached
-    public function getContent() {
+    public function getContent()
+    {
         if (!$this->getContentId()) {
             return null;
         }
@@ -236,51 +261,70 @@ VALUES      ( ?,
     }
 
     // returns all comments for a content by content_id
-    public static function getAllByContentId(int $content_id,
-            string $order_by = "date desc"): array {
-        return self::getAllDatasets(self::TABLE_NAME, self::class, $order_by,
-                        "content_id = " . intval($content_id));
+    public static function getAllByContentId(
+        int $content_id,
+        string $order_by = "date desc"
+    ): array {
+        return self::getAllDatasets(
+            self::TABLE_NAME,
+            self::class,
+            $order_by,
+            "content_id = " . intval($content_id)
+        );
     }
 
-    public static function getAllByStatus(string $status,
-            ?int $content_id = null,
-            string $order = "date desc"): array {
+    public static function getAllByStatus(
+        string $status,
+        ?int $content_id = null,
+        string $order = "date desc"
+    ): array {
         $where = "status = '" . Database::escapeValue($status) . "'";
         if ($content_id) {
             $where .= " and content_id = " . intval($content_id);
         }
         return self::getAllDatasets(
-                        self::TABLE_NAME,
-                        self::class,
-                        $order,
-                        $where);
+            self::TABLE_NAME,
+            self::class,
+            $order,
+            $where
+        );
     }
 
-    public static function getAll(string $order = "id desc"): array {
+    public static function getAll(string $order = "id desc"): array
+    {
         return self::getAllDatasets(self::TABLE_NAME, self::class, $order);
     }
 
     // returns unread comments count to display at the comments icon
     // left to the hamburger menu
-    public static function getUnreadCount(): int {
-        $result = Database::pQuery("select count(id) as amount from "
+    public static function getUnreadCount(): int
+    {
+        $result = Database::pQuery(
+            "select count(id) as amount from "
                         . "{prefix}comments where `read` = ?",
-                        [false], true);
+            [false],
+            true
+        );
         $dataset = Database::fetchObject($result);
         return intval($dataset->amount);
     }
 
     // returns the count of all read comments
-    public static function getReadCount(): ?int {
-        $result = Database::pQuery("select count(id) as amount from "
+    public static function getReadCount(): ?int
+    {
+        $result = Database::pQuery(
+            "select count(id) as amount from "
                         . "{prefix}comments where `read` = ?",
-                        [true], true);
+            [true],
+            true
+        );
         $dataset = Database::fetchObject($result);
         return intval($dataset->amount);
     }
 
     // returns the count of all comments
-    public static function getAllCount(): ?int {
+    public static function getAllCount(): ?int
+    {
         $result = Database::pQuery("select count(id) as amount from "
                         . "{prefix}comments", [], true);
         $dataset = Database::fetchObject($result);
@@ -292,7 +336,8 @@ VALUES      ( ?,
     // however it may be required to save ips temporarly
     // to defend the system against bad bots
     // this method deletes ip addresses of comments after 48 hours
-    public static function deleteIpsAfter48Hours(bool $keepSpamIps = false): int {
+    public static function deleteIpsAfter48Hours(bool $keepSpamIps = false): int
+    {
         $sql = "update {prefix}comments set ip = null WHERE date < "
                 . "FROM_UNIXTIME(UNIX_TIMESTAMP(NOW() - INTERVAL 2 DAY)) "
                 . "and ip is not null";
@@ -304,8 +349,10 @@ VALUES      ( ?,
     }
 
     // check if a comment from this ip exists
-    public static function checkIfCommentWithIpExists(?string $ip,
-            string $status = CommentStatus::SPAM): bool {
+    public static function checkIfCommentWithIpExists(
+        ?string $ip,
+        string $status = CommentStatus::SPAM
+    ): bool {
         $sql = "select ip from {prefix}comments where ip = ?";
         $args = array(
             strval($ip)
@@ -319,12 +366,13 @@ VALUES      ( ?,
     }
 
     // returns true if the comments was read by a backend user
-    public function isRead(): bool {
+    public function isRead(): bool
+    {
         return boolval($this->read);
     }
 
-    public function setRead(?bool $val): void {
+    public function setRead(?bool $val): void
+    {
         $this->read = boolval($val);
     }
-
 }

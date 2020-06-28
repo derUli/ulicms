@@ -12,35 +12,38 @@ use Database;
 
 // Version Control System for pages
 // tracks content changes
-class VCS {
-
+class VCS
+{
     public static function createRevision(
-            int $content_id,
-            string $content,
-            int $user_id): bool {
-
+        int $content_id,
+        string $content,
+        int $user_id
+    ): bool {
         return Database::pQuery(
-                        "INSERT INTO `{prefix}history` (content_id, content, user_id) "
+            "INSERT INTO `{prefix}history` (content_id, content, user_id) "
                         . "VALUES(?, ?,?)",
-                        [$content_id, $content, $user_id],
-                        true
+            [$content_id, $content, $user_id],
+            true
         );
     }
 
-    public static function getRevisionByID(int $history_id): ?object {
+    public static function getRevisionByID(int $history_id): ?object
+    {
         $history_id = intval($history_id);
         $result = Database::pQuery(
-                        "SELECT * FROM `{prefix}history` "
+            "SELECT * FROM `{prefix}history` "
                         . "WHERE id = ?",
-                        [$history_id],
-                        true);
+            [$history_id],
+            true
+        );
         if (Database::getNumRows($result) > 0) {
             return Database::fetchObject($result);
         }
         return null;
     }
 
-    public static function restoreRevision(int $history_id): bool {
+    public static function restoreRevision(int $history_id): bool
+    {
         $result = db_query("SELECT * FROM " . tbname("history") .
                 " WHERE id = " . $history_id);
         if (db_num_rows($result) > 0) {
@@ -56,8 +59,8 @@ class VCS {
     }
 
     public static function getRevisionsByContentID(
-            int $content_id,
-            string $order = "date DESC"
+        int $content_id,
+        string $order = "date DESC"
     ): array {
         $content_id = intval($content_id);
         $result = db_query("SELECT * FROM " . tbname("history")
@@ -68,5 +71,4 @@ class VCS {
         }
         return $retval;
     }
-
 }

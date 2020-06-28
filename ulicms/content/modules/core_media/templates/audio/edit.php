@@ -8,8 +8,7 @@ if ($permissionChecker->hasPermission("audio")
     $id = intval($_REQUEST["id"]);
     $result = db_query("SELECT * FROM " . tbname("audio") . " WHERE id = $id");
     if (db_num_rows($result) > 0) {
-        $dataset = db_fetch_object($result);
-        ?><p>
+        $dataset = db_fetch_object($result); ?><p>
             <a href="<?php echo ModuleHelper::buildActionURL("audio"); ?>"
                class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i>
                 <?php translate("back") ?></a>
@@ -44,9 +43,8 @@ if ($permissionChecker->hasPermission("audio")
             <input name="ogg_file" type="text"
                    value="<?php
                    echo _esc(
-                           $dataset->ogg_file
-                   );
-                   ?>">
+            $dataset->ogg_file
+        ); ?>">
              </div>
              <div class="field">
             <strong class="field-label">
@@ -55,9 +53,8 @@ if ($permissionChecker->hasPermission("audio")
             <input name="mp3_file" type="text" readonly
                    value="<?php
                    echo _esc(
-                           $dataset->mp3_file
-                   );
-                   ?>">
+            $dataset->mp3_file
+        ); ?>">
              </div>
              <div class="field">
             <strong class="field-label">

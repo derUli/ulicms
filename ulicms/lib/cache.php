@@ -5,7 +5,8 @@ declare(strict_types=1);
 use UliCMS\Utils\CacheUtil;
 
 // Alternative PHP Cache leeren, sofern installiert und aktiv
-function clearAPCCache(): bool {
+function clearAPCCache(): bool
+{
     $success = false;
     if (function_exists("apc_clear_cache")) {
         apc_clear_cache();
@@ -19,14 +20,16 @@ function clearAPCCache(): bool {
 // Alle Caches leeren
 // Sowohl den Seiten-Cache, den Download/Paketmanager Cache
 // als auch den APC Bytecode Cache
-function clearCache(): void {
+function clearCache(): void
+{
     CacheUtil::clearCache();
 }
 
-function no_cache($do = false): void {
+function no_cache($do = false): void
+{
     if ($do) {
         Flags::setNoCache(true);
-    } else if (get_cache_control() == "auto"
+    } elseif (get_cache_control() == "auto"
             or get_cache_control() == "no_cache") {
         Flags::setNoCache(true);
     }

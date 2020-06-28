@@ -29,11 +29,11 @@ if ($commentableContentTypeSettings) {
 <?php } ?>
 <?php
 echo ModuleHelper::buildMethodCallForm(
-        CommunitySettingsController::class,
-        "save",
-        [],
-        RequestMethod::POST,
-        [
+    CommunitySettingsController::class,
+    "save",
+    [],
+    RequestMethod::POST,
+    [
             "id" => "community_settings_form"
         ]
 );
@@ -42,17 +42,24 @@ echo ModuleHelper::buildMethodCallForm(
 <div class="field">
     <div class="checkbox">
         <label><?php
-            echo UliCMS\HTML\Input::checkBox("comments_enabled", boolval(Settings::get("comments_enabled")), "1",
-                    array("class" => "js-switch"));
+            echo UliCMS\HTML\Input::checkBox(
+    "comments_enabled",
+    boolval(Settings::get("comments_enabled")),
+    "1",
+    array("class" => "js-switch")
+);
             ?><?php translate("comments_enabled") ?></label>
     </div>
 </div>
 <div class="field">
     <div class="checkbox">
         <label><?php
-            echo UliCMS\HTML\Input::checkBox("comments_must_be_approved", boolval(Settings::get("comments_must_be_approved")),
-                    "1",
-                    array("class" => "js-switch"));
+            echo UliCMS\HTML\Input::checkBox(
+                "comments_must_be_approved",
+                boolval(Settings::get("comments_must_be_approved")),
+                "1",
+                array("class" => "js-switch")
+            );
             ?><?php translate("comments_must_be_approved") ?></label>
     </div>
 </div>
@@ -74,10 +81,9 @@ $translation->addKey("changes_was_saved");
 $translation->render();
 
 enqueueScriptFile(
-        ModuleHelper::buildRessourcePath(
-                "core_settings",
-                "js/community_settings.js"
-        )
+    ModuleHelper::buildRessourcePath(
+        "core_settings",
+        "js/community_settings.js"
+    )
 );
 combinedScriptHtml();
-

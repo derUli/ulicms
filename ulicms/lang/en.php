@@ -740,8 +740,10 @@ add_translation("all", "All");
 
 add_translation("disabled_functions", "Disabled functions");
 
-add_translation("unsupported_output_format",
-        "Unsupported Output Format: %format%");
+add_translation(
+    "unsupported_output_format",
+    "Unsupported Output Format: %format%"
+);
 
 add_translation("mpdf_not_installed", "mPDF is not installed.\n"
         . "Please install mPDF from %link% to use the pdf output feature.");
@@ -750,11 +752,11 @@ add_translation("copied_to_clipboard_success", "Copied to clipboard.");
 add_translation("copied_to_clipboard_failed", "Copy To clipboard failed.");
 
 add_translation(
-        "unsupported_browser",
-        "Your are using the unsupported browser %browser%.\n".
+    "unsupported_browser",
+    "Your are using the unsupported browser %browser%.\n".
         "You must be using a compatible browser to be able to access UliCMS.\n\n".
         "More information about compatible browsers at:\n".
         "https://www.ulicms.de/Welche-Browser-werden-von-UliCMS-unterstutzt.html"
-        );
+);
 
 do_event("lang_en");

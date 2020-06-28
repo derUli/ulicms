@@ -2,13 +2,15 @@
 
 use UliCMS\Helpers\ArrayHelper;
 
-class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
-
-    public function testTake4String() {
+class ArrayHelperTest extends \PHPUnit\Framework\TestCase
+{
+    public function testTake4String()
+    {
         $this->assertEquals("abcd", ArrayHelper::take(4, "abcdefghijklmnopqrstuvwxyz"));
     }
 
-    public function testTake3Array() {
+    public function testTake3Array()
+    {
         $this->assertEquals(array(
             "cat",
             "dog",
@@ -23,11 +25,13 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
         )));
     }
 
-    public function testTake3Invalid() {
+    public function testTake3Invalid()
+    {
         $this->assertNull(ArrayHelper::take(4, 2017));
     }
 
-    public function testInsertBeforeReturnsArray() {
+    public function testInsertBeforeReturnsArray()
+    {
         $input = array(
             "apple",
             "tomato",
@@ -52,7 +56,8 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
                 ), ArrayHelper::insertBefore($input, 0, "pineapple"));
     }
 
-    public function testInsertBeforeReturnsThrowsException() {
+    public function testInsertBeforeReturnsThrowsException()
+    {
         $input = array(
             "apple",
             "tomato",
@@ -66,7 +71,8 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
         ArrayHelper::insertBefore($input, PHP_INT_MAX, 'gibts_nicht');
     }
 
-    public function testInsertAfterReturnsArray() {
+    public function testInsertAfterReturnsArray()
+    {
         $input = array(
             "apple",
             "tomato",
@@ -91,7 +97,8 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
                 ), ArrayHelper::insertAfter($input, 3, "pineapple"));
     }
 
-    public function testInsertAfterReturnsThrowsException() {
+    public function testInsertAfterReturnsThrowsException()
+    {
         $input = array(
             "apple",
             "tomato",
@@ -105,41 +112,48 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
         ArrayHelper::insertAfter($input, PHP_INT_MAX, 'gibts_nicht');
     }
 
-    public function testIsSingleWithEmptyArray() {
+    public function testIsSingleWithEmptyArray()
+    {
         $this->assertFalse(ArrayHelper::isSingle([]));
     }
 
-    public function testIsSingleWithOneItem() {
+    public function testIsSingleWithOneItem()
+    {
         $this->assertTrue(ArrayHelper::isSingle(array(
                     "foo"
         )));
     }
 
-    public function testIsSingleWithTwoItems() {
+    public function testIsSingleWithTwoItems()
+    {
         $this->assertFalse(ArrayHelper::isSingle(array(
                     "foo",
                     "bar"
         )));
     }
 
-    public function testGetSingleWithEmptyArray() {
+    public function testGetSingleWithEmptyArray()
+    {
         $this->assertNull(ArrayHelper::getSingle([]));
     }
 
-    public function testGetSingleWithOneItem() {
+    public function testGetSingleWithOneItem()
+    {
         $this->assertEquals("foo", ArrayHelper::getSingle(array(
                     "foo"
         )));
     }
 
-    public function testGetSingleWithTwoItems() {
+    public function testGetSingleWithTwoItems()
+    {
         $this->assertNull(ArrayHelper::getSingle(array(
                     "foo",
                     "bar"
         )));
     }
 
-    private function getNestesdArray() {
+    private function getNestesdArray()
+    {
         return [
             "foo",
             "bar",
@@ -155,7 +169,8 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
         ];
     }
 
-    public function testFlattenWithNestedArray() {
+    public function testFlattenWithNestedArray()
+    {
         $input = $this->getNestesdArray();
         $expected = [
             "foo",
@@ -170,37 +185,57 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals($expected, ArrayHelper::flatten($input));
     }
 
-    public function testFlattenWithFlattenArray() {
+    public function testFlattenWithFlattenArray()
+    {
         $input = ["dog", "cat", "pig", "horse"];
-        $this->assertEquals($input,
-                ArrayHelper::flatten($input));
-    }
-
-    public function testFlattenWithString() {
-        $this->assertEquals(["ulicms"],
-                ArrayHelper::flatten("ulicms"));
-    }
-
-    public function testGetValueOrDefaultWithNullReturnsDefault() {
-        $this->assertEquals("foobar",
-                ArrayHelper::getValueOrDefault(null, "hello", "foobar"));
-    }
-
-    public function testGetValueOrDefaultWithArrayReturnsDefault() {
-        $this->assertEquals("foobar",
-                ArrayHelper::getValueOrDefault(
-                        ["gibts" => "not"], "hello", "foobar")
+        $this->assertEquals(
+            $input,
+            ArrayHelper::flatten($input)
         );
     }
 
-    public function testGetValueOrDefaultWithArrayReturnsValue() {
-        $this->assertEquals("world",
-                ArrayHelper::getValueOrDefault(
-                        ["hello" => "world"], "hello", "foobar")
+    public function testFlattenWithString()
+    {
+        $this->assertEquals(
+            ["ulicms"],
+            ArrayHelper::flatten("ulicms")
         );
     }
 
-    private function getArrayTestData(): array {
+    public function testGetValueOrDefaultWithNullReturnsDefault()
+    {
+        $this->assertEquals(
+            "foobar",
+            ArrayHelper::getValueOrDefault(null, "hello", "foobar")
+        );
+    }
+
+    public function testGetValueOrDefaultWithArrayReturnsDefault()
+    {
+        $this->assertEquals(
+            "foobar",
+            ArrayHelper::getValueOrDefault(
+                ["gibts" => "not"],
+                "hello",
+                "foobar"
+            )
+        );
+    }
+
+    public function testGetValueOrDefaultWithArrayReturnsValue()
+    {
+        $this->assertEquals(
+            "world",
+            ArrayHelper::getValueOrDefault(
+                ["hello" => "world"],
+                "hello",
+                "foobar"
+            )
+        );
+    }
+
+    private function getArrayTestData(): array
+    {
         return [
             "foo" => "bar",
             "hello" => "world",
@@ -209,40 +244,41 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
         ];
     }
 
-    public function testArrayHasMultipleKeysReturnsTrue() {
+    public function testArrayHasMultipleKeysReturnsTrue()
+    {
         $this->assertTrue(
-                ArrayHelper::hasMultipleKeys(
-                        $this->getArrayTestData(),
-                        [
+            ArrayHelper::hasMultipleKeys(
+                $this->getArrayTestData(),
+                [
                             "foo",
                             "fire"
                         ]
-                )
+            )
         );
     }
 
-    public function testArrayHasMultipleKeysReturnsFalse() {
+    public function testArrayHasMultipleKeysReturnsFalse()
+    {
         $this->assertFalse(
-                ArrayHelper::hasMultipleKeys(
-                        $this->getArrayTestData(),
-                        [
+            ArrayHelper::hasMultipleKeys(
+                $this->getArrayTestData(),
+                [
                             "foo",
                             "fire",
                             "nope"
                             ]
-                        )
+            )
         );
         
-           $this->assertFalse(
-                ArrayHelper::hasMultipleKeys(
-                       null,
-                        [
+        $this->assertFalse(
+            ArrayHelper::hasMultipleKeys(
+                null,
+                [
                             "foo",
                             "fire",
                             "nope"
                             ]
-                        )
+            )
         );
     }
-
 }
