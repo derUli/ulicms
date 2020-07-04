@@ -95,7 +95,7 @@ class Database
             $migrator->migrate();
             foreach ($otherScripts as $script) {
                 $fullPath = Path::resolve($script);
-                $migrator = new DBMigrator("core/initial", dirname($fullPath));
+                $migrator = new DBMigrator(dirname($fullPath), dirname($fullPath));
 
                 $migrator->executeSqlScript(Path::resolve(basename($fullPath)));
             }

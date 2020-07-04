@@ -54,17 +54,21 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
             "../node_modules/zenscroll/zenscroll-min.js",
             "../lib/js/global.js",
         );
-        ?>
-        <?php
+    
         if (is_logged_in()) {
             $scripts[] = "../node_modules/jscolor-picker/jscolor.min.js";
         }
+        
+        $scripts = apply_filter($scripts, "admin_head_scripts");
+        
         foreach ($scripts as $script) {
             enqueueScriptFile($script);
         }
+        
         if (is_logged_in()) {
             echo Script::fromFile("ckeditor/ckeditor.js");
         }
+        
         combinedScriptHtml();
 
         require "inc/touch_icons.php";
@@ -84,6 +88,7 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
               $styles[] = "../node_modules/select2/dist/css/select2.min.css";
               $styles[] = "../node_modules/jquery-datetimepicker/build/jquery.datetimepicker.min.css";
 
+              $styles = apply_filter($styles, "admin_head_styles");
               
               foreach ($styles as $style) {
                   enqueueStylesheet($style);
