@@ -81,7 +81,7 @@ $(() => {
 
     // copy text from input to clipboard on click
     $(".select-on-click").click((event) => {
-        const target = $(event.target);
+        const target = event.target;
         copyTextToClipboard(
                 target.value,
                 () => vanillaToast.success(GlobalTranslation.CopiedToClipboardSuccess),

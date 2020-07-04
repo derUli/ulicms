@@ -1,5 +1,9 @@
 ===== Neues in UliCMS 2020.2.4 =====
 
+Neue Filter:
+* admin_head_scripts
+* admin_head_styles
+
 Sonstige Änderungen:
 * database:* Robotasks in db:* umbenannt.
 
