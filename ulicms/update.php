@@ -27,6 +27,12 @@ if (is_writable($configFile)) {
     }
 }
 
+$ckfinderDirectory = Path::resolve("ULICMS_ROOT/admin/kcfinder");
+
+if(is_dir($ckfinderDirectory)){
+    sureRemoveDir("$ckfinderDirectory");
+}
+
 if (!is_dir(ULICMS_CONFIGURATIONS)) {
     mkdir(ULICMS_CONFIGURATIONS);
 }
