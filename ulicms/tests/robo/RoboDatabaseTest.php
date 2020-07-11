@@ -14,17 +14,6 @@ class RoboDatabaseTest extends RoboBaseTest
         }
     }
 
-    public function testShowException()
-    {
-        $actual = TestHelper::getOutput(function () {
-            $actual = new BadMethodCallException("This is an error");
-            $robo = new RoboTestFile();
-            $robo->showException($actual);
-        });
-        
-        $this->assertStringContainsString("This is an error", $actual);
-    }
-
     public function testCreateAlreadyExists()
     {
         if (!$this->shouldDropDbOnShutdown()) {

@@ -29,7 +29,7 @@ class RoboFile extends Tasks
         }
     }
 
-    public function showException(Exception $e)
+    protected function showException(Exception $e)
     {
         $this->writeln($e->getMessage());
     }
