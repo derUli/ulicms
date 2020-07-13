@@ -540,13 +540,16 @@ div#login-welcome-text {
 #page-list {
     .dataTables_wrapper {
         margin-bottom: 40px;
-        i.type-icon {
-            min-width: 20px;
-            position: relative;
-            top: 1px;
-            text-align: center;
-            margin-right: 2px;
-        }
+    }
+}
+
+.dataTables_wrapper, form{
+    i.type-icon {
+        min-width: 20px;
+        position: relative;
+        top: 1px;
+        text-align: center;
+        margin-right: 2px;
     }
 }
 
