@@ -1,7 +1,11 @@
 <?php
 
+use Spatie\Snapshots\MatchesSnapshots;
+
 class EmailFieldTest extends \PHPUnit\Framework\TestCase
 {
+    use MatchesSnapshots;
+
     protected function setUp(): void
     {
         include_once getLanguageFilePath("en");
@@ -12,13 +16,6 @@ class EmailFieldTest extends \PHPUnit\Framework\TestCase
         $field = new EmailField();
         $field->name = "my_field";
         $field->title = "email";
-        $rendered = $field->render("foo@bar.de");
-
-        $expectedFile = Path::resolve("ULICMS_ROOT/tests/fixtures/custom_field_types/email_field.expected.txt");
-
-        //file_put_contents($expectedFile, $rendered);
-
-        $expected = file_get_contents($expectedFile);
-        $this->assertEquals(normalizeLN($expected), normalizeLN($rendered));
+        $this->assertMatchesHtmlSnapshot($field->render("foo@bar.de"));
     }
 }

@@ -1,6 +1,0 @@
-<div class="custom-field field" 
- data-field-name="my_field">
-<strong class="field-label">Users </strong>
-<textarea name="my_field" 
->123</textarea>
-</div>

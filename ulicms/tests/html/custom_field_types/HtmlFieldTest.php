@@ -1,7 +1,11 @@
 <?php
 
+use Spatie\Snapshots\MatchesSnapshots;
+
 class HtmlFieldTest extends \PHPUnit\Framework\TestCase
 {
+    use MatchesSnapshots;
+
     private $testUser;
 
     protected function setUp(): void
@@ -32,13 +36,8 @@ class HtmlFieldTest extends \PHPUnit\Framework\TestCase
         $field = new HtmlField();
         $field->name = "my_field";
         $field->title = "content";
-        $rendered = $field->render("hello <strong>world</strong>");
-
-        $expectedFile = Path::resolve("ULICMS_ROOT/tests/fixtures/custom_field_types/html_field.expected.txt");
-
-        // file_put_contents($expectedFile, $rendered);
-
-        $expected = file_get_contents($expectedFile);
-        $this->assertEquals(normalizeLN($expected), normalizeLN($rendered));
+        $this->assertMatchesHtmlSnapshot(
+            $field->render("hello <strong>world</strong>")
+        );
     }
 }

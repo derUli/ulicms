@@ -1,7 +1,11 @@
 <?php
 
+use Spatie\Snapshots\MatchesSnapshots;
+
 class ColorFieldTest extends \PHPUnit\Framework\TestCase
 {
+    use MatchesSnapshots;
+    
     protected function setUp(): void
     {
         include_once getLanguageFilePath("en");
@@ -12,13 +16,7 @@ class ColorFieldTest extends \PHPUnit\Framework\TestCase
         $field = new ColorField();
         $field->name = "my_field";
         $field->title = "design";
-        $rendered = $field->render("FFC0CB");
 
-        $expectedFile = Path::resolve("ULICMS_ROOT/tests/fixtures/custom_field_types/color_field.expected.txt");
-
-        // file_put_contents($expectedFile, $rendered);
-
-        $expected = file_get_contents($expectedFile);
-        $this->assertEquals(normalizeLN($expected), normalizeLN($rendered));
+        $this->assertMatchesHtmlSnapshot($field->render("FFC0CB"));
     }
 }

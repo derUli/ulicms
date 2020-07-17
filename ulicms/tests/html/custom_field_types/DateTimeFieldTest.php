@@ -1,7 +1,11 @@
 <?php
 
+use Spatie\Snapshots\MatchesSnapshots;
+
 class DateTimeFieldTest extends \PHPUnit\Framework\TestCase
 {
+    use MatchesSnapshots;
+
     protected function setUp(): void
     {
         include_once getLanguageFilePath("en");
@@ -12,11 +16,8 @@ class DateTimeFieldTest extends \PHPUnit\Framework\TestCase
         $field = new DatetimeField();
         $field->name = "my_field";
         $field->title = "date";
-        $rendered = $field->render("2020-05-17 11:51");
-
-        $expectedFile = Path::resolve("ULICMS_ROOT/tests/fixtures/custom_field_types/datetime.expected.txt");
-
-        $expected = file_get_contents($expectedFile);
-        $this->assertEquals(normalizeLN($expected), normalizeLN($rendered));
+        $this->assertMatchesHtmlSnapshot(
+            $field->render("2020-05-17 11:51")
+        );
     }
 }

@@ -1,7 +1,11 @@
 <?php
 
+use Spatie\Snapshots\MatchesSnapshots;
+
 class MultilineTextFieldTest extends \PHPUnit\Framework\TestCase
 {
+    use MatchesSnapshots;
+    
     protected function setUp(): void
     {
         include_once getLanguageFilePath("en");
@@ -12,13 +16,6 @@ class MultilineTextFieldTest extends \PHPUnit\Framework\TestCase
         $field = new MultilineTextField();
         $field->name = "my_field";
         $field->title = "users";
-        $rendered = $field->render(123);
-
-        $expectedFile = Path::resolve("ULICMS_ROOT/tests/fixtures/custom_field_types/textfield_multiline.expected.txt");
-
-        //file_put_contents($expectedFile, $rendered);
-
-        $expected = file_get_contents($expectedFile);
-        $this->assertEquals(normalizeLN($expected), normalizeLN($rendered));
+        $this->assertMatchesHtmlSnapshot($field->render(123));
     }
 }

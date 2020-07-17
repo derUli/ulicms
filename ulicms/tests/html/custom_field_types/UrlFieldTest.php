@@ -1,7 +1,11 @@
 <?php
 
+use Spatie\Snapshots\MatchesSnapshots;
+
 class UrlFieldTest extends \PHPUnit\Framework\TestCase
 {
+    use MatchesSnapshots;
+
     protected function setUp(): void
     {
         include_once getLanguageFilePath("en");
@@ -12,10 +16,9 @@ class UrlFieldTest extends \PHPUnit\Framework\TestCase
         $field = new UrlField();
         $field->name = "my_field";
         $field->title = "username";
-        $rendered = $field->render("hello world");
 
-        $expectedFile = Path::resolve("ULICMS_ROOT/tests/fixtures/custom_field_types/url.expected.txt");
-        $expected = file_get_contents($expectedFile);
-        $this->assertEquals(normalizeLN($expected), normalizeLN($rendered));
+        $this->assertMatchesHtmlSnapshot(
+            $field->render("https://www.ulicms.de")
+        );
     }
 }

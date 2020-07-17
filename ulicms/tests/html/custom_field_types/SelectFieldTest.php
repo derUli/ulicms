@@ -1,7 +1,11 @@
 <?php
 
+use Spatie\Snapshots\MatchesSnapshots;
+
 class SelectFieldTest extends \PHPUnit\Framework\TestCase
 {
+    use MatchesSnapshots;
+
     public function testRenderSingleSelectField()
     {
         $field = new SelectField();
@@ -10,18 +14,7 @@ class SelectFieldTest extends \PHPUnit\Framework\TestCase
         $field->helpText = "hold_ctrl_to_select_multiple";
         $field->translateOptions = false;
         $field->options = $this->getOptions();
-        $html = $field->render();
-
-        $expected = file_get_contents(
-            Path::resolve(
-                "ULICMS_ROOT/tests/fixtures/custom_field_types/select_field.expected.txt"
-            )
-        );
-
-        $this->assertEquals(
-            normalizeLN($expected),
-            normalizeLN($html)
-        );
+        $this->assertMatchesHtmlSnapshot($field->render());
     }
 
     public function testRenderMultiSelectField()
@@ -32,18 +25,7 @@ class SelectFieldTest extends \PHPUnit\Framework\TestCase
         $field->helpText = "hold_ctrl_to_select_multiple";
         $field->translateOptions = false;
         $field->options = $this->getOptions();
-        $html = $field->render();
-
-        $expected = file_get_contents(
-            Path::resolve(
-                "ULICMS_ROOT/tests/fixtures/custom_field_types/multi_select_field.expected.txt"
-            )
-        );
-
-        $this->assertEquals(
-            normalizeLN($expected),
-            normalizeLN($html)
-        );
+        $this->assertMatchesHtmlSnapshot($field->render());
     }
 
     private function getOptions(): array
