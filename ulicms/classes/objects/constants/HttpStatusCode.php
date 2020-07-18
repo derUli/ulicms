@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 /** HTTP status codes */
-class HttpStatusCode {
-
+class HttpStatusCode
+{
     const __default = self::OK;
     const SWITCHING_PROTOCOLS = 101;
     const OK = 200;
@@ -46,5 +46,4 @@ class HttpStatusCode {
     const SERVICE_UNAVAILABLE = 503;
     const GATEWAY_TIMEOUT = 504;
     const HTTP_VERSION_NOT_SUPPORTED = 505;
-
 }

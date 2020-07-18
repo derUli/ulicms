@@ -10,7 +10,8 @@ if (!$permissionChecker->hasPermission("install_packages")) {
     ?>
     <p>
         <a href="<?php echo ModuleHelper::buildActionURL("install_method"); ?>"
-           class="btn btn-default btn-back"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+           class="btn btn-default btn-back is-ajax">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i>
             <?php translate("back") ?></a>
     </p>
     <?php
@@ -31,7 +32,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                             "%file%" => $_FILES['file']['name']
                         )) . "</p>";
                     }
-                } else if (endsWith($file_in_tmp, ".sin")) {
+                } elseif (endsWith($file_in_tmp, ".sin")) {
                     $url = "?action=pkginfo&file=" . basename($file_in_tmp);
                     Request::javascriptRedirect($url);
                 } else {
@@ -41,16 +42,21 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                 echo "<p style='color:red'>" . get_translation("upload_failed") . "</p>";
             }
         }
-    }
-    ?>
+    } ?>
     <h1><?php translate("upload_package"); ?></h1>
     <form action="?action=upload_package" enctype="multipart/form-data"
           method="post">
               <?php
-              csrf_token_html();
-              ?>
-        <input type="file" name="file"><br /> <br />
-        <button type="submit" class="btn btn-warning"><i class="fa fa-upload" aria-hidden="true"></i> <?php translate("install_package"); ?></button>
+              csrf_token_html(); ?>
+        <p>
+            <input type="file" name="file" class="form-control" required>
+        </p>
+        <p>
+            <button type="submit" class="btn btn-warning">
+                <i class="fa fa-upload" aria-hidden="true"></i>
+                <?php translate("install_package"); ?>
+            </button>
+        </p>
     </form>
     <?php
 }

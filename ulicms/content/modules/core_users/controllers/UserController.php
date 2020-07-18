@@ -5,16 +5,18 @@ declare(strict_types=1);
 use UliCMS\Security\PermissionChecker;
 use UliCMS\Constants\AuditLog;
 
-class UserController extends Controller {
-
+class UserController extends Controller
+{
     private $logger;
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         $this->logger = LoggerRegistry::get("audit_log");
     }
 
-    public function createPost(): void {
+    public function createPost(): void
+    {
         $username = $_POST["username"];
         $lastname = $_POST["lastname"];
         $firstname = $_POST["firstname"];
@@ -64,7 +66,8 @@ class UserController extends Controller {
         Request::redirect(ModuleHelper::buildActionURL("admins"));
     }
 
-    public function updatePost(): void {
+    public function updatePost(): void
+    {
         $permissionChecker = new PermissionChecker(get_user_id());
         if ($permissionChecker->hasPermission("users_edit") or $_POST["id"] == $_SESSION["login_id"]) {
             $id = intval($_POST["id"]);
@@ -126,13 +129,12 @@ class UserController extends Controller {
             if (!empty($_FILES["avatar"]["name"])) {
                 if (!$user->changeAvatar($_FILES["avatar"])) {
                     ExceptionResult(
-                            get_translation("avatar_upload_failed")
+                        get_translation("avatar_upload_failed")
                     );
                 }
             }
 
             if (Request::getVar("delete_avatar")) {
-
                 $user->removeAvatar();
             }
 
@@ -145,12 +147,23 @@ class UserController extends Controller {
         ExceptionResult(get_translation("forbidden"), HttpStatusCode::FORBIDDEN);
     }
 
-    public function deletePost(): void {
-        $id = intval($_GET["id"]);
+    public function deletePost(): void
+    {
+        $id = Request::getVar("id", 0, "int");
 
+        $this->_deletePost($id);
+        Request::redirect(ModuleHelper::buildActionURL("admins"));
+    }
+
+    public function _deletePost(int $id): bool
+    {
         do_event("before_admin_delete");
 
         $user = new User($id);
+        if (!$user->isPersistent()) {
+            return false;
+        }
+
         $user->delete();
 
         do_event("after_admin_delete");
@@ -160,7 +173,6 @@ class UserController extends Controller {
             $name = isset($user["username"]) ? $user["username"] : AuditLog::UNKNOWN;
             $this->logger->debug("User $name - Deleted User with id ($id)");
         }
-        Request::redirect(ModuleHelper::buildActionURL("admins"));
+        return true;
     }
-
 }

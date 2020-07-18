@@ -3,24 +3,27 @@
 use function UliCMS\HTML\icon;
 
 $menuTranslation = new JsTranslation(
-        [
+    [
     "logout",
     "on",
     "off"
         ],
-        "MenuTranslation");
+    "MenuTranslation"
+);
 $menuTranslation->render();
 
 $globalTranslation = new JsTranslation(
-        [
-    "all"
+    [
+    "all",
+            "copied_to_clipboard_success",
+            "copied_to_clipboard_failed"
         ],
-        "GlobalTranslation"
+    "GlobalTranslation"
 );
 $globalTranslation->render();
 
 $passwordSecurityTranslation = new JSTranslation(
-        [
+    [
     "short_pass",
     "bad_pass",
     "good_pass",
@@ -28,7 +31,7 @@ $passwordSecurityTranslation = new JSTranslation(
     "contains_username",
     "enter_pass",
         ],
-        "PasswordSecurityTranslation"
+    "PasswordSecurityTranslation"
 );
 $passwordSecurityTranslation->render();
 ?>
@@ -40,13 +43,7 @@ $passwordSecurityTranslation->render();
     <br />
 </div>
 </div>
-<div id="footer">
-    <?php do_event("admin_copyright_footer_left"); ?>
-    &copy; 2011 - <?php cms_release_year(); ?> by <a
-        href="http://www.ulicms.de" target="_blank">UliCMS</a>
-
-    <?php do_event("admin_copyright_footer_right"); ?>
-</div>
+<?php do_event("admin_copyright_footer_left"); ?>
 </div>
 <a href="#" id="scroll-to-top" class="has-pointer">
     <?php echo icon("fas fa-arrow-circle-up"); ?>

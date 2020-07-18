@@ -5,10 +5,10 @@ use UliCMS\Exceptions\DatabaseException;
 // A list is a paginated set of content
 // filtered by conditions
 // e.g. article archive
-class List_Data extends Model {
-
+class List_Data extends Model
+{
     public $content_id = null;
-    public $language = NULL;
+    public $language = null;
     public $category_id = null;
     public $menu = null;
     public $parent_id = null;
@@ -18,51 +18,56 @@ class List_Data extends Model {
     public $use_pagination = false;
     public $type = null;
 
-    public function filter(?int $offset = null): array {
+    public function filter(?int $offset = null): array
+    {
         return $this->filterPaginated($offset);
     }
 
-    public function hasMore(int $offset = 0): bool {
+    public function hasMore(int $offset = 0): bool
+    {
         return count(
-                $this->filterPaginated(
-                        $offset + intval($this->limit)
-                )
+            $this->filterPaginated(
+                $offset + intval($this->limit)
+            )
         ) > 0;
     }
 
     // apply the filter conditions of this list
     // returns array of contents
-    public function filterPaginated(?int $offset = null): array {
+    public function filterPaginated(?int $offset = null): array
+    {
         $limit = $this->use_pagination ? $this->limit : null;
 
         return ContentFactory::getForFilter(
-                        $this->language,
-                        $this->category_id,
-                        $this->menu,
-                        $this->parent_id,
-                        $this->order_by,
-                        $this->order_direction,
-                        $this->type,
-                        $limit,
-                        $offset
+            $this->language,
+            $this->category_id,
+            $this->menu,
+            $this->parent_id,
+            $this->order_by,
+            $this->order_direction,
+            $this->type,
+            $limit,
+            $offset
         );
     }
 
     // apply the filter conditions of this list
     // returns array of contents
-    public function filterAll(): array {
+    public function filterAll(): array
+    {
         return ContentFactory::getForFilter(
-                        $this->language,
-                        $this->category_id,
-                        $this->menu,
-                        $this->parent_id,
-                        $this->order_by,
-                        $this->order_direction,
-                        $this->type
+            $this->language,
+            $this->category_id,
+            $this->menu,
+            $this->parent_id,
+            $this->order_by,
+            $this->order_direction,
+            $this->type
         );
     }
 
-    public function loadByID($id) {
+    public function loadByID($id)
+    {
         $id = intval($id);
         $result = Database::query("select * from " . tbname("lists")
                         . " WHERE content_id = $id");
@@ -74,7 +79,8 @@ class List_Data extends Model {
         $this->content_id = $id ? intval($id) : null;
     }
 
-    protected function fillVars($data = null) {
+    protected function fillVars($data = null)
+    {
         $this->content_id = $data->content_id ? intval($data->content_id) : null;
         $this->language = $data->language ? $data->language : null;
         $this->category_id = $data->category_id ? intval($data->category_id) : null;
@@ -87,7 +93,8 @@ class List_Data extends Model {
         $this->type = $data->type ? $data->type : null;
     }
 
-    public function save() {
+    public function save()
+    {
         if ($this->content_id === null) {
             throw new DatabaseException("no content_id for list set");
         }
@@ -101,7 +108,8 @@ class List_Data extends Model {
         }
     }
 
-    protected function create() {
+    protected function create()
+    {
         $content_id = intval($this->content_id);
 
         if ($this->language === null) {
@@ -159,7 +167,8 @@ class List_Data extends Model {
         Database::query($sql);
     }
 
-    protected function update() {
+    protected function update()
+    {
         $content_id = intval($this->content_id);
 
         if ($this->language === null) {
@@ -220,8 +229,8 @@ class List_Data extends Model {
         Database::query($sql);
     }
 
-    public function isPersistent(): bool {
+    public function isPersistent(): bool
+    {
         return $this->content_id >= 1;
     }
-
 }

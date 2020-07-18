@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace UliCMS\Security\SpamChecker;
 
-interface ISpamChecker {
+interface ISpamChecker
+{
 
     // this must be an array which must return an array of
     // SpamDetectionResults

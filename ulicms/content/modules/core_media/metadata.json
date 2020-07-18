@@ -1,10 +1,9 @@
 {
     "source": "core",
-    "version": "2020.2",
+    "version": "2020.2.4",
     "embed": false,
     "custom_acl": 
             [
-                "images",
                 "files",
                 "videos",
                 "videos_create",

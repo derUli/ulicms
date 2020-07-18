@@ -1,7 +1,7 @@
 <?php
 
-class ModuleInfoViewModel {
-
+class ModuleInfoViewModel
+{
     public $name;
     public $version;
     public $source;
@@ -10,5 +10,4 @@ class ModuleInfoViewModel {
     public $adminPermission;
     public $manufacturerName;
     public $manufacturerUrl;
-
 }

@@ -1,23 +1,21 @@
 <?php
 
-class FileFileTest extends \PHPUnit\Framework\TestCase {
+use Spatie\Snapshots\MatchesSnapshots;
 
-    public function setUp() {
+class FileFileTest extends \PHPUnit\Framework\TestCase
+{
+    use MatchesSnapshots;
+    
+    protected function setUp(): void
+    {
         include_once getLanguageFilePath("en");
     }
 
-    public function testRender() {
+    public function testRender()
+    {
         $field = new FileFile();
         $field->name = "my_field";
         $field->title = "file";
-        $rendered = $field->render("/foo/bar/test.pdf");
-
-        $expectedFile = Path::resolve("ULICMS_ROOT/tests/fixtures/custom_field_types/file_file.expected.txt");
-
-        // file_put_contents($expectedFile, $rendered);
-
-        $expected = file_get_contents($expectedFile);
-        $this->assertEquals(normalizeLN($expected), normalizeLN($rendered));
+        $this->assertMatchesHtmlSnapshot($field->render("/foo/bar/test.pdf"));
     }
-
 }

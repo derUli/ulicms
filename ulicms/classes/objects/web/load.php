@@ -3,9 +3,9 @@
 $classes = array(
     "Mailer",
     "Request",
-    "Response"
+    "Response",
+    "BrowserCompatiblityChecker"
 );
 foreach ($classes as $class) {
     require_once dirname(__file__) . "/$class.php";
 }
-

@@ -1,5 +1,4 @@
 <?php
-
 require_once dirname(__file__) . "/classes/exceptions/load.php";
 
 use UliCMS\Exceptions\AccessDeniedException;
@@ -42,48 +41,32 @@ if (file_exists($composerAutoloadFile)) {
     require_once $composerAutoloadFile;
 } else {
     throw new FileNotFoundException(
-            "autoload.php not found. "
+        "autoload.php not found. "
             . "Please run \"./composer install\" to install dependecies."
     );
 }
 
-
 require_once dirname(__file__) . "/lib/load.php";
-
 require_once dirname(__file__) . "/classes/objects/privacy/load.php";
 require_once dirname(__file__) . "/classes/objects/abstract/load.php";
 require_once dirname(__file__) . "/classes/objects/constants/load.php";
 require_once dirname(__file__) . "/classes/objects/storages/load.php";
 require_once dirname(__file__) . "/classes/objects/modules/load.php";
-require_once dirname(__file__) . "/classes/objects/backend/load.php";
 require_once dirname(__file__) . "/classes/objects/settings/load.php";
 require_once dirname(__file__) . "/classes/objects/web/load.php";
 require_once dirname(__file__) . "/classes/objects/content/Categories.php";
 require_once dirname(__file__) . "/classes/objects/content/VCS.php";
 require_once dirname(__file__) . "/classes/objects/content/types/ContentType.php";
 require_once dirname(__file__) . "/classes/objects/content/types/DefaultContentTypes.php";
-require_once dirname(__file__) . "/classes/objects/content/types/fields/CustomField.php";
-require_once dirname(__file__) . "/classes/objects/content/types/fields/TextField.php";
-require_once dirname(__file__) . "/classes/objects/content/types/fields/MultilineTextField.php";
-require_once dirname(__file__) . "/classes/objects/content/types/fields/EmailField.php";
-require_once dirname(__file__) . "/classes/objects/content/types/fields/MonthField.php";
-require_once dirname(__file__) . "/classes/objects/content/types/fields/DatetimeField.php";
-require_once dirname(__file__) . "/classes/objects/content/types/fields/NumberField.php";
-require_once dirname(__file__) . "/classes/objects/content/types/fields/ColorField.php";
-require_once dirname(__file__) . "/classes/objects/content/types/fields/HtmlField.php";
-require_once dirname(__file__) . "/classes/objects/content/types/fields/SelectField.php";
-require_once dirname(__file__) . "/classes/objects/content/types/fields/CheckboxField.php";
-require_once dirname(__file__) . "/classes/objects/content/types/fields/FileFile.php";
-require_once dirname(__file__) . "/classes/objects/content/types/fields/FileImage.php";
+require_once dirname(__file__) . "/classes/objects/content/types/fields/load.php";
+
 require_once dirname(__file__) . "/classes/objects/pkg/load.php";
 require_once dirname(__file__) . "/classes/helpers/load.php";
 require_once dirname(__file__) . "/classes/objects/registry/load.php";
 require_once dirname(__file__) . "/classes/objects/logging/load.php";
 require_once dirname(__file__) . "/classes/objects/html/load.php";
 require_once dirname(__file__) . "/classes/objects/content/TypeMapper.php";
-
 require_once dirname(__file__) . "/classes/objects/database/load.php";
-require_once dirname(__file__) . "/classes/objects/html/Template.php";
 require_once dirname(__file__) . "/classes/objects/security/load.php";
 require_once dirname(__file__) . "/classes/objects/files/load.php";
 require_once dirname(__file__) . "/classes/objects/spam/load.php";
@@ -113,6 +96,7 @@ require_once dirname(__file__) . "/classes/objects/content/ContentFactory.php";
 require_once dirname(__file__) . "/classes/objects/content/CustomFields.php";
 require_once dirname(__file__) . "/classes/objects/content/Results.php";
 require_once dirname(__file__) . "/classes/objects/media/load.php";
+require_once dirname(__file__) . "/classes/objects/backend/load.php";
 
 require_once dirname(__file__) . "/UliCMSVersion.php";
 
@@ -122,7 +106,8 @@ if (file_exists($mobile_detect_as_module)) {
     require_once $mobile_detect_as_module;
 }
 
-function exception_handler($exception) {
+function exception_handler($exception)
+{
     if (!defined("EXCEPTION_OCCURRED")) {
         define("EXCEPTION_OCCURRED", true);
     }
@@ -140,11 +125,11 @@ function exception_handler($exception) {
     $httpStatus = $exception instanceof AccessDeniedException ?
             HttpStatusCode::FORBIDDEN : HttpStatusCode::INTERNAL_SERVER_ERROR;
     if (function_exists("HTMLResult") and class_exists("Template")
-            and ! headers_sent() and function_exists("get_theme")) {
+            && !headers_sent() and function_exists("get_theme")) {
         ViewBag::set("exception", nl2br(_esc($exception)));
         HTMLResult(Template::executeDefaultOrOwnTemplate("exception.php"), $httpStatus);
     }
-    if (function_exists("HTMLResult") and ! headers_sent()) {
+    if (function_exists("HTMLResult") && !headers_sent()) {
         HTMLResult($message, $httpStatus);
     } else {
         echo "{$message}\n";
@@ -154,11 +139,13 @@ function exception_handler($exception) {
 // if config exists require_config else redirect to installer
 $path_to_config = dirname(__file__) . "/CMSConfig.php";
 
+Vars::set("http_headers", []);
+
 // load config file
 if (file_exists($path_to_config)) {
     require_once $path_to_config;
-} else if (is_dir("installer")) {
-    header("Location: installer/");
+} elseif (is_dir("installer")) {
+    send_header("Location: installer/");
     exit();
 } else {
     throw new Exception("Can't require CMSConfig.php. Starting installer failed, too.");
@@ -169,7 +156,7 @@ if (php_sapi_name() != "cli") {
 }
 
 // Backwards compatiblity for modules using the old config class name
-if (class_exists("CMSConfig") and ! class_exists("config")) {
+if (class_exists("CMSConfig") && !class_exists("config")) {
     class_alias("CMSConfig", "config");
 }
 
@@ -177,9 +164,9 @@ global $config;
 $config = new CMSConfig();
 
 // IF ULICMS_DEBUG is defined then display all errors except E_NOTICE,
-// else use default error_reporting from php.ini
+// else disable error_reporting from php.ini
 if ((defined("ULICMS_DEBUG") and ULICMS_DEBUG)
-        or ( isset($config->debug) and $config->debug)) {
+        or (isset($config->debug) and $config->debug)) {
     error_reporting(E_ALL ^ E_NOTICE);
 } else {
     error_reporting(0);
@@ -190,18 +177,18 @@ if ((defined("ULICMS_DEBUG") and ULICMS_DEBUG)
 // this enables us to use stuff like Docker containers where data gets lost
 // after stopping the container
 if (isset($config->data_storage_root)
-        and ! is_null($config->data_storage_root)) {
+        && !is_null($config->data_storage_root)) {
     define("ULICMS_DATA_STORAGE_ROOT", $config->data_storage_root);
 } else {
     define("ULICMS_DATA_STORAGE_ROOT", ULICMS_ROOT);
 }
 
-require_once dirname(__file__) . "/classes/creators/load.php";
+require_once dirname(__file__) . "/classes/renderers/load.php";
 
 // this enables us to set an base url for statis ressources such as images
 // stored in ULICMS_DATA_STORAGE_ROOT
 if (isset($config->data_storage_url)
-        and ! is_null($config->data_storage_url)) {
+        && !is_null($config->data_storage_url)) {
     define("ULICMS_DATA_STORAGE_URL", $config->data_storage_url);
 }
 
@@ -267,29 +254,28 @@ if (isset($config->memory_limit)) {
 Translation::init();
 
 if (class_exists("Path")) {
-
     if (isset($config->exception_logging) and is_true($config->exception_logging)) {
         LoggerRegistry::register(
-                "exception_log",
-                new Logger(Path::resolve("ULICMS_LOG/exception_log"))
+            "exception_log",
+            new Logger(Path::resolve("ULICMS_LOG/exception_log"))
         );
     }
     if (isset($config->query_logging) and is_true($config->query_logging)) {
         LoggerRegistry::register(
-                "sql_log",
-                new Logger(Path::resolve("ULICMS_LOG/sql_log"))
+            "sql_log",
+            new Logger(Path::resolve("ULICMS_LOG/sql_log"))
         );
     }
     if (isset($config->phpmailer_logging) and is_true($config->phpmailer_logging)) {
         LoggerRegistry::register(
-                "phpmailer_log",
-                new Logger(Path::resolve("ULICMS_LOG/phpmailer_log"))
+            "phpmailer_log",
+            new Logger(Path::resolve("ULICMS_LOG/phpmailer_log"))
         );
     }
     if (isset($config->audit_log) and is_true($config->audit_log)) {
         LoggerRegistry::register(
-                "audit_log",
-                new Logger(Path::resolve("ULICMS_LOG/audit_log"))
+            "audit_log",
+            new Logger(Path::resolve("ULICMS_LOG/audit_log"))
         );
     }
 }
@@ -301,7 +287,8 @@ define('CRLF', "\r\n"); // carriage return and line feed; Windows
 define('BR', '<br />' . LF); // HTML Break
 define("ONE_DAY_IN_SECONDS", 60 * 60 * 24);
 
-function noPerms() {
+function noPerms()
+{
     echo "<div class=\"alert alert-danger\">"
     . get_translation("no_permissions") . "</div>";
     $logger = LoggerRegistry::get("audit_log");
@@ -327,12 +314,12 @@ $db_strict_mode = isset($config->db_strict_mode) ?
         boolval($config->db_strict_mode) : false;
 
 @$connection = Database::connect(
-                $config->db_server,
-                $config->db_user,
-                $config->db_password,
-                $db_port,
-                $db_socket,
-                $db_strict_mode
+    $config->db_server,
+    $config->db_user,
+    $config->db_password,
+    $db_port,
+    $db_socket,
+    $db_strict_mode
 );
 
 if (!$connection) {
@@ -348,8 +335,8 @@ if (isset($config->dbmigrator_auto_migrate) and is_true($config->dbmigrator_auto
         Database::setEchoQueries(true);
     }
     $select = Database::setupSchemaAndSelect(
-                    $config->db_database,
-                    $additionalSql
+        $config->db_database,
+        $additionalSql
     );
 } else {
     $select = Database::select($config->db_database);
@@ -366,18 +353,20 @@ if (!Settings::get("session_name")) {
     Settings::set("session_name", uniqid() . "_SESSION");
 }
 
-@session_name(Settings::get("session_name"));
+UliCMS\Utils\Session\sessionName(Settings::get("session_name"));
 
 $useragent = Settings::get("useragent");
 
-define("ULICMS_USERAGENT", $useragent ?
+define(
+    "ULICMS_USERAGENT",
+    $useragent ?
                 $useragent : "UliCMS Release " . cms_version()
 );
 
 @ini_set('user_agent', ULICMS_USERAGENT);
 
 if (!Settings::get("hide_meta_generator")) {
-    @header('X-Powered-By: UliCMS Release ' . cms_version());
+    @send_header('X-Powered-By: UliCMS Release ' . cms_version());
 }
 
 $memory_limit = Settings::get("memory_limit");
@@ -415,22 +404,20 @@ $session_timeout = 60 * intval(Settings::get("session_timeout"));
 // Session abgelaufen
 if (isset($_SESSION["session_begin"])) {
     if (time() - $_SESSION["session_begin"] > $session_timeout) {
-        session_destroy();
-        header("Location: ./");
+        UliCMS\Utils\Session\sessionDestroy();
+        send_header("Location: ./");
         exit();
     } else {
         $_SESSION["session_begin"] = time();
     }
 }
 
-function shutdown_function() {
-    // don't execute shutdown hook on kcfinder page (media)
-    // since the "Path" class has a naming conflict with the same named
-    // class of KCFinder
+function shutdown_function()
+{
     do_event("shutdown");
 
     $cfg = new CMSConfig();
-    if (isset($cfg->show_render_time) and is_true($cfg->show_render_time) and ! Request::isAjaxRequest()) {
+    if (isset($cfg->show_render_time) and is_true($cfg->show_render_time) && !Request::isAjaxRequest()) {
         echo "\n\n<!--" . (microtime(true) - START_TIME) . "-->";
     }
     if (isset($cfg->dbmigrator_drop_database_on_shutdown) and is_true($cfg->dbmigrator_drop_database_on_shutdown)) {
@@ -444,20 +431,33 @@ function shutdown_function() {
 
 register_shutdown_function("shutdown_function");
 
+$patchManager = new PatchManager();
+$installed_patches = $patchManager->getInstalledPatchNames();
+$installed_patches = implode(";", $installed_patches);
+$version = new UliCMSVersion();
+
+define("PATCH_CHECK_URL", "https://patches.ulicms.de/?v=" .
+        urlencode(implode(".", $version->getInternalVersion())) . "&installed_patches=" . urlencode($installed_patches));
+
+$defaultMenu = isset($config->default_menu) && !empty($config->default_menu) ?
+        $config->default_menu : 'not_in_menu';
+define("DEFAULT_MENU", $defaultMenu);
+
+
+$defaultContentType = isset($config->default_content_type) && !empty($config->default_menu) ?
+        $config->default_content_type : 'page';
+define("DEFAULT_CONTENT_TYPE", $defaultContentType);
+
 $enforce_https = Settings::get("enforce_https");
 
 if (!is_ssl() and $enforce_https) {
-    header("Location: https://" . $_SERVER["HTTP_HOST"] .
+    send_header("Location: https://" . $_SERVER["HTTP_HOST"] .
             $_SERVER["REQUEST_URI"]);
     exit();
 }
 
 $moduleManager = new ModuleManager();
 Vars::set("disabledModules", $moduleManager->getDisabledModuleNames());
-
-// don't load module stuff on kcfinder page (media)
-// since the "Path" class has a naming conflict with the same named
-// class of KCFinder
 
 ModelRegistry::loadModuleModels();
 
@@ -469,15 +469,3 @@ require_once dirname(__file__) . "/lib/templating.php";
 do_event("before_init");
 do_event("init");
 do_event("after_init");
-
-$patchManager = new PatchManager();
-
-$installed_patches = $patchManager->getInstalledPatchNames();
-$installed_patches = implode(";", $installed_patches);
-
-$version = new UliCMSVersion();
-
-if (!defined("PATCH_CHECK_URL")) {
-    define("PATCH_CHECK_URL", "https://patches.ulicms.de/?v=" .
-            urlencode(implode(".", $version->getInternalVersion())) . "&installed_patches=" . urlencode($installed_patches));
-}

@@ -29,3 +29,6 @@ node_modules
 ulicms/content/configurations/*
 ulicms/content/generated/*
 report
+modules.aus
+.php_cs.cache
+.phplint-cache

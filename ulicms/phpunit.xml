@@ -7,8 +7,8 @@
     cacheResult="false"
     cacheTokens="false"
     colors="false"
-    convertErrorsToExceptions="false"
-    convertNoticesToExceptions="true"
+    convertErrorsToExceptions="true"
+    convertNoticesToExceptions="false"
     convertWarningsToExceptions="true"
     forceCoversAnnotation="false"
     processIsolation="false"
@@ -52,10 +52,13 @@
                 <directory>classes/exceptions</directory>
             </exclude>
             <exclude>
-                <file>classes/creators/load.php</file>
+                <file>classes/renderers/load.php</file>
             </exclude>
             <exclude>
                 <file>classes/objects/backend/load.php</file>
+            </exclude>
+            <exclude>
+                <file>classes/objects/content/types/fields/load.php</file>
             </exclude>
             <exclude>
                 <file>classes/objects/registry/load.php</file>
@@ -109,6 +112,12 @@
                 <file>classes/objects/web/load.php</file>
             </exclude>
             <exclude>
+                <directory>content/better_cron</directory>
+            </exclude>
+            <exclude>
+                <directory>content/modules.aus</directory>
+            </exclude>
+            <exclude>
                 <directory>content/modules/core_comments/lang</directory>
             </exclude>
             <exclude>
@@ -124,13 +133,19 @@
                 <directory>content/modules/core_help/lang</directory>
             </exclude>
             <exclude>
+                <directory>content/modules/better_cron/templates</directory>
+            </exclude>
+            <exclude>
+                <directory>content/modules/timezones/templates</directory>
+            </exclude>
+            <exclude>
                 <directory>tests/</directory>
             </exclude>
             <exclude>
                 <directory>shell</directory>
             </exclude>
             <exclude>
-                <directory>admin/kcfinder/</directory>
+                <directory>admin/fm/</directory>
             </exclude>
 
             <exclude>
@@ -152,7 +167,10 @@
                 <directory>content/modules/core_content/lang</directory>
             </exclude>
             <exclude>
-                <directory>lang/</directory>
+                <directory>content/modules/core_info/lang</directory>
+            </exclude>
+            <exclude>
+                <directory>lang</directory>
             </exclude>
             <exclude>
                 <directory>content/modules/core_package_manager/lang</directory>

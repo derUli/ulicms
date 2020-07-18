@@ -4,18 +4,17 @@ require_once "init.php";
 
 use UliCMS\Models\Content\Language;
 use UliCMS\Utils\CacheUtil;
-use UliCMS\Creators\CSVCreator;
-use UliCMS\Creators\JSONCreator;
-use UliCMS\Creators\PDFCreator;
-use UliCMS\Creators\PlainTextCreator;
+use UliCMS\Renderers\CsvRenderer;
+use UliCMS\Renderers\JsonRenderer;
+use UliCMS\Renderers\PdfRenderer;
+use UliCMS\Renderers\PlainTextRenderer;
 
 global $connection;
 
 do_event("before_session_start");
 
 // initialize session
-@session_start();
-// $_COOKIE[session_name()] = session_id();
+UliCMS\Utils\Session\sessionStart();
 
 do_event("after_session_start");
 
@@ -26,8 +25,8 @@ $languages = getAllLanguages();
 if (!empty($_GET["language"])
         and faster_in_array($_GET["language"], $languages)) {
     $_SESSION["language"] = Database::escapeValue(
-                    $_GET["language"],
-                    DB_TYPE_STRING
+        $_GET["language"],
+        DB_TYPE_STRING
     );
 }
 
@@ -40,7 +39,7 @@ setLocaleByLanguage();
 if (faster_in_array($_SESSION["language"], $languages)
         and file_exists(getLanguageFilePath($_SESSION["language"]))) {
     require_once getLanguageFilePath($_SESSION["language"]);
-} else if (file_exists(getLanguageFilePath("en"))) {
+} elseif (file_exists(getLanguageFilePath("en"))) {
     require getLanguageFilePath("en");
 }
 
@@ -50,7 +49,7 @@ Translation::includeCustomLangFile($_SESSION["language"]);
 Translation::loadCurrentThemeLanguageFiles($_SESSION["language"]);
 do_event("custom_lang_" . $_SESSION["language"]);
 
-if (Request::isPost() and ! defined("NO_ANTI_CSRF")) {
+if (Request::isPost() && !defined("NO_ANTI_CSRF")) {
     if (!check_csrf_token()) {
         die("This is probably a CSRF attack!");
     }
@@ -72,7 +71,7 @@ $status = check_status();
 
 if (Settings::get("redirection")) {
     do_event("before_global_redirection");
-    header("Location: " . Settings::get("redirection"));
+    send_header("Location: " . Settings::get("redirection"));
     exit();
 }
 
@@ -81,11 +80,11 @@ $theme = get_theme();
 if (isMaintenanceMode()) {
     do_event("before_maintenance_message");
     // Sende HTTP Status 503 und Retry-After im Wartungsmodus
-    header($_SERVER["SERVER_PROTOCOL"] .
+    send_header($_SERVER["SERVER_PROTOCOL"] .
             " 503 Service Temporarily Unavailable");
-    header('Status: 503 Service Temporarily Unavailable');
-    header('Retry-After: 60');
-    header("Content-Type: text/html; charset=utf-8");
+    send_header('Status: 503 Service Temporarily Unavailable');
+    send_header('Retry-After: 60');
+    send_header("Content-Type: text/html; charset=utf-8");
     if (file_exists(getTemplateDirPath($theme) . "maintenance.php")) {
         require_once getTemplateDirPath($theme) . "maintenance.php";
     } else {
@@ -95,7 +94,7 @@ if (isMaintenanceMode()) {
     die();
 }
 
-if (isset($_GET["format"]) and ! empty($_GET["format"])) {
+if (isset($_GET["format"]) && !empty($_GET["format"])) {
     $format = trim($_GET["format"]);
 } else {
     $format = "html";
@@ -107,7 +106,7 @@ do_event("before_http_header");
 
 $redirection = get_redirection();
 
-if ($redirection and ( is_active() or is_logged_in())) {
+if ($redirection and (is_active() or is_logged_in())) {
     Request::redirect($redirection, 302);
 }
 if (get_ID()) {
@@ -117,7 +116,8 @@ if (get_ID()) {
             $language = new Language($page->link_to_language);
             if (!is_null($language->getID())
                     and StringHelper::isNotNullOrWhitespace(
-                            $language->getLanguageLink())
+                        $language->getLanguageLink()
+                    )
             ) {
                 Request::redirect($language->getLanguageLink());
             }
@@ -140,29 +140,30 @@ if (isset($_GET["goid"])) {
 
 ControllerRegistry::runMethods();
 
-header($_SERVER["SERVER_PROTOCOL"] . " " . $status);
+send_header($_SERVER["SERVER_PROTOCOL"] . " " . $status);
 
 if ($format == "html") {
-    header("Content-Type: text/html; charset=utf-8");
-} else if ($format == "pdf") {
-    $pdf = new PDFCreator();
+    send_header("Content-Type: text/html; charset=utf-8");
+} elseif ($format == "pdf") {
+    $pdf = new PdfRenderer();
     Result($pdf->render(), HttpStatusCode::OK, "application/pdf");
-} else if ($format == "csv") {
-    $csv = new CSVCreator();
+} elseif ($format == "csv") {
+    $csv = new CsvRenderer();
     Result($csv->render(), HttpStatusCode::OK, "text/csv");
-} else if ($format == "json") {
-    $json = new JSONCreator();
+} elseif ($format == "json") {
+    $json = new JsonRenderer();
     RawJSONResult($json->render());
-} else if ($format == "txt") {
-    $plain = new PlainTextCreator();
+} elseif ($format == "txt") {
+    $plain = new PlainTextRenderer();
     TextResult($plain->render());
 } else {
     ExceptionResult(
-            get_secure_translation("unsupported_output_format",
-                    [
+        get_secure_translation(
+            "unsupported_output_format",
+            [
                         "%format%" => $format
                     ]
-            )
+        )
     );
 }
 
@@ -185,7 +186,7 @@ if (file_exists(getTemplateDirPath($theme, true) . "functions.php")) {
 
 do_event("after_functions");
 
-$hasModul = containsModule(get_requested_pagename());
+$hasModul = containsModule(get_slug());
 
 $cache_control = get_cache_control();
 switch ($cache_control) {
@@ -211,7 +212,7 @@ do_event("before_html");
 
 $cacheAdapter = null;
 if (CacheUtil::isCacheEnabled() and Request::isGet()
-        and ! Flags::getNoCache()) {
+        && !Flags::getNoCache()) {
     $cacheAdapter = CacheUtil::getAdapter();
 }
 $uid = CacheUtil::getCurrentUid();
@@ -296,7 +297,7 @@ if ($cacheAdapter or Settings::get("minify_html")) {
 
     echo $generatedHtml;
 
-    if ($cacheAdapter and ! defined("EXCEPTION_OCCURRED")) {
+    if ($cacheAdapter && !defined("EXCEPTION_OCCURRED")) {
         $cacheAdapter->set($uid, $generatedHtml, CacheUtil::getCachePeriod());
     }
 }
@@ -310,4 +311,3 @@ if (!Settings::get("no_auto_cron")) {
 }
 
 exit();
-

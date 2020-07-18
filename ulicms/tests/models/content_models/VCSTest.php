@@ -2,14 +2,16 @@
 
 use UliCMS\Models\Content\VCS;
 
-class VCSTest extends \PHPUnit\Framework\TestCase {
-
-    public function tearDown() {
+class VCSTest extends \PHPUnit\Framework\TestCase
+{
+    protected function tearDown(): void
+    {
         Database::deleteFrom("content", "slug like '%unit-test-%'");
         Database::deleteFrom("history", "content like '%Text%'");
     }
 
-    public function testGetRevisionByContentIdReturnsRevision() {
+    public function testGetRevisionByContentIdReturnsRevision()
+    {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
         $page->slug = 'unit-test-' . time();
@@ -34,15 +36,18 @@ class VCSTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(1, $revision->user_id);
     }
 
-    public function testGetRevisionByIdReturnsNull() {
+    public function testGetRevisionByIdReturnsNull()
+    {
         $this->assertNull(VCS::getRevisionByID(PHP_INT_MAX));
     }
 
-    public function testRestoreRevisionNotExistingReturnsFalse() {
+    public function testRestoreRevisionNotExistingReturnsFalse()
+    {
         $this->assertFalse(VCS::restoreRevision(PHP_INT_MAX));
     }
 
-    public function testRestoreRevisionReturnsTrue() {
+    public function testRestoreRevisionReturnsTrue()
+    {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
         $page->slug = 'unit-test-' . time();
@@ -53,10 +58,8 @@ class VCSTest extends \PHPUnit\Framework\TestCase {
         $page->save();
 
         VCS::createRevision($page->getID(), "New Text 1", 1);
-        $revisions = VCS::getRevisionsByContentID($page->getID());
-
         VCS::createRevision($page->getID(), "New Text 2", 1);
-        $revisions = VCS::getRevisionsByContentID($page->getID());
+        $revisions = VCS::getRevisionsByContentID($page->getID(), "id asc");
         $lastRevision = $revisions[1];
 
         $page = new Page($page->getID());
@@ -65,5 +68,4 @@ class VCSTest extends \PHPUnit\Framework\TestCase {
         $page = new Page($page->getID());
         $this->assertEquals("New Text 2", $page->content);
     }
-
 }

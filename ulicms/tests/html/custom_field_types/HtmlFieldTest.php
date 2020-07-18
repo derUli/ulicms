@@ -1,10 +1,15 @@
 <?php
 
-class HtmlFieldTest extends \PHPUnit\Framework\TestCase {
+use Spatie\Snapshots\MatchesSnapshots;
+
+class HtmlFieldTest extends \PHPUnit\Framework\TestCase
+{
+    use MatchesSnapshots;
 
     private $testUser;
 
-    public function setUp() {
+    protected function setUp(): void
+    {
         include_once getLanguageFilePath("en");
 
         $user = new User();
@@ -19,26 +24,20 @@ class HtmlFieldTest extends \PHPUnit\Framework\TestCase {
         $this->testUser = $user;
     }
 
-    public function tearDown() {
+    protected function tearDown(): void
+    {
         $this->testUser->delete();
-        @session_destroy();
     }
 
-    public function testRender() {
-
+    public function testRender()
+    {
         $this->testUser->registerSession();
 
         $field = new HtmlField();
         $field->name = "my_field";
         $field->title = "content";
-        $rendered = $field->render("hello <strong>world</strong>");
-
-        $expectedFile = Path::resolve("ULICMS_ROOT/tests/fixtures/custom_field_types/html_field.expected.txt");
-
-        // file_put_contents($expectedFile, $rendered);
-
-        $expected = file_get_contents($expectedFile);
-        $this->assertEquals(normalizeLN($expected), normalizeLN($rendered));
+        $this->assertMatchesHtmlSnapshot(
+            $field->render("hello <strong>world</strong>")
+        );
     }
-
 }

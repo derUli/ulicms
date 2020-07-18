@@ -9,8 +9,8 @@ add_translation("TOP_PAGES", "Top pages");
 add_translation("LAST_CHANGES", "Last changes");
 
 add_translation("SITE_ONLINE_SINCE", "Site online since");
-add_translation("PAGES_COUNT", "Count of page");
-add_translation("REGISTERED_USERS_COUNT", "Amount of users");
+add_translation("PAGES_COUNT", "Count of pages");
+add_translation("REGISTERED_USERS_COUNT", "Amount of Users");
 add_translation("BLOCKED_SPAM_MAILS", "refused spam messages");
 add_translation("GUESTBOOK_ENTRIES", "guestbook entries");
 
@@ -21,7 +21,7 @@ add_translation("DATE", "Date");
 add_translation("DONE_BY", "Done by");
 
 add_translation("EDIT_PROFILE", "Edit Profile");
-add_translation("HELLO_NAME", "Hello %firstname% %lastname%!");
+add_translation("HELLO_NAME", "Hello %name%!");
 
 // Admin Menü Navigation
 add_translation("WELCOME", "Welcome");
@@ -740,10 +740,23 @@ add_translation("all", "All");
 
 add_translation("disabled_functions", "Disabled functions");
 
-add_translation("unsupported_output_format",
-        "Unsupported Output Format: %format%");
+add_translation(
+    "unsupported_output_format",
+    "Unsupported Output Format: %format%"
+);
 
 add_translation("mpdf_not_installed", "mPDF is not installed.\n"
         . "Please install mPDF from %link% to use the pdf output feature.");
+
+add_translation("copied_to_clipboard_success", "Copied to clipboard.");
+add_translation("copied_to_clipboard_failed", "Copy To clipboard failed.");
+
+add_translation(
+    "unsupported_browser",
+    "Your are using the unsupported browser %browser%.\n".
+        "You must be using a compatible browser to be able to access UliCMS.\n\n".
+        "More information about compatible browsers at:\n".
+        "https://www.ulicms.de/Welche-Browser-werden-von-UliCMS-unterstutzt.html"
+);
 
 do_event("lang_en");

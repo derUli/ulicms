@@ -31,6 +31,8 @@ $background-color-8: black;
 
 html {
     overflow-y: scroll;
+    scroll-behavior: smooth;
+
 }
 
 body {
@@ -43,14 +45,22 @@ body {
     -ms-overflow-style: scrollbar;
 }
 
+input, select, checkbox, radio, textarea {
+    &:invalid{
+        border-color: red !important;
+    }
+}
+
 // pointer mouse cursor
 .has-pointer,
-input.kcfinder,
+input.fm,
+input.fm,
 input[type="button"],
 input[type="submit"],
 input[type="reset"],
 input[type="image"],
-button {
+button,
+.select-on-click {
     cursor: pointer
 }
 
@@ -65,12 +75,12 @@ button {
 
 #scroll-to-top {
     position: fixed;
-    bottom: 10px;
-    right: 10px;
-    padding: 10px;
+    bottom: 5px;
+    right: 20px;
+    padding: 0;
     display: none;
     font-size: 32px;
-    z-index: 5
+    z-index: 5;
 }
 
 button:disabled, .disabled {
@@ -272,7 +282,7 @@ button {
     padding: 10px;
 }
 
-input:not([type="submit"]):not([type="reset"]):not([type="button"]):not([type="radio"]):not([type="checkbox"]),
+input:not([type="submit"]):not([type="reset"]):not([type="button"]):not([type="radio"]):not([type="checkbox"]):not([type="image"]),
 select, textarea {
     width: 100%;
 }
@@ -455,7 +465,7 @@ div#google-fonts {
         .online-users {
             .online-user {
                 margin: 0 0 5px 0;
-                
+
                 &:last-child {
                     margin-bottom: 0;
                 }
@@ -523,12 +533,23 @@ div#login-welcome-text {
 
 .main {
     margin-top: 10px;
+    margin-bottom: 20px;
     width:100%;
 }
 
 #page-list {
     .dataTables_wrapper {
         margin-bottom: 40px;
+    }
+}
+
+.dataTables_wrapper, form{
+    i.type-icon {
+        min-width: 20px;
+        position: relative;
+        top: 1px;
+        text-align: center;
+        margin-right: 2px;
     }
 }
 
@@ -633,6 +654,10 @@ form#edit-user {
     margin-left: 5px;
 }
 
+#main-content-loadspinner {
+    display:none
+}
+
 .main-content {
     > .btn-toolbar {
         margin-top: 10px;
@@ -664,8 +689,12 @@ h1, h2, h3, h4, h5, h6 {
     word-break: break-word;
 }
 
+.break-word {
+    word-break: break-word
+}
+
 #msgcontainer {
-    padding-top: 16px;
+    margin-top: 10px;
 }
 
 input[type="radio"],
@@ -966,8 +995,24 @@ pre,
     height: 40px;
 }
 
-iframe.kcfinder {
+iframe.fm {
     border: 0;
     width: 100%;
     height: calc(100vh - 290px);
+}
+
+#vanilla-toast {
+    font-size: 1em;
+}
+
+
+.changelog {
+    line-height: 2;
+    h3{
+        padding-top: 10px;
+        &:not(:first-child) {
+            margin-top: 10px;
+            border-top: 1px solid #e8e8e8;
+        }
+    }
 }

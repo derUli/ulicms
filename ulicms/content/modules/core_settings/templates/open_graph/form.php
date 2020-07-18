@@ -6,25 +6,22 @@ $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("open_graph")) {
     $og_image = Settings::get("og_image");
     $og_url = "";
-    if (!empty($og_image) and !startsWith($og_image, "http")) {
-        $og_url = get_protocol_and_domain() . $og_image;
-    }
-    ?>
+    if (!empty($og_image) && !startsWith($og_image, "http")) {
+        $og_url = "..${og_image}";
+    } ?>
     <p>
         <a href="<?php echo ModuleHelper::buildActionURL("settings_simple"); ?>"
-           class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
+           class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
     </p>
     <h1><?php translate("open_graph"); ?></h1>
     <?php
     echo Alert::info(
-            get_translation("og_defaults_help")
-    );
-    ?>
+        get_translation("og_defaults_help")
+    ); ?>
     <?php
     echo ModuleHelper::buildMethodCallForm("OpenGraphController", "save", [], "post", array(
         "id" => "open_graph"
-    ));
-    ?>
+    )); ?>
     <table style="border: 0px;">
         <tr>
             <td><strong><?php translate("image"); ?></strong></td>
@@ -36,18 +33,18 @@ if ($permissionChecker->hasPermission("open_graph")) {
                         <img class="small-preview-image"
                              src="<?php esc($og_url); ?>" />
                     </div>
-    <?php } ?>
-                <p>
+                <?php
+                } ?>
+                <div class="voffset2">
                     <input type="text" id="og_image" name="og_image" readonly="readonly"
-                           onclick="openMenuImageSelectWindow(this)"
                            value="<?php esc($og_image); ?>"
                            style="cursor: pointer" />
-                </p>
-                <p>
+                </div>
+                <div class="voffset2">
                     <a href="#" onclick="$('#og_image').val('');return false;"
                        class="btn btn-default"><i class="fa fa-eraser"></i> <?php translate("clear"); ?>
                     </a>
-                </p>
+                </div>
             </td>
         </tr>
         <tr>

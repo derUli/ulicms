@@ -52,7 +52,7 @@ if (!$searchPage) {
 
             <div id="mobile-nav"></div>
             <?php
-            if ((!containsModule(null, "extended_search") and ! containsModule(null, "search")) and $hasSearch and $searchPage) {
+            if ((!containsModule(null, "extended_search") && !containsModule(null, "search")) and $hasSearch and $searchPage) {
                 ?>
                 <form id="search-form-head" method="get"
                       action="<?php Template::escape(buildSEOURL($searchPage->slug)); ?>">
@@ -61,7 +61,8 @@ if (!$searchPage) {
                            autosave="<?php echo md5($_SERVER ["SERVER_NAME"]); ?>"
                            placeholder="<?php translate("search"); ?>...">
                 </form>
-            <?php } ?>
+            <?php
+            } ?>
         </div>
         <?php if (is_frontpage()) { ?>
             <div class="jumbotron">

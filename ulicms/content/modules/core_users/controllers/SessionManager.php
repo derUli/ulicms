@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 use UliCMS\Constants\AuditLog;
 
-class SessionManager extends Controller {
-
-    public function login(): void {
+class SessionManager extends Controller
+{
+    public function login(): void
+    {
         $logger = LoggerRegistry::get("audit_log");
 
         $user = new User();
@@ -54,7 +55,8 @@ class SessionManager extends Controller {
         }
     }
 
-    public function logout(): void {
+    public function logout(): void
+    {
         $logger = LoggerRegistry::get("audit_log");
 
         $id = intval($_SESSION["login_id"]);
@@ -67,13 +69,14 @@ class SessionManager extends Controller {
         db_query("UPDATE " . tbname("users") . " SET last_action = 0 WHERE id = $id");
         $url = apply_filter("index.php", "logout_url");
         // throw the session to /dev/null
-        session_destroy();
+        UliCMS\Utils\Session\sessionDestroy();
         // redirect to the logout Url
         Response::redirect($url, HttpStatusCode::MOVED_TEMPORARILY);
         exit();
     }
 
-    public function resetPassword(): void {
+    public function resetPassword(): void
+    {
         $logger = LoggerRegistry::get("audit_log");
 
         if (!isset($_REQUEST["token"])) {
@@ -100,5 +103,4 @@ class SessionManager extends Controller {
             TextResult(get_translation("invalid_token"), 404);
         }
     }
-
 }

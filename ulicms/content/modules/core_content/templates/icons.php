@@ -36,23 +36,28 @@ $notSelectedButton = "btn btn-default"
      aria-label="Toolbar with button groups">
     <div class="btn-group" role="group">
         <a href="<?php echo ModuleHelper::buildActionURL("contents"); ?>"
-           class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i>
+           class="btn btn-default btn-back is-ajax"
+           ><i class="fa fa-arrow-left"></i>
             <?php translate("back") ?></a>
     </div>
     <?php foreach ($icons as $action => $cssClass) { ?>
         <div class="btn-group" role="group">
             <a href="<?php echo ModuleHelper::buildActionURL($action); ?>"
-               class="<?php echo $action == $currentAction ? $selectedButton : $notSelectedButton; ?>">
+               class="<?php
+               echo $action == $currentAction ?
+                       $selectedButton : $notSelectedButton;
+               ?> is-not-ajax">
                 <i class="<?php echo $cssClass ?>"></i>
                 <span class="hide-on-820">
                     <?php
-                    (isset($specialLabels[$action]) ?
+                    (
+                   isset($specialLabels[$action]) ?
                                     esc(
-                                            $specialLabels[$action]
+                                        $specialLabels[$action]
                                     ) : translate(
-                                            $action
+                                        $action
                                     )
-                            );
+               );
                     ?></span>
             </a>
         </div>

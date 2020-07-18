@@ -4,27 +4,26 @@ use UliCMS\Models\Content\Categories;
 
 $permissionChecker = new ACL();
 if (!$permissionChecker->hasPermission("forms")
-        or ! $permissionChecker->hasPermission("forms_create")) {
+        || !$permissionChecker->hasPermission("forms_create")) {
     noPerms();
 } else {
     $forms = Forms::getAllForms();
-    $pages = getAllPages();
-    ?><div class="field">
+    $pages = getAllPages(); ?><div class="field">
         <a href="<?php echo ModuleHelper::buildActionURL("forms"); ?>"
-           class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i>
+           class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i>
             <?php translate("back") ?></a>
     </div>
     <h1><?php translate("create_form"); ?></h1>
     <?php echo ModuleHelper::buildMethodCallForm("FormController", "create"); ?>
     <div class="field">
         <strong class="field-label"><?php translate("name"); ?>*</strong>
-        <input type="text" value="" name="name" required />
+        <input class="form-control" type="text" value="" name="name" required />
     </div>
     <div class="field">
         <strong class="field-label">
             <?php translate("enabled"); ?>
         </strong>
-        <select
+        <select class="form-control"
             name="enabled">
             <option value="1" selected><?php translate("yes"); ?></option>
             <option value="0"><?php translate("no"); ?></option>
@@ -36,7 +35,7 @@ if (!$permissionChecker->hasPermission("forms")
             <?php translate("email_to"); ?>*
         </strong>
         <input
-            type="email" value="" name="email_to" required />
+            class="form-control" type="email" value="" name="email_to" required />
     </div>
 
     <div class="field">
@@ -44,27 +43,26 @@ if (!$permissionChecker->hasPermission("forms")
             <?php translate("subject"); ?>*
         </strong>
         <input
-            type="text" value="" name="subject" required />
+            class="form-control" type="text" value="" name="subject" required />
     </div>
     <div class="field">
         <strong class="field-label">
             <?php translate("category"); ?>
         </strong>
         <?php
-        echo Categories::getHTMLSelect();
-        ?></div>
+        echo Categories::getHTMLSelect(); ?></div>
 
     <div class="field">
         <strong class="field-label">
             <?php translate("fields"); ?>
         </strong>
-        <textarea name="fields" rows="10"></textarea>
+        <textarea class="form-control" name="fields" rows="10"></textarea>
     </div>
     <div class="field">
         <strong class="field-label">
             <?php translate("required_fields"); ?>
         </strong>
-        <textarea name="required_fields" rows="10"></textarea>
+        <textarea class="form-control" name="required_fields" rows="10"></textarea>
     </div>
 
     <div class="field">
@@ -72,20 +70,20 @@ if (!$permissionChecker->hasPermission("forms")
             <?php translate("mail_from_field"); ?>
         </strong>
         <input
-            type="text" value="" name="mail_from_field" />
+            class="form-control" type="text" value="" name="mail_from_field" />
     </div>
 
 
     <div class="field">
         <strong class="field-label">
             <?php translate("target_page_id"); ?></strong>
-        <select
+        <select class="form-control"
             name="target_page_id">
                 <?php foreach ($pages as $page) { ?>
                 <option value="<?php echo $page["id"]; ?>"><?php
                     esc(
-                            $page["title"]
-                    );
+        $page["title"]
+    );
                     ?></option>
             <?php } ?>
         </select>

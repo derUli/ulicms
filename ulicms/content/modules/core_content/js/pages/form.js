@@ -1,4 +1,6 @@
 // Script for new page and edit page form
+
+window.slugChecking = false;
 $(() => {
     const url = $(".main-form")
             .first()
@@ -21,18 +23,37 @@ $(() => {
     slugOrLanguageChanged();
     filterParentPages();
 
+    $(".new-page-form #btn-submit").click((event) => {
+        const form = $(event.target).closest("form");
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        if (!form.hasClass("edit-page-form") && form.get(0).reportValidity()) {
+            $(window).off("beforeunload");
+            $(form).off("submit");
+            form.submit();
+        } else {
+            const hiddenInvalidElements = form.find(
+                    "input, select, checkbox, textarea, radio"
+                    ).filter(':hidden').toArray().
+                    filter((x) => !x.checkValidity());
+
+            if (hiddenInvalidElements.length) {
+                bootbox.alert(PageTranslation.FillAllRequiredFields);
+            }
+        }
+    });
+
     // AJAX submit page edit form
-    $("#pageform-edit").ajaxForm({
+    $(".edit-page-form").ajaxForm({
         beforeSubmit: () => {
             $("#message-page-edit").html("");
             $("#message-page-edit").hide();
             $(".loading").show();
         },
         beforeSerialize: () => {
-            /* Before serialize */
-            for (instance in CKEDITOR.instances) {
-                CKEDITOR.instances[instance].updateElement();
-            }
+            updateCKEditors()
             return true;
         },
         success: () => {
@@ -47,7 +68,8 @@ $(() => {
     });
 
     // check if a slug is free on changing system title or menu
-    $("input[name='slug']").keyup(() => slugOrLanguageChanged());
+    $("input[name='slug']").blur(() => slugOrLanguageChanged());
+    $("input[name='title']").blur(() => slugOrLanguageChanged());
 
     $("select[name='menu']").change(() => filterParentPages());
 
@@ -74,6 +96,10 @@ showAndHideFieldsByTypeWithoutEffects = () => {
     const type = $("input[name=type]:checked").val();
 
     $(".typedep").hide();
+    if (typeof AllTypes[type] === 'undefined') {
+        return;
+    }
+
     const typeData = AllTypes[type];
     const show = typeData["show"];
 
@@ -92,9 +118,11 @@ showAndHideFieldsByTypeWithoutEffects = () => {
 
     $(".custom-field-tab").each((index, el) => {
         if ($(el).data("type") === $("input[name='type']:checked").val()) {
+            $(el).find("input, select, checkbox, radio, button, submit").prop("disabled", false);
             $(el).show();
         } else {
             $(el).hide();
+            $(el).find("input, select, checkbox, radio, button, submit").prop("disabled", true);
         }
     });
 
@@ -139,8 +167,10 @@ showAndHideFieldsByType = () => {
     $(".custom-field-tab").each((index, el) => {
         if ($(el).data("type") === $("input[name='type']:checked").val()) {
             $(el).slideDown();
+            $(el).find("input, select, button, submit").prop("disabled", false);
         } else {
             $(el).slideUp();
+            $(el).find("input, select, button, submit").prop("disabled", true);
         }
     });
 
@@ -165,9 +195,9 @@ showAndHideFieldsByType = () => {
 let AllTypes = {};
 
 // this shows a thumbnail of the selected file on text inputs with
-// kcfinder image uploader attached
+// fm image uploader attached
 refreshFieldThumbnails = () => {
-    $("input.kcfinder[data-kcfinder-type=images]").each((index, element) => {
+    $("input.fm[data-fm-type=images]").each((index, element) => {
         const id = $(element).attr("name");
         if ($(element).val().length > 0) {
             $("img#thumbnail-" + id).attr("src", $(element).val());
@@ -189,6 +219,7 @@ bindEvents = () => {
             });
     $(".clear-field").on("click", (event) => {
         event.preventDefault();
+        event.stopPropagation()
         const element = $(event.target);
         const linkFor = $(element).data("for");
         $(linkFor).val("");
@@ -196,30 +227,25 @@ bindEvents = () => {
     });
 
     refreshFieldThumbnails();
-    $("input.kcfinder").on("click", (event) => {
+    $("input.fm").on("click", (event) => {
         const field = $(event.target);
-        const name = $(field).data("kcfinder-name")
-                ? $(field).data("kcfinder-name")
-                : "kcfinder_textbox";
-        const type = $(field).data("kcfinder-type")
-                ? $(field).data("kcfinder-type")
+
+        const name = $(field).attr("id")
+                ? $(field).attr("id")
+                : $(field).attr("name")
+
+        const type = $(field).data("fm-type")
+                ? $(field).data("fm-type")
                 : "images";
 
-        window.KCFinder = {
-            callBack: (url) => {
-                field.val(url);
-                window.KCFinder = null;
-                refreshFieldThumbnails();
-            }
-        };
         window.open(
-                "kcfinder/browse.php?type=" +
+                "fm/dialog.php?fldr=" +
                 type +
-                "&langCode=" +
-                $("html").data("select2-language"),
+                "&editor=ckeditor&type=2&langCode=" +
+                $("html").data("select2-language") + "&popup=1&field_id=" + field.attr("id"),
                 name,
                 "status=0, toolbar=0, location=0, menubar=0, directories=0, " +
-                "resizable=1, scrollbars=0, width=800, height=600"
+                "resizable=1, scrollbars=0, width=850, height=600"
                 );
     });
 };
@@ -227,7 +253,7 @@ bindEvents = () => {
 unbindEvents = () => {
     $('input[name="type"]').off("change");
     $("select[name='menu']").off("change");
-    $("input.kcfinder").off("click");
+    $("input.fm").off("click");
     $(".clear-field").off("click");
 };
 
@@ -240,6 +266,10 @@ suggestSlug = (text) => {
 // this checks if a slug is free within the selected language
 // the combination of slug + language must be unique
 slugOrLanguageChanged = () => {
+    if (window.slugChecking) {
+        return;
+    }
+    window.slugChecking = true;
     const id_field = $("input[name='page_id']");
     let myid = 0;
     if (id_field) {
@@ -258,15 +288,11 @@ slugOrLanguageChanged = () => {
             .data("slug-free-url");
 
     $.get(url, data, function (text) {
-        if (text === "yes") {
-            $("input[name='slug']").removeClass("error-field");
-            $("select[name='language']").removeClass("error-field");
-        } else {
-            $("input[name='slug']").addClass("error-field");
-            $("select[name='language']").addClass("error-field");
+        if (text.length > $("input[name='slug']").val().length) {
+            $("input[name='slug']").val(text);
         }
+        window.slugChecking = false;
     });
-
 };
 
 // filter parent pages by selected language and menu

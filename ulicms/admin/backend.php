@@ -6,9 +6,7 @@ require_once "../init.php";
 
 use UliCMS\Backend\BackendPageRenderer;
 
-@session_start();
-
-// $_COOKIE[session_name()] = session_id();
+UliCMS\Utils\Session\sessionStart();
 
 do_event("after_session_start");
 
@@ -22,7 +20,7 @@ do_event("after_set_language_by_domain");
 $syslang = getSystemLanguage();
 if (file_exists(getLanguageFilePath($syslang))) {
     require_once getLanguageFilePath($syslang);
-} else if (file_exists(getLanguageFilePath("en"))) {
+} elseif (file_exists(getLanguageFilePath("en"))) {
     require_once getLanguageFilePath("en");
 }
 Translation::loadAllModuleLanguageFiles($syslang);
@@ -38,8 +36,8 @@ do_event("after_custom_lang");
 
 // Cross-Site-Request-Forgery Protection
 if ((logged_in()
-        and Request::isPost()
-        and ! defined("NO_ANTI_CSRF")) and ! check_csrf_token()) {
+        && Request::isPost()
+        && !defined("NO_ANTI_CSRF")) && !check_csrf_token()) {
     ExceptionResult("This is probably a CSRF attack!", HttpStatusCode::FORBIDDEN);
 }
 
@@ -52,7 +50,7 @@ do_event("after_set_locale_by_language");
 // configuration file
 // reject access to the backend if the client's ip is not whitelisted
 $cfg = new CMSConfig();
-if (isset($cfg->ip_whitelist) and is_array($cfg->ip_whitelist) and count($cfg->ip_whitelist) > 0 and ! faster_in_array(get_ip(), $cfg->ip_whitelist)) {
+if (isset($cfg->ip_whitelist) && is_array($cfg->ip_whitelist) && count($cfg->ip_whitelist) > 0 && !faster_in_array(get_ip(), $cfg->ip_whitelist)) {
     ExceptionResult(get_translation("login_from_ip_not_allowed"));
     die();
 }
@@ -63,7 +61,7 @@ if (is_logged_in()) {
     db_query("UPDATE " . tbname("users") . " SET last_action = " . time() . " WHERE id = " . get_user_id());
 }
 
-header("Content-Type: text/html; charset=UTF-8");
+send_header("Content-Type: text/html; charset=UTF-8");
 
 // run controller methods if called
 do_event("before_backend_run_methods");

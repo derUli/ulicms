@@ -1,5 +1,5 @@
 <?php
 
-abstract class BaseConfig {
-
+abstract class BaseConfig
+{
 }

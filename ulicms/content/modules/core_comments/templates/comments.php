@@ -4,8 +4,8 @@ use UliCMS\Models\Content\Comment;
 use UliCMS\Constants\CommentStatus;
 
 $comments = Comment::getAllByStatus(
-                CommentStatus::PUBLISHED,
-                Vars::get("content_id")
+    CommentStatus::PUBLISHED,
+    Vars::get("content_id")
 );
 $last = end($comments);
 reset($comments);
@@ -28,20 +28,20 @@ reset($comments);
                         rel="nofollow"
                         target="_blank"><?php
                             esc(
-                                    $comment->getAuthorUrl()
-                            );
+                $comment->getAuthorUrl()
+            );
                             ?></a> <br />
                 <?php } ?>
                 <?php
                 echo make_links_clickable(
-                        UliCMS\HTML\text($comment->getText())
-                );
-                ?>
+                                UliCMS\HTML\text($comment->getText())
+                            ); ?>
             </p>
             <?php if ($comment != $last) { ?>
                 <hr />
         <?php } ?>
-    <?php } ?>
+    <?php
+        } ?>
     </div>
     <?php
 }

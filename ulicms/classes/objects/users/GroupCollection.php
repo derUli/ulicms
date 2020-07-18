@@ -8,16 +8,18 @@ use User;
 
 // provides the same method as in Group model but as collection of all groups
 // of a user
-class GroupCollection {
-
+class GroupCollection
+{
     private $user;
 
-    public function __construct(?User $user = null) {
+    public function __construct(?User $user = null)
+    {
         $this->user = $user ? $user : new User();
     }
 
     // return allowable tags of all groups of the user as string
-    public function getAllowableTags(): string {
+    public function getAllowableTags(): string
+    {
         $groups = $this->user->getAllGroups();
         $tagString = "";
         foreach ($groups as $group) {
@@ -39,13 +41,15 @@ class GroupCollection {
         return $this->joinTags($tags);
     }
 
-    private function joinTags(array $tags): string {
+    private function joinTags(array $tags): string
+    {
         $tags = array_map(
-                function($tag) {
-            return "<{$tag}>";
-        }, $tags);
+            function ($tag) {
+                return "<{$tag}>";
+            },
+            $tags
+        );
 
         return implode("", $tags);
     }
-
 }

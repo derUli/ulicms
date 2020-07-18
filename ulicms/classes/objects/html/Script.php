@@ -9,12 +9,14 @@ use ModuleHelper;
 
 // generates HTML script tags
 // please use script queue instead of this methods if possible
-class Script {
-
-    public static function fromFile(string $file,
-            bool $async = false,
-            bool $defer = false,
-            array $htmlAttributes = []): string {
+class Script
+{
+    public static function fromFile(
+        string $file,
+        bool $async = false,
+        bool $defer = false,
+        array $htmlAttributes = []
+    ): string {
         $attributes = array(
             "src" => $file,
             "type" => "text/javascript"
@@ -37,10 +39,12 @@ class Script {
         return "<script $attribHTML></script>";
     }
 
-    public static function fromString(?string $code,
-            bool $async = false,
-            bool $defer = false,
-            array $htmlAttributes = []): string {
+    public static function fromString(
+        ?string $code,
+        bool $async = false,
+        bool $defer = false,
+        array $htmlAttributes = []
+    ): string {
         $attributes = array(
             "type" => "text/javascript"
         );
@@ -57,5 +61,4 @@ class Script {
 
         return "<script $attribHTML>" . $code . "</script>";
     }
-
 }

@@ -6,12 +6,8 @@ if ($permissionChecker->hasPermission($_GET["action"])) {
     <h2>
         <?php translate("media"); ?>
     </h2>
-    <iframe
-        src="kcfinder/browse.php?type=<?php
-        echo basename(get_action());
-        ?>&lang=<?php esc(getSystemLanguage()); ?>"
-        class="kcfinder"></iframe>
+    <iframe src="fm/dialog.php" class="fm"></iframe>
     <?php
 } else {
-    noPerms();
-}
+        noPerms();
+    }

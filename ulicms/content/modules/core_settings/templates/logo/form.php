@@ -5,7 +5,7 @@ if ($permissionChecker->hasPermission("logo")) {
     <p>
         <a
             href="<?php echo ModuleHelper::buildActionURL("design"); ?>"
-            class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
+            class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
     </p>
     <h1><?php translate("upload_new_logo"); ?></h1>
     <p>
@@ -13,8 +13,7 @@ if ($permissionChecker->hasPermission("logo")) {
     </p>
     <form enctype="multipart/form-data" action="index.php" method="post">
         <?php
-        csrf_token_html();
-        ?>
+        csrf_token_html(); ?>
         <input type="hidden" name="sClass" value="LogoUploadController" /> <input
             type="hidden" name="sMethod" value="upload" />
         <table style="height: 250px">
@@ -27,12 +26,11 @@ if ($permissionChecker->hasPermission("logo")) {
                     } else {
                         $logo_path = "../content/images/" . Settings::get("logo_image");
                     }
-                    $logo_storage_path = ULICMS_DATA_STORAGE_ROOT . "/content/images/" . Settings::get("logo_image");
+    $logo_storage_path = ULICMS_DATA_STORAGE_ROOT . "/content/images/" . Settings::get("logo_image");
 
-                    if (file_exists($logo_storage_path)) {
-                        echo '<img class="website_logo" src="' . $logo_path . '" alt="' . Settings::get("homepage_title") . '"/>';
-                    }
-                    ?>
+    if (file_exists($logo_storage_path)) {
+        echo '<img class="website_logo" src="' . $logo_path . '" alt="' . Settings::get("homepage_title") . '"/>';
+    } ?>
                 </td>
             </tr>
             <tr>
@@ -42,15 +40,13 @@ if ($permissionChecker->hasPermission("logo")) {
                         <?php
                         if (Settings::get("logo_disabled") == "yes") {
                             echo 'selected ';
-                        }
-                        ?>
+                        } ?>
                             value="yes"><?php translate("yes"); ?></option>
                         <option
                         <?php
                         if (Settings::get("logo_disabled") != "yes") {
                             echo 'selected ';
-                        }
-                        ?>
+                        } ?>
                             value="no"><?php translate("no"); ?></option>
                     </select></td>
             </tr>
@@ -69,5 +65,5 @@ if ($permissionChecker->hasPermission("logo")) {
     </form>
     <?php
 } else {
-    noPerms();
-}
+                            noPerms();
+                        }

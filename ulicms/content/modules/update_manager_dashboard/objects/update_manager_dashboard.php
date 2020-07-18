@@ -1,8 +1,9 @@
 <?php
 
-class UpdateManagerDashboard {
-
-    public static function anyUpdateAvailable() {
+class UpdateManagerDashboard
+{
+    public static function anyUpdateAvailable()
+    {
         $pkg = new PackageManager();
         $modules = getAllModules();
         if (count($modules) > 0) {
@@ -10,7 +11,7 @@ class UpdateManagerDashboard {
                 $version = getModuleMeta($module, "version");
                 if ($version != null) {
                     $status = $pkg->checkForNewerVersionOfPackage($module);
-                    if (version_compare($status, $version, '>')) {
+                    if (\UliCMS\Utils\VersionComparison\compare($status, $version, '>')) {
                         return true;
                     }
                 }
@@ -24,7 +25,7 @@ class UpdateManagerDashboard {
                 if ($version != null) {
                     $theme = "theme-" . $theme;
                     $status = $pkg->checkForNewerVersionOfPackage($theme);
-                    if (version_compare($status, $version, '>')) {
+                    if (\UliCMS\Utils\VersionComparison\compare($status, $version, '>')) {
                         return true;
                     }
                 }
@@ -33,5 +34,4 @@ class UpdateManagerDashboard {
 
         return false;
     }
-
 }

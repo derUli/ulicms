@@ -1,7 +1,9 @@
 <a href="<?php echo ModuleHelper::buildActionURL("info"); ?>"
-   class="btn btn-info" role="button"><i class="fa fa-arrow-left"></i>
+   class="btn btn-default btn-back is-ajax"
+   ><i class="fa fa-arrow-left"></i>
     <?php translate("back") ?></a>
-<h2><?php translate("license"); ?></h2>
+
+<h1><?php translate("license"); ?></h1>
 Copyright (c) 2011 - 2020, Ulrich Schmidt
 <br>
 All rights reserved.

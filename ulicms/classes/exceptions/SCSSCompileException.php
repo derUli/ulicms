@@ -4,6 +4,6 @@ namespace UliCMS\Exceptions;
 
 use Exception;
 
-class SCSSCompileException extends Exception {
-
+class SCSSCompileException extends Exception
+{
 }

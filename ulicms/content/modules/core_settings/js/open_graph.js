@@ -1,21 +1,17 @@
 /* global Translation */
 
-const openMenuImageSelectWindow = (field) => {
-    window.KCFinder = {
-        callBack: function (url) {
-            field.value = url;
-            window.KCFinder = null;
-        }
-    };
-
+const openMenuImageSelectWindow = (target) => {
     window.open(
-            'kcfinder/browse.php?type=images&dir=images&langCode=' + $("html").data("select2-language"),
-            'og_image',
-            'status=0, toolbar=0, location=0, menubar=0, directories=0, '
-            + 'resizable=1, scrollbars=0, width=800, height=600');
-};
+            "fm/dialog.php?fldr=images&editor=ckeditor&type=1&langCode=" +
+            $("html").data("select2-language") + "&popup=1&field_id=og_image",
+            "og_image",
+            "status=0, toolbar=0, location=0, menubar=0, directories=0, " +
+            "resizable=1, scrollbars=0, width=850, height=600"
+            );
+}
 
 $(() => {
+    $("#og_image").click((event) => openMenuImageSelectWindow(event.target))
     $("#open_graph").ajaxForm(
             {
                 beforeSubmit: () => {

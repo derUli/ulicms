@@ -5,54 +5,71 @@ declare(strict_types=1);
 use UliCMS\Constants\AuditLog;
 use UliCMS\Models\Content\Categories;
 
-class CategoryController extends Controller {
-
+class CategoryController extends Controller
+{
     private $logger;
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         $this->logger = LoggerRegistry::get("audit_log");
     }
 
-    public function createPost(): void {
+    public function createPost(): void
+    {
+        $name = Request::getVar("name", "", "str");
+        $description = Request::getVar("description", "", "str");
+
+        // TODO: validate required fields
+        Categories::addCategory($name, $description);
+
+        Request::redirect(ModuleHelper::buildActionURL("categories"));
+    }
+
+    public function _createPost(string $name, string $description): ?int
+    {
         $logger = LoggerRegistry::get("audit_log");
-
-        if (!empty($_REQUEST["name"])) {
-            Categories::addCategory(
-                    $_REQUEST["name"],
-                    $_REQUEST["description"]
-            );
-            if ($this->logger) {
-                $user = getUserById(get_user_id());
-                $name = isset($user["username"]) ?
-                        $user["username"] : AuditLog::UNKNOWN;
-                $this->logger->debug("User $name - "
-                        . "Created a new category ({$_REQUEST['name']})");
-            }
+        $categoryId = Categories::addCategory($name, $description);
+        if ($categoryId && $this->logger) {
+            $user = getUserById(get_user_id());
+            $userName = isset($user["username"]) ?
+                    $user["username"] : AuditLog::UNKNOWN;
+            $this->logger->debug("User $userName - "
+                    . "Created a new category ({$name})");
         }
+        return $categoryId;
+    }
+    
+    public function updatePost(): void
+    {
+        $id = Request::getVar("id", 0, "int");
+        $name = Request::getVar("name", "", "str");
+        $description = Request::getVar("description", "", "str");
+
+        // TODO: validate required fields
+        Categories::updateCategory($id, $name, $description);
+
         Request::redirect(ModuleHelper::buildActionURL("categories"));
     }
 
-    public function updatePost(): void {
-        if (!empty($_REQUEST["name"]) and ! empty($_REQUEST["id"])) {
-            Categories::updateCategory(
-                    intval($_REQUEST["id"]),
-                    $_REQUEST["name"],
-                    $_REQUEST["description"]
-            );
-            if ($this->logger) {
-                $user = getUserById(get_user_id());
-                $name = isset($user["username"]) ?
-                        $user["username"] : AuditLog::UNKNOWN;
-                $this->logger->debug("User $name - Update category with id "
-                        . "({$_REQUEST['id']}) new title is "
-                        . "\"{$_REQUEST['name']}\"");
-            }
+
+    public function _updatePost(int $id, string $name, string $description): ?int
+    {
+        $updateId = Categories::updateCategory($id, $name, $description);
+        if ($this->logger) {
+            $user = getUserById(get_user_id());
+            $userName = isset($user["username"]) ?
+                    $user["username"] : AuditLog::UNKNOWN;
+            $this->logger->debug("User $userName - Update category with id "
+                    . "({$id}) new title is "
+                    . "\"{$name}\"");
         }
-        Request::redirect(ModuleHelper::buildActionURL("categories"));
+
+        return $updateId;
     }
 
-    public function deletePost(): void {
+    public function deletePost(): void
+    {
         $del = intval($_GET["del"]);
         if ($del != 1) {
             Categories::deleteCategory($del);
@@ -66,5 +83,20 @@ class CategoryController extends Controller {
         }
         Request::redirect(ModuleHelper::buildActionURL("categories"));
     }
-
+    
+    public function _deletePost($id): bool
+    {
+        $success = false;
+        if ($id != 1) {
+            $success = Categories::deleteCategory($id);
+            if ($this->logger) {
+                $user = getUserById(get_user_id());
+                $name = isset($user["username"]) ?
+                        $user["username"] : AuditLog::UNKNOWN;
+                $this->logger->debug("User $name - "
+                        . "delete category with id ({$id})");
+            }
+        }
+        return $success;
+    }
 }

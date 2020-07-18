@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 use UliCMS\Constants\ModuleEventConstants;
 
-function getModuleMeta($module, $attrib = null) {
+function getModuleMeta($module, $attrib = null)
+{
     $metadata_file = ModuleHelper::buildModuleRessourcePath(
-                    $module,
-                    "metadata.json",
-                    true
+        $module,
+        "metadata.json",
+        true
     );
     if (!file_exists($metadata_file) or is_dir($metadata_file)) {
         return null;
@@ -17,34 +18,16 @@ function getModuleMeta($module, $attrib = null) {
     $data = file_get_contents($metadata_file);
     $json = json_decode($data, true);
 
-    if ($attrib and ! isset($json[$attrib])) {
+    if ($attrib && !isset($json[$attrib])) {
         return null;
     }
     return $attrib ? $json[$attrib] : $json;
 }
 
-// DEPRECATED:
-// This function may be removed in future releases of UliCMS
-// Use do_event()
-function add_hook(
-        string $name,
-        string $runs = ModuleEventConstants::RUNS_ONCE
-): void {
-    trigger_error("add_hook() is deprecated. Please use do_event().",
-            E_USER_DEPRECATED);
-    do_event($name, $runs);
-}
-
 function do_event(
-        string $name,
-        string $runs = ModuleEventConstants::RUNS_ONCE
+    string $name,
+    string $runs = ModuleEventConstants::RUNS_ONCE
 ): void {
-// don't run this code on kcfinder page (media)
-// since the "Path" class has a naming conflict with the same named
-// class of KCFinder
-    if (defined("KCFINDER_PAGE")) {
-        return;
-    }
     $modules = getAllModules();
     $disabledModules = Vars::get("disabledModules");
     for ($hook_i = 0; $hook_i < count($modules); $hook_i ++) {
@@ -64,14 +47,13 @@ function do_event(
         $escapedName = ModuleHelper::underscoreToCamel($name);
         if ($controller and method_exists($controller, $escapedName)) {
             echo $controller->$escapedName();
-        } else if (file_exists($file1)) {
+        } elseif (file_exists($file1)) {
             if ($runs === ModuleEventConstants::RUNS_MULTIPLE) {
                 require $file1;
             } else {
                 require_once $file1;
             }
-        } else if (file_exists($file2)) {
-
+        } elseif (file_exists($file2)) {
             if ($runs === ModuleEventConstants::RUNS_MULTIPLE) {
                 require $file1;
             } else {
@@ -82,10 +64,11 @@ function do_event(
     }
 }
 
-function stringContainsShortCodes(string $content, ?string $module = null): bool {
+function stringContainsShortCodes(string $content, ?string $module = null): bool
+{
     $quot = '(' . preg_quote('&quot;') . ')?';
     return boolval(
-            $module ?
+        $module ?
             preg_match('/\[module=\"?' . $quot . preg_quote($module) . '\"?' .
                     $quot . '\]/m', $content) :
             preg_match('/\[module=\"?' . $quot . '([a-zA-Z0-9_]+)\"?' .
@@ -95,8 +78,8 @@ function stringContainsShortCodes(string $content, ?string $module = null): bool
 
 // replace Shortcodes with modules
 function replaceShortcodesWithModules(
-        string $string,
-        bool $replaceOther = true
+    string $string,
+    bool $replaceOther = true
 ): string {
     $string = $replaceOther ? replaceOtherShortCodes($string) : $string;
 
@@ -105,7 +88,7 @@ function replaceShortcodesWithModules(
 
     foreach ($allModules as $module) {
         if (faster_in_array($module, $disabledModules)
-                or ! stringContainsShortCodes($string, $module)) {
+                || !stringContainsShortCodes($string, $module)) {
             continue;
         }
         $stringToReplace1 = '[module="' . $module . '"]';
@@ -117,7 +100,7 @@ function replaceShortcodesWithModules(
 
         if (file_exists($module_mainfile_path)) {
             require_once $module_mainfile_path;
-        } else if (file_exists($module_mainfile_path2)) {
+        } elseif (file_exists($module_mainfile_path2)) {
             require_once $module_mainfile_path2;
         }
 
@@ -128,7 +111,7 @@ function replaceShortcodesWithModules(
         }
         if ($controller and method_exists($controller, "render")) {
             $html_output = $controller->render();
-        } else if (function_exists($module . "_render")) {
+        } elseif (function_exists($module . "_render")) {
             $html_output = call_user_func($module . "_render");
         } else {
             throw new BadMethodCallException("Module $module "
@@ -148,7 +131,8 @@ function replaceShortcodesWithModules(
     return $string;
 }
 
-function replaceOtherShortCodes(string $string): string {
+function replaceOtherShortCodes(string $string): string
+{
     $string = str_ireplace('[title]', get_title(), $string);
     ob_start();
     logo();
@@ -156,9 +140,9 @@ function replaceOtherShortCodes(string $string): string {
     $language = getCurrentLanguage(true);
     $checkbox = new PrivacyCheckbox($language);
     $string = str_ireplace(
-            "[accept_privacy_policy]",
-            $checkbox->render(),
-            $string
+        "[accept_privacy_policy]",
+        $checkbox->render(),
+        $string
     );
     ob_start();
     site_slogan();
@@ -176,21 +160,21 @@ function replaceOtherShortCodes(string $string): string {
 
     // [tel] Links for tel Tags
     $string = preg_replace(
-            '/\[tel\]([^\[\]]+)\[\/tel\]/i',
-            '<a href="tel:$1" class="tel">$1</a>',
-            $string
+        '/\[tel\]([^\[\]]+)\[\/tel\]/i',
+        '<a href="tel:$1" class="tel">$1</a>',
+        $string
     );
     $string = preg_replace(
-            '/\[skype\]([^\[\]]+)\[\/skype\]/i',
-            '<a href="skye:$1?call" class="skype">$1</a>',
-            $string
+        '/\[skype\]([^\[\]]+)\[\/skype\]/i',
+        '<a href="skye:$1?call" class="skype">$1</a>',
+        $string
     );
 
     $string = str_ireplace("[year]", Template::getYear(), $string);
     $string = str_ireplace(
-            "[homepage_owner]",
-            Template::getHomepageOwner(),
-            $string
+        "[homepage_owner]",
+        Template::getHomepageOwner(),
+        $string
     );
 
     preg_match_all("/\[include=([0-9]+)]/i", $string, $match);
@@ -217,9 +201,10 @@ function replaceOtherShortCodes(string $string): string {
 }
 
 // Check if site contains a module
-function containsModule(?string $page = null, ?string $module = null): bool {
+function containsModule(?string $page = null, ?string $module = null): bool
+{
     if (is_null($page)) {
-        $page = get_requested_pagename();
+        $page = get_slug();
     }
 
     if (!is_null(Vars::get("page_" . $page . "_contains_" . $module))) {
@@ -229,16 +214,16 @@ function containsModule(?string $page = null, ?string $module = null): bool {
     $result = db_query("SELECT content, module, `type` FROM " .
             tbname("content") . " WHERE slug = '" . db_escape($page) . "'");
     
-    if(!Database::any($result)){
+    if (!Database::any($result)) {
         return false;
     }
     
     $dataset = db_fetch_assoc($result);
     $content = $dataset["content"];
     $content = str_replace("&quot;", "\"", $content);
-    if (!is_null($dataset["module"]) and ! empty($dataset["module"])
+    if (!is_null($dataset["module"]) && !empty($dataset["module"])
             and $dataset["type"] == "module") {
-        if (!$module or ( $module and $dataset["module"] == $module)) {
+        if (!$module or ($module and $dataset["module"] == $module)) {
             Vars::set("page_" . $page . "_contains_" . $module, true);
             return true;
         }

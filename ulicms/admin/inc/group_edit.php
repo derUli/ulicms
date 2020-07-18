@@ -23,8 +23,7 @@ if (!$permissionChecker->hasPermission("groups")) {
     $group = new Group($id);
     $selectedLanguages = $group->getLanguages();
 
-    ksort($all_permissions);
-    ?>
+    ksort($all_permissions); ?>
     <form action="?action=groups" method="post">
         <?php csrf_token_html(); ?>
         <input type="hidden" name="id" value="<?php echo $id; ?>">
@@ -53,14 +52,14 @@ if (!$permissionChecker->hasPermission("groups")) {
                                    name="user_permissons[]" value="<?php esc($key); ?>"
                                    data-select-all-checkbox="#select-all"
                                    data-checkbox-group=".permission-checkbox"
-                                   class="permission-checkbox" <?php if ($value) echo "checked"; ?>>
+                                   class="permission-checkbox" <?php if ($value) {
+                        echo "checked";
+                    } ?>>
                                    <?php
-                                   esc($key);
-                                   ?> </label>
+                                   esc($key); ?> </label>
                     </div>
                     <?php
-                }
-                ?>
+                } ?>
             </div>
         </fieldset>
         <h3><?php translate("languages"); ?></h3>

@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 use UliCMS\Utils\CacheUtil;
 
-class CommunitySettingsController extends Controller {
-
-    public function savePost(): void {
+class CommunitySettingsController extends Controller
+{
+    public function savePost(): void
+    {
         if (Request::getVar("comments_enabled")) {
             Settings::set("comments_enabled", "1");
         } else {
@@ -20,8 +21,8 @@ class CommunitySettingsController extends Controller {
         if (isset($_POST["commentable_content_types"])
                 and is_array($_POST["commentable_content_types"])) {
             Settings::set(
-                    "commentable_content_types",
-                    implode(";", $_POST["commentable_content_types"])
+                "commentable_content_types",
+                implode(";", $_POST["commentable_content_types"])
             );
         } else {
             Settings::delete("commentable_content_types");
@@ -29,9 +30,12 @@ class CommunitySettingsController extends Controller {
 
         CacheUtil::clearPageCache();
 
-        Response::redirect(
-                ModuleHelper::buildActionURL("community_settings", "save=1")
+        Response::sendHttpStatusCodeResultIfAjax(
+            HttpStatusCode::OK,
+            ModuleHelper::buildActionURL(
+                "community_settings",
+                "save=1"
+            )
         );
     }
-
 }

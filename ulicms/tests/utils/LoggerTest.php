@@ -1,16 +1,21 @@
 <?php
 
-class LoggerTest extends \PHPUnit\Framework\TestCase {
+use UliCMS\Helpers\TestHelper;
 
-    public function setUp() {
+class LoggerTest extends \PHPUnit\Framework\TestCase
+{
+    protected function setUp(): void
+    {
         sureRemoveDir(Path::resolve("ULICMS_LOG/test_log"), true);
     }
 
-    public function tearDown() {
+    protected function tearDown(): void
+    {
         sureRemoveDir(Path::resolve("ULICMS_LOG/test_log"), true);
     }
 
-    public function testRegisterAndUnregisterLogger() {
+    public function testRegisterAndUnregisterLogger()
+    {
         $logger = new Logger(Path::resolve("ULICMS_LOG/test_log"));
         $this->assertTrue(is_dir(Path::resolve("ULICMS_LOG/test_log")));
         LoggerRegistry::register("test_log", $logger);
@@ -20,13 +25,15 @@ class LoggerTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull(LoggerRegistry::get("test_log"));
     }
 
-    public function testLogFolderIsProtected() {
+    public function testLogFolderIsProtected()
+    {
         $htaccessFile = Path::resolve("ULICMS_LOG/.htaccess");
         $this->assertTrue(file_exists($htaccessFile));
         $this->assertContains("deny from all", array_map("strtolower", StringHelper::linesFromFile($htaccessFile)));
     }
 
-    public function testLogDebug() {
+    public function testLogDebug()
+    {
         $logger = new Logger(Path::resolve("ULICMS_LOG/test_log"));
 
         LoggerRegistry::register("test_log", $logger);
@@ -45,7 +52,8 @@ class LoggerTest extends \PHPUnit\Framework\TestCase {
         LoggerRegistry::unregister("test_log");
     }
 
-    public function testLogError() {
+    public function testLogError()
+    {
         $logger = new Logger(Path::resolve("ULICMS_LOG/test_log"));
 
         LoggerRegistry::register("test_log", $logger);
@@ -64,7 +72,8 @@ class LoggerTest extends \PHPUnit\Framework\TestCase {
         LoggerRegistry::unregister("test_log");
     }
 
-    public function testLogInfo() {
+    public function testLogInfo()
+    {
         $logger = new Logger(Path::resolve("ULICMS_LOG/test_log"));
 
         LoggerRegistry::register("test_log", $logger);
@@ -84,4 +93,23 @@ class LoggerTest extends \PHPUnit\Framework\TestCase {
         LoggerRegistry::unregister("test_log");
     }
 
+    public function testFixLogPermissions()
+    {
+        $cfg = new CMSConfig();
+        $cfg->fix_log_permissions = true;
+        
+        $logger = new Logger(Path::resolve("ULICMS_LOG/test_log"), $cfg);
+
+        $logger->debug("Test");
+
+        clearstatcache();
+        
+        $path = $logger->getPath();
+        
+        if (TestHelper::isWindowsServer()) {
+            $this->assertTrue(is_writable($path));
+        } else {
+            $this->assertEquals(0777, fileperms($path));
+        }
+    }
 }

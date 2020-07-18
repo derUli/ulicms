@@ -13,9 +13,13 @@ if (is_null($value)) {
 ?>
 <div class="custom-field field"
      data-field-name="<?php Template::escape($field->name); ?>">
-        <strong class="field-label"><?php translate($field->title); ?> <?php if ($field->required) echo "*"; ?></strong>
+        <strong class="field-label"><?php translate($field->title); ?> <?php if ($field->required) {
+    echo "*";
+} ?></strong>
         <select name="<?php Template::escape(ViewBag::get("field_name")); ?>[]"
-        <?php if ($field->required) echo "required"; ?>
+        <?php if ($field->required) {
+    echo "required";
+} ?>
                 <?php echo ModuleHelper::buildHTMLAttributesFromArray($field->htmlAttributes); ?>>
                     <?php foreach ($options as $optionValue => $optionTitle) { ?>
                 <option value="<?php Template::escape($optionValue); ?>"

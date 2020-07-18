@@ -5,9 +5,9 @@ $classes = array(
     "SinPackageInstaller",
     "PackageSourceConnector",
     "Patch",
-    "PatchManager"
+    "PatchManager",
+    "extend/AvailablePackageVersionMatcher"
 );
 foreach ($classes as $class) {
     require_once dirname(__file__) . "/$class.php";
 }
-

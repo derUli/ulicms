@@ -10,9 +10,10 @@ use UliCMS\Constants\CommentStatus;
 use UliCMS\Utils\CacheUtil;
 use zz\Html\HTMLMinify;
 
-class CommentsController extends MainClass {
-
-    public function beforeHtml(): void {
+class CommentsController extends MainClass
+{
+    public function beforeHtml(): void
+    {
         Vars::set("comments_enabled", false);
 
         if (is_200()) {
@@ -31,7 +32,8 @@ class CommentsController extends MainClass {
     }
 
     // This method handles posted comments
-    public function postComment(): void {
+    public function postComment(): void
+    {
 
         // check if DSGVO checkbox is checked
         $checkbox = new PrivacyCheckbox(getCurrentLanguage(true));
@@ -64,7 +66,7 @@ class CommentsController extends MainClass {
                 CommentStatus::PENDING : CommentStatus::PUBLISHED;
 
         // show error if not all required fields are filled
-        if (!$comment->getAuthorName() or ! $comment->getText()) {
+        if (!$comment->getAuthorName() || !$comment->getText()) {
             ExceptionResult(get_translation("fill_all_fields"));
         }
 
@@ -90,71 +92,87 @@ class CommentsController extends MainClass {
 
         // Redirect to the page and show a message to the user
         Response::redirect(
-                ModuleHelper::getFullPageURLByID(
-                        $content_id,
-                        "comment_published=" . $status
-                )
+            ModuleHelper::getFullPageURLByID(
+                $content_id,
+                "comment_published=" . $status
+            )
         );
     }
 
-    public function getCommentText(): void {
-        $id = Request::getVar("id");
+    public function getCommentText(): void
+    {
+        $id = Request::getVar("id", 0, "int");
+        $text = $this->_getCommentText($id);
+        if ($text) {
+            HtmlResult($text, HttpStatusCode::OK, HTMLMinify::OPTIMIZATION_ADVANCED);
+        }
+        HTMLResult(get_translation("not_found"), 404);
+    }
+
+    public function _getCommentText(int $id): ?string
+    {
         try {
             $comment = new Comment($id);
             $comment->setRead(true);
             $comment->save();
-            HtmlResult(
-                    StringHelper::makeLinksClickable(
-                            HTML\text(trim($comment->getText()))
-                    ),
-                    HttpStatusCode::OK,
-                    HTMLMinify::OPTIMIZATION_ADVANCED
+            return StringHelper::makeLinksClickable(
+                HTML\text(trim($comment->getText()))
             );
         } catch (DatasetNotFoundException $e) {
-            HTMLResult(get_translation("not_found"), 404);
+            return null;
         }
     }
 
     // this returns the default status for new comments
-    public function getDefaultStatus(): string {
+    public function _getDefaultStatus(): string
+    {
         $defaultStatus = Settings::get("comments_must_be_approved") ?
                 CommentStatus::PENDING : CommentStatus::PUBLISHED;
         return $defaultStatus;
     }
 
-    public function getResults(
-            ?string $status = null,
-            ?int $content_id = null,
-            ?int $limit = 0
+    public function _getResults(
+        ?string $status = null,
+        ?int $content_id = null,
+        ?int $limit = 0
     ): array {
         $results = [];
         if ($status) {
             $results = Comment::getAllByStatus($status, $content_id);
-        } else if ($content_id) {
+        } elseif ($content_id) {
             $results = Comment::getAllByContentId($content_id);
         } else {
-            $status = $this->getDefaultStatus();
+            $status = $this->_getDefaultStatus();
             $results = Comment::getAllByStatus($status);
         }
         return $results;
     }
 
     // filter and show the comments to the comment moderation
-    public function filterComments(): void {
+    public function filterComments(): void
+    {
         // get arguments from the URL
         $status = Request::getVar("status", null, "str");
         $content_id = Request::getVar("content_id", null, "int");
-        $limit = Request::getVar("limit", $this->getDefaultLimit(), "int");
+        $limit = Request::getVar("limit", $this->_getDefaultLimit(), "int");
 
-        // do the search query
-        $results = $this->getResults($status, $content_id, $limit);
-
+        $results = $this->_filterComments($status, $content_id, $limit);
         // output the comment backend page to the user
         ActionResult("comments_manage", $results);
     }
 
+    public function _filterComments(
+        ?string $status = null,
+        ?int $content_id = null,
+        ?int $limit = null
+    ): array {
+        // do the search query
+        return $this->_getResults($status, $content_id, $limit);
+    }
+
     // get the configured default limit or if is set the default value
-    public function getDefaultLimit(): int {
+    public function _getDefaultLimit(): int
+    {
         $limit = 100;
         if (Settings::get("comments_default_limit")) {
             $limit = intval(Settings::get("comments_default_limit"));
@@ -162,62 +180,26 @@ class CommentsController extends MainClass {
         return $limit;
     }
 
-    public function doAction(): void {
+    public function doAction(): void
+    {
         // post arguments
-        $comments = Request::getVar("comments", []);
+        $commentIds = Request::getVar("comments", []);
         $action = Request::getVar("action", null, "str");
 
         // if we have comments and an action
-        if (is_array($comments) and ! empty($action)) {
+        if (is_array($commentIds) && !empty($action)) {
             // do the selected action for each comment
-            foreach ($comments as $id) {
-                $comment = new Comment($id);
-                switch ($action) {
-                    case "mark_as_spam":
-                        $comment->setStatus(CommentStatus::SPAM);
-                        $comment->setRead(true);
-                        break;
-                    case "publish":
-                        $comment->setStatus(CommentStatus::PUBLISHED);
-                        $comment->setRead(true);
-                        break;
-                    case "unpublish":
-                        $comment->setStatus(CommentStatus::PENDING);
-                        break;
-                    case "mark_as_read":
-                        $comment->setRead(true);
-                        break;
-                    case "mark_as_unread":
-                        $comment->setRead(false);
-                        break;
-                    case "delete":
-                        $comment->delete();
-                        break;
-                    default:
-                        throw new NotImplementedException(
-                                "comment action not implemented"
-                        );
-                }
-
-
-
-                // if action is not delete save it
-                if ($action != "delete") {
-                    $comment->save();
-                }
-
-                CacheUtil::clearPageCache();
-            }
+            $this->_doActions($commentIds, $action);
         }
 
         // referrer is from a hidden field on the form
         // Append jumpto=comments to the url to jump to the comment
         // table after redirect
         // It's inpossible to append an anchor to the url on a http redirect
-        // a javascript in util.js performs the jump to the anchor
+        // a javascript in fx.js performs the jump to the anchor
         $referrer = Request::getVar("referrer");
-        if (!str_contains("jumpto=comments", $referrer)) {
-            if (!str_contains("?", $referrer)) {
+        if (!str_contains($referrer, "jumpto=comments")) {
+            if (!str_contains($referrer, "?")) {
                 $referrer .= "?";
             } else {
                 $referrer .= "&";
@@ -227,4 +209,52 @@ class CommentsController extends MainClass {
         Request::redirect($referrer);
     }
 
+    public function _doActions(array $commentIds, string $action): array
+    {
+        $processedComments = [];
+
+        foreach ($commentIds as $id) {
+            $comment = new Comment($id);
+            $processedComments[] = $this->_doAction($comment, $action);
+        }
+        return $processedComments;
+    }
+
+    public function _doAction(Comment $comment, string $action): Comment
+    {
+        switch ($action) {
+            case "mark_as_spam":
+                $comment->setStatus(CommentStatus::SPAM);
+                $comment->setRead(true);
+                break;
+            case "publish":
+                $comment->setStatus(CommentStatus::PUBLISHED);
+                $comment->setRead(true);
+                break;
+            case "unpublish":
+                $comment->setStatus(CommentStatus::PENDING);
+                break;
+            case "mark_as_read":
+                $comment->setRead(true);
+                break;
+            case "mark_as_unread":
+                $comment->setRead(false);
+                break;
+            case "delete":
+                $comment->delete();
+                break;
+            default:
+                throw new NotImplementedException(
+                    "comment action not implemented"
+                );
+        }
+        // if action is not delete save it
+        if ($action != "delete") {
+            $comment->save();
+        }
+
+        CacheUtil::clearPageCache();
+
+        return $comment;
+    }
 }

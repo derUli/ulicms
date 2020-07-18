@@ -8,27 +8,33 @@ use UliCMS\Models\Content\Types\DefaultContentTypes;
 use UliCMS\Utils\File;
 use UliCMS\Exceptions\DatasetNotFoundException;
 
-function html5_doctype(): void {
+function html5_doctype(): void
+{
     echo Template::getHtml5Doctype();
 }
 
-function get_html5_doctype(): string {
+function get_html5_doctype(): string
+{
     return Template::getHtml5Doctype();
 }
 
-function og_html_prefix(): void {
+function og_html_prefix(): void
+{
     echo Template::getOgHTMLPrefix();
 }
 
-function get_og_html_prefix(): string {
+function get_og_html_prefix(): string
+{
     return Template::getOgHTMLPrefix();
 }
 
-function og_tags(): void {
+function og_tags(): void
+{
     echo get_og_tags();
 }
 
-function get_og_tags(?string $slug = null): string {
+function get_og_tags(?string $slug = null): string
+{
     $html = "";
     if (is_200()) {
         $og_data = get_og_data($slug);
@@ -47,16 +53,15 @@ function get_og_tags(?string $slug = null): string {
             $og_image = Settings::get("og_image");
         }
 
-        if (!empty($og_image) and ! startsWith($og_image, "http")) {
+        if (!empty($og_image) && !startsWith($og_image, "http")) {
             $og_image = ModuleHelper::getBaseUrl() . ltrim($og_image, "/");
         }
         $page = get_page($slug);
-        if (empty($og_image)
-                and ! StringHelper::isNullOrWhitespace($page["article_image"])) {
-
+        if (empty($og_image) &&
+                !StringHelper::isNullOrWhitespace($page["article_image"])) {
             $og_image = ltrim($page["article_image"], "/");
         }
-        if (!empty($og_image) and ! startsWith($og_image, "http")) {
+        if (!empty($og_image) && !startsWith($og_image, "http")) {
             $og_image = ModuleHelper::getBaseUrl() . ltrim($og_image, "/");
         }
         if (is_null($og_description) or empty($og_description)) {
@@ -102,7 +107,8 @@ function get_og_tags(?string $slug = null): string {
     return $html;
 }
 
-function get_og_data($slug = ""): ?array {
+function get_og_data($slug = ""): ?array
+{
     if (empty($slug)) {
         $slug = isset($_GET["slug"]) ? $_GET["slug"] : get_frontpage();
     }
@@ -118,31 +124,36 @@ function get_og_data($slug = ""): ?array {
     return $data;
 }
 
-function get_all_combined_html(): string {
+function get_all_combined_html(): string
+{
     $html = "";
     $html .= getCombinedStylesheetHtml();
     $html .= getCombinedScriptHtml();
     return $html;
 }
 
-function edit_button(): void {
+function edit_button(): void
+{
     Template::editButton();
 }
 
-function get_edit_button(): ?string {
+function get_edit_button(): ?string
+{
     return Template::getEditButton();
 }
 
-function all_combined_html(): void {
+function all_combined_html(): void
+{
     echo get_all_combined_html();
 }
 
-function get_ID(): ?int {
+function get_ID(): ?int
+{
     if (!is_null(Vars::get("id"))) {
         return Vars::get("id");
     }
 
-    $page = get_requested_pagename();
+    $page = get_slug();
 
     $dataset = null;
 
@@ -158,13 +169,14 @@ function get_ID(): ?int {
     return $dataset;
 }
 
-function is_active(): bool {
+function is_active(): bool
+{
     if (!is_null(Vars::get("active"))) {
         return Vars::get("active");
     }
-	
-    $page = get_requested_pagename();
-    
+
+    $page = get_slug();
+
     $dataset = boolval(1);
     $sql = "SELECT `active` FROM " . tbname("content")
             . " WHERE slug='" . db_escape($page) . "'  AND language='" .
@@ -178,10 +190,10 @@ function is_active(): bool {
     return $dataset;
 }
 
-function get_type(?string $slug = null, ?string $language = null): ?string {
-
+function get_type(?string $slug = null, ?string $language = null): ?string
+{
     if (!$slug) {
-        $slug = get_requested_pagename();
+        $slug = get_slug();
     }
 
     if (!$language) {
@@ -206,9 +218,10 @@ function get_type(?string $slug = null, ?string $language = null): ?string {
     return $result;
 }
 
-function get_article_meta(?string $page = null): ?object {
+function get_article_meta(?string $page = null): ?object
+{
     if (!$page) {
-        $page = get_requested_pagename();
+        $page = get_slug();
     }
 
     $dataset = null;
@@ -230,17 +243,20 @@ function get_article_meta(?string $page = null): ?object {
     return $dataset;
 }
 
-function get_cache_control(): string {
+function get_cache_control(): string
+{
     if (!is_null(Vars::get("cache_control"))) {
         return Vars::get("cache_control");
     }
-    $page = get_requested_pagename();
+    $page = get_slug();
 
     $cacheControl = "auto";
-    $sql = "SELECT `cache_control` FROM " . tbname("content") . " WHERE slug='" . db_escape($page) . "'  AND language='" . db_escape(getFrontendLanguage()) . "'";
+    $sql = "SELECT `cache_control` FROM " . tbname("content") .
+            " WHERE slug='" . db_escape($page) . "'  AND language='" .
+            db_escape(getFrontendLanguage()) . "'";
     $result = db_query($sql);
     $dataset = null;
-    
+
     if ($result and db_num_rows($result) > 0) {
         $dataset = db_fetch_object($result);
         $cacheControl = $dataset->cache_control ? $dataset->cache_control : $cacheControl;
@@ -250,8 +266,9 @@ function get_cache_control(): string {
     return $cacheControl;
 }
 
-function get_text_position(): string {
-    $page = get_requested_pagename();
+function get_text_position(): string
+{
+    $page = get_slug();
 
     $dataset = null;
     $sql = "SELECT `text_position` FROM " . tbname("content") .
@@ -268,9 +285,10 @@ function get_text_position(): string {
     return $dataset;
 }
 
-function get_category_id(string $page = null): ?int {
+function get_category_id(string $page = null): ?int
+{
     if (!$page) {
-        $page = get_requested_pagename();
+        $page = get_slug();
     }
     $dataset = null;
     $sql = "SELECT `category_id` FROM " . tbname("content") .
@@ -284,13 +302,15 @@ function get_category_id(string $page = null): ?int {
     return $dataset;
 }
 
-function category_id(?string $page = null): void {
+function category_id(?string $page = null): void
+{
     echo get_category_id($page);
 }
 
-function get_parent(string $page = null): ?int {
+function get_parent(string $page = null): ?int
+{
     if (!$page) {
-        $page = get_requested_pagename();
+        $page = get_slug();
     }
     $parent_id = null;
     $sql = "SELECT `parent_id` FROM " . tbname("content") . " WHERE slug='"
@@ -304,14 +324,16 @@ function get_parent(string $page = null): ?int {
     return $parent_id;
 }
 
-function include_jquery(): void {
+function include_jquery(): void
+{
     Template::jQueryScript();
 }
 
-function get_access(?string $page = null): array {
+function get_access(?string $page = null): array
+{
     $access = [];
     if (!$page) {
-        $page = get_requested_pagename();
+        $page = get_slug();
     }
 
     $sql = "SELECT `access` FROM " . tbname("content") .
@@ -326,9 +348,10 @@ function get_access(?string $page = null): array {
     return $access;
 }
 
-function get_redirection(?string $page = null): ?string {
+function get_redirection(?string $page = null): ?string
+{
     if (!$page) {
-        $page = get_requested_pagename();
+        $page = get_slug();
     }
     $sql = "SELECT `link_url` FROM " . tbname("content") .
             " WHERE slug='" . db_escape($page) . "'  AND language='" .
@@ -338,16 +361,17 @@ function get_redirection(?string $page = null): ?string {
     $redirection = null;
     if (db_num_rows($result) > 0) {
         $dataset = db_fetch_object($result);
-        if (!empty($dataset->link_url) and ! is_null($dataset->link_url)) {
+        if (!empty($dataset->link_url) && !is_null($dataset->link_url)) {
             $redirection = $dataset->link_url;
         }
     }
     return $redirection;
 }
 
-function get_theme(?string $page = null): ?string {
+function get_theme(?string $page = null): ?string
+{
     if (!$page) {
-        $page = get_requested_pagename();
+        $page = get_slug();
     }
 
     if (!is_null(Vars::get("theme_" . $page))) {
@@ -376,12 +400,13 @@ function get_theme(?string $page = null): ?string {
     return $theme;
 }
 
-
-function language_selection(): void {
+function language_selection(): void
+{
     Template::languageSelection();
 }
 
-function get_category(): ?string {
+function get_category(): ?string
+{
     $current_page = get_page();
     if (!(isset($current_page["category_id"]) and
             $current_page["category_id"])) {
@@ -390,41 +415,50 @@ function get_category(): ?string {
     return Categories::getCategoryById(intval($current_page["category_id"]));
 }
 
-function category(): void {
+function category(): void
+{
     Template::escape(get_category());
 }
 
-function get_body_classes(): string {
+function get_body_classes(): string
+{
     return Template::getBodyClasses();
 }
 
-function body_classes(): void {
+function body_classes(): void
+{
     echo Template::getBodyClasses();
 }
 
 // Gibt "Diese Seite läuft mit UliCMS" aus
-function poweredByUliCMS(): void {
+function poweredByUliCMS(): void
+{
     Template::poweredByUliCMS();
 }
 
 // Einen zufälligen Banner aus der Datenbank ausgeben
-function random_banner(): void {
+function random_banner(): void
+{
     Template::randomBanner();
 }
 
-function logo(): void {
+function logo(): void
+{
     Template::logo();
 }
 
-function year($format = "Y"): void {
+function year($format = "Y"): void
+{
     Template::year($format);
 }
 
-function homepage_owner(): void {
+function homepage_owner(): void
+{
     Template::homepageOwner();
 }
 
-function get_homepage_title(): string {
+function get_homepage_title(): string
+{
     $homepage_title = Settings::get("homepage_title_" . getFrontendLanguage());
     if (!$homepage_title) {
         $homepage_title = Settings::get("homepage_title");
@@ -432,11 +466,13 @@ function get_homepage_title(): string {
     return _esc($homepage_title);
 }
 
-function homepage_title(): void {
+function homepage_title(): void
+{
     echo get_homepage_title();
 }
 
-function get_meta_keywords(): string {
+function get_meta_keywords(): string
+{
     $ipage = isset($_GET["slug"]) ? db_escape($_GET["slug"]) : '';
     $result = db_query("SELECT meta_keywords FROM " . tbname("content") .
             " WHERE slug='$ipage' AND language='" .
@@ -457,14 +493,16 @@ function get_meta_keywords(): string {
     return $meta_keywords;
 }
 
-function meta_keywords(): void {
+function meta_keywords(): void
+{
     $value = get_meta_keywords();
     if ($value) {
         echo $value;
     }
 }
 
-function get_meta_description(?string $ipage = null): string {
+function get_meta_description(?string $ipage = null): string
+{
     $ipage = isset($_GET["slug"]) ? db_escape($_GET["slug"]) : '';
     $result = db_query("SELECT meta_description FROM " . tbname("content") .
             " WHERE slug='$ipage' AND language='" .
@@ -486,26 +524,32 @@ function get_meta_description(?string $ipage = null): string {
     return $meta_description;
 }
 
-function meta_description(): void {
+function meta_description(): void
+{
     $value = get_meta_description();
     if ($value) {
         echo $value;
     }
 }
 
-function get_title(?string $slug = null, bool $headline = false): ?string {
+function get_title(?string $slug = null, bool $headline = false): ?string
+{
     $cacheVar = $headline ? "headline" : "title";
     if (Vars::get($cacheVar)) {
         return Vars::get($cacheVar);
     }
 
-    $errorPage403 = intval(Settings::getLanguageSetting(
-                    "error_page_403",
-                    getCurrentLanguage())
+    $errorPage403 = intval(
+        Settings::getLanguageSetting(
+            "error_page_403",
+            getCurrentLanguage()
+        )
     );
-    $errorPage404 = intval(Settings::getLanguageSetting(
-                    "error_page_404",
-                    getCurrentLanguage())
+    $errorPage404 = intval(
+        Settings::getLanguageSetting(
+            "error_page_404",
+            getCurrentLanguage()
+        )
     );
 
     if (is_404()) {
@@ -516,7 +560,7 @@ function get_title(?string $slug = null, bool $headline = false): ?string {
             }
         }
         return get_translation("page_not_found");
-    } else if (is_403()) {
+    } elseif (is_403()) {
         if ($errorPage403) {
             $content = ContentFactory::getByID($errorPage403);
             if ($content->id !== null) {
@@ -533,8 +577,7 @@ function get_title(?string $slug = null, bool $headline = false): ?string {
 
     if (db_num_rows($result) > 0) {
         while ($row = db_fetch_object($result)) {
-            if ($headline and isset($row->alternate_title)
-                    and ! empty($row->alternate_title)) {
+            if ($headline and isset($row->alternate_title) && !empty($row->alternate_title)) {
                 $title = $row->alternate_title;
             } else {
                 $title = $row->title;
@@ -549,22 +592,26 @@ function get_title(?string $slug = null, bool $headline = false): ?string {
     return null;
 }
 
-function title(?string $ipage = null, bool $headline = false): void {
+function title(?string $ipage = null, bool $headline = false): void
+{
     echo get_title($ipage, $headline);
 }
 
-function get_headline(?string $ipage = null): string {
+function get_headline(?string $ipage = null): string
+{
     return get_title($ipage, true);
 }
 
-function headline(?string $ipage = null): void {
+function headline(?string $ipage = null): void
+{
     echo get_headline($ipage);
 }
 
-function apply_filter($text, string $type) {
+function apply_filter($text, string $type)
+{
     $modules = getAllModules();
     $disabledModules = Vars::get("disabledModules");
-    for ($i = 0; $i < count($modules); $i ++) {
+    for ($i = 0; $i < count($modules); $i++) {
         if (faster_in_array($modules[$i], $disabledModules)) {
             continue;
         }
@@ -581,13 +628,13 @@ function apply_filter($text, string $type) {
         $escapedName = ModuleHelper::underscoreToCamel($type . "_filter");
         if ($controller and method_exists($controller, $escapedName)) {
             $text = $controller->$escapedName($text);
-        } else if (file_exists($module_content_filter_file1)) {
+        } elseif (file_exists($module_content_filter_file1)) {
             require_once $module_content_filter_file1;
             if (function_exists($modules[$i] . "_" . $type . "_filter")) {
                 $text = call_user_func($modules[$i] . "_" . $type .
                         "_filter", $text);
             }
-        } else if (file_exists($module_content_filter_file2)) {
+        } elseif (file_exists($module_content_filter_file2)) {
             require_once $module_content_filter_file2;
             if (function_exists($modules[$i] . "_" . $type . "_filter")) {
                 $text = call_user_func($modules[$i] . "_" . $type .
@@ -599,23 +646,28 @@ function apply_filter($text, string $type) {
     return $text;
 }
 
-function get_site_slogan(): string {
+function get_site_slogan(): string
+{
     return Template::getSiteSlogan();
 }
 
-function site_slogan(): void {
+function site_slogan(): void
+{
     echo Template::siteSlogan();
 }
 
-function motto(): void {
+function motto(): void
+{
     site_slogan();
 }
 
-function get_motto(): string {
+function get_motto(): string
+{
     return get_site_slogan();
 }
 
-function get_frontpage(): ?string {
+function get_frontpage(): ?string
+{
     setLanguageByDomain();
     if (getFrontendLanguage()) {
         $frontpage = Settings::get("frontpage_" . getFrontendLanguage());
@@ -626,19 +678,20 @@ function get_frontpage(): ?string {
     return Settings::get("frontpage");
 }
 
-function get_requested_pagename(): string {
-    $value = get_frontpage();
+function get_slug(): string
+{
+    return !empty($_GET["slug"]) ? $_GET["slug"] : get_frontpage();
+}
 
-    if (isset($_GET["slug"]) and StringHelper::isNotNullOrWhitespace($_GET["slug"])) {
-        $value = $_GET["slug"];
-    }
-    return Database::escapeValue($value);
+function get_requested_pagename(): string
+{
+    return get_slug();
 }
 
 function set_requested_pagename(
-        string $slug,
-        ?string $language = null,
-        ?string $format = "html"
+    string $slug,
+    ?string $language = null,
+    ?string $format = "html"
 ): void {
     if (!$language) {
         $language = getCurrentLanguage();
@@ -652,50 +705,57 @@ function set_requested_pagename(
     set_format($format);
 }
 
-function is_home(): bool {
-    return get_requested_pagename() === get_frontpage();
+function is_home(): bool
+{
+    return get_slug() === get_frontpage();
 }
 
-function is_frontpage(): bool {
+function is_frontpage(): bool
+{
     return is_home();
 }
 
-function is_200(): bool {
+function is_200(): bool
+{
     return check_status() == "200 OK";
 }
 
-function is_403(): bool {
+function is_403(): bool
+{
     return check_status() == "403 Forbidden";
 }
 
-function is_404(): bool {
+function is_404(): bool
+{
     return check_status() == "404 Not Found";
 }
 
-function is_500(): bool {
+function is_500(): bool
+{
     return check_status() == "500 Internal Server Error";
 }
 
-function is_503(): bool {
+function is_503(): bool
+{
     return check_status() == "503 Service Unavailable";
 }
 
 function buildtree(
-        array $src_arr,
-        ?int $parent_id = 0,
-        ?array $tree = []
+    array $src_arr,
+    ?int $parent_id = 0,
+    ?array $tree = []
 ): array {
     foreach ($src_arr as $idx => $row) {
         if ($row['parent_id'] == $parent_id) {
-
             foreach ($row as $k => $v) {
                 $tree[$row['id']][$k] = $v;
             }
             unset($src_arr[$idx]);
             $tree[$row['id']]['children'] = buildtree(
-                    $src_arr,
-                    intval($row['id']
-                    )
+                $src_arr,
+                intval(
+                    $row['id']
+                )
             );
         }
     }
@@ -703,7 +763,8 @@ function buildtree(
     return $tree;
 }
 
-function parent_item_contains_current_page(?int $id): bool {
+function parent_item_contains_current_page(?int $id): bool
+{
     $retval = false;
     if (!$id) {
         return $retval;
@@ -720,7 +781,7 @@ function parent_item_contains_current_page(?int $id): bool {
 
     $tree = buildtree($data, $id);
     foreach ($tree as $key) {
-        if ($key["slug"] == get_requested_pagename()) {
+        if ($key["slug"] == get_slug()) {
             $retval = true;
         }
     }
@@ -728,10 +789,10 @@ function parent_item_contains_current_page(?int $id): bool {
 }
 
 function get_menu(
-        string $name = "top",
-        ?int $parent_id = null,
-        bool $recursive = true,
-        string $order = "position"
+    string $name = "top",
+    ?int $parent_id = null,
+    bool $recursive = true,
+    string $order = "position"
 ): string {
     $html = "";
     $name = db_escape($name);
@@ -773,7 +834,7 @@ function get_menu(
                 $additional_classes .= "contains-current-page ";
             }
 
-            if (get_requested_pagename() != $row->slug) {
+            if (get_slug() != $row->slug) {
                 $html .= "  <li class='" . trim($additional_classes) . "'>";
             } else {
                 $html .= "  <li class='menu_active_list_item" . rtrim($additional_classes) . "'>";
@@ -798,12 +859,12 @@ function get_menu(
             $url = ($row->type == "link" or $row->type == "node") ? $row->link_url : buildSEOUrl($row->slug);
             $url = Template::getEscape($url);
 
-            if (get_requested_pagename() != $row->slug) {
+            if (get_slug() != $row->slug) {
                 $html .= "<a href='" . $url . "' target='" . $row->target . "' class='" . trim($additional_classes) . "'>";
             } else {
                 $html .= "<a class='menu_active_link" . rtrim($additional_classes) . "' href='" . $url . "' target='" . $row->target . "'>";
             }
-            if (!is_null($row->menu_image) and ! empty($row->menu_image)) {
+            if (!is_null($row->menu_image) && !empty($row->menu_image)) {
                 $html .= '<img src="' . $row->menu_image . '" alt="' . _esc($title) . '"/>';
             } else {
                 $html .= _esc($title);
@@ -822,19 +883,21 @@ function get_menu(
 }
 
 function menu(
-        string $name = "top",
-        ?int $parent = null,
-        bool $recursive = true,
-        string $order = 'position'
+    string $name = "top",
+    ?int $parent = null,
+    bool $recursive = true,
+    string $order = 'position'
 ): void {
     echo get_menu($name, $parent, $recursive, $order);
 }
 
-function output_favicon_code(): void {
+function output_favicon_code(): void
+{
     echo get_output_favicon_code();
 }
 
-function get_output_favicon_code(): string {
+function get_output_favicon_code(): string
+{
     $url = "content/images/favicon.ico";
     if (defined("ULICMS_DATA_STORAGE_URL")) {
         $url = ULICMS_DATA_STORAGE_URL . "/" . $url;
@@ -848,25 +911,30 @@ function get_output_favicon_code(): string {
     return $html;
 }
 
-function base_metas(): void {
+function base_metas(): void
+{
     Template::baseMetas();
 }
 
-function get_base_metas(): string {
+function get_base_metas(): string
+{
     return Template::getBaseMetas();
 }
 
-function head(): void {
+function head(): void
+{
     base_metas();
 }
 
-function get_head(): string {
+function get_head(): string
+{
     return get_base_metas();
 }
 
-function get_page(?string $slug = ''): ?array {
+function get_page(?string $slug = ''): ?array
+{
     if (empty($slug)) {
-        $slug = isset($_GET["slug"]) ? $_GET["slug"] :  "";
+        $slug = isset($_GET["slug"]) ? $_GET["slug"] : "";
     }
     if (empty($slug)) {
         $slug = get_frontpage();
@@ -885,30 +953,34 @@ function get_page(?string $slug = ''): ?array {
     }
 }
 
-function content(): void {
+function content(): void
+{
     Template::content();
 }
 
-function get_content(): string {
+function get_content(): string
+{
     return Template::getContent();
 }
 
-function checkforAccessForDevice(string $access): bool {
+function checkforAccessForDevice(string $access): bool
+{
     $access = explode(",", $access);
     $allowed = false;
     if (faster_in_array("mobile", $access) and is_mobile()) {
         $allowed = true;
     }
-    if (faster_in_array("desktop", $access) and ! is_mobile()) {
+    if (faster_in_array("desktop", $access) && !is_mobile()) {
         $allowed = true;
     }
-    if (!faster_in_array("mobile", $access) and ! faster_in_array("desktop", $access)) {
+    if (!faster_in_array("mobile", $access) && !faster_in_array("desktop", $access)) {
         $allowed = true;
     }
     return $allowed;
 }
 
-function checkAccess(string $access = ""): ?string {
+function checkAccess(string $access = ""): ?string
+{
     $access_for_device = checkforAccessForDevice($access);
     if (!$access_for_device) {
         return null;
@@ -920,7 +992,7 @@ function checkAccess(string $access = ""): ?string {
     if (faster_in_array("registered", $access) and is_logged_in()) {
         return "registered";
     }
-    for ($i = 0; $i < count($access); $i ++) {
+    for ($i = 0; $i < count($access); $i++) {
         if (is_numeric($access[$i]) and isset($_SESSION["group_id"]) and $access[$i] == $_SESSION["group_id"]) {
             return $access[$i];
         }
@@ -928,7 +1000,8 @@ function checkAccess(string $access = ""): ?string {
     return null;
 }
 
-function check_status(): string {
+function check_status(): string
+{
     $status = apply_filter("", "status");
     if (!empty($status)) {
         return $status;
@@ -940,16 +1013,16 @@ function check_status(): string {
     if (get_type() == "snippet") {
         return "403 Forbidden";
     }
-    if (!(isset($_GET["slug"]) and !empty($_GET["slug"]))) {
+    if (!(isset($_GET["slug"]) && !empty($_GET["slug"]))) {
         $_GET["slug"] = get_frontpage();
     }
 
-    if (!is_active() and ! is_logged_in()) {
+    if (!is_active() && !is_logged_in()) {
         return "403 Forbidden";
     }
 
     $test = isset($_GET["slug"]) ? get_page($_GET["slug"]) : null;
-    if (!$test or ! is_null($test["deleted_at"])) {
+    if (!$test || !is_null($test["deleted_at"])) {
         no_cache();
         return "404 Not Found";
     }
@@ -965,14 +1038,16 @@ function check_status(): string {
     return "403 Forbidden";
 }
 
-function cms_release_year(): void {
+function cms_release_year(): void
+{
     $v = new UliCMSVersion();
     echo $v->getReleaseYear();
 }
 
 // prepares a text / code for html output
 // replaces new lines with <br> tags
-function preparePlainTextforHTMLOutput($text): string {
+function preparePlainTextforHTMLOutput($text): string
+{
     return UliCMS\HTML\text($text);
 }
 

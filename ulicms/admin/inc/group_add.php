@@ -32,10 +32,10 @@ $languages = Language::getAllLanguages();
                                   data-select-all-checkbox="#checkall"
                                   data-checkbox-group=".permission-checkbox"
                                   class="permission-checkbox"> <?php
-                                  esc($key);
-                                  ?> </label>
+                                  esc($key); ?> </label>
                 </div>
-            <?php } ?>
+            <?php
+            } ?>
         </div>
     </fieldset>
     <h3><?php translate("languages"); ?></h3>

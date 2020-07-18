@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 use UliCMS\Utils\CacheUtil;
 
-class SiteSloganController extends Controller {
-
-    public function savePost(): void {
+class SiteSloganController extends Controller
+{
+    public function savePost(): void
+    {
         $languages = getAllLanguages();
 
         if (isset($_POST["submit"])) {
             for ($i = 0; $i < count($languages); $i ++) {
-
                 $lang = $languages[$i];
                 if (isset($_POST["site_slogan_" . $lang])) {
                     $page = $_POST["site_slogan_" . $lang];
@@ -31,5 +31,4 @@ class SiteSloganController extends Controller {
         }
         Request::redirect(ModuleHelper::buildActionURL("site_slogan"));
     }
-
 }

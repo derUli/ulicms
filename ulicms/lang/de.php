@@ -21,7 +21,7 @@ add_translation("DATE", "Datum");
 add_translation("DONE_BY", "Durchgeführt von");
 
 add_translation("EDIT_PROFILE", "Profil bearbeiten");
-add_translation("HELLO_NAME", "Hallo %firstname% %lastname%!");
+add_translation("HELLO_NAME", "Hallo %name%!");
 
 // Admin Menü Navigation
 add_translation("WELCOME", "Willkommen");
@@ -744,5 +744,16 @@ add_translation("unsupported_output_format", "Nicht unterstütztes Ausgabeformat
 add_translation("mpdf_not_installed", "mPDF ist nicht installiert.\n"
         . "Bitte installieren Sie mPDF von %link% um das PDF-Ausgabe "
         . "Feature nutzen zu können.");
+
+add_translation("copied_to_clipboard_success", "Text wurde in die Zwischenablage kopiert.");
+add_translation("copied_to_clipboard_failed", "Kopieren des Textes fehlgeschlagen.");
+
+add_translation(
+    "unsupported_browser",
+    "Sie benutzen den Browser %browser% welcher von UliCMS nicht unterstützt wird.\n" .
+        "Bitte verwenden Sie einen der unterstützen Browser.\n\n" .
+        "Welche Browser von UliCMS unterstützt werden, erfahren Sie unter:\n" .
+        "https://www.ulicms.de/Welche-Browser-werden-von-UliCMS-unterstutzt.html"
+);
 
 do_event("lang_de");

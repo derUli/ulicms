@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-class Link extends Page {
-
+class Link extends Page
+{
     public $link_url = "";
     public $type = "link";
 
-    public function save() {
+    public function save()
+    {
         $retval = null;
         if ($this->id === null) {
             $retval = $this->create();
@@ -18,12 +19,14 @@ class Link extends Page {
         return $retval;
     }
 
-    protected function fillVars($result = null) {
+    protected function fillVars($result = null)
+    {
         parent::fillVars($result);
         $this->link_url = $result->link_url;
     }
 
-    public function update() {
+    public function update()
+    {
         $result = null;
         if ($this->id === null) {
             return $this->create();
@@ -39,8 +42,13 @@ class Link extends Page {
         return $result;
     }
 
-    public function isRegular(): bool {
+    public function isRegular(): bool
+    {
         return false;
     }
 
+    public function getIcon(): string
+    {
+        return "fas fa-link";
+    }
 }

@@ -33,11 +33,17 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
         ?>
         <?php
         $scripts = array(
+            "../node_modules/vanilla-toast/vanilla-toast.js",
             "../node_modules/jquery/dist/jquery.min.js",
             "../node_modules/jquery-datetimepicker/build/jquery.datetimepicker.full.js",
             "../node_modules/jquery-form/dist/jquery.form.min.js",
             "scripts/vallenato/vallenato.js",
-            "scripts/util.js",
+            "scripts/utils/inputs.js",
+            "scripts/utils/dataTables.js",
+            "scripts/utils/ajax.js",
+            "scripts/utils/fx.js",
+            "scripts/utils/clipboard.js",
+            "scripts/utils/editors.js",
             "scripts/global.js",
             "../node_modules/bootstrap/dist/js/bootstrap.min.js",
             "../node_modules/bootstrap-toggle/js/bootstrap-toggle.min.js",
@@ -48,17 +54,21 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
             "../node_modules/zenscroll/zenscroll-min.js",
             "../lib/js/global.js",
         );
-        ?>
-        <?php
+    
         if (is_logged_in()) {
             $scripts[] = "../node_modules/jscolor-picker/jscolor.min.js";
         }
+        
+        $scripts = apply_filter($scripts, "admin_head_scripts");
+        
         foreach ($scripts as $script) {
             enqueueScriptFile($script);
         }
+        
         if (is_logged_in()) {
             echo Script::fromFile("ckeditor/ckeditor.js");
         }
+        
         combinedScriptHtml();
 
         require "inc/touch_icons.php";
@@ -72,11 +82,14 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
               <?php
               $styles[] = "../node_modules/bootstrap/dist/css/bootstrap.min.css";
               $styles[] = "../node_modules/codemirror-minified/lib/codemirror.css";
+              $styles[] = "../node_modules/vanilla-toast/vanilla-toast.css";
               $styles[] = "css/modern.scss";
               $styles[] = "../node_modules/bootstrap-toggle/css/bootstrap-toggle.min.css";
               $styles[] = "../node_modules/select2/dist/css/select2.min.css";
               $styles[] = "../node_modules/jquery-datetimepicker/build/jquery.datetimepicker.min.css";
 
+              $styles = apply_filter($styles, "admin_head_styles");
+              
               foreach ($styles as $style) {
                   enqueueStylesheet($style);
               }
@@ -127,8 +140,7 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
                 <div class="col-xs-5 menu-container">
                     <?php
                     if (is_logged_in()) {
-                        $colClass = $permissionChecker->hasPermission("comments_manage") ? "col-xs-4" : "col-xs-6";
-                        ?>
+                        $colClass = $permissionChecker->hasPermission("comments_manage") ? "col-xs-4" : "col-xs-6"; ?>
                         <div class="row pull-right top-right-icons">
                             <div class="<?php esc($colClass); ?>">
                                 <a href="#" class="has-pointer" id="menu-clear-cache"
@@ -138,8 +150,7 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
                             </div>
                             <?php
                             if ($permissionChecker->hasPermission("comments_manage")) {
-                                $count = Comment::getUnreadCount();
-                                ?>
+                                $count = Comment::getUnreadCount(); ?>
                                 <div class="<?php esc($colClass); ?>">
                                     <div class="comment-counter">
                                         <a href="<?php echo ModuleHelper::buildActionURL("comments_manage"); ?>"><i class="fa fa-comments"></i>
@@ -149,15 +160,18 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
                                                 <div class="count" data-count="<?php echo $count ?>">
                                                     <?php echo $count; ?>
                                                 </div>
-                                            <?php } ?></a>
+                                            <?php
+                                            } ?></a>
                                     </div>
                                 </div>
-                            <?php } ?>
+                            <?php
+                            } ?>
                             <div class="<?php esc($colClass); ?>">
                                 <a id="menu-toggle" class="has-pointer"><i class="fa fa-bars"></i> </a>
                             </div>
                         </div>
-                    <?php } ?>
+                    <?php
+                    } ?>
                 </div>
             </div>
             <div class="main-content">

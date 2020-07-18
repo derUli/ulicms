@@ -1,19 +1,21 @@
 <?php
 
 // Page that has assigned a module
-class Module_Page extends Page {
-
+class Module_Page extends Page
+{
     public $type = "module";
     public $module = null;
     public $text_position = 'after';
 
-    protected function fillVars($result = null) {
+    protected function fillVars($result = null)
+    {
         parent::fillVars($result);
         $this->module = $result->module;
         $this->text_position = $result->text_position;
     }
 
-    public function save() {
+    public function save()
+    {
         $retval = null;
         if ($this->id === null) {
             $retval = $this->create();
@@ -24,7 +26,8 @@ class Module_Page extends Page {
         return $retval;
     }
 
-    public function update() {
+    public function update()
+    {
         $result = null;
         if ($this->id === null) {
             return $this->create();
@@ -42,27 +45,32 @@ class Module_Page extends Page {
         return $result;
     }
 
-    public function containsModule(?string $module = null): bool {
+    public function containsModule(?string $module = null): bool
+    {
         $retval = false;
 
         if (parent::containsModule($module)) {
             $retval = true;
         }
-        if ($this->module !== null and ! empty($this->module)) {
-            if (($module and $this->module == $module) or ! $module) {
+        if ($this->module !== null && !empty($this->module)) {
+            if (($module and $this->module == $module) || !$module) {
                 $retval = true;
             }
         }
         return $retval;
     }
 
-    public function getEmbeddedModules(): array {
+    public function getEmbeddedModules(): array
+    {
         $result = parent::getEmbeddedModules();
-        if (StringHelper::isNotNullOrEmpty($this->module)
-                and ! faster_in_array($this->module, $result)) {
+        if (StringHelper::isNotNullOrEmpty($this->module) && !faster_in_array($this->module, $result)) {
             $result[] = $this->module;
         }
         return $result;
     }
 
+    public function getIcon(): string
+    {
+        return "fas fa-puzzle-piece";
+    }
 }

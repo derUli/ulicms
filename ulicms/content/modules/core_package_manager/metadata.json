@@ -1,6 +1,6 @@
 {
     "source": "core",
-    "version": "2020.2",
+    "version": "2020.2.4",
     "embed": false,
     "controllers": {
         "PkgInfoController": "controllers/PkgInfoController.php",
@@ -39,7 +39,7 @@
         "PackageController::uninstallModule": "remove_packages",
         "PackageController::uninstallTheme": "remove_packages",
         "PackageController::toggleModule": "enable_disable_module",
-        "PackageController::truncatedInstalledPatches": "patch_management",
+        "PackageController::truncateInstalledPatches": "patch_management",
         "PackageController::getPackageLicense": "install_packages"
     }
 }

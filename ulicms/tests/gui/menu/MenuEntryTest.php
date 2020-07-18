@@ -2,13 +2,14 @@
 
 use UliCMS\Exceptions\NotImplementedException;
 
-class MenuEntryTest extends \PHPUnit\Framework\TestCase {
-
+class MenuEntryTest extends \PHPUnit\Framework\TestCase
+{
     private $permittedUser;
     private $notPermittedUser;
     private $testGroup;
 
-    public function setUp() {
+    protected function setUp(): void
+    {
         $group = new Group();
         $group->addPermission("info", true);
         $group->save();
@@ -33,7 +34,8 @@ class MenuEntryTest extends \PHPUnit\Framework\TestCase {
         $this->notPermittedUser = $notPermittedUser;
     }
 
-    public function tearDown() {
+    protected function tearDown(): void
+    {
         $this->permittedUser->delete();
         $this->notPermittedUser->delete();
         $this->testGroup->delete();
@@ -42,24 +44,37 @@ class MenuEntryTest extends \PHPUnit\Framework\TestCase {
         unset($_REQUEST["action"]);
     }
 
-    private function constructMenuEntryWithoutChildren(): MenuEntry {
-        return new MenuEntry("Say Hello", "https://www.hello-world.com/",
-                "say_hello", ["info", "dashboard"], [], true);
+    private function constructMenuEntryWithoutChildren(): MenuEntry
+    {
+        return new MenuEntry(
+            "Say Hello",
+            "https://www.hello-world.com/",
+            "say_hello",
+            ["info", "dashboard"],
+            [],
+            true
+        );
     }
 
-    public function testConstructor() {
+    public function testConstructor()
+    {
         $menuEntry = $this->constructMenuEntryWithoutChildren();
         $this->assertEquals("Say Hello", $menuEntry->getTitle());
-        $this->assertEquals("https://www.hello-world.com/",
-                $menuEntry->getLink());
+        $this->assertEquals(
+            "https://www.hello-world.com/",
+            $menuEntry->getLink()
+        );
         $this->assertEquals("say_hello", $menuEntry->getIdentifier());
-        $this->assertEquals(["info", "dashboard"],
-                $menuEntry->getPermissions());
+        $this->assertEquals(
+            ["info", "dashboard"],
+            $menuEntry->getPermissions()
+        );
         $this->assertCount(0, $menuEntry->getChildren());
         $this->assertTrue($menuEntry->getNewWindow());
     }
 
-    public function testHasChildrenReturnsTrue() {
+    public function testHasChildrenReturnsTrue()
+    {
         $menuEntry = $this->constructMenuEntryWithoutChildren();
 
         $menuEntry->setChildren([
@@ -69,36 +84,42 @@ class MenuEntryTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue($menuEntry->hasChildren());
     }
 
-    public function testHasChildrenReturnsFalse() {
+    public function testHasChildrenReturnsFalse()
+    {
         $menuEntry = $this->constructMenuEntryWithoutChildren();
         $this->assertFalse($menuEntry->hasChildren());
     }
 
-    public function testSetTitle() {
+    public function testSetTitle()
+    {
         $menuEntry = $this->constructMenuEntryWithoutChildren();
         $menuEntry->setTitle("Foobar");
         $this->assertEquals("Foobar", $menuEntry->getTitle());
     }
 
-    public function testSetPermissions() {
+    public function testSetPermissions()
+    {
         $menuEntry = $this->constructMenuEntryWithoutChildren();
         $menuEntry->setPermissions(["foo", "bar"]);
         $this->assertEquals(["foo", "bar"], $menuEntry->getPermissions());
     }
 
-    public function testSetLink() {
+    public function testSetLink()
+    {
         $menuEntry = $this->constructMenuEntryWithoutChildren();
         $menuEntry->setLink("https://www.ulicms.de");
         $this->assertEquals("https://www.ulicms.de", $menuEntry->getLink());
     }
 
-    public function testSetIdentifier() {
+    public function testSetIdentifier()
+    {
         $menuEntry = $this->constructMenuEntryWithoutChildren();
         $menuEntry->setIdentifier("foobar");
         $this->assertEquals("foobar", $menuEntry->getIdentifier());
     }
 
-    public function testSetChildren() {
+    public function testSetChildren()
+    {
         $menuEntry = $this->constructMenuEntryWithoutChildren();
         $menuEntry->setChildren([
             $this->constructMenuEntryWithoutChildren(),
@@ -108,7 +129,8 @@ class MenuEntryTest extends \PHPUnit\Framework\TestCase {
         $this->assertCount(3, $menuEntry->getChildren());
     }
 
-    public function testAddChildren() {
+    public function testAddChildren()
+    {
         $menuEntry = $this->constructMenuEntryWithoutChildren();
         $menuEntry->setChildren([
             $this->constructMenuEntryWithoutChildren(),
@@ -117,81 +139,97 @@ class MenuEntryTest extends \PHPUnit\Framework\TestCase {
         ]);
 
         $menuEntry->addChildren(
-                [
+            [
                     $this->constructMenuEntryWithoutChildren()
                 ]
         );
         $this->assertCount(4, $menuEntry->getChildren());
     }
 
-    public function testSetNewWindows() {
+    public function testSetNewWindows()
+    {
         $menuEntry = $this->constructMenuEntryWithoutChildren();
         $menuEntry->setNewWindow(false);
         $this->assertFalse($menuEntry->getNewWindow());
     }
 
-    public function testUserHasPermissionReturnsTrueWithPermission() {
+    public function testUserHasPermissionReturnsTrueWithPermission()
+    {
         $menuEntry = $this->constructMenuEntryWithoutChildren();
 
         $this->permittedUser->registerSession(false);
         $this->assertTrue($menuEntry->userHasPermission());
     }
-    
-    
-    public function testUserHasPermissionReturnsTrueWithoutPermissions() {
+
+    public function testUserHasPermissionReturnsTrueWithoutPermissions()
+    {
         $menuEntry = $this->constructMenuEntryWithoutChildren();
 
         $this->permittedUser->registerSession(false);
         $menuEntry->setPermissions(null);
         $this->assertTrue($menuEntry->userHasPermission());
     }
-    
-    public function testUserHasPermissionReturnsFalse() {
+
+    public function testUserHasPermissionReturnsFalse()
+    {
         $menuEntry = $this->constructMenuEntryWithoutChildren();
 
         $menuEntry->setPermissions("foobar");
         $this->notPermittedUser->registerSession(false);
         $this->assertFalse($menuEntry->userHasPermission());
-        
     }
 
-    public function testRender() {
+    public function testRender()
+    {
         $menuEntry = $this->constructMenuEntryWithoutChildren();
         $menuEntry->setNewWindow(false);
 
         $inputExpected = file_get_contents(
-                Path::resolve(
-                        "ULICMS_ROOT/tests/fixtures/menu/menu_entry/render.html"
-                )
+            Path::resolve(
+                "ULICMS_ROOT/tests/fixtures/menu/menu_entry/render.html"
+            )
         );
         $this->assertEquals($inputExpected, $menuEntry->render());
     }
 
-    public function testRenderWithNewWindow() {
+    public function testRenderWithNewWindow()
+    {
         $menuEntry = $this->constructMenuEntryWithoutChildren();
         $menuEntry->setNewWindow(true);
 
 
         $inputExpected = file_get_contents(
-                Path::resolve(
-                        "ULICMS_ROOT/tests/fixtures/menu/menu_entry/render_with_new_window.html"
-                )
+            Path::resolve(
+                "ULICMS_ROOT/tests/fixtures/menu/menu_entry/render_with_new_window.html"
+            )
         );
         $this->assertEquals($inputExpected, $menuEntry->render());
     }
 
-    public function testRenderWithCurrentPage() {
+    public function testRenderWithCurrentPage()
+    {
         $menuEntry = $this->constructMenuEntryWithoutChildren();
         $menuEntry->setNewWindow(false);
 
         BackendHelper::setAction("say_hello");
 
         $inputExpected = file_get_contents(
-                Path::resolve(
-                        "ULICMS_ROOT/tests/fixtures/menu/menu_entry/render_current_page.html"
-                )
+            Path::resolve(
+                "ULICMS_ROOT/tests/fixtures/menu/menu_entry/render_current_page.html"
+            )
         );
         $this->assertEquals($inputExpected, $menuEntry->render());
     }
 
+    public function testSetIsAjax()
+    {
+        $menuEntry = $this->constructMenuEntryWithoutChildren();
+        $this->assertFalse($menuEntry->getIsAjax());
+
+        $menuEntry->setIsAjax(true);
+        $this->assertTrue($menuEntry->getIsAjax());
+
+        $menuEntry->setIsAjax(false);
+        $this->assertFalse($menuEntry->getIsAjax());
+    }
 }

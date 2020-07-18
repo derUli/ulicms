@@ -17,21 +17,15 @@ CKEDITOR.editorConfig = function (config) {
     config.height = '300px';
     config.image_prefillDimensions = false;
 
-    // kcfinder file uploader
+    // responsive filemanager
     if (window.location.href.indexOf("admin/") !== -1) {
-        config.filebrowserBrowseUrl = 'kcfinder/browse.php?type=files';
-        config.filebrowserImageBrowseUrl = 'kcfinder/browse.php?type=images';
-        config.filebrowserFlashBrowseUrl = 'kcfinder/browse.php?type=flash';
-        config.filebrowserUploadUrl = 'kcfinder/upload.php?type=files';
-        config.filebrowserImageUploadUrl = 'kcfinder/upload.php?type=images';
-        config.filebrowserFlashUploadUrl = 'kcfinder/upload.php?type=flash';
+        config.filebrowserBrowseUrl = 'fm/dialog.php?type=2&editor=ckeditor&fldr=files';
+        config.filebrowserImageBrowseUrl = 'fm/dialog.php?type=1&editor=ckeditor&fldr=images';
+        config.filebrowserFlashBrowseUrl = 'fm/dialog.php?type=2&editor=ckeditor&fldr=flash';
     } else {
-        config.filebrowserBrowseUrl = 'admin/kcfinder/browse.php?type=files';
-        config.filebrowserImageBrowseUrl = 'admin/kcfinder/browse.php?type=images';
-        config.filebrowserFlashBrowseUrl = 'admin/kcfinder/browse.php?type=flash';
-        config.filebrowserUploadUrl = 'admin/kcfinder/upload.php?type=files';
-        config.filebrowserImageUploadUrl = 'admin/kcfinder/upload.php?type=images';
-        config.filebrowserFlashUploadUrl = 'admin/kcfinder/upload.php?type=flash';
+        config.filebrowserBrowseUrl = 'admin/fm/dialog.php?type=2&editor=ckeditor&fldr=files';
+        config.filebrowserImageBrowseUrl = 'admin/fm/dialog.php?type=1&editor=ckeditor&fldr=images';
+        config.filebrowserFlashBrowseUrl = 'admin/fm/dialog.php?type=2&editor=ckeditor&fldr=flash';
     }
     config.entities_latin = false;
     config.uiColor = '#d1d8d0';

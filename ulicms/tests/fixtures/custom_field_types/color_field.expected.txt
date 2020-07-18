@@ -1,6 +1,0 @@
-<div class="custom-field field" 
- data-field-name="my_field">
-<strong class="field-label">Design </strong>
-<input type="text" 
- name="my_field" value="FFC0CB" class="jscolor {hash:true,caps:true}" />
-</div>

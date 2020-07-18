@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 // This class contains methods to manipulate CustomFields
 // defined by modules
-class CustomFields {
-
+class CustomFields
+{
     public static function set(
-            string $name,
-            $value,
-            ?int $content_id = null,
-            $addPrefix = false
+        string $name,
+        $value,
+        ?int $content_id = null,
+        $addPrefix = false
     ): ?bool {
         if (is_null($content_id)) {
             $content_id = get_ID();
@@ -22,9 +22,9 @@ class CustomFields {
         // use two nullbytes as seperator for arrays
         if (is_array($value)) {
             $value = join("\0\0", $value);
-        } else if (is_bool($value)) {
+        } elseif (is_bool($value)) {
             $value = strval(intval($value));
-        } else if (!is_null($value)) {
+        } elseif (!is_null($value)) {
             $value = strval($value);
         }
 
@@ -55,7 +55,7 @@ class CustomFields {
                         . "where name = ? and content_id = ?";
                 return Database::pQuery($sql, $args, true);
             }
-        } else if (!is_null($value)) {
+        } elseif (!is_null($value)) {
             $args = array(
                 $content_id,
                 $name,
@@ -69,8 +69,8 @@ class CustomFields {
     }
 
     public static function getAll(
-            ?int $content_id = null,
-            bool $removePrefix = true
+        ?int $content_id = null,
+        bool $removePrefix = true
     ): array {
         $fields = [];
         if (is_null($content_id)) {
@@ -87,30 +87,34 @@ class CustomFields {
 
         while ($row = Database::fetchObject($result)) {
             $name = $row->name;
-
+            $value = $row->value;
             if ($removePrefix) {
                 $page = ContentFactory::getByID($content_id);
                 $prefix = "{$page->type}_";
                 $name = remove_prefix($name, $prefix);
             }
-            $fields[$name] = $row->value;
+
+            $fields[$name] = $value;
         }
         return $fields;
     }
 
     public static function get(
-            string $name,
-            ?int $content_id = null,
-            $addPrefix = true
+        string $name,
+        ?int $content_id = null,
+        $addPrefix = true
     ) {
         if (is_null($content_id)) {
             $content_id = get_ID();
         }
+
+        $content_id = intval($content_id);
+        $page = ContentFactory::getByID($content_id);
+
         if ($addPrefix) {
-            $page = ContentFactory::getByID($content_id);
             $name = "{$page->type}_{$name}";
         }
-        $content_id = intval($content_id);
+
         $args = array(
             $content_id,
             $name
@@ -123,12 +127,11 @@ class CustomFields {
             $value = $dataset->value;
             // if string contains double null bytes it is an array
             // FIXME: Use new boolean "array" Attribute
-            if (str_contains("\0\0", $value)) {
+            if (str_contains($value, "\0\0")) {
                 $value = explode("\0\0", $value);
             }
             return $value;
         }
         return null;
     }
-
 }

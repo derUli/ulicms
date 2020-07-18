@@ -2,20 +2,29 @@
 
 declare(strict_types=1);
 
+use UliCMS\Exceptions\DatasetNotFoundException;
 use UliCMS\Constants\AuditLog;
 use UliCMS\Models\Content\Advertisement\Banner;
 use UliCMS\Utils\CacheUtil;
 
-class BannerController extends Controller {
-
+class BannerController extends Controller
+{
     private $logger;
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         $this->logger = LoggerRegistry::get("audit_log");
     }
 
-    public function createPost(): void {
+    public function createPost(): void
+    {
+        $this->_createPost();
+        Request::redirect(ModuleHelper::buildActionURL("banner"));
+    }
+
+    public function _createPost(): Banner
+    {
         do_event("before_create_banner");
 
         $banner = new Banner();
@@ -44,14 +53,22 @@ class BannerController extends Controller {
         do_event("after_create_banner");
 
         CacheUtil::clearPageCache();
+        return $banner;
+    }
+
+    public function updatePost(): void
+    {
+        $this->_updatePost();
 
         Request::redirect(ModuleHelper::buildActionURL("banner"));
     }
 
-    public function updatePost(): void {
+    public function _updatePost(): Banner
+    {
+        $id = intval($_POST["id"]);
+
         do_event("before_edit_banner");
 
-        $id = intval($_POST["id"]);
         $banner = new Banner($id);
         $banner->setName(strval($_POST["banner_name"]));
         $banner->setImageUrl(strval($_POST["image_url"]));
@@ -80,12 +97,26 @@ class BannerController extends Controller {
 
         CacheUtil::clearPageCache();
 
+        return $banner;
+    }
+
+    public function deletePost(): void
+    {
+        $id = Request::getVat("banner", 0, "int");
+
+        $this->_deletePost($id);
+        // Todo: handle errors
         Request::redirect(ModuleHelper::buildActionURL("banner"));
     }
 
-    public function deletePost(): void {
-        $id = intval($_GET["banner"]);
-        $banner = new Banner($id);
+    public function _deletePost(int $id): bool
+    {
+        try {
+            $banner = new Banner($id);
+        } catch (DatasetNotFoundException $e) {
+            return false;
+        }
+
         do_event("before_banner_delete");
         $banner->delete();
 
@@ -100,7 +131,6 @@ class BannerController extends Controller {
 
         CacheUtil::clearPageCache();
 
-        Request::redirect(ModuleHelper::buildActionURL("banner"));
+        return !$banner->isPersistent();
     }
-
 }

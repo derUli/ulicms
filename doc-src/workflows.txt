@@ -1,11 +1,11 @@
 Berechtigungen für Workflows:
 
-pages_activate_own:
+pages_approve_own:
 - Wenn der User dieses Recht hat, darf er seine eigenen Seiten aktivieren
 - Ansonsten ist das Feld "Aktiviert" deaktiviert und beim Anlegen
 einer neuen Seite per default auf "deaktiviert".
 
-pages_activate_others:
+pages_approve_others:
 - Wenn der User dieses Recht hat, darf er seine eigenen Seiten und die Seiten
 anderer Autoren aktivieren und bearbeiten
 

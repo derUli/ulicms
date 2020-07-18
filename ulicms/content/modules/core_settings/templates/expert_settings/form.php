@@ -9,18 +9,19 @@ if ($permissionChecker->hasPermission("expert_settings") and $permissionChecker-
         if (is_null($value)) {
             Request::javascriptRedirect(ModuleHelper::buildActionURL("settings"));
         }
-    }
-    ?>
+    } ?>
     <?php echo ModuleHelper::buildMethodCallForm("ExpertSettingsController", "save"); ?>
     <a href="<?php echo ModuleHelper::buildActionURL("other_settings"); ?>"
-       class="btn btn-default btn-back">
+       class="btn btn-default btn-back is-not-ajax">
         <i class="fa fa-arrow-left"></i>
         <?php translate("back") ?>
     </a>
     <div class="field">
         <strong><?php translate("option"); ?></strong>
         <input type="text" name="name" value="<?php esc($name) ?>"
-        <?php if ($name) echo "readonly"; ?>
+        <?php if ($name) {
+        echo "readonly";
+    } ?>
                >
     </div>
     <div class="field">

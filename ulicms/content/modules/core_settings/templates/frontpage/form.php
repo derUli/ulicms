@@ -11,11 +11,10 @@ if ($permissionChecker->hasPermission("settings_simple")) {
         if (!$frontpages[$lang]) {
             $frontpages[$lang] = Settings::get("frontpage");
         }
-    }
-    ?>
+    } ?>
     <p>
         <a href="<?php echo ModuleHelper::buildActionURL("settings_simple"); ?>"
-           class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
+           class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
     </p>
     <h1>
         <?php translate("frontpage"); ?>
@@ -23,8 +22,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
     <?php
     echo ModuleHelper::buildMethodCallForm("FrontPageSettingsController", "save", [], "post", array(
         "id" => "frontpage_settings"
-    ));
-    ?>
+    )); ?>
     <table>
         <tr>
             <td><strong><?php translate("language"); ?>
@@ -34,33 +32,29 @@ if ($permissionChecker->hasPermission("settings_simple")) {
         </tr>
         <?php
         for ($n = 0; $n < count($languages); $n ++) {
-            $lang = $languages[$n];
-            ?>
+            $lang = $languages[$n]; ?>
             <tr>
                 <td>
                     <?php esc(getLanguageNameByCode($lang)); ?>
                 </td>
                 <td><select
                         name = "frontpage_<?php
-                        esc($lang);
-                        ?>"
+                        esc($lang); ?>"
                         size = "1">
                             <?php
                             $pages = getAllPages($lang, "title", true);
 
-                            for ($i = 0; $i < count($pages); $i ++) {
-                                if ($pages[$i]["slug"] == $frontpages[$lang]) {
-                                    echo "<option value='" . _esc($pages[$i]["slug"]) . "' selected='selected'>" . _esc($pages[$i]["title"]) . " (ID: " . $pages[$i]["id"] . ")</option>";
-                                } else {
-                                    echo "<option value='" . _esc($pages[$i]["slug"]) . "'>" . _esc($pages[$i]["title"]) . " (ID: " . $pages[$i]["id"] . ")</option>";
-                                }
-                            }
-                            ?>
+            for ($i = 0; $i < count($pages); $i ++) {
+                if ($pages[$i]["slug"] == $frontpages[$lang]) {
+                    echo "<option value='" . _esc($pages[$i]["slug"]) . "' selected='selected'>" . _esc($pages[$i]["title"]) . " (ID: " . $pages[$i]["id"] . ")</option>";
+                } else {
+                    echo "<option value='" . _esc($pages[$i]["slug"]) . "'>" . _esc($pages[$i]["title"]) . " (ID: " . $pages[$i]["id"] . ")</option>";
+                }
+            } ?>
                     </select></td>
             </tr>
             <?php
-        }
-        ?>
+        } ?>
         <tr>
             <td></td>
             <td class="text-center">

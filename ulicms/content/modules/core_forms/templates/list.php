@@ -3,14 +3,16 @@ $permissionChecker = new ACL();
 if (!$permissionChecker->hasPermission("forms")) {
     noPerms();
 } else {
-    $forms = Forms::getAllForms();
-    ?>
+    $forms = Forms::getAllForms(); ?>
     <?php echo Template::executeModuleTemplate("core_content", "icons.php"); ?>
 
     <h1><?php translate("forms"); ?></h1>
     <?php if ($permissionChecker->hasPermission("forms_create")) { ?>
         <p>
-            <a href="index.php?action=forms_new" class="btn btn-default"><i
+            <a
+                href="index.php?action=forms_new"
+                class="btn btn-default is-ajax"
+                ><i
                     class="fa fa-plus"></i> <?php translate("create_form"); ?></a>
         </p>
     <?php } ?>
@@ -34,8 +36,7 @@ if (!$permissionChecker->hasPermission("forms")) {
             <tbody>
                 <?php
                 foreach ($forms as $form) {
-                    $submit_form_url = "?submit-cms-form=" . $form["id"];
-                    ?>
+                    $submit_form_url = "?submit-cms-form=" . $form["id"]; ?>
                     <tr id="dataset-<?php echo $form["id"]; ?>">
                         <td><?php echo $form["id"]; ?></td>
                         <td><?php esc($form["name"]); ?></td>
@@ -48,31 +49,33 @@ if (!$permissionChecker->hasPermission("forms")) {
 
                         <?php
                         if ($permissionChecker->hasPermission(
-                                        "forms_edit")
+                        "forms_edit"
+                    )
                         ) {
                             ?>
                             <td class="text-center">
                                 <a
                                     href="?action=forms_edit&id=<?php
-                                    echo $form["id"];
-                                    ?>"><img src="gfx/edit.png" class="mobile-big-image"
+                                    echo $form["id"]; ?>" class="is-ajax"
+                                    ><img src="gfx/edit.png" class="mobile-big-image"
                                        alt="<?php translate("edit"); ?>"
                                        title="<?php translate("edit"); ?>"></a>
                             </td>
                             <td class="text-center">
                                 <?php
                                 echo ModuleHelper::deleteButton(
-                                        ModuleHelper::buildMethodCallUrl(
-                                                "FormController",
-                                                "delete"
-                                        ),
-                                        ["del" => $form ["id"]]
-                                );
-                                ?>
+                                ModuleHelper::buildMethodCallUrl(
+                                    "FormController",
+                                    "delete"
+                                ),
+                                ["del" => $form ["id"]]
+                            ); ?>
                             </td>
-                        <?php } ?>
+                        <?php
+                        } ?>
                     </tr>
-                <?php } ?>
+                <?php
+                } ?>
             </tbody>
         </table>
     </div>

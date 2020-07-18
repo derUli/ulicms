@@ -1,6 +1,7 @@
 /* global Translation, bootbox */
 
 $(() => {
+    // init filters
     if (localStorage.getItem('pageFilters') === null) {
         localStorage.setItem(
                 'pageFilters',
@@ -20,7 +21,7 @@ $(() => {
         });
     });
 
-    // "Show Filters switch
+    // "Show Filters" switch
     $("#show_filters").change((event) => {
         const url = $(event.target).data("url");
         const isChecked = $(event.target).is(':checked');
@@ -42,8 +43,7 @@ $(() => {
     loadParentPages().then(() => {
         loadFiltersFromlocalStorage();
         bindSelectOnChange();
-    }
-    );
+    });
 });
 
 const bindSelectOnChange = () => {
@@ -52,9 +52,9 @@ const bindSelectOnChange = () => {
         const target = event.target;
         const dataTable = $(".tablesorter").DataTable();
         dataTable.ajax.reload();
-        
+
         dataTable.page(1);
-        
+
         localStorage.setItem(
                 'pageFilters',
                 JSON.stringify(buildFiltersObject())

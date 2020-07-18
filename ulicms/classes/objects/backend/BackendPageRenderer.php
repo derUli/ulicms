@@ -4,61 +4,86 @@ declare(strict_types=1);
 
 namespace UliCMS\Backend;
 
+use UliCMS\Backend\Utils\BrowserCompatiblityChecker;
+use Template;
+use Vars;
+use Request;
 use StringHelper;
 use ActionRegistry;
 use Settings;
 use zz\Html\HTMLMinify;
 use UliCMS\Security\PermissionChecker;
+use UliCMS\HTML\Alert;
 
 // This class renders a backend page
 // if you set a model from a model
 // you can get it with this code in your template
 // $model = BackendPageRenderer::getModel();
-class BackendPageRenderer {
-
+class BackendPageRenderer
+{
     private $action;
     private static $model;
 
-    public function __construct($action, $model = null) {
+    public function __construct($action, $model = null)
+    {
         $this->action = $action;
 
         self::$model = $model;
     }
 
-    public function getAction(): string {
+    public function getAction(): string
+    {
         return $this->action;
     }
 
-    public function setAction(string $action): void {
+    public function setAction(string $action): void
+    {
         $this->action = $action;
     }
 
-    public static function getModel() {
+    public static function getModel()
+    {
         return self::$model;
     }
 
-    public static function setModel($model): void {
+    public static function setModel($model): void
+    {
         self::$model = $model;
     }
 
     // renders a backend page, outputs it and do events
-    public function render(): void {
+    public function render(): void
+    {
         if (Settings::get("minify_html")) {
             ob_start();
         }
 
-        require "inc/header.php";
+        $onlyContent = boolval(
+            Request::getVar("only_content", false, 'bool')
+        );
 
-        if (!is_logged_in()) {
-            $this->handleNotLoggedIn();
-        } else {
-            $this->handleLoggedIn();
+        if (!$onlyContent) {
+            require "inc/header.php";
         }
 
-        do_event("admin_footer");
+        $isCompatible = true;
+        if (Request::getUserAgent()) {
+            $checker = new BrowserCompatiblityChecker(Request::getUserAgent());
+            $isCompatible = $checker->isCompatible();
+        }
 
-        require_once "inc/footer.php";
+        if (!$isCompatible) {
+            $this->showUnsupportedBrowser($checker);
+        } elseif (!is_logged_in()) {
+            $this->handleNotLoggedIn($onlyContent);
+        } else {
+            $this->handleLoggedIn($onlyContent);
+        }
 
+        if (!$onlyContent) {
+            do_event("admin_footer");
+            require_once "inc/footer.php";
+        }
         if (Settings::get("minify_html")) {
             $this->outputMinified();
         }
@@ -67,19 +92,37 @@ class BackendPageRenderer {
         exit();
     }
 
+    public function showUnsupportedBrowser($checker)
+    {
+        $message = nl2br(
+            get_secure_translation(
+                "unsupported_browser",
+                [
+                            "%browser%" => $checker->getUnsupportedBrowserName()
+                        ]
+            )
+        );
+        $message = make_links_clickable($message);
+
+        echo Alert::danger($message, "", true);
+    }
+
     // this method handles access to the features that are
     // accesible for non authenticated users
-    protected function handleNotLoggedIn(): void {
-
+    protected function handleNotLoggedIn(bool $onlyContent = false): void
+    {
         ActionRegistry::loadModuleActions();
         $actions = ActionRegistry::getActions();
 
         if ($this->getAction()) {
             $action_permission = ActionRegistry::getActionPermission(
-                            $this->getAction()
+                $this->getAction()
             );
             if ($action_permission and $action_permission === "*") {
-                require_once $actions[$this->getAction()];
+                Vars::set("action_filename", $actions[$this->getAction()]);
+                echo Template::executeDefaultOrOwnTemplate(
+                    "backend/container.php"
+                );
             }
         }
 
@@ -87,7 +130,7 @@ class BackendPageRenderer {
             do_event("before_register_form");
             require_once "inc/registerform.php";
             do_event("after_register_form");
-        } else if (isset($_GET["reset_password"])) {
+        } elseif (isset($_GET["reset_password"])) {
             do_event("before_reset_password_form");
             require_once "inc/reset_password.php";
             do_event("before_after_password_form");
@@ -98,11 +141,14 @@ class BackendPageRenderer {
         }
     }
 
-// this method handles all actions by authenticated users
-    protected function handleLoggedIn(): void {
+    // this method handles all actions by authenticated users
+    protected function handleLoggedIn(bool $onlyContent = false): void
+    {
         $permissionChecker = new PermissionChecker(get_user_id());
 
-        require_once "inc/adminmenu.php";
+        if (!$onlyContent) {
+            require_once "inc/adminmenu.php";
+        }
 
         ActionRegistry::loadModuleActions();
         $actions = ActionRegistry::getActions();
@@ -111,16 +157,19 @@ class BackendPageRenderer {
 
         if ($_SESSION["require_password_change"]) {
             require_once "inc/change_password.php";
-        } else if (isset($actions[$this->getAction()])) {
+        } elseif (isset($actions[$this->getAction()])) {
             $requiredPermission = ActionRegistry::getActionPermission(
-                            $this->getAction()
+                $this->getAction()
             );
             if (!$requiredPermission
                     or (
                     $requiredPermission
                     and $permissionChecker->hasPermission($requiredPermission))
             ) {
-                require_once $actions[$this->getAction()];
+                Vars::set("action_filename", $actions[$this->getAction()]);
+                echo Template::executeDefaultOrOwnTemplate(
+                    "backend/container.php"
+                );
             } else {
                 noPerms();
             }
@@ -130,7 +179,8 @@ class BackendPageRenderer {
     }
 
     // minify html output
-    protected function outputMinified(): void {
+    public function outputMinified(): void
+    {
         $generatedHtml = ob_get_clean();
         $options = array(
             'optimizationLevel' => HTMLMinify::OPTIMIZATION_ADVANCED
@@ -138,17 +188,17 @@ class BackendPageRenderer {
         $HTMLMinify = new HTMLMinify($generatedHtml, $options);
         $generatedHtml = $HTMLMinify->process();
         $generatedHtml = StringHelper::removeEmptyLinesFromString(
-                        $generatedHtml
+            $generatedHtml
         );
 
         echo $generatedHtml;
     }
 
     // run cron events of modules
-    protected function doCronEvents(): void {
+    public function doCronEvents(): void
+    {
         do_event("before_admin_cron");
         do_event("admin_cron");
         do_event("after_admin_cron");
     }
-
 }

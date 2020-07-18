@@ -19,7 +19,7 @@ if (isset($_REQUEST["sort"]) and faster_in_array($_REQUEST["sort"], array(
 
 <?php if ($permissionChecker->hasPermission("groups_create")) { ?>
     <div class="btn-toolbar field">
-        <a href="?action=groups&add=add" class="btn btn-default"> <i
+        <a href="?action=groups&add=add" class="btn btn-default is-not-ajax"> <i
                 class="fa fa-plus"></i> <?php translate("create_group"); ?></a>
     </div>
 <?php } ?>
@@ -57,12 +57,10 @@ if (count($groups) > 0) {
                                 } else {
                                     ?> <a
                                         href="?action=groups&standard=<?php
-                                        echo $id;
-                                        ?>"><span style="color: red; font-weight: bold;"
+                                        echo $id; ?>"><span style="color: red; font-weight: bold;"
                                             onclick='return confirm("<?php
-                                            echo str_ireplace("%name%", $name, get_translation("make_group_default"));
-                                            ?>")'><?php translate("no"); ?> </span> </a> <?php
-                                    }
+                                            echo str_ireplace("%name%", $name, get_translation("make_group_default")); ?>")'><?php translate("no"); ?> </span> </a> <?php
+                                }
                                     ?>
                             </td>
                             <td><a
@@ -97,8 +95,7 @@ if (count($groups) > 0) {
 
 
                     <?php
-                }
-                ?>
+                } ?>
 
             </tbody>
         </table>
