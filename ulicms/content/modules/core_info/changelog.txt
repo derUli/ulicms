@@ -1,4 +1,4 @@
-===== Neues in UliCMS 2020.2.4 =====
+===== Neues in UliCMS 2020.3 =====
 
 Neue Filter:
 * admin_head_scripts
