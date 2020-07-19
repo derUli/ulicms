@@ -28,7 +28,7 @@ class VersionComparisonsTest extends \PHPUnit\Framework\TestCase
     public function testIsGreaterReturnsTrue()
     {
         $this->assertTrue(isGreater("1.1", "1.0"));
-        $this->assertTrue(isGreater("2020.2.4", "2020.2"));
+        $this->assertTrue(isGreater("2020.3", "2020.2"));
         $this->assertTrue(isGreater("2", "1.0.0"));
     }
 
@@ -43,7 +43,7 @@ class VersionComparisonsTest extends \PHPUnit\Framework\TestCase
     public function testIsLesserReturnsTrue()
     {
         $this->assertTrue(isLesser("1.0", "1.1"));
-        $this->assertTrue(isLesser("2020.2", "2020.2.4", ));
+        $this->assertTrue(isLesser("2020.2", "2020.3", ));
         $this->assertTrue(isLesser("1.0.0", "2"));
     }
 
