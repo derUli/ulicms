@@ -1,28 +1,33 @@
 ===== Neues in UliCMS 2020.3 =====
 
-Neue Filter:
-* admin_head_scripts
-* admin_head_styles
-
-Sonstige Änderungen:
-* database:* Robotasks in db:* umbenannt.
-
-Entfernte API-Methoden:
-* NumberFormatHelper::timestampToHtml5Datetime(?int $timestamp = null): string
-
-===== Neues in UliCMS 2020.2.3 =====
-
 Neue Features:
-* Neue database Robo Tasks
+* Shortcodes von Modulen werden automatisch in die Zwischenablage kopiert
+* Seitenfilter Feature aktiviert
+* Neuer Dateimanager: RESPONSIVE filemanager
+* Neue Robo Tasks hinzugefügt
+* Vorausgewähltes Menü und vorausgewählter Inhaltstyp konfigurierbar
+* Doppelte Slugs werden nun verhindert
+* Neuer CustomField-Typ "UrlField"
+* Performance-Verbesserungen durchgeführt
+* Meldung bei nicht unterstützten Browsern
 * Rechtliche Hinweise hinzugefügt
 * Icons zur Seitenverwaltung hinzugefügt
 
-API-Änderungen:
+Neue API-methoden:
+* is_version_number(string? $input): bool
+* ArrayHelper::hasMultipleKeys(?array $input, array $keys): bool
+* UliCMS\HTML\_nbsp(string $text = " "): string
+* UliCMS\HTML\nbsp(string $text = " "): void
 * str_contains() empfängt nun Parameter in vertauschter Reihenfolge
 * $user->getLocked() umbenannt in $user->isLocked()
 * $user->getAdmin() umbenannt in $user->isAdmin()
 
+Neue Filter:
+* admin_head_scripts
+* admin_head_styles
+
 Entfernte API-Methoden:
+* NumberFormatHelper::timestampToHtml5Datetime(?int $timestamp = null): string
 * \isNullOrEmpty($variable): bool
 * \isNotNullOrEmpty($variable): bool
 * \add_hook(string $name, string $runs = ModuleEventConstants::RUNS_ONCE): void
@@ -30,32 +35,9 @@ Entfernte API-Methoden:
 * \get_combined_script_html(): string
 * \get_combined_stylesheet_html(): string
 
-===== Neues in UliCMS 2020.2.2 =====
-
-Neue Features:
-* Neuer Dateimanager: RESPONSIVE filemanager
-* Neue Robo Tasks zur Verwaltung von Modulen
-* Vorausgewähltes Menü und vorausgewählter Inhaltstyp konfigurierbar
-* Doppelte Slugs werden nun verhindert
-* Neuer CustomField-Typ "UrlField"
-* Performance-Verbesserungen durchgeführt
-* Meldung bei nicht unterstützten Browsern
-
-Neue API-methoden
-* is_version_number(string? $input): bool
-* ArrayHelper::hasMultipleKeys(?array $input, array $keys): bool
-* UliCMS\HTML\_nbsp(string $text = " "): string
-* UliCMS\HTML\nbsp(string $text = " "): void
-
 Fehlerkorrekturen:
 * Freigabe-Workflows für Seiten repariert
 * "Nachricht des Tages" wurde nicht korrekt gespeichert
-
-===== Neues in UliCMS 2020.2.1 =====
-
-Neue Features:
-* Shortcodes von Modulen werden automatisch in die Zwischenablage kopiert
-* Seitenfilter Feature aktiviert (experimentiell)
 
 ===== Neues in UliCMS 2020.2 =====
 
