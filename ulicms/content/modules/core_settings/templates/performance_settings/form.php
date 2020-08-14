@@ -2,6 +2,18 @@
 
 use UliCMS\Security\PermissionChecker;
 use UliCMS\Constants\RequestMethod;
+use UliCMS\HTML\Input;
+use UliCMS\HTML\ListItem;
+
+$lazy_loading = [];
+
+if (Settings::get('lazy_loading_img', 'bool')) {
+    $lazy_loading[] = 'img';
+}
+
+if (Settings::get('lazy_loading_iframe', 'bool')) {
+    $lazy_loading[] = 'iframe';
+}
 
 $permissionChecker = new PermissionChecker(get_user_id());
 
@@ -9,7 +21,8 @@ if (!$permissionChecker->hasPermission("performance_settings")) {
     noPerms();
 } else {
     $cache_enabled = !Settings::get("cache_disabled");
-    $cache_period = round(Settings::get("cache_period") / 60); ?>
+    $cache_period = round(Settings::get("cache_period") / 60);
+    ?>
     <?php
     if (Request::getVar("clear_cache")) {
         ?>
@@ -17,8 +30,8 @@ if (!$permissionChecker->hasPermission("performance_settings")) {
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
             <?php translate("cache_was_cleared"); ?>
         </div>
-    <?php
-    } ?>
+    <?php }
+    ?>
     <?php
     if (Request::getVar("save")) {
         ?>
@@ -27,23 +40,25 @@ if (!$permissionChecker->hasPermission("performance_settings")) {
                 &times;</a>
             <?php translate("changes_was_saved"); ?>
         </div>
-    <?php
-    } ?>
+    <?php }
+    ?>
 
     <a
         href="<?php
         echo ModuleHelper::buildActionURL(
-            "settings_categories"
-        ); ?>"
+                "settings_categories"
+        );
+        ?>"
         class="btn btn-default btn-back is-not-ajax">
         <i class="fas fa-arrow-left"></i>
         <?php translate("back") ?></a>
     <a
         href="<?php
         echo ModuleHelper::buildMethodCallUrl(
-            "PerformanceSettingsController",
-            "clearCache"
-        ); ?>"
+                "PerformanceSettingsController",
+                "clearCache"
+        );
+        ?>"
         class="btn btn-warning pull-right">
         <i class="fas fa-broom"></i>
         <?php translate("clear_cache"); ?></a>
@@ -51,14 +66,15 @@ if (!$permissionChecker->hasPermission("performance_settings")) {
     <h2><?php translate("performance"); ?></h2>
     <?php
     echo ModuleHelper::buildMethodCallForm(
-                    "PerformanceSettingsController",
-                    "save",
-                    [],
-                    RequestMethod::POST,
-                    [
+            "PerformanceSettingsController",
+            "save",
+            [],
+            RequestMethod::POST,
+            [
                 "id" => "form"
             ]
-                ); ?>
+    );
+    ?>
     <h3><?php translate("page_cache"); ?></h3>
     <div class="field">
         <div class="label">
@@ -73,39 +89,62 @@ if (!$permissionChecker->hasPermission("performance_settings")) {
                    <?php
                    if ($cache_enabled) {
                        echo " checked=\"checked\"";
-                   } ?>>
+                   }
+                   ?>>
         </div>
     </div>
     <div class="field">
         <div class="label">
-            <?php
-            translate("CACHE_VALIDATION_DURATION"); ?>
+            <?php translate("CACHE_VALIDATION_DURATION"); ?>
         </div>
         <div class="inputWrapper">
             <input type="number" name="cache_period" min="0" max="20160"
-                   value="<?php
-                   echo $cache_period; ?>">
+                   value="<?php echo $cache_period; ?>">
                    <?php translate("minutes"); ?>
         </div>
     </div>
-    <div class="voffset2">
-        <button type="submit" name="submit" class="btn btn-primary">
-            <i class="fa fa-save"></i>
-            <?php translate("save_changes"); ?>
-        </button>
-    </div>
-    <?php
-    echo ModuleHelper::endForm();
+    <div class="field">
+        <div class="label">
+            <?php translate('lazy_loading') ?>
 
-    $translation = new JSTranslation();
-    $translation->addKey("changes_was_saved");
-    $translation->render();
+            <div class="inputWrapper">
+                <?php
+                echo Input::multiSelect(
+                        "lazy_loading[]",
+                        $lazy_loading,
+                        [
+                            new ListItem(
+                                    'img',
+                                    get_translation('lazy_loading_img')
+                            ),
+                            new ListItem(
+                                    'iframe',
+                                    get_translation('lazy_loading_iframe')
+                            ),
+                        ],
+                        1
+                );
+                ?>
+            </div>
+        </div>
+        <div class="voffset2">
+            <button type="submit" name="submit" class="btn btn-primary">
+                <i class="fa fa-save"></i>
+                <?php translate("save_changes"); ?>
+            </button>
+        </div>
+        <?php
+        echo ModuleHelper::endForm();
 
-    enqueueScriptFile(
-        ModuleHelper::buildRessourcePath(
-            "core_settings",
-            "js/performance.js"
-        )
-    );
-    combinedScriptHtml();
-}
+        $translation = new JSTranslation();
+        $translation->addKey("changes_was_saved");
+        $translation->render();
+
+        enqueueScriptFile(
+                ModuleHelper::buildRessourcePath(
+                        "core_settings",
+                        "js/performance.js"
+                )
+        );
+        combinedScriptHtml();
+    }

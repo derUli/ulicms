@@ -49,3 +49,7 @@ add_translation("not_found", "Not Found");
 add_translation("make_default", "Make Default");
 
 add_translation("no_html_allowed", "String must not contain HTML.");
+
+add_translation("lazy_loading", "Lazy Loading");
+add_translation("lazy_loading_img", "Images");
+add_translation("lazy_loading_iframe", "IFrames");

@@ -47,3 +47,7 @@ add_translation("not_found", "Nicht gefunden");
 add_translation("make_default", "Als Standard festlegen");
 
 add_translation("no_html_allowed", "HTML ist in der Zeichenkette nicht erlaubt");
+
+add_translation("lazy_loading", "Faules Laden");
+add_translation("lazy_loading_img", "Bilder");
+add_translation("lazy_loading_iframe", "iFrames");

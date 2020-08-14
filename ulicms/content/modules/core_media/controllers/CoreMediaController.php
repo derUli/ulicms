@@ -14,10 +14,11 @@ class CoreMediaController extends MainClass {
                         $data["disable_media_embed"]
         ));
 
+        $input = $mediaEmbedEnabled && !empty($input) ?
+                $this->_replaceLinks($input) : $input;
         $input = $this->_addLazyLoad($input);
 
-        return $mediaEmbedEnabled && !empty($input) ?
-                $this->_replaceLinks($input) : $input;
+        return $input;
     }
 
     protected function _addLazyload($input) {
