@@ -9,10 +9,9 @@ class CoreMediaController extends MainClass {
     public function beforeContentFilter(string $input): string {
         $data = CustomData::get();
 
-        $mediaEmbedEnabled = !($data and isset($data["disable_media_embed"]) and
-                is_true(
-                        $data["disable_media_embed"]
-        ));
+        $mediaEmbedEnabled = !($data and isset($data["disable_media_embed"]) &&
+                $data["disable_media_embed"]
+                );
 
         $input = $mediaEmbedEnabled && !empty($input) ?
                 $this->_replaceLinks($input) : $input;

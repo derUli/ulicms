@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\HTML\Link;
+use function UliCMS\HTML\imageTag;
 use Spatie\Snapshots\MatchesSnapshots;
 
 class CoreMediaControllerTest extends \PHPUnit\Framework\TestCase {
@@ -35,7 +36,21 @@ class CoreMediaControllerTest extends \PHPUnit\Framework\TestCase {
             return Link::link($url, $url);
         }, $urls);
 
-        return implode("\n", $links);
+        $html = implode("\n", $links);
+
+        $html .= imageTag(
+                "foo.jpg",
+                ["class" => "foo"]
+        );
+        $html .= imageTag(
+                "foo.jpg",
+                [
+                    "class" => "foo",
+                    "loading" => "auto"
+                ]
+        );
+
+        return $html;
     }
 
     public function testReplaceLinksWithEmpty() {
