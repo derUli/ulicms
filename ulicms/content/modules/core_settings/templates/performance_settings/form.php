@@ -76,93 +76,104 @@ if (!$permissionChecker->hasPermission("performance_settings")) {
             ]
     );
     ?>
-    <h3><?php translate("page_cache"); ?></h3>
-    <div class="field">
-        <div class="label">
-            <label for="cache_enabled">
-                <?php translate("cache_enabled"); ?>
-            </label>
-        </div>
-        <div class="inputWrapper">
-            <input type="checkbox" id="cache_enabled" name="cache_enabled"
-                   class="js-switch"
-                   value="cache_enabled"
-                   <?php
-                   if ($cache_enabled) {
-                       echo " checked=\"checked\"";
-                   }
-                   ?>>
-        </div>
-    </div>
-    <div class="field">
-        <div class="label">
-            <?php translate("CACHE_VALIDATION_DURATION"); ?>
-        </div>
-        <div class="inputWrapper">
-            <input type="number" name="cache_period" min="0" max="20160"
-                   value="<?php echo $cache_period; ?>">
-                   <?php translate("minutes"); ?>
-        </div>
-    </div>
-    <div class="field">
-        <div class="label">
-            <?php translate('lazy_loading') ?>
-
-            <div class="inputWrapper">
-                <?php
-                echo Input::multiSelect(
-                        "lazy_loading[]",
-                        $lazy_loading,
-                        [
-                            new ListItem(
-                                    'img',
-                                    get_translation('lazy_loading_img')
-                            ),
-                            new ListItem(
-                                    'iframe',
-                                    get_translation('lazy_loading_iframe')
-                            ),
-                        ],
-                        1
-                );
-                ?>
+    <div id="accordion-container">
+        <h2 class="accordion-header">
+            <?php translate("page_cache"); ?>
+        </h2>
+        <div class="accordion-content">
+            <div class="field">
+                <div class="label">
+                    <label for="cache_enabled">
+                        <?php translate("cache_enabled"); ?>
+                    </label>
+                </div>
+                <div class="inputWrapper">
+                    <input type="checkbox" id="cache_enabled" name="cache_enabled"
+                           class="js-switch"
+                           value="cache_enabled"
+                           <?php
+                           if ($cache_enabled) {
+                               echo " checked=\"checked\"";
+                           }
+                           ?>>
+                </div>
+            </div>
+            <div class="field">
+                <div class="label">
+                    <?php translate("CACHE_VALIDATION_DURATION"); ?>
+                </div>
+                <div class="inputWrapper">
+                    <input type="number" name="cache_period" min="0" max="20160"
+                           value="<?php echo $cache_period; ?>">
+                           <?php translate("minutes"); ?>
+                </div>
             </div>
         </div>
-        <div class="alert alert-info voffset2">
-            <p>
-                <?php translate("lazy_loading_help1"); ?>
-            </p>
-            <p>
-                <?php translate("lazy_loading_help2"); ?>
-                <br/>
+        <h2 class="accordion-header">
+            <?php translate("lazy_loading"); ?>
+        </h2>
+        <div class="accordion-content">
+            <div class="field">
+                <div class="label">
+                    <?php translate('lazy_loading') ?>
+                </div>
+                <div class="inputWrapper">
+                    <?php
+                    echo Input::multiSelect(
+                            "lazy_loading[]",
+                            $lazy_loading,
+                            [
+                                new ListItem(
+                                        'img',
+                                        get_translation('lazy_loading_img')
+                                ),
+                                new ListItem(
+                                        'iframe',
+                                        get_translation('lazy_loading_iframe')
+                                ),
+                            ],
+                            1
+                    );
+                    ?>
+                </div>
+                <div class="alert alert-info voffset2">
+                    <p>
+                        <?php translate("lazy_loading_help1"); ?>
+                    </p>
+                    <p>
+                        <?php translate("lazy_loading_help2"); ?>
+                        <br/>
 
-                <?php translate("lazy_loading_help3"); ?>
-                <br/>
-                <?php
-                echo StringHelper::makeLinksClickable(
-                        $canIuseLazyLoadingUrl
-                );
-                ?>
-            </p>
+                        <?php translate("lazy_loading_help3"); ?>
+                        <br/>
+                        <?php
+                        echo StringHelper::makeLinksClickable(
+                                $canIuseLazyLoadingUrl
+                        );
+                        ?>
+                    </p>
+                </div>
+            </div>
         </div>
-        <div class="voffset2">
-            <button type="submit" name="submit" class="btn btn-primary">
-                <i class="fa fa-save"></i>
-                <?php translate("save_changes"); ?>
-            </button>
-        </div>
-        <?php
-        echo ModuleHelper::endForm();
+    </div>
+    <div class="voffset2">
+        <button type="submit" name="submit" class="btn btn-primary">
+            <i class="fa fa-save"></i>
+            <?php translate("save_changes"); ?>
+        </button>
+    </div>
+    <?php
+    echo ModuleHelper::endForm();
 
-        $translation = new JSTranslation();
-        $translation->addKey("changes_was_saved");
-        $translation->render();
+    $translation = new JSTranslation();
+    $translation->addKey("changes_was_saved");
+    $translation->render();
 
-        enqueueScriptFile(
-                ModuleHelper::buildRessourcePath(
-                        "core_settings",
-                        "js/performance.js"
-                )
-        );
-        combinedScriptHtml();
-    }
+    enqueueScriptFile(
+            ModuleHelper::buildRessourcePath(
+                    "core_settings",
+                    "js/performance.js"
+            )
+    );
+    combinedScriptHtml();
+}
