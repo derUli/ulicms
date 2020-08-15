@@ -1,4 +1,5 @@
 <?php
+$canIuseLazyLoadingUrl = "https://caniuse.com/#feat=loading-lazy-attr";
 
 use UliCMS\Security\PermissionChecker;
 use UliCMS\Constants\RequestMethod;
@@ -126,6 +127,23 @@ if (!$permissionChecker->hasPermission("performance_settings")) {
                 );
                 ?>
             </div>
+        </div>
+        <div class="alert alert-info voffset2">
+            <p>
+                <?php translate("lazy_loading_help1"); ?>
+            </p>
+            <p>
+                <?php translate("lazy_loading_help2"); ?>
+                <br/>
+
+                <?php translate("lazy_loading_help3"); ?>
+                <br/>
+                <?php
+                echo StringHelper::makeLinksClickable(
+                        $canIuseLazyLoadingUrl
+                );
+                ?>
+            </p>
         </div>
         <div class="voffset2">
             <button type="submit" name="submit" class="btn btn-primary">
