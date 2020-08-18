@@ -75,6 +75,7 @@
       <directory>default</directory>
       <file>index.php</file>
       <file>lib/CMSConfigSample.php</file>
+      <file>lib/api.php</file>
       <file>lib/load.php</file>
       <file>CMSConfig.php</file>
       <file>admin/index.php</file>

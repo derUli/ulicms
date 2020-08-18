@@ -11,14 +11,13 @@ use UliCMS\Exceptions\DatasetNotFoundException;
 use Page;
 
 // this class renders a content as csv
-class JsonRenderer
-{
+class JsonRenderer {
+
     public $target_file = null;
     public $content = null;
     public $title = null;
 
-    protected function renderContent()
-    {
+    protected function renderContent() {
         $this->title = get_title();
         ob_start();
         content();
@@ -26,8 +25,7 @@ class JsonRenderer
         $this->content = trim($content);
     }
 
-    public function render(): string
-    {
+    public function render(): string {
         $cacheUid = CacheUtil::getCurrentUid();
 
         $adapter = CacheUtil::getAdapter();
@@ -47,23 +45,23 @@ class JsonRenderer
 
         try {
             $page = ContentFactory::getBySlugAndLanguage(
-                get_slug(),
-                getCurrentLanguage(true)
+                            get_slug(),
+                            getCurrentLanguage(true)
             );
         } catch (DatasetNotFoundException $e) {
             $page = new Page();
         }
-        
-        $data->data = $page->custom_data ? json_decode(
-            json_encode(
+        $encodedJson = json_encode(
                 $page->custom_data,
                 JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
-            )
-        ) : new stdClass();
+        );
+
+        $data->data = $page->custom_data ?
+                json_decode($encodedJson) : new stdClass();
 
         $json_string = json_encode(
-            $data,
-            JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
+                $data,
+                JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
         );
 
         if ($adapter) {
@@ -71,4 +69,5 @@ class JsonRenderer
         }
         return trim($json_string);
     }
+
 }
