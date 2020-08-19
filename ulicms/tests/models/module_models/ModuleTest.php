@@ -1,9 +1,10 @@
 <?php
 
-class ModuleTest extends \PHPUnit\Framework\TestCase
-{
-    protected function setUp(): void
-    {
+use UliCMS\Exceptions\NotImplementedException;
+
+class ModuleTest extends \PHPUnit\Framework\TestCase {
+
+    protected function setUp(): void {
         $manager = new ModuleManager();
         $manager->sync();
 
@@ -11,8 +12,7 @@ class ModuleTest extends \PHPUnit\Framework\TestCase
         $module->enable();
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         $manager = new ModuleManager();
         $manager->sync();
 
@@ -20,32 +20,27 @@ class ModuleTest extends \PHPUnit\Framework\TestCase
         $module->enable();
     }
 
-    public function testHasAdminPageReturnsTrue()
-    {
+    public function testHasAdminPageReturnsTrue() {
         $module = new Module("fortune2");
         $this->assertTrue($module->hasAdminPage());
     }
 
-    public function testHasAdminPageReturnsFalse()
-    {
+    public function testHasAdminPageReturnsFalse() {
         $module = new Module("core_users");
         $this->assertFalse($module->hasAdminPage());
     }
 
-    public function testisEmbedModuleReturnsTrue()
-    {
+    public function testisEmbedModuleReturnsTrue() {
         $module = new Module("fortune2");
         $this->assertTrue($module->isEmbedModule());
     }
 
-    public function testisEmbedModuleReturnsFalse()
-    {
+    public function testisEmbedModuleReturnsFalse() {
         $module = new Module("core_users");
         $this->assertFalse($module->isEmbedModule());
     }
 
-    public function testCreateUpdateAndDeleteModule()
-    {
+    public function testCreateUpdateAndDeleteModule() {
         $module = new Module();
         $module->setName("my_awesome_module");
         $module->setVersion("1.0");
@@ -86,8 +81,7 @@ class ModuleTest extends \PHPUnit\Framework\TestCase
         $this->assertNull($module->getVersion());
     }
 
-    public function testToggleEnabled()
-    {
+    public function testToggleEnabled() {
         $module = new Module("fortune2");
         $module->toggleEnabled();
         $this->assertFalse($module->isEnabled());
@@ -103,40 +97,45 @@ class ModuleTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($module->isEnabled());
     }
 
-    public function testIsInstalledReturnsTrue()
-    {
+    public function testIsInstalledReturnsTrue() {
         $module = new Module("core_content");
         $this->assertTrue($module->isInstalled());
     }
 
-    public function testIsInstalledReturnsFalse()
-    {
+    public function testIsInstalledReturnsFalse() {
         $module = new Module("not_existing_module");
         $this->assertFalse($module->isInstalled());
     }
 
-    public function testGetShortcodeReturnsShortcode()
-    {
+    public function testGetShortcodeReturnsShortcode() {
         $module = new Module();
         $module->setName("hello_world");
         $this->assertEquals("[module=hello_world]", $module->getShortCode());
     }
 
-    public function testGetShortcodeReturnsNull()
-    {
+    public function testGetShortcodeReturnsNull() {
         $module = new Module();
         $this->assertNull(
-            $module->getShortCode()
+                $module->getShortCode()
         );
     }
 
-    public function testGetDependentModules()
-    {
+    public function testGetDependentModules() {
         $module = new Module("core_content");
 
         $this->assertContains(
-            "core_comments",
-            $module->getDependentModules()
+                "core_comments",
+                $module->getDependentModules()
         );
     }
+
+    public function testhasUninstallEventReturnsTrue() {
+        throw new NotImplementedException();
+    }
+
+    public function testhasUninstallEventReturnsFalse() {
+        $module = new Module("core_content");
+        $this->assertFalse($module->hasUninstallEvent());
+    }
+
 }
