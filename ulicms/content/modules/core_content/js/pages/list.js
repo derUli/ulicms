@@ -9,6 +9,14 @@ $(() => {
                 );
     }
 
+    $("#btn-go-up").click((event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        // TODO: get parent page of parent page and update the filter
+        alert('Not Implemented!')
+    });
+
+
     // confirmation on empty trash
     $("a#empty-trash").click((event) => {
         const item = $(event.currentTarget);
@@ -46,6 +54,15 @@ $(() => {
     });
 });
 
+const updateGoUpButton = () => {
+    const parentId = $("select#filter_parent").val();
+    if (parentId.length) {
+        $("#btn-go-up").show();
+    } else {
+        $("#btn-go-up").hide();
+    }
+}
+
 const bindSelectOnChange = () => {
     // fetch updated results after filter values where changed
     $(".filters select").change((event) => {
@@ -54,6 +71,7 @@ const bindSelectOnChange = () => {
         dataTable.ajax.reload();
 
         dataTable.page(1);
+        updateGoUpButton();
 
         localStorage.setItem(
                 'pageFilters',

@@ -1128,12 +1128,12 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/katzgrau/KLogger.git",
+                "url": "git@github.com:katzgrau/klogger.git",
                 "reference": "de2d3ab6777a393a9879e0496ebb8e0644066e3f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/katzgrau/KLogger/zipball/de2d3ab6777a393a9879e0496ebb8e0644066e3f",
+                "url": "https://api.github.com/repos/katzgrau/klogger/zipball/de2d3ab6777a393a9879e0496ebb8e0644066e3f",
                 "reference": "de2d3ab6777a393a9879e0496ebb8e0644066e3f",
                 "shasum": ""
             },

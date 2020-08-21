@@ -21,6 +21,14 @@ const dataTableDrawCallback = (settings) => {
         }
     });
 
+    $(`#${settings.sInstance}`).find("a.show-children").click((event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        const id = $(event.target).data("id");
+        $("#filter_parent").val(id).trigger("change");
+    });
+
+
     $(`#${settings.sInstance}`).find("a.delete-icon").click((event) => {
         event.preventDefault();
         event.stopPropagation();
@@ -62,7 +70,6 @@ const buildFiltersObject = () => {
     const menu = $("#filter_menu").val();
     const active = $("#filter_active").val();
 
-    // TODO: reimplement all filters
     return {
         type,
         category_id: categoryId,
@@ -105,7 +112,6 @@ const initDataTables = (rootElement) => {
             stateSave: true,
             stateDuration: 0,
             stateSaveCallback: (settings, data) => {
-                console.log(settings, data);
                 localStorage.setItem(
                         "DataTables_" + action + "_"
                         + settings.sInstance, JSON.stringify(data)
