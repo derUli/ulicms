@@ -2,11 +2,11 @@
 
 use UliCMS\Models\Content\Language;
 use UliCMS\Models\Content\VCS;
+use UliCMS\Exceptions\DatasetNotFoundException;
 
-class PageControllerTest extends \PHPUnit\Framework\TestCase
-{
-    protected function setUp(): void
-    {
+class PageControllerTest extends \PHPUnit\Framework\TestCase {
+
+    protected function setUp(): void {
         require_once getLanguageFilePath("en");
         Translation::loadAllModuleLanguageFiles("en");
 
@@ -15,8 +15,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         $_GET = [];
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         $_POST = [];
         $_GET = [];
         $_SESSION = [];
@@ -29,55 +28,48 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         Database::deleteFrom("content", "slug like 'unit-test-%'");
     }
 
-    public function testGetPagesListViewNotSetReturnsDefault()
-    {
+    public function testGetPagesListViewNotSetReturnsDefault() {
         $controller = ControllerRegistry::get(PageController::class);
         $this->assertEquals("default", $controller->_getPagesListView());
     }
 
-    public function testGetPagesListReturnsDefault()
-    {
+    public function testGetPagesListReturnsDefault() {
         $_SESSION["pages_list_view"] = "default";
 
         $controller = ControllerRegistry::get(PageController::class);
         $this->assertEquals("default", $controller->_getPagesListView());
     }
 
-    public function testGetPagesListReturnsRecycleBin()
-    {
+    public function testGetPagesListReturnsRecycleBin() {
         $_SESSION["pages_list_view"] = "recycle_bin";
 
         $controller = ControllerRegistry::get(PageController::class);
         $this->assertEquals("recycle_bin", $controller->_getPagesListView());
     }
 
-    public function testcheckIfSlugIsFreeReturnsTrue()
-    {
+    public function testcheckIfSlugIsFreeReturnsTrue() {
         $controller = ControllerRegistry::get(PageController::class);
         $this->assertTrue(
-            $controller->_checkIfSlugIsFree(uniqid(), "de", PHP_INT_MAX)
+                $controller->_checkIfSlugIsFree(uniqid(), "de", PHP_INT_MAX)
         );
     }
 
-    public function testcheckIfSlugIsFreeWithEmptyReturnsTrue()
-    {
+    public function testcheckIfSlugIsFreeWithEmptyReturnsTrue() {
         $controller = ControllerRegistry::get(PageController::class);
         $this->assertTrue(
-            $controller->_checkIfSlugIsFree("", "de", PHP_INT_MAX)
+                $controller->_checkIfSlugIsFree("", "de", PHP_INT_MAX)
         );
     }
 
-    public function testcheckIfSlugIsFreeReturnsFalse()
-    {
+    public function testcheckIfSlugIsFreeReturnsFalse() {
         $allSlugs = getAllSlugs("de");
         $controller = ControllerRegistry::get(PageController::class);
         $this->assertFalse(
-            $controller->_checkIfSlugIsFree($allSlugs[0], "de", PHP_INT_MAX)
+                $controller->_checkIfSlugIsFree($allSlugs[0], "de", PHP_INT_MAX)
         );
     }
 
-    public function testGetBooleanSelection()
-    {
+    public function testGetBooleanSelection() {
         $controller = ControllerRegistry::get(PageController::class);
 
         $items = $controller->_getBooleanSelection();
@@ -88,8 +80,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testGetCategorySelection()
-    {
+    public function testGetCategorySelection() {
         $controller = new PageController();
 
         $items = $controller->_getCategorySelection();
@@ -103,8 +94,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testGetMenuSelection()
-    {
+    public function testGetMenuSelection() {
         $controller = ControllerRegistry::get(PageController::class);
 
         $items = $controller->_getMenuSelection();
@@ -118,8 +108,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testGetTypeSelection()
-    {
+    public function testGetTypeSelection() {
         $controller = ControllerRegistry::get(PageController::class);
 
         $items = $controller->_getTypeSelection();
@@ -133,8 +122,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testGetLanguageSelection()
-    {
+    public function testGetLanguageSelection() {
         $controller = ControllerRegistry::get(PageController::class);
 
         $items = $controller->_getLanguageSelection();
@@ -148,8 +136,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testGetLanguageSelectionGroupAssigned()
-    {
+    public function testGetLanguageSelectionGroupAssigned() {
         $user = $this->getTestUser();
         $_SESSION["login_id"] = $user->getId();
 
@@ -159,8 +146,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertCount(2, $items);
     }
 
-    public function getTestUser(): User
-    {
+    public function getTestUser(): User {
         $manager = new UserManager();
         $user = $manager->getAllUsers("admin desc")[0];
 
@@ -179,8 +165,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         return $user;
     }
 
-    public function testGetParentIds()
-    {
+    public function testGetParentIds() {
         $controller = ControllerRegistry::get(PageController::class);
         $parentIds = $controller->_getParentIds();
 
@@ -191,8 +176,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testGetParentIdsWithLanguageAndMenu()
-    {
+    public function testGetParentIdsWithLanguageAndMenu() {
         $controller = ControllerRegistry::get(PageController::class);
 
         $parentIds = $controller->_getParentIds("en", "top");
@@ -200,10 +184,10 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertGreaterThanOrEqual(2, count($parentIds));
 
         $this->assertLessThan(
-            count(
-                $controller->_getParentIds()
-            ),
-            count($parentIds)
+                count(
+                        $controller->_getParentIds()
+                ),
+                count($parentIds)
         );
 
         foreach ($parentIds as $id) {
@@ -211,8 +195,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testGetParentIdsWithRestrictedGroups()
-    {
+    public function testGetParentIdsWithRestrictedGroups() {
         $controller = ControllerRegistry::get(PageController::class);
         $allIds = $parentIds = $controller->_getParentIds();
 
@@ -226,30 +209,28 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertGreaterThanOrEqual(2, count($parentIds));
 
         $this->assertLessThan(
-            count(
-                $allIds
-            ),
-            count($parentIds)
+                count(
+                        $allIds
+                ),
+                count($parentIds)
         );
         foreach ($parentIds as $id) {
             $this->assertGreaterThanOrEqual(1, $id);
         }
     }
 
-    public function testGetContentTypes()
-    {
+    public function testGetContentTypes() {
         $controller = new PageController();
 
         $actual = $controller->_getContentTypes();
         $expected = file_get_contents(
-            Path::resolve("ULICMS_ROOT/tests/fixtures/getContentTypes.expected.json")
+                Path::resolve("ULICMS_ROOT/tests/fixtures/getContentTypes.expected.json")
         );
 
         $this->assertEquals(normalizeLN($expected), normalizeLN($actual));
     }
 
-    public function testToggleFilters()
-    {
+    public function testToggleFilters() {
         $_SESSION["login_id"] = 666;
         $controller = new PageController();
 
@@ -257,8 +238,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($controller->_toggleFilters());
     }
 
-    public function testToggleShowPositions()
-    {
+    public function testToggleShowPositions() {
         $_SESSION["login_id"] = 666;
         $controller = new PageController();
 
@@ -266,22 +246,19 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($controller->_toggleShowPositions());
     }
 
-    public function testPages()
-    {
+    public function testPages() {
         $controller = new PageController();
         $controller->_pages();
         $this->assertEquals("default", $_SESSION["pages_list_view"]);
     }
 
-    public function testRecycleBin()
-    {
+    public function testRecycleBin() {
         $controller = new PageController();
         $controller->_recycleBin();
         $this->assertEquals("recycle_bin", $_SESSION["pages_list_view"]);
     }
 
-    public function testGetCKEditorLinkList()
-    {
+    public function testGetCKEditorLinkList() {
         $controller = new PageController();
         $links = $controller->_getCKEditorLinkList();
         $this->assertGreaterThanOrEqual(1, count($links));
@@ -293,8 +270,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testEmptyTrash()
-    {
+    public function testEmptyTrash() {
         $this->createDeletedPage();
 
         $deleted = Content::getAllDatasets("content", "Page", "id", "deleted_at is not null");
@@ -307,8 +283,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertCount(0, $deleted);
     }
 
-    protected function createTestPages(): array
-    {
+    protected function createTestPages(): array {
         $pages = [];
         $slugs = ["unit-test", "unit-test-2", "unit-test-3"];
 
@@ -324,11 +299,24 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
             $page->save();
             $pages[] = $page;
         }
+
+        $parentPage = ContentFactory::getBySlugAndLanguage("google", "en");
+        $page = new Page();
+        $page->title = 'Unit Test ' . time();
+        $page->slug = "unit-test-4";
+        $page->parent_id = $parentPage->getId();
+        $page->language = 'en';
+        $page->content = "Some Text";
+        $page->comments_enabled = true;
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->save();
+        
+        $pages[] = $page;
         return $pages;
     }
 
-    protected function createDeletedPage(): Page
-    {
+    protected function createDeletedPage(): Page {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
         $page->slug = 'unit-test-' . time();
@@ -343,19 +331,18 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         return $page;
     }
 
-    public function testDiffContents()
-    {
+    public function testDiffContents() {
         $testDiff = $this->createTestDiff();
 
         $controller = new PageController();
         $diff = $controller->_diffContents(
-            $testDiff->history_id,
-            $testDiff->content_id
+                $testDiff->history_id,
+                $testDiff->content_id
         );
 
         $this->assertEquals(
-            "<del>Old Text 1</del><ins>New Text</ins>",
-            $diff->html
+                "<del>Old Text 1</del><ins>New Text</ins>",
+                $diff->html
         );
         $this->assertEquals(19, strlen($diff->current_version_date));
         $this->assertEquals(19, strlen($diff->old_version_date));
@@ -363,8 +350,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertGreaterThanOrEqual(1, $diff->history_id);
     }
 
-    protected function createTestDiff(): object
-    {
+    protected function createTestDiff(): object {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
         $page->slug = 'unit-test-' . time();
@@ -387,8 +373,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         return $result;
     }
 
-    public function testValidateInputReturnsErrors()
-    {
+    public function testValidateInputReturnsErrors() {
         $controller = new PageController();
         $errors = $controller->_validateInput();
 
@@ -401,8 +386,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
                 . "</ul>", $errors);
     }
 
-    public function testValidateInputSlugXSS()
-    {
+    public function testValidateInputSlugXSS() {
         $_POST["slug"] = "<script>alert(\"xss\")</script";
 
         $controller = new PageController();
@@ -410,8 +394,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("String must not contain HTML.", $errors);
     }
 
-    public function testValidateInputOk()
-    {
+    public function testValidateInputOk() {
         $_POST["slug"] = "foo-bar";
         $_POST["title"] = "Foobar";
         $_POST["position"] = "123";
@@ -423,8 +406,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertNull($errors);
     }
 
-    public function testGetPages()
-    {
+    public function testGetPages() {
         $user = $this->getTestUser();
         $_SESSION["login_id"] = $user->getId();
 
@@ -441,34 +423,32 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(123, $response["draw"]);
         $this->assertGreaterThanOrEqual(5, $response["recordsFiltered"]);
         $this->assertEquals(
-            $response["recordsFiltered"],
-            $response["recordsTotal"]
+                $response["recordsFiltered"],
+                $response["recordsTotal"]
         );
     }
 
-    public function testGetParentSelection()
-    {
+    public function testGetParentSelection() {
         $parent = ContentFactory::getBySlugAndLanguage("google", "en");
         $controller = new PageController();
         $output = $controller->_getParentSelection(
-            "en",
-            "top",
-            $parent->getId()
+                "en",
+                "top",
+                $parent->getId()
         );
 
         $this->assertStringContainsString(
-            "<option value=\"\">[All]</option>",
-            $output
+               '<option value="all">[All]</option>',
+                $output
         );
         $this->assertStringContainsString(
-            "<option value=\"12\">Modules</option>",
-            $output
+                "<option value=\"12\">Modules</option>",
+                $output
         );
         $this->assertGreaterThanOrEqual(3, substr_count($output, "<option"));
     }
 
-    public function testFilterParentPages()
-    {
+    public function testFilterParentPages() {
         $parent = ContentFactory::getBySlugAndLanguage("google", "en");
         $controller = new PageController();
 
@@ -476,15 +456,13 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertGreaterThanOrEqual(10, substr_count($output, "<option"));
     }
 
-    public function testNextFreeSlugReturnsSlug()
-    {
+    public function testNextFreeSlugReturnsSlug() {
         $controller = new PageController();
         $slug = $controller->_nextFreeSlug("ziemlich-neu", "de", 0);
         $this->assertEquals("ziemlich-neu", $slug);
     }
 
-    public function testNextFreeSlugReturnsSlugWithSuffix()
-    {
+    public function testNextFreeSlugReturnsSlugWithSuffix() {
         $this->createTestPages();
 
         $controller = new PageController();
@@ -492,8 +470,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("unit-test-4", $slug);
     }
 
-    public function testDeletePageReturnsTrue()
-    {
+    public function testDeletePageReturnsTrue() {
         $pages = $this->createTestPages();
 
         $controller = new PageController();
@@ -501,15 +478,13 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($success);
     }
 
-    public function testDeletePageReturnsFalse()
-    {
+    public function testDeletePageReturnsFalse() {
         $controller = new PageController();
         $success = $controller->_deletePost(PHP_INT_MAX);
         $this->assertFalse($success);
     }
 
-    public function testUnDeletePageReturnsTrue()
-    {
+    public function testUnDeletePageReturnsTrue() {
         $page = $this->createDeletedPage();
 
         $controller = new PageController();
@@ -517,15 +492,13 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($success);
     }
 
-    public function testUnDeletePageReturnsFalse()
-    {
+    public function testUnDeletePageReturnsFalse() {
         $controller = new PageController();
         $success = $controller->_undeletePost(PHP_INT_MAX);
         $this->assertFalse($success);
     }
 
-    public function testCreatePostReturnsModel()
-    {
+    public function testCreatePostReturnsModel() {
         $testUser = $this->getTestUser();
         $_SESSION["login_id"] = $testUser->getID();
 
@@ -544,8 +517,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($content->isPersistent());
     }
 
-    public function testCreatePostReturnsNull()
-    {
+    public function testCreatePostReturnsNull() {
         $_SESSION["login_id"] = PHP_INT_MAX;
 
         $_POST["title"] = "foobar";
@@ -562,8 +534,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertNull($content);
     }
 
-    public function testEditPostSuccessReturnsTrue()
-    {
+    public function testEditPostSuccessReturnsTrue() {
         $pages = $this->createTestPages();
 
         $types = [
@@ -593,7 +564,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
             $_POST["language"] = "de";
             $_POST["active"] = "1";
             $_POST["access"] = ["all"];
-            
+
 
             $controller = new PageController();
             $success = $controller->_editPost();
@@ -602,8 +573,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testEditPostNotFoundReturnsFalse()
-    {
+    public function testEditPostNotFoundReturnsFalse() {
         $testUser = $this->getTestUser();
         $_SESSION["login_id"] = $testUser->getID();
 
@@ -622,8 +592,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($success);
     }
 
-    public function testEditPostInvalidTypeReturnsFalse()
-    {
+    public function testEditPostInvalidTypeReturnsFalse() {
         $testUser = $this->getTestUser();
         $_SESSION["login_id"] = $testUser->getID();
 
@@ -641,4 +610,32 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
 
         $this->assertFalse($success);
     }
+
+    public function testGetParentPageIdReturnsId() {
+        $testPages = $this->createTestPages();
+        $id = $testPages[3]->getId();
+        
+        $controller = new PageController();
+        $actual = $controller->_getParentPageId($id);
+
+        $this->assertGreaterThanOrEqual(1, $actual->id);
+        $this->assertNotEquals($actual->id, $id);
+    }
+
+    public function testGetParentPageIdReturnsNull() {
+        $page = ContentFactory::getBySlugAndLanguage("links", "en");
+        $id = $page->getId();
+
+        $controller = new PageController();
+        $actual = $controller->_getParentPageId($id);
+
+        $this->assertNull($actual->id);
+    }
+
+    public function testGetParentPageIdThrowsException() {
+        $this->expectException(DatasetNotFoundException::class);
+        $controller = new PageController();
+        $actual = $controller->_getParentPageId(PHP_INT_MAX);
+    }
+
 }
