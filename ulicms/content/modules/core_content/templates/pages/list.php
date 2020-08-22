@@ -28,23 +28,8 @@ if ($permissionChecker->hasPermission("pages")) {
             "pages/partials/filters/filters.php"
     );
     ?>
-    <p>
-        <a
-           href="#"
-           class="btn btn-default"
-           id="btn-go-up"
-           data-url="<?php
-           echo ModuleHelper::buildMethodCallUrl(
-                   PageController::class,
-                   "getParentPageId"
-                   );
-           ?>">
-    <?php echo icon("fas fa-arrow-up"); ?>
-        <?php translate("go_up"); ?>
-        </a>
-    </p>
     <div id="page-list">
-    <?php if ($controller->_getPagesListView() === "default") { ?>
+        <?php if ($controller->_getPagesListView() === "default") { ?>
             <div class="row">
                 <div class="col-xs-6">
                     <a href="index.php?action=pages_new" class="btn btn-primary"><i
@@ -55,16 +40,16 @@ if ($permissionChecker->hasPermission("pages")) {
                             class="fa fa-trash"></i> <?php translate("recycle_bin"); ?></a>
                 </div>
             </div>
-    <?php } elseif ($controller->_getPagesListView() === "recycle_bin") {
-        ?>
+        <?php } elseif ($controller->_getPagesListView() === "recycle_bin") {
+            ?>
             <div class="row">
                 <div class="col-xs-6">
                     <a href="<?php
-                       echo ModuleHelper::buildMethodCallUrl(
-                               PageController::class,
-                               "emptyTrash"
-                       );
-                       ?>"
+                    echo ModuleHelper::buildMethodCallUrl(
+                            PageController::class,
+                            "emptyTrash"
+                    );
+                    ?>"
                        id="empty-trash"
                        class="btn btn-primary"><i
                             class="fas fa-broom"></i> <?php translate("empty_recycle_bin"); ?></a>
@@ -74,8 +59,21 @@ if ($permissionChecker->hasPermission("pages")) {
                             class="fas fa-book"></i> <?php translate("pages"); ?></a>
                 </div>
             </div>
-                       <?php }
-                   ?>
+        <?php }
+        ?>
+        <a
+            href="#"
+            class="btn btn-default voffset3"
+            id="btn-go-up"
+            data-url="<?php
+            echo ModuleHelper::buildMethodCallUrl(
+                    PageController::class,
+                    "getParentPageId"
+            );
+            ?>">
+                <?php echo icon("fas fa-arrow-up"); ?>
+                <?php translate("go_up"); ?>
+        </a>
         <div class="scroll voffset3">
             <table class="tablesorter dataset-list"
                    data-url="<?php echo ModuleHelper::buildMethodCallUrl("PageController", "getPages"); ?>">
@@ -97,10 +95,10 @@ if ($permissionChecker->hasPermission("pages")) {
                         <td class="no-sort text-center"><?php translate("edit"); ?>
                         </td>
                         <td class="no-sort text-center"><?php
-                        translate(
-                                $controller->_getPagesListView() === "default" ? "delete" : "restore"
-                        );
-                        ?>
+                            translate(
+                                    $controller->_getPagesListView() === "default" ? "delete" : "restore"
+                            );
+                            ?>
                         </td>
                     </tr>
                 </thead>

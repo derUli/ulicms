@@ -13,8 +13,8 @@ $(() => {
         event.preventDefault();
         event.stopPropagation();
 
-        const target = $(event.target)
-        const parentId = $("select#filter_parent").val();
+        const target = $(event.target);
+        const parentId = $("#filter_parent").val();
         const url = `${target.data('url')}&id=${parentId}`;
         $.ajax({
             method: "get",
@@ -68,6 +68,10 @@ $(() => {
     loadParentPages().then(() => {
         loadFiltersFromlocalStorage();
         bindSelectOnChange();
+
+        const dataTable = $(".tablesorter").DataTable();
+        dataTable.ajax.reload();
+        dataTable.page(1);
     });
 });
 
@@ -86,8 +90,8 @@ const bindSelectOnChange = () => {
         const target = event.target;
         const dataTable = $(".tablesorter").DataTable();
         dataTable.ajax.reload();
-
         dataTable.page(1);
+
         updateGoUpButton();
 
         localStorage.setItem(
@@ -100,7 +104,7 @@ const bindSelectOnChange = () => {
             loadParentPages();
         }
     });
-}
+};
 
 const loadFiltersFromlocalStorage = () => {
     if (localStorage.getItem('pageFilters') === null) {
@@ -123,6 +127,7 @@ const loadFiltersFromlocalStorage = () => {
     $("#filter_parent").val(parentId).trigger("change");
 
 };
+
 // filter parent pages by selected language and menu
 const loadParentPages = () => {
     const previousParentPage = $("#filter_parent").val();

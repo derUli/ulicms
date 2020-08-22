@@ -11,4 +11,4 @@ $none = new ListItem("0", "[" . get_translation("none") . "]");
 <?php translate("parent_id"); ?>
 <?php
 
-echo Input::singleSelect("filter_parent", null, [$placeholder, $none]);
+echo Input::singleSelect("filter_parent", "0", [$placeholder, $none]);

@@ -857,6 +857,7 @@ class PageController extends Controller {
         }
         return implode("", $selectItems);
     }
+    
        public function getParentPageId(): object {
            $id = Request::getVar('id', 0, "int");
            try{
