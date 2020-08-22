@@ -12,8 +12,26 @@ $(() => {
     $("#btn-go-up").click((event) => {
         event.preventDefault();
         event.stopPropagation();
-        // TODO: get parent page of parent page and update the filter
-        alert('Not Implemented!')
+
+        const target = $(event.target)
+        const parentId = $("select#filter_parent").val();
+        const url = `${target.data('url')}&id=${parentId}`;
+        $.ajax({
+            method: "get",
+            url: url,
+            success: function (data) {
+                const newId = data.id !== null ?
+                        data.id : 0;
+                $("select#filter_parent").val(
+                        newId.toString()
+                        ).change();
+                if (newId === 0) {
+                    $("#btn-go-up").hide();
+                }
+            },
+            error: (xhr) =>
+                alert(xhr.responseText)
+        });
     });
 
 
@@ -46,7 +64,6 @@ $(() => {
                 alert(xhr.responseText)
         });
     });
-    loadFiltersFromlocalStorage();
 
     loadParentPages().then(() => {
         loadFiltersFromlocalStorage();
@@ -86,7 +103,7 @@ const bindSelectOnChange = () => {
 }
 
 const loadFiltersFromlocalStorage = () => {
-    if (localStorage.getItem('pageFilters') == null) {
+    if (localStorage.getItem('pageFilters') === null) {
         return;
     }
 
@@ -97,14 +114,13 @@ const loadFiltersFromlocalStorage = () => {
 
     const filterParent = $("#filter_parent");
     const parentOptionExists = filterParent.find(`option[value='${filters.parent_id}']`).length;
+    const parentId = parentOptionExists ? filters.parent_id : "all";
 
-    const parentId = parentOptionExists ? filters.parent_id : "";
-
-    $("#filter_parent").val(parentId).trigger("change");
     $("#filter_approved").val(filters.approved).trigger("change");
     $("#filter_language").val(filters.language).trigger("change");
     $("#filter_menu").val(filters.menu).trigger("change");
     $("#filter_active").val(filters.active).trigger("change");
+    $("#filter_parent").val(parentId).trigger("change");
 
 };
 // filter parent pages by selected language and menu

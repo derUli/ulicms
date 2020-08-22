@@ -29,7 +29,16 @@ if ($permissionChecker->hasPermission("pages")) {
     );
     ?>
     <p>
-        <a href="#" class="btn btn-default" id="btn-go-up">
+        <a
+           href="#"
+           class="btn btn-default"
+           id="btn-go-up"
+           data-url="<?php
+           echo ModuleHelper::buildMethodCallUrl(
+                   PageController::class,
+                   "getParentPageId"
+                   );
+           ?>">
     <?php echo icon("fas fa-arrow-up"); ?>
         <?php translate("go_up"); ?>
         </a>

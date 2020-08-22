@@ -845,7 +845,8 @@ class PageController extends Controller {
         $parentIds = $this->_getParentIds($language, $menu);
 
         $selectItems = [];
-        $selectItems[] = new ListItem(null, "[" . get_translation("all") . "]");
+        $selectItems[] = new ListItem("all", "[" . get_translation("all") . "]");
+        $selectItems[] = new ListItem("0", "[" . get_translation("none") . "]");
 
         foreach ($parentIds as $parentId) {
             $item = new ListItem(
@@ -855,6 +856,22 @@ class PageController extends Controller {
             $selectItems[] = $item->getHtml();
         }
         return implode("", $selectItems);
+    }
+       public function getParentPageId(): object {
+           $id = Request::getVar('id', 0, "int");
+           try{
+             JSONResult($this->_getParentPageId($id));
+           } catch(DatasetNotFoundException $e){
+               HTTPStatusCodeResult(HttpStatusCode::NOT_FOUND);
+           }
+    }
+    
+    public function _getParentPageId(int $pageId): object {
+        $page = ContentFactory::getByID($pageId);
+        
+        $obj = new stdClass;
+        $obj->id = $page->parent_id;
+        return $obj;
     }
 
     public function _getBooleanSelection(): array {
