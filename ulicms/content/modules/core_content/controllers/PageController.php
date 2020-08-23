@@ -604,13 +604,13 @@ class PageController extends Controller {
                 echo "selected";
             }
             ?>>
-            <?php echo esc($page["title"]); ?>
+                        <?php echo esc($page["title"]); ?>
 
-            <?php if (!Request::getVar("no_id")) {
-                ?>
+                <?php if (!Request::getVar("no_id")) {
+                    ?>
                     (ID: <?php echo $page["id"]; ?>)
                 <?php }
-            ?>
+                ?>
             </option>
             <?php
         }
@@ -857,19 +857,19 @@ class PageController extends Controller {
         }
         return implode("", $selectItems);
     }
-    
-       public function getParentPageId(): object {
-           $id = Request::getVar('id', 0, "int");
-           try{
-             JSONResult($this->_getParentPageId($id));
-           } catch(DatasetNotFoundException $e){
-               HTTPStatusCodeResult(HttpStatusCode::NOT_FOUND);
-           }
+
+    public function getParentPageId(): object {
+        $id = Request::getVar('id', 0, "int");
+        try {
+            JSONResult($this->_getParentPageId($id));
+        } catch (DatasetNotFoundException $e) {
+            HTTPStatusCodeResult(HttpStatusCode::NOT_FOUND);
+        }
     }
-    
+
     public function _getParentPageId(int $pageId): object {
         $page = ContentFactory::getByID($pageId);
-        
+
         $obj = new stdClass;
         $obj->id = $page->parent_id;
         return $obj;

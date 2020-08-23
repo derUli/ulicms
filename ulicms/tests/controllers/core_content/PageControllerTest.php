@@ -311,7 +311,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
         $page->author_id = 1;
         $page->group_id = 1;
         $page->save();
-        
+
         $pages[] = $page;
         return $pages;
     }
@@ -438,7 +438,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
         );
 
         $this->assertStringContainsString(
-               '<option value="all">[All]</option>',
+                '<option value="all">[All]</option>',
                 $output
         );
         $this->assertStringContainsString(
@@ -614,7 +614,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
     public function testGetParentPageIdReturnsId() {
         $testPages = $this->createTestPages();
         $id = $testPages[3]->getId();
-        
+
         $controller = new PageController();
         $actual = $controller->_getParentPageId($id);
 
@@ -635,7 +635,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
     public function testGetParentPageIdThrowsException() {
         $this->expectException(DatasetNotFoundException::class);
         $controller = new PageController();
-        $actual = $controller->_getParentPageId(PHP_INT_MAX);
+        $controller->_getParentPageId(PHP_INT_MAX);
     }
 
 }
