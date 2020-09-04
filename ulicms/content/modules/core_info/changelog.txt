@@ -1,3 +1,9 @@
+===== Neues in UliCMS 2020.3.1 =====
+
+Neue Features: 
+* Lazy Loading für Bilder und iFrames
+* Seitenverwaltung ist wieder hierarchisch
+
 ===== Neues in UliCMS 2020.3 =====
 
 Neue Features:

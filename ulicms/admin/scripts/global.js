@@ -6,7 +6,7 @@ $(document).ready(() => {
     $.ajaxSetup({cache: false});
 
     const token = $(body).data("csrf-token");
-    $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
+    $.ajaxPrefilter((options, originalOptions, jqXHR) => {
         if (options.type.toLowerCase() === "post") {
             // initialize `data` to empty string if it does not exist
             options.data = options.data || "";
