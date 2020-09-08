@@ -21,6 +21,10 @@ class CoreMediaController extends MainClass {
     }
 
     protected function _addLazyload($input) {
+        if (empty($input)) {
+            return $input;
+        }
+
         $input = mb_convert_encoding($input, 'HTML-ENTITIES', "UTF-8");
         $dom = new DOMDocument();
         @$dom->loadHTML($input);
