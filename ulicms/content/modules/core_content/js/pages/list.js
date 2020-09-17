@@ -82,7 +82,7 @@ const updateGoUpButton = () => {
     } else {
         $("#btn-go-up").hide();
     }
-}
+};
 
 const bindSelectOnChange = () => {
     // fetch updated results after filter values where changed
