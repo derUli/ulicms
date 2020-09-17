@@ -53,7 +53,7 @@ $(() => {
             $(".loading").show();
         },
         beforeSerialize: () => {
-            updateCKEditors()
+            updateCKEditors();
             return true;
         },
         success: () => {
@@ -190,7 +190,7 @@ showAndHideFieldsByType = () => {
 };
 
 
-/* global Translation, formChanged, submitted, bootbox, instance, CKEDITOR */
+/* global Translation, formChanged, submitted, bootbox, instance, CKEDITOR, PageTranslation */
 
 let AllTypes = {};
 
@@ -219,7 +219,7 @@ bindEvents = () => {
             });
     $(".clear-field").on("click", (event) => {
         event.preventDefault();
-        event.stopPropagation()
+        event.stopPropagation();
         const element = $(event.target);
         const linkFor = $(element).data("for");
         $(linkFor).val("");
@@ -232,8 +232,7 @@ bindEvents = () => {
 
         const name = $(field).attr("id")
                 ? $(field).attr("id")
-                : $(field).attr("name")
-
+                : $(field).attr("name");
         const type = $(field).data("fm-type")
                 ? $(field).data("fm-type")
                 : "images";
