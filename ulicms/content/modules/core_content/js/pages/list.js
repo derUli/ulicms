@@ -77,7 +77,7 @@ $(() => {
 
 const updateGoUpButton = () => {
     const parentId = $("select#filter_parent").val();
-    if (parentId.length) {
+    if (parentId && parseInt(parentId) > 0) {
         $("#btn-go-up").show();
     } else {
         $("#btn-go-up").hide();
@@ -126,6 +126,7 @@ const loadFiltersFromlocalStorage = () => {
     $("#filter_active").val(filters.active).trigger("change");
     $("#filter_parent").val(parentId).trigger("change");
 
+    updateGoUpButton();
 };
 
 // filter parent pages by selected language and menu

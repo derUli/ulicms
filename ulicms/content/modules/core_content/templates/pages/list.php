@@ -65,6 +65,7 @@ if ($permissionChecker->hasPermission("pages")) {
             href="#"
             class="btn btn-default voffset3"
             id="btn-go-up"
+            style="display: none"
             data-url="<?php
             echo ModuleHelper::buildMethodCallUrl(
                     PageController::class,
