@@ -405,12 +405,13 @@ consolidation/output-formatters     4.1.1    MIT
 dflydev/dot-access-data             v1.1.0   MIT
 psr/container                       1.0.0    MIT
 psr/log                             1.1.3    MIT
-symfony/console                     v4.4.8   MIT
-symfony/event-dispatcher            v4.4.8   MIT
+symfony/console                     v4.4.10  MIT
+symfony/event-dispatcher            v4.4.10  MIT
 symfony/event-dispatcher-contracts  v1.1.7   MIT
-symfony/finder                      v4.4.8   MIT
+symfony/finder                      v4.4.10  MIT
 symfony/polyfill-mbstring           v1.17.0  MIT
 symfony/polyfill-php73              v1.17.0  MIT
+symfony/polyfill-php80              v1.17.0  MIT
 symfony/service-contracts           v1.1.8   MIT
 
 ### consolidation/config 
@@ -507,7 +508,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 DEPENDENCY LICENSES:
 
 Name                                 Version  License
-consolidation/annotated-command      4.1.1    MIT
+consolidation/annotated-command      4.2.1    MIT
 consolidation/config                 2.0.0    MIT
 consolidation/log                    2.0.1    MIT
 consolidation/output-formatters      4.1.1    MIT
@@ -515,21 +516,20 @@ consolidation/self-update            1.2.0    MIT
 container-interop/container-interop  1.2.0    MIT
 dflydev/dot-access-data              v1.1.0   MIT
 grasmash/expander                    1.0.0    MIT
-grasmash/yaml-expander               1.4.0    MIT
 league/container                     2.4.1    MIT
 psr/container                        1.0.0    MIT
 psr/log                              1.1.3    MIT
-symfony/console                      v4.4.8   MIT
-symfony/event-dispatcher             v4.4.8   MIT
-symfony/event-dispatcher-contracts   v1.1.7   MIT
-symfony/filesystem                   v4.4.8   MIT
-symfony/finder                       v4.4.8   MIT
-symfony/polyfill-ctype               v1.17.0  MIT
-symfony/polyfill-mbstring            v1.17.0  MIT
-symfony/polyfill-php73               v1.17.0  MIT
-symfony/process                      v4.4.8   MIT
-symfony/service-contracts            v1.1.8   MIT
-symfony/yaml                         v4.4.8   MIT
+symfony/console                      v4.4.12  MIT
+symfony/event-dispatcher             v4.4.12  MIT
+symfony/event-dispatcher-contracts   v1.1.9   MIT
+symfony/filesystem                   v4.4.12  MIT
+symfony/finder                       v4.4.12  MIT
+symfony/polyfill-ctype               v1.18.1  MIT
+symfony/polyfill-mbstring            v1.18.1  MIT
+symfony/polyfill-php73               v1.18.1  MIT
+symfony/polyfill-php80               v1.18.1  MIT
+symfony/process                      v4.4.12  MIT
+symfony/service-contracts            v1.1.9   MIT
 
 ### consolidation/self-update 
 Provides a self:update command for Symfony Console applications.
@@ -676,33 +676,6 @@ THE SOFTWARE.
 
 ### grasmash/expander 
 Expands internal property references in PHP arrays file.
-Homepage: Not configured.
-Licenses Used: MIT
-MIT License
-
-Copyright (c) 2017 Matthew Grasmick
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
-
-### grasmash/yaml-expander 
-Expands internal property references in a yaml file.
 Homepage: Not configured.
 Licenses Used: MIT
 MIT License
@@ -2287,31 +2260,6 @@ Generic abstractions related to translation
 Homepage: https://symfony.com
 Licenses Used: MIT
 Copyright (c) 2018-2020 Fabien Potencier
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is furnished
-to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
-
-
-### symfony/yaml 
-Symfony Yaml Component
-Homepage: https://symfony.com
-Licenses Used: MIT
-Copyright (c) 2004-2020 Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

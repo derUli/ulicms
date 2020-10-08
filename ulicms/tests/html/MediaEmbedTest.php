@@ -1,7 +1,10 @@
 <?php
 
+use Spatie\Snapshots\MatchesSnapshots;
+
 class MediaEmbedTest extends \PHPUnit\Framework\TestCase
 {
+    use MatchesSnapshots;
     protected function setUp(): void
     {
         $_SESSION = [
@@ -17,10 +20,9 @@ class MediaEmbedTest extends \PHPUnit\Framework\TestCase
     public function testReplaceLinks()
     {
         $input = file_get_contents("tests/fixtures/AutoEmbed/input.html");
-        $expected = file_get_contents("tests/fixtures/AutoEmbed/expected.html");
-        $output = apply_filter($input, "before_content");
+        $actual = apply_filter($input, "before_content");
 
-        $this->assertEquals(normalizeLN($expected), normalizeLN($output));
+        $this->assertMatchesHtmlSnapshot($actual);
     }
 
     public function testReplaceLinksWithDisableMediaEmbedTrue()
@@ -31,9 +33,9 @@ class MediaEmbedTest extends \PHPUnit\Framework\TestCase
         CustomData::set("disable_media_embed", true);
 
         $input = file_get_contents("tests/fixtures/AutoEmbed/input.html");
-        $output = apply_filter($input, "before_content");
+        $actual = apply_filter($input, "before_content");
 
-        $this->assertEquals(normalizeLN($input), normalizeLN($output));
+        $this->assertMatchesHtmlSnapshot($actual);
 
         $page->delete();
     }
@@ -46,10 +48,9 @@ class MediaEmbedTest extends \PHPUnit\Framework\TestCase
         CustomData::set("disable_media_embed", false);
 
         $input = file_get_contents("tests/fixtures/AutoEmbed/input.html");
-        $expected = file_get_contents("tests/fixtures/AutoEmbed/expected.html");
-        $output = apply_filter($input, "before_content");
+        $actual = apply_filter($input, "before_content");
 
-        $this->assertEquals(normalizeLN($expected), normalizeLN($output));
+        $this->assertMatchesHtmlSnapshot($actual);
 
         $page->delete();
     }

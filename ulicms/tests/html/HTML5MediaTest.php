@@ -3,7 +3,7 @@
 use UliCMS\Models\Media\Audio;
 use UliCMS\Models\Media\Video;
 
-class Html5MediaTest extends \PHPUnit\Framework\TestCase
+class HTML5MediaTest extends \PHPUnit\Framework\TestCase
 {
     public function testReplaceAudioTagsWithShortCode()
     {

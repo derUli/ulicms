@@ -47,3 +47,12 @@ add_translation("not_found", "Nicht gefunden");
 add_translation("make_default", "Als Standard festlegen");
 
 add_translation("no_html_allowed", "HTML ist in der Zeichenkette nicht erlaubt");
+
+add_translation("lazy_loading", "Faules Laden");
+add_translation("lazy_loading_img", "Bilder");
+add_translation("lazy_loading_iframe", "iFrames");
+
+add_translation("lazy_loading_help1", "Lädt Medien erst, wenn sich diese im Scrollbereich befinden.");
+add_translation("lazy_loading_help2", "Bitte beachten Sie, dass derzeit noch nicht jeder Browser dieses Feature unterstützt.");
+add_translation("lazy_loading_help3", "Unter folgendem Link erfahren Sie, welche Browser dies derzeit unterstützen:");
+

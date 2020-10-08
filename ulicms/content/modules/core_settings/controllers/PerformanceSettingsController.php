@@ -14,7 +14,20 @@ class PerformanceSettingsController extends Controller
         if (isset($_POST["cache_period"])) {
             Settings::set("cache_period", intval($_POST["cache_period"]) * 60);
         }
-        Response::redirect(ModuleHelper::buildActionUrl("performance_settings", "save=1"));
+        $lazy_loading = $_POST["lazy_loading"] ?? [];
+        
+        $lazy_loading_img = intval(in_array('img', $lazy_loading));
+        $lazy_loading_iframe = intval(in_array('iframe', $lazy_loading));
+        
+        Settings::set('lazy_loading_img', $lazy_loading_img);
+        Settings::set('lazy_loading_iframe', $lazy_loading_iframe);
+        
+        Response::sendHttpStatusCodeResultIfAjax(
+                HttpStatusCode::OK,
+                ModuleHelper::buildActionUrl(
+                        "performance_settings",
+                        "save=1")
+                );
     }
 
     public function clearCache(): void
