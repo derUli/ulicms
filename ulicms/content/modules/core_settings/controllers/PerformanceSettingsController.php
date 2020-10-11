@@ -13,7 +13,7 @@ class PerformanceSettingsController extends Controller {
         if (isset($_POST["cache_period"])) {
             Settings::set("cache_period", intval($_POST["cache_period"]) * 60);
         }
-        
+
         $lazy_loading = $_POST["lazy_loading"] ?? [];
 
         $lazy_loading_img = intval(in_array('img', $lazy_loading));
@@ -34,11 +34,16 @@ class PerformanceSettingsController extends Controller {
         );
     }
 
+    public function _clearCache(): void {
+        clearCache();
+    }
+
     public function clearCache(): void {
         if (!is_logged_in()) {
             Request::redirect("index.php");
         }
-        clearCache();
+
+        $this->_clearCache();
 
         // No need to redirect on ajax request
         if (Request::isAjaxRequest()) {
