@@ -6,7 +6,14 @@ class ExpertSettingsControllerTest extends \PHPUnit\Framework\TestCase {
         Settings::delete("foo");
     }
 
-    public function testDeletePost() {
+    public function testSave() {
+        $controller = new ExpertSettingsController();
+        $controller->_save("foo", "bar");
+
+        $this->assertEquals("bar", Settings::get("foo"));
+    }
+
+    public function testDelete() {
         Settings::set("foo", "bar");
         $this->assertEquals("bar", Settings::get("foo"));
 
