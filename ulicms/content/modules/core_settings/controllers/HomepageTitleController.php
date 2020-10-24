@@ -4,23 +4,26 @@ declare(strict_types=1);
 
 use UliCMS\Utils\CacheUtil;
 
-class HomepageTitleController extends Controller
-{
-    public function savePost(): void
-    {
+class HomepageTitleController extends Controller {
+
+    public function _savePost(): void {
         $languages = getAllLanguages();
-        for ($i = 0; $i < count($languages); $i ++) {
+        for ($i = 0; $i < count($languages); $i++) {
             $lang = $languages[$i];
             if (isset($_POST["homepage_title_" . $lang])) {
                 $page = $_POST["homepage_title_" . $lang];
                 Settings::set("homepage_title_" . $lang, $page);
-                if ($lang == Settings::get("default_language")) {
+                if ($lang === Settings::get("default_language")) {
                     Settings::set("homepage_title", $page);
                 }
             }
         }
 
         CacheUtil::clearPageCache();
+    }
+
+    public function savePost(): void {
+        $this->_savePost();
 
         // if called by ajax return no content to improve performance
         if (Request::isAjaxRequest()) {
@@ -28,4 +31,5 @@ class HomepageTitleController extends Controller
         }
         Request::redirect(ModuleHelper::buildActionURL("homepage_title"));
     }
+
 }
