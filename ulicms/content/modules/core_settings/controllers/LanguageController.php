@@ -9,7 +9,7 @@ use function UliCMS\HTML\stringContainsHtml;
 
 class LanguageController extends Controller {
 
-    public function createPost(): void {
+    public function _createPost(): Language {
         $this->validateInput();
 
         $name = Request::getVar("name", null, "str");
@@ -24,6 +24,11 @@ class LanguageController extends Controller {
 
         do_event("after_create_language");
         CacheUtil::clearPageCache();
+        return $language;
+    }
+
+    public function createPost(): void {
+        $this->_createPost();
         Request::redirect(ModuleHelper::buildActionURL("languages"));
     }
 
