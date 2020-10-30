@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-class SpamFilterController extends Controller
-{
-    public function savePost(): void
-    {
+class SpamFilterController extends Controller {
+
+    public function _savePost(): void {
         do_event("before_save_spamfilter_settings");
 
         if ($_POST["spamfilter_enabled"] == "yes") {
@@ -28,6 +27,7 @@ class SpamFilterController extends Controller
         } else {
             Settings::delete("disallow_chinese_chars");
         }
+
         if (isset($_POST["disallow_cyrillic_chars"])) {
             Settings::set("disallow_cyrillic_chars", "disallow");
         } else {
@@ -52,21 +52,25 @@ class SpamFilterController extends Controller
             Settings::delete("check_mx_of_mail_address");
         }
 
-        Settings::set(
-            "min_time_to_fill_form",
-            Request::getVar(
-                "min_time_to_fill_form",
-                0,
-                "int"
-            )
+        $min_time_to_fill_form = Request::getVar(
+                        "min_time_to_fill_form",
+                        0,
+                        "int"
         );
+
+        Settings::set("min_time_to_fill_form", $min_time_to_fill_form);
 
         do_event("after_save_spamfilter_settings");
         // if called by ajax return no content to improve performance
+    }
+
+    public function savePost(): void {
+        $this->_savePost();
 
         if (Request::isAjaxRequest()) {
             HTTPStatusCodeResult(HttpStatusCode::OK);
         }
         Request::redirect(ModuleHelper::buildActionURL("spam_filter"));
     }
+
 }
