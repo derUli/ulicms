@@ -1,7 +1,5 @@
 <?php
 
-use UliCMS\Utils\File;
-
 class PerformanceSettingsControllerTest extends \PHPUnit\Framework\TestCase {
 
     protected function tearDown(): void {
