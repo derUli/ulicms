@@ -84,6 +84,7 @@ class SpamFilterControllerTest extends \PHPUnit\Framework\TestCase {
 
     public function testSavePostWithoutValues(): void {
         $_POST = [
+            "spamfilter_enabled" => "no"
         ];
 
         Settings::set("default_language", "en");
