@@ -1,4 +1,5 @@
 <?php
+
 use UliCMS\HTML\Input;
 use UliCMS\HTML\ListItem;
 
@@ -31,7 +32,8 @@ if (!$permissionChecker->hasPermission("design")) {
     $font_sizes = getFontSizes();
     $no_mobile_design_on_tablet = Settings::get("no_mobile_design_on_tablet");
     $modManager = new ModuleManager();
-    $mobileDetectInstalled = in_array("Mobile_Detect", $modManager->getEnabledModuleNames()); ?>
+    $mobileDetectInstalled = in_array("Mobile_Detect", $modManager->getEnabledModuleNames());
+    ?>
     <?php if ($default_font != "google") { ?>
         <style type="text/css">
             div#google-fonts {
@@ -45,12 +47,13 @@ if (!$permissionChecker->hasPermission("design")) {
             class="btn btn-default btn-back is-not-ajax"><i class="fas fa-arrow-left"></i> <?php translate("back") ?></a>
     </p>
     <h1>
-        <?php translate("design"); ?>
+    <?php translate("design"); ?>
     </h1>
     <?php
     echo ModuleHelper::buildMethodCallForm("DesignSettingsController", "save", [], "post", array(
         "id" => "designForm"
-    )); ?>
+    ));
+    ?>
     <div class="scroll">
         <table style="width: 100%;">
             <tr>
@@ -60,13 +63,13 @@ if (!$permissionChecker->hasPermission("design")) {
                            <?php
                            if (!Settings::get("disable_custom_layout_options")) {
                                echo " checked";
-                           } ?>></td>
+                           }
+                           ?>></td>
             </tr>
             <tr>
                 <td style="width: 300px;"><strong><?php translate("title_format"); ?> </strong></td>
                 <td><input type="text" name="title_format"
-                           value="<?php
-                           esc($title_format); ?>"></td>
+                           value="<?php esc($title_format); ?>"></td>
             </tr>
             <tr>
                 <td><strong><?php translate("frontend_design"); ?> </strong></td>
@@ -75,24 +78,24 @@ if (!$permissionChecker->hasPermission("design")) {
                                 <?php
                                 foreach ($allThemes as $th) {
                                     ?>
-                            <option value="<?php
-                            echo $th; ?>"
+                            <option value="<?php echo $th; ?>"
                                     <?php
                                     if ($th === $theme) {
                                         echo " selected";
-                                    } ?>
+                                    }
+                                    ?>
                                     data-preview-url="<?php
                                     echo ModuleHelper::buildMethodCallUrl(
-                                        DesignSettingsController::class,
-                                        "themePreview",
-                                        "theme={$th}"
-                                    ); ?>"
+                                            DesignSettingsController::class,
+                                            "themePreview",
+                                            "theme={$th}"
+                                    );
+                                    ?>"
                                     >
-                                        <?php
-                                        echo $th; ?>
+                            <?php echo $th; ?>
                             </option>
-                            <?php
-                                } ?>
+        <?php }
+    ?>
                     </select>
                     <div id="theme-preview" class="voffset3">                        <i class="fa fa-spinner fa-spin"></i>
                         <div class="preview"></div>
@@ -109,32 +112,33 @@ if (!$permissionChecker->hasPermission("design")) {
                             <?php
                             if (!$mobile_theme) {
                                 echo " selected";
-                            } ?>
+                            }
+                            ?>
                                     >
                                 [
-                                <?php translate("standard"); ?>
+                            <?php translate("standard"); ?>
                                 ]
                             </option>
-                            <?php
-                            foreach ($allThemes as $th) {
-                                ?>
-                                <option value="<?php
-                                echo $th; ?>"
+                                    <?php
+                                    foreach ($allThemes as $th) {
+                                        ?>
+                                <option value="<?php echo $th; ?>"
                                         <?php
                                         if ($th === $mobile_theme) {
                                             echo " selected";
-                                        } ?>
+                                        }
+                                        ?>
                                         data-preview-url="<?php
                                         echo ModuleHelper::buildMethodCallUrl(
-                                            DesignSettingsController::class,
-                                            "themePreview",
-                                            "theme={$th}"
-                                        ); ?>">
-                                            <?php
-                                            echo $th; ?>
+                                                DesignSettingsController::class,
+                                                "themePreview",
+                                                "theme={$th}"
+                                        );
+                                        ?>">
+        <?php echo $th; ?>
                                 </option>
-                                <?php
-                            } ?>
+        <?php }
+    ?>
                         </select>
                     <div id="theme-mobile-preview" class="voffset3">
                         <i class="fa fa-spinner fa-spin"></i>
@@ -144,57 +148,60 @@ if (!$permissionChecker->hasPermission("design")) {
                     </p>
                     <div class="alert alert-warning fade in" id="mobile_detect_notice"
                          data-installed="<?php echo strbool($mobileDetectInstalled); ?>">
-                             <?php translate("mobile_detect_install_notice"); ?>
+    <?php translate("mobile_detect_install_notice"); ?>
                     </div>
                 </td>
             </tr>
             <tr>
-                <td><strong><?php
-                        translate("no_mobile_design_on_tablet"); ?> </strong></td>
+                <td><strong><?php translate("no_mobile_design_on_tablet"); ?> </strong></td>
                 <td><input type="checkbox" name="no_mobile_design_on_tablet"
                            class="js-switch"
 
                            <?php
                            if ($no_mobile_design_on_tablet) {
                                echo " checked";
-                           } ?>></td>
+                           }
+                           ?>></td>
             </tr>
             <tr>
                 <td><strong><?php translate("editor_skin"); ?> </strong></td>
                 <td>
-                    <?php echo Input::singleSelect(
-                               "ckeditor_skin",
-                               $ckeditor_skin,
-                               $skinItems
-                           ); ?>
+                    <?php
+                    echo Input::singleSelect(
+                            "ckeditor_skin",
+                            $ckeditor_skin,
+                            $skinItems
+                    );
+                    ?>
                 </td>
-                
+
             </tr>
             <tr>
                 <td><strong><?php translate("font_family"); ?> </strong></td>
                 <td><select name="default_font" id="default_font" size=1>
                         <?php
                         $font_amount = count($fonts);
-    $i = 1;
-    foreach ($fonts as $key => $value) {
-        $selected = "";
-        if ($default_font === $value) {
-            $selected = "selected";
-        }
+                        $i = 1;
+                        foreach ($fonts as $key => $value) {
+                            $selected = "";
+                            if ($default_font === $value) {
+                                $selected = "selected";
+                            }
 
-        if (!faster_in_array($default_font, $fonts) and $i === $font_amount) {
-            $selected = "selected";
-        }
-        if ($value != 'google') {
-            echo '<optgroup style="font-family:' . $value . '; font-size:1.2em;">';
-        } else {
-            echo '<optgroup>';
-        }
-        echo "<option value=\"$value\" $selected>$key</option>";
-        echo '</optgroup>';
+                            if (!faster_in_array($default_font, $fonts) and $i === $font_amount) {
+                                $selected = "selected";
+                            }
+                            if ($value != 'google') {
+                                echo '<optgroup style="font-family:' . $value . '; font-size:1.2em;">';
+                            } else {
+                                echo '<optgroup>';
+                            }
+                            echo "<option value=\"$value\" $selected>$key</option>";
+                            echo '</optgroup>';
 
-        $i ++;
-    } ?></select>
+                            $i++;
+                        }
+                        ?></select>
                     <div id="google-fonts">
                         <select name="google-font" size=1>
                             <?php
@@ -204,7 +211,8 @@ if (!$permissionChecker->hasPermission("design")) {
                                 } else {
                                     echo '<option value="' . _esc($myfont) . '">' . _esc($myfont) . "</option>";
                                 }
-                            } ?>
+                            }
+                            ?>
                         </select>
                         <div class="voffset3 alert alert-warning"><?php translate("google_fonts_privacy_warning"); ?></div>
                     </div>
@@ -223,7 +231,8 @@ if (!$permissionChecker->hasPermission("design")) {
                             echo ">";
                             echo $size;
                             echo "</option>";
-                        } ?>
+                        }
+                        ?>
                     </select></td>
             </tr>
             <tr id="font-preview"
@@ -235,26 +244,23 @@ if (!$permissionChecker->hasPermission("design")) {
                 <td><strong><?php translate("HEADER_BACKGROUNDCOLOR"); ?> </strong></td>
                 <td><input name="header-background-color"
                            class="jscolor {hash:true,caps:true}"
-                           value="<?php
-                           echo _esc(Settings::get("header-background-color")); ?>"></td>
+                           value="<?php echo _esc(Settings::get("header-background-color")); ?>"></td>
             </tr>
             <tr>
                 <td><strong><?php translate("font_color"); ?> </strong></td>
                 <td><input name="body-text-color"
                            class="jscolor {hash:true,caps:true}"
-                           value="<?php
-                           echo _esc(Settings::get("body-text-color")); ?>"></td>
+                           value="<?php echo _esc(Settings::get("body-text-color")); ?>"></td>
             </tr>
             <tr>
                 <td><strong><?php translate("BACKGROUNDCOLOR"); ?> </strong></td>
                 <td><input name="body-background-color"
                            class="jscolor {hash:true,caps:true}"
-                           value ="<?php
-                           echo _esc(Settings::get("body-background-color")); ?>"></td>
+                           value ="<?php echo _esc(Settings::get("body-background-color")); ?>"></td>
             </tr>
-            <?php
-            if ($permissionChecker->hasPermission("logo")) {
-                ?>
+    <?php
+    if ($permissionChecker->hasPermission("logo")) {
+        ?>
                 <tr>
                     <td>
                         <strong><?php translate("logo"); ?></strong>
@@ -264,49 +270,47 @@ if (!$permissionChecker->hasPermission("design")) {
                         <a href="index.php?action=logo_upload" class="btn btn-default"><i
                                 class="fas fa-tools"></i> <?php translate("upload_new_logo"); ?></a>
                     </td></tr>
-                <?php
-            } ?>
-            <?php
-            if ($permissionChecker->hasPermission("favicon")) {
-                ?>
+        <?php }
+    ?>
+    <?php
+    if ($permissionChecker->hasPermission("favicon")) {
+        ?>
                 <tr>
                     <td><strong><?php translate("favicon"); ?></strong></td>
                     <td><a href="index.php?action=favicon" class="btn btn-default"><i
                                 class="fas fa-file-image"></i> <?php translate("upload_new_favicon"); ?></a>
                     </td>
                 </tr>
-            <?php
-            } ?>
-            <?php
-            if ($permissionChecker->hasPermission("footer_text")) {
-                ?>
+        <?php }
+    ?>
+    <?php
+    if ($permissionChecker->hasPermission("footer_text")) {
+        ?>
                 <tr>
                     <td><strong><?php translate("footer"); ?></strong></td>
                     <td><a href="index.php?action=footer_text" class="btn btn-default"><i class="fas fa-edit"></i> <?php translate("edit_footer_text"); ?></a>
                     </td>
                 </tr>
-            <?php
-            } ?>
+        <?php }
+    ?>
             <tr>
-                <td><strong><?php
-                        translate("HTML5_VIDEO_WIDTH_100_PERCENT"); ?> </strong>
+                <td><strong><?php translate("HTML5_VIDEO_WIDTH_100_PERCENT"); ?> </strong>
 
                 <td><input type="checkbox" name="video_width_100_percent"
                            class="js-switch"
 
-                           <?php
-                           if ($video_width_100_percent) {
-                               echo " checked";
-                           } ?>
+    <?php
+    if ($video_width_100_percent) {
+        echo " checked";
+    }
+    ?>
                            value="video_width_100_percent"></td>
             </tr>
             <tr>
-                <td><strong><?php
-                        translate("ADDITIONAL_MENUS"); ?> </strong>
+                <td><strong><?php translate("ADDITIONAL_MENUS"); ?> </strong>
 
                 <td><input type="text" name="additional_menus"
-                           value="<?php
-                           echo _esc($additional_menus); ?>"></td>
+                           value="<?php echo _esc($additional_menus); ?>"></td>
             </tr>
         </table>
     </div>

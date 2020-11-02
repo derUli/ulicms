@@ -9,15 +9,13 @@ class SiteSloganController extends Controller {
     public function _savePost(): void {
         $languages = getAllLanguages();
 
-        if (isset($_POST["submit"])) {
-            for ($i = 0; $i < count($languages); $i++) {
-                $lang = $languages[$i];
-                if (isset($_POST["site_slogan_" . $lang])) {
-                    $page = $_POST["site_slogan_" . $lang];
-                    Settings::set("site_slogan_" . $lang, $page);
-                    if ($lang === Settings::get("default_language")) {
-                        Settings::set("site_slogan", $page);
-                    }
+        for ($i = 0; $i < count($languages); $i++) {
+            $lang = $languages[$i];
+            if (isset($_POST["site_slogan_" . $lang])) {
+                $page = $_POST["site_slogan_" . $lang];
+                Settings::set("site_slogan_" . $lang, $page);
+                if ($lang === Settings::get("default_language")) {
+                    Settings::set("site_slogan", $page);
                 }
             }
         }
