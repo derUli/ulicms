@@ -29,7 +29,6 @@ class ErrorPagesController extends Controller {
 
     public function savePost(): void {
         $this->_savePost();
-
         Response::sendHttpStatusCodeResultIfAjax(
                 HttpStatusCode::OK,
                 ModuleHelper::buildActionURL("error_pages")

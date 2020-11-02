@@ -16,12 +16,10 @@ class OpenGraphController extends Controller {
 
     public function savePost(): void {
         $this->_savePost();
-
-        // if called by ajax return no content to improve performance
-        if (Request::isAjaxRequest()) {
-            HTTPStatusCodeResult(HttpStatusCode::OK);
-        }
-        Request::redirect(ModuleHelper::buildActionURL("open_graph"));
+        Response::sendHttpStatusCodeResultIfAjax(
+                HttpStatusCode::OK,
+                ModuleHelper::buildActionURL("open_graph")
+        );
     }
 
 }

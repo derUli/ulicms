@@ -13,7 +13,6 @@ class FooterTextController extends Controller {
 
     public function savePost(): void {
         $this->_savePost();
-
         Response::sendHttpStatusCodeResultIfAjax(
                 HttpStatusCode::OK,
                 ModuleHelper::buildActionURL("design")

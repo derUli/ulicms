@@ -80,10 +80,10 @@ class OtherSettingsController extends Controller {
 
     public function savePost(): void {
         $this->_savePost();
-        if (Request::isAjaxRequest()) {
-            HTTPStatusCodeResult(HttpStatusCode::OK);
-        }
-        Request::redirect(ModuleHelper::buildActionURL("other_settings"));
+        Response::sendHttpStatusCodeResultIfAjax(
+                HttpStatusCode::OK,
+                ModuleHelper::buildActionURL("other_settings")
+        );
     }
 
 }

@@ -17,13 +17,12 @@ class MOTDController extends Controller {
         }
 
         CacheUtil::clearPageCache();
-
     }
 
     public function savePost(): void {
         $this->_savePost();
-        Response::sendHttpStatusCodeResultIfAjax();
-        Request::redirect(
+        Response::sendHttpStatusCodeResultIfAjax(
+                HttpStatusCode::OK,
                 ModuleHelper::buildActionURL(
                         "motd",
                         ModuleHelper::buildQueryString(

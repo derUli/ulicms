@@ -44,12 +44,10 @@ class PerformanceSettingsController extends Controller {
         }
 
         $this->_clearCache();
-
-        // No need to redirect on ajax request
-        if (Request::isAjaxRequest()) {
-            HTTPStatusCodeResult(HttpStatusCode::OK);
-        }
-        Request::redirect(ModuleHelper::buildActionURL("performance_settings", "clear_cache=1"));
+        Response::sendHttpStatusCodeResultIfAjax(
+                HttpStatusCode::OK,
+                ModuleHelper::buildActionURL("performance_settings")
+        );
     }
 
 }

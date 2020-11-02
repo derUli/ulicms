@@ -56,10 +56,14 @@ class PrivacyController extends Controller {
         $this->_savePost();
 
         $language = basename(Request::getVar("language", null, "str"));
-        Response::redirect(ModuleHelper::buildActionURL(
+
+        Response::sendHttpStatusCodeResultIfAjax(
+                HttpStatusCode::OK,
+                ModuleHelper::buildActionURL(
                         "privacy_settings",
                         "save=1&language={$language}"
-        ));
+                )
+        );
     }
 
 }

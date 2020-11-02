@@ -66,11 +66,10 @@ class SpamFilterController extends Controller {
 
     public function savePost(): void {
         $this->_savePost();
-
-        if (Request::isAjaxRequest()) {
-            HTTPStatusCodeResult(HttpStatusCode::OK);
-        }
-        Request::redirect(ModuleHelper::buildActionURL("spam_filter"));
+        Response::sendHttpStatusCodeResultIfAjax(
+                HttpStatusCode::OK,
+                ModuleHelper::buildActionURL("spam_filter")
+        );
     }
 
 }
