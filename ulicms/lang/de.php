@@ -190,7 +190,7 @@ add_translation("FRONTPAGE", "Startseite");
 add_translation("MAINTENANCE_MODE_ENABLED", "Wartungsmodus aktiviert");
 add_translation("GUEST_MAY_REGISTER", "Gäste dürfen sich registrieren");
 add_translation("DESCRIPTION", "Beschreibung");
-add_translation("KEYWORDS", "Keywords");
+add_translation("KEYWORDS", "Tags");
 add_translation("METADATA", "Meta-Daten");
 add_translation("FIX_W3C_VALIDATION_ERRORS", "W3C Validierungsfehler automatisch korrigieren");
 add_translation("TECHNICAL_STUFF", "Technisches");

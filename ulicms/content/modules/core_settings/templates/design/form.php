@@ -260,7 +260,7 @@ if (!$permissionChecker->hasPermission("design")) {
                     </td>
                     <td>
 
-                        <a href="index.php?action=logo_upload" class="btn btn-default"><i
+                        <a href="index.php?action=logo_upload" class="btn btn-default is-not-ajax"><i
                                 class="fas fa-tools"></i> <?php translate("upload_new_logo"); ?></a>
                     </td></tr>
             <?php }
@@ -270,7 +270,7 @@ if (!$permissionChecker->hasPermission("design")) {
                 ?>
                 <tr>
                     <td><strong><?php translate("favicon"); ?></strong></td>
-                    <td><a href="index.php?action=favicon" class="btn btn-default"><i
+                    <td><a href="index.php?action=favicon" class="btn btn-default is-not-ajax"><i
                                 class="fas fa-file-image"></i> <?php translate("upload_new_favicon"); ?></a>
                     </td>
                 </tr>
@@ -281,7 +281,7 @@ if (!$permissionChecker->hasPermission("design")) {
                 ?>
                 <tr>
                     <td><strong><?php translate("footer"); ?></strong></td>
-                    <td><a href="index.php?action=footer_text" class="btn btn-default"><i class="fas fa-edit"></i> <?php translate("edit_footer_text"); ?></a>
+                    <td><a href="index.php?action=footer_text" class="btn btn-default is-not-ajax"><i class="fas fa-edit"></i> <?php translate("edit_footer_text"); ?></a>
                     </td>
                 </tr>
             <?php }

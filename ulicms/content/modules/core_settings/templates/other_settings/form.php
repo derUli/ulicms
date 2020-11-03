@@ -64,7 +64,7 @@ if (!$permissionChecker->hasPermission("other")) {
     <a
         href="<?php echo ModuleHelper::buildActionURL("settings_categories"); ?>"
         class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
-    <div id="accordion-container">
+    <div id="accordion-container" class="voffset3">
         <h2 class="accordion-header">
             <?php translate("DOMAIN2LANGUAGE_MAPPING"); ?>
         </h2>
@@ -277,7 +277,7 @@ if (!$permissionChecker->hasPermission("other")) {
             <?php translate("expert_settings"); ?>
         </h2>
         <div class="accordion-content">
-            <a href="index.php?action=settings" class="btn btn-danger"><i
+            <a href="index.php?action=settings" class="btn btn-danger is-not-ajax"><i
                     class="fas fa-tools"></i> <?php translate("view"); ?></a>
         </div>
     </div>

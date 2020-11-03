@@ -189,7 +189,7 @@ add_translation("FRONTPAGE", "Frontpage");
 add_translation("MAINTENANCE_MODE_ENABLED", "Maintenance mode enabled");
 add_translation("GUEST_MAY_REGISTER", "Guests can register");
 add_translation("DESCRIPTION", "Description");
-add_translation("KEYWORDS", "Keywords");
+add_translation("KEYWORDS", "Tags");
 add_translation("METADATA", "Meta Data");
 add_translation("FIX_W3C_VALIDATION_ERRORS", "fix W3C validation errors automatically");
 add_translation("TECHNICAL_STUFF", "technical stuff");

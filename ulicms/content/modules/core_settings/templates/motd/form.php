@@ -46,7 +46,7 @@ if ($permissionChecker->hasPermission("motd")) {
     </div>
     <?php
     csrf_token_html(); ?>
-    <div class="field">
+    <div class="field voffset3">
         <textarea class="<?php esc($editor); ?>" data-mimetype="text/html"
                   name="motd" id="motd" cols=60 rows=15><?php
                       esc(Request::getVar("language") ? Settings::get("motd_" . Request::getVar("language")) : Settings::get("motd")); ?></textarea>
