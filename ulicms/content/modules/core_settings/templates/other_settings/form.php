@@ -175,7 +175,6 @@ if (!$permissionChecker->hasPermission("other")) {
                                value="<?php esc($smtp_host); ?>">
                     </div>
                 </div>
-
                 <div class="field">
                     <div class="label">
                         <?php translate("port"); ?>
@@ -185,7 +184,6 @@ if (!$permissionChecker->hasPermission("other")) {
                                value="<?php echo _esc($smtp_port); ?>">
                     </div>
                 </div>
-
                 <div class="field">
                     <div class="label">
                         <label for="smtp_auth"> <?php translate("smtp_encryption"); ?>
@@ -214,7 +212,6 @@ if (!$permissionChecker->hasPermission("other")) {
                         </select>
                     </div>
                 </div>
-
                 <div class="field">
                     <div class="label">
                         <label for="smtp_no_verify_certificate"> <?php translate("smtp_no_verify_certificate"); ?>
@@ -254,7 +251,6 @@ if (!$permissionChecker->hasPermission("other")) {
                     </div>
                 </div>
                 <div id="smtp_auth_div" style="display: none">
-
                     <div class="field">
                         <div class="label">
                             <?php translate("user"); ?>
@@ -264,7 +260,6 @@ if (!$permissionChecker->hasPermission("other")) {
                                    value="<?php echo _esc($smtp_user); ?>">
                         </div>
                     </div>
-
                     <div class="field">
                         <div class="label">
                             <?php translate("password"); ?>
@@ -278,39 +273,6 @@ if (!$permissionChecker->hasPermission("other")) {
                 </div>
             </div>
         </div>
-        <script>
-    <?php
-// FIXME: Extract this code to an external script
-    if ($smtp_auth) {
-        ?>
-                $('#smtp_auth_div').show();
-    <?php }
-    ?>
-            $('#smtp_auth').change(function () {
-                if ($('#smtp_auth').prop('checked')) {
-                    $('#smtp_auth_div').slideDown();
-                } else {
-                    $('#smtp_auth_div').slideUp();
-                }
-            });
-        </script>
-        <script>
-    <?php
-// FIXME: Extract this code to an external script
-    if ($email_mode == EmailModes::PHPMAILER) {
-        ?>
-                $('#smtp_settings').show();
-    <?php }
-    ?>
-            $('#email_mode').change(function () {
-                if ($('#email_mode').val() == "phpmailer") {
-                    $('#smtp_settings').slideDown();
-                } else {
-                    $('#smtp_settings').slideUp();
-                }
-            });
-
-        </script>
         <h2 class="accordion-header">
             <?php translate("expert_settings"); ?>
         </h2>
@@ -323,17 +285,17 @@ if (!$permissionChecker->hasPermission("other")) {
         <i class="fa fa-save"></i>
         <?php translate("save_changes"); ?>
     </button>
-    <?php echo ModuleHelper::endForm(); ?>
-    <script>
-        $("#other_settings").ajaxForm({beforeSubmit: function (e) {
-                $("#message").html("");
-                $("#loading").show();
-            },
-            success: function (e) {
-                $("#loading").hide();
-                $("#message").html("<span style=\"color:green;\"><?php translate("CHANGES_WAS_SAVED"); ?></span>");
-            }
-        });
-    </script>
     <?php
+    echo ModuleHelper::endForm();
+
+    $translation = new JSTranslation();
+    $translation->addKey("changes_was_saved");
+    $translation->render();
+
+    enqueueScriptFile(ModuleHelper::buildRessourcePath(
+                    "core_settings",
+                    "js/other_settings.js"
+            )
+    );
+    combinedScriptHtml();
 }
