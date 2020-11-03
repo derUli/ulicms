@@ -5786,22 +5786,22 @@
         },
         {
             "name": "spatie/phpunit-snapshot-assertions",
-            "version": "4.2.2",
+            "version": "4.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/phpunit-snapshot-assertions.git",
-                "reference": "869122de0d42746f041571137684028a9d2fd3e0"
+                "reference": "b8a978cebdeaaaedd90731ac2d8e71f58b170b2e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/phpunit-snapshot-assertions/zipball/869122de0d42746f041571137684028a9d2fd3e0",
-                "reference": "869122de0d42746f041571137684028a9d2fd3e0",
+                "url": "https://api.github.com/repos/spatie/phpunit-snapshot-assertions/zipball/b8a978cebdeaaaedd90731ac2d8e71f58b170b2e",
+                "reference": "b8a978cebdeaaaedd90731ac2d8e71f58b170b2e",
                 "shasum": ""
             },
             "require": {
                 "ext-dom": "*",
                 "ext-json": "*",
-                "php": "^7.4",
+                "php": "^7.4|^8.0",
                 "phpunit/phpunit": "^8.3|^9.0",
                 "symfony/property-access": "^4.0|^5.0",
                 "symfony/serializer": "^4.0|^5.0",
@@ -5838,7 +5838,7 @@
                 "spatie",
                 "testing"
             ],
-            "time": "2020-06-01T08:11:06+00:00"
+            "time": "2020-11-03T10:17:39+00:00"
         },
         {
             "name": "symfony/options-resolver",

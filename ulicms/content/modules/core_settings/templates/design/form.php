@@ -34,20 +34,13 @@ if (!$permissionChecker->hasPermission("design")) {
     $modManager = new ModuleManager();
     $mobileDetectInstalled = in_array("Mobile_Detect", $modManager->getEnabledModuleNames());
     ?>
-    <?php if ($default_font != "google") { ?>
-        <style type="text/css">
-            div#google-fonts {
-                display: none;
-            }
-        </style>
-    <?php } ?>
     <p>
         <a
             href="<?php echo ModuleHelper::buildActionURL("settings_categories"); ?>"
             class="btn btn-default btn-back is-not-ajax"><i class="fas fa-arrow-left"></i> <?php translate("back") ?></a>
     </p>
     <h1>
-    <?php translate("design"); ?>
+        <?php translate("design"); ?>
     </h1>
     <?php
     echo ModuleHelper::buildMethodCallForm("DesignSettingsController", "save", [], "post", array(
@@ -79,11 +72,11 @@ if (!$permissionChecker->hasPermission("design")) {
                                 foreach ($allThemes as $th) {
                                     ?>
                             <option value="<?php echo $th; ?>"
-                                    <?php
-                                    if ($th === $theme) {
-                                        echo " selected";
-                                    }
-                                    ?>
+                            <?php
+                            if ($th === $theme) {
+                                echo " selected";
+                            }
+                            ?>
                                     data-preview-url="<?php
                                     echo ModuleHelper::buildMethodCallUrl(
                                             DesignSettingsController::class,
@@ -92,10 +85,10 @@ if (!$permissionChecker->hasPermission("design")) {
                                     );
                                     ?>"
                                     >
-                            <?php echo $th; ?>
+                                        <?php echo $th; ?>
                             </option>
-        <?php }
-    ?>
+                        <?php }
+                        ?>
                     </select>
                     <div id="theme-preview" class="voffset3">                        <i class="fa fa-spinner fa-spin"></i>
                         <div class="preview"></div>
@@ -116,18 +109,18 @@ if (!$permissionChecker->hasPermission("design")) {
                             ?>
                                     >
                                 [
-                            <?php translate("standard"); ?>
+                                <?php translate("standard"); ?>
                                 ]
                             </option>
-                                    <?php
-                                    foreach ($allThemes as $th) {
-                                        ?>
+                            <?php
+                            foreach ($allThemes as $th) {
+                                ?>
                                 <option value="<?php echo $th; ?>"
-                                        <?php
-                                        if ($th === $mobile_theme) {
-                                            echo " selected";
-                                        }
-                                        ?>
+                                <?php
+                                if ($th === $mobile_theme) {
+                                    echo " selected";
+                                }
+                                ?>
                                         data-preview-url="<?php
                                         echo ModuleHelper::buildMethodCallUrl(
                                                 DesignSettingsController::class,
@@ -135,10 +128,10 @@ if (!$permissionChecker->hasPermission("design")) {
                                                 "theme={$th}"
                                         );
                                         ?>">
-        <?php echo $th; ?>
+                                            <?php echo $th; ?>
                                 </option>
-        <?php }
-    ?>
+                            <?php }
+                            ?>
                         </select>
                     <div id="theme-mobile-preview" class="voffset3">
                         <i class="fa fa-spinner fa-spin"></i>
@@ -148,7 +141,7 @@ if (!$permissionChecker->hasPermission("design")) {
                     </p>
                     <div class="alert alert-warning fade in" id="mobile_detect_notice"
                          data-installed="<?php echo strbool($mobileDetectInstalled); ?>">
-    <?php translate("mobile_detect_install_notice"); ?>
+                             <?php translate("mobile_detect_install_notice"); ?>
                     </div>
                 </td>
             </tr>
@@ -202,8 +195,8 @@ if (!$permissionChecker->hasPermission("design")) {
                             $i++;
                         }
                         ?></select>
-                    <div id="google-fonts">
-                        <select name="google-font" size=1>
+                    <div id="google-fonts" style="display: none">
+                        <select name="google-font" size="1">
                             <?php
                             foreach ($google_fonts as $myfont) {
                                 if ($myfont == $google_font) {
@@ -258,9 +251,9 @@ if (!$permissionChecker->hasPermission("design")) {
                            class="jscolor {hash:true,caps:true}"
                            value ="<?php echo _esc(Settings::get("body-background-color")); ?>"></td>
             </tr>
-    <?php
-    if ($permissionChecker->hasPermission("logo")) {
-        ?>
+            <?php
+            if ($permissionChecker->hasPermission("logo")) {
+                ?>
                 <tr>
                     <td>
                         <strong><?php translate("logo"); ?></strong>
@@ -270,40 +263,40 @@ if (!$permissionChecker->hasPermission("design")) {
                         <a href="index.php?action=logo_upload" class="btn btn-default"><i
                                 class="fas fa-tools"></i> <?php translate("upload_new_logo"); ?></a>
                     </td></tr>
-        <?php }
-    ?>
-    <?php
-    if ($permissionChecker->hasPermission("favicon")) {
-        ?>
+            <?php }
+            ?>
+            <?php
+            if ($permissionChecker->hasPermission("favicon")) {
+                ?>
                 <tr>
                     <td><strong><?php translate("favicon"); ?></strong></td>
                     <td><a href="index.php?action=favicon" class="btn btn-default"><i
                                 class="fas fa-file-image"></i> <?php translate("upload_new_favicon"); ?></a>
                     </td>
                 </tr>
-        <?php }
-    ?>
-    <?php
-    if ($permissionChecker->hasPermission("footer_text")) {
-        ?>
+            <?php }
+            ?>
+            <?php
+            if ($permissionChecker->hasPermission("footer_text")) {
+                ?>
                 <tr>
                     <td><strong><?php translate("footer"); ?></strong></td>
                     <td><a href="index.php?action=footer_text" class="btn btn-default"><i class="fas fa-edit"></i> <?php translate("edit_footer_text"); ?></a>
                     </td>
                 </tr>
-        <?php }
-    ?>
+            <?php }
+            ?>
             <tr>
                 <td><strong><?php translate("HTML5_VIDEO_WIDTH_100_PERCENT"); ?> </strong>
 
                 <td><input type="checkbox" name="video_width_100_percent"
                            class="js-switch"
 
-    <?php
-    if ($video_width_100_percent) {
-        echo " checked";
-    }
-    ?>
+                           <?php
+                           if ($video_width_100_percent) {
+                               echo " checked";
+                           }
+                           ?>
                            value="video_width_100_percent"></td>
             </tr>
             <tr>
