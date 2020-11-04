@@ -305,13 +305,12 @@ class PageController extends Controller {
                             Request::getVar("list_order_by", "id", "str")
             );
 
-            $list_order_direction = Database::escapeValue(
-                            Request::getVar(
-                                    "list_order_direction",
-                                    "asc",
-                                    "str"
-                            )
+            $list_order_direction = Request::getVar(
+                            "list_order_direction",
+                            "asc",
+                            "str"
             );
+            $list_order_direction = Database::escapeValue($list_order_direction);
 
             $list_use_pagination = Request::getVar("list_use_pagination", 0, "int");
 
