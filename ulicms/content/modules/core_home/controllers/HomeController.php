@@ -22,10 +22,12 @@ class HomeController extends Controller
         while ($row = Database::fetchObject($lastModfiedPages)) {
             $model->lastModfiedPages[] = $row;
         }
+        
         $adminsQuery = Database::query("SELECT id, username FROM " . tbname("users"));
         while ($row = Database::fetchObject($adminsQuery)) {
             $admins[$row->id] = $row->username;
         }
+        
         $model->admins = $admins;
 
         return $model;

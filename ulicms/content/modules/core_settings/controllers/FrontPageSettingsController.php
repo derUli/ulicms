@@ -10,12 +10,13 @@ class FrontPageSettingsController extends Controller {
         $languages = getAllLanguages();
         for ($i = 0; $i < count($languages); $i++) {
             $lang = $languages[$i];
-            if (isset($_POST["frontpage_" . $lang])) {
-                $page = $_POST["frontpage_" . $lang];
-                Settings::set("frontpage_" . $lang, $page);
-                if ($lang === Settings::get("default_language")) {
-                    Settings::set("frontpage", $page);
-                }
+            if (!isset($_POST["frontpage_" . $lang])) {
+                continue;
+            }
+            $page = $_POST["frontpage_" . $lang];
+            Settings::set("frontpage_" . $lang, $page);
+            if ($lang === Settings::get("default_language")) {
+                Settings::set("frontpage", $page);
             }
         }
         CacheUtil::clearPageCache();

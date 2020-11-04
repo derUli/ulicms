@@ -10,12 +10,12 @@ class MetaDescriptionController extends Controller {
         $languages = getAllLanguages();
         for ($i = 0; $i < count($languages); $i++) {
             $lang = $languages[$i];
-            if (isset($_POST["meta_description_" . $lang])) {
-                $page = $_POST["meta_description_" . $lang];
-                Settings::set("meta_description_" . $lang, $page);
-                if ($lang === Settings::get("default_language")) {
-                    Settings::set("meta_description", $page);
-                }
+            $key = "meta_description_" . $lang;
+            $meta_description = Request::getVar($key, "", "str");
+            
+            Settings::set("meta_description_" . $lang, $meta_description);
+            if ($lang === Settings::get("default_language")) {
+                Settings::set("meta_description", $meta_description);
             }
         }
 
@@ -29,4 +29,5 @@ class MetaDescriptionController extends Controller {
                 ModuleHelper::buildActionURL("meta_description")
         );
     }
+
 }
