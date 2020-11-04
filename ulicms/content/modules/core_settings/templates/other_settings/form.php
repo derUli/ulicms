@@ -281,7 +281,7 @@ if (!$permissionChecker->hasPermission("other")) {
                     class="fas fa-tools"></i> <?php translate("view"); ?></a>
         </div>
     </div>
-    <button type="submit" name="submit" class="btn btn-primary voffset3">
+    <button type="submit" class="btn btn-primary voffset3">
         <i class="fa fa-save"></i>
         <?php translate("save_changes"); ?>
     </button>

@@ -308,7 +308,7 @@ if (!$permissionChecker->hasPermission("design")) {
         </table>
     </div>
     <p class="voffset3">
-        <button type="submit" class="btn btn-primary" name="submit">
+        <button type="submit" class="btn btn-primary">
             <i class="fas fa-save"></i> <?php translate("save_changes"); ?></button>
     </p>
     <?php

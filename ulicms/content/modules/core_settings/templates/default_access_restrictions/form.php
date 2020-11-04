@@ -67,7 +67,7 @@ if ($permissionChecker->hasPermission("default_access_restrictions_edit")) {
         </label>
     </div>
     <div class="voffset2">
-        <button type="submit" name="submit_form" class="btn btn-primary">
+        <button type="submit" class="btn btn-primary">
             <i class="fa fa-save"></i> <?php translate("save_changes"); ?></button>
     </div>
     <?php

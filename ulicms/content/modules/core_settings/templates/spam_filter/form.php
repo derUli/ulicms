@@ -96,8 +96,7 @@ if ($permissionChecker->hasPermission("spam_filter")) {
             </p>
         </div>
         <p class="voffset2">
-            <button type="submit" name="submit_spamfilter_settings"
-                    class="btn btn-primary">
+            <button type="submit" class="btn btn-primary">
                 <i class="fas fa-save"></i> <?php
                 translate("save_changes"); ?></button>
         </p>

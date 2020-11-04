@@ -22,7 +22,6 @@ class SiteSloganControllerTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testSavePost(): void {
-        $_POST["submit"] = "1";
         $_POST["site_slogan_de"] = "Lalala und Lelele";
         $_POST["site_slogan_en"] = "Some random stuff";
         Settings::set("default_language", "en");

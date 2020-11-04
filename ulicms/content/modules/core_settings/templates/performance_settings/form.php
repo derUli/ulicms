@@ -157,7 +157,7 @@ if (!$permissionChecker->hasPermission("performance_settings")) {
         </div>
     </div>
     <div class="voffset2">
-        <button type="submit" name="submit" class="btn btn-primary">
+        <button type="submit" class="btn btn-primary">
             <i class="fa fa-save"></i>
             <?php translate("save_changes"); ?>
         </button>
