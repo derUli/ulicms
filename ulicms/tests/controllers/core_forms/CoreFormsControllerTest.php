@@ -2,14 +2,26 @@
 
 class CoreFormsControllerTest extends \PHPUnit\Framework\TestCase {
 
-    protected function setUp(): void {
+    private $defaultSettings = [];
 
+    protected function setUp(): void {
+        $this->defaultSettings = [
+            "country_blacklist" => Settings::get("country_blacklist")
+        ];
         require_once getLanguageFilePath("en");
         Translation::loadAllModuleLanguageFiles("en");
+
+
+        Settings::set("country_blacklist", "vn,jp,at,tr");
     }
 
     protected function tearDown(): void {
         $_POST = [];
+        $_SERVER = [];
+
+        foreach ($this->defaultSettings as $key => $value) {
+            Settings::set($key, $value);
+        }
     }
 
     public function testIncSpamCount() {
@@ -56,6 +68,19 @@ class CoreFormsControllerTest extends \PHPUnit\Framework\TestCase {
         ];
         $controller = new CoreFormsController();
         $this->assertEquals("The request contains a bad word: viagra", $controller->_spamCheck());
+    }
+
+    public function testWithForbiddenCountry() {
+        $_POST = [
+            "foo" => "bar",
+            "hello" => "world"
+        ];
+        $_SERVER["REMOTE_ADDR"] = "123.30.54.106";
+        $controller = new CoreFormsController();
+        $this->assertStringContainsString(
+                "Access to this function for your country is blocked",
+                $controller->_spamCheck()
+        );
     }
 
 }
