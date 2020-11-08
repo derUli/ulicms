@@ -27,7 +27,7 @@ function get_domain(): ?string
 // Die IP-Adresse des Clients zurückgeben
 // Falls ein Proxy genutzt wurde, versuchen, die echte IP statt der
 // des Proxy zu ermitteln
-function get_ip(): string
+function get_ip(): ?string
 {
     return Request::getIp();
 }

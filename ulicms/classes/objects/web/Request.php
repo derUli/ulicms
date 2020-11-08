@@ -133,7 +133,7 @@ class Request
         );
     }
 
-    public static function getIp(): string
+    public static function getIp(): ?string
     {
         $proxy_headers = self::getProxyHeaders();
         foreach ($proxy_headers as $proxy_header) {
