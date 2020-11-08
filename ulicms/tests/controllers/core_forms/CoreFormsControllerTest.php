@@ -6,13 +6,11 @@ class CoreFormsControllerTest extends \PHPUnit\Framework\TestCase {
 
     protected function setUp(): void {
         $this->defaultSettings = [
-            "country_blacklist" => Settings::get("country_blacklist")
+            "country_blacklist" => Settings::get("country_blacklist"),
+            "reject_requests_from_bots" => Settings::get("reject_requests_from_bots")
         ];
         require_once getLanguageFilePath("en");
         Translation::loadAllModuleLanguageFiles("en");
-
-
-        Settings::set("country_blacklist", "vn,jp,at,tr");
     }
 
     protected function tearDown(): void {
@@ -71,6 +69,8 @@ class CoreFormsControllerTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testWithForbiddenCountry() {
+        Settings::set("country_blacklist", "vn,jp,at,tr");
+
         $_POST = [
             "foo" => "bar",
             "hello" => "world"
@@ -79,6 +79,22 @@ class CoreFormsControllerTest extends \PHPUnit\Framework\TestCase {
         $controller = new CoreFormsController();
         $this->assertStringContainsString(
                 "Access to this function for your country is blocked",
+                $controller->_spamCheck()
+        );
+    }
+
+    public function testWithBot() {
+        Settings::set("reject_requests_from_bots", "1");
+
+        $_POST = [
+            "foo" => "bar",
+            "hello" => "world"
+        ];
+        $_SERVER['HTTP_USER_AGENT'] = "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)";
+
+        $controller = new CoreFormsController();
+        $this->assertStringContainsString(
+                "Bots are not allowed to send messages on this website.",
                 $controller->_spamCheck()
         );
     }
