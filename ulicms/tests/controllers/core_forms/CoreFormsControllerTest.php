@@ -7,7 +7,10 @@ class CoreFormsControllerTest extends \PHPUnit\Framework\TestCase {
     protected function setUp(): void {
         $this->defaultSettings = [
             "country_blacklist" => Settings::get("country_blacklist"),
-            "reject_requests_from_bots" => Settings::get("reject_requests_from_bots")
+            "reject_requests_from_bots" => Settings::get("reject_requests_from_bots"),
+            "disallow_chinese_chars" => Settings::get("chinese_chars_not_allowed"),
+            "disallow_cyrillic_chars" => Settings::get("disallow_cyrillic_chars"),
+            "disallow_rtl_chars" => Settings::get("disallow_rtl_chars")
         ];
         require_once getLanguageFilePath("en");
         Translation::loadAllModuleLanguageFiles("en");
@@ -98,5 +101,49 @@ class CoreFormsControllerTest extends \PHPUnit\Framework\TestCase {
                 $controller->_spamCheck()
         );
     }
+    
+       public function testWithChinese() {
+        Settings::set("disallow_chinese_chars", "1");
 
+        $_POST = [
+            "foo" => "Test 習近平是小熊維尼 Test",
+            "hello" => "world"
+        ];
+                
+        $controller = new CoreFormsController();
+        $this->assertStringContainsString(
+                "Chinese chars are not allowed!",
+                $controller->_spamCheck()
+        );
+    }
+    
+   public function testWithRTL() {
+        Settings::set("disallow_rtl_chars", "1");
+
+        $_POST = [
+            "foo" => "من آرزو می کنم رئیس جمهور ایران کرونا",
+            "hello" => "world"
+        ];
+                
+        $controller = new CoreFormsController();
+        $this->assertStringContainsString(
+                "Right-To-Left languages are not allowed!",
+                $controller->_spamCheck()
+        );
+    }
+    
+     public function testWithCyrillic() {
+        Settings::set("disallow_cyrillic_chars", "1");
+
+        $_POST = [
+            "foo" => "Путин воняет",
+            "hello" => "world"
+        ];
+                
+        $controller = new CoreFormsController();
+        $this->assertStringContainsString(
+                "Cyrillic chars are not allowed!",
+                $controller->_spamCheck()
+        );
+    }
 }

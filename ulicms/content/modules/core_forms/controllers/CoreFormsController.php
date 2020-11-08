@@ -32,6 +32,7 @@ class CoreFormsController extends Controller {
                     $this->_incSpamCount();
                     return get_translation("cyrillic_chars_not_allowed");
                 }
+
                 if (Settings::get("disallow_rtl_chars")
                         and AntiSpamHelper::isRtl($_POST[$key])) {
                     $this->_incSpamCount();
@@ -41,6 +42,7 @@ class CoreFormsController extends Controller {
                 $badwordsCheck = AntiSpamHelper::containsBadwords(
                                 $_POST[$key]
                 );
+
                 if ($badwordsCheck) {
                     $this->_incSpamCount();
                     return get_translation(
