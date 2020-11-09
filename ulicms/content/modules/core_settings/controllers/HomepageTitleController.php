@@ -10,11 +10,10 @@ class HomepageTitleController extends Controller {
         $languages = getAllLanguages();
         for ($i = 0; $i < count($languages); $i++) {
             $lang = $languages[$i];
-            if (!isset($_POST["homepage_title_" . $lang])) {
-                continue;
-            }
-            $page = $_POST["homepage_title_" . $lang];
-            Settings::set("homepage_title_" . $lang, $page);
+            $varName = "homepage_title_{$lang}";
+            $page = Request::getVar($varName, "", "str");
+
+            Settings::set($varName, $page);
             if ($lang === Settings::get("default_language")) {
                 Settings::set("homepage_title", $page);
             }

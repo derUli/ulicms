@@ -46,7 +46,8 @@ class AudioControllerTest extends \PHPUnit\Framework\TestCase {
             "name" => "test-audio-2",
             "mp3_file" => "test-audio-2.mp3",
             "ogg_file" => "test-audio-2.ogg",
-            "id" => PHP_INT_MAX
+            "id" => PHP_INT_MAX,
+            "category_id" => 1
         ];
 
         $controller = new AudioController();
