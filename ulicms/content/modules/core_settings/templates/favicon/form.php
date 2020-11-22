@@ -28,8 +28,11 @@ if ($permissionChecker->hasPermission("favicon")) {
             <?php csrf_token_html(); ?>
         <table style="height: 250px">
             <tr>
-                <td><strong><?php translate("current_favicon"); ?>
-                    </strong></td>
+                <td>
+                    <strong>
+                        <?php translate("current_favicon"); ?>
+                    </strong>
+                </td>
                 <td>
                     <div id="favicon-wrapper">
                         <?php
@@ -62,17 +65,30 @@ if ($permissionChecker->hasPermission("favicon")) {
                         <?php }
                         ?>
                     </div>
-                    <img id="delete-favicon-loading" src="gfx/loading.gif" alt="Bitte warten..."
-                         style="display: none;">
+                    <img
+                        id="delete-favicon-loading"
+                        src="gfx/loading.gif"
+                        alt="<?php translate("loading_alt"); ?>"
+                        style="display: none;"
+                        >
                 </td>
-
             </tr>
             <tr>
-
-                <td><label for="high_resolution"><strong><?php translate("high_resolution"); ?></strong></label>
+                <td>
+                    <label for="high_resolution">
+                        <strong>
+                            <?php translate("high_resolution"); ?>
+                        </strong>
+                    </label>
                 </td>
-                <td><input type="checkbox" id="high_resolution"
-                           name="high_resolution" value="high_resolution"></td>
+                <td>
+                    <input
+                        type="checkbox"
+                        id="high_resolution"
+                        name="high_resolution"
+                        value="high_resolution"
+                        >
+                </td>
             </tr>
             <tr>
                 <td width=480><strong><?php translate("upload_new_favicon"); ?>

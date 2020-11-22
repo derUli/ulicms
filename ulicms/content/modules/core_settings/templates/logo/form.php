@@ -71,8 +71,9 @@ if ($permissionChecker->hasPermission("logo")) {
                         <img
                             id="delete-logo-loading"
                             src="gfx/loading.gif"
-                            alt="Bitte warten..."
-                            style="display: none;">
+                            alt="<?php translate("loading_alt"); ?>"
+                            style="display: none;"
+                            >
                     </td>
                 </tr>
             <?php } ?>

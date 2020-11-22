@@ -36,8 +36,12 @@ $passwordSecurityTranslation = new JSTranslation(
 $passwordSecurityTranslation->render();
 ?>
 <div id="msgcontainer">
-    <img id="loading" src="gfx/loading.gif" alt="Bitte warten..."
-         style="display: none;">
+    <img
+        id="loading"
+        src="gfx/loading.gif"
+        alt="<?php translate("loading_alt"); ?>"
+        style="display: none;"
+        >
 </div>
 <div id="message">
     <br />

@@ -758,4 +758,7 @@ add_translation(
         "https://www.ulicms.de/Welche-Browser-werden-von-UliCMS-unterstutzt.html"
 );
 
+
+add_translation("loading_alt", "Please wait...");
+
 do_event("lang_en");
