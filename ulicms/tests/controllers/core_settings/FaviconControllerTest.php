@@ -112,7 +112,7 @@ class FaviconControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($controller->_hasFavicon());
         $this->assertFileDoesNotExist($controller->_getDestination1());
         $this->assertFileDoesNotExist($controller->_getDestination2());
-        
     }
+    
 
 }

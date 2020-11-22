@@ -59,4 +59,29 @@ class LogoUploadController extends Controller {
         Request::redirect(ModuleHelper::buildActionURL("logo_upload"));
     }
 
+    public function _deleteLogo(): bool {
+        $logoImage = Settings::get("logo_image");
+        $path = ULICMS_DATA_STORAGE_ROOT . "/content/images/${logoImage}";
+
+        if (empty($logoImage) || !file_exists($path)) {
+            return false;
+        }
+
+        @unlink($path);
+
+        Settings::set("logo_image", "");
+        Settings::set("logo_disabled", "yes");
+        return true;
+    }
+
+    public function deleteLogo(): void {
+        $success = $this->_deleteLogo();
+        Response::sendHttpStatusCodeResultIfAjax(
+                $success ?
+                        HttpStatusCode::OK :
+                        HttpStatusCode::INTERNAL_SERVER_ERROR,
+                ModuleHelper::buildActionURL("logo")
+        );
+    }
+
 }
