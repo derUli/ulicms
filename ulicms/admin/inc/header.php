@@ -54,21 +54,21 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
             "../node_modules/zenscroll/zenscroll-min.js",
             "../lib/js/global.js",
         );
-    
+
         if (is_logged_in()) {
             $scripts[] = "../node_modules/jscolor-picker/jscolor.min.js";
         }
-        
+
         $scripts = apply_filter($scripts, "admin_head_scripts");
-        
+
         foreach ($scripts as $script) {
             enqueueScriptFile($script);
         }
-        
+
         if (is_logged_in()) {
             echo Script::fromFile("ckeditor/ckeditor.js");
         }
-        
+
         combinedScriptHtml();
 
         require "inc/touch_icons.php";
@@ -89,7 +89,7 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
               $styles[] = "../node_modules/jquery-datetimepicker/build/jquery.datetimepicker.min.css";
 
               $styles = apply_filter($styles, "admin_head_styles");
-              
+
               foreach ($styles as $style) {
                   enqueueStylesheet($style);
               }
@@ -133,46 +133,59 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
             ?>">
             <div class="row menubar">
                 <div class="col-xs-7">
-                    <a href="../" title="<?php translate("goto_frontend"); ?>"><img
+                    <a
+                        href="../"
+                        title="<?php translate("goto_frontend"); ?>"
+
+                        data-placement="bottom" 
+                        ><img
                             src="<?php Template::escape($admin_logo); ?>" alt="UliCMS"
                             class="img-responsive"></a>
                 </div>
                 <div class="col-xs-5 menu-container">
                     <?php
                     if (is_logged_in()) {
-                        $colClass = $permissionChecker->hasPermission("comments_manage") ? "col-xs-4" : "col-xs-6"; ?>
+                        $colClass = $permissionChecker->hasPermission("comments_manage") ? "col-xs-4" : "col-xs-6";
+                        ?>
                         <div class="row pull-right top-right-icons">
                             <div class="<?php esc($colClass); ?>">
                                 <a href="#" class="has-pointer" id="menu-clear-cache"
-                                   data-url="<?php echo ModuleHelper::buildMethodCallUrl("PerformanceSettingsController", "clearCache", "clear_cache=1"); ?>">
+                                   data-url="<?php echo ModuleHelper::buildMethodCallUrl("PerformanceSettingsController", "clearCache", "clear_cache=1"); ?>"
+                                   title="<?php translate("clear_cache"); ?>"
+                                   data-placement="bottom" 
+                                   >
                                     <i class="fas fa-broom"></i></a>
                                 <a href="#" id="menu-clear-cache-loading" style="display: none;"><i class="fa fa-spinner fa-spin"></i></a>
                             </div>
                             <?php
                             if ($permissionChecker->hasPermission("comments_manage")) {
-                                $count = Comment::getUnreadCount(); ?>
+                                $count = Comment::getUnreadCount();
+                                ?>
                                 <div class="<?php esc($colClass); ?>">
                                     <div class="comment-counter">
-                                        <a href="<?php echo ModuleHelper::buildActionURL("comments_manage"); ?>"><i class="fa fa-comments"></i>
+                                        <a href="<?php echo ModuleHelper::buildActionURL("comments_manage"); ?>"
+                                           title="<?php translate("comments"); ?>"
+                                           data-placement="bottom" 
+                                           >
+                                            <i class="fa fa-comments"></i>
                                             <?php
                                             if ($count) {
                                                 ?>
                                                 <div class="count" data-count="<?php echo $count ?>">
                                                     <?php echo $count; ?>
                                                 </div>
-                                            <?php
-                                            } ?></a>
+                                            <?php }
+                                            ?></a>
                                     </div>
                                 </div>
-                            <?php
-                            } ?>
+                            <?php }
+                            ?>
                             <div class="<?php esc($colClass); ?>">
                                 <a id="menu-toggle" class="has-pointer"><i class="fa fa-bars"></i> </a>
                             </div>
                         </div>
-                    <?php
-                    } ?>
+                    <?php }
+                    ?>
                 </div>
             </div>
             <div class="main-content">
-                
