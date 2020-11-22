@@ -17,11 +17,13 @@ $(() => {
                 `${Translation.DeleteFavicon}?`, (result) => {
             if (result) {
                 $("#favicon-wrapper").hide();
-                $("#favicon-wrapper").hide();
                 $("#delete-favicon-loading").show();
 
                 $.post(url, (text, status) => {
                     target.closest('td').html('');
+                }).fail(() => {
+                    $("#delete-favicon-loading").hide();
+                    $("#favicon-wrapper").show();
                 });
             }
         });

@@ -3,7 +3,21 @@
 $(document).ready(() => {
     const body = $("body");
 
-    $.ajaxSetup({cache: false});
+    $.ajaxSetup(
+            {
+                cache: false,
+                beforeSend: (jqXHR, settings) => {
+                    // set url to get in the general error handler
+                    jqXHR.url = settings.url;
+                },
+                error: (jqXHR) => {
+                    const errorMessage =
+                            `Error requesting ${jqXHR.url} - ${jqXHR.status} ${jqXHR.statusText}`
+                    console.error(errorMessage)
+                    vanillaToast.error(errorMessage);
+                }
+            }
+    );
 
     const token = $(body).data("csrf-token");
     $.ajaxPrefilter((options, originalOptions, jqXHR) => {
