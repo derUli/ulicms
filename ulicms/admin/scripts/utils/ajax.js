@@ -71,6 +71,7 @@ const bindContentEvents = (contentContainer) => {
     initSelect2(contentContainer);
     addCssClassToInputs(contentContainer);
     initBootstrapToggle(contentContainer);
+    bindTooltips($(body));
 };
 
 const initRemoteAlerts = (rootElement) => {

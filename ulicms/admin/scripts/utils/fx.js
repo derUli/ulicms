@@ -32,3 +32,7 @@ const setWaitCursor = () => {
 const setDefaultCursor = () => {
     $('body').css('cursor', 'auto');
 };
+
+const bindTooltips = (root) => {
+    $(root).find("*[title]").tooltip();
+}

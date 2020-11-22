@@ -35,6 +35,7 @@ $(document).ready(() => {
 $(() => {
     const body = $("body");
     const language = $("html").data("select2-language");
+    bindTooltips($(body));
     bootbox.setDefaults({
         locale: $("html").data("select2-language")
     });
