@@ -58,7 +58,7 @@ class FaviconController extends Controller {
                 $source = $favicon_upload_file['tmp_name'];
 
                 $sizes = $this->_getSizes(isset($_POST["high_resolution"]));
-
+                // TODO: extract to method _placeFiles($source, $sizes)
                 $ico_lib = new PHP_ICO($source, $sizes);
                 $ico_lib->save_ico($destination1);
                 @$ico_lib->save_ico($destination2);
