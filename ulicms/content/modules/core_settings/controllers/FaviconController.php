@@ -6,6 +6,27 @@ use UliCMS\Utils\CacheUtil;
 
 class FaviconController extends Controller {
 
+    public function _getSizes($highResolution = false): array {
+        $sizes = [
+            [
+                32,
+                32
+            ],
+            [
+                64,
+                64
+            ]
+        ];
+
+        if ($highResolution) {
+            $sizes[] = [
+                128,
+                128
+            ];
+        }
+        return $sizes;
+    }
+
     public function doUpload(): void {
         // Favicon Upload
         if (!empty($_FILES['favicon_upload_file']['name'])) {
@@ -29,27 +50,11 @@ class FaviconController extends Controller {
 
                 $source = $favicon_upload_file['tmp_name'];
 
-                $sizes = array(
-                    array(
-                        32,
-                        32
-                    ),
-                    array(
-                        64,
-                        64
-                    )
-                );
-
-                if (isset($_POST["high_resolution"])) {
-                    $sizes[] = array(
-                        128,
-                        128
-                    );
-                }
+                $sizes = $this->_getSizes(isset($_POST["high_resolution"]));
 
                 $ico_lib = new PHP_ICO($source, $sizes);
                 $ico_lib->save_ico($destination1);
-                $ico_lib->save_ico($destination2);
+                @$ico_lib->save_ico($destination2);
 
                 // Google Cloud: make file public
                 if (startsWith(ULICMS_DATA_STORAGE_ROOT, "gs://")
