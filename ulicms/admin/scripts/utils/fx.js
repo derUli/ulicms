@@ -34,5 +34,8 @@ const setDefaultCursor = () => {
 };
 
 const bindTooltips = (root) => {
+    if (isTouchDevice()) {
+        return;
+    }
     $(root).find("*[title]").tooltip();
 }
