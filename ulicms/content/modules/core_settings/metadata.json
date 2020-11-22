@@ -100,7 +100,8 @@
         "ExpertSettingsController::save": "expert_settings_edit",
         "ExpertSettingsController::delete": "expert_settings_edit",
         "ExpertSettingsController::savePost": "design",
-        "FaviconController::doUpload": "favicon",
+        "FaviconController::*": "favicon",
+
         "LanguageController::createPost": "languages",
         "LanguageController::deletePost": "languages",
         "LanguageController::setDefaultLanguage": "languages",

@@ -118,4 +118,12 @@ class FaviconController extends Controller {
         return count(array_filter($success)) > 0;
     }
 
+    public function deleteIcon(): void {
+        $this->_deleteIcon();
+        Response::sendHttpStatusCodeResultIfAjax(
+                HttpStatusCode::OK,
+                ModuleHelper::buildActionURL("favicon")
+        );
+    }
+
 }
