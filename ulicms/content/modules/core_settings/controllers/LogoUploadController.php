@@ -76,12 +76,20 @@ class LogoUploadController extends Controller {
 
     public function deleteLogo(): void {
         $success = $this->_deleteLogo();
+        if ($succes) {
+            CacheUtil::clearPageCache();
+        }
         Response::sendHttpStatusCodeResultIfAjax(
                 $success ?
                         HttpStatusCode::OK :
                         HttpStatusCode::INTERNAL_SERVER_ERROR,
                 ModuleHelper::buildActionURL("logo")
         );
+    }
+
+    public function _hasLogo(): bool {
+        return !empty(Settings::get("logo_image")) &&
+                Settings::get("logo_disabled") !== 'yes';
     }
 
 }

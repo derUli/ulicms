@@ -1,5 +1,17 @@
 <?php
+
+use function UliCMS\HTML\imageTag;
+
+$controller = new LogoUploadController();
+
 $permissionChecker = new ACL();
+if (defined("ULICMS_DATA_STORAGE_URL")) {
+    $logoUrl = ULICMS_DATA_STORAGE_URL . "/content/images/" . Settings::get("logo_image");
+} else {
+    $logoUrl = "../content/images/" . Settings::get("logo_image");
+}
+$logoStoragePath = ULICMS_DATA_STORAGE_ROOT . "/content/images/" . Settings::get("logo_image");
+
 if ($permissionChecker->hasPermission("logo")) {
     ?>
     <p>
@@ -16,23 +28,48 @@ if ($permissionChecker->hasPermission("logo")) {
         <input type="hidden" name="sClass" value="LogoUploadController" /> <input
             type="hidden" name="sMethod" value="upload" />
         <table style="height: 250px">
-            <tr>
-                <td><strong><?php translate("your_logo"); ?>
-                    </strong></td>
-                <td><?php
-                    if (defined("ULICMS_DATA_STORAGE_URL")) {
-                        $logo_path = ULICMS_DATA_STORAGE_URL . "/content/images/" . Settings::get("logo_image");
-                    } else {
-                        $logo_path = "../content/images/" . Settings::get("logo_image");
-                    }
-                    $logo_storage_path = ULICMS_DATA_STORAGE_ROOT . "/content/images/" . Settings::get("logo_image");
 
-                    if (file_exists($logo_storage_path)) {
-                        echo '<img class="website_logo" src="' . $logo_path . '" alt="' . Settings::get("homepage_title") . '"/>';
-                    }
-                    ?>
-                </td>
-            </tr>
+            <?php if ($controller->_hasLogo()) {
+                ?>
+
+                <tr>
+                    <td><strong><?php translate("your_logo"); ?>
+                        </strong></td>
+                    <td>
+                        <div id="logo-wrapper">
+                            <?php
+                            if (file_exists($logoStoragePath)) {
+                                echo imageTag(
+                                        $logoUrl,
+                                        ["alt" => Settings::get("homepage_title")]
+                                );
+                                ?>
+                                <div class="voffset2 text-center">
+                                    <button
+                                        type="button"
+                                        class="btn btn-default"
+                                        id="delete-logo"
+                                        data-url="<?php
+                                        echo ModuleHelper::buildMethodCallUrl(
+                                                LogoUploadController::Class,
+                                                "deleteLogo",
+                                        );
+                                        ?>
+                                        "
+                                        >
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                        <?php translate("delete_logo"); ?>
+                                    </button>
+                                    <?php
+                                }
+                                ?>
+                            </div>
+                        </div>
+                        <img id="delete-logo-loading" src="gfx/loading.gif" alt="Bitte warten..."
+                             style="display: none;">
+                    </td>
+                </tr>
+            <?php } ?>
             <tr>
                 <td width="480"><strong><?php translate("upload_new_logo"); ?>
                     </strong></td>
@@ -49,6 +86,17 @@ if ($permissionChecker->hasPermission("logo")) {
         </table>
     </form>
     <?php
+    $translation = new JSTranslation();
+    $translation->addKey("delete_logo");
+    $translation->addKey("logo_deleted");
+    $translation->render();
+
+    enqueueScriptFile(ModuleHelper::buildRessourcePath(
+                    "core_settings",
+                    "js/logo.js"
+            )
+    );
+    combinedScriptHtml();
 } else {
     noPerms();
 }

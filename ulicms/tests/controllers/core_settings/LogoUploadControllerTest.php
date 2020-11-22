@@ -17,7 +17,7 @@ class LogoUploadControllerTest extends \PHPUnit\Framework\TestCase {
                 "cat.jpg"
         );
         copy($fixtureFile, $filePath);
-        
+
         Settings::set("logo_disabled", "no");
         Settings::set("logo_image", basename($filePath));
     }
@@ -50,6 +50,17 @@ class LogoUploadControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertEmpty(Settings::get("logo_image"));
         $this->assertEquals("yes", Settings::get("logo_disabled"));
         $this->assertFalse($controller->_deleteLogo());
+    }
+
+    public function testHasLogoReturnsTrue() {
+        $controller = new LogoUploadController();
+        $this->assertTrue($controller->_hasLogo());
+    }
+
+    public function testHasLogoReturnsFalse() {
+        $controller = new LogoUploadController();
+        $controller->_deleteLogo();
+        $this->assertFalse($controller->_hasLogo());
     }
 
     public function testBuildFileName() {

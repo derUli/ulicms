@@ -58,3 +58,6 @@ add_translation("lazy_loading_help3", "Unter folgendem Link erfahren Sie, welche
 
 add_translation("delete_favicon", "Favicon löschen");
 add_translation("favicon_deleted", "Das Favicon wurde gelöscht.");
+
+add_translation("delete_logo", "Logo löschen");
+add_translation("logo_deleted", "Das Logo wurde gelöscht.");
