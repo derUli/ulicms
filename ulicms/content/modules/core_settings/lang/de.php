@@ -57,3 +57,4 @@ add_translation("lazy_loading_help2", "Bitte beachten Sie, dass derzeit noch nic
 add_translation("lazy_loading_help3", "Unter folgendem Link erfahren Sie, welche Browser dies derzeit unterstützen:");
 
 add_translation("delete_favicon", "Favicon löschen");
+add_translation("favicon_deleted", "Das Favicon wurde gelöscht.");

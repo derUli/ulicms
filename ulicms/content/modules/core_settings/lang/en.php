@@ -59,3 +59,4 @@ add_translation("lazy_loading_help2", "Please note that not every browser suppor
 add_translation("lazy_loading_help3", "Use following link to read which browsers have support:");
 
 add_translation("delete_favicon", "Delete Favicon");
+add_translation("favicon_deleted", "Favicon deleted.");

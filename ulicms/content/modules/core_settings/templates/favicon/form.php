@@ -95,6 +95,7 @@ if ($permissionChecker->hasPermission("favicon")) {
     <?php
     $translation = new JSTranslation();
     $translation->addKey("delete_favicon");
+    $translation->addKey("favicon_deleted");
     $translation->render();
 
     enqueueScriptFile(ModuleHelper::buildRessourcePath(

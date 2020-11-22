@@ -19,12 +19,15 @@ $(() => {
                 $("#favicon-wrapper").hide();
                 $("#delete-favicon-loading").show();
 
-                $.post(url, (text, status) => {
-                    target.closest('td').html('');
-                }).fail(() => {
-                    $("#delete-favicon-loading").hide();
-                    $("#favicon-wrapper").show();
-                });
+                $.post(url)
+                        .done((text, status) => {
+                            target.closest('td').html('');
+                            vanillaToast.success(Translation.FaviconDeleted);
+                        })
+                        .fail(() => {
+                            $("#delete-favicon-loading").hide();
+                            $("#favicon-wrapper").show();
+                        });
             }
         });
 
