@@ -30,22 +30,15 @@ class LogoUploadController extends Controller {
                 }
 
                 Settings::set("logo_image", $logo_upload_filename);
+                Settings::set("logo_disabled", "no");
+
+                CacheUtil::clearPageCache();
                 do_event("after_upload_logo_successful");
             }
 
             do_event("after_upload_logo");
         }
 
-        Settings::set(
-                "logo_disabled",
-                Request::getVar(
-                        "logo_disabled",
-                        "no",
-                        "str"
-                )
-        );
-
-        CacheUtil::clearPageCache();
 
         Request::redirect(ModuleHelper::buildActionURL("logo_upload"));
     }
