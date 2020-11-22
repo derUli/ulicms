@@ -100,7 +100,7 @@ class FaviconController extends Controller {
         return count(array_filter($success)) > 0;
     }
 
-    public function _deleteIcon(): bool {
+    public function _deleteFavicon(): bool {
         $success = [];
 
         $files = [
@@ -119,8 +119,8 @@ class FaviconController extends Controller {
         return count(array_filter($success)) > 0;
     }
 
-    public function deleteIcon(): void {
-        $success = $this->_deleteIcon();
+    public function deleteFavicon(): void {
+        $success = $this->_deleteFavicon();
         Response::sendHttpStatusCodeResultIfAjax(
                 $success ?
                         HttpStatusCode::OK :

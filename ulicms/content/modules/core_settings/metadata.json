@@ -90,7 +90,7 @@
         "HomepageTitleController::savePost": "settings_simple",
         "SiteSloganController::savePost": "settings_simple",
         "FrontPageSettingsController::savePost": "settings_simple",
-        "LogoUploadController::upload": "logo",
+        "LogoUploadController::*": "logo",
         "MetaDescriptionController::savePost": "settings_simple",
         "MetaKeywordsController::savePost": "settings_simple",
         "OpenGraphController::savePost": "open_graph",
