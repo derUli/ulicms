@@ -19,4 +19,26 @@ class FaviconControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals([128, 128], $sizes[2]);
     }
 
+    public function testGetDestination1() {
+        $controller = new FaviconController();
+
+        $this->assertStringEndsWith(
+                "/content/images/favicon.ico",
+                $controller->_getDestination1()
+        );
+    }
+
+    public function testGetDestination2() {
+        $controller = new FaviconController();
+
+        $this->assertStringEndsWith(
+                "/favicon.ico",
+                $controller->_getDestination2()
+        );
+        $this->assertStringEndsNotWith(
+                "/content/images/favicon.ico",
+                $controller->_getDestination2()
+        );
+    }
+
 }

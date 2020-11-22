@@ -26,6 +26,16 @@ class FaviconController extends Controller {
         }
         return $sizes;
     }
+    
+    public function _getDestination1(): string {
+        return ULICMS_DATA_STORAGE_ROOT
+                        . "/content/images/favicon.ico";
+    }
+    
+       public function _getDestination2(): string {
+        return ULICMS_DATA_STORAGE_ROOT
+                        . "/favicon.ico";
+    }
 
     public function doUpload(): void {
         // Favicon Upload
@@ -40,11 +50,8 @@ class FaviconController extends Controller {
             $extension = file_extension($filename);
 
             if (startsWith($type, "image/")) {
-                $destination1 = ULICMS_DATA_STORAGE_ROOT
-                        . "/content/images/favicon.ico";
-
-                $destination2 = ULICMS_DATA_STORAGE_ROOT
-                        . "/favicon.ico";
+                $destination1 = $this->_getDestination1();
+                $destination2 = $this->_getDestination2();
 
                 do_event("before_upload_favicon");
 
