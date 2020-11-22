@@ -57,3 +57,5 @@ add_translation("lazy_loading_iframe", "IFrames");
 add_translation("lazy_loading_help1", "Delay loading media until it is in the viewport.");
 add_translation("lazy_loading_help2", "Please note that not every browser supports this feature.");
 add_translation("lazy_loading_help3", "Use following link to read which browsers have support:");
+
+add_translation("delete_favicon", "Delete Favicon");

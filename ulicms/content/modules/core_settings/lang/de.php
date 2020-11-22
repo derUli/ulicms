@@ -56,3 +56,4 @@ add_translation("lazy_loading_help1", "Lädt Medien erst, wenn sich diese im Scr
 add_translation("lazy_loading_help2", "Bitte beachten Sie, dass derzeit noch nicht jeder Browser dieses Feature unterstützt.");
 add_translation("lazy_loading_help3", "Unter folgendem Link erfahren Sie, welche Browser dies derzeit unterstützen:");
 
+add_translation("delete_favicon", "Favicon löschen");
