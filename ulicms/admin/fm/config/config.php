@@ -2,6 +2,10 @@
 
 define("RESPONSIVE_FM", true);
 include_once "../../init.php";
+
+use UliCMS\Helpers\ImageScaleHelper;
+
+$dimensions = ImageScaleHelper::getMaxImageDimensions();
 $version = "9.14.0";
 
 if (session_id() == '') {
@@ -16,6 +20,13 @@ foreach ($permissions as $permission) {
     if ($acl->hasPermission($permission)) {
         $isPermitted = true;
     }
+}
+
+$language = getSystemLanguage();
+
+$languageFile = dirname(__FILE__ . "/../lang/${language}.php");
+if (!file_exists($languageFile)) {
+    $language = "en_EN";
 }
 
 mb_internal_encoding('UTF-8');
@@ -227,7 +238,7 @@ $config = array(
       | default language file name
       |--------------------------------------------------------------------------
      */
-    'default_language' => getSystemLanguage(),
+    'default_language' => $language,
     /*
       |--------------------------------------------------------------------------
       | Icon theme
@@ -264,8 +275,8 @@ $config = array(
     // set maximum pixel width and/or maximum pixel height for all images
     // If you set a maximum width or height, oversized images are converted to those limits. Images smaller than the limit(s) are unaffected
     // if you don't need a limit set both to 0
-    'image_max_width' => 2560,
-    'image_max_height' => 0,
+    'image_max_width' => $dimensions ? $dimensions[0]: 0,
+    'image_max_height' => $dimensions ? $dimensions[1]: 0,
     'image_max_mode' => 'auto',
     /*
       #  $option:  0 / exact = defined size;
@@ -508,14 +519,14 @@ $config = array(
 );
 
 return array_merge(
-    $config,
-    array(
+        $config,
+        array(
             'ext' => array_merge(
-                $config['ext_img'],
-                $config['ext_file'],
-                $config['ext_misc'],
-                $config['ext_video'],
-                $config['ext_music']
+                    $config['ext_img'],
+                    $config['ext_file'],
+                    $config['ext_misc'],
+                    $config['ext_video'],
+                    $config['ext_music']
             ),
             'tui_defaults_config' => array(
                 //'common.bi.image'                   => $config['common.bi.image'],
