@@ -71,14 +71,15 @@ class FaviconController extends Controller {
                 CacheUtil::clearPageCache();
 
                 Request::redirect(ModuleHelper::buildActionURL("favicon"));
-            } else {
-                Request::redirect(
-                        ModuleHelper::buildActionURL(
-                                "favicon",
-                                "error=UPLOAD_WRONG_FILE_FORMAT"
-                        )
-                );
             }
+
+            // Show error if uploaded file is not an image
+            Request::redirect(
+                    ModuleHelper::buildActionURL(
+                            "favicon",
+                            "error=UPLOAD_WRONG_FILE_FORMAT"
+                    )
+            );
         }
     }
 
@@ -124,6 +125,10 @@ class FaviconController extends Controller {
                 HttpStatusCode::OK,
                 ModuleHelper::buildActionURL("favicon")
         );
+    }
+
+    public function _hasFavicon(): bool {
+        return file_exists($this->_getDestination2());
     }
 
 }

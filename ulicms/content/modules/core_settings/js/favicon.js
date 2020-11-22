@@ -2,6 +2,11 @@
 /* global bootbox */
 
 $(() => {
+    // Enable submit button after file was selected
+    $(".btn-primary").prop('disabled', true)
+    $("input[name=favicon_upload_file]").change(
+            () => $(".btn-primary").prop('disabled', false)
+    );
     // Delete Favicon
     // show load spinner
     // then empty the table column

@@ -77,12 +77,18 @@ if ($permissionChecker->hasPermission("favicon")) {
             <tr>
                 <td width=480><strong><?php translate("upload_new_favicon"); ?>
                     </strong></td>
-                <td><input name="favicon_upload_file" type="file"> <br /></td>
+                <td>
+                    <input name="favicon_upload_file" type="file" required
+                           accept="image/*">
+                    <br /></td>
             </tr>
             <tr>
                 <td></td>
-                <td class="text-center"><button type="submit"
-                                                class="btn btn-primary"><?php translate("upload"); ?></td>
+                <td class="text-center">
+                    <button type="submit"class="btn btn-primary">
+                        <?php translate("upload"); ?>
+                    </button>
+                </td>
             </tr>
         </table>
     </form>

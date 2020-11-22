@@ -1,5 +1,13 @@
-<link rel="icon" href="gfx/favicon.ico" type="image/x-icon" />
-<link rel="shortcut icon" href="gfx/favicon.ico" type="image/x-icon" />
+<?php
+$controller = ControllerRegistry::get("FaviconController");
+
+$hasFavicon = $controller && $controller->_hasFavicon();
+?>
+<?php if (!$hasFavicon) { ?>
+    <link rel="icon" href="gfx/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="gfx/favicon.ico" type="image/x-icon" />
+<?php }
+?>
 <link rel="apple-touch-icon" href="gfx/apple-touch-icon.png" />
 <link rel="apple-touch-icon-precomposed" href="gfx/apple-touch-icon.png" />
 <link rel="apple-touch-icon" sizes="57x57"

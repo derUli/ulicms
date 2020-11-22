@@ -76,6 +76,8 @@ class FaviconControllerTest extends \PHPUnit\Framework\TestCase {
                 $controller->_placeFiles($source, $controller->_getSizes())
         );
 
+        $this->assertTrue($controller->_hasFavicon());
+        
         $this->assertEquals(
                 "7005a4a7c5933da712ff8766bfd21d33",
                 md5_file($controller->_getDestination1())
@@ -107,8 +109,10 @@ class FaviconControllerTest extends \PHPUnit\Framework\TestCase {
         );
 
         $this->assertTrue($controller->_deleteIcon());
+        $this->assertFalse($controller->_hasFavicon());
         $this->assertFileDoesNotExist($controller->_getDestination1());
         $this->assertFileDoesNotExist($controller->_getDestination2());
+        
     }
 
 }
