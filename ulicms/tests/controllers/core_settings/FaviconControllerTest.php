@@ -69,4 +69,46 @@ class FaviconControllerTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
+    public function testPutAndDeleteFiles() {
+        $source = Path::resolve("ULICMS_ROOT/tests/fixtures/cat.jpg");
+        $controller = new FaviconController();
+        $this->assertTrue(
+                $controller->_placeFiles($source, $controller->_getSizes())
+        );
+
+        $this->assertEquals(
+                "7005a4a7c5933da712ff8766bfd21d33",
+                md5_file($controller->_getDestination1())
+        );
+        $this->assertEquals(
+                "7005a4a7c5933da712ff8766bfd21d33",
+                md5_file($controller->_getDestination2())
+        );
+
+        $this->assertTrue($controller->_deleteIcon());
+        $this->assertFileDoesNotExist($controller->_getDestination1());
+        $this->assertFileDoesNotExist($controller->_getDestination2());
+    }
+
+    public function testPutAndDeleteFilesHQ() {
+        $source = Path::resolve("ULICMS_ROOT/tests/fixtures/cat.jpg");
+        $controller = new FaviconController();
+        $this->assertTrue(
+                $controller->_placeFiles($source, $controller->_getSizes(true))
+        );
+
+        $this->assertEquals(
+                "d4150ed4acdf20fe4a9c4f31ace5e262",
+                md5_file($controller->_getDestination1())
+        );
+        $this->assertEquals(
+                "d4150ed4acdf20fe4a9c4f31ace5e262",
+                md5_file($controller->_getDestination2())
+        );
+
+        $this->assertTrue($controller->_deleteIcon());
+        $this->assertFileDoesNotExist($controller->_getDestination1());
+        $this->assertFileDoesNotExist($controller->_getDestination2());
+    }
+
 }

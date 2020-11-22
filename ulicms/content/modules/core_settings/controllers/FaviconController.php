@@ -56,17 +56,14 @@ class FaviconController extends Controller {
                 do_event("before_upload_favicon");
 
                 $source = $favicon_upload_file['tmp_name'];
-
                 $sizes = $this->_getSizes(isset($_POST["high_resolution"]));
-                // TODO: extract to method _placeFiles($source, $sizes)
-                $ico_lib = new PHP_ICO($source, $sizes);
-                $ico_lib->save_ico($destination1);
-                @$ico_lib->save_ico($destination2);
+                $this->_placeFiles($source, $sizes);
 
                 // Google Cloud: make file public
                 if (startsWith(ULICMS_DATA_STORAGE_ROOT, "gs://")
                         and class_exists("GoogleCloudHelper")) {
                     GoogleCloudHelper::changeFileVisiblity($destination1, true);
+                    GoogleCloudHelper::changeFileVisiblity($destination2, true);
                 }
 
                 do_event("after_upload_favicon");
@@ -85,8 +82,25 @@ class FaviconController extends Controller {
         }
     }
 
+    public function _placeFiles(string $source, array $sizes): bool {
+        $success = [];
+        $files = [
+            $this->_getDestination1(),
+            $this->_getDestination2()
+        ];
+
+        $icoLib = new PHP_ICO($source, $sizes);
+
+        foreach ($files as $file) {
+            @$fileSaved = $icoLib->save_ico($file);
+
+            $success[] = file_exists($file);
+        }
+        return count(array_filter($success)) > 0;
+    }
+
     public function _deleteIcon(): bool {
-        $success = true;
+        $success = [];
 
         $files = [
             $this->_getDestination1(),
@@ -98,11 +112,10 @@ class FaviconController extends Controller {
                 @unlink($file);
             }
 
-            if (file_exists($file)) {
-                $success = false;
-            }
+            $success[] = !file_exists($file);
         }
-        return $success;
+
+        return count(array_filter($success)) > 0;
     }
 
 }
