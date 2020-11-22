@@ -19,13 +19,15 @@ class FaviconController extends Controller {
             $extension = file_extension($filename);
 
             if (startsWith($type, "image/")) {
-                $new_filename = ULICMS_DATA_STORAGE_ROOT
+                $destination1 = ULICMS_DATA_STORAGE_ROOT
                         . "/content/images/favicon.ico";
+
+                $destination2 = ULICMS_DATA_STORAGE_ROOT
+                        . "/favicon.ico";
 
                 do_event("before_upload_favicon");
 
                 $source = $favicon_upload_file['tmp_name'];
-                $destination = $new_filename;
 
                 $sizes = array(
                     array(
@@ -37,19 +39,22 @@ class FaviconController extends Controller {
                         64
                     )
                 );
+
                 if (isset($_POST["high_resolution"])) {
                     $sizes[] = array(
                         128,
                         128
                     );
                 }
+
                 $ico_lib = new PHP_ICO($source, $sizes);
-                $ico_lib->save_ico($destination);
+                $ico_lib->save_ico($destination1);
+                $ico_lib->save_ico($destination2);
 
                 // Google Cloud: make file public
                 if (startsWith(ULICMS_DATA_STORAGE_ROOT, "gs://")
                         and class_exists("GoogleCloudHelper")) {
-                    GoogleCloudHelper::changeFileVisiblity($destination, true);
+                    GoogleCloudHelper::changeFileVisiblity($destination1, true);
                 }
 
                 do_event("after_upload_favicon");
