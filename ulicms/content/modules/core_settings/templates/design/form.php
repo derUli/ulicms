@@ -260,7 +260,7 @@ if (!$permissionChecker->hasPermission("design")) {
                     </td>
                     <td>
 
-                        <a href="index.php?action=logo_upload" class="btn btn-default is-not-ajax"><i
+                        <a href="index.php?action=logo" class="btn btn-default is-not-ajax"><i
                                 class="fas fa-tools"></i> <?php translate("upload_new_logo"); ?></a>
                     </td></tr>
             <?php }

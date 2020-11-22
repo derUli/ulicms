@@ -8,7 +8,7 @@
         "site_slogan": "templates/site_slogan/form.php",
         "settings_categories": "templates/categories/menu.php",
         "frontpage_settings": "templates/frontpage/form.php",
-        "logo_upload": "templates/logo/form.php",
+        "logo": "templates/logo/form.php",
         "meta_description": "templates/meta_description/form.php",
         "meta_keywords": "templates/meta_keywords/form.php",
         "open_graph": "templates/open_graph/form.php",
