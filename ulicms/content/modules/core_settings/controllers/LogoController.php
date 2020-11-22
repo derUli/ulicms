@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use UliCMS\Utils\CacheUtil;
+use UliCMS\Helpers\ImageScaleHelper;
 
 class LogoController extends Controller {
 
@@ -23,6 +24,8 @@ class LogoController extends Controller {
                 $this->_buildFileName($filename, $originalName);
     }
 
+  
+
     public function upload(): void {
         // Logo Upload
         if (!empty($_FILES['logo_upload_file']['name'])) {
@@ -39,6 +42,9 @@ class LogoController extends Controller {
 
                 do_event("before_upload_logo");
                 move_uploaded_file($logo_upload['tmp_name'], $newPath);
+
+                ImageScaleHelper::scaleDown($newPath);
+
                 // Google Cloud: make file public
                 if (startsWith(ULICMS_DATA_STORAGE_ROOT, "gs://")
                         and class_exists("GoogleCloudHelper")) {
