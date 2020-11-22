@@ -26,15 +26,15 @@ class FaviconController extends Controller {
         }
         return $sizes;
     }
-    
+
     public function _getDestination1(): string {
         return ULICMS_DATA_STORAGE_ROOT
-                        . "/content/images/favicon.ico";
+                . "/content/images/favicon.ico";
     }
-    
-       public function _getDestination2(): string {
+
+    public function _getDestination2(): string {
         return ULICMS_DATA_STORAGE_ROOT
-                        . "/favicon.ico";
+                . "/favicon.ico";
     }
 
     public function doUpload(): void {
@@ -83,6 +83,26 @@ class FaviconController extends Controller {
                 );
             }
         }
+    }
+
+    public function _deleteIcon(): bool {
+        $success = true;
+
+        $files = [
+            $this->_getDestination1(),
+            $this->_getDestination2()
+        ];
+
+        foreach ($files as $file) {
+            if (file_exists($file)) {
+                @unlink($file);
+            }
+
+            if (file_exists($file)) {
+                $success = false;
+            }
+        }
+        return $success;
     }
 
 }

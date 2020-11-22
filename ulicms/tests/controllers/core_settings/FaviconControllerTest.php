@@ -2,6 +2,34 @@
 
 class FaviconControllerTest extends \PHPUnit\Framework\TestCase {
 
+    protected function setUp(): void {
+        $controller = new FaviconController();
+        $file1 = $controller->_getDestination1();
+        $file2 = $controller->_getDestination2();
+
+        if (file_exists($file1)) {
+            rename($file1, "{$file1}.bak");
+        }
+
+        if (file_exists($file2)) {
+            rename($file2, "{$file2}.bak");
+        }
+    }
+
+    protected function tearDown(): void {
+        $controller = new FaviconController();
+        $file1 = $controller->_getDestination1() . ".bak";
+        $file2 = $controller->_getDestination2() . ".bak";
+
+        if (file_exists($file1)) {
+            rename($file1, $controller->_getDestination1());
+        }
+
+        if (file_exists($file2)) {
+            rename($file2, $controller->_getDestination2());
+        }
+    }
+
     public function testGetSizes() {
         $controller = new FaviconController();
         $sizes = $controller->_getSizes();
