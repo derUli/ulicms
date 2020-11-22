@@ -3,6 +3,7 @@
 Neue Features:
 * Favicons können gelöscht werden
 * Logo-Upload verbessert
+* Maximale Größe Bilder kann konfiguriert werden
 
 ===== Neues in UliCMS 2020.4 =====
 
