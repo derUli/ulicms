@@ -1,6 +1,6 @@
 <?php
 
-class LogoUploadControllerTest extends \PHPUnit\Framework\TestCase {
+class LogoControllerTest extends \PHPUnit\Framework\TestCase {
 
     private $initialSettings = [];
 
@@ -9,7 +9,7 @@ class LogoUploadControllerTest extends \PHPUnit\Framework\TestCase {
             "logo_disabled" => Settings::get("logo_disabled"),
             "logo_image" => Settings::get("logo_image"),
         ];
-        $controller = new LogoUploadController();
+        $controller = new LogoController();
 
         $fixtureFile = $this->getFixturePath();
         $filePath = $controller->_buildFilePath(
@@ -27,7 +27,7 @@ class LogoUploadControllerTest extends \PHPUnit\Framework\TestCase {
             Settings::set($key, $value);
         }
 
-        $controller = new LogoUploadController();
+        $controller = new LogoController();
         $fixtureFile = $this->getFixturePath();
         $fileName = $controller->_buildFilePath(
                 $fixtureFile,
@@ -43,7 +43,7 @@ class LogoUploadControllerTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testDeleteLogo() {
-        $controller = new LogoUploadController();
+        $controller = new LogoController();
         $this->assertEquals("no", Settings::get("logo_disabled"));
         $this->assertTrue($controller->_deleteLogo());
 
@@ -53,18 +53,18 @@ class LogoUploadControllerTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testHasLogoReturnsTrue() {
-        $controller = new LogoUploadController();
+        $controller = new LogoController();
         $this->assertTrue($controller->_hasLogo());
     }
 
     public function testHasLogoReturnsFalse() {
-        $controller = new LogoUploadController();
+        $controller = new LogoController();
         $controller->_deleteLogo();
         $this->assertFalse($controller->_hasLogo());
     }
 
     public function testBuildFileName() {
-        $controller = new LogoUploadController();
+        $controller = new LogoController();
 
         $fileName = $controller->_buildFileName(
                 $this->getFixturePath(),
@@ -74,7 +74,7 @@ class LogoUploadControllerTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testBuildFilePath() {
-        $controller = new LogoUploadController();
+        $controller = new LogoController();
 
         $filePath = $controller->_buildFilePath(
                 $this->getFixturePath(),

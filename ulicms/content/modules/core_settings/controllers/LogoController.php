@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use UliCMS\Utils\CacheUtil;
 
-class LogoUploadController extends Controller {
+class LogoController extends Controller {
 
     public function _buildFileName(
             string $filename,

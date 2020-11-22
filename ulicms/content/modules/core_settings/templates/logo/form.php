@@ -2,7 +2,7 @@
 
 use function UliCMS\HTML\imageTag;
 
-$controller = new LogoUploadController();
+$controller = new LogoController();
 
 $permissionChecker = new ACL();
 if (defined("ULICMS_DATA_STORAGE_URL")) {
@@ -25,7 +25,7 @@ if ($permissionChecker->hasPermission("logo")) {
     </p>
     <form enctype="multipart/form-data" action="index.php" method="post">
         <?php csrf_token_html(); ?>
-        <input type="hidden" name="sClass" value="LogoUploadController" /> <input
+        <input type="hidden" name="sClass" value="LogoController" /> <input
             type="hidden" name="sMethod" value="upload" />
         <table style="height: 250px">
 
@@ -41,17 +41,20 @@ if ($permissionChecker->hasPermission("logo")) {
                             if (file_exists($logoStoragePath)) {
                                 echo imageTag(
                                         $logoUrl,
-                                        ["alt" => Settings::get("homepage_title")]
+                                        [
+                                            "alt" => Settings::get("homepage_title"),
+                                            "class" => "img-responsive"
+                                        ]
                                 );
                                 ?>
-                                <div class="voffset2 text-center">
+                                <div class="voffset2">
                                     <button
                                         type="button"
                                         class="btn btn-default"
                                         id="delete-logo"
                                         data-url="<?php
                                         echo ModuleHelper::buildMethodCallUrl(
-                                                LogoUploadController::Class,
+                                                LogoController::Class,
                                                 "deleteLogo",
                                         );
                                         ?>
@@ -65,8 +68,11 @@ if ($permissionChecker->hasPermission("logo")) {
                                 ?>
                             </div>
                         </div>
-                        <img id="delete-logo-loading" src="gfx/loading.gif" alt="Bitte warten..."
-                             style="display: none;">
+                        <img
+                            id="delete-logo-loading"
+                            src="gfx/loading.gif"
+                            alt="Bitte warten..."
+                            style="display: none;">
                     </td>
                 </tr>
             <?php } ?>
