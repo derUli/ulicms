@@ -65,9 +65,7 @@ class CoreFormsController extends Controller {
             if (Settings::get("reject_requests_from_bots")
                     and AntiSpamHelper::checkForBot(get_useragent())) {
                 $this->_incSpamCount();
-                return get_translation("bots_are_not_allowed", [
-                    "%hostname%" => $hostname
-                ]);
+                return get_translation("bots_are_not_allowed");
             }
         }
         return null;

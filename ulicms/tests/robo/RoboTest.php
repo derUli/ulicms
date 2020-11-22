@@ -30,7 +30,7 @@ class RoboTest extends RoboBaseTest
                 ]
         );
         $this->assertStringContainsString(
-            "OK (5 tests, 42 assertions)",
+            "OK (6 tests, 43 assertions)",
             $actual
         );
     }
