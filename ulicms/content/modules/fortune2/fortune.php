@@ -30,12 +30,6 @@ class Fortune extends MainClass
         return get_translation("my_settings_page");
     }
 
-    // Text für den Link auf die Einstellungen des Moduls, Default ist "Einstellungen"
-    public function getSettingsLinkText()
-    {
-        return get_translation("show_samples");
-    }
-
     // settings page content below headline
     public function settings()
     {
@@ -95,5 +89,11 @@ class Fortune extends MainClass
     public function helloWorld()
     {
         echo "Hello World!";
+    }
+    
+    // Thia is executed before uninstalling this module
+    // Use this to clean up data (e.g. drop database tables, delete files)
+    public function uninstall(){
+        Settings::set("fortune2_uninstalled_at", time());
     }
 }

@@ -37,6 +37,8 @@ class ModuleTest extends \PHPUnit\Framework\TestCase {
 
         $module = new Module("core_comments");
         $module->enable();
+
+        $this->restoreFortune2();
     }
 
     public function testHasAdminPageReturnsTrue() {
