@@ -14,31 +14,32 @@ class ModuleTest extends \PHPUnit\Framework\TestCase {
         Settings::delete("fortune2_uninstalled_at");
     }
 
-    protected function backupFortune2(): void {
-        $src = getModulePath("fortune2");
-        $dst = Path::resolve("ULICMS_TMP/fortune2");
-        recurse_copy($src, $dst);
-        Settings::delete("fortune2_uninstalled_at");
-    }
-
-    protected function restoreFortune2(): void {
-        $src = Path::resolve("ULICMS_TMP/fortune2");
-        $dst = getModulePath("fortune2");
-
-        $files = find_all_files($dst);
-        if (count($files) < 10) {
-            recurse_copy($src, $dst);
-        }
-    }
-
     protected function tearDown(): void {
+        $this->restoreFortune2();
         $manager = new ModuleManager();
         $manager->sync();
 
         $module = new Module("core_comments");
         $module->enable();
+    }
 
-        $this->restoreFortune2();
+    protected function backupFortune2(): void {
+        $src = getModulePath("fortune2", true);
+        $dst = getModulePath(".fortune2.bak", true);
+        if (file_exists($src) && !file_exists($dst)) {
+            recurse_copy($src, $dst);
+        }
+        Settings::delete("fortune2_uninstalled_at");
+    }
+
+    protected function restoreFortune2(): void {
+        $src = getModulePath(".fortune2.bak", true);
+        $dst = getModulePath("fortune2", true);
+
+        if (file_exists($src) && !file_exists($dst)) {
+            recurse_copy($src, $dst);
+            sureRemoveDir($src, true);
+        }
     }
 
     public function testHasAdminPageReturnsTrue() {

@@ -170,22 +170,16 @@ class Module {
 
     public function hasUninstallEvent(): bool {
         $name = $this->name;
-        $hasUninstallEvent = false;
-
         $uninstallScript1 = getModuleUninstallScriptPath($name, true);
         $uninstallScript2 = getModuleUninstallScriptPath2($name, true);
 
         // Uninstall Script ausführen, sofern vorhanden
         $mainController = ModuleHelper::getMainController($name);
-        if ($mainController &&
-                method_exists($mainController, "uninstall")) {
-            $hasUninstallEvent = true;
-        } elseif (file_exists($uninstallScript1)) {
-            $hasUninstallEvent = true;
-        } elseif (file_exists($uninstallScript2)) {
-            $hasUninstallEvent = true;
-        }
-        return $hasUninstallEvent;
+        return (($mainController &&
+                method_exists($mainController, "uninstall")) ||
+                file_exists($uninstallScript1) ||
+                file_exists($uninstallScript2)
+                );
     }
 
     public function delete(): ?bool {
@@ -207,4 +201,5 @@ class Module {
     public function uninstall(): bool {
         return uninstall_module($this->getName(), "module");
     }
+
 }

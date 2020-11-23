@@ -37,7 +37,7 @@ function getModuleAdminSelfPath(): string
 function getModulePath($module, $abspath = false): string
 {
     if ($abspath) {
-        return Path::resolve(
+        return Path::resolveAndNormalize(
             "ULICMS_DATA_STORAGE_ROOT/content/modules/$module"
         ) . "/";
     }
