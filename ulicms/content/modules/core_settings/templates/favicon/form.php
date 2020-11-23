@@ -52,8 +52,8 @@ if ($permissionChecker->hasPermission("favicon")) {
                                     id="delete-favicon"
                                     data-url="<?php
                                     echo ModuleHelper::buildMethodCallUrl(
-                                            FaviconController::Class,
-                                            "deleteFavicon",
+                                            FaviconController::class,
+                                            "deleteFavicon"
                                     );
                                     ?>
                                     "
