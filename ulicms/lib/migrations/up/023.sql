@@ -1,2 +1,2 @@
-update `{prefix}settings` set value = 'no' WHERE name = 'logo_disabled' and (
-select count(id) from `{prefix}settings` where name = 'logo_image' and value is not null and value <> '') > 0
+update {prefix}settings set value = 'foo' where 
+"This is just a dummy query." = "The previous query caused an error. So it was removed"

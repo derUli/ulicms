@@ -204,4 +204,7 @@ class Module {
         return null;
     }
 
+    public function uninstall(): bool {
+        return uninstall_module($this->getName(), "module");
+    }
 }

@@ -7,9 +7,28 @@ class ModuleTest extends \PHPUnit\Framework\TestCase {
     protected function setUp(): void {
         $manager = new ModuleManager();
         $manager->sync();
+        $this->backupFortune2();
 
         $module = new Module("core_comments");
         $module->enable();
+        Settings::delete("fortune2_uninstalled_at");
+    }
+
+    protected function backupFortune2(): void {
+        $src = getModulePath("fortune2");
+        $dst = Path::resolve("ULICMS_TMP/fortune2");
+        recurse_copy($src, $dst);
+        Settings::delete("fortune2_uninstalled_at");
+    }
+
+    protected function restoreFortune2(): void {
+        $src = Path::resolve("ULICMS_TMP/fortune2");
+        $dst = getModulePath("fortune2");
+
+        $files = find_all_files($dst);
+        if (count($files) < 10) {
+            recurse_copy($src, $dst);
+        }
     }
 
     protected function tearDown(): void {
@@ -130,12 +149,25 @@ class ModuleTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testhasUninstallEventReturnsTrue() {
-        throw new NotImplementedException();
+        $module = new Module("fortune2");
+        $this->assertTrue($module->hasUninstallEvent());
     }
 
     public function testhasUninstallEventReturnsFalse() {
         $module = new Module("core_content");
         $this->assertFalse($module->hasUninstallEvent());
+    }
+
+    public function testUninstallReturnsTrue() {
+        $module = new Module("fortune2");
+        $this->assertTrue($module->uninstall());
+
+        $fortune2_uninstalled_at = Settings::get(
+                        "fortune2_uninstalled_at",
+                        "int"
+        );
+
+        $this->assertGreaterThanOrEqual(time() - 10, $fortune2_uninstalled_at);
     }
 
 }
