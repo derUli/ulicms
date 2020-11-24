@@ -1,6 +1,5 @@
 <?php
 
-use UliCMS\Exceptions\NotImplementedException;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -25,12 +24,24 @@ class PathTest extends \PHPUnit\Framework\TestCase {
                 Path::normalize('../foo/bar/file.txt')
         );
     }
-    
-    public function testResolve(){
-        throw new NotImplementedException();
+
+    public function testResolve() {
+        $this->assertStringEndsWith(
+                "/content/log/exception_log/foo.log",
+                Path::resolve("ULICMS_LOG/exception_log/foo.log")
+        );
     }
-    public function testResolveAndNormalize(){
-        throw new NotImplementedException();
+
+    public function testResolveAndNormalize() {
+        $expected = str_replace(
+                "/",
+                DIRECTORY_SEPARATOR,
+                "/content/log/exception_log/foo.log"
+        );
+        $this->assertStringEndsWith(
+                $expected,
+                Path::resolveAndNormalize("ULICMS_LOG/exception_log/foo.log")
+        );
     }
 
 }
