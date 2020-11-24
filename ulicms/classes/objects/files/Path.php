@@ -7,7 +7,7 @@ class Path
     
     public static function normalize(string $path): string {
         $path = str_replace("\\", DIRECTORY_SEPARATOR, $path);
-        $path = str_replace("//", DIRECTORY_SEPARATOR, $path);
+        $path = str_replace("/", DIRECTORY_SEPARATOR, $path);
         return $path;
     }
     
