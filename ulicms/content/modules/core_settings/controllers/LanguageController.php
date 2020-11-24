@@ -33,6 +33,11 @@ class LanguageController extends Controller {
     }
 
     public function setDefaultLanguage(): void {
+        $this->_setDefaultLanguage();
+        Request::redirect(ModuleHelper::buildActionURL("languages"));
+    }
+
+    public function _setDefaultLanguage():void {
         do_event("before_set_default_language");
 
         $default = Request::getVar("default", null, "str");
@@ -43,7 +48,6 @@ class LanguageController extends Controller {
         do_event("after_set_default_language");
 
         CacheUtil::clearPageCache();
-        Request::redirect(ModuleHelper::buildActionURL("languages"));
     }
 
     public function _deletePost(): bool {
