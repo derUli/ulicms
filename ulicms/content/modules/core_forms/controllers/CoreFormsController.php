@@ -2,17 +2,19 @@
 
 declare(strict_types=1);
 
-class CoreFormsController extends Controller {
-
-    public function _incSpamCount(): int {
+class CoreFormsController extends Controller
+{
+    public function _incSpamCount(): int
+    {
         $newCount = intval(
-                        Settings::get("contact_form_refused_spam_mails")
-                ) + 1;
+            Settings::get("contact_form_refused_spam_mails")
+        ) + 1;
         Settings::set("contact_form_refused_spam_mails", $newCount);
         return $newCount;
     }
 
-    public function _spamCheck(): ?string {
+    public function _spamCheck(): ?string
+    {
         if (Settings::get("spamfilter_enabled") == "yes") {
             // check if honeypot field is filled
             if (!empty($_POST["my_homepage_url"])) {
@@ -40,14 +42,14 @@ class CoreFormsController extends Controller {
                 }
 
                 $badwordsCheck = AntiSpamHelper::containsBadwords(
-                                $_POST[$key]
+                    $_POST[$key]
                 );
 
                 if ($badwordsCheck) {
                     $this->_incSpamCount();
                     return get_translation(
-                            "request_contains_badword",
-                            [
+                        "request_contains_badword",
+                        [
                                 "%word%" => $badwordsCheck
                             ]
                     );
@@ -71,10 +73,11 @@ class CoreFormsController extends Controller {
         return null;
     }
 
-    public function beforeHttpHeader(): void {
+    public function beforeHttpHeader(): void
+    {
         if (StringHelper::isNotNullOrWhitespace(
-                        Request::getVar("submit-cms-form")
-                ) and Request::isPost()) {
+            Request::getVar("submit-cms-form")
+        ) and Request::isPost()) {
             // apply spam filter if enabled
             $spamCheck = $this->_spamCheck();
 
@@ -86,5 +89,4 @@ class CoreFormsController extends Controller {
             Forms::submitForm($form_id);
         }
     }
-
 }

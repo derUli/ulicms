@@ -93,7 +93,8 @@ class Fortune extends MainClass
     
     // Thia is executed before uninstalling this module
     // Use this to clean up data (e.g. drop database tables, delete files)
-    public function uninstall(){
+    public function uninstall()
+    {
         Settings::set("fortune2_uninstalled_at", time());
     }
 }

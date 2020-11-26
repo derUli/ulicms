@@ -31,11 +31,11 @@ if ($permissionChecker->hasPermission("pages")) {
         <a
             href="<?php
             echo ModuleHelper::buildMethodCallUrl(
-                        "HistoryController",
-                        "doRestore",
-                        "version_id=" .
+        "HistoryController",
+        "doRestore",
+        "version_id=" .
                     $diff->history_id
-                    )
+    )
             ?>"
             class="btn btn-danger voffset3"
             onclick="return confirm(

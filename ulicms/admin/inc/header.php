@@ -145,8 +145,7 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
                 <div class="col-xs-5 menu-container">
                     <?php
                     if (is_logged_in()) {
-                        $colClass = $permissionChecker->hasPermission("comments_manage") ? "col-xs-4" : "col-xs-6";
-                        ?>
+                        $colClass = $permissionChecker->hasPermission("comments_manage") ? "col-xs-4" : "col-xs-6"; ?>
                         <div class="row pull-right top-right-icons">
                             <div class="<?php esc($colClass); ?>">
                                 <a href="#" class="has-pointer" id="menu-clear-cache"
@@ -159,8 +158,7 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
                             </div>
                             <?php
                             if ($permissionChecker->hasPermission("comments_manage")) {
-                                $count = Comment::getUnreadCount();
-                                ?>
+                                $count = Comment::getUnreadCount(); ?>
                                 <div class="<?php esc($colClass); ?>">
                                     <div class="comment-counter">
                                         <a href="<?php echo ModuleHelper::buildActionURL("comments_manage"); ?>"
@@ -174,17 +172,18 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
                                                 <div class="count" data-count="<?php echo $count ?>">
                                                     <?php echo $count; ?>
                                                 </div>
-                                            <?php }
-                                            ?></a>
+                                            <?php
+                                            } ?></a>
                                     </div>
                                 </div>
-                            <?php }
-                            ?>
+                            <?php
+                            } ?>
                             <div class="<?php esc($colClass); ?>">
                                 <a id="menu-toggle" class="has-pointer"><i class="fa fa-bars"></i> </a>
                             </div>
                         </div>
-                    <?php }
+                    <?php
+                    }
                     ?>
                 </div>
             </div>

@@ -1,10 +1,11 @@
 <?php
 
-class CoreFormsControllerTest extends \PHPUnit\Framework\TestCase {
-
+class CoreFormsControllerTest extends \PHPUnit\Framework\TestCase
+{
     private $defaultSettings = [];
 
-    protected function setUp(): void {
+    protected function setUp(): void
+    {
         $this->defaultSettings = [
             "country_blacklist" => Settings::get("country_blacklist"),
             "reject_requests_from_bots" => Settings::get("reject_requests_from_bots"),
@@ -16,7 +17,8 @@ class CoreFormsControllerTest extends \PHPUnit\Framework\TestCase {
         Translation::loadAllModuleLanguageFiles("en");
     }
 
-    protected function tearDown(): void {
+    protected function tearDown(): void
+    {
         $_POST = [];
         $_SERVER = [];
 
@@ -25,7 +27,8 @@ class CoreFormsControllerTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testIncSpamCount() {
+    public function testIncSpamCount()
+    {
         $controller = new CoreFormsController();
         $initialCount = intval(Settings::get("contact_form_refused_spam_mails"));
 
@@ -37,12 +40,13 @@ class CoreFormsControllerTest extends \PHPUnit\Framework\TestCase {
         }
 
         $this->assertEquals(
-                $initialCount + 3,
-                intval(Settings::get("contact_form_refused_spam_mails"))
+            $initialCount + 3,
+            intval(Settings::get("contact_form_refused_spam_mails"))
         );
     }
 
-    public function testSpamCheckReturnsNull() {
+    public function testSpamCheckReturnsNull()
+    {
         $_POST = [
             "foo" => "bar",
             "hello" => "world"
@@ -51,7 +55,8 @@ class CoreFormsControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull($controller->_spamCheck());
     }
 
-    public function testSpamCheckWithHoneypotFilled() {
+    public function testSpamCheckWithHoneypotFilled()
+    {
         $_POST = [
             "foo" => "bar",
             "hello" => "world",
@@ -61,7 +66,8 @@ class CoreFormsControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("Honeypot is not empty!", $controller->_spamCheck());
     }
 
-    public function testWithBadWord() {
+    public function testWithBadWord()
+    {
         $_POST = [
             "foo" => "bar",
             "hello" => "world",
@@ -71,7 +77,8 @@ class CoreFormsControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("The request contains a bad word: viagra", $controller->_spamCheck());
     }
 
-    public function testWithForbiddenCountry() {
+    public function testWithForbiddenCountry()
+    {
         Settings::set("country_blacklist", "vn,jp,at,tr");
 
         $_POST = [
@@ -81,12 +88,13 @@ class CoreFormsControllerTest extends \PHPUnit\Framework\TestCase {
         $_SERVER["REMOTE_ADDR"] = "123.30.54.106";
         $controller = new CoreFormsController();
         $this->assertStringContainsString(
-                "Access to this function for your country is blocked",
-                $controller->_spamCheck()
+            "Access to this function for your country is blocked",
+            $controller->_spamCheck()
         );
     }
 
-    public function testWithBot() {
+    public function testWithBot()
+    {
         Settings::set("reject_requests_from_bots", "1");
 
         $_POST = [
@@ -97,12 +105,13 @@ class CoreFormsControllerTest extends \PHPUnit\Framework\TestCase {
 
         $controller = new CoreFormsController();
         $this->assertStringContainsString(
-                "Bots are not allowed to send messages on this website.",
-                $controller->_spamCheck()
+            "Bots are not allowed to send messages on this website.",
+            $controller->_spamCheck()
         );
     }
     
-       public function testWithChinese() {
+    public function testWithChinese()
+    {
         Settings::set("disallow_chinese_chars", "1");
 
         $_POST = [
@@ -112,12 +121,13 @@ class CoreFormsControllerTest extends \PHPUnit\Framework\TestCase {
                 
         $controller = new CoreFormsController();
         $this->assertStringContainsString(
-                "Chinese chars are not allowed!",
-                $controller->_spamCheck()
+            "Chinese chars are not allowed!",
+            $controller->_spamCheck()
         );
     }
     
-   public function testWithRTL() {
+    public function testWithRTL()
+    {
         Settings::set("disallow_rtl_chars", "1");
 
         $_POST = [
@@ -127,12 +137,13 @@ class CoreFormsControllerTest extends \PHPUnit\Framework\TestCase {
                 
         $controller = new CoreFormsController();
         $this->assertStringContainsString(
-                "Right-To-Left languages are not allowed!",
-                $controller->_spamCheck()
+            "Right-To-Left languages are not allowed!",
+            $controller->_spamCheck()
         );
     }
     
-     public function testWithCyrillic() {
+    public function testWithCyrillic()
+    {
         Settings::set("disallow_cyrillic_chars", "1");
 
         $_POST = [
@@ -142,8 +153,8 @@ class CoreFormsControllerTest extends \PHPUnit\Framework\TestCase {
                 
         $controller = new CoreFormsController();
         $this->assertStringContainsString(
-                "Cyrillic chars are not allowed!",
-                $controller->_spamCheck()
+            "Cyrillic chars are not allowed!",
+            $controller->_spamCheck()
         );
     }
 }

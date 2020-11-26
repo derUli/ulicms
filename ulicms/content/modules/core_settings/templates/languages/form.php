@@ -91,9 +91,9 @@ if ($permissionChecker->hasPermission("languages")) {
                             <td>
                                 <?php
                                 echo ModuleHelper::deleteButton(
-                                           ModuleHelper::buildMethodCallUrl(LanguageController::class, "delete"),
-                                           ["id" => $language->getID()]
-                                       ); ?>
+                                        ModuleHelper::buildMethodCallUrl(LanguageController::class, "delete"),
+                                        ["id" => $language->getID()]
+                                    ); ?>
                             </td>
                         </tr>
                     <?php
@@ -104,9 +104,9 @@ if ($permissionChecker->hasPermission("languages")) {
         <?php
         enqueueScriptFile(
                                            ModuleHelper::buildModuleRessourcePath(
-                                                "core_settings",
-                                                "js/languages.js"
-                                            )
+                                               "core_settings",
+                                               "js/languages.js"
+                                           )
                                        );
         combinedScriptHtml();
     }

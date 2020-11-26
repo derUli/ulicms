@@ -10,8 +10,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
         if (!$site_slogans[$lang]) {
             $site_slogans[$lang] = Settings::get("site_slogan");
         }
-    }
-    ?><p>
+    } ?><p>
         <a href="<?php echo ModuleHelper::buildActionURL("settings_simple"); ?>"
            class="btn btn-default btn-back is-not-ajax">
             <i class="fa fa-arrow-left"></i> <?php translate("back") ?>
@@ -23,8 +22,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
     <?php
     echo ModuleHelper::buildMethodCallForm("SiteSloganController", "save", [], "post", array(
         "id" => "site_slogan_settings"
-    ));
-    ?>
+    )); ?>
     <table>
         <tr>
             <td style="min-width: 100px;"><strong><?php translate("language"); ?>
@@ -35,15 +33,14 @@ if ($permissionChecker->hasPermission("settings_simple")) {
         </tr>
         <?php
         for ($n = 0; $n < count($languages); $n++) {
-            $lang = $languages[$n];
-            ?>
+            $lang = $languages[$n]; ?>
             <tr>
                 <td><?php esc(getLanguageNameByCode($lang)); ?></td>
                 <td><input
                         name="site_slogan_<?php esc($lang); ?>"
                         value="<?php esc($site_slogans[$lang]); ?>"></td>
-                <?php }
-                ?>
+                <?php
+        } ?>
         </tr>
         <tr>
             <td></td>
@@ -63,14 +60,13 @@ if ($permissionChecker->hasPermission("settings_simple")) {
     $translation->render();
     
     enqueueScriptFile(
-    ModuleHelper::buildRessourcePath(
+        ModuleHelper::buildRessourcePath(
         "core_settings",
         "js/site_slogan.js"
     )
-);
-combinedScriptHtml();
-    ?>
+    );
+    combinedScriptHtml(); ?>
     <?php
 } else {
-    noPerms();
-}
+        noPerms();
+    }

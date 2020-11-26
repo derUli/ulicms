@@ -2,19 +2,21 @@
 
 declare(strict_types=1);
 
-class Module {
-
+class Module
+{
     private $name = null;
     private $version = null;
     private $enabled = 0;
 
-    public function __construct(?string $name = null) {
+    public function __construct(?string $name = null)
+    {
         if ($name) {
             $this->loadByName($name);
         }
     }
 
-    public function loadByName(string $name): bool {
+    public function loadByName(string $name): bool
+    {
         $sql = "select * from {prefix}modules where name = ?";
         $args = array(
             $name
@@ -31,7 +33,8 @@ class Module {
         return false;
     }
 
-    public function save(): void {
+    public function save(): void
+    {
         $sql = "select name from {prefix}modules where name = ?";
         $args = array(
             $this->name
@@ -45,7 +48,8 @@ class Module {
         }
     }
 
-    protected function insert(): bool {
+    protected function insert(): bool
+    {
         $sql = "INSERT INTO {prefix}modules (name, version, enabled) "
                 . "values(?, ?, ?)";
         $args = array(
@@ -56,7 +60,8 @@ class Module {
         return Database::pQuery($sql, $args, true);
     }
 
-    protected function update(): bool {
+    protected function update(): bool
+    {
         $sql = "update {prefix}modules set version = ?, enabled = ? "
                 . "where name = ?";
         $args = array(
@@ -67,26 +72,31 @@ class Module {
         return Database::pQuery($sql, $args, true);
     }
 
-    public function getVersion(): ?string {
+    public function getVersion(): ?string
+    {
         return $this->version;
     }
 
-    public function getName(): ?string {
+    public function getName(): ?string
+    {
         return $this->name;
     }
 
-    public function isEnabled(): bool {
+    public function isEnabled(): bool
+    {
         return boolval($this->enabled);
     }
 
-    public function enable(): void {
+    public function enable(): void
+    {
         if (!$this->isMissingDependencies()) {
             $this->enabled = 1;
             $this->save();
         }
     }
 
-    public function getMissingDependencies(): array {
+    public function getMissingDependencies(): array
+    {
         $result = [];
         $manager = new ModuleManager();
         $dependencies = $manager->getDependencies($this->name);
@@ -99,18 +109,21 @@ class Module {
         return $result;
     }
 
-    public function isInstalled(): bool {
+    public function isInstalled(): bool
+    {
         if (!$this->getName()) {
             return false;
         }
         return !is_null(getModuleMeta($this->getName()));
     }
 
-    public function isMissingDependencies(): bool {
+    public function isMissingDependencies(): bool
+    {
         return (count($this->getMissingDependencies()) > 0);
     }
 
-    public function hasAdminPage(): bool {
+    public function hasAdminPage(): bool
+    {
         $controller = ModuleHelper::getMainController($this->name);
         return (file_exists(getModuleAdminFilePath($this->name))
                 or file_exists(getModuleAdminFilePath2($this->name))
@@ -119,15 +132,18 @@ class Module {
                 getModuleMeta($this->name, "admin_permission"));
     }
 
-    public function isEmbedModule(): bool {
+    public function isEmbedModule(): bool
+    {
         return ModuleHelper::isEmbedModule($this->name);
     }
 
-    public function getShortCode(): ?string {
+    public function getShortCode(): ?string
+    {
         return $this->getName() ? "[module={$this->getName()}]" : null;
     }
 
-    public function getDependentModules(): array {
+    public function getDependentModules(): array
+    {
         $result = [];
         $manager = new ModuleManager();
         $enabledMods = $manager->getEnabledModuleNames();
@@ -141,18 +157,21 @@ class Module {
         return $result;
     }
 
-    public function hasDependentModules(): bool {
+    public function hasDependentModules(): bool
+    {
         return (count($this->getDependentModules()) > 0);
     }
 
-    public function disable(): void {
+    public function disable(): void
+    {
         if (!$this->hasDependentModules()) {
             $this->enabled = 0;
             $this->save();
         }
     }
 
-    public function toggleEnabled(): void {
+    public function toggleEnabled(): void
+    {
         if ($this->isEnabled()) {
             $this->disable();
         } else {
@@ -160,15 +179,18 @@ class Module {
         }
     }
 
-    public function setName(?string $name): void {
+    public function setName(?string $name): void
+    {
         $this->name = strval($name);
     }
 
-    public function setVersion(?string $version): void {
+    public function setVersion(?string $version): void
+    {
         $this->version = $version ? strval($version) : null;
     }
 
-    public function hasUninstallEvent(): bool {
+    public function hasUninstallEvent(): bool
+    {
         $name = $this->name;
         $uninstallScript1 = getModuleUninstallScriptPath($name, true);
         $uninstallScript2 = getModuleUninstallScriptPath2($name, true);
@@ -182,7 +204,8 @@ class Module {
                 );
     }
 
-    public function delete(): ?bool {
+    public function delete(): ?bool
+    {
         $sql = "select name from {prefix}modules where name = ?";
         $args = array(
             $this->name
@@ -198,8 +221,8 @@ class Module {
         return null;
     }
 
-    public function uninstall(): bool {
+    public function uninstall(): bool
+    {
         return uninstall_module($this->getName(), "module");
     }
-
 }

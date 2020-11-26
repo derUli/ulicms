@@ -42,8 +42,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                 echo "<p style='color:red'>" . get_translation("upload_failed") . "</p>";
             }
         }
-    }
-    ?>
+    } ?>
     <h1><?php translate("upload_package"); ?></h1>
     <form action="?action=upload_package" enctype="multipart/form-data"
           method="post">

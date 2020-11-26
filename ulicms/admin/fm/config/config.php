@@ -519,14 +519,14 @@ $config = array(
 );
 
 return array_merge(
-        $config,
-        array(
+    $config,
+    array(
             'ext' => array_merge(
-                    $config['ext_img'],
-                    $config['ext_file'],
-                    $config['ext_misc'],
-                    $config['ext_video'],
-                    $config['ext_music']
+                $config['ext_img'],
+                $config['ext_file'],
+                $config['ext_misc'],
+                $config['ext_video'],
+                $config['ext_music']
             ),
             'tui_defaults_config' => array(
                 //'common.bi.image'                   => $config['common.bi.image'],

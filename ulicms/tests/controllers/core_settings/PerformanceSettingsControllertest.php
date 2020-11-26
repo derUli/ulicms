@@ -1,8 +1,9 @@
 <?php
 
-class PerformanceSettingsControllerTest extends \PHPUnit\Framework\TestCase {
-
-    protected function tearDown(): void {
+class PerformanceSettingsControllerTest extends \PHPUnit\Framework\TestCase
+{
+    protected function tearDown(): void
+    {
         $_POST = [];
         Settings::delete("cache_disabled");
         Settings::delete("cache_period");
@@ -11,7 +12,8 @@ class PerformanceSettingsControllerTest extends \PHPUnit\Framework\TestCase {
         Settings::set('lazy_loading_iframe', 1);
     }
 
-    public function testSubmitEnabled(): void {
+    public function testSubmitEnabled(): void
+    {
         $_POST["cache_enabled"] = "1";
         $_POST["cache_period"] = "4";
         $_POST["lazy_loading"] = ["img"];
@@ -25,7 +27,8 @@ class PerformanceSettingsControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("0", Settings::get("lazy_loading_iframe"));
     }
 
-    public function testSubmitDisabled(): void {
+    public function testSubmitDisabled(): void
+    {
         $_POST["cache_period"] = "2";
         $_POST["lazy_loading"] = ["img"];
 
@@ -38,7 +41,8 @@ class PerformanceSettingsControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("0", Settings::get("lazy_loading_iframe"));
     }
 
-    public function testClearCache() {
+    public function testClearCache()
+    {
         $controller = new PerformanceSettingsController();
         $controller->_clearCache();
 
@@ -46,5 +50,4 @@ class PerformanceSettingsControllerTest extends \PHPUnit\Framework\TestCase {
 
         $this->assertCount(0, $files);
     }
-
 }

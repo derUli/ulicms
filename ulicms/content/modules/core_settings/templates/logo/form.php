@@ -30,7 +30,7 @@ if ($permissionChecker->hasPermission("logo")) {
         <table style="height: 250px">
 
             <?php if ($controller->_hasLogo()) {
-                ?>
+        ?>
 
                 <tr>
                     <td><strong><?php translate("your_logo"); ?>
@@ -40,13 +40,12 @@ if ($permissionChecker->hasPermission("logo")) {
                             <?php
                             if (file_exists($logoStoragePath)) {
                                 echo imageTag(
-                                        $logoUrl,
-                                        [
+                                    $logoUrl,
+                                    [
                                             "alt" => Settings::get("homepage_title"),
                                             "class" => "img-responsive"
                                         ]
-                                );
-                                ?>
+                                ); ?>
                                 <div class="voffset2">
                                     <button
                                         type="button"
@@ -54,17 +53,16 @@ if ($permissionChecker->hasPermission("logo")) {
                                         id="delete-logo"
                                         data-url="<?php
                                         echo ModuleHelper::buildMethodCallUrl(
-                                                LogoController::class,
-                                                "deleteLogo"
-                                        );?>
+                                    LogoController::class,
+                                    "deleteLogo"
+                                ); ?>
                                         "
                                         >
                                         <i class="fa fa-trash" aria-hidden="true"></i>
                                         <?php translate("delete_logo"); ?>
                                     </button>
                                     <?php
-                                }
-                                ?>
+                            } ?>
                             </div>
                         </div>
                         <img
@@ -75,7 +73,8 @@ if ($permissionChecker->hasPermission("logo")) {
                             >
                     </td>
                 </tr>
-            <?php } ?>
+            <?php
+    } ?>
             <tr>
                 <td width="480"><strong><?php translate("upload_new_logo"); ?>
                     </strong></td>
@@ -97,10 +96,11 @@ if ($permissionChecker->hasPermission("logo")) {
     $translation->addKey("logo_deleted");
     $translation->render();
 
-    enqueueScriptFile(ModuleHelper::buildRessourcePath(
-                    "core_settings",
-                    "js/logo.js"
-            )
+    enqueueScriptFile(
+        ModuleHelper::buildRessourcePath(
+        "core_settings",
+        "js/logo.js"
+    )
     );
     combinedScriptHtml();
 } else {

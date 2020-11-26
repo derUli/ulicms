@@ -16,8 +16,8 @@ if ($permissionChecker->hasPermission("favicon")) {
         <div class="alert alert-danger">
             <?php echo translate(_esc($_GET["error"])); ?>
         </div>
-    <?php }
-    ?>
+    <?php
+    } ?>
     <h1><?php translate("favicon"); ?></h1>
     <p><?php translate("favicon_infotext"); ?>
     </p>
@@ -37,14 +37,13 @@ if ($permissionChecker->hasPermission("favicon")) {
                     <div id="favicon-wrapper">
                         <?php
                         $favicon_path = ULICMS_DATA_STORAGE_ROOT . "/content/images/favicon.ico";
-                        $faviconUrl = defined("ULICMS_DATA_STORAGE_URL") ? ULICMS_DATA_STORAGE_URL . "/content/images/favicon.ico" : "../content/images/favicon.ico";
-                        if (file_exists($favicon_path)) {
-                            $faviconUrl .= "?time=" . File::getLastChanged($favicon_path);
-                            echo imageTag(
-                                    $faviconUrl,
-                                    ["alt" => Settings::get("homepage_title")]
-                            );
-                            ?>
+    $faviconUrl = defined("ULICMS_DATA_STORAGE_URL") ? ULICMS_DATA_STORAGE_URL . "/content/images/favicon.ico" : "../content/images/favicon.ico";
+    if (file_exists($favicon_path)) {
+        $faviconUrl .= "?time=" . File::getLastChanged($favicon_path);
+        echo imageTag(
+            $faviconUrl,
+            ["alt" => Settings::get("homepage_title")]
+        ); ?>
                             <div class="voffset2">
                                 <button
                                     type="button"
@@ -52,18 +51,17 @@ if ($permissionChecker->hasPermission("favicon")) {
                                     id="delete-favicon"
                                     data-url="<?php
                                     echo ModuleHelper::buildMethodCallUrl(
-                                            FaviconController::class,
-                                            "deleteFavicon"
-                                    );
-                                    ?>
+                                FaviconController::class,
+                                "deleteFavicon"
+                            ); ?>
                                     "
                                     >
                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                     <?php translate("delete_favicon"); ?>
                                 </button>
                             </div>
-                        <?php }
-                        ?>
+                        <?php
+    } ?>
                     </div>
                     <img
                         id="delete-favicon-loading"
@@ -118,10 +116,11 @@ if ($permissionChecker->hasPermission("favicon")) {
     $translation->addKey("favicon_deleted");
     $translation->render();
 
-    enqueueScriptFile(ModuleHelper::buildRessourcePath(
-                    "core_settings",
-                    "js/favicon.js"
-            )
+    enqueueScriptFile(
+        ModuleHelper::buildRessourcePath(
+        "core_settings",
+        "js/favicon.js"
+    )
     );
     combinedScriptHtml();
 } else {

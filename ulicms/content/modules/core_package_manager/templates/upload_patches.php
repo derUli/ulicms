@@ -11,10 +11,10 @@ if (!$permissionChecker->hasPermission("upload_patches")) {
             and endsWith($_FILES ['file'] ['name'], ".zip")) {
         $patchManager = new PatchManager();
         if ($patchManager->installPatch(
-                        $_POST ["name"],
-                        $_POST ["description"],
-                        $_FILES ['file']['tmp_name']
-                )
+            $_POST ["name"],
+            $_POST ["description"],
+            $_FILES ['file']['tmp_name']
+        )
         ) {
             $redirect = true;
         }
@@ -24,8 +24,7 @@ if (!$permissionChecker->hasPermission("upload_patches")) {
 
     if ($redirect) {
         Response::javascriptRedirect($backUrl);
-    }
-    ?>
+    } ?>
     <p>
         <a
             href="<?php esc($backUrl); ?>"

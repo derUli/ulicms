@@ -3,15 +3,17 @@
 require_once __DIR__ . "/RoboTestFile.php";
 require_once __DIR__ . "/RoboBaseTest.php";
 
-class RoboDatabaseTest extends RoboBaseTest {
-
-    protected function tearDown(): void {
+class RoboDatabaseTest extends RoboBaseTest
+{
+    protected function tearDown(): void
+    {
         if ($this->shouldDropDbOnShutdown()) {
             $this->runRoboCommand(["db:reset"]);
         }
     }
 
-    public function testCreateAlreadyExists() {
+    public function testCreateAlreadyExists()
+    {
         if (!$this->shouldDropDbOnShutdown()) {
             $this->markTestSkipped();
         }
@@ -23,5 +25,4 @@ class RoboDatabaseTest extends RoboBaseTest {
         $actualCreate = $this->runRoboCommand(["db:create"]);
         $this->assertStringContainsString('CREATE DATABASE', $actualCreate);
     }
-
 }

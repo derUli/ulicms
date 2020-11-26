@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-class VideoController extends Controller {
-
-    public function createPost(): void {
+class VideoController extends Controller
+{
+    public function createPost(): void
+    {
         $video_folder = ULICMS_DATA_STORAGE_ROOT . "/content/videos";
 
         if (isset($_FILES)) {
@@ -20,15 +21,15 @@ class VideoController extends Controller {
                 if (faster_in_array($mp4_type, $mp4_allowed_mime_type)) {
                     $target = $video_folder . "/" . $mp4_file;
                     if (move_uploaded_file(
-                                    $_FILES ['mp4_file'] ['tmp_name'],
-                                    $target
-                            )) {
+                        $_FILES ['mp4_file'] ['tmp_name'],
+                        $target
+                    )) {
                         // Google Cloud: make file public
                         if (startsWith(ULICMS_DATA_STORAGE_ROOT, "gs://")
                                 and class_exists("GoogleCloudHelper")) {
                             GoogleCloudHelper::changeFileVisiblity(
-                                    $target,
-                                    true
+                                $target,
+                                true
                             );
                         }
                         $mp4_file_value = basename($mp4_file);
@@ -49,9 +50,9 @@ class VideoController extends Controller {
                 if (faster_in_array($ogg_type, $ogg_allowed_mime_type)) {
                     $target = $video_folder . "/" . $ogg_file;
                     if (move_uploaded_file(
-                                    $_FILES ['ogg_file'] ['tmp_name'],
-                                    $target
-                            )) {
+                        $_FILES ['ogg_file'] ['tmp_name'],
+                        $target
+                    )) {
                         // Google Cloud: make file public
                         if (startsWith(ULICMS_DATA_STORAGE_ROOT, "gs://")
                                 and class_exists("GoogleCloudHelper")) {
@@ -76,15 +77,15 @@ class VideoController extends Controller {
                 if (faster_in_array($webm_type, $webm_allowed_mime_type)) {
                     $target = $video_folder . "/" . $webm_file;
                     if (move_uploaded_file(
-                                    $_FILES ['webm_file'] ['tmp_name'],
-                                    $target
-                            )) {
+                        $_FILES ['webm_file'] ['tmp_name'],
+                        $target
+                    )) {
                         // Google Cloud: make file public
                         if (startsWith(ULICMS_DATA_STORAGE_ROOT, "gs://")
                                 and class_exists("GoogleCloudHelper")) {
                             GoogleCloudHelper::changeFileVisiblity(
-                                    $target,
-                                    true
+                                $target,
+                                true
                             );
                         }
                         $webm_file_value = basename($webm_file);
@@ -115,7 +116,8 @@ class VideoController extends Controller {
         Request::redirect(ModuleHelper::buildActionURL("videos"));
     }
 
-    public function _updatePost(): bool {
+    public function _updatePost(): bool
+    {
         $name = db_escape($_POST ["name"]);
         $id = intval($_POST ["id"]);
         $ogg_file = db_escape(basename($_POST ["ogg_file"]));
@@ -133,12 +135,14 @@ class VideoController extends Controller {
         return Database::getAffectedRows() > 0;
     }
 
-    public function updatePost(): void {
+    public function updatePost(): void
+    {
         $this->_updatePost();
         Request::redirect(ModuleHelper::buildActionURL("videos"));
     }
 
-    public function deletePost(): void {
+    public function deletePost(): void
+    {
         $result = db_query("select ogg_file, webm_file, mp4_file from " .
                 tbname("videos") . " where id = " . intval($_REQUEST ["delete"]));
         if (db_num_rows($result) > 0) {
@@ -169,5 +173,4 @@ class VideoController extends Controller {
         }
         Request::redirect(ModuleHelper::buildActionURL("videos"));
     }
-
 }

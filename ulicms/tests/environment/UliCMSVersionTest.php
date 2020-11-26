@@ -2,24 +2,28 @@
 
 use UliCMS\Services\Connectors\PackageSourceConnector;
 
-class UliCMSVersionTest extends \PHPUnit\Framework\TestCase {
-
-    public function testGetCodeName() {
+class UliCMSVersionTest extends \PHPUnit\Framework\TestCase
+{
+    public function testGetCodeName()
+    {
         $version = new UliCMSVersion();
         $this->assertNotEmpty($version->getCodeName());
     }
 
-    public function testDbSchemaVersionSet() {
+    public function testDbSchemaVersionSet()
+    {
         $version = new UliCMSVersion();
         $this->assertNotEmpty(Settings::get("db_schema_version"));
     }
 
-    public function testGetBuildTimestamp() {
+    public function testGetBuildTimestamp()
+    {
         $version = new UliCMSVersion();
         $this->assertIsInt($version->getBuildTimestamp());
     }
 
-    public function testGetBuildDate() {
+    public function testGetBuildDate()
+    {
         $version = new UliCMSVersion();
 
         $date = $version->getBuildDate();
@@ -27,7 +31,8 @@ class UliCMSVersionTest extends \PHPUnit\Framework\TestCase {
         $this->assertGreaterThanOrEqual(16, strlen($date));
     }
 
-    public function testModuleVersions() {
+    public function testModuleVersions()
+    {
         $modules = getAllModules();
         $ulicmsVersion = (new UliCMSVersion())->getInternalVersionAsString();
 
@@ -36,18 +41,19 @@ class UliCMSVersionTest extends \PHPUnit\Framework\TestCase {
             $this->assertNotEmpty($moduleVersion);
             if (startsWith($module, "core_")) {
                 $this->assertTrue(
-                        \UliCMS\Utils\VersionComparison\compare(
-                                $moduleVersion,
-                                $ulicmsVersion,
-                                "="
+                    \UliCMS\Utils\VersionComparison\compare(
+                            $moduleVersion,
+                            $ulicmsVersion,
+                            "="
                         ),
-                        "$module has a bad version $moduleVersion"
+                    "$module has a bad version $moduleVersion"
                 );
             }
         }
     }
 
-    public function testCompareModuleVersionsWithPackageSource() {
+    public function testCompareModuleVersionsWithPackageSource()
+    {
         $modules = getAllModules();
         $connector = new PackageSourceConnector();
         foreach ($modules as $module) {
@@ -56,17 +62,16 @@ class UliCMSVersionTest extends \PHPUnit\Framework\TestCase {
 
             if ($availableVersion) {
                 $this->assertTrue(
-                        \UliCMS\Utils\VersionComparison\compare(
-                                $availableVersion,
-                                $installedVersion,
-                                ">="
+                    \UliCMS\Utils\VersionComparison\compare(
+                            $availableVersion,
+                            $installedVersion,
+                            ">="
                         ),
-                        "$module $availableVersion in the package source "
+                    "$module $availableVersion in the package source "
                         . "is not at least equal to "
                         . "the installed version $module $installedVersion"
                 );
             }
         }
     }
-
 }

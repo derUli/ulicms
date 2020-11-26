@@ -66,10 +66,10 @@ class DBMigratorTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue(
             Database::any(
                 Database::selectAll(
-                        "dbtrack",
-                        ["id"],
-                        "component = 'dbmigrator_test'"
-                    )
+                    "dbtrack",
+                    ["id"],
+                    "component = 'dbmigrator_test'"
+                )
             )
         );
 
@@ -79,10 +79,10 @@ class DBMigratorTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse(
             Database::any(
                 Database::selectAll(
-                        "dbtrack",
-                        ["id"],
-                        "component = 'dbmigrator_test'"
-                    )
+                    "dbtrack",
+                    ["id"],
+                    "component = 'dbmigrator_test'"
+                )
             )
         );
     }
