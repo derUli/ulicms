@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 use UliCMS\Utils\CacheUtil;
 
-class MetaKeywordsController extends Controller {
-
-    public function _savePost(): void {
-      $languages = getAllLanguages();
+class MetaKeywordsController extends Controller
+{
+    public function _savePost(): void
+    {
+        $languages = getAllLanguages();
         for ($i = 0; $i < count($languages); $i++) {
             $lang = $languages[$i];
             $key = "meta_keywords_" . $lang;
@@ -22,13 +23,13 @@ class MetaKeywordsController extends Controller {
         CacheUtil::clearPageCache();
     }
 
-    public function savePost(): void {
+    public function savePost(): void
+    {
         $this->_savePost();
 
         Response::sendHttpStatusCodeResultIfAjax(
-                HttpStatusCode::OK,
-                ModuleHelper::buildActionURL("meta_keywords")
+            HttpStatusCode::OK,
+            ModuleHelper::buildActionURL("meta_keywords")
         );
     }
-
 }

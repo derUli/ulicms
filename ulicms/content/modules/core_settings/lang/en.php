@@ -60,3 +60,6 @@ add_translation("lazy_loading_help3", "Use following link to read which browsers
 
 add_translation("delete_favicon", "Delete Favicon");
 add_translation("favicon_deleted", "Favicon deleted.");
+
+add_translation("delete_logo", "Delete Logo");
+add_translation("logo_deleted", "Logo deleted.");

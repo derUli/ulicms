@@ -68,13 +68,13 @@ function multi_explode(array $delimiters, string $string): array
         strtr(
             $string,
             array_combine(
-                    array_slice($delimiters, 1),
-                    array_fill(
-                            0,
-                            count($delimiters) - 1,
-                            array_shift($delimiters)
-                        )
-                )
+                array_slice($delimiters, 1),
+                array_fill(
+                        0,
+                        count($delimiters) - 1,
+                        array_shift($delimiters)
+                    )
+            )
         )
     );
 }

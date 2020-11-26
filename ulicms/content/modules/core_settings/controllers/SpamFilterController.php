@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-class SpamFilterController extends Controller {
-
-    public function _savePost(): void {
+class SpamFilterController extends Controller
+{
+    public function _savePost(): void
+    {
         do_event("before_save_spamfilter_settings");
 
         if ($_POST["spamfilter_enabled"] == "yes") {
@@ -53,9 +54,9 @@ class SpamFilterController extends Controller {
         }
 
         $min_time_to_fill_form = Request::getVar(
-                        "min_time_to_fill_form",
-                        0,
-                        "int"
+            "min_time_to_fill_form",
+            0,
+            "int"
         );
 
         Settings::set("min_time_to_fill_form", $min_time_to_fill_form);
@@ -64,12 +65,12 @@ class SpamFilterController extends Controller {
         // if called by ajax return no content to improve performance
     }
 
-    public function savePost(): void {
+    public function savePost(): void
+    {
         $this->_savePost();
         Response::sendHttpStatusCodeResultIfAjax(
-                HttpStatusCode::OK,
-                ModuleHelper::buildActionURL("spam_filter")
+            HttpStatusCode::OK,
+            ModuleHelper::buildActionURL("spam_filter")
         );
     }
-
 }

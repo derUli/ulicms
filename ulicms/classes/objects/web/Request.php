@@ -144,7 +144,7 @@ class Request
                 return $_SERVER[$proxy_header];
             }
         }
-        return $_SERVER['REMOTE_ADDR'];
+        return isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null;
     }
 
     public static function isHeaderSent(string $header, ?array $headers = null): bool

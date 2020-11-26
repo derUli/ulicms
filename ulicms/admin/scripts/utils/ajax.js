@@ -11,12 +11,12 @@ const bindAjaxLinks = (root) => {
     $(root).find("a.is-ajax").click((event) => {
         event.preventDefault();
         event.stopPropagation();
-        
+
         const target = $(event.currentTarget);
         const originalUrl = target.attr("href");
         let url = `${originalUrl}&only_content=true`;
-        
-        if(target.hasClass("full-minified")){
+
+        if (target.hasClass("full-minified")) {
             url += "&full_minified=true"
         }
 
@@ -71,6 +71,7 @@ const bindContentEvents = (contentContainer) => {
     initSelect2(contentContainer);
     addCssClassToInputs(contentContainer);
     initBootstrapToggle(contentContainer);
+    bindTooltips($("body"));
 };
 
 const initRemoteAlerts = (rootElement) => {

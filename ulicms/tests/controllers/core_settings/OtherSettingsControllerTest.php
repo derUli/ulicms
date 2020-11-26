@@ -1,10 +1,11 @@
 <?php
 
-class OtherSettingsControllerTest extends \PHPUnit\Framework\TestCase {
-
+class OtherSettingsControllerTest extends \PHPUnit\Framework\TestCase
+{
     private $defaultSettings = [];
 
-    protected function setUp(): void {
+    protected function setUp(): void
+    {
         $this->defaultSettings = [
             "email_mode" => Settings::get("email_mode"),
             "domain_to_language" => Settings::get("domain_to_language"),
@@ -21,7 +22,8 @@ class OtherSettingsControllerTest extends \PHPUnit\Framework\TestCase {
         ];
     }
 
-    protected function tearDown(): void {
+    protected function tearDown(): void
+    {
         $_POST = [
         ];
 
@@ -30,7 +32,8 @@ class OtherSettingsControllerTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testSavePostAllSet(): void {
+    public function testSavePostAllSet(): void
+    {
         $mappingLines = [
             'example.de=>de',
             'example.co.uk=>en'
@@ -56,32 +59,33 @@ class OtherSettingsControllerTest extends \PHPUnit\Framework\TestCase {
 
         $this->assertEquals("internal", Settings::get("email_mode"));
         $this->assertEquals(
-                implode("\n", $mappingLines),
-                Settings::get("domain_to_language")
+            implode("\n", $mappingLines),
+            Settings::get("domain_to_language")
         );
         $this->assertEquals("auth", Settings::get("smtp_auth"));
         $this->assertEquals("ssl", Settings::get("smtp_encryption"));
         $this->assertEquals(
-                "smtp_no_verify_certificate",
-                Settings::get("smtp_no_verify_certificate")
+            "smtp_no_verify_certificate",
+            Settings::get("smtp_no_verify_certificate")
         );
         $this->assertEquals(
-                "twofactor_authentication",
-                Settings::get("twofactor_authentication")
+            "twofactor_authentication",
+            Settings::get("twofactor_authentication")
         );
         $this->assertEquals("no_auto_cron", Settings::get("no_auto_cron"));
 
         $this->assertEquals("foohost", Settings::get("smtp_host"));
         $this->assertEquals("123", Settings::get("smtp_port"));
         $this->assertEquals(
-                "5",
-                Settings::get("max_failed_logins_items")
+            "5",
+            Settings::get("max_failed_logins_items")
         );
         $this->assertEquals("user", Settings::get("smtp_user"));
         $this->assertEquals("password", Settings::get("smtp_password"));
     }
 
-    public function testSavePostNothingSet(): void {
+    public function testSavePostNothingSet(): void
+    {
         $_POST = [
         ];
 
@@ -90,7 +94,7 @@ class OtherSettingsControllerTest extends \PHPUnit\Framework\TestCase {
 
         $this->assertEquals("internal", Settings::get("email_mode"));
         $this->assertEmpty(
-                Settings::get("domain_to_language")
+            Settings::get("domain_to_language")
         );
         $this->assertNull(Settings::get("smtp_auth"));
         $this->assertEmpty(Settings::get("smtp_encryption"));
@@ -104,5 +108,4 @@ class OtherSettingsControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertEmpty(Settings::get("smtp_user"));
         $this->assertEmpty(Settings::get("smtp_password"));
     }
-
 }

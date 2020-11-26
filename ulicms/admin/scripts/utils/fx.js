@@ -32,3 +32,10 @@ const setWaitCursor = () => {
 const setDefaultCursor = () => {
     $('body').css('cursor', 'auto');
 };
+
+const bindTooltips = (root) => {
+    if (isTouchDevice()) {
+        return;
+    }
+    $(root).find("*[title]").tooltip();
+}

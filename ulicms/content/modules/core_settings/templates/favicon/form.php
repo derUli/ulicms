@@ -16,8 +16,8 @@ if ($permissionChecker->hasPermission("favicon")) {
         <div class="alert alert-danger">
             <?php echo translate(_esc($_GET["error"])); ?>
         </div>
-    <?php }
-    ?>
+    <?php
+    } ?>
     <h1><?php translate("favicon"); ?></h1>
     <p><?php translate("favicon_infotext"); ?>
     </p>
@@ -28,20 +28,22 @@ if ($permissionChecker->hasPermission("favicon")) {
             <?php csrf_token_html(); ?>
         <table style="height: 250px">
             <tr>
-                <td><strong><?php translate("current_favicon"); ?>
-                    </strong></td>
+                <td>
+                    <strong>
+                        <?php translate("current_favicon"); ?>
+                    </strong>
+                </td>
                 <td>
                     <div id="favicon-wrapper">
                         <?php
                         $favicon_path = ULICMS_DATA_STORAGE_ROOT . "/content/images/favicon.ico";
-                        $faviconUrl = defined("ULICMS_DATA_STORAGE_URL") ? ULICMS_DATA_STORAGE_URL . "/content/images/favicon.ico" : "../content/images/favicon.ico";
-                        if (file_exists($favicon_path)) {
-                            $faviconUrl .= "?time=" . File::getLastChanged($favicon_path);
-                            echo imageTag(
-                                    $faviconUrl,
-                                    ["alt" => Settings::get("homepage_title")]
-                            );
-                            ?>
+    $faviconUrl = defined("ULICMS_DATA_STORAGE_URL") ? ULICMS_DATA_STORAGE_URL . "/content/images/favicon.ico" : "../content/images/favicon.ico";
+    if (file_exists($favicon_path)) {
+        $faviconUrl .= "?time=" . File::getLastChanged($favicon_path);
+        echo imageTag(
+            $faviconUrl,
+            ["alt" => Settings::get("homepage_title")]
+        ); ?>
                             <div class="voffset2">
                                 <button
                                     type="button"
@@ -49,37 +51,53 @@ if ($permissionChecker->hasPermission("favicon")) {
                                     id="delete-favicon"
                                     data-url="<?php
                                     echo ModuleHelper::buildMethodCallUrl(
-                                            FaviconController::Class,
-                                            "deleteIcon",
-                                    );
-                                    ?>
+                                FaviconController::class,
+                                "deleteFavicon"
+                            ); ?>
                                     "
                                     >
                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                     <?php translate("delete_favicon"); ?>
                                 </button>
                             </div>
-                        <?php }
-                        ?>
+                        <?php
+    } ?>
                     </div>
-                    <img id="delete-favicon-loading" src="gfx/loading.gif" alt="Bitte warten..."
-                         style="display: none;">
+                    <img
+                        id="delete-favicon-loading"
+                        src="gfx/loading.gif"
+                        alt="<?php translate("loading_alt"); ?>"
+                        style="display: none;"
+                        >
                 </td>
-
             </tr>
             <tr>
-
-                <td><label for="high_resolution"><strong><?php translate("high_resolution"); ?></strong></label>
+                <td>
+                    <label for="high_resolution">
+                        <strong>
+                            <?php translate("high_resolution"); ?>
+                        </strong>
+                    </label>
                 </td>
-                <td><input type="checkbox" id="high_resolution"
-                           name="high_resolution" value="high_resolution"></td>
+                <td>
+                    <input
+                        type="checkbox"
+                        id="high_resolution"
+                        name="high_resolution"
+                        value="high_resolution"
+                        >
+                </td>
             </tr>
             <tr>
                 <td width=480><strong><?php translate("upload_new_favicon"); ?>
                     </strong></td>
                 <td>
-                    <input name="favicon_upload_file" type="file" required
-                           accept="image/*">
+                    <input
+                        name="favicon_upload_file"
+                        type="file"
+                        required
+                        accept="image/*"
+                        >
                     <br /></td>
             </tr>
             <tr>
@@ -98,10 +116,11 @@ if ($permissionChecker->hasPermission("favicon")) {
     $translation->addKey("favicon_deleted");
     $translation->render();
 
-    enqueueScriptFile(ModuleHelper::buildRessourcePath(
-                    "core_settings",
-                    "js/favicon.js"
-            )
+    enqueueScriptFile(
+        ModuleHelper::buildRessourcePath(
+        "core_settings",
+        "js/favicon.js"
+    )
     );
     combinedScriptHtml();
 } else {

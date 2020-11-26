@@ -29,7 +29,7 @@ if (is_writable($configFile)) {
 
 $ckfinderDirectory = Path::resolve("ULICMS_ROOT/admin/kcfinder");
 
-if(is_dir($ckfinderDirectory)){
+if (is_dir($ckfinderDirectory)) {
     sureRemoveDir("$ckfinderDirectory");
 }
 
@@ -45,8 +45,8 @@ if (!file_exists($defaultConfig)) {
 
 copy(
     Path::resolve(
-        "ULICMS_ROOT/lib/CMSConfigSample.php"
-    ),
+            "ULICMS_ROOT/lib/CMSConfigSample.php"
+        ),
     Path::resolve("ULICMS_ROOT/CMSConfig.php")
 );
 
@@ -56,6 +56,10 @@ copy(
 // Run SQL Migration Scripts
 $migrator = new DBMigrator("core", "lib/migrations/up");
 $migrator->migrate();
+
+$version = new UliCMSVersion();
+$versionNumber = $version->getInternalVersionAsString();
+Settings::set("db_schema_version", $versionNumber);
 
 // Enable HTML Minifying
 Settings::register("minify_html", "1");

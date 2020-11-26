@@ -38,7 +38,7 @@ class HistoryController extends Controller
         }
     }
 
-    public function _doRestore(int $version_id)
+    public function _doRestore(int $version_id): ?object
     {
         $rev = VCS::getRevisionByID($version_id);
         if ($rev) {

@@ -36,12 +36,12 @@ if ($permissionChecker->hasPermission("audio")
             <strong class="field-label">
                 <?php echo translate("audio_ogg"); ?>
             </strong>
-            <input name="ogg_file" type="file">
+            <input name="ogg_file" type="file" accept=".ogg,audio/ogg">
         </div>
 
         <div class="field">
             <strong class="field-label"><?php echo translate("audio_mp3"); ?></strong>
-            <input name="mp3_file" type="file">
+            <input name="mp3_file" type="file" accept=".mp3,audio/mpeg	">
         </div>
         <div class="voffset2">
             <button type="submit" class="btn btn-primary">

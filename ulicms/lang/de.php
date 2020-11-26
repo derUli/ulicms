@@ -184,7 +184,6 @@ add_translation("INSTALLED_DESIGNS_INFO", "Hier finden Sie eine Auflistung der i
 add_translation("HOMEPAGE_TITLE", "Titel der Website");
 add_translation("site_slogan", "Motto der Homepage");
 add_translation("HOMEPAGE_OWNER", "Inhaber der Website");
-add_translation("HIDE_LOGO", "Logo ausblenden");
 add_translation("OWNER_MAILADRESS", "E-Mail Adresse des Administrators");
 add_translation("FRONTPAGE", "Startseite");
 add_translation("MAINTENANCE_MODE_ENABLED", "Wartungsmodus aktiviert");
@@ -755,5 +754,7 @@ add_translation(
         "Welche Browser von UliCMS unterstützt werden, erfahren Sie unter:\n" .
         "https://www.ulicms.de/Welche-Browser-werden-von-UliCMS-unterstutzt.html"
 );
+
+add_translation("loading_alt", "Bitte warten...");
 
 do_event("lang_de");

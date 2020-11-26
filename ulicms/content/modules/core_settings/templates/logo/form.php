@@ -1,5 +1,17 @@
 <?php
+
+use function UliCMS\HTML\imageTag;
+
+$controller = new LogoController();
+
 $permissionChecker = new ACL();
+if (defined("ULICMS_DATA_STORAGE_URL")) {
+    $logoUrl = ULICMS_DATA_STORAGE_URL . "/content/images/" . Settings::get("logo_image");
+} else {
+    $logoUrl = "../content/images/" . Settings::get("logo_image");
+}
+$logoStoragePath = ULICMS_DATA_STORAGE_ROOT . "/content/images/" . Settings::get("logo_image");
+
 if ($permissionChecker->hasPermission("logo")) {
     ?>
     <p>
@@ -12,48 +24,63 @@ if ($permissionChecker->hasPermission("logo")) {
         <?php translate("logo_infotext"); ?>
     </p>
     <form enctype="multipart/form-data" action="index.php" method="post">
-        <?php
-        csrf_token_html(); ?>
-        <input type="hidden" name="sClass" value="LogoUploadController" /> <input
+        <?php csrf_token_html(); ?>
+        <input type="hidden" name="sClass" value="LogoController" /> <input
             type="hidden" name="sMethod" value="upload" />
         <table style="height: 250px">
-            <tr>
-                <td><strong><?php translate("your_logo"); ?>
-                    </strong></td>
-                <td><?php
-                    if (defined("ULICMS_DATA_STORAGE_URL")) {
-                        $logo_path = ULICMS_DATA_STORAGE_URL . "/content/images/" . Settings::get("logo_image");
-                    } else {
-                        $logo_path = "../content/images/" . Settings::get("logo_image");
-                    }
-    $logo_storage_path = ULICMS_DATA_STORAGE_ROOT . "/content/images/" . Settings::get("logo_image");
 
-    if (file_exists($logo_storage_path)) {
-        echo '<img class="website_logo" src="' . $logo_path . '" alt="' . Settings::get("homepage_title") . '"/>';
+            <?php if ($controller->_hasLogo()) {
+        ?>
+
+                <tr>
+                    <td><strong><?php translate("your_logo"); ?>
+                        </strong></td>
+                    <td>
+                        <div id="logo-wrapper">
+                            <?php
+                            if (file_exists($logoStoragePath)) {
+                                echo imageTag(
+                                    $logoUrl,
+                                    [
+                                            "alt" => Settings::get("homepage_title"),
+                                            "class" => "img-responsive"
+                                        ]
+                                ); ?>
+                                <div class="voffset2">
+                                    <button
+                                        type="button"
+                                        class="btn btn-default"
+                                        id="delete-logo"
+                                        data-url="<?php
+                                        echo ModuleHelper::buildMethodCallUrl(
+                                    LogoController::class,
+                                    "deleteLogo"
+                                ); ?>
+                                        "
+                                        >
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                        <?php translate("delete_logo"); ?>
+                                    </button>
+                                    <?php
+                            } ?>
+                            </div>
+                        </div>
+                        <img
+                            id="delete-logo-loading"
+                            src="gfx/loading.gif"
+                            alt="<?php translate("loading_alt"); ?>"
+                            style="display: none;"
+                            >
+                    </td>
+                </tr>
+            <?php
     } ?>
-                </td>
-            </tr>
-            <tr>
-                <td><strong><?php translate("hide_logo") ?></strong></td>
-                <td><select name="logo_disabled" size=1>
-                        <option
-                        <?php
-                        if (Settings::get("logo_disabled") == "yes") {
-                            echo 'selected ';
-                        } ?>
-                            value="yes"><?php translate("yes"); ?></option>
-                        <option
-                        <?php
-                        if (Settings::get("logo_disabled") != "yes") {
-                            echo 'selected ';
-                        } ?>
-                            value="no"><?php translate("no"); ?></option>
-                    </select></td>
-            </tr>
             <tr>
                 <td width="480"><strong><?php translate("upload_new_logo"); ?>
                     </strong></td>
-                <td><input name="logo_upload_file" type="file"></td>
+                <td>
+                    <input name="logo_upload_file" type="file" accept="image/*">
+                </td>
             </tr>
             <tr>
                 <td></td>
@@ -64,6 +91,18 @@ if ($permissionChecker->hasPermission("logo")) {
         </table>
     </form>
     <?php
+    $translation = new JSTranslation();
+    $translation->addKey("delete_logo");
+    $translation->addKey("logo_deleted");
+    $translation->render();
+
+    enqueueScriptFile(
+        ModuleHelper::buildRessourcePath(
+        "core_settings",
+        "js/logo.js"
+    )
+    );
+    combinedScriptHtml();
 } else {
-                            noPerms();
-                        }
+    noPerms();
+}

@@ -46,10 +46,15 @@ if (!$permissionChecker->hasPermission("install_packages")) {
     <h1><?php translate("upload_package"); ?></h1>
     <form action="?action=upload_package" enctype="multipart/form-data"
           method="post">
-              <?php
-              csrf_token_html(); ?>
+              <?php csrf_token_html(); ?>
         <p>
-            <input type="file" name="file" class="form-control" required>
+            <input
+                type="file"
+                name="file"
+                class="form-control"
+                required 
+                accept=".sin,.tar.gz"
+                >
         </p>
         <p>
             <button type="submit" class="btn btn-warning">

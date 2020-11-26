@@ -183,7 +183,6 @@ add_translation("INSTALLED_DESIGNS_INFO", "This is a list of all installed desig
 add_translation("HOMEPAGE_TITLE", "Site Title");
 add_translation("site_slogan", "Site Slogan");
 add_translation("HOMEPAGE_OWNER", "Site owner");
-add_translation("HIDE_LOGO", "hide Logo");
 add_translation("OWNER_MAILADRESS", "E-Mail Adress of Site Admin");
 add_translation("FRONTPAGE", "Frontpage");
 add_translation("MAINTENANCE_MODE_ENABLED", "Maintenance mode enabled");
@@ -758,5 +757,8 @@ add_translation(
         "More information about compatible browsers at:\n".
         "https://www.ulicms.de/Welche-Browser-werden-von-UliCMS-unterstutzt.html"
 );
+
+
+add_translation("loading_alt", "Please wait...");
 
 do_event("lang_en");

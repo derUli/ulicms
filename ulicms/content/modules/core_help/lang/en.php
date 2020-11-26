@@ -6,10 +6,10 @@ add_translation(
     "PATCH_INSTALL_HELP",
     file_get_contents(
         ModuleHelper::buildModuleRessourcePath(
-                "core_help",
-                "docs/en/patch_install_help.html",
-                true
-            )
+            "core_help",
+            "docs/en/patch_install_help.html",
+            true
+        )
     )
 );
 add_translation("HELP_IS_ADMIN", "This option disables all "

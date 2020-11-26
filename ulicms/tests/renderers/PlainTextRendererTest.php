@@ -56,8 +56,8 @@ class PlainTextRendererTest extends \PHPUnit\Framework\TestCase
         $expected = normalizeLN(
             file_get_contents(
                 Path::resolve(
-                        "ULICMS_ROOT/tests/fixtures/renderers/plain.txt"
-                    )
+                    "ULICMS_ROOT/tests/fixtures/renderers/plain.txt"
+                )
             )
         );
         $renderer = new PlainTextRenderer();

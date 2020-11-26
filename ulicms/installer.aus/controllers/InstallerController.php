@@ -243,6 +243,13 @@ class InstallerController
         $script = str_ireplace("{admin_email}", $admin_email, $script);
         $script = str_ireplace("{time}", time(), $script);
 
+        $version = new UliCMSVersion();
+        $script = str_ireplace(
+            '{ulicms_version}',
+            $version->getInternalVersionAsString(),
+            $script
+        );
+
         mysqli_multi_query($connection, $script);
         while (mysqli_more_results($connection)) {
             mysqli_next_result($connection);

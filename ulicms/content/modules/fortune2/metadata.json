@@ -4,7 +4,7 @@
         "Fortune": "fortune.php"
     },
     "main_class": "Fortune",
-    "version": "0.2.2",
+    "version": "0.2.3",
     "manufacturer_name": "Ulrich Schmidt",
     "manufacturer_url": "https://www.ulicms.de",
     "embed": true,
