@@ -15,7 +15,6 @@ class FilesTest extends \PHPUnit\Framework\TestCase
     public function testGetMime()
     {
         $this->assertEquals("text/plain", File::getMime(Path::resolve("ULICMS_ROOT/.htaccess")));
-        $this->assertEquals("image/gif", File::getMime(Path::resolve("ULICMS_ROOT/admin/gfx/edit.gif")));
         $this->assertEquals("image/png", File::getMime(Path::resolve("ULICMS_ROOT/admin/gfx/edit.png")));
     }
 
