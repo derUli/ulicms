@@ -126,7 +126,7 @@ if ($permissionChecker->hasPermission("users")) {
                             if ($user->getId() == $_SESSION["login_id"]) {
                                 echo "<td class=\"text-center\"></td>";
                             } else {
-                                echo "<td class=\"text-center\">" . '<form action="index.php?sClass=UserController&sMethod=delete&id=' . $user->getId() . '" method="post" class="delete-form">' . get_csrf_token_html() . '<input type="image" class="mobile-big-image" src="gfx/delete.gif"></form></td>';
+                                echo "<td class=\"text-center\">" . '<form action="index.php?sClass=UserController&sMethod=delete&id=' . $user->getId() . '" method="post" class="delete-form">' . get_csrf_token_html() . '<input type="image" class="mobile-big-image" src="gfx/delete.png"></form></td>';
                             }
                         }
                         echo '</tr>';

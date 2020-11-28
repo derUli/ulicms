@@ -82,7 +82,7 @@ if (count($groups) > 0) {
                                     echo $id;
                                     ?>"
                                     method="post" class="delete-form"><?php csrf_token_html(); ?><input
-                                        type="image" class="mobile-big-image" src="gfx/delete.gif"
+                                        type="image" class="mobile-big-image" src="gfx/delete.png"
                                         alt="<?php
                                         translate("delete");
                                         ?>"

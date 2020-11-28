@@ -105,7 +105,7 @@ if (!$permissionChecker->hasPermission("categories")) {
                                             method="post"
                                             class="delete-form"><?php csrf_token_html(); ?><input
                                                 type="image"
-                                                class="mobile-big-image" src="gfx/delete.gif"
+                                                class="mobile-big-image" src="gfx/delete.png"
                                                 alt="<?php
                                                 translate("delete"); ?>"
                                                 title="<?php
@@ -120,7 +120,7 @@ if (!$permissionChecker->hasPermission("categories")) {
                                            translate(
                                         "CANT_DELETE_CATEGORY_GENERAL"
                                     ); ?>')"><img
-                                                class="mobile-big-image" src="gfx/delete.gif"
+                                                class="mobile-big-image" src="gfx/delete.png"
                                                 alt="<?php
                                                 translate("delete"); ?>"
                                                 title="<?php

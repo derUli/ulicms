@@ -102,7 +102,7 @@ if ($permissionChecker->hasPermission("banners")) {
                             get_csrf_token_html() .
                             '<input type="image" '
                             . 'class="mobile-big-image" '
-                            . 'src="gfx/delete.gif" title="' .
+                            . 'src="gfx/delete.png" title="' .
                             get_translation("delete") . '">'
                             . '</form></td>';
                         }

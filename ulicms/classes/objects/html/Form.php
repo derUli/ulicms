@@ -97,7 +97,7 @@ class Form
             $html .= '<input type="hidden" name="' . Template::getEscape($key)
                     . '" value="' . Template::getEscape($value) . '">';
         }
-        $imgFile = is_admin_dir() ? "gfx/delete.gif" : "admin/gfx/delete.gif";
+        $imgFile = is_admin_dir() ? "gfx/delete.png" : "admin/gfx/delete.png";
         $html .= '<input type="image" src="' . $imgFile . '" alt="' .
                 get_translation("delete") . '" title="' .
                 get_translation("delete") . '">';
