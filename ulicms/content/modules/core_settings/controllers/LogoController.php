@@ -33,8 +33,7 @@ class LogoController extends Controller
             $logo_upload = $_FILES['logo_upload_file'];
             $type = $logo_upload['type'];
 
-            if ($type == "image/jpeg" or $type == "image/jpg"
-                    or $type == "image/gif" or $type == "image/png") {
+            if (startsWith($type, "image/")) {
                 $originalName = $logo_upload['name'];
                 $newPath = $this->_buildFilePath(
                     $logo_upload['tmp_name'],
