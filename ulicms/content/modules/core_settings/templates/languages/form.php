@@ -103,11 +103,11 @@ if ($permissionChecker->hasPermission("languages")) {
         </div>
         <?php
         enqueueScriptFile(
-                                           ModuleHelper::buildModuleRessourcePath(
+                                        ModuleHelper::buildModuleRessourcePath(
                                                "core_settings",
                                                "js/languages.js"
                                            )
-                                       );
+                                    );
         combinedScriptHtml();
     }
 } else {

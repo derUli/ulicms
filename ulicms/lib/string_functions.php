@@ -70,10 +70,10 @@ function multi_explode(array $delimiters, string $string): array
             array_combine(
                 array_slice($delimiters, 1),
                 array_fill(
-                        0,
-                        count($delimiters) - 1,
-                        array_shift($delimiters)
-                    )
+                    0,
+                    count($delimiters) - 1,
+                    array_shift($delimiters)
+                )
             )
         )
     );

@@ -62,9 +62,9 @@ class PrivacyController extends Controller
         Response::sendHttpStatusCodeResultIfAjax(
             HttpStatusCode::OK,
             ModuleHelper::buildActionURL(
-                    "privacy_settings",
-                    "save=1&language={$language}"
-                )
+                "privacy_settings",
+                "save=1&language={$language}"
+            )
         );
     }
 }

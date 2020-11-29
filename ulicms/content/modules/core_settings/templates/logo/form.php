@@ -98,9 +98,9 @@ if ($permissionChecker->hasPermission("logo")) {
 
     enqueueScriptFile(
         ModuleHelper::buildRessourcePath(
-        "core_settings",
-        "js/logo.js"
-    )
+            "core_settings",
+            "js/logo.js"
+        )
     );
     combinedScriptHtml();
 } else {

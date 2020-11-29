@@ -202,8 +202,8 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
 
         $this->assertLessThan(
             count(
-                    $controller->_getParentIds()
-                ),
+                $controller->_getParentIds()
+            ),
             count($parentIds)
         );
 
@@ -228,8 +228,8 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
 
         $this->assertLessThan(
             count(
-                    $allIds
-                ),
+                $allIds
+            ),
             count($parentIds)
         );
         foreach ($parentIds as $id) {

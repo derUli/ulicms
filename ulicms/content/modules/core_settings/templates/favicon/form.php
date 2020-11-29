@@ -51,9 +51,9 @@ if ($permissionChecker->hasPermission("favicon")) {
                                     id="delete-favicon"
                                     data-url="<?php
                                     echo ModuleHelper::buildMethodCallUrl(
-                                FaviconController::class,
-                                "deleteFavicon"
-                            ); ?>
+            FaviconController::class,
+            "deleteFavicon"
+        ); ?>
                                     "
                                     >
                                     <i class="fa fa-trash" aria-hidden="true"></i>
@@ -118,9 +118,9 @@ if ($permissionChecker->hasPermission("favicon")) {
 
     enqueueScriptFile(
         ModuleHelper::buildRessourcePath(
-        "core_settings",
-        "js/favicon.js"
-    )
+            "core_settings",
+            "js/favicon.js"
+        )
     );
     combinedScriptHtml();
 } else {

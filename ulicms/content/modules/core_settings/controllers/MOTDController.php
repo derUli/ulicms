@@ -26,15 +26,15 @@ class MOTDController extends Controller
         Response::sendHttpStatusCodeResultIfAjax(
             HttpStatusCode::OK,
             ModuleHelper::buildActionURL(
-                    "motd",
-                    ModuleHelper::buildQueryString(
-                            [
+                "motd",
+                ModuleHelper::buildQueryString(
+                        [
                                     "save" => "1",
                                     "language" => Request::getVar("language")
                                 ],
-                            false
-                        )
-                )
+                        false
+                    )
+            )
         );
     }
 }

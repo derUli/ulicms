@@ -80,9 +80,9 @@ class FaviconController extends Controller
             // Show error if uploaded file is not an image
             Request::redirect(
                 ModuleHelper::buildActionURL(
-                        "favicon",
-                        "error=UPLOAD_WRONG_FILE_FORMAT"
-                    )
+                    "favicon",
+                    "error=UPLOAD_WRONG_FILE_FORMAT"
+                )
             );
         }
     }

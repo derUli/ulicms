@@ -31,9 +31,9 @@ class PerformanceSettingsController extends Controller
         Response::sendHttpStatusCodeResultIfAjax(
             HttpStatusCode::OK,
             ModuleHelper::buildActionUrl(
-                    "performance_settings",
-                    "save=1"
-                )
+                "performance_settings",
+                "save=1"
+            )
         );
     }
 

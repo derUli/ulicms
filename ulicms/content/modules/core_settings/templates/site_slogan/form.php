@@ -61,9 +61,9 @@ if ($permissionChecker->hasPermission("settings_simple")) {
     
     enqueueScriptFile(
         ModuleHelper::buildRessourcePath(
-        "core_settings",
-        "js/site_slogan.js"
-    )
+            "core_settings",
+            "js/site_slogan.js"
+        )
     );
     combinedScriptHtml(); ?>
     <?php

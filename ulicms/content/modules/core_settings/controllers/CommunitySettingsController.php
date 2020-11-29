@@ -39,9 +39,9 @@ class CommunitySettingsController extends Controller
         Response::sendHttpStatusCodeResultIfAjax(
             HttpStatusCode::OK,
             ModuleHelper::buildActionURL(
-                    "community_settings",
-                    "save=1"
-                )
+                "community_settings",
+                "save=1"
+            )
         );
     }
 }

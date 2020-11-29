@@ -5,8 +5,8 @@ use UliCMS\Models\Content\Comment;
 use UliCMS\Models\Content\VCS;
 use UliCMS\Exceptions\DatasetNotFoundException;
 
-class Page extends Content {
-
+class Page extends Content
+{
     public $id = null;
     public $slug = "";
     public $title = "";
@@ -44,7 +44,8 @@ class Page extends Content {
     private $permissions;
     public $show_headline = true;
 
-    public function __construct($id = null) {
+    public function __construct($id = null)
+    {
         if ($this->custom_data === null) {
             $this->custom_data = [];
         }
@@ -55,7 +56,8 @@ class Page extends Content {
         }
     }
 
-    protected function fillVars($result = null) {
+    protected function fillVars($result = null)
+    {
         $this->id = intval($result->id);
         $this->slug = $result->slug;
         $this->title = $result->title;
@@ -106,7 +108,8 @@ class Page extends Content {
         }
     }
 
-    public function loadByID($id) {
+    public function loadByID($id)
+    {
         $result = Database::pQuery("SELECT * FROM `{prefix}content` "
                         . "where id = ?", array(
                     intval($id)
@@ -119,7 +122,8 @@ class Page extends Content {
         }
     }
 
-    public function loadBySlugAndLanguage($name, $language) {
+    public function loadBySlugAndLanguage($name, $language)
+    {
         $name = Database::escapeValue($name);
         $language = Database::escapeValue($language);
         $result = Database::query("SELECT * FROM `" . tbname("content") .
@@ -133,7 +137,8 @@ class Page extends Content {
         throw new DatasetNotFoundException("No such page");
     }
 
-    public function save() {
+    public function save()
+    {
         $retval = null;
         if ($this->id === null) {
             $retval = $this->create();
@@ -143,7 +148,8 @@ class Page extends Content {
         return $retval;
     }
 
-    public function create() {
+    public function create()
+    {
         $sql = "INSERT INTO `" . tbname("content") . "` (slug, title,
             alternate_title, target, category_id,
 				content, language, menu_image, active,
@@ -227,8 +233,8 @@ class Page extends Content {
         }
 
         $json = json_encode(
-                $this->custom_data,
-                JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
+            $this->custom_data,
+            JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
         );
 
         $sql .= "'" . Database::escapeValue($json) . "',";
@@ -250,7 +256,8 @@ class Page extends Content {
         return $result;
     }
 
-    public function update() {
+    public function update()
+    {
         $result = null;
         if ($this->id === null) {
             return $this->create();
@@ -333,8 +340,8 @@ class Page extends Content {
         }
 
         $json = json_encode(
-                $this->custom_data,
-                JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
+            $this->custom_data,
+            JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
         );
 
         $sql .= "custom_data='" . Database::escapeValue($json) . "',";
@@ -344,12 +351,12 @@ class Page extends Content {
         $sql .= "og_title='" . Database::escapeValue($this->og_title) . "',";
         $sql .= "og_image='" . Database::escapeValue($this->og_image) . "',";
         $sql .= "og_description='" . Database::escapeValue(
-                        $this->og_description
-                ) . "', ";
+            $this->og_description
+        ) . "', ";
         $sql .= "hidden='" . Database::escapeValue($this->hidden) . "', ";
         $sql .= "comments_enabled=" . Database::escapeValue(
-                        $this->comments_enabled
-                ) . ", ";
+            $this->comments_enabled
+        ) . ", ";
         $sql .= "show_headline=" . Database::escapeValue($this->show_headline)
                 . ",";
         $sql .= "cache_control='" . Database::escapeValue($this->cache_control)
@@ -364,20 +371,23 @@ class Page extends Content {
         return $result;
     }
 
-    public function delete() {
+    public function delete()
+    {
         if ($this->deleted_at === null) {
             $this->deleted_at = time();
         }
         $this->save();
     }
 
-    public function undelete(): void {
+    public function undelete(): void
+    {
         $this->deleted_at = null;
         $this->save();
     }
 
     // returns true if this page contains a module
-    public function containsModule(?string $module = null): bool {
+    public function containsModule(?string $module = null): bool
+    {
         $content = $this->content;
         $content = str_replace("&quot;", "\"", $content);
         if ($module) {
@@ -387,7 +397,8 @@ class Page extends Content {
     }
 
     // returns all modules contained in this page
-    public function getEmbeddedModules(): array {
+    public function getEmbeddedModules(): array
+    {
         $result = [];
         $content = str_ireplace("&quot;", '"', $this->content);
         preg_match_all("/\[module=\"?([a-z_\-0-9]+)\"?]/i", $content, $match);
@@ -403,7 +414,8 @@ class Page extends Content {
     }
 
     // returns the parent page
-    public function getParent(): ?Content {
+    public function getParent(): ?Content
+    {
         if (!$this->parent_id) {
             return null;
         }
@@ -411,18 +423,21 @@ class Page extends Content {
     }
 
     // returns the change history of this page
-    public function getHistory(string $order = "date DESC"): array {
+    public function getHistory(string $order = "date DESC"): array
+    {
         if (!$this->getID()) {
             return [];
         }
         return VCS::getRevisionsByContentID($this->getID(), $order);
     }
 
-    public function getPermissions(): PagePermissions {
+    public function getPermissions(): PagePermissions
+    {
         return $this->permissions;
     }
 
-    public function setPermissions(PagePermissions $permissions): void {
+    public function setPermissions(PagePermissions $permissions): void
+    {
         $this->permissions = $permissions;
     }
 
@@ -430,23 +445,24 @@ class Page extends Content {
     // if "Comments enabled" has "[Default]" selected
     // then it returns if the comments are enabled in
     // the global settings
-    public function areCommentsEnabled(): bool {
+    public function areCommentsEnabled(): bool
+    {
         $commentsEnabled = false;
         if (is_null($this->comments_enabled)) {
             $commentsEnabled = boolval(Settings::get("comments_enabled"));
 
             $commentable_content_types = Settings::get(
-                            "commentable_content_types"
+                "commentable_content_types"
             );
             if ($commentable_content_types) {
                 $commentable_content_types = splitAndTrim(
-                        $commentable_content_types
+                    $commentable_content_types
                 );
 
                 if (count($commentable_content_types) > 0 && !faster_in_array(
-                                $this->type,
-                                $commentable_content_types
-                        )) {
+                    $this->type,
+                    $commentable_content_types
+                )) {
                     $commentsEnabled = false;
                 }
             }
@@ -458,89 +474,101 @@ class Page extends Content {
 
     // TODO: write a more ressource friendly implementation
     // which doesn't load all comment datasets into the memory
-    public function hasComments(): bool {
+    public function hasComments(): bool
+    {
         return count($this->getComments()) > 0;
     }
 
     // this returns an array of all comments of this content
-    public function getComments($order_by = "date desc"): array {
+    public function getComments($order_by = "date desc"): array
+    {
         return Comment::getAllByContentId($this->id, $order_by);
     }
 
     // returns the url of this page
-    public function getUrl(?string $suffix = null): string {
+    public function getUrl(?string $suffix = null): string
+    {
         return ModuleHelper::getFullPageURLByID($this->id, $suffix);
     }
 
-    public function checkAccess(): ?string {
+    public function checkAccess(): ?string
+    {
         return checkAccess($this->access);
     }
 
     // set this page as frontpage
-    public function makeFrontPage(): void {
+    public function makeFrontPage(): void
+    {
         Settings::setLanguageSetting("frontpage", $this->slug, $this->language);
     }
 
     // returns true if this page is the frontpage
-    public function isFrontPage(): bool {
+    public function isFrontPage(): bool
+    {
         $frontPage = Settings::getLang(
-                        "frontpage",
-                        $this->language
+            "frontpage",
+            $this->language
         );
         return $frontPage === $this->slug;
     }
 
-    public function getDeletedAt(): ?int {
+    public function getDeletedAt(): ?int
+    {
         return $this->deleted_at;
     }
 
-    public function isDeleted(): bool {
+    public function isDeleted(): bool
+    {
         return !is_null($this->getDeletedAt());
     }
 
     // returns true if this page is configured as the 403 error page
-    public function isErrorPage403(): bool {
+    public function isErrorPage403(): bool
+    {
         $errorPage403 = intval(
-                Settings::getLanguageSetting(
-                        "error_page_403",
-                        $this->language
+            Settings::getLanguageSetting(
+                    "error_page_403",
+                    $this->language
                 )
         );
         return $this->getID() && $this->getID() == $errorPage403;
     }
 
     // returns true if this page is configured as the 404 error page
-    public function isErrorPage404(): bool {
+    public function isErrorPage404(): bool
+    {
         $errorPage404 = intval(
-                Settings::getLanguageSetting(
-                        "error_page_404",
-                        $this->language
+            Settings::getLanguageSetting(
+                    "error_page_404",
+                    $this->language
                 )
         );
         return $this->getID() && $this->getID() == $errorPage404;
     }
 
     // returns true if this page is configured as an error page
-    public function isErrorPage(): bool {
+    public function isErrorPage(): bool
+    {
         return $this->isErrorPage403() or $this->isErrorPage404();
     }
 
     // set this page as error page for http status 403
-    public function makeErrorPage403(bool $enabled = true): void {
+    public function makeErrorPage403(bool $enabled = true): void
+    {
         Settings::setLanguageSetting(
-                "error_page_403",
-                $enabled ? $this->getID() : null,
-                $this->language
+            "error_page_403",
+            $enabled ? $this->getID() : null,
+            $this->language
         );
     }
 
     // set this page as error page for http status 404
-    public function makeErrorPage404(bool $enabled = true): void {
+    public function makeErrorPage404(bool $enabled = true): void
+    {
         Settings::setLanguageSetting(
-                "error_page_404",
-                $enabled ? $this->getID() : null,
-                $this->language
+            "error_page_404",
+            $enabled ? $this->getID() : null,
+            $this->language
         );
     }
-
 }

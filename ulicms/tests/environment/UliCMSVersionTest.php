@@ -42,10 +42,10 @@ class UliCMSVersionTest extends \PHPUnit\Framework\TestCase
             if (startsWith($module, "core_")) {
                 $this->assertTrue(
                     \UliCMS\Utils\VersionComparison\compare(
-                            $moduleVersion,
-                            $ulicmsVersion,
-                            "="
-                        ),
+                        $moduleVersion,
+                        $ulicmsVersion,
+                        "="
+                    ),
                     "$module has a bad version $moduleVersion"
                 );
             }
@@ -63,10 +63,10 @@ class UliCMSVersionTest extends \PHPUnit\Framework\TestCase
             if ($availableVersion) {
                 $this->assertTrue(
                     \UliCMS\Utils\VersionComparison\compare(
-                            $availableVersion,
-                            $installedVersion,
-                            ">="
-                        ),
+                        $availableVersion,
+                        $installedVersion,
+                        ">="
+                    ),
                     "$module $availableVersion in the package source "
                         . "is not at least equal to "
                         . "the installed version $module $installedVersion"

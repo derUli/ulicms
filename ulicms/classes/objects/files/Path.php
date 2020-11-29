@@ -26,9 +26,9 @@ class Path
         $path = str_ireplace(
             "ULICMS_DATA_STORAGE_ROOT",
             rtrim(
-                    ULICMS_DATA_STORAGE_ROOT,
-                    "/"
-                ),
+                ULICMS_DATA_STORAGE_ROOT,
+                "/"
+            ),
             $path
         );
         $path = str_ireplace("ULICMS_CONFIGURATIONS", ULICMS_CONFIGURATIONS, $path);
@@ -36,9 +36,9 @@ class Path
             $path = str_ireplace(
                 "ULICMS_DATA_STORAGE_URL",
                 rtrim(
-                        ULICMS_DATA_STORAGE_URL,
-                        "/"
-                    ),
+                    ULICMS_DATA_STORAGE_URL,
+                    "/"
+                ),
                 $path
             );
         }
@@ -47,17 +47,17 @@ class Path
         $path = str_ireplace(
             "ULICMS_CONTENT",
             rtrim(
-                    ULICMS_CONTENT,
-                    "/"
-                ),
+                ULICMS_CONTENT,
+                "/"
+            ),
             $path
         );
         $path = str_ireplace(
             "ULICMS_GENERATED",
             rtrim(
-                    ULICMS_GENERATED,
-                    "/"
-                ),
+                ULICMS_GENERATED,
+                "/"
+            ),
             $path
         );
         $path = str_ireplace("ULICMS_LOG", rtrim(ULICMS_LOG, "/"), $path);

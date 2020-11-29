@@ -282,9 +282,9 @@ if (!$permissionChecker->hasPermission("other")) {
 
     enqueueScriptFile(
         ModuleHelper::buildRessourcePath(
-        "core_settings",
-        "js/other_settings.js"
-    )
+            "core_settings",
+            "js/other_settings.js"
+        )
     );
     combinedScriptHtml();
 }
