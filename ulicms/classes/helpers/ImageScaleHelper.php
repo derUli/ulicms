@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace UliCMS\Helpers;
 
+use Helper;
 use Settings;
-use Imagine\Gd\Imagine;
+use ImagineHelper;
 use Imagine\Image\Box;
 use Imagine\Image\ImageInterface;
 
-class ImageScaleHelper
+class ImageScaleHelper extends Helper
 {
     public static function getMaxImageDimensions(): ?array
     {
@@ -42,7 +43,7 @@ class ImageScaleHelper
         $scaled = false;
 
         if ($dimensions) {
-            $imagine = new Imagine();
+            $imagine = ImagineHelper::getImagine();
 
             $size = new Box($dimensions[0], $dimensions[1]);
             $mode = ImageInterface::THUMBNAIL_INSET;
