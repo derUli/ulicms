@@ -96,7 +96,9 @@ if ($permissionChecker->hasPermission("favicon")) {
                         name="favicon_upload_file"
                         type="file"
                         required
-                        accept="image/*"
+                        accept="<?php
+                    echo ImagineHelper::ACCEPT_MIMES;
+                    ?>"
                         >
                     <br /></td>
             </tr>

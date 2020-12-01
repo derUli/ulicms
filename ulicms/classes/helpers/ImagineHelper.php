@@ -7,6 +7,11 @@ use Imagine\Exception\RuntimeException;
 
 class ImagineHelper extends Helper {
 
+    const ACCEPT_MIMES = 'image/jpeg,image/png,image/gif';
+    const GRAPHICS_MAGICK = 'gmagick';
+    const IMAGE_MAGICK = 'imagick';
+    const GD = 'imagick';
+
     protected static function getImageMagick(): ?AbstractImagine {
         try {
             return new Imagine\Imagick\Imagine();
@@ -52,9 +57,18 @@ class ImagineHelper extends Helper {
         return $imagine;
     }
 
-    public static function isSVGSupportAvailable() {
-        $imagine = self::getImagine();
-        return !($imagine instanceof Imagine\Gd\Imagine);
+    public static function getLibraryName(): string {
+        if (self::getImageMagick()) {
+            return self::IMAGE_MAGICK;
+        }
+        if (self::getGraphicsMagicks()) {
+            return self::GRAPHICS_MAGICK;
+        }
+
+        if (self::getGD()) {
+            return self::GD;
+        }
+        return null;
     }
 
 }
