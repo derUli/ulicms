@@ -97,8 +97,7 @@ if ($permissionChecker->hasPermission("favicon")) {
                         type="file"
                         required
                         accept="<?php
-                    echo ImagineHelper::ACCEPT_MIMES;
-                    ?>"
+                    echo ImagineHelper::ACCEPT_MIMES; ?>"
                         >
                     <br /></td>
             </tr>
