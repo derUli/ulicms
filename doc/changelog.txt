@@ -9,6 +9,8 @@ Neue Features:
 Neue API-methoden:
 * Path::normalize(string $path): string
 * Path::resolveAndNormalize(string $path): string
+* ImagineHelper::getImagine(): ?AbstractImagine
+* ImagineHelper::getLibraryName(): ?string
 
 ===== Neues in UliCMS 2020.4 =====
 

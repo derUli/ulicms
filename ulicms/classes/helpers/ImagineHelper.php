@@ -61,7 +61,7 @@ class ImagineHelper extends Helper
         return $imagine;
     }
 
-    public static function getLibraryName(): string
+    public static function getLibraryName(): ?string
     {
         if (self::getImageMagick()) {
             return self::IMAGE_MAGICK;
