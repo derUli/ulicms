@@ -475,11 +475,12 @@ DEPENDENCY LICENSES:
 Name                       Version  License
 dflydev/dot-access-data    v1.1.0   MIT
 psr/container              1.0.0    MIT
-symfony/console            v4.4.8   MIT
-symfony/finder             v4.4.8   MIT
-symfony/polyfill-mbstring  v1.17.0  MIT
-symfony/polyfill-php73     v1.17.0  MIT
-symfony/service-contracts  v1.1.8   MIT
+symfony/console            v4.4.17  MIT
+symfony/finder             v4.4.17  MIT
+symfony/polyfill-mbstring  v1.20.0  MIT
+symfony/polyfill-php73     v1.20.0  MIT
+symfony/polyfill-php80     v1.20.0  MIT
+symfony/service-contracts  v1.1.9   MIT
 
 ### consolidation/robo 
 Modern task runner
