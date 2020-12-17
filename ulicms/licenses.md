@@ -451,9 +451,10 @@ DEPENDENCY LICENSES:
 Name                       Version  License
 psr/container              1.0.0    MIT
 psr/log                    1.1.3    MIT
-symfony/console            v4.4.8   MIT
+symfony/console            v4.4.9   MIT
 symfony/polyfill-mbstring  v1.17.0  MIT
 symfony/polyfill-php73     v1.17.0  MIT
+symfony/polyfill-php80     v1.17.0  MIT
 symfony/service-contracts  v1.1.8   MIT
 
 ### consolidation/output-formatters 
