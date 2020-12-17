@@ -80,7 +80,7 @@ class VersionComparisonsTest extends \PHPUnit\Framework\TestCase
     public function testIsLesserOrEqualReturnsFalse()
     {
         $this->assertFalse(isLesserOrEqual("2020.2", "2020.1"));
-        $this->assertFalse(isLesserOrEqual("2020.4.1", "2020.3.1"));
+        $this->assertFalse(isLesserOrEqual("2021.1", "2020.3.1"));
         $this->assertFalse(isLesserOrEqual("1.5", "1.2"));
         $this->assertFalse(isLesserOrEqual("1.7.5", "1.7.2"));
     }

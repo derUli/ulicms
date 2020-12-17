@@ -10,8 +10,7 @@ class UliCMSVersion
         $this->releaseYear = 2020;
         $this->buildDate = 0; // {InsertBuildDate}
         $this->internalVersion = [
-            2020,
-            4,
+            2021,
             1
         ];
 
