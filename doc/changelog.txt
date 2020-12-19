@@ -1,4 +1,4 @@
-===== Neues in UliCMS 2020.4.1 =====
+===== Neues in UliCMS 2021.1 =====
 
 Neue Features:
 * Favicons können gelöscht werden
