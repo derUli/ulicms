@@ -209,7 +209,7 @@ function get_article_meta(?string $page = null): ?object {
         $page = get_slug();
     }
 
-    $dataset = null;
+    $dataset = '';
     $sql = "SELECT `article_author_name`, `article_author_email`, CASE WHEN "
             . "`article_date` is not null then UNIX_TIMESTAMP(article_date) "
             . "else null end as article_date, `article_image`, "
