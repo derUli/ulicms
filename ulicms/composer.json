@@ -22,7 +22,7 @@
       }
    ],
    "require": {
-      "php": ">=7.2",
+      "php": ">=7.3",
       "ext-mysqli": "*",
       "ext-gd": "*",
       "ext-json": "*",
@@ -30,7 +30,7 @@
       "ext-openssl": "*",
       "ext-dom": "*",
       "ext-libxml": "*",
-      "phpfastcache/phpfastcache": "7.*",
+      "phpfastcache/phpfastcache": "*",
       "phpgangsta/googleauthenticator": "dev-master",
       "katzgrau/klogger": "dev-master",
       "phpmailer/phpmailer": "*",
@@ -48,13 +48,13 @@
       "consolidation/robo": "*",
       "lasserafn/php-initial-avatar-generator": "*",
       "imagine/imagine": "*",
-      "michelf/php-markdown": "^1.9"
+      "michelf/php-markdown": "*"
    },
    "require-dev": {
-      "spatie/phpunit-snapshot-assertions": "^4.2",
-      "phpunit/phpunit": "^9.0",
-      "mpdf/mpdf": "^8.0",
-      "friendsofphp/php-cs-fixer": "^2.16",
-      "overtrue/phplint": "^2.0"
+      "spatie/phpunit-snapshot-assertions": "*",
+      "phpunit/phpunit": "*",
+      "mpdf/mpdf": "*",
+      "friendsofphp/php-cs-fixer": "*",
+      "overtrue/phplint": "*"
    }
 }
