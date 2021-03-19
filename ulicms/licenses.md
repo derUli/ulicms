@@ -509,30 +509,28 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 DEPENDENCY LICENSES:
 
-Name                                 Version  License
-consolidation/annotated-command      4.2.4    MIT
-consolidation/config                 2.0.1    MIT
-consolidation/log                    2.0.2    MIT
-consolidation/output-formatters      4.1.2    MIT
-consolidation/self-update            1.2.0    MIT
-container-interop/container-interop  1.2.0    MIT
-dflydev/dot-access-data              v1.1.0   MIT
-grasmash/expander                    1.0.0    MIT
-league/container                     2.4.1    MIT
-psr/container                        1.0.0    MIT
-psr/log                              1.1.3    MIT
-symfony/console                      v4.4.18  MIT
-symfony/event-dispatcher             v4.4.18  MIT
-symfony/event-dispatcher-contracts   v1.1.9   MIT
-symfony/filesystem                   v4.4.18  MIT
-symfony/finder                       v4.4.18  MIT
-symfony/polyfill-ctype               v1.20.0  MIT
-symfony/polyfill-mbstring            v1.20.0  MIT
-symfony/polyfill-php73               v1.20.0  MIT
-symfony/polyfill-php80               v1.20.0  MIT
-symfony/process                      v4.4.18  MIT
-symfony/service-contracts            v1.1.9   MIT
-symfony/yaml                         v4.4.18  MIT
+Name                                Version  License
+consolidation/annotated-command     4.2.3    MIT
+consolidation/config                2.0.0    MIT
+consolidation/log                   2.0.1    MIT
+consolidation/output-formatters     4.1.1    MIT
+consolidation/self-update           1.2.0    MIT
+dflydev/dot-access-data             v1.1.0   MIT
+grasmash/expander                   1.0.0    MIT
+league/container                    3.3.3    MIT
+psr/container                       1.0.0    MIT
+psr/log                             1.1.3    MIT
+symfony/console                     v4.4.14  MIT
+symfony/event-dispatcher            v4.4.14  MIT
+symfony/event-dispatcher-contracts  v1.1.9   MIT
+symfony/filesystem                  v4.4.14  MIT
+symfony/finder                      v4.4.14  MIT
+symfony/polyfill-ctype              v1.18.1  MIT
+symfony/polyfill-mbstring           v1.18.1  MIT
+symfony/polyfill-php73              v1.18.1  MIT
+symfony/polyfill-php80              v1.18.1  MIT
+symfony/process                     v4.4.14  MIT
+symfony/service-contracts           v1.1.9   MIT
 
 ### consolidation/self-update 
 Provides a self:update command for Symfony Console applications.
@@ -541,32 +539,6 @@ Licenses Used: MIT
 The MIT License (MIT)
 
 Copyright (c) 2014 Codegyre Developers Team, Consolidation Team
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of
-this software and associated documentation files (the "Software"), to deal in
-the Software without restriction, including without limitation the rights to
-use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
-the Software, and to permit persons to whom the Software is furnished to do so,
-subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
-FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-
-### container-interop/container-interop 
-Promoting the interoperability of container objects (DIC, SL, etc.)
-Homepage: https://github.com/container-interop/container-interop
-Licenses Used: MIT
-The MIT License (MIT)
-
-Copyright (c) 2013 container-interop
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
@@ -906,7 +878,7 @@ Homepage: https://github.com/thephpleague/container
 Licenses Used: MIT
 # The MIT License (MIT)
 
-Copyright (c) 2014 Phil Bennett <philipobenito@gmail.com>
+Copyright (c) 2017 Phil Bennett <philipobenito@gmail.com>
 
 > Permission is hereby granted, free of charge, to any person obtaining a copy
 > of this software and associated documentation files (the "Software"), to deal
@@ -1859,10 +1831,10 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
 ### symfony/console 
-Symfony Console Component
+Eases the creation of beautiful and testable command line interfaces
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2004-2020 Fabien Potencier
+Copyright (c) 2004-2021 Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -1909,10 +1881,10 @@ THE SOFTWARE.
 
 
 ### symfony/event-dispatcher 
-Symfony EventDispatcher Component
+Provides tools that allow your application components to communicate with each other by dispatching events and listening to them
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2004-2020 Fabien Potencier
+Copyright (c) 2004-2021 Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -1959,10 +1931,10 @@ THE SOFTWARE.
 
 
 ### symfony/filesystem 
-Symfony Filesystem Component
+Provides basic utilities for the filesystem
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2004-2020 Fabien Potencier
+Copyright (c) 2004-2021 Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -1984,10 +1956,10 @@ THE SOFTWARE.
 
 
 ### symfony/finder 
-Symfony Finder Component
+Finds files and directories via an intuitive fluent interface
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2004-2020 Fabien Potencier
+Copyright (c) 2004-2021 Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2159,10 +2131,10 @@ THE SOFTWARE.
 
 
 ### symfony/process 
-Symfony Process Component
+Executes commands in sub-processes
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2004-2020 Fabien Potencier
+Copyright (c) 2004-2021 Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2209,10 +2181,10 @@ THE SOFTWARE.
 
 
 ### symfony/string 
-Symfony String component
+Provides an object-oriented API to strings and deals with bytes, UTF-8 code points and grapheme clusters in a unified way
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2019-2020 Fabien Potencier
+Copyright (c) 2019-2021 Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2234,10 +2206,10 @@ THE SOFTWARE.
 
 
 ### symfony/translation 
-Symfony Translation Component
+Provides tools to internationalize your application
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2004-2020 Fabien Potencier
+Copyright (c) 2004-2021 Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2284,10 +2256,10 @@ THE SOFTWARE.
 
 
 ### symfony/yaml 
-Symfony Yaml Component
+Loads and dumps YAML files
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2004-2020 Fabien Potencier
+Copyright (c) 2004-2021 Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
