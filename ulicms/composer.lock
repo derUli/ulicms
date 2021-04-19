@@ -508,24 +508,24 @@
         },
         {
             "name": "dereuromark/media-embed",
-            "version": "0.5.4",
+            "version": "0.5.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dereuromark/media-embed.git",
-                "reference": "cd91ebd55c6167a7911632dc17786f0f8aec4055"
+                "reference": "ebc1669d2faf831fbf785d9a9a5311b5fe5de1c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dereuromark/media-embed/zipball/cd91ebd55c6167a7911632dc17786f0f8aec4055",
-                "reference": "cd91ebd55c6167a7911632dc17786f0f8aec4055",
+                "url": "https://api.github.com/repos/dereuromark/media-embed/zipball/ebc1669d2faf831fbf785d9a9a5311b5fe5de1c0",
+                "reference": "ebc1669d2faf831fbf785d9a9a5311b5fe5de1c0",
                 "shasum": ""
             },
             "require": {
                 "jbroadway/urlify": "^1.0.0",
-                "php": ">=5.6"
+                "php": ">=7.2"
             },
             "require-dev": {
-                "fig-r/psr2r-sniffer": "^0.6",
+                "fig-r/psr2r-sniffer": "dev-master",
                 "sebastian/diff": "@stable"
             },
             "bin": [
@@ -559,7 +559,7 @@
             ],
             "support": {
                 "issues": "https://github.com/dereuromark/media-embed/issues",
-                "source": "https://github.com/dereuromark/media-embed/tree/0.5.4"
+                "source": "https://github.com/dereuromark/media-embed/tree/0.5.5"
             },
             "funding": [
                 {
@@ -567,7 +567,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-01-18T12:06:27+00:00"
+            "time": "2021-04-15T14:10:22+00:00"
         },
         {
             "name": "deruli/html-minifier",
@@ -1690,16 +1690,16 @@
         },
         {
             "name": "overtrue/pinyin",
-            "version": "4.0.6",
+            "version": "4.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/overtrue/pinyin.git",
-                "reference": "9836dae1783bcf5934508a2abe32eca9ea5ee15d"
+                "reference": "083de406907d42df2e0feaaeb83f1a3c2e0095eb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/overtrue/pinyin/zipball/9836dae1783bcf5934508a2abe32eca9ea5ee15d",
-                "reference": "9836dae1783bcf5934508a2abe32eca9ea5ee15d",
+                "url": "https://api.github.com/repos/overtrue/pinyin/zipball/083de406907d42df2e0feaaeb83f1a3c2e0095eb",
+                "reference": "083de406907d42df2e0feaaeb83f1a3c2e0095eb",
                 "shasum": ""
             },
             "require": {
@@ -1751,7 +1751,7 @@
             ],
             "support": {
                 "issues": "https://github.com/overtrue/pinyin/issues",
-                "source": "https://github.com/overtrue/pinyin/tree/master"
+                "source": "https://github.com/overtrue/pinyin/tree/4.0.7"
             },
             "funding": [
                 {
@@ -1759,20 +1759,20 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2020-04-13T08:53:30+00:00"
+            "time": "2021-04-16T11:13:48+00:00"
         },
         {
             "name": "phpfastcache/phpfastcache",
-            "version": "8.0.4",
+            "version": "8.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPSocialNetwork/phpfastcache.git",
-                "reference": "f1a22a821a30b928b28d2ec73ed1b0245b5ab3f9"
+                "reference": "6d66cc0604bcbd7681ef1b3fdd1ba22901a16b1c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPSocialNetwork/phpfastcache/zipball/f1a22a821a30b928b28d2ec73ed1b0245b5ab3f9",
-                "reference": "f1a22a821a30b928b28d2ec73ed1b0245b5ab3f9",
+                "url": "https://api.github.com/repos/PHPSocialNetwork/phpfastcache/zipball/6d66cc0604bcbd7681ef1b3fdd1ba22901a16b1c",
+                "reference": "6d66cc0604bcbd7681ef1b3fdd1ba22901a16b1c",
                 "shasum": ""
             },
             "require": {
@@ -1864,7 +1864,7 @@
             ],
             "support": {
                 "issues": "https://github.com/PHPSocialNetwork/phpfastcache/issues",
-                "source": "https://github.com/PHPSocialNetwork/phpfastcache/tree/8.0.4"
+                "source": "https://github.com/PHPSocialNetwork/phpfastcache/tree/8.0.5"
             },
             "funding": [
                 {
@@ -1876,7 +1876,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2020-12-21T19:35:04+00:00"
+            "time": "2021-04-05T22:24:16+00:00"
         },
         {
             "name": "phpgangsta/googleauthenticator",
@@ -4406,16 +4406,16 @@
         },
         {
             "name": "friendsofphp/php-cs-fixer",
-            "version": "v2.18.4",
+            "version": "v2.18.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfPHP/PHP-CS-Fixer.git",
-                "reference": "06f764e3cb6d60822d8f5135205f9d32b5508a31"
+                "reference": "e0f6d05c8b157f50029ca6c65c19ed2694f475bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/06f764e3cb6d60822d8f5135205f9d32b5508a31",
-                "reference": "06f764e3cb6d60822d8f5135205f9d32b5508a31",
+                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/e0f6d05c8b157f50029ca6c65c19ed2694f475bf",
+                "reference": "e0f6d05c8b157f50029ca6c65c19ed2694f475bf",
                 "shasum": ""
             },
             "require": {
@@ -4498,7 +4498,7 @@
             "description": "A tool to automatically fix PHP code style",
             "support": {
                 "issues": "https://github.com/FriendsOfPHP/PHP-CS-Fixer/issues",
-                "source": "https://github.com/FriendsOfPHP/PHP-CS-Fixer/tree/v2.18.4"
+                "source": "https://github.com/FriendsOfPHP/PHP-CS-Fixer/tree/v2.18.5"
             },
             "funding": [
                 {
@@ -4506,7 +4506,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-03-20T14:52:33+00:00"
+            "time": "2021-04-06T18:37:33+00:00"
         },
         {
             "name": "mpdf/mpdf",
