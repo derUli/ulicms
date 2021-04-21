@@ -12,6 +12,8 @@ class AvailablePackageVersionMatcherTest extends \PHPUnit\Framework\TestCase
         );
         $data = json_decode($json, true);
 
+        var_dump($data);
+        
         $matcher = new AvailablePackageVersionMatcher($data["data"]);
         $compatibleVersions = $matcher->getCompatibleVersions("2019.3");
 
