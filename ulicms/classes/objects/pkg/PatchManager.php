@@ -38,6 +38,7 @@ class PatchManager
         if (!$indexData) {
             return $patches;
         }
+        
         $lines = StringHelper::linesFromString($indexData, true, true);
         foreach ($lines as $line) {
             $splittedLine = explode("|", $line);
