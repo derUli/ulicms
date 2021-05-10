@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Imagine\Image\AbstractImagine;
 use Imagine\Exception\RuntimeException;
+use UliCMS\Exceptions\NotSupportedException;
 
 class ImagineHelper extends Helper
 {

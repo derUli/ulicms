@@ -11,7 +11,8 @@ $classes = [
     "FileNotFoundException",
     "ArgumentNullException",
     "SCSSCompileException",
-    "UnknownContentTypeException"
+    "UnknownContentTypeException",
+    "NotSupportedException"
 ];
 
 foreach ($classes as $class) {
