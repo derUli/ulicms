@@ -2395,16 +2395,16 @@
         },
         {
             "name": "scssphp/scssphp",
-            "version": "v1.5.0",
+            "version": "v1.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/scssphp/scssphp.git",
-                "reference": "d90ea7c479151f6254a6655446fd3425e59e22e8"
+                "reference": "fc275168bc43de68b82e81e95d8456567e86654f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/scssphp/scssphp/zipball/d90ea7c479151f6254a6655446fd3425e59e22e8",
-                "reference": "d90ea7c479151f6254a6655446fd3425e59e22e8",
+                "url": "https://api.github.com/repos/scssphp/scssphp/zipball/fc275168bc43de68b82e81e95d8456567e86654f",
+                "reference": "fc275168bc43de68b82e81e95d8456567e86654f",
                 "shasum": ""
             },
             "require": {
@@ -2418,7 +2418,7 @@
                 "sass/sass-spec": "*",
                 "squizlabs/php_codesniffer": "~3.5",
                 "symfony/phpunit-bridge": "^5.1",
-                "twbs/bootstrap": "~4.3",
+                "twbs/bootstrap": "~5.0",
                 "zurb/foundation": "~6.5"
             },
             "suggest": {
@@ -2461,9 +2461,9 @@
             ],
             "support": {
                 "issues": "https://github.com/scssphp/scssphp/issues",
-                "source": "https://github.com/scssphp/scssphp/tree/v1.5.0"
+                "source": "https://github.com/scssphp/scssphp/tree/v1.5.1"
             },
-            "time": "2021-05-14T12:18:56+00:00"
+            "time": "2021-05-17T08:29:29+00:00"
         },
         {
             "name": "symfony/console",
@@ -4192,16 +4192,16 @@
         },
         {
             "name": "doctrine/annotations",
-            "version": "1.13.0",
+            "version": "1.13.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/annotations.git",
-                "reference": "03cb2123a67d4be806554fe670d0adc298199808"
+                "reference": "e6e7b7d5b45a2f2abc5460cc6396480b2b1d321f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/annotations/zipball/03cb2123a67d4be806554fe670d0adc298199808",
-                "reference": "03cb2123a67d4be806554fe670d0adc298199808",
+                "url": "https://api.github.com/repos/doctrine/annotations/zipball/e6e7b7d5b45a2f2abc5460cc6396480b2b1d321f",
+                "reference": "e6e7b7d5b45a2f2abc5460cc6396480b2b1d321f",
                 "shasum": ""
             },
             "require": {
@@ -4214,7 +4214,7 @@
                 "doctrine/cache": "^1.11 || ^2.0",
                 "doctrine/coding-standard": "^6.0 || ^8.1",
                 "phpstan/phpstan": "^0.12.20",
-                "phpunit/phpunit": "^7.5 || ^9.1.5",
+                "phpunit/phpunit": "^7.5 || ^8.0 || ^9.1.5",
                 "symfony/cache": "^4.4 || ^5.2"
             },
             "type": "library",
@@ -4258,9 +4258,9 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/annotations/issues",
-                "source": "https://github.com/doctrine/annotations/tree/1.13.0"
+                "source": "https://github.com/doctrine/annotations/tree/1.13.1"
             },
-            "time": "2021-04-29T07:39:39+00:00"
+            "time": "2021-05-16T18:07:53+00:00"
         },
         {
             "name": "doctrine/instantiator",
