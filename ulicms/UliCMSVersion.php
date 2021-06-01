@@ -7,7 +7,7 @@ class UliCMSVersion
     public function __construct()
     {
         $this->codename = "Flamingo Pride";
-        $this->releaseYear = 2020;
+        $this->releaseYear = 2021;
         $this->buildDate = 0; // {InsertBuildDate}
         $this->internalVersion = [
             2021,
