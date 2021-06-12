@@ -182,11 +182,11 @@ class Database
             } else {
                 $value = $args[$i];
                 if (is_float($value)) {
-                    $value = str_replace(",", ".", floatval($value));
+                    $value = str_replace(",", ".", strval(floatval($value)));
                 } elseif (is_int($value)) {
-                    $value = intval($value);
+                    $value = strval(intval($value));
                 } elseif (is_bool($value)) {
-                    $value = (int) $value;
+                    $value = strval(intval($value));
                 } elseif (is_null($value)) {
                     $value = "NULL";
                 } else {
@@ -211,7 +211,7 @@ class Database
 
     public static function getClientVersion(): ?int
     {
-        return mysqli_get_client_version(self::$connection);
+        return mysqli_get_client_version();
     }
 
     public static function dropTable(

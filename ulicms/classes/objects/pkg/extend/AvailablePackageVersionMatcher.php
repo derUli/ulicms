@@ -50,10 +50,14 @@ class AvailablePackageVersionMatcher
         $releases = $this->versionData;
 
         usort($releases, function ($a, $b) {
-            return \UliCMS\Utils\VersionComparison\compare($a["version"], $b["version"], "<");
+            return \UliCMS\Utils\VersionComparison\compare(
+                    $a["version"], $b["version"], "<"
+                    ) ? 1 : 0;
         });
         usort($releases, function ($a, $b) {
-            return \UliCMS\Utils\VersionComparison\compare($a["compatible_with"], $b["compatible_with"], "<");
+            return \UliCMS\Utils\VersionComparison\compare(
+                    $a["compatible_with"], $b["compatible_with"], "<"
+                    ) ? 1 : 0;
         });
 
         return $releases;

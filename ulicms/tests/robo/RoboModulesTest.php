@@ -80,7 +80,11 @@ class RoboModulesTest extends RoboBaseTest
                     "ldap_login"
                 ]
         );
-        $this->assertEquals(normalizeLN($expected), normalizeLN($actual));
+        
+        $this->assertStringContainsString(
+                '/content/files/packages/ldap_login/ldap_login-2.1.sin',
+                $actual
+                );
     }
 
     public function testModulesEnableAndDisable()

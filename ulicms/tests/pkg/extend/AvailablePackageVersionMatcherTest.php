@@ -2,13 +2,12 @@
 
 use UliCMS\Services\Connectors\eXtend\AvailablePackageVersionMatcher;
 
-class AvailablePackageVersionMatcherTest extends \PHPUnit\Framework\TestCase
-{
-    public function testMatchVersionsWithVersionNumber1()
-    {
+class AvailablePackageVersionMatcherTest extends \PHPUnit\Framework\TestCase {
+
+    public function testMatchVersionsWithVersionNumber1() {
         $json = file_get_contents_wrapper(
-            "https://extend.ulicms.de/ldap_login.json",
-            true
+                "https://extend.ulicms.de/ldap_login.json",
+                true
         );
         $data = json_decode($json, true);
 
@@ -22,20 +21,19 @@ class AvailablePackageVersionMatcherTest extends \PHPUnit\Framework\TestCase
 
         foreach ($compatibleVersions as $version) {
             $this->assertTrue(
-                \UliCMS\Utils\VersionComparison\compare(
-                    $version["compatible_with"],
-                    "2017.4",
-                    ">="
-                )
+                    \UliCMS\Utils\VersionComparison\compare(
+                            $version["compatible_with"],
+                            "2017.4",
+                            ">="
+                    )
             );
         }
     }
 
-    public function testMatchVersionsWithVersionNumber2()
-    {
+    public function testMatchVersionsWithVersionNumber2() {
         $json = file_get_contents_wrapper(
-            "https://extend.ulicms.de/mobile_detect_js.json",
-            true
+                "https://extend.ulicms.de/mobile_detect_js.json",
+                true
         );
         $data = json_decode($json, true);
 
@@ -53,11 +51,10 @@ class AvailablePackageVersionMatcherTest extends \PHPUnit\Framework\TestCase
         $this->assertCount(1, $compatibleVersions);
     }
 
-    public function testMatchVersionsWithVersionNumber3()
-    {
+    public function testMatchVersionsWithVersionNumber3() {
         $json = file_get_contents_wrapper(
-            "https://extend.ulicms.de/ldap_login.json",
-            true
+                "https://extend.ulicms.de/ldap_login.json",
+                true
         );
         $data = json_decode($json, true);
 
@@ -68,11 +65,10 @@ class AvailablePackageVersionMatcherTest extends \PHPUnit\Framework\TestCase
         $this->assertGreaterThanOrEqual(8, count($compatibleVersions));
     }
 
-    public function testMatchVersionsWithoutVersionNumber()
-    {
+    public function testMatchVersionsWithoutVersionNumber() {
         $json = file_get_contents_wrapper(
-            "https://extend.ulicms.de/oneclick_upgrade.json",
-            true
+                "https://extend.ulicms.de/oneclick_upgrade.json",
+                true
         );
         $data = json_decode($json, true);
 
@@ -81,11 +77,10 @@ class AvailablePackageVersionMatcherTest extends \PHPUnit\Framework\TestCase
         $this->assertGreaterThanOrEqual(6, count($compatibleVersions));
     }
 
-    public function testGetAllVersion()
-    {
+    public function testGetAllVersion() {
         $json = file_get_contents_wrapper(
-            "https://extend.ulicms.de/ldap_login.json",
-            true
+                "https://extend.ulicms.de/ldap_login.json",
+                true
         );
         $data = json_decode($json, true);
 
@@ -97,4 +92,5 @@ class AvailablePackageVersionMatcherTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("1.4", $compatibleVersions[4]["version"]);
         $this->assertEquals("1.1", $compatibleVersions[6]["version"]);
     }
+
 }

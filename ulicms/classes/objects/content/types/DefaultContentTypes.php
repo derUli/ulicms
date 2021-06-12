@@ -6,12 +6,11 @@ namespace UliCMS\Models\Content\Types;
 
 use UliCMS\Models\Content\Types\ContentType;
 
-class DefaultContentTypes
-{
+class DefaultContentTypes {
+
     private static $types = [];
 
-    public static function initTypes(): void
-    {
+    public static function initTypes(): void {
         self::$types = [];
         self::$types["page"] = new ContentType();
         self::$types["page"]->show = array(
@@ -81,28 +80,24 @@ class DefaultContentTypes
         self::$types = apply_filter(self::$types, "content_types");
     }
 
-    public static function getAll(): array
-    {
+    public static function getAll(): array {
         return self::$types;
     }
 
-    public static function get($name): ?object
-    {
+    public static function get($name): ?object {
         if (isset(self::$types[$name])) {
             return self::$types[$name];
         }
         return null;
     }
 
-    public static function toJSON(): string
-    {
+    public static function toJSON(): string {
         $result = [];
         foreach (self::$types as $key => $value) {
-            $result[$key] = array(
-                "show" => $value->show
-            );
+            $result[$key] = ["show" => $value->show];
         }
 
         return json_encode($result);
     }
+
 }

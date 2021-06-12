@@ -1,91 +1,90 @@
-D:\Users\ulric\Documents\GitHub\ulicms\ulicms\lib\encode.php:11:
 array(8) {
-  [0] =>
+  [0]=>
   array(4) {
-    'version' =>
+    ["version"]=>
     string(3) "2.1"
-    'compatible_with' =>
+    ["compatible_with"]=>
     string(6) "2020.1"
-    'status' =>
+    ["status"]=>
     string(6) "stable"
-    'file' =>
+    ["file"]=>
     string(53) "/content/files/packages/ldap_login/ldap_login-2.1.sin"
   }
-  [1] =>
+  [1]=>
   array(4) {
-    'version' =>
+    ["version"]=>
     string(3) "2.0"
-    'compatible_with' =>
+    ["compatible_with"]=>
     string(8) "2019.3.1"
-    'status' =>
+    ["status"]=>
     string(6) "stable"
-    'file' =>
+    ["file"]=>
     string(53) "/content/files/packages/ldap_login/ldap_login-2.0.sin"
   }
-  [2] =>
+  [2]=>
   array(4) {
-    'version' =>
+    ["version"]=>
     string(3) "1.9"
-    'compatible_with' =>
+    ["compatible_with"]=>
     string(6) "2019.3"
-    'status' =>
+    ["status"]=>
     string(6) "stable"
-    'file' =>
+    ["file"]=>
     string(53) "/content/files/packages/ldap_login/ldap_login-1.9.sin"
   }
-  [3] =>
+  [3]=>
   array(4) {
-    'version' =>
+    ["version"]=>
     string(3) "1.5"
-    'compatible_with' =>
+    ["compatible_with"]=>
     string(6) "2018.3"
-    'status' =>
+    ["status"]=>
     string(6) "stable"
-    'file' =>
+    ["file"]=>
     string(53) "/content/files/packages/ldap_login/ldap_login-1.5.sin"
   }
-  [4] =>
+  [4]=>
   array(4) {
-    'version' =>
+    ["version"]=>
     string(3) "1.4"
-    'compatible_with' =>
+    ["compatible_with"]=>
     string(6) "2018.2"
-    'status' =>
+    ["status"]=>
     string(6) "stable"
-    'file' =>
+    ["file"]=>
     string(53) "/content/files/packages/ldap_login/ldap_login-1.4.sin"
   }
-  [5] =>
+  [5]=>
   array(4) {
-    'version' =>
+    ["version"]=>
     string(3) "1.2"
-    'compatible_with' =>
+    ["compatible_with"]=>
     string(6) "2017.4"
-    'status' =>
+    ["status"]=>
     string(6) "stable"
-    'file' =>
+    ["file"]=>
     string(53) "/content/files/packages/ldap_login/ldap_login-1.2.sin"
   }
-  [6] =>
+  [6]=>
   array(4) {
-    'version' =>
+    ["version"]=>
     string(3) "1.1"
-    'compatible_with' =>
+    ["compatible_with"]=>
     string(6) "2017.4"
-    'status' =>
+    ["status"]=>
     string(6) "stable"
-    'file' =>
+    ["file"]=>
     string(53) "/content/files/packages/ldap_login/ldap_login-1.1.sin"
   }
-  [7] =>
+  [7]=>
   array(4) {
-    'version' =>
+    ["version"]=>
     string(3) "1.0"
-    'compatible_with' =>
+    ["compatible_with"]=>
     string(6) "2017.4"
-    'status' =>
+    ["status"]=>
     string(6) "stable"
-    'file' =>
+    ["file"]=>
     string(53) "/content/files/packages/ldap_login/ldap_login-1.0.sin"
   }
 }
