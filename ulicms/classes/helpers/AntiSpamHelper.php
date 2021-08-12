@@ -103,7 +103,7 @@ class AntiSpamHelper extends Helper
             );
         }
 
-        $wordCount = count($words_blacklist)
+        $wordCount = count($words_blacklist);
         for ($i = 0; $i < $wordCount; $i++) 
         {
             $word = strtolower($words_blacklist[$i]);

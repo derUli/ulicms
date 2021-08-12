@@ -32,7 +32,7 @@ function do_event(
     $disabledModules = Vars::get("disabledModules");
     $modulesCount = count($modules);
 
-    for ($hook_i = 0; $hook_i < $modulesCount); $hook_i ++) {
+    for ($hook_i = 0; $hook_i < $modulesCount; $hook_i ++) {
         if (faster_in_array($modules[$hook_i], $disabledModules)) {
             continue;
         }
