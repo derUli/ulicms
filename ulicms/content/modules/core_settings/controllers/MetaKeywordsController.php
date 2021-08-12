@@ -9,7 +9,9 @@ class MetaKeywordsController extends Controller
     public function _savePost(): void
     {
         $languages = getAllLanguages();
-        for ($i = 0; $i < count($languages); $i++) {
+        $languagesCount = count($languages);
+        
+        for ($i = 0; $i < $languagesCount; $i++) {
             $lang = $languages[$i];
             $key = "meta_keywords_" . $lang;
             $meta_keywords = Request::getVar($key, "", "str");

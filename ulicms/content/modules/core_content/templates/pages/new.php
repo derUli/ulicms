@@ -148,8 +148,11 @@ if ($permissionChecker->hasPermission("pages")
     } else {
         $default_language = Settings::get("default_language");
     }
+    
 
-    for ($j = 0; $j < count($languages); $j++) {
+    $languagesCount = count($languages);
+
+    for ($j = 0; $j < $languagesCount; $j++) {
         if ($languages[$j] === $default_language) {
             echo "<option value='" . $languages[$j] . "' selected>" . getLanguageNameByCode($languages[$j]) . "</option>";
         } else {
@@ -464,8 +467,9 @@ if ($permissionChecker->hasPermission("pages")
                         <option value="">[<?php translate("every"); ?>]</option>
                         <?php
                         $languages = getAllLanguages();
+                        $languagesCount = count($languages);
 
-    for ($j = 0; $j < count($languages); $j++) {
+                        for ($j = 0; $j < $languagesCount; $j++) {
         echo "<option value='" . $languages[$j] . "'>" . getLanguageNameByCode($languages[$j]) . "</option>";
     } ?>
                     </select>

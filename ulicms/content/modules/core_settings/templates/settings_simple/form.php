@@ -128,7 +128,8 @@ if ($permissionChecker->hasPermission("settings_simple")) {
     $current_timezone = Settings::get("timezone");
     $current_timezone = trim($current_timezone);
     sort($timezones);
-    for ($i = 0; $i < count($timezones); $i++) {
+    $timezoneCount = count($timezones);
+    for ($i = 0; $i < $timezoneCount; $i++) {
         $thisTimezone = $timezones[$i];
         $thisTimezone = trim($thisTimezone);
         if ($thisTimezone === $current_timezone) {

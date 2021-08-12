@@ -116,7 +116,9 @@ class PackageManager
 
         $folders = scanDir($templateDir);
         natcasesort($folders);
-        for ($i = 0; $i < count($folders); $i++) {
+
+        $foldersCount = count($folders);
+        for ($i = 0; $i < $foldersCount; $i++) {
             $f = $templateDir . $folders[$i] . "/";
             if (is_dir($templateDir . $folders[$i]) && !startsWith($folders[$i], ".")) {
                 array_push($themes, $folders[$i]);

@@ -9,7 +9,9 @@ class HomepageTitleController extends Controller
     public function _savePost(): void
     {
         $languages = getAllLanguages();
-        for ($i = 0; $i < count($languages); $i++) {
+
+        $languagesCount = count($languages);
+        for ($i = 0; $i < $languagesCount; $i++) {
             $lang = $languages[$i];
             $varName = "homepage_title_{$lang}";
             $page = Request::getVar($varName, "", "str");

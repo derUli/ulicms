@@ -568,7 +568,9 @@ function headline(?string $ipage = null): void {
 function apply_filter($text, string $type) {
     $modules = getAllModules();
     $disabledModules = Vars::get("disabledModules");
-    for ($i = 0; $i < count($modules); $i++) {
+
+    $modulesCount = count($modules);
+    for ($i = 0; $i < $modulesCount; $i++) {
         if (faster_in_array($modules[$i], $disabledModules)) {
             continue;
         }
@@ -917,13 +919,18 @@ function checkAccess(string $access = ""): ?string {
         return null;
     }
     $access = explode(",", $access);
+
     if (faster_in_array("all", $access)) {
         return "all";
     }
+
     if (faster_in_array("registered", $access) and is_logged_in()) {
         return "registered";
     }
-    for ($i = 0; $i < count($access); $i++) {
+    
+    $accessCount = count($access);
+    
+    for ($i = 0; $i < $accessCount; $i++) {
         if (is_numeric($access[$i]) and isset($_SESSION["group_id"]) and $access[$i] == $_SESSION["group_id"]) {
             return $access[$i];
         }

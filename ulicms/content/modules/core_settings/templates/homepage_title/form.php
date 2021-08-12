@@ -3,7 +3,8 @@ $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("settings_simple")) {
     $languages = getAllLanguages();
     $homepage_titles = [];
-    for ($i = 0; $i < count($languages); $i ++) {
+    $languageCount = count($languages);
+    for ($i = 0; $i < $languageCount; $i ++) {
         $lang = $languages[$i];
         $homepage_titles[$lang] = Settings::get("homepage_title_" . $lang);
 
@@ -28,7 +29,8 @@ if ($permissionChecker->hasPermission("settings_simple")) {
                 </strong></td>
         </tr>
         <?php
-        for ($n = 0; $n < count($languages); $n ++) {
+        $languageCount = count($languages);
+        for ($n = 0; $n < $languageCount; $n ++) {
             $lang = $languages[$n]; ?>
             <tr>
                 <td><?php

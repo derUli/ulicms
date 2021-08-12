@@ -3,7 +3,9 @@ $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("settings_simple")) {
     $languages = getAllLanguages();
     $meta_descriptions = [];
-    for ($i = 0; $i < count($languages); $i ++) {
+    $languageCount = count($languages);
+    
+    for ($i = 0; $i < $languageCount; $i ++) {
         $lang = $languages[$i];
         $meta_descriptions[$lang] = Settings::get("meta_description_" . $lang);
         if (!$meta_descriptions[$lang]) {
@@ -27,7 +29,8 @@ if ($permissionChecker->hasPermission("settings_simple")) {
                 </strong></td>
         </tr>
         <?php
-        for ($n = 0; $n < count($languages); $n ++) {
+        $languageCount = count($languages);
+        for ($n = 0; $n < $languageCount; $n ++) {
             $lang = $languages[$n]; ?>
             <tr>
                 <td>

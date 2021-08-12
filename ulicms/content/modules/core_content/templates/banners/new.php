@@ -99,8 +99,10 @@ if ($permissionChecker->hasPermission("banners")
         <select name="language">
             <?php
             $languages = getAllLanguages();
+        
+            $languagesCount = count($languages);
     echo "<option value='all'>" . get_translation("every") . "</option>";
-    for ($j = 0; $j < count($languages); $j++) {
+    for ($j = 0; $j < $languagesCount; $j++) {
         echo "<option value='" . $languages[$j] . "'>" .
                 getLanguageNameByCode($languages[$j]) . "</option>";
     } ?>

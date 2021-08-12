@@ -30,7 +30,9 @@ function do_event(
 ): void {
     $modules = getAllModules();
     $disabledModules = Vars::get("disabledModules");
-    for ($hook_i = 0; $hook_i < count($modules); $hook_i ++) {
+    $modulesCount = count($modules);
+
+    for ($hook_i = 0; $hook_i < $modulesCount); $hook_i ++) {
         if (faster_in_array($modules[$hook_i], $disabledModules)) {
             continue;
         }
@@ -180,7 +182,8 @@ function replaceOtherShortCodes(string $string): string
     preg_match_all("/\[include=([0-9]+)]/i", $string, $match);
 
     if (count($match) > 0) {
-        for ($i = 0; $i < count($match[0]); $i ++) {
+        $matchCount = count($match[0]);
+        for ($i = 0; $i < $matchCount; $i ++) {
             $placeholder = $match[0][$i];
             $id = unhtmlspecialchars($match[1][$i]);
             $id = intval($id);

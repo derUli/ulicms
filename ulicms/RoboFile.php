@@ -229,7 +229,8 @@ class RoboFile extends Tasks
         $modules = count($modules) ?
                 $this->replaceModulePlaceholders($modules) : getAllModules();
         if (count($modules) > 0) {
-            for ($i = 0; $i < count($modules); $i++) {
+            $modulesCount = count($modules);
+            for ($i = 0; $i < $modulesCount; $i++) {
                 $this->writeln($this->getModuleInfo($modules[$i]));
             }
         }
@@ -371,7 +372,8 @@ class RoboFile extends Tasks
     {
         $theme = getAllThemes();
         if (count($theme) > 0) {
-            for ($i = 0; $i < count($theme); $i++) {
+            $themesCount = count($theme);
+            for ($i = 0; $i < $themesCount; $i++) {
                 $version = getThemeMeta($theme[$i], "version");
                 $line = $theme[$i];
                 if ($version !== null) {

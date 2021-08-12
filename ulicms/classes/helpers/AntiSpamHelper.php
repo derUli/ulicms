@@ -37,7 +37,9 @@ class AntiSpamHelper extends Helper
 
         $hostname = strtolower($hostname);
 
-        for ($i = 0; $i < count($country_blacklist); $i++) {
+        $blacklistCount = count($country_blacklist);
+
+        for ($i = 0; $i < $blacklistCount ; $i++) {
             $ending = "." . $country_blacklist[$i];
             if (endsWith($hostname, $ending)) {
                 return true;
@@ -100,7 +102,10 @@ class AntiSpamHelper extends Helper
                 true
             );
         }
-        for ($i = 0; $i < count($words_blacklist); $i++) {
+
+        $wordCount = count($words_blacklist)
+        for ($i = 0; $i < $wordCount; $i++) 
+        {
             $word = strtolower($words_blacklist[$i]);
             if (strpos(strtolower($str), $word) !== false) {
                 return $words_blacklist[$i];

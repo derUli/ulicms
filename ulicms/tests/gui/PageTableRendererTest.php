@@ -36,7 +36,9 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase
         $this->assertCount(3, $data1["data"]);
         $this->assertCount(3, $data2["data"]);
 
-        for ($i = 0; $i < count($data2["data"]); $i++) {
+        $dataCount = count($data2["data"]);
+
+        for ($i = 0; $i < $dataCount; $i++) {
             $this->assertNotEquals(
                 $data1["data"][$i][0],
                 $data2["data"][$i][0]

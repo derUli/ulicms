@@ -269,12 +269,13 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
             echo " selected";
         } ?>>[<?php translate("standard"); ?>]</option>
                 <?php
-                for ($i = 0; $i < count($languages); $i++) {
-                    if ($row->default_language == $languages[$i]) {
-                        echo '<option value="' . $languages[$i] . '" selected>' . getLanguageNameByCode($languages[$i]) . '</option>';
-                    } else {
-                        echo '<option value="' . $languages[$i] . '">' . getLanguageNameByCode($languages[$i]) . '</option>';
-                    }
+                    $languageCount = count($languages);
+                    for ($i = 0; $i < $languageCount; $i++) {
+                        if ($row->default_language == $languages[$i]) {
+                            echo '<option value="' . $languages[$i] . '" selected>' . getLanguageNameByCode($languages[$i]) . '</option>';
+                        } else {
+                            echo '<option value="' . $languages[$i] . '">' . getLanguageNameByCode($languages[$i]) . '</option>';
+                        }
                 } ?>
             </select>
         </div>

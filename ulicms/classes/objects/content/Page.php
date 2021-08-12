@@ -403,7 +403,8 @@ class Page extends Content
         $content = str_ireplace("&quot;", '"', $this->content);
         preg_match_all("/\[module=\"?([a-z_\-0-9]+)\"?]/i", $content, $match);
         if (count($match) > 0) {
-            for ($i = 0; $i < count($match[1]); $i++) {
+            $matchesCount = count($match[1]);
+            for ($i = 0; $i < $matchesCount; $i++) {
                 $id = unhtmlspecialchars($match[1][$i]);
                 if (!faster_in_array($id, $result)) {
                     $result[] = $id;

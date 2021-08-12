@@ -9,6 +9,8 @@ $qrCodeUrl = $ga->getQRCodeGoogleUrl("UliCMS Login auf " . get_domain(), $ga_sec
 $twofactor_authentication = Settings::get("twofactor_authentication");
 
 $languages = getAvailableBackendLanguages();
+$languagesCount = count($languages);
+
 $default_language = getSystemLanguage();
 if (isset($_SESSION["language"]) and faster_in_array($_SESSION["language"], $languages)) {
     $default_language = $_SESSION["language"];
@@ -75,7 +77,7 @@ if (!empty($_REQUEST["go"])) {
         <td><select name="system_language">
                 <option value="" selected>[<?php translate("standard"); ?>]</option>
                 <?php
-                for ($i = 0; $i < count($languages); $i ++) {
+                for ($i = 0; $i < $languagesCount; $i ++) {
                     echo '<option value="' . $languages[$i] . '">' . getLanguageNameByCode($languages[$i]) . '</option>';
                 }
                 ?>

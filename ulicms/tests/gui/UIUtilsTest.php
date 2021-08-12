@@ -15,7 +15,8 @@ class UIUtilsTest extends \PHPUnit\Framework\TestCase
         $countItems = 0;
         $countNoItems = 0;
 
-        for ($i = 1; $i < count($items); $i++) {
+        $itemCount = count($items);
+        for ($i = 1; $i < $itemCount; $i++) {
             $this->assertNotEmpty($items[$i]->getValue());
             $this->assertNotEmpty($items[$i]->getText());
             $countNoItems += intval(str_contains($items[$i]->getValue(), "no"));

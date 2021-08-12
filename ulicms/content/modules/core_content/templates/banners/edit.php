@@ -162,7 +162,9 @@ if ($permissionChecker->hasPermission("banners")
             echo "<option value='all'>" . get_translation("every") . "</option>";
         }
 
-        for ($j = 0; $j < count($languages); $j++) {
+        $languagesCount = count($languages);
+
+        for ($j = 0; $j < $languagesCount; $j++) {
             if ($languages[$j] === $page_language) {
                 echo "<option value='" . $languages[$j] . "' selected>" .
                         getLanguageNameByCode($languages[$j]) . "</option>";

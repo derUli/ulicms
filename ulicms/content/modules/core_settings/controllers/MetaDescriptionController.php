@@ -9,7 +9,9 @@ class MetaDescriptionController extends Controller
     public function _savePost(): void
     {
         $languages = getAllLanguages();
-        for ($i = 0; $i < count($languages); $i++) {
+        $languagesCount = count($languages);
+        
+        for ($i = 0; $i < $languagesCount; $i++) {
             $lang = $languages[$i];
             $key = "meta_description_" . $lang;
             $meta_description = Request::getVar($key, "", "str");

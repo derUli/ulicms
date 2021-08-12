@@ -142,7 +142,8 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
             <select name="default_language">
                 <option value="" selected>[<?php translate("standard"); ?>]</option>
                 <?php
-                for ($i = 0; $i < count($languages); $i++) {
+                $languageCount = count($languages);
+                for ($i = 0; $i < $languageCount; $i++) {
                     echo '<option value="' . $languages[$i] . '">' . getLanguageNameByCode($languages[$i]) . '</option>';
                 } ?>
             </select>

@@ -3,8 +3,9 @@ $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("settings_simple")) {
     $languages = getAllLanguages();
     $frontpages = [];
-
-    for ($i = 0; $i < count($languages); $i ++) {
+    $languagesCount = count($languages);
+        
+    for ($i = 0; $i < $languagesCount; $i++) {
         $lang = $languages[$i];
         $frontpages[$lang] = Settings::get("frontpage_" . $lang);
 
@@ -31,7 +32,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
                 </strong></td>
         </tr>
         <?php
-        for ($n = 0; $n < count($languages); $n ++) {
+        for ($n = 0; $n < $languagesCount; $n ++) {
             $lang = $languages[$n]; ?>
             <tr>
                 <td>
@@ -43,8 +44,8 @@ if ($permissionChecker->hasPermission("settings_simple")) {
                         size = "1">
                             <?php
                             $pages = getAllPages($lang, "title", true);
-
-            for ($i = 0; $i < count($pages); $i ++) {
+                            $pageCount = count($pages);
+            for ($i = 0; $i < $pageCount; $i ++) {
                 if ($pages[$i]["slug"] == $frontpages[$lang]) {
                     echo "<option value='" . _esc($pages[$i]["slug"]) . "' selected='selected'>" . _esc($pages[$i]["title"]) . " (ID: " . $pages[$i]["id"] . ")</option>";
                 } else {

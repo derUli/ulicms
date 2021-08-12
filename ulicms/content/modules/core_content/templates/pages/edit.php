@@ -205,7 +205,9 @@ if ($permissionChecker->hasPermission("pages")) {
 
             $page_language = $row->language;
 
-            for ($j = 0; $j < count($languages); $j++) {
+            $languagesCount = count($languages);
+
+            for ($j = 0; $j < $languagesCount; $j++) {
                 if ($languages[$j] === $page_language) {
                     echo "<option value='" . $languages[$j] . "' selected>" . getLanguageNameByCode($languages[$j]) . "</option>";
                 } else {
@@ -608,8 +610,8 @@ if ($permissionChecker->hasPermission("pages")) {
                                     } ?>>[<?php translate("every"); ?>]</option>
                                             <?php
                                             $languages = getAllLanguages();
-
-            for ($j = 0; $j < count($languages); $j++) {
+                                            $languagesCount = count($languages);
+            for ($j = 0; $j < $languagesCount; $j++) {
                 if ($list_data->language === $languages[$j]) {
                     echo "<option value='" . $languages[$j] . "' selected>" . getLanguageNameByCode($languages[$j]) . "</option>";
                 } else {

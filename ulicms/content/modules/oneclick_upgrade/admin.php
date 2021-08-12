@@ -13,7 +13,11 @@ function oneclick_upgrade_admin()
     $channels = array(
         "fast",
         "slow",
-    ); ?>
+    );
+    
+    $channelCount = count($channels);
+    ?>
+
     <?php
     if (Request::isPost()) {
         ?>
@@ -32,7 +36,7 @@ function oneclick_upgrade_admin()
                 name="oneclick_upgrade_channel"
                 size=1
                 id="oneclick_upgrade_channel">
-                    <?php for ($i = 0; $i < count($channels); $i++) { ?>
+                    <?php for ($i = 0; $i < $channelCount; $i++) { ?>
                     <option value="<?php Template::escape($channels[$i]) ?>"
                     <?php
                     if ($oneclick_upgrade_channel == $channels[$i]) {

@@ -9,8 +9,9 @@ class SiteSloganController extends Controller
     public function _savePost(): void
     {
         $languages = getAllLanguages();
-
-        for ($i = 0; $i < count($languages); $i++) {
+        $languagesCount = count($languages);
+        
+        for ($i = 0; $i < $languagesCount; $i++) {
             $lang = $languages[$i];
             if (isset($_POST["site_slogan_" . $lang])) {
                 $page = $_POST["site_slogan_" . $lang];

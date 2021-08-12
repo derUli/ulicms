@@ -47,7 +47,8 @@ if (!$permissionChecker->hasPermission("install_packages")) {
             </p>
             <?php
         } else {
-            for ($i = 0; $i < count($packagesToInstall); $i ++) {
+            $packageCount = count($packagesToInstall);
+            for ($i = 0; $i < $packageCount; $i ++) {
                 if (!empty($packagesToInstall [$i])) {
                     $pkgURL = $packageArchiveFolder . basename($packagesToInstall [$i]) . ".tar.gz";
                     $pkgContent = @file_get_contents_wrapper($pkgURL);
