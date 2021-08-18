@@ -29,7 +29,7 @@ if ($permissionChecker->hasPermission("banners")) {
     if ($permissionChecker->hasPermission("banners_create")) {
         ?>
     <div class="field"><a href="index.php?action=banner_new"
-                         class="btn btn-default"><i class="fa fa-plus"></i>
+                         class="btn btn-default is-not-ajax"><i class="fa fa-plus"></i>
                              <?php translate("add_advertisement"); ?>
         </a>
     </div>
@@ -92,7 +92,7 @@ if ($permissionChecker->hasPermission("banners")) {
                             echo "<td class=\"text-center\">" .
                             '<a href="index.php?action=banner_edit&banner=' .
                             $banner->getId() .
-                            '"><img class="mobile-big-image" src="gfx/edit.png" alt="' .
+                            '" class="is-not-ajax"><img class="mobile-big-image" src="gfx/edit.png" alt="' .
                             get_translation("edit") . '" title="' .
                             get_translation("edit") . '"></a></td>';
                             echo "<td class=\"text-center\">" .
