@@ -1,3 +1,9 @@
+===== Neues in UliCMS 2021.3 =====
+
+Neue Features:
+* Performance Verbesserungen
+* Composer und npm Pakete aktualisiert
+
 ===== Neues in UliCMS 2021.2 =====
 
 Neue Features:

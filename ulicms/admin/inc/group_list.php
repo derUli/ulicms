@@ -64,13 +64,17 @@ if (count($groups) > 0) {
                                     ?>
                             </td>
                             <td><a
-                                    href="<?php echo ModuleHelper::buildActionURL("admins", "admins_filter_group=" . $id) ?>"><img
+                                    href="<?php echo ModuleHelper::buildActionURL("admins", "admins_filter_group=" . $id) ?>" 
+                                    class="is-not-ajax"
+                                    ><img
                                         src="gfx/preview.png" title="<?php translate("show_users"); ?>"
                                         alt="<?php translate("show_users"); ?>"></a></td>
                             <td><a
                                     href="?action=groups&edit=<?php
                                     echo $id;
-                                    ?>"><img class="mobile-big-image" src="gfx/edit.png"
+                                    ?>"
+                                    class="is-not-ajax"
+                                    ><img class="mobile-big-image" src="gfx/edit.png"
                                        alt="<?php
                                        translate("edit");
                                        ?>"

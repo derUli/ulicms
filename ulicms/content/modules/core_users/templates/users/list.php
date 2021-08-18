@@ -112,7 +112,7 @@ if ($permissionChecker->hasPermission("users")) {
                         $id = $user->getGroupId();
                         if ($id and $permissionChecker->hasPermission("groups_edit")) {
                             $url = ModuleHelper::buildActionURL("groups", "edit=$id");
-                            echo '<a href="' . Template::getEscape($url) . '">';
+                            echo '<a href="' . Template::getEscape($url) . '" class="is-not-ajax">';
                         }
                         esc($group);
 
@@ -121,7 +121,7 @@ if ($permissionChecker->hasPermission("users")) {
                         }
                         echo "</td>";
                         if ($permissionChecker->hasPermission("users_edit")) {
-                            echo "<td class=\"text-center\">" . '<a href="index.php?action=admin_edit&id=' . $user->getId() . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . get_translation("edit") . '" title="' . get_translation("edit") . '"></a></td>';
+                            echo "<td class=\"text-center\">" . '<a href="index.php?action=admin_edit&id=' . $user->getId() . '" class="is-not-ajax"><img class="mobile-big-image" src="gfx/edit.png" alt="' . get_translation("edit") . '" title="' . get_translation("edit") . '"></a></td>';
 
                             if ($user->getId() == $_SESSION["login_id"]) {
                                 echo "<td class=\"text-center\"></td>";
