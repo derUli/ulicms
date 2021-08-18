@@ -29,11 +29,11 @@ if ($permissionChecker->hasPermission("pages")) {
         <?php if ($controller->_getPagesListView() === "default") { ?>
             <div class="row">
                 <div class="col-xs-6">
-                    <a href="index.php?action=pages_new" class="btn btn-primary"><i
+                    <a href="index.php?action=pages_new" class="btn btn-primary is-not-ajax"><i
                             class="fa fa-plus"></i> <?php translate("create_page"); ?></a>
                 </div>
                 <div class="col-xs-6 text-right">
-                    <a href="<?php echo ModuleHelper::buildMethodCallUrl("PageController", "recycleBin"); ?>" class="btn btn-default"><i
+                    <a href="<?php echo ModuleHelper::buildMethodCallUrl("PageController", "recycleBin"); ?>" class="btn btn-default is-not-ajax"><i
                             class="fa fa-trash"></i> <?php translate("recycle_bin"); ?></a>
                 </div>
             </div>
@@ -51,7 +51,7 @@ if ($permissionChecker->hasPermission("pages")) {
                             class="fas fa-broom"></i> <?php translate("empty_recycle_bin"); ?></a>
                 </div>
                 <div class="col-xs-6 text-right">
-                    <a href="<?php echo ModuleHelper::buildMethodCallUrl("PageController", "pages"); ?>" class="btn btn-default"><i
+                    <a href="<?php echo ModuleHelper::buildMethodCallUrl("PageController", "pages"); ?>" class="btn btn-default is-not-ajax"><i
                             class="fas fa-book"></i> <?php translate("pages"); ?></a>
                 </div>
             </div>
