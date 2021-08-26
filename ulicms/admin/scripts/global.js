@@ -41,8 +41,15 @@ $(() => {
     });
 
     // toggle hamburger menu
-    $("#menu-toggle").click(() =>
-        $(".mainmenu").slideToggle()
+    $("#menu-toggle").click((e) => {
+        if ($(e.currentTarget).hasClass('is-open')) {
+            $(".mainmenu").slideUp();
+            $(e.currentTarget).removeClass("is-open");
+        } else {
+            $(".mainmenu").slideDown();
+            $(e.currentTarget).addClass("is-open");
+        }
+    }
     );
 
     bindAjaxLinks(body);

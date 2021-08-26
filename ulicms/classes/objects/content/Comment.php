@@ -13,6 +13,7 @@ use StringHelper;
 use UliCMS\Exceptions\DatasetNotFoundException;
 use UliCMS\Security\SpamChecker\SpamFilterConfiguration;
 use UliCMS\Security\SpamChecker\CommentSpamChecker;
+use ModuleHelper;
 
 // TODO: Comment public static functions
 // This class is a comment model class
@@ -184,6 +185,12 @@ VALUES      ( ?,
     public function getAuthorUrl(): ?string
     {
         return $this->author_url;
+    }
+    
+    public function getCommentUrl(): ?string {
+        return $this->content_id ?
+                ModuleHelper::getFullPageURLByID($this->content_id)
+                . "#comment-{$this->id}" : null;
     }
 
     public function setAuthorUrl(?string $val): void

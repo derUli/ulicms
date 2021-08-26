@@ -4,8 +4,8 @@ use UliCMS\Models\Content\Comment;
 use UliCMS\Constants\CommentStatus;
 
 $comments = Comment::getAllByStatus(
-    CommentStatus::PUBLISHED,
-    Vars::get("content_id")
+                CommentStatus::PUBLISHED,
+                Vars::get("content_id")
 );
 $last = end($comments);
 reset($comments);
@@ -16,7 +16,8 @@ reset($comments);
         <h3><?php translate("comments"); ?></h3>
         <?php
         foreach ($comments as $comment) {
-            ?>    <p>
+            ?>  
+            <div class="comment" id="comment-<?php echo $comment->getId(); ?>">
                 <strong><?php translate("date"); ?>:</strong>
                 <?php echo strftime("%x %X", $comment->getDate()); ?>
                 <br /> <strong><?php translate("name"); ?>:</strong>
@@ -28,20 +29,21 @@ reset($comments);
                         rel="nofollow"
                         target="_blank"><?php
                             esc(
-                $comment->getAuthorUrl()
-            );
+                                    $comment->getAuthorUrl()
+                            );
                             ?></a> <br />
                 <?php } ?>
                 <?php
                 echo make_links_clickable(
-                                UliCMS\HTML\text($comment->getText())
-                            ); ?>
-            </p>
-            <?php if ($comment != $last) { ?>
-                <hr />
-        <?php } ?>
-    <?php
-        } ?>
-    </div>
-    <?php
-}
+                        UliCMS\HTML\text($comment->getText())
+                );
+                ?>
+                </div>
+                <?php if ($comment != $last) { ?>
+                    <hr />
+                <?php } ?>
+                <?php }
+            ?>
+        </div>
+        <?php
+    }

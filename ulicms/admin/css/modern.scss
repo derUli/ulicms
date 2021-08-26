@@ -527,6 +527,21 @@ div#login-welcome-text {
 }
 
 .menu-container {
+
+    #menu-toggle {
+        i {
+            transition: transform .4s ease-in-out;
+        }
+        
+        /* Rotate Hamburger Menu Icon on open */
+        &.is-open {
+            i {
+                transform: rotate(90deg);
+            }
+        }
+
+    }
+
     text-align: right;
 
     img {

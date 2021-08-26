@@ -4,7 +4,7 @@ if (Settings::get("disable_password_reset")) {
 } else {
     ?>
     <?php
-    $messame = null;
+    $message = null;
     $color = "danger";
     if (isset($_POST["username"]) && !empty($_POST["username"])) {
         $username = $_POST["username"];
