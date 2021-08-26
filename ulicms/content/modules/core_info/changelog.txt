@@ -1,8 +1,13 @@
 ===== Neues in UliCMS 2021.3 =====
 
 Neue Features:
+* Kommentar-Übersicht verbessert
 * Performance Verbesserungen
 * Composer und npm Pakete aktualisiert
+* Animation für Menü Icon
+
+Fehlerkorrekturen:
+* 2 SQLExceptions wenn $db_strict_mode aktiviert ist korrigiert
 
 ===== Neues in UliCMS 2021.2 =====
 
