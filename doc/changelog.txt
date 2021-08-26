@@ -4,6 +4,9 @@ Neue Features:
 * Performance Verbesserungen
 * Composer und npm Pakete aktualisiert
 
+Fehlerkorrekturen:
+* 2 SQLExceptions wenn $db_strict_mode aktiviert ist korrigiert
+
 ===== Neues in UliCMS 2021.2 =====
 
 Neue Features:
