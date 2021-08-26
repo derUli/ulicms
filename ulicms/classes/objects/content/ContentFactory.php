@@ -173,9 +173,9 @@ class ContentFactory
     public static function getAllWithComments(string $order = "title"): array
     {
         $datasets = [];
-        $sql = "select type, a.id  from {prefix}content a inner join "
+        $sql = "select type, a.id from {prefix}content a inner join "
                 . "{prefix}comments c on c.content_id = a.id group by "
-                . "c.content_id order by a.{$order}";
+                . "c.content_id, a.type, a.{$order}, a.id order by a.{$order}";
         $result = Database::query($sql, true);
 
         while ($row = Database::fetchObject($result)) {

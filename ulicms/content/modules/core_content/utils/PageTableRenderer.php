@@ -121,12 +121,11 @@ class PageTableRenderer
         $where .= " order by $sortColumn $sortDirection";
 
         // get filtered pages count
-        $countSql = "select count(id) as count from {prefix}content "
-                . "where $where";
+        $countSql = "select id as count from {prefix}content"
+                . " where $where  ";
 
         $countResult = Database::query($countSql, true);
-        $countData = Database::fetchObject($countResult);
-        $filteredCount = $countData->count;
+        $filteredCount = Database::getNumRows($countResult);
 
         // query only datasets for the current page
         // to have a good performance
