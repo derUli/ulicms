@@ -211,6 +211,7 @@ function combinedScriptHtml(): void
 
 function getCombinedScriptHtml(): string
 {
+    $html = "";
     $cfg = new CMSConfig();
     if (isset($cfg->no_minify) and is_true($cfg->no_minify)) {
         foreach (Vars::get("script_queue") as $script) {
@@ -245,6 +246,8 @@ function enqueueStylesheet(string $path): void
 
 function getCombinedStylesheetHTML(): ?string
 {
+    $html = "";
+    
     $cfg = new CMSConfig();
     if (!Vars::get("stylesheet_queue")) {
         return null;
