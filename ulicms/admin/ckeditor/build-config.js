@@ -1,5 +1,5 @@
 ﻿/**
- * @license Copyright (c) 2003-2020, CKSource - Frederico Knabben. All rights reserved.
+ * @license Copyright (c) 2003-2021, CKSource - Frederico Knabben. All rights reserved.
  * For licensing, see LICENSE.md or https://ckeditor.com/license
  */
 
@@ -13,10 +13,10 @@
  * (1) https://ckeditor.com/cke4/builder
  *     Visit online builder to build CKEditor from scratch.
  *
- * (2) https://ckeditor.com/cke4/builder/1a79e1e537f6e8a24c24d46530187770
+ * (2) https://ckeditor.com/cke4/builder/75e3d4a83d93f136096fd8f17db0bfac
  *     Visit online builder to build CKEditor, starting with the same setup as before.
  *
- * (3) https://ckeditor.com/cke4/builder/download/1a79e1e537f6e8a24c24d46530187770
+ * (3) https://ckeditor.com/cke4/builder/download/75e3d4a83d93f136096fd8f17db0bfac
  *     Straight download link to the latest version of CKEditor (Optimized) with the same setup as before.
  *
  * NOTE:
@@ -25,7 +25,7 @@
  */
 
 var CKBUILDER_CONFIG = {
-	skin: 'moono',
+	skin: 'moono-lisa',
 	preset: 'full',
 	ignore: [
 		'.DS_Store',
@@ -39,6 +39,7 @@ var CKBUILDER_CONFIG = {
 		'.jshintrc',
 		'.mailmap',
 		'.npm',
+		'.nvmrc',
 		'.travis.yml',
 		'README.md',
 		'bender-err.log',
@@ -49,6 +50,7 @@ var CKBUILDER_CONFIG = {
 		'gruntfile.js',
 		'less',
 		'node_modules',
+		'package-lock.json',
 		'package.json',
 		'tests'
 	],

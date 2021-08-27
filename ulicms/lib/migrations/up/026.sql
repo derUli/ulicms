@@ -1,0 +1,1 @@
+update `{prefix}settings` set value = 'moono-lisa' WHERE name = 'ckeditor_skin' and value = 'moono'
