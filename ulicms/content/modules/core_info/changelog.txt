@@ -4,6 +4,7 @@ Neue Features:
 * Kommentar-Übersicht verbessert
 * Performance Verbesserungen
 * Composer und npm Pakete aktualisiert
+* CKEditor aktualisiert
 * Animation für Menü Icon
 
 Fehlerkorrekturen:
