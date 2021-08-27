@@ -65,10 +65,6 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
             enqueueScriptFile($script);
         }
 
-        if (is_logged_in()) {
-            echo Script::fromFile("ckeditor/ckeditor.js");
-        }
-
         combinedScriptHtml();
 
         require "inc/touch_icons.php";

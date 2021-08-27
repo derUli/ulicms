@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use UliCMS\HTML\Script;
+
 class BackendHelper extends Helper
 {
 
@@ -27,10 +29,14 @@ class BackendHelper extends Helper
     {
         // ckeditor is huge so embed it only if this is the user'S preferred html editor
         if (get_html_editor() == "ckeditor") {
+           
+            echo Script::fromFile("ckeditor/ckeditor.js");
+            
             enqueueScriptFile(ModuleHelper::buildRessourcePath(
                 "core_content",
                 "js/pages/init-ckeditor.js"
             ));
+            
         }
 
         enqueueScriptFile(

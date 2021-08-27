@@ -30,7 +30,7 @@ CKEDITOR.editorConfig = function (config) {
     config.entities_latin = false;
     config.uiColor = '#d1d8d0';
 
-    config.removePlugins = "link,newpage,templates,preview,print,save,language,autoembed";
+    config.removePlugins = "newpage,templates,preview,print,save,language,autoembed";
     // disable contextmenu on touchy things
     // to make it possible to select text in editor
     if (isTouchDevice()) {
@@ -42,5 +42,5 @@ CKEDITOR.editorConfig = function (config) {
         console.log("CKEditor: Can't touch this");
     }
     config.autoGrow_onStartup = false;
-    config.extraPlugins = 'adv_link,font';
+    config.extraPlugins = 'link,font';
 };

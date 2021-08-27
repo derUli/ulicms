@@ -87,7 +87,6 @@ var CKBUILDER_CONFIG = {
 		'justify' : 1,
 		'label' : 1,
 		'language' : 1,
-		'link' : 1,
 		'list' : 1,
 		'liststyle' : 1,
 		'magicline' : 1,
