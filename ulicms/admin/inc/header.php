@@ -48,7 +48,7 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
             "../node_modules/bootstrap/dist/js/bootstrap.min.js",
             "../node_modules/bootstrap-toggle/js/bootstrap-toggle.min.js",
             "../node_modules/select2/dist/js/select2.min.js",
-            "../node_modules/bootbox/bootbox.min.js",
+            "../node_modules/bootbox/dist/bootbox.min.js",
             $select2TranslationFile,
             "../node_modules/datatables/media/js/jquery.dataTables.min.js",
             "../node_modules/zenscroll/zenscroll-min.js",
