@@ -87,7 +87,7 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
                    } ?>>
         </div>
         <div class="row field">
-            <div class="col-xs-12 col-md-6">
+            <div class="col-12 col-md-6">
                 <strong class="field-label">
                     <?php translate("firstname"); ?>
                 </strong>
@@ -95,7 +95,7 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
                        value="<?php
                        echo _esc($row->firstname); ?>">
             </div>
-            <div class="col-xs-12 col-md-6"> <strong class="field-label">
+            <div class="col-12 col-md-6"> <strong class="field-label">
                     <?php translate("lastname"); ?>
                 </strong>
                 <input type="text" name="lastname"
@@ -123,14 +123,14 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
             } ?>
         </div>
         <div class="row field">
-            <div class="col-xs-12 col-md-6">
+            <div class="col-12 col-md-6">
                 <strong class="field-label">
                     <?php translate("new_password"); ?>
                 </strong>
                 <input type="password" name="password" id="password"
                        class="password-security-check"
                        value="" autocomplete="new-password"> </div>
-            <div class="col-xs-12 col-md-6">
+            <div class="col-12 col-md-6">
                 <strong class="field-label">
                     <?php translate("password_repeat"); ?>
                 </strong>

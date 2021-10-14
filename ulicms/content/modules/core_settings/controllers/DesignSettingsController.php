@@ -190,7 +190,7 @@ class DesignSettingsController extends Controller
                 UliCMS\HTML\imageTag(
                     $screenshot,
                     [
-                                "class" => "img-responsive theme-preview"
+                                "class" => "img-fluid theme-preview"
                             ]
                 )
             );

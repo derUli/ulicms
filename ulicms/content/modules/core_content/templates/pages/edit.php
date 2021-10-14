@@ -1126,11 +1126,11 @@ if ($permissionChecker->hasPermission("pages")) {
                     <img class="loading" src="gfx/loading.gif" alt="Wird gespeichert...">
                 </div>
                 <div class="row">
-                    <div class="col-xs-6">
+                    <div class="col-6">
                         <button type="submit" class="btn btn-primary" id="btn-submit">
                             <i class="far fa-save"></i> <?php translate("save_changes"); ?></button>
                     </div>
-                    <div class="col-xs-6 text-right">
+                    <div class="col-6 text-right">
                         <button class="typedep btn btn-info" type="button" id="btn-view-page">
                             <i class="fas fa-eye"></i> <?php translate("view"); ?></button>
                     </div>

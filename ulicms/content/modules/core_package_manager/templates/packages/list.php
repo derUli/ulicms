@@ -263,7 +263,7 @@ if ($permissionChecker->hasPermission("list_packages")) {
         ));
         ?>
         <div class="row">
-            <div class="col-xs-6">
+            <div class="col-6">
                 <p>
                     <a href="index.php?action=upload_patches"
                        class="btn btn-warning is-ajax"
@@ -271,7 +271,7 @@ if ($permissionChecker->hasPermission("list_packages")) {
                             class="fa fa-plus"></i> <?php translate("INSTALL_PATCH_FROM_FILE"); ?></a>
                 </p>
             </div>
-            <div class="col-xs-6 text-right">
+            <div class="col-6 text-right">
                 <p>
                     <button type="submit" class="btn btn-danger"
                             <?php if (count($patches) == 0) {

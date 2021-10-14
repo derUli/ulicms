@@ -1035,3 +1035,28 @@ iframe.fm {
         }
     }
 }
+
+
+/* Legacy CSS classes for Bootstrap 3 backwards compatiblity */
+.btn-default {
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}
+
+.btn-default:focus {
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #8c8c8c;
+}
+.btn-default:hover {
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+    text-decoration: none;
+}
+.btn-default:active {
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+}

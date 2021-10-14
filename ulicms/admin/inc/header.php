@@ -122,13 +122,13 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
             do_event("after_backend_header");
             ?>
         <div
-            class="container main <?php
+            class="container-fluid main <?php
             if (get_action()) {
                 echo 'action-' . Template::getEscape(get_action());
             }
             ?>">
             <div class="row menubar">
-                <div class="col-xs-7">
+                <div class="col-7">
                     <a
                         href="../"
                         title="<?php translate("goto_frontend"); ?>"
@@ -136,12 +136,12 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
                         data-placement="bottom" 
                         ><img
                             src="<?php Template::escape($admin_logo); ?>" alt="UliCMS"
-                            class="img-responsive"></a>
+                            class="img-fluid"></a>
                 </div>
-                <div class="col-xs-5 menu-container">
+                <div class="col-5 menu-container">
                     <?php
                     if (is_logged_in()) {
-                        $colClass = $permissionChecker->hasPermission("comments_manage") ? "col-xs-4" : "col-xs-6"; ?>
+                        $colClass = $permissionChecker->hasPermission("comments_manage") ? "col-4" : "col-6"; ?>
                         <div class="row pull-right top-right-icons">
                             <div class="<?php esc($colClass); ?>">
                                 <a href="#" class="has-pointer" id="menu-clear-cache"

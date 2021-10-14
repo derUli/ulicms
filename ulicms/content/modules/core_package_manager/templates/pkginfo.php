@@ -68,7 +68,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                     <tr>
                         <td></td>
                         <td><img src="data:<?php esc($screenshot); ?>"
-                                 alt="Screenshot" class="img-responsive"></td>
+                                 alt="Screenshot" class="img-fluid"></td>
                     </tr>
                 <?php
                 } ?>

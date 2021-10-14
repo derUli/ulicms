@@ -46,7 +46,7 @@ if ($permissionChecker->hasPermission("logo")) {
                                     $logoUrl,
                                     [
                                             "alt" => Settings::get("homepage_title"),
-                                            "class" => "img-responsive"
+                                            "class" => "img-fluid"
                                         ]
                                 ); ?>
                                 <div class="voffset2">

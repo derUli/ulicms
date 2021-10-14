@@ -10,7 +10,7 @@ $users = ViewBag::get("users");
             <?php
             echo imageTag(
     $user->getAvatar(),
-    ["class" => "img-responsive"]
+    ["class" => "img-fluid"]
 );
             ?>
             <div class="username">

@@ -41,6 +41,6 @@
     </div>
     <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> <?php echo TRANSLATION_APPLY; ?></button>
     <div id="loading">
-        <img src="../admin/gfx/loading.gif" alt="Loading" class="img-responsive">
+        <img src="../admin/gfx/loading.gif" alt="Loading" class="img-fluid">
     </div>
 </form>

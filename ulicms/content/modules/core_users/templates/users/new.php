@@ -19,13 +19,13 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
             <input type="text" required="required" name="username" value="">
         </div>
         <div class="row field">
-            <div class="col-xs-12 col-md-6">
+            <div class="col-12 col-md-6">
                 <strong class="field-label">
                     <?php translate("firstname"); ?>
                 </strong>
                 <input type="text" name="firstname" value="">
             </div>
-            <div class="col-xs-12 col-md-6">
+            <div class="col-12 col-md-6">
                 <strong class="field-label">
                     <?php translate("lastname"); ?>
                 </strong> <input
@@ -39,7 +39,7 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
             <input type="email" name="email" value="">
         </div>
         <div class="row field">
-            <div class="col-xs-12 col-md-6">
+            <div class="col-12 col-md-6">
                 <strong class="field-label">
                     <?php translate("password"); ?>*
                 </strong>
@@ -47,7 +47,7 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
                        class="password-security-check"
                        id="password" value="" autocomplete="new-password">
             </div>
-            <div class="col-xs-12 col-md-6">
+            <div class="col-12 col-md-6">
                 <strong class="field-label">
                     <?php translate("password_repeat"); ?>*
                 </strong>
