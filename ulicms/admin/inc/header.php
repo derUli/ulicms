@@ -46,7 +46,7 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
             "scripts/utils/editors.js",
             "scripts/global.js",
             "../node_modules/bootstrap/dist/js/bootstrap.min.js",
-            "../node_modules/bootstrap-toggle/js/bootstrap-toggle.min.js",
+            "../node_modules/bootstrap4-toggle/js/bootstrap4-toggle.min.js",
             "../node_modules/select2/dist/js/select2.min.js",
             "../node_modules/bootbox/dist/bootbox.min.js",
             $select2TranslationFile,
@@ -80,7 +80,7 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
               $styles[] = "../node_modules/codemirror-minified/lib/codemirror.css";
               $styles[] = "../node_modules/vanilla-toast/vanilla-toast.css";
               $styles[] = "css/modern.scss";
-              $styles[] = "../node_modules/bootstrap-toggle/css/bootstrap-toggle.min.css";
+              $styles[] = "../node_modules/bootstrap4-toggle/css/bootstrap4-toggle.min.css";
               $styles[] = "../node_modules/select2/dist/css/select2.min.css";
               $styles[] = "../node_modules/jquery-datetimepicker/build/jquery.datetimepicker.min.css";
 
@@ -141,7 +141,8 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
                 <div class="col-5 menu-container">
                     <?php
                     if (is_logged_in()) {
-                        $colClass = $permissionChecker->hasPermission("comments_manage") ? "col-4" : "col-6"; ?>
+                        $colClass = $permissionChecker->hasPermission("comments_manage") ? "col-4" : "col-6";
+                        ?>
                         <div class="row pull-right top-right-icons">
                             <div class="<?php esc($colClass); ?>">
                                 <a href="#" class="has-pointer" id="menu-clear-cache"
@@ -154,7 +155,8 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
                             </div>
                             <?php
                             if ($permissionChecker->hasPermission("comments_manage")) {
-                                $count = Comment::getUnreadCount(); ?>
+                                $count = Comment::getUnreadCount();
+                                ?>
                                 <div class="<?php esc($colClass); ?>">
                                     <div class="comment-counter">
                                         <a href="<?php echo ModuleHelper::buildActionURL("comments_manage"); ?>"
@@ -166,19 +168,19 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
                                             if ($count) {
                                                 ?>
                                                 <div class="count" data-count="<?php echo $count ?>">
-                                                    <?php echo $count; ?>
+                                                <?php echo $count; ?>
                                                 </div>
-                                            <?php
-                                            } ?></a>
+            <?php }
+        ?></a>
                                     </div>
                                 </div>
-                            <?php
-                            } ?>
+        <?php }
+    ?>
                             <div class="<?php esc($colClass); ?>">
                                 <a id="menu-toggle" class="has-pointer"><i class="fa fa-bars"></i> </a>
                             </div>
                         </div>
-                    <?php
+                        <?php
                     }
                     ?>
                 </div>

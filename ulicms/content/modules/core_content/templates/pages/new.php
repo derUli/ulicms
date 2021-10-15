@@ -411,7 +411,7 @@ if ($permissionChecker->hasPermission("pages")
                         <strong class="field-label"><?php translate("image"); ?></strong>
                         <input type="text" id="og_image" name="og_image" readonly="readonly"
                                class="fm"
-                               value="<?php esc($og_image); ?>"
+                               value=""
                                style="cursor: pointer" /> <a href="#"
                                onclick="$('#og_image').val('');
                                            return false;"
