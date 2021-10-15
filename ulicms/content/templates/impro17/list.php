@@ -66,7 +66,7 @@ if ($id !== null) {
                                     href="<?php Template::escape(buildSEOUrl()); ?>?start=<?php echo $next_start; ?>"><?php Template::escape(">>"); ?></a></span>
                             <?php } ?>
                     </div>
-                    <div class="text-right rss-icon">
+                    <div class="text-end rss-icon">
                         <a class="fa fa-rss fa-4x"
                            href="<?php Template::escape(buildSEOUrl(false, null, "rss")); ?>"
                            title="Newsfeed"></a>

@@ -94,7 +94,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                ), array(
                            "page" => $row->id
                                ), array(
-                           "class" => "pull-right delete-form page-delete-form"
+                           "class" => "float-end delete-form page-delete-form"
                        )); ?>
                        <?php echo ModuleHelper::endForm(); ?>
                 </div>
@@ -1130,7 +1130,7 @@ if ($permissionChecker->hasPermission("pages")) {
                         <button type="submit" class="btn btn-primary" id="btn-submit">
                             <i class="far fa-save"></i> <?php translate("save_changes"); ?></button>
                     </div>
-                    <div class="col-6 text-right">
+                    <div class="col-6 text-end">
                         <button class="typedep btn btn-info" type="button" id="btn-view-page">
                             <i class="fas fa-eye"></i> <?php translate("view"); ?></button>
                     </div>

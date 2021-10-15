@@ -20,19 +20,19 @@ if ($permissionChecker->hasPermission("update_system")) {
           method="post">
               <?php csrf_token_html(); ?>
         <div class="row">
-            <div class="col-6 text-left">
+            <div class="col-6 text-start">
                 <strong><?php translate("installed_version"); ?></strong>
             </div>
-            <div class="col-6 text-right">
+            <div class="col-6 text-end">
                 <?php Template::escape($currentVersion); ?>
             </div>
 
         </div>
         <div class="row">
-            <div class="col-6 text-left">
+            <div class="col-6 text-start">
                 <strong><?php translate("available_version"); ?></strong>
             </div>
-            <div class="col-6 text-right"><?php Template::escape($newVersion); ?></div>
+            <div class="col-6 text-end"><?php Template::escape($newVersion); ?></div>
         </div>
         <?php if ($release_notes) { ?>
             <h2><?php translate("release_notes") ?></h2>

@@ -59,7 +59,7 @@ if ($permissionChecker->hasPermission("list_packages")) {
                                 data-btn-for="<?php esc($module->getName()); ?>"><i
                                     class="fas fa-tools"></i> <?php esc($module->getName()); ?> </a>
                                 <?php if (!$userIsPermitted and $hasAdminPage) { ?>
-                                <i class="fas fa-lock pull-right"
+                                <i class="fas fa-lock float-end"
                                    title="<?php translate("no_permission"); ?>"></i>
                                <?php } ?>
                         </td>
@@ -271,7 +271,7 @@ if ($permissionChecker->hasPermission("list_packages")) {
                             class="fa fa-plus"></i> <?php translate("INSTALL_PATCH_FROM_FILE"); ?></a>
                 </p>
             </div>
-            <div class="col-6 text-right">
+            <div class="col-6 text-end">
                 <p>
                     <button type="submit" class="btn btn-danger"
                             <?php if (count($patches) == 0) {

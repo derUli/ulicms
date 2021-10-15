@@ -179,7 +179,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
             <?php
             if ($installable) {
                 ?>
-                <div class="text-right" style="margin-top: 30px;">
+                <div class="text-end" style="margin-top: 30px;">
                     <?php
                     echo ModuleHelper::buildMethodCallForm("PkgInfoController", "install", array(
                         "file" => basename($tempfile)

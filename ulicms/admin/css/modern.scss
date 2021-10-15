@@ -1060,3 +1060,29 @@ iframe.fm {
     background-color: #e6e6e6;
     border-color: #adadad;
 }
+
+.text-left {
+    text-align: left;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.pull-right {
+    float: right;
+}
+
+.pull-left {
+    float: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+
+/* Margin Left Fix */
+.checkbox label .toggle, .checkbox-inline .toggle {
+    margin-left: 0;
+}

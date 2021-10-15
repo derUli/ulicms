@@ -57,7 +57,7 @@ if (!$permissionChecker->hasPermission("performance_settings")) {
             "PerformanceSettingsController",
             "clearCache"
         ); ?>"
-        class="btn btn-warning pull-right">
+        class="btn btn-warning float-end">
         <i class="fas fa-broom"></i>
         <?php translate("clear_cache"); ?></a>
 
