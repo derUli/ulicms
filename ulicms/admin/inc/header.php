@@ -82,8 +82,7 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
               $styles[] = "../node_modules/bootstrap4-toggle/css/bootstrap4-toggle.min.css";
               $styles[] = "../node_modules/select2/dist/css/select2.min.css";
               $styles[] = "../node_modules/jquery-datetimepicker/build/jquery.datetimepicker.min.css";
-                            $styles[] = "css/modern.scss";
-
+              $styles[] = "css/modern.scss";
 
               $styles = apply_filter($styles, "admin_head_styles");
 
@@ -168,14 +167,14 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
                                             if ($count) {
                                                 ?>
                                                 <div class="count" data-count="<?php echo $count ?>">
-                                                <?php echo $count; ?>
+                                                    <?php echo $count; ?>
                                                 </div>
-            <?php }
-        ?></a>
+                                            <?php }
+                                            ?></a>
                                     </div>
                                 </div>
-        <?php }
-    ?>
+                            <?php }
+                            ?>
                             <div class="col-auto">
                                 <a id="menu-toggle" class="has-pointer"><i class="fa fa-bars"></i> </a>
                             </div>
