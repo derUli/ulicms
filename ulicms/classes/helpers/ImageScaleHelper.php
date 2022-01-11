@@ -31,6 +31,7 @@ class ImageScaleHelper extends Helper
         if ($width && $height) {
             $dimensions = [$width, $height];
         }
+        
         return $dimensions;
     }
 

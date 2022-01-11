@@ -19,7 +19,7 @@ const checkboxChecked = (event) => {
 };
 
 const checkSelectAllIfAllChecked = (item, group) => {
-    if (!item) {
+    if (!item && !group) {
         return;
     }
 
@@ -68,13 +68,13 @@ const initSelect2 = (container) => {
 };
 
 const initBootstrapToggle = (container) => {
-     // Toggle switches for some checkboxes
+    // Toggle switches for some checkboxes
     $(container).find(".js-switch").bootstrapToggle({
         on: MenuTranslation.On,
         off: MenuTranslation.Off
     });
-    
-        // bootstrap-toggle doesn't react to click on the label of a toggle switch
+
+    // bootstrap-toggle doesn't react to click on the label of a toggle switch
     // This is a long standing issue that is still not fixed.
     // https://github.com/minhur/bootstrap-toggle/issues/23
     // just wrap the clickable text in an element with this css class
@@ -85,10 +85,11 @@ const initBootstrapToggle = (container) => {
         if (theSwitch && theSwitch.length) {
             theSwitch.bootstrapToggle('toggle');
         }
-    });};
+    });
+};
 
 const initPasswordSecurityCheck = (container) => {
-        // password security check
+    // password security check
     if (typeof $(".password-security-check").password !== "undefined") {
         $(".password-security-check").password({
             shortPass: PasswordSecurityTranslation.ShortPass,

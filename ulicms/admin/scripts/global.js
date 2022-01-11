@@ -151,7 +151,7 @@ $(() => {
         }, false);
     }
 
-    $("input[type=checkbox] .select-all").change(selectAllChecked);
+    $("input[type=checkbox].select-all").change(selectAllChecked);
     $("input[type=checkbox]").change(checkboxChecked);
 
     // check "Select All" checkbox if all checkboxes of this group are checked
