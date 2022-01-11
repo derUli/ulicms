@@ -577,7 +577,21 @@ class RoboFile extends Tasks
 
         system("$command $testFile");
     }
+    
+    /**
+     * Run PHPUnit Tests and update snapshots
+     * @param string $testFile test file to run
+     */
+    public function testsUpdateSnapshots(string $testFile = "")
+    {
+        $command = "vendor/bin/phpunit -d --update-snapshots";
+        if (DIRSEP === "\\") {
+            $command = str_replace("/", "\\", $command);
+        }
 
+        system("$command $testFile");
+    }
+    
     /**
      * Creates the application's database
      */

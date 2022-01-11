@@ -7,11 +7,11 @@ class UliCMSVersion
     public function __construct()
     {
         $this->codename = "Starved Piranha";
-        $this->releaseYear = 2021;
+        $this->releaseYear = 2022;
         $this->buildDate = 0; // {InsertBuildDate}
         $this->internalVersion = [
-            2021,
-            3
+            2022,
+            1
         ];
 
         $this->update = "";
