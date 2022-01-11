@@ -66,11 +66,7 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
             </strong>
             <select
                 name="group_id">
-                <option value="-"
-                <?php
-                if ($row->group_id === null) {
-                    echo "selected";
-                } ?>>[<?php translate("none"); ?>]</option>
+                <option value="-">[<?php translate("none"); ?>]</option>
                         <?php
                         foreach ($allGroups as $key => $value) {
                             ?>

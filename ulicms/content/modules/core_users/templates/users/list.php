@@ -17,6 +17,7 @@ if ($permissionChecker->hasPermission("users")) {
     } else {
         $users = $manager->getAllUsers();
     }
+
     $groups = Group::getAll(); ?>
     <?php echo Template::executeModuleTemplate("core_users", "icons.php"); ?>
     <h2><?php translate("users"); ?></h2>
