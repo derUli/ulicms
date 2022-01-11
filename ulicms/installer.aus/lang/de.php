@@ -3,13 +3,14 @@
 add_translation("INSTALLATION", "Installation");
 add_translation("TITLE_STEP_1", "Sprache auswählen");
 add_translation("TITLE_STEP_2", "Lizenzbedingungen akzeptieren");
-add_translation("TITLE_STEP_3", "Dateiberechtigungen setzen");
-add_translation("TITLE_STEP_4", "Verbinden mit der Datenbank");
-add_translation("TITLE_STEP_5", "Administrator Account erstellen");
-add_translation("TITLE_STEP_6", "Optionale Komponenten auswählen");
-add_translation("TITLE_STEP_7", "Datenbank aufbauen");
-add_translation("TITLE_STEP_8", "Konfigurationsdatei erstellen");
-add_translation("TITLE_STEP_9", "Installer Ordner löschen");
+add_translation("TITLE_STEP_3", "Systemvoraussetzungen");
+add_translation("TITLE_STEP_4", "Dateiberechtigungen setzen");
+add_translation("TITLE_STEP_5", "Verbinden mit der Datenbank");
+add_translation("TITLE_STEP_6", "Administrator Account erstellen");
+add_translation("TITLE_STEP_7", "Optionale Komponenten auswählen");
+add_translation("TITLE_STEP_8", "Datenbank aufbauen");
+add_translation("TITLE_STEP_9", "Konfigurationsdatei erstellen");
+add_translation("TITLE_STEP_10", "Installer Ordner löschen");
 add_translation("SELECT_LANGUAGE", "Bitte wählen Sie Ihre Sprache aus.");
 add_translation("FOLLOW_INSTRUCTIONS", "Bitte folgen Sie den Anweisungen um UliCMS zu installieren");
 add_translation("CHMOD", "<p>Bitte setzen Sie die Berechtigungen der folgenden Dateien auf 0755.<br/>
@@ -47,3 +48,6 @@ add_translation("ADD_FK", "Fremdschlüssel hinzufügen");
 add_translation("ACCEPT_LICNSE", "Lizenz akzeptieren");
 add_translation("NEXT", "Weiter");
 add_translation("THIS_PROCEDUDRE_WILL_TAKE_SOME_MINUTES", "Dieser Vorgang kann einige Minuten dauern.");
+
+add_translation("TRANSLATION_PHP_MODULES", "PHP Module");
+add_translation("TRANSLATION_PHP_VERSION", "PHP >=");

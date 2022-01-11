@@ -113,6 +113,10 @@ function ulicms_mail(
 function send_header(string $header): bool
 {
     $headers = Vars::get("http_headers");
+    
+    if(!$headers){
+        return false;
+    }
     if (!in_array($header, $headers)) {
         $headers[] = $header;
     }

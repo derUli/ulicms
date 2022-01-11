@@ -3,13 +3,14 @@
 add_translation("INSTALLATION", "Installation");
 add_translation("TITLE_STEP_1", "Select Language");
 add_translation("TITLE_STEP_2", "Accept License Conditions");
-add_translation("TITLE_STEP_3", "Change File Permissions");
-add_translation("TITLE_STEP_4", "Connect to Database");
-add_translation("TITLE_STEP_5", "Create Administrator Account");
-add_translation("TITLE_STEP_6", "Select optional Components");
-add_translation("TITLE_STEP_7", "Build Database");
-add_translation("TITLE_STEP_8", "Create Config File");
-add_translation("TITLE_STEP_9", "Remove Installer Folder");
+add_translation("TITLE_STEP_3", "System Requirements Check");
+add_translation("TITLE_STEP_4", "Change File Permissions");
+add_translation("TITLE_STEP_5", "Connect to Database");
+add_translation("TITLE_STEP_6", "Create Administrator Account");
+add_translation("TITLE_STEP_7", "Select optional Components");
+add_translation("TITLE_STEP_8", "Build Database");
+add_translation("TITLE_STEP_9", "Create Config File");
+add_translation("TITLE_STEP_10", "Remove Installer Folder");
 add_translation("SELECT_LANGUAGE", "Please select your language.");
 add_translation("FOLLOW_INSTRUCTIONS", "Please follow instructions, to install UliCMS on this Server.");
 add_translation("CHMOD", "<p>Please chmod the following files to 0755.<br/>
@@ -48,3 +49,6 @@ add_translation("ADD_FK", "Add Foreign Keys");
 add_translation("ACCEPT_LICNSE", "Accept License");
 add_translation("NEXT", "Next");
 add_translation("THIS_PROCEDUDRE_WILL_TAKE_SOME_MINUTES", "This procedure will take some minutes.");
+
+add_translation("TRANSLATION_PHP_MODULES", "PHP Module");
+add_translation("TRANSLATION_PHP_VERSION", "PHP >=");

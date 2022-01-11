@@ -1,4 +1,3 @@
-<p>
-    <?php echo TRANSLATION_LAST_STEP; ?>
-</p>
-<a href="index.php?submit_form=LoginToBackend" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i> <?php echo TRANSLATION_GOTO_LOGIN; ?></a>
+<form id="create-cms-config" action="#" method="post">
+    <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> <?php echo TRANSLATION_CREATE_CMS_CONFIG_PHP; ?></button>
+</form>
