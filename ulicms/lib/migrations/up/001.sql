@@ -63,7 +63,7 @@ CREATE TABLE `{prefix}content` (
   `active` tinyint(1) NOT NULL,
   `created` bigint(20) NOT NULL,
   `lastmodified` bigint(20) NOT NULL,
-  `autor` int(11) DEFAULT NULL,
+  `author_id` int(11) DEFAULT NULL,
   `group_id` int(11) DEFAULT NULL,
   `lastchangeby` int(11) DEFAULT NULL,
   `views` int(11) NOT NULL,
