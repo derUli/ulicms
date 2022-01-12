@@ -86,11 +86,11 @@ class FaviconControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($controller->_hasFavicon());
         
         $this->assertEquals(
-            "7005a4a7c5933da712ff8766bfd21d33",
+            "444aa40c763f942322f6b1d1a4ab18cc",
             md5_file($controller->_getDestination1())
         );
         $this->assertEquals(
-            "7005a4a7c5933da712ff8766bfd21d33",
+            "444aa40c763f942322f6b1d1a4ab18cc",
             md5_file($controller->_getDestination2())
         );
 
@@ -108,11 +108,11 @@ class FaviconControllerTest extends \PHPUnit\Framework\TestCase
         );
 
         $this->assertEquals(
-            "d4150ed4acdf20fe4a9c4f31ace5e262",
+            "70aae2ed780bc052c1f4c91602528070",
             md5_file($controller->_getDestination1())
         );
         $this->assertEquals(
-            "d4150ed4acdf20fe4a9c4f31ace5e262",
+            "70aae2ed780bc052c1f4c91602528070",
             md5_file($controller->_getDestination2())
         );
 

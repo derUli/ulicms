@@ -250,7 +250,7 @@ class Page extends Content
         $sql .= Database::escapeValue($this->show_headline);
         $sql .= ")";
 
-        $result = Database::query($sql) or die(Database::error());
+        $result = Database::query($sql);
         $this->id = Database::getLastInsertID();
         $this->permissions->save($this->id);
         return $result;

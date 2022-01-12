@@ -5,6 +5,7 @@ declare(strict_types=1);
 use UliCMS\Helpers\TestHelper;
 
 if (!defined("RESPONSIVE_FM")) {
+    
     class Response
     {
         public static function sendHttpStatusCodeResultIfAjax(

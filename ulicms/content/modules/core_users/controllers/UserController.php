@@ -67,7 +67,7 @@ class UserController extends Controller
     public function createPost(): void
     {
         $this->_createPost();
-        Request::redirect(ModuleHelper::buildActionURL("admins"));
+        Response::redirect(ModuleHelper::buildActionURL("admins"));
     }
 
     public function updatePost(): void
@@ -115,7 +115,7 @@ class UserController extends Controller
                 $user->setGroupId($group_id);
                 $user->setSecondaryGroups([]);
 
-                $secondary_groups = $_POST["secondary_groups"];
+                $secondary_groups = $_POST["secondary_groups"] ?? [];
                 if (is_array($secondary_groups)) {
                     foreach ($secondary_groups as $group) {
                         $user->addSecondaryGroup(new Group($group));
@@ -141,11 +141,12 @@ class UserController extends Controller
             if (Request::getVar("delete_avatar")) {
                 $user->removeAvatar();
             }
+            
 
             if (!$permissionChecker->hasPermission("users")) {
-                Request::redirect("index.php");
+                Response::redirect("index.php");
             } else {
-                Request::redirect(ModuleHelper::buildActionURL("admins"));
+                Response::redirect(ModuleHelper::buildActionURL("admins"));
             }
         }
         ExceptionResult(get_translation("forbidden"), HttpStatusCode::FORBIDDEN);
@@ -156,7 +157,7 @@ class UserController extends Controller
         $id = Request::getVar("id", 0, "int");
 
         $this->_deletePost($id);
-        Request::redirect(ModuleHelper::buildActionURL("admins"));
+        Response::redirect(ModuleHelper::buildActionURL("admins"));
     }
 
     public function _deletePost(int $id): bool
