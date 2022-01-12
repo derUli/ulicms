@@ -115,7 +115,7 @@ function send_header(string $header): bool
     $headers = Vars::get("http_headers");
     
     if(!$headers){
-        return false;
+        $headers = [];
     }
     if (!in_array($header, $headers)) {
         $headers[] = $header;
