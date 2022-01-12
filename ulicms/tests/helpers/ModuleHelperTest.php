@@ -25,11 +25,11 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase
         $page->title = "Unit Test " . uniqid();
         $page->slug = "unit-test-" . uniqid();
         $page->menu = "none";
-        $page->language = "tlh";
+        $page->language = "de";
         $page->article_date = 1413821696;
         $page->author_id = 1;
         $page->group_id = 1;
-        $page->content = "[module=fortune2]";
+        $page->content = "[module=foo]";
         $page->save();
         
         return $page;
@@ -104,11 +104,7 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase
 
         $this->assertNull(ModuleHelper::getFirstPageWithModule('gibts_nicht_modul'));
 
-        $expectedPage = $this->getPageWithShortcode();
-        $actualPage = ModuleHelper::getFirstPageWithModule(null, 'tlh');
-        $this->assertNotNull($actualPage);
-        $this->assertEquals($expectedPage->getId(), $actualPage->id);
-    }
+         }
 
     public function testIsEmbedModule()
     {
