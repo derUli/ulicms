@@ -1,3 +1,13 @@
+===== Neues in UliCMS 2022.1 =====
+
+Neue Features:
+* Neuer Robo Task tests:update-snapshots hinzugefügt
+* composer und node Pakete aktualisiert
+
+Fehlerkorrekturen:
+* "Alles auwählen" bei "Kommentare" korrigiert
+* "Nachricht des Tages" - CKEditor aktiviert
+
 ===== Neues in UliCMS 2021.3 =====
 
 Neue Features:

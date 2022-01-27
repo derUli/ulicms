@@ -383,6 +383,31 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
+### composer/semver 
+Semver library that offers utilities, version constraint parsing and validation.
+Homepage: Not configured.
+Licenses Used: MIT
+Copyright (C) 2015 Composer
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is furnished to do
+so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
 ### consolidation/annotated-command 
 Initialize Symfony Console commands from annotated command class methods.
 Homepage: Not configured.
@@ -488,7 +513,7 @@ Homepage: Not configured.
 Licenses Used: MIT
 The MIT License (MIT)
 
-Copyright (c) 2014-2020 Codegyre Developers Team, Consolidation Team
+Copyright (c) 2014-2021 Codegyre Developers Team, Consolidation Team
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
@@ -531,6 +556,7 @@ symfony/polyfill-php73              v1.18.1  MIT
 symfony/polyfill-php80              v1.18.1  MIT
 symfony/process                     v4.4.14  MIT
 symfony/service-contracts           v1.1.9   MIT
+
 
 ### consolidation/self-update 
 Provides a self:update command for Symfony Console applications.
@@ -680,7 +706,14 @@ SOFTWARE.
 PSR-7 message implementation that also provides common utility methods
 Homepage: Not configured.
 Licenses Used: MIT
-Copyright (c) 2015 Michael Dowling, https://github.com/mtdowling <mtdowling@gmail.com>
+The MIT License (MIT)
+
+Copyright (c) 2015 Michael Dowling <mtdowling@gmail.com>
+Copyright (c) 2015 Márk Sági-Kazár <mark.sagikazar@gmail.com>
+Copyright (c) 2015 Graham Campbell <hello@gjcampbell.co.uk>
+Copyright (c) 2016 Tobias Schultze <webmaster@tubo-world.de>
+Copyright (c) 2016 George Mponos <gmponos@gmail.com>
+Copyright (c) 2018 Tobias Nyholm <tobias.nyholm@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -747,7 +780,7 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ### jbroadway/urlify 
-PHP port of URLify.js from the Django project. Transliterates non-ascii characters for use in URLs.
+A fast PHP slug generator and transliteration library that converts non-ascii characters for use in URLs.
 Homepage: https://github.com/jbroadway/urlify
 Licenses Used: BSD-3-Clause-Clear
 Copyright (c) Django Software Foundation and individual contributors.
@@ -979,7 +1012,7 @@ PHP Markdown
 Homepage: https://michelf.ca/projects/php-markdown/
 Licenses Used: BSD-3-Clause
 PHP Markdown Lib  
-Copyright (c) 2004-2019 Michel Fortin
+Copyright (c) 2004-2021 Michel Fortin
 <https://michelf.ca/>  
 All rights reserved.
 
@@ -1068,7 +1101,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 ### phpfastcache/phpfastcache 
-PHP Abstract Cache Class - Reduce your database call using cache system. PhpFastCache handles a lot of drivers such as Apc(u), Cassandra, CouchBase, Couchdb, Mongodb, Files, (P)redis, Leveldb, Memcache(d), Ssdb, Sqlite, Wincache, Xcache, Zend Data Cache.
+PHP Abstract Cache Class - Reduce your database call using cache system. Phpfastcache handles a lot of drivers such as Apc(u), Cassandra, CouchBase, Couchdb, Mongodb, Files, (P)redis, Leveldb, Memcache(d), Ssdb, Sqlite, Wincache, Xcache, Zend Data Cache.
 Homepage: https://www.phpfastcache.com
 Licenses Used: MIT
 Full license text not found in dependency source.
@@ -2087,31 +2120,6 @@ Symfony polyfill for the Mbstring extension
 Homepage: https://symfony.com
 Licenses Used: MIT
 Copyright (c) 2015-2019 Fabien Potencier
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is furnished
-to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
-
-
-### symfony/polyfill-php73 
-Symfony polyfill backporting some PHP 7.3+ features to lower PHP versions
-Homepage: https://symfony.com
-Licenses Used: MIT
-Copyright (c) 2018-2019 Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

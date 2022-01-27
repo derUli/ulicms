@@ -2,7 +2,7 @@
 
 use UliCMS\Utils\VersionComparison;
 
-$minPhpRequired = "7.2";
+$minPhpRequired = "8.0.2";
 
 $phpVersion = phpversion();
 
