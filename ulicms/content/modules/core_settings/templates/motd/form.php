@@ -60,6 +60,9 @@ if ($permissionChecker->hasPermission("motd")) {
     $translation = new JSTranslation();
     $translation->addKey("changes_was_saved");
     $translation->render();
+    
+    BackendHelper::enqueueEditorScripts();
+
     enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/motd.js"));
     combinedScriptHtml();
     echo ModuleHelper::endForm();

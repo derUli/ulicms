@@ -1,10 +1,11 @@
+<?php $version = new UliCMSVersion(); ?>
 <a href="<?php echo ModuleHelper::buildActionURL("info"); ?>"
    class="btn btn-default btn-back is-ajax"
    ><i class="fa fa-arrow-left"></i>
     <?php translate("back") ?></a>
 
 <h1><?php translate("license"); ?></h1>
-Copyright (c) 2011 - 2020, Ulrich Schmidt
+Copyright (c) 2011 - <?php echo $version->getReleaseYear();?>, Ulrich Schmidt
 <br>
 All rights reserved.
 <p>Redistribution and use in source and binary forms, with or without

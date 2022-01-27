@@ -605,7 +605,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                 <select name="list_language">
                                     <option value=""
                                     <?php
-                                    if ($list->language === "null") {
+                                    if ($list_data->language === "null") {
                                         echo "selected";
                                     } ?>>[<?php translate("every"); ?>]</option>
                                             <?php
