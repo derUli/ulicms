@@ -72,9 +72,9 @@ const updateFontPreview = () => {
 $(() => {
     $("#mobile_detect_notice").hide();
     initMobileDetectNotice();
-    
+
     const fontFamily = $("select#default_font").val();
-    if(fontFamily === 'google'){
+    if (fontFamily === 'google') {
         $("div#google-fonts").show();
     }
 

@@ -6,7 +6,7 @@ $(() => {
         const valueSelected = $('#category').val();
         location.replace(`index.php?action=videos&filter_category=${valueSelected}`);
     });
-    
+
     const ajaxOptions = {
         success: (responseText, statusText, xhr, $form) => {
             const action = $($form).attr("action");

@@ -1,7 +1,7 @@
 const bindAjaxLinks = (root) => {
     $(root).find("a.is-not-ajax").click((event) => {
         $(".mainmenu").hide();
-         $("#menu-toggle").removeClass('is-open');
+        $("#menu-toggle").removeClass('is-open');
         if (event.target.target === "_blank") {
             return;
         }
@@ -22,7 +22,7 @@ const bindAjaxLinks = (root) => {
         }
 
         const mainMenu = $(".mainmenu");
-         $("#menu-toggle").removeClass('is-open');
+        $("#menu-toggle").removeClass('is-open');
         const isMenuEntry = mainMenu.has(target);
 
         mainMenu.hide();
