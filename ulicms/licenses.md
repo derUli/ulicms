@@ -513,7 +513,7 @@ Homepage: Not configured.
 Licenses Used: MIT
 The MIT License (MIT)
 
-Copyright (c) 2014-2021 Codegyre Developers Team, Consolidation Team
+Copyright (c) 2014-2020 Codegyre Developers Team, Consolidation Team
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
@@ -556,7 +556,6 @@ symfony/polyfill-php73              v1.18.1  MIT
 symfony/polyfill-php80              v1.18.1  MIT
 symfony/process                     v4.4.14  MIT
 symfony/service-contracts           v1.1.9   MIT
-
 
 ### consolidation/self-update 
 Provides a self:update command for Symfony Console applications.
@@ -706,14 +705,7 @@ SOFTWARE.
 PSR-7 message implementation that also provides common utility methods
 Homepage: Not configured.
 Licenses Used: MIT
-The MIT License (MIT)
-
-Copyright (c) 2015 Michael Dowling <mtdowling@gmail.com>
-Copyright (c) 2015 Márk Sági-Kazár <mark.sagikazar@gmail.com>
-Copyright (c) 2015 Graham Campbell <hello@gjcampbell.co.uk>
-Copyright (c) 2016 Tobias Schultze <webmaster@tubo-world.de>
-Copyright (c) 2016 George Mponos <gmponos@gmail.com>
-Copyright (c) 2018 Tobias Nyholm <tobias.nyholm@gmail.com>
+Copyright (c) 2015 Michael Dowling, https://github.com/mtdowling <mtdowling@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -1012,7 +1004,7 @@ PHP Markdown
 Homepage: https://michelf.ca/projects/php-markdown/
 Licenses Used: BSD-3-Clause
 PHP Markdown Lib  
-Copyright (c) 2004-2021 Michel Fortin
+Copyright (c) 2004-2019 Michel Fortin
 <https://michelf.ca/>  
 All rights reserved.
 

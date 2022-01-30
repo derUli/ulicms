@@ -1,6 +1,7 @@
 ===== Neues in UliCMS 2022.1 =====
 
 Neue Features:
+* Installer prüft jetzt auf Systemvoraussetzungen
 * Neuer Robo Task tests:update-snapshots hinzugefügt
 * composer und node Pakete aktualisiert
 
