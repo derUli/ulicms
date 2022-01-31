@@ -44,7 +44,7 @@ function installNextDBScript() {
         if (text.contains("<!--finish-->")) {
             $("form#setup-database").html(text);
             setTimeout(function () {
-                location.replace("index.php?step=10");
+                location.replace("index.php?step=9");
             }, 500);
         } else if (text.contains("<!--ok-->")) {
             $("form#setup-database").html(text);
