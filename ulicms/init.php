@@ -313,6 +313,11 @@ $db_port = isset($config->db_port) ?
 $db_strict_mode = isset($config->db_strict_mode) ?
         boolval($config->db_strict_mode) : false;
 
+
+// Seit PHP ist der Default-Wert MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT
+// TODO: Datenbank-Code fixen, damit auch ohne diese Zeile alles funktioniert
+mysqli_report(MYSQLI_REPORT_OFF);
+
 @$connection = Database::connect(
     $config->db_server,
     $config->db_user,
@@ -334,10 +339,12 @@ if (isset($config->dbmigrator_auto_migrate) and is_true($config->dbmigrator_auto
     if (isCLI()) {
         Database::setEchoQueries(true);
     }
+    
     $select = Database::setupSchemaAndSelect(
         $config->db_database,
         $additionalSql
     );
+    
 } else {
     $select = Database::select($config->db_database);
 }

@@ -80,6 +80,7 @@ class Database
         array $otherScripts = []
     ): bool {
         $selected = self::select($schemaName);
+        
         if (!$selected) {
             $success = self::createSchema($schemaName);
             if ($success) {
