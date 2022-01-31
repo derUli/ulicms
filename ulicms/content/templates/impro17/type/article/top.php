@@ -10,7 +10,7 @@ $article_image = getTemplateDirPath("impro17") . "images/nopic.jpg";
 ?>
 <strong><?php translate("date"); ?>:</strong>
 <time datetime="<?php echo date(DATE_W3C, $lastmodified); ?>">
-    <?php echo strftime("%x", $lastmodified); ?>
+    <?php echo PHP81_BC\strftime("%x", $lastmodified); ?>
 </time>
 </p>
 <?php

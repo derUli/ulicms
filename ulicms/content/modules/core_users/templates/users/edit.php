@@ -119,7 +119,7 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
             if (is_null($row->last_login)) {
                 translate("never");
             } else {
-                echo strftime("%x %X", $row->last_login);
+                echo PHP81_BC\strftime("%x %X", $row->last_login);
             } ?>
         </div>
         <div class="row field">

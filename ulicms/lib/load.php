@@ -33,7 +33,8 @@ $files = [
     "translation",
     "html5_media",
     "custom_data",
-    "version_compare_functions"
+    "version_compare_functions",
+    "legacy"
 ];
 
 foreach ($files as $file) {

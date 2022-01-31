@@ -643,4 +643,13 @@ class RoboFile extends Tasks
 
         $this->dbMigrate();
     }
+
+    public function getBuilder(): \Robo\Collection\CollectionBuilder {
+        
+    }
+
+    public function setBuilder(\Robo\Collection\CollectionBuilder $builder) {
+        
+    }
+
 }

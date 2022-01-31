@@ -37,7 +37,7 @@ if (!Settings::get("disable_ulicms_newsfeed")) {
             $description = $feed[$x]['desc'];
             echo '<p><strong><a href="' . $link . '" target="_blank">' . $title . '</a></strong><br />';
             $date = strtotime($feed[$x]['date']);
-            $datestr = strftime("%x, %A", $date);
+            $datestr = PHP81_BC\strftime("%x, %A", $date);
             $txt = get_translation("posted_on_date");
             $txt = str_replace("%s", $datestr, $txt);
             echo '<small><em>' . $txt . '</em></small></p>';

@@ -58,7 +58,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                     ?>
                     <tr>
                         <td><strong><?php translate("build_date") ?></strong></td>
-                        <td><?php esc(strftime("%x %X", $build_date)); ?></td>
+                        <td><?php esc(PHP81_BC\strftime("%x %X", $build_date)); ?></td>
                     </tr>
                 <?php
                 } ?>

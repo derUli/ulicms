@@ -64,7 +64,7 @@ if (Request::getVar("run_cron")) {
     do_event("before_cron");
     require 'lib/cron.php';
     do_event("after_cron");
-    TextResult("finished cron at " . strftime("%x %X"), HttpStatusCode::OK);
+    TextResult("finished cron at " . PHP81_BC\strftime("%x %X"), HttpStatusCode::OK);
 }
 
 $status = check_status();

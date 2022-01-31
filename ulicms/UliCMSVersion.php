@@ -47,7 +47,7 @@ class UliCMSVersion
 
     public function getBuildDate(): string
     {
-        return strftime("%x %X", $this->getBuildTimestamp());
+        return PHP81_BC\strftime("%x %X", $this->getBuildTimestamp());
     }
 }
 
