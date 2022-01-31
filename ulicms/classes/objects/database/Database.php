@@ -207,7 +207,7 @@ class Database
 
     public static function getClientInfo(): string
     {
-        return mysqli_get_client_info(self::$connection);
+        return mysqli_get_client_info();
     }
 
     public static function getClientVersion(): ?int
