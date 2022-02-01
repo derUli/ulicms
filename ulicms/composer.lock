@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1409a2361076418166db14c1f7141ce8",
+    "content-hash": "e01d0e699a6f5e34035b8bc6909ed512",
     "packages": [
         {
             "name": "chrisjean/php-ico",
@@ -590,70 +590,6 @@
             "time": "2021-12-30T19:08:32+00:00"
         },
         {
-            "name": "dereuromark/media-embed",
-            "version": "0.5.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/dereuromark/media-embed.git",
-                "reference": "5423991c8b387e879d86e914fbe6c32f5a2cece9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/dereuromark/media-embed/zipball/5423991c8b387e879d86e914fbe6c32f5a2cece9",
-                "reference": "5423991c8b387e879d86e914fbe6c32f5a2cece9",
-                "shasum": ""
-            },
-            "require": {
-                "jbroadway/urlify": "^1.0.0",
-                "php": ">=7.3"
-            },
-            "require-dev": {
-                "fig-r/psr2r-sniffer": "dev-master",
-                "phpunit/phpunit": "^9.5",
-                "sebastian/diff": "@stable"
-            },
-            "bin": [
-                "bin/generate-docs"
-            ],
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "MediaEmbed\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mark Scherer",
-                    "homepage": "https://www.dereuromark.de",
-                    "role": "Author"
-                }
-            ],
-            "description": "A PHP library to deal with all those media services around, parsing their URLs and embedding their audio/video content in websites.",
-            "keywords": [
-                "audio",
-                "embed",
-                "iframe",
-                "media",
-                "php",
-                "video"
-            ],
-            "support": {
-                "issues": "https://github.com/dereuromark/media-embed/issues",
-                "source": "https://github.com/dereuromark/media-embed/tree/0.5.6"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/dereuromark",
-                    "type": "github"
-                }
-            ],
-            "time": "2021-11-01T21:42:46+00:00"
-        },
-        {
             "name": "deruli/html-minifier",
             "version": "dev-master",
             "source": {
@@ -707,6 +643,138 @@
                 "PHP"
             ],
             "time": "2019-02-24T18:52:13+00:00"
+        },
+        {
+            "name": "deruli/klogger",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/derUli/KLogger",
+                "reference": "7fead3e84e5a80e7a0bb216e376cdf8bb2a8d78f"
+            },
+            "require": {
+                "php": ">=5.3",
+                "psr/log": "^1.0.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.0.*"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Katzgrau\\KLogger\\": "src/"
+                },
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kenny Katzgrau",
+                    "email": "katzgrau@gmail.com"
+                },
+                {
+                    "name": "Dan Horrigan",
+                    "email": "dan@dhorrigan.com"
+                },
+                {
+                    "name": "Ulrich Schmidt",
+                    "email": "support@ulicms.de"
+                }
+            ],
+            "description": "A Simple Logging Class",
+            "keywords": [
+                "logging"
+            ],
+            "time": "2022-01-31T23:44:44+00:00"
+        },
+        {
+            "name": "deruli/media-embed",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/derUli/media-embed",
+                "reference": "efef6281557bef5ca752fe585278663a3715f298"
+            },
+            "require": {
+                "jbroadway/urlify": "^1.0.0",
+                "php": ">=7.3"
+            },
+            "require-dev": {
+                "fig-r/psr2r-sniffer": "dev-master",
+                "phpunit/phpunit": "^9.5",
+                "sebastian/diff": "@stable"
+            },
+            "default-branch": true,
+            "bin": [
+                "bin/generate-docs"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MediaEmbed\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "MediaEmbed\\Test\\": "tests/"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "phpunit"
+                ],
+                "test-coverage": [
+                    "phpunit --log-junit tmp/coverage/unitreport.xml --coverage-html tmp/coverage --coverage-clover tmp/coverage/coverage.xml"
+                ],
+                "stan": [
+                    "phpstan analyse"
+                ],
+                "stan-setup": [
+                    "cp composer.json composer.backup && composer require --dev phpstan/phpstan:^1.0.0 && mv composer.backup composer.json"
+                ],
+                "lowest": [
+                    "validate-prefer-lowest"
+                ],
+                "lowest-setup": [
+                    "composer update --prefer-lowest --prefer-stable --prefer-dist --no-interaction && cp composer.json composer.backup && composer require --dev dereuromark/composer-prefer-lowest && mv composer.backup composer.json"
+                ],
+                "cs-check": [
+                    "phpcs -s -p --standard=vendor/fig-r/psr2r-sniffer/PSR2R/ruleset.xml --extensions=php src/ tests/"
+                ],
+                "cs-fix": [
+                    "phpcbf -p --standard=vendor/fig-r/psr2r-sniffer/PSR2R/ruleset.xml --extensions=php src/ tests/"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mark Scherer",
+                    "role": "Author",
+                    "homepage": "https://www.dereuromark.de"
+                },
+                {
+                    "name": "Ulrich Schmidt",
+                    "role": "Developer",
+                    "homepage": "https://en.ulicms.de"
+                }
+            ],
+            "description": "A PHP library to deal with all those media services around, parsing their URLs and embedding their audio/video content in websites.",
+            "keywords": [
+                "PHP",
+                "audio",
+                "embed",
+                "iframe",
+                "media",
+                "video"
+            ],
+            "time": "2022-02-01T00:25:02+00:00"
         },
         {
             "name": "dflydev/dot-access-data",
@@ -1207,61 +1275,6 @@
             "time": "2021-08-17T14:07:39+00:00"
         },
         {
-            "name": "katzgrau/klogger",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/katzgrau/KLogger.git",
-                "reference": "de2d3ab6777a393a9879e0496ebb8e0644066e3f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/katzgrau/KLogger/zipball/de2d3ab6777a393a9879e0496ebb8e0644066e3f",
-                "reference": "de2d3ab6777a393a9879e0496ebb8e0644066e3f",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3",
-                "psr/log": "^1.0.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^6.0.0"
-            },
-            "default-branch": true,
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Katzgrau\\KLogger\\": "src/"
-                },
-                "classmap": [
-                    "src/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Kenny Katzgrau",
-                    "email": "katzgrau@gmail.com"
-                },
-                {
-                    "name": "Dan Horrigan",
-                    "email": "dan@dhorrigan.com"
-                }
-            ],
-            "description": "A Simple Logging Class",
-            "keywords": [
-                "logging"
-            ],
-            "support": {
-                "issues": "https://github.com/katzgrau/KLogger/issues",
-                "source": "https://github.com/katzgrau/KLogger/tree/master"
-            },
-            "time": "2017-12-01T19:46:35+00:00"
-        },
-        {
             "name": "lasserafn/php-initial-avatar-generator",
             "version": "4.2.1",
             "source": {
@@ -1423,6 +1436,55 @@
                 "source": "https://github.com/LasseRafn/php-string-script-language/tree/0.3"
             },
             "time": "2020-12-24T12:43:59+00:00"
+        },
+        {
+            "name": "leafo/lessphp",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/leafo/lessphp.git",
+                "reference": "1fdc40e77824a692d7f4811ba86ed89669a66135"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/leafo/lessphp/zipball/1fdc40e77824a692d7f4811ba86ed89669a66135",
+                "reference": "1fdc40e77824a692d7f4811ba86ed89669a66135",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.7.27",
+                "squizlabs/php_codesniffer": "3.3.2"
+            },
+            "default-branch": true,
+            "bin": [
+                "plessc",
+                "lessify"
+            ],
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "lessc.inc.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT",
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Leaf Corcoran",
+                    "email": "leafot@gmail.com",
+                    "homepage": "http://leafo.net"
+                }
+            ],
+            "description": "lessphp is a compiler for LESS written in PHP.",
+            "homepage": "http://leafo.net/lessphp/",
+            "support": {
+                "issues": "https://github.com/leafo/lessphp/issues",
+                "source": "https://github.com/leafo/lessphp/tree/master"
+            },
+            "time": "2018-10-16T19:24:03+00:00"
         },
         {
             "name": "league/container",
@@ -7492,8 +7554,10 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "phpgangsta/googleauthenticator": 20,
-        "katzgrau/klogger": 20,
-        "deruli/html-minifier": 20
+        "leafo/lessphp": 20,
+        "deruli/html-minifier": 20,
+        "deruli/klogger": 20,
+        "deruli/media-embed": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

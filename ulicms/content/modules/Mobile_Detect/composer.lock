@@ -4,21 +4,15 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b5f525427875397b7284f593175f93f7",
+    "content-hash": "0860a4969a7540481c4f90dd0dde603b",
     "packages": [
         {
-            "name": "mobiledetect/mobiledetectlib",
-            "version": "2.8.37",
+            "name": "deruli/mobiledetectlib",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/serbanghita/Mobile-Detect.git",
-                "reference": "9841e3c46f5bd0739b53aed8ac677fa712943df7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/serbanghita/Mobile-Detect/zipball/9841e3c46f5bd0739b53aed8ac677fa712943df7",
-                "reference": "9841e3c46f5bd0739b53aed8ac677fa712943df7",
-                "shasum": ""
+                "url": "https://github.com/derUli/Mobile-Detect",
+                "reference": "75dea542ea5fe72980a4b941a23da477ab60db2f"
             },
             "require": {
                 "php": ">=5.0.0"
@@ -35,7 +29,13 @@
                     "Detection": "namespaced/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "archive": {
+                "exclude": [
+                    "docs",
+                    "examples",
+                    "export"
+                ]
+            },
             "license": [
                 "MIT"
             ],
@@ -44,6 +44,12 @@
                     "name": "Serban Ghita",
                     "email": "serbanghita@gmail.com",
                     "homepage": "http://mobiledetect.net",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Ulrich Schmidt",
+                    "email": "support@ulicms.de",
+                    "homepage": "http://en.ulicms.de",
                     "role": "Developer"
                 }
             ],
@@ -56,26 +62,18 @@
                 "mobile detector",
                 "php mobile detect"
             ],
-            "support": {
-                "issues": "https://github.com/serbanghita/Mobile-Detect/issues",
-                "source": "https://github.com/serbanghita/Mobile-Detect/tree/2.8.37"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/serbanghita",
-                    "type": "github"
-                }
-            ],
-            "time": "2021-02-19T21:22:57+00:00"
+            "time": "2022-02-01T00:17:05+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "deruli/mobiledetectlib": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.2.0"
 }
