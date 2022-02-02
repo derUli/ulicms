@@ -19,7 +19,8 @@ $phpModules = [
     "mbstring",
     "openssl",
     "dom",
-    "xml"
+    "xml",
+    "intl"
 ];
 ?>
 

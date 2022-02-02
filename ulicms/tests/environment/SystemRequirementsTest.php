@@ -52,6 +52,11 @@ class SystemRequirementsTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertTrue(extension_loaded("dom"));
     }
+    
+    public function testPhpModuleIntl()
+    {
+        $this->assertTrue(extension_loaded("intl"));
+    }
 
     public function testPhpModuleXml()
     {
