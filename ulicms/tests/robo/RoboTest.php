@@ -34,4 +34,22 @@ class RoboTest extends RoboBaseTest
             $actual
         );
     }
+    
+    public function testsUpdateSnapshots(){
+            $cfg = new CMSConfig();
+        Database::dropSchema($cfg->db_database);
+
+        putenv("ULICMS_ENVIRONMENT=" . get_environment());
+
+        $actual = $this->runRoboCommand(
+            [
+                    "tests:update-snapshots",
+                    "foobar"
+                ]
+        );
+        $this->assertStringContainsString(
+            'Cannot open file "foobar".',
+            $actual
+        );
+    }
 }

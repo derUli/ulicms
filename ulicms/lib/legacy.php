@@ -31,7 +31,7 @@ function strftime(string $format, $timestamp = null, ?string $locale = null): st
     } elseif (is_numeric($timestamp)) {
         $timestamp = date_create('@' . $timestamp);
     } elseif (is_string($timestamp)) {
-        $timestamp = date_create('!' . $timestamp);
+        $timestamp = date_create($timestamp);
     }
 
     if (!($timestamp instanceof \DateTimeInterface)) {
