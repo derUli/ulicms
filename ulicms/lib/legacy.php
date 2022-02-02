@@ -65,7 +65,7 @@ function strftime(string $format, $timestamp = null, ?string $locale = null): st
         // %x = Preferred date representation based on locale, without the time
         // Example: 02/05/09 for February 5, 2009
         elseif ($format == '%x') {
-            $date_type = IntlDateFormatter::SHORT;
+            $date_type = IntlDateFormatter::MEDIUM;
             $time_type = IntlDateFormatter::NONE;
         }
         // Localized time format
