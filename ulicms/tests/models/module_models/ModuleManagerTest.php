@@ -144,7 +144,7 @@ class ModuleManagerTest extends \PHPUnit\Framework\TestCase
         $moduleManager->sync();
 
         $module = new Module("Mobile_Detect");
-        $this->assertEquals("2.8.37", $module->getVersion());
+        $this->assertEquals("2.8.37.1", $module->getVersion());
     }
 
     public function testInitModulesDefaultSettings()
