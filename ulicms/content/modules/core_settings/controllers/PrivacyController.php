@@ -9,9 +9,7 @@ class PrivacyController extends Controller
     public function _savePost(): void
     {
         $language = basename(Request::getVar("language", null, "str"));
-        $varName = StringHelper::isNotNullOrWhitespace($language) ?
-                "privacy_policy_checkbox_enable_{$language}" :
-                "privacy_policy_checkbox_enable";
+        $varName = StringHelper::isNotNullOrWhitespace($language) ? "privacy_policy_checkbox_enable_{$language}" : "privacy_policy_checkbox_enable";
 
         if (Request::getVar("privacy_policy_checkbox_enable", 0, "int")) {
             Settings::set($varName, 1);
@@ -40,9 +38,7 @@ class PrivacyController extends Controller
             Settings::delete("keep_spam_ips");
         }
 
-        $varName = StringHelper::isNotNullOrWhitespace($language) ?
-                "privacy_policy_checkbox_text_{$language}" :
-                "privacy_policy_checkbox_text";
+        $varName = StringHelper::isNotNullOrWhitespace($language) ? "privacy_policy_checkbox_text_{$language}" : "privacy_policy_checkbox_text";
 
         $privacy_policy_checkbox_text = Request::getVar(
             "privacy_policy_checkbox_text",
