@@ -192,12 +192,12 @@ echo ModuleHelper::buildMethodCallForm(
     </table>
 </div>
 <div class="row">
-    <div class="col-xs-6">
+    <div class="col-xs-8">
         <?php
         echo Input::singleSelect("action", "", $actionSelect, 1);
         ?>
     </div>
-    <div class="col-xs-6">
+    <div class="col-xs-4 text-right">
         <button type="submit" class="btn btn-primary">
             <i class="fas fa-running"></i>
 <?php translate("do_action") ?></button>
