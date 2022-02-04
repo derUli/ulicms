@@ -15,7 +15,7 @@ class RoboThemesTest extends RoboBaseTest
     {
         $output = $this->runRoboCommand(["themes:list"]);
         $this->assertStringContainsString("2020 1.0.3", $output);
-        $this->assertStringContainsString("impro17 2.1.4", $output);
+        $this->assertStringContainsString("impro17 2.1.5", $output);
     }
 
     public function testThemesRemove()
