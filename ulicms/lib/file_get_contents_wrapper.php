@@ -61,6 +61,7 @@ function file_get_contents_wrapper(
     $cache_path = $cache_folder . "/" . $cache_name;
     if (is_file($cache_path) && is_url($url) && !$no_cache) {
         $content = file_get_contents($cache_path);
+       
         return is_string($content) ? $content : null;
     }
 
