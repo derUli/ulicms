@@ -536,16 +536,16 @@
         },
         {
             "name": "consolidation/self-update",
-            "version": "2.0.3",
+            "version": "2.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/consolidation/self-update.git",
-                "reference": "117dcc9494dc970a6ae307103c41d654e6253bc4"
+                "reference": "48d3bfac6d37b10c8ddae6e366ea79db5594d918"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/consolidation/self-update/zipball/117dcc9494dc970a6ae307103c41d654e6253bc4",
-                "reference": "117dcc9494dc970a6ae307103c41d654e6253bc4",
+                "url": "https://api.github.com/repos/consolidation/self-update/zipball/48d3bfac6d37b10c8ddae6e366ea79db5594d918",
+                "reference": "48d3bfac6d37b10c8ddae6e366ea79db5594d918",
                 "shasum": ""
             },
             "require": {
@@ -585,9 +585,9 @@
             "description": "Provides a self:update command for Symfony Console applications.",
             "support": {
                 "issues": "https://github.com/consolidation/self-update/issues",
-                "source": "https://github.com/consolidation/self-update/tree/2.0.3"
+                "source": "https://github.com/consolidation/self-update/tree/2.0.4"
             },
-            "time": "2021-12-30T19:08:32+00:00"
+            "time": "2022-02-08T16:22:44+00:00"
         },
         {
             "name": "deruli/html-minifier",
@@ -5837,11 +5837,11 @@
                 }
             },
             "autoload": {
-                "classmap": [
-                    "src/"
-                ],
                 "files": [
                     "src/Framework/Assert/Functions.php"
+                ],
+                "classmap": [
+                    "src/"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -6916,16 +6916,16 @@
         },
         {
             "name": "spatie/phpunit-snapshot-assertions",
-            "version": "4.2.9",
+            "version": "4.2.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/phpunit-snapshot-assertions.git",
-                "reference": "a259df1bb5ccf272bacafcee7fdb0eb703d9b1cc"
+                "reference": "f5bef7e4667f1a86bc0c308f93ff2d7618865578"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/phpunit-snapshot-assertions/zipball/a259df1bb5ccf272bacafcee7fdb0eb703d9b1cc",
-                "reference": "a259df1bb5ccf272bacafcee7fdb0eb703d9b1cc",
+                "url": "https://api.github.com/repos/spatie/phpunit-snapshot-assertions/zipball/f5bef7e4667f1a86bc0c308f93ff2d7618865578",
+                "reference": "f5bef7e4667f1a86bc0c308f93ff2d7618865578",
                 "shasum": ""
             },
             "require": {
@@ -6971,7 +6971,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/phpunit-snapshot-assertions/issues",
-                "source": "https://github.com/spatie/phpunit-snapshot-assertions/tree/4.2.9"
+                "source": "https://github.com/spatie/phpunit-snapshot-assertions/tree/4.2.10"
             },
             "funding": [
                 {
@@ -6979,7 +6979,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2021-12-03T19:21:19+00:00"
+            "time": "2022-02-08T22:54:52+00:00"
         },
         {
             "name": "symfony/options-resolver",

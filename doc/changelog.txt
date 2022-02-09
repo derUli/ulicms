@@ -2,6 +2,10 @@
 
 Neue Features:
 * Kompatiblität mit PHP 8.1
+* Composer Pakete wurden aktualisiert
+
+Entfernte Features:
+* composer wurde entfernt
 
 ===== Neues in UliCMS 2022.1 =====
 
