@@ -53,8 +53,7 @@ class NumberFormatHelper extends Helper
 
         $languageClass = "\\Westsworld\\TimeAgo\\Translations\\" .
                 ucfirst(getSystemLanguage());
-        $language = class_exists($languageClass) ? new $languageClass() :
-                new \Westsworld\TimeAgo\Translations\De();
+        $language = class_exists($languageClass) ? new $languageClass() : new \Westsworld\TimeAgo\Translations\De();
 
         $timeAgo = new TimeAgo($language);
         return $timeAgo->inWords($dateTime);
