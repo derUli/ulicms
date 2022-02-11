@@ -69,7 +69,7 @@ function file_extension(string $filename): string
 }
 
 // Mimetypen einer Datei ermitteln
-function get_mime(?string $file): string
+function get_mime(?string $file): ?string
 {
     return File::getMime($file);
 }

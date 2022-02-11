@@ -62,7 +62,8 @@
         "consolidation/robo": "*",
         "lasserafn/php-initial-avatar-generator": "*",
         "deruli/imagine": "dev-develop",
-        "michelf/php-markdown": "*"
+        "michelf/php-markdown": "*",
+        "softcreatr/php-mime-detector": "^3.2"
     },
     "require-dev": {
         "spatie/phpunit-snapshot-assertions": "*",
