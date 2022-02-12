@@ -38,18 +38,31 @@ $languages = Language::getAllLanguages();
             } ?>
         </div>
     </fieldset>
-    <h3><?php translate("languages"); ?></h3>
-    <fieldset>
-        <?php foreach ($languages as $lang) { ?>
-            <div class="checkbox">
+     <h3><?php translate("languages"); ?></h3>
+        <fieldset>
+            <div class="checkbox field">
                 <label>
-                    <input type="checkbox" name="restrict_edit_access_language[]"
-                           value="<?php echo $lang->getID(); ?>"
-                           id="lang-<?php echo $lang->getID(); ?>">
-                    <?php Template::escape($lang->getName()); ?></label>
+                    <input id="select-all-languages" type="checkbox" class="checkall">
+                    <?php translate("select_all"); ?>
+                </label>
             </div>
-        <?php } ?>
-    </fieldset>
+            <div class="voffset1">
+
+                <?php foreach ($languages as $lang) { ?>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="restrict_edit_access_language[]"
+                                   class="language-checkbox"
+                                   data-select-all-checkbox="#select-all-languages"
+                                   data-checkbox-group=".language-checkbox"
+                                   value="<?php echo $lang->getID(); ?>"
+                                   id="lang-<?php echo $lang->getID(); ?>">
+                                   <?php Template::escape($lang->getName()); ?>
+                        </label>
+                    </div>
+                <?php } ?>
+            </div>
+        </fieldset>
     <h3><?php translate("allowable_tags"); ?></h3>
     <input type="text" name="allowable_tags"
            value="<?php Template::escape(HTML5_ALLOWED_TAGS); ?>"> <small><?php translate("allowable_tags_help"); ?></small>

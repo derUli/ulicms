@@ -3,6 +3,7 @@
 Neue Features:
 * Kompatiblität mit PHP 8.1
 * Composer Pakete wurden aktualisiert
+* Gruppen: "Alles auswählen" für Sprachen hinzugefügt
 
 Entfernte Features:
 * composer wurde entfernt
