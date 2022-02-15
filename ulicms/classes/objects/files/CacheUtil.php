@@ -61,7 +61,7 @@ class CacheUtil
 
         if (extension_loaded("apcu") && ini_get("apc.enabled")) {
             $driver = "apcu";
-        } elseif (function_exists("sqlite_open")) {
+        } else if (extension_loaded("pdo_sqlite")) {
             $driver = "sqlite";
         }
 

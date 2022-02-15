@@ -47,8 +47,7 @@ class InfoController extends MainClass
         );
 
         $content = is_file($file) ?
-                file_get_contents($file) :
-                file_get_contents_wrapper(self::CHANGELOG_URL);
+                file_get_contents($file) : file_get_contents_wrapper(self::CHANGELOG_URL);
 
         return explode("\n", $content);
     }
