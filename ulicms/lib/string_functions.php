@@ -315,10 +315,7 @@ function replace_num_entity($ord): string
     }
 
     for ($i = 0; $i < $no_bytes; $i++) {
-        $byte[$no_bytes - $i - 1] = (
-            ($ord & (63 * pow(2, 6 * $i))) / pow(2, 6 * $i)
-        ) &
-                63 | 128;
+        $byte[$no_bytes - $i - 1] = (($ord & (63 * pow(2, 6 * $i))) / pow(2, 6 * $i)) & 63 | 128;
     }
 
     $byte[0] = ($byte[0] & $prefix[0]) | $prefix[1];

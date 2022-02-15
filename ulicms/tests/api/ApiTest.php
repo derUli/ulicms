@@ -240,6 +240,15 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("max@muster.de", $result[2]);
         $this->assertEquals("Musterstadt", $result[3]);
     }
+    
+    public function testReplaceNumEntity(){#
+        $this->assertEquals('d', replace_num_entity([0, "100"]));
+        $this->assertEquals('Ɛ', replace_num_entity([0, "400"]));
+        $this->assertEquals('ஸ', replace_num_entity([0, "3000"]));
+        $this->assertEquals('𐀀', replace_num_entity([0, "65536"]));
+        $this->assertEmpty(replace_num_entity([0, '1114113']));
+        $this->assertEquals('က', replace_num_entity([0, 'x1000']));
+    }
 
     public function testGetAllThemes()
     {
