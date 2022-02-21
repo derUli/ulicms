@@ -32,6 +32,11 @@ class SystemRequirementsTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertTrue(extension_loaded("gd"));
     }
+    
+    public function testPhpModuleCurl()
+    {
+        $this->assertTrue(extension_loaded("curl"));
+    }
 
     public function testPhpModuleJson()
     {

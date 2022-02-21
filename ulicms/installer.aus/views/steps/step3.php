@@ -15,6 +15,7 @@ $phpVersionCompatible = \UliCMS\Utils\VersionComparison\compare(
 $phpModules = [
     "mysqli",
     "gd",
+    "curl",
     "json",
     "mbstring",
     "openssl",

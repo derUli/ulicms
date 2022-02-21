@@ -59,13 +59,6 @@ class FaviconController extends Controller {
                 $sizes = $this->_getSizes(isset($_POST["high_resolution"]));
                 $this->_placeFiles($source, $sizes);
 
-                // Google Cloud: make file public
-                if (startsWith(ULICMS_DATA_STORAGE_ROOT, "gs://")
-                        and class_exists("GoogleCloudHelper")) {
-                    GoogleCloudHelper::changeFileVisiblity($destination1, true);
-                    GoogleCloudHelper::changeFileVisiblity($destination2, true);
-                }
-
                 do_event("after_upload_favicon");
 
                 CacheUtil::clearPageCache();

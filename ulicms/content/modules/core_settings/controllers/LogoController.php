@@ -44,13 +44,7 @@ class LogoController extends Controller
                 move_uploaded_file($logo_upload['tmp_name'], $newPath);
 
                 ImageScaleHelper::scaleDown($newPath);
-
-                // Google Cloud: make file public
-                if (startsWith(ULICMS_DATA_STORAGE_ROOT, "gs://")
-                        and class_exists("GoogleCloudHelper")) {
-                    GoogleCloudHelper::changeFileVisiblity($newPath, true);
-                }
-
+                
                 Settings::set("logo_image", basename($newPath));
                 Settings::set("logo_disabled", "no");
 

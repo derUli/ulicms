@@ -6,8 +6,7 @@ use UliCMS\Exceptions\CorruptDownloadException;
 
 // die Funktionalität von file_get_contents
 // mit dem Curl-Modul umgesetzt
-function file_get_contents_curl(string $url): ?string
-{
+function file_get_contents_curl(string $url): ?string {
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_USERAGENT, ULICMS_USERAGENT);
     curl_setopt($ch, CURLOPT_HEADER, 0);
@@ -29,8 +28,7 @@ function file_get_contents_curl(string $url): ?string
     return $data;
 }
 
-function is_url(?string $url): bool
-{
+function is_url(?string $url): bool {
     if (!$url) {
         return false;
     }
@@ -45,12 +43,18 @@ function is_url(?string $url): bool
     return false;
 }
 
-// Nutze curl zum Download der Datei, sofern verfügbar
-// Ansonsten Fallback auf file_get_contents
+/**
+ * 
+ * @param string $url URL
+ * @param bool $no_cache If this file should be cached
+ * @param type $checksum 
+ * @return string|null
+ * @throws CorruptDownloadException
+ */
 function file_get_contents_wrapper(
-    string $url,
-    bool $no_cache = false,
-    $checksum = null
+        string $url,
+        bool $no_cache = false,
+        $checksum = null
 ): ?string {
     $content = false;
     if (!is_url($url)) {
@@ -61,25 +65,15 @@ function file_get_contents_wrapper(
     $cache_path = $cache_folder . "/" . $cache_name;
     if (is_file($cache_path) && is_url($url) && !$no_cache) {
         $content = file_get_contents($cache_path);
-       
         return is_string($content) ? $content : null;
     }
 
-    // use file_get_contents() on Google Cloud Platform since it's optimized by Google
-    $runningInGoogleCloud = class_exists("GoogleCloudHelper") ?
-            GoogleCloudHelper::isProduction() : false;
-
-    if (function_exists("curl_init") and is_url($url) && !$runningInGoogleCloud) {
-        $content = file_get_contents_curl($url);
-    } elseif (ini_get("allow_url_fopen")) {
-        ini_set("default_socket_timeout", 5);
-        $content = @file_get_contents($url, 0, $context);
-    }
+    $content = file_get_contents_curl($url);
 
     if ($content and StringHelper::isNotNullOrWhitespace($checksum)
             and md5($content) !== strtolower($checksum)) {
         throw new CorruptDownloadException(
-            "Download of $url - Checksum validation failed"
+                        "Download of $url - Checksum validation failed"
         );
     }
 
@@ -90,8 +84,12 @@ function file_get_contents_wrapper(
     return $content;
 }
 
-function curl_url_exists(string $url): bool
-{
+/**
+ * Check if an URL exists by CURL
+ * @param string $url URL
+ * @return bool True if http status is in 2xx or 3xx range
+ */
+function curl_url_exists(string $url): bool {
     $timeout = 10;
     $ch = curl_init();
     // HTTP request is 'HEAD' too make this method fast
@@ -105,20 +103,17 @@ function curl_url_exists(string $url): bool
 
     $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
-    return $http_code >= 200 and $http_code < 400;
+    return $http_code >= 200 && $http_code < 400;
 }
 
 if (!defined("RESPONSIVE_FM")) {
-    function url_exists(string $url): bool
-    {
-        if (function_exists("curl_init") and
-                startsWith($url, "http")) {
-            return curl_url_exists($url);
-        }
-
-        if (@file_get_contents($url, false, null, 0, 0) === false) {
-            return false;
-        }
-        return true;
+/**
+ * Check if an URL exists
+ * @param string $url URL
+ * @return bool True if http status is in 2xx or 3xx range
+ */
+    function url_exists(string $url): bool {
+        return curl_url_exists($url);
     }
+
 }

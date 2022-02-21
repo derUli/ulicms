@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-class AudioController extends Controller
-{
-    public function createPost(): void
-    {
+class AudioController extends Controller {
+
+    public function createPost(): void {
         $mp3_file_value = "";
         $audio_folder = ULICMS_DATA_STORAGE_ROOT . "/content/audio";
         // mp3
@@ -23,14 +22,10 @@ class AudioController extends Controller
             if (faster_in_array($mp3_type, $mp3_allowed_mime_type)) {
                 $target = $audio_folder . "/" . $mp3_file;
                 if (move_uploaded_file(
-                    $_FILES ['mp3_file'] ['tmp_name'],
-                    $target
-                )) {
-                    // Google Cloud: make file public
-                    if (startsWith(ULICMS_DATA_STORAGE_ROOT, "gs://")
-                            and class_exists("GoogleCloudHelper")) {
-                        GoogleCloudHelper::changeFileVisiblity($target, true);
-                    }
+                                $_FILES ['mp3_file'] ['tmp_name'],
+                                $target
+                        )) {
+
                     $mp3_file_value = basename($mp3_file);
                 }
             }
@@ -49,14 +44,10 @@ class AudioController extends Controller
             if (faster_in_array($ogg_type, $ogg_allowed_mime_type)) {
                 $target = $audio_folder . "/" . $ogg_file;
                 if (move_uploaded_file(
-                    $_FILES ['ogg_file'] ['tmp_name'],
-                    $target
-                )) {
-                    // Google Cloud: make file public
-                    if (startsWith(ULICMS_DATA_STORAGE_ROOT, "gs://")
-                            and class_exists("GoogleCloudHelper")) {
-                        GoogleCloudHelper::changeFileVisiblity($target, true);
-                    }
+                                $_FILES ['ogg_file'] ['tmp_name'],
+                                $target
+                        )) {
+
                     $ogg_file_value = basename($ogg_file);
                 }
             }
@@ -78,8 +69,7 @@ class AudioController extends Controller
         Request::redirect(ModuleHelper::buildActionURL("audio"));
     }
 
-    public function _updatePost(): bool
-    {
+    public function _updatePost(): bool {
         $name = db_escape($_POST ["name"]);
         $id = intval($_POST ["id"]);
         $ogg_file = db_escape(basename($_POST ["ogg_file"]));
@@ -90,18 +80,16 @@ class AudioController extends Controller
                 . "ogg_file='$ogg_file', mp3_file='$mp3_file', "
                 . "category_id = $category_id, `updated` = $updated "
                 . "where id = $id");
-        
+
         return Database::getAffectedRows() > 0;
     }
 
-    public function updatePost(): void
-    {
+    public function updatePost(): void {
         $this->_updatePost();
         Request::redirect(ModuleHelper::buildActionURL("audio"));
     }
 
-    public function deletePost(): void
-    {
+    public function deletePost(): void {
         $result = db_query("select ogg_file, mp3_file from " .
                 tbname("audio") . " where id = " .
                 intval($_REQUEST ["delete"]));
@@ -124,4 +112,5 @@ class AudioController extends Controller
         }
         Request::redirect(ModuleHelper::buildActionURL("videos"));
     }
+
 }
