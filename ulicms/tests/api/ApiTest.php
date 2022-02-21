@@ -393,9 +393,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
 
     public function testFuncEnabledReturnsTrue()
     {
-        $enabled = func_enabled("mysqli_connect");
-        $this->assertEquals("mysqli_connect() is allow to use", $enabled["m"]);
-        $this->assertEquals(1, $enabled["s"]);
+       $this->assertTrue(func_enabled("mysqli_connect"));
     }
 
     public function testGetBaseFolderUrlWithFilenameInUrl()
