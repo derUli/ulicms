@@ -1577,7 +1577,7 @@ Homepage: https://github.com/thephpleague/container
 Licenses Used: MIT
 # The MIT License (MIT)
 
-Copyright (c) 2017 Phil Bennett <philipobenito@gmail.com>
+Copyright (c) 2021 Phil Bennett <philipobenito@gmail.com>
 
 > Permission is hereby granted, free of charge, to any person obtaining a copy
 > of this software and associated documentation files (the "Software"), to deal

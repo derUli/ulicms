@@ -112,6 +112,10 @@ class CacheUtilTest extends \PHPUnit\Framework\TestCase
 
         $this->assertNotEquals($uid2, $uid1);
     }
+    
+    public function testGetDriverName(){
+        $this->assertEquals("files", CacheUtil::getDriverName());
+    }
 
     public function testClearCache()
     {

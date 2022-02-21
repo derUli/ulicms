@@ -5,9 +5,6 @@ Neue Features:
 * Composer Pakete wurden aktualisiert
 * Gruppen: "Alles auswählen" für Sprachen hinzugefügt
 
-Fehlerkorrekturen:
-* Caching mit SQLite Treiber korrigiert
-
 Entfernte Features:
 * composer wurde entfernt
 
