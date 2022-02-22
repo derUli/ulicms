@@ -12,7 +12,6 @@ $files = [
     "menus",
     "output",
     "constants",
-    "arrays",
     "modules",
     "designs",
     "cache",
