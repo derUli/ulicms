@@ -8,8 +8,7 @@ declare(strict_types=1);
  * @param type $value Value
  * @return bool returns false if the constant was already set
  */
-function idefine(string $key, $value): bool
-{
+function idefine(string $key, $value): bool {
     $key = strtoupper($key);
     if (!defined($key)) {
         define($key, $value);

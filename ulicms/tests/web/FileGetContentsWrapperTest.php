@@ -56,10 +56,9 @@ class FileGetContentsWrapperTest extends \PHPUnit\Framework\TestCase
     public function testIsURLReturnsFalse()
     {
         $this->assertFalse(is_url("/var/www/html"));
-        $this->assertFalse(is_url("C:\\xampp\\htdocs"));
+        $this->assertFalse(is_url("C:\\xampp\\htdocs"));       
         $this->assertFalse(is_url("http://"));
-        $this->assertFalse(is_url("https://"));
-        $this->assertFalse(is_url("ftp://"));
+
         $this->assertFalse(is_url(null));
     }
 

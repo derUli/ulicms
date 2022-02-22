@@ -28,19 +28,17 @@ function file_get_contents_curl(string $url): ?string {
     return $data;
 }
 
+/**
+ * Checks if a string is an URL
+ * @param string|null $url String to check
+ * @return bool Returns true if this is an URL
+ */
 function is_url(?string $url): bool {
     if (!$url) {
         return false;
     }
 
-    // it it is an URL
-    if (startsWith($url, "http://")
-            or startsWith($url, "https://")
-            or startsWith($url, "ftp://")) {
-        // if it is not an incomplete url return true
-        return ($url != "http://" and $url != "https://" and $url != "ftp://");
-    }
-    return false;
+    return filter_var($url, FILTER_VALIDATE_URL) !== false;
 }
 
 /**
@@ -107,11 +105,12 @@ function curl_url_exists(string $url): bool {
 }
 
 if (!defined("RESPONSIVE_FM")) {
-/**
- * Check if an URL exists
- * @param string $url URL
- * @return bool True if http status is in 2xx or 3xx range
- */
+
+    /**
+     * Check if an URL exists
+     * @param string $url URL
+     * @return bool True if http status is in 2xx or 3xx range
+     */
     function url_exists(string $url): bool {
         return curl_url_exists($url);
     }
