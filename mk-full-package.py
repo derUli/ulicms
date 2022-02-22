@@ -67,12 +67,14 @@ def main():
                 print(line)
                 f.write(line)
 
-    
-    # Install composer & npm packages
-    old_cwd = os.getcwd()
-    os.chdir("ulicms")
+    # Composer packages zu Deploy hinzufügen
+    os.system("php ulicms/composer install --working-dir=" + main_dir + "/ --no-dev")
 
-    os.system("composer install --no-dev")
+    old_cwd = os.getcwd()
+
+    # Install npm packages
+    # TODO: is there are a way to specify a working dir like used for composer (code above)?
+    os.chdir("ulicms")
     os.system("npm install --production")
 
     # generate license files
