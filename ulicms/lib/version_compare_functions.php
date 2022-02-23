@@ -2,6 +2,13 @@
 
 namespace UliCMS\Utils\VersionComparison;
 
+/**
+ * Compare two version numbers
+ * @param string|null $version1 Version Number
+ * @param string|null $version2 Version Number
+ * @param string $operator Comparions Operator
+ * @return bool Result of Comparison
+ */
 function compare(
         ?string $version1,
         ?string $version2,
@@ -15,7 +22,7 @@ function compare(
     if ($version1 !== null && $version2 === null) {
         return false;
     }
-    
+
     $splitted1 = explode(".", $version1 ?? '');
     $splitted2 = explode(".", $version2 ?? '');
     $fillUp = fillUpVersionNumbers($splitted1, $splitted2);
@@ -46,6 +53,12 @@ function compare(
     return false;
 }
 
+/**
+ * Compare if Version Number 1 is greater than 2
+ * @param string|null $version1 Version Number 1
+ * @param string|null $version2 Version Number 2
+ * @return bool Result of Comparison
+ */
 function isGreater(
         ?string $version1,
         ?string $version2
@@ -53,6 +66,12 @@ function isGreater(
     return compare($version1, $version2, ">");
 }
 
+/**
+ * Compare if Version Number 1 is greater or equal than 2
+ * @param string|null $version1 Version Number 1
+ * @param string|null $version2 Version Number 2
+ * @return bool Result of Comparison
+ */
 function isGreaterOrEqual(
         ?string $version1,
         ?string $version2
@@ -60,6 +79,12 @@ function isGreaterOrEqual(
     return compare($version1, $version2, ">=");
 }
 
+/**
+ * Compare if Version Number 1 is lesser than 2
+ * @param string|null $version1 Version Number 1
+ * @param string|null $version2 Version Number 2
+ * @return bool Result of Comparison
+ */
 function isLesser(
         ?string $version1,
         ?string $version2
@@ -67,6 +92,12 @@ function isLesser(
     return compare($version1, $version2, "<");
 }
 
+/**
+ * Compare if Version Number 1 is lesser or equal than 2
+ * @param string|null $version1 Version Number 1
+ * @param string|null $version2 Version Number 2
+ * @return bool Result of Comparison
+ */
 function isLesserOrEqual(
         ?string $version1,
         ?string $version2
@@ -74,6 +105,12 @@ function isLesserOrEqual(
     return compare($version1, $version2, "<=");
 }
 
+/**
+ * Compare if Version Number 1 is equal to 2
+ * @param string|null $version1 Version Number 1
+ * @param string|null $version2 Version Number 2
+ * @return bool Result of Comparison
+ */
 function isEqual(
         ?string $version1,
         ?string $version2
@@ -81,6 +118,12 @@ function isEqual(
     return compare($version1, $version2, "=");
 }
 
+/**
+ * Version Fill up version numbers with 0
+ * @param array $splitted1 Version array
+ * @param array $splitted2 Version array
+ * @return array of arrays in format [[1, 3, 0], [1, 4, 0]]
+ */
 function fillUpVersionNumbers(array $splitted1, array $splitted2): array {
     if (count($splitted1) === count($splitted2)) {
         return [$splitted1, $splitted2];
