@@ -30,16 +30,18 @@ class Settings
         string $key,
         ?string $type = 'str'
     ) {
-        if (!is_null(SettingsCache::get($key))) {
+        
+        if (SettingsCache::get($key)) {
             return SettingsCache::get($key);
         }
-        $key = db_escape($key);
+        
+        $escapedKey = db_escape($key);
         $result = db_query("SELECT value FROM " . tbname("settings") .
-                " WHERE name='$key'");
+                " WHERE name='$escapedKey'");
         if (db_num_rows($result) > 0) {
             while ($row = db_fetch_object($result)) {
                 $value = self::convertVar($row->value, $type);
-                SettingsCache::set($key, $value, $type);
+                SettingsCache::set($key, $value);
                 return $value;
             }
         }
