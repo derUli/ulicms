@@ -5,6 +5,10 @@ declare(strict_types=1);
 use UliCMS\Security\PermissionChecker;
 use Negotiation\LanguageNegotiator;
 
+/**
+ * Gibt alle Sprachen in denen Inhalte vorhanden sind zurück
+ * @return array Sprachcodes
+ */
 function getAllUsedLanguages(): array
 {
     $languages = [];
