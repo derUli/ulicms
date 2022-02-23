@@ -8,6 +8,7 @@ declare(strict_types=1);
  * for displaying long loading lists eg: bulk emailers on screen
  * Stops the end user seeing loads of just plain old white
  * and thinking the browser has crashed on long loading pages.
+ * @return void
  */
 function fcflush(): void
 {
