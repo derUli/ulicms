@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 use UliCMS\Exceptions\CorruptDownloadException;
 
-// die Funktionalität von file_get_contents
-// mit dem Curl-Modul umgesetzt
+/**
+ * Fetch Data from URL by CURL
+ * @param string $url URL
+ * @return string|null response body or null
+ */
 function file_get_contents_curl(string $url): ?string {
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_USERAGENT, ULICMS_USERAGENT);
@@ -42,8 +45,8 @@ function is_url(?string $url): bool {
 }
 
 /**
- * 
- * @param string $url URL
+ * Get file from URL or Path
+ * @param string $url URL Or Path
  * @param bool $no_cache If this file should be cached
  * @param type $checksum 
  * @return string|null
