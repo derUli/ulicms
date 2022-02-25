@@ -13,7 +13,13 @@ function clearCache(): void
     CacheUtil::clearCache();
 }
 
-function no_cache($do = false): void
+/**
+ * Deaktiviert den Seitencache, sofern aktiviert
+ * @param type $do Wenn dies true ist, wird der Seitencache unabhängig von 
+ * den Einstellungen für diese Session deaktiviert
+ * @return void
+ */
+function no_cache(bool $do = false): void
 {
     if ($do) {
         Flags::setNoCache(true);
