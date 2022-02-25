@@ -183,7 +183,7 @@ function is_mobile(): bool
     }
 
     if (Settings::get("no_mobile_design_on_tablet")
-            and $result and $detect->isTablet()) {
+            && $result && $detect->isTablet()) {
         $result = false;
     }
 
