@@ -194,6 +194,10 @@ function is_mobile(): bool
     return $result;
 }
 
+/**
+ * Checks if the maintenance mode is enabled
+ * @return bool
+ */
 function isMaintenanceMode(): bool
 {
     if (!is_string(Settings::get("maintenance_mode"))) {
@@ -215,6 +219,12 @@ function is_tablet(): bool
     return $result;
 }
 
+/**
+ * Checks if the current user has the admin flag set
+ * If this is the case, the user has full access without restrictions
+ * to the system
+ * @return bool
+ */
 function is_admin(): bool
 {
     $isAdmin = false;
@@ -241,6 +251,10 @@ function is_debug_mode(): bool
             or (isset($config->debug) and $config->debug);
 }
 
+/**
+ * Checks if the application is running from command line
+ * @return bool
+ */
 function isCLI(): bool
 {
     return php_sapi_name() == "cli";
@@ -282,6 +296,11 @@ function var_is_type($var, $type, $required = false): bool
     return false;
 }
 
+/**
+ * Checks if a string is a valid version number
+ * @param string|null $input
+ * @return bool
+ */
 function is_version_number(?string $input): bool
 {
     return ($input and version_compare($input, '0.0.1', '>='));
