@@ -79,15 +79,11 @@ class CacheUtil {
         }
     }
 
-    // clears all caches including apc, opcache, cache directory
+    // clears all caches including opcache, cache directory
     // and tmp directory, sync modules directory with database
     public static function clearCache(): void {
         do_event("before_clear_cache");
 
-        // clear apc cache if available
-        if (function_exists("apc_clear_cache")) {
-            clearAPCCache();
-        }
         // clear opcache if available
         if (function_exists("opcache_reset")) {
             opcache_reset();
