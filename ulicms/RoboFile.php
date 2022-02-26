@@ -20,15 +20,8 @@ class RoboFile extends Tasks {
     }
 
     protected function initUliCMS() {
-        try {
-            $this->initCore();
-        } catch (SqlException $e) {
-            $this->showException($e);
-        }
-    }
 
-    protected function showException(Exception $e) {
-        $this->writeln($e->getMessage());
+        $this->initCore();
     }
 
     protected function initCore() {

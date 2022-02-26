@@ -648,8 +648,7 @@ class PageController extends Controller
         $start = Request::getVar("start", 0, "int");
         $length = Request::getVar("length", 25, "int");
         $draw = Request::getVar("draw", 1, "int");
-        $search = isset($_REQUEST["search"]) &&
-                isset($_REQUEST["search"]["value"]) ?
+        $search = isset($_REQUEST["search"]) && isset($_REQUEST["search"]["value"]) ?
                 $_REQUEST["search"]["value"] : null;
         $filters = isset($_REQUEST["filters"]) &&
                 is_array($_REQUEST["filters"]) ? $_REQUEST["filters"] : [];
