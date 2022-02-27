@@ -109,7 +109,11 @@ function is_present($val = null): bool
 {
     return isset($val) && !is_blank($val);
 }
-
+/**
+ * Checks if a string is valid JSON
+ * @param string|null $str input string
+ * @return bool
+ */
 function is_json(?string $str): bool
 {
     return !is_null($str) ? json_decode($str) != null : false;
