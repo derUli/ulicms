@@ -6,12 +6,10 @@ namespace UliCMS\Security;
 
 use Settings;
 
-class Encryption
-{
+class Encryption {
 
     // use this to encrypt user passwords
-    public static function hashPassword(string $password): string
-    {
+    public static function hashPassword(string $password): string {
         $salt = Settings::get("password_salt");
 
         // if no salt is set, generate it
@@ -22,4 +20,5 @@ class Encryption
         }
         return hash("sha512", $salt . $password);
     }
+
 }

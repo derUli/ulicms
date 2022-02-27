@@ -10,19 +10,19 @@ use Template;
 use UliCMS\Constants\RequestMethod;
 
 // this class contains method to build <form> tags
-class Form
-{
+class Form {
+
     public static function buildMethodCallForm(
-        string $sClass,
-        string $sMethod,
-        array $otherVars = [],
-        string $requestMethod = RequestMethod::POST,
-        array $htmlAttributes = []
+            string $sClass,
+            string $sMethod,
+            array $otherVars = [],
+            string $requestMethod = RequestMethod::POST,
+            array $htmlAttributes = []
     ): string {
         $html = "";
         $attribhtml = StringHelper::isNotNullOrWhitespace(
-            ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes)
-        ) ?
+                        ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes)
+                ) ?
                 " " .
                 ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes) :
                 "";
@@ -43,22 +43,22 @@ class Form
     }
 
     public static function buildMethodCallButton(
-        string $sClass,
-        string $sMethod,
-        string $buttonText,
-        array $buttonAttributes = [
+            string $sClass,
+            string $sMethod,
+            string $buttonText,
+            array $buttonAttributes = [
                 "class" => "btn btn-default",
                 "type" => "submit"],
-        array $otherVars = [],
-        array $formAttributes = [],
-        string $requestMethod = RequestMethod::POST
+            array $otherVars = [],
+            array $formAttributes = [],
+            string $requestMethod = RequestMethod::POST
     ): string {
         $html = ModuleHelper::buildMethodCallForm(
-            $sClass,
-            $sMethod,
-            $otherVars,
-            $requestMethod,
-            $formAttributes
+                        $sClass,
+                        $sMethod,
+                        $otherVars,
+                        $requestMethod,
+                        $formAttributes
         );
         $html .= '<button ' .
                 ModuleHelper::buildHTMLAttributesFromArray($buttonAttributes)
@@ -66,14 +66,13 @@ class Form
         $html .= $buttonText . "</button>";
         $html .= "</form>";
 
-
         return $html;
     }
 
     public static function deleteButton(
-        string $url,
-        array $otherVars = [],
-        array $htmlAttributes = []
+            string $url,
+            array $otherVars = [],
+            array $htmlAttributes = []
     ) {
         $html = "";
 
@@ -85,7 +84,7 @@ class Form
 
         $htmlAttributesString = ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes);
         $attribHtml = "";
-        
+
         if (!empty($htmlAttributes)) {
             $attribHtml .= " $htmlAttributesString";
         }
@@ -105,8 +104,8 @@ class Form
         return optimizeHtml($html);
     }
 
-    public static function endForm(): string
-    {
+    public static function endForm(): string {
         return "</form>";
     }
+
 }

@@ -21,8 +21,8 @@ function clearCache(): void {
 function no_cache(bool $do = false): void {
     if ($do) {
         Flags::setNoCache(true);
-    } elseif (get_cache_control() == "auto"
-            or get_cache_control() == "no_cache") {
+    } elseif (get_cache_control() === "auto"
+            or get_cache_control() === "no_cache") {
         Flags::setNoCache(true);
     }
 }

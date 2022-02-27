@@ -3,13 +3,12 @@
 declare(strict_types=1);
 
 // Wrapper for KLogger
-class Logger
-{
+class Logger {
+
     private $path;
     private $logger;
 
-    public function __construct(string $path, ?CMSConfig $cmsConfig = null)
-    {
+    public function __construct(string $path, ?CMSConfig $cmsConfig = null) {
         $cfg = $cmsConfig ? $cmsConfig : new CMSConfig();
         $environment = get_environment();
         $this->path = $path;
@@ -19,9 +18,9 @@ class Logger
         }
         if (is_dir($this->path)) {
             $this->logger = new Katzgrau\KLogger\Logger(
-                $this->path,
-                Psr\Log\LogLevel::DEBUG,
-                [
+                    $this->path,
+                    Psr\Log\LogLevel::DEBUG,
+                    [
                 "extension" => "log",
                 "prefix" => "{$environment}_"
                     ]
@@ -30,13 +29,11 @@ class Logger
         }
     }
 
-    public function getPath(): string
-    {
+    public function getPath(): string {
         return $this->path;
     }
 
-    protected function FixLogPermissions(CMSConfig $cfg)
-    {
+    protected function FixLogPermissions(CMSConfig $cfg) {
         // Option fix_log_permissions
         if (isset($cfg->fix_log_permissions) and is_true($cfg->fix_log_permissions)) {
             $files = glob($this->path . "/*.log");
@@ -46,24 +43,22 @@ class Logger
         }
     }
 
-    public function debug($message): void
-    {
+    public function debug($message): void {
         if ($this->logger) {
             $this->logger->debug($message);
         }
     }
 
-    public function error($message): void
-    {
+    public function error($message): void {
         if ($this->logger) {
             $this->logger->error($message);
         }
     }
 
-    public function info($message): void
-    {
+    public function info($message): void {
         if ($this->logger) {
             $this->logger->info($message);
         }
     }
+
 }

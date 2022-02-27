@@ -7,16 +7,14 @@ use UliCMS\Constants\ModuleEventConstants;
 
 // old permission check class
 // please use PermissionChecker instead
-class ACL
-{
-    public function hasPermission(string $name): bool
-    {
+class ACL {
+
+    public function hasPermission(string $name): bool {
         $checker = new PermissionChecker(get_user_id());
         return $checker->hasPermission($name);
     }
 
-    public function createGroup(string $name, ?array $permissions = null): int
-    {
+    public function createGroup(string $name, ?array $permissions = null): int {
         $permissionData = is_null($permissions) ? $this->getDefaultACL() : json_encode($permissions);
 
         $sql = "INSERT INTO `" . tbname("groups") .
@@ -32,9 +30,9 @@ class ACL
     }
 
     public function updateGroup(
-        int $id,
-        string $name,
-        ?array $permissions = null
+            int $id,
+            string $name,
+            ?array $permissions = null
     ): int {
         $permissionData = is_null($permissions) ? $this->getDefaultACL() : json_encode($permissions);
 
@@ -47,8 +45,7 @@ class ACL
         return $id;
     }
 
-    public function deleteGroup(int $id, ?int $move_users_to = null)
-    {
+    public function deleteGroup(int $id, ?int $move_users_to = null) {
         $id = intval($id);
 
         if (is_null($move_users_to)) {
@@ -66,8 +63,7 @@ class ACL
         db_query($deleteGroupSQL);
     }
 
-    public function getPermissionQueryResult(?int $id = null): ?array
-    {
+    public function getPermissionQueryResult(?int $id = null): ?array {
         $group_id = null;
         if ($id) {
             $group_id = $id;
@@ -91,8 +87,7 @@ class ACL
         return $dataset;
     }
 
-    public function getAllGroups(string $order = 'id DESC'): array
-    {
+    public function getAllGroups(string $order = 'id DESC'): array {
         $list = [];
         $sql = "SELECT * FROM `" . tbname("groups") . "` ORDER by " . $order;
         $result = db_query($sql);
@@ -104,8 +99,8 @@ class ACL
 
     // initializes a json object with default permissions
     public function getDefaultACLAsJSON(
-        bool $admin = false,
-        bool $plain = false
+            bool $admin = false,
+            bool $plain = false
     ) {
         $acl_data = [];
 
@@ -144,8 +139,8 @@ class ACL
         return $json;
     }
 
-    public function getDefaultACL(bool $admin = false, bool $plain = false)
-    {
+    public function getDefaultACL(bool $admin = false, bool $plain = false) {
         return $this->getDefaultACLAsJSON($admin, $plain);
     }
+
 }

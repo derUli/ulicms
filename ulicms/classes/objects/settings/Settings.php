@@ -5,17 +5,16 @@ declare(strict_types=1);
 use UliCMS\Constants\AuditLog;
 
 // class for handling system settings
-class Settings
-{
-    public static function register(string $key, $value, $type = 'str'): void
-    {
+class Settings {
+
+    public static function register(string $key, $value, $type = 'str'): void {
         self::init($key, $value, $type);
     }
 
     public static function init(
-        string $key,
-        $value,
-        ?string $type = 'str'
+            string $key,
+            $value,
+            ?string $type = 'str'
     ): bool {
         if (!self::get($key)) {
             self::set($key, $value, $type);
@@ -27,14 +26,14 @@ class Settings
 
     // get a config variable
     public static function get(
-        string $key,
-        ?string $type = 'str'
+            string $key,
+            ?string $type = 'str'
     ) {
-        
+
         if (SettingsCache::get($key)) {
             return SettingsCache::get($key);
         }
-        
+
         $escapedKey = db_escape($key);
         $result = db_query("SELECT value FROM " . tbname("settings") .
                 " WHERE name='$escapedKey'");
@@ -50,9 +49,9 @@ class Settings
     }
 
     public static function getLanguageSetting(
-        string $name,
-        ?string $language = null,
-        ?string $type = 'str'
+            string $name,
+            ?string $language = null,
+            ?string $type = 'str'
     ) {
         $retval = false;
         $settingsName = $language ? "{$name}_{$language}" : $name;
@@ -67,17 +66,17 @@ class Settings
     }
 
     public static function getLang(
-        string $name,
-        ?string $language = null,
-        ?string $type = 'str'
+            string $name,
+            ?string $language = null,
+            ?string $type = 'str'
     ) {
         return self::getLanguageSetting($name, $language, $type);
     }
 
     public static function setLanguageSetting(
-        string $name,
-        $value,
-        ?string $language = null
+            string $name,
+            $value,
+            ?string $language = null
     ): void {
         $settingsName = $language ? "{$name}_{$language}" : $name;
 
@@ -90,9 +89,9 @@ class Settings
 
     // Set a configuration Variable;
     public static function set(
-        string $key,
-        $value,
-        ?string $type = 'str'
+            string $key,
+            $value,
+            ?string $type = 'str'
     ): void {
         $key = db_escape($key);
         $originalValue = self::convertVar($value, $type);
@@ -126,16 +125,14 @@ class Settings
     }
 
     // Remove an configuration variable
-    public static function delete(string $key): bool
-    {
+    public static function delete(string $key): bool {
         $key = db_escape($key);
         db_query("DELETE FROM " . tbname("settings") . " WHERE name='$key'");
         SettingsCache::set($key, null);
         return db_affected_rows() > 0;
     }
 
-    public static function convertVar($value, ?string $type)
-    {
+    public static function convertVar($value, ?string $type) {
         switch ($type) {
             case 'str':
                 $value = strval($value);
@@ -160,8 +157,7 @@ class Settings
         return $value;
     }
 
-    public static function getAll(string $order = "name"): array
-    {
+    public static function getAll(string $order = "name"): array {
         $datasets = [];
         $result = Database::query("SELECT * FROM `{prefix}settings` "
                         . "order by $order", true);
@@ -176,8 +172,7 @@ class Settings
     // example mapping string
     // foo=>bar
     // hello=>world
-    public static function mappingStringToArray(string $str): array
-    {
+    public static function mappingStringToArray(string $str): array {
         $str = trim($str);
         $str = normalizeLN($str, "\n");
         $lines = explode("\n", $str);
@@ -190,11 +185,11 @@ class Settings
                 continue;
             }
             $splitted = explode("=>", $line);
-            
+
             if (count($splitted) < 2) {
                 continue;
             }
-            
+
             $splitted = array_map('trim', $splitted);
             $key = $splitted[0];
             $value = $splitted[1];
@@ -202,4 +197,5 @@ class Settings
         }
         return $result;
     }
+
 }

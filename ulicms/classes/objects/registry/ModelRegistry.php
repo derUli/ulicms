@@ -5,12 +5,10 @@ declare(strict_types=1);
 use UliCMS\Exceptions\FileNotFoundException;
 
 // loads model files of modules
-class ModelRegistry
-{
+class ModelRegistry {
 
     // TODO: refactor this and split int into multiple method s
-    public static function loadModuleModels(): void
-    {
+    public static function loadModuleModels(): void {
         if (!defined("RESPONSIVE_FM")) {
             $modelRegistry = [];
             $modules = getAllModules();
@@ -37,9 +35,10 @@ class ModelRegistry
                     require $value;
                 } else {
                     throw new FileNotFoundException("Module {$module}: "
-                            . "File '{$value}' not found.");
+                                    . "File '{$value}' not found.");
                 }
             }
         }
     }
+
 }

@@ -4,10 +4,9 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\PHPMailer;
 use UliCMS\Constants\EmailModes;
 
-class Mailer
-{
-    public static function splitHeaders(string $headers): array
-    {
+class Mailer {
+
+    public static function splitHeaders(string $headers): array {
         $header_array = [];
         $lines = normalizeLN($headers, "\n");
         $lines = explode("\n", $lines);
@@ -23,10 +22,10 @@ class Mailer
     }
 
     public static function send(
-        string $to,
-        string $subject,
-        string $message,
-        string $headers = ""
+            string $to,
+            string $subject,
+            string $message,
+            string $headers = ""
     ): bool {
         $mode = Settings::get("email_mode") ?
                 Settings::get("email_mode") : EmailModes::INTERNAL;
@@ -41,16 +40,15 @@ class Mailer
         db_query($insert_sql);
 
         return self::sendWithPHPMailer(
-            $to,
-            $subject,
-            $message,
-            $headers,
-            $mode
+                        $to,
+                        $subject,
+                        $message,
+                        $headers,
+                        $mode
         );
     }
 
-    public static function getMailLogger(): Closure
-    {
+    public static function getMailLogger(): Closure {
         return function ($str, $level) {
             $logger = LoggerRegistry::get("phpmailer_log");
             if ($logger) {
@@ -59,8 +57,7 @@ class Mailer
         };
     }
 
-    protected static function setPHPMailerAttributes(PHPMailer $mailer): PHPMailer
-    {
+    protected static function setPHPMailerAttributes(PHPMailer $mailer): PHPMailer {
         $mailer->SMTPSecure = Settings::get("smtp_encryption");
 
         // disable verification of ssl certificates
@@ -92,19 +89,19 @@ class Mailer
     }
 
     public static function getPHPMailer(
-        string $mode = EmailModes::INTERNAL
+            string $mode = EmailModes::INTERNAL
     ): ?PHPMailer {
         $mailer = new PHPMailer();
         $mailer->SMTPDebug = SMTP::DEBUG_CONNECTION;
 
         $mailer->Debugoutput = self::getMailLogger();
-        
+
         // If we use SMTP setup PHPMailer with a SMTP connection
         // else PHPMailer will use the mail() function of PHP.
         if ($mode == EmailModes::PHPMAILER) {
             $mailer = self::setPHPMailerAttributes($mailer);
         }
-        
+
         $mailer->XMailer = Settings::get("show_meta_generator") ? "UliCMS" : "";
         $mailer->CharSet = "UTF-8";
         $mailer->Encoding = "quoted-printable";
@@ -114,11 +111,11 @@ class Mailer
     }
 
     public static function sendWithPHPMailer(
-        string $to,
-        string $subject,
-        string $message,
-        string $headers = "",
-        string $mode = EmailModes::INTERNAL
+            string $to,
+            string $subject,
+            string $message,
+            string $headers = "",
+            string $mode = EmailModes::INTERNAL
     ): bool {
         $headers = self::splitHeaders($headers);
         $headersLower = array_change_key_case($headers, CASE_LOWER);
@@ -138,11 +135,11 @@ class Mailer
         $mailer->addAddress($to);
         $mailer->Subject = $subject;
         $mailer->isHTML(
-            isset(
+                isset(
                         $headersLower["content-type"])
                 and startsWith(
-                    $headersLower["content-type"],
-                    "text/html"
+                        $headersLower["content-type"],
+                        "text/html"
                 )
         );
         $mailer->Body = $message;
@@ -150,4 +147,5 @@ class Mailer
         $mailer = apply_filter($mailer, "php_mailer_send");
         return $mailer->send();
     }
+
 }

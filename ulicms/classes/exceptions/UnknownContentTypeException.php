@@ -4,6 +4,6 @@ namespace UliCMS\Exceptions;
 
 use Exception;
 
-class UnknownContentTypeException extends Exception
-{
+class UnknownContentTypeException extends Exception {
+    
 }

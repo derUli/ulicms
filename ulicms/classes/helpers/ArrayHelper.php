@@ -7,14 +7,13 @@ namespace UliCMS\Helpers;
 use Helper;
 use Exception;
 
-class ArrayHelper extends Helper
-{
+class ArrayHelper extends Helper {
 
     // inserts an item before an index to an array
     public static function insertBefore(
-        array $input,
-        int $index,
-        $element
+            array $input,
+            int $index,
+            $element
     ): array {
         if (!array_key_exists($index, $input)) {
             throw new Exception("Index not found");
@@ -35,9 +34,9 @@ class ArrayHelper extends Helper
 
     // inserts an item after an index to an array
     public static function insertAfter(
-        array $input,
-        int $index,
-        $element
+            array $input,
+            int $index,
+            $element
     ): array {
         if (!array_key_exists($index, $input)) {
             throw new Exception("Index not found");
@@ -57,8 +56,7 @@ class ArrayHelper extends Helper
     }
 
     // returns the first x items of an array
-    public static function take(int $count, $data)
-    {
+    public static function take(int $count, $data) {
         if (is_array($data)) {
             return array_slice($data, 0, $count);
         } elseif (is_string($data)) {
@@ -68,15 +66,13 @@ class ArrayHelper extends Helper
     }
 
     // returns true if an array contains only one item
-    public static function isSingle(array $input): bool
-    {
+    public static function isSingle(array $input): bool {
         return count($input) == 1;
     }
 
     // returns the array item if the array contains only one item
     // else returns null
-    public static function getSingle(array $input)
-    {
+    public static function getSingle(array $input) {
         if (self::isSingle($input)) {
             return $input[0];
         }
@@ -84,8 +80,7 @@ class ArrayHelper extends Helper
     }
 
     // flatten a nested array structure to one layer
-    public static function flatten($input): array
-    {
+    public static function flatten($input): array {
         if (!is_array($input)) {
             // nothing to do if it's not an array
             return [$input];
@@ -100,23 +95,21 @@ class ArrayHelper extends Helper
         return $result;
     }
 
-    public static function getValueOrDefault(?array $input, $key, $default)
-    {
+    public static function getValueOrDefault(?array $input, $key, $default) {
         if (!$input) {
             return $default;
         }
 
         return isset($input[$key]) ? $input[$key] : $default;
     }
-    
-    public static function hasMultipleKeys(?array $input, array $keys): bool
-    {
+
+    public static function hasMultipleKeys(?array $input, array $keys): bool {
         if (!$input) {
             return false;
         }
-            
+
         $hasKeys = true;
-            
+
         foreach ($keys as $key) {
             if (!array_key_exists($key, $input)) {
                 $hasKeys = false;
@@ -124,4 +117,5 @@ class ArrayHelper extends Helper
         }
         return $hasKeys;
     }
+
 }

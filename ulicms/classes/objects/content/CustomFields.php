@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 // This class contains methods to manipulate CustomFields
 // defined by modules
-class CustomFields
-{
+class CustomFields {
+
     public static function set(
-        string $name,
-        $value,
-        ?int $content_id = null,
-        $addPrefix = false
+            string $name,
+            $value,
+            ?int $content_id = null,
+            $addPrefix = false
     ): ?bool {
         if (is_null($content_id)) {
             $content_id = get_ID();
@@ -69,8 +69,8 @@ class CustomFields
     }
 
     public static function getAll(
-        ?int $content_id = null,
-        bool $removePrefix = true
+            ?int $content_id = null,
+            bool $removePrefix = true
     ): array {
         $fields = [];
         if (is_null($content_id)) {
@@ -100,9 +100,9 @@ class CustomFields
     }
 
     public static function get(
-        string $name,
-        ?int $content_id = null,
-        $addPrefix = true
+            string $name,
+            ?int $content_id = null,
+            $addPrefix = true
     ) {
         if (is_null($content_id)) {
             $content_id = get_ID();
@@ -134,4 +134,5 @@ class CustomFields
         }
         return null;
     }
+
 }

@@ -9,25 +9,22 @@ use User;
 use Group;
 
 // permission checks for read, write and delete content permissions
-class ContentPermissionChecker implements IDatasetPermissionChecker
-{
+class ContentPermissionChecker implements IDatasetPermissionChecker {
+
     private $user_id;
 
-    public function __construct(int $user_id)
-    {
+    public function __construct(int $user_id) {
         $this->user_id = $user_id;
     }
 
-    public function canRead(int $contentId): bool
-    {
+    public function canRead(int $contentId): bool {
         $content = ContentFactory::getByID($contentId);
         $access = $content->checkAccess($content);
 
         return !is_null($access);
     }
 
-    public function canWrite(int $contentId): bool
-    {
+    public function canWrite(int $contentId): bool {
         $content = ContentFactory::getByID($contentId);
         $permissions = $content->getPermissions();
 
@@ -88,8 +85,8 @@ class ContentPermissionChecker implements IDatasetPermissionChecker
         return $canEditThis;
     }
 
-    public function canDelete($contentId): bool
-    {
+    public function canDelete($contentId): bool {
         return $this->canWrite($contentId);
     }
+
 }

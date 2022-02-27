@@ -9,13 +9,13 @@ use ModuleHelper;
 
 // This class contains helper methods to build Bootstrap buttons
 // see https://getbootstrap.com/docs/3.3/components/
-class Button
-{
+class Button {
+
     public static function button(
-        string $text,
-        string $type = ButtonType::BUTTON_SUBMIT,
-        array $htmlAttributes = [],
-        bool $allowHtml = false
+            string $text,
+            string $type = ButtonType::BUTTON_SUBMIT,
+            array $htmlAttributes = [],
+            bool $allowHtml = false
     ): string {
         if (!$allowHtml) {
             $text = _esc($text);
@@ -27,16 +27,16 @@ class Button
         }
 
         $attributesHtml = ModuleHelper::buildHTMLAttributesFromArray(
-            $htmlAttributes
+                        $htmlAttributes
         );
         return "<button {$attributesHtml}>{$text}</button>";
     }
 
     public static function default(
-        string $text,
-        string $type = ButtonType::BUTTON_SUBMIT,
-        array $htmlAttributes = [],
-        bool $allowHtml = false
+            string $text,
+            string $type = ButtonType::BUTTON_SUBMIT,
+            array $htmlAttributes = [],
+            bool $allowHtml = false
     ): string {
         if (!isset($htmlAttributes["class"])) {
             $htmlAttributes["class"] = ButtonType::TYPE_DEFAULT;
@@ -46,10 +46,10 @@ class Button
     }
 
     public static function primary(
-        string $text,
-        string $type = ButtonType::BUTTON_SUBMIT,
-        array $htmlAttributes = [],
-        bool $allowHtml = false
+            string $text,
+            string $type = ButtonType::BUTTON_SUBMIT,
+            array $htmlAttributes = [],
+            bool $allowHtml = false
     ): string {
         if (!isset($htmlAttributes["class"])) {
             $htmlAttributes["class"] = ButtonType::TYPE_PRIMARY;
@@ -59,10 +59,10 @@ class Button
     }
 
     public static function success(
-        string $text,
-        string $type = ButtonType::BUTTON_SUBMIT,
-        array $htmlAttributes = [],
-        bool $allowHtml = false
+            string $text,
+            string $type = ButtonType::BUTTON_SUBMIT,
+            array $htmlAttributes = [],
+            bool $allowHtml = false
     ) {
         if (!isset($htmlAttributes["class"])) {
             $htmlAttributes["class"] = ButtonType::TYPE_SUCCESS;
@@ -72,10 +72,10 @@ class Button
     }
 
     public static function info(
-        string $text,
-        string $type = ButtonType::BUTTON_SUBMIT,
-        array $htmlAttributes = [],
-        bool $allowHtml = false
+            string $text,
+            string $type = ButtonType::BUTTON_SUBMIT,
+            array $htmlAttributes = [],
+            bool $allowHtml = false
     ): string {
         if (!isset($htmlAttributes["class"])) {
             $htmlAttributes["class"] = ButtonType::TYPE_INFO;
@@ -85,10 +85,10 @@ class Button
     }
 
     public static function warning(
-        string $text,
-        string $type = ButtonType::BUTTON_SUBMIT,
-        array $htmlAttributes = [],
-        bool $allowHtml = false
+            string $text,
+            string $type = ButtonType::BUTTON_SUBMIT,
+            array $htmlAttributes = [],
+            bool $allowHtml = false
     ): string {
         if (!isset($htmlAttributes["class"])) {
             $htmlAttributes["class"] = ButtonType::TYPE_WARNING;
@@ -98,10 +98,10 @@ class Button
     }
 
     public static function danger(
-        string $text,
-        string $type = ButtonType::BUTTON_SUBMIT,
-        array $htmlAttributes = [],
-        bool $allowHtml = false
+            string $text,
+            string $type = ButtonType::BUTTON_SUBMIT,
+            array $htmlAttributes = [],
+            bool $allowHtml = false
     ): string {
         if (!isset($htmlAttributes["class"])) {
             $htmlAttributes["class"] = ButtonType::TYPE_DANGER;
@@ -111,10 +111,10 @@ class Button
     }
 
     public static function link(
-        string $text,
-        string $type = ButtonType::BUTTON_SUBMIT,
-        array $htmlAttributes = [],
-        bool $allowHtml = false
+            string $text,
+            string $type = ButtonType::BUTTON_SUBMIT,
+            array $htmlAttributes = [],
+            bool $allowHtml = false
     ): string {
         if (!isset($htmlAttributes["class"])) {
             $htmlAttributes["class"] = ButtonType::TYPE_LINK;
@@ -122,4 +122,5 @@ class Button
 
         return self::button($text, $type, $htmlAttributes, $allowHtml);
     }
+
 }
