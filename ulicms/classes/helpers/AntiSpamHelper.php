@@ -48,7 +48,11 @@ class AntiSpamHelper extends Helper {
         return false;
     }
 
-    // returns true if a string contains chinese chars
+    /**
+     * Checks if a string contains chinese chars
+     * @param string|null $str Input String
+     * @return bool
+     */
     public static function isChinese(?string $str): bool {
         if (!$str) {
             return false;
@@ -57,7 +61,11 @@ class AntiSpamHelper extends Helper {
         return (bool) preg_match("/\p{Han}+/u", $str);
     }
 
-    // returns true if a string contains cyrillic chars
+    /**
+     * Checks if a string contains cyrillic chars
+     * @param string|null $str Input String
+     * @return bool
+     */
     public static function isCyrillic(?string $str): bool {
         if (!$str) {
             return false;
@@ -66,8 +74,12 @@ class AntiSpamHelper extends Helper {
         return (bool) preg_match('/\p{Cyrillic}+/u', $str);
     }
 
-    // returns true if a string contains chars in
-    // right to left languages such as arabic
+    /**
+     * returns true if a string contains chars in
+     * right to left languages such as arabic
+     * @param string|null $str Input String
+     * @return bool
+     */
     public static function isRtl(?string $str): bool {
         if (!$str) {
             return false;
@@ -110,13 +122,21 @@ class AntiSpamHelper extends Helper {
         return null;
     }
 
-    // returns true if the spamfilter is enabled
+    /**
+     * Checks if the spam filter is enabled
+     * @return bool
+     */
     public static function isSpamFilterEnabled(): bool {
-        return Settings::get("spamfilter_enabled") == "yes";
+        return Settings::get("spamfilter_enabled") === "yes";
     }
 
-    // returns true if this is a bot, based on a static useragent list
+    /**
+     * Checks if this UserAgent is a bot based on a static list
+     * @param string|null $useragent Useragent
+     * @return bool
+     */
     public static function checkForBot(?string $useragent = null): bool {
+        // If UserAgent is null then use the current user agent
         if (!$useragent and isset($_SERVER['HTTP_USER_AGENT'])) {
             $useragent = $_SERVER['HTTP_USER_AGENT'];
         }
