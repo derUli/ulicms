@@ -7,10 +7,9 @@ declare(strict_types=1);
  * @global type $sizes
  * @return array
  */
-function getFontSizes(): array
-{
+function getFontSizes(): array {
     $sizes = [];
-    for ($i = 6; $i <= 80; $i ++) {
+    for ($i = 6; $i <= 80; $i++) {
         $sizes[] = $i . "px";
     }
     do_event("custom_font_sizes");
@@ -25,8 +24,7 @@ function getFontSizes(): array
  * @param string $attrib Attribute
  * @return type if $attrib is not null the value of a specific attribute, else an array
  */
-function getThemeMeta(string $theme, string $attrib = null)
-{
+function getThemeMeta(string $theme, string $attrib = null) {
     $retval = null;
     $metadata_file = getTemplateDirPath($theme, true) . "metadata.json";
     if (file_exists($metadata_file)) {

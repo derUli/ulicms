@@ -294,16 +294,6 @@ function rename_file($old_path, $name, $ftp = null, $config = null)
     }
 }
 
-
-function url_exists($url)
-{
-    if (!$fp = curl_init($url)) {
-        return false;
-    }
-    return true;
-}
-
-
 function tempdir()
 {
     $tempfile=tempnam(sys_get_temp_dir(), '');

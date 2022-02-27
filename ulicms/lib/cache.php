@@ -8,8 +8,7 @@ use UliCMS\Utils\CacheUtil;
  * Leert alle Caches
  * @return void
  */
-function clearCache(): void
-{
+function clearCache(): void {
     CacheUtil::clearCache();
 }
 
@@ -19,8 +18,7 @@ function clearCache(): void
  * den Einstellungen für diese Session deaktiviert
  * @return void
  */
-function no_cache(bool $do = false): void
-{
+function no_cache(bool $do = false): void {
     if ($do) {
         Flags::setNoCache(true);
     } elseif (get_cache_control() == "auto"

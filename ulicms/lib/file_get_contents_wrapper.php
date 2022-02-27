@@ -107,15 +107,11 @@ function curl_url_exists(string $url): bool {
     return $http_code >= 200 && $http_code < 400;
 }
 
-if (!defined("RESPONSIVE_FM")) {
-
-    /**
-     * Check if an URL exists
-     * @param string $url URL
-     * @return bool True if http status is in 2xx or 3xx range
-     */
-    function url_exists(string $url): bool {
-        return curl_url_exists($url);
-    }
-
+/**
+ * Check if an URL exists
+ * @param string $url URL
+ * @return bool True if http status is in 2xx or 3xx range
+ */
+function url_exists(string $url): bool {
+    return curl_url_exists($url);
 }
