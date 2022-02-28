@@ -6,8 +6,12 @@ namespace UliCMS\Helpers;
 
 class UrlHelper extends \Helper {
 
-    // this method removes the get parameters string from $url
-    // and returns the url without get parameters
+    /**
+     * Removes the get parameters string from $url
+     * and returns the url without get parameters
+     * @param string $url
+     * @return string
+     */
     public static function getUrlWithoutGetParameters(string $url): string {
         $parsedUri = parse_url($url);
         $hostWithPort = $parsedUri["host"];
