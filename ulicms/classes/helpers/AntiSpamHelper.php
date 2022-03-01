@@ -4,9 +4,13 @@ declare(strict_types=1);
 
 class AntiSpamHelper extends Helper {
 
-    // checking if this Country is blocked by spamfilter
-    // blocking works by the domain extension of the client's
-    // hostname
+    /**
+     * Checks if an IPs hostname country is blocked by spamfilter
+     * blocking works by the domain extension of the client's hostname
+     * @param string|null $ip IP address
+     * @param array|null $country_blacklist List of allowed country TLDs
+     * @return bool
+     */
     public static function isCountryBlocked(
             ?string $ip = null,
             ?array $country_blacklist = null
@@ -17,6 +21,7 @@ class AntiSpamHelper extends Helper {
         if (is_null($country_blacklist)) {
             $country_blacklist = Settings::get("country_blacklist");
         }
+        
         if (is_string($country_blacklist)) {
             $country_blacklist = strtolower($country_blacklist);
             $country_blacklist = explode(",", $country_blacklist);
