@@ -21,7 +21,7 @@ class AntiSpamHelper extends Helper {
         if (is_null($country_blacklist)) {
             $country_blacklist = Settings::get("country_blacklist");
         }
-        
+
         if (is_string($country_blacklist)) {
             $country_blacklist = strtolower($country_blacklist);
             $country_blacklist = explode(",", $country_blacklist);
@@ -197,12 +197,15 @@ class AntiSpamHelper extends Helper {
         return false;
     }
 
-    // This function checks if the domain of an email address has a mx nds entry
-    // if it is invalid there is a high chance, that this is not valid
-    // email address
-    // please note that this function returns also true if
-    // you send an email to a nonexisting user on a valid domain.
-    // Use this function with care
+    /**
+     * This function checks if the domain of an email address has a mx nds entry
+     * if it is invalid there is a high chance, that this is not valid email address
+     * please note that this function returns also true if you send an email
+     * to a nonexisting user on a valid domain.
+     * Use this function with care
+     * @param string $email Mail Address
+     * @return bool
+     */
     public static function checkMailDomain(string $email): bool {
         $domain = strstr($email, '@');
         $domain = remove_prefix($domain, "@");
