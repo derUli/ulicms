@@ -4,17 +4,24 @@ declare(strict_types=1);
 
 use UliCMS\HTML\Script;
 
+/**
+ * Helper methods for admin backend area
+ */
 class BackendHelper extends Helper {
 
     /**
-     * Returns the current backend action or "home" if not specified
+     * Returns the current action or "home" if not specified
      * @return string
      */
     public static function getAction(): string {
         return isset($_REQUEST["action"]) ? $_REQUEST["action"] : "home";
     }
 
-    // set backend action parameter
+    /**
+     * Set action
+     * @param string $action
+     * @return void
+     */
     public static function setAction(string $action): void {
         $_REQUEST["action"] = $action;
         if (Request::isPost()) {
@@ -24,13 +31,14 @@ class BackendHelper extends Helper {
         }
     }
 
-    // add html editor scripts to the script queue
+    /**
+     * Add html editor scripts to the script queue
+     * @return void
+     */
     public static function enqueueEditorScripts(): void {
         // ckeditor is huge so embed it only if this is the user'S preferred html editor
         if (get_html_editor() == "ckeditor") {
-
             echo Script::fromFile("ckeditor/ckeditor.js");
-
             enqueueScriptFile(ModuleHelper::buildRessourcePath(
                             "core_content",
                             "js/pages/init-ckeditor.js"
@@ -62,6 +70,10 @@ class BackendHelper extends Helper {
         ));
     }
 
+    /**
+     * Get list of installed CKEditor skin
+     * @return array
+     */
     public static function getCKEditorSkins(): array {
         $skins = [];
         $dir = Path::resolve("ULICMS_ROOT/admin/ckeditor/skins");
