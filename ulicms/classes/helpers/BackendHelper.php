@@ -6,7 +6,10 @@ use UliCMS\HTML\Script;
 
 class BackendHelper extends Helper {
 
-    // returns the current backend action or "home" if not specified
+    /**
+     * Returns the current backend action or "home" if not specified
+     * @return string
+     */
     public static function getAction(): string {
         return isset($_REQUEST["action"]) ? $_REQUEST["action"] : "home";
     }
