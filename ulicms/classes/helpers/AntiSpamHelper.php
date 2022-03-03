@@ -2,6 +2,9 @@
 
 declare(strict_types=1);
 
+/**
+ * Utils for fighting comment spam
+ */
 class AntiSpamHelper extends Helper {
 
     /**

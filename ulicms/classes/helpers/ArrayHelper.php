@@ -9,7 +9,14 @@ use Exception;
 
 class ArrayHelper extends Helper {
 
-    // inserts an item before an index to an array
+    /**
+     * Inserts an item before an index to an array
+     * @param array $input
+     * @param int $index
+     * @param type $element
+     * @return array
+     * @throws Exception
+     */
     public static function insertBefore(
             array $input,
             int $index,
