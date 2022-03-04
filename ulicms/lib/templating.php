@@ -32,34 +32,32 @@ function get_og_tags(?string $slug = null): string {
     $html = "";
     if (is_200()) {
         $og_data = get_og_data($slug);
-        $og_title = $og_data["og_title"];
-        $og_image = $og_data["og_image"];
-        $og_description = $og_data["og_description"];
+        $og_title = get_headline();
+        $og_description = get_meta_description();
         $og_url = getCurrentURL();
 
         // Falls kein og_title für die Seite gesetzt ist,
         // Standardtitel bzw. Headline verwenden
-        if (is_null($og_title) or empty($og_title)) {
-            $og_title = get_headline();
+        if (!empty($og_data["og_title"])) {
+            $og_title = $og_data["og_title"];
         }
 
-        if (is_null($og_image) or empty($og_image)) {
-            $og_image = Settings::get("og_image");
+        $og_image = Settings::get("og_image");
+        
+        if (!empty($og_data["article_image"])) {
+            $og_image = ltrim($og_data["article_image"], "/");
+        }
+
+        if (!empty($og_data["og_image"])) {
+            $og_image = ltrim($og_data["og_image"], "/");
         }
 
         if (!empty($og_image) && !startsWith($og_image, "http")) {
             $og_image = ModuleHelper::getBaseUrl() . ltrim($og_image, "/");
         }
-        $page = get_page($slug);
-        if (empty($og_image) &&
-                !StringHelper::isNullOrWhitespace($page["article_image"])) {
-            $og_image = ltrim($page["article_image"], "/");
-        }
-        if (!empty($og_image) && !startsWith($og_image, "http")) {
-            $og_image = ModuleHelper::getBaseUrl() . ltrim($og_image, "/");
-        }
-        if (is_null($og_description) or empty($og_description)) {
-            $og_description = get_meta_description();
+
+        if (!empty($og_data["og_description"])) {
+            $og_description = $og_data["og_description"];
         }
 
         $og_title = apply_filter($og_title, "og_title");
@@ -89,8 +87,7 @@ function get_og_tags(?string $slug = null): string {
         }
 
         if ($og_image) {
-            $html .= '<meta property="og:image" content="'
-                    . _esc($og_image) . '" />';
+            $html .= '<meta property="og:image" content="' . _esc($og_image) . '" />';
         }
 
         $html .= '<meta property="og:site_name" content="'
@@ -108,7 +105,7 @@ function get_og_data($slug = ""): ?array {
 
     $data = null;
 
-    $result = db_query("SELECT og_title, og_image, og_description FROM " .
+    $result = db_query("SELECT og_title, og_image, og_description, article_image FROM " .
             tbname("content") . " WHERE slug='" . db_escape($slug) .
             "' AND language='" . db_escape(getFrontendLanguage()) . "'");
     if (db_num_rows($result) > 0) {

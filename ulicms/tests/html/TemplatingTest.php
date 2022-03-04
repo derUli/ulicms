@@ -201,7 +201,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("de", $_SESSION["language"]);
     }
 
-    public function testGetMenu()
+    public function testGetMenuTopReturnsNone()
     {
         $_SESSION["language"] = 'en';
         $html = get_menu("top", null, false);
@@ -222,6 +222,12 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
             $this->assertStringNotContainsString($page->title . ".html", $html);
         }
     }
+    
+    
+    public function testGetMenuReturnsEmpty(){
+        $this->assertEmpty(get_menu("top", PHP_INT_MAX));
+    }
+    
 
     public function testMenu()
     {
@@ -542,6 +548,30 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
 
     public function testOgTags()
     {
+        $article = new Article();
+        $article->title = "Unit Test Article";
+        $article->slug = "unit-test-" . uniqid();
+        $article->menu = "none";
+        $article->language = "de";
+        $article->article_date = 1413821696;
+        $article->author_id = 1;
+        $article->group_id = 1;
+
+        $article->article_author_name = 'Lara Croft';
+        $article->article_author_email = 'lara@croft.com';
+        $article->article_date = mktime(4, 20, 15, 4, 1, 2019);
+        $article->excerpt = "Das ist der Ausschnitt";
+
+        $article->og_title = 'Open Graph Titel';
+        $article->og_description = "Open Graph Beschreibung";
+
+        $article->og_image = "/content/images/grafik.jpg";
+        $article->article_image = "/content/images/grafik.jpg";
+        $article->save();
+
+        $_GET["slug"] = $article->slug;
+        $_SESSION["language"] = "de";
+        
         ob_start();
         og_tags();
         $html = ob_get_clean();
@@ -684,6 +714,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         $article->og_description = "Open Graph Beschreibung";
 
         $article->og_image = "/content/images/grafik.jpg";
+        $article->article_image = "/content/images/grafik.jpg";
         $article->save();
 
         $_GET["slug"] = $article->slug;
