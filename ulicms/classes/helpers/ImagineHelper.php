@@ -6,6 +6,9 @@ use Imagine\Image\AbstractImagine;
 use Imagine\Exception\RuntimeException;
 use UliCMS\Exceptions\NotSupportedException;
 
+/**
+ * We use Imagine for imagine manipulations
+ */
 class ImagineHelper extends Helper {
 
     const ACCEPT_MIMES = 'image/jpeg,image/png,image/gif';
@@ -13,6 +16,10 @@ class ImagineHelper extends Helper {
     const IMAGE_MAGICK = 'imagick';
     const GD = 'imagick';
 
+    /**
+     * Get new ImageMagick Imagine adapter
+     * @return AbstractImagine|null
+     */
     protected static function getImageMagick(): ?AbstractImagine {
         try {
             return new Imagine\Imagick\Imagine();
@@ -21,6 +28,10 @@ class ImagineHelper extends Helper {
         }
     }
 
+    /**
+     * Get new Gmagick Imagine adapter
+     * @return AbstractImagine|null
+     */
     protected static function getGraphicsMagicks(): ?AbstractImagine {
         try {
             return new Imagine\Gmagick\Imagine();
@@ -29,6 +40,10 @@ class ImagineHelper extends Helper {
         }
     }
 
+    /**
+     * Get new GD Imagine adapter
+     * @return AbstractImagine|null
+     */
     protected static function getGD(): ?AbstractImagine {
         try {
             return new Imagine\Gd\Imagine();
@@ -37,6 +52,10 @@ class ImagineHelper extends Helper {
         }
     }
 
+    /**
+     * Get Image Adapter with first available adapter
+     * @return AbstractImagine|null
+     */
     public static function getImagine(): ?AbstractImagine {
         $imagine = self::getImageMagick();
 
@@ -58,6 +77,10 @@ class ImagineHelper extends Helper {
         return $imagine;
     }
 
+    /**
+     * Get name of first available adapter
+     * @return string|null
+     */
     public static function getLibraryName(): ?string {
         if (self::getImageMagick()) {
             return self::IMAGE_MAGICK;
