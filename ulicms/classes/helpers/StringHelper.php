@@ -91,7 +91,11 @@ class StringHelper extends Helper {
         return $excerpt;
     }
 
-    // returns true if the string is empty
+    /**
+     * Returns true if the string is empty
+     * @param type $str
+     * @return bool
+     */
     public static function isEmpty($str): bool {
         $str = trim($str);
         return empty($str);
@@ -162,7 +166,7 @@ class StringHelper extends Helper {
         return $lines;
     }
 
-    // reads a file and converts it to an array of lines
+    // Reads a file and converts it to an array of lines
     public static function linesFromFile(
             string $file,
             bool $trim = true,
@@ -182,7 +186,12 @@ class StringHelper extends Helper {
         return $lines;
     }
 
-    // trims all lines of string
+    /**
+     * Trims all lines of string
+     * @param string $str input string
+     * @param string $newline Line Breaks
+     * @return string processed string
+     */
     public static function trimLines(
             string $str,
             string $newline = PHP_EOL
@@ -192,12 +201,20 @@ class StringHelper extends Helper {
         return $str;
     }
 
-    // returns true if this string is all upper case
+    /**
+     * Check if a string is all upper case
+     * @param string $val input string
+     * @return bool result
+     */
     public static function isUpperCase(string $val): bool {
         return strtoupper($val) === $val;
     }
 
-    // returns true if this string is all lower case
+    /**
+     * Check if a string is all lower case
+     * @param string $val input string
+     * @return bool result
+     */
     public static function isLowerCase(string $val): bool {
         return strtolower($val) === $val;
     }
