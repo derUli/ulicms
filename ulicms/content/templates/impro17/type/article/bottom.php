@@ -12,12 +12,6 @@
             ));
         }
         ?></p>
-<?php } ?>
-<?php if (StringHelper::isNotNullOrEmpty(get_meta_keywords())) { ?>
-    <p class="tags">
-        <strong><?php translate("tags") ?>:</strong> <br />
-        <?php Template::escape(get_meta_keywords()); ?>
-    </p>
-<?php } ?>
-<?php
+<?php } 
+
 require_once getTemplateDirPath(get_theme()) . "/bottom.php";

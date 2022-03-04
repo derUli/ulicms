@@ -47,14 +47,22 @@ class StringHelper extends Helper {
         return $slugify->slugify($string, $separator);
     }
 
-    // encode strings to prevent XSS
+    /**
+     * Encode strings to prevent XSS
+     * @param string $string Input
+     * @return string Output
+     */
     public static function realHtmlSpecialchars(
             string $string
     ): string {
         return _esc($string);
     }
 
-    // replace urls with clickable html links
+    /**
+     * Replace urls with clickable html links
+     * @param string $text Input
+     * @return string Output
+     */
     public static function makeLinksClickable(string $text): string {
         return preg_replace(
                 '!(((f|ht)tp(s)?://)[-a-zA-Zа-яА-Я()0-9@:%_+.~#?&;//=]+)!i',
@@ -101,13 +109,20 @@ class StringHelper extends Helper {
         return empty($str);
     }
 
+    /**
+     * Decode html entities
+     * @param string $str Input
+     * @return string Output
+     */
     public static function decodeHTMLEntities(string $str): string {
         return html_entity_decode($str, ENT_COMPAT, 'UTF-8');
     }
 
-    // Häufigste Wörter in String ermitteln und
-    // als Assoziatives Array zurückgeben.
-    // z.B. für automatisches ausfüllen der Meta-Keywords nutzbar
+    /**
+     * Get most common words
+     * @param string $text Input
+     * @return array Words
+     */
     public static function keywordsFromString(string $text): array {
         $text = normalizeLN($text, "\n");
         $words = [];

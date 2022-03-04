@@ -7,6 +7,7 @@ Neue Features:
 
 Entfernte Features:
 * composer wurde entfernt
+* "Meta Keywords" Features entfernt
 
 ===== Neues in UliCMS 2022.1 =====
 

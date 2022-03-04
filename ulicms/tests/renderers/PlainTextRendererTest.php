@@ -3,13 +3,15 @@
 use UliCMS\Renderers\PlainTextRenderer;
 use UliCMS\Utils\CacheUtil;
 
-class PlainTextRendererTest extends \PHPUnit\Framework\TestCase
-{
+use Spatie\Snapshots\MatchesSnapshots;
+
+class PlainTextRendererTest extends \PHPUnit\Framework\TestCase {
+    use MatchesSnapshots;
+    
     private $cacheDisabledOriginal;
     private $cachePeriodOriginal;
 
-    protected function setUp(): void
-    {
+    protected function setUp(): void {
         require_once getLanguageFilePath("en");
 
         $this->cacheDisabledOriginal = Settings::get("cache_disabled");
@@ -21,8 +23,7 @@ class PlainTextRendererTest extends \PHPUnit\Framework\TestCase
                 . "Chrome/63.0.3239.132 Safari/537.36";
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         CacheUtil::clearPageCache();
         Database::query("delete from {prefix}content where title "
                 . "like 'Unit Test%' or slug like 'unit-test%'", true);
@@ -44,8 +45,7 @@ class PlainTextRendererTest extends \PHPUnit\Framework\TestCase
         Vars::clear();
     }
 
-    public function testRender()
-    {
+    public function testRender() {
         Settings::delete("cache_disabled");
         Settings::set("cache_period", "500");
         CacheUtil::resetAdapater();
@@ -53,21 +53,13 @@ class PlainTextRendererTest extends \PHPUnit\Framework\TestCase
         $_GET["slug"] = "lorem_ipsum";
         $_SESSION["language"] = "de";
 
-        $expected = normalizeLN(
-            file_get_contents(
-                Path::resolve(
-                    "ULICMS_ROOT/tests/fixtures/renderers/plain.txt"
-                )
-            )
-        );
         $renderer = new PlainTextRenderer();
 
-        $this->assertEquals($expected, normalizeLN($renderer->render()));
-        $this->assertEquals($expected, normalizeLN($renderer->render()));
+        $this->assertMatchesTextSnapshot($renderer->render());
+        $this->assertMatchesTextSnapshot($renderer->render());
     }
 
-    public function testRenderWithHeadlineEnabled()
-    {
+    public function testRenderWithHeadlineEnabled() {
         $page = new Page();
         $page->title = "The Headline";
         $page->content = "Content";
@@ -96,8 +88,7 @@ class PlainTextRendererTest extends \PHPUnit\Framework\TestCase
         $this->assertStringContainsString("Content", $output);
     }
 
-    public function testRenderWithHeadlineDisabled()
-    {
+    public function testRenderWithHeadlineDisabled() {
         $page = new Page();
         $page->title = "The Headline";
         $page->content = "Content";
@@ -125,8 +116,7 @@ class PlainTextRendererTest extends \PHPUnit\Framework\TestCase
         $this->assertStringContainsString("Content", $output);
     }
 
-    public function testRenderWithTextPositionBefore()
-    {
+    public function testRenderWithTextPositionBefore() {
         $modulePage = new Module_Page();
         $modulePage->title = "Unit Test Article";
         $modulePage->slug = "unit-test-" . uniqid();
@@ -156,8 +146,7 @@ class PlainTextRendererTest extends \PHPUnit\Framework\TestCase
         $this->assertNotEmpty($output);
     }
 
-    public function testRenderWithTextPositionAfter()
-    {
+    public function testRenderWithTextPositionAfter() {
         $_SERVER["REQUEST_URI"] = "/url-two.txt?param=value&foo=bar";
 
         $modulePage = new Module_Page();
@@ -187,8 +176,7 @@ class PlainTextRendererTest extends \PHPUnit\Framework\TestCase
         $this->assertNotEmpty($output);
     }
 
-    public function testRenderNonExisting()
-    {
+    public function testRenderNonExisting() {
         $_GET["slug"] = 'gibts_nicht';
         $_SESSION["language"] = "de";
 
@@ -197,4 +185,5 @@ class PlainTextRendererTest extends \PHPUnit\Framework\TestCase
         $this->assertStringContainsString("Page not found", $output);
         $this->assertStringContainsString("This page doesn't exist.", $output);
     }
+
 }

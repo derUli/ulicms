@@ -684,14 +684,12 @@ class PageTest extends \PHPUnit\Framework\TestCase
         $page->author_id = 1;
         $page->group_id = 1;
         $page->meta_description = null;
-        $page->meta_keywords = null;
         $page->save();
 
         $this->assertNotNull($page->id);
 
         $page = new Page($page->id);
         $this->assertNull($page->meta_description);
-        $this->assertNull($page->meta_keywords);
         $this->assertNull($page->robots);
     }
 
@@ -706,21 +704,17 @@ class PageTest extends \PHPUnit\Framework\TestCase
         $page->author_id = 1;
         $page->group_id = 1;
         $page->meta_description = 'foo';
-        $page->meta_keywords = 'foo';
 
         $page->save();
         $this->assertEquals("foo", $page->meta_description);
-        $this->assertEquals("foo", $page->meta_keywords);
 
         $page->meta_description = null;
-        $page->meta_keywords = null;
         $page->save();
 
         $this->assertNotNull($page->id);
 
         $page = new Page($page->id);
         $this->assertNull($page->meta_description);
-        $this->assertNull($page->meta_keywords);
     }
 
     public function testCustomDataJsonIsObjectByDefault()
@@ -989,7 +983,6 @@ class PageTest extends \PHPUnit\Framework\TestCase
         $page->group_id = 1;
         $page->approved = 0;
         $page->meta_description = null;
-        $page->meta_keywords = null;
         $page->robots = "noindex, nofollow";
         $page->save();
 
@@ -1016,7 +1009,6 @@ class PageTest extends \PHPUnit\Framework\TestCase
         $page->author_id = 1;
         $page->group_id = 1;
         $page->meta_description = null;
-        $page->meta_keywords = null;
         $page->robots = "noindex, nofollow";
         $page->save();
 
@@ -1037,7 +1029,6 @@ class PageTest extends \PHPUnit\Framework\TestCase
         $page->author_id = 1;
         $page->group_id = 1;
         $page->meta_description = null;
-        $page->meta_keywords = null;
         $page->robots = "noindex, nofollow";
         $page->save();
 

@@ -343,12 +343,6 @@ if ($permissionChecker->hasPermission("pages")
                 </div>
                 <div class="field">
                     <strong class="field-label">
-                        <?php translate("meta_keywords"); ?>
-                    </strong>
-                    <input type="text" name="meta_keywords" value='' maxlength="200" placeholder="<?php translate("comma_separated"); ?>">
-                </div>
-                <div class="field">
-                    <strong class="field-label">
                     <?php translate("robots"); ?>
                     </strong>
     <?php

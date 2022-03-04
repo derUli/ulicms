@@ -39,14 +39,12 @@ class CsvRenderer {
             "Title",
             "Content",
             "Description",
-            "Tags",
             "Author"
         ];
         $data[] = [
             $this->title,
             $this->content,
-            get_meta_description(),
-            get_meta_keywords()
+            get_meta_description()
         ];
         return $data;
     }

@@ -153,7 +153,6 @@ add_translation("EXTERNAL_REDIRECT", "Weiterleitung auf externen Link");
 add_translation("ADDITIONAL_SETTINGS", "Zusätzliche Optionen &gt;&gt;");
 add_translation("MENU_IMAGE", "Menüpunkt als Grafik");
 add_translation("META_DESCRIPTION", "Beschreibung");
-add_translation("META_KEYWORDS", "Tags");
 add_translation("comma_separated", "Kommagetrennt");
 add_translation("COMMENTS", "Kommentare");
 add_translation("OPEN_IN", "Öffnen in");

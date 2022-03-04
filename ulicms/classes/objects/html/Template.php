@@ -381,18 +381,7 @@ class Template {
                 . "href=\"$style_file\"/>";
             }
         }
-        $keywords = get_meta_keywords();
-        if (!$keywords) {
-            $keywords = Settings::get("meta_keywords");
-        }
-        if ($keywords != "" && $keywords != false) {
-            if (!Settings::get("hide_meta_keywords")) {
-                $keywords = apply_filter($keywords, "meta_keywords");
 
-                echo '<meta name="keywords" content="'
-                . _esc($keywords) . '"/>';
-            }
-        }
         $description = get_meta_description() ?
                 get_meta_description() : Settings::get("meta_description");
 

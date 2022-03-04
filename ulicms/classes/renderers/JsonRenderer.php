@@ -41,7 +41,6 @@ class JsonRenderer {
         $data->title = $this->title;
         $data->content = $this->content;
         $data->meta_description = get_meta_description();
-        $data->meta_keywords = get_meta_keywords();
 
         try {
             $page = ContentFactory::getBySlugAndLanguage(

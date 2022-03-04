@@ -8,4 +8,3 @@ CHANGE `content` `content` mediumtext DEFAULT NULL,
 CHANGE `views` `views` int(11) NOT NULL DEFAULT '0',
 CHANGE `redirection` `redirection` varchar(255) DEFAULT NULL,
 CHANGE `meta_description` `meta_description` varchar(255) DEFAULT NULL,
-CHANGE `meta_keywords` `meta_keywords` varchar(255) DEFAULT NULL;

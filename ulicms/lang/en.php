@@ -152,7 +152,6 @@ add_translation("EXTERNAL_REDIRECT", "external redirect");
 add_translation("ADDITIONAL_SETTINGS", "additional options &gt;&gt;");
 add_translation("MENU_IMAGE", "menu entry as image");
 add_translation("META_DESCRIPTION", "Description");
-add_translation("META_KEYWORDS", "Tags");
 add_translation("comma_separated", "Comma separated");
 add_translation("COMMENTS", "Comments");
 add_translation("OPEN_IN", "Target");
