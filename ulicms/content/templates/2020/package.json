@@ -16,7 +16,7 @@
     "author": "Ulrich Schmidt",
     "license": "ISC",
     "dependencies": {
-        "fullpage.js": "^3.0.8"
+        "fullpage.js": "^3.1.2"
     },
     "private": true
 }

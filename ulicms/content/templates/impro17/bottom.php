@@ -2,11 +2,12 @@
 <div class="advertisement">
     <?php random_banner(); ?>
 </div>
+</article>
 </main>
-</div>
 <footer class="footer">
     <?php Template::footerText(); ?>
 </footer>
+</div>
 <?php Template::footer(); ?>
 </div>
 <?php

@@ -20,7 +20,7 @@ function jumbotron_get_menu($name = "top", $parent_id = null, $recursive = true,
     }
 
     if (is_null($parent_id)) {
-        $html .= "<ul class='nav nav-pills pull-right menu_top'>\n";
+        $html .= "<ul class='nav nav-pills menu_top'>\n";
     } else {
         $containsCurrentItem = parent_item_contains_current_page($parent_id);
 
