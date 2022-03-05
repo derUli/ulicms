@@ -1,17 +1,25 @@
 $default-horizontal-spacing: 15px;
 $default-vertical-spacing: 10px;
-
 $menu-hover-color: #ce3939;
+$lightgrey-background: #f6f6f6;
 
 html {
     overflow: hidden;
 }
 
 body {
+    letter-spacing: .03em;
     div.root {
         position: relative;
 
         header.header {
+            font-size: initial;
+
+            .flex {
+                display: flex;
+                align-items: center;
+            }
+
             .hamburger {
                 display: inline-block;
                 float: left;
@@ -52,22 +60,34 @@ body {
             }
 
             span.headline {
-                display: flex;
-                align-items: center;
+                min-width: 0;
+                width: 100%;
+                padding-right: $default-horizontal-spacing;
 
                 h1 {
-                    display: inline-block;
-                    max-width: calc(100% - 100px);
                     overflow: hidden;
-                    margin: 16px 10px;
+                    margin: 0;
+                    padding: 0;
                     white-space: nowrap;
-                    height: 1em;
                     text-overflow: ellipsis;
-                    line-height: 1em;
                     vertical-align: middle;
                 }
             }
 
+            a.logo-wrapper {
+                text-align: right;
+                padding: $default-vertical-spacing $default-horizontal-spacing;
+                background: $lightgrey-background;
+                
+                display: flex;
+                align-items: center;
+               
+                height: 67px;
+
+                img {
+                    max-height: 47px;
+                }
+            }
 
 
             nav.navbar {
@@ -147,12 +167,17 @@ body {
         }
 
         .advertisement{
-            a {
-                display: block;
+            margin: 20px -#{$default-horizontal-spacing} 0;
+            padding: $default-horizontal-spacing;
+            background: $lightgrey-background;
+
+            .ulicms-image-banner {
+                display: inline-block;
             }
         }
 
         footer {
+            font-size: 14px;
             height: 52px;
             display: flex;
             align-items: center;

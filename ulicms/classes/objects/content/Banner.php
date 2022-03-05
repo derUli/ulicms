@@ -329,7 +329,7 @@ class Banner extends Model {
                 $title = Template::getEscape($this->getName());
                 $link_url = Template::getEscape($this->getLinkUrl());
                 $image_url = Template::getEscape($this->getImageUrl());
-                $html = "<a href=\"$link_url\" target=\"_blank\">"
+                $html = "<a href=\"$link_url\" target=\"_blank\" class=\"ulicms-image-banner\">"
                         . "<img src=\"$image_url\" title=\"$title\" "
                         . "alt=\"$title\" border=\"0\"></a>";
                 break;

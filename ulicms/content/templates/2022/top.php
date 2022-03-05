@@ -10,41 +10,50 @@ og_html_prefix();
     enqueueStylesheet(getModulePath("bootstrap", true) . "css/bootstrap.min.css");
     enqueueStylesheet(getTemplateDirPath(get_theme(), true) . "styles/style.scss");
     combinedStylesheetHtml();
-    
+
     base_metas();
     ?>
     <style type="text/css">
         header.header {
-            background: <?php esc(Settings::get("header-background-color"));?>
+            background: <?php esc(Settings::get("header-background-color")); ?>;
         }
-        
+
         header.header .hamburger .line:nth-child(1),
         header.header .hamburger .line:nth-child(3) {
-            background: <?php echo getBarColor1();?>;
+            background: <?php echo getBarColor1(); ?>;
         }
-        
+
         .header.header h1 {
-            color: <?php echo getHeadlineColor();?>;
+            color: <?php echo getHeadlineColor(); ?>;
         }
-        
+
         header.header .hamburger .line:nth-child(2){
-            background: <?php echo getBarColor2();?>;
+            background: <?php echo getBarColor2(); ?>;
         }
     </style>
 </head>
 <body class="<?php body_classes(); ?>">
     <div class="root">
         <header class="header">
-            <div class="hamburger">
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
+            <div class="flex">
+                <div class="hamburger">
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                </div>
+                <?php Template::headline('<span class="headline"><h1>%title%</h1></span>'); ?> 
+                <?php
+                if (getconfig("logo_disabled") == "no") {
+                    echo '<a href="./" class="logo-wrapper">';
+                    Template::logo();
+                    echo '</a>';
+                }
+                ?>
             </div>
-            <?php Template::headline('<span class="headline"><h1>%title%</h1></span>'); ?> 
             <nav class="navbar active">
                 <?php menu("top"); ?>
             </nav>
         </header>
         <main>
 
-        <article>
+            <article>

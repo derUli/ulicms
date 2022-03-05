@@ -1,6 +1,6 @@
 <?php Template::comments(); ?>
 <div class="advertisement">
-    <?php random_banner(); ?>
+    <?php Template::(); ?>
 </div>
 </article>
 </main>
