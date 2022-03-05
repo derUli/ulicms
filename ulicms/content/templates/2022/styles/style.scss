@@ -52,7 +52,7 @@ body {
             span.headline {
                 display: flex;
                 align-items: center;
-                
+
                 h1 {
                     display: inline-block;
                     max-width: calc(100% - 100px);
@@ -124,7 +124,7 @@ body {
             }
         }
 
-        main, nav.navbar.active {
+        nav.navbar.active {
             padding: $default-vertical-spacing $default-horizontal-spacing;
             height: calc(100vh - 75px);
             width: 100%;
@@ -132,10 +132,26 @@ body {
         }
 
         main {
+            padding: $default-vertical-spacing $default-horizontal-spacing;
+            height: calc(100vh - 150px);
+            width: 100%;
+            overflow: auto;
+
             article {
                 margin-top: $default-vertical-spacing;
                 line-height: 1.5em;
 
+            }
+        }
+
+        footer {
+            height: 75px;
+            display: flex;
+            align-items: end;
+            padding: $default-vertical-spacing $default-horizontal-spacing;
+            
+            div {
+                width: 100%;
             }
         }
     }

@@ -7,7 +7,9 @@
 </div>
 </main>
 <footer class="footer">
+<div>
     <?php Template::footerText(); ?>
+</div>
 </footer>
 <?php Template::footer(); ?>
 </div>
