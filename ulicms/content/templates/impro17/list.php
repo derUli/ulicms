@@ -29,7 +29,8 @@ if ($id !== null) {
             $next_start = $start + $limit;
             if ($next_start <= $entries_total_count) {
                 $next_start = $start + $limit;
-            } ?>
+            }
+            ?>
             <div class="fluid-container">
                 <?php
                 foreach ($entries as $entry) {
@@ -39,7 +40,8 @@ if ($id !== null) {
                     $article_date = !is_null($entry->article_date) ? $entry->article_date : $entry->created;
                     $excerpt = strip_tags($meta->excerpt, "<img><iframe><embed><object>");
                     $excerpt = trim($excerpt);
-                    $excerpt = StringHelper::isNotNullOrWhitespace($excerpt) ? $meta->excerpt : $entry->content; ?>
+                    $excerpt = StringHelper::isNotNullOrWhitespace($excerpt) ? $meta->excerpt : $entry->content;
+                    ?>
                     <div class="article-list-row">
                         <p>
                             <strong><a
@@ -52,8 +54,8 @@ if ($id !== null) {
                                 href="<?php Template::escape(buildSEOUrl($entry->slug, $entry->link_url)); ?>"><?php translate("readmore"); ?></a>
                         </p>
                     </div>
-                <?php
-                } ?>
+                <?php }
+                ?>
                 <div class="bottom-list-border"></div>
                 <?php if ($use_pagination) { ?>
                     <div class="page_older_newer">
