@@ -10,6 +10,7 @@
 <div>
     <?php Template::footerText(); ?>
 </div>
+<?php echo Template::editButton();?>
 </footer>
 <?php Template::footer(); ?>
 </div>

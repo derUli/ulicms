@@ -3,5 +3,8 @@
     "version": "1.0.0",
     "menus": [
         "top"
+    ],
+    "disable_functions": [
+        "edit_button"
     ]
 }

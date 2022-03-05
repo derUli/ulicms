@@ -1,6 +1,8 @@
 $default-horizontal-spacing: 15px;
 $default-vertical-spacing: 10px;
 
+$menu-hover-color: #ce3939;
+
 html {
     overflow: hidden;
 }
@@ -97,7 +99,7 @@ body {
                             cursor: pointer;
 
                             cursor: pointer;
-                            background-color: #ce3939;
+                            background-color: $menu-hover-color;
                             letter-spacing: 10px;
                         }
 
@@ -125,7 +127,6 @@ body {
         }
 
         nav.navbar.active {
-            padding: $default-vertical-spacing $default-horizontal-spacing;
             height: calc(100vh - 75px);
             width: 100%;
             overflow: auto;
@@ -133,7 +134,7 @@ body {
 
         main {
             padding: $default-vertical-spacing $default-horizontal-spacing;
-            height: calc(100vh - 150px);
+            height: calc(100vh - 120px);
             width: 100%;
             overflow: auto;
 
@@ -142,16 +143,51 @@ body {
                 line-height: 1.5em;
 
             }
+
+        }
+
+        .advertisement{
+            a {
+                display: block;
+            }
         }
 
         footer {
-            height: 75px;
+            height: 52px;
             display: flex;
-            align-items: end;
-            padding: $default-vertical-spacing $default-horizontal-spacing;
-            
+            align-items: center;
+            padding: 0 $default-horizontal-spacing;
+
+            max-width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+
+
             div {
                 width: 100%;
+
+                &.ulicms-edit {
+                    text-align: right;
+                    display: none;
+
+                    a {
+                        background: #333;
+                        color: #d3e3e3;
+
+                        &:hover {
+                            background: $menu-hover-color;
+                        }
+                    }
+
+                    @media screen and (min-width: 1024px){
+                        display: block;
+                    }
+                }
+
+                p {
+                    margin: 0;
+                }
             }
         }
     }
