@@ -12,6 +12,7 @@
             ));
         }
         ?></p>
-<?php } 
+    <?php
+}
 
 require_once getTemplateDirPath(get_theme()) . "/bottom.php";

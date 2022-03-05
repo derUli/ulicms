@@ -9,8 +9,8 @@ $pages = ContentFactory::getAllByMenu("top", "position");
 $frontpagePhotoFile = ULICMS_CONTENT . "/images/theme/frontpage_photo.png";
 
 $frontpagePhoto = file_exists($frontpagePhotoFile) ? UliCMS\HTML\imageTag(
-    "content/images/theme/frontpage_photo.png"
-) : null;
+                "content/images/theme/frontpage_photo.png"
+        ) : null;
 ?>
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,15 +19,15 @@ $frontpagePhoto = file_exists($frontpagePhotoFile) ? UliCMS\HTML\imageTag(
     base_metas();
     og_tags();
     enqueueStylesheet(
-        getTemplateDirPath(
-            get_theme()
-        ) .
+            getTemplateDirPath(
+                    get_theme()
+            ) .
             "node_modules/fullpage.js/dist/fullpage.min.css"
     );
     enqueueStylesheet(
-        getTemplateDirPath(
-            get_theme()
-        ) .
+            getTemplateDirPath(
+                    get_theme()
+            ) .
             "css/main.scss"
     );
     combinedStylesheetHtml();
@@ -67,7 +67,8 @@ $frontpagePhoto = file_exists($frontpagePhotoFile) ? UliCMS\HTML\imageTag(
                 <?php Template::siteSlogan(); ?> </blockquote>
             <?php
             if (count($pages)) {
-                $firstPage = $pages[0]; ?>
+                $firstPage = $pages[0];
+                ?>
                 <?php if (count($slugs) >= 2) { ?>
                     <a href="#<?php esc($slugs[1]); ?>" class="button move-down"><?php esc($firstPage->getHeadline()); ?></a>
                 <?php } ?>
@@ -75,10 +76,10 @@ $frontpagePhoto = file_exists($frontpagePhotoFile) ? UliCMS\HTML\imageTag(
                     <div id="frontpage-photo">
                         <?php echo $frontpagePhoto; ?>
                     </div>
-                    <?php
-                } ?>
-            <?php
-            } ?>
+                <?php }
+                ?>
+            <?php }
+            ?>
             <div class="advertisement">
                 <?php random_banner(); ?>
             </div>
@@ -88,25 +89,26 @@ $frontpagePhoto = file_exists($frontpagePhotoFile) ? UliCMS\HTML\imageTag(
         foreach ($filteredPages as $index => $page) {
             set_requested_pagename($page->slug, $page->language);
             $text_position = get_text_position();
-            $color ++; ?>
+            $color++;
+            ?>
             <div class="section bgcolor<?php echo $color; ?>">
                 <div class="content">
-                    <?php
-                    echo $page->getShowHeadline() ? "<h1 class=\"sliding\">{$page->getHeadline()}</h1>" : ""; ?>
+                    <?php echo $page->getShowHeadline() ? "<h1 class=\"sliding\">{$page->getHeadline()}</h1>" : ""; ?>
                     <div class="text-content">
                         <?php
                         if ($text_position == "after") {
                             Template::outputContentElement();
                         }
 
-            if ($page instanceof Article and
+                        if ($page instanceof Article and
                                 $page->article_image) {
-                echo UliCMS\HTML\imageTag($page->article_image, ["class" => "article-image"]);
-            }
-            content();
-            if ($text_position == "before") {
-                Template::outputContentElement();
-            } ?>
+                            echo UliCMS\HTML\imageTag($page->article_image, ["class" => "article-image"]);
+                        }
+                        content();
+                        if ($text_position == "before") {
+                            Template::outputContentElement();
+                        }
+                        ?>
                     </div>
 
                     <?php Template::comments(); ?>
