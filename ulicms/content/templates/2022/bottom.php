@@ -1,10 +1,11 @@
 <?php Template::comments(); ?>
 </article>
 
+
 <div class="advertisement">
     <?php Template::randomBanner(); ?>
 </div>
-
+</main>
 <footer class="footer">
     <?php Template::footerText(); ?>
 </footer>
