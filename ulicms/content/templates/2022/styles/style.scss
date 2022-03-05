@@ -7,9 +7,18 @@ html {
     overflow: hidden;
 }
 
+
 body {
     letter-spacing: .03em;
+
     div.root {
+        transition: opacity 0.5s ease-in-out;
+        opacity: 1;
+
+        &.fadeout {
+            opacity: 0;
+        }
+
         position: relative;
 
         header.header {
@@ -71,6 +80,29 @@ body {
                     white-space: nowrap;
                     text-overflow: ellipsis;
                     vertical-align: middle;
+
+                    font-size: 14px;
+                    font-weight: bold;
+
+                    // Small devices (landscape phones, 576px and up)
+                    @media (min-width: 576px) {
+                        font-size: 16px;
+                    }
+
+                    // Medium devices (tablets, 768px and up)
+                    @media (min-width: 768px) {
+                        font-size: 18px;
+                    }
+
+                    // Large devices (desktops, 992px and up)
+                    @media (min-width: 992px) {
+                        font-size: 20px;
+                    }
+
+                    // Extra large devices (large desktops, 1200px and up)
+                    @media (min-width: 1200px) {
+                        font-size: 22px;
+                    }
                 }
             }
 
@@ -78,10 +110,10 @@ body {
                 text-align: right;
                 padding: $default-vertical-spacing $default-horizontal-spacing;
                 background: $lightgrey-background;
-                
+
                 display: flex;
                 align-items: center;
-               
+
                 height: 67px;
 
                 img {
@@ -167,7 +199,10 @@ body {
         }
 
         .advertisement{
-            margin: 20px -#{$default-horizontal-spacing} 0;
+            margin: 20px -#{
+                $default-horizontal-spacing
+            }
+            0;
             padding: $default-horizontal-spacing;
             background: $lightgrey-background;
 

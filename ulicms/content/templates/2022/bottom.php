@@ -20,6 +20,7 @@ $translation->addKey("menu");
 $translation->renderJS();
 
 enqueueScriptFile(getTemplateDirPath(get_theme(), true) . "scripts/navigation.js");
+enqueueScriptFile(getTemplateDirPath(get_theme(), true) . "scripts/headline.js");
 combinedScriptHtml();
 ?>
 </body>
