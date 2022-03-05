@@ -43,7 +43,7 @@ function get_og_tags(?string $slug = null): string {
         }
 
         $og_image = Settings::get("og_image");
-        
+
         if (!empty($og_data["article_image"])) {
             $og_image = ltrim($og_data["article_image"], "/");
         }
@@ -86,12 +86,36 @@ function get_og_tags(?string $slug = null): string {
                     . _esc($og_url) . '" />';
         }
 
+        $html .= '<meta name="twitter:card" content="summary" />';
+
         if ($og_image) {
             $html .= '<meta property="og:image" content="' . _esc($og_image) . '" />';
+            $html .= '<meta property="og:title:alt" content="'
+                    . _esc($og_title) . '" />';
         }
 
         $html .= '<meta property="og:site_name" content="'
                 . get_homepage_title() . '" />';
+
+        if ($og_title) {
+            $html .= '<meta  name="twitter:title" content="'
+                    . _esc($og_title) . '" />';
+        }
+
+        if ($og_description) {
+            $html .= '<meta name="twitter:description" content="'
+                    . _esc($og_description) . '" />';
+        }
+
+        if ($og_image) {
+            $html .= '<meta name="twitter:image" content="' . _esc($og_image) . '" />';
+            $html .= '<meta name="twitter:image:alt" content="' . _esc($og_title) . '" />';
+        }
+
+        /**
+          <meta name="twitter:site" content="@USERNAME">
+          <meta name="twitter:creator" content="@USERNAME">
+         * */
     }
 
     $html = apply_filter($html, "og_html");
