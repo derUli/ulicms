@@ -1,0 +1,7 @@
+{
+    "source": "extend",
+    "version": "1.0.0",
+    "menus": [
+        "top"
+    ]
+}
