@@ -334,41 +334,6 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse(is_503());
     }
 
-    public function testGetBaseMetas()
-    {
-        $baseMetas = get_base_metas();
-
-        $this->assertTrue(str_contains($baseMetas, '<meta http-equiv="content-type" content="text/html; charset=utf-8"/>'));
-        $this->assertTrue(str_contains($baseMetas, '<meta charset="utf-8"/>'));
-    }
-
-    public function testBaseMetas()
-    {
-        ob_start();
-        base_metas();
-        $baseMetas = ob_get_clean();
-
-        $this->assertTrue(str_contains($baseMetas, '<meta http-equiv="content-type" content="text/html; charset=utf-8"/>'));
-        $this->assertTrue(str_contains($baseMetas, '<meta charset="utf-8"/>'));
-    }
-
-    public function testHead()
-    {
-        ob_start();
-        head();
-        $baseMetas = ob_get_clean();
-
-        $this->assertTrue(str_contains($baseMetas, '<meta http-equiv="content-type" content="text/html; charset=utf-8"/>'));
-        $this->assertTrue(str_contains($baseMetas, '<meta charset="utf-8"/>'));
-    }
-
-    public function testGetHead()
-    {
-        $baseMetas = get_head();
-        $this->assertTrue(str_contains($baseMetas, '<meta http-equiv="content-type" content="text/html; charset=utf-8"/>'));
-        $this->assertTrue(str_contains($baseMetas, '<meta charset="utf-8"/>'));
-    }
-
     public function testIs500ReturnsFalse()
     {
         $this->assertFalse(is_500());

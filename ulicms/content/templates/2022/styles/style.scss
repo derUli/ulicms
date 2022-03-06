@@ -68,7 +68,8 @@ body {
                 }
             }
 
-            span.headline {
+            div.headline {
+                display: inline-block; 
                 min-width: 0;
                 width: 100%;
                 padding-right: $default-horizontal-spacing;

@@ -135,23 +135,6 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         unset($_SESSION["language"]);
     }
 
-    public function testGetBaseMetas()
-    {
-        $baseMetas = Template::getBaseMetas();
-        $this->assertTrue(
-            str_contains(
-                $baseMetas,
-                '<meta http-equiv="content-type" content="text/html; charset=utf-8"/>'
-            )
-        );
-        $this->assertTrue(
-            str_contains(
-                $baseMetas,
-                '<meta charset="utf-8"/>'
-            )
-        );
-    }
-
     public function testGetBaseMetasVideoWidth100Percent()
     {
         Settings::set("video_width_100_percent", "1");
@@ -240,7 +223,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         $file = "node_modules/jquery/dist/jquery.min.js";
         $time = File::getLastChanged($file);
         $expected = '<script src="' . $file . '?time=' . $time .
-                '" type="text/javascript"></script>';
+                '"></script>';
         $this->assertStringContainsString($expected, Template::getjQueryScript());
     }
 

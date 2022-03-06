@@ -4,9 +4,8 @@
         <meta name="viewport" content="width=device-width" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title><?php echo InstallerController::getTitle(); ?> - <?php echo APPLICATION_TITLE; ?> </title>
-        <link rel="stylesheet" type="text/css"
-              href="../content/modules/bootstrap/css/bootstrap.min.css" />
-        <link rel="stylesheet" type="text/css" href="media/style.css" />
+        <link rel="stylesheet" href="../content/modules/bootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="media/style.css" />
         <link rel="stylesheet"
               href="../node_modules/@fortawesome/fontawesome-free/css/all.min.css" />
     </head>

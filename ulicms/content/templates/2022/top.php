@@ -13,7 +13,7 @@ og_html_prefix();
 
     base_metas();
     ?>
-    <style type="text/css">
+    <style>
         header.header {
             background: <?php esc(Settings::get("header-background-color")); ?>;
         }
@@ -41,7 +41,7 @@ og_html_prefix();
                     <div class="line"></div>
                     <div class="line"></div>
                 </div>
-                <?php Template::headline('<span class="headline"><h1>%title%</h1></span>'); ?> 
+                <?php Template::headline('<div class="headline"><h1>%title%</h1></div>'); ?> 
                 <?php
                 if (getconfig("logo_disabled") == "no") {
                     echo '<a href="./" class="logo-wrapper">';

@@ -18,8 +18,7 @@ class Script {
             array $htmlAttributes = []
     ): string {
         $attributes = array(
-            "src" => $file,
-            "type" => "text/javascript"
+            "src" => $file
         );
         if ($async) {
             $attributes["async"] = "async";
@@ -36,7 +35,11 @@ class Script {
 
         $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);
 
-        return "<script $attribHTML></script>";
+        if(!empty($attribHTML)){
+            $attribHTML = " $attribHTML";
+        }
+        
+        return "<script{$attribHTML}></script>";
     }
 
     public static function fromString(
@@ -45,9 +48,8 @@ class Script {
             bool $defer = false,
             array $htmlAttributes = []
     ): string {
-        $attributes = array(
-            "type" => "text/javascript"
-        );
+        $attributes = [];
+        
         if ($async) {
             $attributes["async"] = "async";
         }
@@ -58,8 +60,12 @@ class Script {
             $attributes[$key] = $value;
         }
         $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);
+        
+        if(!empty($attribHTML)){
+            $attribHTML = " $attribHTML";
+        }
 
-        return "<script $attribHTML>" . $code . "</script>";
+        return "<script{$attribHTML}>" . $code . "</script>";
     }
 
 }

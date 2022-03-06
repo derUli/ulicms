@@ -77,7 +77,7 @@ if ($permissionChecker->hasPermission("banners")) {
                             echo '<td><a href="' . $link_url .
                             '" target="_blank"><img src="' .
                             $image_url . '" title="' . $name .
-                            '" alt="' . $name . '" border=0></a></td>';
+                            '" alt="' . $name . '"></a></td>';
                         } else {
                             echo '<td>' .
                             Template::getEscape($banner->render()) .

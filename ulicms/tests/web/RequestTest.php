@@ -1,9 +1,11 @@
 <?php
 
 use UliCMS\Helpers\TestHelper;
+use Spatie\Snapshots\MatchesSnapshots;
 
 class RequestTest extends \PHPUnit\Framework\TestCase
 {
+    use MatchesSnapshots;
     protected function tearDown(): void
     {
         require_once getLanguageFilePath("en");
@@ -246,14 +248,12 @@ class RequestTest extends \PHPUnit\Framework\TestCase
     }
     public function testJavascriptRedirect()
     {
-        $expected = file_get_contents(
-            Path::resolve("tests/fixtures/javascriptRedirect.expected.txt")
-        );
+     
 
         $actual = TestHelper::getOutput(function () {
             Request::javascriptRedirect("https://google.de");
         });
 
-        $this->assertEquals($expected, $actual);
+        $this->assertMatchesTextSnapshot($actual);
     }
 }

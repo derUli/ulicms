@@ -305,9 +305,6 @@ class Template {
             echo "<title>" . $title . "</title>";
         }
 
-        echo '<meta http-equiv="content-type" content="text/html; charset=utf-8"/>';
-        echo '<meta charset="utf-8"/>';
-
         if (!Settings::get("disable_no_format_detection")) {
             echo '<meta name="format-detection" content="telephone=no"/>';
         }
@@ -374,10 +371,10 @@ class Template {
                             $style_file_realpath
             );
             if (file_exists($min_style_file_realpath)) {
-                echo "<link rel=\"stylesheet\" type=\"text/css\" "
+                echo "<link rel=\"stylesheet\" "
                 . "href=\"$min_style_file\"/>";
             } elseif (file_exists($style_file_realpath)) {
-                echo "<link rel=\"stylesheet\" type=\"text/css\" "
+                echo "<link rel=\"stylesheet\" "
                 . "href=\"$style_file\"/>";
             }
         }
@@ -399,7 +396,7 @@ class Template {
             if ($font == "google") {
                 $google_font = Settings::get("google-font");
                 if ($google_font) {
-                    echo '<link rel="stylesheet" type="text/css" '
+                    echo '<link rel="stylesheet" '
                     . 'href="//fonts.googleapis.com/css?family=' .
                     urlencode($google_font) . '&display=swap"/>';
                     $font = "'$google_font'";
@@ -429,7 +426,7 @@ color: " . Settings::get("body-text-color") . ";
             }
 
             if (Settings::get("video_width_100_percent")) {
-                echo "<style type=\"text/css\">
+                echo "<style>
   video {
   width: 100% !important;
   height: auto !important;

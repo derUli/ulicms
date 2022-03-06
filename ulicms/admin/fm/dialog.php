@@ -342,7 +342,7 @@ $get_params = http_build_query($get_params);
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/jplayer/2.7.1/skin/blue.monday/jplayer.blue.monday.min.css"/>
     <link href="css/style.css?v=<?php
-    echo $version; ?>" rel="stylesheet" type="text/css"/>
+    echo $version; ?>" rel="stylesheet"/>
     <!--[if lt IE 8]>
     <style>
         .img-container span, .img-container-mini span {
@@ -359,8 +359,8 @@ $get_params = http_build_query($get_params);
     <script src="js/plugins.js?v=<?php
     echo $version; ?>"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jplayer/2.9.2/jplayer/jquery.jplayer.min.js"></script>
-    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/fabric.js/3.6.0/fabric.js'></script>
-    <script type="text/javascript"
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fabric.js/3.6.0/fabric.js'></script>
+    <script
             src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js"></script>
     <script src="js/modernizr.custom.js"></script>
 
@@ -372,17 +372,17 @@ $get_params = http_build_query($get_params);
     <?php
     if ($config['tui_active'] === true) { ?>
         <link rel="stylesheet" href="https://uicdn.toast.com/tui-image-editor/latest/tui-image-editor.css">
-        <link type="text/css" href="https://uicdn.toast.com/tui-color-picker/v2.2.6/tui-color-picker.css"
+        <link href="https://uicdn.toast.com/tui-color-picker/v2.2.6/tui-color-picker.css"
               rel="stylesheet">
-        <script type="text/javascript"
+        <script
                 src="https://uicdn.toast.com/tui.code-snippet/v1.5.0/tui-code-snippet.min.js"></script>
-        <script type="text/javascript"
+        <script
                 src="https://uicdn.toast.com/tui-color-picker/v2.2.6/tui-color-picker.js"></script>
         <script src="https://uicdn.toast.com/tui-image-editor/latest/tui-image-editor.js"></script>
         <?php
     } ?>
 
-    <script type="text/javascript">
+    <script>
         var ext_img = new Array('<?php echo implode("','", $config['ext_img'])?>');
         var image_editor = <?php echo $config['tui_active'] ? "true" : "false";?>;
     </script>

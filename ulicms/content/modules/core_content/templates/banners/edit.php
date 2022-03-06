@@ -47,8 +47,7 @@ if ($permissionChecker->hasPermission("banners")
                         title="<?php
                         Template::escape($row->getName()); ?>"
                         alt="<?php
-                        Template::escape($row->getName()); ?>"
-                        border=0> </a>
+                        Template::escape($row->getName()); ?>"> </a>
             </div>
             <?php
         } else {

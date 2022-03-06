@@ -331,7 +331,7 @@ class Banner extends Model {
                 $image_url = Template::getEscape($this->getImageUrl());
                 $html = "<a href=\"$link_url\" target=\"_blank\" class=\"ulicms-image-banner\">"
                         . "<img src=\"$image_url\" title=\"$title\" "
-                        . "alt=\"$title\" border=\"0\"></a>";
+                        . "alt=\"$title\"></a>";
                 break;
             case "html":
                 $html = $this->getHtml();

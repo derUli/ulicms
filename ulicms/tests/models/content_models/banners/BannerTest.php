@@ -257,10 +257,9 @@ class BannerTest extends \PHPUnit\Framework\TestCase
         $banner->setImageUrl(self::IMAGE_URL_TEXT1);
         $banner->setLinkUrl(self::LINK_URL_TEXT1);
         $this->assertEquals(
-            '<a href="http://www.google.de" target="_blank">'
+            '<a href="http://www.google.de" target="_blank" class="ulicms-image-banner">'
                 . '<img src="http://firma.de/bild.gif" '
-                . 'title="My first Gif Banner" alt="My first Gif Banner" '
-                . 'border="0"></a>',
+                . 'title="My first Gif Banner" alt="My first Gif Banner"></a>',
             $banner->render()
         );
     }
