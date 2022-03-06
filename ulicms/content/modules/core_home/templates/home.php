@@ -51,7 +51,7 @@ if ($permissionChecker->hasPermission("dashboard")) {
         ?>
 
         <?php
-        $pi = ULICMS_DATA_STORAGE_ROOT . "/post-install.php";
+        $pi = ULICMS_ROOT . "/post-install.php";
         if (is_writable($pi)) {
             ?>
             <h2 class="accordion-header"><?php translate("unfinished_package_installations"); ?></h2>

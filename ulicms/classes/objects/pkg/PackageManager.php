@@ -51,9 +51,9 @@ class PackageManager {
         try {
             // Paket entpacken
             $phar = new PharData($file);
-            $phar->extractTo(ULICMS_DATA_STORAGE_ROOT, null, true);
+            $phar->extractTo(ULICMS_ROOT, null, true);
 
-            $post_install_script1 = ULICMS_DATA_STORAGE_ROOT .
+            $post_install_script1 = ULICMS_ROOT .
                     DIRECTORY_SEPARATOR . "post-install.php";
             $post_install_script2 = ULICMS_TMP .
                     DIRECTORY_SEPARATOR . "post-install.php";
@@ -83,7 +83,7 @@ class PackageManager {
     public function getInstalledModules(): array {
         $availableModules = [];
 
-        $moduleFolder = Path::resolve("ULICMS_DATA_STORAGE_ROOT/content/modules");
+        $moduleFolder = Path::resolve("ULICMS_ROOT/content/modules");
         $moduleDirectories = find_all_folders($moduleFolder);
 
         natcasesort($moduleDirectories);
@@ -101,7 +101,7 @@ class PackageManager {
     public function getInstalledThemes(): array {
         $themes = [];
         $templateDir = Path::resolve(
-                        "ULICMS_DATA_STORAGE_ROOT/content/templates"
+                        "ULICMS_ROOT/content/templates"
                 ) . "/";
 
         $folders = scanDir($templateDir);

@@ -9,7 +9,7 @@ function getTemplateDirPath(
  string {
     if ($abspath) {
         $templateDir = Path::resolve(
-                        "ULICMS_DATA_STORAGE_ROOT/content/templates/"
+                        "ULICMS_ROOT/content/templates/"
                 ) . "/";
     } else if (is_admin_dir()) {
         $templateDir = "../content/templates/";
@@ -31,8 +31,7 @@ function getModuleAdminSelfPath(): string {
 function getModulePath($module, $abspath = false): string {
     if ($abspath) {
         return Path::resolve(
-                        "ULICMS_DATA_STORAGE_ROOT/content/modules/$module"
-                ) . "/";
+                        "ULICMS_ROOT/content/modules/$module") . "/";
     }
 
     // Frontend Directory

@@ -34,7 +34,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
         $packageArchiveFolder = $pkg_src . "archives/";
         $packagesToInstall = explode(",", $_REQUEST ["packages"]);
 
-        $post_install_script = ULICMS_DATA_STORAGE_ROOT . "/post-install.php";
+        $post_install_script = ULICMS_ROOT . "/post-install.php";
         if (file_exists($post_install_script)) {
             unlink($post_install_script);
         }

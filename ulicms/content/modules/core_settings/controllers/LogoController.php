@@ -20,7 +20,7 @@ class LogoController extends Controller
         string $filename,
         string $originalName
     ): string {
-        return ULICMS_DATA_STORAGE_ROOT . "/content/images/" .
+        return ULICMS_ROOT . "/content/images/" .
                 $this->_buildFileName($filename, $originalName);
     }
 
@@ -62,7 +62,7 @@ class LogoController extends Controller
     public function _deleteLogo(): bool
     {
         $logoImage = Settings::get("logo_image");
-        $path = ULICMS_DATA_STORAGE_ROOT . "/content/images/${logoImage}";
+        $path = ULICMS_ROOT . "/content/images/${logoImage}";
 
         if (empty($logoImage) || !file_exists($path)) {
             return false;

@@ -8,7 +8,7 @@ $permissionChecker = new ACL();
 
 $logoUrl = "../content/images/" . Settings::get("logo_image");
 
-$logoStoragePath = ULICMS_DATA_STORAGE_ROOT . "/content/images/" . Settings::get("logo_image");
+$logoStoragePath = ULICMS_ROOT . "/content/images/" . Settings::get("logo_image");
 
 if ($permissionChecker->hasPermission("logo")) {
     ?>

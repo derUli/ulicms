@@ -172,12 +172,10 @@ if ((defined("ULICMS_DEBUG") and ULICMS_DEBUG)
     error_reporting(0);
 }
 
-define("ULICMS_DATA_STORAGE_ROOT", ULICMS_ROOT);
-
 require_once dirname(__file__) . "/classes/renderers/load.php";
 
 if (!defined("ULICMS_TMP")) {
-    define("ULICMS_TMP", ULICMS_DATA_STORAGE_ROOT . "/content/tmp/");
+    define("ULICMS_TMP", ULICMS_ROOT . "/content/tmp/");
 }
 
 if (!is_dir(ULICMS_TMP)) {
@@ -185,13 +183,13 @@ if (!is_dir(ULICMS_TMP)) {
 }
 
 if (!defined("ULICMS_CACHE")) {
-    define("ULICMS_CACHE", ULICMS_DATA_STORAGE_ROOT . "/content/cache/");
+    define("ULICMS_CACHE", ULICMS_ROOT . "/content/cache/");
 }
 if (!defined("ULICMS_LOG")) {
-    define("ULICMS_LOG", ULICMS_DATA_STORAGE_ROOT . "/content/log/");
+    define("ULICMS_LOG", ULICMS_ROOT . "/content/log/");
 }
 if (!defined("ULICMS_CONTENT")) {
-    define("ULICMS_CONTENT", ULICMS_DATA_STORAGE_ROOT . "/content/");
+    define("ULICMS_CONTENT", ULICMS_ROOT . "/content/");
 }
 
 if (!defined("ULICMS_GENERATED")) {

@@ -174,7 +174,7 @@ class Template {
         }
 
         $logo_storage_url = self::getLogoUrl();
-        $logo_storage_path = ULICMS_DATA_STORAGE_ROOT . "/content/images/" .
+        $logo_storage_path = ULICMS_ROOT . "/content/images/" .
                 Settings::get("logo_image");
 
         if (Settings::get("logo_disabled") == "no" and file_exists($logo_storage_path)) {

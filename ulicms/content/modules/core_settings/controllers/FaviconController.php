@@ -28,13 +28,11 @@ class FaviconController extends Controller {
     }
 
     public function _getDestination1(): string {
-        return ULICMS_DATA_STORAGE_ROOT
-                . "/content/images/favicon.ico";
+        return  ULICMS_ROOT . "/content/images/favicon.ico";
     }
 
     public function _getDestination2(): string {
-        return ULICMS_DATA_STORAGE_ROOT
-                . "/favicon.ico";
+        return ULICMS_ROOT  . "/favicon.ico";
     }
 
     public function doUpload(): void {
