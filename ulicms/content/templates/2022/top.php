@@ -7,8 +7,8 @@ og_html_prefix();
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php
     og_tags();
-    enqueueStylesheet(getModulePath("bootstrap", true) . "css/bootstrap.min.css");
-    enqueueStylesheet(getTemplateDirPath(get_theme(), true) . "styles/style.scss");
+    enqueueStylesheet(getModulePath("bootstrap") . "css/bootstrap.min.css");
+    enqueueStylesheet(getTemplateDirPath(get_theme()) . "styles/style.scss");
     combinedStylesheetHtml();
 
     base_metas();

@@ -19,8 +19,8 @@ $translation = new JSTranslation();
 $translation->addKey("menu");
 $translation->renderJS();
 
-enqueueScriptFile(getTemplateDirPath(get_theme(), true) . "scripts/navigation.js");
-enqueueScriptFile(getTemplateDirPath(get_theme(), true) . "scripts/headline.js");
+enqueueScriptFile(getTemplateDirPath(get_theme()) . "scripts/navigation.js");
+enqueueScriptFile(getTemplateDirPath(get_theme()) . "scripts/headline.js");
 combinedScriptHtml();
 ?>
 </body>
