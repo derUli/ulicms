@@ -21,6 +21,11 @@ class SinPackageInstaller {
             return $this->packageData;
         }
         $data = file_get_contents($this->file);
+
+        if (endsWith($this->file, ".sin2")) {
+            $data = gzdecode($data);
+        }
+
         $json = json_decode($data, true);
         $this->packageData = $json;
         return $json;

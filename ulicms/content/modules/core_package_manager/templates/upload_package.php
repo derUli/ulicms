@@ -32,7 +32,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                             "%file%" => $_FILES['file']['name']
                         )) . "</p>";
                     }
-                } elseif (endsWith($file_in_tmp, ".sin")) {
+                } elseif (endsWith($file_in_tmp, ".sin") || endsWith($file_in_tmp, ".sin2")) {
                     $url = "?action=pkginfo&file=" . basename($file_in_tmp);
                     Request::javascriptRedirect($url);
                 } else {
@@ -53,7 +53,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                 name="file"
                 class="form-control"
                 required 
-                accept=".sin,.tar.gz"
+                accept=".sin,.sin2,.tar.gz"
                 >
         </p>
         <p>

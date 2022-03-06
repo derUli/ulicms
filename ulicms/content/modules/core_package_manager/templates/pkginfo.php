@@ -6,7 +6,8 @@ $permissionChecker = new ACL();
 if (!$permissionChecker->hasPermission("install_packages")) {
     noPerms();
 } else {
-    if (StringHelper::isNotNullOrEmpty($_REQUEST["file"]) and endsWith($_REQUEST["file"], ".sin")) {
+    if (StringHelper::isNotNullOrEmpty($_REQUEST["file"]) &&
+            (endsWith($_REQUEST["file"], ".sin") || endsWith($_REQUEST["file"], ".sin2"))) {
         $tempfile = Path::resolve("ULICMS_TMP/" . basename($_REQUEST["file"]));
         if (file_exists($tempfile)) {
             $pkg = new SinPackageInstaller($tempfile);
@@ -28,13 +29,13 @@ if (!$permissionChecker->hasPermission("install_packages")) {
             $license = $pkg->getProperty("license");
             $build_date = $pkg->getProperty("build_date");
             $screenshot = $pkg->getProperty("screenshot");
-            $size = intval($pkg->getSize()); ?>
+            $size = intval($pkg->getSize());
+            ?>
             <p>
                 <a href="<?php echo ModuleHelper::buildActionURL("upload_package"); ?>"
                    class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
             </p>
-            <h1><?php
-               esc($id); ?></h1>
+            <h1><?php esc($id); ?></h1>
             <table>
                 <?php
                 if ($name) {
@@ -43,8 +44,8 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                         <td><strong><?php translate("name") ?></strong></td>
                         <td><?php esc($name) ?></td>
                     </tr>
-                <?php
-                } ?>
+                    <?php }
+                ?>
                 <tr>
                     <td><strong><?php translate("version") ?></strong></td>
                     <td><?php esc($version) ?></td>
@@ -60,8 +61,8 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                         <td><strong><?php translate("build_date") ?></strong></td>
                         <td><?php esc(PHP81_BC\strftime("%x %X", $build_date)); ?></td>
                     </tr>
-                <?php
-                } ?>
+                    <?php }
+                ?>
                 <?php
                 if ($screenshot) {
                     ?>
@@ -70,8 +71,8 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                         <td><img src="data:<?php esc($screenshot); ?>"
                                  alt="Screenshot" class="img-responsive"></td>
                     </tr>
-                <?php
-                } ?>
+                    <?php }
+                ?>
                 <?php
                 if ($description) {
                     ?>
@@ -80,8 +81,8 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                         <td><?php esc($description); ?></td>
 
                     </tr>
-                <?php
-                } ?>
+                    <?php }
+                ?>
                 <?php
                 if ($compatible_from) {
                     ?>
@@ -90,8 +91,8 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                         <td>UliCMS <?php esc($compatible_from); ?></td>
 
                     </tr>
-                <?php
-                } ?>
+                    <?php }
+                ?>
                 <?php
                 if ($compatible_to) {
                     ?>
@@ -99,8 +100,8 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                         <td><strong><?php translate("compatible_to") ?></strong></td>
                         <td>UliCMS <?php esc($compatible_to); ?></td>
                     </tr>
-                <?php
-                } ?>
+                    <?php }
+                ?>
                 <?php
                 if ($min_php_version) {
                     ?>
@@ -108,8 +109,8 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                         <td><strong><?php translate("min_php_version") ?></strong></td>
                         <td><?php esc($min_php_version); ?></td>
                     </tr>
-                <?php
-                } ?>
+                    <?php }
+                ?>
                 <?php
                 if ($max_php_version) {
                     ?>
@@ -117,8 +118,8 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                         <td><strong><?php translate("max_php_version") ?></strong></td>
                         <td><?php esc($max_php_version); ?></td>
                     </tr>
-                <?php
-                } ?>
+                    <?php }
+                ?>
                 <?php if ($required_php_extensions) { ?>
                     <tr>
                         <td><strong><?php translate("required_php_extensions") ?></strong></td>
@@ -126,11 +127,11 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                             foreach ($required_php_extensions as $extension) {
                                 ?>
                                 <?php esc($extension); ?><br />
-                            <?php
-                            } ?></td>
+                                <?php }
+                            ?></td>
                     </tr>
-                    <?php
-                } ?>
+                    <?php }
+                ?>
                 <?php
                 if ($min_mysql_version) {
                     ?>
@@ -138,8 +139,8 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                         <td><strong><?php translate("min_mysql_version") ?></strong></td>
                         <td><?php esc($min_mysql_version); ?></td>
                     </tr>
-                <?php
-                } ?>
+                    <?php }
+                ?>
 
                 <?php
                 if ($max_mysql_version) {
@@ -148,8 +149,8 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                         <td><strong><?php translate("max_mysql_version") ?></strong></td>
                         <td><?php esc($max_mysql_version); ?></td>
                     </tr>
-                <?php
-                } ?>
+                    <?php }
+                ?>
                 <?php
                 if ($dependencies) {
                     ?>
@@ -159,11 +160,11 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                             foreach ($dependencies as $dep) {
                                 ?>
                                 <?php esc($dep); ?><br />
-                            <?php
-                            } ?></td>
+                                <?php }
+                            ?></td>
                     </tr>
-                <?php
-                } ?>
+                    <?php }
+                ?>
             </table>
             <?php if ($license) { ?>
                 <h2><?php translate("license_agreement"); ?></h2>
@@ -175,7 +176,8 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                 <h2><?php translate("errors"); ?></h2>
                 <?php
                 echo implode("<br/>", $errors);
-            } ?>
+            }
+            ?>
             <?php
             if ($installable) {
                 ?>
@@ -183,7 +185,8 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                     <?php
                     echo ModuleHelper::buildMethodCallForm("PkgInfoController", "install", array(
                         "file" => basename($tempfile)
-                    )); ?>
+                    ));
+                    ?>
                     <button type="submit" class="btn btn-warning"><i class="fas fa-box"></i> <?php translate("install"); ?></button>
                 </form>
                 </div>
