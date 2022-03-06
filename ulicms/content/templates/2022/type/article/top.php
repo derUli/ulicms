@@ -18,7 +18,7 @@ $article_image = getTemplateDirPath("impro17") . "images/nopic.jpg";
 if ($meta && !empty($meta->article_image)) {
     $article_image = $meta->article_image;
 }
-?><p>
+?><div class="article-content-image">
     <img src="<?php Template::escape($article_image); ?>"
          alt="<?php Template::escape($meta->title); ?>" class="article-image">
 </p>
