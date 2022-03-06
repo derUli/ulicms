@@ -1,12 +1,5 @@
 {
-    "repositories": [
-        {
-            "name": "deruli/mobiledetectlib",
-            "url": "https://github.com/derUli/Mobile-Detect",
-            "type": "git"
-        }
-    ],
     "require": {
-        "deruli/mobiledetectlib": "dev-master"
+        "mobiledetect/mobiledetectlib": "*"
     }
 }
