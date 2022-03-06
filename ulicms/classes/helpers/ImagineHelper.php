@@ -57,24 +57,17 @@ class ImagineHelper extends Helper {
      * @return AbstractImagine|null
      */
     public static function getImagine(): ?AbstractImagine {
-        $imagine = self::getImageMagick();
+        $imagineInterface = null;
+        $libraries = self::getLibraries();
 
-        if (!$imagine) {
-            $imagine = self::getGraphicsMagicks();
+        foreach ($libraries as $imagine) {
+            if ($imagine) {
+                $imagineInterface = $imagine;
+                break;
+            }
         }
 
-        if (!$imagine) {
-            $imagine = self::getGD();
-        }
-
-        if (!$imagine) {
-            throw new NotSupportedException(
-                            "No graphics library installed\n" .
-                            "Please install GD, ImageMagick or GraphicsMagick for PHP"
-            );
-        }
-
-        return $imagine;
+        return $imagineInterface;
     }
 
     /**
@@ -82,17 +75,25 @@ class ImagineHelper extends Helper {
      * @return string|null
      */
     public static function getLibraryName(): ?string {
-        if (self::getImageMagick()) {
-            return self::IMAGE_MAGICK;
-        }
-        if (self::getGraphicsMagicks()) {
-            return self::GRAPHICS_MAGICK;
+        $libraryName = null;
+        $libraries = self::getLibraries();
+
+        foreach ($libraries as $name => $imagine) {
+            if ($imagine) {
+                $libraryName = $name;
+                break;
+            }
         }
 
-        if (self::getGD()) {
-            return self::GD;
-        }
-        return null;
+        return $libraryName;
+    }
+
+    public static function getLibraries(): array {
+        return [
+            self::GRAPHICS_MAGICK => self::getGraphicsMagicks(),
+            self::IMAGE_MAGICK => self::getImageMagick(),
+            self::GD => self::getGD()
+        ];
     }
 
 }
