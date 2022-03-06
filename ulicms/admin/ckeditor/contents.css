@@ -207,22 +207,8 @@ a > img {
     margin:0 auto;
 }
 
-img{
+img
+{
     max-width: 100%;
     height: auto;
-}
-
-
-ol {
-    list-style: none;
-    counter-reset: cupcake;
-    padding-left: 32px;
-
-    li {
-        counter-increment: cupcake;
-
-        &:before {
-            content: counters(cupcake, ".") ". ";
-        }
-    }
 }
