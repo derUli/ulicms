@@ -230,7 +230,7 @@ function get_article_meta(?string $page = null): ?object {
         $page = get_slug();
     }
 
-    $dataset = '';
+    $dataset = null;
     $sql = "SELECT `article_author_name`, `article_author_email`, CASE WHEN "
             . "`article_date` is not null then UNIX_TIMESTAMP(article_date) "
             . "else null end as article_date, `article_image`, "
@@ -238,6 +238,7 @@ function get_article_meta(?string $page = null): ?object {
             " WHERE slug='" . db_escape($page) .
             "'  AND language='" .
             Database::escapeValue(getFrontendLanguage()) . "'";
+
     $result = db_query($sql);
     if (db_num_rows($result) > 0) {
         $dataset = Database::fetchObject($result);
@@ -245,6 +246,7 @@ function get_article_meta(?string $page = null): ?object {
         $dataset->article_date = $dataset->article_date ?
                 intval($dataset->article_date) : null;
     }
+
     $dataset = apply_filter($dataset, "get_article_meta");
     return $dataset;
 }
