@@ -21,4 +21,5 @@ if ($meta && !empty($meta->article_image)) {
 ?><div class="article-content-image">
     <img src="<?php Template::escape($article_image); ?>"
          alt="<?php Template::escape($meta->title); ?>" class="article-image">
+</div>
 </p>

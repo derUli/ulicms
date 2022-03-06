@@ -68,7 +68,9 @@ body {
             }
 
             div.headline {
-                display: inline-block; 
+                @extend .noselect;
+                
+                display: inline-block;
                 min-width: 0;
                 width: 100%;
                 padding-right: $default-horizontal-spacing;
@@ -195,14 +197,20 @@ body {
                 line-height: 1.5em;
 
                 .article-content-image {
-                    margin: 20px -#{$default-horizontal-spacing};
+                    margin: 20px -#{
+                        $default-horizontal-spacing
+                    }
+                    ;
                 }
             }
 
         }
 
         .advertisement{
-            margin: 20px -#{$default-horizontal-spacing} 0;
+            margin: 20px -#{
+                $default-horizontal-spacing
+            }
+            0;
             padding: $default-horizontal-spacing;
             background: $lightgrey-background;
 
@@ -251,6 +259,16 @@ body {
             }
         }
     }
+}
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                          supported by Chrome, Edge, Opera and Firefox */
 }
 
 @keyframes fade {

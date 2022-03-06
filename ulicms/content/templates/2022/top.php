@@ -13,6 +13,7 @@ og_html_prefix();
 
     base_metas();
     ?>
+    <meta name="theme-color" content="<?php esc(Settings::get("header-background-color")); ?>;" />
     <style>
         header.header {
             background: <?php esc(Settings::get("header-background-color")); ?>;

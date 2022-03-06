@@ -13,19 +13,48 @@ use UliCMS\Models\Content\Advertisement\Banners;
 class Template {
 
     public static function getBodyClasses(): string {
-        $str = get_ID() ? "page-id-" . get_ID() . " " : "";
+        $classes = [];
 
-        $str .= (is_frontpage() ? "home " : "");
-        $str .= (is_404() ? "error404 " : "");
-        $str .= (is_403() ? "error403 " : "");
-        $str .= ((is_404() or is_403()) ? "errorPage " : "page ");
-        $str .= (is_mobile() ? "mobile " : "desktop ");
-        $str .= (containsModule(get_slug()) ?
-                " containsModule " : "");
+        if (get_ID()) {
+            $classes[] = "page-id-" . get_ID();
+        }
 
-        $str = trim($str);
-        $str = apply_filter($str, "body_classes");
-        return $str;
+        if (is_frontpage()) {
+            $classes[] = "home";
+        }
+
+        if (is_404()) {
+            $classes[] = "error404";
+        }
+
+        if (is_403()) {
+            $classes[] = "error403";
+        }
+
+
+        if (is_404() || is_403()) {
+            $classes[] = "errorPage";
+        } else {
+            $classes[] = "page";
+        }
+
+        if (is_mobile()) {
+            $classes[] = "mobile";
+        } else {
+            $classes[] = "desktop";
+        }
+
+        if (containsModule(get_slug())) {
+            $classes[] = "containsModule";
+        }
+
+        if (get_type()) {
+            $classes[] = "content-type-" . get_type() . " ";
+        }
+
+        $classes = apply_filter($classes, "body_classes");
+
+        return implode(" ", $classes);
     }
 
     public static function bodyClasses() {
