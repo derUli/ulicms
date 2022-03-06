@@ -56,5 +56,4 @@ og_html_prefix();
             </nav>
         </header>
         <main>
-
             <article>

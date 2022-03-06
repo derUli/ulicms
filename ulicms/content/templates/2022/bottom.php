@@ -1,16 +1,14 @@
 <?php Template::comments(); ?>
 </article>
-
-
 <div class="advertisement">
     <?php Template::randomBanner(); ?>
 </div>
 </main>
 <footer class="footer">
-<div>
-    <?php Template::footerText(); ?>
-</div>
-<?php echo Template::editButton();?>
+    <div>
+        <?php Template::footerText(); ?>
+    </div>
+    <?php echo Template::editButton(); ?>
 </footer>
 <?php Template::footer(); ?>
 </div>
