@@ -29,13 +29,6 @@ function get_canonical(): string
         $canonical .= buildSEOUrl();
     }
 
-    if (containsModule(null, "blog")) {
-        if (isset($_GET["single"])) {
-            $canonical .= "?single=" . _esc($_GET["single"]);
-        } elseif (isset($_GET["limit"])) {
-            $canonical .= "?limit=" . intval($_GET["limit"]);
-        }
-    }
     $canonical = apply_filter($canonical, "canonical");
     return $canonical;
 }
