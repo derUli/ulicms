@@ -29,16 +29,7 @@ class Path {
                 $path
         );
         $path = str_ireplace("ULICMS_CONFIGURATIONS", ULICMS_CONFIGURATIONS, $path);
-        if (defined("ULICMS_DATA_STORAGE_URL")) {
-            $path = str_ireplace(
-                    "ULICMS_DATA_STORAGE_URL",
-                    rtrim(
-                            ULICMS_DATA_STORAGE_URL,
-                            "/"
-                    ),
-                    $path
-            );
-        }
+
         $path = str_ireplace("ULICMS_TMP", rtrim(ULICMS_TMP, "/"), $path);
         $path = str_ireplace("ULICMS_CACHE", rtrim(ULICMS_CACHE, "/"), $path);
         $path = str_ireplace(

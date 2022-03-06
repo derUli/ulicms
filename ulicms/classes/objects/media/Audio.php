@@ -198,12 +198,7 @@ class Audio extends Model {
     }
 
     protected function getAudioDir(): string {
-        $audioDir = self::AUDIO_DIR;
-
-        $storageUrl = defined("ULICMS_DATA_STORAGE_URL") ?
-                Path::resolve("ULICMS_DATA_STORAGE_URL/$audioDir") . "/" : null;
-
-        return defined("ULICMS_DATA_STORAGE_URL") ? $storageUrl : $audioDir;
+        return self::AUDIO_DIR;
     }
 
     // render HTML5 <audio> tag

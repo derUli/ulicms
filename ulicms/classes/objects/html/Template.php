@@ -184,10 +184,7 @@ class Template {
     }
 
     public static function getLogoUrl(): string {
-        return defined("ULICMS_DATA_STORAGE_URL") ?
-                ULICMS_DATA_STORAGE_URL . "/content/images/" .
-                Settings::get("logo_image") : "content/images/" .
-                Settings::get("logo_image");
+        return "content/images/" . Settings::get("logo_image");
     }
 
     // get current year

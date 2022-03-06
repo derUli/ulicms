@@ -8,9 +8,7 @@ use UliCMS\Models\Media\Video;
 function replaceAudioTags(string $txt): ?string
 {
     $audio_dir = "content/audio/";
-    if (defined("ULICMS_DATA_STORAGE_URL")) {
-        $audio_dir = Path::resolve("ULICMS_DATA_STORAGE_URL/$audio_dir") . "/";
-    }
+    
     // Ich weiß, dass das eigentlich einfacher mit einem
     // regulären Ausdruck geht, aber ich kann keine reguläre Ausdrücke.
     // Reguläre Ausdrücke sehen für mich so aus, als wäre
@@ -40,9 +38,6 @@ function replaceAudioTags(string $txt): ?string
 function replaceVideoTags(string $txt): string
 {
     $video_dir = "content/videos/";
-    if (defined("ULICMS_DATA_STORAGE_URL")) {
-        $video_dir = Path::resolve("ULICMS_DATA_STORAGE_URL/$video_dir") . "/";
-    }
 
     // Ich weiß, dass das eigentlich einfacher mit einem
     // regulären Ausdruck geht, aber ich kann keine reguläre Ausdrücke.

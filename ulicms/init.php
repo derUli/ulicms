@@ -172,25 +172,9 @@ if ((defined("ULICMS_DEBUG") and ULICMS_DEBUG)
     error_reporting(0);
 }
 
-// UliCMS has support to define an alternative root folder
-// to seperate it's core files from variable data such as modules and media
-// this enables us to use stuff like Docker containers where data gets lost
-// after stopping the container
-if (isset($config->data_storage_root)
-        && !is_null($config->data_storage_root)) {
-    define("ULICMS_DATA_STORAGE_ROOT", $config->data_storage_root);
-} else {
-    define("ULICMS_DATA_STORAGE_ROOT", ULICMS_ROOT);
-}
+define("ULICMS_DATA_STORAGE_ROOT", ULICMS_ROOT);
 
 require_once dirname(__file__) . "/classes/renderers/load.php";
-
-// this enables us to set an base url for statis ressources such as images
-// stored in ULICMS_DATA_STORAGE_ROOT
-if (isset($config->data_storage_url)
-        && !is_null($config->data_storage_url)) {
-    define("ULICMS_DATA_STORAGE_URL", $config->data_storage_url);
-}
 
 if (!defined("ULICMS_TMP")) {
     define("ULICMS_TMP", ULICMS_DATA_STORAGE_ROOT . "/content/tmp/");
