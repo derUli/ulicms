@@ -139,16 +139,13 @@ function is_crawler(?string $useragent = null): bool {
         return false;
     }
 
-    $isCrawler = apply_filter($useragent, "is_crawler");
-    if (is_bool($isCrawler) or is_int($isCrawler)) {
-        return boolval($isCrawler);
+    $isCrawler = false;
+
+    $crawlerCheck = apply_filter($useragent, "is_crawler");
+    if (is_bool($crawlerCheck) or is_int($crawlerCheck)) {
+        $isCrawler = boolval($crawlerCheck);
     }
 
-    $crawlers = 'Google|msnbot|Rambler|Yahoo|AbachoBOT|accoona|' .
-            'AcioRobot|ASPSeek|CocoCrawler|Dumbot|FAST-WebCrawler|' .
-            'GeonaBot|Gigabot|Lycos|MSRBOT|Scooter|AltaVista|IDBot'
-            . '|eStyle|Scrubby';
-    $isCrawler = (preg_match("/$crawlers/", $useragent) > 0);
     return $isCrawler;
 }
 

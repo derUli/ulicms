@@ -68,6 +68,7 @@
       <directory>content/modules/core_history/templates</directory>
       <directory>classes/objects/constants</directory>
       <directory>content/modules/core_media/templates</directory>
+      <directory>content/modules/CrawlerDetect</directory>
       <directory>content/templates/impro17</directory>
       <directory>content/templates/2022</directory>
       <directory>content/templates/2020</directory>

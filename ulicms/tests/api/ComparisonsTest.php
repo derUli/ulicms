@@ -3,18 +3,16 @@
 use UliCMS\Utils\File;
 use UliCMS\Exceptions\DatasetNotFoundException;
 
-class ComparisonsTest extends \PHPUnit\Framework\TestCase
-{
-    protected function setUp(): void
-    {
+class ComparisonsTest extends \PHPUnit\Framework\TestCase {
+
+    protected function setUp(): void {
         $_SERVER = [];
         $_REQUEST = [];
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         Database::query("delete from {prefix}users where username like 'testuser-%'", true);
-                
+
         $_SERVER = [];
         $_REQUEST = [];
 
@@ -25,20 +23,17 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase
 
     // in the test environment this returns always true
     // since the tests are running at the command line
-    public function testIsCli()
-    {
+    public function testIsCli() {
         $this->assertTrue(isCLI());
     }
 
-    public function testIsCrawler()
-    {
+    public function testIsCrawler() {
         $pkg = new PackageManager();
-        
+
         if (!faster_in_array("CrawlerDetect", $pkg->getInstalledModules())) {
-            $this->assertNotNull("CrawlerDetect is not installed. Skip this test");
-            return;
+            $this->markTestSkipped("CrawlerDetect is not installed. Skip this test");
         }
-        
+
         $useragents = array(
             "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)" => true,
             "Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)" => true,
@@ -47,54 +42,49 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase
             "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; NP08; .NET4.0C; .NET4.0E; NP08; MAAU; rv:11.0) like Gecko" => false,
             "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:55.0) Gecko/20100101 Firefox/55.0" => false
         );
+
         foreach ($useragents as $key => $value) {
             $this->assertEquals($value, is_crawler($key));
         }
     }
 
-    public function testIsCrawlerWithoutUseragent()
-    {
+    public function testIsCrawlerWithoutUseragent() {
         unset($_SERVER["HTTP_USER_AGENT"]);
         $this->assertFalse(
-            is_crawler()
+                is_crawler()
         );
     }
-    public function testIsCrawlerWithUseragentFromSession()
-    {
+
+    public function testIsCrawlerWithUseragentFromSession() {
         $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)";
         $this->assertTrue(
-            is_crawler()
+                is_crawler()
         );
     }
-    
-    public function testIsTrue()
-    {
+
+    public function testIsTrue() {
         $this->assertTrue(is_true(true));
         $this->assertTrue(is_true(1));
         $this->assertFalse(is_true(false));
         $this->assertFalse(is_true(0));
     }
 
-    public function testIsAdminDirTrue()
-    {
+    public function testIsAdminDirTrue() {
         chdir(Path::resolve("ULICMS_ROOT/admin"));
         $this->assertTrue(is_admin_dir());
     }
 
-    public function testIsAdminDirFalse()
-    {
+    public function testIsAdminDirFalse() {
         chdir(Path::resolve("ULICMS_ROOT"));
         $this->assertFalse(is_admin_dir());
     }
 
-    public function testIsMaintenanceModeOn()
-    {
+    public function testIsMaintenanceModeOn() {
         Settings::set("maintenance_mode", "1");
         $this->assertTrue(isMaintenanceMode());
     }
 
-    public function testIsMaintenanceModeOff()
-    {
+    public function testIsMaintenanceModeOff() {
         Settings::set("maintenance_mode", "0");
         $this->assertFalse(isMaintenanceMode());
 
@@ -102,28 +92,24 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse(isMaintenanceMode());
     }
 
-    public function testIsFalse()
-    {
+    public function testIsFalse() {
         $this->assertFalse(is_false(true));
         $this->assertFalse(is_false(1));
         $this->assertTrue(is_false(false));
         $this->assertTrue(is_false(0));
     }
 
-    public function testIsJsonTrue()
-    {
+    public function testIsJsonTrue() {
         $validJson = File::read(ModuleHelper::buildModuleRessourcePath("core_content", "metadata.json"));
         $this->assertTrue(is_json($validJson));
     }
 
-    public function testIsJsonFalse()
-    {
+    public function testIsJsonFalse() {
         $invalidJson = File::read(ModuleHelper::buildModuleRessourcePath("core_content", "lang/de.php"));
         $this->assertFalse(is_json($invalidJson));
     }
 
-    public function testIsNumericArray()
-    {
+    public function testIsNumericArray() {
         $this->assertTrue(is_numeric_array(array(
             "42",
             1337,
@@ -144,16 +130,14 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse(is_numeric_array(9.1));
     }
 
-    public function testIsZeroReturnsTrue()
-    {
+    public function testIsZeroReturnsTrue() {
         $this->assertTrue(is_zero(0.00));
         $this->assertTrue(is_zero(0));
         $this->assertTrue(is_zero("0.00"));
         $this->assertTrue(is_zero("0"));
     }
 
-    public function testIsZeroReturnsFalse()
-    {
+    public function testIsZeroReturnsFalse() {
         $this->assertFalse(is_zero(2.99));
         $this->assertFalse(is_zero(4));
         $this->assertFalse(is_zero("13.37"));
@@ -162,24 +146,21 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse(is_zero(null));
     }
 
-    public function testIsDecimalReturnsTrue()
-    {
+    public function testIsDecimalReturnsTrue() {
         $this->assertTrue(is_decimal(1.99));
         $this->assertTrue(is_decimal("1.99"));
         $this->assertTrue(is_decimal("0.00"));
         $this->assertTrue(is_decimal("1.00"));
     }
 
-    public function testisDecimalReturnsFalse()
-    {
+    public function testisDecimalReturnsFalse() {
         $this->assertFalse(is_decimal(666));
         $this->assertFalse(is_decimal("666"));
         $this->assertFalse(is_decimal("foobar"));
         $this->assertFalse(is_decimal("0"));
     }
 
-    public function testIsBlankReturnsTrue()
-    {
+    public function testIsBlankReturnsTrue() {
         $this->assertTrue(is_blank(""));
         $this->assertTrue(is_blank(" "));
         $this->assertTrue(is_blank(false));
@@ -189,8 +170,7 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue(is_blank("0"));
     }
 
-    public function testIsBlankReturnsFalse()
-    {
+    public function testIsBlankReturnsFalse() {
         $this->assertFalse(is_blank(" hallo welt "));
         $this->assertFalse(is_blank(13));
         $this->assertFalse(is_blank(true));
@@ -198,8 +178,7 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse(is_blank("13"));
     }
 
-    public function testIsPresentReturnsTrue()
-    {
+    public function testIsPresentReturnsTrue() {
         $this->assertTrue(is_present(" hallo welt "));
         $this->assertTrue(is_present(13));
         $this->assertTrue(is_present(true));
@@ -207,8 +186,7 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue(is_present("13"));
     }
 
-    public function testIsPresentReturnsFalse()
-    {
+    public function testIsPresentReturnsFalse() {
         $this->assertFalse(is_present(""));
         $this->assertFalse(is_present(" "));
         $this->assertFalse(is_present(false));
@@ -218,47 +196,40 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse(is_present("0"));
     }
 
-    public function testStartsWithReturnsTrue()
-    {
+    public function testStartsWithReturnsTrue() {
         $this->assertTrue(startsWith("hello world", "hello"));
         $this->assertTrue(startsWith("hello world", "Hello", false));
     }
 
-    public function testStartsWithReturnsFalse()
-    {
+    public function testStartsWithReturnsFalse() {
         $this->assertFalse(startsWith("hello world", "bye"));
         $this->assertFalse(startsWith("hello world", "Hello"));
     }
 
-    public function testEndsWithReturnsTrue()
-    {
+    public function testEndsWithReturnsTrue() {
         $this->assertTrue(endsWith("hello world", "world"));
         $this->assertTrue(endsWith("hello world", "World", false));
     }
 
-    public function testEndsWithReturnsFalse()
-    {
+    public function testEndsWithReturnsFalse() {
         $this->assertFalse(endsWith("hello world", "you"));
         $this->assertFalse(endsWith("hello world", "World"));
     }
 
-    public function testFasterInArrayReturnsTrue()
-    {
+    public function testFasterInArrayReturnsTrue() {
         $array = array("hello", "world", 123);
         $this->assertTrue(faster_in_array("world", $array));
         $this->assertTrue(faster_in_array(123, $array));
     }
 
-    public function testFasterInArrayReturnsFalse()
-    {
+    public function testFasterInArrayReturnsFalse() {
         $array = array("hello", "world", 123);
         $this->assertFalse(faster_in_array("germany", $array));
         $this->assertFalse(faster_in_array(789, $array));
         $this->assertFalse(faster_in_array(789, "not-an-array"));
     }
 
-    public function testVarIsType()
-    {
+    public function testVarIsType() {
         $this->assertTrue(var_is_type(123, "numeric", true));
         $this->assertTrue(var_is_type(null, "numeric", false));
         $this->assertFalse(var_is_type(null, "numeric", true));
@@ -268,44 +239,38 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse(var_is_type("nicht leer", "typ_der_nicht_existiert", true));
     }
 
-    public function testIsNightReturnsTrue()
-    {
+    public function testIsNightReturnsTrue() {
         $this->assertTrue(is_night(1570404356));
     }
 
-    public function testIsNightReturnsFalse()
-    {
+    public function testIsNightReturnsFalse() {
         $this->assertFalse(is_night(1570389956));
     }
 
-    public function testIsNightWithoutTimeReturnsBool()
-    {
+    public function testIsNightWithoutTimeReturnsBool() {
         $this->assertIsBool(is_night());
     }
 
-    public function testIsDebugMode()
-    {
+    public function testIsDebugMode() {
         $this->assertIsBool(is_debug_mode());
     }
 
-    public function testGetByIdThrowsException()
-    {
+    public function testGetByIdThrowsException() {
         $this->expectException(DatasetNotFoundException::class);
         ContentFactory::getByID(PHP_INT_MAX);
     }
 
-    public function testIsVersionNumberReturnsTrue()
-    {
+    public function testIsVersionNumberReturnsTrue() {
         $this->assertTrue(is_version_number("1.0"));
         $this->assertTrue(is_version_number("123"));
         $this->assertTrue(is_version_number("2.0.3"));
         $this->assertTrue(is_version_number("2.0.3beta"));
     }
 
-    public function testIsVersionNumberReturnsFalse()
-    {
+    public function testIsVersionNumberReturnsFalse() {
         $this->assertFalse(is_version_number("keine version"));
         $this->assertFalse(is_version_number("null"));
         $this->assertFalse(is_version_number("beta"));
     }
+
 }
