@@ -5,6 +5,11 @@ use UliCMS\Utils\CacheUtil;
 
 class MinifyTest extends \PHPUnit\Framework\TestCase {
 
+    protected function setUp(): void {
+        sureRemoveDir(Path::resolve("ULICMS_ROOT/content/cache/stylesheets"), true);
+        sureRemoveDir(Path::resolve("ULICMS_ROOT/content/cache/scripts"), true);
+    }
+    
     protected function tearDown(): void {
         resetScriptQueue();
         resetStylesheetQueue();
