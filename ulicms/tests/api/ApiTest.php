@@ -658,6 +658,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $_SESSION["language"] = "de";
         $_GET["slug"] = $page->slug;
         $this->assertTrue(containsModule());
+        $this->assertTrue(containsModule());
     }
 
     public function testContainsModuleReturnsTrue() {
