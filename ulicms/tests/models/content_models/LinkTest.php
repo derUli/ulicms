@@ -1,14 +1,12 @@
 <?php
 
-class LinkTest extends \PHPUnit\Framework\TestCase
-{
-    protected function tearDown(): void
-    {
+class LinkTest extends \PHPUnit\Framework\TestCase {
+
+    protected function tearDown(): void {
         Database::deleteFrom("content", "slug like 'unit_test_%'");
     }
 
-    public function testCreateUpdateAndDeleteLink()
-    {
+    public function testCreateUpdateAndDeleteLink() {
         $link = new Link();
         $link->title = "Unit Test Link";
         $link->slug = "unit_test_" . uniqid();
@@ -29,8 +27,8 @@ class LinkTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("none", $loadedLink->menu);
         $this->assertEquals("de", $loadedLink->language);
         $this->assertEquals(
-            "https://www.google.de",
-            $loadedLink->link_url
+                "https://www.google.de",
+                $loadedLink->link_url
         );
 
         $this->assertEquals("link", $loadedLink->type);
@@ -45,8 +43,7 @@ class LinkTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("https://www.ulicms.de", $loadedLink->link_url);
     }
 
-    public function testUpdateCreatesDataset()
-    {
+    public function testUpdateCreatesDataset() {
         $link = new Link();
         $link->title = "Unit Test Link";
         $link->slug = "unit_test_" . uniqid();
@@ -64,4 +61,5 @@ class LinkTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($link->isPersistent());
         $this->assertIsNumeric($link->getID());
     }
+
 }

@@ -18,19 +18,20 @@ $model = $controller->getModel();
             $url = "../" . $row->slug . ".html";
         } else {
             $url = "http://" . $domain . "/" . $row->slug . ".html";
-        } ?>
+        }
+        ?>
         <tr>
-            <td><a href="<?php
-                echo $url; ?>" target="_blank"><?php
-                       esc($row->title); ?></a></td>
+            <td><a href="<?php echo $url; ?>" target="_blank"><?php esc($row->title); ?></a></td>
             <td><?php echo PHP81_BC\strftime("%x %X", $row->lastmodified) ?></td>
             <td><?php
                 $autorName = $model->admins[$row->lastchangeby];
-        if (!empty($autorName)) {
-        } else {
-            $autorName = $model->admins[$row->author_id];
-        }
-        echo $autorName; ?></td>
+                if (!empty($autorName)) {
+                    
+                } else {
+                    $autorName = $model->admins[$row->author_id];
+                }
+                echo $autorName;
+                ?></td>
         </tr>
         <?php
     }

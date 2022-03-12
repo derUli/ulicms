@@ -591,11 +591,11 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue($user->removeAvatar());
         $this->assertFalse($user->hasProcessedAvatar());
     }
-    
 
     public function testChangeAvatarReturnsTrue() {
         throw new NotImplementedException();
     }
+
     public function testChangeAvatarReturnsFalse() {
         $inputFile = Path::resolve(
                         "ULICMS_ROOT/admin/gfx/apple-touch-icon-120x120.png"

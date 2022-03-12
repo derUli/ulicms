@@ -1,15 +1,13 @@
 <?php
 
-class JSTranslationTest extends \PHPUnit\Framework\TestCase
-{
-    protected function setUp(): void
-    {
+class JSTranslationTest extends \PHPUnit\Framework\TestCase {
+
+    protected function setUp(): void {
         require_once getLanguageFilePath("en");
         require_once ModuleHelper::buildModuleRessourcePath("core_help", "lang/en.php");
     }
 
-    public function testConstructorWithKeys()
-    {
+    public function testConstructorWithKeys() {
         $keys = [
             "help",
             "pages",
@@ -19,8 +17,7 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($keys, $translation->getKeys());
     }
 
-    public function testGetJs()
-    {
+    public function testGetJs() {
         $keys = [
             "help",
             "TRANSLATION_PAGES",
@@ -28,18 +25,16 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase
         ];
         $translation = new JSTranslation($keys);
 
-
         $this->assertEquals(
-            file_get_contents(
-                ULICMS_ROOT .
+                file_get_contents(
+                        ULICMS_ROOT .
                         "/tests/fixtures/JSTranslation/JSTranslation1.html"
-            ),
-            $translation->getJS()
+                ),
+                $translation->getJS()
         );
     }
 
-    public function testGetJsWithVarname()
-    {
+    public function testGetJsWithVarname() {
         $keys = [
             "pages_count",
             "pages",
@@ -48,16 +43,15 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase
         $translation = new JSTranslation($keys, "ThisIsNotGoogleTranslator");
 
         $this->assertEquals(
-            file_get_contents(
-                ULICMS_ROOT .
+                file_get_contents(
+                        ULICMS_ROOT .
                         "/tests/fixtures/JSTranslation/JSTranslation2.html"
-            ),
-            $translation->getJS()
+                ),
+                $translation->getJS()
         );
     }
 
-    public function testGetJsWithVarnameAndWrap()
-    {
+    public function testGetJsWithVarnameAndWrap() {
         $keys = [
             "pages_count",
             "pages",
@@ -66,16 +60,15 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase
         $translation = new JSTranslation($keys, "ThisIsNotGoogleTranslator");
 
         $this->assertEquals(
-            file_get_contents(
-                ULICMS_ROOT . "/tests/fixtures/JSTranslation/JSTranslation3.html"
-            ),
-            $translation->getJS('<script id="my-script">{code}</script>')
+                file_get_contents(
+                        ULICMS_ROOT . "/tests/fixtures/JSTranslation/JSTranslation3.html"
+                ),
+                $translation->getJS('<script id="my-script">{code}</script>')
         )
         ;
     }
 
-    public function testRender()
-    {
+    public function testRender() {
         $keys = [
             "help",
             "pages",
@@ -87,16 +80,15 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase
         $output = ob_get_clean();
 
         $this->assertEquals(
-            file_get_contents(
-                ULICMS_ROOT .
+                file_get_contents(
+                        ULICMS_ROOT .
                         "/tests/fixtures/JSTranslation/JSTranslation1.html"
-            ),
-            $output
+                ),
+                $output
         );
     }
 
-    public function testRenderJs()
-    {
+    public function testRenderJs() {
         $keys = [
             "help",
             "pages",
@@ -108,16 +100,15 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase
         $output = ob_get_clean();
 
         $this->assertEquals(
-            file_get_contents(
-                ULICMS_ROOT .
+                file_get_contents(
+                        ULICMS_ROOT .
                         "/tests/fixtures/JSTranslation/JSTranslation1.html"
-            ),
-            $output
+                ),
+                $output
         );
     }
 
-    public function testRenderJsWithVarname()
-    {
+    public function testRenderJsWithVarname() {
         $keys = [
             "pages_count",
             "pages",
@@ -128,16 +119,15 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase
         $translation->renderJS();
         $output = ob_get_clean();
         $this->assertEquals(
-            $output,
-            file_get_contents(
-                ULICMS_ROOT .
+                $output,
+                file_get_contents(
+                        ULICMS_ROOT .
                         "/tests/fixtures/JSTranslation/JSTranslation2.html"
-            )
+                )
         );
     }
 
-    public function testRenderJsWithVarnameAndWrap()
-    {
+    public function testRenderJsWithVarnameAndWrap() {
         $keys = [
             "pages_count",
             "pages",
@@ -150,16 +140,15 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase
         $output = ob_get_clean();
 
         $this->assertEquals(
-            $output,
-            file_get_contents(
-                ULICMS_ROOT .
+                $output,
+                file_get_contents(
+                        ULICMS_ROOT .
                         "/tests/fixtures/JSTranslation/JSTranslation3.html"
-            )
+                )
         );
     }
 
-    public function testAddKey()
-    {
+    public function testAddKey() {
         $keys = [
             "pages_count",
             "pages",
@@ -170,45 +159,42 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase
         $translation->addKey("category");
 
         $this->assertEquals(
-            [
+                [
                     "pages_count",
                     "pages",
                     "gibts_nicht",
                     "category"
                 ],
-            $translation->getKeys()
+                $translation->getKeys()
         );
     }
 
-    public function testAddKeys()
-    {
+    public function testAddKeys() {
         $keys = [
             "help",
             "pages",
             "gibts_nicht"
         ];
 
-
         $translation = new JSTranslation($keys);
         $translation->addKeys(
-            ["category",
+                ["category",
                     "images"]
         );
 
         $this->assertEquals(
-            [
+                [
                     "help",
                     "pages",
                     "gibts_nicht",
                     "category",
                     "images"
                 ],
-            $translation->getKeys()
+                $translation->getKeys()
         );
     }
 
-    public function testGetVarName()
-    {
+    public function testGetVarName() {
         $keys = [
             "pages_count",
             "pages",
@@ -218,8 +204,7 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("UniversalTranslator", $translation->getVarName());
     }
 
-    public function testSetVarName()
-    {
+    public function testSetVarName() {
         $keys = [
             "pages_count",
             "pages",
@@ -230,8 +215,7 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("CrapTranslation", $translation->getVarName());
     }
 
-    public function testRemoveKey()
-    {
+    public function testRemoveKey() {
         $keys = [
             "pages_count",
             "pages",
@@ -242,8 +226,7 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(["pages", "gibts_nicht"], $translation->getKeys());
     }
 
-    public function testRemoveKeys()
-    {
+    public function testRemoveKeys() {
         $keys = [
             "pages_count",
             "pages",
@@ -254,8 +237,9 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase
         $translation = new JSTranslation($keys, "UniversalTranslator");
         $translation->removeKeys(["foo", "gibts_nicht"]);
         $this->assertEquals(
-            ["pages_count", "pages", "bar"],
-            $translation->getKeys()
+                ["pages_count", "pages", "bar"],
+                $translation->getKeys()
         );
     }
+
 }

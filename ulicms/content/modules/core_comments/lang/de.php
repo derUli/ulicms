@@ -1,8 +1,8 @@
 <?php
 
 add_translation(
-    "comment_contains_badword",
-    "Das Feld \"%field%\" enthält das nicht erlaubte Wort \"%word%\"."
+        "comment_contains_badword",
+        "Das Feld \"%field%\" enthält das nicht erlaubte Wort \"%word%\"."
 );
 add_translation("comment_text", "Kommentartext");
 add_translation("useragent", "User Agent");
@@ -18,16 +18,16 @@ add_translation("your_website", "Ihre Webseite");
 add_translation("text", "Text");
 
 add_translation(
-    "comment_published_published",
-    "Ihr Kommentar wurde veröffentlicht."
+        "comment_published_published",
+        "Ihr Kommentar wurde veröffentlicht."
 );
 add_translation(
-    "comment_published_pending",
-    "Ihr Kommentar wurde gesendet und muss zuerst freischaltet werden."
+        "comment_published_pending",
+        "Ihr Kommentar wurde gesendet und muss zuerst freischaltet werden."
 );
 add_translation(
-    "comment_published_spam",
-    "Ihr Kommentar wurde als Spam erkannt.
+        "comment_published_spam",
+        "Ihr Kommentar wurde als Spam erkannt.
             Wenn Sie denken, dass dies ein Fehler ist,
 kontaktieren Sie bitten den Administrator der Webseite"
 );
@@ -41,8 +41,8 @@ add_translation("pending", "Ausstehend");
 add_translation("spam", "Spam");
 add_translation("search", "Suchen");
 add_translation(
-    "limit_results",
-    "Ergebnisanzahl beschränken (0 = Alles anzeigen)"
+        "limit_results",
+        "Ergebnisanzahl beschränken (0 = Alles anzeigen)"
 );
 
 add_translation("select_action", "Aktion auswählen");

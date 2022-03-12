@@ -3,16 +3,14 @@
 use UliCMS\Models\Media\Video;
 use UliCMS\Models\Content\Categories;
 
-class VideoControllerTest extends \PHPUnit\Framework\TestCase
-{
-    protected function tearDown(): void
-    {
+class VideoControllerTest extends \PHPUnit\Framework\TestCase {
+
+    protected function tearDown(): void {
         $_POST = [];
         Database::deleteFrom("videos", "name like 'test-video-%'", true);
     }
 
-    public function testUpdatePostReturnsTrue(): void
-    {
+    public function testUpdatePostReturnsTrue(): void {
         $categories = Categories::getAllCategories();
         $first = $categories[0];
 
@@ -26,7 +24,6 @@ class VideoControllerTest extends \PHPUnit\Framework\TestCase
 
         $video->setCategory($first);
         $video->save();
-
 
         $_POST = [
             "name" => "test-video-2",
@@ -54,8 +51,7 @@ class VideoControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(480, $video->getHeight());
     }
 
-    public function testUpdatePostReturnsFalse(): void
-    {
+    public function testUpdatePostReturnsFalse(): void {
         $categories = Categories::getAllCategories();
         $first = $categories[0];
 
@@ -73,4 +69,5 @@ class VideoControllerTest extends \PHPUnit\Framework\TestCase
         $controller = new VideoController();
         $this->assertFalse($controller->_updatePost());
     }
+
 }

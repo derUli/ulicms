@@ -102,6 +102,11 @@ function is_json(?string $str): bool {
     return !is_null($str) ? json_decode($str) != null : false;
 }
 
+/**
+ * Checks if this is an array with only numeric values
+ * @param type $var Input
+ * @return bool Is Numeric Array
+ */
 function is_numeric_array($var): bool {
     if (!is_array($var)) {
         return false;
@@ -209,7 +214,11 @@ function is_admin(): bool {
     return $isAdmin;
 }
 
-// Check if it is night (current hour between 0 and 4 o'Clock AM)
+/**
+ * Check if it is night (current hour between 0 and 4 o'Clock AM)
+ * @param int|null $time Timestamp
+ * @return bool Is Night
+ */
 function is_night(?int $time = null): bool {
     $time = $time ? $time : time();
     $hour = (int) date("G", $time);

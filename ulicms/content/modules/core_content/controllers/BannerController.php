@@ -7,24 +7,21 @@ use UliCMS\Constants\AuditLog;
 use UliCMS\Models\Content\Advertisement\Banner;
 use UliCMS\Utils\CacheUtil;
 
-class BannerController extends Controller
-{
+class BannerController extends Controller {
+
     private $logger;
 
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
         $this->logger = LoggerRegistry::get("audit_log");
     }
 
-    public function createPost(): void
-    {
+    public function createPost(): void {
         $this->_createPost();
         Request::redirect(ModuleHelper::buildActionURL("banner"));
     }
 
-    public function _createPost(): Banner
-    {
+    public function _createPost(): Banner {
         do_event("before_create_banner");
 
         $banner = new Banner();
@@ -56,15 +53,13 @@ class BannerController extends Controller
         return $banner;
     }
 
-    public function updatePost(): void
-    {
+    public function updatePost(): void {
         $this->_updatePost();
 
         Request::redirect(ModuleHelper::buildActionURL("banner"));
     }
 
-    public function _updatePost(): Banner
-    {
+    public function _updatePost(): Banner {
         $id = intval($_POST["id"]);
 
         do_event("before_edit_banner");
@@ -100,8 +95,7 @@ class BannerController extends Controller
         return $banner;
     }
 
-    public function deletePost(): void
-    {
+    public function deletePost(): void {
         $id = Request::getVat("banner", 0, "int");
 
         $this->_deletePost($id);
@@ -109,8 +103,7 @@ class BannerController extends Controller
         Request::redirect(ModuleHelper::buildActionURL("banner"));
     }
 
-    public function _deletePost(int $id): bool
-    {
+    public function _deletePost(int $id): bool {
         try {
             $banner = new Banner($id);
         } catch (DatasetNotFoundException $e) {
@@ -133,4 +126,5 @@ class BannerController extends Controller
 
         return !$banner->isPersistent();
     }
+
 }

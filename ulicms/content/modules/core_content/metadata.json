@@ -56,7 +56,7 @@
         "PageController::getPages": "pages",
         "PageController::filterParentPages": "pages",
         "PageController::getParentSelection": "pages",
-        "PageController::*" : "pages",
+        "PageController::*": "pages",
         "PageController::getCKEditorLinkList": "",
         "CategoryController::createPost": "categories_create",
         "CategoryController::updatePost": "categories_edit",

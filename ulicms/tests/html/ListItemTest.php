@@ -3,87 +3,79 @@
 use UliCMS\HTML\Input as Input;
 use UliCMS\HTML\ListItem;
 
-class ListItemTest extends \PHPUnit\Framework\TestCase
-{
-    public function testGetHtml()
-    {
+class ListItemTest extends \PHPUnit\Framework\TestCase {
+
+    public function testGetHtml() {
         $item = new ListItem("hello_world", "Hello World!");
         $itemSelected = new ListItem("bye_bye", "Bye Bye!", true);
 
         $this->assertEquals(
-            '<option value="hello_world">Hello World!</option>',
-            $item->getHtml()
+                '<option value="hello_world">Hello World!</option>',
+                $item->getHtml()
         );
         $this->assertEquals(
-            '<option value="bye_bye" selected>Bye Bye!</option>',
-            $itemSelected->getHtml()
+                '<option value="bye_bye" selected>Bye Bye!</option>',
+                $itemSelected->getHtml()
         );
     }
 
-    public function testRender()
-    {
+    public function testRender() {
         $item = new ListItem("hello_world", "Hello World!");
         $itemSelected = new ListItem("bye_bye", "Bye Bye!", true);
 
         ob_start();
         $item->render();
         $this->assertEquals(
-            '<option value="hello_world">Hello World!</option>',
-            ob_get_clean()
+                '<option value="hello_world">Hello World!</option>',
+                ob_get_clean()
         );
-
 
         ob_start();
         $itemSelected->render();
         $this->assertEquals(
-            '<option value="bye_bye" selected>Bye Bye!</option>',
-            ob_get_clean()
+                '<option value="bye_bye" selected>Bye Bye!</option>',
+                ob_get_clean()
         );
     }
 
-    public function testToString()
-    {
+    public function testToString() {
         $item = new ListItem("hello_world", "Hello World!");
 
         $this->assertEquals(
-            '<option value="hello_world">Hello World!</option>',
-            strval($item)
+                '<option value="hello_world">Hello World!</option>',
+                strval($item)
         );
     }
 
-    public function testGetSelectedReturnsTrue()
-    {
+    public function testGetSelectedReturnsTrue() {
         $item = new ListItem("bye_bye", "Bye Bye!", true);
         $this->assertTrue($item->getSelected());
     }
 
-    public function testGetSelectedReturnsFalse()
-    {
+    public function testGetSelectedReturnsFalse() {
         $item = new ListItem("bye_bye", "Bye Bye!", false);
         $this->assertFalse($item->getSelected());
     }
 
-    public function testSetAndGetText()
-    {
+    public function testSetAndGetText() {
         $item = new ListItem("hello_world", "Hello World!");
         $item->setText("Bye Bye");
 
         $this->assertEquals("Bye Bye", $item->getText());
     }
 
-    public function testSetAndGetValue()
-    {
+    public function testSetAndGetValue() {
         $item = new ListItem("hello_world", "Hello World!");
         $item->setValue("bye_bye");
 
         $this->assertEquals("bye_bye", $item->getValue());
     }
 
-    public function testSetSelected()
-    {
+    public function testSetSelected() {
         $item = new ListItem("bye_bye", "Bye Bye!", false);
         $item->setSelected(true);
 
         $this->assertTrue($item->getSelected());
     }
+
 }

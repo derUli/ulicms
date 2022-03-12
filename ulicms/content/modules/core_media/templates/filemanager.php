@@ -9,5 +9,5 @@ if ($permissionChecker->hasPermission($_GET["action"])) {
     <iframe src="fm/dialog.php" class="fm"></iframe>
     <?php
 } else {
-        noPerms();
-    }
+    noPerms();
+}

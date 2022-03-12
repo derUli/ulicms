@@ -16,7 +16,7 @@ if ($permissionChecker->hasPermission("favicon")) {
         <div class="alert alert-danger">
             <?php echo translate(_esc($_GET["error"])); ?>
         </div>
-        <?php }
+    <?php }
     ?>
     <h1><?php translate("favicon"); ?></h1>
     <p><?php translate("favicon_infotext"); ?>
@@ -59,11 +59,11 @@ if ($permissionChecker->hasPermission("favicon")) {
                                     "
                                     >
                                     <i class="fa fa-trash" aria-hidden="true"></i>
-                            <?php translate("delete_favicon"); ?>
+                                    <?php translate("delete_favicon"); ?>
                                 </button>
                             </div>
-        <?php }
-    ?>
+                        <?php }
+                        ?>
                     </div>
                     <img
                         id="delete-favicon-loading"
@@ -77,7 +77,7 @@ if ($permissionChecker->hasPermission("favicon")) {
                 <td>
                     <label for="high_resolution">
                         <strong>
-    <?php translate("high_resolution"); ?>
+                            <?php translate("high_resolution"); ?>
                         </strong>
                     </label>
                 </td>
@@ -106,7 +106,7 @@ if ($permissionChecker->hasPermission("favicon")) {
                 <td></td>
                 <td class="text-center">
                     <button type="submit"class="btn btn-primary">
-    <?php translate("upload"); ?>
+                        <?php translate("upload"); ?>
                     </button>
                 </td>
             </tr>

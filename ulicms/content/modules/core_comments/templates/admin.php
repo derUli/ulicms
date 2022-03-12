@@ -150,7 +150,7 @@ echo ModuleHelper::buildMethodCallForm(
                         );
                         ?></td>
                     <td>
-    <?php esc(date("Y-m-d H:i:s", $comment->getDate())); ?>
+                        <?php esc(date("Y-m-d H:i:s", $comment->getDate())); ?>
                     </td>
                     <td><?php translate($comment->getStatus()); ?></td>
                     <td><?php esc($comment->getAuthorName()); ?>
@@ -158,18 +158,18 @@ echo ModuleHelper::buildMethodCallForm(
                         <?php if ($comment->getAuthorEmail()) { ?>
                             <?php esc($comment->getAuthorEmail()); ?>
                             <br />
-    <?php } ?>
-    <?php if ($comment->getAuthorUrl()) { ?>
+                        <?php } ?>
+                        <?php if ($comment->getAuthorUrl()) { ?>
                             <a href="<?php esc($comment->getAuthorUrl()); ?>"
                                target="_blank"
                                rel="nofollow"><?php esc($url); ?></a>
-    <?php } ?></td>
+                        <?php } ?></td>
                     <td>
                         <p>
                             <a href="<?php esc($comment->getCommentUrl()); ?>"
                                target="_blank">
                                 <strong>
-    <?php esc($content->title); ?>
+                                    <?php esc($content->title); ?>
                                 </strong>
                             </a>
                         </p>
@@ -187,7 +187,7 @@ echo ModuleHelper::buildMethodCallForm(
                         </p>
                     </td>
                 </tr>
-<?php } ?>
+            <?php } ?>
         </tbody>
     </table>
 </div>
@@ -200,7 +200,7 @@ echo ModuleHelper::buildMethodCallForm(
     <div class="col-xs-4 text-right">
         <button type="submit" class="btn btn-primary">
             <i class="fas fa-running"></i>
-<?php translate("do_action") ?></button>
+            <?php translate("do_action") ?></button>
     </div>
 </div>
 <?php
@@ -208,5 +208,5 @@ echo ModuleHelper::endForm();
 enqueueScriptFile(ModuleHelper::buildRessourcePath(
                 "core_comments",
                 "js/admin.js"
-));
+        ));
 combinedScriptHtml();

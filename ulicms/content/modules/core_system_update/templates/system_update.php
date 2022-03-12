@@ -14,7 +14,8 @@ if ($permissionChecker->hasPermission("update_system")) {
         </div>
         <?php
     } else {
-        translate("update_information_text"); ?>
+        translate("update_information_text");
+        ?>
         </p>
         <?php
     }

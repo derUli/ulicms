@@ -3,15 +3,13 @@
 use UliCMS\Models\Media\Video;
 use UliCMS\Models\Media\Audio;
 
-class VideoAndAudioPageTest extends \PHPUnit\Framework\TestCase
-{
-    protected function tearDown(): void
-    {
+class VideoAndAudioPageTest extends \PHPUnit\Framework\TestCase {
+
+    protected function tearDown(): void {
         Database::deleteFrom("content", "slug='audio_page_test' or slug='video_page_test'");
     }
 
-    public function testSetAndGetVideo()
-    {
+    public function testSetAndGetVideo() {
         $video = new Video();
         $video->setName("My Name");
         $video->setMP4File("video.mp4");
@@ -50,8 +48,7 @@ class VideoAndAudioPageTest extends \PHPUnit\Framework\TestCase
         $page->delete();
     }
 
-    public function testSetAndGetAudio()
-    {
+    public function testSetAndGetAudio() {
         $audio = new Audio();
         $audio->setName("My Name");
         $audio->setMP3File("audio.mp3");
@@ -86,4 +83,5 @@ class VideoAndAudioPageTest extends \PHPUnit\Framework\TestCase
         $savedPage->delete(false);
         $page->delete();
     }
+
 }

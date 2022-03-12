@@ -2,21 +2,18 @@
 
 use UliCMS\Models\Content\Types\DefaultContentTypes;
 
-class DefaultContentTypesTest extends \PHPUnit\Framework\TestCase
-{
-    protected function setUp(): void
-    {
+class DefaultContentTypesTest extends \PHPUnit\Framework\TestCase {
+
+    protected function setUp(): void {
         DefaultContentTypes::initTypes();
     }
 
-    public function testGetAll()
-    {
+    public function testGetAll() {
         $types = DefaultContentTypes::getAll();
         $this->assertGreaterThanOrEqual(11, count($types));
     }
 
-    public function testGetExistingReturnsObject()
-    {
+    public function testGetExistingReturnsObject() {
         $typePage = DefaultContentTypes::get("page");
         $this->assertCount(13, $typePage->show);
         $this->assertContains(".menu-stuff", $typePage->show);
@@ -28,21 +25,20 @@ class DefaultContentTypesTest extends \PHPUnit\Framework\TestCase
         $this->assertContains("#article-image", $typeArticle->show);
     }
 
-    public function testGetNonExistingReturnsNull()
-    {
+    public function testGetNonExistingReturnsNull() {
         $this->assertNull(DefaultContentTypes::get("gibts_nicht"));
     }
 
-    public function testToJson()
-    {
+    public function testToJson() {
         $this->assertEquals(
-            file_get_contents(
-                Path::resolve(
-                    "ULICMS_ROOT/tests/fixtures/json" .
+                file_get_contents(
+                        Path::resolve(
+                                "ULICMS_ROOT/tests/fixtures/json" .
                                 "/defaultContentTypes.json"
-                )
-            ),
-            DefaultContentTypes::toJSON()
+                        )
+                ),
+                DefaultContentTypes::toJSON()
         );
     }
+
 }

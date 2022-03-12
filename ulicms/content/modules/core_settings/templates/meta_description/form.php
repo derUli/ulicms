@@ -4,14 +4,15 @@ if ($permissionChecker->hasPermission("settings_simple")) {
     $languages = getAllLanguages();
     $meta_descriptions = [];
     $languageCount = count($languages);
-    
-    for ($i = 0; $i < $languageCount; $i ++) {
+
+    for ($i = 0; $i < $languageCount; $i++) {
         $lang = $languages[$i];
         $meta_descriptions[$lang] = Settings::get("meta_description_" . $lang);
         if (!$meta_descriptions[$lang]) {
             $meta_descriptions[$lang] = Settings::get("meta_description");
         }
-    } ?>
+    }
+    ?>
     <p>
         <a href="<?php echo ModuleHelper::buildActionURL("settings_simple"); ?>"
            class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
@@ -20,7 +21,8 @@ if ($permissionChecker->hasPermission("settings_simple")) {
     <?php
     echo ModuleHelper::buildMethodCallForm("MetaDescriptionController", "save", [], "post", array(
         "id" => "meta_description_settings"
-    )); ?>
+    ));
+    ?>
     <table style="border: 0">
         <tr>
             <td style="min-width: 100px;"><strong><?php translate("language"); ?>
@@ -30,20 +32,19 @@ if ($permissionChecker->hasPermission("settings_simple")) {
         </tr>
         <?php
         $languageCount = count($languages);
-        for ($n = 0; $n < $languageCount; $n ++) {
-            $lang = $languages[$n]; ?>
+        for ($n = 0; $n < $languageCount; $n++) {
+            $lang = $languages[$n];
+            ?>
             <tr>
                 <td>
                     <?php esc(getLanguageNameByCode($lang)); ?>
                 </td>
                 <td><input
-                        name="meta_description_<?php
-                        esc($lang); ?>"
-                        value="<?php
-                        esc($meta_descriptions[$lang]); ?>"></td>
+                        name="meta_description_<?php esc($lang); ?>"
+                        value="<?php esc($meta_descriptions[$lang]); ?>"></td>
             </tr>
-            <?php
-        } ?>
+        <?php }
+        ?>
         <tr>
             <td></td>
             <td class="text-center">

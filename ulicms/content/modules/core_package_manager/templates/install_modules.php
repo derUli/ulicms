@@ -6,7 +6,8 @@ if (!$permissionChecker->hasPermission("install_packages")) {
     noPerms();
 } else {
     $pkg_src = Settings::get("pkg_src");
-    @set_time_limit(0); ?>
+    @set_time_limit(0);
+    ?>
     <p>
         <a
             href="<?php echo ModuleHelper::buildMethodCallUrl(PackageController::class, "redirectToPackageView"); ?>"
@@ -48,7 +49,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
             <?php
         } else {
             $packageCount = count($packagesToInstall);
-            for ($i = 0; $i < $packageCount; $i ++) {
+            for ($i = 0; $i < $packageCount; $i++) {
                 if (!empty($packagesToInstall [$i])) {
                     $pkgURL = $packageArchiveFolder . basename($packagesToInstall [$i]) . ".tar.gz";
                     $pkgContent = @file_get_contents_wrapper($pkgURL);
@@ -87,7 +88,8 @@ if (!$permissionChecker->hasPermission("install_packages")) {
 
             // Disabled because this caused issues
             // with the stylesheet queue on this page
-            //clearCache ();?>
+            //clearCache ();
+            ?>
             <p>
                 <a
                     href="<?php echo ModuleHelper::buildActionURL("available_modules"); ?>"

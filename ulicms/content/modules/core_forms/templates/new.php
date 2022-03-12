@@ -3,12 +3,12 @@
 use UliCMS\Models\Content\Categories;
 
 $permissionChecker = new ACL();
-if (!$permissionChecker->hasPermission("forms")
-        || !$permissionChecker->hasPermission("forms_create")) {
+if (!$permissionChecker->hasPermission("forms") || !$permissionChecker->hasPermission("forms_create")) {
     noPerms();
 } else {
     $forms = Forms::getAllForms();
-    $pages = getAllPages(); ?><div class="field">
+    $pages = getAllPages();
+    ?><div class="field">
         <a href="<?php echo ModuleHelper::buildActionURL("forms"); ?>"
            class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i>
             <?php translate("back") ?></a>
@@ -24,7 +24,7 @@ if (!$permissionChecker->hasPermission("forms")
             <?php translate("enabled"); ?>
         </strong>
         <select class="form-control"
-            name="enabled">
+                name="enabled">
             <option value="1" selected><?php translate("yes"); ?></option>
             <option value="0"><?php translate("no"); ?></option>
         </select>
@@ -49,8 +49,7 @@ if (!$permissionChecker->hasPermission("forms")
         <strong class="field-label">
             <?php translate("category"); ?>
         </strong>
-        <?php
-        echo Categories::getHTMLSelect(); ?></div>
+        <?php echo Categories::getHTMLSelect(); ?></div>
 
     <div class="field">
         <strong class="field-label">
@@ -78,12 +77,12 @@ if (!$permissionChecker->hasPermission("forms")
         <strong class="field-label">
             <?php translate("target_page_id"); ?></strong>
         <select class="form-control"
-            name="target_page_id">
-                <?php foreach ($pages as $page) { ?>
+                name="target_page_id">
+                    <?php foreach ($pages as $page) { ?>
                 <option value="<?php echo $page["id"]; ?>"><?php
                     esc(
-        $page["title"]
-    );
+                            $page["title"]
+                    );
                     ?></option>
             <?php } ?>
         </select>

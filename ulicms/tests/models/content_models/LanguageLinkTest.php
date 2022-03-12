@@ -2,29 +2,25 @@
 
 use UliCMS\Models\Content\Language;
 
-class LanguageLinkTest extends \PHPUnit\Framework\TestCase
-{
-    protected function tearDown(): void
-    {
+class LanguageLinkTest extends \PHPUnit\Framework\TestCase {
+
+    protected function tearDown(): void {
         Database::deleteFrom("content", "slug like 'unit_test_%'");
     }
 
-    private function getGermanLanguage()
-    {
+    private function getGermanLanguage() {
         $language = new Language();
         $language->loadByLanguageCode("de");
         return $language;
     }
 
-    private function getEnglishLanguage()
-    {
+    private function getEnglishLanguage() {
         $language = new Language();
         $language->loadByLanguageCode("en");
         return $language;
     }
 
-    public function testCreateUpdateAndDeleteLink()
-    {
+    public function testCreateUpdateAndDeleteLink() {
         $link = new Language_Link();
         $link->title = "Unit Test Link";
         $link->slug = "unit_test_" . uniqid();
@@ -45,8 +41,8 @@ class LanguageLinkTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("none", $loadedLink->menu);
         $this->assertEquals($this->getGermanLanguage()->getID(), $loadedLink->link_to_language);
         $this->assertEquals(
-            $this->getGermanLanguage()->getID(),
-            $loadedLink->link_to_language
+                $this->getGermanLanguage()->getID(),
+                $loadedLink->link_to_language
         );
 
         $this->assertEquals("language_link", $loadedLink->type);
@@ -61,8 +57,7 @@ class LanguageLinkTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($this->getEnglishLanguage()->getID(), $loadedLink->link_to_language);
     }
 
-    public function testUpdateCreatesDataset()
-    {
+    public function testUpdateCreatesDataset() {
         $link = new Language_Link();
         $link->title = "Unit Test Link";
         $link->slug = "unit_test_" . uniqid();
@@ -71,7 +66,6 @@ class LanguageLinkTest extends \PHPUnit\Framework\TestCase
         $link->author_id = 1;
         $link->group_id = 1;
         $link->link_to_language = $this->getGermanLanguage()->getId();
-
 
         $this->assertNull($link->getID());
         $this->assertFalse($link->isPersistent());
@@ -82,14 +76,12 @@ class LanguageLinkTest extends \PHPUnit\Framework\TestCase
         $this->assertIsNumeric($link->getID());
     }
 
-    public function testIsRegularReturnsFalse()
-    {
+    public function testIsRegularReturnsFalse() {
         $link = new Language_Link();
         $this->assertFalse($link->isRegular());
     }
 
-    public function testSetAndGetLinkedLanguage()
-    {
+    public function testSetAndGetLinkedLanguage() {
         $link = new Language_Link();
 
         $language = new Language();
@@ -99,11 +91,12 @@ class LanguageLinkTest extends \PHPUnit\Framework\TestCase
 
         $link->setLinkedLanguage($language);
         $this->assertEquals(
-            $language->getLanguageCode(),
-            $link->getLinkedLanguage()->getLanguageCode()
+                $language->getLanguageCode(),
+                $link->getLinkedLanguage()->getLanguageCode()
         );
 
         $link->setLinkedLanguage(null);
         $this->assertNull($link->getLinkedLanguage());
     }
+
 }

@@ -24,16 +24,16 @@ if ($commentableContentTypeSettings) {
 <?php if (Request::getVar("save")) { ?>
     <div class="alert alert-success alert-dismissable fade in voffset3">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <?php translate("changes_was_saved") ?>
+        <?php translate("changes_was_saved") ?>
     </div>
 <?php } ?>
 <?php
 echo ModuleHelper::buildMethodCallForm(
-    CommunitySettingsController::class,
-    "save",
-    [],
-    RequestMethod::POST,
-    [
+        CommunitySettingsController::class,
+        "save",
+        [],
+        RequestMethod::POST,
+        [
             "id" => "community_settings_form"
         ]
 );
@@ -43,11 +43,11 @@ echo ModuleHelper::buildMethodCallForm(
     <div class="checkbox">
         <label><?php
             echo UliCMS\HTML\Input::checkBox(
-    "comments_enabled",
-    boolval(Settings::get("comments_enabled")),
-    "1",
-    array("class" => "js-switch")
-);
+                    "comments_enabled",
+                    boolval(Settings::get("comments_enabled")),
+                    "1",
+                    array("class" => "js-switch")
+            );
             ?><?php translate("comments_enabled") ?></label>
     </div>
 </div>
@@ -55,10 +55,10 @@ echo ModuleHelper::buildMethodCallForm(
     <div class="checkbox">
         <label><?php
             echo UliCMS\HTML\Input::checkBox(
-                "comments_must_be_approved",
-                boolval(Settings::get("comments_must_be_approved")),
-                "1",
-                array("class" => "js-switch")
+                    "comments_must_be_approved",
+                    boolval(Settings::get("comments_must_be_approved")),
+                    "1",
+                    array("class" => "js-switch")
             );
             ?><?php translate("comments_must_be_approved") ?></label>
     </div>
@@ -81,9 +81,9 @@ $translation->addKey("changes_was_saved");
 $translation->render();
 
 enqueueScriptFile(
-    ModuleHelper::buildRessourcePath(
-        "core_settings",
-        "js/community_settings.js"
-    )
+        ModuleHelper::buildRessourcePath(
+                "core_settings",
+                "js/community_settings.js"
+        )
 );
 combinedScriptHtml();

@@ -11,10 +11,10 @@ if (!$permissionChecker->hasPermission("upload_patches")) {
             and endsWith($_FILES ['file'] ['name'], ".zip")) {
         $patchManager = new PatchManager();
         if ($patchManager->installPatch(
-            $_POST ["name"],
-            $_POST ["description"],
-            $_FILES ['file']['tmp_name']
-        )
+                        $_POST ["name"],
+                        $_POST ["description"],
+                        $_FILES ['file']['tmp_name']
+                )
         ) {
             $redirect = true;
         }
@@ -24,19 +24,20 @@ if (!$permissionChecker->hasPermission("upload_patches")) {
 
     if ($redirect) {
         Response::javascriptRedirect($backUrl);
-    } ?>
+    }
+    ?>
     <p>
         <a
             href="<?php esc($backUrl); ?>"
             class="btn btn-default btn-back is-not-ajax"
             >
             <i class="fa fa-arrow-left" aria-hidden="true"></i>
-    <?php translate("back") ?></a>
+            <?php translate("back") ?></a>
     </p>
     <h1><?php translate("install_patch_from_file"); ?></h1>
     <form enctype="multipart/form-data"
           action="index.php?action=upload_patches" method="POST">
-    <?php csrf_token_html(); ?>
+              <?php csrf_token_html(); ?>
         <p>
             <strong><?php translate("name"); ?></strong> <br />
             <input
@@ -70,7 +71,7 @@ if (!$permissionChecker->hasPermission("upload_patches")) {
         <p>
             <button type="submit" class="btn btn-warning" name="upload_patch">
                 <i class="fa fa-upload" aria-hidden="true"></i>
-    <?php translate("install_patch"); ?></button>
+                <?php translate("install_patch"); ?></button>
         </p>
     </form>
     <?php

@@ -62,10 +62,10 @@ if ($permissionChecker->hasPermission("logo")) {
                                         "
                                         >
                                         <i class="fa fa-trash" aria-hidden="true"></i>
-                                    <?php translate("delete_logo"); ?>
+                                        <?php translate("delete_logo"); ?>
                                     </button>
-            <?php }
-        ?>
+                                <?php }
+                                ?>
                             </div>
                         </div>
                         <img
@@ -76,8 +76,8 @@ if ($permissionChecker->hasPermission("logo")) {
                             >
                     </td>
                 </tr>
-        <?php }
-    ?>
+            <?php }
+            ?>
             <tr>
                 <td width="480"><strong><?php translate("upload_new_logo"); ?>
                     </strong></td>

@@ -1,21 +1,18 @@
 <?php
 
-class ViewBagTest extends \PHPUnit\Framework\TestCase
-{
-    protected function setUp(): void
-    {
+class ViewBagTest extends \PHPUnit\Framework\TestCase {
+
+    protected function setUp(): void {
         ViewBag::set("foo", "bar");
         ViewBag::set("john", "doe");
         ViewBag::set("hello", "world");
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         ViewBag::clear();
     }
 
-    public function testSetAndGet()
-    {
+    public function testSetAndGet() {
         $this->assertEquals("bar", ViewBag::get("foo"));
         $this->assertEquals("world", ViewBag::get("hello"));
 
@@ -23,25 +20,23 @@ class ViewBagTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("you", ViewBag::get("hello"));
     }
 
-    public function testGetAllVars()
-    {
+    public function testGetAllVars() {
         $vars = ViewBag::getAllVars();
         $this->assertEquals("doe", $vars["john"]);
         $this->assertGreaterThanOrEqual(2, count($vars));
     }
 
-    public function testDelete()
-    {
+    public function testDelete() {
         $this->assertEquals("bar", ViewBag::get("foo"));
 
         ViewBag::delete("foo");
         $this->assertNull(ViewBag::get("foo"));
     }
 
-    public function testClear()
-    {
+    public function testClear() {
         $this->assertGreaterThanOrEqual(1, count(ViewBag::getAllVars()));
         ViewBag::clear();
         $this->assertCount(0, ViewBag::getAllVars());
     }
+
 }

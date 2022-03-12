@@ -12,8 +12,7 @@ if ($permissionChecker->hasPermission("install_packages")) {
         ?>
         <p>
             <strong><?php translate("error"); ?> </strong> <br />
-            <?php
-            translate("pkgsrc_not_defined"); ?>
+            <?php translate("pkgsrc_not_defined"); ?>
         </p>
         <?php
     } else {
@@ -51,7 +50,8 @@ if ($permissionChecker->hasPermission("install_packages")) {
                                 <td><?php
                                     echo StringHelper::isNotNullOrWhitespace($package->description) ?
                                             nl2br($package->description) :
-                                            get_translation("no_description_available"); ?>
+                                            get_translation("no_description_available");
+                                    ?>
                                 </td>
                                 <td>
                                     <a href="#" class="btn btn-info btn-sm remote-alert"
@@ -68,8 +68,8 @@ if ($permissionChecker->hasPermission("install_packages")) {
                                     </a>
                                 </td>
                             </tr>
-                        <?php
-                        } ?>
+                        <?php }
+                        ?>
                     </tbody>
                 </table>
             </div>

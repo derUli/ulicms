@@ -2,39 +2,34 @@
 
 use UliCMS\Models\Content\Language;
 
-class PageFunctionsTest extends \PHPUnit\Framework\TestCase
-{
-    public function testGetPageSlugByID()
-    {
+class PageFunctionsTest extends \PHPUnit\Framework\TestCase {
+
+    public function testGetPageSlugByID() {
         $allPages = ContentFactory::getAll();
         $first = $allPages[0];
         $this->assertEquals($first->slug, getPageSlugByID($first->id));
         $this->assertNull(getPageSlugByID(PHP_INT_MAX));
     }
 
-    public function testGetPageIDBySlug()
-    {
+    public function testGetPageIDBySlug() {
         $allPages = ContentFactory::getAll();
         $first = $allPages[0];
         $this->assertEquals($first->id, getPageIDBySlug($first->slug));
         $this->assertNull(getPageIDBySlug("ich-existiere-wirklich-nicht"));
     }
 
-    public function testGetPageTitleByID()
-    {
+    public function testGetPageTitleByID() {
         $allPages = ContentFactory::getAll();
         $first = $allPages[0];
         $this->assertEquals($first->title, getPageTitleByID($first->id));
         $this->assertEquals("[" . get_translation("none") . "]", getPageTitleByID(PHP_INT_MAX));
     }
 
-    public function testGetPageByIDReturnsNull()
-    {
+    public function testGetPageByIDReturnsNull() {
         $this->assertNull(getPageById(PHP_INT_MAX));
     }
 
-    public function testGetPageByIDReturnsObject()
-    {
+    public function testGetPageByIDReturnsObject() {
         $all = ContentFactory::getAll();
         $first = $all[0];
         $page = getPageByID($first->id);
@@ -44,8 +39,7 @@ class PageFunctionsTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($first->title, $page->title);
     }
 
-    public function testGetAllPagesWithTitle()
-    {
+    public function testGetAllPagesWithTitle() {
         $pages = getAllPagesWithTitle();
         $this->assertGreaterThanOrEqual(1, count($pages));
         foreach ($pages as $page) {
@@ -56,16 +50,14 @@ class PageFunctionsTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testGetAllSlugs()
-    {
+    public function testGetAllSlugs() {
         $slugs = getAllSlugs();
         $this->assertTrue(in_array("willkommen", $slugs));
         $this->assertTrue(in_array("welcome", $slugs));
         $this->assertTrue(in_array("lorem_ipsum", $slugs));
     }
 
-    public function testGetAllSlugsByLanguage()
-    {
+    public function testGetAllSlugsByLanguage() {
         $germanSlugs = getAllSlugs("de");
         $this->assertTrue(in_array("willkommen", $germanSlugs));
         $this->assertFalse(in_array("welcome", $germanSlugs));
@@ -78,11 +70,11 @@ class PageFunctionsTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue(in_array("fortune", $englishSlugs));
         $this->assertFalse(in_array("glueckskeks", $englishSlugs));
     }
-    public function testGetAllPagesWithHashLinks()
-    {
+
+    public function testGetAllPagesWithHashLinks() {
         $pages = getAllPages(null, "slug", false);
         $this->assertGreaterThan(0, count($pages));
-        
+
         $hasHashhLinks = false;
         foreach ($pages as $page) {
             $content = ContentFactory::getById($page["id"]);
@@ -92,27 +84,27 @@ class PageFunctionsTest extends \PHPUnit\Framework\TestCase
                 $hasHashhLinks = true;
             }
         }
-        
+
         $this->assertTrue($hasHashhLinks);
     }
-    public function testGetAllPagesWithoutHashLinks()
-    {
+
+    public function testGetAllPagesWithoutHashLinks() {
         $allPages = getAllPages(null, "slug", false);
         $pages = getAllPages(null, "slug", true);
-        
+
         $this->assertGreaterThan(0, count($pages));
         $this->assertLessThan(count($allPages), count($pages));
-        
+
         foreach ($pages as $page) {
             $content = ContentFactory::getById($page["id"]);
             $this->assertTrue($content->isRegular());
         }
     }
-    public function testGetAllPagesByLanguage()
-    {
+
+    public function testGetAllPagesByLanguage() {
         $pages = getAllPages("en", "id");
         $this->assertGreaterThan(0, count($pages));
-        
+
         $oldPageId = 0;
         foreach ($pages as $page) {
             $this->assertGreaterThan($oldPageId, $page["id"]);
@@ -120,12 +112,11 @@ class PageFunctionsTest extends \PHPUnit\Framework\TestCase
             $this->assertEquals("en", $page["language"]);
         }
     }
-    
-    public function testGetAllPagesByMenu()
-    {
+
+    public function testGetAllPagesByMenu() {
         $pages = getAllPages(null, "id", false, "top");
         $this->assertGreaterThan(0, count($pages));
-        
+
         $oldPageId = 0;
         foreach ($pages as $page) {
             $this->assertGreaterThan($oldPageId, $page["id"]);
@@ -133,12 +124,11 @@ class PageFunctionsTest extends \PHPUnit\Framework\TestCase
             $this->assertEquals("top", $page["menu"]);
         }
     }
-    
-    public function testGetAllPagesByLanguageAndMenu()
-    {
+
+    public function testGetAllPagesByLanguageAndMenu() {
         $pages = getAllPages("en", "id", false, "top");
         $this->assertGreaterThan(0, count($pages));
-        
+
         $oldPageId = 0;
         foreach ($pages as $page) {
             $this->assertGreaterThan($oldPageId, $page["id"]);
@@ -147,4 +137,5 @@ class PageFunctionsTest extends \PHPUnit\Framework\TestCase
             $this->assertEquals("en", $page["language"]);
         }
     }
+
 }

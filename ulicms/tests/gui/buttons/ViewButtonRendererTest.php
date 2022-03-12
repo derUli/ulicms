@@ -2,12 +2,11 @@
 
 use UliCMS\CoreContent\Partials\ViewButtonRenderer;
 
-class ViewButtonRendererTest extends \PHPUnit\Framework\TestCase
-{
+class ViewButtonRendererTest extends \PHPUnit\Framework\TestCase {
+
     private $user;
 
-    protected function setUp(): void
-    {
+    protected function setUp(): void {
         $user = new User();
         $user->setUsername("paul.panzer");
         $user->setLastname("Panzer");
@@ -19,14 +18,12 @@ class ViewButtonRendererTest extends \PHPUnit\Framework\TestCase
         $this->user = $user;
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         $this->user->delete();
         Database::query("delete from {prefix}content where title like 'Test Page%'", true);
     }
 
-    public function testRenderReturnsHtml()
-    {
+    public function testRenderReturnsHtml() {
         $allGroups = Group::getAll();
 
         $page = new Page();
@@ -39,22 +36,21 @@ class ViewButtonRendererTest extends \PHPUnit\Framework\TestCase
         $render = new ViewButtonRenderer();
 
         $html = $render->render(
-            $page->getID(),
-            $this->user
+                $page->getID(),
+                $this->user
         );
 
         $this->assertStringContainsString(
-            '<i class="fa fa-eye',
-            $html
+                '<i class="fa fa-eye',
+                $html
         );
         $this->assertStringContainsString(
-            '?goid=',
-            $html
+                '?goid=',
+                $html
         );
     }
 
-    public function testRenderNonRegularReturnsNothing()
-    {
+    public function testRenderNonRegularReturnsNothing() {
         $allGroups = Group::getAll();
 
         $page = new Node();
@@ -67,13 +63,12 @@ class ViewButtonRendererTest extends \PHPUnit\Framework\TestCase
         $render = new ViewButtonRenderer();
 
         $this->assertEmpty($render->render(
-            $page->getID(),
-            $this->user
+                        $page->getID(),
+                        $this->user
         ));
     }
 
-    public function testRenderCanNotReadReturnsNothing()
-    {
+    public function testRenderCanNotReadReturnsNothing() {
         $allGroups = Group::getAll();
 
         $page = new Page();
@@ -87,8 +82,9 @@ class ViewButtonRendererTest extends \PHPUnit\Framework\TestCase
         $render = new ViewButtonRenderer();
 
         $this->assertEmpty($render->render(
-            $page->getID(),
-            $this->user
+                        $page->getID(),
+                        $this->user
         ));
     }
+
 }

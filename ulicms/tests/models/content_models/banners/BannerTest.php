@@ -3,8 +3,8 @@
 use UliCMS\Models\Content\Advertisement\Banner;
 use UliCMS\Exceptions\DatasetNotFoundException;
 
-class BannerTest extends \PHPUnit\Framework\TestCase
-{
+class BannerTest extends \PHPUnit\Framework\TestCase {
+
     const HTML_TEXT1 = "My first Banner HTML";
     const HTML_TEXT2 = "My second Banner HTML";
     const NAME_TEXT1 = "My first Gif Banner";
@@ -14,16 +14,14 @@ class BannerTest extends \PHPUnit\Framework\TestCase
     const LINK_URL_TEXT1 = "http://www.google.de";
     const LINK_URL_TEXT2 = "http://www.yahoo.com";
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         Database::pQuery("DELETE FROM `{prefix}banner` where html in (? , ?)", array(
             self::HTML_TEXT1,
             self::HTML_TEXT2
                 ), true);
     }
 
-    public function testHTMLBannerWithoutLanguage()
-    {
+    public function testHTMLBannerWithoutLanguage() {
         $banner = new Banner();
         $banner->setType("html");
         $banner->setHtml(self::HTML_TEXT1);
@@ -52,8 +50,7 @@ class BannerTest extends \PHPUnit\Framework\TestCase
         $this->assertNull($banner->getId());
     }
 
-    public function testHTMLBannerDisabledWithoutLanguage()
-    {
+    public function testHTMLBannerDisabledWithoutLanguage() {
         $banner = new Banner();
         $banner->setType("html");
         $banner->setHtml(self::HTML_TEXT1);
@@ -80,8 +77,7 @@ class BannerTest extends \PHPUnit\Framework\TestCase
         $this->assertNull($banner->getId());
     }
 
-    public function testHTMLBannerWithLanguage()
-    {
+    public function testHTMLBannerWithLanguage() {
         $banner = new Banner();
         $banner->setType("html");
         $banner->setHtml(self::HTML_TEXT1);
@@ -113,8 +109,7 @@ class BannerTest extends \PHPUnit\Framework\TestCase
         $this->assertNull($banner->getId());
     }
 
-    public function testGifBannerWithoutLanguage()
-    {
+    public function testGifBannerWithoutLanguage() {
         $banner = new Banner();
         $banner->setType("gif");
         $banner->setName(self::NAME_TEXT1);
@@ -147,8 +142,7 @@ class BannerTest extends \PHPUnit\Framework\TestCase
         $this->assertNull($banner->getId());
     }
 
-    public function testGifBannerWithLanguage()
-    {
+    public function testGifBannerWithLanguage() {
         $banner = new Banner();
         $banner->setType("gif");
         $banner->setLanguage("de");
@@ -183,8 +177,7 @@ class BannerTest extends \PHPUnit\Framework\TestCase
         $this->assertNull($banner->getId());
     }
 
-    public function testGifBannerWithDateAsString()
-    {
+    public function testGifBannerWithDateAsString() {
         $banner = new Banner();
         $banner->setType("html");
         $banner->setHtml(self::HTML_TEXT1);
@@ -212,8 +205,7 @@ class BannerTest extends \PHPUnit\Framework\TestCase
         $banner->delete();
     }
 
-    public function testGifBannerWithDateAsInteger()
-    {
+    public function testGifBannerWithDateAsInteger() {
         $banner = new Banner();
         $banner->setType("html");
         $banner->setHtml(self::HTML_TEXT1);
@@ -241,47 +233,42 @@ class BannerTest extends \PHPUnit\Framework\TestCase
         $banner->delete();
     }
 
-    public function testRenderHtmlBanner()
-    {
+    public function testRenderHtmlBanner() {
         $banner = new Banner();
         $banner->setType("html");
         $banner->setHtml(self::HTML_TEXT1);
         $this->assertEquals(self::HTML_TEXT1, $banner->render());
     }
 
-    public function testRenderGifBanner()
-    {
+    public function testRenderGifBanner() {
         $banner = new Banner();
         $banner->setType("gif");
         $banner->setName(self::NAME_TEXT1);
         $banner->setImageUrl(self::IMAGE_URL_TEXT1);
         $banner->setLinkUrl(self::LINK_URL_TEXT1);
         $this->assertEquals(
-            '<a href="http://www.google.de" target="_blank" class="ulicms-image-banner">'
+                '<a href="http://www.google.de" target="_blank" class="ulicms-image-banner">'
                 . '<img src="http://firma.de/bild.gif" '
                 . 'title="My first Gif Banner" alt="My first Gif Banner"></a>',
-            $banner->render()
+                $banner->render()
         );
     }
 
-    public function testSetDateFromThrowsException()
-    {
+    public function testSetDateFromThrowsException() {
         $banner = new Banner();
 
         $this->expectException("InvalidArgumentException");
         $banner->setDateFrom(new Page());
     }
 
-    public function testSetDateToThrowsException()
-    {
+    public function testSetDateToThrowsException() {
         $banner = new Banner();
 
         $this->expectException("InvalidArgumentException");
         $banner->setDateTo(new Page());
     }
 
-    public function testLoadByIdNotFound()
-    {
+    public function testLoadByIdNotFound() {
         $banner = new Banner();
 
         $this->expectException(DatasetNotFoundException::class);
@@ -291,8 +278,7 @@ class BannerTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($banner->isPersistent());
     }
 
-    private function createTestBanners()
-    {
+    private function createTestBanners() {
         for ($i = 1; $i < 20; $i++) {
             $banner = new Banner();
             $banner->setType("html");
@@ -301,8 +287,7 @@ class BannerTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testLoadRandom()
-    {
+    public function testLoadRandom() {
         $this->createTestBanners();
 
         $banner1 = new Banner();
@@ -324,8 +309,7 @@ class BannerTest extends \PHPUnit\Framework\TestCase
         $this->assertNotEquals($banner2->getId(), $banner1->getId());
     }
 
-    public function testCreateWithAllEmpty()
-    {
+    public function testCreateWithAllEmpty() {
         $banner = new Banner();
         $banner->setCategoryId(null);
         $banner->save(); // insert
@@ -336,8 +320,7 @@ class BannerTest extends \PHPUnit\Framework\TestCase
         $banner->delete();
     }
 
-    public function testUpdateWithoutInsert()
-    {
+    public function testUpdateWithoutInsert() {
         $banner = new Banner();
         $banner->setType("html");
 
@@ -349,4 +332,5 @@ class BannerTest extends \PHPUnit\Framework\TestCase
 
         $banner->delete();
     }
+
 }

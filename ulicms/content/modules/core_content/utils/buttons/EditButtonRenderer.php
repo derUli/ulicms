@@ -12,12 +12,11 @@ use UliCMS\Security\ContentPermissionChecker;
 use function UliCMS\HTML\icon;
 use function UliCMS\HTML\link;
 
-class EditButtonRenderer
-{
+class EditButtonRenderer {
+
     const MODULE_NAME = "core_content";
 
-    public function render(int $pageId, User $user): string
-    {
+    public function render(int $pageId, User $user): string {
         $permitted = true;
 
         // check edit permissions
@@ -34,8 +33,9 @@ class EditButtonRenderer
         ViewBag::set("button", $link);
 
         return $permitted ? Template::executeModuleTemplate(
-            self::MODULE_NAME,
-            "pages/partials/edit_button.php"
-        ) : "";
+                        self::MODULE_NAME,
+                        "pages/partials/edit_button.php"
+                ) : "";
     }
+
 }

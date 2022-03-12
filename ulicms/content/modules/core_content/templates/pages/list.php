@@ -13,18 +13,21 @@ $show_filters = Settings::get("user/" . get_user_id() . "/show_filters");
 $permissionChecker = new PermissionChecker(get_user_id());
 
 if ($permissionChecker->hasPermission("pages")) {
-    echo Template::executeModuleTemplate("core_content", "icons.php"); ?>
+    echo Template::executeModuleTemplate("core_content", "icons.php");
+    ?>
     <h2><?php translate("pages"); ?></h2>
     <?php
     echo Alert::info(
-        get_translation("pages_infotext")
-    ); ?>
+            get_translation("pages_infotext")
+    );
+    ?>
 
     <?php
     echo Template::executeModuleTemplate(
-        "core_content",
-        "pages/partials/filters/filters.php"
-    ); ?>
+            "core_content",
+            "pages/partials/filters/filters.php"
+    );
+    ?>
     <div id="page-list">
         <?php if ($controller->_getPagesListView() === "default") { ?>
             <div class="row">
@@ -38,14 +41,15 @@ if ($permissionChecker->hasPermission("pages")) {
                 </div>
             </div>
         <?php } elseif ($controller->_getPagesListView() === "recycle_bin") {
-        ?>
+            ?>
             <div class="row">
                 <div class="col-xs-6">
                     <a href="<?php
                     echo ModuleHelper::buildMethodCallUrl(
-            PageController::class,
-            "emptyTrash"
-        ); ?>"
+                            PageController::class,
+                            "emptyTrash"
+                    );
+                    ?>"
                        id="empty-trash"
                        class="btn btn-primary"><i
                             class="fas fa-broom"></i> <?php translate("empty_recycle_bin"); ?></a>
@@ -55,8 +59,8 @@ if ($permissionChecker->hasPermission("pages")) {
                             class="fas fa-book"></i> <?php translate("pages"); ?></a>
                 </div>
             </div>
-        <?php
-    } ?>
+        <?php }
+        ?>
         <a
             href="#"
             class="btn btn-default voffset3"
@@ -64,9 +68,10 @@ if ($permissionChecker->hasPermission("pages")) {
             style="display: none"
             data-url="<?php
             echo ModuleHelper::buildMethodCallUrl(
-                        PageController::class,
-                        "getParentPageId"
-                    ); ?>">
+                    PageController::class,
+                    "getParentPageId"
+            );
+            ?>">
                 <?php echo icon("fas fa-arrow-up"); ?>
                 <?php translate("go_up"); ?>
         </a>
@@ -92,8 +97,9 @@ if ($permissionChecker->hasPermission("pages")) {
                         </td>
                         <td class="no-sort text-center"><?php
                             translate(
-                $controller->_getPagesListView() === "default" ? "delete" : "restore"
-            ); ?>
+                                    $controller->_getPagesListView() === "default" ? "delete" : "restore"
+                            );
+                            ?>
                         </td>
                     </tr>
                 </thead>
@@ -105,11 +111,11 @@ if ($permissionChecker->hasPermission("pages")) {
 
     <?php
     enqueueScriptFile(
-                                ModuleHelper::buildRessourcePath(
-                "core_content",
-                "js/pages/list.js"
+            ModuleHelper::buildRessourcePath(
+                    "core_content",
+                    "js/pages/list.js"
             )
-                            );
+    );
     combinedScriptHtml();
     $translation = new JSTranslation();
     $translation->addKey("ask_for_delete");

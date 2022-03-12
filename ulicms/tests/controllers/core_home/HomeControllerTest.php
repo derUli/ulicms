@@ -1,9 +1,8 @@
 <?php
 
-class HomeControllerTest extends \PHPUnit\Framework\TestCase
-{
-    protected function setUp(): void
-    {
+class HomeControllerTest extends \PHPUnit\Framework\TestCase {
+
+    protected function setUp(): void {
         require_once getLanguageFilePath("en");
         Settings::set("installed_at", "1495362918");
 
@@ -14,17 +13,15 @@ class HomeControllerTest extends \PHPUnit\Framework\TestCase
         $_SERVER['REQUEST_URI'] = "/foobar/foo.html";
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         Database::deleteFrom(
-            "users",
-            "username like 'online-%' or username like 'nicht-online-%'"
+                "users",
+                "username like 'online-%' or username like 'nicht-online-%'"
         );
         $_SERVER = [];
     }
 
-    public function testGetModel()
-    {
+    public function testGetModel() {
         $controller = new HomeController();
         $model = $controller->getModel();
 
@@ -33,55 +30,51 @@ class HomeControllerTest extends \PHPUnit\Framework\TestCase
         // TODO: Do more asserts, check data
     }
 
-    public function testNewsfeed()
-    {
+    public function testNewsfeed() {
         $controller = new HomeController();
         $html = $controller->_newsfeed();
 
         $this->assertGreaterThanOrEqual(
-            5,
-            substr_count(
-                $html,
-                '<a href'
-            )
+                5,
+                substr_count(
+                        $html,
+                        '<a href'
+                )
         );
         $this->assertGreaterThanOrEqual(
-            5,
-            substr_count(
-                $html,
-                'ulicms.de/?single='
-            )
+                5,
+                substr_count(
+                        $html,
+                        'ulicms.de/?single='
+                )
         );
     }
 
-    public function testTopPages()
-    {
+    public function testTopPages() {
         $controller = new HomeController();
         $html = $controller->_topPages();
         $this->assertEquals(
-            6,
-            substr_count(
-                $html,
-                '<tr'
-            )
+                6,
+                substr_count(
+                        $html,
+                        '<tr'
+                )
         );
     }
 
-    public function testLastUpdatedPages()
-    {
+    public function testLastUpdatedPages() {
         $controller = new HomeController();
         $html = $controller->_lastUpdatedPages();
         $this->assertEquals(
-            6,
-            substr_count(
-                $html,
-                '<tr'
-            )
+                6,
+                substr_count(
+                        $html,
+                        '<tr'
+                )
         );
     }
 
-    public function testOnlineUsers()
-    {
+    public function testOnlineUsers() {
         $this->createTestUsers();
 
         $controller = new HomeController();
@@ -91,13 +84,12 @@ class HomeControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertStringContainsString("online-2", $output);
         $this->assertStringNotContainsString("nicht-online-", $output);
         $this->assertGreaterThanOrEqual(
-            2,
-            substr_count($output, "content/avatars/")
+                2,
+                substr_count($output, "content/avatars/")
         );
     }
 
-    public function testStatistics()
-    {
+    public function testStatistics() {
         $usersCount = count(getAllUsers());
         $pagesCount = count(ContentFactory::getAll());
 
@@ -111,14 +103,12 @@ class HomeControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertStringContainsString("<td>$pagesCount</td>", $output);
     }
 
-    protected function createTestUsers()
-    {
+    protected function createTestUsers() {
         $this->createOnlineUsers();
         $this->createOfflineUsers();
     }
 
-    protected function createOnlineUsers()
-    {
+    protected function createOnlineUsers() {
         $user1 = new User();
         $user1->setUsername("online-2");
         $user1->setPassword(rand_string(23));
@@ -138,8 +128,7 @@ class HomeControllerTest extends \PHPUnit\Framework\TestCase
         $user2->setLastAction(time() - 10);
     }
 
-    protected function createOfflineUsers()
-    {
+    protected function createOfflineUsers() {
         $user3 = new User();
         $user3->setUsername("nicht-online-1");
         $user3->setPassword(rand_string(23));
@@ -157,4 +146,5 @@ class HomeControllerTest extends \PHPUnit\Framework\TestCase
         $user4->setHTMLEditor("ckeditor");
         $user4->save();
     }
+
 }

@@ -1,11 +1,10 @@
 <?php
 
-class Domain2LanguageMappingTest extends \PHPUnit\Framework\TestCase
-{
+class Domain2LanguageMappingTest extends \PHPUnit\Framework\TestCase {
+
     private $originalMapping;
 
-    protected function setUp(): void
-    {
+    protected function setUp(): void {
         $_SERVER = [];
 
         $this->originalMapping = Settings::get("domain_to_language");
@@ -13,15 +12,13 @@ class Domain2LanguageMappingTest extends \PHPUnit\Framework\TestCase
         Settings::set("domain_to_language", $testData);
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         chdir(ULICMS_ROOT);
 
         Settings::set("domain_to_language", $this->originalMapping);
     }
 
-    public function testGetLanguageByDomain()
-    {
+    public function testGetLanguageByDomain() {
         $this->assertEquals("de", getLanguageByDomain("www.domain.de"));
         $this->assertEquals("en", getLanguageByDomain("domain.com"));
         $this->assertEquals("fr", getLanguageByDomain("domain.fr"));
@@ -29,8 +26,7 @@ class Domain2LanguageMappingTest extends \PHPUnit\Framework\TestCase
         $this->assertNull(getLanguageByDomain("domain.cn"));
     }
 
-    public function testGetDomainBylanguage()
-    {
+    public function testGetDomainBylanguage() {
         $this->assertEquals("www.domain.de", getDomainByLanguage("de"));
         $this->assertEquals("domain.com", getDomainByLanguage("en"));
         $this->assertEquals("domain.fr", getDomainByLanguage("fr"));
@@ -38,8 +34,7 @@ class Domain2LanguageMappingTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(null, getDomainByLanguage("cn"));
     }
 
-    public function testSetLanguageByDomainReturnsTrue()
-    {
+    public function testSetLanguageByDomainReturnsTrue() {
         $_SERVER["HTTP_HOST"] = "domain.de";
         $this->assertTrue(setLanguageByDomain());
         $this->assertEquals("de", $_SESSION["language"]);
@@ -49,37 +44,34 @@ class Domain2LanguageMappingTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("en", $_SESSION["language"]);
     }
 
-    public function testSetLanguageByDomainReturnsFalse()
-    {
+    public function testSetLanguageByDomainReturnsFalse() {
         $_SERVER["HTTP_HOST"] = "domain.invalid";
         $this->assertFalse(setLanguageByDomain());
     }
 
-    public function testSetLocaleByLanguageFrontend()
-    {
+    public function testSetLocaleByLanguageFrontend() {
         $_SESSION["language"] = "de";
         $languages = setLocaleByLanguage();
 
         $this->assertEquals(
-            [
+                [
                     LC_ALL,
                     "de_DE.UTF-8",
                     "de_DE",
                     "deu_deu"
                 ],
-            $languages
+                $languages
         );
     }
 
-    public function testSetLocaleByLanguageBackend()
-    {
+    public function testSetLocaleByLanguageBackend() {
         chdir(Path::resolve("ULICMS_ROOT/admin"));
 
         $_SESSION["system_language"] = "en";
         $languages = setLocaleByLanguage();
 
         $this->assertEquals(
-            [
+                [
                     LC_ALL,
                     "en_US.UTF-8",
                     "en_GB.UTF-8",
@@ -89,7 +81,8 @@ class Domain2LanguageMappingTest extends \PHPUnit\Framework\TestCase
                     "eng",
                     "uk"
                 ],
-            $languages
+                $languages
         );
     }
+
 }

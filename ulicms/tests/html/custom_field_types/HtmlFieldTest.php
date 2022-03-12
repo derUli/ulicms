@@ -2,14 +2,13 @@
 
 use Spatie\Snapshots\MatchesSnapshots;
 
-class HtmlFieldTest extends \PHPUnit\Framework\TestCase
-{
+class HtmlFieldTest extends \PHPUnit\Framework\TestCase {
+
     use MatchesSnapshots;
 
     private $testUser;
 
-    protected function setUp(): void
-    {
+    protected function setUp(): void {
         include_once getLanguageFilePath("en");
 
         $user = new User();
@@ -24,20 +23,19 @@ class HtmlFieldTest extends \PHPUnit\Framework\TestCase
         $this->testUser = $user;
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         $this->testUser->delete();
     }
 
-    public function testRender()
-    {
+    public function testRender() {
         $this->testUser->registerSession();
 
         $field = new HtmlField();
         $field->name = "my_field";
         $field->title = "content";
         $this->assertMatchesHtmlSnapshot(
-            $field->render("hello <strong>world</strong>")
+                $field->render("hello <strong>world</strong>")
         );
     }
+
 }

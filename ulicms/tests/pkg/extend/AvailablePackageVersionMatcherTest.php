@@ -92,8 +92,8 @@ class AvailablePackageVersionMatcherTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("1.4", $compatibleVersions[4]["version"]);
         $this->assertEquals("1.1", $compatibleVersions[6]["version"]);
     }
-    
-    public function testGetAllVersionsWithNull(){
+
+    public function testGetAllVersionsWithNull() {
         $matcher = new AvailablePackageVersionMatcher(null);
         $this->assertCount(0, $matcher->getAllVersions());
     }

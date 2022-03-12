@@ -53,12 +53,14 @@ if (!$permissionChecker->hasPermission("other")) {
         new UliCMS\HTML\ListItem("", get_translation("off")),
         new UliCMS\HTML\ListItem("sanitize", get_translation("on")),
         new UliCMS\HTML\ListItem("block", get_translation("on_block"))
-    ); ?>
+    );
+    ?>
     <?php
     echo ModuleHelper::buildMethodCallForm("OtherSettingsController", "save", [], "post", array(
         "id" => "other_settings",
         "autocomplete" => "off"
-    )); ?>
+    ));
+    ?>
     <a
         href="<?php echo ModuleHelper::buildActionURL("settings_categories"); ?>"
         class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
@@ -70,10 +72,11 @@ if (!$permissionChecker->hasPermission("other")) {
         <div class="accordion-content">
             <?php
             echo Alert::info(
-        get_translation("DOMAIN2LANGUAGE_MAPPING_INFO"),
-        "",
-        true
-    ); ?>
+                    get_translation("DOMAIN2LANGUAGE_MAPPING_INFO"),
+                    "",
+                    true
+            );
+            ?>
             <div class="field">
                 <textarea name="domain_to_language" rows="10" cols="40"><?php echo _esc(Settings::get("domain_to_language")); ?></textarea>
             </div>
@@ -106,7 +109,8 @@ if (!$permissionChecker->hasPermission("other")) {
                            <?php
                            if ($twofactor_authentication) {
                                echo "checked ";
-                           } ?>>
+                           }
+                           ?>>
                 </div>
             </div>
             <div class="voffset2">
@@ -125,13 +129,14 @@ if (!$permissionChecker->hasPermission("other")) {
                 <a
                     href="<?php
                     echo ModuleHelper::buildActionURL(
-                    "default_access_restrictions"
-                ); ?>"
+                            "default_access_restrictions"
+                    );
+                    ?>"
                     class="btn btn-default is-not-ajax"
                     > <i class="fas fa-tools"></i>
                     <?php translate("view"); ?></a>
-            <?php
-            } ?>
+            <?php }
+            ?>
         </div>
         <h2 class="accordion-header">
             <?php translate("EMAIL_DELIVERY"); ?>
@@ -145,12 +150,14 @@ if (!$permissionChecker->hasPermission("other")) {
                         <?php
                         if ($email_mode == EmailModes::INTERNAL) {
                             echo ' selected="selected"';
-                        } ?>>mail()</option>
+                        }
+                        ?>>mail()</option>
                         <option value="phpmailer"
                         <?php
                         if ($email_mode == EmailModes::PHPMAILER) {
                             echo ' selected="selected"';
-                        } ?>>SMTP</option>
+                        }
+                        ?>>SMTP</option>
                     </select>
                 </div>
             </div>
@@ -188,17 +195,20 @@ if (!$permissionChecker->hasPermission("other")) {
                             <?php
                             if (empty($smtp_encryption)) {
                                 echo "selected";
-                            } ?>><?php translate("unencrypted"); ?></option>
+                            }
+                            ?>><?php translate("unencrypted"); ?></option>
                             <option value="ssl"
                             <?php
                             if ($smtp_encryption == "ssl") {
                                 echo "selected";
-                            } ?>>SSL</option>
+                            }
+                            ?>>SSL</option>
                             <option value="tls"
                             <?php
                             if ($smtp_encryption == "tls") {
                                 echo "selected";
-                            } ?>>TLS</option>
+                            }
+                            ?>>TLS</option>
                         </select>
                     </div>
                 </div>
@@ -217,7 +227,8 @@ if (!$permissionChecker->hasPermission("other")) {
                                    <?php
                                    if ($smtp_no_verify_certificate) {
                                        echo ' checked="checked"';
-                                   } ?>
+                                   }
+                                   ?>
                                    value="smtp_no_verify_certificate"> <br /> <small><?php translate("smtp_no_verify_certificate_warning"); ?></small>
                         </div>
                     </div>
@@ -234,7 +245,8 @@ if (!$permissionChecker->hasPermission("other")) {
                                <?php
                                if ($smtp_auth) {
                                    echo ' checked="checked"';
-                               } ?>
+                               }
+                               ?>
                                value="auth">
                     </div>
                 </div>
@@ -281,10 +293,10 @@ if (!$permissionChecker->hasPermission("other")) {
     $translation->render();
 
     enqueueScriptFile(
-        ModuleHelper::buildRessourcePath(
-            "core_settings",
-            "js/other_settings.js"
-        )
+            ModuleHelper::buildRessourcePath(
+                    "core_settings",
+                    "js/other_settings.js"
+            )
     );
     combinedScriptHtml();
 }

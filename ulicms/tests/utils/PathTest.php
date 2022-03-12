@@ -11,39 +11,37 @@
  *
  * @author ulric
  */
-class PathTest extends \PHPUnit\Framework\TestCase
-{
-    public function testNormalize()
-    {
+class PathTest extends \PHPUnit\Framework\TestCase {
+
+    public function testNormalize() {
         $this->assertStringContainsString(
-            DIRECTORY_SEPARATOR,
-            Path::normalize('..\foo\bar\file.txt')
+                DIRECTORY_SEPARATOR,
+                Path::normalize('..\foo\bar\file.txt')
         );
 
         $this->assertStringContainsString(
-            DIRECTORY_SEPARATOR,
-            Path::normalize('../foo/bar/file.txt')
+                DIRECTORY_SEPARATOR,
+                Path::normalize('../foo/bar/file.txt')
         );
     }
 
-    public function testResolve()
-    {
+    public function testResolve() {
         $this->assertStringEndsWith(
-            "/content/log/exception_log/foo.log",
-            Path::resolve("ULICMS_LOG/exception_log/foo.log")
+                "/content/log/exception_log/foo.log",
+                Path::resolve("ULICMS_LOG/exception_log/foo.log")
         );
     }
 
-    public function testResolveAndNormalize()
-    {
+    public function testResolveAndNormalize() {
         $expected = str_replace(
-            "/",
-            DIRECTORY_SEPARATOR,
-            "/content/log/exception_log/foo.log"
+                "/",
+                DIRECTORY_SEPARATOR,
+                "/content/log/exception_log/foo.log"
         );
         $this->assertStringEndsWith(
-            $expected,
-            Path::resolveAndNormalize("ULICMS_LOG/exception_log/foo.log")
+                $expected,
+                Path::resolveAndNormalize("ULICMS_LOG/exception_log/foo.log")
         );
     }
+
 }

@@ -2,12 +2,12 @@
 
 use UliCMS\Renderers\PlainTextRenderer;
 use UliCMS\Utils\CacheUtil;
-
 use Spatie\Snapshots\MatchesSnapshots;
 
 class PlainTextRendererTest extends \PHPUnit\Framework\TestCase {
+
     use MatchesSnapshots;
-    
+
     private $cacheDisabledOriginal;
     private $cachePeriodOriginal;
 

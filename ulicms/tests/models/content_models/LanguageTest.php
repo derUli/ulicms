@@ -2,13 +2,12 @@
 
 use UliCMS\Models\Content\Language;
 
-class LanguageTest extends \PHPUnit\Framework\TestCase
-{
+class LanguageTest extends \PHPUnit\Framework\TestCase {
+
     private $initialDefaultLanguage;
     private $initialDomain2LanguageMapping = null;
 
-    protected function setUp(): void
-    {
+    protected function setUp(): void {
         $this->initialDefaultLanguage = Settings::get("default_language");
 
         Settings::set("default_language", "de");
@@ -17,8 +16,7 @@ class LanguageTest extends \PHPUnit\Framework\TestCase
         $this->initialDomain2LanguageMapping = Settings::get("domain_to_language");
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         $_SESSION = [];
 
         $sql = "delete from `{prefix}languages` where language_code <> 'de' and language_code <> 'en'";
@@ -28,14 +26,12 @@ class LanguageTest extends \PHPUnit\Framework\TestCase
         Settings::set("domain_to_language", $this->initialDomain2LanguageMapping);
     }
 
-    public function testGetAllLanguages()
-    {
+    public function testGetAllLanguages() {
         $list = Language::getAllLanguages();
         $this->assertEquals(2, count($list));
     }
 
-    public function testLoadLanguage()
-    {
+    public function testLoadLanguage() {
         $lang = new Language();
         $this->assertNull($lang->getId());
         $this->assertNull($lang->getName());
@@ -46,8 +42,7 @@ class LanguageTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("Deutsch", $lang->getName());
     }
 
-    public function testCreateLanguage()
-    {
+    public function testCreateLanguage() {
         $lang = new Language();
         $lang->setName("Lampukisch");
         $lang->setLanguageCode("lp");
@@ -75,8 +70,7 @@ class LanguageTest extends \PHPUnit\Framework\TestCase
         $this->assertNull($lang->getID());
     }
 
-    public function testIsDefaultLanguage()
-    {
+    public function testIsDefaultLanguage() {
         $lang = new Language();
         $lang->loadByLanguageCode("de");
         $this->assertTrue($lang->isDefaultLanguage());
@@ -86,56 +80,51 @@ class LanguageTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($lang->isDefaultLanguage());
     }
 
-    public function testIsCurrentLanguageReturnsTrue()
-    {
+    public function testIsCurrentLanguageReturnsTrue() {
         $_SESSION["language"] = "de";
         $lang = new Language();
         $lang->loadByLanguageCode("de");
         $this->assertTrue($lang->isCurrentLanguage());
     }
 
-    public function testIsCurrentLanguageReturnsFalse()
-    {
+    public function testIsCurrentLanguageReturnsFalse() {
         $_SESSION["language"] = "de";
         $lang = new Language();
         $lang->loadByLanguageCode("en");
         $this->assertFalse($lang->isCurrentLanguage());
     }
 
-    public function testToString()
-    {
+    public function testToString() {
         $lang = new Language();
         $lang->setLanguageCode("fr");
         $this->assertEquals("fr", strval($lang));
     }
 
-    public function testGetLanguageLinkReturnsRelative()
-    {
+    public function testGetLanguageLinkReturnsRelative() {
         $lang = new Language();
         $lang->setLanguageCode("fr");
         $this->assertEquals("./?language=fr", $lang->getLanguageLink());
     }
-    
-    public function testGetLanguageLinkReturnsAbsolute()
-    {
+
+    public function testGetLanguageLinkReturnsAbsolute() {
         $mappingLines = [
             'example.de=>de',
             'example.co.uk=>en'
         ];
         Settings::set(
-            "domain_to_language",
-            implode("\n", $mappingLines)
+                "domain_to_language",
+                implode("\n", $mappingLines)
         );
-        
+
         $lang = new Language();
         $lang->setLanguageCode("en");
         $this->assertEquals("http://example.co.uk", $lang->getLanguageLink());
     }
 
-    public function testFillVars()
-    {
+    public function testFillVars() {
         $lang = new Language();
         $lang->fillVars(null);
         $this->assertNull($lang->getLanguageCode());
     }
+
 }

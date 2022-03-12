@@ -2,44 +2,39 @@
 
 use UliCMS\Helpers\ImageScaleHelper;
 
-class ImageScaleHelperTest extends \PHPUnit\Framework\TestCase
-{
-    protected function tearDown(): void
-    {
+class ImageScaleHelperTest extends \PHPUnit\Framework\TestCase {
+
+    protected function tearDown(): void {
         if (file_exists($this->getProcessedPath())) {
             unlink($this->getProcessedPath());
         }
     }
 
-    protected function getFixturePath(): string
-    {
+    protected function getFixturePath(): string {
         return Path::resolve("ULICMS_ROOT/tests/fixtures/huge-image.jpg");
     }
 
-    protected function getProcessedPath(): string
-    {
+    protected function getProcessedPath(): string {
         return Path::resolve("ULICMS_TMP/scaled-image.jpg");
     }
 
-    public function testGetMaxImageDimensions()
-    {
+    public function testGetMaxImageDimensions() {
         $this->assertEquals(
-            [2500, 1667],
-            ImageScaleHelper::getMaxImageDimensions()
+                [2500, 1667],
+                ImageScaleHelper::getMaxImageDimensions()
         );
     }
 
-    public function testScaleDown()
-    {
+    public function testScaleDown() {
         ImageScaleHelper::scaleDown(
-            $this->getFixturePath(),
-            $this->getProcessedPath()
+                $this->getFixturePath(),
+                $this->getProcessedPath()
         );
 
         // check file size
         $this->assertLessThanOrEqual(
-            400 * 1000,
-            filesize($this->getProcessedPath())
+                400 * 1000,
+                filesize($this->getProcessedPath())
         );
 
         // Check image size
@@ -49,4 +44,5 @@ class ImageScaleHelperTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(1667, $size->getWidth());
         $this->assertEquals(1667, $size->getHeight());
     }
+
 }

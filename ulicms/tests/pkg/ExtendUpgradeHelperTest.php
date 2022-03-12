@@ -1,9 +1,8 @@
 <?php
 
-class ExtendUpgradeHelperTest extends \PHPUnit\Framework\TestCase
-{
-    public function testExtendUpgradeHelper()
-    {
+class ExtendUpgradeHelperTest extends \PHPUnit\Framework\TestCase {
+
+    public function testExtendUpgradeHelper() {
         if (!class_exists("ExtendUpgradeHelper")) {
             $this->markTestSkipped('extend_upgrade_helper is not installed');
         }
@@ -19,8 +18,8 @@ class ExtendUpgradeHelperTest extends \PHPUnit\Framework\TestCase
             $this->assertNotEmpty($module->name);
             $this->assertNotEmpty($module->version);
             $this->assertEquals(
-                "https://extend.ulicms.de/{$module->name}.html",
-                $module->url
+                    "https://extend.ulicms.de/{$module->name}.html",
+                    $module->url
             );
 
             $this->assertTrue(is_url($module->url));
@@ -30,12 +29,12 @@ class ExtendUpgradeHelperTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    private function getExpectedModuleNames(): array
-    {
+    private function getExpectedModuleNames(): array {
         return [
             "oneclick_upgrade",
             "Mobile_Detect",
             "fortune2"
         ];
     }
+
 }
