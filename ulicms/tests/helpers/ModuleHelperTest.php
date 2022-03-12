@@ -6,6 +6,7 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase {
         $_SESSION["language"] = "en";
         require_once getLanguageFilePath("en");
         $_SERVER = [];
+        $_GET = [];
         $_SERVER["REQUEST_URI"] = "/other-url.html?param=value";
     }
 
@@ -13,6 +14,8 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase {
         chdir(ULICMS_ROOT);
 
         $_SERVER = [];
+        $_GET = [];
+        Vars::clear();
 
         Database::deleteFrom("content", "title like 'Unit Test%'");
     }
@@ -187,8 +190,15 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase {
         $_SERVER['HTTPS'] = "on";
         $this->assertEquals("https://company.com/willkommen.html", ModuleHelper::getFullPageURLByID(1));
 
-        unset($_SERVER['HTTP_HOST']);
-        unset($_SERVER['HTTPS']);
+        $this->assertEquals("https://company.com/willkommen.html", ModuleHelper::getFullPageURLByID());
+        
+        Vars::clear();
+        $this->assertEquals("https://company.com/willkommen.html", ModuleHelper::getFullPageURLByID());
+        
+        Vars::clear();
+        $_GET["slug"] = "existert_nicht";
+        $this->assertNull(ModuleHelper::getFullPageURLByID());
+       
     }
 
     public function testGetBaseUrl() {

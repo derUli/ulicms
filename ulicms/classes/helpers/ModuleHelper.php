@@ -196,21 +196,14 @@ class ModuleHelper extends Helper {
         }
 
         $domain = getDomainByLanguage($page->language);
+
+        // TODO: Clean this up
         $dirname = dirname(get_request_uri());
-
         $dirname = str_replace("\\", "/", $dirname);
+        $dirname = is_admin_dir() ? dirname(dirname($dirname . "/..")) : $dirname;
+        $dirname = !startsWith($dirname, "/") ? $dirname = "/" . $dirname : $dirname;
 
-        if (is_admin_dir()) {
-            $dirname = dirname(dirname($dirname . "/.."));
-        }
-
-        if (!startsWith($dirname, "/")) {
-            $dirname = "/" . $dirname;
-        }
-
-        if (!endsWith($dirname, "/")) {
-            $dirname = $dirname . "/";
-        }
+        $dirname = !endsWith($dirname, "/") ? $dirname = $dirname . "/" : $dirname;
 
         // Replace backslashes with slashes (Windows)
         $dirname = str_replace("\\", "/", $dirname);
