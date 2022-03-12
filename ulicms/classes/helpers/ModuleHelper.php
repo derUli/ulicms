@@ -58,10 +58,9 @@ class ModuleHelper extends Helper {
             $content = $dataset->content;
             $content = str_replace("&quot;", "\"", $content);
 
-            if ($dataset->type == "module" && !empty($dataset->module) &&
-                    (!$module || ($module && $dataset->module == $module))) {
-                return $dataset;
-            } else if (stringContainsShortCodes($content, $module)) {
+            if (($dataset->type == "module" && !empty($dataset->module) &&
+                    (!$module || ($module && $dataset->module == $module))) ||
+                    stringContainsShortCodes($content, $module)) {
                 return $dataset;
             }
         }
