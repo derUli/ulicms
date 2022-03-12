@@ -31,10 +31,7 @@ class PatchManager {
 
     public function getAvailablePatches(): array {
         $patches = [];
-        $indexData = $this->fetchPackageIndex();
-        if (!$indexData) {
-            return $patches;
-        }
+        $indexData = $this->fetchPackageIndex() ?? "";
 
         $lines = StringHelper::linesFromString($indexData, true, true);
         foreach ($lines as $line) {

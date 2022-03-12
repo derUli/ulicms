@@ -14,9 +14,9 @@ class HTML5MediaTest extends \PHPUnit\Framework\TestCase {
         $audio->save();
 
         $this->assertEquals(
-                "Foo {$audio->render()} Bar",
+                "Foo {$audio->render()} Bar Foo {$audio->render()} Bar",
                 replaceAudioTags(
-                        "Foo [audio id={$audio->getId()}] Bar"
+                        "Foo [audio id={$audio->getId()}] Bar Foo [audio id=\"{$audio->getId()}\"] Bar"
                 )
         );
 

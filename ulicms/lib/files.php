@@ -30,6 +30,11 @@ function recurse_copy(string $src, string $dst): void {
     closedir($dir);
 }
 
+/**
+ * Returns an array of all files in a folder and its subfolders
+ * @param string $dir Path
+ * @return array List of files
+ */
 function find_all_files(string $dir): array {
     $root = scandir($dir);
     $result = [];
@@ -49,6 +54,11 @@ function find_all_files(string $dir): array {
     return $result;
 }
 
+/**
+ * Returns an array of all sub folders of a folder
+ * @param string $dir Folder
+ * @return array list of folders
+ */
 function find_all_folders(string $dir): array {
     $root = scandir($dir);
     $result = [];
