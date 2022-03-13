@@ -35,10 +35,10 @@ class Script {
 
         $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);
 
-        if(!empty($attribHTML)){
+        if (!empty($attribHTML)) {
             $attribHTML = " $attribHTML";
         }
-        
+
         return "<script{$attribHTML}></script>";
     }
 
@@ -49,7 +49,7 @@ class Script {
             array $htmlAttributes = []
     ): string {
         $attributes = [];
-        
+
         if ($async) {
             $attributes["async"] = "async";
         }
@@ -60,8 +60,8 @@ class Script {
             $attributes[$key] = $value;
         }
         $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);
-        
-        if(!empty($attribHTML)){
+
+        if (!empty($attribHTML)) {
             $attribHTML = " $attribHTML";
         }
 

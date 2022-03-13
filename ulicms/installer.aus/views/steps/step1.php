@@ -4,13 +4,17 @@
     ?></p>
 <p>
     <select name="language" id="language" class="form-control">
-        <option value="de" <?php if ($language == "de") {
-        echo "selected";
-    } ?>>Deutsch</option>
+        <option value="de" <?php
+        if ($language == "de") {
+            echo "selected";
+        }
+        ?>>Deutsch</option>
 
-        <option value="en" <?php if ($language == "en") {
-        echo "selected";
-    } ?>>English</option>
+        <option value="en" <?php
+        if ($language == "en") {
+            echo "selected";
+        }
+        ?>>English</option>
     </select>
 </p>
 <p>

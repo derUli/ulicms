@@ -5,20 +5,17 @@ declare(strict_types=1);
 use UliCMS\Constants\AuditLog;
 
 // get a config variable
-function getconfig(string $key)
-{
+function getconfig(string $key) {
     return Settings::get($key);
 }
 
 // Remove an configuration variable
-function deleteconfig(string $key): bool
-{
+function deleteconfig(string $key): bool {
     return Settings::delete($key);
 }
 
 // Set a configuration Variable;
-function setconfig(string $key, $value)
-{
+function setconfig(string $key, $value) {
     $result = db_query("SELECT id FROM " . tbname("settings") .
             " WHERE name='$key'");
     if (db_num_rows($result) > 0) {
@@ -43,8 +40,7 @@ function setconfig(string $key, $value)
     SettingsCache::set($key, $value);
 }
 
-function initconfig(string $key, $value): bool
-{
+function initconfig(string $key, $value): bool {
     $retval = false;
     if (!Settings::get($key)) {
         setconfig($key, $value);
@@ -54,8 +50,7 @@ function initconfig(string $key, $value): bool
     return $retval;
 }
 
-function get_lang_config(string $name, string $lang): ?string
-{
+function get_lang_config(string $name, string $lang): ?string {
     $retval = null;
     $config = Settings::get($name . "_" . $lang);
     if ($config) {

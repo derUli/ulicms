@@ -2,8 +2,7 @@
 
 declare(strict_types=1);
 
-function getAllThemes(): array
-{
+function getAllThemes(): array {
     $pkg = new PackageManager();
     return $pkg->getInstalledPackages('themes');
 }
@@ -12,8 +11,7 @@ function getAllThemes(): array
 // Ruft uninstall Script auf, falls vorhanden
 // Löscht anschließend den Ordner modules/$name
 // TODO: dies in die PackageManager Klasse verschieben
-function uninstall_module(string $name, string $type = "module"): bool
-{
+function uninstall_module(string $name, string $type = "module"): bool {
     $acl = new ACL();
     if (!$acl->hasPermission("install_packages") && !isCLI()) {
         return false;
@@ -66,14 +64,12 @@ function uninstall_module(string $name, string $type = "module"): bool
     return false;
 }
 
-function isModuleInstalled(string $name): bool
-{
+function isModuleInstalled(string $name): bool {
     $module = new Module($name);
     return $module->isInstalled();
 }
 
-function getAllModules(): array
-{
+function getAllModules(): array {
     if (Vars::get("allModules")) {
         return Vars::get("allModules");
     }

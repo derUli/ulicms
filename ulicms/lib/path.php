@@ -34,13 +34,7 @@ function getModulePath($module, $abspath = false): string {
                         "ULICMS_ROOT/content/modules/$module") . "/";
     }
 
-    // Frontend Directory
-    if (file_exists("CMSConfig.php")) {
-        $module_folder = "content/modules/";
-    } // Backend Directory
-    else {
-        $module_folder = "../content/modules/";
-    }
+    $module_folder = is_admin_dir() ? "../content/modules/" : "content/modules/";
 
     return $module_folder . $module . "/";
 }

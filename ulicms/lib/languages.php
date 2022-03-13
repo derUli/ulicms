@@ -9,8 +9,7 @@ use Negotiation\LanguageNegotiator;
  * Gibt alle Sprachen in denen Inhalte vorhanden sind zurück
  * @return array Sprachcodes
  */
-function getAllUsedLanguages(): array
-{
+function getAllUsedLanguages(): array {
     $languages = [];
     $sql = "select language from `{prefix}content` where active = 1 "
             . "group by language order by language";
@@ -22,26 +21,24 @@ function getAllUsedLanguages(): array
 }
 
 function get_prefered_language(
-    array $priorities,
-    ?string $http_accept_language
+        array $priorities,
+        ?string $http_accept_language
 ) {
     $negotiator = new LanguageNegotiator();
     return $negotiator->getBest($http_accept_language, $priorities)->getType();
 }
 
-function getLanguageFilePath(string $lang = "de"): string
-{
+function getLanguageFilePath(string $lang = "de"): string {
     return ULICMS_ROOT . "/lang/" . $lang . ".php";
 }
 
-function getAvailableBackendLanguages(): array
-{
+function getAvailableBackendLanguages(): array {
     $langdir = ULICMS_ROOT . "/lang/";
     $list = scandir($langdir);
     sort($list);
     $retval = [];
     $listCount = count($list);
-    for ($i = 0; $i < $listCount; $i ++) {
+    for ($i = 0; $i < $listCount; $i++) {
         if (endsWith($list[$i], ".php")) {
             $retval[] = basename($list[$i], ".php");
         }
@@ -50,8 +47,7 @@ function getAvailableBackendLanguages(): array
     return $retval;
 }
 
-function getSystemLanguage(): string
-{
+function getSystemLanguage(): string {
     if (isset($_SESSION["system_language"])) {
         $lang = $_SESSION["system_language"];
     } elseif (isset($_SESSION["language"])) {
@@ -67,8 +63,7 @@ function getSystemLanguage(): string
     return $lang;
 }
 
-function getDomainByLanguage($givenLanguage): ?string
-{
+function getDomainByLanguage($givenLanguage): ?string {
     $domainMapping = Settings::get("domain_to_language");
     $domainMapping = Settings::mappingStringToArray($domainMapping);
     foreach ($domainMapping as $domain => $language) {
@@ -79,8 +74,7 @@ function getDomainByLanguage($givenLanguage): ?string
     return null;
 }
 
-function getLanguageByDomain($givenDomain): ?string
-{
+function getLanguageByDomain($givenDomain): ?string {
     $domainMapping = Settings::get("domain_to_language");
     $domainMapping = Settings::mappingStringToArray($domainMapping);
     foreach ($domainMapping as $domain => $language) {
@@ -91,17 +85,16 @@ function getLanguageByDomain($givenDomain): ?string
     return null;
 }
 
-function setLanguageByDomain(): bool
-{
+function setLanguageByDomain(): bool {
     $domainMapping = Settings::get("domain_to_language");
     $domainMapping = Settings::mappingStringToArray($domainMapping);
 
     foreach ($domainMapping as $domain => $language) {
         $givenDomain = $_SERVER["HTTP_HOST"];
         if ($domain == $givenDomain and faster_in_array(
-            $language,
-            getAllLanguages()
-        )
+                        $language,
+                        getAllLanguages()
+                )
         ) {
             $_SESSION["language"] = $language;
             return true;
@@ -111,10 +104,9 @@ function setLanguageByDomain(): bool
     return false;
 }
 
-function getLanguageNameByCode(string $code): string
-{
+function getLanguageNameByCode(string $code): string {
     $result = db_query(
-        "SELECT name FROM `" . tbname("languages") .
+            "SELECT name FROM `" . tbname("languages") .
             "` WHERE language_code = '" . db_escape($code) . "'"
     );
     $retval = $code;
@@ -126,8 +118,7 @@ function getLanguageNameByCode(string $code): string
     return $retval;
 }
 
-function setLocaleByLanguage(): array
-{
+function setLocaleByLanguage(): array {
     $locale = [];
 
     $var = (is_admin_dir() and isset($_SESSION["system_language"])) ?
@@ -149,8 +140,7 @@ function setLocaleByLanguage(): array
 // Returns the language code of the current language
 // If $current is true returns language of the current page
 // else it returns $_SESSION["language"];
-function getCurrentLanguage($current = false): string
-{
+function getCurrentLanguage($current = false): string {
     if (Vars::get("current_language_" . strbool($current))) {
         return Vars::get("current_language_" . strbool($current));
     }
@@ -172,8 +162,7 @@ function getCurrentLanguage($current = false): string
 }
 
 // Sprachcodes abfragen und als Array zurück geben
-function getAllLanguages($filtered = false): array
-{
+function getAllLanguages($filtered = false): array {
     $languageCodes = [];
 
     if ($filtered) {
@@ -187,7 +176,7 @@ function getAllLanguages($filtered = false): array
             return $result;
         }
     }
-    
+
     if (!is_null(Vars::get("all_languages"))) {
         return Vars::get("all_languages");
     }

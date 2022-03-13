@@ -747,8 +747,8 @@ add_translation("copied_to_clipboard_success", "Text wurde in die Zwischenablage
 add_translation("copied_to_clipboard_failed", "Kopieren des Textes fehlgeschlagen.");
 
 add_translation(
-    "unsupported_browser",
-    "Sie benutzen den Browser %browser% welcher von UliCMS nicht unterstützt wird.\n" .
+        "unsupported_browser",
+        "Sie benutzen den Browser %browser% welcher von UliCMS nicht unterstützt wird.\n" .
         "Bitte verwenden Sie einen der unterstützen Browser.\n\n" .
         "Welche Browser von UliCMS unterstützt werden, erfahren Sie unter:\n" .
         "https://www.ulicms.de/Welche-Browser-werden-von-UliCMS-unterstutzt.html"

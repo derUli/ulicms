@@ -7,10 +7,9 @@ require_once "../classes/objects/storages/load.php";
 
 require_once "../lib/files.php";
 
-class InstallerController
-{
-    public static function getStep()
-    {
+class InstallerController {
+
+    public static function getStep() {
         $step = 1;
         if (isset($_REQUEST["step"]) && !empty($_REQUEST["step"])) {
             $step = intval($_REQUEST["step"]);
@@ -22,8 +21,7 @@ class InstallerController
         return $step;
     }
 
-    public static function initSessionVars()
-    {
+    public static function initSessionVars() {
         $vars = array(
             "mysql_user",
             "mysql_host",
@@ -59,14 +57,12 @@ class InstallerController
         }
     }
 
-    public static function loadLanguageFile($lang)
-    {
+    public static function loadLanguageFile($lang) {
         include_once "lang/" . $lang . ".php";
         include_once "lang/all.php";
     }
 
-    public static function getLanguage()
-    {
+    public static function getLanguage() {
         if (isset($_SESSION["language"]) && !empty($_SESSION["language"])) {
             return basename($_SESSION["language"]);
         } else {
@@ -75,21 +71,18 @@ class InstallerController
         }
     }
 
-    public static function getTitle()
-    {
+    public static function getTitle() {
         return constant("TRANSLATION_TITLE_STEP_" . self::getStep());
     }
 
-    public static function getFooter()
-    {
+    public static function getFooter() {
         $version = new UliCMSVersion();
         return "&copy; 2011 - " . $version->getReleaseYear() .
                 " by <a href=\"http://www.ulicms.de\" "
                 . "target=\"_blank\">UliCMS</a>";
     }
 
-    public static function submitAdminData()
-    {
+    public static function submitAdminData() {
         $_SESSION["admin_password"] = $_POST["admin_password"];
         $_SESSION["admin_user"] = $_POST["admin_user"];
         $_SESSION["admin_email"] = $_POST["admin_email"];
@@ -98,12 +91,11 @@ class InstallerController
         header("Location: index.php?step=7");
     }
 
-    public static function submitTryConnect()
-    {
+    public static function submitTryConnect() {
         @$connection = mysqli_connect(
-            $_POST["servername"],
-            $_POST["loginname"],
-            $_POST["passwort"]
+                $_POST["servername"],
+                $_POST["loginname"],
+                $_POST["passwort"]
         );
         if ($connection == false) {
             die(TRANSLATION_DB_CONNECTION_FAILED);
@@ -119,11 +111,11 @@ class InstallerController
         if (!in_array($_POST["datenbank"], $databases)) {
             // Try to create database if it not exists
             mysqli_query(
-                $connection,
-                "CREATE DATABASE " .
+                    $connection,
+                    "CREATE DATABASE " .
                     mysqli_real_escape_string(
-                        $connection,
-                        $_POST["datenbank"]
+                            $connection,
+                            $_POST["datenbank"]
                     )
             );
         }
@@ -141,8 +133,7 @@ class InstallerController
         $_SESSION["mysql_prefix"] = $_POST["mysql_prefix"];
     }
 
-    public static function submitInstall()
-    {
+    public static function submitInstall() {
         @set_time_limit(60 * 10); // 10 Minuten
 
         if (!isset($_SESSION["install_index"])) {
@@ -167,10 +158,10 @@ class InstallerController
         $sql_file = $files[$currentStep];
 
         @$connection = mysqli_connect(
-            $_SESSION["mysql_host"],
-            $_SESSION["mysql_user"],
-            $_SESSION["mysql_password"]
-        ) or die(TRANSLATION_DB_CONNECTION_FAILED);
+                        $_SESSION["mysql_host"],
+                        $_SESSION["mysql_user"],
+                        $_SESSION["mysql_password"]
+                ) or die(TRANSLATION_DB_CONNECTION_FAILED);
 
         $select = mysqli_select_db($connection, $_SESSION["mysql_database"]);
 
@@ -193,51 +184,51 @@ class InstallerController
 
         if (!isset($_SESSION["encrypted_password"])) {
             $_SESSION["encrypted_password"] = hash(
-                "sha512",
-                $_SESSION["salt"] . $_SESSION["admin_password"]
+                    "sha512",
+                    $_SESSION["salt"] . $_SESSION["admin_password"]
             );
         }
 
         $script = file_exists($sql_file) ? file_get_contents($sql_file) : '';
         $prefix = mysqli_real_escape_string(
-            $connection,
-            $_SESSION["mysql_prefix"]
+                $connection,
+                $_SESSION["mysql_prefix"]
         );
         $language = mysqli_real_escape_string(
-            $connection,
-            $_SESSION["language"]
+                $connection,
+                $_SESSION["language"]
         );
         $admin_user = mysqli_real_escape_string(
-            $connection,
-            $_SESSION["admin_user"]
+                $connection,
+                $_SESSION["admin_user"]
         );
         $encrypted_password = mysqli_real_escape_string(
-            $connection,
-            $_SESSION["encrypted_password"]
+                $connection,
+                $_SESSION["encrypted_password"]
         );
         $admin_lastname = mysqli_real_escape_string(
-            $connection,
-            $_SESSION["admin_lastname"]
+                $connection,
+                $_SESSION["admin_lastname"]
         );
         $admin_firstname = mysqli_real_escape_string(
-            $connection,
-            $_SESSION["admin_firstname"]
+                $connection,
+                $_SESSION["admin_firstname"]
         );
         $admin_email = mysqli_real_escape_string(
-            $connection,
-            $_SESSION["admin_email"]
+                $connection,
+                $_SESSION["admin_email"]
         );
         $salt = mysqli_real_escape_string(
-            $connection,
-            $_SESSION["salt"]
+                $connection,
+                $_SESSION["salt"]
         );
         $script = str_ireplace("{prefix}", $prefix, $script);
         $script = str_ireplace("{language}", $language, $script);
         $script = str_ireplace("{admin_user}", $admin_user, $script);
         $script = str_ireplace(
-            "{encrypted_password}",
-            $encrypted_password,
-            $script
+                "{encrypted_password}",
+                $encrypted_password,
+                $script
         );
         $script = str_ireplace("{salt}", $salt, $script);
         $script = str_ireplace("{ga_secret}", $_SESSION["ga_secret"], $script);
@@ -248,9 +239,9 @@ class InstallerController
 
         $version = new UliCMSVersion();
         $script = str_ireplace(
-            '{ulicms_version}',
-            $version->getInternalVersionAsString(),
-            $script
+                '{ulicms_version}',
+                $version->getInternalVersionAsString(),
+                $script
         );
 
         mysqli_multi_query($connection, $script);
@@ -259,8 +250,8 @@ class InstallerController
         }
 
         $sqlFileName = mysqli_real_escape_string(
-            $connection,
-            basename($sql_file)
+                $connection,
+                basename($sql_file)
         );
 
         mysqli_query($connection, "INSERT INTO {$prefix
@@ -270,34 +261,33 @@ class InstallerController
         $_SESSION["install_index"] += 1;
     }
 
-    public static function submitCreateConfig()
-    {
+    public static function submitCreateConfig() {
         $template_path = "templates/CMSConfig.tpl";
         $content = file_get_contents($template_path);
         $content = str_replace(
-            "{prefix}",
-            $_SESSION["mysql_prefix"],
-            $content
+                "{prefix}",
+                $_SESSION["mysql_prefix"],
+                $content
         );
         $content = str_replace(
-            "{mysql_host}",
-            $_SESSION["mysql_host"],
-            $content
+                "{mysql_host}",
+                $_SESSION["mysql_host"],
+                $content
         );
         $content = str_replace(
-            "{mysql_user}",
-            $_SESSION["mysql_user"],
-            $content
+                "{mysql_user}",
+                $_SESSION["mysql_user"],
+                $content
         );
         $content = str_replace(
-            "{mysql_password}",
-            $_SESSION["mysql_password"],
-            $content
+                "{mysql_password}",
+                $_SESSION["mysql_password"],
+                $content
         );
         $content = str_replace(
-            "{mysql_database}",
-            $_SESSION["mysql_database"],
-            $content
+                "{mysql_database}",
+                $_SESSION["mysql_database"],
+                $content
         );
 
         copy("../lib/CMSConfigSample.php", "../CMSConfig.php");
@@ -318,8 +308,7 @@ class InstallerController
         }
     }
 
-    public static function submitDemodata()
-    {
+    public static function submitDemodata() {
         if (isset($_REQUEST["install_demodata"])) {
             $_SESSION["install_demodata"] = "yes";
         } else {
@@ -329,8 +318,7 @@ class InstallerController
         header("Location: index.php?step=8");
     }
 
-    public static function SureRemoveDir($dir, $DeleteMe)
-    {
+    public static function SureRemoveDir($dir, $DeleteMe) {
         if (!$dh = @opendir($dir)) {
             return;
         }
@@ -349,8 +337,7 @@ class InstallerController
         }
     }
 
-    public static function submitLoginToBackend()
-    {
+    public static function submitLoginToBackend() {
         $installerDir = "../installer";
         if (is_dir($installerDir)) {
             @sureRemoveDir($installerDir, true);
@@ -358,4 +345,5 @@ class InstallerController
         @session_destroy();
         header("Location: ../admin/");
     }
+
 }
