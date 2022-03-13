@@ -20,6 +20,10 @@ function getAllUsers(): array {
     return getUsers();
 }
 
+/**
+ * Get online users
+ * @return array Login names of currently logged in users
+ */
 function getUsersOnline(): array {
     $users_online = Database::query("SELECT username FROM " . tbname("users") . " WHERE last_action > " . (time() - 300) . " ORDER BY username");
     $retval = [];
@@ -29,6 +33,12 @@ function getUsersOnline(): array {
     return $retval;
 }
 
+/**
+ * Change password of a user
+ * @param type $password New plain text password
+ * @param type $userId User id
+ * @return boolean true if successful
+ */
 function changePassword($password, $userId) {
     $user = new User($userId);
     if (!$user->isPersistent()) {
