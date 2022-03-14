@@ -2,14 +2,17 @@
 
 use UliCMS\Exceptions\SCSSCompileException;
 use UliCMS\Utils\CacheUtil;
+use Spatie\Snapshots\MatchesSnapshots;
 
 class MinifyTest extends \PHPUnit\Framework\TestCase {
+
+    use MatchesSnapshots;
 
     protected function setUp(): void {
         sureRemoveDir(Path::resolve("ULICMS_ROOT/content/cache/stylesheets"), true);
         sureRemoveDir(Path::resolve("ULICMS_ROOT/content/cache/scripts"), true);
     }
-    
+
     protected function tearDown(): void {
         resetScriptQueue();
         resetStylesheetQueue();
@@ -155,11 +158,10 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         foreach ($styles as $style) {
             enqueueStylesheet($style);
         }
-        $expected = file_get_contents("tests/fixtures/scss/expected.css");
 
         $outputFile = minifyCSS();
-        $real = file_get_contents($outputFile);
-        $this->assertEquals($expected, $real);
+
+        $this->assertMatchesFileSnapshot($outputFile);
     }
 
     public function testMinifySCSSThrowsException() {

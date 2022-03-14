@@ -58,6 +58,11 @@ function getUserByName(string $name): ?array {
     return null;
 }
 
+/**
+ * Get user by id
+ * @param type $id User Id
+ * @return array|null User as associative array
+ */
 function getUserById($id): ?array {
     $result = Database::query("SELECT * FROM " . tbname("users") .
                     " WHERE id = " . intval($id));
