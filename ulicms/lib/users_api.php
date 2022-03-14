@@ -83,6 +83,11 @@ function get_group_id(): int {
     }
 }
 
+/**
+ * Checks if a user exists 
+ * @param string $name Username
+ * @return bool User exists
+ */
 function user_exists(string $name): bool {
     $user = new User();
     $user->loadByUsername($name);

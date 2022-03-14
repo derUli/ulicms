@@ -5,6 +5,7 @@
         "top"
     ],
     "disable_functions": [
-        "edit_button"
+        "edit_button",
+        "output_design_settings_styles"
     ]
 }

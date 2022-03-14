@@ -1,3 +1,5 @@
+@import 'design_variables';
+
 $default-horizontal-spacing: 15px;
 $default-vertical-spacing: 10px;
 $menu-hover-color: #ce3939;
@@ -9,19 +11,20 @@ html {
 }
 
 body {
+    color: $body-text-color;
+    background: $body-background-color;
+    font-family: $default-font;
+    font-size: $font-size;
+
     letter-spacing: .03em;
 
     div.root {
-        transition: opacity 0.5s ease-in-out;
-        opacity: 1;
-
-        &.fadeout {
-            opacity: 0;
-        }
-
-        position: relative;
+         position: relative;
 
         header.header {
+            background: $header-background-color;
+            border-bottom: 1px solid $body-text-color;
+            
             font-size: initial;
 
             .flex {

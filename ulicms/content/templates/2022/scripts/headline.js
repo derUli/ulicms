@@ -3,7 +3,7 @@ let logo = document.querySelector('header.header .logo-wrapper');
 
 let initialTruncated = isTruncated(headline);
 
-function updateCursor() {
+const updateCursor = () => {
     if (!logo.classList.contains('hide')) {
         initialTruncated = isTruncated(headline);
         headline.style.cursor = initialTruncated ? 'help' : 'default';
@@ -33,10 +33,3 @@ headline.addEventListener('click', (e) => {
     }
 
 });
-
-/**
- * Check if an element is truncated.
- */
-function isTruncated(el) {
-    return el.scrollWidth > el.clientWidth
-}

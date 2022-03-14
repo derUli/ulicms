@@ -15,10 +15,6 @@ og_html_prefix();
     ?>
     <meta name="theme-color" content="<?php esc(Settings::get("header-background-color")); ?>;" />
     <style>
-        header.header {
-            background: <?php esc(Settings::get("header-background-color")); ?>;
-        }
-
         header.header .hamburger .line:nth-child(1),
         header.header .hamburger .line:nth-child(3) {
             background: <?php echo getBarColor1(); ?>;

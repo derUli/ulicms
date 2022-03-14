@@ -18,7 +18,7 @@ menu.querySelectorAll('a').forEach((link) => {
         if (!url.startsWith('#')) {
             hamburger.classList.remove('isactive');
             menu.classList.remove('active');
-            container.classList.add('fadeout');
+            container.fadeTo('slow', 0.0)
         }
     });
 });

@@ -14,6 +14,6 @@ if ($permissionChecker->hasPermission("update_system")) {
     </form>
     <?php
 } else {
-        noPerms();
-    }
+    noPerms();
+}
 ?>
