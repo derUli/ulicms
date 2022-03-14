@@ -1,6 +1,10 @@
 <?php
 
+use Spatie\Snapshots\MatchesSnapshots;
+
 class ACLTest extends \PHPUnit\Framework\TestCase {
+
+    use MatchesSnapshots;
 
     protected function setUp(): void {
         $_SESSION = [];
@@ -22,22 +26,22 @@ class ACLTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetDefaultACLAsJSONWithAdminAndPlain() {
         $acl = new ACL();
-        $expected = file_get_contents(
-                Path::resolve("ULICMS_ROOT/tests/fixtures/json/default_acl.json")
-        );
 
-        $output = $acl->getDefaultACLAsJSON(true, false);
-        $this->assertEquals($expected, $output);
+        $this->assertMatchesJsonSnapshot($acl->getDefaultACLAsJSON(true, false));
     }
 
     public function testGetDefaultACLWithAdminAndPlain() {
         $acl = new ACL();
-        $expected = file_get_contents(
-                Path::resolve("ULICMS_ROOT/tests/fixtures/json/default_acl.json")
-        );
 
-        $output = $acl->getDefaultACL(true, false);
-        $this->assertEquals($expected, $output);
+        $output = $acl->getDefaultACL(true, true);
+
+        $this->assertIsArray($output);
+        $this->assertGreaterThanOrEqual(60, count($output));
+
+        foreach ($output as $key => $value) {
+            $this->assertIsString($key);
+            $this->assertTrue($value);
+        }
     }
 
     public function testCreateUpdateAndDeleteGroup() {

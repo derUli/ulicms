@@ -1,8 +1,11 @@
 <?php
 
 use UliCMS\Models\Content\Types\DefaultContentTypes;
+use Spatie\Snapshots\MatchesSnapshots;
 
 class DefaultContentTypesTest extends \PHPUnit\Framework\TestCase {
+
+    use MatchesSnapshots;
 
     protected function setUp(): void {
         DefaultContentTypes::initTypes();
@@ -30,15 +33,7 @@ class DefaultContentTypesTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testToJson() {
-        $this->assertEquals(
-                file_get_contents(
-                        Path::resolve(
-                                "ULICMS_ROOT/tests/fixtures/json" .
-                                "/defaultContentTypes.json"
-                        )
-                ),
-                DefaultContentTypes::toJSON()
-        );
+        $this->assertMatchesJsonSnapshot(DefaultContentTypes::toJSON());
     }
 
 }
