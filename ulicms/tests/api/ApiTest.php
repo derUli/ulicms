@@ -1,8 +1,11 @@
 <?php
 
 use UliCMS\Models\Content\Language;
+use Spatie\Snapshots\MatchesSnapshots;
 
 class ApiTest extends \PHPUnit\Framework\TestCase {
+
+    use MatchesSnapshots;
 
     private $initialUser;
     private $additionalMenus;
@@ -921,17 +924,8 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
             "boolean" => true,
             "null" => null
         ];
-        $expected = file_get_contents(
-                Path::resolve(
-                        "ULICMS_ROOT/tests/fixtures/json_readable_encode.txt"
-                )
-        );
-        $output = json_readable_encode($data);
 
-        $this->assertEquals(
-                normalizeLN($expected),
-                normalizeLN($output)
-        );
+        $this->assertMatchesJsonSnapshot(json_readable_encode($data));
     }
 
     public function testGetSystemLanguageReturnsSystemLanguageFromSession() {

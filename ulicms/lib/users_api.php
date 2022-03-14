@@ -150,12 +150,18 @@ function validate_login(
     return getUserById($user->getId());
 }
 
-// Ist der User eingeloggt
+/**
+ * Checks if the user is currently logged in.
+ * @return bool Logged in
+ */
 function is_logged_in(): bool {
     return isset($_SESSION["logged_in"]);
 }
 
-// Alias für is_logged_in
+/**
+ * Checks if the user is currently logged in.
+ * @return bool Logged in
+ */
 function logged_in(): bool {
     return is_logged_in();
 }
@@ -200,8 +206,10 @@ function get_gravatar(
     return $img ? $html : $url;
 }
 
-// Gibt den für den derzeit eingeloggten User eingestellten HTML-Editor aus.
-// Wenn der Anwender nicht eingeloggt ist return null
+/**
+ * Returns the preferred HTML editor of the current user.
+ * @return string|null "ckeditor" or "codemirror"
+ */
 function get_html_editor(): ?string {
     $user_id = get_user_id();
 
