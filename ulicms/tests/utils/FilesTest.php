@@ -1,9 +1,11 @@
 <?php
 
 use UliCMS\Utils\File;
+use Spatie\Snapshots\MatchesSnapshots;
 
 class FilesTest extends \PHPUnit\Framework\TestCase {
-
+    use MatchesSnapshots;
+    
     public function testFileExtension() {
         $this->assertEquals("pdf", file_extension("myfile.pdf"));
         $this->assertEquals("pdf", file_extension("myfile.PDF"));
@@ -237,17 +239,9 @@ class FilesTest extends \PHPUnit\Framework\TestCase {
 
     public function testLoadLinesAndTrim() {
         $inputFile = Path::resolve("ULICMS_ROOT/tests/fixtures/trimLines.input.txt");
-        $inputExpected = Path::resolve("ULICMS_ROOT/tests/fixtures/trimLines.expected.txt");
-
-        $expectedData = normalizeLN(
-                file_get_contents($inputExpected),
-                "\n"
-        );
-        $expectedData = explode("\n", $expectedData);
 
         $output = File::loadLinesAndTrim($inputFile);
-
-        $this->assertCount(8, $output);
+        $this->assertMatchesJsonSnapshot(json_encode($output));
     }
 
     public function testLoadLines() {

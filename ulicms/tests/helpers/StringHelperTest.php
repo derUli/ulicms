@@ -81,11 +81,9 @@ class StringHelperTest extends \PHPUnit\Framework\TestCase {
 
     public function testTrimLines() {
         $inputFile = Path::resolve("ULICMS_ROOT/tests/fixtures/trimLines.input.txt");
-        $inputExpected = Path::resolve("ULICMS_ROOT/tests/fixtures/trimLines.expected.txt");
-
         $input = file_get_contents($inputFile);
-        $expected = file_get_contents($inputExpected);
-        $this->assertEquals($expected, StringHelper::trimLines($input));
+        
+        $this->assertMatchesTextSnapshot(StringHelper::trimLines($input));
     }
 
     public function testMakeLinksClickable() {

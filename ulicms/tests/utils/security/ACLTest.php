@@ -13,6 +13,11 @@ class ACLTest extends \PHPUnit\Framework\TestCase {
     protected function tearDown(): void {
         $_SESSION = [];
     }
+    
+    public function testHasPermission(){
+        $acl = new ACL();
+        $this->assertFalse($acl->hasPermission("foobar"));
+    }
 
     public function testGetAllGroups() {
         $acl = new ACL();
