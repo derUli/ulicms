@@ -1,0 +1,50 @@
+{
+    "0": {
+        "version": "2.1",
+        "compatible_with": "2020.1",
+        "status": "stable",
+        "file": "\/content\/files\/packages\/ldap_login\/ldap_login-2.1.sin"
+    },
+    "1": {
+        "version": "2.0",
+        "compatible_with": "2019.3.1",
+        "status": "stable",
+        "file": "\/content\/files\/packages\/ldap_login\/ldap_login-2.0.sin"
+    },
+    "2": {
+        "version": "1.9",
+        "compatible_with": "2019.3",
+        "status": "stable",
+        "file": "\/content\/files\/packages\/ldap_login\/ldap_login-1.9.sin"
+    },
+    "3": {
+        "version": "1.5",
+        "compatible_with": "2018.3",
+        "status": "stable",
+        "file": "\/content\/files\/packages\/ldap_login\/ldap_login-1.5.sin"
+    },
+    "4": {
+        "version": "1.4",
+        "compatible_with": "2018.2",
+        "status": "stable",
+        "file": "\/content\/files\/packages\/ldap_login\/ldap_login-1.4.sin"
+    },
+    "5": {
+        "version": "1.2",
+        "compatible_with": "2017.4",
+        "status": "stable",
+        "file": "\/content\/files\/packages\/ldap_login\/ldap_login-1.2.sin"
+    },
+    "6": {
+        "version": "1.1",
+        "compatible_with": "2017.4",
+        "status": "stable",
+        "file": "\/content\/files\/packages\/ldap_login\/ldap_login-1.1.sin"
+    },
+    "7": {
+        "version": "1.0",
+        "compatible_with": "2017.4",
+        "status": "stable",
+        "file": "\/content\/files\/packages\/ldap_login\/ldap_login-1.0.sin"
+    }
+}

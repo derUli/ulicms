@@ -1,6 +1,10 @@
 <?php
 
+use Spatie\Snapshots\MatchesSnapshots;
+
 class StringHelperTest extends \PHPUnit\Framework\TestCase {
+
+    use MatchesSnapshots;
 
     private function getTestFilePath() {
         return Path::resolve("ULICMS_ROOT/tests/fixtures/lines.txt");
@@ -10,10 +14,8 @@ class StringHelperTest extends \PHPUnit\Framework\TestCase {
         $input = file_get_contents(
                 Path::resolve("ULICMS_ROOT/tests/fixtures/removeEmptyLinesFromString.input.txt")
         );
-        $expected = normalizeLN(file_get_contents(Path::resolve("ULICMS_ROOT/tests/fixtures/removeEmptyLinesFromString.expected.txt")), "\n");
 
-        $this->assertEquals(
-                $expected,
+        $this->assertMatchesTextSnapshot(
                 StringHelper::removeEmptyLinesFromString($input)
         );
     }

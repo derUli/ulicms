@@ -326,7 +326,7 @@ class RoboFile extends Tasks {
             $releases = $data["data"];
             $checker = new AvailablePackageVersionMatcher($releases);
             $this->writeln(
-                    var_dump_str($checker->getCompatibleVersions())
+                    json_readable_encode($checker->getCompatibleVersions())
             );
         }
     }

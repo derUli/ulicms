@@ -1,9 +1,13 @@
 <?php
 
+use Spatie\Snapshots\MatchesSnapshots;
+
 require_once __DIR__ . "/RoboTestFile.php";
 require_once __DIR__ . "/RoboBaseTest.php";
 
 class RoboModulesTest extends RoboBaseTest {
+
+    use MatchesSnapshots;
 
     protected function setUp(): void {
         $this->runRoboCommand(["modules:sync"]);
@@ -61,12 +65,6 @@ class RoboModulesTest extends RoboBaseTest {
     }
 
     public function testModulesGetPackageVersions() {
-        $expected = file_get_contents(
-                Path::resolve(
-                        "ULICMS_ROOT/tests/fixtures/robo/modulesGetPackageVersions.expected.txt"
-                )
-        );
-
         $actual = $this->runRoboCommand(
                 [
                     "modules:get-package-versions",
@@ -74,10 +72,7 @@ class RoboModulesTest extends RoboBaseTest {
                 ]
         );
 
-        $this->assertStringContainsString(
-                '/content/files/packages/ldap_login/ldap_login-2.1.sin',
-                $actual
-        );
+        $this->assertMatchesJsonSnapshot($actual);
     }
 
     public function testModulesEnableAndDisable() {

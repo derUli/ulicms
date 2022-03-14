@@ -1,10 +1,15 @@
 <?php
 
+use Spatie\Snapshots\MatchesSnapshots;
+
 require_once __DIR__ . "/RoboTestFile.php";
 require_once __DIR__ . "/RoboBaseTest.php";
 
-class RoboPackageTest extends RoboBaseTest {
 
+class RoboPackageTest extends RoboBaseTest {
+ 
+    use MatchesSnapshots;
+ 
     protected function setUp(): void {
         $this->runRoboCommand(["modules:sync"]);
     }
@@ -30,18 +35,8 @@ class RoboPackageTest extends RoboBaseTest {
                         "ULICMS_ROOT/tests/fixtures/packages/lock_inactive_users-1.0.1.sin"
         );
 
-        $expected = file_get_contents(
-                Path::resolve(
-                        "ULICMS_ROOT/tests/fixtures/packages/packageExamine.expected.txt"
-                )
-        );
-
         $output = $this->runRoboCommand(["package:examine", $packageFile]);
-
-        $this->assertEquals(
-                trim(normalizeLN($expected)),
-                trim(normalizeLN($output))
-        );
+        $this->assertMatchesTextSnapshot($output);
     }
 
     public function testPackageExamineReturnsError() {

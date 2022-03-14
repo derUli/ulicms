@@ -3,8 +3,11 @@
 use UliCMS\Models\Content\Language;
 use UliCMS\Models\Content\VCS;
 use UliCMS\Exceptions\DatasetNotFoundException;
+use Spatie\Snapshots\MatchesSnapshots;
 
 class PageControllerTest extends \PHPUnit\Framework\TestCase {
+
+    use MatchesSnapshots;
 
     protected function setUp(): void {
         require_once getLanguageFilePath("en");
@@ -221,13 +224,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetContentTypes() {
         $controller = new PageController();
-
-        $actual = $controller->_getContentTypes();
-        $expected = file_get_contents(
-                Path::resolve("ULICMS_ROOT/tests/fixtures/getContentTypes.expected.json")
-        );
-
-        $this->assertEquals(normalizeLN($expected), normalizeLN($actual));
+        $this->assertMatchesTextSnapshot($controller->_getContentTypes());
     }
 
     public function testToggleFilters() {
