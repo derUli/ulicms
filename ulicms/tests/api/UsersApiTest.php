@@ -263,7 +263,7 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase {
 
     public function testRegisterSession() {
         $login = validate_login("testuser1", "topsecret");
-        register_session($login, false);
+        register_session((int)$login['id'], false);
 
         $this->assertEquals("testuser1", $_SESSION["ulicms_login"]);
         $this->assertEquals("Muster", $_SESSION["lastname"]);

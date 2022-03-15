@@ -277,7 +277,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $user->setHTMLEditor("ckeditor");
         $user->save();
 
-        register_session(getUserByName(("testuser-1")), false);
+        register_session($user->getId(), false);
         $this->assertEquals("ckeditor", get_html_editor());
     }
 
@@ -290,7 +290,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $user->setHTMLEditor("codemirror");
         $user->save();
 
-        register_session(getUserByName(("testuser-2")), false);
+        register_session($user->getId(), false);
         $this->assertEquals("codemirror", get_html_editor());
     }
 
@@ -804,7 +804,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $user->save();
 
         register_session(
-                getUserById($user->getId())
+                $user->getId()
         );
         $languages = getAllLanguages(true);
 

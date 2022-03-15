@@ -42,7 +42,8 @@ class SessionManager extends Controller {
             if ($logger) {
                 $logger->debug("User {$_POST['user']} - Login OK");
             }
-            register_session($sessionData);
+
+            register_session((int) $sessionData['id']);
         } else {
             // If login failed
             if ($logger) {
@@ -82,8 +83,8 @@ class SessionManager extends Controller {
         $reset = new PasswordReset();
         $token = $reset->getTokenByTokenString($_REQUEST["token"]);
         if ($token) {
-            $user_id = $token->user_id;
-            $user = new User($user_id);
+            $userId = $token->user_id;
+            $user = new User($userId);
             $user->setRequirePasswordChange(1);
             $user->save();
             $token = $reset->deleteToken($_REQUEST["token"]);
@@ -92,7 +93,7 @@ class SessionManager extends Controller {
                 $logger->debug("Password reset $name - OK");
             }
 
-            register_session(getUserById($user_id));
+            register_session((int) $userId);
         } else {
             if ($logger) {
                 $logger->error("Password reset - Invalid token");

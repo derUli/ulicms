@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 use UliCMS\Security\TwoFactorAuthentication;
 
-// this file contains functions for managing user accounts
+/**
+ * Returns all Users 
+ * @return arrays of User ID, an Username
+ */
 function getUsers(): array {
     $users = [];
     $result = Database::query("SELECT id, username FROM " . tbname("users") .
@@ -16,6 +19,10 @@ function getUsers(): array {
     return $users;
 }
 
+/**
+ * Returns all Users 
+ * @return arrays of User ID, an Username
+ */
 function getAllUsers(): array {
     return getUsers();
 }
@@ -49,6 +56,11 @@ function changePassword($password, $userId) {
     return true;
 }
 
+/**
+ * Get a user from database by it's username
+ * @param string $name Username
+ * @return array|null User dataset
+ */
 function getUserByName(string $name): ?array {
     $result = Database::query("SELECT * FROM " . tbname("users") .
                     " WHERE username='" . Database::escapeValue($name, DB_TYPE_STRING) . "'");
@@ -72,6 +84,10 @@ function getUserById($id): ?array {
     return null;
 }
 
+/**
+ * Get the user id of the current user
+ * @return int
+ */
 function get_user_id(): int {
     if (isset($_SESSION["login_id"])) {
         return intval($_SESSION["login_id"]);
@@ -80,6 +96,10 @@ function get_user_id(): int {
     }
 }
 
+/**
+ * Get the primary group id of the current user
+ * @return int User Id, 0 if not set
+ */
 function get_group_id(): int {
     if (isset($_SESSION["group_id"])) {
         return intval($_SESSION["group_id"]);
@@ -99,15 +119,29 @@ function user_exists(string $name): bool {
     return intval($user->getId()) > 0;
 }
 
-function register_session(array $user, bool $redirect = true): void {
-    $userDataset = new User($user["id"]);
+/**
+ * initiate user session
+ * @param int $userId User Iid
+ * @param bool $redirect should redirect after set fill $_SESSION
+ * @return void
+ */
+function register_session(int $userId, bool $redirect = true): void {
+
+    $userDataset = new User($userId);
     $userDataset->registerSession($redirect);
 }
 
+/**
+ * Validate login data
+ * @param string $username Username
+ * @param string $password Plain password
+ * @param string|null $confirmationCode Confirmation Code for Google Authenticator
+ * @return array|null User or null
+ */
 function validate_login(
         string $username,
         string $password,
-        ?string $token = null
+        ?string $confirmationCode = null
 ): ?array {
     $user = new User();
     $user->loadByUsername($username);
@@ -144,7 +178,7 @@ function validate_login(
         return null;
     }
 
-    if (TwoFactorAuthentication::isEnabled() && !$auth->checkCode($token)) {
+    if (TwoFactorAuthentication::isEnabled() && !$auth->checkCode($confirmationCode)) {
         $_REQUEST["error"] = get_translation("confirmation_code_wrong");
         return null;
     }
@@ -171,6 +205,10 @@ function logged_in(): bool {
     return is_logged_in();
 }
 
+/**
+ * Get online users
+ * @return array Login names of currently logged in users
+ */
 function getOnlineUsers(): array {
     return getUsersOnline();
 }
