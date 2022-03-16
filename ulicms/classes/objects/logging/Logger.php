@@ -35,7 +35,7 @@ class Logger {
 
     protected function FixLogPermissions(CMSConfig $cfg) {
         // Option fix_log_permissions
-        if (isset($cfg->fix_log_permissions) and is_true($cfg->fix_log_permissions)) {
+        if (isset($cfg->fix_log_permissions) && $cfg->fix_log_permissions) {
             $files = glob($this->path . "/*.log");
             foreach ($files as $file) {
                 chmod($file, 0777);

@@ -81,7 +81,7 @@ class Template {
             case "module":
                 $page = get_page();
 
-                if ($page["module"] != null and strlen($page['module']) > 0) {
+                if ($page["module"] != null &&  strlen($page['module']) > 0) {
                     no_cache();
                     $output = replaceShortcodesWithModules(
                             "[module=\"" . $page["module"] . "\"]"
@@ -90,7 +90,7 @@ class Template {
                 break;
             case "video":
                 $page = get_page();
-                if ($page["video"] != null and strlen($page['video']) > 0) {
+                if ($page["video"] != null && strlen($page['video']) > 0) {
                     $output = replaceVideoTags(
                             "[video id=" . $page['video'] . "]"
                     );
@@ -98,7 +98,7 @@ class Template {
                 break;
             case "audio":
                 $page = get_page();
-                if ($page["audio"] != null and strlen($page["audio"]) > 0) {
+                if ($page["audio"] != null && strlen($page["audio"]) > 0) {
                     $output = replaceAudioTags(
                             "[audio id=" . $page['audio'] . "]"
                     );
@@ -177,7 +177,7 @@ class Template {
         $logo_storage_path = ULICMS_ROOT . "/content/images/" .
                 Settings::get("logo_image");
 
-        if (Settings::get("logo_disabled") == "no" and file_exists($logo_storage_path)) {
+        if (Settings::get("logo_disabled") == "no" && file_exists($logo_storage_path)) {
             echo '<img class="website_logo" src="' . $logo_storage_url .
             '" alt="' . _esc(Settings::get("homepage_title")) . '"/>';
         }
@@ -364,14 +364,14 @@ class Template {
         }
         output_favicon_code();
 
-        if (!Settings::get("hide_shortlink") and (is_200() or is_403())) {
+        if (!Settings::get("hide_shortlink") && (is_200() || is_403())) {
             $shortlink = get_shortlink();
             if ($shortlink) {
                 echo '<link rel="shortlink" href="' . $shortlink . '"/>';
             }
         }
 
-        if (!Settings::get("hide_canonical") and (is_200() or is_403())) {
+        if (!Settings::get("hide_canonical") && (is_200() || is_403())) {
             $canonical = get_canonical();
             if ($canonical) {
                 echo '<link rel="canonical"  href="' . $canonical . '"/>';
@@ -443,7 +443,7 @@ color: " . Settings::get("body-text-color") . ";
             $minifier = new Minify\CSS();
             $minifier->add($cssCode);
             if (!(is_array($disableFunctions)
-                    and in_array(
+                   && in_array(
                             "output_design_settings_styles",
                             $disableFunctions
                     ))
@@ -541,7 +541,7 @@ color: " . Settings::get("body-text-color") . ";
         $data = CustomData::get();
         // it's possible to disable shortcodes for a page
         // define "disable_shortcodes in custom data / json
-        if (!(isset($data["disable_shortcodes"]) and is_true($data["disable_shortcodes"]))) {
+        if (!(isset($data["disable_shortcodes"]) && $data["disable_shortcodes"])) {
             $htmlContent = replaceShortcodesWithModules($htmlContent);
             $htmlContent = replaceOtherShortCodes($htmlContent);
         }
@@ -602,7 +602,7 @@ color: " . Settings::get("body-text-color") . ";
             return $html;
         }
         $acl = new PermissionChecker(get_user_id());
-        if ($acl->hasPermission("pages") and Flags::getNoCache() && is_200()) {
+        if ($acl->hasPermission("pages") && Flags::getNoCache() && is_200()) {
             $id = get_ID();
             $page = ContentFactory::getById($id);
             if (in_array($page->language, getAllLanguages(true))) {

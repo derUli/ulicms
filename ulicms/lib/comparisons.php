@@ -14,6 +14,7 @@ function faster_in_array($needle, $haystack): bool {
     if (!is_array($haystack)) {
         return false;
     }
+    
     $flipped = array_flip($haystack);
     return isset($flipped[$needle]);
 }
@@ -125,23 +126,28 @@ function is_numeric_array($var): bool {
     return true;
 }
 
-function is_true($var): bool {
-    return (isset($var) and $var);
-}
-
-function is_false($var): bool {
-    return !(isset($var) and $var);
-}
-
-// sind wir gerade im Adminordner?
+/**
+ * Is the current working directory the admin directory?
+ * @return bool Is Admin Directory
+ */
 function is_admin_dir(): bool {
     return basename(getcwd()) === "admin";
 }
 
+/**
+ * Checks if the client is a desktop computer
+ * @return bool Is Desktop
+ */
 function is_desktop(): bool {
     return !is_mobile();
 }
 
+/**
+ * Checks if the client is a crawler.
+ * Needs CrawlerDetect or another crawler detection module installed.
+ * @param string|null $useragent Useragent
+ * @return bool
+ */
 function is_crawler(?string $useragent = null): bool {
     if (!$useragent && Request::getUserAgent()) {
         $useragent = Request::getUserAgent();
@@ -153,7 +159,7 @@ function is_crawler(?string $useragent = null): bool {
     $isCrawler = false;
 
     $crawlerCheck = apply_filter($useragent, "is_crawler");
-    if (is_bool($crawlerCheck) or is_int($crawlerCheck)) {
+    if (is_bool($crawlerCheck) || is_int($crawlerCheck)) {
         $isCrawler = boolval($crawlerCheck);
     }
 
@@ -232,18 +238,21 @@ function is_admin(): bool {
 function is_night(?int $time = null): bool {
     $time = $time ? $time : time();
     $hour = (int) date("G", $time);
-    return ($hour >= 0 and $hour <= 4);
+    return ($hour >= 0 && $hour <= 4);
 }
 
+/**
+ * Checks if the debug mode is enabled
+ * @return bool Debug mode enabled
+ */
 function is_debug_mode(): bool {
     $config = new CMSConfig();
-    return (defined("ULICMS_DEBUG") and ULICMS_DEBUG)
-            or (isset($config->debug) and $config->debug);
+    return (defined("ULICMS_DEBUG") && ULICMS_DEBUG) || (isset($config->debug) && $config->debug);
 }
 
 /**
  * Checks if the application is running from command line
- * @return bool
+ * @return bool Is running from command line
  */
 function isCLI(): bool {
     return php_sapi_name() == "cli";
@@ -272,7 +281,7 @@ function endsWith(string $haystack, string $needle, bool $case = true): bool {
 function var_is_type($var, $type, $required = false): bool {
     $methodName = "is_{$type}";
 
-    if ($var === null or $var === "") {
+    if ($var === null || $var === "") {
         return !$required;
     }
 
@@ -288,5 +297,5 @@ function var_is_type($var, $type, $required = false): bool {
  * @return bool
  */
 function is_version_number(?string $input): bool {
-    return ($input and version_compare($input, '0.0.1', '>='));
+    return ($input && version_compare($input, '0.0.1', '>='));
 }
