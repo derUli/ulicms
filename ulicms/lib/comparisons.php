@@ -4,6 +4,12 @@ declare(strict_types=1);
 
 use Carbon\Carbon;
 
+/**
+ * Replacement for in_array with better performance
+ * @param type $needle Needle
+ * @param type $haystack Haystack
+ * @return bool Needl is in Haystack
+ */
 function faster_in_array($needle, $haystack): bool {
     if (!is_array($haystack)) {
         return false;
@@ -188,6 +194,10 @@ function isMaintenanceMode(): bool {
             Settings::get("maintenance_mode") == "1");
 }
 
+/**
+ * Checks if the client is a tablet
+ * @return bool 
+ */
 function is_tablet(): bool {
     $result = false;
 
