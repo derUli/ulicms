@@ -20,6 +20,12 @@ function getAllUsedLanguages(): array {
     return $languages;
 }
 
+/**
+ * Get preferred language by http accept language header
+ * @param array $priorities Priorities for language code
+ * @param string|null $http_accept_language accept language http header
+ * @return type
+ */
 function get_prefered_language(
         array $priorities,
         ?string $http_accept_language

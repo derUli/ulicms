@@ -14,7 +14,7 @@ function faster_in_array($needle, $haystack): bool {
     if (!is_array($haystack)) {
         return false;
     }
-    
+
     $flipped = array_flip($haystack);
     return isset($flipped[$needle]);
 }
@@ -22,10 +22,6 @@ function faster_in_array($needle, $haystack): bool {
 // is $val a decimal number or a integer?
 function is_decimal($val): bool {
     return is_numeric($val) && !ctype_digit(strval($val));
-}
-
-function is_zero($val): bool {
-    return is_numeric($val) && $val == 0;
 }
 
 function is_today($datetime = null): bool {

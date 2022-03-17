@@ -116,22 +116,6 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(is_numeric_array(9.1));
     }
 
-    public function testIsZeroReturnsTrue() {
-        $this->assertTrue(is_zero(0.00));
-        $this->assertTrue(is_zero(0));
-        $this->assertTrue(is_zero("0.00"));
-        $this->assertTrue(is_zero("0"));
-    }
-
-    public function testIsZeroReturnsFalse() {
-        $this->assertFalse(is_zero(2.99));
-        $this->assertFalse(is_zero(4));
-        $this->assertFalse(is_zero("13.37"));
-        $this->assertFalse(is_zero("666"));
-        $this->assertFalse(is_zero("foobar"));
-        $this->assertFalse(is_zero(null));
-    }
-
     public function testIsDecimalReturnsTrue() {
         $this->assertTrue(is_decimal(1.99));
         $this->assertTrue(is_decimal("1.99"));
