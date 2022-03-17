@@ -4,7 +4,13 @@ declare(strict_types=1);
 
 use UliCMS\Constants\ModuleEventConstants;
 
-function getModuleMeta($module, $attrib = null) {
+/**
+ * 
+ * @param string $module
+ * @param string|null $attrib attribute to get or null
+ * @return type array|string|int|float|null metadata array or attribute
+ */
+function getModuleMeta(string $module, ?string $attrib = null) {
     $metadata_file = ModuleHelper::buildModuleRessourcePath(
                     $module,
                     "metadata.json",
@@ -23,6 +29,12 @@ function getModuleMeta($module, $attrib = null) {
     return $attrib ? $json[$attrib] : $json;
 }
 
+/**
+ * Execute module event
+ * @param string $name Event Name
+ * @param string $runs See ModuleEventConstants
+ * @return void
+ */
 function do_event(
         string $name,
         string $runs = ModuleEventConstants::RUNS_ONCE
@@ -65,6 +77,12 @@ function do_event(
     }
 }
 
+/**
+ * Checks if a string contains a module shortcode
+ * @param string $content HTML string
+ * @param string|null $module specific module
+ * @return bool String contains a module
+ */
 function stringContainsShortCodes(string $content, ?string $module = null): bool {
     $quot = '(' . preg_quote('&quot;') . ')?';
     return boolval(
@@ -76,7 +94,13 @@ function stringContainsShortCodes(string $content, ?string $module = null): bool
     );
 }
 
-// replace Shortcodes with modules
+/**
+ * Replace shortcodes with modules
+ * @param string $string HTML string
+ * @param bool $replaceOther replace other placeholders
+ * @return string Processed HTML string
+ * @throws BadMethodCallException
+ */
 function replaceShortcodesWithModules(
         string $string,
         bool $replaceOther = true
@@ -130,6 +154,11 @@ function replaceShortcodesWithModules(
     return $string;
 }
 
+/**
+ * Replace other shortcodes
+ * @param string $string HTML string
+ * @return string Processed HTML string
+ */
 function replaceOtherShortCodes(string $string): string {
     $string = str_ireplace('[title]', get_title(), $string);
     ob_start();
@@ -199,20 +228,25 @@ function replaceOtherShortCodes(string $string): string {
     return $string;
 }
 
-// Check if site contains a module
-function containsModule(?string $page = null, ?string $module = null): bool {
+/**
+ * Checks if page contains a module (shortcode or as content type "module")
+ * @param string|null $slug Page slug
+ * @param string|null $module
+ * @return bool Contains module
+ */
+function containsModule(?string $slug = null, ?string $module = null): bool {
     $containsModule = false;
 
-    if (is_null($page)) {
-        $page = get_slug();
+    if (is_null($slug)) {
+        $slug = get_slug();
     }
 
-    if (!is_null(Vars::get("page_" . $page . "_contains_" . $module))) {
-        return Vars::get("page_" . $page . "_contains_" . $module);
+    if (!is_null(Vars::get("page_" . $slug . "_contains_" . $module))) {
+        return Vars::get("page_" . $slug . "_contains_" . $module);
     }
 
     $result = db_query("SELECT content, module, `type` FROM " .
-            tbname("content") . " WHERE slug = '" . db_escape($page) . "' LIMIT 1");
+            tbname("content") . " WHERE slug = '" . db_escape($slug) . "' LIMIT 1");
 
     while ($dataset = db_fetch_assoc($result)) {
         $content = $dataset["content"];
@@ -227,6 +261,6 @@ function containsModule(?string $page = null, ?string $module = null): bool {
         }
     }
 
-    Vars::set("page_" . $page . "_contains_" . $module, $containsModule);
+    Vars::set("page_" . $slug . "_contains_" . $module, $containsModule);
     return $containsModule;
 }

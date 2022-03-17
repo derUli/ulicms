@@ -14,7 +14,12 @@ function sureRemoveDir(string $dir, bool $deleteMe = true): void {
     File::sureRemoveDir($dir, $deleteMe);
 }
 
-// Ordner rekursiv kopieren
+/**
+ * Recursive copy directory
+ * @param string $src Source directory
+ * @param string $dst Target directory
+ * @return void
+ */
 function recurse_copy(string $src, string $dst): void {
     $dir = opendir($src);
     @mkdir($dst);
