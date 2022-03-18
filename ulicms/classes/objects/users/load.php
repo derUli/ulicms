@@ -5,7 +5,6 @@ $classes = array(
     "PasswordReset",
     "User",
     "UserManager",
-    "GroupCollection",
     "Session"
 );
 foreach ($classes as $class) {
