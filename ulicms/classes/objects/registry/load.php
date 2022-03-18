@@ -3,7 +3,6 @@
 $classes = array(
     "ActionRegistry",
     "ControllerRegistry",
-    "HelperRegistry",
     "ModelRegistry",
     "LoggerRegistry"
 );

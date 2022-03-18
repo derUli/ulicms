@@ -3,9 +3,6 @@
 $classes = array(
     "PackageManager",
     "SinPackageInstaller",
-    "PackageSourceConnector",
-    "Patch",
-    "PatchManager",
     "extend/AvailablePackageVersionMatcher"
 );
 foreach ($classes as $class) {

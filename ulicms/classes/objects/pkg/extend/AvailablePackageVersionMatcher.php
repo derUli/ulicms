@@ -1,6 +1,6 @@
 <?php
 
-namespace UliCMS\Services\Connectors\eXtend;
+namespace UliCMS\Services\Connectors;
 
 use function is_version_number;
 use UliCMS\Helpers\ArrayHelper;

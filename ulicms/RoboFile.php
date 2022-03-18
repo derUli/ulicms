@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use UliCMS\Packages\PatchManager;
-use UliCMS\Services\Connectors\eXtend\AvailablePackageVersionMatcher;
+use UliCMS\Services\Connectors\AvailablePackageVersionMatcher;
 use UliCMS\Utils\CacheUtil;
 use \Robo\Tasks;
 use UliCMS\Exceptions\SqlException;

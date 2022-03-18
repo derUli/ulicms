@@ -1,7 +1,6 @@
 <?php
 
 $classes = array(
-    "Theme",
     "Module",
     "ModuleManager"
 );
