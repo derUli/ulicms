@@ -446,14 +446,14 @@ class RoboFile extends Tasks {
      * get a list of all available patches
      */
     public function patchesAvailable() {
-        $available = $this->patchckAvailable();
+        $available = $this->_patchesAvailable();
         if (!$available) {
             $this->writeln("No patches available");
         }
         $this->writeln(trim($available));
     }
 
-    private function patchckAvailable() {
+    private function _patchesAvailable() {
         return file_get_contents_wrapper(PATCH_CHECK_URL, true);
     }
 
@@ -494,7 +494,7 @@ class RoboFile extends Tasks {
      */
     public function patchesInstall(array $patchesToInstall): void {
         $patchManager = new PatchManager();
-        $available = $this->patchckAvailable();
+        $available = $this->_patchesAvailable();
         if (!$available) {
             $this->writeln("no patches available");
             return;
@@ -526,7 +526,7 @@ class RoboFile extends Tasks {
      */
     public function testsRun(string $testFile = "") {
         $command = "vendor/bin/phpunit";
-        if (DIRSEP === "\\") {
+        if (DIRECTORY_SEPARATOR === "\\") {
             $command = str_replace("/", "\\", $command);
         }
 
@@ -539,7 +539,7 @@ class RoboFile extends Tasks {
      */
     public function testsUpdateSnapshots(string $testFile = "") {
         $command = "vendor/bin/phpunit -d --update-snapshots";
-        if (DIRSEP === "\\") {
+        if (DIRECTORY_SEPARATOR === "\\") {
             $command = str_replace("/", "\\", $command);
         }
 

@@ -28,6 +28,12 @@ function getModuleAdminSelfPath(): string {
     return _esc(get_request_uri());
 }
 
+/**
+ * Get path to a module
+ * @param type $module Module name
+ * @param type $abspath should return absolute path
+ * @return string Path
+ */
 function getModulePath($module, $abspath = false): string {
     if ($abspath) {
         return Path::resolve(

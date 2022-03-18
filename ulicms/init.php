@@ -16,16 +16,9 @@ if (!defined("ULICMS_ROOT")) {
     define("ULICMS_ROOT", dirname(__file__));
 }
 
+
 // this is kept for compatiblity reasons
 define("DIRECTORY_SEPERATOR", DIRECTORY_SEPARATOR);
-
-// shortcut for DIRECTORY_SEPARATOR
-// however it's unnecessary to use these constansts
-// since PHP normalizes all paths
-// So just always use a forward slash
-// Shortcut, but should not be used anymore
-// Just use /
-define("DIRSEP", DIRECTORY_SEPARATOR);
 
 // use this constant at the end
 // of the page load procedure to measure site performance

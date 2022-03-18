@@ -167,7 +167,6 @@ if ($format == "html") {
     );
 }
 
-
 do_event("after_http_header");
 
 if (count(getAllThemes()) === 0) {
