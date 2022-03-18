@@ -1,9 +1,10 @@
 <?php
 
 $classes = array(
-    "Mailer",
-    "Request",
-    "Response",
+    "HttpStatusCode",
+    "EmailModes",
+    "AllowedTags",
+    "ButtonType"
 );
 foreach ($classes as $class) {
     require_once dirname(__file__) . "/$class.php";
