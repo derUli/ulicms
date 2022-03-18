@@ -16,17 +16,9 @@ if (!defined("ULICMS_ROOT")) {
     define("ULICMS_ROOT", dirname(__file__));
 }
 
-
-// this is kept for compatiblity reasons
-define("DIRECTORY_SEPERATOR", DIRECTORY_SEPARATOR);
-
 // use this constant at the end
 // of the page load procedure to measure site performance
 define("START_TIME", microtime(true));
-
-/*
- * Diese Datei initalisiert das System
- */
 
 // load composer packages
 $composerAutoloadFile = dirname(__FILE__) . "/vendor/autoload.php";
