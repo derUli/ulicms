@@ -2,15 +2,9 @@
 
 $classes = array(
     "AntiSpamHelper",
-    "ArrayHelper",
     "BackendHelper",
     "ModuleHelper",
-    "NumberFormatHelper",
     "StringHelper",
-    "UrlHelper",
-    "DataTablesHelper",
-    "TestHelper",
-    "ImageScaleHelper",
     "ImagineHelper"
 );
 foreach ($classes as $class) {
