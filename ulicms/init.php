@@ -4,9 +4,11 @@ define('CLASSDIR', dirname(__file__) . '/classes');
 
 //Autoloader eingebaut
 spl_autoload_register(function ($class) {
+
     $file = str_ireplace("UliCMS\\", CLASSDIR . "/", $class) . ".php";
     $file = str_replace("\\", "/", $file);
-    if(file_exists($file)){
+
+    if (file_exists($file)) {
         require $file;
     }
 });
@@ -19,7 +21,6 @@ use UliCMS\Constants\AuditLog;
 use UliCMS\Registries\HelperRegistry;
 use UliCMS\Models\Content\TypeMapper;
 use UliCMS\Packages\PatchManager;
-
 
 // root directory of UliCMS
 if (!defined("ULICMS_ROOT")) {
