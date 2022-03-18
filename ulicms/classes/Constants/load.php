@@ -1,7 +1,6 @@
 <?php
 
 $classes = array(
-    "HttpStatusCode",
     "EmailModes",
     "AllowedTags",
     "ButtonType"
