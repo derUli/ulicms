@@ -2,18 +2,14 @@
 
 define('CLASSDIR', dirname(__file__) . '/classes');
 
-// Or, using an anonymous function
+//Autoloader eingebaut
 spl_autoload_register(function ($class) {
-    $class = str_ireplace('ULICMS\\', CLASSDIR . '/classes/', $class);
-    
-    $path = str_replace("\\", "/", "{$class}.php");
-    var_dump($path);
+    $file = str_ireplace("UliCMS\\", CLASSDIR . "/", $class) . ".php";
+    $file = str_replace("\\", "/", $file);
+    if(file_exists($file)){
+        require $file;
+    }
 });
-
-new UliCMS\objects\pkg\;
-
-
-require_once dirname(__file__) . "/classes/exceptions/load.php";
 
 use UliCMS\Exceptions\AccessDeniedException;
 use UliCMS\Exceptions\ConnectionFailedException;
@@ -23,6 +19,7 @@ use UliCMS\Constants\AuditLog;
 use UliCMS\Registries\HelperRegistry;
 use UliCMS\Models\Content\TypeMapper;
 use UliCMS\Packages\PatchManager;
+
 
 // root directory of UliCMS
 if (!defined("ULICMS_ROOT")) {
@@ -152,12 +149,6 @@ if (php_sapi_name() != "cli") {
     set_exception_handler('exception_handler');
 }
 
-// Backwards compatiblity for modules using the old config class name
-if (class_exists("CMSConfig") && !class_exists("config")) {
-    class_alias("CMSConfig", "config");
-}
-
-global $config;
 $config = new CMSConfig();
 
 // IF ULICMS_DEBUG is defined then display all errors except E_NOTICE,

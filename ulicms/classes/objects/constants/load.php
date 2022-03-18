@@ -2,7 +2,6 @@
 
 $classes = array(
     "HttpStatusCode",
-    "AuditLog",
     "EmailModes",
     "CommentStatus",
     "RequestMethod",
