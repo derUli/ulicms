@@ -54,7 +54,7 @@ require_once dirname(__file__) . "/classes/objects/web/load.php";
 require_once dirname(__file__) . "/classes/objects/content/types/fields/load.php";
 
 require_once dirname(__file__) . "/classes/objects/pkg/load.php";
-require_once dirname(__file__) . "/classes/helpers/load.php";
+require_once dirname(__file__) . "/classes/Helpers/load.php";
 require_once dirname(__file__) . "/classes/objects/registry/load.php";
 require_once dirname(__file__) . "/classes/objects/logging/load.php";
 require_once dirname(__file__) . "/classes/objects/html/load.php";
