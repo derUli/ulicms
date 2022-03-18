@@ -149,8 +149,6 @@ if ((defined("ULICMS_DEBUG") && ULICMS_DEBUG) || (isset($config->debug) && $conf
     error_reporting(0);
 }
 
-require_once dirname(__file__) . "/classes/renderers/load.php";
-
 if (!defined("ULICMS_TMP")) {
     define("ULICMS_TMP", ULICMS_ROOT . "/content/tmp/");
 }
