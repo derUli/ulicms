@@ -1,5 +1,18 @@
 <?php
 
+define('CLASSDIR', dirname(__file__) . '/classes');
+
+// Or, using an anonymous function
+spl_autoload_register(function ($class) {
+    $class = str_ireplace('ULICMS\\', CLASSDIR . '/classes/', $class);
+    
+    $path = str_replace("\\", "/", "{$class}.php");
+    var_dump($path);
+});
+
+new UliCMS\objects\pkg\;
+
+
 require_once dirname(__file__) . "/classes/exceptions/load.php";
 
 use UliCMS\Exceptions\AccessDeniedException;
