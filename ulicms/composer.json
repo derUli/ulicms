@@ -28,7 +28,7 @@
             "url": "https://github.com/derUli/media-embed",
             "type": "git"
         },
-        
+
         {
             "url": "https://github.com/derUli/imagine",
             "type": "git"
@@ -71,5 +71,10 @@
         "mpdf/mpdf": "*",
         "friendsofphp/php-cs-fixer": "*",
         "overtrue/phplint": "*"
+    },
+    "autoload": {
+        "files": [
+                
+        ]
     }
 }
