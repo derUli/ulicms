@@ -149,7 +149,6 @@ function stringOrNull($val): ?string {
 }
 
 // Aus einer Boolean einen String machen ("true" oder "false")
-
 function strbool($value): string {
     return($value) ? 'true' : 'false';
 }
@@ -157,10 +156,10 @@ function strbool($value): string {
 function convertLineEndingsToLN(string $s): string {
     // Normalize line endings using Global
     // Convert all line-endings to UNIX format
-    $s = str_replace(CRLF, LF, $s);
-    $s = str_replace(CR, LF, $s);
+    $s = str_replace("\r\n", "\n", $s);
+    $s = str_replace("\r", "\n", $s);
     // Don't allow out-of-control blank lines
-    $s = preg_replace("/\n{2,}/", LF . LF, $s);
+    $s = preg_replace("/\n{2,}/", "\n\n", $s);
     return $s;
 }
 

@@ -52,7 +52,7 @@ def main():
 
     main_dir = os.path.join(target, "ulicms")
 
-    version_file = os.path.join(target, "ulicms", "UliCMSVersion.php")
+    version_file = os.path.join(target, "ulicms", "classes", "UliCMSVersion.php")
 
     if os.path.exists(version_file):
         print("set build date...")

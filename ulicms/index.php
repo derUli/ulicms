@@ -25,8 +25,8 @@ $languages = getAllLanguages();
 if (!empty($_GET["language"])
         and faster_in_array($_GET["language"], $languages)) {
     $_SESSION["language"] = Database::escapeValue(
-        $_GET["language"],
-        DB_TYPE_STRING
+                    $_GET["language"],
+                    DB_TYPE_STRING
     );
 }
 
@@ -116,7 +116,7 @@ if (get_ID()) {
             $language = new Language($page->link_to_language);
             if (!is_null($language->getID())
                     and StringHelper::isNotNullOrWhitespace(
-                        $language->getLanguageLink()
+                            $language->getLanguageLink()
                     )
             ) {
                 Request::redirect($language->getLanguageLink());
@@ -158,12 +158,12 @@ if ($format == "html") {
     TextResult($plain->render());
 } else {
     ExceptionResult(
-        get_secure_translation(
-            "unsupported_output_format",
-            [
+            get_secure_translation(
+                    "unsupported_output_format",
+                    [
                         "%format%" => $format
                     ]
-        )
+            )
     );
 }
 
@@ -210,8 +210,7 @@ if (is_logged_in() and get_cache_control() == "auto") {
 do_event("before_html");
 
 $cacheAdapter = null;
-if (CacheUtil::isCacheEnabled() and Request::isGet()
-        && !Flags::getNoCache()) {
+if (CacheUtil::isCacheEnabled() and Request::isGet() && !Flags::getNoCache()) {
     $cacheAdapter = CacheUtil::getAdapter();
 }
 $uid = CacheUtil::getCurrentUid();

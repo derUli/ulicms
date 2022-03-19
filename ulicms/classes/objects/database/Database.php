@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 use UliCMS\Exceptions\SqlException;
 
 // this class provides an abstraction for database access

@@ -1,11 +1,16 @@
 <?php
+// use this constant at the end
+// of the page load procedure to measure site performance
+define("START_TIME", microtime(true));
 
-define('CLASSDIR', dirname(__file__) . '/classes');
+// root directory of UliCMS
+define("ULICMS_ROOT", dirname(__FILE__));
 
-//Autoloader eingebaut
+define('CLASSDIR', ULICMS_ROOT . '/classes');
+
+// Autoload classes
 spl_autoload_register(function ($class) {
-
-    $file = str_ireplace("UliCMS\\", CLASSDIR . "/", $class) . ".php";
+    $file = CLASSDIR . "/" . str_ireplace("UliCMS\\", "", $class) . ".php";
     $file = str_replace("\\", "/", $file);
 
     if (file_exists($file)) {
@@ -22,17 +27,8 @@ use UliCMS\Registries\HelperRegistry;
 use UliCMS\Models\Content\TypeMapper;
 use UliCMS\Packages\PatchManager;
 
-// root directory of UliCMS
-if (!defined("ULICMS_ROOT")) {
-    define("ULICMS_ROOT", dirname(__file__));
-}
-
-// use this constant at the end
-// of the page load procedure to measure site performance
-define("START_TIME", microtime(true));
-
 // load composer packages
-$composerAutoloadFile = dirname(__FILE__) . "/vendor/autoload.php";
+$composerAutoloadFile = ULICMS_ROOT . "/vendor/autoload.php";
 
 if (file_exists($composerAutoloadFile)) {
     require_once $composerAutoloadFile;
@@ -43,47 +39,45 @@ if (file_exists($composerAutoloadFile)) {
     );
 }
 
-require_once dirname(__file__) . "/classes/objects/privacy/load.php";
-require_once dirname(__file__) . "/classes/objects/abstract/load.php";
-require_once dirname(__file__) . "/classes/objects/constants/load.php";
-require_once dirname(__file__) . "/classes/objects/storages/load.php";
-require_once dirname(__file__) . "/classes/objects/modules/load.php";
-require_once dirname(__file__) . "/classes/objects/settings/load.php";
-require_once dirname(__file__) . "/classes/objects/web/load.php";
-require_once dirname(__file__) . "/classes/objects/content/types/fields/load.php";
+require_once ULICMS_ROOT . "/classes/objects/privacy/load.php";
+require_once ULICMS_ROOT . "/classes/objects/abstract/load.php";
+require_once ULICMS_ROOT . "/classes/objects/constants/load.php";
+require_once ULICMS_ROOT . "/classes/objects/storages/load.php";
+require_once ULICMS_ROOT . "/classes/objects/modules/load.php";
+require_once ULICMS_ROOT . "/classes/objects/settings/load.php";
+require_once ULICMS_ROOT . "/classes/objects/web/load.php";
+require_once ULICMS_ROOT . "/classes/objects/content/types/fields/load.php";
 
-require_once dirname(__file__) . "/classes/objects/pkg/load.php";
-require_once dirname(__file__) . "/classes/Helpers/load.php";
-require_once dirname(__file__) . "/classes/objects/registry/load.php";
-require_once dirname(__file__) . "/classes/objects/logging/load.php";
-require_once dirname(__file__) . "/classes/objects/html/load.php";
-require_once dirname(__file__) . "/classes/objects/database/load.php";
-require_once dirname(__file__) . "/classes/objects/security/load.php";
-require_once dirname(__file__) . "/classes/objects/files/load.php";
-require_once dirname(__file__) . "/classes/objects/users/load.php";
-require_once dirname(__file__) . "/classes/objects/localization/load.php";
-require_once dirname(__file__) . "/classes/objects/content/CustomData.php";
-require_once dirname(__file__) . "/classes/objects/content/Content.php";
-require_once dirname(__file__) . "/classes/objects/content/Page.php";
-require_once dirname(__file__) . "/classes/objects/content/Snippet.php";
-require_once dirname(__file__) . "/classes/objects/content/Link.php";
-require_once dirname(__file__) . "/classes/objects/content/Language_Link.php";
-require_once dirname(__file__) . "/classes/objects/content/Node.php";
-require_once dirname(__file__) . "/classes/objects/content/List_Data.php";
-require_once dirname(__file__) . "/classes/objects/content/Content_List.php";
-require_once dirname(__file__) . "/classes/objects/content/Module_Page.php";
-require_once dirname(__file__) . "/classes/objects/content/Video_Page.php";
-require_once dirname(__file__) . "/classes/objects/content/Audio_Page.php";
-require_once dirname(__file__) . "/classes/objects/content/Image_Page.php";
-require_once dirname(__file__) . "/classes/objects/content/Article.php";
-require_once dirname(__file__) . "/classes/objects/content/ContentFactory.php";
-require_once dirname(__file__) . "/classes/objects/content/CustomFields.php";
-require_once dirname(__file__) . "/classes/objects/content/Results.php";
-require_once dirname(__file__) . "/classes/objects/backend/load.php";
+require_once ULICMS_ROOT . "/classes/objects/pkg/load.php";
+require_once ULICMS_ROOT . "/classes/Helpers/load.php";
+require_once ULICMS_ROOT . "/classes/objects/registry/load.php";
+require_once ULICMS_ROOT . "/classes/objects/logging/load.php";
+require_once ULICMS_ROOT . "/classes/objects/html/load.php";
+require_once ULICMS_ROOT . "/classes/objects/database/load.php";
+require_once ULICMS_ROOT . "/classes/objects/security/load.php";
+require_once ULICMS_ROOT . "/classes/objects/files/load.php";
+require_once ULICMS_ROOT . "/classes/objects/users/load.php";
+require_once ULICMS_ROOT . "/classes/objects/localization/load.php";
+require_once ULICMS_ROOT . "/classes/objects/content/CustomData.php";
+require_once ULICMS_ROOT . "/classes/objects/content/Content.php";
+require_once ULICMS_ROOT . "/classes/objects/content/Page.php";
+require_once ULICMS_ROOT . "/classes/objects/content/Snippet.php";
+require_once ULICMS_ROOT . "/classes/objects/content/Link.php";
+require_once ULICMS_ROOT . "/classes/objects/content/Language_Link.php";
+require_once ULICMS_ROOT . "/classes/objects/content/Node.php";
+require_once ULICMS_ROOT . "/classes/objects/content/List_Data.php";
+require_once ULICMS_ROOT . "/classes/objects/content/Content_List.php";
+require_once ULICMS_ROOT . "/classes/objects/content/Module_Page.php";
+require_once ULICMS_ROOT . "/classes/objects/content/Video_Page.php";
+require_once ULICMS_ROOT . "/classes/objects/content/Audio_Page.php";
+require_once ULICMS_ROOT . "/classes/objects/content/Image_Page.php";
+require_once ULICMS_ROOT . "/classes/objects/content/Article.php";
+require_once ULICMS_ROOT . "/classes/objects/content/ContentFactory.php";
+require_once ULICMS_ROOT . "/classes/objects/content/CustomFields.php";
+require_once ULICMS_ROOT . "/classes/objects/content/Results.php";
+require_once ULICMS_ROOT . "/classes/objects/backend/load.php";
 
-require_once dirname(__file__) . "/UliCMSVersion.php";
-
-$mobile_detect_as_module = dirname(__file__) .
+$mobile_detect_as_module = ULICMS_ROOT .
         "/content/modules/Mobile_Detect/Mobile_Detect.php";
 if (file_exists($mobile_detect_as_module)) {
     require_once $mobile_detect_as_module;
@@ -118,7 +112,7 @@ function exception_handler($exception) {
 }
 
 // if config exists require_config else redirect to installer
-$path_to_config = dirname(__file__) . "/CMSConfig.php";
+$path_to_config = ULICMS_ROOT . "/CMSConfig.php";
 
 Vars::set("http_headers", []);
 
@@ -157,9 +151,11 @@ if (!is_dir(ULICMS_TMP)) {
 if (!defined("ULICMS_CACHE")) {
     define("ULICMS_CACHE", ULICMS_ROOT . "/content/cache/");
 }
+
 if (!defined("ULICMS_LOG")) {
     define("ULICMS_LOG", ULICMS_ROOT . "/content/log/");
 }
+
 if (!defined("ULICMS_CONTENT")) {
     define("ULICMS_CONTENT", ULICMS_ROOT . "/content/");
 }
@@ -174,9 +170,11 @@ if (!defined("ULICMS_CONFIGURATIONS")) {
 if (!is_dir(ULICMS_CACHE)) {
     mkdir(ULICMS_CACHE);
 }
+
 if (!is_dir(ULICMS_LOG)) {
     mkdir(ULICMS_LOG);
 }
+
 if (!is_dir(ULICMS_GENERATED)) {
     mkdir(ULICMS_GENERATED);
 }
@@ -234,11 +232,6 @@ if (class_exists("Path")) {
     }
 }
 
-// define Constants
-define('CR', "\r"); // carriage return; Mac
-define('LF', "\n"); // line feed; Unix
-define('CRLF', "\r\n"); // carriage return and line feed; Windows
-define('BR', '<br />' . LF); // HTML Break
 define("ONE_DAY_IN_SECONDS", 60 * 60 * 24);
 
 function noPerms() {
@@ -283,7 +276,7 @@ if (!$connection) {
     throw new ConnectionFailedException("Can't connect to Database.");
 }
 
-$path_to_installer = dirname(__file__) . "/installer/installer.php";
+$path_to_installer = ULICMS_ROOT . "/installer/installer.php";
 
 if (isset($config->dbmigrator_auto_migrate) && $config->dbmigrator_auto_migrate) {
     $additionalSql = is_array($config->dbmigrator_initial_sql_files) ?
@@ -420,7 +413,7 @@ ModelRegistry::loadModuleModels();
 TypeMapper::loadMapping();
 HelperRegistry::loadModuleHelpers();
 ControllerRegistry::loadModuleControllers();
-require_once dirname(__file__) . "/lib/templating.php";
+require_once ULICMS_ROOT . "/lib/templating.php";
 
 do_event("before_init");
 do_event("init");
