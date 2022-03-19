@@ -9,7 +9,7 @@ use Template;
 use Vars;
 use Request;
 use StringHelper;
-use ActionRegistry;
+use UliCMS\Registries\ActionRegistry;
 use Settings;
 use zz\Html\HTMLMinify;
 use UliCMS\Security\PermissionChecker;

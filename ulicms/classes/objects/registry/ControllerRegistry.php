@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use UliCMS\Exceptions\FileNotFoundException;
+use UliCMS\Registries\ActionRegistry;
 
 class ControllerRegistry {
 

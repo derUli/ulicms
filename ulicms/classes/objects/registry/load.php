@@ -1,7 +1,6 @@
 <?php
 
 $classes = array(
-    "ActionRegistry",
     "ControllerRegistry",
     "ModelRegistry",
     "LoggerRegistry"

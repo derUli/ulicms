@@ -2,7 +2,13 @@
 
 declare(strict_types=1);
 
+namespace UliCMS\Registries;
+
 use UliCMS\Exceptions\FileNotFoundException;
+use Vars;
+use ControllerRegistry;
+use Controller;
+use function get_action;
 
 class ActionRegistry {
 
