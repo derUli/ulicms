@@ -1,12 +1,35 @@
 <?php
+
 // use this constant at the end
 // of the page load procedure to measure site performance
 define("START_TIME", microtime(true));
 
+// 24 Stunden in Sekunden
+define("ONE_DAY_IN_SECONDS", 60 * 60 * 24);
+
 // root directory of UliCMS
 define("ULICMS_ROOT", dirname(__FILE__));
 
+// Class dir for autoload
 define('CLASSDIR', ULICMS_ROOT . '/classes');
+
+// Temp Directory
+define("ULICMS_TMP", ULICMS_ROOT . "/content/tmp/");
+
+// Cache Directory
+define("ULICMS_CACHE", ULICMS_ROOT . "/content/cache/");
+
+// Log Directory
+define("ULICMS_LOG", ULICMS_ROOT . "/content/log/");
+
+// Content Directory
+define("ULICMS_CONTENT", ULICMS_ROOT . "/content/");
+
+// Generated Directory
+define("ULICMS_GENERATED", ULICMS_CONTENT . "generated");
+
+// Configuration Directory
+define("ULICMS_CONFIGURATIONS", ULICMS_CONTENT . "/configurations/");
 
 // Autoload classes
 spl_autoload_register(function ($class) {
@@ -26,6 +49,7 @@ use UliCMS\Constants\AuditLog;
 use UliCMS\Registries\HelperRegistry;
 use UliCMS\Models\Content\TypeMapper;
 use UliCMS\Packages\PatchManager;
+use UliCMS\Registries\ModelRegistry;
 
 // load composer packages
 $composerAutoloadFile = ULICMS_ROOT . "/vendor/autoload.php";
@@ -47,7 +71,6 @@ require_once ULICMS_ROOT . "/classes/objects/modules/load.php";
 require_once ULICMS_ROOT . "/classes/objects/settings/load.php";
 require_once ULICMS_ROOT . "/classes/objects/web/load.php";
 require_once ULICMS_ROOT . "/classes/objects/content/types/fields/load.php";
-
 require_once ULICMS_ROOT . "/classes/objects/pkg/load.php";
 require_once ULICMS_ROOT . "/classes/Helpers/load.php";
 require_once ULICMS_ROOT . "/classes/objects/registry/load.php";
@@ -140,33 +163,10 @@ if ((defined("ULICMS_DEBUG") && ULICMS_DEBUG) || (isset($config->debug) && $conf
     error_reporting(0);
 }
 
-if (!defined("ULICMS_TMP")) {
-    define("ULICMS_TMP", ULICMS_ROOT . "/content/tmp/");
-}
-
 if (!is_dir(ULICMS_TMP)) {
     mkdir(ULICMS_TMP);
 }
 
-if (!defined("ULICMS_CACHE")) {
-    define("ULICMS_CACHE", ULICMS_ROOT . "/content/cache/");
-}
-
-if (!defined("ULICMS_LOG")) {
-    define("ULICMS_LOG", ULICMS_ROOT . "/content/log/");
-}
-
-if (!defined("ULICMS_CONTENT")) {
-    define("ULICMS_CONTENT", ULICMS_ROOT . "/content/");
-}
-
-if (!defined("ULICMS_GENERATED")) {
-    define("ULICMS_GENERATED", ULICMS_CONTENT . "generated");
-}
-
-if (!defined("ULICMS_CONFIGURATIONS")) {
-    define("ULICMS_CONFIGURATIONS", ULICMS_CONTENT . "/configurations/");
-}
 if (!is_dir(ULICMS_CACHE)) {
     mkdir(ULICMS_CACHE);
 }
@@ -205,34 +205,30 @@ if (isset($config->memory_limit)) {
 
 Translation::init();
 
-if (class_exists("Path")) {
-    if (isset($config->exception_logging) && $config->exception_logging) {
-        LoggerRegistry::register(
-                "exception_log",
-                new Logger(Path::resolve("ULICMS_LOG/exception_log"))
-        );
-    }
-    if (isset($config->query_logging) && $config->query_logging) {
-        LoggerRegistry::register(
-                "sql_log",
-                new Logger(Path::resolve("ULICMS_LOG/sql_log"))
-        );
-    }
-    if (isset($config->phpmailer_logging) && $config->phpmailer_logging) {
-        LoggerRegistry::register(
-                "phpmailer_log",
-                new Logger(Path::resolve("ULICMS_LOG/phpmailer_log"))
-        );
-    }
-    if (isset($config->audit_log) && $config->audit_log) {
-        LoggerRegistry::register(
-                "audit_log",
-                new Logger(Path::resolve("ULICMS_LOG/audit_log"))
-        );
-    }
+if (isset($config->exception_logging) && $config->exception_logging) {
+    LoggerRegistry::register(
+            "exception_log",
+            new Logger(Path::resolve("ULICMS_LOG/exception_log"))
+    );
 }
-
-define("ONE_DAY_IN_SECONDS", 60 * 60 * 24);
+if (isset($config->query_logging) && $config->query_logging) {
+    LoggerRegistry::register(
+            "sql_log",
+            new Logger(Path::resolve("ULICMS_LOG/sql_log"))
+    );
+}
+if (isset($config->phpmailer_logging) && $config->phpmailer_logging) {
+    LoggerRegistry::register(
+            "phpmailer_log",
+            new Logger(Path::resolve("ULICMS_LOG/phpmailer_log"))
+    );
+}
+if (isset($config->audit_log) && $config->audit_log) {
+    LoggerRegistry::register(
+            "audit_log",
+            new Logger(Path::resolve("ULICMS_LOG/audit_log"))
+    );
+}
 
 function noPerms() {
     echo "<div class=\"alert alert-danger\">"

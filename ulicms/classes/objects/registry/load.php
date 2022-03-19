@@ -2,7 +2,6 @@
 
 $classes = array(
     "ControllerRegistry",
-    "ModelRegistry",
     "LoggerRegistry"
 );
 foreach ($classes as $class) {
