@@ -3,19 +3,7 @@
 declare(strict_types=1);
 
 $files = [
-    "path",
-    "url",
-    "types",
-    "packages",
-    "encode",
-    "request",
-    "menus",
-    "output",
-    "constants",
-    "modules",
-    "designs",
     "cache",
-    "languages",
     "environment",
     "comparisons",
     "pages",
@@ -24,8 +12,6 @@ $files = [
     "csv_writer",
     "users_api",
     "string_functions",
-    "network",
-    "settings",
     "db_functions",
     "files",
     "file_get_contents_wrapper",

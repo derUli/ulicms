@@ -74,7 +74,20 @@
     },
     "autoload": {
         "files": [
-                
+            "lib/constants.php",
+            "lib/path.php",
+            "lib/url.php",
+            "lib/packages.php",
+            "lib/types.php",
+            "lib/encode.php",
+            "lib/request.php",
+            "lib/menus.php",
+            "lib/output.php",
+            "lib/modules.php",
+            "lib/designs.php",
+            "lib/languages.php",
+            "lib/settings.php",
+            "lib/network.php"
         ]
     }
 }
