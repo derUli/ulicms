@@ -5,8 +5,7 @@ error_reporting(E_ALL ^ E_NOTICE);
 
 date_default_timezone_set("Europe/Berlin");
 
-include_once "../lib/load.php";
-include_once "../classes/objects/web/Request.php";
+include_once "../vendor/autoload.php";
 include_once "controllers/InstallerController.php";
 
 InstallerController::initSessionVars();

@@ -87,7 +87,24 @@
             "lib/designs.php",
             "lib/languages.php",
             "lib/settings.php",
-            "lib/network.php"
+            "lib/network.php",
+            "lib/csrf_token.php",
+            "lib/comparisons.php",
+            "lib/pages.php",
+            "lib/csv_writer.php",
+            "lib/users_api.php",
+            "lib/legacy.php",
+            "lib/custom_data.php",
+            "lib/string_functions.php",
+            "lib/db_functions.php",
+            "lib/files.php",
+            "lib/file_get_contents_wrapper.php",
+            "lib/translation.php",
+            "lib/html5_media.php",
+            "lib/version_compare_functions.php",
+            "lib/cache.php",
+            "lib/environment.php",
+            "lib/minify.php"
         ]
     }
 }
