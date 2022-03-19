@@ -2,8 +2,7 @@
 
 $classes = array(
     "PackageManager",
-    "SinPackageInstaller",
-    "extend/AvailablePackageVersionMatcher"
+    "SinPackageInstaller"
 );
 foreach ($classes as $class) {
     require_once dirname(__file__) . "/$class.php";
