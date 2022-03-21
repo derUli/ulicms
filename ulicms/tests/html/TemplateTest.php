@@ -3,6 +3,7 @@
 use UliCMS\Exceptions\FileNotFoundException;
 use UliCMS\Utils\File;
 use UliCMS\Helpers\TestHelper;
+use UliCMS\Storages\Flags;
 use function UliCMS\HTML\stringContainsHtml;
 
 class TemplateTest extends \PHPUnit\Framework\TestCase {

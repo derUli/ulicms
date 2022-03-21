@@ -8,6 +8,7 @@ use UliCMS\Renderers\CsvRenderer;
 use UliCMS\Renderers\JsonRenderer;
 use UliCMS\Renderers\PdfRenderer;
 use UliCMS\Renderers\PlainTextRenderer;
+use UliCMS\Storages\Flags;
 
 global $connection;
 

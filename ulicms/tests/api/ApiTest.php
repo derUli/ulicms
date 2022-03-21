@@ -2,6 +2,7 @@
 
 use UliCMS\Models\Content\Language;
 use Spatie\Snapshots\MatchesSnapshots;
+use UliCMS\Storages\Flags;
 
 class ApiTest extends \PHPUnit\Framework\TestCase {
 

@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace UliCMS\Storages;
+
 class Flags {
 
     private static $noCache = false;

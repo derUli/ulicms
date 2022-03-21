@@ -9,6 +9,7 @@ use UliCMS\Exceptions\NotImplementedException;
 use UliCMS\Constants\CommentStatus;
 use UliCMS\Utils\CacheUtil;
 use zz\Html\HTMLMinify;
+use UliCMS\Storages\Flags;
 
 class CommentsController extends MainClass {
 

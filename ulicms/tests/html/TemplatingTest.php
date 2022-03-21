@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Models\Content\Advertisement\Banner;
+use UliCMS\Storages\Flags;
 
 class TemplatingTest extends \PHPUnit\Framework\TestCase {
 
