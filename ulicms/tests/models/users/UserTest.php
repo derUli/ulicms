@@ -4,6 +4,7 @@ use UliCMS\Security\Encryption;
 use UliCMS\Exceptions\NotImplementedException;
 use UliCMS\Utils\CacheUtil;
 use UliCMS\Models\Users\GroupCollection;
+use UliCMS\Utils\Users\PasswordReset;
 
 class UserTest extends \PHPUnit\Framework\TestCase {
 

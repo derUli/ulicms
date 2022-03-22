@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Utils\Users\PasswordReset;
+
 class PasswordResetTest extends \PHPUnit\Framework\TestCase {
 
     private $testUserId;

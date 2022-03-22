@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use UliCMS\Constants\AuditLog;
+use UliCMS\Utils\Users\PasswordReset;
 
 class SessionManager extends Controller {
 

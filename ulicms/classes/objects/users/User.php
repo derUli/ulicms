@@ -6,6 +6,7 @@ use LasseRafn\InitialAvatarGenerator\InitialAvatar;
 use UliCMS\Security\PermissionChecker;
 use UliCMS\Security\Encryption;
 use UliCMS\Models\Users\GroupCollection;
+use UliCMS\Utils\Users\PasswordReset;
 
 class User extends Model {
 

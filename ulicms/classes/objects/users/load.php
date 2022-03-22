@@ -2,7 +2,6 @@
 
 $classes = array(
     "Group",
-    "PasswordReset",
     "User",
     "UserManager",
     "Session"

@@ -1,4 +1,7 @@
 <?php
+
+use UliCMS\Utils\Users\PasswordReset;
+
 if (Settings::get("disable_password_reset")) {
     translate("function_is_disabled");
 } else {
@@ -18,36 +21,32 @@ if (Settings::get("disable_password_reset")) {
         } else {
             $message = get_translation("NO_SUCH_USER");
         }
-    } ?>
+    }
+    ?>
     <p>
         <a href="./" class="btn btn-default btn-back is-not-ajax"><i
-                class="fa fa-arrow-left"></i> <?php
-                translate("back_to_login"); ?></a>
+                class="fa fa-arrow-left"></i> <?php translate("back_to_login"); ?></a>
     </p>
     <h1>
         <?php translate("reset_password"); ?>
     </h1>
     <form action="index.php?reset_password" method="post">
-        <?php
-        csrf_token_html(); ?><p>
-            <strong><?php
-                translate("username"); ?>
+        <?php csrf_token_html(); ?><p>
+            <strong><?php translate("username"); ?>
             </strong> <br /> <input type="text" name="username" value="" required>
         </p>
         <p>
-            <button type="submit" class="btn btn-warning"><i class="fa fa-lock"></i> <?php
-                translate("reset_password"); ?></button>
+            <button type="submit" class="btn btn-warning"><i class="fa fa-lock"></i> <?php translate("reset_password"); ?></button>
         </p>
-        <?php
-        if ($message) {
-            ?>
-            <div class="alert alert-<?php echo $color; ?>">
                 <?php
-                esc($message); ?>
+                if ($message) {
+                    ?>
+            <div class="alert alert-<?php echo $color; ?>">
+            <?php esc($message); ?>
             </div>
 
-            <?php
-        } ?>
+                <?php }
+            ?>
     </form>
-    <?php
-}
+        <?php
+    }

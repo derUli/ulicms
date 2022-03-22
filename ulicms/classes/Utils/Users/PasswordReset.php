@@ -2,6 +2,20 @@
 
 declare(strict_types=1);
 
+namespace UliCMS\Utils\Users;
+
+use Database;
+use Mailer;
+use ViewBag;
+use Template;
+use Settings;
+use ModuleHelper;
+use SessionManager;
+
+use function getBaseFolderURL;
+use function get_translation;
+use function is_admin_dir;
+
 class PasswordReset {
 
     // create a password reset token
