@@ -1,7 +1,6 @@
 <?php
 
 $classes = array(
-    "AdminMenu",
     "MenuEntry",
 );
 foreach ($classes as $class) {

@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Backend\Menu\AdminMenu;
+
 class AdminMenuTest extends \PHPUnit\Framework\TestCase {
 
     private $adminUser;

@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace UliCMS\Backend\Menu;
+
 // this class renders the backend main navigation menu
 class AdminMenu {
 

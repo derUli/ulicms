@@ -1,3 +1,6 @@
+<?php
+use UliCMS\Backend\Menu\AdminMenu;
+?>
 <div class="mainmenu">
     <?php
     $menu = new AdminMenu();
