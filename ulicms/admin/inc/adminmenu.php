@@ -1,5 +1,7 @@
 <?php
 use UliCMS\Backend\Menu\AdminMenu;
+use UliCMS\Backend\Menu\MenuEntry;
+
 ?>
 <div class="mainmenu">
     <?php

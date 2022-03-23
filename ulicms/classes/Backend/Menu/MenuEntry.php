@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+
+namespace UliCMS\Backend\Menu;
+
+use ACL;
+use function get_action;
+
 // this method implements the rendering of a single backend main menu item
 class MenuEntry {
 

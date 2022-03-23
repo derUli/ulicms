@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Backend\Menu\AdminMenu;
+use UliCMS\Backend\Menu\MenuEntry;
 
 class AdminMenuTest extends \PHPUnit\Framework\TestCase {
 

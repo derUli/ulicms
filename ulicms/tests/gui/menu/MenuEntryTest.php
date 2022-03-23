@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Exceptions\NotImplementedException;
+use UliCMS\Backend\Menu\MenuEntry;
 
 class MenuEntryTest extends \PHPUnit\Framework\TestCase {
 

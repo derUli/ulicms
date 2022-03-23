@@ -97,7 +97,6 @@ require_once ULICMS_ROOT . "/classes/objects/content/Article.php";
 require_once ULICMS_ROOT . "/classes/objects/content/ContentFactory.php";
 require_once ULICMS_ROOT . "/classes/objects/content/CustomFields.php";
 require_once ULICMS_ROOT . "/classes/objects/content/Results.php";
-require_once ULICMS_ROOT . "/classes/objects/backend/load.php";
 
 $mobile_detect_as_module = ULICMS_ROOT .
         "/content/modules/Mobile_Detect/Mobile_Detect.php";
