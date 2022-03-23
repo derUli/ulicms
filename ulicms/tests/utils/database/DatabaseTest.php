@@ -111,7 +111,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
 
     protected function getSQLLogger(): Logger {
         $path = Path::resolve("ULICMS_LOG/sql_exception");
-        return new \UliCMS\Logging\Logger($path);
+        return new Logger($path);
     }
 
     public function testGetError() {

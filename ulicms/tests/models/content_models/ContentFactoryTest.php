@@ -4,13 +4,14 @@ use UliCMS\Models\Content\TypeMapper;
 use UliCMS\Exceptions\UnknownContentTypeException;
 use UliCMS\Models\Content\Comment;
 use UliCMS\Models\Content\Category;
+use UliCMS\Logging\Logger;
 
 class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
 
     protected function setUp(): void {
         LoggerRegistry::register(
                 "exception_log",
-                new \UliCMS\Logging\Logger(Path::resolve("ULICMS_LOG/exception_log"))
+                new Logger(Path::resolve("ULICMS_LOG/exception_log"))
         );
     }
 

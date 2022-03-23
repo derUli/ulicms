@@ -1,7 +1,7 @@
 <?php
 
 use UliCMS\Helpers\TestHelper;
-
+use UliCMS\Logging\Logger;
 class LoggerTest extends \PHPUnit\Framework\TestCase {
 
     protected function setUp(): void {
@@ -13,10 +13,10 @@ class LoggerTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testRegisterAndUnregisterLogger() {
-        $logger = new \UliCMS\Logging\Logger(Path::resolve("ULICMS_LOG/test_log"));
+        $logger = new Logger(Path::resolve("ULICMS_LOG/test_log"));
         $this->assertTrue(is_dir(Path::resolve("ULICMS_LOG/test_log")));
         LoggerRegistry::register("test_log", $logger);
-        $this->assertInstanceOf(\UliCMS\Logging\Logger::class, LoggerRegistry::get("test_log"));
+        $this->assertInstanceOf(Logger::class, LoggerRegistry::get("test_log"));
 
         LoggerRegistry::unregister("test_log");
         $this->assertNull(LoggerRegistry::get("test_log"));
@@ -29,7 +29,7 @@ class LoggerTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testLogDebug() {
-        $logger = new \UliCMS\Logging\Logger(Path::resolve("ULICMS_LOG/test_log"));
+        $logger = new Logger(Path::resolve("ULICMS_LOG/test_log"));
 
         LoggerRegistry::register("test_log", $logger);
 
@@ -48,7 +48,7 @@ class LoggerTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testLogError() {
-        $logger = new \UliCMS\Logging\Logger(Path::resolve("ULICMS_LOG/test_log"));
+        $logger = new Logger(Path::resolve("ULICMS_LOG/test_log"));
 
         LoggerRegistry::register("test_log", $logger);
 
@@ -67,7 +67,7 @@ class LoggerTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testLogInfo() {
-        $logger = new \UliCMS\Logging\Logger(Path::resolve("ULICMS_LOG/test_log"));
+        $logger = new Logger(Path::resolve("ULICMS_LOG/test_log"));
 
         LoggerRegistry::register("test_log", $logger);
 
@@ -90,7 +90,7 @@ class LoggerTest extends \PHPUnit\Framework\TestCase {
         $cfg = new CMSConfig();
         $cfg->fix_log_permissions = true;
 
-        $logger = new \UliCMS\Logging\Logger(Path::resolve("ULICMS_LOG/test_log"), $cfg);
+        $logger = new Logger(Path::resolve("ULICMS_LOG/test_log"), $cfg);
 
         $logger->debug("Test");
 
