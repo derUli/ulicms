@@ -10,7 +10,7 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
     protected function setUp(): void {
         LoggerRegistry::register(
                 "exception_log",
-                new Logger(Path::resolve("ULICMS_LOG/exception_log"))
+                new \UliCMS\Logging\Logger(Path::resolve("ULICMS_LOG/exception_log"))
         );
     }
 

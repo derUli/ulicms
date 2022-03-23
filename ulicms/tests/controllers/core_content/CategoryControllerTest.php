@@ -8,7 +8,7 @@ class CategoryControllerTest extends \PHPUnit\Framework\TestCase {
     protected function setUp(): void {
         LoggerRegistry::register(
                 "audit_log",
-                new Logger(Path::resolve("ULICMS_LOG/audit_log"))
+                new \UliCMS\Logging\Logger(Path::resolve("ULICMS_LOG/audit_log"))
         );
     }
 

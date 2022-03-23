@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Exceptions\SqlException;
+use UliCMS\Logging\Logger;
 
 class DatabaseTest extends \PHPUnit\Framework\TestCase {
 
@@ -110,7 +111,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
 
     protected function getSQLLogger(): Logger {
         $path = Path::resolve("ULICMS_LOG/sql_exception");
-        return new Logger($path);
+        return new \UliCMS\Logging\Logger($path);
     }
 
     public function testGetError() {

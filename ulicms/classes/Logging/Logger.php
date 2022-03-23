@@ -2,6 +2,11 @@
 
 declare(strict_types=1);
 
+namespace UliCMS\Logging;
+
+use CMSConfig;
+use function get_environment;
+
 // Wrapper for KLogger
 class Logger {
 
@@ -12,14 +17,16 @@ class Logger {
         $cfg = $cmsConfig ? $cmsConfig : new CMSConfig();
         $environment = get_environment();
         $this->path = $path;
+        
         // if the directory doesn't exist, create it.
         if (!is_dir($this->path)) {
             @mkdir($path, 0777, true);
         }
+        
         if (is_dir($this->path)) {
-            $this->logger = new Katzgrau\KLogger\Logger(
+            $this->logger = new \Katzgrau\KLogger\Logger(
                     $this->path,
-                    Psr\Log\LogLevel::DEBUG,
+                    \Psr\Log\LogLevel::DEBUG,
                     [
                 "extension" => "log",
                 "prefix" => "{$environment}_"
