@@ -2,7 +2,6 @@
 
 $classes = array(
     "HttpStatusCode",
-    "AllowedTags"
 );
 
 foreach ($classes as $class) {

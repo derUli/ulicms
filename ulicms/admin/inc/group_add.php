@@ -1,6 +1,6 @@
 <?php
 
-use const UliCMS\Constants\HTML5_ALLOWED_TAGS;
+use UliCMS\Constants\AllowedTags;
 use UliCMS\Models\Content\Language;
 
 $permissionChecker = new ACL();
@@ -31,41 +31,40 @@ $languages = Language::getAllLanguages();
                                   name="user_permissons[]" value="<?php esc($key); ?>"
                                   data-select-all-checkbox="#checkall"
                                   data-checkbox-group=".permission-checkbox"
-                                  class="permission-checkbox"> <?php
-                                  esc($key); ?> </label>
+                                  class="permission-checkbox"> <?php esc($key); ?> </label>
                 </div>
-            <?php
-            } ?>
+                <?php }
+            ?>
         </div>
     </fieldset>
-     <h3><?php translate("languages"); ?></h3>
-        <fieldset>
-            <div class="checkbox field">
-                <label>
-                    <input id="select-all-languages" type="checkbox" class="checkall">
-                    <?php translate("select_all"); ?>
-                </label>
-            </div>
-            <div class="voffset1">
+    <h3><?php translate("languages"); ?></h3>
+    <fieldset>
+        <div class="checkbox field">
+            <label>
+                <input id="select-all-languages" type="checkbox" class="checkall">
+                <?php translate("select_all"); ?>
+            </label>
+        </div>
+        <div class="voffset1">
 
-                <?php foreach ($languages as $lang) { ?>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" name="restrict_edit_access_language[]"
-                                   class="language-checkbox"
-                                   data-select-all-checkbox="#select-all-languages"
-                                   data-checkbox-group=".language-checkbox"
-                                   value="<?php echo $lang->getID(); ?>"
-                                   id="lang-<?php echo $lang->getID(); ?>">
-                                   <?php Template::escape($lang->getName()); ?>
-                        </label>
-                    </div>
-                <?php } ?>
-            </div>
-        </fieldset>
+            <?php foreach ($languages as $lang) { ?>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="restrict_edit_access_language[]"
+                               class="language-checkbox"
+                               data-select-all-checkbox="#select-all-languages"
+                               data-checkbox-group=".language-checkbox"
+                               value="<?php echo $lang->getID(); ?>"
+                               id="lang-<?php echo $lang->getID(); ?>">
+                               <?php Template::escape($lang->getName()); ?>
+                    </label>
+                </div>
+            <?php } ?>
+        </div>
+    </fieldset>
     <h3><?php translate("allowable_tags"); ?></h3>
     <input type="text" name="allowable_tags"
-           value="<?php Template::escape(HTML5_ALLOWED_TAGS); ?>"> <small><?php translate("allowable_tags_help"); ?></small>
+           value="<?php Template::escape(AllowedTags::HTML5_ALLOWED_TAGS); ?>"> <small><?php translate("allowable_tags_help"); ?></small>
     <div class="voffset2">
         <button name="add_group" type="submit" class="btn btn-primary">
             <i class="fa fa-save"></i>

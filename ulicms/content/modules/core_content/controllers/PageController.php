@@ -14,7 +14,7 @@ use UliCMS\Constants\LinkTarget;
 use UliCMS\Utils\CacheUtil;
 use zz\Html\HTMLMinify;
 use function UliCMS\HTML\stringContainsHtml;
-use const UliCMS\Constants\HTML5_ALLOWED_TAGS;
+use UliCMS\Constants\AllowedTags;
 use UliCMS\HTML\ListItem;
 
 class PageController extends Controller {
@@ -161,7 +161,7 @@ class PageController extends Controller {
 
         // get allowed tags of all groups assigned to the current user
         $allowedTags = $groupCollection ?
-                $groupCollection->getAllowableTags() : HTML5_ALLOWED_TAGS;
+                $groupCollection->getAllowableTags() : AllowedTags::HTML5_ALLOWED_TAGS;
 
         // remove all html tags except the explicitly allowed tags
         if (Stringhelper::isNotNullOrWhitespace($allowedTags)) {
