@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use UliCMS\Packages\Modules\Module;
+
 class ModuleManager {
 
     public function getAllModules(): array {

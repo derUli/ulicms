@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Packages\Modules\Module;
+
 class ModulePageTest extends \PHPUnit\Framework\TestCase {
 
     protected function tearDown(): void {

@@ -2,6 +2,17 @@
 
 declare(strict_types=1);
 
+namespace UliCMS\Packages\Modules;
+
+use Database;
+use ModuleManager;
+use ModuleHelper;
+use function getModuleMeta;
+use function getModuleAdminFilePath;
+use function getModuleUninstallScriptPath;
+use function getModuleUninstallScriptPath2;
+use function uninstall_module;
+
 class Module {
 
     private $name = null;
@@ -92,7 +103,7 @@ class Module {
         $dependencies = $manager->getDependencies($this->name);
         $enabledMods = $manager->getEnabledModuleNames();
         foreach ($dependencies as $dependency) {
-            if (!faster_in_array($dependency, $enabledMods)) {
+            if (!in_array($dependency, $enabledMods)) {
                 $result [] = $dependency;
             }
         }
@@ -134,7 +145,7 @@ class Module {
         $dependent = $manager->getDependentModules($this->getName());
 
         foreach ($dependent as $dep) {
-            if (faster_in_array($dep, $enabledMods)) {
+            if (in_array($dep, $enabledMods)) {
                 $result [] = $dep;
             }
         }

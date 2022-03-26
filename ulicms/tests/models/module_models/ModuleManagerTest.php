@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Packages\Modules\Module;
+
 class ModuleManagerTest extends \PHPUnit\Framework\TestCase {
 
     const sampleName1 = "mymodule1";

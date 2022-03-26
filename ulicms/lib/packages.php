@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use UliCMS\Packages\Modules\Module;
+
 function getAllThemes(): array {
     $pkg = new PackageManager();
     return $pkg->getInstalledPackages('themes');

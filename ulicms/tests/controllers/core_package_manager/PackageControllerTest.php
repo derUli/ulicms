@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Packages\Modules\Module;
+
 class PackageControllerTest extends \PHPUnit\Framework\TestCase {
 
     private $testUser = null;

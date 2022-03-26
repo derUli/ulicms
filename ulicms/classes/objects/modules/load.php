@@ -1,7 +1,6 @@
 <?php
 
 $classes = array(
-    "Module",
     "ModuleManager"
 );
 foreach ($classes as $class) {

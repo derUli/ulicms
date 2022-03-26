@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use UliCMS\Services\Connectors\PackageSourceConnector;
 use UliCMS\Constants\PackageTypes;
+use UliCMS\Packages\Modules\Module;
 
 class PackageManager {
 
