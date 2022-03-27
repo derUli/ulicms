@@ -4,6 +4,7 @@ use UliCMS\Security\PermissionChecker;
 use UliCMS\Constants\RequestMethod;
 use UliCMS\Packages\PatchManager;
 use UliCMS\Packages\Theme;
+use UliCMS\Packages\Modules\ModuleManager;
 
 $permissionChecker = new PermissionChecker(get_user_id());
 

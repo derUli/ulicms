@@ -1,7 +1,7 @@
 <?php
 
-use UliCMS\Exceptions\NotImplementedException;
 use UliCMS\Packages\Modules\Module;
+use UliCMS\Packages\Modules\ModuleManager;
 
 class ModuleTest extends \PHPUnit\Framework\TestCase {
 

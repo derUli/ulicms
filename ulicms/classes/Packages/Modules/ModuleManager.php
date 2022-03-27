@@ -2,7 +2,15 @@
 
 declare(strict_types=1);
 
+namespace UliCMS\Packages\Modules;
+
 use UliCMS\Packages\Modules\Module;
+use Database;
+use getModuleMeta;
+use Settings;
+
+use function faster_in_array;
+use function getAllModules;
 
 class ModuleManager {
 

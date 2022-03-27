@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace UliCMS\Packages\Modules;
 
 use Database;
-use ModuleManager;
 use ModuleHelper;
+use UliCMS\Packages\Modules\ModuleManager;
 use function getModuleMeta;
 use function getModuleAdminFilePath;
 use function getModuleUninstallScriptPath;

@@ -6,6 +6,7 @@ use UliCMS\Packages\PatchManager;
 use UliCMS\Services\Connectors\AvailablePackageVersionMatcher;
 use UliCMS\Utils\CacheUtil;
 use UliCMS\Packages\Modules\Module;
+use UliCMS\Packages\Modules\ModuleManager;
 use \Robo\Tasks;
 
 /**

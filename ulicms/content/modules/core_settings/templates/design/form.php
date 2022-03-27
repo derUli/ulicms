@@ -2,6 +2,7 @@
 
 use UliCMS\HTML\Input;
 use UliCMS\HTML\ListItem;
+use UliCMS\Packages\Modules\ModuleManager;
 
 $skins = BackendHelper::getCKEditorSkins();
 $skinItems = [];

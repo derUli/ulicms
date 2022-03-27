@@ -62,8 +62,8 @@ def main():
     content_dir_to = os.path.join(target, "ulicms", "classes", "Models", "Content")
     shutil.copytree(content_dir_from, content_dir_to, ignore=IGNORE_PATTERNS)
 
-    modules_dir_from = os.path.join(source_dir, "ulicms", "classes", "objects", "modules")
-    modules_dir_to = os.path.join(target, "ulicms", "classes", "objects", "modules")
+    modules_dir_from = os.path.join(source_dir, "ulicms", "classes", "Packages", "Modules")
+    modules_dir_to = os.path.join(target, "ulicms", "classes", "Packages", "Modules")
     shutil.copytree(modules_dir_from, modules_dir_to, ignore=IGNORE_PATTERNS)
 
     modules_dir_from = os.path.join(source_dir, "ulicms", "content", "modules")

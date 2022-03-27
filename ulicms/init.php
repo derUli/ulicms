@@ -51,6 +51,7 @@ use UliCMS\Models\Content\TypeMapper;
 use UliCMS\Packages\PatchManager;
 use UliCMS\Registries\ModelRegistry;
 use UliCMS\Logging\Logger;
+use UliCMS\Packages\Modules\ModuleManager;
 
 // load composer packages
 $composerAutoloadFile = ULICMS_ROOT . "/vendor/autoload.php";
@@ -67,7 +68,6 @@ if (file_exists($composerAutoloadFile)) {
 require_once ULICMS_ROOT . "/classes/objects/privacy/load.php";
 require_once ULICMS_ROOT . "/classes/objects/constants/load.php";
 require_once ULICMS_ROOT . "/classes/objects/storages/load.php";
-require_once ULICMS_ROOT . "/classes/objects/modules/load.php";
 require_once ULICMS_ROOT . "/classes/objects/settings/load.php";
 require_once ULICMS_ROOT . "/classes/objects/web/load.php";
 require_once ULICMS_ROOT . "/classes/objects/content/types/fields/load.php";

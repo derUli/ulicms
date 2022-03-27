@@ -9,7 +9,10 @@ use Settings;
 use Phpfastcache\Helper\Psr16Adapter;
 use Phpfastcache\CacheManager;
 use Phpfastcache\Config\ConfigurationOption;
-use ModuleManager;
+use UliCMS\Packages\Modules\ModuleManager;
+use ControllerRegistry;
+use DesignSettingsController;
+
 use function do_event;
 use function sureRemoveDir;
 use function get_request_uri;
@@ -18,8 +21,6 @@ use function strbool;
 use function is_mobile;
 use function is_crawler;
 use function is_tablet;
-use ControllerRegistry;
-use DesignSettingsController;
 
 class CacheUtil {
 

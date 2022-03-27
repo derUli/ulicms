@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Constants\PackageTypes;
+use UliCMS\Packages\Modules\ModuleManager;
 
 class PackageManagerTest extends \PHPUnit\Framework\TestCase {
 

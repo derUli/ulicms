@@ -8,9 +8,9 @@ declare(strict_types=1);
 
 namespace UliCMS\Models\Content;
 
-use ModuleManager;
-use function getModuleMeta;
+use UliCMS\Packages\Modules\ModuleManager;
 use StringHelper;
+use function getModuleMeta;
 
 // this class maps the values in the "type" column of the
 // "content" table to the equally model class names
