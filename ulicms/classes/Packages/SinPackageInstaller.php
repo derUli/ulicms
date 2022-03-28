@@ -2,7 +2,18 @@
 
 declare(strict_types=1);
 
+namespace UliCMS\Packages;
+
 use UliCMS\Utils\File;
+use StringHelper;
+use Path;
+use PackageManager;
+use Database;
+use function getAllModules;
+use function faster_in_array;
+use function get_translation;
+use function endsWith;
+use UliCMSVersion;
 
 class SinPackageInstaller {
 
@@ -59,7 +70,7 @@ class SinPackageInstaller {
 
     public function getProperty(string $name) {
         $data = $this->loadPackage();
-        if (isset($data[$name]) and StringHelper::isNotNullOrEmpty(
+        if (isset($data[$name]) && StringHelper::isNotNullOrEmpty(
                         $data[$name]
                 )
         ) {
@@ -76,7 +87,7 @@ class SinPackageInstaller {
         $this->errors = [];
         $installed_modules = getAllModules();
         $data = $this->loadPackage();
-        if (isset($data["dependencies"]) and is_array($data["dependencies"])) {
+        if (isset($data["dependencies"]) && is_array($data["dependencies"])) {
             $dependencies = $data["dependencies"];
             foreach ($dependencies as $dependency) {
                 if (!faster_in_array($dependency, $installed_modules)) {
@@ -92,26 +103,22 @@ class SinPackageInstaller {
         $version = new UliCMSVersion();
         $version = $version->getInternalVersionAsString();
         $version_not_supported = false;
-        if (isset($data["compatible_from"])
-                and StringHelper::isNotNullOrEmpty($data["compatible_from"]) && !\UliCMS\Utils\VersionComparison\compare($version, $data["compatible_from"], ">=")) {
+        if (isset($data["compatible_from"]) && StringHelper::isNotNullOrEmpty($data["compatible_from"]) && !\UliCMS\Utils\VersionComparison\compare($version, $data["compatible_from"], ">=")) {
             $version_not_supported = true;
         }
 
-        if (isset($data["compatible_to"])
-                and StringHelper::isNotNullOrEmpty($data["compatible_to"]) && !\UliCMS\Utils\VersionComparison\compare($version, $data["compatible_to"], "<=")) {
+        if (isset($data["compatible_to"]) && StringHelper::isNotNullOrEmpty($data["compatible_to"]) && !\UliCMS\Utils\VersionComparison\compare($version, $data["compatible_to"], "<=")) {
             $version_not_supported = true;
         }
 
         $phpVersionSupported = true;
 
         // if package requires a specific php version check it
-        if (isset($data["min_php_version"])
-                and StringHelper::isNotNullOrEmpty($data["min_php_version"]) && !\UliCMS\Utils\VersionComparison\compare(phpversion(), $data["min_php_version"], ">=")) {
+        if (isset($data["min_php_version"]) && StringHelper::isNotNullOrEmpty($data["min_php_version"]) && !\UliCMS\Utils\VersionComparison\compare(phpversion(), $data["min_php_version"], ">=")) {
             $phpVersionSupported = false;
         }
 
-        if (isset($data["max_php_version"])
-                and StringHelper::isNotNullOrEmpty($data["max_php_version"]) && !\UliCMS\Utils\VersionComparison\compare(phpversion(), $data["max_php_version"], "<=")) {
+        if (isset($data["max_php_version"]) && StringHelper::isNotNullOrEmpty($data["max_php_version"]) && !\UliCMS\Utils\VersionComparison\compare(phpversion(), $data["max_php_version"], "<=")) {
             $phpVersionSupported = false;
         }
         if (!$phpVersionSupported) {
@@ -126,13 +133,11 @@ class SinPackageInstaller {
         $mysqlVersionSupported = true;
 
         // if package requires a specific mysql version check it
-        if (isset($data["min_mysql_version"])
-                and StringHelper::isNotNullOrEmpty($data["min_mysql_version"]) && !\UliCMS\Utils\VersionComparison\compare($mysqlVersion, $data["min_mysql_version"], ">=")) {
+        if (isset($data["min_mysql_version"]) && StringHelper::isNotNullOrEmpty($data["min_mysql_version"]) && !\UliCMS\Utils\VersionComparison\compare($mysqlVersion, $data["min_mysql_version"], ">=")) {
             $mysqlVersionSupported = false;
         }
 
-        if (isset($data["max_mysql_version"])
-                and StringHelper::isNotNullOrEmpty($data["max_mysql_version"]) && !\UliCMS\Utils\VersionComparison\compare($mysqlVersion, $data["max_mysql_version"], "<=")) {
+        if (isset($data["max_mysql_version"]) && StringHelper::isNotNullOrEmpty($data["max_mysql_version"]) && !\UliCMS\Utils\VersionComparison\compare($mysqlVersion, $data["max_mysql_version"], "<=")) {
             $mysqlVersionSupported = false;
         }
 
@@ -145,8 +150,7 @@ class SinPackageInstaller {
             );
         }
 
-        if (isset($data["required_php_extensions"])
-                and is_array($data["required_php_extensions"])) {
+        if (isset($data["required_php_extensions"]) && is_array($data["required_php_extensions"])) {
             $loadedExtensions = get_loaded_extensions();
             foreach ($data["required_php_extensions"] as $extension) {
                 if (!in_array($extension, $loadedExtensions)) {

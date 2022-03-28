@@ -7,7 +7,8 @@ use UliCMS\Services\Connectors\AvailablePackageVersionMatcher;
 use UliCMS\Utils\CacheUtil;
 use UliCMS\Packages\Modules\Module;
 use UliCMS\Packages\Modules\ModuleManager;
-use \Robo\Tasks;
+use Robo\Tasks;
+use UliCMS\Packages\SinPackageInstaller;
 
 /**
  * This is project's console commands configuration for Robo task runner.

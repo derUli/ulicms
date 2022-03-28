@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Exceptions\NotImplementedException;
+use UliCMS\Packages\SinPackageInstaller;
 
 class SinPackageInstallerTest extends \PHPUnit\Framework\TestCase {
 

@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Packages\Modules\Module;
+use UliCMS\Packages\SinPackageInstaller;
 
 class PackageControllerTest extends \PHPUnit\Framework\TestCase {
 
