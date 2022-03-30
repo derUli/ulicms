@@ -8,7 +8,7 @@ use UliCMS\Models\Content\VCS;
 use UliCMS\Models\Content\Types\DefaultContentTypes;
 use Rakit\Validation\Validator;
 use UliCMS\Security\PermissionChecker;
-use function UliCMS\Security\XSSProtection\stripTags;
+use UliCMS\Security\XSSProtection;
 use UliCMS\Models\Content\TypeMapper;
 use UliCMS\Constants\LinkTarget;
 use UliCMS\Utils\CacheUtil;
@@ -165,7 +165,7 @@ class PageController extends Controller {
 
         // remove all html tags except the explicitly allowed tags
         if (Stringhelper::isNotNullOrWhitespace($allowedTags)) {
-            $model->content = stripTags($model->content, $allowedTags);
+            $model->content = XSSProtection::stripTags($model->content, $allowedTags);
         }
 
         $model->category_id = Request::getVar("category_id", 1, "int");

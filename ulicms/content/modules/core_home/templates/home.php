@@ -2,7 +2,7 @@
 
 use UliCMS\HTML\Alert;
 use UliCMS\Constants\AllowedTags;
-use function UliCMS\Security\XSSProtection\stripTags;
+use UliCMS\Security\XSSProtection;
 
 $permissionChecker = new ACL();
 
@@ -29,7 +29,7 @@ if ($permissionChecker->hasPermission("dashboard")) {
         <?php
         $motd = get_lang_config("motd", getSystemLanguage());
         if ($motd or strlen($motd) > 10) {
-            $motd = stripTags($motd, AllowedTags::HTML5_ALLOWED_TAGS);
+            $motd = XSSProtection::stripTags($motd, AllowedTags::HTML5_ALLOWED_TAGS);
             ?>
             <h2 class="accordion-header">
                 <?php translate("motd"); ?></h2>
