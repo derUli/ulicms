@@ -1,15 +1,15 @@
 <?php
 
-use function UliCMS\Utils\Session\sessionName;
+use UliCMS\Utils\Session;
 
 class SessionTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetSessionName() {
-        $this->assertStringContainsString("SESS", sessionName());
+        $this->assertStringContainsString("SESS", Session::sessionName());
     }
 
     public function testSetSessionName() {
-        $this->assertStringEndsWith(sessionName(), sessionName("foo"));
+        $this->assertStringEndsWith(Session::sessionName(), Session::sessionName("foo"));
     }
 
 }

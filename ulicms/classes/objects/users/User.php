@@ -7,6 +7,7 @@ use UliCMS\Security\PermissionChecker;
 use UliCMS\Security\Encryption;
 use UliCMS\Models\Users\GroupCollection;
 use UliCMS\Utils\Users\PasswordReset;
+use UliCMS\Utils\Session;
 
 class User extends Model {
 
@@ -69,7 +70,7 @@ class User extends Model {
             throw new BadMethodCallException();
         }
         if (!session_id()) {
-            UliCMS\Utils\Session\sessionStart();
+            Session::sessionStart();
         }
 
         $_SESSION["logged_in"] = true;

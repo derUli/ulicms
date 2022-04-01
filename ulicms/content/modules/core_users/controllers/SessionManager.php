@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use UliCMS\Constants\AuditLog;
 use UliCMS\Utils\Users\PasswordReset;
+use UliCMS\Utils\Session;
 
 class SessionManager extends Controller {
 
@@ -69,7 +70,7 @@ class SessionManager extends Controller {
         db_query("UPDATE " . tbname("users") . " SET last_action = 0 WHERE id = $id");
         $url = apply_filter("index.php", "logout_url");
         // throw the session to /dev/null
-        UliCMS\Utils\Session\sessionDestroy();
+        Session::sessionDestroy();
         // redirect to the logout Url
         Response::redirect($url, HttpStatusCode::MOVED_TEMPORARILY);
         exit();

@@ -9,13 +9,14 @@ use UliCMS\Renderers\JsonRenderer;
 use UliCMS\Renderers\PdfRenderer;
 use UliCMS\Renderers\PlainTextRenderer;
 use UliCMS\Storages\Flags;
+use UliCMS\Utils\Session;
 
 global $connection;
 
 do_event("before_session_start");
 
 // initialize session
-UliCMS\Utils\Session\sessionStart();
+Session::sessionStart();
 
 do_event("after_session_start");
 

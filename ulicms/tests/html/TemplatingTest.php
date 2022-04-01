@@ -2,6 +2,7 @@
 
 use UliCMS\Models\Content\Advertisement\Banner;
 use UliCMS\Storages\Flags;
+use UliCMS\Utils\Session;
 
 class TemplatingTest extends \PHPUnit\Framework\TestCase {
 
@@ -24,7 +25,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         $_SERVER["SERVER_PORT"] = "80";
         $_SERVER['HTTP_HOST'] = "example.org";
         $_SERVER['REQUEST_URI'] = "/foobar/foo.html";
-        UliCMS\Utils\Session\sessionStart();
+        Session::sessionStart();
     }
 
     protected function tearDown(): void {
@@ -44,7 +45,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         unset($_SESSION["login_id"]);
         unset($_SESSION["language"]);
 
-        UliCMS\Utils\Session\sessionDestroy();
+        Session::sessionDestroy();
 
         Database::deleteFrom("users", "username like 'testuser_%'");
         Database::deleteFrom("content", "slug like 'unit-test%'");
