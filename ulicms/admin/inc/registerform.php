@@ -1,4 +1,7 @@
 <?php
+
+use UliCMS\Privacy\PrivacyCheckbox; 
+
 if (Settings::get("visitors_can_register") == "off" || !Settings::get("visitors_can_register")) {
     translate("FUNCTION_IS_DISABLED");
 } else {

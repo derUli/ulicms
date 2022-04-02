@@ -2,7 +2,15 @@
 
 declare(strict_types=1);
 
-use UliCMS\HTML\Input as Input;
+namespace UliCMS\Privacy;
+
+use Settings;
+use Request;
+use StringHelper;
+use ViewBag;
+use Template;
+use UliCMS\HTML\Input;
+use function get_translation;
 
 // Class with DSGVO / GDPR related functions
 class PrivacyCheckbox {
@@ -82,6 +90,7 @@ class PrivacyCheckbox {
         ) {
             return "";
         }
+
         $fullHtml = str_ireplace(
                 "[checkbox]",
                 $checkboxHtml,

@@ -66,7 +66,6 @@ if (file_exists($composerAutoloadFile)) {
     );
 }
 
-require_once ULICMS_ROOT . "/classes/objects/privacy/load.php";
 require_once ULICMS_ROOT . "/classes/objects/constants/load.php";
 require_once ULICMS_ROOT . "/classes/objects/storages/load.php";
 require_once ULICMS_ROOT . "/classes/objects/settings/load.php";

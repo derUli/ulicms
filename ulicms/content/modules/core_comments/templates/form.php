@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Constants\CommentStatus;
+use UliCMS\Privacy\PrivacyCheckbox; 
 
 if (Vars::get("comments_enabled")) {
     ?>

@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Privacy\PrivacyCheckbox;
+
 class PrivacyCheckboxTest extends \PHPUnit\Framework\TestCase {
 
     private $privacy_policy_checkbox_enable_de;
