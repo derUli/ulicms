@@ -2,9 +2,18 @@
 
 declare(strict_types=1);
 
+namespace UliCMS\Packages;
+
 use UliCMS\Services\Connectors\PackageSourceConnector;
 use UliCMS\Constants\PackageTypes;
 use UliCMS\Packages\Modules\Module;
+use Path;
+use BadMethodCallException;
+use PharData;
+
+use function find_all_folders;
+use function clearCache;
+use function startsWith;
 
 class PackageManager {
 
@@ -35,7 +44,7 @@ class PackageManager {
                 $module = new Module($package);
                 return $module->isInstalled();
             case PackageTypes::TYPE_THEME:
-                return faster_in_array($package, getAllThemes());
+                return in_array($package, getAllThemes());
             default:
                 throw new BadMethodCallException(
                                 "Package Type {$type} not supported"
@@ -105,7 +114,7 @@ class PackageManager {
                         "ULICMS_ROOT/content/templates"
                 ) . "/";
 
-        $folders = scanDir($templateDir);
+        $folders = scandir($templateDir);
         natcasesort($folders);
 
         $foldersCount = count($folders);

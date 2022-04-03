@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use UliCMS\Packages\Modules\Module;
+use UliCMS\Packages\PackageManager;
 
 function getAllThemes(): array {
     $pkg = new PackageManager();

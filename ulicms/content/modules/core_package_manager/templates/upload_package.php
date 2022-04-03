@@ -1,4 +1,6 @@
 <?php
+use UliCMS\Packages\PackageManager;
+
 // TODO: Refactor this
 // Move logic to controller
 // don't use so much nested if-statements

@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Packages\Modules\ModuleManager;
+use UliCMS\Packages\PackageManager;
 
 // TODO: Refactor this, move business logic to controller
 $permissionChecker = new ACL();

@@ -7,13 +7,13 @@ namespace UliCMS\Packages;
 use UliCMS\Utils\File;
 use StringHelper;
 use Path;
-use PackageManager;
 use Database;
+use UliCMSVersion;
+use UliCMS\Packages\PackageManager;
 use function getAllModules;
 use function faster_in_array;
 use function get_translation;
 use function endsWith;
-use UliCMSVersion;
 
 class SinPackageInstaller {
 

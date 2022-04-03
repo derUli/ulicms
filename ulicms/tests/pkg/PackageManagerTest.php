@@ -2,6 +2,7 @@
 
 use UliCMS\Constants\PackageTypes;
 use UliCMS\Packages\Modules\ModuleManager;
+use UliCMS\Packages\PackageManager;
 
 class PackageManagerTest extends \PHPUnit\Framework\TestCase {
 
