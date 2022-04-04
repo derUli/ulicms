@@ -68,7 +68,7 @@ def main():
                 f.write(line)
 
     # Composer packages zu Deploy hinzufügen
-    os.system("ulicms/composer install --working-dir=" + main_dir + "/ --no-dev")
+    os.system("composer install --working-dir=" + main_dir + "/ --no-dev")
 
     old_cwd = os.getcwd()
 

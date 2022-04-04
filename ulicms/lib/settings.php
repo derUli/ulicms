@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use UliCMS\Constants\AuditLog;
+use UliCMS\Storages\SettingsCache;
 
 // get a config variable
 function getconfig(string $key) {

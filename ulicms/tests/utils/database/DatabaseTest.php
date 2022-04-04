@@ -2,6 +2,7 @@
 
 use UliCMS\Exceptions\SqlException;
 use UliCMS\Logging\Logger;
+use UliCMS\Storages\SettingsCache;
 
 class DatabaseTest extends \PHPUnit\Framework\TestCase {
 

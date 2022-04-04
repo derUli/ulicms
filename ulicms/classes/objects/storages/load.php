@@ -1,7 +1,6 @@
 <?php
 
 $classes = array(
-    "SettingsCache",
     "Vars",
     "ViewBag"
 );

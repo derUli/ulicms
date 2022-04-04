@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use UliCMS\Constants\AuditLog;
+use UliCMS\Storages\SettingsCache;
 
 // class for handling system settings
 class Settings {
