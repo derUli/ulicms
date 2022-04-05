@@ -1,3 +1,6 @@
+<?php 
+use UliCMS\Storages\Vars;
+?>
 <div id="content-container">
     <div id="main-backend-content">
         <?php

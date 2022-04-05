@@ -3,6 +3,7 @@
 use UliCMS\Renderers\PlainTextRenderer;
 use UliCMS\Utils\CacheUtil;
 use Spatie\Snapshots\MatchesSnapshots;
+use UliCMS\Storages\Vars;
 
 class PlainTextRendererTest extends \PHPUnit\Framework\TestCase {
 

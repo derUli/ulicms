@@ -54,6 +54,7 @@ use UliCMS\Registries\ModelRegistry;
 use UliCMS\Logging\Logger;
 use UliCMS\Packages\Modules\ModuleManager;
 use UliCMS\Utils\Session;
+use UliCMS\Storages\Vars;
 
 // load composer packages
 $composerAutoloadFile = ULICMS_ROOT . "/vendor/autoload.php";

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use UliCMS\Exceptions\FileNotFoundException;
 use UliCMS\Registries\ActionRegistry;
+use UliCMS\Storages\Vars;
 
 class ControllerRegistry {
 

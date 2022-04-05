@@ -3,6 +3,7 @@
 use UliCMS\Models\Content\Language;
 use Spatie\Snapshots\MatchesSnapshots;
 use UliCMS\Storages\Flags;
+use UliCMS\Storages\Vars;
 use UliCMS\Packages\Modules\ModuleManager;
 
 class ApiTest extends \PHPUnit\Framework\TestCase {

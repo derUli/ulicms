@@ -1,7 +1,6 @@
 <?php
 
 $classes = array(
-    "Vars",
     "ViewBag"
 );
 foreach ($classes as $class) {

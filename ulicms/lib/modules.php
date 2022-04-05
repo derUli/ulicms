@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use UliCMS\Constants\ModuleEventConstants;
 use UliCMS\Privacy\PrivacyCheckbox; 
+use UliCMS\Storages\Vars;
 
 /**
  * 

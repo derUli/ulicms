@@ -3,6 +3,7 @@
 use UliCMS\Exceptions\SCSSCompileException;
 use UliCMS\Utils\CacheUtil;
 use Spatie\Snapshots\MatchesSnapshots;
+use UliCMS\Storages\Vars;
 
 class MinifyTest extends \PHPUnit\Framework\TestCase {
 

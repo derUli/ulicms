@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Storages\Vars;
+
 class ModuleHelperTest extends \PHPUnit\Framework\TestCase {
 
     protected function setUp(): void {
@@ -191,14 +193,13 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("https://company.com/willkommen.html", ModuleHelper::getFullPageURLByID(1));
 
         $this->assertEquals("https://company.com/willkommen.html", ModuleHelper::getFullPageURLByID());
-        
+
         Vars::clear();
         $this->assertEquals("https://company.com/willkommen.html", ModuleHelper::getFullPageURLByID());
-        
+
         Vars::clear();
         $_GET["slug"] = "existert_nicht";
         $this->assertNull(ModuleHelper::getFullPageURLByID());
-       
     }
 
     public function testGetBaseUrl() {

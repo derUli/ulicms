@@ -1,4 +1,5 @@
 <?php
+use UliCMS\Storages\Vars;
 
 class PkgInfoControllerTest extends \PHPUnit\Framework\TestCase {
 

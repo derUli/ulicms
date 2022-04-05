@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Storages\Vars;
+
 class VarsTest extends \PHPUnit\Framework\TestCase {
 
     protected function setUp(): void {

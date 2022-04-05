@@ -6,7 +6,7 @@ namespace UliCMS\Backend;
 
 use UliCMS\Backend\Utils\BrowserCompatiblityChecker;
 use Template;
-use Vars;
+use UliCMS\Storages\Vars;
 use Request;
 use StringHelper;
 use UliCMS\Registries\ActionRegistry;

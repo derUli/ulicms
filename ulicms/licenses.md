@@ -2631,7 +2631,7 @@ THE SOFTWARE.
 Generic abstractions related to dispatching event
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2018-2021 Fabien Potencier
+Copyright (c) 2018-2022 Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2856,7 +2856,7 @@ THE SOFTWARE.
 Generic abstractions related to writing services
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2018-2021 Fabien Potencier
+Copyright (c) 2018-2022 Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2931,7 +2931,7 @@ THE SOFTWARE.
 Generic abstractions related to translation
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2018-2021 Fabien Potencier
+Copyright (c) 2018-2022 Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

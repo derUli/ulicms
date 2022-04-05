@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use UliCMS\Storages\Vars;
+
 /**
  * Returns font size values for design settings in backend from 6px to 80px
  * @global type $sizes

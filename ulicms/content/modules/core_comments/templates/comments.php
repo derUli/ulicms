@@ -2,6 +2,7 @@
 
 use UliCMS\Models\Content\Comment;
 use UliCMS\Constants\CommentStatus;
+use UliCMS\Storages\Vars;
 
 $comments = Comment::getAllByStatus(
                 CommentStatus::PUBLISHED,

@@ -11,6 +11,7 @@ use UliCMS\Utils\CacheUtil;
 use zz\Html\HTMLMinify;
 use UliCMS\Storages\Flags;
 use UliCMS\Privacy\PrivacyCheckbox; 
+use UliCMS\Storages\Vars;
 
 class CommentsController extends MainClass {
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use UliCMS\Security\PermissionChecker;
 use Negotiation\LanguageNegotiator;
+use UliCMS\Storages\Vars;
 
 /**
  * Gibt alle Sprachen in denen Inhalte vorhanden sind zurück

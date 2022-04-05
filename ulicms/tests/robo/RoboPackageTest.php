@@ -1,6 +1,7 @@
 <?php
 
 use Spatie\Snapshots\MatchesSnapshots;
+use UliCMS\Storages\Vars;
 
 require_once __DIR__ . "/RoboTestFile.php";
 require_once __DIR__ . "/RoboBaseTest.php";

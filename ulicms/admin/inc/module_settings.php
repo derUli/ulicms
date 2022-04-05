@@ -1,4 +1,6 @@
 <?php
+use UliCMS\Storages\Vars;
+
 $module = basename($_GET ["module"]);
 
 $admin_file_path = getModuleAdminFilePath($module);

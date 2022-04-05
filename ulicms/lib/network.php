@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use UliCMS\Storages\Vars;
+
 // returns site protocl
 // http:// or https://
 function get_site_protocol(): string {

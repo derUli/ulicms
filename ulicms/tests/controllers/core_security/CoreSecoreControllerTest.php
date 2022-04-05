@@ -1,4 +1,5 @@
 <?php
+use UliCMS\Storages\Vars;
 
 class CoreSecoreControllerTest extends \PHPUnit\Framework\TestCase {
 

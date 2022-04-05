@@ -8,6 +8,7 @@ use UliCMS\Exceptions\SCSSCompileException;
 use ScssPhp\ScssPhp\Compiler;
 use zz\Html\HTMLMinify;
 use MatthiasMullie\Minify;
+use UliCMS\Storages\Vars;
 
 function resetScriptQueue(): void {
     Vars::set("script_queue", []);

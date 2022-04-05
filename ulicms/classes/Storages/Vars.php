@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace UliCMS\Storages;
+
 class Vars {
 
     private static $vars = [];

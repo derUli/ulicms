@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace UliCMS\Registries;
 
 use UliCMS\Exceptions\FileNotFoundException;
-use Vars;
+use UliCMS\Storages\Vars;
 use function getAllModules;
 use function faster_in_array;
 use function getModuleMeta;
