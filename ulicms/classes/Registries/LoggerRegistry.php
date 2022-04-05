@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace UliCMS\Registries;
+
 use UliCMS\Logging\Logger;
 
 class LoggerRegistry {

@@ -3,6 +3,7 @@
 // FIXME: this file looks like shit, refactor this code to MVC pattern.
 use UliCMS\Models\Content\Language;
 use UliCMS\Constants\AuditLog;
+use UliCMS\Registries\LoggerRegistry;
 
 $permissionChecker = new ACL();
 if (!$permissionChecker->hasPermission("groups")) {

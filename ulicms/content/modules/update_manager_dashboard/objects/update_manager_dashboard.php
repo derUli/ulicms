@@ -1,4 +1,5 @@
 <?php
+
 use UliCMS\Packages\PackageManager;
 
 class UpdateManagerDashboard {

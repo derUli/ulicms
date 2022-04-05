@@ -6,6 +6,7 @@ use UliCMS\Exceptions\DatasetNotFoundException;
 use UliCMS\Constants\AuditLog;
 use UliCMS\Models\Content\Advertisement\Banner;
 use UliCMS\Utils\CacheUtil;
+use UliCMS\Registries\LoggerRegistry;
 
 class BannerController extends Controller {
 

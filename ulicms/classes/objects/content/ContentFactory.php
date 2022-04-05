@@ -5,6 +5,7 @@ declare(strict_types=1);
 use UliCMS\Exceptions\DatasetNotFoundException;
 use UliCMS\Exceptions\UnknownContentTypeException;
 use UliCMS\Models\Content\TypeMapper;
+use UliCMS\Registries\LoggerRegistry;
 
 // this class contains methods to return one content model or an array of multiple content datasets
 class ContentFactory {

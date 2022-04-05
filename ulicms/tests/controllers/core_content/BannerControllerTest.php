@@ -2,7 +2,7 @@
 
 use UliCMS\Models\Content\Advertisement\Banner;
 use UliCMS\Exceptions\DatasetNotFoundException;
-
+use UliCMS\Registries\LoggerRegistry;
 use UliCMS\Logging\Logger;
 
 class BannerControllerTest extends \PHPUnit\Framework\TestCase {

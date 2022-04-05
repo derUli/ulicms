@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use UliCMS\Security\PermissionChecker;
 use UliCMS\Constants\AuditLog;
+use UliCMS\Registries\LoggerRegistry;
 
 class UserController extends Controller {
 

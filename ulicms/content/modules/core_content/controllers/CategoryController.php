@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use UliCMS\Constants\AuditLog;
 use UliCMS\Models\Content\Categories;
+use UliCMS\Registries\LoggerRegistry;
 
 class CategoryController extends Controller {
 

@@ -3,6 +3,7 @@
 use UliCMS\Models\Content\Category;
 use UliCMS\Models\Content\Categories;
 use UliCMS\Logging\Logger;
+use UliCMS\Registries\LoggerRegistry;
 
 class CategoryControllerTest extends \PHPUnit\Framework\TestCase {
 

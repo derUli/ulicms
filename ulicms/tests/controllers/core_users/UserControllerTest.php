@@ -1,5 +1,6 @@
 <?php
 use UliCMS\Logging\Logger;
+use UliCMS\Registries\LoggerRegistry;
 
 class UserControllerTest extends \PHPUnit\Framework\TestCase {
 

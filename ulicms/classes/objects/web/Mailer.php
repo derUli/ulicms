@@ -3,6 +3,7 @@
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\PHPMailer;
 use UliCMS\Constants\EmailModes;
+use UliCMS\Registries\LoggerRegistry;
 
 class Mailer {
 

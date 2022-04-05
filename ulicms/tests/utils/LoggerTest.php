@@ -2,6 +2,8 @@
 
 use UliCMS\Helpers\TestHelper;
 use UliCMS\Logging\Logger;
+use UliCMS\Registries\LoggerRegistry;
+
 class LoggerTest extends \PHPUnit\Framework\TestCase {
 
     protected function setUp(): void {

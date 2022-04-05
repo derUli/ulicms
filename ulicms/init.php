@@ -47,6 +47,7 @@ use UliCMS\Exceptions\FileNotFoundException;
 use UliCMS\Exceptions\SqlException;
 use UliCMS\Constants\AuditLog;
 use UliCMS\Registries\HelperRegistry;
+use UliCMS\Registries\LoggerRegistry;
 use UliCMS\Models\Content\TypeMapper;
 use UliCMS\Packages\PatchManager;
 use UliCMS\Registries\ModelRegistry;

@@ -5,6 +5,7 @@ use UliCMS\Exceptions\UnknownContentTypeException;
 use UliCMS\Models\Content\Comment;
 use UliCMS\Models\Content\Category;
 use UliCMS\Logging\Logger;
+use UliCMS\Registries\LoggerRegistry;
 
 class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
 
