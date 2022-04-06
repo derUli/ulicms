@@ -17,7 +17,7 @@ class ModulePageTest extends \PHPUnit\Framework\TestCase {
         $modulePage->article_date = 1413821696;
         $modulePage->author_id = 1;
         $modulePage->group_id = 1;
-        $modulePage->module = 'blog';
+        $modulePage->module = 'hello_world';
 
         $modulePage->save();
         $modulePage->save();
@@ -27,7 +27,7 @@ class ModulePageTest extends \PHPUnit\Framework\TestCase {
         $modulePage = ContentFactory::getByID($id);
 
         $this->assertTrue($modulePage->containsModule());
-        $this->assertTrue($modulePage->containsModule("blog"));
+        $this->assertTrue($modulePage->containsModule("hello_world"));
         $this->assertFalse($modulePage->containsModule("not_existing"));
     }
 
@@ -42,7 +42,7 @@ class ModulePageTest extends \PHPUnit\Framework\TestCase {
         $modulePage->group_id = 1;
         $modulePage->update();
         $this->assertFalse($modulePage->containsModule());
-        $this->assertFalse($modulePage->containsModule("blog"));
+        $this->assertFalse($modulePage->containsModule("hello_world"));
     }
 
     public function testGetEmbeddedModulesReturnsModules() {
@@ -56,18 +56,18 @@ class ModulePageTest extends \PHPUnit\Framework\TestCase {
         $modulePage->article_date = 1413821696;
         $modulePage->author_id = 1;
         $modulePage->group_id = 1;
-        $modulePage->module = 'blog';
+        $modulePage->module = 'hello_world';
 
         $modulePage->content = $module->getShortCode();
         $modulePage->save();
 
         $this->assertTrue($modulePage->containsModule("fortune2"));
-        $this->assertTrue($modulePage->containsModule("blog"));
+        $this->assertTrue($modulePage->containsModule("hello_world"));
 
         $this->assertEquals(
                 [
                     "fortune2",
-                    "blog"
+                    "hello_world"
                 ],
                 $modulePage->getEmbeddedModules()
         );
@@ -89,7 +89,7 @@ class ModulePageTest extends \PHPUnit\Framework\TestCase {
         $modulePage->save();
 
         $this->assertFalse($modulePage->containsModule("fortune2"));
-        $this->assertFalse($modulePage->containsModule("blog"));
+        $this->assertFalse($modulePage->containsModule("hello_world"));
 
         $this->assertCount(0, $modulePage->getEmbeddedModules());
     }

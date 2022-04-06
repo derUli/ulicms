@@ -1,5 +1,6 @@
 <?php
 
+
 $configFile = "CMSConfig.php";
 
 // since UliCMS 2018.3 the config file has a new name
@@ -16,6 +17,7 @@ require_once "init.php";
 
 use UliCMS\Packages\PatchManager;
 use UliCMS\Utils\CacheUtil;
+use UliCMS\Database\DBMigrator;
 
 // "var" is old and should not be used in PHP >= 5
 // if the config file is writable replace "var" with "public"
@@ -44,10 +46,10 @@ if (!file_exists($defaultConfig)) {
 }
 
 copy(
-    Path::resolve(
-        "ULICMS_ROOT/lib/CMSConfigSample.php"
-    ),
-    Path::resolve("ULICMS_ROOT/CMSConfig.php")
+        Path::resolve(
+                "ULICMS_ROOT/lib/CMSConfigSample.php"
+        ),
+        Path::resolve("ULICMS_ROOT/CMSConfig.php")
 );
 
 // no time limit to prevent a timeout while running sql migrations

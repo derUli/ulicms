@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use UliCMS\Exceptions\SqlException;
 use UliCMS\Registries\LoggerRegistry;
+use UliCMS\Database\DBMigrator;
 
 // this class provides an abstraction for database access
 // and many helpful utility methods to do database stuff

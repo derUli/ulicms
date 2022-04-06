@@ -10,6 +10,7 @@ use UliCMS\Packages\Modules\ModuleManager;
 use Robo\Tasks;
 use UliCMS\Packages\SinPackageInstaller;
 use UliCMS\Packages\PackageManager;
+use UliCMS\Database\DBMigrator;
 
 /**
  * This is project's console commands configuration for Robo task runner.

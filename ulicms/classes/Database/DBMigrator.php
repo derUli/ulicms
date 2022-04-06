@@ -4,7 +4,14 @@
 // TODO: Write knowledge base article how the DBMigrator works
 declare(strict_types=1);
 
+namespace UliCMS\Database;
+
+use CMSConfig;
+use Database;
+use StringHelper;
+use Exception;
 use UliCMS\Exceptions\SqlException;
+use function endsWith;
 
 class DBMigrator {
 
