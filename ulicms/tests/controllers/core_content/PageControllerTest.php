@@ -3,6 +3,7 @@
 use UliCMS\Models\Content\Language;
 use UliCMS\Models\Content\VCS;
 use UliCMS\Exceptions\DatasetNotFoundException;
+use UliCMS\Users\UserManager;
 use Spatie\Snapshots\MatchesSnapshots;
 
 class PageControllerTest extends \PHPUnit\Framework\TestCase {

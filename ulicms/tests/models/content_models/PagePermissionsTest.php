@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Security\Permissions\PagePermissions;
+use UliCMS\Users\UserManager;
 
 class PagePermissionsTest extends \PHPUnit\Framework\TestCase {
 

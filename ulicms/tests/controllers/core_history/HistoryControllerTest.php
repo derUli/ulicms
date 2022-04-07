@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Models\Content\VCS;
+use UliCMS\Users\UserManager;
 
 class HistoryControllerTest extends \PHPUnit\Framework\TestCase {
 

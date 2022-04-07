@@ -2,6 +2,11 @@
 
 declare(strict_types=1);
 
+namespace UliCMS\Users;
+
+use Database;
+use User;
+
 class UserManager {
 
     public function getUsersByGroupId(?int $gid, ?string $order = "id"): array {

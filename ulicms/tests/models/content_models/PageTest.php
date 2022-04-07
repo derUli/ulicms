@@ -5,6 +5,7 @@ use UliCMS\Models\Content\VCS;
 use UliCMS\Exceptions\DatasetNotFoundException;
 use UliCMS\Security\Permissions\PagePermissions;
 use UliCMS\Storages\Vars;
+use UliCMS\Users\UserManager;
 
 class PageTest extends \PHPUnit\Framework\TestCase {
 

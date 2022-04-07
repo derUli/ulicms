@@ -2,6 +2,7 @@
 
 use function UliCMS\HTML\imageTag;
 use UliCMS\HTML\Alert;
+use UliCMS\Users\UserManager;
 
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("users")) {

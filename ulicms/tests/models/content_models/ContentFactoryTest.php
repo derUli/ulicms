@@ -6,6 +6,7 @@ use UliCMS\Models\Content\Comment;
 use UliCMS\Models\Content\Category;
 use UliCMS\Logging\Logger;
 use UliCMS\Registries\LoggerRegistry;
+use UliCMS\Users\UserManager;
 
 class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
 
