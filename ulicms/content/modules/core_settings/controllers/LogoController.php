@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use UliCMS\Utils\CacheUtil;
 use UliCMS\Helpers\ImageScaleHelper;
+use UliCMS\Constants\HttpStatusCode;
 
 class LogoController extends Controller {
 

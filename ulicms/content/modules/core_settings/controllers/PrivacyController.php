@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use UliCMS\Utils\CacheUtil;
+use UliCMS\Constants\HttpStatusCode;
 
 class PrivacyController extends Controller {
 

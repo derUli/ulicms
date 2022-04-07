@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 use UliCMS\Services\Connectors\PackageSourceConnector;
 use UliCMS\Packages\Modules\Module;
+use UliCMS\Constants\HttpStatusCode;
+
 use function UliCMS\HTML\text;
 
 class PackageController extends MainClass {

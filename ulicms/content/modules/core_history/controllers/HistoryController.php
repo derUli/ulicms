@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use UliCMS\Models\Content\VCS;
 use UliCMS\Utils\CacheUtil;
+use UliCMS\Constants\HttpStatusCode;
 
 class HistoryController extends Controller {
 

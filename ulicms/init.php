@@ -46,6 +46,7 @@ use UliCMS\Exceptions\ConnectionFailedException;
 use UliCMS\Exceptions\FileNotFoundException;
 use UliCMS\Exceptions\SqlException;
 use UliCMS\Constants\AuditLog;
+use UliCMS\Constants\HttpStatusCode;
 use UliCMS\Registries\HelperRegistry;
 use UliCMS\Registries\LoggerRegistry;
 use UliCMS\Models\Content\TypeMapper;
@@ -68,7 +69,6 @@ if (file_exists($composerAutoloadFile)) {
     );
 }
 
-require_once ULICMS_ROOT . "/classes/objects/constants/load.php";
 require_once ULICMS_ROOT . "/classes/objects/storages/load.php";
 require_once ULICMS_ROOT . "/classes/objects/settings/load.php";
 require_once ULICMS_ROOT . "/classes/objects/web/load.php";

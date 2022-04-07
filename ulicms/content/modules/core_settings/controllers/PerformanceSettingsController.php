@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use UliCMS\Constants\HttpStatusCode;
+
 class PerformanceSettingsController extends Controller {
 
     public function _savePost(): void {

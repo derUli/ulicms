@@ -5,6 +5,7 @@ declare(strict_types=1);
 use UliCMS\Security\PermissionChecker;
 use UliCMS\Constants\AuditLog;
 use UliCMS\Registries\LoggerRegistry;
+use UliCMS\Constants\HttpStatusCode;
 
 class UserController extends Controller {
 
