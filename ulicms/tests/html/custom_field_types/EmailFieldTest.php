@@ -1,6 +1,7 @@
 <?php
 
 use Spatie\Snapshots\MatchesSnapshots;
+use UliCMS\Fields\EmailField;
 
 class EmailFieldTest extends \PHPUnit\Framework\TestCase {
 

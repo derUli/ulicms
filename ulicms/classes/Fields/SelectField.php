@@ -2,6 +2,11 @@
 
 declare(strict_types=1);
 
+namespace UliCMS\Fields;
+
+use ViewBag;
+use Template;
+
 class SelectField extends CustomField {
 
     public $options = [];

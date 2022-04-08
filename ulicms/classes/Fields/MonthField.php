@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-class ColorField extends CustomField {
+namespace UliCMS\Fields;
 
-    public $htmlAttributes = array(
-        "class" => "jscolor {hash:true,caps:true}"
-    );
+use ViewBag;
+use Template;
+
+class MonthField extends CustomField {
 
     public function render($value = null): string {
         ViewBag::set("field", $this);
@@ -14,12 +15,7 @@ class ColorField extends CustomField {
         ViewBag::set("field_name", !is_null($this->contentType) ?
                         $this->contentType . "_" . $this->name : $this->name);
 
-        return Template::executeDefaultOrOwnTemplate("fields/textfield.php");
+        return Template::executeDefaultOrOwnTemplate("fields/monthfield.php");
     }
 
-}
-
-// Alias
-class ColourField extends ColorField {
-    
 }

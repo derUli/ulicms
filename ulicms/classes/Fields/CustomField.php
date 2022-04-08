@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace UliCMS\Fields;
+
 use UliCMS\Exceptions\NotImplementedException;
 
 class CustomField {

@@ -1,6 +1,7 @@
 <?php
 
 use Spatie\Snapshots\MatchesSnapshots;
+use UliCMS\Fields\MonthField;
 
 class MonthFieldTest extends \PHPUnit\Framework\TestCase {
 

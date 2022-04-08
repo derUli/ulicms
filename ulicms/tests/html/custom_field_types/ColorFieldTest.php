@@ -1,6 +1,7 @@
 <?php
 
 use Spatie\Snapshots\MatchesSnapshots;
+use UliCMS\Fields\ColorField;
 
 class ColorFieldTest extends \PHPUnit\Framework\TestCase {
 

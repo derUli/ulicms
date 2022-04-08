@@ -1,6 +1,7 @@
 <?php
 
 use Spatie\Snapshots\MatchesSnapshots;
+use UliCMS\Fields\CheckboxField;
 
 class CheckboxFieldTest extends \PHPUnit\Framework\TestCase {
 

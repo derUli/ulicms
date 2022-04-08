@@ -1,6 +1,7 @@
 <?php
 
 use Spatie\Snapshots\MatchesSnapshots;
+use UliCMS\Fields\UrlField;
 
 class UrlFieldTest extends \PHPUnit\Framework\TestCase {
 

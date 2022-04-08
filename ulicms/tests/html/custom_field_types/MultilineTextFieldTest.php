@@ -1,6 +1,7 @@
 <?php
 
 use Spatie\Snapshots\MatchesSnapshots;
+use UliCMS\Fields\MultilineTextField;
 
 class MultilineTextFieldTest extends \PHPUnit\Framework\TestCase {
 

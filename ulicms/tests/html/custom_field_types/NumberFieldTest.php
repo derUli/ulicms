@@ -1,6 +1,7 @@
 <?php
 
 use Spatie\Snapshots\MatchesSnapshots;
+use UliCMS\Fields\NumberField;
 
 class NumberFieldTest extends \PHPUnit\Framework\TestCase {
 

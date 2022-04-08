@@ -2,7 +2,12 @@
 
 declare(strict_types=1);
 
-class DatetimeField extends CustomField {
+namespace UliCMS\Fields;
+
+use ViewBag;
+use Template;
+
+class UrlField extends CustomField {
 
     public function render($value = null): string {
         ViewBag::set("field", $this);
@@ -10,9 +15,7 @@ class DatetimeField extends CustomField {
         ViewBag::set("field_name", !is_null($this->contentType) ?
                         $this->contentType . "_" . $this->name : $this->name);
 
-        return Template::executeDefaultOrOwnTemplate(
-                        "fields/datetimefield.php"
-        );
+        return Template::executeDefaultOrOwnTemplate("fields/url.php");
     }
 
 }

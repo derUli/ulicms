@@ -2,6 +2,11 @@
 
 declare(strict_types=1);
 
+namespace UliCMS\Fields;
+
+use ViewBag;
+use Template;
+
 class HtmlField extends CustomField {
 
     public function render($value = null): string {

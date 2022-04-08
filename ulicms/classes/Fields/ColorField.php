@@ -2,7 +2,16 @@
 
 declare(strict_types=1);
 
-class FileImage extends CustomField {
+namespace UliCMS\Fields;
+
+use ViewBag;
+use Template;
+
+class ColorField extends CustomField {
+
+    public $htmlAttributes = array(
+        "class" => "jscolor {hash:true,caps:true}"
+    );
 
     public function render($value = null): string {
         ViewBag::set("field", $this);
@@ -10,9 +19,12 @@ class FileImage extends CustomField {
         ViewBag::set("field_name", !is_null($this->contentType) ?
                         $this->contentType . "_" . $this->name : $this->name);
 
-        ViewBag::set("fm_type", "images");
-
-        return Template::executeDefaultOrOwnTemplate("fields/file.php");
+        return Template::executeDefaultOrOwnTemplate("fields/textfield.php");
     }
 
+}
+
+// Alias
+class ColourField extends ColorField {
+    
 }

@@ -1,6 +1,7 @@
 <?php
 
 use Spatie\Snapshots\MatchesSnapshots;
+use UliCMS\Fields\HtmlField;
 
 class HtmlFieldTest extends \PHPUnit\Framework\TestCase {
 

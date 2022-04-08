@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Exceptions\NotImplementedException;
+use UliCMS\Fields\CustomField;
 
 class CustomFieldTest extends \PHPUnit\Framework\TestCase {
 

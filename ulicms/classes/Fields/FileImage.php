@@ -2,7 +2,12 @@
 
 declare(strict_types=1);
 
-class MonthField extends CustomField {
+namespace UliCMS\Fields;
+
+use ViewBag;
+use Template;
+
+class FileImage extends CustomField {
 
     public function render($value = null): string {
         ViewBag::set("field", $this);
@@ -10,7 +15,9 @@ class MonthField extends CustomField {
         ViewBag::set("field_name", !is_null($this->contentType) ?
                         $this->contentType . "_" . $this->name : $this->name);
 
-        return Template::executeDefaultOrOwnTemplate("fields/monthfield.php");
+        ViewBag::set("fm_type", "images");
+
+        return Template::executeDefaultOrOwnTemplate("fields/file.php");
     }
 
 }

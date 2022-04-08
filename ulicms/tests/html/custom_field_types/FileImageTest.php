@@ -1,6 +1,7 @@
 <?php
 
 use Spatie\Snapshots\MatchesSnapshots;
+use UliCMS\Fields\FileImage;
 
 class FileImageTest extends \PHPUnit\Framework\TestCase {
 

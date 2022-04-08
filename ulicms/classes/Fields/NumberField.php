@@ -2,7 +2,12 @@
 
 declare(strict_types=1);
 
-class FileFile extends CustomField {
+namespace UliCMS\Fields;
+
+use ViewBag;
+use Template;
+
+class NumberField extends CustomField {
 
     public function render($value = null): string {
         ViewBag::set("field", $this);
@@ -10,9 +15,7 @@ class FileFile extends CustomField {
         ViewBag::set("field_name", !is_null($this->contentType) ?
                         $this->contentType . "_" . $this->name : $this->name);
 
-        ViewBag::set("fm_type", "files");
-
-        return Template::executeDefaultOrOwnTemplate("fields/file.php");
+        return Template::executeDefaultOrOwnTemplate("fields/numberfield.php");
     }
 
 }

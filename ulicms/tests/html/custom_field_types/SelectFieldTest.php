@@ -1,6 +1,8 @@
 <?php
 
 use Spatie\Snapshots\MatchesSnapshots;
+use UliCMS\Fields\SelectField;
+use UliCMS\Fields\MultiSelectField;
 
 class SelectFieldTest extends \PHPUnit\Framework\TestCase {
 

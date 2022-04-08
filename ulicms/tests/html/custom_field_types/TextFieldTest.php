@@ -1,6 +1,7 @@
 <?php
 
 use Spatie\Snapshots\MatchesSnapshots;
+use UliCMS\Fields\TextField;
 
 class TextFieldTest extends \PHPUnit\Framework\TestCase {
 
