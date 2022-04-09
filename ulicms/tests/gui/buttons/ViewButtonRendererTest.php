@@ -1,5 +1,5 @@
 <?php
-
+use UliCMS\Users\Group;
 use UliCMS\CoreContent\Partials\ViewButtonRenderer;
 
 class ViewButtonRendererTest extends \PHPUnit\Framework\TestCase {

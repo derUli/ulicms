@@ -1,5 +1,5 @@
 <?php
-
+use UliCMS\Users\Group;
 use UliCMS\CoreContent\Partials\DeleteButtonRenderer;
 
 class DeleteButtonRendererTest extends \PHPUnit\Framework\TestCase {

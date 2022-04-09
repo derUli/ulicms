@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Backend\Menu\MenuEntry;
+use UliCMS\Users\Group;
 
 class MenuEntryTest extends \PHPUnit\Framework\TestCase {
 

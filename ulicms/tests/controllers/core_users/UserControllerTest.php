@@ -2,6 +2,7 @@
 use UliCMS\Logging\Logger;
 use UliCMS\Registries\LoggerRegistry;
 use UliCMS\Users\UserManager;
+use UliCMS\Users\Group;
 
 class UserControllerTest extends \PHPUnit\Framework\TestCase {
 

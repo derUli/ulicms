@@ -8,6 +8,7 @@ use UliCMS\Security\Encryption;
 use UliCMS\Models\Users\GroupCollection;
 use UliCMS\Utils\Users\PasswordReset;
 use UliCMS\Utils\Session;
+use UliCMS\Users\Group;
 
 class User extends Model {
 

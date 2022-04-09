@@ -1,4 +1,5 @@
 <?php
+use UliCMS\Users\Group;
 
 class GroupTest extends \PHPUnit\Framework\TestCase {
 

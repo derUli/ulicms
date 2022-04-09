@@ -1,6 +1,7 @@
 <?php
 
 use Spatie\Snapshots\MatchesSnapshots;
+use UliCMS\Users\Group;
 
 class ACLTest extends \PHPUnit\Framework\TestCase {
 

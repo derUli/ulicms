@@ -1,5 +1,5 @@
 <?php
-
+use UliCMS\Users\Group;
 use UliCMS\Models\Media\Video;
 use UliCMS\Models\Media\Audio;
 use UliCMS\Users\UserManager;

@@ -5,6 +5,7 @@ use UliCMS\Utils\CacheUtil;
 use UliCMS\Models\Users\GroupCollection;
 use UliCMS\Utils\Users\PasswordReset;
 use UliCMS\Users\UserManager;
+use UliCMS\Users\Group;
 
 class UserTest extends \PHPUnit\Framework\TestCase {
 

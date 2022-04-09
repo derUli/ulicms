@@ -1,5 +1,5 @@
 <?php
-
+use UliCMS\Users\Group;
 use UliCMS\Security\Permissions\PagePermissions;
 use UliCMS\Users\UserManager;
 

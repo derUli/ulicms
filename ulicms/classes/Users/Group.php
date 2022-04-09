@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+namespace UliCMS\Users;
+
+use ACL;
+use Settings;
+use Database;
+use StringHelper;
 use UliCMS\Models\Content\Language;
 use UliCMS\Users\UserManager;
 
@@ -61,9 +67,9 @@ class Group {
 
     public function loadById(int $id): void {
         $sql = "select * from `{prefix}groups` where id = ?";
-        $args = array(
+        $args = [
             intval($id)
-        );
+        ];
         $result = Database::pQuery($sql, $args, true);
         if (Database::any($result)) {
             $dataset = Database::fetchObject($result);
@@ -82,9 +88,10 @@ class Group {
         $this->languages = [];
         $sql = "select `language_id` from `{prefix}group_languages` "
                 . "where `group_id` = ?";
-        $args = array(
+        $args = [
             $this->getId()
-        );
+        ];
+
         $result = Database::pQuery($sql, $args, true);
         while ($row = Database::fetchobject($result)) {
             $lang = new Language();
@@ -105,17 +112,17 @@ class Group {
 
     protected function saveLanguages(): void {
         $sql = "delete from `{prefix}group_languages` where `group_id` = ?";
-        $args = array(
+        $args = [
             $this->getId()
-        );
+        ];
         Database::pQuery($sql, $args, true);
         foreach ($this->languages as $lang) {
             $sql = "insert into `{prefix}group_languages` (`group_id`,
  `language_id`) values(?, ?)";
-            $args = array(
+            $args = [
                 $this->getId(),
                 $lang->getID()
-            );
+            ];
             Database::pQuery($sql, $args, true);
         }
     }
@@ -123,14 +130,14 @@ class Group {
     protected function insert(): void {
         $sql = "insert into `{prefix}groups` "
                 . "(name, permissions, allowable_tags) values (?,?,?)";
-        $args = array(
+        $args = [
             $this->getName(),
             json_encode(
                     $this->getPermissions(),
                     JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
             ),
             $this->getAllowableTags()
-        );
+        ];
         $result = Database::pQuery($sql, $args, true);
         if ($result) {
             $id = Database::getInsertID();
@@ -142,12 +149,12 @@ class Group {
     protected function update(): void {
         $sql = "update `{prefix}groups`set name = ?, permissions = ?, "
                 . "allowable_tags = ? where id = ?";
-        $args = array(
+        $args = [
             $this->getName(),
             json_encode($this->getPermissions()),
             $this->getAllowableTags(),
             $this->id
-        );
+        ];
         Database::pQuery($sql, $args, true);
         $this->saveLanguages();
     }
@@ -157,9 +164,9 @@ class Group {
             return;
         }
         $sql = "delete from `{prefix}groups` where id = ?";
-        $args = array(
+        $args = [
             $this->id
-        );
+        ];
         $result = Database::pQuery($sql, $args, true);
         if ($result) {
             $this->id = null;
@@ -196,7 +203,7 @@ class Group {
 
     public function hasPermission(string $name): bool {
         return (
-                isset($this->permissions[$name]) and
+                isset($this->permissions[$name]) &&
                 $this->permissions[$name]
                 );
     }
@@ -220,7 +227,7 @@ class Group {
     }
 
     public function setAllowableTags(?string $val): void {
-        $this->allowable_tags = Stringhelper::isNotNullOrWhitespace($val) ?
+        $this->allowable_tags = StringHelper::isNotNullOrWhitespace($val) ?
                 strval($val) : null;
     }
 

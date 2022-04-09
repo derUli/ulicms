@@ -3,6 +3,7 @@
 use UliCMS\CoreContent\PageTableRenderer;
 use UliCMS\Models\Content\Language;
 use UliCMS\Users\UserManager;
+use UliCMS\Users\Group;
 
 class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
 

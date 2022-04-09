@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Security\ContentPermissionChecker;
+use UliCMS\Users\Group;
 
 class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase {
 

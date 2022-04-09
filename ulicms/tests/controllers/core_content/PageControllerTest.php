@@ -5,6 +5,7 @@ use UliCMS\Models\Content\VCS;
 use UliCMS\Exceptions\DatasetNotFoundException;
 use UliCMS\Users\UserManager;
 use Spatie\Snapshots\MatchesSnapshots;
+use UliCMS\Users\Group;
 
 class PageControllerTest extends \PHPUnit\Framework\TestCase {
 

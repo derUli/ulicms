@@ -2,6 +2,7 @@
 
 use UliCMS\Backend\Menu\AdminMenu;
 use UliCMS\Backend\Menu\MenuEntry;
+use UliCMS\Users\Group;
 
 class AdminMenuTest extends \PHPUnit\Framework\TestCase {
 

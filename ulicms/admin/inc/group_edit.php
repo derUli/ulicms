@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Models\Content\Language;
+use UliCMS\Users\Group;
 
 $permissionChecker = new ACL();
 

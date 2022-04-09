@@ -1,7 +1,6 @@
 <?php
 
 $classes = array(
-    "Group",
     "User",
 );
 foreach ($classes as $class) {

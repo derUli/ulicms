@@ -1,5 +1,5 @@
 <?php
-
+use UliCMS\Users\Group;
 use UliCMS\CoreContent\Partials\EditButtonRenderer;
 
 class EditButtonRendererTest extends \PHPUnit\Framework\TestCase {

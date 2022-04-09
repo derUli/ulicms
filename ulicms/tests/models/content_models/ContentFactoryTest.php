@@ -7,6 +7,7 @@ use UliCMS\Models\Content\Category;
 use UliCMS\Logging\Logger;
 use UliCMS\Registries\LoggerRegistry;
 use UliCMS\Users\UserManager;
+use UliCMS\Users\Group;
 
 class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
 

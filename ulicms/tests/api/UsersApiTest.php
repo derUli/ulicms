@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Security\TwoFactorAuthentication;
+use UliCMS\Users\Group;
 
 class UsersApiTest extends \PHPUnit\Framework\TestCase {
 
