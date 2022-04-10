@@ -1,5 +1,6 @@
 <?php
 
+use UliCMS\Localization\JSTranslation;
 use UliCMS\Models\Content\Advertisement\Banners;
 use UliCMS\Models\Content\Categories;
 use UliCMS\HTML\Alert;

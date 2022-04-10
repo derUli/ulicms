@@ -15,6 +15,7 @@ use UliCMS\Helpers\NumberFormatHelper;
 use UliCMS\HTML\Input;
 use UliCMS\CoreContent\UIUtils;
 use UliCMS\Users\Group;
+use UliCMS\Localization\JSTranslation;
 use function UliCMS\HTML\icon;
 
 $permissionChecker = new PermissionChecker(get_user_id());

@@ -1,3 +1,6 @@
+<?php
+use UliCMS\Localization\JSTranslation;
+?> 
 <?php Template::comments(); ?>
 <div class="advertisement">
     <?php Template::randomBanner(); ?>

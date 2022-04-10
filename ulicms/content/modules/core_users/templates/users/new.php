@@ -1,4 +1,7 @@
 <?php
+
+use UliCMS\Localization\JSTranslation;
+
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermission("users_create")) {
     $languages = getAvailableBackendLanguages();

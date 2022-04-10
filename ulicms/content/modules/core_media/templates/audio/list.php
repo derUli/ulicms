@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Models\Content\Categories;
+use UliCMS\Localization\JSTranslation;
 
 $permissionChecker = new ACL();
 $audio_folder = ULICMS_ROOT . "/content/audio";

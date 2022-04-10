@@ -3,6 +3,7 @@
 // TODO: refactor this file into multiple files
 use UliCMS\Models\Content\Categories;
 use UliCMS\HTML\Alert;
+use UliCMS\Localization\JSTranslation;
 
 $permissionChecker = new ACL();
 if (!$permissionChecker->hasPermission("categories")) {

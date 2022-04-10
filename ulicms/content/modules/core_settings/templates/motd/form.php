@@ -1,4 +1,6 @@
 <?php
+use UliCMS\Localization\JSTranslation;
+
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("motd")) {
     $editor = get_html_editor();

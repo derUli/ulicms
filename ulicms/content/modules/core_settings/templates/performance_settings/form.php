@@ -5,6 +5,7 @@ use UliCMS\Security\PermissionChecker;
 use UliCMS\Constants\RequestMethod;
 use UliCMS\HTML\Input;
 use UliCMS\HTML\ListItem;
+use UliCMS\Localization\JSTranslation;
 
 $lazy_loading = [];
 

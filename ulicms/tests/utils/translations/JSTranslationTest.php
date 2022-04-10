@@ -1,6 +1,7 @@
 <?php
 
 use Spatie\Snapshots\MatchesSnapshots;
+use UliCMS\Localization\JSTranslation;
 
 class JSTranslationTest extends \PHPUnit\Framework\TestCase {
 

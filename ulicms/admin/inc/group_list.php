@@ -1,4 +1,7 @@
 <?php
+
+use UliCMS\Localization\JSTranslation;
+
 if (isset($_REQUEST["standard"])) {
     $standard = intval($_REQUEST["standard"]);
     setconfig("default_acl_group", $standard);

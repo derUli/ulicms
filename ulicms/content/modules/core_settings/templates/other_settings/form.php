@@ -2,6 +2,7 @@
 
 use UliCMS\Constants\EmailModes;
 use UliCMS\HTML\Alert;
+use UliCMS\Localization\JSTranslation;
 
 $ga = new PHPGangsta_GoogleAuthenticator();
 $ga_secret = Settings::get("ga_secret");

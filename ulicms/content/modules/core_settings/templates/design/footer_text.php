@@ -1,5 +1,6 @@
 <?php
 
+use UliCMS\Localization\JSTranslation;
 use UliCMS\Constants\RequestMethod;
 ?>
 <p>

@@ -1,4 +1,6 @@
 <?php
+use UliCMS\Localization\JSTranslation;
+
 $permissionChecker = new ACL();
 if (!$permissionChecker->hasPermission("forms")) {
     noPerms();

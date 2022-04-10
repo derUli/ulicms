@@ -8,6 +8,7 @@ use UliCMS\Models\Content\Language;
 use UliCMS\Models\Content\Types\DefaultContentTypes;
 use UliCMS\Helpers\NumberFormatHelper;
 use UliCMS\CoreContent\UIUtils;
+use UliCMS\Localization\JSTranslation;
 use function UliCMS\HTML\icon;
 use UliCMS\HTML\Input;
 

@@ -1,5 +1,6 @@
 <?php
 
+use UliCMS\Localization\JSTranslation;
 use UliCMS\Security\PermissionChecker;
 
 $permissionChecker = new PermissionChecker(get_user_id());

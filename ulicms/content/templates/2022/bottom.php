@@ -1,3 +1,6 @@
+<?php
+use UliCMS\Localization\JSTranslation;
+?> 
 <?php Template::comments(); ?>
 </article>
 <div class="advertisement">

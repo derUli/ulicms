@@ -2,6 +2,11 @@
 
 declare(strict_types=1);
 
+namespace UliCMS\Localization;
+
+use ModuleHelper;
+use function get_translation;
+
 // Makes translation strings avaiable for Javascript
 class JSTranslation {
 
@@ -17,7 +22,7 @@ class JSTranslation {
     }
 
     public function addKey(string $name): void {
-        if (!faster_in_array($name, $this->keys)) {
+        if (!in_array($name, $this->keys)) {
             $this->keys[] = $name;
         }
     }

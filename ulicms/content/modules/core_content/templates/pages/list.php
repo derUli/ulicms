@@ -4,6 +4,7 @@
 // This should be rewritten with MVC pattern and using partial views
 use UliCMS\Security\PermissionChecker;
 use UliCMS\HTML\Alert;
+use UliCMS\Localization\JSTranslation;
 use function UliCMS\HTML\icon;
 
 $controller = ControllerRegistry::get(PageController::class);

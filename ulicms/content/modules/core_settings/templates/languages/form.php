@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Models\Content\Language;
+use UliCMS\Localization\JSTranslation;
 
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("languages")) {

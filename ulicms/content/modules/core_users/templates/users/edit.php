@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Constants\RequestMethod;
+use UliCMS\Localization\JSTranslation;
 use function UliCMS\HTML\imageTag;
 use UliCMS\HTML\Input;
 

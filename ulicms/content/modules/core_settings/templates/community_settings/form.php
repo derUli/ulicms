@@ -1,5 +1,6 @@
 <?php
 
+use UliCMS\Localization\JSTranslation;
 use UliCMS\Constants\RequestMethod;
 
 $types = get_available_post_types();

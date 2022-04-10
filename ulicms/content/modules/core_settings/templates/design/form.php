@@ -3,6 +3,7 @@
 use UliCMS\HTML\Input;
 use UliCMS\HTML\ListItem;
 use UliCMS\Packages\Modules\ModuleManager;
+use UliCMS\Localization\JSTranslation;
 
 $skins = BackendHelper::getCKEditorSkins();
 $skinItems = [];

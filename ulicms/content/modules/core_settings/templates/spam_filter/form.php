@@ -1,3 +1,6 @@
+<?php 
+use UliCMS\Localization\JSTranslation;
+?>
 <p>
     <a
         href="<?php echo ModuleHelper::buildActionURL("settings_categories"); ?>"
