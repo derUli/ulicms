@@ -2,6 +2,13 @@
 
 declare(strict_types=1);
 
+namespace UliCMS\Localization;
+
+use function getAllModules;
+use function getModulePath;
+use function get_theme;
+use function getTemplateDirPath;
+
 // This class is a work in progress
 // It's currently only used for overriding of translations
 class Translation {

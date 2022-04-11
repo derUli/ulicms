@@ -7,6 +7,7 @@ use UliCMS\Storages\Flags;
 use UliCMS\Storages\Vars;
 use UliCMS\Users\UserManager;
 use UliCMS\Users\Group;
+use UliCMS\Localization\Translation;
 use function UliCMS\HTML\stringContainsHtml;
 
 class TemplateTest extends \PHPUnit\Framework\TestCase {

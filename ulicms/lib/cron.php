@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Models\Content\Comment;
+use UliCMS\Localization\Translation;
 
 if (!defined("LOADED_LANGUAGE_FILE")) {
     setLanguageByDomain();

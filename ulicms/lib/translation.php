@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use UliCMS\Localization\Translation;
+
 function get_translation(string $name, array $placeholders = []): string {
     $iname = strtoupper($name);
     foreach (get_defined_constants() as $key => $value) {

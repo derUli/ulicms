@@ -56,6 +56,7 @@ use UliCMS\Logging\Logger;
 use UliCMS\Packages\Modules\ModuleManager;
 use UliCMS\Utils\Session;
 use UliCMS\Storages\Vars;
+use UliCMS\Localization\Translation;
 
 // load composer packages
 $composerAutoloadFile = ULICMS_ROOT . "/vendor/autoload.php";
@@ -79,7 +80,6 @@ require_once ULICMS_ROOT . "/classes/objects/database/load.php";
 require_once ULICMS_ROOT . "/classes/objects/security/load.php";
 require_once ULICMS_ROOT . "/classes/objects/files/load.php";
 require_once ULICMS_ROOT . "/classes/objects/users/load.php";
-require_once ULICMS_ROOT . "/classes/objects/localization/load.php";
 require_once ULICMS_ROOT . "/classes/objects/content/CustomData.php";
 require_once ULICMS_ROOT . "/classes/objects/content/Content.php";
 require_once ULICMS_ROOT . "/classes/objects/content/Page.php";

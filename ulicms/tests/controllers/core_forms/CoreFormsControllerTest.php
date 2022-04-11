@@ -1,4 +1,5 @@
 <?php
+use UliCMS\Localization\Translation;
 
 class CoreFormsControllerTest extends \PHPUnit\Framework\TestCase {
 

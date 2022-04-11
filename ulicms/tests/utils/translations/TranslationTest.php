@@ -1,4 +1,5 @@
 <?php
+use UliCMS\Localization\Translation;
 
 class TranslationTest extends \PHPUnit\Framework\TestCase {
 

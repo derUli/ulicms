@@ -1,4 +1,5 @@
 <?php
+use UliCMS\Localization\Translation;
 
 class InfoControllerTest extends \PHPUnit\Framework\TestCase {
 

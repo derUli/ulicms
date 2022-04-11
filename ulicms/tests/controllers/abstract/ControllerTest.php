@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Exceptions\AccessDeniedException;
+use UliCMS\Localization\Translation;
 
 class ControllerTest extends \PHPUnit\Framework\TestCase {
 

@@ -11,6 +11,7 @@ use UliCMS\Renderers\PlainTextRenderer;
 use UliCMS\Storages\Flags;
 use UliCMS\Utils\Session;
 use UliCMS\Constants\HttpStatusCode;
+use UliCMS\Localization\Translation;
 
 global $connection;
 
