@@ -76,7 +76,6 @@ require_once ULICMS_ROOT . "/classes/objects/web/load.php";
 require_once ULICMS_ROOT . "/classes/Helpers/load.php";
 require_once ULICMS_ROOT . "/classes/objects/registry/load.php";
 require_once ULICMS_ROOT . "/classes/objects/html/load.php";
-require_once ULICMS_ROOT . "/classes/objects/files/load.php";
 require_once ULICMS_ROOT . "/classes/objects/users/load.php";
 require_once ULICMS_ROOT . "/classes/objects/content/CustomData.php";
 require_once ULICMS_ROOT . "/classes/objects/content/Content.php";
