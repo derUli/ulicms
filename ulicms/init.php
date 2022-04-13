@@ -70,7 +70,6 @@ if (file_exists($composerAutoloadFile)) {
     );
 }
 
-require_once ULICMS_ROOT . "/classes/objects/storages/load.php";
 require_once ULICMS_ROOT . "/classes/objects/web/load.php";
 require_once ULICMS_ROOT . "/classes/Helpers/load.php";
 require_once ULICMS_ROOT . "/classes/objects/registry/load.php";
