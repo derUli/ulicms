@@ -104,7 +104,8 @@
             "lib/version_compare_functions.php",
             "lib/cache.php",
             "lib/environment.php",
-            "lib/minify.php"
+            "lib/minify.php",
+            "lib/html.php"
         ]
     }
 }
