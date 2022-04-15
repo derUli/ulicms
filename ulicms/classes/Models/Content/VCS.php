@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace UliCMS\Models\Content;
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
+
 use function db_query;
 use function db_fetch_object;
 use function db_num_rows;

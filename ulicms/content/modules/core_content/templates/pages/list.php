@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 // TODO: This is old code before the switch to MVC architecture
 // This should be rewritten with MVC pattern and using partial views
 use UliCMS\Security\PermissionChecker;

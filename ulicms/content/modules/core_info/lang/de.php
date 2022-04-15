@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 add_translation("fetch_failed", "Herunterladen der Datei fehlgeschlagen.");
 
 add_translation("legal_npm", "NPM Lizenzen");

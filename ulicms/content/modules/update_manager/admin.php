@@ -1,4 +1,9 @@
 <?php
+
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 define("MODULE_ADMIN_HEADLINE", get_translation("update_manager"));
 define("MODULE_ADMIN_REQUIRED_PERMISSION", "install_packages");
 

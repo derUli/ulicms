@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 function jumbotron_get_menu($name = "top", $parent_id = null, $recursive = true, $order = "position") {
     $html = "";
     $name = db_escape($name);

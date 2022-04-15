@@ -1,4 +1,9 @@
 <?php
+
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 use UliCMS\Packages\PackageManager;
 
 // TODO: Refactor this

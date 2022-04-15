@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 use UliCMS\Security\Permissions\PagePermissions;
 use UliCMS\Models\Content\Comment;
 use UliCMS\Models\Content\VCS;

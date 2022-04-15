@@ -1,4 +1,9 @@
 <?php
+
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("expert_settings") and $permissionChecker->hasPermission("expert_settings_edit")) {
     $name = "";

@@ -2,6 +2,10 @@
 
 declare(strict_types=1);
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 class Content_List extends Page {
 
     public $listData = null;

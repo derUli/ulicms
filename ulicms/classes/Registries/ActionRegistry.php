@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace UliCMS\Registries;
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 use UliCMS\Exceptions\FileNotFoundException;
 use UliCMS\Storages\Vars;
 use ControllerRegistry;

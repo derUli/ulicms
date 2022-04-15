@@ -1,3 +1,8 @@
+<?php
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+?>
 <!DOCTYPE html>
 <html>
     <head>

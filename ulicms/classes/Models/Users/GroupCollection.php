@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace UliCMS\Models\Users;
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 use UliCMS\Models\Users\User;
 
 // provides the same method as in Group model but as collection of all groups

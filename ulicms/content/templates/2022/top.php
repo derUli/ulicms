@@ -1,4 +1,9 @@
 <?php
+
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 html5_doctype();
 og_html_prefix();
 ?>

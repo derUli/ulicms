@@ -1,4 +1,9 @@
 <?php
+
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 require_once getTemplateDirPath(get_theme()) . "/top.php";
 $meta = get_article_meta();
 $page = get_page();

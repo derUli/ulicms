@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace UliCMS\Models\Content;
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
+
 use function get_translation;
 use function db_escape;
 use UliCMS\Models\Content\Category;

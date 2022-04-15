@@ -1,4 +1,11 @@
-<?php $version = new UliCMSVersion(); ?>
+<?php
+
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
+$version = new UliCMSVersion();
+?>
 <a href="<?php echo ModuleHelper::buildActionURL("info"); ?>"
    class="btn btn-default btn-back is-ajax"
    ><i class="fa fa-arrow-left"></i>

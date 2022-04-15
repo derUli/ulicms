@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 use UliCMS\Helpers\NumberFormatHelper;
 use UliCMS\Packages\SinPackageInstaller;
 

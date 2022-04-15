@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 add_translation("FORTUNE", "Glückskeks");
 add_translation("MY_SETTINGS_PAGE", "Meine Einstellungsseite");
 add_translation("HELLO_WORLD", "Hallo Welt!");

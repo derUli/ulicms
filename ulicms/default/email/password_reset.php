@@ -1,3 +1,8 @@
+<?php 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+?>
 <?php translate("hello_name", array("%firstname%" => ViewBag::get("firstname"), "%lastname%" => ViewBag::get("lastname"))); ?>
 
 

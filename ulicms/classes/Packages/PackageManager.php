@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace UliCMS\Packages;
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 use UliCMS\Services\Connectors\PackageSourceConnector;
 use UliCMS\Constants\PackageTypes;
 use UliCMS\Packages\Modules\Module;

@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 // TODO: Rewrite this view, move logic to PageController
 // Join new and edit views to one form
 use UliCMS\Models\Content\TypeMapper;

@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 use UliCMS\Backend\BackendPageRenderer;
 use UliCMS\HTML\Input;
 use UliCMS\HTML\ListItem;

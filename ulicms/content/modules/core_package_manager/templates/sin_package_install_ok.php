@@ -1,4 +1,9 @@
 <?php
+
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("install_packages")) {
     if (isset($_REQUEST["file"])) {

@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace UliCMS\Models\Content\Types;
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 use UliCMS\Models\Content\Types\ContentType;
 
 class DefaultContentTypes {

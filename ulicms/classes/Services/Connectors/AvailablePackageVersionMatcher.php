@@ -2,6 +2,10 @@
 
 namespace UliCMS\Services\Connectors;
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 use function is_version_number;
 use UliCMS\Helpers\ArrayHelper;
 use UliCMSVersion;

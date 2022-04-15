@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 use UliCMS\Constants\EmailModes;
 use UliCMS\HTML\Alert;
 use UliCMS\Localization\JSTranslation;

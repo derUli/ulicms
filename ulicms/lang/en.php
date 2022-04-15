@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 define("LOADED_LANGUAGE_FILE", "en");
 // Dashboard (Willkommen)
 add_translation("MOTD", "Message of the Day");

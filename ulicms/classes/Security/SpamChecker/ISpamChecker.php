@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace UliCMS\Security\SpamChecker;
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 interface ISpamChecker {
 
     // this must be an array which must return an array of

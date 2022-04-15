@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace UliCMS\Services\Connectors;
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 use Settings;
 use function cms_version;
 use function file_get_contents_wrapper;

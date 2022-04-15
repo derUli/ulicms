@@ -2,6 +2,10 @@
 
 declare(strict_types=1);
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 use UliCMS\Services\Connectors\PackageSourceConnector;
 use UliCMS\Packages\Modules\Module;
 use UliCMS\Constants\HttpStatusCode;

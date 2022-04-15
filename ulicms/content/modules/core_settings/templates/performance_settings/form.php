@@ -1,4 +1,9 @@
 <?php
+
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 $canIuseLazyLoadingUrl = "https://caniuse.com/#feat=loading-lazy-attr";
 
 use UliCMS\Security\PermissionChecker;

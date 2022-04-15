@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace UliCMS\CoreContent;
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 use ContentFactory;
 use UliCMS\Models\Content\TypeMapper;
 use Database;

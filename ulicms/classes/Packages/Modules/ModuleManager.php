@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace UliCMS\Packages\Modules;
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 use UliCMS\Packages\Modules\Module;
 use Database;
 use getModuleMeta;

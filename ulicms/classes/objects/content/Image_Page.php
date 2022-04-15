@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 // Image Pages are like regular pages but a field to
 // select an image file
 class Image_Page extends Page {

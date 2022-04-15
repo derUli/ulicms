@@ -1,4 +1,9 @@
 <?php
+
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 $field = ViewBag::get("field");
 $value = ViewBag::get("field_value");
 $options = Viewbag::get("field_options") ? Viewbag::get("field_options") : [];

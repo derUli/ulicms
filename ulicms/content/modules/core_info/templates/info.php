@@ -1,4 +1,9 @@
 <?php
+
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 $version = new UliCMSVersion();
 $admin_logo = Settings::get("admin_logo");
 if (!$admin_logo) {

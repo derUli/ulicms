@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 class CMSConfig extends BaseConfig {
 
     public $db_server = "{mysql_host}";

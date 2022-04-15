@@ -2,6 +2,10 @@
 
 declare(strict_types=1);
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 function hexToRgb(string $hex, bool $alpha = false): array {
     $hex = str_replace('#', '', $hex);
     $length = strlen($hex);

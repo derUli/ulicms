@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace UliCMS\Privacy;
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 use Settings;
 use Request;
 use StringHelper;

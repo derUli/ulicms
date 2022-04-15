@@ -1,4 +1,10 @@
-<?php $meta = get_article_meta(); ?>
+<?php 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
+$meta = get_article_meta(); 
+?>
 <?php if (StringHelper::isNotNullOrEmpty($meta->article_author_name)) { ?>
     <p class="author-info"><?php
         if (StringHelper::isNullOrEmpty($meta->article_author_email)) {

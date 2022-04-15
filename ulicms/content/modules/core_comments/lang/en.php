@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 add_translation(
         "comment_contains_badword",
         "The field \"%field%\" contains the not allowed word \"%word%\"."

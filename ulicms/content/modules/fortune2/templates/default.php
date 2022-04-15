@@ -1,4 +1,9 @@
 <?php
+
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 $controller = ControllerRegistry::get(getModuleMeta("fortune2", "main_class"));
 ?>
 <div class="fortune">

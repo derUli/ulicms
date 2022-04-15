@@ -2,6 +2,10 @@
 
 declare(strict_types=1);
 
+if (PHP_SAPI !== 'cli') {
+    exit('No direct script access allowed');
+}
+
 use UliCMS\Packages\PatchManager;
 use UliCMS\Services\Connectors\AvailablePackageVersionMatcher;
 use UliCMS\Utils\CacheUtil;

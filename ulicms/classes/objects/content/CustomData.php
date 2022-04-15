@@ -2,6 +2,10 @@
 
 declare(strict_types=1);
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 // This class contains methods to handle CustomData which is saved
 // as json object in the "content" database table
 class CustomData {

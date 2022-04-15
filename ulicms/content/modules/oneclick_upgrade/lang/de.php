@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 add_translation("ONECLICK_UPGRADE", "1-Klick Upgrade");
 add_translation("NO_NEW_VERSION_AVAILABLE", "Keine neue Version verfügbar.");
 add_translation("INSTALLED_VERSION", "Installierte Version");

@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 use UliCMS\Localization\JSTranslation;
 use UliCMS\Models\Content\Advertisement\Banners;
 use UliCMS\Models\Content\Categories;

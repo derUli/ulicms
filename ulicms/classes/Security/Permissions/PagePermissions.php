@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace UliCMS\Security\Permissions;
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 use Database;
 
 // this class is used to store the edit restrictions of content

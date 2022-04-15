@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace UliCMS\Models\Media;
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 use UliCMS\Utils\File;
 use UliCMS\Models\Content\Category;
 use Database;

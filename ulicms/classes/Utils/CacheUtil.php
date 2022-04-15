@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace UliCMS\Utils;
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 use Path;
 use Settings;
 use Phpfastcache\Helper\Psr16Adapter;

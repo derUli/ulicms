@@ -1,6 +1,10 @@
 <?php
 declare(strict_types=1);
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 use UliCMS\Exceptions\DatasetNotFoundException;
 use UliCMS\CoreContent\Models\ViewModels\DiffViewModel;
 use UliCMS\CoreContent\PageTableRenderer;

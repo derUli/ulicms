@@ -1,6 +1,5 @@
 <?php
 
-
 $configFile = "CMSConfig.php";
 
 // since UliCMS 2018.3 the config file has a new name

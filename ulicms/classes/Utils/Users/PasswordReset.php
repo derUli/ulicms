@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace UliCMS\Utils\Users;
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 use Database;
 use ViewBag;
 use Template;

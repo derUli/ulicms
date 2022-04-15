@@ -1,4 +1,9 @@
 <?php
+
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("update_system") && !Settings::get("disable_core_patch_check")) {
     $data = file_get_contents_wrapper(PATCH_CHECK_URL, true);

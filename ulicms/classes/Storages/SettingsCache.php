@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace UliCMS\Storages;
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 class SettingsCache {
 
     private static $settings = [];
