@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace UliCMS\Security;
 
-use User;
+use UliCMS\Models\Users\User;
 
 // class for permission checks
 class PermissionChecker {

@@ -2,14 +2,31 @@
 
 declare(strict_types=1);
 
+namespace UliCMS\Models\Users;
+
+use Model;
+use Database;
 use LasseRafn\InitialAvatarGenerator\InitialAvatar;
 use UliCMS\Security\PermissionChecker;
 use UliCMS\Security\Encryption;
 use UliCMS\Models\Users\GroupCollection;
 use UliCMS\Utils\Users\PasswordReset;
 use UliCMS\Utils\Session;
-use UliCMS\Users\Group;
+use UliCMS\Models\Users\Group;
 use UliCMS\Net\Mailer;
+use BadMethodCallException;
+use Response;
+use Settings;
+use Path;
+use ViewBag;
+use Imagine;
+use ModuleHelper;
+use ImagineHelper;
+use StringHelper;
+use Template;
+use function get_user_id;
+use function get_translation;
+
 
 class User extends Model {
 
@@ -40,9 +57,9 @@ class User extends Model {
 
     public function loadById($id): void {
         $sql = "select * from {prefix}users where id = ?";
-        $args = array(
+        $args = [
             intval($id)
-        );
+        ];
         $result = Database::pQuery($sql, $args, true);
         $this->fillVars($result);
     }
@@ -99,9 +116,9 @@ class User extends Model {
     public function loadByUsername(string $name): void {
         $sql = "select * from {prefix}users where username "
                 . "COLLATE utf8mb4_general_ci = ?";
-        $args = array(
+        $args = [
             strval($name)
-        );
+        ];
         $result = Database::pQuery($sql, $args, true);
         $this->fillVars($result);
     }
@@ -109,9 +126,9 @@ class User extends Model {
     public function loadByEmail(string $email): void {
         $sql = "select * from {prefix}users where email "
                 . "COLLATE utf8mb4_general_ci = ?";
-        $args = array(
+        $args = [
             strval($email)
-        );
+        ];
         $result = Database::pQuery($sql, $args, true);
         $this->fillVars($result);
     }
@@ -685,7 +702,7 @@ class User extends Model {
 
     public function removeAvatar(): bool {
         $generatedAvatar = $this->getProcessedAvatarPath();
-        if ($generatedAvatar and file_exists($generatedAvatar)) {
+        if ($generatedAvatar && file_exists($generatedAvatar)) {
             return unlink($generatedAvatar);
         }
         return false;

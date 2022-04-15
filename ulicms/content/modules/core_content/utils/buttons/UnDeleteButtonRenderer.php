@@ -6,7 +6,7 @@ namespace UliCMS\CoreContent\Partials;
 
 use Template;
 use ViewBag;
-use User;
+use UliCMS\Models\Users\User;
 use ModuleHelper;
 use PageController;
 use UliCMS\Security\ContentPermissionChecker;

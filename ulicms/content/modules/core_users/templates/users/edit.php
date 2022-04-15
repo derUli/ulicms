@@ -4,6 +4,7 @@ use UliCMS\Constants\RequestMethod;
 use UliCMS\Localization\JSTranslation;
 use function UliCMS\HTML\imageTag;
 use UliCMS\HTML\Input;
+use UliCMS\Models\Users\User;
 
 $permissionChecker = new ACL();
 if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermission("users_edit")) or ($_GET["id"] == $_SESSION["login_id"])) {

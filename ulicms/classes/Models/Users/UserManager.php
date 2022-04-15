@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace UliCMS\Users;
+namespace UliCMS\Models\Users;
 
 use Database;
-use User;
+use UliCMS\Models\Users\User;
 
 class UserManager {
 

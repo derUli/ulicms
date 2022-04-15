@@ -7,11 +7,11 @@ namespace UliCMS\CoreContent;
 use ContentFactory;
 use UliCMS\Models\Content\TypeMapper;
 use Database;
-use User;
 use UliCMS\CoreContent\Partials\ViewButtonRenderer;
 use UliCMS\CoreContent\Partials\EditButtonRenderer;
 use UliCMS\CoreContent\Partials\DeleteButtonRenderer;
 use UliCMS\CoreContent\Partials\UnDeleteButtonRenderer;
+use UliCMS\Models\Users\User;
 use function UliCMS\HTML\icon;
 use function UliCMS\HTML\link;
 

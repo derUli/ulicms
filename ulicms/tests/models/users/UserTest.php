@@ -4,8 +4,9 @@ use UliCMS\Security\Encryption;
 use UliCMS\Utils\CacheUtil;
 use UliCMS\Models\Users\GroupCollection;
 use UliCMS\Utils\Users\PasswordReset;
-use UliCMS\Users\UserManager;
-use UliCMS\Users\Group;
+use UliCMS\Models\Users\UserManager;
+use UliCMS\Models\Users\Group;
+use UliCMS\Models\Users\User;
 
 class UserTest extends \PHPUnit\Framework\TestCase {
 

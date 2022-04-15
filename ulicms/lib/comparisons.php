@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Carbon\Carbon;
+use UliCMS\Models\Users\User;
 
 /**
  * Replacement for in_array with better performance

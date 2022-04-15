@@ -3,6 +3,7 @@
 use UliCMS\HTML\Alert;
 use UliCMS\Constants\AllowedTags;
 use UliCMS\Security\XSSProtection;
+use UliCMS\Models\Users\User;
 
 $permissionChecker = new ACL();
 

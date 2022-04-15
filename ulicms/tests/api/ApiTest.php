@@ -5,7 +5,8 @@ use Spatie\Snapshots\MatchesSnapshots;
 use UliCMS\Storages\Flags;
 use UliCMS\Storages\Vars;
 use UliCMS\Packages\Modules\ModuleManager;
-use UliCMS\Users\Group;
+use UliCMS\Models\Users\Group;
+use UliCMS\Models\Users\User;
 
 class ApiTest extends \PHPUnit\Framework\TestCase {
 

@@ -1995,16 +1995,16 @@
         },
         {
             "name": "phpfastcache/phpfastcache",
-            "version": "9.1.0",
+            "version": "9.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPSocialNetwork/phpfastcache.git",
-                "reference": "c871f9850c8850fc1bbab1d7b3e61aa239ed6921"
+                "reference": "517741c800f8d44d2aade1c4228d679bd5c5e7f9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPSocialNetwork/phpfastcache/zipball/c871f9850c8850fc1bbab1d7b3e61aa239ed6921",
-                "reference": "c871f9850c8850fc1bbab1d7b3e61aa239ed6921",
+                "url": "https://api.github.com/repos/PHPSocialNetwork/phpfastcache/zipball/517741c800f8d44d2aade1c4228d679bd5c5e7f9",
+                "reference": "517741c800f8d44d2aade1c4228d679bd5c5e7f9",
                 "shasum": ""
             },
             "require": {
@@ -2118,7 +2118,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2022-04-03T23:35:41+00:00"
+            "time": "2022-04-15T21:25:40+00:00"
         },
         {
             "name": "phpgangsta/googleauthenticator",

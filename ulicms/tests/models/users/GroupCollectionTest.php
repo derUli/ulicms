@@ -3,7 +3,8 @@
 declare(strict_types=1);
 
 use UliCMS\Models\Users\GroupCollection;
-use UliCMS\Users\Group;
+use UliCMS\Models\Users\Group;
+use UliCMS\Models\Users\User;
 
 class GroupCollectionTest extends \PHPUnit\Framework\TestCase {
 

@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use UliCMS\Security\TwoFactorAuthentication;
+use UliCMS\Models\Users\User;
 
 /**
  * Returns all Users 

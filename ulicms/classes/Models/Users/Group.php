@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace UliCMS\Users;
+namespace UliCMS\Models\Users;
 
 use ACL;
 use Settings;
 use Database;
 use StringHelper;
 use UliCMS\Models\Content\Language;
-use UliCMS\Users\UserManager;
+use UliCMS\Models\Users\UserManager;
 
 class Group {
 

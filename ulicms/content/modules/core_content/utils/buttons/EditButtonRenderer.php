@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace UliCMS\CoreContent\Partials;
 
 use Template;
-use User;
+use UliCMS\Models\Users\User;
 use ViewBag;
 use ModuleHelper;
 use UliCMS\Security\ContentPermissionChecker;

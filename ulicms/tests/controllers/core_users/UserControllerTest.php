@@ -1,8 +1,9 @@
 <?php
 use UliCMS\Logging\Logger;
 use UliCMS\Registries\LoggerRegistry;
-use UliCMS\Users\UserManager;
-use UliCMS\Users\Group;
+use UliCMS\Models\Users\UserManager;
+use UliCMS\Models\Users\Group;
+use UliCMS\Models\Users\User;
 
 class UserControllerTest extends \PHPUnit\Framework\TestCase {
 

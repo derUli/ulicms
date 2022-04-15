@@ -14,7 +14,7 @@ use UliCMS\Models\Content\Types\DefaultContentTypes;
 use UliCMS\Helpers\NumberFormatHelper;
 use UliCMS\HTML\Input;
 use UliCMS\CoreContent\UIUtils;
-use UliCMS\Users\Group;
+use UliCMS\Models\Users\Group;
 use UliCMS\Localization\JSTranslation;
 use function UliCMS\HTML\icon;
 

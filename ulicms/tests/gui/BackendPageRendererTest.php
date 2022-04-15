@@ -3,6 +3,7 @@
 use UliCMS\Backend\BackendPageRenderer;
 use UliCMS\Backend\Utils\BrowserCompatiblityChecker;
 use UliCMS\Helpers\TestHelper;
+use UliCMS\Models\Users\User;
 
 class BackendPageRendererTest extends \PHPUnit\Framework\TestCase {
 

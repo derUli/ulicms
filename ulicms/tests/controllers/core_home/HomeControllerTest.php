@@ -1,4 +1,5 @@
 <?php
+use UliCMS\Models\Users\User;
 
 class HomeControllerTest extends \PHPUnit\Framework\TestCase {
 

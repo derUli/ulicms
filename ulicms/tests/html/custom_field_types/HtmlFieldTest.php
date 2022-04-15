@@ -2,6 +2,7 @@
 
 use Spatie\Snapshots\MatchesSnapshots;
 use UliCMS\Fields\HtmlField;
+use UliCMS\Models\Users\User;
 
 class HtmlFieldTest extends \PHPUnit\Framework\TestCase {
 

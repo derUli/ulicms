@@ -4,7 +4,7 @@
 use UliCMS\Models\Content\Language;
 use UliCMS\Constants\AuditLog;
 use UliCMS\Registries\LoggerRegistry;
-use UliCMS\Users\Group;
+use UliCMS\Models\Users\Group;
 
 $permissionChecker = new ACL();
 if (!$permissionChecker->hasPermission("groups")) {

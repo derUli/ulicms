@@ -4,6 +4,7 @@ use UliCMS\Models\Content\Advertisement\Banner;
 use UliCMS\Storages\Flags;
 use UliCMS\Utils\Session;
 use UliCMS\Storages\Vars;
+use UliCMS\Models\Users\User;
 
 class TemplatingTest extends \PHPUnit\Framework\TestCase {
 

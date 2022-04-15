@@ -1,7 +1,7 @@
 <?php
 
 use UliCMS\Utils\Users\PasswordReset;
-use UliCMS\Users\UserManager;
+use UliCMS\Models\Users\UserManager;
 
 class PasswordResetTest extends \PHPUnit\Framework\TestCase {
 

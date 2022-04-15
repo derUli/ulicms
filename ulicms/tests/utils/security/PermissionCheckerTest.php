@@ -2,7 +2,8 @@
 
 use UliCMS\Models\Content\Language;
 use UliCMS\Security\PermissionChecker;
-use UliCMS\Users\Group;
+use UliCMS\Models\Users\Group;
+use UliCMS\Models\Users\User;
 
 class PermissionCheckerTest extends \PHPUnit\Framework\TestCase {
 

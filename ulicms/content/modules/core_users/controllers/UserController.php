@@ -6,7 +6,8 @@ use UliCMS\Security\PermissionChecker;
 use UliCMS\Constants\AuditLog;
 use UliCMS\Registries\LoggerRegistry;
 use UliCMS\Constants\HttpStatusCode;
-use UliCMS\Users\Group;
+use UliCMS\Models\Users\Group;
+use UliCMS\Models\Users\User;
 
 class UserController extends Controller {
 

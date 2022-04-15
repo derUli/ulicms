@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace UliCMS\Models\Users;
 
-use User;
+use UliCMS\Models\Users\User;
 
 // provides the same method as in Group model but as collection of all groups
 // of a user

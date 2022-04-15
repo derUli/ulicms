@@ -2,8 +2,8 @@
 
 use function UliCMS\HTML\imageTag;
 use UliCMS\HTML\Alert;
-use UliCMS\Users\UserManager;
-use UliCMS\Users\Group;
+use UliCMS\Models\Users\UserManager;
+use UliCMS\Models\Users\Group;
 use UliCMS\Localization\JSTranslation;
 
 $permissionChecker = new ACL();

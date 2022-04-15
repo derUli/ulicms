@@ -17,6 +17,7 @@ use function UliCMS\HTML\stringContainsHtml;
 use UliCMS\Constants\AllowedTags;
 use UliCMS\HTML\ListItem;
 use UliCMS\Constants\HttpStatusCode;
+use UliCMS\Models\Users\User;
 
 class PageController extends Controller {
 

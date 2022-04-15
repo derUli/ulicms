@@ -7,7 +7,7 @@ namespace UliCMS\CoreContent\Partials;
 use ContentFactory;
 use Template;
 use ViewBag;
-use User;
+use UliCMS\Models\Users\User;
 use UliCMS\Security\ContentPermissionChecker;
 use function UliCMS\HTML\icon;
 use function UliCMS\HTML\link;

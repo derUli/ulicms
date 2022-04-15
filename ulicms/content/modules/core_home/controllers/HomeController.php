@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use zz\Html\HTMLMinify;
+use UliCMS\Models\Users\User;
 
 class HomeController extends Controller {
 

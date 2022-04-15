@@ -7,6 +7,7 @@ use UliCMS\Utils\Users\PasswordReset;
 use UliCMS\Utils\Session;
 use UliCMS\Registries\LoggerRegistry;
 use UliCMS\Constants\HttpStatusCode;
+use UliCMS\Models\Users\User;
 
 class SessionManager extends Controller {
 

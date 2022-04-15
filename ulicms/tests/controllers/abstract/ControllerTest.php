@@ -2,6 +2,7 @@
 
 use UliCMS\Exceptions\AccessDeniedException;
 use UliCMS\Localization\Translation;
+use UliCMS\Models\Users\User;
 
 class ControllerTest extends \PHPUnit\Framework\TestCase {
 

@@ -5,8 +5,8 @@ use UliCMS\Utils\File;
 use UliCMS\Helpers\TestHelper;
 use UliCMS\Storages\Flags;
 use UliCMS\Storages\Vars;
-use UliCMS\Users\UserManager;
-use UliCMS\Users\Group;
+use UliCMS\Models\Users\UserManager;
+use UliCMS\Models\Users\Group;
 use UliCMS\Localization\Translation;
 use function UliCMS\HTML\stringContainsHtml;
 

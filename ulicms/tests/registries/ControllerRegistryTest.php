@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Registries\ActionRegistry;
+use UliCMS\Models\Users\User;
 
 class ControllerRegistryTest extends \PHPUnit\Framework\TestCase {
 

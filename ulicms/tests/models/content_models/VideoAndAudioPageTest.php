@@ -1,8 +1,8 @@
 <?php
-use UliCMS\Users\Group;
+use UliCMS\Models\Users\Group;
 use UliCMS\Models\Media\Video;
 use UliCMS\Models\Media\Audio;
-use UliCMS\Users\UserManager;
+use UliCMS\Models\Users\UserManager;
 
 class VideoAndAudioPageTest extends \PHPUnit\Framework\TestCase {
 

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace UliCMS\Security;
 
 use ContentFactory;
-use User;
-use UliCMS\Users\Group;
+use UliCMS\Models\Users\User;
+use UliCMS\Models\Users\Group;
 
 // permission checks for read, write and delete content permissions
 class ContentPermissionChecker implements IDatasetPermissionChecker {

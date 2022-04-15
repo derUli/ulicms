@@ -1,6 +1,7 @@
 <?php
 
-use UliCMS\Users\UserManager;
+use UliCMS\Models\Users\UserManager;
+use UliCMS\Models\Users\User;
 
 class UserManagerTest extends \PHPUnit\Framework\TestCase {
 
