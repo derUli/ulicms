@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use UliCMS\Net\Mailer;
 use UliCMS\Storages\Vars;
 
 // returns site protocl

@@ -1,9 +1,17 @@
 <?php
 
+namespace UliCMS\Net;
+
+use Settings;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\PHPMailer;
 use UliCMS\Constants\EmailModes;
 use UliCMS\Registries\LoggerRegistry;
+use Closure;
+use function normalizeLN;
+use function db_escape;
+use function db_query;
+use function apply_filter;
 
 class Mailer {
 

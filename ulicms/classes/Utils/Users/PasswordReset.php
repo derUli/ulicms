@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace UliCMS\Utils\Users;
 
 use Database;
-use Mailer;
 use ViewBag;
 use Template;
 use Settings;
 use ModuleHelper;
 use SessionManager;
+use UliCMS\Net\Mailer;
 
 use function getBaseFolderURL;
 use function get_translation;

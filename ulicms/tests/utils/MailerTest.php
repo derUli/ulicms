@@ -5,6 +5,7 @@ use UliCMS\Constants\EmailModes;
 use PHPMailer\PHPMailer\SMTP;
 use UliCMS\Logging\Logger;
 use UliCMS\Registries\LoggerRegistry;
+use UliCMS\Net\Mailer;
 
 class MailerTest extends \PHPUnit\Framework\TestCase {
 

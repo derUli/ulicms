@@ -1,5 +1,6 @@
 <?php
 use UliCMS\Constants\HttpStatusCode;
+use UliCMS\Net\Mailer;
 
 class Forms {
 
