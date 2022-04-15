@@ -2,6 +2,10 @@
 
 namespace UliCMS\Constants;
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 class AllowedTags {
 
     const HTML5_ALLOWED_TAGS = "<a>" .

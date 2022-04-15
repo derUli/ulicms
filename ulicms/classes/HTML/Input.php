@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace UliCMS\HTML;
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 use Path;
 use ModuleHelper;
 use Template;

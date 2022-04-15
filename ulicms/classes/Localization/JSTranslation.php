@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace UliCMS\Localization;
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 use ModuleHelper;
 use function get_translation;
 

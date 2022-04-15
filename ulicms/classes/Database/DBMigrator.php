@@ -6,6 +6,10 @@ declare(strict_types=1);
 
 namespace UliCMS\Database;
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 use CMSConfig;
 use Database;
 use StringHelper;

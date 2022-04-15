@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace UliCMS\Logging;
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 use CMSConfig;
 use function get_environment;
 

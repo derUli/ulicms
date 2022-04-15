@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace UliCMS\Constants;
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 // use this constants if you have to compare request methods
 class RequestMethod {
 
