@@ -105,7 +105,8 @@
             "lib/cache.php",
             "lib/environment.php",
             "lib/minify.php",
-            "lib/html.php"
+            "lib/html.php",
+            "lib/Results.php"
         ]
     }
 }

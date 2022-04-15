@@ -72,7 +72,6 @@ if (file_exists($composerAutoloadFile)) {
 
 require_once ULICMS_ROOT . "/classes/objects/web/load.php";
 require_once ULICMS_ROOT . "/classes/Helpers/load.php";
-require_once ULICMS_ROOT . "/classes/objects/registry/load.php";
 require_once ULICMS_ROOT . "/classes/objects/users/load.php";
 require_once ULICMS_ROOT . "/classes/objects/content/CustomData.php";
 require_once ULICMS_ROOT . "/classes/objects/content/Content.php";
@@ -90,7 +89,6 @@ require_once ULICMS_ROOT . "/classes/objects/content/Image_Page.php";
 require_once ULICMS_ROOT . "/classes/objects/content/Article.php";
 require_once ULICMS_ROOT . "/classes/objects/content/ContentFactory.php";
 require_once ULICMS_ROOT . "/classes/objects/content/CustomFields.php";
-require_once ULICMS_ROOT . "/classes/objects/content/Results.php";
 
 $mobile_detect_as_module = ULICMS_ROOT .
         "/content/modules/Mobile_Detect/Mobile_Detect.php";
