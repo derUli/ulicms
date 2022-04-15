@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace UliCMS\Helpers;
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 use Closure;
 use Exception;
 

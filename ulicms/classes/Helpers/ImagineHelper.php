@@ -2,6 +2,10 @@
 
 declare(strict_types=1);
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 use Imagine\Image\AbstractImagine;
 use Imagine\Exception\RuntimeException;
 use UliCMS\Exceptions\NotSupportedException;
