@@ -2,6 +2,10 @@
 
 namespace UliCMS\Backend\Utils;
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 class BrowserCompatiblityChecker {
 
     private $unsupportedBrowserName = null;

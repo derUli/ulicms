@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace UliCMS\Backend\Menu;
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 // this class renders the backend main navigation menu
 class AdminMenu {
 

@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace UliCMS\Backend;
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 use UliCMS\Backend\Utils\BrowserCompatiblityChecker;
 use Template;
 use UliCMS\Storages\Vars;
