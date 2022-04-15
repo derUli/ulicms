@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 use UliCMS\Models\Content\Comment;
 use UliCMS\HTML\Script;
 use UliCMS\Helpers\DataTablesHelper;

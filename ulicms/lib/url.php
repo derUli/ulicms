@@ -92,7 +92,7 @@ function buildSEOUrl(
 
     $seo_url = "";
 
-    if (file_exists("backend.php")) {
+    if (is_admin_dir()) {
         $seo_url .= "../";
     }
     $seo_url .= $page;

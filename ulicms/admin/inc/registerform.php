@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('ULICMS_ROOT')) {
+    exit('No direct script access allowed');
+}
+
 use UliCMS\Privacy\PrivacyCheckbox; 
 use UliCMS\Models\Users\User;
 
