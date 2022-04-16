@@ -11,7 +11,7 @@ define("ONE_DAY_IN_SECONDS", 60 * 60 * 24);
 define("ULICMS_ROOT", dirname(__FILE__));
 
 // Class dir for autoload
-define('CLASSDIR', ULICMS_ROOT . '/classes');
+define('ULICMS_CLASSDIR', ULICMS_ROOT . '/classes');
 
 // Temp Directory
 define("ULICMS_TMP", ULICMS_ROOT . "/content/tmp/");
@@ -33,7 +33,7 @@ define("ULICMS_CONFIGURATIONS", ULICMS_CONTENT . "/configurations/");
 
 // Autoload classes
 spl_autoload_register(function ($class) {
-    $file = CLASSDIR . "/" . str_ireplace("UliCMS\\", "", $class) . ".php";
+    $file = ULICMS_CLASSDIR . "/" . str_ireplace("UliCMS\\", "", $class) . ".php";
     $file = str_replace("\\", "/", $file);
 
     if (file_exists($file)) {
@@ -87,12 +87,6 @@ require_once ULICMS_ROOT . "/classes/objects/content/Image_Page.php";
 require_once ULICMS_ROOT . "/classes/objects/content/Article.php";
 require_once ULICMS_ROOT . "/classes/objects/content/ContentFactory.php";
 require_once ULICMS_ROOT . "/classes/objects/content/CustomFields.php";
-
-$mobile_detect_as_module = ULICMS_ROOT .
-        "/content/modules/Mobile_Detect/Mobile_Detect.php";
-if (file_exists($mobile_detect_as_module)) {
-    require_once $mobile_detect_as_module;
-}
 
 function exception_handler($exception) {
     if (!defined("EXCEPTION_OCCURRED")) {

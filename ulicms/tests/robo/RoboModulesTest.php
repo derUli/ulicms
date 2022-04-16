@@ -35,7 +35,6 @@ class RoboModulesTest extends RoboBaseTest {
         $output = $this->runRoboCommand(["modules:list", "[core]"]);
         $this->assertStringContainsString("core_", $output);
 
-        $this->assertStringNotContainsString("Mobile_Detect", $output);
         $this->assertStringNotContainsString("bootstrap", $output);
         $this->assertStringNotContainsString("fortune2", $output);
         $this->assertStringNotContainsString("oneclick_upgrade", $output);
@@ -47,7 +46,6 @@ class RoboModulesTest extends RoboBaseTest {
         $this->assertStringNotContainsString("update_manager_dashboard", $output);
         $this->assertStringNotContainsString("core_", $output);
 
-        $this->assertStringContainsString("Mobile_Detect", $output);
         $this->assertStringContainsString("extend_upgrade_helper", $output);
         $this->assertStringContainsString("fortune2", $output);
         $this->assertStringContainsString("oneclick_upgrade", $output);
@@ -58,7 +56,6 @@ class RoboModulesTest extends RoboBaseTest {
         $this->assertStringContainsString("update_manager_dashboard", $output);
 
         $this->assertStringNotContainsString("core_", $output);
-        $this->assertStringNotContainsString("Mobile_Detect", $output);
         $this->assertStringNotContainsString("extend_upgrade_helper", $output);
         $this->assertStringNotContainsString("fortune2", $output);
         $this->assertStringNotContainsString("oneclick_upgrade", $output);

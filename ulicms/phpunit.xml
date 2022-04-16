@@ -42,7 +42,6 @@
       <directory>shell</directory>
       <directory>admin/fm/</directory>
       <directory>admin/inc</directory>
-      <directory>content/modules/Mobile_Detect</directory>
       <directory>content/configurations/</directory>
       <directory>content/modules/core_comments/templates</directory>
       <directory>content/modules/core_content/templates</directory>

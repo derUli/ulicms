@@ -30,27 +30,6 @@ class AvailablePackageVersionMatcherTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testMatchVersionsWithVersionNumber2() {
-        $json = file_get_contents_wrapper(
-                "https://extend.ulicms.de/mobile_detect_js.json",
-                true
-        );
-        $data = json_decode($json, true);
-
-        $matcher = new AvailablePackageVersionMatcher($data["data"]);
-
-        $compatibleVersions = $matcher->getCompatibleVersions("2016.3");
-        $this->assertCount(1, $compatibleVersions);
-        $this->assertEquals("1.4.2", $compatibleVersions[0]["version"]);
-
-        $compatibleVersions = $matcher->getCompatibleVersions("2018.3.6");
-        $this->assertCount(1, $compatibleVersions);
-        $this->assertEquals("1.4.2", $compatibleVersions[0]["version"]);
-
-        $compatibleVersions = $matcher->getCompatibleVersions("2019.3");
-        $this->assertCount(1, $compatibleVersions);
-    }
-
     public function testMatchVersionsWithVersionNumber3() {
         $json = file_get_contents_wrapper(
                 "https://extend.ulicms.de/ldap_login.json",

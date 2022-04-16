@@ -671,8 +671,6 @@ add_translation("THIS_MODULE_HAS_NO_SETTINGS", "Dieses Modul hat keine Einstellu
 add_translation("CANT_DELETE_CATEGORY_GENERAL", "Die Allgemeine Kategorie kann nicht gelöscht werden!");
 add_translation("GROUP_WAS_DELETED", "Die Gruppe wurde erfolgreich gelöscht.");
 
-add_translation("MOBILE_DETECT_INSTALL_NOTICE", "Um dieses Feature zu nutzen müssen Sie <a href=\"https://extend.ulicms.de/mobile_detect.html\" target=\"_blank\">Mobile_Detect</a> installieren.");
-
 add_translation("SNIPPET", "Schnipsel");
 add_translation("SNIPPET_CODE", "Schnipsel Code");
 add_translation("SNIPPET_CODE_HELP", "Mit diesem Shortcode können Sie diesen Schnipsel in eine andere Seite einbinden.");

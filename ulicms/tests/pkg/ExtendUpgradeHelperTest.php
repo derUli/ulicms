@@ -32,7 +32,6 @@ class ExtendUpgradeHelperTest extends \PHPUnit\Framework\TestCase {
     private function getExpectedModuleNames(): array {
         return [
             "oneclick_upgrade",
-            "Mobile_Detect",
             "fortune2"
         ];
     }

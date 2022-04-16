@@ -1,5 +1,4 @@
 <?php
-
 if (!defined('ULICMS_ROOT')) {
     exit('No direct script access allowed');
 }
@@ -38,8 +37,6 @@ if (!$permissionChecker->hasPermission("design")) {
     $video_width_100_percent = Settings::get("video_width_100_percent");
     $font_sizes = getFontSizes();
     $no_mobile_design_on_tablet = Settings::get("no_mobile_design_on_tablet");
-    $modManager = new ModuleManager();
-    $mobileDetectInstalled = in_array("Mobile_Detect", $modManager->getEnabledModuleNames());
     ?>
     <p>
         <a
@@ -85,12 +82,12 @@ if (!$permissionChecker->hasPermission("design")) {
                             }
                             ?>
                                     data-preview-url="<?php
-                                    echo ModuleHelper::buildMethodCallUrl(
-                                            DesignSettingsController::class,
-                                            "themePreview",
-                                            "theme={$th}"
-                                    );
-                                    ?>"
+                    echo ModuleHelper::buildMethodCallUrl(
+                            DesignSettingsController::class,
+                            "themePreview",
+                            "theme={$th}"
+                    );
+                            ?>"
                                     >
                                         <?php echo $th; ?>
                             </option>
@@ -129,13 +126,13 @@ if (!$permissionChecker->hasPermission("design")) {
                                 }
                                 ?>
                                         data-preview-url="<?php
-                                        echo ModuleHelper::buildMethodCallUrl(
-                                                DesignSettingsController::class,
-                                                "themePreview",
-                                                "theme={$th}"
-                                        );
-                                        ?>">
-                                            <?php echo $th; ?>
+                        echo ModuleHelper::buildMethodCallUrl(
+                                DesignSettingsController::class,
+                                "themePreview",
+                                "theme={$th}"
+                        );
+                                ?>">
+                                        <?php echo $th; ?>
                                 </option>
                             <?php }
                             ?>
@@ -143,12 +140,6 @@ if (!$permissionChecker->hasPermission("design")) {
                     <div id="theme-mobile-preview" class="voffset3">
                         <i class="fa fa-spinner fa-spin"></i>
                         <div class="preview"></div>
-                    </div>
-
-                    </p>
-                    <div class="alert alert-warning fade in" id="mobile_detect_notice"
-                         data-installed="<?php echo strbool($mobileDetectInstalled); ?>">
-                             <?php translate("mobile_detect_install_notice"); ?>
                     </div>
                 </td>
             </tr>

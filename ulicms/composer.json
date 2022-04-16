@@ -63,7 +63,8 @@
         "lasserafn/php-initial-avatar-generator": "*",
         "deruli/imagine": "dev-develop",
         "michelf/php-markdown": "*",
-        "softcreatr/php-mime-detector": "^3.2"
+        "softcreatr/php-mime-detector": "^3.2",
+        "mobiledetect/mobiledetectlib": "^2.8"
     },
     "require-dev": {
         "spatie/phpunit-snapshot-assertions": "*",

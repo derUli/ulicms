@@ -18,10 +18,6 @@ class MobileDetectTest extends \PHPUnit\Framework\TestCase {
         unset($_SERVER["HTTP_USER_AGENT"]);
     }
 
-    public function testIsInstalled() {
-        $this->assertTrue(class_exists("Mobile_Detect"));
-    }
-
     public function testIsDesktop() {
         $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36";
         $this->assertTrue(is_desktop());

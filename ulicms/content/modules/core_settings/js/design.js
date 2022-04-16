@@ -2,17 +2,6 @@
 
 // This script contains the code for the "design settings" page
 
-// show a message if a "design for mobile devices" is set but
-// Mobile_Detect is not installed
-const initMobileDetectNotice = () => {
-    if ($("select[name='mobile_theme']").val() !== ""
-            && $("#mobile_detect_notice").data("installed") === false) {
-        $("#mobile_detect_notice").slideDown();
-    } else {
-        $("#mobile_detect_notice").slideUp();
-    }
-};
-
 const loadThemePreview = (selectField) => {
     const url = $(selectField).find("option:selected").data("preview-url");
     const targetElement = $($(selectField).data("preview-target-element"));
@@ -70,15 +59,11 @@ const updateFontPreview = () => {
 };
 
 $(() => {
-    $("#mobile_detect_notice").hide();
-    initMobileDetectNotice();
-
     const fontFamily = $("select#default_font").val();
     if (fontFamily === 'google') {
         $("div#google-fonts").show();
     }
-
-    $("select[name='mobile_theme']").change(initMobileDetectNotice);
+    
     $("select#default_font, select#font-size, #google-fonts select")
             .change(updateFontPreview);
 
