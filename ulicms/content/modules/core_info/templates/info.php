@@ -35,10 +35,7 @@ if (!$admin_logo) {
     2017 by Marijn Haverbeke &lt;marijnh@gmail.com&gt; and others <br />
     <a
         href="http://www.raymondhill.net/finediff/viewdiff-ex.php"
-        target="_blank">PHP Fine Diff</a> Copyright 2011 (c) Raymond Hill
-    <br />
-    <a href="http://mobiledetect.net/" target="_blank">Mobile_Detect</a>
-    Copyright &copy; 2011 - 2015 Serban Ghita, Nick Ilyin and contributors.
+        target="_blank">PHP Fine Diff</a> Copyright 2011 (c) Raymond Hill  
     <br /> <a href="https://github.com/chrisbliss18/php-ico"
               target="_blank">PHP ICO - The PHP ICO Generator</a> - Copyright 2011 -
     2013 Chris Jean <br /> <a href="https://plugins.jquery.com/url/"

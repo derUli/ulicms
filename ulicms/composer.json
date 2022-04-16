@@ -64,7 +64,8 @@
         "deruli/imagine": "dev-develop",
         "michelf/php-markdown": "*",
         "softcreatr/php-mime-detector": "^3.2",
-        "mobiledetect/mobiledetectlib": "^2.8"
+        "mobiledetect/mobiledetectlib": "^2.8",
+        "jaybizzle/crawler-detect": "^1.2"
     },
     "require-dev": {
         "spatie/phpunit-snapshot-assertions": "*",

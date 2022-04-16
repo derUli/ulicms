@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Carbon\Carbon;
 use UliCMS\Models\Users\User;
+use Jaybizzle\CrawlerDetect\CrawlerDetect;
 
 /**
  * Replacement for in_array with better performance
@@ -146,21 +147,8 @@ function is_desktop(): bool {
  * @return bool
  */
 function is_crawler(?string $useragent = null): bool {
-    if (!$useragent && Request::getUserAgent()) {
-        $useragent = Request::getUserAgent();
-    }
-    if (!$useragent) {
-        return false;
-    }
-
-    $isCrawler = false;
-
-    $crawlerCheck = apply_filter($useragent, "is_crawler");
-    if (is_bool($crawlerCheck) || is_int($crawlerCheck)) {
-        $isCrawler = boolval($crawlerCheck);
-    }
-
-    return $isCrawler;
+    $CrawlerDetect = new CrawlerDetect();
+    return $CrawlerDetect->isCrawler($useragent);
 }
 
 // 21. Februar 2015
