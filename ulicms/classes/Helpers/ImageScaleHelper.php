@@ -10,9 +10,9 @@ if (!defined('ULICMS_ROOT')) {
 
 use Helper;
 use Settings;
-use ImagineHelper;
 use Imagine\Image\Box;
 use Imagine\Image\ImageInterface;
+use UliCMS\Helpers\ImageScaleHelper;
 
 /**
  * Utils for scaling images

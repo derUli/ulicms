@@ -2,12 +2,16 @@
 
 declare(strict_types=1);
 
+namespace UliCMS\Helpers;
+
 if (!defined('ULICMS_ROOT')) {
     exit('No direct script access allowed');
 }
 
 use Imagine\Image\AbstractImagine;
 use Imagine\Exception\RuntimeException;
+use Imagine;
+use Helper;
 
 /**
  * We use Imagine for imagine manipulations

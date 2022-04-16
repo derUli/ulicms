@@ -25,12 +25,11 @@ use Path;
 use ViewBag;
 use Imagine;
 use ModuleHelper;
-use ImagineHelper;
 use StringHelper;
 use Template;
+use UliCMS\Helpers\ImagineHelper;
 use function get_user_id;
 use function get_translation;
-
 
 class User extends Model {
 

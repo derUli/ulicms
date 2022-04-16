@@ -4,6 +4,7 @@ if (!defined('ULICMS_ROOT')) {
     exit('No direct script access allowed');
 }
 
+use UliCMS\Helpers\ImageScaleHelper;
 use UliCMS\Localization\JSTranslation;
 use function UliCMS\HTML\imageTag;
 

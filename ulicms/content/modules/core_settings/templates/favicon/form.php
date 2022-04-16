@@ -8,6 +8,8 @@ use UliCMS\Utils\File;
 use UliCMS\Localization\JSTranslation;
 use function UliCMS\HTML\imageTag;
 
+use UliCMS\Helpers\ImageScaleHelper;
+
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("favicon")) {
     ?>
