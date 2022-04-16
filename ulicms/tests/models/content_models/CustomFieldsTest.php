@@ -1,5 +1,6 @@
 <?php
 use UliCMS\Storages\Vars;
+use UliCMS\Models\Content\CustomFields;
 
 class CustomFieldsTest extends \PHPUnit\Framework\TestCase {
 

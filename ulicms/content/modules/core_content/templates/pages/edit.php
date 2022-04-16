@@ -21,6 +21,7 @@ use UliCMS\CoreContent\UIUtils;
 use UliCMS\Models\Users\Group;
 use UliCMS\Localization\JSTranslation;
 use UliCMS\Helpers\BackendHelper;
+use UliCMS\Models\Content\CustomFields;
 
 use function UliCMS\HTML\icon;
 

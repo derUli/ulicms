@@ -18,7 +18,7 @@ class ContentFactory {
     public static function getCurrentPage(): ?Content {
         $slug = get_slug();
         $language = getCurrentLanguage(true);
-        return ContentFactory::getBySlugAndLanguage(
+        return self::getBySlugAndLanguage(
                         get_slug(),
                         $language
         );

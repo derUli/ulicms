@@ -87,7 +87,7 @@ class Template {
             case "module":
                 $page = get_page();
 
-                if ($page["module"] != null &&  strlen($page['module']) > 0) {
+                if ($page["module"] != null && strlen($page['module']) > 0) {
                     no_cache();
                     $output = replaceShortcodesWithModules(
                             "[module=\"" . $page["module"] . "\"]"
@@ -448,8 +448,7 @@ color: " . Settings::get("body-text-color") . ";
 
             $minifier = new Minify\CSS();
             $minifier->add($cssCode);
-            if (!(is_array($disableFunctions)
-                   && in_array(
+            if (!(is_array($disableFunctions) && in_array(
                             "output_design_settings_styles",
                             $disableFunctions
                     ))

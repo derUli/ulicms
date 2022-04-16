@@ -17,11 +17,12 @@ use UliCMS\Models\Content\TypeMapper;
 use UliCMS\Constants\LinkTarget;
 use UliCMS\Utils\CacheUtil;
 use zz\Html\HTMLMinify;
-use function UliCMS\HTML\stringContainsHtml;
 use UliCMS\Constants\AllowedTags;
 use UliCMS\HTML\ListItem;
 use UliCMS\Constants\HttpStatusCode;
 use UliCMS\Models\Users\User;
+use UliCMS\Models\Content\CustomFields;
+use function UliCMS\HTML\stringContainsHtml;
 
 class PageController extends Controller {
 

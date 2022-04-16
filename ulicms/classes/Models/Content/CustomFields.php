@@ -2,9 +2,16 @@
 
 declare(strict_types=1);
 
+namespace UliCMS\Models\Content;
+
 if (!defined('ULICMS_ROOT')) {
     exit('No direct script access allowed');
 }
+
+use ContentFactory;
+use Database;
+use function get_ID;
+use function remove_prefix;
 
 // This class contains methods to manipulate CustomFields
 // defined by modules
@@ -33,38 +40,38 @@ class CustomFields {
         }
 
         $content_id = intval($content_id);
-        $args = array(
+        $args = [
             $content_id,
             $name
-        );
+        ];
         $sql = "Select id from {prefix}custom_fields "
                 . "where content_id = ? and name = ?";
         $result = Database::pQuery($sql, $args, true);
         if (Database::getNumRows($result) > 0) {
             $result = Database::fetchObject($result);
             if (is_null($value)) {
-                $args = array(
+                $args = [
                     intval($result->id)
-                );
+                ];
                 $sql = "DELETE FROM {prefix}custom_fields "
                         . "where id = ?";
                 return Database::pQuery($sql, $args, true);
             } else {
-                $args = array(
+                $args = [
                     $value,
                     $name,
                     $content_id
-                );
+                ];
                 $sql = "UPDATE {prefix}custom_fields set value = ? "
                         . "where name = ? and content_id = ?";
                 return Database::pQuery($sql, $args, true);
             }
         } elseif (!is_null($value)) {
-            $args = array(
+            $args = [
                 $content_id,
                 $name,
                 $value
-            );
+            ];
             $sql = "INSERT INTO {prefix}custom_fields "
                     . "(content_id, name, value) VALUES(?, ?, ?)";
             return Database::pQuery($sql, $args, true);
@@ -82,9 +89,9 @@ class CustomFields {
         }
 
         $content_id = intval($content_id);
-        $args = array(
+        $args = [
             $content_id
-        );
+        ];
         $sql = "Select name, value from {prefix}custom_fields "
                 . "where content_id = ?";
         $result = Database::pQuery($sql, $args, true);
