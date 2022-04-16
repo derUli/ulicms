@@ -11,7 +11,9 @@ if (!defined('ULICMS_ROOT')) {
 use ACL;
 use function get_action;
 
-// this method implements the rendering of a single backend main menu item
+/**
+ * Admin Menu Entry
+ */
 class MenuEntry {
 
     private $title;
@@ -22,6 +24,16 @@ class MenuEntry {
     private $newWindow = false;
     private $isAjax = false;
 
+    /**
+     * Constructor
+     * @param string $title Display Title
+     * @param string $link Link
+     * @param string $identifier Unique identifier
+     * @param type $permissions Permissions required to access the item
+     * @param array $children Sub Entries of this entry
+     * @param bool $newWindow Target _blank or _self
+     * @param bool $isAjax Should load this page by Ajax
+     */
     public function __construct(
             string $title,
             string $link,
