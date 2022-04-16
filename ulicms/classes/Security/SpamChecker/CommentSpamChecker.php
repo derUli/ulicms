@@ -12,6 +12,7 @@ use StringHelper;
 use AntiSpamHelper;
 use Request;
 use UliCMS\Models\Content\Comment;
+use UliCMS\Helpers\AntiSpamHelper;
 
 class CommentSpamChecker implements ISpamChecker {
 

@@ -12,6 +12,7 @@ use AntiSpamHelper;
 use StringHelper;
 use Settings;
 use InvalidArgumentException;
+use UliCMS\Helpers\AntiSpamHelper;
 
 class SpamFilterConfiguration {
 

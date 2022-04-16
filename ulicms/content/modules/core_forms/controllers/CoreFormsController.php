@@ -7,6 +7,7 @@ if (!defined('ULICMS_ROOT')) {
 }
 
 use UliCMS\Constants\HttpStatusCode;
+use UliCMS\Helpers\AntiSpamHelper;
 
 class CoreFormsController extends Controller {
 
@@ -27,20 +28,17 @@ class CoreFormsController extends Controller {
             }
 
             foreach ($_POST as $key => $value) {
-                if (Settings::get("disallow_chinese_chars")
-                        and AntiSpamHelper::isChinese($_POST[$key])) {
+                if (Settings::get("disallow_chinese_chars") && AntiSpamHelper::isChinese($_POST[$key])) {
                     $this->_incSpamCount();
                     return get_translation("chinese_chars_not_allowed");
                 }
 
-                if (Settings::get("disallow_cyrillic_chars")
-                        and AntiSpamHelper::isCyrillic($_POST[$key])) {
+                if (Settings::get("disallow_cyrillic_chars") && AntiSpamHelper::isCyrillic($_POST[$key])) {
                     $this->_incSpamCount();
                     return get_translation("cyrillic_chars_not_allowed");
                 }
 
-                if (Settings::get("disallow_rtl_chars")
-                        and AntiSpamHelper::isRtl($_POST[$key])) {
+                if (Settings::get("disallow_rtl_chars") && AntiSpamHelper::isRtl($_POST[$key])) {
                     $this->_incSpamCount();
                     return get_translation("rtl_chars_not_allowed");
                 }
@@ -68,8 +66,7 @@ class CoreFormsController extends Controller {
                 ]);
             }
 
-            if (Settings::get("reject_requests_from_bots")
-                    and AntiSpamHelper::checkForBot(get_useragent())) {
+            if (Settings::get("reject_requests_from_bots") && AntiSpamHelper::checkForBot(get_useragent())) {
                 $this->_incSpamCount();
                 return get_translation("bots_are_not_allowed");
             }
@@ -80,7 +77,7 @@ class CoreFormsController extends Controller {
     public function beforeHttpHeader(): void {
         if (StringHelper::isNotNullOrWhitespace(
                         Request::getVar("submit-cms-form")
-                ) and Request::isPost()) {
+                ) && Request::isPost()) {
             // apply spam filter if enabled
             $spamCheck = $this->_spamCheck();
 

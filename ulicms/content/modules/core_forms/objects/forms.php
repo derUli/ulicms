@@ -6,6 +6,7 @@ if (!defined('ULICMS_ROOT')) {
 
 use UliCMS\Constants\HttpStatusCode;
 use UliCMS\Net\Mailer;
+use UliCMS\Helpers\AntiSpamHelper;
 
 class Forms {
 
@@ -147,7 +148,7 @@ class Forms {
 
             // if dns mx check is enabled check the mail domain
             if (!StringHelper::isNullOrEmpty($email_from)
-                    and Settings::get("check_mx_of_mail_address") && !AntiSpamHelper::checkMailDomain($email_from)) {
+                    && Settings::get("check_mx_of_mail_address") && !AntiSpamHelper::checkMailDomain($email_from)) {
                 ExceptionResult(
                         get_translation("mail_address_has_invalid_mx_entry"),
                         HttpStatusCode::BAD_REQUEST

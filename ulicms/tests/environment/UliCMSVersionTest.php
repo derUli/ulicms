@@ -10,7 +10,6 @@ class UliCMSVersionTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testDbSchemaVersionSet() {
-        $version = new UliCMSVersion();
         $this->assertNotEmpty(Settings::get("db_schema_version"));
     }
 

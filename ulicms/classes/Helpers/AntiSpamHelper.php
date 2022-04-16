@@ -2,9 +2,18 @@
 
 declare(strict_types=1);
 
+namespace UliCMS\Helpers;
+
 if (!defined('ULICMS_ROOT')) {
     exit('No direct script access allowed');
 }
+
+use Settings;
+use StringHelper;
+use Helper;
+use function get_ip;
+use function endsWith;
+use function remove_prefix;
 
 /**
  * Utils for fighting comment spam
@@ -149,13 +158,14 @@ class AntiSpamHelper extends Helper {
      */
     public static function checkForBot(?string $useragent = null): bool {
         // If UserAgent is null then use the current user agent
-        if (!$useragent and isset($_SERVER['HTTP_USER_AGENT'])) {
+        if (!$useragent && isset($_SERVER['HTTP_USER_AGENT'])) {
             $useragent = $_SERVER['HTTP_USER_AGENT'];
         }
 
         if (!$useragent) {
             return false;
         }
+
         $bots = [
             "Indy",
             "Blaiz",
