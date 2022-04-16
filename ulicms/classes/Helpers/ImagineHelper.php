@@ -8,7 +8,6 @@ if (!defined('ULICMS_ROOT')) {
 
 use Imagine\Image\AbstractImagine;
 use Imagine\Exception\RuntimeException;
-use UliCMS\Exceptions\NotSupportedException;
 
 /**
  * We use Imagine for imagine manipulations
