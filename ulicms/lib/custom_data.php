@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use UliCMS\Models\Content\CustomData;
+
 function get_custom_data(?string $page = null): array {
     return CustomData::get($page);
 }

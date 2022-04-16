@@ -7,6 +7,7 @@ if (!defined('ULICMS_ROOT')) {
 }
 
 use MediaEmbed\MediaEmbed;
+use UliCMS\Models\Content\CustomData;
 
 class CoreMediaController extends MainClass {
 

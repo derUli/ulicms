@@ -15,6 +15,7 @@ use UliCMS\CoreContent\UIUtils;
 use UliCMS\Localization\JSTranslation;
 use UliCMS\HTML\Input;
 use UliCMS\Helpers\BackendHelper;
+use UliCMS\Models\Content\CustomData;
 
 use function UliCMS\HTML\icon;
 

@@ -14,6 +14,7 @@ use UliCMS\Security\PermissionChecker;
 use MatthiasMullie\Minify;
 use UliCMS\Models\Content\Advertisement\Banners;
 use UliCMS\Storages\Flags;
+use UliCMS\Models\Content\CustomData;
 
 class Template {
 

@@ -2,9 +2,19 @@
 
 declare(strict_types=1);
 
+namespace UliCMS\Models\Content;
+
 if (!defined('ULICMS_ROOT')) {
     exit('No direct script access allowed');
 }
+
+use Database;
+use Settings;
+use function get_slug;
+use function getCurrentLanguage;
+use function is_json;
+use function json_readable_encode;
+use function tbname;
 
 // This class contains methods to handle CustomData which is saved
 // as json object in the "content" database table
@@ -75,8 +85,8 @@ class CustomData {
     }
 
     public static function getCustomDataOrSetting(string $name) {
-        $data = CustomData::get();
-        if (!is_null($data) and is_array($data) and isset($data[$name])) {
+        $data = self::get();
+        if (!is_null($data) && is_array($data) && isset($data[$name])) {
             return $data[$name];
         }
         return Settings::get($name);

@@ -1,6 +1,7 @@
 <?php
 
 use Spatie\Snapshots\MatchesSnapshots;
+use UliCMS\Models\Content\CustomData;
 
 class MediaEmbedTest extends \PHPUnit\Framework\TestCase {
 
