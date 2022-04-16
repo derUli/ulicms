@@ -14,22 +14,22 @@ define("ULICMS_ROOT", dirname(__FILE__));
 define('ULICMS_CLASSDIR', ULICMS_ROOT . '/classes');
 
 // Content Directory
-define("ULICMS_CONTENT", ULICMS_ROOT . "/content/");
+define("ULICMS_CONTENT", ULICMS_ROOT . "/content");
 
 // Temp Directory
-define("ULICMS_TMP", ULICMS_ROOT . "/content/tmp/");
+define("ULICMS_TMP", ULICMS_CONTENT . "/tmp");
 
 // Cache Directory
-define("ULICMS_CACHE", ULICMS_ROOT . "/content/cache");
+define("ULICMS_CACHE", ULICMS_CONTENT . "/cache");
 
 // Log Directory
-define("ULICMS_LOG", ULICMS_ROOT . "/content/log/");
+define("ULICMS_LOG", ULICMS_CONTENT . "/log");
 
 // Generated Directory
-define("ULICMS_GENERATED", ULICMS_CONTENT . "generated");
+define("ULICMS_GENERATED", ULICMS_CONTENT . "/generated");
 
 // Configuration Directory
-define("ULICMS_CONFIGURATIONS", ULICMS_CONTENT . "/configurations/");
+define("ULICMS_CONFIGURATIONS", ULICMS_CONTENT . "/configurations");
 
 // Autoload classes
 spl_autoload_register(function ($class) {
