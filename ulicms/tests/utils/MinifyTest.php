@@ -10,8 +10,8 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
     use MatchesSnapshots;
 
     protected function setUp(): void {
-        sureRemoveDir(Path::resolve("ULICMS_ROOT/content/cache/stylesheets"), true);
-        sureRemoveDir(Path::resolve("ULICMS_ROOT/content/cache/scripts"), true);
+        sureRemoveDir(Path::resolve("ULICMS_CACHE/stylesheets"), true);
+        sureRemoveDir(Path::resolve("ULICMS_CACHE/scripts"), true);
     }
 
     protected function tearDown(): void {
@@ -240,7 +240,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
     public function testCompileSCSSToFile() {
         sureRemoveDir(
                 Path::resolve(
-                        "ULICMS_ROOT/content/cache/stylesheets"
+                        "ULICMS_CACHE/stylesheets"
                 )
         );
         setSCSSImportPaths(

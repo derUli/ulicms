@@ -73,7 +73,7 @@ function minifyJs(): string {
     }
 
     $cacheId = md5((implode(";", $scripts)) . $lastmod);
-    $jsDir = Path::resolve("ULICMS_ROOT/content/cache/scripts");
+    $jsDir = Path::resolve("ULICMS_CACHE/scripts");
 
     if (!is_dir($jsDir)) {
         mkdir($jsDir, 0777, true);
@@ -119,7 +119,7 @@ function minifyCSS(): string {
 
     $cacheId = md5((implode(";", $stylesheets)) . $lastmod);
 
-    $cssDir = Path::resolve("ULICMS_ROOT/content/cache/stylesheets");
+    $cssDir = Path::resolve("ULICMS_CACHE/stylesheets");
 
     if (!is_dir($cssDir)) {
         mkdir($cssDir, 0777, true);
@@ -173,7 +173,7 @@ function compileSCSS(string $stylesheet): string {
 }
 
 function compileSCSSToFile(string $stylesheet): string {
-    $cssDir = Path::resolve("ULICMS_ROOT/content/cache/stylesheets");
+    $cssDir = Path::resolve("ULICMS_CACHE/stylesheets");
 
     if (!is_dir($cssDir)) {
         mkdir($cssDir, 0777, true);

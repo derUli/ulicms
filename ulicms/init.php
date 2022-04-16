@@ -13,17 +13,17 @@ define("ULICMS_ROOT", dirname(__FILE__));
 // Class dir for autoload
 define('ULICMS_CLASSDIR', ULICMS_ROOT . '/classes');
 
+// Content Directory
+define("ULICMS_CONTENT", ULICMS_ROOT . "/content/");
+
 // Temp Directory
 define("ULICMS_TMP", ULICMS_ROOT . "/content/tmp/");
 
 // Cache Directory
-define("ULICMS_CACHE", ULICMS_ROOT . "/content/cache/");
+define("ULICMS_CACHE", ULICMS_ROOT . "/content/cache");
 
 // Log Directory
 define("ULICMS_LOG", ULICMS_ROOT . "/content/log/");
-
-// Content Directory
-define("ULICMS_CONTENT", ULICMS_ROOT . "/content/");
 
 // Generated Directory
 define("ULICMS_GENERATED", ULICMS_CONTENT . "generated");
