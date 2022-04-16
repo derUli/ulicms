@@ -1,5 +1,4 @@
 <?php
-
 if (!defined('ULICMS_ROOT')) {
     exit('No direct script access allowed');
 }
@@ -63,11 +62,9 @@ if (count($groups) > 0) {
                                     ?> <span style="color: green; font-weight: bold;"><?php translate("yes"); ?> </span> <?php
                                 } else {
                                     ?> <a
-                                        href="?action=groups&standard=<?php
-                                        echo $id; ?>"><span style="color: red; font-weight: bold;"
-                                            onclick='return confirm("<?php
-                                            echo str_ireplace("%name%", $name, get_translation("make_group_default")); ?>")'><?php translate("no"); ?> </span> </a> <?php
-                                }
+                                        href="?action=groups&standard=<?php echo $id; ?>"><span style="color: red; font-weight: bold;"
+                                                                                            onclick='return confirm("<?php echo str_ireplace("%name%", $name, get_translation("make_group_default")); ?>")'><?php translate("no"); ?> </span> </a> <?php
+                                    }
                                     ?>
                             </td>
                             <td><a
@@ -82,12 +79,12 @@ if (count($groups) > 0) {
                                     ?>"
                                     class="is-not-ajax"
                                     ><img class="mobile-big-image" src="gfx/edit.png"
-                                       alt="<?php
-                                       translate("edit");
-                                       ?>"
-                                       title="<?php
-                                       translate("edit");
-                                       ?>"> </a></td>
+                                      alt="<?php
+                                      translate("edit");
+                                      ?>"
+                                      title="<?php
+                                      translate("edit");
+                                      ?>"> </a></td>
                             <td><form
                                     action="?action=groups&delete=<?php
                                     echo $id;
@@ -105,8 +102,8 @@ if (count($groups) > 0) {
                     </tr>
 
 
-                    <?php
-                } ?>
+                <?php }
+                ?>
 
             </tbody>
         </table>

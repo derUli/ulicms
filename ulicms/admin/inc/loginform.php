@@ -1,5 +1,4 @@
 <?php
-
 if (!defined('ULICMS_ROOT')) {
     exit('No direct script access allowed');
 }
@@ -25,7 +24,7 @@ if (!$admin_logo) {
     $admin_logo = "gfx/logo.png";
 }
 
-$error = (isset($_REQUEST["error"]) and !empty($_REQUEST["error"])) ? $_REQUEST["error"] : null;
+$error = (isset($_REQUEST["error"]) and!empty($_REQUEST["error"])) ? $_REQUEST["error"] : null;
 
 $login_welcome_text = get_lang_config("login_welcome_text", $default_language);
 ?>
@@ -35,8 +34,8 @@ if ($login_welcome_text) {
     <div id="login-welcome-text">
         <?php echo nl2br($login_welcome_text); ?>
     </div>
-<?php
-} ?>
+<?php }
+?>
 <h3 id="login-please-headline">
     <?php translate("please_authenticate"); ?>
 </h3>
@@ -50,7 +49,7 @@ echo ModuleHelper::buildMethodCallForm(
             "id" => "login-form",
             "data-has-error" => !is_null($error)
         )
-    )
+)
 ?>
 <?php
 csrf_token_html();
@@ -61,7 +60,7 @@ if (!empty($_REQUEST["go"])) {
     <input type="hidden" name="go"
            value='<?php esc($_REQUEST["go"]) ?>'>
            <?php
-}
+       }
        ?>
 <table>
     <tr>
@@ -81,7 +80,7 @@ if (!empty($_REQUEST["go"])) {
         <td><select name="system_language">
                 <option value="" selected>[<?php translate("standard"); ?>]</option>
                 <?php
-                for ($i = 0; $i < $languagesCount; $i ++) {
+                for ($i = 0; $i < $languagesCount; $i++) {
                     echo '<option value="' . $languages[$i] . '">' . getLanguageNameByCode($languages[$i]) . '</option>';
                 }
                 ?>
@@ -109,13 +108,12 @@ if (!empty($_REQUEST["go"])) {
 <?php echo ModuleHelper::endForm(); ?>
 <?php
 if ($error) {
-        ?>
+    ?>
     <div class="alert alert-danger voffset2">
-        <?php
-        esc($error); ?>
+        <?php esc($error); ?>
     </div>
     <?php
-    }
+}
 ?>
 <?php
 if (Settings::get("visitors_can_register") === "on" or Settings::get("visitors_can_register") === "1") {
@@ -124,18 +122,17 @@ if (Settings::get("visitors_can_register") === "on" or Settings::get("visitors_c
         href="?register=register&<?php
         if (!empty($_REQUEST["go"])) {
             echo "go=" . _esc($_REQUEST["go"]);
-        } ?>"
-        class="btn btn-default voffset2"><i class="fas fa-user-plus"></i> <?php
-            translate("register"); ?></a>
-    <?php
-}
-?>
-<?php
-if (!Settings::get("disable_password_reset")) {
+        }
+        ?>"
+        class="btn btn-default voffset2"><i class="fas fa-user-plus"></i> <?php translate("register"); ?></a>
+        <?php
+    }
     ?>
+    <?php
+    if (!Settings::get("disable_password_reset")) {
+        ?>
     <a href="?reset_password" class="btn btn-default pull-right voffset2"><i
-            class="fa fa-lock"></i> <?php
-        translate("reset_password"); ?></a>
+            class="fa fa-lock"></i> <?php translate("reset_password"); ?></a>
     <?php
 }
 enqueueScriptFile("scripts/login.js");

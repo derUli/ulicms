@@ -1,10 +1,9 @@
 <?php
-
 if (!defined('ULICMS_ROOT')) {
     exit('No direct script access allowed');
 }
 
-use UliCMS\Privacy\PrivacyCheckbox; 
+use UliCMS\Privacy\PrivacyCheckbox;
 use UliCMS\Models\Users\User;
 
 if (Settings::get("visitors_can_register") == "off" || !Settings::get("visitors_can_register")) {
@@ -16,7 +15,7 @@ if (Settings::get("visitors_can_register") == "off" || !Settings::get("visitors_
 
     $errors = false;
     if (isset($_POST["register_user"])) {
-        if ($checkbox->isEnabled() and !$checkbox->isChecked()) {
+        if ($checkbox->isEnabled() and!$checkbox->isChecked()) {
             echo "<p style='color:red;'>" . get_translation("please_accept_privacy_conditions") . "</p>";
         } elseif (empty($_POST["username"]) or empty($_POST["password"]) or empty($_POST["firstname"]) or empty($_POST["lastname"])) {
             echo "<p style='color:red;'>" . get_translation("FILL_ALL_FIELDS") . "</p>";
@@ -46,31 +45,28 @@ if (Settings::get("visitors_can_register") == "off" || !Settings::get("visitors_
             }
             echo "<p><a href='$go'>" . get_translation("continue_here") . "</a></p>";
         }
-    } ?>
-    <?php
-    do_event("before_register_form_title"); ?>
+    }
+    ?>
+    <?php do_event("before_register_form_title"); ?>
     <p>
         <a href="./" class="btn btn-default btn-back is-not-ajax">
             <i class="fa fa-arrow-left"></i>
-            <?php
-            translate("back_to_login"); ?></a>
+            <?php translate("back_to_login"); ?></a>
     </p>
     <h1>
         <?php translate("registration"); ?>
     </h1>
-    <?php
-    do_event("before_register_form"); ?>
+    <?php do_event("before_register_form"); ?>
     <form action="index.php?register=register" method="post">
-        <?php
-        csrf_token_html(); ?>
+        <?php csrf_token_html(); ?>
         <input type="hidden" name="register_user" value="add_admin">
         <?php
         if (!empty($_REQUEST["go"])) {
             ?>
             <input type="hidden" name="go"
                    value='<?php esc($_REQUEST["go"]) ?>'>
-                   <?php
-        } ?>
+               <?php }
+               ?>
         <div class="field">
             <strong class="field-label">
                 <?php translate("username"); ?>
@@ -117,8 +113,7 @@ if (Settings::get("visitors_can_register") == "off" || !Settings::get("visitors_
         </div>
         <?php do_event("register_form_field"); ?>
         <div class="privacy-checkbox field">
-            <?php
-            echo $checkbox->render(); ?>
+            <?php echo $checkbox->render(); ?>
         </div>
         <p class="voffset2">
             <button type="submit" class="btn btn-primary">

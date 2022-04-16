@@ -1,5 +1,4 @@
 <?php
-
 if (!defined('ULICMS_ROOT')) {
     exit('No direct script access allowed');
 }
@@ -174,14 +173,14 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
                                             if ($count) {
                                                 ?>
                                                 <div class="count" data-count="<?php echo $count ?>">
-                                                <?php echo $count; ?>
+                                                    <?php echo $count; ?>
                                                 </div>
-            <?php }
-        ?></a>
+                                            <?php }
+                                            ?></a>
                                     </div>
                                 </div>
-        <?php }
-    ?>
+                            <?php }
+                            ?>
                             <div class="<?php esc($colClass); ?>">
                                 <a id="menu-toggle" class="has-pointer"><i class="fa fa-bars"></i> </a>
                             </div>

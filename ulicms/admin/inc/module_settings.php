@@ -1,5 +1,4 @@
 <?php
-
 if (!defined('ULICMS_ROOT')) {
     exit('No direct script access allowed');
 }
@@ -23,55 +22,55 @@ if ((!is_file($admin_file_path) && !is_file($admin_file_path2) && !($controller 
     <div class="alert alert-danger"><?php translate("this_module_has_no_settings") ?></div>
     <?php
 } else {
-        if ($controller and method_exists($controller, "settings")) {
-            if (method_exists($controller, "getSettingsHeadline")) {
-                define("MODULE_ADMIN_HEADLINE", $controller->getSettingsHeadline());
-            }
-        } elseif (is_file($admin_file_path2)) {
-            require $admin_file_path2;
-        } else {
-            require $admin_file_path;
+    if ($controller and method_exists($controller, "settings")) {
+        if (method_exists($controller, "getSettingsHeadline")) {
+            define("MODULE_ADMIN_HEADLINE", $controller->getSettingsHeadline());
         }
+    } elseif (is_file($admin_file_path2)) {
+        require $admin_file_path2;
+    } else {
+        require $admin_file_path;
+    }
 
-        if (defined("MODULE_ADMIN_HEADLINE")) {
-            echo "<h1>" . MODULE_ADMIN_HEADLINE . "</h1>";
+    if (defined("MODULE_ADMIN_HEADLINE")) {
+        echo "<h1>" . MODULE_ADMIN_HEADLINE . "</h1>";
+    } else {
+        $capitalized_module_name = ucwords($module);
+        echo "<h1>$capitalized_module_name  " . get_translation("settings") . "</h1>";
+    }
+
+    $permissionChecker = new ACL();
+    $admin_permission = getModuleMeta($module, "admin_permission");
+
+    if ($admin_permission) {
+        if ($permissionChecker->hasPermission($admin_permission)) {
+            define("MODULE_ACCESS_PERMITTED", true);
         } else {
-            $capitalized_module_name = ucwords($module);
-            echo "<h1>$capitalized_module_name  " . get_translation("settings") . "</h1>";
+            define("MODULE_ACCESS_PERMITTED", false);
         }
-
-        $permissionChecker = new ACL();
-        $admin_permission = getModuleMeta($module, "admin_permission");
-
-        if ($admin_permission) {
-            if ($permissionChecker->hasPermission($admin_permission)) {
-                define("MODULE_ACCESS_PERMITTED", true);
-            } else {
-                define("MODULE_ACCESS_PERMITTED", false);
-            }
-        } elseif (defined("MODULE_ADMIN_REQUIRED_PERMISSION")) {
-            if ($permissionChecker->hasPermission(MODULE_ADMIN_REQUIRED_PERMISSION) and $permissionChecker->hasPermission("module_settings")) {
-                define("MODULE_ACCESS_PERMITTED", true);
-            } else {
-                define("MODULE_ACCESS_PERMITTED", false);
-            }
-        }
-
-        $admin_func = $module . "_admin";
-
-        if ($controller and method_exists($controller, "settings")) {
-            if (defined("MODULE_ACCESS_PERMITTED") and MODULE_ACCESS_PERMITTED) {
-                echo $controller->settings();
-            } else {
-                noPerms();
-            }
-        } elseif (function_exists($admin_func)) {
-            if (MODULE_ACCESS_PERMITTED) {
-                call_user_func($admin_func);
-            } else {
-                noPerms();
-            }
+    } elseif (defined("MODULE_ADMIN_REQUIRED_PERMISSION")) {
+        if ($permissionChecker->hasPermission(MODULE_ADMIN_REQUIRED_PERMISSION) and $permissionChecker->hasPermission("module_settings")) {
+            define("MODULE_ACCESS_PERMITTED", true);
         } else {
-            echo "<p>" . get_translation("this_module_has_no_settings") . "</p>";
+            define("MODULE_ACCESS_PERMITTED", false);
         }
     }
+
+    $admin_func = $module . "_admin";
+
+    if ($controller and method_exists($controller, "settings")) {
+        if (defined("MODULE_ACCESS_PERMITTED") and MODULE_ACCESS_PERMITTED) {
+            echo $controller->settings();
+        } else {
+            noPerms();
+        }
+    } elseif (function_exists($admin_func)) {
+        if (MODULE_ACCESS_PERMITTED) {
+            call_user_func($admin_func);
+        } else {
+            noPerms();
+        }
+    } else {
+        echo "<p>" . get_translation("this_module_has_no_settings") . "</p>";
+    }
+}

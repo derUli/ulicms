@@ -1,5 +1,4 @@
 <?php
-
 if (!defined('ULICMS_ROOT')) {
     exit('No direct script access allowed');
 }
@@ -42,15 +41,15 @@ if (Settings::get("disable_password_reset")) {
         <p>
             <button type="submit" class="btn btn-warning"><i class="fa fa-lock"></i> <?php translate("reset_password"); ?></button>
         </p>
-                <?php
-                if ($message) {
-                    ?>
+        <?php
+        if ($message) {
+            ?>
             <div class="alert alert-<?php echo $color; ?>">
-            <?php esc($message); ?>
+                <?php esc($message); ?>
             </div>
 
-                <?php }
-            ?>
+        <?php }
+        ?>
     </form>
-        <?php
-    }
+    <?php
+}

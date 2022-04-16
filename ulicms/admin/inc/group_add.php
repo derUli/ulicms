@@ -1,5 +1,4 @@
 <?php
-
 if (!defined('ULICMS_ROOT')) {
     exit('No direct script access allowed');
 }
@@ -37,7 +36,7 @@ $languages = Language::getAllLanguages();
                                   data-checkbox-group=".permission-checkbox"
                                   class="permission-checkbox"> <?php esc($key); ?> </label>
                 </div>
-                <?php }
+            <?php }
             ?>
         </div>
     </fieldset>
