@@ -77,7 +77,6 @@ require_once ULICMS_ROOT . "/classes/objects/content/Snippet.php";
 require_once ULICMS_ROOT . "/classes/objects/content/Link.php";
 require_once ULICMS_ROOT . "/classes/objects/content/Language_Link.php";
 require_once ULICMS_ROOT . "/classes/objects/content/Node.php";
-require_once ULICMS_ROOT . "/classes/objects/content/List_Data.php";
 require_once ULICMS_ROOT . "/classes/objects/content/Content_List.php";
 require_once ULICMS_ROOT . "/classes/objects/content/Module_Page.php";
 require_once ULICMS_ROOT . "/classes/objects/content/Video_Page.php";

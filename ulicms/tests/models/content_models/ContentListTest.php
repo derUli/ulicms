@@ -1,5 +1,6 @@
 
 <?php
+use UliCMS\Models\Content\ListData;
 
 class ContentListTest extends \PHPUnit\Framework\TestCase {
 
@@ -20,7 +21,7 @@ class ContentListTest extends \PHPUnit\Framework\TestCase {
 
         $loadedContentList = new Content_List($contentList->getId());
 
-        $this->assertInstanceOf(List_Data::class, $loadedContentList->listData);
+        $this->assertInstanceOf(ListData::class, $loadedContentList->listData);
     }
 
 }

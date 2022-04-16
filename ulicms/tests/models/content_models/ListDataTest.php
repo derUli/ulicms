@@ -3,6 +3,7 @@
 
 use UliCMS\Exceptions\DatabaseException;
 use UliCMS\Models\Content\Category;
+use UliCMS\Models\Content\ListData;
 
 class ListDataTest extends \PHPUnit\Framework\TestCase {
 
@@ -49,7 +50,7 @@ class ListDataTest extends \PHPUnit\Framework\TestCase {
         $this->createTestContent($category);
 
         $contentList = $this->createContentList();
-        $listData = new List_Data($contentList->getId());
+        $listData = new ListData($contentList->getId());
         $listData->language = "de";
         $listData->limit = 5;
         $listData->category_id = $category->getID();
@@ -71,7 +72,7 @@ class ListDataTest extends \PHPUnit\Framework\TestCase {
         $this->createTestContent($category);
 
         $contentList = $this->createContentList();
-        $listData = new List_Data($contentList->getId());
+        $listData = new ListData($contentList->getId());
         $listData->language = "de";
         $listData->limit = 5;
         $listData->category_id = $category->getID();
@@ -104,7 +105,7 @@ class ListDataTest extends \PHPUnit\Framework\TestCase {
         $this->createTestContent($category);
 
         $contentList = $this->createContentList();
-        $listData = new List_Data($contentList->getId());
+        $listData = new ListData($contentList->getId());
         $listData->language = "de";
         $listData->limit = 5;
         $listData->category_id = $category->getID();
@@ -128,7 +129,7 @@ class ListDataTest extends \PHPUnit\Framework\TestCase {
         $this->createTestContent($category);
 
         $contentList = $this->createContentList();
-        $listData = new List_Data($contentList->getId());
+        $listData = new ListData($contentList->getId());
         $listData->language = "de";
         $listData->limit = 5;
         $listData->category_id = $category->getID();
@@ -163,7 +164,7 @@ class ListDataTest extends \PHPUnit\Framework\TestCase {
 
     public function testLoadById() {
         $contentList = $this->createContentList();
-        $loaded = new List_Data($contentList->getId());
+        $loaded = new ListData($contentList->getId());
 
         $this->assertTrue($loaded->isPersistent());
         $this->assertFalse($loaded->hasChanges());
@@ -181,12 +182,12 @@ class ListDataTest extends \PHPUnit\Framework\TestCase {
 
     public function testUpdate() {
         $contentList = $this->createContentList();
-        $loaded = new List_Data($contentList->getId());
+        $loaded = new ListData($contentList->getId());
         $loaded->limit = 10;
         $loaded->type = 'page';
         $loaded->save();
 
-        $updated = new List_Data($contentList->getId());
+        $updated = new ListData($contentList->getId());
         $this->assertEquals(10, $updated->limit);
         $this->assertEquals("page", $updated->type);
     }
@@ -204,7 +205,7 @@ class ListDataTest extends \PHPUnit\Framework\TestCase {
 
         $contentList->listData = $this->getEmptyListData($contentList->getID());
 
-        $loaded = new List_Data($contentList->getId());
+        $loaded = new ListData($contentList->getId());
 
         $this->assertNull($loaded->language);
         $this->assertNull($loaded->category_id);
@@ -218,7 +219,7 @@ class ListDataTest extends \PHPUnit\Framework\TestCase {
     }
 
     private function getEmptyListData($contentId) {
-        $listData = new List_Data($contentId);
+        $listData = new ListData($contentId);
         $listData->order_by = null;
 
         $listData->save();
@@ -244,7 +245,7 @@ class ListDataTest extends \PHPUnit\Framework\TestCase {
     }
 
     private function createListData($contentId) {
-        $listData = new List_Data($contentId);
+        $listData = new ListData($contentId);
         $listData->language = "de";
         $listData->category_id = 1;
         $listData->menu = "not_in_menu";
@@ -262,7 +263,7 @@ class ListDataTest extends \PHPUnit\Framework\TestCase {
     public function testSaveWithoutContentId() {
         $this->expectException(DatabaseException::class);
 
-        $listData = new List_Data();
+        $listData = new ListData();
         $listData->save();
     }
 

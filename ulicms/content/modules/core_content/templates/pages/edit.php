@@ -22,6 +22,7 @@ use UliCMS\Models\Users\Group;
 use UliCMS\Localization\JSTranslation;
 use UliCMS\Helpers\BackendHelper;
 use UliCMS\Models\Content\CustomFields;
+use UliCMS\Models\Content\ListData;
 
 use function UliCMS\HTML\icon;
 
@@ -55,7 +56,7 @@ if ($permissionChecker->hasPermission("pages")) {
     $pages_approve_others = $permissionChecker->hasPermission("pages_approve_others");
 
     while ($row = db_fetch_object($result)) {
-        $list_data = new List_Data($row->id);
+        $ListData = new ListData($row->id);
         $is_owner = $row->author_id == get_user_id();
 
         // TODO: refactor this into a method
@@ -603,7 +604,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                 <select name="list_type">
                                     <option value="null"
                                     <?php
-                                    if ("null" == $list_data->type) {
+                                    if ("null" == $ListData->type) {
                                         echo "selected";
                                     }
                                     ?>>
@@ -611,7 +612,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                     </option>
                                     <?php
                                     foreach ($types as $type) {
-                                        if ($type == $list_data->type) {
+                                        if ($type == $ListData->type) {
                                             echo '<option value="' . $type . '" selected>' . get_translation($type) . "</option>";
                                         } else {
                                             echo '<option value="' . $type . '">' . get_translation($type) . "</option>";
@@ -628,7 +629,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                 <select name="list_language">
                                     <option value=""
                                     <?php
-                                    if ($list_data->language === "null") {
+                                    if ($ListData->language === "null") {
                                         echo "selected";
                                     }
                                     ?>>[<?php translate("every"); ?>]</option>
@@ -636,7 +637,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                             $languages = getAllLanguages();
                                             $languagesCount = count($languages);
                                             for ($j = 0; $j < $languagesCount; $j++) {
-                                                if ($list_data->language === $languages[$j]) {
+                                                if ($ListData->language === $languages[$j]) {
                                                     echo "<option value='" . $languages[$j] . "' selected>" . getLanguageNameByCode($languages[$j]) . "</option>";
                                                 } else {
                                                     echo "<option value='" . $languages[$j] . "'>" . getLanguageNameByCode($languages[$j]) . "</option>";
@@ -651,7 +652,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                     <?php translate("category"); ?>
                                 </strong>
                                 <?php
-                                $lcat = $list_data->category_id;
+                                $lcat = $ListData->category_id;
                                 if ($lcat === null) {
                                     $lcat = - 1;
                                 }
@@ -670,7 +671,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                         ?>
                                         <option value="<?php echo $menu ?>"
                                         <?php
-                                        if ($menu == $list_data->menu) {
+                                        if ($menu == $ListData->menu) {
                                             echo "selected";
                                         }
                                         ?>>
@@ -687,7 +688,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                 <select name="list_parent" size=1>
                                     <option
                                     <?php
-                                    if ($list_data->parent_id === null) {
+                                    if ($ListData->parent_id === null) {
                                         echo 'selected="selected"';
                                     }
                                     ?>
@@ -702,7 +703,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                         <option
                                             value="<?php echo $page["id"]; ?>"
                                             <?php
-                                            if ($list_data->parent_id === intval($page["id"])) {
+                                            if ($ListData->parent_id === intval($page["id"])) {
                                                 echo 'selected="selected"';
                                             }
                                             ?>>
@@ -722,7 +723,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                     <?php foreach ($cols as $col) { ?>
                                         <option value="<?php echo $col; ?>"
                                         <?php
-                                        if ($col == $list_data->order_by) {
+                                        if ($col == $ListData->order_by) {
                                             echo 'selected';
                                         }
                                         ?>><?php echo $col; ?></option>
@@ -738,7 +739,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                     <option value="asc"><?php translate("asc"); ?></option>
                                     <option value="desc"
                                     <?php
-                                    if ($list_data->order_direction === "desc") {
+                                    if ($ListData->order_direction === "desc") {
                                         echo ' selected';
                                     }
                                     ?>><?php translate("desc"); ?></option>
@@ -749,7 +750,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                     <?php translate("entries_per_page"); ?>
                                 </strong>
                                 <input type="number" name="limit" min="0" step="1"
-                                       value="<?php echo intval($list_data->limit); ?>">
+                                       value="<?php echo intval($ListData->limit); ?>">
                             </div>
 
                             <div class="field">
@@ -760,13 +761,13 @@ if ($permissionChecker->hasPermission("pages")) {
                                 <select name="list_use_pagination">
                                     <option value="1"
                                     <?php
-                                    if ($list_data->use_pagination) {
+                                    if ($ListData->use_pagination) {
                                         echo "selected";
                                     }
                                     ?>><?php translate("yes") ?></option>
                                     <option value="0"
                                     <?php
-                                    if (!$list_data->use_pagination) {
+                                    if (!$ListData->use_pagination) {
                                         echo "selected";
                                     }
                                     ?>><?php translate("no") ?></option>

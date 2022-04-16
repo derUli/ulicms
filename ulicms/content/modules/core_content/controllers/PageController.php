@@ -22,6 +22,7 @@ use UliCMS\HTML\ListItem;
 use UliCMS\Constants\HttpStatusCode;
 use UliCMS\Models\Users\User;
 use UliCMS\Models\Content\CustomFields;
+use UliCMS\Models\Content\ListData;
 use function UliCMS\HTML\stringContainsHtml;
 
 class PageController extends Controller {
@@ -326,7 +327,7 @@ class PageController extends Controller {
                 $list_type = null;
             }
 
-            $list = new List_Data($content_id);
+            $list = new ListData($content_id);
             $list->language = $list_language;
             $list->category_id = $list_category;
             $list->menu = $list_menu;

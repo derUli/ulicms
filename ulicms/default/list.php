@@ -4,9 +4,11 @@ if (!defined('ULICMS_ROOT')) {
     exit('No direct script access allowed');
 }
 
+use UliCMS\Models\Content\ListData;
+
 $id = get_ID();
 if ($id !== null) {
-    $list = new List_Data($id);
+    $list = new ListData($id);
     if ($list->content_id !== null) {
         $entries = $list->filter();
         if (count($entries) > 0) {

@@ -1,15 +1,21 @@
 <?php
 
+namespace UliCMS\Models\Content;
+
 if (!defined('ULICMS_ROOT')) {
     exit('No direct script access allowed');
 }
 
 use UliCMS\Exceptions\DatabaseException;
+use ContentFactory;
+use Database;
+use Model;
+use function tbname;
 
 // A list is a paginated set of content
 // filtered by conditions
 // e.g. article archive
-class List_Data extends Model {
+class ListData extends Model {
 
     public $content_id = null;
     public $language = null;
@@ -154,6 +160,7 @@ class List_Data extends Model {
         if (intval($this->limit) > 0) {
             $limit = intval($this->limit);
         }
+
         $sql = "INSERT INTO " . tbname("lists") .
                 " (content_id, language, category_id, menu, parent_id, "
                 . "`order_by`, `order_direction`, `limit`, `use_pagination`, "
