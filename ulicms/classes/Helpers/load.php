@@ -6,7 +6,6 @@ if (!defined('ULICMS_ROOT')) {
 
 $classes = array(
     "AntiSpamHelper",
-    "BackendHelper",
     "ModuleHelper",
     "StringHelper",
 );

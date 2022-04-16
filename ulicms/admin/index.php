@@ -2,12 +2,13 @@
 
 // required because my local XAMPP is sometimes in wrong folder, so includes will fail
 
-require_once "../init.php";
+require_once dirname(__FILE__) . "/../init.php";
 
 use UliCMS\Backend\BackendPageRenderer;
 use UliCMS\Utils\Session;
 use UliCMS\Constants\HttpStatusCode;
 use UliCMS\Localization\Translation;
+use UliCMS\Helpers\BackendHelper;
 
 Session::sessionStart();
 

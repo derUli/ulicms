@@ -2,6 +2,7 @@
 
 use UliCMS\Registries\ActionRegistry;
 use UliCMS\Models\Users\User;
+use UliCMS\Helpers\BackendHelper;
 
 class ControllerRegistryTest extends \PHPUnit\Framework\TestCase {
 

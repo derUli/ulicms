@@ -3,6 +3,7 @@
 use UliCMS\Backend\Menu\MenuEntry;
 use UliCMS\Models\Users\User;
 use UliCMS\Models\Users\Group;
+use UliCMS\Helpers\BackendHelper;
 
 class MenuEntryTest extends \PHPUnit\Framework\TestCase {
 

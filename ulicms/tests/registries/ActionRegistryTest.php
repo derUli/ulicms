@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Registries\ActionRegistry;
+use UliCMS\Helpers\BackendHelper;
 
 class ActionRegistryTest extends \PHPUnit\Framework\TestCase {
 

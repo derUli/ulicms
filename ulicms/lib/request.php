@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use UliCMS\Helpers\BackendHelper;
+
 function get_action(): string {
     return BackendHelper::getAction();
 }

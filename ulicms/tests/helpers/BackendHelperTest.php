@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Helpers\BackendHelper;
+
 class BackendHelperTest extends \PHPUnit\Framework\TestCase {
 
     protected function setUp(): void {

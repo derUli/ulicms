@@ -13,8 +13,10 @@ use UliCMS\Models\Content\Types\DefaultContentTypes;
 use UliCMS\Helpers\NumberFormatHelper;
 use UliCMS\CoreContent\UIUtils;
 use UliCMS\Localization\JSTranslation;
-use function UliCMS\HTML\icon;
 use UliCMS\HTML\Input;
+use UliCMS\Helpers\BackendHelper;
+
+use function UliCMS\HTML\icon;
 
 $parent_id = Request::getVar("parent_id", null, "int");
 

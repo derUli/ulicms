@@ -5,6 +5,7 @@ if (!defined('ULICMS_ROOT')) {
 }
 
 use UliCMS\Localization\JSTranslation;
+use UliCMS\Helpers\BackendHelper;
 
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("motd")) {

@@ -4,6 +4,9 @@ if (!defined('ULICMS_ROOT')) {
     exit('No direct script access allowed');
 }
 
+
+use UliCMS\Helpers\BackendHelper;
+
 $currentAction = BackendHelper::getAction();
 $icons = array(
     "legal_composer" => "fas fa-file-contract",

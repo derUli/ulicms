@@ -9,6 +9,7 @@ if (!defined('ULICMS_ROOT')) {
 use UliCMS\Services\Connectors\PackageSourceConnector;
 use UliCMS\Packages\Modules\Module;
 use UliCMS\Constants\HttpStatusCode;
+use UliCMS\Helpers\BackendHelper;
 
 use function UliCMS\HTML\text;
 

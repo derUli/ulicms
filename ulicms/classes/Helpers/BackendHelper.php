@@ -2,11 +2,20 @@
 
 declare(strict_types=1);
 
+namespace UliCMS\Helpers;
+
 if (!defined('ULICMS_ROOT')) {
     exit('No direct script access allowed');
 }
 
+use Helper;
+use Request;
 use UliCMS\HTML\Script;
+use ModuleHelper;
+use Path;
+use function find_all_folders;
+use function get_html_editor;
+use function enqueueScriptFile;
 
 /**
  * Helper methods for admin backend area

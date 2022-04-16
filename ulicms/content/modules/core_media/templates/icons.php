@@ -5,6 +5,7 @@ if (!defined('ULICMS_ROOT')) {
 }
 
 use UliCMS\Security\PermissionChecker;
+use UliCMS\Helpers\BackendHelper;
 
 $currentAction = BackendHelper::getAction();
 $icons = array(

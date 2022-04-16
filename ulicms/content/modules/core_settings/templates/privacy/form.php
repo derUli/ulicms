@@ -3,6 +3,7 @@
 use UliCMS\Constants\RequestMethod;
 use UliCMS\HTML\Alert;
 use UliCMS\Localization\JSTranslation;
+use UliCMS\Helpers\BackendHelper;
 
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("privacy_settings")) {
