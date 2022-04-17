@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Models\Content\Language;
+use UliCMS\Models\Content\ContentFactory;
 
 class PageFunctionsTest extends \PHPUnit\Framework\TestCase {
 

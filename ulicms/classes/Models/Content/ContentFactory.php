@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace UliCMS\Models\Content;
+
 if (!defined('ULICMS_ROOT')) {
     exit('No direct script access allowed');
 }
@@ -10,6 +12,12 @@ use UliCMS\Exceptions\DatasetNotFoundException;
 use UliCMS\Exceptions\UnknownContentTypeException;
 use UliCMS\Models\Content\TypeMapper;
 use UliCMS\Registries\LoggerRegistry;
+use StringHelper;
+use Database;
+use Content;
+use function get_slug;
+use function getCurrentLanguage;
+use function tbname;
 
 // this class contains methods to return one content model or an array of multiple content datasets
 class ContentFactory {
@@ -55,9 +63,7 @@ class ContentFactory {
         $retval = null;
         $type = $row->type;
         $mappings = TypeMapper::getMappings();
-        if (isset($mappings[$type])
-                and StringHelper::isNotNullOrEmpty($mappings[$type])
-                and class_exists($mappings[$type])) {
+        if (isset($mappings[$type]) && StringHelper::isNotNullOrEmpty($mappings[$type]) && class_exists($mappings[$type])) {
             $retval = new $mappings[$type]();
             $retval->loadByID(intval($row->id));
         } else {
@@ -196,25 +202,25 @@ class ContentFactory {
         $datasets = [];
         $sql = "select id, `type` from " . tbname("content") .
                 " where active = 1 and deleted_at is null and ";
-        if ($language !== null and $language !== "") {
+        if ($language !== null && $language !== "") {
             $language = Database::escapeValue($language);
             $sql .= "language = '$language' and ";
         }
-        if ($category_id !== null and $category_id !== 0) {
+        if ($category_id !== null && $category_id !== 0) {
             $category_id = intval($category_id);
             $sql .= "category_id = $category_id and ";
         }
-        if ($menu !== null and $menu !== "") {
+        if ($menu !== null && $menu !== "") {
             $menu = Database::escapeValue($menu);
             $sql .= "menu = '$menu' and ";
         }
 
-        if ($parent_id !== null and $parent_id !== 0) {
+        if ($parent_id !== null && $parent_id !== 0) {
             $parent_id = intval($parent_id);
             $sql .= "parent_id = $parent_id and ";
         }
 
-        if ($type !== null and $type !== "") {
+        if ($type !== null && $type !== "") {
             $type = Database::escapeValue($type);
             $sql .= "type = '$type' and ";
         }

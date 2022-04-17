@@ -8,7 +8,6 @@ if (!defined('ULICMS_ROOT')) {
     exit('No direct script access allowed');
 }
 
-use ContentFactory;
 use UliCMS\Models\Content\TypeMapper;
 use Database;
 use UliCMS\CoreContent\Partials\ViewButtonRenderer;
@@ -16,6 +15,7 @@ use UliCMS\CoreContent\Partials\EditButtonRenderer;
 use UliCMS\CoreContent\Partials\DeleteButtonRenderer;
 use UliCMS\CoreContent\Partials\UnDeleteButtonRenderer;
 use UliCMS\Models\Users\User;
+use UliCMS\Models\Content\ContentFactory;
 use function UliCMS\HTML\icon;
 use function UliCMS\HTML\link;
 

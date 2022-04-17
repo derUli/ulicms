@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Packages\Modules\Module;
+use UliCMS\Models\Content\ContentFactory;
 
 class ModulePageTest extends \PHPUnit\Framework\TestCase {
 

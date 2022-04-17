@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Models\Content\ContentFactory;
+
 class ArticleTest extends \PHPUnit\Framework\TestCase {
 
     protected function tearDown(): void {

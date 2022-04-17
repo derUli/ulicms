@@ -4,6 +4,7 @@ use UliCMS\Models\Content\Comment;
 use UliCMS\Constants\CommentStatus;
 use UliCMS\Exceptions\DatasetNotFoundException;
 use UliCMS\Utils\CacheUtil;
+use UliCMS\Models\Content\ContentFactory;
 
 class CommentTest extends \PHPUnit\Framework\TestCase {
 

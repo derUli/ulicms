@@ -9,7 +9,6 @@ if (!defined('ULICMS_ROOT')) {
 }
 
 use Database;
-use ContentFactory;
 use UliCMS\Constants\CommentStatus;
 use InvalidArgumentException;
 use Model;
@@ -18,6 +17,7 @@ use UliCMS\Exceptions\DatasetNotFoundException;
 use UliCMS\Security\SpamChecker\SpamFilterConfiguration;
 use UliCMS\Security\SpamChecker\CommentSpamChecker;
 use ModuleHelper;
+use UliCMS\Models\Content\ContentFactory;
 
 // TODO: Comment public static functions
 // This class is a comment model class

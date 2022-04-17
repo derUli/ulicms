@@ -9,9 +9,9 @@ if (!defined('ULICMS_ROOT')) {
 }
 
 use Template;
-use ContentFactory;
 use UliCMS\Utils\CacheUtil;
 use UliCMS\Exceptions\DatasetNotFoundException;
+use UliCMS\Models\Content\ContentFactory;
 
 // this class renders a page as plain text
 class PlainTextRenderer {

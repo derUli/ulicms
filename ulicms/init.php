@@ -83,7 +83,6 @@ require_once ULICMS_ROOT . "/classes/objects/content/Video_Page.php";
 require_once ULICMS_ROOT . "/classes/objects/content/Audio_Page.php";
 require_once ULICMS_ROOT . "/classes/objects/content/Image_Page.php";
 require_once ULICMS_ROOT . "/classes/objects/content/Article.php";
-require_once ULICMS_ROOT . "/classes/objects/content/ContentFactory.php";
 
 function exception_handler($exception) {
     if (!defined("EXCEPTION_OCCURRED")) {

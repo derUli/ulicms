@@ -8,6 +8,7 @@ use UliCMS\Models\Content\Types\DefaultContentTypes;
 use UliCMS\Utils\File;
 use UliCMS\Exceptions\DatasetNotFoundException;
 use UliCMS\Storages\Vars;
+use UliCMS\Models\Content\ContentFactory;
 
 function html5_doctype(): void {
     echo Template::getHtml5Doctype();

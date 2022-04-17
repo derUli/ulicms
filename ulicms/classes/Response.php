@@ -7,6 +7,7 @@ if (!defined('ULICMS_ROOT')) {
 }
 
 use UliCMS\Constants\HttpStatusCode;
+use UliCMS\Models\Content\ContentFactory;
 
 if (!defined("RESPONSIVE_FM")) {
 

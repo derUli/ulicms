@@ -4,6 +4,7 @@ use UliCMS\Logging\Logger;
 use UliCMS\Registries\LoggerRegistry;
 use UliCMS\Models\Users\UserManager;
 use UliCMS\Models\Users\User;
+use UliCMS\Models\Content\ContentFactory;
 
 class FormControllerTest extends \PHPUnit\Framework\TestCase {
 

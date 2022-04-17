@@ -7,6 +7,7 @@ use UliCMS\Storages\Vars;
 use UliCMS\Packages\Modules\ModuleManager;
 use UliCMS\Models\Users\Group;
 use UliCMS\Models\Users\User;
+use UliCMS\Models\Content\ContentFactory;
 
 class ApiTest extends \PHPUnit\Framework\TestCase {
 

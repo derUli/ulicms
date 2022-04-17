@@ -8,6 +8,7 @@ use UliCMS\Security\Permissions\PagePermissions;
 use UliCMS\Models\Content\Comment;
 use UliCMS\Models\Content\VCS;
 use UliCMS\Exceptions\DatasetNotFoundException;
+use UliCMS\Models\Content\ContentFactory;
 
 class Page extends Content {
 

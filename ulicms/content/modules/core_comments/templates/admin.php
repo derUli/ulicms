@@ -8,6 +8,7 @@ use UliCMS\Backend\BackendPageRenderer;
 use UliCMS\HTML\Input;
 use UliCMS\HTML\ListItem;
 use UliCMS\Constants\CommentStatus;
+use UliCMS\Models\Content\ContentFactory;
 
 $controller = ModuleHelper::getMainController("core_comments");
 $defaultStatus = $controller->_getDefaultStatus();

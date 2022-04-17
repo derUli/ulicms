@@ -6,6 +6,7 @@ if (!defined('ULICMS_ROOT')) {
     exit('No direct script access allowed');
 }
 
+use UliCMS\Models\Content\ContentFactory;
 use UliCMS\Models\Content\Language;
 use UliCMS\HTML\Form;
 use UliCMS\Constants\RequestMethod;

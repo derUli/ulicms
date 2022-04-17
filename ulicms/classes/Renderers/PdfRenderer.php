@@ -12,7 +12,7 @@ use Template;
 use Mpdf\Mpdf;
 use UliCMS\Utils\CacheUtil;
 use StringHelper;
-use ContentFactory;
+use UliCMS\Models\Content\ContentFactory;
 use UliCMS\Exceptions\DatasetNotFoundException;
 
 // this class renders a page as pdf using mPDF

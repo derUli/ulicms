@@ -8,6 +8,7 @@ use Spatie\Snapshots\MatchesSnapshots;
 use UliCMS\Models\Users\Group;
 use UliCMS\Localization\Translation;
 use UliCMS\Models\Users\User;
+use UliCMS\Models\Content\ContentFactory;
 
 class PageControllerTest extends \PHPUnit\Framework\TestCase {
 

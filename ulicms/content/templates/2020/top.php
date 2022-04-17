@@ -4,6 +4,8 @@ if (!defined('ULICMS_ROOT')) {
     exit('No direct script access allowed');
 }
 
+use UliCMS\Models\Content\ContentFactory;
+
 $permissionChecker = new UliCMS\Security\ContentPermissionChecker(get_user_id());
 
 html5_doctype();

@@ -8,9 +8,9 @@ if (!defined('ULICMS_ROOT')) {
     exit('No direct script access allowed');
 }
 
-use ContentFactory;
 use UliCMS\Models\Users\User;
 use UliCMS\Models\Users\Group;
+use UliCMS\Models\Content\ContentFactory;
 
 // permission checks for read, write and delete content permissions
 class ContentPermissionChecker implements IDatasetPermissionChecker {

@@ -3,6 +3,7 @@
 use UliCMS\Constants\CommentStatus;
 use UliCMS\Models\Content\Comment;
 use UliCMS\Exceptions\NotImplementedException;
+use UliCMS\Models\Content\ContentFactory;
 
 class CommentsControllerTest extends \PHPUnit\Framework\TestCase {
 

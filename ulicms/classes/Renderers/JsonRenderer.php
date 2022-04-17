@@ -9,10 +9,10 @@ if (!defined('ULICMS_ROOT')) {
 }
 
 use stdClass;
-use ContentFactory;
 use UliCMS\Utils\CacheUtil;
 use UliCMS\Exceptions\DatasetNotFoundException;
 use Page;
+use UliCMS\Models\Content\ContentFactory;
 
 // this class renders a content as csv
 class JsonRenderer {

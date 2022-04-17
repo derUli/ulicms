@@ -7,6 +7,7 @@ if (!defined('ULICMS_ROOT')) {
 }
 
 use UliCMS\Exceptions\DatasetNotFoundException;
+use UliCMS\Models\Content\ContentFactory;
 
 abstract class Content extends Model {
 

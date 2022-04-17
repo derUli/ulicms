@@ -8,6 +8,7 @@ use UliCMS\Storages\Vars;
 use UliCMS\Models\Users\UserManager;
 use UliCMS\Models\Users\Group;
 use UliCMS\Localization\Translation;
+use UliCMS\Models\Content\ContentFactory;
 use function UliCMS\HTML\stringContainsHtml;
 
 class TemplateTest extends \PHPUnit\Framework\TestCase {

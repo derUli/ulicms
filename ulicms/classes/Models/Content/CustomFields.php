@@ -8,8 +8,9 @@ if (!defined('ULICMS_ROOT')) {
     exit('No direct script access allowed');
 }
 
-use ContentFactory;
+use UliCMS\Models\Content\ContentFactory;
 use Database;
+
 use function get_ID;
 use function remove_prefix;
 

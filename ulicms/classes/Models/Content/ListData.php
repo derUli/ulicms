@@ -7,9 +7,9 @@ if (!defined('ULICMS_ROOT')) {
 }
 
 use UliCMS\Exceptions\DatabaseException;
-use ContentFactory;
 use Database;
 use Model;
+use UliCMS\Models\Content\ContentFactory;
 use function tbname;
 
 // A list is a paginated set of content

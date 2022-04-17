@@ -3,6 +3,7 @@ use UliCMS\Models\Users\Group;
 use UliCMS\Models\Media\Video;
 use UliCMS\Models\Media\Audio;
 use UliCMS\Models\Users\UserManager;
+use UliCMS\Models\Content\ContentFactory;
 
 class VideoAndAudioPageTest extends \PHPUnit\Framework\TestCase {
 

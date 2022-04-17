@@ -12,6 +12,7 @@ use UliCMS\Storages\Flags;
 use UliCMS\Utils\Session;
 use UliCMS\Constants\HttpStatusCode;
 use UliCMS\Localization\Translation;
+use UliCMS\Models\Content\ContentFactory;
 
 global $connection;
 

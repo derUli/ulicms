@@ -23,6 +23,7 @@ use UliCMS\Constants\HttpStatusCode;
 use UliCMS\Models\Users\User;
 use UliCMS\Models\Content\CustomFields;
 use UliCMS\Models\Content\ListData;
+use UliCMS\Models\Content\ContentFactory;
 use function UliCMS\HTML\stringContainsHtml;
 
 class PageController extends Controller {

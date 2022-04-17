@@ -2,7 +2,7 @@
 
 use UliCMS\Utils\File;
 use UliCMS\Exceptions\DatasetNotFoundException;
-use UliCMS\Packages\PackageManager;
+use UliCMS\Models\Content\ContentFactory;
 
 class ComparisonsTest extends \PHPUnit\Framework\TestCase {
 

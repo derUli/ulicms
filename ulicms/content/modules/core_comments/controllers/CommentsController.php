@@ -17,6 +17,7 @@ use UliCMS\Storages\Flags;
 use UliCMS\Privacy\PrivacyCheckbox; 
 use UliCMS\Storages\Vars;
 use UliCMS\Constants\HttpStatusCode;
+use UliCMS\Models\Content\ContentFactory;
 
 class CommentsController extends MainClass {
 
