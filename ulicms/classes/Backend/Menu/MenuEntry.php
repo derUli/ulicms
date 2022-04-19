@@ -8,8 +8,9 @@ if (!defined('ULICMS_ROOT')) {
     exit('No direct script access allowed');
 }
 
-use ACL;
+use UliCMS\Security\PermissionChecker;
 use function get_action;
+use function get_user_id;
 
 /**
  * Admin Menu Entry
@@ -118,15 +119,16 @@ class MenuEntry {
 
     // check if the user has permissions to access this menu entry
     public function userHasPermission(): bool {
-        $acl = new ACL();
+        $permissionChecker = new PermissionChecker(get_user_id());
+        
         if (is_string($this->permissions) && !empty($this->permissions)) {
-            return $acl->hasPermission($this->permissions);
+            return $permissionChecker->hasPermission($this->permissions);
         }
-        if (is_array($this->permissions) and count($this->permissions) > 0) {
+        if (is_array($this->permissions) && count($this->permissions) > 0) {
             $isPermitted = false;
             foreach ($this->permissions as $permission) {
                 if (is_string($permission) && !empty($permission)
-                        and $acl->hasPermission($permission)) {
+                        and $permissionChecker->hasPermission($permission)) {
                     $isPermitted = true;
                 }
             }
