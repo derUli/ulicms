@@ -4,6 +4,7 @@ if (!defined('ULICMS_ROOT')) {
 }
 
 use UliCMS\Storages\Vars;
+use UliCMS\Security\PermissionChecker;
 
 $module = basename($_GET ["module"]);
 
@@ -39,7 +40,7 @@ if ((!is_file($admin_file_path) && !is_file($admin_file_path2) && !($controller 
         echo "<h1>$capitalized_module_name  " . get_translation("settings") . "</h1>";
     }
 
-    $permissionChecker = new ACL();
+    $permissionChecker = new PermissionChecker(get_user_id());
     $admin_permission = getModuleMeta($module, "admin_permission");
 
     if ($admin_permission) {
