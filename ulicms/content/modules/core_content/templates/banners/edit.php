@@ -1,5 +1,4 @@
 <?php
-
 if (!defined('ULICMS_ROOT')) {
     exit('No direct script access allowed');
 }
@@ -9,8 +8,9 @@ use UliCMS\Models\Content\Advertisement\Banner;
 use UliCMS\HTML\Alert;
 use UliCMS\Models\Content\Categories;
 use UliCMS\Exceptions\DatasetNotFoundException;
+use UliCMS\Security\PermissionChecker;
 
-$permissionChecker = new ACL();
+$permissionChecker = new PermissionChecker(get_user_id());
 if ($permissionChecker->hasPermission("banners")
         and $permissionChecker->hasPermission("banners_edit")) {
     $banner = Request::getVar("banner", 0, "int");
@@ -74,7 +74,7 @@ if ($permissionChecker->hasPermission("banners")
         if ($row->getType() != "gif") {
             echo "display:none";
         }
-        ?>">
+            ?>">
             <div class="field">
                 <strong class="field-label">
                     <?php translate("bannertext"); ?>
@@ -111,7 +111,7 @@ if ($permissionChecker->hasPermission("banners")
         if ($row->getType() != "html") {
             echo "display:none";
         }
-        ?>">
+            ?>">
             <div class="field">
                 <textarea name="html" cols=40 rows=10><?php esc($row->getHtml()); ?></textarea>
             </div>
@@ -127,14 +127,14 @@ if ($permissionChecker->hasPermission("banners")
                     echo "selected";
                 }
                 ?>>
-                    <?php translate("yes"); ?></option>
+                        <?php translate("yes"); ?></option>
                 <option value="0"
                 <?php
                 if (!$row->getEnabled()) {
                     echo "selected";
                 }
                 ?>>
-                    <?php translate("no"); ?></option>
+                        <?php translate("no"); ?></option>
             </select>
         </div>
         <div class="field">

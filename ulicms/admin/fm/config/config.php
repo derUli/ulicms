@@ -13,7 +13,7 @@ if (session_id() == '') {
     session_start();
 }
 
-$acl = new PermissionChecker();
+$acl = new PermissionChecker(get_user_id());
 $permissions = ["files"];
 
 $isPermitted = false;
