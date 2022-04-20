@@ -8,8 +8,9 @@ if (!defined('ULICMS_ROOT')) {
 use UliCMS\Models\Content\Categories;
 use UliCMS\HTML\Alert;
 use UliCMS\Localization\JSTranslation;
+use UliCMS\Security\PermissionChecker;
 
-$permissionChecker = new ACL();
+$permissionChecker = new PermissionChecker(get_user_id());
 if (!$permissionChecker->hasPermission("categories")) {
     noPerms();
 } else {
