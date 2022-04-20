@@ -9,6 +9,7 @@ use UliCMS\Utils\File;
 use UliCMS\Exceptions\DatasetNotFoundException;
 use UliCMS\Storages\Vars;
 use UliCMS\Models\Content\ContentFactory;
+use UliCMS\Security\PermissionChecker;
 
 function html5_doctype(): void {
     echo Template::getHtml5Doctype();
@@ -785,8 +786,8 @@ function get_menu(
 
             // Show page positions in menu if user has the "pages_show_positions" permission.
             if (is_logged_in()) {
-                $acl = new ACL();
-                if ($acl->hasPermission("pages_show_positions") and Settings::get("user/" . get_user_id() . "/show_positions")) {
+                $permissionChecker = new PermissionChecker(get_user_id());
+                if ($permissionChecker->hasPermission("pages_show_positions") and Settings::get("user/" . get_user_id() . "/show_positions")) {
                     $title .= " ({$row->position})";
                 }
             }
