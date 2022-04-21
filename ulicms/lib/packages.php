@@ -5,7 +5,7 @@ declare(strict_types=1);
 use UliCMS\Packages\Modules\Module;
 use UliCMS\Packages\PackageManager;
 use UliCMS\Storages\Vars;
-use UliCMS\Security\ContentPermissionChecker;
+use UliCMS\Security\PermissionChecker;
 
 function getAllThemes(): array {
     $pkg = new PackageManager();
@@ -17,7 +17,7 @@ function getAllThemes(): array {
 // Löscht anschließend den Ordner modules/$name
 // TODO: dies in die PackageManager Klasse verschieben
 function uninstall_module(string $name, string $type = "module"): bool {
-    $permissionChecker = new ContentPermissionChecker(get_user_id());
+    $permissionChecker = new PermissionChecker(get_user_id());
     if (!$permissionChecker->hasPermission("install_packages") && !isCLI()) {
         return false;
     }

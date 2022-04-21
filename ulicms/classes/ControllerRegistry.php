@@ -9,6 +9,7 @@ if (!defined('ULICMS_ROOT')) {
 use UliCMS\Exceptions\FileNotFoundException;
 use UliCMS\Registries\ActionRegistry;
 use UliCMS\Storages\Vars;
+use UliCMS\Security\PermissionChecker;
 
 class ControllerRegistry {
 
@@ -67,7 +68,7 @@ class ControllerRegistry {
 
     public static function runMethods(): void {
         if (isset($_REQUEST["sClass"])
-                and StringHelper::isNotNullOrEmpty($_REQUEST["sClass"])) {
+                && StringHelper::isNotNullOrEmpty($_REQUEST["sClass"])) {
             if (self::get($_REQUEST["sClass"])) {
                 $sClass = $_REQUEST["sClass"];
                 self::get($sClass)->runCommand();
@@ -83,7 +84,7 @@ class ControllerRegistry {
     //return an instance of a controller by it's name
     // if $class is null it returns the main class for the current backend action if defined
     public static function get(?string $class = null): ?Controller {
-        if ($class == null and get_action()) {
+        if ($class == null && get_action()) {
             return ActionRegistry::getController();
         } elseif (isset(self::$controllers[$class])) {
             return self::$controllers[$class];
@@ -94,22 +95,22 @@ class ControllerRegistry {
     // check if user is permitted to call controller method $sMethod in Class $sClass
     public static function userCanCall(string $sClass, string $sMethod): bool {
         $allowed = true;
-        $acl = new ACL();
+        $permissionChecker = new PermissionChecker(get_user_id());
         $methodIdentifier = $sClass . "::" . $sMethod;
 
         $wildcardMethodIdentifier = $sClass . "::*";
 
         if (
-                isset(self::$controller_function_permissions[$methodIdentifier]) and
+                isset(self::$controller_function_permissions[$methodIdentifier]) &&
                 !is_blank(self::$controller_function_permissions[$methodIdentifier])
         ) {
-            $allowed = $acl->hasPermission(
+            $allowed = $permissionChecker->hasPermission(
                     self::$controller_function_permissions[$methodIdentifier]
             );
         } elseif (
-                isset(self::$controller_function_permissions[$wildcardMethodIdentifier]) and
+                isset(self::$controller_function_permissions[$wildcardMethodIdentifier]) &&
                 !is_blank(self::$controller_function_permissions[$wildcardMethodIdentifier])) {
-            $allowed = $acl->hasPermission(
+            $allowed = $permissionChecker->hasPermission(
                     self::$controller_function_permissions[$wildcardMethodIdentifier]
             );
         }
