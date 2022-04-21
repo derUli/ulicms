@@ -5,8 +5,10 @@ if (!defined('ULICMS_ROOT')) {
 }
 
 use UliCMS\Models\Content\Categories;
+use UliCMS\Security\PermissionChecker;
 
-$permissionChecker = new ACL();
+$permissionChecker = new PermissionChecker(get_user_id());
+
 if (!$permissionChecker->hasPermission("forms") || !$permissionChecker->hasPermission("forms_create")) {
     noPerms();
 } else {

@@ -1,15 +1,16 @@
 <?php
-
 if (!defined('ULICMS_ROOT')) {
     exit('No direct script access allowed');
 }
 
 use UliCMS\Packages\Modules\ModuleManager;
 use UliCMS\Packages\PackageManager;
+use UliCMS\Security\PermissionChecker;
 
 // TODO: Refactor this, move business logic to controller
-$permissionChecker = new ACL();
+$permissionChecker = new PermissionChecker(get_user_id());
 $pkg = new PackageManager();
+
 if (!$permissionChecker->hasPermission("install_packages")) {
     noPerms();
 } else {
@@ -27,84 +28,84 @@ if (!$permissionChecker->hasPermission("install_packages")) {
         ?>
         <p>
             <strong><?php translation("error"); ?></strong> <br />
-            <?php translate("pkgsrc_not_defined"); ?></p>
-        <?php
-    } elseif (!class_exists("PharData")) {
-        ?>
+        <?php translate("pkgsrc_not_defined"); ?></p>
+            <?php
+        } elseif (!class_exists("PharData")) {
+            ?>
         <p>
             <strong><?php translate("error"); ?></strong> <br />
-            <?php translate("phardata_not_available"); ?></p>
-        <?php
-    } else {
-        $version = new UliCMSVersion();
-        $internalVersion = implode(".", $version->getInternalVersion());
-        $pkg_src = str_replace("{version}", $internalVersion, $pkg_src);
-
-        $packageArchiveFolder = $pkg_src . "archives/";
-        $packagesToInstall = explode(",", $_REQUEST ["packages"]);
-
-        $post_install_script = ULICMS_ROOT . "/post-install.php";
-        if (file_exists($post_install_script)) {
-            unlink($post_install_script);
-        }
-
-        if (count($packagesToInstall) === 0 or empty($_REQUEST ["packages"])) {
-            ?>
-            <p>
-                <strong><?php translate("error"); ?></strong> <br />
-                <?php translate("nothing_to_do"); ?>
-            </p>
+        <?php translate("phardata_not_available"); ?></p>
             <?php
         } else {
-            $packageCount = count($packagesToInstall);
-            for ($i = 0; $i < $packageCount; $i++) {
-                if (!empty($packagesToInstall [$i])) {
-                    $pkgURL = $packageArchiveFolder . basename($packagesToInstall [$i]) . ".tar.gz";
-                    $pkgContent = @file_get_contents_wrapper($pkgURL);
+            $version = new UliCMSVersion();
+            $internalVersion = implode(".", $version->getInternalVersion());
+            $pkg_src = str_replace("{version}", $internalVersion, $pkg_src);
 
-                    // Wenn Paket nicht runtergeladen werden konnte
-                    if (!$pkgContent or strlen($pkgContent) < 1) {
-                        echo "<p style='color:red;'>" . str_ireplace("%pkg%", $packagesToInstall [$i], get_translation("download_failed")) . "</p>";
-                    } else {
-                        $tmpdir = "../content/tmp/";
-                        if (!is_dir($tmpdir)) {
-                            mkdir($tmpdir, 0777);
-                        }
+            $packageArchiveFolder = $pkg_src . "archives/";
+            $packagesToInstall = explode(",", $_REQUEST ["packages"]);
 
-                        $tmpFile = $tmpdir . $packagesToInstall [$i] . ".tar.gz";
-
-                        // write downloaded tarball to file
-                        $handle = fopen($tmpFile, "wb");
-                        fwrite($handle, $pkgContent);
-                        fclose($handle);
-
-                        if (file_exists($tmpFile)) {
-                            // Paket installieren
-                            if ($pkg->installPackage($tmpFile, false)) {
-                                echo "<p style='color:green;'>" . str_ireplace("%pkg%", $packagesToInstall [$i], get_translation("INSTALLATION_SUCCESSFUL")) . "</p>";
-                            } else {
-                                echo "<p style='color:red;'>" . str_ireplace("%pkg%", $packagesToInstall [$i], get_translation("EXTRACTION_OF_PACKAGE_FAILED")) . "</p>";
-                            }
-                        }
-                        @unlink($tmpFile);
-                    }
-                }
+            $post_install_script = ULICMS_ROOT . "/post-install.php";
+            if (file_exists($post_install_script)) {
+                unlink($post_install_script);
             }
 
-            $manager = new ModuleManager();
-            $manager->sync();
+            if (count($packagesToInstall) === 0 or empty($_REQUEST ["packages"])) {
+                ?>
+            <p>
+                <strong><?php translate("error"); ?></strong> <br />
+            <?php translate("nothing_to_do"); ?>
+            </p>
+                <?php
+            } else {
+                $packageCount = count($packagesToInstall);
+                for ($i = 0; $i < $packageCount; $i++) {
+                    if (!empty($packagesToInstall [$i])) {
+                        $pkgURL = $packageArchiveFolder . basename($packagesToInstall [$i]) . ".tar.gz";
+                        $pkgContent = @file_get_contents_wrapper($pkgURL);
 
-            // Disabled because this caused issues
-            // with the stylesheet queue on this page
-            //clearCache ();
-            ?>
+                        // Wenn Paket nicht runtergeladen werden konnte
+                        if (!$pkgContent or strlen($pkgContent) < 1) {
+                            echo "<p style='color:red;'>" . str_ireplace("%pkg%", $packagesToInstall [$i], get_translation("download_failed")) . "</p>";
+                        } else {
+                            $tmpdir = "../content/tmp/";
+                            if (!is_dir($tmpdir)) {
+                                mkdir($tmpdir, 0777);
+                            }
+
+                            $tmpFile = $tmpdir . $packagesToInstall [$i] . ".tar.gz";
+
+                            // write downloaded tarball to file
+                            $handle = fopen($tmpFile, "wb");
+                            fwrite($handle, $pkgContent);
+                            fclose($handle);
+
+                            if (file_exists($tmpFile)) {
+                                // Paket installieren
+                                if ($pkg->installPackage($tmpFile, false)) {
+                                    echo "<p style='color:green;'>" . str_ireplace("%pkg%", $packagesToInstall [$i], get_translation("INSTALLATION_SUCCESSFUL")) . "</p>";
+                                } else {
+                                    echo "<p style='color:red;'>" . str_ireplace("%pkg%", $packagesToInstall [$i], get_translation("EXTRACTION_OF_PACKAGE_FAILED")) . "</p>";
+                                }
+                            }
+                            @unlink($tmpFile);
+                        }
+                    }
+                }
+
+                $manager = new ModuleManager();
+                $manager->sync();
+
+                // Disabled because this caused issues
+                // with the stylesheet queue on this page
+                //clearCache ();
+                ?>
             <p>
                 <a
                     href="<?php echo ModuleHelper::buildActionURL("available_modules"); ?>"
                     class="btn btn-default"><i class="fas fa-box"></i>
-                    <?php translate("install_another_package") ?></a>
+            <?php translate("install_another_package") ?></a>
             </p>
-            <?php
+                    <?php
+                }
+            }
         }
-    }
-}

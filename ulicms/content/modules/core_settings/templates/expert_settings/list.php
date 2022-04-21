@@ -1,12 +1,13 @@
 <?php
-
 if (!defined('ULICMS_ROOT')) {
     exit('No direct script access allowed');
 }
 
 use UliCMS\Localization\JSTranslation;
+use UliCMS\Security\PermissionChecker;
 
-$permissionChecker = new ACL();
+$permissionChecker = new PermissionChecker(get_user_id());
+
 if ($permissionChecker->hasPermission("expert_settings")) {
     $data = Settings::getAll();
     if ($permissionChecker->hasPermission("expert_settings_edit")) {

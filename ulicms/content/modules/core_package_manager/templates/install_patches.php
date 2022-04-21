@@ -1,13 +1,14 @@
 <?php
-
 if (!defined('ULICMS_ROOT')) {
     exit('No direct script access allowed');
 }
 
 use UliCMS\Exceptions\CorruptDownloadException;
 use UliCMS\Packages\Patch;
+use UliCMS\Security\PermissionChecker;
 
-$permissionChecker = new ACL();
+$permissionChecker = new PermissionChecker(get_user_id());
+
 if ($permissionChecker->hasPermission("update_system")) {
     // No time limit
     @set_time_limit(0);

@@ -1,16 +1,16 @@
 <?php
-
 if (!defined('ULICMS_ROOT')) {
     exit('No direct script access allowed');
 }
 
 use UliCMS\Utils\File;
 use UliCMS\Localization\JSTranslation;
+use UliCMS\Security\PermissionChecker;
+use UliCMS\Helpers\ImagineHelper;
 use function UliCMS\HTML\imageTag;
 
-use UliCMS\Helpers\ImageScaleHelper;
+$permissionChecker = new PermissionChecker(get_user_id());
 
-$permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("favicon")) {
     ?>
     <p>
@@ -21,10 +21,10 @@ if ($permissionChecker->hasPermission("favicon")) {
     if (isset($_GET["error"])) {
         ?>
         <div class="alert alert-danger">
-            <?php echo translate(_esc($_GET["error"])); ?>
+        <?php echo translate(_esc($_GET["error"])); ?>
         </div>
-    <?php }
-    ?>
+        <?php }
+        ?>
     <h1><?php translate("favicon"); ?></h1>
     <p><?php translate("favicon_infotext"); ?>
     </p>
@@ -32,45 +32,45 @@ if ($permissionChecker->hasPermission("favicon")) {
           method="post">
         <input type="hidden" name="sClass" value="FaviconController"> <input
             type="hidden" name="sMethod" value="doUpload">
-            <?php csrf_token_html(); ?>
+    <?php csrf_token_html(); ?>
         <table style="height: 250px">
             <tr>
                 <td>
                     <strong>
-                        <?php translate("current_favicon"); ?>
+    <?php translate("current_favicon"); ?>
                     </strong>
                 </td>
                 <td>
                     <div id="favicon-wrapper">
-                        <?php
-                        $favicon_path = ULICMS_ROOT . "/content/images/favicon.ico";
-                        $faviconUrl = "../content/images/favicon.ico";
-                        if (file_exists($favicon_path)) {
-                            $faviconUrl .= "?time=" . File::getLastChanged($favicon_path);
-                            echo imageTag(
-                                    $faviconUrl,
-                                    ["alt" => Settings::get("homepage_title")]
-                            );
-                            ?>
+    <?php
+    $favicon_path = ULICMS_ROOT . "/content/images/favicon.ico";
+    $faviconUrl = "../content/images/favicon.ico";
+    if (file_exists($favicon_path)) {
+        $faviconUrl .= "?time=" . File::getLastChanged($favicon_path);
+        echo imageTag(
+                $faviconUrl,
+                ["alt" => Settings::get("homepage_title")]
+        );
+        ?>
                             <div class="voffset2">
                                 <button
                                     type="button"
                                     class="btn btn-default"
                                     id="delete-favicon"
                                     data-url="<?php
-                                    echo ModuleHelper::buildMethodCallUrl(
-                                            FaviconController::class,
-                                            "deleteFavicon"
-                                    );
-                                    ?>
+                    echo ModuleHelper::buildMethodCallUrl(
+                            FaviconController::class,
+                            "deleteFavicon"
+                    );
+        ?>
                                     "
                                     >
                                     <i class="fa fa-trash" aria-hidden="true"></i>
-                                    <?php translate("delete_favicon"); ?>
+        <?php translate("delete_favicon"); ?>
                                 </button>
                             </div>
-                        <?php }
-                        ?>
+    <?php }
+    ?>
                     </div>
                     <img
                         id="delete-favicon-loading"
@@ -84,7 +84,7 @@ if ($permissionChecker->hasPermission("favicon")) {
                 <td>
                     <label for="high_resolution">
                         <strong>
-                            <?php translate("high_resolution"); ?>
+    <?php translate("high_resolution"); ?>
                         </strong>
                     </label>
                 </td>
@@ -113,7 +113,7 @@ if ($permissionChecker->hasPermission("favicon")) {
                 <td></td>
                 <td class="text-center">
                     <button type="submit"class="btn btn-primary">
-                        <?php translate("upload"); ?>
+    <?php translate("upload"); ?>
                     </button>
                 </td>
             </tr>

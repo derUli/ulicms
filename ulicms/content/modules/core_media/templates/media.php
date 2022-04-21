@@ -1,12 +1,14 @@
 <?php
-
 if (!defined('ULICMS_ROOT')) {
     exit('No direct script access allowed');
 }
 
-$permissionChecker = new ACL();
-if ($permissionChecker->hasPermission("videos") or
-        $permissionChecker->hasPermission("audio") or
+use UliCMS\Security\PermissionChecker;
+
+$permissionChecker = new PermissionChecker(get_user_id());
+
+if ($permissionChecker->hasPermission("videos") ||
+        $permissionChecker->hasPermission("audio") ||
         $permissionChecker->hasPermission("files")) {
     ?>
     <h2>

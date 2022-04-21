@@ -7,6 +7,7 @@ if (!defined('ULICMS_ROOT')) {
 }
 
 use UliCMS\Exceptions\CorruptDownloadException;
+use UliCMS\Security\PermissionChecker;
 
 class CoreUpgradeController extends Controller {
 
@@ -51,8 +52,9 @@ class CoreUpgradeController extends Controller {
     public function runUpgrade(bool $skipPermissions = false): ?bool {
         @set_time_limit(0);
         @ignore_user_abort(true);
-        $acl = new ACL();
-        if ((!$skipPermissions && (!$acl->hasPermission("update_system")) || !$this->checkForUpgrades() || get_request_method() != "post")) {
+
+        $permissionChecker = new PermissionChecker(get_user_id());
+        if ((!$skipPermissions && (!$permissionChecker->hasPermission("update_system")) || !$this->checkForUpgrades() || get_request_method() != "post")) {
             return false;
         }
 

@@ -1,12 +1,13 @@
 <?php
-
 if (!defined('ULICMS_ROOT')) {
     exit('No direct script access allowed');
 }
 
 use UliCMS\Models\Content\VCS;
+use UliCMS\Security\PermissionChecker;
 
-$permissionChecker = new ACL();
+$permissionChecker = new PermissionChecker(get_user_id());
+
 if ($permissionChecker->hasPermission("pages")) {
     $content_id = intval($_GET ["content_id"]);
     $revisions = VCS::getRevisionsByContentID($content_id);
@@ -38,11 +39,11 @@ if ($permissionChecker->hasPermission("pages")) {
                         <td><a href="<?php echo $view_diff_link; ?>" class="btn btn-info"
                                target="_blank"><i class="fas fa-eye"></i> <?php translate("view_diff"); ?></a></td>
                         <td><?php
-                            $user = getUserById($revision->user_id);
-                            if ($user and isset($user ["username"])) {
-                                esc($user ["username"]);
-                            }
-                            ?></td>
+            $user = getUserById($revision->user_id);
+            if ($user and isset($user ["username"])) {
+                esc($user ["username"]);
+            }
+                    ?></td>
                         <td><?php echo $revision->date; ?></td>
                         <td><a
                                 href="<?php echo ModuleHelper::buildMethodCallUrl("HistoryController", "doRestore", "version_id=" . $revision->id); ?>"

@@ -1,16 +1,16 @@
 <?php
-
 if (!defined('ULICMS_ROOT')) {
     exit('No direct script access allowed');
 }
 
 use UliCMS\Packages\PackageManager;
+use UliCMS\Security\PermissionChecker;
 
 // TODO: Refactor this
 // Move logic to controller
 // don't use so much nested if-statements
+$permissionChecker = new PermissionChecker(get_user_id());
 
-$permissionChecker = new ACL();
 if (!$permissionChecker->hasPermission("install_packages")) {
     noPerms();
 } else {
@@ -60,7 +60,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                 type="file"
                 name="file"
                 class="form-control"
-                required 
+                required
                 accept=".sin,.sin2,.tar.gz"
                 >
         </p>

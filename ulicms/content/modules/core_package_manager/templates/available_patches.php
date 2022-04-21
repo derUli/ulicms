@@ -1,15 +1,16 @@
 <?php
-
 if (!defined('ULICMS_ROOT')) {
     exit('No direct script access allowed');
 }
 
 use UliCMS\Packages\PatchManager;
+use UliCMS\Security\PermissionChecker;
+
+$permissionChecker = new PermissionChecker(get_user_id());
 
 $patchManager = new PatchManager();
 $availablePatches = $patchManager->getAvailablePatches();
 
-$permissionChecker = new ACL();
 // no patch check in google cloud
 
 if ($permissionChecker->hasPermission("update_system")) {

@@ -1,10 +1,12 @@
 <?php
-
 if (!defined('ULICMS_ROOT')) {
     exit('No direct script access allowed');
 }
 
-$permissionChecker = new ACL();
+use UliCMS\Security\PermissionChecker;
+
+$permissionChecker = new PermissionChecker(get_user_id());
+
 if ($permissionChecker->hasPermission("install_packages")) {
     ?>
     <div id="update-manager-dashboard-container" style="display: none">

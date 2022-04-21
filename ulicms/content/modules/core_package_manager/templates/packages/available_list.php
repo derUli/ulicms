@@ -1,5 +1,4 @@
 <?php
-
 if (!defined('ULICMS_ROOT')) {
     exit('No direct script access allowed');
 }
@@ -9,8 +8,10 @@ if (!defined('ULICMS_ROOT')) {
 // It should only do output
 // Implement a backend action which fetches the index of the package source
 use UliCMS\Services\Connectors\PackageSourceConnector;
+use UliCMS\Security\PermissionChecker;
 
-$permissionChecker = new ACL();
+$permissionChecker = new PermissionChecker(get_user_id());
+
 if ($permissionChecker->hasPermission("install_packages")) {
     if (!Settings::get("pkg_src")) {
         ?>
@@ -52,10 +53,10 @@ if ($permissionChecker->hasPermission("install_packages")) {
                                 <td><?php esc($package->name); ?></td>
                                 <td><?php esc($package->version); ?></td>
                                 <td><?php
-                                    echo StringHelper::isNotNullOrWhitespace($package->description) ?
-                                            nl2br($package->description) :
-                                            get_translation("no_description_available");
-                                    ?>
+                echo StringHelper::isNotNullOrWhitespace($package->description) ?
+                        nl2br($package->description) :
+                        get_translation("no_description_available");
+                            ?>
                                 </td>
                                 <td>
                                     <a href="#" class="btn btn-info btn-sm remote-alert"

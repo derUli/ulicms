@@ -1,10 +1,12 @@
 <?php
-
 if (!defined('ULICMS_ROOT')) {
     exit('No direct script access allowed');
 }
 
-$permissionChecker = new ACL();
+use UliCMS\Security\PermissionChecker;
+
+$permissionChecker = new PermissionChecker(get_user_id());
+
 if ($permissionChecker->hasPermission("install_packages")) {
     if (isset($_REQUEST["file"])) {
         $file = Template::getEscape($_REQUEST["file"]);

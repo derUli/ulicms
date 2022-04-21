@@ -1,10 +1,12 @@
 <?php
-
 if (!defined('ULICMS_ROOT')) {
     exit('No direct script access allowed');
 }
 
-$permissionChecker = new ACL();
+use UliCMS\Security\PermissionChecker;
+
+$permissionChecker = new PermissionChecker(get_user_id());
+
 if ($permissionChecker->hasPermission("update_system")) {
     $version = new UliCMSVersion();
     $currentVersion = $version->getInternalVersionAsString();
@@ -24,13 +26,13 @@ if ($permissionChecker->hasPermission("update_system")) {
     <?php } ?>
     <form action="?sClass=CoreUpgradeController&sMethod=runUpgrade"
           method="post">
-              <?php csrf_token_html(); ?>
+    <?php csrf_token_html(); ?>
         <div class="row">
             <div class="col-xs-6 text-left">
                 <strong><?php translate("installed_version"); ?></strong>
             </div>
             <div class="col-xs-6 text-right">
-                <?php Template::escape($currentVersion); ?>
+    <?php Template::escape($currentVersion); ?>
             </div>
 
         </div>
@@ -40,25 +42,25 @@ if ($permissionChecker->hasPermission("update_system")) {
             </div>
             <div class="col-xs-6 text-right"><?php Template::escape($newVersion); ?></div>
         </div>
-        <?php if ($release_notes) { ?>
+    <?php if ($release_notes) { ?>
             <h2><?php translate("release_notes") ?></h2>
             <p>
                 <textarea rows="25" cols="80" readonly><?php echo $release_notes; ?></textarea>
             </p>
-        <?php } ?>
+    <?php } ?>
         <?php if ($currentVersion != $newVersion) { ?>
             <div class="alert alert-danger">
-                <?php translate("upgrade_warning_notice"); ?>
+            <?php translate("upgrade_warning_notice"); ?>
             </div>
             <p>
                 <button type="submit" class="btn btn-danger">
                     <i class="fas fa-download"></i>
-                    <?php translate("do_core_upgrade"); ?>
+        <?php translate("do_core_upgrade"); ?>
                 </button>
             </p>
-        <?php } ?>
+    <?php } ?>
     </form>
-    <?php
-} else {
-    noPerms();
-}
+        <?php
+    } else {
+        noPerms();
+    }

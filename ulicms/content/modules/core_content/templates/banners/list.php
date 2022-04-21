@@ -8,8 +8,10 @@ use UliCMS\Localization\JSTranslation;
 use UliCMS\Models\Content\Advertisement\Banners;
 use UliCMS\Models\Content\Categories;
 use UliCMS\HTML\Alert;
+use UliCMS\Security\PermissionChecker;
 
-$permissionChecker = new ACL();
+$permissionChecker = new PermissionChecker(get_user_id());
+
 if ($permissionChecker->hasPermission("banners")) {
     if (!isset($_SESSION["filter_category"])) {
         $_SESSION["filter_category"] = 0;
