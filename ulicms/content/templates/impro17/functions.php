@@ -4,6 +4,8 @@ if (!defined('ULICMS_ROOT')) {
     exit('No direct script access allowed');
 }
 
+use UliCMS\Security\PermissionChecker;
+
 function jumbotron_get_menu($name = "top", $parent_id = null, $recursive = true, $order = "position") {
     $html = "";
     $name = db_escape($name);
@@ -54,10 +56,10 @@ function jumbotron_get_menu($name = "top", $parent_id = null, $recursive = true,
             $title = $row->title;
             // Show page positions in menu if user has the "pages_show_positions" permission.
             if (is_logged_in()) {
-                $acl = new ACL();
+                $permissionChecker = new PermissionChecker(get_user_id());
                 $settingsName = "user/" . get_user_id() . "/show_positions";
 
-                if ($acl->hasPermission("pages_show_positions") and Settings::get($settingsName)) {
+                if ($permissionChecker->hasPermission("pages_show_positions") and Settings::get($settingsName)) {
                     $title .= " ({$row->position})";
                 }
             }
