@@ -1,13 +1,13 @@
 <?php
-
 if (!defined('ULICMS_ROOT')) {
     exit('No direct script access allowed');
 }
 
 use UliCMS\Helpers\NumberFormatHelper;
 use UliCMS\Packages\SinPackageInstaller;
+use UliCMS\Security\PermissionChecker;
 
-$permissionChecker = new ACL();
+$permissionChecker = new PermissionChecker(get_user_id());
 if (!$permissionChecker->hasPermission("install_packages")) {
     noPerms();
 } else {
@@ -129,8 +129,8 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                     <tr>
                         <td><strong><?php translate("required_php_extensions") ?></strong></td>
                         <td><?php
-                            foreach ($required_php_extensions as $extension) {
-                                ?>
+                foreach ($required_php_extensions as $extension) {
+                        ?>
                                 <?php esc($extension); ?><br />
                             <?php }
                             ?></td>
@@ -162,8 +162,8 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                     <tr>
                         <td><strong><?php translate("dependencies") ?></strong></td>
                         <td><?php
-                            foreach ($dependencies as $dep) {
-                                ?>
+                foreach ($dependencies as $dep) {
+                        ?>
                                 <?php esc($dep); ?><br />
                             <?php }
                             ?></td>
