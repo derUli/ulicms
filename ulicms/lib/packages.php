@@ -5,7 +5,7 @@ declare(strict_types=1);
 use UliCMS\Packages\Modules\Module;
 use UliCMS\Packages\PackageManager;
 use UliCMS\Storages\Vars;
-use UliCMS\Security\PermissionChecker;
+use UliCMS\Security\Permissions\PermissionChecker;
 
 function getAllThemes(): array {
     $pkg = new PackageManager();

@@ -6,7 +6,7 @@ if (!defined('ULICMS_ROOT')) {
     exit('No direct script access allowed');
 }
 
-use UliCMS\Security\PermissionChecker;
+use UliCMS\Security\Permissions\PermissionChecker;
 use UliCMS\Constants\ModuleEventConstants;
 
 // old permission check class

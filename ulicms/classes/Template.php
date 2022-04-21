@@ -10,7 +10,7 @@ use UliCMS\Utils\File;
 use UliCMS\Exceptions\FileNotFoundException;
 use UliCMS\Exceptions\DatasetNotFoundException;
 use UliCMS\HTML\Script;
-use UliCMS\Security\PermissionChecker;
+use UliCMS\Security\Permissions\PermissionChecker;
 use MatthiasMullie\Minify;
 use UliCMS\Models\Content\Advertisement\Banners;
 use UliCMS\Storages\Flags;

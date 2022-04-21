@@ -8,7 +8,7 @@ if (!defined('ULICMS_ROOT')) {
 // It should only do output
 // Implement a backend action which fetches the index of the package source
 use UliCMS\Services\Connectors\PackageSourceConnector;
-use UliCMS\Security\PermissionChecker;
+use UliCMS\Security\Permissions\PermissionChecker;
 
 $permissionChecker = new PermissionChecker(get_user_id());
 

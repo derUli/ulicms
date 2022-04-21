@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace UliCMS\Security;
+namespace UliCMS\Security\Permissions;
 
 if (!defined('ULICMS_ROOT')) {
     exit('No direct script access allowed');

@@ -5,7 +5,7 @@ if (!defined('ULICMS_ROOT')) {
 
 use UliCMS\Packages\Modules\ModuleManager;
 use UliCMS\Packages\PackageManager;
-use UliCMS\Security\PermissionChecker;
+use UliCMS\Security\Permissions\PermissionChecker;
 
 // TODO: Refactor this, move business logic to controller
 $permissionChecker = new PermissionChecker(get_user_id());

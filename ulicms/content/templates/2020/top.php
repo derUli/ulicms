@@ -6,7 +6,7 @@ if (!defined('ULICMS_ROOT')) {
 
 use UliCMS\Models\Content\ContentFactory;
 
-$permissionChecker = new UliCMS\Security\ContentPermissionChecker(get_user_id());
+$permissionChecker = new UliCMS\Security\Permissions\ContentPermissionChecker(get_user_id());
 
 html5_doctype();
 og_html_prefix();

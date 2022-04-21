@@ -4,7 +4,7 @@ if (!defined('ULICMS_ROOT')) {
 }
 
 use UliCMS\Models\Content\VCS;
-use UliCMS\Security\PermissionChecker;
+use UliCMS\Security\Permissions\PermissionChecker;
 
 $permissionChecker = new PermissionChecker(get_user_id());
 

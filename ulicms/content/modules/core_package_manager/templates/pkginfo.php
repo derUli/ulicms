@@ -5,7 +5,7 @@ if (!defined('ULICMS_ROOT')) {
 
 use UliCMS\Helpers\NumberFormatHelper;
 use UliCMS\Packages\SinPackageInstaller;
-use UliCMS\Security\PermissionChecker;
+use UliCMS\Security\Permissions\PermissionChecker;
 
 $permissionChecker = new PermissionChecker(get_user_id());
 if (!$permissionChecker->hasPermission("install_packages")) {

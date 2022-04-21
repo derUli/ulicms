@@ -11,7 +11,7 @@ use UliCMS\CoreContent\PageTableRenderer;
 use UliCMS\Models\Content\VCS;
 use UliCMS\Models\Content\Types\DefaultContentTypes;
 use Rakit\Validation\Validator;
-use UliCMS\Security\PermissionChecker;
+use UliCMS\Security\Permissions\PermissionChecker;
 use UliCMS\Security\XSSProtection;
 use UliCMS\Models\Content\TypeMapper;
 use UliCMS\Constants\LinkTarget;

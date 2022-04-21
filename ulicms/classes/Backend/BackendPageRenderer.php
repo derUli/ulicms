@@ -16,7 +16,7 @@ use StringHelper;
 use UliCMS\Registries\ActionRegistry;
 use Settings;
 use zz\Html\HTMLMinify;
-use UliCMS\Security\PermissionChecker;
+use UliCMS\Security\Permissions\PermissionChecker;
 use UliCMS\HTML\Alert;
 
 // This class renders a backend page

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use UliCMS\Security\PermissionChecker;
+use UliCMS\Security\Permissions\PermissionChecker;
 use Negotiation\LanguageNegotiator;
 use UliCMS\Storages\Vars;
 

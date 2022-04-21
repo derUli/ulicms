@@ -4,7 +4,7 @@ if (!defined('ULICMS_ROOT')) {
 }
 
 use UliCMS\Packages\PackageManager;
-use UliCMS\Security\PermissionChecker;
+use UliCMS\Security\Permissions\PermissionChecker;
 
 // TODO: Refactor this
 // Move logic to controller

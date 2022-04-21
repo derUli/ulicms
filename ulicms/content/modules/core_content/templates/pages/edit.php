@@ -8,8 +8,8 @@ if (!defined('ULICMS_ROOT')) {
 // Join new and edit views to one form
 
 use UliCMS\Models\Content\TypeMapper;
-use UliCMS\Security\ContentPermissionChecker;
-use UliCMS\Security\PermissionChecker;
+use UliCMS\Security\Permissions\ContentPermissionChecker;
+use UliCMS\Security\Permissions\PermissionChecker;
 use UliCMS\Models\Content\Comment;
 use UliCMS\Models\Content\VCS;
 use UliCMS\Models\Content\Categories;

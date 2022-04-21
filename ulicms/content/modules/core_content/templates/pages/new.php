@@ -15,7 +15,7 @@ use UliCMS\Localization\JSTranslation;
 use UliCMS\HTML\Input;
 use UliCMS\Helpers\BackendHelper;
 use UliCMS\Models\Content\CustomData;
-use UliCMS\Security\PermissionChecker;
+use UliCMS\Security\Permissions\PermissionChecker;
 use function UliCMS\HTML\icon;
 
 $parent_id = Request::getVar("parent_id", null, "int");

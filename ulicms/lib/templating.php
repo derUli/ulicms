@@ -9,7 +9,7 @@ use UliCMS\Utils\File;
 use UliCMS\Exceptions\DatasetNotFoundException;
 use UliCMS\Storages\Vars;
 use UliCMS\Models\Content\ContentFactory;
-use UliCMS\Security\PermissionChecker;
+use UliCMS\Security\Permissions\PermissionChecker;
 
 function html5_doctype(): void {
     echo Template::getHtml5Doctype();

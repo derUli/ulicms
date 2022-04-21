@@ -7,7 +7,7 @@ if (!defined('ULICMS_ROOT')) {
 }
 
 use UliCMS\Exceptions\CorruptDownloadException;
-use UliCMS\Security\PermissionChecker;
+use UliCMS\Security\Permissions\PermissionChecker;
 
 class CoreUpgradeController extends Controller {
 

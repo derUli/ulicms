@@ -5,7 +5,7 @@ if (!defined('ULICMS_ROOT')) {
 
 use UliCMS\Constants\RequestMethod;
 use UliCMS\Models\Content\Categories;
-use UliCMS\Security\PermissionChecker;
+use UliCMS\Security\Permissions\PermissionChecker;
 
 $permissionChecker = new PermissionChecker(get_user_id());
 

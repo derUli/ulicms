@@ -20,7 +20,7 @@ if (!file_exists($select2TranslationFile)) {
     $select2Language = "en";
 }
 
-$permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
+$permissionChecker = new UliCMS\Security\Permissions\PermissionChecker(get_user_id());
 ?>
 <!DOCTYPE html>
 <html data-select2-language="<?php esc($select2Language) ?>">

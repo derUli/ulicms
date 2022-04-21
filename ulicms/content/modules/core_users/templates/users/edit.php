@@ -1,5 +1,4 @@
 <?php
-
 if (!defined('ULICMS_ROOT')) {
     exit('No direct script access allowed');
 }
@@ -11,7 +10,8 @@ use UliCMS\HTML\Input;
 use UliCMS\Models\Users\User;
 
 $permissionChecker = new ACL();
-if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermission("users_edit")) or ($_GET["id"] == $_SESSION["login_id"])) {
+
+if (($permissionChecker->hasPermission("users") && $permissionChecker->hasPermission("users_edit")) || ($_GET["id"] == $_SESSION["login_id"])) {
     $id = intval($_GET["id"]);
     $languages = getAvailableBackendLanguages();
     $result = db_query("SELECT * FROM " . tbname("users") . " WHERE id='$id'");

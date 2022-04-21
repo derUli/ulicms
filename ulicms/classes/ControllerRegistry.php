@@ -9,7 +9,7 @@ if (!defined('ULICMS_ROOT')) {
 use UliCMS\Exceptions\FileNotFoundException;
 use UliCMS\Registries\ActionRegistry;
 use UliCMS\Storages\Vars;
-use UliCMS\Security\PermissionChecker;
+use UliCMS\Security\Permissions\PermissionChecker;
 
 class ControllerRegistry {
 

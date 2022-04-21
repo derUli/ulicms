@@ -4,7 +4,7 @@ if (!defined('ULICMS_ROOT')) {
 }
 
 use UliCMS\Storages\Vars;
-use UliCMS\Security\PermissionChecker;
+use UliCMS\Security\Permissions\PermissionChecker;
 
 $module = basename($_GET ["module"]);
 

@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Security\ContentPermissionChecker;
+use UliCMS\Security\Permissions\ContentPermissionChecker;
 use UliCMS\Models\Users\Group;
 use UliCMS\Models\Users\User;
 use UliCMS\Models\Content\ContentFactory;

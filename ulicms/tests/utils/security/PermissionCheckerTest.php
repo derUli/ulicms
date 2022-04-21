@@ -1,7 +1,7 @@
 <?php
 
 use UliCMS\Models\Content\Language;
-use UliCMS\Security\PermissionChecker;
+use UliCMS\Security\Permissions\PermissionChecker;
 use UliCMS\Models\Users\Group;
 use UliCMS\Models\Users\User;
 

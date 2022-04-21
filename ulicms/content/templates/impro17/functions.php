@@ -4,7 +4,7 @@ if (!defined('ULICMS_ROOT')) {
     exit('No direct script access allowed');
 }
 
-use UliCMS\Security\PermissionChecker;
+use UliCMS\Security\Permissions\PermissionChecker;
 
 function jumbotron_get_menu($name = "top", $parent_id = null, $recursive = true, $order = "position") {
     $html = "";

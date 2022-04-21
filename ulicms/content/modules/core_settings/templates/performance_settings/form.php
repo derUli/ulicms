@@ -6,7 +6,7 @@ if (!defined('ULICMS_ROOT')) {
 
 $canIuseLazyLoadingUrl = "https://caniuse.com/#feat=loading-lazy-attr";
 
-use UliCMS\Security\PermissionChecker;
+use UliCMS\Security\Permissions\PermissionChecker;
 use UliCMS\Constants\RequestMethod;
 use UliCMS\HTML\Input;
 use UliCMS\HTML\ListItem;

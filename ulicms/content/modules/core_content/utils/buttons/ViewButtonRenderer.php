@@ -11,7 +11,7 @@ if (!defined('ULICMS_ROOT')) {
 use Template;
 use ViewBag;
 use UliCMS\Models\Users\User;
-use UliCMS\Security\ContentPermissionChecker;
+use UliCMS\Security\Permissions\ContentPermissionChecker;
 use UliCMS\Models\Content\ContentFactory;
 use function UliCMS\HTML\icon;
 use function UliCMS\HTML\link;

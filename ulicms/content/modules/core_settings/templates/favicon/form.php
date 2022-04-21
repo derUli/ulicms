@@ -5,7 +5,7 @@ if (!defined('ULICMS_ROOT')) {
 
 use UliCMS\Utils\File;
 use UliCMS\Localization\JSTranslation;
-use UliCMS\Security\PermissionChecker;
+use UliCMS\Security\Permissions\PermissionChecker;
 use UliCMS\Helpers\ImagineHelper;
 use function UliCMS\HTML\imageTag;
 

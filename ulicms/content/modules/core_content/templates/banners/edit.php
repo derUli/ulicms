@@ -8,7 +8,7 @@ use UliCMS\Models\Content\Advertisement\Banner;
 use UliCMS\HTML\Alert;
 use UliCMS\Models\Content\Categories;
 use UliCMS\Exceptions\DatasetNotFoundException;
-use UliCMS\Security\PermissionChecker;
+use UliCMS\Security\Permissions\PermissionChecker;
 
 $permissionChecker = new PermissionChecker(get_user_id());
 if ($permissionChecker->hasPermission("banners")

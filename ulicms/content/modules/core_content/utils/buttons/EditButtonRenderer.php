@@ -12,7 +12,7 @@ use Template;
 use UliCMS\Models\Users\User;
 use ViewBag;
 use ModuleHelper;
-use UliCMS\Security\ContentPermissionChecker;
+use UliCMS\Security\Permissions\ContentPermissionChecker;
 use function UliCMS\HTML\icon;
 use function UliCMS\HTML\link;
 

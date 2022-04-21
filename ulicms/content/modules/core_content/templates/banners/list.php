@@ -8,7 +8,7 @@ use UliCMS\Localization\JSTranslation;
 use UliCMS\Models\Content\Advertisement\Banners;
 use UliCMS\Models\Content\Categories;
 use UliCMS\HTML\Alert;
-use UliCMS\Security\PermissionChecker;
+use UliCMS\Security\Permissions\PermissionChecker;
 
 $permissionChecker = new PermissionChecker(get_user_id());
 

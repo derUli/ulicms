@@ -11,7 +11,7 @@ if (!defined('ULICMS_ROOT')) {
 use Model;
 use Database;
 use LasseRafn\InitialAvatarGenerator\InitialAvatar;
-use UliCMS\Security\PermissionChecker;
+use UliCMS\Security\Permissions\PermissionChecker;
 use UliCMS\Security\Encryption;
 use UliCMS\Models\Users\GroupCollection;
 use UliCMS\Utils\Users\PasswordReset;
