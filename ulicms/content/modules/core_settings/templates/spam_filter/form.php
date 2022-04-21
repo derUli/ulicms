@@ -1,10 +1,12 @@
-<?php 
-
+<?php
 if (!defined('ULICMS_ROOT')) {
     exit('No direct script access allowed');
 }
 
 use UliCMS\Localization\JSTranslation;
+use UliCMS\Security\Permissions\PermissionChecker;
+
+$permissionChecker = new PermissionChecker();
 ?>
 <p>
     <a
@@ -13,30 +15,29 @@ use UliCMS\Localization\JSTranslation;
 </p>
 <h1><?php translate("spamfilter"); ?></h1>
 <?php
-$permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("spam_filter")) {
     ?>
     <form id="spamfilter_settings" name="?action=spam_filter" method="post">
-        <?php echo ModuleHelper::buildMethodCallForm("SpamFilterController", "save"); ?>
+    <?php echo ModuleHelper::buildMethodCallForm("SpamFilterController", "save"); ?>
         <div class="checkbox">
             <label for="spamfilter_enabled"> <input type="checkbox"
                                                     id="spamfilter_enabled" name="spamfilter_enabled"
                                                     class="js-switch"
-                                                    <?php
-                                                    if (Settings::get("spamfilter_enabled") == "yes") {
-                                                        echo " checked";
-                                                    }
-                                                    ?>
+    <?php
+    if (Settings::get("spamfilter_enabled") == "yes") {
+        echo " checked";
+    }
+    ?>
                                                     value="yes">
                                                     <?php translate("spamfilter_enabled"); ?>
             </label>
         </div>
         <div id="country_filter_settings"
-        <?php
-        if (Settings::get("spamfilter_enabled") != "yes") {
-            echo " style='display:none;'";
-        }
-        ?>>
+    <?php
+    if (Settings::get("spamfilter_enabled") != "yes") {
+        echo " style='display:none;'";
+    }
+    ?>>
             <p>
                 <label for="spamfilter_words_blacklist"><?php translate("blacklist"); ?></label><br />
                 <textarea name="spamfilter_words_blacklist"
@@ -50,11 +51,11 @@ if ($permissionChecker->hasPermission("spam_filter")) {
                 <label for="disallow_chinese_chars"> <input type="checkbox"
                                                             name="disallow_chinese_chars" id="disallow_chinese_chars"
                                                             class="js-switch"
-                                                            <?php
-                                                            if (Settings::get("disallow_chinese_chars")) {
-                                                                echo " checked=\"checked\"";
-                                                            }
-                                                            ?>> <?php translate("disallow_chinese_chars"); ?>
+    <?php
+    if (Settings::get("disallow_chinese_chars")) {
+        echo " checked=\"checked\"";
+    }
+    ?>> <?php translate("disallow_chinese_chars"); ?>
                 </label>
             </div>
             <div class="checkbox">
@@ -62,39 +63,39 @@ if ($permissionChecker->hasPermission("spam_filter")) {
                                                              class="js-switch"
 
                                                              name="disallow_cyrillic_chars" id="disallow_cyrillic_chars"
-                                                             <?php
-                                                             if (Settings::get("disallow_cyrillic_chars")) {
-                                                                 echo " checked=\"checked\"";
-                                                             }
-                                                             ?>> <?php translate("disallow_cyrillic_chars"); ?>
+    <?php
+    if (Settings::get("disallow_cyrillic_chars")) {
+        echo " checked=\"checked\"";
+    }
+    ?>> <?php translate("disallow_cyrillic_chars"); ?>
                 </label>
             </div>
             <div class="checkbox">
                 <label for="disallow_rtl_chars"> <input type="checkbox"
                                                         class="js-switch"
                                                         name="disallow_rtl_chars" id="disallow_rtl_chars"
-                                                        <?php
-                                                        if (Settings::get("disallow_rtl_chars")) {
-                                                            echo " checked=\"checked\"";
-                                                        }
-                                                        ?>> <?php translate("disallow_rtl_chars"); ?>
+    <?php
+    if (Settings::get("disallow_rtl_chars")) {
+        echo " checked=\"checked\"";
+    }
+    ?>> <?php translate("disallow_rtl_chars"); ?>
                 </label>
             </div>
             <div class="checkbox">
                 <label><input name="reject_requests_from_bots" type="checkbox"
                               value=""
                               class="js-switch"
-                              <?php echo Settings::get("reject_requests_from_bots") ? "checked" : ""; ?>> <?php translate("reject_requests_from_bots"); ?></label>
+    <?php echo Settings::get("reject_requests_from_bots") ? "checked" : ""; ?>> <?php translate("reject_requests_from_bots"); ?></label>
             </div>
             <div class="checkbox">
                 <label for="check_mx_of_mail_address"> <input type="checkbox"
                                                               class="js-switch"
                                                               name="check_mx_of_mail_address" id="check_mx_of_mail_address"
-                                                              <?php
-                                                              if (Settings::get("check_mx_of_mail_address")) {
-                                                                  echo " checked=\"checked\"";
-                                                              }
-                                                              ?>> <?php translate("check_mx_of_mail_address"); ?>
+    <?php
+    if (Settings::get("check_mx_of_mail_address")) {
+        echo " checked=\"checked\"";
+    }
+    ?>> <?php translate("check_mx_of_mail_address"); ?>
                 </label>
             </div>
             <p>
