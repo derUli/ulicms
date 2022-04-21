@@ -10,6 +10,9 @@ define("ONE_DAY_IN_SECONDS", 60 * 60 * 24);
 // root directory of UliCMS
 define("ULICMS_ROOT", dirname(__FILE__));
 
+// Update Script
+define("ULICMS_UPDATE_FILE", ULICMS_ROOT . "/update.php");
+
 // Class dir for autoload
 define('ULICMS_CLASSDIR', ULICMS_ROOT . '/classes');
 

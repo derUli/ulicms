@@ -59,7 +59,7 @@ use UliCMS\Backend\Menu\MenuEntry;
             "packages",
             "list_packages"
     );
-    if (file_exists(Path::resolve("ULICMS_ROOT/update.php"))) {
+    if (file_exists(Path::resolve(ULICMS_UPDATE_FILE))) {
         $entries[] = new MenuEntry(
                 '<i class="fas fa-sync"></i> '
                 . get_translation("update"),

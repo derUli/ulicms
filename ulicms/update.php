@@ -73,6 +73,6 @@ CacheUtil::clearCache();
 
 // The line below will be uncommented by the mk-upgrade-package.py deploy script
 // The script will delete itself after execution.
-// @unlink ("update.php");
+// @unlink (__FILE__);
 // Redirect to Admin backend after running the update script
 Response::redirect("admin/");
