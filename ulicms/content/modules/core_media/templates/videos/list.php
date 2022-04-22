@@ -1,13 +1,13 @@
 <?php
-
 if (!defined('ULICMS_ROOT')) {
     exit('No direct script access allowed');
 }
 
 use UliCMS\Models\Content\Categories;
 use UliCMS\Localization\JSTranslation;
+use UliCMS\Security\Permissions\PermissionChecker;
 
-$permissionChecker = new ACL();
+$permissionChecker = new PermissionChecker(get_user_id());
 
 $video_folder = ULICMS_ROOT . "/content/videos";
 if (!is_dir($video_folder)) {
@@ -45,8 +45,8 @@ if ($permissionChecker->hasPermission("videos")) {
         <div class="voffset2">
             <a href="index.php?action=add_video" class="btn btn-default"> <i
                     class="fas fa-upload"></i> <?php
-                    translate("upload_video");
-                    ?></a>
+        translate("upload_video");
+        ?></a>
         </div>
     <?php } ?>
     <div class="voffset2">
@@ -87,24 +87,24 @@ if ($permissionChecker->hasPermission("videos")) {
                         <?php if ($permissionChecker->hasPermission("videos_edit")) { ?>
                             <td><a
                                     href="index.php?action=edit_video&id=<?php
-                                    echo $row->id;
-                                    ?>"><img src="gfx/edit.png" class="mobile-big-image"
+                            echo $row->id;
+                            ?>"><img src="gfx/edit.png" class="mobile-big-image"
                                        alt="<?php
-                                       translate("edit");
-                                       ?>"
+                        translate("edit");
+                            ?>"
                                        title="<?php
-                                       translate("edit");
-                                       ?>"> </a></td>
+                           translate("edit");
+                            ?>"> </a></td>
                             <td><form
                                     action="?sClass=VideoController&sMethod=delete&delete=<?php echo $row->id; ?>"
                                     method="post" class="delete-form"><?php csrf_token_html(); ?><input
                                         type="image" src="gfx/delete.png" class="mobile-big-image"
                                         alt="<?php
-                                        translate("delete");
-                                        ?>"
+                           translate("delete");
+                            ?>"
                                         title="<?php
-                                        translate("delete");
-                                        ?>">
+                            translate("delete");
+                            ?>">
                                 </form>
                             </td>
                         <?php } ?>
