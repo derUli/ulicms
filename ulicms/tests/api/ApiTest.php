@@ -136,7 +136,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
 
         $meta = getModuleMeta("core_content");
         $this->assertIsArray($meta);
-        $this->assertEquals("2022.2", $meta["version"]);
+        $this->assertEquals("2023.1", $meta["version"]);
         $this->assertEquals(false, $meta["embed"]);
     }
 

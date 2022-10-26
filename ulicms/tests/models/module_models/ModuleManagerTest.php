@@ -140,7 +140,7 @@ class ModuleManagerTest extends \PHPUnit\Framework\TestCase {
         $moduleManager->sync();
 
         $module = new Module("core_content");
-        $this->assertEquals("2022.2", $module->getVersion());
+        $this->assertEquals("2023.1", $module->getVersion());
     }
 
     public function testInitModulesDefaultSettings() {

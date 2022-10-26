@@ -1,4 +1,4 @@
-===== Neues in UliCMS 2022.2 =====
+===== Neues in UliCMS 2023.1 =====
 
 Neue Features:
 * Kompatiblität mit PHP 8.1

@@ -3,6 +3,8 @@
 session_start();
 error_reporting(E_ALL ^ E_NOTICE);
 
+define('ULICMS_ROOT', realpath(dirname(__FILE__ . '/..')));
+
 date_default_timezone_set("Europe/Berlin");
 
 include_once "../vendor/autoload.php";
@@ -18,6 +20,7 @@ if (isset($_GET["language"])) {
         $_SESSION["language"] = $_GET["language"];
     }
 }
+
 $lang = InstallerController::getLanguage();
 
 InstallerController::loadLanguageFile($lang);
