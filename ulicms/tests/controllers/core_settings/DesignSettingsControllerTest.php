@@ -112,27 +112,11 @@ class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase
             "Arial, 'Helvetica Neue', Helvetica, sans-serif",
             $fonts["Arial"]
         );
-        $this->assertGreaterThanOrEqual(21, count($fonts));
+        $this->assertGreaterThanOrEqual(20, count($fonts));
         foreach ($fonts as $name => $family) {
             $this->assertNotEmpty($name);
             $this->assertNotEmpty($family);
         }
-    }
-
-    public function testGetGoogleFonts()
-    {
-        $controller = new DesignSettingsController();
-        $fonts = $controller->getGoogleFonts();
-        $this->assertCount(732, $fonts);
-        foreach ($fonts as $font) {
-            $this->assertIsString($font);
-            $this->assertNotEmpty($font);
-            $this->assertGreaterThanOrEqual(3, strlen($font));
-        }
-
-        $this->assertContains("Roboto", $fonts);
-        $this->assertContains("Open Sans", $fonts);
-        $this->assertContains("Lato", $fonts);
     }
 
     public function testGetThemePreviewReturnsPath()

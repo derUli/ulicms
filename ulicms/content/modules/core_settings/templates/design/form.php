@@ -19,12 +19,10 @@ if (!$permissionChecker->hasPermission("design")) {
     $mobile_theme = Settings::get("mobile_theme");
     $allThemes = getAllThemes();
     $fonts = $controller->getFontFamilys();
-    $google_fonts = $controller->getGoogleFonts();
     $theme = Settings::get("theme");
     $additional_menus = Settings::get("additional_menus");
     $mobile_theme = Settings::get("mobile_theme");
     $default_font = Settings::get("default_font");
-    $google_font = Settings::get("google-font");
     $title_format = Settings::get("title_format");
     $font_size = Settings::get("font-size");
     $ckeditor_skin = Settings::get("ckeditor_skin");
@@ -174,29 +172,14 @@ if (!$permissionChecker->hasPermission("design")) {
         if (!faster_in_array($default_font, $fonts) and $i === $font_amount) {
             $selected = "selected";
         }
-        if ($value != 'google') {
-            echo '<optgroup style="font-family:' . $value . '; font-size:1.2em;">';
-        } else {
-            echo '<optgroup>';
-        }
+     
+        echo '<optgroup>';
+        
         echo "<option value=\"$value\" $selected>$key</option>";
         echo '</optgroup>';
 
         $i++;
     } ?></select>
-                    <div id="google-fonts" style="display: none">
-                        <select name="google-font" size="1">
-                            <?php
-                            foreach ($google_fonts as $myfont) {
-                                if ($myfont == $google_font) {
-                                    echo '<option value="' . _esc($myfont) . '" selected>' . _esc($myfont) . "</option>";
-                                } else {
-                                    echo '<option value="' . _esc($myfont) . '">' . _esc($myfont) . "</option>";
-                                }
-                            } ?>
-                        </select>
-                        <div class="voffset3 alert alert-warning"><?php translate("google_fonts_privacy_warning"); ?></div>
-                    </div>
                 </td>
             </tr>
             <tr>
@@ -215,8 +198,7 @@ if (!$permissionChecker->hasPermission("design")) {
                         } ?>
                     </select></td>
             </tr>
-            <tr id="font-preview"
-                data-google-font-url="//fonts.googleapis.com/css?family=">
+            <tr id="font-preview">
                 <td></td>
                 <td>Franz jagt im komplett verwahrlosten Taxi quer durch Bayern</td>
             </tr>

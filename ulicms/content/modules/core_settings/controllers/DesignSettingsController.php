@@ -80,11 +80,6 @@ class DesignSettingsController extends Controller
             Settings::set("default_font", $font);
         }
 
-        if (!empty($_REQUEST["google-font"])) {
-            $font = $_REQUEST["google-font"];
-            $font = $font;
-            Settings::set("google-font", $font);
-        }
 
         Settings::set("font-size", $_REQUEST["font-size"]);
         Settings::set("ckeditor_skin", $_REQUEST["ckeditor_skin"]);
@@ -146,7 +141,6 @@ class DesignSettingsController extends Controller
         $fonts["Zapf Chancery"] = "'Zapf Chancery', cursive";
         $fonts["Calibri"] = "Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif";
         $fonts["Segoe"] = "'wf_SegoeUI', 'Segoe UI', 'Segoe','Segoe WP', 'Tahoma', 'Verdana', 'Arial', 'sans-serif'";
-        $fonts["Google Fonts"] = "google";
 
         $fonts = apply_filter($fonts, "fonts_filter");
 
@@ -157,21 +151,6 @@ class DesignSettingsController extends Controller
         // Weitere Fonts Ende
         uksort($fonts, "strnatcasecmp");
 
-        return $fonts;
-    }
-
-    public function getGoogleFonts(): array
-    {
-        $fonts = [];
-        $file = ModuleHelper::buildModuleRessourcePath(
-            $this->moduleName,
-            "data/webFontNames.opml"
-        );
-        $content = file_get_contents($file);
-        $xml = new SimpleXMLElement($content);
-        foreach ($xml->body->outline as $outline) {
-            $fonts[] = strval($outline["text"]);
-        }
         return $fonts;
     }
 
@@ -212,8 +191,7 @@ class DesignSettingsController extends Controller
             "header-background-color" => Settings::get("header-background-color"),
             "body-text-color" => Settings::get("body-text-color"),
             "body-background-color" => Settings::get("body-background-color"),
-            "default-font" => Settings::get("default_font") !== "google" ?
-            Settings::get("default_font") : Settings::get("google-font"),
+            "default-font" => Settings::get("default_font"),
             "font-size" => Settings::get("font-size")
         ];
 

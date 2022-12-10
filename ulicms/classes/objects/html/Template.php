@@ -435,15 +435,7 @@ class Template
 
         if (!Settings::get("disable_custom_layout_options")) {
             $font = Settings::get("default_font");
-            if ($font == "google") {
-                $google_font = Settings::get("google-font");
-                if ($google_font) {
-                    echo '<link rel="stylesheet" type="text/css" '
-                    . 'href="//fonts.googleapis.com/css?family=' .
-                    urlencode($google_font) . '&display=swap"/>';
-                    $font = "'$google_font'";
-                }
-            }
+   
             $cssCode = "body{
 font-family: " . $font . ";
 font-size: " . Settings::get("font-size") . ";
