@@ -129,11 +129,9 @@ function exception_handler($exception)
         ViewBag::set("exception", nl2br(_esc($exception)));
         HTMLResult(Template::executeDefaultOrOwnTemplate("exception.php"), $httpStatus);
     }
-    if (function_exists("HTMLResult") && !headers_sent()) {
-        HTMLResult($message, $httpStatus);
-    } else {
-        echo "{$message}\n";
-    }
+
+    echo "{$message}\n";
+    
 }
 
 // if config exists require_config else redirect to installer
