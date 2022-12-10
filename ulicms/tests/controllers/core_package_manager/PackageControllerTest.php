@@ -69,7 +69,7 @@ class PackageControllerTest extends \PHPUnit\Framework\TestCase
         $controller = new PackageController();
         $output = $controller->_availablePackages();
 
-        $this->assertGreaterThanOrEqual(100, substr_count($output, "<tr>"));
+        $this->assertGreaterThanOrEqual(99, substr_count($output, "<tr>"));
         $this->assertGreaterThanOrEqual(15, substr_count($output, "theme-"));
 
 

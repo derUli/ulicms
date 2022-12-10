@@ -9,7 +9,7 @@ class RoboVersionTest extends RoboBaseTest
     {
         $output = $this->runRoboCommand(["version"]);
 
-        $this->assertStringStartsWith("2022", $output);
+        $this->assertStringStartsWith("2023", $output);
         $this->assertStringContainsString(".", $output);
     }
 }
