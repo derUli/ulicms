@@ -177,8 +177,8 @@ function is_mobile(): bool
 {
     $result = false;
 
-    if (class_exists("Mobile_Detect")) {
-        $detect = new Mobile_Detect();
+    if (class_exists('\Detection\MobileDetect')) {
+        $detect = new \Detection\MobileDetect();
         $result = $detect->isMobile();
     }
 
@@ -208,8 +208,8 @@ function is_tablet(): bool
 {
     $result = false;
 
-    if (class_exists("Mobile_Detect")) {
-        $detect = new Mobile_Detect();
+    if (class_exists('\Detection\MobileDetect')) {
+        $detect = new \Detection\MobileDetect();
         $result = $detect->isTablet();
     }
     return $result;

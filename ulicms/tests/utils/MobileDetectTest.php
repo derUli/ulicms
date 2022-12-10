@@ -22,7 +22,7 @@ class MobileDetectTest extends \PHPUnit\Framework\TestCase
 
     public function testIsInstalled()
     {
-        $this->assertTrue(class_exists("Mobile_Detect"));
+        $this->assertTrue(class_exists('\Detection\MobileDetect'));
     }
 
     public function testIsDesktop()

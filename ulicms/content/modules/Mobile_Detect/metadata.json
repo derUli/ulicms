@@ -1,5 +1,5 @@
 {
-	"source" : "extend",
-	"version" : "2.8.37",
-	"embed" : false
+    "source": "extend",
+    "version": "3.74.0",
+    "embed": false
 }
