@@ -144,7 +144,7 @@ class SimpleSettingsControllerTest extends \PHPUnit\Framework\TestCase
     {
         $controller = new SimpleSettingsController();
         $timezones = $controller->getTimezones();
-        $this->assertGreaterThanOrEqual(425, count($timezones));
+        $this->assertGreaterThanOrEqual(423, count($timezones));
         $this->assertContains("Europe/Berlin", $timezones);
         $this->assertContains("Asia/Tokyo", $timezones);
         $this->assertContains("Australia/Sydney", $timezones);
