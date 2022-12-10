@@ -24,7 +24,7 @@ class RoboPackageTest extends RoboBaseTest
 
         $this->assertEquals(13, substr_count($output, "core_"));
 
-        $this->assertStringContainsString("2020 1.0.3", $output);
+        $this->assertStringContainsString("2020 1.0.4", $output);
         $this->assertStringContainsString("impro17 2.1.4", $output);
     }
 
