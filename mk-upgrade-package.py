@@ -104,14 +104,14 @@ def main():
     main_dir = os.path.join(target, "ulicms")
 
     # Install all non-dev composer packages
-    os.system("php ulicms/composer install --working-dir=" + main_dir + "/ --no-dev")
+    os.system("composer install --working-dir=" + main_dir + "/ --no-dev")
 
     old_cwd = os.getcwd()
 
     # Install npm packages
     # TODO: is there are a way to specify a working dir like used for composer (code above)?
     os.chdir("ulicms")
-    os.system("npm install --production")
+    os.system("npm install --omit=dev")
 
     os.system("php-legal-licenses generate --hide-version")
     os.system("license-report --only=prod --output=json > licenses.json")

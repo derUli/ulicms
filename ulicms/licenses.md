@@ -513,7 +513,7 @@ Homepage: Not configured.
 Licenses Used: MIT
 The MIT License (MIT)
 
-Copyright (c) 2014-2020 Codegyre Developers Team, Consolidation Team
+Copyright (c) 2014-2021 Codegyre Developers Team, Consolidation Team
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
@@ -556,6 +556,7 @@ symfony/polyfill-php73              v1.18.1  MIT
 symfony/polyfill-php80              v1.18.1  MIT
 symfony/process                     v4.4.14  MIT
 symfony/service-contracts           v1.1.9   MIT
+
 
 ### consolidation/self-update 
 Provides a self:update command for Symfony Console applications.
@@ -705,7 +706,14 @@ SOFTWARE.
 PSR-7 message implementation that also provides common utility methods
 Homepage: Not configured.
 Licenses Used: MIT
-Copyright (c) 2015 Michael Dowling, https://github.com/mtdowling <mtdowling@gmail.com>
+The MIT License (MIT)
+
+Copyright (c) 2015 Michael Dowling <mtdowling@gmail.com>
+Copyright (c) 2015 Márk Sági-Kazár <mark.sagikazar@gmail.com>
+Copyright (c) 2015 Graham Campbell <hello@gjcampbell.co.uk>
+Copyright (c) 2016 Tobias Schultze <webmaster@tubo-world.de>
+Copyright (c) 2016 George Mponos <gmponos@gmail.com>
+Copyright (c) 2018 Tobias Nyholm <tobias.nyholm@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -903,7 +911,7 @@ Homepage: https://github.com/thephpleague/container
 Licenses Used: MIT
 # The MIT License (MIT)
 
-Copyright (c) 2017 Phil Bennett <philipobenito@gmail.com>
+Copyright (c) 2021 Phil Bennett <philipobenito@gmail.com>
 
 > Permission is hereby granted, free of charge, to any person obtaining a copy
 > of this software and associated documentation files (the "Software"), to deal
@@ -926,7 +934,7 @@ Copyright (c) 2017 Phil Bennett <philipobenito@gmail.com>
 
 ### matthiasmullie/minify 
 CSS & JavaScript minifier, in PHP. Removes whitespace, strips comments, combines files (incl. @import statements and small assets in CSS files), and optimizes/shortens a few common programming patterns.
-Homepage: http://www.minifier.org
+Homepage: https://github.com/matthiasmullie/minify
 Licenses Used: MIT
 Copyright (c) 2012 Matthias Mullie
 
@@ -1004,7 +1012,7 @@ PHP Markdown
 Homepage: https://michelf.ca/projects/php-markdown/
 Licenses Used: BSD-3-Clause
 PHP Markdown Lib  
-Copyright (c) 2004-2019 Michel Fortin
+Copyright (c) 2004-2022 Michel Fortin
 <https://michelf.ca/>  
 All rights reserved.
 
@@ -1091,6 +1099,62 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+### phootwork/collection 
+The phootwork library fills gaps in the php language and provides better solutions than the existing ones php offers.
+Homepage: https://phootwork.github.io/collection/
+Licenses Used: MIT
+The MIT License (MIT)
+
+Copyright (c) 2015 - 2021 Thomas Gossmann
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
+
+### phootwork/lang 
+Missing PHP language constructs
+Homepage: https://phootwork.github.io/lang/
+Licenses Used: MIT
+The MIT License (MIT)
+
+Copyright (c) 2015 - 2019 Thomas Gossmann
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
 
 ### phpfastcache/phpfastcache 
 PHP Abstract Cache Class - Reduce your database call using cache system. Phpfastcache handles a lot of drivers such as Apc(u), Cassandra, CouchBase, Couchdb, Mongodb, Files, (P)redis, Leveldb, Memcache(d), Ssdb, Sqlite, Wincache, Xcache, Zend Data Cache.
@@ -1633,6 +1697,34 @@ necessary.  Here is a sample; alter the names:
 
 That's all there is to it!
 
+### phpowermove/docblock 
+PHP Docblock parser and generator. An API to read and write Docblocks.
+Homepage: Not configured.
+Licenses Used: MIT
+The MIT License (MIT)
+
+Copyright (c) 2015 Thomas Gossmann
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
+
 ### psr/cache 
 Common interface for caching libraries
 Homepage: Not configured.
@@ -1886,32 +1978,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Eases the creation of beautiful and testable command line interfaces
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2004-2021 Fabien Potencier
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is furnished
-to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
-
-
-### symfony/deprecation-contracts 
-A generic function and convention to trigger deprecation notices
-Homepage: https://symfony.com
-Licenses Used: MIT
-Copyright (c) 2020-2021 Fabien Potencier
+Copyright (c) 2004-2022 Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -1936,7 +2003,7 @@ THE SOFTWARE.
 Provides tools that allow your application components to communicate with each other by dispatching events and listening to them
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2004-2021 Fabien Potencier
+Copyright (c) 2004-2022 Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -1961,7 +2028,7 @@ THE SOFTWARE.
 Generic abstractions related to dispatching event
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2018-2021 Fabien Potencier
+Copyright (c) 2018-2022 Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -1986,7 +2053,7 @@ THE SOFTWARE.
 Provides basic utilities for the filesystem
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2004-2021 Fabien Potencier
+Copyright (c) 2004-2022 Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2011,7 +2078,7 @@ THE SOFTWARE.
 Finds files and directories via an intuitive fluent interface
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2004-2021 Fabien Potencier
+Copyright (c) 2004-2022 Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2157,11 +2224,36 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
+### symfony/polyfill-php81 
+Symfony polyfill backporting some PHP 8.1+ features to lower PHP versions
+Homepage: https://symfony.com
+Licenses Used: MIT
+Copyright (c) 2021 Fabien Potencier
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is furnished
+to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+
 ### symfony/process 
 Executes commands in sub-processes
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2004-2021 Fabien Potencier
+Copyright (c) 2004-2022 Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2186,7 +2278,7 @@ THE SOFTWARE.
 Generic abstractions related to writing services
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2018-2021 Fabien Potencier
+Copyright (c) 2018-2022 Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2211,7 +2303,7 @@ THE SOFTWARE.
 Provides an object-oriented API to strings and deals with bytes, UTF-8 code points and grapheme clusters in a unified way
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2019-2021 Fabien Potencier
+Copyright (c) 2019-2022 Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2236,7 +2328,7 @@ THE SOFTWARE.
 Provides tools to internationalize your application
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2004-2021 Fabien Potencier
+Copyright (c) 2004-2022 Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2261,7 +2353,7 @@ THE SOFTWARE.
 Generic abstractions related to translation
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2018-2021 Fabien Potencier
+Copyright (c) 2018-2022 Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2286,7 +2378,7 @@ THE SOFTWARE.
 Loads and dumps YAML files
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2004-2021 Fabien Potencier
+Copyright (c) 2004-2022 Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
