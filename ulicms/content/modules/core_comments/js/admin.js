@@ -23,6 +23,9 @@ $(() => {
                         commentCounter.hide();
                     }
                 }
+
+                bootbox.hideAll();
+
                 // show the response to the user in an bootbox alert
                 bootbox.alert({
                     message: result,
