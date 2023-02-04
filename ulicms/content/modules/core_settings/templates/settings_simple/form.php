@@ -142,7 +142,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
         </tr>
         <tr>
             <td><strong><?php translate("search_engines"); ?></strong></td>
-            <td><select name="robots" size=1>
+            <td style="width:50%"><select name="robots" size=1>
                     <?php
                     if (Settings::get("robots") == "noindex,nofollow") {
                         ?>
@@ -162,7 +162,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
         <?php do_event("settings_simple"); ?>
         <tr>
             <td>
-            <td align="center">
+            <td style="text-align: center">
                 <button type="submit" class="btn btn-primary">
                     <i class="fa fa-save"></i> <?php translate("save_changes") ?></button>
             </td>
