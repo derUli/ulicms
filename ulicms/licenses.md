@@ -1978,7 +1978,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Eases the creation of beautiful and testable command line interfaces
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2004-2022 Fabien Potencier
+Copyright (c) 2004-2023 Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2003,7 +2003,7 @@ THE SOFTWARE.
 Provides tools that allow your application components to communicate with each other by dispatching events and listening to them
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2004-2022 Fabien Potencier
+Copyright (c) 2004-2023 Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2053,7 +2053,7 @@ THE SOFTWARE.
 Provides basic utilities for the filesystem
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2004-2022 Fabien Potencier
+Copyright (c) 2004-2023 Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2078,7 +2078,7 @@ THE SOFTWARE.
 Finds files and directories via an intuitive fluent interface
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2004-2022 Fabien Potencier
+Copyright (c) 2004-2023 Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2253,7 +2253,7 @@ THE SOFTWARE.
 Executes commands in sub-processes
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2004-2022 Fabien Potencier
+Copyright (c) 2004-2023 Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2303,7 +2303,7 @@ THE SOFTWARE.
 Provides an object-oriented API to strings and deals with bytes, UTF-8 code points and grapheme clusters in a unified way
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2019-2022 Fabien Potencier
+Copyright (c) 2019-2023 Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2328,7 +2328,7 @@ THE SOFTWARE.
 Provides tools to internationalize your application
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2004-2022 Fabien Potencier
+Copyright (c) 2004-2023 Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2378,7 +2378,7 @@ THE SOFTWARE.
 Loads and dumps YAML files
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2004-2022 Fabien Potencier
+Copyright (c) 2004-2023 Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
