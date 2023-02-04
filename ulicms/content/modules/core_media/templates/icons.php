@@ -19,7 +19,7 @@ $notSelectedButton = "btn btn-default"
      aria-label="Toolbar with button groups">
     <div class="btn-group" role="group">
         <a href="<?php echo ModuleHelper::buildActionURL("media"); ?>"
-           class="btn btn-default btn-back is-ajax" title="<?php translate("back"); ?>"><i
+           class="btn btn-default btn-back is-ajax"><i
                 class="fa fa-arrow-left"></i> <?php translate("back"); ?></a>
     </div>
     <?php foreach ($icons as $action => $cssClass) { ?>
