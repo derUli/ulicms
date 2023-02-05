@@ -25,13 +25,6 @@ class DbFunctionsTest extends \PHPUnit\Framework\TestCase
         $this->assertStringStartsNotWith("random_table", $tableName);
     }
 
-    public function testGetServerVersion()
-    {
-        $version = db_get_server_info();
-        $version = preg_replace('/[^0-9.].*/', '', $version);
-        $this->assertTrue(\UliCMS\Utils\VersionComparison\compare($version, "5.5.3", '>='));
-    }
-
     public function testGetClientInfo()
     {
         $this->assertStringStartsWith("mysql", db_get_client_info());

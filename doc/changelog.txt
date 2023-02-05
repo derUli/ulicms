@@ -22,6 +22,7 @@ Entfernte API-Methoden:
 * get_format()
 * set_format()
 * array_keep()
+* db_get_server_info()
 
 ===== Neues in UliCMS 2022.1 =====
 
