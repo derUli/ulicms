@@ -127,7 +127,7 @@ class Settings {
         $key = db_escape($key);
         db_query("DELETE FROM " . tbname("settings") . " WHERE name='$key'");
         SettingsCache::set($key, null);
-        return Database::getAffectedRows()() > 0;
+        return Database::getAffectedRows() > 0;
     }
 
     public static function convertVar($value, ?string $type) {
