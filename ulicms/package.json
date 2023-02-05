@@ -14,7 +14,7 @@
         "jscolor-picker": "*",
         "password-strength-meter": "^2.1.0",
         "select2": "^4.0.13",
-        "slug": "*",
+        "slug": "^2.1.1",
         "vanilla-toast": "*",
         "zenscroll": "*"
     },
