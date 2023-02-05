@@ -3,24 +3,21 @@
 use UliCMS\Exceptions\SqlException;
 
 // test for legacy database methods
-class DbFunctionsTest extends \PHPUnit\Framework\TestCase
-{
-    public function testTbName()
-    {
+class DbFunctionsTest extends \PHPUnit\Framework\TestCase {
+
+    public function testTbName() {
         $tableName = tbname("random_table");
 
         $this->assertStringEndsWith("random_table", $tableName);
         $this->assertStringStartsNotWith("random_table", $tableName);
     }
 
-    public function testDbNumFields()
-    {
+    public function testDbNumFields() {
         Database::selectAll("settings");
         $this->assertEquals(3, db_num_fields());
     }
 
-    public function testDbFetchRow()
-    {
+    public function testDbFetchRow() {
         $datasets = Database::selectAll("settings");
         while ($row = db_fetch_row($datasets)) {
             $this->assertIsNumeric($row[0]);
@@ -29,8 +26,7 @@ class DbFunctionsTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testDbFetchAssoc()
-    {
+    public function testDbFetchAssoc() {
         $datasets = Database::selectAll("settings");
         while ($row = db_fetch_assoc($datasets)) {
             $this->assertIsNumeric($row["id"]);
@@ -39,8 +35,7 @@ class DbFunctionsTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testDbFetchObject()
-    {
+    public function testDbFetchObject() {
         $datasets = Database::selectAll("settings");
         while ($row = db_fetch_object($datasets)) {
             $this->assertIsNumeric($row->id);
@@ -49,8 +44,7 @@ class DbFunctionsTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testDbFetchArray()
-    {
+    public function testDbFetchArray() {
         $datasets = Database::selectAll("settings");
         while ($row = db_fetch_array($datasets)) {
             $this->assertIsNumeric($row["id"]);
@@ -63,8 +57,7 @@ class DbFunctionsTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testDbFetchField()
-    {
+    public function testDbFetchField() {
         $cfg = new CMSConfig();
 
         $datasets = Database::selectAll("settings");
@@ -76,37 +69,26 @@ class DbFunctionsTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testDbNumRows()
-    {
+    public function testDbNumRows() {
         $datasets = Database::selectAll("settings");
         $this->assertGreaterThanOrEqual(50, db_num_rows($datasets));
         ;
     }
 
-    public function testDbQuery()
-    {
+    public function testDbQuery() {
         $query = db_query("select * from " . tbname("settings") . " where name = 'homepage_title' or name = 'site_slogan'");
         $this->assertEquals(2, db_num_rows($query));
     }
 
-    public function testDbInsertId()
-    {
-        $key = uniqid();
-        Settings::set($key, "foobar");
-
-        $this->assertGreaterThan(50, db_insert_id());
-        Settings::delete($key);
-    }
-
-    public function testDbError()
-    {
+    public function testDbError() {
         try {
             Database::selectAll("gibts_nicht");
         } catch (SqlException $e) {
+            
         } finally {
             $this->assertStringEndsWith(
-                "gibts_nicht' doesn't exist",
-                Database::getLastError()
+                    "gibts_nicht' doesn't exist",
+                    Database::getLastError()
             );
         }
     }

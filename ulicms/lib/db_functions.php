@@ -12,10 +12,6 @@ function db_query(string $query) {
     return Database::query($query);
 }
 
-function db_insert_id(): ?int {
-    return Database::getLastInsertID();
-}
-
 // Fetch Row in diversen Datentypen
 function db_fetch_array(?mysqli_result $result) {
     return Database::fetchArray($result);
