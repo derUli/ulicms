@@ -1,7 +1,8 @@
 ===== Neues in UliCMS 2023.1 =====
 
-Entfernte Features:
-* Google Fonts
+Fehlerkorrekturen:
+* Google Fonts entfernt
+* Einige UI Fixes
 
 ===== Neues in UliCMS 2022.1 =====
 
