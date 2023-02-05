@@ -184,12 +184,6 @@ function is_admin(): bool {
     return $isAdmin;
 }
 
-function is_debug_mode(): bool {
-    $config = new CMSConfig();
-    return (defined("ULICMS_DEBUG") and ULICMS_DEBUG)
-            or (isset($config->debug) and $config->debug);
-}
-
 function isCLI(): bool {
     return php_sapi_name() == "cli";
 }

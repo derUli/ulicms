@@ -42,6 +42,7 @@ Entfernte API-Methoden:
 * no_anti_csrf()
 * is_zero()
 * is_night()
+* is_debug_mode()
 
 ===== Neues in UliCMS 2022.1 =====
 

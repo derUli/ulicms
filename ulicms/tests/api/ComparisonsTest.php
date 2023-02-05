@@ -204,10 +204,6 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(var_is_type("nicht leer", "typ_der_nicht_existiert", true));
     }
 
-    public function testIsDebugMode() {
-        $this->assertIsBool(is_debug_mode());
-    }
-
     public function testGetByIdThrowsException() {
         $this->expectException(DatasetNotFoundException::class);
         ContentFactory::getByID(PHP_INT_MAX);
