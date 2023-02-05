@@ -45,7 +45,7 @@ Translation::includeCustomLangFile($_SESSION["language"]);
 Translation::loadCurrentThemeLanguageFiles($_SESSION["language"]);
 do_event("custom_lang_" . $_SESSION["language"]);
 
-if (Request::isPost() && !defined("NO_ANTI_CSRF")) {
+if (Request::isPost()) {
     if (!check_csrf_token()) {
         die("This is probably a CSRF attack!");
     }

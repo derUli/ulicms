@@ -35,9 +35,7 @@ do_event("custom_lang_" . $syslang);
 do_event("after_custom_lang");
 
 // Cross-Site-Request-Forgery Protection
-if ((is_logged_in()
-        && Request::isPost()
-        && !defined("NO_ANTI_CSRF")) && !check_csrf_token()) {
+if (is_logged_in() && Request::isPost() && !check_csrf_token()) {
     ExceptionResult("This is probably a CSRF attack!", HttpStatusCode::FORBIDDEN);
 }
 

@@ -36,10 +36,3 @@ function check_csrf_token(): bool
     }
     return $_REQUEST["csrf_token"] == $_SESSION["csrf_token"];
 }
-
-function no_anti_csrf(): void
-{
-    if (!defined("NO_ANTI_CSRF")) {
-        define("NO_ANTI_CSRF", true);
-    }
-}

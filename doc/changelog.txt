@@ -39,6 +39,7 @@ Entfernte API-Methoden:
 * SettingsCache::set()
 * SettingsCache::get()
 * initconfig()
+* no_anti_csrf()
 
 ===== Neues in UliCMS 2022.1 =====
 
