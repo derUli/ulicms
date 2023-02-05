@@ -51,11 +51,6 @@ function end_of_day($datetime = null)
     return $endOfDay->getTimestamp();
 }
 
-function is_midnight($datetime = null): bool
-{
-    $carbon = get_carbon($datetime);
-    return $carbon->isStartOfDay();
-}
 
 function is_end_of_day($datetime = null): bool
 {

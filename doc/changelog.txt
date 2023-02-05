@@ -9,6 +9,7 @@ Entfernte Features:
 
 Entfernte API-Methoden:
 * is_present()
+* is_midnight()
 
 ===== Neues in UliCMS 2022.1 =====
 

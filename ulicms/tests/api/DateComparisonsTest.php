@@ -63,18 +63,6 @@ class DateComparisonsTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse(is_future(time() - 5));
     }
 
-    public function testIsStartOfDateReturnsTrue()
-    {
-        $timestamp = gmmktime(0, 0, 0, 4, 1, 2017);
-        $this->assertTrue(is_midnight($timestamp));
-    }
-
-    public function testIsStartOfDateReturnsFalse()
-    {
-        $timestamp = gmmktime(10, 30, 15, 4, 1, 2017);
-        $this->assertFalse(is_midnight($timestamp));
-    }
-
     public function testIsEndOfDateReturnsTrue()
     {
         $timestamp = gmmktime(23, 59, 59, 4, 1, 2017);
