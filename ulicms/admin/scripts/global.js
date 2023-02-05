@@ -195,6 +195,8 @@ $(() => {
     $("a.backend-menu-item-logout").click((event) => {
         event.preventDefault();
         $(".mainmenu").hide();
+        $("#menu-toggle").removeClass('is-open');
+
         const url = $(event.target).attr("href");
         bootbox.confirm(`${MenuTranslation.Logout}?`, (result) => {
             if (result) {
