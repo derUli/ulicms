@@ -1,2 +1,0 @@
-﻿[ ] Spamschutz für Formulare in der forms-Tabelle
-[ ] Möglichkeit Slideshows zu erstellen über Camera http://www.pixedelic.com/plugins/camera/
