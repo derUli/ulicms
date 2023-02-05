@@ -13,9 +13,7 @@ $environment = basename(get_environment());
 
 $file = dirname(__FILE__) . "/content/configurations/{$environment}.php";
 
-/**
- * If there is no config file for the environment show an error
- */
+// If there is no config file for the environment show an error
 if (!file_exists($file)) {
     header('HTTP/1.1 500 Internal Server Error');
     echo "Configuration file for environment {$environment} not found.";
