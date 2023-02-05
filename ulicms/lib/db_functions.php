@@ -29,11 +29,6 @@ function db_fetch_assoc(?mysqli_result $result) {
     return Database::fetchAssoc($result);
 }
 
-// Datenbank auswählen
-function db_select(string $schema): bool {
-    return Database::select($schema);
-}
-
 function db_num_fields(): ?int {
     return Database::getNumFieldCount();
 }
