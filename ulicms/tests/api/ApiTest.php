@@ -308,36 +308,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("World", TEST_HELLO);
     }
 
-    public function testIsAdminReturnsFalse()
-    {
-        $user = new User();
-        $user->setUsername("testuser-nicht-admin");
-        $user->setLastname("Admin");
-        $user->setFirstname("Nicht");
-        $user->setPassword(uniqid());
-        $user->setAdmin(false);
-        $user->save();
-
-        $_SESSION["login_id"] = $user->getId();
-
-        $this->assertFalse(is_admin());
-    }
-
-    public function testIsAdminReturnsTrue()
-    {
-        $user = new User();
-        $user->setUsername("testuser-ist-admin");
-        $user->setLastname("Admin");
-        $user->setFirstname("Ist");
-        $user->setPassword(uniqid());
-        $user->setAdmin(true);
-        $user->save();
-
-        $_SESSION["login_id"] = $user->getId();
-
-        $this->assertTrue(is_admin());
-    }
-
     public function testGetAllUsedMenus()
     {
         $menus = get_all_used_menus();

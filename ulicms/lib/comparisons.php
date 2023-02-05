@@ -174,16 +174,6 @@ function is_tablet(): bool {
     return $result;
 }
 
-function is_admin(): bool {
-    $isAdmin = false;
-    $user_id = get_user_id();
-    if ($user_id) {
-        $user = new User(get_user_id());
-        $isAdmin = $user->isAdmin();
-    }
-    return $isAdmin;
-}
-
 function isCLI(): bool {
     return php_sapi_name() == "cli";
 }

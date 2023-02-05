@@ -43,6 +43,7 @@ Entfernte API-Methoden:
 * is_zero()
 * is_night()
 * is_debug_mode()
+* is_admin()
 
 ===== Neues in UliCMS 2022.1 =====
 
