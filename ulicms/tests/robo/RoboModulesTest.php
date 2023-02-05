@@ -1,9 +1,9 @@
 <?php
 
 require_once __DIR__ . "/RoboTestFile.php";
-require_once __DIR__ . "/RoboBaseTest.php";
+require_once __DIR__ . "/RoboTestBase.php";
 
-class RoboModulesTest extends RoboBaseTest
+class RoboModulesTest extends RoboTestBase
 {
     protected function setUp(): void
     {

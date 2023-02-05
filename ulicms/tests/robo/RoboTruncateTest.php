@@ -1,9 +1,9 @@
 <?php
 
 require_once __DIR__ . "/RoboTestFile.php";
-require_once __DIR__ . "/RoboBaseTest.php";
+require_once __DIR__ . "/RoboTestBase.php";
 
-class RoboTruncateTest extends RoboBaseTest
+class RoboTruncateTest extends RoboTestBase
 {
     public function testTruncateHistory()
     {

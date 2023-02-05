@@ -206,6 +206,8 @@ function replaceOtherShortCodes(string $string): string
 // Check if site contains a module
 function containsModule(?string $page = null, ?string $module = null): bool
 {
+    $containsModule = false;
+    
     if (is_null($page)) {
         $page = get_slug();
     }
@@ -218,23 +220,23 @@ function containsModule(?string $page = null, ?string $module = null): bool
             tbname("content") . " WHERE slug = '" . db_escape($page) . "'");
     
     if (!Database::any($result)) {
-        return false;
+        return $containsModule;
     }
     
     $dataset = db_fetch_assoc($result);
     $content = $dataset["content"];
     $content = str_replace("&quot;", "\"", $content);
+    
+    // TODO: Refactor this
     if (!is_null($dataset["module"]) && !empty($dataset["module"])
-            and $dataset["type"] == "module") {
-        if (!$module or ($module and $dataset["module"] == $module)) {
-            Vars::set("page_" . $page . "_contains_" . $module, true);
-            return true;
+            && $dataset["type"] == "module") {
+        if (!$module || ($module && $dataset["module"] == $module)) {
+            $containsModule = true;
         }
-    } else {
-        $match = stringContainsShortCodes($content, $module);
-        Vars::set("page_" . $page . "_contains_" . $module, $match);
-        return $match;
+    } else if(stringContainsShortCodes($content, $module)){
+            $containsModule = true; 
     }
-    Vars::set("page_" . $page . "_contains_" . $module, false);
-    return false;
+    
+    Vars::set("page_" . $page . "_contains_" . $module, $containsModule);
+    return $containsModule;
 }

@@ -5,7 +5,7 @@ declare(strict_types=1);
 require_once "RoboFile.php";
 require_once __DIR__ . "/RoboTestFile.php";
 
-abstract class RoboBaseTest extends \PHPUnit\Framework\TestCase
+abstract class RoboTestBase extends \PHPUnit\Framework\TestCase
 {
     protected function runRoboCommand(array $command): string
     {

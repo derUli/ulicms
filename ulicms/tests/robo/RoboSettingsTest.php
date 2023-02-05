@@ -1,13 +1,13 @@
 <?php
 
 require_once __DIR__ . "/RoboTestFile.php";
-require_once __DIR__ . "/RoboBaseTest.php";
+require_once __DIR__ . "/RoboTestBase.php";
 
 use League\Container\ContainerAwareInterface;
 use League\Container\ContainerAwareTrait;
 use Robo\TaskAccessor;
 
-class RoboSettingsTest extends RoboBaseTest
+class RoboSettingsTest extends RoboTestBase
 {
     protected function tearDown(): void
     {
