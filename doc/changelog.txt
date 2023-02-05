@@ -36,6 +36,8 @@ Entfernte API-Methoden:
 * db_get_tables()
 * db_real_escape_string()
 * db_insert_id()
+* SettingsCache::set()
+* SettingsCache::get()
 
 ===== Neues in UliCMS 2022.1 =====
 

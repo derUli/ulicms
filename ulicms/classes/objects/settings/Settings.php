@@ -16,12 +16,13 @@ class Settings {
             $value,
             ?string $type = 'str'
     ): bool {
+        $success = false;
         if (!self::get($key)) {
             self::set($key, $value, $type);
-            SettingsCache::set($key, $value);
-            return true;
+            $success = true;
         }
-        return false;
+
+        return $success;
     }
 
     // get a config variable
@@ -29,21 +30,17 @@ class Settings {
             string $key,
             ?string $type = 'str'
     ) {
-        if (!is_null(SettingsCache::get($key))) {
-            return SettingsCache::get($key);
-        }
+        $value = null;
         $key = db_escape($key);
         $result = db_query("SELECT value FROM " . tbname("settings") .
                 " WHERE name='$key'");
         if (db_num_rows($result) > 0) {
             while ($row = db_fetch_object($result)) {
                 $value = self::convertVar($row->value, $type);
-                SettingsCache::set($key, $value, $type);
-                return $value;
             }
         }
-        SettingsCache::set($key, null);
-        return null;
+
+        return $value;
     }
 
     public static function getLanguageSetting(
@@ -119,14 +116,12 @@ class Settings {
                         . "Changed setting $key to '$originalValue'");
             }
         }
-        SettingsCache::set($key, $originalValue);
     }
 
     // Remove an configuration variable
     public static function delete(string $key): bool {
         $key = db_escape($key);
         db_query("DELETE FROM " . tbname("settings") . " WHERE name='$key'");
-        SettingsCache::set($key, null);
         return Database::getAffectedRows() > 0;
     }
 

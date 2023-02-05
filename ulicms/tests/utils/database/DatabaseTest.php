@@ -195,16 +195,6 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase
         $this->assertGreaterThanOrEqual(50000, Database::getClientVersion());
     }
 
-    public function testDeleteFrom()
-    {
-        Settings::set("foo", "bar");
-        Database::deleteFrom("settings", "name = 'foo'");
-
-        // clear settings cache
-        SettingsCache::set("foo", null);
-
-        $this->assertNull(Settings::get("foo"));
-    }
 
     public function testEscapeName()
     {

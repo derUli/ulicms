@@ -2,7 +2,6 @@
 
 $classes = array(
     "Flags",
-    "SettingsCache",
     "Vars",
     "ViewBag"
 );
