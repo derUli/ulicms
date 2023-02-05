@@ -12,9 +12,6 @@ function db_query(string $query) {
     return Database::query($query);
 }
 
-function db_get_client_info(): string {
-    return Database::getClientInfo();
-}
 
 function db_name_escape(string $name): string {
     return Database::escapeName($name);

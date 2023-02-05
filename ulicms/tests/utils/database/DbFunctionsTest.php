@@ -25,11 +25,6 @@ class DbFunctionsTest extends \PHPUnit\Framework\TestCase
         $this->assertStringStartsNotWith("random_table", $tableName);
     }
 
-    public function testGetClientInfo()
-    {
-        $this->assertStringStartsWith("mysql", db_get_client_info());
-    }
-
     public function testDbNumFields()
     {
         Database::selectAll("settings");
