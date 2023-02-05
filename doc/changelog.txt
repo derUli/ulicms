@@ -7,6 +7,9 @@ Fehlerkorrekturen:
 Entfernte Features:
 * Meta Keywords
 
+Entfernte API-Methoden:
+* is_present()
+
 ===== Neues in UliCMS 2022.1 =====
 
 Neue Features:
