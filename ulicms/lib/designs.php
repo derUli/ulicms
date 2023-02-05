@@ -2,22 +2,9 @@
 
 declare(strict_types=1);
 
-// Schriftgrößen zurückgeben
-function getFontSizes(): array
-{
-    global $sizes;
-    $sizes = [];
-    for ($i = 6; $i <= 80; $i ++) {
-        $sizes[] = $i . "px";
-    }
-    do_event("custom_font_sizes");
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
 
-    $sizes = apply_filter($sizes, "font_sizes");
-    return $sizes;
-}
-
-function getThemeMeta(string $theme, string $attrib = null)
-{
+function getThemeMeta(string $theme, string $attrib = null) {
     $retval = null;
     $metadata_file = getTemplateDirPath($theme, true) . "metadata.json";
     if (file_exists($metadata_file)) {

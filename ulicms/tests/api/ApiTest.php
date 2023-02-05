@@ -424,12 +424,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         unset($_SERVER['HTTPS']);
     }
 
-    public function testGetFontSizes()
-    {
-        $this->assertCount(75, getFontSizes());
-        $this->assertContains("14px", getFontSizes());
-    }
-
     public function testGetGravatarReturnsUrl()
     {
         $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";

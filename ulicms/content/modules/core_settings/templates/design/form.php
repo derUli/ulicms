@@ -27,7 +27,7 @@ if (!$permissionChecker->hasPermission("design")) {
     $font_size = Settings::get("font-size");
     $ckeditor_skin = Settings::get("ckeditor_skin");
     $video_width_100_percent = Settings::get("video_width_100_percent");
-    $font_sizes = getFontSizes();
+    $font_sizes = $controller->getFontSizes();
     $no_mobile_design_on_tablet = Settings::get("no_mobile_design_on_tablet");
     $modManager = new ModuleManager();
     $mobileDetectInstalled = in_array("Mobile_Detect", $modManager->getEnabledModuleNames()); ?>
