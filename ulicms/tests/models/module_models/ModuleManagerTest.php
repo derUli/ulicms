@@ -38,7 +38,7 @@ class ModuleManagerTest extends \PHPUnit\Framework\TestCase
 
         $allModules = $manager->getAllModuleNames();
 
-        $this->assertTrue(faster_in_array(self::sampleName1, $allModules));
+        $this->assertTrue(in_array(self::sampleName1, $allModules));
 
         $module = new Module(self::sampleName1);
         $this->assertEquals(self::sampleName1, $module->getName());
@@ -68,20 +68,20 @@ class ModuleManagerTest extends \PHPUnit\Framework\TestCase
 
         $allModules = $manager->getAllModuleNames();
 
-        $this->assertTrue(faster_in_array(self::sampleName1, $allModules));
-        $this->assertTrue(faster_in_array(self::sampleName2, $allModules));
+        $this->assertTrue(in_array(self::sampleName1, $allModules));
+        $this->assertTrue(in_array(self::sampleName2, $allModules));
 
         $module = new Module(self::sampleName1);
         $module->delete();
 
         $allModules = $manager->getAllModuleNames();
-        $this->assertFalse(faster_in_array(self::sampleName1, $allModules));
+        $this->assertFalse(in_array(self::sampleName1, $allModules));
 
         $module = new Module(self::sampleName2);
         $module->delete();
 
         $allModules = $manager->getAllModuleNames();
-        $this->assertFalse(faster_in_array(self::sampleName2, $allModules));
+        $this->assertFalse(in_array(self::sampleName2, $allModules));
     }
 
     public function testInitialSync()

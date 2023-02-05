@@ -114,9 +114,9 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase
 
     public function testGetAllEmbedModule()
     {
-        $embedModules = ModuleHelper::getAllEmbedModules();
-        $this->assertTrue(faster_in_array("fortune2", $embedModules));
-        $this->assertFalse(faster_in_array("slicknav", $embedModules));
+            $embedModules = ModuleHelper::getAllEmbedModules();
+        $this->assertTrue(in_array("fortune2", $embedModules));
+        $this->assertFalse(in_array("slicknav", $embedModules));
     }
 
     public function testGetMainController()

@@ -11,11 +11,10 @@ if (!defined("LOADED_LANGUAGE_FILE")) {
         $_SESSION = [];
     }
 
-    if (!empty($_GET["language"])
-            and faster_in_array($_GET["language"], $languages)) {
+    if (!empty($_GET["language"]) && faster_in_array($_GET["language"], $languages)) {
         $_SESSION["language"] = Database::escapeValue(
-            $_GET["language"],
-            DB_TYPE_STRING
+                        $_GET["language"],
+                        DB_TYPE_STRING
         );
     }
 
@@ -25,7 +24,7 @@ if (!defined("LOADED_LANGUAGE_FILE")) {
 
     setLocaleByLanguage();
 
-    if (faster_in_array($_SESSION["language"], $languages) and
+    if (faster_in_array($_SESSION["language"], $languages) &&
             file_exists(getLanguageFilePath($_SESSION["language"]))) {
         require_once getLanguageFilePath($_SESSION["language"]);
     } elseif (file_exists(getLanguageFilePath("en"))) {
@@ -50,7 +49,7 @@ if ($empty_trash_days === false) {
 // Papierkorb für Seiten Cronjob
 $empty_trash_timestamp = $empty_trash_days * (60 * 60 * 24);
 Database::query("DELETE FROM " . tbname("content") . " WHERE " . time() .
-                " -  `deleted_at` > $empty_trash_timestamp") or die(Database::getLastError());
+                " -  `deleted_at` > $empty_trash_timestamp") || die(Database::getLastError());
 
 // Cronjobs der Module
 do_event("cron");

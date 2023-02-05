@@ -35,7 +35,7 @@ function get_used_post_types(): array
         $used_types[] = $row->type;
     }
     foreach ($types as $type) {
-        if (faster_in_array($type, $used_types)) {
+        if (in_array($type, $used_types)) {
             $return_types[] = $type;
         }
     }

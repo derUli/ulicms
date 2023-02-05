@@ -4,6 +4,13 @@ declare(strict_types=1);
 
 use Carbon\Carbon;
 
+/**
+ * @deprecated since version 2023.1
+ * Does not provide performance improvements anymore in modern PHP
+ * @param type $needle
+ * @param type $haystack
+ * @return bool
+ */
 function faster_in_array($needle, $haystack): bool {
     if (!is_array($haystack)) {
         return false;
