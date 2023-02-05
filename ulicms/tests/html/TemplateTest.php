@@ -12,7 +12,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
     protected function setUp(): void
     {
         Translation::loadAllModuleLanguageFiles("en");
-        Flags::setNoCache(true);
+        Vars::setNoCache(true);
 
         $settings = array(
             "site_slogan",
@@ -42,7 +42,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
 
     protected function tearDown(): void
     {
-        Flags::setNoCache(false);
+        Vars::setNoCache(false);
 
         foreach ($this->savedSettings as $key => $value) {
             Settings::set($key, $value);

@@ -13,8 +13,8 @@ function clearCache(): void {
 
 function no_cache(bool $do = false): void {
     if ($do) {
-        Flags::setNoCache(true);
+        Vars::setNoCache(true);
     } elseif (in_array(get_cache_control(), ["auto", "no_cache"])) {
-        Flags::setNoCache(true);
+        Vars::setNoCache(true);
     }
 }

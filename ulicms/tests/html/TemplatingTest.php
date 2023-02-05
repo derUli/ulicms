@@ -576,14 +576,14 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         $user = $this->getTestUser();
         $user->registerSession(false);
 
-        Flags::setNoCache(true);
+        Vars::setNoCache(true);
 
         $html = get_edit_button();
 
         $this->assertStringStartsWith('<div class="ulicms-edit"><a href="admin/?action=pages_edit&amp;page', $html);
         $this->assertStringEndsWith('class="btn btn-warning btn-edit">Edit</a></div>', $html);
 
-        Flags::setNoCache(false);
+        Vars::setNoCache(false);
     }
 
     public function testGetEditButtonReturnsEmptyString()
@@ -596,7 +596,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         $user = $this->getTestUser();
         $user->registerSession(false);
 
-        Flags::setNoCache(true);
+        Vars::setNoCache(true);
         ob_start();
         edit_button();
         $html = ob_get_clean();
@@ -604,7 +604,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         $this->assertStringStartsWith('<div class="ulicms-edit"><a href="admin/?action=pages_edit&amp;page', $html);
         $this->assertStringEndsWith('class="btn btn-warning btn-edit">Edit</a></div>', $html);
 
-        Flags::setNoCache(false);
+        Vars::setNoCache(false);
     }
 
     public function testGetCacheControl()

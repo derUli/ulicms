@@ -43,7 +43,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
             Settings::set($key, $value);
         }
 
-        Flags::setNoCache(false);
+        Vars::setNoCache(false);
 
         Database::query("delete from {prefix}content where title like 'Unit Test%'", true);
         $this->cleanUp();
@@ -1116,10 +1116,10 @@ class ApiTest extends \PHPUnit\Framework\TestCase
 
     public function testNoCacheWithTrue()
     {
-        $this->assertFalse(Flags::getNoCache());
+        $this->assertFalse(Vars::getNoCache());
 
         no_cache(true);
 
-        $this->assertTrue(Flags::getNoCache());
+        $this->assertTrue(Vars::getNoCache());
     }
 }

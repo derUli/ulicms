@@ -180,10 +180,10 @@ $cache_control = get_cache_control();
 switch ($cache_control) {
     case "auto":
     case "force":
-        Flags::setNoCache(false);
+        Vars::setNoCache(false);
         break;
     case "no_cache":
-        Flags::setNoCache(true);
+        Vars::setNoCache(true);
         break;
 }
 
@@ -199,7 +199,7 @@ if (is_logged_in() && get_cache_control() == "auto") {
 do_event("before_html");
 
 $cacheAdapter = null;
-if (CacheUtil::isCacheEnabled() && Request::isGet() && !Flags::getNoCache()) {
+if (CacheUtil::isCacheEnabled() && Request::isGet() && !Vars::getNoCache()) {
     $cacheAdapter = CacheUtil::getAdapter();
 }
 $uid = CacheUtil::getCurrentUid();
