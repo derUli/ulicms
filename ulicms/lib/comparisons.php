@@ -51,19 +51,6 @@ function end_of_day($datetime = null)
     return $endOfDay->getTimestamp();
 }
 
-
-function is_end_of_day($datetime = null): bool
-{
-    $carbon = get_carbon($datetime);
-    return $carbon->isEndOfDay();
-}
-
-function is_midday($datetime = null): bool
-{
-    $carbon = get_carbon($datetime);
-    return $carbon->isMidday();
-}
-
 function is_tomorrow($datetime = null): bool
 {
     $carbon = get_carbon($datetime);

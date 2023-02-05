@@ -63,30 +63,6 @@ class DateComparisonsTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse(is_future(time() - 5));
     }
 
-    public function testIsEndOfDateReturnsTrue()
-    {
-        $timestamp = gmmktime(23, 59, 59, 4, 1, 2017);
-        $this->assertTrue(is_end_of_day($timestamp));
-    }
-
-    public function testIsEndOfDateReturnsFalse()
-    {
-        $timestamp = gmmktime(10, 30, 15, 4, 1, 2017);
-        $this->assertFalse(is_end_of_day($timestamp));
-    }
-
-    public function testIsMiddayOfDateReturnsTrue()
-    {
-        $timestamp = gmmktime(12, 00, 00, 4, 1, 2017);
-        $this->assertTrue(is_midday($timestamp));
-    }
-
-    public function testIsMiddayOfDateReturnsFalse()
-    {
-        $timestamp = gmmktime(10, 30, 15, 4, 1, 2017);
-        $this->assertFalse(is_midday($timestamp));
-    }
-
     public function testGetCarbon()
     {
         $this->assertInstanceOf(Carbon::class, get_carbon("2019-04-14"));
