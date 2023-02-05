@@ -31,7 +31,6 @@ $frontpagePhoto = file_exists($frontpagePhotoFile) ? UliCMS\HTML\imageTag(
             "css/main.scss"
     );
     combinedStylesheetHtml();
-    echo \UliCMS\HTML\Style::fromString($css);
 
     $titles = [get_translation("frontpage")];
     $filteredPages = [];
