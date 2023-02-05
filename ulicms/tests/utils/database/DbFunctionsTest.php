@@ -127,15 +127,6 @@ class DbFunctionsTest extends \PHPUnit\Framework\TestCase
         $this->assertGreaterThan(1, db_affected_rows());
     }
 
-    public function testDbLastInsertId()
-    {
-        $key = uniqid();
-        Settings::set($key, "foobar");
-
-        $this->assertGreaterThan(50, db_last_insert_id());
-        Settings::delete($key);
-    }
-
     public function testDbInsertId()
     {
         $key = uniqid();

@@ -28,7 +28,7 @@ class ACL
         db_query($sql);
 
         // Gebe die letzte Insert-ID zurück, damit man gleich mit der erzeugten Gruppe arbeiten kann.
-        return db_last_insert_id();
+        return Database::getLastInsertID();
     }
 
     public function updateGroup(

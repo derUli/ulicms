@@ -12,9 +12,6 @@ function db_query(string $query) {
     return Database::query($query);
 }
 
-function db_last_insert_id(): ?int {
-    return Database::getLastInsertID();
-}
 
 function db_insert_id(): ?int {
     return Database::getLastInsertID();
