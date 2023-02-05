@@ -83,14 +83,6 @@ class DbFunctionsTest extends \PHPUnit\Framework\TestCase
         ;
     }
 
-    public function testDbRealEscapeString()
-    {
-        $this->assertEquals(
-            "\\'foo\\'",
-            db_real_escape_string("'foo'")
-        );
-    }
-
     public function testDbQuery()
     {
         $query = db_query("select * from " . tbname("settings") . " where name = 'homepage_title' or name = 'site_slogan'");
