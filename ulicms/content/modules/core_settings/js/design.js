@@ -41,12 +41,29 @@ const loadThemePreview = (selectField) => {
     });
 };
 
+// show a privacy warning if a google font is selected
+const updateFontPreview = () => {
+    const fontFamily = $("select#default_font").val();
+    const fontSize = $("select#font-size").val();
+
+    $("#font-preview").css(
+            {
+                fontFamily: fontFamily,
+                fontSize: fontSize
+            }
+    );
+};
+
 
 $(() => {
     $("#mobile_detect_notice").hide();
     initMobileDetectNotice();
 
     $("select[name='mobile_theme']").change(initMobileDetectNotice);
+
+    $("select#default_font, select#font-size").change(updateFontPreview);
+
+updateFontPreview();
 
     loadThemePreview($("select[name='theme']"));
     loadThemePreview($("select[name='mobile_theme']"));
