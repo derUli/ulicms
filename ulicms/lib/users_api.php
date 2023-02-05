@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 use UliCMS\Security\TwoFactorAuthentication;
 
-// this file contains functions for managing user accounts
+/**
+ * Gets id and username of all users
+ * @return array
+ */
 function getUsers(): array
 {
     $users = [];
@@ -17,11 +20,11 @@ function getUsers(): array
     return $users;
 }
 
-function getAllUsers(): array
-{
-    return getUsers();
-}
 
+/**
+ * Gets the usernames of all users whose last action was less than 5 minutes ago
+ * @return array
+ */
 function getUsersOnline(): array
 {
     $users_online = Database::query("SELECT username FROM " . tbname("users") . " WHERE last_action > " . (time() - 300) . " ORDER BY username");

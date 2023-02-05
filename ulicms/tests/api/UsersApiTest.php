@@ -246,19 +246,7 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase
 
         $this->assertNull($user);
     }
-
-    public function testGetAllUsers()
-    {
-        $allUsers = getAllUsers();
-        foreach ($allUsers as $user) {
-            if ($user["username"] == "testuser1") {
-                $this->assertEquals($user["id"], $this->testUser->getID());
-                return;
-            }
-        }
-        $this->fail("The testuser is not in the result.");
-    }
-
+    
     public function testGetUsers()
     {
         $allUsers = getUsers();

@@ -98,7 +98,7 @@ class HomeControllerTest extends \PHPUnit\Framework\TestCase
 
     public function testStatistics()
     {
-        $usersCount = count(getAllUsers());
+        $usersCount = count(getUsers());
         $pagesCount = count(ContentFactory::getAll());
 
         $controller = new HomeController();

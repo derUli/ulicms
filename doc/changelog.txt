@@ -12,6 +12,7 @@ Entfernte API-Methoden:
 * is_midnight()
 * is_midday()
 * is_end_of_day()
+* getAllUsers()
 
 ===== Neues in UliCMS 2022.1 =====
 
