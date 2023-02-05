@@ -21,6 +21,7 @@ Entfernte API-Methoden:
 * clearAPCCache()
 * get_format()
 * set_format()
+* array_keep()
 
 ===== Neues in UliCMS 2022.1 =====
 

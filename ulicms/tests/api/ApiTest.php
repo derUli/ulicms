@@ -901,29 +901,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertEmpty(var_dump_str());
     }
 
-    public function testArrayKeep()
-    {
-        $input = [
-            "hello" => "world",
-            "foo" => "bar",
-            "cat" => "dog",
-            "pig" => "chicken"
-        ];
-
-        $keys = [
-            "cat",
-            "pig"
-        ];
-
-
-        $expected = [
-            "cat" => "dog",
-            "pig" => "chicken"
-        ];
-
-        $this->assertEquals($expected, array_keep($input, $keys));
-    }
-
     public function testGetAllMenus()
     {
         $menus = getAllMenus();
