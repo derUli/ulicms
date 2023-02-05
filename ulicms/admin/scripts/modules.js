@@ -11,6 +11,7 @@ const uninstallModule = (url, name) => {
     }
     return false;
 };
+
 const uninstallTheme = (url, name) => {
     if (confirm(Translation.AskForUninstallPackage.replace("%name%", "theme-"
             + name))) {

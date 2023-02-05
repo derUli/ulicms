@@ -41,7 +41,6 @@ const loadThemePreview = (selectField) => {
     });
 };
 
-// show a privacy warning if a google font is selected
 const updateFontPreview = () => {
     const fontFamily = $("select#default_font").val();
     const fontSize = $("select#font-size").val();
@@ -53,7 +52,6 @@ const updateFontPreview = () => {
             }
     );
 };
-
 
 $(() => {
     $("#mobile_detect_notice").hide();

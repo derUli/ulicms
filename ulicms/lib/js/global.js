@@ -7,6 +7,10 @@ $(() => {
     );
 });
 
+/**
+ * Checks if the client device has a touchscreen
+ * @returns {Boolean}
+ */
 const isTouchDevice = () => {
     const prefixes = ' -webkit- -moz- -o- -ms- '.split(' ');
     const mq = (query) => {

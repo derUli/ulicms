@@ -16,7 +16,6 @@ if ($permissionChecker->hasPermission("update_system")) {
     } else {
         translate("update_information_text");
         ?>
-        </p>
         <?php
     }
 } else {

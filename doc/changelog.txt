@@ -1,7 +1,7 @@
 ===== Neues in UliCMS 2023.1 =====
 
 Neue Features:
-* URLs enthalten nun kein Endung mehr.
+* URLs enthalten nun kein Endung mehr
 
 Fehlerkorrekturen:
 * Google Fonts entfernt
@@ -44,6 +44,8 @@ Entfernte API-Methoden:
 * is_night()
 * is_debug_mode()
 * is_admin()
+* get_referer()
+* isModuleInstalled()
 
 ===== Neues in UliCMS 2022.1 =====
 

@@ -1,6 +1,7 @@
 // Script for new page and edit page form
 
 window.slugChecking = false;
+
 $(() => {
     const url = $(".main-form")
             .first()

@@ -55,10 +55,19 @@ const addCssClassToInputs = (container) => {
             .addClass("form-control");
 };
 
+/**
+ * Get localization for select2 from <html> tag
+ * @returns {Object}
+ */
 const getSelect2Language = () => {
     return $("html").data("select2-language");
 };
 
+/**
+ * replaces all selects with select2
+ * @param {type} container
+ * @returns {undefined}
+ */
 const initSelect2 = (container) => {
     // prettier select-boxes
     $(container).find("select").select2({
@@ -67,6 +76,11 @@ const initSelect2 = (container) => {
     });
 };
 
+/**
+ * Init bootstrap toggle switches
+ * @param {type} container
+ * @returns {undefined}
+ */
 const initBootstrapToggle = (container) => {
     // Toggle switches for some checkboxes
     $(container).find(".js-switch").bootstrapToggle({
@@ -88,6 +102,11 @@ const initBootstrapToggle = (container) => {
     });
 };
 
+/**
+ * Init password security meter
+ * @param {type} container
+ * @returns {undefined}
+ */
 const initPasswordSecurityCheck = (container) => {
     // password security check
     if (typeof $(".password-security-check").password !== "undefined") {

@@ -38,7 +38,7 @@ CKEDITOR.editorConfig = function (config) {
         // We need also to disable plugins which are dependent on contextmenu
         config.removePlugins += ',colordialog,liststyle,tabletools,contextmenu,';
     }
-    
+
     config.autoGrow_onStartup = false;
     config.extraPlugins = 'link,font';
 };

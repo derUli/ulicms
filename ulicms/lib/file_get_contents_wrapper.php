@@ -2,7 +2,10 @@
 
 declare(strict_types=1);
 
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
 use UliCMS\Exceptions\CorruptDownloadException;
+
 
 // die Funktionalität von file_get_contents
 // mit dem Curl-Modul umgesetzt

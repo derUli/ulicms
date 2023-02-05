@@ -1,4 +1,10 @@
-
+/**
+ * Copies a text to clipboard
+ * @param {type} text
+ * @param {type} successCallback
+ * @param {type} errorCallback
+ * @returns {undefined}
+ */
 const copyTextToClipboard = (
         text,
         successCallback = null,
@@ -57,7 +63,7 @@ const copyTextToClipboard = (
             successCallback();
         }
     } catch (error) {
-        console.log('Oops, unable to copy');
+        console.error('Oops, unable to copy');
         if (errorCallback) {
             errorCallback(error);
         }

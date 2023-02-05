@@ -8,7 +8,7 @@ const openMenuImageSelectWindow = (target) => {
             "status=0, toolbar=0, location=0, menubar=0, directories=0, " +
             "resizable=1, scrollbars=0, width=850, height=600"
             );
-}
+};
 
 $(() => {
     $("#og_image").click((event) => openMenuImageSelectWindow(event.target))

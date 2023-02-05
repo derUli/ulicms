@@ -1,5 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
 // HTML Code für Anti CSRF Token zurückgeben
 // Siehe http://de.wikipedia.org/wiki/Cross-Site-Request-Forgery
 function get_csrf_token_html(): string {

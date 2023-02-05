@@ -119,7 +119,6 @@ class RequestTest extends \PHPUnit\Framework\TestCase {
     public function testGetReferrer() {
         $_SERVER["HTTP_REFERER"] = "https://www.google.de/?q=Hallo%20Welt";
         $this->assertEquals($_SERVER["HTTP_REFERER"], Request::getReferrer());
-        $this->assertEquals($_SERVER["HTTP_REFERER"], get_referer());
         $this->assertEquals($_SERVER["HTTP_REFERER"], get_referrer());
     }
 

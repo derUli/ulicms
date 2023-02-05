@@ -66,10 +66,6 @@ function get_http_host(): ?string {
     return get_domain();
 }
 
-function get_referer(): ?string {
-    return get_referrer();
-}
-
 function get_referrer(): ?string {
     return Request::getReferrer();
 }

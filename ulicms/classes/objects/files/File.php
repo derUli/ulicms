@@ -108,7 +108,7 @@ class File
     {
         $url = null;
         if (file_exists($file)) {
-            $mime = is_null($mime) ? get_mime($file) : $mime;
+            $mime = is_null($mime) ? File::getMime($file) : $mime;
             $data = file_get_contents($file);
             $base64_data = base64_encode($data);
             $url = "data:{$mime};base64,{$base64_data}";

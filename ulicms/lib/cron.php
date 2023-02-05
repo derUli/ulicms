@@ -2,6 +2,8 @@
 
 use UliCMS\Models\Content\Comment;
 
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
 if (!defined("LOADED_LANGUAGE_FILE")) {
     setLanguageByDomain();
 

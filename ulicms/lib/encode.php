@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
 function var_dump_str(): string {
     $argc = func_num_args();
     $argv = func_get_args();

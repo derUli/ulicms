@@ -1,5 +1,8 @@
-// shakes a div (animation)
-// This is used when login fails
+/**
+ * Shake animation
+ * @param {type} div
+ * @returns {undefined}
+ */
 const shake = (div) => {
     const interval = 100;
     const distance = 10;
@@ -25,14 +28,28 @@ const scrollToAnchor = (aid) => {
     }, 'slow');
 };
 
+/**
+ * Set mouse pointer to wait
+ * @returns {undefined}
+ */
+
 const setWaitCursor = () => {
     $('body').css('cursor', 'progress');
 };
 
+/**
+ * Set mouse pointer to default
+ * @returns {undefined}
+ */
 const setDefaultCursor = () => {
     $('body').css('cursor', 'auto');
 };
 
+/**
+ * Tooltip drop in replacement for title attributes
+ * @param {type} root
+ * @returns {undefined}
+ */
 const bindTooltips = (root) => {
     if (isTouchDevice()) {
         return;

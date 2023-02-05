@@ -66,11 +66,6 @@ function uninstall_module(string $name, string $type = "module"): bool {
     return false;
 }
 
-function isModuleInstalled(string $name): bool {
-    $module = new Module($name);
-    return $module->isInstalled();
-}
-
 function getAllModules(): array {
     if (Vars::get("allModules")) {
         return Vars::get("allModules");

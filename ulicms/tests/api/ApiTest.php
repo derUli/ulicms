@@ -301,15 +301,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("test", get_environment());
     }
 
-    public function testIsModuleInstalledReturnsTrue() {
-        $this->assertTrue(isModuleInstalled("core_content"));
-        $this->assertTrue(isModuleInstalled("fortune2"));
-    }
-
-    public function testIsModuleInstalledReturnsFalse() {
-        $this->assertFalse(isModuleInstalled("not_a_module"));
-    }
-
     public function testFuncEnabledReturnsTrue() {
         $enabled = func_enabled("mysqli_connect");
         $this->assertTrue($enabled);

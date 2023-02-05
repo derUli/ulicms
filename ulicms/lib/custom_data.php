@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
 function get_custom_data(?string $page = null): array {
     return CustomData::get($page);
 }

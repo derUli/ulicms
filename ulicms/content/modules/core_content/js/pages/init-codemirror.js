@@ -4,6 +4,11 @@ let formChanged = 0;
 let submitted = 0;
 let isCtrl = false;
 
+/**
+ * Check if this is a valid JSON string
+ * @param {type} str
+ * @returns {Boolean}
+ */
 const isJsonString = (str) => {
     try {
         JSON.parse(str);
