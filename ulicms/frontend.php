@@ -186,7 +186,7 @@ if (file_exists(getTemplateDirPath($theme, true) . "functions.php")) {
 
 do_event("after_functions");
 
-$hasModul = containsModule(get_slug());
+$hasModule = containsModule(get_slug());
 
 $cache_control = get_cache_control();
 switch ($cache_control) {
@@ -194,17 +194,17 @@ switch ($cache_control) {
     case "force":
         Flags::setNoCache(false);
         break;
-        break;
     case "no_cache":
         Flags::setNoCache(true);
         break;
 }
-if ($hasModul) {
+
+if ($hasModule) {
     no_cache();
 }
 
 // Kein Caching wenn man eingeloggt ist
-if (is_logged_in() and get_cache_control() == "auto") {
+if (is_logged_in() && get_cache_control() == "auto") {
     no_cache();
 }
 

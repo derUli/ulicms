@@ -15,6 +15,7 @@ Entfernte API-Methoden:
 * logged_in()
 * getAllUsers()
 * getOnlineUsers()
+* clearAPCCache()
 
 ===== Neues in UliCMS 2022.1 =====
 

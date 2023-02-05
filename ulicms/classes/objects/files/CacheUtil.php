@@ -96,10 +96,6 @@ class CacheUtil
     {
         do_event("before_clear_cache");
 
-        // clear apc cache if available
-        if (function_exists("apc_clear_cache")) {
-            clearAPCCache();
-        }
         // clear opcache if available
         if (function_exists("opcache_reset")) {
             opcache_reset();
