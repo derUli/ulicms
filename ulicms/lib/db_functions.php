@@ -12,11 +12,6 @@ function db_query(string $query) {
     return Database::query($query);
 }
 
-
-function db_name_escape(string $name): string {
-    return Database::escapeName($name);
-}
-
 function db_last_insert_id(): ?int {
     return Database::getLastInsertID();
 }

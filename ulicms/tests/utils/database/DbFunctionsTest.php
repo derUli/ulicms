@@ -121,11 +121,6 @@ class DbFunctionsTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(2, db_num_rows($query));
     }
 
-    public function testDbEscapeName()
-    {
-        $this->assertEquals("`foobar`", db_name_escape('foobar'));
-    }
-
     public function testDbAdffectedRows()
     {
         db_query("update " . tbname("content") . " set `views` = `views` + 1 where language = 'en'");
