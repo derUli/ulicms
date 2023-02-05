@@ -196,9 +196,17 @@ if (!is_dir(ULICMS_TMP)) {
     mkdir(ULICMS_TMP);
 }
 
-if (!defined("ULICMS_CACHE")) {
-    define("ULICMS_CACHE", ULICMS_DATA_STORAGE_ROOT . "/content/cache/");
+if (!defined("ULICMS_CACHE_BASE")) {
+    define("ULICMS_CACHE_BASE", ULICMS_DATA_STORAGE_ROOT . "/content/cache");
 }
+
+// TOdo: Alle stellen, wo manuell Cache-Dateien geschrieben werden auf PhpFastCache umstellen
+// und das hier dann abschaffen.
+
+if (!defined("ULICMS_CACHE")) {
+    define("ULICMS_CACHE", ULICMS_CACHE_BASE . "/legacy");
+}
+
 if (!defined("ULICMS_LOG")) {
     define("ULICMS_LOG", ULICMS_DATA_STORAGE_ROOT . "/content/log/");
 }
@@ -212,6 +220,10 @@ if (!defined("ULICMS_GENERATED")) {
 
 if (!defined("ULICMS_CONFIGURATIONS")) {
     define("ULICMS_CONFIGURATIONS", ULICMS_CONTENT . "/configurations/");
+}
+
+if (!is_dir(ULICMS_CACHE_BASE)) {
+    mkdir(ULICMS_CACHE_BASE);
 }
 if (!is_dir(ULICMS_CACHE)) {
     mkdir(ULICMS_CACHE);

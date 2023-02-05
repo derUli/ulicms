@@ -2,8 +2,7 @@
 
 declare(strict_types=1);
 
-function get_all_used_menus(): array
-{
+function get_all_used_menus(): array {
     $retval = [];
     $result = db_query("select menu from " . tbname("content") .
             " group by menu");
@@ -17,8 +16,8 @@ function get_all_used_menus(): array
 // Zusätzliche Navigationsmenüs können definiert werden,
 // durch setzen von additional_menus
 function getAllMenus(
-    bool $only_used = false,
-    bool $read_theme_menus = true
+        bool $only_used = false,
+        bool $read_theme_menus = true
 ): array {
     $menus = array(
         "left",
@@ -40,9 +39,9 @@ function getAllMenus(
         $new_menus = [];
 
         $menuCount = count($menus);
-        
-        for ($i = 0; $i < $menuCount; $i ++) {
-            if (faster_in_array($menus[$i], $used)) {
+
+        for ($i = 0; $i < $menuCount; $i++) {
+            if (in_array($menus[$i], $used)) {
                 $new_menus[] = $menus[$i];
             }
         }
@@ -53,20 +52,20 @@ function getAllMenus(
     $allThemeMenus = [];
     foreach ($themesList as $theme) {
         $themeMenus = getThemeMeta($theme, "menus");
-        if ($themeMenus and is_array($themeMenus)) {
+        if ($themeMenus && is_array($themeMenus)) {
             foreach ($themeMenus as $m) {
-                if (!faster_in_array($m, $allThemeMenus)) {
+                if (!in_array($m, $allThemeMenus)) {
                     $allThemeMenus[] = $m;
                 }
             }
         }
     }
 
-    if ($read_theme_menus and count($allThemeMenus) > 0) {
+    if ($read_theme_menus && count($allThemeMenus) > 0) {
         $menus = $allThemeMenus;
     }
 
-    if (!faster_in_array("not_in_menu", $menus)) {
+    if (!in_array("not_in_menu", $menus)) {
         $menus[] = "not_in_menu";
     }
 

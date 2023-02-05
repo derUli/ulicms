@@ -47,7 +47,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
 
         $html = getCombinedScriptHtml();
         $this->assertStringStartsWith(
-            '<script src="content/cache/scripts/',
+            '<script src="content/cache/legacy/scripts/',
             $html
         );
         $this->assertStringContainsString(".js?time=", $html);
@@ -73,7 +73,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
         $html = ob_get_clean();
 
         $this->assertStringStartsWith(
-            '<script src="content/cache/scripts/',
+            '<script src="content/cache/legacy/scripts/',
             $html
         );
         $this->assertStringContainsString(".js?time=", $html);
@@ -273,7 +273,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
         $html = get_all_combined_html();
 
         $this->assertStringContainsString(
-            '<script src="content/cache/scripts/',
+            '<script src="content/cache/legacy/scripts/',
             $html
         );
         $this->assertStringContainsString(
@@ -313,7 +313,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
         $html = ob_get_clean();
 
         $this->assertStringContainsString(
-            '<script src="content/cache/scripts/',
+            '<script src="content/cache/legacy/scripts/',
             $html
         );
         $this->assertStringContainsString(

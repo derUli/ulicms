@@ -19,10 +19,10 @@ setLanguageByDomain();
 $languages = getAllLanguages();
 
 if (!empty($_GET["language"])
-        and faster_in_array($_GET["language"], $languages)) {
+        && in_array($_GET["language"], $languages)) {
     $_SESSION["language"] = Database::escapeValue(
-        $_GET["language"],
-        DB_TYPE_STRING
+                    $_GET["language"],
+                    DB_TYPE_STRING
     );
 }
 
@@ -32,8 +32,8 @@ if (!isset($_SESSION["language"])) {
 
 setLocaleByLanguage();
 
-if (faster_in_array($_SESSION["language"], $languages)
-        and file_exists(getLanguageFilePath($_SESSION["language"]))) {
+if (in_array($_SESSION["language"], $languages)
+        && file_exists(getLanguageFilePath($_SESSION["language"]))) {
     require_once getLanguageFilePath($_SESSION["language"]);
 } elseif (file_exists(getLanguageFilePath("en"))) {
     require getLanguageFilePath("en");
@@ -67,7 +67,6 @@ if (Request::getVar("run_cron")) {
 $slug = strtolower($_GET['slug'] ?? '');
 $slugParts = explode('.', $slug);
 
-
 // No extension anymore since UliCMS 2023.1
 // Redirect old urls to new one without extension
 $formatExtensions = [
@@ -81,7 +80,7 @@ $formatExtensions = [
 
 $slugExtension = count($slugParts) > 1 ? end($slugParts) : null;
 
-if(in_array($slugExtension, $formatExtensions)){
+if (in_array($slugExtension, $formatExtensions)) {
     $newUrl = str_replace(".{$slugExtension}", '', $_SERVER['REQUEST_URI']);
     Response::redirect($newUrl, HttpStatusCode::MOVED_PERMANENTLY);
 }
@@ -119,18 +118,18 @@ do_event("before_http_header");
 
 $redirection = get_redirection();
 
-if ($redirection and (is_active() or is_logged_in())) {
+if ($redirection && (is_active() or is_logged_in())) {
     Request::redirect($redirection, 302);
 }
 
 if (get_ID()) {
     try {
         $page = ContentFactory::getByID(get_ID());
-        if (!is_null($page->id) and $page instanceof Language_Link) {
+        if (!is_null($page->id) && $page instanceof Language_Link) {
             $language = new Language($page->link_to_language);
             if (!is_null($language->getID())
-                    and StringHelper::isNotNullOrWhitespace(
-                        $language->getLanguageLink()
+                    && StringHelper::isNotNullOrWhitespace(
+                            $language->getLanguageLink()
                     )
             ) {
                 Request::redirect($language->getLanguageLink());
@@ -200,12 +199,11 @@ if (is_logged_in() && get_cache_control() == "auto") {
 do_event("before_html");
 
 $cacheAdapter = null;
-if (CacheUtil::isCacheEnabled() and Request::isGet()
-        && !Flags::getNoCache()) {
+if (CacheUtil::isCacheEnabled() && Request::isGet() && !Flags::getNoCache()) {
     $cacheAdapter = CacheUtil::getAdapter();
 }
 $uid = CacheUtil::getCurrentUid();
-if ($cacheAdapter and $cacheAdapter->get($uid)) {
+if ($cacheAdapter && $cacheAdapter->get($uid)) {
     echo $cacheAdapter->get($uid);
 
     if (Settings::get("no_auto_cron")) {
@@ -245,7 +243,7 @@ if ($text_position == "after") {
 $disable_functions = getThemeMeta(get_theme(), "disable_functions");
 
 if (!(is_array($disable_functions)
-        and faster_in_array("output_content", $disable_functions))) {
+        && in_array("output_content", $disable_functions))) {
     content();
 }
 
@@ -258,7 +256,7 @@ do_event("after_content");
 do_event("before_edit_button");
 
 if (!(is_array($disable_functions)
-        and faster_in_array("edit_button", $disable_functions))) {
+        && in_array("edit_button", $disable_functions))) {
     edit_button();
 }
 

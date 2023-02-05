@@ -43,6 +43,7 @@ class Path
             );
         }
         $path = str_ireplace("ULICMS_TMP", rtrim(ULICMS_TMP, "/"), $path);
+        $path = str_ireplace("ULICMS_CACHE_BASE", rtrim(ULICMS_CACHE_BASE, "/"), $path);
         $path = str_ireplace("ULICMS_CACHE", rtrim(ULICMS_CACHE, "/"), $path);
         $path = str_ireplace(
             "ULICMS_CONTENT",

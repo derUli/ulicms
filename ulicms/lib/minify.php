@@ -80,13 +80,13 @@ function minifyJs(): string
     }
 
     $cacheId = md5((implode(";", $scripts)) . $lastmod);
-    $jsDir = Path::resolve("ULICMS_ROOT/content/cache/scripts");
+    $jsDir = Path::resolve("ULICMS_CACHE/scripts");
 
     if (!is_dir($jsDir)) {
         mkdir($jsDir, 0777, true);
     }
     $jsUrl = !is_admin_dir() ?
-            "content/cache/scripts" : "../content/cache/scripts";
+            "content/cache/legacy/scripts" : "../content/cache/legacy/scripts";
 
     $bundleFile = "{$jsDir}/{$cacheId}.js";
     $bundleUrl = "{$jsUrl}/{$cacheId}.js";
@@ -129,13 +129,13 @@ function minifyCSS(): string
 
     $cacheId = md5((implode(";", $stylesheets)) . $lastmod);
 
-    $cssDir = Path::resolve("ULICMS_ROOT/content/cache/stylesheets");
+    $cssDir = Path::resolve("ULICMS_CACHE/stylesheets");
 
     if (!is_dir($cssDir)) {
         mkdir($cssDir, 0777, true);
     }
     $cssUrl = !is_admin_dir() ?
-            "content/cache/stylesheets" : "../content/cache/stylesheets";
+            "content/cache/legacy/stylesheets" : "../content/cache/legacy/stylesheets";
 
     $bundleFile = "{$cssDir}/{$cacheId}.css";
     $bundleUrl = "{$cssUrl}/{$cacheId}.css";
