@@ -27,7 +27,6 @@ $permissionChecker = new UliCMS\Security\PermissionChecker(get_user_id());
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <meta name="google" content="notranslate" />
         <title>[<?php Template::escape(Settings::get("homepage_title")); ?>] - UliCMS</title>
-        <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
         <?php
         $styles = [];
         ?>

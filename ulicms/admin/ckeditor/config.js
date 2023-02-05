@@ -37,10 +37,8 @@ CKEDITOR.editorConfig = function (config) {
         console.log("CKEditor: This is a touchscreen device. Disable Context Menu");
         // We need also to disable plugins which are dependent on contextmenu
         config.removePlugins += ',colordialog,liststyle,tabletools,contextmenu,';
-    } else
-    {
-        console.log("CKEditor: Can't touch this");
     }
+    
     config.autoGrow_onStartup = false;
     config.extraPlugins = 'link,font';
 };
