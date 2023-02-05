@@ -4,10 +4,6 @@ require_once "init.php";
 
 use UliCMS\Models\Content\Language;
 use UliCMS\Utils\CacheUtil;
-use UliCMS\Renderers\CsvRenderer;
-use UliCMS\Renderers\JsonRenderer;
-use UliCMS\Renderers\PdfRenderer;
-use UliCMS\Renderers\PlainTextRenderer;
 
 global $connection;
 
@@ -94,12 +90,6 @@ if (isMaintenanceMode()) {
     die();
 }
 
-if (isset($_GET["format"]) && !empty($_GET["format"])) {
-    $format = trim($_GET["format"]);
-} else {
-    $format = "html";
-}
-
 setSCSSImportPaths([ULICMS_GENERATED]);
 
 do_event("before_http_header");
@@ -142,31 +132,12 @@ ControllerRegistry::runMethods();
 
 send_header($_SERVER["SERVER_PROTOCOL"] . " " . $status);
 
-if ($format == "html") {
-    send_header("Content-Type: text/html; charset=utf-8");
-} elseif ($format == "pdf") {
-    $pdf = new PdfRenderer();
-    Result($pdf->render(), HttpStatusCode::OK, "application/pdf");
-} elseif ($format == "csv") {
-    $csv = new CsvRenderer();
-    Result($csv->render(), HttpStatusCode::OK, "text/csv");
-} elseif ($format == "json") {
-    $json = new JsonRenderer();
-    RawJSONResult($json->render());
-} elseif ($format == "txt") {
-    $plain = new PlainTextRenderer();
-    TextResult($plain->render());
-} else {
-    ExceptionResult(
-        get_secure_translation(
-            "unsupported_output_format",
-            [
-                        "%format%" => $format
-                    ]
-        )
-    );
-}
+// Die Renderer wurden entfernt. Damit können Inhalte nur noch als HTML abgerufen werden.
+// TODO: Die ENdung .html aus den URLs entfernen, aber abwärtskompatibel mit Weiterleitung.
+// Wer einen alten Link z.B. example.org/willkommen.html aufruft, soll einen permanent redirect auf 
+// example.org/willkommen kriegen.
 
+send_header("Content-Type: text/html; charset=utf-8");
 
 do_event("after_http_header");
 

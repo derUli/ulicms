@@ -736,14 +736,6 @@ add_translation("enter_pass", "Geben Sie Ihr Passwort ein");
 
 add_translation("all", "Alle");
 
-add_translation("disabled_functions", "Deaktivierte Funktionen");
-
-add_translation("unsupported_output_format", "Nicht unterstütztes Ausgabeformat: %format%");
-
-add_translation("mpdf_not_installed", "mPDF ist nicht installiert.\n"
-        . "Bitte installieren Sie mPDF von %link% um das PDF-Ausgabe "
-        . "Feature nutzen zu können.");
-
 add_translation("copied_to_clipboard_success", "Text wurde in die Zwischenablage kopiert.");
 add_translation("copied_to_clipboard_failed", "Kopieren des Textes fehlgeschlagen.");
 
