@@ -29,22 +29,6 @@ function db_fetch_assoc(?mysqli_result $result) {
     return Database::fetchAssoc($result);
 }
 
-function db_close(): void {
-    Database::close();
-}
-
-// Connect with database server
-function db_connect(
-        string $server,
-        string $user,
-        string $password,
-        int $port = 3306,
-        ?string $socket = null,
-        bool $db_strict_mode = false
-): ?object {
-    return Database::connect($server, $user, $password, $port, $socket, $db_strict_mode);
-}
-
 // Datenbank auswählen
 function db_select(string $schema): bool {
     return Database::select($schema);

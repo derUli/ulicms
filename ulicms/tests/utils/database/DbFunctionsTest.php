@@ -150,39 +150,4 @@ class DbFunctionsTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testClose()
-    {
-        $this->assertTrue(Database::isConnected());
-
-        db_close();
-        $this->assertFalse(Database::isConnected());
-
-        $this->reconnect(true);
-        $this->assertTrue(Database::isConnected());
-
-        db_close();
-
-        $this->reconnect();
-    }
-
-    private function reconnect($db_strict_mode = null)
-    {
-        $config = new CMSConfig();
-        $db_socket = isset($config->db_socket) ? $config->db_socket : ini_get("mysqli.default_socket");
-
-        $db_port = isset($config->db_port) ? $config->db_port : ini_get("mysqli.default_port");
-
-        if ($db_strict_mode === null) {
-            $db_strict_mode = isset($config->db_strict_mode) ? boolval($config->db_strict_mode) : false;
-        }
-
-        db_connect($config->db_server, $config->db_user, $config->db_password, $db_port, $db_socket, $db_strict_mode);
-
-        $this->assertFalse(schema_select("gibts_nicht"));
-
-        $this->assertTrue(schema_select($config->db_database));
-        $this->assertTrue(db_select_db($config->db_database));
-        $this->assertTrue(schema_select($config->db_database));
-        $this->assertTrue(db_select($config->db_database));
-    }
 }
