@@ -2,32 +2,36 @@
 
 declare(strict_types=1);
 
-// returns version number of UliCMS Core
+/**
+ * Returns the version number of UliCMS Core
+ * @return string
+ */
 function cms_version(): string
 {
     $v = new UliCMSVersion();
     return implode(".", $v->getInternalVersion());
 }
 
+/**
+ * Gets the UliCMS configuration environment
+ * @return string
+ */
 function get_environment(): string
 {
     return getenv("ULICMS_ENVIRONMENT") ?
             getenv("ULICMS_ENVIRONMENT") : "default";
 }
 
-function func_enabled(string $func): array
-{
-    $disabled = explode(',', ini_get('disable_functions'));
-    foreach ($disabled as $disableFunction) {
-        $is_disabled[] = trim($disableFunction);
-    }
-    if (faster_in_array($func, $is_disabled)) {
-        $it_is_disabled["m"] = $func .
-                '() has been disabled for security reasons in php.ini';
-        $it_is_disabled["s"] = 0;
-    } else {
-        $it_is_disabled["m"] = $func . '() is allow to use';
-        $it_is_disabled["s"] = 1;
-    }
-    return $it_is_disabled;
+/**
+ * Checks if a PHP builtin method is enabled
+ * This returns true for any method that isn't specified
+ * in the "disable_functions" option of php.ini
+ * @param string $func method name
+ * @return bool
+ */
+function func_enabled(string $func): bool {
+    $disabledFunctions = explode(',', ini_get('disable_functions') ?? '');
+    $disabledFunctions = array_map('trim', $disabledFunctions);
+    
+    return !in_array($func, $disabledFunctions);
 }
