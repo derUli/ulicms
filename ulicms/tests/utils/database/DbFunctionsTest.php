@@ -88,18 +88,6 @@ class DbFunctionsTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testDbFetchAll()
-    {
-        $datasets = Database::selectAll("settings");
-
-        $allSettings = db_fetch_all($datasets);
-        foreach ($allSettings as $row) {
-            $this->assertIsNumeric($row->id);
-            $this->assertNotEmpty($row->name);
-            $this->assertIsString($row->value);
-        }
-    }
-
     public function testDbNumRows()
     {
         $datasets = Database::selectAll("settings");

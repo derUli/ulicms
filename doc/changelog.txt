@@ -26,6 +26,7 @@ Entfernte API-Methoden:
 * db_get_client_info()
 * db_name_escape()
 * db_last_insert_id()
+* db_fetch_all()
 
 ===== Neues in UliCMS 2022.1 =====
 

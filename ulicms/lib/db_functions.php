@@ -12,7 +12,6 @@ function db_query(string $query) {
     return Database::query($query);
 }
 
-
 function db_insert_id(): ?int {
     return Database::getLastInsertID();
 }
@@ -28,10 +27,6 @@ function db_fetch_field(?mysqli_result $result) {
 
 function db_fetch_assoc(?mysqli_result $result) {
     return Database::fetchAssoc($result);
-}
-
-function db_fetch_all(?mysqli_result $result) {
-    return Database::fetchAll($result);
 }
 
 function db_close(): void {
