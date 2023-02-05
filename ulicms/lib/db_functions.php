@@ -33,10 +33,6 @@ function db_num_fields(): ?int {
     return Database::getNumFieldCount();
 }
 
-function db_select_db(string $schema): bool {
-    return Database::select($schema);
-}
-
 function db_fetch_object(?mysqli_result $result) {
     return Database::fetchObject($result);
 }

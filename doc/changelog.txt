@@ -30,6 +30,7 @@ Entfernte API-Methoden:
 * db_connect()
 * db_affected_rows()
 * schema_select()
+* db_select_db()
 
 ===== Neues in UliCMS 2022.1 =====
 
