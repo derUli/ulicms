@@ -33,6 +33,7 @@ Entfernte API-Methoden:
 * db_select_db()
 * db_last_error()
 * db_error()
+* db_get_tables() entfernt
 
 ===== Neues in UliCMS 2022.1 =====
 

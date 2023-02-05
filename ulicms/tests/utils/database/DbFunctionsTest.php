@@ -5,18 +5,6 @@ use UliCMS\Exceptions\SqlException;
 // test for legacy database methods
 class DbFunctionsTest extends \PHPUnit\Framework\TestCase
 {
-    public function testGetAllTables()
-    {
-        $tables = db_get_tables();
-        $cfg = new CMSConfig();
-        $prefix = $cfg->db_prefix;
-        $this->assertGreaterThanOrEqual(21, count($tables));
-
-        $this->assertContains("{$prefix}content", $tables);
-        $this->assertContains("{$prefix}settings", $tables);
-        $this->assertContains("{$prefix}users", $tables);
-    }
-
     public function testTbName()
     {
         $tableName = tbname("random_table");

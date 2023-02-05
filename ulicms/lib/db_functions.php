@@ -45,10 +45,6 @@ function db_num_rows(mysqli_result $result): ?int {
     return Database::getNumRows($result);
 }
 
-function db_get_tables(): array {
-    return Database::getAllTables();
-}
-
 function db_real_escape_string($value): string {
     return Database::escapeValue($value, DB_TYPE_STRING);
 }
