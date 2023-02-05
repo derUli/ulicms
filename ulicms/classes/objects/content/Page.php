@@ -198,13 +198,13 @@ class Page extends Content {
         }
 
         $sql .= "'" . Database::escapeValue($this->access) . "',";
-        if (is_present($this->meta_description)) {
+        if ($this->meta_description) {
             $sql .= "'" . Database::escapeValue($this->meta_description) . "',";
         } else {
             $sql .= "NULL,";
         }
 
-        if (is_present($this->meta_keywords)) {
+        if ($this->meta_keywords) {
             $sql .= "'" . Database::escapeValue($this->meta_keywords) . "',";
         } else {
             $sql .= "NULL,";
@@ -304,14 +304,14 @@ class Page extends Content {
         }
 
         $sql .= "access='" . Database::escapeValue($this->access) . "',";
-        if (is_present($this->meta_description)) {
+        if ($this->meta_description) {
             $sql .= "meta_description='" .
                     Database::escapeValue($this->meta_description) . "',";
         } else {
             $sql .= "meta_description = null,";
         }
 
-        if (is_present($this->meta_keywords)) {
+        if ($this->meta_keywords) {
             $sql .= "meta_keywords='" .
                     Database::escapeValue($this->meta_keywords) . "',";
         } else {

@@ -347,8 +347,7 @@ class User extends Model
 
     public function getDisplayName(): string
     {
-        $name = is_present($this->getFullName()) ? $this->getFullName() :
-                $this->getUsername();
+        $name = !empty($this->getFullName()) ? $this->getFullName() : $this->getUsername();
         return $name ?? "";
     }
 

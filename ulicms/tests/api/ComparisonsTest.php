@@ -198,26 +198,6 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse(is_blank("13"));
     }
 
-    public function testIsPresentReturnsTrue()
-    {
-        $this->assertTrue(is_present(" hallo welt "));
-        $this->assertTrue(is_present(13));
-        $this->assertTrue(is_present(true));
-        $this->assertTrue(is_present(array("foo", "bar")));
-        $this->assertTrue(is_present("13"));
-    }
-
-    public function testIsPresentReturnsFalse()
-    {
-        $this->assertFalse(is_present(""));
-        $this->assertFalse(is_present(" "));
-        $this->assertFalse(is_present(false));
-        $this->assertFalse(is_present(null));
-        $this->assertFalse(is_present(0));
-        $this->assertFalse(is_present([]));
-        $this->assertFalse(is_present("0"));
-    }
-
     public function testStartsWithReturnsTrue()
     {
         $this->assertTrue(startsWith("hello world", "hello"));

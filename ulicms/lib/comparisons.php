@@ -105,11 +105,6 @@ function is_blank($val = null): bool
             empty($val);
 }
 
-function is_present($val = null): bool
-{
-    return isset($val) && !is_blank($val);
-}
-
 function is_json(?string $str): bool
 {
     return !is_null($str) ? json_decode($str) != null : false;

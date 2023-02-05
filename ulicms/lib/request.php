@@ -14,7 +14,7 @@ function set_format(string $format): void
 
 function get_format(): string
 {
-    return (isset($_GET["format"]) and is_present($_GET["format"])) ? $_GET["format"] : "html";
+    return $_GET["format"] ?? "html";
 }
 
 function _check_form_timestamp(): bool

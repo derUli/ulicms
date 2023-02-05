@@ -155,7 +155,7 @@ function keywordsFromString(string $text): array
 
 function stringOrNull($val): ?string
 {
-    return is_present($val) ? $val : null;
+    return is_string($val) && !empty($val) ? $val : null;
 }
 
 // Aus einer Boolean einen String machen ("true" oder "false")

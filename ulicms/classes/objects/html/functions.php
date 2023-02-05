@@ -62,7 +62,7 @@ function link(
     array $htmlAttributes = []
 ): string {
     $htmlAttributes["href"] = $url;
-    if (is_present($target)) {
+    if ($target) {
         $htmlAttributes["target"] = $target;
     }
 
