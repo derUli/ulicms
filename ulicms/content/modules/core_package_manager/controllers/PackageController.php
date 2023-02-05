@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use UliCMS\Services\Connectors\PackageSourceConnector;
 use function UliCMS\HTML\text;
+use zz\Html\HTMLMinify;
 
 class PackageController extends MainClass {
 
@@ -178,7 +179,11 @@ class PackageController extends MainClass {
 
     public function availablePackages(): void {
         $html = $this->_availablePackages();
-        HtmlResult($html);
+        HtmlResult(
+            $html,
+            HttpStatusCode::OK,
+            HTMLMinify::OPTIMIZATION_ADVANCED
+        );
     }
 
     public function _availablePackages(): string {
