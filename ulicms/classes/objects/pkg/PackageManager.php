@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use UliCMS\Services\Connectors\PackageSourceConnector;
 use UliCMS\Constants\PackageTypes;
+use UliCMS\Utils\CacheUtil;
 
 class PackageManager
 {
@@ -77,12 +78,12 @@ class PackageManager
             }
 
             if ($clear_cache) {
-                clearCache();
+                CacheUtil::clearCache();
             }
             return true;
         } catch (Exception $e) {
             if ($clear_cache) {
-                clearCache();
+                CacheUtil::clearCache();
             }
             return false;
         }

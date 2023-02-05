@@ -107,6 +107,8 @@ class CacheUtil {
         if (function_exists("opcache_reset")) {
             opcache_reset();
         }
+        
+        self::clearPageCache();
 
         sureRemoveDir(Path::resolve("ULICMS_CACHE"), false);
         sureRemoveDir(Path::resolve("ULICMS_TMP"), false);
