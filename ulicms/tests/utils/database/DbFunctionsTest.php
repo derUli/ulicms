@@ -126,20 +126,7 @@ class DbFunctionsTest extends \PHPUnit\Framework\TestCase
         } finally {
             $this->assertStringEndsWith(
                 "gibts_nicht' doesn't exist",
-                db_error()
-            );
-        }
-    }
-
-    public function testDbLastError()
-    {
-        try {
-            Database::selectAll("gibts_nicht");
-        } catch (SqlException $e) {
-        } finally {
-            $this->assertStringEndsWith(
-                "gibts_nicht' doesn't exist",
-                db_last_error()
+                Database::getLastError()
             );
         }
     }

@@ -45,14 +45,6 @@ function db_num_rows(mysqli_result $result): ?int {
     return Database::getNumRows($result);
 }
 
-function db_last_error(): ?string {
-    return Database::getLastError();
-}
-
-function db_error(): ?string {
-    return db_last_error();
-}
-
 function db_get_tables(): array {
     return Database::getAllTables();
 }
