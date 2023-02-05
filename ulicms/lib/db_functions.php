@@ -33,10 +33,6 @@ function db_num_fields(): ?int {
     return Database::getNumFieldCount();
 }
 
-function db_affected_rows(): ?int {
-    return Database::getAffectedRows();
-}
-
 function schema_select(string $schema): bool {
     return Database::select($schema);
 }

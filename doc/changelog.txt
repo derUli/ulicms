@@ -28,6 +28,7 @@ Entfernte API-Methoden:
 * db_last_insert_id()
 * db_fetch_all()
 * db_connect()
+* db_affected_rows()
 
 ===== Neues in UliCMS 2022.1 =====
 
