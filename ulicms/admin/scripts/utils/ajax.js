@@ -85,6 +85,7 @@ const initRemoteAlerts = (rootElement) => {
         const url = $(event.currentTarget).data("url");
         $.get(url, (result) => {
             setDefaultCursor();
+            bootbox.hideAll();
             bootbox.alert(result);
         });
     });
