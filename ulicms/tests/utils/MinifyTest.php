@@ -277,7 +277,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
             $html
         );
         $this->assertStringContainsString(
-            '<link rel="stylesheet" href="content/cache/stylesheets/',
+            '<link rel="stylesheet" href="content/cache/legacy/stylesheets/',
             $html
         );
     }
@@ -317,7 +317,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
             $html
         );
         $this->assertStringContainsString(
-            '<link rel="stylesheet" href="content/cache/stylesheets/',
+            '<link rel="stylesheet" href="content/cache/legacy/stylesheets/',
             $html
         );
     }

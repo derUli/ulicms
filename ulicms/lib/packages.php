@@ -2,6 +2,9 @@
 
 declare(strict_types=1);
 
+
+use UliCMS\Utils\CacheUtil;
+
 function getAllThemes(): array
 {
     $pkg = new PackageManager();
@@ -46,7 +49,7 @@ function uninstall_module(string $name, string $type = "module"): bool
                     require $uninstall_script2;
                 }
                 sureRemoveDir($moduleDir, true);
-                clearCache();
+                CacheUtil::clearCache();
                 return !is_dir($moduleDir);
             }
             break;

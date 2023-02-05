@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use UliCMS\Constants\AuditLog;
+use UliCMS\Utils\CacheUtil;
 
 class SessionManager extends Controller
 {
@@ -36,7 +37,7 @@ class SessionManager extends Controller
         if ($sessionData) {
             // sync modules folder with database at first login
             if (!Settings::get("sys_initialized")) {
-                clearCache();
+                CacheUtil::clearCache();
                 Settings::set("sys_initialized", "true");
             }
             do_event("login_ok");

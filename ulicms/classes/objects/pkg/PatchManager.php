@@ -5,20 +5,19 @@ declare(strict_types=1);
 namespace UliCMS\Packages;
 
 use Database;
-use function file_get_contents_wrapper;
-use function clearCache;
-use function sureRemoveDir;
-use function recurse_copy;
 use ZipArchive;
 use StringHelper;
+use UliCMS\Utils\CacheUtil;
+use function file_get_contents_wrapper;
+use function sureRemoveDir;
+use function recurse_copy;
 
-class PatchManager
-{
-    public function getInstalledPatchNames(): array
-    {
+class PatchManager {
+
+    public function getInstalledPatchNames(): array {
         $retval = [];
         $result = Database::query(
-            "SELECT name from " . tbname("installed_patches")
+                        "SELECT name from " . tbname("installed_patches")
         );
         while ($row = Database::fetchObject($result)) {
             $retval[] = $row->name;
@@ -26,42 +25,38 @@ class PatchManager
         return $retval;
     }
 
-    public function fetchPackageIndex(): ?string
-    {
+    public function fetchPackageIndex(): ?string {
         return file_get_contents_wrapper(PATCH_CHECK_URL, true);
     }
 
-    public function getAvailablePatches(): array
-    {
+    public function getAvailablePatches(): array {
         $patches = [];
         $indexData = $this->fetchPackageIndex();
         if (!$indexData) {
             return $patches;
         }
-        
+
         $lines = StringHelper::linesFromString($indexData, true, true);
         foreach ($lines as $line) {
             $splittedLine = explode("|", $line);
             $patches[] = new Patch(
-                $splittedLine[0],
-                $splittedLine[1],
-                $splittedLine[2],
-                $splittedLine[3]
+                    $splittedLine[0],
+                    $splittedLine[1],
+                    $splittedLine[2],
+                    $splittedLine[3]
             );
         }
         return $patches;
     }
 
-    public function truncateInstalledPatches(): bool
-    {
+    public function truncateInstalledPatches(): bool {
         return Database::truncateTable("installed_patches");
     }
 
-    public function getInstalledPatches(): array
-    {
+    public function getInstalledPatches(): array {
         $retval = [];
         $result = Database::query(
-            "SELECT * from " . tbname("installed_patches")
+                        "SELECT * from " . tbname("installed_patches")
         );
         while ($row = Database::fetchObject($result)) {
             $retval[$row->name] = $row;
@@ -70,11 +65,11 @@ class PatchManager
     }
 
     public function installPatch(
-        string $name,
-        string $description,
-        string $url,
-        bool $clear_cache = true,
-        ?string $checksum = null
+            string $name,
+            string $description,
+            string $url,
+            bool $clear_cache = true,
+            ?string $checksum = null
     ): bool {
         @set_time_limit(0);
         $test = $this->getInstalledPatchNames();
@@ -111,15 +106,16 @@ class PatchManager
 
                 sureRemoveDir($tmp_dir, true);
                 if ($clear_cache) {
-                    clearCache();
+                    CacheUtil::clearCache();
                 }
                 return true;
             }
         }
         sureRemoveDir($tmp_dir, true);
         if ($clear_cache) {
-            clearCache();
+            CacheUtil::clearCache();
         }
         return false;
     }
+
 }

@@ -1,6 +1,7 @@
 <?php
 
 use UliCMS\Models\Content\Language;
+use UliCMS\Utils\CacheUtil;
 
 class ApiTest extends \PHPUnit\Framework\TestCase
 {
@@ -21,9 +22,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->initialUser = Database::fetchObject($userQuery);
         $this->additionalMenus = Settings::get("additional_menus");
 
-        // call this method, which is an alias for CacheUtil::clearCache()
-        // to have it covered
-        clearCache();
+        CacheUtil::clearCache();
 
         $avatarsDirectory = Path::resolve("ULICMS_ROOT/content/avatars/");
         if (!is_dir($avatarsDirectory)) {

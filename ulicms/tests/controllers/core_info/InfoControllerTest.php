@@ -1,16 +1,18 @@
 <?php
 
+use UliCMS\Utils\CacheUtil;
+
 class InfoControllerTest extends \PHPUnit\Framework\TestCase
 {
     protected function setUp(): void
     {
         Translation::loadAllModuleLanguageFiles("en");
-        clearCache();
+        CacheUtil::clearCache();
     }
 
     protected function tearDown(): void
     {
-        clearCache();
+        CacheUtil::clearCache();
     }
 
     public function testfetchChangelog()

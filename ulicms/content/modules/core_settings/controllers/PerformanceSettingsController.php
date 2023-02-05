@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-class PerformanceSettingsController extends Controller
-{
-    public function _savePost(): void
-    {
+use UliCMS\Utils\CacheUtil;
+
+class PerformanceSettingsController extends Controller {
+
+    public function _savePost(): void {
         if (isset($_POST["cache_enabled"])) {
             Settings::delete("cache_disabled");
         } else {
@@ -24,34 +25,32 @@ class PerformanceSettingsController extends Controller
         Settings::set('lazy_loading_iframe', $lazy_loading_iframe);
     }
 
-    public function savePost(): void
-    {
+    public function savePost(): void {
         $this->_savePost();
 
         Response::sendHttpStatusCodeResultIfAjax(
-            HttpStatusCode::OK,
-            ModuleHelper::buildActionUrl(
-                "performance_settings",
-                "save=1"
-            )
+                HttpStatusCode::OK,
+                ModuleHelper::buildActionUrl(
+                        "performance_settings",
+                        "save=1"
+                )
         );
     }
 
-    public function _clearCache(): void
-    {
-        clearCache();
+    public function _clearCache(): void {
+        CacheUtil::clearCache();
     }
 
-    public function clearCache(): void
-    {
+    public function clearCache(): void {
         if (!is_logged_in()) {
             Request::redirect("index.php");
         }
 
         $this->_clearCache();
         Response::sendHttpStatusCodeResultIfAjax(
-            HttpStatusCode::OK,
-            ModuleHelper::buildActionURL("performance_settings")
+                HttpStatusCode::OK,
+                ModuleHelper::buildActionURL("performance_settings")
         );
     }
+
 }
