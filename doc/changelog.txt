@@ -4,6 +4,9 @@ Fehlerkorrekturen:
 * Google Fonts entfernt
 * Einige UI Fixes
 
+Entfernte Features:
+* Meta Keywords
+
 ===== Neues in UliCMS 2022.1 =====
 
 Neue Features:

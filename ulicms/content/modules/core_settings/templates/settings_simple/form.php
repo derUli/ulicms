@@ -104,11 +104,6 @@ if ($permissionChecker->hasPermission("settings_simple")) {
             <td><a href="index.php?action=meta_description"
                    class="btn btn-default is-not-ajax"><i class="fa fa-edit"></i> <?php translate("edit"); ?></a></td>
         </tr>
-        <tr>
-            <td><strong><?php translate("keywords"); ?></strong></td>
-            <td><a href="index.php?action=meta_keywords" class="btn btn-default is-not-ajax"><i
-                        class="fa fa-edit"></i>  <?php translate("edit"); ?></a></td>
-        </tr>
         <?php
         if ($permissionChecker->hasPermission("open_graph")) {
             ?>

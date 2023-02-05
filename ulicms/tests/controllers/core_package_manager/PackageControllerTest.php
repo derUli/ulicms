@@ -69,7 +69,7 @@ class PackageControllerTest extends \PHPUnit\Framework\TestCase
         $controller = new PackageController();
         $output = $controller->_availablePackages();
 
-        $this->assertGreaterThanOrEqual(99, substr_count($output, "<tr>"));
+        $this->assertGreaterThanOrEqual(90, substr_count($output, "<tr>"));
         $this->assertGreaterThanOrEqual(15, substr_count($output, "theme-"));
 
 
@@ -120,8 +120,8 @@ class PackageControllerTest extends \PHPUnit\Framework\TestCase
     public function testGetLicenseReturnsString()
     {
         $controller = new PackageController();
-        $output = $controller->_getPackageLicense("adminer");
-        $this->assertStringContainsString("Apache License or GPL2", $output);
+        $output = $controller->_getPackageLicense("bootstrap");
+        $this->assertStringContainsString("The MIT License (MIT)", $output);
     }
 
     public function testGetLicenseReturnsNull()

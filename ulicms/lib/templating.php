@@ -437,34 +437,6 @@ function homepage_title(): void {
     echo get_homepage_title();
 }
 
-function get_meta_keywords(): string {
-    $ipage = isset($_GET["slug"]) ? db_escape($_GET["slug"]) : '';
-    $result = db_query("SELECT meta_keywords FROM " . tbname("content") .
-            " WHERE slug='$ipage' AND language='" .
-            db_escape(getFrontendLanguage()) . "'");
-
-    if (db_num_rows($result) > 0) {
-        while ($row = db_fetch_object($result)) {
-            if (StringHelper::isNotNullOrEmpty($row->meta_keywords)) {
-                return $row->meta_keywords;
-            }
-        }
-    }
-    $meta_keywords = Settings::get("meta_keywords_" . getFrontendLanguage());
-    if (!$meta_keywords) {
-        $meta_keywords = Settings::get("meta_keywords");
-    }
-
-    return $meta_keywords;
-}
-
-function meta_keywords(): void {
-    $value = get_meta_keywords();
-    if ($value) {
-        echo $value;
-    }
-}
-
 function get_meta_description(?string $ipage = null): string {
     $ipage = isset($_GET["slug"]) ? db_escape($_GET["slug"]) : '';
     $result = db_query("SELECT meta_description FROM " . tbname("content") .

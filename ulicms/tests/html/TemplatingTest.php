@@ -832,15 +832,6 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("Bla Bla usw.", get_meta_description());
     }
 
-    public function testGetMetaKeywordsFromPage()
-    {
-        $article = $this->getArticleWithMetaData();
-
-        $_GET["slug"] = $article->slug;
-        $_SESSION["language"] = "de";
-
-        $this->assertEquals("word 1, word 2, word 3", get_meta_keywords());
-    }
 
     public function testMetaDescriptionFromPage()
     {
@@ -852,18 +843,6 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         ob_start();
         meta_description();
         $this->assertEquals("Bla Bla usw.", ob_get_clean());
-    }
-
-    public function testMetaKeywordsFromPage()
-    {
-        $article = $this->getArticleWithMetaData();
-
-        $_GET["slug"] = $article->slug;
-        $_SESSION["language"] = "de";
-
-        ob_start();
-        meta_keywords();
-        $this->assertEquals("word 1, word 2, word 3", ob_get_clean());
     }
 
     private function getArticleWithMetaData(): Article

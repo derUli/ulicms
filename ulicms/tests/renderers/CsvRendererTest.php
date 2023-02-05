@@ -91,7 +91,7 @@ class CsvRendererTest extends \PHPUnit\Framework\TestCase
         $output = $renderer->render();
         $output = $renderer->render();
 
-        $this->assertCount(8, str_getcsv($output));
+        $this->assertCount(6, str_getcsv($output));
     }
 
     public function testRenderWithTextPositionAfter()
@@ -120,7 +120,7 @@ class CsvRendererTest extends \PHPUnit\Framework\TestCase
         $output = $renderer->render();
         $output = $renderer->render();
 
-        $this->assertCount(8, str_getcsv($output));
+        $this->assertCount(6, str_getcsv($output));
     }
 
     public function testRenderNonExisting()
@@ -129,7 +129,7 @@ class CsvRendererTest extends \PHPUnit\Framework\TestCase
 
         $renderer = new CsvRenderer();
         $output = $renderer->render();
-        $this->assertStringContainsString("Title,Content,Description,Tags,Author", $output);
+        $this->assertStringContainsString("Title,Content,Description,Author", $output);
         $this->assertStringContainsString("This page doesn't exist.", $output);
     }
 }
