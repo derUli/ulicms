@@ -11,7 +11,7 @@ function clearCache(): void {
     CacheUtil::clearCache();
 }
 
-function no_cache($do = false): void {
+function no_cache(bool $do = false): void {
     if ($do) {
         Flags::setNoCache(true);
     } elseif (in_array(get_cache_control(), ["auto", "no_cache"])) {
