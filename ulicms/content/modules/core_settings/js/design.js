@@ -63,7 +63,7 @@ $(() => {
 
     $("select#default_font, select#font-size").change(updateFontPreview);
 
-updateFontPreview();
+    updateFontPreview();
 
     loadThemePreview($("select[name='theme']"));
     loadThemePreview($("select[name='mobile_theme']"));
