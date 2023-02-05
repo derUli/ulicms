@@ -1,4 +1,4 @@
-getFontSizes<?php
+<?php
 
 add_translation(
         "comment_contains_badword",
