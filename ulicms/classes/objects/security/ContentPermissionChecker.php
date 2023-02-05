@@ -9,25 +9,22 @@ use User;
 use Group;
 
 // permission checks for read, write and delete content permissions
-class ContentPermissionChecker implements IDatasetPermissionChecker
-{
+class ContentPermissionChecker implements IDatasetPermissionChecker {
+
     private $user_id;
 
-    public function __construct(int $user_id)
-    {
+    public function __construct(int $user_id) {
         $this->user_id = $user_id;
     }
 
-    public function canRead(int $contentId): bool
-    {
+    public function canRead(int $contentId): bool {
         $content = ContentFactory::getByID($contentId);
         $access = $content->checkAccess($content);
 
         return !is_null($access);
     }
 
-    public function canWrite(int $contentId): bool
-    {
+    public function canWrite(int $contentId): bool {
         $content = ContentFactory::getByID($contentId);
         $permissions = $content->getPermissions();
 
@@ -63,23 +60,19 @@ class ContentPermissionChecker implements IDatasetPermissionChecker
 
         // if there are edit restrictions
         if ($groupCanEdit or $adminsCanEdit or $ownerCanEdit or $othersCanEdit) {
-            if ($groupCanEdit and in_array($contentGroup, $groupIds)) {
+            if ($groupCanEdit && in_array($contentGroup, $groupIds)) {
                 $canEditThis = true;
-            } elseif ($adminsCanEdit and $user->isAdmin()) {
+            } elseif ($adminsCanEdit && $user->isAdmin()) {
                 $canEditThis = true;
-            } elseif ($ownerCanEdit and $isOwner
-                    and $permissionChecker->hasPermission("pages_edit_own")) {
+            } elseif ($ownerCanEdit && $isOwner && $permissionChecker->hasPermission("pages_edit_own")) {
                 $canEditThis = true;
-            } elseif ($othersCanEdit && !in_array($contentGroup, $groupIds)
-                    && !$user->isAdmin() && !$isOwner) {
+            } elseif ($othersCanEdit && !in_array($contentGroup, $groupIds) && !$user->isAdmin() && !$isOwner) {
                 $canEditThis = true;
             }
         } else {
-            if (!$isOwner
-                    and $permissionChecker->hasPermission("pages_edit_others")) {
+            if (!$isOwner && $permissionChecker->hasPermission("pages_edit_others")) {
                 $canEditThis = true;
-            } elseif ($isOwner
-                    and $permissionChecker->hasPermission("pages_edit_own")) {
+            } elseif ($isOwner && $permissionChecker->hasPermission("pages_edit_own")) {
                 $canEditThis = true;
             }
         }
@@ -92,8 +85,8 @@ class ContentPermissionChecker implements IDatasetPermissionChecker
         return $canEditThis;
     }
 
-    public function canDelete($contentId): bool
-    {
+    public function canDelete($contentId): bool {
         return $this->canWrite($contentId);
     }
+
 }

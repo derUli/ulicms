@@ -23,7 +23,8 @@ if (!$permissionChecker->hasPermission("groups")) {
     $group = new Group($id);
     $selectedLanguages = $group->getLanguages();
 
-    ksort($all_permissions); ?>
+    ksort($all_permissions);
+    ?>
     <form action="?action=groups" method="post">
         <?php csrf_token_html(); ?>
         <input type="hidden" name="id" value="<?php echo $id; ?>">
@@ -52,33 +53,47 @@ if (!$permissionChecker->hasPermission("groups")) {
                                    name="user_permissons[]" value="<?php esc($key); ?>"
                                    data-select-all-checkbox="#select-all"
                                    data-checkbox-group=".permission-checkbox"
-                                   class="permission-checkbox" <?php if ($value) {
-                        echo "checked";
-                    } ?>>
-                                   <?php
-                                   esc($key); ?> </label>
+                                   class="permission-checkbox" <?php
+                                   if ($value) {
+                                       echo "checked";
+                                   }
+                                   ?>>
+                            <?php esc($key); ?> </label>
                     </div>
-                    <?php
-                } ?>
+                <?php }
+                ?>
             </div>
         </fieldset>
+
         <h3><?php translate("languages"); ?></h3>
         <fieldset>
-            <?php foreach ($languages as $lang) { ?>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" name="restrict_edit_access_language[]"
-                               value="<?php echo $lang->getID(); ?>"
-                               <?php
-                               if (in_array($lang, $selectedLanguages)) {
-                                   echo "checked";
-                               }
-                               ?>
-                               id="lang-<?php echo $lang->getID(); ?>">
-                               <?php Template::escape($lang->getName()); ?>
-                    </label>
-                </div>
-            <?php } ?>
+            <div class="checkbox field">
+                <label>
+                    <input id="select-all-languages" type="checkbox" class="checkall">
+                    <?php translate("select_all"); ?>
+                </label>
+            </div>
+            <div class="voffset1">
+
+                <?php foreach ($languages as $lang) { ?>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="restrict_edit_access_language[]"
+                                   class="language-checkbox"
+                                   data-select-all-checkbox="#select-all-languages"
+                                   data-checkbox-group=".language-checkbox"
+                                   value="<?php echo $lang->getID(); ?>"
+                                   <?php
+                                   if (in_array($lang, $selectedLanguages)) {
+                                       echo "checked";
+                                   }
+                                   ?>
+                                   id="lang-<?php echo $lang->getID(); ?>">
+                                   <?php Template::escape($lang->getName()); ?>
+                        </label>
+                    </div>
+                <?php } ?>
+            </div>
         </fieldset>
         <h3><?php translate("allowable_tags"); ?></h3>
         <fieldset>

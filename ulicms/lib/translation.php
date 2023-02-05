@@ -15,7 +15,7 @@ function get_translation(string $name, array $placeholders = []): string {
             // als assoziatives Array als zweiter Parameter
             // dem Funktionsaufruf mitgegeben werden
             foreach ($placeholders as $placeholder => $replacement) {
-                $value = str_ireplace($placeholder, $replacement, $value);
+                $value = str_ireplace($placeholder, strval($replacement), $value);
             }
 
             return $value;

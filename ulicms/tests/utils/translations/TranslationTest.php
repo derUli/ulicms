@@ -159,4 +159,13 @@ Anschließend werden statt die Inhalte immer wieder aus der Datenbank zu laden, 
         $this->assertEquals("Pages", ob_get_clean());
     }
 
+    public function testGetTranslationWithNumber() {
+        $translation = get_translation("hello_x", [
+            "%x%" => 123
+                ]
+        );
+
+        $this->assertEquals("Hello 123", $translation);
+    }
+
 }

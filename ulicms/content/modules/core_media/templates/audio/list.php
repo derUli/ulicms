@@ -3,7 +3,7 @@
 use UliCMS\Models\Content\Categories;
 
 $permissionChecker = new ACL();
-$audio_folder = ULICMS_DATA_STORAGE_ROOT . "/content/audio";
+$audio_folder = ULICMS_ROOT . "/content/audio";
 if (!is_dir($audio_folder)) {
     mkdir($audio_folder);
 }
@@ -29,13 +29,12 @@ if ($permissionChecker->hasPermission("audio")) {
     <?php echo Template::executeModuleTemplate("core_media", "icons.php"); ?>
 
     <h1>
-        <?php
-        translate("audio"); ?>
+        <?php translate("audio"); ?>
     </h1>
-<div class="field">
-    <?php translate("category"); ?>
-    <?php echo Categories::getHTMLSelect($_SESSION ["filter_category"], true); ?>
-</div>
+    <div class="field">
+        <?php translate("category"); ?>
+        <?php echo Categories::getHTMLSelect($_SESSION ["filter_category"], true); ?>
+    </div>
     <?php if ($permissionChecker->hasPermission("audio_create")) { ?>
         <div class="voffset2">
             <a href="index.php?action=add_audio"
@@ -49,28 +48,24 @@ if ($permissionChecker->hasPermission("audio")) {
         <table class="tablesorter">
             <thead>
                 <tr>
-                    <th><?php
-                        translate("id"); ?>
+                    <th><?php translate("id"); ?>
                     </th>
-                    <th><?php
-                        translate("name"); ?>
+                    <th><?php translate("name"); ?>
                     </th>
-                    <th class="hide-on-mobile"><?php
-                        translate("OGG_FILE"); ?>
+                    <th class="hide-on-mobile"><?php translate("OGG_FILE"); ?>
                     </th>
-                    <th class="hide-on-mobile"><?php
-                        translate("MP3_FILE"); ?>
+                    <th class="hide-on-mobile"><?php translate("MP3_FILE"); ?>
                     </th>
 
                     <?php
                     if ($permissionChecker->hasPermission(
-                       "audio_edit"
-                   )) {
+                                    "audio_edit"
+                            )) {
                         ?>
                         <td class="no-sort"></td>
                         <td class="no-sort"></td>
-                    <?php
-                    } ?>
+                    <?php }
+                    ?>
                 </tr>
 
             </thead>
@@ -79,34 +74,27 @@ if ($permissionChecker->hasPermission("audio")) {
                 while ($row = db_fetch_object($all_audio)) {
                     ?>
                     <tr id="dataset-<?php echo $row->id; ?>">
-                        <td><?php
-                            echo $row->id; ?>
+                        <td><?php echo $row->id; ?>
                         </td>
-                        <td><?php
-                            esc($row->name); ?>
+                        <td><?php esc($row->name); ?>
                         </td>
-                        <td class="hide-on-mobile"><?php
-                            esc(basename($row->ogg_file)); ?>
+                        <td class="hide-on-mobile"><?php esc(basename($row->ogg_file)); ?>
                         </td>
-                        <td class="hide-on-mobile"><?php
-                            esc(basename($row->mp3_file)); ?>
+                        <td class="hide-on-mobile"><?php esc(basename($row->mp3_file)); ?>
                         </td>
                         <?php
                         if ($permissionChecker->hasPermission(
-                        "audio_edit"
-                    )
+                                        "audio_edit"
+                                )
                         ) {
                             ?>
                             <td>
                                 <a
-                                    href="index.php?action=edit_audio&id=<?php
-                                    echo $row->id; ?>"><img
+                                    href="index.php?action=edit_audio&id=<?php echo $row->id; ?>"><img
                                         src="gfx/edit.png"
                                         class="mobile-big-image"
-                                        alt="<?php
-                                        translate("edit"); ?>"
-                                        title="<?php
-                                        translate("edit"); ?>"> </a>
+                                        alt="<?php translate("edit"); ?>"
+                                        title="<?php translate("edit"); ?>"> </a>
                             </td>
                             <td>
                                 <form
@@ -121,26 +109,27 @@ if ($permissionChecker->hasPermission("audio")) {
                                         title="<?php translate("delete"); ?>">
                                 </form>
                             </td>
-                        <?php
-                        } ?>
+                        <?php }
+                        ?>
                     </tr>
-                <?php
-                } ?>
+                <?php }
+                ?>
             </tbody>
         </table>
     </div>
     <?php
     enqueueScriptFile(
-                                ModuleHelper::buildModuleRessourcePath(
-                                    "core_media",
-                                    "js/audio.js"
-                                )
-                            );
-    combinedScriptHtml(); ?>
+            ModuleHelper::buildModuleRessourcePath(
+                    "core_media",
+                    "js/audio.js"
+            )
+    );
+    combinedScriptHtml();
+    ?>
     <?php
 } else {
-        noPerms();
-    }
+    noPerms();
+}
 
 $translation = new JSTranslation(array(
     "ask_for_delete"

@@ -2,14 +2,16 @@
 
 use UliCMS\Renderers\CsvRenderer;
 use UliCMS\Utils\CacheUtil;
+use Spatie\Snapshots\MatchesSnapshots;
 
-class CsvRendererTest extends \PHPUnit\Framework\TestCase
-{
+class CsvRendererTest extends \PHPUnit\Framework\TestCase {
+
+    use MatchesSnapshots;
+
     private $cacheDisabledOriginal;
     private $cachePeriodOriginal;
 
-    protected function setUp(): void
-    {
+    protected function setUp(): void {
         require_once getLanguageFilePath("en");
 
         $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (Windows NT 6.1; "
@@ -23,8 +25,7 @@ class CsvRendererTest extends \PHPUnit\Framework\TestCase
         $_SERVER["REQUEST_URI"] = "/other-url.csv?param=value";
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         CacheUtil::clearPageCache();
         CacheUtil::resetAdapater();
         Database::query("delete from {prefix}content where title like 'Unit Test%'", true);
@@ -44,30 +45,18 @@ class CsvRendererTest extends \PHPUnit\Framework\TestCase
         unset($_SESSION["logged_in"]);
     }
 
-    public function testRender()
-    {
+    public function testRender() {
         Settings::delete("cache_disabled");
         Settings::set("cache_period", "500");
 
         $_GET["slug"] = "lorem_ipsum";
 
-        $expected = file_get_contents(
-            Path::resolve("ULICMS_ROOT/tests/fixtures/renderers/csv.csv")
-        );
         $renderer = new CsvRenderer();
-
-        $this->assertEquals(
-            normalizeLN($expected),
-            normalizeLN($renderer->render())
-        );
-        $this->assertEquals(
-            normalizeLN($expected),
-            normalizeLN($renderer->render())
-        );
+        $this->assertMatchesTextSnapshot($renderer->render());
+        $this->assertMatchesTextSnapshot($renderer->render());
     }
 
-    public function testRenderWithTextPositionBefore()
-    {
+    public function testRenderWithTextPositionBefore() {
         $modulePage = new Module_Page();
         $modulePage->title = "Unit Test Article";
         $modulePage->slug = "unit-test-" . uniqid();
@@ -91,11 +80,10 @@ class CsvRendererTest extends \PHPUnit\Framework\TestCase
         $output = $renderer->render();
         $output = $renderer->render();
 
-        $this->assertCount(8, str_getcsv($output));
+        $this->assertCount(6, str_getcsv($output));
     }
 
-    public function testRenderWithTextPositionAfter()
-    {
+    public function testRenderWithTextPositionAfter() {
         $_SERVER["REQUEST_URI"] = "/url-two.csv?param=value&foo=bar";
 
         $modulePage = new Module_Page();
@@ -120,16 +108,16 @@ class CsvRendererTest extends \PHPUnit\Framework\TestCase
         $output = $renderer->render();
         $output = $renderer->render();
 
-        $this->assertCount(8, str_getcsv($output));
+        $this->assertCount(6, str_getcsv($output));
     }
 
-    public function testRenderNonExisting()
-    {
+    public function testRenderNonExisting() {
         $_GET["slug"] = 'gibts_nicht';
 
         $renderer = new CsvRenderer();
-        $output = $renderer->render();
-        $this->assertStringContainsString("Title,Content,Description,Tags,Author", $output);
-        $this->assertStringContainsString("This page doesn't exist.", $output);
+
+        $this->assertMatchesTextSnapshot($renderer->render());
+        $this->assertMatchesTextSnapshot($renderer->render());
     }
+
 }

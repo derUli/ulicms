@@ -16,8 +16,8 @@ add_translation("CORRUPTED_DOWNLOAD", "Integrity check of download failed.");
 add_translation("RETRY", "Retry");
 add_translation("whats_new", "What's New?");
 add_translation(
-    "slow_description",
-    "At the slow release channel there is usually one new version per "
+        "slow_description",
+        "At the slow release channel there is usually one new version per "
         . "quarter.\nUse this release channel if stable software is more important "
         . "for you than the availability of current features."
 );

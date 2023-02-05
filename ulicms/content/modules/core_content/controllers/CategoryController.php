@@ -5,18 +5,16 @@ declare(strict_types=1);
 use UliCMS\Constants\AuditLog;
 use UliCMS\Models\Content\Categories;
 
-class CategoryController extends Controller
-{
+class CategoryController extends Controller {
+
     private $logger;
 
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
         $this->logger = LoggerRegistry::get("audit_log");
     }
 
-    public function createPost(): void
-    {
+    public function createPost(): void {
         $name = Request::getVar("name", "", "str");
         $description = Request::getVar("description", "", "str");
 
@@ -26,8 +24,7 @@ class CategoryController extends Controller
         Request::redirect(ModuleHelper::buildActionURL("categories"));
     }
 
-    public function _createPost(string $name, string $description): ?int
-    {
+    public function _createPost(string $name, string $description): ?int {
         $logger = LoggerRegistry::get("audit_log");
         $categoryId = Categories::addCategory($name, $description);
         if ($categoryId && $this->logger) {
@@ -39,9 +36,8 @@ class CategoryController extends Controller
         }
         return $categoryId;
     }
-    
-    public function updatePost(): void
-    {
+
+    public function updatePost(): void {
         $id = Request::getVar("id", 0, "int");
         $name = Request::getVar("name", "", "str");
         $description = Request::getVar("description", "", "str");
@@ -52,9 +48,7 @@ class CategoryController extends Controller
         Request::redirect(ModuleHelper::buildActionURL("categories"));
     }
 
-
-    public function _updatePost(int $id, string $name, string $description): ?int
-    {
+    public function _updatePost(int $id, string $name, string $description): ?int {
         $updateId = Categories::updateCategory($id, $name, $description);
         if ($this->logger) {
             $user = getUserById(get_user_id());
@@ -68,8 +62,7 @@ class CategoryController extends Controller
         return $updateId;
     }
 
-    public function deletePost(): void
-    {
+    public function deletePost(): void {
         $del = intval($_GET["del"]);
         if ($del != 1) {
             Categories::deleteCategory($del);
@@ -83,9 +76,8 @@ class CategoryController extends Controller
         }
         Request::redirect(ModuleHelper::buildActionURL("categories"));
     }
-    
-    public function _deletePost($id): bool
-    {
+
+    public function _deletePost($id): bool {
         $success = false;
         if ($id != 1) {
             $success = Categories::deleteCategory($id);
@@ -99,4 +91,5 @@ class CategoryController extends Controller
         }
         return $success;
     }
+
 }

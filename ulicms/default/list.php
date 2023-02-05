@@ -26,15 +26,16 @@ if ($id !== null) {
             $next_start = $start + $limit;
             if ($next_start <= $entries_total_count) {
                 $next_start = $start + $limit;
-            } ?>
+            }
+            ?>
             <ol class="ulicms-content-list" start="<?php echo $start + 1; ?>">
                 <?php
                 foreach ($entries as $entry) {
                     ?>
                     <li><a
                             href="<?php Template::escape(buildSEOUrl($entry->slug)); ?>"><?php Template::escape($entry->title) ?></a></li>
-                    <?php
-                } ?>
+                    <?php }
+                    ?>
             </ol>
             <?php if ($use_pagination) { ?>
                 <div class="page_older_newer">

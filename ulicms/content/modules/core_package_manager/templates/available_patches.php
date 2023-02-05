@@ -7,9 +7,8 @@ $availablePatches = $patchManager->getAvailablePatches();
 
 $permissionChecker = new ACL();
 // no patch check in google cloud
-$runningInGoogleCloud = class_exists("GoogleCloudHelper") ? GoogleCloudHelper::isProduction() : false;
 
-if ($permissionChecker->hasPermission("update_system") && !$runningInGoogleCloud) {
+if ($permissionChecker->hasPermission("update_system")) {
     ?>
     <p>
         <a href="<?php echo ModuleHelper::buildActionURL("home"); ?>"
@@ -21,7 +20,7 @@ if ($permissionChecker->hasPermission("update_system") && !$runningInGoogleCloud
     if (count($availablePatches) === 0) {
         ?>
         <div class="alert alert-danger">
-        <?php translate("no_patches_available"); ?></div>
+            <?php translate("no_patches_available"); ?></div>
         <?php
     } else {
         ?>
@@ -36,12 +35,13 @@ if ($permissionChecker->hasPermission("update_system") && !$runningInGoogleCloud
                                value="<?php esc($patch->toLine()); ?>">
                         <strong><?php esc($patch->name); ?></strong>
                         <br />
-            <?php esc($patch->description); ?>
+                        <?php esc($patch->description); ?>
                     </label>
                 </p>
                 <?php
             }
-    } ?>
+        }
+        ?>
         <button type="submit" class="btn btn-warning"><i class="fas fa-sync"></i> <?php translate("install_selected_patches"); ?></button>
         <button type="button"
                 onclick="window.open('?action=help&help=patch_install');"
@@ -49,5 +49,5 @@ if ($permissionChecker->hasPermission("update_system") && !$runningInGoogleCloud
     </form>
     <?php
 } else {
-        noPerms();
-    }
+    noPerms();
+}

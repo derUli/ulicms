@@ -10,10 +10,9 @@ use UliCMS\Constants\CommentStatus;
 use UliCMS\Utils\CacheUtil;
 use zz\Html\HTMLMinify;
 
-class CommentsController extends MainClass
-{
-    public function beforeHtml(): void
-    {
+class CommentsController extends MainClass {
+
+    public function beforeHtml(): void {
         Vars::set("comments_enabled", false);
 
         if (is_200()) {
@@ -32,8 +31,7 @@ class CommentsController extends MainClass
     }
 
     // This method handles posted comments
-    public function postComment(): void
-    {
+    public function postComment(): void {
 
         // check if DSGVO checkbox is checked
         $checkbox = new PrivacyCheckbox(getCurrentLanguage(true));
@@ -92,15 +90,14 @@ class CommentsController extends MainClass
 
         // Redirect to the page and show a message to the user
         Response::redirect(
-            ModuleHelper::getFullPageURLByID(
-                $content_id,
-                "comment_published=" . $status
-            )
+                ModuleHelper::getFullPageURLByID(
+                        $content_id,
+                        "comment_published=" . $status
+                )
         );
     }
 
-    public function getCommentText(): void
-    {
+    public function getCommentText(): void {
         $id = Request::getVar("id", 0, "int");
         $text = $this->_getCommentText($id);
         if ($text) {
@@ -109,14 +106,13 @@ class CommentsController extends MainClass
         HTMLResult(get_translation("not_found"), 404);
     }
 
-    public function _getCommentText(int $id): ?string
-    {
+    public function _getCommentText(int $id): ?string {
         try {
             $comment = new Comment($id);
             $comment->setRead(true);
             $comment->save();
             return StringHelper::makeLinksClickable(
-                HTML\text(trim($comment->getText()))
+                            HTML\text(trim($comment->getText()))
             );
         } catch (DatasetNotFoundException $e) {
             return null;
@@ -124,17 +120,16 @@ class CommentsController extends MainClass
     }
 
     // this returns the default status for new comments
-    public function _getDefaultStatus(): string
-    {
+    public function _getDefaultStatus(): string {
         $defaultStatus = Settings::get("comments_must_be_approved") ?
                 CommentStatus::PENDING : CommentStatus::PUBLISHED;
         return $defaultStatus;
     }
 
     public function _getResults(
-        ?string $status = null,
-        ?int $content_id = null,
-        ?int $limit = 0
+            ?string $status = null,
+            ?int $content_id = null,
+            ?int $limit = 0
     ): array {
         $results = [];
         if ($status) {
@@ -149,8 +144,7 @@ class CommentsController extends MainClass
     }
 
     // filter and show the comments to the comment moderation
-    public function filterComments(): void
-    {
+    public function filterComments(): void {
         // get arguments from the URL
         $status = Request::getVar("status", null, "str");
         $content_id = Request::getVar("content_id", null, "int");
@@ -162,17 +156,16 @@ class CommentsController extends MainClass
     }
 
     public function _filterComments(
-        ?string $status = null,
-        ?int $content_id = null,
-        ?int $limit = null
+            ?string $status = null,
+            ?int $content_id = null,
+            ?int $limit = null
     ): array {
         // do the search query
         return $this->_getResults($status, $content_id, $limit);
     }
 
     // get the configured default limit or if is set the default value
-    public function _getDefaultLimit(): int
-    {
+    public function _getDefaultLimit(): int {
         $limit = 100;
         if (Settings::get("comments_default_limit")) {
             $limit = intval(Settings::get("comments_default_limit"));
@@ -180,8 +173,7 @@ class CommentsController extends MainClass
         return $limit;
     }
 
-    public function doAction(): void
-    {
+    public function doAction(): void {
         // post arguments
         $commentIds = Request::getVar("comments", []);
         $action = Request::getVar("action", null, "str");
@@ -209,8 +201,7 @@ class CommentsController extends MainClass
         Request::redirect($referrer);
     }
 
-    public function _doActions(array $commentIds, string $action): array
-    {
+    public function _doActions(array $commentIds, string $action): array {
         $processedComments = [];
 
         foreach ($commentIds as $id) {
@@ -220,8 +211,7 @@ class CommentsController extends MainClass
         return $processedComments;
     }
 
-    public function _doAction(Comment $comment, string $action): Comment
-    {
+    public function _doAction(Comment $comment, string $action): Comment {
         switch ($action) {
             case "mark_as_spam":
                 $comment->setStatus(CommentStatus::SPAM);
@@ -245,7 +235,7 @@ class CommentsController extends MainClass
                 break;
             default:
                 throw new NotImplementedException(
-                    "comment action not implemented"
+                                "comment action not implemented"
                 );
         }
         // if action is not delete save it
@@ -257,4 +247,5 @@ class CommentsController extends MainClass
 
         return $comment;
     }
+
 }

@@ -1,12 +1,13 @@
 <?php Template::comments(); ?>
 <div class="advertisement">
-    <?php random_banner(); ?>
+    <?php Template::randomBanner(); ?>
 </div>
+</article>
 </main>
-</div>
 <footer class="footer">
     <?php Template::footerText(); ?>
 </footer>
+</div>
 <?php Template::footer(); ?>
 </div>
 <?php

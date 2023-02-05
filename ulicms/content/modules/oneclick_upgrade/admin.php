@@ -1,11 +1,11 @@
 <?php
+
 use UliCMS\HTML\Alert;
 use function UliCMS\HTML\text;
 
 define("MODULE_ADMIN_HEADLINE", get_translation("oneclick_upgrade") . " " . get_translation("settings"));
 
-function oneclick_upgrade_admin()
-{
+function oneclick_upgrade_admin() {
     if (Request::isPost()) {
         Settings::set("oneclick_upgrade_channel", strval($_POST["oneclick_upgrade_channel"]));
     }
@@ -14,7 +14,7 @@ function oneclick_upgrade_admin()
         "fast",
         "slow",
     );
-    
+
     $channelCount = count($channels);
     ?>
 
@@ -25,8 +25,8 @@ function oneclick_upgrade_admin()
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
             <?php translate("changes_was_saved") ?>
         </div>
-        <?php
-    } ?>
+    <?php }
+    ?>
     <form action="<?php echo getModuleAdminSelfPath(); ?>"
           method="post">
               <?php csrf_token_html(); ?>
@@ -61,10 +61,10 @@ function oneclick_upgrade_admin()
     </form>
     <?php
     enqueueScriptFile(
-                        ModuleHelper::buildRessourcePath(
-                            "oneclick_upgrade",
-                            "js/settings.js"
-                        )
-                    );
+            ModuleHelper::buildRessourcePath(
+                    "oneclick_upgrade",
+                    "js/settings.js"
+            )
+    );
     combinedScriptHtml();
 }

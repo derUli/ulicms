@@ -2,10 +2,9 @@
 
 use UliCMS\Security\Permissions\PagePermissions;
 
-class PagePermissionsTest extends \PHPUnit\Framework\TestCase
-{
-    protected function tearDown(): void
-    {
+class PagePermissionsTest extends \PHPUnit\Framework\TestCase {
+
+    protected function tearDown(): void {
         $sql = "delete from `{prefix}content` where slug = ?";
         $args = array(
             "page_permission_test"
@@ -13,8 +12,7 @@ class PagePermissionsTest extends \PHPUnit\Framework\TestCase
         Database::pQuery($sql, $args, true);
     }
 
-    public function testPagePermissionsConstructorDefault()
-    {
+    public function testPagePermissionsConstructorDefault() {
         $permissions = new PagePermissions();
         $this->assertFalse($permissions->getEditRestriction("admins"));
         $this->assertFalse($permissions->getEditRestriction("group"));
@@ -22,8 +20,7 @@ class PagePermissionsTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($permissions->getEditRestriction("others"));
     }
 
-    public function testPagePermissionsConstructorWithArguments()
-    {
+    public function testPagePermissionsConstructorWithArguments() {
         $permissions = new PagePermissions(array(
             "group" => true,
             "others" => false,
@@ -35,8 +32,7 @@ class PagePermissionsTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($permissions->getEditRestriction("others"));
     }
 
-    public function testPagePermissionsSetEditRestriction()
-    {
+    public function testPagePermissionsSetEditRestriction() {
         $permissions = new PagePermissions();
         $permissions->setEditRestriction("others", true);
         $this->assertFalse($permissions->getEditRestriction("admins"));
@@ -45,8 +41,7 @@ class PagePermissionsTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($permissions->getEditRestriction("others"));
     }
 
-    public function testPagePermissionsgetAll()
-    {
+    public function testPagePermissionsgetAll() {
         $permissions = new PagePermissions(array(
             "group" => true,
             "others" => false,
@@ -58,8 +53,7 @@ class PagePermissionsTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($all["others"]);
     }
 
-    public function testCreatePageWithPermissions()
-    {
+    public function testCreatePageWithPermissions() {
         $page = new Page();
         $page->slug = "page_permission_test";
         $page->title = "Page Permission Test";
@@ -102,12 +96,12 @@ class PagePermissionsTest extends \PHPUnit\Framework\TestCase
         $page2->delete();
     }
 
-    public function testSetAndGetEditRestrictionForNonExistingObject()
-    {
+    public function testSetAndGetEditRestrictionForNonExistingObject() {
         $page = new Page();
 
         // Der Pumuckl ist nur das Hirngespinst von Meister Eder
         $page->getPermissions()->setEditRestriction("pumuckl", true);
         $this->assertNull($page->getPermissions()->getEditRestriction("pumuckl"));
     }
+
 }

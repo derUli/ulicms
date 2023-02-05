@@ -8,7 +8,8 @@ if ($permissionChecker->hasPermission("videos")
     $id = intval($_REQUEST["id"]);
     $result = db_query("SELECT * FROM " . tbname("videos") . " WHERE id = $id");
     if (db_num_rows($result) > 0) {
-        $dataset = db_fetch_object($result); ?>
+        $dataset = db_fetch_object($result);
+        ?>
         <div class="field">
             <a href="<?php echo ModuleHelper::buildActionURL("videos"); ?>"
                class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i>
@@ -41,8 +42,9 @@ if ($permissionChecker->hasPermission("videos")
                 <input name="ogg_file" type="text" readonly
                        value="<?php
                        echo _esc(
-            $dataset->ogg_file
-        ); ?>">
+                               $dataset->ogg_file
+                       );
+                       ?>">
             </div>
             <div class="field">
                 <strong class="field-label">
@@ -77,8 +79,9 @@ if ($permissionChecker->hasPermission("videos")
                 <strong class="field-label">
                     <?php
                     translate(
-            "insert_this_code_into_a_page"
-        ); ?>
+                            "insert_this_code_into_a_page"
+                    );
+                    ?>
                 </strong>
                 <input type="text" name="code"
                        value="[video id=<?php echo $dataset->id; ?>]"

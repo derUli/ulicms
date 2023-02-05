@@ -104,7 +104,7 @@ def main():
     main_dir = os.path.join(target, "ulicms")
 
     # Install all non-dev composer packages
-    os.system("php ulicms/composer install --working-dir=" + main_dir + "/ --no-dev")
+    os.system("ulicms/composer install --working-dir=" + main_dir + "/ --no-dev")
 
     old_cwd = os.getcwd()
 

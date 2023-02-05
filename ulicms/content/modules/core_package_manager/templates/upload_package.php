@@ -15,7 +15,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
             <?php translate("back") ?></a>
     </p>
     <?php
-    $temp_folder = ULICMS_DATA_STORAGE_ROOT . DIRECTORY_SEPARATOR . "content" . DIRECTORY_SEPARATOR . "tmp";
+    $temp_folder = ULICMS_ROOT . DIRECTORY_SEPARATOR . "content" . DIRECTORY_SEPARATOR . "tmp";
     if (!empty($_POST)) {
         if (count($_FILES) > 0) {
             $file_in_tmp = $temp_folder . DIRECTORY_SEPARATOR . $_FILES['file']['name'];
@@ -32,7 +32,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                             "%file%" => $_FILES['file']['name']
                         )) . "</p>";
                     }
-                } elseif (endsWith($file_in_tmp, ".sin")) {
+                } elseif (endsWith($file_in_tmp, ".sin") || endsWith($file_in_tmp, ".sin2")) {
                     $url = "?action=pkginfo&file=" . basename($file_in_tmp);
                     Request::javascriptRedirect($url);
                 } else {
@@ -42,7 +42,8 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                 echo "<p style='color:red'>" . get_translation("upload_failed") . "</p>";
             }
         }
-    } ?>
+    }
+    ?>
     <h1><?php translate("upload_package"); ?></h1>
     <form action="?action=upload_package" enctype="multipart/form-data"
           method="post">
@@ -53,7 +54,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                 name="file"
                 class="form-control"
                 required 
-                accept=".sin,.tar.gz"
+                accept=".sin,.sin2,.tar.gz"
                 >
         </p>
         <p>

@@ -11,7 +11,8 @@ if ($permissionChecker->hasPermission("update_system")) {
         $lang = getSystemLanguage();
         $release_notes = isset($release_notes->$lang) ? $release_notes->$lang : $release_notes->en;
         $release_notes = nl2br(_esc($release_notes));
-    } ?>
+    }
+    ?>
     <?php if ($currentVersion == $newVersion) { ?>
         <h1><?php translate("oneclick_upgrade") ?></h1>
         <p><?php translate("no_new_version_available"); ?></p>
@@ -46,13 +47,13 @@ if ($permissionChecker->hasPermission("update_system")) {
             </div>
             <p>
                 <button type="submit" class="btn btn-danger">
-                  <i class="fas fa-download"></i>
-                  <?php translate("do_core_upgrade"); ?>
+                    <i class="fas fa-download"></i>
+                    <?php translate("do_core_upgrade"); ?>
                 </button>
             </p>
         <?php } ?>
     </form>
     <?php
 } else {
-        noPerms();
-    }
+    noPerms();
+}

@@ -1,3 +1,15 @@
+===== Neues in UliCMS 2022.2 =====
+
+Neue Features:
+* Kompatiblität mit PHP 8.1
+* Composer Pakete wurden aktualisiert
+* Gruppen: "Alles auswählen" für Sprachen hinzugefügt
+* Unterstützung für komprimierte SimpleInstall Pakete
+
+Entfernte Features:
+* composer wurde entfernt
+* "Meta Keywords" Features entfernt
+
 ===== Neues in UliCMS 2022.1 =====
 
 Neue Features:

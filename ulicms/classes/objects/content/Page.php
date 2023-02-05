@@ -30,7 +30,6 @@ class Page extends Content {
     public $parent_id = null;
     public $access = "all";
     public $meta_description = null;
-    public $meta_keywords = null;
     private $deleted_at = null;
     public $theme = null;
     public $robots = null;
@@ -78,7 +77,6 @@ class Page extends Content {
         $this->parent_id = $result->parent_id;
         $this->access = $result->access;
         $this->meta_description = $result->meta_description;
-        $this->meta_keywords = $result->meta_keywords;
         $this->deleted_at = $result->deleted_at;
         $this->theme = $result->theme;
         $this->robots = $result->robots;
@@ -151,7 +149,7 @@ class Page extends Content {
                                 lastmodified, author_id,
 				`group_id`, lastchangeby, views, menu, position,
                                 parent_id, access, meta_description,
-                                meta_keywords, deleted_at,
+                                deleted_at,
 				theme, robots,
                                 custom_data, `type`, og_title, og_image,
                                 og_description, cache_control, hidden,
@@ -204,11 +202,6 @@ class Page extends Content {
             $sql .= "NULL,";
         }
 
-        if (is_present($this->meta_keywords)) {
-            $sql .= "'" . Database::escapeValue($this->meta_keywords) . "',";
-        } else {
-            $sql .= "NULL,";
-        }
         if ($this->deleted_at === null) {
             $sql .= " NULL,";
         } else {
@@ -309,13 +302,6 @@ class Page extends Content {
                     Database::escapeValue($this->meta_description) . "',";
         } else {
             $sql .= "meta_description = null,";
-        }
-
-        if (is_present($this->meta_keywords)) {
-            $sql .= "meta_keywords='" .
-                    Database::escapeValue($this->meta_keywords) . "',";
-        } else {
-            $sql .= "meta_keywords = null,";
         }
 
         if ($this->deleted_at === null) {

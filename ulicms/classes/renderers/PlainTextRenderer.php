@@ -10,13 +10,12 @@ use UliCMS\Utils\CacheUtil;
 use UliCMS\Exceptions\DatasetNotFoundException;
 
 // this class renders a page as plain text
-class PlainTextRenderer
-{
+class PlainTextRenderer {
+
     public $content = null;
 
     // render html content to string
-    protected function renderContent(): void
-    {
+    protected function renderContent(): void {
         ob_start();
 
         try {
@@ -48,14 +47,13 @@ class PlainTextRenderer
         $this->content = normalizeLN($this->content);
         $this->content = unhtmlspecialchars($this->content);
         $this->content = preg_replace_callback(
-            '/&#([0-9a-fx]+);/mi',
-            'replace_num_entity',
-            $this->content
+                '/&#([0-9a-fx]+);/mi',
+                'replace_num_entity',
+                $this->content
         );
     }
 
-    public function render(): string
-    {
+    public function render(): string {
         $cacheUid = CacheUtil::getCurrentUid();
         $adapter = CacheUtil::getAdapter();
 
@@ -74,4 +72,5 @@ class PlainTextRenderer
         }
         return $this->content;
     }
+
 }

@@ -22,8 +22,8 @@ if ($permissionChecker->hasPermission("videos") or
         </a>
         <br />
         <br />
-        <?php
-    } ?>
+    <?php }
+    ?>
     <?php
     if ($permissionChecker->hasPermission("videos")) {
         ?>
@@ -32,8 +32,8 @@ if ($permissionChecker->hasPermission("videos") or
         </a>
         <br />
         <br />
-        <?php
-    } ?>
+    <?php }
+    ?>
     <?php
     if ($permissionChecker->hasPermission("audio")) {
         ?>

@@ -5,13 +5,13 @@ declare(strict_types=1);
 use UliCMS\Helpers\TestHelper;
 
 if (!defined("RESPONSIVE_FM")) {
-    
-    class Response
-    {
+
+    class Response {
+
         public static function sendHttpStatusCodeResultIfAjax(
-            int $status = HTTPStatusCode::OK,
-            ?string $redirect = null,
-            int $redirectStatus = HttpStatusCode::MOVED_TEMPORARILY
+                int $status = HTTPStatusCode::OK,
+                ?string $redirect = null,
+                int $redirectStatus = HttpStatusCode::MOVED_TEMPORARILY
         ): void {
             if (Request::isAjaxRequest()) {
                 HTTPStatusCodeResult($status);
@@ -23,8 +23,8 @@ if (!defined("RESPONSIVE_FM")) {
 
         // Weiterleitung per Location header;
         public static function redirect(
-            string $url = "http://www.ulicms.de",
-            int $status = HttpStatusCode::MOVED_TEMPORARILY
+                string $url = "http://www.ulicms.de",
+                int $status = HttpStatusCode::MOVED_TEMPORARILY
         ): void {
             Response::sendStatusHeader($status);
             send_header("Location: " . $url);
@@ -32,26 +32,26 @@ if (!defined("RESPONSIVE_FM")) {
         }
 
         public static function redirectToAction(
-            string $action,
-            ?string $controller = null,
-            $status = HttpStatusCode::MOVED_TEMPORARILY
+                string $action,
+                ?string $controller = null,
+                $status = HttpStatusCode::MOVED_TEMPORARILY
         ): void {
             if (is_null($controller)) {
                 Response::redirect(ModuleHelper::buildActionURL($action), $status);
             }
             Response::redirect(
-                ModuleHelper::buildMethodCallUrl(
-                    $controller,
-                    $action
-                ),
-                $status
+                    ModuleHelper::buildMethodCallUrl(
+                            $controller,
+                            $action
+                    ),
+                    $status
             );
         }
 
         public static function javascriptRedirect(
-            string $url = "http://www.ulicms.de"
+                string $url = "http://www.ulicms.de"
         ): void {
-            echo "<script type=\"text/javascript\">"
+            echo "<script>"
             . "location.replace(\"$url\");</script>";
             echo "<noscript><p>" . get_translation("jsredirect_noscript", array(
                 "%url%" => Template::getEscape($url)
@@ -59,8 +59,8 @@ if (!defined("RESPONSIVE_FM")) {
         }
 
         public static function getSafeRedirectURL(
-            string $url,
-            $safeHosts = null
+                string $url,
+                $safeHosts = null
         ): string {
             $cfg = new CMSConfig();
             if (is_array($safeHosts) and count($safeHosts) >= 1) {
@@ -76,11 +76,11 @@ if (!defined("RESPONSIVE_FM")) {
             if (!in_array($host, $safeHosts)) {
                 try {
                     $page = ContentFactory::getBySlugAndLanguage(
-                        Settings::getLanguageSetting(
-                            "frontpage",
-                            getCurrentLanguage()
-                        ),
-                        getCurrentLanguage()
+                                    Settings::getLanguageSetting(
+                                            "frontpage",
+                                            getCurrentLanguage()
+                                    ),
+                                    getCurrentLanguage()
                     );
                     $url = ModuleHelper::getFullPageURLByID($page->id);
                 } catch (Exception $e) {
@@ -91,16 +91,15 @@ if (!defined("RESPONSIVE_FM")) {
         }
 
         public static function safeRedirect(
-            string $url,
-            int $status = 302,
-            $safeHosts = null
+                string $url,
+                int $status = 302,
+                $safeHosts = null
         ): void {
             $url = self::getSafeRedirectUrl($url, $safeHosts);
             Request::redirect($url, $status);
         }
 
-        public static function sendStatusHeader(?int $nr): bool
-        {
+        public static function sendStatusHeader(?int $nr): bool {
             if (headers_sent()) {
                 return false;
             }
@@ -110,8 +109,7 @@ if (!defined("RESPONSIVE_FM")) {
         }
 
         // Übersetzung HTTP Status Code => Name
-        public static function getStatusCodeByNumber(int $nr): string
-        {
+        public static function getStatusCodeByNumber(int $nr): string {
             $http_codes = array(
                 100 => 'Continue',
                 101 => 'Switching Protocols',
@@ -172,8 +170,7 @@ if (!defined("RESPONSIVE_FM")) {
             return $nr . " " . $http_codes[$nr];
         }
 
-        public static function sendHeader(string $header): bool
-        {
+        public static function sendHeader(string $header): bool {
             if (headers_sent() || isCLI()) {
                 return false;
             }
@@ -181,5 +178,7 @@ if (!defined("RESPONSIVE_FM")) {
             header($header);
             return true;
         }
+
     }
+
 }

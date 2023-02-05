@@ -4,14 +4,23 @@ declare(strict_types=1);
 
 use UliCMS\Utils\File;
 
-function sureRemoveDir(string $dir, bool $deleteMe = true): void
-{
+/**
+ * Deletes content of a direcotry
+ * @param string $dir Directory
+ * @param bool $deleteMe Delete the directory or just the content
+ * @return void
+ */
+function sureRemoveDir(string $dir, bool $deleteMe = true): void {
     File::sureRemoveDir($dir, $deleteMe);
 }
 
-// Ordner rekursiv kopieren
-function recurse_copy(string $src, string $dst): void
-{
+/**
+ * Recursive copy directory
+ * @param string $src Source directory
+ * @param string $dst Target directory
+ * @return void
+ */
+function recurse_copy(string $src, string $dst): void {
     $dir = opendir($src);
     @mkdir($dst);
     while (false !== ($file = readdir($dir))) {
@@ -26,8 +35,12 @@ function recurse_copy(string $src, string $dst): void
     closedir($dir);
 }
 
-function find_all_files(string $dir): array
-{
+/**
+ * Returns an array of all files in a folder and its subfolders
+ * @param string $dir Path
+ * @return array List of files
+ */
+function find_all_files(string $dir): array {
     $root = scandir($dir);
     $result = [];
     foreach ($root as $value) {
@@ -46,8 +59,12 @@ function find_all_files(string $dir): array
     return $result;
 }
 
-function find_all_folders(string $dir): array
-{
+/**
+ * Returns an array of all sub folders of a folder
+ * @param string $dir Folder
+ * @return array list of folders
+ */
+function find_all_folders(string $dir): array {
     $root = scandir($dir);
     $result = [];
     foreach ($root as $value) {
@@ -63,13 +80,20 @@ function find_all_folders(string $dir): array
     return $result;
 }
 
-function file_extension(string $filename): string
-{
+/**
+ * Returns the extension of a file name
+ * @param string $filename Filename
+ * @return string Extension without dot (e.g. "jpg")
+ */
+function file_extension(string $filename): string {
     return File::getExtension($filename);
 }
 
-// Mimetypen einer Datei ermitteln
-function get_mime(?string $file): string
-{
+/**
+ * Detect the mime type of a file by it's content
+ * @param string|null $file File Name
+ * @return string|null Mime ype or null
+ */
+function get_mime(?string $file): ?string {
     return File::getMime($file);
 }

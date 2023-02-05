@@ -5,12 +5,10 @@ use function UliCMS\HTML\imageTag;
 $controller = new LogoController();
 
 $permissionChecker = new ACL();
-if (defined("ULICMS_DATA_STORAGE_URL")) {
-    $logoUrl = ULICMS_DATA_STORAGE_URL . "/content/images/" . Settings::get("logo_image");
-} else {
-    $logoUrl = "../content/images/" . Settings::get("logo_image");
-}
-$logoStoragePath = ULICMS_DATA_STORAGE_ROOT . "/content/images/" . Settings::get("logo_image");
+
+$logoUrl = "../content/images/" . Settings::get("logo_image");
+
+$logoStoragePath = ULICMS_ROOT . "/content/images/" . Settings::get("logo_image");
 
 if ($permissionChecker->hasPermission("logo")) {
     ?>
@@ -33,7 +31,7 @@ if ($permissionChecker->hasPermission("logo")) {
         <table style="height: 250px">
 
             <?php if ($controller->_hasLogo()) {
-        ?>
+                ?>
 
                 <tr>
                     <td><strong><?php translate("your_logo"); ?>
@@ -43,12 +41,13 @@ if ($permissionChecker->hasPermission("logo")) {
                             <?php
                             if (file_exists($logoStoragePath)) {
                                 echo imageTag(
-                                    $logoUrl,
-                                    [
+                                        $logoUrl,
+                                        [
                                             "alt" => Settings::get("homepage_title"),
                                             "class" => "img-responsive"
                                         ]
-                                ); ?>
+                                );
+                                ?>
                                 <div class="voffset2">
                                     <button
                                         type="button"
@@ -56,16 +55,17 @@ if ($permissionChecker->hasPermission("logo")) {
                                         id="delete-logo"
                                         data-url="<?php
                                         echo ModuleHelper::buildMethodCallUrl(
-                                    LogoController::class,
-                                    "deleteLogo"
-                                ); ?>
+                                                LogoController::class,
+                                                "deleteLogo"
+                                        );
+                                        ?>
                                         "
                                         >
                                         <i class="fa fa-trash" aria-hidden="true"></i>
-                                    <?php translate("delete_logo"); ?>
+                                        <?php translate("delete_logo"); ?>
                                     </button>
-            <?php
-                            } ?>
+                                <?php }
+                                ?>
                             </div>
                         </div>
                         <img
@@ -76,14 +76,13 @@ if ($permissionChecker->hasPermission("logo")) {
                             >
                     </td>
                 </tr>
-        <?php
-    } ?>
+            <?php }
+            ?>
             <tr>
                 <td width="480"><strong><?php translate("upload_new_logo"); ?>
                     </strong></td>
                 <td>
-                    <input name="logo_upload_file" type="file" accept="<?php
-                    echo ImagineHelper::ACCEPT_MIMES; ?>">
+                    <input name="logo_upload_file" type="file" accept="<?php echo ImagineHelper::ACCEPT_MIMES; ?>">
                 </td>
             </tr>
             <tr>
@@ -101,9 +100,9 @@ if ($permissionChecker->hasPermission("logo")) {
     $translation->render();
 
     enqueueScriptFile(
-        ModuleHelper::buildRessourcePath(
-                "core_settings",
-                "js/logo.js"
+            ModuleHelper::buildRessourcePath(
+                    "core_settings",
+                    "js/logo.js"
             )
     );
     combinedScriptHtml();

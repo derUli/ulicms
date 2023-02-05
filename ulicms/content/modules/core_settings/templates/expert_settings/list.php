@@ -16,8 +16,8 @@ if ($permissionChecker->hasPermission("expert_settings")) {
                 class="btn btn-default is-ajax"
                 ><i class="fa fa-plus"></i> <?php translate("create_option"); ?></a>
         </p>
-    <?php
-    } ?>
+    <?php }
+    ?>
     <?php
     if (count($data) > 0) {
         ?>
@@ -44,10 +44,10 @@ if ($permissionChecker->hasPermission("expert_settings")) {
                                 <td class="text-center"><a
                                         href="<?php
                                         echo ModuleHelper::buildActionURL(
-                            "settings_edit",
-                            "name=" .
+                                                "settings_edit",
+                                                "name=" .
                                                 Template::getEscape($row->name)
-                        );
+                                        );
                                         ?>"
                                         class="is-ajax"
                                         ><img
@@ -61,8 +61,8 @@ if ($permissionChecker->hasPermission("expert_settings")) {
                                     ?>
                                 </td><?php } ?>
                         </tr>
-                    <?php
-                    } ?>
+                    <?php }
+                    ?>
                 </tbody>
             </table>
         </div>

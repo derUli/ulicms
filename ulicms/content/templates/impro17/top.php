@@ -41,8 +41,8 @@ if (!$searchPage) {
 <body class="<?php body_classes(); ?>">
     <div class="container" id="root">
 
-        <div class="header clearfix">
-            <nav>
+        <header class="header clearfix">
+            <nav class="pull-right">
                 <?= jumbotron_get_menu("top"); ?>
             </nav>
             <h3 class="text-muted">
@@ -61,9 +61,9 @@ if (!$searchPage) {
                            autosave="<?php echo md5($_SERVER ["SERVER_NAME"]); ?>"
                            placeholder="<?php translate("search"); ?>...">
                 </form>
-            <?php
-            } ?>
-        </div>
+            <?php }
+            ?>
+        </header>
         <?php if (is_frontpage()) { ?>
             <div class="jumbotron">
                 <?php
@@ -71,16 +71,18 @@ if (!$searchPage) {
                     logo();
                 }
                 ?>
+
                 <div class="lead"><?php echo Settings::get("motd"); ?></div>
                 <p>
                     <a class="btn btn-lg btn-success" href="admin/" role="button"><?php translate("login") ?></a>
                 </p>
             </div>
         <?php } ?>
-        <div class="row marketing">
+        <main>
             <?php if ($site_slogan) { ?>
                 <blockquote>
-                    <?php Template::escape($site_slogan); ?></blockquote>
+                    <?php Template::escape($site_slogan); ?>
+                </blockquote>
             <?php } ?>
-            <main>
+            <article>
                 <?php Template::headline(); ?>

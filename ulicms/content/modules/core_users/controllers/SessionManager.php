@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 use UliCMS\Constants\AuditLog;
 
-class SessionManager extends Controller
-{
-    public function login(): void
-    {
+class SessionManager extends Controller {
+
+    public function login(): void {
         $logger = LoggerRegistry::get("audit_log");
 
         $user = new User();
@@ -43,7 +42,8 @@ class SessionManager extends Controller
             if ($logger) {
                 $logger->debug("User {$_POST['user']} - Login OK");
             }
-            register_session($sessionData);
+
+            register_session((int) $sessionData['id']);
         } else {
             // If login failed
             if ($logger) {
@@ -55,8 +55,7 @@ class SessionManager extends Controller
         }
     }
 
-    public function logout(): void
-    {
+    public function logout(): void {
         $logger = LoggerRegistry::get("audit_log");
 
         $id = intval($_SESSION["login_id"]);
@@ -75,8 +74,7 @@ class SessionManager extends Controller
         exit();
     }
 
-    public function resetPassword(): void
-    {
+    public function resetPassword(): void {
         $logger = LoggerRegistry::get("audit_log");
 
         if (!isset($_REQUEST["token"])) {
@@ -85,8 +83,8 @@ class SessionManager extends Controller
         $reset = new PasswordReset();
         $token = $reset->getTokenByTokenString($_REQUEST["token"]);
         if ($token) {
-            $user_id = $token->user_id;
-            $user = new User($user_id);
+            $userId = $token->user_id;
+            $user = new User($userId);
             $user->setRequirePasswordChange(1);
             $user->save();
             $token = $reset->deleteToken($_REQUEST["token"]);
@@ -95,7 +93,7 @@ class SessionManager extends Controller
                 $logger->debug("Password reset $name - OK");
             }
 
-            register_session(getUserById($user_id));
+            register_session((int) $userId);
         } else {
             if ($logger) {
                 $logger->error("Password reset - Invalid token");
@@ -103,4 +101,5 @@ class SessionManager extends Controller
             TextResult(get_translation("invalid_token"), 404);
         }
     }
+
 }

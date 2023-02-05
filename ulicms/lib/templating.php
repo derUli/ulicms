@@ -32,34 +32,32 @@ function get_og_tags(?string $slug = null): string {
     $html = "";
     if (is_200()) {
         $og_data = get_og_data($slug);
-        $og_title = $og_data["og_title"];
-        $og_image = $og_data["og_image"];
-        $og_description = $og_data["og_description"];
+        $og_title = get_headline();
+        $og_description = get_meta_description();
         $og_url = getCurrentURL();
 
         // Falls kein og_title für die Seite gesetzt ist,
         // Standardtitel bzw. Headline verwenden
-        if (is_null($og_title) or empty($og_title)) {
-            $og_title = get_headline();
+        if (!empty($og_data["og_title"])) {
+            $og_title = $og_data["og_title"];
         }
 
-        if (is_null($og_image) or empty($og_image)) {
-            $og_image = Settings::get("og_image");
+        $og_image = Settings::get("og_image");
+
+        if (!empty($og_data["article_image"])) {
+            $og_image = ltrim($og_data["article_image"], "/");
+        }
+
+        if (!empty($og_data["og_image"])) {
+            $og_image = ltrim($og_data["og_image"], "/");
         }
 
         if (!empty($og_image) && !startsWith($og_image, "http")) {
             $og_image = ModuleHelper::getBaseUrl() . ltrim($og_image, "/");
         }
-        $page = get_page($slug);
-        if (empty($og_image) &&
-                !StringHelper::isNullOrWhitespace($page["article_image"])) {
-            $og_image = ltrim($page["article_image"], "/");
-        }
-        if (!empty($og_image) && !startsWith($og_image, "http")) {
-            $og_image = ModuleHelper::getBaseUrl() . ltrim($og_image, "/");
-        }
-        if (is_null($og_description) or empty($og_description)) {
-            $og_description = get_meta_description();
+
+        if (!empty($og_data["og_description"])) {
+            $og_description = $og_data["og_description"];
         }
 
         $og_title = apply_filter($og_title, "og_title");
@@ -88,13 +86,36 @@ function get_og_tags(?string $slug = null): string {
                     . _esc($og_url) . '" />';
         }
 
+        $html .= '<meta name="twitter:card" content="summary" />';
+
         if ($og_image) {
-            $html .= '<meta property="og:image" content="'
-                    . _esc($og_image) . '" />';
+            $html .= '<meta property="og:image" content="' . _esc($og_image) . '" />';
+            $html .= '<meta property="og:title:alt" content="'
+                    . _esc($og_title) . '" />';
         }
 
         $html .= '<meta property="og:site_name" content="'
                 . get_homepage_title() . '" />';
+
+        if ($og_title) {
+            $html .= '<meta  name="twitter:title" content="'
+                    . _esc($og_title) . '" />';
+        }
+
+        if ($og_description) {
+            $html .= '<meta name="twitter:description" content="'
+                    . _esc($og_description) . '" />';
+        }
+
+        if ($og_image) {
+            $html .= '<meta name="twitter:image" content="' . _esc($og_image) . '" />';
+            $html .= '<meta name="twitter:image:alt" content="' . _esc($og_title) . '" />';
+        }
+
+        /**
+          <meta name="twitter:site" content="@USERNAME">
+          <meta name="twitter:creator" content="@USERNAME">
+         * */
     }
 
     $html = apply_filter($html, "og_html");
@@ -108,7 +129,7 @@ function get_og_data($slug = ""): ?array {
 
     $data = null;
 
-    $result = db_query("SELECT og_title, og_image, og_description FROM " .
+    $result = db_query("SELECT og_title, og_image, og_description, article_image FROM " .
             tbname("content") . " WHERE slug='" . db_escape($slug) .
             "' AND language='" . db_escape(getFrontendLanguage()) . "'");
     if (db_num_rows($result) > 0) {
@@ -209,7 +230,7 @@ function get_article_meta(?string $page = null): ?object {
         $page = get_slug();
     }
 
-    $dataset = '';
+    $dataset = null;
     $sql = "SELECT `article_author_name`, `article_author_email`, CASE WHEN "
             . "`article_date` is not null then UNIX_TIMESTAMP(article_date) "
             . "else null end as article_date, `article_image`, "
@@ -217,6 +238,7 @@ function get_article_meta(?string $page = null): ?object {
             " WHERE slug='" . db_escape($page) .
             "'  AND language='" .
             Database::escapeValue(getFrontendLanguage()) . "'";
+
     $result = db_query($sql);
     if (db_num_rows($result) > 0) {
         $dataset = Database::fetchObject($result);
@@ -224,6 +246,7 @@ function get_article_meta(?string $page = null): ?object {
         $dataset->article_date = $dataset->article_date ?
                 intval($dataset->article_date) : null;
     }
+
     $dataset = apply_filter($dataset, "get_article_meta");
     return $dataset;
 }
@@ -435,34 +458,6 @@ function get_homepage_title(): string {
 
 function homepage_title(): void {
     echo get_homepage_title();
-}
-
-function get_meta_keywords(): string {
-    $ipage = isset($_GET["slug"]) ? db_escape($_GET["slug"]) : '';
-    $result = db_query("SELECT meta_keywords FROM " . tbname("content") .
-            " WHERE slug='$ipage' AND language='" .
-            db_escape(getFrontendLanguage()) . "'");
-
-    if (db_num_rows($result) > 0) {
-        while ($row = db_fetch_object($result)) {
-            if (StringHelper::isNotNullOrEmpty($row->meta_keywords)) {
-                return $row->meta_keywords;
-            }
-        }
-    }
-    $meta_keywords = Settings::get("meta_keywords_" . getFrontendLanguage());
-    if (!$meta_keywords) {
-        $meta_keywords = Settings::get("meta_keywords");
-    }
-
-    return $meta_keywords;
-}
-
-function meta_keywords(): void {
-    $value = get_meta_keywords();
-    if ($value) {
-        echo $value;
-    }
 }
 
 function get_meta_description(?string $ipage = null): string {
@@ -841,10 +836,8 @@ function output_favicon_code(): void {
 
 function get_output_favicon_code(): string {
     $url = "content/images/favicon.ico";
-    if (defined("ULICMS_DATA_STORAGE_URL")) {
-        $url = ULICMS_DATA_STORAGE_URL . "/" . $url;
-    }
-    $path = ULICMS_DATA_STORAGE_ROOT . "/content/images/favicon.ico";
+
+    $path = ULICMS_ROOT . "/content/images/favicon.ico";
     $html = "";
     if (file_exists($path)) {
         $url .= "?time=" . File::getLastChanged($path);
@@ -927,9 +920,9 @@ function checkAccess(string $access = ""): ?string {
     if (faster_in_array("registered", $access) and is_logged_in()) {
         return "registered";
     }
-    
+
     $accessCount = count($access);
-    
+
     for ($i = 0; $i < $accessCount; $i++) {
         if (is_numeric($access[$i]) and isset($_SESSION["group_id"]) and $access[$i] == $_SESSION["group_id"]) {
             return $access[$i];

@@ -4,6 +4,6 @@ namespace UliCMS\Exceptions;
 
 use Exception;
 
-class DatasetNotFoundException extends SqlException
-{
+class DatasetNotFoundException extends SqlException {
+    
 }

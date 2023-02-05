@@ -13,14 +13,13 @@ use function endsWith;
 use function getModulePath;
 
 // This method loads all module's helper classes
-class HelperRegistry
-{
+class HelperRegistry {
+
     private static $helpers = [];
 
     // TODO: This code works but looks like crap
     // refactor it and split it into multiple small methods
-    public static function loadModuleHelpers(): void
-    {
+    public static function loadModuleHelpers(): void {
         if (!defined("RESPONSIVE_FM")) {
             $helperRegistry = [];
             $modules = getAllModules();
@@ -46,7 +45,7 @@ class HelperRegistry
                     require_once $value;
                 } else {
                     throw new FileNotFoundException("Module {$module}: "
-                            . "File '{$value}' not found.");
+                                    . "File '{$value}' not found.");
                 }
                 if (class_exists($key)) {
                     $classInstance = new $key();
@@ -57,4 +56,5 @@ class HelperRegistry
             }
         }
     }
+
 }

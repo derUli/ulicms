@@ -9,17 +9,16 @@ use ModuleHelper;
 
 // generates HTML script tags
 // please use script queue instead of this methods if possible
-class Script
-{
+class Script {
+
     public static function fromFile(
-        string $file,
-        bool $async = false,
-        bool $defer = false,
-        array $htmlAttributes = []
+            string $file,
+            bool $async = false,
+            bool $defer = false,
+            array $htmlAttributes = []
     ): string {
         $attributes = array(
-            "src" => $file,
-            "type" => "text/javascript"
+            "src" => $file
         );
         if ($async) {
             $attributes["async"] = "async";
@@ -36,18 +35,21 @@ class Script
 
         $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);
 
-        return "<script $attribHTML></script>";
+        if (!empty($attribHTML)) {
+            $attribHTML = " $attribHTML";
+        }
+
+        return "<script{$attribHTML}></script>";
     }
 
     public static function fromString(
-        ?string $code,
-        bool $async = false,
-        bool $defer = false,
-        array $htmlAttributes = []
+            ?string $code,
+            bool $async = false,
+            bool $defer = false,
+            array $htmlAttributes = []
     ): string {
-        $attributes = array(
-            "type" => "text/javascript"
-        );
+        $attributes = [];
+
         if ($async) {
             $attributes["async"] = "async";
         }
@@ -59,6 +61,11 @@ class Script
         }
         $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);
 
-        return "<script $attribHTML>" . $code . "</script>";
+        if (!empty($attribHTML)) {
+            $attribHTML = " $attribHTML";
+        }
+
+        return "<script{$attribHTML}>" . $code . "</script>";
     }
+
 }

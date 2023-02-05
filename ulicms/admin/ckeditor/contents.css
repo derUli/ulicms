@@ -207,7 +207,8 @@ a > img {
     margin:0 auto;
 }
 
-img{
+img
+{
     max-width: 100%;
     height: auto;
 }

@@ -152,7 +152,6 @@ add_translation("EXTERNAL_REDIRECT", "external redirect");
 add_translation("ADDITIONAL_SETTINGS", "additional options &gt;&gt;");
 add_translation("MENU_IMAGE", "menu entry as image");
 add_translation("META_DESCRIPTION", "Description");
-add_translation("META_KEYWORDS", "Tags");
 add_translation("comma_separated", "Comma separated");
 add_translation("COMMENTS", "Comments");
 add_translation("OPEN_IN", "Target");
@@ -740,8 +739,8 @@ add_translation("all", "All");
 add_translation("disabled_functions", "Disabled functions");
 
 add_translation(
-    "unsupported_output_format",
-    "Unsupported Output Format: %format%"
+        "unsupported_output_format",
+        "Unsupported Output Format: %format%"
 );
 
 add_translation("mpdf_not_installed", "mPDF is not installed.\n"
@@ -751,13 +750,12 @@ add_translation("copied_to_clipboard_success", "Copied to clipboard.");
 add_translation("copied_to_clipboard_failed", "Copy To clipboard failed.");
 
 add_translation(
-    "unsupported_browser",
-    "Your are using the unsupported browser %browser%.\n".
-        "You must be using a compatible browser to be able to access UliCMS.\n\n".
-        "More information about compatible browsers at:\n".
+        "unsupported_browser",
+        "Your are using the unsupported browser %browser%.\n" .
+        "You must be using a compatible browser to be able to access UliCMS.\n\n" .
+        "More information about compatible browsers at:\n" .
         "https://www.ulicms.de/Welche-Browser-werden-von-UliCMS-unterstutzt.html"
 );
-
 
 add_translation("loading_alt", "Please wait...");
 

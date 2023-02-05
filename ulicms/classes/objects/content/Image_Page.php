@@ -2,21 +2,19 @@
 
 // Image Pages are like regular pages but a field to
 // select an image file
-class Image_Page extends Page
-{
+class Image_Page extends Page {
+
     public $type = "image";
     public $image_url = null;
     public $text_position = "after";
 
-    protected function fillVars($result = null)
-    {
+    protected function fillVars($result = null) {
         parent::fillVars($result);
         $this->image_url = $result->image_url;
         $this->text_position = $result->text_position;
     }
 
-    public function save()
-    {
+    public function save() {
         $retval = null;
         if ($this->id === null) {
             $retval = $this->create();
@@ -27,8 +25,7 @@ class Image_Page extends Page
         return $retval;
     }
 
-    public function update()
-    {
+    public function update() {
         $result = null;
         if ($this->id === null) {
             return $this->create();
@@ -46,8 +43,8 @@ class Image_Page extends Page
         return $result;
     }
 
-    public function getIcon(): string
-    {
+    public function getIcon(): string {
         return "far fa-images";
     }
+
 }

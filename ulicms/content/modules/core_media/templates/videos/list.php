@@ -4,7 +4,7 @@ use UliCMS\Models\Content\Categories;
 
 $permissionChecker = new ACL();
 
-$video_folder = ULICMS_DATA_STORAGE_ROOT . "/content/videos";
+$video_folder = ULICMS_ROOT . "/content/videos";
 if (!is_dir($video_folder)) {
     mkdir($video_folder);
 }
@@ -30,13 +30,11 @@ if ($permissionChecker->hasPermission("videos")) {
     <?php echo Template::executeModuleTemplate("core_media", "icons.php"); ?>
 
     <h1>
-        <?php
-        translate("videos"); ?>
+        <?php translate("videos"); ?>
     </h1>
     <div class="field">
         <?php translate("category"); ?>
-        <?php
-        echo Categories::getHTMLSelect($_SESSION["filter_category"], true); ?>
+        <?php echo Categories::getHTMLSelect($_SESSION["filter_category"], true); ?>
     </div>
     <?php if ($permissionChecker->hasPermission("videos_create")) { ?>
         <div class="voffset2">
@@ -50,20 +48,15 @@ if ($permissionChecker->hasPermission("videos")) {
         <table class="tablesorter">
             <thead>
                 <tr>
-                    <th><?php
-                        translate("id"); ?>
+                    <th><?php translate("id"); ?>
                     </th>
-                    <th><?php
-                        translate("name"); ?>
+                    <th><?php translate("name"); ?>
                     </th>
-                    <th class="hide-on-mobile"><?php
-                        translate("ogg_file"); ?>
+                    <th class="hide-on-mobile"><?php translate("ogg_file"); ?>
                     </th>
-                    <th class="hide-on-mobile"><?php
-                        translate("webm_file"); ?>
+                    <th class="hide-on-mobile"><?php translate("webm_file"); ?>
                     </th>
-                    <th class="hide-on-mobile"><?php
-                        translate("mp4_file"); ?>
+                    <th class="hide-on-mobile"><?php translate("mp4_file"); ?>
                     </th>
                     <?php if ($permissionChecker->hasPermission("videos_edit")) { ?>
                         <td class="no-sort"></td>
@@ -76,20 +69,15 @@ if ($permissionChecker->hasPermission("videos")) {
                 while ($row = db_fetch_object($all_videos)) {
                     ?>
                     <tr id="dataset-<?php echo $row->id; ?>">
-                        <td><?php
-                            echo $row->id; ?>
+                        <td><?php echo $row->id; ?>
                         </td>
-                        <td><?php
-                            esc($row->name); ?>
+                        <td><?php esc($row->name); ?>
                         </td>
-                        <td class="hide-on-mobile"><?php
-                            esc(basename($row->ogg_file)); ?>
+                        <td class="hide-on-mobile"><?php esc(basename($row->ogg_file)); ?>
                         </td>
-                        <td class="hide-on-mobile"><?php
-                            esc(basename($row->webm_file)); ?>
+                        <td class="hide-on-mobile"><?php esc(basename($row->webm_file)); ?>
                         </td>
-                        <td class="hide-on-mobile"><?php
-                            esc(basename($row->mp4_file)); ?>
+                        <td class="hide-on-mobile"><?php esc(basename($row->mp4_file)); ?>
                         </td>
                         <?php if ($permissionChecker->hasPermission("videos_edit")) { ?>
                             <td><a
@@ -116,18 +104,19 @@ if ($permissionChecker->hasPermission("videos")) {
                             </td>
                         <?php } ?>
                     </tr>
-                    <?php
-                } ?>
+                <?php }
+                ?>
             </tbody>
         </table>
     </div>
     <?php
     enqueueScriptFile(ModuleHelper::buildModuleRessourcePath("core_media", "js/video.js"));
-    combinedScriptHtml(); ?>
+    combinedScriptHtml();
+    ?>
     <?php
 } else {
-        noPerms();
-    }
+    noPerms();
+}
 
 $translation = new JSTranslation(array(
     "ask_for_delete"

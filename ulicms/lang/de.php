@@ -153,7 +153,6 @@ add_translation("EXTERNAL_REDIRECT", "Weiterleitung auf externen Link");
 add_translation("ADDITIONAL_SETTINGS", "Zusätzliche Optionen &gt;&gt;");
 add_translation("MENU_IMAGE", "Menüpunkt als Grafik");
 add_translation("META_DESCRIPTION", "Beschreibung");
-add_translation("META_KEYWORDS", "Tags");
 add_translation("comma_separated", "Kommagetrennt");
 add_translation("COMMENTS", "Kommentare");
 add_translation("OPEN_IN", "Öffnen in");
@@ -748,8 +747,8 @@ add_translation("copied_to_clipboard_success", "Text wurde in die Zwischenablage
 add_translation("copied_to_clipboard_failed", "Kopieren des Textes fehlgeschlagen.");
 
 add_translation(
-    "unsupported_browser",
-    "Sie benutzen den Browser %browser% welcher von UliCMS nicht unterstützt wird.\n" .
+        "unsupported_browser",
+        "Sie benutzen den Browser %browser% welcher von UliCMS nicht unterstützt wird.\n" .
         "Bitte verwenden Sie einen der unterstützen Browser.\n\n" .
         "Welche Browser von UliCMS unterstützt werden, erfahren Sie unter:\n" .
         "https://www.ulicms.de/Welche-Browser-werden-von-UliCMS-unterstutzt.html"

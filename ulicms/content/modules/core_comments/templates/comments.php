@@ -19,7 +19,7 @@ reset($comments);
             ?>  
             <div class="comment" id="comment-<?php echo $comment->getId(); ?>">
                 <strong><?php translate("date"); ?>:</strong>
-                <?php echo strftime("%x %X", $comment->getDate()); ?>
+                <?php echo PHP81_BC\strftime("%x %X", $comment->getDate()); ?>
                 <br /> <strong><?php translate("name"); ?>:</strong>
                 <?php esc($comment->getAuthorName()); ?>
                 <br />
@@ -38,12 +38,12 @@ reset($comments);
                         UliCMS\HTML\text($comment->getText())
                 );
                 ?>
-                </div>
-                <?php if ($comment != $last) { ?>
-                    <hr />
-                <?php } ?>
-                <?php }
-            ?>
-        </div>
-        <?php
-    }
+            </div>
+            <?php if ($comment != $last) { ?>
+                <hr />
+            <?php } ?>
+        <?php }
+        ?>
+    </div>
+    <?php
+}

@@ -25,35 +25,32 @@ if ($permissionChecker->hasPermission("banners")
         </div>
         <?php
         echo ModuleHelper::buildMethodCallForm(
-            "BannerController",
-            "update",
-            [],
-            RequestMethod::POST,
-            [
+                "BannerController",
+                "update",
+                [],
+                RequestMethod::POST,
+                [
                     "autocomplete" => "off"
                 ]
-        ); ?>
+        );
+        ?>
         <h4><?php translate("preview"); ?></h4>
         <?php
         if ($row->getType() == "gif") {
             ?>
             <div class="field">
                 <a
-                    href="<?php
-                    Template::escape($row->getLinkUrl()); ?>"
+                    href="<?php Template::escape($row->getLinkUrl()); ?>"
                     target="_blank"><img
-                        src="<?php
-                        Template::escape($row->getImageUrl()); ?>"
-                        title="<?php
-                        Template::escape($row->getName()); ?>"
-                        alt="<?php
-                        Template::escape($row->getName()); ?>"
-                        border=0> </a>
+                        src="<?php Template::escape($row->getImageUrl()); ?>"
+                        title="<?php Template::escape($row->getName()); ?>"
+                        alt="<?php Template::escape($row->getName()); ?>"> </a>
             </div>
             <?php
         } else {
             echo $row->getHtml();
-        } ?>
+        }
+        ?>
         <input type="hidden" name="edit_banner" value="edit_banner">
         <input type="hidden" name="id" value="<?php echo $row->getId(); ?>">
         <div class="field">
@@ -61,7 +58,8 @@ if ($permissionChecker->hasPermission("banners")
             <?php
             if ($row->getType() == "gif") {
                 echo 'checked="checked"';
-            } ?>
+            }
+            ?>
                    id="radio_gif" name="type" value="gif"
                    onclick="$('#type_gif').slideDown();
                                    $('#type_html').slideUp();">
@@ -71,31 +69,27 @@ if ($permissionChecker->hasPermission("banners")
         <fieldset id="type_gif" style="<?php
         if ($row->getType() != "gif") {
             echo "display:none";
-        } ?>">
+        }
+        ?>">
             <div class="field">
                 <strong class="field-label">
-                    <?php
-                    translate("bannertext"); ?>
+                    <?php translate("bannertext"); ?>
                 </strong>
                 <input type="text" name="banner_name"
-                       value="<?php
-                       Template::escape($row->getName()); ?>">
+                       value="<?php Template::escape($row->getName()); ?>">
             </div>
             <div class="field">
                 <strong class="field-label">
-                    <?php
-                    translate("IMAGE_URL"); ?>
+                    <?php translate("IMAGE_URL"); ?>
                 </strong>
                 <input type="text" name="image_url"
-                       value="<?php
-                       Template::escape($row->getImageUrl()); ?>">
+                       value="<?php Template::escape($row->getImageUrl()); ?>">
             </div>
             <div class="field">
                 <strong class="field-label"><?php translate("link_url"); ?></strong>
 
                 <input type="text" name="link_url"
-                       value="<?php
-                       Template::escape($row->getLinkUrl()); ?>">
+                       value="<?php Template::escape($row->getLinkUrl()); ?>">
             </div>
         </fieldset>
         <div class="field">
@@ -103,7 +97,8 @@ if ($permissionChecker->hasPermission("banners")
             <?php
             if ($row->getType() == "html") {
                 echo 'checked="checked"';
-            } ?>
+            }
+            ?>
                    id="radio_html" name="type" value="html"
                    onclick="$('#type_html').slideDown();$('#type_gif').slideUp();">
             <label for="radio_html">HTML</label>
@@ -111,10 +106,10 @@ if ($permissionChecker->hasPermission("banners")
         <fieldset id="type_html" style="<?php
         if ($row->getType() != "html") {
             echo "display:none";
-        } ?>">
+        }
+        ?>">
             <div class="field">
-                <textarea name="html" cols=40 rows=10><?php
-                    esc($row->getHtml()); ?></textarea>
+                <textarea name="html" cols=40 rows=10><?php esc($row->getHtml()); ?></textarea>
             </div>
         </fieldset>
 
@@ -123,14 +118,18 @@ if ($permissionChecker->hasPermission("banners")
             <strong class="field-label"><?php translate("enabled"); ?></strong> <select
                 name="enabled">
                 <option value="1"
-                        <?php if ($row->getEnabled()) {
-                        echo "selected";
-                    } ?>>
+                <?php
+                if ($row->getEnabled()) {
+                    echo "selected";
+                }
+                ?>>
                     <?php translate("yes"); ?></option>
                 <option value="0"
-                        <?php if (!$row->getEnabled()) {
-                        echo "selected";
-                    } ?>>
+                <?php
+                if (!$row->getEnabled()) {
+                    echo "selected";
+                }
+                ?>>
                     <?php translate("no"); ?></option>
             </select>
         </div>
@@ -153,35 +152,35 @@ if ($permissionChecker->hasPermission("banners")
             <select name="language">
                 <?php
                 $languages = getAllLanguages();
-        $page_language = $row->getLanguage();
+                $page_language = $row->getLanguage();
 
-        if ($page_language === "all") {
-            echo "<option value='all' selected='selected'>" .
+                if ($page_language === "all") {
+                    echo "<option value='all' selected='selected'>" .
                     get_translation("every") . "</option>";
-        } else {
-            echo "<option value='all'>" . get_translation("every") . "</option>";
-        }
+                } else {
+                    echo "<option value='all'>" . get_translation("every") . "</option>";
+                }
 
-        $languagesCount = count($languages);
+                $languagesCount = count($languages);
 
-        for ($j = 0; $j < $languagesCount; $j++) {
-            if ($languages[$j] === $page_language) {
-                echo "<option value='" . $languages[$j] . "' selected>" .
+                for ($j = 0; $j < $languagesCount; $j++) {
+                    if ($languages[$j] === $page_language) {
+                        echo "<option value='" . $languages[$j] . "' selected>" .
                         getLanguageNameByCode($languages[$j]) . "</option>";
-            } else {
-                echo "<option value='" . $languages[$j] . "'>" .
+                    } else {
+                        echo "<option value='" . $languages[$j] . "'>" .
                         getLanguageNameByCode($languages[$j]) . "</option>";
-            }
-        }
+                    }
+                }
 
-        $pages = getAllPages($page_language, "title"); ?>
+                $pages = getAllPages($page_language, "title");
+                ?>
             </select>
         </div>
         <div class="field">
             <strong class="field-label"><?php translate("category"); ?></strong>
 
-            <?php
-            echo Categories::getHTMLSelect($row->getCategoryId()); ?>
+            <?php echo Categories::getHTMLSelect($row->getCategoryId()); ?>
         </div>
         <div class="voffset2">
             <button type="submit" class="btn btn-primary">
@@ -192,7 +191,7 @@ if ($permissionChecker->hasPermission("banners")
         <?php
     } else {
         echo Alert::danger(
-            get_translation("not_found")
+                get_translation("not_found")
         );
     }
 } else {

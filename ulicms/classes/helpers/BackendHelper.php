@@ -4,18 +4,25 @@ declare(strict_types=1);
 
 use UliCMS\HTML\Script;
 
-class BackendHelper extends Helper
-{
+/**
+ * Helper methods for admin backend area
+ */
+class BackendHelper extends Helper {
 
-    // returns the current backend action or "home" if not specified
-    public static function getAction(): string
-    {
+    /**
+     * Returns the current action or "home" if not specified
+     * @return string
+     */
+    public static function getAction(): string {
         return isset($_REQUEST["action"]) ? $_REQUEST["action"] : "home";
     }
 
-    // set backend action parameter
-    public static function setAction(string $action): void
-    {
+    /**
+     * Set action
+     * @param string $action
+     * @return void
+     */
+    public static function setAction(string $action): void {
         $_REQUEST["action"] = $action;
         if (Request::isPost()) {
             $_POST["action"] = $action;
@@ -24,48 +31,50 @@ class BackendHelper extends Helper
         }
     }
 
-    // add html editor scripts to the script queue
-    public static function enqueueEditorScripts(): void
-    {
+    /**
+     * Add html editor scripts to the script queue
+     * @return void
+     */
+    public static function enqueueEditorScripts(): void {
         // ckeditor is huge so embed it only if this is the user'S preferred html editor
         if (get_html_editor() == "ckeditor") {
-           
             echo Script::fromFile("ckeditor/ckeditor.js");
-            
             enqueueScriptFile(ModuleHelper::buildRessourcePath(
-                "core_content",
-                "js/pages/init-ckeditor.js"
+                            "core_content",
+                            "js/pages/init-ckeditor.js"
             ));
-            
         }
 
         enqueueScriptFile(
-            "../node_modules/codemirror-minified/lib/codemirror.js"
+                "../node_modules/codemirror-minified/lib/codemirror.js"
         );
         enqueueScriptFile(
-            "../node_modules/codemirror-minified/mode/php/php.js"
+                "../node_modules/codemirror-minified/mode/php/php.js"
         );
         enqueueScriptFile(
-            "../node_modules/codemirror-minified/mode/xml/xml.js"
+                "../node_modules/codemirror-minified/mode/xml/xml.js"
         );
         enqueueScriptFile(
-            "../node_modules/codemirror-minified/mode/javascript/javascript.js"
+                "../node_modules/codemirror-minified/mode/javascript/javascript.js"
         );
         enqueueScriptFile(
-            "../node_modules/codemirror-minified/mode/clike/clike.js"
+                "../node_modules/codemirror-minified/mode/clike/clike.js"
         );
         enqueueScriptFile(
-            "../node_modules/codemirror-minified/mode/css/css.js"
+                "../node_modules/codemirror-minified/mode/css/css.js"
         );
 
         enqueueScriptFile(ModuleHelper::buildRessourcePath(
-            "core_content",
-            "js/pages/init-codemirror.js"
+                        "core_content",
+                        "js/pages/init-codemirror.js"
         ));
     }
 
-    public static function getCKEditorSkins(): array
-    {
+    /**
+     * Get list of installed CKEditor skin
+     * @return array
+     */
+    public static function getCKEditorSkins(): array {
         $skins = [];
         $dir = Path::resolve("ULICMS_ROOT/admin/ckeditor/skins");
         $folders = find_all_folders($dir);
@@ -78,4 +87,5 @@ class BackendHelper extends Helper
         }
         return $skins;
     }
+
 }

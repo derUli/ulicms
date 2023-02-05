@@ -4,9 +4,8 @@
         <meta name="viewport" content="width=device-width" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title><?php echo InstallerController::getTitle(); ?> - <?php echo APPLICATION_TITLE; ?> </title>
-        <link rel="stylesheet" type="text/css"
-              href="../content/modules/bootstrap/css/bootstrap.min.css" />
-        <link rel="stylesheet" type="text/css" href="media/style.css" />
+        <link rel="stylesheet" href="../content/modules/bootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="media/style.css" />
         <link rel="stylesheet"
               href="../node_modules/@fortawesome/fontawesome-free/css/all.min.css" />
     </head>
@@ -27,9 +26,11 @@
                     <ol id="navigation">
                         <?php for ($i = 1; $i <= 10; $i++) { ?>
                             <li><a href="index.php?step=<?php echo $i; ?>"
-                                   class="<?php if ($i == InstallerController::getStep()) {
-    echo "current-item";
-} ?>">
+                                   class="<?php
+                                   if ($i == InstallerController::getStep()) {
+                                       echo "current-item";
+                                   }
+                                   ?>">
                                     <?php echo constant("TRANSLATION_TITLE_STEP_" . $i); ?></a></li>
                         <?php } ?>
                     </ol>

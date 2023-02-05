@@ -4,7 +4,8 @@ use UliCMS\Models\Content\Language;
 
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("languages")) {
-    $languages = Language::getAllLanguages(); ?>
+    $languages = Language::getAllLanguages();
+    ?>
     <p>
         <a
             href="<?php echo ModuleHelper::buildActionURL("settings_categories"); ?>"
@@ -67,24 +68,26 @@ if ($permissionChecker->hasPermission("languages")) {
                                     <a class="btn btn-primary btn-make-default"
                                        href="<?php
                                        echo ModuleHelper::buildMethodCallUrl(
-                                        "LanguageController",
-                                        "setDefaultLanguage",
-                                        ModuleHelper::buildQueryString(
-                                            array("default" => $language->getLanguageCode()
+                                               "LanguageController",
+                                               "setDefaultLanguage",
+                                               ModuleHelper::buildQueryString(
+                                                       array("default" => $language->getLanguageCode()
                                                        )
-                                        )
-                                    ); ?>"
+                                               )
+                                       );
+                                       ?>"
                                        data-message="<?php
                                        translate(
-                                        "REALLY_MAKE_DEFAULT_LANGUAGE",
-                                        array(
+                                               "REALLY_MAKE_DEFAULT_LANGUAGE",
+                                               array(
                                                    "%name%" => $language->getName())
-                                    ); ?>">
+                                       );
+                                       ?>">
                                         <i class="fas fa-language"></i>
                                         <?php translate("make_default"); ?>
                                     </a>
-                                <?php
-                                } else { ?>
+                                <?php } else {
+                                    ?>
                                     <i class="fas fa-check text-success"></i>
                                 <?php } ?>
                             </td>
@@ -93,21 +96,22 @@ if ($permissionChecker->hasPermission("languages")) {
                                 echo ModuleHelper::deleteButton(
                                         ModuleHelper::buildMethodCallUrl(LanguageController::class, "delete"),
                                         ["id" => $language->getID()]
-                                    ); ?>
+                                );
+                                ?>
                             </td>
                         </tr>
-                    <?php
-                    } ?>
+                    <?php }
+                    ?>
                 </tbody>
             </table>
         </div>
         <?php
         enqueueScriptFile(
-                                        ModuleHelper::buildModuleRessourcePath(
-                                               "core_settings",
-                                               "js/languages.js"
-                                           )
-                                    );
+                ModuleHelper::buildModuleRessourcePath(
+                        "core_settings",
+                        "js/languages.js"
+                )
+        );
         combinedScriptHtml();
     }
 } else {

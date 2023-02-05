@@ -28,8 +28,7 @@ if ($permissionChecker->hasPermission("audio")
             <strong class="field-label">
                 <?php translate("category"); ?>
             </strong>
-            <?php
-            echo Categories::getHTMLSelect(); ?>
+            <?php echo Categories::getHTMLSelect(); ?>
         </div>
 
         <div class="field">
@@ -52,5 +51,5 @@ if ($permissionChecker->hasPermission("audio")
     </form>
     <?php
 } else {
-                noPerms();
-            }
+    noPerms();
+}

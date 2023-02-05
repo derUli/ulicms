@@ -5,11 +5,11 @@ declare(strict_types=1);
 use UliCMS\Utils\CacheUtil;
 use UliCMS\Helpers\ImageScaleHelper;
 
-class LogoController extends Controller
-{
+class LogoController extends Controller {
+
     public function _buildFileName(
-        string $filename,
-        string $originalName
+            string $filename,
+            string $originalName
     ): string {
         $extension = file_extension($originalName);
         $hash = md5_file($filename);
@@ -17,17 +17,14 @@ class LogoController extends Controller
     }
 
     public function _buildFilePath(
-        string $filename,
-        string $originalName
+            string $filename,
+            string $originalName
     ): string {
-        return ULICMS_DATA_STORAGE_ROOT . "/content/images/" .
+        return ULICMS_ROOT . "/content/images/" .
                 $this->_buildFileName($filename, $originalName);
     }
 
-  
-
-    public function upload(): void
-    {
+    public function upload(): void {
         // Logo Upload
         if (!empty($_FILES['logo_upload_file']['name'])) {
             $logo_upload = $_FILES['logo_upload_file'];
@@ -36,20 +33,14 @@ class LogoController extends Controller
             if (startsWith($type, "image/")) {
                 $originalName = $logo_upload['name'];
                 $newPath = $this->_buildFilePath(
-                    $logo_upload['tmp_name'],
-                    $originalName
+                        $logo_upload['tmp_name'],
+                        $originalName
                 );
 
                 do_event("before_upload_logo");
                 move_uploaded_file($logo_upload['tmp_name'], $newPath);
 
                 ImageScaleHelper::scaleDown($newPath);
-
-                // Google Cloud: make file public
-                if (startsWith(ULICMS_DATA_STORAGE_ROOT, "gs://")
-                        and class_exists("GoogleCloudHelper")) {
-                    GoogleCloudHelper::changeFileVisiblity($newPath, true);
-                }
 
                 Settings::set("logo_image", basename($newPath));
                 Settings::set("logo_disabled", "no");
@@ -65,10 +56,9 @@ class LogoController extends Controller
         Request::redirect(ModuleHelper::buildActionURL("logo"));
     }
 
-    public function _deleteLogo(): bool
-    {
+    public function _deleteLogo(): bool {
         $logoImage = Settings::get("logo_image");
-        $path = ULICMS_DATA_STORAGE_ROOT . "/content/images/${logoImage}";
+        $path = ULICMS_ROOT . "/content/images/${logoImage}";
 
         if (empty($logoImage) || !file_exists($path)) {
             return false;
@@ -81,23 +71,22 @@ class LogoController extends Controller
         return true;
     }
 
-    public function deleteLogo(): void
-    {
+    public function deleteLogo(): void {
         $success = $this->_deleteLogo();
         if ($succes) {
             CacheUtil::clearPageCache();
         }
         Response::sendHttpStatusCodeResultIfAjax(
-            $success ?
+                $success ?
                         HttpStatusCode::OK :
                         HttpStatusCode::INTERNAL_SERVER_ERROR,
-            ModuleHelper::buildActionURL("logo")
+                ModuleHelper::buildActionURL("logo")
         );
     }
 
-    public function _hasLogo(): bool
-    {
+    public function _hasLogo(): bool {
         return !empty(Settings::get("logo_image")) &&
                 Settings::get("logo_disabled") !== 'yes';
     }
+
 }

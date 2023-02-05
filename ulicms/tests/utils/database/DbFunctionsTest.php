@@ -3,10 +3,9 @@
 use UliCMS\Exceptions\SqlException;
 
 // test for legacy database methods
-class DbFunctionsTest extends \PHPUnit\Framework\TestCase
-{
-    public function testGetAllTables()
-    {
+class DbFunctionsTest extends \PHPUnit\Framework\TestCase {
+
+    public function testGetAllTables() {
         $tables = db_get_tables();
         $cfg = new CMSConfig();
         $prefix = $cfg->db_prefix;
@@ -17,34 +16,29 @@ class DbFunctionsTest extends \PHPUnit\Framework\TestCase
         $this->assertContains("{$prefix}users", $tables);
     }
 
-    public function testTbName()
-    {
+    public function testTbName() {
         $tableName = tbname("random_table");
 
         $this->assertStringEndsWith("random_table", $tableName);
         $this->assertStringStartsNotWith("random_table", $tableName);
     }
 
-    public function testGetServerVersion()
-    {
+    public function testGetServerVersion() {
         $version = db_get_server_info();
         $version = preg_replace('/[^0-9.].*/', '', $version);
         $this->assertTrue(\UliCMS\Utils\VersionComparison\compare($version, "5.5.3", '>='));
     }
 
-    public function testGetClientInfo()
-    {
+    public function testGetClientInfo() {
         $this->assertStringStartsWith("mysql", db_get_client_info());
     }
 
-    public function testDbNumFields()
-    {
+    public function testDbNumFields() {
         Database::selectAll("settings");
         $this->assertEquals(3, db_num_fields());
     }
 
-    public function testDbFetchRow()
-    {
+    public function testDbFetchRow() {
         $datasets = Database::selectAll("settings");
         while ($row = db_fetch_row($datasets)) {
             $this->assertIsNumeric($row[0]);
@@ -53,8 +47,7 @@ class DbFunctionsTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testDbFetchAssoc()
-    {
+    public function testDbFetchAssoc() {
         $datasets = Database::selectAll("settings");
         while ($row = db_fetch_assoc($datasets)) {
             $this->assertIsNumeric($row["id"]);
@@ -63,8 +56,7 @@ class DbFunctionsTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testDbFetchObject()
-    {
+    public function testDbFetchObject() {
         $datasets = Database::selectAll("settings");
         while ($row = db_fetch_object($datasets)) {
             $this->assertIsNumeric($row->id);
@@ -73,8 +65,7 @@ class DbFunctionsTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testDbFetchArray()
-    {
+    public function testDbFetchArray() {
         $datasets = Database::selectAll("settings");
         while ($row = db_fetch_array($datasets)) {
             $this->assertIsNumeric($row["id"]);
@@ -87,8 +78,7 @@ class DbFunctionsTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testDbFetchField()
-    {
+    public function testDbFetchField() {
         $cfg = new CMSConfig();
 
         $datasets = Database::selectAll("settings");
@@ -100,8 +90,7 @@ class DbFunctionsTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testDbFetchAll()
-    {
+    public function testDbFetchAll() {
         $datasets = Database::selectAll("settings");
 
         $allSettings = db_fetch_all($datasets);
@@ -112,40 +101,34 @@ class DbFunctionsTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testDbNumRows()
-    {
+    public function testDbNumRows() {
         $datasets = Database::selectAll("settings");
         $this->assertGreaterThanOrEqual(50, db_num_rows($datasets));
         ;
     }
 
-    public function testDbRealEscapeString()
-    {
+    public function testDbRealEscapeString() {
         $this->assertEquals(
-            "\\'foo\\'",
-            db_real_escape_string("'foo'")
+                "\\'foo\\'",
+                db_real_escape_string("'foo'")
         );
     }
 
-    public function testDbQuery()
-    {
+    public function testDbQuery() {
         $query = db_query("select * from " . tbname("settings") . " where name = 'homepage_title' or name = 'site_slogan'");
         $this->assertEquals(2, db_num_rows($query));
     }
 
-    public function testDbEscapeName()
-    {
+    public function testDbEscapeName() {
         $this->assertEquals("`foobar`", db_name_escape('foobar'));
     }
 
-    public function testDbAdffectedRows()
-    {
+    public function testDbAdffectedRows() {
         db_query("update " . tbname("content") . " set `views` = `views` + 1 where language = 'en'");
         $this->assertGreaterThan(1, db_affected_rows());
     }
 
-    public function testDbLastInsertId()
-    {
+    public function testDbLastInsertId() {
         $key = uniqid();
         Settings::set($key, "foobar");
 
@@ -153,8 +136,7 @@ class DbFunctionsTest extends \PHPUnit\Framework\TestCase
         Settings::delete($key);
     }
 
-    public function testDbInsertId()
-    {
+    public function testDbInsertId() {
         $key = uniqid();
         Settings::set($key, "foobar");
 
@@ -162,34 +144,33 @@ class DbFunctionsTest extends \PHPUnit\Framework\TestCase
         Settings::delete($key);
     }
 
-    public function testDbError()
-    {
+    public function testDbError() {
         try {
             Database::selectAll("gibts_nicht");
         } catch (SqlException $e) {
+            
         } finally {
             $this->assertStringEndsWith(
-                "gibts_nicht' doesn't exist",
-                db_error()
+                    "gibts_nicht' doesn't exist",
+                    db_error()
             );
         }
     }
 
-    public function testDbLastError()
-    {
+    public function testDbLastError() {
         try {
             Database::selectAll("gibts_nicht");
         } catch (SqlException $e) {
+            
         } finally {
             $this->assertStringEndsWith(
-                "gibts_nicht' doesn't exist",
-                db_last_error()
+                    "gibts_nicht' doesn't exist",
+                    db_last_error()
             );
         }
     }
 
-    public function testClose()
-    {
+    public function testClose() {
         $this->assertTrue(Database::isConnected());
 
         db_close();
@@ -203,8 +184,7 @@ class DbFunctionsTest extends \PHPUnit\Framework\TestCase
         $this->reconnect();
     }
 
-    private function reconnect($db_strict_mode = null)
-    {
+    private function reconnect($db_strict_mode = null) {
         $config = new CMSConfig();
         $db_socket = isset($config->db_socket) ? $config->db_socket : ini_get("mysqli.default_socket");
 
@@ -223,4 +203,5 @@ class DbFunctionsTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue(schema_select($config->db_database));
         $this->assertTrue(db_select($config->db_database));
     }
+
 }

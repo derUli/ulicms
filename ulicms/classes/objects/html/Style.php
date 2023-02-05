@@ -9,17 +9,16 @@ use UliCMS\Utils\File;
 
 // generates HTML style tags
 // please use stylesheet queue instead of this methods if possible
-class Style
-{
+class Style {
+
     public static function fromExternalFile(
-        string $href,
-        ?string $media = null,
-        array $htmlAttributes = []
+            string $href,
+            ?string $media = null,
+            array $htmlAttributes = []
     ): string {
         $attributes = array(
             "rel" => "stylesheet",
             "href" => $href,
-            "type" => "text/css"
         );
         if ($media) {
             $attributes["media"] = $media;
@@ -32,17 +31,20 @@ class Style
         }
         $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);
 
-        return "<link {$attribHTML}/>";
+        if (!empty($attribHTML)) {
+            $attribHTML = " $attribHTML";
+        }
+
+
+        return "<link{$attribHTML}/>";
     }
 
     public static function fromString(
-        ?string $code,
-        ?string $media = null,
-        array $htmlAttributes = []
+            ?string $code,
+            ?string $media = null,
+            array $htmlAttributes = []
     ): string {
-        $attributes = array(
-            "type" => "text/css"
-        );
+        $attributes = [];
         if ($media) {
             $attributes["media"] = $media;
         }
@@ -51,6 +53,11 @@ class Style
         }
         $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);
 
-        return "<style $attribHTML>" . $code . "</style>";
+        if (!empty($attribHTML)) {
+            $attribHTML = " $attribHTML";
+        }
+
+        return "<style{$attribHTML}>" . $code . "</style>";
     }
+
 }

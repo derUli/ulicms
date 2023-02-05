@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-class HtmlField extends CustomField
-{
-    public function render($value = null): string
-    {
+class HtmlField extends CustomField {
+
+    public function render($value = null): string {
         if (!isset($this->htmlAttributes["class"])) {
             $this->htmlAttributes["class"] = get_html_editor();
         }
@@ -19,4 +18,5 @@ class HtmlField extends CustomField
 
         return Template::executeDefaultOrOwnTemplate("fields/htmlfield.php");
     }
+
 }

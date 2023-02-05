@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 use UliCMS\Security\TwoFactorAuthentication;
 
-// this file contains functions for managing user accounts
-function getUsers(): array
-{
+/**
+ * Returns all Users 
+ * @return arrays of User ID, an Username
+ */
+function getUsers(): array {
     $users = [];
     $result = Database::query("SELECT id, username FROM " . tbname("users") .
                     " ORDER by username");
@@ -17,13 +19,19 @@ function getUsers(): array
     return $users;
 }
 
-function getAllUsers(): array
-{
+/**
+ * Returns all Users 
+ * @return arrays of User ID, an Username
+ */
+function getAllUsers(): array {
     return getUsers();
 }
 
-function getUsersOnline(): array
-{
+/**
+ * Get online users
+ * @return array Login names of currently logged in users
+ */
+function getUsersOnline(): array {
     $users_online = Database::query("SELECT username FROM " . tbname("users") . " WHERE last_action > " . (time() - 300) . " ORDER BY username");
     $retval = [];
     while ($row = db_fetch_object($users_online)) {
@@ -32,8 +40,13 @@ function getUsersOnline(): array
     return $retval;
 }
 
-function changePassword($password, $userId)
-{
+/**
+ * Change password of a user
+ * @param type $password New plain text password
+ * @param type $userId User id
+ * @return boolean true if successful
+ */
+function changePassword($password, $userId) {
     $user = new User($userId);
     if (!$user->isPersistent()) {
         return false;
@@ -43,8 +56,12 @@ function changePassword($password, $userId)
     return true;
 }
 
-function getUserByName(string $name): ?array
-{
+/**
+ * Get a user from database by it's username
+ * @param string $name Username
+ * @return array|null User dataset
+ */
+function getUserByName(string $name): ?array {
     $result = Database::query("SELECT * FROM " . tbname("users") .
                     " WHERE username='" . Database::escapeValue($name, DB_TYPE_STRING) . "'");
     if (db_num_rows($result) > 0) {
@@ -53,8 +70,12 @@ function getUserByName(string $name): ?array
     return null;
 }
 
-function getUserById($id): ?array
-{
+/**
+ * Get user by id
+ * @param type $id User Id
+ * @return array|null User as associative array
+ */
+function getUserById($id): ?array {
     $result = Database::query("SELECT * FROM " . tbname("users") .
                     " WHERE id = " . intval($id));
     if (db_num_rows($result) > 0) {
@@ -63,8 +84,11 @@ function getUserById($id): ?array
     return null;
 }
 
-function get_user_id(): int
-{
+/**
+ * Get the user id of the current user
+ * @return int
+ */
+function get_user_id(): int {
     if (isset($_SESSION["login_id"])) {
         return intval($_SESSION["login_id"]);
     } else {
@@ -72,8 +96,11 @@ function get_user_id(): int
     }
 }
 
-function get_group_id(): int
-{
+/**
+ * Get the primary group id of the current user
+ * @return int User Id, 0 if not set
+ */
+function get_group_id(): int {
     if (isset($_SESSION["group_id"])) {
         return intval($_SESSION["group_id"]);
     } else {
@@ -81,23 +108,40 @@ function get_group_id(): int
     }
 }
 
-function user_exists(string $name): bool
-{
+/**
+ * Checks if a user exists 
+ * @param string $name Username
+ * @return bool User exists
+ */
+function user_exists(string $name): bool {
     $user = new User();
     $user->loadByUsername($name);
     return intval($user->getId()) > 0;
 }
 
-function register_session(array $user, bool $redirect = true): void
-{
-    $userDataset = new User($user["id"]);
+/**
+ * initiate user session
+ * @param int $userId User Iid
+ * @param bool $redirect should redirect after set fill $_SESSION
+ * @return void
+ */
+function register_session(int $userId, bool $redirect = true): void {
+
+    $userDataset = new User($userId);
     $userDataset->registerSession($redirect);
 }
 
+/**
+ * Validate login data
+ * @param string $username Username
+ * @param string $password Plain password
+ * @param string|null $confirmationCode Confirmation Code for Google Authenticator
+ * @return array|null User or null
+ */
 function validate_login(
-    string $username,
-    string $password,
-    ?string $token = null
+        string $username,
+        string $password,
+        ?string $confirmationCode = null
 ): ?array {
     $user = new User();
     $user->loadByUsername($username);
@@ -119,7 +163,7 @@ function validate_login(
 
         // Limit Login Attampts
         $max_failed_logins_items = intval(
-            Settings::get("max_failed_logins_items")
+                Settings::get("max_failed_logins_items")
         );
         $user->setFailedLogins($user->getFailedLogins() + 1);
         $user->save();
@@ -134,7 +178,7 @@ function validate_login(
         return null;
     }
 
-    if (TwoFactorAuthentication::isEnabled() && !$auth->checkCode($token)) {
+    if (TwoFactorAuthentication::isEnabled() && !$auth->checkCode($confirmationCode)) {
         $_REQUEST["error"] = get_translation("confirmation_code_wrong");
         return null;
     }
@@ -145,20 +189,27 @@ function validate_login(
     return getUserById($user->getId());
 }
 
-// Ist der User eingeloggt
-function is_logged_in(): bool
-{
+/**
+ * Checks if the user is currently logged in.
+ * @return bool Logged in
+ */
+function is_logged_in(): bool {
     return isset($_SESSION["logged_in"]);
 }
 
-// Alias für is_logged_in
-function logged_in(): bool
-{
+/**
+ * Checks if the user is currently logged in.
+ * @return bool Logged in
+ */
+function logged_in(): bool {
     return is_logged_in();
 }
 
-function getOnlineUsers(): array
-{
+/**
+ * Get online users
+ * @return array Login names of currently logged in users
+ */
+function getOnlineUsers(): array {
     return getUsersOnline();
 }
 
@@ -170,12 +221,12 @@ function getOnlineUsers(): array
  *
  */
 function get_gravatar(
-    string $email,
-    int $s = 80,
-    string $d = 'mm',
-    string $r = 'g',
-    bool $img = false,
-    array $atts = []
+        string $email,
+        int $s = 80,
+        string $d = 'mm',
+        string $r = 'g',
+        bool $img = false,
+        array $atts = []
 ): string {
     //
     $url = ModuleHelper::getBaseUrl("/admin/gfx/no_avatar.png");
@@ -198,10 +249,11 @@ function get_gravatar(
     return $img ? $html : $url;
 }
 
-// Gibt den für den derzeit eingeloggten User eingestellten HTML-Editor aus.
-// Wenn der Anwender nicht eingeloggt ist return null
-function get_html_editor(): ?string
-{
+/**
+ * Returns the preferred HTML editor of the current user.
+ * @return string|null "ckeditor" or "codemirror"
+ */
+function get_html_editor(): ?string {
     $user_id = get_user_id();
 
     if (!$user_id) {

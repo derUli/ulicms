@@ -4,14 +4,19 @@ declare(strict_types=1);
 
 namespace UliCMS\Helpers;
 
-class DataTablesHelper extends \Helper
-{
+/**
+ * Methods for DataTables
+ */
+class DataTablesHelper extends \Helper {
 
-    // returns the path of the datatables language file
-    // if there is no language file for the current language
-    // it returns the path to the english language file
-    public static function getLanguageFileURL(string $lang): string
-    {
+    /**
+     * Returns the path of the datatables language file
+     * if there is no language file for the current language
+     * it returns the path to the english language file
+     * @param string $lang Language Code
+     * @return string Language File URL 
+     */
+    public static function getLanguageFileURL(string $lang): string {
         $baseUrl = "scripts/datatables/lang";
         $file = "{$baseUrl}/{$lang}.lang";
         if (file_exists($file)) {
@@ -19,4 +24,5 @@ class DataTablesHelper extends \Helper
         }
         return "$baseUrl/en.lang";
     }
+
 }

@@ -4,32 +4,34 @@ declare(strict_types=1);
 
 use UliCMS\Utils\File;
 
-class SinPackageInstaller
-{
+class SinPackageInstaller {
+
     private $file = null;
     private $errors = [];
     private $packageData = null;
 
-    public function __construct(string $file)
-    {
+    public function __construct(string $file) {
         if (StringHelper::isNotNullOrEmpty($file)) {
             $this->file = $file;
         }
     }
 
-    public function loadPackage(): array
-    {
+    public function loadPackage(): array {
         if ($this->packageData) {
             return $this->packageData;
         }
         $data = file_get_contents($this->file);
+
+        if (endsWith($this->file, ".sin2")) {
+            $data = gzdecode($data);
+        }
+
         $json = json_decode($data, true);
         $this->packageData = $json;
         return $json;
     }
 
-    public function extractArchive(): string
-    {
+    public function extractArchive(): string {
         $path = Path::resolve("ULICMS_TMP/package-" . $this->getProperty("id")
                         . "-" . $this->getProperty("version") . ".tar.gz");
         $data = $this->loadPackage();
@@ -38,8 +40,7 @@ class SinPackageInstaller
         return $path;
     }
 
-    public function installPackage(bool $clear_cache = true): bool
-    {
+    public function installPackage(bool $clear_cache = true): bool {
         if ($this->isInstallable()) {
             $path = $this->extractArchive();
             $pkg = new PackageManager();
@@ -50,32 +51,28 @@ class SinPackageInstaller
         return false;
     }
 
-    public function getSize(): int
-    {
+    public function getSize(): int {
         $data = $this->loadPackage();
         $decoded = base64_decode($data["data"]);
         return mb_strlen($decoded, '8bit');
     }
 
-    public function getProperty(string $name)
-    {
+    public function getProperty(string $name) {
         $data = $this->loadPackage();
         if (isset($data[$name]) and StringHelper::isNotNullOrEmpty(
-            $data[$name]
-        )
+                        $data[$name]
+                )
         ) {
             return $data[$name];
         }
         return null;
     }
 
-    public function getErrors(): array
-    {
+    public function getErrors(): array {
         return $this->errors;
     }
 
-    public function isInstallable(): bool
-    {
+    public function isInstallable(): bool {
         $this->errors = [];
         $installed_modules = getAllModules();
         $data = $this->loadPackage();
@@ -84,10 +81,10 @@ class SinPackageInstaller
             foreach ($dependencies as $dependency) {
                 if (!faster_in_array($dependency, $installed_modules)) {
                     $this->errors[] = get_translation(
-                        "dependency_x_is_not_installed",
-                        [
+                            "dependency_x_is_not_installed",
+                            [
                                 "%x%" => $dependency
-                    ]
+                            ]
                     );
                 }
             }
@@ -130,23 +127,21 @@ class SinPackageInstaller
 
         // if package requires a specific mysql version check it
         if (isset($data["min_mysql_version"])
-                and StringHelper::isNotNullOrEmpty($data["min_mysql_version"])
-                && !\UliCMS\Utils\VersionComparison\compare($mysqlVersion, $data["min_mysql_version"], ">=")) {
+                and StringHelper::isNotNullOrEmpty($data["min_mysql_version"]) && !\UliCMS\Utils\VersionComparison\compare($mysqlVersion, $data["min_mysql_version"], ">=")) {
             $mysqlVersionSupported = false;
         }
 
         if (isset($data["max_mysql_version"])
-                and StringHelper::isNotNullOrEmpty($data["max_mysql_version"])
-                && !\UliCMS\Utils\VersionComparison\compare($mysqlVersion, $data["max_mysql_version"], "<=")) {
+                and StringHelper::isNotNullOrEmpty($data["max_mysql_version"]) && !\UliCMS\Utils\VersionComparison\compare($mysqlVersion, $data["max_mysql_version"], "<=")) {
             $mysqlVersionSupported = false;
         }
 
         if (!$mysqlVersionSupported) {
             $this->errors[] = get_translation(
-                "mysql_version_x_not_supported",
-                [
+                    "mysql_version_x_not_supported",
+                    [
                         "%version%" => $mysqlVersion
-            ]
+                    ]
             );
         }
 
@@ -156,10 +151,10 @@ class SinPackageInstaller
             foreach ($data["required_php_extensions"] as $extension) {
                 if (!in_array($extension, $loadedExtensions)) {
                     $this->errors[] = get_translation(
-                        "php_extension_x_not_installed",
-                        [
+                            "php_extension_x_not_installed",
+                            [
                                 "%extension%" => $extension
-                    ]
+                            ]
                     );
                 }
             }
@@ -167,7 +162,7 @@ class SinPackageInstaller
 
         if ($version_not_supported) {
             $this->errors[] = get_translation(
-                "this_ulicms_version_is_not_supported"
+                    "this_ulicms_version_is_not_supported"
             );
         }
 
@@ -179,4 +174,5 @@ class SinPackageInstaller
 
         return (count($this->errors) <= 0);
     }
+
 }

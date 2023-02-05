@@ -9,9 +9,9 @@ $users = ViewBag::get("users");
         <div class="online-user">
             <?php
             echo imageTag(
-    $user->getAvatar(),
-    ["class" => "img-responsive"]
-);
+                    $user->getAvatar(),
+                    ["class" => "img-responsive"]
+            );
             ?>
             <div class="username">
                 <?php esc($user->getUsername()); ?>

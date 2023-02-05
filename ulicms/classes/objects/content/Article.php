@@ -1,7 +1,6 @@
 <?php
 
-class Article extends Page
-{
+class Article extends Page {
 
     // FIXME: Variablen alle private machen
     // und getter und setter implementieren
@@ -12,20 +11,19 @@ class Article extends Page
     public $excerpt = "";
     public $type = "article";
 
-    protected function fillVars($result = null)
-    {
+    protected function fillVars($result = null) {
         parent::fillVars($result);
 
         // article metadata
         $this->article_author_email = $result->article_author_email;
         $this->article_author_name = $result->article_author_name;
         $this->article_image = $result->article_image;
-        $this->article_date = strtotime($result->article_date);
+        $this->article_date = $result->article_date ?
+                strtotime($result->article_date) : null;
         $this->excerpt = $result->excerpt;
     }
 
-    public function save()
-    {
+    public function save() {
         $retval = null;
         if ($this->id === null) {
             $retval = $this->create();
@@ -36,8 +34,7 @@ class Article extends Page
         return $retval;
     }
 
-    public function update()
-    {
+    public function update() {
         if (is_null($this->id)) {
             return false;
         }
@@ -66,8 +63,8 @@ excerpt = ? where id = ?";
         return Database::pQuery($sql, $args, true);
     }
 
-    public function getIcon(): string
-    {
+    public function getIcon(): string {
         return "far fa-newspaper";
     }
+
 }

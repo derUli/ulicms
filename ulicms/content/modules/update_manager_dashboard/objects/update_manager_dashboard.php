@@ -1,9 +1,8 @@
 <?php
 
-class UpdateManagerDashboard
-{
-    public static function anyUpdateAvailable()
-    {
+class UpdateManagerDashboard {
+
+    public static function anyUpdateAvailable() {
         $pkg = new PackageManager();
         $modules = getAllModules();
         if (count($modules) > 0) {
@@ -34,4 +33,5 @@ class UpdateManagerDashboard
 
         return false;
     }
+
 }

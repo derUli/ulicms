@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace UliCMS\Utils\Session;
 
-function sessionStart(): bool
-{
+function sessionStart(): bool {
     return !headers_sent() ? session_start() : false;
 }
 
-function sessionName(?string $name = null): string
-{
+function sessionName(?string $name = null): string {
     if (!$name) {
         return session_name();
     }
@@ -18,7 +16,6 @@ function sessionName(?string $name = null): string
     return !headers_sent() ? session_name($name) : sessionName();
 }
 
-function sessionDestroy(): bool
-{
+function sessionDestroy(): bool {
     return session_id() ? session_destroy() : false;
 }

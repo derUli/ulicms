@@ -4,6 +4,6 @@ namespace UliCMS\Exceptions;
 
 use InvalidArgumentException;
 
-class ArgumentNullException extends InvalidArgumentException
-{
+class ArgumentNullException extends InvalidArgumentException {
+    
 }

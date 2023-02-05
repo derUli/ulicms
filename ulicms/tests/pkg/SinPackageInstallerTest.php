@@ -2,42 +2,36 @@
 
 use UliCMS\Exceptions\NotImplementedException;
 
-class SinPackageInstallerTest extends \PHPUnit\Framework\TestCase
-{
-    protected function setUp(): void
-    {
+class SinPackageInstallerTest extends \PHPUnit\Framework\TestCase {
+
+    protected function setUp(): void {
         require_once getLanguageFilePath("en");
     }
 
-    private function getSinPackageInstaller($file)
-    {
+    private function getSinPackageInstaller($file) {
         return new SinPackageInstaller(
-            Path::resolve(
-                "ULICMS_ROOT/tests/fixtures/packages/{$file}"
-            )
+                Path::resolve(
+                        "ULICMS_ROOT/tests/fixtures/packages/{$file}"
+                )
         );
     }
 
-    public function testIsInstallableReturnsTrue()
-    {
+    public function testIsInstallableReturnsTrue() {
         $installer = $this->getSinPackageInstaller("is_proxy-1.0.sin");
         $this->assertTrue($installer->isInstallable());
     }
 
-    public function testIsInstallableReturnsFalse()
-    {
+    public function testIsInstallableReturnsFalse() {
         $installer = $this->getSinPackageInstaller("ip_api_com-1.0.sin");
         $this->assertFalse($installer->isInstallable());
     }
 
-    public function testGetSize()
-    {
+    public function testGetSize() {
         $installer = $this->getSinPackageInstaller("is_proxy-1.0.sin");
         $this->assertEquals(671, $installer->getSize());
     }
 
-    public function testGetProperty()
-    {
+    public function testGetProperty() {
         $installer = $this->getSinPackageInstaller("is_proxy-1.0.sin");
         $this->assertEquals("Check if site is accessed by a proxy server", $installer->getProperty("description"));
 
@@ -48,16 +42,22 @@ class SinPackageInstallerTest extends \PHPUnit\Framework\TestCase
         $this->assertNull($installer->getProperty('gibts_nicht'));
     }
 
-    public function testGetErrorsReturnsNothing()
-    {
+    public function testGetPropertyCompressed() {
+        $installer = $this->getSinPackageInstaller("is_proxy-2.0.sin2");
+        $this->assertEquals("Check if site is accessed by a proxy server", $installer->getProperty("description"));
+
+        $this->assertFalse($installer->isInstallable());
+        $this->assertEquals("2.0", $installer->getProperty("version"));
+    }
+
+    public function testGetErrorsReturnsNothing() {
         $installer = $this->getSinPackageInstaller("is_proxy-1.0.sin");
         $installer->isInstallable();
         $this->assertIsArray($installer->getErrors());
         $this->assertCount(0, $installer->getErrors());
     }
 
-    public function testGetErrorsReturnsErrors()
-    {
+    public function testGetErrorsReturnsErrors() {
         $installer = $this->getSinPackageInstaller("ip_api_com-1.0.sin");
         $installer->isInstallable();
         $errors = $installer->getErrors();
@@ -68,8 +68,7 @@ class SinPackageInstallerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("The package is not with your UliCMS Version compatible.", $errors[1]);
     }
 
-    public function testLoadPackage()
-    {
+    public function testLoadPackage() {
         $installer = $this->getSinPackageInstaller("is_proxy-1.0.sin");
         $data = $installer->loadPackage();
         $this->assertIsArray($data);
@@ -78,4 +77,5 @@ class SinPackageInstallerTest extends \PHPUnit\Framework\TestCase
         $this->assertArrayHasKey("checksum", $data);
         $this->assertArrayHasKey("data", $data);
     }
+
 }

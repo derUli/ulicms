@@ -8,10 +8,9 @@ use Database;
 use function tbname;
 
 // This class contains methods that return an array of banners
-class Banners
-{
-    public static function getAll(string $order = "id"): array
-    {
+class Banners {
+
+    public static function getAll(string $order = "id"): array {
         $datasets = [];
         $sql = "SELECT id FROM " . tbname("banner") . " ORDER BY $order";
         $result = Database::query($sql);
@@ -24,8 +23,8 @@ class Banners
     }
 
     public static function getByLanguage(
-        string $language,
-        string $order = "language"
+            string $language,
+            string $order = "language"
     ): array {
         $datasets = [];
         $language = Database::escapeValue($language);
@@ -41,8 +40,8 @@ class Banners
     }
 
     public static function getByCategory(
-        ?int $category_id,
-        string $order = "id"
+            ?int $category_id,
+            string $order = "id"
     ): array {
         $category_id = intval($category_id);
         $datasets = [];
@@ -58,8 +57,8 @@ class Banners
     }
 
     public static function getByType(
-        string $type = "gif",
-        string $order = "language"
+            string $type = "gif",
+            string $order = "language"
     ): array {
         $type = Database::escapeValue($type);
         $datasets = [];
@@ -74,8 +73,7 @@ class Banners
         return $datasets;
     }
 
-    public static function getRandom(): ?Banner
-    {
+    public static function getRandom(): ?Banner {
         $banner = null;
 
         $result = Database::pQuery("SELECT id FROM {prefix}banner
@@ -102,4 +100,5 @@ class Banners
         }
         return $banner;
     }
+
 }

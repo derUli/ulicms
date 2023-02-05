@@ -12,23 +12,20 @@ use ContentFactory;
 use UliCMS\Exceptions\DatasetNotFoundException;
 
 // this class renders a page as pdf using mPDF
-class PdfRenderer
-{
+class PdfRenderer {
+
     public $isMpdfInstalled = false;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->isMpdfInstalled = $this->checkIfMpdfIsInstalled();
     }
 
-    protected function checkIfMpdfIsInstalled(): bool
-    {
+    protected function checkIfMpdfIsInstalled(): bool {
         return class_exists('Mpdf\Mpdf');
     }
 
     // renders the content html to class variable
-    protected function renderContent(): void
-    {
+    protected function renderContent(): void {
         ob_start();
 
         try {
@@ -54,15 +51,14 @@ class PdfRenderer
         $this->content = ob_get_clean();
     }
 
-    public function outputMpdfNotInstalled(): string
-    {
+    public function outputMpdfNotInstalled(): string {
         $clickableLink = StringHelper::makeLinksClickable(
-            "https://extend.ulicms.de/mPDF.html"
+                        "https://extend.ulicms.de/mPDF.html"
         );
 
         $message = get_translation(
-            "mpdf_not_installed",
-            [
+                "mpdf_not_installed",
+                [
                     "%link%" => $clickableLink
                 ]
         );
@@ -71,8 +67,7 @@ class PdfRenderer
     }
 
     // renders the pdf and returns the pdf binary data as string
-    public function render(): string
-    {
+    public function render(): string {
 
         // The Mpdf module is required to render pdf files
         // if it is not installed shown an error message to the user
@@ -94,8 +89,8 @@ class PdfRenderer
 
         $mpdf->WriteHTML($this->content);
         $output = $mpdf->Output(
-            'foobar.pdf',
-            \Mpdf\Output\Destination::STRING_RETURN
+                'foobar.pdf',
+                \Mpdf\Output\Destination::STRING_RETURN
         );
 
         if ($adapter) {
@@ -103,4 +98,5 @@ class PdfRenderer
         }
         return $output;
     }
+
 }

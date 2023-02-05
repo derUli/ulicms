@@ -2,12 +2,14 @@
 
 declare(strict_types=1);
 
-// Schriftgrößen zurückgeben
-function getFontSizes(): array
-{
-    global $sizes;
+/**
+ * Returns font size values for design settings in backend from 6px to 80px
+ * @global type $sizes
+ * @return array
+ */
+function getFontSizes(): array {
     $sizes = [];
-    for ($i = 6; $i <= 80; $i ++) {
+    for ($i = 6; $i <= 80; $i++) {
         $sizes[] = $i . "px";
     }
     do_event("custom_font_sizes");
@@ -16,8 +18,13 @@ function getFontSizes(): array
     return $sizes;
 }
 
-function getThemeMeta(string $theme, string $attrib = null)
-{
+/**
+ * Get metadata of theme
+ * @param Name of theme
+ * @param string $attrib Attribute
+ * @return type if $attrib is not null the value of a specific attribute, else an array
+ */
+function getThemeMeta(string $theme, string $attrib = null) {
     $retval = null;
     $metadata_file = getTemplateDirPath($theme, true) . "metadata.json";
     if (file_exists($metadata_file)) {

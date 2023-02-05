@@ -2,8 +2,11 @@
 
 declare(strict_types=1);
 
-function var_dump_str(): string
-{
+/**
+ * Like var_dump but with output buffering
+ * @return string var_dump
+ */
+function var_dump_str(): string {
     $argc = func_num_args();
     $argv = func_get_args();
 
@@ -18,9 +21,13 @@ function var_dump_str(): string
     return '';
 }
 
-// like json_encode() but human readable
-function json_readable_encode($in, $indent = 0): string
-{
+/**
+ * Human readable JSON Encode
+ * @param type $in Object to serialize
+ * @param type $indent Indent spaces
+ * @return string JSON string
+ */
+function json_readable_encode($in, $indent = 0): string {
     $_myself = __FUNCTION__;
     $_escape = function ($str) {
         return preg_replace("!([\b\t\n\r\f\"\\'])!", "\\\\\\1", $str);
