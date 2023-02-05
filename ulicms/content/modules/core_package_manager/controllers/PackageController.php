@@ -180,9 +180,9 @@ class PackageController extends MainClass {
     public function availablePackages(): void {
         $html = $this->_availablePackages();
         HtmlResult(
-            $html,
-            HttpStatusCode::OK,
-            HTMLMinify::OPTIMIZATION_ADVANCED
+                $html,
+                HttpStatusCode::OK,
+                HTMLMinify::OPTIMIZATION_ADVANCED
         );
     }
 

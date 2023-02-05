@@ -9,7 +9,8 @@ if ($permissionChecker->hasPermission("settings_simple")) {
     $settings = [];
     foreach ($allSettings as $option) {
         $settings[$option->name] = Template::getEscape($option->value);
-    } ?>
+    }
+    ?>
     <p>
         <a
             href="<?php echo ModuleHelper::buildActionURL("settings_categories"); ?>"
@@ -25,7 +26,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
         <tr>
             <td><strong><?php translate("homepage_title"); ?></strong></td>
             <td><a href="index.php?action=homepage_title" class="btn btn-default is-not-ajax"
-                    >
+                   >
                     <i
                         class="fa fa-edit"></i> <?php translate("edit"); ?>
                 </a></td>
@@ -34,8 +35,8 @@ if ($permissionChecker->hasPermission("settings_simple")) {
             <td><strong><?php translate("site_slogan"); ?></strong></td>
             <td><a
                     href="index.php?action=site_slogan"
-                   class="btn btn-default is-not-ajax"
-                   ><i
+                    class="btn btn-default is-not-ajax"
+                    ><i
                         class="fa fa-edit"></i> <?php translate("edit"); ?></a></td>
         </tr>
         <tr>
@@ -54,14 +55,14 @@ if ($permissionChecker->hasPermission("settings_simple")) {
                    class="btn btn-default is-not-ajax"><i class="fa fa-edit"></i> <?php translate("edit"); ?></a></td>
         </tr>
         <?php if ($permissionChecker->hasPermission("error_pages")) {
-        ?>
+            ?>
             <tr>
                 <td><strong><?php translate("error_pages"); ?></strong></td>
                 <td><a href="index.php?action=error_pages"
                        class="btn btn-default is-not-ajax"><i class="fa fa-edit"></i> <?php translate("edit"); ?></a></td>
             </tr>
-        <?php
-    } ?>
+        <?php }
+        ?>
         <tr>
             <td><strong><?php translate("MAINTENANCE_MODE_ENABLED"); ?></strong></td>
             <td><input type="checkbox" name="maintenance_mode"
@@ -69,7 +70,8 @@ if ($permissionChecker->hasPermission("settings_simple")) {
                        <?php
                        if (strtolower($settings["maintenance_mode"] == "on") || $settings["maintenance_mode"] == "1" || strtolower($settings["maintenance_mode"]) == "true") {
                            echo " checked";
-                       } ?>></td>
+                       }
+                       ?>></td>
         </tr>
         <tr>
             <td><strong><?php translate("GUEST_MAY_REGISTER"); ?></strong></td>
@@ -78,7 +80,8 @@ if ($permissionChecker->hasPermission("settings_simple")) {
                        <?php
                        if (strtolower($settings["visitors_can_register"] == "on") || $settings["visitors_can_register"] == "1" || strtolower($settings["visitors_can_register"]) == "true") {
                            echo " checked";
-                       } ?>></td>
+                       }
+                       ?>></td>
         </tr>
         <tr>
             <td>
@@ -91,7 +94,8 @@ if ($permissionChecker->hasPermission("settings_simple")) {
                        <?php
                        if (!isset($settings["disable_password_reset"])) {
                            echo " checked";
-                       } ?>>
+                       }
+                       ?>>
             </td>
         </tr>
         <tr>
@@ -113,26 +117,27 @@ if ($permissionChecker->hasPermission("settings_simple")) {
                 <td><a href="index.php?action=open_graph" class="btn btn-default is-not-ajax"><i
                             class="fa fa-edit"></i> <?php translate("edit"); ?></a></td>
             </tr>
-        <?php
-        } ?>
+        <?php }
+        ?>
         <tr>
             <td><strong><?php translate("timezone"); ?></strong></td>
             <td><select name="timezone" size="1">
                     <?php
                     $timezones = $controller->getTimezones();
-    $current_timezone = Settings::get("timezone");
-    $current_timezone = trim($current_timezone);
-    sort($timezones);
-    $timezoneCount = count($timezones);
-    for ($i = 0; $i < $timezoneCount; $i++) {
-        $thisTimezone = $timezones[$i];
-        $thisTimezone = trim($thisTimezone);
-        if ($thisTimezone === $current_timezone) {
-            echo '<option value="' . $thisTimezone . '" selected>' . $thisTimezone . '</option>';
-        } else {
-            echo '<option value="' . $thisTimezone . '">' . $thisTimezone . '</option>';
-        }
-    } ?>
+                    $current_timezone = Settings::get("timezone");
+                    $current_timezone = trim($current_timezone);
+                    sort($timezones);
+                    $timezoneCount = count($timezones);
+                    for ($i = 0; $i < $timezoneCount; $i++) {
+                        $thisTimezone = $timezones[$i];
+                        $thisTimezone = trim($thisTimezone);
+                        if ($thisTimezone === $current_timezone) {
+                            echo '<option value="' . $thisTimezone . '" selected>' . $thisTimezone . '</option>';
+                        } else {
+                            echo '<option value="' . $thisTimezone . '">' . $thisTimezone . '</option>';
+                        }
+                    }
+                    ?>
                 </select></td>
         </tr>
         <tr>
@@ -150,8 +155,8 @@ if ($permissionChecker->hasPermission("settings_simple")) {
                         ?>
                         <option value="index,follow" selected><?php translate("SEARCH_ENGINES_INDEX"); ?></option>
                         <option value="noindex,nofollow"><?php translate("SEARCH_ENGINES_NOINDEX"); ?></option>
-                    <?php
-                    } ?>
+                    <?php }
+                    ?>
                 </select></td>
         </tr>
         <?php do_event("settings_simple"); ?>
@@ -170,7 +175,6 @@ if ($permissionChecker->hasPermission("settings_simple")) {
     $translation = new JSTranslation();
     $translation->addKey("changes_was_saved");
     $translation->render();
-
 
     enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/settings_simple.js"));
     combinedScriptHtml();

@@ -3,9 +3,9 @@
 namespace UliCMS\Utils\VersionComparison;
 
 function compare(
-    ?string $version1,
-    ?string $version2,
-    string $operator = ">"
+        ?string $version1,
+        ?string $version2,
+        string $operator = ">"
 ): bool {
     $splitted1 = explode(".", $version1);
     $splitted2 = explode(".", $version2);
@@ -46,42 +46,41 @@ function compare(
 }
 
 function isGreater(
-    ?string $version1,
-    ?string $version2
+        ?string $version1,
+        ?string $version2
 ): bool {
     return compare($version1, $version2, ">");
 }
 
 function isGreaterOrEqual(
-    ?string $version1,
-    ?string $version2
+        ?string $version1,
+        ?string $version2
 ): bool {
     return compare($version1, $version2, ">=");
 }
 
 function isLesser(
-    ?string $version1,
-    ?string $version2
+        ?string $version1,
+        ?string $version2
 ): bool {
     return compare($version1, $version2, "<");
 }
 
 function isLesserOrEqual(
-    ?string $version1,
-    ?string $version2
+        ?string $version1,
+        ?string $version2
 ): bool {
     return compare($version1, $version2, "<=");
 }
 
 function isEqual(
-    ?string $version1,
-    ?string $version2
+        ?string $version1,
+        ?string $version2
 ): bool {
     return compare($version1, $version2, "=");
 }
 
-function fillUpVersionNumbers(array $splitted1, array $splitted2): array
-{
+function fillUpVersionNumbers(array $splitted1, array $splitted2): array {
     if (count($splitted1) === count($splitted2)) {
         return [$splitted1, $splitted2];
     }

@@ -18,8 +18,7 @@ setLanguageByDomain();
 
 $languages = getAllLanguages();
 
-if (!empty($_GET["language"])
-        && in_array($_GET["language"], $languages)) {
+if (!empty($_GET["language"]) && in_array($_GET["language"], $languages)) {
     $_SESSION["language"] = Database::escapeValue(
                     $_GET["language"],
                     DB_TYPE_STRING
@@ -32,8 +31,7 @@ if (!isset($_SESSION["language"])) {
 
 setLocaleByLanguage();
 
-if (in_array($_SESSION["language"], $languages)
-        && file_exists(getLanguageFilePath($_SESSION["language"]))) {
+if (in_array($_SESSION["language"], $languages) && file_exists(getLanguageFilePath($_SESSION["language"]))) {
     require_once getLanguageFilePath($_SESSION["language"]);
 } elseif (file_exists(getLanguageFilePath("en"))) {
     require getLanguageFilePath("en");
@@ -127,8 +125,7 @@ if (get_ID()) {
         $page = ContentFactory::getByID(get_ID());
         if (!is_null($page->id) && $page instanceof Language_Link) {
             $language = new Language($page->link_to_language);
-            if (!is_null($language->getID())
-                    && StringHelper::isNotNullOrWhitespace(
+            if (!is_null($language->getID()) && StringHelper::isNotNullOrWhitespace(
                             $language->getLanguageLink()
                     )
             ) {
@@ -242,8 +239,7 @@ if ($text_position == "after") {
 
 $disable_functions = getThemeMeta(get_theme(), "disable_functions");
 
-if (!(is_array($disable_functions)
-        && in_array("output_content", $disable_functions))) {
+if (!(is_array($disable_functions) && in_array("output_content", $disable_functions))) {
     content();
 }
 
@@ -255,8 +251,7 @@ do_event("after_content");
 
 do_event("before_edit_button");
 
-if (!(is_array($disable_functions)
-        && in_array("edit_button", $disable_functions))) {
+if (!(is_array($disable_functions) && in_array("edit_button", $disable_functions))) {
     edit_button();
 }
 

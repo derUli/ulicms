@@ -2,13 +2,12 @@
 
 use UliCMS\CoreContent\Partials\EditButtonRenderer;
 
-class EditButtonRendererTest extends \PHPUnit\Framework\TestCase
-{
+class EditButtonRendererTest extends \PHPUnit\Framework\TestCase {
+
     private $user;
     private $group;
 
-    protected function setUp(): void
-    {
+    protected function setUp(): void {
         $user = new User();
         $user->setUsername("paul.panzer");
         $user->setLastname("Panzer");
@@ -20,15 +19,13 @@ class EditButtonRendererTest extends \PHPUnit\Framework\TestCase
         $this->user = $user;
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         $this->user->delete();
 
         Database::query("delete from {prefix}content where title like 'Test Page%'", true);
     }
 
-    public function testRenderReturnsHtml()
-    {
+    public function testRenderReturnsHtml() {
         $this->user->setAdmin(true);
         $this->user->save();
 
@@ -44,22 +41,21 @@ class EditButtonRendererTest extends \PHPUnit\Framework\TestCase
         $render = new EditButtonRenderer();
 
         $html = $render->render(
-            $page->getID(),
-            $this->user
+                $page->getID(),
+                $this->user
         );
 
         $this->assertStringContainsString(
-            '<i class="fas fa-pencil-alt',
-            $html
+                '<i class="fas fa-pencil-alt',
+                $html
         );
         $this->assertStringContainsString(
-            '?action=pages_edit&amp;page=',
-            $html
+                '?action=pages_edit&amp;page=',
+                $html
         );
     }
 
-    public function testRenderReturnsNothing()
-    {
+    public function testRenderReturnsNothing() {
         $allGroups = Group::getAll();
 
         $this->user->setAdmin(false);
@@ -75,8 +71,9 @@ class EditButtonRendererTest extends \PHPUnit\Framework\TestCase
         $render = new EditButtonRenderer();
 
         $this->assertEmpty($render->render(
-            $page->getID(),
-            $this->user
+                        $page->getID(),
+                        $this->user
         ));
     }
+
 }

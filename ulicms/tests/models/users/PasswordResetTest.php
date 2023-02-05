@@ -1,14 +1,13 @@
 <?php
 
-class PasswordResetTest extends \PHPUnit\Framework\TestCase
-{
+class PasswordResetTest extends \PHPUnit\Framework\TestCase {
+
     private $testUserId;
 
-    protected function setUp(): void
-    {
+    protected function setUp(): void {
         $manager = new UserManager();
         $this->testUserId = intval(
-            $manager->getAllUsers()[0]->getId()
+                $manager->getAllUsers()[0]->getId()
         );
 
         $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
@@ -19,8 +18,7 @@ class PasswordResetTest extends \PHPUnit\Framework\TestCase
         $this->cleanUp();
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         $this->cleanUp();
         unset($_SERVER["SERVER_PROTOCOL"]);
         unset($_SERVER['HTTP_HOST']);
@@ -28,25 +26,23 @@ class PasswordResetTest extends \PHPUnit\Framework\TestCase
         unset($_SERVER['REQUEST_URI']);
     }
 
-    private function cleanUp()
-    {
+    private function cleanUp() {
         Database::truncateTable("password_reset");
     }
 
-    public function testAddToken()
-    {
+    public function testAddToken() {
         $passwordReset = new PasswordReset();
         $this->assertCount(
-            0,
-            $passwordReset->getAllTokensByUserId($this->testUserId)
+                0,
+                $passwordReset->getAllTokensByUserId($this->testUserId)
         );
 
         $token = $passwordReset->addToken($this->testUserId);
 
         $this->assertEquals(32, strlen($token));
         $this->assertCount(
-            1,
-            $passwordReset->getAllTokensByUserId($this->testUserId)
+                1,
+                $passwordReset->getAllTokensByUserId($this->testUserId)
         );
 
         $passwordReset->sendMail($token, "john@doe.invalid", "123.123.123.123", "John", "Doe");
@@ -54,22 +50,20 @@ class PasswordResetTest extends \PHPUnit\Framework\TestCase
         $this->cleanUp();
     }
 
-    public function testGetPasswordResetLink()
-    {
+    public function testGetPasswordResetLink() {
         $passwordReset = new PasswordReset();
         $token = $passwordReset->addToken($this->testUserId);
 
         $this->assertEquals(
-            "http://example.org/foobar/admin/index.php?sClass=SessionManager" .
+                "http://example.org/foobar/admin/index.php?sClass=SessionManager" .
                 "&sMethod=resetPassword&token={$token}",
-            $passwordReset->getPasswordResetLink($token)
+                $passwordReset->getPasswordResetLink($token)
         );
 
         $this->cleanUp();
     }
 
-    public function testGetAllTokensReturnsTokens()
-    {
+    public function testGetAllTokensReturnsTokens() {
         $passwordReset = new PasswordReset();
         for ($i = 1; $i < 4; $i++) {
             $passwordReset->addToken(1);
@@ -80,34 +74,31 @@ class PasswordResetTest extends \PHPUnit\Framework\TestCase
         $this->cleanUp();
     }
 
-    public function testGetAllTokensReturnsEmptyArray()
-    {
+    public function testGetAllTokensReturnsEmptyArray() {
         Database::truncateTable("password_reset");
         $passwordReset = new PasswordReset();
         $this->assertCount(0, $passwordReset->getAllTokens());
     }
 
-    public function testGetAllTokensByUserId()
-    {
+    public function testGetAllTokensByUserId() {
         $passwordReset = new PasswordReset();
         for ($i = 1; $i < 4; $i++) {
             $passwordReset->addToken(1);
         }
         $passwordReset->addToken($this->testUserId);
         $this->assertCount(
-            4,
-            $passwordReset->getAllTokensByUserId(1)
+                4,
+                $passwordReset->getAllTokensByUserId(1)
         );
         $this->assertCount(
-            0,
-            $passwordReset->getAllTokensByUserId(PHP_INT_MAX)
+                0,
+                $passwordReset->getAllTokensByUserId(PHP_INT_MAX)
         );
 
         $this->cleanUp();
     }
 
-    public function testGetTokenByTokenString()
-    {
+    public function testGetTokenByTokenString() {
         $passwordReset = new PasswordReset();
         $tokenString1 = $passwordReset->addToken($this->testUserId);
         $tokenString2 = $passwordReset->addToken($this->testUserId);
@@ -125,8 +116,7 @@ class PasswordResetTest extends \PHPUnit\Framework\TestCase
         $this->cleanUp();
     }
 
-    public function testDeleteToken()
-    {
+    public function testDeleteToken() {
         $passwordReset = new PasswordReset();
 
         $token = $passwordReset->addToken($this->testUserId);
@@ -136,4 +126,5 @@ class PasswordResetTest extends \PHPUnit\Framework\TestCase
         $passwordReset->deleteToken($token);
         $this->assertNull($passwordReset->getTokenByTokenString($token));
     }
+
 }

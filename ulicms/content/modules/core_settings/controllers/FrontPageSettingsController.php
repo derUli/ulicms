@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 use UliCMS\Utils\CacheUtil;
 
-class FrontPageSettingsController extends Controller
-{
-    public function _savePost(): void
-    {
+class FrontPageSettingsController extends Controller {
+
+    public function _savePost(): void {
         $languages = getAllLanguages();
         $languagesCount = count($languages);
 
@@ -24,13 +23,13 @@ class FrontPageSettingsController extends Controller
         CacheUtil::clearPageCache();
     }
 
-    public function savePost(): void
-    {
+    public function savePost(): void {
         $this->_savePost();
         // if called by ajax return no content to improve performance
         Response::sendHttpStatusCodeResultIfAjax(
-            HttpStatusCode::OK,
-            ModuleHelper::buildActionURL("frontpage_settings")
+                HttpStatusCode::OK,
+                ModuleHelper::buildActionURL("frontpage_settings")
         );
     }
+
 }

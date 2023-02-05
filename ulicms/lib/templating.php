@@ -897,9 +897,9 @@ function checkAccess(string $access = ""): ?string {
     if (faster_in_array("registered", $access) and is_logged_in()) {
         return "registered";
     }
-    
+
     $accessCount = count($access);
-    
+
     for ($i = 0; $i < $accessCount; $i++) {
         if (is_numeric($access[$i]) and isset($_SESSION["group_id"]) and $access[$i] == $_SESSION["group_id"]) {
             return $access[$i];

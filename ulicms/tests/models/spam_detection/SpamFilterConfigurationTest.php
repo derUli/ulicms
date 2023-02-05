@@ -2,10 +2,9 @@
 
 use UliCMS\Security\SpamChecker\SpamFilterConfiguration;
 
-class SpamFilterConfigurationTest extends \PHPUnit\Framework\TestCase
-{
-    public function testSetSpamfilterEnabled()
-    {
+class SpamFilterConfigurationTest extends \PHPUnit\Framework\TestCase {
+
+    public function testSetSpamfilterEnabled() {
         $configuration = new SpamFilterConfiguration();
         $this->assertTrue($configuration->getSpamFilterEnabled());
 
@@ -15,8 +14,7 @@ class SpamFilterConfigurationTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($configuration->getSpamFilterEnabled());
     }
 
-    public function testSetRejectRequestsFromBots()
-    {
+    public function testSetRejectRequestsFromBots() {
         $configuration = new SpamFilterConfiguration();
         $this->assertFalse($configuration->getRejectRequestsFromBots());
 
@@ -27,8 +25,7 @@ class SpamFilterConfigurationTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($configuration->getRejectRequestsFromBots());
     }
 
-    public function testSetCheckMxOfMailAddress()
-    {
+    public function testSetCheckMxOfMailAddress() {
         $configuration = new SpamFilterConfiguration();
         $this->assertFalse($configuration->getCheckmxOfMailAddress());
 
@@ -39,8 +36,7 @@ class SpamFilterConfigurationTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($configuration->getCheckmxOfMailAddress());
     }
 
-    public function testSetDisallowChineseChars()
-    {
+    public function testSetDisallowChineseChars() {
         $configuration = new SpamFilterConfiguration();
         $this->assertFalse($configuration->getDisallowChineseChars());
 
@@ -51,8 +47,7 @@ class SpamFilterConfigurationTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($configuration->getDisallowChineseChars());
     }
 
-    public function testSetDisallowCyrillicChars()
-    {
+    public function testSetDisallowCyrillicChars() {
         $configuration = new SpamFilterConfiguration();
         $this->assertFalse($configuration->getDisallowCyrillicChars());
 
@@ -63,8 +58,7 @@ class SpamFilterConfigurationTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($configuration->getDisallowCyrillicChars());
     }
 
-    public function testSetDisallowRtlChars()
-    {
+    public function testSetDisallowRtlChars() {
         $configuration = new SpamFilterConfiguration();
         $this->assertFalse($configuration->getDisallowRtlChars());
 
@@ -75,8 +69,7 @@ class SpamFilterConfigurationTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($configuration->getDisallowRtlChars());
     }
 
-    public function testSetBlockedCountriesWithString()
-    {
+    public function testSetBlockedCountriesWithString() {
         $configuration = new SpamFilterConfiguration();
         $this->assertCount(0, $configuration->getBlockedCountries());
 
@@ -86,8 +79,7 @@ class SpamFilterConfigurationTest extends \PHPUnit\Framework\TestCase
         $this->assertContains("vn", $configuration->getBlockedCountries());
     }
 
-    public function testSetBlockedCountriesWithNull()
-    {
+    public function testSetBlockedCountriesWithNull() {
         $configuration = new SpamFilterConfiguration();
 
         $configuration->setBlockedCountries(["ir, vn"]);
@@ -96,8 +88,7 @@ class SpamFilterConfigurationTest extends \PHPUnit\Framework\TestCase
         $this->assertCount(0, $configuration->getBlockedCountries());
     }
 
-    public function testSetBlockedCountriesWithInvalid()
-    {
+    public function testSetBlockedCountriesWithInvalid() {
         $configuration = new SpamFilterConfiguration();
 
         $configuration->setBlockedCountries(["ir, vn"]);
@@ -105,8 +96,7 @@ class SpamFilterConfigurationTest extends \PHPUnit\Framework\TestCase
         $configuration->setBlockedCountries(new Page());
     }
 
-    public function testSetBlockedCountriesWithArray()
-    {
+    public function testSetBlockedCountriesWithArray() {
         $configuration = new SpamFilterConfiguration();
         $this->assertCount(0, $configuration->getBlockedCountries());
 
@@ -121,8 +111,7 @@ class SpamFilterConfigurationTest extends \PHPUnit\Framework\TestCase
         $this->assertContains("vn", $configuration->getBlockedCountries());
     }
 
-    public function testSetBadwordsWithString()
-    {
+    public function testSetBadwordsWithString() {
         $configuration = new SpamFilterConfiguration();
         $this->assertCount(0, $configuration->getBadwords());
 
@@ -134,8 +123,7 @@ class SpamFilterConfigurationTest extends \PHPUnit\Framework\TestCase
         $this->assertContains("bastard", $configuration->getBadwords());
     }
 
-    public function testSetBadwordsWithArray()
-    {
+    public function testSetBadwordsWithArray() {
         $configuration = new SpamFilterConfiguration();
         $this->assertCount(0, $configuration->getBadwords());
 
@@ -152,8 +140,7 @@ class SpamFilterConfigurationTest extends \PHPUnit\Framework\TestCase
         $this->assertContains("bastard", $configuration->getBadwords());
     }
 
-    public function testSetBadwordsWithNull()
-    {
+    public function testSetBadwordsWithNull() {
         $configuration = new SpamFilterConfiguration();
         $configuration->setBadwords(array(
             "fuck",
@@ -166,8 +153,7 @@ class SpamFilterConfigurationTest extends \PHPUnit\Framework\TestCase
         $this->assertCount(0, $configuration->getBadwords());
     }
 
-    public function testSetBadwordsWithInvalid()
-    {
+    public function testSetBadwordsWithInvalid() {
         $configuration = new SpamFilterConfiguration();
 
         $this->expectException(InvalidArgumentException::class);
@@ -177,10 +163,10 @@ class SpamFilterConfigurationTest extends \PHPUnit\Framework\TestCase
         $this->assertCount($configuration->getBadwords());
     }
 
-    public function testFromSettings()
-    {
+    public function testFromSettings() {
         $configuration = SpamFilterConfiguration::fromSettings();
         $this->assertInstanceOf(SpamFilterConfiguration::class, $configuration);
         // TODO: Weitere Asserts durchführen
     }
+
 }

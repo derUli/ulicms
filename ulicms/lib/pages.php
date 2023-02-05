@@ -3,8 +3,7 @@
 declare(strict_types=1);
 
 // get page id by slug
-function getPageIDBySlug(string $slug): ?int
-{
+function getPageIDBySlug(string $slug): ?int {
     $result = db_query("SELECT slug, id FROM `" . tbname("content")
             . "` where slug='" . db_escape($slug) . "'");
     if (db_num_rows($result) > 0) {
@@ -14,8 +13,7 @@ function getPageIDBySlug(string $slug): ?int
     return null;
 }
 
-function getPageSlugByID(?int $id): ?string
-{
+function getPageSlugByID(?int $id): ?string {
     $result = db_query("SELECT slug, id FROM `" . tbname("content")
             . "` where id=" . intval($id));
     if (db_num_rows($result) > 0) {
@@ -25,8 +23,7 @@ function getPageSlugByID(?int $id): ?string
     return null;
 }
 
-function getPageByID(int $id): ?object
-{
+function getPageByID(int $id): ?object {
     $id = intval($id);
     $result = db_query("SELECT * FROM " . tbname("content") .
             " where id = " . $id);
@@ -36,8 +33,7 @@ function getPageByID(int $id): ?object
     return null;
 }
 
-function getPageTitleByID(?int $id): string
-{
+function getPageTitleByID(?int $id): string {
     $result = db_query("SELECT title, id FROM `" . tbname("content")
             . "` where id=" . intval($id));
     if (db_num_rows($result) > 0) {
@@ -48,8 +44,7 @@ function getPageTitleByID(?int $id): string
 }
 
 // Get slugs of all pages
-function getAllPagesWithTitle(): array
-{
+function getAllPagesWithTitle(): array {
     $result = db_query("SELECT slug, id, title FROM `" . tbname("content") .
             "` WHERE `deleted_at` IS NULL ORDER BY slug");
     $returnvalues = [];
@@ -65,10 +60,10 @@ function getAllPagesWithTitle(): array
 
 // Get all pages
 function getAllPages(
-    string $lang = null,
-    string $order = "slug",
-    bool $exclude_hash_links = true,
-    string $menu = null
+        string $lang = null,
+        string $order = "slug",
+        bool $exclude_hash_links = true,
+        string $menu = null
 ): array {
     if (!$lang) {
         if (!$menu) {
@@ -104,8 +99,7 @@ function getAllPages(
 }
 
 // Get slugs of all pages
-function getAllSlugs(string $lang = null): array
-{
+function getAllSlugs(string $lang = null): array {
     $slugs = [];
 
     if (!$lang) {

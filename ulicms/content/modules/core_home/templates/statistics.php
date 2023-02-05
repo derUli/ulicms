@@ -11,11 +11,11 @@ $model = $controller->getModel();
     <?php
     $installed_at = Settings::get("installed_at");
     if ($installed_at) {
-        $formatted = NumberFormatHelper::formatTime($installed_at); ?>
+        $formatted = NumberFormatHelper::formatTime($installed_at);
+        ?>
         <tr>
             <td><?php translate("site_online_since"); ?></td>
-            <td><?php
-                echo $formatted; ?></td>
+            <td><?php echo $formatted; ?></td>
         </tr>
         <?php
     }

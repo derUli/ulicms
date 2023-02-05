@@ -5,8 +5,7 @@ declare(strict_types=1);
 use UliCMS\Models\Media\Audio;
 use UliCMS\Models\Media\Video;
 
-function replaceAudioTags(string $txt): ?string
-{
+function replaceAudioTags(string $txt): ?string {
     $audio_dir = "content/audio/";
     if (defined("ULICMS_DATA_STORAGE_URL")) {
         $audio_dir = Path::resolve("ULICMS_DATA_STORAGE_URL/$audio_dir") . "/";
@@ -37,8 +36,7 @@ function replaceAudioTags(string $txt): ?string
     return $txt;
 }
 
-function replaceVideoTags(string $txt): string
-{
+function replaceVideoTags(string $txt): string {
     $video_dir = "content/videos/";
     if (defined("ULICMS_DATA_STORAGE_URL")) {
         $video_dir = Path::resolve("ULICMS_DATA_STORAGE_URL/$video_dir") . "/";

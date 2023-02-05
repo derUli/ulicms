@@ -27,9 +27,11 @@
                     <ol id="navigation">
                         <?php for ($i = 1; $i <= 10; $i++) { ?>
                             <li><a href="index.php?step=<?php echo $i; ?>"
-                                   class="<?php if ($i == InstallerController::getStep()) {
-    echo "current-item";
-} ?>">
+                                   class="<?php
+                                   if ($i == InstallerController::getStep()) {
+                                       echo "current-item";
+                                   }
+                                   ?>">
                                     <?php echo constant("TRANSLATION_TITLE_STEP_" . $i); ?></a></li>
                         <?php } ?>
                     </ol>

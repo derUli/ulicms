@@ -1,4 +1,5 @@
 <?php
+
 require_once dirname(__file__) . "/classes/exceptions/load.php";
 
 use UliCMS\Exceptions\AccessDeniedException;
@@ -41,8 +42,8 @@ if (file_exists($composerAutoloadFile)) {
     require_once $composerAutoloadFile;
 } else {
     throw new FileNotFoundException(
-        "autoload.php not found. "
-            . "Please run \"./composer install\" to install dependecies."
+                    "autoload.php not found. "
+                    . "Please run \"./composer install\" to install dependecies."
     );
 }
 
@@ -106,8 +107,7 @@ if (file_exists($mobile_detect_as_module)) {
     require_once $mobile_detect_as_module;
 }
 
-function exception_handler($exception)
-{
+function exception_handler($exception) {
     if (!defined("EXCEPTION_OCCURRED")) {
         define("EXCEPTION_OCCURRED", true);
     }
@@ -124,14 +124,12 @@ function exception_handler($exception)
     }
     $httpStatus = $exception instanceof AccessDeniedException ?
             HttpStatusCode::FORBIDDEN : HttpStatusCode::INTERNAL_SERVER_ERROR;
-    if (function_exists("HTMLResult") and class_exists("Template")
-            && !headers_sent() and function_exists("get_theme")) {
+    if (function_exists("HTMLResult") and class_exists("Template") && !headers_sent() and function_exists("get_theme")) {
         ViewBag::set("exception", nl2br(_esc($exception)));
         HTMLResult(Template::executeDefaultOrOwnTemplate("exception.php"), $httpStatus);
     }
 
     echo "{$message}\n";
-    
 }
 
 // if config exists require_config else redirect to installer
@@ -174,8 +172,7 @@ if ((defined("ULICMS_DEBUG") and ULICMS_DEBUG)
 // to seperate it's core files from variable data such as modules and media
 // this enables us to use stuff like Docker containers where data gets lost
 // after stopping the container
-if (isset($config->data_storage_root)
-        && !is_null($config->data_storage_root)) {
+if (isset($config->data_storage_root) && !is_null($config->data_storage_root)) {
     define("ULICMS_DATA_STORAGE_ROOT", $config->data_storage_root);
 } else {
     define("ULICMS_DATA_STORAGE_ROOT", ULICMS_ROOT);
@@ -183,8 +180,7 @@ if (isset($config->data_storage_root)
 
 // this enables us to set an base url for statis ressources such as images
 // stored in ULICMS_DATA_STORAGE_ROOT
-if (isset($config->data_storage_url)
-        && !is_null($config->data_storage_url)) {
+if (isset($config->data_storage_url) && !is_null($config->data_storage_url)) {
     define("ULICMS_DATA_STORAGE_URL", $config->data_storage_url);
 }
 
@@ -264,26 +260,26 @@ Translation::init();
 if (class_exists("Path")) {
     if (isset($config->exception_logging) and is_true($config->exception_logging)) {
         LoggerRegistry::register(
-            "exception_log",
-            new Logger(Path::resolve("ULICMS_LOG/exception_log"))
+                "exception_log",
+                new Logger(Path::resolve("ULICMS_LOG/exception_log"))
         );
     }
     if (isset($config->query_logging) and is_true($config->query_logging)) {
         LoggerRegistry::register(
-            "sql_log",
-            new Logger(Path::resolve("ULICMS_LOG/sql_log"))
+                "sql_log",
+                new Logger(Path::resolve("ULICMS_LOG/sql_log"))
         );
     }
     if (isset($config->phpmailer_logging) and is_true($config->phpmailer_logging)) {
         LoggerRegistry::register(
-            "phpmailer_log",
-            new Logger(Path::resolve("ULICMS_LOG/phpmailer_log"))
+                "phpmailer_log",
+                new Logger(Path::resolve("ULICMS_LOG/phpmailer_log"))
         );
     }
     if (isset($config->audit_log) and is_true($config->audit_log)) {
         LoggerRegistry::register(
-            "audit_log",
-            new Logger(Path::resolve("ULICMS_LOG/audit_log"))
+                "audit_log",
+                new Logger(Path::resolve("ULICMS_LOG/audit_log"))
         );
     }
 }
@@ -295,8 +291,7 @@ define('CRLF', "\r\n"); // carriage return and line feed; Windows
 define('BR', '<br />' . LF); // HTML Break
 define("ONE_DAY_IN_SECONDS", 60 * 60 * 24);
 
-function noPerms()
-{
+function noPerms() {
     echo "<div class=\"alert alert-danger\">"
     . get_translation("no_permissions") . "</div>";
     $logger = LoggerRegistry::get("audit_log");
@@ -322,12 +317,12 @@ $db_strict_mode = isset($config->db_strict_mode) ?
         boolval($config->db_strict_mode) : false;
 
 @$connection = Database::connect(
-    $config->db_server,
-    $config->db_user,
-    $config->db_password,
-    $db_port,
-    $db_socket,
-    $db_strict_mode
+                $config->db_server,
+                $config->db_user,
+                $config->db_password,
+                $db_port,
+                $db_socket,
+                $db_strict_mode
 );
 
 if (!$connection) {
@@ -343,8 +338,8 @@ if (isset($config->dbmigrator_auto_migrate) and is_true($config->dbmigrator_auto
         Database::setEchoQueries(true);
     }
     $select = Database::setupSchemaAndSelect(
-        $config->db_database,
-        $additionalSql
+                    $config->db_database,
+                    $additionalSql
     );
 } else {
     $select = Database::select($config->db_database);
@@ -354,7 +349,7 @@ Database::setEchoQueries(false);
 
 if (!$select) {
     throw new SqlException("<h1>Database "
-            . $config->db_database . " doesn't exist.</h1>");
+                    . $config->db_database . " doesn't exist.</h1>");
 }
 
 if (!Settings::get("session_name")) {
@@ -366,8 +361,8 @@ UliCMS\Utils\Session\sessionName(Settings::get("session_name"));
 $useragent = Settings::get("useragent");
 
 define(
-    "ULICMS_USERAGENT",
-    $useragent ?
+        "ULICMS_USERAGENT",
+        $useragent ?
                 $useragent : "UliCMS Release " . cms_version()
 );
 
@@ -420,8 +415,7 @@ if (isset($_SESSION["session_begin"])) {
     }
 }
 
-function shutdown_function()
-{
+function shutdown_function() {
     do_event("shutdown");
 
     $cfg = new CMSConfig();
@@ -450,7 +444,6 @@ define("PATCH_CHECK_URL", "https://patches.ulicms.de/?v=" .
 $defaultMenu = isset($config->default_menu) && !empty($config->default_menu) ?
         $config->default_menu : 'not_in_menu';
 define("DEFAULT_MENU", $defaultMenu);
-
 
 $defaultContentType = isset($config->default_content_type) && !empty($config->default_menu) ?
         $config->default_content_type : 'page';

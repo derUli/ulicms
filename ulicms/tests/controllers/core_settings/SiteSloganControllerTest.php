@@ -1,11 +1,10 @@
 <?php
 
-class SiteSloganControllerTest extends \PHPUnit\Framework\TestCase
-{
+class SiteSloganControllerTest extends \PHPUnit\Framework\TestCase {
+
     private $defaultSettings = [];
-    
-    protected function setUp(): void
-    {
+
+    protected function setUp(): void {
         $this->defaultSettings = [
             "default_language" => Settings::get("default_language"),
             "site_slogan_de" => Settings::get("site_slogan_de"),
@@ -13,18 +12,16 @@ class SiteSloganControllerTest extends \PHPUnit\Framework\TestCase
             "site_slogan" => Settings::get("site_slogan"),
         ];
     }
-    
-    protected function tearDown(): void
-    {
+
+    protected function tearDown(): void {
         $_POST = [];
-        
+
         foreach ($this->defaultSettings as $key => $value) {
             Settings::set($key, $value);
         }
     }
 
-    public function testSavePost(): void
-    {
+    public function testSavePost(): void {
         $_POST["site_slogan_de"] = "Lalala und Lelele";
         $_POST["site_slogan_en"] = "Some random stuff";
         Settings::set("default_language", "en");
@@ -33,17 +30,18 @@ class SiteSloganControllerTest extends \PHPUnit\Framework\TestCase
         $controller->_savePost();
 
         $this->assertEquals(
-            "Lalala und Lelele",
-            Settings::get('site_slogan_de')
+                "Lalala und Lelele",
+                Settings::get('site_slogan_de')
         );
 
         $this->assertEquals(
-            "Some random stuff",
-            Settings::get('site_slogan_en')
+                "Some random stuff",
+                Settings::get('site_slogan_en')
         );
         $this->assertEquals(
-            "Some random stuff",
-            Settings::get('site_slogan')
+                "Some random stuff",
+                Settings::get('site_slogan')
         );
     }
+
 }

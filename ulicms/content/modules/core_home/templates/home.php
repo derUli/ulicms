@@ -12,13 +12,15 @@ $model = $controller->getModel();
 // no patch check in google cloud
 $runningInGoogleCloud = class_exists("GoogleCloudHelper") ? GoogleCloudHelper::isProduction() : false;
 if ($permissionChecker->hasPermission("dashboard")) {
-    $user = User::fromSessionData(); ?>
+    $user = User::fromSessionData();
+    ?>
     <p>
         <?php
         secure_translation(
-        "hello_name",
-        ["%name%" => $user->getDisplayName()]
-    ); ?> </p>
+                "hello_name",
+                ["%name%" => $user->getDisplayName()]
+        );
+        ?> </p>
     <p>
         <a
             href="?action=admin_edit&id=<?php echo get_user_id() ?>&ref=home"
@@ -28,18 +30,18 @@ if ($permissionChecker->hasPermission("dashboard")) {
     <div id="accordion-container">
         <?php
         $motd = get_lang_config("motd", getSystemLanguage());
-    if ($motd or strlen($motd) > 10) {
-        $motd = stripTags($motd, HTML5_ALLOWED_TAGS); ?>
+        if ($motd or strlen($motd) > 10) {
+            $motd = stripTags($motd, HTML5_ALLOWED_TAGS);
+            ?>
             <h2 class="accordion-header">
                 <?php translate("motd"); ?></h2>
             <div class="accordion-content motd-tab">
-                <?php
-                echo Alert::info($motd, "", true); ?>
+                <?php echo Alert::info($motd, "", true); ?>
             </div>
-        <?php
-    } ?>
-        <?php if (!Settings::get("disable_core_patch_check")) {
+        <?php }
         ?>
+        <?php if (!Settings::get("disable_core_patch_check")) {
+            ?>
             <div id="patch-notification" style="display: none;"
                  data-url="<?php echo ModuleHelper::buildMethodCallUrl(UpdateCheckController::class, "patchCheck"); ?>">
                 <h2 class="accordion-header">
@@ -47,21 +49,21 @@ if ($permissionChecker->hasPermission("dashboard")) {
                 </h2>
                 <div class="accordion-content" id="patch-message"></div>
             </div>
-        <?php
-    } ?>
+        <?php }
+        ?>
 
         <?php
         $pi = ULICMS_DATA_STORAGE_ROOT . "/post-install.php";
-    if (is_writable($pi)) {
-        ?>
+        if (is_writable($pi)) {
+            ?>
             <h2 class="accordion-header"><?php translate("unfinished_package_installations"); ?></h2>
             <div class="accordion-content">
                 <a
                     href="<?php echo ModuleHelper::buildActionURL("do_post_install"); ?>">
                     <?php translate("there_are_unfinished_package_installations"); ?></a>
             </div>
-        <?php
-    } ?>
+        <?php }
+        ?>
         <?php
         if (!Settings::get("disable_ulicms_newsfeed")) {
             ?>
@@ -74,8 +76,8 @@ if ($permissionChecker->hasPermission("dashboard")) {
                     <?php require "inc/loadspinner.php"; ?>
                 </div>
             </div>
-        <?php
-        } ?>
+        <?php }
+        ?>
         <?php if ($permissionChecker->hasPermission("pages_show_positions")) { ?>
             <h2 class="accordion-header"><?php translate("helper_utils"); ?></h2>
             <div class="accordion-content">
@@ -124,8 +126,7 @@ if ($permissionChecker->hasPermission("dashboard")) {
                 <?php require "inc/loadspinner.php"; ?>
             </div>
         </div>
-        <?php
-        do_event("accordion_layout"); ?>
+        <?php do_event("accordion_layout"); ?>
     </div>
     <?php
     if (!$runningInGoogleCloud) {

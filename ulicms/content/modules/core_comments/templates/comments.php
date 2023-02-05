@@ -38,12 +38,12 @@ reset($comments);
                         UliCMS\HTML\text($comment->getText())
                 );
                 ?>
-                </div>
-                <?php if ($comment != $last) { ?>
-                    <hr />
-                <?php } ?>
-                <?php }
-            ?>
-        </div>
-        <?php
-    }
+            </div>
+            <?php if ($comment != $last) { ?>
+                <hr />
+            <?php } ?>
+        <?php }
+        ?>
+    </div>
+    <?php
+}

@@ -98,7 +98,8 @@ if (!$permissionChecker->hasPermission("groups")) {
         if (isset($GLOBALS["permissions"])) {
             unset($GLOBALS["permissions"]);
         }
-    } ?>
+    }
+    ?>
     <?php echo Template::executeModuleTemplate("core_users", "icons.php"); ?>
     <h2><?php translation("groups"); ?></h2>
     <?php
@@ -121,8 +122,8 @@ if (!$permissionChecker->hasPermission("groups")) {
         <div class="alert alert-success">
             <?php translate("group_was_deleted") ?>
         </div>
-        <?php
-    } ?>
+    <?php }
+    ?>
     <?php
     if (!isset($_GET["add"]) && !isset($_GET["edit"])) {
         require "inc/group_list.php";
@@ -138,6 +139,7 @@ if (!$permissionChecker->hasPermission("groups")) {
         } else {
             noPerms();
         }
-    } ?>
+    }
+    ?>
     <?php
 }

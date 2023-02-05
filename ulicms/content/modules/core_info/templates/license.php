@@ -5,7 +5,7 @@
     <?php translate("back") ?></a>
 
 <h1><?php translate("license"); ?></h1>
-Copyright (c) 2011 - <?php echo $version->getReleaseYear();?>, Ulrich Schmidt
+Copyright (c) 2011 - <?php echo $version->getReleaseYear(); ?>, Ulrich Schmidt
 <br>
 All rights reserved.
 <p>Redistribution and use in source and binary forms, with or without

@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-class UpdateManager
-{
-    public static function getAllUpdateablePackages(): array
-    {
+class UpdateManager {
+
+    public static function getAllUpdateablePackages(): array {
         $pkg = new PackageManager();
         $retval = [];
         $modules = getAllModules();
@@ -35,4 +34,5 @@ class UpdateManager
 
         return $retval;
     }
+
 }

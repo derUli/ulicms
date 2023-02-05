@@ -44,10 +44,10 @@ if (!file_exists($defaultConfig)) {
 }
 
 copy(
-    Path::resolve(
-        "ULICMS_ROOT/lib/CMSConfigSample.php"
-    ),
-    Path::resolve("ULICMS_ROOT/CMSConfig.php")
+        Path::resolve(
+                "ULICMS_ROOT/lib/CMSConfigSample.php"
+        ),
+        Path::resolve("ULICMS_ROOT/CMSConfig.php")
 );
 
 // no time limit to prevent a timeout while running sql migrations

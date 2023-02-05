@@ -4,12 +4,11 @@ use UliCMS\HTML\Link;
 use function UliCMS\HTML\imageTag;
 use Spatie\Snapshots\MatchesSnapshots;
 
-class CoreMediaControllerTest extends \PHPUnit\Framework\TestCase
-{
+class CoreMediaControllerTest extends \PHPUnit\Framework\TestCase {
+
     use MatchesSnapshots;
 
-    public function testReplaceLinks()
-    {
+    public function testReplaceLinks() {
         $input = $this->getExampleHtml();
 
         $controller = new CoreMediaController();
@@ -18,8 +17,7 @@ class CoreMediaControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertMatchesHtmlSnapshot($actual);
     }
 
-    public function testBeforeContentFilterEnabled()
-    {
+    public function testBeforeContentFilterEnabled() {
         $input = $this->getExampleHtml();
 
         $controller = new CoreMediaController();
@@ -27,8 +25,7 @@ class CoreMediaControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertMatchesHtmlSnapshot($actual);
     }
 
-    private function getExampleHtml()
-    {
+    private function getExampleHtml() {
         $urls = [
             "http://example.org/",
             "https://youtu.be/7b-B1-xs6Og",
@@ -42,12 +39,12 @@ class CoreMediaControllerTest extends \PHPUnit\Framework\TestCase
         $html = implode("\n", $links);
 
         $html .= imageTag(
-            "foo.jpg",
-            ["class" => "foo"]
+                "foo.jpg",
+                ["class" => "foo"]
         );
         $html .= imageTag(
-            "foo.jpg",
-            [
+                "foo.jpg",
+                [
                     "class" => "foo",
                     "loading" => "auto"
                 ]
@@ -56,10 +53,10 @@ class CoreMediaControllerTest extends \PHPUnit\Framework\TestCase
         return $html;
     }
 
-    public function testReplaceLinksWithEmpty()
-    {
+    public function testReplaceLinksWithEmpty() {
         $controller = new CoreMediaController();
         $output = $controller->_replaceLinks("");
         $this->assertEmpty($output);
     }
+
 }

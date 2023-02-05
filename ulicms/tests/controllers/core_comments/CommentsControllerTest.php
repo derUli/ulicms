@@ -4,23 +4,21 @@ use UliCMS\Constants\CommentStatus;
 use UliCMS\Models\Content\Comment;
 use UliCMS\Exceptions\NotImplementedException;
 
-class CommentsControllerTest extends \PHPUnit\Framework\TestCase
-{
+class CommentsControllerTest extends \PHPUnit\Framework\TestCase {
+
     private $initialCommentsMustBeApproved;
     private $initialCommentsDefaultLimit;
 
-    protected function setUp(): void
-    {
+    protected function setUp(): void {
         $this->initialCommentsMustBeApproved = Settings::get(
-            "comments_must_be_approved"
+                        "comments_must_be_approved"
         );
         $this->initialCommentsDefaultLimit = Settings::get(
-            "comments_default_limit"
+                        "comments_default_limit"
         );
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         Database::deleteFrom("comments", "text like 'Unit Test%'");
 
         if (boolval($this->initialCommentsMustBeApproved)) {
@@ -30,92 +28,85 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase
         }
 
         Settings::set(
-            "comments_default_limit",
-            $this->initialCommentsDefaultLimit
+                "comments_default_limit",
+                $this->initialCommentsDefaultLimit
         );
     }
 
-    public function testGetDefaultStatusExpectPending()
-    {
+    public function testGetDefaultStatusExpectPending() {
         $controller = new CommentsController();
         Settings::set("comments_must_be_approved", "1");
         $this->assertEquals(
-            CommentStatus::PENDING,
-            $controller->_getDefaultStatus()
+                CommentStatus::PENDING,
+                $controller->_getDefaultStatus()
         );
     }
 
-    public function testGetDefaultStatusExpectPublished()
-    {
+    public function testGetDefaultStatusExpectPublished() {
         Settings::delete("comments_must_be_approved");
 
         $controller = new CommentsController();
         $this->assertEquals(
-            CommentStatus::PUBLISHED,
-            $controller->_getDefaultStatus()
+                CommentStatus::PUBLISHED,
+                $controller->_getDefaultStatus()
         );
     }
 
-    public function testGetResultsNoResults()
-    {
+    public function testGetResultsNoResults() {
         $controller = new CommentsController();
         $this->assertCount(
-            0,
-            $controller->_getResults(
-                CommentStatus::SPAM,
-                PHP_INT_MAX
-            )
+                0,
+                $controller->_getResults(
+                        CommentStatus::SPAM,
+                        PHP_INT_MAX
+                )
         );
         $this->assertCount(
-            0,
-            $controller->_getResults(
-                null,
-                PHP_INT_MAX
-            )
+                0,
+                $controller->_getResults(
+                        null,
+                        PHP_INT_MAX
+                )
         );
         $this->assertCount(
-            0,
-            $controller->_getResults(
-                null,
-                null,
-                null
-            )
+                0,
+                $controller->_getResults(
+                        null,
+                        null,
+                        null
+                )
         );
     }
 
-    public function testGetDefaultLimit()
-    {
+    public function testGetDefaultLimit() {
         Settings::set("comments_default_limit", "123");
 
         $controller = new CommentsController();
         $this->assertEquals(123, $controller->_getDefaultLimit());
     }
 
-    public function testGetCommentTextReturnstext()
-    {
+    public function testGetCommentTextReturnstext() {
         $page = $this->getTestComment();
         $controller = new CommentsController();
         $commentText = $controller->_getCommentText($page->getID());
 
         $this->assertEquals(
-            "Unit Test 1<br />\n" .
+                "Unit Test 1<br />\n" .
                 '<a href="https://google.com" rel="nofollow" target="_blank">'
                 . 'https://google.com'
                 . '</a>',
-            $commentText
+                $commentText
         );
     }
 
-    public function testGetCommentTextReturnsNull()
-    {
+    public function testGetCommentTextReturnsNull() {
         $controller = new CommentsController();
         $commentText = $controller->_getCommentText(PHP_INT_MAX);
 
         $this->assertNull($commentText);
     }
 
-    protected function getTestComment(): Comment
-    {
+    protected function getTestComment(): Comment {
         $content = ContentFactory::getAll();
         $first = $content[0];
         $comment = new Comment();
@@ -137,21 +128,19 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase
         return $comment;
     }
 
-    public function testFilterComments()
-    {
+    public function testFilterComments() {
         $page = $this->getTestComment();
         $controller = new CommentsController();
 
         $comments = $controller->_filterComments(
-            CommentStatus::PUBLISHED,
-            $page->getContentId()
+                CommentStatus::PUBLISHED,
+                $page->getContentId()
         );
 
         $this->assertCount(1, $comments);
     }
 
-    public function testDoActionThrowsException()
-    {
+    public function testDoActionThrowsException() {
         $controller = new CommentsController();
 
         $this->expectException(NotImplementedException::class);
@@ -159,8 +148,7 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase
         $controller->_doAction($comment, "do_magic");
     }
 
-    public function testDoActionPublish()
-    {
+    public function testDoActionPublish() {
         $controller = new CommentsController();
 
         $comment = $this->getTestComment();
@@ -170,8 +158,7 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($updatedComment->isRead());
     }
 
-    public function testDoActionUnpublish()
-    {
+    public function testDoActionUnpublish() {
         $controller = new CommentsController();
 
         $comment = $this->getTestComment();
@@ -180,8 +167,7 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(CommentStatus::PENDING, $updatedComment->getStatus());
     }
 
-    public function testDoActionMarkAsSpam()
-    {
+    public function testDoActionMarkAsSpam() {
         $controller = new CommentsController();
 
         $comment = $this->getTestComment();
@@ -190,8 +176,7 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(CommentStatus::SPAM, $updatedComment->getStatus());
     }
 
-    public function testDoActionMarkAsRead()
-    {
+    public function testDoActionMarkAsRead() {
         $controller = new CommentsController();
 
         $comment = $this->getTestComment();
@@ -200,8 +185,7 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($updatedComment->isRead());
     }
 
-    public function testDoActionsMarkAsRead()
-    {
+    public function testDoActionsMarkAsRead() {
         $controller = new CommentsController();
 
         $commentIds = [
@@ -216,8 +200,7 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testDoActionMarkAsUnread()
-    {
+    public function testDoActionMarkAsUnread() {
         $controller = new CommentsController();
 
         $comment = $this->getTestComment();
@@ -226,8 +209,7 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($updatedComment->isRead());
     }
 
-    public function testDoActionDelete()
-    {
+    public function testDoActionDelete() {
         $controller = new CommentsController();
 
         $comment = $this->getTestComment();
@@ -235,4 +217,5 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase
 
         $this->assertFalse($updatedComment->isPersistent());
     }
+
 }

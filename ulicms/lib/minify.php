@@ -9,14 +9,13 @@ use ScssPhp\ScssPhp\Compiler;
 use zz\Html\HTMLMinify;
 use MatthiasMullie\Minify;
 
-function resetScriptQueue(): void
-{
+function resetScriptQueue(): void {
     Vars::set("script_queue", []);
 }
 
 function optimizeHtml(
-    string $html,
-    int $level = HTMLMinify::OPTIMIZATION_SIMPLE
+        string $html,
+        int $level = HTMLMinify::OPTIMIZATION_SIMPLE
 ): string {
     if (Database::isConnected() and Settings::get("minify_html")) {
         $options = array(
@@ -30,8 +29,7 @@ function optimizeHtml(
     return $html;
 }
 
-function enqueueScriptFile($path): void
-{
+function enqueueScriptFile($path): void {
     if (!Vars::get("script_queue")) {
         resetScriptQueue();
     }
@@ -41,8 +39,7 @@ function enqueueScriptFile($path): void
     Vars::set("script_queue", $script_queue);
 }
 
-function setSCSSImportPaths(?array $importPaths = null): void
-{
+function setSCSSImportPaths(?array $importPaths = null): void {
     if ($importPaths == null) {
         $importPaths = array(
             Path::resolve("ULICMS_ROOT")
@@ -51,18 +48,15 @@ function setSCSSImportPaths(?array $importPaths = null): void
     Vars::set("css_include_paths", $importPaths);
 }
 
-function getSCSSImportPaths(): ?array
-{
+function getSCSSImportPaths(): ?array {
     return Vars::get("css_include_paths");
 }
 
-function unsetSCSSImportPaths(): void
-{
+function unsetSCSSImportPaths(): void {
     Vars::delete("css_include_paths");
 }
 
-function minifyJs(): string
-{
+function minifyJs(): string {
     $scripts = Vars::get("script_queue");
     $lastmod = 0;
 
@@ -109,8 +103,7 @@ function minifyJs(): string
     return $bundleUrl;
 }
 
-function minifyCSS(): string
-{
+function minifyCSS(): string {
     $stylesheets = Vars::get("stylesheet_queue");
     $lastmod = 0;
 
@@ -161,8 +154,7 @@ function minifyCSS(): string
     return $bundleUrl;
 }
 
-function compileSCSS(string $stylesheet): string
-{
+function compileSCSS(string $stylesheet): string {
     $scss = new Compiler();
 
     $importPaths = getSCSSImportPaths();
@@ -177,13 +169,12 @@ function compileSCSS(string $stylesheet): string
         $scssOutput = $scss->compileString($scssInput)->getCSS();
     } catch (Exception $e) {
         throw new SCSSCompileException("Compilation of $stylesheet failed: "
-                . "{$e->getMessage()}");
+                        . "{$e->getMessage()}");
     }
     return $scssOutput;
 }
 
-function compileSCSSToFile(string $stylesheet): string
-{
+function compileSCSSToFile(string $stylesheet): string {
     $cssDir = Path::resolve("ULICMS_ROOT/content/cache/stylesheets");
 
     if (!is_dir($cssDir)) {
@@ -204,13 +195,11 @@ function compileSCSSToFile(string $stylesheet): string
     return $bundleUrl;
 }
 
-function combinedScriptHtml(): void
-{
+function combinedScriptHtml(): void {
     echo getCombinedScriptHtml();
 }
 
-function getCombinedScriptHtml(): string
-{
+function getCombinedScriptHtml(): string {
     $html = "";
     $cfg = new CMSConfig();
     if (isset($cfg->no_minify) and is_true($cfg->no_minify)) {
@@ -228,13 +217,11 @@ function getCombinedScriptHtml(): string
 }
 
 // Ab hier Stylesheet Funktionen
-function resetStylesheetQueue(): void
-{
+function resetStylesheetQueue(): void {
     Vars::set("stylesheet_queue", []);
 }
 
-function enqueueStylesheet(string $path): void
-{
+function enqueueStylesheet(string $path): void {
     if (!Vars::get("stylesheet_queue")) {
         resetStylesheetQueue();
     }
@@ -244,10 +231,9 @@ function enqueueStylesheet(string $path): void
     Vars::set("stylesheet_queue", $stylesheet_queue);
 }
 
-function getCombinedStylesheetHTML(): ?string
-{
+function getCombinedStylesheetHTML(): ?string {
     $html = "";
-    
+
     $cfg = new CMSConfig();
     if (!Vars::get("stylesheet_queue")) {
         return null;
@@ -259,7 +245,7 @@ function getCombinedStylesheetHTML(): ?string
                 $html .= Style::fromExternalFile($stylesheet);
             } elseif ($type == "scss") {
                 $html .= Style::fromExternalFile(
-                    compileSCSSToFile($stylesheet)
+                                compileSCSSToFile($stylesheet)
                 );
             }
         }
@@ -273,7 +259,6 @@ function getCombinedStylesheetHTML(): ?string
     return $html;
 }
 
-function combinedStylesheetHtml(): void
-{
+function combinedStylesheetHtml(): void {
     echo getCombinedStylesheetHTML();
 }

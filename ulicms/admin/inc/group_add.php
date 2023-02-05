@@ -31,11 +31,10 @@ $languages = Language::getAllLanguages();
                                   name="user_permissons[]" value="<?php esc($key); ?>"
                                   data-select-all-checkbox="#checkall"
                                   data-checkbox-group=".permission-checkbox"
-                                  class="permission-checkbox"> <?php
-                                  esc($key); ?> </label>
+                                  class="permission-checkbox"> <?php esc($key); ?> </label>
                 </div>
-            <?php
-            } ?>
+            <?php }
+            ?>
         </div>
     </fieldset>
     <h3><?php translate("languages"); ?></h3>

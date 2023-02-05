@@ -17,7 +17,6 @@ add_translation("unencrypted", "unencrypted");
 add_translation("smtp_no_verify_certificate", "Disable certificate validation");
 add_translation("smtp_no_verify_certificate_warning", "Use this only if it's unavoidable. This will decrease the security of the connection.");
 
-
 add_translation("privacy", "Privacy");
 
 add_translation("privacy_policy_checkbox_enable", "Enable GDPR Checkbox for forms");
@@ -40,7 +39,6 @@ add_translation("min_time_to_fill_form_help", "One word per line. Parts of a str
 
 add_translation("footer", "Footer");
 add_translation("edit_footer_text", "Edit Footer Text");
-
 
 add_translation("error_pages", "Error Pages");
 add_translation("not_found", "Not Found");

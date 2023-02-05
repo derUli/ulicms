@@ -2,32 +2,28 @@
 
 use UliCMS\Utils\File;
 
-class FilesTest extends \PHPUnit\Framework\TestCase
-{
-    public function testFileExtension()
-    {
+class FilesTest extends \PHPUnit\Framework\TestCase {
+
+    public function testFileExtension() {
         $this->assertEquals("pdf", file_extension("myfile.pdf"));
         $this->assertEquals("pdf", file_extension("myfile.PDF"));
         $this->assertEquals("txt", file_extension("foo.txt"));
         $this->assertEquals("myfile", file_extension("myfile"));
     }
 
-    public function testGetMime()
-    {
+    public function testGetMime() {
         $this->assertEquals("text/plain", File::getMime(Path::resolve("ULICMS_ROOT/.htaccess")));
         $this->assertEquals("image/png", File::getMime(Path::resolve("ULICMS_ROOT/admin/gfx/edit.png")));
     }
 
-    public function testGetExtension()
-    {
+    public function testGetExtension() {
         $this->assertEquals("pdf", File::getExtension("myfile.pdf"));
         $this->assertEquals("pdf", File::getExtension("myfile.PDF"));
         $this->assertEquals("txt", File::getExtension("foo.txt"));
         $this->assertEquals("myfile", File::getExtension("myfile"));
     }
 
-    public function testFindAllFolders()
-    {
+    public function testFindAllFolders() {
         $allFolders = find_all_folders("admin");
         $this->assertContains("admin/inc", $allFolders);
         $this->assertContains("admin/fm", $allFolders);
@@ -35,8 +31,7 @@ class FilesTest extends \PHPUnit\Framework\TestCase
         $this->assertNotContains("vendor", $allFolders);
     }
 
-    public function testFindAllFiles()
-    {
+    public function testFindAllFiles() {
         $allFiles = find_all_files("admin");
         $this->assertContains("admin/css/modern.scss", $allFiles);
         $this->assertContains("admin/gfx/logo.png", $allFiles);
@@ -44,20 +39,17 @@ class FilesTest extends \PHPUnit\Framework\TestCase
         $this->assertNotContains("init.php", $allFiles);
     }
 
-    public function testExistsLocallyExpectTrue()
-    {
+    public function testExistsLocallyExpectTrue() {
         $this->assertTrue(File::existsLocally(Path::resolve("ULICMS_ROOT/init.php")));
         $this->assertTrue(File::existsLocally(__FILE__));
     }
 
-    public function testExistsLocallyExpectFalse()
-    {
+    public function testExistsLocallyExpectFalse() {
         $this->assertFalse(File::existsLocally("https://www.example.org"));
         $this->assertFalse(File::existsLocally("ftp://ftp.example.org"));
     }
 
-    public function testToDataUri()
-    {
+    public function testToDataUri() {
         $this->assertNull(File::toDataUri("gibtsnicht.txt"));
 
         $expected1 = file_get_contents(Path::resolve("ULICMS_ROOT/tests/fixtures/logo-data-url.txt"));
@@ -65,18 +57,16 @@ class FilesTest extends \PHPUnit\Framework\TestCase
 
         $expected2 = file_get_contents(Path::resolve("ULICMS_ROOT/tests/fixtures/hello-base64.txt"));
         $this->assertEquals(
-            $expected2,
-            File::toDataUri(Path::resolve("ULICMS_ROOT/tests/fixtures/hello-original.txt"), "application/inf")
+                $expected2,
+                File::toDataUri(Path::resolve("ULICMS_ROOT/tests/fixtures/hello-original.txt"), "application/inf")
         );
     }
 
-    public function testDeleteIfExistsWithNonExistingFile()
-    {
+    public function testDeleteIfExistsWithNonExistingFile() {
         $this->assertFalse(File::deleteIfExists("diese-datei-existiert-nicht"));
     }
 
-    public function testDeleteIfExistsWithDirectory()
-    {
+    public function testDeleteIfExistsWithDirectory() {
         $dirs = Path::resolve("ULICMS_TMP/foo/bar");
 
         $baseDir = Path::resolve("ULICMS_TMP/foo");
@@ -100,8 +90,7 @@ class FilesTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse(File::deleteIfExists($baseDir));
     }
 
-    public function testDeleteIfExistsWithFile()
-    {
+    public function testDeleteIfExistsWithFile() {
         $file = Path::Resolve("ULICMS_TMP/hello");
         file_put_contents($file, "world");
 
@@ -109,8 +98,7 @@ class FilesTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse(File::deleteIfExists($file));
     }
 
-    public function testSureRemoveDirIncludingItself()
-    {
+    public function testSureRemoveDirIncludingItself() {
         $dirs = Path::resolve("ULICMS_TMP/foo/bar");
 
         $baseDir = Path::resolve("ULICMS_TMP/foo");
@@ -137,8 +125,7 @@ class FilesTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse(is_dir($baseDir));
     }
 
-    public function testSureRemoveDirWithoutItself()
-    {
+    public function testSureRemoveDirWithoutItself() {
         $dirs = Path::resolve("ULICMS_TMP/foo/bar");
 
         $baseDir = Path::resolve("ULICMS_TMP/foo");
@@ -167,13 +154,11 @@ class FilesTest extends \PHPUnit\Framework\TestCase
         sureRemoveDir($baseDir, true);
     }
 
-    public function testGetNewestMtimeNoFiles()
-    {
+    public function testGetNewestMtimeNoFiles() {
         $this->assertEquals(0, File::getNewestMtime([]));
     }
 
-    public function testGetNewestMtimeWithFiles()
-    {
+    public function testGetNewestMtimeWithFiles() {
         $files = array(
             Path::resolve("ULICMS_ROOT/init.php"),
             Path::resolve("ULICMS_ROOT/composer.json"),
@@ -185,8 +170,7 @@ class FilesTest extends \PHPUnit\Framework\TestCase
         $this->assertGreaterThanOrEqual($minimumResult, File::getNewestMtime($files));
     }
 
-    public function testRecurseCopy()
-    {
+    public function testRecurseCopy() {
         $source = Path::resolve("ULICMS_ROOT/tests/fixtures");
 
         $destination = Path::resolve("ULICMS_TMP/copy-target");
@@ -200,8 +184,7 @@ class FilesTest extends \PHPUnit\Framework\TestCase
         sureRemoveDir($destination, true);
     }
 
-    public function testLastChanged()
-    {
+    public function testLastChanged() {
         $file = Path::resolve("ULICMS_ROOT/package.json");
 
         ob_start();
@@ -214,10 +197,9 @@ class FilesTest extends \PHPUnit\Framework\TestCase
         $this->assertGreaterThanOrEqual(1, $timestamp);
     }
 
-    public function testWriteAppendAndDeleteFile()
-    {
+    public function testWriteAppendAndDeleteFile() {
         $path = Path::resolve(
-            "ULICMS_TMP/" . uniqid()
+                        "ULICMS_TMP/" . uniqid()
         );
 
         File::write($path, "foo");
@@ -227,13 +209,12 @@ class FilesTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("foobar", $fileContent);
     }
 
-    public function testWriteRenameAndDelete()
-    {
+    public function testWriteRenameAndDelete() {
         $path1 = Path::resolve(
-            "ULICMS_TMP/" . uniqid()
+                        "ULICMS_TMP/" . uniqid()
         );
         $path2 = Path::resolve(
-            "ULICMS_TMP/" . uniqid()
+                        "ULICMS_TMP/" . uniqid()
         );
 
         File::write($path1, "My File");
@@ -252,14 +233,13 @@ class FilesTest extends \PHPUnit\Framework\TestCase
         $this->assertFileDoesNotExist($path2);
     }
 
-    public function testLoadLinesAndTrim()
-    {
+    public function testLoadLinesAndTrim() {
         $inputFile = Path::resolve("ULICMS_ROOT/tests/fixtures/trimLines.input.txt");
         $inputExpected = Path::resolve("ULICMS_ROOT/tests/fixtures/trimLines.expected.txt");
 
         $expectedData = normalizeLN(
-            file_get_contents($inputExpected),
-            "\n"
+                file_get_contents($inputExpected),
+                "\n"
         );
         $expectedData = explode("\n", $expectedData);
 
@@ -268,10 +248,10 @@ class FilesTest extends \PHPUnit\Framework\TestCase
         $this->assertCount(8, $output);
     }
 
-    public function testLoadLines()
-    {
+    public function testLoadLines() {
         $this->assertNull(
-            File::loadLines("gibts_nicht")
+                File::loadLines("gibts_nicht")
         );
     }
+
 }

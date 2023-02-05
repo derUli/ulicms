@@ -18,8 +18,8 @@ if ($permissionChecker->hasPermission("pages")
                 ><i
                     class="fas fa-book"></i> <?php translate("pages"); ?></a>
 
-            <?php
-        } ?>
+        <?php }
+        ?>
         <?php
         if ($permissionChecker->hasPermission("comments_manage")) {
             ?>
@@ -28,20 +28,19 @@ if ($permissionChecker->hasPermission("pages")
                ><i
                     class="fa fa-comments" aria-hidden="true"></i>
                 <?php translate("comments"); ?></a>
-            <?php
-        } ?>
+        <?php }
+        ?>
         <?php
         if ($permissionChecker->hasPermission("forms")) {
             ?><a href='?action=forms'
                class="btn btn-default is-not-ajax voffset2"
                ><i
                     class="fab fa-wpforms" aria-hidden="true"></i>
-                    <?php
-                    translate("forms"); ?></a> 
+                <?php translate("forms"); ?></a> 
             <?php
         }
-    if ($permissionChecker->hasPermission("banners")) {
-        ?>
+        if ($permissionChecker->hasPermission("banners")) {
+            ?>
             <a href="index.php?action=banner"
                class="btn btn-default is-not-ajax voffset2"
                ><i
@@ -49,15 +48,15 @@ if ($permissionChecker->hasPermission("pages")
                 <?php translate("advertisements"); ?></a>
 
             <?php
-    }
-    if ($permissionChecker->hasPermission("categories")) {
-        ?>
+        }
+        if ($permissionChecker->hasPermission("categories")) {
+            ?>
             <a href="index.php?action=categories"
                class="btn btn-default is-not-ajax voffset2"><i
                     class="fa fa-list-alt" aria-hidden="true"></i>
                 <?php translate("categories"); ?></a>
-                <?php
-    } ?>
+            <?php }
+            ?>
     </div>
     <?php
     do_event("content_type_list_entry");

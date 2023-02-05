@@ -2,31 +2,28 @@
 
 use Spatie\Snapshots\MatchesSnapshots;
 
-class MediaEmbedTest extends \PHPUnit\Framework\TestCase
-{
+class MediaEmbedTest extends \PHPUnit\Framework\TestCase {
+
     use MatchesSnapshots;
-    protected function setUp(): void
-    {
+
+    protected function setUp(): void {
         $_SESSION = [
             "language" => "de"
         ];
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         $_SESSION = [];
     }
 
-    public function testReplaceLinks()
-    {
+    public function testReplaceLinks() {
         $input = file_get_contents("tests/fixtures/AutoEmbed/input.html");
         $actual = apply_filter($input, "before_content");
 
         $this->assertMatchesHtmlSnapshot($actual);
     }
 
-    public function testReplaceLinksWithDisableMediaEmbedTrue()
-    {
+    public function testReplaceLinksWithDisableMediaEmbedTrue() {
         $page = $this->getTestPage();
 
         set_requested_pagename($page->slug, $page->language);
@@ -40,8 +37,7 @@ class MediaEmbedTest extends \PHPUnit\Framework\TestCase
         $page->delete();
     }
 
-    public function testReplaceLinksWithDisableMediaEmbedFalse()
-    {
+    public function testReplaceLinksWithDisableMediaEmbedFalse() {
         $page = $this->getTestPage();
 
         set_requested_pagename($page->slug, $page->language);
@@ -55,8 +51,7 @@ class MediaEmbedTest extends \PHPUnit\Framework\TestCase
         $page->delete();
     }
 
-    private function getTestPage()
-    {
+    private function getTestPage() {
         $page = new Page();
         $page->title = 'Test Page';
         $page->slug = uniqid();
@@ -70,4 +65,5 @@ class MediaEmbedTest extends \PHPUnit\Framework\TestCase
 
         return $page;
     }
+
 }

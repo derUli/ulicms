@@ -2,15 +2,14 @@
 
 use UliCMS\Models\Content\Category;
 
-class CategoryTest extends \PHPUnit\Framework\TestCase
-{
+class CategoryTest extends \PHPUnit\Framework\TestCase {
+
     const name1 = "Name 1";
     const name2 = "Name 2";
     const description1 = "Description 1";
     const description2 = "Description 2";
 
-    protected function setUp(): void
-    {
+    protected function setUp(): void {
         Database::pQuery("delete from `{prefix}categories`
 							where name = ? or name = ?", array(
             self::name1,
@@ -18,13 +17,11 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
                 ), true);
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         $this->setUp();
     }
 
-    public function testCreateEditAndDeleteCategory()
-    {
+    public function testCreateEditAndDeleteCategory() {
         $category = new Category();
         $category->setName(self::name1);
         $category->setDescription(self::description1);
@@ -48,11 +45,11 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
         $this->assertNull($category->getID());
     }
 
-    public function testSetId()
-    {
+    public function testSetId() {
         $category = new Category();
         $category->setID(123);
 
         $this->assertEquals(123, $category->getID());
     }
+
 }

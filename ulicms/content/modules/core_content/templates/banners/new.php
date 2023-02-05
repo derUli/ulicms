@@ -10,14 +10,15 @@ if ($permissionChecker->hasPermission("banners")
 
     <?php
     echo ModuleHelper::buildMethodCallForm(
-        "BannerController",
-        "create",
-        [],
-        RequestMethod::POST,
-        [
+            "BannerController",
+            "create",
+            [],
+            RequestMethod::POST,
+            [
                 "autocomplete" => "off"
             ]
-    ); ?>
+    );
+    ?>
     <div class="field">
         <a href="<?php echo ModuleHelper::buildActionURL("banner"); ?>"
            class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i>
@@ -43,8 +44,7 @@ if ($permissionChecker->hasPermission("banners")
         </div>
         <div class="field">
             <strong class="field-label">
-                <?php
-                translate("IMAGE_URL"); ?></strong>
+                <?php translate("IMAGE_URL"); ?></strong>
             <input type="text" name="image_url" value="">
         </div>
         <div class="field">
@@ -99,13 +99,14 @@ if ($permissionChecker->hasPermission("banners")
         <select name="language">
             <?php
             $languages = getAllLanguages();
-        
+
             $languagesCount = count($languages);
-    echo "<option value='all'>" . get_translation("every") . "</option>";
-    for ($j = 0; $j < $languagesCount; $j++) {
-        echo "<option value='" . $languages[$j] . "'>" .
+            echo "<option value='all'>" . get_translation("every") . "</option>";
+            for ($j = 0; $j < $languagesCount; $j++) {
+                echo "<option value='" . $languages[$j] . "'>" .
                 getLanguageNameByCode($languages[$j]) . "</option>";
-    } ?>
+            }
+            ?>
         </select>
     </div>
     <div class="field">

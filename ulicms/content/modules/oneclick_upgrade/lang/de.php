@@ -17,8 +17,8 @@ add_translation("RETRY", "Erneut versuchen");
 add_translation("whats_new", "Was ist neu?");
 
 add_translation(
-    "slow_description",
-    "Auf dem langsamen Release-Kanal erscheint in der Regel eine neue "
+        "slow_description",
+        "Auf dem langsamen Release-Kanal erscheint in der Regel eine neue "
         . "Version je Quartal.\nWählen Sie diesen Release-Kanal wenn ihnen "
         . "stabile Software wichtiger ist, als die immer neuesten Features "
         . "verwenden zu können"

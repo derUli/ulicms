@@ -1,17 +1,15 @@
 <?php
 
-class MobileDetectTest extends \PHPUnit\Framework\TestCase
-{
+class MobileDetectTest extends \PHPUnit\Framework\TestCase {
+
     private $no_mobile_design_on_tablet = false;
 
-    protected function setUp(): void
-    {
+    protected function setUp(): void {
         $this->no_mobile_design_on_tablet = Settings::get("no_mobile_design_on_tablet");
         Settings::delete("no_mobile_design_on_tablet");
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         if ($this->no_mobile_design_on_tablet) {
             Settings::set("no_mobile_design_on_tablet", 1);
         } else {
@@ -20,13 +18,11 @@ class MobileDetectTest extends \PHPUnit\Framework\TestCase
         unset($_SERVER["HTTP_USER_AGENT"]);
     }
 
-    public function testIsInstalled()
-    {
+    public function testIsInstalled() {
         $this->assertTrue(class_exists('\Detection\MobileDetect'));
     }
 
-    public function testIsDesktop()
-    {
+    public function testIsDesktop() {
         $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36";
         $this->assertTrue(is_desktop());
 
@@ -40,8 +36,7 @@ class MobileDetectTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse(is_desktop());
     }
 
-    public function testIsMobile()
-    {
+    public function testIsMobile() {
         $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36";
         $this->assertFalse(is_mobile());
         $this->assertFalse(is_tablet());
@@ -59,8 +54,7 @@ class MobileDetectTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue(is_tablet());
     }
 
-    public function testOptionNoMobileDesignOnTablet()
-    {
+    public function testOptionNoMobileDesignOnTablet() {
         Settings::set("no_mobile_design_on_tablet", 1);
 
         $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (Linux; U; Android 4.2.2; de-de; A1-811 Build/JDQ39) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Safari/534.30";
@@ -71,4 +65,5 @@ class MobileDetectTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue(is_mobile());
         $this->assertTrue(is_tablet());
     }
+
 }

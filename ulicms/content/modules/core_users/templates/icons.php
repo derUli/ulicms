@@ -43,5 +43,5 @@ $notSelectedButton = "btn btn-default"
             </a>
         </div>
 
-<?php } ?>
+    <?php } ?>
 </div>

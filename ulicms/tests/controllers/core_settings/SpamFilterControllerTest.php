@@ -1,11 +1,10 @@
 <?php
 
-class SpamFilterControllerTest extends \PHPUnit\Framework\TestCase
-{
+class SpamFilterControllerTest extends \PHPUnit\Framework\TestCase {
+
     private $defaultSettings = [];
 
-    protected function setUp(): void
-    {
+    protected function setUp(): void {
         $this->defaultSettings = [
             "spamfilter_enabled" => Settings::get("spamfilter_enabled"),
             "country_blacklist" => Settings::get("country_blacklist"),
@@ -19,8 +18,7 @@ class SpamFilterControllerTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         $_POST = [];
 
         foreach ($this->defaultSettings as $key => $value) {
@@ -28,8 +26,7 @@ class SpamFilterControllerTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testSavePostWithValues(): void
-    {
+    public function testSavePostWithValues(): void {
         $_POST = [
             "spamfilter_enabled" => "yes",
             "country_blacklist" => "de,en",
@@ -48,45 +45,44 @@ class SpamFilterControllerTest extends \PHPUnit\Framework\TestCase
         $controller->_savePost();
 
         $this->assertEquals(
-            "yes",
-            Settings::get('spamfilter_enabled')
+                "yes",
+                Settings::get('spamfilter_enabled')
         );
         $this->assertEquals(
-            "de,en",
-            Settings::get('country_blacklist')
+                "de,en",
+                Settings::get('country_blacklist')
         );
         $this->assertEquals(
-            "foo\nbar",
-            Settings::get('spamfilter_words_blacklist')
+                "foo\nbar",
+                Settings::get('spamfilter_words_blacklist')
         );
         $this->assertEquals(
-            "disallow",
-            Settings::get('disallow_chinese_chars')
+                "disallow",
+                Settings::get('disallow_chinese_chars')
         );
         $this->assertEquals(
-            "disallow",
-            Settings::get('disallow_cyrillic_chars')
+                "disallow",
+                Settings::get('disallow_cyrillic_chars')
         );
         $this->assertEquals(
-            "disallow",
-            Settings::get('disallow_rtl_chars')
+                "disallow",
+                Settings::get('disallow_rtl_chars')
         );
         $this->assertEquals(
-            "1",
-            Settings::get('reject_requests_from_bots')
+                "1",
+                Settings::get('reject_requests_from_bots')
         );
         $this->assertEquals(
-            "1",
-            Settings::get('check_mx_of_mail_address')
+                "1",
+                Settings::get('check_mx_of_mail_address')
         );
         $this->assertEquals(
-            "3",
-            Settings::get('min_time_to_fill_form')
+                "3",
+                Settings::get('min_time_to_fill_form')
         );
     }
 
-    public function testSavePostWithoutValues(): void
-    {
+    public function testSavePostWithoutValues(): void {
         $_POST = [
             "spamfilter_enabled" => "no"
         ];
@@ -97,35 +93,36 @@ class SpamFilterControllerTest extends \PHPUnit\Framework\TestCase
         $controller->_savePost();
 
         $this->assertEquals(
-            "no",
-            Settings::get('spamfilter_enabled')
+                "no",
+                Settings::get('spamfilter_enabled')
         );
         $this->assertEquals(
-            "ru, cn, in",
-            Settings::get('country_blacklist')
+                "ru, cn, in",
+                Settings::get('country_blacklist')
         );
         $this->assertStringContainsString(
-            "enlargement",
-            Settings::get('spamfilter_words_blacklist')
+                "enlargement",
+                Settings::get('spamfilter_words_blacklist')
         );
         $this->assertNull(
-            Settings::get('disallow_chinese_chars')
+                Settings::get('disallow_chinese_chars')
         );
         $this->assertNull(
-            Settings::get('disallow_cyrillic_chars')
+                Settings::get('disallow_cyrillic_chars')
         );
         $this->assertNull(
-            Settings::get('disallow_rtl_chars')
+                Settings::get('disallow_rtl_chars')
         );
         $this->assertNull(
-            Settings::get('reject_requests_from_bots')
+                Settings::get('reject_requests_from_bots')
         );
         $this->assertNull(
-            Settings::get('check_mx_of_mail_address')
+                Settings::get('check_mx_of_mail_address')
         );
         $this->assertEquals(
-            "0",
-            Settings::get('min_time_to_fill_form')
+                "0",
+                Settings::get('min_time_to_fill_form')
         );
     }
+
 }

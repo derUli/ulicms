@@ -2,33 +2,30 @@
 
 use UliCMS\Packages\PatchManager;
 
-class PatchManagerTest extends \PHPUnit\Framework\TestCase
-{
-    protected function setUp(): void
-    {
+class PatchManagerTest extends \PHPUnit\Framework\TestCase {
+
+    protected function setUp(): void {
         for ($i = 1; $i <= 3; $i++) {
             Database::pQuery(
-                "insert into {prefix}installed_patches "
+                    "insert into {prefix}installed_patches "
                     . "(name, description, url, date) VALUES "
                     . "(?,?,?, NOW())",
-                [
+                    [
                         "patch-$i",
                         "Beschreibung $i",
                         "https://google.de",
                     ],
-                true
+                    true
             );
         }
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         $patchManager = new PatchManager();
         $patchManager->truncateInstalledPatches();
     }
 
-    public function testGetInstalledPatches()
-    {
+    public function testGetInstalledPatches() {
         $patchManager = new PatchManager();
         $patches = $patchManager->getInstalledPatches();
 
@@ -45,8 +42,7 @@ class PatchManagerTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testGetAvailablePatches()
-    {
+    public function testGetAvailablePatches() {
         $patchManager = new PatchManager();
         $patches = $patchManager->getAvailablePatches();
 
@@ -59,33 +55,30 @@ class PatchManagerTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testFetchpageIndex()
-    {
+    public function testFetchpageIndex() {
         $patchManager = new PatchManager();
         $this->assertIsString($patchManager->fetchPackageIndex());
     }
 
-    public function testTruncateInstalledPatches()
-    {
+    public function testTruncateInstalledPatches() {
         $patchManager = new PatchManager();
         $patchManager->truncateInstalledPatches();
         $query = Database::selectAll("installed_patches");
         $this->assertFalse(Database::any($query));
     }
 
-    public function testGetInstalledPatchNames()
-    {
+    public function testGetInstalledPatchNames() {
         for ($i = 1; $i <= 3; $i++) {
             Database::pQuery(
-                "insert into {prefix}installed_patches "
+                    "insert into {prefix}installed_patches "
                     . "(name, description, url, date) VALUES "
                     . "(?,?,?, NOW())",
-                [
+                    [
                         "patch-$i",
                         "Beschreibung $i",
                         "https://google.de",
                     ],
-                true
+                    true
             );
         }
         $patchManager = new PatchManager();
@@ -97,4 +90,5 @@ class PatchManagerTest extends \PHPUnit\Framework\TestCase
             $this->assertNotEmpty($patch);
         }
     }
+
 }

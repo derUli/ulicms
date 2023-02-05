@@ -4,30 +4,26 @@ use UliCMS\Security\SpamChecker\SpamFilterConfiguration;
 use UliCMS\Models\Content\Comment;
 use UliCMS\Security\SpamChecker\CommentSpamChecker;
 
-class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase
-{
-    protected function setUp(): void
-    {
+class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase {
+
+    protected function setUp(): void {
         require_once getLanguageFilePath("en");
         require_once ModuleHelper::buildModuleRessourcePath("core_comments", "lang/en.php");
         require_once ModuleHelper::buildModuleRessourcePath("core_forms", "lang/en.php");
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         $_POST = [];
     }
 
-    public function testConstructor()
-    {
+    public function testConstructor() {
         $configuration = new SpamFilterConfiguration();
         $comment = new Comment();
         $checker = new CommentSpamChecker($comment, $configuration);
         $this->assertCount(0, $checker->getErrors());
     }
 
-    public function testSpamWithNonEmptyHoneypotField()
-    {
+    public function testSpamWithNonEmptyHoneypotField() {
         $configuration = new SpamFilterConfiguration();
 
         $comment = new Comment();
@@ -50,8 +46,7 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase
         unset($_POST["my_homepage_url"]);
     }
 
-    public function testSpamWithBadwords()
-    {
+    public function testSpamWithBadwords() {
         $configuration = new SpamFilterConfiguration();
         $configuration->setBadwords(array(
             "Shit",
@@ -79,8 +74,7 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('The field "Comment Text" contains the not allowed word "Shit".', $error1->message);
     }
 
-    public function testSpamWithInvalidMxEntry()
-    {
+    public function testSpamWithInvalidMxEntry() {
         $configuration = new SpamFilterConfiguration();
         $configuration->setCheckMxOfMailAddress(true);
 
@@ -98,8 +92,7 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('The domain of your e-Mail address has no valid MX entry. Please verify that your e-Mail address in valid.', $error->message);
     }
 
-    public function testWithBotUseragent()
-    {
+    public function testWithBotUseragent() {
         $configuration = new SpamFilterConfiguration();
         $configuration->setRejectRequestsFromBots(true);
 
@@ -118,8 +111,7 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('You look like a bot. Bots are not allowed to send messages on this website.', $error->message);
     }
 
-    public function testSpamWithChineseChars()
-    {
+    public function testSpamWithChineseChars() {
         $configuration = new SpamFilterConfiguration();
         $configuration->setDisallowChineseChars(true);
 
@@ -142,8 +134,7 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("Chinese chars are not allowed!", $error1->message);
     }
 
-    public function testSpamWithCyrillicChars()
-    {
+    public function testSpamWithCyrillicChars() {
         $configuration = new SpamFilterConfiguration();
         $configuration->setDisallowCyrillicChars(true);
 
@@ -166,8 +157,7 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("Cyrillic chars are not allowed!", $error1->message);
     }
 
-    public function testSpamWithRtlChars()
-    {
+    public function testSpamWithRtlChars() {
         $configuration = new SpamFilterConfiguration();
         $configuration->setDisallowRtlChars(true);
 
@@ -190,8 +180,7 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("Right-To-Left languages are not allowed!", $error1->message);
     }
 
-    public function testWithBlockedCountries()
-    {
+    public function testWithBlockedCountries() {
         $configuration = new SpamFilterConfiguration();
 
         $configuration->setBlockedCountries(array(
@@ -217,8 +206,7 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("Access to this function for your country is blocked!\nYour hostname: static.vnpt.vn", $error->message);
     }
 
-    public function testSpamfilterDisabled()
-    {
+    public function testSpamfilterDisabled() {
         $configuration = new SpamFilterConfiguration();
         $configuration->setSpamFilterEnabled(false);
 
@@ -237,8 +225,7 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase
         unset($_POST["my_homepage_url"]);
     }
 
-    public function testNoSpamWithAllOptions()
-    {
+    public function testNoSpamWithAllOptions() {
         $configuration = new SpamFilterConfiguration();
         $configuration->setSpamFilterEnabled(true);
         $configuration->setBadwords("shit", "fuck", "crap");
@@ -262,4 +249,5 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase
 
         $this->assertCount(0, $checker->getErrors());
     }
+
 }

@@ -247,7 +247,7 @@ class DesignSettingsController extends Controller {
     }
 
     public function getFontSizes(): array {
-        
+
         $sizes = [];
         for ($i = 6; $i <= 80; $i++) {
             $sizes[] = $i . "px";

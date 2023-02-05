@@ -16,16 +16,14 @@ $model = $controller->getModel();
             $url = "../" . $row->slug;
         } else {
             $url = "http://" . $domain . "/" . $row->slug;
-        } ?>
+        }
+        ?>
         <tr>
-            <td><a href="<?php
-                echo $url; ?>"
-                   target="_blank"><?php
-                       esc($row->title); ?></a></td>
-            <td align="right"><?php
-                echo $row->views; ?></td>
+            <td><a href="<?php echo $url; ?>"
+                   target="_blank"><?php esc($row->title); ?></a></td>
+            <td align="right"><?php echo $row->views; ?></td>
             <?php
-    }
+        }
         ?>
     </tr>
 </table>
