@@ -20,7 +20,6 @@ function getUsers(): array
     return $users;
 }
 
-
 /**
  * Gets the usernames of all users whose last action was less than 5 minutes ago
  * @return array
@@ -152,17 +151,6 @@ function validate_login(
 function is_logged_in(): bool
 {
     return isset($_SESSION["logged_in"]);
-}
-
-// Alias für is_logged_in
-function logged_in(): bool
-{
-    return is_logged_in();
-}
-
-function getOnlineUsers(): array
-{
-    return getUsersOnline();
 }
 
 /**

@@ -118,17 +118,6 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse(is_logged_in());
     }
 
-    public function testLoggedInTrue()
-    {
-        $_SESSION["logged_in"] = true;
-        $this->assertTrue(logged_in());
-    }
-
-    public function testLoggedInFalse()
-    {
-        $this->assertFalse(logged_in());
-    }
-
     public function testValidateLoginIsValid()
     {
         $this->assertTrue(is_array(validate_login("testuser1", "topsecret")));

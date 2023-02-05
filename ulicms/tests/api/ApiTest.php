@@ -1083,39 +1083,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertCount(0, getFieldsForCustomType("gibts_nicht"));
     }
 
-    public function testGetOnlineUsersReturnsEmptyArray()
-    {
-        $usersOnline = getOnlineUsers();
-        $this->assertCount(0, $usersOnline);
-    }
-
-    public function testGetOnlineUsersReturnsArrayWith2Items()
-    {
-        $user1 = new User();
-        $user1->setUsername("testuser-1");
-        $user1->setPassword(rand_string(23));
-        $user1->setLastname("Beutlin");
-        $user1->setFirstname("Bilbo");
-        $user1->setHTMLEditor("ckeditor");
-        $user1->save();
-        $user1->setLastAction(time() - 10);
-
-        $user2 = new User();
-        $user2->setUsername("testuser-2");
-        $user2->setPassword(rand_string(23));
-        $user2->setLastname("Duck");
-        $user2->setFirstname("Donald");
-        $user2->setHTMLEditor("ckeditor");
-        $user2->save();
-        $user2->setLastAction(time() - 10);
-
-        $usersOnline = getOnlineUsers();
-        $this->assertCount(2, $usersOnline);
-
-        $user1->delete();
-        $user2->delete();
-    }
-
     public function testGetShortlink()
     {
         $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
