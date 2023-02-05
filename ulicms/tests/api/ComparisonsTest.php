@@ -204,18 +204,6 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(var_is_type("nicht leer", "typ_der_nicht_existiert", true));
     }
 
-    public function testIsNightReturnsTrue() {
-        $this->assertTrue(is_night(1570404356));
-    }
-
-    public function testIsNightReturnsFalse() {
-        $this->assertFalse(is_night(1570389956));
-    }
-
-    public function testIsNightWithoutTimeReturnsBool() {
-        $this->assertIsBool(is_night());
-    }
-
     public function testIsDebugMode() {
         $this->assertIsBool(is_debug_mode());
     }

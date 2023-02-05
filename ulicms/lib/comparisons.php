@@ -184,13 +184,6 @@ function is_admin(): bool {
     return $isAdmin;
 }
 
-// Check if it is night (current hour between 0 and 4 o'Clock AM)
-function is_night(?int $time = null): bool {
-    $time = $time ? $time : time();
-    $hour = (int) date("G", $time);
-    return ($hour >= 0 and $hour <= 4);
-}
-
 function is_debug_mode(): bool {
     $config = new CMSConfig();
     return (defined("ULICMS_DEBUG") and ULICMS_DEBUG)
