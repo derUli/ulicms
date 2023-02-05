@@ -38,6 +38,7 @@ Entfernte API-Methoden:
 * db_insert_id()
 * SettingsCache::set()
 * SettingsCache::get()
+* initconfig()
 
 ===== Neues in UliCMS 2022.1 =====
 

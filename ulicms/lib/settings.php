@@ -56,22 +56,6 @@ function setconfig(string $key, $value) {
     }
 }
 
-/**
- * Adds a setting if not exist yet
- * @param string $key
- * @param type $value
- * @deprecated since 2023.1
- * @return bool
- */
-function initconfig(string $key, $value): bool {
-    $success = false;
-    if (!Settings::get($key)) {
-        setconfig($key, $value);
-        $success = true;
-    }
-    return $success;
-}
-
 function get_lang_config(string $name, string $lang): ?string {
     return Settings::getLang($name, $lang);
 }

@@ -18,32 +18,6 @@ class SettingsTest extends \PHPUnit\Framework\TestCase
         LoggerRegistry::unregister("audit_log");
     }
 
-    public function testSettingsOld()
-    {
-        deleteconfig("example_setting");
-        $this->assertEquals(false, getconfig("example_setting"));
-
-        initconfig("example_setting", "hello");
-        $this->assertEquals("hello", getconfig("example_setting"));
-
-        initconfig("example_setting", "bye");
-        $this->assertEquals("hello", getconfig("example_setting"));
-
-        setconfig("example_setting", "bye");
-        $this->assertEquals("bye", getconfig("example_setting"));
-
-        deleteconfig("example_setting");
-        $this->assertEquals(false, getconfig("example_setting"));
-
-        $userManager = new UserManager();
-        $users = $userManager->getAllUsers();
-        $_SESSION["login_id"] = $users[0]->getId();
-
-        setconfig("foo", "bar");
-        $this->assertEquals("bar", getconfig("foo"));
-        deleteconfig("foo");
-    }
-
     public function testSettingsNew()
     {
         Settings::delete("example_setting");
