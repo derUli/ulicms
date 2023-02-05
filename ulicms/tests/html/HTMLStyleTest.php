@@ -7,17 +7,17 @@ class HTMLStyleTest extends \PHPUnit\Framework\TestCase
 {
     public function testInlineCSS()
     {
-        $this->assertEquals("<style type=\"text/css\">body{background-color:red;}</style>", Style::fromString("body{background-color:red;}"));
+        $this->assertEquals("<style>body{background-color:red;}</style>", Style::fromString("body{background-color:red;}"));
     }
 
     public function testInlineCSSWithMedia()
     {
-        $this->assertEquals("<style type=\"text/css\" media=\"handheld\">body{background-color:red;}</style>", Style::fromString("body{background-color:red;}", "handheld"));
+        $this->assertEquals("<style media=\"handheld\">body{background-color:red;}</style>", Style::fromString("body{background-color:red;}", "handheld"));
     }
 
     public function testInlineCSSWithMediaAndTwoFoos()
     {
-        $this->assertEquals("<style type=\"text/css\" media=\"handheld\" foo1=\"hello\" foo2=\"world\">body{background-color:red;}</style>", Style::fromString("body{background-color:red;}", "handheld", array(
+        $this->assertEquals("<style media=\"handheld\" foo1=\"hello\" foo2=\"world\">body{background-color:red;}</style>", Style::fromString("body{background-color:red;}", "handheld", array(
                     "foo1" => "hello",
                     "foo2" => "world"
         )));

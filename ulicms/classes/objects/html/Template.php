@@ -460,7 +460,7 @@ color: " . Settings::get("body-text-color") . ";
             }
 
             if (Settings::get("video_width_100_percent")) {
-                echo "<style type=\"text/css\">
+                echo "<style>
   video {
   width: 100% !important;
   height: auto !important;

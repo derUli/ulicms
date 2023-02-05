@@ -240,7 +240,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         $file = "node_modules/jquery/dist/jquery.min.js";
         $time = File::getLastChanged($file);
         $expected = '<script src="' . $file . '?time=' . $time .
-                '" type="text/javascript"></script>';
+                '"></script>';
         $this->assertStringContainsString($expected, Template::getjQueryScript());
     }
 

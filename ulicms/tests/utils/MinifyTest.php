@@ -51,7 +51,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
             $html
         );
         $this->assertStringContainsString(".js?time=", $html);
-        $this->assertStringEndsWith('type="text/javascript"></script>', $html);
+        $this->assertStringEndsWith('></script>', $html);
 
         $this->assertCount(0, Vars::get("script_queue"));
     }
@@ -77,7 +77,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
             $html
         );
         $this->assertStringContainsString(".js?time=", $html);
-        $this->assertStringEndsWith('type="text/javascript"></script>', $html);
+        $this->assertStringEndsWith('></script>', $html);
 
         $this->assertCount(0, Vars::get("script_queue"));
     }

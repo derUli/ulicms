@@ -16,11 +16,12 @@ class Style
         ?string $media = null,
         array $htmlAttributes = []
     ): string {
-        $attributes = array(
+        $attributes = [
             "rel" => "stylesheet",
             "href" => $href,
-            "type" => "text/css"
-        );
+        
+            "type" => "text/css",
+        ];
         if ($media) {
             $attributes["media"] = $media;
         }
@@ -32,7 +33,11 @@ class Style
         }
         $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);
 
-        return "<link {$attribHTML}/>";
+        if(!empty($attribHTML)){
+            $attribHTML = " " . $attribHTML;
+        }
+
+        return "<link{$attribHTML}/>";
     }
 
     public static function fromString(
@@ -40,9 +45,7 @@ class Style
         ?string $media = null,
         array $htmlAttributes = []
     ): string {
-        $attributes = array(
-            "type" => "text/css"
-        );
+        $attributes = [];
         if ($media) {
             $attributes["media"] = $media;
         }
@@ -51,6 +54,10 @@ class Style
         }
         $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);
 
-        return "<style $attribHTML>" . $code . "</style>";
+        if(!empty($attribHTML)){
+            $attribHTML = " " . $attribHTML;
+        }
+
+        return "<style$attribHTML>" . $code . "</style>";
     }
 }
