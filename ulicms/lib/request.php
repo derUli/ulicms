@@ -7,16 +7,6 @@ function get_action(): string
     return BackendHelper::getAction();
 }
 
-function set_format(string $format): void
-{
-    $_GET["format"] = trim($format, ".");
-}
-
-function get_format(): string
-{
-    return $_GET["format"] ?? "html";
-}
-
 function _check_form_timestamp(): bool
 {
     $original_timestamp = Request::getVar("form_timestamp", 0, "int");

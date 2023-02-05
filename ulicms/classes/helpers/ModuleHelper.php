@@ -237,20 +237,20 @@ class ModuleHelper extends Helper
         // Todo: Too much if's refactor this code
         if ($domain) {
             $url = get_site_protocol() . $domain .
-                    $dirname . $page->slug . ".html";
+                    $dirname . $page->slug;
             if (!is_null($suffix)) {
                 $url .= "?{$suffix}";
             }
         } else {
             if ($page->language != $currentLanguage) {
                 $url = get_protocol_and_domain() . $dirname .
-                        $page->slug . ".html" . "?language=" . $page->language;
+                        $page->slug . "?language=" . $page->language;
                 if (!is_null($suffix)) {
                     $url .= "&{$suffix}";
                 }
             } else {
                 $url = get_protocol_and_domain() . $dirname
-                        . $page->slug . ".html";
+                        . $page->slug;
                 if (!is_null($suffix)) {
                     $url .= "?{$suffix}";
                 }

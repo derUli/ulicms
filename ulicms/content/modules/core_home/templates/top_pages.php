@@ -13,9 +13,9 @@ $model = $controller->getModel();
     foreach ($model->topPages as $row) {
         $domain = getDomainByLanguage($row->language);
         if (!$domain) {
-            $url = "../" . $row->slug . ".html";
+            $url = "../" . $row->slug;
         } else {
-            $url = "http://" . $domain . "/" . $row->slug . ".html";
+            $url = "http://" . $domain . "/" . $row->slug;
         } ?>
         <tr>
             <td><a href="<?php

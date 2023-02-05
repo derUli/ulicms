@@ -613,7 +613,7 @@ class PageTest extends \PHPUnit\Framework\TestCase
         $this->assertStringStartsWith("http", $url);
         $this->assertStringContainsString("//company.com", $url);
 
-        $this->assertStringContainsString("{$page->slug}.html", $url);
+        $this->assertStringContainsString("{$page->slug}", $url);
         $this->assertStringEndsWith("foo=bar&hello=world", $url);
     }
 
@@ -633,7 +633,7 @@ class PageTest extends \PHPUnit\Framework\TestCase
         $this->assertStringStartsWith("http", $url);
         $this->assertStringContainsString("//company.com", $url);
 
-        $this->assertStringContainsString("{$page->slug}.html", $url);
+        $this->assertStringContainsString("{$page->slug}", $url);
     }
 
     public function testIncludeShortcodeShouldIncludeOtherPages()

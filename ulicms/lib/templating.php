@@ -614,8 +614,7 @@ function get_requested_pagename(): string {
 
 function set_requested_pagename(
         string $slug,
-        ?string $language = null,
-        ?string $format = "html"
+        ?string $language = null
 ): void {
     if (!$language) {
         $language = getCurrentLanguage();
@@ -626,7 +625,6 @@ function set_requested_pagename(
     $_GET["language"] = $language;
     $_REQUEST["language"] = $language;
     $_SESSION["language"] = $language;
-    set_format($format);
 }
 
 function is_home(): bool {

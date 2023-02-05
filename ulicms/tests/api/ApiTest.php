@@ -81,7 +81,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         unset($_REQUEST["action"]);
         Settings::set("maintenance_mode", "0");
         chdir(Path::resolve("ULICMS_ROOT"));
-        set_format("html");
     }
 
     public function testRemovePrefix()
@@ -194,15 +193,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         Settings::set("min_time_to_fill_form", 3);
         $_POST["form_timestamp"] = time() - 1;
         $this->assertFalse(_check_form_timestamp());
-    }
-
-    public function testSetFormat()
-    {
-        set_format("pdf");
-        $this->assertEquals("pdf", $_GET["format"]);
-
-        set_format("txt");
-        $this->assertEquals("txt", $_GET["format"]);
     }
 
     public function testGetJqueryUrl()
@@ -393,7 +383,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
         $_SERVER["SERVER_PORT"] = "80";
         $_SERVER['HTTP_HOST'] = "example.org";
-        $_SERVER['REQUEST_URI'] = "/foobar/foo.html";
+        $_SERVER['REQUEST_URI'] = "/foobar/foo";
 
         $this->assertEquals("http://example.org/foobar", getBaseFolderURL());
     }
@@ -404,7 +394,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $_SERVER["SERVER_PORT"] = "443";
         $_SERVER["HTTPS"] = "on";
         $_SERVER['HTTP_HOST'] = "example.org";
-        $_SERVER['REQUEST_URI'] = "/foobar/foo.html";
+        $_SERVER['REQUEST_URI'] = "/foobar/foo";
 
         $this->assertEquals("https://example.org/foobar", getBaseFolderURL());
 
@@ -421,7 +411,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $_SERVER["SERVER_PORT"] = "8080";
         $_SERVER["HTTPS"] = "on";
         $_SERVER['HTTP_HOST'] = "example.org";
-        $_SERVER['REQUEST_URI'] = "/foobar/foo.html";
+        $_SERVER['REQUEST_URI'] = "/foobar/foo";
 
         $this->assertEquals("https://example.org:8080/foobar", getBaseFolderURL());
 
@@ -453,10 +443,10 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $_SERVER["SERVER_PORT"] = "8080";
         $_SERVER["HTTPS"] = "on";
         $_SERVER['HTTP_HOST'] = "example.org";
-        $_SERVER['REQUEST_URI'] = "/foobar/foo.html?hello=world";
+        $_SERVER['REQUEST_URI'] = "/foobar/foo?hello=world";
 
 
-        $this->assertEquals("https://example.org:8080/foobar/foo.html?hello=world", getCurrentURL());
+        $this->assertEquals("https://example.org:8080/foobar/foo?hello=world", getCurrentURL());
 
         unset($_SERVER["SERVER_PROTOCOL"]);
         unset($_SERVER['HTTP_HOST']);
@@ -477,7 +467,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $_SERVER["SERVER_PORT"] = "8080";
         $_SERVER["HTTPS"] = "on";
         $_SERVER['HTTP_HOST'] = "example.org";
-        $_SERVER['REQUEST_URI'] = "/foobar/foo.html?hello=world";
+        $_SERVER['REQUEST_URI'] = "/foobar/foo?hello=world";
 
         $user = new User();
         $user->setUsername("testuser-1");
@@ -513,7 +503,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $_SERVER["SERVER_PORT"] = "8080";
         $_SERVER["HTTPS"] = "on";
         $_SERVER['HTTP_HOST'] = "example.org";
-        $_SERVER['REQUEST_URI'] = "/foobar/foo.html?hello=world";
+        $_SERVER['REQUEST_URI'] = "/foobar/foo?hello=world";
 
         $this->assertEquals(
             "https://example.org/foobar/admin/gfx/no_avatar.png",
@@ -533,7 +523,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $_SERVER["SERVER_PORT"] = "8080";
         $_SERVER["HTTPS"] = "on";
         $_SERVER['HTTP_HOST'] = "example.org";
-        $_SERVER['REQUEST_URI'] = "/foobar/foo.html?hello=world";
+        $_SERVER['REQUEST_URI'] = "/foobar/foo?hello=world";
 
         $this->assertEquals(
             '<img src="https://example.org/foobar/admin/gfx/no_avatar.png" />',
@@ -552,7 +542,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $_SERVER["SERVER_PORT"] = "8080";
         $_SERVER["HTTPS"] = "on";
         $_SERVER['HTTP_HOST'] = "example.org";
-        $_SERVER['REQUEST_URI'] = "/foobar/foo.html?hello=world";
+        $_SERVER['REQUEST_URI'] = "/foobar/foo?hello=world";
 
         $this->assertEquals(
             '<img src="https://example.org/foobar/admin/gfx/no_avatar.png" '
@@ -806,19 +796,19 @@ class ApiTest extends \PHPUnit\Framework\TestCase
 
     public function testBuildSEOUrlWithoutAnything()
     {
-        set_requested_pagename("hello_world", null, "pdf");
-        $this->assertEquals("hello_world.pdf", buildSEOUrl());
+        set_requested_pagename("hello_world");
+        $this->assertEquals("hello_world", buildSEOUrl());
     }
 
     public function testBuildSEOUrlWithPage()
     {
-        $this->assertEquals("foobar.html", buildSEOUrl("foobar"));
+        $this->assertEquals("foobar", buildSEOUrl("foobar"));
     }
 
     public function testBuildSEOUrlWithPageFromAdminDir()
     {
         chdir(Path::resolve("ULICMS_ROOT/admin"));
-        $this->assertEquals("../foobar.html", buildSEOUrl("foobar"));
+        $this->assertEquals("../foobar", buildSEOUrl("foobar"));
     }
 
     public function testBuildSEOUrlWithPageAndRedirection()
@@ -831,8 +821,8 @@ class ApiTest extends \PHPUnit\Framework\TestCase
     public function testBuildSEOUrlWithPageAndType()
     {
         $this->assertEquals(
-            "foobar.txt",
-            buildSEOUrl("foobar", null, "txt")
+            "foobar",
+            buildSEOUrl("foobar", null)
         );
     }
 
@@ -1088,7 +1078,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $_SERVER["SERVER_PORT"] = "443";
         $_SERVER["HTTPS"] = "on";
         $_SERVER['HTTP_HOST'] = "example.org";
-        $_SERVER['REQUEST_URI'] = "/foobar/foo.html";
+        $_SERVER['REQUEST_URI'] = "/foobar/foo";
 
         $pages = ContentFactory::getAll();
 
@@ -1107,12 +1097,12 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $_SERVER["SERVER_PORT"] = "443";
         $_SERVER["HTTPS"] = "on";
         $_SERVER['HTTP_HOST'] = "example.org";
-        $_SERVER['REQUEST_URI'] = "/foobar/foo.html";
+        $_SERVER['REQUEST_URI'] = "/foobar/foo";
 
         $_GET["slug"] = "hello_world";
 
         $this->assertEquals(
-            "https://example.org/foobar/hello_world.html",
+            "https://example.org/foobar/hello_world",
             get_canonical()
         );
     }

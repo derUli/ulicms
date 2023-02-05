@@ -20,7 +20,6 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase
 
         Settings::set("maintenance_mode", "0");
         chdir(Path::resolve("ULICMS_ROOT"));
-        set_format("html");
     }
 
     // in the test environment this returns always true

@@ -290,7 +290,6 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         foreach ($links as $link) {
             $this->assertCount(2, $link);
             $this->assertNotEmpty($link[0]);
-            $this->assertStringContainsString(".html", $link[1]);
         }
     }
 

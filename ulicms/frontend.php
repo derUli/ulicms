@@ -63,6 +63,29 @@ if (Request::getVar("run_cron")) {
     TextResult("finished cron at " . strftime("%x %X"), HttpStatusCode::OK);
 }
 
+
+$slug = strtolower($_GET['slug'] ?? '');
+$slugParts = explode('.', $slug);
+
+
+// No extension anymore since UliCMS 2023.1
+// Redirect old urls to new one without extension
+$formatExtensions = [
+    'html',
+    'pdf',
+    'csv',
+    'txt',
+    'json',
+    'rss'
+];
+
+$slugExtension = count($slugParts) > 1 ? end($slugParts) : null;
+
+if(in_array($slugExtension, $formatExtensions)){
+    $newUrl = str_replace(".{$slugExtension}", '', $_SERVER['REQUEST_URI']);
+    Response::redirect($newUrl, HttpStatusCode::MOVED_PERMANENTLY);
+}
+
 $status = check_status();
 
 if (Settings::get("redirection")) {
@@ -99,6 +122,7 @@ $redirection = get_redirection();
 if ($redirection and (is_active() or is_logged_in())) {
     Request::redirect($redirection, 302);
 }
+
 if (get_ID()) {
     try {
         $page = ContentFactory::getByID(get_ID());
@@ -131,12 +155,6 @@ if (isset($_GET["goid"])) {
 ControllerRegistry::runMethods();
 
 send_header($_SERVER["SERVER_PROTOCOL"] . " " . $status);
-
-// Die Renderer wurden entfernt. Damit können Inhalte nur noch als HTML abgerufen werden.
-// TODO: Die ENdung .html aus den URLs entfernen, aber abwärtskompatibel mit Weiterleitung.
-// Wer einen alten Link z.B. example.org/willkommen.html aufruft, soll einen permanent redirect auf 
-// example.org/willkommen kriegen.
-
 send_header("Content-Type: text/html; charset=utf-8");
 
 do_event("after_http_header");

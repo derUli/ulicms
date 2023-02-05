@@ -187,10 +187,9 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
 
     public function testSetRequestedPageName()
     {
-        set_requested_pagename("my-slug", "en", "pdf");
+        set_requested_pagename("my-slug", "en");
         $this->assertEquals("my-slug", get_slug());
         $this->assertEquals("en", Request::getVar("language"));
-        $this->assertEquals("pdf", get_format());
     }
 
     public function testSetRequestedPageNameWithoutLanguage()
@@ -213,7 +212,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         $pages = Contentfactory::getAllByMenuAndLanguage("top", "en");
         foreach ($pages as $page) {
             if (!$page->isFrontPage() && $page->isRegular() && !$page->getParent()) {
-                $this->assertStringContainsString($page->slug . ".html", $html);
+                $this->assertStringContainsString($page->slug, $html);
                 $this->assertStringContainsString($page->title, $html);
             }
         }
@@ -239,14 +238,13 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         $pages = Contentfactory::getAllByMenuAndLanguage("top", "en");
         foreach ($pages as $page) {
             if (!$page->isFrontPage() && $page->isRegular() && !$page->getParent()) {
-                $this->assertStringContainsString($page->slug . ".html", $html);
+                $this->assertStringContainsString($page->slug, $html);
                 $this->assertStringContainsString($page->title, $html);
             }
         }
-        $germanPages = Contentfactory::getAllByLanguage("de");
-        foreach ($germanPages as $page) {
-            $this->assertStringNotContainsString($page->title . ".html", $html);
-        }
+        
+        $this->assertStringNotContainsString("Willkommen", $html);
+        
     }
 
     public function testHtml5Doctype()

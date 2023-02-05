@@ -29,13 +29,6 @@ function get_canonical(): string
         $canonical .= buildSEOUrl();
     }
 
-    if (containsModule(null, "blog")) {
-        if (isset($_GET["single"])) {
-            $canonical .= "?single=" . _esc($_GET["single"]);
-        } elseif (isset($_GET["limit"])) {
-            $canonical .= "?limit=" . intval($_GET["limit"]);
-        }
-    }
     $canonical = apply_filter($canonical, "canonical");
     return $canonical;
 }
@@ -67,7 +60,7 @@ function getBaseFolderURL(?string $suffix = null): string
 }
 
 // This Returns the current full URL
-// for example: http://www.homepage.de/news.html?single=title
+// for example: http://www.homepage.de/news?single=title
 function getCurrentURL(): string
 {
     return getBaseFolderURL(get_request_uri());
@@ -85,6 +78,7 @@ function getCurrentURL(): string
 function buildSEOUrl(
     ?string $page = null,
     ?string $redirection = null,
+    // TODO: Obsoleten Parameter $format entfernen
     ?string $format = null
 ) {
     if ($redirection) {
@@ -93,11 +87,6 @@ function buildSEOUrl(
     if (!$page) {
         $page = get_slug();
     }
-
-    if (!$format) {
-        $format = get_format() ? get_format() : "html";
-    }
-
     if ($page === get_frontpage()) {
         return "./";
     }
@@ -108,7 +97,6 @@ function buildSEOUrl(
         $seo_url .= "../";
     }
     $seo_url .= $page;
-    $seo_url .= "." . trim($format, ".");
     return $seo_url;
 }
 

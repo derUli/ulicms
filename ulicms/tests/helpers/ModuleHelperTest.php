@@ -203,10 +203,10 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase
     {
         $_SESSION["language"] = "de";
         $_SERVER['HTTP_HOST'] = "company.com";
-        $this->assertEquals("http://company.com/willkommen.html", ModuleHelper::getFullPageURLByID(1));
+        $this->assertEquals("http://company.com/willkommen", ModuleHelper::getFullPageURLByID(1));
 
         $_SERVER['HTTPS'] = "on";
-        $this->assertEquals("https://company.com/willkommen.html", ModuleHelper::getFullPageURLByID(1));
+        $this->assertEquals("https://company.com/willkommen", ModuleHelper::getFullPageURLByID(1));
 
         unset($_SERVER['HTTP_HOST']);
         unset($_SERVER['HTTPS']);

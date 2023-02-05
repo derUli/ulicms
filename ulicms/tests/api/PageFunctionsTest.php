@@ -52,7 +52,6 @@ class PageFunctionsTest extends \PHPUnit\Framework\TestCase
             $this->assertCount(2, $page);
             $this->assertNotEmpty($page[0]);
             $this->assertNotEmpty($page[1]);
-            $this->assertStringContainsString(".html", $page[1]);
         }
     }
 
