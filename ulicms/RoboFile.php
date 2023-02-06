@@ -533,7 +533,7 @@ class RoboFile extends Tasks {
      */
     public function testsRun(string $testFile = "") {
         $command = "vendor/bin/phpunit";
-        if (DIRSEP === "\\") {
+        if (DIRECTORY_SEPARATOR === "\\") {
             $command = str_replace("/", "\\", $command);
         }
 
@@ -546,7 +546,7 @@ class RoboFile extends Tasks {
      */
     public function testsUpdateSnapshots(string $testFile = "") {
         $command = "vendor/bin/phpunit -d --update-snapshots";
-        if (DIRSEP === "\\") {
+        if (DIRECTORY_SEPARATOR === "\\") {
             $command = str_replace("/", "\\", $command);
         }
 

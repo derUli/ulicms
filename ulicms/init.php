@@ -1,4 +1,12 @@
 <?php
+// use this constant at the end
+// of the page load procedure to measure site performance
+define("START_TIME", microtime(true));
+
+// root directory of UliCMS
+if (!defined("ULICMS_ROOT")) {
+    define("ULICMS_ROOT", dirname(__file__));
+}
 
 require_once dirname(__file__) . "/classes/exceptions/load.php";
 
@@ -10,26 +18,6 @@ use UliCMS\Constants\AuditLog;
 use UliCMS\Registries\HelperRegistry;
 use UliCMS\Models\Content\TypeMapper;
 use UliCMS\Packages\PatchManager;
-
-// root directory of UliCMS
-if (!defined("ULICMS_ROOT")) {
-    define("ULICMS_ROOT", dirname(__file__));
-}
-
-// this is kept for compatiblity reasons
-define("DIRECTORY_SEPERATOR", DIRECTORY_SEPARATOR);
-
-// shortcut for DIRECTORY_SEPARATOR
-// however it's unnecessary to use these constansts
-// since PHP normalizes all paths
-// So just always use a forward slash
-// Shortcut, but should not be used anymore
-// Just use /
-define("DIRSEP", DIRECTORY_SEPARATOR);
-
-// use this constant at the end
-// of the page load procedure to measure site performance
-define("START_TIME", microtime(true));
 
 /*
  * Diese Datei initalisiert das System
@@ -161,8 +149,8 @@ $config = new CMSConfig();
 
 // IF ULICMS_DEBUG is defined then display all errors except E_NOTICE,
 // else disable error_reporting from php.ini
-if ((defined("ULICMS_DEBUG") and ULICMS_DEBUG)
-        or (isset($config->debug) and $config->debug)) {
+if ((defined("ULICMS_DEBUG") && ULICMS_DEBUG)
+        || (isset($config->debug) and $config->debug)) {
     error_reporting(E_ALL ^ E_NOTICE);
 } else {
     error_reporting(0);
@@ -196,9 +184,8 @@ if (!defined("ULICMS_CACHE_BASE")) {
     define("ULICMS_CACHE_BASE", ULICMS_DATA_STORAGE_ROOT . "/content/cache");
 }
 
-// TOdo: Alle stellen, wo manuell Cache-Dateien geschrieben werden auf PhpFastCache umstellen
+// Todo: Alle stellen, wo manuell Cache-Dateien geschrieben werden auf PhpFastCache umstellen
 // und das hier dann abschaffen.
-
 if (!defined("ULICMS_CACHE")) {
     define("ULICMS_CACHE", ULICMS_CACHE_BASE . "/legacy");
 }
@@ -235,24 +222,6 @@ $htaccessForLogFolderSource = ULICMS_ROOT . "/lib/htaccess-deny-all.txt";
 $htaccessLogFolderTarget = ULICMS_LOG . "/.htaccess";
 if (!file_exists($htaccessLogFolderTarget)) {
     copy($htaccessForLogFolderSource, $htaccessLogFolderTarget);
-}
-
-// umask setzen
-// Die umask legt die Standarddateirechte für neue Dateien auf
-// Unix Systemen fest.
-// Die Variable $umask sollte nur gesetzt werden, sofern es zu
-// Berechtigungsproblemen bei durch UliCMS generierten Dateien kommt.
-// umask lässt sich wie folgt berechnen
-// 0777 - X = gewünschte Berechtigung
-// X ist die umask
-// Eine umask von 0022 erzeugt z.B. Ordner mit chmod 0755 und Dateien mit chmod 0655
-if (isset($config->umask)) {
-    umask($config->umask);
-}
-
-// memory_limit setzen
-if (isset($config->memory_limit)) {
-    @ini_set("memory_limit", $config->memory_limit);
 }
 
 Translation::init();
@@ -370,12 +339,6 @@ define(
 
 if (!Settings::get("hide_meta_generator")) {
     @send_header('X-Powered-By: UliCMS Release ' . cms_version());
-}
-
-$memory_limit = Settings::get("memory_limit");
-
-if ($memory_limit) {
-    @ini_set('memory_limit', $memory_limit);
 }
 
 $cache_period = Settings::get("cache_period");
