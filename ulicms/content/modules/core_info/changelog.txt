@@ -46,6 +46,17 @@ Entfernte API-Methoden:
 * is_admin()
 * get_referer()
 * isModuleInstalled()
+* is_500()
+* is_503()
+* faster_in_array()
+* is_today()
+* is_tomorrow()
+* is_yesterday()
+* is_future()
+* is_past()
+* midnight()
+* end_of_day()
+* get_carbon()
 
 ===== Neues in UliCMS 2022.1 =====
 

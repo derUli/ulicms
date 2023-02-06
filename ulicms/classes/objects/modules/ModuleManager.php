@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-class ModuleManager
-{
-    public function getAllModules(): array
-    {
+class ModuleManager {
+
+    public function getAllModules(): array {
         $modules = [];
         $sql = "select name from {prefix}modules";
         $result = Database::query($sql, true);
@@ -15,8 +14,7 @@ class ModuleManager
         return $modules;
     }
 
-    public function getEnabledModuleNames(): array
-    {
+    public function getEnabledModuleNames(): array {
         $modules = [];
         $sql = "select name from {prefix}modules where enabled = 1";
         $result = Database::query($sql, true);
@@ -26,8 +24,7 @@ class ModuleManager
         return $modules;
     }
 
-    public function getDisabledModuleNames(): array
-    {
+    public function getDisabledModuleNames(): array {
         $modules = [];
         $sql = "select name from {prefix}modules where enabled = 0";
         $result = Database::query($sql, true);
@@ -37,8 +34,7 @@ class ModuleManager
         return $modules;
     }
 
-    public function getAllModuleNames(?string $source = null): array
-    {
+    public function getAllModuleNames(?string $source = null): array {
         $modules = [];
         $sql = "select name from {prefix}modules";
         $result = Database::query($sql, true);
@@ -52,8 +48,8 @@ class ModuleManager
     }
 
     public function getDependencies(
-        ?string $module,
-        array $allDeps = []
+            ?string $module,
+            array $allDeps = []
     ): array {
         $dependencies = getModuleMeta($module, "dependencies");
         if ($dependencies) {
@@ -67,8 +63,8 @@ class ModuleManager
     }
 
     public function getDependentModules(
-        ?string $module,
-        array $allDeps = []
+            ?string $module,
+            array $allDeps = []
     ): array {
         $allModules = $this->getEnabledModuleNames();
         foreach ($allModules as $mod) {
@@ -89,8 +85,7 @@ class ModuleManager
     // - Nicht mehr vorhandene Module aus Datenbank löschen
     // - neue Module sollen erst mal deaktiviert sein
     // - Diese Funktion aufrufen beim installieren von Modulen, beim leeren des Caches und beim deinstallieren von Modulen
-    public function sync(): void
-    {
+    public function sync(): void {
         $this->removeDeletedModules();
         $this->addNewModules();
 
@@ -98,8 +93,7 @@ class ModuleManager
     }
 
     // remove modules from database which aren't installed anymore
-    protected function removeDeletedModules()
-    {
+    protected function removeDeletedModules() {
         $realModules = getAllModules();
 
         $dataBaseModules = $this->getAllModuleNames();
@@ -113,8 +107,7 @@ class ModuleManager
     }
 
     // add new modules to database
-    protected function addNewModules()
-    {
+    protected function addNewModules() {
         $realModules = getAllModules();
         $dataBaseModules = $this->getAllModuleNames();
 
@@ -144,8 +137,7 @@ class ModuleManager
 
     // modules may define default values for it's settings in it's
     // metadata file
-    protected function initModulesDefaultSettings(): void
-    {
+    protected function initModulesDefaultSettings(): void {
         $enabledModules = $this->getEnabledModuleNames();
         foreach ($enabledModules as $module) {
             $settings = getModuleMeta($module, "settings");
@@ -162,8 +154,8 @@ class ModuleManager
     // stored in the database
     // update the version number in the database
     protected function updateModuleVersion(
-        ?string $version,
-        string $realModule
+            ?string $version,
+            string $realModule
     ): void {
         $module = new Module($realModule);
         if ($module->getVersion() !== $version) {
@@ -171,4 +163,5 @@ class ModuleManager
         }
         $module->save();
     }
+
 }

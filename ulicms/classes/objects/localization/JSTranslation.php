@@ -3,65 +3,57 @@
 declare(strict_types=1);
 
 // Makes translation strings avaiable for Javascript
-class JSTranslation
-{
+class JSTranslation {
+
     private $keys = [];
     private $varName = "Translation";
 
     public function __construct(
-        array $keys = [],
-        string $varName = "Translation"
+            array $keys = [],
+            string $varName = "Translation"
     ) {
         $this->addKeys($keys);
         $this->setVarName($varName);
     }
 
-    public function addKey(string $name): void
-    {
+    public function addKey(string $name): void {
         if (!in_array($name, $this->keys)) {
             $this->keys[] = $name;
         }
     }
 
-    public function addKeys(array $names): void
-    {
+    public function addKeys(array $names): void {
         foreach ($names as $name) {
             $this->addKey($name);
         }
     }
 
-    public function removeKey(string $del_var): void
-    {
+    public function removeKey(string $del_var): void {
         if (($key = array_search($del_var, $this->keys)) !== false) {
             unset($this->keys[$key]);
             $this->keys = array_values($this->keys);
         }
     }
 
-    public function removeKeys(array $del_vars): void
-    {
+    public function removeKeys(array $del_vars): void {
         foreach ($del_vars as $del_var) {
             $this->removeKey($del_var);
         }
     }
 
-    public function getKeys(): array
-    {
+    public function getKeys(): array {
         return $this->keys;
     }
 
-    public function setVarName(string $val): void
-    {
+    public function setVarName(string $val): void {
         $this->varName = $val;
     }
 
-    public function getVarName(): string
-    {
+    public function getVarName(): string {
         return $this->varName;
     }
 
-    public function getJS(string $wrap = "<script>{code}</script>"): string
-    {
+    public function getJS(string $wrap = "<script>{code}</script>"): string {
         $js = array(
             "{$this->varName}={};"
         );
@@ -82,13 +74,12 @@ class JSTranslation
         return $output;
     }
 
-    public function renderJS(string $wrap = "<script>{code}</script>"): void
-    {
+    public function renderJS(string $wrap = "<script>{code}</script>"): void {
         echo $this->getJS($wrap);
     }
 
-    public function render(string $wrap = "<script>{code}</script>"): void
-    {
+    public function render(string $wrap = "<script>{code}</script>"): void {
         $this->renderJS($wrap);
     }
+
 }

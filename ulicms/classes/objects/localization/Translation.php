@@ -4,17 +4,15 @@ declare(strict_types=1);
 
 // This class is a work in progress
 // It's currently only used for overriding of translations
-class Translation
-{
+class Translation {
+
     private static $translations = [];
 
-    public static function init(): void
-    {
+    public static function init(): void {
         self::$translations = [];
     }
 
-    public static function set(string $key, ?string $value): void
-    {
+    public static function set(string $key, ?string $value): void {
         $key = "translation_" . $key;
         $key = strtoupper($key);
         if (!is_null($value)) {
@@ -24,18 +22,15 @@ class Translation
         }
     }
 
-    public static function delete(string $key): void
-    {
+    public static function delete(string $key): void {
         self::set($key, null);
     }
 
-    public static function override(string $key, string $value): void
-    {
+    public static function override(string $key, string $value): void {
         self::set($key, $value);
     }
 
-    public static function get(string $key): ?string
-    {
+    public static function get(string $key): ?string {
         $retval = null;
         if (isset(self::$translations[$key])) {
             $retval = self::$translations[$key];
@@ -43,16 +38,14 @@ class Translation
         return $retval;
     }
 
-    public static function includeCustomLangFile(string $lang): void
-    {
+    public static function includeCustomLangFile(string $lang): void {
         $file = ULICMS_ROOT . "/lang/custom/" . basename($lang) . ".php";
         if (file_exists($file)) {
             require_once $file;
         }
     }
 
-    public static function loadAllModuleLanguageFiles(string $lang): void
-    {
+    public static function loadAllModuleLanguageFiles(string $lang): void {
         $modules = getAllModules();
         foreach ($modules as $module) {
             $currentLanguageFile = getModulePath($module, true) . "/lang/" .
@@ -68,8 +61,7 @@ class Translation
         }
     }
 
-    public static function loadCurrentThemeLanguageFiles(string $lang): void
-    {
+    public static function loadCurrentThemeLanguageFiles(string $lang): void {
         $file = getTemplateDirPath(get_theme(), true) . "/lang/" .
                 $lang . ".php";
         if (file_exists($file)) {
@@ -82,4 +74,5 @@ class Translation
             require_once $file;
         }
     }
+
 }

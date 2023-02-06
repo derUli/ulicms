@@ -1,8 +1,7 @@
 <?php
 
 $classes = array(
-    "AllowedTags",
-    "HttpStatusCode",
+    "AllowedTags"
 );
 
 foreach ($classes as $class) {
