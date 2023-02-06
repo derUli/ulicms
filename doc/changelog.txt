@@ -46,6 +46,8 @@ Entfernte API-Methoden:
 * is_admin()
 * get_referer()
 * isModuleInstalled()
+* is_500()
+* is_503()
 
 ===== Neues in UliCMS 2022.1 =====
 

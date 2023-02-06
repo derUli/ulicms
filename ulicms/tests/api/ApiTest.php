@@ -182,12 +182,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("node_modules/jquery/dist/jquery.min.js", get_jquery_url());
     }
 
-    public function testPreparePlainTextforHTMLOutput() {
-        $input = "This is\na\n<Textfile>.";
-        $expected = "This is<br />\na<br />\n&lt;Textfile&gt;.";
-        $this->assertEquals($expected, preparePlainTextforHTMLOutput($input));
-    }
-
     public function testRandStr() {
         $password1 = rand_string(15);
         $password2 = rand_string(15);

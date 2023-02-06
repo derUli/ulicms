@@ -291,16 +291,6 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(4, strlen($output));
     }
 
-    public function testIs503ReturnsTrue() {
-        Settings::set("maintenance_mode", "on");
-        $this->assertTrue(is_503());
-    }
-
-    public function testIs503ReturnsFalse() {
-        Settings::set("maintenance_mode", "off");
-        $this->assertFalse(is_503());
-    }
-
     public function testGetBaseMetas() {
         $baseMetas = get_base_metas();
 
@@ -330,10 +320,6 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         $baseMetas = get_head();
         $this->assertTrue(str_contains($baseMetas, '<meta http-equiv="content-type" content="text/html; charset=utf-8"/>'));
         $this->assertTrue(str_contains($baseMetas, '<meta charset="utf-8"/>'));
-    }
-
-    public function testIs500ReturnsFalse() {
-        $this->assertFalse(is_500());
     }
 
     public function testGetBodyClassesDesktop() {

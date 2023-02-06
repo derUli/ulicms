@@ -539,7 +539,7 @@ function headline(?string $ipage = null): void {
 
 function apply_filter($text, string $type) {
     $modules = getAllModules();
-    $disabledModules = Vars::get("disabledModules");
+    $disabledModules = Vars::get("disabledModules") ?? [];
 
     $modulesCount = count($modules);
     for ($i = 0; $i < $modulesCount; $i++) {
@@ -645,14 +645,6 @@ function is_403(): bool {
 
 function is_404(): bool {
     return check_status() == "404 Not Found";
-}
-
-function is_500(): bool {
-    return check_status() == "500 Internal Server Error";
-}
-
-function is_503(): bool {
-    return check_status() == "503 Service Unavailable";
 }
 
 function buildtree(
@@ -948,12 +940,6 @@ function check_status(): string {
 function cms_release_year(): void {
     $v = new UliCMSVersion();
     echo $v->getReleaseYear();
-}
-
-// prepares a text / code for html output
-// replaces new lines with <br> tags
-function preparePlainTextforHTMLOutput($text): string {
-    return UliCMS\HTML\text($text);
 }
 
 DefaultContentTypes::initTypes();
