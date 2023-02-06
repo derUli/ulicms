@@ -9,7 +9,6 @@ $classes = [
     "DatasetNotFoundException",
     "ConnectionFailedException",
     "FileNotFoundException",
-    "ArgumentNullException",
     "SCSSCompileException",
     "UnknownContentTypeException",
     "NotSupportedException"

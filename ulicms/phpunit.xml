@@ -8,7 +8,6 @@
             <directory>vendor/</directory>
             <directory>installer.aus/</directory>
             <file>classes/helpers/load.php</file>
-            <directory>classes/exceptions</directory>
             <file>classes/renderers/load.php</file>
             <file>classes/objects/backend/load.php</file>
             <file>classes/objects/content/types/fields/load.php</file>

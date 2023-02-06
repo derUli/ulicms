@@ -29,7 +29,7 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase {
     public function testIsCrawler() {
         $pkg = new PackageManager();
 
-        if (!faster_in_array("CrawlerDetect", $pkg->getInstalledModules())) {
+        if (!in_array("CrawlerDetect", $pkg->getInstalledModules())) {
             $this->assertNotNull("CrawlerDetect is not installed. Skip this test");
             return;
         }
