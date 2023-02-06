@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace UliCMS\Models\Content\Advertisement;
+namespace App\Models\Content\Advertisement;
 
 use Database;
 use function tbname;

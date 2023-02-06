@@ -1,7 +1,7 @@
 <?php
 
 use App\Constants\RequestMethod;
-use UliCMS\Models\Content\Advertisement\Banner;
+use App\Models\Content\Advertisement\Banner;
 use UliCMS\HTML\Alert;
 use UliCMS\Models\Content\Categories;
 use App\Exceptions\DatasetNotFoundException;

@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Models\Content\Advertisement\Banners;
+use App\Models\Content\Advertisement\Banners;
 use UliCMS\Models\Content\Categories;
 use UliCMS\HTML\Alert;
 

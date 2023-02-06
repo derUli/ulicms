@@ -99,14 +99,11 @@ require_once dirname(__file__) . "/classes/objects/content/Module_Page.php";
 require_once dirname(__file__) . "/classes/objects/content/Video_Page.php";
 require_once dirname(__file__) . "/classes/objects/content/Audio_Page.php";
 require_once dirname(__file__) . "/classes/objects/content/Image_Page.php";
-require_once dirname(__file__) . "/classes/objects/content/Banner.php";
-require_once dirname(__file__) . "/classes/objects/content/Banners.php";
 require_once dirname(__file__) . "/classes/objects/content/Article.php";
 require_once dirname(__file__) . "/classes/objects/content/Comment.php";
 require_once dirname(__file__) . "/classes/objects/content/ContentFactory.php";
 require_once dirname(__file__) . "/classes/objects/content/CustomFields.php";
 require_once dirname(__file__) . "/classes/objects/content/Results.php";
-require_once dirname(__file__) . "/classes/objects/media/load.php";
 require_once dirname(__file__) . "/classes/objects/backend/load.php";
 
 require_once dirname(__file__) . "/UliCMSVersion.php";

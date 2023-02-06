@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Models\Content\Advertisement\Banner;
+use App\Models\Content\Advertisement\Banner;
 use App\Exceptions\DatasetNotFoundException;
 
 class BannerTest extends \PHPUnit\Framework\TestCase {

@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Models\Media\Audio;
+use App\Models\Media\Audio;
 use UliCMS\Models\Content\Categories;
 
 class AudioControllerTest extends \PHPUnit\Framework\TestCase {

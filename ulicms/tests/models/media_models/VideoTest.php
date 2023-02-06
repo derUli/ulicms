@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Models\Media\Video;
+use App\Models\Media\Video;
 use UliCMS\Models\Content\Category;
 
 class VideoTest extends \PHPUnit\Framework\TestCase {

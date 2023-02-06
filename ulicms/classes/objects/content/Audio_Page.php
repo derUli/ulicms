@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Models\Media\Audio;
+use App\Models\Media\Audio;
 
 // audio pages are pages that are linked to audio files
 // audio files are played with html5

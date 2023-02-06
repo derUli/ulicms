@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use UliCMS\Models\Media\Video;
+use App\Models\Media\Video;
 
 // video pages are pages that are linked to video files
 // video files are played with html5

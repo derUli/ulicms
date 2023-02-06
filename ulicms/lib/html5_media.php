@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use UliCMS\Models\Media\Audio;
-use UliCMS\Models\Media\Video;
+use App\Models\Media\Audio;
+use App\Models\Media\Video;
 
 function replaceAudioTags(string $txt): ?string {
     $audio_dir = "content/audio/";

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace UliCMS\Models\Media;
+namespace App\Models\Media;
 
 use UliCMS\Utils\File;
 use UliCMS\Models\Content\Category;
