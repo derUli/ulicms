@@ -4,58 +4,9 @@ declare(strict_types=1);
 
 defined('ULICMS_ROOT') or exit('no direct script access allowed');
 
-use Carbon\Carbon;
-
 // is $val a decimal number or a integer?
 function is_decimal($val): bool {
     return is_numeric($val) && !ctype_digit(strval($val));
-}
-
-function is_today($datetime = null): bool {
-    $carbon = get_carbon($datetime);
-    return $carbon->isToday();
-}
-
-function midnight($datetime = null) {
-    $carbon = get_carbon($datetime);
-    $midnight = $carbon->startOfDay();
-    return $midnight->getTimestamp();
-}
-
-function midday($datetime = null) {
-    $carbon = get_carbon($datetime);
-    $mdiday = $carbon->midday();
-    return $mdiday->getTimestamp();
-}
-
-function end_of_day($datetime = null) {
-    $carbon = get_carbon($datetime);
-    $endOfDay = $carbon->endOfDay();
-    return $endOfDay->getTimestamp();
-}
-
-function is_tomorrow($datetime = null): bool {
-    $carbon = get_carbon($datetime);
-    return $carbon->isTomorrow();
-}
-
-function is_yesterday($datetime = null): bool {
-    $carbon = get_carbon($datetime);
-    return $carbon->isYesterday();
-}
-
-function is_past($datetime = null): bool {
-    $carbon = get_carbon($datetime);
-    return $carbon->isPast();
-}
-
-function is_future($datetime = null): bool {
-    $carbon = get_carbon($datetime);
-    return $carbon->isFuture();
-}
-
-function get_carbon($datetime = null): Carbon {
-    return new Carbon($datetime ?? time(), date_default_timezone_get());
 }
 
 function is_blank($val = null): bool {
@@ -72,6 +23,7 @@ function is_numeric_array($var): bool {
     if (!is_array($var)) {
         return false;
     }
+
     foreach ($var as $key => $value) {
         if (!is_numeric($value)) {
             return false;

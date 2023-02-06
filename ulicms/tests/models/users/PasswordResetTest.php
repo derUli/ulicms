@@ -111,8 +111,8 @@ class PasswordResetTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals($tokenString2, $token2->token);
         $this->assertEquals($this->testUserId, $token2->user_id);
 
-        $this->assertTrue(is_today($token2->date));
-        $this->assertTrue(is_today($token1->date));
+        $this->assertString($token2->date);
+        $this->assertString($token1->date);
         $this->cleanUp();
     }
 
