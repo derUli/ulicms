@@ -5,7 +5,7 @@ use UliCMS\Helpers\TestHelper;
 class SystemRequirementsTest extends \PHPUnit\Framework\TestCase {
 
     public function testPhpVersion() {
-        $this->assertTrue(\UliCMS\Utils\VersionComparison\compare(phpversion(), "7.2", ">="));
+        $this->assertTrue(\UliCMS\Utils\VersionComparison\compare(phpversion(), "8.0.2", ">="));
     }
 
     public function testMySQLVersion() {

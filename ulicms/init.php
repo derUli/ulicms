@@ -1,4 +1,5 @@
 <?php
+
 // use this constant at the end
 // of the page load procedure to measure site performance
 define("START_TIME", microtime(true));
@@ -15,7 +16,7 @@ use UliCMS\Exceptions\ConnectionFailedException;
 use UliCMS\Exceptions\FileNotFoundException;
 use UliCMS\Exceptions\SqlException;
 use UliCMS\Constants\AuditLog;
-use UliCMS\Registries\HelperRegistry;
+use App\Registries\HelperRegistry;
 use UliCMS\Models\Content\TypeMapper;
 use UliCMS\Packages\PatchManager;
 
@@ -34,6 +35,24 @@ if (file_exists($composerAutoloadFile)) {
                     . "Please run \"./composer install\" to install dependecies."
     );
 }
+
+// Autoloader
+spl_autoload_register(function ($className) {
+
+    // Backwards compatiblity for old code
+    if (str_starts_with($className, 'UliCMS\\')) {
+        $className = 'App\\' . substring($className, 8);
+    }
+
+    $basePath = dirname(__FILE__) . "/{$className}.php";
+    $basePath = str_replace('\\', '/', $basePath);
+
+    if (!file_exists($basePath)) {
+        return;
+    }
+
+    require $basePath;
+});
 
 require_once dirname(__file__) . "/lib/load.php";
 require_once dirname(__file__) . "/classes/objects/privacy/load.php";
@@ -139,18 +158,12 @@ if (php_sapi_name() != "cli") {
     set_exception_handler('exception_handler');
 }
 
-// Backwards compatiblity for modules using the old config class name
-if (class_exists("CMSConfig") && !class_exists("config")) {
-    class_alias("CMSConfig", "config");
-}
-
 global $config;
 $config = new CMSConfig();
 
 // IF ULICMS_DEBUG is defined then display all errors except E_NOTICE,
 // else disable error_reporting from php.ini
-if ((defined("ULICMS_DEBUG") && ULICMS_DEBUG)
-        || (isset($config->debug) and $config->debug)) {
+if ((defined("ULICMS_DEBUG") && ULICMS_DEBUG) || (isset($config->debug) and $config->debug)) {
     error_reporting(E_ALL ^ E_NOTICE);
 } else {
     error_reporting(0);

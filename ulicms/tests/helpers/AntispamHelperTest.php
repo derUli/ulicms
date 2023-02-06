@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Registries\HelperRegistry;
+use App\Registries\HelperRegistry;
 
 class AntispamHelperTest extends \PHPUnit\Framework\TestCase {
 

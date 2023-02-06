@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace UliCMS\Registries;
+namespace App\Registries;
 
 use UliCMS\Exceptions\FileNotFoundException;
 use Vars;
