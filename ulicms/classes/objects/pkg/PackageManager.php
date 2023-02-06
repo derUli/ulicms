@@ -37,7 +37,7 @@ class PackageManager
                 $module = new Module($package);
                 return $module->isInstalled();
             case PackageTypes::TYPE_THEME:
-                return faster_in_array($package, getAllThemes());
+                return in_array($package, getAllThemes());
             default:
                 throw new BadMethodCallException(
                     "Package Type {$type} not supported"

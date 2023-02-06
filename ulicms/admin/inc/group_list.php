@@ -9,7 +9,7 @@ $groups = $permissionChecker->getAllGroups();
 
 $default_acl_group = intval(Settings::get("default_acl_group"));
 
-if (isset($_REQUEST["sort"]) and faster_in_array($_REQUEST["sort"], array(
+if (isset($_REQUEST["sort"]) && in_array($_REQUEST["sort"], array(
             "id",
             "name"
         ))) {

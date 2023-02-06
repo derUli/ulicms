@@ -13,7 +13,7 @@ use Carbon\Carbon;
  * @param type $haystack
  * @return bool
  */
-function faster_in_array($needle, $haystack): bool {
+function faster_in_array(mixed $needle, array $haystack, bool $strict = false): bool {
     if (!is_array($haystack)) {
         return false;
     }

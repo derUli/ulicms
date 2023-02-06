@@ -73,7 +73,7 @@ class PatchManager {
     ): bool {
         @set_time_limit(0);
         $test = $this->getInstalledPatchNames();
-        if (faster_in_array($name, $test)) {
+        if (in_array($name, $test)) {
             return false;
         }
 

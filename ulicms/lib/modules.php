@@ -28,11 +28,11 @@ function do_event(
         string $runs = ModuleEventConstants::RUNS_ONCE
 ): void {
     $modules = getAllModules();
-    $disabledModules = Vars::get("disabledModules");
+    $disabledModules = Vars::get("disabledModules") ?? [];
     $modulesCount = count($modules);
 
     for ($hook_i = 0; $hook_i < $modulesCount; $hook_i++) {
-        if (faster_in_array($modules[$hook_i], $disabledModules)) {
+        if (in_array($modules[$hook_i], $disabledModules)) {
             continue;
         }
         $file1 = getModulePath($modules[$hook_i], true) .
@@ -84,10 +84,10 @@ function replaceShortcodesWithModules(
     $string = $replaceOther ? replaceOtherShortCodes($string) : $string;
 
     $allModules = ModuleHelper::getAllEmbedModules();
-    $disabledModules = Vars::get("disabledModules");
+    $disabledModules = Vars::get("disabledModules") ?? [];
 
     foreach ($allModules as $module) {
-        if (faster_in_array($module, $disabledModules) || !stringContainsShortCodes($string, $module)) {
+        if (in_array($module, $disabledModules) || !stringContainsShortCodes($string, $module)) {
             continue;
         }
         $stringToReplace1 = '[module="' . $module . '"]';

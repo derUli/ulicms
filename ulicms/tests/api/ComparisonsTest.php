@@ -182,7 +182,7 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testFasterInArrayReturnsTrue() {
-        $array = array("hello", "world", 123);
+        $array = ["hello", "world", 123];
         $this->assertTrue(faster_in_array("world", $array));
         $this->assertTrue(faster_in_array(123, $array));
     }
@@ -191,7 +191,6 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase {
         $array = array("hello", "world", 123);
         $this->assertFalse(faster_in_array("germany", $array));
         $this->assertFalse(faster_in_array(789, $array));
-        $this->assertFalse(faster_in_array(789, "not-an-array"));
     }
 
     public function testVarIsType() {

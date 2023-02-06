@@ -12,7 +12,7 @@ $languages = getAvailableBackendLanguages();
 $languagesCount = count($languages);
 
 $default_language = getSystemLanguage();
-if (isset($_SESSION["language"]) and faster_in_array($_SESSION["language"], $languages)) {
+if (isset($_SESSION["language"]) && in_array($_SESSION["language"], $languages)) {
     $default_language = $_SESSION["language"];
 }
 

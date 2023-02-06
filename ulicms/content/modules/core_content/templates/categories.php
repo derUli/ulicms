@@ -8,7 +8,7 @@ $permissionChecker = new ACL();
 if (!$permissionChecker->hasPermission("categories")) {
     noPerms();
 } else {
-    if (isset($_GET["order"]) and faster_in_array($_GET["order"], array(
+    if (isset($_GET["order"]) && in_array($_GET["order"], array(
                 "id",
                 "name",
                 "description",

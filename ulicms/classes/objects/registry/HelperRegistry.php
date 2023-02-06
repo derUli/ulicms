@@ -7,7 +7,6 @@ namespace UliCMS\Registries;
 use UliCMS\Exceptions\FileNotFoundException;
 use Vars;
 use function getAllModules;
-use function faster_in_array;
 use function getModuleMeta;
 use function endsWith;
 use function getModulePath;
@@ -24,9 +23,9 @@ class HelperRegistry
         if (!defined("RESPONSIVE_FM")) {
             $helperRegistry = [];
             $modules = getAllModules();
-            $disabledModules = Vars::get("disabledModules");
+            $disabledModules = Vars::get("disabledModules") ?? [];
             foreach ($modules as $module) {
-                if (faster_in_array($module, $disabledModules)) {
+                if (in_array($module, $disabledModules)) {
                     continue;
                 }
                 $helpers = getModuleMeta($module, "helpers");

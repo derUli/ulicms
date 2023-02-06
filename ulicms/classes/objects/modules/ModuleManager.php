@@ -73,7 +73,7 @@ class ModuleManager
         $allModules = $this->getEnabledModuleNames();
         foreach ($allModules as $mod) {
             $dependencies = getModuleMeta($mod, "dependencies");
-            if ($dependencies && faster_in_array($module, $dependencies)) {
+            if ($dependencies && in_array($module, $dependencies)) {
                 $allDeps [] = $mod;
                 $allDeps = array_combine($allDeps, $this->getDependentModules($mod, $allDeps));
             }
@@ -105,7 +105,7 @@ class ModuleManager
         $dataBaseModules = $this->getAllModuleNames();
         // Nicht mehr vorhandene Module entfernen
         foreach ($dataBaseModules as $dbModule) {
-            if (!faster_in_array($dbModule, $realModules)) {
+            if (!in_array($dbModule, $realModules)) {
                 $module = new Module($dbModule);
                 $module->delete();
             }
@@ -123,7 +123,7 @@ class ModuleManager
         // Settings aller aktiven Module auslesen und registrieren
         foreach ($realModules as $realModule) {
             $version = getModuleMeta($realModule, "version");
-            if (faster_in_array($realModule, $dataBaseModules)) {
+            if (in_array($realModule, $dataBaseModules)) {
                 $this->updateModuleVersion($version, $realModule);
                 continue;
             }

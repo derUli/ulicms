@@ -47,7 +47,7 @@ do_event("after_set_locale_by_language");
 // configuration file
 // reject access to the backend if the client's ip is not whitelisted
 $cfg = new CMSConfig();
-if (isset($cfg->ip_whitelist) && is_array($cfg->ip_whitelist) && count($cfg->ip_whitelist) > 0 && !faster_in_array(get_ip(), $cfg->ip_whitelist)) {
+if (isset($cfg->ip_whitelist) && is_array($cfg->ip_whitelist) && count($cfg->ip_whitelist) > 0 && !in_array(get_ip(), $cfg->ip_whitelist)) {
     ExceptionResult(get_translation("login_from_ip_not_allowed"));
     die();
 }

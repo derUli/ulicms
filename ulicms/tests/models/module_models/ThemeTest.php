@@ -6,7 +6,7 @@ class ThemeTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetVersionReturnsVersion() {
         $theme = new Theme("impro17");
-        $this->assertEquals("2.1.4", $theme->getVersion());
+        $this->assertEquals("2.1.5", $theme->getVersion());
     }
 
     public function testGetVersionReturnsNull() {

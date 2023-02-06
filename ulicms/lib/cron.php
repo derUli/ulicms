@@ -13,7 +13,7 @@ if (!defined("LOADED_LANGUAGE_FILE")) {
         $_SESSION = [];
     }
 
-    if (!empty($_GET["language"]) && faster_in_array($_GET["language"], $languages)) {
+    if (!empty($_GET["language"]) && in_array($_GET["language"], $languages)) {
         $_SESSION["language"] = Database::escapeValue(
                         $_GET["language"],
                         DB_TYPE_STRING
@@ -26,7 +26,7 @@ if (!defined("LOADED_LANGUAGE_FILE")) {
 
     setLocaleByLanguage();
 
-    if (faster_in_array($_SESSION["language"], $languages) &&
+    if (in_array($_SESSION["language"], $languages) &&
             file_exists(getLanguageFilePath($_SESSION["language"]))) {
         require_once getLanguageFilePath($_SESSION["language"]);
     } elseif (file_exists(getLanguageFilePath("en"))) {

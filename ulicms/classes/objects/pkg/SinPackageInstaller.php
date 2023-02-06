@@ -82,7 +82,7 @@ class SinPackageInstaller
         if (isset($data["dependencies"]) and is_array($data["dependencies"])) {
             $dependencies = $data["dependencies"];
             foreach ($dependencies as $dependency) {
-                if (!faster_in_array($dependency, $installed_modules)) {
+                if (!in_array($dependency, $installed_modules)) {
                     $this->errors[] = get_translation(
                         "dependency_x_is_not_installed",
                         [

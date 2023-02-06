@@ -132,7 +132,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
     public function testGetThemeMeta() {
         $meta = getThemeMeta("impro17");
         $this->assertIsArray($meta);
-        $this->assertEquals("2.1.4", $meta["version"]);
+        $this->assertEquals("2.1.5", $meta["version"]);
     }
 
     public function testBool2YesNo() {

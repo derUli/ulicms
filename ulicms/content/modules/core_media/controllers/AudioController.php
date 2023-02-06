@@ -19,7 +19,7 @@ class AudioController extends Controller {
                 "video/x-mpeg",
                 "audio/mpeg"
             );
-            if (faster_in_array($mp3_type, $mp3_allowed_mime_type)) {
+            if (in_array($mp3_type, $mp3_allowed_mime_type)) {
                 $target = $audio_folder . "/" . $mp3_file;
                 if (move_uploaded_file(
                                 $_FILES ['mp3_file'] ['tmp_name'],
@@ -45,7 +45,7 @@ class AudioController extends Controller {
                 "application/ogg",
                 "video/ogg"
             );
-            if (faster_in_array($ogg_type, $ogg_allowed_mime_type)) {
+            if (in_array($ogg_type, $ogg_allowed_mime_type)) {
                 $target = $audio_folder . "/" . $ogg_file;
                 if (move_uploaded_file(
                                 $_FILES ['ogg_file'] ['tmp_name'],

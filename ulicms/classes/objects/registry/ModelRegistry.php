@@ -14,9 +14,9 @@ class ModelRegistry
         if (!defined("RESPONSIVE_FM")) {
             $modelRegistry = [];
             $modules = getAllModules();
-            $disabledModules = Vars::get("disabledModules");
+            $disabledModules = Vars::get("disabledModules") ?? [];
             foreach ($modules as $module) {
-                if (faster_in_array($module, $disabledModules)) {
+                if (in_array($module, $disabledModules)) {
                     continue;
                 }
                 $models = getModuleMeta($module, "models") ?

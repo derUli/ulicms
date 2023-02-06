@@ -18,7 +18,7 @@ class JSTranslation
 
     public function addKey(string $name): void
     {
-        if (!faster_in_array($name, $this->keys)) {
+        if (!in_array($name, $this->keys)) {
             $this->keys[] = $name;
         }
     }

@@ -61,7 +61,7 @@ class DesignSettingsController extends Controller {
         $themes = getAllThemes();
         if (empty($_REQUEST["mobile_theme"])) {
             Settings::delete("mobile_theme");
-        } elseif (faster_in_array($_REQUEST["mobile_theme"], $themes)) {
+        } elseif (in_array($_REQUEST["mobile_theme"], $themes)) {
             Settings::set("mobile_theme", $_REQUEST["mobile_theme"]);
             $mobile_theme = $_REQUEST["mobile_theme"];
         }

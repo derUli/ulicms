@@ -510,8 +510,8 @@ class RoboFile extends Tasks {
 
         $filteredPatches = [];
         foreach ($availablePatches as $patch) {
-            if (faster_in_array($patch->name, $patchesToInstall) ||
-                    faster_in_array("all", $patchesToInstall)) {
+            if (in_array($patch->name, $patchesToInstall) ||
+                    in_array("all", $patchesToInstall)) {
                 $filteredPatches[] = $patch;
             }
         }

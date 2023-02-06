@@ -33,7 +33,7 @@ abstract class Controller
     {
         $sClass = $_REQUEST["sClass"];
         if (isset($_REQUEST["sMethod"])
-                and StringHelper::isNotNullOrEmpty($_REQUEST["sMethod"]) && !faster_in_array(
+                && StringHelper::isNotNullOrEmpty($_REQUEST["sMethod"]) && !in_array(
                     $_REQUEST["sMethod"],
                     $this->blacklist
                 )

@@ -36,9 +36,9 @@ class ActionRegistry
                 }
             }
             $modules = getAllModules();
-            $disabledModules = Vars::get("disabledModules");
+            $disabledModules = Vars::get("disabledModules") ?? [];
             foreach ($modules as $module) {
-                if (faster_in_array($module, $disabledModules)) {
+                if (in_array($module, $disabledModules)) {
                     continue;
                 }
                 $cActions = getModuleMeta($module, "views") ?
@@ -72,9 +72,9 @@ class ActionRegistry
     private static function loadActionPermissions(): void
     {
         $modules = getAllModules();
-        $disabledModules = Vars::get("disabledModules");
+        $disabledModules = Vars::get("disabledModules") ?? [];
         foreach ($modules as $module) {
-            if (faster_in_array($module, $disabledModules)) {
+            if (in_array($module, $disabledModules)) {
                 continue;
             }
             $action_permissions = getModuleMeta($module, "action_permissions");
