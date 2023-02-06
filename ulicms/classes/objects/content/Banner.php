@@ -251,7 +251,7 @@ class Banner extends Model
             "gif",
             "html"
         );
-        if (faster_in_array($type, $allowedTypes)) {
+        if (in_array($type, $allowedTypes)) {
             $this->type = $type;
         }
     }

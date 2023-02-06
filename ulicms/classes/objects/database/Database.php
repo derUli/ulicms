@@ -2,25 +2,25 @@
 
 declare(strict_types=1);
 
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
 use UliCMS\Exceptions\SqlException;
 
 // this class provides an abstraction for database access
 // and many helpful utility methods to do database stuff
-class Database
-{
+class Database {
+
     private static $connection = null;
     private static $echoQueries = false;
     private static $schema_selected = false;
 
     // this is used to show sql queries while running the unit tests
-    public static function setEchoQueries($echoQueries = true): void
-    {
+    public static function setEchoQueries($echoQueries = true): void {
         self::$echoQueries = $echoQueries;
     }
 
     // force MySQL into strict mode
-    public static function getSqlStrictModeFlags(): array
-    {
+    public static function getSqlStrictModeFlags(): array {
         return [
             "ONLY_FULL_GROUP_BY",
             "STRICT_TRANS_TABLES",
@@ -34,12 +34,12 @@ class Database
 
     // Connect with database server
     public static function connect(
-        string $server,
-        string $user,
-        string $password,
-        int $port,
-        ?string $socket = null,
-        bool $db_strict_mode = false
+            string $server,
+            string $user,
+            string $password,
+            int $port,
+            ?string $socket = null,
+            bool $db_strict_mode = false
     ): ?mysqli {
         $connected = mysqli_connect($server, $user, $password, "", $port, $socket);
         self::$connection = $connected ? $connected : null;
@@ -62,22 +62,20 @@ class Database
     }
 
     // Close the databse connection
-    public static function close(): void
-    {
+    public static function close(): void {
         mysqli_close(self::$connection);
         self::$connection = null;
     }
 
     // Create a database schema
-    public static function createSchema($name): bool
-    {
+    public static function createSchema($name): bool {
         return Database::query("CREATE DATABASE {$name}");
     }
 
     // TODO: Do logging when auto initialize the database
     public static function setupSchemaAndSelect(
-        string $schemaName,
-        array $otherScripts = []
+            string $schemaName,
+            array $otherScripts = []
     ): bool {
         $selected = self::select($schemaName);
         if (!$selected) {
@@ -89,8 +87,8 @@ class Database
 
         if ($selected) {
             $migrator = new DBMigrator(
-                "core",
-                Path::resolve("ULICMS_ROOT/lib/migrations/up")
+                    "core",
+                    Path::resolve("ULICMS_ROOT/lib/migrations/up")
             );
             $migrator->migrate();
             foreach ($otherScripts as $script) {
@@ -105,8 +103,7 @@ class Database
     }
 
     // Abstraktion für Ausführen von SQL Strings
-    public static function query(string $sql, bool $replacePrefix = false)
-    {
+    public static function query(string $sql, bool $replacePrefix = false) {
         $cfg = new CMSConfig();
         if ($replacePrefix) {
             $sql = str_replace("{prefix}", $cfg->db_prefix, $sql);
@@ -127,8 +124,8 @@ class Database
 
     // execute a sql string with multiple statements
     public static function multiQuery(
-        string $sql,
-        bool $replacePrefix = false
+            string $sql,
+            bool $replacePrefix = false
     ) {
         $cfg = new CMSConfig();
         if ($replacePrefix) {
@@ -145,19 +142,16 @@ class Database
     }
 
     // get the current database connection
-    public static function getConnection(): ?mysqli
-    {
+    public static function getConnection(): ?mysqli {
         return self::$connection;
     }
 
     // returns true if UliCMS is connected to database
-    public static function isConnected(): bool
-    {
+    public static function isConnected(): bool {
         return !is_null(self::$connection);
     }
 
-    public static function setConnection(?mysqli $con): void
-    {
+    public static function setConnection(?mysqli $con): void {
         self::$connection = $con;
     }
 
@@ -169,9 +163,9 @@ class Database
     // the method replaces the question marks with the items of the $args array
     // $args are automatically escaped to prevent sql injections
     public static function pQuery(
-        string $sql,
-        array $args = [],
-        bool $replacePrefix = false
+            string $sql,
+            array $args = [],
+            bool $replacePrefix = false
     ) {
         $preparedQuery = "";
         $chars = mb_str_split($sql);
@@ -199,24 +193,21 @@ class Database
         return Database::query($preparedQuery, $replacePrefix);
     }
 
-    public static function getServerVersion(): ?string
-    {
+    public static function getServerVersion(): ?string {
         return mysqli_get_server_info(self::$connection);
     }
 
-    public static function getClientInfo(): string
-    {
+    public static function getClientInfo(): string {
         return mysqli_get_client_info(self::$connection);
     }
 
-    public static function getClientVersion(): ?int
-    {
+    public static function getClientVersion(): ?int {
         return mysqli_get_client_version();
     }
 
     public static function dropTable(
-        string $table,
-        bool $prefix = true
+            string $table,
+            bool $prefix = true
     ): bool {
         if ($prefix) {
             $table = tbname($table);
@@ -230,17 +221,16 @@ class Database
         return self::query("DROP TABLE IF EXISTS $table");
     }
 
-    public static function dropSchema(string $schema): bool
-    {
+    public static function dropSchema(string $schema): bool {
         $schema = self::escapeName($schema);
         return self::query("DROP SCHEMA IF EXISTS $schema ");
     }
 
     public static function selectMin(
-        string $table,
-        string $column,
-        string $where = "",
-        bool $prefix = true
+            string $table,
+            string $column,
+            string $where = "",
+            bool $prefix = true
     ) {
         if ($prefix) {
             $table = tbname($table);
@@ -261,10 +251,10 @@ class Database
     }
 
     public static function selectMax(
-        string $table,
-        string $column,
-        string $where = "",
-        bool $prefix = true
+            string $table,
+            string $column,
+            string $where = "",
+            bool $prefix = true
     ) {
         if ($prefix) {
             $table = tbname($table);
@@ -285,10 +275,10 @@ class Database
     }
 
     public static function selectAvg(
-        string $table,
-        string $column,
-        string $where = "",
-        bool $prefix = true
+            string $table,
+            string $column,
+            string $where = "",
+            bool $prefix = true
     ) {
         if ($prefix) {
             $table = tbname($table);
@@ -309,9 +299,9 @@ class Database
     }
 
     public static function deleteFrom(
-        string $table,
-        string $where = "",
-        bool $prefix = true
+            string $table,
+            string $where = "",
+            bool $prefix = true
     ): bool {
         if ($prefix) {
             $table = tbname($table);
@@ -328,8 +318,8 @@ class Database
     }
 
     public static function truncateTable(
-        string $table,
-        bool $prefix = true
+            string $table,
+            bool $prefix = true
     ): bool {
         if ($prefix) {
             $table = tbname($table);
@@ -340,9 +330,9 @@ class Database
     }
 
     public static function dropColumn(
-        string $table,
-        string $column,
-        bool $prefix = true
+            string $table,
+            string $column,
+            bool $prefix = true
     ): bool {
         if ($prefix) {
             $table = tbname($table);
@@ -354,12 +344,12 @@ class Database
     }
 
     public static function selectAll(
-        string $table,
-        array $columns = [],
-        string $where = "",
-        array $args = [],
-        bool $replacePrefix = true,
-        string $order = ""
+            string $table,
+            array $columns = [],
+            string $where = "",
+            array $args = [],
+            bool $replacePrefix = true,
+            string $order = ""
     ): ?mysqli_result {
         if ($replacePrefix) {
             $table = tbname($table);
@@ -384,42 +374,35 @@ class Database
         return self::pQuery($sql, $args, $replacePrefix);
     }
 
-    public static function escapeName(string $name): string
-    {
+    public static function escapeName(string $name): string {
         $name = str_replace("'", "", $name);
         $name = str_replace("\"", "", $name);
         $name = "`" . db_escape($name) . "`";
         return $name;
     }
 
-    public static function getLastInsertID(): ?int
-    {
+    public static function getLastInsertID(): ?int {
         return mysqli_insert_id(self::$connection);
     }
 
-    public static function getInsertID(): ?int
-    {
+    public static function getInsertID(): ?int {
         return self::getLastInsertID();
     }
 
     // Fetch Row in diversen Datentypen
-    public static function fetchArray(?mysqli_result $result)
-    {
+    public static function fetchArray(?mysqli_result $result) {
         return mysqli_fetch_array($result);
     }
 
-    public static function fetchField(?mysqli_result $result)
-    {
+    public static function fetchField(?mysqli_result $result) {
         return mysqli_fetch_field($result);
     }
 
-    public static function fetchAssoc(?mysqli_result $result)
-    {
+    public static function fetchAssoc(?mysqli_result $result) {
         return mysqli_fetch_assoc($result);
     }
 
-    public static function fetchAll(?mysqli_result $result): array
-    {
+    public static function fetchAll(?mysqli_result $result): array {
         $datasets = [];
 
         while (!is_null($result) and $row = self::fetchObject($result)) {
@@ -430,63 +413,53 @@ class Database
     }
 
     // Datenbank auswählen
-    public static function select(string $schema): bool
-    {
+    public static function select(string $schema): bool {
         $selected = mysqli_select_db(self::$connection, $schema);
         self::$schema_selected = $selected;
         return $selected;
     }
 
-    public static function isSchemaSelected(): bool
-    {
-        return self::$schema_selected ;
+    public static function isSchemaSelected(): bool {
+        return self::$schema_selected;
     }
-    public static function getNumFieldCount(): ?int
-    {
+
+    public static function getNumFieldCount(): ?int {
         return mysqli_field_count(self::$connection);
     }
 
-    public static function getAffectedRows(): ?int
-    {
+    public static function getAffectedRows(): ?int {
         return mysqli_affected_rows(self::$connection);
     }
 
-    public static function fetchObject(mysqli_result $result): ?object
-    {
+    public static function fetchObject(mysqli_result $result): ?object {
         return mysqli_fetch_object($result);
     }
 
-    public static function fetchRow(mysqli_result $result)
-    {
+    public static function fetchRow(mysqli_result $result) {
         return mysqli_fetch_row($result);
     }
 
-    public static function getNumRows(mysqli_result $result): ?int
-    {
+    public static function getNumRows(mysqli_result $result): ?int {
         return mysqli_num_rows($result);
     }
 
     // returns the last mysqli error
-    public static function getLastError(): ?string
-    {
+    public static function getLastError(): ?string {
         return mysqli_error(self::$connection);
     }
 
     // returns the last mysqli error
-    public static function error(): ?string
-    {
+    public static function error(): ?string {
         return self::getLastError();
     }
 
     // returns the last mysqli error
-    public static function getError(): ?string
-    {
+    public static function getError(): ?string {
         return self::getLastError();
     }
 
     // returns a list of all tables in the database
-    public static function getAllTables(): array
-    {
+    public static function getAllTables(): array {
         $tableList = [];
         $res = mysqli_query(self::$connection, "SHOW TABLES");
         while ($cRow = mysqli_fetch_array($res)) {
@@ -499,8 +472,8 @@ class Database
 
     // returns true if a database table exists
     public static function tableExists(
-        string $table,
-        bool $prefix = true
+            string $table,
+            bool $prefix = true
     ): bool {
         $tableName = $prefix ? tbname($table) : $table;
         return faster_in_array($tableName, self::getAllTables());
@@ -509,8 +482,7 @@ class Database
     // escape values to prevent sql injections
     // don't manually call this, if you use
     // pQuery() to make queries
-    public static function escapeValue($value, ?int $type = null)
-    {
+    public static function escapeValue($value, ?int $type = null) {
         if (is_null($value)) {
             return "NULL";
         }
@@ -531,8 +503,8 @@ class Database
                 return floatval($value);
             } elseif ($type === DB_TYPE_STRING) {
                 return mysqli_real_escape_string(
-                    self::$connection,
-                    strval($value)
+                        self::$connection,
+                        strval($value)
                 );
             } elseif ($type === DB_TYPE_BOOL) {
                 return intval($value);
@@ -544,8 +516,8 @@ class Database
 
     // returns a list of all tables of a table
     public static function getColumnNames(
-        string $table,
-        bool $prefix = true
+            string $table,
+            bool $prefix = true
     ): array {
         $retval = [];
         if ($prefix) {
@@ -566,8 +538,7 @@ class Database
     // if the result contains one result returns it
     // if the result contains no result returns null
     // if the result returns more than one result throws an exception
-    public static function fetchSingle(?mysqli_result $result): ?object
-    {
+    public static function fetchSingle(?mysqli_result $result): ?object {
         if (self::getNumRows($result) > 1) {
             throw new RangeException("Result contains more than one element.");
         }
@@ -581,8 +552,8 @@ class Database
     // if the result contains no result returns a default object
     // if the result returns more than one result throws an exception
     public static function fetchSingleOrDefault(
-        ?mysqli_result $result,
-        ?object $default = null
+            ?mysqli_result $result,
+            ?object $default = null
     ): ?object {
         if (self::getNumRows($result) > 1) {
             throw new RangeException("Result contains more than one element.");
@@ -595,8 +566,7 @@ class Database
 
     // fetches and returns the first dataset of a mysqli_result
     // as object
-    public static function fetchFirst(mysqli_result $result): ?object
-    {
+    public static function fetchFirst(mysqli_result $result): ?object {
         if (Database::getNumRows($result) > 0) {
             return self::fetchObject($result);
         }
@@ -607,8 +577,8 @@ class Database
     // as object
     // if there are no results, return a default object
     public static function fetchFirstOrDefault(
-        mysqli_result$result,
-        ?object $default = null
+            mysqli_result $result,
+            ?object $default = null
     ): ?object {
         if (Database::getNumRows($result) > 0) {
             return self::fetchObject($result);
@@ -617,28 +587,25 @@ class Database
     }
 
     // returns true if the database result contains at least one row
-    public static function any(mysqli_result $result): bool
-    {
+    public static function any(mysqli_result $result): bool {
         return (Database::getNumRows($result) > 0);
     }
 
     // used for multi queries
-    public static function hasMoreResults(): bool
-    {
+    public static function hasMoreResults(): bool {
         return mysqli_more_results(self::$connection);
     }
 
     // used for multi queries
-    public static function loadNextResult(): bool
-    {
+    public static function loadNextResult(): bool {
         return mysqli_next_result(self::$connection);
     }
 
     // used for multi queries
-    public static function storeResult(): mysqli_result
-    {
+    public static function storeResult(): mysqli_result {
         return mysqli_store_result(self::$connection);
     }
+
 }
 
 // for backwards compatiblity

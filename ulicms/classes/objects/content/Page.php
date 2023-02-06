@@ -1,5 +1,7 @@
 <?php
 
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
 use UliCMS\Security\Permissions\PagePermissions;
 use UliCMS\Models\Content\Comment;
 use UliCMS\Models\Content\VCS;
@@ -403,7 +405,7 @@ class Page extends Content {
             $matchesCount = count($match[1]);
             for ($i = 0; $i < $matchesCount; $i++) {
                 $id = unhtmlspecialchars($match[1][$i]);
-                if (!faster_in_array($id, $result)) {
+                if (!in_array($id, $result)) {
                     $result[] = $id;
                 }
             }
@@ -452,7 +454,7 @@ class Page extends Content {
                         $commentable_content_types
                 );
 
-                if (count($commentable_content_types) > 0 && !faster_in_array(
+                if (count($commentable_content_types) > 0 && !in_array(
                                 $this->type,
                                 $commentable_content_types
                         )) {

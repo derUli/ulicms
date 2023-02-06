@@ -96,11 +96,11 @@ function is_numeric_array($var): bool {
 }
 
 function is_true($var): bool {
-    return (isset($var) and $var);
+    return (isset($var) && $var);
 }
 
 function is_false($var): bool {
-    return !(isset($var) and $var);
+    return !is_true($var);
 }
 
 // sind wir gerade im Adminordner?
