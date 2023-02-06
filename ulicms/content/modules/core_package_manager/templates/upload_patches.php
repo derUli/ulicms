@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Packages\PatchManager;
+use App\Packages\PatchManager;
 
 $permissionChecker = new ACL();
 if (!$permissionChecker->hasPermission("upload_patches")) {

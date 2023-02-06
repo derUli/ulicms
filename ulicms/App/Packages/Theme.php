@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace UliCMS\Packages;
+namespace App\Packages;
 
 use function getThemeMeta;
 use function getTemplateDirPath;

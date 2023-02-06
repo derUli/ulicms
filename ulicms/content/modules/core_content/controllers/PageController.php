@@ -9,7 +9,7 @@ use UliCMS\Models\Content\Types\DefaultContentTypes;
 use Rakit\Validation\Validator;
 use UliCMS\Security\PermissionChecker;
 use function UliCMS\Security\XSSProtection\stripTags;
-use UliCMS\Models\Content\TypeMapper;
+use App\Models\Content\TypeMapper;
 use App\Constants\LinkTarget;
 use UliCMS\Utils\CacheUtil;
 use zz\Html\HTMLMinify;

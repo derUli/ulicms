@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use UliCMS\Packages\PatchManager;
-use UliCMS\Services\Connectors\eXtend\AvailablePackageVersionMatcher;
+use App\Packages\PatchManager;
+use App\Services\Connectors\AvailablePackageVersionMatcher;
 use UliCMS\Utils\CacheUtil;
 use \Robo\Tasks;
 use App\Exceptions\SqlException;

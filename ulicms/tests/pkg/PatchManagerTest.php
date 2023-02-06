@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Packages\PatchManager;
+use App\Packages\PatchManager;
 
 class PatchManagerTest extends \PHPUnit\Framework\TestCase {
 

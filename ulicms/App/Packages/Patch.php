@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace UliCMS\Packages;
+namespace App\Packages;
 
-use UliCMS\Packages\PatchManager;
+use App\Packages\PatchManager;
 
 class Patch
 {

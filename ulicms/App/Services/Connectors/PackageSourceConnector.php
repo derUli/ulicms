@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace UliCMS\Services\Connectors;
+namespace App\Services\Connectors;
 
 use Settings;
 use function cms_version;

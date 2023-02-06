@@ -3,7 +3,7 @@
 // TODO: Rewrite this view, move logic to PageController
 // Join new and edit views to one form
 
-use UliCMS\Models\Content\TypeMapper;
+use App\Models\Content\TypeMapper;
 use UliCMS\Security\ContentPermissionChecker;
 use UliCMS\Security\PermissionChecker;
 use UliCMS\Models\Content\Comment;

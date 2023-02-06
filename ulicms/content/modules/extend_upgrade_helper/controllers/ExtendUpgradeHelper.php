@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use UliCMS\Services\Connectors\eXtend\AvailablePackageVersionMatcher;
+use App\Services\Connectors\AvailablePackageVersionMatcher;
 
 class ExtendUpgradeHelper extends Controller {
 

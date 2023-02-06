@@ -6,7 +6,7 @@ declare(strict_types=1);
 // Die Namen der Modelklassen sollten direkt gespeichert werden in der Tabelle
 // content
 
-namespace UliCMS\Models\Content;
+namespace App\Models\Content;
 
 use ModuleManager;
 use function getModuleMeta;

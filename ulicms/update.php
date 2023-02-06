@@ -14,7 +14,7 @@ if (file_exists("cms-config.php") && !file_exists($configFile)) {
 
 require_once "init.php";
 
-use UliCMS\Packages\PatchManager;
+use App\Packages\PatchManager;
 use UliCMS\Utils\CacheUtil;
 
 // "var" is old and should not be used in PHP >= 5

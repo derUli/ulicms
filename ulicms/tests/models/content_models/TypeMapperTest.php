@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Models\Content\TypeMapper;
+use App\Models\Content\TypeMapper;
 
 class TypeMapperTest extends \PHPUnit\Framework\TestCase {
 

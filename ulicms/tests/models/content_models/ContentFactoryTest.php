@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Models\Content\TypeMapper;
+use App\Models\Content\TypeMapper;
 use App\Exceptions\UnknownContentTypeException;
 use UliCMS\Models\Content\Comment;
 use UliCMS\Models\Content\Category;

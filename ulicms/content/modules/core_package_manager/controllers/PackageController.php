@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use UliCMS\Services\Connectors\PackageSourceConnector;
+use App\Services\Connectors\PackageSourceConnector;
 use function UliCMS\HTML\text;
 use zz\Html\HTMLMinify;
 

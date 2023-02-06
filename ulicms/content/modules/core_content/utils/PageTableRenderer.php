@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace UliCMS\CoreContent;
 
 use ContentFactory;
-use UliCMS\Models\Content\TypeMapper;
+use App\Models\Content\TypeMapper;
 use Database;
 use User;
 use UliCMS\CoreContent\Partials\ViewButtonRenderer;

@@ -1,7 +1,7 @@
 <?php
 
 use App\Exceptions\CorruptDownloadException;
-use UliCMS\Packages\Patch;
+use App\Packages\Patch;
 
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("update_system")) {

@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Packages\Patch;
+use App\Packages\Patch;
 
 class PatchTest extends \PHPUnit\Framework\TestCase {
 

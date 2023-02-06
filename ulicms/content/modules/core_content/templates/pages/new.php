@@ -2,7 +2,7 @@
 
 // TODO: Rewrite this view, move logic to PageController
 // Join new and edit views to one form
-use UliCMS\Models\Content\TypeMapper;
+use App\Models\Content\TypeMapper;
 use UliCMS\Models\Content\Categories;
 use UliCMS\Models\Content\Language;
 use UliCMS\Models\Content\Types\DefaultContentTypes;

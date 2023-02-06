@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Packages\Theme;
+use App\Packages\Theme;
 
 class ThemeTest extends \PHPUnit\Framework\TestCase {
 

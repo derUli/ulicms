@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Services\Connectors\eXtend\AvailablePackageVersionMatcher;
+use App\Services\Connectors\AvailablePackageVersionMatcher;
 
 class AvailablePackageVersionMatcherTest extends \PHPUnit\Framework\TestCase {
 

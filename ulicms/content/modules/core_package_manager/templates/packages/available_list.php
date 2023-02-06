@@ -4,7 +4,7 @@
 // This file should not contain any business logic.
 // It should only do output
 // Implement a backend action which fetches the index of the package source
-use UliCMS\Services\Connectors\PackageSourceConnector;
+use App\Services\Connectors\PackageSourceConnector;
 
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("install_packages")) {

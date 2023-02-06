@@ -15,8 +15,8 @@ use App\Exceptions\FileNotFoundException;
 use App\Exceptions\SqlException;
 use App\Constants\AuditLog;
 use App\Registries\HelperRegistry;
-use UliCMS\Models\Content\TypeMapper;
-use UliCMS\Packages\PatchManager;
+use App\Models\Content\TypeMapper;
+use App\Packages\PatchManager;
 
 // Autoloader
 spl_autoload_register(function ($className) {
@@ -29,9 +29,9 @@ spl_autoload_register(function ($className) {
 
         $className = 'App\\' . substring($className, 8);
     }
-    
+
     // Interim solution for non namespaced classes
-    if(!str_contains($className, "\\")){
+    if (!str_contains($className, "\\")) {
         $className = "App\\non_namespaced\\{$className}";
     }
 
@@ -73,18 +73,14 @@ require_once dirname(__file__) . "/classes/objects/content/VCS.php";
 require_once dirname(__file__) . "/classes/objects/content/types/ContentType.php";
 require_once dirname(__file__) . "/classes/objects/content/types/DefaultContentTypes.php";
 require_once dirname(__file__) . "/classes/objects/content/types/fields/load.php";
-
-require_once dirname(__file__) . "/classes/objects/pkg/load.php";
 require_once dirname(__file__) . "/classes/objects/registry/load.php";
 require_once dirname(__file__) . "/classes/objects/logging/load.php";
 require_once dirname(__file__) . "/classes/objects/html/load.php";
-require_once dirname(__file__) . "/classes/objects/content/TypeMapper.php";
 require_once dirname(__file__) . "/classes/objects/database/load.php";
 require_once dirname(__file__) . "/classes/objects/security/load.php";
 require_once dirname(__file__) . "/classes/objects/files/load.php";
 require_once dirname(__file__) . "/classes/objects/spam/load.php";
 require_once dirname(__file__) . "/classes/objects/users/load.php";
-require_once dirname(__file__) . "/classes/objects/localization/load.php";
 require_once dirname(__file__) . "/classes/objects/content/CustomData.php";
 require_once dirname(__file__) . "/classes/objects/content/Category.php";
 require_once dirname(__file__) . "/classes/objects/content/PagePermissions.php";
@@ -106,8 +102,6 @@ require_once dirname(__file__) . "/classes/objects/content/Comment.php";
 require_once dirname(__file__) . "/classes/objects/content/ContentFactory.php";
 require_once dirname(__file__) . "/classes/objects/content/CustomFields.php";
 require_once dirname(__file__) . "/classes/objects/content/Results.php";
-
-require_once dirname(__file__) . "/UliCMSVersion.php";
 
 $mobile_detect_as_module = dirname(__file__) .
         "/content/modules/Mobile_Detect/Mobile_Detect.php";

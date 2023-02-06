@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use App\Exceptions\DatasetNotFoundException;
 use App\Exceptions\UnknownContentTypeException;
-use UliCMS\Models\Content\TypeMapper;
+use App\Models\Content\TypeMapper;
 
 // this class contains methods to return one content model or an array of multiple content datasets
 class ContentFactory

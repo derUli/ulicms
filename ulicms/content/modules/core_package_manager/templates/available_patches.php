@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Packages\PatchManager;
+use App\Packages\PatchManager;
 
 $patchManager = new PatchManager();
 $availablePatches = $patchManager->getAvailablePatches();
