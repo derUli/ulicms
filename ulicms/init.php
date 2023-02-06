@@ -20,7 +20,6 @@ use UliCMS\Packages\PatchManager;
 
 // Autoloader
 spl_autoload_register(function ($className) {
-
     // Backwards compatiblity for old code
     if (str_starts_with($className, 'UliCMS\\')) {
         trigger_error(
@@ -29,6 +28,11 @@ spl_autoload_register(function ($className) {
         );
 
         $className = 'App\\' . substring($className, 8);
+    }
+    
+    // Interim solution for non namespaced classes
+    if(!str_contains($className, "\\")){
+        $className = "App\\non_namespaced\\{$className}";
     }
 
     $basePath = dirname(__FILE__) . "/{$className}.php";
@@ -72,7 +76,6 @@ require_once dirname(__file__) . "/classes/objects/content/types/DefaultContentT
 require_once dirname(__file__) . "/classes/objects/content/types/fields/load.php";
 
 require_once dirname(__file__) . "/classes/objects/pkg/load.php";
-require_once dirname(__file__) . "/classes/helpers/load.php";
 require_once dirname(__file__) . "/classes/objects/registry/load.php";
 require_once dirname(__file__) . "/classes/objects/logging/load.php";
 require_once dirname(__file__) . "/classes/objects/html/load.php";
