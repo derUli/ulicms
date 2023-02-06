@@ -180,19 +180,7 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(endsWith("hello world", "you"));
         $this->assertFalse(endsWith("hello world", "World"));
     }
-
-    public function testFasterInArrayReturnsTrue() {
-        $array = ["hello", "world", 123];
-        $this->assertTrue(faster_in_array("world", $array));
-        $this->assertTrue(faster_in_array(123, $array));
-    }
-
-    public function testFasterInArrayReturnsFalse() {
-        $array = array("hello", "world", 123);
-        $this->assertFalse(faster_in_array("germany", $array));
-        $this->assertFalse(faster_in_array(789, $array));
-    }
-
+    
     public function testVarIsType() {
         $this->assertTrue(var_is_type(123, "numeric", true));
         $this->assertTrue(var_is_type(null, "numeric", false));

@@ -6,21 +6,6 @@ defined('ULICMS_ROOT') or exit('no direct script access allowed');
 
 use Carbon\Carbon;
 
-/**
- * @deprecated since version 2023.1
- * Does not provide performance improvements anymore in modern PHP
- * @param type $needle
- * @param type $haystack
- * @return bool
- */
-function faster_in_array(mixed $needle, array $haystack, bool $strict = false): bool {
-    if (!is_array($haystack)) {
-        return false;
-    }
-    $flipped = array_flip($haystack);
-    return isset($flipped[$needle]);
-}
-
 // is $val a decimal number or a integer?
 function is_decimal($val): bool {
     return is_numeric($val) && !ctype_digit(strval($val));

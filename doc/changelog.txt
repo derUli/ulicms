@@ -48,6 +48,7 @@ Entfernte API-Methoden:
 * isModuleInstalled()
 * is_500()
 * is_503()
+* faster_in_array()
 
 ===== Neues in UliCMS 2022.1 =====
 
