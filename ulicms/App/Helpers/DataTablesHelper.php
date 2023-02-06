@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace UliCMS\Helpers;
+namespace App\Helpers;
 
 class DataTablesHelper extends \Helper
 {

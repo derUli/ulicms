@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use UliCMS\Helpers\TestHelper;
+use App\Helpers\TestHelper;
 
 class CoreSecurityController extends MainClass {
 

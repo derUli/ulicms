@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Helpers\NumberFormatHelper;
+use App\Helpers\NumberFormatHelper;
 
 $permissionChecker = new ACL();
 if (!$permissionChecker->hasPermission("install_packages")) {

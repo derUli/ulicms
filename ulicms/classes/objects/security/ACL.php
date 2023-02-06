@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use UliCMS\Security\PermissionChecker;
-use UliCMS\Constants\ModuleEventConstants;
+use App\Constants\ModuleEventConstants;
 
 // old permission check class
 // please use PermissionChecker instead

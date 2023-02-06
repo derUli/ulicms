@@ -4,7 +4,7 @@
 // TODO: Write knowledge base article how the DBMigrator works
 declare(strict_types=1);
 
-use UliCMS\Exceptions\SqlException;
+use App\Exceptions\SqlException;
 
 class DBMigrator
 {

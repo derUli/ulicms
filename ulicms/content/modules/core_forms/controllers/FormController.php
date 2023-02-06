@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use UliCMS\Constants\AuditLog;
+use App\Constants\AuditLog;
 
 class FormController extends Controller {
 

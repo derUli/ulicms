@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Backend\Utils\BrowserCompatiblityChecker;
+use App\Backend\BrowserCompatiblityChecker;
 
 class BrowserCompatiblityCheckerTest extends \PHPUnit\Framework\TestCase {
 

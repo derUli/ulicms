@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use UliCMS\Exceptions\AccessDeniedException;
+use App\Exceptions\AccessDeniedException;
 
 // All module controllers must inherit from this class
 abstract class Controller

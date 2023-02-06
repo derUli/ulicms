@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Helpers\ArrayHelper;
+use App\Helpers\ArrayHelper;
 
 class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
 

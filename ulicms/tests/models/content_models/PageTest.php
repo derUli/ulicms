@@ -2,7 +2,7 @@
 
 use UliCMS\Models\Content\Comment;
 use UliCMS\Models\Content\VCS;
-use UliCMS\Exceptions\DatasetNotFoundException;
+use App\Exceptions\DatasetNotFoundException;
 use UliCMS\Security\Permissions\PagePermissions;
 
 class PageTest extends \PHPUnit\Framework\TestCase {

@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Exceptions\SqlException;
+use App\Exceptions\SqlException;
 
 class DBMigratorTest extends \PHPUnit\Framework\TestCase {
 

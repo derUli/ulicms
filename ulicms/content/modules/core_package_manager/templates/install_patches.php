@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Exceptions\CorruptDownloadException;
+use App\Exceptions\CorruptDownloadException;
 use UliCMS\Packages\Patch;
 
 $permissionChecker = new ACL();

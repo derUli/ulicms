@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace UliCMS\HTML;
 
-use UliCMS\Constants\ButtonType;
+use App\Constants\ButtonType;
 use ModuleHelper;
 
 // This class contains helper methods to build Bootstrap buttons

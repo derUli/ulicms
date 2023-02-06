@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use UliCMS\Constants\ModuleEventConstants;
+use App\Constants\ModuleEventConstants;
 
 function getModuleMeta($module, $attrib = null) {
     $metadata_file = ModuleHelper::buildModuleRessourcePath(

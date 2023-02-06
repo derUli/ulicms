@@ -1,7 +1,7 @@
 <?php
 
 use UliCMS\Models\Content\Comment;
-use UliCMS\Constants\CommentStatus;
+use App\Constants\CommentStatus;
 
 $comments = Comment::getAllByStatus(
                 CommentStatus::PUBLISHED,

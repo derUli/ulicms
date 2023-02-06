@@ -6,11 +6,11 @@ namespace UliCMS\Models\Content;
 
 use Database;
 use ContentFactory;
-use UliCMS\Constants\CommentStatus;
+use App\Constants\CommentStatus;
 use InvalidArgumentException;
 use Model;
 use StringHelper;
-use UliCMS\Exceptions\DatasetNotFoundException;
+use App\Exceptions\DatasetNotFoundException;
 use UliCMS\Security\SpamChecker\SpamFilterConfiguration;
 use UliCMS\Security\SpamChecker\CommentSpamChecker;
 use ModuleHelper;

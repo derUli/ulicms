@@ -6,7 +6,7 @@ use UliCMS\Packages\PatchManager;
 use UliCMS\Services\Connectors\eXtend\AvailablePackageVersionMatcher;
 use UliCMS\Utils\CacheUtil;
 use \Robo\Tasks;
-use UliCMS\Exceptions\SqlException;
+use App\Exceptions\SqlException;
 
 /**
  * This is project's console commands configuration for Robo task runner.

@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Exceptions\DatabaseException;
+use App\Exceptions\DatabaseException;
 
 // A list is a paginated set of content
 // filtered by conditions

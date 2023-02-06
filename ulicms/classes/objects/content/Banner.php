@@ -8,7 +8,7 @@ use Template;
 use Database;
 use Model;
 use InvalidArgumentException;
-use UliCMS\Exceptions\DatasetNotFoundException;
+use App\Exceptions\DatasetNotFoundException;
 
 // advertisement banners can be html codes or classic gif banners
 class Banner extends Model

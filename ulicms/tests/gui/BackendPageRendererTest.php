@@ -1,8 +1,9 @@
 <?php
 
-use UliCMS\Backend\BackendPageRenderer;
-use UliCMS\Backend\Utils\BrowserCompatiblityChecker;
-use UliCMS\Helpers\TestHelper;
+use App\Backend\BackendPageRenderer;
+use App\Backend\BrowserCompatiblityChecker;
+
+use App\Helpers\TestHelper;
 
 class BackendPageRendererTest extends \PHPUnit\Framework\TestCase {
 

@@ -2,7 +2,7 @@
 
 use UliCMS\HTML\Input;
 use UliCMS\HTML\ListItem;
-use UliCMS\Constants\RequestMethod;
+use App\Constants\RequestMethod;
 
 $languages = getAllLanguages();
 $errorCodes = array(

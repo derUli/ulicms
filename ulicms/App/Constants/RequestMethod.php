@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace UliCMS\Constants;
+namespace App\Constants;
 
 // use this constants if you have to compare request methods
 class RequestMethod

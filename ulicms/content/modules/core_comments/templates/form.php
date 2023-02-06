@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Constants\CommentStatus;
+use App\Constants\CommentStatus;
 
 if (Vars::get("comments_enabled")) {
     ?>

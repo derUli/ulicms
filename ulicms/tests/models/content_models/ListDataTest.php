@@ -1,7 +1,7 @@
 
 <?php
 
-use UliCMS\Exceptions\DatabaseException;
+use App\Exceptions\DatabaseException;
 use UliCMS\Models\Content\Category;
 
 class ListDataTest extends \PHPUnit\Framework\TestCase {

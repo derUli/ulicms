@@ -2,7 +2,7 @@
 $canIuseLazyLoadingUrl = "https://caniuse.com/#feat=loading-lazy-attr";
 
 use UliCMS\Security\PermissionChecker;
-use UliCMS\Constants\RequestMethod;
+use App\Constants\RequestMethod;
 use UliCMS\HTML\Input;
 use UliCMS\HTML\ListItem;
 

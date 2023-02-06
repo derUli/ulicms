@@ -6,7 +6,7 @@ use UliCMS\Models\Content\TypeMapper;
 use UliCMS\Models\Content\Categories;
 use UliCMS\Models\Content\Language;
 use UliCMS\Models\Content\Types\DefaultContentTypes;
-use UliCMS\Helpers\NumberFormatHelper;
+use App\Helpers\NumberFormatHelper;
 use UliCMS\CoreContent\UIUtils;
 use function UliCMS\HTML\icon;
 use UliCMS\HTML\Input;

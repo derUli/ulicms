@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Exceptions\NotImplementedException;
+use App\Exceptions\NotImplementedException;
 
 class CustomFieldTest extends \PHPUnit\Framework\TestCase {
 

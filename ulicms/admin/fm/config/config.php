@@ -3,7 +3,7 @@
 define("RESPONSIVE_FM", true);
 include_once "../../init.php";
 
-use UliCMS\Helpers\ImageScaleHelper;
+use App\Helpers\ImageScaleHelper;
 
 $dimensions = ImageScaleHelper::getMaxImageDimensions();
 $version = "9.14.0";

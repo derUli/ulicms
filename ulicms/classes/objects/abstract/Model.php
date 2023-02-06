@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Exceptions\NotImplementedException;
+use App\Exceptions\NotImplementedException;
 
 // This is a base class for database models
 // one model contains the definition of a database table and methods to load,

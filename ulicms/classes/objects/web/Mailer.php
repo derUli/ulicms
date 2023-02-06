@@ -2,7 +2,7 @@
 
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\PHPMailer;
-use UliCMS\Constants\EmailModes;
+use App\Constants\EmailModes;
 
 class Mailer
 {

@@ -1,10 +1,10 @@
 <?php
 
-use UliCMS\Constants\RequestMethod;
+use App\Constants\RequestMethod;
 use UliCMS\Models\Content\Advertisement\Banner;
 use UliCMS\HTML\Alert;
 use UliCMS\Models\Content\Categories;
-use UliCMS\Exceptions\DatasetNotFoundException;
+use App\Exceptions\DatasetNotFoundException;
 
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("banners")

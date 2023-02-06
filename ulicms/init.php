@@ -9,16 +9,37 @@ if (!defined("ULICMS_ROOT")) {
     define("ULICMS_ROOT", dirname(__file__));
 }
 
-require_once dirname(__file__) . "/classes/exceptions/load.php";
-
-use UliCMS\Exceptions\AccessDeniedException;
-use UliCMS\Exceptions\ConnectionFailedException;
-use UliCMS\Exceptions\FileNotFoundException;
-use UliCMS\Exceptions\SqlException;
-use UliCMS\Constants\AuditLog;
+use App\Exceptions\AccessDeniedException;
+use App\Exceptions\ConnectionFailedException;
+use App\Exceptions\FileNotFoundException;
+use App\Exceptions\SqlException;
+use App\Constants\AuditLog;
 use App\Registries\HelperRegistry;
 use UliCMS\Models\Content\TypeMapper;
 use UliCMS\Packages\PatchManager;
+
+// Autoloader
+spl_autoload_register(function ($className) {
+
+    // Backwards compatiblity for old code
+    if (str_starts_with($className, 'UliCMS\\')) {
+        trigger_error(
+                "Namespaces starting with UliCMS\\ are deprecated: $className",
+                E_USER_DEPRECATED
+        );
+
+        $className = 'App\\' . substring($className, 8);
+    }
+
+    $basePath = dirname(__FILE__) . "/{$className}.php";
+    $basePath = str_replace('\\', '/', $basePath);
+
+    if (!file_exists($basePath)) {
+        return;
+    }
+
+    require $basePath;
+});
 
 /*
  * Diese Datei initalisiert das System
@@ -35,24 +56,6 @@ if (file_exists($composerAutoloadFile)) {
                     . "Please run \"./composer install\" to install dependecies."
     );
 }
-
-// Autoloader
-spl_autoload_register(function ($className) {
-
-    // Backwards compatiblity for old code
-    if (str_starts_with($className, 'UliCMS\\')) {
-        $className = 'App\\' . substring($className, 8);
-    }
-
-    $basePath = dirname(__FILE__) . "/{$className}.php";
-    $basePath = str_replace('\\', '/', $basePath);
-
-    if (!file_exists($basePath)) {
-        return;
-    }
-
-    require $basePath;
-});
 
 require_once dirname(__file__) . "/lib/load.php";
 require_once dirname(__file__) . "/classes/objects/privacy/load.php";

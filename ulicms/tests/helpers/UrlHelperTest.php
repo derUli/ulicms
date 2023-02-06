@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Helpers\UrlHelper;
+use App\Helpers\UrlHelper;
 
 class UrlHelperTest extends \PHPUnit\Framework\TestCase {
 

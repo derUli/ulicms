@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use UliCMS\Exceptions\FileNotFoundException;
+use App\Exceptions\FileNotFoundException;
 
 // loads model files of modules
 class ModelRegistry

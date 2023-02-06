@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Registries;
 
-use UliCMS\Exceptions\FileNotFoundException;
+use App\Exceptions\FileNotFoundException;
 use Vars;
 use function getAllModules;
 use function getModuleMeta;

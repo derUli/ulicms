@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use UliCMS\Exceptions\DatasetNotFoundException;
+use App\Exceptions\DatasetNotFoundException;
 
 abstract class Content extends Model
 {

@@ -2,7 +2,7 @@
 
 use UliCMS\Models\Content\Comment;
 use UliCMS\HTML\Script;
-use UliCMS\Helpers\DataTablesHelper;
+use App\Helpers\DataTablesHelper;
 
 $admin_logo = Settings::get("admin_logo");
 if (!$admin_logo) {

@@ -1,7 +1,7 @@
 <?php
 
 use UliCMS\Models\Content\Advertisement\Banner;
-use UliCMS\Exceptions\DatasetNotFoundException;
+use App\Exceptions\DatasetNotFoundException;
 
 class BannerControllerTest extends \PHPUnit\Framework\TestCase {
 

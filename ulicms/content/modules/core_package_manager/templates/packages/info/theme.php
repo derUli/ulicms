@@ -34,7 +34,7 @@ $model = ViewBag::get("model");
                 Link::link(
                         $model->source_url,
                         get_secure_translation($model->source),
-                        ["target" => UliCMS\Constants\LinkTarget::TARGET_BLANK]
+                        ["target" => App\Constants\LinkTarget::TARGET_BLANK]
                 ) :
                 get_secure_translation($model->source);
         ?>

@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Constants\EmailModes;
+use App\Constants\EmailModes;
 use UliCMS\HTML\Alert;
 
 $ga = new PHPGangsta_GoogleAuthenticator();

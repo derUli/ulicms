@@ -1,6 +1,6 @@
 <?php
 
-namespace UliCMS\Exceptions;
+namespace App\Exceptions;
 
 use InvalidArgumentException;
 

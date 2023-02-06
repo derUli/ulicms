@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use UliCMS\Utils\CacheUtil;
-use UliCMS\Helpers\ImageScaleHelper;
+use App\Helpers\ImageScaleHelper;
 
 class LogoController extends Controller {
 

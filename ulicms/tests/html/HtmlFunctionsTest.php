@@ -9,9 +9,9 @@ use function UliCMS\HTML\icon;
 use function UliCMS\HTML\link;
 use function UliCMS\HTML\buttonLink;
 use function UliCMS\HTML\stringContainsHtml;
-use UliCMS\Constants\LinkTarget;
-use UliCMS\Constants\ButtonType;
-use UliCMS\Exceptions\FileNotFoundException;
+use App\Constants\LinkTarget;
+use App\Constants\ButtonType;
+use App\Exceptions\FileNotFoundException;
 
 class HtmlFunctionsTest extends \PHPUnit\Framework\TestCase {
 

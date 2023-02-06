@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Exceptions\AccessDeniedException;
+use App\Exceptions\AccessDeniedException;
 
 class ControllerTest extends \PHPUnit\Framework\TestCase {
 

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 defined('ULICMS_ROOT') or exit('no direct script access allowed');
 
-use UliCMS\Exceptions\SqlException;
+use App\Exceptions\SqlException;
 
 // this class provides an abstraction for database access
 // and many helpful utility methods to do database stuff

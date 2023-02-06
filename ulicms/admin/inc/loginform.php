@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Constants\RequestMethod;
+use App\Constants\RequestMethod;
 
 $ga = new PHPGangsta_GoogleAuthenticator();
 $ga_secret = Settings::get("ga_secret");

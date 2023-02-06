@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Helpers\DataTablesHelper;
+use App\Helpers\DataTablesHelper;
 
 class DataTablesHelperTest extends \PHPUnit\Framework\TestCase {
 

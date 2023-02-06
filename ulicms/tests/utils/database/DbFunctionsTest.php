@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Exceptions\SqlException;
+use App\Exceptions\SqlException;
 
 // test for legacy database methods
 class DbFunctionsTest extends \PHPUnit\Framework\TestCase {

@@ -1,7 +1,7 @@
 <?php
 
 use UliCMS\HTML\Button;
-use UliCMS\Constants\ButtonType;
+use App\Constants\ButtonType;
 
 class ButtonTest extends \PHPUnit\Framework\TestCase {
 

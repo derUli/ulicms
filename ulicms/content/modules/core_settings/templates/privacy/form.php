@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Constants\RequestMethod;
+use App\Constants\RequestMethod;
 use UliCMS\HTML\Alert;
 
 $permissionChecker = new ACL();

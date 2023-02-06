@@ -7,7 +7,7 @@ namespace UliCMS\HTML;
 use StringHelper;
 use ModuleHelper;
 use Template;
-use UliCMS\Constants\RequestMethod;
+use App\Constants\RequestMethod;
 
 // this class contains method to build <form> tags
 class Form

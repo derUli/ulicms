@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Helpers\ImageScaleHelper;
+use App\Helpers\ImageScaleHelper;
 
 class ImageScaleHelperTest extends \PHPUnit\Framework\TestCase {
 

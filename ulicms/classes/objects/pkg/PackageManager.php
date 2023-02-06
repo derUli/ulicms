@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use UliCMS\Services\Connectors\PackageSourceConnector;
-use UliCMS\Constants\PackageTypes;
+use App\Constants\PackageTypes;
 use UliCMS\Utils\CacheUtil;
 
 class PackageManager

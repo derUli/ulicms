@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Helpers\NumberFormatHelper;
+use App\Helpers\NumberFormatHelper;
 
 class NumberFormatHelperTest extends \PHPUnit\Framework\TestCase {
 

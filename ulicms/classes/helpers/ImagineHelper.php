@@ -4,17 +4,16 @@ declare(strict_types=1);
 
 use Imagine\Image\AbstractImagine;
 use Imagine\Exception\RuntimeException;
-use UliCMS\Exceptions\NotSupportedException;
+use App\Exceptions\NotSupportedException;
 
-class ImagineHelper extends Helper
-{
+class ImagineHelper extends Helper {
+
     const ACCEPT_MIMES = 'image/jpeg,image/png,image/gif';
     const GRAPHICS_MAGICK = 'gmagick';
     const IMAGE_MAGICK = 'imagick';
     const GD = 'imagick';
 
-    protected static function getImageMagick(): ?AbstractImagine
-    {
+    protected static function getImageMagick(): ?AbstractImagine {
         try {
             return new Imagine\Imagick\Imagine();
         } catch (RuntimeException $e) {
@@ -22,8 +21,7 @@ class ImagineHelper extends Helper
         }
     }
 
-    protected static function getGraphicsMagicks(): ?AbstractImagine
-    {
+    protected static function getGraphicsMagicks(): ?AbstractImagine {
         try {
             return new Imagine\Gmagick\Imagine();
         } catch (RuntimeException $e) {
@@ -31,8 +29,7 @@ class ImagineHelper extends Helper
         }
     }
 
-    protected static function getGD(): ?AbstractImagine
-    {
+    protected static function getGD(): ?AbstractImagine {
         try {
             return new Imagine\Gd\Imagine();
         } catch (RuntimeException $e) {
@@ -40,8 +37,7 @@ class ImagineHelper extends Helper
         }
     }
 
-    public static function getImagine(): ?AbstractImagine
-    {
+    public static function getImagine(): ?AbstractImagine {
         $imagine = self::getImageMagick();
 
         if (!$imagine) {
@@ -54,16 +50,15 @@ class ImagineHelper extends Helper
 
         if (!$imagine) {
             throw new NotSupportedException(
-                "No graphics library installed\n" .
-                    "Please install GD, ImageMagick or GraphicsMagick for PHP"
+                            "No graphics library installed\n" .
+                            "Please install GD, ImageMagick or GraphicsMagick for PHP"
             );
         }
 
         return $imagine;
     }
 
-    public static function getLibraryName(): ?string
-    {
+    public static function getLibraryName(): ?string {
         if (self::getImageMagick()) {
             return self::IMAGE_MAGICK;
         }
@@ -76,4 +71,5 @@ class ImagineHelper extends Helper
         }
         return null;
     }
+
 }

@@ -1,7 +1,7 @@
 <?php
 
 use PHPMailer\PHPMailer\PHPMailer;
-use UliCMS\Constants\EmailModes;
+use App\Constants\EmailModes;
 use PHPMailer\PHPMailer\SMTP;
 
 class MailerTest extends \PHPUnit\Framework\TestCase {

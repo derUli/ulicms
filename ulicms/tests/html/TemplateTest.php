@@ -1,8 +1,8 @@
 <?php
 
-use UliCMS\Exceptions\FileNotFoundException;
+use App\Exceptions\FileNotFoundException;
 use UliCMS\Utils\File;
-use UliCMS\Helpers\TestHelper;
+use App\Helpers\TestHelper;
 use function UliCMS\HTML\stringContainsHtml;
 
 class TemplateTest extends \PHPUnit\Framework\TestCase {

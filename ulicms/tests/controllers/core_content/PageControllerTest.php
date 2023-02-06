@@ -2,7 +2,7 @@
 
 use UliCMS\Models\Content\Language;
 use UliCMS\Models\Content\VCS;
-use UliCMS\Exceptions\DatasetNotFoundException;
+use App\Exceptions\DatasetNotFoundException;
 
 class PageControllerTest extends \PHPUnit\Framework\TestCase {
 
@@ -557,7 +557,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
             $_POST["content"] = "<p>New Content</p>";
             $_POST["position"] = "123";
 
-            $_POST["article_date"] = UliCMS\Helpers\NumberFormatHelper::timestampToSqlDate();
+            $_POST["article_date"] = App\Helpers\NumberFormatHelper::timestampToSqlDate();
 
             $_POST["menu"] = "not_in_menu";
             $_POST["language"] = "de";

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use UliCMS\HTML\Style;
 use UliCMS\HTML\Script;
-use UliCMS\Exceptions\SCSSCompileException;
+use App\Exceptions\SCSSCompileException;
 use ScssPhp\ScssPhp\Compiler;
 use zz\Html\HTMLMinify;
 use MatthiasMullie\Minify;

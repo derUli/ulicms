@@ -1,7 +1,7 @@
 <?php
 
 use UliCMS\Security\Encryption;
-use UliCMS\Exceptions\NotImplementedException;
+use App\Exceptions\NotImplementedException;
 use UliCMS\Utils\CacheUtil;
 use UliCMS\Models\Users\GroupCollection;
 

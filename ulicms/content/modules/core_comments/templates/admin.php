@@ -1,9 +1,9 @@
 <?php
 
-use UliCMS\Backend\BackendPageRenderer;
+use App\Backend\BackendPageRenderer;
 use UliCMS\HTML\Input;
 use UliCMS\HTML\ListItem;
-use UliCMS\Constants\CommentStatus;
+use App\Constants\CommentStatus;
 
 $controller = ModuleHelper::getMainController("core_comments");
 $defaultStatus = $controller->_getDefaultStatus();

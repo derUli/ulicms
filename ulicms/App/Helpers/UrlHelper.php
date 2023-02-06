@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace UliCMS\Helpers;
+namespace App\Helpers;
 
 class UrlHelper extends \Helper
 {

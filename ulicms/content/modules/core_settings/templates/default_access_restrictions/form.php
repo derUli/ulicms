@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Constants\RequestMethod;
+use App\Constants\RequestMethod;
 
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("default_access_restrictions_edit")) {

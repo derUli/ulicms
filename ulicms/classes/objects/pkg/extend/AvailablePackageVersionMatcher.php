@@ -3,7 +3,7 @@
 namespace UliCMS\Services\Connectors\eXtend;
 
 use function is_version_number;
-use UliCMS\Helpers\ArrayHelper;
+use App\Helpers\ArrayHelper;
 use UliCMSVersion;
 
 class AvailablePackageVersionMatcher

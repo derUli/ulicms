@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-use UliCMS\Exceptions\DatasetNotFoundException;
+use App\Exceptions\DatasetNotFoundException;
 use UliCMS\CoreContent\Models\ViewModels\DiffViewModel;
 use UliCMS\CoreContent\PageTableRenderer;
 use UliCMS\Models\Content\VCS;
@@ -10,7 +10,7 @@ use Rakit\Validation\Validator;
 use UliCMS\Security\PermissionChecker;
 use function UliCMS\Security\XSSProtection\stripTags;
 use UliCMS\Models\Content\TypeMapper;
-use UliCMS\Constants\LinkTarget;
+use App\Constants\LinkTarget;
 use UliCMS\Utils\CacheUtil;
 use zz\Html\HTMLMinify;
 use function UliCMS\HTML\stringContainsHtml;

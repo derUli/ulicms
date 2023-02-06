@@ -3,10 +3,10 @@
 declare(strict_types=1);
 
 use UliCMS\Models\Content\Comment;
-use UliCMS\Exceptions\DatasetNotFoundException;
+use App\Exceptions\DatasetNotFoundException;
 use UliCMS\HTML as HTML;
-use UliCMS\Exceptions\NotImplementedException;
-use UliCMS\Constants\CommentStatus;
+use App\Exceptions\NotImplementedException;
+use App\Constants\CommentStatus;
 use UliCMS\Utils\CacheUtil;
 use zz\Html\HTMLMinify;
 

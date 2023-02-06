@@ -1,8 +1,8 @@
 <?php
 
-namespace UliCMS\Exceptions;
+namespace App\Exceptions;
 
-use UliCMS\Exceptions\DatabaseException;
+use App\Exceptions\DatabaseException;
 
 class ConnectionFailedException extends DatabaseException
 {

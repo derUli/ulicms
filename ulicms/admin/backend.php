@@ -3,7 +3,7 @@
 // required because my local XAMPP is sometimes in wrong folder, so includes will fail
 require_once "../init.php";
 
-use UliCMS\Backend\BackendPageRenderer;
+use App\Backend\BackendPageRenderer;
 
 UliCMS\Utils\Session\sessionStart();
 

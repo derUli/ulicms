@@ -1,7 +1,7 @@
 <?php
 
 use UliCMS\Security\PermissionChecker;
-use UliCMS\Constants\RequestMethod;
+use App\Constants\RequestMethod;
 use UliCMS\Packages\PatchManager;
 use UliCMS\Packages\Theme;
 

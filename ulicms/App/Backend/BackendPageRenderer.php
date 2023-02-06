@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace UliCMS\Backend;
+namespace App\Backend;
 
-use UliCMS\Backend\Utils\BrowserCompatiblityChecker;
+use App\Backend\BrowserCompatiblityChecker;
 use Template;
 use Vars;
 use Request;

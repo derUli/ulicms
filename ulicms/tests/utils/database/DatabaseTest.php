@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Exceptions\SqlException;
+use App\Exceptions\SqlException;
 
 class DatabaseTest extends \PHPUnit\Framework\TestCase {
 

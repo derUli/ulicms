@@ -5,7 +5,7 @@ defined('ULICMS_ROOT') or exit('no direct script access allowed');
 use UliCMS\Security\Permissions\PagePermissions;
 use UliCMS\Models\Content\Comment;
 use UliCMS\Models\Content\VCS;
-use UliCMS\Exceptions\DatasetNotFoundException;
+use App\Exceptions\DatasetNotFoundException;
 
 class Page extends Content {
 

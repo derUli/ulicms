@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Constants\RequestMethod;
+use App\Constants\RequestMethod;
 use function UliCMS\HTML\imageTag;
 use UliCMS\HTML\Input;
 

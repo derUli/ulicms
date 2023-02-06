@@ -5,8 +5,8 @@
 declare(strict_types=1);
 
 use zz\Html\HTMLMinify;
-use UliCMS\Backend\BackendPageRenderer;
-use UliCMS\Helpers\TestHelper;
+use App\Backend\BackendPageRenderer;
+use App\Helpers\TestHelper;
 
 if (!defined("RESPONSIVE_FM")) {
     function JSONResult($data, int $status = 200, $compact = true): void

@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Helpers\TestHelper;
+use App\Helpers\TestHelper;
 
 class ResponseTest extends \PHPUnit\Framework\TestCase {
 

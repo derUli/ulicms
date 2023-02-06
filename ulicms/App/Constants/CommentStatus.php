@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace UliCMS\Constants;
+namespace App\Constants;
 
 // comments have three states
 // if a comment is pending

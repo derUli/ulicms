@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Backend\BackendPageRenderer;
+use App\Backend\BackendPageRenderer;
 
 $fortune = BackendPageRenderer::getModel();
 ?>
