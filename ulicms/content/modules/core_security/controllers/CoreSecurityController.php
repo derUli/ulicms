@@ -13,7 +13,7 @@ class CoreSecurityController extends MainClass {
             "DENY",
             "SAMEORIGIN"
         );
-        if ($x_frame_options and faster_in_array(
+        if ($x_frame_options && in_array(
                         $x_frame_options,
                         $allowedOptions
                 )) {

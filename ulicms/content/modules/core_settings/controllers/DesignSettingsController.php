@@ -52,7 +52,7 @@ class DesignSettingsController extends Controller {
 
         // Wenn Formular abgesendet wurde, Wert Speichern
         $themes = getAllThemes();
-        if (faster_in_array($_REQUEST["theme"], $themes)) {
+        if (in_array($_REQUEST["theme"], $themes)) {
             Settings::set("theme", $_REQUEST["theme"]);
             $theme = $_REQUEST["theme"];
         }

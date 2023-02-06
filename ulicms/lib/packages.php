@@ -54,7 +54,7 @@ function uninstall_module(string $name, string $type = "module"): bool {
             $cTheme = Settings::get("theme");
             $allThemes = getAllThemes();
 
-            if (faster_in_array($name, $allThemes) and $cTheme !== $name) {
+            if (in_array($name, $allThemes) and $cTheme !== $name) {
                 $theme_path = getTemplateDirPath($name, true);
                 sureRemoveDir($theme_path, true);
                 CacheUtil::clearCache();

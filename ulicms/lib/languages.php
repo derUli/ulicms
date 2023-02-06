@@ -87,7 +87,7 @@ function setLanguageByDomain(): bool {
 
     foreach ($domainMapping as $domain => $language) {
         $givenDomain = $_SERVER["HTTP_HOST"];
-        if ($domain == $givenDomain and faster_in_array(
+        if ($domain == $givenDomain && in_array(
                         $language,
                         getAllLanguages()
                 )
@@ -117,7 +117,7 @@ function getLanguageNameByCode(string $code): string {
 function setLocaleByLanguage(): array {
     $locale = [];
 
-    $var = (is_admin_dir() and isset($_SESSION["system_language"])) ?
+    $var = (is_admin_dir() && isset($_SESSION["system_language"])) ?
             "locale_" . $_SESSION["system_language"] :
             "locale_" . getFrontendLanguage();
 

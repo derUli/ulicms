@@ -450,7 +450,7 @@ class User extends Model
             "ckeditor",
             "codemirror"
         );
-        if (!faster_in_array($editor, $allowedEditors)) {
+        if (!in_array($editor, $allowedEditors)) {
             $editor = "ckeditor";
         }
         $this->html_editor = $editor;

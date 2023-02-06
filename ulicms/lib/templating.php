@@ -543,7 +543,7 @@ function apply_filter($text, string $type) {
 
     $modulesCount = count($modules);
     for ($i = 0; $i < $modulesCount; $i++) {
-        if (faster_in_array($modules[$i], $disabledModules)) {
+        if (in_array($modules[$i], $disabledModules)) {
             continue;
         }
         $module_content_filter_file1 = getModulePath($modules[$i], true)
@@ -871,13 +871,13 @@ function get_content(): string {
 function checkforAccessForDevice(string $access): bool {
     $access = explode(",", $access);
     $allowed = false;
-    if (faster_in_array("mobile", $access) and is_mobile()) {
+    if (in_array("mobile", $access) and is_mobile()) {
         $allowed = true;
     }
-    if (faster_in_array("desktop", $access) && !is_mobile()) {
+    if (in_array("desktop", $access) && !is_mobile()) {
         $allowed = true;
     }
-    if (!faster_in_array("mobile", $access) && !faster_in_array("desktop", $access)) {
+    if (!in_array("mobile", $access) && !in_array("desktop", $access)) {
         $allowed = true;
     }
     return $allowed;
@@ -890,11 +890,11 @@ function checkAccess(string $access = ""): ?string {
     }
     $access = explode(",", $access);
 
-    if (faster_in_array("all", $access)) {
+    if (in_array("all", $access)) {
         return "all";
     }
 
-    if (faster_in_array("registered", $access) and is_logged_in()) {
+    if (in_array("registered", $access) and is_logged_in()) {
         return "registered";
     }
 
