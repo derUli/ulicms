@@ -175,7 +175,7 @@ function compileSCSS(string $stylesheet): string {
 }
 
 function compileSCSSToFile(string $stylesheet): string {
-    $cssDir = Path::resolve("ULICMS_ROOT/content/cache/stylesheets");
+    $cssDir = Path::resolve("ULICMS_CACHE/stylesheets");
 
     if (!is_dir($cssDir)) {
         mkdir($cssDir, 0777, true);

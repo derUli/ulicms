@@ -234,7 +234,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
     public function testCompileSCSSToFile() {
         sureRemoveDir(
                 Path::resolve(
-                        "ULICMS_ROOT/content/cache/stylesheets"
+                        "ULICMS_CACHE/stylesheets"
                 )
         );
         setSCSSImportPaths(

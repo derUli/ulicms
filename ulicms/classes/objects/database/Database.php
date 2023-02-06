@@ -213,7 +213,7 @@ class Database {
             $table = tbname($table);
         }
 
-        if (!faster_in_array($table, self::getAllTables())) {
+        if (!self::tableExists($table, false)) {
             return true;
         }
 
@@ -476,7 +476,7 @@ class Database {
             bool $prefix = true
     ): bool {
         $tableName = $prefix ? tbname($table) : $table;
-        return faster_in_array($tableName, self::getAllTables());
+        return in_array($tableName, self::getAllTables());
     }
 
     // escape values to prevent sql injections
