@@ -1,7 +1,7 @@
 <?php
 
 use Phpfastcache\Helper\Psr16Adapter;
-use UliCMS\Utils\CacheUtil;
+use App\Utils\CacheUtil;
 
 // if opcache is not installed, define dummy function to
 // have full code coverage

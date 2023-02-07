@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use App\Models\Content\Language;
 use App\Models\Content\Categories;
-use UliCMS\Utils\File;
+use App\Utils\File;
 use App\Exceptions\DatasetNotFoundException;
 
 function html5_doctype(): void {

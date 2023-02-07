@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 defined('ULICMS_ROOT') or exit('no direct script access allowed');
 
-use UliCMS\Utils\CacheUtil;
+use App\Utils\CacheUtil;
 
 /**
  * Clears all caches

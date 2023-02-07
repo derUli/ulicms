@@ -7,7 +7,7 @@ use App\Exceptions\DatasetNotFoundException;
 use UliCMS\HTML as HTML;
 use App\Exceptions\NotImplementedException;
 use App\Constants\CommentStatus;
-use UliCMS\Utils\CacheUtil;
+use App\Utils\CacheUtil;
 use zz\Html\HTMLMinify;
 
 class CommentsController extends MainClass {

@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Utils\File;
+use App\Utils\File;
 use function UliCMS\HTML\imageTag;
 
 $permissionChecker = new ACL();

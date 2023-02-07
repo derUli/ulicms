@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use App\Exceptions\DatasetNotFoundException;
 use App\Models\Content\Advertisement\Banner;
-use UliCMS\Utils\CacheUtil;
+use App\Utils\CacheUtil;
 
 class BannerController extends Controller {
 

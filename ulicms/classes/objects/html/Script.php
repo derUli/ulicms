@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace UliCMS\HTML;
 
-use UliCMS\Utils\File;
+use App\Utils\File;
 use ModuleHelper;
 
 // generates HTML script tags

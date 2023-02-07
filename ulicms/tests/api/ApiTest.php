@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\Content\Language;
-use UliCMS\Utils\CacheUtil;
+use App\Utils\CacheUtil;
 
 class ApiTest extends \PHPUnit\Framework\TestCase {
 

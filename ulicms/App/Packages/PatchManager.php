@@ -7,7 +7,7 @@ namespace App\Packages;
 use Database;
 use ZipArchive;
 use StringHelper;
-use UliCMS\Utils\CacheUtil;
+use App\Utils\CacheUtil;
 use UliCMSVersion;
 use function file_get_contents_wrapper;
 use function sureRemoveDir;

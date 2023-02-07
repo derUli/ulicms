@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use UliCMS\Utils\File;
+use App\Utils\File;
 
 class SinPackageInstaller
 {

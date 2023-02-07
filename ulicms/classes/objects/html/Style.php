@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace UliCMS\HTML;
 
 use ModuleHelper;
-use UliCMS\Utils\File;
+use App\Utils\File;
 
 // generates HTML style tags
 // please use stylesheet queue instead of this methods if possible

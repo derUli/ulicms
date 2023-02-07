@@ -1,7 +1,7 @@
 <?php
 
 use App\Exceptions\FileNotFoundException;
-use UliCMS\Utils\File;
+use App\Utils\File;
 use App\Helpers\TestHelper;
 use function UliCMS\HTML\stringContainsHtml;
 

@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Utils\File;
+use App\Utils\File;
 use App\Exceptions\DatasetNotFoundException;
 
 class ComparisonsTest extends \PHPUnit\Framework\TestCase {

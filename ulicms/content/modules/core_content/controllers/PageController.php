@@ -11,7 +11,7 @@ use App\Security\PermissionChecker;
 use function App\Security\XSSProtection\stripTags;
 use App\Models\Content\TypeMapper;
 use App\Constants\LinkTarget;
-use UliCMS\Utils\CacheUtil;
+use App\Utils\CacheUtil;
 use zz\Html\HTMLMinify;
 use function UliCMS\HTML\stringContainsHtml;
 use const UliCMS\Constants\HTML5_ALLOWED_TAGS;

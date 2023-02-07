@@ -3,7 +3,7 @@
 use App\Models\Content\Comment;
 use App\Constants\CommentStatus;
 use App\Exceptions\DatasetNotFoundException;
-use UliCMS\Utils\CacheUtil;
+use App\Utils\CacheUtil;
 
 class CommentTest extends \PHPUnit\Framework\TestCase {
 

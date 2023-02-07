@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use UliCMS\Utils\File;
+use App\Utils\File;
 
 function sureRemoveDir(string $dir, bool $deleteMe = true): void {
     File::sureRemoveDir($dir, $deleteMe);

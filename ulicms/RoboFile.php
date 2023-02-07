@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use App\Packages\PatchManager;
 use App\Services\Connectors\AvailablePackageVersionMatcher;
-use UliCMS\Utils\CacheUtil;
+use App\Utils\CacheUtil;
 use \Robo\Tasks;
 use App\Exceptions\SqlException;
 

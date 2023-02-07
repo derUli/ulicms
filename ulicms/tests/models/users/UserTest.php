@@ -2,7 +2,7 @@
 
 use App\Security\Encryption;
 use App\Exceptions\NotImplementedException;
-use UliCMS\Utils\CacheUtil;
+use App\Utils\CacheUtil;
 use UliCMS\Models\Users\GroupCollection;
 
 class UserTest extends \PHPUnit\Framework\TestCase {

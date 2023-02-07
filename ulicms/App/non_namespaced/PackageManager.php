@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use App\Services\Connectors\PackageSourceConnector;
 use App\Constants\PackageTypes;
-use UliCMS\Utils\CacheUtil;
+use App\Utils\CacheUtil;
 
 class PackageManager {
 

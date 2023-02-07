@@ -6,7 +6,7 @@ namespace UliCMS\HTML;
 
 use App\Exceptions\FileNotFoundException;
 use ModuleHelper;
-use UliCMS\Utils\File;
+use App\Utils\File;
 
 // use this to output a string as html
 // html specialchars are encoded, line breaks are replaced with

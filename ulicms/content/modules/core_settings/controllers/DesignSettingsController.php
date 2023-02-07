@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use UliCMS\Utils\CacheUtil;
+use App\Utils\CacheUtil;
 use App\Packages\Theme;
 
 class DesignSettingsController extends Controller {

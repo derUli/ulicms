@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace UliCMS\Utils;
+namespace App\Utils;
 
 use Path;
 use Settings;

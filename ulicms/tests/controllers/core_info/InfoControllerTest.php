@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Utils\CacheUtil;
+use App\Utils\CacheUtil;
 
 class InfoControllerTest extends \PHPUnit\Framework\TestCase {
 

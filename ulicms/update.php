@@ -5,7 +5,7 @@ const CORE_COMPONENT = 'update';
 require_once "init.php";
 
 use App\Packages\PatchManager;
-use UliCMS\Utils\CacheUtil;
+use App\Utils\CacheUtil;
 
 // no time limit to prevent a timeout while running sql migrations
 @set_time_limit(0);

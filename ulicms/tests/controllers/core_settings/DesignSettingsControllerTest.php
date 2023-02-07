@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Utils\File;
+use App\Utils\File;
 
 class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase {
 
