@@ -41,7 +41,7 @@ class Database {
             ?string $socket = null,
             bool $db_strict_mode = false
     ): ?mysqli {
-        $connected = mysqli_connect($server, $user, $password, "", $port, $socket);
+        @$connected = mysqli_connect($server, $user, $password, "", $port, $socket);
         self::$connection = $connected ? $connected : null;
         if (!self::$connection) {
             return null;

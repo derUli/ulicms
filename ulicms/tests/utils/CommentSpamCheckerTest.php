@@ -1,8 +1,8 @@
 <?php
 
-use UliCMS\Security\SpamChecker\SpamFilterConfiguration;
+use App\Security\SpamChecker\SpamFilterConfiguration;
 use App\Models\Content\Comment;
-use UliCMS\Security\SpamChecker\CommentSpamChecker;
+use App\Security\SpamChecker\CommentSpamChecker;
 
 class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase {
 

@@ -1,5 +1,5 @@
 <?php
-$permissionChecker = new UliCMS\Security\ContentPermissionChecker(get_user_id());
+$permissionChecker = new App\Security\ContentPermissionChecker(get_user_id());
 
 html5_doctype();
 og_html_prefix();

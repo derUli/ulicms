@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace UliCMS\Security\Permissions;
+namespace App\Security\Permissions;
 
 use Database;
 

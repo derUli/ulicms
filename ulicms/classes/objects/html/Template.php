@@ -6,7 +6,7 @@ use UliCMS\Utils\File;
 use App\Exceptions\FileNotFoundException;
 use App\Exceptions\DatasetNotFoundException;
 use UliCMS\HTML\Script;
-use UliCMS\Security\PermissionChecker;
+use App\Security\PermissionChecker;
 use MatthiasMullie\Minify;
 use App\Models\Content\Advertisement\Banners;
 

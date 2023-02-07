@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 use LasseRafn\InitialAvatarGenerator\InitialAvatar;
-use UliCMS\Security\PermissionChecker;
-use UliCMS\Security\Encryption;
+use App\Security\PermissionChecker;
+use App\Security\Encryption;
 use UliCMS\Models\Users\GroupCollection;
 
 class User extends Model

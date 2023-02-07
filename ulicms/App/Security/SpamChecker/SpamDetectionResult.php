@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace UliCMS\Security\SpamChecker;
+namespace App\Security\SpamChecker;
 
 // This class is used to show a user if his command was
 // detected as spam.

@@ -1,6 +1,6 @@
 <?php
 
-use function UliCMS\Security\XSSProtection\stripTags;
+use function App\Security\XSSProtection\stripTags;
 
 class XSSProtectionTest extends \PHPUnit\Framework\TestCase {
 

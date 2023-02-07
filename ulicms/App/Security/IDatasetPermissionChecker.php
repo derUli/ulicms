@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace UliCMS\Security;
+namespace App\Security;
 
 // permission checker interface for objects with read, write and delete
 // permission

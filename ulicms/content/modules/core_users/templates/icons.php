@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Security\PermissionChecker;
+use App\Security\PermissionChecker;
 
 $currentAction = BackendHelper::getAction();
 $icons = array(

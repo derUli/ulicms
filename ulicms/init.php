@@ -70,8 +70,26 @@ spl_autoload_register(function ($className) {
     require $basePath;
 });
 
+function require_all_files_in_dir(string $dir) {
+    $files = glob(ULICMS_ROOT . "/$dir/*.php");
+
+    foreach ($files as $file) {
+        if (is_file($file) && basename($file) !== 'load.php') {
+            require $file;
+        }
+    }
+}
+
 require dirname(__FILE__) . "/lib/load.php";
-require dirname(__FILE__) . "/classes/objects/constants/load.php";
+
+$loadDirs = [
+    'classes/objects/constants',
+];
+
+foreach ($loadDirs as $loadDir) {
+    require_all_files_in_dir($loadDir);
+}
+
 require dirname(__FILE__) . "/classes/objects/storages/load.php";
 require dirname(__FILE__) . "/classes/objects/modules/load.php";
 require dirname(__FILE__) . "/classes/objects/settings/load.php";
@@ -82,10 +100,8 @@ require dirname(__FILE__) . "/classes/objects/html/load.php";
 require dirname(__FILE__) . "/classes/objects/database/load.php";
 require dirname(__FILE__) . "/classes/objects/security/load.php";
 require dirname(__FILE__) . "/classes/objects/files/load.php";
-require dirname(__FILE__) . "/classes/objects/spam/load.php";
 require dirname(__FILE__) . "/classes/objects/users/load.php";
 require dirname(__FILE__) . "/classes/objects/content/CustomData.php";
-require dirname(__FILE__) . "/classes/objects/content/PagePermissions.php";
 require dirname(__FILE__) . "/classes/objects/content/Content.php";
 require dirname(__FILE__) . "/classes/objects/content/Page.php";
 require dirname(__FILE__) . "/classes/objects/content/Snippet.php";

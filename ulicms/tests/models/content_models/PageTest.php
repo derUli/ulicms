@@ -3,7 +3,7 @@
 use App\Models\Content\Comment;
 use App\Models\Content\VCS;
 use App\Exceptions\DatasetNotFoundException;
-use UliCMS\Security\Permissions\PagePermissions;
+use App\Security\Permissions\PagePermissions;
 
 class PageTest extends \PHPUnit\Framework\TestCase {
 

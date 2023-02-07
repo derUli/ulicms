@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace UliCMS\Security\XSSProtection;
+namespace App\Security\XSSProtection;
 
 // like PHP's strip_tags
 // But remove also inline javascript code

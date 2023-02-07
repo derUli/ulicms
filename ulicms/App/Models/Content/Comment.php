@@ -11,8 +11,8 @@ use InvalidArgumentException;
 use Model;
 use StringHelper;
 use App\Exceptions\DatasetNotFoundException;
-use UliCMS\Security\SpamChecker\SpamFilterConfiguration;
-use UliCMS\Security\SpamChecker\CommentSpamChecker;
+use App\Security\SpamChecker\SpamFilterConfiguration;
+use App\Security\SpamChecker\CommentSpamChecker;
 use ModuleHelper;
 
 // TODO: Comment public static functions

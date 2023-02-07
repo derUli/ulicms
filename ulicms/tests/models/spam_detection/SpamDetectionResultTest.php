@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Security\SpamChecker\SpamDetectionResult;
+use App\Security\SpamChecker\SpamDetectionResult;
 
 class SpamDetectionResultTest extends PHPUnit\Framework\TestCase {
 

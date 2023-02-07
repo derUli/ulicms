@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\Content\Language;
-use UliCMS\Security\PermissionChecker;
+use App\Security\PermissionChecker;
 
 class PermissionCheckerTest extends \PHPUnit\Framework\TestCase {
 

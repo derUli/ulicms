@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Security\SpamChecker\SpamFilterConfiguration;
+use App\Security\SpamChecker\SpamFilterConfiguration;
 
 class SpamFilterConfigurationTest extends \PHPUnit\Framework\TestCase {
 

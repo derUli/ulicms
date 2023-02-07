@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Security\PermissionChecker;
+use App\Security\PermissionChecker;
 
 $permissionChecker = new PermissionChecker(get_user_id());
 if (!$permissionChecker->hasPermission("install_packages")) {

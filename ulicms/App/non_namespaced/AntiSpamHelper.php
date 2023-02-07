@@ -85,9 +85,9 @@ class AntiSpamHelper extends Helper {
         if (!$str) {
             return null;
         }
-        if (is_null($words_blacklist)) {
-            $words_blacklist = Settings::get("spamfilter_words_blacklist");
-        }
+
+        $words_blacklist = $words_blacklist ?? Settings::get("spamfilter_words_blacklist");
+
         if (is_string($words_blacklist)) {
             $words_blacklist = StringHelper::linesFromString(
                             $words_blacklist,
@@ -162,7 +162,7 @@ class AntiSpamHelper extends Helper {
             "ZyBorg",
             "rabaz"
         ];
-        
+
         foreach ($bots as $bot) {
             if ($useragent && stripos($useragent, $bot) !== false) {
                 return true;

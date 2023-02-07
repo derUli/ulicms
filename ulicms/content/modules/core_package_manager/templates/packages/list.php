@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Security\PermissionChecker;
+use App\Security\PermissionChecker;
 use App\Constants\RequestMethod;
 use App\Packages\PatchManager;
 use App\Packages\Theme;

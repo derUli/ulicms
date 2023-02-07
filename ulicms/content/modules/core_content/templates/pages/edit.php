@@ -4,8 +4,8 @@
 // Join new and edit views to one form
 
 use App\Models\Content\TypeMapper;
-use UliCMS\Security\ContentPermissionChecker;
-use UliCMS\Security\PermissionChecker;
+use App\Security\ContentPermissionChecker;
+use App\Security\PermissionChecker;
 use App\Models\Content\Comment;
 use App\Models\Content\VCS;
 use App\Models\Content\Categories;

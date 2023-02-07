@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use UliCMS\Security\PermissionChecker;
+use App\Security\PermissionChecker;
 use Negotiation\LanguageNegotiator;
 
 function getAllUsedLanguages(): array {

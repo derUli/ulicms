@@ -12,7 +12,7 @@ use StringHelper;
 use ActionRegistry;
 use Settings;
 use zz\Html\HTMLMinify;
-use UliCMS\Security\PermissionChecker;
+use App\Security\PermissionChecker;
 use UliCMS\HTML\Alert;
 
 // This class renders a backend page

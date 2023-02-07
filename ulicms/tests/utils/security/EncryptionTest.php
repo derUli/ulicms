@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Security\Encryption;
+use App\Security\Encryption;
 
 class EncryptionTest extends \PHPUnit\Framework\TestCase {
 

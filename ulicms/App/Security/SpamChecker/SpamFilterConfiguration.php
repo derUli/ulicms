@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace UliCMS\Security\SpamChecker;
+namespace App\Security\SpamChecker;
 
 use AntiSpamHelper;
 use StringHelper;

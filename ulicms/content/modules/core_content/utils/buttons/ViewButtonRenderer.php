@@ -8,7 +8,7 @@ use ContentFactory;
 use Template;
 use ViewBag;
 use User;
-use UliCMS\Security\ContentPermissionChecker;
+use App\Security\ContentPermissionChecker;
 use function UliCMS\HTML\icon;
 use function UliCMS\HTML\link;
 

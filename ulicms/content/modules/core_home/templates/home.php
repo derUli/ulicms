@@ -2,7 +2,7 @@
 
 use UliCMS\HTML\Alert;
 use const UliCMS\Constants\HTML5_ALLOWED_TAGS;
-use function UliCMS\Security\XSSProtection\stripTags;
+use function App\Security\XSSProtection\stripTags;
 
 $permissionChecker = new ACL();
 
