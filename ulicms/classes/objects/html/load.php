@@ -1,7 +1,6 @@
 <?php
 
 $classes = [
-    "Template",
     "Style",
     "Script",
     "Link",
