@@ -71,7 +71,7 @@ class Audio extends Model
             $this->setMP3File($result->mp3_file);
             $this->setOGGFile($result->ogg_file);
             $this->setCategoryId(
-                $result->category_id ? intval($result->category_id) : null
+                $result->category_id ? (int)$result->category_id : null
             );
             $this->created = $result->created ?
                     intval($result->created) : null;

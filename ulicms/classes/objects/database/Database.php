@@ -176,7 +176,7 @@ class Database {
             } else {
                 $value = $args[$i];
                 if (is_float($value)) {
-                    $value = str_replace(",", ".", strval(floatval($value)));
+                    $value = str_replace(",", ".", strval((float)$value));
                 } elseif (is_int($value)) {
                     $value = strval(intval($value));
                 } elseif (is_bool($value)) {
@@ -247,7 +247,7 @@ class Database {
 
         $row = Database::fetchObject($result);
         $val = $row->val;
-        return is_decimal($val) ? floatval(val) : (int)$val;
+        return is_decimal($val) ? (float)$val : (int)$val;
     }
 
     public static function selectMax(
@@ -271,7 +271,7 @@ class Database {
 
         $row = Database::fetchObject($result);
         $val = $row->val;
-        return is_decimal($val) ? floatval(val) : (int)$val;
+        return is_decimal($val) ? (float)$val : (int)$val;
     }
 
     public static function selectAvg(
@@ -295,7 +295,7 @@ class Database {
 
         $row = Database::fetchObject($result);
         $val = $row->val;
-        return is_decimal($val) ? floatval($val) : (int)$val;
+        return is_decimal($val) ? (float)$val : (int)$val;
     }
 
     public static function deleteFrom(
@@ -488,7 +488,7 @@ class Database {
         }
         if (is_null($type)) {
             if (is_float($value)) {
-                return floatval($value);
+                return (float)$value;
             } elseif (is_int($value)) {
                 return intval($value);
             } elseif (is_bool($value)) {
@@ -500,7 +500,7 @@ class Database {
             if ($type === DB_TYPE_INT) {
                 return intval($value);
             } elseif ($type === DB_TYPE_FLOAT) {
-                return floatval($value);
+                return (float)$value;
             } elseif ($type === DB_TYPE_STRING) {
                 return mysqli_real_escape_string(
                         self::$connection,

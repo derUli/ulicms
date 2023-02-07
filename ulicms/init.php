@@ -283,13 +283,9 @@ function noPerms() {
     return false;
 }
 
-$db_socket = isset($config->db_socket) ?
-        $config->db_socket : ini_get("mysqli.default_socket");
-
-$db_port = isset($config->db_port) ?
-        $config->db_port : ini_get("mysqli.default_port");
-$db_strict_mode = isset($config->db_strict_mode) ?
-        boolval($config->db_strict_mode) : false;
+$db_socket = $config->db_socket ?? ini_get("mysqli.default_socket");
+$db_port = $config->db_port ?? ini_get("mysqli.default_port");
+$db_strict_mode = $config->db_strict_mode ?? false;
 
 @$connection = Database::connect(
                 $config->db_server,

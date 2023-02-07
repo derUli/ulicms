@@ -58,7 +58,7 @@ class Page extends Content {
     }
 
     protected function fillVars($result = null) {
-        $this->id = intval($result->id);
+        $this->id = (int)$result->id;
         $this->slug = $result->slug;
         $this->title = $result->title;
         $this->alternate_title = $result->alternate_title;

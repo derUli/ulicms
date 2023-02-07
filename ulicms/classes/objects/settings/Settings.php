@@ -134,7 +134,7 @@ class Settings {
                 $value = intval($value);
                 break;
             case 'float':
-                $value = floatval($value);
+                $value = (float)$value;
                 break;
             case 'bool':
 

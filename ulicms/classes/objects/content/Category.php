@@ -38,7 +38,7 @@ class Category
 
         if ($result and Database::getNumRows($result) > 0) {
             $result = Database::fetchObject($result);
-            $this->id = intval($result->id);
+            $this->id = (int)$result->id;
             $this->name = $result->name;
             $this->description = $result->description;
         }
