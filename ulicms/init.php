@@ -84,21 +84,16 @@ require dirname(__FILE__) . "/lib/load.php";
 
 $loadDirs = [
     'classes/objects/constants',
+    'classes/objects/security'
 ];
 
 foreach ($loadDirs as $loadDir) {
     require_all_files_in_dir($loadDir);
 }
 
-require dirname(__FILE__) . "/classes/objects/storages/load.php";
-require dirname(__FILE__) . "/classes/objects/modules/load.php";
-require dirname(__FILE__) . "/classes/objects/settings/load.php";
-require dirname(__FILE__) . "/classes/objects/web/load.php";
 require dirname(__FILE__) . "/classes/objects/content/types/fields/load.php";
 require dirname(__FILE__) . "/classes/objects/registry/load.php";
 require dirname(__FILE__) . "/classes/objects/html/load.php";
-require dirname(__FILE__) . "/classes/objects/database/load.php";
-require dirname(__FILE__) . "/classes/objects/security/load.php";
 require dirname(__FILE__) . "/classes/objects/files/load.php";
 require dirname(__FILE__) . "/classes/objects/users/load.php";
 require dirname(__FILE__) . "/classes/objects/content/CustomData.php";
