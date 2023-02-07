@@ -6,7 +6,7 @@ if ($permissionChecker->hasPermission("expert_settings") and $permissionChecker-
     if (Request::hasVar("name")) {
         $name = Request::getVar("name");
         $value = Settings::get($name);
-        if (is_null($value)) {
+        if ($value === NULL) {
             Request::javascriptRedirect(ModuleHelper::buildActionURL("settings"));
         }
     }

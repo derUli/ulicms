@@ -9,7 +9,7 @@ class ExpertSettingsController extends Controller {
     const LIST_ACTION = "settings";
 
     public function _save(?string $name = null, $value = null): void {
-        if (StringHelper::isNotNullOrWhitespace($name) && !is_null($value)) {
+        if (StringHelper::isNotNullOrWhitespace($name) && $value !== NULL) {
             Settings::set($name, $value);
             CacheUtil::clearPageCache();
         }

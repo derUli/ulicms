@@ -181,7 +181,7 @@ class Database {
                     $value = strval(intval($value));
                 } elseif (is_bool($value)) {
                     $value = strval(intval($value));
-                } elseif (is_null($value)) {
+                } elseif ($value === NULL) {
                     $value = "NULL";
                 } else {
                     $value = "'" . self::escapeValue($value) . "'";
@@ -483,7 +483,7 @@ class Database {
     // don't manually call this, if you use
     // pQuery() to make queries
     public static function escapeValue($value, ?int $type = null) {
-        if (is_null($value)) {
+        if ($value === NULL) {
             return "NULL";
         }
         if (is_null($type)) {

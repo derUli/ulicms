@@ -19,7 +19,7 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $user = new User();
         $user->loadByUsername("max_muster");
 
-        if (!is_null($user->getId())) {
+        if ($user->getId() !== NULL) {
             $user->delete();
         }
 

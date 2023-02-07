@@ -15,7 +15,7 @@ class Translation {
     public static function set(string $key, ?string $value): void {
         $key = "translation_" . $key;
         $key = strtoupper($key);
-        if (!is_null($value)) {
+        if ($value !== NULL) {
             self::$translations[$key] = $value;
         } else {
             unset(self::$translations[$key]);

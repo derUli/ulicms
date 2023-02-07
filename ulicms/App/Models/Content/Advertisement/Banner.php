@@ -210,7 +210,7 @@ class Banner extends Model {
     }
 
     public function setDateFrom($val): void {
-        if (is_null($val) or is_string($val)) {
+        if ($val === NULL or is_string($val)) {
             $this->date_from = $val;
         } elseif (is_numeric($val)) {
             $this->date_from = date("Y-m-d", $val);
@@ -222,7 +222,7 @@ class Banner extends Model {
     }
 
     public function setDateTo($val): void {
-        if (is_null($val) or is_string($val)) {
+        if ($val === NULL or is_string($val)) {
             $this->date_to = $val;
         } elseif (is_numeric($val)) {
             $this->date_to = date("Y-m-d", $val);
@@ -252,7 +252,7 @@ class Banner extends Model {
     }
 
     public function setHtml(?string $val): void {
-        $this->html = !is_null($val) ? (string)$val : null;
+        $this->html = $val !== NULL ? (string)$val : null;
     }
 
     public function getDateFrom(): ?string {
@@ -276,7 +276,7 @@ class Banner extends Model {
     }
 
     public function setLanguage(?string $val): void {
-        $this->language = !is_null($val) ? (string)$val : null;
+        $this->language = $val !== NULL ? (string)$val : null;
     }
 
     public function getName(): ?string {
@@ -284,7 +284,7 @@ class Banner extends Model {
     }
 
     public function setName($val) {
-        $this->name = !is_null($val) ? (string)$val : null;
+        $this->name = $val !== NULL ? (string)$val : null;
     }
 
     public function getImageUrl(): ?string {
@@ -292,7 +292,7 @@ class Banner extends Model {
     }
 
     public function setImageUrl(?string $val): void {
-        $this->image_url = !is_null($val) ? (string)$val : null;
+        $this->image_url = $val !== NULL ? (string)$val : null;
     }
 
     public function getLinkUrl(): ?string {
@@ -300,7 +300,7 @@ class Banner extends Model {
     }
 
     public function setLinkUrl(?string $val): void {
-        $this->link_url = !is_null($val) ? (string)$val : null;
+        $this->link_url = $val !== NULL ? (string)$val : null;
     }
 
     public function getEnabled(): bool {

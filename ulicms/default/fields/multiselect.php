@@ -7,7 +7,7 @@ if (is_string($value)) {
     );
 }
 $options = Viewbag::get("field_options") ? Viewbag::get("field_options") : [];
-if (is_null($value)) {
+if ($value === NULL) {
     $value = $field->defaultValue;
 }
 ?>

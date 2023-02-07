@@ -24,7 +24,7 @@ class CustomFields
             $value = join("\0\0", $value);
         } elseif (is_bool($value)) {
             $value = strval(intval($value));
-        } elseif (!is_null($value)) {
+        } elseif ($value !== NULL) {
             $value = strval($value);
         }
 
@@ -38,7 +38,7 @@ class CustomFields
         $result = Database::pQuery($sql, $args, true);
         if (Database::getNumRows($result) > 0) {
             $result = Database::fetchObject($result);
-            if (is_null($value)) {
+            if ($value === NULL) {
                 $args = array(
                     intval($result->id)
                 );
@@ -55,7 +55,7 @@ class CustomFields
                         . "where name = ? and content_id = ?";
                 return Database::pQuery($sql, $args, true);
             }
-        } elseif (!is_null($value)) {
+        } elseif ($value !== NULL) {
             $args = array(
                 $content_id,
                 $name,

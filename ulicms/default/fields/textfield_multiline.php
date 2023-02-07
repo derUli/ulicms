@@ -1,7 +1,7 @@
 <?php
 $field = ViewBag::get("field");
 $value = ViewBag::get("field_value");
-if (is_null($value)) {
+if ($value === NULL) {
     $value = $field->defaultValue;
 }
 ?>

@@ -58,12 +58,12 @@ class ListItem
 
     public function setValue($val)
     {
-        $this->value = !is_null($val) ? (string)$val : null;
+        $this->value = $val !== NULL ? (string)$val : null;
     }
 
     public function setText($val): void
     {
-        $this->text = !is_null($val) ? (string)$val : null;
+        $this->text = $val !== NULL ? (string)$val : null;
     }
 
     public function setSelected(bool $val): void

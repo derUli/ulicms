@@ -493,7 +493,7 @@ class User extends Model
 
     public function setLastLogin($val): void
     {
-        $this->last_login = !is_null($val) ? (int)$val : null;
+        $this->last_login = $val !== NULL ? (int)$val : null;
     }
 
     public function getFailedLogins(): int

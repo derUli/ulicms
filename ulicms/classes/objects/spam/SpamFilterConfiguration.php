@@ -75,7 +75,7 @@ class SpamFilterConfiguration
             $this->badwords = StringHelper::linesFromString($val);
         } elseif (is_array($val)) {
             $this->badwords = $val;
-        } elseif (is_null($val)) {
+        } elseif ($val === NULL) {
             $this->badwords = [];
         } else {
             throw new InvalidArgumentException(var_dump_str($val) .
@@ -98,7 +98,7 @@ class SpamFilterConfiguration
             $this->blockedCountries = $countries;
         } elseif (is_array($val)) {
             $this->blockedCountries = $val;
-        } elseif (is_null($val)) {
+        } elseif ($val === NULL) {
             $this->blockedCountries = [];
         } else {
             throw new InvalidArgumentException(var_dump_str($val) .
