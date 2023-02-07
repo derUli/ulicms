@@ -823,7 +823,7 @@ class PageController extends Controller {
         );
         $parentIds = [];
         while ($row = Database::fetchObject($query)) {
-            $parentIds[] = intval($row->id);
+            $parentIds[] = (int)$row->id;
         }
         return $parentIds;
     }

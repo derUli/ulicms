@@ -95,7 +95,7 @@ class Category
         $sql = "select id from `{prefix}categories` order by $order";
         $result = Database::query($sql, true);
         while ($row = Database::fetchobject($result)) {
-            $datasets[] = new Category(intval($row->id));
+            $datasets[] = new Category((int)$row->id);
         }
         return $datasets;
     }

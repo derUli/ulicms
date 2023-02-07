@@ -11,12 +11,10 @@ class AntiSpamHelper extends Helper {
             ?string $ip = null,
             ?array $country_blacklist = null
     ): bool {
-        if (is_null($ip)) {
-            $ip = get_ip();
-        }
-        if (is_null($country_blacklist)) {
-            $country_blacklist = Settings::get("country_blacklist");
-        }
+        $ip = $ip ?? get_ip();
+
+        $country_blacklist = $country_blacklist ?? Settings::get("country_blacklist");
+
         if (is_string($country_blacklist)) {
             $country_blacklist = strtolower($country_blacklist);
             $country_blacklist = explode(",", $country_blacklist);
@@ -117,7 +115,7 @@ class AntiSpamHelper extends Helper {
 
     // returns true if this is a bot, based on a static useragent list
     public static function checkForBot(?string $useragent = null): bool {
-        if (!$useragent and isset($_SERVER['HTTP_USER_AGENT'])) {
+        if (!$useragent && isset($_SERVER['HTTP_USER_AGENT'])) {
             $useragent = $_SERVER['HTTP_USER_AGENT'];
         }
 
@@ -164,6 +162,7 @@ class AntiSpamHelper extends Helper {
             "ZyBorg",
             "rabaz"
         ];
+        
         foreach ($bots as $bot) {
             if ($useragent && stripos($useragent, $bot) !== false) {
                 return true;

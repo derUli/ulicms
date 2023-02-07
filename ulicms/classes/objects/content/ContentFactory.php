@@ -58,7 +58,7 @@ class ContentFactory
                 and StringHelper::isNotNullOrEmpty($mappings[$type])
                 and class_exists($mappings[$type])) {
             $retval = new $mappings[$type]();
-            $retval->loadByID(intval($row->id));
+            $retval->loadByID((int)$row->id);
         } else {
             $message = "Content with id={$row->id} has unknown content type "
                     . "\"{$type}\"";

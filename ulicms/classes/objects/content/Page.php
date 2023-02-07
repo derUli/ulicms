@@ -180,7 +180,7 @@ class Page extends Content {
         $sql .= intval($this->approved) . ",";
         $this->created = time();
         $this->lastmodified = $this->created;
-        $sql .= intval($this->created) . ",";
+        $sql .= (int)$this->created . ",";
         $sql .= intval($this->lastmodified) . ",";
         $sql .= intval($this->author_id) . ",";
 

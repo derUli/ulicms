@@ -40,7 +40,7 @@ class NumberFormatHelper extends Helper
         ?int $timestamp = null,
         string $format = self::SQL_DATE_WITHOUT_SECONDS
     ): string {
-        $time = !is_null($timestamp) ? $timestamp : time();
+        $time = $timestamp ?? time();
         return date($format, $time);
     }
     

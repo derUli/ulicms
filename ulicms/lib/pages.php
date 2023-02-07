@@ -8,7 +8,7 @@ function getPageIDBySlug(string $slug): ?int {
             . "` where slug='" . db_escape($slug) . "'");
     if (db_num_rows($result) > 0) {
         $row = db_fetch_object($result);
-        return intval($row->id);
+        return (int)$row->id;
     }
     return null;
 }

@@ -45,9 +45,8 @@ class ModuleHelper extends Helper {
             ?string $module = null,
             ?string $language = null
     ): ?object {
-        if (is_null($language)) {
-            $language = getCurrentLanguage();
-        }
+        $language = $language ?? getCurrentLanguage();
+       
         $args = array(
             1,
             $language
@@ -59,8 +58,8 @@ class ModuleHelper extends Helper {
             $content = str_replace("&quot;", "\"", $content);
 
             // TODO: refactor this if-hell
-            if (!is_null($dataset->module) && !empty($dataset->module) and $dataset->type == "module") {
-                if (!$module or ($module and $dataset->module == $module)) {
+            if (!empty($dataset->module) && $dataset->type == "module") {
+                if (!$module || ($module && $dataset->module == $module)) {
                     return $dataset;
                 }
             } elseif ($module) {
@@ -193,13 +192,13 @@ class ModuleHelper extends Helper {
         }
 
         $page = ContentFactory::getByID($page_id);
-        if (is_null($page->id)) {
+        if ($page->id === NULL) {
             return null;
         }
 
         if ($page instanceof Language_Link) {
             $language = new Language($page->link_to_language);
-            if (!is_null($language->getID()) and StringHelper::isNotNullOrWhitespace($language->getLanguageLink())) {
+            if ($language->getID() !== NULL && StringHelper::isNotNullOrWhitespace($language->getLanguageLink())) {
                 return $language->getLanguageLink();
             }
         }
@@ -231,20 +230,20 @@ class ModuleHelper extends Helper {
         if ($domain) {
             $url = get_site_protocol() . $domain .
                     $dirname . $page->slug;
-            if (!is_null($suffix)) {
+            if ($suffix !== NULL) {
                 $url .= "?{$suffix}";
             }
         } else {
             if ($page->language != $currentLanguage) {
                 $url = get_protocol_and_domain() . $dirname .
                         $page->slug . "?language=" . $page->language;
-                if (!is_null($suffix)) {
+                if ($suffix !== NULL) {
                     $url .= "&{$suffix}";
                 }
             } else {
                 $url = get_protocol_and_domain() . $dirname
                         . $page->slug;
-                if (!is_null($suffix)) {
+                if ($suffix !== NULL) {
                     $url .= "?{$suffix}";
                 }
             }

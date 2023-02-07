@@ -736,7 +736,7 @@ function get_menu(
 
     while ($row = db_fetch_object($result)) {
         if (checkAccess($row->access)) {
-            $containsCurrentItem = parent_item_contains_current_page(intval($row->id));
+            $containsCurrentItem = parent_item_contains_current_page((int)$row->id);
 
             $additional_classes = " menu-link-to-" . $row->id . " ";
             if ($containsCurrentItem) {
@@ -781,7 +781,7 @@ function get_menu(
             $html .= "</a>\n";
 
             if ($recursive) {
-                $html .= get_menu($name, intval($row->id), true, $order);
+                $html .= get_menu($name, (int)$row->id, true, $order);
             }
 
             $html .= "</li>";
