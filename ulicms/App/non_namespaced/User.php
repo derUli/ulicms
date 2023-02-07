@@ -5,7 +5,7 @@ declare(strict_types=1);
 use LasseRafn\InitialAvatarGenerator\InitialAvatar;
 use App\Security\PermissionChecker;
 use App\Security\Encryption;
-use UliCMS\Models\Users\GroupCollection;
+use App\Models\Users\GroupCollection;
 
 class User extends Model
 {

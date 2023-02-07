@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-use App\Exceptions\DatasetNotFoundException;
-
 abstract class Content extends Model
 {
     abstract protected function loadBySlugAndLanguage($name, $language);

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use UliCMS\Models\Users\GroupCollection;
+use App\Models\Users\GroupCollection;
 
 class GroupCollectionTest extends \PHPUnit\Framework\TestCase {
 

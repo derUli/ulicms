@@ -3,7 +3,7 @@
 use App\Security\Encryption;
 use App\Exceptions\NotImplementedException;
 use App\Utils\CacheUtil;
-use UliCMS\Models\Users\GroupCollection;
+use App\Models\Users\GroupCollection;
 
 class UserTest extends \PHPUnit\Framework\TestCase {
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace UliCMS\Models\Users;
+namespace App\Models\Users;
 
 use User;
 

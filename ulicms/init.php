@@ -84,7 +84,8 @@ require dirname(__FILE__) . "/lib/load.php";
 
 $loadDirs = [
     'classes/objects/constants',
-    'classes/objects/security'
+    'classes/objects/security',
+    'classes/objects/users'
 ];
 
 foreach ($loadDirs as $loadDir) {
@@ -93,7 +94,6 @@ foreach ($loadDirs as $loadDir) {
 
 require dirname(__FILE__) . "/classes/objects/content/types/fields/load.php";
 require dirname(__FILE__) . "/classes/objects/html/load.php";
-require dirname(__FILE__) . "/classes/objects/users/load.php";
 require dirname(__FILE__) . "/classes/objects/content/CustomData.php";
 require dirname(__FILE__) . "/classes/objects/content/Content.php";
 require dirname(__FILE__) . "/classes/objects/content/Page.php";

@@ -1,6 +1,6 @@
 <?php
 
-$classes = array(
+$classes = [
     "Template",
     "Style",
     "Script",
@@ -11,7 +11,8 @@ $classes = array(
     "Button",
     "functions",
     "Form"
-);
+];
+
 foreach ($classes as $class) {
     require dirname(__FILE__) . "/$class.php";
 }
