@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use UliCMS\Models\Content\Language;
+use App\Models\Content\Language;
 
 class Group
 {

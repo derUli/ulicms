@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Models\Content\Language;
+use App\Models\Content\Language;
 
 // Links to another language
 class Language_Link extends Page

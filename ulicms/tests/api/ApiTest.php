@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Models\Content\Language;
+use App\Models\Content\Language;
 use UliCMS\Utils\CacheUtil;
 
 class ApiTest extends \PHPUnit\Framework\TestCase {

@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Models\Content\Comment;
+use App\Models\Content\Comment;
 use UliCMS\HTML\Script;
 use App\Helpers\DataTablesHelper;
 

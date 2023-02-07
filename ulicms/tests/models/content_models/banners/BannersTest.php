@@ -2,7 +2,7 @@
 
 use App\Models\Content\Advertisement\Banners;
 use App\Models\Content\Advertisement\Banner;
-use UliCMS\Models\Content\Category;
+use App\Models\Content\Category;
 
 class BannersTest extends \PHPUnit\Framework\TestCase {
 

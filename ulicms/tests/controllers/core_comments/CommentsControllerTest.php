@@ -1,7 +1,7 @@
 <?php
 
 use App\Constants\CommentStatus;
-use UliCMS\Models\Content\Comment;
+use App\Models\Content\Comment;
 use App\Exceptions\NotImplementedException;
 
 class CommentsControllerTest extends \PHPUnit\Framework\TestCase {

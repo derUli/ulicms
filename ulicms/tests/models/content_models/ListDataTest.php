@@ -2,7 +2,7 @@
 <?php
 
 use App\Exceptions\DatabaseException;
-use UliCMS\Models\Content\Category;
+use App\Models\Content\Category;
 
 class ListDataTest extends \PHPUnit\Framework\TestCase {
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use UliCMS\Models\Content\Types\DefaultContentTypes;
+use App\Models\Content\Types\DefaultContentTypes;
 
 function getFieldsForCustomType(string $type): array {
     $fields = [];

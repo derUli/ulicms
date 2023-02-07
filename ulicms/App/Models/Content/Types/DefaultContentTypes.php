@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace UliCMS\Models\Content\Types;
+namespace App\Models\Content\Types;
 
-use UliCMS\Models\Content\Types\ContentType;
+use App\Models\Content\Types\ContentType;
 
 class DefaultContentTypes {
 

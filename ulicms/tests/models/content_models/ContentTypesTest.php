@@ -1,7 +1,7 @@
 <?php
 
-use UliCMS\Models\Content\Types\ContentType;
-use UliCMS\Models\Content\Types\DefaultContentTypes;
+use App\Models\Content\Types\ContentType;
+use App\Models\Content\Types\DefaultContentTypes;
 
 class ContentTypesTest extends \PHPUnit\Framework\TestCase {
 

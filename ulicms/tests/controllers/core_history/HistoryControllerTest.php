@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Models\Content\VCS;
+use App\Models\Content\VCS;
 
 class HistoryControllerTest extends \PHPUnit\Framework\TestCase {
 

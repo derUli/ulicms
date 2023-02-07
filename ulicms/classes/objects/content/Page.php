@@ -3,8 +3,8 @@
 defined('ULICMS_ROOT') or exit('no direct script access allowed');
 
 use UliCMS\Security\Permissions\PagePermissions;
-use UliCMS\Models\Content\Comment;
-use UliCMS\Models\Content\VCS;
+use App\Models\Content\Comment;
+use App\Models\Content\VCS;
 use App\Exceptions\DatasetNotFoundException;
 
 class Page extends Content {

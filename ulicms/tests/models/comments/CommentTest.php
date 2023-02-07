@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Models\Content\Comment;
+use App\Models\Content\Comment;
 use App\Constants\CommentStatus;
 use App\Exceptions\DatasetNotFoundException;
 use UliCMS\Utils\CacheUtil;

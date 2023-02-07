@@ -7,7 +7,7 @@ namespace UliCMS\Security\SpamChecker;
 use StringHelper;
 use AntiSpamHelper;
 use Request;
-use UliCMS\Models\Content\Comment;
+use App\Models\Content\Comment;
 
 class CommentSpamChecker implements ISpamChecker
 {

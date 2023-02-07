@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\Media\Audio;
-use UliCMS\Models\Content\Category;
+use App\Models\Content\Category;
 
 class AudioTest extends \PHPUnit\Framework\TestCase {
 

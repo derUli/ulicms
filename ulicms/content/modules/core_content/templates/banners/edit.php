@@ -3,7 +3,7 @@
 use App\Constants\RequestMethod;
 use App\Models\Content\Advertisement\Banner;
 use UliCMS\HTML\Alert;
-use UliCMS\Models\Content\Categories;
+use App\Models\Content\Categories;
 use App\Exceptions\DatasetNotFoundException;
 
 $permissionChecker = new ACL();

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use UliCMS\Models\Content\Comment;
+use App\Models\Content\Comment;
 use App\Exceptions\DatasetNotFoundException;
 use UliCMS\HTML as HTML;
 use App\Exceptions\NotImplementedException;

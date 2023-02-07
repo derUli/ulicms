@@ -1,7 +1,7 @@
 <?php
 
-use UliCMS\Models\Content\Category;
-use UliCMS\Models\Content\Categories;
+use App\Models\Content\Category;
+use App\Models\Content\Categories;
 
 class CategoryControllerTest extends \PHPUnit\Framework\TestCase {
 

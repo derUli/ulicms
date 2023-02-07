@@ -37,6 +37,7 @@ if (file_exists($composerAutoloadFile)) {
 // Autoloader
 spl_autoload_register(function ($className) {
     // Backwards compatiblity for old code
+    /*
     if (str_starts_with($className, 'UliCMS\\')) {
         trigger_error(
                 "Namespaces starting with UliCMS\\ are deprecated: $className",
@@ -44,7 +45,7 @@ spl_autoload_register(function ($className) {
         );
 
         $className = 'App\\' . substring($className, 8);
-    }
+    } */
 
     // Interim solution for non namespaced classes
     if (!str_contains($className, "\\")) {
@@ -67,10 +68,6 @@ require_once dirname(__file__) . "/classes/objects/storages/load.php";
 require_once dirname(__file__) . "/classes/objects/modules/load.php";
 require_once dirname(__file__) . "/classes/objects/settings/load.php";
 require_once dirname(__file__) . "/classes/objects/web/load.php";
-require_once dirname(__file__) . "/classes/objects/content/Categories.php";
-require_once dirname(__file__) . "/classes/objects/content/VCS.php";
-require_once dirname(__file__) . "/classes/objects/content/types/ContentType.php";
-require_once dirname(__file__) . "/classes/objects/content/types/DefaultContentTypes.php";
 require_once dirname(__file__) . "/classes/objects/content/types/fields/load.php";
 require_once dirname(__file__) . "/classes/objects/registry/load.php";
 require_once dirname(__file__) . "/classes/objects/html/load.php";
@@ -80,14 +77,12 @@ require_once dirname(__file__) . "/classes/objects/files/load.php";
 require_once dirname(__file__) . "/classes/objects/spam/load.php";
 require_once dirname(__file__) . "/classes/objects/users/load.php";
 require_once dirname(__file__) . "/classes/objects/content/CustomData.php";
-require_once dirname(__file__) . "/classes/objects/content/Category.php";
 require_once dirname(__file__) . "/classes/objects/content/PagePermissions.php";
 require_once dirname(__file__) . "/classes/objects/content/Content.php";
 require_once dirname(__file__) . "/classes/objects/content/Page.php";
 require_once dirname(__file__) . "/classes/objects/content/Snippet.php";
 require_once dirname(__file__) . "/classes/objects/content/Link.php";
 require_once dirname(__file__) . "/classes/objects/content/Language_Link.php";
-require_once dirname(__file__) . "/classes/objects/content/Language.php";
 require_once dirname(__file__) . "/classes/objects/content/Node.php";
 require_once dirname(__file__) . "/classes/objects/content/List_Data.php";
 require_once dirname(__file__) . "/classes/objects/content/Content_List.php";
@@ -96,7 +91,6 @@ require_once dirname(__file__) . "/classes/objects/content/Video_Page.php";
 require_once dirname(__file__) . "/classes/objects/content/Audio_Page.php";
 require_once dirname(__file__) . "/classes/objects/content/Image_Page.php";
 require_once dirname(__file__) . "/classes/objects/content/Article.php";
-require_once dirname(__file__) . "/classes/objects/content/Comment.php";
 require_once dirname(__file__) . "/classes/objects/content/ContentFactory.php";
 require_once dirname(__file__) . "/classes/objects/content/CustomFields.php";
 require_once dirname(__file__) . "/classes/objects/content/Results.php";

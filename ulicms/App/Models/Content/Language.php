@@ -1,6 +1,6 @@
 <?php
 
-namespace UliCMS\Models\Content;
+namespace App\Models\Content;
 
 use Model;
 use Database;

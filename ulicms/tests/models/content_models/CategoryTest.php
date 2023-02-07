@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Models\Content\Category;
+use App\Models\Content\Category;
 
 class CategoryTest extends \PHPUnit\Framework\TestCase {
 

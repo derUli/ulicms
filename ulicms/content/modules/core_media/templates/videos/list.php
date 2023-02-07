@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Models\Content\Categories;
+use App\Models\Content\Categories;
 
 $permissionChecker = new ACL();
 

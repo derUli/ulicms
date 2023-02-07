@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use UliCMS\Models\Content\Language;
-use UliCMS\Models\Content\Categories;
-use UliCMS\Models\Content\Types\DefaultContentTypes;
+use App\Models\Content\Language;
+use App\Models\Content\Categories;
+use App\Models\Content\Types\DefaultContentTypes;
 use UliCMS\Utils\File;
 use App\Exceptions\DatasetNotFoundException;
 

@@ -1,7 +1,7 @@
 <?php
 
 use App\Constants\RequestMethod;
-use UliCMS\Models\Content\Categories;
+use App\Models\Content\Categories;
 
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("banners")

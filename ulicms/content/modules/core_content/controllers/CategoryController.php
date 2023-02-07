@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use UliCMS\Models\Content\Categories;
+use App\Models\Content\Categories;
 
 class CategoryController extends Controller {
 

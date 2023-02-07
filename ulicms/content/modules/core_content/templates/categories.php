@@ -1,7 +1,7 @@
 <?php
 
 // TODO: refactor this file into multiple files
-use UliCMS\Models\Content\Categories;
+use App\Models\Content\Categories;
 use UliCMS\HTML\Alert;
 
 $permissionChecker = new ACL();

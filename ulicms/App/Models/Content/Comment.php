@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace UliCMS\Models\Content;
+namespace App\Models\Content;
 
 use Database;
 use ContentFactory;

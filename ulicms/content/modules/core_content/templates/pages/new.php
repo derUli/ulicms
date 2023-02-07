@@ -3,9 +3,9 @@
 // TODO: Rewrite this view, move logic to PageController
 // Join new and edit views to one form
 use App\Models\Content\TypeMapper;
-use UliCMS\Models\Content\Categories;
-use UliCMS\Models\Content\Language;
-use UliCMS\Models\Content\Types\DefaultContentTypes;
+use App\Models\Content\Categories;
+use App\Models\Content\Language;
+use App\Models\Content\Types\DefaultContentTypes;
 use App\Helpers\NumberFormatHelper;
 use UliCMS\CoreContent\UIUtils;
 use function UliCMS\HTML\icon;

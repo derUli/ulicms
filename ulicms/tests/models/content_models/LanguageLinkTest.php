@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Models\Content\Language;
+use App\Models\Content\Language;
 
 class LanguageLinkTest extends \PHPUnit\Framework\TestCase {
 

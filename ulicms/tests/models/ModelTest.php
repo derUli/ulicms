@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Models\Content\Language;
+use App\Models\Content\Language;
 use App\Exceptions\NotImplementedException;
 
 class ModelTest extends \PHPUnit\Framework\TestCase {

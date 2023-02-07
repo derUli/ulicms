@@ -1,7 +1,7 @@
 <?php
 
-use UliCMS\Models\Content\Language;
-use UliCMS\Models\Content\VCS;
+use App\Models\Content\Language;
+use App\Models\Content\VCS;
 use App\Exceptions\DatasetNotFoundException;
 
 class PageControllerTest extends \PHPUnit\Framework\TestCase {

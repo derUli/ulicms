@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use UliCMS\Models\Content\VCS;
+use App\Models\Content\VCS;
 use UliCMS\Utils\CacheUtil;
 
 class HistoryController extends Controller {

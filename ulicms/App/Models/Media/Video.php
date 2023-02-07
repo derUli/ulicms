@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Models\Media;
 
 use UliCMS\Utils\File;
-use UliCMS\Models\Content\Category;
+use App\Models\Content\Category;
 use Database;
 use Model;
 use Path;

@@ -1,7 +1,7 @@
 <?php
 
 // FIXME: this file looks like shit, refactor this code to MVC pattern.
-use UliCMS\Models\Content\Language;
+use App\Models\Content\Language;
 
 $permissionChecker = new ACL();
 if (!$permissionChecker->hasPermission("groups")) {

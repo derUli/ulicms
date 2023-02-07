@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\Content\Advertisement\Banners;
-use UliCMS\Models\Content\Categories;
+use App\Models\Content\Categories;
 use UliCMS\HTML\Alert;
 
 $permissionChecker = new ACL();

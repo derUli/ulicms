@@ -6,11 +6,11 @@
 use App\Models\Content\TypeMapper;
 use UliCMS\Security\ContentPermissionChecker;
 use UliCMS\Security\PermissionChecker;
-use UliCMS\Models\Content\Comment;
-use UliCMS\Models\Content\VCS;
-use UliCMS\Models\Content\Categories;
-use UliCMS\Models\Content\Language;
-use UliCMS\Models\Content\Types\DefaultContentTypes;
+use App\Models\Content\Comment;
+use App\Models\Content\VCS;
+use App\Models\Content\Categories;
+use App\Models\Content\Language;
+use App\Models\Content\Types\DefaultContentTypes;
 use App\Helpers\NumberFormatHelper;
 use UliCMS\HTML\Input;
 use UliCMS\CoreContent\UIUtils;

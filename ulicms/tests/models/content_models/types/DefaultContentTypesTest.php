@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Models\Content\Types\DefaultContentTypes;
+use App\Models\Content\Types\DefaultContentTypes;
 
 class DefaultContentTypesTest extends \PHPUnit\Framework\TestCase {
 

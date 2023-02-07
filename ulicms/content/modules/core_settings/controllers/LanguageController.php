@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use UliCMS\Utils\CacheUtil;
-use UliCMS\Models\Content\Language;
+use App\Models\Content\Language;
 use Rakit\Validation\Validator;
 use function UliCMS\HTML\stringContainsHtml;
 

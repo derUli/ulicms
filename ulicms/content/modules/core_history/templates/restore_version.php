@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Models\Content\VCS;
+use App\Models\Content\VCS;
 
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("pages")) {
