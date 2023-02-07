@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace UliCMS\Security;
+namespace App\Security;
 
 use Settings;
 use PHPGangsta_GoogleAuthenticator;

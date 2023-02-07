@@ -6,7 +6,6 @@ $classes = array(
     "PermissionChecker",
     "IDatasetPermissionChecker",
     "ContentPermissionChecker",
-    "TwoFactorAuthentication",
     "XSSProtection"
 );
 foreach ($classes as $class) {

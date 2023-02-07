@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use UliCMS\Security\TwoFactorAuthentication;
+use App\Security\TwoFactorAuthentication;
 
 /**
  * Gets id and username of all users

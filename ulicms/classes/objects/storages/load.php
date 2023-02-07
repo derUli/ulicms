@@ -1,7 +1,6 @@
 <?php
 
 $classes = array(
-    "Flags",
     "Vars",
     "ViewBag"
 );

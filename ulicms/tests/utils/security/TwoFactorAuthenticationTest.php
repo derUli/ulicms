@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\Security\TwoFactorAuthentication;
+use App\Security\TwoFactorAuthentication;
 
 class TwoFactorAuthenticationTest extends \PHPUnit\Framework\TestCase {
 
