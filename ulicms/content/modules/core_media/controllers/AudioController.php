@@ -6,7 +6,7 @@ class AudioController extends Controller {
 
     public function createPost(): void {
         $mp3_file_value = "";
-        $audio_folder = ULICMS_DATA_STORAGE_ROOT . "/content/audio";
+        $audio_folder = ULICMS_ROOT . "/content/audio";
         // mp3
         if (!empty($_FILES ['mp3_file'] ['name'])) {
             $mp3_file = time() . "-" . basename($_FILES ['mp3_file'] ['name']);
@@ -25,11 +25,7 @@ class AudioController extends Controller {
                                 $_FILES ['mp3_file'] ['tmp_name'],
                                 $target
                         )) {
-                    // Google Cloud: make file public
-                    if (startsWith(ULICMS_DATA_STORAGE_ROOT, "gs://")
-                            and class_exists("GoogleCloudHelper")) {
-                        GoogleCloudHelper::changeFileVisiblity($target, true);
-                    }
+
                     $mp3_file_value = basename($mp3_file);
                 }
             }
@@ -51,11 +47,7 @@ class AudioController extends Controller {
                                 $_FILES ['ogg_file'] ['tmp_name'],
                                 $target
                         )) {
-                    // Google Cloud: make file public
-                    if (startsWith(ULICMS_DATA_STORAGE_ROOT, "gs://")
-                            and class_exists("GoogleCloudHelper")) {
-                        GoogleCloudHelper::changeFileVisiblity($target, true);
-                    }
+
                     $ogg_file_value = basename($ogg_file);
                 }
             }
@@ -103,13 +95,13 @@ class AudioController extends Controller {
                 intval($_REQUEST ["delete"]));
         if (db_num_rows($result) > 0) {
             $dataset = db_fetch_object($result);
-            $filepath = ULICMS_DATA_STORAGE_ROOT . "/content/audio/" .
+            $filepath = ULICMS_ROOT . "/content/audio/" .
                     basename($dataset->ogg_file);
             if (!empty($dataset->ogg_file) and file_exists($filepath)) {
                 @unlink($filepath);
             }
 
-            $filepath = ULICMS_DATA_STORAGE_ROOT . "/content/audio/" .
+            $filepath = ULICMS_ROOT . "/content/audio/" .
                     basename($dataset->mp3_file);
             if (!empty($dataset->mp3_file) and file_exists($filepath)) {
                 @unlink($filepath);

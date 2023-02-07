@@ -5,12 +5,10 @@ use function UliCMS\HTML\imageTag;
 $controller = new LogoController();
 
 $permissionChecker = new ACL();
-if (defined("ULICMS_DATA_STORAGE_URL")) {
-    $logoUrl = ULICMS_DATA_STORAGE_URL . "/content/images/" . Settings::get("logo_image");
-} else {
-    $logoUrl = "../content/images/" . Settings::get("logo_image");
-}
-$logoStoragePath = ULICMS_DATA_STORAGE_ROOT . "/content/images/" . Settings::get("logo_image");
+
+$logoUrl = "../content/images/" . Settings::get("logo_image");
+
+$logoStoragePath = ULICMS_ROOT . "/content/images/" . Settings::get("logo_image");
 
 if ($permissionChecker->hasPermission("logo")) {
     ?>

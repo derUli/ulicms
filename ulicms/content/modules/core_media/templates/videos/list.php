@@ -4,7 +4,7 @@ use UliCMS\Models\Content\Categories;
 
 $permissionChecker = new ACL();
 
-$video_folder = ULICMS_DATA_STORAGE_ROOT . "/content/videos";
+$video_folder = ULICMS_ROOT . "/content/videos";
 if (!is_dir($video_folder)) {
     mkdir($video_folder);
 }

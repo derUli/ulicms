@@ -5,7 +5,7 @@ declare(strict_types=1);
 class VideoController extends Controller {
 
     public function createPost(): void {
-        $video_folder = ULICMS_DATA_STORAGE_ROOT . "/content/videos";
+        $video_folder = ULICMS_ROOT . "/content/videos";
 
         if (isset($_FILES)) {
             $mp4_file_value = "";
@@ -23,14 +23,7 @@ class VideoController extends Controller {
                                     $_FILES ['mp4_file'] ['tmp_name'],
                                     $target
                             )) {
-                        // Google Cloud: make file public
-                        if (startsWith(ULICMS_DATA_STORAGE_ROOT, "gs://")
-                                and class_exists("GoogleCloudHelper")) {
-                            GoogleCloudHelper::changeFileVisiblity(
-                                    $target,
-                                    true
-                            );
-                        }
+
                         $mp4_file_value = basename($mp4_file);
                     }
                 }
@@ -52,11 +45,7 @@ class VideoController extends Controller {
                                     $_FILES ['ogg_file'] ['tmp_name'],
                                     $target
                             )) {
-                        // Google Cloud: make file public
-                        if (startsWith(ULICMS_DATA_STORAGE_ROOT, "gs://")
-                                and class_exists("GoogleCloudHelper")) {
-                            GoogleCloudHelper::changeFileVisiblity($target, true);
-                        }
+
                         $ogg_file_value = basename($ogg_file);
                     }
                 }
@@ -79,14 +68,7 @@ class VideoController extends Controller {
                                     $_FILES ['webm_file'] ['tmp_name'],
                                     $target
                             )) {
-                        // Google Cloud: make file public
-                        if (startsWith(ULICMS_DATA_STORAGE_ROOT, "gs://")
-                                and class_exists("GoogleCloudHelper")) {
-                            GoogleCloudHelper::changeFileVisiblity(
-                                    $target,
-                                    true
-                            );
-                        }
+                     
                         $webm_file_value = basename($webm_file);
                     }
                 }
@@ -144,21 +126,21 @@ class VideoController extends Controller {
         if (db_num_rows($result) > 0) {
             // OGG
             $dataset = db_fetch_object($result);
-            $filepath = ULICMS_DATA_STORAGE_ROOT . "/content/videos/" .
+            $filepath = ULICMS_ROOT . "/content/videos/" .
                     basename($dataset->ogg_file);
             if (!empty($dataset->ogg_file) and file_exists($filepath)) {
                 unlink($filepath);
             }
 
             // WebM
-            $filepath = ULICMS_DATA_STORAGE_ROOT . "/content/videos/" .
+            $filepath = ULICMS_ROOT . "/content/videos/" .
                     basename($dataset->webm_file);
             if (!empty($dataset->webm_file) and file_exists($filepath)) {
                 unlink($filepath);
             }
 
             // MP4
-            $filepath = ULICMS_DATA_STORAGE_ROOT . "/content/videos/" .
+            $filepath = ULICMS_ROOT . "/content/videos/" .
                     basename($dataset->mp4_file);
             if (!empty($dataset->mp4_file) and file_exists($filepath)) {
                 @unlink($filepath);

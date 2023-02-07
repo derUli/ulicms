@@ -15,7 +15,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
             <?php translate("back") ?></a>
     </p>
     <?php
-    $temp_folder = ULICMS_DATA_STORAGE_ROOT . DIRECTORY_SEPARATOR . "content" . DIRECTORY_SEPARATOR . "tmp";
+    $temp_folder = ULICMS_ROOT . DIRECTORY_SEPARATOR . "content" . DIRECTORY_SEPARATOR . "tmp";
     if (!empty($_POST)) {
         if (count($_FILES) > 0) {
             $file_in_tmp = $temp_folder . DIRECTORY_SEPARATOR . $_FILES['file']['name'];

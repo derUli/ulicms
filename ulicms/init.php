@@ -1,5 +1,11 @@
 <?php
 
+// Define static constants
+const CR = "\r"; // carriage return; Mac
+const LF = "\n";  // line feed; Unix
+const CRLF = "\r\n"; // carriage return and line feed; Windows
+const ONE_DAY_IN_SECONDS = 86400;
+
 // use this constant at the end
 // of the page load procedure to measure site performance
 define("START_TIME", microtime(true));
@@ -11,12 +17,23 @@ if (!defined("ULICMS_ROOT")) {
 
 use App\Exceptions\AccessDeniedException;
 use App\Exceptions\ConnectionFailedException;
-use App\Exceptions\FileNotFoundException;
 use App\Exceptions\SqlException;
 use App\Constants\AuditLog;
 use App\Registries\HelperRegistry;
 use App\Models\Content\TypeMapper;
 use App\Packages\PatchManager;
+
+// load composer packages
+$composerAutoloadFile = dirname(__FILE__) . "/vendor/autoload.php";
+
+if (file_exists($composerAutoloadFile)) {
+    require_once $composerAutoloadFile;
+} else {
+    throw new FileNotFoundException(
+                    "autoload.php not found. "
+                    . "Please run \"./composer install\" to install dependecies."
+    );
+}
 
 // Autoloader
 spl_autoload_register(function ($className) {
@@ -44,22 +61,6 @@ spl_autoload_register(function ($className) {
 
     require $basePath;
 });
-
-/*
- * Diese Datei initalisiert das System
- */
-
-// load composer packages
-$composerAutoloadFile = dirname(__FILE__) . "/vendor/autoload.php";
-
-if (file_exists($composerAutoloadFile)) {
-    require_once $composerAutoloadFile;
-} else {
-    throw new FileNotFoundException(
-                    "autoload.php not found. "
-                    . "Please run \"./composer install\" to install dependecies."
-    );
-}
 
 require_once dirname(__file__) . "/lib/load.php";
 require_once dirname(__file__) . "/classes/objects/constants/load.php";
@@ -163,24 +164,13 @@ if ((defined("ULICMS_DEBUG") && ULICMS_DEBUG) || (isset($config->debug) && $conf
     error_reporting(0);
 }
 
-// UliCMS has support to define an alternative root folder
-// to seperate it's core files from variable data such as modules and media
-// this enables us to use stuff like Docker containers where data gets lost
-// after stopping the container
-if (isset($config->data_storage_root) && $config->data_storage_root !== null) {
-    define("ULICMS_DATA_STORAGE_ROOT", $config->data_storage_root);
-} else {
-    define("ULICMS_DATA_STORAGE_ROOT", ULICMS_ROOT);
-}
-
-// this enables us to set an base url for statis ressources such as images
-// stored in ULICMS_DATA_STORAGE_ROOT
-if (isset($config->data_storage_url) && $config->data_storage_url !== null) {
-    define("ULICMS_DATA_STORAGE_URL", $config->data_storage_url);
-}
+/**
+ * @deprecated since version 2023.1
+ */
+ define("ULICMS_DATA_STORAGE_ROOT", ULICMS_ROOT);
 
 if (!defined("ULICMS_TMP")) {
-    define("ULICMS_TMP", ULICMS_DATA_STORAGE_ROOT . "/content/tmp/");
+    define("ULICMS_TMP", ULICMS_ROOT . "/content/tmp/");
 }
 
 if (!is_dir(ULICMS_TMP)) {
@@ -188,7 +178,7 @@ if (!is_dir(ULICMS_TMP)) {
 }
 
 if (!defined("ULICMS_CACHE_BASE")) {
-    define("ULICMS_CACHE_BASE", ULICMS_DATA_STORAGE_ROOT . "/content/cache");
+    define("ULICMS_CACHE_BASE", ULICMS_ROOT . "/content/cache");
 }
 
 // Todo: Alle stellen, wo manuell Cache-Dateien geschrieben werden auf PhpFastCache umstellen
@@ -198,10 +188,10 @@ if (!defined("ULICMS_CACHE")) {
 }
 
 if (!defined("ULICMS_LOG")) {
-    define("ULICMS_LOG", ULICMS_DATA_STORAGE_ROOT . "/content/log/");
+    define("ULICMS_LOG", ULICMS_ROOT . "/content/log/");
 }
 if (!defined("ULICMS_CONTENT")) {
-    define("ULICMS_CONTENT", ULICMS_DATA_STORAGE_ROOT . "/content/");
+    define("ULICMS_CONTENT", ULICMS_ROOT . "/content/");
 }
 
 if (!defined("ULICMS_GENERATED")) {
@@ -259,12 +249,6 @@ if (class_exists("Path")) {
         );
     }
 }
-
-// define Constants
-const CR = "\r"; // carriage return; Mac
-const LF = "\n";  // line feed; Unix
-const CRLF = "\r\n"; // carriage return and line feed; Windows
-const ONE_DAY_IN_SECONDS = 86400;
 
 function noPerms() {
     echo "<div class=\"alert alert-danger\">"

@@ -28,12 +28,12 @@ class FaviconController extends Controller {
     }
 
     public function _getDestination1(): string {
-        return ULICMS_DATA_STORAGE_ROOT
+        return ULICMS_ROOT
                 . "/content/images/favicon.ico";
     }
 
     public function _getDestination2(): string {
-        return ULICMS_DATA_STORAGE_ROOT
+        return ULICMS_ROOT
                 . "/favicon.ico";
     }
 
@@ -58,13 +58,6 @@ class FaviconController extends Controller {
                 $source = $favicon_upload_file['tmp_name'];
                 $sizes = $this->_getSizes(isset($_POST["high_resolution"]));
                 $this->_placeFiles($source, $sizes);
-
-                // Google Cloud: make file public
-                if (startsWith(ULICMS_DATA_STORAGE_ROOT, "gs://")
-                        and class_exists("GoogleCloudHelper")) {
-                    GoogleCloudHelper::changeFileVisiblity($destination1, true);
-                    GoogleCloudHelper::changeFileVisiblity($destination2, true);
-                }
 
                 do_event("after_upload_favicon");
 

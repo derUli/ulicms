@@ -6,17 +6,15 @@ use App\Services\Connectors\PackageSourceConnector;
 use App\Constants\PackageTypes;
 use UliCMS\Utils\CacheUtil;
 
-class PackageManager
-{
-    public function checkForNewerVersionOfPackage(string $name): ?string
-    {
+class PackageManager {
+
+    public function checkForNewerVersionOfPackage(string $name): ?string {
         $connector = new PackageSourceConnector();
         $connector->fetch(true);
         return $connector->getVersionOfPackage($name);
     }
 
-    public function splitPackageName(string $name): array
-    {
+    public function splitPackageName(string $name): array {
         $name = str_ireplace(".tar.gz", "", $name);
         $name = str_ireplace(".zip", "", $name);
         $splitted = explode("-", $name);
@@ -29,8 +27,8 @@ class PackageManager
     }
 
     public function isInstalled(
-        string $package,
-        string $type = PackageTypes::TYPE_MODULE
+            string $package,
+            string $type = PackageTypes::TYPE_MODULE
     ): bool {
         switch ($type) {
             case PackageTypes::TYPE_MODULE:
@@ -40,29 +38,23 @@ class PackageManager
                 return in_array($package, getAllThemes());
             default:
                 throw new BadMethodCallException(
-                    "Package Type {$type} not supported"
+                                "Package Type {$type} not supported"
                 );
         }
     }
 
     // TODO: Reimplement in PackageSourceconnector
     public function installPackage(
-        string $file,
-        bool $clear_cache = true
+            string $file,
+            bool $clear_cache = true
     ): bool {
         @set_time_limit(0);
         try {
             // Paket entpacken
             $phar = new PharData($file);
-            $phar->extractTo(ULICMS_DATA_STORAGE_ROOT, null, true);
+            $phar->extractTo(ULICMS_ROOT, null, true);
 
-            // make asset files of the package public
-            if (startsWith(ULICMS_DATA_STORAGE_ROOT, "gs://")
-                    and class_exists("GoogleCloudHelper")) {
-                GoogleCloudHelper::makeFilesPublic(ULICMS_DATA_STORAGE_ROOT);
-            }
-
-            $post_install_script1 = ULICMS_DATA_STORAGE_ROOT .
+            $post_install_script1 = ULICMS_ROOT .
                     DIRECTORY_SEPARATOR . "post-install.php";
             $post_install_script2 = ULICMS_TMP .
                     DIRECTORY_SEPARATOR . "post-install.php";
@@ -89,11 +81,10 @@ class PackageManager
         }
     }
 
-    public function getInstalledModules(): array
-    {
+    public function getInstalledModules(): array {
         $availableModules = [];
 
-        $moduleFolder = Path::resolve("ULICMS_DATA_STORAGE_ROOT/content/modules");
+        $moduleFolder = Path::resolve("ULICMS_ROOT/content/modules");
         $moduleDirectories = find_all_folders($moduleFolder);
 
         natcasesort($moduleDirectories);
@@ -108,12 +99,11 @@ class PackageManager
         return $availableModules;
     }
 
-    public function getInstalledThemes(): array
-    {
+    public function getInstalledThemes(): array {
         $themes = [];
         $templateDir = Path::resolve(
-            "ULICMS_DATA_STORAGE_ROOT/content/templates"
-        ) . "/";
+                        "ULICMS_ROOT/content/templates"
+                ) . "/";
 
         $folders = scanDir($templateDir);
         natcasesort($folders);
@@ -131,8 +121,7 @@ class PackageManager
         return $themes;
     }
 
-    public function getInstalledPackages(string $type = 'modules'): ?array
-    {
+    public function getInstalledPackages(string $type = 'modules'): ?array {
         if ($type === 'modules' or $type === 'module') {
             return $this->getInstalledModules();
         } elseif ($type === 'themes' or $type === 'theme') {
@@ -140,4 +129,5 @@ class PackageManager
         }
         throw new BadMethodCallException("No such package type: $type");
     }
+
 }

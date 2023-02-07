@@ -36,8 +36,8 @@ if ($permissionChecker->hasPermission("favicon")) {
                 <td>
                     <div id="favicon-wrapper">
                         <?php
-                        $favicon_path = ULICMS_DATA_STORAGE_ROOT . "/content/images/favicon.ico";
-                        $faviconUrl = defined("ULICMS_DATA_STORAGE_URL") ? ULICMS_DATA_STORAGE_URL . "/content/images/favicon.ico" : "../content/images/favicon.ico";
+                        $favicon_path = ULICMS_ROOT . "/content/images/favicon.ico";
+                        $faviconUrl = "../content/images/favicon.ico";
                         if (file_exists($favicon_path)) {
                             $faviconUrl .= "?time=" . File::getLastChanged($favicon_path);
                             echo imageTag(

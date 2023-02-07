@@ -44,7 +44,7 @@ class Video extends Model {
         $sql = "SELECT id FROM {prefix}videos ORDER BY $order";
         $result = Database::query($sql, true);
         while ($row = Database::fetchObject($result)) {
-            $datasets[] = new self((int)$row->id);
+            $datasets[] = new self((int) $row->id);
         }
         return $datasets;
     }
@@ -63,13 +63,13 @@ class Video extends Model {
     protected function fillVars($result = null): void {
         if ($result) {
             $result = Database::fetchSingle($result);
-            $this->setID((int)$result->id);
+            $this->setID((int) $result->id);
             $this->setName($result->name);
             $this->mp4_file = $result->mp4_file;
             $this->ogg_file = $result->ogg_file;
             $this->webm_file = $result->webm_file;
             $this->setCategoryId($result->category_id ?
-                            (int)$result->category_id : null);
+                            (int) $result->category_id : null);
             $this->created = intval($result->created);
             $this->updated = intval($result->updated);
             $this->width = intval($result->width);
@@ -196,21 +196,21 @@ class Video extends Model {
             if ($deletePhysical) {
                 if ($this->getMp4File()) {
                     $file = Path::resolve(
-                                    "ULICMS_DATA_STORAGE_ROOT/content/videos/" .
+                                    "ULICMS_ROOT/content/videos/" .
                                     basename($this->getMP4File())
                     );
                     File::deleteIfExists($file);
                 }
                 if ($this->getOggFile()) {
                     $file = Path::resolve(
-                                    "ULICMS_DATA_STORAGE_ROOT/content/videos/" .
+                                    "ULICMS_ROOT/content/videos/" .
                                     basename($this->getOggFile())
                     );
                     File::deleteIfExists($file);
                 }
                 if ($this->getWebmFile()) {
                     $file = Path::resolve(
-                                    "ULICMS_DATA_STORAGE_ROOT/content/videos/" .
+                                    "ULICMS_ROOT/content/videos/" .
                                     basename($this->getWebmFile())
                     );
                     File::deleteIfExists($file);
@@ -228,12 +228,7 @@ class Video extends Model {
     }
 
     protected function getVideoDir(): string {
-        $videoDir = self::VIDEO_DIR;
-
-        $storageUrl = defined("ULICMS_DATA_STORAGE_URL") ?
-                Path::resolve("ULICMS_DATA_STORAGE_URL/$videoDir") . "/" : null;
-
-        return defined("ULICMS_DATA_STORAGE_URL") ? $storageUrl : $videoDir;
+        return self::VIDEO_DIR;
     }
 
     // render HTML5 <video> tag

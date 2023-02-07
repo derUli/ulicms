@@ -9,8 +9,6 @@ $permissionChecker = new ACL();
 $controller = ControllerRegistry::get();
 $model = $controller->getModel();
 
-// no patch check in google cloud
-$runningInGoogleCloud = class_exists("GoogleCloudHelper") ? GoogleCloudHelper::isProduction() : false;
 if ($permissionChecker->hasPermission("dashboard")) {
     $user = User::fromSessionData();
     ?>
@@ -53,7 +51,7 @@ if ($permissionChecker->hasPermission("dashboard")) {
         ?>
 
         <?php
-        $pi = ULICMS_DATA_STORAGE_ROOT . "/post-install.php";
+        $pi = ULICMS_ROOT . "/post-install.php";
         if (is_writable($pi)) {
             ?>
             <h2 class="accordion-header"><?php translate("unfinished_package_installations"); ?></h2>
@@ -129,10 +127,8 @@ if ($permissionChecker->hasPermission("dashboard")) {
         <?php do_event("accordion_layout"); ?>
     </div>
     <?php
-    if (!$runningInGoogleCloud) {
-        enqueueScriptFile(ModuleHelper::buildModuleRessourcePath("core_home", "js/dashboard.js"));
-        combinedScriptHtml();
-    }
+    enqueueScriptFile(ModuleHelper::buildModuleRessourcePath("core_home", "js/dashboard.js"));
+    combinedScriptHtml();
 } else {
     noPerms();
 }

@@ -3,7 +3,7 @@
 use UliCMS\Models\Content\Categories;
 
 $permissionChecker = new ACL();
-$audio_folder = ULICMS_DATA_STORAGE_ROOT . "/content/audio";
+$audio_folder = ULICMS_ROOT . "/content/audio";
 if (!is_dir($audio_folder)) {
     mkdir($audio_folder);
 }

@@ -20,7 +20,7 @@ class LogoController extends Controller {
             string $filename,
             string $originalName
     ): string {
-        return ULICMS_DATA_STORAGE_ROOT . "/content/images/" .
+        return ULICMS_ROOT . "/content/images/" .
                 $this->_buildFileName($filename, $originalName);
     }
 
@@ -42,12 +42,6 @@ class LogoController extends Controller {
 
                 ImageScaleHelper::scaleDown($newPath);
 
-                // Google Cloud: make file public
-                if (startsWith(ULICMS_DATA_STORAGE_ROOT, "gs://")
-                        and class_exists("GoogleCloudHelper")) {
-                    GoogleCloudHelper::changeFileVisiblity($newPath, true);
-                }
-
                 Settings::set("logo_image", basename($newPath));
                 Settings::set("logo_disabled", "no");
 
@@ -64,7 +58,7 @@ class LogoController extends Controller {
 
     public function _deleteLogo(): bool {
         $logoImage = Settings::get("logo_image");
-        $path = ULICMS_DATA_STORAGE_ROOT . "/content/images/${logoImage}";
+        $path = ULICMS_ROOT . "/content/images/${logoImage}";
 
         if (empty($logoImage) || !file_exists($path)) {
             return false;

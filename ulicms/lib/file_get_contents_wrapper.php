@@ -65,11 +65,8 @@ function file_get_contents_wrapper(
         return is_string($content) ? $content : null;
     }
 
-    // use file_get_contents() on Google Cloud Platform since it's optimized by Google
-    $runningInGoogleCloud = class_exists("GoogleCloudHelper") ?
-            GoogleCloudHelper::isProduction() : false;
 
-    if (function_exists("curl_init") and is_url($url) && !$runningInGoogleCloud) {
+    if (function_exists("curl_init") and is_url($url)) {
         $content = file_get_contents_curl($url);
     } elseif (ini_get("allow_url_fopen")) {
         ini_set("default_socket_timeout", 5);

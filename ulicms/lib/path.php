@@ -9,12 +9,7 @@ function getTemplateDirPath(
  string {
     if ($abspath) {
         $templateDir = Path::resolve(
-                        "ULICMS_DATA_STORAGE_ROOT/content/templates/"
-                ) . "/";
-    } elseif (ULICMS_ROOT != ULICMS_DATA_STORAGE_ROOT
-            && defined("ULICMS_DATA_STORAGE_URL")) {
-        $templateDir = Path::resolve(
-                        "ULICMS_DATA_STORAGE_URL/content/templates"
+                        "ULICMS_ROOT/content/templates/"
                 ) . "/";
     } elseif (is_admin_dir()) {
         $templateDir = "../content/templates/";
@@ -36,22 +31,18 @@ function getModuleAdminSelfPath(): string {
 function getModulePath($module, $abspath = false): string {
     if ($abspath) {
         return Path::resolve(
-                        "ULICMS_DATA_STORAGE_ROOT/content/modules/$module"
+                        "ULICMS_ROOT/content/modules/$module"
                 ) . "/";
     }
-    if (ULICMS_ROOT == ULICMS_DATA_STORAGE_ROOT && !defined("ULICMS_DATA_STORAGE_URL")) {
-        // Frontend Directory
-        if (file_exists("CMSConfig.php")) {
-            $module_folder = "content/modules/";
-        } // Backend Directory
-        else {
-            $module_folder = "../content/modules/";
-        }
-    } else {
-        $module_folder = Path::resolve(
-                        "ULICMS_DATA_STORAGE_URL/content/modules"
-                ) . "/";
+
+    // Frontend Directory
+    if (file_exists("CMSConfig.php")) {
+        $module_folder = "content/modules/";
+    } // Backend Directory
+    else {
+        $module_folder = "../content/modules/";
     }
+
 
     return $module_folder . $module . "/";
 }

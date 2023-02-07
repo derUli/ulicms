@@ -196,14 +196,14 @@ class Audio extends Model
             if ($deletePhysical) {
                 if ($this->getMP3File()) {
                     $file = Path::resolve(
-                        "ULICMS_DATA_STORAGE_ROOT/content/audio/" .
+                        "ULICMS_ROOT/content/audio/" .
                                     basename($this->getMP3File())
                     );
                     File::deleteIfExists($file);
                 }
                 if ($this->getOggFile()) {
                     $file = Path::resolve(
-                        "ULICMS_DATA_STORAGE_ROOT/content/audio/" .
+                        "ULICMS_ROOT/content/audio/" .
                                     basename($this->getOggFile())
                     );
                     File::deleteIfExists($file);
@@ -218,12 +218,7 @@ class Audio extends Model
 
     protected function getAudioDir(): string
     {
-        $audioDir = self::AUDIO_DIR;
-        
-        $storageUrl = defined("ULICMS_DATA_STORAGE_URL") ?
-                Path::resolve("ULICMS_DATA_STORAGE_URL/$audioDir"). "/"  : null;
-        
-        return defined("ULICMS_DATA_STORAGE_URL") ? $storageUrl : $audioDir;
+        return self::AUDIO_DIR;
     }
 
     // render HTML5 <audio> tag

@@ -806,10 +806,8 @@ function output_favicon_code(): void {
 
 function get_output_favicon_code(): string {
     $url = "content/images/favicon.ico";
-    if (defined("ULICMS_DATA_STORAGE_URL")) {
-        $url = ULICMS_DATA_STORAGE_URL . "/" . $url;
-    }
-    $path = ULICMS_DATA_STORAGE_ROOT . "/content/images/favicon.ico";
+
+    $path = ULICMS_ROOT . "/content/images/favicon.ico";
     $html = "";
     if (file_exists($path)) {
         $url .= "?time=" . File::getLastChanged($path);

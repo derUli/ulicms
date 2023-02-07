@@ -134,4 +134,12 @@ class PermissionCheckerTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($checker->hasPermission("info"));
     }
 
+    public function testNoPerms() {
+        ob_start();
+        noPerms();
+        $this->assertStringContainsString(
+                'alert alert-dange', ob_get_clean()
+        );
+    }
+
 }
