@@ -6,7 +6,7 @@ defined('ULICMS_ROOT') or exit('no direct script access allowed');
 
 // is $val a decimal number or a integer?
 function is_decimal($val): bool {
-    return is_numeric($val) && !ctype_digit((string)$val);
+    return is_numeric($val) && !ctype_digit((string) $val);
 }
 
 function is_blank($val = null): bool {
@@ -42,7 +42,7 @@ function is_false($var): bool {
 
 // sind wir gerade im Adminordner?
 function is_admin_dir(): bool {
-    return basename(getcwd()) === "admin";
+    return basename(getcwd()) === 'admin';
 }
 
 function is_desktop(): bool {

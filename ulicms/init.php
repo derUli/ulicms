@@ -1,6 +1,15 @@
 <?php
 
+if (!defined('CORE_COMPONENT')) {
+    throw new Exception('Core Component is not defined');
+}
+
 // Define static constants
+const CORE_COMPONENT_FRONTEND = 'frontend';
+const CORE_COMPONENT_ADMIN = 'admin';
+const CORE_COMPONENT_PHPUNIT = 'phpunit';
+
+
 const CR = "\r"; // carriage return; Mac
 const LF = "\n";  // line feed; Unix
 const CRLF = "\r\n"; // carriage return and line feed; Windows
@@ -12,7 +21,7 @@ define("START_TIME", microtime(true));
 
 // root directory of UliCMS
 if (!defined("ULICMS_ROOT")) {
-    define("ULICMS_ROOT", dirname(__file__));
+    define("ULICMS_ROOT", dirname(__FILE__));
 }
 
 use App\Exceptions\AccessDeniedException;
@@ -61,40 +70,40 @@ spl_autoload_register(function ($className) {
     require $basePath;
 });
 
-require_once dirname(__file__) . "/lib/load.php";
-require_once dirname(__file__) . "/classes/objects/constants/load.php";
-require_once dirname(__file__) . "/classes/objects/storages/load.php";
-require_once dirname(__file__) . "/classes/objects/modules/load.php";
-require_once dirname(__file__) . "/classes/objects/settings/load.php";
-require_once dirname(__file__) . "/classes/objects/web/load.php";
-require_once dirname(__file__) . "/classes/objects/content/types/fields/load.php";
-require_once dirname(__file__) . "/classes/objects/registry/load.php";
-require_once dirname(__file__) . "/classes/objects/html/load.php";
-require_once dirname(__file__) . "/classes/objects/database/load.php";
-require_once dirname(__file__) . "/classes/objects/security/load.php";
-require_once dirname(__file__) . "/classes/objects/files/load.php";
-require_once dirname(__file__) . "/classes/objects/spam/load.php";
-require_once dirname(__file__) . "/classes/objects/users/load.php";
-require_once dirname(__file__) . "/classes/objects/content/CustomData.php";
-require_once dirname(__file__) . "/classes/objects/content/PagePermissions.php";
-require_once dirname(__file__) . "/classes/objects/content/Content.php";
-require_once dirname(__file__) . "/classes/objects/content/Page.php";
-require_once dirname(__file__) . "/classes/objects/content/Snippet.php";
-require_once dirname(__file__) . "/classes/objects/content/Link.php";
-require_once dirname(__file__) . "/classes/objects/content/Language_Link.php";
-require_once dirname(__file__) . "/classes/objects/content/Node.php";
-require_once dirname(__file__) . "/classes/objects/content/List_Data.php";
-require_once dirname(__file__) . "/classes/objects/content/Content_List.php";
-require_once dirname(__file__) . "/classes/objects/content/Module_Page.php";
-require_once dirname(__file__) . "/classes/objects/content/Video_Page.php";
-require_once dirname(__file__) . "/classes/objects/content/Audio_Page.php";
-require_once dirname(__file__) . "/classes/objects/content/Image_Page.php";
-require_once dirname(__file__) . "/classes/objects/content/Article.php";
-require_once dirname(__file__) . "/classes/objects/content/ContentFactory.php";
-require_once dirname(__file__) . "/classes/objects/content/CustomFields.php";
-require_once dirname(__file__) . "/classes/objects/content/Results.php";
+require_once dirname(__FILE__) . "/lib/load.php";
+require_once dirname(__FILE__) . "/classes/objects/constants/load.php";
+require_once dirname(__FILE__) . "/classes/objects/storages/load.php";
+require_once dirname(__FILE__) . "/classes/objects/modules/load.php";
+require_once dirname(__FILE__) . "/classes/objects/settings/load.php";
+require_once dirname(__FILE__) . "/classes/objects/web/load.php";
+require_once dirname(__FILE__) . "/classes/objects/content/types/fields/load.php";
+require_once dirname(__FILE__) . "/classes/objects/registry/load.php";
+require_once dirname(__FILE__) . "/classes/objects/html/load.php";
+require_once dirname(__FILE__) . "/classes/objects/database/load.php";
+require_once dirname(__FILE__) . "/classes/objects/security/load.php";
+require_once dirname(__FILE__) . "/classes/objects/files/load.php";
+require_once dirname(__FILE__) . "/classes/objects/spam/load.php";
+require_once dirname(__FILE__) . "/classes/objects/users/load.php";
+require_once dirname(__FILE__) . "/classes/objects/content/CustomData.php";
+require_once dirname(__FILE__) . "/classes/objects/content/PagePermissions.php";
+require_once dirname(__FILE__) . "/classes/objects/content/Content.php";
+require_once dirname(__FILE__) . "/classes/objects/content/Page.php";
+require_once dirname(__FILE__) . "/classes/objects/content/Snippet.php";
+require_once dirname(__FILE__) . "/classes/objects/content/Link.php";
+require_once dirname(__FILE__) . "/classes/objects/content/Language_Link.php";
+require_once dirname(__FILE__) . "/classes/objects/content/Node.php";
+require_once dirname(__FILE__) . "/classes/objects/content/List_Data.php";
+require_once dirname(__FILE__) . "/classes/objects/content/Content_List.php";
+require_once dirname(__FILE__) . "/classes/objects/content/Module_Page.php";
+require_once dirname(__FILE__) . "/classes/objects/content/Video_Page.php";
+require_once dirname(__FILE__) . "/classes/objects/content/Audio_Page.php";
+require_once dirname(__FILE__) . "/classes/objects/content/Image_Page.php";
+require_once dirname(__FILE__) . "/classes/objects/content/Article.php";
+require_once dirname(__FILE__) . "/classes/objects/content/ContentFactory.php";
+require_once dirname(__FILE__) . "/classes/objects/content/CustomFields.php";
+require_once dirname(__FILE__) . "/classes/objects/content/Results.php";
 
-$mobile_detect_as_module = dirname(__file__) .
+$mobile_detect_as_module = dirname(__FILE__) .
         "/content/modules/Mobile_Detect/Mobile_Detect.php";
 
 if (file_exists($mobile_detect_as_module)) {
@@ -127,7 +136,7 @@ function exception_handler($exception) {
 }
 
 // if config exists require_config else redirect to installer
-$path_to_config = dirname(__file__) . "/CMSConfig.php";
+$path_to_config = dirname(__FILE__) . "/CMSConfig.php";
 
 Vars::set("http_headers", []);
 
@@ -258,7 +267,7 @@ if (!$connection) {
     throw new ConnectionFailedException("Can't connect to Database.");
 }
 
-$path_to_installer = dirname(__file__) . "/installer/installer.php";
+$path_to_installer = dirname(__FILE__) . "/installer/installer.php";
 
 if (isset($config->dbmigrator_auto_migrate) && $config->dbmigrator_auto_migrate) {
     $additionalSql = is_array($config->dbmigrator_initial_sql_files) ?
@@ -380,7 +389,7 @@ ModelRegistry::loadModuleModels();
 TypeMapper::loadMapping();
 HelperRegistry::loadModuleHelpers();
 ControllerRegistry::loadModuleControllers();
-require_once dirname(__file__) . "/lib/templating.php";
+require_once dirname(__FILE__) . "/lib/templating.php";
 
 do_event("before_init");
 do_event("init");

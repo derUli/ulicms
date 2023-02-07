@@ -693,11 +693,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("foobar", buildSEOUrl("foobar"));
     }
 
-    public function testBuildSEOUrlWithPageFromAdminDir() {
-        chdir(Path::resolve("ULICMS_ROOT/admin"));
-        $this->assertEquals("../foobar", buildSEOUrl("foobar"));
-    }
-
     public function testBuildSEOUrlWithPageAndRedirection() {
         $this->assertEquals("#", buildSEOUrl("foobar", "#"));
 

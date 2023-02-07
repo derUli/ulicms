@@ -1,7 +1,10 @@
 <?php
 
 define("RESPONSIVE_FM", true);
-include_once "../../init.php";
+
+define('CORE_COMPONENT', 'admin');
+
+require_once "../../init.php";
 
 use App\Helpers\ImageScaleHelper;
 

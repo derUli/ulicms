@@ -290,7 +290,7 @@ class User extends Model
 
     public function delete()
     {
-        if (is_null($this->id)) {
+        if ($this->id === NULL) {
             return false;
         }
 
@@ -369,7 +369,7 @@ class User extends Model
     public function getLastAction(): int
     {
         $lastAction = 0;
-        if (!is_null($this->id)) {
+        if ($this->id !== NULL) {
             $sql = "select last_action from {prefix}users where id = ?";
             $args = array(
                 $this->id
@@ -385,7 +385,7 @@ class User extends Model
 
     public function setLastAction(?int $time): void
     {
-        if (is_null($this->id)) {
+        if ($this->id === NULL) {
             return;
         }
         $time = intval($time);
@@ -499,7 +499,7 @@ class User extends Model
     public function getFailedLogins(): int
     {
         $failedLogins = 0;
-        if (!is_null($this->id)) {
+        if ($this->id !== NULL) {
             $sql = "select failed_logins from {prefix}users where id = ?";
             $args = array(
                 $this->id
@@ -515,7 +515,7 @@ class User extends Model
 
     public function increaseFailedLogins(): void
     {
-        if (is_null($this->id)) {
+        if ($this->id === NULL) {
             return;
         }
         $sql = "update {prefix}users set failed_logins = failed_logins + 1 "
@@ -528,7 +528,7 @@ class User extends Model
 
     public function resetFailedLogins(): void
     {
-        if (is_null($this->id)) {
+        if ($this->id === NULL) {
             return;
         }
         $sql = "update {prefix}users set failed_logins = ? "
@@ -542,7 +542,7 @@ class User extends Model
 
     public function setFailedLogins($amount): void
     {
-        if (is_null($this->id)) {
+        if ($this->id === NULL) {
             return;
         }
         $sql = "update {prefix}users set failed_logins = ? where id = ?";

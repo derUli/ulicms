@@ -48,7 +48,7 @@ class Language extends Model
     public function loadByLanguageCode(string $language_code): void
     {
         $args = array(
-            strval($language_code)
+            (string)$language_code
         );
         $sql = "SELECT * FROM `{prefix}languages` where language_code = ?";
         $result = Database::pQuery($sql, $args, true);
@@ -77,7 +77,7 @@ class Language extends Model
 
     public function save()
     {
-        if (is_null($this->id)) {
+        if ($this->id === NULL) {
             $this->insert();
         } else {
             $this->update();
@@ -110,7 +110,7 @@ class Language extends Model
 
     public function delete()
     {
-        if (!is_null($this->id)) {
+        if ($this->id !== NULL) {
             $sql = "DELETE FROM `{prefix}languages` where id = ?";
             $args = array(
                 $this->id
@@ -124,7 +124,7 @@ class Language extends Model
 
     public function makeDefaultLanguage(): void
     {
-        if (!is_null($this->language_code)) {
+        if ($this->language_code !== NULL) {
             Settings::set("default_language", $this->language_code);
         }
     }

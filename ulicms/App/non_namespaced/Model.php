@@ -37,7 +37,7 @@ class Model
 
     public function save()
     {
-        if (is_null($this->id)) {
+        if ($this->id === NULL) {
             $this->insert();
         } else {
             $this->update();

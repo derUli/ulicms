@@ -38,7 +38,7 @@ class Article extends Page
 
     public function update()
     {
-        if (is_null($this->id)) {
+        if ($this->id === NULL) {
             return false;
         }
         parent::update();

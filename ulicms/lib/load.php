@@ -35,5 +35,5 @@ $files = [
 ];
 
 foreach ($files as $file) {
-    require_once dirname(__file__) . "/$file.php";
+    require_once dirname(__FILE__) . "/$file.php";
 }

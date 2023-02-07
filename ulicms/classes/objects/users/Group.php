@@ -164,7 +164,7 @@ class Group
 
     public function delete(): void
     {
-        if (is_null($this->id)) {
+        if ($this->id === NULL) {
             return;
         }
         $sql = "delete from `{prefix}groups` where id = ?";
@@ -179,7 +179,7 @@ class Group
 
     public function getId(): ?int
     {
-        return !is_null($this->id) ? intval($this->id) : null;
+        return $this->id !== NULL ? intval($this->id) : null;
     }
 
     public function setId(?int $id): void
