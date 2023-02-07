@@ -62,7 +62,6 @@ if (file_exists($composerAutoloadFile)) {
 }
 
 require_once dirname(__file__) . "/lib/load.php";
-require_once dirname(__file__) . "/classes/objects/privacy/load.php";
 require_once dirname(__file__) . "/classes/objects/constants/load.php";
 require_once dirname(__file__) . "/classes/objects/storages/load.php";
 require_once dirname(__file__) . "/classes/objects/modules/load.php";
@@ -74,7 +73,6 @@ require_once dirname(__file__) . "/classes/objects/content/types/ContentType.php
 require_once dirname(__file__) . "/classes/objects/content/types/DefaultContentTypes.php";
 require_once dirname(__file__) . "/classes/objects/content/types/fields/load.php";
 require_once dirname(__file__) . "/classes/objects/registry/load.php";
-require_once dirname(__file__) . "/classes/objects/logging/load.php";
 require_once dirname(__file__) . "/classes/objects/html/load.php";
 require_once dirname(__file__) . "/classes/objects/database/load.php";
 require_once dirname(__file__) . "/classes/objects/security/load.php";

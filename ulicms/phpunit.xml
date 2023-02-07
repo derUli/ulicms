@@ -74,13 +74,10 @@
             <directory>default</directory>
             <file>index.php</file>
             <file>lib/CMSConfigSample.php</file>
-            <file>lib/api.php</file>
-            <file>lib/load.php</file>
             <file>CMSConfig.php</file>
             <file>admin/index.php</file>
             <file>admin/backend.php</file>
             <file>frontend.php</file>
-            <file>init.php</file>
             <file>update.php</file>
             <file>admin.php</file>
             <file>admin/inc/getlinksforeditor.php</file>
