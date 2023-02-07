@@ -32,8 +32,10 @@ class RoboFile extends Tasks {
     }
 
     protected function initCore() {
-        require_once dirname(__FILE__) . "/init.php";
-        require_once getLanguageFilePath("en");
+        if (!defined('ULICMS_ROOT')) {
+            require dirname(__FILE__) . "/init.php";
+            require_once getLanguageFilePath("en");
+        }
     }
 
     /**

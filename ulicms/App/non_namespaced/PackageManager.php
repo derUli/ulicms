@@ -62,10 +62,10 @@ class PackageManager {
             // post_install_script ausführen und anschließend
             // entfernen, sofern vorhanden;
             if (file_exists($post_install_script1)) {
-                require_once $post_install_script1;
+                require $post_install_script1;
                 unlink($post_install_script1);
             } elseif (file_exists($post_install_script2)) {
-                require_once $post_install_script2;
+                require $post_install_script2;
                 unlink($post_install_script2);
             }
 

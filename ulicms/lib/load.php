@@ -31,9 +31,10 @@ $files = [
     'translation',
     'html5_media',
     'custom_data',
-    'version_compare_functions'
+    'version_compare_functions',
+    'templating'
 ];
 
 foreach ($files as $file) {
-    require_once dirname(__FILE__) . "/$file.php";
+    require dirname(__FILE__) . "/$file.php";
 }

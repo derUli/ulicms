@@ -82,7 +82,7 @@ class BackendPageRenderer
 
         if (!$onlyContent) {
             do_event("admin_footer");
-            require_once "inc/footer.php";
+            require "inc/footer.php";
         }
         if (Settings::get("minify_html")) {
             $this->outputMinified();
@@ -127,15 +127,15 @@ class BackendPageRenderer
 
         if (isset($_GET["register"])) {
             do_event("before_register_form");
-            require_once "inc/registerform.php";
+            require "inc/registerform.php";
             do_event("after_register_form");
         } elseif (isset($_GET["reset_password"])) {
             do_event("before_reset_password_form");
-            require_once "inc/reset_password.php";
+            require "inc/reset_password.php";
             do_event("before_after_password_form");
         } else {
             do_event("before_login_form");
-            require_once "inc/loginform.php";
+            require "inc/loginform.php";
             do_event("after_login_form");
         }
     }
@@ -146,7 +146,7 @@ class BackendPageRenderer
         $permissionChecker = new PermissionChecker(get_user_id());
 
         if (!$onlyContent) {
-            require_once "inc/adminmenu.php";
+            require "inc/adminmenu.php";
         }
 
         ActionRegistry::loadModuleActions();
@@ -155,7 +155,7 @@ class BackendPageRenderer
         do_event("register_actions");
 
         if ($_SESSION["require_password_change"]) {
-            require_once "inc/change_password.php";
+            require "inc/change_password.php";
         } elseif (isset($actions[$this->getAction()])) {
             $requiredPermission = ActionRegistry::getActionPermission(
                 $this->getAction()

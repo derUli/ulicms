@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 use App\Models\Content\Language;
 use App\Models\Content\Categories;
-use App\Models\Content\Types\DefaultContentTypes;
 use UliCMS\Utils\File;
 use App\Exceptions\DatasetNotFoundException;
 
@@ -170,12 +169,12 @@ function is_active(): bool {
             . " WHERE slug='" . db_escape($page) . "'  AND language='" .
             db_escape(getFrontendLanguage()) . "'";
     $result = db_query($sql);
-    
+
     if (db_num_rows($result) > 0) {
         $dataset = db_fetch_object($result);
         $dataset = boolval($dataset->active);
     }
-    
+
     Vars::set("active", $dataset);
     return $dataset;
 }
@@ -678,7 +677,7 @@ function parent_item_contains_current_page(?int $id): bool {
     if (!$id) {
         return $retval;
     }
-    $id = (int)$id;
+    $id = (int) $id;
     $language = $_SESSION["language"];
     $sql = "SELECT id, slug, parent_id FROM " . tbname("content") . " WHERE language = '$language' AND active = 1 AND `deleted_at` IS NULL";
     $r = db_query($sql);
@@ -736,7 +735,7 @@ function get_menu(
 
     while ($row = db_fetch_object($result)) {
         if (checkAccess($row->access)) {
-            $containsCurrentItem = parent_item_contains_current_page((int)$row->id);
+            $containsCurrentItem = parent_item_contains_current_page((int) $row->id);
 
             $additional_classes = " menu-link-to-" . $row->id . " ";
             if ($containsCurrentItem) {
@@ -781,7 +780,7 @@ function get_menu(
             $html .= "</a>\n";
 
             if ($recursive) {
-                $html .= get_menu($name, (int)$row->id, true, $order);
+                $html .= get_menu($name, (int) $row->id, true, $order);
             }
 
             $html .= "</li>";
@@ -942,5 +941,3 @@ function cms_release_year(): void {
     $v = new UliCMSVersion();
     echo $v->getReleaseYear();
 }
-
-DefaultContentTypes::initTypes();
