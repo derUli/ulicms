@@ -2,14 +2,11 @@
 
 // FIXME: this file looks like shit, refactor this code to MVC pattern.
 use UliCMS\Models\Content\Language;
-use App\Constants\AuditLog;
 
 $permissionChecker = new ACL();
 if (!$permissionChecker->hasPermission("groups")) {
     noPerms();
 } else {
-    $logger = LoggerRegistry::get("audit_log");
-
     $modified = false;
     $created = false;
     $removed = false;
@@ -38,11 +35,7 @@ if (!$permissionChecker->hasPermission("groups")) {
             $group->setAllowableTags($allowed_tags);
             $group->save();
             $created = true;
-            if ($logger) {
-                $user = getUserById(get_user_id());
-                $userName = isset($user["username"]) ? $user["username"] : AuditLog::UNKNOWN;
-                $logger->debug("User $userName - Created new group ({$name})\nPermissions: " . json_readable_encode($all_permissions));
-            }
+
             $name = _esc($name);
         }
     } elseif (isset($_GET["delete"]) and Request::isPost()) {
@@ -52,11 +45,6 @@ if (!$permissionChecker->hasPermission("groups")) {
         $removed = true;
         if (isset($GLOBALS["permissions"])) {
             unset($GLOBALS["permissions"]);
-        }
-        if ($logger) {
-            $user = getUserById(get_user_id());
-            $userName = isset($user["username"]) ? $user["username"] : AuditLog::UNKNOWN;
-            $logger->debug("User $name - Delete group with id ($id)");
         }
     } elseif (isset($_POST["edit_group"])) {
         $permissionChecker = new ACL();
@@ -90,11 +78,6 @@ if (!$permissionChecker->hasPermission("groups")) {
             $name = _esc($name);
         }
 
-        if ($logger) {
-            $user = getUserById(get_user_id());
-            $userName = isset($user["username"]) ? $user["username"] : AuditLog::UNKNOWN;
-            $logger->debug("User $userName - Created new group ({$name})\nPermissions: " . json_readable_encode($all_permissions));
-        }
         if (isset($GLOBALS["permissions"])) {
             unset($GLOBALS["permissions"]);
         }

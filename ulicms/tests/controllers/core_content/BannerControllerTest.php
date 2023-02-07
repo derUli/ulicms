@@ -6,18 +6,12 @@ use App\Exceptions\DatasetNotFoundException;
 class BannerControllerTest extends \PHPUnit\Framework\TestCase {
 
     protected function setUp(): void {
-        LoggerRegistry::register(
-                "audit_log",
-                new Logger(Path::resolve("ULICMS_LOG/audit_log"))
-        );
-
         $_POST = [];
     }
 
     protected function tearDown(): void {
         $_POST = [];
 
-        LoggerRegistry::unregister("audit_log");
         Database::pQuery(
                 "DELETE FROM `{prefix}banner` where html in (?) or "
                 . "name = ?",

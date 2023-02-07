@@ -3,15 +3,11 @@
 declare(strict_types=1);
 
 use UliCMS\Security\PermissionChecker;
-use App\Constants\AuditLog;
 
 class UserController extends Controller {
 
-    private $logger;
-
     public function __construct() {
         parent::__construct();
-        $this->logger = LoggerRegistry::get("audit_log");
     }
 
     public function _createPost(): User {
@@ -53,12 +49,6 @@ class UserController extends Controller {
             $user->save();
         }
 
-
-        if ($this->logger) {
-            $auditUser = getUserById(get_user_id());
-            $name = isset($auditUser["username"]) ? $auditUser["username"] : AuditLog::UNKNOWN;
-            $this->logger->debug("User $name - Created a new user ({$username})");
-        }
         return $user;
     }
 
@@ -167,11 +157,6 @@ class UserController extends Controller {
 
         do_event("after_admin_delete");
 
-        if ($this->logger) {
-            $user = getUserById(get_user_id());
-            $name = isset($user["username"]) ? $user["username"] : AuditLog::UNKNOWN;
-            $this->logger->debug("User $name - Deleted User with id ($id)");
-        }
         return true;
     }
 

@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-use App\Constants\AuditLog;
-
 // class for handling system settings
 class Settings {
 
@@ -100,22 +98,6 @@ class Settings {
             db_query("INSERT INTO " . tbname("settings") . " (name, value) "
                     . "VALUES('$key', '$value')");
         }
-
-        $logger = LoggerRegistry::get("audit_log");
-        $userId = get_user_id();
-        if ($logger) {
-            if ($userId) {
-                $user = getUserById($userId);
-                $username = isset($user["username"]) ?
-                        $user["username"] : AuditLog::UNKNOWN;
-                $logger->debug("User $username - "
-                        . "Changed setting $key to '$originalValue'");
-            } else {
-                $username = AuditLog::UNKNOWN;
-                $logger->debug("User $username - "
-                        . "Changed setting $key to '$originalValue'");
-            }
-        }
     }
 
     // Remove an configuration variable
@@ -134,7 +116,7 @@ class Settings {
                 $value = intval($value);
                 break;
             case 'float':
-                $value = (float)$value;
+                $value = (float) $value;
                 break;
             case 'bool':
 

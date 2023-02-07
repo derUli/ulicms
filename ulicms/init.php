@@ -18,7 +18,6 @@ if (!defined("ULICMS_ROOT")) {
 use App\Exceptions\AccessDeniedException;
 use App\Exceptions\ConnectionFailedException;
 use App\Exceptions\SqlException;
-use App\Constants\AuditLog;
 use App\Registries\HelperRegistry;
 use App\Models\Content\TypeMapper;
 use App\Packages\PatchManager;
@@ -242,29 +241,11 @@ if (class_exists("Path")) {
                 new Logger(Path::resolve("ULICMS_LOG/phpmailer_log"))
         );
     }
-    if (isset($config->audit_log) && $config->audit_log) {
-        LoggerRegistry::register(
-                "audit_log",
-                new Logger(Path::resolve("ULICMS_LOG/audit_log"))
-        );
-    }
 }
 
-function noPerms() {
+function noPerms(): void {
     echo "<div class=\"alert alert-danger\">"
     . get_translation("no_permissions") . "</div>";
-    $logger = LoggerRegistry::get("audit_log");
-    if ($logger) {
-        $userId = get_user_id();
-        $name = AuditLog::UNKNOWN;
-        if ($userId) {
-            $user = getUserById($userId);
-            $name = $user["username"];
-        }
-        $url = get_request_uri();
-        $logger->error("User $name - No Permission on URL ($url)");
-    }
-    return false;
 }
 
 $db_socket = $config->db_socket ?? ini_get("mysqli.default_socket");

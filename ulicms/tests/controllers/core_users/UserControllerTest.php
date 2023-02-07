@@ -3,11 +3,6 @@
 class UserControllerTest extends \PHPUnit\Framework\TestCase {
 
     protected function setUp(): void {
-        LoggerRegistry::register(
-                "audit_log",
-                new Logger(Path::resolve("ULICMS_LOG/audit_log"))
-        );
-
         $manager = new UserManager();
         $user = $manager->getAllUsers("admin desc")[0];
 
@@ -21,7 +16,6 @@ class UserControllerTest extends \PHPUnit\Framework\TestCase {
     }
 
     protected function tearDown(): void {
-        LoggerRegistry::unregister("audit_log");
         Database::deleteFrom("users", "username like 'testuser-%'");
 
         $_SESSION = [];

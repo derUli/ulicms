@@ -3,17 +3,13 @@
 declare(strict_types=1);
 
 use App\Exceptions\DatasetNotFoundException;
-use App\Constants\AuditLog;
 use App\Models\Content\Advertisement\Banner;
 use UliCMS\Utils\CacheUtil;
 
 class BannerController extends Controller {
 
-    private $logger;
-
     public function __construct() {
         parent::__construct();
-        $this->logger = LoggerRegistry::get("audit_log");
     }
 
     public function createPost(): void {
@@ -39,13 +35,6 @@ class BannerController extends Controller {
         $banner->setLanguage($_POST["language"] != "all" ?
                         strval($_POST["language"]) : null);
         $banner->save();
-        if ($this->logger) {
-            $user = getUserById(get_user_id());
-            $userName = isset($user["username"]) ?
-                    $user["username"] : AuditLog::UNKNOWN;
-            $this->logger->debug("User $userName - "
-                    . "Created new banner with type ({$_POST ['type']})");
-        }
 
         do_event("after_create_banner");
 
@@ -80,14 +69,6 @@ class BannerController extends Controller {
                         strval($_POST["language"]) : null);
         $banner->save();
 
-        if ($this->logger) {
-            $user = getUserById(get_user_id());
-            $userName = isset($user["username"]) ?
-                    $user["username"] : AuditLog::UNKNOWN;
-            $this->logger->debug("User $userName - "
-                    . "Updated Banner with id ($id)");
-        }
-
         do_event("after_edit_banner");
 
         CacheUtil::clearPageCache();
@@ -113,13 +94,6 @@ class BannerController extends Controller {
         do_event("before_banner_delete");
         $banner->delete();
 
-        if ($this->logger) {
-            $user = getUserById(get_user_id());
-            $userName = isset($user["username"]) ?
-                    $user["username"] : AuditLog::UNKNOWN;
-            $this->logger->debug("User $userName - "
-                    . "Deleted Banner with id ($id)");
-        }
         do_event("after_banner_delete");
 
         CacheUtil::clearPageCache();

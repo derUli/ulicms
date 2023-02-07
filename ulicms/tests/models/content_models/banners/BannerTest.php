@@ -28,7 +28,7 @@ class BannerTest extends \PHPUnit\Framework\TestCase {
         $banner->save();
 
         $this->assertNotNull($banner->getId());
-        $id = intval($banner->getId());
+        $id = (int)$banner->getId();
 
         $banner = new Banner($id);
         $this->assertNotNull($banner->getId());
@@ -57,7 +57,7 @@ class BannerTest extends \PHPUnit\Framework\TestCase {
         $banner->setEnabled(false);
         $banner->save();
         $this->assertNotNull($banner->getId());
-        $id = intval($banner->getId());
+        $id = (int)$banner->getId();
         $banner = new Banner($id);
         $this->assertNotNull($banner->getId());
         $this->assertEquals("html", $banner->getType());
@@ -85,7 +85,7 @@ class BannerTest extends \PHPUnit\Framework\TestCase {
         $banner->save();
 
         $this->assertNotNull($banner->getId());
-        $id = intval($banner->getId());
+        $id = (int)$banner->getId();
 
         $banner = new Banner($id);
         $this->assertNotNull($banner->getId());
@@ -117,7 +117,7 @@ class BannerTest extends \PHPUnit\Framework\TestCase {
         $banner->setLinkUrl(self::LINK_URL_TEXT1);
         $banner->save();
         $this->assertNotNull($banner->getId());
-        $id = intval($banner->getId());
+        $id = (int)$banner->getId();
         $banner = new Banner($id);
         $this->assertNotNull($banner->getId());
         $this->assertEquals("gif", $banner->getType());
@@ -151,7 +151,7 @@ class BannerTest extends \PHPUnit\Framework\TestCase {
         $banner->setLinkUrl(self::LINK_URL_TEXT1);
         $banner->save();
         $this->assertNotNull($banner->getId());
-        $id = intval($banner->getId());
+        $id = (int)$banner->getId();
 
         $banner = new Banner($id);
         $this->assertNotNull($banner->getId());

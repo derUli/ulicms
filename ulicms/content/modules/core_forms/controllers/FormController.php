@@ -2,13 +2,10 @@
 
 declare(strict_types=1);
 
-use App\Constants\AuditLog;
-
 class FormController extends Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->logger = LoggerRegistry::get("audit_log");
     }
 
     public function createPost(): void {
@@ -38,14 +35,8 @@ class FormController extends Controller {
                         $target_page_id,
                         $enabled
         );
-        $id = $success ? Database::getLastInsertID() : null;
-        if ($this->logger) {
-            $user = getUserById(get_user_id());
-            $name = isset($user["username"]) ?
-                    $user["username"] : AuditLog::UNKNOWN;
-            $this->logger->debug("User $name - Created a new form ({$name})");
-        }
-        return $id;
+
+        return Database::getLastInsertID();
     }
 
     public function updatePost(): void {
@@ -80,12 +71,6 @@ class FormController extends Controller {
         );
         $affectedRows = Database::getAffectedRows();
 
-        if ($this->logger) {
-            $user = getUserById(get_user_id());
-            $name = isset($user["username"]) ?
-                    $user["username"] : AuditLog::UNKNOWN;
-            $this->logger->debug("User $name - Updated form with Id ({$id})");
-        }
         return $affectedRows > 0;
     }
 
@@ -96,14 +81,7 @@ class FormController extends Controller {
     }
 
     public function _deletePost(int $id): bool {
-        $success = Forms::deleteForm($id);
-        if ($this->logger) {
-            $user = getUserById(get_user_id());
-            $name = isset($user["username"]) ?
-                    $user["username"] : AuditLog::UNKNOWN;
-            $this->logger->debug("User $name - Deleted form with Id ({$id})");
-        }
-        return $success;
+        return Forms::deleteForm($id);
     }
 
 }

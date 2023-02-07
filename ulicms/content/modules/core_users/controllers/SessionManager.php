@@ -2,14 +2,11 @@
 
 declare(strict_types=1);
 
-use App\Constants\AuditLog;
 use UliCMS\Utils\CacheUtil;
 
 class SessionManager extends Controller {
 
     public function login(): void {
-        $logger = LoggerRegistry::get("audit_log");
-
         $user = new User();
         $user->loadByUsername($_POST["user"]);
 
@@ -40,15 +37,9 @@ class SessionManager extends Controller {
                 Settings::set("sys_initialized", "true");
             }
             do_event("login_ok");
-            if ($logger) {
-                $logger->debug("User {$_POST['user']} - Login OK");
-            }
             register_session($sessionData);
         } else {
             // If login failed
-            if ($logger) {
-                $logger->error("User {$_POST['user']} - Login Failed");
-            }
             // send unauthorized header
             Response::sendStatusHeader(HttpStatusCode::UNAUTHORIZED);
             do_event("login_failed");
@@ -56,14 +47,8 @@ class SessionManager extends Controller {
     }
 
     public function logout(): void {
-        $logger = LoggerRegistry::get("audit_log");
-
         $id = intval($_SESSION["login_id"]);
-        if ($logger) {
-            $user = getUserById($id);
-            $name = isset($user["username"]) ? $user["username"] : AuditLog::UNKNOWN;
-            $logger->debug("User $name - Logout");
-        }
+
         // set user state to offline
         db_query("UPDATE " . tbname("users") . " SET last_action = 0 WHERE id = $id");
         $url = apply_filter("index.php", "logout_url");
@@ -75,7 +60,6 @@ class SessionManager extends Controller {
     }
 
     public function resetPassword(): void {
-        $logger = LoggerRegistry::get("audit_log");
 
         if (!isset($_REQUEST["token"])) {
             ExceptionResult("A token is required");
@@ -88,16 +72,8 @@ class SessionManager extends Controller {
             $user->setRequirePasswordChange(1);
             $user->save();
             $token = $reset->deleteToken($_REQUEST["token"]);
-            if ($logger) {
-                $name = $user->getUsername() ? $user->getUsername() : AuditLog::UNKNOWN;
-                $logger->debug("Password reset $name - OK");
-            }
-
             register_session(getUserById($user_id));
         } else {
-            if ($logger) {
-                $logger->error("Password reset - Invalid token");
-            }
             TextResult(get_translation("invalid_token"), 404);
         }
     }
