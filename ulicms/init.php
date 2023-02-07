@@ -115,7 +115,7 @@ function exception_handler($exception) {
     // FIXME: what if there is no config class?
     $cfg = class_exists("CMSConfig") ? new CMSConfig() : null;
 
-    $message = !is_null($cfg) && is_true($cfg->debug) ?
+    $message = $cfg && $cfg->debug ?
             $exception : "An error occurred! See exception_log for details. 😞";
 
     $logger = LoggerRegistry::get("exception_log");
@@ -166,7 +166,7 @@ if ((defined("ULICMS_DEBUG") && ULICMS_DEBUG) || (isset($config->debug) and $con
 // to seperate it's core files from variable data such as modules and media
 // this enables us to use stuff like Docker containers where data gets lost
 // after stopping the container
-if (isset($config->data_storage_root) && !is_null($config->data_storage_root)) {
+if (isset($config->data_storage_root) && $config->data_storage_root !== null) {
     define("ULICMS_DATA_STORAGE_ROOT", $config->data_storage_root);
 } else {
     define("ULICMS_DATA_STORAGE_ROOT", ULICMS_ROOT);
@@ -174,7 +174,7 @@ if (isset($config->data_storage_root) && !is_null($config->data_storage_root)) {
 
 // this enables us to set an base url for statis ressources such as images
 // stored in ULICMS_DATA_STORAGE_ROOT
-if (isset($config->data_storage_url) && !is_null($config->data_storage_url)) {
+if (isset($config->data_storage_url) && $config->data_storage_url !== null) {
     define("ULICMS_DATA_STORAGE_URL", $config->data_storage_url);
 }
 
@@ -233,25 +233,25 @@ if (!file_exists($htaccessLogFolderTarget)) {
 Translation::init();
 
 if (class_exists("Path")) {
-    if (isset($config->exception_logging) and is_true($config->exception_logging)) {
+    if (isset($config->exception_logging) && $config->exception_logging) {
         LoggerRegistry::register(
                 "exception_log",
                 new Logger(Path::resolve("ULICMS_LOG/exception_log"))
         );
     }
-    if (isset($config->query_logging) and is_true($config->query_logging)) {
+    if (isset($config->query_logging) && $config->query_logging) {
         LoggerRegistry::register(
                 "sql_log",
                 new Logger(Path::resolve("ULICMS_LOG/sql_log"))
         );
     }
-    if (isset($config->phpmailer_logging) and is_true($config->phpmailer_logging)) {
+    if (isset($config->phpmailer_logging) && $config->phpmailer_logging) {
         LoggerRegistry::register(
                 "phpmailer_log",
                 new Logger(Path::resolve("ULICMS_LOG/phpmailer_log"))
         );
     }
-    if (isset($config->audit_log) and is_true($config->audit_log)) {
+    if (isset($config->audit_log) && $config->audit_log) {
         LoggerRegistry::register(
                 "audit_log",
                 new Logger(Path::resolve("ULICMS_LOG/audit_log"))
@@ -260,11 +260,10 @@ if (class_exists("Path")) {
 }
 
 // define Constants
-define('CR', "\r"); // carriage return; Mac
-define('LF', "\n"); // line feed; Unix
-define('CRLF', "\r\n"); // carriage return and line feed; Windows
-define('BR', '<br />' . LF); // HTML Break
-define("ONE_DAY_IN_SECONDS", 60 * 60 * 24);
+const CR = "\r"; // carriage return; Mac
+const LF = "\n";  // line feed; Unix
+const CRLF = "\r\n"; // carriage return and line feed; Windows
+const ONE_DAY_IN_SECONDS = 86400;
 
 function noPerms() {
     echo "<div class=\"alert alert-danger\">"
@@ -352,7 +351,7 @@ $cache_period = Settings::get("cache_period");
 // by Check if the cache expiry is set.
 // if not initialize setting with default value
 if ($cache_period === null) {
-    Settings::set("cache_period", strval(ONE_DAY_IN_SECONDS));
+    Settings::set("cache_period", (string) ONE_DAY_IN_SECONDS);
     define("CACHE_PERIOD", ONE_DAY_IN_SECONDS);
 } else {
     define("CACHE_PERIOD", $cache_period);
@@ -439,3 +438,4 @@ require_once dirname(__file__) . "/lib/templating.php";
 do_event("before_init");
 do_event("init");
 do_event("after_init");
+

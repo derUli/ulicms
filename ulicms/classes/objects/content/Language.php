@@ -16,7 +16,7 @@ class Language extends Model
 
     public function __construct($id = null)
     {
-        if (!is_null($id)) {
+        if ($id !== null) {
             $this->loadById($id);
         }
     }

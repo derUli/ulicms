@@ -31,7 +31,7 @@ class Audio extends Model
 
     public function __construct($id = null)
     {
-        if (!is_null($id)) {
+        if ($id !== null) {
             $this->loadById($id);
         } else {
             $this->created = time();

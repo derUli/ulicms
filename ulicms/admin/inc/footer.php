@@ -2,7 +2,7 @@
 
 use function UliCMS\HTML\icon;
 
-$menuTranslation = new JsTranslation(
+$menuTranslation = new JSTranslation(
         [
     "logout",
     "on",
@@ -12,7 +12,7 @@ $menuTranslation = new JsTranslation(
 );
 $menuTranslation->render();
 
-$globalTranslation = new JsTranslation(
+$globalTranslation = new JSTranslation(
         [
     "all",
     "copied_to_clipboard_success",

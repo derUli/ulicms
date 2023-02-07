@@ -16,7 +16,7 @@ class Group
     {
         $acl = new ACL();
         $this->permissions = $acl->getDefaultACLAsJSON(false, true);
-        if (!is_null($id)) {
+        if ($id !== null) {
             $this->loadById(intval($id));
         }
     }
@@ -184,7 +184,7 @@ class Group
 
     public function setId(?int $id): void
     {
-        $this->id = !is_null($id) ? $id : null;
+        $this->id = $id !== null ? $id : null;
     }
 
     public function getName(): ?string

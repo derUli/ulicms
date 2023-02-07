@@ -15,7 +15,7 @@ class Model
     // calls loadById if $id is not null
     public function __construct($id = null)
     {
-        if (!is_null($id)) {
+        if ($id !== null) {
             $this->loadByID($id);
         }
     }

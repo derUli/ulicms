@@ -245,7 +245,7 @@ class User extends Model
 
     public function setId($id): void
     {
-        $this->id = !is_null($id) ? intval($id) : null;
+        $this->id = $id !== null ? intval($id) : null;
     }
 
     public function getUsername(): ?string
