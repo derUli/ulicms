@@ -35,10 +35,10 @@ class Comment extends Model
 
     public function loadByID($id)
     {
-        $result = Database::selectAll("comments", [], "id=" . intval($id));
+        $result = Database::selectAll("comments", [], "id=" . (int)$id);
         if ($result == null || !Database::any($result)) {
             throw new DatasetNotFoundException("no comment with id " .
-                    intval($id));
+                    (int)$id);
         }
         $this->fillVars($result);
     }
@@ -157,7 +157,7 @@ VALUES      ( ?,
 
     public function setContentId(int $val): void
     {
-        $this->content_id = intval($val);
+        $this->content_id = (int)$val;
     }
 
     public function getAuthorName(): ?string
@@ -168,7 +168,7 @@ VALUES      ( ?,
     public function setAuthorName(?string $val): void
     {
         $this->author_name = StringHelper::isNotNullOrWhitespace($val) ?
-                strval($val) : null;
+                (string)$val : null;
     }
 
     public function getAuthorEmail(): ?string
@@ -179,7 +179,7 @@ VALUES      ( ?,
     public function setAuthorEmail(?string $val): void
     {
         $this->author_email = StringHelper::isNotNullOrWhitespace($val) ?
-                strval($val) : null;
+                (string)$val : null;
     }
 
     public function getAuthorUrl(): ?string
@@ -195,7 +195,7 @@ VALUES      ( ?,
 
     public function setAuthorUrl(?string $val): void
     {
-        $this->author_url = is_url($val) ? strval($val) : null;
+        $this->author_url = is_url($val) ? (string)$val : null;
     }
 
     public function getDate()
@@ -212,7 +212,7 @@ VALUES      ( ?,
                 var_dump_str($val) . " is not an integer timestamp"
             );
         }
-        $this->date = intval($val);
+        $this->date = (int)$val;
     }
 
     public function getText(): ?string
@@ -223,7 +223,7 @@ VALUES      ( ?,
     public function setText(?string $val): void
     {
         $this->text = StringHelper::isNotNullOrWhitespace($val) ?
-                strval($val) : null;
+                (string)$val : null;
     }
 
     public function getStatus()
@@ -244,7 +244,7 @@ VALUES      ( ?,
     public function setIp(?string $val): void
     {
         $this->ip = StringHelper::isNotNullOrWhitespace($val) ?
-                strval($val) : null;
+                (string)$val : null;
     }
 
     public function getUserAgent(): ?string
@@ -255,7 +255,7 @@ VALUES      ( ?,
     public function setUserAgent(?string $val): void
     {
         $this->useragent = StringHelper::isNotNullOrWhitespace($val) ?
-                strval($val) : null;
+                (string)$val : null;
     }
 
     // returns the content where this comment is attached
@@ -380,6 +380,6 @@ VALUES      ( ?,
 
     public function setRead(?bool $val): void
     {
-        $this->read = boolval($val);
+        $this->read = (bool)$val;
     }
 }

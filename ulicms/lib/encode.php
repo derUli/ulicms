@@ -37,7 +37,7 @@ function json_readable_encode($in, $indent = 0): string {
             $out .= $_myself($value, $indent + 1);
         } elseif (is_bool($value)) {
             $out .= $value ? 'true' : 'false';
-        } elseif (is_null($value)) {
+        } elseif ($value === NULL) {
             $out .= 'null';
         } elseif (is_string($value)) {
             $out .= "\"" . $_escape($value) . "\"";

@@ -4,7 +4,7 @@ class Forms {
 
     public static function getFormByID($id) {
         $retval = null;
-        $result = db_query("select * from `" . tbname("forms") . "` WHERE id = " . intval($id));
+        $result = db_query("select * from `" . tbname("forms") . "` WHERE id = " . (int)$id);
         if (db_num_rows($result) > 0) {
             $retval = db_fetch_assoc($result);
         }
@@ -58,7 +58,7 @@ class Forms {
         $mail_from_field = db_escape($mail_from_field);
         $target_page_id = intval($target_page_id);
         $updated = time();
-        $id = intval($id);
+        $id = (int)$id;
 
         return db_query(
                 "UPDATE `" . tbname("forms") . "` set name='$name', "
@@ -172,7 +172,7 @@ class Forms {
     }
 
     public static function deleteForm($id) {
-        $id = intval($id);
+        $id = (int)$id;
         return db_query("DELETE FROM " . tbname("forms") . " WHERE id = $id");
     }
 

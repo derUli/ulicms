@@ -81,6 +81,6 @@ class PermissionChecker
 
     public function setUserId(?int $val): void
     {
-        $this->user_id = is_numeric($val) ? intval($val) : null;
+        $this->user_id = is_numeric($val) ? (int)$val : null;
     }
 }

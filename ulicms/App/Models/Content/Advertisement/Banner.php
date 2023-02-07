@@ -32,7 +32,7 @@ class Banner extends Model {
     }
 
     public function loadByID($id) {
-        $id = intval($id);
+        $id = (int)$id;
         $result = Database::query("SELECT * FROM `" . tbname("banner") .
                         "` where id = $id");
         if (Database::getNumRows($result) > 0) {
@@ -252,7 +252,7 @@ class Banner extends Model {
     }
 
     public function setHtml(?string $val): void {
-        $this->html = !is_null($val) ? strval($val) : null;
+        $this->html = !is_null($val) ? (string)$val : null;
     }
 
     public function getDateFrom(): ?string {
@@ -268,7 +268,7 @@ class Banner extends Model {
     }
 
     public function setCategoryId(?int $val): void {
-        $this->category_id = is_numeric($val) ? intval($val) : null;
+        $this->category_id = is_numeric($val) ? (int)$val : null;
     }
 
     public function getLanguage(): ?string {
@@ -276,7 +276,7 @@ class Banner extends Model {
     }
 
     public function setLanguage(?string $val): void {
-        $this->language = !is_null($val) ? strval($val) : null;
+        $this->language = !is_null($val) ? (string)$val : null;
     }
 
     public function getName(): ?string {
@@ -284,7 +284,7 @@ class Banner extends Model {
     }
 
     public function setName($val) {
-        $this->name = !is_null($val) ? strval($val) : null;
+        $this->name = !is_null($val) ? (string)$val : null;
     }
 
     public function getImageUrl(): ?string {
@@ -292,7 +292,7 @@ class Banner extends Model {
     }
 
     public function setImageUrl(?string $val): void {
-        $this->image_url = !is_null($val) ? strval($val) : null;
+        $this->image_url = !is_null($val) ? (string)$val : null;
     }
 
     public function getLinkUrl(): ?string {
@@ -300,7 +300,7 @@ class Banner extends Model {
     }
 
     public function setLinkUrl(?string $val): void {
-        $this->link_url = !is_null($val) ? strval($val) : null;
+        $this->link_url = !is_null($val) ? (string)$val : null;
     }
 
     public function getEnabled(): bool {
@@ -308,7 +308,7 @@ class Banner extends Model {
     }
 
     public function setEnabled(bool $val): void {
-        $this->enabled = boolval($val);
+        $this->enabled = (bool)$val;
     }
 
     public function delete() {

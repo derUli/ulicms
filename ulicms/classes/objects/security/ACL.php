@@ -49,7 +49,7 @@ class ACL
 
     public function deleteGroup(int $id, ?int $move_users_to = null)
     {
-        $id = intval($id);
+        $id = (int)$id;
 
         if (is_null($move_users_to)) {
             $updateUsers = "UPDATE " . tbname("users") .

@@ -182,7 +182,7 @@ function replaceOtherShortCodes(string $string): string {
         for ($i = 0; $i < $matchCount; $i++) {
             $placeholder = $match[0][$i];
             $id = unhtmlspecialchars($match[1][$i]);
-            $id = intval($id);
+            $id = (int)$id;
 
             $page = ContentFactory::getByID($id);
             // a page should not include itself
@@ -203,11 +203,11 @@ function replaceOtherShortCodes(string $string): string {
 function containsModule(?string $page = null, ?string $module = null): bool {
     $containsModule = false;
 
-    if (is_null($page)) {
+    if ($page === NULL) {
         $page = get_slug();
     }
 
-    if (!is_null(Vars::get("page_" . $page . "_contains_" . $module))) {
+    if (Vars::get("page_" . $page . "_contains_" . $module) !== NULL) {
         return Vars::get("page_" . $page . "_contains_" . $module);
     }
 
@@ -223,7 +223,7 @@ function containsModule(?string $page = null, ?string $module = null): bool {
     $content = str_replace("&quot;", "\"", $content);
 
     // TODO: Refactor this
-    if (!is_null($dataset["module"]) && !empty($dataset["module"]) && $dataset["type"] == "module") {
+    if ($dataset["module"] !== NULL && !empty($dataset["module"]) && $dataset["type"] == "module") {
         if (!$module || ($module && $dataset["module"] == $module)) {
             $containsModule = true;
         }

@@ -14,8 +14,9 @@ function getThemeMeta(string $theme, string $attrib = null) {
         if (is_string($data)) {
             $data = json_decode($data, true);
         }
+
         Vars::set("theme_{$theme}_meta", $data);
-        if ($attrib != null) {
+        if ($attrib != NULL) {
             if (isset($data[$attrib])) {
                 $retval = $data[$attrib];
             }

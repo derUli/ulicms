@@ -15,7 +15,7 @@ function getPageIDBySlug(string $slug): ?int {
 
 function getPageSlugByID(?int $id): ?string {
     $result = db_query("SELECT slug, id FROM `" . tbname("content")
-            . "` where id=" . intval($id));
+            . "` where id=" . (int)$id);
     if (db_num_rows($result) > 0) {
         $row = db_fetch_object($result);
         return $row->slug;
@@ -24,7 +24,7 @@ function getPageSlugByID(?int $id): ?string {
 }
 
 function getPageByID(int $id): ?object {
-    $id = intval($id);
+    $id = (int)$id;
     $result = db_query("SELECT * FROM " . tbname("content") .
             " where id = " . $id);
     if (db_num_rows($result) > 0) {
@@ -35,7 +35,7 @@ function getPageByID(int $id): ?object {
 
 function getPageTitleByID(?int $id): string {
     $result = db_query("SELECT title, id FROM `" . tbname("content")
-            . "` where id=" . intval($id));
+            . "` where id=" . (int)$id);
     if (db_num_rows($result) > 0) {
         $row = db_fetch_object($result);
         return $row->title;
@@ -88,9 +88,9 @@ function getAllPages(
     }
     $returnvalues = [];
     while ($row = db_fetch_assoc($result)) {
-        if (!$exclude_hash_links or ($exclude_hash_links
-                and $row["type"] != "link" and $row["type"] != "node"
-                and $row["type"] != "language_link")) {
+        if (!$exclude_hash_links || ($exclude_hash_links
+                && $row["type"] != "link" && $row["type"] != "node"
+                && $row["type"] != "language_link")) {
             array_push($returnvalues, $row);
         }
     }

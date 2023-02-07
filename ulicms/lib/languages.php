@@ -173,7 +173,7 @@ function getAllLanguages($filtered = false): array {
         }
     }
 
-    if (!is_null(Vars::get("all_languages"))) {
+    if (Vars::get("all_languages") !== NULL) {
         return Vars::get("all_languages");
     }
     $result = db_query("SELECT language_code FROM `" . tbname("languages") .

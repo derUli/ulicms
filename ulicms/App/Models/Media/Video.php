@@ -55,7 +55,7 @@ class Video extends Model
     {
         $result = Database::pQuery("select * from `{prefix}videos` "
                         . "where id = ?", array(
-                    intval($id)
+                    (int)$id
                         ), true);
         if (!Database::any($result)) {
             $result = null;
@@ -196,12 +196,12 @@ class Video extends Model
     public function setName(?string $val): void
     {
         $this->name = StringHelper::isNotNullOrWhitespace($val) ?
-                strval($val) : null;
+                (string)$val : null;
     }
 
     public function setCategoryId(?int $val): void
     {
-        $this->category_id = is_numeric($val) ? intval($val) : null;
+        $this->category_id = is_numeric($val) ? (int)$val : null;
         $this->category = is_numeric($val) ? new Category($val) : null;
     }
 

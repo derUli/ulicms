@@ -25,7 +25,7 @@ class Model
     {
         $id = Request::getVar("id");
         if (is_numeric($id)) {
-            $this->loadByID(intval($id));
+            $this->loadByID((int)$id);
         }
     }
 
@@ -72,7 +72,7 @@ class Model
 
     public function setID($id)
     {
-        $this->id = is_numeric($id) ? intval($id) : null;
+        $this->id = is_numeric($id) ? (int)$id : null;
     }
 
     public function getID()

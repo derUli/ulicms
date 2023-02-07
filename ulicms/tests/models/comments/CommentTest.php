@@ -234,7 +234,7 @@ class CommentTest extends \PHPUnit\Framework\TestCase {
             $comment = new Comment($id);
             $this->fail("expected exception not thrown");
         } catch (DatasetNotFoundException $e) {
-            $this->assertEquals("no comment with id " . intval($id), $e->getMessage());
+            $this->assertEquals("no comment with id " . (int)$id, $e->getMessage());
         }
     }
 

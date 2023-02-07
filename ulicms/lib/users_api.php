@@ -53,7 +53,7 @@ function getUserByName(string $name): ?array {
 
 function getUserById($id): ?array {
     $result = Database::query("SELECT * FROM " . tbname("users") .
-                    " WHERE id = " . intval($id));
+                    " WHERE id = " . (int)$id);
     if (db_num_rows($result) > 0) {
         return db_fetch_assoc($result);
     }

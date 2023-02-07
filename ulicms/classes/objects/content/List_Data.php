@@ -68,7 +68,7 @@ class List_Data extends Model
 
     public function loadByID($id)
     {
-        $id = intval($id);
+        $id = (int)$id;
         $result = Database::query("select * from " . tbname("lists")
                         . " WHERE content_id = $id");
         if (Database::getNumRows($result) > 0) {
@@ -76,7 +76,7 @@ class List_Data extends Model
             $this->fillVars($dataset);
         }
 
-        $this->content_id = $id ? intval($id) : null;
+        $this->content_id = $id ? (int)$id : null;
     }
 
     protected function fillVars($data = null)

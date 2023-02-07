@@ -247,7 +247,7 @@ class Database {
 
         $row = Database::fetchObject($result);
         $val = $row->val;
-        return is_decimal($val) ? floatval(val) : intval($val);
+        return is_decimal($val) ? floatval(val) : (int)$val;
     }
 
     public static function selectMax(
@@ -271,7 +271,7 @@ class Database {
 
         $row = Database::fetchObject($result);
         $val = $row->val;
-        return is_decimal($val) ? floatval(val) : intval($val);
+        return is_decimal($val) ? floatval(val) : (int)$val;
     }
 
     public static function selectAvg(
@@ -295,7 +295,7 @@ class Database {
 
         $row = Database::fetchObject($result);
         $val = $row->val;
-        return is_decimal($val) ? floatval($val) : intval($val);
+        return is_decimal($val) ? floatval($val) : (int)$val;
     }
 
     public static function deleteFrom(

@@ -137,7 +137,7 @@ function all_combined_html(): void {
 }
 
 function get_ID(): ?int {
-    if (!is_null(Vars::get("id"))) {
+    if (Vars::get("id") !== NULL) {
         return Vars::get("id");
     }
 
@@ -151,28 +151,31 @@ function get_ID(): ?int {
     $result = db_query($sql);
     if (db_num_rows($result) > 0) {
         $dataset = db_fetch_object($result);
-        $dataset = intval($dataset->id);
+        $dataset = (int) $dataset->id;
     }
     Vars::set("id", $dataset);
     return $dataset;
 }
 
 function is_active(): bool {
-    if (!is_null(Vars::get("active"))) {
+    if (Vars::get("active") !== null) {
         return Vars::get("active");
     }
 
     $page = get_slug();
 
-    $dataset = boolval(1);
+    $dataset = true;
+
     $sql = "SELECT `active` FROM " . tbname("content")
             . " WHERE slug='" . db_escape($page) . "'  AND language='" .
             db_escape(getFrontendLanguage()) . "'";
     $result = db_query($sql);
+    
     if (db_num_rows($result) > 0) {
         $dataset = db_fetch_object($result);
         $dataset = boolval($dataset->active);
     }
+    
     Vars::set("active", $dataset);
     return $dataset;
 }
@@ -229,7 +232,7 @@ function get_article_meta(?string $page = null): ?object {
 }
 
 function get_cache_control(): string {
-    if (!is_null(Vars::get("cache_control"))) {
+    if (Vars::get("cache_control") !== NULL) {
         return Vars::get("cache_control");
     }
     $page = get_slug();
@@ -350,7 +353,7 @@ function get_theme(?string $page = null): ?string {
         $page = get_slug();
     }
 
-    if (!is_null(Vars::get("theme_" . $page))) {
+    if (Vars::get("theme_" . $page) !== NULL) {
         return Vars::get("theme_" . $page);
     }
     $theme = Settings::get("theme");
@@ -675,7 +678,7 @@ function parent_item_contains_current_page(?int $id): bool {
     if (!$id) {
         return $retval;
     }
-    $id = intval($id);
+    $id = (int)$id;
     $language = $_SESSION["language"];
     $sql = "SELECT id, slug, parent_id FROM " . tbname("content") . " WHERE language = '$language' AND active = 1 AND `deleted_at` IS NULL";
     $r = db_query($sql);
@@ -706,7 +709,7 @@ function get_menu(
     $sql = "SELECT id, slug, access, link_url, title, "
             . "alternate_title, menu_image, target, type, link_to_language, position FROM " . tbname("content") . " WHERE menu='$name' AND language = '$language' AND active = 1 AND `deleted_at` IS NULL AND hidden = 0 and type <> 'snippet' and parent_id ";
 
-    if (is_null($parent_id)) {
+    if ($parent_id === NULL) {
         $sql .= " IS NULL ";
     } else {
         $sql .= " = " . intval($parent_id) . " ";
@@ -718,7 +721,7 @@ function get_menu(
         return $html;
     }
 
-    if (is_null($parent_id)) {
+    if ($parent_id === NULL) {
         $html .= "<ul class='menu_" . $name . " navmenu'>\n";
     } else {
         $containsCurrentItem = parent_item_contains_current_page(intval($parent_id));

@@ -253,7 +253,7 @@ function replace_num_entity($ord): string {
     if (preg_match('/^x([0-9a-f]+)$/i', $ord, $match)) {
         $ord = hexdec($match[1]);
     } else {
-        $ord = intval($ord);
+        $ord = (int)$ord;
     }
 
     $no_bytes = 0;

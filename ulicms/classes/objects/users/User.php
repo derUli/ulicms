@@ -39,7 +39,7 @@ class User extends Model
     {
         $sql = "select * from {prefix}users where id = ?";
         $args = array(
-            intval($id)
+            (int)$id
         );
         $result = Database::pQuery($sql, $args, true);
         $this->fillVars($result);
@@ -245,7 +245,7 @@ class User extends Model
 
     public function setId($id): void
     {
-        $this->id = $id !== null ? intval($id) : null;
+        $this->id = $id !== null ? (int)$id : null;
     }
 
     public function getUsername(): ?string
@@ -463,7 +463,7 @@ class User extends Model
 
     public function setRequirePasswordChange($val): void
     {
-        $this->require_password_change = boolval($val);
+        $this->require_password_change = (bool)$val;
     }
 
     public function isAdmin(): bool
@@ -473,7 +473,7 @@ class User extends Model
 
     public function setAdmin($val): void
     {
-        $this->admin = boolval($val);
+        $this->admin = (bool)$val;
     }
 
     public function isLocked(): bool
@@ -483,7 +483,7 @@ class User extends Model
 
     public function setLocked($val)
     {
-        $this->locked = boolval($val);
+        $this->locked = (bool)$val;
     }
 
     public function getLastLogin()
@@ -493,7 +493,7 @@ class User extends Model
 
     public function setLastLogin($val): void
     {
-        $this->last_login = !is_null($val) ? intval($val) : null;
+        $this->last_login = !is_null($val) ? (int)$val : null;
     }
 
     public function getFailedLogins(): int
@@ -560,7 +560,7 @@ class User extends Model
 
     public function setHomepage(?string $val): void
     {
-        $this->homepage = strval($val);
+        $this->homepage = (string)$val;
     }
 
     public function getDefaultLanguage(): ?string
@@ -571,7 +571,7 @@ class User extends Model
     public function setDefaultLanguage(?string $val): void
     {
         $this->default_language = StringHelper::isNotNullOrWhitespace($val) ?
-                strval($val) : null;
+                (string)$val : null;
     }
 
     // Since 2020.1:

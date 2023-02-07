@@ -8,7 +8,7 @@ class CustomFieldsTest extends \PHPUnit\Framework\TestCase {
         Database::pQuery("delete from {prefix}custom_fields where name in (?, ?) and content_id = ?", array(
             "{$type}_foo",
             "{$type}_hello",
-            intval($id)
+            (int)$id
                 ), true);
 
         Vars::delete("id");

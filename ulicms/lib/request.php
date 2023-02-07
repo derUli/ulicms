@@ -17,7 +17,6 @@ function check_form_timestamp(): void {
         return;
     }
 
-
     if (!_check_form_timestamp()) {
         setconfig(
                 "contact_form_refused_spam_mails",

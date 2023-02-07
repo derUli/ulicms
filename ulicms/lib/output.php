@@ -11,9 +11,11 @@ declare(strict_types=1);
  */
 function fcflush(): void {
     static $output_handler = null;
+
     if ($output_handler === null) {
         $output_handler = @ini_get('output_handler');
     }
+
     if ($output_handler !== 'ob_gzhandler') {
         flush();
         if (ob_get_length() !== false) {

@@ -225,7 +225,7 @@ class PageTableRenderer {
         $undeleteButtonRenderer = new UnDeleteButtonRenderer();
 
         // render button iconssuch as view, edit and delete
-        $id = intval($dataset->id);
+        $id = (int)$dataset->id;
         $viewButton = $viewButtonRenderer->render($id, $user);
         $editButton = $editButtonRenderer->render($id, $user);
         $deleteButton = $deleteButtonRenderer->render($id, $user);

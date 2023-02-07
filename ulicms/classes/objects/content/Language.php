@@ -67,12 +67,12 @@ class Language extends Model
 
     public function setName($val)
     {
-        $this->name = !is_null($val) ? strval($val) : null;
+        $this->name = !is_null($val) ? (string)$val : null;
     }
 
     public function setLanguageCode($val)
     {
-        $this->language_code = !is_null($val) ? strval($val) : null;
+        $this->language_code = !is_null($val) ? (string)$val : null;
     }
 
     public function save()

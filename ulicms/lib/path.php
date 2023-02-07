@@ -12,7 +12,7 @@ function getTemplateDirPath(
                         "ULICMS_DATA_STORAGE_ROOT/content/templates/"
                 ) . "/";
     } elseif (ULICMS_ROOT != ULICMS_DATA_STORAGE_ROOT
-            and defined("ULICMS_DATA_STORAGE_URL")) {
+            && defined("ULICMS_DATA_STORAGE_URL")) {
         $templateDir = Path::resolve(
                         "ULICMS_DATA_STORAGE_URL/content/templates"
                 ) . "/";

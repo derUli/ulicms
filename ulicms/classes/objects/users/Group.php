@@ -17,7 +17,7 @@ class Group
         $acl = new ACL();
         $this->permissions = $acl->getDefaultACLAsJSON(false, true);
         if ($id !== null) {
-            $this->loadById(intval($id));
+            $this->loadById((int)$id);
         }
     }
 
@@ -68,12 +68,12 @@ class Group
     {
         $sql = "select * from `{prefix}groups` where id = ?";
         $args = array(
-            intval($id)
+            (int)$id
         );
         $result = Database::pQuery($sql, $args, true);
         if (Database::any($result)) {
             $dataset = Database::fetchObject($result);
-            $this->id = intval($dataset->id);
+            $this->id = (int)$dataset->id;
             $this->name = $dataset->name;
             $this->permissions = json_decode($dataset->permissions, true);
             $this->allowable_tags = $dataset->allowable_tags;
@@ -245,7 +245,7 @@ class Group
     public function setAllowableTags(?string $val): void
     {
         $this->allowable_tags = Stringhelper::isNotNullOrWhitespace($val) ?
-                strval($val) : null;
+                (string)$val : null;
     }
 
     // get all users in this group

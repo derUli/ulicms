@@ -61,7 +61,7 @@ class SpamFilterConfiguration
 
     public function setSpamFilterEnabled(bool $val): void
     {
-        $this->spamfilterEnabled = boolval($val);
+        $this->spamfilterEnabled = (bool)$val;
     }
 
     public function getBadwords(): array
@@ -113,7 +113,7 @@ class SpamFilterConfiguration
 
     public function setDisallowChineseChars(bool $val): void
     {
-        $this->disallowChineseChars = boolval($val);
+        $this->disallowChineseChars = (bool)$val;
     }
 
     public function getDisallowCyrillicChars(): bool
@@ -123,7 +123,7 @@ class SpamFilterConfiguration
 
     public function setDisallowCyrillicChars(bool $val): void
     {
-        $this->disallowCyrillicChars = boolval($val);
+        $this->disallowCyrillicChars = (bool)$val;
     }
 
     public function getDisallowRtlChars(): bool
@@ -133,7 +133,7 @@ class SpamFilterConfiguration
 
     public function setDisallowRtlChars(bool $val): void
     {
-        $this->disallowRtlChars = boolval($val);
+        $this->disallowRtlChars = (bool)$val;
     }
 
     public function getRejectRequestsFromBots(): bool
@@ -143,7 +143,7 @@ class SpamFilterConfiguration
 
     public function setRejectRequestsFromBots(bool $val): void
     {
-        $this->rejectRequestsFromBots = boolval($val);
+        $this->rejectRequestsFromBots = (bool)$val;
     }
 
     public function getCheckMxOfMailAddress(): bool
@@ -153,6 +153,6 @@ class SpamFilterConfiguration
 
     public function setCheckMxOfMailAddress(bool $val): void
     {
-        $this->checkMxOfMailAddress = boolval($val);
+        $this->checkMxOfMailAddress = (bool)$val;
     }
 }

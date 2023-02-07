@@ -24,7 +24,7 @@ class Category
     {
         $sql = "select * from {prefix}categories where id = ?";
         $args = array(
-            intval($id)
+            (int)$id
         );
         $result = Database::pQuery($sql, $args, true);
         $this->fillVars($result);
@@ -117,16 +117,16 @@ class Category
 
     public function setID(?int $val): void
     {
-        $this->id = !is_null($val) ? intval($val) : null;
+        $this->id = !is_null($val) ? (int)$val : null;
     }
 
     public function setName(?string $val): void
     {
-        $this->name = !is_null($val) ? strval($val) : null;
+        $this->name = !is_null($val) ? (string)$val : null;
     }
 
     public function setDescription(?string $val): void
     {
-        $this->description = !is_null($val) ? strval($val) : null;
+        $this->description = !is_null($val) ? (string)$val : null;
     }
 }
