@@ -1,7 +1,11 @@
 <?php
+
+use App\Packages\PatchManager;
+
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("update_system") && !Settings::get("disable_core_patch_check")) {
-    $data = file_get_contents_wrapper(PATCH_CHECK_URL, true);
+    $patchManager = new PatchManager();
+    $data = $patchManager->fetchPackageIndex();
     $data = trim($data);
     if (!empty($data)) {
         ?>

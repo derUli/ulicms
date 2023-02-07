@@ -256,6 +256,7 @@ if (!(is_array($disable_functions) && in_array("edit_button", $disable_functions
 }
 
 do_event("after_edit_button");
+
 $bottom_files = array(
     "type/" . get_type() . "/unten.php",
     "type/" . get_type() . "/bottom.php",
@@ -272,7 +273,7 @@ foreach ($bottom_files as $file) {
 
 do_event("after_html");
 
-if ($cacheAdapter or Settings::get("minify_html")) {
+if ($cacheAdapter || Settings::get("minify_html")) {
     $generatedHtml = ob_get_clean();
     $generatedHtml = normalizeLN($generatedHtml, "\n");
     $generatedHtml = optimizeHtml($generatedHtml);

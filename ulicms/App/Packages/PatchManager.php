@@ -8,6 +8,7 @@ use Database;
 use ZipArchive;
 use StringHelper;
 use UliCMS\Utils\CacheUtil;
+use UliCMSVersion;
 use function file_get_contents_wrapper;
 use function sureRemoveDir;
 use function recurse_copy;
@@ -25,8 +26,16 @@ class PatchManager {
         return $retval;
     }
 
-    public function fetchPackageIndex(): ?string {
-        return file_get_contents_wrapper(PATCH_CHECK_URL, true);
+    public function fetchPackageIndex(bool $noCache = true): ?string {
+        return file_get_contents_wrapper($this->getPatchCheckUrl(), $noCache);
+    }
+
+    protected function getPatchCheckUrl(): string {
+        $installed_patches = $this->getInstalledPatchNames();
+        $installed_patches = implode(";", $installed_patches);
+        $version = new UliCMSVersion();
+
+        return "https://patches.ulicms.de/?v=" . urlencode(implode(".", $version->getInternalVersion())) . "&installed_patches=" . urlencode($installed_patches);
     }
 
     public function getAvailablePatches(): array {

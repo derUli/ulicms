@@ -20,7 +20,6 @@ use App\Exceptions\ConnectionFailedException;
 use App\Exceptions\SqlException;
 use App\Registries\HelperRegistry;
 use App\Models\Content\TypeMapper;
-use App\Packages\PatchManager;
 
 // load composer packages
 $composerAutoloadFile = dirname(__FILE__) . "/vendor/autoload.php";
@@ -38,14 +37,14 @@ if (file_exists($composerAutoloadFile)) {
 spl_autoload_register(function ($className) {
     // Backwards compatiblity for old code
     /*
-    if (str_starts_with($className, 'UliCMS\\')) {
-        trigger_error(
-                "Namespaces starting with UliCMS\\ are deprecated: $className",
-                E_USER_DEPRECATED
-        );
+      if (str_starts_with($className, 'UliCMS\\')) {
+      trigger_error(
+      "Namespaces starting with UliCMS\\ are deprecated: $className",
+      E_USER_DEPRECATED
+      );
 
-        $className = 'App\\' . substring($className, 8);
-    } */
+      $className = 'App\\' . substring($className, 8);
+      } */
 
     // Interim solution for non namespaced classes
     if (!str_contains($className, "\\")) {
@@ -160,7 +159,7 @@ if ((defined("ULICMS_DEBUG") && ULICMS_DEBUG) || (isset($config->debug) && $conf
 /**
  * @deprecated since version 2023.1
  */
- define("ULICMS_DATA_STORAGE_ROOT", ULICMS_ROOT);
+define("ULICMS_DATA_STORAGE_ROOT", ULICMS_ROOT);
 
 if (!defined("ULICMS_TMP")) {
     define("ULICMS_TMP", ULICMS_ROOT . "/content/tmp/");
@@ -339,31 +338,23 @@ if (isset($_SESSION["session_begin"])) {
     }
 }
 
-function shutdown_function() {
-    do_event("shutdown");
+register_shutdown_function(
+        function () {
+            do_event("shutdown");
 
-    $cfg = new CMSConfig();
-    if (isset($cfg->show_render_time) && $cfg->show_render_time && !Request::isAjaxRequest()) {
-        echo "\n\n<!--" . (microtime(true) - START_TIME) . "-->";
-    }
-    if (isset($cfg->dbmigrator_drop_database_on_shutdown) && $cfg->dbmigrator_drop_database_on_shutdown) {
-        if (isCLI()) {
-            Database::setEchoQueries(true);
+            $cfg = new CMSConfig();
+            if (isset($cfg->show_render_time) && $cfg->show_render_time && !Request::isAjaxRequest()) {
+                echo "\n\n<!--" . (microtime(true) - START_TIME) . "-->";
+            }
+            if (isset($cfg->dbmigrator_drop_database_on_shutdown) && $cfg->dbmigrator_drop_database_on_shutdown) {
+                if (isCLI()) {
+                    Database::setEchoQueries(true);
+                }
+                Database::dropSchema($cfg->db_database);
+                Database::setEchoQueries(false);
+            }
         }
-        Database::dropSchema($cfg->db_database);
-        Database::setEchoQueries(false);
-    }
-}
-
-register_shutdown_function("shutdown_function");
-
-$patchManager = new PatchManager();
-$installed_patches = $patchManager->getInstalledPatchNames();
-$installed_patches = implode(";", $installed_patches);
-$version = new UliCMSVersion();
-
-define("PATCH_CHECK_URL", "https://patches.ulicms.de/?v=" .
-        urlencode(implode(".", $version->getInternalVersion())) . "&installed_patches=" . urlencode($installed_patches));
+);
 
 $defaultMenu = isset($config->default_menu) && !empty($config->default_menu) ?
         $config->default_menu : 'not_in_menu';

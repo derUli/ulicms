@@ -461,7 +461,8 @@ class RoboFile extends Tasks {
     }
 
     private function patchckAvailable() {
-        return file_get_contents_wrapper(PATCH_CHECK_URL, true);
+        $patchManager = new PatchManager();
+        return $patchManager->fetchPackageIndex();
     }
 
     /**
