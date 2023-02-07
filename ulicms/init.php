@@ -103,6 +103,7 @@ require_once dirname(__file__) . "/classes/objects/content/Results.php";
 
 $mobile_detect_as_module = dirname(__file__) .
         "/content/modules/Mobile_Detect/Mobile_Detect.php";
+
 if (file_exists($mobile_detect_as_module)) {
     require_once $mobile_detect_as_module;
 }
@@ -124,7 +125,7 @@ function exception_handler($exception) {
     }
     $httpStatus = $exception instanceof AccessDeniedException ?
             HttpStatusCode::FORBIDDEN : HttpStatusCode::INTERNAL_SERVER_ERROR;
-    if (function_exists("HTMLResult") and class_exists("Template") && !headers_sent() and function_exists("get_theme")) {
+    if (function_exists("HTMLResult") && class_exists("Template") && !headers_sent() && function_exists("get_theme")) {
         ViewBag::set("exception", nl2br(_esc($exception)));
         HTMLResult(Template::executeDefaultOrOwnTemplate("exception.php"), $httpStatus);
     }
@@ -156,7 +157,7 @@ $config = new CMSConfig();
 
 // IF ULICMS_DEBUG is defined then display all errors except E_NOTICE,
 // else disable error_reporting from php.ini
-if ((defined("ULICMS_DEBUG") && ULICMS_DEBUG) || (isset($config->debug) and $config->debug)) {
+if ((defined("ULICMS_DEBUG") && ULICMS_DEBUG) || (isset($config->debug) && $config->debug)) {
     error_reporting(E_ALL ^ E_NOTICE);
 } else {
     error_reporting(0);
@@ -305,7 +306,7 @@ if (!$connection) {
 
 $path_to_installer = dirname(__file__) . "/installer/installer.php";
 
-if (isset($config->dbmigrator_auto_migrate) and is_true($config->dbmigrator_auto_migrate)) {
+if (isset($config->dbmigrator_auto_migrate) && $config->dbmigrator_auto_migrate) {
     $additionalSql = is_array($config->dbmigrator_initial_sql_files) ?
             $config->dbmigrator_initial_sql_files : [];
     if (isCLI()) {
@@ -387,10 +388,10 @@ function shutdown_function() {
     do_event("shutdown");
 
     $cfg = new CMSConfig();
-    if (isset($cfg->show_render_time) and is_true($cfg->show_render_time) && !Request::isAjaxRequest()) {
+    if (isset($cfg->show_render_time) && $cfg->show_render_time && !Request::isAjaxRequest()) {
         echo "\n\n<!--" . (microtime(true) - START_TIME) . "-->";
     }
-    if (isset($cfg->dbmigrator_drop_database_on_shutdown) and is_true($cfg->dbmigrator_drop_database_on_shutdown)) {
+    if (isset($cfg->dbmigrator_drop_database_on_shutdown) && $cfg->dbmigrator_drop_database_on_shutdown) {
         if (isCLI()) {
             Database::setEchoQueries(true);
         }
@@ -419,7 +420,7 @@ define("DEFAULT_CONTENT_TYPE", $defaultContentType);
 
 $enforce_https = Settings::get("enforce_https");
 
-if (!is_ssl() and $enforce_https) {
+if (!is_ssl() && $enforce_https) {
     send_header("Location: https://" . $_SERVER["HTTP_HOST"] .
             $_SERVER["REQUEST_URI"]);
     exit();
