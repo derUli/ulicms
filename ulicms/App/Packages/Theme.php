@@ -36,7 +36,7 @@ class Theme {
     }
 
     public function hasScreenshot(): bool {
-        return !is_null($this->getScreenshotFile());
+        return $this->getScreenshotFile() !== NULL;
     }
 
 }
