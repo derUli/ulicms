@@ -91,25 +91,7 @@ foreach ($loadDirs as $loadDir) {
     require_all_files_in_dir($loadDir);
 }
 
-require dirname(__FILE__) . "/classes/objects/content/types/fields/load.php";
 require dirname(__FILE__) . "/classes/objects/html/load.php";
-require dirname(__FILE__) . "/classes/objects/content/CustomData.php";
-require dirname(__FILE__) . "/classes/objects/content/Content.php";
-require dirname(__FILE__) . "/classes/objects/content/Page.php";
-require dirname(__FILE__) . "/classes/objects/content/Snippet.php";
-require dirname(__FILE__) . "/classes/objects/content/Link.php";
-require dirname(__FILE__) . "/classes/objects/content/Language_Link.php";
-require dirname(__FILE__) . "/classes/objects/content/Node.php";
-require dirname(__FILE__) . "/classes/objects/content/List_Data.php";
-require dirname(__FILE__) . "/classes/objects/content/Content_List.php";
-require dirname(__FILE__) . "/classes/objects/content/Module_Page.php";
-require dirname(__FILE__) . "/classes/objects/content/Video_Page.php";
-require dirname(__FILE__) . "/classes/objects/content/Audio_Page.php";
-require dirname(__FILE__) . "/classes/objects/content/Image_Page.php";
-require dirname(__FILE__) . "/classes/objects/content/Article.php";
-require dirname(__FILE__) . "/classes/objects/content/ContentFactory.php";
-require dirname(__FILE__) . "/classes/objects/content/CustomFields.php";
-require dirname(__FILE__) . "/classes/objects/content/Results.php";
 
 $mobile_detect_as_module = dirname(__FILE__) .
         "/content/modules/Mobile_Detect/Mobile_Detect.php";
