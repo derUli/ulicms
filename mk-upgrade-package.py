@@ -54,19 +54,11 @@ def main():
 
     update_script = os.path.join(target, "ulicms", "update.php")
 
-    content_dir1_from = os.path.join(source_dir, "ulicms", "classes", "objects", "content")
-    content_dir1_to = os.path.join(target, "ulicms", "classes", "objects", "content")
-    shutil.copytree(content_dir1_from, content_dir1_to, ignore=IGNORE_PATTERNS)
     
-    content_dir2_from = os.path.join(source_dir, "ulicms", "App", "Models", "Content")
-    content_dir2_to = os.path.join(target, "ulicms", "App", "Models", "Content")
+    content_dir_from = os.path.join(source_dir, "ulicms", "App", "Models", "Content")
+    content_dir_to = os.path.join(target, "ulicms", "App", "Models", "Content")
     
-    shutil.copytree(content_dir2_from, content_dir2_to, ignore=IGNORE_PATTERNS)
-    
-    
-    modules_dir_from = os.path.join(source_dir, "ulicms", "classes", "objects", "modules")
-    modules_dir_to = os.path.join(target, "ulicms", "classes", "objects", "modules")
-    shutil.copytree(modules_dir_from, modules_dir_to, ignore=IGNORE_PATTERNS)
+    shutil.copytree(content_dir_from, content_dir_to, ignore=IGNORE_PATTERNS)
 
     modules_dir_from = os.path.join(source_dir, "ulicms", "content", "modules")
     modules_dir_to = os.path.join(target, "ulicms", "content", "modules")

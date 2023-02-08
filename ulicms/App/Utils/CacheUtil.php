@@ -33,7 +33,7 @@ class CacheUtil {
             return null;
         }
 
-        if (!is_null(self::$adapter)) {
+        if (self::$adapter !== NULL) {
             return self::$adapter;
         }
 

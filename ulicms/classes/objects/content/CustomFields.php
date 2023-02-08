@@ -4,31 +4,31 @@ declare(strict_types=1);
 
 // This class contains methods to manipulate CustomFields
 // defined by modules
-class CustomFields
-{
+class CustomFields {
+
     public static function set(
-        string $name,
-        $value,
-        ?int $content_id = null,
-        $addPrefix = false
+            string $name,
+            $value,
+            ?int $content_id = null,
+            $addPrefix = false
     ): ?bool {
-        if (is_null($content_id)) {
-            $content_id = get_ID();
-        }
+        $content_id = $content_id ?? get_ID();
+
         if ($addPrefix) {
             $page = ContentFactory::getByID($content_id);
             $name = "{$page->type}_{$name}";
         }
+
         // use two nullbytes as seperator for arrays
         if (is_array($value)) {
             $value = join("\0\0", $value);
         } elseif (is_bool($value)) {
-            $value = strval(intval($value));
+            $value = strval((int) $value);
         } elseif ($value !== NULL) {
-            $value = strval($value);
+            $value = (string) $value;
         }
 
-        $content_id = intval($content_id);
+        $content_id = (int)$content_id;
         $args = array(
             $content_id,
             $name
@@ -40,7 +40,7 @@ class CustomFields
             $result = Database::fetchObject($result);
             if ($value === NULL) {
                 $args = array(
-                    (int)$result->id
+                    (int) $result->id
                 );
                 $sql = "DELETE FROM {prefix}custom_fields "
                         . "where id = ?";
@@ -69,15 +69,15 @@ class CustomFields
     }
 
     public static function getAll(
-        ?int $content_id = null,
-        bool $removePrefix = true
+            ?int $content_id = null,
+            bool $removePrefix = true
     ): array {
         $fields = [];
         if (is_null($content_id)) {
             $content_id = get_ID();
         }
 
-        $content_id = intval($content_id);
+        $content_id = (int)$content_id;
         $args = array(
             $content_id
         );
@@ -100,15 +100,15 @@ class CustomFields
     }
 
     public static function get(
-        string $name,
-        ?int $content_id = null,
-        $addPrefix = true
+            string $name,
+            ?int $content_id = null,
+            $addPrefix = true
     ) {
         if (is_null($content_id)) {
             $content_id = get_ID();
         }
 
-        $content_id = intval($content_id);
+        $content_id = (int)$content_id;
         $page = ContentFactory::getByID($content_id);
 
         if ($addPrefix) {
@@ -134,4 +134,5 @@ class CustomFields
         }
         return null;
     }
+
 }

@@ -171,7 +171,7 @@ class CommentSpamChecker implements ISpamChecker
         $countries = $this->spamFilterConfiguration->getBlockedCountries();
         $ip = $this->comment->getIp();
 
-        if (!is_null($ip) && AntiSpamHelper::isCountryBlocked($ip, $countries)) {
+        if ($ip !== NULL && AntiSpamHelper::isCountryBlocked($ip, $countries)) {
             $hostname = @gethostbyaddr($ip);
             $message = get_translation(
                 "your_country_is_blocked",

@@ -334,7 +334,7 @@ class PageController extends Controller {
         }
         $content = $model->content;
         VCS::createRevision(
-                intval($content_id),
+                (int)$content_id,
                 $content,
                 intval($user_id)
         );

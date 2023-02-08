@@ -148,7 +148,7 @@ class Database {
 
     // returns true if UliCMS is connected to database
     public static function isConnected(): bool {
-        return !is_null(self::$connection);
+        return self::$connection !== NULL;
     }
 
     public static function setConnection(?mysqli $con): void {
@@ -176,11 +176,11 @@ class Database {
             } else {
                 $value = $args[$i];
                 if (is_float($value)) {
-                    $value = str_replace(",", ".", strval((float)$value));
+                    $value = str_replace(",", ".", strval((float) $value));
                 } elseif (is_int($value)) {
-                    $value = strval(intval($value));
+                    $value = strval((int)$value);
                 } elseif (is_bool($value)) {
-                    $value = strval(intval($value));
+                    $value = strval((int)$value);
                 } elseif ($value === NULL) {
                     $value = "NULL";
                 } else {
@@ -247,7 +247,7 @@ class Database {
 
         $row = Database::fetchObject($result);
         $val = $row->val;
-        return is_decimal($val) ? (float)$val : (int)$val;
+        return is_decimal($val) ? (float) $val : (int) $val;
     }
 
     public static function selectMax(
@@ -271,7 +271,7 @@ class Database {
 
         $row = Database::fetchObject($result);
         $val = $row->val;
-        return is_decimal($val) ? (float)$val : (int)$val;
+        return is_decimal($val) ? (float) $val : (int) $val;
     }
 
     public static function selectAvg(
@@ -295,7 +295,7 @@ class Database {
 
         $row = Database::fetchObject($result);
         $val = $row->val;
-        return is_decimal($val) ? (float)$val : (int)$val;
+        return is_decimal($val) ? (float) $val : (int) $val;
     }
 
     public static function deleteFrom(
@@ -405,7 +405,7 @@ class Database {
     public static function fetchAll(?mysqli_result $result): array {
         $datasets = [];
 
-        while (!is_null($result) and $row = self::fetchObject($result)) {
+        while ($result !== null && $row = self::fetchObject($result)) {
             $datasets[] = $row;
         }
 
@@ -486,11 +486,11 @@ class Database {
         if ($value === NULL) {
             return "NULL";
         }
-        if (is_null($type)) {
+        if ($type === NULL) {
             if (is_float($value)) {
-                return (float)$value;
+                return (float) $value;
             } elseif (is_int($value)) {
-                return intval($value);
+                return (int)$value;
             } elseif (is_bool($value)) {
                 return (int) $value;
             } else {
@@ -498,16 +498,16 @@ class Database {
             }
         } else {
             if ($type === DB_TYPE_INT) {
-                return intval($value);
+                return (int)$value;
             } elseif ($type === DB_TYPE_FLOAT) {
-                return (float)$value;
+                return (float) $value;
             } elseif ($type === DB_TYPE_STRING) {
                 return mysqli_real_escape_string(
                         self::$connection,
-                        strval($value)
+                        (string)$value
                 );
             } elseif ($type === DB_TYPE_BOOL) {
-                return intval($value);
+                return (int)$value;
             } else {
                 return $value;
             }

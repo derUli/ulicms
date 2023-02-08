@@ -110,10 +110,10 @@ class Settings {
     public static function convertVar($value, ?string $type) {
         switch ($type) {
             case 'str':
-                $value = strval($value);
+                $value = (string)$value;
                 break;
             case 'int':
-                $value = intval($value);
+                $value = (int)$value;
                 break;
             case 'float':
                 $value = (float) $value;

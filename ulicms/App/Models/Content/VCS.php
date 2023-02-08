@@ -62,7 +62,7 @@ class VCS
         int $content_id,
         string $order = "date DESC"
     ): array {
-        $content_id = intval($content_id);
+        $content_id = (int)$content_id;
         $result = db_query("SELECT * FROM " . tbname("history")
                 . " WHERE content_id = " . $content_id . " ORDER BY " . $order);
         $retval = [];

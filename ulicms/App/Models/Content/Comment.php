@@ -276,7 +276,7 @@ VALUES      ( ?,
             self::TABLE_NAME,
             self::class,
             $order_by,
-            "content_id = " . intval($content_id)
+            "content_id = " . (int)$content_id
         );
     }
 
@@ -287,7 +287,7 @@ VALUES      ( ?,
     ): array {
         $where = "status = '" . Database::escapeValue($status) . "'";
         if ($content_id) {
-            $where .= " and content_id = " . intval($content_id);
+            $where .= " and content_id = " . (int)$content_id;
         }
         return self::getAllDatasets(
             self::TABLE_NAME,

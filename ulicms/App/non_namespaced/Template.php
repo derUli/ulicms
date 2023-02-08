@@ -136,7 +136,7 @@ class Template {
     }
 
     public static function getEscape($value): string {
-        return htmlspecialchars(strval($value), ENT_QUOTES, "UTF-8");
+        return htmlspecialchars((string)$value, ENT_QUOTES, "UTF-8");
     }
 
     public static function logo(): void {
