@@ -74,7 +74,7 @@ function require_all_files_in_dir(string $dir) {
     $files = glob(ULICMS_ROOT . "/$dir/*.php");
 
     foreach ($files as $file) {
-        if (is_file($file) && basename($file) !== 'load.php') {
+        if (is_file($file)) {
             require $file;
         }
     }

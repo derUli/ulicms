@@ -12,6 +12,7 @@ $classes = [
     "ColorField",
     "HtmlField",
     "SelectField",
+    "MultiSelectField",
     "CheckboxField",
     "FileFile",
     "FileImage"
