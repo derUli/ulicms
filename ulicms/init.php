@@ -44,18 +44,7 @@ if (file_exists($composerAutoloadFile)) {
 
 // Autoloader
 spl_autoload_register(function ($className) {
-    // Backwards compatiblity for old code
-
-    if (str_starts_with($className, 'UliCMS\\')) {
-        trigger_error(
-                "Namespaces starting with UliCMS\\ are deprecated: $className",
-                E_USER_DEPRECATED
-        );
-
-        $className = 'App\\' . substring($className, 8);
-    }
-
-    // Interim solution for non namespaced classes
+    // Interim solution for not yet namespaced classes
     if (!str_contains($className, "\\")) {
         $className = "App\\non_namespaced\\{$className}";
     }
