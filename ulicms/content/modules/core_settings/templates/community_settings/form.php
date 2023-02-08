@@ -42,7 +42,7 @@ echo ModuleHelper::buildMethodCallForm(
 <div class="field">
     <div class="checkbox">
         <label><?php
-            echo UliCMS\HTML\Input::checkBox(
+            echo App\HTML\Input::checkBox(
                     "comments_enabled",
                     boolval(Settings::get("comments_enabled")),
                     "1",
@@ -54,7 +54,7 @@ echo ModuleHelper::buildMethodCallForm(
 <div class="field">
     <div class="checkbox">
         <label><?php
-            echo UliCMS\HTML\Input::checkBox(
+            echo App\HTML\Input::checkBox(
                     "comments_must_be_approved",
                     boolval(Settings::get("comments_must_be_approved")),
                     "1",
@@ -66,7 +66,7 @@ echo ModuleHelper::buildMethodCallForm(
 <div class="field">
     <label for="commentable_content_types[]"><?php translate("commentable_content_types") ?></label>
     <?php
-    echo UliCMS\HTML\Input::multiSelect("commentable_content_types[]", $commentableContentTypes, $typeSelection, 5);
+    echo App\HTML\Input::multiSelect("commentable_content_types[]", $commentableContentTypes, $typeSelection, 5);
     ?>
 </div>
 <div class="voffset2">

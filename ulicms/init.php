@@ -83,7 +83,6 @@ function require_all_files_in_dir(string $dir) {
 require dirname(__FILE__) . "/lib/load.php";
 
 $loadDirs = [
-    'classes/objects/constants',
     'classes/objects/security',
     'classes/objects/users'
 ];

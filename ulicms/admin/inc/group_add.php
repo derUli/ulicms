@@ -1,6 +1,6 @@
 <?php
 
-use const UliCMS\Constants\HTML5_ALLOWED_TAGS;
+use App\Constants\DefaultValues;
 use App\Models\Content\Language;
 
 $permissionChecker = new ACL();
@@ -51,7 +51,7 @@ $languages = Language::getAllLanguages();
     </fieldset>
     <h3><?php translate("allowable_tags"); ?></h3>
     <input type="text" name="allowable_tags"
-           value="<?php Template::escape(HTML5_ALLOWED_TAGS); ?>"> <small><?php translate("allowable_tags_help"); ?></small>
+           value="<?php Template::escape(DefaultValues::ALLOWED_TAGS); ?>"> <small><?php translate("allowable_tags_help"); ?></small>
     <div class="voffset2">
         <button name="add_group" type="submit" class="btn btn-primary">
             <i class="fa fa-save"></i>

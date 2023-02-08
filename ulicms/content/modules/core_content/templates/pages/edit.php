@@ -12,7 +12,7 @@ use App\Models\Content\Categories;
 use App\Models\Content\Language;
 use App\Models\Content\Types\DefaultContentTypes;
 use App\Helpers\NumberFormatHelper;
-use UliCMS\HTML\Input;
+use App\HTML\Input;
 use UliCMS\CoreContent\UIUtils;
 use function UliCMS\HTML\icon;
 

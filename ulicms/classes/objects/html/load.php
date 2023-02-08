@@ -4,7 +4,6 @@ $classes = [
     "Script",
     "Link",
     "ListItem",
-    "Input",
     "Button",
     "functions",
     "Form"

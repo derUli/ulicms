@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\HTML\Input;
+use App\HTML\Input;
 use Michelf\MarkdownExtra;
 use zz\Html\HTMLMinify;
 

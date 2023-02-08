@@ -2,20 +2,19 @@
 
 declare(strict_types=1);
 
-namespace UliCMS\HTML;
+namespace App\HTML;
 
-use Path;
 use ModuleHelper;
 use Template;
 
 // this class contains methods to build input fields
-class Input
-{
+class Input {
+
     public static function textBox(
-        string $name,
-        $value,
-        string $type = "text",
-        array $htmlAttributes = []
+            string $name,
+            $value,
+            string $type = "text",
+            array $htmlAttributes = []
     ): string {
         $attributes = array(
             "type" => $type,
@@ -30,11 +29,11 @@ class Input
     }
 
     public static function textArea(
-        string $name,
-        $value,
-        int $rows = 25,
-        int $cols = 80,
-        array $htmlAttributes = []
+            string $name,
+            $value,
+            int $rows = 25,
+            int $cols = 80,
+            array $htmlAttributes = []
     ): string {
         $attributes = array(
             "name" => $name,
@@ -52,11 +51,11 @@ class Input
     }
 
     public static function editor(
-        string $name,
-        $value,
-        int $rows = 25,
-        int $cols = 80,
-        array $htmlAttributes = []
+            string $name,
+            $value,
+            int $rows = 25,
+            int $cols = 80,
+            array $htmlAttributes = []
     ): string {
         if (!isset($htmlAttributes["id"])) {
             $htmlAttributes["id"] = $name;
@@ -81,18 +80,18 @@ class Input
      *      */
 
     public static function password(
-        string $name,
-        $value,
-        array $htmlAttributes = []
+            string $name,
+            $value,
+            array $htmlAttributes = []
     ): string {
         return self::textBox($name, $value, "password", $htmlAttributes);
     }
 
     public static function file(
-        string $name,
-        bool $multiple = false,
-        $accept = null,
-        array $htmlAttributes = []
+            string $name,
+            bool $multiple = false,
+            $accept = null,
+            array $htmlAttributes = []
     ): string {
         $attributes = array(
             "name" => $name
@@ -115,18 +114,18 @@ class Input
     }
 
     public static function hidden(
-        string $name,
-        $value,
-        array $htmlAttributes = []
+            string $name,
+            $value,
+            array $htmlAttributes = []
     ): string {
         return self::textBox($name, $value, "hidden", $htmlAttributes);
     }
 
     public static function checkBox(
-        string $name,
-        bool $checked = false,
-        $value = "1",
-        array $htmlAttributes = []
+            string $name,
+            bool $checked = false,
+            $value = "1",
+            array $htmlAttributes = []
     ): string {
         if ($checked) {
             $htmlAttributes["checked"] = "checked";
@@ -135,10 +134,10 @@ class Input
     }
 
     public static function radioButton(
-        string $name,
-        bool $checked = false,
-        $value = "1",
-        array $htmlAttributes = []
+            string $name,
+            bool $checked = false,
+            $value = "1",
+            array $htmlAttributes = []
     ): string {
         if ($checked) {
             $htmlAttributes["checked"] = "checked";
@@ -147,11 +146,11 @@ class Input
     }
 
     public static function singleSelect(
-        string $name,
-        $value = null,
-        array $options = [],
-        int $size = 1,
-        array $htmlAttributes = []
+            string $name,
+            $value = null,
+            array $options = [],
+            int $size = 1,
+            array $htmlAttributes = []
     ): string {
         $attributes = array(
             "name" => $name,
@@ -160,11 +159,11 @@ class Input
         foreach ($htmlAttributes as $key => $val) {
             $attributes[$key] = $val;
         }
-        
+
         if (!isset($attributes["id"])) {
             $attributes["id"] = $name;
         }
-        
+
         $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);
 
         $html = "<select $attribHTML>";
@@ -179,11 +178,11 @@ class Input
     }
 
     public static function multiSelect(
-        string $name,
-        $value = null,
-        array $options = [],
-        int $size = 5,
-        array $htmlAttributes = []
+            string $name,
+            $value = null,
+            array $options = [],
+            int $size = 5,
+            array $htmlAttributes = []
     ): string {
         $attributes = array(
             "name" => $name,
@@ -204,4 +203,5 @@ class Input
         $html .= '</select>';
         return $html;
     }
+
 }

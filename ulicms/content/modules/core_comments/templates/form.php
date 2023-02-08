@@ -47,7 +47,7 @@ if (Vars::get("comments_enabled")) {
         );
         ?>
         <?php
-        echo UliCMS\HTML\Input::hidden(
+        echo App\HTML\Input::hidden(
                 "content_id",
                 Vars::get("content_id")
         );
@@ -58,7 +58,7 @@ if (Vars::get("comments_enabled")) {
                 <span class="text-danger">*</span></label>
             <div>
                 <?php
-                echo UliCMS\HTML\Input::textBox(
+                echo App\HTML\Input::textBox(
                         "author_name",
                         "",
                         "text",
@@ -74,7 +74,7 @@ if (Vars::get("comments_enabled")) {
             <label for="author_email"><?php translate("your_email") ?></label>
             <div>
                 <?php
-                echo UliCMS\HTML\Input::textBox(
+                echo App\HTML\Input::textBox(
                         "author_email",
                         "",
                         "email",
@@ -88,7 +88,7 @@ if (Vars::get("comments_enabled")) {
         <label for="author_url"><?php translate("your_website") ?></label>
         <div>
             <?php
-            echo UliCMS\HTML\Input::textBox("author_url", "", "url", array(
+            echo App\HTML\Input::textBox("author_url", "", "url", array(
                 "class" => "form-control"
             ));
             ?>
@@ -99,7 +99,7 @@ if (Vars::get("comments_enabled")) {
                     <label for="text"><?php translate("text") ?>
                         <span class="text-danger">*</span></label>
                     <?php
-                    echo UliCMS\HTML\Input::textArea("text", "", 10, 80, array(
+                    echo App\HTML\Input::textArea("text", "", 10, 80, array(
                         "required" => "required",
                         "class" => "form-control"
                     ))

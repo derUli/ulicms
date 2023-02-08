@@ -2,7 +2,7 @@
 
 use App\Constants\RequestMethod;
 use function UliCMS\HTML\imageTag;
-use UliCMS\HTML\Input;
+use App\HTML\Input;
 
 $permissionChecker = new ACL();
 if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermission("users_edit")) or ($_GET["id"] == $_SESSION["login_id"])) {
@@ -63,7 +63,7 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
                 <div class="checkbox field voffset1">
                     <label>
                         <?php
-                        echo UliCMS\HTML\Input::checkBox(
+                        echo App\HTML\Input::checkBox(
                                 "delete_avatar",
                                 false,
                                 "1",

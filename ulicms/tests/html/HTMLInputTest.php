@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\HTML\Input as Input;
+use App\HTML\Input as Input;
 use UliCMS\HTML\ListItem;
 
 class HTMLInputTest extends \PHPUnit\Framework\TestCase {

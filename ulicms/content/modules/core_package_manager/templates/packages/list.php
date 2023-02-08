@@ -71,7 +71,7 @@ if ($permissionChecker->hasPermission("list_packages")) {
                         <?php if ($anyEmbedModules) { ?>
                             <td><?php
                                 if ($module->isEmbedModule()) {
-                                    echo UliCMS\HTML\Input::textBox(
+                                    echo App\HTML\Input::textBox(
                                             '',
                                             $module->getShortCode(),
                                             "text",

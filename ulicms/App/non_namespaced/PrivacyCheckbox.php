@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use UliCMS\HTML\Input as Input;
+use App\HTML\Input as Input;
 
 // Class with DSGVO / GDPR related functions
 class PrivacyCheckbox

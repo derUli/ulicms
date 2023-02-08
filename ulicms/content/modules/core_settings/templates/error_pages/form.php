@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\HTML\Input;
+use App\HTML\Input;
 use UliCMS\HTML\ListItem;
 use App\Constants\RequestMethod;
 
