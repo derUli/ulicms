@@ -89,7 +89,7 @@ $permissionChecker = new App\Security\PermissionChecker(get_user_id());
                   enqueueStylesheet($style);
               }
 
-              echo UliCMS\HTML\Style::fromExternalFile("../node_modules/password-strength-meter/dist/password.min.css");
+              echo App\HTML\Style::fromExternalFile("../node_modules/password-strength-meter/dist/password.min.css");
               combinedStylesheetHtml();
 
               do_event("admin_head");

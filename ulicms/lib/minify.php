@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use UliCMS\HTML\Style;
+use App\HTML\Style;
 use UliCMS\HTML\Script;
 use App\Exceptions\SCSSCompileException;
 use ScssPhp\ScssPhp\Compiler;

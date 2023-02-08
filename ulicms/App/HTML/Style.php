@@ -2,24 +2,23 @@
 
 declare(strict_types=1);
 
-namespace UliCMS\HTML;
+namespace App\HTML;
 
 use ModuleHelper;
 use App\Utils\File;
 
 // generates HTML style tags
 // please use stylesheet queue instead of this methods if possible
-class Style
-{
+class Style {
+
     public static function fromExternalFile(
-        string $href,
-        ?string $media = null,
-        array $htmlAttributes = []
+            string $href,
+            ?string $media = null,
+            array $htmlAttributes = []
     ): string {
         $attributes = [
             "rel" => "stylesheet",
             "href" => $href,
-        
             "type" => "text/css",
         ];
         if ($media) {
@@ -33,7 +32,7 @@ class Style
         }
         $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);
 
-        if(!empty($attribHTML)){
+        if (!empty($attribHTML)) {
             $attribHTML = " " . $attribHTML;
         }
 
@@ -41,9 +40,9 @@ class Style
     }
 
     public static function fromString(
-        ?string $code,
-        ?string $media = null,
-        array $htmlAttributes = []
+            ?string $code,
+            ?string $media = null,
+            array $htmlAttributes = []
     ): string {
         $attributes = [];
         if ($media) {
@@ -54,10 +53,11 @@ class Style
         }
         $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);
 
-        if(!empty($attribHTML)){
+        if (!empty($attribHTML)) {
             $attribHTML = " " . $attribHTML;
         }
 
         return "<style$attribHTML>" . $code . "</style>";
     }
+
 }

@@ -58,7 +58,7 @@ class FileGetContentsWrapperTest extends \PHPUnit\Framework\TestCase {
 
     public function testUrlExistsReturnsTrue() {
         $this->assertTrue(url_exists("http://example.org"));
-        $this->assertTrue(url_exists("https://www.ulicms.de/content/images/67cc042b9ee9eb28cdc81ae7d7420d8a.png"));
+        $this->assertTrue(url_exists("https://www.ulicms.de/content/images/1c7fc60b8ac709a661598ea1a236c155.png"));
     }
 
     public function testUrlExistsReturnsFalse() {
