@@ -71,16 +71,7 @@ function require_all_files_in_dir(string $dir) {
 
 require dirname(__FILE__) . "/lib/load.php";
 
-$loadDirs = [
-    'classes/objects/security',
-    'classes/objects/users'
-];
-
-foreach ($loadDirs as $loadDir) {
-    require_all_files_in_dir($loadDir);
-}
-
-require dirname(__FILE__) . "/classes/objects/html/load.php";
+require_all_files_in_dir('classes');
 
 $mobile_detect_as_module = dirname(__FILE__) .
         "/content/modules/Mobile_Detect/Mobile_Detect.php";

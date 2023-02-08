@@ -2,10 +2,8 @@
 require_once getTemplateDirPath(get_theme()) . "/top.php";
 $meta = get_article_meta();
 $page = get_page();
-$lastmodified = $page["lastmodified"];
-if (!is_null($meta->article_date)) {
-    $lastmodified = $meta->article_date;
-}
+$lastmodified = $meta->article_date ?? $page["lastmodified"];
+
 $article_image = getTemplateDirPath("impro17") . "images/nopic.jpg";
 ?>
 <strong><?php translate("date"); ?>:</strong>
