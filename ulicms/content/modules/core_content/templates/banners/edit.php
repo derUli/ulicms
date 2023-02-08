@@ -2,7 +2,7 @@
 
 use App\Constants\RequestMethod;
 use App\Models\Content\Advertisement\Banner;
-use UliCMS\HTML\Alert;
+use App\HTML\Alert;
 use App\Models\Content\Categories;
 use App\Exceptions\DatasetNotFoundException;
 

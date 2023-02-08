@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\HTML\Alert;
+use App\HTML\Alert;
 use const UliCMS\Constants\HTML5_ALLOWED_TAGS;
 use function App\Security\XSSProtection\stripTags;
 

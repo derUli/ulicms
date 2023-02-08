@@ -13,7 +13,7 @@ use ActionRegistry;
 use Settings;
 use zz\Html\HTMLMinify;
 use App\Security\PermissionChecker;
-use UliCMS\HTML\Alert;
+use App\HTML\Alert;
 
 // This class renders a backend page
 // if you set a model from a model

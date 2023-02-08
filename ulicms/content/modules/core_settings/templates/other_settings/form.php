@@ -1,7 +1,7 @@
 <?php
 
 use App\Constants\EmailModes;
-use UliCMS\HTML\Alert;
+use App\HTML\Alert;
 
 $ga = new PHPGangsta_GoogleAuthenticator();
 $ga_secret = Settings::get("ga_secret");

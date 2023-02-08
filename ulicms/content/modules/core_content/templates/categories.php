@@ -2,7 +2,7 @@
 
 // TODO: refactor this file into multiple files
 use App\Models\Content\Categories;
-use UliCMS\HTML\Alert;
+use App\HTML\Alert;
 
 $permissionChecker = new ACL();
 if (!$permissionChecker->hasPermission("categories")) {

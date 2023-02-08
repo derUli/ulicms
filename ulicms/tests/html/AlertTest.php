@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\HTML\Alert;
+use App\HTML\Alert;
 
 class AlertTest extends \PHPUnit\Framework\TestCase {
 

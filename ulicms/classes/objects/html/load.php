@@ -6,7 +6,6 @@ $classes = [
     "Link",
     "ListItem",
     "Input",
-    "Alert",
     "Button",
     "functions",
     "Form"

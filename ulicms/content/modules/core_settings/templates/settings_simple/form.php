@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\HTML\Alert;
+use App\HTML\Alert;
 
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("settings_simple")) {
