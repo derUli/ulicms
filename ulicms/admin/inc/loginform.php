@@ -42,11 +42,11 @@ echo ModuleHelper::buildMethodCallForm(
         "login",
         [],
         RequestMethod::POST,
-        array(
+        [
             "id" => "login-form",
-            "data-has-error" => !is_null($error)
-        )
-)
+            "data-has-error" => $error !== NULL
+        ]
+);
 ?>
 <?php
 csrf_token_html();
