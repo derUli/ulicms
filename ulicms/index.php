@@ -81,7 +81,7 @@ $formatExtensions = [
 $slugExtension = count($slugParts) > 1 ? end($slugParts) : null;
 
 if (in_array($slugExtension, $formatExtensions)) {
-    $newUrl = str_replace(".{$slugExtension}", '',  Request::getRequestUri());
+    $newUrl = str_replace(".{$slugExtension}", '', Request::getRequestUri());
     Response::redirect($newUrl, HttpStatusCode::MOVED_PERMANENTLY);
 }
 
@@ -125,9 +125,9 @@ if ($redirection && (is_active() or is_logged_in())) {
 if (get_ID()) {
     try {
         $page = ContentFactory::getByID(get_ID());
-        if (!is_null($page->id) && $page instanceof Language_Link) {
+        if ($page->id !== NULL && $page instanceof Language_Link) {
             $language = new Language($page->link_to_language);
-            if (!is_null($language->getID()) && StringHelper::isNotNullOrWhitespace(
+            if ($language->getID() !== NULL && StringHelper::isNotNullOrWhitespace(
                             $language->getLanguageLink()
                     )
             ) {

@@ -163,14 +163,4 @@ Noch mehr Text <a href="http://www.ulicms.de" rel="nofollow" target="_blank">htt
         $this->assertEquals(5, $keywords["dolore"]);
     }
 
-    public function testIsEmptyReturnsTrue() {
-        $this->assertTrue(StringHelper::isEmpty(""));
-        $this->assertTrue(StringHelper::isEmpty("    "));
-    }
-
-    public function testIsEmptyReturnsFalse() {
-        $this->assertFalse(StringHelper::isEmpty("nicht"));
-        $this->assertFalse(StringHelper::isEmpty(" nicht leer   "));
-    }
-
 }

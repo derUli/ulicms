@@ -51,7 +51,7 @@ class ACL
     {
         $id = (int)$id;
 
-        if (is_null($move_users_to)) {
+        if ($move_users_to === NULL) {
             $updateUsers = "UPDATE " . tbname("users") .
                     " SET `group_id`=NULL where `group_id`=$id";
         } else {

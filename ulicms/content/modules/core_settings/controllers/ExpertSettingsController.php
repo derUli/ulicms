@@ -24,7 +24,7 @@ class ExpertSettingsController extends Controller {
     }
 
     public function _delete(?string $name = null): void {
-        if (!is_null($name)) {
+        if ($name !== NULL) {
             Settings::delete($name);
             CacheUtil::clearPageCache();
         }

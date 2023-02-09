@@ -34,7 +34,8 @@ if (!defined("RESPONSIVE_FM")) {
                 ?string $controller = null,
                 $status = HttpStatusCode::MOVED_TEMPORARILY
         ): void {
-            if (is_null($controller)) {
+
+            if ($controller == NULL) {
                 Response::redirect(ModuleHelper::buildActionURL($action), $status);
             }
             Response::redirect(

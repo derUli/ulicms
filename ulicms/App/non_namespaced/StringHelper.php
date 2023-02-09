@@ -20,12 +20,12 @@ class StringHelper extends Helper {
 
     // returns true if the string is null or empty
     public static function isNullOrEmpty($variable): bool {
-        return (is_null($variable) || empty($variable));
+        return empty($variable);
     }
 
     // returns true if the string is not null or empty
     public static function isNotNullOrEmpty($variable): bool {
-        return (!is_null($variable) && !empty($variable));
+        return !self::isNullOrEmpty($variable);
     }
 
     // returns true if the string is null or whitespace
@@ -35,7 +35,7 @@ class StringHelper extends Helper {
 
     // returns true if the string is not null or whitespace
     public static function isNotNullOrWhitespace($variable): bool {
-        return $variable ? self::isNotNullOrEmpty(trim($variable)) : false;
+        return !self::isNullOrWhitespace($variable);
     }
 
     // clean a string to use it in urls
@@ -89,12 +89,6 @@ class StringHelper extends Helper {
         }
 
         return $excerpt;
-    }
-
-    // returns true if the string is empty
-    public static function isEmpty($str): bool {
-        $str = trim($str);
-        return empty($str);
     }
 
     public static function decodeHTMLEntities(string $str): string {

@@ -103,7 +103,7 @@ class Module {
         if (!$this->getName()) {
             return false;
         }
-        return !is_null(getModuleMeta($this->getName()));
+        return getModuleMeta($this->getName()) !== NULL;
     }
 
     public function isMissingDependencies(): bool {
@@ -161,7 +161,7 @@ class Module {
     }
 
     public function setName(?string $name): void {
-        $this->name = strval($name);
+        $this->name = $name;
     }
 
     public function setVersion(?string $version): void {
