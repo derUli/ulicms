@@ -12,7 +12,7 @@ class MultiSelectField extends CustomField {
         ViewBag::set("field", $this);
         ViewBag::set("field_value", $value);
         ViewBag::set("field_options", $this->options);
-        ViewBag::set("field_name", !is_null($this->contentType) ?
+        ViewBag::set("field_name", $this->contentType !== NULL?
                         $this->contentType . "_" . $this->name : $this->name);
 
         return Template::executeDefaultOrOwnTemplate("fields/multiselect.php");

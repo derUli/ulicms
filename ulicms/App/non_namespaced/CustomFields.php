@@ -73,7 +73,7 @@ class CustomFields {
             bool $removePrefix = true
     ): array {
         $fields = [];
-        if (is_null($content_id)) {
+        if ($content_id === NULL) {
             $content_id = get_ID();
         }
 
@@ -104,7 +104,7 @@ class CustomFields {
             ?int $content_id = null,
             $addPrefix = true
     ) {
-        if (is_null($content_id)) {
+        if ($content_id === NULL) {
             $content_id = get_ID();
         }
 
