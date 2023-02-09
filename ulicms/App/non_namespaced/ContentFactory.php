@@ -222,10 +222,10 @@ class ContentFactory {
         }
         $sql .= " order by $order_by $order_direction";
 
-        if (!is_null($limit) && $limit > 0) {
+        if ($limit !== null && $limit > 0) {
             $sql .= " limit " . $limit;
         }
-        if (!is_null($offset)) {
+        if ($offset !== null) {
             $sql .= " offset " . $offset;
         }
 

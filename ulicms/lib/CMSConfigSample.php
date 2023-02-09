@@ -20,4 +20,4 @@ if (!file_exists($file)) {
     exit();
 }
 
-require_once $file;
+require  $file;

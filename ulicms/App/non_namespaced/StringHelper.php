@@ -20,7 +20,7 @@ class StringHelper extends Helper {
 
     // returns true if the string is null or empty
     public static function isNullOrEmpty($variable): bool {
-        return (is_null($variable) or empty($variable));
+        return (is_null($variable) || empty($variable));
     }
 
     // returns true if the string is not null or empty
