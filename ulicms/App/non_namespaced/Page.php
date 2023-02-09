@@ -58,7 +58,7 @@ class Page extends Content {
     }
 
     protected function fillVars($result = null) {
-        $this->id = (int)$result->id;
+        $this->id = (int) $result->id;
         $this->slug = $result->slug;
         $this->title = $result->title;
         $this->alternate_title = $result->alternate_title;
@@ -93,9 +93,9 @@ class Page extends Content {
         $this->og_description = $result->og_description;
         $this->cache_control = $result->cache_control;
         $this->hidden = $result->hidden;
-        $this->show_headline = boolval($result->show_headline);
+        $this->show_headline = (bool) $result->show_headline;
         $this->comments_enabled = !is_null($result->comments_enabled) ?
-                boolval($result->comments_enabled) : null;
+                (bool) ($result->comments_enabled) : null;
 
         // fill page permissions object
         $resultArray = (array) $result;
@@ -111,7 +111,7 @@ class Page extends Content {
     public function loadByID($id) {
         $result = Database::pQuery("SELECT * FROM `{prefix}content` "
                         . "where id = ?", array(
-                    (int)$id
+                    (int) $id
                         ), true);
         if (Database::getNumRows($result) > 0) {
             $result = Database::fetchObject($result);
@@ -180,7 +180,7 @@ class Page extends Content {
         $sql .= intval($this->approved) . ",";
         $this->created = time();
         $this->lastmodified = $this->created;
-        $sql .= (int)$this->created . ",";
+        $sql .= (int) $this->created . ",";
         $sql .= intval($this->lastmodified) . ",";
         $sql .= intval($this->author_id) . ",";
 
@@ -443,8 +443,8 @@ class Page extends Content {
     // the global settings
     public function areCommentsEnabled(): bool {
         $commentsEnabled = false;
-        if (is_null($this->comments_enabled)) {
-            $commentsEnabled = boolval(Settings::get("comments_enabled"));
+        if ($this->comments_enabled === NULL) {
+            $commentsEnabled = (bool) Settings::get("comments_enabled");
 
             $commentable_content_types = Settings::get(
                             "commentable_content_types"
@@ -462,7 +462,7 @@ class Page extends Content {
                 }
             }
         } else {
-            $commentsEnabled = boolval($this->comments_enabled);
+            $commentsEnabled = (bool) $this->comments_enabled;
         }
         return $commentsEnabled;
     }
@@ -506,7 +506,7 @@ class Page extends Content {
     }
 
     public function isDeleted(): bool {
-        return !is_null($this->getDeletedAt());
+        return $this->getDeletedAt() !== NULL;
     }
 
     // returns true if this page is configured as the 403 error page
