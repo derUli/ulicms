@@ -37,7 +37,7 @@ class Request {
                     } elseif ($value === "false") {
                         $value = false;
                     }
-                    $value = intval(boolval($value));
+                    $value = intval((bool)$value);
                     break;
                 case "int":
                     $value = (int) $value;

@@ -6,8 +6,8 @@ declare(strict_types=1);
 
 use App\Exceptions\SqlException;
 
-class DBMigrator
-{
+class DBMigrator {
+
     private $component = null;
     private $folder = null;
     private $strictMode = true;
@@ -15,35 +15,30 @@ class DBMigrator
     // component is an identifier for the module which executes the migrations
     // $folder is the path to an up or down folder
     // containing numbered sql scripts from 001.sql to 999.sql
-    public function __construct(string $component, string $folder)
-    {
+    public function __construct(string $component, string $folder) {
         $this->component = $component;
         $this->folder = $folder;
         $cfg = new CMSConfig();
         if (isset($cfg->dbmigrator_strict_mode)) {
-            $this->strictMode = boolval($cfg->dbmigrator_strict_mode);
+            $this->strictMode = (bool) $cfg->dbmigrator_strict_mode;
         }
     }
 
     // in strict mode DBMigrator stops on error
-    public function enableStrictMode(): void
-    {
+    public function enableStrictMode(): void {
         $this->strictMode = true;
     }
 
-    public function disableStrictMode(): void
-    {
+    public function disableStrictMode(): void {
         $this->strictMode = false;
     }
 
-    public function isStrictMode(): bool
-    {
+    public function isStrictMode(): bool {
         return $this->strictMode;
     }
 
     // use this to migrate up migrations
-    public function migrate(?string $stop = null): void
-    {
+    public function migrate(?string $stop = null): void {
         $this->checkVars();
         $files = scandir($this->folder);
         natcasesort($files);
@@ -55,8 +50,7 @@ class DBMigrator
         }
     }
 
-    public function executeSqlScript(string $file): void
-    {
+    public function executeSqlScript(string $file): void {
         if (endsWith($file, ".sql")) {
             $sql = "SELECT id from {prefix}dbtrack where component = ? "
                     . "and name = ?";
@@ -82,7 +76,7 @@ class DBMigrator
                     Database::pQuery($sql, $args, true);
                 } elseif ($this->strictMode) {
                     throw new SqlException("{$this->component} - {$file}: " .
-                            Database::getLastError());
+                                    Database::getLastError());
                 }
             }
         }
@@ -91,8 +85,7 @@ class DBMigrator
     // use this to rollback migrations
     // $stop is the name of the sql file where rollback should stop
     // if $stop is null, all migrations for this component will rollback
-    public function rollback(?string $stop = null): void
-    {
+    public function rollback(?string $stop = null): void {
         $this->checkVars();
         $files = scandir($this->folder);
         natcasesort($files);
@@ -121,8 +114,8 @@ class DBMigrator
                         Database::pQuery($sql, $args, true);
                     } elseif ($this->strictMode) {
                         throw new SqlException(
-                            "{$this->component} - {$file}: "
-                                . Database::getLastError()
+                                        "{$this->component} - {$file}: "
+                                        . Database::getLastError()
                         );
                     }
                 }
@@ -133,21 +126,18 @@ class DBMigrator
         }
     }
 
-    public function resetDBTrack(): bool
-    {
+    public function resetDBTrack(): bool {
         return Database::pQuery("DELETE FROM {prefix}dbtrack "
                         . "where component = ?", array(
                     $this->component
                         ), true);
     }
 
-    public function resetDBTrackAll(): void
-    {
+    public function resetDBTrackAll(): void {
         Database::truncateTable("dbtrack");
     }
 
-    public function checkVars(): bool
-    {
+    public function checkVars(): bool {
         if (StringHelper::isNullOrEmpty($this->component)) {
             throw new Exception("component is null or empty");
         }
@@ -159,4 +149,5 @@ class DBMigrator
         }
         return true;
     }
+
 }

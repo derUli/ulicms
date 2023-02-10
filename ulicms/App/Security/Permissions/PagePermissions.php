@@ -8,10 +8,9 @@ use Database;
 
 // this class is used to store the edit restrictions of content
 // think of it as ACL like write permissions
-class PagePermissions
-{
-    public function __construct($objects = [])
-    {
+class PagePermissions {
+
+    public function __construct($objects = []) {
         foreach ($objects as $object => $restriction) {
             $this->setEditRestriction($object, $restriction);
         }
@@ -22,8 +21,7 @@ class PagePermissions
     private $only_owner_can_edit = false;
     private $only_others_can_edit = false;
 
-    public function getEditRestriction(string $object): ?bool
-    {
+    public function getEditRestriction(string $object): ?bool {
         $varName = "only_{$object}_can_edit";
         if (!isset($this->$varName)) {
             return null;
@@ -32,18 +30,18 @@ class PagePermissions
     }
 
     public function setEditRestriction(
-        string $object,
-        bool $restricted = false
+            string $object,
+            bool $restricted = false
     ): void {
         $varName = "only_{$object}_can_edit";
         if (!isset($this->$varName)) {
             return;
         }
-        $this->$varName = boolval($restricted);
+
+        $this->$varName = $restricted;
     }
 
-    public function getAll(): array
-    {
+    public function getAll(): array {
         $result = [];
         $classArray = (array) $this;
         foreach ($classArray as $key => $value) {
@@ -56,8 +54,7 @@ class PagePermissions
         return $result;
     }
 
-    public function save(int $id): void
-    {
+    public function save(int $id): void {
         $all = $this->getAll();
 
         $sql = "update `{prefix}content` set ";
@@ -70,8 +67,9 @@ class PagePermissions
         $sql .= " id = id ";
         $sql = trim($sql);
 
-        $args[] = (int)$id;
+        $args[] = (int) $id;
         $sql .= " where id = ?";
         Database::pQuery($sql, $args, true) or die(Database::getError());
     }
+
 }

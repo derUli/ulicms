@@ -25,7 +25,7 @@ class Module {
         if ($dataset) {
             $this->name = $dataset->name;
             $this->version = $dataset->version;
-            $this->enabled = boolval($dataset->enabled);
+            $this->enabled = (bool)$dataset->enabled;
             return true;
         }
         return false;
@@ -76,7 +76,7 @@ class Module {
     }
 
     public function isEnabled(): bool {
-        return boolval($this->enabled);
+        return (bool) $this->enabled;
     }
 
     public function enable(): void {
@@ -165,7 +165,7 @@ class Module {
     }
 
     public function setVersion(?string $version): void {
-        $this->version = $version ? strval($version) : null;
+        $this->version = $version;
     }
 
     public function hasUninstallEvent(): bool {

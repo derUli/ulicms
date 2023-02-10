@@ -54,7 +54,7 @@ class Comment extends Model {
         $this->setStatus($data->status);
         $this->setIp($data->ip);
         $this->setUserAgent($data->useragent);
-        $this->setRead(boolval($data->read));
+        $this->setRead((bool) $data->read);
     }
 
     protected function insert() {
