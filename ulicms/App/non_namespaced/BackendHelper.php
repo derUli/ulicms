@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use UliCMS\HTML\Script;
+use App\HTML\Script;
 
 class BackendHelper extends Helper {
 

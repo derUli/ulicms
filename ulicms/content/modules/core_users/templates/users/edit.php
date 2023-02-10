@@ -117,7 +117,7 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
                 <?php translate("last_login"); ?>
             </strong>
             <?php
-            if (is_null($row->last_login)) {
+            if ($row->last_login === NULL) {
                 translate("never");
             } else {
                 echo strftime("%x %X", $row->last_login);

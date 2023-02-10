@@ -2,12 +2,10 @@
 
 declare(strict_types=1);
 
-class PasswordReset
-{
+class PasswordReset {
 
     // create a password reset token
-    public function addToken(int $user_id): string
-    {
+    public function addToken(int $user_id): string {
         $token = md5(uniqid() . strval($user_id));
         $sql = "INSERT INTO {prefix}password_reset (token, user_id) "
                 . "values (?, ?)";
@@ -21,11 +19,11 @@ class PasswordReset
 
     // send a password reset mail
     public function sendMail(
-        string $token,
-        string $to,
-        string $ip,
-        string $firstname,
-        string $lastname
+            string $token,
+            string $to,
+            string $ip,
+            string $firstname,
+            string $lastname
     ): void {
         ViewBag::set("url", $this->getPasswordResetLink($token));
         ViewBag::set("firstname", $firstname);
@@ -42,24 +40,22 @@ class PasswordReset
     }
 
     // get a password reset link
-    public function getPasswordResetLink(string $token): string
-    {
+    public function getPasswordResetLink(string $token): string {
         $url = getBaseFolderURL();
         $url = rtrim($url, "/");
         if (!is_admin_dir()) {
             $url .= "/admin";
         }
         $url .= "/" . ModuleHelper::buildMethodCallUrl(
-            SessionManager::class,
-            "resetPassword",
-            "token=$token"
+                        SessionManager::class,
+                        "resetPassword",
+                        "token=$token"
         );
         return $url;
     }
 
     // get all tokens
-    public function getAllTokens(): array
-    {
+    public function getAllTokens(): array {
         $tokens = [];
         $result = Database::selectAll("password_reset");
         if (Database::getNumRows($result) === 0) {
@@ -72,13 +68,12 @@ class PasswordReset
     }
 
     // get all tokens for a user
-    public function getAllTokensByUserId(int $user_id): array
-    {
+    public function getAllTokensByUserId(int $user_id): array {
         $tokens = [];
         $result = Database::selectAll(
-            "password_reset",
-            [],
-            "user_id={$user_id}"
+                        "password_reset",
+                        [],
+                        "user_id={$user_id}"
         );
         if (Database::getNumRows($result) === 0) {
             return $tokens;
@@ -89,25 +84,27 @@ class PasswordReset
         return $tokens;
     }
 
-    public function getTokenByTokenString(string $token): ?object
-    {
+    public function getTokenByTokenString(string $token): ?object {
         $sql = "select * from {prefix}password_reset where token = ?";
-        $args = array(
-            strval($token)
-        );
+
+        $args = [
+            $token
+        ];
+
         $result = Database::pQuery($sql, $args, true);
+
         if (Database::any($result)) {
             return Database::fetchObject($result);
         }
         return null;
     }
 
-    public function deleteToken(string $token): void
-    {
+    public function deleteToken(string $token): void {
         $sql = "delete from {prefix}password_reset where token = ?";
         $args = array(
             strval($token)
         );
         Database::pQuery($sql, $args, true);
     }
+
 }

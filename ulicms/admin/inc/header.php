@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\Content\Comment;
-use UliCMS\HTML\Script;
+use App\HTML\Script;
 use App\Helpers\DataTablesHelper;
 
 $admin_logo = Settings::get("admin_logo");

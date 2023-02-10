@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use App\HTML\Style;
-use UliCMS\HTML\Script;
+use App\HTML\Script;
 use App\Exceptions\SCSSCompileException;
 use ScssPhp\ScssPhp\Compiler;
 use zz\Html\HTMLMinify;

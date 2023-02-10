@@ -393,7 +393,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                        value="<?php esc($row->menu_image); ?>"
                                        style="cursor: pointer" /> <a href="#"
                                        onclick="$('#menu_image').val('');
-                                                           return false;"
+                                               return false;"
                                        class="btn btn-default voffset2">
                                     <i class="fa fa-eraser"></i> <?php translate("clear"); ?> </a>
                             </div>
@@ -423,7 +423,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                 <select name="link_to_language">
                                     <option value=""
                                     <?php
-                                    if (is_null($row->link_to_language)) {
+                                    if ($row->link_to_language === NULL) {
                                         echo "selected";
                                     }
                                     ?>>[<?php translate("none"); ?>]</option>
@@ -550,7 +550,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                            value="<?php esc($row->og_image); ?>"
                                            style="cursor: pointer" /> <a href="#"
                                            onclick="$('#og_image').val('');
-                                                               return false;"
+                                                   return false;"
                                            class="btn btn-default voffset2">
                                         <i class="fa fa-eraser"></i>
                                         <?php translate("clear"); ?>
@@ -865,7 +865,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                        value="<?php Template::escape($row->image_url); ?>"
                                        style="cursor: pointer" /> <a href="#"
                                        onclick="$('#image_url').val('');
-                                                           return false;"
+                                               return false;"
                                        class="btn btn-default voffset2"><i class="fa fa-eraser"></i>
                                            <?php translate("clear"); ?>
                                 </a>
@@ -909,7 +909,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                        value="<?php echo _esc($row->article_image); ?>"
                                        style="cursor: pointer" maxlength="255" /> <a href="#"
                                        onclick="$('#article_image').val('');
-                                                           return false;"
+                                               return false;"
                                        class="btn btn-default voffset2">
                                     <i class="fa fa-eraser"></i>
                                     <?php translate("clear"); ?></a>
@@ -1094,7 +1094,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                         <option
                                             value="<?php echo $th; ?>"
                                             <?php
-                                            if (!is_null($row->theme) && !empty($row->theme) and $row->theme == $th) {
+                                            if ($row->theme == $th) {
                                                 echo "selected";
                                             }
                                             ?>>

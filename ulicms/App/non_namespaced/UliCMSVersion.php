@@ -17,7 +17,7 @@ class UliCMSVersion {
     }
 
     public function getReleaseYear(): string {
-        return strval($this->releaseYear);
+        return (string) $this->releaseYear;
     }
 
     //  returns the codename of this UliCMS release

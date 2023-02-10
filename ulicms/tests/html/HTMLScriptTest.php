@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\HTML\Script as Script;
+use App\HTML\Script as Script;
 
 class HTMLScriptTest extends \PHPUnit\Framework\TestCase {
 

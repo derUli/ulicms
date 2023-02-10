@@ -332,11 +332,11 @@ VALUES      ( ?,
     ): bool {
         $sql = "select ip from {prefix}comments where ip = ?";
         $args = array(
-            strval($ip)
+            (string) $ip
         );
         if ($status) {
             $sql .= " and status = ?";
-            $args[] = strval($status);
+            $args[] = (string) $status;
         }
         $result = Database::pQuery($sql, $args, true);
         return Database::any($result);

@@ -37,7 +37,7 @@ if ($id !== null) {
                     $article_image = getTemplateDirPath("impro17") . "images/nopic.jpg";
                     $meta = get_article_meta($entry->slug);
 
-                    $article_date = !is_null($entry->article_date) ? $entry->article_date : $entry->created;
+                    $article_date = $entry->article_date ?? $entry->created;
                     $excerpt = strip_tags($meta->excerpt, "<img><iframe><embed><object>");
                     $excerpt = trim($excerpt);
                     $excerpt = StringHelper::isNotNullOrWhitespace($excerpt) ? $meta->excerpt : $entry->content;

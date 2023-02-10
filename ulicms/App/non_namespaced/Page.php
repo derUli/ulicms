@@ -94,8 +94,8 @@ class Page extends Content {
         $this->cache_control = $result->cache_control;
         $this->hidden = $result->hidden;
         $this->show_headline = (bool) $result->show_headline;
-        $this->comments_enabled = !is_null($result->comments_enabled) ?
-                (bool) ($result->comments_enabled) : null;
+        $this->comments_enabled = $result->comments_enabled !== NULL ?
+                (bool) $result->comments_enabled : null;
 
         // fill page permissions object
         $resultArray = (array) $result;

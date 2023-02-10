@@ -95,9 +95,9 @@ class User extends Model {
     public function loadByUsername(string $name): void {
         $sql = "select * from {prefix}users where username "
                 . "COLLATE utf8mb4_general_ci = ?";
-        $args = array(
-            strval($name)
-        );
+        $args = [
+            $name
+        ];
         $result = Database::pQuery($sql, $args, true);
         $this->fillVars($result);
     }
@@ -105,9 +105,11 @@ class User extends Model {
     public function loadByEmail(string $email): void {
         $sql = "select * from {prefix}users where email "
                 . "COLLATE utf8mb4_general_ci = ?";
-        $args = array(
-            strval($email)
-        );
+        
+        $args = [
+            $email
+        ];
+        
         $result = Database::pQuery($sql, $args, true);
         $this->fillVars($result);
     }

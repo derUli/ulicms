@@ -5,7 +5,7 @@ declare(strict_types=1);
 use App\Utils\File;
 use App\Exceptions\FileNotFoundException;
 use App\Exceptions\DatasetNotFoundException;
-use UliCMS\HTML\Script;
+use App\HTML\Script;
 use App\Security\PermissionChecker;
 use MatthiasMullie\Minify;
 use App\Models\Content\Advertisement\Banners;

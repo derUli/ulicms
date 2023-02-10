@@ -8,7 +8,7 @@ if ($permissionChecker->hasPermission("users")) {
     if (!isset($_SESSION["admins_filter_group"])) {
         $_SESSION["admins_filter_group"] = 0;
     }
-    if (!is_null(Request::getVar("admins_filter_group"))) {
+    if (Request::getVar("admins_filter_group") !== NULL) {
         $_SESSION["admins_filter_group"] = Request::getVar("admins_filter_group", 0, "int");
     }
     $manager = new UserManager();
