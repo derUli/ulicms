@@ -4,7 +4,7 @@ $canIuseLazyLoadingUrl = "https://caniuse.com/#feat=loading-lazy-attr";
 use App\Security\PermissionChecker;
 use App\Constants\RequestMethod;
 use App\HTML\Input;
-use UliCMS\HTML\ListItem;
+use App\HTML\ListItem;
 
 $lazy_loading = [];
 

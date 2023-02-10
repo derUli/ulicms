@@ -2,7 +2,7 @@
 
 namespace UliCMS\CoreContent;
 
-use UliCMS\HTML\ListItem;
+use App\HTML\ListItem;
 
 class UIUtils {
 

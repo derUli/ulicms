@@ -1,7 +1,7 @@
 <?php
 
 use App\HTML\Input;
-use UliCMS\HTML\ListItem;
+use App\HTML\ListItem;
 
 $skins = BackendHelper::getCKEditorSkins();
 $skinItems = [];

@@ -1,7 +1,7 @@
 <?php
 
 use App\HTML\Input as Input;
-use UliCMS\HTML\ListItem;
+use App\HTML\ListItem;
 
 class ListItemTest extends \PHPUnit\Framework\TestCase {
 

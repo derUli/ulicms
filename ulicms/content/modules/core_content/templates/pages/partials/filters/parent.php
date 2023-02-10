@@ -1,7 +1,7 @@
 <?php
 
 use App\HTML\Input;
-use UliCMS\HTML\ListItem;
+use App\HTML\ListItem;
 
 $controller = ControllerRegistry::get("PageController");
 $placeholder = new ListItem("all", "[" . get_translation("all") . "]");

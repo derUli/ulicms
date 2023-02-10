@@ -15,7 +15,7 @@ use App\Utils\CacheUtil;
 use zz\Html\HTMLMinify;
 use function UliCMS\HTML\stringContainsHtml;
 use App\Constants;
-use UliCMS\HTML\ListItem;
+use App\HTML\ListItem;
 
 class PageController extends Controller {
 

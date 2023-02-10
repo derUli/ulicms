@@ -43,16 +43,16 @@ if (!$permissionChecker->hasPermission("other")) {
 
     $x_frame_options = Settings::get("x_frame_options");
     $xFrameOptionsItems = array(
-        new UliCMS\HTML\ListItem("", get_translation("allow")),
-        new UliCMS\HTML\ListItem("SAMEORIGIN", get_translation("sameorigin")),
-        new UliCMS\HTML\ListItem("DENY", get_translation("deny"))
+        new App\HTML\ListItem("", get_translation("allow")),
+        new App\HTML\ListItem("SAMEORIGIN", get_translation("sameorigin")),
+        new App\HTML\ListItem("DENY", get_translation("deny"))
     );
 
     $x_xss_protection = Settings::get("x_xss_protection");
     $xXssProtectionOptions = array(
-        new UliCMS\HTML\ListItem("", get_translation("off")),
-        new UliCMS\HTML\ListItem("sanitize", get_translation("on")),
-        new UliCMS\HTML\ListItem("block", get_translation("on_block"))
+        new App\HTML\ListItem("", get_translation("off")),
+        new App\HTML\ListItem("sanitize", get_translation("on")),
+        new App\HTML\ListItem("block", get_translation("on_block"))
     );
     ?>
     <?php

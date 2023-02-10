@@ -2,7 +2,7 @@
 
 use App\Backend\BackendPageRenderer;
 use App\HTML\Input;
-use UliCMS\HTML\ListItem;
+use App\HTML\ListItem;
 use App\Constants\CommentStatus;
 
 $controller = ModuleHelper::getMainController("core_comments");
