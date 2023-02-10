@@ -129,7 +129,7 @@ class RoboFile extends Tasks {
      * @param string $file path to *.sin package file
      */
     public function packageExamine(string $file) {
-        if (!file_exists($file)) {
+        if (!is_file($file)) {
             $this->writeln("File " . basename($file) . " not found!");
             return;
         }

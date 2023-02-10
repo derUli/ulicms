@@ -164,7 +164,7 @@ class StringHelper extends Helper {
             bool $removeComments = true
     ): ?array {
         $lines = null;
-        if (file_exists($file)) {
+        if (is_file($file)) {
             $str = file_get_contents($file);
             $lines = self::linesFromString(
                             $str,

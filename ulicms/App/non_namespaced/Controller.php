@@ -16,7 +16,7 @@ abstract class Controller
         // add all hooks to blacklist
         // blacklisted methods can not be remote called as action
         $file = Path::resolve("ULICMS_ROOT/lib/ressources/hooks.txt");
-        if (file_exists($file)) {
+        if (is_file($file)) {
             $lines = StringHelper::linesFromFile($file);
             $lines = array_unique($lines);
             foreach ($lines as $line) {

@@ -88,7 +88,7 @@ class FaviconController extends Controller {
         foreach ($files as $file) {
             @$fileSaved = $icoLib->save_ico($file);
 
-            $success[] = file_exists($file);
+            $success[] = is_file($file);
         }
         return count(array_filter($success)) > 0;
     }
@@ -102,11 +102,11 @@ class FaviconController extends Controller {
         ];
 
         foreach ($files as $file) {
-            if (file_exists($file)) {
+            if (is_file($file)) {
                 @unlink($file);
             }
 
-            $success[] = !file_exists($file);
+            $success[] = !is_file($file);
         }
 
         return count(array_filter($success)) > 0;

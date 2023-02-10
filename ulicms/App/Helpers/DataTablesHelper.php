@@ -14,7 +14,7 @@ class DataTablesHelper extends \Helper
     {
         $baseUrl = "scripts/datatables/lang";
         $file = "{$baseUrl}/{$lang}.lang";
-        if (file_exists($file)) {
+        if (is_file($file)) {
             return $file;
         }
         return "$baseUrl/en.lang";

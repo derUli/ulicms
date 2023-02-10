@@ -263,7 +263,7 @@ class Template {
 
         $file = getTemplateDirPath($theme, true) . "partials/{$template}";
         $file = !endsWith($file, ".php") ? $file . ".php" : $file;
-        if (!file_exists($file)) {
+        if (!is_file($file)) {
             throw new FileNotFoundException("Partial Template {$template} "
                             . "of Theme {$theme} not found.");
         }

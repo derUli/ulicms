@@ -70,7 +70,7 @@ class File {
             return unlink($file);
         } elseif (is_dir($file)) {
             sureRemoveDir($file, true);
-            return !file_exists($file);
+            return !is_file($file);
         }
         return false;
     }
@@ -93,7 +93,7 @@ class File {
     public static function toDataUri(string $file, ?string $mime = null): ?string {
         $url = null;
 
-        if (file_exists($file)) {
+        if (is_file($file)) {
             $mime = $mime ?? File::getMime($file);
             $data = file_get_contents($file);
             $base64_data = base64_encode($data);
@@ -156,7 +156,7 @@ class File {
     public static function getNewestMtime(array $files): ?int {
         $mtime = 0;
         foreach ($files as $file) {
-            if (file_exists($file) && filemtime($file) > $mtime) {
+            if (is_file($file) && filemtime($file) > $mtime) {
                 $mtime = filemtime($file);
             }
         }

@@ -227,7 +227,7 @@ $top_files = array(
 
 foreach ($top_files as $file) {
     $file = getTemplateDirPath($theme, true) . $file;
-    if (file_exists($file)) {
+    if (is_file($file)) {
         require $file;
         break;
     }
@@ -267,7 +267,7 @@ $bottom_files = array(
 );
 foreach ($bottom_files as $file) {
     $file = getTemplateDirPath($theme, true) . $file;
-    if (file_exists($file)) {
+    if (is_file($file)) {
         require $file;
         break;
     }

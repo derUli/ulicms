@@ -40,7 +40,7 @@ class Translation {
 
     public static function includeCustomLangFile(string $lang): void {
         $file = ULICMS_ROOT . "/lang/custom/" . basename($lang) . ".php";
-        if (file_exists($file)) {
+        if (is_file($file)) {
             require_once $file;
         }
     }
@@ -64,13 +64,13 @@ class Translation {
     public static function loadCurrentThemeLanguageFiles(string $lang): void {
         $file = getTemplateDirPath(get_theme(), true) . "/lang/" .
                 $lang . ".php";
-        if (file_exists($file)) {
+        if (is_file($file)) {
             require_once $file;
             return;
         }
         $file = getTemplateDirPath(get_theme(), true) .
                 "/lang/en.php";
-        if (file_exists($file)) {
+        if (is_file($file)) {
             require_once $file;
         }
     }
