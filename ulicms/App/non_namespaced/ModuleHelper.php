@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use App\Models\Content\Language;
-use UliCMS\HTML\Form;
+use App\HTML\Form;
 use App\Constants\RequestMethod;
 
 class ModuleHelper extends Helper {
