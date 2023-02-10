@@ -66,9 +66,9 @@ class File {
 
     // Delete a file  or a directory if it exist
     public static function deleteIfExists(string $file): bool {
-        if (file_exists($file) and is_file($file)) {
+        if (is_file($file)) {
             return unlink($file);
-        } elseif (file_exists($file) and is_dir($file)) {
+        } elseif (is_dir($file)) {
             sureRemoveDir($file, true);
             return !file_exists($file);
         }
@@ -86,13 +86,13 @@ class File {
 
     // check if a file exists in the local file system
     public static function existsLocally(string $path): bool {
-        return (preg_match('~^(\w+:)?//~', $path) === 0
-                and file_exists($path));
+        return (preg_match('~^(\w+:)?//~', $path) === 0 && file_exists($path));
     }
 
     // converts a file to a data URI
     public static function toDataUri(string $file, ?string $mime = null): ?string {
         $url = null;
+
         if (file_exists($file)) {
             $mime = $mime ?? File::getMime($file);
             $data = file_get_contents($file);
@@ -156,7 +156,7 @@ class File {
     public static function getNewestMtime(array $files): ?int {
         $mtime = 0;
         foreach ($files as $file) {
-            if (file_exists($file) and filemtime($file) > $mtime) {
+            if (file_exists($file) && filemtime($file) > $mtime) {
                 $mtime = filemtime($file);
             }
         }
