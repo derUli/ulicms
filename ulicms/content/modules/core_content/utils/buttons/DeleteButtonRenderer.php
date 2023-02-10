@@ -11,7 +11,7 @@ use ModuleHelper;
 use PageController;
 use App\Security\ContentPermissionChecker;
 use function UliCMS\HTML\icon;
-use function UliCMS\HTML\link;
+use function UliCMS\HTML\Link;
 
 class DeleteButtonRenderer {
 

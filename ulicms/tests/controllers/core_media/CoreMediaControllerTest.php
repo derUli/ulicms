@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\HTML\Link;
+use App\HTML\Link;
 use function UliCMS\HTML\imageTag;
 use Spatie\Snapshots\MatchesSnapshots;
 

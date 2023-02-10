@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\HTML\Link;
+use App\HTML\Link;
 
 $model = ViewBag::get("model");
 ?>

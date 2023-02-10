@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\HTML\Link as Link;
+use App\HTML\Link as Link;
 
 class HTMLLinkTest extends \PHPUnit\Framework\TestCase {
 

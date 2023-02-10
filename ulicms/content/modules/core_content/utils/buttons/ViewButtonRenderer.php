@@ -10,7 +10,7 @@ use ViewBag;
 use User;
 use App\Security\ContentPermissionChecker;
 use function UliCMS\HTML\icon;
-use function UliCMS\HTML\link;
+use function UliCMS\HTML\Link;
 
 class ViewButtonRenderer {
 

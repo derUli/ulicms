@@ -573,7 +573,7 @@ color: " . Settings::get("body-text-color") . ";
             $page = ContentFactory::getById($id);
             if (in_array($page->language, getAllLanguages(true))) {
                 $html .= '<div class="ulicms-edit">';
-                $html .= UliCMS\HTML\Link::actionLink(
+                $html .= App\HTML\Link::actionLink(
                                 "pages_edit",
                                 get_translation("edit"),
                                 "page={$id}",

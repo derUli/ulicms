@@ -13,7 +13,7 @@ use UliCMS\CoreContent\Partials\EditButtonRenderer;
 use UliCMS\CoreContent\Partials\DeleteButtonRenderer;
 use UliCMS\CoreContent\Partials\UnDeleteButtonRenderer;
 use function UliCMS\HTML\icon;
-use function UliCMS\HTML\link;
+use function UliCMS\HTML\Link;
 
 class PageTableRenderer {
 

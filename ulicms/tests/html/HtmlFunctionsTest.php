@@ -6,7 +6,7 @@ use function UliCMS\HTML\_nbsp;
 use function UliCMS\HTML\imageTag;
 use function UliCMS\HTML\imageTagInline;
 use function UliCMS\HTML\icon;
-use function UliCMS\HTML\link;
+use function UliCMS\HTML\Link;
 use function UliCMS\HTML\buttonLink;
 use function UliCMS\HTML\stringContainsHtml;
 use App\Constants\LinkTarget;
