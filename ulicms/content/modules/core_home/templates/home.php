@@ -2,7 +2,7 @@
 
 use App\HTML\Alert;
 use App\Constants\DefaultValues;
-use function App\Security\XSSProtection\stripTags;
+use App\Security\XSSProtection;
 
 $permissionChecker = new ACL();
 
@@ -29,7 +29,7 @@ if ($permissionChecker->hasPermission("dashboard")) {
         <?php
         $motd = get_lang_config("motd", getSystemLanguage());
         if ($motd or strlen($motd) > 10) {
-            $motd = stripTags($motd, DefaultValues::ALLOWED_TAGS);
+            $motd = XSSProtection::stripTags($motd, DefaultValues::ALLOWED_TAGS);
             ?>
             <h2 class="accordion-header">
                 <?php translate("motd"); ?></h2>

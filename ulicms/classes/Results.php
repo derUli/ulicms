@@ -9,8 +9,8 @@ use App\Backend\BackendPageRenderer;
 use App\Helpers\TestHelper;
 
 if (!defined("RESPONSIVE_FM")) {
-    function JSONResult($data, int $status = 200, $compact = true): void
-    {
+
+    function JSONResult($data, int $status = 200, $compact = true): void {
         Response::sendStatusHeader($status);
         $json = $compact ?
                 json_encode($data, JSON_UNESCAPED_SLASHES) :
@@ -23,8 +23,7 @@ if (!defined("RESPONSIVE_FM")) {
         exit();
     }
 
-    function RawJSONResult(string $data, int $status = 200): void
-    {
+    function RawJSONResult(string $data, int $status = 200): void {
         Response::sendStatusHeader($status);
         $size = getStringLengthInBytes($data);
         send_header('Content-Type: application/json');
@@ -34,9 +33,9 @@ if (!defined("RESPONSIVE_FM")) {
     }
 
     function HTMLResult(
-        string $data,
-        int $status = 200,
-        int $optimizationLevel = HTMLMinify::OPTIMIZATION_SIMPLE
+            string $data,
+            int $status = 200,
+            int $optimizationLevel = HTMLMinify::OPTIMIZATION_SIMPLE
     ): void {
         Response::sendStatusHeader($status);
         $data = optimizeHtml($data, $optimizationLevel);
@@ -47,8 +46,7 @@ if (!defined("RESPONSIVE_FM")) {
         exit();
     }
 
-    function TextResult(string $data, int $status = 200): void
-    {
+    function TextResult(string $data, int $status = 200): void {
         Response::sendStatusHeader($status);
         $size = getStringLengthInBytes($data);
         send_header('Content-Type: text/plain; charset=utf-8');
@@ -56,8 +54,7 @@ if (!defined("RESPONSIVE_FM")) {
         die($data);
     }
 
-    function Result(string $data, int $status = 200, ?string $type = null): void
-    {
+    function Result(string $data, int $status = 200, ?string $type = null): void {
         Response::sendStatusHeader($status);
         $size = getStringLengthInBytes($data);
         if ($type) {
@@ -68,8 +65,8 @@ if (!defined("RESPONSIVE_FM")) {
     }
 
     function HTTPStatusCodeResult(
-        int $status,
-        ?string $description = null
+            int $status,
+            ?string $description = null
     ): void {
         $header = $_SERVER ["SERVER_PROTOCOL"] . " "
                 . getStatusCodeByNumber(intval($status));
@@ -82,8 +79,7 @@ if (!defined("RESPONSIVE_FM")) {
         exit();
     }
 
-    function ExceptionResult(string $message, int $status = 500): void
-    {
+    function ExceptionResult(string $message, int $status = 500): void {
         ViewBag::set("exception", nl2br($message));
         $content = Template::executeDefaultOrOwnTemplate("exception.php");
 
@@ -101,8 +97,7 @@ if (!defined("RESPONSIVE_FM")) {
         }
     }
 
-    function ActionResult(string $action, $model = null): void
-    {
+    function ActionResult(string $action, $model = null): void {
         $renderer = new BackendPageRenderer($action, $model);
         $renderer->render();
     }

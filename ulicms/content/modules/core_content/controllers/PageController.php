@@ -8,7 +8,7 @@ use App\Models\Content\VCS;
 use App\Models\Content\Types\DefaultContentTypes;
 use Rakit\Validation\Validator;
 use App\Security\PermissionChecker;
-use function App\Security\XSSProtection\stripTags;
+use App\Security\XSSProtection;
 use App\Models\Content\TypeMapper;
 use App\Constants\LinkTarget;
 use App\Utils\CacheUtil;
@@ -165,7 +165,7 @@ class PageController extends Controller {
 
         // remove all html tags except the explicitly allowed tags
         if (Stringhelper::isNotNullOrWhitespace($allowedTags)) {
-            $model->content = stripTags($model->content, $allowedTags);
+            $model->content = XSSProtection::stripTags($model->content, $allowedTags);
         }
 
         $model->category_id = Request::getVar("category_id", 1, "int");
