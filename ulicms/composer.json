@@ -49,7 +49,8 @@
         "lasserafn/php-initial-avatar-generator": "*",
         "imagine/imagine": "*",
         "michelf/php-markdown": "*",
-        "chrisullyott/php-filesize": "^4.2"
+        "chrisullyott/php-filesize": "^4.2",
+        "intervention/mimesniffer": "^0.4.2"
     },
     "require-dev": {
         "spatie/phpunit-snapshot-assertions": "*",

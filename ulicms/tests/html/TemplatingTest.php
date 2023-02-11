@@ -33,7 +33,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
 
         Settings::get("mobile_theme", $this->initialMobileTheme);
         Settings::set("homepage_owner", $this->homepageOwner);
-        Settings::set("maintenance_mode", "off");
+        Settings::set('maintenance_mode', "off");
         Settings::set("domain_to_language", $this->initialDomainToLanguage);
 
         unset($_SERVER["SERVER_PROTOCOL"]);

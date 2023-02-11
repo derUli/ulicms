@@ -3,6 +3,7 @@
 namespace App\Services\Connectors;
 
 use App\Helpers\ArrayHelper;
+
 use function is_version_number;
 
 class AvailablePackageVersionMatcher

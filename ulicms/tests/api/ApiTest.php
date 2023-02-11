@@ -78,7 +78,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
     public function cleanUp()
     {
         unset($_REQUEST["action"]);
-        Settings::set("maintenance_mode", "0");
+        Settings::set('maintenance_mode', "0");
         chdir(Path::resolve("ULICMS_ROOT"));
     }
 

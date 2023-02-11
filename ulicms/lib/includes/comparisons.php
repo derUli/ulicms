@@ -104,12 +104,12 @@ function is_mobile(): bool
 
 function isMaintenanceMode(): bool
 {
-    if (!is_string(Settings::get("maintenance_mode"))) {
+    if (!is_string(Settings::get('maintenance_mode'))) {
         return false;
     }
-    return (strtolower(Settings::get("maintenance_mode")) == "on" ||
-            strtolower(Settings::get("maintenance_mode")) == "true" ||
-            Settings::get("maintenance_mode") == "1");
+    return (strtolower(Settings::get('maintenance_mode')) == "on" ||
+            strtolower(Settings::get('maintenance_mode')) == "true" ||
+            Settings::get('maintenance_mode') == "1");
 }
 
 function is_tablet(): bool

@@ -8,7 +8,7 @@ class SimpleSettingsControllerTest extends \PHPUnit\Framework\TestCase
             "homepage_owner" => Settings::get("homepage_owner"),
             "language" => Settings::get("language"),
             "visitors_can_register" => Settings::get("visitors_can_register"),
-            "maintenance_mode" => Settings::get("maintenance_mode"),
+            'maintenance_mode' => Settings::get('maintenance_mode'),
             "email" => Settings::get("email"),
             "timezone" => Settings::get("timezone"),
             "robots" => Settings::get("robots"),
@@ -31,7 +31,7 @@ class SimpleSettingsControllerTest extends \PHPUnit\Framework\TestCase
             "homepage_owner" => "Jane Doe",
             "language" => "en",
             "visitors_can_register" => "1",
-            "maintenance_mode" => "1",
+            'maintenance_mode' => "1",
             "email" => "foobar@example.org",
             "timezone" => "Asia/Tokyo",
             "robots" => "index, nofollow",
@@ -63,7 +63,7 @@ class SimpleSettingsControllerTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals(
             "1",
-            Settings::get("maintenance_mode")
+            Settings::get('maintenance_mode')
         );
 
         $this->assertEquals(
@@ -110,7 +110,7 @@ class SimpleSettingsControllerTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals(
             "1",
-            Settings::get("maintenance_mode")
+            Settings::get('maintenance_mode')
         );
 
         $this->assertEquals(

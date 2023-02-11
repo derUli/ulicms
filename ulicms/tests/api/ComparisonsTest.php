@@ -18,7 +18,7 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase
         $_SERVER = [];
         $_REQUEST = [];
 
-        Settings::set("maintenance_mode", "0");
+        Settings::set('maintenance_mode', "0");
         chdir(Path::resolve("ULICMS_ROOT"));
     }
 
@@ -89,16 +89,16 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase
 
     public function testIsMaintenanceModeOn()
     {
-        Settings::set("maintenance_mode", "1");
+        Settings::set('maintenance_mode', "1");
         $this->assertTrue(isMaintenanceMode());
     }
 
     public function testIsMaintenanceModeOff()
     {
-        Settings::set("maintenance_mode", "0");
+        Settings::set('maintenance_mode', "0");
         $this->assertFalse(isMaintenanceMode());
 
-        Settings::delete("maintenance_mode");
+        Settings::delete('maintenance_mode');
         $this->assertFalse(isMaintenanceMode());
     }
 

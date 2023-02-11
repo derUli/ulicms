@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Utils;
 
+use Intervention\MimeSniffer\MimeSniffer;
+
 class File
 {
     // write a string to a file
@@ -116,26 +118,13 @@ class File
     }
 
     // detect the mime type of a file
-    public static function getMime(string $file): ?string
+    public static function getMime(string $file): string
     {
-        // try multiple methods to detect mime type,
-        // based on the php environment
-        if (function_exists("finfo_file")) {
-            // return mime type ala mimetype extension
-            $finfo = finfo_open(FILEINFO_MIME_TYPE);
-            $mime = finfo_file($finfo, $file);
-            finfo_close($finfo);
-            return $mime;
-        } elseif (function_exists("mime_content_type")) {
-            return mime_content_type($file);
-        } elseif (!stristr(ini_get("disable_functions"), "shell_exec")) {
-            // http://stackoverflow.com/a/134930/1593459
-            $file = escapeshellarg($file);
-            $mime = shell_exec("file -bi " . $file);
-            return $mime;
-        }
-        // if detection of file mimetype failed
-        return null;
+        $sniffer = new MimeSniffer();
+        $sniffer->setFromFilename($file);
+
+        $type = $sniffer->getType();
+        return (string)$type;
     }
 
     public static function sureRemoveDir(

@@ -16,9 +16,9 @@ class SimpleSettingsController extends Controller
             intval(isset($_POST["visitors_can_register"]))
         );
         Settings::set(
-            "maintenance_mode",
+            'maintenance_mode',
             intval(
-                isset($_POST["maintenance_mode"])
+                isset($_POST['maintenance_mode'])
             )
         );
         Settings::set("email", $_POST["email"]);

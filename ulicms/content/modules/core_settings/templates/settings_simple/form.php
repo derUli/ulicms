@@ -65,10 +65,10 @@ if ($permissionChecker->hasPermission("settings_simple")) {
         ?>
         <tr>
             <td><strong><?php translate("MAINTENANCE_MODE_ENABLED"); ?></strong></td>
-            <td><input type="checkbox" name="maintenance_mode"
+            <td><input type="checkbox" name='maintenance_mode'
                        class="js-switch"
                        <?php
-                       if (strtolower($settings["maintenance_mode"] == "on") || $settings["maintenance_mode"] == "1" || strtolower($settings["maintenance_mode"]) == "true") {
+                       if (strtolower($settings['maintenance_mode'] == "on") || $settings['maintenance_mode'] == "1" || strtolower($settings['maintenance_mode']) == "true") {
                            echo " checked";
                        }
     ?>></td>

@@ -45,7 +45,7 @@ class RoboSettingsTest extends RoboTestBase
     public function testSettingsPrintsNull()
     {
         $output = $this->runRoboCommand(["settings:get", "gibts_nicht"]);
-        $this->assertStringContainsString("[NULL]", $output);
+        $this->assertStringContainsString('[NULL]', $output);
     }
 
     public function testSettingsSetToValue()
@@ -66,7 +66,7 @@ class RoboSettingsTest extends RoboTestBase
             [
                 "settings:set",
                 "foo1",
-                "[null]"]
+                '[NULL]']
         );
         $this->assertNull(Settings::get("foo1"));
     }

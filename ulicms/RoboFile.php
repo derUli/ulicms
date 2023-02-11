@@ -37,7 +37,7 @@ class RoboFile extends Tasks
     protected function initCore()
     {
         if (!defined('ULICMS_ROOT')) {
-            require dirname(__FILE__) . "/init.php";
+            require dirname(__FILE__) . '/init.php';
             require_once getLanguageFilePath("en");
         }
     }
@@ -96,7 +96,7 @@ class RoboFile extends Tasks
     public function settingsGet($settingsName): void
     {
         $value = Settings::get($settingsName) !== null ?
-                Settings::get($settingsName) : "[NULL]";
+                Settings::get($settingsName) : '[NULL]';
         $this->writeln($value);
     }
 
@@ -107,7 +107,7 @@ class RoboFile extends Tasks
      */
     public function settingsSet($settingsName, $value): void
     {
-        if (strtoupper($value) !== "[NULL]") {
+        if (strtoupper($value) !== '[NULL]') {
             Settings::set($settingsName, $value);
         } else {
             Settings::delete($settingsName);
@@ -119,7 +119,7 @@ class RoboFile extends Tasks
      */
     public function maintenanceOn()
     {
-        Settings::set("maintenance_mode", "1");
+        Settings::set('maintenance_mode', "1");
     }
 
     /**
@@ -127,7 +127,7 @@ class RoboFile extends Tasks
      */
     public function maintenanceOff()
     {
-        Settings::set("maintenance_mode", "0");
+        Settings::set('maintenance_mode', "0");
     }
 
     /**

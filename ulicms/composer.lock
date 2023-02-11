@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "34dc41b746d7a7cbff8003ec85998c7d",
+    "content-hash": "3a6d95c04c8e019320b5195a013f7618",
     "packages": [
         {
             "name": "chrisjean/php-ico",
@@ -1121,6 +1121,58 @@
                 }
             ],
             "time": "2022-05-21T17:30:32+00:00"
+        },
+        {
+            "name": "intervention/mimesniffer",
+            "version": "0.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Intervention/mimesniffer.git",
+                "reference": "50f6086af5fa3302ad362864bc5daef15ed702e8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Intervention/mimesniffer/zipball/50f6086af5fa3302ad362864bc5daef15ed702e8",
+                "reference": "50f6086af5fa3302ad362864bc5daef15ed702e8",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.3|^8.0"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^0.12.11",
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Intervention\\MimeSniffer\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Oliver Vogel",
+                    "email": "oliver@olivervogel.com",
+                    "homepage": "https://olivervogel.com/"
+                }
+            ],
+            "description": "PHP MIME Type Sniffer",
+            "homepage": "http://intervention.io/",
+            "keywords": [
+                "detector",
+                "mime",
+                "sniffer",
+                "type"
+            ],
+            "support": {
+                "issues": "https://github.com/Intervention/mimesniffer/issues",
+                "source": "https://github.com/Intervention/mimesniffer/tree/0.4.2"
+            },
+            "time": "2020-12-29T09:20:18+00:00"
         },
         {
             "name": "jbroadway/urlify",
