@@ -863,7 +863,7 @@ function get_content(): string {
 function checkforAccessForDevice(string $access): bool {
     $access = explode(",", $access);
     $allowed = false;
-    if (in_array("mobile", $access) and is_mobile()) {
+    if (in_array("mobile", $access) && is_mobile()) {
         $allowed = true;
     }
     if (in_array("desktop", $access) && !is_mobile()) {

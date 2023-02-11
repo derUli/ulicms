@@ -18,10 +18,15 @@ const ONE_DAY_IN_SECONDS = 86400;
 // of the page load procedure to measure site performance
 define("START_TIME", microtime(true));
 
-// root directory of UliCMS
-if (!defined("ULICMS_ROOT")) {
-    define("ULICMS_ROOT", dirname(__FILE__));
-}
+// Define path constants
+define("ULICMS_ROOT", dirname(__FILE__));
+define("ULICMS_TMP", ULICMS_ROOT . "/content/tmp/");
+define("ULICMS_CACHE_BASE", ULICMS_ROOT . "/content/cache");
+define("ULICMS_CACHE", ULICMS_CACHE_BASE . "/legacy");
+define("ULICMS_LOG", ULICMS_ROOT . "/content/log/");
+define("ULICMS_CONTENT", ULICMS_ROOT . "/content/");
+define("ULICMS_GENERATED", ULICMS_CONTENT . "generated");
+define("ULICMS_CONFIGURATIONS", ULICMS_CONTENT . "/configurations/");
 
 use App\Exceptions\AccessDeniedException;
 use App\Exceptions\ConnectionFailedException;
@@ -133,37 +138,8 @@ if ((defined("ULICMS_DEBUG") && ULICMS_DEBUG) || (isset($config->debug) && $conf
     error_reporting(0);
 }
 
-if (!defined("ULICMS_TMP")) {
-    define("ULICMS_TMP", ULICMS_ROOT . "/content/tmp/");
-}
-
 if (!is_dir(ULICMS_TMP)) {
     mkdir(ULICMS_TMP);
-}
-
-if (!defined("ULICMS_CACHE_BASE")) {
-    define("ULICMS_CACHE_BASE", ULICMS_ROOT . "/content/cache");
-}
-
-// Todo: Alle stellen, wo manuell Cache-Dateien geschrieben werden auf PhpFastCache umstellen
-// und das hier dann abschaffen.
-if (!defined("ULICMS_CACHE")) {
-    define("ULICMS_CACHE", ULICMS_CACHE_BASE . "/legacy");
-}
-
-if (!defined("ULICMS_LOG")) {
-    define("ULICMS_LOG", ULICMS_ROOT . "/content/log/");
-}
-if (!defined("ULICMS_CONTENT")) {
-    define("ULICMS_CONTENT", ULICMS_ROOT . "/content/");
-}
-
-if (!defined("ULICMS_GENERATED")) {
-    define("ULICMS_GENERATED", ULICMS_CONTENT . "generated");
-}
-
-if (!defined("ULICMS_CONFIGURATIONS")) {
-    define("ULICMS_CONFIGURATIONS", ULICMS_CONTENT . "/configurations/");
 }
 
 if (!is_dir(ULICMS_CACHE_BASE)) {
