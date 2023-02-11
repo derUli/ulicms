@@ -43,7 +43,7 @@ class BannerControllerTest extends \PHPUnit\Framework\TestCase
         $_POST["link_url"] = "";
         $_POST["category_id"] = 1;
         $_POST["type"] = "html";
-        $_POST['language'] = "de";
+        $_POST['language'] = 'de';
         $_POST["enabled"] = 1;
         $_POST["html"] = "Foo Bar";
         $_POST["date_from"] = "";

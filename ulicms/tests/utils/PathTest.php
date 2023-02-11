@@ -37,7 +37,7 @@ class PathTest extends \PHPUnit\Framework\TestCase
     public function testResolveAndNormalize()
     {
         $expected = str_replace(
-            "/",
+            '/',
             DIRECTORY_SEPARATOR,
             "/content/log/exception_log/foo.log"
         );

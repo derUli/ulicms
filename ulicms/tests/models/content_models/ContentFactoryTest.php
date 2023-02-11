@@ -87,7 +87,7 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase
             "Content with id={$page->getId()} has unknown content type \"{$page->type}\""
         );
 
-        ContentFactory::getBySlugAndLanguage("test-123", "de");
+        ContentFactory::getBySlugAndLanguage("test-123", 'de');
     }
 
     public function testGetAllByParent()
@@ -369,7 +369,7 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase
     public function testGetForFilter()
     {
         $contents = ContentFactory::getForFilter(
-            "de",
+            'de',
             1,
             "top",
             5,
@@ -383,7 +383,7 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase
         $this->assertLessThanOrEqual(4, count($contents));
 
         foreach ($contents as $content) {
-            $this->assertEquals("de", $content->language);
+            $this->assertEquals('de', $content->language);
             $this->assertEquals("top", $content->menu);
             $this->assertInstanceOf(Module_Page::class, $content);
         }

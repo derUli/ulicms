@@ -27,7 +27,7 @@ class ModuleHelper extends Helper
         string $path,
         bool $absolute = false
     ): string {
-        $path = trim($path, "/");
+        $path = trim($path, '/');
         return getModulePath($module, $absolute) . $path;
     }
 
@@ -161,23 +161,23 @@ class ModuleHelper extends Helper
     }
 
     // returns the absolute url to UliCMS
-    public static function getBaseUrl(string $suffix = "/"): string
+    public static function getBaseUrl(string $suffix = '/'): string
     {
         $domain = get_http_host();
 
         $dirname = dirname(get_request_uri());
 
         // Replace backslashes with slashes (Windows)
-        $dirname = str_replace("\\", "/", $dirname);
+        $dirname = str_replace("\\", '/', $dirname);
 
         if (is_admin_dir()) {
             $dirname = dirname($dirname . "/..");
         }
 
         // Replace backslashes with slashes (Windows)
-        $dirname = str_replace("\\", "/", $dirname);
+        $dirname = str_replace("\\", '/', $dirname);
 
-        $dirname = rtrim($dirname, "/");
+        $dirname = rtrim($dirname, '/');
 
         return get_site_protocol() . $domain . $dirname . $suffix;
     }
@@ -210,22 +210,22 @@ class ModuleHelper extends Helper
         $domain = getDomainByLanguage($page->language);
         $dirname = dirname(get_request_uri());
 
-        $dirname = str_replace("\\", "/", $dirname);
+        $dirname = str_replace("\\", '/', $dirname);
 
         if (is_admin_dir()) {
             $dirname = dirname(dirname($dirname . "/.."));
         }
 
-        if (!str_starts_with($dirname, "/")) {
-            $dirname = "/" . $dirname;
+        if (!str_starts_with($dirname, '/')) {
+            $dirname = '/' . $dirname;
         }
 
-        if (!str_ends_with($dirname, "/")) {
-            $dirname = $dirname . "/";
+        if (!str_ends_with($dirname, '/')) {
+            $dirname = $dirname . '/';
         }
 
         // Replace backslashes with slashes (Windows)
-        $dirname = str_replace("\\", "/", $dirname);
+        $dirname = str_replace("\\", '/', $dirname);
 
         $currentLanguage = isset($_SESSION['language']) ?
                 $_SESSION['language'] : Settings::get("default_language");

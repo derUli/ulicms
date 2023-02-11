@@ -36,8 +36,8 @@ class SettingsTest extends \PHPUnit\Framework\TestCase
                 "foobar";
         $mapped = Settings::mappingStringToArray($mappingString);
         $this->assertEquals(3, count($mapped));
-        $this->assertEquals("de", $mapped["company.de"]);
-        $this->assertEquals("en", $mapped["company.co.uk"]);
+        $this->assertEquals('de', $mapped["company.de"]);
+        $this->assertEquals('en', $mapped["company.co.uk"]);
         $this->assertEquals("fr", $mapped["company.fr"]);
         $this->assertFalse(isset($mapped["#This is a comment"]));
     }
@@ -51,25 +51,25 @@ class SettingsTest extends \PHPUnit\Framework\TestCase
         $firstUser->registerSession(false);
 
         Settings::setLanguageSetting("my_setting", "Lampukisch");
-        Settings::setLanguageSetting("my_setting", "Germanisch", "de");
-        Settings::setLanguageSetting("my_setting", "Angelsächisch", "en");
+        Settings::setLanguageSetting("my_setting", "Germanisch", 'de');
+        Settings::setLanguageSetting("my_setting", "Angelsächisch", 'en');
 
         $this->assertEquals("Lampukisch", Settings::getLang("my_setting"));
         $this->assertEquals("Lampukisch", Settings::getLang("my_setting", "fr"));
-        $this->assertEquals("Germanisch", Settings::getLang("my_setting", "de"));
-        $this->assertEquals("Angelsächisch", Settings::getLang("my_setting", "en"));
+        $this->assertEquals("Germanisch", Settings::getLang("my_setting", 'de'));
+        $this->assertEquals("Angelsächisch", Settings::getLang("my_setting", 'en'));
     }
 
     public function testGetAndSetLanguageSetting()
     {
         Settings::setLanguageSetting("my_setting", "Lampukisch");
-        Settings::setLanguageSetting("my_setting", "Germanisch", "de");
-        Settings::setLanguageSetting("my_setting", "Angelsächisch", "en");
+        Settings::setLanguageSetting("my_setting", "Germanisch", 'de');
+        Settings::setLanguageSetting("my_setting", "Angelsächisch", 'en');
 
         $this->assertEquals("Lampukisch", Settings::getLanguageSetting("my_setting"));
         $this->assertEquals("Lampukisch", Settings::getLanguageSetting("my_setting", "fr"));
-        $this->assertEquals("Germanisch", Settings::getLanguageSetting("my_setting", "de"));
-        $this->assertEquals("Angelsächisch", Settings::getLanguageSetting("my_setting", "en"));
+        $this->assertEquals("Germanisch", Settings::getLanguageSetting("my_setting", 'de'));
+        $this->assertEquals("Angelsächisch", Settings::getLanguageSetting("my_setting", 'en'));
     }
 
     public function testConvertVarTypeStr()

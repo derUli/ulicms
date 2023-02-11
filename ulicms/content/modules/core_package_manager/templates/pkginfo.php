@@ -174,7 +174,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                 ?>
                 <h2><?php translate("errors"); ?></h2>
                 <?php
-                echo implode("<br/>", $errors);
+                echo implode('<br/>', $errors);
             }
             ?>
             <?php

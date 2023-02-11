@@ -13,7 +13,7 @@ $select2TranslationFile = "../node_modules/select2/dist/js/i18n/" . getSystemLan
 $select2Language = getSystemLanguage();
 if (!is_file($select2TranslationFile)) {
     $select2TranslationFile = "../node_modules/select2/dist/js/i18n/en.js";
-    $select2Language = "en";
+    $select2Language = 'en';
 }
 
 $permissionChecker = new App\Security\PermissionChecker(get_user_id());

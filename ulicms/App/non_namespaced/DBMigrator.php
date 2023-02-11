@@ -67,7 +67,7 @@ class DBMigrator
             $result = Database::tableExists("dbtrack") ?
                     Database::pQuery($sql, $args, true) : false;
             if (!$result or Database::getNumRows($result) == 0) {
-                $path = $this->folder . "/" . $file;
+                $path = $this->folder . '/' . $file;
                 $sql = file_get_contents($path);
                 $cfg = new CMSConfig();
                 $sql = str_ireplace("{prefix}", $cfg->db_prefix, $sql);
@@ -107,7 +107,7 @@ class DBMigrator
                 );
                 $result = Database::pQuery($sql, $args, true);
                 if (Database::getNumRows($result) > 0) {
-                    $path = $this->folder . "/" . $file;
+                    $path = $this->folder . '/' . $file;
                     $sql = file_get_contents($path);
                     $cfg = new CMSConfig();
                     $sql = str_ireplace("{prefix}", $cfg->db_prefix, $sql);

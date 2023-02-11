@@ -16,8 +16,8 @@ class DataTablesHelperTest extends \PHPUnit\Framework\TestCase
 
     public function testGetLanguageFileURLExists()
     {
-        $this->assertEquals("scripts/datatables/lang/de.lang", DataTablesHelper::getLanguageFileURL("de"));
-        $this->assertEquals("scripts/datatables/lang/en.lang", DataTablesHelper::getLanguageFileURL("en"));
+        $this->assertEquals("scripts/datatables/lang/de.lang", DataTablesHelper::getLanguageFileURL('de'));
+        $this->assertEquals("scripts/datatables/lang/en.lang", DataTablesHelper::getLanguageFileURL('en'));
     }
 
     public function testGetlanguageFileNotExists()

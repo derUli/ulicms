@@ -14,7 +14,7 @@ class ContentListTest extends \PHPUnit\Framework\TestCase
         $contentList->title = "Unit Test Article";
         $contentList->slug = "unit test";
         $contentList->menu = "none";
-        $contentList->language = "de";
+        $contentList->language = 'de';
         $contentList->article_date = 1413821696;
         $contentList->author_id = 1;
         $contentList->group_id = 1;

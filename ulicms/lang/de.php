@@ -1,7 +1,7 @@
 <?php
 
 // Dashboard (Willkommen)
-define("LOADED_LANGUAGE_FILE", "de");
+define("LOADED_LANGUAGE_FILE", 'de');
 add_translation("MOTD", "Nachricht des Tages");
 add_translation("STATISTICS", "Statistiken");
 add_translation("ONLINE_NOW", "Jetzt online sind");

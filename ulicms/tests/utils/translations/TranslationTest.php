@@ -5,10 +5,10 @@ class TranslationTest extends \PHPUnit\Framework\TestCase
     protected function setUp(): void
     {
         Translation::init();
-        require_once getLanguageFilePath("en");
-        Translation::loadAllModuleLanguageFiles("en");
-        Translation::loadCurrentThemeLanguageFiles("en");
-        Translation::includeCustomLangFile("en");
+        require_once getLanguageFilePath('en');
+        Translation::loadAllModuleLanguageFiles('en');
+        Translation::loadCurrentThemeLanguageFiles('en');
+        Translation::includeCustomLangFile('en');
     }
 
     public function testGetTranslation()

@@ -27,8 +27,8 @@ class PageTest extends \PHPUnit\Framework\TestCase
         $this->initialCommentableContentTypes = Settings::get("commentable_content_types");
 
         $_SERVER['HTTP_HOST'] = "company.com";
-        $_SESSION['language'] = "de";
-        $_SERVER["REQUEST_URI"] = "/";
+        $_SESSION['language'] = 'de';
+        $_SERVER["REQUEST_URI"] = '/';
 
         $settings = array(
             "frontpage",

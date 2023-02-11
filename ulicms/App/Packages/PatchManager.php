@@ -93,7 +93,7 @@ class PatchManager
             return false;
         }
 
-        $tmp_dir = ULICMS_TMP . "/" . uniqid() . "/";
+        $tmp_dir = ULICMS_TMP . '/' . uniqid() . '/';
         if (!is_dir($tmp_dir)) {
             mkdir($tmp_dir);
         }

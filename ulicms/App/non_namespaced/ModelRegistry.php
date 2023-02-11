@@ -23,7 +23,7 @@ class ModelRegistry
                 continue;
             }
             foreach ($models as $key => $value) {
-                $path = getModulePath($module, true) . trim($value, "/");
+                $path = getModulePath($module, true) . trim($value, '/');
                 if (!str_ends_with($path, ".php")) {
                     $path .= ".php";
                 }

@@ -27,7 +27,7 @@ class HomepageTitleControllerTest extends \PHPUnit\Framework\TestCase
     {
         $_POST["homepage_title_de"] = "Ulis löbliche Heimseite";
         $_POST["homepage_title_en"] = "Ulis lovely Homepage";
-        Settings::set("default_language", "en");
+        Settings::set("default_language", 'en');
 
         $controller = new HomepageTitleController();
         $controller->_savePost();

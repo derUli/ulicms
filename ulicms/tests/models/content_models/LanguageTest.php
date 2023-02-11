@@ -11,7 +11,7 @@ class LanguageTest extends \PHPUnit\Framework\TestCase
     {
         $this->initialDefaultLanguage = Settings::get("default_language");
 
-        Settings::set("default_language", "de");
+        Settings::set("default_language", 'de');
 
         $_SESSION = [];
         $this->initialDomain2LanguageMapping = Settings::get("domain_to_language");
@@ -40,9 +40,9 @@ class LanguageTest extends \PHPUnit\Framework\TestCase
         $this->assertNull($lang->getId());
         $this->assertNull($lang->getName());
         $this->assertNull($lang->getLanguageCode());
-        $lang->loadByLanguageCode("de");
+        $lang->loadByLanguageCode('de');
         $this->assertNotNull($lang->getID());
-        $this->assertEquals("de", $lang->getLanguageCode());
+        $this->assertEquals('de', $lang->getLanguageCode());
         $this->assertEquals("Deutsch", $lang->getName());
     }
 
@@ -78,9 +78,9 @@ class LanguageTest extends \PHPUnit\Framework\TestCase
     public function testIsDefaultLanguage()
     {
         $lang = new Language();
-        $lang->loadByLanguageCode("de");
+        $lang->loadByLanguageCode('de');
         $this->assertTrue($lang->isDefaultLanguage());
-        $lang->loadByLanguageCode("en");
+        $lang->loadByLanguageCode('en');
         $this->assertFalse($lang->isDefaultLanguage());
         $lang->makeDefaultLanguage();
         $this->assertTrue($lang->isDefaultLanguage());
@@ -88,17 +88,17 @@ class LanguageTest extends \PHPUnit\Framework\TestCase
 
     public function testIsCurrentLanguageReturnsTrue()
     {
-        $_SESSION['language'] = "de";
+        $_SESSION['language'] = 'de';
         $lang = new Language();
-        $lang->loadByLanguageCode("de");
+        $lang->loadByLanguageCode('de');
         $this->assertTrue($lang->isCurrentLanguage());
     }
 
     public function testIsCurrentLanguageReturnsFalse()
     {
-        $_SESSION['language'] = "de";
+        $_SESSION['language'] = 'de';
         $lang = new Language();
-        $lang->loadByLanguageCode("en");
+        $lang->loadByLanguageCode('en');
         $this->assertFalse($lang->isCurrentLanguage());
     }
 
@@ -128,7 +128,7 @@ class LanguageTest extends \PHPUnit\Framework\TestCase
         );
 
         $lang = new Language();
-        $lang->setLanguageCode("en");
+        $lang->setLanguageCode('en');
         $this->assertEquals("http://example.co.uk", $lang->getLanguageLink());
     }
 

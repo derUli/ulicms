@@ -24,7 +24,7 @@ function get_shortlink($id = null): ?string
 
 function get_canonical(): string
 {
-    $canonical = getBaseFolderURL() . "/";
+    $canonical = getBaseFolderURL() . '/';
     if (!is_frontpage()) {
         $canonical .= buildSEOUrl();
     }
@@ -40,14 +40,14 @@ function getBaseFolderURL(?string $suffix = null): string
     $s = empty($_SERVER["HTTPS"]) ? '' : (($_SERVER["HTTPS"] == "on") ?
             "s" : "");
     $sp = strtolower($_SERVER["SERVER_PROTOCOL"]);
-    $protocol = substr($sp, 0, strpos($sp, "/")) . $s;
+    $protocol = substr($sp, 0, strpos($sp, '/')) . $s;
     $port = ($_SERVER["SERVER_PORT"] == "80"
             or $_SERVER["SERVER_PORT"] == "443") ?
             "" : (":" . $_SERVER["SERVER_PORT"]);
     $path = basename(dirname($_SERVER['REQUEST_URI'])) == "" ?
             $_SERVER['REQUEST_URI'] : dirname($_SERVER['REQUEST_URI']);
     $suffix = $suffix ?
-            str_replace("\\", "/", $suffix) : str_replace("\\", "/", $path);
+            str_replace("\\", '/', $suffix) : str_replace("\\", '/', $path);
     return trim(
         rtrim(
             $protocol . "://"
@@ -55,7 +55,7 @@ function getBaseFolderURL(?string $suffix = null): string
             .
             $suffix
         ),
-        "/"
+        '/'
     );
 }
 

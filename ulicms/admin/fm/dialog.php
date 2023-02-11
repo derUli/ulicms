@@ -45,13 +45,13 @@ include 'include/utils.php';
 $subdir_path = '';
 
 if (isset($_GET['fldr']) && !empty($_GET['fldr'])) {
-    $subdir_path = rawurldecode(trim(strip_tags($_GET['fldr']), "/"));
+    $subdir_path = rawurldecode(trim(strip_tags($_GET['fldr']), '/'));
 } elseif (isset($_SESSION['RF']['fldr']) && !empty($_SESSION['RF']['fldr'])) {
-    $subdir_path = rawurldecode(trim(strip_tags($_SESSION['RF']['fldr']), "/"));
+    $subdir_path = rawurldecode(trim(strip_tags($_SESSION['RF']['fldr']), '/'));
 }
 
 if (checkRelativePath($subdir_path)) {
-    $subdir = strip_tags($subdir_path) . "/";
+    $subdir = strip_tags($subdir_path) . '/';
     $_SESSION['RF']['fldr'] = $subdir_path;
     $_SESSION['RF']["filter"] = '';
 } else {
@@ -66,7 +66,7 @@ if ($subdir == "") {
 //remember last position
 setcookie('last_position', $subdir, time() + (86400 * 7));
 
-if ($subdir == "/") {
+if ($subdir == '/') {
     $subdir = "";
 }
 
@@ -96,14 +96,14 @@ if (!isset($_SESSION['RF']["subfolder"])) {
 $rfm_subfolder = '';
 
 if (!empty($_SESSION['RF']["subfolder"])
-    && strpos($_SESSION['RF']["subfolder"], "/") !== 0
+    && strpos($_SESSION['RF']["subfolder"], '/') !== 0
     && strpos($_SESSION['RF']["subfolder"], '.') === false
 ) {
     $rfm_subfolder = $_SESSION['RF']['subfolder'];
 }
 
-if ($rfm_subfolder != "" && $rfm_subfolder[strlen($rfm_subfolder) - 1] != "/") {
-    $rfm_subfolder .= "/";
+if ($rfm_subfolder != "" && $rfm_subfolder[strlen($rfm_subfolder) - 1] != '/') {
+    $rfm_subfolder .= '/';
 }
 
 $ftp = ftp_con($config);
@@ -160,7 +160,7 @@ if (!$ftp) {
         if ($parent == "") {
             $cycle = false;
         } else {
-            $parent = fix_dirname($parent) . "/";
+            $parent = fix_dirname($parent) . '/';
         }
     }
 
@@ -1125,11 +1125,11 @@ $files = $sorted;
         echo $link ?>/"><i class="icon-home"></i></a></li>
             <li><span class="divider">/</span></li>
             <?php
-    $bc = explode("/", $subdir);
+    $bc = explode('/', $subdir);
 $tmp_path = '';
 if (!empty($bc)) {
     foreach ($bc as $k => $b) {
-        $tmp_path .= $b . "/";
+        $tmp_path .= $b . '/';
         if ($k == count($bc) - 2) {
             ?>
                         <li class="active"><?php
@@ -1139,7 +1139,7 @@ if (!empty($bc)) {
                 echo $link . $tmp_path ?>"><?php
                     echo $b ?></a></li>
                         <li><span class="divider"><?php
-                    echo "/"; ?></span></li>
+                    echo '/'; ?></span></li>
                     <?php
         }
     }
@@ -1299,14 +1299,14 @@ if ($config['show_language_selection']) { ?>
 
                     $class_ext = 3;
                     if ($file == '..' && trim($subdir) != '') {
-                        $src = explode("/", $subdir);
+                        $src = explode('/', $subdir);
                         unset($src[count($src) - 2]);
-                        $src = implode("/", $src);
+                        $src = implode('/', $src);
                         if ($src == '') {
-                            $src = "/";
+                            $src = '/';
                         }
                     } elseif ($file != '..') {
-                        $src = $subdir . $file . "/";
+                        $src = $subdir . $file . '/';
                     }
 
                     ?>
@@ -1343,7 +1343,7 @@ if ($config['show_language_selection']) { ?>
                                 <input type="hidden" class="path" value="<?php
                             echo str_replace('.', '', dirname($rfm_subfolder . $subdir)); ?>"/>
                                 <input type="hidden" class="path_thumb" value="<?php
-                            echo dirname($thumbs_path) . "/"; ?>"/>
+                            echo dirname($thumbs_path) . '/'; ?>"/>
                             <?php
                         } ?>
                             <a class="folder-link" href="dialog.php?<?php
@@ -1514,7 +1514,7 @@ if ($config['show_language_selection']) { ?>
                         $img_width = $img_height = "";
                         if ($ftp) {
                             $mini_src = $src_thumb = $config['ftp_base_url'] . $config['ftp_thumbs_dir'] . $subdir . $file;
-                            $creation_thumb_path = "/" . $config['ftp_base_folder'] . $config['ftp_thumbs_dir'] . $subdir . $file;
+                            $creation_thumb_path = '/' . $config['ftp_base_folder'] . $config['ftp_thumbs_dir'] . $subdir . $file;
                         } else {
                             $creation_thumb_path = $mini_src = $src_thumb = $thumbs_path . $file;
 

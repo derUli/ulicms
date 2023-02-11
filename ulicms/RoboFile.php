@@ -38,7 +38,7 @@ class RoboFile extends Tasks
     {
         if (!defined('ULICMS_ROOT')) {
             require dirname(__FILE__) . '/init.php';
-            require_once getLanguageFilePath("en");
+            require_once getLanguageFilePath('en');
         }
     }
 
@@ -574,7 +574,7 @@ class RoboFile extends Tasks
     {
         $command = "vendor/bin/phpunit";
         if (DIRECTORY_SEPARATOR === "\\") {
-            $command = str_replace("/", "\\", $command);
+            $command = str_replace('/', "\\", $command);
         }
 
         system("$command $testFile");
@@ -588,7 +588,7 @@ class RoboFile extends Tasks
     {
         $command = "vendor/bin/phpunit -d --update-snapshots";
         if (DIRECTORY_SEPARATOR === "\\") {
-            $command = str_replace("/", "\\", $command);
+            $command = str_replace('/', "\\", $command);
         }
 
         system("$command $testFile");

@@ -37,7 +37,7 @@ class UserControllerTest extends \PHPUnit\Framework\TestCase
             "lastname" => "Doe",
             "password" => "topsecret",
             "email" => "johndoe@example.org",
-            "default_language" => "en",
+            "default_language" => 'en',
             "locked" => "1",
             "group_id" => $groups[0]->getId(),
             "require_password_change" => "1",
@@ -65,7 +65,7 @@ class UserControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("Doe", $user->getLastname());
         $this->assertGreaterThanOrEqual(128, strlen($user->getPassword()));
         $this->assertEquals("johndoe@example.org", $user->getEmail());
-        $this->assertEquals("en", $user->getDefaultLanguage());
+        $this->assertEquals('en', $user->getDefaultLanguage());
         $this->assertTrue($user->isLocked());
         $this->assertGreaterThanOrEqual(1, $user->getGroupId());
         $this->assertTrue($user->getRequirePasswordChange());
@@ -93,7 +93,7 @@ class UserControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("Doe", $user->getLastname());
         $this->assertGreaterThanOrEqual(128, strlen($user->getPassword()));
         $this->assertEquals("johndoe@example.org", $user->getEmail());
-        $this->assertEquals("en", $user->getDefaultLanguage());
+        $this->assertEquals('en', $user->getDefaultLanguage());
         $this->assertTrue($user->isLocked());
         $this->assertGreaterThanOrEqual(1, $user->getGroupId());
         $this->assertTrue($user->getRequirePasswordChange());

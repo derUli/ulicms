@@ -149,8 +149,8 @@ function deleteFile($path, $path_thumb, $config)
         $ftp = ftp_con($config);
         if ($ftp) {
             try {
-                $ftp->delete("/".$path);
-                @$ftp->delete("/".$path_thumb);
+                $ftp->delete('/'.$path);
+                @$ftp->delete('/'.$path_thumb);
             } catch (FtpClient\FtpException $e) {
                 return;
             }
@@ -166,23 +166,23 @@ function deleteFile($path, $path_thumb, $config)
         $info=pathinfo($path);
         if (!$ftp && $config['relative_image_creation']) {
             foreach ($config['relative_path_from_current_pos'] as $k=>$path) {
-                if ($path!="" && $path[strlen($path)-1]!="/") {
-                    $path.="/";
+                if ($path!="" && $path[strlen($path)-1]!='/') {
+                    $path.='/';
                 }
 
-                if (file_exists($info['dirname']."/".$path.$config['relative_image_creation_name_to_prepend'][$k].$info['filename'].$config['relative_image_creation_name_to_append'][$k].".".$info['extension'])) {
-                    unlink($info['dirname']."/".$path.$config['relative_image_creation_name_to_prepend'][$k].$info['filename'].$config['relative_image_creation_name_to_append'][$k].".".$info['extension']);
+                if (file_exists($info['dirname'].'/'.$path.$config['relative_image_creation_name_to_prepend'][$k].$info['filename'].$config['relative_image_creation_name_to_append'][$k].".".$info['extension'])) {
+                    unlink($info['dirname'].'/'.$path.$config['relative_image_creation_name_to_prepend'][$k].$info['filename'].$config['relative_image_creation_name_to_append'][$k].".".$info['extension']);
                 }
             }
         }
 
         if (!$ftp && $config['fixed_image_creation']) {
             foreach ($config['fixed_path_from_filemanager'] as $k=>$path) {
-                if ($path!="" && $path[strlen($path)-1] != "/") {
-                    $path.="/";
+                if ($path!="" && $path[strlen($path)-1] != '/') {
+                    $path.='/';
                 }
 
-                $base_dir=$path.substr_replace($info['dirname']."/", '', 0, strlen($config['current_path']));
+                $base_dir=$path.substr_replace($info['dirname'].'/', '', 0, strlen($config['current_path']));
                 if (file_exists($base_dir.$config['fixed_image_creation_name_to_prepend'][$k].$info['filename'].$config['fixed_image_creation_to_append'][$k].".".$info['extension'])) {
                     unlink($base_dir.$config['fixed_image_creation_name_to_prepend'][$k].$info['filename'].$config['fixed_image_creation_to_append'][$k].".".$info['extension']);
                 }
@@ -238,12 +238,12 @@ function deleteDir($dir, $ftp = null, $config = null)
 function duplicate_file($old_path, $name, $ftp = null, $config = null)
 {
     $info = pathinfo($old_path);
-    $new_path = $info['dirname'] . "/" . $name . "." . $info['extension'];
+    $new_path = $info['dirname'] . '/' . $name . "." . $info['extension'];
     if ($ftp) {
         try {
             $tmp = time().$name . "." . $info['extension'];
-            $ftp->get($tmp, "/".$old_path, FTP_BINARY);
-            $ftp->put("/".$new_path, $tmp, FTP_BINARY);
+            $ftp->get($tmp, '/'.$old_path, FTP_BINARY);
+            $ftp->put('/'.$new_path, $tmp, FTP_BINARY);
             unlink($tmp);
             return true;
         } catch (FtpClient\FtpException $e) {
@@ -274,16 +274,16 @@ function rename_file($old_path, $name, $ftp = null, $config = null)
 {
     $name = fix_filename($name, $config);
     $info = pathinfo($old_path);
-    $new_path = $info['dirname'] . "/" . $name . "." . $info['extension'];
+    $new_path = $info['dirname'] . '/' . $name . "." . $info['extension'];
     if ($ftp) {
         try {
-            return $ftp->rename("/".$old_path, "/".$new_path);
+            return $ftp->rename('/'.$old_path, '/'.$new_path);
         } catch (FtpClient\FtpException $e) {
             return false;
         }
     } else {
         if (file_exists($old_path) && is_file($old_path)) {
-            $new_path = $info['dirname'] . "/" . $name . "." . $info['extension'];
+            $new_path = $info['dirname'] . '/' . $name . "." . $info['extension'];
             if (file_exists($new_path) && $old_path == $new_path) {
                 return false;
             }
@@ -328,13 +328,13 @@ function tempdir()
 function rename_folder($old_path, $name, $ftp = null, $config = null)
 {
     $name = fix_filename($name, $config, true);
-    $new_path = fix_dirname($old_path) . "/" . $name;
+    $new_path = fix_dirname($old_path) . '/' . $name;
     if ($ftp) {
-        if ($ftp->chdir("/".$old_path)) {
+        if ($ftp->chdir('/'.$old_path)) {
             if (@$ftp->chdir($new_path)) {
                 return false;
             }
-            return $ftp->rename("/".$old_path, "/".$new_path);
+            return $ftp->rename('/'.$old_path, '/'.$new_path);
         }
     } else {
         if (file_exists($old_path) && is_dir($old_path) && !isUploadDir($old_path, $config)) {
@@ -574,7 +574,7 @@ function check_files_extensions_on_path($path, $ext)
     } else {
         $files = scandir($path);
         foreach ($files as $file) {
-            check_files_extensions_on_path(trim($path, '/') . "/" . $file, $ext);
+            check_files_extensions_on_path(trim($path, '/') . '/' . $file, $ext);
         }
     }
 }
@@ -708,7 +708,7 @@ function fix_filename($str, $config, $is_folder = false)
         $str = preg_replace("/[^a-zA-Z0-9\.\[\]_| -]/", '', $str);
     }
 
-    $str = str_replace(array( '"', "'", "/", "\\" ), "", $str);
+    $str = str_replace(array( '"', "'", '/', "\\" ), "", $str);
     $str = strip_tags($str);
 
     // Empty or incorrectly transliterated filename.
@@ -892,8 +892,8 @@ function new_thumbnails_creation($targetPath, $targetFile, $name, $current_path,
     $info['filename'] = fix_filename($info['filename'], $config);
     if ($config['relative_image_creation']) {
         foreach ($config['relative_path_from_current_pos'] as $k => $path) {
-            if ($path != "" && $path[ strlen($path) - 1 ] != "/") {
-                $path .= "/";
+            if ($path != "" && $path[ strlen($path) - 1 ] != '/') {
+                $path .= '/';
             }
             if (! file_exists($targetPath . $path)) {
                 create_folder($targetPath . $path, false);
@@ -909,8 +909,8 @@ function new_thumbnails_creation($targetPath, $targetFile, $name, $current_path,
     //create fixed thumbs
     if ($config['fixed_image_creation']) {
         foreach ($config['fixed_path_from_filemanager'] as $k => $path) {
-            if ($path != "" && $path[ strlen($path) - 1 ] != "/") {
-                $path .= "/";
+            if ($path != "" && $path[ strlen($path) - 1 ] != '/') {
+                $path .= '/';
             }
             $base_dir = $path . substr_replace($targetPath, '', 0, strlen($current_path));
             if (! file_exists($base_dir)) {

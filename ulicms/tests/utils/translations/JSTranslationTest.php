@@ -4,7 +4,7 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase
 {
     protected function setUp(): void
     {
-        require_once getLanguageFilePath("en");
+        require_once getLanguageFilePath('en');
         require_once ModuleHelper::buildModuleRessourcePath("core_help", "lang/en.php");
     }
 

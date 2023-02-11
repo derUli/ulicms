@@ -25,7 +25,7 @@ function get_prefered_language(
     return $negotiator->getBest($http_accept_language, $priorities)->getType();
 }
 
-function getLanguageFilePath(string $lang = "de"): string
+function getLanguageFilePath(string $lang = 'de'): string
 {
     return ULICMS_ROOT . "/lang/" . $lang . ".php";
 }
@@ -55,10 +55,10 @@ function getSystemLanguage(): string
     } elseif (Settings::get("system_language")) {
         $lang = Settings::get("system_language");
     } else {
-        $lang = "de";
+        $lang = 'de';
     }
     if (!is_file(getLanguageFilePath($lang))) {
-        $lang = "de";
+        $lang = 'de';
     }
     return $lang;
 }

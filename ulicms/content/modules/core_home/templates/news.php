@@ -4,14 +4,14 @@ if (!Settings::get("disable_ulicms_newsfeed")) {
     App\Utils\Session\sessionStart();
     $rss = new DOMDocument();
     $feeds = [];
-    $feeds["de"] = "https://www.ulicms.de/blog_rss.php?s=aktuelles&lang=de";
-    $feeds["en"] = "https://en.ulicms.de/blog_rss.php?s=aktuelles&lang=en";
+    $feeds['de'] = "https://www.ulicms.de/blog_rss.php?s=aktuelles&lang=de";
+    $feeds['en'] = "https://en.ulicms.de/blog_rss.php?s=aktuelles&lang=en";
 
     if (isset($_SESSION["system_language"]) &&
             isset($feeds[$_SESSION["system_language"]])) {
         $feed_url = $feeds[$_SESSION["system_language"]];
     } else {
-        $feed_url = $feeds["en"];
+        $feed_url = $feeds['en'];
     }
 
     $xml = file_get_contents_wrapper($feed_url, true);

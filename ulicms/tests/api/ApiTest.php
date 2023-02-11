@@ -102,8 +102,8 @@ class ApiTest extends \PHPUnit\Framework\TestCase
     {
         $languages = getAllUsedLanguages();
         $this->assertGreaterThanOrEqual(2, count($languages));
-        $this->assertTrue(in_array("de", $languages));
-        $this->assertTrue(in_array("en", $languages));
+        $this->assertTrue(in_array('de', $languages));
+        $this->assertTrue(in_array('en', $languages));
     }
 
     public function testAddTranslation()
@@ -246,13 +246,13 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         q = 0.8, en;
         q = 0.7, de;
         q = 0.5";
-        $this->assertEquals("en", get_prefered_language(array("de", "en"), $acceptLanguageHeader1));
+        $this->assertEquals('en', get_prefered_language(array('de', 'en'), $acceptLanguageHeader1));
 
         $acceptLanguageHeader2 = "Accept-Language: da, en - gb;
         q = 0.8, en;
         q = 0.7, de;
         q = 0.9";
-        $this->assertEquals("de", get_prefered_language(array("de", "en"), $acceptLanguageHeader2));
+        $this->assertEquals('de', get_prefered_language(array('de', 'en'), $acceptLanguageHeader2));
     }
 
     public function testGetHtmlEditorNotLoggedInReturnsCkeditor()
@@ -629,7 +629,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $page->title = "Unit Test " . uniqid();
         $page->slug = "unit-test-" . uniqid();
         $page->menu = "none";
-        $page->language = "de";
+        $page->language = 'de';
         $page->article_date = 1413821696;
         $page->author_id = 1;
         $page->group_id = 1;
@@ -637,7 +637,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $page->content = "Hello World";
         $page->save();
 
-        $_SESSION['language'] = "de";
+        $_SESSION['language'] = 'de';
         $_GET["slug"] = $page->slug;
         $this->assertTrue(containsModule());
     }
@@ -648,7 +648,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $page->title = "Unit Test " . uniqid();
         $page->slug = "unit-test-" . uniqid();
         $page->menu = "none";
-        $page->language = "de";
+        $page->language = 'de';
         $page->article_date = 1413821696;
         $page->author_id = 1;
         $page->group_id = 1;
@@ -656,7 +656,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $page->content = "Hello World";
         $page->save();
 
-        $_SESSION['language'] = "de";
+        $_SESSION['language'] = 'de';
         $this->assertTrue(containsModule($page->slug));
     }
 
@@ -666,13 +666,13 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $page->title = "Unit Test " . uniqid();
         $page->slug = "unit-test-" . uniqid();
         $page->menu = "none";
-        $page->language = "de";
+        $page->language = 'de';
         $page->article_date = 1413821696;
         $page->author_id = 1;
         $page->group_id = 1;
         $page->save();
 
-        $_SESSION['language'] = "de";
+        $_SESSION['language'] = 'de';
 
         $this->assertFalse(containsModule($page->slug));
     }
@@ -683,7 +683,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $page->title = "Unit Test " . uniqid();
         $page->slug = "unit-test-" . uniqid();
         $page->menu = "none";
-        $page->language = "de";
+        $page->language = 'de';
         $page->article_date = 1413821696;
         $page->author_id = 1;
         $page->group_id = 1;
@@ -691,7 +691,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $page->content = "Hello World";
         $page->save();
 
-        $_SESSION['language'] = "de";
+        $_SESSION['language'] = 'de';
         $this->assertTrue(containsModule($page->slug, "fortune2"));
     }
 
@@ -701,14 +701,14 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $page->title = "Unit Test " . uniqid();
         $page->slug = "unit-test-" . uniqid();
         $page->menu = "none";
-        $page->language = "de";
+        $page->language = 'de';
         $page->article_date = 1413821696;
         $page->author_id = 1;
         $page->group_id = 1;
         $page->content = "Hello [module=fortune2] World";
         $page->save();
 
-        $_SESSION['language'] = "de";
+        $_SESSION['language'] = 'de';
         $this->assertTrue(containsModule($page->slug, "fortune2"));
     }
 
@@ -718,14 +718,14 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $page->title = "Unit Test " . uniqid();
         $page->slug = "unit-test-" . uniqid();
         $page->menu = "none";
-        $page->language = "de";
+        $page->language = 'de';
         $page->article_date = 1413821696;
         $page->author_id = 1;
         $page->group_id = 1;
         $page->content = "Hello [module=fortune2] World";
         $page->save();
 
-        $_SESSION['language'] = "de";
+        $_SESSION['language'] = 'de';
 
         $this->assertFalse(containsModule($page->slug, "nicht_enthalten"));
     }
@@ -767,7 +767,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
     public function testGetAllLanguagesFiltered()
     {
         $language = new Language();
-        $language->loadByLanguageCode("en");
+        $language->loadByLanguageCode('en');
 
         $group = new Group();
         $group->setName("Testgroup");
@@ -792,8 +792,8 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         );
         $languages = getAllLanguages(true);
 
-        $this->assertNotContains("de", $languages);
-        $this->assertContains("en", $languages);
+        $this->assertNotContains('de', $languages);
+        $this->assertContains('en', $languages);
         $user->delete();
         $group->delete();
     }
@@ -876,12 +876,12 @@ class ApiTest extends \PHPUnit\Framework\TestCase
     public function testGetLangConfig()
     {
         Settings::setLanguageSetting("my_setting", "Lampukisch");
-        Settings::setLanguageSetting("my_setting", "Germanisch", "de");
-        Settings::setLanguageSetting("my_setting", "Angelsächisch", "en");
+        Settings::setLanguageSetting("my_setting", "Germanisch", 'de');
+        Settings::setLanguageSetting("my_setting", "Angelsächisch", 'en');
 
         $this->assertEquals("Lampukisch", get_lang_config("my_setting", "fr"));
-        $this->assertEquals("Germanisch", get_lang_config("my_setting", "de"));
-        $this->assertEquals("Angelsächisch", get_lang_config("my_setting", "en"));
+        $this->assertEquals("Germanisch", get_lang_config("my_setting", 'de'));
+        $this->assertEquals("Angelsächisch", get_lang_config("my_setting", 'en'));
     }
 
     public function testGetUsedPostTypes()
@@ -892,8 +892,8 @@ class ApiTest extends \PHPUnit\Framework\TestCase
 
     public function testGetLanguageNameByCodeReturnsName()
     {
-        $this->assertEquals("Deutsch", getLanguageNameByCode("de"));
-        $this->assertEquals("English", getLanguageNameByCode("en"));
+        $this->assertEquals("Deutsch", getLanguageNameByCode('de'));
+        $this->assertEquals("English", getLanguageNameByCode('en'));
     }
 
     public function testGetLanguageNameByCodeReturnsCode()
@@ -906,8 +906,8 @@ class ApiTest extends \PHPUnit\Framework\TestCase
 
     public function testGetAvailableBackendLanguages()
     {
-        $this->assertContains("de", getAvailableBackendLanguages());
-        $this->assertContains("en", getAvailableBackendLanguages());
+        $this->assertContains('de', getAvailableBackendLanguages());
+        $this->assertContains('en', getAvailableBackendLanguages());
     }
 
     public function testJsonReadableEncode()
@@ -935,15 +935,15 @@ class ApiTest extends \PHPUnit\Framework\TestCase
 
     public function testGetSystemLanguageReturnsSystemLanguageFromSession()
     {
-        $_SESSION["system_language"] = "de";
-        $_SESSION['language'] = "en";
-        $this->assertEquals("de", getSystemLanguage());
+        $_SESSION["system_language"] = 'de';
+        $_SESSION['language'] = 'en';
+        $this->assertEquals('de', getSystemLanguage());
     }
 
     public function testGetSystemLanguageReturnsFrontendLanguageFromSession()
     {
-        $_SESSION['language'] = "en";
-        $this->assertEquals("en", getSystemLanguage());
+        $_SESSION['language'] = 'en';
+        $this->assertEquals('en', getSystemLanguage());
     }
 
     public function testGetSystemLanguageReturnsSystemLanguageFromSetting()
@@ -955,8 +955,8 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         }
 
         $system_language = Settings::get("system_language");
-        Settings::set("system_language", "en");
-        $this->assertEquals("en", getSystemLanguage());
+        Settings::set("system_language", 'en');
+        $this->assertEquals('en', getSystemLanguage());
 
         Settings::set("system_language", $system_language);
     }
@@ -967,7 +967,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
 
         Settings::delete("system_language");
 
-        $this->assertEquals("de", getSystemLanguage());
+        $this->assertEquals('de', getSystemLanguage());
 
         Settings::set("system_language", $system_language);
     }

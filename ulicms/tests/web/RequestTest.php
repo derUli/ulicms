@@ -6,7 +6,7 @@ class RequestTest extends \PHPUnit\Framework\TestCase
 {
     protected function tearDown(): void
     {
-        require_once getLanguageFilePath("en");
+        require_once getLanguageFilePath('en');
         unset($_SERVER["HTTP_HOST"]);
         unset($_SERVER["HTTP_REFERRER"]);
         unset($_SERVER["HTTP_USER_AGENT"]);

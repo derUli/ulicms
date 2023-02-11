@@ -13,7 +13,7 @@ class GroupTest extends \PHPUnit\Framework\TestCase
             $this->savedSettings[$setting] = Settings::get($setting);
         }
 
-        require_once getLanguageFilePath("en");
+        require_once getLanguageFilePath('en');
     }
 
     protected function tearDown(): void

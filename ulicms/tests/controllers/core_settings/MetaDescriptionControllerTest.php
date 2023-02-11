@@ -27,7 +27,7 @@ class MetaDescriptionControllerTest extends \PHPUnit\Framework\TestCase
     {
         $_POST["meta_description_de"] = "Die Meta Beschreibung";
         $_POST["meta_description_en"] = "The Meta Description";
-        Settings::set("default_language", "en");
+        Settings::set("default_language", 'en');
 
         $controller = new MetaDescriptionController();
         $controller->_savePost();

@@ -47,7 +47,7 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase
         $this->maxFailedLoginItems = Settings::get("max_failed_logins_items");
 
         TwoFactorAuthentication::disable();
-        require_once getLanguageFilePath("en");
+        require_once getLanguageFilePath('en');
     }
 
     protected function tearDown(): void

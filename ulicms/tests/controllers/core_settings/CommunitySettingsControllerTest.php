@@ -28,7 +28,7 @@ class CommunitySettingsControllerTest extends \PHPUnit\Framework\TestCase
         $_POST["comments_must_be_approved"] = "1";
         $_POST["commentable_content_types"] = ["page", "article"];
 
-        Settings::set("default_language", "en");
+        Settings::set("default_language", 'en');
 
         $controller = new CommunitySettingsController();
         $controller->_savePost();
@@ -50,7 +50,7 @@ class CommunitySettingsControllerTest extends \PHPUnit\Framework\TestCase
 
     public function testSavePostShoulDelete(): void
     {
-        Settings::set("default_language", "en");
+        Settings::set("default_language", 'en');
 
         $controller = new CommunitySettingsController();
         $controller->_savePost();

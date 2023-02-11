@@ -16,7 +16,7 @@ class Page extends Content
     public $target = "_self";
     public $category_id = 1;
     public $content = "";
-    public $language = "de";
+    public $language = 'de';
     public $menu_image = null;
     public $active = 1;
     public $approved = 1;

@@ -107,14 +107,14 @@ class PackageManager
         $themes = [];
         $templateDir = Path::resolve(
             "ULICMS_ROOT/content/templates"
-        ) . "/";
+        ) . '/';
 
         $folders = scanDir($templateDir);
         natcasesort($folders);
 
         $foldersCount = count($folders);
         for ($i = 0; $i < $foldersCount; $i++) {
-            $f = $templateDir . $folders[$i] . "/";
+            $f = $templateDir . $folders[$i] . '/';
             if (is_dir($templateDir . $folders[$i]) && !str_starts_with($folders[$i], ".")) {
                 array_push($themes, $folders[$i]);
             }

@@ -4,7 +4,7 @@ class HomeControllerTest extends \PHPUnit\Framework\TestCase
 {
     protected function setUp(): void
     {
-        require_once getLanguageFilePath("en");
+        require_once getLanguageFilePath('en');
         Settings::set("installed_at", "1495362918");
 
         $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";

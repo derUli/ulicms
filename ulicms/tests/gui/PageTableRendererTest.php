@@ -7,7 +7,7 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase
 {
     protected function setUp(): void
     {
-        include_once getLanguageFilePath("en");
+        include_once getLanguageFilePath('en');
     }
 
     public function testGetDataReturns3Items()
@@ -75,7 +75,7 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase
         $allData = $allDataRenderer->getData(0, 20, 123, "");
 
         $german = new Language();
-        $german->loadByLanguageCode("de");
+        $german->loadByLanguageCode('de');
 
         $group = new Group();
         $group->setLanguages([$german]);
@@ -107,7 +107,7 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase
 
         $withoutLanguageFilter = $renderer->getData(0, 20, 123, "", $filters);
 
-        $filters['language'] = "de";
+        $filters['language'] = 'de';
         $data = $renderer->getData(0, 20, 123, "", $filters);
 
         $this->assertLessThan(
@@ -156,7 +156,7 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase
 
         $renderer = new PageTableRenderer($user);
 
-        $parentPage = ContentFactory::getBySlugAndLanguage("modules", "en");
+        $parentPage = ContentFactory::getBySlugAndLanguage("modules", 'en');
 
         $data = $renderer->getData(
             0,

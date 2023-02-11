@@ -29,7 +29,7 @@ class SimpleSettingsControllerTest extends \PHPUnit\Framework\TestCase
     {
         return [
             "homepage_owner" => "Jane Doe",
-            'language' => "en",
+            'language' => 'en',
             "visitors_can_register" => "1",
             'maintenance_mode' => "1",
             "email" => "foobar@example.org",
@@ -52,7 +52,7 @@ class SimpleSettingsControllerTest extends \PHPUnit\Framework\TestCase
         );
 
         $this->assertEquals(
-            "en",
+            'en',
             Settings::get('language')
         );
 
@@ -99,7 +99,7 @@ class SimpleSettingsControllerTest extends \PHPUnit\Framework\TestCase
         );
 
         $this->assertEquals(
-            "en",
+            'en',
             Settings::get('language')
         );
 

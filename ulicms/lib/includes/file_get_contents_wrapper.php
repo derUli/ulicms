@@ -54,7 +54,7 @@ function file_get_contents_wrapper(
     }
     $cache_name = md5($url);
     $cache_folder = PATH::resolve("ULICMS_CACHE");
-    $cache_path = $cache_folder . "/" . $cache_name;
+    $cache_path = $cache_folder . '/' . $cache_name;
     if (is_file($cache_path) && is_url($url) && !$no_cache) {
         $content = file_get_contents($cache_path);
         return is_string($content) ? $content : null;

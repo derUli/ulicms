@@ -13,7 +13,7 @@ class ModulePageTest extends \PHPUnit\Framework\TestCase
         $modulePage->title = "Unit Test Article";
         $modulePage->slug = "unit test";
         $modulePage->menu = "none";
-        $modulePage->language = "de";
+        $modulePage->language = 'de';
         $modulePage->article_date = 1413821696;
         $modulePage->author_id = 1;
         $modulePage->group_id = 1;
@@ -37,7 +37,7 @@ class ModulePageTest extends \PHPUnit\Framework\TestCase
         $modulePage->title = "Unit Test Article";
         $modulePage->slug = "unit test";
         $modulePage->menu = "none";
-        $modulePage->language = "de";
+        $modulePage->language = 'de';
         $modulePage->article_date = 1413821696;
         $modulePage->author_id = 1;
         $modulePage->group_id = 1;
@@ -54,7 +54,7 @@ class ModulePageTest extends \PHPUnit\Framework\TestCase
         $modulePage->title = "Unit Test Article";
         $modulePage->slug = "unit test";
         $modulePage->menu = "none";
-        $modulePage->language = "de";
+        $modulePage->language = 'de';
         $modulePage->article_date = 1413821696;
         $modulePage->author_id = 1;
         $modulePage->group_id = 1;
@@ -83,7 +83,7 @@ class ModulePageTest extends \PHPUnit\Framework\TestCase
         $modulePage->title = "Unit Test Article";
         $modulePage->slug = "unit test";
         $modulePage->menu = "none";
-        $modulePage->language = "de";
+        $modulePage->language = 'de';
         $modulePage->article_date = 1413821696;
         $modulePage->author_id = 1;
         $modulePage->group_id = 1;

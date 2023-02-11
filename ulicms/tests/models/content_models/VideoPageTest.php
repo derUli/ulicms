@@ -13,7 +13,7 @@ class VideoPageTest extends \PHPUnit\Framework\TestCase
         $videoPage->title = "Unit Test Article";
         $videoPage->slug = "unit test";
         $videoPage->menu = "none";
-        $videoPage->language = "de";
+        $videoPage->language = 'de';
         $videoPage->article_date = 1413821696;
         $videoPage->author_id = 1;
         $videoPage->group_id = 1;

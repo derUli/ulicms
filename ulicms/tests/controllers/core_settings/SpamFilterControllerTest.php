@@ -42,7 +42,7 @@ class SpamFilterControllerTest extends \PHPUnit\Framework\TestCase
             "min_time_to_fill_form" => "3"
         ];
 
-        Settings::set("default_language", "en");
+        Settings::set("default_language", 'en');
 
         $controller = new SpamFilterController();
         $controller->_savePost();
@@ -91,7 +91,7 @@ class SpamFilterControllerTest extends \PHPUnit\Framework\TestCase
             "spamfilter_enabled" => "no"
         ];
 
-        Settings::set("default_language", "en");
+        Settings::set("default_language", 'en');
 
         $controller = new SpamFilterController();
         $controller->_savePost();

@@ -63,7 +63,7 @@ class ActionRegistryTest extends \PHPUnit\Framework\TestCase
         $this->assertStringEndsWith("content/modules/core_content/templates/contents.php", $actions["contents"]);
         foreach (array_values($actions) as $file) {
             $this->assertFileExists($file);
-            $this->assertStringContainsString("content/modules/", $file);
+            $this->assertStringContainsString('content/modules/', $file);
         }
     }
 

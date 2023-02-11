@@ -71,7 +71,7 @@ function minifyJs(): string
     // TODO: Methode erstellen: getLatestMtime()
     // returns the updated timestamp of the last changed file
     foreach ($scripts as $script) {
-        $script = ltrim($script, "/");
+        $script = ltrim($script, '/');
         if (is_file($script)
                 and pathinfo($script, PATHINFO_EXTENSION) == "js"
                 and filemtime($script) > $lastmod) {
@@ -94,7 +94,7 @@ function minifyJs(): string
     $output = "";
     if (!is_file($bundleFile)) {
         foreach ($scripts as $script) {
-            $script = ltrim($script, "/");
+            $script = ltrim($script, '/');
             if (is_file($script)
                     and pathinfo($script, PATHINFO_EXTENSION) == "js") {
                 $minifier->add($script);
@@ -119,7 +119,7 @@ function minifyCSS(): string
     // TODO: Methode erstellen: getLatestMtime()
     // returns the updated timestamp of the last changed file
     foreach ($stylesheets as $stylesheet) {
-        $stylesheet = ltrim($stylesheet, "/");
+        $stylesheet = ltrim($stylesheet, '/');
         $type = pathinfo($stylesheet, PATHINFO_EXTENSION);
         if (is_file($stylesheet) && ($type == "css" or $type == "scss")
                 and filemtime($stylesheet) > $lastmod) {
@@ -144,7 +144,7 @@ function minifyCSS(): string
 
     if (!is_file($bundleFile)) {
         foreach ($stylesheets as $stylesheet) {
-            $stylesheet = ltrim($stylesheet, "/");
+            $stylesheet = ltrim($stylesheet, '/');
             $type = pathinfo($stylesheet, PATHINFO_EXTENSION);
             if (is_file($stylesheet) and $type == "css") {
                 $minifier->add($stylesheet);

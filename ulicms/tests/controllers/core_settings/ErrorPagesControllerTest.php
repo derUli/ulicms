@@ -27,12 +27,12 @@ class ErrorPagesControllerTest extends \PHPUnit\Framework\TestCase
     {
         $_POST["error_page"] = [
             "403" => [
-                "de" => "12",
-                "en" => "34"
+                'de' => "12",
+                'en' => "34"
             ],
             "404" => [
-                "de" => "56",
-                "en" => "78"
+                'de' => "56",
+                'en' => "78"
             ]
         ];
 
@@ -64,12 +64,12 @@ class ErrorPagesControllerTest extends \PHPUnit\Framework\TestCase
     {
         $_POST["error_page"] = [
             "403" => [
-                "de" => "12",
-                "en" => 0
+                'de' => "12",
+                'en' => 0
             ],
             "404" => [
-                "de" => "56",
-                "en" => 0
+                'de' => "56",
+                'en' => 0
             ]
         ];
 

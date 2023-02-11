@@ -137,10 +137,10 @@ if (isset($_GET['action'])) {
             }
             if ($ftp) {
                 $path = $config['ftp_base_url'].$config['upload_dir'] . $_POST['path'];
-                $base_folder = $config['ftp_base_url'].$config['upload_dir'] . fix_dirname($_POST['path']) . "/";
+                $base_folder = $config['ftp_base_url'].$config['upload_dir'] . fix_dirname($_POST['path']) . '/';
             } else {
                 $path = $config['current_path'] . $_POST['path'];
-                $base_folder = $config['current_path'] . fix_dirname($_POST['path']) . "/";
+                $base_folder = $config['current_path'] . fix_dirname($_POST['path']) . '/';
             }
 
             $info = pathinfo($path);
@@ -154,7 +154,7 @@ if (isset($_GET['action'])) {
                 fwrite($handle, file_get_contents($path));
                 fclose($handle);
                 $path = $temp;
-                $base_folder = $tempDir . "/";
+                $base_folder = $tempDir . '/';
             }
 
             $info = pathinfo($path);
@@ -179,11 +179,11 @@ if (isset($_GET['action'])) {
                             $FullFileName = $zip->statIndex($i);
 
                             if (checkRelativePath($FullFileName['name'])) {
-                                if (substr($FullFileName['name'], -1, 1) == "/") {
+                                if (substr($FullFileName['name'], -1, 1) == '/') {
                                     create_folder($base_folder . $FullFileName['name']);
                                 }
 
-                                if (! (substr($FullFileName['name'], -1, 1) == "/")) {
+                                if (! (substr($FullFileName['name'], -1, 1) == '/')) {
                                     $fileinfo = pathinfo($FullFileName['name']);
                                     if (in_array(strtolower($fileinfo['extension']), $config['ext'])) {
                                         copy('zip://' . $path . '#' . $FullFileName['name'], $base_folder . $FullFileName['name']);
@@ -222,7 +222,7 @@ if (isset($_GET['action'])) {
 
             if ($ftp) {
                 unlink($path);
-                $ftp->putAll($base_folder, "/".$config['ftp_base_folder'] . $config['upload_dir'] . fix_dirname($_POST['path']), FTP_BINARY);
+                $ftp->putAll($base_folder, '/'.$config['ftp_base_folder'] . $config['upload_dir'] . fix_dirname($_POST['path']), FTP_BINARY);
                 deleteDir($base_folder);
             }
 

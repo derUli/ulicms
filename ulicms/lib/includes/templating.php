@@ -53,15 +53,15 @@ function get_og_tags(?string $slug = null): string
         }
 
         if (!empty($og_image) && !str_starts_with($og_image, "http")) {
-            $og_image = ModuleHelper::getBaseUrl() . ltrim($og_image, "/");
+            $og_image = ModuleHelper::getBaseUrl() . ltrim($og_image, '/');
         }
         $page = get_page($slug);
         if (empty($og_image) &&
                 !StringHelper::isNullOrWhitespace($page["article_image"])) {
-            $og_image = ltrim($page["article_image"], "/");
+            $og_image = ltrim($page["article_image"], '/');
         }
         if (!empty($og_image) && !str_starts_with($og_image, "http")) {
-            $og_image = ModuleHelper::getBaseUrl() . ltrim($og_image, "/");
+            $og_image = ModuleHelper::getBaseUrl() . ltrim($og_image, '/');
         }
         if (is_null($og_description) or empty($og_description)) {
             $og_description = get_meta_description();

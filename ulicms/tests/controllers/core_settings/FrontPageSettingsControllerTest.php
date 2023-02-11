@@ -27,7 +27,7 @@ class FrontPageSettingsControllerTest extends \PHPUnit\Framework\TestCase
     {
         $_POST["frontpage_de"] = "willkommen";
         $_POST["frontpage_en"] = "welcome";
-        Settings::set("default_language", "en");
+        Settings::set("default_language", 'en');
 
         $controller = new FrontPageSettingsController();
         $controller->_savePost();

@@ -13,7 +13,7 @@ class LinkTest extends \PHPUnit\Framework\TestCase
         $link->title = "Unit Test Link";
         $link->slug = "unit_test_" . uniqid();
         $link->menu = "none";
-        $link->language = "de";
+        $link->language = 'de';
         $link->author_id = 1;
         $link->group_id = 1;
         $link->link_url = "https://www.google.de";
@@ -27,7 +27,7 @@ class LinkTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("Unit Test Link", $loadedLink->title);
         $this->assertStringStartsWith("unit_test_", $loadedLink->slug);
         $this->assertEquals("none", $loadedLink->menu);
-        $this->assertEquals("de", $loadedLink->language);
+        $this->assertEquals('de', $loadedLink->language);
         $this->assertEquals(
             "https://www.google.de",
             $loadedLink->link_url
@@ -51,7 +51,7 @@ class LinkTest extends \PHPUnit\Framework\TestCase
         $link->title = "Unit Test Link";
         $link->slug = "unit_test_" . uniqid();
         $link->menu = "none";
-        $link->language = "de";
+        $link->language = 'de';
         $link->author_id = 1;
         $link->group_id = 1;
         $link->link_url = "https://www.google.de";

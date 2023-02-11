@@ -35,8 +35,8 @@ setLocaleByLanguage();
 
 if (in_array($_SESSION['language'], $languages) && is_file(getLanguageFilePath($_SESSION['language']))) {
     require_once getLanguageFilePath($_SESSION['language']);
-} elseif (is_file(getLanguageFilePath("en"))) {
-    require getLanguageFilePath("en");
+} elseif (is_file(getLanguageFilePath('en'))) {
+    require getLanguageFilePath('en');
 }
 
 Translation::loadAllModuleLanguageFiles($_SESSION['language']);

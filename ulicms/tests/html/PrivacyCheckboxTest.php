@@ -37,8 +37,8 @@ class PrivacyCheckboxTest extends \PHPUnit\Framework\TestCase
     public function testIsEnabled()
     {
         $languages = array(
-            "de",
-            "en"
+            'de',
+            'en'
         );
         foreach ($languages as $language) {
             Settings::set("privacy_policy_checkbox_enable_{$language}", 1);
@@ -52,12 +52,12 @@ class PrivacyCheckboxTest extends \PHPUnit\Framework\TestCase
     public function testRender()
     {
         $values = array(
-            "de" => '<div class="checkbox"><label>[checkbox] Lorem Ipsum</label></div>',
-            "en" => '<div class="checkbox"><label>[checkbox] Sit dor amet</label></div>'
+            'de' => '<div class="checkbox"><label>[checkbox] Lorem Ipsum</label></div>',
+            'en' => '<div class="checkbox"><label>[checkbox] Sit dor amet</label></div>'
         );
         $expectedResults = array(
-            "de" => '<div class="checkbox"><label><input type="checkbox" name="accept_privacy_policy" value="✔" required="required" id="accept_privacy_policy"> Lorem Ipsum</label></div>',
-            "en" => '<div class="checkbox"><label><input type="checkbox" name="accept_privacy_policy" value="✔" required="required" id="accept_privacy_policy"> Sit dor amet</label></div>'
+            'de' => '<div class="checkbox"><label><input type="checkbox" name="accept_privacy_policy" value="✔" required="required" id="accept_privacy_policy"> Lorem Ipsum</label></div>',
+            'en' => '<div class="checkbox"><label><input type="checkbox" name="accept_privacy_policy" value="✔" required="required" id="accept_privacy_policy"> Sit dor amet</label></div>'
         );
         foreach ($values as $language => $html) {
             Settings::delete("privacy_policy_checkbox_text_{$language}");
@@ -74,7 +74,7 @@ class PrivacyCheckboxTest extends \PHPUnit\Framework\TestCase
 
     public function testIsCheckboxCheckedPost()
     {
-        $checkbox = new PrivacyCheckbox("en");
+        $checkbox = new PrivacyCheckbox('en');
         $this->assertFalse($checkbox->isChecked());
         $_POST[PrivacyCheckbox::CHECKBOX_NAME] = "1";
         $this->assertTrue($checkbox->isChecked());
@@ -83,7 +83,7 @@ class PrivacyCheckboxTest extends \PHPUnit\Framework\TestCase
 
     public function testIsCheckboxCheckedGet()
     {
-        $checkbox = new PrivacyCheckbox("en");
+        $checkbox = new PrivacyCheckbox('en');
         $this->assertFalse($checkbox->isChecked());
         $_GET[PrivacyCheckbox::CHECKBOX_NAME] = "1";
         $this->assertTrue($checkbox->isChecked());

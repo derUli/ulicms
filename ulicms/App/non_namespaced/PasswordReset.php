@@ -44,11 +44,11 @@ class PasswordReset
     public function getPasswordResetLink(string $token): string
     {
         $url = getBaseFolderURL();
-        $url = rtrim($url, "/");
+        $url = rtrim($url, '/');
         if (!is_admin_dir()) {
             $url .= "/admin";
         }
-        $url .= "/" . ModuleHelper::buildMethodCallUrl(
+        $url .= '/' . ModuleHelper::buildMethodCallUrl(
             SessionManager::class,
             "resetPassword",
             "token=$token"

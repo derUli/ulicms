@@ -100,28 +100,28 @@ class BannersTest extends \PHPUnit\Framework\TestCase
         $banner1->setType("html");
         $banner1->setHtml(self::HTML_TEXT1);
         $banner1->setCategoryId($category1->getID());
-        $banner1->setLanguage("en");
+        $banner1->setLanguage('en');
         $banner1->save();
 
         $banner2 = new Banner();
         $banner2->setType("html");
         $banner2->setHtml(self::HTML_TEXT1);
         $banner2->setCategoryId($category1->getID());
-        $banner2->setLanguage("de");
+        $banner2->setLanguage('de');
         $banner2->save();
 
-        $germanBanners = Banners::getByLanguage("de");
+        $germanBanners = Banners::getByLanguage('de');
 
         $this->assertGreaterThanOrEqual(1, count($germanBanners));
         foreach ($germanBanners as $banner) {
-            $this->assertEquals("de", $banner->getLanguage());
+            $this->assertEquals('de', $banner->getLanguage());
         }
 
-        $englishBanners = Banners::getByLanguage("en");
+        $englishBanners = Banners::getByLanguage('en');
         $this->assertGreaterThanOrEqual(1, count($englishBanners));
 
         foreach ($englishBanners as $banner) {
-            $this->assertEquals("en", $banner->getLanguage());
+            $this->assertEquals('en', $banner->getLanguage());
         }
     }
 
@@ -138,7 +138,7 @@ class BannersTest extends \PHPUnit\Framework\TestCase
 
     public function testGetRandom()
     {
-        $_SESSION['language'] = "de";
+        $_SESSION['language'] = 'de';
 
         for ($i = 1; $i < 5; $i++) {
             $banner = new Banner();

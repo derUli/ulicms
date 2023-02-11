@@ -8,7 +8,7 @@ class DateTimeFieldTest extends \PHPUnit\Framework\TestCase
 
     protected function setUp(): void
     {
-        include_once getLanguageFilePath("en");
+        include_once getLanguageFilePath('en');
     }
 
     public function testRender()

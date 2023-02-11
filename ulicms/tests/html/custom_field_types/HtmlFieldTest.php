@@ -10,7 +10,7 @@ class HtmlFieldTest extends \PHPUnit\Framework\TestCase
 
     protected function setUp(): void
     {
-        include_once getLanguageFilePath("en");
+        include_once getLanguageFilePath('en');
 
         $user = new User();
         $user->setUsername("testuser-nicht-admin");

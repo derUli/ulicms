@@ -13,7 +13,7 @@ class ArticleTest extends \PHPUnit\Framework\TestCase
         $article->title = "Unit Test Article";
         $article->slug = "unit test";
         $article->menu = "none";
-        $article->language = "de";
+        $article->language = 'de';
         $article->article_date = 1413821696;
         $article->author_id = 1;
         $article->group_id = 1;
@@ -35,7 +35,7 @@ class ArticleTest extends \PHPUnit\Framework\TestCase
         $article->title = "Unit Test Article";
         $article->slug = "unit test";
         $article->menu = "none";
-        $article->language = "de";
+        $article->language = 'de';
         $article->article_date = '2019-04-07';
         $article->author_id = 1;
         $article->group_id = 1;

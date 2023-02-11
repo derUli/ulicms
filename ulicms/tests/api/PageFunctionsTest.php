@@ -65,13 +65,13 @@ class PageFunctionsTest extends \PHPUnit\Framework\TestCase
 
     public function testGetAllSlugsByLanguage()
     {
-        $germanSlugs = getAllSlugs("de");
+        $germanSlugs = getAllSlugs('de');
         $this->assertTrue(in_array("willkommen", $germanSlugs));
         $this->assertFalse(in_array("welcome", $germanSlugs));
         $this->assertTrue(in_array("glueckskeks", $germanSlugs));
         $this->assertFalse(in_array("fortune", $germanSlugs));
 
-        $englishSlugs = getAllSlugs("en");
+        $englishSlugs = getAllSlugs('en');
         $this->assertTrue(in_array("welcome", $englishSlugs));
         $this->assertFalse(in_array("willkommen", $englishSlugs));
         $this->assertTrue(in_array("fortune", $englishSlugs));
@@ -112,14 +112,14 @@ class PageFunctionsTest extends \PHPUnit\Framework\TestCase
 
     public function testGetAllPagesByLanguage()
     {
-        $pages = getAllPages("en", "id");
+        $pages = getAllPages('en', "id");
         $this->assertGreaterThan(0, count($pages));
 
         $oldPageId = 0;
         foreach ($pages as $page) {
             $this->assertGreaterThan($oldPageId, $page["id"]);
             $oldPageId = $page["id"];
-            $this->assertEquals("en", $page['language']);
+            $this->assertEquals('en', $page['language']);
         }
     }
 
@@ -138,7 +138,7 @@ class PageFunctionsTest extends \PHPUnit\Framework\TestCase
 
     public function testGetAllPagesByLanguageAndMenu()
     {
-        $pages = getAllPages("en", "id", false, "top");
+        $pages = getAllPages('en', "id", false, "top");
         $this->assertGreaterThan(0, count($pages));
 
         $oldPageId = 0;
@@ -146,7 +146,7 @@ class PageFunctionsTest extends \PHPUnit\Framework\TestCase
             $this->assertGreaterThan($oldPageId, $page["id"]);
             $oldPageId = $page["id"];
             $this->assertEquals("top", $page["menu"]);
-            $this->assertEquals("en", $page['language']);
+            $this->assertEquals('en', $page['language']);
         }
     }
 }

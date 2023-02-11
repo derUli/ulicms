@@ -18,8 +18,8 @@ include_once "controllers/InstallerController.php";
 InstallerController::initSessionVars();
 if (isset($_GET['language'])) {
     $languages = array(
-        "de",
-        "en"
+        'de',
+        'en'
     );
     if (in_array($_GET['language'], $languages)) {
         $_SESSION['language'] = $_GET['language'];

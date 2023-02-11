@@ -63,7 +63,7 @@ class PagePermissionsTest extends \PHPUnit\Framework\TestCase
         $page = new Page();
         $page->slug = "page_permission_test";
         $page->title = "Page Permission Test";
-        $page->language = "en";
+        $page->language = 'en';
 
         $manager = new UserManager();
         $users = $manager->getAllUsers();
@@ -88,7 +88,7 @@ class PagePermissionsTest extends \PHPUnit\Framework\TestCase
         $page->save();
 
         $page2 = new Page();
-        $page2->loadBySlugAndLanguage("page_permission_test", "en");
+        $page2->loadBySlugAndLanguage("page_permission_test", 'en');
         $this->assertEquals("Page Permission Test", $page2->title);
         $this->assertTrue($page->getPermissions()
                         ->getEditRestriction("owner"));

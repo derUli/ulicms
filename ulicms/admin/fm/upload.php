@@ -32,7 +32,7 @@ try {
         return;
     }
 
-    $fldr = rawurldecode(trim(strip_tags($_POST['fldr']), "/") . "/");
+    $fldr = rawurldecode(trim(strip_tags($_POST['fldr']), '/') . '/');
 
     if (!checkRelativePath($fldr)) {
         response(trans('wrong path') . AddErrorLocation())->send();

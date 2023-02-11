@@ -4,8 +4,8 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase
 {
     protected function setUp(): void
     {
-        $_SESSION['language'] = "en";
-        require_once getLanguageFilePath("en");
+        $_SESSION['language'] = 'en';
+        require_once getLanguageFilePath('en');
         $_SERVER = [];
         $_SERVER["REQUEST_URI"] = "/other-url.html?param=value";
     }
@@ -25,7 +25,7 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase
         $page->title = "Unit Test " . uniqid();
         $page->slug = "unit-test-" . uniqid();
         $page->menu = "none";
-        $page->language = "de";
+        $page->language = 'de';
         $page->article_date = 1413821696;
         $page->author_id = 1;
         $page->group_id = 1;
@@ -86,18 +86,18 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase
 
     public function testGetFirstPageWithModule()
     {
-        $_SESSION['language'] = "de";
+        $_SESSION['language'] = 'de';
         $this->assertEquals(6, ModuleHelper::getFirstPageWithModule()->id);
         $this->assertEquals(7, ModuleHelper::getFirstPageWithModule("pfbc_sample")->id);
         $this->assertEquals(6, ModuleHelper::getFirstPageWithModule("fortune2")->id);
-        $this->assertEquals(7, ModuleHelper::getFirstPageWithModule("pfbc_sample", "de")->id);
-        $this->assertEquals(6, ModuleHelper::getFirstPageWithModule("fortune2", "de")->id);
-        $this->assertEquals(14, ModuleHelper::getFirstPageWithModule("pfbc_sample", "en")->id);
-        $this->assertEquals(13, ModuleHelper::getFirstPageWithModule("fortune2", "en")->id);
-        $this->assertEquals(6, ModuleHelper::getFirstPageWithModule(null, "de")->id);
-        $this->assertEquals(13, ModuleHelper::getFirstPageWithModule(null, "en")->id);
+        $this->assertEquals(7, ModuleHelper::getFirstPageWithModule("pfbc_sample", 'de')->id);
+        $this->assertEquals(6, ModuleHelper::getFirstPageWithModule("fortune2", 'de')->id);
+        $this->assertEquals(14, ModuleHelper::getFirstPageWithModule("pfbc_sample", 'en')->id);
+        $this->assertEquals(13, ModuleHelper::getFirstPageWithModule("fortune2", 'en')->id);
+        $this->assertEquals(6, ModuleHelper::getFirstPageWithModule(null, 'de')->id);
+        $this->assertEquals(13, ModuleHelper::getFirstPageWithModule(null, 'en')->id);
 
-        $_SESSION['language'] = "en";
+        $_SESSION['language'] = 'en';
         $this->assertEquals(13, ModuleHelper::getFirstPageWithModule()->id);
         $this->assertEquals(14, ModuleHelper::getFirstPageWithModule("pfbc_sample")->id);
         $this->assertEquals(13, ModuleHelper::getFirstPageWithModule("fortune2")->id);
@@ -200,7 +200,7 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase
 
     public function testGetFullPageURLByID()
     {
-        $_SESSION['language'] = "de";
+        $_SESSION['language'] = 'de';
         $_SERVER['HTTP_HOST'] = "company.com";
         $this->assertEquals("http://company.com/willkommen", ModuleHelper::getFullPageURLByID(1));
 

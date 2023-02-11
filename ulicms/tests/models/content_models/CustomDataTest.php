@@ -5,7 +5,7 @@ class CustomDataTest extends \PHPUnit\Framework\TestCase
     protected function setUp(): void
     {
         $_GET["slug"] = "welcome";
-        $_SESSION['language'] = "en";
+        $_SESSION['language'] = 'en';
     }
 
     protected function tearDown(): void

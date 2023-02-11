@@ -202,7 +202,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(
             str_replace(
                 "\\",
-                "/",
+                '/',
                 ULICMS_ROOT
             ),
             getSCSSImportPaths()[0]

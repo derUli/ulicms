@@ -134,7 +134,7 @@ class ModelTest extends \PHPUnit\Framework\TestCase
     public function testReloadReturnsTrue()
     {
         $language = new Language();
-        $language->loadByLanguageCode("de");
+        $language->loadByLanguageCode('de');
 
         $language->setName("Germanisch");
         $this->assertEquals("Germanisch", $language->getName());

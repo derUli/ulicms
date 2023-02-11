@@ -46,7 +46,7 @@ combinedStylesheetHtml();
                 <?= jumbotron_get_menu("top"); ?>
             </nav>
             <h3 class="text-muted">
-                <a href="/">
+                <a href='/'>
                     <?php homepage_title(); ?></a>
             </h3>
 

@@ -12,14 +12,14 @@ class LanguageLinkTest extends \PHPUnit\Framework\TestCase
     private function getGermanLanguage()
     {
         $language = new Language();
-        $language->loadByLanguageCode("de");
+        $language->loadByLanguageCode('de');
         return $language;
     }
 
     private function getEnglishLanguage()
     {
         $language = new Language();
-        $language->loadByLanguageCode("en");
+        $language->loadByLanguageCode('en');
         return $language;
     }
 
@@ -29,7 +29,7 @@ class LanguageLinkTest extends \PHPUnit\Framework\TestCase
         $link->title = "Unit Test Link";
         $link->slug = "unit_test_" . uniqid();
         $link->menu = "none";
-        $link->language = "de";
+        $link->language = 'de';
         $link->author_id = 1;
         $link->group_id = 1;
         $link->link_to_language = $this->getGermanLanguage()->getId();
@@ -67,7 +67,7 @@ class LanguageLinkTest extends \PHPUnit\Framework\TestCase
         $link->title = "Unit Test Link";
         $link->slug = "unit_test_" . uniqid();
         $link->menu = "none";
-        $link->language = "de";
+        $link->language = 'de';
         $link->author_id = 1;
         $link->group_id = 1;
         $link->link_to_language = $this->getGermanLanguage()->getId();
@@ -92,7 +92,7 @@ class LanguageLinkTest extends \PHPUnit\Framework\TestCase
         $link = new Language_Link();
 
         $language = new Language();
-        $language->loadByLanguageCode("en");
+        $language->loadByLanguageCode('en');
 
         $this->assertNull($link->getLinkedLanguage());
 

@@ -31,7 +31,7 @@ class PermissionCheckerTest extends \PHPUnit\Framework\TestCase
         $group3->addPermission("files", true);
 
         $lang = new Language();
-        $lang->loadByLanguageCode("en");
+        $lang->loadByLanguageCode('en');
 
         $group3->setLanguages(array(
             $lang
@@ -131,7 +131,7 @@ class PermissionCheckerTest extends \PHPUnit\Framework\TestCase
         $language = $languages[0];
 
         $this->assertEquals(1, count($languages));
-        $this->assertEquals("en", $language->getLanguageCode());
+        $this->assertEquals('en', $language->getLanguageCode());
     }
 
     public function testHasPermissionWithoutUser()

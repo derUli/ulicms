@@ -21,7 +21,7 @@ class ListDataTest extends \PHPUnit\Framework\TestCase
         $this->assertLessThanOrEqual(4, count($contents));
 
         foreach ($contents as $content) {
-            $this->assertEquals("de", $content->language);
+            $this->assertEquals('de', $content->language);
             $this->assertEquals("top", $content->menu);
             $this->assertInstanceOf(Module_Page::class, $content);
         }
@@ -35,7 +35,7 @@ class ListDataTest extends \PHPUnit\Framework\TestCase
             $page->title = "Unit Test $i";
             $page->slug = uniqid();
             $page->menu = "top";
-            $page->language = "de";
+            $page->language = 'de';
             $page->content = "foo [csrf_token_html] bar";
             $page->author_id = 1;
             $page->group_id = 1;
@@ -54,7 +54,7 @@ class ListDataTest extends \PHPUnit\Framework\TestCase
 
         $contentList = $this->createContentList();
         $listData = new List_Data($contentList->getId());
-        $listData->language = "de";
+        $listData->language = 'de';
         $listData->limit = 5;
         $listData->category_id = $category->getID();
         $listData->use_pagination = true;
@@ -77,7 +77,7 @@ class ListDataTest extends \PHPUnit\Framework\TestCase
 
         $contentList = $this->createContentList();
         $listData = new List_Data($contentList->getId());
-        $listData->language = "de";
+        $listData->language = 'de';
         $listData->limit = 5;
         $listData->category_id = $category->getID();
         $listData->use_pagination = true;
@@ -111,7 +111,7 @@ class ListDataTest extends \PHPUnit\Framework\TestCase
 
         $contentList = $this->createContentList();
         $listData = new List_Data($contentList->getId());
-        $listData->language = "de";
+        $listData->language = 'de';
         $listData->limit = 5;
         $listData->category_id = $category->getID();
         $listData->use_pagination = true;
@@ -136,7 +136,7 @@ class ListDataTest extends \PHPUnit\Framework\TestCase
 
         $contentList = $this->createContentList();
         $listData = new List_Data($contentList->getId());
-        $listData->language = "de";
+        $listData->language = 'de';
         $listData->limit = 5;
         $listData->category_id = $category->getID();
         $listData->use_pagination = true;
@@ -176,7 +176,7 @@ class ListDataTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($loaded->isPersistent());
         $this->assertFalse($loaded->hasChanges());
 
-        $this->assertEquals("de", $loaded->language);
+        $this->assertEquals('de', $loaded->language);
         $this->assertEquals(1, $loaded->category_id);
         $this->assertEquals("not_in_menu", $loaded->menu);
         $this->assertEquals(5, $loaded->parent_id);
@@ -206,7 +206,7 @@ class ListDataTest extends \PHPUnit\Framework\TestCase
         $contentList->title = "Unit Test Article";
         $contentList->slug = "unit test";
         $contentList->menu = "none";
-        $contentList->language = "de";
+        $contentList->language = 'de';
         $contentList->article_date = 1413821696;
         $contentList->author_id = 1;
         $contentList->group_id = 1;
@@ -244,7 +244,7 @@ class ListDataTest extends \PHPUnit\Framework\TestCase
         $contentList->title = "Unit Test Article";
         $contentList->slug = "unit test";
         $contentList->menu = "none";
-        $contentList->language = "de";
+        $contentList->language = 'de';
         $contentList->article_date = 1413821696;
         $contentList->author_id = 1;
         $contentList->group_id = 1;
@@ -258,7 +258,7 @@ class ListDataTest extends \PHPUnit\Framework\TestCase
     private function createListData($contentId)
     {
         $listData = new List_Data($contentId);
-        $listData->language = "de";
+        $listData->language = 'de';
         $listData->category_id = 1;
         $listData->menu = "not_in_menu";
         $listData->parent_id = 5;

@@ -29,7 +29,7 @@ class VideoAndAudioPageTest extends \PHPUnit\Framework\TestCase
         $page = new Video_Page();
         $page->slug = "video_page_test";
         $page->title = "Video Page Test";
-        $page->language = "en";
+        $page->language = 'en';
         $page->author_id = $userId;
         $page->group_id = $groupId;
         $this->assertNull($page->getVideo());
@@ -65,7 +65,7 @@ class VideoAndAudioPageTest extends \PHPUnit\Framework\TestCase
         $page = new Audio_Page();
         $page->slug = "audio_page_test";
         $page->title = "Audio Page Test";
-        $page->language = "en";
+        $page->language = 'en';
         $page->author_id = $userId;
         $page->group_id = $groupId;
         $this->assertNull($page->getAudio());

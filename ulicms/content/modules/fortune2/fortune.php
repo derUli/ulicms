@@ -45,7 +45,7 @@ class Fortune extends MainClass
         } else {
             $lang = getCurrentLanguage(true);
         }
-        $fortuneDir = getModulePath($this->moduleName) . "cookies/" . $lang . "/";
+        $fortuneDir = getModulePath($this->moduleName) . "cookies/" . $lang . '/';
         if (!is_dir($fortuneDir)) {
             $fortuneDir = getModulePath($this->moduleName) . "cookies/en/";
         }

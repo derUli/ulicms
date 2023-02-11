@@ -20,8 +20,8 @@ do_event("after_set_language_by_domain");
 $syslang = getSystemLanguage();
 if (file_exists(getLanguageFilePath($syslang))) {
     require getLanguageFilePath($syslang);
-} elseif (file_exists(getLanguageFilePath("en"))) {
-    require getLanguageFilePath("en");
+} elseif (file_exists(getLanguageFilePath('en'))) {
+    require getLanguageFilePath('en');
 }
 Translation::loadAllModuleLanguageFiles($syslang);
 

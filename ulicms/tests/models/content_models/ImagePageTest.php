@@ -13,7 +13,7 @@ class ImagePageTest extends \PHPUnit\Framework\TestCase
         $imagePage->title = "Unit Test Link";
         $imagePage->slug = "unit_test_" . uniqid();
         $imagePage->menu = "none";
-        $imagePage->language = "de";
+        $imagePage->language = 'de';
         $imagePage->author_id = 1;
         $imagePage->group_id = 1;
         $imagePage->image_url = "foo.jpg";
@@ -27,7 +27,7 @@ class ImagePageTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("Unit Test Link", $loadedImagePage->title);
         $this->assertStringStartsWith("unit_test_", $loadedImagePage->slug);
         $this->assertEquals("none", $loadedImagePage->menu);
-        $this->assertEquals("de", $loadedImagePage->language);
+        $this->assertEquals('de', $loadedImagePage->language);
         $this->assertEquals(
             "foo.jpg",
             $loadedImagePage->image_url
@@ -51,7 +51,7 @@ class ImagePageTest extends \PHPUnit\Framework\TestCase
         $imagePage->title = "Unit Test Link";
         $imagePage->slug = "unit_test_" . uniqid();
         $imagePage->menu = "none";
-        $imagePage->language = "de";
+        $imagePage->language = 'de';
         $imagePage->author_id = 1;
         $imagePage->group_id = 1;
         $imagePage->image_url = "foo.jpg";

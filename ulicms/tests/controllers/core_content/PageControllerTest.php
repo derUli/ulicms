@@ -8,8 +8,8 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
 {
     protected function setUp(): void
     {
-        require_once getLanguageFilePath("en");
-        Translation::loadAllModuleLanguageFiles("en");
+        require_once getLanguageFilePath('en');
+        Translation::loadAllModuleLanguageFiles('en');
 
         $_SESSION = [];
         $_POST = [];
@@ -56,7 +56,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
     {
         $controller = ControllerRegistry::get(PageController::class);
         $this->assertTrue(
-            $controller->_checkIfSlugIsFree(uniqid(), "de", PHP_INT_MAX)
+            $controller->_checkIfSlugIsFree(uniqid(), 'de', PHP_INT_MAX)
         );
     }
 
@@ -64,16 +64,16 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
     {
         $controller = ControllerRegistry::get(PageController::class);
         $this->assertTrue(
-            $controller->_checkIfSlugIsFree("", "de", PHP_INT_MAX)
+            $controller->_checkIfSlugIsFree("", 'de', PHP_INT_MAX)
         );
     }
 
     public function testcheckIfSlugIsFreeReturnsFalse()
     {
-        $allSlugs = getAllSlugs("de");
+        $allSlugs = getAllSlugs('de');
         $controller = ControllerRegistry::get(PageController::class);
         $this->assertFalse(
-            $controller->_checkIfSlugIsFree($allSlugs[0], "de", PHP_INT_MAX)
+            $controller->_checkIfSlugIsFree($allSlugs[0], 'de', PHP_INT_MAX)
         );
     }
 
@@ -166,7 +166,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         $user = $manager->getAllUsers("admin desc")[0];
 
         $german = new Language();
-        $german->loadByLanguageCode("de");
+        $german->loadByLanguageCode('de');
 
         $group = new Group();
         $group->setLanguages([$german]);
@@ -196,7 +196,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
     {
         $controller = ControllerRegistry::get(PageController::class);
 
-        $parentIds = $controller->_getParentIds("en", "top");
+        $parentIds = $controller->_getParentIds('en', "top");
 
         $this->assertGreaterThanOrEqual(2, count($parentIds));
 
@@ -325,7 +325,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
             $pages[] = $page;
         }
 
-        $parentPage = ContentFactory::getBySlugAndLanguage("google", "en");
+        $parentPage = ContentFactory::getBySlugAndLanguage("google", 'en');
         $page = new Page();
         $page->title = 'Unit Test ' . time();
         $page->slug = "unit-test-4";
@@ -430,7 +430,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         $_POST["title"] = "Foobar";
         $_POST["position"] = "123";
         $_POST["menu"] = "top";
-        $_POST['language'] = "de";
+        $_POST['language'] = 'de';
 
         $controller = new PageController();
         $errors = $controller->_validateInput();
@@ -462,10 +462,10 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
 
     public function testGetParentSelection()
     {
-        $parent = ContentFactory::getBySlugAndLanguage("google", "en");
+        $parent = ContentFactory::getBySlugAndLanguage("google", 'en');
         $controller = new PageController();
         $output = $controller->_getParentSelection(
-            "en",
+            'en',
             "top",
             $parent->getId()
         );
@@ -483,17 +483,17 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
 
     public function testFilterParentPages()
     {
-        $parent = ContentFactory::getBySlugAndLanguage("google", "en");
+        $parent = ContentFactory::getBySlugAndLanguage("google", 'en');
         $controller = new PageController();
 
-        $output = $controller->_filterParentPages("en", "top", $parent->getID());
+        $output = $controller->_filterParentPages('en', "top", $parent->getID());
         $this->assertGreaterThanOrEqual(10, substr_count($output, "<option"));
     }
 
     public function testNextFreeSlugReturnsSlug()
     {
         $controller = new PageController();
-        $slug = $controller->_nextFreeSlug("ziemlich-neu", "de", 0);
+        $slug = $controller->_nextFreeSlug("ziemlich-neu", 'de', 0);
         $this->assertEquals("ziemlich-neu", $slug);
     }
 
@@ -502,7 +502,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         $this->createTestPages();
 
         $controller = new PageController();
-        $slug = $controller->_nextFreeSlug("unit-test", "de", 0);
+        $slug = $controller->_nextFreeSlug("unit-test", 'de', 0);
         $this->assertEquals("unit-test-4", $slug);
     }
 
@@ -549,7 +549,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         $_POST["content"] = "<p>Foo Content</p>";
         $_POST["position"] = "123";
         $_POST["menu"] = "not_in_menu";
-        $_POST['language'] = "de";
+        $_POST['language'] = 'de';
 
         $controller = new PageController();
         $content = $controller->_createPost();
@@ -568,7 +568,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         $_POST["content"] = "<p>Foo Content</p>";
         $_POST["position"] = "123";
         $_POST["menu"] = "not_in_menu";
-        $_POST['language'] = "de";
+        $_POST['language'] = 'de';
 
         $controller = new PageController();
         $content = $controller->_createPost();
@@ -604,7 +604,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
             $_POST["article_date"] = App\Helpers\NumberFormatHelper::timestampToSqlDate();
 
             $_POST["menu"] = "not_in_menu";
-            $_POST['language'] = "de";
+            $_POST['language'] = 'de';
             $_POST["active"] = "1";
             $_POST["access"] = ["all"];
 
@@ -627,7 +627,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         $_POST["content"] = "<p>Foo Content</p>";
         $_POST["position"] = "123";
         $_POST["menu"] = "not_in_menu";
-        $_POST['language'] = "de";
+        $_POST['language'] = 'de';
 
         $controller = new PageController();
         $success = $controller->_editPost();
@@ -647,7 +647,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         $_POST["content"] = "<p>Foo Content</p>";
         $_POST["position"] = "123";
         $_POST["menu"] = "not_in_menu";
-        $_POST['language'] = "de";
+        $_POST['language'] = 'de';
 
         $controller = new PageController();
         $success = $controller->_editPost();
@@ -669,7 +669,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
 
     public function testGetParentPageIdReturnsNull()
     {
-        $page = ContentFactory::getBySlugAndLanguage("links", "en");
+        $page = ContentFactory::getBySlugAndLanguage("links", 'en');
         $id = $page->getId();
 
         $controller = new PageController();

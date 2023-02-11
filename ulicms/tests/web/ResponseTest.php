@@ -6,10 +6,10 @@ class ResponseTest extends \PHPUnit\Framework\TestCase
 {
     protected function setUp(): void
     {
-        require_once getLanguageFilePath("en");
+        require_once getLanguageFilePath('en');
         $_SERVER["HTTP_HOST"] = "ulicms.de";
-        $_SERVER["REQUEST_URI"] = "/";
-        $_SESSION['language'] = "en";
+        $_SERVER["REQUEST_URI"] = '/';
+        $_SESSION['language'] = 'en';
     }
 
     protected function tearDown(): void

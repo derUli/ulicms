@@ -12,7 +12,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
 
     protected function setUp(): void
     {
-        Translation::loadAllModuleLanguageFiles("en");
+        Translation::loadAllModuleLanguageFiles('en');
         Vars::setNoCache(true);
 
         $settings = array(
@@ -37,7 +37,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         $_SESSION = [];
         $_GET = [];
 
-        require_once getLanguageFilePath("en");
+        require_once getLanguageFilePath('en');
     }
 
     protected function tearDown(): void
@@ -122,12 +122,12 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
 
     public function testGetOgHTMLPrefix()
     {
-        $_SESSION['language'] = "en";
+        $_SESSION['language'] = 'en';
         $this->assertEquals(
             "<html prefix=\"og: http://ogp.me/ns#\" lang=\"en\">",
             Template::getOgHTMLPrefix()
         );
-        $_SESSION['language'] = "de";
+        $_SESSION['language'] = 'de';
         $this->assertEquals(
             "<html prefix=\"og: http://ogp.me/ns#\" lang=\"de\">",
             Template::getOgHTMLPrefix()
@@ -202,22 +202,22 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
 
     public function testGetSiteSloganWithoutLanguage()
     {
-        $_SESSION['language'] = "de";
+        $_SESSION['language'] = 'de';
         $this->assertEquals("SiteSlogan Deutsch", Template::getSiteSlogan());
 
-        $_SESSION['language'] = "en";
+        $_SESSION['language'] = 'en';
         $this->assertEquals("SiteSlogan English", Template::getSiteSlogan());
     }
 
     public function testGetMottoWithoutLanguage()
     {
-        $_SESSION['language'] = "de";
+        $_SESSION['language'] = 'de';
         $this->assertEquals("SiteSlogan Deutsch", Template::getMotto());
     }
 
     public function testMottoWithoutLanguage()
     {
-        $_SESSION['language'] = "de";
+        $_SESSION['language'] = 'de';
 
         ob_start();
         Template::motto();
@@ -247,7 +247,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
     public function testGetContentReturnsContent()
     {
         $_GET["slug"] = "lorem_ipsum";
-        $_SESSION['language'] = "de";
+        $_SESSION['language'] = 'de';
         $_GET["REQUEST_URI"] = "/lorem_ipsum.html";
         $content = Template::getContent();
 
@@ -261,7 +261,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
     public function testContentOutputsContent()
     {
         $_GET["slug"] = "lorem_ipsum";
-        $_SESSION['language'] = "de";
+        $_SESSION['language'] = 'de';
         $_GET["REQUEST_URI"] = "/lorem_ipsum.html";
 
         ob_start();
@@ -277,7 +277,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
     public function testGetContentReturnsNotFound()
     {
         $_GET["slug"] = "gibts_nicht";
-        $_SESSION['language'] = "de";
+        $_SESSION['language'] = 'de';
         $_GET["REQUEST_URI"] = "/gibts_nicht.html";
 
         $content = Template::getContent();
@@ -414,7 +414,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         $page = new Page();
         $page->title = "Test Page " . time();
         $page->slug = "test-page-" . time();
-        $page->language = "de";
+        $page->language = 'de';
         $page->menu = "not_in_menu";
         $page->content = "<p>Wir schreiben das Jahr [year] des fliegenden " .
                 "Spaghettimonsters</p>";
@@ -435,7 +435,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
 
     public function testGetBodyClassesHome()
     {
-        $_SESSION['language'] = "de";
+        $_SESSION['language'] = 'de';
         $_GET["slug"] = get_frontpage();
         $this->assertMatchesRegularExpression(
             '/page-id-\d+ home page(.+)/',
@@ -448,7 +448,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
 
     public function testBodyClassesHome()
     {
-        $_SESSION['language'] = "de";
+        $_SESSION['language'] = 'de';
         $_GET["slug"] = get_frontpage();
 
         ob_start();
@@ -519,7 +519,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
 
     public function testGetBodyClassesError404()
     {
-        $_SESSION['language'] = "de";
+        $_SESSION['language'] = 'de';
         $_GET["slug"] = "gibts-nicht";
         $this->assertMatchesRegularExpression(
             '/error404 errorPage(.+)/',
@@ -532,7 +532,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
 
     public function testGetBodyClassesMobile()
     {
-        $_SESSION['language'] = "de";
+        $_SESSION['language'] = 'de';
         $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (iPhone; CPU iPhone OS 5_0" .
                 " like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) " .
                 "Version/5.1 Mobile/9A334 Safari/7534.48.3";
@@ -551,7 +551,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
 
     public function testGetBodyClassesDesktop()
     {
-        $_SESSION['language'] = "de";
+        $_SESSION['language'] = 'de';
         $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (Windows NT 6.1;" .
                 " Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)" .
                 " Chrome/63.0.3239.132 Safari/537.36";
@@ -570,7 +570,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
 
     public function testGetBodyClassesContainsModule()
     {
-        $_SESSION['language'] = "de";
+        $_SESSION['language'] = 'de';
         $_GET["slug"] = ModuleHelper::getFirstPageWithModule()->slug;
         $this->assertMatchesRegularExpression(
             '/page-id-\d+ (.+)containsModule/',
@@ -594,7 +594,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
 
     public function testOgHTMLPrefix()
     {
-        $_SESSION['language'] = "en";
+        $_SESSION['language'] = 'en';
 
         ob_start();
         Template::OgHTMLPrefix();
@@ -603,7 +603,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
             ob_get_clean()
         );
 
-        $_SESSION['language'] = "de";
+        $_SESSION['language'] = 'de';
         ob_start();
         Template::OgHTMLPrefix();
         $this->assertEquals(
@@ -616,7 +616,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
     public function testGetBaseMetasForNonExistingPage()
     {
         $_GET["slug"] = "gibts_echt_nicht";
-        $_SESSION['language'] = "de";
+        $_SESSION['language'] = 'de';
 
         $this->assertNotEmpty(Template::getBaseMetas());
     }
@@ -631,7 +631,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
     public function testGetHeadlineNotFound()
     {
         $_GET["slug"] = "gibts_echt_nicht";
-        $_SESSION['language'] = "de";
+        $_SESSION['language'] = 'de';
 
         $this->assertEquals(
             "<h2>Page not found</h2>",
@@ -653,7 +653,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         $page = new Page();
         $page->title = "Test Page " . time();
         $page->slug = "test-page-" . time();
-        $page->language = "de";
+        $page->language = 'de';
         $page->menu = "not_in_menu";
         $page->content = "<p>Wir schreiben das Jahr [year] des fliegenden " .
                 "Spaghettimonsters</p>";
@@ -682,7 +682,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         $page = new Page();
         $page->title = "Titel";
         $page->slug = "test-page-" . time();
-        $page->language = "de";
+        $page->language = 'de';
         $page->menu = "not_in_menu";
         $page->content = "<p>Wir schreiben das Jahr [year] des fliegenden " .
                 "Spaghettimonsters</p>";
@@ -711,7 +711,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         $page->title = "Titel";
         $page->alternate_title = "Alternative Überschrift";
         $page->slug = "test-page-" . time();
-        $page->language = "de";
+        $page->language = 'de';
         $page->menu = "not_in_menu";
         $page->content = "<p>Wir schreiben das Jahr [year] des fliegenden " .
                 "Spaghettimonsters</p>";
@@ -746,7 +746,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
     public function testComments()
     {
         $_GET["slug"] = "gibts_echt_nicht";
-        $_SESSION['language'] = "de";
+        $_SESSION['language'] = 'de';
 
         ob_start();
         Template::comments();
@@ -763,7 +763,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         $page = new Page();
         $page->title = "Test Page " . time();
         $page->slug = "test-page-" . time();
-        $page->language = "de";
+        $page->language = 'de';
         $page->menu = "not_in_menu";
         $page->content = "<p>Wir schreiben das Jahr [year] des fliegenden " .
                 "Spaghettimonsters</p>";
@@ -802,7 +802,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
     public function testGetCommentsReturnsEmptyString()
     {
         $_GET["slug"] = "gibts_echt_nicht";
-        $_SESSION['language'] = "de";
+        $_SESSION['language'] = 'de';
 
         $this->assertEmpty(Template::getComments());
     }

@@ -17,7 +17,7 @@ $model = $controller->getModel();
         if (!$domain) {
             $url = "../" . $row->slug;
         } else {
-            $url = "http://" . $domain . "/" . $row->slug;
+            $url = "http://" . $domain . '/' . $row->slug;
         }
         ?>
         <tr>

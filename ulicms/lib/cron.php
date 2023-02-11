@@ -29,8 +29,8 @@ if (!defined("LOADED_LANGUAGE_FILE")) {
     if (in_array($_SESSION['language'], $languages) &&
             file_exists(getLanguageFilePath($_SESSION['language']))) {
         require_once getLanguageFilePath($_SESSION['language']);
-    } elseif (file_exists(getLanguageFilePath("en"))) {
-        require getLanguageFilePath("en");
+    } elseif (file_exists(getLanguageFilePath('en'))) {
+        require getLanguageFilePath('en');
     }
 
     Translation::loadAllModuleLanguageFiles($_SESSION['language']);

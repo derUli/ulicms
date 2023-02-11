@@ -118,7 +118,7 @@ class Template
         $originalTemplatePath = getModulePath($module, true) . "templates/" .
                 $template;
         $ownTemplatePath = getTemplateDirPath(get_theme(), true) . $module
-                . "/" . $template;
+                . '/' . $template;
 
         if (!str_ends_with($template, ".php")) {
             $originalTemplatePath .= ".php";
@@ -131,7 +131,7 @@ class Template
             require $originalTemplatePath;
         } else {
             $retval = ob_get_clean();
-            throw new FileNotFoundException("Template " . $module . "/" . $template
+            throw new FileNotFoundException("Template " . $module . '/' . $template
                             . " not found!");
         }
         $retval = trim(ob_get_clean());
@@ -213,7 +213,7 @@ class Template
     ): string {
         $retval = "";
         $originalTemplatePath = ULICMS_ROOT . "/default/" . $template;
-        $ownTemplatePath = getTemplateDirPath(get_theme()) . "/" . $template;
+        $ownTemplatePath = getTemplateDirPath(get_theme()) . '/' . $template;
 
         if (!str_ends_with($template, ".php")) {
             $originalTemplatePath .= ".php";
@@ -337,10 +337,10 @@ class Template
         }
 
         $dir = dirname($_SERVER["SCRIPT_NAME"]);
-        $dir = str_replace("\\", "/", $dir);
+        $dir = str_replace("\\", '/', $dir);
 
-        if (str_ends_with($dir, "/") == false) {
-            $dir .= "/";
+        if (str_ends_with($dir, '/') == false) {
+            $dir .= '/';
         }
 
         $robots = null;

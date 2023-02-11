@@ -96,7 +96,7 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase
 
         $page = new Page();
         $page->slug = "testpage1";
-        $page->language = "de";
+        $page->language = 'de';
         $page->group_id = $this->testGroup1->getId();
         $page->author_id = $this->testUser2->getId();
 
@@ -113,7 +113,7 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase
 
         $page = new Page();
         $page->slug = "testpage2";
-        $page->language = "de";
+        $page->language = 'de';
         $page->group_id = $this->testGroup2->getId();
         $page->author_id = $this->testUser1->getId();
         $page->getPermissions()->setEditRestriction("group", true);
@@ -132,7 +132,7 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase
 
         $page = new Page();
         $page->slug = "testpage3";
-        $page->language = "de";
+        $page->language = 'de';
         $page->group_id = $this->testGroup2->getId();
         $page->author_id = $this->testUser2->getId();
         $page->getPermissions()->setEditRestriction("group", true);
@@ -149,7 +149,7 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase
 
         $page = new Page();
         $page->slug = "testpage2";
-        $page->language = "de";
+        $page->language = 'de';
         $page->group_id = $this->testGroup2->getId();
         $page->author_id = $this->testUser1->getId();
         $page->getPermissions()->setEditRestriction("group", true);
@@ -168,7 +168,7 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase
 
         $page = new Page();
         $page->slug = "testpage3";
-        $page->language = "de";
+        $page->language = 'de';
         $page->group_id = $this->testGroup2->getId();
         $page->author_id = $this->testUser2->getId();
         $page->getPermissions()->setEditRestriction("group", true);
@@ -183,7 +183,7 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase
     {
         $page = new Page();
         $page->slug = "testpage3";
-        $page->language = "de";
+        $page->language = 'de';
         $page->group_id = $this->testGroup2->getId();
         $page->author_id = $this->testUser2->getId();
         $page->getPermissions()->setEditRestriction("admins", true);
@@ -197,7 +197,7 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase
     {
         $page = new Page();
         $page->slug = "testpage3";
-        $page->language = "de";
+        $page->language = 'de';
         $page->group_id = $this->testGroup2->getId();
         $page->author_id = $this->testUser1->getId();
         $page->getPermissions()->setEditRestriction("admins", true);
@@ -211,7 +211,7 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase
     {
         $page = new Page();
         $page->slug = "testpage3";
-        $page->language = "de";
+        $page->language = 'de';
         $page->group_id = $this->testGroup3->getId();
         $page->author_id = $this->testUser2->getId();
         $page->getPermissions()->setEditRestriction("group", true);
@@ -225,7 +225,7 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase
     {
         $page = new Page();
         $page->slug = "testpage3";
-        $page->language = "de";
+        $page->language = 'de';
         $page->group_id = $this->testGroup3->getId();
         $page->author_id = $this->testUser1->getId();
         $page->getPermissions()->setEditRestriction("group", true);

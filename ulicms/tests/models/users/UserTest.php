@@ -15,7 +15,7 @@ class UserTest extends \PHPUnit\Framework\TestCase
         $_SERVER["REQUEST_URI"] = "/other-url.html?param=value";
 
         $_SERVER["REMOTE_ADDR"] = "123.123.123.123";
-        require_once getLanguageFilePath("en");
+        require_once getLanguageFilePath('en');
 
         $user = new User();
         $user->loadByUsername("max_muster");

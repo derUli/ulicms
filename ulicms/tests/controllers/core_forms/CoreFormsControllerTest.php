@@ -13,8 +13,8 @@ class CoreFormsControllerTest extends \PHPUnit\Framework\TestCase
             "disallow_cyrillic_chars" => Settings::get("disallow_cyrillic_chars"),
             "disallow_rtl_chars" => Settings::get("disallow_rtl_chars")
         ];
-        require_once getLanguageFilePath("en");
-        Translation::loadAllModuleLanguageFiles("en");
+        require_once getLanguageFilePath('en');
+        Translation::loadAllModuleLanguageFiles('en');
     }
 
     protected function tearDown(): void

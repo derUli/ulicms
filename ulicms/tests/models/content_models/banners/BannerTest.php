@@ -85,7 +85,7 @@ class BannerTest extends \PHPUnit\Framework\TestCase
         $banner = new Banner();
         $banner->setType("html");
         $banner->setHtml(self::HTML_TEXT1);
-        $banner->setLanguage("de");
+        $banner->setLanguage('de');
         $banner->save();
 
         $this->assertNotNull($banner->getId());
@@ -95,11 +95,11 @@ class BannerTest extends \PHPUnit\Framework\TestCase
         $this->assertNotNull($banner->getId());
         $this->assertEquals("html", $banner->getType());
         $this->assertEquals(self::HTML_TEXT1, $banner->getHtml());
-        $this->assertEquals("de", $banner->getLanguage());
+        $this->assertEquals('de', $banner->getLanguage());
         $this->assertNull($banner->getDateFrom());
         $this->assertNull($banner->getDateTo());
         $banner->setHtml(self::HTML_TEXT2);
-        $banner->setLanguage("en");
+        $banner->setLanguage('en');
         $banner->save();
 
         $banner = new Banner($id);
@@ -107,7 +107,7 @@ class BannerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("html", $banner->getType());
         $this->assertEquals(self::HTML_TEXT2, $banner->getHtml());
 
-        $this->assertEquals("en", $banner->getLanguage());
+        $this->assertEquals('en', $banner->getLanguage());
         $banner->delete();
         $banner = new Banner();
         $this->assertNull($banner->getId());
@@ -151,7 +151,7 @@ class BannerTest extends \PHPUnit\Framework\TestCase
     {
         $banner = new Banner();
         $banner->setType("gif");
-        $banner->setLanguage("de");
+        $banner->setLanguage('de');
         $banner->setName(self::NAME_TEXT1);
         $banner->setImageUrl(self::IMAGE_URL_TEXT1);
         $banner->setLinkUrl(self::LINK_URL_TEXT1);
@@ -165,8 +165,8 @@ class BannerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(self::NAME_TEXT1, $banner->getName());
         $this->assertEquals(self::IMAGE_URL_TEXT1, $banner->getImageUrl());
         $this->assertEquals(self::LINK_URL_TEXT1, $banner->getLinkUrl());
-        $this->assertEquals("de", $banner->getLanguage());
-        $banner->setLanguage("en");
+        $this->assertEquals('de', $banner->getLanguage());
+        $banner->setLanguage('en');
         $banner->setName(self::NAME_TEXT2);
         $banner->setImageUrl(self::IMAGE_URL_TEXT2);
         $banner->setLinkUrl(self::LINK_URL_TEXT2);
@@ -177,7 +177,7 @@ class BannerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(self::NAME_TEXT2, $banner->getName());
         $this->assertEquals(self::IMAGE_URL_TEXT2, $banner->getImageUrl());
         $this->assertEquals(self::LINK_URL_TEXT2, $banner->getLinkUrl());
-        $this->assertEquals("en", $banner->getLanguage());
+        $this->assertEquals('en', $banner->getLanguage());
         $banner->delete();
         $banner = new Banner();
         $this->assertNull($banner->getId());

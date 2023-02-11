@@ -9,7 +9,7 @@ class ControllerTest extends \PHPUnit\Framework\TestCase
         $_SERVER["REQUEST_METHOD"] = "POST";
         $_SESSION = [];
 
-        Translation::loadAllModuleLanguageFiles("en");
+        Translation::loadAllModuleLanguageFiles('en');
     }
 
     protected function tearDown(): void
