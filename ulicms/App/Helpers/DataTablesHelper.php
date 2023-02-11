@@ -4,11 +4,18 @@ declare(strict_types=1);
 
 namespace App\Helpers;
 
+/**
+ * This tool returns methods to use DataTables (https://datatables.net/)
+ */
 class DataTablesHelper extends \Helper
 {
-    // returns the path of the datatables language file
-    // if there is no language file for the current language
-    // it returns the path to the english language file
+    /**
+     * Returns a path to DataTables lang file based on $lang
+     * If there is no translation for the given language returns path
+     * to english translation
+     * @param string $lang Language Code
+     * @return string Path to language file
+     */
     public static function getLanguageFileURL(string $lang): string
     {
         $baseUrl = "scripts/datatables/lang";
