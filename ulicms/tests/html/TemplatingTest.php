@@ -42,7 +42,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         unset($_SERVER['HTTPS']);
         unset($_SERVER['REQUEST_URI']);
         unset($_GET["slug"]);
-        unset($_SESSION["login_id"]);
+        unset($_SESSION['login_id']);
         unset($_SESSION['language']);
 
         App\Utils\Session\sessionDestroy();

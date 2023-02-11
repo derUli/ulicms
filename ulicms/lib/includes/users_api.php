@@ -34,7 +34,13 @@ function getUsersOnline(): array
     return $retval;
 }
 
-function changePassword($password, $userId)
+/**
+ * Changes the password of a user
+ * @param string $password
+ * @param int|null $userId
+ * @return boolean
+ */
+function changePassword(string $password, ?int $userId)
 {
     $user = new User($userId);
     if (!$user->isPersistent()) {
@@ -45,6 +51,11 @@ function changePassword($password, $userId)
     return true;
 }
 
+/**
+ * Get a user by username
+ * @param string $name
+ * @return array|null
+ */
 function getUserByName(string $name): ?array
 {
     $result = Database::query("SELECT * FROM " . tbname('users') .
@@ -65,22 +76,22 @@ function getUserById($id): ?array
     return null;
 }
 
-function get_user_id(): int
+/**
+ * Get the id of the currently logged in user or
+ * @return int
+ */
+function get_user_id(): ?int
 {
-    if (isset($_SESSION["login_id"])) {
-        return intval($_SESSION["login_id"]);
-    } else {
-        return 0;
-    }
+    return $_SESSION['login_id'] ?? null;
 }
 
-function get_group_id(): int
+/**
+ * Get the primary group id of the currentlogy logged in user
+ * @return int|null
+ */
+function get_group_id(): ?int
 {
-    if (isset($_SESSION['group_id'])) {
-        return intval($_SESSION['group_id']);
-    } else {
-        return 0;
-    }
+    return $_SESSION['group_id'] ?? null;
 }
 
 function user_exists(string $name): bool
@@ -189,16 +200,14 @@ function get_gravatar(
     return $img ? $html : $url;
 }
 
-// Gibt den für den derzeit eingeloggten User eingestellten HTML-Editor aus.
-// Wenn der Anwender nicht eingeloggt ist return null
-function get_html_editor(): ?string
+/**
+ * Get the configured HTML editor for the currently logged in user or default
+ * @return string
+ */
+function get_html_editor(): string
 {
-    $user_id = get_user_id();
+    $userId = get_user_id();
 
-    if (!$user_id) {
-        return "ckeditor";
-    }
-
-    $user = new User($user_id);
+    $user = new User($userId);
     return $user->getHTMLEditor();
 }

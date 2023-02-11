@@ -76,7 +76,7 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase
 
     public function testGetUserIdUserIsLoggedIn()
     {
-        $_SESSION["login_id"] = 123;
+        $_SESSION['login_id'] = 123;
         $this->assertEquals(123, get_user_id());
     }
 
@@ -277,7 +277,7 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("max@muster.de", $_SESSION["email"]);
 
         $this->assertGreaterThan(0, $this->testUser->getId());
-        $this->assertEquals($this->testUser->getId(), $_SESSION["login_id"]);
+        $this->assertEquals($this->testUser->getId(), $_SESSION['login_id']);
 
         $this->assertGreaterThan(0, $this->testGroup->getId());
         $this->assertEquals($this->testGroup->getId(), $_SESSION['group_id']);

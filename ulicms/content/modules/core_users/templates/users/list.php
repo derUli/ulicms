@@ -131,7 +131,7 @@ if ($permissionChecker->hasPermission("users")) {
                                 if ($permissionChecker->hasPermission("users_edit")) {
                                     echo "<td class=\"text-center\">" . '<a href="index.php?action=admin_edit&id=' . $user->getId() . '" class="is-not-ajax"><img class="mobile-big-image" src="gfx/edit.png" alt="' . get_translation("edit") . '" title="' . get_translation("edit") . '"></a></td>';
 
-                                    if ($user->getId() == $_SESSION["login_id"]) {
+                                    if ($user->getId() == $_SESSION['login_id']) {
                                         echo "<td class=\"text-center\"></td>";
                                     } else {
                                         echo "<td class=\"text-center\">" . '<form action="index.php?sClass=UserController&sMethod=delete&id=' . $user->getId() . '" method="post" class="delete-form">' . get_csrf_token_html() . '<input type="image" class="mobile-big-image" src="gfx/delete.png"></form></td>';

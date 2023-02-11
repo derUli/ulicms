@@ -236,7 +236,7 @@ class UserTest extends \PHPUnit\Framework\TestCase
 
     public function testFromSessionDataWithInvalidIdReturnsEmptyUser()
     {
-        $_SESSION["login_id"] = PHP_INT_MAX;
+        $_SESSION['login_id'] = PHP_INT_MAX;
         $userFromSession = User::fromSessionData();
         $this->assertInstanceOf(User::class, $userFromSession);
         $this->assertNull($userFromSession->getId());
@@ -255,7 +255,7 @@ class UserTest extends \PHPUnit\Framework\TestCase
         $users = $manager->getLockedUsers(false);
         $user = $users[0];
 
-        $_SESSION["login_id"] = $user->getId();
+        $_SESSION['login_id'] = $user->getId();
 
         $userFromSession = User::fromSessionData();
 
@@ -661,7 +661,7 @@ class UserTest extends \PHPUnit\Framework\TestCase
 
     public function testIsCurrentReturnsTrue()
     {
-        $_SESSION["login_id"] = 123;
+        $_SESSION['login_id'] = 123;
 
         $user = new User();
         $user->setId(123);
@@ -671,7 +671,7 @@ class UserTest extends \PHPUnit\Framework\TestCase
 
     public function testIsCurrentReturnsFalse()
     {
-        $_SESSION["login_id"] = PHP_INT_MAX;
+        $_SESSION['login_id'] = PHP_INT_MAX;
 
         $user = new User();
         $user->setId(123);

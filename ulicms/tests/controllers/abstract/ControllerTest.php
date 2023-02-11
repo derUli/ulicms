@@ -58,7 +58,7 @@ class ControllerTest extends \PHPUnit\Framework\TestCase
     public function testCallPostMethod()
     {
         $user = $this->getAdminUser();
-        $_SESSION["login_id"] = $user->getId();
+        $_SESSION['login_id'] = $user->getId();
 
         $controller = new Fortune();
 
@@ -76,7 +76,7 @@ class ControllerTest extends \PHPUnit\Framework\TestCase
     public function testCallHeadMethod()
     {
         $user = $this->getAdminUser();
-        $_SESSION["login_id"] = $user->getId();
+        $_SESSION['login_id'] = $user->getId();
 
         $controller = new Fortune();
 

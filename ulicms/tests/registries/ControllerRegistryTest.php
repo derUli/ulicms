@@ -81,10 +81,10 @@ class ControllerRegistryTest extends \PHPUnit\Framework\TestCase
         $user->setAdmin(true);
         $user->save();
 
-        $_SESSION["login_id"] = $user->getId();
+        $_SESSION['login_id'] = $user->getId();
 
         $this->assertTrue(ControllerRegistry::userCanCall("PageController", "createPost"));
-        unset($_SESSION["login_id"]);
+        unset($_SESSION['login_id']);
     }
 
     public function testUserCanCallReturnsFalse()
@@ -97,10 +97,10 @@ class ControllerRegistryTest extends \PHPUnit\Framework\TestCase
         $user->setAdmin(false);
         $user->save();
 
-        $_SESSION["login_id"] = $user->getId();
+        $_SESSION['login_id'] = $user->getId();
 
         $this->assertFalse(ControllerRegistry::userCanCall("PageController", "createPost"));
-        unset($_SESSION["login_id"]);
+        unset($_SESSION['login_id']);
     }
 
     public function testUserCanCallWildCard()
@@ -113,7 +113,7 @@ class ControllerRegistryTest extends \PHPUnit\Framework\TestCase
         $user->setAdmin(false);
         $user->save();
 
-        $_SESSION["login_id"] = $user->getId();
+        $_SESSION['login_id'] = $user->getId();
 
         $this->assertFalse(
             ControllerRegistry::userCanCall(
@@ -121,7 +121,7 @@ class ControllerRegistryTest extends \PHPUnit\Framework\TestCase
                 "newsfeed"
             )
         );
-        unset($_SESSION["login_id"]);
+        unset($_SESSION['login_id']);
     }
 
     public function testRunMethodsWithNonExistingClassName()

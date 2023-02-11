@@ -152,7 +152,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
     public function testGetLanguageSelectionGroupAssigned()
     {
         $user = $this->getTestUser();
-        $_SESSION["login_id"] = $user->getId();
+        $_SESSION['login_id'] = $user->getId();
 
         $controller = ControllerRegistry::get(PageController::class);
 
@@ -218,7 +218,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         $allIds = $parentIds = $controller->_getParentIds();
 
         $user = $this->getTestUser();
-        $_SESSION["login_id"] = $user->getId();
+        $_SESSION['login_id'] = $user->getId();
 
         $controller = ControllerRegistry::get(PageController::class);
 
@@ -251,7 +251,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
 
     public function testToggleFilters()
     {
-        $_SESSION["login_id"] = 666;
+        $_SESSION['login_id'] = 666;
         $controller = new PageController();
 
         $this->assertTrue($controller->_toggleFilters());
@@ -260,7 +260,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
 
     public function testToggleShowPositions()
     {
-        $_SESSION["login_id"] = 666;
+        $_SESSION['login_id'] = 666;
         $controller = new PageController();
 
         $this->assertTrue($controller->_toggleShowPositions());
@@ -440,7 +440,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
     public function testGetPages()
     {
         $user = $this->getTestUser();
-        $_SESSION["login_id"] = $user->getId();
+        $_SESSION['login_id'] = $user->getId();
 
         $_GET = [
             "start" => "0",
@@ -541,7 +541,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
     public function testCreatePostReturnsModel()
     {
         $testUser = $this->getTestUser();
-        $_SESSION["login_id"] = $testUser->getID();
+        $_SESSION['login_id'] = $testUser->getID();
 
         $_POST["title"] = "foobar";
         $_POST["slug"] = "unit-test-foobar";
@@ -560,7 +560,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
 
     public function testCreatePostReturnsNull()
     {
-        $_SESSION["login_id"] = PHP_INT_MAX;
+        $_SESSION['login_id'] = PHP_INT_MAX;
 
         $_POST["title"] = "foobar";
         $_POST["slug"] = "unit-test-foobar";
@@ -592,7 +592,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         ];
         foreach ($types as $type) {
             $testUser = $this->getTestUser();
-            $_SESSION["login_id"] = $testUser->getID();
+            $_SESSION['login_id'] = $testUser->getID();
 
             $_POST["page_id"] = $pages[0]->getId();
             $_POST["title"] = "foobar";
@@ -618,7 +618,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
     public function testEditPostNotFoundReturnsFalse()
     {
         $testUser = $this->getTestUser();
-        $_SESSION["login_id"] = $testUser->getID();
+        $_SESSION['login_id'] = $testUser->getID();
 
         $_POST["page_id"] = PHP_INT_MAX;
         $_POST["title"] = "foobar";
@@ -638,7 +638,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
     public function testEditPostInvalidTypeReturnsFalse()
     {
         $testUser = $this->getTestUser();
-        $_SESSION["login_id"] = $testUser->getID();
+        $_SESSION['login_id'] = $testUser->getID();
 
         $_POST['id'] = PHP_INT_MAX;
         $_POST["title"] = "foobar";
