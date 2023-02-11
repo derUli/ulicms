@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Backend;
 
-use App\Backend\BrowserCompatiblityChecker;
 use Template;
 use Vars;
 use Request;
@@ -64,15 +63,7 @@ class BackendPageRenderer
             require "inc/header.php";
         }
 
-        $isCompatible = true;
-        if (Request::getUserAgent()) {
-            $checker = new BrowserCompatiblityChecker(Request::getUserAgent());
-            $isCompatible = $checker->isCompatible();
-        }
-
-        if (!$isCompatible) {
-            $this->showUnsupportedBrowser($checker);
-        } elseif (!is_logged_in()) {
+        if (is_logged_in()) {
             $this->handleNotLoggedIn($onlyContent);
         } else {
             $this->handleLoggedIn($onlyContent);
