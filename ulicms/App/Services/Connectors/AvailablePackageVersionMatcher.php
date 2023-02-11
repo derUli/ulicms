@@ -36,7 +36,7 @@ class AvailablePackageVersionMatcher
                                 "compatible_with",
                                 "file"
                             ]
-            ) and
+            ) &&
                     is_version_number($version["version"]) and
                     is_version_number($version["compatible_with"])
             ) {

@@ -7,9 +7,19 @@ namespace App\Helpers;
 use Helper;
 use Exception;
 
+/**
+ * This class contains utilities to deal with arrays
+ */
 class ArrayHelper extends Helper
 {
-    // inserts an item before an index to an array
+    /**
+     * inserts an item before an index to an array
+     * @param array $input
+     * @param int $index
+     * @param type $element
+     * @return array
+     * @throws Exception
+     */
     public static function insertBefore(
         array $input,
         int $index,
@@ -32,7 +42,14 @@ class ArrayHelper extends Helper
         return $input;
     }
 
-    // inserts an item after an index to an array
+    /**
+     * inserts an item after an index to an array
+     * @param array $input
+     * @param int $index
+     * @param type $element
+     * @return array
+     * @throws Exception
+     */
     public static function insertAfter(
         array $input,
         int $index,
@@ -55,6 +72,12 @@ class ArrayHelper extends Helper
         return $input;
     }
 
+    /**
+     * Checks if an array has a list of keys
+     * @param array|null $input
+     * @param array $keys
+     * @return bool
+     */
     public static function hasMultipleKeys(?array $input, array $keys): bool
     {
         if (!$input) {
