@@ -48,7 +48,8 @@
         "consolidation/robo": "*",
         "lasserafn/php-initial-avatar-generator": "*",
         "imagine/imagine": "*",
-        "michelf/php-markdown": "*"
+        "michelf/php-markdown": "*",
+        "chrisullyott/php-filesize": "^4.2"
     },
     "require-dev": {
         "spatie/phpunit-snapshot-assertions": "*",

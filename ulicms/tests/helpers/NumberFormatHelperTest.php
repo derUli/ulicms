@@ -40,11 +40,11 @@ class NumberFormatHelperTest extends \PHPUnit\Framework\TestCase
     public function testFormatSizeUnitsBytes()
     {
         $this->assertEquals(
-            "64 Bytes",
+            "64 B",
             NumberFormatHelper::formatSizeUnits(floatval(64))
         );
         $this->assertEquals(
-            "0 Bytes",
+            "0 B",
             NumberFormatHelper::formatSizeUnits(floatval(0))
         );
     }
@@ -52,7 +52,7 @@ class NumberFormatHelperTest extends \PHPUnit\Framework\TestCase
     public function testFormatSizeUnitsByte()
     {
         $this->assertEquals(
-            "1 Byte",
+            "1 B",
             NumberFormatHelper::formatSizeUnits(floatval(1))
         );
     }
