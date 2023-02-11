@@ -39,15 +39,15 @@ class BannerControllerTest extends \PHPUnit\Framework\TestCase
     protected function setPostVars()
     {
         $_POST["banner_name"] = "Nervige Werbung";
-        $_POST["image_url"] = "";
-        $_POST["link_url"] = "";
+        $_POST["image_url"] = '';
+        $_POST["link_url"] = '';
         $_POST["category_id"] = 1;
         $_POST["type"] = "html";
         $_POST['language'] = 'de';
         $_POST["enabled"] = 1;
         $_POST["html"] = "Foo Bar";
-        $_POST["date_from"] = "";
-        $_POST["date_to"] = "";
+        $_POST["date_from"] = '';
+        $_POST["date_to"] = '';
     }
 
     public function testUpdateReturnsModel()
@@ -55,7 +55,7 @@ class BannerControllerTest extends \PHPUnit\Framework\TestCase
         $this->setPostVars();
         $controller = new BannerController();
         $id = $controller->_createPost()->getId();
-        $_POST["id"] = $id;
+        $_POST['id'] = $id;
 
         $_POST["link_url"] = "https://google.com";
         $banner = $controller->_updatePost();

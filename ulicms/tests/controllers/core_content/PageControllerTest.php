@@ -640,7 +640,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         $testUser = $this->getTestUser();
         $_SESSION["login_id"] = $testUser->getID();
 
-        $_POST["id"] = PHP_INT_MAX;
+        $_POST['id'] = PHP_INT_MAX;
         $_POST["title"] = "foobar";
         $_POST["slug"] = "unit-test-foobar";
         $_POST["type"] = "magic_content";

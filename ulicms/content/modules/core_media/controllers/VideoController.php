@@ -9,7 +9,7 @@ class VideoController extends Controller
         $video_folder = ULICMS_ROOT . "/content/videos";
 
         if (isset($_FILES)) {
-            $mp4_file_value = "";
+            $mp4_file_value = '';
             // MP4
             if (!empty($_FILES ['mp4_file'] ['name'])) {
                 $mp4_file = time() . "-" .
@@ -29,7 +29,7 @@ class VideoController extends Controller
                 }
             }
 
-            $ogg_file_value = "";
+            $ogg_file_value = '';
             // ogg
             if (!empty($_FILES ['ogg_file'] ['name'])) {
                 $ogg_file = time() . "-" . $_FILES ['ogg_file'] ['name'];
@@ -51,7 +51,7 @@ class VideoController extends Controller
             }
 
             // WebM
-            $webm_file_value = "";
+            $webm_file_value = '';
             // webm
             if (!empty($_FILES ['webm_file'] ['name'])) {
                 $webm_file = time() . "-" . $_FILES ['webm_file'] ['name'];
@@ -72,7 +72,7 @@ class VideoController extends Controller
                 }
             }
 
-            $name = db_escape($_POST ["name"]);
+            $name = db_escape($_POST ['name']);
             $category_id = intval($_POST ["category_id"]);
             $ogg_file_value = db_escape($ogg_file_value);
             $webm_file_value = db_escape($webm_file_value);
@@ -97,8 +97,8 @@ class VideoController extends Controller
 
     public function _updatePost(): bool
     {
-        $name = db_escape($_POST ["name"]);
-        $id = intval($_POST ["id"]);
+        $name = db_escape($_POST ['name']);
+        $id = intval($_POST ['id']);
         $ogg_file = db_escape(basename($_POST ["ogg_file"]));
         $webm_file = db_escape(basename($_POST ["webm_file"]));
         $mp4_file = db_escape(basename($_POST ["mp4_file"]));

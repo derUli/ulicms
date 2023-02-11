@@ -17,7 +17,7 @@ class CommentTest extends \PHPUnit\Framework\TestCase
         $_SERVER['HTTP_HOST'] = "company.com";
         $_SERVER['HTTPS'] = "on";
 
-        $_SERVER["REQUEST_URI"] = "/other-url.html?param=value";
+        $_SERVER['REQUEST_URI'] = "/other-url.html?param=value";
     }
 
     protected function tearDown(): void
@@ -146,7 +146,7 @@ class CommentTest extends \PHPUnit\Framework\TestCase
 
     public function testIsSpamError()
     {
-        $_POST["my_homepage_url"] = "http://www.ulicms.de";
+        $_POST["my_homepage_url"] = 'http://www.ulicms.de';
 
         $comment = new Comment();
         $comment->setAuthorName("John Doe");
@@ -576,7 +576,7 @@ class CommentTest extends \PHPUnit\Framework\TestCase
 
     protected function countIpsInDatabase(): int
     {
-        $query = Database::selectAll("comments", ["id"], "ip is not null");
+        $query = Database::selectAll("comments", ['id'], "ip is not null");
         return Database::getNumROws($query);
     }
 }

@@ -8,19 +8,19 @@ class DefaultAccessRestrictionsController extends Controller
     {
         Settings::set(
             "only_admins_can_edit",
-            Request::getVar("only_admins_can_edit", 0, "int")
+            Request::getVar("only_admins_can_edit", 0, 'int')
         );
         Settings::set(
             "only_group_can_edit",
-            Request::getVar("only_group_can_edit", 0, "int")
+            Request::getVar("only_group_can_edit", 0, 'int')
         );
         Settings::set(
             "only_owner_can_edit",
-            Request::getVar("only_owner_can_edit", 0, "int")
+            Request::getVar("only_owner_can_edit", 0, 'int')
         );
         Settings::set(
             "only_others_can_edit",
-            Request::getVar("only_others_can_edit", 0, "int")
+            Request::getVar("only_others_can_edit", 0, 'int')
         );
     }
 

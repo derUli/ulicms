@@ -6,7 +6,7 @@ class AudioController extends Controller
 {
     public function createPost(): void
     {
-        $mp3_file_value = "";
+        $mp3_file_value = '';
         $audio_folder = ULICMS_ROOT . "/content/audio";
         // mp3
         if (!empty($_FILES ['mp3_file'] ['name'])) {
@@ -31,7 +31,7 @@ class AudioController extends Controller
             }
         }
 
-        $ogg_file_value = "";
+        $ogg_file_value = '';
         // ogg
         if (!empty($_FILES ['ogg_file'] ['name'])) {
             $ogg_file = time() . "-" . $_FILES ['ogg_file'] ['name'];
@@ -52,7 +52,7 @@ class AudioController extends Controller
             }
         }
 
-        $name = db_escape($_POST ["name"]);
+        $name = db_escape($_POST ['name']);
         $category_id = intval($_POST ["category_id"]);
         $ogg_file_value = db_escape($ogg_file_value);
         $mp3_file_value = db_escape($mp3_file_value);
@@ -70,8 +70,8 @@ class AudioController extends Controller
 
     public function _updatePost(): bool
     {
-        $name = db_escape($_POST ["name"]);
-        $id = intval($_POST ["id"]);
+        $name = db_escape($_POST ['name']);
+        $id = intval($_POST ['id']);
         $ogg_file = db_escape(basename($_POST ["ogg_file"]));
         $mp3_file = db_escape(basename($_POST ["mp3_file"]));
         $updated = time();

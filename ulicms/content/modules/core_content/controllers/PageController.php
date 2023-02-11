@@ -90,7 +90,7 @@ class PageController extends Controller
     {
         $success = $this->_editPost();
 
-        $id = Request::getVar("page_id", null, "int"); #
+        $id = Request::getVar("page_id", null, 'int'); #
         $url = ModuleHelper::buildActionURL(
             "pages_edit",
             "page={$id}"
@@ -112,15 +112,15 @@ class PageController extends Controller
             return false;
         }
         try {
-            $model->loadById(Request::getVar("page_id", null, "int"));
+            $model->loadById(Request::getVar("page_id", null, 'int'));
         } catch (DatasetNotFoundException $e) {
             return false;
         }
 
         $model->type = Request::getVar('type');
 
-        $authorId = Request::getVar("author_id", $model->author_id, "int");
-        $groupId = Request::getVar("group_id", $model->group_id, "int");
+        $authorId = Request::getVar("author_id", $model->author_id, 'int');
+        $groupId = Request::getVar("group_id", $model->group_id, 'int');
 
         $this->_fillAndSaveModel($model, $permissionChecker, $authorId, $groupId);
 
@@ -154,16 +154,16 @@ class PageController extends Controller
         // and don't change it's value on update
         if (!$model->isPersistent()) {
             $model->active = Request::hasVar("active") ?
-                    Request::getVar("active", true, "bool") : false;
+                    Request::getVar("active", true, 'bool') : false;
             $model->approved = Request::hasVar("active");
         } elseif (Request::hasVar("active")) {
-            $model->active = Request::getVar("active", true, "bool");
+            $model->active = Request::getVar("active", true, 'bool');
             if ($model->active) {
                 $model->approved = true;
             }
         }
 
-        $model->hidden = Request::getVar("hidden", false, "bool");
+        $model->hidden = Request::getVar("hidden", false, 'bool');
         $model->content = Request::getVar("content");
 
         $user = User::fromSessionData();
@@ -178,10 +178,10 @@ class PageController extends Controller
             $model->content = XSSProtection::stripTags($model->content, $allowedTags);
         }
 
-        $model->category_id = Request::getVar("category_id", 1, "int");
+        $model->category_id = Request::getVar("category_id", 1, 'int');
         $model->link_url = Request::getVar("link_url", null, "str");
         $model->menu = Request::getVar("menu", "not_in_menu", "str");
-        $model->position = Request::getVar("position", 0, "int");
+        $model->position = Request::getVar("position", 0, 'int');
 
         $model->menu_image = Request::getVar("menu_image", null, "str");
         $model->custom_data = json_decode(
@@ -226,10 +226,10 @@ class PageController extends Controller
         }
 
         if ($model instanceof Video_Page) {
-            $model->video = Request::getVar("video", null, "int");
+            $model->video = Request::getVar("video", null, 'int');
         }
         if ($model instanceof Audio_Page) {
-            $model->audio = Request::getVar("audio", null, "int");
+            $model->audio = Request::getVar("audio", null, 'int');
         }
 
         $model->text_position = Request::getVar(
@@ -265,7 +265,7 @@ class PageController extends Controller
             $permission = Request::getVar(
                 "only_{$object}_can_edit",
                 false,
-                "bool"
+                'bool'
             );
             $model->getPermissions()->setEditRestriction(
                 $object,
@@ -273,13 +273,13 @@ class PageController extends Controller
             );
         }
 
-        $model->link_to_language = Request::getVar("link_to_language", null, "int");
+        $model->link_to_language = Request::getVar("link_to_language", null, 'int');
         $model->comments_enabled = Request::getVar(
             "comments_enabled"
         ) !== "null" ?
-                Request::getVar("comments_enabled", false, "bool") : null;
+                Request::getVar("comments_enabled", false, 'bool') : null;
 
-        $model->show_headline = Request::getVar("show_headline", 1, "bool");
+        $model->show_headline = Request::getVar("show_headline", 1, 'bool');
         $model->group_id = $groupId ? $groupId : get_group_id();
 
         do_event("before_create_page");
@@ -321,9 +321,9 @@ class PageController extends Controller
             );
             $list_order_direction = Database::escapeValue($list_order_direction);
 
-            $list_use_pagination = Request::getVar("list_use_pagination", 0, "int");
+            $list_use_pagination = Request::getVar("list_use_pagination", 0, 'int');
 
-            $limit = Request::getVar("limit", 0, "int");
+            $limit = Request::getVar("limit", 0, 'int');
             $list_type = Request::getVar("list_type", "null", "str");
 
             if (empty($list_type) or $list_type == "null") {
@@ -363,7 +363,7 @@ class PageController extends Controller
 
     public function undeletePost(): void
     {
-        $id = Request::getVar('id', null, "int");
+        $id = Request::getVar('id', null, 'int');
         do_event("before_undelete_page");
 
         if (!$id) {
@@ -407,7 +407,7 @@ class PageController extends Controller
 
     public function deletePost(): void
     {
-        $id = Request::getVar('id', null, "int");
+        $id = Request::getVar('id', null, 'int');
         do_event("before_delete_page");
 
         if (!$id) {
@@ -537,8 +537,8 @@ class PageController extends Controller
     {
         $slug = $_REQUEST["slug"];
         $language = $_REQUEST['language'];
-        $id = isset($_REQUEST["id"]) ?
-                intval($_REQUEST["id"]) : 0;
+        $id = isset($_REQUEST['id']) ?
+                intval($_REQUEST['id']) : 0;
 
         TextResult($this->_nextFreeSlug($slug, $language, $id));
     }
@@ -594,7 +594,7 @@ class PageController extends Controller
     {
         $lang = $_REQUEST["mlang"];
         $menu = $_REQUEST["mmenu"];
-        $parent_id = Request::getVar("mparent", null, "int");
+        $parent_id = Request::getVar("mparent", null, 'int');
 
         $html = $this->_filterParentPages($lang, $menu, $parent_id);
         HTMLResult(
@@ -619,8 +619,8 @@ class PageController extends Controller
         $pages = getAllPages($lang, "title", false, $menu);
         foreach ($pages as $key => $page) {
             ?>
-            <option value="<?php echo $page["id"]; ?>" <?php
-            if ($page["id"] == $parent_id) {
+            <option value="<?php echo $page['id']; ?>" <?php
+            if ($page['id'] == $parent_id) {
                 echo "selected";
             }
             ?>>
@@ -628,7 +628,7 @@ class PageController extends Controller
 
                 <?php if (!Request::getVar("no_id")) {
                     ?>
-                    (ID: <?php echo $page["id"]; ?>)
+                    (ID: <?php echo $page['id']; ?>)
                 <?php }
                 ?>
             </option>
@@ -647,9 +647,9 @@ class PageController extends Controller
 
     public function _getPages(): array
     {
-        $start = Request::getVar("start", 0, "int");
-        $length = Request::getVar("length", 25, "int");
-        $draw = Request::getVar("draw", 1, "int");
+        $start = Request::getVar("start", 0, 'int');
+        $length = Request::getVar("length", 25, 'int');
+        $draw = Request::getVar("draw", 1, 'int');
         $search = isset($_REQUEST["search"]) &&
                 isset($_REQUEST["search"]["value"]) ?
                 $_REQUEST["search"]["value"] : null;
@@ -894,7 +894,7 @@ class PageController extends Controller
 
     public function getParentPageId(): object
     {
-        $id = Request::getVar('id', 0, "int");
+        $id = Request::getVar('id', 0, 'int');
         try {
             JSONResult($this->_getParentPageId($id));
         } catch (DatasetNotFoundException $e) {

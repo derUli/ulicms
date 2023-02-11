@@ -65,13 +65,13 @@ class GroupTest extends \PHPUnit\Framework\TestCase
 
     public function testGetCurrentGroupId()
     {
-        $_SESSION["group_id"] = 1;
+        $_SESSION['group_id'] = 1;
         $this->assertEquals(1, Group::getCurrentGroupId());
     }
 
     public function testGetCurrentGroup()
     {
-        $_SESSION["group_id"] = 1;
+        $_SESSION['group_id'] = 1;
 
         $group = Group::getCurrentGroup();
         $this->assertInstanceOf(Group::class, $group);

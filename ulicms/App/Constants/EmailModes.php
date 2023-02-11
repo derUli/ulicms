@@ -4,10 +4,18 @@ declare(strict_types=1);
 
 namespace App\Constants;
 
+/**
+ * Modes for Email delivery
+ */
 class EmailModes
 {
-    // use mail()
+    /**
+     * Uses mail()
+     */
     public const INTERNAL = 'internal';
-    // send mails by an external SMTP Server
+
+    /**
+     * Uses phpmailer
+     */
     public const PHPMAILER = 'phpmailer';
 }

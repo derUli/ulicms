@@ -13,7 +13,7 @@ class PrivacyController extends Controller
                 "privacy_policy_checkbox_enable_{$language}" :
                 "privacy_policy_checkbox_enable";
 
-        if (Request::getVar("privacy_policy_checkbox_enable", 0, "int")) {
+        if (Request::getVar("privacy_policy_checkbox_enable", 0, 'int')) {
             Settings::set($varName, 1);
         } else {
             Settings::delete($varName);

@@ -9,11 +9,10 @@ namespace App\Constants;
  * if a comment is pending
  * it has to be approved by a backend user
  */
-class CommentStatus {
-
+class CommentStatus
+{
     public const PENDING = 'pending';
     public const PUBLISHED = 'published';
     public const SPAM = 'spam';
     public const DEFAULT_STATUS = self::PENDING;
-
 }

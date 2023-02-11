@@ -35,7 +35,7 @@ class InstallerController
         );
         foreach ($vars as $var) {
             if (!isset($_SESSION[$var])) {
-                $_SESSION[$var] = "";
+                $_SESSION[$var] = '';
                 switch ($var) {
                     case "install_demodata":
                         $_SESSION[$var] = "yes";
@@ -315,7 +315,7 @@ class InstallerController
         if (isset($_REQUEST["install_demodata"])) {
             $_SESSION["install_demodata"] = "yes";
         } else {
-            $_SESSION["install_demodata"] = "";
+            $_SESSION["install_demodata"] = '';
         }
 
         header("Location: index.php?step=8");

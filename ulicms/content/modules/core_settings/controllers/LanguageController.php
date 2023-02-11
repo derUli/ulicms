@@ -57,7 +57,7 @@ class LanguageController extends Controller
 
     public function _deletePost(): bool
     {
-        $id = Request::getVar('id', null, "int");
+        $id = Request::getVar('id', null, 'int');
         do_event("before_delete_language");
 
         $language = new Language($id);
@@ -86,7 +86,7 @@ class LanguageController extends Controller
     protected function validateInput(): void
     {
         // Fix for security issue CVE-2019-11398
-        if (stringContainsHtml($_POST["name"])
+        if (stringContainsHtml($_POST['name'])
                 or stringContainsHtml($_POST["language_code"])) {
             ExceptionResult(get_translation("no_html_allowed"));
         }

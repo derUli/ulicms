@@ -79,26 +79,26 @@ class SettingsTest extends \PHPUnit\Framework\TestCase
 
     public function testConvertVarTypeInt()
     {
-        $this->assertIsInt(Settings::convertVar(2.12, "int"));
-        $this->assertEquals(2, Settings::convertVar(2.12, "int"));
+        $this->assertIsInt(Settings::convertVar(2.12, 'int'));
+        $this->assertEquals(2, Settings::convertVar(2.12, 'int'));
     }
 
     public function testConvertVarTypeFloat()
     {
-        $this->assertIsFloat(Settings::convertVar(666, "float"));
-        $this->assertIsFloat(Settings::convertVar(0, "float"));
+        $this->assertIsFloat(Settings::convertVar(666, 'float'));
+        $this->assertIsFloat(Settings::convertVar(0, 'float'));
     }
 
     public function testConvertVarTypeBool()
     {
-        $this->assertEquals(1, Settings::convertVar(666, "bool"));
-        $this->assertEquals(0, Settings::convertVar(0, "bool"));
+        $this->assertEquals(1, Settings::convertVar(666, 'bool'));
+        $this->assertEquals(0, Settings::convertVar(0, 'bool'));
 
-        $this->assertEquals(1, Settings::convertVar("true", "bool"));
-        $this->assertEquals(0, Settings::convertVar("false", "bool"));
+        $this->assertEquals(1, Settings::convertVar("true", 'bool'));
+        $this->assertEquals(0, Settings::convertVar("false", 'bool'));
 
-        $this->assertEquals(1, Settings::convertVar("wuff", "bool"));
-        $this->assertEquals(0, Settings::convertVar("", "bool"));
+        $this->assertEquals(1, Settings::convertVar("wuff", 'bool'));
+        $this->assertEquals(0, Settings::convertVar("", 'bool'));
     }
 
     public function testGetAllSettings()

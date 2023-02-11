@@ -12,9 +12,9 @@ class UserTest extends \PHPUnit\Framework\TestCase
     protected function setUp(): void
     {
         CacheUtil::clearAvatars(true);
-        $_SERVER["REQUEST_URI"] = "/other-url.html?param=value";
+        $_SERVER['REQUEST_URI'] = "/other-url.html?param=value";
 
-        $_SERVER["REMOTE_ADDR"] = "123.123.123.123";
+        $_SERVER['REMOTE_ADDR'] = "123.123.123.123";
         require_once getLanguageFilePath('en');
 
         $user = new User();
@@ -29,8 +29,8 @@ class UserTest extends \PHPUnit\Framework\TestCase
         $group->save();
         $this->otherGroup = $group;
 
-        $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
-        $_SERVER["SERVER_PORT"] = "80";
+        $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
+        $_SERVER['SERVER_PORT'] = "80";
         $_SERVER['HTTP_HOST'] = "example.org";
         $_SERVER['REQUEST_URI'] = "/foobar/foo.html";
     }
@@ -50,9 +50,9 @@ class UserTest extends \PHPUnit\Framework\TestCase
             ],
             true
         );
-        unset($_SERVER["REMOTE_ADDR"]);
-        unset($_SERVER["REQUEST_URI"]);
-        unset($_SERVER["SERVER_PROTOCOL"]);
+        unset($_SERVER['REMOTE_ADDR']);
+        unset($_SERVER['REQUEST_URI']);
+        unset($_SERVER['SERVER_PROTOCOL']);
         unset($_SERVER['HTTP_HOST']);
         unset($_SERVER['SERVER_PORT']);
         unset($_SERVER['HTTPS']);

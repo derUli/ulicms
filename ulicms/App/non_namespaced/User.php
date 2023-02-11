@@ -11,11 +11,11 @@ class User extends Model
 {
     protected $id = null;
     private $username = null;
-    private $lastname = "";
-    private $firstname = "";
-    private $email = "";
-    private $password = "";
-    private $about_me = "";
+    private $lastname = '';
+    private $firstname = '';
+    private $email = '';
+    private $password = '';
+    private $about_me = '';
     private $group_id = null;
     private $secondary_groups = [];
     private $group = null;
@@ -25,7 +25,7 @@ class User extends Model
     private $password_changed = null;
     private $locked = false;
     private $last_login = null;
-    private $homepage = "";
+    private $homepage = '';
     private $default_language = null;
 
     public function __construct($id = null)
@@ -175,8 +175,8 @@ class User extends Model
                 $this->group = null;
             }
             // load secondary groups
-            $this->loadGroups($result["id"]);
-            $this->setId(intval($result["id"]));
+            $this->loadGroups($result['id']);
+            $this->setId(intval($result['id']));
             return;
         }
         $this->setSecondaryGroups([]);
@@ -728,7 +728,7 @@ class User extends Model
 
     public function changeAvatar(array $upload): bool
     {
-        $extension = pathinfo($upload["name"], PATHINFO_EXTENSION);
+        $extension = pathinfo($upload['name'], PATHINFO_EXTENSION);
         $tmpFile = uniqid() . "." . $extension;
         $tmpFile = Path::resolve("ULICMS_TMP/$tmpFile");
 
@@ -800,7 +800,7 @@ class User extends Model
     {
         $query = Database::selectAll(
             "users",
-            ["id"],
+            ['id'],
             "last_action > " . (time() - 300) . " ORDER BY username"
         );
 

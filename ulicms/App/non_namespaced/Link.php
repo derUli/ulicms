@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 class Link extends Page
 {
-    public $link_url = "";
+    public $link_url = '';
     public $type = "link";
 
     public function save()

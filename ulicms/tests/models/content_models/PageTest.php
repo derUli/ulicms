@@ -28,7 +28,7 @@ class PageTest extends \PHPUnit\Framework\TestCase
 
         $_SERVER['HTTP_HOST'] = "company.com";
         $_SESSION['language'] = 'de';
-        $_SERVER["REQUEST_URI"] = '/';
+        $_SERVER['REQUEST_URI'] = '/';
 
         $settings = array(
             "frontpage",
@@ -1114,7 +1114,7 @@ class PageTest extends \PHPUnit\Framework\TestCase
 
         $oldId = $page->getId();
 
-        $_GET["id"] = $oldId;
+        $_GET['id'] = $oldId;
         $loadedPage = new Page();
         $loadedPage->loadByRequestId();
 

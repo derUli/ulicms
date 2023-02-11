@@ -94,7 +94,7 @@ $permissionChecker = new ACL();
                 <input type="number" name="min_time_to_fill_form"
                        id="min_time_to_fill_form" step="any" min="0"
                        max="<?php esc(PHP_INT_MAX); ?>"
-                       value="<?php esc(Settings::get("min_time_to_fill_form", "int")); ?>">
+                       value="<?php esc(Settings::get("min_time_to_fill_form", 'int')); ?>">
             </p>
         </div>
         <p class="voffset2">

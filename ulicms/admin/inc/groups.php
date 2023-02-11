@@ -20,7 +20,7 @@ if (!$permissionChecker->hasPermission("groups")) {
             }
         }
 
-        $name = trim($_POST["name"]);
+        $name = trim($_POST['name']);
         if (!empty($name)) {
             $id = $permissionChecker->createGroup($name, $all_permissions);
             $group = new Group($id);
@@ -50,7 +50,7 @@ if (!$permissionChecker->hasPermission("groups")) {
         $permissionChecker = new ACL();
         $all_permissions = $permissionChecker->getDefaultACL(false, true);
 
-        $id = $_POST["id"];
+        $id = $_POST['id'];
 
         $group = new Group();
         $group->loadById($id);
@@ -71,7 +71,7 @@ if (!$permissionChecker->hasPermission("groups")) {
             }
         }
 
-        $name = trim($_POST["name"]);
+        $name = trim($_POST['name']);
         if (!empty($name)) {
             $permissionChecker->updateGroup($id, $name, $all_permissions);
             $modified = true;

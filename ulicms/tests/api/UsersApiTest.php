@@ -87,7 +87,7 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase
 
     public function testGetUserGroupReturnsGroupId()
     {
-        $_SESSION["group_id"] = 666;
+        $_SESSION['group_id'] = 666;
         $this->assertEquals(666, get_group_id());
     }
 
@@ -203,7 +203,7 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase
     {
         $user = getUserByName("testuser1");
 
-        $this->assertEquals($this->testUser->getID(), $user["id"]);
+        $this->assertEquals($this->testUser->getID(), $user['id']);
         $this->assertEquals("testuser1", $user["username"]);
         $this->assertEquals("Muster", $user["lastname"]);
         $this->assertEquals("Max", $user["firstname"]);
@@ -221,7 +221,7 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase
     {
         $user = getUserById($this->testUser->getID());
 
-        $this->assertEquals($this->testUser->getID(), $user["id"]);
+        $this->assertEquals($this->testUser->getID(), $user['id']);
         $this->assertEquals("testuser1", $user["username"]);
         $this->assertEquals("Muster", $user["lastname"]);
         $this->assertEquals("Max", $user["firstname"]);
@@ -240,7 +240,7 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase
         $allUsers = getUsers();
         foreach ($allUsers as $user) {
             if ($user["username"] == "testuser1") {
-                $this->assertEquals($user["id"], $this->testUser->getID());
+                $this->assertEquals($user['id'], $this->testUser->getID());
                 return;
             }
         }
@@ -280,7 +280,7 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($this->testUser->getId(), $_SESSION["login_id"]);
 
         $this->assertGreaterThan(0, $this->testGroup->getId());
-        $this->assertEquals($this->testGroup->getId(), $_SESSION["group_id"]);
+        $this->assertEquals($this->testGroup->getId(), $_SESSION['group_id']);
 
         $this->assertEquals(0, $_SESSION["require_password_change"]);
         $this->assertTrue($_SESSION["logged_in"]);

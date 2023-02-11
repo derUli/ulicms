@@ -10,7 +10,7 @@ if ($permissionChecker->hasPermission("users")) {
         $_SESSION["admins_filter_group"] = 0;
     }
     if (Request::getVar("admins_filter_group") !== null) {
-        $_SESSION["admins_filter_group"] = Request::getVar("admins_filter_group", 0, "int");
+        $_SESSION["admins_filter_group"] = Request::getVar("admins_filter_group", 0, 'int');
     }
     $manager = new UserManager();
     if ($_SESSION["admins_filter_group"] > 0) {
@@ -88,7 +88,7 @@ if ($permissionChecker->hasPermission("users")) {
                                 $group = "[" . get_translation("none") . "]";
                                 if ($user->getGroupId()) {
                                     $group = $permissionChecker->getPermissionQueryResult($user->getGroupId());
-                                    $group = $group["name"];
+                                    $group = $group['name'];
                                 }
                                 ?>
                         <?php

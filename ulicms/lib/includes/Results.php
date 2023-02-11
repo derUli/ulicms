@@ -72,11 +72,11 @@ function HTTPStatusCodeResult(
     int $status,
     ?string $description = null
 ): void {
-    $header = $_SERVER ["SERVER_PROTOCOL"] . " "
+    $header = $_SERVER ['SERVER_PROTOCOL'] . " "
             . getStatusCodeByNumber(intval($status));
 
-    if ($description != null and $description != "") {
-        $header = $_SERVER ["SERVER_PROTOCOL"] . " " .
+    if ($description != null and $description != '') {
+        $header = $_SERVER ['SERVER_PROTOCOL'] . " " .
                 intval($status) . " " . $description;
     }
     send_header($header);
@@ -90,7 +90,7 @@ function ExceptionResult(string $message, int $status = 500): void
 
     $size = getStringLengthInBytes($content);
     if (!TestHelper::isRunningPHPUnit()) {
-        send_header($_SERVER ["SERVER_PROTOCOL"] . " "
+        send_header($_SERVER ['SERVER_PROTOCOL'] . " "
                 . getStatusCodeByNumber(intval($status)));
         send_header("Content-Type: text/html; charset=UTF-8");
         send_header("Content-length: $size");

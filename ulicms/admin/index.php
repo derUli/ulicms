@@ -56,7 +56,7 @@ if (isset($cfg->ip_whitelist) && is_array($cfg->ip_whitelist) && count($cfg->ip_
 // if the user is logged in then update the time of
 // last action on every request
 if (is_logged_in()) {
-    db_query("UPDATE " . tbname("users") . " SET last_action = " . time() . " WHERE id = " . get_user_id());
+    db_query("UPDATE " . tbname('users') . " SET last_action = " . time() . " WHERE id = " . get_user_id());
 }
 
 send_header("Content-Type: text/html; charset=UTF-8");

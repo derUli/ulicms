@@ -7,7 +7,7 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase
         $_SESSION['language'] = 'en';
         require_once getLanguageFilePath('en');
         $_SERVER = [];
-        $_SERVER["REQUEST_URI"] = "/other-url.html?param=value";
+        $_SERVER['REQUEST_URI'] = "/other-url.html?param=value";
     }
 
     protected function tearDown(): void
@@ -214,10 +214,10 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase
     public function testGetBaseUrl()
     {
         $_SERVER['HTTP_HOST'] = "company.com";
-        $_SERVER["REQUEST_URI"] = "/foo.png";
+        $_SERVER['REQUEST_URI'] = "/foo.png";
         $this->assertEquals("http://company.com/", ModuleHelper::getBaseUrl());
         $this->assertEquals("http://company.com/admin/gfx/logo.png", ModuleHelper::getBaseUrl("/admin/gfx/logo.png"));
-        $_SERVER["REQUEST_URI"] = "/subdir/foo.png";
+        $_SERVER['REQUEST_URI'] = "/subdir/foo.png";
         $this->assertEquals("http://company.com/subdir/", ModuleHelper::getBaseUrl());
         $this->assertEquals("http://company.com/subdir/admin/gfx/logo.png", ModuleHelper::getBaseUrl("/admin/gfx/logo.png"));
     }
@@ -226,13 +226,13 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase
     {
         chdir("admin/");
         $_SERVER['HTTP_HOST'] = "company.com";
-        $_SERVER["REQUEST_URI"] = "/foo.png";
+        $_SERVER['REQUEST_URI'] = "/foo.png";
         $this->assertEquals("http://company.com/", ModuleHelper::getBaseUrl());
         $this->assertEquals(
             "http://company.com/admin/gfx/logo.png",
             ModuleHelper::getBaseUrl("/admin/gfx/logo.png")
         );
-        $_SERVER["REQUEST_URI"] = "/subdir/foo.png";
+        $_SERVER['REQUEST_URI'] = "/subdir/foo.png";
         $this->assertEquals(
             "http://company.com/subdir/",
             ModuleHelper::getBaseUrl()

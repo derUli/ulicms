@@ -194,7 +194,7 @@ class ContentFactory
         $sql = "select id, `type` from " . tbname("content") .
                 " where active = 1 and deleted_at is null and ";
 
-        if ($language !== null && $language !== "") {
+        if ($language !== null && $language !== '') {
             $language = Database::escapeValue($language);
             $sql .= "language = '$language' and ";
         }
@@ -202,7 +202,7 @@ class ContentFactory
             $category_id = (int) $category_id;
             $sql .= "category_id = $category_id and ";
         }
-        if ($menu !== null && $menu !== "") {
+        if ($menu !== null && $menu !== '') {
             $menu = Database::escapeValue($menu);
             $sql .= "menu = '$menu' and ";
         }
@@ -212,7 +212,7 @@ class ContentFactory
             $sql .= "parent_id = $parent_id and ";
         }
 
-        if ($type !== null && $type !== "") {
+        if ($type !== null && $type !== '') {
             $type = Database::escapeValue($type);
             $sql .= "type = '$type' and ";
         }

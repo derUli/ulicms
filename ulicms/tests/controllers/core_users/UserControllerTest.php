@@ -10,8 +10,8 @@ class UserControllerTest extends \PHPUnit\Framework\TestCase
         $_SESSION = [
             "login_id" => $user->getId()
         ];
-        $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
-        $_SERVER["SERVER_PORT"] = "80";
+        $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
+        $_SERVER['SERVER_PORT'] = "80";
         $_SERVER['HTTP_HOST'] = "example.org";
         $_SERVER['REQUEST_URI'] = "/foobar/foo.html";
     }

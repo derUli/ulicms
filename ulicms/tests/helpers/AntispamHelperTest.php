@@ -87,19 +87,19 @@ class AntispamHelperTest extends \PHPUnit\Framework\TestCase
         Settings::set("country_blacklist", "vn,jp,at,tr");
 
         // Vietnam
-        $_SERVER["REMOTE_ADDR"] = "123.30.54.106";
+        $_SERVER['REMOTE_ADDR'] = "123.30.54.106";
         $this->assertTrue(AntiSpamHelper::isCountryBlocked());
 
         // Japan
-        $_SERVER["REMOTE_ADDR"] = "202.172.26.11";
+        $_SERVER['REMOTE_ADDR'] = "202.172.26.11";
         $this->assertTrue(AntiSpamHelper::isCountryBlocked());
 
         // Austria
-        $_SERVER["REMOTE_ADDR"] = "194.116.243.20";
+        $_SERVER['REMOTE_ADDR'] = "194.116.243.20";
         $this->assertTrue(AntiSpamHelper::isCountryBlocked());
 
         // Turkey
-        $_SERVER["REMOTE_ADDR"] = "88.255.55.110";
+        $_SERVER['REMOTE_ADDR'] = "88.255.55.110";
         $this->assertTrue(AntiSpamHelper::isCountryBlocked());
     }
 
@@ -108,18 +108,18 @@ class AntispamHelperTest extends \PHPUnit\Framework\TestCase
         Settings::set("country_blacklist", "vn,jp,at,tr");
 
         // Germany
-        $_SERVER["REMOTE_ADDR"] = "178.254.29.67";
+        $_SERVER['REMOTE_ADDR'] = "178.254.29.67";
         $this->assertFalse(AntiSpamHelper::isCountryBlocked());
 
         // Italy
-        $_SERVER["REMOTE_ADDR"] = "40.84.199.233";
+        $_SERVER['REMOTE_ADDR'] = "40.84.199.233";
         $this->assertFalse(AntiSpamHelper::isCountryBlocked());
 
         // United Kingdom
-        $_SERVER["REMOTE_ADDR"] = "52.222.250.185";
+        $_SERVER['REMOTE_ADDR'] = "52.222.250.185";
         $this->assertFalse(AntiSpamHelper::isCountryBlocked());
 
-        $_SERVER["REMOTE_ADDR"] = "not an ip address";
+        $_SERVER['REMOTE_ADDR'] = "not an ip address";
         $this->assertFalse(AntiSpamHelper::isCountryBlocked());
 
         $this->assertFalse(

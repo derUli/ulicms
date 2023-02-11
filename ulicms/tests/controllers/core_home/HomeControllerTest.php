@@ -7,9 +7,9 @@ class HomeControllerTest extends \PHPUnit\Framework\TestCase
         require_once getLanguageFilePath('en');
         Settings::set("installed_at", "1495362918");
 
-        $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
-        $_SERVER["SERVER_PORT"] = "443";
-        $_SERVER["HTTPS"] = "on";
+        $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
+        $_SERVER['SERVER_PORT'] = "443";
+        $_SERVER['HTTPS'] = "on";
         $_SERVER['HTTP_HOST'] = "example.org";
         $_SERVER['REQUEST_URI'] = "/foobar/foo.html";
     }

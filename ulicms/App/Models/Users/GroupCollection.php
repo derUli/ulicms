@@ -21,7 +21,7 @@ class GroupCollection
     public function getAllowableTags(): string
     {
         $groups = $this->user->getAllGroups();
-        $tagString = "";
+        $tagString = '';
         foreach ($groups as $group) {
             if ($group->getAllowableTags()) {
                 $tagString .= $group->getAllowableTags();

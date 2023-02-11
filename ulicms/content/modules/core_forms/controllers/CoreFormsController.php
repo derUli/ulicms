@@ -85,7 +85,7 @@ class CoreFormsController extends Controller
                 HTMLResult($spamCheck, HttpStatusCode::FORBIDDEN);
             }
 
-            $form_id = Request::getVar("submit-cms-form", null, "int");
+            $form_id = Request::getVar("submit-cms-form", null, 'int');
             Forms::submitForm($form_id);
         }
     }

@@ -67,7 +67,7 @@ class DBMigratorTest extends \PHPUnit\Framework\TestCase
             Database::any(
                 Database::selectAll(
                     "dbtrack",
-                    ["id"],
+                    ['id'],
                     "component = 'dbmigrator_test'"
                 )
             )
@@ -80,7 +80,7 @@ class DBMigratorTest extends \PHPUnit\Framework\TestCase
             Database::any(
                 Database::selectAll(
                     "dbtrack",
-                    ["id"],
+                    ['id'],
                     "component = 'dbmigrator_test'"
                 )
             )

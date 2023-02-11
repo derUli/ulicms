@@ -483,7 +483,7 @@ class FineDiff
         FineDiff::wordDelimiters
     );
 
-    public const characterDelimiters = "";
+    public const characterDelimiters = '';
 
     public static $characterGranularity = array(
         FineDiff::paragraphDelimiters,

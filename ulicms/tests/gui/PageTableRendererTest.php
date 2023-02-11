@@ -167,7 +167,7 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase
                 "parent_id" => $parentPage->getID()
             ],
             "default",
-            ["id"]
+            ['id']
         );
 
         $this->assertGreaterThanOrEqual(2, count($data["data"]));

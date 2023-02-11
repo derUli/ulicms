@@ -30,10 +30,10 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         }
         $this->setSiteSlogan();
 
-        $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
-        $_SERVER["SERVER_PORT"] = "80";
+        $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
+        $_SERVER['SERVER_PORT'] = "80";
         $_SERVER['HTTP_HOST'] = "example.org";
-        $_SERVER["REQUEST_URI"] = "/other-url.html?param=value";
+        $_SERVER['REQUEST_URI'] = "/other-url.html?param=value";
         $_SESSION = [];
         $_GET = [];
 
@@ -248,7 +248,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
     {
         $_GET["slug"] = "lorem_ipsum";
         $_SESSION['language'] = 'de';
-        $_GET["REQUEST_URI"] = "/lorem_ipsum.html";
+        $_GET['REQUEST_URI'] = "/lorem_ipsum.html";
         $content = Template::getContent();
 
         $this->assertStringContainsString(
@@ -262,7 +262,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
     {
         $_GET["slug"] = "lorem_ipsum";
         $_SESSION['language'] = 'de';
-        $_GET["REQUEST_URI"] = "/lorem_ipsum.html";
+        $_GET['REQUEST_URI'] = "/lorem_ipsum.html";
 
         ob_start();
         Template::content();
@@ -278,7 +278,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
     {
         $_GET["slug"] = "gibts_nicht";
         $_SESSION['language'] = 'de';
-        $_GET["REQUEST_URI"] = "/gibts_nicht.html";
+        $_GET['REQUEST_URI'] = "/gibts_nicht.html";
 
         $content = Template::getContent();
 
@@ -425,7 +425,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         $_SESSION['language'] = $page->language;
         $_GET["slug"] = $page->slug;
 
-        $_GET["REQUEST_URI"] = "/{$page->slug}.html";
+        $_GET['REQUEST_URI'] = "/{$page->slug}.html";
         $this->assertEquals(
             "<p>Wir schreiben das Jahr " . date("Y") .
             " des fliegenden Spaghettimonsters</p>",
@@ -533,7 +533,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
     public function testGetBodyClassesMobile()
     {
         $_SESSION['language'] = 'de';
-        $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (iPhone; CPU iPhone OS 5_0" .
+        $_SERVER['HTTP_USER_AGENT'] = "Mozilla/5.0 (iPhone; CPU iPhone OS 5_0" .
                 " like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) " .
                 "Version/5.1 Mobile/9A334 Safari/7534.48.3";
         $this->assertStringContainsString(
@@ -552,7 +552,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
     public function testGetBodyClassesDesktop()
     {
         $_SESSION['language'] = 'de';
-        $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (Windows NT 6.1;" .
+        $_SERVER['HTTP_USER_AGENT'] = "Mozilla/5.0 (Windows NT 6.1;" .
                 " Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)" .
                 " Chrome/63.0.3239.132 Safari/537.36";
         $this->assertStringContainsString(

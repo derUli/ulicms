@@ -85,7 +85,7 @@ class CoreFormsControllerTest extends \PHPUnit\Framework\TestCase
             "foo" => "bar",
             "hello" => "world"
         ];
-        $_SERVER["REMOTE_ADDR"] = "123.30.54.106";
+        $_SERVER['REMOTE_ADDR'] = "123.30.54.106";
         $controller = new CoreFormsController();
         $this->assertStringContainsString(
             "Access to this function for your country is blocked",

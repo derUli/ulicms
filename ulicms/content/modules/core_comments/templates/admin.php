@@ -9,8 +9,8 @@ $controller = ModuleHelper::getMainController("core_comments");
 $defaultStatus = $controller->_getDefaultStatus();
 
 $selectedStatus = Request::getVar("status", $defaultStatus, "str");
-$content_id = Request::getVar("content_id", 0, "int");
-$limit = Request::getVar("limit", $controller->_getDefaultLimit(), "int");
+$content_id = Request::getVar("content_id", 0, 'int');
+$limit = Request::getVar("limit", $controller->_getDefaultLimit(), 'int');
 
 $comments = is_array(BackendPageRenderer::getModel()) ?
         BackendPageRenderer::getModel() :
@@ -143,10 +143,10 @@ echo ModuleHelper::buildMethodCallForm(
                     false,
                     $comment->getId(),
                     [
-                                "class" => "checkbox comment-checkbox",
-                                "data-select-all-checkbox" => ".select-all",
-                                "data-checkbox-group" => ".comment-checkbox"
-                            ]
+                                        "class" => "checkbox comment-checkbox",
+                                        "data-select-all-checkbox" => ".select-all",
+                                        "data-checkbox-group" => ".comment-checkbox"
+                                    ]
                 );
                 ?></td>
                     <td>

@@ -37,11 +37,11 @@ if (!$permissionChecker->hasPermission("forms")) {
             <tbody>
                 <?php
                 foreach ($forms as $form) {
-                    $submit_form_url = "?submit-cms-form=" . $form["id"];
+                    $submit_form_url = "?submit-cms-form=" . $form['id'];
                     ?>
-                    <tr id="dataset-<?php echo $form["id"]; ?>">
-                        <td><?php echo $form["id"]; ?></td>
-                        <td><?php esc($form["name"]); ?></td>
+                    <tr id="dataset-<?php echo $form['id']; ?>">
+                        <td><?php echo $form['id']; ?></td>
+                        <td><?php esc($form['name']); ?></td>
                         <td class="hide-on-mobile"><?php esc($form["email_to"]); ?></td>
                         <td><input
                                 class="form-submit-url select-on-click"
@@ -57,7 +57,7 @@ if (!$permissionChecker->hasPermission("forms")) {
                             ?>
                             <td class="text-center">
                                 <a
-                                    href="?action=forms_edit&id=<?php echo $form["id"]; ?>" class="is-ajax"
+                                    href="?action=forms_edit&id=<?php echo $form['id']; ?>" class="is-ajax"
                                     ><img src="gfx/edit.png" class="mobile-big-image"
                                       alt="<?php translate("edit"); ?>"
                                       title="<?php translate("edit"); ?>"></a>
@@ -69,7 +69,7 @@ if (!$permissionChecker->hasPermission("forms")) {
                                         "FormController",
                                         "delete"
                                     ),
-                                ["del" => $form ["id"]]
+                                ["del" => $form ['id']]
                             );
                             ?>
                             </td>

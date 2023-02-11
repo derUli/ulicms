@@ -79,7 +79,7 @@ if (!$permissionChecker->hasPermission("forms") || !$permissionChecker->hasPermi
         <select class="form-control"
                 name="target_page_id">
                     <?php foreach ($pages as $page) { ?>
-                <option value="<?php echo $page["id"]; ?>"><?php
+                <option value="<?php echo $page['id']; ?>"><?php
                     esc(
         $page["title"]
     );

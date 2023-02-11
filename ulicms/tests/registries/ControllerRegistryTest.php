@@ -19,7 +19,7 @@ class ControllerRegistryTest extends \PHPUnit\Framework\TestCase
         Database::query("delete from {prefix}users where username like 'testuser-%'", true);
         unset($_REQUEST["sClass"]);
         unset($_REQUEST["sMethod"]);
-        unset($_SERVER["REQUEST_METHOD"]);
+        unset($_SERVER['REQUEST_METHOD']);
     }
 
     public function testGetWithClassNameReturnsController()
@@ -137,7 +137,7 @@ class ControllerRegistryTest extends \PHPUnit\Framework\TestCase
     {
         $_REQUEST["sClass"] = "Fortune";
         $_REQUEST["sMethod"] = "helloWorld";
-        $_SERVER["REQUEST_METHOD"] = "GET";
+        $_SERVER['REQUEST_METHOD'] = "GET";
 
         ob_start();
         ControllerRegistry::runMethods();

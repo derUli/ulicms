@@ -6,7 +6,7 @@ class ControllerTest extends \PHPUnit\Framework\TestCase
 {
     protected function setUp(): void
     {
-        $_SERVER["REQUEST_METHOD"] = "POST";
+        $_SERVER['REQUEST_METHOD'] = "POST";
         $_SESSION = [];
 
         Translation::loadAllModuleLanguageFiles('en');
@@ -80,7 +80,7 @@ class ControllerTest extends \PHPUnit\Framework\TestCase
 
         $controller = new Fortune();
 
-        $_SERVER["REQUEST_METHOD"] = "put";
+        $_SERVER['REQUEST_METHOD'] = "put";
         $_REQUEST["sClass"] = Fortune::class;
         $_REQUEST["sMethod"] = "doSomething";
 

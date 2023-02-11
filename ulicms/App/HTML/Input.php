@@ -57,8 +57,8 @@ class Input
         int $cols = 80,
         array $htmlAttributes = []
     ): string {
-        if (!isset($htmlAttributes["id"])) {
-            $htmlAttributes["id"] = $name;
+        if (!isset($htmlAttributes['id'])) {
+            $htmlAttributes['id'] = $name;
         }
         if (isset($htmlAttributes["class"])) {
             $htmlAttributes["class"] .= " " . get_html_editor();
@@ -160,8 +160,8 @@ class Input
             $attributes[$key] = $val;
         }
 
-        if (!isset($attributes["id"])) {
-            $attributes["id"] = $name;
+        if (!isset($attributes['id'])) {
+            $attributes['id'] = $name;
         }
 
         $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);

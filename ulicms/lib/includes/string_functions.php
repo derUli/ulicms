@@ -167,7 +167,7 @@ function strbool($value): string
 
 function convertLineEndingsToLN(string $s): string
 {
-  return normalizeLN($s, "\n");
+    return normalizeLN($s, "\n");
 }
 
 function str_replace_nth(

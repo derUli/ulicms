@@ -354,7 +354,7 @@ class ModuleHelper extends Helper
     public static function buildHTMLAttributesFromArray(
         array $attributes = []
     ): string {
-        $html = "";
+        $html = '';
         foreach ($attributes as $key => $value) {
             $val = is_bool($value) ? strbool($value) : $value;
             $html .= Template::getEscape($key) . '="' . Template::getEscape($val) . '" ';

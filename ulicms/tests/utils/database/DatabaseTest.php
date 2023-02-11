@@ -367,7 +367,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase
 
         while ($row = Database::fetchArray($query)) {
             $this->assertCount(6, $row);
-            $this->assertNotEmpty($row["name"]);
+            $this->assertNotEmpty($row['name']);
         }
     }
 

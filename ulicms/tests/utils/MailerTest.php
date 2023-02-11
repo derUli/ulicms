@@ -42,7 +42,7 @@ class MailerTest extends \PHPUnit\Framework\TestCase
 
     public function testSplitHeaders()
     {
-        $headers = "";
+        $headers = '';
         $headers .= "From: info@company.com\n";
         $headers .= "Reply-To: reply@company.com\n";
         $headers .= ":Invalid Column\n";

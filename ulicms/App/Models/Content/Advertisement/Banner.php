@@ -354,7 +354,7 @@ class Banner extends Model
 
     public function render(): string
     {
-        $html = "";
+        $html = '';
         switch ($this->getType()) {
             case "gif":
                 $title = Template::getEscape($this->getName());

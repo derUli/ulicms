@@ -570,7 +570,7 @@ class RoboFile extends Tasks
      * Run PHPUnit Tests
      * @param string $testFile test file to run
      */
-    public function testsRun(string $testFile = "")
+    public function testsRun(string $testFile = '')
     {
         $command = "vendor/bin/phpunit";
         if (DIRECTORY_SEPARATOR === "\\") {
@@ -584,7 +584,7 @@ class RoboFile extends Tasks
      * Run PHPUnit Tests and update snapshots
      * @param string $testFile test file to run
      */
-    public function testsUpdateSnapshots(string $testFile = "")
+    public function testsUpdateSnapshots(string $testFile = '')
     {
         $command = "vendor/bin/phpunit -d --update-snapshots";
         if (DIRECTORY_SEPARATOR === "\\") {

@@ -93,7 +93,7 @@ function setLanguageByDomain(): bool
     $domainMapping = Settings::mappingStringToArray($domainMapping);
 
     foreach ($domainMapping as $domain => $language) {
-        $givenDomain = $_SERVER["HTTP_HOST"];
+        $givenDomain = $_SERVER['HTTP_HOST'];
         if ($domain == $givenDomain && in_array(
             $language,
             getAllLanguages()

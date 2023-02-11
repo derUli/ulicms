@@ -33,8 +33,8 @@ class DbFunctionsTest extends \PHPUnit\Framework\TestCase
     {
         $datasets = Database::selectAll("settings");
         while ($row = db_fetch_assoc($datasets)) {
-            $this->assertIsNumeric($row["id"]);
-            $this->assertNotEmpty($row["name"]);
+            $this->assertIsNumeric($row['id']);
+            $this->assertNotEmpty($row['name']);
             $this->assertIsString($row["value"]);
         }
     }
@@ -53,8 +53,8 @@ class DbFunctionsTest extends \PHPUnit\Framework\TestCase
     {
         $datasets = Database::selectAll("settings");
         while ($row = db_fetch_array($datasets)) {
-            $this->assertIsNumeric($row["id"]);
-            $this->assertNotEmpty($row["name"]);
+            $this->assertIsNumeric($row['id']);
+            $this->assertNotEmpty($row['name']);
             $this->assertIsString($row["value"]);
 
             $this->assertIsNumeric($row[0]);

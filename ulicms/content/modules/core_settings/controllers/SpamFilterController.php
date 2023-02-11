@@ -56,7 +56,7 @@ class SpamFilterController extends Controller
         $min_time_to_fill_form = Request::getVar(
             "min_time_to_fill_form",
             0,
-            "int"
+            'int'
         );
 
         Settings::set("min_time_to_fill_form", $min_time_to_fill_form);

@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace App\Constants;
 
-/* * *
+/**
  * Bootstrap 3.x Button Styles
  */
-
-class ButtonType {
-
+class ButtonType
+{
     public const BUTTON_BUTTON = 'button';
     public const BUTTON_SUBMIT = 'submit';
     public const BUTTON_RESET = 'reset';
@@ -21,5 +20,4 @@ class ButtonType {
     public const TYPE_WARNING = 'btn btn-warning';
     public const TYPE_DANGER = 'btn btn-danger';
     public const TYPE_LINK = 'btn btn-link';
-
 }

@@ -12,10 +12,10 @@ use App\HTML\Input;
 
 use function App\HTML\icon;
 
-$parent_id = Request::getVar("parent_id", null, "int");
+$parent_id = Request::getVar("parent_id", null, 'int');
 
 $permissionChecker = new ACL();
-$groups = db_query("SELECT id, name from " . tbname("groups"));
+$groups = db_query("SELECT id, name from " . tbname('groups'));
 if ($permissionChecker->hasPermission("pages")
         and $permissionChecker->hasPermission("pages_create")) {
     $editor = get_html_editor();
@@ -230,15 +230,15 @@ if ($permissionChecker->hasPermission("pages")
                         <?php
     foreach ($pages as $key => $page) {
         ?>
-                            <option value="<?php echo $page["id"]; ?>"
+                            <option value="<?php echo $page['id']; ?>"
                             <?php
-        if ($parent_id == $page["id"]) {
+        if ($parent_id == $page['id']) {
             echo "selected";
         }
         ?>>
                                 <?php esc($page["title"]); ?>
                                 (ID:
-        <?php echo $page["id"]; ?>
+        <?php echo $page['id']; ?>
                                 )
                             </option>
                         <?php }
@@ -529,10 +529,10 @@ if ($permissionChecker->hasPermission("pages")
                         <?php
     foreach ($pages as $key => $page) {
         ?>
-                            <option value="<?php echo $page["id"]; ?>">
+                            <option value="<?php echo $page['id']; ?>">
                                 <?php esc($page["title"]); ?>
                                 (ID:
-        <?php echo $page["id"]; ?>
+        <?php echo $page['id']; ?>
                                 )
                             </option>
                         <?php }

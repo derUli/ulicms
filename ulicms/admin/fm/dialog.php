@@ -58,7 +58,7 @@ if (checkRelativePath($subdir_path)) {
     $subdir = '';
 }
 
-if ($subdir == "") {
+if ($subdir == '') {
     if (!empty($_COOKIE['last_position']) && strpos($_COOKIE['last_position'], '.') === false) {
         $subdir = trim($_COOKIE['last_position']);
     }
@@ -67,7 +67,7 @@ if ($subdir == "") {
 setcookie('last_position', $subdir, time() + (86400 * 7));
 
 if ($subdir == '/') {
-    $subdir = "";
+    $subdir = '';
 }
 
 // If hidden folders are specified
@@ -77,7 +77,7 @@ if (count($config['hidden_folders'])) {
     foreach ($dirs as $dir) {
         if ($dir !== '' && in_array($dir, $config['hidden_folders'])) {
             // Ignore the path
-            $subdir = "";
+            $subdir = '';
             break;
         }
     }
@@ -102,7 +102,7 @@ if (!empty($_SESSION['RF']["subfolder"])
     $rfm_subfolder = $_SESSION['RF']['subfolder'];
 }
 
-if ($rfm_subfolder != "" && $rfm_subfolder[strlen($rfm_subfolder) - 1] != '/') {
+if ($rfm_subfolder != '' && $rfm_subfolder[strlen($rfm_subfolder) - 1] != '/') {
     $rfm_subfolder .= '/';
 }
 
@@ -112,7 +112,7 @@ if (($ftp && !$ftp->isDir(
     $config['ftp_base_folder'] . $config['upload_dir'] . $rfm_subfolder . $subdir
 )) || (!$ftp && !file_exists($config['current_path'] . $rfm_subfolder . $subdir))) {
     $subdir = '';
-    $rfm_subfolder = "";
+    $rfm_subfolder = '';
 }
 
 
@@ -136,7 +136,7 @@ if (!$ftp) {
         $i++;
 
         if ($parent == "./") {
-            $parent = "";
+            $parent = '';
         }
 
         if (is_file($config['current_path'] . $parent . "config.php")) {
@@ -157,7 +157,7 @@ if (!$ftp) {
             $cycle = false;
         }
 
-        if ($parent == "") {
+        if ($parent == '') {
             $cycle = false;
         } else {
             $parent = fix_dirname($parent) . '/';
@@ -216,7 +216,7 @@ if (isset($_GET['view'])) {
 $view = $_SESSION['RF']["view_type"];
 
 //filter
-$filter = "";
+$filter = '';
 if (isset($_SESSION['RF']["filter"])) {
     $filter = $_SESSION['RF']["filter"];
 }
@@ -934,7 +934,7 @@ switch ($sort_by) {
         break;
 }
 
-if ($subdir != "") {
+if ($subdir != '') {
     $sorted = array_merge(array(array('file' => '..')), $sorted);
 }
 
@@ -1134,7 +1134,7 @@ if (!empty($bc)) {
             ?>
                         <li class="active"><?php
             echo $b ?></li><?php
-        } elseif ($b != "") { ?>
+        } elseif ($b != '') { ?>
                         <li><a href="<?php
                 echo $link . $tmp_path ?>"><?php
                     echo $b ?></a></li>
@@ -1353,41 +1353,41 @@ if ($config['show_language_selection']) { ?>
                                 <div class="img-precontainer">
                                     <div class="img-container directory"><span></span>
                                         <img class="directory-img" data-src="img/<?php
-                                echo $config['icon_theme']; ?>/folder<?php
-                                if ($file == "..") {
-                                    echo "_back";
-                                } ?>.png"/>
+                                    echo $config['icon_theme']; ?>/folder<?php
+                                    if ($file == "..") {
+                                        echo "_back";
+                                    } ?>.png"/>
                                     </div>
                                 </div>
                                 <div class="img-precontainer-mini directory">
                                     <div class="img-container-mini">
                                         <span></span>
                                         <img class="directory-img" data-src="img/<?php
-                                echo $config['icon_theme']; ?>/folder<?php
-                                if ($file == "..") {
-                                    echo "_back";
-                                } ?>.png"/>
+                                    echo $config['icon_theme']; ?>/folder<?php
+                                    if ($file == "..") {
+                                        echo "_back";
+                                    } ?>.png"/>
                                     </div>
                                 </div>
                                 <?php
-                                if ($file == "..") { ?>
+                                    if ($file == "..") { ?>
                                 <div class="box no-effect">
                                     <h4><?php
-                                echo trans('Back') ?></h4>
+                                    echo trans('Back') ?></h4>
                                 </div>
                             </a>
 
                         <?php
-                                } else { ?>
+                                    } else { ?>
                             </a>
                             <div class="box">
                                 <h4 class="<?php
-                                        if ($config['ellipsis_title_after_first_row']) {
-                                            echo "ellipsis";
-                                        } ?>"><a class="folder-link" data-file="<?php
-                                            echo $file ?>" href="dialog.php?<?php
-                                            echo $get_params . rawurlencode($src) . "&" . uniqid() ?>"><?php
-                                                echo $file; ?></a></h4>
+                                            if ($config['ellipsis_title_after_first_row']) {
+                                                echo "ellipsis";
+                                            } ?>"><a class="folder-link" data-file="<?php
+                                                echo $file ?>" href="dialog.php?<?php
+                                                echo $get_params . rawurlencode($src) . "&" . uniqid() ?>"><?php
+                                                    echo $file; ?></a></h4>
                             </div>
                             <input type="hidden" class="name" value="<?php
                             echo $file_array['file_lcase']; ?>"/>
@@ -1398,15 +1398,15 @@ if ($config['show_language_selection']) { ?>
                             <input type="hidden" class="extension" value="<?php
                             echo fix_strtolower(trans('Type_dir')); ?>"/>
                             <div class="file-date"><?php
-                                        echo date(trans('Date_type'), $file_array['date']); ?></div>
+                                            echo date(trans('Date_type'), $file_array['date']); ?></div>
                             <?php
                             if ($config['show_folder_size']) { ?>
                                 <div class="file-size"><?php
-                                            echo makeSize($file_array['size']); ?></div>
+                                                echo makeSize($file_array['size']); ?></div>
                                 <input type="hidden" class="nfiles" value="<?php
-                                        echo $file_array['nfiles']; ?>"/>
+                                            echo $file_array['nfiles']; ?>"/>
                                 <input type="hidden" class="nfolders" value="<?php
-                                        echo $file_array['nfolders']; ?>"/>
+                                            echo $file_array['nfolders']; ?>"/>
                             <?php
                             } ?>
                             <div class='file-extension'><?php
@@ -1435,7 +1435,7 @@ if ($config['show_language_selection']) { ?>
                                 </a>
                             </figcaption>
                         <?php
-                                } ?>
+                                    } ?>
                         </figure>
                     </li>
                     <?php
@@ -1505,13 +1505,13 @@ if ($config['show_language_selection']) { ?>
                     $is_audio = false;
                     $show_original = false;
                     $show_original_mini = false;
-                    $mini_src = "";
-                    $src_thumb = "";
+                    $mini_src = '';
+                    $src_thumb = '';
                     if (in_array($file_array['extension'], $config['ext_img'])) {
                         $src = $file_path;
                         $is_img = true;
 
-                        $img_width = $img_height = "";
+                        $img_width = $img_height = '';
                         if ($ftp) {
                             $mini_src = $src_thumb = $config['ftp_base_url'] . $config['ftp_thumbs_dir'] . $subdir . $file;
                             $creation_thumb_path = '/' . $config['ftp_base_folder'] . $config['ftp_thumbs_dir'] . $subdir . $file;
@@ -1520,7 +1520,7 @@ if ($config['show_language_selection']) { ?>
 
                             if (!file_exists($src_thumb)) {
                                 if (create_img($file_path, $creation_thumb_path, 122, 91, 'crop', $config) !== true) {
-                                    $src_thumb = $mini_src = "";
+                                    $src_thumb = $mini_src = '';
                                 }
                             }
                             //check if is smaller than thumb
@@ -1539,7 +1539,7 @@ if ($config['show_language_selection']) { ?>
                     $is_icon_thumb = false;
                     $is_icon_thumb_mini = false;
                     $no_thumb = false;
-                    if ($src_thumb == "") {
+                    if ($src_thumb == '') {
                         $no_thumb = true;
                         if (file_exists('img/' . $config['icon_theme'] . '/' . $file_array['extension'] . ".jpg")) {
                             $src_thumb = 'img/' . $config['icon_theme'] . '/' . $file_array['extension'] . ".jpg";
@@ -1548,7 +1548,7 @@ if ($config['show_language_selection']) { ?>
                         }
                         $is_icon_thumb = true;
                     }
-                    if ($mini_src == "") {
+                    if ($mini_src == '') {
                         $is_icon_thumb_mini = false;
                     }
 
@@ -1644,7 +1644,7 @@ if ($config['show_language_selection']) { ?>
                                     echo $file_array['extension'] ?></div>
                                 <div class="img-container-mini">
                                     <?php
-                                    if ($mini_src != "") { ?>
+                                    if ($mini_src != '') { ?>
                                         <img class="<?php
                                         echo $show_original_mini ? "original" : "" ?><?php
                                         echo $is_icon_thumb_mini ? " icon" : "" ?>" data-src="<?php
@@ -1704,7 +1704,7 @@ if ($config['show_language_selection']) { ?>
                                             } ?>"></i></a>
 
                                 <?php
-                                if ($is_img && $src_thumb != "") { ?>
+                                if ($is_img && $src_thumb != '') { ?>
                                     <a class="tip-right preview" title="<?php
                                     echo trans('Preview') ?>" data-featherlight="<?php
                                     echo $src; ?>" href="#"><i class=" icon-eye-open"></i></a>

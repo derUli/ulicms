@@ -17,7 +17,7 @@ class FormController extends Controller
 
     public function _createPost(): ?int
     {
-        $name = $_POST["name"];
+        $name = $_POST['name'];
         $enabled = $_POST["enabled"];
         $email_to = $_POST["email_to"];
         $subject = $_POST["subject"];
@@ -50,8 +50,8 @@ class FormController extends Controller
 
     public function _updatePost(): bool
     {
-        $id = $_POST["id"];
-        $name = $_POST["name"];
+        $id = $_POST['id'];
+        $name = $_POST['name'];
         $enabled = $_POST["enabled"];
         $email_to = $_POST["email_to"];
         $subject = $_POST["subject"];
@@ -81,7 +81,7 @@ class FormController extends Controller
 
     public function deletePost(): void
     {
-        $id = Request::getVar("del", 0, "int");
+        $id = Request::getVar("del", 0, 'int');
         $this->_deletePost($id);
         Request::redirect(ModuleHelper::buildActionURL("forms"));
     }

@@ -170,7 +170,7 @@ if (isset($_GET['action'])) {
                     rename_folder($path_thumb, $name, $ftp, $config);
                     if (!$ftp && $config['fixed_image_creation']) {
                         foreach ($config['fixed_path_from_filemanager'] as $k => $paths) {
-                            if ($paths != "" && $paths[strlen($paths) - 1] != '/') {
+                            if ($paths != '' && $paths[strlen($paths) - 1] != '/') {
                                 $paths .= '/';
                             }
 
@@ -264,7 +264,7 @@ if (isset($_GET['action'])) {
                         $info = pathinfo($path);
 
                         foreach ($config['fixed_path_from_filemanager'] as $k => $paths) {
-                            if ($paths != "" && $paths[strlen($paths) - 1] != '/') {
+                            if ($paths != '' && $paths[strlen($paths) - 1] != '/') {
                                 $paths .= '/';
                             }
 
@@ -299,7 +299,7 @@ if (isset($_GET['action'])) {
                     if (!$ftp && $config['fixed_image_creation']) {
                         $info = pathinfo($path);
                         foreach ($config['fixed_path_from_filemanager'] as $k => $paths) {
-                            if ($paths != "" && $paths[strlen($paths) - 1] != '/') {
+                            if ($paths != '' && $paths[strlen($paths) - 1] != '/') {
                                 $paths .= '/';
                             }
 
@@ -330,7 +330,7 @@ if (isset($_GET['action'])) {
 
 
             if ($ftp) {
-                if ($_POST['path'] != "") {
+                if ($_POST['path'] != '') {
                     $path .= DIRECTORY_SEPARATOR;
                     $path_thumb .= DIRECTORY_SEPARATOR;
                 }

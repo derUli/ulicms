@@ -10,7 +10,7 @@ class ModelBinderExample extends Model
 
     public function setField1($value)
     {
-        Model::checkValueType($value, "int");
+        Model::checkValueType($value, 'int');
         $this->field1 = $value;
     }
 

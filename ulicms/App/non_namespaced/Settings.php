@@ -123,9 +123,9 @@ class Settings
                 break;
             case 'bool':
 
-                if ($value === "true") {
+                if ($value === 'true') {
                     $value = true;
-                } elseif ($value === "false") {
+                } elseif ($value === 'false') {
                     $value = false;
                 }
 

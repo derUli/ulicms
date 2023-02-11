@@ -11,7 +11,7 @@ use App\Security\TwoFactorAuthentication;
 function getUsers(): array
 {
     $users = [];
-    $result = Database::query("SELECT id, username FROM " . tbname("users") .
+    $result = Database::query("SELECT id, username FROM " . tbname('users') .
                     " ORDER by username");
     while ($row = db_fetch_assoc($result)) {
         $users[] = $row;
@@ -26,7 +26,7 @@ function getUsers(): array
  */
 function getUsersOnline(): array
 {
-    $users_online = Database::query("SELECT username FROM " . tbname("users") . " WHERE last_action > " . (time() - 300) . " ORDER BY username");
+    $users_online = Database::query("SELECT username FROM " . tbname('users') . " WHERE last_action > " . (time() - 300) . " ORDER BY username");
     $retval = [];
     while ($row = db_fetch_object($users_online)) {
         $retval[] = $row->username;
@@ -47,7 +47,7 @@ function changePassword($password, $userId)
 
 function getUserByName(string $name): ?array
 {
-    $result = Database::query("SELECT * FROM " . tbname("users") .
+    $result = Database::query("SELECT * FROM " . tbname('users') .
                     " WHERE username='" . Database::escapeValue($name, DB_TYPE_STRING) . "'");
     if (db_num_rows($result) > 0) {
         return db_fetch_assoc($result);
@@ -57,7 +57,7 @@ function getUserByName(string $name): ?array
 
 function getUserById($id): ?array
 {
-    $result = Database::query("SELECT * FROM " . tbname("users") .
+    $result = Database::query("SELECT * FROM " . tbname('users') .
                     " WHERE id = " . (int)$id);
     if (db_num_rows($result) > 0) {
         return db_fetch_assoc($result);
@@ -76,8 +76,8 @@ function get_user_id(): int
 
 function get_group_id(): int
 {
-    if (isset($_SESSION["group_id"])) {
-        return intval($_SESSION["group_id"]);
+    if (isset($_SESSION['group_id'])) {
+        return intval($_SESSION['group_id']);
     } else {
         return 0;
     }
@@ -92,7 +92,7 @@ function user_exists(string $name): bool
 
 function register_session(array $user, bool $redirect = true): void
 {
-    $userDataset = new User($user["id"]);
+    $userDataset = new User($user['id']);
     $userDataset->registerSession($redirect);
 }
 
@@ -178,7 +178,7 @@ function get_gravatar(
         $url = $user->getAvatar();
     }
 
-    $html = "";
+    $html = '';
     if ($img) {
         $html = '<img src="' . $url . '"';
         foreach ($atts as $key => $val) {

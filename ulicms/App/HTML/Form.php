@@ -19,7 +19,7 @@ class Form
         string $requestMethod = RequestMethod::POST,
         array $htmlAttributes = []
     ): string {
-        $html = "";
+        $html = '';
         $attribhtml = StringHelper::isNotNullOrWhitespace(
             ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes)
         ) ?
@@ -75,16 +75,16 @@ class Form
         array $otherVars = [],
         array $htmlAttributes = []
     ) {
-        $html = "";
+        $html = '';
 
         if (!isset($htmlAttributes["class"])) {
-            $htmlAttributes["class"] = "";
+            $htmlAttributes["class"] = '';
         }
 
         $htmlAttributes["class"] = trim("delete-form " . $htmlAttributes["class"]);
 
         $htmlAttributesString = ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes);
-        $attribHtml = "";
+        $attribHtml = '';
 
         if (!empty($htmlAttributes)) {
             $attribHtml .= " $htmlAttributesString";

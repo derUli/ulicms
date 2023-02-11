@@ -53,7 +53,7 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase
 
     public function testIsCrawlerWithoutUseragent()
     {
-        unset($_SERVER["HTTP_USER_AGENT"]);
+        unset($_SERVER['HTTP_USER_AGENT']);
         $this->assertFalse(
             is_crawler()
         );
@@ -61,7 +61,7 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase
 
     public function testIsCrawlerWithUseragentFromSession()
     {
-        $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)";
+        $_SERVER['HTTP_USER_AGENT'] = "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)";
         $this->assertTrue(
             is_crawler()
         );

@@ -132,8 +132,8 @@ class ACLTest extends \PHPUnit\Framework\TestCase
         $this->assertIsArray($groupData);
 
         $this->assertGreaterThanOrEqual(4, count($groupData));
-        $this->assertIsNumeric($groupData["id"]);
-        $this->assertNotEmpty($groupData["name"]);
+        $this->assertIsNumeric($groupData['id']);
+        $this->assertNotEmpty($groupData['name']);
         $this->assertTrue(is_json($groupData["permissions"]));
         $this->assertArrayHasKey(
             "allowable_tags",
@@ -149,15 +149,15 @@ class ACLTest extends \PHPUnit\Framework\TestCase
         $group->setName("testgroup");
         $group->save();
 
-        $_SESSION["group_id"] = $group->getId();
+        $_SESSION['group_id'] = $group->getId();
 
         $acl = new ACL();
         $groupData = $acl->getPermissionQueryResult();
         $this->assertIsArray($groupData);
 
         $this->assertGreaterThanOrEqual(4, count($groupData));
-        $this->assertIsNumeric($groupData["id"]);
-        $this->assertNotEmpty($groupData["name"]);
+        $this->assertIsNumeric($groupData['id']);
+        $this->assertNotEmpty($groupData['name']);
         $this->assertTrue(is_json($groupData["permissions"]));
         $this->assertArrayHasKey(
             "allowable_tags",

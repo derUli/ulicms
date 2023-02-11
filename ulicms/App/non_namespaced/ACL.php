@@ -5,8 +5,10 @@ declare(strict_types=1);
 use App\Security\PermissionChecker;
 use App\Constants\ModuleEventConstants;
 
-// old permission check class
-// please use PermissionChecker instead
+/**
+ * Old permission checker class
+ * @deprecated since version 2023.1
+ */
 class ACL
 {
     public function hasPermission(string $name): bool
@@ -15,11 +17,17 @@ class ACL
         return $checker->hasPermission($name);
     }
 
+    /**
+     * Creates a group
+     * @param string $name
+     * @param array|null $permissions
+     * @return int
+     */
     public function createGroup(string $name, ?array $permissions = null): int
     {
         $permissionData = $permissions === null ? $this->getDefaultACL() : json_encode($permissions);
 
-        $sql = "INSERT INTO `" . tbname("groups") .
+        $sql = "INSERT INTO `" . tbname('groups') .
                 "` (`name`, `permissions`) " .
                 "VALUES('" . db_escape($name) . "','" .
                 db_escape($permissionData) . "')";
@@ -31,6 +39,13 @@ class ACL
         return Database::getLastInsertID();
     }
 
+    /**
+     * Updates a group
+     * @param int $id
+     * @param string $name
+     * @param array|null $permissions
+     * @return int
+     */
     public function updateGroup(
         int $id,
         string $name,
@@ -38,7 +53,7 @@ class ACL
     ): int {
         $permissionData = $permissions === null ? $this->getDefaultACL() : json_encode($permissions);
 
-        $sql = "UPDATE `" . tbname("groups") . "` SET name='" .
+        $sql = "UPDATE `" . tbname('groups') . "` SET name='" .
                 db_escape($name) . "', permissions='" . db_escape($permissionData) . "' WHERE id=" . $id;
 
         // Führe Query aus
@@ -47,38 +62,48 @@ class ACL
         return $id;
     }
 
+    /**
+     * Deletes a group
+     * @param int $id
+     * @param int|null $move_users_to
+     */
     public function deleteGroup(int $id, ?int $move_users_to = null)
     {
         $id = (int)$id;
 
         if ($move_users_to === null) {
-            $updateUsers = "UPDATE " . tbname("users") .
+            $updateUsers = "UPDATE " . tbname('users') .
                     " SET `group_id`=NULL where `group_id`=$id";
         } else {
-            $updateUsers = "UPDATE " . tbname("users") .
+            $updateUsers = "UPDATE " . tbname('users') .
                     " SET `group_id`=" . $move_users_to . " where `group_id`=$id";
         }
 
         db_query($updateUsers);
 
-        $deleteGroupSQL = "DELETE FROM `" . tbname("groups") .
+        $deleteGroupSQL = "DELETE FROM `" . tbname('groups') .
                 "` WHERE id=" . $id;
         db_query($deleteGroupSQL);
     }
 
+    /**
+     * Fetches a group
+     * @param int|null $id
+     * @return array|null
+     */
     public function getPermissionQueryResult(?int $id = null): ?array
     {
         $group_id = null;
         if ($id) {
             $group_id = $id;
-        } elseif (isset($_SESSION["group_id"])) {
-            $group_id = $_SESSION["group_id"];
+        } elseif (isset($_SESSION['group_id'])) {
+            $group_id = $_SESSION['group_id'];
         }
         if (!$group_id) {
             return null;
         }
 
-        $sqlString = "SELECT * FROM `" . tbname("groups") .
+        $sqlString = "SELECT * FROM `" . tbname('groups') .
                 "` WHERE id=" . $group_id;
         $result = db_query($sqlString);
 
@@ -91,18 +116,29 @@ class ACL
         return $dataset;
     }
 
+    /**
+     * Fetches all groups
+     * @param string $order
+     * @return array
+     */
     public function getAllGroups(string $order = 'id DESC'): array
     {
         $list = [];
-        $sql = "SELECT * FROM `" . tbname("groups") . "` ORDER by " . $order;
+        $sql = "SELECT * FROM `" . tbname('groups') . "` ORDER by " . $order;
         $result = db_query($sql);
         while ($assoc = db_fetch_assoc($result)) {
-            $list[$assoc["id"]] = $assoc["name"];
+            $list[$assoc['id']] = $assoc['name'];
         }
         return $list;
     }
 
-    // initializes a json object with default permissions
+    /**
+     * Returns default ACL permissions for a new user
+     * @global type $acl_array
+     * @param bool $admin If "admin" every permission is true
+     * @param bool $plain if true returns a JSON string
+     * @return bool
+     */
     public function getDefaultACLAsJSON(
         bool $admin = false,
         bool $plain = false
@@ -113,14 +149,14 @@ class ACL
         // Temporäres globales Array zum hinzufügen eigener Objekte
         global $acl_array;
         $acl_array = $acl_data;
-        do_event("custom_acl", ModuleEventConstants::RUNS_MULTIPLE);
+        do_event('custom_acl', ModuleEventConstants::RUNS_MULTIPLE);
         $acl_data = $acl_array;
         unset($acl_array);
 
         // read custom permissions from modules
         $modules = getAllModules();
         foreach ($modules as $module) {
-            $acl_metadata = getModuleMeta($module, "custom_acl");
+            $acl_metadata = getModuleMeta($module, 'custom_acl');
             if ($acl_metadata and is_array($acl_metadata)) {
                 foreach ($acl_metadata as $permission) {
                     $acl_data[$permission] = null;
@@ -144,6 +180,12 @@ class ACL
         return $json;
     }
 
+    /**
+     * Alias for getDefaultACLAsJSON()
+     * @param bool $admin
+     * @param bool $plain
+     * @return type
+     */
     public function getDefaultACL(bool $admin = false, bool $plain = false)
     {
         return $this->getDefaultACLAsJSON($admin, $plain);

@@ -45,7 +45,7 @@ class Template
     public static function outputContentElement(): void
     {
         $type = get_type();
-        $output = "";
+        $output = '';
         switch ($type) {
             case "list":
                 $output = Template::executeDefaultOrOwnTemplate("list");
@@ -114,7 +114,7 @@ class Template
         string $module,
         string $template
     ): string {
-        $retval = "";
+        $retval = '';
         $originalTemplatePath = getModulePath($module, true) . "templates/" .
                 $template;
         $ownTemplatePath = getTemplateDirPath(get_theme(), true) . $module
@@ -211,7 +211,7 @@ class Template
     public static function executeDefaultOrOwnTemplate(
         string $template
     ): string {
-        $retval = "";
+        $retval = '';
         $originalTemplatePath = ULICMS_ROOT . "/default/" . $template;
         $ownTemplatePath = getTemplateDirPath(get_theme()) . '/' . $template;
 
@@ -315,7 +315,7 @@ class Template
 
     public static function baseMetas(): void
     {
-        $title_format = Settings::get("title_format");
+        $title_format = Settings::get('title_format');
         if ($title_format) {
             $title = $title_format;
             $title = str_ireplace(
@@ -336,7 +336,7 @@ class Template
             echo '<meta name="format-detection" content="telephone=no"/>';
         }
 
-        $dir = dirname($_SERVER["SCRIPT_NAME"]);
+        $dir = dirname($_SERVER['SCRIPT_NAME']);
         $dir = str_replace("\\", '/', $dir);
 
         if (str_ends_with($dir, '/') == false) {
@@ -409,7 +409,7 @@ class Template
         $description = get_meta_description() ?
                 get_meta_description() : Settings::get("meta_description");
 
-        if ($description != "" && $description != false) {
+        if ($description != '' && $description != false) {
             $description = apply_filter($description, "meta_description");
             $$description = _esc($description);
             if (!Settings::get("hide_meta_description")) {
@@ -601,7 +601,7 @@ color: " . Settings::get("body-text-color") . ";
 
     public static function getEditButton(): string
     {
-        $html = "";
+        $html = '';
         if (!is_logged_in()) {
             return $html;
         }

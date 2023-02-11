@@ -191,7 +191,7 @@ function replaceOtherShortCodes(string $string): string
             // a page should not include itself
             // because that would cause an endless loop
             if ($page and $id != get_ID()) {
-                $content = "";
+                $content = '';
                 if ($page->active and checkAccess($page->access)) {
                     $content = $page->content;
                 }

@@ -40,9 +40,9 @@ function get_host(): string
         $host = trim(end($elements));
     } else {
         $vars = [
-            "HTTP_HOST",
-            "SERVER_NAME",
-            "SERVER_ADDR"
+            'HTTP_HOST',
+            'SERVER_NAME',
+            'SERVER_ADDR'
         ];
 
         foreach ($vars as $var) {
@@ -100,7 +100,7 @@ function ulicms_mail(
     string $to,
     string $subject,
     string $message,
-    ?string $headers = ""
+    ?string $headers = ''
 ): bool {
     return Mailer::send($to, $subject, $message, $headers);
 }

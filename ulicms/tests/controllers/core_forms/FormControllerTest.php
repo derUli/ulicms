@@ -62,7 +62,7 @@ class FormControllerTest extends \PHPUnit\Framework\TestCase
     {
         $page = ContentFactory::getAllRegular()[0];
 
-        $_POST["name"] = "Unit Test " . time();
+        $_POST['name'] = "Unit Test " . time();
         $_POST["enabled"] = "1";
         $_POST["email_to"] = "foo@example.invalid";
         $_POST["subject"] = "My Subject";
@@ -80,8 +80,8 @@ class FormControllerTest extends \PHPUnit\Framework\TestCase
         $controller = new FormController();
         $id = $controller->_createPost();
 
-        $_POST["id"] = $id;
-        $_POST["name"] = "Unit Test Updated";
+        $_POST['id'] = $id;
+        $_POST['name'] = "Unit Test Updated";
 
         $success = $controller->_updatePost();
         $this->assertTrue($success);
@@ -91,7 +91,7 @@ class FormControllerTest extends \PHPUnit\Framework\TestCase
     {
         $this->setPostVars();
 
-        $_POST["id"] = PHP_INT_MAX;
+        $_POST['id'] = PHP_INT_MAX;
 
         $controller = new FormController();
         $success = $controller->_updatePost();

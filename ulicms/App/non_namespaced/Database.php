@@ -175,7 +175,7 @@ class Database
         array $args = [],
         bool $replacePrefix = false
     ) {
-        $preparedQuery = "";
+        $preparedQuery = '';
         $chars = mb_str_split($sql);
         $i = 0;
         foreach ($chars as $char) {
@@ -241,7 +241,7 @@ class Database
     public static function selectMin(
         string $table,
         string $column,
-        string $where = "",
+        string $where = '',
         bool $prefix = true
     ) {
         if ($prefix) {
@@ -265,7 +265,7 @@ class Database
     public static function selectMax(
         string $table,
         string $column,
-        string $where = "",
+        string $where = '',
         bool $prefix = true
     ) {
         if ($prefix) {
@@ -289,7 +289,7 @@ class Database
     public static function selectAvg(
         string $table,
         string $column,
-        string $where = "",
+        string $where = '',
         bool $prefix = true
     ) {
         if ($prefix) {
@@ -312,7 +312,7 @@ class Database
 
     public static function deleteFrom(
         string $table,
-        string $where = "",
+        string $where = '',
         bool $prefix = true
     ): bool {
         if ($prefix) {
@@ -358,10 +358,10 @@ class Database
     public static function selectAll(
         string $table,
         array $columns = [],
-        string $where = "",
+        string $where = '',
         array $args = [],
         bool $replacePrefix = true,
-        string $order = ""
+        string $order = ''
     ): ?mysqli_result {
         if ($replacePrefix) {
             $table = tbname($table);
@@ -643,6 +643,3 @@ class Database
         return mysqli_store_result(self::$connection);
     }
 }
-
-// for backwards compatiblity
-class_alias(Database::class, "DB");

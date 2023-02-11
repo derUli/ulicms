@@ -6,7 +6,7 @@ $data = get_custom_data();
 if (isset($data["site_slogan"])) {
     $site_slogan = $data["site_slogan"];
 }
-$q = "";
+$q = '';
 if (isset($_GET["q"])) {
     $q = $_GET["q"];
 }
@@ -58,7 +58,7 @@ combinedStylesheetHtml();
                       action="<?php Template::escape(buildSEOURL($searchPage->slug)); ?>">
                     <input type="search" required="required" name="q"
                            value="<?php Template::escape($q); ?>" results="10"
-                           autosave="<?php echo md5($_SERVER ["SERVER_NAME"]); ?>"
+                           autosave="<?php echo md5($_SERVER ['SERVER_NAME']); ?>"
                            placeholder="<?php translate("search"); ?>...">
                 </form>
             <?php }

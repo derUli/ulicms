@@ -49,7 +49,7 @@ echo ModuleHelper::buildMethodCallForm(
                 $items = array(new ListItem("-1", "[" . get_translation("standard") . "]"));
                 foreach ($pages as $page) {
                     $items[] = new ListItem(
-                        $page["id"],
+                        $page['id'],
                         $page["title"]
                     );
                 }

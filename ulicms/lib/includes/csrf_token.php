@@ -10,7 +10,7 @@ function get_csrf_token_html(): string
 {
     $html = '<input type="hidden" name="csrf_token" value="' .
             get_csrf_token() . '">';
-    if (Settings::get("min_time_to_fill_form", "int") > 0) {
+    if (Settings::get("min_time_to_fill_form", 'int') > 0) {
         $html .= '<input type="hidden" name="form_timestamp" value="' .
                 time() . '">';
     }

@@ -9,8 +9,8 @@ function get_action(): string
 
 function _check_form_timestamp(): bool
 {
-    $original_timestamp = Request::getVar("form_timestamp", 0, "int");
-    $min_time_to_fill_form = Settings::get("min_time_to_fill_form", "int");
+    $original_timestamp = Request::getVar("form_timestamp", 0, 'int');
+    $min_time_to_fill_form = Settings::get("min_time_to_fill_form", 'int');
     return !(time() - $original_timestamp < $min_time_to_fill_form);
 }
 

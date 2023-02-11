@@ -30,7 +30,7 @@ class LanguageControllerTest extends \PHPUnit\Framework\TestCase
 
     public function testCreatePostReturnsModel(): void
     {
-        $_POST["name"] = "Lampukisch";
+        $_POST['name'] = "Lampukisch";
         $_POST["language_code"] = "lp";
         $controller = new LanguageController();
         $model = $controller->_createPost();
@@ -48,14 +48,14 @@ class LanguageControllerTest extends \PHPUnit\Framework\TestCase
         $lang->setLanguageCode("lp");
         $lang->save();
 
-        $_GET["id"] = $lang->getId();
+        $_GET['id'] = $lang->getId();
         $controller = new LanguageController();
         $this->assertTrue($controller->_deletePost());
     }
 
     public function testDeleteReturnsFalse(): void
     {
-        $_GET["id"] = PHP_INT_MAX;
+        $_GET['id'] = PHP_INT_MAX;
         $controller = new LanguageController();
         $this->assertFalse($controller->_deletePost());
     }

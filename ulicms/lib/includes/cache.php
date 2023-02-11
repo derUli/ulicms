@@ -4,18 +4,6 @@ declare(strict_types=1);
 
 defined('ULICMS_ROOT') or exit('no direct script access allowed');
 
-use App\Utils\CacheUtil;
-
-/**
- * Clears all caches
- * @deprecated since version 2023.1
- * @return void
- */
-function clearCache(): void
-{
-    CacheUtil::clearCache();
-}
-
 /**
  * Disable Cache
  * @param bool $do

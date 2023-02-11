@@ -37,7 +37,7 @@ if ($permissionChecker->hasPermission("pages")) {
     $users = getUsers();
 
     $groups = Group::getAll();
-    $groupsSql = db_query("SELECT id, name from " . tbname("groups"));
+    $groupsSql = db_query("SELECT id, name from " . tbname('groups'));
 
     $pages_change_owner = $permissionChecker->hasPermission("pages_change_owner");
 
@@ -284,15 +284,15 @@ if ($permissionChecker->hasPermission("pages")) {
                 foreach ($pages as $key => $page) {
                     ?>
                                             <option
-                                                value="<?php echo $page["id"]; ?>"
+                                                value="<?php echo $page['id']; ?>"
                                                 <?php
-                        if ($page["id"] == $row->parent_id) {
+                        if ($page['id'] == $row->parent_id) {
                             echo " selected='selected'";
                         }
                     ?>>
                                                     <?php esc($page["title"]); ?>
                                                 (ID:
-                                                <?php echo $page["id"]; ?>
+                                                <?php echo $page['id']; ?>
                                                 )
                                             </option>
                                         <?php }
@@ -702,15 +702,15 @@ if ($permissionChecker->hasPermission("pages")) {
             foreach ($pages as $key => $page) {
                 ?>
                                         <option
-                                            value="<?php echo $page["id"]; ?>"
+                                            value="<?php echo $page['id']; ?>"
                                             <?php
-                    if ($list_data->parent_id === intval($page["id"])) {
+                    if ($list_data->parent_id === intval($page['id'])) {
                         echo 'selected="selected"';
                     }
                 ?>>
                                                 <?php esc($page["title"]); ?>
                                             (ID:
-                                            <?php echo $page["id"]; ?>
+                                            <?php echo $page['id']; ?>
                                             )
                                         </option>
                                     <?php }
@@ -939,9 +939,9 @@ if ($permissionChecker->hasPermission("pages")) {
                                             <?php
                         foreach ($users as $user) {
                             ?>
-                                        <option value="<?php Template::escape($user["id"]); ?>"
+                                        <option value="<?php Template::escape($user['id']); ?>"
                                         <?php
-                                        if ($user["id"] == $row->author_id) {
+                                        if ($user['id'] == $row->author_id) {
                                             echo "selected";
                                         }
                             ?>><?php Template::escape($user["username"]); ?></option>

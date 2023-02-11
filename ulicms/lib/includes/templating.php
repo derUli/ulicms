@@ -34,7 +34,7 @@ function og_tags(): void
 
 function get_og_tags(?string $slug = null): string
 {
-    $html = "";
+    $html = '';
     if (is_200()) {
         $og_data = get_og_data($slug);
         $og_title = $og_data["og_title"];
@@ -106,7 +106,7 @@ function get_og_tags(?string $slug = null): string
     return $html;
 }
 
-function get_og_data($slug = ""): ?array
+function get_og_data($slug = ''): ?array
 {
     if (empty($slug)) {
         $slug = isset($_GET["slug"]) ? $_GET["slug"] : get_frontpage();
@@ -125,7 +125,7 @@ function get_og_data($slug = ""): ?array
 
 function get_all_combined_html(): string
 {
-    $html = "";
+    $html = '';
     $html .= getCombinedStylesheetHtml();
     $html .= getCombinedScriptHtml();
     return $html;
@@ -758,7 +758,7 @@ function get_menu(
     bool $recursive = true,
     string $order = "position"
 ): string {
-    $html = "";
+    $html = '';
     $name = db_escape($name);
     $language = $_SESSION['language'];
     $sql = "SELECT id, slug, access, link_url, title, "
@@ -865,7 +865,7 @@ function get_output_favicon_code(): string
     $url = "content/images/favicon.ico";
 
     $path = ULICMS_ROOT . "/content/images/favicon.ico";
-    $html = "";
+    $html = '';
     if (file_exists($path)) {
         $url .= "?time=" . File::getLastChanged($path);
         $html = '<link rel="icon" href="' . $url . '" type="image/x-icon" />' . '<link rel="shortcut icon" href="' . $url . '" type="image/x-icon" />';
@@ -941,7 +941,7 @@ function checkforAccessForDevice(string $access): bool
     return $allowed;
 }
 
-function checkAccess(string $access = ""): ?string
+function checkAccess(string $access = ''): ?string
 {
     $access_for_device = checkforAccessForDevice($access);
     if (!$access_for_device) {
@@ -960,7 +960,7 @@ function checkAccess(string $access = ""): ?string
     $accessCount = count($access);
 
     for ($i = 0; $i < $accessCount; $i++) {
-        if (is_numeric($access[$i]) and isset($_SESSION["group_id"]) and $access[$i] == $_SESSION["group_id"]) {
+        if (is_numeric($access[$i]) and isset($_SESSION['group_id']) and $access[$i] == $_SESSION['group_id']) {
             return $access[$i];
         }
     }

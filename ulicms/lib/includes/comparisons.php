@@ -132,7 +132,7 @@ function var_is_type($var, $type, $required = false): bool
 {
     $methodName = "is_{$type}";
 
-    if ($var === null or $var === "") {
+    if ($var === null or $var === '') {
         return !$required;
     }
 

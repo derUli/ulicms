@@ -97,7 +97,7 @@ do_event("admin_head");
     <?php
     do_event("before_backend_header");
 
-$cssClasses = "";
+$cssClasses = '';
 if (get_user_id()) {
     $cssClasses .= "user-" . get_user_id() . "-logged-in ";
 } else {

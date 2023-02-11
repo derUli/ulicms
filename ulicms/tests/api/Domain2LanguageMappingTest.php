@@ -40,18 +40,18 @@ class Domain2LanguageMappingTest extends \PHPUnit\Framework\TestCase
 
     public function testSetLanguageByDomainReturnsTrue()
     {
-        $_SERVER["HTTP_HOST"] = "domain.de";
+        $_SERVER['HTTP_HOST'] = "domain.de";
         $this->assertTrue(setLanguageByDomain());
         $this->assertEquals('de', $_SESSION['language']);
 
-        $_SERVER["HTTP_HOST"] = "domain.com";
+        $_SERVER['HTTP_HOST'] = "domain.com";
         $this->assertTrue(setLanguageByDomain());
         $this->assertEquals('en', $_SESSION['language']);
     }
 
     public function testSetLanguageByDomainReturnsFalse()
     {
-        $_SERVER["HTTP_HOST"] = "domain.invalid";
+        $_SERVER['HTTP_HOST'] = "domain.invalid";
         $this->assertFalse(setLanguageByDomain());
     }
 

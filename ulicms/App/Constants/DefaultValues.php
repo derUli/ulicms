@@ -2,6 +2,9 @@
 
 namespace App\Constants;
 
+/**
+ * Default Values
+ */
 class DefaultValues
 {
     public const ALLOWED_TAGS = '<a>' .

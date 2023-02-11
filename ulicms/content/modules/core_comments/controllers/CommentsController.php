@@ -40,7 +40,7 @@ class CommentsController extends MainClass
             $checkbox->check();
         }
 
-        $content_id = Request::getVar("content_id", 0, "int");
+        $content_id = Request::getVar("content_id", 0, 'int');
         $content = null;
         try {
             $content = ContentFactory::getByID($content_id);
@@ -100,7 +100,7 @@ class CommentsController extends MainClass
 
     public function getCommentText(): void
     {
-        $id = Request::getVar('id', 0, "int");
+        $id = Request::getVar('id', 0, 'int');
         $text = $this->_getCommentText($id);
         if ($text) {
             HtmlResult($text, HttpStatusCode::OK, HTMLMinify::OPTIMIZATION_ADVANCED);
@@ -152,8 +152,8 @@ class CommentsController extends MainClass
     {
         // get arguments from the URL
         $status = Request::getVar("status", null, "str");
-        $content_id = Request::getVar("content_id", null, "int");
-        $limit = Request::getVar("limit", $this->_getDefaultLimit(), "int");
+        $content_id = Request::getVar("content_id", null, 'int');
+        $limit = Request::getVar("limit", $this->_getDefaultLimit(), 'int');
 
         $results = $this->_filterComments($status, $content_id, $limit);
         // output the comment backend page to the user

@@ -18,14 +18,14 @@ class Style
     ): string {
         $attributes = [
             "rel" => "stylesheet",
-            "href" => $href,
+            'href' => $href,
             "type" => "text/css",
         ];
         if ($media) {
             $attributes["media"] = $media;
         }
         if (!parse_url($href, PHP_URL_SCHEME) && is_file($href)) {
-            $attributes["href"] .= "?time=" . File::getLastChanged($href);
+            $attributes['href'] .= "?time=" . File::getLastChanged($href);
         }
         foreach ($htmlAttributes as $key => $value) {
             $attributes[$key] = $value;

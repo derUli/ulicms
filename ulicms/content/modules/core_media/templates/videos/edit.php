@@ -5,7 +5,7 @@ use App\Models\Content\Categories;
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("videos")
         and $permissionChecker->hasPermission("videos_edit")) {
-    $id = intval($_REQUEST["id"]);
+    $id = intval($_REQUEST['id']);
     $result = db_query("SELECT * FROM " . tbname("videos") . " WHERE id = $id");
     if (db_num_rows($result) > 0) {
         $dataset = db_fetch_object($result);

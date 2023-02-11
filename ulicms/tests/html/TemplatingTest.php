@@ -20,8 +20,8 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         $_GET["slug"] = get_frontpage();
         require_once getLanguageFilePath('en');
 
-        $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
-        $_SERVER["SERVER_PORT"] = "80";
+        $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
+        $_SERVER['SERVER_PORT'] = "80";
         $_SERVER['HTTP_HOST'] = "example.org";
         $_SERVER['REQUEST_URI'] = "/foobar/foo.html";
         App\Utils\Session\sessionStart();
@@ -36,7 +36,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         Settings::set('maintenance_mode', "off");
         Settings::set("domain_to_language", $this->initialDomainToLanguage);
 
-        unset($_SERVER["SERVER_PROTOCOL"]);
+        unset($_SERVER['SERVER_PROTOCOL']);
         unset($_SERVER['HTTP_HOST']);
         unset($_SERVER['SERVER_PORT']);
         unset($_SERVER['HTTPS']);
@@ -89,7 +89,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
 
     public function testGetRequestedPageNameWithEmptyString()
     {
-        $_GET ["slug"] = "";
+        $_GET ["slug"] = '';
         $this->assertEquals(get_frontpage(), get_slug());
         $this->assertEquals(get_frontpage(), get_requested_pagename());
     }
@@ -351,7 +351,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
     public function testGetBodyClassesDesktop()
     {
         $_SESSION['language'] = 'de';
-        $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (Windows NT 6.1;" .
+        $_SERVER['HTTP_USER_AGENT'] = "Mozilla/5.0 (Windows NT 6.1;" .
                 " Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)" .
                 " Chrome/63.0.3239.132 Safari/537.36";
 
@@ -372,7 +372,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
     public function testBodyClassesDesktop()
     {
         $_SESSION['language'] = 'de';
-        $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (Windows NT 6.1;" .
+        $_SERVER['HTTP_USER_AGENT'] = "Mozilla/5.0 (Windows NT 6.1;" .
                 " Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)" .
                 " Chrome/63.0.3239.132 Safari/537.36";
 
@@ -763,7 +763,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         $_GET["slug"] = $article->slug;
         $_SESSION['language'] = 'de';
 
-        $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (iPhone; CPU iPhone OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3";
+        $_SERVER['HTTP_USER_AGENT'] = "Mozilla/5.0 (iPhone; CPU iPhone OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3";
 
         $this->assertEquals("2020", get_theme());
     }
@@ -792,7 +792,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         $_GET["slug"] = $article->slug;
         $_SESSION['language'] = 'de';
 
-        $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (iPhone; CPU iPhone OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3";
+        $_SERVER['HTTP_USER_AGENT'] = "Mozilla/5.0 (iPhone; CPU iPhone OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3";
 
         $this->assertEmpty(get_category());
     }

@@ -54,7 +54,7 @@ class BannerController extends Controller
 
     public function _updatePost(): Banner
     {
-        $id = intval($_POST["id"]);
+        $id = intval($_POST['id']);
 
         do_event("before_edit_banner");
 
@@ -83,7 +83,7 @@ class BannerController extends Controller
 
     public function deletePost(): void
     {
-        $id = Request::getVat("banner", 0, "int");
+        $id = Request::getVat("banner", 0, 'int');
 
         $this->_deletePost($id);
         // Todo: handle errors

@@ -9,7 +9,7 @@ use App\Exceptions\DatasetNotFoundException;
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("banners")
         and $permissionChecker->hasPermission("banners_edit")) {
-    $banner = Request::getVar("banner", 0, "int");
+    $banner = Request::getVar("banner", 0, 'int');
     $row = new Banner();
     try {
         $row->loadByID($banner);

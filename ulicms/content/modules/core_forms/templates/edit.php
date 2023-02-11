@@ -8,7 +8,7 @@ if (!$permissionChecker->hasPermission("forms") || !$permissionChecker->hasPermi
 } else {
     $forms = Forms::getAllForms();
     $pages = getAllPages();
-    $id = intval($_GET["id"]);
+    $id = intval($_GET['id']);
     $form = Forms::getFormByID($id);
     if ($form) {
         ?>
@@ -30,7 +30,7 @@ if (!$permissionChecker->hasPermission("forms") || !$permissionChecker->hasPermi
                 <?php translate("name"); ?>*
             </strong>
             <input class="form-control" type="text"
-                   value="<?php esc($form["name"]); ?>" name="name"
+                   value="<?php esc($form['name']); ?>" name="name"
                    required />
         </div>
         <div class="field">
@@ -116,9 +116,9 @@ if (!$permissionChecker->hasPermission("forms") || !$permissionChecker->hasPermi
             <select class="form-control"
                     name="target_page_id">
                         <?php foreach ($pages as $page) { ?>
-                    <option value="<?php echo $page["id"]; ?>"
+                    <option value="<?php echo $page['id']; ?>"
                     <?php
-            if ($page["id"] == $form["target_page_id"]) {
+            if ($page['id'] == $form["target_page_id"]) {
                 echo " selected";
             }
                             ?>><?php esc($page["title"]); ?></option>

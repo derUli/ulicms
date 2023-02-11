@@ -23,6 +23,7 @@ Entfernte API-Methoden:
 * StringHelper::isEmpty()
 * array_keep()
 * clearAPCCache()
+* clearCache()
 * db_affected_rows()
 * db_connect()
 * db_error()

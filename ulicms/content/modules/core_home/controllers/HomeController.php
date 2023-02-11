@@ -23,7 +23,7 @@ class HomeController extends Controller
             $model->lastModfiedPages[] = $row;
         }
 
-        $adminsQuery = Database::query("SELECT id, username FROM " . tbname("users"));
+        $adminsQuery = Database::query("SELECT id, username FROM " . tbname('users'));
         while ($row = Database::fetchObject($adminsQuery)) {
             $admins[$row->id] = $row->username;
         }

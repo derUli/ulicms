@@ -80,32 +80,32 @@ class CacheUtilTest extends \PHPUnit\Framework\TestCase
 
     public function testGetCurrentUid()
     {
-        $_SERVER["REQUEST_URI"] = "/my-url.html";
-        $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1";
+        $_SERVER['REQUEST_URI'] = "/my-url.html";
+        $_SERVER['HTTP_USER_AGENT'] = "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1";
         $_SESSION['language'] = 'de';
         $this->assertEquals("fullpage-cache-03f3212f898cd71615a9dc03bdb0c2f1", CacheUtil::getCurrentUid());
 
         $_SESSION['language'] = 'en';
         $this->assertEquals("fullpage-cache-dae3163884e1d91690d9f525dd559820", CacheUtil::getCurrentUid());
 
-        $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (iPad; U; CPU OS 4_3_3 like Mac OS X; en-us AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8J2 Safari/6533.18.5";
+        $_SERVER['HTTP_USER_AGENT'] = "Mozilla/5.0 (iPad; U; CPU OS 4_3_3 like Mac OS X; en-us AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8J2 Safari/6533.18.5";
         $this->assertEquals("fullpage-cache-ea537739024d4680137192a32f8e4d66", CacheUtil::getCurrentUid());
 
-        $_SERVER["REQUEST_URI"] = "/other-url.html?param=value";
+        $_SERVER['REQUEST_URI'] = "/other-url.html?param=value";
         $this->assertEquals("fullpage-cache-f613a13d544c757b5b015de5dabd561b", CacheUtil::getCurrentUid());
     }
 
     // Tests for a bug where two different requests are producing the same hash
     public function testGetCurrentUidCollisionBug()
     {
-        $_SERVER["REQUEST_URI"] = "/my-url.html";
-        $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (iPhone; CPU iPhone OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3";
+        $_SERVER['REQUEST_URI'] = "/my-url.html";
+        $_SERVER['HTTP_USER_AGENT'] = "Mozilla/5.0 (iPhone; CPU iPhone OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3";
         $_SESSION['language'] = 'de';
 
         $uid1 = CacheUtil::getCurrentUid();
 
-        $_SERVER["REQUEST_URI"] = "/my-url.html";
-        $_SERVER["HTTP_USER_AGENT"] = "Googlebot/2.1 (+http://www.google.com/bot.html)";
+        $_SERVER['REQUEST_URI'] = "/my-url.html";
+        $_SERVER['HTTP_USER_AGENT'] = "Googlebot/2.1 (+http://www.google.com/bot.html)";
         $_SESSION['language'] = 'de';
 
         $uid2 = CacheUtil::getCurrentUid();

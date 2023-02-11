@@ -184,7 +184,7 @@ class ModuleTest extends \PHPUnit\Framework\TestCase
 
         $fortune2_uninstalled_at = Settings::get(
             "fortune2_uninstalled_at",
-            "int"
+            'int'
         );
 
         $this->assertGreaterThanOrEqual(time() - 10, $fortune2_uninstalled_at);

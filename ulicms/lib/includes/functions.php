@@ -61,7 +61,7 @@ function link(
     ?string $target = null,
     array $htmlAttributes = []
 ): string {
-    $htmlAttributes["href"] = $url;
+    $htmlAttributes['href'] = $url;
     if ($target) {
         $htmlAttributes["target"] = $target;
     }

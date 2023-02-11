@@ -63,8 +63,8 @@ class UserController extends Controller
     public function updatePost(): void
     {
         $permissionChecker = new PermissionChecker(get_user_id());
-        if ($permissionChecker->hasPermission("users_edit") or $_POST["id"] == $_SESSION["login_id"]) {
-            $id = intval($_POST["id"]);
+        if ($permissionChecker->hasPermission("users_edit") or $_POST['id'] == $_SESSION["login_id"]) {
+            $id = intval($_POST['id']);
             $lastname = $_POST["lastname"];
             $firstname = $_POST["firstname"];
             $password = $_POST["password"];
@@ -120,7 +120,7 @@ class UserController extends Controller
             $user->setHTMLEditor($html_editor);
             $user->save();
 
-            if (!empty($_FILES["avatar"]["name"])) {
+            if (!empty($_FILES["avatar"]['name'])) {
                 if (!$user->changeAvatar($_FILES["avatar"])) {
                     ExceptionResult(
                         get_translation("avatar_upload_failed")
@@ -144,7 +144,7 @@ class UserController extends Controller
 
     public function deletePost(): void
     {
-        $id = Request::getVar('id', 0, "int");
+        $id = Request::getVar('id', 0, 'int');
 
         $this->_deletePost($id);
         Response::redirect(ModuleHelper::buildActionURL("admins"));

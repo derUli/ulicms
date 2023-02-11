@@ -40,8 +40,8 @@ class PackageController extends MainClass
         $model->source_url = $model->source === "extend" ?
                 $this->_getPackageDownloadUrl($model->name) : null;
         $customPermissions = is_array(
-            getModuleMeta($name, "custom_acl")
-        ) ? getModuleMeta($name, "custom_acl") : [];
+            getModuleMeta($name, 'custom_acl')
+        ) ? getModuleMeta($name, 'custom_acl') : [];
         $model->customPermissions = $customPermissions;
         $model->adminPermission = getModuleMeta($name, "admin_permission");
 

@@ -15,7 +15,7 @@ function get_shortlink($id = null): ?string
     $id = $id ? $id : get_ID();
 
     if ($id) {
-        $shortlink = getBaseFolderURL() . "/?goid=" . $id;
+        $shortlink = getBaseFolderURL() . '/?goid=' . $id;
         $shortlink = apply_filter($shortlink, "shortlink");
     }
 
@@ -37,14 +37,14 @@ function get_canonical(): string
 // rewrite this method
 function getBaseFolderURL(?string $suffix = null): string
 {
-    $s = empty($_SERVER["HTTPS"]) ? '' : (($_SERVER["HTTPS"] == "on") ?
+    $s = empty($_SERVER['HTTPS']) ? '' : (($_SERVER['HTTPS'] == "on") ?
             "s" : "");
-    $sp = strtolower($_SERVER["SERVER_PROTOCOL"]);
+    $sp = strtolower($_SERVER['SERVER_PROTOCOL']);
     $protocol = substr($sp, 0, strpos($sp, '/')) . $s;
-    $port = ($_SERVER["SERVER_PORT"] == "80"
-            or $_SERVER["SERVER_PORT"] == "443") ?
-            "" : (":" . $_SERVER["SERVER_PORT"]);
-    $path = basename(dirname($_SERVER['REQUEST_URI'])) == "" ?
+    $port = ($_SERVER['SERVER_PORT'] == "80"
+            or $_SERVER['SERVER_PORT'] == "443") ?
+            "" : (":" . $_SERVER['SERVER_PORT']);
+    $path = basename(dirname($_SERVER['REQUEST_URI'])) == '' ?
             $_SERVER['REQUEST_URI'] : dirname($_SERVER['REQUEST_URI']);
     $suffix = $suffix ?
             str_replace("\\", '/', $suffix) : str_replace("\\", '/', $path);
@@ -91,7 +91,7 @@ function buildSEOUrl(
         return "./";
     }
 
-    $seo_url = "";
+    $seo_url = '';
 
     if (is_admin_dir()) {
         $seo_url .= "../";

@@ -15,7 +15,7 @@ class Link
         array $htmlAttributes = []
     ): string {
         $attributes = array(
-            "href" => $href
+            'href' => $href
         );
 
         foreach ($htmlAttributes as $key => $value) {
@@ -33,7 +33,7 @@ class Link
         array $htmlAttributes = []
     ): string {
         $attributes = array(
-            "href" => ModuleHelper::buildActionURL($action, $suffix, true)
+            'href' => ModuleHelper::buildActionURL($action, $suffix, true)
         );
 
         foreach ($htmlAttributes as $key => $value) {

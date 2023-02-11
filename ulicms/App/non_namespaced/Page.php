@@ -10,12 +10,12 @@ use App\Exceptions\DatasetNotFoundException;
 class Page extends Content
 {
     public $id = null;
-    public $slug = "";
-    public $title = "";
-    public $alternate_title = "";
+    public $slug = '';
+    public $title = '';
+    public $alternate_title = '';
     public $target = "_self";
     public $category_id = 1;
-    public $content = "";
+    public $content = '';
     public $language = 'de';
     public $menu_image = null;
     public $active = 1;
@@ -38,9 +38,9 @@ class Page extends Content
     public $robots = null;
     public $custom_data = null;
     public $type = "page";
-    public $og_title = "";
-    public $og_image = "";
-    public $og_description = "";
+    public $og_title = '';
+    public $og_image = '';
+    public $og_description = '';
     public $hidden = 0;
     public $comments_enabled = null;
     private $permissions;

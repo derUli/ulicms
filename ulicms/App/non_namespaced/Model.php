@@ -126,7 +126,7 @@ class Model
         $tableName,
         $modelClass,
         $orderBy = "id",
-        $where = ""
+        $where = ''
     ): array {
         $datasets = [];
         $result = Database::selectAll($tableName, array(

@@ -770,7 +770,7 @@ function fix_path($path, $config)
     $info = pathinfo($path);
     $tmp_path = $info['dirname'];
     $str = fix_filename($info['filename'], $config);
-    if ($tmp_path != "") {
+    if ($tmp_path != '') {
         return $tmp_path . DIRECTORY_SEPARATOR . $str;
     } else {
         return $str;
@@ -854,7 +854,7 @@ function image_check_memory_usage($img, $max_breedte, $max_hoogte)
 if (!function_exists('ends_with')) {
     function ends_with($haystack, $needle)
     {
-        return $needle === "" || substr($haystack, -strlen($needle)) === $needle;
+        return $needle === '' || substr($haystack, -strlen($needle)) === $needle;
     }
 }
 
@@ -892,7 +892,7 @@ function new_thumbnails_creation($targetPath, $targetFile, $name, $current_path,
     $info['filename'] = fix_filename($info['filename'], $config);
     if ($config['relative_image_creation']) {
         foreach ($config['relative_path_from_current_pos'] as $k => $path) {
-            if ($path != "" && $path[ strlen($path) - 1 ] != '/') {
+            if ($path != '' && $path[ strlen($path) - 1 ] != '/') {
                 $path .= '/';
             }
             if (! file_exists($targetPath . $path)) {
@@ -909,7 +909,7 @@ function new_thumbnails_creation($targetPath, $targetFile, $name, $current_path,
     //create fixed thumbs
     if ($config['fixed_image_creation']) {
         foreach ($config['fixed_path_from_filemanager'] as $k => $path) {
-            if ($path != "" && $path[ strlen($path) - 1 ] != '/') {
+            if ($path != '' && $path[ strlen($path) - 1 ] != '/') {
                 $path .= '/';
             }
             $base_dir = $path . substr_replace($targetPath, '', 0, strlen($current_path));

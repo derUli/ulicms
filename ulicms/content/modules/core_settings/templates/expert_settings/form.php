@@ -1,8 +1,8 @@
 <?php
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("expert_settings") and $permissionChecker->hasPermission("expert_settings_edit")) {
-    $name = "";
-    $value = "";
+    $name = '';
+    $value = '';
     if (Request::hasVar("name")) {
         $name = Request::getVar("name");
         $value = Settings::get($name);

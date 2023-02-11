@@ -7,7 +7,7 @@ use App\Models\Content\Language;
 class Group
 {
     private $id = null;
-    private $name = "";
+    private $name = '';
     private $permissions = [];
     private $languages = [];
     private $allowable_tags = null;
@@ -24,8 +24,8 @@ class Group
     // get the primary group id of the current user
     public static function getCurrentGroupId(): ?int
     {
-        return isset($_SESSION["group_id"]) ?
-                intval($_SESSION["group_id"]) : null;
+        return isset($_SESSION['group_id']) ?
+                intval($_SESSION['group_id']) : null;
     }
 
     // get the primary group of the current user

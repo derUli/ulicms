@@ -29,7 +29,7 @@ class CategoryController extends Controller
 
     public function updatePost(): void
     {
-        $id = Request::getVar('id', 0, "int");
+        $id = Request::getVar('id', 0, 'int');
         $name = Request::getVar("name", "", "str");
         $description = Request::getVar("description", "", "str");
 

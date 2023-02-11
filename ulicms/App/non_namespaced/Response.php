@@ -20,7 +20,7 @@ if (!defined("RESPONSIVE_FM")) {
 
         // Weiterleitung per Location header;
         public static function redirect(
-            string $url = "http://www.ulicms.de",
+            string $url = 'http://www.ulicms.de',
             int $status = HttpStatusCode::MOVED_TEMPORARILY
         ): void {
             Response::sendStatusHeader($status);
@@ -46,7 +46,7 @@ if (!defined("RESPONSIVE_FM")) {
         }
 
         public static function javascriptRedirect(
-            string $url = "http://www.ulicms.de"
+            string $url = 'http://www.ulicms.de'
         ): void {
             echo "<script>"
             . "location.replace(\"$url\");</script>";
@@ -101,7 +101,7 @@ if (!defined("RESPONSIVE_FM")) {
             if (headers_sent()) {
                 return false;
             }
-            send_header($_SERVER["SERVER_PROTOCOL"] . " " .
+            send_header($_SERVER['SERVER_PROTOCOL'] . " " .
                     self::getStatusCodeByNumber($nr));
             return true;
         }

@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use App\Constants\RequestMethod;
+
 class Request
 {
     public static function getPort(): ?int
@@ -22,7 +24,7 @@ class Request
     public static function getVar(
         string $name,
         $default = null,
-        ?string $convert = ""
+        ?string $convert = ''
     ) {
         $value = $default;
         if (isset($_POST[$name])) {
@@ -33,21 +35,21 @@ class Request
 
         if ($value !== null) {
             switch ($convert) {
-                case "bool":
-                    if ($value === "true") {
+                case 'bool':
+                    if ($value === 'true') {
                         $value = true;
-                    } elseif ($value === "false") {
+                    } elseif ($value === 'false') {
                         $value = false;
                     }
                     $value = intval((bool)$value);
                     break;
-                case "int":
+                case 'int':
                     $value = (int) $value;
                     break;
-                case "float":
+                case 'float':
                     $value = (float) $value;
                     break;
-                case "str":
+                case 'str':
                     $value = (string) $value;
                     break;
             }
@@ -68,37 +70,37 @@ class Request
 
     // Weiterleitung per Location header;
     public static function redirect(
-        string $url = "http://www.ulicms.de",
+        string $url = 'http://www.ulicms.de',
         int $status = 302
     ): void {
         Response::redirect($url, $status);
     }
 
     public static function javascriptRedirect(
-        string $url = "http://www.ulicms.de"
+        string $url = 'http://www.ulicms.de'
     ): void {
         Response::javascriptRedirect($url);
     }
 
     public static function getMethod(): ?string
     {
-        return isset($_SERVER["REQUEST_METHOD"]) ?
-                strtolower($_SERVER["REQUEST_METHOD"]) : null;
+        return isset($_SERVER['REQUEST_METHOD']) ?
+                strtolower($_SERVER['REQUEST_METHOD']) : null;
     }
 
     public static function isGet(): bool
     {
-        return self::getMethod() == "get";
+        return self::getMethod() == RequestMethod::GET;
     }
 
     public static function isPost(): bool
     {
-        return self::getMethod() == "post";
+        return self::getMethod() == RequestMethod::POST;
     }
 
     public static function isHead(): bool
     {
-        return self::getMethod() == "head";
+        return self::getMethod() == RequestMethod::HEAD;
     }
 
     public static function isSSL(): bool
@@ -194,7 +196,7 @@ class Request
 
     public static function getRequestUri(): ?string
     {
-        return isset($_SERVER["REQUEST_URI"]) ?
-                $_SERVER["REQUEST_URI"] : null;
+        return isset($_SERVER['REQUEST_URI']) ?
+                $_SERVER['REQUEST_URI'] : null;
     }
 }

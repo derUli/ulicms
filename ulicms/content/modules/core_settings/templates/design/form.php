@@ -174,7 +174,7 @@ if (!$permissionChecker->hasPermission("design")) {
         $font_amount = count($fonts);
     $i = 1;
     foreach ($fonts as $key => $value) {
-        $selected = "";
+        $selected = '';
         if ($default_font === $value) {
             $selected = "selected";
         }

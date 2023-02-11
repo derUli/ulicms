@@ -331,8 +331,8 @@ class ApiTest extends \PHPUnit\Framework\TestCase
 
     public function testGetBaseFolderUrlWithFilenameInUrl()
     {
-        $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
-        $_SERVER["SERVER_PORT"] = "80";
+        $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
+        $_SERVER['SERVER_PORT'] = "80";
         $_SERVER['HTTP_HOST'] = "example.org";
         $_SERVER['REQUEST_URI'] = "/foobar/foo";
 
@@ -341,15 +341,15 @@ class ApiTest extends \PHPUnit\Framework\TestCase
 
     public function testGetBaseFolderUrlWithFilenameInUrlAndHttps()
     {
-        $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
-        $_SERVER["SERVER_PORT"] = "443";
-        $_SERVER["HTTPS"] = "on";
+        $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
+        $_SERVER['SERVER_PORT'] = "443";
+        $_SERVER['HTTPS'] = "on";
         $_SERVER['HTTP_HOST'] = "example.org";
         $_SERVER['REQUEST_URI'] = "/foobar/foo";
 
         $this->assertEquals("https://example.org/foobar", getBaseFolderURL());
 
-        unset($_SERVER["SERVER_PROTOCOL"]);
+        unset($_SERVER['SERVER_PROTOCOL']);
         unset($_SERVER['HTTP_HOST']);
         unset($_SERVER['SERVER_PORT']);
         unset($_SERVER['REQUEST_URI']);
@@ -358,15 +358,15 @@ class ApiTest extends \PHPUnit\Framework\TestCase
 
     public function testGetBaseFolderUrlWithFilenameInUrlAndHttpsAndAlternativePort()
     {
-        $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
-        $_SERVER["SERVER_PORT"] = "8080";
-        $_SERVER["HTTPS"] = "on";
+        $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
+        $_SERVER['SERVER_PORT'] = "8080";
+        $_SERVER['HTTPS'] = "on";
         $_SERVER['HTTP_HOST'] = "example.org";
         $_SERVER['REQUEST_URI'] = "/foobar/foo";
 
         $this->assertEquals("https://example.org:8080/foobar", getBaseFolderURL());
 
-        unset($_SERVER["SERVER_PROTOCOL"]);
+        unset($_SERVER['SERVER_PROTOCOL']);
         unset($_SERVER['HTTP_HOST']);
         unset($_SERVER['SERVER_PORT']);
         unset($_SERVER['REQUEST_URI']);
@@ -375,14 +375,14 @@ class ApiTest extends \PHPUnit\Framework\TestCase
 
     public function testGetBaseFolderUrlWithoutFilename()
     {
-        $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
-        $_SERVER["SERVER_PORT"] = "80";
+        $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
+        $_SERVER['SERVER_PORT'] = "80";
         $_SERVER['HTTP_HOST'] = "example.org";
         $_SERVER['REQUEST_URI'] = "/foobar/";
 
         $this->assertEquals("http://example.org/foobar", getBaseFolderURL());
 
-        unset($_SERVER["SERVER_PROTOCOL"]);
+        unset($_SERVER['SERVER_PROTOCOL']);
         unset($_SERVER['HTTP_HOST']);
         unset($_SERVER['SERVER_PORT']);
         unset($_SERVER['REQUEST_URI']);
@@ -390,15 +390,15 @@ class ApiTest extends \PHPUnit\Framework\TestCase
 
     public function testGetCurrentURL()
     {
-        $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
-        $_SERVER["SERVER_PORT"] = "8080";
-        $_SERVER["HTTPS"] = "on";
+        $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
+        $_SERVER['SERVER_PORT'] = "8080";
+        $_SERVER['HTTPS'] = "on";
         $_SERVER['HTTP_HOST'] = "example.org";
         $_SERVER['REQUEST_URI'] = "/foobar/foo?hello=world";
 
         $this->assertEquals("https://example.org:8080/foobar/foo?hello=world", getCurrentURL());
 
-        unset($_SERVER["SERVER_PROTOCOL"]);
+        unset($_SERVER['SERVER_PROTOCOL']);
         unset($_SERVER['HTTP_HOST']);
         unset($_SERVER['SERVER_PORT']);
         unset($_SERVER['REQUEST_URI']);
@@ -407,9 +407,9 @@ class ApiTest extends \PHPUnit\Framework\TestCase
 
     public function testGetGravatarReturnsUrl()
     {
-        $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
-        $_SERVER["SERVER_PORT"] = "8080";
-        $_SERVER["HTTPS"] = "on";
+        $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
+        $_SERVER['SERVER_PORT'] = "8080";
+        $_SERVER['HTTPS'] = "on";
         $_SERVER['HTTP_HOST'] = "example.org";
         $_SERVER['REQUEST_URI'] = "/foobar/foo?hello=world";
 
@@ -434,7 +434,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
 
         $user->delete();
 
-        unset($_SERVER["SERVER_PROTOCOL"]);
+        unset($_SERVER['SERVER_PROTOCOL']);
         unset($_SERVER['HTTP_HOST']);
         unset($_SERVER['SERVER_PORT']);
         unset($_SERVER['REQUEST_URI']);
@@ -443,9 +443,9 @@ class ApiTest extends \PHPUnit\Framework\TestCase
 
     public function testGetGravatarReturnsPlaceholderUrl()
     {
-        $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
-        $_SERVER["SERVER_PORT"] = "8080";
-        $_SERVER["HTTPS"] = "on";
+        $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
+        $_SERVER['SERVER_PORT'] = "8080";
+        $_SERVER['HTTPS'] = "on";
         $_SERVER['HTTP_HOST'] = "example.org";
         $_SERVER['REQUEST_URI'] = "/foobar/foo?hello=world";
 
@@ -454,7 +454,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
             get_gravatar("foo@bar.de")
         );
 
-        unset($_SERVER["SERVER_PROTOCOL"]);
+        unset($_SERVER['SERVER_PROTOCOL']);
         unset($_SERVER['HTTP_HOST']);
         unset($_SERVER['SERVER_PORT']);
         unset($_SERVER['REQUEST_URI']);
@@ -463,9 +463,9 @@ class ApiTest extends \PHPUnit\Framework\TestCase
 
     public function testGetGravatarReturnsImage()
     {
-        $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
-        $_SERVER["SERVER_PORT"] = "8080";
-        $_SERVER["HTTPS"] = "on";
+        $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
+        $_SERVER['SERVER_PORT'] = "8080";
+        $_SERVER['HTTPS'] = "on";
         $_SERVER['HTTP_HOST'] = "example.org";
         $_SERVER['REQUEST_URI'] = "/foobar/foo?hello=world";
 
@@ -473,7 +473,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
             '<img src="https://example.org/foobar/admin/gfx/no_avatar.png" />',
             get_gravatar("foo@bar.de", 80, 'mm', 'g', true)
         );
-        unset($_SERVER["SERVER_PROTOCOL"]);
+        unset($_SERVER['SERVER_PROTOCOL']);
         unset($_SERVER['HTTP_HOST']);
         unset($_SERVER['SERVER_PORT']);
         unset($_SERVER['REQUEST_URI']);
@@ -482,9 +482,9 @@ class ApiTest extends \PHPUnit\Framework\TestCase
 
     public function testGetGravatarWithHtmlAttributesReturnsImage()
     {
-        $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
-        $_SERVER["SERVER_PORT"] = "8080";
-        $_SERVER["HTTPS"] = "on";
+        $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
+        $_SERVER['SERVER_PORT'] = "8080";
+        $_SERVER['HTTPS'] = "on";
         $_SERVER['HTTP_HOST'] = "example.org";
         $_SERVER['REQUEST_URI'] = "/foobar/foo?hello=world";
 
@@ -500,7 +500,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
                 ["class" => "gravatar"]
             )
         );
-        unset($_SERVER["SERVER_PROTOCOL"]);
+        unset($_SERVER['SERVER_PROTOCOL']);
         unset($_SERVER['HTTP_HOST']);
         unset($_SERVER['SERVER_PORT']);
         unset($_SERVER['REQUEST_URI']);
@@ -989,15 +989,15 @@ class ApiTest extends \PHPUnit\Framework\TestCase
 
     public function testGetShortlink()
     {
-        $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
-        $_SERVER["SERVER_PORT"] = "443";
-        $_SERVER["HTTPS"] = "on";
+        $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
+        $_SERVER['SERVER_PORT'] = "443";
+        $_SERVER['HTTPS'] = "on";
         $_SERVER['HTTP_HOST'] = "example.org";
         $_SERVER['REQUEST_URI'] = "/foobar/foo";
 
         $pages = ContentFactory::getAll();
 
-        $expected = "/?goid=" . $pages[0]->getId();
+        $expected = '/?goid=' . $pages[0]->getId();
         $shortlink = get_shortlink($pages[0]->getId());
 
         $this->assertEquals(
@@ -1008,9 +1008,9 @@ class ApiTest extends \PHPUnit\Framework\TestCase
 
     public function testGetCanonical()
     {
-        $_SERVER["SERVER_PROTOCOL"] = "HTTP/1.1";
-        $_SERVER["SERVER_PORT"] = "443";
-        $_SERVER["HTTPS"] = "on";
+        $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
+        $_SERVER['SERVER_PORT'] = "443";
+        $_SERVER['HTTPS'] = "on";
         $_SERVER['HTTP_HOST'] = "example.org";
         $_SERVER['REQUEST_URI'] = "/foobar/foo";
 
@@ -1025,14 +1025,14 @@ class ApiTest extends \PHPUnit\Framework\TestCase
     // XXX: Whats the purpose of this method?
     public function testGetModuleAdminSelfPath()
     {
-        $_SERVER["REQUEST_URI"] = "/foo/?bar=\"hello\"";
+        $_SERVER['REQUEST_URI'] = "/foo/?bar=\"hello\"";
         $this->assertEquals("/foo/?bar=&quot;hello&quot;", getModuleAdminSelfPath());
     }
 
     public function testRootDirectory()
     {
         $_SERVER['HTTP_HOST'] = "company.com";
-        $_SERVER["REQUEST_URI"] = "/subdir/foo.png";
+        $_SERVER['REQUEST_URI'] = "/subdir/foo.png";
 
         $this->assertEquals("http://company.com/subdir/", rootDirectory());
     }

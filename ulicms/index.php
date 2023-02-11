@@ -49,7 +49,7 @@ if (Request::isPost()) {
     if (!check_csrf_token()) {
         die("This is probably a CSRF attack!");
     }
-    if (Settings::get("min_time_to_fill_form", "int") > 0) {
+    if (Settings::get("min_time_to_fill_form", 'int') > 0) {
         check_form_timestamp();
     }
 }
@@ -98,7 +98,7 @@ $theme = get_theme();
 if (isMaintenanceMode()) {
     do_event("before_maintenance_message");
     // Sende HTTP Status 503 und Retry-After im Wartungsmodus
-    send_header($_SERVER["SERVER_PROTOCOL"] .
+    send_header($_SERVER['SERVER_PROTOCOL'] .
             " 503 Service Temporarily Unavailable");
     send_header('Status: 503 Service Temporarily Unavailable');
     send_header('Retry-After: 60');
@@ -152,7 +152,7 @@ if (isset($_GET["goid"])) {
 
 ControllerRegistry::runMethods();
 
-send_header($_SERVER["SERVER_PROTOCOL"] . " " . $status);
+send_header($_SERVER['SERVER_PROTOCOL'] . " " . $status);
 send_header("Content-Type: text/html; charset=utf-8");
 
 do_event("after_http_header");

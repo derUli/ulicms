@@ -10,7 +10,7 @@ class CustomField
     public $title;
     public $required = false;
     public $helpText;
-    public $defaultValue = "";
+    public $defaultValue = '';
     public $htmlAttributes = [];
     public $contentType;
 

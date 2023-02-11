@@ -26,7 +26,7 @@ class Categories
 
     public static function addCategory(
         ?string $name = null,
-        string $description = ""
+        string $description = ''
     ): ?int {
         $category = new Category();
         $category->setName($name);

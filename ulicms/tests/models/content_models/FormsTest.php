@@ -24,8 +24,8 @@ class FormsTest extends \PHPUnit\Framework\TestCase
         );
         $id = Database::getInsertID();
         $form = Forms::getFormByID($id);
-        $this->assertEquals($id, $form["id"]);
-        $this->assertEquals("Unit Test 1", $form["name"]);
+        $this->assertEquals($id, $form['id']);
+        $this->assertEquals("Unit Test 1", $form['name']);
         $this->assertEquals(1, $form["enabled"]);
         $this->assertEquals("max@muster.de", $form["email_to"]);
         $this->assertEquals("Subject 1", $form["subject"]);
@@ -60,8 +60,8 @@ class FormsTest extends \PHPUnit\Framework\TestCase
         );
         $id = Database::getInsertID();
         $form = Forms::getFormByID($id);
-        $this->assertEquals($id, $form["id"]);
-        $this->assertEquals("Unit Test 2", $form["name"]);
+        $this->assertEquals($id, $form['id']);
+        $this->assertEquals("Unit Test 2", $form['name']);
         $this->assertEquals(0, $form["enabled"]);
         $this->assertEquals("max@muster.de", $form["email_to"]);
         $this->assertEquals("Subject 1", $form["subject"]);
@@ -113,8 +113,8 @@ class FormsTest extends \PHPUnit\Framework\TestCase
 
         $form = Forms::getFormByID($id);
 
-        $this->assertEquals($id, $form["id"]);
-        $this->assertEquals("Unit Test 3", $form["name"]);
+        $this->assertEquals($id, $form['id']);
+        $this->assertEquals("Unit Test 3", $form['name']);
         $this->assertEquals(1, $form["enabled"]);
         $this->assertEquals("foo@bar.de", $form["email_to"]);
         $this->assertEquals("My Subject", $form["subject"]);
@@ -163,8 +163,8 @@ class FormsTest extends \PHPUnit\Framework\TestCase
 
         $form = Forms::getFormByID($id);
 
-        $this->assertEquals($id, $form["id"]);
-        $this->assertEquals("Unit Test 3", $form["name"]);
+        $this->assertEquals($id, $form['id']);
+        $this->assertEquals("Unit Test 3", $form['name']);
         $this->assertEquals(0, $form["enabled"]);
         $this->assertEquals("foo@bar.de", $form["email_to"]);
         $this->assertEquals("My Subject", $form["subject"]);
@@ -217,13 +217,13 @@ class FormsTest extends \PHPUnit\Framework\TestCase
         $this->assertGreaterThanOrEqual(2, count($forms));
         foreach ($forms as $form) {
             $this->assertIsArray($form);
-            $this->assertGreaterThanOrEqual(1, $form["id"]);
-            $this->assertNotEmpty($form["name"]);
-            $this->assertNotEmpty($form["name"]);
-            $this->assertNotEmpty($form["name"]);
-            $this->assertNotEmpty($form["name"]);
-            $this->assertNotEmpty($form["name"]);
-            $this->assertNotEmpty($form["name"]);
+            $this->assertGreaterThanOrEqual(1, $form['id']);
+            $this->assertNotEmpty($form['name']);
+            $this->assertNotEmpty($form['name']);
+            $this->assertNotEmpty($form['name']);
+            $this->assertNotEmpty($form['name']);
+            $this->assertNotEmpty($form['name']);
+            $this->assertNotEmpty($form['name']);
         }
         Forms::deleteForm($id1);
         Forms::deleteForm($id2);

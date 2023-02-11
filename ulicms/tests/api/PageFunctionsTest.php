@@ -85,7 +85,7 @@ class PageFunctionsTest extends \PHPUnit\Framework\TestCase
 
         $hasHashhLinks = false;
         foreach ($pages as $page) {
-            $content = ContentFactory::getById($page["id"]);
+            $content = ContentFactory::getById($page['id']);
             $this->assertInstanceOf(Content::class, $content);
             $this->assertIsNumeric($content->getId());
             if (!$content->isRegular()) {
@@ -105,7 +105,7 @@ class PageFunctionsTest extends \PHPUnit\Framework\TestCase
         $this->assertLessThan(count($allPages), count($pages));
 
         foreach ($pages as $page) {
-            $content = ContentFactory::getById($page["id"]);
+            $content = ContentFactory::getById($page['id']);
             $this->assertTrue($content->isRegular());
         }
     }
@@ -117,8 +117,8 @@ class PageFunctionsTest extends \PHPUnit\Framework\TestCase
 
         $oldPageId = 0;
         foreach ($pages as $page) {
-            $this->assertGreaterThan($oldPageId, $page["id"]);
-            $oldPageId = $page["id"];
+            $this->assertGreaterThan($oldPageId, $page['id']);
+            $oldPageId = $page['id'];
             $this->assertEquals('en', $page['language']);
         }
     }
@@ -130,8 +130,8 @@ class PageFunctionsTest extends \PHPUnit\Framework\TestCase
 
         $oldPageId = 0;
         foreach ($pages as $page) {
-            $this->assertGreaterThan($oldPageId, $page["id"]);
-            $oldPageId = $page["id"];
+            $this->assertGreaterThan($oldPageId, $page['id']);
+            $oldPageId = $page['id'];
             $this->assertEquals("top", $page["menu"]);
         }
     }
@@ -143,8 +143,8 @@ class PageFunctionsTest extends \PHPUnit\Framework\TestCase
 
         $oldPageId = 0;
         foreach ($pages as $page) {
-            $this->assertGreaterThan($oldPageId, $page["id"]);
-            $oldPageId = $page["id"];
+            $this->assertGreaterThan($oldPageId, $page['id']);
+            $oldPageId = $page['id'];
             $this->assertEquals("top", $page["menu"]);
             $this->assertEquals('en', $page['language']);
         }

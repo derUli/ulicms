@@ -26,7 +26,7 @@ class Mailer
         string $to,
         string $subject,
         string $message,
-        string $headers = ""
+        string $headers = ''
     ): bool {
         $mode = Settings::get("email_mode") ?
                 Settings::get("email_mode") : EmailModes::INTERNAL;
@@ -86,7 +86,7 @@ class Mailer
             if (Settings::get("smtp_password")) {
                 $mailer->Password = Settings::get("smtp_password");
             }
-            $mailer->Port = Settings::get("smtp_port", "int");
+            $mailer->Port = Settings::get("smtp_port", 'int');
         }
         return $mailer;
     }
@@ -117,7 +117,7 @@ class Mailer
         string $to,
         string $subject,
         string $message,
-        string $headers = "",
+        string $headers = '',
         string $mode = EmailModes::INTERNAL
     ): bool {
         $headers = self::splitHeaders($headers);
