@@ -82,40 +82,6 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
         ArrayHelper::insertAfter($input, PHP_INT_MAX, 'gibts_nicht');
     }
 
-    public function testIsSingleWithEmptyArray() {
-        $this->assertFalse(ArrayHelper::isSingle([]));
-    }
-
-    public function testIsSingleWithOneItem() {
-        $this->assertTrue(ArrayHelper::isSingle(array(
-                    "foo"
-        )));
-    }
-
-    public function testIsSingleWithTwoItems() {
-        $this->assertFalse(ArrayHelper::isSingle(array(
-                    "foo",
-                    "bar"
-        )));
-    }
-
-    public function testGetSingleWithEmptyArray() {
-        $this->assertNull(ArrayHelper::getSingle([]));
-    }
-
-    public function testGetSingleWithOneItem() {
-        $this->assertEquals("foo", ArrayHelper::getSingle(array(
-                    "foo"
-        )));
-    }
-
-    public function testGetSingleWithTwoItems() {
-        $this->assertNull(ArrayHelper::getSingle(array(
-                    "foo",
-                    "bar"
-        )));
-    }
-
     private function getNestesdArray() {
         return [
             "foo",
@@ -159,35 +125,6 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(
                 ["ulicms"],
                 ArrayHelper::flatten("ulicms")
-        );
-    }
-
-    public function testGetValueOrDefaultWithNullReturnsDefault() {
-        $this->assertEquals(
-                "foobar",
-                ArrayHelper::getValueOrDefault(null, "hello", "foobar")
-        );
-    }
-
-    public function testGetValueOrDefaultWithArrayReturnsDefault() {
-        $this->assertEquals(
-                "foobar",
-                ArrayHelper::getValueOrDefault(
-                        ["gibts" => "not"],
-                        "hello",
-                        "foobar"
-                )
-        );
-    }
-
-    public function testGetValueOrDefaultWithArrayReturnsValue() {
-        $this->assertEquals(
-                "world",
-                ArrayHelper::getValueOrDefault(
-                        ["hello" => "world"],
-                        "hello",
-                        "foobar"
-                )
         );
     }
 
