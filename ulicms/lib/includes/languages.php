@@ -35,7 +35,7 @@ function getAvailableBackendLanguages(): array {
     $retval = [];
     $listCount = count($list);
     for ($i = 0; $i < $listCount; $i++) {
-        if (endsWith($list[$i], ".php")) {
+        if (str_ends_with($list[$i], ".php")) {
             $retval[] = basename($list[$i], ".php");
         }
     }

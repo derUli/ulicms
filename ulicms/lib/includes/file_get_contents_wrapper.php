@@ -101,7 +101,7 @@ if (!defined("RESPONSIVE_FM")) {
 
     function url_exists(string $url): bool {
         if (function_exists("curl_init") and
-                startsWith($url, "http")) {
+                str_starts_with($url, "http")) {
             return curl_url_exists($url);
         }
 

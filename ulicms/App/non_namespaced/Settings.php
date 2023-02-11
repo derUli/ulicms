@@ -156,7 +156,7 @@ class Settings {
         $result = [];
         foreach ($lines as $line) {
             // if a line starts with a hash skip it (comment)
-            if (startsWith($line, "#")) {
+            if (str_starts_with($line, "#")) {
                 continue;
             }
             $splitted = explode("=>", $line);

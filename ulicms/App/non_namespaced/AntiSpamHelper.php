@@ -38,7 +38,7 @@ class AntiSpamHelper extends Helper {
 
         for ($i = 0; $i < $blacklistCount; $i++) {
             $ending = "." . $country_blacklist[$i];
-            if (endsWith($hostname, $ending)) {
+            if (str_ends_with($hostname, $ending)) {
                 return true;
             }
         }
@@ -182,7 +182,7 @@ class AntiSpamHelper extends Helper {
         $domain = remove_prefix($domain, "@");
         // In some cases getmxrr() would return a result for an invalid domain
         // if there is no additional dot at the end
-        $domain = !endsWith($domain, ".") ? $domain . "." : $domain;
+        $domain = !str_ends_with($domain, ".") ? $domain . "." : $domain;
         $result = [];
 
         // sometimes getmxrr returns true even if the result is empty

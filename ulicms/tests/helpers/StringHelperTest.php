@@ -26,10 +26,10 @@ class StringHelperTest extends \PHPUnit\Framework\TestCase {
                         false
         );
         $this->assertCount(9, $lines);
-        $this->assertFalse(startsWith($lines[2], " "));
-        $this->assertTrue(endsWith($lines[2], " "));
-        $this->assertTrue(startsWith($lines[3], " "));
-        $this->assertTrue(endsWith($lines[3], " "));
+        $this->assertFalse(str_starts_with($lines[2], " "));
+        $this->assertTrue(str_ends_with($lines[2], " "));
+        $this->assertTrue(str_starts_with($lines[3], " "));
+        $this->assertTrue(str_ends_with($lines[3], " "));
         $this->assertEquals(17, strlen($lines[2]));
         $this->assertEquals(23, strlen($lines[3]));
     }
@@ -52,10 +52,10 @@ class StringHelperTest extends \PHPUnit\Framework\TestCase {
     public function testLinesFromFileTrim() {
         $lines = StringHelper::linesFromFile($this->getTestFilePath(), true, false, false);
         $this->assertCount(9, $lines);
-        $this->assertFalse(startsWith($lines[2], " "));
-        $this->assertFalse(endsWith($lines[2], " "));
-        $this->assertFalse(startsWith($lines[3], " "));
-        $this->assertFalse(endsWith($lines[3], " "));
+        $this->assertFalse(str_starts_with($lines[2], " "));
+        $this->assertFalse(str_ends_with($lines[2], " "));
+        $this->assertFalse(str_starts_with($lines[3], " "));
+        $this->assertFalse(str_ends_with($lines[3], " "));
         $this->assertEquals(16, strlen($lines[2]));
         $this->assertEquals(21, strlen($lines[3]));
     }
@@ -63,10 +63,10 @@ class StringHelperTest extends \PHPUnit\Framework\TestCase {
     public function testLinesFromFileTrimRemoveCommentsAndEmpty() {
         $lines = StringHelper::linesFromFile($this->getTestFilePath(), true, true, true);
         $this->assertCount(3, $lines);
-        $this->assertFalse(startsWith($lines[0], " "));
-        $this->assertFalse(endsWith($lines[0], " "));
-        $this->assertFalse(startsWith($lines[1], " "));
-        $this->assertFalse(endsWith($lines[1], " "));
+        $this->assertFalse(str_starts_with($lines[0], " "));
+        $this->assertFalse(str_ends_with($lines[0], " "));
+        $this->assertFalse(str_starts_with($lines[1], " "));
+        $this->assertFalse(str_ends_with($lines[1], " "));
 
         $this->assertEquals(16, strlen($lines[0]));
         $this->assertEquals(21, strlen($lines[1]));

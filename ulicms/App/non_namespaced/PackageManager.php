@@ -111,7 +111,7 @@ class PackageManager {
         $foldersCount = count($folders);
         for ($i = 0; $i < $foldersCount; $i++) {
             $f = $templateDir . $folders[$i] . "/";
-            if (is_dir($templateDir . $folders[$i]) && !startsWith($folders[$i], ".")) {
+            if (is_dir($templateDir . $folders[$i]) && !str_starts_with($folders[$i], ".")) {
                 array_push($themes, $folders[$i]);
             }
         }

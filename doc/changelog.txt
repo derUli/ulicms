@@ -1,6 +1,7 @@
 ===== Neues in UliCMS 2023.1 =====
 
 Neue Features:
+* Codebasis grundlegend überarbeitet
 * URLs enthalten nun kein Endung mehr
 
 Fehlerkorrekturen:
@@ -63,6 +64,8 @@ Entfernte API-Methoden:
 * ArrayHelper::isSingle()
 * ArrayHelper::getSingle()
 * ArrayHelper::getValueOrDefault()
+* startsWith()
+* endsWith()
 
 ===== Neues in UliCMS 2022.1 =====
 

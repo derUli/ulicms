@@ -8,7 +8,6 @@ use App\Exceptions\FileNotFoundException;
 use Vars;
 use function getAllModules;
 use function getModuleMeta;
-use function endsWith;
 use function getModulePath;
 
 // This method loads all module's helper classes
@@ -31,7 +30,7 @@ class HelperRegistry {
                 foreach ($helpers as $key => $value) {
                     $path = getModulePath($module, true) .
                             trim($value, "/");
-                    if (!endsWith($path, ".php")) {
+                    if (!str_ends_with($path, ".php")) {
                         $path .= ".php";
                     }
                     $helperRegistry[$key] = $path;

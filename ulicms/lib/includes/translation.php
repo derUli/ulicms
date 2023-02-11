@@ -5,7 +5,7 @@ declare(strict_types=1);
 function get_translation(string $name, array $placeholders = []): string {
     $iname = strtoupper($name);
     foreach (get_defined_constants() as $key => $value) {
-        if (startsWith($key, "TRANSLATION_") && $key == "TRANSLATION_" . $iname) {
+        if (str_starts_with($key, "TRANSLATION_") && $key == "TRANSLATION_" . $iname) {
             $custom_translation = Translation::get($key);
             if ($custom_translation !== null) {
                 $value = $custom_translation;
@@ -66,7 +66,7 @@ function add_translation(string $key, string $value): void {
 
 function register_translation(string $key, string $value): void {
     $key = strtoupper($key);
-    if (!startsWith($key, "TRANSLATION_")) {
+    if (!str_starts_with($key, "TRANSLATION_")) {
         $key = "TRANSLATION_" . $key;
     }
     idefine($key, $value);

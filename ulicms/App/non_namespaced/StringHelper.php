@@ -149,7 +149,7 @@ class StringHelper extends Helper {
         }
         if ($removeComments) {
             $lines = array_filter($lines, function ($line) {
-                return !startsWith($line, "#");
+                return !str_starts_with($line, "#");
             });
         }
         $lines = array_values($lines);

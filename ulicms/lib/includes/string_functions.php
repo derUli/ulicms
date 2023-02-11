@@ -204,14 +204,14 @@ function _esc($value): string {
 }
 
 function remove_prefix(string $text, string $prefix): string {
-    if (startsWith($text, $prefix)) {
+    if (str_starts_with($text, $prefix)) {
         $text = substr($text, strlen($prefix));
     }
     return $text;
 }
 
 function remove_suffix(string $text, string $suffix): string {
-    if (endsWith($text, $suffix)) {
+    if (str_ends_with($text, $suffix)) {
         $text = substr($text, 0, strlen($text) - strlen($suffix));
     }
     return $text;

@@ -61,7 +61,7 @@ abstract class Controller
 
             // if there is a method, it is public and the user has the required
             // permissions, call it
-            if (method_exists($this, $sMethodWithRequestType) && !startsWith($sMethodWithRequestType, "_")
+            if (method_exists($this, $sMethodWithRequestType) && !str_starts_with($sMethodWithRequestType, "_")
                     and $reflectionWithRequestType
                     and $reflectionWithRequestType->isPublic()) {
                 if (ControllerRegistry::userCanCall(
@@ -74,7 +74,7 @@ abstract class Controller
                         get_translation("forbidden")
                     );
                 }
-            } elseif (method_exists($this, $sMethod) && !startsWith($sMethod, "_")
+            } elseif (method_exists($this, $sMethod) && !str_starts_with($sMethod, "_")
                     and $reflection and $reflection->isPublic()) {
                 if (ControllerRegistry::userCanCall($sClass, $sMethod)) {
                     $this->$sMethod();

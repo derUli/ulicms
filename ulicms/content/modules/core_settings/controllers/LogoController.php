@@ -30,7 +30,7 @@ class LogoController extends Controller {
             $logo_upload = $_FILES['logo_upload_file'];
             $type = $logo_upload['type'];
 
-            if (startsWith($type, "image/")) {
+            if (str_starts_with($type, "image/")) {
                 $originalName = $logo_upload['name'];
                 $newPath = $this->_buildFilePath(
                         $logo_upload['tmp_name'],

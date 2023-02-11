@@ -49,7 +49,7 @@ class FaviconController extends Controller {
             $filename = $favicon_upload_file['name'];
             $extension = file_extension($filename);
 
-            if (startsWith($type, "image/")) {
+            if (str_starts_with($type, "image/")) {
                 $destination1 = $this->_getDestination1();
                 $destination2 = $this->_getDestination2();
 

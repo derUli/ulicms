@@ -46,7 +46,7 @@ function get_og_tags(?string $slug = null): string {
             $og_image = Settings::get("og_image");
         }
 
-        if (!empty($og_image) && !startsWith($og_image, "http")) {
+        if (!empty($og_image) && !str_starts_with($og_image, "http")) {
             $og_image = ModuleHelper::getBaseUrl() . ltrim($og_image, "/");
         }
         $page = get_page($slug);
@@ -54,7 +54,7 @@ function get_og_tags(?string $slug = null): string {
                 !StringHelper::isNullOrWhitespace($page["article_image"])) {
             $og_image = ltrim($page["article_image"], "/");
         }
-        if (!empty($og_image) && !startsWith($og_image, "http")) {
+        if (!empty($og_image) && !str_starts_with($og_image, "http")) {
             $og_image = ModuleHelper::getBaseUrl() . ltrim($og_image, "/");
         }
         if (is_null($og_description) or empty($og_description)) {

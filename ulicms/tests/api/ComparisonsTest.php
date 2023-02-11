@@ -160,26 +160,6 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(is_blank(array("foo", "bar")));
         $this->assertFalse(is_blank("13"));
     }
-
-    public function testStartsWithReturnsTrue() {
-        $this->assertTrue(startsWith("hello world", "hello"));
-        $this->assertTrue(startsWith("hello world", "Hello", false));
-    }
-
-    public function testStartsWithReturnsFalse() {
-        $this->assertFalse(startsWith("hello world", "bye"));
-        $this->assertFalse(startsWith("hello world", "Hello"));
-    }
-
-    public function testEndsWithReturnsTrue() {
-        $this->assertTrue(endsWith("hello world", "world"));
-        $this->assertTrue(endsWith("hello world", "World", false));
-    }
-
-    public function testEndsWithReturnsFalse() {
-        $this->assertFalse(endsWith("hello world", "you"));
-        $this->assertFalse(endsWith("hello world", "World"));
-    }
     
     public function testVarIsType() {
         $this->assertTrue(var_is_type(123, "numeric", true));

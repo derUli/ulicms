@@ -181,10 +181,10 @@ class RoboFile extends Tasks {
 
         $result = false;
 
-        if (endsWith($file, ".tar.gz")) {
+        if (str_ends_with($file, ".tar.gz")) {
             $pkg = new PackageManager();
             $result = $pkg->installPackage($file);
-        } elseif (endsWith($file, ".sin")) {
+        } elseif (str_ends_with($file, ".sin")) {
             $pkg = new SinPackageInstaller($file);
             $result = $pkg->installPackage();
         }

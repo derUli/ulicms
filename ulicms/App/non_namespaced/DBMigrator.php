@@ -51,7 +51,7 @@ class DBMigrator {
     }
 
     public function executeSqlScript(string $file): void {
-        if (endsWith($file, ".sql")) {
+        if (str_ends_with($file, ".sql")) {
             $sql = "SELECT id from {prefix}dbtrack where component = ? "
                     . "and name = ?";
             $args = array(
@@ -91,7 +91,7 @@ class DBMigrator {
         natcasesort($files);
         $files = array_reverse($files);
         foreach ($files as $file) {
-            if (endsWith($file, ".sql")) {
+            if (str_ends_with($file, ".sql")) {
                 $sql = "SELECT id from {prefix}dbtrack where component = ? "
                         . "and name = ?";
                 $args = array(

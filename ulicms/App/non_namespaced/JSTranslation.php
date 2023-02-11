@@ -58,7 +58,7 @@ class JSTranslation {
             "{$this->varName}={};"
         );
         foreach ($this->keys as $key) {
-            if (startsWith($key, "TRANSLATION_")) {
+            if (str_starts_with($key, "TRANSLATION_")) {
                 $key = substr($key, 12);
             }
             $jsName = ucfirst(ModuleHelper::underscoreToCamel(strtolower($key)));

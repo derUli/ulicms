@@ -23,7 +23,7 @@ class ControllerRegistry {
                 foreach ($controllers as $key => $value) {
                     $path = getModulePath($module, true) .
                             trim($value, "/");
-                    if (!endsWith($path, ".php")) {
+                    if (!str_ends_with($path, ".php")) {
                         $path .= ".php";
                     }
                     $controllerRegistry[$key] = $path;

@@ -20,7 +20,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
         if (count($_FILES) > 0) {
             $file_in_tmp = $temp_folder . DIRECTORY_SEPARATOR . $_FILES['file']['name'];
             if (move_uploaded_file($_FILES['file']['tmp_name'], $file_in_tmp)) {
-                if (endsWith($file_in_tmp, ".tar.gz")) {
+                if (str_ends_with($file_in_tmp, ".tar.gz")) {
                     $pkg = new PackageManager();
                     if ($pkg->installPackage($file_in_tmp, false)) {
                         @unlink($file_in_tmp);
@@ -32,7 +32,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                             "%file%" => $_FILES['file']['name']
                         )) . "</p>";
                     }
-                } elseif (endsWith($file_in_tmp, ".sin")) {
+                } elseif (str_ends_with($file_in_tmp, ".sin")) {
                     $url = "?action=pkginfo&file=" . basename($file_in_tmp);
                     Request::javascriptRedirect($url);
                 } else {

@@ -113,7 +113,7 @@ class Template {
         $ownTemplatePath = getTemplateDirPath(get_theme(), true) . $module
                 . "/" . $template;
 
-        if (!endsWith($template, ".php")) {
+        if (!str_ends_with($template, ".php")) {
             $originalTemplatePath .= ".php";
             $ownTemplatePath .= ".php";
         }
@@ -198,7 +198,7 @@ class Template {
         $originalTemplatePath = ULICMS_ROOT . "/default/" . $template;
         $ownTemplatePath = getTemplateDirPath(get_theme()) . "/" . $template;
 
-        if (!endsWith($template, ".php")) {
+        if (!str_ends_with($template, ".php")) {
             $originalTemplatePath .= ".php";
             $ownTemplatePath .= ".php";
         }
@@ -262,7 +262,7 @@ class Template {
         }
 
         $file = getTemplateDirPath($theme, true) . "partials/{$template}";
-        $file = !endsWith($file, ".php") ? $file . ".php" : $file;
+        $file = !str_ends_with($file, ".php") ? $file . ".php" : $file;
         if (!is_file($file)) {
             throw new FileNotFoundException("Partial Template {$template} "
                             . "of Theme {$theme} not found.");
@@ -312,7 +312,7 @@ class Template {
         $dir = dirname($_SERVER["SCRIPT_NAME"]);
         $dir = str_replace("\\", "/", $dir);
 
-        if (endsWith($dir, "/") == false) {
+        if (str_ends_with($dir, "/") == false) {
             $dir .= "/";
         }
 

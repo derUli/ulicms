@@ -15,13 +15,13 @@ class InfoController extends MainClass {
         $lines = array_map("make_links_clickable", $lines);
 
         $lines = array_map(function ($line) {
-            if (startsWith($line, "+") || startsWith($line, "*") ||
-                    startsWith($line, "-") || startsWith($line, "# ") ||
-                    startsWith($line, "*")) {
+            if (str_starts_with($line, "+") || str_starts_with($line, "*") ||
+                    str_starts_with($line, "-") || str_starts_with($line, "# ") ||
+                    str_starts_with($line, "*")) {
                 $line = "&bull;&nbsp;" . substr($line, 1);
-            } elseif (startsWith($line, "=") && endsWith($line, "=")) {
+            } elseif (str_starts_with($line, "=") && str_ends_with($line, "=")) {
                 $line = "<h3>" . trim(trim($line, "=")) . "</h3>";
-            } elseif (endsWith($line, ":")) {
+            } elseif (str_ends_with($line, ":")) {
                 $line = "<strong>$line</strong>";
             }
             if (!str_contains($line, "<h")) {

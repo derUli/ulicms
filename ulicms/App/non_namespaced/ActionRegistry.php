@@ -26,7 +26,7 @@ class ActionRegistry {
         foreach ($coreActions as $action => $file) {
             $path = $file;
 
-            if (!endsWith($path, ".php")) {
+            if (!str_ends_with($path, ".php")) {
                 $path .= ".php";
             }
 
@@ -47,7 +47,7 @@ class ActionRegistry {
                 foreach ($cActions as $key => $value) {
                     $path = getModulePath($module, true) .
                             trim($value, "/");
-                    if (!endsWith($path, ".php")) {
+                    if (!str_ends_with($path, ".php")) {
                         $path .= ".php";
                     }
 

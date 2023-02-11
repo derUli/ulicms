@@ -115,26 +115,6 @@ function isCLI(): bool {
     return php_sapi_name() == "cli";
 }
 
-function startsWith(string $haystack, string $needle, bool $case = true): bool {
-    if ($case) {
-        return (strcmp(substr($haystack, 0, strlen($needle)), $needle) === 0);
-    }
-    return (strcasecmp(substr($haystack, 0, strlen($needle)), $needle) === 0);
-}
-
-function endsWith(string $haystack, string $needle, bool $case = true): bool {
-    if ($case) {
-        return (strcmp(
-                        substr($haystack, strlen($haystack) - strlen($needle)),
-                        $needle
-                ) === 0);
-    }
-    return (strcasecmp(
-                    substr($haystack, strlen($haystack) - strlen($needle)),
-                    $needle
-            ) === 0);
-}
-
 function var_is_type($var, $type, $required = false): bool {
     $methodName = "is_{$type}";
 

@@ -211,11 +211,11 @@ class ModuleHelper extends Helper {
             $dirname = dirname(dirname($dirname . "/.."));
         }
 
-        if (!startsWith($dirname, "/")) {
+        if (!str_starts_with($dirname, "/")) {
             $dirname = "/" . $dirname;
         }
 
-        if (!endsWith($dirname, "/")) {
+        if (!str_ends_with($dirname, "/")) {
             $dirname = $dirname . "/";
         }
 

@@ -8,7 +8,7 @@ if (!$permissionChecker->hasPermission("upload_patches")) {
 } else {
     $redirect = false;
     if (isset($_POST ["upload_patch"]) and isset($_FILES ['file'] ['tmp_name'])
-            and endsWith($_FILES ['file'] ['name'], ".zip")) {
+            and str_ends_with($_FILES ['file'] ['name'], ".zip")) {
         $patchManager = new PatchManager();
         if ($patchManager->installPatch(
                         $_POST ["name"],
