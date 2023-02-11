@@ -1,10 +1,10 @@
 <?php
 
-use function UliCMS\Utils\VersionComparison\isEqual;
-use function UliCMS\Utils\VersionComparison\isGreater;
-use function UliCMS\Utils\VersionComparison\isLesser;
-use function UliCMS\Utils\VersionComparison\isGreaterOrEqual;
-use function UliCMS\Utils\VersionComparison\isLesserOrEqual;
+use function App\Utils\VersionComparison\isEqual;
+use function App\Utils\VersionComparison\isGreater;
+use function App\Utils\VersionComparison\isLesser;
+use function App\Utils\VersionComparison\isGreaterOrEqual;
+use function App\Utils\VersionComparison\isLesserOrEqual;
 
 class VersionComparisonsTest extends \PHPUnit\Framework\TestCase {
 

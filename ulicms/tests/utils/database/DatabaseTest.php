@@ -51,7 +51,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
     public function testGetServerVersion() {
         $version = Database::getServerVersion();
         $version = preg_replace('/[^0-9.].*/', '', $version);
-        $this->assertTrue(\UliCMS\Utils\VersionComparison\compare($version, "5.5.3", '>='));
+        $this->assertTrue(\App\Utils\VersionComparison\compare($version, "5.5.3", '>='));
     }
 
     public function testAnyReturnsTrue() {

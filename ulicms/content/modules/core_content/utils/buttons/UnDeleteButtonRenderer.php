@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace UliCMS\CoreContent\Partials;
+namespace App\CoreContent\Partials;
 
 use Template;
 use ViewBag;
@@ -10,8 +10,8 @@ use User;
 use ModuleHelper;
 use PageController;
 use App\Security\ContentPermissionChecker;
-use function UliCMS\HTML\icon;
-use function UliCMS\HTML\Link;
+use function App\HTML\icon;
+use function App\HTML\Link;
 
 class UnDeleteButtonRenderer {
 

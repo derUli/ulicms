@@ -5,7 +5,7 @@ declare(strict_types=1);
 use App\Utils\CacheUtil;
 use App\Models\Content\Language;
 use Rakit\Validation\Validator;
-use function UliCMS\HTML\stringContainsHtml;
+use function App\HTML\stringContainsHtml;
 
 class LanguageController extends Controller {
 

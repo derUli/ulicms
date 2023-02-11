@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\CoreContent\PageTableRenderer;
+use App\CoreContent\PageTableRenderer;
 use App\Models\Content\Language;
 
 class PageTableRendererTest extends \PHPUnit\Framework\TestCase {

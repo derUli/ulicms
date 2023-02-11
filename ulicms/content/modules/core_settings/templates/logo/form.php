@@ -1,6 +1,6 @@
 <?php
 
-use function UliCMS\HTML\imageTag;
+use function App\HTML\imageTag;
 
 $controller = new LogoController();
 

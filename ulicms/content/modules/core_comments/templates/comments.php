@@ -35,7 +35,7 @@ reset($comments);
                 <?php } ?>
                 <?php
                 echo make_links_clickable(
-                        UliCMS\HTML\text($comment->getText())
+                        App\HTML\text($comment->getText())
                 );
                 ?>
             </div>

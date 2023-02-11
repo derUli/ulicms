@@ -12,7 +12,7 @@ global $connection;
 do_event("before_session_start");
 
 // initialize session
-UliCMS\Utils\Session\sessionStart();
+App\Utils\Session\sessionStart();
 
 do_event("after_session_start");
 

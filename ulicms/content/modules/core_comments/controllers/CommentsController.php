@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use App\Models\Content\Comment;
 use App\Exceptions\DatasetNotFoundException;
-use UliCMS\HTML as HTML;
+use App\HTML as HTML;
 use App\Exceptions\NotImplementedException;
 use App\Constants\CommentStatus;
 use App\Utils\CacheUtil;

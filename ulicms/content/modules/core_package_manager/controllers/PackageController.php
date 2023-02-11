@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use App\Services\Connectors\PackageSourceConnector;
-use function UliCMS\HTML\text;
+use function App\HTML\text;
 use zz\Html\HTMLMinify;
 
 class PackageController extends MainClass {

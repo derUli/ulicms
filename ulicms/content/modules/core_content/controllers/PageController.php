@@ -2,8 +2,8 @@
 declare(strict_types=1);
 
 use App\Exceptions\DatasetNotFoundException;
-use UliCMS\CoreContent\Models\ViewModels\DiffViewModel;
-use UliCMS\CoreContent\PageTableRenderer;
+use App\CoreContent\Models\ViewModels\DiffViewModel;
+use App\CoreContent\PageTableRenderer;
 use App\Models\Content\VCS;
 use App\Models\Content\Types\DefaultContentTypes;
 use Rakit\Validation\Validator;
@@ -13,7 +13,7 @@ use App\Models\Content\TypeMapper;
 use App\Constants\LinkTarget;
 use App\Utils\CacheUtil;
 use zz\Html\HTMLMinify;
-use function UliCMS\HTML\stringContainsHtml;
+use function App\HTML\stringContainsHtml;
 use App\Constants;
 use App\HTML\ListItem;
 

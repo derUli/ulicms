@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\CoreContent\UIUtils;
+use App\CoreContent\UIUtils;
 
 class UIUtilsTest extends \PHPUnit\Framework\TestCase {
 

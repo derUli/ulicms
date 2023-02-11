@@ -38,7 +38,7 @@ class CoreUpgradeController extends Controller {
         $version = $data->version;
         $cfg = new UliCMSVersion();
         $oldVersion = $cfg->getInternalVersionAsString();
-        if (\UliCMS\Utils\VersionComparison\compare($oldVersion, $data->version, "<")) {
+        if (\App\Utils\VersionComparison\compare($oldVersion, $data->version, "<")) {
             return $data->version;
         }
         return null;

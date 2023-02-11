@@ -1,14 +1,14 @@
 <?php
 
-use function UliCMS\HTML\text;
-use function UliCMS\HTML\nbsp;
-use function UliCMS\HTML\_nbsp;
-use function UliCMS\HTML\imageTag;
-use function UliCMS\HTML\imageTagInline;
-use function UliCMS\HTML\icon;
-use function UliCMS\HTML\Link;
-use function UliCMS\HTML\buttonLink;
-use function UliCMS\HTML\stringContainsHtml;
+use function App\HTML\text;
+use function App\HTML\nbsp;
+use function App\HTML\_nbsp;
+use function App\HTML\imageTag;
+use function App\HTML\imageTagInline;
+use function App\HTML\icon;
+use function App\HTML\Link;
+use function App\HTML\buttonLink;
+use function App\HTML\stringContainsHtml;
 use App\Constants\LinkTarget;
 use App\Constants\ButtonType;
 use App\Exceptions\FileNotFoundException;

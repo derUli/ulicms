@@ -162,7 +162,7 @@ class DesignSettingsController extends Controller {
 
         if ($screenshot) {
             HTMLResult(
-                    UliCMS\HTML\imageTag(
+                    App\HTML\imageTag(
                             $screenshot,
                             [
                                 "class" => "img-responsive theme-preview"

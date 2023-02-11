@@ -1,7 +1,7 @@
 <?php
 
 use App\Utils\File;
-use function UliCMS\HTML\imageTag;
+use function App\HTML\imageTag;
 
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("favicon")) {

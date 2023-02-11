@@ -360,7 +360,7 @@ add_translation("FORBIDDEN_COTENT", "You don't have the needed permissions to vi
 
 add_translation("ULICMS_NEWS", "News about UliCMS");
 add_translation("POSTED_ON_DATE", "Posted on %s");
-add_translation("POWERED_BY_ULICMS", "<p class=\"powered-by-ulicms\">This page is powered by " . "<a href=\"http://www.ulicms.de\" target=\"_blank\">UliCMS " . cms_version() . "</a></p>");
+add_translation("POWERED_BY_ULICMS", "<p class=\"powered-by-App\">This page is powered by " . "<a href=\"http://www.ulicms.de\" target=\"_blank\">UliCMS " . cms_version() . "</a></p>");
 add_translation("UNDER_MAINTENANCE", "<h1>Briefly unavailable for scheduled maintenance. Check back in a minute.</h1>");
 
 // Patches

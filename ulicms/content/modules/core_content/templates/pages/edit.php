@@ -13,8 +13,8 @@ use App\Models\Content\Language;
 use App\Models\Content\Types\DefaultContentTypes;
 use App\Helpers\NumberFormatHelper;
 use App\HTML\Input;
-use UliCMS\CoreContent\UIUtils;
-use function UliCMS\HTML\icon;
+use App\CoreContent\UIUtils;
+use function App\HTML\icon;
 
 $permissionChecker = new PermissionChecker(get_user_id());
 if ($permissionChecker->hasPermission("pages")) {

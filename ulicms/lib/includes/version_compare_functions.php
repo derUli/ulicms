@@ -1,6 +1,6 @@
 <?php
 
-namespace UliCMS\Utils\VersionComparison;
+namespace App\Utils\VersionComparison;
 
 function compare(
         ?string $version1,

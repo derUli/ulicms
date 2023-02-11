@@ -1,6 +1,6 @@
 <?php
 
-use function UliCMS\Utils\Session\sessionName;
+use function App\Utils\Session\sessionName;
 
 class SessionTest extends \PHPUnit\Framework\TestCase {
 

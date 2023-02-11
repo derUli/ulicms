@@ -53,7 +53,7 @@ class SessionManager extends Controller {
         db_query("UPDATE " . tbname("users") . " SET last_action = 0 WHERE id = $id");
         $url = apply_filter("index.php", "logout_url");
         // throw the session to /dev/null
-        UliCMS\Utils\Session\sessionDestroy();
+        App\Utils\Session\sessionDestroy();
         // redirect to the logout Url
         Response::redirect($url, HttpStatusCode::MOVED_TEMPORARILY);
         exit();

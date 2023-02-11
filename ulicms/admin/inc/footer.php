@@ -1,6 +1,6 @@
 <?php
 
-use function UliCMS\HTML\icon;
+use function App\HTML\icon;
 
 $menuTranslation = new JSTranslation(
         [

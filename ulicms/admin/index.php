@@ -6,7 +6,7 @@ require_once "../init.php";
 
 use App\Backend\BackendPageRenderer;
 
-UliCMS\Utils\Session\sessionStart();
+App\Utils\Session\sessionStart();
 
 do_event("after_session_start");
 

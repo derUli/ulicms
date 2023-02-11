@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\CoreContent\Partials\DeleteButtonRenderer;
+use App\CoreContent\Partials\DeleteButtonRenderer;
 
 class DeleteButtonRendererTest extends \PHPUnit\Framework\TestCase {
 

@@ -3,7 +3,7 @@
 use App\Exceptions\FileNotFoundException;
 use App\Utils\File;
 use App\Helpers\TestHelper;
-use function UliCMS\HTML\stringContainsHtml;
+use function App\HTML\stringContainsHtml;
 
 class TemplateTest extends \PHPUnit\Framework\TestCase {
 

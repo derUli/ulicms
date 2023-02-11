@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace UliCMS\Utils\Session;
+namespace App\Utils\Session;
 
 function sessionStart(): bool
 {

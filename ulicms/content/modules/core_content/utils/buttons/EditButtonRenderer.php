@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace UliCMS\CoreContent\Partials;
+namespace App\CoreContent\Partials;
 
 use Template;
 use User;
 use ViewBag;
 use ModuleHelper;
 use App\Security\ContentPermissionChecker;
-use function UliCMS\HTML\icon;
-use function UliCMS\HTML\Link;
+use function App\HTML\icon;
+use function App\HTML\Link;
 
 class EditButtonRenderer {
 

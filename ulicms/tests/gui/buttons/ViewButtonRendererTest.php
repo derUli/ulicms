@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\CoreContent\Partials\ViewButtonRenderer;
+use App\CoreContent\Partials\ViewButtonRenderer;
 
 class ViewButtonRendererTest extends \PHPUnit\Framework\TestCase {
 

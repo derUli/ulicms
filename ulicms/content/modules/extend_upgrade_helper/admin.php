@@ -1,7 +1,7 @@
 <?php
 
-use function UliCMS\HTML\icon;
-use function UliCMS\HTML\nbsp;
+use function App\HTML\icon;
+use function App\HTML\nbsp;
 
 define("MODULE_ADMIN_HEADLINE", get_translation("extend_upgrade_helper"));
 

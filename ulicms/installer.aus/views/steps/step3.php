@@ -1,12 +1,12 @@
 <?php
 
-use UliCMS\Utils\VersionComparison;
+use App\Utils\VersionComparison;
 
 $minPhpRequired = "8.0.2";
 
 $phpVersion = phpversion();
 
-$phpVersionCompatible = \UliCMS\Utils\VersionComparison\compare(
+$phpVersionCompatible = \App\Utils\VersionComparison\compare(
         $phpVersion,
         $minPhpRequired,
         ">="

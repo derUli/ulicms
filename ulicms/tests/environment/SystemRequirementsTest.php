@@ -5,12 +5,12 @@ use App\Helpers\TestHelper;
 class SystemRequirementsTest extends \PHPUnit\Framework\TestCase {
 
     public function testPhpVersion() {
-        $this->assertTrue(\UliCMS\Utils\VersionComparison\compare(phpversion(), "8.0.2", ">="));
+        $this->assertTrue(\App\Utils\VersionComparison\compare(phpversion(), "8.0.2", ">="));
     }
 
     public function testMySQLVersion() {
         $this->assertTrue(
-                \UliCMS\Utils\VersionComparison\compare($this->getMySQLVersion(), "5.5.3", '>=')
+                \App\Utils\VersionComparison\compare($this->getMySQLVersion(), "5.5.3", '>=')
         );
     }
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace UliCMS\CoreContent\Models\ViewModels;
+namespace App\CoreContent\Models\ViewModels;
 
 class DiffViewModel {
 

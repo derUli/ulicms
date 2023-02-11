@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\CoreContent\Partials\UnDeleteButtonRenderer;
+use App\CoreContent\Partials\UnDeleteButtonRenderer;
 
 class UnDeleteButtonRendererTest extends \PHPUnit\Framework\TestCase {
 

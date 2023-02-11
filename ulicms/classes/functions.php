@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace UliCMS\HTML;
+namespace App\HTML;
 
 use App\Exceptions\FileNotFoundException;
 use ModuleHelper;

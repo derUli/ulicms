@@ -4,7 +4,7 @@
 // This should be rewritten with MVC pattern and using partial views
 use App\Security\PermissionChecker;
 use App\HTML\Alert;
-use function UliCMS\HTML\icon;
+use function App\HTML\icon;
 
 $controller = ControllerRegistry::get(PageController::class);
 

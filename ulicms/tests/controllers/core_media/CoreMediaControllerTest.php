@@ -1,7 +1,7 @@
 <?php
 
 use App\HTML\Link;
-use function UliCMS\HTML\imageTag;
+use function App\HTML\imageTag;
 use Spatie\Snapshots\MatchesSnapshots;
 
 class CoreMediaControllerTest extends \PHPUnit\Framework\TestCase {

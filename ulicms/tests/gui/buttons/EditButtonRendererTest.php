@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\CoreContent\Partials\EditButtonRenderer;
+use App\CoreContent\Partials\EditButtonRenderer;
 
 class EditButtonRendererTest extends \PHPUnit\Framework\TestCase {
 

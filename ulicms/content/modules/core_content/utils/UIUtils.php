@@ -1,6 +1,6 @@
 <?php
 
-namespace UliCMS\CoreContent;
+namespace App\CoreContent;
 
 use App\HTML\ListItem;
 

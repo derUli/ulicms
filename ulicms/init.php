@@ -263,7 +263,7 @@ if (!Settings::get("session_name")) {
     Settings::set("session_name", uniqid() . "_SESSION");
 }
 
-UliCMS\Utils\Session\sessionName(Settings::get("session_name"));
+App\Utils\Session\sessionName(Settings::get("session_name"));
 
 $useragent = Settings::get("useragent");
 
@@ -308,7 +308,7 @@ $session_timeout = 60 * intval(Settings::get("session_timeout"));
 // Session abgelaufen
 if (isset($_SESSION["session_begin"])) {
     if (time() - $_SESSION["session_begin"] > $session_timeout) {
-        UliCMS\Utils\Session\sessionDestroy();
+        App\Utils\Session\sessionDestroy();
         send_header("Location: ./");
         exit();
     } else {

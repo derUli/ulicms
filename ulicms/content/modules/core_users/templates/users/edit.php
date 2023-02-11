@@ -1,7 +1,7 @@
 <?php
 
 use App\Constants\RequestMethod;
-use function UliCMS\HTML\imageTag;
+use function App\HTML\imageTag;
 use App\HTML\Input;
 
 $permissionChecker = new ACL();

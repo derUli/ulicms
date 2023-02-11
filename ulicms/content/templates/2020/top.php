@@ -8,7 +8,7 @@ $pages = ContentFactory::getAllByMenu("top", "position");
 
 $frontpagePhotoFile = ULICMS_CONTENT . "/images/theme/frontpage_photo.png";
 
-$frontpagePhoto = file_exists($frontpagePhotoFile) ? UliCMS\HTML\imageTag(
+$frontpagePhoto = file_exists($frontpagePhotoFile) ? App\HTML\imageTag(
                 "content/images/theme/frontpage_photo.png"
         ) : null;
 ?>
@@ -101,7 +101,7 @@ $frontpagePhoto = file_exists($frontpagePhotoFile) ? UliCMS\HTML\imageTag(
 
                         if ($page instanceof Article and
                                 $page->article_image) {
-                            echo UliCMS\HTML\imageTag($page->article_image, ["class" => "article-image"]);
+                            echo App\HTML\imageTag($page->article_image, ["class" => "article-image"]);
                         }
                         content();
                         if ($text_position == "before") {

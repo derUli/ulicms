@@ -68,7 +68,7 @@ class User extends Model {
             throw new BadMethodCallException();
         }
         if (!session_id()) {
-            UliCMS\Utils\Session\sessionStart();
+            App\Utils\Session\sessionStart();
         }
 
         $_SESSION["logged_in"] = true;

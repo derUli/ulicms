@@ -1,6 +1,6 @@
 <?php
 
-use UliCMS\CoreContent\Models\ViewModels\DiffViewModel;
+use App\CoreContent\Models\ViewModels\DiffViewModel;
 
 class DiffViewModelTest extends \PHPUnit\Framework\TestCase {
 

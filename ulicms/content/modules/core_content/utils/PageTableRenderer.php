@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace UliCMS\CoreContent;
+namespace App\CoreContent;
 
 use ContentFactory;
 use App\Models\Content\TypeMapper;
 use Database;
 use User;
-use UliCMS\CoreContent\Partials\ViewButtonRenderer;
-use UliCMS\CoreContent\Partials\EditButtonRenderer;
-use UliCMS\CoreContent\Partials\DeleteButtonRenderer;
-use UliCMS\CoreContent\Partials\UnDeleteButtonRenderer;
-use function UliCMS\HTML\icon;
-use function UliCMS\HTML\Link;
+use App\CoreContent\Partials\ViewButtonRenderer;
+use App\CoreContent\Partials\EditButtonRenderer;
+use App\CoreContent\Partials\DeleteButtonRenderer;
+use App\CoreContent\Partials\UnDeleteButtonRenderer;
+use function App\HTML\icon;
+use function App\HTML\Link;
 
 class PageTableRenderer {
 

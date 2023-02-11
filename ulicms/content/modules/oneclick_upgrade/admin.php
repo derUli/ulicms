@@ -1,7 +1,7 @@
 <?php
 
 use App\HTML\Alert;
-use function UliCMS\HTML\text;
+use function App\HTML\text;
 
 define("MODULE_ADMIN_HEADLINE", get_translation("oneclick_upgrade") . " " . get_translation("settings"));
 

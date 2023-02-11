@@ -7,8 +7,8 @@ use App\Models\Content\Categories;
 use App\Models\Content\Language;
 use App\Models\Content\Types\DefaultContentTypes;
 use App\Helpers\NumberFormatHelper;
-use UliCMS\CoreContent\UIUtils;
-use function UliCMS\HTML\icon;
+use App\CoreContent\UIUtils;
+use function App\HTML\icon;
 use App\HTML\Input;
 
 $parent_id = Request::getVar("parent_id", null, "int");
