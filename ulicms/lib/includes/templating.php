@@ -674,9 +674,9 @@ function set_requested_pagename(
     $_GET["slug"] = $slug;
     $_REQUEST["slug"] = $slug;
 
-    $_GET["language"] = $language;
-    $_REQUEST["language"] = $language;
-    $_SESSION["language"] = $language;
+    $_GET['language'] = $language;
+    $_REQUEST['language'] = $language;
+    $_SESSION['language'] = $language;
 }
 
 function is_home(): bool
@@ -734,7 +734,7 @@ function parent_item_contains_current_page(?int $id): bool
         return $retval;
     }
     $id = (int) $id;
-    $language = $_SESSION["language"];
+    $language = $_SESSION['language'];
     $sql = "SELECT id, slug, parent_id FROM " . tbname("content") . " WHERE language = '$language' AND active = 1 AND `deleted_at` IS NULL";
     $r = db_query($sql);
 
@@ -760,7 +760,7 @@ function get_menu(
 ): string {
     $html = "";
     $name = db_escape($name);
-    $language = $_SESSION["language"];
+    $language = $_SESSION['language'];
     $sql = "SELECT id, slug, access, link_url, title, "
             . "alternate_title, menu_image, target, type, link_to_language, position FROM " . tbname("content") . " WHERE menu='$name' AND language = '$language' AND active = 1 AND `deleted_at` IS NULL AND hidden = 0 and type <> 'snippet' and parent_id ";
 

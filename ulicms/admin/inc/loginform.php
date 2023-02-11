@@ -12,8 +12,8 @@ $languages = getAvailableBackendLanguages();
 $languagesCount = count($languages);
 
 $default_language = getSystemLanguage();
-if (isset($_SESSION["language"]) && in_array($_SESSION["language"], $languages)) {
-    $default_language = $_SESSION["language"];
+if (isset($_SESSION['language']) && in_array($_SESSION['language'], $languages)) {
+    $default_language = $_SESSION['language'];
 }
 
 $admin_logo = Settings::get("admin_logo");
@@ -73,7 +73,7 @@ if (!empty($_REQUEST["go"])) {
         <td><input type="checkbox" id="view_password" /></td>
     </tr>
     <tr>
-        <td><strong><?php translate("language"); ?></strong></td>
+        <td><strong><?php translate('language'); ?></strong></td>
         <td><select name="system_language">
                 <option value="" selected>[<?php translate("standard"); ?>]</option>
                 <?php

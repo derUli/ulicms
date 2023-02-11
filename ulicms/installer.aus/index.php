@@ -16,13 +16,13 @@ foreach (glob('../lib/includes/*.php') as $file) {
 include_once "controllers/InstallerController.php";
 
 InstallerController::initSessionVars();
-if (isset($_GET["language"])) {
+if (isset($_GET['language'])) {
     $languages = array(
         "de",
         "en"
     );
-    if (in_array($_GET["language"], $languages)) {
-        $_SESSION["language"] = $_GET["language"];
+    if (in_array($_GET['language'], $languages)) {
+        $_SESSION['language'] = $_GET['language'];
     }
 }
 $lang = InstallerController::getLanguage();

@@ -145,7 +145,7 @@ add_translation("VIEW", "View");
 add_translation("page_title", "Page title");
 add_translation("ALTERNATE_TITLE", "Alternate title");
 add_translation("ALTERNATE_TITLE_INFO", "If the headline should not be the page title.");
-add_translation("LANGUAGE", "Language");
+add_translation('language', 'language');
 
 // Zusätzliche Optionen
 add_translation("EXTERNAL_REDIRECT", "external redirect");

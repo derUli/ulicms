@@ -25,7 +25,7 @@ class InstallerController
             "mysql_password",
             "mysql_database",
             "mysql_prefix",
-            "language",
+            'language',
             "admin_password",
             "admin_user",
             "admin_email",
@@ -59,10 +59,10 @@ class InstallerController
 
     public static function getLanguage()
     {
-        if (isset($_SESSION["language"]) && !empty($_SESSION["language"])) {
-            return basename($_SESSION["language"]);
+        if (isset($_SESSION['language']) && !empty($_SESSION['language'])) {
+            return basename($_SESSION['language']);
         } else {
-            $_SESSION["language"] = "en";
+            $_SESSION['language'] = "en";
             return "en";
         }
     }
@@ -197,7 +197,7 @@ class InstallerController
         );
         $language = mysqli_real_escape_string(
             $connection,
-            $_SESSION["language"]
+            $_SESSION['language']
         );
         $admin_user = mysqli_real_escape_string(
             $connection,

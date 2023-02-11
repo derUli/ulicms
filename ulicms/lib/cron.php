@@ -13,28 +13,28 @@ if (!defined("LOADED_LANGUAGE_FILE")) {
         $_SESSION = [];
     }
 
-    if (!empty($_GET["language"]) && in_array($_GET["language"], $languages)) {
-        $_SESSION["language"] = Database::escapeValue(
-            $_GET["language"],
+    if (!empty($_GET['language']) && in_array($_GET['language'], $languages)) {
+        $_SESSION['language'] = Database::escapeValue(
+            $_GET['language'],
             DB_TYPE_STRING
         );
     }
 
-    if (!isset($_SESSION["language"])) {
-        $_SESSION["language"] = Settings::get("default_language");
+    if (!isset($_SESSION['language'])) {
+        $_SESSION['language'] = Settings::get("default_language");
     }
 
     setLocaleByLanguage();
 
-    if (in_array($_SESSION["language"], $languages) &&
-            file_exists(getLanguageFilePath($_SESSION["language"]))) {
-        require_once getLanguageFilePath($_SESSION["language"]);
+    if (in_array($_SESSION['language'], $languages) &&
+            file_exists(getLanguageFilePath($_SESSION['language']))) {
+        require_once getLanguageFilePath($_SESSION['language']);
     } elseif (file_exists(getLanguageFilePath("en"))) {
         require getLanguageFilePath("en");
     }
 
-    Translation::loadAllModuleLanguageFiles($_SESSION["language"]);
-    Translation::includeCustomLangFile($_SESSION["language"]);
+    Translation::loadAllModuleLanguageFiles($_SESSION['language']);
+    Translation::includeCustomLangFile($_SESSION['language']);
 }
 
 if (Settings::get("delete_ips_after_48_hours")) {

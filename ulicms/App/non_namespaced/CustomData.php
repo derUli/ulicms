@@ -42,7 +42,7 @@ class CustomData
                         Database::escapeValue($json) .
                         "' WHERE slug='" . Database::escapeValue($page) . "'") .
                 "' AND language='" .
-                Database::escapeValue($_SESSION["language"]) . "'";
+                Database::escapeValue($_SESSION['language']) . "'";
     }
 
     public static function delete(
@@ -68,7 +68,7 @@ class CustomData
                 . Database::escapeValue($json)
                 . "' WHERE slug='" . Database::escapeValue($page) . "' "
                 . "AND language='" .
-                Database::escapeValue($_SESSION["language"]) . "'");
+                Database::escapeValue($_SESSION['language']) . "'");
     }
 
     public static function getCustomDataOrSetting(string $name)

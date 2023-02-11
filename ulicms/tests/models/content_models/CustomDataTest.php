@@ -5,14 +5,14 @@ class CustomDataTest extends \PHPUnit\Framework\TestCase
     protected function setUp(): void
     {
         $_GET["slug"] = "welcome";
-        $_SESSION["language"] = "en";
+        $_SESSION['language'] = "en";
     }
 
     protected function tearDown(): void
     {
         CustomData::delete("my_value");
         unset($_GET["slug"]);
-        unset($_SESSION["language"]);
+        unset($_SESSION['language']);
     }
 
     public function testGetCustomDataOrSetting()

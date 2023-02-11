@@ -69,7 +69,7 @@ class PageController extends Controller
     public function _createPost(): ?Content
     {
         $permissionChecker = new PermissionChecker(get_user_id());
-        $model = TypeMapper::getModel(Request::getVar("type"));
+        $model = TypeMapper::getModel(Request::getVar('type'));
 
         if ($model) {
             $this->_fillAndSaveModel($model, $permissionChecker);
@@ -107,7 +107,7 @@ class PageController extends Controller
     public function _editPost(): bool
     {
         $permissionChecker = new PermissionChecker(get_user_id());
-        $model = TypeMapper::getModel(Request::getVar("type"));
+        $model = TypeMapper::getModel(Request::getVar('type'));
         if (!$model) {
             return false;
         }
@@ -117,7 +117,7 @@ class PageController extends Controller
             return false;
         }
 
-        $model->type = Request::getVar("type");
+        $model->type = Request::getVar('type');
 
         $authorId = Request::getVar("author_id", $model->author_id, "int");
         $groupId = Request::getVar("group_id", $model->group_id, "int");
@@ -219,7 +219,7 @@ class PageController extends Controller
         $model->meta_keywords = Request::getVar("meta_keywords");
         $model->robots = Request::getVar("robots", null, "str");
 
-        $model->language = Request::getVar("language");
+        $model->language = Request::getVar('language');
 
         if ($model instanceof Module_Page) {
             $model->module = Request::getVar("module", null, "str");
@@ -363,7 +363,7 @@ class PageController extends Controller
 
     public function undeletePost(): void
     {
-        $id = Request::getVar("id", null, "int");
+        $id = Request::getVar('id', null, "int");
         do_event("before_undelete_page");
 
         if (!$id) {
@@ -407,7 +407,7 @@ class PageController extends Controller
 
     public function deletePost(): void
     {
-        $id = Request::getVar("id", null, "int");
+        $id = Request::getVar('id', null, "int");
         do_event("before_delete_page");
 
         if (!$id) {
@@ -536,7 +536,7 @@ class PageController extends Controller
     public function nextFreeSlug(): void
     {
         $slug = $_REQUEST["slug"];
-        $language = $_REQUEST["language"];
+        $language = $_REQUEST['language'];
         $id = isset($_REQUEST["id"]) ?
                 intval($_REQUEST["id"]) : 0;
 
@@ -865,7 +865,7 @@ class PageController extends Controller
 
     public function getParentSelection(): void
     {
-        $language = Request::getVar("language", null, "str");
+        $language = Request::getVar('language', null, "str");
         $menu = Request::getVar("menu", null, "str");
 
         $html = $this->_getParentSelection($language, $menu);

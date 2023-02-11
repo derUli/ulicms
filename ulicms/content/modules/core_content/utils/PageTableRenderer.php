@@ -57,9 +57,9 @@ class PageTableRenderer
             "position",
             "parent_id",
             "active",
-            "language",
+            'language',
             "deleted_at",
-            "language",
+            'language',
             "type"
         ];
 
@@ -187,10 +187,10 @@ class PageTableRenderer
             $where .= " and approved =" . intval($filters["approved"]);
         }
 
-        if (isset($filters["language"]) and
-                !empty($filters["language"])) {
+        if (isset($filters['language']) and
+                !empty($filters['language'])) {
             $where .= " and language ='" .
-                    Database::escapeValue($filters["language"]) .
+                    Database::escapeValue($filters['language']) .
                     "'";
         }
 

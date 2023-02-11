@@ -637,7 +637,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $page->content = "Hello World";
         $page->save();
 
-        $_SESSION["language"] = "de";
+        $_SESSION['language'] = "de";
         $_GET["slug"] = $page->slug;
         $this->assertTrue(containsModule());
     }
@@ -656,7 +656,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $page->content = "Hello World";
         $page->save();
 
-        $_SESSION["language"] = "de";
+        $_SESSION['language'] = "de";
         $this->assertTrue(containsModule($page->slug));
     }
 
@@ -672,7 +672,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $page->group_id = 1;
         $page->save();
 
-        $_SESSION["language"] = "de";
+        $_SESSION['language'] = "de";
 
         $this->assertFalse(containsModule($page->slug));
     }
@@ -691,7 +691,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $page->content = "Hello World";
         $page->save();
 
-        $_SESSION["language"] = "de";
+        $_SESSION['language'] = "de";
         $this->assertTrue(containsModule($page->slug, "fortune2"));
     }
 
@@ -708,7 +708,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $page->content = "Hello [module=fortune2] World";
         $page->save();
 
-        $_SESSION["language"] = "de";
+        $_SESSION['language'] = "de";
         $this->assertTrue(containsModule($page->slug, "fortune2"));
     }
 
@@ -725,7 +725,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $page->content = "Hello [module=fortune2] World";
         $page->save();
 
-        $_SESSION["language"] = "de";
+        $_SESSION['language'] = "de";
 
         $this->assertFalse(containsModule($page->slug, "nicht_enthalten"));
     }
@@ -936,13 +936,13 @@ class ApiTest extends \PHPUnit\Framework\TestCase
     public function testGetSystemLanguageReturnsSystemLanguageFromSession()
     {
         $_SESSION["system_language"] = "de";
-        $_SESSION["language"] = "en";
+        $_SESSION['language'] = "en";
         $this->assertEquals("de", getSystemLanguage());
     }
 
     public function testGetSystemLanguageReturnsFrontendLanguageFromSession()
     {
-        $_SESSION["language"] = "en";
+        $_SESSION['language'] = "en";
         $this->assertEquals("en", getSystemLanguage());
     }
 

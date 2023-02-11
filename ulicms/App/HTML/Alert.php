@@ -10,7 +10,7 @@ class Alert
 {
     public static function alert(
         string $text,
-        string $cssClasses,
+        string $cssClasses = '',
         bool $allowHtml = false
     ): string {
         if (!$allowHtml) {
@@ -21,7 +21,7 @@ class Alert
 
     public static function info(
         string $text,
-        string $cssClasses = "",
+        string $cssClasses = '',
         bool $allowHtml = false
     ): string {
         return self::alert($text, "alert-info {$cssClasses}", $allowHtml);
@@ -29,7 +29,7 @@ class Alert
 
     public static function danger(
         $text,
-        string $cssClasses = "",
+        string $cssClasses = '',
         bool $allowHtml = false
     ): string {
         return self::alert($text, "alert-danger {$cssClasses}", $allowHtml);
@@ -37,7 +37,7 @@ class Alert
 
     public static function warning(
         string $text,
-        string $cssClasses = "",
+        string $cssClasses = '',
         bool $allowHtml = false
     ): string {
         return self::alert($text, "alert-warning {$cssClasses}", $allowHtml);
@@ -45,7 +45,7 @@ class Alert
 
     public static function success(
         string $text,
-        string $cssClasses = "",
+        string $cssClasses = '',
         bool $allowHtml = false
     ): string {
         return self::alert($text, "alert-success {$cssClasses}", $allowHtml);

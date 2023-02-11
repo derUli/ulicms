@@ -107,7 +107,7 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase
 
         $withoutLanguageFilter = $renderer->getData(0, 20, 123, "", $filters);
 
-        $filters["language"] = "de";
+        $filters['language'] = "de";
         $data = $renderer->getData(0, 20, 123, "", $filters);
 
         $this->assertLessThan(

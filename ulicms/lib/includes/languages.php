@@ -50,8 +50,8 @@ function getSystemLanguage(): string
 {
     if (isset($_SESSION["system_language"])) {
         $lang = $_SESSION["system_language"];
-    } elseif (isset($_SESSION["language"])) {
-        $lang = $_SESSION["language"];
+    } elseif (isset($_SESSION['language'])) {
+        $lang = $_SESSION['language'];
     } elseif (Settings::get("system_language")) {
         $lang = Settings::get("system_language");
     } else {
@@ -99,7 +99,7 @@ function setLanguageByDomain(): bool
             getAllLanguages()
         )
         ) {
-            $_SESSION["language"] = $language;
+            $_SESSION['language'] = $language;
             return true;
         }
     }
@@ -144,7 +144,7 @@ function setLocaleByLanguage(): array
 
 // Returns the language code of the current language
 // If $current is true returns language of the current page
-// else it returns $_SESSION["language"];
+// else it returns $_SESSION['language'];
 function getCurrentLanguage($current = false): string
 {
     if (Vars::get("current_language_" . strbool($current))) {
@@ -160,8 +160,8 @@ function getCurrentLanguage($current = false): string
         }
     }
 
-    if (isset($_SESSION["language"])) {
-        return basename($_SESSION["language"]);
+    if (isset($_SESSION['language'])) {
+        return basename($_SESSION['language']);
     } else {
         return basename(Settings::get("default_language"));
     }

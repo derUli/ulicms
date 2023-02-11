@@ -87,7 +87,7 @@ function getFrontendLanguage()
     $domainLanguage = get_domain() ?
             getDomainByLanguage(get_domain()) : null;
     $fallbackLanguage = $domainLanguage ?
-            $domainLanguage : Settings::get("language");
+            $domainLanguage : Settings::get('language');
 
-    return isset($_SESSION["language"]) ? $_SESSION["language"] : $fallbackLanguage;
+    return isset($_SESSION['language']) ? $_SESSION['language'] : $fallbackLanguage;
 }

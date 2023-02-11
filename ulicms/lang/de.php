@@ -146,7 +146,7 @@ add_translation("VIEW", "Anzeigen");
 add_translation("page_title", "Seitentitel");
 add_translation("ALTERNATE_TITLE", "Alternative Überschrift");
 add_translation("ALTERNATE_TITLE_INFO", "Falls die Überschrift auf der Seite vom Titel im Navigationsmenü abweichen soll. ");
-add_translation("LANGUAGE", "Sprache");
+add_translation('language', "Sprache");
 
 // Zusätzliche Optionen
 add_translation("EXTERNAL_REDIRECT", "Weiterleitung auf externen Link");

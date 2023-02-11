@@ -27,7 +27,7 @@ class PrivacyControllerTest extends \PHPUnit\Framework\TestCase
     public function testSavePostAllSet(): void
     {
         $_POST = [
-            "language" => "en",
+            'language' => "en",
             "privacy_policy_checkbox_enable" => "1",
             "log_ip" => "1",
             "delete_ips_after_48_hours" => "1",
@@ -67,7 +67,7 @@ class PrivacyControllerTest extends \PHPUnit\Framework\TestCase
     public function testSavePostNothingSet(): void
     {
         $_POST = [
-            "language" => "en"
+            'language' => "en"
         ];
 
         $controller = new PrivacyController();

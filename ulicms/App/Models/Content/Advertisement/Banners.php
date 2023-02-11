@@ -26,7 +26,7 @@ class Banners
 
     public static function getByLanguage(
         string $language,
-        string $order = "language"
+        string $order = 'language'
     ): array {
         $datasets = [];
         $language = Database::escapeValue($language);
@@ -60,7 +60,7 @@ class Banners
 
     public static function getByType(
         string $type = "gif",
-        string $order = "language"
+        string $order = 'language'
     ): array {
         $type = Database::escapeValue($type);
         $datasets = [];

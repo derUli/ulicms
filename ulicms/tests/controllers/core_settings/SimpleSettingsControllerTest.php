@@ -6,7 +6,7 @@ class SimpleSettingsControllerTest extends \PHPUnit\Framework\TestCase
     {
         $this->defaultSettings = [
             "homepage_owner" => Settings::get("homepage_owner"),
-            "language" => Settings::get("language"),
+            'language' => Settings::get('language'),
             "visitors_can_register" => Settings::get("visitors_can_register"),
             'maintenance_mode' => Settings::get('maintenance_mode'),
             "email" => Settings::get("email"),
@@ -29,7 +29,7 @@ class SimpleSettingsControllerTest extends \PHPUnit\Framework\TestCase
     {
         return [
             "homepage_owner" => "Jane Doe",
-            "language" => "en",
+            'language' => "en",
             "visitors_can_register" => "1",
             'maintenance_mode' => "1",
             "email" => "foobar@example.org",
@@ -53,7 +53,7 @@ class SimpleSettingsControllerTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals(
             "en",
-            Settings::get("language")
+            Settings::get('language')
         );
 
         $this->assertEquals(
@@ -100,7 +100,7 @@ class SimpleSettingsControllerTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals(
             "en",
-            Settings::get("language")
+            Settings::get('language')
         );
 
         $this->assertEquals(

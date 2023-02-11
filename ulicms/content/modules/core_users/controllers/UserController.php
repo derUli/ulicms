@@ -144,7 +144,7 @@ class UserController extends Controller
 
     public function deletePost(): void
     {
-        $id = Request::getVar("id", 0, "int");
+        $id = Request::getVar('id', 0, "int");
 
         $this->_deletePost($id);
         Response::redirect(ModuleHelper::buildActionURL("admins"));

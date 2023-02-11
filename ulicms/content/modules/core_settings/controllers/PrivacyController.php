@@ -8,7 +8,7 @@ class PrivacyController extends Controller
 {
     public function _savePost(): void
     {
-        $language = basename(Request::getVar("language", null, "str"));
+        $language = basename(Request::getVar('language', null, "str"));
         $varName = StringHelper::isNotNullOrWhitespace($language) ?
                 "privacy_policy_checkbox_enable_{$language}" :
                 "privacy_policy_checkbox_enable";
@@ -57,7 +57,7 @@ class PrivacyController extends Controller
     {
         $this->_savePost();
 
-        $language = basename(Request::getVar("language", null, "str"));
+        $language = basename(Request::getVar('language', null, "str"));
 
         Response::sendHttpStatusCodeResultIfAjax(
             HttpStatusCode::OK,

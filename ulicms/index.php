@@ -20,30 +20,30 @@ setLanguageByDomain();
 
 $languages = getAllLanguages();
 
-if (!empty($_GET["language"]) && in_array($_GET["language"], $languages)) {
-    $_SESSION["language"] = Database::escapeValue(
-        $_GET["language"],
+if (!empty($_GET['language']) && in_array($_GET['language'], $languages)) {
+    $_SESSION['language'] = Database::escapeValue(
+        $_GET['language'],
         DB_TYPE_STRING
     );
 }
 
-if (!isset($_SESSION["language"])) {
-    $_SESSION["language"] = Settings::get("default_language");
+if (!isset($_SESSION['language'])) {
+    $_SESSION['language'] = Settings::get("default_language");
 }
 
 setLocaleByLanguage();
 
-if (in_array($_SESSION["language"], $languages) && is_file(getLanguageFilePath($_SESSION["language"]))) {
-    require_once getLanguageFilePath($_SESSION["language"]);
+if (in_array($_SESSION['language'], $languages) && is_file(getLanguageFilePath($_SESSION['language']))) {
+    require_once getLanguageFilePath($_SESSION['language']);
 } elseif (is_file(getLanguageFilePath("en"))) {
     require getLanguageFilePath("en");
 }
 
-Translation::loadAllModuleLanguageFiles($_SESSION["language"]);
-Translation::includeCustomLangFile($_SESSION["language"]);
+Translation::loadAllModuleLanguageFiles($_SESSION['language']);
+Translation::includeCustomLangFile($_SESSION['language']);
 
-Translation::loadCurrentThemeLanguageFiles($_SESSION["language"]);
-do_event("custom_lang_" . $_SESSION["language"]);
+Translation::loadCurrentThemeLanguageFiles($_SESSION['language']);
+do_event("custom_lang_" . $_SESSION['language']);
 
 if (Request::isPost()) {
     if (!check_csrf_token()) {

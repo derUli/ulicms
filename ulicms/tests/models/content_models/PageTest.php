@@ -27,7 +27,7 @@ class PageTest extends \PHPUnit\Framework\TestCase
         $this->initialCommentableContentTypes = Settings::get("commentable_content_types");
 
         $_SERVER['HTTP_HOST'] = "company.com";
-        $_SESSION["language"] = "de";
+        $_SESSION['language'] = "de";
         $_SERVER["REQUEST_URI"] = "/";
 
         $settings = array(
@@ -121,7 +121,7 @@ class PageTest extends \PHPUnit\Framework\TestCase
         $page->custom_data["disable_shortcodes"] = true;
         $page->update();
 
-        $_SESSION["language"] = 'de';
+        $_SESSION['language'] = 'de';
         $_GET["slug"] = "testdisableshortcodes";
 
         $this->assertStringNotContainsString(get_csrf_token_html(), get_content());
@@ -144,7 +144,7 @@ class PageTest extends \PHPUnit\Framework\TestCase
         $page->custom_data = null;
         $page->save();
 
-        $_SESSION["language"] = 'de';
+        $_SESSION['language'] = 'de';
         $_GET["slug"] = "testdisableshortcodes";
 
         $this->assertStringContainsString(get_csrf_token_html(), get_content());
@@ -236,7 +236,7 @@ class PageTest extends \PHPUnit\Framework\TestCase
         $page->group_id = 1;
         $page->save();
 
-        $_SESSION["language"] = 'de';
+        $_SESSION['language'] = 'de';
         $_GET["slug"] = "testdisableshortcodes";
 
         $this->assertStringContainsString(get_csrf_token_html(), get_content());

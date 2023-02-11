@@ -23,7 +23,7 @@ class Model
     // this method loads a dataset by id from $_GET
     public function loadByRequestId()
     {
-        $id = Request::getVar("id");
+        $id = Request::getVar('id');
         if (is_numeric($id)) {
             $this->loadByID((int)$id);
         }

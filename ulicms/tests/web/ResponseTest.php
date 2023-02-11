@@ -9,14 +9,14 @@ class ResponseTest extends \PHPUnit\Framework\TestCase
         require_once getLanguageFilePath("en");
         $_SERVER["HTTP_HOST"] = "ulicms.de";
         $_SERVER["REQUEST_URI"] = "/";
-        $_SESSION["language"] = "en";
+        $_SESSION['language'] = "en";
     }
 
     protected function tearDown(): void
     {
         unset($_SERVER["HTTP_HOST"]);
         unset($_SERVER["REQUEST_URI"]);
-        unset($_SESSION["language"]);
+        unset($_SESSION['language']);
     }
 
     public function testGetStatusCodeByNumber()

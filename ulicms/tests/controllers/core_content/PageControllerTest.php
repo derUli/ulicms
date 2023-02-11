@@ -430,7 +430,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         $_POST["title"] = "Foobar";
         $_POST["position"] = "123";
         $_POST["menu"] = "top";
-        $_POST["language"] = "de";
+        $_POST['language'] = "de";
 
         $controller = new PageController();
         $errors = $controller->_validateInput();
@@ -549,7 +549,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         $_POST["content"] = "<p>Foo Content</p>";
         $_POST["position"] = "123";
         $_POST["menu"] = "not_in_menu";
-        $_POST["language"] = "de";
+        $_POST['language'] = "de";
 
         $controller = new PageController();
         $content = $controller->_createPost();
@@ -568,7 +568,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         $_POST["content"] = "<p>Foo Content</p>";
         $_POST["position"] = "123";
         $_POST["menu"] = "not_in_menu";
-        $_POST["language"] = "de";
+        $_POST['language'] = "de";
 
         $controller = new PageController();
         $content = $controller->_createPost();
@@ -604,7 +604,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
             $_POST["article_date"] = App\Helpers\NumberFormatHelper::timestampToSqlDate();
 
             $_POST["menu"] = "not_in_menu";
-            $_POST["language"] = "de";
+            $_POST['language'] = "de";
             $_POST["active"] = "1";
             $_POST["access"] = ["all"];
 
@@ -627,7 +627,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         $_POST["content"] = "<p>Foo Content</p>";
         $_POST["position"] = "123";
         $_POST["menu"] = "not_in_menu";
-        $_POST["language"] = "de";
+        $_POST['language'] = "de";
 
         $controller = new PageController();
         $success = $controller->_editPost();
@@ -647,7 +647,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         $_POST["content"] = "<p>Foo Content</p>";
         $_POST["position"] = "123";
         $_POST["menu"] = "not_in_menu";
-        $_POST["language"] = "de";
+        $_POST['language'] = "de";
 
         $controller = new PageController();
         $success = $controller->_editPost();

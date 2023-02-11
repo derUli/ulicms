@@ -16,7 +16,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         $this->homepageOwner = Settings::get("homepage_owner");
         $this->initialDomainToLanguage = Settings::get("domain_to_language");
 
-        $_SESSION["language"] = "de";
+        $_SESSION['language'] = "de";
         $_GET["slug"] = get_frontpage();
         require_once getLanguageFilePath("en");
 
@@ -43,7 +43,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         unset($_SERVER['REQUEST_URI']);
         unset($_GET["slug"]);
         unset($_SESSION["login_id"]);
-        unset($_SESSION["language"]);
+        unset($_SESSION['language']);
 
         App\Utils\Session\sessionDestroy();
 
@@ -189,7 +189,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
     {
         set_requested_pagename("my-slug", "en");
         $this->assertEquals("my-slug", get_slug());
-        $this->assertEquals("en", Request::getVar("language"));
+        $this->assertEquals("en", Request::getVar('language'));
     }
 
     public function testSetRequestedPageNameWithoutLanguage()
@@ -197,12 +197,12 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         set_requested_pagename("my-slug");
 
         $this->assertEquals("my-slug", get_slug());
-        $this->assertEquals("de", $_SESSION["language"]);
+        $this->assertEquals("de", $_SESSION['language']);
     }
 
     public function testGetMenu()
     {
-        $_SESSION["language"] = 'en';
+        $_SESSION['language'] = 'en';
         $html = get_menu("top", null, false);
         $this->assertStringContainsString("<ul", $html);
         $this->assertStringContainsString("<li", $html);
@@ -224,7 +224,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
 
     public function testMenu()
     {
-        $_SESSION["language"] = 'en';
+        $_SESSION['language'] = 'en';
 
         ob_start();
         menu("top", null, false);
@@ -255,7 +255,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
 
     public function testOgHTMLPrefix()
     {
-        $_SESSION["language"] = "en";
+        $_SESSION['language'] = "en";
 
         ob_start();
         og_html_prefix();
@@ -264,7 +264,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
             "<html prefix=\"og: http://ogp.me/ns#\" lang=\"en\">",
             ob_get_clean()
         );
-        $_SESSION["language"] = "de";
+        $_SESSION['language'] = "de";
 
         ob_start();
         og_html_prefix();
@@ -276,17 +276,17 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
 
     public function testGetOgHTMLPrefix()
     {
-        $_SESSION["language"] = "en";
+        $_SESSION['language'] = "en";
         $this->assertEquals(
             "<html prefix=\"og: http://ogp.me/ns#\" lang=\"en\">",
             get_og_html_prefix()
         );
-        $_SESSION["language"] = "de";
+        $_SESSION['language'] = "de";
         $this->assertEquals(
             "<html prefix=\"og: http://ogp.me/ns#\" lang=\"de\">",
             get_og_html_prefix()
         );
-        unset($_SESSION["language"]);
+        unset($_SESSION['language']);
     }
 
     public function testGetHtml5Doctype()
@@ -350,7 +350,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
 
     public function testGetBodyClassesDesktop()
     {
-        $_SESSION["language"] = "de";
+        $_SESSION['language'] = "de";
         $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (Windows NT 6.1;" .
                 " Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)" .
                 " Chrome/63.0.3239.132 Safari/537.36";
@@ -371,7 +371,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
 
     public function testBodyClassesDesktop()
     {
-        $_SESSION["language"] = "de";
+        $_SESSION['language'] = "de";
         $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (Windows NT 6.1;" .
                 " Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)" .
                 " Chrome/63.0.3239.132 Safari/537.36";
@@ -604,7 +604,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         $article->save();
 
         $_GET["slug"] = $article->slug;
-        $_SESSION["language"] = "de";
+        $_SESSION['language'] = "de";
 
         $this->assertEquals("force", get_cache_control());
         $this->assertEquals("force", get_cache_control());
@@ -634,7 +634,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         $article->save();
 
         $_GET["slug"] = $article->slug;
-        $_SESSION["language"] = "de";
+        $_SESSION['language'] = "de";
 
         $article_meta = get_article_meta();
 
@@ -667,7 +667,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         $article->save();
 
         $_GET["slug"] = $article->slug;
-        $_SESSION["language"] = "de";
+        $_SESSION['language'] = "de";
 
         $ogData = get_og_data();
 
@@ -705,7 +705,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         $article->save();
 
         $_GET["slug"] = $article->slug;
-        $_SESSION["language"] = "de";
+        $_SESSION['language'] = "de";
 
         $this->assertEquals(
             [
@@ -735,7 +735,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         $link->save();
 
         $_GET["slug"] = $link->slug;
-        $_SESSION["language"] = "de";
+        $_SESSION['language'] = "de";
 
         $this->assertEquals("https://www.ulicms.de", get_redirection());
     }
@@ -761,7 +761,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         Settings::set("mobile_theme", "impro17");
 
         $_GET["slug"] = $article->slug;
-        $_SESSION["language"] = "de";
+        $_SESSION['language'] = "de";
 
         $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (iPhone; CPU iPhone OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3";
 
@@ -790,7 +790,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         Settings::set("mobile_theme", "impro17");
 
         $_GET["slug"] = $article->slug;
-        $_SESSION["language"] = "de";
+        $_SESSION['language'] = "de";
 
         $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (iPhone; CPU iPhone OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3";
 
@@ -807,7 +807,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         $article = $this->getArticleWithMetaData();
 
         $_GET["slug"] = $article->slug;
-        $_SESSION["language"] = "de";
+        $_SESSION['language'] = "de";
 
         $this->assertEquals("Bla Bla usw.", get_meta_description());
     }
@@ -817,7 +817,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         $article = $this->getArticleWithMetaData();
 
         $_GET["slug"] = $article->slug;
-        $_SESSION["language"] = "de";
+        $_SESSION['language'] = "de";
 
         ob_start();
         meta_description();
@@ -855,7 +855,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         $article = $this->getArticleWithMetaData();
 
         $_GET["slug"] = $article->slug;
-        $_SESSION["language"] = "de";
+        $_SESSION['language'] = "de";
 
         $this->assertGreaterThanOrEqual(1, get_parent());
     }
@@ -867,14 +867,14 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         $article->save();
 
         $_GET["slug"] = $article->slug;
-        $_SESSION["language"] = "de";
+        $_SESSION['language'] = "de";
 
         $this->assertNull(get_parent());
     }
 
     public function testGetFrontpage()
     {
-        unset($_SESSION["language"]);
+        unset($_SESSION['language']);
         $this->assertIsString(get_frontpage());
         $this->assertNotEmpty(get_frontpage());
     }
@@ -884,7 +884,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         $article = $this->getArticleWithMetaData();
 
         $_GET["slug"] = $article->slug;
-        $_SESSION["language"] = "de";
+        $_SESSION['language'] = "de";
 
         ob_start();
         title();
@@ -899,7 +899,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         $article->save();
 
         $_GET["slug"] = $article->slug;
-        $_SESSION["language"] = "de";
+        $_SESSION['language'] = "de";
 
         ob_start();
         title(null, true);

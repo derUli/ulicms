@@ -57,7 +57,7 @@ class LanguageController extends Controller
 
     public function _deletePost(): bool
     {
-        $id = Request::getVar("id", null, "int");
+        $id = Request::getVar('id', null, "int");
         do_event("before_delete_language");
 
         $language = new Language($id);

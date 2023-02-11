@@ -119,7 +119,7 @@ class PageFunctionsTest extends \PHPUnit\Framework\TestCase
         foreach ($pages as $page) {
             $this->assertGreaterThan($oldPageId, $page["id"]);
             $oldPageId = $page["id"];
-            $this->assertEquals("en", $page["language"]);
+            $this->assertEquals("en", $page['language']);
         }
     }
 
@@ -146,7 +146,7 @@ class PageFunctionsTest extends \PHPUnit\Framework\TestCase
             $this->assertGreaterThan($oldPageId, $page["id"]);
             $oldPageId = $page["id"];
             $this->assertEquals("top", $page["menu"]);
-            $this->assertEquals("en", $page["language"]);
+            $this->assertEquals("en", $page['language']);
         }
     }
 }

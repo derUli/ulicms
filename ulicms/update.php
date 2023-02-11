@@ -2,7 +2,7 @@
 
 const CORE_COMPONENT = 'update';
 
-require_once "init.php";
+require_once dirname(__FILE__) . '/init.php';
 
 use App\Packages\PatchManager;
 use App\Utils\CacheUtil;

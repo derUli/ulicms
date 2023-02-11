@@ -138,7 +138,7 @@ class BannersTest extends \PHPUnit\Framework\TestCase
 
     public function testGetRandom()
     {
-        $_SESSION["language"] = "de";
+        $_SESSION['language'] = "de";
 
         for ($i = 1; $i < 5; $i++) {
             $banner = new Banner();

@@ -10,7 +10,7 @@ class SimpleSettingsController extends Controller
     {
         do_event("before_safe_simple_settings");
         Settings::set("homepage_owner", $_POST["homepage_owner"]);
-        Settings::set("language", $_POST["language"]);
+        Settings::set('language', $_POST['language']);
         Settings::set(
             "visitors_can_register",
             intval(isset($_POST["visitors_can_register"]))

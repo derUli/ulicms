@@ -8,11 +8,11 @@ class MOTDController extends Controller
 {
     public function _savePost(): void
     {
-        if (StringHelper::isNullOrEmpty(Request::getVar("language"))) {
+        if (StringHelper::isNullOrEmpty(Request::getVar('language'))) {
             Settings::set("motd", $_POST["motd"]);
         } else {
             Settings::set(
-                "motd_" . Request::getVar("language"),
+                "motd_" . Request::getVar('language'),
                 Request::getVar("motd")
             );
         }
@@ -30,7 +30,7 @@ class MOTDController extends Controller
                 ModuleHelper::buildQueryString(
                     [
                         "save" => "1",
-                        "language" => Request::getVar("language")
+                        'language' => Request::getVar('language')
                     ],
                     false
                 )

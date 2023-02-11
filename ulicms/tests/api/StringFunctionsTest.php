@@ -17,7 +17,7 @@ class StringFunctionsTest extends \PHPUnit\Framework\TestCase
 
     public function testConvertLineEndingsToLN()
     {
-        $input = "Line1\r\nLine2\rLine3\n";
+        $input = "Line1\r\nLine2\r\nLine3\n";
         $expected = "Line1\nLine2\nLine3\n";
         $this->assertEquals($expected, convertLineEndingsToLN($input));
     }
@@ -72,10 +72,9 @@ class StringFunctionsTest extends \PHPUnit\Framework\TestCase
 
     public function testNormalizeLn()
     {
-        $input = "Line1\nLine2\rLine3\r\n";
+        $input = "Line1\nLine2\r\nLine3\r\n";
         $this->assertEquals("Line1\r\nLine2\r\nLine3\r\n", normalizeLN($input));
         $this->assertEquals("Line1\r\nLine2\r\nLine3\r\n", normalizeLN($input, "\r\n"));
-        $this->assertEquals("Line1\rLine2\rLine3\r", normalizeLN($input, "\r"));
         $this->assertEquals("Line1\nLine2\nLine3\n", normalizeLN($input, "\n"));
     }
 

@@ -88,7 +88,7 @@ class LanguageTest extends \PHPUnit\Framework\TestCase
 
     public function testIsCurrentLanguageReturnsTrue()
     {
-        $_SESSION["language"] = "de";
+        $_SESSION['language'] = "de";
         $lang = new Language();
         $lang->loadByLanguageCode("de");
         $this->assertTrue($lang->isCurrentLanguage());
@@ -96,7 +96,7 @@ class LanguageTest extends \PHPUnit\Framework\TestCase
 
     public function testIsCurrentLanguageReturnsFalse()
     {
-        $_SESSION["language"] = "de";
+        $_SESSION['language'] = "de";
         $lang = new Language();
         $lang->loadByLanguageCode("en");
         $this->assertFalse($lang->isCurrentLanguage());

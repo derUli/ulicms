@@ -5,7 +5,7 @@ class CustomDataFunctionsTest extends \PHPUnit\Framework\TestCase
     protected function setUp(): void
     {
         $_GET["slug"] = "welcome";
-        $_SESSION["language"] = "en";
+        $_SESSION['language'] = "en";
     }
 
     protected function tearDown(): void
@@ -13,7 +13,7 @@ class CustomDataFunctionsTest extends \PHPUnit\Framework\TestCase
         Settings::delete("my_value");
         delete_custom_data("my_value");
         unset($_GET["slug"]);
-        unset($_SESSION["language"]);
+        unset($_SESSION['language']);
     }
 
     public function testSetAndGetCustomData()

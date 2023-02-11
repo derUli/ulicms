@@ -13,7 +13,7 @@ class CommentTest extends \PHPUnit\Framework\TestCase
         require_once ModuleHelper::buildModuleRessourcePath("core_comments", "lang/en.php");
         require_once ModuleHelper::buildModuleRessourcePath("core_forms", "lang/en.php");
         $_SERVER = [];
-        $_SESSION["language"] = "de";
+        $_SESSION['language'] = "de";
         $_SERVER['HTTP_HOST'] = "company.com";
         $_SERVER['HTTPS'] = "on";
 

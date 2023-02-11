@@ -6,6 +6,6 @@ namespace App\Constants;
 
 class ModuleEventConstants
 {
-    public const RUNS_ONCE = "once";
-    public const RUNS_MULTIPLE = "multiple";
+    public const RUNS_ONCE = 'once';
+    public const RUNS_MULTIPLE = 'multiple';
 }

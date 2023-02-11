@@ -37,7 +37,7 @@ class MOTDControllerTest extends \PHPUnit\Framework\TestCase
     public function testSavePostWithLanguage(): void
     {
         $_POST["motd"] = "Hallo Welt!";
-        $_POST["language"] = "de";
+        $_POST['language'] = "de";
         $controller = new MOTDController();
         $controller->_savePost();
 

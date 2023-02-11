@@ -4,7 +4,7 @@ function jumbotron_get_menu($name = "top", $parent_id = null, $recursive = true,
 {
     $html = "";
     $name = db_escape($name);
-    $language = $_SESSION["language"];
+    $language = $_SESSION['language'];
     $sql = "SELECT id, slug, access, link_url, title, alternate_title, menu_image, target, type, position FROM " . tbname("content") . " WHERE menu='$name' AND language = '$language' AND active = 1 AND `deleted_at` IS NULL AND parent_id ";
 
     if ($parent_id === null) {
@@ -69,7 +69,7 @@ function jumbotron_get_menu($name = "top", $parent_id = null, $recursive = true,
                 $html .= "<a class='menu_active_link" . rtrim($additional_classes) . "' href='" . $url . "' target='" . $row->target . "'>";
             }
 
-            if (!is_null($row->menu_image) && !empty($row->menu_image)) {
+            if (!empty($row->menu_image)) {
                 $html .= '<img src="' . $row->menu_image . '" alt="' . _esc($title) . '"/>';
             } else {
                 $html .= _esc($title);

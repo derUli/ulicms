@@ -167,13 +167,7 @@ function strbool($value): string
 
 function convertLineEndingsToLN(string $s): string
 {
-    // Normalize line endings using Global
-    // Convert all line-endings to UNIX format
-    $s = str_replace(CRLF, LF, $s);
-    $s = str_replace(CR, LF, $s);
-    // Don't allow out-of-control blank lines
-    $s = preg_replace("/\n{2,}/", LF . LF, $s);
-    return $s;
+  return normalizeLN($s, "\n");
 }
 
 function str_replace_nth(

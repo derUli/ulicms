@@ -3,7 +3,7 @@
 $language = InstallerController::getLanguage();
 ?></p>
 <p>
-    <select name="language" id="language" class="form-control">
+    <select name='language' id='language' class="form-control">
         <option value="de" <?php
     if ($language == "de") {
         echo "selected";

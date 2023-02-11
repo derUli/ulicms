@@ -100,7 +100,7 @@ class CommentsController extends MainClass
 
     public function getCommentText(): void
     {
-        $id = Request::getVar("id", 0, "int");
+        $id = Request::getVar('id', 0, "int");
         $text = $this->_getCommentText($id);
         if ($text) {
             HtmlResult($text, HttpStatusCode::OK, HTMLMinify::OPTIMIZATION_ADVANCED);

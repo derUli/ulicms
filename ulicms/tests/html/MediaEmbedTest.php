@@ -9,7 +9,7 @@ class MediaEmbedTest extends \PHPUnit\Framework\TestCase
     protected function setUp(): void
     {
         $_SESSION = [
-            "language" => "de"
+            'language' => "de"
         ];
     }
 
