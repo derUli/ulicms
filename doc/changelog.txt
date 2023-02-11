@@ -68,6 +68,7 @@ Entfernte API-Methoden:
 * schema_select()
 * set_format()
 * startsWith()
+* is_blank()
 
 ===== Neues in UliCMS 2022.1 =====
 
