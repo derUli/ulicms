@@ -12,6 +12,9 @@ Fehlerkorrekturen:
 Entfernte Features:
 * Meta Keywords
 
+* Neue API-Methoden:
+* is_cli()
+
 Entfernte API-Methoden:
 * ArrayHelper::flatten()
 * ArrayHelper::getSingle()
@@ -71,6 +74,7 @@ Entfernte API-Methoden:
 * is_blank()
 * is_true()
 * is_false()
+* isCli()
 
 ===== Neues in UliCMS 2022.1 =====
 

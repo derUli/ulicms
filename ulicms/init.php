@@ -214,7 +214,7 @@ $path_to_installer = dirname(__FILE__) . '/installer/installer.php';
 if (isset($config->dbmigrator_auto_migrate) && $config->dbmigrator_auto_migrate) {
     $additionalSql = is_array($config->dbmigrator_initial_sql_files) ?
             $config->dbmigrator_initial_sql_files : [];
-    if (isCLI()) {
+    if (is_cli()) {
         Database::setEchoQueries(true);
     }
     $select = Database::setupSchemaAndSelect(
@@ -298,7 +298,7 @@ register_shutdown_function(
             echo '\n\n<!--' . (microtime(true) - START_TIME) . '-->';
         }
         if (isset($cfg->dbmigrator_drop_database_on_shutdown) && $cfg->dbmigrator_drop_database_on_shutdown) {
-            if (isCLI()) {
+            if (is_cli()) {
                 Database::setEchoQueries(true);
             }
             Database::dropSchema($cfg->db_database);

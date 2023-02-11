@@ -63,7 +63,7 @@ class BackendPageRenderer
             require "inc/header.php";
         }
 
-        if (is_logged_in()) {
+        if (!is_logged_in()) {
             $this->handleNotLoggedIn($onlyContent);
         } else {
             $this->handleLoggedIn($onlyContent);

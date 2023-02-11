@@ -17,7 +17,7 @@ function getAllThemes(): array
 function uninstall_module(string $name, string $type = "module"): bool
 {
     $acl = new ACL();
-    if (!$acl->hasPermission("install_packages") && !isCLI()) {
+    if (!$acl->hasPermission("install_packages") && !is_cli()) {
         return false;
     }
 

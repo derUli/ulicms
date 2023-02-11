@@ -9,10 +9,14 @@ use App\Constants\ModuleEventConstants;
  * Old permission checker class
  * @deprecated since version 2023.1
  */
-class ACL
-{
-    public function hasPermission(string $name): bool
-    {
+class ACL {
+
+    /**
+     * Checks if the current user has a permission
+     * @param string $name
+     * @return bool
+     */
+    public function hasPermission(string $name): bool {
         $checker = new PermissionChecker(get_user_id());
         return $checker->hasPermission($name);
     }
@@ -23,8 +27,7 @@ class ACL
      * @param array|null $permissions
      * @return int
      */
-    public function createGroup(string $name, ?array $permissions = null): int
-    {
+    public function createGroup(string $name, ?array $permissions = null): int {
         $permissionData = $permissions === null ? $this->getDefaultACL() : json_encode($permissions);
 
         $sql = "INSERT INTO `" . tbname('groups') .
@@ -47,9 +50,9 @@ class ACL
      * @return int
      */
     public function updateGroup(
-        int $id,
-        string $name,
-        ?array $permissions = null
+            int $id,
+            string $name,
+            ?array $permissions = null
     ): int {
         $permissionData = $permissions === null ? $this->getDefaultACL() : json_encode($permissions);
 
@@ -67,9 +70,8 @@ class ACL
      * @param int $id
      * @param int|null $move_users_to
      */
-    public function deleteGroup(int $id, ?int $move_users_to = null)
-    {
-        $id = (int)$id;
+    public function deleteGroup(int $id, ?int $move_users_to = null) {
+        $id = (int) $id;
 
         if ($move_users_to === null) {
             $updateUsers = "UPDATE " . tbname('users') .
@@ -91,8 +93,7 @@ class ACL
      * @param int|null $id
      * @return array|null
      */
-    public function getPermissionQueryResult(?int $id = null): ?array
-    {
+    public function getPermissionQueryResult(?int $id = null): ?array {
         $group_id = null;
         if ($id) {
             $group_id = $id;
@@ -121,8 +122,7 @@ class ACL
      * @param string $order
      * @return array
      */
-    public function getAllGroups(string $order = 'id DESC'): array
-    {
+    public function getAllGroups(string $order = 'id DESC'): array {
         $list = [];
         $sql = "SELECT * FROM `" . tbname('groups') . "` ORDER by " . $order;
         $result = db_query($sql);
@@ -140,8 +140,8 @@ class ACL
      * @return bool
      */
     public function getDefaultACLAsJSON(
-        bool $admin = false,
-        bool $plain = false
+            bool $admin = false,
+            bool $plain = false
     ) {
         $acl_data = [];
 
@@ -186,8 +186,8 @@ class ACL
      * @param bool $plain
      * @return type
      */
-    public function getDefaultACL(bool $admin = false, bool $plain = false)
-    {
+    public function getDefaultACL(bool $admin = false, bool $plain = false) {
         return $this->getDefaultACLAsJSON($admin, $plain);
     }
+
 }

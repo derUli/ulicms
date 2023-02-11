@@ -85,7 +85,7 @@ class User extends Model
         $this->setLastLogin(time());
         $this->save();
 
-        if (!$redirect || isCLI()) {
+        if (!$redirect || is_cli()) {
             return;
         }
         $login_url = apply_filter("index.php", "login_url");

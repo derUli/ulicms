@@ -26,7 +26,7 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase
     // since the tests are running at the command line
     public function testIsCli()
     {
-        $this->assertTrue(isCLI());
+        $this->assertTrue(is_cli());
     }
 
     public function testIsCrawler()

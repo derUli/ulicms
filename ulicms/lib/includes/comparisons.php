@@ -5,15 +5,18 @@ declare(strict_types=1);
 defined('ULICMS_ROOT') or exit('no direct script access allowed');
 
 // is $val a decimal number or a integer?
-function is_decimal($val): bool {
+function is_decimal($val): bool
+{
     return is_numeric($val) && !ctype_digit((string) $val);
 }
 
-function is_json(?string $str): bool {
+function is_json(?string $str): bool
+{
     return $str ? json_decode($str) != null : false;
 }
 
-function is_numeric_array($var): bool {
+function is_numeric_array($var): bool
+{
     if (!is_array($var)) {
         return false;
     }
@@ -27,15 +30,18 @@ function is_numeric_array($var): bool {
 }
 
 // sind wir gerade im Adminordner?
-function is_admin_dir(): bool {
+function is_admin_dir(): bool
+{
     return basename(getcwd()) === 'admin';
 }
 
-function is_desktop(): bool {
+function is_desktop(): bool
+{
     return !is_mobile();
 }
 
-function is_crawler(?string $useragent = null): bool {
+function is_crawler(?string $useragent = null): bool
+{
     if (!$useragent && Request::getUserAgent()) {
         $useragent = Request::getUserAgent();
     }
@@ -58,7 +64,8 @@ function is_crawler(?string $useragent = null): bool {
 
 // 21. Februar 2015
 // Nutzt nun die Klasse Mobile_Detect
-function is_mobile(): bool {
+function is_mobile(): bool
+{
     $result = false;
 
     if (class_exists('\Detection\MobileDetect')) {
@@ -78,7 +85,8 @@ function is_mobile(): bool {
     return $result;
 }
 
-function isMaintenanceMode(): bool {
+function isMaintenanceMode(): bool
+{
     if (!is_string(Settings::get('maintenance_mode'))) {
         return false;
     }
@@ -87,7 +95,8 @@ function isMaintenanceMode(): bool {
             Settings::get('maintenance_mode') == "1");
 }
 
-function is_tablet(): bool {
+function is_tablet(): bool
+{
     $result = false;
 
     if (class_exists('\Detection\MobileDetect')) {
@@ -97,14 +106,16 @@ function is_tablet(): bool {
     return $result;
 }
 
-function isCLI(): bool {
+function is_cli(): bool
+{
     return php_sapi_name() == 'cli';
 }
 
-function var_is_type($var, $type, $required = false): bool {
+function var_is_type($var, $type, $required = false): bool
+{
     $methodName = "is_{$type}";
 
-    if ($var === null or $var === '') {
+    if ($var === null || $var === '') {
         return !$required;
     }
 
@@ -114,6 +125,7 @@ function var_is_type($var, $type, $required = false): bool {
     return false;
 }
 
-function is_version_number(?string $input): bool {
+function is_version_number(?string $input): bool
+{
     return ($input && version_compare($input, '0.0.1', '>='));
 }
