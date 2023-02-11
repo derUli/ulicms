@@ -20,8 +20,8 @@ if (!$permissionChecker->hasPermission("forms") || !$permissionChecker->hasPermi
         <h1><?php translate("edit_form"); ?></h1>
         <?php
         echo ModuleHelper::buildMethodCallForm(
-                "FormController",
-                "update"
+            "FormController",
+            "update"
         );
         ?>
         <input type="hidden" name="id" value="<?php echo $id; ?>" />
@@ -44,15 +44,15 @@ if (!$permissionChecker->hasPermission("forms") || !$permissionChecker->hasPermi
                 if ($form["enabled"]) {
                     echo "selected";
                 }
-                ?>>
+        ?>>
                             <?php translate("yes"); ?>
                 </option>
                 <option value="0"
                 <?php
-                if (!$form["enabled"]) {
-                    echo "selected";
-                }
-                ?>>
+        if (!$form["enabled"]) {
+            echo "selected";
+        }
+        ?>>
                             <?php translate("no"); ?>
                 </option>
             </select>
@@ -85,20 +85,20 @@ if (!$permissionChecker->hasPermission("forms") || !$permissionChecker->hasPermi
                 <?php translate("fields"); ?>
             </strong>
             <textarea class="form-control" name="fields" rows="10"><?php
-                esc(
-                        $form["fields"]
-                );
-                ?></textarea>
+        esc(
+            $form["fields"]
+        );
+        ?></textarea>
         </div>
         <div class="field">
             <strong class="field-label">
                 <?php translate("required_fields"); ?>
             </strong>
             <textarea class="form-control" name="required_fields" rows="10"><?php
-                esc(
-                        $form["required_fields"]
-                );
-                ?></textarea>
+        esc(
+            $form["required_fields"]
+        );
+        ?></textarea>
         </div>
         <div class="field">
             <strong class="field-label">
@@ -118,10 +118,10 @@ if (!$permissionChecker->hasPermission("forms") || !$permissionChecker->hasPermi
                         <?php foreach ($pages as $page) { ?>
                     <option value="<?php echo $page["id"]; ?>"
                     <?php
-                    if ($page["id"] == $form["target_page_id"]) {
-                        echo " selected";
-                    }
-                    ?>><?php esc($page["title"]); ?></option>
+            if ($page["id"] == $form["target_page_id"]) {
+                echo " selected";
+            }
+                            ?>><?php esc($page["title"]); ?></option>
                         <?php } ?>
             </select>
         </div>

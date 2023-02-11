@@ -1,4 +1,5 @@
 <?php
+
 $mime_types = array(
     "application/postscript" => "ps",
     "audio/x-aiff" => "aiff",

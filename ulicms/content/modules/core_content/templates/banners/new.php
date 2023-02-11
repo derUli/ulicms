@@ -10,13 +10,13 @@ if ($permissionChecker->hasPermission("banners")
 
     <?php
     echo ModuleHelper::buildMethodCallForm(
-            "BannerController",
-            "create",
-            [],
-            RequestMethod::POST,
-            [
-                "autocomplete" => "off"
-            ]
+        "BannerController",
+        "create",
+        [],
+        RequestMethod::POST,
+        [
+            "autocomplete" => "off"
+        ]
     );
     ?>
     <div class="field">
@@ -100,20 +100,20 @@ if ($permissionChecker->hasPermission("banners")
             <?php
             $languages = getAllLanguages();
 
-            $languagesCount = count($languages);
-            echo "<option value='all'>" . get_translation("every") . "</option>";
-            for ($j = 0; $j < $languagesCount; $j++) {
-                echo "<option value='" . $languages[$j] . "'>" .
-                getLanguageNameByCode($languages[$j]) . "</option>";
-            }
-            ?>
+    $languagesCount = count($languages);
+    echo "<option value='all'>" . get_translation("every") . "</option>";
+    for ($j = 0; $j < $languagesCount; $j++) {
+        echo "<option value='" . $languages[$j] . "'>" .
+        getLanguageNameByCode($languages[$j]) . "</option>";
+    }
+    ?>
         </select>
     </div>
     <div class="field">
         <strong class="field-label">
             <?php translate("category"); ?>
         </strong>
-        <?php echo Categories :: getHTMLSelect() ?></div>
+        <?php echo Categories::getHTMLSelect() ?></div>
     </div>
 
     <div class="voffset2">

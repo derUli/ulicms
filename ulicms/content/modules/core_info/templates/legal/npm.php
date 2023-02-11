@@ -26,7 +26,7 @@ $legalInfo = $controller->_getNpmLegalInfo();
             </tr>
             <?php
         }
-        ?>
+?>
     </tbody>
 </tfoot>
 </table>

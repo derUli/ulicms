@@ -1,18 +1,21 @@
 <?php
 
-class VarsTest extends \PHPUnit\Framework\TestCase {
-
-    protected function setUp(): void {
+class VarsTest extends \PHPUnit\Framework\TestCase
+{
+    protected function setUp(): void
+    {
         Vars::set("foo", "bar");
         Vars::set("john", "doe");
         Vars::set("hello", "world");
     }
 
-    protected function tearDown(): void {
+    protected function tearDown(): void
+    {
         Vars::clear();
     }
 
-    public function testSetAndGet() {
+    public function testSetAndGet()
+    {
         $this->assertEquals("bar", Vars::get("foo"));
         $this->assertEquals("world", Vars::get("hello"));
 
@@ -20,23 +23,25 @@ class VarsTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("you", Vars::get("hello"));
     }
 
-    public function testGetAllVars() {
+    public function testGetAllVars()
+    {
         $vars = Vars::getAllVars();
         $this->assertEquals("doe", $vars["john"]);
         $this->assertGreaterThanOrEqual(2, count($vars));
     }
 
-    public function testDelete() {
+    public function testDelete()
+    {
         $this->assertEquals("bar", Vars::get("foo"));
 
         Vars::delete("foo");
         $this->assertNull(Vars::get("foo"));
     }
 
-    public function testClear() {
+    public function testClear()
+    {
         $this->assertGreaterThanOrEqual(1, count(Vars::getAllVars()));
         Vars::clear();
         $this->assertCount(0, Vars::getAllVars());
     }
-
 }

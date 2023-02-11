@@ -185,7 +185,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                     echo ModuleHelper::buildMethodCallForm("PkgInfoController", "install", array(
                         "file" => basename($tempfile)
                     ));
-                    ?>
+                ?>
                     <button type="submit" class="btn btn-warning"><i class="fas fa-box"></i> <?php translate("install"); ?></button>
                 </form>
                 </div>

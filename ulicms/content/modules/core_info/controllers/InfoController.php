@@ -4,11 +4,12 @@ use App\HTML\Input;
 use Michelf\MarkdownExtra;
 use zz\Html\HTMLMinify;
 
-class InfoController extends MainClass {
+class InfoController extends MainClass
+{
+    public const CHANGELOG_URL = "https://raw.githubusercontent.com/derUli/ulicms/master/doc/changelog.txt";
 
-    const CHANGELOG_URL = "https://raw.githubusercontent.com/derUli/ulicms/master/doc/changelog.txt";
-
-    public function _fetchChangelog() {
+    public function _fetchChangelog()
+    {
         $lines = $this->_getChangelogContent();
         $lines = array_map("trim", $lines);
         $lines = array_map("_esc", $lines);
@@ -37,10 +38,11 @@ class InfoController extends MainClass {
         return ($text ? trim($text) : get_translation("fetch_failed"));
     }
 
-    public function _getChangelogContent(): array {
+    public function _getChangelogContent(): array
+    {
         $file = ModuleHelper::buildModuleRessourcePath(
-                        "core_info",
-                        "changelog.txt"
+            "core_info",
+            "changelog.txt"
         );
 
         $content = is_file($file) ?
@@ -50,7 +52,8 @@ class InfoController extends MainClass {
         return explode("\n", $content);
     }
 
-    public function _getComposerLegalInfo(): string {
+    public function _getComposerLegalInfo(): string
+    {
         $legalFile = Path::resolve("ULICMS_ROOT/licenses.md");
         $lastModified = filemtime($legalFile);
 
@@ -62,14 +65,14 @@ class InfoController extends MainClass {
 
         $legalText = file_get_contents($legalFile);
 
-        $parser = new MarkdownExtra;
+        $parser = new MarkdownExtra();
         $parser->hard_wrap = true;
         $parsed = $parser->transform($legalText);
 
         $parsed = str_replace(
-                "<h1>Project Licenses</h1>",
-                "<h1>" . get_translation("legal_composer") . "</h1>",
-                $parsed
+            "<h1>Project Licenses</h1>",
+            "<h1>" . get_translation("legal_composer") . "</h1>",
+            $parsed
         );
 
         file_put_contents($cacheFile, $parsed);
@@ -77,12 +80,12 @@ class InfoController extends MainClass {
         return $parsed;
     }
 
-    public function _getNpmLegalInfo(): array {
+    public function _getNpmLegalInfo(): array
+    {
         $legalJson = file_get_contents(
-                Path::resolve("ULICMS_ROOT/licenses.json")
+            Path::resolve("ULICMS_ROOT/licenses.json")
         );
 
         return json_decode($legalJson);
     }
-
 }

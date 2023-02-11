@@ -47,19 +47,19 @@ if (!$permissionChecker->hasPermission("performance_settings")) {
     <a
         href="<?php
         echo ModuleHelper::buildActionURL(
-                "settings_categories"
-        );
-        ?>"
+        "settings_categories"
+    );
+    ?>"
         class="btn btn-default btn-back is-not-ajax">
         <i class="fas fa-arrow-left"></i>
         <?php translate("back") ?></a>
     <a
         href="<?php
-        echo ModuleHelper::buildMethodCallUrl(
-                "PerformanceSettingsController",
-                "clearCache"
-        );
-        ?>"
+    echo ModuleHelper::buildMethodCallUrl(
+        "PerformanceSettingsController",
+        "clearCache"
+    );
+    ?>"
         class="btn btn-warning pull-right">
         <i class="fas fa-broom"></i>
         <?php translate("clear_cache"); ?></a>
@@ -67,13 +67,13 @@ if (!$permissionChecker->hasPermission("performance_settings")) {
     <h2><?php translate("performance"); ?></h2>
     <?php
     echo ModuleHelper::buildMethodCallForm(
-            "PerformanceSettingsController",
-            "save",
-            [],
-            RequestMethod::POST,
-            [
-                "id" => "form"
-            ]
+        "PerformanceSettingsController",
+        "save",
+        [],
+        RequestMethod::POST,
+        [
+            "id" => "form"
+        ]
     );
     ?>
     <div id="accordion-container">
@@ -95,7 +95,7 @@ if (!$permissionChecker->hasPermission("performance_settings")) {
                            if ($cache_enabled) {
                                echo " checked=\"checked\"";
                            }
-                           ?>>
+    ?>>
                 </div>
             </div>
             <div class="field">
@@ -120,21 +120,21 @@ if (!$permissionChecker->hasPermission("performance_settings")) {
                 <div class="inputWrapper">
                     <?php
                     echo Input::multiSelect(
-                            "lazy_loading[]",
-                            $lazy_loading,
-                            [
-                                new ListItem(
-                                        'img',
-                                        get_translation('lazy_loading_img')
-                                ),
-                                new ListItem(
-                                        'iframe',
-                                        get_translation('lazy_loading_iframe')
-                                ),
-                            ],
-                            1
-                    );
-                    ?>
+        "lazy_loading[]",
+        $lazy_loading,
+        [
+                            new ListItem(
+                                'img',
+                                get_translation('lazy_loading_img')
+                            ),
+                            new ListItem(
+                                'iframe',
+                                get_translation('lazy_loading_iframe')
+                            ),
+                        ],
+        1
+    );
+    ?>
                 </div>
                 <div class="alert alert-info voffset2">
                     <p>
@@ -147,10 +147,10 @@ if (!$permissionChecker->hasPermission("performance_settings")) {
                         <?php translate("lazy_loading_help3"); ?>
                         <br/>
                         <?php
-                        echo StringHelper::makeLinksClickable(
-                                $canIuseLazyLoadingUrl
-                        );
-                        ?>
+        echo StringHelper::makeLinksClickable(
+        $canIuseLazyLoadingUrl
+    );
+    ?>
                     </p>
                 </div>
             </div>
@@ -170,10 +170,10 @@ if (!$permissionChecker->hasPermission("performance_settings")) {
     $translation->render();
 
     enqueueScriptFile(
-            ModuleHelper::buildRessourcePath(
-                    "core_settings",
-                    "js/performance.js"
-            )
+        ModuleHelper::buildRessourcePath(
+            "core_settings",
+            "js/performance.js"
+        )
     );
     combinedScriptHtml();
 }

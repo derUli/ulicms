@@ -2,9 +2,10 @@
 
 use App\Helpers\TestHelper;
 
-class RequestTest extends \PHPUnit\Framework\TestCase {
-
-    protected function tearDown(): void {
+class RequestTest extends \PHPUnit\Framework\TestCase
+{
+    protected function tearDown(): void
+    {
         require_once getLanguageFilePath("en");
         unset($_SERVER["HTTP_HOST"]);
         unset($_SERVER["HTTP_REFERRER"]);
@@ -17,7 +18,8 @@ class RequestTest extends \PHPUnit\Framework\TestCase {
         unset($_SERVER["HTTP_X_FORWARDED_HOST"]);
     }
 
-    public function testGetVar() {
+    public function testGetVar()
+    {
         $_POST["var1"] = "this";
         $_GET["var1"] = "that";
         $_GET["var2"] = "123";
@@ -43,7 +45,8 @@ class RequestTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(1, Request::getVar("var6", null, "bool"));
     }
 
-    public function testHasVarReturnsTrue() {
+    public function testHasVarReturnsTrue()
+    {
         $_POST["this_var"] = "exists";
         $this->assertTrue(Request::hasVar("this_var"));
 
@@ -52,11 +55,13 @@ class RequestTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue(Request::hasVar("this_var"));
     }
 
-    public function testHasVarReturnsFalse() {
+    public function testHasVarReturnsFalse()
+    {
         $this->assertFalse(Request::hasVar("web_servers_are_magic"));
     }
 
-    public function testGetMethod() {
+    public function testGetMethod()
+    {
         $_SERVER["REQUEST_METHOD"] = "GET";
         $this->assertEquals("get", Request::getMethod());
         $this->assertTrue(Request::isGet());
@@ -74,7 +79,8 @@ class RequestTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue(Request::isHead());
     }
 
-    public function testGetRequestMethod() {
+    public function testGetRequestMethod()
+    {
         $_SERVER["REQUEST_METHOD"] = "GET";
         $this->assertEquals("get", get_request_method());
         $this->assertTrue(Request::isGet());
@@ -92,7 +98,8 @@ class RequestTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue(Request::isHead());
     }
 
-    public function testIsAjaxRequest() {
+    public function testIsAjaxRequest()
+    {
         unset($_SERVER["HTTP_X_REQUESTED_WITH"]);
         $this->assertFalse(Request::isAjaxRequest());
         $_SERVER["HTTP_X_REQUESTED_WITH"] = "XMLHttpRequest";
@@ -100,7 +107,8 @@ class RequestTest extends \PHPUnit\Framework\TestCase {
         unset($_SERVER["HTTP_X_REQUESTED_WITH"]);
     }
 
-    public function testGetDomain() {
+    public function testGetDomain()
+    {
         $_SERVER["HTTP_HOST"] = "example.org";
         $this->assertEquals("example.org", Request::getDomain());
         $this->assertEquals("example.org", get_domain());
@@ -110,41 +118,48 @@ class RequestTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("en.ulicms.de", get_domain());
     }
 
-    public function testGetStatusCodeByNumber() {
+    public function testGetStatusCodeByNumber()
+    {
         $this->assertEquals("200 OK", getStatusCodeByNumber(200));
         $this->assertEquals("404 Not Found", getStatusCodeByNumber(404));
         $this->assertEquals("418 I'm a teapot", getStatusCodeByNumber(418));
     }
 
-    public function testGetReferrer() {
+    public function testGetReferrer()
+    {
         $_SERVER["HTTP_REFERER"] = "https://www.google.de/?q=Hallo%20Welt";
         $this->assertEquals($_SERVER["HTTP_REFERER"], Request::getReferrer());
         $this->assertEquals($_SERVER["HTTP_REFERER"], get_referrer());
     }
 
-    public function testGetUserAgent() {
+    public function testGetUserAgent()
+    {
         $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36";
         $this->assertEquals($_SERVER["HTTP_USER_AGENT"], Request::getUserAgent());
         $this->assertEquals($_SERVER["HTTP_USER_AGENT"], get_useragent());
     }
 
-    public function testGetRequestUri() {
+    public function testGetRequestUri()
+    {
         $_SERVER["REQUEST_URI"] = "/admin/index.php?action=foobar";
         $this->assertEquals($_SERVER["REQUEST_URI"], Request::getRequestUri());
         $this->assertEquals($_SERVER["REQUEST_URI"], get_request_uri());
     }
 
-    public function testIsSSLExpectTrue() {
+    public function testIsSSLExpectTrue()
+    {
         $_SERVER["SERVER_PORT"] = 443;
         $this->assertTrue(Request::isSSL());
     }
 
-    public function testIsSSLExpectFalse() {
+    public function testIsSSLExpectFalse()
+    {
         $_SERVER["SERVER_PORT"] = 80;
         $this->assertFalse(Request::isSSL());
     }
 
-    public function testGetPort() {
+    public function testGetPort()
+    {
         $_SERVER["SERVER_PORT"] = 8080;
         $this->assertEquals(8080, Request::getPort());
 
@@ -152,82 +167,93 @@ class RequestTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(443, Request::getPort());
     }
 
-    public function testGetProtocolExpectHttp() {
+    public function testGetProtocolExpectHttp()
+    {
         $_SERVER["SERVER_PORT"] = 8080;
         $this->assertEquals("http://", Request::getProtocol());
     }
 
-    public function testGetProtocolExpectHttps() {
+    public function testGetProtocolExpectHttps()
+    {
         $_SERVER["SERVER_PORT"] = 443;
         $this->assertEquals("https://", Request::getProtocol());
     }
 
-    public function testGetProtocolExpectHttpsWithPrefix() {
+    public function testGetProtocolExpectHttpsWithPrefix()
+    {
         $_SERVER["SERVER_PORT"] = 443;
         $this->assertEquals("https://www.ulicms.de", Request::getProtocol("www.ulicms.de"));
     }
 
-    public function testGetIp() {
+    public function testGetIp()
+    {
         $_SERVER["REMOTE_ADDR"] = "123.123.123.123";
         $this->assertEquals("123.123.123.123", Request::getIp());
     }
 
-    public function testGetIpWithProxy() {
+    public function testGetIpWithProxy()
+    {
         $_SERVER["REMOTE_ADDR"] = "123.123.123.123";
         $_SERVER["X_FORWARDED"] = "111.111.111.111";
 
         $this->assertEquals("111.111.111.111", Request::getIp());
     }
 
-    public function testSiteProtocolExpectHttp() {
+    public function testSiteProtocolExpectHttp()
+    {
         $_SERVER["SERVER_PORT"] = 80;
         ob_start();
         site_protocol();
         $this->assertEquals("http://", ob_get_clean());
     }
 
-    public function testSiteProtocolExpectHttps() {
+    public function testSiteProtocolExpectHttps()
+    {
         $_SERVER["SERVER_PORT"] = 443;
         ob_start();
         site_protocol();
         $this->assertEquals("https://", ob_get_clean());
     }
 
-    public function testIsSSLReturnsFalse() {
+    public function testIsSSLReturnsFalse()
+    {
         $_SERVER["SERVER_PORT"] = 80;
         $this->assertFalse(is_ssl());
     }
 
-    public function testIsSSLReturnsTrue() {
+    public function testIsSSLReturnsTrue()
+    {
         $_SERVER["SERVER_PORT"] = 443;
         $this->assertTrue(is_ssl());
     }
 
-    public function testIsHeaderSentReturnsTrue() {
+    public function testIsHeaderSentReturnsTrue()
+    {
         $this->assertTrue(
-                Request::isHeaderSent(
-                        "Content-Type",
-                        [
-                            "Content-Type: text/plain"
-                        ]
-                )
+            Request::isHeaderSent(
+                "Content-Type",
+                [
+                    "Content-Type: text/plain"
+                ]
+            )
         );
     }
 
-    public function testIsHeaderSentReturnsFalse() {
+    public function testIsHeaderSentReturnsFalse()
+    {
         $this->assertFalse(Request::isHeaderSent("Foobar"));
     }
 
-    public function testJavascriptRedirect() {
+    public function testJavascriptRedirect()
+    {
         $expected = file_get_contents(
-                Path::resolve("tests/fixtures/javascriptRedirect.expected.txt")
+            Path::resolve("tests/fixtures/javascriptRedirect.expected.txt")
         );
 
         $actual = TestHelper::getOutput(function () {
-                    Request::javascriptRedirect("https://google.de");
-                });
+            Request::javascriptRedirect("https://google.de");
+        });
 
         $this->assertEquals($expected, $actual);
     }
-
 }

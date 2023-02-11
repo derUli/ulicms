@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 use App\Helpers\TestHelper;
 
-class CoreSecurityController extends MainClass {
-
-    public function beforeInit(): void {
+class CoreSecurityController extends MainClass
+{
+    public function beforeInit(): void
+    {
         $x_frame_options = settings::get("x_frame_options");
 
         $allowedOptions = array(
@@ -14,9 +15,9 @@ class CoreSecurityController extends MainClass {
             "SAMEORIGIN"
         );
         if ($x_frame_options && in_array(
-                        $x_frame_options,
-                        $allowedOptions
-                )) {
+            $x_frame_options,
+            $allowedOptions
+        )) {
             @send_header("X-Frame-Options: $x_frame_options");
         }
         $x_xss_protection = Settings::get("x_xss_protection");
@@ -41,5 +42,4 @@ class CoreSecurityController extends MainClass {
             @send_header("Expect-CT: max-age=7776000, enforce");
         }
     }
-
 }

@@ -44,11 +44,11 @@ if ($permissionChecker->hasPermission("expert_settings")) {
                                 <td class="text-center"><a
                                         href="<?php
                                         echo ModuleHelper::buildActionURL(
-                                                "settings_edit",
-                                                "name=" .
-                                                Template::getEscape($row->name)
-                                        );
-                                        ?>"
+                            "settings_edit",
+                            "name=" .
+                                            Template::getEscape($row->name)
+                        );
+                                ?>"
                                         class="is-ajax"
                                         ><img
                                             src="gfx/edit.png" alt="<?php translate("edit"); ?>"
@@ -56,9 +56,9 @@ if ($permissionChecker->hasPermission("expert_settings")) {
                                 <td class="text-center">
                                     <?php
                                     echo ModuleHelper::deleteButton(ModuleHelper::buildMethodCallUrl("ExpertSettingsController", "delete"), array(
-                                        "name" => $row->name
+                                "name" => $row->name
                                     ));
-                                    ?>
+                                ?>
                                 </td><?php } ?>
                         </tr>
                     <?php }

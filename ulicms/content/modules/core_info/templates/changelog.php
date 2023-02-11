@@ -1,6 +1,7 @@
 <?php
 
 use function App\HTML\text;
+
 ?>
 
 <a href="<?php echo ModuleHelper::buildActionURL("info"); ?>"
@@ -14,6 +15,6 @@ use function App\HTML\text;
 <div class="changelog">
     <?php
     $controller = new InfoController();
-    echo $controller->_fetchChangelog();
-    ?>
+echo $controller->_fetchChangelog();
+?>
 </div>

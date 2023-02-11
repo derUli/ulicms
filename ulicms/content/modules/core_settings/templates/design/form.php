@@ -55,7 +55,7 @@ if (!$permissionChecker->hasPermission("design")) {
                            if (!Settings::get("disable_custom_layout_options")) {
                                echo " checked";
                            }
-                           ?>></td>
+    ?>></td>
             </tr>
             <tr>
                 <td style="width: 300px;"><strong><?php translate("title_format"); ?> </strong></td>
@@ -67,26 +67,26 @@ if (!$permissionChecker->hasPermission("design")) {
                 <td><select name="theme" size="1"
                             data-preview-target-element="#theme-preview">
                                 <?php
-                                foreach ($allThemes as $th) {
-                                    ?>
+         foreach ($allThemes as $th) {
+             ?>
                             <option value="<?php echo $th; ?>"
                             <?php
                             if ($th === $theme) {
                                 echo " selected";
                             }
-                            ?>
+             ?>
                                     data-preview-url="<?php
-                                    echo ModuleHelper::buildMethodCallUrl(
-                                            DesignSettingsController::class,
-                                            "themePreview",
-                                            "theme={$th}"
-                                    );
-                                    ?>"
+                     echo ModuleHelper::buildMethodCallUrl(
+                 DesignSettingsController::class,
+                 "themePreview",
+                 "theme={$th}"
+             );
+             ?>"
                                     >
                                         <?php echo $th; ?>
                             </option>
                         <?php }
-                        ?>
+         ?>
                     </select>
                     <div id="theme-preview" class="voffset3">                        <i class="fa fa-spinner fa-spin"></i>
                         <div class="preview"></div>
@@ -101,35 +101,35 @@ if (!$permissionChecker->hasPermission("design")) {
                                 data-preview-target-element="#theme-mobile-preview">
                             <option value=""
                             <?php
-                            if (!$mobile_theme) {
-                                echo " selected";
-                            }
-                            ?>
+             if (!$mobile_theme) {
+                 echo " selected";
+             }
+    ?>
                                     >
                                 [
                                 <?php translate("standard"); ?>
                                 ]
                             </option>
                             <?php
-                            foreach ($allThemes as $th) {
-                                ?>
+    foreach ($allThemes as $th) {
+        ?>
                                 <option value="<?php echo $th; ?>"
                                 <?php
-                                if ($th === $mobile_theme) {
-                                    echo " selected";
-                                }
-                                ?>
+        if ($th === $mobile_theme) {
+            echo " selected";
+        }
+        ?>
                                         data-preview-url="<?php
-                                        echo ModuleHelper::buildMethodCallUrl(
-                                                DesignSettingsController::class,
-                                                "themePreview",
-                                                "theme={$th}"
-                                        );
-                                        ?>">
+                echo ModuleHelper::buildMethodCallUrl(
+            DesignSettingsController::class,
+            "themePreview",
+            "theme={$th}"
+        );
+        ?>">
                                             <?php echo $th; ?>
                                 </option>
                             <?php }
-                            ?>
+    ?>
                         </select>
                     <div id="theme-mobile-preview" class="voffset3">
                         <i class="fa fa-spinner fa-spin"></i>
@@ -152,18 +152,18 @@ if (!$permissionChecker->hasPermission("design")) {
                            if ($no_mobile_design_on_tablet) {
                                echo " checked";
                            }
-                           ?>></td>
+    ?>></td>
             </tr>
             <tr>
                 <td><strong><?php translate("editor_skin"); ?> </strong></td>
                 <td>
                     <?php
                     echo Input::singleSelect(
-                            "ckeditor_skin",
-                            $ckeditor_skin,
-                            $skinItems
-                    );
-                    ?>
+        "ckeditor_skin",
+        $ckeditor_skin,
+        $skinItems
+    );
+    ?>
                 </td>
 
             </tr>
@@ -171,26 +171,26 @@ if (!$permissionChecker->hasPermission("design")) {
                 <td><strong><?php translate("font_family"); ?> </strong></td>
                 <td><select name="default_font" id="default_font" size=1>
                         <?php
-                        $font_amount = count($fonts);
-                        $i = 1;
-                        foreach ($fonts as $key => $value) {
-                            $selected = "";
-                            if ($default_font === $value) {
-                                $selected = "selected";
-                            }
+        $font_amount = count($fonts);
+    $i = 1;
+    foreach ($fonts as $key => $value) {
+        $selected = "";
+        if ($default_font === $value) {
+            $selected = "selected";
+        }
 
-                            if (!in_array($default_font, $fonts) and $i === $font_amount) {
-                                $selected = "selected";
-                            }
+        if (!in_array($default_font, $fonts) and $i === $font_amount) {
+            $selected = "selected";
+        }
 
-                            echo '<optgroup>';
+        echo '<optgroup>';
 
-                            echo "<option value=\"$value\" $selected>$key</option>";
-                            echo '</optgroup>';
+        echo "<option value=\"$value\" $selected>$key</option>";
+        echo '</optgroup>';
 
-                            $i++;
-                        }
-                        ?></select>
+        $i++;
+    }
+    ?></select>
                 </td>
             </tr>
             <tr>
@@ -198,16 +198,16 @@ if (!$permissionChecker->hasPermission("design")) {
 
                 <td> <select name="font-size" id="font-size">
                         <?php
-                        foreach ($font_sizes as $size) {
-                            echo '<option value="' . $size . '"';
-                            if ($font_size == $size) {
-                                echo " selected";
-                            }
-                            echo ">";
-                            echo $size;
-                            echo "</option>";
-                        }
-                        ?>
+    foreach ($font_sizes as $size) {
+        echo '<option value="' . $size . '"';
+        if ($font_size == $size) {
+            echo " selected";
+        }
+        echo ">";
+        echo $size;
+        echo "</option>";
+    }
+    ?>
                     </select></td>
             </tr>
             <tr id="font-preview">
@@ -283,7 +283,7 @@ if (!$permissionChecker->hasPermission("design")) {
                            if ($video_width_100_percent) {
                                echo " checked";
                            }
-                           ?>
+    ?>
                            value="video_width_100_percent"></td>
             </tr>
             <tr>

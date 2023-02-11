@@ -1,24 +1,26 @@
 <?php
 
-class FormsTest extends \PHPUnit\Framework\TestCase {
-
-    protected function tearDown(): void {
+class FormsTest extends \PHPUnit\Framework\TestCase
+{
+    protected function tearDown(): void
+    {
         Database::query("delete from {prefix}forms where name like 'Unit Test%'", true);
     }
 
-    public function testCreateAndDeleteWithEnabled() {
+    public function testCreateAndDeleteWithEnabled()
+    {
         $pages = ContentFactory::getAllRegular();
         $page = $pages[0];
         Forms::createForm(
-                "Unit Test 1",
-                "max@muster.de",
-                "Subject 1",
-                1,
-                "message=>Message",
-                "message",
-                "email",
-                intval($page->id),
-                true
+            "Unit Test 1",
+            "max@muster.de",
+            "Subject 1",
+            1,
+            "message=>Message",
+            "message",
+            "email",
+            intval($page->id),
+            true
         );
         $id = Database::getInsertID();
         $form = Forms::getFormByID($id);
@@ -41,19 +43,20 @@ class FormsTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull($form);
     }
 
-    public function testCreateAndDeleteWithDisabled() {
+    public function testCreateAndDeleteWithDisabled()
+    {
         $pages = ContentFactory::getAllRegular();
         $page = $pages[0];
         Forms::createForm(
-                "Unit Test 2",
-                "max@muster.de",
-                "Subject 1",
-                1,
-                "message=>Message",
-                "message",
-                "email",
-                intval($page->id),
-                false
+            "Unit Test 2",
+            "max@muster.de",
+            "Subject 1",
+            1,
+            "message=>Message",
+            "message",
+            "email",
+            intval($page->id),
+            false
         );
         $id = Database::getInsertID();
         $form = Forms::getFormByID($id);
@@ -76,35 +79,36 @@ class FormsTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull($form);
     }
 
-    public function testEditAndDeleteWithEnabled() {
+    public function testEditAndDeleteWithEnabled()
+    {
         $pages = ContentFactory::getAllRegular();
         $page1 = $pages[0];
         $page2 = array_pop($pages);
 
         Forms::createForm(
-                "Unit Test 2",
-                "max@muster.de",
-                "Subject 1",
-                1,
-                "message=>Message",
-                "message",
-                "email",
-                intval($page1->id),
-                false
+            "Unit Test 2",
+            "max@muster.de",
+            "Subject 1",
+            1,
+            "message=>Message",
+            "message",
+            "email",
+            intval($page1->id),
+            false
         );
         $id = Database::getInsertID();
 
         Forms::editForm(
-                $id,
-                "Unit Test 3",
-                "foo@bar.de",
-                "My Subject",
-                1,
-                "name=>Name",
-                "name",
-                "mail_from",
-                $page2->id,
-                true
+            $id,
+            "Unit Test 3",
+            "foo@bar.de",
+            "My Subject",
+            1,
+            "name=>Name",
+            "name",
+            "mail_from",
+            $page2->id,
+            true
         );
 
         $form = Forms::getFormByID($id);
@@ -126,34 +130,35 @@ class FormsTest extends \PHPUnit\Framework\TestCase {
         Forms::deleteForm($id);
     }
 
-    public function testEditAndDeleteWithDisabled() {
+    public function testEditAndDeleteWithDisabled()
+    {
         $pages = ContentFactory::getAllRegular();
         $page1 = $pages[0];
         $page2 = array_pop($pages);
         Forms::createForm(
-                "Unit Test 2",
-                "max@muster.de",
-                "Subject 1",
-                1,
-                "message=>Message",
-                "message",
-                "email",
-                intval($page1->id),
-                true
+            "Unit Test 2",
+            "max@muster.de",
+            "Subject 1",
+            1,
+            "message=>Message",
+            "message",
+            "email",
+            intval($page1->id),
+            true
         );
         $id = Database::getInsertID();
 
         Forms::editForm(
-                $id,
-                "Unit Test 3",
-                "foo@bar.de",
-                "My Subject",
-                1,
-                "name=>Name",
-                "name",
-                "mail_from",
-                $page2->id,
-                false
+            $id,
+            "Unit Test 3",
+            "foo@bar.de",
+            "My Subject",
+            1,
+            "name=>Name",
+            "name",
+            "mail_from",
+            $page2->id,
+            false
         );
 
         $form = Forms::getFormByID($id);
@@ -175,34 +180,35 @@ class FormsTest extends \PHPUnit\Framework\TestCase {
         Forms::deleteForm($id);
     }
 
-    public function testGetAllForms() {
+    public function testGetAllForms()
+    {
         $pages = ContentFactory::getAllRegular();
         $page1 = $pages[0];
 
         Forms::createForm(
-                "Unit Test 1",
-                "max@muster.de",
-                "Subject 1",
-                1,
-                "message=>Message",
-                "message",
-                "email",
-                intval(
-                        $page1->id
-                ),
-                false
+            "Unit Test 1",
+            "max@muster.de",
+            "Subject 1",
+            1,
+            "message=>Message",
+            "message",
+            "email",
+            intval(
+                $page1->id
+            ),
+            false
         );
         $id1 = Database::getInsertID();
         Forms::createForm(
-                "Unit Test 2",
-                "max@muster.de",
-                "Subject 1",
-                1,
-                "message=>Message",
-                "message",
-                "email",
-                intval($page1->id),
-                false
+            "Unit Test 2",
+            "max@muster.de",
+            "Subject 1",
+            1,
+            "message=>Message",
+            "message",
+            "email",
+            intval($page1->id),
+            false
         );
 
         $id2 = Database::getInsertID();
@@ -222,5 +228,4 @@ class FormsTest extends \PHPUnit\Framework\TestCase {
         Forms::deleteForm($id1);
         Forms::deleteForm($id2);
     }
-
 }

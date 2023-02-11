@@ -23,7 +23,7 @@ $model = $controller->getModel();
                    target="_blank"><?php esc($row->title); ?></a></td>
             <td align="right"><?php echo $row->views; ?></td>
             <?php
-        }
-        ?>
+    }
+?>
     </tr>
 </table>

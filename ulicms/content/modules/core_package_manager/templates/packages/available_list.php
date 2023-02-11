@@ -51,7 +51,7 @@ if ($permissionChecker->hasPermission("install_packages")) {
                                     echo StringHelper::isNotNullOrWhitespace($package->description) ?
                                             nl2br($package->description) :
                                             get_translation("no_description_available");
-                                    ?>
+                            ?>
                                 </td>
                                 <td>
                                     <a href="#" class="btn btn-info btn-sm remote-alert"

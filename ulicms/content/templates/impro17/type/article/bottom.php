@@ -11,7 +11,7 @@
                 "%email%" => Template::getEscape($meta->article_author_email)
             ));
         }
-        ?></p>
+    ?></p>
 <?php } ?>
 <?php
 require_once getTemplateDirPath(get_theme()) . "/bottom.php";

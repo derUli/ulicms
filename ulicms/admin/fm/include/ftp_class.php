@@ -23,7 +23,6 @@ class FTPClient
 
     public function connect($server, $ftpUser, $ftpPassword, $isPassive = false)
     {
-
         // *** Set up basic connection
         $this->connectionId = ftp_connect($server);
 
@@ -51,7 +50,6 @@ class FTPClient
             $this->logMessage('Directory "' . $directory . '" created successfully');
             return true;
         } else {
-
             // *** ...Else, FAIL.
             $this->logMessage('Failed creating directory "' . $directory . '"');
             return false;

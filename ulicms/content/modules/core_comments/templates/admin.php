@@ -18,16 +18,16 @@ $comments = is_array(BackendPageRenderer::getModel()) ?
 
 $stati = array(
     new ListItem(
-            CommentStatus::SPAM,
-            get_translation(CommentStatus::SPAM)
+        CommentStatus::SPAM,
+        get_translation(CommentStatus::SPAM)
     ),
     new ListItem(
-            CommentStatus::PENDING,
-            get_translation(CommentStatus::PENDING)
+        CommentStatus::PENDING,
+        get_translation(CommentStatus::PENDING)
     ),
     new ListItem(
-            CommentStatus::PUBLISHED,
-            get_translation(CommentStatus::PUBLISHED)
+        CommentStatus::PUBLISHED,
+        get_translation(CommentStatus::PUBLISHED)
     )
 );
 
@@ -40,8 +40,8 @@ foreach ($contents as $content) {
     $language = getLanguageNameByCode($content->language);
     $type = get_translation($content->type);
     $contentSelect[] = new ListItem(
-            $content->id,
-            "{$content->title} ({$type} - {$language})"
+        $content->id,
+        "{$content->title} ({$type} - {$language})"
     );
 }
 
@@ -61,10 +61,10 @@ $actionSelect = array(
 <h1><?php translate("comments_manage"); ?></h1>
 <?php
 echo ModuleHelper::buildMethodCallForm(
-        CommentsController::class,
-        "filterComments",
-        [],
-        "get"
+    CommentsController::class,
+    "filterComments",
+    [],
+    "get"
 );
 ?>
 <div class="row">
@@ -72,22 +72,22 @@ echo ModuleHelper::buildMethodCallForm(
         <label for="status"><?php translate("status"); ?></label>
         <?php
         echo Input::singleSelect("status", $selectedStatus, $stati, 1);
-        ?>
+?>
     </div>
     <div class="col-xs-12 col-lg-4">
         <label for="status"><?php translate("contents"); ?></label>
         <?php
-        echo Input::singleSelect("content_id", $content_id, $contentSelect, 1);
-        ?>
+echo Input::singleSelect("content_id", $content_id, $contentSelect, 1);
+?>
     </div>
     <div class="col-xs-12 col-lg-4">
         <label for="status"><?php translate("limit_results"); ?></label>
         <?php
-        echo Input::textBox("limit", $limit, "number", array(
-            "step" => "10",
-            "min" => "0"
-        ));
-        ?>
+echo Input::textBox("limit", $limit, "number", array(
+    "step" => "10",
+    "min" => "0"
+));
+?>
     </div>
 </div>
 <div class="voffset3">
@@ -97,16 +97,16 @@ echo ModuleHelper::buildMethodCallForm(
 <?php echo ModuleHelper::endForm(); ?>
 <?php
 echo ModuleHelper::buildMethodCallForm(
-        CommentsController::class,
-        "doAction",
-        [
-            "referrer" => getCurrentURL()
-        ],
-        "post",
-        [
-            "class" => "voffset3",
-            "id" => "comments"
-        ]
+    CommentsController::class,
+    "doAction",
+    [
+        "referrer" => getCurrentURL()
+    ],
+    "post",
+    [
+        "class" => "voffset3",
+        "id" => "comments"
+    ]
 );
 ?>
 <div class="scroll">
@@ -118,7 +118,7 @@ echo ModuleHelper::buildMethodCallForm(
                         "class" => "select-all",
                         "data-target" => ".comment-checkbox"
                     ));
-                    ?></th>
+?></th>
                 <th><?php translate("date"); ?></th>
                 <th><?php translate("status"); ?></th>
                 <th><?php translate("author"); ?></th>
@@ -129,7 +129,7 @@ echo ModuleHelper::buildMethodCallForm(
             <?php foreach ($comments as $comment) { ?>
                 <?php
                 $url = strlen($comment->getAuthorUrl()) > 30 ?
-                        substr($comment->getAuthorUrl(), 0, 30) . "..." : $comment->getAuthorUrl();
+    substr($comment->getAuthorUrl(), 0, 30) . "..." : $comment->getAuthorUrl();
                 ?>
                 <?php $content = $comment->getContent(); ?>
                 <tr class="<?php
@@ -139,16 +139,16 @@ echo ModuleHelper::buildMethodCallForm(
                 ?>">
                     <td><?php
                         echo Input::checkBox(
-                                "comments[]",
-                                false,
-                                $comment->getId(),
-                                [
-                                    "class" => "checkbox comment-checkbox",
-                                    "data-select-all-checkbox" => ".select-all",
-                                    "data-checkbox-group" => ".comment-checkbox"
-                                ]
-                        );
-                        ?></td>
+                    "comments[]",
+                    false,
+                    $comment->getId(),
+                    [
+                                "class" => "checkbox comment-checkbox",
+                                "data-select-all-checkbox" => ".select-all",
+                                "data-checkbox-group" => ".comment-checkbox"
+                            ]
+                );
+                ?></td>
                     <td>
                         <?php esc(date("Y-m-d H:i:s", $comment->getDate())); ?>
                     </td>
@@ -177,13 +177,13 @@ echo ModuleHelper::buildMethodCallForm(
                             <span
                                 class="has-pointer comment-link ajax-alert"
                                 data-url="<?php
-                                echo
-                                ModuleHelper::buildMethodCallUrl(
-                                        CommentsController::class,
-                                        "getCommentText",
-                                        "id=" . $comment->getID()
-                                );
-                                ?>"><?php esc(getExcerpt($comment->getText())); ?></span>
+                        echo
+                        ModuleHelper::buildMethodCallUrl(
+                            CommentsController::class,
+                            "getCommentText",
+                            "id=" . $comment->getID()
+                        );
+                ?>"><?php esc(getExcerpt($comment->getText())); ?></span>
                         </p>
                     </td>
                 </tr>
@@ -195,7 +195,7 @@ echo ModuleHelper::buildMethodCallForm(
     <div class="col-xs-6">
         <?php
         echo Input::singleSelect("action", "", $actionSelect, 1);
-        ?>
+?>
     </div>
     <div class="col-xs-6">
         <button type="submit" class="btn btn-primary">
@@ -206,7 +206,7 @@ echo ModuleHelper::buildMethodCallForm(
 <?php
 echo ModuleHelper::endForm();
 enqueueScriptFile(ModuleHelper::buildRessourcePath(
-                "core_comments",
-                "js/admin.js"
-        ));
+    "core_comments",
+    "js/admin.js"
+));
 combinedScriptHtml();

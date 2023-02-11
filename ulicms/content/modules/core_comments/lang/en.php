@@ -1,8 +1,8 @@
 <?php
 
 add_translation(
-        "comment_contains_badword",
-        "The field \"%field%\" contains the not allowed word \"%word%\"."
+    "comment_contains_badword",
+    "The field \"%field%\" contains the not allowed word \"%word%\"."
 );
 add_translation("comment_text", "Comment Text");
 add_translation("useragent", "User Agent");
@@ -18,23 +18,23 @@ add_translation("your_website", "Your Website");
 add_translation("text", "Text");
 
 add_translation(
-        "comment_published_published",
-        "Your comment is published."
+    "comment_published_published",
+    "Your comment is published."
 );
 add_translation(
-        "comment_published_pending",
-        "Your comment is posted and awaits moderation."
+    "comment_published_pending",
+    "Your comment is posted and awaits moderation."
 );
 add_translation(
-        "comment_published_spam",
-        "Your comment is marked as spam.
+    "comment_published_spam",
+    "Your comment is marked as spam.
             If you think this is an error, please contact
 the webmaster of this website."
 );
 
 add_translation(
-        "comments_manage",
-        "Manage Comments"
+    "comments_manage",
+    "Manage Comments"
 );
 add_translation("author", "Author");
 add_translation("author_url", "Author URL");

@@ -59,7 +59,7 @@ if (Settings::get("visitors_can_register") == "off" || !Settings::get("visitors_
             <input type="hidden" name="go"
                    value='<?php esc($_REQUEST["go"]) ?>'>
                <?php }
-               ?>
+        ?>
         <div class="field">
             <strong class="field-label">
                 <?php translate("username"); ?>

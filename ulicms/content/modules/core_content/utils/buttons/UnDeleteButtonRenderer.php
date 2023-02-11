@@ -10,14 +10,16 @@ use User;
 use ModuleHelper;
 use PageController;
 use App\Security\ContentPermissionChecker;
+
 use function App\HTML\icon;
 use function App\HTML\Link;
 
-class UnDeleteButtonRenderer {
+class UnDeleteButtonRenderer
+{
+    public const MODULE_NAME = "core_content";
 
-    const MODULE_NAME = "core_content";
-
-    public function render(int $pageId, User $user) {
+    public function render(int $pageId, User $user)
+    {
         $permitted = true;
 
         // check edit permissions
@@ -31,15 +33,15 @@ class UnDeleteButtonRenderer {
 
         $url = "#";
         $message = get_secure_translation(
-                "confirm_undelete_page",
-                [
-                    "%title%" => getPageTitleByID($pageId)
-                ]
+            "confirm_undelete_page",
+            [
+                "%title%" => getPageTitleByID($pageId)
+            ]
         );
         $actionUrl = ModuleHelper::buildMethodCallUrl(
-                        PageController::class,
-                        "undelete",
-                        "id={$pageId}csrf_token=" . get_csrf_token()
+            PageController::class,
+            "undelete",
+            "id={$pageId}csrf_token=" . get_csrf_token()
         );
         $attributes = [
             "data-confirm" => $message,
@@ -51,9 +53,8 @@ class UnDeleteButtonRenderer {
         ViewBag::set("button", $link);
 
         return $permitted ? Template::executeModuleTemplate(
-                        self::MODULE_NAME,
-                        "pages/partials/delete_button.php"
-                ) : "";
+            self::MODULE_NAME,
+            "pages/partials/delete_button.php"
+        ) : "";
     }
-
 }

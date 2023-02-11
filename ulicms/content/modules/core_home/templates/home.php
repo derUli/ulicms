@@ -15,10 +15,10 @@ if ($permissionChecker->hasPermission("dashboard")) {
     <p>
         <?php
         secure_translation(
-                "hello_name",
-                ["%name%" => $user->getDisplayName()]
-        );
-        ?> </p>
+        "hello_name",
+        ["%name%" => $user->getDisplayName()]
+    );
+    ?> </p>
     <p>
         <a
             href="?action=admin_edit&id=<?php echo get_user_id() ?>&ref=home"
@@ -27,17 +27,17 @@ if ($permissionChecker->hasPermission("dashboard")) {
     </p>
     <div id="accordion-container">
         <?php
-        $motd = get_lang_config("motd", getSystemLanguage());
-        if ($motd or strlen($motd) > 10) {
-            $motd = XSSProtection::stripTags($motd, DefaultValues::ALLOWED_TAGS);
-            ?>
+    $motd = get_lang_config("motd", getSystemLanguage());
+    if ($motd or strlen($motd) > 10) {
+        $motd = XSSProtection::stripTags($motd, DefaultValues::ALLOWED_TAGS);
+        ?>
             <h2 class="accordion-header">
                 <?php translate("motd"); ?></h2>
             <div class="accordion-content motd-tab">
                 <?php echo Alert::info($motd, "", true); ?>
             </div>
         <?php }
-        ?>
+    ?>
         <?php if (!Settings::get("disable_core_patch_check")) {
             ?>
             <div id="patch-notification" style="display: none;"
@@ -52,8 +52,8 @@ if ($permissionChecker->hasPermission("dashboard")) {
 
         <?php
         $pi = ULICMS_ROOT . "/post-install.php";
-        if (is_writable($pi)) {
-            ?>
+    if (is_writable($pi)) {
+        ?>
             <h2 class="accordion-header"><?php translate("unfinished_package_installations"); ?></h2>
             <div class="accordion-content">
                 <a
@@ -61,10 +61,10 @@ if ($permissionChecker->hasPermission("dashboard")) {
                     <?php translate("there_are_unfinished_package_installations"); ?></a>
             </div>
         <?php }
-        ?>
+    ?>
         <?php
-        if (!Settings::get("disable_ulicms_newsfeed")) {
-            ?>
+    if (!Settings::get("disable_ulicms_newsfeed")) {
+        ?>
             <div class="has-ajax-content"
                  data-url="<?php echo ModuleHelper::buildMethodCallUrl(HomeController::class, "newsfeed") ?>">
 
@@ -75,7 +75,7 @@ if ($permissionChecker->hasPermission("dashboard")) {
                 </div>
             </div>
         <?php }
-        ?>
+    ?>
         <?php if ($permissionChecker->hasPermission("pages_show_positions")) { ?>
             <h2 class="accordion-header"><?php translate("helper_utils"); ?></h2>
             <div class="accordion-content">
@@ -85,10 +85,10 @@ if ($permissionChecker->hasPermission("dashboard")) {
                                class="js-switch"
                                data-url="<?php esc(ModuleHelper::buildMethodCallUrl(PageController::class, "toggleShowPositions")); ?>" value="1"
                                <?php
-                               if (Settings::get("user/" . get_user_id() . "/show_positions")) {
-                                   echo "checked";
-                               }
-                               ?>>
+                           if (Settings::get("user/" . get_user_id() . "/show_positions")) {
+                               echo "checked";
+                           }
+            ?>>
                         <?php translate("show_positions_in_menus"); ?></label>
                     </label>
                 </form>

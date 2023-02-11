@@ -46,7 +46,7 @@ if (isset($_GET['action'])) {
                 echo '<option value=".'.$ext.'">.'.$ext.'</option>';
             }
             echo '</select><br><hr><textarea id="textfile_create_area" style="width:100%;height:150px;"></textarea>';
-        break;
+            break;
 
         case 'view':
             if (isset($_GET['type'])) {
@@ -161,7 +161,7 @@ if (isset($_GET['action'])) {
 
             switch ($info['extension']) {
                 case "zip":
-                    $zip = new ZipArchive;
+                    $zip = new ZipArchive();
                     if ($zip->open($path) === true) {
                         //get total size
                         $sizeTotalFinal = 0;
@@ -530,7 +530,7 @@ if (isset($_GET['action'])) {
 
             break;
         case 'change_lang':
-            $choosen_lang = (!empty($_POST['choosen_lang']))? $_POST['choosen_lang']:"en_EN";
+            $choosen_lang = (!empty($_POST['choosen_lang'])) ? $_POST['choosen_lang'] : "en_EN";
 
             if (array_key_exists($choosen_lang, $languages)) {
                 if (! is_file('lang/' . $choosen_lang . '.php')) {

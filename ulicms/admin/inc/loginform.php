@@ -38,14 +38,14 @@ if ($login_welcome_text) {
 </h3>
 <?php
 echo ModuleHelper::buildMethodCallForm(
-        "SessionManager",
-        "login",
-        [],
-        RequestMethod::POST,
-        [
-            "id" => "login-form",
-            "data-has-error" => $error !== NULL
-        ]
+    "SessionManager",
+    "login",
+    [],
+    RequestMethod::POST,
+    [
+        "id" => "login-form",
+        "data-has-error" => $error !== null
+    ]
 );
 ?>
 <?php
@@ -57,8 +57,8 @@ if (!empty($_REQUEST["go"])) {
     <input type="hidden" name="go"
            value='<?php esc($_REQUEST["go"]) ?>'>
            <?php
-       }
-       ?>
+}
+?>
 <table>
     <tr>
         <td><strong><?php translate("username"); ?></strong></td>
@@ -77,10 +77,10 @@ if (!empty($_REQUEST["go"])) {
         <td><select name="system_language">
                 <option value="" selected>[<?php translate("standard"); ?>]</option>
                 <?php
-                for ($i = 0; $i < $languagesCount; $i++) {
-                    echo '<option value="' . $languages[$i] . '">' . getLanguageNameByCode($languages[$i]) . '</option>';
-                }
-                ?>
+         for ($i = 0; $i < $languagesCount; $i++) {
+             echo '<option value="' . $languages[$i] . '">' . getLanguageNameByCode($languages[$i]) . '</option>';
+         }
+?>
             </select></td>
     </tr>
     <?php
@@ -93,7 +93,7 @@ if (!empty($_REQUEST["go"])) {
         </tr>
         <?php
     }
-    ?>
+?>
     <tr>
         <td></td>
         <td class="text-center">
@@ -120,14 +120,14 @@ if (Settings::get("visitors_can_register") === "on" or Settings::get("visitors_c
         if (!empty($_REQUEST["go"])) {
             echo "go=" . _esc($_REQUEST["go"]);
         }
-        ?>"
+    ?>"
         class="btn btn-default voffset2"><i class="fas fa-user-plus"></i> <?php translate("register"); ?></a>
         <?php
-    }
-    ?>
+}
+?>
     <?php
-    if (!Settings::get("disable_password_reset")) {
-        ?>
+if (!Settings::get("disable_password_reset")) {
+    ?>
     <a href="?reset_password" class="btn btn-default pull-right voffset2"><i
             class="fa fa-lock"></i> <?php translate("reset_password"); ?></a>
     <?php

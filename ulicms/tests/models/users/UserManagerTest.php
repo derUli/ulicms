@@ -1,8 +1,9 @@
 <?php
 
-class UserManagerTest extends \PHPUnit\Framework\TestCase {
-
-    protected function setUp(): void {
+class UserManagerTest extends \PHPUnit\Framework\TestCase
+{
+    protected function setUp(): void
+    {
         $this->tearDown();
         for ($i = 1; $i < 5; $i++) {
             $user = new User();
@@ -26,7 +27,8 @@ class UserManagerTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    protected function tearDown(): void {
+    protected function tearDown(): void
+    {
         for ($i = 1; $i < 5; $i++) {
             $user = new User();
             $user->loadByUsername("locked_user_" . $i);
@@ -39,19 +41,20 @@ class UserManagerTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testIsLocked() {
+    public function testIsLocked()
+    {
         $manager = new UserManager();
         $this->assertTrue(count($manager->getLockedUsers()) >= 3);
 
         $this->assertTrue(count($manager->getLockedUsers(false)) >= 4);
     }
 
-    public function testGetByGroup() {
+    public function testGetByGroup()
+    {
         $manager = new UserManager();
         $this->assertEquals([], $manager->getUsersByGroupId(666));
 
         $this->assertEquals([], $manager->getUsersByGroupId(null));
         $this->assertTrue(count($manager->getUsersByGroupId(1)) >= 7);
     }
-
 }

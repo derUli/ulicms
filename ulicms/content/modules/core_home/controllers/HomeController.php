@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 use zz\Html\HTMLMinify;
 
-class HomeController extends Controller {
-
-    public function getModel(): HomeViewModel {
+class HomeController extends Controller
+{
+    public function getModel(): HomeViewModel
+    {
         $model = new HomeViewModel();
         $result = Database::query("SELECT count(id) as amount FROM `{prefix}content`", true);
         $dataset = Database::fetchObject($result);
@@ -32,12 +33,14 @@ class HomeController extends Controller {
         return $model;
     }
 
-    public function newsfeed(): void {
+    public function newsfeed(): void
+    {
         $html = $this->_newsfeed();
         HtmlResult($html);
     }
 
-    public function _newsfeed() {
+    public function _newsfeed()
+    {
         $html = Template::executeModuleTemplate("core_home", "news.php");
         $options = array(
             'optimizationLevel' => HTMLMinify::OPTIMIZATION_ADVANCED
@@ -48,12 +51,14 @@ class HomeController extends Controller {
         return $html;
     }
 
-    public function statistics(): void {
+    public function statistics(): void
+    {
         $html = $this->_statistics();
         HtmlResult($html);
     }
 
-    public function _statistics(): string {
+    public function _statistics(): string
+    {
         $html = Template::executeModuleTemplate("core_home", "statistics.php");
         $options = array(
             'optimizationLevel' => HTMLMinify::OPTIMIZATION_ADVANCED
@@ -63,12 +68,14 @@ class HomeController extends Controller {
         return $HTMLMinify->process();
     }
 
-    public function topPages(): void {
+    public function topPages(): void
+    {
         $html = $this->_topPages();
         HtmlResult($html);
     }
 
-    public function _topPages(): string {
+    public function _topPages(): string
+    {
         $html = Template::executeModuleTemplate("core_home", "top_pages.php");
         $options = array(
             'optimizationLevel' => HTMLMinify::OPTIMIZATION_ADVANCED
@@ -77,12 +84,14 @@ class HomeController extends Controller {
         return $HTMLMinify->process();
     }
 
-    public function lastUpdatedPages(): void {
+    public function lastUpdatedPages(): void
+    {
         $html = $this->_lastUpdatedPages();
         HtmlResult($html);
     }
 
-    public function _lastUpdatedPages(): string {
+    public function _lastUpdatedPages(): string
+    {
         $html = Template::executeModuleTemplate("core_home", "last_updated_pages.php");
 
         $options = array(
@@ -92,12 +101,14 @@ class HomeController extends Controller {
         return $HTMLMinify->process();
     }
 
-    public function onlineUsers(): void {
+    public function onlineUsers(): void
+    {
         $html = $this->_onlineUsers();
         HtmlResult($html);
     }
 
-    public function _onlineUsers(): string {
+    public function _onlineUsers(): string
+    {
         ViewBag::set("users", User::getOnlineUsers());
 
         $html = Template::executeModuleTemplate("core_home", "online_users.php");
@@ -108,5 +119,4 @@ class HomeController extends Controller {
         $HTMLMinify = new HTMLMinify($html, $options);
         return $HTMLMinify->process();
     }
-
 }

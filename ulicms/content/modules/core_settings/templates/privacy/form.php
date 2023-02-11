@@ -27,21 +27,21 @@ if ($permissionChecker->hasPermission("privacy_settings")) {
     <?php
     if (Request::getVar("save")) {
         echo Alert::success(
-                get_translation("changes_was_saved"),
-                "voffset2"
+            get_translation("changes_was_saved"),
+            "voffset2"
         );
     }
     ?>
     <h2><?php translate("privacy"); ?></h2>
     <?php
     echo ModuleHelper::buildMethodCallForm(
-            "PrivacyController",
-            "save",
-            [],
-            RequestMethod::POST,
-            array(
-                "id" => "privacy-form"
-            )
+        "PrivacyController",
+        "save",
+        [],
+        RequestMethod::POST,
+        array(
+            "id" => "privacy-form"
+        )
     );
     ?>
     <div id="accordion-container">
@@ -59,9 +59,9 @@ if ($permissionChecker->hasPermission("privacy_settings")) {
                         if ($currentLanguage == $language) {
                             echo "selected";
                         }
-                        ?>><?php Template::escape(getLanguageNameByCode($language)); ?></option>
+                            ?>><?php Template::escape(getLanguageNameByCode($language)); ?></option>
                             <?php }
-                            ?>
+                        ?>
 
                 </select>
             </div>
@@ -74,7 +74,7 @@ if ($permissionChecker->hasPermission("privacy_settings")) {
                        if ($privacy_policy_checkbox_enable) {
                            echo "checked";
                        }
-                       ?>> <label
+    ?>> <label
                        for="privacy_policy_checkbox_enable"><?php translate("privacy_policy_checkbox_enable"); ?></label>
             </div>
             <?php $editor = get_html_editor(); ?>
@@ -100,10 +100,10 @@ if ($permissionChecker->hasPermission("privacy_settings")) {
                     <input type="checkbox" id="log_ip" name="log_ip"
                            class="js-switch"
                            <?php
-                           if ($log_ip) {
-                               echo "checked ";
-                           }
-                           ?>>
+        if ($log_ip) {
+            echo "checked ";
+        }
+    ?>>
                 </div>
                 <small>
                     <?php translate("LOG_IP_ADDRESSES_NOTICE"); ?>
@@ -121,10 +121,10 @@ if ($permissionChecker->hasPermission("privacy_settings")) {
                            name="delete_ips_after_48_hours"
                            class="js-switch"
                            <?php
-                           if ($delete_ips_after_48_hours) {
-                               echo "checked ";
-                           }
-                           ?>>
+    if ($delete_ips_after_48_hours) {
+        echo "checked ";
+    }
+    ?>>
                 </div>
             </div>
             <div class="field">
@@ -137,10 +137,10 @@ if ($permissionChecker->hasPermission("privacy_settings")) {
                     <input type="checkbox" id="keep_spam_ips" name="keep_spam_ips"
                            class="js-switch"
                            <?php
-                           if ($keep_spam_ips) {
-                               echo "checked ";
-                           }
-                           ?>>
+    if ($keep_spam_ips) {
+        echo "checked ";
+    }
+    ?>>
                 </div>
             </div>
         </div>

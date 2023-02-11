@@ -3,27 +3,30 @@
 use App\Models\Content\Advertisement\Banner;
 use App\Exceptions\DatasetNotFoundException;
 
-class BannerControllerTest extends \PHPUnit\Framework\TestCase {
-
-    protected function setUp(): void {
+class BannerControllerTest extends \PHPUnit\Framework\TestCase
+{
+    protected function setUp(): void
+    {
         $_POST = [];
     }
 
-    protected function tearDown(): void {
+    protected function tearDown(): void
+    {
         $_POST = [];
 
         Database::pQuery(
-                "DELETE FROM `{prefix}banner` where html in (?) or "
-                . "name = ?",
-                [
-                    "Werbung nervt",
-                    "Nervige Werbung"
-                ],
-                true
+            "DELETE FROM `{prefix}banner` where html in (?) or "
+            . "name = ?",
+            [
+                "Werbung nervt",
+                "Nervige Werbung"
+            ],
+            true
         );
     }
 
-    public function testCreateReturnsModel() {
+    public function testCreateReturnsModel()
+    {
         $this->setPostVars();
 
         $controller = new BannerController();
@@ -33,7 +36,8 @@ class BannerControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertGreaterThanOrEqual(1, $banner->getId());
     }
 
-    protected function setPostVars() {
+    protected function setPostVars()
+    {
         $_POST["banner_name"] = "Nervige Werbung";
         $_POST["image_url"] = "";
         $_POST["link_url"] = "";
@@ -46,7 +50,8 @@ class BannerControllerTest extends \PHPUnit\Framework\TestCase {
         $_POST["date_to"] = "";
     }
 
-    public function testUpdateReturnsModel() {
+    public function testUpdateReturnsModel()
+    {
         $this->setPostVars();
         $controller = new BannerController();
         $id = $controller->_createPost()->getId();
@@ -60,7 +65,8 @@ class BannerControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("https://google.com", $banner->getLinkUrl());
     }
 
-    public function testDeletePostReturnsTrue() {
+    public function testDeletePostReturnsTrue()
+    {
         $banner = new Banner();
         $banner->setType("html");
         $banner->setHtml("Werbung nervt");
@@ -75,10 +81,10 @@ class BannerControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($banner->isPersistent());
     }
 
-    public function testDeletePostReturnsFalse() {
+    public function testDeletePostReturnsFalse()
+    {
         $controller = new BannerController();
         $success = $controller->_deletePost(PHP_INT_MAX);
         $this->assertFalse($success);
     }
-
 }

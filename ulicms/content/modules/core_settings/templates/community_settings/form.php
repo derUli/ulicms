@@ -29,13 +29,13 @@ if ($commentableContentTypeSettings) {
 <?php } ?>
 <?php
 echo ModuleHelper::buildMethodCallForm(
-        CommunitySettingsController::class,
-        "save",
-        [],
-        RequestMethod::POST,
-        [
-            "id" => "community_settings_form"
-        ]
+    CommunitySettingsController::class,
+    "save",
+    [],
+    RequestMethod::POST,
+    [
+        "id" => "community_settings_form"
+    ]
 );
 ?>
 <h1><?php translate("comments") ?></h1>
@@ -43,31 +43,31 @@ echo ModuleHelper::buildMethodCallForm(
     <div class="checkbox">
         <label><?php
             echo App\HTML\Input::checkBox(
-                    "comments_enabled",
-                    boolval(Settings::get("comments_enabled")),
-                    "1",
-                    array("class" => "js-switch")
-            );
-            ?><?php translate("comments_enabled") ?></label>
+    "comments_enabled",
+    boolval(Settings::get("comments_enabled")),
+    "1",
+    array("class" => "js-switch")
+);
+?><?php translate("comments_enabled") ?></label>
     </div>
 </div>
 <div class="field">
     <div class="checkbox">
         <label><?php
-            echo App\HTML\Input::checkBox(
-                    "comments_must_be_approved",
-                    boolval(Settings::get("comments_must_be_approved")),
-                    "1",
-                    array("class" => "js-switch")
-            );
-            ?><?php translate("comments_must_be_approved") ?></label>
+echo App\HTML\Input::checkBox(
+    "comments_must_be_approved",
+    boolval(Settings::get("comments_must_be_approved")),
+    "1",
+    array("class" => "js-switch")
+);
+?><?php translate("comments_must_be_approved") ?></label>
     </div>
 </div>
 <div class="field">
     <label for="commentable_content_types[]"><?php translate("commentable_content_types") ?></label>
     <?php
     echo App\HTML\Input::multiSelect("commentable_content_types[]", $commentableContentTypes, $typeSelection, 5);
-    ?>
+?>
 </div>
 <div class="voffset2">
     <button type="submit" class="btn btn-primary">
@@ -81,9 +81,9 @@ $translation->addKey("changes_was_saved");
 $translation->render();
 
 enqueueScriptFile(
-        ModuleHelper::buildRessourcePath(
-                "core_settings",
-                "js/community_settings.js"
-        )
+    ModuleHelper::buildRessourcePath(
+        "core_settings",
+        "js/community_settings.js"
+    )
 );
 combinedScriptHtml();

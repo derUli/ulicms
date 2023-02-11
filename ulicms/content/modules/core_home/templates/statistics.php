@@ -10,16 +10,16 @@ $model = $controller->getModel();
 <table>
     <?php
     $installed_at = Settings::get("installed_at");
-    if ($installed_at) {
-        $formatted = NumberFormatHelper::formatTime($installed_at);
-        ?>
+if ($installed_at) {
+    $formatted = NumberFormatHelper::formatTime($installed_at);
+    ?>
         <tr>
             <td><?php translate("site_online_since"); ?></td>
             <td><?php echo $formatted; ?></td>
         </tr>
         <?php
-    }
-    ?>
+}
+?>
     <tr>
         <td><?php translate("pages_count"); ?>
         </td>
@@ -31,14 +31,14 @@ $model = $controller->getModel();
         <td><?php echo count(getUsers()) ?></td>
     </tr>
     <?php
-    if (Settings::get("contact_form_refused_spam_mails")) {
-        ?>
+if (Settings::get("contact_form_refused_spam_mails")) {
+    ?>
         <tr>
             <td><?php echo translate("BLOCKED_SPAM_MAILS"); ?></td>
             <td><?php echo Settings::get("contact_form_refused_spam_mails") ?></td>
         </tr>
         <?php
-    }
-    ?>
+}
+?>
 </table>
 

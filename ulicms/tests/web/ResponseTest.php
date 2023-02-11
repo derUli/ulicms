@@ -2,22 +2,25 @@
 
 use App\Helpers\TestHelper;
 
-class ResponseTest extends \PHPUnit\Framework\TestCase {
-
-    protected function setUp(): void {
+class ResponseTest extends \PHPUnit\Framework\TestCase
+{
+    protected function setUp(): void
+    {
         require_once getLanguageFilePath("en");
         $_SERVER["HTTP_HOST"] = "ulicms.de";
         $_SERVER["REQUEST_URI"] = "/";
         $_SESSION["language"] = "en";
     }
 
-    protected function tearDown(): void {
+    protected function tearDown(): void
+    {
         unset($_SERVER["HTTP_HOST"]);
         unset($_SERVER["REQUEST_URI"]);
         unset($_SESSION["language"]);
     }
 
-    public function testGetStatusCodeByNumber() {
+    public function testGetStatusCodeByNumber()
+    {
         $this->assertEquals("200 OK", Response::getStatusCodeByNumber(200));
         $this->assertEquals("301 Moved Permanently", Response::getStatusCodeByNumber(301));
         $this->assertEquals("302 Found", Response::getStatusCodeByNumber(302));
@@ -27,7 +30,8 @@ class ResponseTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('418 I\'m a teapot', Response::getStatusCodeByNumber(418));
     }
 
-    public function testGetSafeRedirectURL() {
+    public function testGetSafeRedirectURL()
+    {
         $this->assertEquals("http://ulicms.de/lorem_ipsum.html", Response::getSafeRedirectURL("http://ulicms.de/lorem_ipsum.html"));
 
         $this->assertEquals("http://ulicms.de/welcome", Response::getSafeRedirectURL("https://google.de"));
@@ -37,16 +41,16 @@ class ResponseTest extends \PHPUnit\Framework\TestCase {
         )));
     }
 
-    public function testJavascriptRedirect() {
+    public function testJavascriptRedirect()
+    {
         $expected = file_get_contents(
-                Path::resolve("tests/fixtures/javascriptRedirect.expected.txt")
+            Path::resolve("tests/fixtures/javascriptRedirect.expected.txt")
         );
 
         $actual = TestHelper::getOutput(function () {
-                    Response::javascriptRedirect("https://google.de");
-                });
+            Response::javascriptRedirect("https://google.de");
+        });
 
         $this->assertEquals($expected, $actual);
     }
-
 }

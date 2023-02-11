@@ -23,7 +23,7 @@ if ($permissionChecker->hasPermission("banners")) {
     <h2><?php translate("advertisements"); ?></h2>
     <?php
     echo Alert::info(
-            get_translation("advertisement_infotext")
+        get_translation("advertisement_infotext")
     );
     ?>
 
@@ -51,8 +51,8 @@ if ($permissionChecker->hasPermission("banners")) {
                     </th>
                     <?php
                     if ($permissionChecker->hasPermission(
-                                    "banners_edit"
-                            )) {
+        "banners_edit"
+    )) {
                         ?>
                         <td class="no-sort text-center">
                             <?php translate("edit"); ?>
@@ -110,16 +110,16 @@ if ($permissionChecker->hasPermission("banners")) {
                         echo '</tr>';
                     }
                 }
-                ?>
+    ?>
             </tbody>
         </table>
     </div>
     <?php
     enqueueScriptFile(
-            ModuleHelper::buildRessourcePath(
-                    "core_content",
-                    "js/banners.js"
-            )
+        ModuleHelper::buildRessourcePath(
+            "core_content",
+            "js/banners.js"
+        )
     );
     combinedScriptHtml();
     ?>

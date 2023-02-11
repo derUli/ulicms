@@ -3,9 +3,10 @@
 use App\Models\Content\Types\ContentType;
 use App\Models\Content\Types\DefaultContentTypes;
 
-class ContentTypesTest extends \PHPUnit\Framework\TestCase {
-
-    private function getBaseTypes() {
+class ContentTypesTest extends \PHPUnit\Framework\TestCase
+{
+    private function getBaseTypes()
+    {
         $baseTypes = array(
             "page",
             "article",
@@ -22,7 +23,8 @@ class ContentTypesTest extends \PHPUnit\Framework\TestCase {
         return $baseTypes;
     }
 
-    public function testTypesArray() {
+    public function testTypesArray()
+    {
         DefaultContentTypes::initTypes();
         $types = DefaultContentTypes::getAll();
         $this->assertTrue(is_array($types));
@@ -40,7 +42,8 @@ class ContentTypesTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetAvailablePostTypes() {
+    public function testGetAvailablePostTypes()
+    {
         $baseTypes = $this->getBaseTypes();
         $availableTypes = get_available_post_types();
 
@@ -49,7 +52,8 @@ class ContentTypesTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testIsRegularReturnsTrue() {
+    public function testIsRegularReturnsTrue()
+    {
         $types = array("Page", "Article", "Image_Page",
             "Video_Page", "Audio_Page", "Snippet",
             "Module_Page", "Content_List");
@@ -59,12 +63,12 @@ class ContentTypesTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testIsRegularReturnsFalse() {
+    public function testIsRegularReturnsFalse()
+    {
         $types = array("Link", "Node", "Language_Link");
         foreach ($types as $type) {
             $model = new $type();
             $this->assertFalse($model->isRegular());
         }
     }
-
 }

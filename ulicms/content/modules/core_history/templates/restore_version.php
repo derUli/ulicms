@@ -35,10 +35,10 @@ if ($permissionChecker->hasPermission("pages")) {
                                target="_blank"><i class="fas fa-eye"></i> <?php translate("view_diff"); ?></a></td>
                         <td><?php
                             $user = getUserById($revision->user_id);
-                            if ($user and isset($user ["username"])) {
-                                esc($user ["username"]);
-                            }
-                            ?></td>
+                    if ($user and isset($user ["username"])) {
+                        esc($user ["username"]);
+                    }
+                    ?></td>
                         <td><?php echo $revision->date; ?></td>
                         <td><a
                                 href="<?php echo ModuleHelper::buildMethodCallUrl("HistoryController", "doRestore", "version_id=" . $revision->id); ?>"

@@ -1,8 +1,9 @@
 <?php
 
-class FormControllerTest extends \PHPUnit\Framework\TestCase {
-
-    protected function setUp(): void {
+class FormControllerTest extends \PHPUnit\Framework\TestCase
+{
+    protected function setUp(): void
+    {
         $manager = new UserManager();
         $user = $manager->getAllUsers("admin desc")[0];
 
@@ -13,7 +14,8 @@ class FormControllerTest extends \PHPUnit\Framework\TestCase {
         $_POST = [];
     }
 
-    protected function tearDown(): void {
+    protected function tearDown(): void
+    {
         Database::deleteFrom("users", "username = 'testuser-ist-admin'");
         Database::deleteFrom("forms", "name like 'Unit Test%'");
 
@@ -21,7 +23,8 @@ class FormControllerTest extends \PHPUnit\Framework\TestCase {
         $_POST = [];
     }
 
-    public function testDeleteReturnsTrue() {
+    public function testDeleteReturnsTrue()
+    {
         $id = $this->createTestForm();
         $controller = new FormController();
         $success = $controller->_deletePost($id);
@@ -29,23 +32,25 @@ class FormControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue($success);
     }
 
-    protected function createTestForm(): int {
+    protected function createTestForm(): int
+    {
         $page = ContentFactory::getAllRegular()[0];
         Forms::createForm(
-                "Unit Test 2",
-                "max@muster.de",
-                "Subject 1",
-                1,
-                "message=>Message",
-                "message",
-                "email",
-                $page->getId(),
-                true
+            "Unit Test 2",
+            "max@muster.de",
+            "Subject 1",
+            1,
+            "message=>Message",
+            "message",
+            "email",
+            $page->getId(),
+            true
         );
         return Database::getInsertID();
     }
 
-    public function testCreatePostReturnsId() {
+    public function testCreatePostReturnsId()
+    {
         $this->setPostVars();
         $controller = new FormController();
         $id = $controller->_createPost();
@@ -53,7 +58,8 @@ class FormControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertGreaterThanOrEqual(1, $id);
     }
 
-    protected function setPostVars() {
+    protected function setPostVars()
+    {
         $page = ContentFactory::getAllRegular()[0];
 
         $_POST["name"] = "Unit Test " . time();
@@ -67,7 +73,8 @@ class FormControllerTest extends \PHPUnit\Framework\TestCase {
         $_POST["target_page_id"] = strval($page->getId());
     }
 
-    public function testUpdatePostReturnsTrue() {
+    public function testUpdatePostReturnsTrue()
+    {
         $this->setPostVars();
 
         $controller = new FormController();
@@ -80,7 +87,8 @@ class FormControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue($success);
     }
 
-    public function testUpdatePostReturnsFalse() {
+    public function testUpdatePostReturnsFalse()
+    {
         $this->setPostVars();
 
         $_POST["id"] = PHP_INT_MAX;
@@ -90,5 +98,4 @@ class FormControllerTest extends \PHPUnit\Framework\TestCase {
 
         $this->assertFalse($success);
     }
-
 }

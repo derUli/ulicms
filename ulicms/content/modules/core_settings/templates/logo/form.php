@@ -41,11 +41,11 @@ if ($permissionChecker->hasPermission("logo")) {
                             <?php
                             if (is_file($logoStoragePath)) {
                                 echo imageTag(
-                                        $logoUrl,
-                                        [
-                                            "alt" => Settings::get("homepage_title"),
-                                            "class" => "img-responsive"
-                                        ]
+                                    $logoUrl,
+                                    [
+                                        "alt" => Settings::get("homepage_title"),
+                                        "class" => "img-responsive"
+                                    ]
                                 );
                                 ?>
                                 <div class="voffset2">
@@ -55,17 +55,17 @@ if ($permissionChecker->hasPermission("logo")) {
                                         id="delete-logo"
                                         data-url="<?php
                                         echo ModuleHelper::buildMethodCallUrl(
-                                                LogoController::class,
-                                                "deleteLogo"
-                                        );
-                                        ?>
+                                    LogoController::class,
+                                    "deleteLogo"
+                                );
+                                ?>
                                         "
                                         >
                                         <i class="fa fa-trash" aria-hidden="true"></i>
                                         <?php translate("delete_logo"); ?>
                                     </button>
                                 <?php }
-                                ?>
+                            ?>
                             </div>
                         </div>
                         <img
@@ -100,10 +100,10 @@ if ($permissionChecker->hasPermission("logo")) {
     $translation->render();
 
     enqueueScriptFile(
-            ModuleHelper::buildRessourcePath(
-                    "core_settings",
-                    "js/logo.js"
-            )
+        ModuleHelper::buildRessourcePath(
+            "core_settings",
+            "js/logo.js"
+        )
     );
     combinedScriptHtml();
 } else {

@@ -109,8 +109,8 @@ if ($rfm_subfolder != "" && $rfm_subfolder[strlen($rfm_subfolder) - 1] != "/") {
 $ftp = ftp_con($config);
 
 if (($ftp && !$ftp->isDir(
-            $config['ftp_base_folder'] . $config['upload_dir'] . $rfm_subfolder . $subdir
-        )) || (!$ftp && !file_exists($config['current_path'] . $rfm_subfolder . $subdir))) {
+    $config['ftp_base_folder'] . $config['upload_dir'] . $rfm_subfolder . $subdir
+)) || (!$ftp && !file_exists($config['current_path'] . $rfm_subfolder . $subdir))) {
     $subdir = '';
     $rfm_subfolder = "";
 }
@@ -747,199 +747,199 @@ if ($config['upload_files']) { ?>
 
     <?php
     $class_ext = '';
-    $src = '';
+$src = '';
+if ($ftp) {
+    try {
+        $files = $ftp->scanDir($config['ftp_base_folder'] . $config['upload_dir'] . $rfm_subfolder . $subdir);
+        if (!$ftp->isDir($config['ftp_base_folder'] . $config['ftp_thumbs_dir'] . $rfm_subfolder . $subdir)) {
+            create_folder(
+                false,
+                $config['ftp_base_folder'] . $config['ftp_thumbs_dir'] . $rfm_subfolder . $subdir,
+                $ftp,
+                $config
+            );
+        }
+    } catch (FtpClient\FtpException $e) {
+        echo "Error: ";
+        echo $e->getMessage();
+        echo "<br/>Please check configurations";
+        die();
+    }
+} else {
+    $files = scandir($config['current_path'] . $rfm_subfolder . $subdir);
+}
+
+$n_files = count($files);
+
+//php sorting
+$sorted = array();
+//$current_folder=array();
+//$prev_folder=array();
+$current_files_number = 0;
+$current_folders_number = 0;
+
+foreach ($files as $k => $file) {
     if ($ftp) {
-        try {
-            $files = $ftp->scanDir($config['ftp_base_folder'] . $config['upload_dir'] . $rfm_subfolder . $subdir);
-            if (!$ftp->isDir($config['ftp_base_folder'] . $config['ftp_thumbs_dir'] . $rfm_subfolder . $subdir)) {
-                create_folder(
-                    false,
-                    $config['ftp_base_folder'] . $config['ftp_thumbs_dir'] . $rfm_subfolder . $subdir,
-                    $ftp,
-                    $config
+        $date = strtotime($file['day'] . " " . $file['month'] . " " . date('Y') . " " . $file['time']);
+        $size = $file['size'];
+        if ($file['type'] == 'file') {
+            $current_files_number++;
+            $file_ext = substr(strrchr($file['name'], '.'), 1);
+            $is_dir = false;
+        } else {
+            $current_folders_number++;
+            $file_ext = trans('Type_dir');
+            $is_dir = true;
+        }
+        $sorted[$k] = array(
+            'is_dir' => $is_dir,
+            'file' => $file['name'],
+            'file_lcase' => strtolower($file['name']),
+            'date' => $date,
+            'size' => $size,
+            'permissions' => $file['permissions'],
+            'extension' => fix_strtolower($file_ext)
+        );
+    } else {
+        if ($file != "." && $file != "..") {
+            if (is_dir($config['current_path'] . $rfm_subfolder . $subdir . $file)) {
+                $date = filemtime($config['current_path'] . $rfm_subfolder . $subdir . $file);
+                if (!($file == '.' || substr($file, 0, 1) == '.' ||
+                    (isset($file_array['extension']) && $file_array['extension'] == fix_strtolower(
+                        trans('Type_dir')
+                    )) ||
+                    (isset($file_array['extension']) && $file_array['extension'] != fix_strtolower(
+                        trans('Type_dir')
+                    )) ||
+                    ($file == '..' && $subdir == '') ||
+                    in_array($file, $config['hidden_folders']) ||
+                    ($filter != '' && $n_files > $config['file_number_limit_js'] && $file != ".." && stripos(
+                        $file,
+                        $filter
+                    ) === false))) {
+                    $current_folders_number++;
+                }
+                if ($config['show_folder_size']) {
+                    list($size, $nfiles, $nfolders) = folder_info(
+                        $config['current_path'] . $rfm_subfolder . $subdir . $file,
+                        false
+                    );
+                } else {
+                    $size = 0;
+                }
+                $file_ext = trans('Type_dir');
+                $sorted[$k] = array(
+                    'is_dir' => true,
+                    'file' => $file,
+                    'file_lcase' => strtolower($file),
+                    'date' => $date,
+                    'size' => $size,
+                    'permissions' => '',
+                    'extension' => fix_strtolower($file_ext)
+                );
+
+                if ($config['show_folder_size']) {
+                    $sorted[$k]['nfiles'] = $nfiles;
+                    $sorted[$k]['nfolders'] = $nfolders;
+                }
+            } else {
+                $current_files_number++;
+                $file_path = $config['current_path'] . $rfm_subfolder . $subdir . $file;
+                $date = filemtime($file_path);
+                $size = filesize($file_path);
+                $file_ext = substr(strrchr($file, '.'), 1);
+                $sorted[$k] = array(
+                    'is_dir' => false,
+                    'file' => $file,
+                    'file_lcase' => strtolower($file),
+                    'date' => $date,
+                    'size' => $size,
+                    'permissions' => '',
+                    'extension' => strtolower($file_ext)
                 );
             }
-        } catch (FtpClient\FtpException $e) {
-            echo "Error: ";
-            echo $e->getMessage();
-            echo "<br/>Please check configurations";
-            die();
         }
+    }
+}
+
+function filenameSort($x, $y)
+{
+    global $descending;
+
+    if ($x['is_dir'] !== $y['is_dir']) {
+        $greater = $y['is_dir'];
     } else {
-        $files = scandir($config['current_path'] . $rfm_subfolder . $subdir);
+        $greater = ($descending)
+            ? $x['file_lcase'] < $y['file_lcase']
+            : $x['file_lcase'] >= $y['file_lcase'];
     }
+    return $greater ? 1 : -1;
+}
 
-    $n_files = count($files);
+function dateSort($x, $y)
+{
+    global $descending;
 
-    //php sorting
-    $sorted = array();
-    //$current_folder=array();
-    //$prev_folder=array();
-    $current_files_number = 0;
-    $current_folders_number = 0;
-
-    foreach ($files as $k => $file) {
-        if ($ftp) {
-            $date = strtotime($file['day'] . " " . $file['month'] . " " . date('Y') . " " . $file['time']);
-            $size = $file['size'];
-            if ($file['type'] == 'file') {
-                $current_files_number++;
-                $file_ext = substr(strrchr($file['name'], '.'), 1);
-                $is_dir = false;
-            } else {
-                $current_folders_number++;
-                $file_ext = trans('Type_dir');
-                $is_dir = true;
-            }
-            $sorted[$k] = array(
-                'is_dir' => $is_dir,
-                'file' => $file['name'],
-                'file_lcase' => strtolower($file['name']),
-                'date' => $date,
-                'size' => $size,
-                'permissions' => $file['permissions'],
-                'extension' => fix_strtolower($file_ext)
-            );
-        } else {
-            if ($file != "." && $file != "..") {
-                if (is_dir($config['current_path'] . $rfm_subfolder . $subdir . $file)) {
-                    $date = filemtime($config['current_path'] . $rfm_subfolder . $subdir . $file);
-                    if (!($file == '.' || substr($file, 0, 1) == '.' ||
-                        (isset($file_array['extension']) && $file_array['extension'] == fix_strtolower(
-                                trans('Type_dir')
-                            )) ||
-                        (isset($file_array['extension']) && $file_array['extension'] != fix_strtolower(
-                                trans('Type_dir')
-                            )) ||
-                        ($file == '..' && $subdir == '') ||
-                        in_array($file, $config['hidden_folders']) ||
-                        ($filter != '' && $n_files > $config['file_number_limit_js'] && $file != ".." && stripos(
-                                $file,
-                                $filter
-                            ) === false))) {
-                        $current_folders_number++;
-                    }
-                    if ($config['show_folder_size']) {
-                        list($size, $nfiles, $nfolders) = folder_info(
-                            $config['current_path'] . $rfm_subfolder . $subdir . $file,
-                            false
-                        );
-                    } else {
-                        $size = 0;
-                    }
-                    $file_ext = trans('Type_dir');
-                    $sorted[$k] = array(
-                        'is_dir' => true,
-                        'file' => $file,
-                        'file_lcase' => strtolower($file),
-                        'date' => $date,
-                        'size' => $size,
-                        'permissions' => '',
-                        'extension' => fix_strtolower($file_ext)
-                    );
-
-                    if ($config['show_folder_size']) {
-                        $sorted[$k]['nfiles'] = $nfiles;
-                        $sorted[$k]['nfolders'] = $nfolders;
-                    }
-                } else {
-                    $current_files_number++;
-                    $file_path = $config['current_path'] . $rfm_subfolder . $subdir . $file;
-                    $date = filemtime($file_path);
-                    $size = filesize($file_path);
-                    $file_ext = substr(strrchr($file, '.'), 1);
-                    $sorted[$k] = array(
-                        'is_dir' => false,
-                        'file' => $file,
-                        'file_lcase' => strtolower($file),
-                        'date' => $date,
-                        'size' => $size,
-                        'permissions' => '',
-                        'extension' => strtolower($file_ext)
-                    );
-                }
-            }
-        }
+    if ($x['is_dir'] !== $y['is_dir']) {
+        $greater = $y['is_dir'];
+    } else {
+        $greater = ($descending)
+            ? $x['date'] < $y['date']
+            : $x['date'] >= $y['date'];
     }
+    return $greater ? 1 : -1;
+}
 
-    function filenameSort($x, $y)
-    {
-        global $descending;
 
-        if ($x['is_dir'] !== $y['is_dir']) {
-            $greater = $y['is_dir'];
-        } else {
-            $greater = ($descending)
-                ? $x['file_lcase'] < $y['file_lcase']
-                : $x['file_lcase'] >= $y['file_lcase'];
-        }
-        return $greater ? 1 : -1;
+function sizeSort($x, $y)
+{
+    global $descending;
+
+    if ($x['is_dir'] !== $y['is_dir']) {
+        $greater = $y['is_dir'];
+    } else {
+        $greater = ($descending)
+            ? $x['size'] < $y['size']
+            : $x['size'] >= $y['size'];
     }
+    return $greater ? 1 : -1;
+}
 
-    function dateSort($x, $y)
-    {
-        global $descending;
+function extensionSort($x, $y)
+{
+    global $descending;
 
-        if ($x['is_dir'] !== $y['is_dir']) {
-            $greater = $y['is_dir'];
-        } else {
-            $greater = ($descending)
-                ? $x['date'] < $y['date']
-                : $x['date'] >= $y['date'];
-        }
-        return $greater ? 1 : -1;
+    if ($x['is_dir'] !== $y['is_dir']) {
+        $greater = $y['is_dir'];
+    } else {
+        $greater = ($descending)
+            ? $x['extension'] < $y['extension']
+            : $x['extension'] >= $y['extension'];
     }
+    return $greater ? 1 : -1;
+}
 
+switch ($sort_by) {
+    case 'date':
+        usort($sorted, 'dateSort');
+        break;
+    case 'size':
+        usort($sorted, 'sizeSort');
+        break;
+    case 'extension':
+        usort($sorted, 'extensionSort');
+        break;
+    default:
+        usort($sorted, 'filenameSort');
+        break;
+}
 
-    function sizeSort($x, $y)
-    {
-        global $descending;
+if ($subdir != "") {
+    $sorted = array_merge(array(array('file' => '..')), $sorted);
+}
 
-        if ($x['is_dir'] !== $y['is_dir']) {
-            $greater = $y['is_dir'];
-        } else {
-            $greater = ($descending)
-                ? $x['size'] < $y['size']
-                : $x['size'] >= $y['size'];
-        }
-        return $greater ? 1 : -1;
-    }
-
-    function extensionSort($x, $y)
-    {
-        global $descending;
-
-        if ($x['is_dir'] !== $y['is_dir']) {
-            $greater = $y['is_dir'];
-        } else {
-            $greater = ($descending)
-                ? $x['extension'] < $y['extension']
-                : $x['extension'] >= $y['extension'];
-        }
-        return $greater ? 1 : -1;
-    }
-
-    switch ($sort_by) {
-        case 'date':
-            usort($sorted, 'dateSort');
-            break;
-        case 'size':
-            usort($sorted, 'sizeSort');
-            break;
-        case 'extension':
-            usort($sorted, 'extensionSort');
-            break;
-        default:
-            usort($sorted, 'filenameSort');
-            break;
-    }
-
-    if ($subdir != "") {
-        $sorted = array_merge(array(array('file' => '..')), $sorted);
-    }
-
-    $files = $sorted;
-    ?>
+$files = $sorted;
+?>
     <!-- header div start -->
     <div class="navbar navbar-fixed-top">
         <div class="navbar-inner">
@@ -950,62 +950,62 @@ if ($config['upload_files']) { ?>
                     <span class="icon-bar"></span>
                 </button>
                 <div class="brand"><?php
-                    echo trans('Toolbar'); ?></div>
+                echo trans('Toolbar'); ?></div>
                 <div class="nav-collapse collapse">
                     <div class="filters">
                         <div class="row-fluid">
                             <div class="span4 half">
                                 <?php
-                                if ($config['upload_files']) { ?>
+                            if ($config['upload_files']) { ?>
                                     <button class="tip btn btn-success upload-btn" title="<?php
-                                    echo trans('Upload_file'); ?>"><i class="rficon-upload"></i> <?php echo trans('Upload_file'); ?></button>
+                                echo trans('Upload_file'); ?>"><i class="rficon-upload"></i> <?php echo trans('Upload_file'); ?></button>
                                 <?php
-                                } ?>
+                            } ?>
                                 <?php
-                                if ($config['create_text_files']) { ?>
+                            if ($config['create_text_files']) { ?>
                                     <button class="tip btn create-file-btn" title="<?php
-                                    echo trans('New_File'); ?>"><i class="icon-plus"></i><i class="icon-file"></i>
+                                echo trans('New_File'); ?>"><i class="icon-plus"></i><i class="icon-file"></i>
                                     </button>
                                 <?php
-                                } ?>
+                            } ?>
                                 <?php
-                                if ($config['create_folders']) { ?>
+                            if ($config['create_folders']) { ?>
                                     <button class="tip btn new-folder" title="<?php
-                                    echo trans('New_Folder') ?>"><i class="icon-plus"></i><i
+                                echo trans('New_Folder') ?>"><i class="icon-plus"></i><i
                                                 class="icon-folder-open"></i></button>
                                 <?php
-                                } ?>
+                            } ?>
                                 <?php
-                                if ($config['copy_cut_files'] || $config['copy_cut_dirs']) { ?>
+                            if ($config['copy_cut_files'] || $config['copy_cut_dirs']) { ?>
                                     <button class="tip btn paste-here-btn" title="<?php
-                                    echo trans('Paste_Here'); ?>"><i class="rficon-clipboard-apply"></i></button>
+                                echo trans('Paste_Here'); ?>"><i class="rficon-clipboard-apply"></i></button>
                                     <button class="tip btn clear-clipboard-btn" title="<?php
-                                    echo trans('Clear_Clipboard'); ?>"><i class="rficon-clipboard-clear"></i></button>
+                                echo trans('Clear_Clipboard'); ?>"><i class="rficon-clipboard-clear"></i></button>
                                 <?php
-                                } ?>
+                            } ?>
                                 <div id="multiple-selection" style="display:none;">
                                     <?php
-                                    if ($config['multiple_selection']) { ?>
+                                if ($config['multiple_selection']) { ?>
                                         <?php
-                                        if ($config['delete_files']) { ?>
+                                    if ($config['delete_files']) { ?>
                                             <button class="tip btn multiple-delete-btn" title="<?php
-                                            echo trans('Erase'); ?>" data-confirm="<?php
-                                            echo trans('Confirm_del'); ?>"><i class="icon-trash"></i></button>
+                                        echo trans('Erase'); ?>" data-confirm="<?php
+                                        echo trans('Confirm_del'); ?>"><i class="icon-trash"></i></button>
                                         <?php
-                                        } ?>
-                                        <button class="tip btn multiple-select-btn" title="<?php
-                                        echo trans('Select_All'); ?>"><i class="icon-check"></i></button>
-                                        <button class="tip btn multiple-deselect-btn" title="<?php
-                                        echo trans('Deselect_All'); ?>"><i class="icon-ban-circle"></i></button>
-                                        <?php
-                                        if ($apply_type != "apply_none" && $config['multiple_selection_action_button']) { ?>
-                                            <button class="btn multiple-action-btn btn-inverse" data-function="<?php
-                                            echo $apply_type; ?>"><?php
-                                                echo trans('Select'); ?></button>
-                                        <?php
-                                        } ?>
-                                    <?php
                                     } ?>
+                                        <button class="tip btn multiple-select-btn" title="<?php
+                                    echo trans('Select_All'); ?>"><i class="icon-check"></i></button>
+                                        <button class="tip btn multiple-deselect-btn" title="<?php
+                                    echo trans('Deselect_All'); ?>"><i class="icon-ban-circle"></i></button>
+                                        <?php
+                                    if ($apply_type != "apply_none" && $config['multiple_selection_action_button']) { ?>
+                                            <button class="btn multiple-action-btn btn-inverse" data-function="<?php
+                                        echo $apply_type; ?>"><?php
+                                            echo trans('Select'); ?></button>
+                                        <?php
+                                    } ?>
+                                    <?php
+                                } ?>
                                 </div>
                             </div>
                             <div class="span2 half view-controller">
@@ -1099,10 +1099,10 @@ if ($config['upload_files']) { ?>
                                        class="hide"/>
                                 <label id="ff-item-type-all" title="<?php
                                 echo trans('All'); ?>" <?php
-                                       if ($_GET['type'] == 1 || $_GET['type'] == 3){ ?>style="visibility: hidden;" <?php
-                                } ?> data-item="ff-item-type-all" for="select-type-all" style="margin-rigth:0px;"
+                                       if ($_GET['type'] == 1 || $_GET['type'] == 3) { ?>style="visibility: hidden;" <?php
+                                       } ?> data-item="ff-item-type-all" for="select-type-all" style="margin-rigth:0px;"
                                        class="tip btn btn-inverse ff-label-type-all"><?php
-                                    echo trans('All'); ?></label>
+                                           echo trans('All'); ?></label>
 
                             </div>
                         </div>
@@ -1119,43 +1119,43 @@ if ($config['upload_files']) { ?>
     <div class="row-fluid">
         <?php
         $link = "dialog.php?" . $get_params;
-        ?>
+?>
         <ul class="breadcrumb">
             <li class="pull-left"><a href="<?php
-                echo $link ?>/"><i class="icon-home"></i></a></li>
+        echo $link ?>/"><i class="icon-home"></i></a></li>
             <li><span class="divider">/</span></li>
             <?php
-            $bc = explode("/", $subdir);
-            $tmp_path = '';
-            if (!empty($bc)) {
-                foreach ($bc as $k => $b) {
-                    $tmp_path .= $b . "/";
-                    if ($k == count($bc) - 2) {
-                        ?>
-                        <li class="active"><?php
-                        echo $b ?></li><?php
-                    } elseif ($b != "") { ?>
-                        <li><a href="<?php
-                            echo $link . $tmp_path ?>"><?php
-                                echo $b ?></a></li>
-                        <li><span class="divider"><?php
-                                echo "/"; ?></span></li>
-                    <?php
-                    }
-                }
-            }
+    $bc = explode("/", $subdir);
+$tmp_path = '';
+if (!empty($bc)) {
+    foreach ($bc as $k => $b) {
+        $tmp_path .= $b . "/";
+        if ($k == count($bc) - 2) {
             ?>
+                        <li class="active"><?php
+            echo $b ?></li><?php
+        } elseif ($b != "") { ?>
+                        <li><a href="<?php
+                echo $link . $tmp_path ?>"><?php
+                    echo $b ?></a></li>
+                        <li><span class="divider"><?php
+                    echo "/"; ?></span></li>
+                    <?php
+        }
+    }
+}
+?>
 
             <li class="pull-right"><a class="btn-small" href="javascript:void('')" id="info"><i
                             class="icon-question-sign"></i></a></li>
             <?php
-            if ($config['show_language_selection']) { ?>
+if ($config['show_language_selection']) { ?>
                 <li class="pull-right"><a class="btn-small" href="javascript:void('')" id="change_lang_btn"><i
                                 class="icon-globe"></i></a></li>
             <?php
-            } ?>
+} ?>
             <li class="pull-right"><a id="refresh" class="btn-small" href="dialog.php?<?php
-                echo $get_params . $subdir . "&" . uniqid() ?>"><i class="icon-refresh"></i></a></li>
+    echo $get_params . $subdir . "&" . uniqid() ?>"><i class="icon-refresh"></i></a></li>
 
             <li class="pull-right">
                 <div class="btn-group">
@@ -1165,45 +1165,45 @@ if ($config['upload_files']) { ?>
                     </a>
                     <ul class="dropdown-menu pull-left sorting">
                         <li class="text-center"><strong><?php
-                                echo trans('Sorting') ?></strong></li>
+                    echo trans('Sorting') ?></strong></li>
                         <li><a class="sorter sort-name <?php
-                            if ($sort_by == "name") {
-                                echo ($descending) ? "descending" : "ascending";
-                            } ?>" href="javascript:void('')" data-sort="name"><?php
-                                echo trans('Filename'); ?></a></li>
+                if ($sort_by == "name") {
+                    echo ($descending) ? "descending" : "ascending";
+                } ?>" href="javascript:void('')" data-sort="name"><?php
+                    echo trans('Filename'); ?></a></li>
                         <li><a class="sorter sort-date <?php
-                            if ($sort_by == "date") {
-                                echo ($descending) ? "descending" : "ascending";
-                            } ?>" href="javascript:void('')" data-sort="date"><?php
-                                echo trans('Date'); ?></a></li>
+                if ($sort_by == "date") {
+                    echo ($descending) ? "descending" : "ascending";
+                } ?>" href="javascript:void('')" data-sort="date"><?php
+                    echo trans('Date'); ?></a></li>
                         <li><a class="sorter sort-size <?php
-                            if ($sort_by == "size") {
-                                echo ($descending) ? "descending" : "ascending";
-                            } ?>" href="javascript:void('')" data-sort="size"><?php
-                                echo trans('Size'); ?></a></li>
+                if ($sort_by == "size") {
+                    echo ($descending) ? "descending" : "ascending";
+                } ?>" href="javascript:void('')" data-sort="size"><?php
+                    echo trans('Size'); ?></a></li>
                         <li><a class="sorter sort-extension <?php
-                            if ($sort_by == "extension") {
-                                echo ($descending) ? "descending" : "ascending";
-                            } ?>" href="javascript:void('')" data-sort="extension"><?php
-                                echo trans('Type'); ?></a></li>
+                if ($sort_by == "extension") {
+                    echo ($descending) ? "descending" : "ascending";
+                } ?>" href="javascript:void('')" data-sort="extension"><?php
+                    echo trans('Type'); ?></a></li>
                     </ul>
                 </div>
             </li>
             <li><small class="hidden-phone">(<span id="files_number"><?php
                         echo $current_files_number . "</span> " . trans(
-                                'Files'
-                            ) . " - <span id='folders_number'>" . $current_folders_number . "</span> " . trans(
-                                'Folders'
-                            ); ?>)</small></li>
+                    'Files'
+                ) . " - <span id='folders_number'>" . $current_folders_number . "</span> " . trans(
+                            'Folders'
+                        ); ?>)</small></li>
             <?php
             if ($config['show_total_size']) { ?>
                 <li><small class="hidden-phone"><span title="<?php
                         echo trans('total size') . $config['MaxSizeTotal']; ?>"><?php
-                            echo trans('total size') . ": " . makeSize(
-                                    $sizeCurrentFolder
-                                ) . (($config['MaxSizeTotal'] !== false && is_int(
-                                        $config['MaxSizeTotal']
-                                    )) ? '/' . $config['MaxSizeTotal'] . ' ' . trans('MB') : ''); ?></span></small>
+                        echo trans('total size') . ": " . makeSize(
+                            $sizeCurrentFolder
+                        ) . (($config['MaxSizeTotal'] !== false && is_int(
+                            $config['MaxSizeTotal']
+                        )) ? '/' . $config['MaxSizeTotal'] . ' ' . trans('MB') : ''); ?></span></small>
                 </li>
             <?php
             } ?>
@@ -1212,48 +1212,48 @@ if ($config['upload_files']) { ?>
     <!-- breadcrumb div end -->
     <div class="row-fluid ff-container">
         <div class="span12">
-            <?php if( ($ftp && !$ftp->isDir(
-                    $config['ftp_base_folder'] . $config['upload_dir'] . $rfm_subfolder . $subdir
-                )) || (!$ftp && @opendir($config['current_path'] . $rfm_subfolder . $subdir) === false)){ ?>
+            <?php if(($ftp && !$ftp->isDir(
+                            $config['ftp_base_folder'] . $config['upload_dir'] . $rfm_subfolder . $subdir
+                        )) || (!$ftp && @opendir($config['current_path'] . $rfm_subfolder . $subdir) === false)) { ?>
             <br/>
             <div class="alert alert-error">There is an error! The upload folder there isn't. Check your config.php
                 file.
             </div>
-            <?php }else{ ?>
+            <?php } else { ?>
             <h4 id="help"><?php
-                echo trans('Swipe_help'); ?></h4>
-            <?php if(isset($config['folder_message'])){ ?>
+            echo trans('Swipe_help'); ?></h4>
+            <?php if(isset($config['folder_message'])) { ?>
             <div class="alert alert-block"><?php
-                echo $config['folder_message']; ?></div>
+            echo $config['folder_message']; ?></div>
             <?php } ?>
-            <?php if($config['show_sorting_bar']){ ?>
+            <?php if($config['show_sorting_bar']) { ?>
             <!-- sorter -->
             <div class="sorter-container <?php
             echo "list-view" . $view; ?>">
                 <div class="file-name"><a class="sorter sort-name <?php
-                    if ($sort_by == "name") {
-                        echo ($descending) ? "descending" : "ascending";
-                    } ?>" href="javascript:void('')" data-sort="name"><?php
-                        echo trans('Filename'); ?></a></div>
+                if ($sort_by == "name") {
+                    echo ($descending) ? "descending" : "ascending";
+                } ?>" href="javascript:void('')" data-sort="name"><?php
+                    echo trans('Filename'); ?></a></div>
                 <div class="file-date"><a class="sorter sort-date <?php
-                    if ($sort_by == "date") {
-                        echo ($descending) ? "descending" : "ascending";
-                    } ?>" href="javascript:void('')" data-sort="date"><?php
-                        echo trans('Date'); ?></a></div>
+                if ($sort_by == "date") {
+                    echo ($descending) ? "descending" : "ascending";
+                } ?>" href="javascript:void('')" data-sort="date"><?php
+                    echo trans('Date'); ?></a></div>
                 <div class="file-size"><a class="sorter sort-size <?php
-                    if ($sort_by == "size") {
-                        echo ($descending) ? "descending" : "ascending";
-                    } ?>" href="javascript:void('')" data-sort="size"><?php
-                        echo trans('Size'); ?></a></div>
+                if ($sort_by == "size") {
+                    echo ($descending) ? "descending" : "ascending";
+                } ?>" href="javascript:void('')" data-sort="size"><?php
+                    echo trans('Size'); ?></a></div>
                 <div class='img-dimension'><?php
-                    echo trans('Dimension'); ?></div>
+                echo trans('Dimension'); ?></div>
                 <div class='file-extension'><a class="sorter sort-extension <?php
-                    if ($sort_by == "extension") {
-                        echo ($descending) ? "descending" : "ascending";
-                    } ?>" href="javascript:void('')" data-sort="extension"><?php
-                        echo trans('Type'); ?></a></div>
+                if ($sort_by == "extension") {
+                    echo ($descending) ? "descending" : "ascending";
+                } ?>" href="javascript:void('')" data-sort="extension"><?php
+                    echo trans('Type'); ?></a></div>
                 <div class='file-operations'><?php
-                    echo trans('Operations'); ?></div>
+                echo trans('Operations'); ?></div>
             </div>
             <?php } ?>
 
@@ -1268,20 +1268,20 @@ if ($config['upload_files']) { ?>
                 foreach ($files as $file_array) {
                     $file = $file_array['file'];
                     if ($file == '.' || (substr(
-                                $file,
-                                0,
-                                1
-                            ) == '.' && isset($file_array['extension']) && $file_array['extension'] == fix_strtolower(
-                                trans('Type_dir')
-                            )) || (isset($file_array['extension']) && $file_array['extension'] != fix_strtolower(
-                                trans('Type_dir')
-                            )) || ($file == '..' && $subdir == '') || in_array(
-                            $file,
-                            $config['hidden_folders']
-                        ) || ($filter != '' && $n_files > $config['file_number_limit_js'] && $file != ".." && stripos(
-                                $file,
-                                $filter
-                            ) === false)) {
+                        $file,
+                        0,
+                        1
+                    ) == '.' && isset($file_array['extension']) && $file_array['extension'] == fix_strtolower(
+                        trans('Type_dir')
+                    )) || (isset($file_array['extension']) && $file_array['extension'] != fix_strtolower(
+                        trans('Type_dir')
+                    )) || ($file == '..' && $subdir == '') || in_array(
+                        $file,
+                        $config['hidden_folders']
+                    ) || ($filter != '' && $n_files > $config['file_number_limit_js'] && $file != ".." && stripos(
+                        $file,
+                        $filter
+                    ) === false)) {
                         continue;
                     }
                     $new_name = fix_filename($file, $config);
@@ -1323,71 +1323,71 @@ if ($config['upload_files']) { ?>
                         echo ' style="display:none;"';
                     } ?>><?php
                         $file_prevent_rename = false;
-                        $file_prevent_delete = false;
-                        if (isset($filePermissions[$file])) {
-                            $file_prevent_rename = isset($filePermissions[$file]['prevent_rename']) && $filePermissions[$file]['prevent_rename'];
-                            $file_prevent_delete = isset($filePermissions[$file]['prevent_delete']) && $filePermissions[$file]['prevent_delete'];
-                        }
-                        ?>
+                    $file_prevent_delete = false;
+                    if (isset($filePermissions[$file])) {
+                        $file_prevent_rename = isset($filePermissions[$file]['prevent_rename']) && $filePermissions[$file]['prevent_rename'];
+                        $file_prevent_delete = isset($filePermissions[$file]['prevent_delete']) && $filePermissions[$file]['prevent_delete'];
+                    }
+                    ?>
                         <figure data-name="<?php
-                        echo $file ?>" data-path="<?php
-                        echo $rfm_subfolder . $subdir . $file; ?>" class="<?php
-                        if ($file == "..") {
-                            echo "back-";
-                        } ?>directory" data-type="<?php
-                        if ($file != "..") {
-                            echo "dir";
-                        } ?>">
+                    echo $file ?>" data-path="<?php
+                    echo $rfm_subfolder . $subdir . $file; ?>" class="<?php
+                    if ($file == "..") {
+                        echo "back-";
+                    } ?>directory" data-type="<?php
+                    if ($file != "..") {
+                        echo "dir";
+                    } ?>">
                             <?php
-                            if ($file == "..") { ?>
+                        if ($file == "..") { ?>
                                 <input type="hidden" class="path" value="<?php
-                                echo str_replace('.', '', dirname($rfm_subfolder . $subdir)); ?>"/>
+                            echo str_replace('.', '', dirname($rfm_subfolder . $subdir)); ?>"/>
                                 <input type="hidden" class="path_thumb" value="<?php
-                                echo dirname($thumbs_path) . "/"; ?>"/>
+                            echo dirname($thumbs_path) . "/"; ?>"/>
                             <?php
-                            } ?>
+                        } ?>
                             <a class="folder-link" href="dialog.php?<?php
-                            echo $get_params . rawurlencode(
-                                    $src
-                                ) . "&" . ($callback ? 'callback=' . $callback . "&" : '') . uniqid() ?>">
+                        echo $get_params . rawurlencode(
+                        $src
+                    ) . "&" . ($callback ? 'callback=' . $callback . "&" : '') . uniqid() ?>">
                                 <div class="img-precontainer">
                                     <div class="img-container directory"><span></span>
                                         <img class="directory-img" data-src="img/<?php
-                                        echo $config['icon_theme']; ?>/folder<?php
-                                        if ($file == "..") {
-                                            echo "_back";
-                                        } ?>.png"/>
+                                echo $config['icon_theme']; ?>/folder<?php
+                                if ($file == "..") {
+                                    echo "_back";
+                                } ?>.png"/>
                                     </div>
                                 </div>
                                 <div class="img-precontainer-mini directory">
                                     <div class="img-container-mini">
                                         <span></span>
                                         <img class="directory-img" data-src="img/<?php
-                                        echo $config['icon_theme']; ?>/folder<?php
-                                        if ($file == "..") {
-                                            echo "_back";
-                                        } ?>.png"/>
+                                echo $config['icon_theme']; ?>/folder<?php
+                                if ($file == "..") {
+                                    echo "_back";
+                                } ?>.png"/>
                                     </div>
                                 </div>
                                 <?php
-                                if ($file == ".."){ ?>
+                                if ($file == "..") { ?>
                                 <div class="box no-effect">
                                     <h4><?php
-                                        echo trans('Back') ?></h4>
+                                echo trans('Back') ?></h4>
                                 </div>
                             </a>
 
                         <?php
-                        } else { ?>
+                                } else { ?>
                             </a>
                             <div class="box">
                                 <h4 class="<?php
-                                if ($config['ellipsis_title_after_first_row']) {
-                                    echo "ellipsis";
-                                } ?>"><a class="folder-link" data-file="<?php
-                                    echo $file ?>" href="dialog.php?<?php
-                                    echo $get_params . rawurlencode($src) . "&" . uniqid() ?>"><?php
-                                        echo $file; ?></a></h4>
+                                        if ($config['ellipsis_title_after_first_row']) {
+                                            echo "ellipsis";
+                                        } ?>"><a class="folder-link" data-file="<?php
+                                            echo $file ?>" href="dialog.php?<?php
+                                            echo $get_params . rawurlencode($src) . "&" . uniqid() ?>"><?php
+                                                echo $file; ?></a></h4>
                             </div>
                             <input type="hidden" class="name" value="<?php
                             echo $file_array['file_lcase']; ?>"/>
@@ -1398,15 +1398,15 @@ if ($config['upload_files']) { ?>
                             <input type="hidden" class="extension" value="<?php
                             echo fix_strtolower(trans('Type_dir')); ?>"/>
                             <div class="file-date"><?php
-                                echo date(trans('Date_type'), $file_array['date']); ?></div>
+                                        echo date(trans('Date_type'), $file_array['date']); ?></div>
                             <?php
                             if ($config['show_folder_size']) { ?>
                                 <div class="file-size"><?php
-                                    echo makeSize($file_array['size']); ?></div>
+                                            echo makeSize($file_array['size']); ?></div>
                                 <input type="hidden" class="nfiles" value="<?php
-                                echo $file_array['nfiles']; ?>"/>
+                                        echo $file_array['nfiles']; ?>"/>
                                 <input type="hidden" class="nfolders" value="<?php
-                                echo $file_array['nfolders']; ?>"/>
+                                        echo $file_array['nfolders']; ?>"/>
                             <?php
                             } ?>
                             <div class='file-extension'><?php
@@ -1435,7 +1435,7 @@ if ($config['upload_files']) { ?>
                                 </a>
                             </figcaption>
                         <?php
-                        } ?>
+                                } ?>
                         </figure>
                     </li>
                     <?php
@@ -1446,184 +1446,186 @@ if ($config['upload_files']) { ?>
                 foreach ($files
 
                 as $nu => $file_array) {
-                $file = $file_array['file'];
+                    $file = $file_array['file'];
 
-                if ($file == '.' || $file == '..' || $file_array['extension'] == fix_strtolower(
+                    if ($file == '.' || $file == '..' || $file_array['extension'] == fix_strtolower(
                         trans('Type_dir')
                     ) || !check_extension(
                         $file_array['extension'],
                         $config
                     ) || ($filter != '' && $n_files > $config['file_number_limit_js'] && stripos(
-                            $file,
-                            $filter
-                        ) === false)) {
-                    continue;
-                }
-                foreach ($config['hidden_files'] as $hidden_file) {
-                    if (fnmatch($hidden_file, $file, FNM_PATHNAME)) {
-                        continue 2;
+                        $file,
+                        $filter
+                    ) === false)) {
+                        continue;
                     }
-                }
-                $filename = substr($file, 0, '-' . (strlen($file_array['extension']) + 1));
-                if (strlen($file_array['extension']) === 0) {
-                    $filename = $file;
-                }
-                if (!$ftp) {
-                    $file_path = $config['current_path'] . $rfm_subfolder . $subdir . $file;
-                    //check if file have illegal caracter
+                    foreach ($config['hidden_files'] as $hidden_file) {
+                        if (fnmatch($hidden_file, $file, FNM_PATHNAME)) {
+                            continue 2;
+                        }
+                    }
+                    $filename = substr($file, 0, '-' . (strlen($file_array['extension']) + 1));
+                    if (strlen($file_array['extension']) === 0) {
+                        $filename = $file;
+                    }
+                    if (!$ftp) {
+                        $file_path = $config['current_path'] . $rfm_subfolder . $subdir . $file;
+                        //check if file have illegal caracter
 
-                    if ($file != fix_filename($file, $config)) {
-                        $file1 = fix_filename($file, $config);
-                        $file_path1 = ($config['current_path'] . $rfm_subfolder . $subdir . $file1);
-                        if (file_exists($file_path1)) {
-                            $i = 1;
-                            $info = pathinfo($file1);
-                            while (file_exists(
-                                $config['current_path'] . $rfm_subfolder . $subdir . $info['filename'] . ".[" . $i . "]." . $info['extension']
-                            )) {
-                                $i++;
-                            }
-                            $file1 = $info['filename'] . ".[" . $i . "]." . $info['extension'];
+                        if ($file != fix_filename($file, $config)) {
+                            $file1 = fix_filename($file, $config);
                             $file_path1 = ($config['current_path'] . $rfm_subfolder . $subdir . $file1);
+                            if (file_exists($file_path1)) {
+                                $i = 1;
+                                $info = pathinfo($file1);
+                                while (file_exists(
+                                    $config['current_path'] . $rfm_subfolder . $subdir . $info['filename'] . ".[" . $i . "]." . $info['extension']
+                                )) {
+                                    $i++;
+                                }
+                                $file1 = $info['filename'] . ".[" . $i . "]." . $info['extension'];
+                                $file_path1 = ($config['current_path'] . $rfm_subfolder . $subdir . $file1);
+                            }
+
+                            $filename = substr($file1, 0, '-' . (strlen($file_array['extension']) + 1));
+                            if (strlen($file_array['extension']) === 0) {
+                                $filename = $file1;
+                            }
+                            rename_file($file_path, fix_filename($filename, $config), $ftp, $config);
+                            $file = $file1;
+                            $file_array['extension'] = fix_filename($file_array['extension'], $config);
+                            $file_path = $file_path1;
                         }
-
-                        $filename = substr($file1, 0, '-' . (strlen($file_array['extension']) + 1));
-                        if (strlen($file_array['extension']) === 0) {
-                            $filename = $file1;
-                        }
-                        rename_file($file_path, fix_filename($filename, $config), $ftp, $config);
-                        $file = $file1;
-                        $file_array['extension'] = fix_filename($file_array['extension'], $config);
-                        $file_path = $file_path1;
-                    }
-                } else {
-                    $file_path = $config['ftp_base_url'] . $config['upload_dir'] . $rfm_subfolder . $subdir . $file;
-                }
-
-                $is_img = false;
-                $is_video = false;
-                $is_audio = false;
-                $show_original = false;
-                $show_original_mini = false;
-                $mini_src = "";
-                $src_thumb = "";
-                if (in_array($file_array['extension'], $config['ext_img'])) {
-                    $src = $file_path;
-                    $is_img = true;
-
-                    $img_width = $img_height = "";
-                    if ($ftp) {
-                        $mini_src = $src_thumb = $config['ftp_base_url'] . $config['ftp_thumbs_dir'] . $subdir . $file;
-                        $creation_thumb_path = "/" . $config['ftp_base_folder'] . $config['ftp_thumbs_dir'] . $subdir . $file;
                     } else {
-                        $creation_thumb_path = $mini_src = $src_thumb = $thumbs_path . $file;
+                        $file_path = $config['ftp_base_url'] . $config['upload_dir'] . $rfm_subfolder . $subdir . $file;
+                    }
 
-                        if (!file_exists($src_thumb)) {
-                            if (create_img($file_path, $creation_thumb_path, 122, 91, 'crop', $config) !== true) {
-                                $src_thumb = $mini_src = "";
+                    $is_img = false;
+                    $is_video = false;
+                    $is_audio = false;
+                    $show_original = false;
+                    $show_original_mini = false;
+                    $mini_src = "";
+                    $src_thumb = "";
+                    if (in_array($file_array['extension'], $config['ext_img'])) {
+                        $src = $file_path;
+                        $is_img = true;
+
+                        $img_width = $img_height = "";
+                        if ($ftp) {
+                            $mini_src = $src_thumb = $config['ftp_base_url'] . $config['ftp_thumbs_dir'] . $subdir . $file;
+                            $creation_thumb_path = "/" . $config['ftp_base_folder'] . $config['ftp_thumbs_dir'] . $subdir . $file;
+                        } else {
+                            $creation_thumb_path = $mini_src = $src_thumb = $thumbs_path . $file;
+
+                            if (!file_exists($src_thumb)) {
+                                if (create_img($file_path, $creation_thumb_path, 122, 91, 'crop', $config) !== true) {
+                                    $src_thumb = $mini_src = "";
+                                }
+                            }
+                            //check if is smaller than thumb
+                            list($img_width, $img_height, $img_type, $attr) = @getimagesize($file_path);
+                            if ($img_width < 122 && $img_height < 91) {
+                                $src_thumb = $file_path;
+                                $show_original = true;
+                            }
+
+                            if ($img_width < 45 && $img_height < 38) {
+                                $mini_src = $config['current_path'] . $rfm_subfolder . $subdir . $file;
+                                $show_original_mini = true;
                             }
                         }
-                        //check if is smaller than thumb
-                        list($img_width, $img_height, $img_type, $attr) = @getimagesize($file_path);
-                        if ($img_width < 122 && $img_height < 91) {
-                            $src_thumb = $file_path;
-                            $show_original = true;
-                        }
-
-                        if ($img_width < 45 && $img_height < 38) {
-                            $mini_src = $config['current_path'] . $rfm_subfolder . $subdir . $file;
-                            $show_original_mini = true;
-                        }
                     }
-                }
-                $is_icon_thumb = false;
-                $is_icon_thumb_mini = false;
-                $no_thumb = false;
-                if ($src_thumb == "") {
-                    $no_thumb = true;
-                    if (file_exists('img/' . $config['icon_theme'] . '/' . $file_array['extension'] . ".jpg")) {
-                        $src_thumb = 'img/' . $config['icon_theme'] . '/' . $file_array['extension'] . ".jpg";
-                    } else {
-                        $src_thumb = "img/" . $config['icon_theme'] . "/default.jpg";
-                    }
-                    $is_icon_thumb = true;
-                }
-                if ($mini_src == "") {
+                    $is_icon_thumb = false;
                     $is_icon_thumb_mini = false;
-                }
-
-                $class_ext = 0;
-                if (in_array($file_array['extension'], $config['ext_video'])) {
-                    $class_ext = 4;
-                    $is_video = true;
-                } elseif (in_array($file_array['extension'], $config['ext_img'])) {
-                    $class_ext = 2;
-                } elseif (in_array($file_array['extension'], $config['ext_music'])) {
-                    $class_ext = 5;
-                    $is_audio = true;
-                } elseif (in_array($file_array['extension'], $config['ext_misc'])) {
-                    $class_ext = 3;
-                } else {
-                    $class_ext = 1;
-                }
-                if ((!($_GET['type'] == 1 && !$is_img) && !(($_GET['type'] == 3 && !$is_video) && ($_GET['type'] == 3 && !$is_audio))) && $class_ext > 0){
-                ?>
-                <li class="ff-item-type-<?php
-                echo $class_ext; ?> file <?php
-                if (!$config['multiple_selection']) { ?>no-selector<?php
-                } ?>" data-name="<?php
-                echo $file; ?>" <?php
-                if (($filter != '' && stripos($file, $filter) === false)) {
-                    echo ' style="display:none;"';
-                } ?>><?php
-                    $file_prevent_rename = false;
-                    $file_prevent_delete = false;
-                    if (isset($filePermissions[$file])) {
-                        if (isset($filePermissions[$file]['prevent_duplicate']) && $filePermissions[$file]['prevent_duplicate']) {
-                            $files_prevent_duplicate[] = $file;
+                    $no_thumb = false;
+                    if ($src_thumb == "") {
+                        $no_thumb = true;
+                        if (file_exists('img/' . $config['icon_theme'] . '/' . $file_array['extension'] . ".jpg")) {
+                            $src_thumb = 'img/' . $config['icon_theme'] . '/' . $file_array['extension'] . ".jpg";
+                        } else {
+                            $src_thumb = "img/" . $config['icon_theme'] . "/default.jpg";
                         }
-                        $file_prevent_rename = isset($filePermissions[$file]['prevent_rename']) && $filePermissions[$file]['prevent_rename'];
-                        $file_prevent_delete = isset($filePermissions[$file]['prevent_delete']) && $filePermissions[$file]['prevent_delete'];
+                        $is_icon_thumb = true;
                     }
-                    ?>
-                    <figure data-name="<?php
-                    echo $file ?>" data-path="<?php
-                    echo $rfm_subfolder . $subdir . $file; ?>" data-type="<?php
-                    if ($is_img) {
-                        echo "img";
+                    if ($mini_src == "") {
+                        $is_icon_thumb_mini = false;
+                    }
+
+                    $class_ext = 0;
+                    if (in_array($file_array['extension'], $config['ext_video'])) {
+                        $class_ext = 4;
+                        $is_video = true;
+                    } elseif (in_array($file_array['extension'], $config['ext_img'])) {
+                        $class_ext = 2;
+                    } elseif (in_array($file_array['extension'], $config['ext_music'])) {
+                        $class_ext = 5;
+                        $is_audio = true;
+                    } elseif (in_array($file_array['extension'], $config['ext_misc'])) {
+                        $class_ext = 3;
                     } else {
-                        echo "file";
-                    } ?>">
+                        $class_ext = 1;
+                    }
+                    if ((!($_GET['type'] == 1 && !$is_img) && !(($_GET['type'] == 3 && !$is_video) && ($_GET['type'] == 3 && !$is_audio))) && $class_ext > 0) {
+                        ?>
+                <li class="ff-item-type-<?php
+                        echo $class_ext; ?> file <?php
+                        if (!$config['multiple_selection']) { ?>no-selector<?php
+                        } ?>" data-name="<?php
+                        echo $file; ?>" <?php
+                        if (($filter != '' && stripos($file, $filter) === false)) {
+                            echo ' style="display:none;"';
+                        } ?>><?php
+                            $file_prevent_rename = false;
+                        $file_prevent_delete = false;
+                        if (isset($filePermissions[$file])) {
+                            if (isset($filePermissions[$file]['prevent_duplicate']) && $filePermissions[$file]['prevent_duplicate']) {
+                                $files_prevent_duplicate[] = $file;
+                            }
+                            $file_prevent_rename = isset($filePermissions[$file]['prevent_rename']) && $filePermissions[$file]['prevent_rename'];
+                            $file_prevent_delete = isset($filePermissions[$file]['prevent_delete']) && $filePermissions[$file]['prevent_delete'];
+                        }
+                        ?>
+                    <figure data-name="<?php
+                        echo $file ?>" data-path="<?php
+                        echo $rfm_subfolder . $subdir . $file; ?>" data-type="<?php
+                        if ($is_img) {
+                            echo "img";
+                        } else {
+                            echo "file";
+                        } ?>">
                         <?php
-                        if ($config['multiple_selection']) { ?>
+                            if ($config['multiple_selection']) { ?>
                             <div class="selector">
                             <label class="cont">
                                 <input type="checkbox" class="selection" name="selection[]" value="<?php
-                                echo $file; ?>">
+                                    echo $file; ?>">
                                 <span class="checkmark"></span>
                             </label>
                             </div>
                         <?php
-                        } ?>
+                            } ?>
                         <a href="javascript:void('')" class="link" data-file="<?php
-                        echo $file; ?>" data-function="<?php
-                        echo $apply; ?>">
+                            echo $file; ?>" data-function="<?php
+                            echo $apply; ?>">
                             <div class="img-precontainer">
                                 <?php
-                                if ($is_icon_thumb) { ?>
+                                    if ($is_icon_thumb) { ?>
                                     <div class="filetype"><?php
-                                    echo $file_array['extension'] ?></div><?php
-                                } ?>
+                                        echo $file_array['extension'] ?></div><?php
+                                    } ?>
 
                                 <div class="img-container">
                                     <img class="<?php
-                                    echo $show_original ? "original" : "" ?><?php
-                                    echo $is_icon_thumb ? " icon" : "" ?>" data-src="<?php
-                                    echo $src_thumb; ?>">
+                                        echo $show_original ? "original" : "" ?><?php
+                        echo $is_icon_thumb ? " icon" : "" ?>" data-src="<?php
+                        echo $src_thumb; ?>">
                                 </div>
                             </div>
                             <div class="img-precontainer-mini <?php
-                            if ($is_img) echo 'original-thumb' ?>">
+                            if ($is_img) {
+                                echo 'original-thumb';
+                            } ?>">
                                 <?php
                                 if ($config['multiple_selection']) { ?>
                                 <?php
@@ -1631,9 +1633,11 @@ if ($config['upload_files']) { ?>
                                 <div class="filetype <?php
                                 echo $file_array['extension'] ?> <?php
                                 if (in_array(
-                                    $file_array['extension'],
-                                    $config['editable_text_file_exts']
-                                )) echo 'edit-text-file-allowed' ?> <?php
+                                $file_array['extension'],
+                                $config['editable_text_file_exts']
+                            )) {
+                                    echo 'edit-text-file-allowed';
+                                } ?> <?php
                                 if (!$is_icon_thumb) {
                                     echo "hide";
                                 } ?>"><?php
@@ -1691,7 +1695,9 @@ if ($config['upload_files']) { ?>
 
                                 <a title="<?php
                                 echo trans('Download') ?>" class="tip-right" href="javascript:void('')" <?php
-                                if ($config['download_files']) echo "onclick=\"$('#form" . $nu . "').submit();\"" ?>><i
+                                if ($config['download_files']) {
+                                    echo "onclick=\"$('#form" . $nu . "').submit();\"";
+                                } ?>><i
                                             class="icon-download <?php
                                             if (!$config['download_files']) {
                                                 echo 'icon-white';
@@ -1704,20 +1710,20 @@ if ($config['upload_files']) { ?>
                                     echo $src; ?>" href="#"><i class=" icon-eye-open"></i></a>
                                 <?php
                                 } elseif (($is_video || $is_audio) && in_array(
-                                        $file_array['extension'],
-                                        $config['jplayer_exts']
-                                    )) { ?>
+                                                $file_array['extension'],
+                                                $config['jplayer_exts']
+                                            )) { ?>
                                     <a class="tip-right modalAV <?php
-                                    if ($is_audio) {
-                                        echo "audio";
-                                    } else {
-                                        echo "video";
-                                    } ?>"
+                                if ($is_audio) {
+                                    echo "audio";
+                                } else {
+                                    echo "video";
+                                } ?>"
                                        title="<?php
-                                       echo trans('Preview') ?>"
+                                   echo trans('Preview') ?>"
                                        data-url="ajax_calls.php?action=media_preview&title=<?php
-                                       echo $filename; ?>&file=<?php
-                                       echo $rfm_subfolder . $subdir . $file; ?>"
+                                   echo $filename; ?>&file=<?php
+                                   echo $rfm_subfolder . $subdir . $file; ?>"
                                        href="javascript:void('');"><i class=" icon-eye-open"></i></a>
                                 <?php
                                 } elseif (in_array($file_array['extension'], $config['cad_exts'])) { ?>
@@ -1728,25 +1734,25 @@ if ($config['upload_files']) { ?>
                                        href="javascript:void('');"><i class=" icon-eye-open"></i></a>
                                 <?php
                                 } elseif ($config['preview_text_files'] && in_array(
-                                        $file_array['extension'],
-                                        $config['previewable_text_file_exts']
-                                    )) { ?>
+                                    $file_array['extension'],
+                                    $config['previewable_text_file_exts']
+                                )) { ?>
                                     <a class="tip-right file-preview-btn" title="<?php
-                                    echo trans('Preview') ?>"
+                                echo trans('Preview') ?>"
                                        data-url="ajax_calls.php?action=get_file&sub_action=preview&preview_mode=text&title=<?php
-                                       echo $filename; ?>&file=<?php
-                                       echo $rfm_subfolder . $subdir . $file; ?>"
+                                   echo $filename; ?>&file=<?php
+                                   echo $rfm_subfolder . $subdir . $file; ?>"
                                        href="javascript:void('');"><i class=" icon-eye-open"></i></a>
                                 <?php
                                 } elseif ($config['googledoc_enabled'] && in_array(
-                                        $file_array['extension'],
-                                        $config['googledoc_file_exts']
-                                    )) { ?>
+                                    $file_array['extension'],
+                                    $config['googledoc_file_exts']
+                                )) { ?>
                                     <a class="tip-right file-preview-btn" title="<?php
-                                    echo trans('Preview') ?>"
+                                echo trans('Preview') ?>"
                                        data-url="ajax_calls.php?action=get_file&sub_action=preview&preview_mode=google&title=<?php
-                                       echo $filename; ?>&file=<?php
-                                       echo $rfm_subfolder . $subdir . $file; ?>"
+                                   echo $filename; ?>&file=<?php
+                                   echo $rfm_subfolder . $subdir . $file; ?>"
                                        href="docs.google.com;"><i class=" icon-eye-open"></i></a>
                                 <?php
                                 } else { ?>
@@ -1780,13 +1786,13 @@ if ($config['upload_files']) { ?>
                     </figure>
                 </li>
             <?php
-            }
-            }
+                    }
+                }
 
-            ?></div>
+                ?></div>
         </ul>
         <?php
-        } ?>
+            } ?>
     </div>
 </div>
 </div>
@@ -1812,7 +1818,7 @@ if ($config['upload_files']) { ?>
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h3><?php
-            echo trans('Preview'); ?></h3>
+                echo trans('Preview'); ?></h3>
     </div>
     <div class="modal-body">
         <div class="row-fluid body-preview">

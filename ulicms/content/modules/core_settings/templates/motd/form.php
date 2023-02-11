@@ -34,10 +34,10 @@ if ($permissionChecker->hasPermission("motd")) {
             if (!Request::getVar("language")) {
                 echo "selected";
             }
-            ?>>[<?php translate("no_language"); ?>]</option>
+    ?>>[<?php translate("no_language"); ?>]</option>
                     <?php
-                    foreach ($languages as $language) {
-                        ?>
+            foreach ($languages as $language) {
+                ?>
                 <option value="<?php Template::escape($language); ?>"
                 <?php
                 if (Request::getVar("language") == $language) {
@@ -45,7 +45,7 @@ if ($permissionChecker->hasPermission("motd")) {
                 }
                 ?>><?php Template::escape(getLanguageNameByCode($language)); ?></option>
                     <?php }
-                    ?>
+            ?>
         </select>
     </div>
     <?php csrf_token_html(); ?>

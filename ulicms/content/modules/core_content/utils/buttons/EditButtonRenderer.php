@@ -9,14 +9,16 @@ use User;
 use ViewBag;
 use ModuleHelper;
 use App\Security\ContentPermissionChecker;
+
 use function App\HTML\icon;
 use function App\HTML\Link;
 
-class EditButtonRenderer {
+class EditButtonRenderer
+{
+    public const MODULE_NAME = "core_content";
 
-    const MODULE_NAME = "core_content";
-
-    public function render(int $pageId, User $user): string {
+    public function render(int $pageId, User $user): string
+    {
         $permitted = true;
 
         // check edit permissions
@@ -33,9 +35,8 @@ class EditButtonRenderer {
         ViewBag::set("button", $link);
 
         return $permitted ? Template::executeModuleTemplate(
-                        self::MODULE_NAME,
-                        "pages/partials/edit_button.php"
-                ) : "";
+            self::MODULE_NAME,
+            "pages/partials/edit_button.php"
+        ) : "";
     }
-
 }

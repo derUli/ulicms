@@ -7,8 +7,8 @@ date_default_timezone_set("Europe/Berlin");
 
 define("ULICMS_ROOT", dirname(__FILE__));
 
-foreach(glob('../lib/includes/*.php') as $file){
-    if(is_file($file)){
+foreach (glob('../lib/includes/*.php') as $file) {
+    if (is_file($file)) {
         require $file;
     }
 }

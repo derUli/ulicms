@@ -1,6 +1,7 @@
 <?php
 
 use App\Utils\File;
+
 use function App\HTML\imageTag;
 
 $permissionChecker = new ACL();
@@ -37,25 +38,25 @@ if ($permissionChecker->hasPermission("favicon")) {
                     <div id="favicon-wrapper">
                         <?php
                         $favicon_path = ULICMS_ROOT . "/content/images/favicon.ico";
-                        $faviconUrl = "../content/images/favicon.ico";
-                        if (is_file($favicon_path)) {
-                            $faviconUrl .= "?time=" . File::getLastChanged($favicon_path);
-                            echo imageTag(
-                                    $faviconUrl,
-                                    ["alt" => Settings::get("homepage_title")]
-                            );
-                            ?>
+    $faviconUrl = "../content/images/favicon.ico";
+    if (is_file($favicon_path)) {
+        $faviconUrl .= "?time=" . File::getLastChanged($favicon_path);
+        echo imageTag(
+            $faviconUrl,
+            ["alt" => Settings::get("homepage_title")]
+        );
+        ?>
                             <div class="voffset2">
                                 <button
                                     type="button"
                                     class="btn btn-default"
                                     id="delete-favicon"
                                     data-url="<?php
-                                    echo ModuleHelper::buildMethodCallUrl(
-                                            FaviconController::class,
-                                            "deleteFavicon"
-                                    );
-                                    ?>
+                echo ModuleHelper::buildMethodCallUrl(
+            FaviconController::class,
+            "deleteFavicon"
+        );
+        ?>
                                     "
                                     >
                                     <i class="fa fa-trash" aria-hidden="true"></i>
@@ -63,7 +64,7 @@ if ($permissionChecker->hasPermission("favicon")) {
                                 </button>
                             </div>
                         <?php }
-                        ?>
+    ?>
                     </div>
                     <img
                         id="delete-favicon-loading"
@@ -119,10 +120,10 @@ if ($permissionChecker->hasPermission("favicon")) {
     $translation->render();
 
     enqueueScriptFile(
-            ModuleHelper::buildRessourcePath(
-                    "core_settings",
-                    "js/favicon.js"
-            )
+        ModuleHelper::buildRessourcePath(
+            "core_settings",
+            "js/favicon.js"
+        )
     );
     combinedScriptHtml();
 } else {

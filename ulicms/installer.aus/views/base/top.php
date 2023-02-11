@@ -31,7 +31,7 @@
                                    if ($i == InstallerController::getStep()) {
                                        echo "current-item";
                                    }
-                                   ?>">
+                            ?>">
                                     <?php echo constant("TRANSLATION_TITLE_STEP_" . $i); ?></a></li>
                         <?php } ?>
                     </ol>

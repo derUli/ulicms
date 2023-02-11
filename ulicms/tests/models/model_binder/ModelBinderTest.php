@@ -2,9 +2,10 @@
 
 require_once dirname(__FILE__) . "/ModelBinderExample.php";
 
-class ModelBinderTest extends \PHPUnit\Framework\TestCase {
-
-    public function testModelBind() {
+class ModelBinderTest extends \PHPUnit\Framework\TestCase
+{
+    public function testModelBind()
+    {
         $model = new ModelBinderExample();
         $model->fillVars();
         $this->assertEquals(123, $model->getField1());
@@ -20,5 +21,4 @@ class ModelBinderTest extends \PHPUnit\Framework\TestCase {
         $model->fillInvalid2();
         $this->assertNull($model->getNotMapped());
     }
-
 }

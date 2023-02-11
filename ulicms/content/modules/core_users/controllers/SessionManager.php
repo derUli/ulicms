@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 use App\Utils\CacheUtil;
 
-class SessionManager extends Controller {
-
-    public function login(): void {
+class SessionManager extends Controller
+{
+    public function login(): void
+    {
         $user = new User();
         $user->loadByUsername($_POST["user"]);
 
@@ -46,7 +47,8 @@ class SessionManager extends Controller {
         }
     }
 
-    public function logout(): void {
+    public function logout(): void
+    {
         $id = intval($_SESSION["login_id"]);
 
         // set user state to offline
@@ -59,8 +61,8 @@ class SessionManager extends Controller {
         exit();
     }
 
-    public function resetPassword(): void {
-
+    public function resetPassword(): void
+    {
         if (!isset($_REQUEST["token"])) {
             ExceptionResult("A token is required");
         }
@@ -77,5 +79,4 @@ class SessionManager extends Controller {
             TextResult(get_translation("invalid_token"), 404);
         }
     }
-
 }

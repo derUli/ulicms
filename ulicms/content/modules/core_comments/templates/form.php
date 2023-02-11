@@ -37,61 +37,61 @@ if (Vars::get("comments_enabled")) {
     <div class="comments">
         <?php
         echo ModuleHelper::buildMethodCallForm(
-                CommentsController::class,
-                "postComment",
-                [],
-                "post",
-                [
-                    "autocomplete" => "off"
-                ]
-        );
-        ?>
+        CommentsController::class,
+        "postComment",
+        [],
+        "post",
+        [
+                "autocomplete" => "off"
+            ]
+    );
+    ?>
         <?php
-        echo App\HTML\Input::hidden(
-                "content_id",
-                Vars::get("content_id")
-        );
-        ?>
+    echo App\HTML\Input::hidden(
+        "content_id",
+        Vars::get("content_id")
+    );
+    ?>
 
         <div>
             <label for="author_name"><?php translate("your_name") ?>
                 <span class="text-danger">*</span></label>
             <div>
                 <?php
-                echo App\HTML\Input::textBox(
-                        "author_name",
-                        "",
-                        "text",
-                        [
-                            "class" => "form-control",
-                            "required" => "required"
-                        ]
-                );
-                ?>
+            echo App\HTML\Input::textBox(
+        "author_name",
+        "",
+        "text",
+        [
+                    "class" => "form-control",
+                    "required" => "required"
+                ]
+    );
+    ?>
             </div>
         </div>
         <div>
             <label for="author_email"><?php translate("your_email") ?></label>
             <div>
                 <?php
-                echo App\HTML\Input::textBox(
-                        "author_email",
-                        "",
-                        "email",
-                        [
-                            "class" => "form-control"
-                        ]
-                );
-                ?>
+    echo App\HTML\Input::textBox(
+        "author_email",
+        "",
+        "email",
+        [
+            "class" => "form-control"
+        ]
+    );
+    ?>
             </div>
         </div>
         <label for="author_url"><?php translate("your_website") ?></label>
         <div>
             <?php
             echo App\HTML\Input::textBox("author_url", "", "url", array(
-                "class" => "form-control"
+    "class" => "form-control"
             ));
-            ?>
+    ?>
         </div>
         <div>
             <div class="comment-text">
@@ -99,28 +99,28 @@ if (Vars::get("comments_enabled")) {
                     <label for="text"><?php translate("text") ?>
                         <span class="text-danger">*</span></label>
                     <?php
-                    echo App\HTML\Input::textArea("text", "", 10, 80, array(
-                        "required" => "required",
-                        "class" => "form-control"
-                    ))
-                    ?>
+            echo App\HTML\Input::textArea("text", "", 10, 80, array(
+                "required" => "required",
+                "class" => "form-control"
+            ))
+    ?>
                 </p>
             </div>
         </div>
         <?php
         $checkbox = new PrivacyCheckbox(getCurrentLanguage(true));
-        if ($checkbox->isEnabled()) {
-            echo $checkbox->render();
-        }
-        ?>
+    if ($checkbox->isEnabled()) {
+        echo $checkbox->render();
+    }
+    ?>
         <input type="url" name="my_homepage_url" class="antispam_honeypot"
                value="" autocomplete="nope">
         <p>
             <button type="submit" class="btn btn-primary"><?php
-                translate(
-                        "post_comment"
-                )
-                ?></button>
+            translate(
+        "post_comment"
+    )
+    ?></button>
         </p>
     </div>
     <?php

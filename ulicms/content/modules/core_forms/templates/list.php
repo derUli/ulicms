@@ -51,8 +51,8 @@ if (!$permissionChecker->hasPermission("forms")) {
 
                         <?php
                         if ($permissionChecker->hasPermission(
-                                        "forms_edit"
-                                )
+                        "forms_edit"
+                    )
                         ) {
                             ?>
                             <td class="text-center">
@@ -65,13 +65,13 @@ if (!$permissionChecker->hasPermission("forms")) {
                             <td class="text-center">
                                 <?php
                                 echo ModuleHelper::deleteButton(
-                                        ModuleHelper::buildMethodCallUrl(
-                                                "FormController",
-                                                "delete"
-                                        ),
-                                        ["del" => $form ["id"]]
-                                );
-                                ?>
+                                ModuleHelper::buildMethodCallUrl(
+                                        "FormController",
+                                        "delete"
+                                    ),
+                                ["del" => $form ["id"]]
+                            );
+                            ?>
                             </td>
                         <?php }
                         ?>

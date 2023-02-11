@@ -34,12 +34,12 @@ $notSelectedButton = "btn btn-default"
                class="<?php
                echo $action == $currentAction ?
                        $selectedButton : $notSelectedButton;
-               ?> is-not-ajax">
+             ?> is-not-ajax">
                 <i class="<?php echo $cssClass ?>"></i>
                 <?php
-                (isset($specialLabels[$action]) ?
-                                esc($specialLabels[$action]) : translate($action));
-                ?>
+              (isset($specialLabels[$action]) ?
+                              esc($specialLabels[$action]) : translate($action));
+             ?>
             </a>
         </div>
 

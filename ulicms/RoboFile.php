@@ -5,7 +5,7 @@ declare(strict_types=1);
 use App\Packages\PatchManager;
 use App\Services\Connectors\AvailablePackageVersionMatcher;
 use App\Utils\CacheUtil;
-use \Robo\Tasks;
+use Robo\Tasks;
 use App\Exceptions\SqlException;
 
 /**
@@ -13,13 +13,15 @@ use App\Exceptions\SqlException;
  *
  * @see http://robo.li/
  */
-class RoboFile extends Tasks {
-
-    public function __construct() {
+class RoboFile extends Tasks
+{
+    public function __construct()
+    {
         $this->initUliCMS();
     }
 
-    protected function initUliCMS() {
+    protected function initUliCMS()
+    {
         try {
             $this->initCore();
         } catch (SqlException $e) {
@@ -27,11 +29,13 @@ class RoboFile extends Tasks {
         }
     }
 
-    protected function showException(Exception $e) {
+    protected function showException(Exception $e)
+    {
         $this->writeln($e->getMessage());
     }
 
-    protected function initCore() {
+    protected function initCore()
+    {
         if (!defined('ULICMS_ROOT')) {
             require dirname(__FILE__) . "/init.php";
             require_once getLanguageFilePath("en");
@@ -41,35 +45,40 @@ class RoboFile extends Tasks {
     /**
      * shows the UliCMS release version
      */
-    public function version(): void {
+    public function version(): void
+    {
         $this->writeln(cms_version());
     }
 
     /**
      * truncates the history database table
      */
-    public function truncateHistory(): void {
+    public function truncateHistory(): void
+    {
         Database::truncateTable("history");
     }
 
     /**
      * truncates the mails database table
      */
-    public function truncateMails(): void {
+    public function truncateMails(): void
+    {
         Database::truncateTable("mails");
     }
 
     /**
      * truncates the mails database table
      */
-    public function cacheClear(): void {
+    public function cacheClear(): void
+    {
         CacheUtil::clearCache();
     }
 
     /**
      * List all settings
      */
-    public function settingsList(): void {
+    public function settingsList(): void
+    {
         // show all settings
         $settings = Settings::getAll();
         foreach ($settings as $setting) {
@@ -84,7 +93,8 @@ class RoboFile extends Tasks {
      * shows the value of a setting
      * @param string $settingsName settings identifier name
      */
-    public function settingsGet($settingsName): void {
+    public function settingsGet($settingsName): void
+    {
         $value = Settings::get($settingsName) !== null ?
                 Settings::get($settingsName) : "[NULL]";
         $this->writeln($value);
@@ -95,7 +105,8 @@ class RoboFile extends Tasks {
      * @param string $settingsName settings identifier name
      * @param string $value value to set
      */
-    public function settingsSet($settingsName, $value): void {
+    public function settingsSet($settingsName, $value): void
+    {
         if (strtoupper($value) !== "[NULL]") {
             Settings::set($settingsName, $value);
         } else {
@@ -106,21 +117,24 @@ class RoboFile extends Tasks {
     /**
      * Enables the maintenance mode
      */
-    public function maintenanceOn() {
+    public function maintenanceOn()
+    {
         Settings::set("maintenance_mode", "1");
     }
 
     /**
      * Disables the maintenance mode
      */
-    public function maintenanceOff() {
+    public function maintenanceOff()
+    {
         Settings::set("maintenance_mode", "0");
     }
 
     /**
      * Shows the status of maintenance mode
      */
-    public function maintenanceStatus() {
+    public function maintenanceStatus()
+    {
         $this->writeln(strbool(isMaintenanceMode()));
     }
 
@@ -128,7 +142,8 @@ class RoboFile extends Tasks {
      * examines a *.sin SimpleInstall v2 package file
      * @param string $file path to *.sin package file
      */
-    public function packageExamine(string $file) {
+    public function packageExamine(string $file)
+    {
         if (!is_file($file)) {
             $this->writeln("File " . basename($file) . " not found!");
             return;
@@ -139,7 +154,8 @@ class RoboFile extends Tasks {
         $this->showPageKeys($json);
     }
 
-    private function showPageKeys($json) {
+    private function showPageKeys($json)
+    {
         $skipAttributes = array(
             "data",
             "screenshot"
@@ -161,7 +177,8 @@ class RoboFile extends Tasks {
     /**
      * list all installed packages
      */
-    public function packagesList() {
+    public function packagesList()
+    {
         $this->writeln("Modules:");
         $this->modulesList([]);
         $this->writeln("");
@@ -173,7 +190,8 @@ class RoboFile extends Tasks {
      * installs a SimpleInstall v1 or SimpleInstall v2 package
      * @param string $file path to *.sin or *.tar.gz package file
      */
-    public function packageInstall($file): void {
+    public function packageInstall($file): void
+    {
         if (!is_file($file)) {
             $this->writeln("Can't open $file. File doesn't exists.");
             return;
@@ -207,7 +225,8 @@ class RoboFile extends Tasks {
      * List all installed modules and their version numbers
      * @param string $modules one or more modules
      */
-    public function modulesList(array $modules) {
+    public function modulesList(array $modules)
+    {
         $modules = count($modules) ?
                 $this->replaceModulePlaceholders($modules) : getAllModules();
         if (count($modules) > 0) {
@@ -218,7 +237,8 @@ class RoboFile extends Tasks {
         }
     }
 
-    private function getModuleInfo(string $name): string {
+    private function getModuleInfo(string $name): string
+    {
         $version = getModuleMeta($name, "version");
         $line = $name;
 
@@ -235,7 +255,8 @@ class RoboFile extends Tasks {
      * toggles one or more modules
      * @param array $modules one or more modules
      */
-    public function modulesToggle(array $modules) {
+    public function modulesToggle(array $modules)
+    {
         $modules = $this->replaceModulePlaceholders($modules);
 
         foreach ($modules as $name) {
@@ -246,7 +267,8 @@ class RoboFile extends Tasks {
         }
     }
 
-    private function replaceModulePlaceholders(array $modules): array {
+    private function replaceModulePlaceholders(array $modules): array
+    {
         $manager = new ModuleManager();
         $manager->sync();
         $outModules = [];
@@ -254,20 +276,20 @@ class RoboFile extends Tasks {
         foreach ($modules as $name) {
             if (strtolower($name) == "[all]") {
                 $outModules = array_merge(
-                        $outModules,
-                        $manager->getAllModuleNames()
+                    $outModules,
+                    $manager->getAllModuleNames()
                 );
             } elseif (strtolower($name) == "[core]") {
                 $outModules = array_merge(
-                        $outModules,
-                        $manager->getAllModuleNames("core")
+                    $outModules,
+                    $manager->getAllModuleNames("core")
                 );
             } elseif (strtolower($name) == "[extend]") {
                 $outModules = array_merge($outModules, $manager->getAllModuleNames("extend"));
             } elseif (strtolower($name) == "[pkgsrc]") {
                 $outModules = array_merge(
-                        $outModules,
-                        $manager->getAllModuleNames("pkgsrc")
+                    $outModules,
+                    $manager->getAllModuleNames("pkgsrc")
                 );
             } else {
                 $outModules[] = $name;
@@ -280,7 +302,8 @@ class RoboFile extends Tasks {
      * enables one or more modules
      * @param array $modules one or more modules
      */
-    public function modulesEnable(array $modules) {
+    public function modulesEnable(array $modules)
+    {
         $modules = $this->replaceModulePlaceholders($modules);
 
         foreach ($modules as $name) {
@@ -295,7 +318,8 @@ class RoboFile extends Tasks {
      * disables one or more modules
      * @param array $modules one or more modules
      */
-    public function modulesDisable(array $modules) {
+    public function modulesDisable(array $modules)
+    {
         $modules = $this->replaceModulePlaceholders($modules);
 
         $manager = new ModuleManager();
@@ -311,7 +335,8 @@ class RoboFile extends Tasks {
      * Uninstalls one or more modules
      * @param array $modules one or more modules
      */
-    public function modulesRemove(array $modules) {
+    public function modulesRemove(array $modules)
+    {
         foreach ($modules as $module) {
             if (uninstall_module($module, "module")) {
                 $this->writeln("Package $module removed.");
@@ -325,7 +350,8 @@ class RoboFile extends Tasks {
      * get available versions of a module from eXtend
      * @param array $modules one or more modules
      */
-    public function modulesGetPackageVersions(array $modules) {
+    public function modulesGetPackageVersions(array $modules)
+    {
         $modules = $this->replaceModulePlaceholders($modules);
 
         foreach ($modules as $module) {
@@ -335,7 +361,7 @@ class RoboFile extends Tasks {
             $releases = $data["data"];
             $checker = new AvailablePackageVersionMatcher($releases);
             $this->writeln(
-                    var_dump_str($checker->getCompatibleVersions())
+                var_dump_str($checker->getCompatibleVersions())
             );
         }
     }
@@ -343,7 +369,8 @@ class RoboFile extends Tasks {
     /**
      * List all installed themes and their version numbers
      */
-    public function themesList() {
+    public function themesList()
+    {
         $theme = getAllThemes();
         if (count($theme) > 0) {
             $themesCount = count($theme);
@@ -362,7 +389,8 @@ class RoboFile extends Tasks {
      * Uninstalls one or more themes
      * @param array $themes one or more themes
      */
-    public function themesRemove(array $themes) {
+    public function themesRemove(array $themes)
+    {
         foreach ($themes as $theme) {
             if (uninstall_module($theme, "theme")) {
                 $this->writeln("Package $theme removed.");
@@ -379,9 +407,9 @@ class RoboFile extends Tasks {
      * @param string $stop path to migrations directory
      */
     public function dbmigratorUp(
-            string $component,
-            string $directory,
-            ?string $stop = null
+        string $component,
+        string $directory,
+        ?string $stop = null
     ): void {
         $folder = Path::resolve($directory . "/up");
 
@@ -403,9 +431,9 @@ class RoboFile extends Tasks {
      * @param string $stop path to migrations directory
      */
     public function dbmigratorDown(
-            string $component,
-            string $directory,
-            ?string $stop = null
+        string $component,
+        string $directory,
+        ?string $stop = null
     ): void {
         $folder = Path::resolve($directory . "/down");
 
@@ -424,7 +452,8 @@ class RoboFile extends Tasks {
      * reset dbtrack table
      * @param string $component name of the component
      */
-    public function dbmigratorReset(?string $component = null): void {
+    public function dbmigratorReset(?string $component = null): void
+    {
         Database::setEchoQueries(true);
 
         $migrator = new DBMigrator($component ? $component : "[all]", getcwd());
@@ -441,7 +470,8 @@ class RoboFile extends Tasks {
      * list all applied sql migrations
      * @param string $component name of the component
      */
-    public function dbmigratorList(?string $component = null): void {
+    public function dbmigratorList(?string $component = null): void
+    {
         $where = $component ? "component='" .
                 Database::escapeValue($component) . "'" : "1=1";
         $result = Database::query("Select * from {prefix}dbtrack "
@@ -454,7 +484,8 @@ class RoboFile extends Tasks {
     /**
      * get a list of all available patches
      */
-    public function patchesAvailable() {
+    public function patchesAvailable()
+    {
         $available = $this->patchckAvailable();
         if (!$available) {
             $this->writeln("No patches available");
@@ -462,7 +493,8 @@ class RoboFile extends Tasks {
         $this->writeln(trim($available));
     }
 
-    private function patchckAvailable() {
+    private function patchckAvailable()
+    {
         $patchManager = new PatchManager();
         return $patchManager->fetchPackageIndex();
     }
@@ -470,7 +502,8 @@ class RoboFile extends Tasks {
     /**
      * Truncate list of installed patches in database
      */
-    public function patchesTruncate(): void {
+    public function patchesTruncate(): void
+    {
         $patchManager = new PatchManager();
         $patchManager->truncateInstalledPatches();
     }
@@ -478,7 +511,8 @@ class RoboFile extends Tasks {
     /**
      * Sync installed modules with database
      */
-    public function modulesSync(): void {
+    public function modulesSync(): void
+    {
         $modules = new ModuleManager();
         $modules->sync();
     }
@@ -486,7 +520,8 @@ class RoboFile extends Tasks {
     /**
      * List installed patches
      */
-    public function patchesInstalled() {
+    public function patchesInstalled()
+    {
         $patchManager = new PatchManager();
         $installedPatches = $patchManager->getInstalledPatchNames();
         if (count($installedPatches) == 0) {
@@ -502,7 +537,8 @@ class RoboFile extends Tasks {
      * install patches
      * @param array $patchesToInstall name of the patches to install or "all"
      */
-    public function patchesInstall(array $patchesToInstall): void {
+    public function patchesInstall(array $patchesToInstall): void
+    {
         $patchManager = new PatchManager();
         $available = $this->patchckAvailable();
         if (!$available) {
@@ -534,7 +570,8 @@ class RoboFile extends Tasks {
      * Run PHPUnit Tests
      * @param string $testFile test file to run
      */
-    public function testsRun(string $testFile = "") {
+    public function testsRun(string $testFile = "")
+    {
         $command = "vendor/bin/phpunit";
         if (DIRECTORY_SEPARATOR === "\\") {
             $command = str_replace("/", "\\", $command);
@@ -547,7 +584,8 @@ class RoboFile extends Tasks {
      * Run PHPUnit Tests and update snapshots
      * @param string $testFile test file to run
      */
-    public function testsUpdateSnapshots(string $testFile = "") {
+    public function testsUpdateSnapshots(string $testFile = "")
+    {
         $command = "vendor/bin/phpunit -d --update-snapshots";
         if (DIRECTORY_SEPARATOR === "\\") {
             $command = str_replace("/", "\\", $command);
@@ -559,7 +597,8 @@ class RoboFile extends Tasks {
     /**
      * Creates the application's database
      */
-    public function dbCreate() {
+    public function dbCreate()
+    {
         Database::setEchoQueries(true);
         $cfg = new CMSConfig();
         Database::createSchema($cfg->db_database);
@@ -569,7 +608,8 @@ class RoboFile extends Tasks {
     /**
      * Drop and recreate the application's database
      */
-    public function dbMigrate() {
+    public function dbMigrate()
+    {
         Database::setEchoQueries(true);
 
         $cfg = new CMSConfig();
@@ -577,15 +617,16 @@ class RoboFile extends Tasks {
                 $cfg->dbmigrator_initial_sql_files : [];
 
         Database::setupSchemaAndSelect(
-                $cfg->db_database,
-                $additionalSql
+            $cfg->db_database,
+            $additionalSql
         );
     }
 
     /**
      * Drops the application's database
      */
-    public function dbDrop() {
+    public function dbDrop()
+    {
         $cfg = new CMSConfig();
         Database::setEchoQueries(true);
         if (Database::isConnected()) {
@@ -596,12 +637,12 @@ class RoboFile extends Tasks {
     /**
      * Creates and migrates the application's database
      */
-    public function dbReset() {
+    public function dbReset()
+    {
         Database::setEchoQueries(true);
 
         $this->dbDrop();
 
         $this->dbMigrate();
     }
-
 }

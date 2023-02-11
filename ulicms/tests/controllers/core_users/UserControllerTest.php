@@ -1,8 +1,9 @@
 <?php
 
-class UserControllerTest extends \PHPUnit\Framework\TestCase {
-
-    protected function setUp(): void {
+class UserControllerTest extends \PHPUnit\Framework\TestCase
+{
+    protected function setUp(): void
+    {
         $manager = new UserManager();
         $user = $manager->getAllUsers("admin desc")[0];
 
@@ -15,7 +16,8 @@ class UserControllerTest extends \PHPUnit\Framework\TestCase {
         $_SERVER['REQUEST_URI'] = "/foobar/foo.html";
     }
 
-    protected function tearDown(): void {
+    protected function tearDown(): void
+    {
         Database::deleteFrom("users", "username like 'testuser-%'");
 
         $_SESSION = [];
@@ -23,7 +25,8 @@ class UserControllerTest extends \PHPUnit\Framework\TestCase {
         $_SERVER = [];
     }
 
-    public function getPostVars(): array {
+    public function getPostVars(): array
+    {
         $groups = Group::getAll();
         $groupIds = array_map(function ($value) {
             return $value->getId();
@@ -42,7 +45,8 @@ class UserControllerTest extends \PHPUnit\Framework\TestCase {
         ];
     }
 
-    public function testCreate() {
+    public function testCreate()
+    {
         $groups = Group::getAll();
         $groupIds = array_map(function ($value) {
             return $value->getId();
@@ -68,7 +72,8 @@ class UserControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertCount(count($groupIds), $user->getSecondaryGroups());
     }
 
-    public function testCreateWithMail() {
+    public function testCreateWithMail()
+    {
         $groups = Group::getAll();
         $groupIds = array_map(function ($value) {
             return $value->getId();
@@ -95,7 +100,8 @@ class UserControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertCount(count($groupIds), $user->getSecondaryGroups());
     }
 
-    public function testDeleteUserReturnsTrue() {
+    public function testDeleteUserReturnsTrue()
+    {
         $controller = new UserController();
         $testUser = $this->getTestUser();
         $success = $controller->_deletePost($testUser->getId());
@@ -106,13 +112,15 @@ class UserControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($testUser->isPersistent());
     }
 
-    public function testDeleteUserReturnsFalse() {
+    public function testDeleteUserReturnsFalse()
+    {
         $controller = new UserController();
         $success = $controller->_deletePost(PHP_INT_MAX);
         $this->assertFalse($success);
     }
 
-    protected function getTestUser(): User {
+    protected function getTestUser(): User
+    {
         $user = new User();
         $user->setUsername("testuser-ist-admin");
         $user->setLastname("Admin");
@@ -123,5 +131,4 @@ class UserControllerTest extends \PHPUnit\Framework\TestCase {
 
         return $user;
     }
-
 }

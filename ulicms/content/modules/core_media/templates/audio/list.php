@@ -41,7 +41,7 @@ if ($permissionChecker->hasPermission("audio")) {
                class="btn btn-default"><i class="fa fa-upload"></i>
                    <?php
                    translate("upload_audio");
-                   ?></a>
+        ?></a>
         </div>
     <?php } ?>
     <div class="scroll voffset2">
@@ -58,14 +58,14 @@ if ($permissionChecker->hasPermission("audio")) {
                     </th>
 
                     <?php
-                    if ($permissionChecker->hasPermission(
-                                    "audio_edit"
-                            )) {
-                        ?>
+         if ($permissionChecker->hasPermission(
+            "audio_edit"
+        )) {
+             ?>
                         <td class="no-sort"></td>
                         <td class="no-sort"></td>
                     <?php }
-                    ?>
+         ?>
                 </tr>
 
             </thead>
@@ -84,8 +84,8 @@ if ($permissionChecker->hasPermission("audio")) {
                         </td>
                         <?php
                         if ($permissionChecker->hasPermission(
-                                        "audio_edit"
-                                )
+                        "audio_edit"
+                    )
                         ) {
                             ?>
                             <td>
@@ -119,11 +119,11 @@ if ($permissionChecker->hasPermission("audio")) {
     </div>
     <?php
     enqueueScriptFile(
-            ModuleHelper::buildModuleRessourcePath(
-                    "core_media",
-                    "js/audio.js"
-            )
-    );
+                    ModuleHelper::buildModuleRessourcePath(
+            "core_media",
+            "js/audio.js"
+        )
+                );
     combinedScriptHtml();
     ?>
     <?php

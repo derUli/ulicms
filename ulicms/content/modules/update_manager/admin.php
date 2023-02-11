@@ -2,7 +2,8 @@
 define("MODULE_ADMIN_HEADLINE", get_translation("update_manager"));
 define("MODULE_ADMIN_REQUIRED_PERMISSION", "install_packages");
 
-function update_manager_admin() {
+function update_manager_admin()
+{
     $updates = UpdateManager::getAllUpdateablePackages();
     $i = 0;
     ?>
@@ -19,7 +20,7 @@ function update_manager_admin() {
                         "%count%" => count($updates)
                     ));
                 }
-                ?></p>
+            ?></p>
             <p>
                 <input id="checkall" type="checkbox" class="checkall" checked> <label
                     for="checkall"><?php translate("select_all"); ?> </label>
@@ -49,9 +50,9 @@ function update_manager_admin() {
     <?php
     enqueueScriptFile(
             ModuleHelper::buildRessourcePath(
-                    "update_manager",
-                    "scripts/update_manager.js"
-            )
-    );
+            "update_manager",
+            "scripts/update_manager.js"
+        )
+        );
     combinedScriptHtml();
 }

@@ -4,6 +4,7 @@
 // This should be rewritten with MVC pattern and using partial views
 use App\Security\PermissionChecker;
 use App\HTML\Alert;
+
 use function App\HTML\icon;
 
 $controller = ControllerRegistry::get(PageController::class);
@@ -18,14 +19,14 @@ if ($permissionChecker->hasPermission("pages")) {
     <h2><?php translate("pages"); ?></h2>
     <?php
     echo Alert::info(
-            get_translation("pages_infotext")
+        get_translation("pages_infotext")
     );
     ?>
 
     <?php
     echo Template::executeModuleTemplate(
-            "core_content",
-            "pages/partials/filters/filters.php"
+        "core_content",
+        "pages/partials/filters/filters.php"
     );
     ?>
     <div id="page-list">
@@ -46,10 +47,10 @@ if ($permissionChecker->hasPermission("pages")) {
                 <div class="col-xs-6">
                     <a href="<?php
                     echo ModuleHelper::buildMethodCallUrl(
-                            PageController::class,
-                            "emptyTrash"
-                    );
-                    ?>"
+                PageController::class,
+                "emptyTrash"
+            );
+            ?>"
                        id="empty-trash"
                        class="btn btn-primary"><i
                             class="fas fa-broom"></i> <?php translate("empty_recycle_bin"); ?></a>
@@ -68,10 +69,10 @@ if ($permissionChecker->hasPermission("pages")) {
             style="display: none"
             data-url="<?php
             echo ModuleHelper::buildMethodCallUrl(
-                    PageController::class,
-                    "getParentPageId"
-            );
-            ?>">
+            PageController::class,
+            "getParentPageId"
+        );
+    ?>">
                 <?php echo icon("fas fa-arrow-up"); ?>
                 <?php translate("go_up"); ?>
         </a>
@@ -96,10 +97,10 @@ if ($permissionChecker->hasPermission("pages")) {
                         <td class="no-sort text-center"><?php translate("edit"); ?>
                         </td>
                         <td class="no-sort text-center"><?php
-                            translate(
-                                    $controller->_getPagesListView() === "default" ? "delete" : "restore"
-                            );
-                            ?>
+                    translate(
+        $controller->_getPagesListView() === "default" ? "delete" : "restore"
+    );
+    ?>
                         </td>
                     </tr>
                 </thead>
@@ -111,10 +112,10 @@ if ($permissionChecker->hasPermission("pages")) {
 
     <?php
     enqueueScriptFile(
-            ModuleHelper::buildRessourcePath(
-                    "core_content",
-                    "js/pages/list.js"
-            )
+        ModuleHelper::buildRessourcePath(
+            "core_content",
+            "js/pages/list.js"
+        )
     );
     combinedScriptHtml();
     $translation = new JSTranslation();

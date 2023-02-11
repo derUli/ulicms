@@ -22,19 +22,19 @@ $notSelectedButton = "btn btn-default"
                class="<?php
                echo $action == $currentAction ?
                        $selectedButton : $notSelectedButton;
-               ?> is-ajax">
+        ?> is-ajax">
                 <i class="<?php echo $cssClass ?>"></i>
                 <span class="hide-on-820">
                     <?php
-                    (
-                            isset($specialLabels[$action]) ?
-                                    esc(
-                                            $specialLabels[$action]
-                                    ) : translate(
-                                            $action
-                                    )
-                            );
-                    ?></span>
+             (
+            isset($specialLabels[$action]) ?
+                         esc(
+                             $specialLabels[$action]
+                         ) : translate(
+                             $action
+                         )
+        );
+        ?></span>
             </a>
         </div>
     <?php } ?>

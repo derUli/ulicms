@@ -17,7 +17,7 @@ if ($permissionChecker->hasPermission("open_graph")) {
     <h1><?php translate("open_graph"); ?></h1>
     <?php
     echo Alert::info(
-            get_translation("og_defaults_help")
+        get_translation("og_defaults_help")
     );
     ?>
     <?php

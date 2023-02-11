@@ -27,14 +27,14 @@ if (!$permissionChecker->hasPermission("categories")) {
         ?>
         <?php
         echo Template::executeModuleTemplate(
-                "core_content",
-                "icons.php"
+            "core_content",
+            "icons.php"
         );
         ?>
         <h2><?php translate("categories"); ?></h2>
         <?php
         echo Alert::info(
-                get_translation("categories_infotext")
+            get_translation("categories_infotext")
         );
         ?>
         <div class="field">
@@ -84,8 +84,8 @@ if (!$permissionChecker->hasPermission("categories")) {
                             </td>
                             <?php
                             if ($permissionChecker->hasPermission(
-                                            "categories_edit"
-                                    )) {
+                            "categories_edit"
+                        )) {
                                 ?>
                                 <td class="text-center"><a
                                         href="?action=categories&edit=<?php echo $category->getID(); ?>"
@@ -115,9 +115,9 @@ if (!$permissionChecker->hasPermission("categories")) {
                                         <a href="#"
                                            onclick="alert('<?php
                                            translate(
-                                                   "CANT_DELETE_CATEGORY_GENERAL"
-                                           );
-                                           ?>')"><img
+                                        "CANT_DELETE_CATEGORY_GENERAL"
+                                    );
+                                    ?>')"><img
                                                 class="mobile-big-image" src="gfx/delete.png"
                                                 alt="<?php translate("delete"); ?>"
                                                 title="<?php translate("delete"); ?>"> </a>
@@ -149,8 +149,8 @@ if (!$permissionChecker->hasPermission("categories")) {
             <h2><?php translate("create_category"); ?></h2>
             <?php
             echo ModuleHelper::buildMethodCallForm(
-                    "CategoryController",
-                    "create"
+                "CategoryController",
+                "create"
             );
             ?>
             <div class="field">
@@ -195,8 +195,8 @@ if (!$permissionChecker->hasPermission("categories")) {
             <h2><?php translate("edit_category"); ?></h2>
             <?php
             echo ModuleHelper::buildMethodCallForm(
-                    "CategoryController",
-                    "update"
+                "CategoryController",
+                "update"
             );
             ?>
             <input type="hidden" name="id"
@@ -219,11 +219,11 @@ if (!$permissionChecker->hasPermission("categories")) {
                     class="form-control"
                     maxlength="255"><?php
                         esc(
-                                Categories::getCategoryDescriptionById(
-                                        intval($_GET["edit"])
-                                )
-                        );
-                        ?></textarea>
+                Categories::getCategoryDescriptionById(
+                                intval($_GET["edit"])
+                            )
+            );
+            ?></textarea>
             </div>
             <div class="voffset2">
                 <button type="submit" name="update" class="btn btn-primary">

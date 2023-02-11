@@ -13,7 +13,7 @@ if (!$admin_logo) {
             <?php echo $version->getBuildDate() ?></small>
         <?php
     }
-    ?>
+?>
 </p>
 <p>
     <a href="http://www.ulicms.de" target="_blank">UliCMS</a> &copy; 2011 -
@@ -21,8 +21,8 @@ if (!$admin_logo) {
         href="http://www.ckeditor.com" target="_blank">CKEditor</a> &copy;
     2003 - 2020 by CKSource<br />
     <?php
-    // FIXME: Replace with Responsive File Manager copyright
-    ?>
+// FIXME: Replace with Responsive File Manager copyright
+?>
     Copyright 2005, 2014 jQuery Foundation, Inc. and other contributors
     <br />
     <a href="http://codemirror.net/" target="_blank">CodeMirror</a>

@@ -44,9 +44,9 @@ if ($permissionChecker->hasPermission("audio")
                 <input name="ogg_file" type="text"
                        value="<?php
                        echo _esc(
-                               $dataset->ogg_file
-                       );
-                       ?>">
+            $dataset->ogg_file
+        );
+        ?>">
             </div>
             <div class="field">
                 <strong class="field-label">
@@ -54,10 +54,10 @@ if ($permissionChecker->hasPermission("audio")
                 </strong>
                 <input name="mp3_file" type="text" readonly
                        value="<?php
-                       echo _esc(
-                               $dataset->mp3_file
-                       );
-                       ?>">
+        echo _esc(
+            $dataset->mp3_file
+        );
+        ?>">
             </div>
             <div class="field">
                 <strong class="field-label">

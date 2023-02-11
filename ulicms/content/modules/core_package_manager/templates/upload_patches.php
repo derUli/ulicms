@@ -11,10 +11,10 @@ if (!$permissionChecker->hasPermission("upload_patches")) {
             and str_ends_with($_FILES ['file'] ['name'], ".zip")) {
         $patchManager = new PatchManager();
         if ($patchManager->installPatch(
-                        $_POST ["name"],
-                        $_POST ["description"],
-                        $_FILES ['file']['tmp_name']
-                )
+            $_POST ["name"],
+            $_POST ["description"],
+            $_FILES ['file']['tmp_name']
+        )
         ) {
             $redirect = true;
         }

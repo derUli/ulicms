@@ -40,8 +40,8 @@ if ($permissionChecker->hasPermission("update_system")) {
                 </p>
                 <?php
             }
-        }
-        ?>
+    }
+    ?>
         <button type="submit" class="btn btn-warning"><i class="fas fa-sync"></i> <?php translate("install_selected_patches"); ?></button>
         <button type="button"
                 onclick="window.open('?action=help&help=patch_install');"

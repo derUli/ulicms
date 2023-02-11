@@ -2,9 +2,10 @@
 
 use App\Helpers\ArrayHelper;
 
-class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
-
-    public function testInsertBeforeReturnsArray() {
+class ArrayHelperTest extends \PHPUnit\Framework\TestCase
+{
+    public function testInsertBeforeReturnsArray()
+    {
         $input = array(
             "apple",
             "tomato",
@@ -29,7 +30,8 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
                 ), ArrayHelper::insertBefore($input, 0, "pineapple"));
     }
 
-    public function testInsertBeforeReturnsThrowsException() {
+    public function testInsertBeforeReturnsThrowsException()
+    {
         $input = array(
             "apple",
             "tomato",
@@ -43,7 +45,8 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
         ArrayHelper::insertBefore($input, PHP_INT_MAX, 'gibts_nicht');
     }
 
-    public function testInsertAfterReturnsArray() {
+    public function testInsertAfterReturnsArray()
+    {
         $input = array(
             "apple",
             "tomato",
@@ -68,7 +71,8 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
                 ), ArrayHelper::insertAfter($input, 3, "pineapple"));
     }
 
-    public function testInsertAfterReturnsThrowsException() {
+    public function testInsertAfterReturnsThrowsException()
+    {
         $input = array(
             "apple",
             "tomato",
@@ -82,7 +86,8 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
         ArrayHelper::insertAfter($input, PHP_INT_MAX, 'gibts_nicht');
     }
 
-    private function getNestesdArray() {
+    private function getNestesdArray()
+    {
         return [
             "foo",
             "bar",
@@ -98,7 +103,8 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
         ];
     }
 
-    public function testFlattenWithNestedArray() {
+    public function testFlattenWithNestedArray()
+    {
         $input = $this->getNestesdArray();
         $expected = [
             "foo",
@@ -113,22 +119,25 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals($expected, ArrayHelper::flatten($input));
     }
 
-    public function testFlattenWithFlattenArray() {
+    public function testFlattenWithFlattenArray()
+    {
         $input = ["dog", "cat", "pig", "horse"];
         $this->assertEquals(
-                $input,
-                ArrayHelper::flatten($input)
+            $input,
+            ArrayHelper::flatten($input)
         );
     }
 
-    public function testFlattenWithString() {
+    public function testFlattenWithString()
+    {
         $this->assertEquals(
-                ["ulicms"],
-                ArrayHelper::flatten("ulicms")
+            ["ulicms"],
+            ArrayHelper::flatten("ulicms")
         );
     }
 
-    private function getArrayTestData(): array {
+    private function getArrayTestData(): array
+    {
         return [
             "foo" => "bar",
             "hello" => "world",
@@ -137,40 +146,41 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
         ];
     }
 
-    public function testArrayHasMultipleKeysReturnsTrue() {
+    public function testArrayHasMultipleKeysReturnsTrue()
+    {
         $this->assertTrue(
-                ArrayHelper::hasMultipleKeys(
-                        $this->getArrayTestData(),
-                        [
-                            "foo",
-                            "fire"
-                        ]
-                )
+            ArrayHelper::hasMultipleKeys(
+                $this->getArrayTestData(),
+                [
+                    "foo",
+                    "fire"
+                ]
+            )
         );
     }
 
-    public function testArrayHasMultipleKeysReturnsFalse() {
+    public function testArrayHasMultipleKeysReturnsFalse()
+    {
         $this->assertFalse(
-                ArrayHelper::hasMultipleKeys(
-                        $this->getArrayTestData(),
-                        [
-                            "foo",
-                            "fire",
-                            "nope"
-                        ]
-                )
+            ArrayHelper::hasMultipleKeys(
+                $this->getArrayTestData(),
+                [
+                    "foo",
+                    "fire",
+                    "nope"
+                ]
+            )
         );
 
         $this->assertFalse(
-                ArrayHelper::hasMultipleKeys(
-                        null,
-                        [
-                            "foo",
-                            "fire",
-                            "nope"
-                        ]
-                )
+            ArrayHelper::hasMultipleKeys(
+                null,
+                [
+                    "foo",
+                    "fire",
+                    "nope"
+                ]
+            )
         );
     }
-
 }

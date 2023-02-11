@@ -24,7 +24,6 @@ if (! function_exists('response')) {
 }
 
 if (! function_exists('trans')) {
-
     /**
     * Translate language variable
     *
@@ -822,7 +821,7 @@ function image_check_memory_usage($img, $max_breedte, $max_hoogte)
             if (strpos($mem, 'G') !== false) {
                 $memory_limit = abs(intval(str_replace(array('G'), '', $mem) * 1024 * 1024 * 1024));
             }
-            
+
             $image_properties = getimagesize($img);
             $image_width = $image_properties[0];
             $image_height = $image_properties[1];

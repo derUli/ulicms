@@ -71,17 +71,17 @@ if ($permissionChecker->hasPermission("settings_simple")) {
                        if (strtolower($settings["maintenance_mode"] == "on") || $settings["maintenance_mode"] == "1" || strtolower($settings["maintenance_mode"]) == "true") {
                            echo " checked";
                        }
-                       ?>></td>
+    ?>></td>
         </tr>
         <tr>
             <td><strong><?php translate("GUEST_MAY_REGISTER"); ?></strong></td>
             <td><input type="checkbox" name="visitors_can_register"
                        class="js-switch"
                        <?php
-                       if (strtolower($settings["visitors_can_register"] == "on") || $settings["visitors_can_register"] == "1" || strtolower($settings["visitors_can_register"]) == "true") {
-                           echo " checked";
-                       }
-                       ?>></td>
+    if (strtolower($settings["visitors_can_register"] == "on") || $settings["visitors_can_register"] == "1" || strtolower($settings["visitors_can_register"]) == "true") {
+        echo " checked";
+    }
+    ?>></td>
         </tr>
         <tr>
             <td>
@@ -92,10 +92,10 @@ if ($permissionChecker->hasPermission("settings_simple")) {
                        class="js-switch"
 
                        <?php
-                       if (!isset($settings["disable_password_reset"])) {
-                           echo " checked";
-                       }
-                       ?>>
+    if (!isset($settings["disable_password_reset"])) {
+        echo " checked";
+    }
+    ?>>
             </td>
         </tr>
         <tr>
@@ -124,39 +124,39 @@ if ($permissionChecker->hasPermission("settings_simple")) {
             <td><select name="timezone" size="1">
                     <?php
                     $timezones = $controller->getTimezones();
-                    $current_timezone = Settings::get("timezone");
-                    $current_timezone = trim($current_timezone);
-                    sort($timezones);
-                    $timezoneCount = count($timezones);
-                    for ($i = 0; $i < $timezoneCount; $i++) {
-                        $thisTimezone = $timezones[$i];
-                        $thisTimezone = trim($thisTimezone);
-                        if ($thisTimezone === $current_timezone) {
-                            echo '<option value="' . $thisTimezone . '" selected>' . $thisTimezone . '</option>';
-                        } else {
-                            echo '<option value="' . $thisTimezone . '">' . $thisTimezone . '</option>';
-                        }
-                    }
-                    ?>
+    $current_timezone = Settings::get("timezone");
+    $current_timezone = trim($current_timezone);
+    sort($timezones);
+    $timezoneCount = count($timezones);
+    for ($i = 0; $i < $timezoneCount; $i++) {
+        $thisTimezone = $timezones[$i];
+        $thisTimezone = trim($thisTimezone);
+        if ($thisTimezone === $current_timezone) {
+            echo '<option value="' . $thisTimezone . '" selected>' . $thisTimezone . '</option>';
+        } else {
+            echo '<option value="' . $thisTimezone . '">' . $thisTimezone . '</option>';
+        }
+    }
+    ?>
                 </select></td>
         </tr>
         <tr>
             <td><strong><?php translate("search_engines"); ?></strong></td>
             <td style="width:50%"><select name="robots" size=1>
                     <?php
-                    if (Settings::get("robots") == "noindex,nofollow") {
-                        ?>
+    if (Settings::get("robots") == "noindex,nofollow") {
+        ?>
 
                         <option value="index,follow"><?php translate("EARCH_ENGINES_INDEX"); ?></option>
                         <option value="noindex,nofollow" selected><?php translate("SEARCH_ENGINES_NOINDEX"); ?></option>
 
                         <?php
-                    } else {
-                        ?>
+    } else {
+        ?>
                         <option value="index,follow" selected><?php translate("SEARCH_ENGINES_INDEX"); ?></option>
                         <option value="noindex,nofollow"><?php translate("SEARCH_ENGINES_NOINDEX"); ?></option>
                     <?php }
-                    ?>
+    ?>
                 </select></td>
         </tr>
         <?php do_event("settings_simple"); ?>

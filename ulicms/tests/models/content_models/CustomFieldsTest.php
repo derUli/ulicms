@@ -1,8 +1,9 @@
 <?php
 
-class CustomFieldsTest extends \PHPUnit\Framework\TestCase {
-
-    protected function tearDown(): void {
+class CustomFieldsTest extends \PHPUnit\Framework\TestCase
+{
+    protected function tearDown(): void
+    {
         $id = $this->getFirstPage()->id;
         $type = $this->getFirstPage()->type;
         Database::pQuery("delete from {prefix}custom_fields where name in (?, ?) and content_id = ?", array(
@@ -18,12 +19,14 @@ class CustomFieldsTest extends \PHPUnit\Framework\TestCase {
         $_POST = [];
     }
 
-    private function getFirstPage() {
+    private function getFirstPage()
+    {
         $pages = ContentFactory::getAll();
         return $pages[0];
     }
 
-    public function testSetAndGetField() {
+    public function testSetAndGetField()
+    {
         $id = $this->getFirstPage()->id;
         $type = $this->getFirstPage()->type;
 
@@ -52,7 +55,8 @@ class CustomFieldsTest extends \PHPUnit\Framework\TestCase {
         $this->assertGreaterThanOrEqual(0, count($all));
     }
 
-    public function testSetAndGetBooleanToFalse() {
+    public function testSetAndGetBooleanToFalse()
+    {
         $id = $this->getFirstPage()->id;
 
         $uniq = uniqid();
@@ -64,7 +68,8 @@ class CustomFieldsTest extends \PHPUnit\Framework\TestCase {
         CustomFields::set($uniq, null);
     }
 
-    public function testSetAndGetBooleanToTrue() {
+    public function testSetAndGetBooleanToTrue()
+    {
         $id = $this->getFirstPage()->id;
 
         $uniq = uniqid();
@@ -76,7 +81,8 @@ class CustomFieldsTest extends \PHPUnit\Framework\TestCase {
         CustomFields::set($uniq, null);
     }
 
-    public function testSetAndGetFieldArray() {
+    public function testSetAndGetFieldArray()
+    {
         $id = $this->getFirstPage()->id;
 
         $value = ["foo", "bar"];
@@ -85,7 +91,8 @@ class CustomFieldsTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals($value, CustomFields::get("foo", $id));
     }
 
-    public function testSetAndGetFieldArrayWithoutId() {
+    public function testSetAndGetFieldArrayWithoutId()
+    {
         $page = $this->getFirstPage();
         set_requested_pagename($page->slug, $page->language);
 
@@ -93,7 +100,8 @@ class CustomFieldsTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("bar", CustomFields::get("foo", null, false));
     }
 
-    public function testSetAndGetAllBooleanToTrueWithoutId() {
+    public function testSetAndGetAllBooleanToTrueWithoutId()
+    {
         $page = $this->getFirstPage();
         set_requested_pagename($page->slug, $page->language);
 
@@ -102,5 +110,4 @@ class CustomFieldsTest extends \PHPUnit\Framework\TestCase {
         $all = CustomFields::getAll();
         $this->assertEquals("bar", $all["foo"]);
     }
-
 }

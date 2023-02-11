@@ -1,12 +1,13 @@
 <?php
 
-function jumbotron_get_menu($name = "top", $parent_id = null, $recursive = true, $order = "position") {
+function jumbotron_get_menu($name = "top", $parent_id = null, $recursive = true, $order = "position")
+{
     $html = "";
     $name = db_escape($name);
     $language = $_SESSION["language"];
     $sql = "SELECT id, slug, access, link_url, title, alternate_title, menu_image, target, type, position FROM " . tbname("content") . " WHERE menu='$name' AND language = '$language' AND active = 1 AND `deleted_at` IS NULL AND parent_id ";
 
-    if ($parent_id === NULL) {
+    if ($parent_id === null) {
         $sql .= " IS NULL ";
     } else {
         $sql .= " = " . intval($parent_id) . " ";
@@ -19,7 +20,7 @@ function jumbotron_get_menu($name = "top", $parent_id = null, $recursive = true,
         return $html;
     }
 
-    if ($parent_id === NULL) {
+    if ($parent_id === null) {
         $html .= "<ul class='nav nav-pills pull-right menu_top'>\n";
     } else {
         $containsCurrentItem = parent_item_contains_current_page($parent_id);

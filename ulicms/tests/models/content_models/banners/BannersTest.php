@@ -4,12 +4,13 @@ use App\Models\Content\Advertisement\Banners;
 use App\Models\Content\Advertisement\Banner;
 use App\Models\Content\Category;
 
-class BannersTest extends \PHPUnit\Framework\TestCase {
+class BannersTest extends \PHPUnit\Framework\TestCase
+{
+    public const HTML_TEXT1 = "My first Banner HTML";
+    public const HTML_TEXT2 = "My second Banner HTML";
 
-    const HTML_TEXT1 = "My first Banner HTML";
-    const HTML_TEXT2 = "My second Banner HTML";
-
-    protected function tearDown(): void {
+    protected function tearDown(): void
+    {
         Database::pQuery("DELETE FROM `{prefix}banner` where html in (? , ?)", array(
             self::HTML_TEXT1,
             self::HTML_TEXT2
@@ -18,13 +19,15 @@ class BannersTest extends \PHPUnit\Framework\TestCase {
         Database::query("DELETE FROM `{prefix}categories` where name like 'Testkategorie %'", true);
     }
 
-    public function testGetByCategoryExpectEmptyResult() {
+    public function testGetByCategoryExpectEmptyResult()
+    {
         $result = Banners::getByCategory(PHP_INT_MAX);
         $this->assertIsArray($result);
         $this->assertCount(0, $result);
     }
 
-    public function testGetByCategoryExpectArrayOfBanners() {
+    public function testGetByCategoryExpectArrayOfBanners()
+    {
         $category1 = new Category();
         $category1->setName("Testkategorie " . uniqid());
         $category1->save();
@@ -66,7 +69,8 @@ class BannersTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetByTypeExpectArrayOfBanners() {
+    public function testGetByTypeExpectArrayOfBanners()
+    {
         $gifBanners = Banners::getByType("gif");
 
         $this->assertGreaterThanOrEqual(1, $gifBanners);
@@ -82,7 +86,8 @@ class BannersTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetByLanguageExpectArrayOfBanners() {
+    public function testGetByLanguageExpectArrayOfBanners()
+    {
         $category1 = new Category();
         $category1->setName("Testkategorie " . uniqid());
         $category1->save();
@@ -120,7 +125,8 @@ class BannersTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetAll() {
+    public function testGetAll()
+    {
         $banners = Banners::getAll();
         $this->assertIsArray($banners);
         $this->assertGreaterThanOrEqual(1, count($banners));
@@ -130,7 +136,8 @@ class BannersTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetRandom() {
+    public function testGetRandom()
+    {
         $_SESSION["language"] = "de";
 
         for ($i = 1; $i < 5; $i++) {
@@ -155,5 +162,4 @@ class BannersTest extends \PHPUnit\Framework\TestCase {
 
         $this->assertNotEquals($banner2->getId(), $banner1->getId());
     }
-
 }

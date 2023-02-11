@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 use App\Services\Connectors\AvailablePackageVersionMatcher;
 
-class ExtendUpgradeHelper extends Controller {
-
-    public function getModules(): array {
+class ExtendUpgradeHelper extends Controller
+{
+    public function getModules(): array
+    {
         $modulesFromExtend = [];
         $modules = getAllModules();
         foreach ($modules as $module) {
@@ -16,8 +17,8 @@ class ExtendUpgradeHelper extends Controller {
                 $xtendModule->version = getModuleMeta($module, "version");
                 $xtendModule->url = "https://extend.ulicms.de/" . $module . ".html";
                 $xtendModule->updateAvailable = $this->checkForUpdates(
-                        $xtendModule->name,
-                        $xtendModule->version
+                    $xtendModule->name,
+                    $xtendModule->version
                 );
 
                 $modulesFromExtend[] = $xtendModule;
@@ -26,7 +27,8 @@ class ExtendUpgradeHelper extends Controller {
         return $modulesFromExtend;
     }
 
-    protected function checkForUpdates(string $name, ?string $version): bool {
+    protected function checkForUpdates(string $name, ?string $version): bool
+    {
         if (!$version) {
             return false;
         }
@@ -44,9 +46,8 @@ class ExtendUpgradeHelper extends Controller {
         $available = $versionMatcher->getCompatibleVersions();
 
         return (
-                count($available) and
-                \App\Utils\VersionComparison\compare($available[0]["version"], $version, ">")
-                );
+            count($available) and
+            \App\Utils\VersionComparison\compare($available[0]["version"], $version, ">")
+        );
     }
-
 }

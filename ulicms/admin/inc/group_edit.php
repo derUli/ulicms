@@ -57,7 +57,7 @@ if (!$permissionChecker->hasPermission("groups")) {
                                    if ($value) {
                                        echo "checked";
                                    }
-                                   ?>>
+                    ?>>
                             <?php esc($key); ?> </label>
                     </div>
                 <?php }
@@ -75,7 +75,7 @@ if (!$permissionChecker->hasPermission("groups")) {
                                if (in_array($lang, $selectedLanguages)) {
                                    echo "checked";
                                }
-                               ?>
+                ?>
                                id="lang-<?php echo $lang->getID(); ?>">
                                <?php Template::escape($lang->getName()); ?>
                     </label>

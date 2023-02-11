@@ -3,17 +3,19 @@
 use App\Models\Content\Categories;
 use App\Models\Content\Category;
 
-class CategoriesTest extends \PHPUnit\Framework\TestCase {
-
-    protected function tearDown(): void {
+class CategoriesTest extends \PHPUnit\Framework\TestCase
+{
+    protected function tearDown(): void
+    {
         Database::query(
-                "delete from {prefix}categories "
-                . "where name like 'Test Category %' ",
-                true
+            "delete from {prefix}categories "
+            . "where name like 'Test Category %' ",
+            true
         );
     }
 
-    public function testAddUpdateAndDeleteCategory() {
+    public function testAddUpdateAndDeleteCategory()
+    {
         $name = "Test Category " . uniqid();
         $description = uniqid();
         $id = Categories::addCategory($name, $description);
@@ -36,7 +38,8 @@ class CategoriesTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull(Categories::getCategoryDescriptionById($id));
     }
 
-    public function testGetAllCategories() {
+    public function testGetAllCategories()
+    {
         $categories = Categories::getAllCategories("id");
         $this->assertGreaterThanOrEqual(0, count($categories));
         foreach ($categories as $category) {
@@ -46,34 +49,37 @@ class CategoriesTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("Allgemein", $categories[0]->getName());
     }
 
-    public function testGetHTMLSelectWithAllowNullWithoutDefault() {
+    public function testGetHTMLSelectWithAllowNullWithoutDefault()
+    {
         $this->assertStringContainsString(
-                "<option value='0' selected='selected'>[" .
-                get_translation("every") . "]</option>",
-                Categories::getHTMLSelect(0, true)
+            "<option value='0' selected='selected'>[" .
+            get_translation("every") . "]</option>",
+            Categories::getHTMLSelect(0, true)
         );
     }
 
-    public function testGetHTMLSelectWithAllowNullWithDefault() {
+    public function testGetHTMLSelectWithAllowNullWithDefault()
+    {
         $this->assertStringContainsString(
-                "<option value='0'>[" . get_translation("every") .
-                "]</option>",
-                Categories::getHTMLSelect(1, true)
+            "<option value='0'>[" . get_translation("every") .
+            "]</option>",
+            Categories::getHTMLSelect(1, true)
         );
     }
 
-    public function testGetHTMLSelectWithCustomFieldName() {
+    public function testGetHTMLSelectWithCustomFieldName()
+    {
         $this->assertStringContainsString(
-                "<select name='my_field_name' id='my_field_name' size='1'",
-                Categories::getHTMLSelect(1, true, "my_field_name")
+            "<select name='my_field_name' id='my_field_name' size='1'",
+            Categories::getHTMLSelect(1, true, "my_field_name")
         );
     }
 
-    public function testGetHTMLSelectWithoutCustomFieldName() {
+    public function testGetHTMLSelectWithoutCustomFieldName()
+    {
         $this->assertStringContainsString(
-                "<select name='category_id' id='category_id' size='1'",
-                Categories::getHTMLSelect(1, true)
+            "<select name='category_id' id='category_id' size='1'",
+            Categories::getHTMLSelect(1, true)
         );
     }
-
 }

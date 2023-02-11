@@ -7,9 +7,9 @@ $minPhpRequired = "8.0.2";
 $phpVersion = phpversion();
 
 $phpVersionCompatible = \App\Utils\VersionComparison\compare(
-        $phpVersion,
-        $minPhpRequired,
-        ">="
+    $phpVersion,
+    $minPhpRequired,
+    ">="
 );
 
 $phpModules = [
@@ -34,7 +34,7 @@ $phpModules = [
         } else {
             echo '<i class="fa fa-exclamation-triangle text-red" aria-hidden="true"></i>';
         }
-        ?>
+?>
     </li>
     <?php
     foreach ($phpModules as $module) {
@@ -50,7 +50,7 @@ $phpModules = [
 
         echo "</li>";
     }
-    ?>
+?>
 </ul>
 
 <p>

@@ -25,15 +25,14 @@ $model = $controller->getModel();
             <td><?php echo strftime("%x %X", $row->lastmodified) ?></td>
             <td><?php
                 $autorName = $model->admins[$row->lastchangeby];
-                if (!empty($autorName)) {
-                    
-                } else {
-                    $autorName = $model->admins[$row->author_id];
-                }
-                echo $autorName;
-                ?></td>
+        if (!empty($autorName)) {
+        } else {
+            $autorName = $model->admins[$row->author_id];
+        }
+        echo $autorName;
+        ?></td>
         </tr>
         <?php
     }
-    ?>
+?>
 </table>

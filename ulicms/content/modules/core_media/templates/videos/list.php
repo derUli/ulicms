@@ -41,7 +41,7 @@ if ($permissionChecker->hasPermission("videos")) {
             <a href="index.php?action=add_video" class="btn btn-default"> <i
                     class="fas fa-upload"></i> <?php
                     translate("upload_video");
-                    ?></a>
+        ?></a>
         </div>
     <?php } ?>
     <div class="voffset2">
@@ -83,23 +83,23 @@ if ($permissionChecker->hasPermission("videos")) {
                             <td><a
                                     href="index.php?action=edit_video&id=<?php
                                     echo $row->id;
-                                    ?>"><img src="gfx/edit.png" class="mobile-big-image"
+                            ?>"><img src="gfx/edit.png" class="mobile-big-image"
                                        alt="<?php
-                                       translate("edit");
-                                       ?>"
+                               translate("edit");
+                            ?>"
                                        title="<?php
-                                       translate("edit");
-                                       ?>"> </a></td>
+                            translate("edit");
+                            ?>"> </a></td>
                             <td><form
                                     action="?sClass=VideoController&sMethod=delete&delete=<?php echo $row->id; ?>"
                                     method="post" class="delete-form"><?php csrf_token_html(); ?><input
                                         type="image" src="gfx/delete.png" class="mobile-big-image"
                                         alt="<?php
-                                        translate("delete");
-                                        ?>"
+                             translate("delete");
+                            ?>"
                                         title="<?php
-                                        translate("delete");
-                                        ?>">
+                            translate("delete");
+                            ?>">
                                 </form>
                             </td>
                         <?php } ?>

@@ -35,7 +35,7 @@ if ($id !== null) {
                     <li><a
                             href="<?php Template::escape(buildSEOUrl($entry->slug)); ?>"><?php Template::escape($entry->title) ?></a></li>
                     <?php }
-                    ?>
+                ?>
             </ol>
             <?php if ($use_pagination) { ?>
                 <div class="page_older_newer">

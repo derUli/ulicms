@@ -1,12 +1,14 @@
 <?php
 
-class ModulePageTest extends \PHPUnit\Framework\TestCase {
-
-    protected function tearDown(): void {
+class ModulePageTest extends \PHPUnit\Framework\TestCase
+{
+    protected function tearDown(): void
+    {
         Database::query("delete from {prefix}content where title like 'Unit Test%'", true);
     }
 
-    public function testContainsModuleReturnsTrue() {
+    public function testContainsModuleReturnsTrue()
+    {
         $modulePage = new Module_Page();
         $modulePage->title = "Unit Test Article";
         $modulePage->slug = "unit test";
@@ -29,7 +31,8 @@ class ModulePageTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($modulePage->containsModule("not_existing"));
     }
 
-    public function testContainsModuleReturnFalse() {
+    public function testContainsModuleReturnFalse()
+    {
         $modulePage = new Module_Page();
         $modulePage->title = "Unit Test Article";
         $modulePage->slug = "unit test";
@@ -43,7 +46,8 @@ class ModulePageTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($modulePage->containsModule("blog"));
     }
 
-    public function testGetEmbeddedModulesReturnsModules() {
+    public function testGetEmbeddedModulesReturnsModules()
+    {
         $module = new Module("fortune2");
 
         $modulePage = new Module_Page();
@@ -63,15 +67,16 @@ class ModulePageTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue($modulePage->containsModule("blog"));
 
         $this->assertEquals(
-                [
-                    "fortune2",
-                    "blog"
-                ],
-                $modulePage->getEmbeddedModules()
+            [
+                "fortune2",
+                "blog"
+            ],
+            $modulePage->getEmbeddedModules()
         );
     }
 
-    public function testGetEmbeddedModulesReturnsNothing() {
+    public function testGetEmbeddedModulesReturnsNothing()
+    {
         $module = new Module("fortune2");
 
         $modulePage = new Module_Page();
@@ -91,5 +96,4 @@ class ModulePageTest extends \PHPUnit\Framework\TestCase {
 
         $this->assertCount(0, $modulePage->getEmbeddedModules());
     }
-
 }

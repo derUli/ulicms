@@ -9,9 +9,10 @@
  *
  * @copyright Nicolas Tallefourtane http://nicolab.net
  */
+
 namespace FtpClient;
 
-use \Countable;
+use Countable;
 
 /**
  * The FTP and SSL-FTP client for PHP.
@@ -607,14 +608,11 @@ class FtpClient implements Countable
 
         // do this for each file in the directory
         while ($file = $d->read()) {
-
             // to prevent an infinite loop
             if ($file != "." && $file != "..") {
-
                 // do the following if it is a directory
                 if (is_dir($source_directory.'/'.$file)) {
                     if (!$this->isDir($target_directory.'/'.$file)) {
-
                         // create directories that do not yet exist
                         $this->ftp->mkdir($target_directory.'/'.$file);
                     }
@@ -626,7 +624,6 @@ class FtpClient implements Countable
                         $mode
                     );
                 } else {
-
                     // put the files
                     $this->ftp->put(
                         $target_directory.'/'.$file,
@@ -812,7 +809,6 @@ class FtpClient implements Countable
                     .implode(" ", $chunks);
 
                 if ($item['type'] == 'link') {
-
                     // get the first part of 'link#the-link.ext -> /path/of/the/source.ext'
                     $exp = explode(' ->', $key);
                     $key = rtrim($exp[0]);
@@ -820,7 +816,6 @@ class FtpClient implements Countable
 
                 $items[$key] = $item;
             } else {
-
                 // the key is the path, behavior of FtpClient::rawlist() method()
                 $items[$key] = $item;
             }

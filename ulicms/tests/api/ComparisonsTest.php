@@ -3,14 +3,16 @@
 use App\Utils\File;
 use App\Exceptions\DatasetNotFoundException;
 
-class ComparisonsTest extends \PHPUnit\Framework\TestCase {
-
-    protected function setUp(): void {
+class ComparisonsTest extends \PHPUnit\Framework\TestCase
+{
+    protected function setUp(): void
+    {
         $_SERVER = [];
         $_REQUEST = [];
     }
 
-    protected function tearDown(): void {
+    protected function tearDown(): void
+    {
         Database::query("delete from {prefix}users where username like 'testuser-%'", true);
 
         $_SERVER = [];
@@ -22,11 +24,13 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase {
 
     // in the test environment this returns always true
     // since the tests are running at the command line
-    public function testIsCli() {
+    public function testIsCli()
+    {
         $this->assertTrue(isCLI());
     }
 
-    public function testIsCrawler() {
+    public function testIsCrawler()
+    {
         $pkg = new PackageManager();
 
         if (!in_array("CrawlerDetect", $pkg->getInstalledModules())) {
@@ -47,43 +51,50 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testIsCrawlerWithoutUseragent() {
+    public function testIsCrawlerWithoutUseragent()
+    {
         unset($_SERVER["HTTP_USER_AGENT"]);
         $this->assertFalse(
-                is_crawler()
+            is_crawler()
         );
     }
 
-    public function testIsCrawlerWithUseragentFromSession() {
+    public function testIsCrawlerWithUseragentFromSession()
+    {
         $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)";
         $this->assertTrue(
-                is_crawler()
+            is_crawler()
         );
     }
 
-    public function testIsTrue() {
+    public function testIsTrue()
+    {
         $this->assertTrue(is_true(true));
         $this->assertTrue(is_true(1));
         $this->assertFalse(is_true(false));
         $this->assertFalse(is_true(0));
     }
 
-    public function testIsAdminDirTrue() {
+    public function testIsAdminDirTrue()
+    {
         chdir(Path::resolve("ULICMS_ROOT/admin"));
         $this->assertTrue(is_admin_dir());
     }
 
-    public function testIsAdminDirFalse() {
+    public function testIsAdminDirFalse()
+    {
         chdir(Path::resolve("ULICMS_ROOT"));
         $this->assertFalse(is_admin_dir());
     }
 
-    public function testIsMaintenanceModeOn() {
+    public function testIsMaintenanceModeOn()
+    {
         Settings::set("maintenance_mode", "1");
         $this->assertTrue(isMaintenanceMode());
     }
 
-    public function testIsMaintenanceModeOff() {
+    public function testIsMaintenanceModeOff()
+    {
         Settings::set("maintenance_mode", "0");
         $this->assertFalse(isMaintenanceMode());
 
@@ -91,24 +102,28 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(isMaintenanceMode());
     }
 
-    public function testIsFalse() {
+    public function testIsFalse()
+    {
         $this->assertFalse(is_false(true));
         $this->assertFalse(is_false(1));
         $this->assertTrue(is_false(false));
         $this->assertTrue(is_false(0));
     }
 
-    public function testIsJsonTrue() {
+    public function testIsJsonTrue()
+    {
         $validJson = File::read(ModuleHelper::buildModuleRessourcePath("core_content", "metadata.json"));
         $this->assertTrue(is_json($validJson));
     }
 
-    public function testIsJsonFalse() {
+    public function testIsJsonFalse()
+    {
         $invalidJson = File::read(ModuleHelper::buildModuleRessourcePath("core_content", "lang/de.php"));
         $this->assertFalse(is_json($invalidJson));
     }
 
-    public function testIsNumericArray() {
+    public function testIsNumericArray()
+    {
         $this->assertTrue(is_numeric_array(array(
             "42",
             1337,
@@ -129,21 +144,24 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(is_numeric_array(9.1));
     }
 
-    public function testIsDecimalReturnsTrue() {
+    public function testIsDecimalReturnsTrue()
+    {
         $this->assertTrue(is_decimal(1.99));
         $this->assertTrue(is_decimal("1.99"));
         $this->assertTrue(is_decimal("0.00"));
         $this->assertTrue(is_decimal("1.00"));
     }
 
-    public function testisDecimalReturnsFalse() {
+    public function testisDecimalReturnsFalse()
+    {
         $this->assertFalse(is_decimal(666));
         $this->assertFalse(is_decimal("666"));
         $this->assertFalse(is_decimal("foobar"));
         $this->assertFalse(is_decimal("0"));
     }
 
-    public function testIsBlankReturnsTrue() {
+    public function testIsBlankReturnsTrue()
+    {
         $this->assertTrue(is_blank(""));
         $this->assertTrue(is_blank(" "));
         $this->assertTrue(is_blank(false));
@@ -153,15 +171,17 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue(is_blank("0"));
     }
 
-    public function testIsBlankReturnsFalse() {
+    public function testIsBlankReturnsFalse()
+    {
         $this->assertFalse(is_blank(" hallo welt "));
         $this->assertFalse(is_blank(13));
         $this->assertFalse(is_blank(true));
         $this->assertFalse(is_blank(array("foo", "bar")));
         $this->assertFalse(is_blank("13"));
     }
-    
-    public function testVarIsType() {
+
+    public function testVarIsType()
+    {
         $this->assertTrue(var_is_type(123, "numeric", true));
         $this->assertTrue(var_is_type(null, "numeric", false));
         $this->assertFalse(var_is_type(null, "numeric", true));
@@ -171,22 +191,24 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(var_is_type("nicht leer", "typ_der_nicht_existiert", true));
     }
 
-    public function testGetByIdThrowsException() {
+    public function testGetByIdThrowsException()
+    {
         $this->expectException(DatasetNotFoundException::class);
         ContentFactory::getByID(PHP_INT_MAX);
     }
 
-    public function testIsVersionNumberReturnsTrue() {
+    public function testIsVersionNumberReturnsTrue()
+    {
         $this->assertTrue(is_version_number("1.0"));
         $this->assertTrue(is_version_number("123"));
         $this->assertTrue(is_version_number("2.0.3"));
         $this->assertTrue(is_version_number("2.0.3beta"));
     }
 
-    public function testIsVersionNumberReturnsFalse() {
+    public function testIsVersionNumberReturnsFalse()
+    {
         $this->assertFalse(is_version_number("keine version"));
         $this->assertFalse(is_version_number("null"));
         $this->assertFalse(is_version_number("beta"));
     }
-
 }

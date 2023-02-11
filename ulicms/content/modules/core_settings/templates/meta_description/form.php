@@ -32,9 +32,9 @@ if ($permissionChecker->hasPermission("settings_simple")) {
         </tr>
         <?php
         $languageCount = count($languages);
-        for ($n = 0; $n < $languageCount; $n++) {
-            $lang = $languages[$n];
-            ?>
+    for ($n = 0; $n < $languageCount; $n++) {
+        $lang = $languages[$n];
+        ?>
             <tr>
                 <td>
                     <?php esc(getLanguageNameByCode($lang)); ?>
@@ -44,7 +44,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
                         value="<?php esc($meta_descriptions[$lang]); ?>"></td>
             </tr>
         <?php }
-        ?>
+    ?>
         <tr>
             <td></td>
             <td class="text-center">

@@ -1,7 +1,7 @@
 <?php
 $field = ViewBag::get("field");
 $value = ViewBag::get("field_value");
-if ($value === NULL) {
+if ($value === null) {
     $value = $field->defaultValue;
 }
 ?>
@@ -15,18 +15,18 @@ if ($value === NULL) {
                if ($field->required) {
                    echo "required";
                }
-               ?>
+?>
                <?php echo ModuleHelper::buildHTMLAttributesFromArray($field->htmlAttributes); ?>
                <?php
-               if ($value) {
-                   echo "checked";
-               }
-               ?>> <label
+if ($value) {
+    echo "checked";
+}
+?>> <label
                for="cb_<?php Template::escape(ViewBag::get("field_name")); ?>"><?php translate($field->title); ?> <?php
-                   if ($field->required) {
-                       echo "*";
-                   }
-                   ?></label>
+    if ($field->required) {
+        echo "*";
+    }
+?></label>
         <?php if ($field->helpText) { ?>
             <small><?php translate($field->helpText); ?></small>
         <?php } ?>

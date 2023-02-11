@@ -22,8 +22,8 @@ $languages = getAllLanguages();
 
 if (!empty($_GET["language"]) && in_array($_GET["language"], $languages)) {
     $_SESSION["language"] = Database::escapeValue(
-                    $_GET["language"],
-                    DB_TYPE_STRING
+        $_GET["language"],
+        DB_TYPE_STRING
     );
 }
 
@@ -125,11 +125,11 @@ if ($redirection && (is_active() or is_logged_in())) {
 if (get_ID()) {
     try {
         $page = ContentFactory::getByID(get_ID());
-        if ($page->id !== NULL && $page instanceof Language_Link) {
+        if ($page->id !== null && $page instanceof Language_Link) {
             $language = new Language($page->link_to_language);
-            if ($language->getID() !== NULL && StringHelper::isNotNullOrWhitespace(
-                            $language->getLanguageLink()
-                    )
+            if ($language->getID() !== null && StringHelper::isNotNullOrWhitespace(
+                $language->getLanguageLink()
+            )
             ) {
                 Request::redirect($language->getLanguageLink());
             }

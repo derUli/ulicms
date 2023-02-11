@@ -59,9 +59,9 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
         </div>
         <?php
         $permissionChecker = new ACL();
-        $allGroups = $permissionChecker->getAllGroups();
-        asort($allGroups);
-        ?>
+    $allGroups = $permissionChecker->getAllGroups();
+    asort($allGroups);
+    ?>
         <div class="field">
             <strong class="field-label">
                 <?php translate("primary_group"); ?>
@@ -70,18 +70,18 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
                 name="group_id">
                 <option value="-">[<?php translate("none"); ?>]</option>
                 <?php
-                foreach ($allGroups as $key => $value) {
-                    ?>
+            foreach ($allGroups as $key => $value) {
+                ?>
                     <option value="<?php echo $key; ?>"
                     <?php
-                    if (Settings::get("default_acl_group") == $key) {
-                        echo "selected";
-                    }
-                    ?>>
+                if (Settings::get("default_acl_group") == $key) {
+                    echo "selected";
+                }
+                ?>>
                                 <?php echo _esc($value) ?>
                     </option>
                 <?php }
-                ?>
+            ?>
             </select>
         </div>
         <div class="field">
@@ -90,13 +90,13 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
             </strong>
             <select name="secondary_groups[]" multiple>
                 <?php
-                foreach ($allGroups as $key => $value) {
-                    ?>
+            foreach ($allGroups as $key => $value) {
+                ?>
                     <option value="<?php echo $key; ?>">
                         <?php echo _esc($value) ?>
                     </option>
                 <?php }
-                ?>
+            ?>
             </select>
         </div>
         <div class="checkbox block">
@@ -138,11 +138,11 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
             <select name="default_language">
                 <option value="" selected>[<?php translate("standard"); ?>]</option>
                 <?php
-                $languageCount = count($languages);
-                for ($i = 0; $i < $languageCount; $i++) {
-                    echo '<option value="' . $languages[$i] . '">' . getLanguageNameByCode($languages[$i]) . '</option>';
-                }
-                ?>
+            $languageCount = count($languages);
+    for ($i = 0; $i < $languageCount; $i++) {
+        echo '<option value="' . $languages[$i] . '">' . getLanguageNameByCode($languages[$i]) . '</option>';
+    }
+    ?>
             </select>
         </div>
         <div class="voffset2">
@@ -156,10 +156,10 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
     $translation->addKey("passwords_not_equal");
     $translation->render();
     enqueueScriptFile(
-            ModuleHelper::buildRessourcePath(
-                    "core_users",
-                    "js/users.js"
-            )
+        ModuleHelper::buildRessourcePath(
+            "core_users",
+            "js/users.js"
+        )
     );
     enqueueScriptFile("../node_modules/password-strength-meter/dist/password.min.js");
     combinedScriptHtml();

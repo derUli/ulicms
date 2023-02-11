@@ -46,15 +46,15 @@ if ($permissionChecker->hasPermission("settings_simple")) {
                         size = "1">
                             <?php
                             $pages = getAllPages($lang, "title", true);
-                            $pageCount = count($pages);
-                            for ($i = 0; $i < $pageCount; $i++) {
-                                if ($pages[$i]["slug"] == $frontpages[$lang]) {
-                                    echo "<option value='" . _esc($pages[$i]["slug"]) . "' selected='selected'>" . _esc($pages[$i]["title"]) . " (ID: " . $pages[$i]["id"] . ")</option>";
-                                } else {
-                                    echo "<option value='" . _esc($pages[$i]["slug"]) . "'>" . _esc($pages[$i]["title"]) . " (ID: " . $pages[$i]["id"] . ")</option>";
-                                }
-                            }
-                            ?>
+            $pageCount = count($pages);
+            for ($i = 0; $i < $pageCount; $i++) {
+                if ($pages[$i]["slug"] == $frontpages[$lang]) {
+                    echo "<option value='" . _esc($pages[$i]["slug"]) . "' selected='selected'>" . _esc($pages[$i]["title"]) . " (ID: " . $pages[$i]["id"] . ")</option>";
+                } else {
+                    echo "<option value='" . _esc($pages[$i]["slug"]) . "'>" . _esc($pages[$i]["title"]) . " (ID: " . $pages[$i]["id"] . ")</option>";
+                }
+            }
+            ?>
                     </select></td>
             </tr>
         <?php }

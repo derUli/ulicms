@@ -44,7 +44,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
                         name="site_slogan_<?php esc($lang); ?>"
                         value="<?php esc($site_slogans[$lang]); ?>"></td>
                 <?php }
-                ?>
+        ?>
         </tr>
         <tr>
             <td></td>
@@ -64,10 +64,10 @@ if ($permissionChecker->hasPermission("settings_simple")) {
     $translation->render();
 
     enqueueScriptFile(
-            ModuleHelper::buildRessourcePath(
-                    "core_settings",
-                    "js/site_slogan.js"
-            )
+        ModuleHelper::buildRessourcePath(
+            "core_settings",
+            "js/site_slogan.js"
+        )
     );
     combinedScriptHtml();
     ?>

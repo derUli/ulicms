@@ -6,7 +6,7 @@ if ($permissionChecker->hasPermission("expert_settings") and $permissionChecker-
     if (Request::hasVar("name")) {
         $name = Request::getVar("name");
         $value = Settings::get($name);
-        if ($value === NULL) {
+        if ($value === null) {
             Request::javascriptRedirect(ModuleHelper::buildActionURL("settings"));
         }
     }
@@ -24,7 +24,7 @@ if ($permissionChecker->hasPermission("expert_settings") and $permissionChecker-
         if ($name) {
             echo "readonly";
         }
-        ?>
+    ?>
                >
     </div>
     <div class="field">

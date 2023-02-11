@@ -5,16 +5,18 @@ use App\Exceptions\UnknownContentTypeException;
 use App\Models\Content\Comment;
 use App\Models\Content\Category;
 
-class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
-
-    protected function setUp(): void {
+class ContentFactoryTest extends \PHPUnit\Framework\TestCase
+{
+    protected function setUp(): void
+    {
         LoggerRegistry::register(
-                "exception_log",
-                new Logger(Path::resolve("ULICMS_LOG/exception_log"))
+            "exception_log",
+            new Logger(Path::resolve("ULICMS_LOG/exception_log"))
         );
     }
 
-    protected function tearDown(): void {
+    protected function tearDown(): void
+    {
         Database::deleteFrom("content", "type = 'gibts_nicht' or slug like 'unit-test-%'");
         Database::deleteFrom("categories", "name like 'The Test%'");
         Database::deleteFrom("users", "username like 'testuser%'");
@@ -22,7 +24,8 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
         LoggerRegistry::unregister("exception_log");
     }
 
-    public function testGetAllbyType() {
+    public function testGetAllbyType()
+    {
         $types = TypeMapper::getMappings();
         $this->assertGreaterThanOrEqual(11, count($types));
 
@@ -34,7 +37,8 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetAllByLanguage() {
+    public function testGetAllByLanguage()
+    {
         $languages = getAllLanguages();
 
         foreach ($languages as $language) {
@@ -45,7 +49,8 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetAllbyMenu() {
+    public function testGetAllbyMenu()
+    {
         $menus = getAllMenus();
 
         foreach ($menus as $menu) {
@@ -56,7 +61,8 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testThrowsExceptionOnUnknownTypes() {
+    public function testThrowsExceptionOnUnknownTypes()
+    {
         $userManager = new UserManager();
         $user = $userManager->getAllUsers()[0];
 
@@ -78,13 +84,14 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
 
         $this->expectException(UnknownContentTypeException::class);
         $this->expectExceptionMessage(
-                "Content with id={$page->getId()} has unknown content type \"{$page->type}\""
+            "Content with id={$page->getId()} has unknown content type \"{$page->type}\""
         );
 
         ContentFactory::getBySlugAndLanguage("test-123", "de");
     }
 
-    public function testGetAllByParent() {
+    public function testGetAllByParent()
+    {
         $result = Database::pQuery("select parent_id from {prefix}content where "
                         . "parent_id is not null", [], true);
         $dataset = Database::fetchObject($result);
@@ -97,7 +104,8 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetAllByParentNoParent() {
+    public function testGetAllByParentNoParent()
+    {
         $pages = ContentFactory::getAllByParent(null);
 
         $this->assertGreaterThanOrEqual(1, count($pages));
@@ -106,7 +114,8 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetAll() {
+    public function testGetAll()
+    {
         $content = ContentFactory::getAll();
         $result = Database::pQuery("select id from {prefix}content", [], true);
         $this->assertEquals(count($content), Database::getNumRows($result));
@@ -116,7 +125,8 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetAllRegular() {
+    public function testGetAllRegular()
+    {
         $content = ContentFactory::getAllRegular();
 
         foreach ($content as $page) {
@@ -124,7 +134,8 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testFilterByEnabled() {
+    public function testFilterByEnabled()
+    {
         $elements = [];
 
         $test1 = new Page();
@@ -164,7 +175,8 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetAllWithComments() {
+    public function testGetAllWithComments()
+    {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
         $page->slug = 'unit-test-' . time();
@@ -193,7 +205,8 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
         $this->assertGreaterThanOrEqual(1, ContentFactory::getAllWithComments());
     }
 
-    public function testFilterByCategory() {
+    public function testFilterByCategory()
+    {
         $category1 = new Category();
         $category1->setName("The Test 1 ");
         $category1->save();
@@ -241,7 +254,8 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
         $this->assertCount(3, $filteredContent);
     }
 
-    public function testFilterByAutor() {
+    public function testFilterByAutor()
+    {
         $testUser1 = new User();
         $testUser1->setUsername("testuser1");
         $testUser1->setLastname("Doe");
@@ -295,7 +309,8 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
         $this->assertCount(4, $filteredContent);
     }
 
-    public function testFilterByLastChangeBy() {
+    public function testFilterByLastChangeBy()
+    {
         $testUser1 = new User();
         $testUser1->setUsername("testuser1");
         $testUser1->setLastname("Doe");
@@ -351,16 +366,17 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
         $this->assertCount(3, $filteredContent);
     }
 
-    public function testGetForFilter() {
+    public function testGetForFilter()
+    {
         $contents = ContentFactory::getForFilter(
-                        "de",
-                        1,
-                        "top",
-                        5,
-                        "title",
-                        "asc",
-                        "module",
-                        4
+            "de",
+            1,
+            "top",
+            5,
+            "title",
+            "asc",
+            "module",
+            4
         );
 
         $this->assertIsArray($contents);
@@ -372,5 +388,4 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
             $this->assertInstanceOf(Module_Page::class, $content);
         }
     }
-
 }

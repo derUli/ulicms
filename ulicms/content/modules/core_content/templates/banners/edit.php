@@ -25,13 +25,13 @@ if ($permissionChecker->hasPermission("banners")
         </div>
         <?php
         echo ModuleHelper::buildMethodCallForm(
-                "BannerController",
-                "update",
-                [],
-                RequestMethod::POST,
-                [
-                    "autocomplete" => "off"
-                ]
+            "BannerController",
+            "update",
+            [],
+            RequestMethod::POST,
+            [
+                "autocomplete" => "off"
+            ]
         );
         ?>
         <h4><?php translate("preview"); ?></h4>
@@ -60,7 +60,7 @@ if ($permissionChecker->hasPermission("banners")
             if ($row->getType() == "gif") {
                 echo 'checked="checked"';
             }
-            ?>
+        ?>
                    id="radio_gif" name="type" value="gif"
                    onclick="$('#type_gif').slideDown();
                                    $('#type_html').slideUp();">
@@ -99,7 +99,7 @@ if ($permissionChecker->hasPermission("banners")
             if ($row->getType() == "html") {
                 echo 'checked="checked"';
             }
-            ?>
+        ?>
                    id="radio_html" name="type" value="html"
                    onclick="$('#type_html').slideDown();$('#type_gif').slideUp();">
             <label for="radio_html">HTML</label>
@@ -123,14 +123,14 @@ if ($permissionChecker->hasPermission("banners")
                 if ($row->getEnabled()) {
                     echo "selected";
                 }
-                ?>>
+        ?>>
                     <?php translate("yes"); ?></option>
                 <option value="0"
                 <?php
-                if (!$row->getEnabled()) {
-                    echo "selected";
-                }
-                ?>>
+        if (!$row->getEnabled()) {
+            echo "selected";
+        }
+        ?>>
                     <?php translate("no"); ?></option>
             </select>
         </div>
@@ -152,30 +152,30 @@ if ($permissionChecker->hasPermission("banners")
 
             <select name="language">
                 <?php
-                $languages = getAllLanguages();
-                $page_language = $row->getLanguage();
+        $languages = getAllLanguages();
+        $page_language = $row->getLanguage();
 
-                if ($page_language === "all") {
-                    echo "<option value='all' selected='selected'>" .
-                    get_translation("every") . "</option>";
-                } else {
-                    echo "<option value='all'>" . get_translation("every") . "</option>";
-                }
+        if ($page_language === "all") {
+            echo "<option value='all' selected='selected'>" .
+            get_translation("every") . "</option>";
+        } else {
+            echo "<option value='all'>" . get_translation("every") . "</option>";
+        }
 
-                $languagesCount = count($languages);
+        $languagesCount = count($languages);
 
-                for ($j = 0; $j < $languagesCount; $j++) {
-                    if ($languages[$j] === $page_language) {
-                        echo "<option value='" . $languages[$j] . "' selected>" .
-                        getLanguageNameByCode($languages[$j]) . "</option>";
-                    } else {
-                        echo "<option value='" . $languages[$j] . "'>" .
-                        getLanguageNameByCode($languages[$j]) . "</option>";
-                    }
-                }
+        for ($j = 0; $j < $languagesCount; $j++) {
+            if ($languages[$j] === $page_language) {
+                echo "<option value='" . $languages[$j] . "' selected>" .
+                getLanguageNameByCode($languages[$j]) . "</option>";
+            } else {
+                echo "<option value='" . $languages[$j] . "'>" .
+                getLanguageNameByCode($languages[$j]) . "</option>";
+            }
+        }
 
-                $pages = getAllPages($page_language, "title");
-                ?>
+        $pages = getAllPages($page_language, "title");
+        ?>
             </select>
         </div>
         <div class="field">
@@ -192,7 +192,7 @@ if ($permissionChecker->hasPermission("banners")
         <?php
     } else {
         echo Alert::danger(
-                get_translation("not_found")
+            get_translation("not_found")
         );
     }
 } else {

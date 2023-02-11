@@ -4,8 +4,8 @@ use App\Models\Content\Comment;
 use App\Constants\CommentStatus;
 
 $comments = Comment::getAllByStatus(
-                CommentStatus::PUBLISHED,
-                Vars::get("content_id")
+    CommentStatus::PUBLISHED,
+    Vars::get("content_id")
 );
 $last = end($comments);
 reset($comments);
@@ -29,15 +29,15 @@ reset($comments);
                         rel="nofollow"
                         target="_blank"><?php
                             esc(
-                                    $comment->getAuthorUrl()
-                            );
-                            ?></a> <br />
+                $comment->getAuthorUrl()
+            );
+                    ?></a> <br />
                 <?php } ?>
                 <?php
                 echo make_links_clickable(
                         App\HTML\text($comment->getText())
-                );
-                ?>
+                    );
+            ?>
             </div>
             <?php if ($comment != $last) { ?>
                 <hr />

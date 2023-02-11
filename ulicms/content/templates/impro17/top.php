@@ -24,8 +24,8 @@ if (!$searchPage) {
           href="<?php echo getModulePath("bootstrap"); ?>css/bootstrap.min.css">
           <?php
           base_metas();
-          og_tags();
-          ?>
+og_tags();
+?>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -35,8 +35,8 @@ if (!$searchPage) {
 
     <?php
     enqueueStylesheet(getTemplateDirPath("impro17") . "style.scss");
-    combinedStylesheetHtml();
-    ?>
+combinedStylesheetHtml();
+?>
 </head>
 <body class="<?php body_classes(); ?>">
     <div class="container" id="root">
@@ -52,8 +52,8 @@ if (!$searchPage) {
 
             <div id="mobile-nav"></div>
             <?php
-            if ((!containsModule(null, "extended_search") && !containsModule(null, "search")) and $hasSearch and $searchPage) {
-                ?>
+        if ((!containsModule(null, "extended_search") && !containsModule(null, "search")) and $hasSearch and $searchPage) {
+            ?>
                 <form id="search-form-head" method="get"
                       action="<?php Template::escape(buildSEOURL($searchPage->slug)); ?>">
                     <input type="search" required="required" name="q"
@@ -62,15 +62,15 @@ if (!$searchPage) {
                            placeholder="<?php translate("search"); ?>...">
                 </form>
             <?php }
-            ?>
+        ?>
         </div>
         <?php if (is_frontpage()) { ?>
             <div class="jumbotron">
                 <?php
-                if (getconfig("logo_disabled") == "no") {
-                    logo();
-                }
-                ?>
+            if (getconfig("logo_disabled") == "no") {
+                logo();
+            }
+            ?>
                 <div class="lead"><?php echo Settings::get("motd"); ?></div>
                 <p>
                     <a class="btn btn-lg btn-success" href="admin/" role="button"><?php translate("login") ?></a>

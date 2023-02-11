@@ -2,76 +2,85 @@
 
 use App\HTML\Alert;
 
-class AlertTest extends \PHPUnit\Framework\TestCase {
-
-    public function testAlert() {
+class AlertTest extends \PHPUnit\Framework\TestCase
+{
+    public function testAlert()
+    {
         $this->assertEquals(
-                "<div class=\"alert foo bar\">&lt;strong&gt;Hello World&lt;/strong&gt;</div>",
-                Alert::alert("<strong>Hello World</strong>", "foo bar", false)
+            "<div class=\"alert foo bar\">&lt;strong&gt;Hello World&lt;/strong&gt;</div>",
+            Alert::alert("<strong>Hello World</strong>", "foo bar", false)
         );
     }
 
-    public function testDanger() {
+    public function testDanger()
+    {
         $this->assertEquals(
-                "<div class=\"alert alert-danger \">&lt;strong&gt;Hello World&lt;/strong&gt;</div>",
-                Alert::danger("<strong>Hello World</strong>", "", false)
+            "<div class=\"alert alert-danger \">&lt;strong&gt;Hello World&lt;/strong&gt;</div>",
+            Alert::danger("<strong>Hello World</strong>", "", false)
         );
     }
 
-    public function testInfo() {
+    public function testInfo()
+    {
         $this->assertEquals(
-                "<div class=\"alert alert-info \">&lt;strong&gt;Hello World&lt;/strong&gt;</div>",
-                Alert::info("<strong>Hello World</strong>", "", false)
+            "<div class=\"alert alert-info \">&lt;strong&gt;Hello World&lt;/strong&gt;</div>",
+            Alert::info("<strong>Hello World</strong>", "", false)
         );
     }
 
-    public function testWarning() {
+    public function testWarning()
+    {
         $this->assertEquals(
-                "<div class=\"alert alert-warning \">&lt;strong&gt;Hello World&lt;/strong&gt;</div>",
-                Alert::warning("<strong>Hello World</strong>", "", false)
+            "<div class=\"alert alert-warning \">&lt;strong&gt;Hello World&lt;/strong&gt;</div>",
+            Alert::warning("<strong>Hello World</strong>", "", false)
         );
     }
 
-    public function testSuccess() {
+    public function testSuccess()
+    {
         $this->assertEquals(
-                "<div class=\"alert alert-success \">&lt;strong&gt;Hello World&lt;/strong&gt;</div>",
-                Alert::success("<strong>Hello World</strong>", "", false)
+            "<div class=\"alert alert-success \">&lt;strong&gt;Hello World&lt;/strong&gt;</div>",
+            Alert::success("<strong>Hello World</strong>", "", false)
         );
     }
 
-    public function testAlertAllowHtml() {
+    public function testAlertAllowHtml()
+    {
         $this->assertEquals(
-                "<div class=\"alert foo bar\"><strong>Hello World</strong></div>",
-                Alert::alert("<strong>Hello World</strong>", "foo bar", true)
+            "<div class=\"alert foo bar\"><strong>Hello World</strong></div>",
+            Alert::alert("<strong>Hello World</strong>", "foo bar", true)
         );
     }
 
-    public function testDangerAllowHtml() {
+    public function testDangerAllowHtml()
+    {
         $this->assertEquals(
-                "<div class=\"alert alert-danger \"><strong>Hello World</strong></div>",
-                Alert::danger("<strong>Hello World</strong>", "", true)
+            "<div class=\"alert alert-danger \"><strong>Hello World</strong></div>",
+            Alert::danger("<strong>Hello World</strong>", "", true)
         );
     }
 
-    public function testInfoAllowHtml() {
+    public function testInfoAllowHtml()
+    {
         $this->assertEquals(
-                "<div class=\"alert alert-info \"><strong>Hello World</strong></div>",
-                Alert::info("<strong>Hello World</strong>", "", true)
+            "<div class=\"alert alert-info \"><strong>Hello World</strong></div>",
+            Alert::info("<strong>Hello World</strong>", "", true)
         );
     }
 
-    public function testWarningAllowHtml() {
+    public function testWarningAllowHtml()
+    {
         $this->assertEquals(
-                "<div class=\"alert alert-warning \"><strong>Hello World</strong></div>",
-                Alert::warning("<strong>Hello World</strong>", "", true)
+            "<div class=\"alert alert-warning \"><strong>Hello World</strong></div>",
+            Alert::warning("<strong>Hello World</strong>", "", true)
         );
     }
 
-    public function testSuccessAllowHtml() {
+    public function testSuccessAllowHtml()
+    {
         $this->assertEquals(
-                "<div class=\"alert alert-success \"><strong>Hello World</strong></div>",
-                Alert::success("<strong>Hello World</strong>", "", true)
+            "<div class=\"alert alert-success \"><strong>Hello World</strong></div>",
+            Alert::success("<strong>Hello World</strong>", "", true)
         );
     }
-
 }

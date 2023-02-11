@@ -18,13 +18,13 @@ if ($permissionChecker->hasPermission("default_access_restrictions_edit")) {
     <h1><?php translate("DEFAULT_ACCESS_RESTRICTIONS"); ?></h1>
     <?=
     ModuleHelper::buildMethodCallForm(
-            "DefaultAccessRestrictionsController",
-            "save",
-            [],
-            RequestMethod::POST,
-            [
-                "id" => "default_edit_restrictions"
-            ]
+        "DefaultAccessRestrictionsController",
+        "save",
+        [],
+        RequestMethod::POST,
+        [
+            "id" => "default_edit_restrictions"
+        ]
     );
     ?>
     <div class="checkbox">
@@ -36,7 +36,7 @@ if ($permissionChecker->hasPermission("default_access_restrictions_edit")) {
                    if ($only_admins_can_edit) {
                        echo "checked";
                    }
-                   ?>><?php translate("admins"); ?></label>
+    ?>><?php translate("admins"); ?></label>
     </div>
     <div class="checkbox">
         <label>
@@ -44,10 +44,10 @@ if ($permissionChecker->hasPermission("default_access_restrictions_edit")) {
                    id="only_group_can_edit" value="1"
                    class="js-switch"
                    <?php
-                   if ($only_group_can_edit) {
-                       echo "checked";
-                   }
-                   ?>>
+    if ($only_group_can_edit) {
+        echo "checked";
+    }
+    ?>>
             <?php translate("group"); ?></label>
     </div>
     <div class="checkbox">
@@ -56,10 +56,10 @@ if ($permissionChecker->hasPermission("default_access_restrictions_edit")) {
                    id="only_owner_can_edit" value="1"
                    class="js-switch"
                    <?php
-                   if ($only_owner_can_edit) {
-                       echo "checked";
-                   }
-                   ?>>
+    if ($only_owner_can_edit) {
+        echo "checked";
+    }
+    ?>>
                    <?php translate("owner"); ?>
         </label>
     </div>
@@ -69,10 +69,10 @@ if ($permissionChecker->hasPermission("default_access_restrictions_edit")) {
                    id="only_others_can_edit" value="1"
                    class="js-switch"
                    <?php
-                   if ($only_others_can_edit) {
-                       echo "checked";
-                   }
-                   ?>>
+    if ($only_others_can_edit) {
+        echo "checked";
+    }
+    ?>>
                    <?php translate("others"); ?>
         </label>
     </div>

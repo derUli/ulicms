@@ -58,8 +58,8 @@ if (count($groups) > 0) {
                                     ?> <a
                                         href="?action=groups&standard=<?php echo $id; ?>"><span style="color: red; font-weight: bold;"
                                                                                             onclick='return confirm("<?php echo str_ireplace("%name%", $name, get_translation("make_group_default")); ?>")'><?php translate("no"); ?> </span> </a> <?php
-                                    }
-                                    ?>
+                                }
+                            ?>
                             </td>
                             <td><a
                                     href="<?php echo ModuleHelper::buildActionURL("admins", "admins_filter_group=" . $id) ?>" 
@@ -69,28 +69,28 @@ if (count($groups) > 0) {
                                         alt="<?php translate("show_users"); ?>"></a></td>
                             <td><a
                                     href="?action=groups&edit=<?php
-                                    echo $id;
-                                    ?>"
+                            echo $id;
+                            ?>"
                                     class="is-not-ajax"
                                     ><img class="mobile-big-image" src="gfx/edit.png"
                                       alt="<?php
-                                      translate("edit");
-                                      ?>"
+                              translate("edit");
+                            ?>"
                                       title="<?php
-                                      translate("edit");
-                                      ?>"> </a></td>
+                            translate("edit");
+                            ?>"> </a></td>
                             <td><form
                                     action="?action=groups&delete=<?php
                                     echo $id;
-                                    ?>"
+                            ?>"
                                     method="post" class="delete-form"><?php csrf_token_html(); ?><input
                                         type="image" class="mobile-big-image" src="gfx/delete.png"
                                         alt="<?php
-                                        translate("delete");
-                                        ?>"
+                                translate("delete");
+                            ?>"
                                         title="<?php
-                                        translate("delete");
-                                        ?>">
+                            translate("delete");
+                            ?>">
                                 </form></td>
                         <?php } ?>
                     </tr>

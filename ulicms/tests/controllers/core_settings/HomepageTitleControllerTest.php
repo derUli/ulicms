@@ -1,10 +1,11 @@
 <?php
 
-class HomepageTitleControllerTest extends \PHPUnit\Framework\TestCase {
-
+class HomepageTitleControllerTest extends \PHPUnit\Framework\TestCase
+{
     private $defaultSettings = [];
 
-    protected function setUp(): void {
+    protected function setUp(): void
+    {
         $this->defaultSettings = [
             "default_language" => Settings::get("default_language"),
             "homepage_title_de" => Settings::get("homepage_title_de"),
@@ -13,7 +14,8 @@ class HomepageTitleControllerTest extends \PHPUnit\Framework\TestCase {
         ];
     }
 
-    protected function tearDown(): void {
+    protected function tearDown(): void
+    {
         $_POST = [];
 
         foreach ($this->defaultSettings as $key => $value) {
@@ -21,7 +23,8 @@ class HomepageTitleControllerTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testSavePost(): void {
+    public function testSavePost(): void
+    {
         $_POST["homepage_title_de"] = "Ulis löbliche Heimseite";
         $_POST["homepage_title_en"] = "Ulis lovely Homepage";
         Settings::set("default_language", "en");
@@ -30,18 +33,17 @@ class HomepageTitleControllerTest extends \PHPUnit\Framework\TestCase {
         $controller->_savePost();
 
         $this->assertEquals(
-                "Ulis löbliche Heimseite",
-                Settings::get('homepage_title_de')
+            "Ulis löbliche Heimseite",
+            Settings::get('homepage_title_de')
         );
 
         $this->assertEquals(
-                "Ulis lovely Homepage",
-                Settings::get('homepage_title_en')
+            "Ulis lovely Homepage",
+            Settings::get('homepage_title_en')
         );
         $this->assertEquals(
-                "Ulis lovely Homepage",
-                Settings::get('homepage_title')
+            "Ulis lovely Homepage",
+            Settings::get('homepage_title')
         );
     }
-
 }

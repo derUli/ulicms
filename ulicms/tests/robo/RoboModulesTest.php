@@ -3,13 +3,15 @@
 require_once __DIR__ . "/RoboTestFile.php";
 require_once __DIR__ . "/RoboTestBase.php";
 
-class RoboModulesTest extends RoboTestBase {
-
-    protected function setUp(): void {
+class RoboModulesTest extends RoboTestBase
+{
+    protected function setUp(): void
+    {
         $this->runRoboCommand(["modules:sync"]);
     }
 
-    public function testModulesList() {
+    public function testModulesList()
+    {
         $output = $this->runRoboCommand(["modules:list"]);
 
         $this->assertEquals(13, substr_count($output, "core_"));
@@ -18,7 +20,8 @@ class RoboModulesTest extends RoboTestBase {
         }
     }
 
-    public function testModulesListAll() {
+    public function testModulesListAll()
+    {
         $output = $this->runRoboCommand(["modules:list", "[all]"]);
 
         $this->assertEquals(13, substr_count($output, "core_"));
@@ -27,7 +30,8 @@ class RoboModulesTest extends RoboTestBase {
         }
     }
 
-    public function testModulesListCore() {
+    public function testModulesListCore()
+    {
         $output = $this->runRoboCommand(["modules:list", "[core]"]);
         $this->assertStringContainsString("core_", $output);
 
@@ -38,7 +42,8 @@ class RoboModulesTest extends RoboTestBase {
         $this->assertStringNotContainsString("slicknav", $output);
     }
 
-    public function testModulesListExtend() {
+    public function testModulesListExtend()
+    {
         $output = $this->runRoboCommand(["modules:list", "[extend]"]);
         $this->assertStringNotContainsString("update_manager_dashboard", $output);
         $this->assertStringNotContainsString("core_", $output);
@@ -49,7 +54,8 @@ class RoboModulesTest extends RoboTestBase {
         $this->assertStringContainsString("oneclick_upgrade", $output);
     }
 
-    public function testModulesListPkgSrc() {
+    public function testModulesListPkgSrc()
+    {
         $output = $this->runRoboCommand(["modules:list", "[pkgsrc]"]);
         $this->assertStringContainsString("update_manager_dashboard", $output);
 
@@ -60,79 +66,82 @@ class RoboModulesTest extends RoboTestBase {
         $this->assertStringNotContainsString("oneclick_upgrade", $output);
     }
 
-    public function testModulesGetPackageVersions() {
+    public function testModulesGetPackageVersions()
+    {
         $expected = file_get_contents(
-                Path::resolve(
-                        "ULICMS_ROOT/tests/fixtures/robo/modulesGetPackageVersions.expected.txt"
-                )
+            Path::resolve(
+                "ULICMS_ROOT/tests/fixtures/robo/modulesGetPackageVersions.expected.txt"
+            )
         );
 
         $actual = $this->runRoboCommand(
-                [
-                    "modules:get-package-versions",
-                    "ldap_login"
-                ]
+            [
+                "modules:get-package-versions",
+                "ldap_login"
+            ]
         );
 
         $this->assertStringContainsString(
-                '/content/files/packages/ldap_login/ldap_login-2.1.sin',
-                $actual
+            '/content/files/packages/ldap_login/ldap_login-2.1.sin',
+            $actual
         );
     }
 
-    public function testModulesEnableAndDisable() {
+    public function testModulesEnableAndDisable()
+    {
         $actual = $this->runRoboCommand(
-                [
-                    "modules:enable",
-                    "fortune2"
-                ]
+            [
+                "modules:enable",
+                "fortune2"
+            ]
         );
         $this->assertEquals("fortune2 0.2.3 (enabled)", $actual);
 
         $actual = $this->runRoboCommand(
-                [
-                    "modules:disable",
-                    "fortune2"
-                ]
+            [
+                "modules:disable",
+                "fortune2"
+            ]
         );
         $this->assertEquals("fortune2 0.2.3 (disabled)", $actual);
     }
 
-    public function testModulesToggle() {
+    public function testModulesToggle()
+    {
         $this->runRoboCommand(
-                [
-                    "modules:enable",
-                    "fortune2"
-                ]
+            [
+                "modules:enable",
+                "fortune2"
+            ]
         );
 
         $actual = $this->runRoboCommand(
-                [
-                    "modules:toggle",
-                    "fortune2"
-                ]
+            [
+                "modules:toggle",
+                "fortune2"
+            ]
         );
         $this->assertEquals("fortune2 0.2.3 (disabled)", $actual);
 
         $actual = $this->runRoboCommand(
-                [
-                    "modules:toggle",
-                    "fortune2"
-                ]
+            [
+                "modules:toggle",
+                "fortune2"
+            ]
         );
         $this->assertEquals("fortune2 0.2.3 (enabled)", $actual);
     }
 
-    public function testModulesRemoveReturnsError() {
+    public function testModulesRemoveReturnsError()
+    {
         $actual = $this->runRoboCommand(
-                [
-                    "modules:remove",
-                    "foobar1",
-                    "foobar2"
-                ]
+            [
+                "modules:remove",
+                "foobar1",
+                "foobar2"
+            ]
         );
         $this->assertStringContainsString("Removing foobar1 failed.", $actual);
         $this->assertStringContainsString("Removing foobar2 failed.", $actual);
     }
-
 }

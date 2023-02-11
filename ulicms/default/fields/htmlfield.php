@@ -1,7 +1,7 @@
 <?php
 $field = ViewBag::get("field");
 $value = ViewBag::get("field_value");
-if ($value === NULL) {
+if ($value === null) {
     $value = $field->defaultValue;
 }
 ?>
@@ -11,14 +11,14 @@ if ($value === NULL) {
         if ($field->required) {
             echo "*";
         }
-        ?></strong>
+?></strong>
     <textarea name="<?php esc(ViewBag::get("field_name")); ?>"
               id="<?php esc(ViewBag::get("field_name")); ?>"
               <?php
-              if ($field->required) {
-                  echo "required";
-              }
-              ?>
+      if ($field->required) {
+          echo "required";
+      }
+?>
               <?php echo ModuleHelper::buildHTMLAttributesFromArray($field->htmlAttributes); ?>><?php Template::escape($value); ?></textarea>
               <?php if ($field->helpText) { ?>
         <small><?php translate($field->helpText); ?></small>

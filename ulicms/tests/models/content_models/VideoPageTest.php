@@ -1,12 +1,14 @@
 <?php
 
-class VideoPageTest extends \PHPUnit\Framework\TestCase {
-
-    protected function tearDown(): void {
+class VideoPageTest extends \PHPUnit\Framework\TestCase
+{
+    protected function tearDown(): void
+    {
         Database::query("delete from {prefix}content where title like 'Unit Test%'", true);
     }
 
-    public function testSetArticle() {
+    public function testSetArticle()
+    {
         $videoPage = new Video_Page();
         $videoPage->title = "Unit Test Article";
         $videoPage->slug = "unit test";
@@ -19,5 +21,4 @@ class VideoPageTest extends \PHPUnit\Framework\TestCase {
 
         $this->assertNotNull($videoPage->getId());
     }
-
 }

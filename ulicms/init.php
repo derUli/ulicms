@@ -42,8 +42,8 @@ if (is_file($composerAutoloadFile)) {
     require $composerAutoloadFile;
 } else {
     throw new FileNotFoundException(
-                    "autoload.php not found. "
-                    . "Please run \"./composer install\" to install dependecies."
+        "autoload.php not found. "
+        . "Please run \"./composer install\" to install dependecies."
     );
 }
 
@@ -64,7 +64,8 @@ spl_autoload_register(function ($className) {
     require $basePath;
 });
 
-function require_all_files_in_dir(string $dir) {
+function require_all_files_in_dir(string $dir)
+{
     $files = glob(ULICMS_ROOT . "/$dir/*.php");
 
     foreach ($files as $file) {
@@ -83,7 +84,8 @@ if (is_file($mobile_detect_as_module)) {
     require $mobile_detect_as_module;
 }
 
-function exception_handler($exception) {
+function exception_handler($exception)
+{
     if (!defined("EXCEPTION_OCCURRED")) {
         define("EXCEPTION_OCCURRED", true);
     }
@@ -166,25 +168,26 @@ Translation::init();
 if (class_exists("Path")) {
     if (isset($config->exception_logging) && $config->exception_logging) {
         LoggerRegistry::register(
-                "exception_log",
-                new Logger(Path::resolve("ULICMS_LOG/exception_log"))
+            "exception_log",
+            new Logger(Path::resolve("ULICMS_LOG/exception_log"))
         );
     }
     if (isset($config->query_logging) && $config->query_logging) {
         LoggerRegistry::register(
-                "sql_log",
-                new Logger(Path::resolve("ULICMS_LOG/sql_log"))
+            "sql_log",
+            new Logger(Path::resolve("ULICMS_LOG/sql_log"))
         );
     }
     if (isset($config->phpmailer_logging) && $config->phpmailer_logging) {
         LoggerRegistry::register(
-                "phpmailer_log",
-                new Logger(Path::resolve("ULICMS_LOG/phpmailer_log"))
+            "phpmailer_log",
+            new Logger(Path::resolve("ULICMS_LOG/phpmailer_log"))
         );
     }
 }
 
-function noPerms(): void {
+function noPerms(): void
+{
     echo "<div class=\"alert alert-danger\">"
     . get_translation("no_permissions") . "</div>";
 }
@@ -194,12 +197,12 @@ $db_port = $config->db_port ?? ini_get("mysqli.default_port");
 $db_strict_mode = $config->db_strict_mode ?? false;
 
 @$connection = Database::connect(
-                $config->db_server,
-                $config->db_user,
-                $config->db_password,
-                $db_port,
-                $db_socket,
-                $db_strict_mode
+    $config->db_server,
+    $config->db_user,
+    $config->db_password,
+    $db_port,
+    $db_socket,
+    $db_strict_mode
 );
 
 if (!$connection) {
@@ -215,8 +218,8 @@ if (isset($config->dbmigrator_auto_migrate) && $config->dbmigrator_auto_migrate)
         Database::setEchoQueries(true);
     }
     $select = Database::setupSchemaAndSelect(
-                    $config->db_database,
-                    $additionalSql
+        $config->db_database,
+        $additionalSql
     );
 } else {
     $select = Database::select($config->db_database);
@@ -238,9 +241,9 @@ App\Utils\Session\sessionName(Settings::get("session_name"));
 $useragent = Settings::get("useragent");
 
 define(
-        "ULICMS_USERAGENT",
-        $useragent ?
-                $useragent : "UliCMS Release " . cms_version()
+    "ULICMS_USERAGENT",
+    $useragent ?
+            $useragent : "UliCMS Release " . cms_version()
 );
 
 @ini_set('user_agent', ULICMS_USERAGENT);
@@ -287,21 +290,21 @@ if (isset($_SESSION["session_begin"])) {
 }
 
 register_shutdown_function(
-        function () {
-            do_event("shutdown");
+    function () {
+        do_event("shutdown");
 
-            $cfg = new CMSConfig();
-            if (isset($cfg->show_render_time) && $cfg->show_render_time && !Request::isAjaxRequest()) {
-                echo "\n\n<!--" . (microtime(true) - START_TIME) . "-->";
-            }
-            if (isset($cfg->dbmigrator_drop_database_on_shutdown) && $cfg->dbmigrator_drop_database_on_shutdown) {
-                if (isCLI()) {
-                    Database::setEchoQueries(true);
-                }
-                Database::dropSchema($cfg->db_database);
-                Database::setEchoQueries(false);
-            }
+        $cfg = new CMSConfig();
+        if (isset($cfg->show_render_time) && $cfg->show_render_time && !Request::isAjaxRequest()) {
+            echo "\n\n<!--" . (microtime(true) - START_TIME) . "-->";
         }
+        if (isset($cfg->dbmigrator_drop_database_on_shutdown) && $cfg->dbmigrator_drop_database_on_shutdown) {
+            if (isCLI()) {
+                Database::setEchoQueries(true);
+            }
+            Database::dropSchema($cfg->db_database);
+            Database::setEchoQueries(false);
+        }
+    }
 );
 
 $defaultMenu = isset($config->default_menu) && !empty($config->default_menu) ?
