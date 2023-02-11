@@ -8,7 +8,8 @@ declare(strict_types=1);
  * @deprecated since 2023.1
  * @return type
  */
-function getconfig(string $key) {
+function getconfig(string $key)
+{
     return Settings::get($key);
 }
 
@@ -19,18 +20,20 @@ function getconfig(string $key) {
  * @return bool
  */
 // Remove an configuration variable
-function deleteconfig(string $key): bool {
+function deleteconfig(string $key): bool
+{
     return Settings::delete($key);
 }
 
 /**
- * 
+ *
  * Sets a setting
  * @param string $key
  * @param type $value
  * @deprecated since 2023.1
  */
-function setconfig(string $key, $value) {
+function setconfig(string $key, $value)
+{
     $result = db_query("SELECT id FROM " . tbname("settings") .
             " WHERE name='$key'");
     if (db_num_rows($result) > 0) {
@@ -41,6 +44,7 @@ function setconfig(string $key, $value) {
     }
 }
 
-function get_lang_config(string $name, string $lang): ?string {
+function get_lang_config(string $name, string $lang): ?string
+{
     return Settings::getLang($name, $lang);
 }

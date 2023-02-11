@@ -15,8 +15,8 @@ if (!defined("LOADED_LANGUAGE_FILE")) {
 
     if (!empty($_GET["language"]) && in_array($_GET["language"], $languages)) {
         $_SESSION["language"] = Database::escapeValue(
-                        $_GET["language"],
-                        DB_TYPE_STRING
+            $_GET["language"],
+            DB_TYPE_STRING
         );
     }
 

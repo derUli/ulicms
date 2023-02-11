@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 defined('ULICMS_ROOT') or exit('no direct script access allowed');
 
-function getThemeMeta(string $theme, string $attrib = null) {
+function getThemeMeta(string $theme, string $attrib = null)
+{
     $retval = null;
     $metadata_file = getTemplateDirPath($theme, true) . "metadata.json";
 
@@ -17,7 +18,7 @@ function getThemeMeta(string $theme, string $attrib = null) {
         }
 
         Vars::set("theme_{$theme}_meta", $data);
-        if ($attrib != NULL) {
+        if ($attrib != null) {
             if (isset($data[$attrib])) {
                 $retval = $data[$attrib];
             }

@@ -2,7 +2,8 @@
 
 declare(strict_types=1);
 
-function get_all_used_menus(): array {
+function get_all_used_menus(): array
+{
     $retval = [];
     $result = db_query("select menu from " . tbname("content") .
             " group by menu");
@@ -16,8 +17,8 @@ function get_all_used_menus(): array {
 // Zusätzliche Navigationsmenüs können definiert werden,
 // durch setzen von additional_menus
 function getAllMenus(
-        bool $only_used = false,
-        bool $read_theme_menus = true
+    bool $only_used = false,
+    bool $read_theme_menus = true
 ): array {
     $menus = array(
         "left",

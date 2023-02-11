@@ -9,7 +9,8 @@ declare(strict_types=1);
  * Stops the end user seeing loads of just plain old white
  * and thinking the browser has crashed on long loading pages.
  */
-function fcflush(): void {
+function fcflush(): void
+{
     static $output_handler = null;
 
     if ($output_handler === null) {

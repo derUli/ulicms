@@ -5,7 +5,8 @@ declare(strict_types=1);
 use App\Models\Media\Audio;
 use App\Models\Media\Video;
 
-function replaceAudioTags(string $txt): ?string {
+function replaceAudioTags(string $txt): ?string
+{
     $audio_dir = "content/audio/";
 
     // Ich weiß, dass das eigentlich einfacher mit einem
@@ -34,7 +35,8 @@ function replaceAudioTags(string $txt): ?string {
     return $txt;
 }
 
-function replaceVideoTags(string $txt): string {
+function replaceVideoTags(string $txt): string
+{
     $video_dir = "content/videos/";
 
     // Ich weiß, dass das eigentlich einfacher mit einem

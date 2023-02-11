@@ -8,7 +8,8 @@ use App\Exceptions\CorruptDownloadException;
 
 // die Funktionalität von file_get_contents
 // mit dem Curl-Modul umgesetzt
-function file_get_contents_curl(string $url): ?string {
+function file_get_contents_curl(string $url): ?string
+{
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_USERAGENT, ULICMS_USERAGENT);
     curl_setopt($ch, CURLOPT_HEADER, 0);
@@ -35,16 +36,17 @@ function file_get_contents_curl(string $url): ?string {
  * @param mixed $url
  * @return bool
  */
-function is_url(mixed $url): bool {
-    return filter_var($url, FILTER_VALIDATE_URL) !== FALSE;
+function is_url(mixed $url): bool
+{
+    return filter_var($url, FILTER_VALIDATE_URL) !== false;
 }
 
 // Nutze curl zum Download der Datei, sofern verfügbar
 // Ansonsten Fallback auf file_get_contents
 function file_get_contents_wrapper(
-        string $url,
-        bool $no_cache = false,
-        $checksum = null
+    string $url,
+    bool $no_cache = false,
+    $checksum = null
 ): ?string {
     $content = false;
     if (!is_url($url)) {
@@ -69,7 +71,7 @@ function file_get_contents_wrapper(
     if ($content and StringHelper::isNotNullOrWhitespace($checksum)
             and md5($content) !== strtolower($checksum)) {
         throw new CorruptDownloadException(
-                        "Download of $url - Checksum validation failed"
+            "Download of $url - Checksum validation failed"
         );
     }
 
@@ -80,7 +82,8 @@ function file_get_contents_wrapper(
     return $content;
 }
 
-function curl_url_exists(string $url): bool {
+function curl_url_exists(string $url): bool
+{
     $timeout = 10;
     $ch = curl_init();
     // HTTP request is 'HEAD' too make this method fast
@@ -98,8 +101,8 @@ function curl_url_exists(string $url): bool {
 }
 
 if (!defined("RESPONSIVE_FM")) {
-
-    function url_exists(string $url): bool {
+    function url_exists(string $url): bool
+    {
         if (function_exists("curl_init") and
                 str_starts_with($url, "http")) {
             return curl_url_exists($url);
@@ -110,5 +113,4 @@ if (!defined("RESPONSIVE_FM")) {
         }
         return true;
     }
-
 }

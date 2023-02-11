@@ -11,7 +11,8 @@ use App\Utils\CacheUtil;
  * @deprecated since version 2023.1
  * @return void
  */
-function clearCache(): void {
+function clearCache(): void
+{
     CacheUtil::clearCache();
 }
 
@@ -20,7 +21,8 @@ function clearCache(): void {
  * @param bool $do
  * @return void
  */
-function no_cache(bool $do = false): void {
+function no_cache(bool $do = false): void
+{
     if ($do) {
         Vars::setNoCache(true);
     } elseif (in_array(get_cache_control(), ["auto", "no_cache"])) {

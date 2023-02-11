@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 use App\Constants\ModuleEventConstants;
 
-function getModuleMeta($module, $attrib = null) {
+function getModuleMeta($module, $attrib = null)
+{
     $metadata_file = ModuleHelper::buildModuleRessourcePath(
-                    $module,
-                    "metadata.json",
-                    true
+        $module,
+        "metadata.json",
+        true
     );
     if (!is_file($metadata_file)) {
         return null;
@@ -24,8 +25,8 @@ function getModuleMeta($module, $attrib = null) {
 }
 
 function do_event(
-        string $name,
-        string $runs = ModuleEventConstants::RUNS_ONCE
+    string $name,
+    string $runs = ModuleEventConstants::RUNS_ONCE
 ): void {
     $modules = getAllModules();
     $disabledModules = Vars::get("disabledModules") ?? [];
@@ -65,21 +66,22 @@ function do_event(
     }
 }
 
-function stringContainsShortCodes(string $content, ?string $module = null): bool {
+function stringContainsShortCodes(string $content, ?string $module = null): bool
+{
     $quot = '(' . preg_quote('&quot;') . ')?';
     return boolval(
-            $module ?
-            preg_match('/\[module=\"?' . $quot . preg_quote($module) . '\"?' .
-                    $quot . '\]/m', $content) :
-            preg_match('/\[module=\"?' . $quot . '([a-zA-Z0-9_]+)\"?' .
-                    $quot . '\]/m', $content)
+        $module ?
+        preg_match('/\[module=\"?' . $quot . preg_quote($module) . '\"?' .
+                $quot . '\]/m', $content) :
+        preg_match('/\[module=\"?' . $quot . '([a-zA-Z0-9_]+)\"?' .
+                $quot . '\]/m', $content)
     );
 }
 
 // replace Shortcodes with modules
 function replaceShortcodesWithModules(
-        string $string,
-        bool $replaceOther = true
+    string $string,
+    bool $replaceOther = true
 ): string {
     $string = $replaceOther ? replaceOtherShortCodes($string) : $string;
 
@@ -130,7 +132,8 @@ function replaceShortcodesWithModules(
     return $string;
 }
 
-function replaceOtherShortCodes(string $string): string {
+function replaceOtherShortCodes(string $string): string
+{
     $string = str_ireplace('[title]', get_title(), $string);
     ob_start();
     logo();
@@ -138,9 +141,9 @@ function replaceOtherShortCodes(string $string): string {
     $language = getCurrentLanguage(true);
     $checkbox = new PrivacyCheckbox($language);
     $string = str_ireplace(
-            "[accept_privacy_policy]",
-            $checkbox->render(),
-            $string
+        "[accept_privacy_policy]",
+        $checkbox->render(),
+        $string
     );
     ob_start();
     site_slogan();
@@ -158,21 +161,21 @@ function replaceOtherShortCodes(string $string): string {
 
     // [tel] Links for tel Tags
     $string = preg_replace(
-            '/\[tel\]([^\[\]]+)\[\/tel\]/i',
-            '<a href="tel:$1" class="tel">$1</a>',
-            $string
+        '/\[tel\]([^\[\]]+)\[\/tel\]/i',
+        '<a href="tel:$1" class="tel">$1</a>',
+        $string
     );
     $string = preg_replace(
-            '/\[skype\]([^\[\]]+)\[\/skype\]/i',
-            '<a href="skye:$1?call" class="skype">$1</a>',
-            $string
+        '/\[skype\]([^\[\]]+)\[\/skype\]/i',
+        '<a href="skye:$1?call" class="skype">$1</a>',
+        $string
     );
 
     $string = str_ireplace("[year]", Template::getYear(), $string);
     $string = str_ireplace(
-            "[homepage_owner]",
-            Template::getHomepageOwner(),
-            $string
+        "[homepage_owner]",
+        Template::getHomepageOwner(),
+        $string
     );
 
     preg_match_all("/\[include=([0-9]+)]/i", $string, $match);
@@ -200,14 +203,15 @@ function replaceOtherShortCodes(string $string): string {
 }
 
 // Check if site contains a module
-function containsModule(?string $page = null, ?string $module = null): bool {
+function containsModule(?string $page = null, ?string $module = null): bool
+{
     $containsModule = false;
 
-    if ($page === NULL) {
+    if ($page === null) {
         $page = get_slug();
     }
 
-    if (Vars::get("page_" . $page . "_contains_" . $module) !== NULL) {
+    if (Vars::get("page_" . $page . "_contains_" . $module) !== null) {
         return Vars::get("page_" . $page . "_contains_" . $module);
     }
 
@@ -223,11 +227,11 @@ function containsModule(?string $page = null, ?string $module = null): bool {
     $content = str_replace("&quot;", "\"", $content);
 
     // TODO: Refactor this
-    if ($dataset["module"] !== NULL && !empty($dataset["module"]) && $dataset["type"] == "module") {
+    if ($dataset["module"] !== null && !empty($dataset["module"]) && $dataset["type"] == "module") {
         if (!$module || ($module && $dataset["module"] == $module)) {
             $containsModule = true;
         }
-    } else if (stringContainsShortCodes($content, $module)) {
+    } elseif (stringContainsShortCodes($content, $module)) {
         $containsModule = true;
     }
 

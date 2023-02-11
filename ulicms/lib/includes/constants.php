@@ -10,7 +10,8 @@ defined('ULICMS_ROOT') or exit('no direct script access allowed');
  * @param type $value Value for constant
  * @return bool
  */
-function idefine(string $name, $value): bool {
+function idefine(string $name, $value): bool
+{
     $success = false;
 
     $name = strtoupper($name);

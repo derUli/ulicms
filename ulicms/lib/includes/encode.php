@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 defined('ULICMS_ROOT') or exit('no direct script access allowed');
 
-function var_dump_str(): string {
+function var_dump_str(): string
+{
     $argc = func_num_args();
     $argv = func_get_args();
 
@@ -20,7 +21,8 @@ function var_dump_str(): string {
 }
 
 // like json_encode() but human readable
-function json_readable_encode($in, $indent = 0): string {
+function json_readable_encode($in, $indent = 0): string
+{
     $_myself = __FUNCTION__;
     $_escape = function ($str) {
         return preg_replace("!([\b\t\n\r\f\"\\'])!", "\\\\\\1", $str);
@@ -37,7 +39,7 @@ function json_readable_encode($in, $indent = 0): string {
             $out .= $_myself($value, $indent + 1);
         } elseif (is_bool($value)) {
             $out .= $value ? 'true' : 'false';
-        } elseif ($value === NULL) {
+        } elseif ($value === null) {
             $out .= 'null';
         } elseif (is_string($value)) {
             $out .= "\"" . $_escape($value) . "\"";
