@@ -7,6 +7,9 @@ declare(strict_types=1);
  */
 class UliCMSVersion
 {
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->codename = "Sniffing Vicuña";

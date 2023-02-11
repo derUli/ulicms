@@ -24,13 +24,13 @@ class Database
     public static function getSqlStrictModeFlags(): array
     {
         return [
-            "ONLY_FULL_GROUP_BY",
-            "STRICT_TRANS_TABLES",
-            "NO_ZERO_IN_DATE",
-            "NO_ZERO_DATE",
-            "ERROR_FOR_DIVISION_BY_ZERO",
-            "NO_AUTO_CREATE_USER",
-            "NO_ENGINE_SUBSTITUTION"
+            'ONLY_FULL_GROUP_BY',
+            'STRICT_TRANS_TABLES',
+            'NO_ZERO_IN_DATE',
+            'NO_ZERO_DATE',
+            'ERROR_FOR_DIVISION_BY_ZERO',
+            'NO_AUTO_CREATE_USER',
+            'NO_ENGINE_SUBSTITUTION'
         ];
     }
 
@@ -43,7 +43,7 @@ class Database
         ?string $socket = null,
         bool $db_strict_mode = false
     ): ?mysqli {
-        @$connected = mysqli_connect($server, $user, $password, "", $port, $socket);
+        @$connected = mysqli_connect($server, $user, $password, '', $port, $socket);
         self::$connection = $connected ? $connected : null;
         if (!self::$connection) {
             return null;
@@ -572,7 +572,7 @@ class Database
     public static function fetchSingle(?mysqli_result $result): ?object
     {
         if (self::getNumRows($result) > 1) {
-            throw new RangeException("Result contains more than one element.");
+            throw new RangeException('Result contains more than one element.');
         }
         if (Database::getNumRows($result) == 1) {
             return self::fetchObject($result);
@@ -588,7 +588,7 @@ class Database
         ?object $default = null
     ): ?object {
         if (self::getNumRows($result) > 1) {
-            throw new RangeException("Result contains more than one element.");
+            throw new RangeException('Result contains more than one element.');
         }
         if (Database::getNumRows($result) == 1) {
             return self::fetchObject($result);
