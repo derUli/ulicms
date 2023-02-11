@@ -56,17 +56,6 @@ class ArrayHelper extends Helper
         return $input;
     }
 
-    // returns the first x items of an array
-    public static function take(int $count, $data)
-    {
-        if (is_array($data)) {
-            return array_slice($data, 0, $count);
-        } elseif (is_string($data)) {
-            return mb_substr($data, 0, $count);
-        }
-        return null;
-    }
-
     // returns true if an array contains only one item
     public static function isSingle(array $input): bool
     {

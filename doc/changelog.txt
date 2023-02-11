@@ -58,6 +58,7 @@ Entfernte API-Methoden:
 * end_of_day()
 * get_carbon()
 * StringHelper::isEmpty()
+* ArrayHelper::take()
 
 ===== Neues in UliCMS 2022.1 =====
 
