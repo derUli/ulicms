@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
 use App\Security\TwoFactorAuthentication;
 
 /**
@@ -52,7 +54,7 @@ function changePassword(string $password, ?int $userId)
 }
 
 /**
- * Get a user by username
+ * Gets a user by username
  * @param string $name
  * @return array|null
  */
@@ -66,6 +68,11 @@ function getUserByName(string $name): ?array
     return null;
 }
 
+/**
+ * Get a user by id
+ * @param type $id
+ * @return array|null
+ */
 function getUserById($id): ?array
 {
     $result = Database::query("SELECT * FROM " . tbname('users') .
@@ -77,7 +84,7 @@ function getUserById($id): ?array
 }
 
 /**
- * Get the id of the currently logged in user or
+ * Gets the id of the currently logged in user or
  * @return int
  */
 function get_user_id(): ?int
@@ -86,7 +93,7 @@ function get_user_id(): ?int
 }
 
 /**
- * Get the primary group id of the currentlogy logged in user
+ * Gets the primary group id of the currentlogy logged in user
  * @return int|null
  */
 function get_group_id(): ?int
@@ -94,19 +101,36 @@ function get_group_id(): ?int
     return $_SESSION['group_id'] ?? null;
 }
 
+/**
+ * Checks if a user with the given username exists
+ * @param string $name
+ * @return bool
+ */
 function user_exists(string $name): bool
 {
     $user = new User();
     $user->loadByUsername($name);
-    return intval($user->getId()) > 0;
+    return $user->isPersistent();
 }
 
+/**
+ * Registers a session for the given user
+ * @param array $user
+ * @param bool $redirect
+ * @return void
+ */
 function register_session(array $user, bool $redirect = true): void
 {
     $userDataset = new User($user['id']);
     $userDataset->registerSession($redirect);
 }
-
+/**
+ * Validates a user login
+ * @param string $username
+ * @param string $password
+ * @param string|null $token
+ * @return array|null
+ */
 function validate_login(
     string $username,
     string $password,
@@ -158,50 +182,17 @@ function validate_login(
     return getUserById($user->getId());
 }
 
-// Ist der User eingeloggt
+/**
+ * Checks if a user is logged in
+ * @return bool
+ */
 function is_logged_in(): bool
 {
     return isset($_SESSION["logged_in"]);
 }
 
 /**
- * Gravatar support was removed due to legal issues with the GDPR.
- * This method is still called get_gravatar() for compatiblity reasons
- * If there is a registered user with the email address returns his avatar image file
- * else returns the no avatar placeholder image
- *
- */
-function get_gravatar(
-    string $email,
-    int $s = 80,
-    string $d = 'mm',
-    string $r = 'g',
-    bool $img = false,
-    array $atts = []
-): string {
-    //
-    $url = ModuleHelper::getBaseUrl("/admin/gfx/no_avatar.png");
-
-    // If there is a user with this email address return it's avatar
-    $user = new User();
-    $user->loadByEmail($email);
-    if ($user->hasProcessedAvatar()) {
-        $url = $user->getAvatar();
-    }
-
-    $html = '';
-    if ($img) {
-        $html = '<img src="' . $url . '"';
-        foreach ($atts as $key => $val) {
-            $html .= ' ' . $key . '="' . $val . '"';
-        }
-        $html .= ' />';
-    }
-    return $img ? $html : $url;
-}
-
-/**
- * Get the configured HTML editor for the currently logged in user or default
+ * Gets the configured HTML editor for the currently logged in user or default
  * @return string
  */
 function get_html_editor(): string

@@ -17,6 +17,10 @@ class RoboFile extends Tasks
 {
     public function __construct()
     {
+        if (!defined('CORE_COMPONENT')) {
+            define('CORE_COMPONENT', 'robo');
+        }
+
         $this->initUliCMS();
     }
 
@@ -644,5 +648,17 @@ class RoboFile extends Tasks
         $this->dbDrop();
 
         $this->dbMigrate();
+    }
+
+    /**
+     * Execute cronjobs
+     */
+    public function cron()
+    {
+        
+        do_event("before_cron");
+        require 'lib/cron.php';
+        do_event("after_cron");
+        $this->writeln("finished cron at " . strftime("%x %X"));
     }
 }

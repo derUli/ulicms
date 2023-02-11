@@ -3,6 +3,7 @@
 Neue Features:
 * Codebasis grundlegend überarbeitet
 * URLs enthalten nun kein Endung mehr
+* Neuer Robo Task cron hinzugefügt
 
 Fehlerkorrekturen:
 * Google Fonts entfernt
@@ -75,6 +76,7 @@ Entfernte API-Methoden:
 * is_true()
 * is_false()
 * isCli()
+* get_gravatar()
 
 ===== Neues in UliCMS 2022.1 =====
 

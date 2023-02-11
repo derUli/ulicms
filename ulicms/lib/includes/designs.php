@@ -4,6 +4,12 @@ declare(strict_types=1);
 
 defined('ULICMS_ROOT') or exit('no direct script access allowed');
 
+/**
+ * Gets metadata of a theme
+ * @param string $theme
+ * @param string $attrib
+ * @return type
+ */
 function getThemeMeta(string $theme, string $attrib = null)
 {
     $retval = null;
