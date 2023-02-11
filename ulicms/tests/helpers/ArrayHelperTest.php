@@ -103,39 +103,6 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    public function testFlattenWithNestedArray()
-    {
-        $input = $this->getNestesdArray();
-        $expected = [
-            "foo",
-            "bar",
-            "hello",
-            "world",
-            "apache",
-            "php",
-            "mysql",
-            "linux"
-        ];
-        $this->assertEquals($expected, ArrayHelper::flatten($input));
-    }
-
-    public function testFlattenWithFlattenArray()
-    {
-        $input = ["dog", "cat", "pig", "horse"];
-        $this->assertEquals(
-            $input,
-            ArrayHelper::flatten($input)
-        );
-    }
-
-    public function testFlattenWithString()
-    {
-        $this->assertEquals(
-            ["ulicms"],
-            ArrayHelper::flatten("ulicms")
-        );
-    }
-
     private function getArrayTestData(): array
     {
         return [

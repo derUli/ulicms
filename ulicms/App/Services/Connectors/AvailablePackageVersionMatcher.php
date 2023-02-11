@@ -3,8 +3,6 @@
 namespace App\Services\Connectors;
 
 use App\Helpers\ArrayHelper;
-use UliCMSVersion;
-
 use function is_version_number;
 
 class AvailablePackageVersionMatcher

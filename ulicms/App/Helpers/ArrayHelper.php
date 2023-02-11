@@ -55,23 +55,6 @@ class ArrayHelper extends Helper
         return $input;
     }
 
-    // flatten a nested array structure to one layer
-    public static function flatten($input): array
-    {
-        if (!is_array($input)) {
-            // nothing to do if it's not an array
-            return [$input];
-        }
-
-        $result = [];
-        foreach ($input as $value) {
-            // explode the sub-array, and add the parts
-            $result = array_merge($result, self::flatten($value));
-        }
-
-        return $result;
-    }
-
     public static function hasMultipleKeys(?array $input, array $keys): bool
     {
         if (!$input) {
