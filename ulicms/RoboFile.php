@@ -655,7 +655,6 @@ class RoboFile extends Tasks
      */
     public function cron()
     {
-        
         do_event("before_cron");
         require 'lib/cron.php';
         do_event("after_cron");

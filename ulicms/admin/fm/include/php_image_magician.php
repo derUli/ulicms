@@ -688,7 +688,7 @@ class imageLib
             $optimalHeight = $dimensionsArray['optimalHeight'];
         } else {
             // *** Image to be resizerd is a square
-            
+
             if ($newHeight < $newWidth) {
                 //$optimalWidth = $newWidth;
                 //$optimalHeight= $this->getSizeByFixedWidth($newWidth);

@@ -609,7 +609,7 @@ class FtpClient implements Countable
         // do this for each file in the directory
         while ($file = $d->read()) {
             // to prevent an infinite loop
-            if ($file != "." && $file != "..") {
+            if ($file != "." && $file != '..') {
                 // do the following if it is a directory
                 if (is_dir($source_directory.'/'.$file)) {
                     if (!$this->isDir($target_directory.'/'.$file)) {
@@ -701,7 +701,7 @@ class FtpClient implements Countable
             // "."
             || ($item[$len-1] == '.' && $item[$len-2] == ' '
 
-            // ".."
+            // '..'
             or $item[$len-1] == '.' && $item[$len-2] == '.' && $item[$len-3] == ' ')
             ) {
                 continue;

@@ -92,7 +92,7 @@ function checkRelativePathPartial($path)
         || strpos($path, '..\\') !== false
         || strpos($path, '\\..') !== false
         || strpos($path, '.\\') !== false
-        || $path === ".."
+        || $path === '..'
     ) {
         return false;
     }
@@ -458,7 +458,7 @@ function folder_info($path, $count_hidden=true)
     $files_count = 0;
     $folders_count = 0;
     foreach ($files as $t) {
-        if ($t != "." && $t != "..") {
+        if ($t != "." && $t != '..') {
             if ($count_hidden or !(in_array($t, $config['hidden_folders']) or in_array($t, $config['hidden_files']))) {
                 $currentFile = $cleanPath . $t;
                 if (is_dir($currentFile)) {
@@ -491,7 +491,7 @@ function filescount($path, $count_hidden=true)
     $cleanPath = rtrim($path, '/') . '/';
 
     foreach ($files as $t) {
-        if ($t != "." && $t != "..") {
+        if ($t != "." && $t != '..') {
             if ($count_hidden or !(in_array($t, $config['hidden_folders']) or in_array($t, $config['hidden_files']))) {
                 $currentFile = $cleanPath . $t;
                 if (is_dir($currentFile)) {
@@ -1035,7 +1035,7 @@ function rcopy($source, $destination, $is_rec = false)
 
         $files = scandir($source);
         foreach ($files as $file) {
-            if ($file != "." && $file != "..") {
+            if ($file != "." && $file != '..') {
                 rcopy($source . DIRECTORY_SEPARATOR . $file, rtrim($destination, '/') . DIRECTORY_SEPARATOR . $file, true);
             }
         }
@@ -1080,7 +1080,7 @@ function rrename($source, $destination, $is_rec = false)
 
         $files = scandir($source);
         foreach ($files as $file) {
-            if ($file != "." && $file != "..") {
+            if ($file != "." && $file != '..') {
                 rrename($source . DIRECTORY_SEPARATOR . $file, rtrim($destination, '/') . DIRECTORY_SEPARATOR . $file, true);
             }
         }
@@ -1106,7 +1106,7 @@ function rrename_after_cleaner($source)
     $files = scandir($source);
 
     foreach ($files as $file) {
-        if ($file != "." && $file != "..") {
+        if ($file != "." && $file != '..') {
             if (is_dir($source . DIRECTORY_SEPARATOR . $file)) {
                 rrename_after_cleaner($source . DIRECTORY_SEPARATOR . $file);
             } else {
@@ -1137,7 +1137,7 @@ function rchmod($source, $mode, $rec_option = "none", $is_rec = false)
         $files = scandir($source);
 
         foreach ($files as $file) {
-            if ($file != "." && $file != "..") {
+            if ($file != "." && $file != '..') {
                 if (is_dir($source . DIRECTORY_SEPARATOR . $file)) {
                     if ($rec_option == "folders" || $rec_option == "both") {
                         chmod($source . DIRECTORY_SEPARATOR . $file, $mode);

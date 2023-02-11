@@ -25,7 +25,7 @@ function uninstall_module(string $name, string $type = "module"): bool
 
     // Verhindern, dass der Modulordner oder gar das ganze
     // CMS gelöscht werden kann
-    if ($name == "." or $name == ".." or empty($name)) {
+    if ($name == "." or $name == '..' or empty($name)) {
         return false;
     }
     switch ($type) {

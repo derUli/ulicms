@@ -42,8 +42,8 @@ if (Vars::get("comments_enabled")) {
         [],
         "post",
         [
-                "autocomplete" => "off"
-            ]
+                    "autocomplete" => "off"
+                ]
     );
     ?>
         <?php
@@ -63,9 +63,9 @@ if (Vars::get("comments_enabled")) {
         "",
         "text",
         [
-                    "class" => "form-control",
-                    "required" => "required"
-                ]
+                            "class" => "form-control",
+                            "required" => "required"
+                        ]
     );
     ?>
             </div>

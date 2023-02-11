@@ -517,8 +517,7 @@ class UploadHandler
         $error,
         $index,
         $content_range
-    )
-    {
+    ) {
         while (is_dir($this->get_upload_path($name))) {
             $name = $this->upcount_name($name);
         }
@@ -546,8 +545,7 @@ class UploadHandler
         $error,
         $index,
         $content_range
-    )
-    {
+    ) {
         // Add missing file extension for known image types:
         if (strpos($name, '.') === false &&
                 preg_match('/^image\/(gif|jpe?g|png|webp)/', $type, $matches)) {
@@ -590,8 +588,7 @@ class UploadHandler
         $error,
         $index,
         $content_range
-    )
-    {
+    ) {
         // Remove path information and dots around the filename, to prevent uploading
         // into different directories or replacing hidden system files.
         // Also remove control characters and spaces (\x00..\x20) around the filename:
@@ -621,8 +618,7 @@ class UploadHandler
         $error,
         $index,
         $content_range
-    )
-    {
+    ) {
         $name = $this->trim_file_name(
             $file_path,
             $name,
@@ -1226,8 +1222,7 @@ class UploadHandler
         $error,
         $index = null,
         $content_range = null
-    )
-    {
+    ) {
         $file = new \stdClass();
         $file->name = $this->get_file_name(
             $uploaded_file,

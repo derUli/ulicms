@@ -117,16 +117,26 @@ class File
         return $url;
     }
 
-    // detect the mime type of a file
+    /**
+     * Detect the mime type of a file based on its content
+     * @param string $file
+     * @return string
+     */
     public static function getMime(string $file): string
     {
         $sniffer = new MimeSniffer();
         $sniffer->setFromFilename($file);
 
         $type = $sniffer->getType();
-        return (string)$type;
+        return (string) $type;
     }
 
+    /**
+     * Deletes a directory including its content
+     * @param string $dir
+     * @param bool $deleteMe
+     * @return void
+     */
     public static function sureRemoveDir(
         string $dir,
         bool $deleteMe = true
