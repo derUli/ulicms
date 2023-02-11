@@ -26,14 +26,6 @@ function is_numeric_array($var): bool {
     return true;
 }
 
-function is_true($var): bool {
-    return (isset($var) && $var);
-}
-
-function is_false($var): bool {
-    return !is_true($var);
-}
-
 // sind wir gerade im Adminordner?
 function is_admin_dir(): bool {
     return basename(getcwd()) === 'admin';
@@ -75,7 +67,7 @@ function is_mobile(): bool {
     }
 
     if (Settings::get("no_mobile_design_on_tablet")
-            and $result and $detect->isTablet()) {
+            && $result && $detect->isTablet()) {
         $result = false;
     }
 
@@ -106,7 +98,7 @@ function is_tablet(): bool {
 }
 
 function isCLI(): bool {
-    return php_sapi_name() == "cli";
+    return php_sapi_name() == 'cli';
 }
 
 function var_is_type($var, $type, $required = false): bool {
@@ -123,5 +115,5 @@ function var_is_type($var, $type, $required = false): bool {
 }
 
 function is_version_number(?string $input): bool {
-    return ($input and version_compare($input, '0.0.1', '>='));
+    return ($input && version_compare($input, '0.0.1', '>='));
 }

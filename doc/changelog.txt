@@ -69,6 +69,8 @@ Entfernte API-Methoden:
 * set_format()
 * startsWith()
 * is_blank()
+* is_true()
+* is_false()
 
 ===== Neues in UliCMS 2022.1 =====
 

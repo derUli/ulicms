@@ -146,9 +146,9 @@ function minifyCSS(): string
         foreach ($stylesheets as $stylesheet) {
             $stylesheet = ltrim($stylesheet, '/');
             $type = pathinfo($stylesheet, PATHINFO_EXTENSION);
-            if (is_file($stylesheet) and $type == "css") {
+            if (is_file($stylesheet) && $type == "css") {
                 $minifier->add($stylesheet);
-            } elseif (is_file($stylesheet) and $type == "scss") {
+            } elseif (is_file($stylesheet) && $type == "scss") {
                 $scssOutput = compileSCSS($stylesheet);
                 $minifier->add($scssOutput);
             }
@@ -215,7 +215,7 @@ function getCombinedScriptHtml(): string
 {
     $html = '';
     $cfg = new CMSConfig();
-    if (isset($cfg->no_minify) and is_true($cfg->no_minify)) {
+    if (isset($cfg->no_minify) && $cfg->no_minify) {
         foreach (Vars::get("script_queue") as $script) {
             $html .= Script::fromFile($script);
         }
@@ -254,7 +254,7 @@ function getCombinedStylesheetHTML(): ?string
     if (!Vars::get("stylesheet_queue")) {
         return null;
     }
-    if (isset($cfg->no_minify) and is_true($cfg->no_minify)) {
+    if (isset($cfg->no_minify) && ($cfg->no_minify)) {
         foreach (Vars::get("stylesheet_queue") as $stylesheet) {
             $type = pathinfo($stylesheet, PATHINFO_EXTENSION);
             if ($type == "css") {
