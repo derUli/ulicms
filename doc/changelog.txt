@@ -6,6 +6,7 @@ Neue Features:
 Fehlerkorrekturen:
 * Google Fonts entfernt
 * Einige UI Fixes
+* Fehler nach Dateiupload korrigiert
 
 Entfernte Features:
 * Meta Keywords
