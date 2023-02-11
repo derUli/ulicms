@@ -28,7 +28,7 @@ foreach ($permissions as $permission) {
 $language = getSystemLanguage();
 
 $languageFile = dirname(__FILE__ . "/../lang/${language}.php");
-if (!file_exists($languageFile)) {
+if (!is_file($languageFile)) {
     $language = "en_EN";
 }
 
@@ -277,8 +277,8 @@ $config = array(
     // set maximum pixel width and/or maximum pixel height for all images
     // If you set a maximum width or height, oversized images are converted to those limits. Images smaller than the limit(s) are unaffected
     // if you don't need a limit set both to 0
-    'image_max_width' => $dimensions ? $dimensions[0]: 0,
-    'image_max_height' => $dimensions ? $dimensions[1]: 0,
+    'image_max_width' => $dimensions ? $dimensions[0] : 0,
+    'image_max_height' => $dimensions ? $dimensions[1] : 0,
     'image_max_mode' => 'auto',
     /*
       #  $option:  0 / exact = defined size;
@@ -521,14 +521,14 @@ $config = array(
 );
 
 return array_merge(
-    $config,
-    array(
+        $config,
+        array(
             'ext' => array_merge(
-                $config['ext_img'],
-                $config['ext_file'],
-                $config['ext_misc'],
-                $config['ext_video'],
-                $config['ext_music']
+                    $config['ext_img'],
+                    $config['ext_file'],
+                    $config['ext_misc'],
+                    $config['ext_video'],
+                    $config['ext_music']
             ),
             'tui_defaults_config' => array(
                 //'common.bi.image'                   => $config['common.bi.image'],

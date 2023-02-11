@@ -10,7 +10,7 @@ if ($_SESSION['RF']["verify"] != "RESPONSIVEfilemanager") {
 }
 $languages = include 'lang/languages.php';
 
-if (isset($_SESSION['RF']['language']) && file_exists('lang/' . basename($_SESSION['RF']['language']) . '.php')) {
+if (isset($_SESSION['RF']['language']) && is_file('lang/' . basename($_SESSION['RF']['language']) . '.php')) {
     if (array_key_exists($_SESSION['RF']['language'], $languages)) {
         include 'lang/' . basename($_SESSION['RF']['language']) . '.php';
     } else {
@@ -506,7 +506,7 @@ if (isset($_GET['action'])) {
 
             break;
         case 'get_lang':
-            if (! file_exists('lang/languages.php')) {
+            if (! is_file('lang/languages.php')) {
                 response(trans('Lang_Not_Found').AddErrorLocation())->send();
                 exit;
             }
@@ -533,7 +533,7 @@ if (isset($_GET['action'])) {
             $choosen_lang = (!empty($_POST['choosen_lang']))? $_POST['choosen_lang']:"en_EN";
 
             if (array_key_exists($choosen_lang, $languages)) {
-                if (! file_exists('lang/' . $choosen_lang . '.php')) {
+                if (! is_file('lang/' . $choosen_lang . '.php')) {
                     response(trans('Lang_Not_Found').AddErrorLocation())->send();
                     exit;
                 } else {
@@ -548,7 +548,7 @@ if (isset($_GET['action'])) {
             } else {
                 $selected_file = $config['current_path'] . $_GET['file'];
 
-                if (! file_exists($selected_file)) {
+                if (! is_file($selected_file)) {
                     response(trans('File_Not_Found').AddErrorLocation())->send();
                     exit;
                 }
@@ -578,7 +578,7 @@ if (isset($_GET['action'])) {
             } else {
                 $selected_file = ($sub_action == 'preview' ? $config['current_path'] . $_GET['file'] : $config['current_path'] . $_POST['path']);
 
-                if (! file_exists($selected_file)) {
+                if (! is_file($selected_file)) {
                     response(trans('File_Not_Found').AddErrorLocation())->send();
                     exit;
                 }

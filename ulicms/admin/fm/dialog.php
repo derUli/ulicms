@@ -139,7 +139,7 @@ if (!$ftp) {
             $parent = "";
         }
 
-        if (file_exists($config['current_path'] . $parent . "config.php")) {
+        if (is_file($config['current_path'] . $parent . "config.php")) {
             $configMain = $config;
             $configTemp = include $config['current_path'] . $parent . 'config.php';
             if (is_array($configTemp) && count($configTemp) > 0) {
