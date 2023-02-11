@@ -97,13 +97,13 @@ class AudioController extends Controller {
             $dataset = db_fetch_object($result);
             $filepath = ULICMS_ROOT . "/content/audio/" .
                     basename($dataset->ogg_file);
-            if (!empty($dataset->ogg_file) and file_exists($filepath)) {
+            if (!empty($dataset->ogg_file) && is_file($filepath)) {
                 @unlink($filepath);
             }
 
             $filepath = ULICMS_ROOT . "/content/audio/" .
                     basename($dataset->mp3_file);
-            if (!empty($dataset->mp3_file) and file_exists($filepath)) {
+            if (!empty($dataset->mp3_file) && is_file($filepath)) {
                 @unlink($filepath);
             }
 

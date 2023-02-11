@@ -40,7 +40,7 @@ class HelperRegistry {
                 }
             }
             foreach ($helperRegistry as $key => $value) {
-                if (file_exists($value)) {
+                if (is_file($value)) {
                     require_once $value;
                 } else {
                     throw new FileNotFoundException("Module {$module}: "

@@ -5,7 +5,7 @@ if ($permissionChecker->hasPermission("update_system")) {
     <h1><?php translate("run_post_install_script"); ?></h1>
     <?php
     $postinstall = ULICMS_ROOT . "/post-install.php";
-    if (file_exists($postinstall)) {
+    if (is_file($postinstall)) {
         require $postinstall;
         unlink($postinstall);
         ?>

@@ -66,7 +66,7 @@ class BackendHelper extends Helper {
 
         foreach ($folders as $folder) {
             $cssFile = "$folder/editor.css";
-            if (file_exists(($cssFile))) {
+            if (is_file($cssFile)) {
                 $skins[] = basename($folder);
             }
         }

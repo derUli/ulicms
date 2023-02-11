@@ -20,4 +20,4 @@ if (!is_file($file)) {
     exit();
 }
 
-require  $file;
+require $file;

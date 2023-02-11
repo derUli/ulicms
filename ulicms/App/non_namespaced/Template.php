@@ -118,9 +118,9 @@ class Template {
             $ownTemplatePath .= ".php";
         }
         ob_start();
-        if (file_exists($ownTemplatePath)) {
+        if (is_file($ownTemplatePath)) {
             require $ownTemplatePath;
-        } elseif (file_exists($originalTemplatePath)) {
+        } elseif (is_file($originalTemplatePath)) {
             require $originalTemplatePath;
         } else {
             $retval = ob_get_clean();
@@ -148,7 +148,7 @@ class Template {
         $logo_storage_path = ULICMS_ROOT . "/content/images/" .
                 Settings::get("logo_image");
 
-        if (Settings::get("logo_disabled") == "no" and file_exists($logo_storage_path)) {
+        if (Settings::get("logo_disabled") == "no" && is_file($logo_storage_path)) {
             echo '<img class="website_logo" src="' . $logo_storage_url .
             '" alt="' . _esc(Settings::get("homepage_title")) . '"/>';
         }
@@ -204,9 +204,9 @@ class Template {
         }
 
         ob_start();
-        if (file_exists($ownTemplatePath)) {
+        if (is_file($ownTemplatePath)) {
             require $ownTemplatePath;
-        } elseif (file_exists($originalTemplatePath)) {
+        } elseif (is_file($originalTemplatePath)) {
             require $originalTemplatePath;
         } else {
             $retval = ob_get_clean();
@@ -366,14 +366,14 @@ class Template {
         $style_file = getTemplateDirPath(get_theme()) . "style.css";
         $style_file_realpath = getTemplateDirPath(get_theme(), true) .
                 "style.css";
-        if (file_exists($style_file_realpath)) {
+        if (is_file($style_file_realpath)) {
             $style_file .= "?time=" . File::getLastChanged(
                             $style_file_realpath
             );
-            if (file_exists($min_style_file_realpath)) {
+            if (is_file($min_style_file_realpath)) {
                 echo "<link rel=\"stylesheet\" type=\"text/css\" "
                 . "href=\"$min_style_file\"/>";
-            } elseif (file_exists($style_file_realpath)) {
+            } elseif (is_file($style_file_realpath)) {
                 echo "<link rel=\"stylesheet\" type=\"text/css\" "
                 . "href=\"$style_file\"/>";
             }

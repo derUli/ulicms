@@ -33,7 +33,8 @@ class LogoControllerTest extends \PHPUnit\Framework\TestCase {
                 $fixtureFile,
                 "cat.jpg"
         );
-        if (file_exists($fileName)) {
+
+        if (is_file($fileName)) {
             unlink($fileName);
         }
     }

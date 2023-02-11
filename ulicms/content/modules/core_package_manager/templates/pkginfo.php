@@ -8,7 +8,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
 } else {
     if (StringHelper::isNotNullOrEmpty($_REQUEST["file"]) and endsWith($_REQUEST["file"], ".sin")) {
         $tempfile = Path::resolve("ULICMS_TMP/" . basename($_REQUEST["file"]));
-        if (file_exists($tempfile)) {
+        if (is_file($tempfile)) {
             $pkg = new SinPackageInstaller($tempfile);
             $installable = $pkg->isInstallable();
             $errors = $pkg->getErrors();

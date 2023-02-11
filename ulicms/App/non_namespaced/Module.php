@@ -25,7 +25,7 @@ class Module {
         if ($dataset) {
             $this->name = $dataset->name;
             $this->version = $dataset->version;
-            $this->enabled = (bool)$dataset->enabled;
+            $this->enabled = (bool) $dataset->enabled;
             return true;
         }
         return false;
@@ -112,10 +112,13 @@ class Module {
 
     public function hasAdminPage(): bool {
         $controller = ModuleHelper::getMainController($this->name);
-        return (file_exists(getModuleAdminFilePath($this->name))
-                or file_exists(getModuleAdminFilePath2($this->name))
-                or ($controller and method_exists($controller, "settings"))
-                or (getModuleMeta($this->name, "main_class")) and
+        return (
+                is_file(getModuleAdminFilePath($this->name)) ||
+                is_file(getModuleAdminFilePath2($this->name)) ||
+                ($controller && method_exists($controller, "settings")) ||
+                (
+                getModuleMeta($this->name, "main_class")
+                ) &&
                 getModuleMeta($this->name, "admin_permission"));
     }
 
@@ -177,8 +180,8 @@ class Module {
         $mainController = ModuleHelper::getMainController($name);
         return (($mainController &&
                 method_exists($mainController, "uninstall")) ||
-                file_exists($uninstallScript1) ||
-                file_exists($uninstallScript2)
+                is_file($uninstallScript1) ||
+                is_file($uninstallScript2)
                 );
     }
 

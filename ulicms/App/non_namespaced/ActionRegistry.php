@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 use App\Exceptions\FileNotFoundException;
 
-class ActionRegistry
-{
+class ActionRegistry {
+
     private static $actions = [];
     private static $assignedControllers = [];
     private static $defaultCoreActions = array(
@@ -14,24 +14,24 @@ class ActionRegistry
     );
     private static $actionPermissions = [];
 
-    public static function getDefaultCoreActions(): array
-    {
+    public static function getDefaultCoreActions(): array {
         return self::$defaultCoreActions;
     }
 
     // load module backend action pages
-    public static function loadModuleActions(): void
-    {
+    public static function loadModuleActions(): void {
         self::$actions = [];
 
         if (!defined("RESPONSIVE_FM")) {
             $coreActions = self::getDefaultCoreActions();
             foreach ($coreActions as $action => $file) {
                 $path = $file;
+
                 if (!endsWith($path, ".php")) {
                     $path .= ".php";
                 }
-                if (file_exists($path)) {
+
+                if (is_file($path)) {
                     self::$actions[$action] = $file;
                 }
             }
@@ -52,12 +52,12 @@ class ActionRegistry
                             $path .= ".php";
                         }
 
-                        if (file_exists($path)) {
+                        if (is_file($path)) {
                             self::$actions[$key] = $path;
                         } else {
                             throw new FileNotFoundException(
-                                "Module {$module}: "
-                                    . "File '{$path}' not found."
+                                            "Module {$module}: "
+                                            . "File '{$path}' not found."
                             );
                         }
                     }
@@ -69,8 +69,7 @@ class ActionRegistry
     }
 
     // load backend action page permission of modules
-    private static function loadActionPermissions(): void
-    {
+    private static function loadActionPermissions(): void {
         $modules = getAllModules();
         $disabledModules = Vars::get("disabledModules") ?? [];
         foreach ($modules as $module) {
@@ -87,8 +86,7 @@ class ActionRegistry
         }
     }
 
-    public static function getActionPermission(string $action): ?string
-    {
+    public static function getActionPermission(string $action): ?string {
         $permission = null;
         if (isset(self::$actionPermissions[$action]) and
                 is_string(self::$actionPermissions[$action])) {
@@ -98,8 +96,7 @@ class ActionRegistry
     }
 
     // load action => controller assignments of modules
-    public static function loadModuleActionAssignment(): void
-    {
+    public static function loadModuleActionAssignment(): void {
         $modules = getAllModules();
         foreach ($modules as $module) {
             $action_controllers = getModuleMeta($module, "action_controllers");
@@ -113,32 +110,30 @@ class ActionRegistry
     }
 
     public static function assignControllerToAction(
-        string $action,
-        string $controller
+            string $action,
+            string $controller
     ): void {
         self::$assignedControllers[$action] = $controller;
     }
 
     // return the controller for this action page
-    public static function getController(): ?Controller
-    {
+    public static function getController(): ?Controller {
         $action = get_action();
         if ($action and isset(self::$assignedControllers[$action])) {
             return ControllerRegistry::get(
-                self::$assignedControllers[$action]
+                            self::$assignedControllers[$action]
             );
         }
         return null;
     }
 
-    public static function getActions(): array
-    {
+    public static function getActions(): array {
         return self::$actions;
     }
 
-    public static function getAction(string $action): ?string
-    {
+    public static function getAction(string $action): ?string {
         return isset(self::$actions[$action]) ?
                 self::$actions[$action] : null;
     }
+
 }

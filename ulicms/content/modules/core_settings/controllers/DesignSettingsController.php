@@ -16,7 +16,7 @@ class DesignSettingsController extends Controller {
         $this->generatedSCSS = Path::resolve(
                         "ULICMS_GENERATED/design_variables.scss"
         );
-        if (!file_exists($this->generatedSCSS)) {
+        if (!is_file($this->generatedSCSS)) {
             $this->_generateSCSSToFile();
         }
     }

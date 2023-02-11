@@ -56,7 +56,7 @@ class InfoController extends MainClass {
 
         $cacheFile = Path::resolve("ULICMS_CACHE/legal-{$lastModified}.html");
 
-        if (file_exists($cacheFile)) {
+        if (is_file($cacheFile)) {
             return file_get_contents($cacheFile);
         }
 

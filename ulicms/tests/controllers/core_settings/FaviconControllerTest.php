@@ -7,11 +7,11 @@ class FaviconControllerTest extends \PHPUnit\Framework\TestCase {
         $file1 = $controller->_getDestination1();
         $file2 = $controller->_getDestination2();
 
-        if (file_exists($file1)) {
+        if (is_file($file1)) {
             rename($file1, "{$file1}.bak");
         }
 
-        if (file_exists($file2)) {
+        if (is_file($file2)) {
             rename($file2, "{$file2}.bak");
         }
     }
@@ -21,11 +21,11 @@ class FaviconControllerTest extends \PHPUnit\Framework\TestCase {
         $file1 = $controller->_getDestination1() . ".bak";
         $file2 = $controller->_getDestination2() . ".bak";
 
-        if (file_exists($file1)) {
+        if (is_file($file1)) {
             rename($file1, $controller->_getDestination1());
         }
 
-        if (file_exists($file2)) {
+        if (is_file($file2)) {
             rename($file2, $controller->_getDestination2());
         }
     }

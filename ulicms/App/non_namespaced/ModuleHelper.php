@@ -46,7 +46,7 @@ class ModuleHelper extends Helper {
             ?string $language = null
     ): ?object {
         $language = $language ?? getCurrentLanguage();
-       
+
         $args = array(
             1,
             $language
@@ -111,8 +111,7 @@ class ModuleHelper extends Helper {
                 $embed_attrib = $meta_attr;
             }
 
-            if (!file_exists($noembedfile1) && !file_exists($noembedfile2)
-                    and $embed_attrib) {
+            if (!is_file($noembedfile1) && !is_file($noembedfile2) && $embed_attrib) {
                 $retval[] = $module;
             }
         }
@@ -151,7 +150,7 @@ class ModuleHelper extends Helper {
             $embed_attrib = $meta_attr;
         }
 
-        if (file_exists($noembedfile1) or file_exists($noembedfile2) || !$embed_attrib) {
+        if (is_file($noembedfile1) || is_file($noembedfile2) || !$embed_attrib) {
             $retval = false;
         }
         return $retval;

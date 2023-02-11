@@ -24,7 +24,7 @@ class LoggerTest extends \PHPUnit\Framework\TestCase {
 
     public function testLogFolderIsProtected() {
         $htaccessFile = Path::resolve("ULICMS_LOG/.htaccess");
-        $this->assertTrue(file_exists($htaccessFile));
+        $this->assertTrue(is_file($htaccessFile));
         $this->assertContains("deny from all", array_map("strtolower", StringHelper::linesFromFile($htaccessFile)));
     }
 

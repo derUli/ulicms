@@ -123,7 +123,7 @@ class FaviconController extends Controller {
     }
 
     public function _hasFavicon(): bool {
-        return file_exists($this->_getDestination2());
+        return is_file($this->_getDestination2());
     }
 
 }

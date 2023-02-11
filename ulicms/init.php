@@ -33,7 +33,7 @@ use App\Models\Content\Types\DefaultContentTypes;
 // load composer packages
 $composerAutoloadFile = dirname(__FILE__) . "/vendor/autoload.php";
 
-if (file_exists($composerAutoloadFile)) {
+if (is_file($composerAutoloadFile)) {
     require $composerAutoloadFile;
 } else {
     throw new FileNotFoundException(
@@ -52,7 +52,7 @@ spl_autoload_register(function ($className) {
     $basePath = dirname(__FILE__) . "/{$className}.php";
     $basePath = str_replace('\\', '/', $basePath);
 
-    if (!file_exists($basePath)) {
+    if (!is_file($basePath)) {
         return;
     }
 
@@ -75,7 +75,7 @@ require_all_files_in_dir('lib/includes');
 $mobile_detect_as_module = dirname(__FILE__) .
         "/content/modules/Mobile_Detect/Mobile_Detect.php";
 
-if (file_exists($mobile_detect_as_module)) {
+if (is_file($mobile_detect_as_module)) {
     require $mobile_detect_as_module;
 }
 
@@ -110,7 +110,7 @@ $path_to_config = dirname(__FILE__) . "/CMSConfig.php";
 Vars::set("http_headers", []);
 
 // load config file
-if (file_exists($path_to_config)) {
+if (is_file($path_to_config)) {
     require $path_to_config;
 } elseif (is_dir("installer")) {
     send_header("Location: installer/");
@@ -187,7 +187,7 @@ if (!is_dir(ULICMS_GENERATED)) {
 
 $htaccessForLogFolderSource = ULICMS_ROOT . "/lib/htaccess-deny-all.txt";
 $htaccessLogFolderTarget = ULICMS_LOG . "/.htaccess";
-if (!file_exists($htaccessLogFolderTarget)) {
+if (!is_file($htaccessLogFolderTarget)) {
     copy($htaccessForLogFolderSource, $htaccessLogFolderTarget);
 }
 

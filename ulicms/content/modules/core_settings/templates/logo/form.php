@@ -39,7 +39,7 @@ if ($permissionChecker->hasPermission("logo")) {
                     <td>
                         <div id="logo-wrapper">
                             <?php
-                            if (file_exists($logoStoragePath)) {
+                            if (is_file($logoStoragePath)) {
                                 echo imageTag(
                                         $logoUrl,
                                         [

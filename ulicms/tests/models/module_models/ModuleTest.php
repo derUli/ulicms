@@ -26,7 +26,7 @@ class ModuleTest extends \PHPUnit\Framework\TestCase {
     protected function backupFortune2(): void {
         $src = getModulePath("fortune2", true);
         $dst = getModulePath(".fortune2.bak", true);
-        if (file_exists($src) && !file_exists($dst)) {
+        if (is_dir($src) && !is_dir($dst)) {
             recurse_copy($src, $dst);
         }
         Settings::delete("fortune2_uninstalled_at");
@@ -36,7 +36,7 @@ class ModuleTest extends \PHPUnit\Framework\TestCase {
         $src = getModulePath(".fortune2.bak", true);
         $dst = getModulePath("fortune2", true);
 
-        if (file_exists($src) && !file_exists($dst)) {
+        if (is_dir($src) && !is_dir($dst)) {
             recurse_copy($src, $dst);
             sureRemoveDir($src, true);
         }

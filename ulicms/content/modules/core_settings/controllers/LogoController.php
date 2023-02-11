@@ -60,7 +60,7 @@ class LogoController extends Controller {
         $logoImage = Settings::get("logo_image");
         $path = ULICMS_ROOT . "/content/images/${logoImage}";
 
-        if (empty($logoImage) || !file_exists($path)) {
+        if (empty($logoImage) || !is_file($path)) {
             return false;
         }
 

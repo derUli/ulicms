@@ -5,7 +5,7 @@ use App\Helpers\ImageScaleHelper;
 class ImageScaleHelperTest extends \PHPUnit\Framework\TestCase {
 
     protected function tearDown(): void {
-        if (file_exists($this->getProcessedPath())) {
+        if (is_file($this->getProcessedPath())) {
             unlink($this->getProcessedPath());
         }
     }

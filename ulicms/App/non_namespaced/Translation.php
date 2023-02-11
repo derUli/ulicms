@@ -53,9 +53,9 @@ class Translation {
             $englishLanguageFile = getModulePath($module, true) .
                     "/lang/en.php";
 
-            if (file_exists($currentLanguageFile)) {
+            if (is_file($currentLanguageFile)) {
                 require_once $currentLanguageFile;
-            } elseif (file_exists($englishLanguageFile)) {
+            } elseif (is_file($englishLanguageFile)) {
                 require_once $englishLanguageFile;
             }
         }

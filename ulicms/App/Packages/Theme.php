@@ -28,7 +28,7 @@ class Theme {
         ];
         foreach ($screenshotFiles as $file) {
             $fullPath = getTemplateDirPath($this->name) . $file;
-            if (file_exists($fullPath)) {
+            if (is_file($fullPath)) {
                 $screenshotFile = $fullPath;
             }
         }

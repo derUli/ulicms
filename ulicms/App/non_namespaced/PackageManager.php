@@ -61,10 +61,10 @@ class PackageManager {
 
             // post_install_script ausführen und anschließend
             // entfernen, sofern vorhanden;
-            if (file_exists($post_install_script1)) {
+            if (is_file($post_install_script1)) {
                 require $post_install_script1;
                 unlink($post_install_script1);
-            } elseif (file_exists($post_install_script2)) {
+            } elseif (is_file($post_install_script2)) {
                 require $post_install_script2;
                 unlink($post_install_script2);
             }
@@ -91,7 +91,7 @@ class PackageManager {
         foreach ($moduleDirectories as $moduleDirectory) {
             $metadataFile = "{$moduleDirectory}/metadata.json";
 
-            if (file_exists($metadataFile)) {
+            if (is_file($metadataFile)) {
                 $availableModules [] = basename($moduleDirectory);
             }
         }

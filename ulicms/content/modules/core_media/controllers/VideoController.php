@@ -68,7 +68,7 @@ class VideoController extends Controller {
                                     $_FILES ['webm_file'] ['tmp_name'],
                                     $target
                             )) {
-                     
+
                         $webm_file_value = basename($webm_file);
                     }
                 }
@@ -128,21 +128,21 @@ class VideoController extends Controller {
             $dataset = db_fetch_object($result);
             $filepath = ULICMS_ROOT . "/content/videos/" .
                     basename($dataset->ogg_file);
-            if (!empty($dataset->ogg_file) and file_exists($filepath)) {
+            if (!empty($dataset->ogg_file) && is_file($filepath)) {
                 unlink($filepath);
             }
 
             // WebM
             $filepath = ULICMS_ROOT . "/content/videos/" .
                     basename($dataset->webm_file);
-            if (!empty($dataset->webm_file) and file_exists($filepath)) {
+            if (!empty($dataset->webm_file) && is_file($filepath)) {
                 unlink($filepath);
             }
 
             // MP4
             $filepath = ULICMS_ROOT . "/content/videos/" .
                     basename($dataset->mp4_file);
-            if (!empty($dataset->mp4_file) and file_exists($filepath)) {
+            if (!empty($dataset->mp4_file) && is_file($filepath)) {
                 @unlink($filepath);
             }
 

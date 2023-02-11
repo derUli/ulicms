@@ -105,11 +105,11 @@ class User extends Model {
     public function loadByEmail(string $email): void {
         $sql = "select * from {prefix}users where email "
                 . "COLLATE utf8mb4_general_ci = ?";
-        
+
         $args = [
             $email
         ];
-        
+
         $result = Database::pQuery($sql, $args, true);
         $this->fillVars($result);
     }
@@ -528,11 +528,11 @@ class User extends Model {
 
         $userAvatarDirectory = Path::resolve("ULICMS_CONTENT/avatars");
 
-        if (!file_exists($userAvatarDirectory)) {
+        if (!is_dir($userAvatarDirectory)) {
             mkdir($userAvatarDirectory, 0777, true);
         }
 
-        if (file_exists($userAvatarDirectory) and $this->getDisplayName()) {
+        if (is_dir($userAvatarDirectory) && $this->getDisplayName()) {
             $avatarImageFile1 = Path::Resolve("$userAvatarDirectory/user-" .
                             $this->getId() . ".png");
             $avatarImageFile2 = Path::Resolve("$userAvatarDirectory/" .
@@ -543,7 +543,7 @@ class User extends Model {
                     "../content/avatars/user-" . $this->getId() . ".png";
 
             // generate initial letter avatar if it doesn't exist
-            $avatarUrl = file_exists($avatarImageFile1) ?
+            $avatarUrl = is_file($avatarImageFile1) ?
                     $url : $this->generateAvatar($avatarImageFile2);
         }
         return $avatarUrl;
@@ -553,7 +553,7 @@ class User extends Model {
     // of the users first- and lastname
     // the file is cached for performance reasons
     protected function generateAvatar(string $avatarImageFile): string {
-        if (!file_exists($avatarImageFile)) {
+        if (!is_file($avatarImageFile)) {
             $avatar = new InitialAvatar();
             $image = $avatar->name($this->getDisplayName())->
                             rounded()->smooth()->
@@ -686,15 +686,17 @@ class User extends Model {
 
     public function removeAvatar(): bool {
         $generatedAvatar = $this->getProcessedAvatarPath();
-        if ($generatedAvatar and file_exists($generatedAvatar)) {
+        if ($generatedAvatar && is_file($generatedAvatar)) {
             return unlink($generatedAvatar);
         }
         return false;
     }
 
     public function hasProcessedAvatar(): bool {
-        return ($this->getProcessedAvatarPath() and
-                file_exists($this->getProcessedAvatarPath()));
+        return (
+                $this->getProcessedAvatarPath() &&
+                is_file($this->getProcessedAvatarPath())
+                );
     }
 
     public function isOnline(): bool {
@@ -709,7 +711,7 @@ class User extends Model {
     }
 
     public function isCurrent(): bool {
-        return $this->getId() and $this->getId() == get_user_id();
+        return $this->getId() && $this->getId() == get_user_id();
     }
 
     public static function getOnlineUsers(): array {
