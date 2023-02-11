@@ -11,49 +11,47 @@ class ControllerRegistry {
 
     // load and initialize all module controllers
     public static function loadModuleControllers(): void {
-        if (!defined("RESPONSIVE_FM")) {
-            $controllerRegistry = [];
-            $modules = getAllModules();
-            $disabledModules = Vars::get("disabledModules") ?? [];
-            foreach ($modules as $module) {
-                if (in_array($module, $disabledModules)) {
-                    continue;
-                }
-                $controllers = getModuleMeta($module, "controllers");
-                if ($controllers) {
-                    foreach ($controllers as $key => $value) {
-                        $path = getModulePath($module, true) .
-                                trim($value, "/");
-                        if (!endsWith($path, ".php")) {
-                            $path .= ".php";
-                        }
-                        $controllerRegistry[$key] = $path;
+        $controllerRegistry = [];
+        $modules = getAllModules();
+        $disabledModules = Vars::get("disabledModules") ?? [];
+        foreach ($modules as $module) {
+            if (in_array($module, $disabledModules)) {
+                continue;
+            }
+            $controllers = getModuleMeta($module, "controllers");
+            if ($controllers) {
+                foreach ($controllers as $key => $value) {
+                    $path = getModulePath($module, true) .
+                            trim($value, "/");
+                    if (!endsWith($path, ".php")) {
+                        $path .= ".php";
                     }
-                }
-
-                // read controller function permissions from metadata files of modules
-                $controller_function_permissions = getModuleMeta(
-                        $module,
-                        "controller_function_permissions"
-                );
-                if ($controller_function_permissions) {
-                    foreach ($controller_function_permissions as $key => $value) {
-                        self::$controller_function_permissions[$key] = $value;
-                    }
+                    $controllerRegistry[$key] = $path;
                 }
             }
-            foreach ($controllerRegistry as $key => $value) {
-                if (is_file($value)) {
-                    require_once $value;
-                } else {
-                    throw new FileNotFoundException("Module {$module}: "
-                                    . "File '{$value}' not found.");
+
+            // read controller function permissions from metadata files of modules
+            $controller_function_permissions = getModuleMeta(
+                    $module,
+                    "controller_function_permissions"
+            );
+            if ($controller_function_permissions) {
+                foreach ($controller_function_permissions as $key => $value) {
+                    self::$controller_function_permissions[$key] = $value;
                 }
-                if (class_exists($key)) {
-                    $classInstance = new $key();
-                    if ($classInstance instanceof Controller) {
-                        self::$controllers[$key] = $classInstance;
-                    }
+            }
+        }
+        foreach ($controllerRegistry as $key => $value) {
+            if (is_file($value)) {
+                require_once $value;
+            } else {
+                throw new FileNotFoundException("Module {$module}: "
+                                . "File '{$value}' not found.");
+            }
+            if (class_exists($key)) {
+                $classInstance = new $key();
+                if ($classInstance instanceof Controller) {
+                    self::$controllers[$key] = $classInstance;
                 }
             }
         }

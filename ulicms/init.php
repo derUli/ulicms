@@ -69,7 +69,6 @@ function require_all_files_in_dir(string $dir) {
     }
 }
 
-require_all_files_in_dir('classes');
 require_all_files_in_dir('lib/includes');
 
 $mobile_detect_as_module = dirname(__FILE__) .

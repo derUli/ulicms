@@ -5,41 +5,38 @@ declare(strict_types=1);
 use App\Exceptions\FileNotFoundException;
 
 // loads model files of modules
-class ModelRegistry
-{
+class ModelRegistry {
 
     // TODO: refactor this and split int into multiple method s
-    public static function loadModuleModels(): void
-    {
-        if (!defined("RESPONSIVE_FM")) {
-            $modelRegistry = [];
-            $modules = getAllModules();
-            $disabledModules = Vars::get("disabledModules") ?? [];
-            foreach ($modules as $module) {
-                if (in_array($module, $disabledModules)) {
-                    continue;
-                }
-                $models = getModuleMeta($module, "models") ?
-                        getModuleMeta($module, "models") : getModuleMeta($module, "objects");
-                if (!$models) {
-                    continue;
-                }
-                foreach ($models as $key => $value) {
-                    $path = getModulePath($module, true) . trim($value, "/");
-                    if (!endsWith($path, ".php")) {
-                        $path .= ".php";
-                    }
-                    $modelRegistry[$key] = $path;
-                }
+    public static function loadModuleModels(): void {
+        $modelRegistry = [];
+        $modules = getAllModules();
+        $disabledModules = Vars::get("disabledModules") ?? [];
+        foreach ($modules as $module) {
+            if (in_array($module, $disabledModules)) {
+                continue;
             }
-            foreach ($modelRegistry as $key => $value) {
-                if (is_file($value)) {
-                    require $value;
-                } else {
-                    throw new FileNotFoundException("Module {$module}: "
-                            . "File '{$value}' not found.");
+            $models = getModuleMeta($module, "models") ?
+                    getModuleMeta($module, "models") : getModuleMeta($module, "objects");
+            if (!$models) {
+                continue;
+            }
+            foreach ($models as $key => $value) {
+                $path = getModulePath($module, true) . trim($value, "/");
+                if (!endsWith($path, ".php")) {
+                    $path .= ".php";
                 }
+                $modelRegistry[$key] = $path;
+            }
+        }
+        foreach ($modelRegistry as $key => $value) {
+            if (is_file($value)) {
+                require $value;
+            } else {
+                throw new FileNotFoundException("Module {$module}: "
+                                . "File '{$value}' not found.");
             }
         }
     }
+
 }

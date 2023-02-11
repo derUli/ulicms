@@ -22,50 +22,48 @@ class ActionRegistry {
     public static function loadModuleActions(): void {
         self::$actions = [];
 
-        if (!defined("RESPONSIVE_FM")) {
-            $coreActions = self::getDefaultCoreActions();
-            foreach ($coreActions as $action => $file) {
-                $path = $file;
+        $coreActions = self::getDefaultCoreActions();
+        foreach ($coreActions as $action => $file) {
+            $path = $file;
 
-                if (!endsWith($path, ".php")) {
-                    $path .= ".php";
-                }
-
-                if (is_file($path)) {
-                    self::$actions[$action] = $file;
-                }
+            if (!endsWith($path, ".php")) {
+                $path .= ".php";
             }
-            $modules = getAllModules();
-            $disabledModules = Vars::get("disabledModules") ?? [];
-            foreach ($modules as $module) {
-                if (in_array($module, $disabledModules)) {
-                    continue;
-                }
-                $cActions = getModuleMeta($module, "views") ?
-                        getModuleMeta($module, "views") :
-                        getModuleMeta($module, "actions");
-                if ($cActions) {
-                    foreach ($cActions as $key => $value) {
-                        $path = getModulePath($module, true) .
-                                trim($value, "/");
-                        if (!endsWith($path, ".php")) {
-                            $path .= ".php";
-                        }
 
-                        if (is_file($path)) {
-                            self::$actions[$key] = $path;
-                        } else {
-                            throw new FileNotFoundException(
-                                            "Module {$module}: "
-                                            . "File '{$path}' not found."
-                            );
-                        }
+            if (is_file($path)) {
+                self::$actions[$action] = $file;
+            }
+        }
+        $modules = getAllModules();
+        $disabledModules = Vars::get("disabledModules") ?? [];
+        foreach ($modules as $module) {
+            if (in_array($module, $disabledModules)) {
+                continue;
+            }
+            $cActions = getModuleMeta($module, "views") ?
+                    getModuleMeta($module, "views") :
+                    getModuleMeta($module, "actions");
+            if ($cActions) {
+                foreach ($cActions as $key => $value) {
+                    $path = getModulePath($module, true) .
+                            trim($value, "/");
+                    if (!endsWith($path, ".php")) {
+                        $path .= ".php";
+                    }
+
+                    if (is_file($path)) {
+                        self::$actions[$key] = $path;
+                    } else {
+                        throw new FileNotFoundException(
+                                        "Module {$module}: "
+                                        . "File '{$path}' not found."
+                        );
                     }
                 }
             }
-            self::loadModuleActionAssignment();
-            self::loadActionPermissions();
         }
+        self::loadModuleActionAssignment();
+        self::loadActionPermissions();
     }
 
     // load backend action page permission of modules
