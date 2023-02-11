@@ -10,7 +10,7 @@ function getModuleMeta($module, $attrib = null) {
                     "metadata.json",
                     true
     );
-    if (!file_exists($metadata_file) or is_dir($metadata_file)) {
+    if (!is_file($metadata_file)) {
         return null;
     }
 
@@ -48,13 +48,13 @@ function do_event(
         $escapedName = ModuleHelper::underscoreToCamel($name);
         if ($controller and method_exists($controller, $escapedName)) {
             echo $controller->$escapedName();
-        } elseif (file_exists($file1)) {
+        } elseif (is_file($file1)) {
             if ($runs === ModuleEventConstants::RUNS_MULTIPLE) {
                 require $file1;
             } else {
                 require_once $file1;
             }
-        } elseif (file_exists($file2)) {
+        } elseif (is_file($file2)) {
             if ($runs === ModuleEventConstants::RUNS_MULTIPLE) {
                 require $file1;
             } else {
@@ -97,9 +97,9 @@ function replaceShortcodesWithModules(
         $module_mainfile_path = getModuleMainFilePath($module);
         $module_mainfile_path2 = getModuleMainFilePath2($module);
 
-        if (file_exists($module_mainfile_path)) {
+        if (is_file($module_mainfile_path)) {
             require_once $module_mainfile_path;
-        } elseif (file_exists($module_mainfile_path2)) {
+        } elseif (is_file($module_mainfile_path2)) {
             require_once $module_mainfile_path2;
         }
 

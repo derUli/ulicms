@@ -36,7 +36,7 @@ function getModulePath($module, $abspath = false): string {
     }
 
     // Frontend Directory
-    if (file_exists("CMSConfig.php")) {
+    if (!is_admin_dir()) {
         $module_folder = "content/modules/";
     } // Backend Directory
     else {

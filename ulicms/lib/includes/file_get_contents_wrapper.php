@@ -6,7 +6,6 @@ defined('ULICMS_ROOT') or exit('no direct script access allowed');
 
 use App\Exceptions\CorruptDownloadException;
 
-
 // die Funktionalität von file_get_contents
 // mit dem Curl-Modul umgesetzt
 function file_get_contents_curl(string $url): ?string {
@@ -31,19 +30,13 @@ function file_get_contents_curl(string $url): ?string {
     return $data;
 }
 
-function is_url(?string $url): bool {
-    if (!$url) {
-        return false;
-    }
-
-    // it it is an URL
-    if (startsWith($url, "http://")
-            or startsWith($url, "https://")
-            or startsWith($url, "ftp://")) {
-        // if it is not an incomplete url return true
-        return ($url != "http://" and $url != "https://" and $url != "ftp://");
-    }
-    return false;
+/**
+ * Check if a given variable is an URL
+ * @param mixed $url
+ * @return bool
+ */
+function is_url(mixed $url): bool {
+    return filter_var($url, FILTER_VALIDATE_URL) !== FALSE;
 }
 
 // Nutze curl zum Download der Datei, sofern verfügbar
@@ -55,7 +48,7 @@ function file_get_contents_wrapper(
 ): ?string {
     $content = false;
     if (!is_url($url)) {
-        return file_exists($url) ? file_get_contents($url) : null;
+        return is_file($url) ? file_get_contents($url) : null;
     }
     $cache_name = md5($url);
     $cache_folder = PATH::resolve("ULICMS_CACHE");

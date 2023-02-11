@@ -53,7 +53,7 @@ function getSystemLanguage(): string {
     } else {
         $lang = "de";
     }
-    if (!file_exists(getLanguageFilePath($lang))) {
+    if (!is_file(getLanguageFilePath($lang))) {
         $lang = "de";
     }
     return $lang;

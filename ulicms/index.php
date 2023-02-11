@@ -33,9 +33,9 @@ if (!isset($_SESSION["language"])) {
 
 setLocaleByLanguage();
 
-if (in_array($_SESSION["language"], $languages) && file_exists(getLanguageFilePath($_SESSION["language"]))) {
+if (in_array($_SESSION["language"], $languages) && is_file(getLanguageFilePath($_SESSION["language"]))) {
     require_once getLanguageFilePath($_SESSION["language"]);
-} elseif (file_exists(getLanguageFilePath("en"))) {
+} elseif (is_file(getLanguageFilePath("en"))) {
     require getLanguageFilePath("en");
 }
 
@@ -103,7 +103,7 @@ if (isMaintenanceMode()) {
     send_header('Status: 503 Service Temporarily Unavailable');
     send_header('Retry-After: 60');
     send_header("Content-Type: text/html; charset=utf-8");
-    if (file_exists(getTemplateDirPath($theme) . "maintenance.php")) {
+    if (is_file(getTemplateDirPath($theme) . "maintenance.php")) {
         require_once getTemplateDirPath($theme) . "maintenance.php";
     } else {
         die(get_translation("UNDER_MAINTENANCE"));
@@ -167,7 +167,7 @@ if (!is_dir(getTemplateDirPath($theme, true))) {
 
 do_event("before_functions");
 
-if (file_exists(getTemplateDirPath($theme, true) . "functions.php")) {
+if (is_file(getTemplateDirPath($theme, true) . "functions.php")) {
     require getTemplateDirPath($theme, true) . "functions.php";
 }
 

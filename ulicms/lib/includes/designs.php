@@ -7,7 +7,7 @@ defined('ULICMS_ROOT') or exit('no direct script access allowed');
 function getThemeMeta(string $theme, string $attrib = null) {
     $retval = null;
     $metadata_file = getTemplateDirPath($theme, true) . "metadata.json";
-    if (file_exists($metadata_file)) {
+    if (is_file($metadata_file)) {
         $data = !Vars::get("theme_{$theme}_meta") ?
                 file_get_contents($metadata_file) : Vars::get("theme_{$theme}_meta");
 

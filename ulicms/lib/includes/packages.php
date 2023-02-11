@@ -40,9 +40,9 @@ function uninstall_module(string $name, string $type = "module"): bool {
                 if ($mainController
                         and method_exists($mainController, "uninstall")) {
                     $mainController->uninstall();
-                } elseif (file_exists($uninstall_script)) {
+                } elseif (is_file($uninstall_script)) {
                     require $uninstall_script;
-                } elseif (file_exists($uninstall_script2)) {
+                } elseif (is_file($uninstall_script2)) {
                     require $uninstall_script2;
                 }
                 sureRemoveDir($moduleDir, true);

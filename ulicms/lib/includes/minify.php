@@ -66,7 +66,7 @@ function minifyJs(): string {
     // returns the updated timestamp of the last changed file
     foreach ($scripts as $script) {
         $script = ltrim($script, "/");
-        if (file_exists($script)
+        if (is_file($script)
                 and pathinfo($script, PATHINFO_EXTENSION) == "js"
                 and filemtime($script) > $lastmod) {
             $lastmod = filemtime($script);
@@ -86,10 +86,10 @@ function minifyJs(): string {
     $bundleUrl = "{$jsUrl}/{$cacheId}.js";
 
     $output = "";
-    if (!file_exists($bundleFile)) {
+    if (!is_file($bundleFile)) {
         foreach ($scripts as $script) {
             $script = ltrim($script, "/");
-            if (file_exists($script)
+            if (is_file($script)
                     and pathinfo($script, PATHINFO_EXTENSION) == "js") {
                 $minifier->add($script);
             }
@@ -114,7 +114,7 @@ function minifyCSS(): string {
     foreach ($stylesheets as $stylesheet) {
         $stylesheet = ltrim($stylesheet, "/");
         $type = pathinfo($stylesheet, PATHINFO_EXTENSION);
-        if (file_exists($stylesheet) and ($type == "css" or $type == "scss")
+        if (is_file($stylesheet) && ($type == "css" or $type == "scss")
                 and filemtime($stylesheet) > $lastmod) {
             $lastmod = filemtime($stylesheet);
         }
@@ -134,13 +134,14 @@ function minifyCSS(): string {
     $bundleUrl = "{$cssUrl}/{$cacheId}.css";
 
     $output = "";
-    if (!file_exists($bundleFile)) {
+
+    if (!is_file($bundleFile)) {
         foreach ($stylesheets as $stylesheet) {
             $stylesheet = ltrim($stylesheet, "/");
             $type = pathinfo($stylesheet, PATHINFO_EXTENSION);
-            if (file_exists($stylesheet) and $type == "css") {
+            if (is_file($stylesheet) and $type == "css") {
                 $minifier->add($stylesheet);
-            } elseif (file_exists($stylesheet) and $type == "scss") {
+            } elseif (is_file($stylesheet) and $type == "scss") {
                 $scssOutput = compileSCSS($stylesheet);
                 $minifier->add($scssOutput);
             }
@@ -150,6 +151,7 @@ function minifyCSS(): string {
 
         file_put_contents($bundleFile, $output);
     }
+
     resetStylesheetQueue();
     return $bundleUrl;
 }
