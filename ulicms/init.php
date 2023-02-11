@@ -134,11 +134,6 @@ if ((defined("ULICMS_DEBUG") && ULICMS_DEBUG) || (isset($config->debug) && $conf
     error_reporting(0);
 }
 
-/**
- * @deprecated since version 2023.1
- */
-define("ULICMS_DATA_STORAGE_ROOT", ULICMS_ROOT);
-
 if (!defined("ULICMS_TMP")) {
     define("ULICMS_TMP", ULICMS_ROOT . "/content/tmp/");
 }
