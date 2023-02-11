@@ -1,11 +1,6 @@
 <?php
 
 require_once "../vendor/autoload.php";
-require_once "../classes/objects/files/File.php";
-require_once "../classes/objects/web/load.php";
-require_once "../classes/objects/storages/load.php";
-
-require_once "../lib/files.php";
 
 class InstallerController {
 
@@ -48,9 +43,6 @@ class InstallerController {
                         break;
                     case "mysql_prefix":
                         $_SESSION[$var] = "ulicms_";
-                        break;
-                    case "admin_user":
-                        $_SESSION[$var] = "admin";
                         break;
                 }
             }

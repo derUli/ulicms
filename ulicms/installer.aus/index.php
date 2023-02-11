@@ -6,8 +6,13 @@ error_reporting(E_ALL ^ E_NOTICE);
 date_default_timezone_set("Europe/Berlin");
 
 define("ULICMS_ROOT", dirname(__FILE__));
-include_once "../lib/load.php";
-include_once "../classes/objects/web/Request.php";
+
+foreach(glob('../lib/includes/*.php') as $file){
+    if(is_file($file)){
+        require $file;
+    }
+}
+
 include_once "controllers/InstallerController.php";
 
 InstallerController::initSessionVars();
