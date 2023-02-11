@@ -3,12 +3,13 @@
 class StringHelperTest extends \PHPUnit\Framework\TestCase
 {
     private function getTestFilePath()
-    {
+    { 
         return Path::resolve("ULICMS_ROOT/tests/fixtures/lines.txt");
     }
 
     public function testRemoveEmptyLineFromString()
     {
+        // test
         $input = file_get_contents(
             Path::resolve("ULICMS_ROOT/tests/fixtures/removeEmptyLinesFromString.input.txt")
         );
