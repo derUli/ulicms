@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace App\Models\Content;
 
+use App\Models\Content\Category;
+
 use function get_translation;
 use function db_escape;
-use App\Models\Content\Category;
 
 // methods for manipulating categories
 class Categories

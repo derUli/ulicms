@@ -9,7 +9,6 @@ use Exception;
 
 class TestHelper extends \Helper
 {
-
     // Check if PHP is running in context of a Unit test
     public static function isRunningPHPUnit(): bool
     {

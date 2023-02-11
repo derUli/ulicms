@@ -10,6 +10,9 @@ use Phpfastcache\Helper\Psr16Adapter;
 use Phpfastcache\CacheManager;
 use Phpfastcache\Config\ConfigurationOption;
 use ModuleManager;
+use ControllerRegistry;
+use DesignSettingsController;
+
 use function do_event;
 use function sureRemoveDir;
 use function get_request_uri;
@@ -18,22 +21,21 @@ use function strbool;
 use function is_mobile;
 use function is_crawler;
 use function is_tablet;
-use ControllerRegistry;
-use DesignSettingsController;
 
-class CacheUtil {
-
+class CacheUtil
+{
     private static $adapter;
 
     // returns a Psr16 cache adapter if caching is enabled
     // or $force is true
     // else returns null
-    public static function getAdapter(bool $force = false): ?Psr16Adapter {
+    public static function getAdapter(bool $force = false): ?Psr16Adapter
+    {
         if (!self::isCacheEnabled() && !$force) {
             return null;
         }
 
-        if (self::$adapter !== NULL) {
+        if (self::$adapter !== null) {
             return self::$adapter;
         }
 
@@ -47,20 +49,22 @@ class CacheUtil {
         $driver = self::getDriverName();
 
         self::$adapter = new Psr16Adapter(
-                $driver,
-                new ConfigurationOption($cacheConfig)
+            $driver,
+            new ConfigurationOption($cacheConfig)
         );
 
         return self::$adapter;
     }
 
-    protected static function getDriverName(): string {
+    protected static function getDriverName(): string
+    {
         $driver = self::getBestMatchingDriver();
 
         return apply_filter($driver, 'cache_driver_name');
     }
 
-    protected static function getBestMatchingDriver(): string {
+    protected static function getBestMatchingDriver(): string
+    {
         $driver = 'Memstatic';
 
         $drivers = [
@@ -79,19 +83,22 @@ class CacheUtil {
         return $driver;
     }
 
-    public static function resetAdapater() {
+    public static function resetAdapater()
+    {
         CacheManager::clearInstances();
         self::$adapter = null;
         self::getAdapter(true);
     }
 
     // returns true if caching is enabled
-    public static function isCacheEnabled(): bool {
+    public static function isCacheEnabled(): bool
+    {
         return !Settings::get("cache_disabled") && !is_logged_in();
     }
 
     // clears the page cache
-    public static function clearPageCache(): void {
+    public static function clearPageCache(): void
+    {
         $adapter = self::getAdapter();
         if ($adapter) {
             $adapter->clear();
@@ -100,14 +107,15 @@ class CacheUtil {
 
     // clears all caches including apc, opcache, cache directory
     // and tmp directory, sync modules directory with database
-    public static function clearCache(): void {
+    public static function clearCache(): void
+    {
         do_event("before_clear_cache");
 
         // clear opcache if available
         if (function_exists("opcache_reset")) {
             opcache_reset();
         }
-        
+
         self::clearPageCache();
 
         sureRemoveDir(Path::resolve("ULICMS_CACHE"), false);
@@ -119,7 +127,7 @@ class CacheUtil {
 
         if (class_exists("DesignSettingsController")) {
             $designSettingsController = ControllerRegistry::get(
-                            DesignSettingsController::class
+                DesignSettingsController::class
             );
             $designSettingsController->_generateSCSSToFile();
         }
@@ -128,20 +136,22 @@ class CacheUtil {
     }
 
     // Returns cache expiration time as integer
-    public static function getCachePeriod(): int {
+    public static function getCachePeriod(): int
+    {
         return intval(Settings::get("cache_period"));
     }
 
     // generates an unique identifier for the current page
-    public static function getCurrentUid(): string {
+    public static function getCurrentUid(): string
+    {
         return "fullpage-cache-" . md5(get_request_uri()
                         . getCurrentLanguage() . strbool(is_mobile())
                         . strbool(is_crawler()) . strbool(is_tablet()));
     }
 
-    public static function clearAvatars(bool $removeDir = false): void {
+    public static function clearAvatars(bool $removeDir = false): void
+    {
         $path = Path::resolve("ULICMS_CONTENT/avatars");
         File::sureRemoveDir($path, $removeDir);
     }
-
 }

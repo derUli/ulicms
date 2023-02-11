@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 // This class contains methods to manipulate CustomFields
 // defined by modules
-class CustomFields {
-
+class CustomFields
+{
     public static function set(
-            string $name,
-            $value,
-            ?int $content_id = null,
-            $addPrefix = false
+        string $name,
+        $value,
+        ?int $content_id = null,
+        $addPrefix = false
     ): ?bool {
         $content_id = $content_id ?? get_ID();
 
@@ -24,7 +24,7 @@ class CustomFields {
             $value = join("\0\0", $value);
         } elseif (is_bool($value)) {
             $value = strval((int) $value);
-        } elseif ($value !== NULL) {
+        } elseif ($value !== null) {
             $value = (string) $value;
         }
 
@@ -38,7 +38,7 @@ class CustomFields {
         $result = Database::pQuery($sql, $args, true);
         if (Database::getNumRows($result) > 0) {
             $result = Database::fetchObject($result);
-            if ($value === NULL) {
+            if ($value === null) {
                 $args = array(
                     (int) $result->id
                 );
@@ -55,7 +55,7 @@ class CustomFields {
                         . "where name = ? and content_id = ?";
                 return Database::pQuery($sql, $args, true);
             }
-        } elseif ($value !== NULL) {
+        } elseif ($value !== null) {
             $args = array(
                 $content_id,
                 $name,
@@ -69,11 +69,11 @@ class CustomFields {
     }
 
     public static function getAll(
-            ?int $content_id = null,
-            bool $removePrefix = true
+        ?int $content_id = null,
+        bool $removePrefix = true
     ): array {
         $fields = [];
-        if ($content_id === NULL) {
+        if ($content_id === null) {
             $content_id = get_ID();
         }
 
@@ -100,11 +100,11 @@ class CustomFields {
     }
 
     public static function get(
-            string $name,
-            ?int $content_id = null,
-            $addPrefix = true
+        string $name,
+        ?int $content_id = null,
+        $addPrefix = true
     ) {
-        if ($content_id === NULL) {
+        if ($content_id === null) {
             $content_id = get_ID();
         }
 
@@ -134,5 +134,4 @@ class CustomFields {
         }
         return null;
     }
-
 }

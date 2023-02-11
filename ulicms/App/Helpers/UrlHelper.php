@@ -6,7 +6,6 @@ namespace App\Helpers;
 
 class UrlHelper extends \Helper
 {
-
     // this method removes the get parameters string from $url
     // and returns the url without get parameters
     public static function getUrlWithoutGetParameters(string $url): string
@@ -16,7 +15,7 @@ class UrlHelper extends \Helper
         if (!empty($parsedUri["port"])) {
             $hostWithPort .= ":" . $parsedUri["port"];
         }
-        
+
         $path = isset($parsedUri["path"]) ? $parsedUri["path"] : "";
         return $parsedUri["scheme"] . "://" . $hostWithPort
                 . $path;

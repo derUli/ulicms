@@ -6,7 +6,6 @@ namespace App\Helpers;
 
 class DataTablesHelper extends \Helper
 {
-
     // returns the path of the datatables language file
     // if there is no language file for the current language
     // it returns the path to the english language file

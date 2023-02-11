@@ -7,12 +7,12 @@ namespace App\Constants;
 // use this constants if you have to compare request methods
 class RequestMethod
 {
-    const POST = "post";
-    const GET = "get";
-    const HEAD = "head";
-    const PUT = "put";
-    const DELETE = "delete";
-    const CONNECT = "connect";
-    const OPTIONS = "option";
-    const TRACE = "trace";
+    public const POST = "post";
+    public const GET = "get";
+    public const HEAD = "head";
+    public const PUT = "put";
+    public const DELETE = "delete";
+    public const CONNECT = "connect";
+    public const OPTIONS = "option";
+    public const TRACE = "trace";
 }

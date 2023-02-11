@@ -10,16 +10,16 @@ use ImagineHelper;
 use Imagine\Image\Box;
 use Imagine\Image\ImageInterface;
 
-class ImageScaleHelper extends Helper {
-
-    public static function getMaxImageDimensions(): ?array {
+class ImageScaleHelper extends Helper
+{
+    public static function getMaxImageDimensions(): ?array
+    {
         $dimensions = null;
         $scale = strtolower(Settings::get("max_image_dimensions") ?? '');
 
         $explodedScale = explode("x", $scale);
 
         if (count($explodedScale) === 2) {
-
             if (!empty($explodedScale[0])) {
                 $width = (int) $explodedScale[0];
             }
@@ -37,8 +37,8 @@ class ImageScaleHelper extends Helper {
     }
 
     public static function scaleDown(
-            string $file,
-            ?string $outputFile = null
+        string $file,
+        ?string $outputFile = null
     ): bool {
         $dimensions = ImageScaleHelper::getMaxImageDimensions();
 
@@ -59,5 +59,4 @@ class ImageScaleHelper extends Helper {
 
         return $scaled;
     }
-
 }

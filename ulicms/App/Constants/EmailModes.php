@@ -6,9 +6,8 @@ namespace App\Constants;
 
 class EmailModes
 {
-
     // use mail()
-    const INTERNAL = "internal";
+    public const INTERNAL = "internal";
     // send mails by an external SMTP Server
-    const PHPMAILER = "phpmailer";
+    public const PHPMAILER = "phpmailer";
 }

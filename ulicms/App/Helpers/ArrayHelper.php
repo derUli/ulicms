@@ -7,13 +7,13 @@ namespace App\Helpers;
 use Helper;
 use Exception;
 
-class ArrayHelper extends Helper {
-
+class ArrayHelper extends Helper
+{
     // inserts an item before an index to an array
     public static function insertBefore(
-            array $input,
-            int $index,
-            $element
+        array $input,
+        int $index,
+        $element
     ): array {
         if (!array_key_exists($index, $input)) {
             throw new Exception("Index not found");
@@ -34,9 +34,9 @@ class ArrayHelper extends Helper {
 
     // inserts an item after an index to an array
     public static function insertAfter(
-            array $input,
-            int $index,
-            $element
+        array $input,
+        int $index,
+        $element
     ): array {
         if (!array_key_exists($index, $input)) {
             throw new Exception("Index not found");
@@ -56,7 +56,8 @@ class ArrayHelper extends Helper {
     }
 
     // flatten a nested array structure to one layer
-    public static function flatten($input): array {
+    public static function flatten($input): array
+    {
         if (!is_array($input)) {
             // nothing to do if it's not an array
             return [$input];
@@ -71,7 +72,8 @@ class ArrayHelper extends Helper {
         return $result;
     }
 
-    public static function hasMultipleKeys(?array $input, array $keys): bool {
+    public static function hasMultipleKeys(?array $input, array $keys): bool
+    {
         if (!$input) {
             return false;
         }
@@ -85,5 +87,4 @@ class ArrayHelper extends Helper {
         }
         return $hasKeys;
     }
-
 }

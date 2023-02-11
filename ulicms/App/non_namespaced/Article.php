@@ -2,7 +2,6 @@
 
 class Article extends Page
 {
-
     // FIXME: Variablen alle private machen
     // und getter und setter implementieren
     public $article_author_name = "";
@@ -38,7 +37,7 @@ class Article extends Page
 
     public function update()
     {
-        if ($this->id === NULL) {
+        if ($this->id === null) {
             return false;
         }
         parent::update();

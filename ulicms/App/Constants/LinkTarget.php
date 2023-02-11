@@ -7,8 +7,8 @@ namespace App\Constants;
 // Targets for HTML Links
 class LinkTarget
 {
-    const TARGET_BLANK = "_blank";
-    const TARGET_SELF = "_self";
-    const TARGET_PARENT = "_parent";
-    const TARGET_TOP = "_top";
+    public const TARGET_BLANK = "_blank";
+    public const TARGET_SELF = "_self";
+    public const TARGET_PARENT = "_parent";
+    public const TARGET_TOP = "_top";
 }

@@ -7,15 +7,15 @@ namespace App\Constants;
 // Bootstrap 3.x Button Styles
 class ButtonType
 {
-    const BUTTON_BUTTON = "button";
-    const BUTTON_SUBMIT = "submit";
-    const BUTTON_RESET = "reset";
-    const TYPE_BASIC = "btn";
-    const TYPE_DEFAULT = "btn btn-default";
-    const TYPE_PRIMARY = "btn btn-primary";
-    const TYPE_SUCCESS = "btn btn-success";
-    const TYPE_INFO = "btn btn-info";
-    const TYPE_WARNING = "btn btn-warning";
-    const TYPE_DANGER = "btn btn-danger";
-    const TYPE_LINK = "btn btn-link";
+    public const BUTTON_BUTTON = "button";
+    public const BUTTON_SUBMIT = "submit";
+    public const BUTTON_RESET = "reset";
+    public const TYPE_BASIC = "btn";
+    public const TYPE_DEFAULT = "btn btn-default";
+    public const TYPE_PRIMARY = "btn btn-primary";
+    public const TYPE_SUCCESS = "btn btn-success";
+    public const TYPE_INFO = "btn btn-info";
+    public const TYPE_WARNING = "btn btn-warning";
+    public const TYPE_DANGER = "btn btn-danger";
+    public const TYPE_LINK = "btn btn-link";
 }

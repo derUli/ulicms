@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace App\Models\Content;
 
+use Database;
+
 use function db_query;
 use function db_fetch_object;
 use function db_num_rows;
 use function db_escape;
-use Database;
 
 // Version Control System for pages
 // tracks content changes

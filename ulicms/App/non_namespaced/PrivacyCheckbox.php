@@ -9,7 +9,7 @@ class PrivacyCheckbox
 {
     private $language;
 
-    const CHECKBOX_NAME = "accept_privacy_policy";
+    public const CHECKBOX_NAME = "accept_privacy_policy";
 
     public function __construct(string $language)
     {
@@ -21,9 +21,9 @@ class PrivacyCheckbox
     {
         return boolval(
             Settings::get(
-                    "privacy_policy_checkbox_enable_{$this->language}",
-                    "bool"
-                )
+                "privacy_policy_checkbox_enable_{$this->language}",
+                "bool"
+            )
         );
     }
 

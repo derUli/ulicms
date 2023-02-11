@@ -26,7 +26,7 @@ class PermissionChecker
             return false;
         }
         $user = new User($this->user_id);
-        
+
         // If the "Is Admin" flag is set the user has full access
         // to the whole system
         if ($user->isAdmin()) {

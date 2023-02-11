@@ -5,8 +5,9 @@ namespace App\Models\Content;
 use Model;
 use Database;
 use Request;
-use function getDomainByLanguage;
 use Settings;
+
+use function getDomainByLanguage;
 
 class Language extends Model
 {
@@ -67,17 +68,17 @@ class Language extends Model
 
     public function setName($val)
     {
-        $this->name = $val !== NULL ? (string)$val : null;
+        $this->name = $val !== null ? (string)$val : null;
     }
 
     public function setLanguageCode($val)
     {
-        $this->language_code = $val !== NULL ? (string)$val : null;
+        $this->language_code = $val !== null ? (string)$val : null;
     }
 
     public function save()
     {
-        if ($this->id === NULL) {
+        if ($this->id === null) {
             $this->insert();
         } else {
             $this->update();
@@ -110,7 +111,7 @@ class Language extends Model
 
     public function delete()
     {
-        if ($this->id !== NULL) {
+        if ($this->id !== null) {
             $sql = "DELETE FROM `{prefix}languages` where id = ?";
             $args = array(
                 $this->id
@@ -124,7 +125,7 @@ class Language extends Model
 
     public function makeDefaultLanguage(): void
     {
-        if ($this->language_code !== NULL) {
+        if ($this->language_code !== null) {
             Settings::set("default_language", $this->language_code);
         }
     }

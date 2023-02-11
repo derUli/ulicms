@@ -8,7 +8,6 @@ use Settings;
 
 class Encryption
 {
-
     // use this to encrypt user passwords
     public static function hashPassword(string $password): string
     {

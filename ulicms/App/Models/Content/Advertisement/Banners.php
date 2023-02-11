@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models\Content\Advertisement;
 
 use Database;
+
 use function tbname;
 
 // This class contains methods that return an array of banners

@@ -6,7 +6,6 @@ namespace App\Security\SpamChecker;
 
 interface ISpamChecker
 {
-
     // this must be an array which must return an array of
     // SpamDetectionResults
     public function getErrors(): array;

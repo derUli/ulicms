@@ -9,12 +9,12 @@ use App\Utils\File;
 
 // generates HTML style tags
 // please use stylesheet queue instead of this methods if possible
-class Style {
-
+class Style
+{
     public static function fromExternalFile(
-            string $href,
-            ?string $media = null,
-            array $htmlAttributes = []
+        string $href,
+        ?string $media = null,
+        array $htmlAttributes = []
     ): string {
         $attributes = [
             "rel" => "stylesheet",
@@ -40,9 +40,9 @@ class Style {
     }
 
     public static function fromString(
-            ?string $code,
-            ?string $media = null,
-            array $htmlAttributes = []
+        ?string $code,
+        ?string $media = null,
+        array $htmlAttributes = []
     ): string {
         $attributes = [];
         if ($media) {
@@ -59,5 +59,4 @@ class Style {
 
         return "<style$attribHTML>" . $code . "</style>";
     }
-
 }

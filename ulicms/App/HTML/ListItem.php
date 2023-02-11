@@ -7,19 +7,21 @@ namespace App\HTML;
 use Template;
 
 // represents a list item in a singleSelect() or multiSelect()
-class ListItem {
-
+class ListItem
+{
     private $value;
     private $text;
     private $selected;
 
-    public function __construct($value, $text, bool $selected = false) {
+    public function __construct($value, $text, bool $selected = false)
+    {
         $this->value = $value;
         $this->text = $text;
         $this->selected = $selected;
     }
 
-    public function getHtml(): string {
+    public function getHtml(): string
+    {
         if ($this->selected) {
             return '<option value="' . Template::getEscape($this->value) .
                     '" selected>' . Template::getEscape($this->text) . '</option>';
@@ -28,36 +30,43 @@ class ListItem {
                 Template::getEscape($this->text) . '</option>';
     }
 
-    public function __toString(): string {
+    public function __toString(): string
+    {
         return $this->getHtml();
     }
 
-    public function render(): void {
+    public function render(): void
+    {
         echo $this->getHtml();
     }
 
-    public function getValue() {
+    public function getValue()
+    {
         return $this->value;
     }
 
-    public function getText() {
+    public function getText()
+    {
         return $this->text;
     }
 
-    public function getSelected(): bool {
+    public function getSelected(): bool
+    {
         return $this->selected;
     }
 
-    public function setValue($val) {
-        $this->value = $val !== NULL ? (string) $val : null;
+    public function setValue($val)
+    {
+        $this->value = $val !== null ? (string) $val : null;
     }
 
-    public function setText($val): void {
-        $this->text = $val !== NULL ? (string) $val : null;
+    public function setText($val): void
+    {
+        $this->text = $val !== null ? (string) $val : null;
     }
 
-    public function setSelected(bool $val): void {
+    public function setSelected(bool $val): void
+    {
         $this->selected = $val;
     }
-
 }

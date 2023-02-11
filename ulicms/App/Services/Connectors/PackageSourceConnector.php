@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Connectors;
 
 use Settings;
+
 use function cms_version;
 use function file_get_contents_wrapper;
 

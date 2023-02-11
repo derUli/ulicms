@@ -17,7 +17,7 @@ class ACL
 
     public function createGroup(string $name, ?array $permissions = null): int
     {
-        $permissionData = $permissions === NULL ? $this->getDefaultACL() : json_encode($permissions);
+        $permissionData = $permissions === null ? $this->getDefaultACL() : json_encode($permissions);
 
         $sql = "INSERT INTO `" . tbname("groups") .
                 "` (`name`, `permissions`) " .
@@ -36,7 +36,7 @@ class ACL
         string $name,
         ?array $permissions = null
     ): int {
-        $permissionData = $permissions === NULL ? $this->getDefaultACL() : json_encode($permissions);
+        $permissionData = $permissions === null ? $this->getDefaultACL() : json_encode($permissions);
 
         $sql = "UPDATE `" . tbname("groups") . "` SET name='" .
                 db_escape($name) . "', permissions='" . db_escape($permissionData) . "' WHERE id=" . $id;
@@ -51,7 +51,7 @@ class ACL
     {
         $id = (int)$id;
 
-        if ($move_users_to === NULL) {
+        if ($move_users_to === null) {
             $updateUsers = "UPDATE " . tbname("users") .
                     " SET `group_id`=NULL where `group_id`=$id";
         } else {

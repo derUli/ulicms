@@ -6,18 +6,20 @@ namespace App\Registries;
 
 use App\Exceptions\FileNotFoundException;
 use Vars;
+
 use function getAllModules;
 use function getModuleMeta;
 use function getModulePath;
 
 // This method loads all module's helper classes
-class HelperRegistry {
-
+class HelperRegistry
+{
     private static $helpers = [];
 
     // TODO: This code works but looks like crap
     // refactor it and split it into multiple small methods
-    public static function loadModuleHelpers(): void {
+    public static function loadModuleHelpers(): void
+    {
         $helperRegistry = [];
         $modules = getAllModules();
         $disabledModules = Vars::get("disabledModules") ?? [];
@@ -52,5 +54,4 @@ class HelperRegistry {
             }
         }
     }
-
 }

@@ -8,7 +8,7 @@ class EmailField extends CustomField
     {
         ViewBag::set("field", $this);
         ViewBag::set("field_value", $value);
-        ViewBag::set("field_name", $this->contentType !== NULL?
+        ViewBag::set("field_name", $this->contentType !== null ?
                         $this->contentType . "_" . $this->name : $this->name);
 
         return Template::executeDefaultOrOwnTemplate(

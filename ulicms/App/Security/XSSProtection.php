@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace App\Security;
 
-class XSSProtection {
-
+class XSSProtection
+{
     // like PHP's strip_tags
     // But remove also inline javascript code
-    public static function stripTags(string $input, ?string $allowed = null): string {
+    public static function stripTags(string $input, ?string $allowed = null): string
+    {
         $output = strip_tags($input, $allowed);
 
         // if <script> isn't allowed then remove also inline event handlers
@@ -18,5 +19,4 @@ class XSSProtection {
         }
         return $output;
     }
-
 }

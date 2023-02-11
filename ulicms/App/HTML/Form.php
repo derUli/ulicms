@@ -85,7 +85,7 @@ class Form
 
         $htmlAttributesString = ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes);
         $attribHtml = "";
-        
+
         if (!empty($htmlAttributes)) {
             $attribHtml .= " $htmlAttributesString";
         }

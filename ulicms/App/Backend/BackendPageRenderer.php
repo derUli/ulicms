@@ -19,35 +19,41 @@ use App\HTML\Alert;
 // if you set a model from a model
 // you can get it with this code in your template
 // $model = BackendPageRenderer::getModel();
-class BackendPageRenderer {
-
+class BackendPageRenderer
+{
     private $action;
     private static $model;
 
-    public function __construct($action, $model = null) {
+    public function __construct($action, $model = null)
+    {
         $this->action = $action;
 
         self::$model = $model;
     }
 
-    public function getAction(): string {
+    public function getAction(): string
+    {
         return $this->action;
     }
 
-    public function setAction(string $action): void {
+    public function setAction(string $action): void
+    {
         $this->action = $action;
     }
 
-    public static function getModel() {
+    public static function getModel()
+    {
         return self::$model;
     }
 
-    public static function setModel($model): void {
+    public static function setModel($model): void
+    {
         self::$model = $model;
     }
 
     // renders a backend page, outputs it and do events
-    public function render(): void {
+    public function render(): void
+    {
         if (Settings::get("minify_html")) {
             ob_start();
         }
@@ -84,12 +90,13 @@ class BackendPageRenderer {
         exit();
     }
 
-    public function showUnsupportedBrowser($checker) {
+    public function showUnsupportedBrowser($checker)
+    {
         $message = get_secure_translation(
-                "unsupported_browser",
-                [
-                    "%browser%" => $checker->getUnsupportedBrowserName()
-                ]
+            "unsupported_browser",
+            [
+                "%browser%" => $checker->getUnsupportedBrowserName()
+            ]
         );
         $message = nl2br($message);
         $message = make_links_clickable($message);
@@ -99,18 +106,19 @@ class BackendPageRenderer {
 
     // this method handles access to the features that are
     // accesible for non authenticated users
-    protected function handleNotLoggedIn(bool $onlyContent = false): void {
+    protected function handleNotLoggedIn(bool $onlyContent = false): void
+    {
         ActionRegistry::loadModuleActions();
         $actions = ActionRegistry::getActions();
 
         if ($this->getAction()) {
             $action_permission = ActionRegistry::getActionPermission(
-                            $this->getAction()
+                $this->getAction()
             );
             if ($action_permission and $action_permission === "*") {
                 Vars::set("action_filename", $actions[$this->getAction()]);
                 echo Template::executeDefaultOrOwnTemplate(
-                        "backend/container.php"
+                    "backend/container.php"
                 );
             }
         }
@@ -131,7 +139,8 @@ class BackendPageRenderer {
     }
 
     // this method handles all actions by authenticated users
-    protected function handleLoggedIn(bool $onlyContent = false): void {
+    protected function handleLoggedIn(bool $onlyContent = false): void
+    {
         $permissionChecker = new PermissionChecker(get_user_id());
 
         if (!$onlyContent) {
@@ -147,16 +156,16 @@ class BackendPageRenderer {
             require "inc/change_password.php";
         } elseif (isset($actions[$this->getAction()])) {
             $requiredPermission = ActionRegistry::getActionPermission(
-                            $this->getAction()
+                $this->getAction()
             );
             if (!$requiredPermission
                     or (
-                    $requiredPermission
-                    and $permissionChecker->hasPermission($requiredPermission))
+                        $requiredPermission
+                        and $permissionChecker->hasPermission($requiredPermission))
             ) {
                 Vars::set("action_filename", $actions[$this->getAction()]);
                 echo Template::executeDefaultOrOwnTemplate(
-                        "backend/container.php"
+                    "backend/container.php"
                 );
             } else {
                 noPerms();
@@ -167,7 +176,8 @@ class BackendPageRenderer {
     }
 
     // minify html output
-    public function outputMinified(): void {
+    public function outputMinified(): void
+    {
         $generatedHtml = ob_get_clean();
         $options = array(
             'optimizationLevel' => HTMLMinify::OPTIMIZATION_ADVANCED
@@ -175,17 +185,17 @@ class BackendPageRenderer {
         $HTMLMinify = new HTMLMinify($generatedHtml, $options);
         $generatedHtml = $HTMLMinify->process();
         $generatedHtml = StringHelper::removeEmptyLinesFromString(
-                        $generatedHtml
+            $generatedHtml
         );
 
         echo $generatedHtml;
     }
 
     // run cron events of modules
-    public function doCronEvents(): void {
+    public function doCronEvents(): void
+    {
         do_event("before_admin_cron");
         do_event("admin_cron");
         do_event("after_admin_cron");
     }
-
 }

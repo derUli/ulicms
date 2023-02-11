@@ -6,6 +6,6 @@ namespace App\Constants;
 
 class PackageTypes
 {
-    const TYPE_MODULE = "module";
-    const TYPE_THEME = "theme";
+    public const TYPE_MODULE = "module";
+    public const TYPE_THEME = "theme";
 }

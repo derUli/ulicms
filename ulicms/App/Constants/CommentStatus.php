@@ -9,8 +9,8 @@ namespace App\Constants;
 // it has to be approved by a backend user
 class CommentStatus
 {
-    const PENDING = "pending";
-    const PUBLISHED = "published";
-    const SPAM = "spam";
-    const DEFAULT_STATUS = self::PENDING;
+    public const PENDING = "pending";
+    public const PUBLISHED = "published";
+    public const SPAM = "spam";
+    public const DEFAULT_STATUS = self::PENDING;
 }

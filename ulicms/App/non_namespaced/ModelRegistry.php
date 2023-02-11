@@ -5,10 +5,11 @@ declare(strict_types=1);
 use App\Exceptions\FileNotFoundException;
 
 // loads model files of modules
-class ModelRegistry {
-
+class ModelRegistry
+{
     // TODO: refactor this and split int into multiple method s
-    public static function loadModuleModels(): void {
+    public static function loadModuleModels(): void
+    {
         $modelRegistry = [];
         $modules = getAllModules();
         $disabledModules = Vars::get("disabledModules") ?? [];
@@ -38,5 +39,4 @@ class ModelRegistry {
             }
         }
     }
-
 }

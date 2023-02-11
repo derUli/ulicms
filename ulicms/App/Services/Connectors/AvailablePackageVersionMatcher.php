@@ -2,9 +2,10 @@
 
 namespace App\Services\Connectors;
 
-use function is_version_number;
 use App\Helpers\ArrayHelper;
 use UliCMSVersion;
+
+use function is_version_number;
 
 class AvailablePackageVersionMatcher
 {
@@ -51,13 +52,17 @@ class AvailablePackageVersionMatcher
 
         usort($releases, function ($a, $b) {
             return \App\Utils\VersionComparison\compare(
-                    $a["version"], $b["version"], "<"
-                    ) ? 1 : 0;
+                $a["version"],
+                $b["version"],
+                "<"
+            ) ? 1 : 0;
         });
         usort($releases, function ($a, $b) {
             return \App\Utils\VersionComparison\compare(
-                    $a["compatible_with"], $b["compatible_with"], "<"
-                    ) ? 1 : 0;
+                $a["compatible_with"],
+                $b["compatible_with"],
+                "<"
+            ) ? 1 : 0;
         });
 
         return $releases;

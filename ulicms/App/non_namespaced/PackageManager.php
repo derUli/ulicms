@@ -6,15 +6,17 @@ use App\Services\Connectors\PackageSourceConnector;
 use App\Constants\PackageTypes;
 use App\Utils\CacheUtil;
 
-class PackageManager {
-
-    public function checkForNewerVersionOfPackage(string $name): ?string {
+class PackageManager
+{
+    public function checkForNewerVersionOfPackage(string $name): ?string
+    {
         $connector = new PackageSourceConnector();
         $connector->fetch(true);
         return $connector->getVersionOfPackage($name);
     }
 
-    public function splitPackageName(string $name): array {
+    public function splitPackageName(string $name): array
+    {
         $name = str_ireplace(".tar.gz", "", $name);
         $name = str_ireplace(".zip", "", $name);
         $splitted = explode("-", $name);
@@ -27,8 +29,8 @@ class PackageManager {
     }
 
     public function isInstalled(
-            string $package,
-            string $type = PackageTypes::TYPE_MODULE
+        string $package,
+        string $type = PackageTypes::TYPE_MODULE
     ): bool {
         switch ($type) {
             case PackageTypes::TYPE_MODULE:
@@ -38,15 +40,15 @@ class PackageManager {
                 return in_array($package, getAllThemes());
             default:
                 throw new BadMethodCallException(
-                                "Package Type {$type} not supported"
+                    "Package Type {$type} not supported"
                 );
         }
     }
 
     // TODO: Reimplement in PackageSourceconnector
     public function installPackage(
-            string $file,
-            bool $clear_cache = true
+        string $file,
+        bool $clear_cache = true
     ): bool {
         @set_time_limit(0);
         try {
@@ -81,7 +83,8 @@ class PackageManager {
         }
     }
 
-    public function getInstalledModules(): array {
+    public function getInstalledModules(): array
+    {
         $availableModules = [];
 
         $moduleFolder = Path::resolve("ULICMS_ROOT/content/modules");
@@ -99,11 +102,12 @@ class PackageManager {
         return $availableModules;
     }
 
-    public function getInstalledThemes(): array {
+    public function getInstalledThemes(): array
+    {
         $themes = [];
         $templateDir = Path::resolve(
-                        "ULICMS_ROOT/content/templates"
-                ) . "/";
+            "ULICMS_ROOT/content/templates"
+        ) . "/";
 
         $folders = scanDir($templateDir);
         natcasesort($folders);
@@ -121,7 +125,8 @@ class PackageManager {
         return $themes;
     }
 
-    public function getInstalledPackages(string $type = 'modules'): ?array {
+    public function getInstalledPackages(string $type = 'modules'): ?array
+    {
         if ($type === 'modules' or $type === 'module') {
             return $this->getInstalledModules();
         } elseif ($type === 'themes' or $type === 'theme') {
@@ -129,5 +134,4 @@ class PackageManager {
         }
         throw new BadMethodCallException("No such package type: $type");
     }
-
 }

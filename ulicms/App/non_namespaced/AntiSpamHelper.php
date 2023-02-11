@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-class AntiSpamHelper extends Helper {
-
+class AntiSpamHelper extends Helper
+{
     // checking if this Country is blocked by spamfilter
     // blocking works by the domain extension of the client's
     // hostname
     public static function isCountryBlocked(
-            ?string $ip = null,
-            ?array $country_blacklist = null
+        ?string $ip = null,
+        ?array $country_blacklist = null
     ): bool {
         $ip = $ip ?? get_ip();
 
@@ -47,7 +47,8 @@ class AntiSpamHelper extends Helper {
     }
 
     // returns true if a string contains chinese chars
-    public static function isChinese(?string $str): bool {
+    public static function isChinese(?string $str): bool
+    {
         if (!$str) {
             return false;
         }
@@ -56,7 +57,8 @@ class AntiSpamHelper extends Helper {
     }
 
     // returns true if a string contains cyrillic chars
-    public static function isCyrillic(?string $str): bool {
+    public static function isCyrillic(?string $str): bool
+    {
         if (!$str) {
             return false;
         }
@@ -66,7 +68,8 @@ class AntiSpamHelper extends Helper {
 
     // returns true if a string contains chars in
     // right to left languages such as arabic
-    public static function isRtl(?string $str): bool {
+    public static function isRtl(?string $str): bool
+    {
         if (!$str) {
             return false;
         }
@@ -79,8 +82,8 @@ class AntiSpamHelper extends Helper {
     // badwords can be specified at the spamfilter settings
     // returns null if there are no badwords
     public static function containsBadwords(
-            ?string $str,
-            array $words_blacklist = null
+        ?string $str,
+        array $words_blacklist = null
     ) {
         if (!$str) {
             return null;
@@ -90,10 +93,10 @@ class AntiSpamHelper extends Helper {
 
         if (is_string($words_blacklist)) {
             $words_blacklist = StringHelper::linesFromString(
-                            $words_blacklist,
-                            false,
-                            true,
-                            true
+                $words_blacklist,
+                false,
+                true,
+                true
             );
         }
 
@@ -109,12 +112,14 @@ class AntiSpamHelper extends Helper {
     }
 
     // returns true if the spamfilter is enabled
-    public static function isSpamFilterEnabled(): bool {
+    public static function isSpamFilterEnabled(): bool
+    {
         return Settings::get("spamfilter_enabled") == "yes";
     }
 
     // returns true if this is a bot, based on a static useragent list
-    public static function checkForBot(?string $useragent = null): bool {
+    public static function checkForBot(?string $useragent = null): bool
+    {
         if (!$useragent && isset($_SERVER['HTTP_USER_AGENT'])) {
             $useragent = $_SERVER['HTTP_USER_AGENT'];
         }
@@ -177,7 +182,8 @@ class AntiSpamHelper extends Helper {
     // please note that this function returns also true if
     // you send an email to a nonexisting user on a valid domain.
     // Use this function with care
-    public static function checkMailDomain(string $email): bool {
+    public static function checkMailDomain(string $email): bool
+    {
         $domain = strstr($email, '@');
         $domain = remove_prefix($domain, "@");
         // In some cases getmxrr() would return a result for an invalid domain
@@ -190,5 +196,4 @@ class AntiSpamHelper extends Helper {
         getmxrr($domain, $result);
         return count($result) > 0;
     }
-
 }

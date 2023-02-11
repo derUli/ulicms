@@ -10,6 +10,7 @@ use Database;
 use Model;
 use Path;
 use StringHelper;
+
 use function _esc;
 use function get_translation;
 
@@ -27,7 +28,7 @@ class Audio extends Model
     private $created;
     private $updated;
 
-    const AUDIO_DIR = "content/audio/";
+    public const AUDIO_DIR = "content/audio/";
 
     public function __construct($id = null)
     {

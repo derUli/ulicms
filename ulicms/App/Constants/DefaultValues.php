@@ -2,9 +2,9 @@
 
 namespace App\Constants;
 
-class DefaultValues {
-
-    const ALLOWED_TAGS = "<a>" .
+class DefaultValues
+{
+    public const ALLOWED_TAGS = "<a>" .
             "<abbr>" .
             "<address>" .
             "<area>" .
@@ -107,5 +107,4 @@ class DefaultValues {
             "<video>" .
             "<wbr>" .
             "<menu>";
-
 }

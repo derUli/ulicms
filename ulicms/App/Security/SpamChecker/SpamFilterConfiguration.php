@@ -42,7 +42,7 @@ class SpamFilterConfiguration
         $disallow_rtl_chars = boolval(
             Settings::get("disallow_rtl_chars")
         );
-        
+
         $settings->setDisallowRtlChars($disallow_rtl_chars);
         $settings->setRejectRequestsFromBots(
             boolval(Settings::get("reject_requests_from_bots"))
@@ -75,7 +75,7 @@ class SpamFilterConfiguration
             $this->badwords = StringHelper::linesFromString($val);
         } elseif (is_array($val)) {
             $this->badwords = $val;
-        } elseif ($val === NULL) {
+        } elseif ($val === null) {
             $this->badwords = [];
         } else {
             throw new InvalidArgumentException(var_dump_str($val) .
@@ -98,7 +98,7 @@ class SpamFilterConfiguration
             $this->blockedCountries = $countries;
         } elseif (is_array($val)) {
             $this->blockedCountries = $val;
-        } elseif ($val === NULL) {
+        } elseif ($val === null) {
             $this->blockedCountries = [];
         } else {
             throw new InvalidArgumentException(var_dump_str($val) .

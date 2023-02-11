@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 // this method implements the rendering of a single backend main menu item
-class MenuEntry {
-
+class MenuEntry
+{
     private $title;
     private $link;
     private $identifier;
@@ -14,13 +14,13 @@ class MenuEntry {
     private $isAjax = false;
 
     public function __construct(
-            string $title,
-            string $link,
-            string $identifier,
-            $permissions = null,
-            array $children = [],
-            bool $newWindow = false,
-            bool $isAjax = false
+        string $title,
+        string $link,
+        string $identifier,
+        $permissions = null,
+        array $children = [],
+        bool $newWindow = false,
+        bool $isAjax = false
     ) {
         $this->title = $title;
         $this->link = $link;
@@ -31,72 +31,89 @@ class MenuEntry {
         $this->isAjax = $isAjax;
     }
 
-    public function getTitle(): string {
+    public function getTitle(): string
+    {
         return $this->title;
     }
 
-    public function getLink(): string {
+    public function getLink(): string
+    {
         return $this->link;
     }
 
-    public function getIdentifier(): string {
+    public function getIdentifier(): string
+    {
         return $this->identifier;
     }
 
-    public function setTitle(string $value): void {
+    public function setTitle(string $value): void
+    {
         $this->title = $value;
     }
 
-    public function setLink(string $value): void {
+    public function setLink(string $value): void
+    {
         $this->link = $value;
     }
 
-    public function setIdentifier(string $value): void {
+    public function setIdentifier(string $value): void
+    {
         $this->identifier = $value;
     }
 
-    public function getChildren(): array {
+    public function getChildren(): array
+    {
         return $this->children;
     }
 
-    public function setChildren(array $value): void {
+    public function setChildren(array $value): void
+    {
         $this->children = $value;
     }
 
-    public function hasChildren(): bool {
+    public function hasChildren(): bool
+    {
         return (count($this->children) > 0);
     }
 
-    public function addChildren(array $children): void {
+    public function addChildren(array $children): void
+    {
         $this->children[] = $children;
     }
 
-    public function getPermissions() {
+    public function getPermissions()
+    {
         return $this->permissions;
     }
 
-    public function setPermissions($permissions): void {
+    public function setPermissions($permissions): void
+    {
         $this->permissions = $permissions;
     }
 
-    public function getNewWindow(): bool {
+    public function getNewWindow(): bool
+    {
         return $this->newWindow;
     }
 
-    public function setNewWindow(bool $val): void {
+    public function setNewWindow(bool $val): void
+    {
         $this->newWindow = $val;
     }
 
-    public function getIsAjax(): bool {
+    public function getIsAjax(): bool
+    {
         return $this->isAjax;
     }
 
-    public function setIsAjax(bool $val): void {
+    public function setIsAjax(bool $val): void
+    {
         $this->isAjax = $val;
     }
 
     // check if the user has permissions to access this menu entry
-    public function userHasPermission(): bool {
+    public function userHasPermission(): bool
+    {
         $acl = new ACL();
         if (is_string($this->permissions) && !empty($this->permissions)) {
             return $acl->hasPermission($this->permissions);
@@ -116,7 +133,8 @@ class MenuEntry {
     }
 
     // render a single menu item
-    public function render(): string {
+    public function render(): string
+    {
         $html = "<li>";
         $targetString = $this->getNewWindow() ? "_blank" : "_self";
         $cssClasses = "backend-menu-item-{$this->getIdentifier()}";
@@ -134,5 +152,4 @@ class MenuEntry {
         $html .= "</li>";
         return $html;
     }
-
 }

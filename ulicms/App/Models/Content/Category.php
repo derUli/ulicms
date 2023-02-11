@@ -117,16 +117,16 @@ class Category
 
     public function setID(?int $val): void
     {
-        $this->id = $val !== NULL ? (int)$val : null;
+        $this->id = $val !== null ? (int)$val : null;
     }
 
     public function setName(?string $val): void
     {
-        $this->name = $val !== NULL ? (string)$val : null;
+        $this->name = $val !== null ? (string)$val : null;
     }
 
     public function setDescription(?string $val): void
     {
-        $this->description = $val !== NULL ? (string)$val : null;
+        $this->description = $val !== null ? (string)$val : null;
     }
 }
