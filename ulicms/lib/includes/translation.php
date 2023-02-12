@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
 function get_translation(string $name, array $placeholders = []): string
 {
     $iname = strtoupper($name);

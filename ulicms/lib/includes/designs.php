@@ -13,9 +13,10 @@ defined('ULICMS_ROOT') or exit('no direct script access allowed');
 function getThemeMeta(string $theme, string $attrib = null)
 {
     $retval = null;
-    $metadata_file = getTemplateDirPath($theme, true) . "metadata.json";
+    $metadata_file = getTemplateDirPath($theme, true) . 'metadata.json';
 
     if (is_file($metadata_file)) {
+        
         $data = !Vars::get("theme_{$theme}_meta") ?
                 file_get_contents($metadata_file) : Vars::get("theme_{$theme}_meta");
 
@@ -24,6 +25,7 @@ function getThemeMeta(string $theme, string $attrib = null)
         }
 
         Vars::set("theme_{$theme}_meta", $data);
+        
         if ($attrib != null) {
             if (isset($data[$attrib])) {
                 $retval = $data[$attrib];
@@ -32,5 +34,6 @@ function getThemeMeta(string $theme, string $attrib = null)
             $retval = $data;
         }
     }
+    
     return $retval;
 }

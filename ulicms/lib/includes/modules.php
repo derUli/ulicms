@@ -2,13 +2,15 @@
 
 declare(strict_types=1);
 
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
 use App\Constants\ModuleEventConstants;
 
 function getModuleMeta($module, $attrib = null)
 {
     $metadata_file = ModuleHelper::buildModuleRessourcePath(
         $module,
-        "metadata.json",
+        'metadata.json',
         true
     );
     if (!is_file($metadata_file)) {

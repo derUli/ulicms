@@ -2,6 +2,8 @@
 
 namespace App\Utils\VersionComparison;
 
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
 function compare(
     ?string $version1,
     ?string $version2,

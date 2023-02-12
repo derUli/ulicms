@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
 use App\Models\Content\Language;
 use App\Models\Content\Categories;
 use App\Utils\File;
