@@ -48,7 +48,7 @@ class ControllerRegistryTest extends \PHPUnit\Framework\TestCase
 
     public function testGetWithNonExistingActionReturnsNull()
     {
-        BackendHelper::setAction("pages");
+        BackendHelper::setAction('pages');
         $this->assertNull(
             ControllerRegistry::get()
         );

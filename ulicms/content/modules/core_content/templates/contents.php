@@ -1,6 +1,6 @@
 <?php
 $permissionChecker = new ACL();
-if ($permissionChecker->hasPermission("pages")
+if ($permissionChecker->hasPermission('pages')
         or $permissionChecker->hasPermission("banners")
         or $permissionChecker->hasPermission("categories")
         or $permissionChecker->hasPermission("export")
@@ -10,13 +10,13 @@ if ($permissionChecker->hasPermission("pages")
     <strong><?php translate("select_content_type"); ?> </strong>
     <div class="button-menu">
         <?php
-        if ($permissionChecker->hasPermission("pages")) {
+        if ($permissionChecker->hasPermission('pages')) {
             ?>
             <a
                 href="index.php?action=pages"
                 class="btn btn-default is-not-ajax"
                 ><i
-                    class="fas fa-book"></i> <?php translate("pages"); ?></a>
+                    class="fas fa-book"></i> <?php translate('pages'); ?></a>
 
         <?php }
         ?>

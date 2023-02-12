@@ -379,7 +379,7 @@ function get_theme(?string $page = null): ?string
     if (Vars::get("theme_" . $page) !== null) {
         return Vars::get("theme_" . $page);
     }
-    $theme = Settings::get("theme");
+    $theme = Settings::get('theme');
     $mobile_theme = Settings::get("mobile_theme");
     if ($mobile_theme and is_mobile()) {
         $theme = $mobile_theme;

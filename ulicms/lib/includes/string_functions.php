@@ -118,7 +118,7 @@ function keywordsFromString(string $text): array
     // Punkt, Beistrich, Zeilenumbruch... in Leerzeichen umwandeln
     $text = str_replace(array(
         "\n",
-        ".",
+        '.',
         ",",
         "!",
         "?"

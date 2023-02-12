@@ -5,7 +5,7 @@ use App\HTML\Input;
 use App\HTML\ListItem;
 use App\Constants\CommentStatus;
 
-$controller = ModuleHelper::getMainController("core_comments");
+$controller = ModuleHelper::getMainController('core_comments');
 $defaultStatus = $controller->_getDefaultStatus();
 
 $selectedStatus = Request::getVar("status", $defaultStatus, "str");
@@ -143,10 +143,10 @@ echo ModuleHelper::buildMethodCallForm(
                     false,
                     $comment->getId(),
                     [
-                                                "class" => "checkbox comment-checkbox",
-                                                "data-select-all-checkbox" => ".select-all",
-                                                "data-checkbox-group" => ".comment-checkbox"
-                                            ]
+                                                        "class" => "checkbox comment-checkbox",
+                                                        "data-select-all-checkbox" => ".select-all",
+                                                        "data-checkbox-group" => ".comment-checkbox"
+                                                    ]
                 );
                 ?></td>
                     <td>
@@ -206,7 +206,7 @@ echo ModuleHelper::buildMethodCallForm(
 <?php
 echo ModuleHelper::endForm();
 enqueueScriptFile(ModuleHelper::buildRessourcePath(
-    "core_comments",
+    'core_comments',
     "js/admin.js"
 ));
 combinedScriptHtml();

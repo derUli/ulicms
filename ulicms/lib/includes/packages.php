@@ -4,16 +4,43 @@ declare(strict_types=1);
 
 use App\Utils\CacheUtil;
 
+/**
+ * Get list of all installed modules
+ * @return array
+ */
+function getAllModules(): array
+{
+    // Check if cached
+    if (Vars::get("allModules")) {
+        return Vars::get("allModules");
+    }
+
+    // Fetch installed modules
+    $pkg = new PackageManager();
+    $modules = $pkg->getInstalledPackages('modules');
+
+    // Save installed modules in cache
+    Vars::set("allModules", $modules);
+    return $modules;
+}
+
+/**
+ * Get list of installed themes
+ * @return array
+ */
 function getAllThemes(): array
 {
     $pkg = new PackageManager();
     return $pkg->getInstalledPackages('themes');
 }
 
-// API-Aufruf zur Deinstallation eines Moduls
-// Ruft uninstall Script auf, falls vorhanden
-// Löscht anschließend den Ordner modules/$name
-// TODO: dies in die PackageManager Klasse verschieben
+/**
+ * Uninstall a module
+ * TODO: Move to PackageManager class
+ * @param string $name
+ * @param string $type
+ * @return bool
+ */
 function uninstall_module(string $name, string $type = "module"): bool
 {
     $acl = new ACL();
@@ -25,11 +52,11 @@ function uninstall_module(string $name, string $type = "module"): bool
 
     // Verhindern, dass der Modulordner oder gar das ganze
     // CMS gelöscht werden kann
-    if ($name == "." or $name == '..' or empty($name)) {
+    if ($name == '.' or $name == '..' or empty($name)) {
         return false;
     }
     switch ($type) {
-        case "module":
+        case 'module':
             $moduleDir = getModulePath($name, true);
 
             // Modul-Ordner entfernen
@@ -52,8 +79,8 @@ function uninstall_module(string $name, string $type = "module"): bool
                 return !is_dir($moduleDir);
             }
             break;
-        case "theme":
-            $cTheme = Settings::get("theme");
+        case 'theme':
+            $cTheme = Settings::get('theme');
             $allThemes = getAllThemes();
 
             if (in_array($name, $allThemes) and $cTheme !== $name) {
@@ -66,15 +93,4 @@ function uninstall_module(string $name, string $type = "module"): bool
     }
 
     return false;
-}
-
-function getAllModules(): array
-{
-    if (Vars::get("allModules")) {
-        return Vars::get("allModules");
-    }
-    $pkg = new PackageManager();
-    $modules = $pkg->getInstalledPackages('modules');
-    Vars::set("allModules", $modules);
-    return $modules;
 }

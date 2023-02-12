@@ -149,13 +149,13 @@ Anschließend werden statt die Inhalte immer wieder aus der Datenbank zu laden, 
     public function testGetTranslationReturnsCustomTranslation()
     {
         Translation::set("pages", "Parchments");
-        $this->assertEquals("Parchments", get_translation("pages"));
+        $this->assertEquals("Parchments", get_translation('pages'));
 
         Translation::override("pages", "Papers");
-        $this->assertEquals("Papers", get_translation("pages"));
+        $this->assertEquals("Papers", get_translation('pages'));
 
-        Translation::delete("pages");
-        $this->assertEquals("Pages", get_translation("pages"));
+        Translation::delete('pages');
+        $this->assertEquals("Pages", get_translation('pages'));
     }
 
     public function testGetTranslationNotFoundReturnsKey()
@@ -166,14 +166,14 @@ Anschließend werden statt die Inhalte immer wieder aus der Datenbank zu laden, 
     public function testTranslate()
     {
         ob_start();
-        translate("pages");
+        translate('pages');
         $this->assertEquals("Pages", ob_get_clean());
     }
 
     public function testTranslation()
     {
         ob_start();
-        translation("pages");
+        translation('pages');
         $this->assertEquals("Pages", ob_get_clean());
     }
 }

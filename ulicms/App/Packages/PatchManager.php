@@ -39,7 +39,7 @@ class PatchManager
         $installed_patches = implode(";", $installed_patches);
         $version = new UliCMSVersion();
 
-        return "https://patches.ulicms.de/?v=" . urlencode(implode(".", $version->getInternalVersion())) . "&installed_patches=" . urlencode($installed_patches);
+        return "https://patches.ulicms.de/?v=" . urlencode(implode('.', $version->getInternalVersion())) . "&installed_patches=" . urlencode($installed_patches);
     }
 
     public function getAvailablePatches(): array

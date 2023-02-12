@@ -166,7 +166,7 @@ class ModuleManagerTest extends \PHPUnit\Framework\TestCase
 
         $this->assertContains(
             "core_content",
-            $moduleManager->getDependencies("core_comments")
+            $moduleManager->getDependencies('core_comments')
         );
     }
 
@@ -176,7 +176,7 @@ class ModuleManagerTest extends \PHPUnit\Framework\TestCase
         $moduleManager->sync();
 
         $this->assertContains(
-            "core_comments",
+            'core_comments',
             $moduleManager->getDependentModules("core_content")
         );
     }

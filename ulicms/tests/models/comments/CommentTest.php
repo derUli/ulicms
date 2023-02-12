@@ -10,7 +10,7 @@ class CommentTest extends \PHPUnit\Framework\TestCase
     protected function setUp(): void
     {
         require_once getLanguageFilePath('en');
-        require_once ModuleHelper::buildModuleRessourcePath("core_comments", "lang/en.php");
+        require_once ModuleHelper::buildModuleRessourcePath('core_comments', "lang/en.php");
         require_once ModuleHelper::buildModuleRessourcePath("core_forms", "lang/en.php");
         $_SERVER = [];
         $_SESSION['language'] = 'de';

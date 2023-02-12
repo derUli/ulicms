@@ -113,7 +113,7 @@ class StringHelper extends Helper
         // Punkt, Beistrich, Zeilenumbruch... in Leerzeichen umwandeln
         $text = str_replace(array(
             "\n",
-            ".",
+            '.',
             ","
                 ), " ", $text);
 

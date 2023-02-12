@@ -7,8 +7,8 @@ function compare(
     ?string $version2,
     string $operator = ">"
 ): bool {
-    $splitted1 = explode(".", $version1);
-    $splitted2 = explode(".", $version2);
+    $splitted1 = explode('.', $version1);
+    $splitted2 = explode('.', $version2);
     $fillUp = fillUpVersionNumbers($splitted1, $splitted2);
     $splitted1 = $fillUp[0];
     $splitted2 = $fillUp[1];

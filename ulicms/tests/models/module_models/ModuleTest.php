@@ -10,7 +10,7 @@ class ModuleTest extends \PHPUnit\Framework\TestCase
         $manager->sync();
         $this->backupFortune2();
 
-        $module = new Module("core_comments");
+        $module = new Module('core_comments');
         $module->enable();
         Settings::delete("fortune2_uninstalled_at");
     }
@@ -21,7 +21,7 @@ class ModuleTest extends \PHPUnit\Framework\TestCase
         $manager = new ModuleManager();
         $manager->sync();
 
-        $module = new Module("core_comments");
+        $module = new Module('core_comments');
         $module->enable();
     }
 
@@ -160,7 +160,7 @@ class ModuleTest extends \PHPUnit\Framework\TestCase
         $module = new Module("core_content");
 
         $this->assertContains(
-            "core_comments",
+            'core_comments',
             $module->getDependentModules()
         );
     }

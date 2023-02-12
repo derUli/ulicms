@@ -13,7 +13,7 @@ class LogoController extends Controller
     ): string {
         $extension = file_extension($originalName);
         $hash = md5_file($filename);
-        return $hash . "." . $extension;
+        return $hash . '.' . $extension;
     }
 
     public function _buildFilePath(

@@ -518,7 +518,7 @@ color: " . Settings::get("body-text-color") . ";
                 return get_translation('PAGE_NOT_FOUND_CONTENT');
             }
         } elseif (is_403()) {
-            $theme = Settings::get("theme");
+            $theme = Settings::get('theme');
             if ($errorPage403) {
                 $content = ContentFactory::getByID($errorPage403);
             } else {
@@ -573,7 +573,7 @@ color: " . Settings::get("body-text-color") . ";
 
     public static function getPoweredByUliCMS(): string
     {
-        return get_translation("powered_by_ulicms");
+        return get_translation('powered_by_ulicms');
     }
 
     // Gibt "Diese Seite läuft mit UliCMS" aus
@@ -589,8 +589,8 @@ color: " . Settings::get("body-text-color") . ";
         }
 
         return Template::executeModuleTemplate(
-            "core_comments",
-            "comments.php"
+            'core_comments',
+            'comments.php'
         );
     }
 
@@ -606,7 +606,7 @@ color: " . Settings::get("body-text-color") . ";
             return $html;
         }
         $acl = new PermissionChecker(get_user_id());
-        if ($acl->hasPermission("pages") and Vars::getNoCache() && is_200()) {
+        if ($acl->hasPermission('pages') and Vars::getNoCache() && is_200()) {
             $id = get_ID();
             $page = ContentFactory::getById($id);
             if (in_array($page->language, getAllLanguages(true))) {

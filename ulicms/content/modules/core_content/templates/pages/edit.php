@@ -18,7 +18,7 @@ use App\CoreContent\UIUtils;
 use function App\HTML\icon;
 
 $permissionChecker = new PermissionChecker(get_user_id());
-if ($permissionChecker->hasPermission("pages")) {
+if ($permissionChecker->hasPermission('pages')) {
     // FIXME: Die SQL Statements in einen Controller bzw. Model auslagern.
     $page = intval($_GET["page"]);
     $result = db_query("SELECT * FROM " . tbname("content") . " WHERE id='$page'");
@@ -86,7 +86,7 @@ if ($permissionChecker->hasPermission("pages")) {
             </div>
             <div class="pageform" style="display: none">
                 <div class="top-bar">
-                    <a href="<?php echo ModuleHelper::buildActionURL("pages"); ?>"
+                    <a href="<?php echo ModuleHelper::buildActionURL('pages'); ?>"
                        class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
                        <?php
                        echo ModuleHelper::buildMethodCallButton("PageController", "delete", '<i class="fas fa-trash"></i> ' . get_translation("delete"), array(

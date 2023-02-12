@@ -30,7 +30,7 @@ class PageController extends Controller
     public function recycleBin(): void
     {
         $this->_recycleBin();
-        $url = ModuleHelper::buildActionURL("pages");
+        $url = ModuleHelper::buildActionURL('pages');
         Request::redirect($url);
     }
 
@@ -42,7 +42,7 @@ class PageController extends Controller
     public function pages(): void
     {
         $this->_pages();
-        $url = ModuleHelper::buildActionURL("pages");
+        $url = ModuleHelper::buildActionURL('pages');
         Request::redirect($url);
     }
 
@@ -63,7 +63,7 @@ class PageController extends Controller
             );
         }
 
-        Request::redirect(ModuleHelper::buildActionURL("pages"));
+        Request::redirect(ModuleHelper::buildActionURL('pages'));
     }
 
     public function _createPost(): ?Content
@@ -385,7 +385,7 @@ class PageController extends Controller
 
         Response::sendHttpStatusCodeResultIfAjax(
             HTTPStatusCode::OK,
-            ModuleHelper::buildActionURL("pages")
+            ModuleHelper::buildActionURL('pages')
         );
     }
 
@@ -429,7 +429,7 @@ class PageController extends Controller
 
         Response::sendHttpStatusCodeResultIfAjax(
             HTTPStatusCode::OK,
-            ModuleHelper::buildActionURL("pages")
+            ModuleHelper::buildActionURL('pages')
         );
     }
 
@@ -452,7 +452,7 @@ class PageController extends Controller
     public function emptyTrash(): void
     {
         $this->_emptyTrash();
-        Request::redirect(ModuleHelper::buildActionURL("pages"));
+        Request::redirect(ModuleHelper::buildActionURL('pages'));
     }
 
     public function _emptyTrash(): void

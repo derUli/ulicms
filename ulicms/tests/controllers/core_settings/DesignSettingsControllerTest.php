@@ -137,16 +137,16 @@ class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase
     public function testSetDefaultTheme()
     {
         $controller = new DesignSettingsController();
-        $this->assertNotEquals("foobar", Settings::get("theme"));
+        $this->assertNotEquals("foobar", Settings::get('theme'));
 
         $controller->_setDefaultTheme("foobar");
-        $this->assertEquals("foobar", Settings::get("theme"));
+        $this->assertEquals("foobar", Settings::get('theme'));
     }
 
     public function testSetDefaultMobileThemeWithTheme()
     {
         $controller = new DesignSettingsController();
-        $this->assertNotEquals("foobar", Settings::get("theme"));
+        $this->assertNotEquals("foobar", Settings::get('theme'));
 
         $controller->_setDefaultMobileTheme("foobar");
         $this->assertEquals("foobar", Settings::get("mobile_theme"));

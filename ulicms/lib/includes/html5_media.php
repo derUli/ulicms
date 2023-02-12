@@ -5,19 +5,24 @@ declare(strict_types=1);
 use App\Models\Media\Audio;
 use App\Models\Media\Video;
 
+/**
+ * Replaces audio tags with rendered html5 audio elements
+ * @param string $txt
+ * @return string|null
+ */
 function replaceAudioTags(string $txt): ?string
 {
     $audio_dir = "content/audio/";
 
-    // Ich weiß, dass das eigentlich einfacher mit einem
-    // regulären Ausdruck geht, aber ich kann keine reguläre Ausdrücke.
-    // Reguläre Ausdrücke sehen für mich so aus, als wäre
-    // eine Katze über die Tastatur gelaufen.
+
+    // TODO: Use Regex
     $contains = strpos($txt, "[audio id=") !== false;
 
+    // If there is no [audio=XXX] in page return
     if (!$contains) {
         return $txt;
     }
+
     $audios = Audio::getAll();
 
     foreach ($audios as $audio) {
@@ -35,16 +40,19 @@ function replaceAudioTags(string $txt): ?string
     return $txt;
 }
 
+/**
+ * Replaces video tags with html5 video elements
+ * @param string $txt
+ * @return string
+ */
 function replaceVideoTags(string $txt): string
 {
     $video_dir = "content/videos/";
 
-    // Ich weiß, dass das eigentlich einfacher mit einem
-    // regulären Ausdruck geht, aber ich kann keine reguläre Ausdrücke.
-    // Reguläre Ausdrücke sehen für mich so aus, als wäre
-    // eine Katze über die Tastatur gelaufen.
+    // TODO: Use Regex
     $contains = strpos($txt, "[video id=") !== false;
 
+    // If there is no [video=XXX] in page return
     if (!$contains) {
         return $txt;
     }

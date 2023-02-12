@@ -729,7 +729,7 @@ class User extends Model
     public function changeAvatar(array $upload): bool
     {
         $extension = pathinfo($upload['name'], PATHINFO_EXTENSION);
-        $tmpFile = uniqid() . "." . $extension;
+        $tmpFile = uniqid() . '.' . $extension;
         $tmpFile = Path::resolve("ULICMS_TMP/$tmpFile");
 
         if (move_uploaded_file($upload["tmp_name"], $tmpFile)) {

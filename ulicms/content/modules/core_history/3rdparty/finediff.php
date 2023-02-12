@@ -492,7 +492,7 @@ class FineDiff
         FineDiff::characterDelimiters
     );
     public static $textStack = array(
-        ".",
+        '.',
         " \t.\n\r",
         ""
     );

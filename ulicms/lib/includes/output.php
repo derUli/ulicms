@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 /**
  * Output buffer flusher
- * Forces a flush of the output buffer to screen useful
- * for displaying long loading lists eg: bulk emailers on screen
- * Stops the end user seeing loads of just plain old white
- * and thinking the browser has crashed on long loading pages.
+  Forces a flush of the output buffer to screen useful
+  for displaying long loading lists eg: bulk emailers on screen
+  Stops the end user seeing loads of just plain old white
+  and thinking the browser has crashed on long loading pages.
+ *
+ * @staticvar type $output_handler
+ * @return void
  */
 function fcflush(): void
 {

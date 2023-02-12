@@ -11,7 +11,7 @@ defined('ULICMS_ROOT') or exit('no direct script access allowed');
 function cms_version(): string
 {
     $v = new UliCMSVersion();
-    return implode(".", $v->getInternalVersion());
+    return implode('.', $v->getInternalVersion());
 }
 
 /**

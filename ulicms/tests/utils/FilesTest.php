@@ -37,7 +37,7 @@ class FilesTest extends \PHPUnit\Framework\TestCase
 
     public function testFindAllFiles()
     {
-        $allFiles = find_all_files("admin");
+        $allFiles = File::findAllFiles("admin");
         $this->assertContains("admin/css/modern.scss", $allFiles);
         $this->assertContains("admin/gfx/logo.png", $allFiles);
         $this->assertNotContains("admin/.git", $allFiles);
@@ -193,8 +193,8 @@ class FilesTest extends \PHPUnit\Framework\TestCase
 
         recurse_copy($source, $destination);
 
-        $sourceFiles = find_all_files($source);
-        $targetFiles = find_all_files($destination);
+        $sourceFiles = File::findAllFiles($source);
+        $targetFiles = File::findAllFiles($destination);
 
         $this->assertCount(count($sourceFiles), $targetFiles);
         sureRemoveDir($destination, true);

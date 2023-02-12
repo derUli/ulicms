@@ -100,7 +100,11 @@ function imageTagInline(string $file, array $htmlAttributes = []): string
     return imageTag($url, $htmlAttributes);
 }
 
-// returns true if the string contains html codes
+/**
+ * Checks if a string contains HTML code
+ * @param string $string
+ * @return bool
+ */
 function stringContainsHtml(string $string): bool
 {
     return $string != strip_tags($string);

@@ -13,10 +13,10 @@ $show_filters = Settings::get("user/" . get_user_id() . "/show_filters");
 
 $permissionChecker = new PermissionChecker(get_user_id());
 
-if ($permissionChecker->hasPermission("pages")) {
+if ($permissionChecker->hasPermission('pages')) {
     echo Template::executeModuleTemplate("core_content", "icons.php");
     ?>
-    <h2><?php translate("pages"); ?></h2>
+    <h2><?php translate('pages'); ?></h2>
     <?php
     echo Alert::info(
         get_translation("pages_infotext")
@@ -57,7 +57,7 @@ if ($permissionChecker->hasPermission("pages")) {
                 </div>
                 <div class="col-xs-6 text-right">
                     <a href="<?php echo ModuleHelper::buildMethodCallUrl("PageController", "pages"); ?>" class="btn btn-default is-not-ajax"><i
-                            class="fas fa-book"></i> <?php translate("pages"); ?></a>
+                            class="fas fa-book"></i> <?php translate('pages'); ?></a>
                 </div>
             </div>
         <?php }

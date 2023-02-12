@@ -16,7 +16,7 @@ $parent_id = Request::getVar("parent_id", null, 'int');
 
 $permissionChecker = new ACL();
 $groups = db_query("SELECT id, name from " . tbname('groups'));
-if ($permissionChecker->hasPermission("pages")
+if ($permissionChecker->hasPermission('pages')
         and $permissionChecker->hasPermission("pages_create")) {
     $editor = get_html_editor();
 
@@ -66,7 +66,7 @@ if ($permissionChecker->hasPermission("pages")
     );
     ?>
     <p>
-        <a href="<?php echo ModuleHelper::buildActionURL("pages"); ?>"
+        <a href="<?php echo ModuleHelper::buildActionURL('pages'); ?>"
            class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i>
             <?php translate("back") ?></a>
     </p>

@@ -14,12 +14,12 @@ $permissionChecker = new ACL();
 if (!$permissionChecker->hasPermission("design")) {
     noPerms();
 } else {
-    $theme = Settings::get("theme");
+    $theme = Settings::get('theme');
     $additional_menus = Settings::get("additional_menus");
     $mobile_theme = Settings::get("mobile_theme");
     $allThemes = getAllThemes();
     $fonts = $controller->getFontFamilys();
-    $theme = Settings::get("theme");
+    $theme = Settings::get('theme');
     $additional_menus = Settings::get("additional_menus");
     $mobile_theme = Settings::get("mobile_theme");
     $default_font = Settings::get("default_font");

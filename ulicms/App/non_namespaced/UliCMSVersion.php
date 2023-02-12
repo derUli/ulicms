@@ -56,7 +56,7 @@ class UliCMSVersion
      */
     public function getInternalVersionAsString(): string
     {
-        return implode(".", $this->internalVersion);
+        return implode('.', $this->internalVersion);
     }
 
     /**

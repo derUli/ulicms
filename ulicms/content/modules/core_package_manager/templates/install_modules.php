@@ -29,7 +29,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
         <?php
     } else {
         $version = new UliCMSVersion();
-        $internalVersion = implode(".", $version->getInternalVersion());
+        $internalVersion = implode('.', $version->getInternalVersion());
         $pkg_src = str_replace("{version}", $internalVersion, $pkg_src);
 
         $packageArchiveFolder = $pkg_src . "archives/";

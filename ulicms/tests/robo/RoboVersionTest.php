@@ -10,6 +10,6 @@ class RoboVersionTest extends RoboTestBase
         $output = $this->runRoboCommand(["version"]);
 
         $this->assertStringStartsWith("2023", $output);
-        $this->assertStringContainsString(".", $output);
+        $this->assertStringContainsString('.', $output);
     }
 }

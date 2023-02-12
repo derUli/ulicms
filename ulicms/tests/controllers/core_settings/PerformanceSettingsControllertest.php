@@ -1,5 +1,7 @@
 <?php
 
+use App\Utils\File;
+
 class PerformanceSettingsControllerTest extends \PHPUnit\Framework\TestCase
 {
     protected function tearDown(): void
@@ -46,7 +48,7 @@ class PerformanceSettingsControllerTest extends \PHPUnit\Framework\TestCase
         $controller = new PerformanceSettingsController();
         $controller->_clearCache();
 
-        $files = find_all_files(Path::resolve("ULICMS_CACHE"));
+        $files = File::findAllFiles(Path::resolve("ULICMS_CACHE"));
 
         $this->assertCount(0, $files);
     }

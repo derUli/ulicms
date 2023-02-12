@@ -184,7 +184,7 @@ class Database
             } else {
                 $value = $args[$i];
                 if (is_float($value)) {
-                    $value = str_replace(",", ".", strval((float) $value));
+                    $value = str_replace(",", '.', strval((float) $value));
                 } elseif (is_int($value)) {
                     $value = strval((int)$value);
                 } elseif (is_bool($value)) {

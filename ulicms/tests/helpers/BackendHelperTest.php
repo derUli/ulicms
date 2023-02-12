@@ -10,7 +10,7 @@ class BackendHelperTest extends \PHPUnit\Framework\TestCase
     public function testSetAndGetActionIsSetGet()
     {
         $_SERVER['REQUEST_METHOD'] = "GET";
-        BackendHelper::setAction("pages");
+        BackendHelper::setAction('pages');
         $this->assertEquals("pages", BackendHelper::getAction());
         unset($_REQUEST["action"]);
     }

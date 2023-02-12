@@ -14,43 +14,68 @@ use zz\Html\HTMLMinify;
 use App\Security\PermissionChecker;
 use App\HTML\Alert;
 
-// This class renders a backend page
-// if you set a model from a model
-// you can get it with this code in your template
-// $model = BackendPageRenderer::getModel();
+/**
+ * This class renders a backend page
+ */
 class BackendPageRenderer
 {
     private $action;
     private static $model;
 
-    public function __construct($action, $model = null)
+    /**
+     * Constructor
+     * @param type $action
+     * @param type $model
+     */
+    public function __construct(string $action, mixed $model = null)
     {
         $this->action = $action;
 
         self::$model = $model;
     }
 
+    /**
+     * Gets the action
+     * @return string
+     */
     public function getAction(): string
     {
         return $this->action;
     }
 
+    /**
+     * Sets the action
+     * @param string $action
+     * @return void
+     */
     public function setAction(string $action): void
     {
         $this->action = $action;
     }
 
-    public static function getModel()
+    /**
+     * Gets the model
+     * @return mixed
+     */
+    public static function getModel(): mixed
     {
         return self::$model;
     }
 
-    public static function setModel($model): void
+    /**
+     * Sets the model
+     * @param mixed $model
+     * @return void`
+     */
+    public static function setModel(mixed $model): void
     {
         self::$model = $model;
     }
 
-    // renders a backend page, outputs it and do events
+    /**
+     * Renders a backend page outputs it and runs cron events
+     * @return void
+     */
     public function render(): void
     {
         if (Settings::get("minify_html")) {
@@ -81,22 +106,12 @@ class BackendPageRenderer
         exit();
     }
 
-    public function showUnsupportedBrowser($checker)
-    {
-        $message = get_secure_translation(
-            "unsupported_browser",
-            [
-                "%browser%" => $checker->getUnsupportedBrowserName()
-            ]
-        );
-        $message = nl2br($message);
-        $message = make_links_clickable($message);
-
-        echo Alert::danger($message, "", true);
-    }
-
-    // this method handles access to the features that are
-    // accesible for non authenticated users
+    /**
+     * This method handles access to the features that are
+     * accesible for non authenticated users
+     * @param bool $onlyContent
+     * @return void
+     */
     protected function handleNotLoggedIn(bool $onlyContent = false): void
     {
         ActionRegistry::loadModuleActions();
@@ -129,7 +144,11 @@ class BackendPageRenderer
         }
     }
 
-    // this method handles all actions by authenticated users
+    /**
+     * This method handles all actions by authenticated users
+     * @param bool $onlyContent
+     * @return void
+     */
     protected function handleLoggedIn(bool $onlyContent = false): void
     {
         $permissionChecker = new PermissionChecker(get_user_id());
@@ -166,7 +185,10 @@ class BackendPageRenderer
         }
     }
 
-    // minify html output
+    /**
+     * Outputs minified HTML
+     * @return void
+     */
     public function outputMinified(): void
     {
         $generatedHtml = ob_get_clean();
@@ -182,7 +204,10 @@ class BackendPageRenderer
         echo $generatedHtml;
     }
 
-    // run cron events of modules
+    /**
+     * Run cron events of modules
+     * @return void
+     */
     public function doCronEvents(): void
     {
         do_event("before_admin_cron");

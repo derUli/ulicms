@@ -15,6 +15,7 @@ Entfernte Features:
 
 * Neue API-Methoden:
 * is_cli()
+* File::findAllFiles()
 * File::findAllDirs()
 
 Entfernte API-Methoden:
@@ -78,7 +79,9 @@ Entfernte API-Methoden:
 * is_false()
 * isCli()
 * get_gravatar()
+* find_all_files()
 * find_all_dirs()
+* get_mime()
 
 ===== Neues in UliCMS 2022.1 =====
 

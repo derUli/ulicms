@@ -157,12 +157,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("doof", bool2YesNo(false, "cool", "doof"));
     }
 
-    public function testGetMime()
-    {
-        $this->assertEquals("text/plain", get_mime(Path::resolve("ULICMS_ROOT/.htaccess")));
-        $this->assertEquals("image/png", get_mime(Path::resolve("ULICMS_ROOT/admin/gfx/edit.png")));
-    }
-
     public function testGetActionIsSet()
     {
         $_REQUEST["action"] = "pages";
