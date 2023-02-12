@@ -41,8 +41,14 @@ function is_url(mixed $url): bool
     return filter_var($url, FILTER_VALIDATE_URL) !== false;
 }
 
-// Nutze curl zum Download der Datei, sofern verfügbar
-// Ansonsten Fallback auf file_get_contents
+/**
+ * Retrieves an URL by curl if available or by file_get_contents
+ * @param string $url
+ * @param bool $no_cache
+ * @param type $checksum
+ * @return string|null
+ * @throws CorruptDownloadException
+ */
 function file_get_contents_wrapper(
     string $url,
     bool $no_cache = false,
