@@ -10,6 +10,11 @@ function is_decimal($val): bool
     return is_numeric($val) && !ctype_digit((string) $val);
 }
 
+/**
+ * Checks if a string is valid JSON
+ * @param string|null $str
+ * @return bool
+ */
 function is_json(?string $str): bool
 {
     return $str ? json_decode($str) != null : false;
