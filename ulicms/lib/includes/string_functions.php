@@ -46,6 +46,13 @@ function br2nlr(
     return preg_replace('#<br\s*/?>#i', "\r\n", $html);
 }
 
+
+/**
+ * Normalize line breaks
+ * @param string $txt
+ * @param string $style
+ * @return string
+ */
 function normalizeLN(string $txt, string $style = "\r\n"): string
 {
     $txt = str_replace("\r\n", "\n", $txt);
@@ -81,7 +88,11 @@ function multi_explode(array $delimiters, string $string): array
     );
 }
 
-// Links klickbar machen
+/**
+ * Convert URLS in a string to HTML links
+ * @param string $text
+ * @return string
+ */
 function make_links_clickable(string $text): string
 {
     return StringHelper::makeLinksClickable($text);
@@ -243,7 +254,11 @@ function bool2YesNo(
     return ($value ? $yesString : $noString);
 }
 
-// Random string generieren (für Passwort)
+/**
+ * Generate random string
+ * @param int $length
+ * @return string
+ */
 function rand_string(int $length): string
 {
     $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
