@@ -51,7 +51,7 @@
         "packages",
         "list_packages"
     );
-    if (file_exists(Path::resolve("ULICMS_ROOT/update.php"))) {
+    if (is_file(Path::resolve("ULICMS_ROOT/update.php"))) {
         $entries[] = new MenuEntry(
             '<i class="fas fa-sync"></i> '
             . get_translation("update"),

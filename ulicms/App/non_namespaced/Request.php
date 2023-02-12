@@ -88,16 +88,28 @@ class Request
                 strtolower($_SERVER['REQUEST_METHOD']) : null;
     }
 
+    /**
+     * Check if this is a GET request
+     * @return bool
+     */
     public static function isGet(): bool
     {
         return self::getMethod() == RequestMethod::GET;
     }
 
+    /**
+     * Check if this is a POST request
+     * @return bool
+     */
     public static function isPost(): bool
     {
         return self::getMethod() == RequestMethod::POST;
     }
 
+    /**
+     * Check if this is a HEAD request
+     * @return bool
+     */
     public static function isHead(): bool
     {
         return self::getMethod() == RequestMethod::HEAD;

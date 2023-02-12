@@ -82,6 +82,7 @@ Entfernte API-Methoden:
 * find_all_files()
 * find_all_dirs()
 * get_mime()
+* replace_num_entity()
 
 ===== Neues in UliCMS 2022.1 =====
 

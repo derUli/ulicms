@@ -508,6 +508,12 @@ function meta_description(): void
     }
 }
 
+/**
+ * Get title of the current page
+ * @param string|null $slug
+ * @param bool $headline
+ * @return string
+ */
 function get_title(?string $slug = null, bool $headline = false): string
 {
     $cacheVar = $headline ? "headline" : "title";
@@ -573,6 +579,11 @@ function title(?string $ipage = null, bool $headline = false): void
     echo get_title($ipage, $headline);
 }
 
+/**
+ * Get headline for the current page
+ * @param string|null $ipage
+ * @return string
+ */
 function get_headline(?string $ipage = null): string
 {
     return get_title($ipage, true);
@@ -681,6 +692,10 @@ function set_requested_pagename(
     $_SESSION['language'] = $language;
 }
 
+/**
+ * Checks if the current page is home
+ * @return bool
+ */
 function is_home(): bool
 {
     return get_slug() === get_frontpage();
@@ -868,7 +883,7 @@ function get_output_favicon_code(): string
 
     $path = ULICMS_ROOT . "/content/images/favicon.ico";
     $html = '';
-    if (file_exists($path)) {
+    if (is_file($path)) {
         $url .= "?time=" . File::getLastChanged($path);
         $html = '<link rel="icon" href="' . $url . '" type="image/x-icon" />' . '<link rel="shortcut icon" href="' . $url . '" type="image/x-icon" />';
     }
@@ -931,15 +946,19 @@ function checkforAccessForDevice(string $access): bool
 {
     $access = explode(",", $access);
     $allowed = false;
+
     if (in_array("mobile", $access) && is_mobile()) {
         $allowed = true;
     }
+
     if (in_array("desktop", $access) && !is_mobile()) {
         $allowed = true;
     }
+
     if (!in_array("mobile", $access) && !in_array("desktop", $access)) {
         $allowed = true;
     }
+
     return $allowed;
 }
 
@@ -1007,6 +1026,10 @@ function check_status(): string
     return "403 Forbidden";
 }
 
+/**
+ * Ouputs the CMS release year
+ * @return void
+ */
 function cms_release_year(): void
 {
     $v = new UliCMSVersion();

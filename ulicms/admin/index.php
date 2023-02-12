@@ -18,9 +18,9 @@ do_event("after_set_language_by_domain");
 // if there is no translation for the current language code
 // then do a fallback to english locale
 $syslang = getSystemLanguage();
-if (file_exists(getLanguageFilePath($syslang))) {
+if (is_file(getLanguageFilePath($syslang))) {
     require getLanguageFilePath($syslang);
-} elseif (file_exists(getLanguageFilePath('en'))) {
+} elseif (is_file(getLanguageFilePath('en'))) {
     require getLanguageFilePath('en');
 }
 Translation::loadAllModuleLanguageFiles($syslang);

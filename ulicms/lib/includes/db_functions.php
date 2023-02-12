@@ -51,8 +51,11 @@ function db_num_rows(mysqli_result $result): ?int
     return Database::getNumRows($result);
 }
 
-// prefixes the name of a database table with the table prefix from configuration
-//
+/**
+ * prepend the table prefix to a database table name
+ * @param string $name
+ * @return string
+ */
 function tbname(string $name): string
 {
     $config = new CMSConfig();
