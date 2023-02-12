@@ -15,6 +15,7 @@ Entfernte Features:
 
 * Neue API-Methoden:
 * is_cli()
+* File::findAllDirs()
 
 Entfernte API-Methoden:
 * ArrayHelper::flatten()
@@ -77,6 +78,7 @@ Entfernte API-Methoden:
 * is_false()
 * isCli()
 * get_gravatar()
+* find_all_dirs()
 
 ===== Neues in UliCMS 2022.1 =====
 

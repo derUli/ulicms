@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Services\Connectors\PackageSourceConnector;
 use App\Constants\PackageTypes;
 use App\Utils\CacheUtil;
+use App\Utils\File;
 
 class PackageManager
 {
@@ -88,7 +89,7 @@ class PackageManager
         $availableModules = [];
 
         $moduleFolder = Path::resolve("ULICMS_ROOT/content/modules");
-        $moduleDirectories = find_all_folders($moduleFolder);
+        $moduleDirectories = File::findAllDirs($moduleFolder);
 
         natcasesort($moduleDirectories);
         foreach ($moduleDirectories as $moduleDirectory) {

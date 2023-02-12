@@ -26,9 +26,9 @@ class FilesTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("myfile", File::getExtension("myfile"));
     }
 
-    public function testFindAllFolders()
+    public function testFindAllDirs()
     {
-        $allFolders = find_all_folders("admin");
+        $allFolders = File::findAllDirs("admin");
         $this->assertContains("admin/inc", $allFolders);
         $this->assertContains("admin/fm", $allFolders);
         $this->assertNotContains("admin/", $allFolders);

@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\HTML\Script;
+use App\Utils\File;
 
 class BackendHelper extends Helper
 {
@@ -65,7 +66,7 @@ class BackendHelper extends Helper
     {
         $skins = [];
         $dir = Path::resolve("ULICMS_ROOT/admin/ckeditor/skins");
-        $folders = find_all_folders($dir);
+        $folders = File::findAllDirs($dir);
 
         foreach ($folders as $folder) {
             $cssFile = "$folder/editor.css";

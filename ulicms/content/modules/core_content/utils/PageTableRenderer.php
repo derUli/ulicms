@@ -14,7 +14,7 @@ use App\CoreContent\Partials\DeleteButtonRenderer;
 use App\CoreContent\Partials\UnDeleteButtonRenderer;
 
 use function App\HTML\icon;
-use function App\HTML\Link;
+use function App\HTML\link;
 
 class PageTableRenderer
 {
