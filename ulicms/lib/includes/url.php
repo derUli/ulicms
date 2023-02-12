@@ -2,6 +2,10 @@
 
 declare(strict_types=1);
 
+/**
+ * Returns path to minified jQuery
+ * @return string
+ */
 function get_jquery_url(): string
 {
     $url = "node_modules/jquery/dist/jquery.min.js";
@@ -9,6 +13,11 @@ function get_jquery_url(): string
     return $url;
 }
 
+/**
+ * Gets absolute shortlink URL in the foramt https://example.org/?goid=123
+ * @param type $id
+ * @return string|null
+ */
 function get_shortlink($id = null): ?string
 {
     $shortlink = null;
@@ -16,12 +25,16 @@ function get_shortlink($id = null): ?string
 
     if ($id) {
         $shortlink = getBaseFolderURL() . '/?goid=' . $id;
-        $shortlink = apply_filter($shortlink, "shortlink");
+        $shortlink = apply_filter($shortlink, 'shortlink');
     }
 
     return $shortlink;
 }
 
+/**
+ * Gets canonciel URL for current page
+ * @return string
+ */
 function get_canonical(): string
 {
     $canonical = getBaseFolderURL() . '/';
@@ -29,7 +42,7 @@ function get_canonical(): string
         $canonical .= buildSEOUrl();
     }
 
-    $canonical = apply_filter($canonical, "canonical");
+    $canonical = apply_filter($canonical, 'canonical');
     return $canonical;
 }
 
