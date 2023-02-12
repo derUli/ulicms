@@ -11,11 +11,21 @@ use ScssPhp\ScssPhp\Compiler;
 use zz\Html\HTMLMinify;
 use MatthiasMullie\Minify;
 
+/**
+ * Clears the Javascript queue
+ * @return void
+ */
 function resetScriptQueue(): void
 {
     Vars::set("script_queue", []);
 }
 
+/**
+ * Minify HTML
+ * @param string $html
+ * @param int $level
+ * @return string
+ */
 function optimizeHtml(
     string $html,
     int $level = HTMLMinify::OPTIMIZATION_SIMPLE

@@ -8,7 +8,7 @@ $pages = ContentFactory::getAllByMenu("top", "position");
 
 $frontpagePhotoFile = ULICMS_CONTENT . "/images/theme/frontpage_photo.png";
 
-$frontpagePhoto = file_exists($frontpagePhotoFile) ? App\HTML\imageTag(
+$frontpagePhoto = is_file($frontpagePhotoFile) ? App\HTML\imageTag(
     "content/images/theme/frontpage_photo.png"
 ) : null;
 ?>

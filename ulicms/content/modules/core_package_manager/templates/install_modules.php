@@ -70,7 +70,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                         fwrite($handle, $pkgContent);
                         fclose($handle);
 
-                        if (file_exists($tmpFile)) {
+                        if (is_file($tmpFile)) {
                             // Paket installieren
                             if ($pkg->installPackage($tmpFile, false)) {
                                 echo "<p style='color:green;'>" . str_ireplace("%pkg%", $packagesToInstall [$i], get_translation("INSTALLATION_SUCCESSFUL")) . "</p>";

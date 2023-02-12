@@ -49,7 +49,7 @@ try {
         if ($path == $config['current_path']) {
             $cycle = false;
         }
-        if (file_exists($path . "config.php")) {
+        if (is_file($path . 'config.php')) {
             $configTemp = include $path . 'config.php';
             $config = array_merge($config, $configTemp);
             //TODO switch to array

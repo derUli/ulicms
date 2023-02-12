@@ -41,8 +41,8 @@ while ($cycle && $i < $max_cycles) {
         $cycle = false;
     }
 
-    if (file_exists($path . "config.php")) {
-        require_once $path . "config.php";
+    if (file_exists($path . 'config.php')) {
+        require_once $path . 'config.php';
         $cycle = false;
     }
     $path = fix_dirname($path) . '/';

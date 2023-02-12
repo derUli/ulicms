@@ -190,7 +190,7 @@ class InstallerController
             );
         }
 
-        $script = file_exists($sql_file) ? file_get_contents($sql_file) : '';
+        $script = is_file($sql_file) ? file_get_contents($sql_file) : '';
         $prefix = mysqli_real_escape_string(
             $connection,
             $_SESSION["mysql_prefix"]
