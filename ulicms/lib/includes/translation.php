@@ -81,7 +81,8 @@ function register_translation(string $key, string $value): void
     if (!str_starts_with($key, "TRANSLATION_")) {
         $key = "TRANSLATION_" . $key;
     }
-    idefine($key, $value);
+
+    defined($key) or define($key, $value);
 }
 
 function getFrontendLanguage()

@@ -53,7 +53,7 @@ spl_autoload_register(function ($className) {
         $className = "App\\non_namespaced\\{$className}";
     }
 
-    $basePath = dirname(__FILE__) . "/{$className}.php";
+    $basePath = ULICMS_ROOT . "/{$className}.php";
     $basePath = str_replace('\\', '/', $basePath);
 
     if (!is_file($basePath)) {
@@ -76,11 +76,13 @@ function require_all_files_in_dir(string $dir)
 
 require_all_files_in_dir('lib/includes');
 
+/**
+ * Default exception handler
+ * @param AccessDeniedException $exception
+ */
 function exception_handler($exception)
 {
-    if (!defined('EXCEPTION_OCCURRED')) {
-        define('EXCEPTION_OCCURRED', true);
-    }
+    defined('EXCEPTION_OCCURRED') or define('EXCEPTION_OCCURRED', true);
 
     // FIXME: what if there is no config class?
     $cfg = class_exists('CMSConfig') ? new CMSConfig() : null;
@@ -124,9 +126,7 @@ if (php_sapi_name() != 'cli') {
 global $config;
 $config = new CMSConfig();
 
-// IF ULICMS_DEBUG is defined then display all errors except E_NOTICE,
-// else disable error_reporting from php.ini
-if ((defined('ULICMS_DEBUG') && ULICMS_DEBUG) || (isset($config->debug) && $config->debug)) {
+if (isset($config->debug) && $config->debug) {
     ini_set('display_errors', 1);
     error_reporting(E_ALL);
 } else {

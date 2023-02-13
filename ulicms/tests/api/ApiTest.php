@@ -284,17 +284,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("codemirror", get_html_editor());
     }
 
-    public function testIdefine()
-    {
-        $this->assertFalse(defined("test_hello"));
-
-        $this->assertTrue(idefine("TEST_HELLO", "World"));
-        $this->assertEquals("World", TEST_HELLO);
-
-        $this->assertFalse(idefine("TEST_HELLO", "Uli"));
-        $this->assertEquals("World", TEST_HELLO);
-    }
-
     public function testGetAllUsedMenus()
     {
         $menus = get_all_used_menus();

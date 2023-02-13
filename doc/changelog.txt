@@ -102,6 +102,7 @@ Entfernte API-Methoden:
 * File::existsLocally()
 * rootDirectory()
 * no_cache()
+* idefine()
 
 ===== Neues in UliCMS 2022.1 =====
 
