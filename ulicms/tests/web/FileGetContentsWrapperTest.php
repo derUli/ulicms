@@ -63,18 +63,6 @@ class FileGetContentsWrapperTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse(is_url(null));
     }
 
-    public function testUrlExistsReturnsTrue()
-    {
-        $this->assertTrue(url_exists("http://example.org"));
-        $this->assertTrue(url_exists("https://www.ulicms.de/content/images/1c7fc60b8ac709a661598ea1a236c155.png"));
-    }
-
-    public function testUrlExistsReturnsFalse()
-    {
-        $this->assertFalse(url_exists("http://www.gibtsnicht.ch/"));
-        $this->assertFalse(url_exists("https://www.ulicms.de/gibtsnicht.html"));
-    }
-
     // curl_url_exists supports only http / https
     // and is used by url_exists if php curl module is installed
     public function testCurlUrlExistsReturnsTrue()

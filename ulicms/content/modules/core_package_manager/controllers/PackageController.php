@@ -57,7 +57,7 @@ class PackageController extends MainClass
     public function _getPackageDownloadUrl(string $package): ?string
     {
         $url = "https://extend.ulicms.de/{$package}.html";
-        return url_exists($url) ? $url : null;
+        return curl_url_exists($url) ? $url : null;
     }
 
     public function getThemeInfo(): void

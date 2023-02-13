@@ -246,8 +246,6 @@ define(
             $useragent : 'UliCMS Release ' . cms_version()
 );
 
-@ini_set('user_agent', ULICMS_USERAGENT);
-
 if (!Settings::get('hide_meta_generator')) {
     @send_header('X-Powered-By: UliCMS Release ' . cms_version());
 }

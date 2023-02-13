@@ -5,15 +5,17 @@ error_reporting(E_ALL ^ E_NOTICE);
 
 date_default_timezone_set("Europe/Berlin");
 
-define("ULICMS_ROOT", dirname(__FILE__));
+define("ULICMS_ROOT", dirname(__FILE__) . '/..');
 
-foreach (glob('../lib/includes/*.php') as $file) {
+foreach (glob(ULICMS_ROOT . '/lib/includes/*.php') as $file) {
     if (is_file($file)) {
         require $file;
     }
 }
 
-include_once "controllers/InstallerController.php";
+require ULICMS_ROOT . '/app/Utils/VersionComparison.php';
+
+require "controllers/InstallerController.php";
 
 InstallerController::initSessionVars();
 if (isset($_GET['language'])) {
