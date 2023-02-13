@@ -30,7 +30,6 @@ if (!$permissionChecker->hasPermission("design")) {
     $font_sizes = $controller->getFontSizes();
     $no_mobile_design_on_tablet = Settings::get("no_mobile_design_on_tablet");
     $modManager = new ModuleManager();
-    $mobileDetectInstalled = in_array("Mobile_Detect", $modManager->getEnabledModuleNames());
     ?>
     <p>
         <a
@@ -134,12 +133,6 @@ if (!$permissionChecker->hasPermission("design")) {
                     <div id="theme-mobile-preview" class="voffset3">
                         <i class="fa fa-spinner fa-spin"></i>
                         <div class="preview"></div>
-                    </div>
-
-                    </p>
-                    <div class="alert alert-warning fade in" id="mobile_detect_notice"
-                         data-installed="<?php echo strbool($mobileDetectInstalled); ?>">
-                             <?php translate("mobile_detect_install_notice"); ?>
                     </div>
                 </td>
             </tr>

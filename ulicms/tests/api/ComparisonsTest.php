@@ -33,11 +33,6 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase
     {
         $pkg = new PackageManager();
 
-        if (!in_array("CrawlerDetect", $pkg->getInstalledModules())) {
-            $this->assertNotNull("CrawlerDetect is not installed. Skip this test");
-            return;
-        }
-
         $useragents = array(
             "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)" => true,
             "Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)" => true,

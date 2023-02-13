@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 defined('ULICMS_ROOT') or exit('no direct script access allowed');
 
+use Jaybizzle\CrawlerDetect\CrawlerDetect;
+use Detection\MobileDetect;
+
 /**
  * Checks if a variable is a decimal number
  * @param type $val
@@ -63,24 +66,10 @@ function is_desktop(): bool
  */
 function is_crawler(?string $useragent = null): bool
 {
-    if (!$useragent && Request::getUserAgent()) {
-        $useragent = Request::getUserAgent();
-    }
-    if (!$useragent) {
-        return false;
-    }
+    $useragent = $useragent ?? Request::getUserAgent();
 
-    $isCrawler = apply_filter($useragent, "is_crawler");
-    if (is_bool($isCrawler) or is_int($isCrawler)) {
-        return boolval($isCrawler);
-    }
-
-    $crawlers = 'Google|msnbot|Rambler|Yahoo|AbachoBOT|accoona|' .
-            'AcioRobot|ASPSeek|CocoCrawler|Dumbot|FAST-WebCrawler|' .
-            'GeonaBot|Gigabot|Lycos|MSRBOT|Scooter|AltaVista|IDBot'
-            . '|eStyle|Scrubby';
-    $isCrawler = (preg_match("/$crawlers/", $useragent) > 0);
-    return $isCrawler;
+    $crawlerDetect = new CrawlerDetect();
+    return $crawlerDetect->isCrawler($useragent);
 }
 
 /**
@@ -89,12 +78,9 @@ function is_crawler(?string $useragent = null): bool
  */
 function is_mobile(): bool
 {
-    $result = false;
+    $mobileDetect = new MobileDetect();
+    $result = $mobileDetect->isMobile();
 
-    if (class_exists('\Detection\MobileDetect')) {
-        $detect = new \Detection\MobileDetect();
-        $result = $detect->isMobile();
-    }
 
     if (Settings::get("no_mobile_design_on_tablet")
             && $result && $detect->isTablet()) {

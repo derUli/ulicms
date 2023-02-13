@@ -50,7 +50,9 @@
         "imagine/imagine": "*",
         "michelf/php-markdown": "*",
         "chrisullyott/php-filesize": "^4.2",
-        "intervention/mimesniffer": "^0.4.2"
+        "intervention/mimesniffer": "^0.4.2",
+        "jaybizzle/laravel-crawler-detect": "^1.3",
+        "mobiledetect/mobiledetectlib": "^3.74"
     },
     "require-dev": {
         "spatie/phpunit-snapshot-assertions": "*",

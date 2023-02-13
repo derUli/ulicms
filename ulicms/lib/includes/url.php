@@ -48,7 +48,7 @@ function get_canonical(): string
     return $canonical;
 }
 
-// TODO: this code works but looks like garbage
+// TODO: this code works but looks like shit
 // rewrite this method
 function getBaseFolderURL(?string $suffix = null): string
 {

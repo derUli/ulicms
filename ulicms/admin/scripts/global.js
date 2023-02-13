@@ -12,8 +12,8 @@ $(document).ready(() => {
                 },
                 error: (jqXHR) => {
                     const errorMessage =
-                            `Error requesting ${jqXHR.url} - ${jqXHR.status} ${jqXHR.statusText}`
-                    console.error(errorMessage)
+                            `Error requesting ${jqXHR.url} - ${jqXHR.status} ${jqXHR.statusText}`;
+                    console.error(errorMessage);
                     vanillaToast.error(errorMessage);
                 }
             }
