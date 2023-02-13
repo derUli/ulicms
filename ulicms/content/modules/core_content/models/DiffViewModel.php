@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\CoreContent\Models\ViewModels;
 
+/**
+ * Model to view content diffs
+ */
 class DiffViewModel
 {
     public $html;
@@ -12,6 +15,14 @@ class DiffViewModel
     public $content_id;
     public $history_id;
 
+    /**
+     * Construct
+     * @param string $html
+     * @param string $current_version_date
+     * @param string $old_version_date
+     * @param int $content_id
+     * @param int $history_id
+     */
     public function __construct(
         string $html,
         string $current_version_date,
