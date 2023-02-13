@@ -10,6 +10,7 @@ use App\Exceptions\SCSSCompileException;
 use ScssPhp\ScssPhp\Compiler;
 use zz\Html\HTMLMinify;
 use MatthiasMullie\Minify;
+use App\Security\Hash;
 
 /**
  * Clears the Javascript queue
@@ -91,7 +92,7 @@ function minifyJs(): string
         }
     }
 
-    $cacheId = md5((implode(";", $scripts)) . $lastmod);
+    $cacheId = Hash::hashCacheIdentifier((implode(";", $scripts)) . $lastmod);
     $jsDir = Path::resolve("ULICMS_CACHE/scripts");
 
     if (!is_dir($jsDir)) {
@@ -139,7 +140,7 @@ function minifyCSS(): string
         }
     }
 
-    $cacheId = md5((implode(";", $stylesheets)) . $lastmod);
+    $cacheId = Hash::hashCacheIdentifier((implode(";", $stylesheets)) . $lastmod);
 
     $cssDir = Path::resolve("ULICMS_CACHE/stylesheets");
 
@@ -206,10 +207,10 @@ function compileSCSSToFile(string $stylesheet): string
 
     $output = compileSCSS($stylesheet);
 
-    $cacheId = md5($stylesheet . filemtime($stylesheet)) . ".css";
+    $cacheId = Hash::hashCacheIdentifier($stylesheet . filemtime($stylesheet));
 
     $cssUrl = !is_admin_dir() ?
-            "content/cache/stylesheets" : "../content/cache/stylesheets";
+            "content/cache/legacy/stylesheets" : "../content/cache/legacy/stylesheets";
 
     $bundleFile = "{$cssDir}/{$cacheId}.css";
     $bundleUrl = "{$cssUrl}/{$cacheId}.css";

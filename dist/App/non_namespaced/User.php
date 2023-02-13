@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use LasseRafn\InitialAvatarGenerator\InitialAvatar;
 use App\Security\PermissionChecker;
-use App\Security\Encryption;
+use App\Security\Hash;
 use App\Models\Users\GroupCollection;
 
 class User extends Model
@@ -318,7 +318,7 @@ class User extends Model
 
     public function setPassword(?string $password): void
     {
-        $this->password = Encryption::hashPassword($password);
+        $this->password = Hash::hashPassword($password);
         $this->password_changed = date("Y-m-d H:i:s");
     }
 
@@ -355,7 +355,7 @@ class User extends Model
 
     public function checkPassword(string $password): bool
     {
-        return Encryption::hashPassword($password) == $this->getPassword();
+        return Hash::hashPassword($password) == $this->getPassword();
     }
 
     public function getAboutMe(): ?string

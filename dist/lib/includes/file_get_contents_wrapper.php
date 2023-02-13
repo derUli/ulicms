@@ -6,6 +6,7 @@ defined('ULICMS_ROOT') or exit('no direct script access allowed');
 
 use App\Utils\CacheUtil;
 use App\Exceptions\CorruptDownloadException;
+use App\Security\Hash;
 
 // die Funktionalität von file_get_contents
 // mit dem Curl-Modul umgesetzt
@@ -59,7 +60,7 @@ function file_get_contents_wrapper(
         return is_file($url) ? file_get_contents($url) : null;
     }
 
-    $cacheItemId = md5($url);
+    $cacheItemId = Hash::hashCacheIdentifier($url);
 
     $cacheAdapter = !$noCache ? CacheUtil::getAdapter(true) : null;
 

@@ -9,7 +9,7 @@ use Settings;
 /**
  * This class contains security releated utils
  */
-class Encryption
+class Hash
 {
     /**
      * Hash user password
@@ -28,5 +28,14 @@ class Encryption
             $salt = $newSalt;
         }
         return hash("sha512", $salt . $password);
+    }
+    
+    /**
+     * Hash Cache identifier
+     * @param string $identifier
+     * @return string
+     */
+    public static function hashCacheIdentifier(string $identifier): string{
+        return (string)crc32($identifier);
     }
 }

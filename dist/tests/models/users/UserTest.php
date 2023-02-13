@@ -1,7 +1,6 @@
 <?php
 
-use App\Security\Encryption;
-use App\Exceptions\NotImplementedException;
+use App\Security\Hash;
 use App\Utils\CacheUtil;
 use App\Models\Users\GroupCollection;
 
@@ -95,7 +94,7 @@ class UserTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("Administrator", $user->getGroup()
                         ->getName());
         $this->assertEquals(
-            Encryption::hashPassword("password123"),
+            Hash::hashPassword("password123"),
             $user->getPassword()
         );
         $this->assertEquals($lastLogin, $user->getLastLogin());
