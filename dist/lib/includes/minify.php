@@ -134,12 +134,12 @@ function minifyCSS(): string
         $stylesheet = ltrim($stylesheet, '/');
         $type = pathinfo($stylesheet, PATHINFO_EXTENSION);
         if (is_file($stylesheet) && ($type == "css" or $type == "scss")
-                and filemtime($stylesheet) > $lastmod) {
+                && filemtime($stylesheet) > $lastmod) {
             $lastmod = filemtime($stylesheet);
         }
     }
 
-    $cacheId = md5((implode(";", $stylesheets)) . $lastmod);
+    $cacheId = md5((implode(";", $stylesheets)) . $lastmod . get_environment());
 
     $cssDir = Path::resolve("ULICMS_CACHE/stylesheets");
 
