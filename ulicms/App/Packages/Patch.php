@@ -6,13 +6,23 @@ namespace App\Packages;
 
 use App\Packages\PatchManager;
 
+/**
+ * Installable Patch
+ */
 class Patch
 {
-    public $name;
-    public $description;
-    public $url;
-    public $hash;
+    public string $name;
+    public string $description;
+    public string $url;
+    public string $hash;
 
+    /**
+     * Constructor
+     * @param string $name
+     * @param string $description
+     * @param string $url
+     * @param string|null $hash
+     */
     public function __construct(
         string $name,
         string $description,
@@ -25,6 +35,11 @@ class Patch
         $this->hash = $hash;
     }
 
+    /**
+     * Patch list file entry to model
+     * @param string $line
+     * @return Patch
+     */
     public static function fromLine(string $line): Patch
     {
         $splittedLine = explode("|", $line);
@@ -36,6 +51,10 @@ class Patch
         );
     }
 
+    /**
+     * Install patch
+     * @return bool
+     */
     public function install(): bool
     {
         $patchManager = new PatchManager();
@@ -48,6 +67,10 @@ class Patch
         );
     }
 
+    /**
+     * Model to patch list file entry
+     * @return string
+     */
     public function toLine(): string
     {
         $columns = [
