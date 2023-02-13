@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Helpers;
 
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
 class UrlHelper extends \Helper
 {
     // this method removes the get parameters string from $url
