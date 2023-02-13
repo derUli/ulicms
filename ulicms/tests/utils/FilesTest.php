@@ -44,18 +44,6 @@ class FilesTest extends \PHPUnit\Framework\TestCase
         $this->assertNotContains("init.php", $allFiles);
     }
 
-    public function testExistsLocallyExpectTrue()
-    {
-        $this->assertTrue(File::existsLocally(Path::resolve("ULICMS_ROOT/init.php")));
-        $this->assertTrue(File::existsLocally(__FILE__));
-    }
-
-    public function testExistsLocallyExpectFalse()
-    {
-        $this->assertFalse(File::existsLocally("https://www.example.org"));
-        $this->assertFalse(File::existsLocally("ftp://ftp.example.org"));
-    }
-
     public function testToDataUri()
     {
         $this->assertNull(File::toDataUri("gibtsnicht.txt"));
@@ -198,43 +186,5 @@ class FilesTest extends \PHPUnit\Framework\TestCase
 
         $this->assertCount(count($sourceFiles), $targetFiles);
         sureRemoveDir($destination, true);
-    }
-
-    public function testLastChanged()
-    {
-        $file = Path::resolve("ULICMS_ROOT/package.json");
-
-        ob_start();
-
-        File::lastChanged($file);
-
-        $timestamp = ob_get_clean();
-
-        $this->assertIsNumeric($timestamp);
-        $this->assertGreaterThanOrEqual(1, $timestamp);
-    }
-
-
-    public function testLoadLinesAndTrim()
-    {
-        $inputFile = Path::resolve("ULICMS_ROOT/tests/fixtures/trimLines.input.txt");
-        $inputExpected = Path::resolve("ULICMS_ROOT/tests/fixtures/trimLines.expected.txt");
-
-        $expectedData = normalizeLN(
-            file_get_contents($inputExpected),
-            "\n"
-        );
-        $expectedData = explode("\n", $expectedData);
-
-        $output = File::loadLinesAndTrim($inputFile);
-
-        $this->assertCount(8, $output);
-    }
-
-    public function testLoadLines()
-    {
-        $this->assertNull(
-            File::loadLines("gibts_nicht")
-        );
     }
 }

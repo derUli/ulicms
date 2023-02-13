@@ -8,18 +8,6 @@ use Intervention\MimeSniffer\MimeSniffer;
 
 class File
 {
-    // delete a file
-    public static function delete(string $file): bool
-    {
-        return unlink($file);
-    }
-
-    // output the last modification time of a file
-    public static function lastChanged(string $file): void
-    {
-        echo self::getLastChanged($file);
-    }
-
     // get the last modification time of a file
     public static function getLastChanged(string $file): int
     {
@@ -39,18 +27,6 @@ class File
         return $ext;
     }
 
-    // loads a (remote) file and split lines
-    public static function loadLines(string $url): ?array
-    {
-        $data = file_get_contents_wrapper($url);
-        if (!$data) {
-            return null;
-        }
-        $data = normalizeLN($data, "\n");
-        $data = explode("\n", $data);
-        return $data;
-    }
-
     // Delete a file  or a directory if it exist
     public static function deleteIfExists(string $file): bool
     {
@@ -61,22 +37,6 @@ class File
             return !is_file($file);
         }
         return false;
-    }
-
-    // load, split, and trim a remote file
-    public static function loadLinesAndTrim(string $url): ?array
-    {
-        $data = self::loadLines($url);
-        if ($data) {
-            $data = array_map('trim', $data);
-        }
-        return $data;
-    }
-
-    // check if a file exists in the local file system
-    public static function existsLocally(string $path): bool
-    {
-        return (preg_match('~^(\w+:)?//~', $path) === 0 && file_exists($path));
     }
 
     // converts a file to a data URI

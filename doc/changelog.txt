@@ -92,6 +92,11 @@ Entfernte API-Methoden:
 * File::write()
 * File::append()
 * File::rename()
+* File::delete()
+* File::loadLinesAndTrim()
+* File::lastChanged()
+* File::loadLines()
+* File::existsLocally()
 
 ===== Neues in UliCMS 2022.1 =====
 
