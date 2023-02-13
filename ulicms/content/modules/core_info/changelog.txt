@@ -4,6 +4,9 @@ Neue Features:
 * Codebasis grundlegend überarbeitet
 * URLs enthalten nun kein Endung mehr
 * Neuer Robo Task cron hinzugefügt
+* MobileDetect integriert
+* CrawlerDetect integriert
+* Fine Diff ersetzt durch jfcherng/php-diff
 
 Fehlerkorrekturen:
 * Google Fonts entfernt
@@ -83,6 +86,23 @@ Entfernte API-Methoden:
 * find_all_dirs()
 * get_mime()
 * replace_num_entity()
+* App\Utils\VersionComparison\isGreater()
+* App\Utils\VersionComparison\isGreaterOrEqual()
+* App\Utils\VersionComparison\isLesser()
+* App\Utils\VersionComparison\isLesserOrEqual()
+* App\Utils\VersionComparison\isEqual()
+* url_exists()
+* File::write()
+* File::append()
+* File::rename()
+* File::delete()
+* File::loadLinesAndTrim()
+* File::lastChanged()
+* File::loadLines()
+* File::existsLocally()
+* rootDirectory()
+* no_cache()
+* idefine()
 
 ===== Neues in UliCMS 2022.1 =====
 
