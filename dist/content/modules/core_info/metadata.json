@@ -1,0 +1,26 @@
+{
+    "source": "core",
+    "version": "2023.1",
+    "embed": false,
+    "controllers": {
+        "InfoController": "controllers/InfoController"
+    },
+    "custom_acl": [
+        "info"
+    ],
+    "main_class": "InfoController",
+    "actions": {
+        "info": "templates/info.php",
+        "license": "templates/license.php",
+        "legal_composer": "templates/legal/composer.php",
+        "legal_npm": "templates/legal/npm.php",
+        "changelog": "templates/changelog.php"
+    },
+    "action_permissions": {
+        "info": "info",
+        "license": "info",
+        "legal_composer": "info",
+        "legal_npm": "info",
+        "changelog": "info"
+    }
+}

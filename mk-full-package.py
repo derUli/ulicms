@@ -44,28 +44,27 @@ def main():
         shutil.rmtree(target)
     print("copying files")
     shutil.copytree(source_dir, target, ignore=IGNORE_PATTERNS)
-    installer_aus_folder = os.path.join(target, "ulicms", "installer.aus")
-    installer_folder = os.path.join(target, "ulicms", "installer")
+    installer_aus_folder = os.path.join(target, "dist", "installer.aus")
+    installer_folder = os.path.join(target, "dist", "installer")
 
     if os.path.exists(installer_aus_folder):
         os.rename(installer_aus_folder, installer_folder)
 
-    main_dir = os.path.join(target, "ulicms")
+    main_dir = os.path.join(target, "dist")
 
-    version_file = os.path.join(target, "ulicms", "UliCMSVersion.php")
+    version_file = os.path.join(target, "dist", "App", "non_namespaced", "UliCMSVersion.php")
 
-    if os.path.exists(version_file):
-        print("set build date...")
-        with codecs.open(version_file, 'r+', "utf-8") as f:
-            lines = f.readlines()
-            f.seek(0)
-            f.truncate()
-            for line in lines:
-                if "{InsertBuildDate}" in line:
-                    timestamp = str(int(time.time()))
-                    line = "            $this->buildDate = " + timestamp + "; // {InsertBuildDate}\r\n"
-                print(line)
-                f.write(line)
+    print("set build date...")
+    with codecs.open(version_file, 'r+', "utf-8") as f:
+        lines = f.readlines()
+        f.seek(0)
+        f.truncate()
+        for line in lines:
+            if "{InsertBuildDate}" in line:
+                timestamp = str(int(time.time()))
+                line = "            $this->buildDate = " + timestamp + "; // {InsertBuildDate}\r\n"
+            print(line)
+            f.write(line)
 
     # Composer packages zu Deploy hinzufügen
     os.system("composer install --working-dir=" + main_dir + "/ --no-dev")
@@ -74,7 +73,7 @@ def main():
 
     # Install npm packages
     # TODO: is there are a way to specify a working dir like used for composer (code above)?
-    os.chdir("ulicms")
+    os.chdir("dist")
     os.system("npm install --omit=dev")
 
     # generate license files

@@ -52,16 +52,16 @@ def main():
     print("copying files")
     shutil.copytree(source_dir, target, ignore=IGNORE_PATTERNS)
 
-    update_script = os.path.join(target, "ulicms", "update.php")
+    update_script = os.path.join(target, "dist", "update.php")
 
     
-    content_dir_from = os.path.join(source_dir, "ulicms", "App", "Models", "Content")
-    content_dir_to = os.path.join(target, "ulicms", "App", "Models", "Content")
+    content_dir_from = os.path.join(source_dir, "dist", "App", "Models", "Content")
+    content_dir_to = os.path.join(target, "dist", "App", "Models", "Content")
     
     shutil.copytree(content_dir_from, content_dir_to, ignore=IGNORE_PATTERNS)
 
-    modules_dir_from = os.path.join(source_dir, "ulicms", "content", "modules")
-    modules_dir_to = os.path.join(target, "ulicms", "content", "modules")
+    modules_dir_from = os.path.join(source_dir, "dist", "content", "modules")
+    modules_dir_to = os.path.join(target, "dist", "content", "modules")
 
     os.makedirs(modules_dir_to)
     prefixed = [filename for filename in os.listdir(modules_dir_from) if filename.startswith("core_")]
@@ -83,24 +83,24 @@ def main():
     else:
         print("No update.php found")
 
-    version_file = os.path.join(target, "ulicms", "UliCMSVersion.php")
+    version_file = os.path.join(target, "dist", "App", "non_namespaced", "UliCMSVersion.php")
 
-    if os.path.exists(version_file):
-        print("set build date...")
-        with codecs.open(version_file, 'r+', "utf-8") as f:
-            lines = f.readlines()
-            f.seek(0)
-            f.truncate()
-            for line in lines:
-                if "{InsertBuildDate}" in line:
-                    timestamp = str(int(time.time()))
-                    line = "            $this->buildDate = " + timestamp + "; // {InsertBuildDate}\r\n"
-                print(line)
-                f.write(line)
+    print("set build date...")
+    
+    with codecs.open(version_file, 'r+', "utf-8") as f:
+        lines = f.readlines()
+        f.seek(0)
+        f.truncate()
+        for line in lines:
+            if "{InsertBuildDate}" in line:
+                timestamp = str(int(time.time()))
+                line = "            $this->buildDate = " + timestamp + "; // {InsertBuildDate}\r\n"
+            print(line)
+            f.write(line)
 
     archive_name = os.path.join(target, "..", os.path.basename(target) + ".zip")
 
-    main_dir = os.path.join(target, "ulicms")
+    main_dir = os.path.join(target, "dist")
 
     # Install all non-dev composer packages
     os.system("composer install --working-dir=" + main_dir + "/ --no-dev")
@@ -109,7 +109,7 @@ def main():
 
     # Install npm packages
     # TODO: is there are a way to specify a working dir like used for composer (code above)?
-    os.chdir("ulicms")
+    os.chdir("dist")
     os.system("npm install --omit=dev")
 
     os.system("php-legal-licenses generate --hide-version")
