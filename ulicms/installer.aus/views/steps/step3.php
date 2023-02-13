@@ -1,25 +1,28 @@
 <?php
 use App\Utils\VersionComparison;
 
-$minPhpRequired = "8.0.2";
+$minPhpRequired = '8.0.2';
 
 $phpVersion = phpversion();
 
 $phpVersionCompatible = VersionComparison::compare(
     $phpVersion,
     $minPhpRequired,
-    ">="
+    '>='
 );
 
 $phpModules = [
-    "mysqli",
-    "gd",
-    "json",
-    "mbstring",
-    "openssl",
-    "dom",
-    "xml"
+    'mysqli',
+    'gd',
+    'json',
+    'mbstring',
+    'openssl',
+    'dom',
+    'xml',
+    'curl'
 ];
+
+sort($phpModules);
 ?>
 
 <h2><?php echo TRANSLATION_PHP_MODULES; ?></h2>
