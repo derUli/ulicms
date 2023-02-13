@@ -22,7 +22,7 @@ class AvailablePackageVersionMatcherTest extends \PHPUnit\Framework\TestCase
 
         foreach ($compatibleVersions as $version) {
             $this->assertTrue(
-                \App\Utils\VersionComparison\compare(
+                \App\Utils\VersionComparison::compare(
                     $version["compatible_with"],
                     "2017.4",
                     ">="

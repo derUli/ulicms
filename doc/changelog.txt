@@ -83,6 +83,11 @@ Entfernte API-Methoden:
 * find_all_dirs()
 * get_mime()
 * replace_num_entity()
+* App\Utils\VersionComparison\isGreater()
+* App\Utils\VersionComparison\isGreaterOrEqual()
+* App\Utils\VersionComparison\isLesser()
+* App\Utils\VersionComparison\isLesserOrEqual()
+* App\Utils\VersionComparison\isEqual()
 
 ===== Neues in UliCMS 2022.1 =====
 

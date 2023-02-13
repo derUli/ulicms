@@ -47,7 +47,7 @@ class ExtendUpgradeHelper extends Controller
 
         return (
             count($available) and
-            \App\Utils\VersionComparison\compare($available[0]["version"], $version, ">")
+            \App\Utils\VersionComparison::compare($available[0]["version"], $version, ">")
         );
     }
 }

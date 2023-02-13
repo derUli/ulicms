@@ -11,7 +11,7 @@ class UpdateManagerDashboard
                 $version = getModuleMeta($module, "version");
                 if ($version != null) {
                     $status = $pkg->checkForNewerVersionOfPackage($module);
-                    if (\App\Utils\VersionComparison\compare($status, $version, '>')) {
+                    if (\App\Utils\VersionComparison::compare($status, $version, '>')) {
                         return true;
                     }
                 }
@@ -25,7 +25,7 @@ class UpdateManagerDashboard
                 if ($version != null) {
                     $theme = "theme-" . $theme;
                     $status = $pkg->checkForNewerVersionOfPackage($theme);
-                    if (\App\Utils\VersionComparison\compare($status, $version, '>')) {
+                    if (\App\Utils\VersionComparison::compare($status, $version, '>')) {
                         return true;
                     }
                 }

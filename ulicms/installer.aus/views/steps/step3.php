@@ -6,7 +6,7 @@ $minPhpRequired = "8.0.2";
 
 $phpVersion = phpversion();
 
-$phpVersionCompatible = \App\Utils\VersionComparison\compare(
+$phpVersionCompatible = \App\Utils\VersionComparison::compare(
     $phpVersion,
     $minPhpRequired,
     ">="
