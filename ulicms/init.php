@@ -76,13 +76,6 @@ function require_all_files_in_dir(string $dir)
 
 require_all_files_in_dir('lib/includes');
 
-$mobile_detect_as_module = dirname(__FILE__) .
-        '/content/modules/Mobile_Detect/Mobile_Detect.php';
-
-if (is_file($mobile_detect_as_module)) {
-    require $mobile_detect_as_module;
-}
-
 function exception_handler($exception)
 {
     if (!defined('EXCEPTION_OCCURRED')) {
@@ -134,8 +127,10 @@ $config = new CMSConfig();
 // IF ULICMS_DEBUG is defined then display all errors except E_NOTICE,
 // else disable error_reporting from php.ini
 if ((defined('ULICMS_DEBUG') && ULICMS_DEBUG) || (isset($config->debug) && $config->debug)) {
-    error_reporting(E_ALL ^ E_NOTICE);
+    ini_set('display_errors', 1);
+    error_reporting(E_ALL);
 } else {
+    ini_set('display_errors', 0);
     error_reporting(0);
 }
 

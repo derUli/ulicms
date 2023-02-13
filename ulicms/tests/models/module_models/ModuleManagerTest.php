@@ -135,7 +135,7 @@ class ModuleManagerTest extends \PHPUnit\Framework\TestCase
         $moduleManager = new ModuleManager();
         $moduleManager->sync();
 
-        $module = new Module("Mobile_Detect");
+        $module = new Module("bootstrap");
         $module->setVersion("1.0");
         $module->save();
 
@@ -143,8 +143,8 @@ class ModuleManagerTest extends \PHPUnit\Framework\TestCase
 
         $moduleManager->sync();
 
-        $module = new Module("Mobile_Detect");
-        $this->assertEquals("3.74.0", $module->getVersion());
+        $module = new Module("bootstrap");
+        $this->assertEquals("3.3.7", $module->getVersion());
     }
 
     public function testInitModulesDefaultSettings()

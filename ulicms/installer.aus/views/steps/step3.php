@@ -56,5 +56,5 @@ sort($phpModules);
 </ul>
 
 <p>
-    <a href="?step=4" class="btn btn-primary"><i class="fas fa-check"></i> <?php echo TRANSLATION_ACCEPT_LICNSE; ?></a>
+    <a href="?step=4" class="btn btn-primary"><i class="fas fa-check"></i> <?php echo TRANSLATION_NEXT; ?></a>
 </p>

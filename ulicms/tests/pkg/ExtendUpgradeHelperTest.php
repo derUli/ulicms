@@ -34,8 +34,7 @@ class ExtendUpgradeHelperTest extends \PHPUnit\Framework\TestCase
     {
         return [
             "oneclick_upgrade",
-            "Mobile_Detect",
-            "fortune2"
+            "fortune2",
         ];
     }
 }

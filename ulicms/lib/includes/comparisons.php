@@ -81,16 +81,12 @@ function is_mobile(): bool
     $mobileDetect = new MobileDetect();
     $result = $mobileDetect->isMobile();
 
-
-    if (Settings::get("no_mobile_design_on_tablet")
-            && $result && $detect->isTablet()) {
+    if (Settings::get("no_mobile_design_on_tablet") &&
+            $result &&
+            $mobileDetect->isTablet()) {
         $result = false;
     }
-
-    if (function_exists("apply_filter")) {
-        $result = apply_filter($result, "is_mobile");
-    }
-
+    
     return $result;
 }
 
@@ -114,12 +110,9 @@ function isMaintenanceMode(): bool
  */
 function is_tablet(): bool
 {
-    $result = false;
-
-    if (class_exists('\Detection\MobileDetect')) {
-        $detect = new \Detection\MobileDetect();
-        $result = $detect->isTablet();
-    }
+    $mobileDetect = new \Detection\MobileDetect();
+    $result = $mobileDetect->isTablet();
+    
     return $result;
 }
 
