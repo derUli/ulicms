@@ -56,6 +56,10 @@ class CacheUtil
         return self::$adapter;
     }
 
+    /**
+     * Get the name of the Phpfastcache Driver
+     * @return string
+     */
     protected static function getDriverName(): string
     {
         $driver = self::getBestMatchingDriver();
@@ -63,6 +67,10 @@ class CacheUtil
         return apply_filter($driver, 'cache_driver_name');
     }
 
+    /**
+     * Get best matching supported Phpfastcache driver
+     * @return string
+     */
     protected static function getBestMatchingDriver(): string
     {
         $driver = 'Memstatic';
@@ -90,13 +98,19 @@ class CacheUtil
         self::getAdapter(true);
     }
 
-    // returns true if caching is enabled
+    /**
+     * Check if page cache is enabled
+     * @return bool
+     */
     public static function isCacheEnabled(): bool
     {
         return !Settings::get("cache_disabled") && !is_logged_in();
     }
 
-    // clears the page cache
+    /**
+     * Clear page cache
+     * @return void
+     */
     public static function clearPageCache(): void
     {
         $adapter = self::getAdapter();
@@ -105,8 +119,10 @@ class CacheUtil
         }
     }
 
-    // clears all caches including apc, opcache, cache directory
-    // and tmp directory, sync modules directory with database
+    /*
+     * Clear general cache
+     */
+
     public static function clearCache(): void
     {
         do_event("before_clear_cache");
@@ -135,13 +151,20 @@ class CacheUtil
         do_event("after_clear_cache");
     }
 
-    // Returns cache expiration time as integer
+    /**
+     * Get cache expiration
+     * @return int
+     */
     public static function getCachePeriod(): int
     {
-        return intval(Settings::get("cache_period"));
+        return (int) Settings::get("cache_period");
     }
 
-    // generates an unique identifier for the current page
+    /**
+     *
+     * Get uid for current page
+     * @return string
+     */
     public static function getCurrentUid(): string
     {
         return "fullpage-cache-" . md5(get_request_uri()
@@ -149,6 +172,11 @@ class CacheUtil
                         . strbool(is_crawler()) . strbool(is_tablet()));
     }
 
+    /**
+     * Clear generated avatars
+     * @param bool $removeDir
+     * @return void
+     */
     public static function clearAvatars(bool $removeDir = false): void
     {
         $path = Path::resolve("ULICMS_CONTENT/avatars");
