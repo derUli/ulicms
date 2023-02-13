@@ -12,7 +12,6 @@ use ActionRegistry;
 use Settings;
 use zz\Html\HTMLMinify;
 use App\Security\PermissionChecker;
-use App\HTML\Alert;
 
 /**
  * This class renders a backend page
