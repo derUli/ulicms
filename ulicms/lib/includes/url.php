@@ -114,8 +114,3 @@ function buildSEOUrl(
     $seo_url .= $page;
     return $seo_url;
 }
-
-function rootDirectory(): string
-{
-    return ModuleHelper::getBaseUrl();
-}

@@ -4,7 +4,11 @@ declare(strict_types=1);
 
 defined('ULICMS_ROOT') or exit('no direct script access allowed');
 
-// is $val a decimal number or a integer?
+/**
+ * Checks if a variable is a decimal number
+ * @param type $val
+ * @return bool
+ */
 function is_decimal($val): bool
 {
     return is_numeric($val) && !ctype_digit((string) $val);
@@ -34,17 +38,29 @@ function is_numeric_array($var): bool
     return true;
 }
 
-// sind wir gerade im Adminordner?
+/**
+ * Checks if we are currently in admin dir
+ * @return bool
+ */
 function is_admin_dir(): bool
 {
     return basename(getcwd()) === 'admin';
 }
 
+/**
+ * Checks by useragent if the client is a desktop computer
+ * @return bool
+ */
 function is_desktop(): bool
 {
     return !is_mobile();
 }
 
+/**
+ * Checks by useragent if the client is a crawler
+ * @param string|null $useragent
+ * @return bool
+ */
 function is_crawler(?string $useragent = null): bool
 {
     if (!$useragent && Request::getUserAgent()) {
@@ -67,8 +83,10 @@ function is_crawler(?string $useragent = null): bool
     return $isCrawler;
 }
 
-// 21. Februar 2015
-// Nutzt nun die Klasse Mobile_Detect
+/**
+ * Checks by useragent if the current client is a mobile device
+ * @return bool
+ */
 function is_mobile(): bool
 {
     $result = false;
@@ -90,6 +108,10 @@ function is_mobile(): bool
     return $result;
 }
 
+/**
+ * Checks if the website is currently on maintenance mode
+ * @return bool
+ */
 function isMaintenanceMode(): bool
 {
     if (!is_string(Settings::get('maintenance_mode'))) {
@@ -100,6 +122,10 @@ function isMaintenanceMode(): bool
             Settings::get('maintenance_mode') == "1");
 }
 
+/**
+ * Checks by user agent if the current client is a tablet
+ * @return bool
+ */
 function is_tablet(): bool
 {
     $result = false;
@@ -111,11 +137,22 @@ function is_tablet(): bool
     return $result;
 }
 
+/**
+ * Checks if the script is run from command line
+ * @return bool
+ */
 function is_cli(): bool
 {
     return php_sapi_name() == 'cli';
 }
 
+/**
+ * Checks if var has a type
+ * @param type $var
+ * @param type $type
+ * @param type $required
+ * @return bool
+ */
 function var_is_type($var, $type, $required = false): bool
 {
     $methodName = "is_{$type}";
@@ -130,6 +167,11 @@ function var_is_type($var, $type, $required = false): bool
     return false;
 }
 
+/**
+ * Checks if $input is a valid version number
+ * @param string|null $input
+ * @return bool
+ */
 function is_version_number(?string $input): bool
 {
     return ($input && version_compare($input, '0.0.1', '>='));

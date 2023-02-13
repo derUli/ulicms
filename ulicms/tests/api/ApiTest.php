@@ -921,14 +921,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("/foo/?bar=&quot;hello&quot;", getModuleAdminSelfPath());
     }
 
-    public function testRootDirectory()
-    {
-        $_SERVER['HTTP_HOST'] = "company.com";
-        $_SERVER['REQUEST_URI'] = "/subdir/foo.png";
-
-        $this->assertEquals("http://company.com/subdir/", rootDirectory());
-    }
-
     public function testGetModuleAdminFilePath()
     {
         $this->assertStringEndsWith(
