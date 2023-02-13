@@ -19,11 +19,7 @@ if (!$admin_logo) {
     <a href="http://www.ulicms.de" target="_blank">UliCMS</a> &copy; 2011 -
     <?php cms_release_year(); ?> by Ulrich Schmidt<br /> <a
         href="http://www.ckeditor.com" target="_blank">CKEditor</a> &copy;
-    2003 - 2020 by CKSource<br />
-    <a
-        href="http://www.raymondhill.net/finediff/viewdiff-ex.php"
-        target="_blank">PHP Fine Diff</a> Copyright 2011 (c) Raymond Hill
-    <br />  
+    2003 - 2020 by CKSource<br /> 
 <div>
     Icon made by <a href="http://www.freepik.com" title="Freepik">Freepik</a>
     from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>

@@ -19,9 +19,4 @@ class DiffViewModelTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(123, $model->content_id);
         $this->assertEquals(666, $model->history_id);
     }
-
-    public function testClassFineDifIsLoaded()
-    {
-        $this->assertTrue(class_exists("FineDiff"));
-    }
 }

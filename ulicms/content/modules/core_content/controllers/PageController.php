@@ -15,6 +15,10 @@ use App\Utils\CacheUtil;
 use zz\Html\HTMLMinify;
 use App\Constants;
 use App\HTML\ListItem;
+use Jfcherng\Diff\Differ;
+use Jfcherng\Diff\DiffHelper;
+use Jfcherng\Diff\Factory\RendererFactory;
+use Jfcherng\Diff\Renderer\RendererConstant;
 
 use function App\HTML\stringContainsHtml;
 
@@ -344,7 +348,7 @@ class PageController extends Controller
         }
         $content = $model->content;
         VCS::createRevision(
-            (int)$content_id,
+            (int) $content_id,
             $content,
             intval($user_id)
         );
@@ -487,24 +491,74 @@ class PageController extends Controller
 
         $currentVersion = getPageByID($contentId);
         $oldVersion = VCS::getRevisionByID($historyId);
-        $fromText = $currentVersion->content;
-        $toText = $oldVersion->content;
+
+        $old = $oldVersion->content;
+        $new = $currentVersion->content;
 
         $current_version_date = date(
             "Y-m-d H:i:s",
             intval($currentVersion->lastmodified)
         );
         $oldVersionData = $oldVersion->date;
+        // the Diff class options
+        $differOptions = [
+            // show how many neighbor lines
+            // Differ::CONTEXT_ALL can be used to show the whole file
+            'context' => 3,
+            // ignore case difference
+            'ignoreCase' => false,
+            // ignore whitespace difference
+            'ignoreWhitespace' => true,
+        ];
 
-        $fromText = mb_convert_encoding($fromText, 'HTML-ENTITIES', 'UTF-8');
-        $toText = mb_convert_encoding($toText, 'HTML-ENTITIES', 'UTF-8');
-        $opcodes = FineDiff::getDiffOpcodes(
-            $fromText,
-            $toText,
-            FineDiff::$wordGranularity
-        );
+        // the renderer class options
+        $rendererOptions = [
+            // how detailed the rendered HTML in-line diff is? (none, line, word, char)
+            'detailLevel' => 'word',
+            // renderer language: eng, cht, chs, jpn, ...
+            // or an array which has the same keys with a language file
+            // check the "Custom Language" section in the readme for more advanced usage
+            'language' => 'eng', // TODO: by current backend language
+            // show line numbers in HTML renderers
+            'lineNumbers' => true,
+            // show a separator between different diff hunks in HTML renderers
+            'separateBlock' => false,
+            // show the (table) header
+            'showHeader' => true,
+            // the frontend HTML could use CSS "white-space: pre;" to visualize consecutive whitespaces
+            // but if you want to visualize them in the backend with "&nbsp;", you can set this to true
+            'spacesToNbsp' => true,
+            // HTML renderer tab width (negative = do not convert into spaces)
+            'tabSize' => 4,
+            // this option is currently only for the Combined renderer.
+            // it determines whether a replace-type block should be merged or not
+            // depending on the content changed ratio, which values between 0 and 1.
+            'mergeThreshold' => 0.8,
+            // this option is currently only for the Unified and the Context renderers.
+            // RendererConstant::CLI_COLOR_AUTO = colorize the output if possible (default)
+            // RendererConstant::CLI_COLOR_ENABLE = force to colorize the output
+            // RendererConstant::CLI_COLOR_DISABLE = force not to colorize the output
+            'cliColorization' => RendererConstant::CLI_COLOR_AUTO,
+            // this option is currently only for the Json renderer.
+            // internally, ops (tags) are all int type but this is not good for human reading.
+            // set this to "true" to convert them into string form before outputting.
+            'outputTagAsString' => false,
+            // this option is currently only for the Json renderer.
+            // it controls how the output JSON is formatted.
+            // see available options on https://www.php.net/manual/en/function.json-encode.php
+            'jsonEncodeFlags' => \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_UNICODE,
+            // this option is currently effective when the "detailLevel" is "word"
+            // characters listed in this array can be used to make diff segments into a whole
+            // for example, making "<del>good</del>-<del>looking</del>" into "<del>good-looking</del>"
+            // this should bring better readability but set this to empty array if you do not want it
+            'wordGlues' => [' ', '-'],
+            // change this value to a string as the returned diff if the two input strings are identical
+            'resultForIdenticals' => null,
+            // extra HTML classes added to the DOM of the diff container
+            'wrapperClasses' => ['diff-wrapper'],
+        ];
 
-        $html = FineDiff::renderDiffToHTMLFromOpcodes($fromText, $opcodes);
+        $html = DiffHelper::calculate($old, $new, 'Inline', $differOptions, $rendererOptions);
 
         return new DiffViewModel(
             $html,
@@ -624,7 +678,7 @@ class PageController extends Controller
                 echo "selected";
             }
             ?>>
-                        <?php echo esc($page["title"]); ?>
+                    <?php echo esc($page["title"]); ?>
 
                 <?php if (!Request::getVar("no_id")) {
                     ?>
@@ -858,7 +912,7 @@ class PageController extends Controller
         );
         $parentIds = [];
         while ($row = Database::fetchObject($query)) {
-            $parentIds[] = (int)$row->id;
+            $parentIds[] = (int) $row->id;
         }
         return $parentIds;
     }

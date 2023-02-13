@@ -9,9 +9,6 @@
     "controllers": {
         "HistoryController": "controllers/HistoryController.php"
     },
-    "objects": {
-        "finediff": "3rdparty/finediff.php"
-    },
     "controller_function_permissions": {
         "FaviconController::doRestore": "pages"
     }

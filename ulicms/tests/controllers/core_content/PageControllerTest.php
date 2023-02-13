@@ -3,9 +3,11 @@
 use App\Models\Content\Language;
 use App\Models\Content\VCS;
 use App\Exceptions\DatasetNotFoundException;
+use Spatie\Snapshots\MatchesSnapshots;
 
 class PageControllerTest extends \PHPUnit\Framework\TestCase
 {
+    use MatchesSnapshots;
     protected function setUp(): void
     {
         require_once getLanguageFilePath('en');
@@ -367,10 +369,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
             $testDiff->content_id
         );
 
-        $this->assertEquals(
-            "<del>Old Text 1</del><ins>New Text</ins>",
-            $diff->html
-        );
+        $this->assertMatchesHtmlSnapshot($diff->html);
         $this->assertEquals(19, strlen($diff->current_version_date));
         $this->assertEquals(19, strlen($diff->old_version_date));
         $this->assertGreaterThanOrEqual(1, $diff->content_id);

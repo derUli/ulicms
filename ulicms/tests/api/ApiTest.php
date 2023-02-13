@@ -131,9 +131,9 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertNull(getModuleMeta("not_a_module", "version"));
         $this->assertNull(getModuleMeta("core_home", "not_here"));
 
-        $meta = getModuleMeta("Mobile_Detect");
+        $meta = getModuleMeta("bootstrap");
         $this->assertIsArray($meta);
-        $this->assertEquals("3.74.0", $meta["version"]);
+        $this->assertEquals("3.3.7", $meta["version"]);
         $this->assertEquals(false, $meta["embed"]);
     }
 
