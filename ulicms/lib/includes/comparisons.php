@@ -86,7 +86,7 @@ function is_mobile(): bool
             $mobileDetect->isTablet()) {
         $result = false;
     }
-    
+
     return $result;
 }
 
@@ -112,7 +112,7 @@ function is_tablet(): bool
 {
     $mobileDetect = new \Detection\MobileDetect();
     $result = $mobileDetect->isTablet();
-    
+
     return $result;
 }
 

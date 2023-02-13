@@ -940,9 +940,14 @@ class ApiTest extends \PHPUnit\Framework\TestCase
     public function testNoCacheWithTrue()
     {
         $this->assertFalse(Vars::getNoCache());
-
-        no_cache(true);
-
+        Vars::setNoCache(true);
         $this->assertTrue(Vars::getNoCache());
+    }
+
+    public function testRequireAllFilesInDir()
+    {
+        require_all_files_in_dir('tests/fixtures/testClasses');
+        $this->assertEquals('Hallo', FOO1_TEST);
+        $this->assertEquals('World', FOO2_TEST);
     }
 }

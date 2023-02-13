@@ -22,7 +22,7 @@ class CommentsController extends MainClass
             // currently it's not supported to cache pages
             // where comments are enabled
             // This is a limitation of UliCMS caching system and will get fixed
-            // in a future release of UliCMS
+            // in a future release
             if ($page->areCommentsEnabled()) {
                 Vars::setNoCache(true);
                 Vars::set("comments_enabled", true);

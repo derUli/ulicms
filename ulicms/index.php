@@ -187,12 +187,12 @@ switch ($cache_control) {
 }
 
 if ($hasModule) {
-    no_cache();
+    Vars::setNoCache(false);
 }
 
 // Kein Caching wenn man eingeloggt ist
 if (is_logged_in() && get_cache_control() == "auto") {
-    no_cache();
+    Vars::setNoCache(false);
 }
 
 do_event("before_html");

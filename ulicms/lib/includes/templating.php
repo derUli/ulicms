@@ -1011,18 +1011,18 @@ function check_status(): string
 
     $test = isset($_GET["slug"]) ? get_page($_GET["slug"]) : null;
     if (!$test || !is_null($test["deleted_at"])) {
-        no_cache();
+        Vars::setNoCache(false);
         return "404 Not Found";
     }
 
     $access = checkAccess($test["access"]);
     if ($access) {
         if ($access != "all") {
-            no_cache();
+            Vars::setNoCache(false);
         }
         return "200 OK";
     }
-    no_cache();
+    Vars::setNoCache(false);
     return "403 Forbidden";
 }
 

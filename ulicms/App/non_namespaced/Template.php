@@ -57,7 +57,7 @@ class Template
                 $page = get_page();
 
                 if ($page["module"] != null and strlen($page['module']) > 0) {
-                    no_cache();
+                    Vars::setNoCache(true);
                     $output = replaceShortcodesWithModules(
                         "[module=\"" . $page["module"] . "\"]"
                     );
@@ -606,7 +606,7 @@ color: " . Settings::get("body-text-color") . ";
             return $html;
         }
         $acl = new PermissionChecker(get_user_id());
-        if ($acl->hasPermission('pages') and Vars::getNoCache() && is_200()) {
+        if ($acl->hasPermission('pages') && Vars::getNoCache() && is_200()) {
             $id = get_ID();
             $page = ContentFactory::getById($id);
             if (in_array($page->language, getAllLanguages(true))) {
