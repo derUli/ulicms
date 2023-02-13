@@ -11,7 +11,7 @@ function_exists('get_environment') or exit('no direct script access allowed');
 // Don't edit this file!
 $environment = basename(get_environment());
 
-$file = dirname(__FILE__) . "/content/configurations/{$environment}.php";
+$file = ULICMS_CONFIGURATIONS . "/{$environment}.php";
 
 // If there is no config file for the environment show an error
 if (!is_file($file)) {

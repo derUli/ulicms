@@ -6,11 +6,19 @@ namespace App\Security;
 
 use Settings;
 
+/**
+ * This class contains security releated utils
+ */
 class Encryption
 {
-    // use this to encrypt user passwords
+    /**
+     * Hash user password
+     * @param string $password
+     * @return string
+     */
     public static function hashPassword(string $password): string
     {
+        // TODO: Move password salt from database to CMSConfig
         $salt = Settings::get("password_salt");
 
         // if no salt is set, generate it

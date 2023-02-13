@@ -1,5 +1,9 @@
 <?php
 
+// use this constant at the end
+// of the page load procedure to measure site performance
+define('START_TIME', microtime(true));
+
 if (!defined('CORE_COMPONENT')) {
     throw new Exception('Core Component is not defined');
 }
@@ -13,19 +17,15 @@ const LF = '\n';  // line feed; Unix
 const CRLF = '\r\n'; // carriage return and line feed; Windows
 const ONE_DAY_IN_SECONDS = 86400;
 
-// use this constant at the end
-// of the page load procedure to measure site performance
-define('START_TIME', microtime(true));
-
 // Define path constants
 define('ULICMS_ROOT', dirname(__FILE__));
-define('ULICMS_TMP', ULICMS_ROOT . '/content/tmp/');
+define('ULICMS_TMP', ULICMS_ROOT . '/content/tmp');
 define('ULICMS_CACHE_BASE', ULICMS_ROOT . '/content/cache');
 define('ULICMS_CACHE', ULICMS_CACHE_BASE . '/legacy');
-define('ULICMS_LOG', ULICMS_ROOT . '/content/log/');
-define('ULICMS_CONTENT', ULICMS_ROOT . '/content/');
-define('ULICMS_GENERATED', ULICMS_CONTENT . 'generated');
-define('ULICMS_CONFIGURATIONS', ULICMS_CONTENT . '/configurations/');
+define('ULICMS_LOG', ULICMS_ROOT . '/content/log');
+define('ULICMS_CONTENT', ULICMS_ROOT . '/content');
+define('ULICMS_GENERATED', ULICMS_CONTENT . '/generated');
+define('ULICMS_CONFIGURATIONS', ULICMS_CONTENT . '/configurations');
 
 use App\Exceptions\AccessDeniedException;
 use App\Exceptions\ConnectionFailedException;
