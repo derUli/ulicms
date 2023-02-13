@@ -214,43 +214,6 @@ class FilesTest extends \PHPUnit\Framework\TestCase
         $this->assertGreaterThanOrEqual(1, $timestamp);
     }
 
-    public function testWriteAppendAndDeleteFile()
-    {
-        $path = Path::resolve(
-            "ULICMS_TMP/" . uniqid()
-        );
-
-        File::write($path, "foo");
-        File::append($path, "bar");
-
-        $fileContent = File::read($path);
-        $this->assertEquals("foobar", $fileContent);
-    }
-
-    public function testWriteRenameAndDelete()
-    {
-        $path1 = Path::resolve(
-            "ULICMS_TMP/" . uniqid()
-        );
-        $path2 = Path::resolve(
-            "ULICMS_TMP/" . uniqid()
-        );
-
-        File::write($path1, "My File");
-
-        $this->assertFileExists($path1);
-        $this->assertFileDoesNotExist($path2);
-
-        File::rename($path1, $path2);
-
-        $this->assertFileDoesNotExist($path1);
-        $this->assertFileExists($path2);
-
-        File::delete($path2);
-
-        $this->assertFileDoesNotExist($path1);
-        $this->assertFileDoesNotExist($path2);
-    }
 
     public function testLoadLinesAndTrim()
     {

@@ -96,13 +96,13 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase
 
     public function testIsJsonTrue()
     {
-        $validJson = File::read(ModuleHelper::buildModuleRessourcePath("core_content", 'metadata.json'));
+        $validJson = file_get_contents(ModuleHelper::buildModuleRessourcePath("core_content", 'metadata.json'));
         $this->assertTrue(is_json($validJson));
     }
 
     public function testIsJsonFalse()
     {
-        $invalidJson = File::read(ModuleHelper::buildModuleRessourcePath("core_content", "lang/de.php"));
+        $invalidJson = file_get_contents(ModuleHelper::buildModuleRessourcePath("core_content", "lang/de.php"));
         $this->assertFalse(is_json($invalidJson));
     }
 

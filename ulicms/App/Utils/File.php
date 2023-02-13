@@ -8,34 +8,10 @@ use Intervention\MimeSniffer\MimeSniffer;
 
 class File
 {
-    // write a string to a file
-    public static function write(string $file, ?string $data): int
-    {
-        return file_put_contents($file, $data);
-    }
-
-    // append a string to a file
-    public static function append(string $file, ?string $data): int
-    {
-        return file_put_contents($file, $data, FILE_APPEND | LOCK_EX);
-    }
-
-    // read a file and return it as string
-    public static function read(string $file): ?string
-    {
-        return file_get_contents($file);
-    }
-
     // delete a file
     public static function delete(string $file): bool
     {
         return unlink($file);
-    }
-
-    // rename a file
-    public static function rename(string $old, string $new): bool
-    {
-        return rename($old, $new);
     }
 
     // output the last modification time of a file
