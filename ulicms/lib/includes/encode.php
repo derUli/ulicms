@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 defined('ULICMS_ROOT') or exit('no direct script access allowed');
 
+/**
+ * Like var_dump() but returns it as string
+ * @return string
+ */
 function var_dump_str(): string
 {
     $argc = func_num_args();
@@ -20,7 +24,12 @@ function var_dump_str(): string
     return '';
 }
 
-// like json_encode() but human readable
+/**
+ * Like json_encode() but human readable
+ * @param type $in
+ * @param type $indent
+ * @return string
+ */
 function json_readable_encode($in, $indent = 0): string
 {
     $_myself = __FUNCTION__;
