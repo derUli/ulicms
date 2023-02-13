@@ -7,6 +7,10 @@ defined('ULICMS_ROOT') or exit('no direct script access allowed');
 use App\Security\PermissionChecker;
 use Negotiation\LanguageNegotiator;
 
+/**
+ * Get all languages that have  content
+ * @return array
+ */
 function getAllUsedLanguages(): array
 {
     $languages = [];
@@ -19,6 +23,12 @@ function getAllUsedLanguages(): array
     return $languages;
 }
 
+/**
+ * Get prefered language based on Accept-Language http Header
+ * @param array $priorities
+ * @param string|null $http_accept_language
+ * @return type
+ */
 function get_prefered_language(
     array $priorities,
     ?string $http_accept_language
@@ -27,6 +37,11 @@ function get_prefered_language(
     return $negotiator->getBest($http_accept_language, $priorities)->getType();
 }
 
+/**
+ * Get path to a UliCMS core language file
+ * @param string $lang
+ * @return string
+ */
 function getLanguageFilePath(string $lang = 'de'): string
 {
     return ULICMS_ROOT . "/lang/" . $lang . ".php";
