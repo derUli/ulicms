@@ -36,11 +36,11 @@ function doTestCheck($cycles)
         $endTime = getTime();
 
         $times[] = $endTime - $startTime;
-        echo "Average Unit Test running time: " . (array_sum($times) / count($times));
+        echo "Cycle: $i, Average Unit Test running time: " . (array_sum($times) / count($times));
     }
 }
 
-$cycles = 3;
+$cycles = 5;
 // $loadCheckOld = doLoadCheck($cycles, 'http://localhost/ulicms-old/');
 //$loadCheckNew = doLoadCheck($cycles, 'http://localhost/ulicms/');
 
