@@ -20,8 +20,7 @@ class TestHelper extends \Helper
      */
     public static function isRunningPHPUnit(): bool
     {
-        return defined('PHPUNIT_COMPOSER_INSTALL') ||
-                defined('__PHPUNIT_PHAR__');
+        return CORE_COMPONENT === CORE_COMPONENT_PHPUNIT;
     }
 
     /**

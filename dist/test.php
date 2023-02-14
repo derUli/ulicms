@@ -41,11 +41,4 @@ function doTestCheck($cycles)
 }
 
 $cycles = 5;
-// $loadCheckOld = doLoadCheck($cycles, 'http://localhost/ulicms-old/');
-//$loadCheckNew = doLoadCheck($cycles, 'http://localhost/ulicms/');
-
-echo "$cycles Cycles\n";
-// echo "Load check old: $loadCheckOld\n";
-//echo "Load check new: $loadCheckNew\n";
-
 doTestCheck($cycles);

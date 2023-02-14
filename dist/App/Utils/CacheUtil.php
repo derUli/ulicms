@@ -12,6 +12,7 @@ use Phpfastcache\Config\ConfigurationOption;
 use ModuleManager;
 use ControllerRegistry;
 use DesignSettingsController;
+use App\Helpers\TestHelper;
 use function do_event;
 use function sureRemoveDir;
 use function get_request_uri;
@@ -69,13 +70,14 @@ class CacheUtil {
      * @return string
      */
     protected static function getBestMatchingDriver(): string {
-        $driver = 'Memstatic';
+        $driver = 'Devnull';
 
         $drivers = [
+            'Memstatic' => TestHelper::isRunningPHPUnit(),
             // 'Sqlite' => extension_loaded('pdo_sqlite'),
             // 'Apcu' => extension_loaded('apcu') && ini_get('apc.enabled'),
             'Files' => true,
-                // 'Files' => CORE_COMPONENT !== CORE_COMPONENT_PHPUNIT
+            // 'Files' => CORE_COMPONENT !== CORE_COMPONENT_PHPUNIT
         ];
 
         foreach ($drivers as $name => $driverAvailable) {
