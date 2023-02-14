@@ -15,10 +15,10 @@ function doLoadCheck($cycles, $url) {
         $endTime = getTime();
         
         $times[] = $endTime - $startTime;
-            echo "Cycle $i, Average Front page loading time: " . (array_sum($times) / count($times)) ."\n";
+            echo "URL: $url, Cycle: $i, Average Front page loading time: " . (array_sum($times) / count($times)) ."\n";
 
     }
-
+    return (array_sum($times) / count($times));
 }
 
 // Average Test running time
@@ -34,11 +34,18 @@ function doTestCheck($cycles) {
         $endTime = getTime();
         
         $times[] = $endTime - $startTime;
+        echo "Average Unit Test running time: " . (array_sum($times) / count($times));
     }
 
 
-    echo "Average Unit Test running time: " . (array_sum($times) / count($times));
 }
 
-
- doLoadCheck(2000, 'http://localhost/ulicms-old/');
+$cycles = 2000;
+ $loadCheckOld = doLoadCheck($cycles, 'http://localhost/ulicms-old/'); 
+ $loadCheckNew = doLoadCheck($cycles, 'http://localhost/ulicms/'); 
+ 
+ echo "$cycles Cycles\n";
+ echo "Load check old: $loadCheckOld\n";
+ echo "Load check new: $loadCheckNew\n";
+ 
+ 

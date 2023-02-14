@@ -141,9 +141,7 @@ if (!is_dir(ULICMS_TMP)) {
 if (!is_dir(ULICMS_CACHE_BASE)) {
     mkdir(ULICMS_CACHE_BASE);
 }
-if (!is_dir(ULICMS_CACHE)) {
-    mkdir(ULICMS_CACHE);
-}
+
 if (!is_dir(ULICMS_LOG)) {
     mkdir(ULICMS_LOG);
 }
