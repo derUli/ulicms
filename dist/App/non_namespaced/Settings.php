@@ -100,6 +100,7 @@ class Settings
         ?string $type = 'str'
     ): void {
         self::storeInCache($key, $value);
+
         $key = db_escape($key);
         $originalValue = self::convertVar($value, $type);
         $value = db_escape($originalValue);
@@ -156,7 +157,11 @@ class Settings
                         . "order by $order", true);
         while ($dataset = Database::fetchObject($result)) {
             $datasets[] = $dataset;
+
+            self::storeInCache($dataset->name, $dataset->value);
         }
+
+
         return $datasets;
     }
 

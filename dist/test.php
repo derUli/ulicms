@@ -19,6 +19,7 @@ function doLoadCheck($cycles, $url)
         $times[] = $endTime - $startTime;
         echo "URL: $url, Cycle: $i, Average Front page loading time: " . (array_sum($times) / count($times)) ."\n";
     }
+    
     return (array_sum($times) / count($times));
 }
 
@@ -40,5 +41,7 @@ function doTestCheck($cycles)
     }
 }
 
-$cycles = 5;
-doTestCheck($cycles);
+//$cycles = 5;
+// doTestCheck($cycles);
+
+doLoadCheck(2000, 'http://localhost/ulicms/');

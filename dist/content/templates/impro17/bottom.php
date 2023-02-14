@@ -11,12 +11,11 @@
 </div>
 <?php
 $translation = new JSTranslation();
-$translation->addKey("menu");
+$translation->addKey('menu');
 $translation->renderJS();
 
-enqueueScriptFile(getTemplateDirPath(get_theme()) . "main.js");
+enqueueScriptFile(getTemplateDirPath(get_theme()) . 'main.js');
 combinedScriptHtml();
 ?>
 </body>
 </html>
-<!--  <?php echo date("r"); ?>-->

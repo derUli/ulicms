@@ -1,7 +1,7 @@
 <?php
 if (isset($_REQUEST["standard"])) {
-    $standard = intval($_REQUEST["standard"]);
-    setconfig("default_acl_group", $standard);
+    $standard = (int)$_REQUEST["standard"];
+    Settings::set("default_acl_group", $standard);
 }
 
 $permissionChecker = new ACL();

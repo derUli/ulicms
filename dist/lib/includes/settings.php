@@ -36,14 +36,7 @@ function deleteconfig(string $key): bool
  */
 function setconfig(string $key, $value)
 {
-    $result = db_query("SELECT id FROM " . tbname("settings") .
-            " WHERE name='$key'");
-    if (db_num_rows($result) > 0) {
-        db_query("UPDATE " . tbname("settings") . " SET value='$value' WHERE name='$key'");
-    } else {
-        db_query("INSERT INTO " . tbname("settings") .
-                " (name, value) VALUES('$key', '$value')");
-    }
+    Settins::set($key, $value);
 }
 
 /**

@@ -46,7 +46,7 @@ if ($permissionChecker->hasPermission("expert_settings")) {
                                         echo ModuleHelper::buildActionURL(
                             "settings_edit",
                             "name=" .
-                                                                            Template::getEscape($row->name)
+                                                                                                                            Template::getEscape($row->name)
                         );
                                 ?>"
                                         class="is-ajax"

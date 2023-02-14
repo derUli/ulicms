@@ -28,11 +28,11 @@ $notSelectedButton = "btn btn-default"
                     <?php
              (
             isset($specialLabels[$action]) ?
-                                   esc(
-                                       $specialLabels[$action]
-                                   ) : translate(
-                                       $action
-                                   )
+                                                  esc(
+                                                      $specialLabels[$action]
+                                                  ) : translate(
+                                                      $action
+                                                  )
         );
         ?></span>
             </a>

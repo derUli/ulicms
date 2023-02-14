@@ -34,11 +34,11 @@ if ($id !== null) {
             <div class="fluid-container">
                 <?php
                 foreach ($entries as $entry) {
-                    $article_image = getTemplateDirPath("impro17") . "images/nopic.jpg";
+                    $article_image = getTemplateDirPath('impro17') . "images/nopic.jpg";
                     $meta = get_article_meta($entry->slug);
 
                     $article_date = $entry->article_date ?? $entry->created;
-                    $excerpt = strip_tags($meta->excerpt, "<img><iframe><embed><object>");
+                    $excerpt = strip_tags($meta->excerpt, '<img><iframe><embed><object>');
                     $excerpt = trim($excerpt);
                     $excerpt = StringHelper::isNotNullOrWhitespace($excerpt) ? $meta->excerpt : $entry->content;
                     ?>
@@ -46,12 +46,12 @@ if ($id !== null) {
                         <p>
                             <strong><a
                                     href="<?php Template::escape(buildSEOUrl($entry->slug, $entry->link_url)); ?>"><?php Template::escape($entry->title); ?></a></strong>
-                            <br /> <small><?php translate("date"); ?>: <?php echo strftime("%x %X", $article_date); ?></small>
+                            <br /> <small><?php translate('date'); ?>: <?php echo strftime('%x %X', $article_date); ?></small>
                         </p>
                         <p><?php echo $excerpt; ?></p>
                         <p>
                             <a
-                                href="<?php Template::escape(buildSEOUrl($entry->slug, $entry->link_url)); ?>"><?php translate("readmore"); ?></a>
+                                href="<?php Template::escape(buildSEOUrl($entry->slug, $entry->link_url)); ?>"><?php translate('readmore'); ?></a>
                         </p>
                     </div>
                 <?php }
@@ -61,17 +61,12 @@ if ($id !== null) {
                     <div class="page_older_newer">
                         <?php if ($start > 0 and $use_pagination) { ?>
                             <span class="blog_pagination_newer"><a
-                                    href="<?php Template::escape(buildSEOUrl()); ?>?start=<?php echo $previous_start; ?>"><?php Template::escape("<<"); ?></a></span>
+                                    href="<?php Template::escape(buildSEOUrl()); ?>?start=<?php echo $previous_start; ?>"><?php Template::escape('<<'); ?></a></span>
                             <?php } ?>
                             <?php if ($start + $limit < $entries_count_total and $use_pagination) { ?>
                             <span class="blog_pagination_older"><a
-                                    href="<?php Template::escape(buildSEOUrl()); ?>?start=<?php echo $next_start; ?>"><?php Template::escape(">>"); ?></a></span>
+                                    href="<?php Template::escape(buildSEOUrl()); ?>?start=<?php echo $next_start; ?>"><?php Template::escape('>>'); ?></a></span>
                             <?php } ?>
-                    </div>
-                    <div class="text-right rss-icon">
-                        <a class="fa fa-rss fa-4x"
-                           href="<?php Template::escape(buildSEOUrl(false, null, "rss")); ?>"
-                           title="Newsfeed"></a>
                     </div>
                 <?php } ?>
             </div>
