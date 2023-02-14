@@ -143,10 +143,10 @@ echo ModuleHelper::buildMethodCallForm(
                     false,
                     $comment->getId(),
                     [
-                                                        "class" => "checkbox comment-checkbox",
-                                                        "data-select-all-checkbox" => ".select-all",
-                                                        "data-checkbox-group" => ".comment-checkbox"
-                                                    ]
+                                                                "class" => "checkbox comment-checkbox",
+                                                                "data-select-all-checkbox" => ".select-all",
+                                                                "data-checkbox-group" => ".comment-checkbox"
+                                                            ]
                 );
                 ?></td>
                     <td>

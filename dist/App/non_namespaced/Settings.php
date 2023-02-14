@@ -7,18 +7,19 @@ use Phpfastcache\Helper\Psr16Adapter;
 use App\Security\Hash;
 
 // class for handling system settings
-class Settings {
-
+class Settings
+{
     private static $adapter;
 
-    public static function register(string $key, $value, $type = 'str'): void {
+    public static function register(string $key, $value, $type = 'str'): void
+    {
         self::init($key, $value, $type);
     }
 
     public static function init(
-            string $key,
-            $value,
-            ?string $type = 'str'
+        string $key,
+        $value,
+        ?string $type = 'str'
     ): bool {
         $success = false;
         if (!self::get($key)) {
@@ -31,8 +32,8 @@ class Settings {
 
     // get a config variable
     public static function get(
-            string $key,
-            ?string $type = 'str'
+        string $key,
+        ?string $type = 'str'
     ) {
         $cachedValue = self::retrieveFromCache($key);
         if ($cachedValue) {
@@ -54,9 +55,9 @@ class Settings {
     }
 
     public static function getLanguageSetting(
-            string $name,
-            ?string $language = null,
-            ?string $type = 'str'
+        string $name,
+        ?string $language = null,
+        ?string $type = 'str'
     ) {
         $retval = false;
         $settingsName = $language ? "{$name}_{$language}" : $name;
@@ -71,17 +72,17 @@ class Settings {
     }
 
     public static function getLang(
-            string $name,
-            ?string $language = null,
-            ?string $type = 'str'
+        string $name,
+        ?string $language = null,
+        ?string $type = 'str'
     ) {
         return self::getLanguageSetting($name, $language, $type);
     }
 
     public static function setLanguageSetting(
-            string $name,
-            $value,
-            ?string $language = null
+        string $name,
+        $value,
+        ?string $language = null
     ): void {
         $settingsName = $language ? "{$name}_{$language}" : $name;
 
@@ -94,11 +95,10 @@ class Settings {
 
     // Set a configuration Variable;
     public static function set(
-            string $key,
-            $value,
-            ?string $type = 'str'
+        string $key,
+        $value,
+        ?string $type = 'str'
     ): void {
-        
         self::storeInCache($key, $value);
         $key = db_escape($key);
         $originalValue = self::convertVar($value, $type);
@@ -115,14 +115,16 @@ class Settings {
     }
 
     // Remove an configuration variable
-    public static function delete(string $key): bool {
+    public static function delete(string $key): bool
+    {
         self::deleteInCache($key);
         $key = db_escape($key);
         db_query("DELETE FROM " . tbname("settings") . " WHERE name='$key'");
         return Database::getAffectedRows() > 0;
     }
 
-    public static function convertVar($value, ?string $type) {
+    public static function convertVar($value, ?string $type)
+    {
         switch ($type) {
             case 'str':
                 $value = (string) $value;
@@ -147,7 +149,8 @@ class Settings {
         return $value;
     }
 
-    public static function getAll(string $order = "name"): array {
+    public static function getAll(string $order = "name"): array
+    {
         $datasets = [];
         $result = Database::query("SELECT * FROM `{prefix}settings` "
                         . "order by $order", true);
@@ -162,7 +165,8 @@ class Settings {
     // example mapping string
     // foo=>bar
     // hello=>world
-    public static function mappingStringToArray(string $str): array {
+    public static function mappingStringToArray(string $str): array
+    {
         $str = trim($str);
         $str = normalizeLN($str, "\n");
         $lines = explode("\n", $str);
@@ -188,29 +192,34 @@ class Settings {
         return $result;
     }
 
-    protected static function retrieveFromCache(string $key): mixed {
+    protected static function retrieveFromCache(string $key): mixed
+    {
         $adapter = self::getCacheAdapter();
         $cacheUid = self::generateCacheUid($key);
         return $adapter->get($cacheUid);
     }
 
-    protected static function storeInCache(string $key, $value): bool {
+    protected static function storeInCache(string $key, $value): bool
+    {
         $adapter = self::getCacheAdapter();
         $cacheUid = self::generateCacheUid($key);
         return $adapter->set($cacheUid, $value);
     }
 
-    protected static function deleteInCache(string $key): bool {
+    protected static function deleteInCache(string $key): bool
+    {
         $adapter = self::getCacheAdapter();
         $cacheUid = self::generateCacheUid($key);
         return $adapter->delete($cacheUid);
     }
-    
-    protected static function generateCacheUid($key){
+
+    protected static function generateCacheUid($key)
+    {
         return Hash::hashCacheIdentifier($key);
     }
 
-    protected static function getCacheAdapter(): Psr16Adapter {
+    protected static function getCacheAdapter(): Psr16Adapter
+    {
         if (self::$adapter) {
             return self::$adapter;
         }
@@ -226,5 +235,4 @@ class Settings {
 
         return self::$adapter;
     }
-
 }

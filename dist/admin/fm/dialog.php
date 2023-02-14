@@ -1353,41 +1353,41 @@ if ($config['show_language_selection']) { ?>
                                 <div class="img-precontainer">
                                     <div class="img-container directory"><span></span>
                                         <img class="directory-img" data-src="img/<?php
-                                                    echo $config['icon_theme']; ?>/folder<?php
-                                                    if ($file == '..') {
-                                                        echo "_back";
-                                                    } ?>.png"/>
+                                                        echo $config['icon_theme']; ?>/folder<?php
+                                                        if ($file == '..') {
+                                                            echo "_back";
+                                                        } ?>.png"/>
                                     </div>
                                 </div>
                                 <div class="img-precontainer-mini directory">
                                     <div class="img-container-mini">
                                         <span></span>
                                         <img class="directory-img" data-src="img/<?php
-                                                    echo $config['icon_theme']; ?>/folder<?php
-                                                    if ($file == '..') {
-                                                        echo "_back";
-                                                    } ?>.png"/>
+                                                        echo $config['icon_theme']; ?>/folder<?php
+                                                        if ($file == '..') {
+                                                            echo "_back";
+                                                        } ?>.png"/>
                                     </div>
                                 </div>
                                 <?php
-                                                    if ($file == '..') { ?>
+                                                        if ($file == '..') { ?>
                                 <div class="box no-effect">
                                     <h4><?php
-                                                    echo trans('Back') ?></h4>
+                                                        echo trans('Back') ?></h4>
                                 </div>
                             </a>
 
                         <?php
-                                                    } else { ?>
+                                                        } else { ?>
                             </a>
                             <div class="box">
                                 <h4 class="<?php
-                                                            if ($config['ellipsis_title_after_first_row']) {
-                                                                echo "ellipsis";
-                                                            } ?>"><a class="folder-link" data-file="<?php
-                                                                echo $file ?>" href="dialog.php?<?php
-                                                                echo $get_params . rawurlencode($src) . "&" . uniqid() ?>"><?php
-                                                                    echo $file; ?></a></h4>
+                                                                if ($config['ellipsis_title_after_first_row']) {
+                                                                    echo "ellipsis";
+                                                                } ?>"><a class="folder-link" data-file="<?php
+                                                                    echo $file ?>" href="dialog.php?<?php
+                                                                    echo $get_params . rawurlencode($src) . "&" . uniqid() ?>"><?php
+                                                                        echo $file; ?></a></h4>
                             </div>
                             <input type="hidden" class="name" value="<?php
                             echo $file_array['file_lcase']; ?>"/>
@@ -1398,15 +1398,15 @@ if ($config['show_language_selection']) { ?>
                             <input type="hidden" class="extension" value="<?php
                             echo fix_strtolower(trans('Type_dir')); ?>"/>
                             <div class="file-date"><?php
-                                                            echo date(trans('Date_type'), $file_array['date']); ?></div>
+                                                                echo date(trans('Date_type'), $file_array['date']); ?></div>
                             <?php
                             if ($config['show_folder_size']) { ?>
                                 <div class="file-size"><?php
-                                                                echo makeSize($file_array['size']); ?></div>
+                                                                    echo makeSize($file_array['size']); ?></div>
                                 <input type="hidden" class="nfiles" value="<?php
-                                                            echo $file_array['nfiles']; ?>"/>
+                                                                echo $file_array['nfiles']; ?>"/>
                                 <input type="hidden" class="nfolders" value="<?php
-                                                            echo $file_array['nfolders']; ?>"/>
+                                                                echo $file_array['nfolders']; ?>"/>
                             <?php
                             } ?>
                             <div class='file-extension'><?php
@@ -1435,7 +1435,7 @@ if ($config['show_language_selection']) { ?>
                                 </a>
                             </figcaption>
                         <?php
-                                                    } ?>
+                                                        } ?>
                         </figure>
                     </li>
                     <?php
