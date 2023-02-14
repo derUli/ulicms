@@ -9,15 +9,27 @@ defined('ULICMS_ROOT') or exit('no direct script access allowed');
 use Closure;
 use Exception;
 
+/**
+ * This class contains tools for running in context of unit tests
+ */
 class TestHelper extends \Helper
 {
-    // Check if PHP is running in context of a Unit test
+    /**
+     * Check if we are running unit tests
+     * @return bool
+     */
     public static function isRunningPHPUnit(): bool
     {
         return defined('PHPUNIT_COMPOSER_INSTALL') ||
                 defined('__PHPUNIT_PHAR__');
     }
 
+    /**
+     * Executes a closure and captures it's output
+     * @param Closure $method
+     * @return string
+     * @throws Exception
+     */
     public static function getOutput(Closure $method): string
     {
         ob_start();
@@ -30,6 +42,11 @@ class TestHelper extends \Helper
         }
     }
 
+
+    /**
+     * Check if the application is running on a Windows machine
+     * @return bool
+     */
     public static function isWindowsServer(): bool
     {
         return defined("PHP_WINDOWS_VERSION_MAJOR");
