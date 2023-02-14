@@ -29,13 +29,14 @@ class Hash
         }
         return hash("sha512", $salt . $password);
     }
-    
+
     /**
      * Hash Cache identifier
      * @param string $identifier
      * @return string
      */
-    public static function hashCacheIdentifier(string $identifier): string{
+    public static function hashCacheIdentifier(string $identifier): string
+    {
         return (string)crc32($identifier);
     }
 }

@@ -11,11 +11,8 @@ if (isset($_GET["q"])) {
     $q = $_GET["q"];
 }
 $modules = getAllModules();
-$hasSearch = (in_array("search", $modules) || in_array("extended_search", $modules));
+$hasSearch = in_array("extended_search", $modules);
 $searchPage = ModuleHelper::getFirstPageWithModule("extended_search");
-if (!$searchPage) {
-    $searchPage = ModuleHelper::getFirstPageWithModule("search");
-}
 ?>
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,16 +22,8 @@ if (!$searchPage) {
           <?php
           base_metas();
 og_tags();
-?>
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-          <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
 
-    <?php
-    enqueueStylesheet(getTemplateDirPath("impro17") . "style.scss");
+enqueueStylesheet(getTemplateDirPath("impro17") . "style.scss");
 combinedStylesheetHtml();
 ?>
 </head>
@@ -52,7 +41,7 @@ combinedStylesheetHtml();
 
             <div id="mobile-nav"></div>
             <?php
-        if ((!containsModule(null, "extended_search") && !containsModule(null, "search")) and $hasSearch and $searchPage) {
+        if (!containsModule(null, "extended_search") && $hasSearch && $searchPage) {
             ?>
                 <form id="search-form-head" method="get"
                       action="<?php Template::escape(buildSEOURL($searchPage->slug)); ?>">
