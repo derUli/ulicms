@@ -88,18 +88,14 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase
     {
         $_SESSION['language'] = 'de';
         $this->assertEquals(6, ModuleHelper::getFirstPageWithModule()->id);
-        $this->assertEquals(7, ModuleHelper::getFirstPageWithModule("pfbc_sample")->id);
         $this->assertEquals(6, ModuleHelper::getFirstPageWithModule("fortune2")->id);
-        $this->assertEquals(7, ModuleHelper::getFirstPageWithModule("pfbc_sample", 'de')->id);
         $this->assertEquals(6, ModuleHelper::getFirstPageWithModule("fortune2", 'de')->id);
-        $this->assertEquals(14, ModuleHelper::getFirstPageWithModule("pfbc_sample", 'en')->id);
         $this->assertEquals(13, ModuleHelper::getFirstPageWithModule("fortune2", 'en')->id);
         $this->assertEquals(6, ModuleHelper::getFirstPageWithModule(null, 'de')->id);
         $this->assertEquals(13, ModuleHelper::getFirstPageWithModule(null, 'en')->id);
 
         $_SESSION['language'] = 'en';
         $this->assertEquals(13, ModuleHelper::getFirstPageWithModule()->id);
-        $this->assertEquals(14, ModuleHelper::getFirstPageWithModule("pfbc_sample")->id);
         $this->assertEquals(13, ModuleHelper::getFirstPageWithModule("fortune2")->id);
 
         $this->assertNull(ModuleHelper::getFirstPageWithModule('gibts_nicht_modul'));

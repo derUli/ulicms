@@ -4,13 +4,18 @@ declare(strict_types=1);
 
 use App\Exceptions\AccessDeniedException;
 
-// All module controllers must inherit from this class
+/**
+ * All module controllers must inherited from this class
+ */
 abstract class Controller
 {
     protected $blacklist = array(
         "runCommand"
     );
 
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         // add all hooks to blacklist
@@ -62,8 +67,8 @@ abstract class Controller
             // if there is a method, it is public and the user has the required
             // permissions, call it
             if (method_exists($this, $sMethodWithRequestType) && !str_starts_with($sMethodWithRequestType, "_")
-                    and $reflectionWithRequestType
-                    and $reflectionWithRequestType->isPublic()) {
+                    && $reflectionWithRequestType
+                    && $reflectionWithRequestType->isPublic()) {
                 if (ControllerRegistry::userCanCall(
                     $sClass,
                     $sMethodWithRequestType

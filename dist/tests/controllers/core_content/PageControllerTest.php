@@ -486,7 +486,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         $controller = new PageController();
 
         $output = $controller->_filterParentPages('en', "top", $parent->getID());
-        $this->assertGreaterThanOrEqual(10, substr_count($output, "<option"));
+        $this->assertGreaterThanOrEqual(9, substr_count($output, "<option"));
     }
 
     public function testNextFreeSlugReturnsSlug()

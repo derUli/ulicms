@@ -105,8 +105,6 @@ class PageTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(3, count($page->getEmbeddedModules()));
         $page->module = "fortune2";
         $this->assertEquals(3, count($page->getEmbeddedModules()));
-        $page->module = "pfbc_sample";
-        $this->assertEquals(4, count($page->getEmbeddedModules()));
     }
 
     public function testDisableShortcodesTrue()

@@ -170,7 +170,7 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase
             ['id']
         );
 
-        $this->assertGreaterThanOrEqual(2, count($data["data"]));
+        $this->assertGreaterThanOrEqual(1, count($data["data"]));
 
         $this->assertLessThan(
             $data["recordsTotal"],

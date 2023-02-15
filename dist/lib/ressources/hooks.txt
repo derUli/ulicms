@@ -36,7 +36,6 @@ before_register_form
 register_form_field
 after_register_form
 admin_head
-init_pfbc
 before_log_request
 after_log_request
 custom_font_sizes
