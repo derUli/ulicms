@@ -1,47 +1,100 @@
 <?php
 
-function getTime()
-{
+function getTime() {
     return microtime(true);
 }
 
 // Average page loading time
-function doLoadCheck($cycles, $url)
-{
+function doLoadCheck($url, $maxEquals = 100) {
     $times = [];
 
-    for ($i = 1; $i <= $cycles; $i++) {
+    $oldMinMax = "";
+
+    $currentMaxEquals = $maxEquals;
+
+    $i = 0;
+
+    while ($currentMaxEquals > 1) {
+        $i += 1;
+
         $startTime = getTime();
 
         system("curl -s -o nul $url");
         $endTime = getTime();
 
-        $times[] = $endTime - $startTime;
-        echo "URL: $url, Cycle: $i, Average Front page loading time: " . (array_sum($times) / count($times)) ."\n";
+        $newTime = $endTime - $startTime;
+        $times[] = $newTime;
+
+        $newMinMax = "Min: " . min($times) . ', Max: ' . max($times);
+
+        if ($newMinMax === $oldMinMax) {
+            $currentMaxEquals -= 1;
+        } else {
+            $currentMaxEquals = $maxEquals;
+        }
+
+        $oldMinMax = $newMinMax;
+
+        echo "URL: $url, Cycle: " . str_pad($i, 6, "0", STR_PAD_LEFT) . ", " . $newMinMax . "\n";
     }
-    
-    return (array_sum($times) / count($times));
+
+    return $times;
 }
 
-// Average Test running time
-function doTestCheck($cycles)
-{
+function doTestCheck($maxEquals = 100) {
     $times = [];
 
-    for ($i = 1; $i <= $cycles; $i++) {
-        echo "Test run $i\n\n";
-        $startTime = getTime();
-        $cmd = "vendor\\bin\\phpunit tests";
+    $oldMinMax = "";
 
-        system($cmd);
-        $endTime = getTime();
+    $i = 0;
 
-        $times[] = $endTime - $startTime;
-        echo "Cycle: $i, Average Unit Test running time: " . (array_sum($times) / count($times));
+    $currentMaxEquals = $maxEquals;
+
+    while ($currentMaxEquals > 1) {
+        $i += 1;
+
+        $startTime = time();
+
+        system("vendor\\bin\\phpunit tests");
+        $endTime = time();
+
+        $newTime = $endTime - $startTime;
+        $times[] = $newTime;
+
+        $newMinMax = "Min: " . min($times) . ', Max: ' . max($times);
+
+        if ($newMinMax === $oldMinMax) {
+            $currentMaxEquals -= 1;
+        } else {
+            $currentMaxEquals = $maxEquals;
+        }
+
+        $oldMinMax = $newMinMax;
+
+        echo "Cycle: " . str_pad($i, 6, "0", STR_PAD_LEFT) . ", " . $newMinMax . "\n";
     }
+
+    return $times;
 }
 
-//$cycles = 5;
-// doTestCheck($cycles);
+$maxEquals = 4000;
 
-doLoadCheck(2000, 'http://localhost/ulicms/');
+$timesOld = doLoadCheck('http://localhost/ulicms-old/', $maxEquals);
+$timesNew = doLoadCheck('http://localhost/ulicms/', $maxEquals);
+//$timesUnitTest = doTestCheck(10);
+
+echo "http://localhost/ulicms-old/:\n";
+
+echo "Count: " . count($timesOld) . "\n";
+echo "Min Time: " . min($timesOld) . "\n";
+echo "Max Time: " . max($timesOld) . "\n\n";
+
+echo "http://localhost/ulicms/:\n";
+echo "Count: " . count($timesNew) . "\n";
+echo "Min Time: " . min($timesNew) . "\n";
+echo "Max Time: " . max($timesNew) . "\n\n";
+
+//echo "Unit Test:\n";
+//echo "Count: " . count($timesUnitTest) . "\n";
+//echo "Min Time: " . min($timesUnitTest) . "\n";
+//echo "Max Time: " . max($timesUnitTest) . "\n";
