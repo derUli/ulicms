@@ -14,6 +14,9 @@ function doLoadCheck($url, $maxEquals = 100) {
 
     $i = 0;
 
+    $repeat = 1;
+    $maxRepeat = 0;
+
     while ($currentMaxEquals > 1) {
         $i += 1;
 
@@ -22,21 +25,31 @@ function doLoadCheck($url, $maxEquals = 100) {
         system("curl -s -o nul $url");
         $endTime = getTime();
 
-        $newTime = $endTime - $startTime;
+        $newTime = (floatval(substr(strval($endTime - $startTime), 0, 7)));
+
         $times[] = $newTime;
 
         $newMinMax = "Min: " . min($times) . ', Max: ' . max($times);
 
         if ($newMinMax === $oldMinMax) {
             $currentMaxEquals -= 1;
+            $repeat += 1;
+
+            if ($repeat > $maxRepeat) {
+                $maxRepeat = $repeat;
+            }
         } else {
             $currentMaxEquals = $maxEquals;
+            $repeat = 1;
         }
 
         $oldMinMax = $newMinMax;
 
+        echo "Max Repeat: $maxRepeat, ";
         echo "URL: $url, Cycle: " . str_pad($i, 6, "0", STR_PAD_LEFT) . ", " . $newMinMax . "\n";
     }
+
+    echo $maxRepeat . "\n";
 
     return $times;
 }
@@ -71,30 +84,32 @@ function doTestCheck($maxEquals = 100) {
 
         $oldMinMax = $newMinMax;
 
-        echo "Cycle: " . str_pad($i, 6, "0", STR_PAD_LEFT) . ", " . $newMinMax . "\n";
+        echo "Cycle: " . str_pad($i, 4, "0", STR_PAD_LEFT) . ", " . $newMinMax . "\n";
     }
 
     return $times;
 }
 
-$maxEquals = 4000;
+$maxEquals = 60;
+$urls = [
+    'http://localhost/ulicms-old/',
+    'http://localhost/ulicms/',
+];
 
-//$timesOld = doLoadCheck('http://localhost/ulicms-old/', $maxEquals);
-$timesNew = doLoadCheck('http://localhost/ulicms/', $maxEquals);
-//$timesUnitTest = doTestCheck(10);
+$results = [];
 
-echo "http://localhost/ulicms-old/:\n";
+foreach ($urls as $url) {
+    $results[$url] = doLoadCheck($url, $maxEquals);
+}
 
-// echo "Count: " . count($timesOld) . "\n";
-// echo "Min Time: " . min($timesOld) . "\n";
-//echo "Max Time: " . max($timesOld) . "\n\n";
 
-echo "http://localhost/ulicms/:\n";
-echo "Count: " . count($timesNew) . "\n";
-echo "Min Time: " . min($timesNew) . "\n";
-echo "Max Time: " . max($timesNew) . "\n\n";
+foreach ($results as $url => $times) {
+    echo "$url:\n";
+    $count = count($times);
+    $min = min($times);
+    $max = max($times);
 
-//echo "Unit Test:\n";
-//echo "Count: " . count($timesUnitTest) . "\n";
-//echo "Min Time: " . min($timesUnitTest) . "\n";
-//echo "Max Time: " . max($timesUnitTest) . "\n";
+    echo "Count: " . $count . "\n";
+    echo "Min Time: " . $min . "\n";
+    echo "Max Time: " . $max . "\n\n";
+}
