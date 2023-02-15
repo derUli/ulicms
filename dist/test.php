@@ -79,15 +79,15 @@ function doTestCheck($maxEquals = 100) {
 
 $maxEquals = 4000;
 
-$timesOld = doLoadCheck('http://localhost/ulicms-old/', $maxEquals);
+//$timesOld = doLoadCheck('http://localhost/ulicms-old/', $maxEquals);
 $timesNew = doLoadCheck('http://localhost/ulicms/', $maxEquals);
 //$timesUnitTest = doTestCheck(10);
 
 echo "http://localhost/ulicms-old/:\n";
 
-echo "Count: " . count($timesOld) . "\n";
-echo "Min Time: " . min($timesOld) . "\n";
-echo "Max Time: " . max($timesOld) . "\n\n";
+// echo "Count: " . count($timesOld) . "\n";
+// echo "Min Time: " . min($timesOld) . "\n";
+//echo "Max Time: " . max($timesOld) . "\n\n";
 
 echo "http://localhost/ulicms/:\n";
 echo "Count: " . count($timesNew) . "\n";
