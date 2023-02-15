@@ -1,11 +1,13 @@
 <?php
 
-function getTime() {
+function getTime()
+{
     return microtime(true);
 }
 
 // Average page loading time
-function doLoadCheck($url, $maxRepeat = 100) {
+function doLoadCheck($url, $maxRepeat = 100)
+{
     $times = [];
     $oldMinMax = "";
     $i = 0;
@@ -14,7 +16,7 @@ function doLoadCheck($url, $maxRepeat = 100) {
     $prevMax = 0;
 
     while ($repeat < $maxRepeat) {
-    //while (true) {
+        //while (true) {
         $i += 1;
 
         $startTime = getTime();
@@ -31,7 +33,6 @@ function doLoadCheck($url, $maxRepeat = 100) {
         if ($newMinMax === $oldMinMax) {
             $repeat += 1;
         } else {
-
             if ($repeat > $prevMax) {
                 $prevMax = $repeat;
             }
