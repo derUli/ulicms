@@ -5,19 +5,16 @@ function getTime() {
 }
 
 // Average page loading time
-function doLoadCheck($url, $maxEquals = 100) {
+function doLoadCheck($url, $maxRepeat = 100) {
     $times = [];
-
     $oldMinMax = "";
-
-    $currentMaxEquals = $maxEquals;
-
     $i = 0;
-
     $repeat = 1;
-    $maxRepeat = 0;
 
-    while ($currentMaxEquals > 1) {
+    $prevMax = 0;
+
+    while ($repeat < $maxRepeat) {
+    //while (true) {
         $i += 1;
 
         $startTime = getTime();
@@ -32,20 +29,20 @@ function doLoadCheck($url, $maxEquals = 100) {
         $newMinMax = "Min: " . min($times) . ', Max: ' . max($times);
 
         if ($newMinMax === $oldMinMax) {
-            $currentMaxEquals -= 1;
             $repeat += 1;
-
-            if ($repeat > $maxRepeat) {
-                $maxRepeat = $repeat;
-            }
         } else {
-            $currentMaxEquals = $maxEquals;
+
+            if ($repeat > $prevMax) {
+                $prevMax = $repeat;
+            }
+
             $repeat = 1;
         }
 
         $oldMinMax = $newMinMax;
 
-        echo "Max Repeat: $maxRepeat, ";
+        echo "Prev Max: $prevMax, ";
+        echo "Repeat: $repeat, ";
         echo "URL: $url, Cycle: " . str_pad($i, 6, "0", STR_PAD_LEFT) . ", " . $newMinMax . "\n";
     }
 
@@ -54,43 +51,7 @@ function doLoadCheck($url, $maxEquals = 100) {
     return $times;
 }
 
-function doTestCheck($maxEquals = 100) {
-    $times = [];
-
-    $oldMinMax = "";
-
-    $i = 0;
-
-    $currentMaxEquals = $maxEquals;
-
-    while ($currentMaxEquals > 1) {
-        $i += 1;
-
-        $startTime = time();
-
-        system("vendor\\bin\\phpunit tests");
-        $endTime = time();
-
-        $newTime = $endTime - $startTime;
-        $times[] = $newTime;
-
-        $newMinMax = "Min: " . min($times) . ', Max: ' . max($times);
-
-        if ($newMinMax === $oldMinMax) {
-            $currentMaxEquals -= 1;
-        } else {
-            $currentMaxEquals = $maxEquals;
-        }
-
-        $oldMinMax = $newMinMax;
-
-        echo "Cycle: " . str_pad($i, 4, "0", STR_PAD_LEFT) . ", " . $newMinMax . "\n";
-    }
-
-    return $times;
-}
-
-$maxEquals = 60;
+$maxRepeat = 600;
 $urls = [
     'http://localhost/ulicms-old/',
     'http://localhost/ulicms/',
@@ -99,7 +60,7 @@ $urls = [
 $results = [];
 
 foreach ($urls as $url) {
-    $results[$url] = doLoadCheck($url, $maxEquals);
+    $results[$url] = doLoadCheck($url, $maxRepeat);
 }
 
 
@@ -109,7 +70,7 @@ foreach ($results as $url => $times) {
     $min = min($times);
     $max = max($times);
 
-    echo "Count: " . $count . "\n";
+    // echo "Count: " . $count . "\n";
     echo "Min Time: " . $min . "\n";
-    echo "Max Time: " . $max . "\n\n";
+    echo "\n";
 }
