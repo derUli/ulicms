@@ -198,6 +198,8 @@ $db_strict_mode = $config->db_strict_mode ?? false;
     $db_strict_mode
 );
 
+// Settings::getAll();
+
 if (!$connection) {
     throw new ConnectionFailedException('Can\'t connect to Database.');
 }
