@@ -55,6 +55,12 @@ $maxRepeat = 600;
 $urls = [
     'http://localhost/ulicms-old/',
     'http://localhost/ulicms/',
+    'http://localhost/ulicms-old/lorem_ipsum.html',
+    'http://localhost/ulicms/lorem_ipsum',
+    'http://localhost/ulicms-old/glueckskeks.html',
+    'http://localhost/ulicms/glueckskeks',
+    'http://localhost/ulicms-old/glueckskeks.html',
+    'http://localhost/ulicms/glueckskeks'
 ];
 
 $results = [];
@@ -68,8 +74,6 @@ foreach ($results as $url => $times) {
     echo "$url:\n";
     $count = count($times);
     $min = min($times);
-    $max = max($times);
-
     // echo "Count: " . $count . "\n";
     echo "Min Time: " . $min . "\n";
     echo "\n";
