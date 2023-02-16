@@ -6,7 +6,12 @@ namespace App\Helpers;
 
 defined('ULICMS_ROOT') or exit('no direct script access allowed');
 
-class UrlHelper extends \Helper
+use Helper;
+
+/**
+ * Helper methods for handling URLs
+ */
+class UrlHelper extends Helper
 {
     /**
      * This method removes the get parameters from an URL
