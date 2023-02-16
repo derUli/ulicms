@@ -32,7 +32,7 @@ const loadThemePreview = (selectField) => {
 
 const updateFontPreview = () => {
     const fontFamily = $("select#default_font").val();
-    const fontSize = $("select#font-size").val();
+    const fontSize = $("select#font_size").val();
 
     $("#font-preview").css(
             {

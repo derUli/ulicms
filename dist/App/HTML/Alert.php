@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\HTML;
 
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
 // This class contains helper methods to build Bootstrap alerts
 // see https://getbootstrap.com/docs/3.3/components/
 class Alert

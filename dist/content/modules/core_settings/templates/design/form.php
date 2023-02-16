@@ -24,7 +24,7 @@ if (!$permissionChecker->hasPermission("design")) {
     $mobile_theme = Settings::get("mobile_theme");
     $default_font = Settings::get("default_font");
     $title_format = Settings::get("title_format");
-    $font_size = Settings::get("font-size");
+    $font_size = Settings::get("font_size");
     $ckeditor_skin = Settings::get("ckeditor_skin");
     $font_sizes = $controller->getFontSizes();
     $no_mobile_design_on_tablet = Settings::get("no_mobile_design_on_tablet");
@@ -178,7 +178,7 @@ if (!$permissionChecker->hasPermission("design")) {
             <tr>
                 <td><strong><?php translate("font_size"); ?> </strong>
 
-                <td> <select name="font-size" id="font-size">
+                <td> <select name="font_size" id="font_size">
                         <?php
     foreach ($font_sizes as $size) {
         echo '<option value="' . $size . '"';

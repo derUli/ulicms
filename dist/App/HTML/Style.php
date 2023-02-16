@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace App\HTML;
 
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
 use ModuleHelper;
 use App\Utils\File;
 
 /**
- * Generates a link tag for a stylesheet file
+ * Generates a <link> tag for a stylesheet file
  */
 class Style
 {
@@ -40,6 +42,13 @@ class Style
         return "<link{$attribHTML}/>";
     }
 
+    /**
+     * Generates a <script> tag from string
+     * @param string|null $code
+     * @param string|null $media
+     * @param array $htmlAttributes
+     * @return string
+     */
     public static function fromString(
         ?string $code,
         ?string $media = null,

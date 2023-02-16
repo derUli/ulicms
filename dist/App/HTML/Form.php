@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\HTML;
 
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
 use StringHelper;
 use ModuleHelper;
 use Template;

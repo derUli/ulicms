@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Constants;
 
-// use this constants if you have to compare request methods
+/**
+ * Use this class to compare HTTP request methods
+ */
 class RequestMethod
 {
     public const POST = 'post';
