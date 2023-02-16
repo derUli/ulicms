@@ -22,7 +22,6 @@ class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase
     protected function tearDown(): void
     {
         $this->cleanUpFiles();
-        Settings::delete("disable_custom_layout_options");
 
         foreach ($this->initialSettings as $key => $value) {
             if ($value === null) {
@@ -52,22 +51,6 @@ class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase
         $lines = explode("\n", trim(normalizeLN($scss, "\n")));
 
         $this->assertCount(12, $lines);
-    }
-
-    public function test_generateSCSSReturnsNull()
-    {
-        Settings::set("disable_custom_layout_options", "1");
-        $controller = ControllerRegistry::get(DesignSettingsController::class);
-        $scss = $controller->_generateSCSS();
-        $this->assertNull($scss);
-    }
-
-    public function test_generateSCSSToFileReturnsNull()
-    {
-        Settings::set("disable_custom_layout_options", "1");
-        $controller = ControllerRegistry::get(DesignSettingsController::class);
-        $scss = $controller->_generateSCSSToFile();
-        $this->assertNull($scss);
     }
 
     public function test_generateSCSSToFile()

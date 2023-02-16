@@ -57,7 +57,6 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         Vars::delete("headline");
         Vars::delete("title");
 
-        Settings::delete("video_width_100_percent");
         Settings::delete("hide_meta_generator");
         Settings::delete("disable_no_format_detection");
         Vars::delete("id");
@@ -150,19 +149,6 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
                 '<meta charset="utf-8"/>'
             )
         );
-    }
-
-    public function testGetBaseMetasVideoWidth100Percent()
-    {
-        Settings::set("video_width_100_percent", "1");
-        $baseMetas = Template::getBaseMetas();
-        $this->assertTrue(str_contains($baseMetas, "video {"));
-        $this->assertTrue(str_contains($baseMetas, "width: 100% !important;"));
-        $this->assertTrue(str_contains($baseMetas, "height: auto !important;"));
-
-        Settings::delete("video_width_100_percent");
-        $baseMetas = Template::getBaseMetas();
-        $this->assertFalse(str_contains($baseMetas, "video {"));
     }
 
     public function testGetBaseMetasHideMetaGenerator()

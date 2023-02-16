@@ -191,6 +191,12 @@ audio, video, iframe, p{
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+video {
+  width: 100% !important;
+  height: auto !important;
+}
+
 footer{
     position: absolute;
     top: calc(100vh - 6vh);

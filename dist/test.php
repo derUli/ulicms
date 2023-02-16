@@ -54,14 +54,9 @@ function doLoadCheck($url, $maxRepeat = 100)
 
 $maxRepeat = 600;
 $urls = [
-    'http://localhost/ulicms-old/',
     'http://localhost/ulicms/',
-    'http://localhost/ulicms-old/lorem_ipsum.html',
     'http://localhost/ulicms/lorem_ipsum',
-    'http://localhost/ulicms-old/glueckskeks.html',
     'http://localhost/ulicms/glueckskeks',
-    'http://localhost/ulicms-old/glueckskeks.html',
-    'http://localhost/ulicms/glueckskeks'
 ];
 
 $results = [];

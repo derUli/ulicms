@@ -382,6 +382,7 @@ class Template
         if (!Settings::get("no_autoembed_core_css")) {
             enqueueStylesheet("lib/css/core.scss");
         }
+
         do_event("enqueue_frontend_stylesheets");
 
         combinedStylesheetHtml();
@@ -411,49 +412,11 @@ class Template
 
         if ($description != '' && $description != false) {
             $description = apply_filter($description, "meta_description");
-            $$description = _esc($description);
-            if (!Settings::get("hide_meta_description")) {
-                echo '<meta name="description" content="'
-                . $description . '"/>';
-            }
+
+            echo '<meta name="description" content="'
+            . _esc($description) . '"/>';
         }
 
-        if (!Settings::get("disable_custom_layout_options")) {
-            $font = Settings::get("default_font");
-
-            $cssCode = "body{
-font-family: " . $font . ";
-font-size: " . Settings::get("font-size") . ";
-background-color: " . Settings::get("body-background-color") . ";
-color: " . Settings::get("body-text-color") . ";
-}";
-
-            $disableFunctions = getThemeMeta(
-                get_theme(),
-                "disable_functions"
-            );
-
-            $minifier = new Minify\CSS();
-            $minifier->add($cssCode);
-            if (!(is_array($disableFunctions)
-                    and in_array(
-                        "output_design_settings_styles",
-                        $disableFunctions
-                    ))
-            ) {
-                echo App\HTML\Style::fromString($minifier->minify());
-            }
-
-            if (Settings::get("video_width_100_percent")) {
-                echo "<style>
-  video {
-  width: 100% !important;
-  height: auto !important;
-  }
-           </style>
-        ";
-            }
-        }
         include_jquery();
         do_event("head");
     }

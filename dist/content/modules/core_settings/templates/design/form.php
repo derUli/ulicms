@@ -26,7 +26,6 @@ if (!$permissionChecker->hasPermission("design")) {
     $title_format = Settings::get("title_format");
     $font_size = Settings::get("font-size");
     $ckeditor_skin = Settings::get("ckeditor_skin");
-    $video_width_100_percent = Settings::get("video_width_100_percent");
     $font_sizes = $controller->getFontSizes();
     $no_mobile_design_on_tablet = Settings::get("no_mobile_design_on_tablet");
     $modManager = new ModuleManager();
@@ -46,16 +45,6 @@ if (!$permissionChecker->hasPermission("design")) {
     ?>
     <div class="scroll">
         <table style="width: 100%;">
-            <tr>
-                <td><strong><?php translate("DESIGN_OPTIONS_ENABLED"); ?> </strong></td>
-                <td><input type="checkbox" name="disable_custom_layout_options"
-                           class="js-switch"
-                           <?php
-                           if (!Settings::get("disable_custom_layout_options")) {
-                               echo " checked";
-                           }
-    ?>></td>
-            </tr>
             <tr>
                 <td style="width: 300px;"><strong><?php translate("title_format"); ?> </strong></td>
                 <td><input type="text" name="title_format"
@@ -266,19 +255,6 @@ if (!$permissionChecker->hasPermission("design")) {
                 </tr>
             <?php }
             ?>
-            <tr>
-                <td><strong><?php translate("HTML5_VIDEO_WIDTH_100_PERCENT"); ?> </strong>
-
-                <td><input type="checkbox" name="video_width_100_percent"
-                           class="js-switch"
-
-                           <?php
-                           if ($video_width_100_percent) {
-                               echo " checked";
-                           }
-    ?>
-                           value="video_width_100_percent"></td>
-            </tr>
             <tr>
                 <td><strong><?php translate("ADDITIONAL_MENUS"); ?> </strong>
 

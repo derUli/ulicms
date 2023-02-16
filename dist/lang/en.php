@@ -202,7 +202,6 @@ add_translation("SEARCH_ENGINES_INDEX", "Search engines may index");
 add_translation("SEARCH_ENGINES_NOINDEX", "search engines may not index");
 
 // Design
-add_translation("DESIGN_OPTIONS_ENABLED", "Design Options enabled");
 add_translation("FRONTEND_DESIGN", "Frontend Design");
 add_translation("BACKEND_DESIGN", "Backend Design");
 add_translation("EDITOR_SKIN", "Editor Skin");
@@ -399,8 +398,6 @@ add_translation("DOWNLOAD_AUDIO_INSTEAD", "But you can download the audio file h
 add_translation("UPLOAD_AUDIO", "Upload a Audio file");
 
 add_translation("MP3_FILE", "MP3 File");
-
-add_translation("HTML5_VIDEO_WIDTH_100_PERCENT", "100 % width for HTML 5 Videos");
 
 // Protokoll
 add_translation("LOG", "Log");

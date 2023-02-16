@@ -203,7 +203,6 @@ add_translation("SEARCH_ENGINES_INDEX", "Suchmaschinen dürfen die Website durch
 add_translation("SEARCH_ENGINES_NOINDEX", "Suchmaschinen werden ausgesperrt");
 
 // Design
-add_translation("DESIGN_OPTIONS_ENABLED", "Design Optionen aktiviert");
 add_translation("FRONTEND_DESIGN", "Frontend Design");
 add_translation("BACKEND_DESIGN", "Backend Design");
 add_translation("EDITOR_SKIN", "Editor Skin");
@@ -394,8 +393,6 @@ add_translation("AUDIO_OGG", "Audio Datei im OGG Vorbis Format (für Firefox)");
 add_translation("AUDIO_MP3", "MP3 Datei (für andere Browser)");
 add_translation("DOWNLOAD_AUDIO_INSTEAD", "Sie können die Audiodatei stattdessen hier herunterladen");
 add_translation("UPLOAD_AUDIO", "Audiodatei hochladen");
-
-add_translation("HTML5_VIDEO_WIDTH_100_PERCENT", "100 % Breite für HTML 5 Videos");
 
 // Protokoll
 add_translation("LOG", "Protokoll");
