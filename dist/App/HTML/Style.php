@@ -7,8 +7,9 @@ namespace App\HTML;
 use ModuleHelper;
 use App\Utils\File;
 
-// generates HTML style tags
-// please use stylesheet queue instead of this methods if possible
+/**
+ * Generates a link tag for a stylesheet file
+ */
 class Style
 {
     public static function fromExternalFile(
