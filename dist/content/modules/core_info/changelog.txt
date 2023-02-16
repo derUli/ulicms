@@ -7,19 +7,24 @@ Neue Features:
 * MobileDetect integriert
 * CrawlerDetect integriert
 * Fine Diff ersetzt durch jfcherng/php-diff
+* Auswahl der Schriftarten erweitert
 
 Fehlerkorrekturen:
-* Google Fonts entfernt
 * Einige UI Fixes
 * Fehler nach Dateiupload korrigiert
 
 Entfernte Features:
+* Google Fonts
 * Meta Keywords
+* Abrufen von Inhalten in anderen Formaten
+* Optionen in den Design-Einstellungen
 
 * Neue API-Methoden:
 * is_cli()
 * File::findAllFiles()
 * File::findAllDirs()
+* get_html_head()
+* html_head()
 
 Entfernte API-Methoden:
 * ArrayHelper::flatten()
@@ -103,6 +108,8 @@ Entfernte API-Methoden:
 * rootDirectory()
 * no_cache()
 * idefine()
+* get_head()
+* head()
 
 ===== Neues in UliCMS 2022.1 =====
 
