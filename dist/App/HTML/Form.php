@@ -11,9 +11,20 @@ use ModuleHelper;
 use Template;
 use App\Constants\RequestMethod;
 
-// this class contains method to build <form> tags
+/**
+ * This class contains method to build <form> tags
+ */
 class Form
 {
+    /**
+     * Generates method call form
+     * @param string $sClass
+     * @param string $sMethod
+     * @param array $otherVars
+     * @param string $requestMethod
+     * @param array $htmlAttributes
+     * @return string
+     */
     public static function buildMethodCallForm(
         string $sClass,
         string $sMethod,
@@ -44,6 +55,17 @@ class Form
         return $html;
     }
 
+    /**
+     * Generates method call button
+     * @param string $sClass
+     * @param string $sMethod
+     * @param string $buttonText
+     * @param array $buttonAttributes
+     * @param array $otherVars
+     * @param array $formAttributes
+     * @param string $requestMethod
+     * @return string
+     */
     public static function buildMethodCallButton(
         string $sClass,
         string $sMethod,
@@ -72,6 +94,13 @@ class Form
         return $html;
     }
 
+    /**
+     * Generates delete button
+     * @param string $url
+     * @param array $otherVars
+     * @param array $htmlAttributes
+     * @return type
+     */
     public static function deleteButton(
         string $url,
         array $otherVars = [],
@@ -107,6 +136,10 @@ class Form
         return optimizeHtml($html);
     }
 
+    /**
+     * Returns closing tag for HTML form
+     * @return string
+     */
     public static function endForm(): string
     {
         return "</form>";

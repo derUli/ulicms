@@ -319,7 +319,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase
     public function testFetchAll()
     {
         $result = Database::query(
-            "select id from {prefix}settings where
+            "select * from {prefix}settings where
         name in
         ('default_font', 'frontpage', 'homepage_title')
         order by name",
