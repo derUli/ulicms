@@ -57,7 +57,6 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         Vars::delete("headline");
         Vars::delete("title");
 
-        Settings::delete("hide_meta_generator");
         Settings::delete("disable_no_format_detection");
         Vars::delete("id");
     }
@@ -149,20 +148,6 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
                 '<meta charset="utf-8"/>'
             )
         );
-    }
-
-    public function testGetBaseMetasHideMetaGenerator()
-    {
-        Settings::set("hide_meta_generator", "1");
-        $expected = '<meta name="generator" content="UliCMS '
-                . cms_version() . '"/>';
-
-        $baseMetas = Template::getBaseMetas();
-        $this->assertFalse(str_contains($baseMetas, $expected));
-
-        Settings::delete("hide_meta_generator");
-        $baseMetas = Template::getBaseMetas();
-        $this->assertTrue(str_contains($baseMetas, $expected));
     }
 
     public function testGetBaseMetasDisableNoFormatDetection()

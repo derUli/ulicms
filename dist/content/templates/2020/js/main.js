@@ -23,6 +23,7 @@ $(() => {
         navigationTooltips: $("#fullpage").data("titles").split("||"),
         navigation: true,
         navigationPosition: 'right',
-        verticalCentered: false
+        verticalCentered: false,
+        licenseKey: ''
     });
 });

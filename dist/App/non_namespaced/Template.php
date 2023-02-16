@@ -359,10 +359,7 @@ class Template
             $robots = apply_filter($robots, "meta_robots");
             echo '<meta name="robots" content="' . $robots . '"/>';
         }
-        if (!Settings::get("hide_meta_generator")) {
-            echo Template::executeDefaultOrOwnTemplate("powered-by");
-            echo '<meta name="generator" content="UliCMS ' . cms_version() . '"/>';
-        }
+   
         output_favicon_code();
 
         if (!Settings::get("hide_shortlink") and (is_200() or is_403())) {

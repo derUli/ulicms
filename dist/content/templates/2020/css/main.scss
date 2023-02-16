@@ -129,6 +129,7 @@ body{
             animation-delay: 3s;
             -webkit-animation-delay: 3s;
             border: 2px solid #499649;
+
             &:hover{
                 border: 2px solid $box-shadow-color;
             }
@@ -193,8 +194,8 @@ audio, video, iframe, p{
 }
 
 video {
-  width: 100% !important;
-  height: auto !important;
+    width: 100% !important;
+    height: auto !important;
 }
 
 footer{

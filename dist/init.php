@@ -240,10 +240,6 @@ define(
             $useragent : 'UliCMS Release ' . cms_version()
 );
 
-if (!Settings::get('hide_meta_generator')) {
-    @send_header('X-Powered-By: UliCMS Release ' . cms_version());
-}
-
 $cache_period = Settings::get('cache_period');
 
 // by Check if the cache expiry is set.

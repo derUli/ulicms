@@ -54,8 +54,11 @@ function doLoadCheck($url, $maxRepeat = 100)
 
 $maxRepeat = 600;
 $urls = [
+    'http://localhost/ulicms-old/',
     'http://localhost/ulicms/',
+    'http://localhost/ulicms-old/lorem_ipsum.html',
     'http://localhost/ulicms/lorem_ipsum',
+    'http://localhost/ulicms-old/glueckskeks.html',
     'http://localhost/ulicms/glueckskeks',
 ];
 
@@ -67,10 +70,6 @@ foreach ($urls as $url) {
 
 
 foreach ($results as $url => $times) {
-    echo "$url:\n";
-    $count = count($times);
     $min = min($times);
-    // echo "Count: " . $count . "\n";
-    echo "Min Time: " . $min . "\n";
-    echo "\n";
+    echo "$url: $min\n";
 }
