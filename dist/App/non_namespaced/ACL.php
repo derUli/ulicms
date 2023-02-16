@@ -129,7 +129,7 @@ class ACL
     public function getAllGroups(string $order = 'id DESC'): array
     {
         $list = [];
-        $sql = "SELECT * FROM `" . tbname('groups') . "` ORDER by " . $order;
+        $sql = "SELECT id, name FROM `" . tbname('groups') . "` ORDER by " . $order;
         $result = db_query($sql);
         while ($assoc = db_fetch_assoc($result)) {
             $list[$assoc['id']] = $assoc['name'];

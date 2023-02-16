@@ -63,13 +63,13 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase
 
     public function testAnyReturnsTrue()
     {
-        $result = Database::query("select * from {prefix}settings where value <> ''", true);
+        $result = Database::query("select id from {prefix}settings where value <> ''", true);
         $this->assertTrue(Database::any($result));
     }
 
     public function testAnyReturnsFalse()
     {
-        $result = Database::query("select * from {prefix}settings where value <> value", true);
+        $result = Database::query("select id from {prefix}settings where value <> value", true);
         $this->assertFalse(Database::any($result));
     }
 
@@ -85,13 +85,13 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase
 
     public function testGetNumRowsAny()
     {
-        $result = Database::query("select * from {prefix}settings where name in ('homepage_title', 'frontpage', 'installed_at')", true);
+        $result = Database::query("select id from {prefix}settings where name in ('homepage_title', 'frontpage', 'installed_at')", true);
         $this->assertEquals(3, Database::getNumRows($result));
     }
 
     public function testGetNumRowsZero()
     {
-        $result = Database::query("select * from {prefix}settings where name in ('this_is_not_a_setting')", true);
+        $result = Database::query("select id from {prefix}settings where name in ('this_is_not_a_setting')", true);
         $this->assertEquals(0, Database::getNumRows($result));
     }
 
@@ -319,7 +319,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase
     public function testFetchAll()
     {
         $result = Database::query(
-            "select * from {prefix}settings where
+            "select id from {prefix}settings where
         name in
         ('default_font', 'frontpage', 'homepage_title')
         order by name",
@@ -611,7 +611,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase
         LoggerRegistry::register("sql_log", $this->getSQLLogger());
 
         Database::multiQuery(
-            "select * from {prefix}settings; select 'foo' as bar;"
+            "select id from {prefix}settings; select 'foo' as bar;"
             . "show tables;",
             true
         );

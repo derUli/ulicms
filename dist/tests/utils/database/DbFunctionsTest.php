@@ -80,12 +80,11 @@ class DbFunctionsTest extends \PHPUnit\Framework\TestCase
     {
         $datasets = Database::selectAll("settings");
         $this->assertGreaterThanOrEqual(50, db_num_rows($datasets));
-        ;
     }
 
     public function testDbQuery()
     {
-        $query = db_query("select * from " . tbname("settings") . " where name = 'homepage_title' or name = 'site_slogan'");
+        $query = db_query("select id from " . tbname("settings") . " where name = 'homepage_title' or name = 'site_slogan'");
         $this->assertEquals(2, db_num_rows($query));
     }
 

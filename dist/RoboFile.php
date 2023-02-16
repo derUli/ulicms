@@ -478,7 +478,7 @@ class RoboFile extends Tasks
     {
         $where = $component ? "component='" .
                 Database::escapeValue($component) . "'" : "1=1";
-        $result = Database::query("Select * from {prefix}dbtrack "
+        $result = Database::query("Select component, name, date from {prefix}dbtrack "
                         . "where $where order by component, date", true);
         while ($row = Database::fetchObject($result)) {
             $this->writeln("{$row->component} | {$row->name} | {$row->date}");
