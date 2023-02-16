@@ -222,4 +222,13 @@ $(() => {
         zenscroll.toY(0);
     });
 
+
+    $.fn.toggleVisibility = function (state) {
+        return this.each(function () {
+            $(this).css("visibility", state ? "visible" :
+                    (state === false ? "hidden" :
+                            $(this).css("visibility") === "hidden" ? "visible" : "hidden"));
+        });
+    };
+
 });

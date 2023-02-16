@@ -16,7 +16,7 @@ const loadThemePreview = (selectField) => {
 
     $(targetElement).show();
 
-    loadSpinner.css('visibility', 'visible');
+    loadSpinner.toggleVisibility(true);
 
     $.ajax({
         url: url,
@@ -31,14 +31,14 @@ const loadThemePreview = (selectField) => {
             // After image is loaded show it
             preloadImage.onload = () => {
                 previewImage.html(result);
-                loadSpinner.css('visibility', 'hidden');
+                loadSpinner.toggleVisibility(false);
                 previewImage.show();
             };
 
         },
         error: (jqXHR, textStatus, errorThrown) => {
             // If there is no preview image the controller returns status 404
-            loadSpinner.css('visibility', 'hidden');
+            loadSpinner.toggleVisibility(false);
             previewImage.hide();
         }
     });
