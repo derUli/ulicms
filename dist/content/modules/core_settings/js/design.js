@@ -4,7 +4,10 @@
 
 const loadThemePreview = (selectField) => {
     const url = $(selectField).find("option:selected").data("preview-url");
+
     const targetElement = $($(selectField).data("preview-target-element"));
+    const previewImage = targetElement.find(".preview");
+    const loadSpinner = targetElement.find('.fa-spinner');
 
     if (!url) {
         $(targetElement).hide();
@@ -12,22 +15,35 @@ const loadThemePreview = (selectField) => {
     }
 
     $(targetElement).show();
-    targetElement.find(".fa-spinner").css('visibility', 'visible');
+
+    loadSpinner.css('visibility', 'visible');
 
     $.ajax({
         url: url,
         success: (result) => {
-            targetElement.find(".preview").html(result);
-            targetElement.find(".fa-spinner").css('visibility', 'hidden');
-            targetElement.find(".preview").show();
+            const image = $(result);
+            const imageSrc = image.attr('src');
+
+            // Preload image file before showing it
+            const preloadImage = new Image();
+            preloadImage.src = image.attr('src');
+
+            // After image is loaded show it
+            preloadImage.onload = () => {
+                previewImage.html(result);
+                loadSpinner.css('visibility', 'hidden');
+                previewImage.show();
+            };
+
         },
         error: (jqXHR, textStatus, errorThrown) => {
-            targetElement.find(".fa-spinner").css('visibility', 'hidden');
-            targetElement.find(".preview").hide();
-            $(targetElement).hide();
+            // If there is no preview image the controller returns status 404
+            loadSpinner.css('visibility', 'hidden');
+            previewImage.hide();
         }
     });
 };
+
 
 const updateFontPreview = () => {
     const fontFamily = $("select#default_font").val();
