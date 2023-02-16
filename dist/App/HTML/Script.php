@@ -11,6 +11,14 @@ use ModuleHelper;
 // please use script queue instead of this methods if possible
 class Script
 {
+    /**
+     * Generates a <script> tag for file
+     * @param string $file
+     * @param bool $async
+     * @param bool $defer
+     * @param array $htmlAttributes
+     * @return string
+     */
     public static function fromFile(
         string $file,
         bool $async = false,
@@ -46,6 +54,14 @@ class Script
         return "<script{$attribHTML}></script>";
     }
 
+    /**
+     * Generates a inline <script> tag
+     * @param string|null $code
+     * @param bool $async
+     * @param bool $defer
+     * @param array $htmlAttributes
+     * @return string
+     */
     public static function fromString(
         ?string $code,
         bool $async = false,
