@@ -900,12 +900,12 @@ function get_base_metas(): string
     return Template::getBaseMetas();
 }
 
-function head(): void
+function html_head(): void
 {
     base_metas();
 }
 
-function get_head(): string
+function get_html_head(): string
 {
     return get_base_metas();
 }

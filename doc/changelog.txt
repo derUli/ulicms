@@ -10,11 +10,11 @@ Neue Features:
 * Auswahl der Schriftarten erweitert
 
 Fehlerkorrekturen:
-* Google Fonts entfernt
 * Einige UI Fixes
 * Fehler nach Dateiupload korrigiert
 
 Entfernte Features:
+* Google Fonts
 * Meta Keywords
 * Abrufen von Inhalten in anderen Formaten
 * Optionen in den Design-Einstellungen
@@ -23,6 +23,8 @@ Entfernte Features:
 * is_cli()
 * File::findAllFiles()
 * File::findAllDirs()
+* get_html_head()
+* html_head()
 
 Entfernte API-Methoden:
 * ArrayHelper::flatten()
@@ -106,6 +108,8 @@ Entfernte API-Methoden:
 * rootDirectory()
 * no_cache()
 * idefine()
+* get_head()
+* head()
 
 ===== Neues in UliCMS 2022.1 =====
 

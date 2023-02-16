@@ -12,18 +12,17 @@ const loadThemePreview = (selectField) => {
     }
 
     $(targetElement).show();
-    targetElement.find(".fa-spinner").show();
-    targetElement.find(".preview").hide();
+    targetElement.find(".fa-spinner").css('visibility', 'visible');
 
     $.ajax({
         url: url,
         success: (result) => {
             targetElement.find(".preview").html(result);
-            targetElement.find(".fa-spinner").hide();
+            targetElement.find(".fa-spinner").css('visibility', 'hidden');
             targetElement.find(".preview").show();
         },
         error: (jqXHR, textStatus, errorThrown) => {
-            targetElement.find(".fa-spinner").hide();
+            targetElement.find(".fa-spinner").css('visibility', 'hidden');
             targetElement.find(".preview").hide();
             $(targetElement).hide();
         }

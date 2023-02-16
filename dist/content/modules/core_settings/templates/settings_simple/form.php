@@ -121,24 +121,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
         ?>
         <tr>
             <td><strong><?php translate("timezone"); ?></strong></td>
-            <td><select name="timezone" size="1">
-                    <?php
-                    $timezones = $controller->getTimezones();
-    $current_timezone = Settings::get("timezone");
-    $current_timezone = trim($current_timezone);
-    sort($timezones);
-    $timezoneCount = count($timezones);
-    for ($i = 0; $i < $timezoneCount; $i++) {
-        $thisTimezone = $timezones[$i];
-        $thisTimezone = trim($thisTimezone);
-        if ($thisTimezone === $current_timezone) {
-            echo '<option value="' . $thisTimezone . '" selected>' . $thisTimezone . '</option>';
-        } else {
-            echo '<option value="' . $thisTimezone . '">' . $thisTimezone . '</option>';
-        }
-    }
-    ?>
-                </select></td>
+            <td><?php echo $controller->getTimezones();?></td>
         </tr>
         <tr>
             <td><strong><?php translate("search_engines"); ?></strong></td>

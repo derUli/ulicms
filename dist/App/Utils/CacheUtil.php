@@ -144,12 +144,11 @@ class CacheUtil
         $moduleManager = new ModuleManager();
         $moduleManager->sync();
 
-        if (class_exists("DesignSettingsController")) {
-            $designSettingsController = ControllerRegistry::get(
-                DesignSettingsController::class
-            );
-            $designSettingsController->_generateSCSSToFile();
-        }
+        $designSettingsController = ControllerRegistry::get(
+            DesignSettingsController::class
+        );
+        $designSettingsController->_generateSCSSToFile();
+
 
         do_event("after_clear_cache");
     }

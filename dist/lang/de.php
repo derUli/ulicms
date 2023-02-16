@@ -297,8 +297,6 @@ add_translation("PKGSRC_NOT_DEFINED", "pkg_src wurde nicht definiert!");
 add_translation("NO_PACKAGES_AVAILABLE", "Keine Pakete verfügbar oder Paketquelle nicht erreichbar.");
 add_translation("ASK_FOR_INSTALL_PACKAGE", "%pkg% installieren?\\nBestehende Dateien werden überschrieben.");
 add_translation("NO_DESCRIPTION_AVAILABLE", "Keine Beschreibung verfügbar.");
-add_translation("PHARDATA_NOT_AVAILABLE", "Eine für das Entpacken der Pakete benötigte PHP-Funktion ist nicht verfügbar.<br/>
-Bitte aktualisieren Sie die Serversoftware auf PHP Version 5.3.0 oder neuer.");
 add_translation("NOTHING_TO_DO", "Nichts zu tun.");
 add_translation("DOWNLOAD_FAILED", "Download fehlgeschlagen (%pkg%)");
 add_translation("INSTALLATION_SUCCESSFUL", "Installation erfolgreich (%pkg%)");

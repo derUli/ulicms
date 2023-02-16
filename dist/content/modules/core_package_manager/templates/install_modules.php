@@ -21,12 +21,6 @@ if (!$permissionChecker->hasPermission("install_packages")) {
             <strong><?php translation("error"); ?></strong> <br />
             <?php translate("pkgsrc_not_defined"); ?></p>
         <?php
-    } elseif (!class_exists("PharData")) {
-        ?>
-        <p>
-            <strong><?php translate("error"); ?></strong> <br />
-            <?php translate("phardata_not_available"); ?></p>
-        <?php
     } else {
         $version = new UliCMSVersion();
         $internalVersion = implode('.', $version->getInternalVersion());

@@ -145,6 +145,7 @@ if (!is_dir(ULICMS_CACHE_BASE)) {
 if (!is_dir(ULICMS_LOG)) {
     mkdir(ULICMS_LOG);
 }
+
 if (!is_dir(ULICMS_GENERATED)) {
     mkdir(ULICMS_GENERATED);
 }
@@ -157,25 +158,23 @@ if (!is_file($htaccessLogFolderTarget)) {
 
 Translation::init();
 
-if (class_exists('Path')) {
-    if (isset($config->exception_logging) && $config->exception_logging) {
-        LoggerRegistry::register(
-            'exception_log',
-            new Logger(Path::resolve('ULICMS_LOG/exception_log'))
-        );
-    }
-    if (isset($config->query_logging) && $config->query_logging) {
-        LoggerRegistry::register(
-            'sql_log',
-            new Logger(Path::resolve('ULICMS_LOG/sql_log'))
-        );
-    }
-    if (isset($config->phpmailer_logging) && $config->phpmailer_logging) {
-        LoggerRegistry::register(
-            'phpmailer_log',
-            new Logger(Path::resolve('ULICMS_LOG/phpmailer_log'))
-        );
-    }
+if (isset($config->exception_logging) && $config->exception_logging) {
+    LoggerRegistry::register(
+        'exception_log',
+        new Logger(Path::resolve('ULICMS_LOG/exception_log'))
+    );
+}
+if (isset($config->query_logging) && $config->query_logging) {
+    LoggerRegistry::register(
+        'sql_log',
+        new Logger(Path::resolve('ULICMS_LOG/sql_log'))
+    );
+}
+if (isset($config->phpmailer_logging) && $config->phpmailer_logging) {
+    LoggerRegistry::register(
+        'phpmailer_log',
+        new Logger(Path::resolve('ULICMS_LOG/phpmailer_log'))
+    );
 }
 
 function noPerms(): void

@@ -899,6 +899,13 @@ pre,
 .theme-preview {
     margin: auto;
     max-height: 80vh;
+    position: relative;
+
+    .fa-spinner {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
 }
 
 .nav-tabs, .nav-pills {

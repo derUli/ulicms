@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Utils\CacheUtil;
+use jessedp\Timezones\Timezones;
 
 class SimpleSettingsController extends Controller
 {
@@ -46,8 +47,20 @@ class SimpleSettingsController extends Controller
         );
     }
 
-    public function getTimezones(): array
+    public function getTimezones(): string
     {
-        return DateTimeZone::listIdentifiers(DateTimeZone::ALL);
+        $html = Timezones::create(
+            'timezone',
+            Settings::get('timezone'),
+            [
+                'attr' => [
+                    'class' => 'form-control select2'
+                ],
+                'with_regions' => true
+            ]
+        );
+
+        return str_replace(Timezones::WHITESPACE_SEP, ' ', $html);
+        ;
     }
 }

@@ -334,7 +334,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
     public function testHead()
     {
         ob_start();
-        head();
+        html_head();
         $baseMetas = ob_get_clean();
 
         $this->assertTrue(str_contains($baseMetas, '<meta http-equiv="content-type" content="text/html; charset=utf-8"/>'));
@@ -343,7 +343,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
 
     public function testGetHead()
     {
-        $baseMetas = get_head();
+        $baseMetas = get_html_head();
         $this->assertTrue(str_contains($baseMetas, '<meta http-equiv="content-type" content="text/html; charset=utf-8"/>'));
         $this->assertTrue(str_contains($baseMetas, '<meta charset="utf-8"/>'));
     }
