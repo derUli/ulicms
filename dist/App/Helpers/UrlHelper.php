@@ -8,8 +8,11 @@ defined('ULICMS_ROOT') or exit('no direct script access allowed');
 
 class UrlHelper extends \Helper
 {
-    // this method removes the get parameters string from $url
-    // and returns the url without get parameters
+    /**
+     * This method removes the get parameters from an URL
+     * @param string $url
+     * @return string
+     */
     public static function getUrlWithoutGetParameters(string $url): string
     {
         $parsedUri = parse_url($url);
