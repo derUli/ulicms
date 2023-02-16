@@ -6,6 +6,7 @@ require_once __DIR__ . "/RoboTestBase.php";
 use League\Container\ContainerAwareInterface;
 use League\Container\ContainerAwareTrait;
 use Robo\TaskAccessor;
+use App\Constants\DefaultValues;
 
 class RoboSettingsTest extends RoboTestBase
 {
@@ -45,7 +46,7 @@ class RoboSettingsTest extends RoboTestBase
     public function testSettingsPrintsNull()
     {
         $output = $this->runRoboCommand(["settings:get", "gibts_nicht"]);
-        $this->assertStringContainsString('[NULL]', $output);
+        $this->assertStringContainsString(DefaultValues::NULL_VALUE, $output);
     }
 
     public function testSettingsSetToValue()
@@ -66,7 +67,8 @@ class RoboSettingsTest extends RoboTestBase
             [
                 "settings:set",
                 "foo1",
-                '[NULL]']
+                DefaultValues::NULL_VALUE
+            ]
         );
         $this->assertNull(Settings::get("foo1"));
     }

@@ -7,6 +7,7 @@ use App\Services\Connectors\AvailablePackageVersionMatcher;
 use App\Utils\CacheUtil;
 use Robo\Tasks;
 use App\Exceptions\SqlException;
+use App\Constants\DefaultValues;
 
 /**
  * This is project's console commands configuration for Robo task runner.
@@ -100,7 +101,7 @@ class RoboFile extends Tasks
     public function settingsGet($settingsName): void
     {
         $value = Settings::get($settingsName) !== null ?
-                Settings::get($settingsName) : '[NULL]';
+                Settings::get($settingsName) : DefaultValues::NULL_VALUE;
         $this->writeln($value);
     }
 
@@ -111,7 +112,7 @@ class RoboFile extends Tasks
      */
     public function settingsSet($settingsName, $value): void
     {
-        if (strtoupper($value) !== '[NULL]') {
+        if (strtoupper($value) !== DefaultValues::NULL_VALUE) {
             Settings::set($settingsName, $value);
         } else {
             Settings::delete($settingsName);

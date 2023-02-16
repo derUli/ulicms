@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Phpfastcache\Config\ConfigurationOption;
 use Phpfastcache\Helper\Psr16Adapter;
 use App\Security\Hash;
+use App\Constants\DefaultValues;
 
 // class for handling system settings
 class Settings
@@ -36,7 +37,14 @@ class Settings
         ?string $type = 'str'
     ) {
         $cachedValue = self::retrieveFromCache($key);
-        if ($cachedValue) {
+        
+        // Is cached but null
+        if($cachedValue === DefaultValues::NULL_VALUE){
+            return null;
+        }
+        
+        // Is cached and has a value
+        if ($cachedValue !== NULL) {
             return self::convertVar($cachedValue, $type);
         }
 
@@ -99,7 +107,9 @@ class Settings
         $value,
         ?string $type = 'str'
     ): void {
-        self::storeInCache($key, $value);
+        $cacheValue = $value !== NULL ? $value : DefaultValues::NULL_VALUE;
+        
+        self::storeInCache($key, $cacheValue);
 
         $key = db_escape($key);
         $originalValue = self::convertVar($value, $type);
@@ -197,6 +207,11 @@ class Settings
         return $result;
     }
 
+    /**
+     * Retrieve existing setting from cache
+     * @param string $key
+     * @return mixed
+     */
     protected static function retrieveFromCache(string $key): mixed
     {
         $adapter = self::getCacheAdapter();
@@ -204,6 +219,12 @@ class Settings
         return $adapter->get($cacheUid);
     }
 
+    /**
+     * Store setting in cache
+     * @param string $key
+     * @param type $value
+     * @return bool
+     */
     protected static function storeInCache(string $key, $value): bool
     {
         $adapter = self::getCacheAdapter();
@@ -211,6 +232,11 @@ class Settings
         return $adapter->set($cacheUid, $value);
     }
 
+    /**
+     * Delete setting from cache
+     * @param string $key
+     * @return bool
+     */
     protected static function deleteInCache(string $key): bool
     {
         $adapter = self::getCacheAdapter();
@@ -218,11 +244,20 @@ class Settings
         return $adapter->delete($cacheUid);
     }
 
+    /**
+     * Generate Cache uid from settings name
+     * @param type $key
+     * @return type
+     */
     protected static function generateCacheUid($key)
     {
         return Hash::hashCacheIdentifier($key);
     }
 
+    /**
+     * Get caching adapter
+     * @return Psr16Adapter
+     */
     protected static function getCacheAdapter(): Psr16Adapter
     {
         if (self::$adapter) {
@@ -233,6 +268,8 @@ class Settings
             "defaultTtl" => ONE_DAY_IN_SECONDS
         );
 
+        // Use a Memstatic adapter, because persistent caching would worse 
+        // performance instead of improving it
         self::$adapter = new Psr16Adapter(
             'Memstatic',
             new ConfigurationOption($cacheConfig)

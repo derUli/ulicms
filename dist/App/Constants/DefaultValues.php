@@ -110,4 +110,7 @@ class DefaultValues
             '<video>' .
             '<wbr>' .
             '<menu>';
+    
+    // Where we have to display null values
+    const NULL_VALUE = '[NULL]';
 }

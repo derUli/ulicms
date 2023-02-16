@@ -12,6 +12,7 @@ class ButtonType
     public const BUTTON_BUTTON = 'button';
     public const BUTTON_SUBMIT = 'submit';
     public const BUTTON_RESET = 'reset';
+    
     public const TYPE_BASIC = 'btn';
     public const TYPE_DEFAULT = 'btn btn-default';
     public const TYPE_PRIMARY = 'btn btn-primary';
