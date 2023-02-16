@@ -1,9 +1,12 @@
 <?php
 
 use App\Utils\File;
+use Spatie\Snapshots\MatchesSnapshots;
 
 class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase
 {
+    use MatchesSnapshots;
+
     private $initialSettings = [];
 
     protected function setUp(): void
@@ -90,16 +93,7 @@ class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase
     public function testGetFontFamilys()
     {
         $controller = new DesignSettingsController();
-        $fonts = $controller->getFontFamilys();
-        $this->assertEquals(
-            "Arial, 'Helvetica Neue', Helvetica, sans-serif",
-            $fonts["Arial"]
-        );
-        $this->assertGreaterThanOrEqual(20, count($fonts));
-        foreach ($fonts as $name => $family) {
-            $this->assertNotEmpty($name);
-            $this->assertNotEmpty($family);
-        }
+        $this->assertMatchesJsonSnapshot($controller->getFontFamilys());
     }
 
     public function testGetThemePreviewReturnsPath()

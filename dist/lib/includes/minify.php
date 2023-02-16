@@ -86,8 +86,8 @@ function minifyJs(): string
     foreach ($scripts as $script) {
         $script = ltrim($script, '/');
         if (is_file($script)
-                and pathinfo($script, PATHINFO_EXTENSION) == "js"
-                and filemtime($script) > $lastmod) {
+                && pathinfo($script, PATHINFO_EXTENSION) == "js"
+                && filemtime($script) > $lastmod) {
             $lastmod = filemtime($script);
         }
     }

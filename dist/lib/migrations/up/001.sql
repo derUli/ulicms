@@ -256,7 +256,7 @@ INSERT INTO `{prefix}settings` (`id`, `name`, `value`) VALUES
 (28, 'timezone', 'Europe/Berlin'),
 (30, 'pkg_src', 'https://packages.ulicms.de/{version}/'),
 (31, 'theme', 'impro17'),
-(33, 'default_font', 'Arial, \'Helvetica Neue\', Helvetica, sans-serif'),
+(33, 'default_font', 'Calibri, Candara, Gill Sans, Gill Sans MT, DejaVu Sans, Verdana, Geneva, sans-serif'),
 (34, 'font-size', '16px'),
 (35, 'header-background-color', '#35A1E8'),
 (36, 'body-background-color', '#FCFCFC'),

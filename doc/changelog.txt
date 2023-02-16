@@ -7,6 +7,7 @@ Neue Features:
 * MobileDetect integriert
 * CrawlerDetect integriert
 * Fine Diff ersetzt durch jfcherng/php-diff
+* Auswahl der Schriftarten erweitert
 
 Fehlerkorrekturen:
 * Google Fonts entfernt
