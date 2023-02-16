@@ -15,6 +15,12 @@ class ListItem
     private $text;
     private $selected;
 
+    /**
+     * Constructor
+     * @param type $value
+     * @param type $text
+     * @param bool $selected
+     */
     public function __construct($value, $text, bool $selected = false)
     {
         $this->value = $value;
@@ -22,6 +28,10 @@ class ListItem
         $this->selected = $selected;
     }
 
+    /**
+     * Get option as HTML
+     * @return string
+     */
     public function getHtml(): string
     {
         if ($this->selected) {
@@ -32,41 +42,77 @@ class ListItem
                 Template::getEscape($this->text) . '</option>';
     }
 
+    /**
+     * ListItem to string
+     * @return string
+     */
     public function __toString(): string
     {
         return $this->getHtml();
     }
 
+    /**
+     * Output element as HTML
+     * @return void
+     */
     public function render(): void
     {
         echo $this->getHtml();
     }
 
+
+    /**
+     * Get value
+     * @return type
+     */
     public function getValue()
     {
         return $this->value;
     }
 
+
+    /**
+     * Get text
+     * @return type
+     */
     public function getText()
     {
         return $this->text;
     }
 
+    /**
+     * Get selected item
+     * @return bool
+     */
     public function getSelected(): bool
     {
         return $this->selected;
     }
 
+    /**
+     * Set value
+     * @param type $val
+     */
     public function setValue($val)
     {
         $this->value = $val !== null ? (string) $val : null;
     }
 
+    /**
+     * Set text
+     * @param type $val
+     * @return void
+     */
     public function setText($val): void
     {
         $this->text = $val !== null ? (string) $val : null;
     }
 
+    /**
+     * Set selected
+     * @param bool $val
+     * @return void
+     */
     public function setSelected(bool $val): void
     {
         $this->selected = $val;

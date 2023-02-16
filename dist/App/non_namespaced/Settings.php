@@ -153,7 +153,7 @@ class Settings
     public static function getAll(string $order = "name"): array
     {
         $datasets = [];
-        $result = Database::query("SELECT name, value FROM `{prefix}settings` "
+        $result = Database::query("SELECT * FROM `{prefix}settings` "
                         . "order by $order", true);
         while ($dataset = Database::fetchObject($result)) {
             $datasets[] = $dataset;

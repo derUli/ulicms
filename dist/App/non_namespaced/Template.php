@@ -359,7 +359,7 @@ class Template
             $robots = apply_filter($robots, "meta_robots");
             echo '<meta name="robots" content="' . $robots . '"/>';
         }
-   
+
         output_favicon_code();
 
         if (!Settings::get("hide_shortlink") and (is_200() or is_403())) {

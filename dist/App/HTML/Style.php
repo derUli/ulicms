@@ -9,11 +9,11 @@ defined('ULICMS_ROOT') or exit('no direct script access allowed');
 use ModuleHelper;
 use App\Utils\File;
 
-/**
- * Generates a <link> tag for a stylesheet file
- */
 class Style
 {
+    /**
+     * Generates a <link> tag for a stylesheet file
+     */
     public static function fromExternalFile(
         string $href,
         ?string $media = null,

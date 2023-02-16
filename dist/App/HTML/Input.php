@@ -76,11 +76,6 @@ class Input
         return self::textArea($name, $value, $rows, $cols, $htmlAttributes);
     }
 
-    /*
-
-     * 	<textarea name="content" id="content" cols=60 rows=20 class="<?php esc($editor); ?>" data-mimetype="text/html"
-     *      */
-
     public static function password(
         string $name,
         $value,
