@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Constants;
 
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
+
 /**
  * Targets for HTML Links
  */

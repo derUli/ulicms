@@ -9,6 +9,9 @@ defined('ULICMS_ROOT') or exit('no direct script access allowed');
 use ModuleHelper;
 use App\Utils\File;
 
+/**
+ * Utils to generate <style> tags
+ */
 class Style
 {
     /**

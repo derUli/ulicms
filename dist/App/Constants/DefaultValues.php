@@ -1,6 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Constants;
+
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
 
 /**
  * Default Values
@@ -110,7 +115,7 @@ class DefaultValues
             '<video>' .
             '<wbr>' .
             '<menu>';
-    
+
     // Where we have to display null values
-    const NULL_VALUE = '[NULL]';
+    public const NULL_VALUE = '[NULL]';
 }

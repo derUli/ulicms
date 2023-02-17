@@ -8,7 +8,9 @@ defined('ULICMS_ROOT') or exit('no direct script access allowed');
 
 use Template;
 
-// represents a list item in a singleSelect() or multiSelect()
+/**
+ * Represents a list item in a singleSelect() or multiSelect()
+ */
 class ListItem
 {
     private $value;

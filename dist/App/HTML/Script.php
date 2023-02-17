@@ -9,6 +9,9 @@ defined('ULICMS_ROOT') or exit('no direct script access allowed');
 use App\Utils\File;
 use ModuleHelper;
 
+/**
+ * Utils to generate HTML <script> Tags
+ */
 class Script
 {
     /**

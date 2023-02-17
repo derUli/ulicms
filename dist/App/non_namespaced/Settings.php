@@ -37,14 +37,14 @@ class Settings
         ?string $type = 'str'
     ) {
         $cachedValue = self::retrieveFromCache($key);
-        
+
         // Is cached but null
-        if($cachedValue === DefaultValues::NULL_VALUE){
+        if ($cachedValue === DefaultValues::NULL_VALUE) {
             return null;
         }
-        
+
         // Is cached and has a value
-        if ($cachedValue !== NULL) {
+        if ($cachedValue !== null) {
             return self::convertVar($cachedValue, $type);
         }
 
@@ -107,8 +107,8 @@ class Settings
         $value,
         ?string $type = 'str'
     ): void {
-        $cacheValue = $value !== NULL ? $value : DefaultValues::NULL_VALUE;
-        
+        $cacheValue = $value !== null ? $value : DefaultValues::NULL_VALUE;
+
         self::storeInCache($key, $cacheValue);
 
         $key = db_escape($key);
@@ -268,7 +268,7 @@ class Settings
             "defaultTtl" => ONE_DAY_IN_SECONDS
         );
 
-        // Use a Memstatic adapter, because persistent caching would worse 
+        // Use a Memstatic adapter, because persistent caching would worse
         // performance instead of improving it
         self::$adapter = new Psr16Adapter(
             'Memstatic',

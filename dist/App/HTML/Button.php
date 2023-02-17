@@ -9,10 +9,20 @@ defined('ULICMS_ROOT') or exit('no direct script access allowed');
 use App\Constants\ButtonType;
 use ModuleHelper;
 
-// This class contains helper methods to build Bootstrap buttons
-// see https://getbootstrap.com/docs/3.3/components/
+/**
+ * This class contains helper methods to build Bootstrap buttons
+ * See https://getbootstrap.com/docs/3.3/components/
+ */
 class Button
 {
+    /**
+     * Generates Button
+     * @param string $text
+     * @param string $type
+     * @param array $htmlAttributes
+     * @param bool $allowHtml
+     * @return string
+     */
     public static function button(
         string $text,
         string $type = ButtonType::BUTTON_SUBMIT,
@@ -35,6 +45,14 @@ class Button
         return "<button {$attributesHtml}>{$text}</button>";
     }
 
+    /**
+     * Generates default button
+     * @param string $text
+     * @param string $type
+     * @param array $htmlAttributes
+     * @param bool $allowHtml
+     * @return string
+     */
     public static function default(
         string $text,
         string $type = ButtonType::BUTTON_SUBMIT,
@@ -48,6 +66,14 @@ class Button
         return self::button($text, $type, $htmlAttributes, $allowHtml);
     }
 
+    /**
+     * Generates primary button
+     * @param string $text
+     * @param string $type
+     * @param array $htmlAttributes
+     * @param bool $allowHtml
+     * @return string
+     */
     public static function primary(
         string $text,
         string $type = ButtonType::BUTTON_SUBMIT,
@@ -61,6 +87,14 @@ class Button
         return self::button($text, $type, $htmlAttributes, $allowHtml);
     }
 
+    /**
+     * Generates success button
+     * @param string $text
+     * @param string $type
+     * @param array $htmlAttributes
+     * @param bool $allowHtml
+     * @return type
+     */
     public static function success(
         string $text,
         string $type = ButtonType::BUTTON_SUBMIT,
@@ -74,6 +108,14 @@ class Button
         return self::button($text, $type, $htmlAttributes, $allowHtml);
     }
 
+    /**
+     * Generates info button
+     * @param string $text
+     * @param string $type
+     * @param array $htmlAttributes
+     * @param bool $allowHtml
+     * @return string
+     */
     public static function info(
         string $text,
         string $type = ButtonType::BUTTON_SUBMIT,
@@ -87,6 +129,14 @@ class Button
         return self::button($text, $type, $htmlAttributes, $allowHtml);
     }
 
+    /**
+     * Generates warning button
+     * @param string $text
+     * @param string $type
+     * @param array $htmlAttributes
+     * @param bool $allowHtml
+     * @return string
+     */
     public static function warning(
         string $text,
         string $type = ButtonType::BUTTON_SUBMIT,
@@ -100,6 +150,14 @@ class Button
         return self::button($text, $type, $htmlAttributes, $allowHtml);
     }
 
+    /**
+     * Generates danger button
+     * @param string $text
+     * @param string $type
+     * @param array $htmlAttributes
+     * @param bool $allowHtml
+     * @return string
+     */
     public static function danger(
         string $text,
         string $type = ButtonType::BUTTON_SUBMIT,
@@ -113,6 +171,14 @@ class Button
         return self::button($text, $type, $htmlAttributes, $allowHtml);
     }
 
+    /**
+     * Generates link button
+     * @param string $text
+     * @param string $type
+     * @param array $htmlAttributes
+     * @param bool $allowHtml
+     * @return string
+     */
     public static function link(
         string $text,
         string $type = ButtonType::BUTTON_SUBMIT,
