@@ -6,7 +6,6 @@ namespace App\Constants;
 
 defined('ULICMS_ROOT') or exit('no direct script access allowed');
 
-
 class ModuleEventConstants
 {
     public const RUNS_ONCE = 'once';
