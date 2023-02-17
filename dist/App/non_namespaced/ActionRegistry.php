@@ -131,11 +131,21 @@ class ActionRegistry
         return null;
     }
 
+    /**
+     * Get all actions
+     * @return array
+     */
     public static function getActions(): array
     {
         return self::$actions;
     }
 
+    
+    /**
+     * Get action
+     * @param string $action
+     * @return string|null
+     */
     public static function getAction(string $action): ?string
     {
         return isset(self::$actions[$action]) ?

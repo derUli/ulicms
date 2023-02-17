@@ -52,7 +52,7 @@ function doLoadCheck($url, $maxRepeat = 100)
     return $times;
 }
 
-$maxRepeat = 600;
+$maxRepeat = 1000;
 $urls = [
     'http://localhost/ulicms-old/',
     'http://localhost/ulicms/',

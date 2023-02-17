@@ -2,42 +2,64 @@
 
 declare(strict_types=1);
 
-// this class renders the backend main navigation menu
-class AdminMenu
-{
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
+/**
+ * This class renders the admin menu
+ */
+class AdminMenu {
+
     private $children = [];
 
-    public function __construct(array $children = [])
-    {
+    /**
+     * Constructor
+     * @param array $children
+     */
+    public function __construct(array $children = []) {
         $this->children = $children;
     }
+    
+    /**
+     * Get children
+     * @return array
+     */
 
-    public function getChildren(): array
-    {
+    public function getChildren(): array {
         return $this->children;
     }
+    
+    /**
+     * Set children
+     * @param array $value
+     * @return void
+     */
 
-    public function setChildren(array $value): void
-    {
+    public function setChildren(array $value): void {
         $this->children = $value;
     }
 
-    public function hasChildren(): bool
-    {
+    /**
+     * Check if the menu has children
+     * @return bool
+     */
+    public function hasChildren(): bool {
         return (count($this->children) > 0);
     }
-
-    // render the menu as list which is formatted by SCSS
-    public function render(): string
-    {
-        $html = "<ul>";
+    
+    /**
+     * Render the menu to HTML
+     * @return string
+     */
+    public function render(): string {
+        $html = '<ul>';
         foreach ($this->children as $child) {
             // only render items for that the current user has permissions
             if ($child->userHasPermission()) {
                 $html .= $child->render();
             }
         }
-        $html .= "</ul>";
+        $html .= '</ul>';
         return $html;
     }
+
 }
