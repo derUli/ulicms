@@ -33,17 +33,4 @@ class PathTest extends \PHPUnit\Framework\TestCase
             Path::resolve("ULICMS_LOG/exception_log/foo.log")
         );
     }
-
-    public function testResolveAndNormalize()
-    {
-        $expected = str_replace(
-            '/',
-            DIRECTORY_SEPARATOR,
-            "/content/log/exception_log/foo.log"
-        );
-        $this->assertStringEndsWith(
-            $expected,
-            Path::resolveAndNormalize("ULICMS_LOG/exception_log/foo.log")
-        );
-    }
 }

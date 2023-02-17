@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 class Path
 {
+    /**
+     * Normalize path
+     * @param string $path
+     * @return string
+     */
     public static function normalize(string $path): string
     {
         $path = str_replace("\\", DIRECTORY_SEPARATOR, $path);
@@ -11,14 +16,11 @@ class Path
         return $path;
     }
 
-    public static function resolveAndNormalize(string $path): string
-    {
-        $path = self::resolve($path);
-        $path = self::normalize($path);
-        return $path;
-    }
-
-    // resolves a path including placeholder constants such as ULICMS_ROOT
+    /**
+     * Resolves a path including placeholder constants such as ULICMS_ROOT
+     * @param string $path
+     * @return string
+     */
     public static function resolve(string $path): string
     {
         $path = str_ireplace("ULICMS_ROOT", rtrim(ULICMS_ROOT, '/'), $path);

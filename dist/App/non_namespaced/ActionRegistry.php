@@ -140,7 +140,7 @@ class ActionRegistry
         return self::$actions;
     }
 
-    
+
     /**
      * Get action
      * @param string $action
