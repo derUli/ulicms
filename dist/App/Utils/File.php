@@ -27,7 +27,7 @@ class File
         return $ext;
     }
 
-    // Delete a file  or a directory if it exist
+    // Delete a file or a directory if it exist
     public static function deleteIfExists(string $file): bool
     {
         if (is_file($file)) {
