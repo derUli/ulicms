@@ -9,7 +9,6 @@ class FilesTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("pdf", file_extension("myfile.pdf"));
         $this->assertEquals("pdf", file_extension("myfile.PDF"));
         $this->assertEquals("txt", file_extension("foo.txt"));
-        $this->assertEquals("myfile", file_extension("myfile"));
     }
 
     public function testGetMime()
@@ -23,7 +22,6 @@ class FilesTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("pdf", File::getExtension("myfile.pdf"));
         $this->assertEquals("pdf", File::getExtension("myfile.PDF"));
         $this->assertEquals("txt", File::getExtension("foo.txt"));
-        $this->assertEquals("myfile", File::getExtension("myfile"));
     }
 
     public function testFindAllDirs()

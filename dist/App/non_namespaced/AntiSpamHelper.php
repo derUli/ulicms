@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
+
+/**
+ * Class with methods for checking comments for spam
+ */
 class AntiSpamHelper extends Helper
 {
     // checking if this Country is blocked by spamfilter
@@ -46,7 +52,11 @@ class AntiSpamHelper extends Helper
         return false;
     }
 
-    // returns true if a string contains chinese chars
+    /**
+     * Check if a string contains chinese chars
+     * @param string|null $str
+     * @return bool
+     */
     public static function isChinese(?string $str): bool
     {
         if (!$str) {
@@ -56,7 +66,11 @@ class AntiSpamHelper extends Helper
         return (bool) preg_match("/\p{Han}+/u", $str);
     }
 
-    // returns true if a string contains cyrillic chars
+    /**
+     * Check if a string contains cyrillic chars
+     * @param string|null $str
+     * @return bool
+     */
     public static function isCyrillic(?string $str): bool
     {
         if (!$str) {
@@ -66,8 +80,11 @@ class AntiSpamHelper extends Helper
         return (bool) preg_match('/\p{Cyrillic}+/u', $str);
     }
 
-    // returns true if a string contains chars in
-    // right to left languages such as arabic
+    /**
+     * Check if a string contains text in right to left languages
+     * @param string|null $str
+     * @return bool
+     */
     public static function isRtl(?string $str): bool
     {
         if (!$str) {
@@ -78,9 +95,12 @@ class AntiSpamHelper extends Helper
         return (bool) preg_match($rtl_chars_pattern, $str);
     }
 
-    // returns the first matching word if the string contains badwords
-    // badwords can be specified at the spamfilter settings
-    // returns null if there are no badwords
+    /**
+     * Check if the string contains forbidden words
+     * @param string|null $str
+     * @param array $words_blacklist
+     * @return type
+     */
     public static function containsBadwords(
         ?string $str,
         array $words_blacklist = null
@@ -111,69 +131,25 @@ class AntiSpamHelper extends Helper
         return null;
     }
 
-    // returns true if the spamfilter is enabled
+    /**
+     * Check if the spam filter is enabled
+     * @return bool
+     */
     public static function isSpamFilterEnabled(): bool
     {
         return Settings::get("spamfilter_enabled") == "yes";
     }
 
-    // returns true if this is a bot, based on a static useragent list
+    /**
+     * Check if the client is a bot / crawler based on it's user agent
+     * @param string|null $useragent
+     * @return bool
+     */
     public static function checkForBot(?string $useragent = null): bool
     {
-        if (!$useragent && isset($_SERVER['HTTP_USER_AGENT'])) {
-            $useragent = $_SERVER['HTTP_USER_AGENT'];
-        }
+        $useragent = $useragent ?? Request::getUserAgent();
 
-        if (!$useragent) {
-            return false;
-        }
-        $bots = [
-            "Indy",
-            "Blaiz",
-            "Java",
-            "libwww-perl",
-            "Python",
-            "OutfoxBot",
-            "User-Agent",
-            "PycURL",
-            "AlphaServer",
-            "T8Abot",
-            "Syntryx",
-            "WinHttp",
-            "WebBandit",
-            "nicebot",
-            "Teoma",
-            "alexa",
-            "froogle",
-            "inktomi",
-            "looksmart",
-            "URL_Spider_SQL",
-            "Firefly",
-            "NationalDirectory",
-            "Ask Jeeves",
-            "TECNOSEEK",
-            "InfoSeek",
-            "WebFindBot",
-            "girafabot",
-            "crawler",
-            "www.galaxy.com",
-            "Googlebot",
-            "Scooter",
-            "Slurp",
-            "appie",
-            "FAST",
-            "WebBug",
-            "Spade",
-            "ZyBorg",
-            "rabaz"
-        ];
-
-        foreach ($bots as $bot) {
-            if ($useragent && stripos($useragent, $bot) !== false) {
-                return true;
-            }
-        }
-        return false;
+        return is_crawler($useragent);
     }
 
     // This function checks if the domain of an email address has a mx nds entry

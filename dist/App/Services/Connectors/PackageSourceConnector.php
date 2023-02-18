@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Services\Connectors;
 
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
 use Settings;
 
 use function cms_version;
@@ -19,11 +21,13 @@ class PackageSourceConnector
         if (!$packageSourceUrl) {
             $packageSourceUrl = Settings::get("pkg_src");
         }
+
         $packageSourceUrl = str_replace(
             "{version}",
             cms_version(),
             $packageSourceUrl
         );
+
         $packageSourceUrl .= "index.json";
         $this->packageSourceUrl = $packageSourceUrl;
     }

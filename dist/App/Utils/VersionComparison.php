@@ -4,6 +4,9 @@ namespace App\Utils;
 
 defined('ULICMS_ROOT') or exit('no direct script access allowed');
 
+/**
+ * Utils for version number comparisons
+ */
 class VersionComparison
 {
     /**

@@ -6,9 +6,16 @@ namespace App\Utils;
 
 use Intervention\MimeSniffer\MimeSniffer;
 
+/**
+ * Utils for handling files
+ */
 class File
 {
-    // get the last modification time of a file
+    /**
+     * Get the last modification time of a file as Unix timestamp
+     * @param string $file
+     * @return int
+     */
     public static function getLastChanged(string $file): int
     {
         clearstatcache();
@@ -17,14 +24,15 @@ class File
         return $retval;
     }
 
-    // return the extension of a file without dot
-    // eg pdf, doc, jpg
+    /**
+     * Get the extension of a file without dot in lower case
+     * @param string $filename
+     * @return string
+     */
     public static function getExtension(string $filename): string
     {
-        $ext = explode('.', $filename);
-        $ext = end($ext);
-        $ext = strtolower($ext);
-        return $ext;
+        $ext = pathinfo($filename, PATHINFO_EXTENSION);
+        return strtolower($ext);
     }
 
     // Delete a file or a directory if it exist
@@ -39,7 +47,12 @@ class File
         return false;
     }
 
-    // converts a file to a data URI
+    /**
+     * Convert a file to a data: Uri
+     * @param string $file
+     * @param string|null $mime
+     * @return string|null
+     */
     public static function toDataUri(string $file, ?string $mime = null): ?string
     {
         $url = null;
@@ -102,6 +115,11 @@ class File
         }
     }
 
+    /**
+     * From a list of file get the timestamp of the last changed file
+     * @param array $files
+     * @return int|null
+     */
     public static function getNewestMtime(array $files): ?int
     {
         $mtime = 0;

@@ -197,8 +197,6 @@ $db_strict_mode = $config->db_strict_mode ?? false;
     $db_strict_mode
 );
 
-// Settings::getAll();
-
 if (!$connection) {
     throw new ConnectionFailedException('Can\'t connect to Database.');
 }
@@ -225,6 +223,8 @@ if (!$select) {
     throw new SqlException('<h1>Database '
                     . $config->db_database . ' doesn\'t exist.</h1>');
 }
+
+Settings::getAll();
 
 if (!Settings::get('session_name')) {
     Settings::set('session_name', uniqid() . '_SESSION');

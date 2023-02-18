@@ -2,6 +2,8 @@
 
 namespace App\Services\Connectors;
 
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
 use App\Helpers\ArrayHelper;
 
 use function is_version_number;
@@ -10,6 +12,11 @@ class AvailablePackageVersionMatcher
 {
     private $versionData = [];
 
+
+    /**
+     * Constructor
+     * @param type $versionData
+     */
     public function __construct($versionData = null)
     {
         $this->loadData($versionData);
@@ -37,7 +44,7 @@ class AvailablePackageVersionMatcher
                                 "file"
                             ]
             ) &&
-                    is_version_number($version["version"]) and
+                    is_version_number($version["version"]) &&
                     is_version_number($version["compatible_with"])
             ) {
                 $this->versionData[] = $version;
