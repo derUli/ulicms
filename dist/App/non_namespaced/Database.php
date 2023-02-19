@@ -43,8 +43,19 @@ class Database
         ?string $socket = null,
         bool $db_strict_mode = false
     ): ?mysqli {
+        // Store old error reporting settings
+        $displayErrors = ini_get('display_errors');
+        $errorReporting = error_reporting();
+
+        // Disable error reporting, to prevent errors showing in PHPUnit
+        error_reporting(0);
+        ini_set('display_errors', '0');
+
         @$connected = mysqli_connect($server, $user, $password, '', $port, $socket);
 
+        // Enable error reporting
+        error_reporting($errorReporting);
+        ini_set('display_errors', $displayErrors);
 
         self::$connection = $connected ? $connected : null;
         if (!self::$connection) {
