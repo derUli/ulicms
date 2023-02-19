@@ -2,7 +2,11 @@
 
 declare(strict_types=1);
 
-/** HTTP status codes */
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
+/**
+ * HTTP status codes
+ */
 class HttpStatusCode
 {
     public const __default = self::OK;

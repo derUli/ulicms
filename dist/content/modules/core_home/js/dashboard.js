@@ -23,12 +23,19 @@ $(() => {
     }
 
     $("#show_positions").change((event) => {
+        setWaitCursor();
+
         const url = $(event.currentTarget).data("url");
         $.ajax({
             method: "get",
             url: url,
-            error: (xhr) =>
-                alert(xhr.responseText)
+            success: () => {
+                setDefaultCursor();
+            },
+            error: (xhr) => {
+                setDefaultCursor();
+                alert(xhr.responseText);
+            }
         });
     });
 });

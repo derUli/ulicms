@@ -215,7 +215,7 @@ if ($cacheAdapter && $cacheAdapter->get($uid)) {
     die();
 }
 
-if ($cacheAdapter || Settings::get("minify_html")) {
+if ($cacheAdapter || Settings::get('minify_html')) {
     ob_start();
 }
 $top_files = array(
@@ -275,7 +275,7 @@ foreach ($bottom_files as $file) {
 
 do_event("after_html");
 
-if ($cacheAdapter || Settings::get("minify_html")) {
+if ($cacheAdapter || Settings::get('minify_html')) {
     $generatedHtml = ob_get_clean();
     $generatedHtml = normalizeLN($generatedHtml, "\n");
     $generatedHtml = optimizeHtml($generatedHtml);

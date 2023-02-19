@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Backend;
 
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
 use Template;
 use Vars;
 use Request;
@@ -77,7 +79,7 @@ class BackendPageRenderer
      */
     public function render(): void
     {
-        if (Settings::get("minify_html")) {
+        if (Settings::get('minify_html')) {
             ob_start();
         }
 
@@ -97,7 +99,7 @@ class BackendPageRenderer
             do_event("admin_footer");
             require "inc/footer.php";
         }
-        if (Settings::get("minify_html")) {
+        if (Settings::get('minify_html')) {
             $this->outputMinified();
         }
 

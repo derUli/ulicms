@@ -18,7 +18,7 @@ use App\Security\Hash;
  */
 function resetScriptQueue(): void
 {
-    Vars::set("script_queue", []);
+    Vars::set('script_queue', []);
 }
 
 /**
@@ -31,7 +31,7 @@ function optimizeHtml(
     string $html,
     int $level = HTMLMinify::OPTIMIZATION_SIMPLE
 ): string {
-    if (Database::isConnected() and Settings::get("minify_html")) {
+    if (Database::isConnected() &&  Settings::get('minify_html')) {
         $options = array(
             'optimizationLevel' => $level
         );
@@ -45,13 +45,13 @@ function optimizeHtml(
 
 function enqueueScriptFile($path): void
 {
-    if (!Vars::get("script_queue")) {
+    if (!Vars::get('script_queue')) {
         resetScriptQueue();
     }
-    $script_queue = Vars::get("script_queue");
+    $script_queue = Vars::get('script_queue');
     $script_queue[] = $path;
 
-    Vars::set("script_queue", $script_queue);
+    Vars::set('script_queue', $script_queue);
 }
 
 function setSCSSImportPaths(?array $importPaths = null): void
@@ -76,7 +76,7 @@ function unsetSCSSImportPaths(): void
 
 function minifyJs(): string
 {
-    $scripts = Vars::get("script_queue");
+    $scripts = Vars::get('script_queue');
     $lastmod = 0;
 
     $minifier = new Minify\JS();
@@ -108,8 +108,8 @@ function minifyJs(): string
     if (!is_file($bundleFile)) {
         foreach ($scripts as $script) {
             $script = ltrim($script, '/');
-            if (is_file($script)
-                    and pathinfo($script, PATHINFO_EXTENSION) == "js") {
+            if (is_file($script) &&
+                    pathinfo($script, PATHINFO_EXTENSION) == "js") {
                 $minifier->add($script);
             }
         }
@@ -134,7 +134,7 @@ function minifyCSS(): string
     foreach ($stylesheets as $stylesheet) {
         $stylesheet = ltrim($stylesheet, '/');
         $type = pathinfo($stylesheet, PATHINFO_EXTENSION);
-        if (is_file($stylesheet) && ($type == "css" or $type == "scss")
+        if (is_file($stylesheet) && ($type == "css" || $type == "scss")
                 && filemtime($stylesheet) > $lastmod) {
             $lastmod = filemtime($stylesheet);
         }
@@ -229,7 +229,7 @@ function getCombinedScriptHtml(): string
     $html = '';
     $cfg = new CMSConfig();
     if (isset($cfg->no_minify) && $cfg->no_minify) {
-        foreach (Vars::get("script_queue") as $script) {
+        foreach (Vars::get('script_queue') as $script) {
             $html .= Script::fromFile($script);
         }
         resetScriptQueue();
