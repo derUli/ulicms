@@ -74,8 +74,8 @@ class ControllerRegistry
         }
     }
 
-    //return an instance of a controller by it's name
-    // if $class is null it returns the main class for the current backend action if defined
+    // Return an instance of a controller by it's name
+    // If $class is null it returns the main class for the current backend action if defined
     public static function get(?string $class = null): ?Controller
     {
         if ($class == null and get_action()) {
@@ -86,7 +86,7 @@ class ControllerRegistry
         return null;
     }
 
-    // check if user is permitted to call controller method $sMethod in Class $sClass
+    // Check if user is permitted to call controller method $sMethod in Class $sClass
     public static function userCanCall(string $sClass, string $sMethod): bool
     {
         $allowed = true;

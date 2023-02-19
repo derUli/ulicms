@@ -1,13 +1,13 @@
 <?php
 if (isset($_REQUEST["standard"])) {
     $standard = (int)$_REQUEST["standard"];
-    Settings::set("default_acl_group", $standard);
+    Settings::set('default_acl_group', $standard);
 }
 
 $permissionChecker = new ACL();
 $groups = $permissionChecker->getAllGroups();
 
-$default_acl_group = intval(Settings::get("default_acl_group"));
+$default_acl_group = intval(Settings::get('default_acl_group'));
 
 if (isset($_REQUEST["sort"]) && in_array($_REQUEST["sort"], array(
             "id",

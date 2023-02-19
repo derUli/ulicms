@@ -41,7 +41,7 @@ class Video extends Model
         }
     }
 
-    public static function getAll(string $order = "id"): array
+    public static function getAll(string $order = 'id'): array
     {
         $datasets = [];
         $sql = "SELECT id FROM {prefix}videos ORDER BY $order";

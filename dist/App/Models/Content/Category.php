@@ -89,7 +89,7 @@ class Category
         }
     }
 
-    public static function getAll(string $order = "id"): array
+    public static function getAll(string $order = 'id'): array
     {
         $datasets = [];
         $sql = "select id from `{prefix}categories` order by $order";

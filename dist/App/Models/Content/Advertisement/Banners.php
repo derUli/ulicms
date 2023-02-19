@@ -11,7 +11,7 @@ use function tbname;
 // This class contains methods that return an array of banners
 class Banners
 {
-    public static function getAll(string $order = "id"): array
+    public static function getAll(string $order = 'id'): array
     {
         $datasets = [];
         $sql = "SELECT id FROM " . tbname("banner") . " ORDER BY $order";
@@ -43,7 +43,7 @@ class Banners
 
     public static function getByCategory(
         ?int $category_id,
-        string $order = "id"
+        string $order = 'id'
     ): array {
         $category_id = intval($category_id);
         $datasets = [];

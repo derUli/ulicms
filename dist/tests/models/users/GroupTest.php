@@ -7,7 +7,7 @@ class GroupTest extends \PHPUnit\Framework\TestCase
     protected function setUp(): void
     {
         $settings = array(
-            "default_acl_group"
+            'default_acl_group'
         );
         foreach ($settings as $setting) {
             $this->savedSettings[$setting] = Settings::get($setting);
@@ -86,25 +86,25 @@ class GroupTest extends \PHPUnit\Framework\TestCase
 
     public function testGetPrimaryGroupIdReturnsNull()
     {
-        Settings::delete("default_acl_group");
+        Settings::delete('default_acl_group');
         $this->assertNull(Group::getDefaultPrimaryGroupId());
     }
 
     public function testGetPrimaryGroupReturnsNull()
     {
-        Settings::delete("default_acl_group");
+        Settings::delete('default_acl_group');
         $this->assertNull(Group::getDefaultPrimaryGroup());
     }
 
     public function testGetPrimaryGroupIdReturnsId()
     {
-        Settings::set("default_acl_group", "1");
+        Settings::set('default_acl_group', "1");
         $this->assertEquals(1, Group::getDefaultPrimaryGroupId());
     }
 
     public function testGetPrimaryGroupReturnsGroup()
     {
-        Settings::set("default_acl_group", "1");
+        Settings::set('default_acl_group', "1");
 
         $group = Group::getDefaultPrimaryGroup();
         $this->assertInstanceOf(Group::class, $group);

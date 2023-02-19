@@ -17,7 +17,7 @@ if (!$permissionChecker->hasPermission("categories")) {
             ))) {
         $order = db_escape($_GET["order"]);
     } else {
-        $order = "id";
+        $order = 'id';
     }
     $categories = Categories::getAllCategories($order);
     ?>

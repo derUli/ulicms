@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 class UserManager
 {
-    public function getUsersByGroupId(?int $gid, ?string $order = "id"): array
+    public function getUsersByGroupId(?int $gid, ?string $order = 'id'): array
     {
         $users = [];
         $sql = "select id from {prefix}users where `group_id` = ? order by $order";
@@ -18,7 +18,7 @@ class UserManager
         return $users;
     }
 
-    public function getAllUsers(string $order = "id"): array
+    public function getAllUsers(string $order = 'id'): array
     {
         $users = [];
         $sql = "select id from {prefix}users order by $order";
@@ -31,7 +31,7 @@ class UserManager
 
     public function getLockedUsers(
         bool $locked = true,
-        string $order = "id"
+        string $order = 'id'
     ): array {
         $users = [];
         $sql = "select id from {prefix}users where `locked` = ? "

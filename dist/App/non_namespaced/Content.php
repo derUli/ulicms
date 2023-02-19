@@ -33,7 +33,7 @@ abstract class Content extends Model
         return true;
     }
 
-    public function getChildren(string $order = "id"): array
+    public function getChildren(string $order = 'id'): array
     {
         if (!$this->getID()) {
             return [];

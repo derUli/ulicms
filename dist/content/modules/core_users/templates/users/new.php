@@ -74,7 +74,7 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
                 ?>
                     <option value="<?php echo $key; ?>"
                     <?php
-                if (Settings::get("default_acl_group") == $key) {
+                if (Settings::get('default_acl_group') == $key) {
                     echo "selected";
                 }
                 ?>>

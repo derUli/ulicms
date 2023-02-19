@@ -9,6 +9,10 @@ use App\Exceptions\AccessDeniedException;
  */
 abstract class Controller
 {
+    /**
+     * List of not callable public methods
+     * @var type
+     */
     protected $blacklist = array(
         "runCommand"
     );

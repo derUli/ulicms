@@ -25,7 +25,7 @@ if (Settings::get("visitors_can_register") == "off" || !Settings::get("visitors_
             $user->setFirstname($_POST["firstname"]);
             $user->setEmail($_POST["email"]);
             $user->setPassword($_POST["password"]);
-            $user->setPrimaryGroupId(Settings::get("default_acl_group") ? Settings::get("default_acl_group") : null);
+            $user->setPrimaryGroupId(Settings::get('default_acl_group') ? Settings::get('default_acl_group') : null);
             $user->save();
 
             do_event("after_user_registration");

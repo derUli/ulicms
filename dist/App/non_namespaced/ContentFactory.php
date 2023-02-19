@@ -71,7 +71,7 @@ class ContentFactory
         return $retval;
     }
 
-    public static function getAll(string $order = "id"): array
+    public static function getAll(string $order = 'id'): array
     {
         $datasets = [];
         $sql = "SELECT id, `type` FROM " . tbname("content") .
@@ -83,7 +83,7 @@ class ContentFactory
         return $datasets;
     }
 
-    public static function getAllRegular(string $order = "id"): array
+    public static function getAllRegular(string $order = 'id'): array
     {
         $datasets = [];
         $sql = "SELECT id, `type` FROM " . tbname("content") .
@@ -97,7 +97,7 @@ class ContentFactory
 
     public static function getAllByLanguage(
         string $language,
-        string $order = "id"
+        string $order = 'id'
     ): array {
         $datasets = [];
         $language = Database::escapeValue($language);
@@ -112,7 +112,7 @@ class ContentFactory
 
     public static function getAllByParent(
         ?int $parent_id,
-        string $order = "id"
+        string $order = 'id'
     ): array {
         $contents = [];
 
@@ -137,7 +137,7 @@ class ContentFactory
 
     public static function getAllByMenu(
         string $menu,
-        string $order = "id"
+        string $order = 'id'
     ): array {
         $menu = Database::escapeValue($menu);
         $datasets = [];
@@ -152,7 +152,7 @@ class ContentFactory
 
     public static function getAllByType(
         string $type,
-        string $order = "id"
+        string $order = 'id'
     ): array {
         $type = Database::escapeValue($type);
         $datasets = [];
@@ -244,7 +244,7 @@ class ContentFactory
     public static function getAllByMenuAndLanguage(
         string $menu,
         string $language,
-        string $order = "id"
+        string $order = 'id'
     ): array {
         $menu = Database::escapeValue($menu);
         $language = Database::escapeValue($language);

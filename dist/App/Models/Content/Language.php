@@ -145,7 +145,7 @@ class Language extends Model
     }
 
     // returns an array of all languages
-    public static function getAllLanguages(string $order = "id"): array
+    public static function getAllLanguages(string $order = 'id'): array
     {
         $datasets = [];
         $sql = "select id from `{prefix}languages` order by $order";
