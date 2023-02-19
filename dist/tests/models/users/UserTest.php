@@ -57,7 +57,7 @@ class UserTest extends \PHPUnit\Framework\TestCase
         unset($_SERVER['HTTPS']);
 
         $user = $this->getFirstUser();
-        $user->setLastAction(null);
+        $user->setLastAction(0);
     }
 
     public function testCreateAndDeleteUser()
@@ -388,7 +388,7 @@ class UserTest extends \PHPUnit\Framework\TestCase
         $user->setPassword("password123");
         $user->setEmail("john@doe.com");
         // does nothing because the dataset is not saved yet
-        $user->setLastAction(null);
+        $user->setLastAction(0);
         $user->save();
 
         // is zero until the user does something
@@ -398,7 +398,7 @@ class UserTest extends \PHPUnit\Framework\TestCase
         $user->setLastAction($time);
         $this->assertEquals($time, $user->getLastAction());
 
-        $user->setLastAction(null);
+        $user->setLastAction(0);
         $this->assertEquals(0, $user->getLastAction());
 
         $user->delete();

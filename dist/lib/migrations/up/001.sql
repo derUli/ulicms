@@ -299,7 +299,7 @@ CREATE TABLE `{prefix}users` (
   `password_changed` datetime DEFAULT NULL,
   `group_id` int(11) DEFAULT NULL,
   `locked` tinyint(1) NOT NULL DEFAULT '0',
-  `html_editor` varchar(100) DEFAULT 'ckeditor',
+  `html_editor` varchar(100) NOT NULL DEFAULT 'ckeditor',
   `require_password_change` tinyint(1) DEFAULT '0',
   `admin` tinyint(1) DEFAULT '0',
   `failed_logins` int(11) DEFAULT '0',

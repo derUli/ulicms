@@ -194,7 +194,7 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase
 
     public function testGetUsersOnlineUserIsNotOnline()
     {
-        $this->testUser->setLastAction(null);
+        $this->testUser->setLastAction(0);
         $this->testUser->save();
         $this->assertNotContains("testuser1", getUsersOnline());
     }

@@ -42,6 +42,11 @@ class User extends Model
         }
     }
 
+    /**
+     * Load user by id
+     * @param type $id
+     * @return void
+     */
     public function loadById($id): void
     {
         $sql = "select * from {prefix}users where id = ?";
@@ -52,7 +57,39 @@ class User extends Model
         $this->fillVars($result);
     }
 
+    /**
+     * Load user by username
+     * @param string $name
+     * @return void
+     */
+    public function loadByUsername(string $name): void
+    {
+        $sql = "select * from {prefix}users where username "
+                . "COLLATE utf8mb4_general_ci = ?";
+        $args = [
+            $name
+        ];
+        $result = Database::pQuery($sql, $args, true);
+        $this->fillVars($result);
+    }
 
+    /**
+     * Load user by email
+     * @param string $email
+     * @return void
+     */
+    public function loadByEmail(string $email): void
+    {
+        $sql = "select * from {prefix}users where email "
+                . "COLLATE utf8mb4_general_ci = ?";
+
+        $args = [
+            $email
+        ];
+
+        $result = Database::pQuery($sql, $args, true);
+        $this->fillVars($result);
+    }
 
     /**
      * Load user from session data
@@ -82,6 +119,12 @@ class User extends Model
                 ] : null;
     }
 
+    /**
+     * Register a session from this user
+     * @param bool $redirect Redirect after login
+     * @return void
+     * @throws BadMethodCallException
+     */
     public function registerSession(bool $redirect = true): void
     {
         $sessionData = $this->toSessionData();
@@ -114,30 +157,10 @@ class User extends Model
         }
     }
 
-    public function loadByUsername(string $name): void
-    {
-        $sql = "select * from {prefix}users where username "
-                . "COLLATE utf8mb4_general_ci = ?";
-        $args = [
-            $name
-        ];
-        $result = Database::pQuery($sql, $args, true);
-        $this->fillVars($result);
-    }
-
-    public function loadByEmail(string $email): void
-    {
-        $sql = "select * from {prefix}users where email "
-                . "COLLATE utf8mb4_general_ci = ?";
-
-        $args = [
-            $email
-        ];
-
-        $result = Database::pQuery($sql, $args, true);
-        $this->fillVars($result);
-    }
-
+    /**
+     * Save user
+     * @return void
+     */
     public function save(): void
     {
         if ($this->id) {
@@ -148,15 +171,23 @@ class User extends Model
         $this->saveGroups();
     }
 
-    // save a new user and send a welcome mail
-    public function saveAndSendMail(string $password): void
+    /**
+     * Create a new user and send welcome mail
+     * @param string $password
+     * @return void
+     */
+    public function saveAndSendMail(string $password): bool
     {
         $this->save();
-        $this->sendWelcomeMail($password);
+        return $this->sendWelcomeMail($password);
     }
 
-    // Sent welcome mail to new user
-    public function sendWelcomeMail(string $password): void
+    /**
+     * Send welcome mail to user
+     * @param string $password
+     * @return bool
+     */
+    public function sendWelcomeMail(string $password): bool
     {
         $subject = get_translation(
             "new_user_account_at_site",
@@ -165,10 +196,14 @@ class User extends Model
         $mailBody = $this->getWelcomeMailText($password);
         $headers = "From: " . Settings::get("email");
 
-        Mailer::send($this->getEmail(), $subject, $mailBody, $headers);
+        return Mailer::send($this->getEmail(), $subject, $mailBody, $headers);
     }
 
-    // get text for welcome mail
+    /**
+     * Get text for welcome mail
+     * @param string $password
+     * @return string
+     */
     public function getWelcomeMailText(string $password): string
     {
         ViewBag::set("user", $this);
@@ -177,6 +212,11 @@ class User extends Model
         return Template::executeDefaultOrOwnTemplate("email/user_welcome.php");
     }
 
+    /**
+     * Fil vars from database
+     * @param type $result
+     * @return void
+     */
     public function fillVars($result = null): void
     {
         if (Database::any($result)) {
@@ -193,13 +233,17 @@ class User extends Model
             }
             // load secondary groups
             $this->loadGroups($result['id']);
-            $this->setId(intval($result['id']));
+            $this->setId((int) $result['id']);
             return;
         }
         $this->setSecondaryGroups([]);
     }
 
-    protected function insert()
+    /**
+     * Insert user
+     * @return void
+     */
+    protected function insert(): void
     {
         $sql = "insert into {prefix}users (username, lastname, firstname,
                 email, password, about_me, group_id, html_editor,
@@ -228,7 +272,11 @@ class User extends Model
         $this->id = Database::getLastInsertID();
     }
 
-    protected function update()
+    /**
+     * Update user
+     * @return void
+     */
+    protected function update(): void
     {
         $sql = "update {prefix}users set username = ?, lastname = ?,
             firstname = ?, email = ?, password = ?, about_me = ?,
@@ -257,56 +305,105 @@ class User extends Model
         Database::pQuery($sql, $args, true);
     }
 
+    /**
+     * Get id
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * Set id
+     * @param int|null $id
+     * @return void
+     */
     public function setId($id): void
     {
-        $this->id = $id !== null ? (int) $id : null;
+        $this->id = $id;
     }
 
+    /**
+     * Get username
+     * @return string|null
+     */
     public function getUsername(): ?string
     {
         return $this->username;
     }
 
+    /**
+     * Set username
+     * @param string $username
+     * @return void
+     */
     public function setUsername(string $username): void
     {
         $this->username = $username;
     }
 
+    /**
+     * Get lastname
+     * @return string|null
+     */
     public function getLastname(): ?string
     {
         return $this->lastname;
     }
 
+    /**
+     * Set lastname
+     * @param string|null $lastname
+     * @return void
+     */
     public function setLastname(?string $lastname): void
     {
         $this->lastname = $lastname;
     }
 
+    /**
+     * Get firstname
+     * @return string|null
+     */
     public function getFirstname(): ?string
     {
         return $this->firstname;
     }
 
+    /**
+     * Set firstname
+     * @param string|null $firstname
+     * @return void
+     */
     public function setFirstname(?string $firstname): void
     {
         $this->firstname = $firstname;
     }
 
+    /**
+     * Get email address
+     * @return string|null
+     */
     public function getEmail(): ?string
     {
         return $this->email;
     }
 
+    /**
+     * Set email address
+     * @param string|null $email
+     * @return void
+     */
     public function setEmail(?string $email): void
     {
         $this->email = $email;
     }
 
+    /**
+     * Delete user
+     * @return boolean
+     */
     public function delete()
     {
         if ($this->id === null) {
@@ -328,28 +425,48 @@ class User extends Model
         return $result;
     }
 
+    /**
+     * Get hashed password
+     * @return string|null
+     */
     public function getPassword(): ?string
     {
         return $this->password;
     }
 
-    public function setPassword(?string $password): void
+    /**
+     * Set password
+     * @param string|null $password
+     * @return void
+     */
+    public function setPassword(string $password): void
     {
         $this->password = Hash::hashPassword($password);
         $this->password_changed = date("Y-m-d H:i:s");
     }
 
-    // The password is encrypted
+    /**
+     * Get datetime of last password change
+     * @return string|null
+     */
     public function getPasswordChanged(): ?string
     {
         return $this->password_changed;
     }
 
-    // reset password for this user
+    /**
+     * Reset password
+     * @return void
+     */
     public function resetPassword(): void
     {
+        // Create password reset model
         $passwordReset = new PasswordReset();
+
+        // Generate token for this user
         $token = $passwordReset->addToken($this->getId());
+
+        // Send confirmation mail
         $passwordReset->sendMail(
             $token,
             $this->getEmail(),
@@ -359,11 +476,19 @@ class User extends Model
         );
     }
 
+    /**
+     * Get "Firstname lastname"
+     * @return string
+     */
     public function getFullName(): string
     {
         return trim("{$this->firstname} {$this->lastname}");
     }
 
+    /**
+     * Get full name or username
+     * @return string
+     */
     public function getDisplayName(): string
     {
         $name = !empty($this->getFullName()) ? $this->getFullName() : $this->getUsername();
@@ -380,16 +505,29 @@ class User extends Model
         return Hash::hashPassword($password) == $this->getPassword();
     }
 
+    /**
+     * Get about me text
+     * @return string|null
+     */
     public function getAboutMe(): ?string
     {
         return $this->about_me;
     }
 
+    /**
+     * Set about me text
+     * @param string|null $text
+     * @return void
+     */
     public function setAboutMe(?string $text): void
     {
         $this->about_me = $text;
     }
 
+    /**
+     * Get unix timestamp of last action
+     * @return int
+     */
     public function getLastAction(): int
     {
         $lastAction = 0;
@@ -401,18 +539,24 @@ class User extends Model
             $result = Database::pQuery($sql, $args, true);
             if (Database::any($result)) {
                 $data = Database::fetchObject($result);
-                $lastAction = intval($data->last_action);
+                $lastAction = (int) $data->last_action;
             }
         }
         return $lastAction;
     }
 
-    public function setLastAction(?int $time): void
+    /**
+     * Update last action of this user
+     * @param int|null $time
+     * @return void
+     */
+    public function setLastAction(int $time): void
     {
         if ($this->id === null) {
             return;
         }
-        $time = intval($time);
+
+        $time = (int) $time;
         $sql = "update {prefix}users set last_action = ? where id = ?";
         $args = array(
             $time,
@@ -421,53 +565,99 @@ class User extends Model
         Database::pQuery($sql, $args, true);
     }
 
+    /**
+     * Get group id
+     * @return type
+     */
     public function getGroupId()
     {
         return $this->getPrimaryGroupId();
     }
 
+    /**
+     * Get primary group
+     * @return type
+     */
     public function getPrimaryGroupId()
     {
         return $this->group_id;
     }
 
+    /**
+     * Set primary group
+     * @param type $gid
+     * @return void
+     */
     public function setPrimaryGroupId($gid): void
     {
         $this->group_id = $gid;
         $this->group = $gid;
     }
 
+    /**
+     * Set primary group id
+     * @param type $gid
+     * @return void
+     */
     public function setGroupId($gid): void
     {
         $this->setPrimaryGroupId($gid);
     }
 
+
+    /**
+     * Get primary group
+     * @return type
+     */
     public function getPrimaryGroup()
     {
         return $this->group;
     }
 
+    /**
+     * Get group
+     * @return type
+     */
     public function getGroup()
     {
         return $this->getPrimaryGroup();
     }
 
+    /**
+     * Set primary group
+     * @param type $group
+     * @return void
+     */
     public function setPrimaryGroup($group): void
     {
         $this->group = $group;
         $this->group_id = $group ? $group->getId() : null;
     }
 
+    /**
+     * Set primary group
+     * @param type $group
+     * @return void
+     */
     public function setGroup($group): void
     {
         $this->setPrimaryGroup($group);
     }
 
+    /**
+     * Get html editor
+     * @return string|null
+     */
     public function getHTMLEditor(): ?string
     {
         return $this->html_editor;
     }
 
+    /**
+     * Set html editor
+     * @param string $editor
+     * @return void
+     */
     public function setHTMLEditor(string $editor): void
     {
         $allowedEditors = array(
@@ -502,6 +692,11 @@ class User extends Model
         return (bool) $this->admin;
     }
 
+    /**
+     * Set the "admin" flag which enables unlimited access to the system
+     * @param type $val
+     * @return void
+     */
     public function setAdmin($val): void
     {
         $this->admin = (bool) $val;
@@ -538,7 +733,7 @@ class User extends Model
             $result = Database::pQuery($sql, $args, true);
             if (Database::any($result)) {
                 $data = Database::fetchObject($result);
-                $failedLogins = intval($data->failed_logins);
+                $failedLogins = (int) $data->failed_logins;
             }
         }
         return $failedLogins;
@@ -557,59 +752,79 @@ class User extends Model
         Database::pQuery($sql, $args, true);
     }
 
-    public function resetFailedLogins(): void
+    /**
+     * Set failed logins to 0
+     * @return bool
+     */
+    public function resetFailedLogins(): bool
     {
-        if ($this->id === null) {
-            return;
-        }
-        $sql = "update {prefix}users set failed_logins = ? "
-                . "where id = ?";
-        $args = array(
-            0,
-            $this->id
-        );
-        Database::pQuery($sql, $args, true);
+        return $this->setFailedLogins(0);
     }
 
-    public function setFailedLogins($amount): void
+    /**
+     * Set failed logins
+     * @param int $amount
+     * @return bool
+     */
+    public function setFailedLogins(int $amount): bool
     {
         if ($this->id === null) {
-            return;
+            return false;
         }
+
         $sql = "update {prefix}users set failed_logins = ? where id = ?";
         $args = array(
             $amount,
             $this->id
         );
         Database::pQuery($sql, $args, true);
+
+        return Database::getAffectedRows($amount) > 0;
     }
 
+    /**
+     * Get homepage
+     * @return string|null
+     */
     public function getHomepage(): ?string
     {
         return $this->homepage;
     }
 
+    /**
+     * Set homepage
+     * @param string|null $val
+     * @return void
+     */
     public function setHomepage(?string $val): void
     {
         $this->homepage = (string) $val;
     }
 
+    /**
+     * Get default language of this user
+     * @return string|null
+     */
     public function getDefaultLanguage(): ?string
     {
         return $this->default_language;
     }
 
+    /**
+     * Set default language
+     * @param string|null $val
+     * @return void
+     */
     public function setDefaultLanguage(?string $val): void
     {
-        $this->default_language = StringHelper::isNotNullOrWhitespace($val) ?
-                (string) $val : null;
+        $this->default_language = !empty($val) ? (string) $val : null;
     }
 
-   /**
-    *
-    * Get avatar for the current user
-    * @return string|null
-    */
+    /**
+     *
+     * Get avatar for the current user
+     * @return string|null
+     */
     public function getAvatar(): ?string
     {
         // Fallback "No Avatar" picture
@@ -648,7 +863,6 @@ class User extends Model
         return $avatarUrl;
     }
 
-
     /**
      * Generates an avatar based on the the capitals of the users
      * firstname and lastname.
@@ -686,16 +900,29 @@ class User extends Model
         $this->processAvatar($file);
     }
 
+    /**
+     * Get secondary groups of a user
+     * @return array
+     */
     public function getSecondaryGroups(): array
     {
         return $this->secondary_groups;
     }
 
+    /**
+     * Set secondary groups of a user
+     * @param array $val
+     * @return void
+     */
     public function setSecondaryGroups(array $val): void
     {
         $this->secondary_groups = $val;
     }
 
+    /**
+     * Get all groups including primary and secondary
+     * @return array
+     */
     public function getAllGroups(): array
     {
         $primaryGroup = [$this->getPrimaryGroup()];
@@ -711,11 +938,21 @@ class User extends Model
         return new GroupCollection($this);
     }
 
+    /**
+     * Add secondary group
+     * @param type $val
+     * @return void
+     */
     public function addSecondaryGroup($val): void
     {
         $this->secondary_groups[] = $val;
     }
 
+    /**
+     * Remove secondary group
+     * @param type $val
+     * @return void
+     */
     public function removeSecondaryGroup($val): void
     {
         $filtered = [];
@@ -746,13 +983,18 @@ class User extends Model
         return $this->getPermissionChecker()->hasPermission($permission);
     }
 
-    private function loadGroups($user_id): void
+    /**
+     * Load groups secondary groups of this user
+     * @param type $user_id
+     * @return void
+     */
+    protected function loadGroups($user_id): void
     {
         $groups = [];
 
         $sql = "select `group_id` from `{prefix}user_groups` where user_id = ?";
         $args = array(
-            intval($user_id)
+            (int) $user_id
         );
         $result = Database::pQuery($sql, $args, true);
         while ($row = Database::fetchObject($result)) {
@@ -761,7 +1003,11 @@ class User extends Model
         $this->setSecondaryGroups($groups);
     }
 
-    private function saveGroups(): void
+    /**
+     * Save secondary groups of this user
+     * @return void
+     */
+    protected function saveGroups(): void
     {
         Database::pQuery(
             "delete from {prefix}user_groups where user_id = ?",
@@ -792,7 +1038,7 @@ class User extends Model
         $tmpFile = uniqid() . '.' . $extension;
         $tmpFile = Path::resolve("ULICMS_TMP/$tmpFile");
 
-        if (move_uploaded_file($upload["tmp_name"], $tmpFile)) {
+        if (move_uploaded_file($upload['tmp_name'], $tmpFile)) {
             $this->processAvatar($tmpFile);
             unlink($tmpFile);
             return true;
@@ -881,6 +1127,10 @@ class User extends Model
         return $this->getId() && $this->getId() == get_user_id();
     }
 
+    /**
+     * Get online users
+     * @return array
+     */
     public static function getOnlineUsers(): array
     {
         $query = Database::selectAll(
