@@ -6,10 +6,12 @@ namespace App\Helpers;
 
 defined('ULICMS_ROOT') or exit('no direct script access allowed');
 
+use Helper;
+
 /**
  * This tool returns methods to use DataTables (https://datatables.net/)
  */
-class DataTablesHelper extends \Helper
+class DataTablesHelper extends Helper
 {
     /**
      * Returns a path to DataTables lang file based on $lang

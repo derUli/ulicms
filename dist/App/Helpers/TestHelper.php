@@ -8,11 +8,12 @@ defined('ULICMS_ROOT') or exit('no direct script access allowed');
 
 use Closure;
 use Exception;
+use Helper;
 
 /**
  * This class contains tools for running in context of unit tests
  */
-class TestHelper extends \Helper
+class TestHelper extends Helper
 {
     /**
      * Check if we are running unit tests

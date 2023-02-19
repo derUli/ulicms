@@ -7,6 +7,9 @@ use App\Security\PermissionChecker;
 use App\Security\Hash;
 use App\Models\Users\GroupCollection;
 
+/**
+ * User model
+ */
 class User extends Model
 {
     protected $id = null;
@@ -28,6 +31,10 @@ class User extends Model
     private $homepage = '';
     private $default_language = null;
 
+    /**
+     * Constructor
+     * @param type $id
+     */
     public function __construct($id = null)
     {
         if ($id) {
@@ -45,11 +52,21 @@ class User extends Model
         $this->fillVars($result);
     }
 
+
+
+    /**
+     * Load user from session data
+     * @return User|null
+     */
     public static function fromSessionData(): ?User
     {
         return get_user_id() ? new self(get_user_id()) : null;
     }
 
+    /**
+     * Converts user to session data
+     * @return array|null
+     */
     public function toSessionData(): ?array
     {
         return $this->isPersistent() ? [
@@ -353,6 +370,11 @@ class User extends Model
         return $name ?? "";
     }
 
+    /**
+     * Check password
+     * @param string $password
+     * @return bool
+     */
     public function checkPassword(string $password): bool
     {
         return Hash::hashPassword($password) == $this->getPassword();
@@ -470,6 +492,11 @@ class User extends Model
         $this->require_password_change = (bool) $val;
     }
 
+    /**
+     * Check if the "admin" flag is set
+     * The "admin" flag enables unlimited acccess to the system
+     * @return bool
+     */
     public function isAdmin(): bool
     {
         return (bool) $this->admin;
@@ -578,43 +605,57 @@ class User extends Model
                 (string) $val : null;
     }
 
-    // Since 2020.1:
-    // generates an avatar based of the capitals of the
-    // users name. if the user isn't logged in, returns the default
-    // no avatar pic
+   /**
+    *
+    * Get avatar for the current user
+    * @return string|null
+    */
     public function getAvatar(): ?string
     {
+        // Fallback "No Avatar" picture
         $avatarUrl = ModuleHelper::getBaseUrl(
             !is_admin_dir() ?
             "/admin/gfx/no_avatar.png" : "/gfx/no_avatar.png"
         );
 
+        // Avatar directory
         $userAvatarDirectory = Path::resolve("ULICMS_CONTENT/avatars");
 
+        // Create avatar directory if not exists
         if (!is_dir($userAvatarDirectory)) {
             mkdir($userAvatarDirectory, 0777, true);
         }
 
+        // If there is a display name (Firstname Lastname
         if (is_dir($userAvatarDirectory) && $this->getDisplayName()) {
+            // Custom avatar
             $avatarImageFile1 = Path::Resolve("$userAvatarDirectory/user-" .
                             $this->getId() . ".png");
+            // Auto generated avatar based on the name of the user
             $avatarImageFile2 = Path::Resolve("$userAvatarDirectory/" .
                             md5($this->getDisplayName()) . ".png");
 
+            // relative URL to file
             $url = !is_admin_dir() ?
                     "content/avatars/user-" . $this->getId() . ".png" :
                     "../content/avatars/user-" . $this->getId() . ".png";
 
-            // generate initial letter avatar if it doesn't exist
+            // Generate initial letter avatar if it doesn't exist
             $avatarUrl = is_file($avatarImageFile1) ?
                     $url : $this->generateAvatar($avatarImageFile2);
         }
+
         return $avatarUrl;
     }
 
-    // generates an avatar based on the the capitals
-    // of the users first- and lastname
-    // the file is cached for performance reasons
+
+    /**
+     * Generates an avatar based on the the capitals of the users
+     * firstname and lastname.
+     *  The file is cached for performance reasons
+     * @param string $avatarImageFile
+     * @return string
+     */
     protected function generateAvatar(string $avatarImageFile): string
     {
         if (!is_file($avatarImageFile)) {
@@ -635,6 +676,11 @@ class User extends Model
         return $avatarUrl;
     }
 
+    /**
+     * Set avatar
+     * @param type $file
+     * @return void
+     */
     public function setAvatar($file): void
     {
         $this->processAvatar($file);
@@ -681,11 +727,20 @@ class User extends Model
         $this->secondary_groups = $filtered;
     }
 
+    /**
+     * Get PermissionChecker for this user
+     * @return PermissionChecker
+     */
     public function getPermissionChecker(): PermissionChecker
     {
         return new PermissionChecker($this->getId());
     }
 
+    /**
+     * Check if the user has a permission
+     * @param string $permission
+     * @return bool
+     */
     public function hasPermission(string $permission): bool
     {
         return $this->getPermissionChecker()->hasPermission($permission);
@@ -726,6 +781,11 @@ class User extends Model
         }
     }
 
+    /**
+     * Change avatar image from upload
+     * @param array $upload
+     * @return bool
+     */
     public function changeAvatar(array $upload): bool
     {
         $extension = pathinfo($upload['name'], PATHINFO_EXTENSION);
@@ -740,6 +800,11 @@ class User extends Model
         return false;
     }
 
+    /**
+     * Resize / convert avatar
+     * @param string $inputFile
+     * @return void
+     */
     public function processAvatar(string $inputFile): void
     {
         $imagine = ImagineHelper::getImagine();
@@ -754,6 +819,10 @@ class User extends Model
                 ->save($generatedAvatar);
     }
 
+    /**
+     * Get path of processed avatar
+     * @return string|null
+     */
     protected function getProcessedAvatarPath(): ?string
     {
         return $this->isPersistent() ? Path::resolve(
@@ -762,6 +831,10 @@ class User extends Model
         ) : null;
     }
 
+    /**
+     * Remove avatar of this user
+     * @return bool
+     */
     public function removeAvatar(): bool
     {
         $generatedAvatar = $this->getProcessedAvatarPath();
@@ -771,6 +844,10 @@ class User extends Model
         return false;
     }
 
+    /**
+     * Check if the user has a processed avatar
+     * @return bool
+     */
     public function hasProcessedAvatar(): bool
     {
         return (
@@ -779,6 +856,10 @@ class User extends Model
         );
     }
 
+    /**
+     * Check if user is current online
+     * @return bool
+     */
     public function isOnline(): bool
     {
         $onlineUsers = self::getOnlineUsers();
@@ -791,6 +872,10 @@ class User extends Model
         return false;
     }
 
+    /**
+     * Check if this user is current online
+     * @return bool
+     */
     public function isCurrent(): bool
     {
         return $this->getId() && $this->getId() == get_user_id();

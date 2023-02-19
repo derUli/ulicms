@@ -2,7 +2,12 @@
 
 declare(strict_types=1);
 
-// use this as base class for your own helper classes
+
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
+/**
+ * Extend all helpers from this class
+ */
 abstract class Helper
 {
 }
