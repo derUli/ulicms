@@ -30,18 +30,22 @@ abstract class Controller
         }
     }
 
-    // this method executes controller methods
-    // controller name and method can be specified as sClass and sMethod
-    // arguments by GET or POST request
-    // Example URL: index.php?sClass=MyController&sMethod=helloWorld
+    /**
+     * This method executes controller methods
+     * Controller name and method can be specified as sClass and sMethod
+     * Arguments by GET or POST request
+     * Example URL: index.php?sClass=MyController&sMethod=helloWorld
+     * @return void
+     * @throws AccessDeniedException
+     * @throws BadMethodCallException
+     */
     public function runCommand(): void
     {
         $sClass = $_REQUEST["sClass"];
-        if (isset($_REQUEST["sMethod"])
-                && StringHelper::isNotNullOrEmpty($_REQUEST["sMethod"]) && !in_array(
-                    $_REQUEST["sMethod"],
-                    $this->blacklist
-                )
+        if (isset($_REQUEST["sMethod"]) && StringHelper::isNotNullOrEmpty($_REQUEST["sMethod"]) && !in_array(
+            $_REQUEST["sMethod"],
+            $this->blacklist
+        )
         ) {
             $sMethod = $_REQUEST["sMethod"];
             $sMethodWithRequestType = $sMethod . ucfirst(Request::getMethod());
@@ -66,9 +70,7 @@ abstract class Controller
 
             // if there is a method, it is public and the user has the required
             // permissions, call it
-            if (method_exists($this, $sMethodWithRequestType) && !str_starts_with($sMethodWithRequestType, "_")
-                    && $reflectionWithRequestType
-                    && $reflectionWithRequestType->isPublic()) {
+            if (method_exists($this, $sMethodWithRequestType) && !str_starts_with($sMethodWithRequestType, "_") && $reflectionWithRequestType && $reflectionWithRequestType->isPublic()) {
                 if (ControllerRegistry::userCanCall(
                     $sClass,
                     $sMethodWithRequestType
@@ -91,7 +93,7 @@ abstract class Controller
             } else {
                 throw new BadMethodCallException(
                     "method " . _esc($sMethod) .
-                        " is not callable"
+                    " is not callable"
                 );
             }
         }
