@@ -22,7 +22,7 @@ class User extends Model
     private $group_id = null;
     private $secondary_groups = [];
     private $group = null;
-    private $html_editor = "ckeditor";
+    private $html_editor = 'ckeditor';
     private $require_password_change = false;
     private $admin = false;
     private $password_changed = null;
@@ -535,7 +535,7 @@ class User extends Model
     {
         $lastAction = 0;
         if ($this->id !== null) {
-            $sql = "select last_action from {prefix}users where id = ?";
+            $sql = 'select last_action from {prefix}users where id = ?';
             $args = [
                 $this->id
             ];
@@ -559,8 +559,7 @@ class User extends Model
             return;
         }
 
-        $time = (int) $time;
-        $sql = "update {prefix}users set last_action = ? where id = ?";
+        $sql = 'update {prefix}users set last_action = ? where id = ?';
         $args = [
             $time,
             $this->id
@@ -674,11 +673,20 @@ class User extends Model
         $this->html_editor = $editor;
     }
 
+    /**
+     * Check if password change is required
+     * @return bool
+     */
     public function getRequirePasswordChange(): bool
     {
         return (bool) $this->require_password_change;
     }
 
+    /**
+     * Set require_password_change
+     * @param type $val
+     * @return void
+     */
     public function setRequirePasswordChange($val): void
     {
         $this->require_password_change = (bool) $val;
@@ -704,31 +712,52 @@ class User extends Model
         $this->admin = (bool) $val;
     }
 
+    /**
+     * If account is locked
+     * @return bool
+     */
     public function isLocked(): bool
     {
         return (bool) $this->locked;
     }
 
+    /**
+     * Set if account is locked
+     * @param type $val
+     */
     public function setLocked($val)
     {
         $this->locked = (bool) $val;
     }
 
+    /**
+     * Get datetime of last login
+     * @return type
+     */
     public function getLastLogin()
     {
         return $this->last_login;
     }
 
+    /**
+     * Set datetime of last login
+     * @param type $val
+     * @return void
+     */
     public function setLastLogin($val): void
     {
         $this->last_login = $val;
     }
 
+    /**
+     * Get failed logins
+     * @return int
+     */
     public function getFailedLogins(): int
     {
         $failedLogins = 0;
         if ($this->id !== null) {
-            $sql = "select failed_logins from {prefix}users where id = ?";
+            $sql = 'select failed_logins from {prefix}users where id = ?';
             $args = [
                 $this->id
             ];
@@ -741,16 +770,22 @@ class User extends Model
         return $failedLogins;
     }
 
+    /**
+     * Increase failed logins
+     * @return void
+     */
     public function increaseFailedLogins(): void
     {
         if ($this->id === null) {
             return;
         }
-        $sql = "update {prefix}users set failed_logins = failed_logins + 1 "
-                . "where id = ?";
+        
+        $sql = 'update {prefix}users set failed_logins = failed_logins + 1 '
+                . 'where id = ?';
         $args = [
             $this->id
         ];
+        
         Database::pQuery($sql, $args, true);
     }
 
@@ -774,7 +809,7 @@ class User extends Model
             return false;
         }
 
-        $sql = "update {prefix}users set failed_logins = ? where id = ?";
+        $sql = 'update {prefix}users set failed_logins = ? where id = ?';
         $args = [
             $amount,
             $this->id
@@ -935,6 +970,10 @@ class User extends Model
         return array_values($groups);
     }
 
+    /**
+     * Get Group collection
+     * @return GroupCollection
+     */
     public function getGroupCollection(): GroupCollection
     {
         return new GroupCollection($this);
@@ -994,7 +1033,7 @@ class User extends Model
     {
         $groups = [];
 
-        $sql = "select `group_id` from `{prefix}user_groups` where user_id = ?";
+        $sql = 'select `group_id` from `{prefix}user_groups` where user_id = ?';
         $args = [
             (int) $user_id
         ];
