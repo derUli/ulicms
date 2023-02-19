@@ -186,7 +186,7 @@ class RoboFile extends Tasks
     {
         $this->writeln("Modules:");
         $this->modulesList([]);
-        $this->writeln("");
+        $this->writeln('');
         $this->writeln("Themes:");
         $this->themesList([]);
     }

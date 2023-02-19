@@ -147,7 +147,7 @@ class StringFunctionsTest extends \PHPUnit\Framework\TestCase
 
     public function testStringOrNullExpectNull()
     {
-        $this->assertNull(stringOrNull(""));
+        $this->assertNull(stringOrNull(''));
         $this->assertNull(stringOrNull(null));
     }
 

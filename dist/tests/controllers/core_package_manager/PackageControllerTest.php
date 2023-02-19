@@ -51,7 +51,7 @@ class PackageControllerTest extends \PHPUnit\Framework\TestCase
         $controller = new PackageController();
 
         $this->assertNull($controller->_getPackageDownloadUrl("gibts_nicht"));
-        $this->assertNull($controller->_getPackageDownloadUrl(""));
+        $this->assertNull($controller->_getPackageDownloadUrl(''));
     }
 
     public function testTruncateInstalledPatches()

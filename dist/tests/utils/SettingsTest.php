@@ -98,7 +98,7 @@ class SettingsTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(0, Settings::convertVar("false", 'bool'));
 
         $this->assertEquals(1, Settings::convertVar("wuff", 'bool'));
-        $this->assertEquals(0, Settings::convertVar("", 'bool'));
+        $this->assertEquals(0, Settings::convertVar('', 'bool'));
     }
 
     public function testGetAllSettings()

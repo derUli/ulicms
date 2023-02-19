@@ -144,8 +144,8 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue(var_is_type(123, "numeric", true));
         $this->assertTrue(var_is_type(null, "numeric", false));
         $this->assertFalse(var_is_type(null, "numeric", true));
-        $this->assertFalse(var_is_type("", "numeric", true));
-        $this->assertTrue(var_is_type("", "numeric", false));
+        $this->assertFalse(var_is_type('', "numeric", true));
+        $this->assertTrue(var_is_type('', "numeric", false));
 
         $this->assertFalse(var_is_type("nicht leer", "typ_der_nicht_existiert", true));
     }

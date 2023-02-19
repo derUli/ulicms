@@ -14,12 +14,12 @@ class RoboSettingsTest extends RoboTestBase
     {
         Settings::delete("foo1");
         Settings::delete("foo2");
-        Settings::delete("");
+        Settings::delete('');
     }
 
     public function testSettingsList()
     {
-        Settings::set("", "");
+        Settings::set('', "");
         Settings::set("foo2", "");
         $output = $this->runRoboCommand(["settings:list"]);
         $this->assertGreaterThanOrEqual(60, substr_count($output, "\n"));

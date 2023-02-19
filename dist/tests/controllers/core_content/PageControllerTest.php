@@ -66,7 +66,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
     {
         $controller = ControllerRegistry::get(PageController::class);
         $this->assertTrue(
-            $controller->_checkIfSlugIsFree("", 'de', PHP_INT_MAX)
+            $controller->_checkIfSlugIsFree('', 'de', PHP_INT_MAX)
         );
     }
 

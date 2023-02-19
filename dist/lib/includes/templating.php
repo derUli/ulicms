@@ -990,7 +990,7 @@ function checkAccess(string $access = ''): ?string
 
 function check_status(): string
 {
-    $status = apply_filter("", "status");
+    $status = apply_filter('', "status");
     if (!empty($status)) {
         return $status;
     }

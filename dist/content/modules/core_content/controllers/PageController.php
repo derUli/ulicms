@@ -943,7 +943,7 @@ class PageController extends Controller
             );
             $selectItems[] = $item->getHtml();
         }
-        return implode("", $selectItems);
+        return implode('', $selectItems);
     }
 
     public function getParentPageId(): object

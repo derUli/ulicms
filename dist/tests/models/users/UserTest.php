@@ -550,7 +550,7 @@ class UserTest extends \PHPUnit\Framework\TestCase
     public function testGetDisplayNameReturnsEmptyString()
     {
         $user = new User();
-        $this->assertEquals("", $user->getFullName());
+        $this->assertEquals('', $user->getFullName());
     }
 
     public function testGetAvatarReturnsFallback()

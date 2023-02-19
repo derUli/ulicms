@@ -34,7 +34,7 @@ class InfoController extends MainClass
 
         $lines = array_filter($lines, "trim");
         $lines = array_filter($lines, "strlen");
-        $text = nl2br(implode("", $lines));
+        $text = nl2br(implode('', $lines));
         return ($text ? trim($text) : get_translation("fetch_failed"));
     }
 

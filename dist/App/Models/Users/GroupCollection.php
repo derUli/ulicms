@@ -50,6 +50,6 @@ class GroupCollection
             $tags
         );
 
-        return implode("", $tags);
+        return implode('', $tags);
     }
 }

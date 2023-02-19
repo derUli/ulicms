@@ -60,7 +60,7 @@ class CoreMediaControllerTest extends \PHPUnit\Framework\TestCase
     public function testReplaceLinksWithEmpty()
     {
         $controller = new CoreMediaController();
-        $output = $controller->_replaceLinks("");
+        $output = $controller->_replaceLinks('');
         $this->assertEmpty($output);
     }
 }

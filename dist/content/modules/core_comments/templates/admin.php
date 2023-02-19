@@ -46,7 +46,7 @@ foreach ($contents as $content) {
 }
 
 $actionSelect = array(
-    new ListItem("", "[" . get_translation("select_action") . "]"),
+    new ListItem('', "[" . get_translation("select_action") . "]"),
     new ListItem("mark_as_spam", get_translation("mark_as_spam")),
     new ListItem("mark_as_read", get_translation("mark_as_read")),
     new ListItem("mark_as_unread", get_translation("mark_as_unread")),
@@ -143,10 +143,10 @@ echo ModuleHelper::buildMethodCallForm(
                     false,
                     $comment->getId(),
                     [
-                                                                                        "class" => "checkbox comment-checkbox",
-                                                                                        "data-select-all-checkbox" => ".select-all",
-                                                                                        "data-checkbox-group" => ".comment-checkbox"
-                                                                                    ]
+                                                                                                "class" => "checkbox comment-checkbox",
+                                                                                                "data-select-all-checkbox" => ".select-all",
+                                                                                                "data-checkbox-group" => ".comment-checkbox"
+                                                                                            ]
                 );
                 ?></td>
                     <td>

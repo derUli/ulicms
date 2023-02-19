@@ -19,7 +19,7 @@ class DBMigratorTest extends \PHPUnit\Framework\TestCase
 
     public function testCheckVarsWithComponentEmpty()
     {
-        $migrator = new DBMigrator("", "");
+        $migrator = new DBMigrator('', "");
 
         $this->expectException("Exception");
         $this->expectExceptionMessage("component is null or empty");

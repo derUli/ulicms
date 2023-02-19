@@ -779,13 +779,13 @@ class User extends Model
         if ($this->id === null) {
             return;
         }
-        
+
         $sql = 'update {prefix}users set failed_logins = failed_logins + 1 '
                 . 'where id = ?';
         $args = [
             $this->id
         ];
-        
+
         Database::pQuery($sql, $args, true);
     }
 
