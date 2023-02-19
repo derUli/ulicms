@@ -49,10 +49,10 @@ class User extends Model
      */
     public function loadById($id): void
     {
-        $sql = "select * from {prefix}users where id = ?";
-        $args = array(
+        $sql = 'select * from {prefix}users where id = ?';
+        $args = [
             (int) $id
-        );
+        ];
         $result = Database::pQuery($sql, $args, true);
         $this->fillVars($result);
     }
@@ -64,8 +64,8 @@ class User extends Model
      */
     public function loadByUsername(string $name): void
     {
-        $sql = "select * from {prefix}users where username "
-                . "COLLATE utf8mb4_general_ci = ?";
+        $sql = 'select * from {prefix}users where username '
+                . 'COLLATE utf8mb4_general_ci = ?';
         $args = [
             $name
         ];
@@ -80,8 +80,8 @@ class User extends Model
      */
     public function loadByEmail(string $email): void
     {
-        $sql = "select * from {prefix}users where email "
-                . "COLLATE utf8mb4_general_ci = ?";
+        $sql = 'select * from {prefix}users where email '
+                . 'COLLATE utf8mb4_general_ci = ?';
 
         $args = [
             $email
@@ -107,15 +107,15 @@ class User extends Model
     public function toSessionData(): ?array
     {
         return $this->isPersistent() ? [
-            "ulicms_login" => $this->getUsername(),
-            "lastname" => $this->getLastname(),
-            "firstname" => $this->getFirstname(),
-            "email" => $this->getEmail(),
-            "login_id" => $this->getId(),
-            "require_password_change" => $this->getRequirePasswordChange(),
-            "group_id" => $this->getPrimaryGroupId(),
-            "logged_in" => true,
-            "session_begin" => time()
+            'ulicms_login' => $this->getUsername(),
+            'lastname' => $this->getLastname(),
+            'firstname' => $this->getFirstname(),
+            'email' => $this->getEmail(),
+            'login_id' => $this->getId(),
+            'require_password_change' => $this->getRequirePasswordChange(),
+            'group_id' => $this->getPrimaryGroupId(),
+            'logged_in' => true,
+            'session_begin' => time()
                 ] : null;
     }
 
@@ -136,7 +136,7 @@ class User extends Model
             App\Utils\Session\sessionStart();
         }
 
-        $_SESSION["logged_in"] = true;
+        $_SESSION['logged_in'] = true;
 
         foreach ($sessionData as $key => $value) {
             $_SESSION[$key] = $value;
@@ -148,11 +148,12 @@ class User extends Model
         if (!$redirect || is_cli()) {
             return;
         }
-        $login_url = apply_filter("index.php", "login_url");
-        if (isset($_REQUEST["go"])) {
-            Response::safeRedirect($_REQUEST["go"]);
+        $login_url = apply_filter('index.php', 'login_url');
+
+        if (isset($_REQUEST['go'])) {
+            Response::safeRedirect($_REQUEST['go']);
         } else {
-            $login_url = apply_filter("index.php", "login_url");
+            $login_url = apply_filter('index.php', 'login_url');
             Response::redirect($login_url);
         }
     }
@@ -190,11 +191,13 @@ class User extends Model
     public function sendWelcomeMail(string $password): bool
     {
         $subject = get_translation(
-            "new_user_account_at_site",
-            array("%domain%" => get_domain())
+            'new_user_account_at_site',
+            [
+                '%domain%' => get_domain()
+            ]
         );
         $mailBody = $this->getWelcomeMailText($password);
-        $headers = "From: " . Settings::get("email");
+        $headers = 'From: ' . Settings::get('email');
 
         return Mailer::send($this->getEmail(), $subject, $mailBody, $headers);
     }
@@ -206,10 +209,10 @@ class User extends Model
      */
     public function getWelcomeMailText(string $password): string
     {
-        ViewBag::set("user", $this);
-        ViewBag::set("url", ModuleHelper::getBaseUrl());
-        ViewBag::set("password", $password);
-        return Template::executeDefaultOrOwnTemplate("email/user_welcome.php");
+        ViewBag::set('user', $this);
+        ViewBag::set('url', ModuleHelper::getBaseUrl());
+        ViewBag::set('password', $password);
+        return Template::executeDefaultOrOwnTemplate('email/user_welcome.php');
     }
 
     /**
@@ -245,13 +248,13 @@ class User extends Model
      */
     protected function insert(): void
     {
-        $sql = "insert into {prefix}users (username, lastname, firstname,
+        $sql = 'insert into {prefix}users (username, lastname, firstname,
                 email, password, about_me, group_id, html_editor,
                 require_password_change, admin,
                 password_changed, locked, last_login,
                 homepage, default_language) values
-                (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        $args = array(
+                (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+        $args = [
             $this->username,
             $this->lastname,
             $this->firstname,
@@ -267,8 +270,8 @@ class User extends Model
             $this->last_login,
             $this->homepage,
             $this->default_language
-        );
-        $result = Database::pQuery($sql, $args, true);
+        ];
+        Database::pQuery($sql, $args, true);
         $this->id = Database::getLastInsertID();
     }
 
@@ -278,13 +281,13 @@ class User extends Model
      */
     protected function update(): void
     {
-        $sql = "update {prefix}users set username = ?, lastname = ?,
+        $sql = 'update {prefix}users set username = ?, lastname = ?,
             firstname = ?, email = ?, password = ?, about_me = ?,
             group_id = ?, html_editor = ?,
             require_password_change = ?, admin = ?, password_changed = ?,
             locked = ?, last_login = ?,
-            homepage = ?, default_language = ? where id = ?";
-        $args = array(
+            homepage = ?, default_language = ? where id = ?';
+        $args = [
             $this->username,
             $this->lastname,
             $this->firstname,
@@ -301,7 +304,7 @@ class User extends Model
             $this->homepage,
             $this->default_language,
             $this->id
-        );
+        ];
         Database::pQuery($sql, $args, true);
     }
 
@@ -410,10 +413,10 @@ class User extends Model
             return false;
         }
 
-        $sql = "delete from {prefix}users where id = ?";
-        $args = array(
+        $sql = 'delete from {prefix}users where id = ?';
+        $args = [
             $this->id
-        );
+        ];
         $result = Database::pQuery($sql, $args, true);
 
         $this->removeAvatar();
@@ -533,9 +536,9 @@ class User extends Model
         $lastAction = 0;
         if ($this->id !== null) {
             $sql = "select last_action from {prefix}users where id = ?";
-            $args = array(
+            $args = [
                 $this->id
-            );
+            ];
             $result = Database::pQuery($sql, $args, true);
             if (Database::any($result)) {
                 $data = Database::fetchObject($result);
@@ -558,10 +561,10 @@ class User extends Model
 
         $time = (int) $time;
         $sql = "update {prefix}users set last_action = ? where id = ?";
-        $args = array(
+        $args = [
             $time,
             $this->id
-        );
+        ];
         Database::pQuery($sql, $args, true);
     }
 
@@ -603,7 +606,6 @@ class User extends Model
     {
         $this->setPrimaryGroupId($gid);
     }
-
 
     /**
      * Get primary group
@@ -660,13 +662,13 @@ class User extends Model
      */
     public function setHTMLEditor(string $editor): void
     {
-        $allowedEditors = array(
-            "ckeditor",
-            "codemirror"
-        );
+        $allowedEditors = [
+            'ckeditor',
+            'codemirror'
+        ];
 
         if (!in_array($editor, $allowedEditors)) {
-            $editor = "ckeditor";
+            $editor = 'ckeditor';
         }
 
         $this->html_editor = $editor;
@@ -727,9 +729,9 @@ class User extends Model
         $failedLogins = 0;
         if ($this->id !== null) {
             $sql = "select failed_logins from {prefix}users where id = ?";
-            $args = array(
+            $args = [
                 $this->id
-            );
+            ];
             $result = Database::pQuery($sql, $args, true);
             if (Database::any($result)) {
                 $data = Database::fetchObject($result);
@@ -746,9 +748,9 @@ class User extends Model
         }
         $sql = "update {prefix}users set failed_logins = failed_logins + 1 "
                 . "where id = ?";
-        $args = array(
+        $args = [
             $this->id
-        );
+        ];
         Database::pQuery($sql, $args, true);
     }
 
@@ -773,10 +775,10 @@ class User extends Model
         }
 
         $sql = "update {prefix}users set failed_logins = ? where id = ?";
-        $args = array(
+        $args = [
             $amount,
             $this->id
-        );
+        ];
         Database::pQuery($sql, $args, true);
 
         return Database::getAffectedRows($amount) > 0;
@@ -993,9 +995,9 @@ class User extends Model
         $groups = [];
 
         $sql = "select `group_id` from `{prefix}user_groups` where user_id = ?";
-        $args = array(
+        $args = [
             (int) $user_id
-        );
+        ];
         $result = Database::pQuery($sql, $args, true);
         while ($row = Database::fetchObject($result)) {
             $groups[] = new Group($row->group_id);
@@ -1017,13 +1019,18 @@ class User extends Model
             true
         );
         foreach ($this->secondary_groups as $group) {
-            Database::pQuery("insert into {prefix}user_groups
+            Database::pQuery(
+                'insert into {prefix}user_groups
                               (user_id, group_id)
                               VALUES
-                              (?,?)", array(
-                $this->getID(),
-                $group->getID()
-                    ), true);
+                              (?,?)',
+                [
+                    $this->getID(),
+                    $group->getID()
+                ],
+                true
+            )
+            ;
         }
     }
 

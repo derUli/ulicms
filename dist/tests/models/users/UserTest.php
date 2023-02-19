@@ -279,7 +279,7 @@ class UserTest extends \PHPUnit\Framework\TestCase
         $user->registerSession();
 
         $this->assertEquals(get_user_id(), $user->getId());
-        $this->assertEquals($user->getUsername(), $_SESSION["ulicms_login"]);
+        $this->assertEquals($user->getUsername(), $_SESSION['ulicms_login']);
         $this->assertNotNull(session_id());
     }
 
@@ -305,7 +305,7 @@ class UserTest extends \PHPUnit\Framework\TestCase
         $this->assertIsArray($sessionData);
         $this->assertCount(9, $sessionData);
         $this->assertEquals($user->getId(), $sessionData["login_id"]);
-        $this->assertEquals($user->getUsername(), $sessionData["ulicms_login"]);
+        $this->assertEquals($user->getUsername(), $sessionData['ulicms_login']);
 
         $this->assertEquals($user->getLastname(), $sessionData["lastname"]);
     }
