@@ -12,8 +12,15 @@ use ImagineHelper;
 use Imagine\Image\Box;
 use Imagine\Image\ImageInterface;
 
+/**
+ * Utils to scale down image uploads
+ */
 class ImageScaleHelper extends Helper
 {
+    /**
+     * Get maximum allowed size dimension for images
+     * @return array|null
+     */
     public static function getMaxImageDimensions(): ?array
     {
         $dimensions = null;
@@ -38,6 +45,12 @@ class ImageScaleHelper extends Helper
         return $dimensions;
     }
 
+    /**
+     * Scale down huge images to make them fit max_image_dimensions
+     * @param string $file
+     * @param string|null $outputFile
+     * @return bool
+     */
     public static function scaleDown(
         string $file,
         ?string $outputFile = null

@@ -8,6 +8,9 @@ defined('ULICMS_ROOT') or exit('no direct script access allowed');
 
 use ModuleHelper;
 
+/**
+ * Utils to build HTML links
+ */
 class Link
 {
     /**
