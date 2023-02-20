@@ -198,11 +198,11 @@ if (!$permissionChecker->hasPermission("design")) {
             </tr>
             <tr>
                 <td><strong><?php translate("HEADER_BACKGROUNDCOLOR"); ?> </strong></td>
-                <td><input name="header-background-color"
+                <td><input name="header_background_color"
                            class="jscolor {
                                hash:true,caps:true
                            }"
-                           value="<?php echo _esc(Settings::get("header-background-color")); ?>"></td>
+                           value="<?php echo _esc(Settings::get("header_background_color")); ?>"></td>
             </tr>
             <tr>
                 <td><strong><?php translate("font_color"); ?> </strong></td>

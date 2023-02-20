@@ -67,11 +67,11 @@ class DesignSettingsController extends Controller
         Settings::set("font_size", $_REQUEST["font_size"]);
         Settings::set("ckeditor_skin", $_REQUEST["ckeditor_skin"]);
 
-        if (Settings::get("header-background-color") != $_REQUEST["header-background-color"]
+        if (Settings::get("header_background_color") != $_REQUEST["header_background_color"]
         ) {
             Settings::set(
-                "header-background-color",
-                $_REQUEST["header-background-color"]
+                "header_background_color",
+                $_REQUEST["header_background_color"]
             );
         }
 
@@ -166,7 +166,7 @@ class DesignSettingsController extends Controller
     public function _generateSCSS(): ?string
     {
         $settings = [
-            'header-background-color' => Settings::get('header-background-color'),
+            'header-background-color' => Settings::get('header_background_color'),
             'body-text-color' => Settings::get('body-text-color'),
             'body-background-color' => Settings::get('body-background-color'),
             'default-font' => Settings::get('default_font'),
