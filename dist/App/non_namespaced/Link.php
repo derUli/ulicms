@@ -42,6 +42,12 @@ class Link extends Page
         return $result;
     }
 
+    /**
+     * Check if this is content is regular
+     * Regular means that it is a accessible page
+     * This applies to any default contents except Link, Language_Link and Node
+     * @return bool
+     */
     public function isRegular(): bool
     {
         return false;
