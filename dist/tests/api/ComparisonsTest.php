@@ -77,16 +77,16 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase
     public function testIsMaintenanceModeOn()
     {
         Settings::set('maintenance_mode', "1");
-        $this->assertTrue(isMaintenanceMode());
+        $this->assertTrue(is_maintenance_mode());
     }
 
     public function testIsMaintenanceModeOff()
     {
         Settings::set('maintenance_mode', "0");
-        $this->assertFalse(isMaintenanceMode());
+        $this->assertFalse(is_maintenance_mode());
 
         Settings::delete('maintenance_mode');
-        $this->assertFalse(isMaintenanceMode());
+        $this->assertFalse(is_maintenance_mode());
     }
 
     public function testIsJsonTrue()

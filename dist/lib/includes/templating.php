@@ -995,7 +995,7 @@ function check_status(): string
         return $status;
     }
 
-    if (isMaintenanceMode()) {
+    if (is_maintenance_mode()) {
         return "503 Service Unavailable";
     }
     if (get_type() == "snippet") {

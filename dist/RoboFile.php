@@ -140,7 +140,7 @@ class RoboFile extends Tasks
      */
     public function maintenanceStatus()
     {
-        $this->writeln(strbool(isMaintenanceMode()));
+        $this->writeln(strbool(is_maintenance_mode()));
     }
 
     /**

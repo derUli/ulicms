@@ -18,9 +18,7 @@ class SimpleSettingsController extends Controller
         );
         Settings::set(
             'maintenance_mode',
-            intval(
-                isset($_POST['maintenance_mode'])
-            )
+            (int)isset($_POST['maintenance_mode'])
         );
         Settings::set("email", $_POST["email"]);
         Settings::set("timezone", $_POST["timezone"]);

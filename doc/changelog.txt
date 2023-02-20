@@ -25,6 +25,7 @@ Entfernte Features:
 * File::findAllDirs()
 * get_html_head()
 * html_head()
+* is_maintenance_mode()
 
 Entfernte API-Methoden:
 * ArrayHelper::flatten()
@@ -112,6 +113,7 @@ Entfernte API-Methoden:
 * head()
 * PackageManager::testSplitPackageName()
 * is_numeric_array()
+* isMaintenanceMode()
 
 ===== Neues in UliCMS 2022.1 =====
 

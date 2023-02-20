@@ -95,7 +95,7 @@ if (Settings::get("redirection")) {
 
 $theme = get_theme();
 
-if (isMaintenanceMode()) {
+if (is_maintenance_mode()) {
     do_event("before_maintenance_message");
     // Sende HTTP Status 503 und Retry-After im Wartungsmodus
     send_header($_SERVER['SERVER_PROTOCOL'] .
