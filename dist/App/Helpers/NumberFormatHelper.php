@@ -19,11 +19,11 @@ class NumberFormatHelper extends Helper
     public const SQL_DATE_WITH_SECONDS = "Y-m-d H:i:s";
     public const SQL_DATE_WITHOUT_SECONDS = "Y-m-d H:i";
 
-   /**
-    * Format filesizes in a more human readable format
-    * @param float $bytes
-    * @return string
-    */
+    /**
+     * Format filesizes in a more human readable format
+     * @param float $bytes
+     * @return string
+     */
     public static function formatSizeUnits(float $bytes): string
     {
         $size = new FileSize("$bytes Bytes");
@@ -66,7 +66,7 @@ class NumberFormatHelper extends Helper
         }
 
         // Format it as a human readable string
-        // 
+        //
         // "3 Hours ago"
         // "5 Months ago"
         // "2 Years ago"

@@ -8,7 +8,7 @@ defined('ULICMS_ROOT') or exit('no direct script access allowed');
 
 function sessionStart(): bool
 {
-    return !headers_sent() ? session_start() : false;
+    return !headers_sent() && !session_id() ? session_start() : false;
 }
 
 function sessionName(?string $name = null): string
