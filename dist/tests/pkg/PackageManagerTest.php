@@ -42,17 +42,6 @@ class PackageManagerTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($packageManager->isInstalled("my_ugly_theme", PackageTypes::TYPE_THEME));
     }
 
-    public function testSplitPackageName()
-    {
-        $packageManager = new PackageManager();
-        $input = "foo-bar-2.0";
-        $expected = [
-            "foo-bar",
-            "2.0"
-        ];
-        $this->assertEquals($expected, $packageManager->splitPackageName($input));
-    }
-
     public function testCheckForNewerVersionPackageReturnsFalse()
     {
         $packageManager = new PackageManager();

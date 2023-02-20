@@ -110,6 +110,7 @@ Entfernte API-Methoden:
 * idefine()
 * get_head()
 * head()
+* PackageManager::testSplitPackageName()
 
 ===== Neues in UliCMS 2022.1 =====
 

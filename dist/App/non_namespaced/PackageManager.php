@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
 use App\Services\Connectors\PackageSourceConnector;
 use App\Constants\PackageTypes;
 use App\Utils\CacheUtil;
@@ -12,29 +14,16 @@ use App\Utils\File;
  *  */
 class PackageManager
 {
+    /**
+     * Check package source for a newer version of a package
+     * @param string $name
+     * @return string|null
+     */
     public function checkForNewerVersionOfPackage(string $name): ?string
     {
         $connector = new PackageSourceConnector();
         $connector->fetch(true);
         return $connector->getVersionOfPackage($name);
-    }
-
-    /**
-     * Split package name into
-     * @param string $name
-     * @return array
-     */
-    public function splitPackageName(string $name): array
-    {
-        $name = str_ireplace(".tar.gz", "", $name);
-        $name = str_ireplace(".zip", "", $name);
-        $splitted = explode("-", $name);
-        $version = array_pop($splitted);
-        $name = $splitted;
-        return [
-            join("-", $name),
-            $version
-        ];
     }
 
     /**
@@ -108,6 +97,10 @@ class PackageManager
         return $success;
     }
 
+    /**
+     * Get installed modules
+     * @return array
+     */
     public function getInstalledModules(): array
     {
         $availableModules = [];
@@ -127,6 +120,10 @@ class PackageManager
         return $availableModules;
     }
 
+    /**
+     * Get installed themes
+     * @return array
+     */
     public function getInstalledThemes(): array
     {
         $themes = [];
@@ -150,6 +147,12 @@ class PackageManager
         return $themes;
     }
 
+    /**
+     * Get installed packages
+     * @param string $type
+     * @return array|null
+     * @throws BadMethodCallException
+     */
     public function getInstalledPackages(string $type = 'modules'): ?array
     {
         if ($type === 'modules' or $type === 'module') {
