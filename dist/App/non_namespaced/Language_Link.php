@@ -53,6 +53,12 @@ class Language_Link extends Page
         $this->link_to_language = $language ? $language->getID() : null;
     }
 
+    /**
+     * Check if this is content is regular
+     * Regular means that it is a accessible page
+     * This applies to any default contents except Link, Language_Link and Node
+     * @return bool
+     */
     public function isRegular(): bool
     {
         return false;
