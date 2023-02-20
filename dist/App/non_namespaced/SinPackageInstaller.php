@@ -4,12 +4,19 @@ declare(strict_types=1);
 
 use App\Utils\File;
 
+/**
+ * Util to install Simple Install packages.
+ */
 class SinPackageInstaller
 {
     private $file = null;
     private $errors = [];
     private $packageData = null;
 
+    /**
+     * Constructor
+     * @param string $file
+     */
     public function __construct(string $file)
     {
         if (StringHelper::isNotNullOrEmpty($file)) {
@@ -17,39 +24,68 @@ class SinPackageInstaller
         }
     }
 
+    /**
+     * Load package data
+     * @return array
+     */
     public function loadPackage(): array
     {
+        // If already loaded
         if ($this->packageData) {
             return $this->packageData;
         }
+
+        // Load file
         $data = file_get_contents($this->file);
+
+        // Decode json to assoc
         $json = json_decode($data, true);
         $this->packageData = $json;
+
         return $json;
     }
 
+    /**
+     * Extract archive data
+     * @return string
+     */
     public function extractArchive(): string
     {
         $path = Path::resolve("ULICMS_TMP/package-" . $this->getProperty("id")
                         . "-" . $this->getProperty("version") . ".tar.gz");
         $data = $this->loadPackage();
+
+        // Decode base64 data payload
         $decoded = base64_decode($data["data"]);
+
         file_put_contents($path, $decoded);
         return $path;
     }
 
+    /**
+     * Install package
+     * @param bool $clear_cache
+     * @return bool
+     */
     public function installPackage(bool $clear_cache = true): bool
     {
         if ($this->isInstallable()) {
             $path = $this->extractArchive();
             $pkg = new PackageManager();
             $result = $pkg->installPackage($path, $clear_cache);
+
             File::deleteIfExists($path);
+
             return $result;
         }
+
         return false;
     }
 
+    /**
+     * Get size of package data payload
+     * @return int
+     */
     public function getSize(): int
     {
         $data = $this->loadPackage();
@@ -57,10 +93,15 @@ class SinPackageInstaller
         return mb_strlen($decoded, '8bit');
     }
 
+    /**
+     * Get json property if is set
+     * @param string $name
+     * @return type
+     */
     public function getProperty(string $name)
     {
         $data = $this->loadPackage();
-        if (isset($data[$name])&& StringHelper::isNotNullOrEmpty(
+        if (isset($data[$name]) && StringHelper::isNotNullOrEmpty(
             $data[$name]
         )
         ) {
@@ -69,52 +110,61 @@ class SinPackageInstaller
         return null;
     }
 
+    /**
+     * Get installation errors
+     * @return array
+     */
     public function getErrors(): array
     {
         return $this->errors;
     }
 
+    /**
+     * Check if package is installable
+     * @return bool
+     */
     public function isInstallable(): bool
     {
         $this->errors = [];
         $installed_modules = getAllModules();
         $data = $this->loadPackage();
+
         if (isset($data["dependencies"]) && is_array($data["dependencies"])) {
             $dependencies = $data["dependencies"];
+
             foreach ($dependencies as $dependency) {
                 if (!in_array($dependency, $installed_modules)) {
                     $this->errors[] = get_translation(
                         "dependency_x_is_not_installed",
                         [
-                                "%x%" => $dependency
-                    ]
+                            "%x%" => $dependency
+                        ]
                     );
                 }
             }
         }
+
         $version = new UliCMSVersion();
         $version = $version->getInternalVersionAsString();
+
         $version_not_supported = false;
-        if (isset($data["compatible_from"])
-               && StringHelper::isNotNullOrEmpty($data["compatible_from"]) && !\App\Utils\VersionComparison::compare($version, $data["compatible_from"], ">=")) {
+
+        if (isset($data["compatible_from"]) && StringHelper::isNotNullOrEmpty($data["compatible_from"]) && !\App\Utils\VersionComparison::compare($version, $data["compatible_from"], ">=")) {
             $version_not_supported = true;
         }
 
-        if (isset($data["compatible_to"])
-               && StringHelper::isNotNullOrEmpty($data["compatible_to"]) && !\App\Utils\VersionComparison::compare($version, $data["compatible_to"], "<=")) {
+        if (isset($data["compatible_to"]) && StringHelper::isNotNullOrEmpty($data["compatible_to"]) && !\App\Utils\VersionComparison::compare($version, $data["compatible_to"], "<=")) {
             $version_not_supported = true;
         }
 
         $phpVersionSupported = true;
 
         // if package requires a specific php version check it
-        if (isset($data["min_php_version"])
-               && StringHelper::isNotNullOrEmpty($data["min_php_version"]) && !\App\Utils\VersionComparison::compare(phpversion(), $data["min_php_version"], ">=")) {
+        if (isset($data["min_php_version"]) && StringHelper::isNotNullOrEmpty($data["min_php_version"]) && !\App\Utils\VersionComparison::compare(phpversion(), $data["min_php_version"], ">=")) {
             $phpVersionSupported = false;
         }
 
-        if (isset($data["max_php_version"])
-               && StringHelper::isNotNullOrEmpty($data["max_php_version"]) && !\App\Utils\VersionComparison::compare(phpversion(), $data["max_php_version"], "<=")) {
+        if (isset($data["max_php_version"]) && StringHelper::isNotNullOrEmpty($data["max_php_version"]) && !\App\Utils\VersionComparison::compare(phpversion(), $data["max_php_version"], "<=")) {
             $phpVersionSupported = false;
         }
         if (!$phpVersionSupported) {
@@ -123,21 +173,28 @@ class SinPackageInstaller
             ));
         }
 
-        $mysqlVersion = Database::getServerVersion();
-        $mysqlVersion = preg_replace('/[^0-9.].*/', '', $mysqlVersion);
+        $mysqlVersion = preg_replace('/[^0-9.].*/', '', Database::getServerVersion());
 
         $mysqlVersionSupported = true;
 
         // if package requires a specific mysql version check it
-        if (isset($data["min_mysql_version"])
-               && StringHelper::isNotNullOrEmpty($data["min_mysql_version"])
-                && !\App\Utils\VersionComparison::compare($mysqlVersion, $data["min_mysql_version"], ">=")) {
+        if (
+            isset($data["min_mysql_version"]) &&
+            StringHelper::isNotNullOrEmpty($data["min_mysql_version"]) &&
+            !\App\Utils\VersionComparison::compare($mysqlVersion, $data["min_mysql_version"], ">=")
+        ) {
             $mysqlVersionSupported = false;
         }
 
-        if (isset($data["max_mysql_version"])
-               && StringHelper::isNotNullOrEmpty($data["max_mysql_version"])
-                && !\App\Utils\VersionComparison::compare($mysqlVersion, $data["max_mysql_version"], "<=")) {
+        if (
+            isset($data["max_mysql_version"]) &&
+            StringHelper::isNotNullOrEmpty($data["max_mysql_version"]) &&
+            !\App\Utils\VersionComparison::compare(
+                $mysqlVersion,
+                $data["max_mysql_version"],
+                "<="
+            )
+        ) {
             $mysqlVersionSupported = false;
         }
 
@@ -145,21 +202,24 @@ class SinPackageInstaller
             $this->errors[] = get_translation(
                 "mysql_version_x_not_supported",
                 [
-                        "%version%" => $mysqlVersion
-            ]
+                    "%version%" => $mysqlVersion
+                ]
             );
         }
 
-        if (isset($data["required_php_extensions"])
-                and is_array($data["required_php_extensions"])) {
+        if (
+            isset($data["required_php_extensions"]) &&
+            is_array($data["required_php_extensions"])
+        ) {
             $loadedExtensions = get_loaded_extensions();
+
             foreach ($data["required_php_extensions"] as $extension) {
                 if (!in_array($extension, $loadedExtensions)) {
                     $this->errors[] = get_translation(
                         "php_extension_x_not_installed",
                         [
-                                "%extension%" => $extension
-                    ]
+                            "%extension%" => $extension
+                        ]
                     );
                 }
             }
