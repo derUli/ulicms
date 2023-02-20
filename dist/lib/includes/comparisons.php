@@ -12,8 +12,7 @@ use Detection\MobileDetect;
  * @param type $val
  * @return bool
  */
-function is_decimal($val): bool
-{
+function is_decimal($val): bool {
     return is_numeric($val) && !ctype_digit((string) $val);
 }
 
@@ -22,8 +21,7 @@ function is_decimal($val): bool
  * @param string|null $str
  * @return bool
  */
-function is_json(?string $str): bool
-{
+function is_json(?string $str): bool {
     return $str ? json_decode($str) != null : false;
 }
 
@@ -31,8 +29,7 @@ function is_json(?string $str): bool
  * Checks if we are currently in admin dir
  * @return bool
  */
-function is_admin_dir(): bool
-{
+function is_admin_dir(): bool {
     return basename(getcwd()) === 'admin';
 }
 
@@ -40,8 +37,7 @@ function is_admin_dir(): bool
  * Checks by useragent if the client is a desktop computer
  * @return bool
  */
-function is_desktop(): bool
-{
+function is_desktop(): bool {
     return !is_mobile();
 }
 
@@ -50,8 +46,7 @@ function is_desktop(): bool
  * @param string|null $useragent
  * @return bool
  */
-function is_crawler(?string $useragent = null): bool
-{
+function is_crawler(?string $useragent = null): bool {
     $useragent = $useragent ?? Request::getUserAgent();
 
     $crawlerDetect = new CrawlerDetect();
@@ -62,8 +57,7 @@ function is_crawler(?string $useragent = null): bool
  * Checks by useragent if the current client is a mobile device
  * @return bool
  */
-function is_mobile(): bool
-{
+function is_mobile(): bool {
     $mobileDetect = new MobileDetect();
     $result = $mobileDetect->isMobile();
 
@@ -80,8 +74,7 @@ function is_mobile(): bool
  * Checks if the website is currently on maintenance mode
  * @return bool
  */
-function isMaintenanceMode(): bool
-{
+function isMaintenanceMode(): bool {
     if (!is_string(Settings::get('maintenance_mode'))) {
         return false;
     }
@@ -94,8 +87,7 @@ function isMaintenanceMode(): bool
  * Checks by user agent if the current client is a tablet
  * @return bool
  */
-function is_tablet(): bool
-{
+function is_tablet(): bool {
     $mobileDetect = new \Detection\MobileDetect();
     $result = $mobileDetect->isTablet();
 
@@ -106,8 +98,7 @@ function is_tablet(): bool
  * Checks if the script is run from command line
  * @return bool
  */
-function is_cli(): bool
-{
+function is_cli(): bool {
     return php_sapi_name() == 'cli';
 }
 
@@ -118,8 +109,7 @@ function is_cli(): bool
  * @param type $required
  * @return bool
  */
-function var_is_type($var, $type, $required = false): bool
-{
+function var_is_type($var, $type, $required = false): bool {
     $methodName = "is_{$type}";
 
     if ($var === null || $var === '') {
@@ -137,7 +127,6 @@ function var_is_type($var, $type, $required = false): bool
  * @param string|null $input
  * @return bool
  */
-function is_version_number(?string $input): bool
-{
+function is_version_number(?string $input): bool {
     return ($input && version_compare($input, '0.0.1', '>='));
 }
