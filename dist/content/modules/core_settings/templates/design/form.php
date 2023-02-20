@@ -76,7 +76,8 @@ if (!$permissionChecker->hasPermission("design")) {
                         <?php }
          ?>
                     </select>
-                    <div id="theme-preview" class="voffset3">                        <i class="fa fa-spinner fa-spin"></i>
+                    <div id="theme-preview" class="voffset3">
+                        <i class="fa fa-spinner fa-spin"></i>
                         <div class="preview"></div>
                     </div>
                 </td>
@@ -206,19 +207,19 @@ if (!$permissionChecker->hasPermission("design")) {
             </tr>
             <tr>
                 <td><strong><?php translate("font_color"); ?> </strong></td>
-                <td><input name="body-text-color"
+                <td><input name="body_text_color"
                            class="jscolor {
                                hash:true,caps:true
                            }"
-                           value="<?php echo _esc(Settings::get("body-text-color")); ?>"></td>
+                           value="<?php echo _esc(Settings::get("body_text_color")); ?>"></td>
             </tr>
             <tr>
                 <td><strong><?php translate("BACKGROUNDCOLOR"); ?> </strong></td>
-                <td><input name="body-background-color"
+                <td><input name="body_background_color"
                            class="jscolor {
                                hash:true,caps:true
                            }"
-                           value ="<?php echo _esc(Settings::get("body-background-color")); ?>"></td>
+                           value ="<?php echo _esc(Settings::get("body_background_color")); ?>"></td>
             </tr>
             <?php
             if ($permissionChecker->hasPermission("logo")) {
