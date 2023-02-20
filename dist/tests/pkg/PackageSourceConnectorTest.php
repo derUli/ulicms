@@ -82,12 +82,12 @@ class PackageSourceConnectorTest extends \PHPUnit\Framework\TestCase
         $connector = new PackageSourceConnector();
         $this->assertTrue($connector->fetch(true));
 
-        $metadata = $connector->getDataOfPackage("break_frames");
+        $metadata = $connector->getDataOfPackage("bootstrap");
 
         $this->assertInstanceOf(stdClass::class, $metadata);
-        $this->assertEquals("break_frames", $metadata->name);
+        $this->assertEquals("bootstrap", $metadata->name);
         $this->assertEquals("module", $metadata->type);
-        $this->assertEquals("0.0.2", $metadata->version);
+        $this->assertEquals("3.3.7", $metadata->version);
     }
 
     public function testGetPackageSourceUrl()

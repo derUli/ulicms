@@ -69,6 +69,10 @@ class Module_Page extends Page
         return $result;
     }
 
+     /**
+     * Get css classes for Font Awesome icon
+     * @return string
+     */
     public function getIcon(): string
     {
         return "fas fa-puzzle-piece";

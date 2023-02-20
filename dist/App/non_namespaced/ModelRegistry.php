@@ -22,6 +22,7 @@ class ModelRegistry
             if (!$models) {
                 continue;
             }
+
             foreach ($models as $key => $value) {
                 $path = getModulePath($module, true) . trim($value, '/');
                 if (!str_ends_with($path, ".php")) {
@@ -30,6 +31,7 @@ class ModelRegistry
                 $modelRegistry[$key] = $path;
             }
         }
+
         foreach ($modelRegistry as $key => $value) {
             if (is_file($value)) {
                 require $value;

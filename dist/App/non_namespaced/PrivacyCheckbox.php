@@ -4,36 +4,51 @@ declare(strict_types=1);
 
 use App\HTML\Input as Input;
 
-// Class with DSGVO / GDPR related functions
+/**
+ * Handling GDPR / DSGVO privacy checkbox
+ */
 class PrivacyCheckbox
 {
     private $language;
 
     public const CHECKBOX_NAME = "accept_privacy_policy";
 
+    /**
+     * Constructor
+     * @param string $language
+     */
     public function __construct(string $language)
     {
         $this->language = $language;
     }
 
-    // the gdpr checkbox must be enabled and configured by language
+    /**
+     * Check if the GDPR checkbox is enabled
+     * @return bool
+     */
     public function isEnabled(): bool
     {
-        return boolval(
-            Settings::get(
-                "privacy_policy_checkbox_enable_{$this->language}",
-                'bool'
-            )
-        );
+        return (bool)
+                Settings::get(
+                    "privacy_policy_checkbox_enable_{$this->language}",
+                    'bool'
+                )
+        ;
     }
 
-    // returns the name of the checkbox input
+    /**
+     * Get the name of the checkbox input
+     * @return string
+     */
     public function getCheckboxName(): string
     {
         return self::CHECKBOX_NAME;
     }
 
-    // returns true if the checkbox is checked
+    /**
+     * Check if the checkbox is checked
+     * @return bool
+     */
     public function isChecked(): bool
     {
         $value = Request::getVar(
@@ -41,11 +56,15 @@ class PrivacyCheckbox
             "",
             "str"
         );
-        return StringHelper::isNotNullOrWhitespace($value);
+        return !empty($value);
     }
 
-    // check if the gdpr checkbox is checked
-    // after that execute success or failed callback
+    /**
+     * Check if the checkbox is checked and execute callback
+     * @param callable|null $success
+     * @param callable|null $failed
+     * @return void
+     */
     public function check(
         ?callable $success = null,
         ?callable $failed = null
@@ -65,9 +84,12 @@ class PrivacyCheckbox
         }
     }
 
-    // render the dgpr checkbox input
-    // the dgpr accept text can be written in a html editor
-    // this method replaces the [checkbox] placeholder with the checkbox input
+    /**
+     * Render the GDPR checkbox input
+    // The GDPR accept text can be written in a html editor.
+    // This method replaces the [checkbox] placeholder with the checkbox input
+     * @return string
+     */
     public function render(): string
     {
         $checkboxHtml = Input::checkBox(
@@ -75,9 +97,9 @@ class PrivacyCheckbox
             false,
             "✔",
             [
-                            "required" => "required",
-                            "id" => $this->getCheckboxName()
-                        ]
+                "required" => "required",
+                "id" => $this->getCheckboxName()
+            ]
         );
         $fullHtml = Settings::get(
             "privacy_policy_checkbox_text_{$this->language}"

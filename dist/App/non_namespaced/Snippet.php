@@ -16,6 +16,10 @@ class Snippet extends Page
         $this->hidden = true;
     }
 
+     /**
+     * Get css classes for Font Awesome icon
+     * @return string
+     */
     public function getIcon(): string
     {
         return "fas fa-sticky-note";

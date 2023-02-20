@@ -60,6 +60,10 @@ class Video_Page extends Page
         $this->video = $video ? $video->getID() : null;
     }
 
+     /**
+     * Get css classes for Font Awesome icon
+     * @return string
+     */
     public function getIcon(): string
     {
         return "fas fa-film";

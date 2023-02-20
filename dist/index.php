@@ -176,6 +176,7 @@ do_event("after_functions");
 $hasModule = containsModule(get_slug());
 
 $cache_control = get_cache_control();
+
 switch ($cache_control) {
     case "auto":
     case "force":

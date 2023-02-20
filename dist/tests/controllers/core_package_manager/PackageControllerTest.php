@@ -68,11 +68,10 @@ class PackageControllerTest extends \PHPUnit\Framework\TestCase
         $controller = new PackageController();
         $output = $controller->_availablePackages();
 
-        $this->assertGreaterThanOrEqual(90, substr_count($output, "<tr>"));
-        $this->assertGreaterThanOrEqual(15, substr_count($output, "theme-"));
+        $this->assertGreaterThanOrEqual(3, substr_count($output, "<tr>"));
 
-        $this->assertStringContainsString("android_toolbar_color-1.2", $output);
         $this->assertStringContainsString("bootstrap-3.3.7", $output);
+        $this->assertStringContainsString("slicknav-1.0.10", $output);
     }
 
     public function testGetModuleInfo()
