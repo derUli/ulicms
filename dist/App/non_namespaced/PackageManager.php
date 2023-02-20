@@ -7,6 +7,9 @@ use App\Constants\PackageTypes;
 use App\Utils\CacheUtil;
 use App\Utils\File;
 
+/**
+ * This class is for handling packages
+ *  */
 class PackageManager
 {
     public function checkForNewerVersionOfPackage(string $name): ?string
@@ -16,6 +19,11 @@ class PackageManager
         return $connector->getVersionOfPackage($name);
     }
 
+    /**
+     * Split package name into
+     * @param string $name
+     * @return array
+     */
     public function splitPackageName(string $name): array
     {
         $name = str_ireplace(".tar.gz", "", $name);
@@ -29,6 +37,13 @@ class PackageManager
         ];
     }
 
+    /**
+     * Check if a package is installed
+     * @param string $package
+     * @param string $type
+     * @return bool
+     * @throws BadMethodCallException
+     */
     public function isInstalled(
         string $package,
         string $type = PackageTypes::TYPE_MODULE
@@ -46,11 +61,18 @@ class PackageManager
         }
     }
 
-    // TODO: Reimplement in PackageSourceconnector
+    /**
+     * Install a package from file
+     * @param string $file
+     * @param bool $clear_cache
+     * @return bool
+     */
     public function installPackage(
         string $file,
         bool $clear_cache = true
     ): bool {
+        $success = false;
+
         @set_time_limit(0);
         try {
             // Paket entpacken
@@ -75,13 +97,15 @@ class PackageManager
             if ($clear_cache) {
                 CacheUtil::clearCache();
             }
-            return true;
+
+            $success = true;
         } catch (Exception $e) {
             if ($clear_cache) {
                 CacheUtil::clearCache();
             }
-            return false;
         }
+
+        return $success;
     }
 
     public function getInstalledModules(): array
