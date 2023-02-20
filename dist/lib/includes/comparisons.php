@@ -27,20 +27,6 @@ function is_json(?string $str): bool
     return $str ? json_decode($str) != null : false;
 }
 
-function is_numeric_array($var): bool
-{
-    if (!is_array($var)) {
-        return false;
-    }
-
-    foreach ($var as $key => $value) {
-        if (!is_numeric($value)) {
-            return false;
-        }
-    }
-    return true;
-}
-
 /**
  * Checks if we are currently in admin dir
  * @return bool

@@ -7,7 +7,6 @@ use App\Exceptions\FileNotFoundException;
 use App\Exceptions\DatasetNotFoundException;
 use App\HTML\Script;
 use App\Security\PermissionChecker;
-use MatthiasMullie\Minify;
 use App\Models\Content\Advertisement\Banners;
 
 class Template

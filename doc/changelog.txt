@@ -111,6 +111,7 @@ Entfernte API-Methoden:
 * get_head()
 * head()
 * PackageManager::testSplitPackageName()
+* is_numeric_array()
 
 ===== Neues in UliCMS 2022.1 =====
 

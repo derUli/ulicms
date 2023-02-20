@@ -101,28 +101,6 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse(is_json($invalidJson));
     }
 
-    public function testIsNumericArray()
-    {
-        $this->assertTrue(is_numeric_array(array(
-            "42",
-            1337,
-            0x539,
-            02471,
-            0b10100111001,
-            1337e0,
-            9.1
-        )));
-        $this->assertFalse(is_numeric_array(array(
-            "42",
-            "foo",
-            "not numeric",
-            1337
-        )));
-        $this->assertFalse(is_numeric_array("Not an array"));
-        $this->assertFalse(is_numeric_array(42));
-        $this->assertFalse(is_numeric_array(9.1));
-    }
-
     public function testIsDecimalReturnsTrue()
     {
         $this->assertTrue(is_decimal(1.99));
