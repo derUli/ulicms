@@ -69,6 +69,7 @@
             "App/Utils/Session/Session.php",
             "App/HTML/functions.php",
             [
+                "lib/includes/debug.php",
                 "lib/includes/Results.php",
                 "lib/includes/comparisons.php",
                 "lib/includes/csrf_token.php",
