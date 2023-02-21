@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-defined('ULICMS_ROOT') or exit('no direct script access allowed');
-
 use App\HTML\Style;
 use App\HTML\Script;
 use App\Exceptions\SCSSCompileException;

@@ -1,7 +1,5 @@
 <?php
 
-defined('ULICMS_ROOT') or exit('no direct script access allowed');
-
 define("DB_TYPE_INT", 1);
 define("DB_TYPE_FLOAT", 2);
 define("DB_TYPE_STRING", 3);

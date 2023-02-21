@@ -760,9 +760,9 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         Settings::setLanguageSetting("my_setting", "Germanisch", 'de');
         Settings::setLanguageSetting("my_setting", "Angelsächisch", 'en');
 
-        $this->assertEquals("Lampukisch", get_lang_config("my_setting", "fr"));
-        $this->assertEquals("Germanisch", get_lang_config("my_setting", 'de'));
-        $this->assertEquals("Angelsächisch", get_lang_config("my_setting", 'en'));
+        $this->assertEquals("Lampukisch", Settings::getLang("my_setting", "fr"));
+        $this->assertEquals("Germanisch", Settings::getLang("my_setting", 'de'));
+        $this->assertEquals("Angelsächisch", Settings::getLang("my_setting", 'en'));
     }
 
     public function testGetUsedPostTypes()
@@ -931,12 +931,5 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse(Vars::getNoCache());
         Vars::setNoCache(true);
         $this->assertTrue(Vars::getNoCache());
-    }
-
-    public function testRequireAllFilesInDir()
-    {
-        require_all_files_in_dir('tests/fixtures/testClasses');
-        $this->assertEquals('Hallo', FOO1_TEST);
-        $this->assertEquals('World', FOO2_TEST);
     }
 }

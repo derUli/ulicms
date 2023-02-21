@@ -115,6 +115,10 @@ Entfernte API-Methoden:
 * is_numeric_array()
 * isMaintenanceMode()
 * Banner::loadRandom()
+* getconfig()
+* setconfig()
+* deleteconfig()
+* get_lang_config()
 
 ===== Neues in UliCMS 2022.1 =====
 

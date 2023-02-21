@@ -63,6 +63,40 @@
         "overtrue/phplint": "*",
         "phpstan/phpstan": "^1.9",
         "barryvdh/composer-cleanup-plugin": "0.2.x"
-
+    },
+    "autoload": {
+        "files": [
+            "App/Utils/Session/Session.php",
+            "App/HTML/functions.php",
+            [
+                "lib/includes/Results.php",
+                "lib/includes/comparisons.php",
+                "lib/includes/csrf_token.php",
+                "lib/includes/custom_data.php",
+                "lib/includes/db_functions.php",
+                "lib/includes/designs.php",
+                "lib/includes/encode.php",
+                "lib/includes/environment.php",
+                "lib/includes/file_get_contents_wrapper.php",
+                "lib/includes/files.php",
+                "lib/includes/html5_media.php",
+                "lib/includes/languages.php",
+                "lib/includes/menus.php",
+                "lib/includes/minify.php",
+                "lib/includes/modules.php",
+                "lib/includes/network.php",
+                "lib/includes/output.php",
+                "lib/includes/packages.php",
+                "lib/includes/pages.php",
+                "lib/includes/path.php",
+                "lib/includes/request.php",
+                "lib/includes/string_functions.php",
+                "lib/includes/templating.php",
+                "lib/includes/translation.php",
+                "lib/includes/types.php",
+                "lib/includes/url.php",
+                "lib/includes/users_api.php"
+            ]
+        ]
     }
 }

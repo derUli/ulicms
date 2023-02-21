@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-defined('ULICMS_ROOT') or exit('no direct script access allowed');
-
 /**
  * Output buffer flusher
   Forces a flush of the output buffer to screen useful

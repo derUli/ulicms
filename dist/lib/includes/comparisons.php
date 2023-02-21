@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-defined('ULICMS_ROOT') or exit('no direct script access allowed');
-
 use Jaybizzle\CrawlerDetect\CrawlerDetect;
 use Detection\MobileDetect;
 

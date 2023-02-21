@@ -23,7 +23,7 @@ if (!$admin_logo) {
 
 $error = (isset($_REQUEST["error"]) && !empty($_REQUEST["error"])) ? $_REQUEST["error"] : null;
 
-$login_welcome_text = get_lang_config("login_welcome_text", $default_language);
+$login_welcome_text = Settings::getLang("login_welcome_text", $default_language);
 ?>
 <?php
 if ($login_welcome_text) {

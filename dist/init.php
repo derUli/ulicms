@@ -63,19 +63,6 @@ spl_autoload_register(function ($className) {
     require $basePath;
 });
 
-function require_all_files_in_dir(string $dir)
-{
-    $files = glob(ULICMS_ROOT . "/$dir/*.php");
-
-    foreach ($files as $file) {
-        if (is_file($file)) {
-            require $file;
-        }
-    }
-}
-
-require_all_files_in_dir('lib/includes');
-
 /**
  * Default exception handler
  * @param AccessDeniedException $exception
@@ -180,13 +167,6 @@ if (isset($config->phpmailer_logging) && $config->phpmailer_logging) {
     );
 }
 
-function noPerms(): void
-{
-    echo '<div class="alert alert-danger">'
-    . get_translation("no_permissions") .
-    '</div>';
-}
-
 $db_socket = $config->db_socket ?? ini_get('mysqli.default_socket');
 $db_port = $config->db_port ?? ini_get('mysqli.default_port');
 $db_strict_mode = $config->db_strict_mode ?? false;
@@ -227,6 +207,7 @@ if (!$select) {
                     . $config->db_database . ' doesn\'t exist.</h1>');
 }
 
+// Preload all settings
 Settings::getAll();
 
 if (!Settings::get('session_name')) {

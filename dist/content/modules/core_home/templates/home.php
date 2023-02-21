@@ -27,7 +27,7 @@ if ($permissionChecker->hasPermission("dashboard")) {
     </p>
     <div id="accordion-container">
         <?php
-    $motd = get_lang_config("motd", getSystemLanguage());
+    $motd = Settings::getLang("motd", getSystemLanguage());
     if ($motd or strlen($motd) > 10) {
         $motd = XSSProtection::stripTags($motd, DefaultValues::ALLOWED_TAGS);
         ?>

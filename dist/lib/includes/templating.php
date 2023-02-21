@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-defined('ULICMS_ROOT') or exit('no direct script access allowed');
-
 use App\Models\Content\Language;
 use App\Models\Content\Categories;
 use App\Utils\File;
@@ -1034,4 +1032,16 @@ function cms_release_year(): void
 {
     $v = new UliCMSVersion();
     echo $v->getReleaseYear();
+}
+
+/**
+ * Output no permission error
+ * @return void
+ */
+function noPerms(): void
+{
+    // TODO: Move to BackendPageRenderer oder BackendHelper
+    echo '<div class="alert alert-danger">'
+    . get_translation("no_permissions") .
+    '</div>';
 }
