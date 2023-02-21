@@ -16,16 +16,6 @@ function text($str)
     return \nl2br(\_esc($str));
 }
 
-function _nbsp(string $text = " "): string
-{
-    return str_replace(" ", "&nbsp;", _esc($text));
-}
-
-function nbsp(string $text = " "): void
-{
-    echo _nbsp($text);
-}
-
 // generates a html img tag
 function imageTag(string $file, array $htmlAttributes = []): string
 {

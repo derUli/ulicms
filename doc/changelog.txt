@@ -119,6 +119,8 @@ Entfernte API-Methoden:
 * setconfig()
 * deleteconfig()
 * get_lang_config()
+* _nbsp()
+* nsbp()
 
 ===== Neues in UliCMS 2022.1 =====
 

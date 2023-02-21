@@ -1,7 +1,6 @@
 <?php
 
 use function App\HTML\icon;
-use function App\HTML\nbsp;
 
 define("MODULE_ADMIN_HEADLINE", get_translation("extend_upgrade_helper"));
 
@@ -22,8 +21,7 @@ function extend_upgrade_helper_admin()
                         <?php Template::escape($module->version); ?></a>
                     <?php
                     if ($module->updateAvailable) {
-                        nbsp();
-                        echo icon("fas fa-download text-red");
+                        echo ' ' . icon("fas fa-download text-red");
                     }
                 ?>
 

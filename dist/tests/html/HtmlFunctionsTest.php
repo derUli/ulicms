@@ -4,13 +4,11 @@ use App\Constants\LinkTarget;
 use App\Constants\ButtonType;
 use App\Exceptions\FileNotFoundException;
 
+use function App\HTML\link;
 use function App\HTML\text;
-use function App\HTML\nbsp;
-use function App\HTML\_nbsp;
 use function App\HTML\imageTag;
 use function App\HTML\imageTagInline;
 use function App\HTML\icon;
-use function App\HTML\Link;
 use function App\HTML\buttonLink;
 use function App\HTML\stringContainsHtml;
 
@@ -141,29 +139,5 @@ class HtmlFunctionsTest extends \PHPUnit\Framework\TestCase
     public function testStringContainsHtmlReturnsFalse()
     {
         $this->assertFalse(stringContainsHtml("Hallo Welt"));
-    }
-
-    public function test_NbspWithoutText()
-    {
-        $this->assertEquals("&nbsp;", _nbsp());
-    }
-
-    public function test_NbspWithText()
-    {
-        $this->assertEquals("foo&nbsp;bar", _nbsp("foo bar"));
-    }
-
-    public function testNbspWithoutText()
-    {
-        ob_start();
-        nbsp();
-        $this->assertEquals("&nbsp;", ob_get_clean());
-    }
-
-    public function testNbspWithText()
-    {
-        ob_start();
-        nbsp("foo bar");
-        $this->assertEquals("foo&nbsp;bar", ob_get_clean());
     }
 }
