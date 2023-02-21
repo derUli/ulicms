@@ -91,11 +91,14 @@ function exception_handler($exception)
             $exception : 'An error occurred! See exception_log for details. 😞';
 
     $logger = LoggerRegistry::get('exception_log');
+
     if ($logger) {
         $logger->error($exception);
     }
+
     $httpStatus = $exception instanceof AccessDeniedException ?
             HttpStatusCode::FORBIDDEN : HttpStatusCode::INTERNAL_SERVER_ERROR;
+
     if (function_exists('HTMLResult') && class_exists('Template') && !headers_sent() && function_exists('get_theme')) {
         ViewBag::set('exception', nl2br(_esc($exception)));
         HTMLResult(Template::executeDefaultOrOwnTemplate('exception.php'), $httpStatus);

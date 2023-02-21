@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Models\Content\Advertisement;
 
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
 use Template;
 use Database;
 use Model;
@@ -42,16 +44,6 @@ class Banner extends Model
             $this->fillVars($result);
         } else {
             throw new DatasetNotFoundException("No banner with id $id");
-        }
-    }
-
-    public function loadRandom(): void
-    {
-        $result = Database::query("SELECT * FROM `{prefix}banner` "
-                        . "order by rand() LIMIT 1", true);
-        if (Database::getNumRows($result) > 0) {
-            $dataset = Database::fetchObject($result);
-            $this->fillVars($dataset);
         }
     }
 
@@ -355,6 +347,7 @@ class Banner extends Model
     public function render(): string
     {
         $html = '';
+
         switch ($this->getType()) {
             case "gif":
                 $title = Template::getEscape($this->getName());
@@ -369,6 +362,7 @@ class Banner extends Model
 
                 break;
         }
+
         return $html;
     }
 }

@@ -114,6 +114,7 @@ Entfernte API-Methoden:
 * PackageManager::testSplitPackageName()
 * is_numeric_array()
 * isMaintenanceMode()
+* Banner::loadRandom()
 
 ===== Neues in UliCMS 2022.1 =====
 

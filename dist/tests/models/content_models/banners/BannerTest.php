@@ -302,29 +302,6 @@ class BannerTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testLoadRandom()
-    {
-        $this->createTestBanners();
-
-        $banner1 = new Banner();
-        $banner1->loadRandom();
-
-        $this->assertGreaterThanOrEqual(1, $banner1->getId());
-
-        for ($i = 1; $i <= 3; $i++) {
-            $banner2 = new Banner();
-            $banner2->loadRandom();
-
-            $this->assertGreaterThanOrEqual(1, $banner2->getId());
-            if ($banner1->getId() !== $banner2->getId()) {
-                $this->assertNotEquals($banner2->getId(), $banner1->getId());
-                return;
-            }
-        }
-
-        $this->assertNotEquals($banner2->getId(), $banner1->getId());
-    }
-
     public function testCreateWithAllEmpty()
     {
         $banner = new Banner();

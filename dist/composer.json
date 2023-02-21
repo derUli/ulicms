@@ -61,6 +61,8 @@
         "phpunit/phpunit": "*",
         "friendsofphp/php-cs-fixer": "*",
         "overtrue/phplint": "*",
-        "phpstan/phpstan": "^1.9"
+        "phpstan/phpstan": "^1.9",
+        "barryvdh/composer-cleanup-plugin": "0.2.x"
+
     }
 }
