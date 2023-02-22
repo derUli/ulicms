@@ -86,7 +86,7 @@ class CoreUpgradeController extends Controller
                 $zip->close();
             }
 
-            $upgradeCodeDir = Path::resolve("$tmpDir/ulicms");
+            $upgradeCodeDir = Path::resolve("$tmpDir/dist");
 
             if (is_dir($upgradeCodeDir)) {
                 recurse_copy($upgradeCodeDir, ULICMS_ROOT);
