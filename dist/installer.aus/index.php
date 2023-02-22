@@ -7,12 +7,7 @@ date_default_timezone_set("Europe/Berlin");
 
 define("ULICMS_ROOT", dirname(__FILE__) . '/..');
 
-foreach (glob(ULICMS_ROOT . '/lib/includes/*.php') as $file) {
-    if (is_file($file)) {
-        require $file;
-    }
-}
-
+require ULICMS_ROOT . '/vendor/autoload.php';
 require ULICMS_ROOT . '/app/Utils/VersionComparison.php';
 
 require "controllers/InstallerController.php";
