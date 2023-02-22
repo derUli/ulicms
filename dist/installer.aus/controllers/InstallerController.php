@@ -10,7 +10,7 @@ class InstallerController
             $step = intval($_REQUEST["step"]);
         }
         if ($step > 10) {
-            Request::redirect("index.php?step=9");
+            Request::redirect("index.php?step=10");
         }
 
         return $step;
@@ -140,13 +140,13 @@ class InstallerController
             $_SESSION["install_index"] = 0;
         }
         $files = array();
-        foreach (glob("../lib/migrations/up/*.sql") as $file) {
+        foreach (glob(ULICMS_ROOT ."/lib/migrations/up/*.sql") as $file) {
             $files[] = $file;
         }
         if (!empty($_SESSION["install_demodata"])) {
-            $files[] = "../lib/migrations/up/opt/democontent.full.sql";
+            $files[] = ULICMS_ROOT . "/lib/migrations/up/opt/democontent.full.sql";
         } else {
-            $files[] = "../lib/migrations/up/opt/democontent.min.sql";
+            $files[] = ULICMS_ROOT . "/lib/migrations/up/opt/democontent.min.sql";
         }
 
         $allSteps = count($files);
@@ -291,9 +291,9 @@ class InstallerController
             $content
         );
 
-        copy("../lib/CMSConfigSample.php", "../CMSConfig.php");
+        copy(ULICMS_ROOT . "/lib/CMSConfigSample.php", ULICMS_ROOT."/CMSConfig.php");
 
-        $defaultConfigFile = "../content/configurations/default.php";
+        $defaultConfigFile = ULICMS_ROOT . "/content/configurations/default.php";
 
         $configurationDir = dirname($defaultConfigFile);
         if (!is_dir($configurationDir)) {
