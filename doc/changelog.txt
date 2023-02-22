@@ -3,7 +3,7 @@
 Neue Features:
 * Codebasis grundlegend überarbeitet
 * URLs enthalten nun kein Endung mehr
-* Neuer Robo Task cron hinzugefügt
+* Neuer Robo Task "cron" hinzugefügt
 * MobileDetect integriert
 * CrawlerDetect integriert
 * Fine Diff ersetzt durch jfcherng/php-diff
