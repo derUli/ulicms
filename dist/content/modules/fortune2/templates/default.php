@@ -1,9 +1,9 @@
 <?php
-$controller = ControllerRegistry::get(getModuleMeta("fortune2", "main_class"));
-?>
+    $controller = ControllerRegistry::get(getModuleMeta("fortune2", "main_class"));
+    ?>
 <div class="fortune">
-    <?php
-    $fortune = $controller->getRandomFortune();
-nl2br(esc($fortune));
-?>
+<?php
+        $fortune = $controller->getRandomFortune();
+    echo nl2br(_esc($fortune));
+    ?>
 </div>
