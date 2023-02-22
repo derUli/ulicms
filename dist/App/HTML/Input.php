@@ -12,6 +12,14 @@ use Template;
 // this class contains methods to build input fields
 class Input
 {
+    /**
+     * Generate text input
+     * @param string $name
+     * @param type $value
+     * @param string $type
+     * @param array $htmlAttributes
+     * @return string
+     */
     public static function textBox(
         string $name,
         $value,
@@ -30,6 +38,16 @@ class Input
         return "<input {$attribHTML}>";
     }
 
+
+    /**
+     * Generate textarea input
+     * @param string $name
+     * @param type $value
+     * @param int $rows
+     * @param int $cols
+     * @param array $htmlAttributes
+     * @return string
+     */
     public static function textArea(
         string $name,
         $value,
@@ -52,6 +70,15 @@ class Input
         return "<textarea {$attribHTML}>{$escapedValue}</textarea>";
     }
 
+    /**
+     * Generate textarea with HTML editor
+     * @param string $name
+     * @param type $value
+     * @param int $rows
+     * @param int $cols
+     * @param array $htmlAttributes
+     * @return string
+     */
     public static function editor(
         string $name,
         $value,
@@ -76,6 +103,13 @@ class Input
         return self::textArea($name, $value, $rows, $cols, $htmlAttributes);
     }
 
+    /**
+     * Generate password input
+     * @param string $name
+     * @param type $value
+     * @param array $htmlAttributes
+     * @return string
+     */
     public static function password(
         string $name,
         $value,
@@ -84,6 +118,14 @@ class Input
         return self::textBox($name, $value, "password", $htmlAttributes);
     }
 
+    /**
+     * Generate file input
+     * @param string $name
+     * @param bool $multiple
+     * @param type $accept
+     * @param array $htmlAttributes
+     * @return string
+     */
     public static function file(
         string $name,
         bool $multiple = false,
@@ -110,6 +152,13 @@ class Input
         return self::textBox($name, "", "file", $attributes);
     }
 
+    /**
+     * Generate hidden input
+     * @param string $name
+     * @param type $value
+     * @param array $htmlAttributes
+     * @return string
+     */
     public static function hidden(
         string $name,
         $value,
@@ -118,6 +167,14 @@ class Input
         return self::textBox($name, $value, "hidden", $htmlAttributes);
     }
 
+    /**
+     * Generate checkbox input
+     * @param string $name
+     * @param bool $checked
+     * @param type $value
+     * @param array $htmlAttributes
+     * @return string
+     */
     public static function checkBox(
         string $name,
         bool $checked = false,
@@ -130,6 +187,14 @@ class Input
         return self::textBox($name, $value, "checkbox", $htmlAttributes);
     }
 
+    /**
+     * Generate radio button
+     * @param string $name
+     * @param bool $checked
+     * @param type $value
+     * @param array $htmlAttributes
+     * @return string
+     */
     public static function radioButton(
         string $name,
         bool $checked = false,
@@ -142,6 +207,15 @@ class Input
         return self::textBox($name, $value, "radio", $htmlAttributes);
     }
 
+    /**
+     * Generate single select
+     * @param string $name
+     * @param type $value
+     * @param array $options
+     * @param int $size
+     * @param array $htmlAttributes
+     * @return string
+     */
     public static function singleSelect(
         string $name,
         $value = null,
@@ -174,6 +248,15 @@ class Input
         return $html;
     }
 
+    /**
+     * Generate multiselect
+     * @param string $name
+     * @param type $value
+     * @param array $options
+     * @param int $size
+     * @param array $htmlAttributes
+     * @return string
+     */
     public static function multiSelect(
         string $name,
         $value = null,
