@@ -668,7 +668,7 @@ class User extends Model
         ];
 
         if (!in_array($editor, $allowedEditors)) {
-            $editor = HtmlEditor::CKEDITOR;
+            throw new InvalidArgumentException("Value $editor not allowed");
         }
 
         $this->html_editor = $editor;

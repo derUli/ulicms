@@ -431,15 +431,12 @@ class UserTest extends \PHPUnit\Framework\TestCase
 
     public function testSetHtmlEditorToNonSupported()
     {
+        $this->expectException(InvalidArgumentException::class);
         $user = new User();
-
-        $user->setHTMLEditor(HtmlEditor::CODEMIRROR);
-        $this->assertEquals(HtmlEditor::CODEMIRROR, $user->getHTMLEditor());
 
         // there is no "super_editor" so UliCMS sets html_editor
         // to the default value
         $user->setHTMLEditor("super_editor");
-        $this->assertEquals(HtmlEditor::CKEDITOR, $user->getHTMLEditor());
     }
 
     public function testIncreaseAndResetFailedLogins()
