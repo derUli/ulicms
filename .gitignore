@@ -33,4 +33,4 @@ modules.aus
 .php_cs.cache
 .phplint-cache
 .php-cs-fixer.cache
-.phpunit.result
+.phpunit.result.cache
