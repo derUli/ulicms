@@ -149,7 +149,7 @@ class ModuleManager
         $enabledModules = $this->getEnabledModuleNames();
         foreach ($enabledModules as $module) {
             $settings = getModuleMeta($module, "settings");
-            if (!($settings and is_array($settings))) {
+            if (!($settings && is_array($settings))) {
                 continue;
             }
             foreach ($settings as $key => $value) {
