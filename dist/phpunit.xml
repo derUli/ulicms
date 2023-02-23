@@ -1,5 +1,26 @@
 <?xml version="1.0"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" bootstrap="lib/phpunit_init.php" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd" backupGlobals="true" backupStaticAttributes="false" cacheResult="false" colors="false" convertErrorsToExceptions="false" convertNoticesToExceptions="true" convertWarningsToExceptions="false" forceCoversAnnotation="false" processIsolation="false" stopOnError="true" stopOnFailure="true" stopOnIncomplete="false" stopOnSkipped="false" stopOnRisky="false" timeoutForSmallTests="1" timeoutForMediumTests="10" timeoutForLargeTests="60" verbose="true">
+<phpunit
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    bootstrap="lib/phpunit_init.php"
+    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
+    backupGlobals="true"
+    backupStaticAttributes="false"
+    cacheResult="false"
+    colors="false"
+    convertErrorsToExceptions="true"
+    convertNoticesToExceptions="true"
+    convertWarningsToExceptions="true"
+    forceCoversAnnotation="false"
+    processIsolation="false"
+    stopOnError="true"
+    stopOnFailure="true"
+    stopOnIncomplete="true"
+    stopOnSkipped="false"
+    stopOnRisky="true"
+    timeoutForSmallTests="1"
+    timeoutForMediumTests="10"
+    timeoutForLargeTests="60"
+    verbose="true">
     <coverage processUncoveredFiles="true">
         <include>
             <directory suffix=".php">./</directory>
@@ -7,43 +28,17 @@
         <exclude>
             <directory>vendor/</directory>
             <directory>installer.aus/</directory>
-            <file>classes/helpers/load.php</file>
+            <directory>installer</directory>
             <file>test.php</file>
-            <file>classes/renderers/load.php</file>
-            <file>classes/objects/backend/load.php</file>
-            <file>classes/objects/content/types/fields/load.php</file>
-            <file>classes/objects/registry/load.php</file>
-            <file>classes/objects/database/load.php</file>
-            <file>classes/objects/files/load.php</file>
-            <file>classes/objects/html/load.php</file>
-            <file>classes/objects/localization/load.php</file>
-            <file>classes/objects/logging/load.php</file>
-            <file>classes/objects/media/load.php</file>
-            <file>classes/objects/abstract/load.php</file>
-            <file>classes/objects/modules/load.php</file>
-            <file>classes/objects/pkg/load.php</file>
-            <file>classes/objects/privacy/load.php</file>
-            <file>classes/objects/spam/load.php</file>
-            <file>classes/objects/security/load.php</file>
-            <file>classes/objects/settings/load.php</file>
-            <file>classes/objects/storages/load.php</file>
-            <file>classes/objects/users/load.php</file>
-            <file>classes/objects/web/load.php</file>
-            <directory>content/better_cron</directory>
-            <directory>content/modules.aus</directory>
+            <directory>content/configurations</directory>
             <directory>content/modules/core_comments/lang</directory>
             <directory>content/modules/core_home/lang</directory>
             <directory>content/modules/core_forms/lang</directory>
             <directory>content/modules/core_settings/lang</directory>
             <directory>content/modules/core_help/lang</directory>
-            <directory>content/modules/better_cron/templates</directory>
-            <directory>content/modules/timezones/templates</directory>
             <directory>tests/</directory>
-            <directory>shell</directory>
             <directory>admin/fm/</directory>
             <directory>admin/inc</directory>
-            <directory>content/modules/Mobile_Detect</directory>
-            <directory>content/configurations/</directory>
             <directory>content/modules/core_comments/templates</directory>
             <directory>content/modules/core_content/templates</directory>
             <directory>content/modules/core_content/lang</directory>
@@ -60,13 +55,11 @@
             <directory>content/modules/update_manager_dashboard</directory>
             <directory>content/modules/extend_upgrade_helper</directory>
             <directory>content/modules/core_package_manager/templates</directory>
-            <directory>content/modules/core_history/3rdparty</directory>
             <directory>content/modules/fortune2</directory>
             <directory>content/modules/oneclick_upgrade</directory>
             <directory>content/modules/slicknav/</directory>
             <directory>content/modules/core_home/templates</directory>
             <directory>content/modules/core_history/templates</directory>
-            <directory>classes/objects/constants</directory>
             <directory>content/modules/core_media/templates</directory>
             <directory>content/templates/impro17</directory>
             <directory>content/templates/2020</directory>
@@ -83,7 +76,6 @@
             <file>admin/inc/getlinksforeditor.php</file>
             <file>admin/inc/header.php</file>
             <file>lib/cron.php</file>
-            <file>admin/cron.php</file>
         </exclude>
         <report>
             <html outputDirectory="./report"/>
