@@ -16,10 +16,10 @@ $parent_id = Request::getVar("parent_id", null, 'int');
 
 $permissionChecker = new ACL();
 $groups = db_query("SELECT id, name from " . tbname('groups'));
-if ($permissionChecker->hasPermission('pages')
-        and $permissionChecker->hasPermission("pages_create")) {
-    $editor = get_html_editor();
-
+if (
+    $permissionChecker->hasPermission('pages') &&
+    $permissionChecker->hasPermission("pages_create")
+) {
     $allThemes = getAllThemes();
     $cols = Database::getColumnNames("content");
 
@@ -403,7 +403,7 @@ if ($permissionChecker->hasPermission('pages')
                         <strong class="field-label">
     <?php translate("excerpt"); ?>
                         </strong>
-                        <textarea name="excerpt" id="excerpt" rows="5" cols="80" class="<?php esc($editor); ?>" data-mimetype="text/html"></textarea>
+                        <?php echo Input::editor('excerpt', '');?>
                     </div>
                 </div>
                 <div class="typedep" id="tab-og" style="display: none;">
@@ -768,8 +768,7 @@ if ($permissionChecker->hasPermission('pages')
     <?php do_event("page_option"); ?>
     <div class="typedep" id="content-editor">
         <div class="field">
-            <textarea name="content" id="content" cols=60 rows=20
-                      class="<?php esc($editor); ?>" data-mimetype="text/html"></textarea>
+            <?php echo Input::editor('content', '');?>
         </div>
     </div>
     <div class="inPageMessage"></div>

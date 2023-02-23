@@ -25,7 +25,6 @@ if ($permissionChecker->hasPermission('pages')) {
 
     $allThemes = getAllThemes();
 
-    $editor = get_html_editor();
     $cols = Database::getColumnNames("content");
 
     $sql = "SELECT id, name FROM " . tbname("videos");
@@ -518,10 +517,7 @@ if ($permissionChecker->hasPermission('pages')) {
 
                                 <div class="field">
                                     <strong class="field-label"><?php translate("excerpt"); ?></strong>
-                                    <textarea name="excerpt" id="excerpt" rows="5" cols="80"
-                                              class="<?php esc($editor); ?>"
-                                              data-mimetype="text/html"
-                                              ><?php echo _esc($row->excerpt); ?></textarea>
+                                    <?php echo Input::editor('excerpt', $row->excerpt);?>
                                 </div>
                             </div>
                             <div class="typedep" id="tab-og" style="display: none">
@@ -1163,9 +1159,7 @@ if ($permissionChecker->hasPermission('pages')) {
 
                 <?php do_event("page_option"); ?>
                 <div class="typedep" id="content-editor">
-                    <p>
-                        <textarea name="content" id="content" cols=60 rows=20 class="<?php esc($editor); ?>" data-mimetype="text/html"><?php esc($row->content); ?></textarea>
-                    </p>
+                    <p><?php echo Input::editor('content', $row->content);?></p>
                     <?php
                     $rev = VCS::getRevisionsByContentID($row->id);
             if (count($rev) > 0) {
