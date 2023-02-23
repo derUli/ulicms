@@ -823,6 +823,12 @@ function image_check_memory_usage($img, $max_breedte, $max_hoogte)
             }
 
             $image_properties = getimagesize($img);
+
+            // Prevent warning, if there is a broken image file
+            if ($image_properties === false) {
+                return false;
+            }
+
             $image_width = $image_properties[0];
             $image_height = $image_properties[1];
             if (isset($image_properties['bits'])) {
