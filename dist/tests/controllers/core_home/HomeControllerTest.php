@@ -1,5 +1,7 @@
 <?php
 
+use App\Constants\HtmlEditor;
+
 class HomeControllerTest extends \PHPUnit\Framework\TestCase
 {
     protected function setUp(): void
@@ -124,7 +126,7 @@ class HomeControllerTest extends \PHPUnit\Framework\TestCase
         $user1->setPassword(rand_string(23));
         $user1->setLastname("Beutlin");
         $user1->setFirstname("Bilbo");
-        $user1->setHTMLEditor("ckeditor");
+        $user1->setHTMLEditor(HtmlEditor::CKEDITOR);
         $user1->save();
         $user1->setLastAction(time() - 10);
 
@@ -133,7 +135,7 @@ class HomeControllerTest extends \PHPUnit\Framework\TestCase
         $user2->setPassword(rand_string(23));
         $user2->setLastname("Duck");
         $user2->setFirstname("Donald");
-        $user2->setHTMLEditor("ckeditor");
+        $user2->setHTMLEditor(HtmlEditor::CKEDITOR);
         $user2->save();
         $user2->setLastAction(time() - 10);
     }
@@ -145,7 +147,7 @@ class HomeControllerTest extends \PHPUnit\Framework\TestCase
         $user3->setPassword(rand_string(23));
         $user3->setLastname("Duck");
         $user3->setFirstname("Donald");
-        $user3->setHTMLEditor("ckeditor");
+        $user3->setHTMLEditor(HtmlEditor::CKEDITOR);
         $user3->save();
         $user3->setLastAction(300);
 
@@ -154,7 +156,7 @@ class HomeControllerTest extends \PHPUnit\Framework\TestCase
         $user4->setPassword(rand_string(23));
         $user4->setLastname("Duck");
         $user4->setFirstname("Donald");
-        $user4->setHTMLEditor("ckeditor");
+        $user4->setHTMLEditor(HtmlEditor::CKEDITOR);
         $user4->save();
     }
 }

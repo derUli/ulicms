@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\HTML\Script;
 use App\Utils\File;
+use App\Constants\HtmlEditor;
 
 class BackendHelper extends Helper
 {
@@ -28,7 +29,7 @@ class BackendHelper extends Helper
     public static function enqueueEditorScripts(): void
     {
         // ckeditor is huge so embed it only if this is the user'S preferred html editor
-        if (get_html_editor() == "ckeditor") {
+        if (get_html_editor() == HtmlEditor::CKEDITOR) {
             echo Script::fromFile("ckeditor/ckeditor.js");
 
             enqueueScriptFile(ModuleHelper::buildRessourcePath(

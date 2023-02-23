@@ -1,6 +1,7 @@
 <?php
 
 use App\Constants\RequestMethod;
+use App\Constants\HtmlEditor;
 use App\HTML\Input;
 
 use function App\HTML\imageTag;
@@ -31,8 +32,8 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
             echo imageTag(
             $user->getAvatar(),
             [
-                                                    "alt" => get_translation("avatar_image")
-                                                ]
+                                                            "alt" => get_translation("avatar_image")
+                                                        ]
         );
         ?>
         </div>
@@ -207,13 +208,13 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
                 name="html_editor">
                 <option value="ckeditor"
                 <?php
-                if (!$row->html_editor or $row->html_editor == "ckeditor") {
+                if (!$row->html_editor or $row->html_editor == HtmlEditor::CKEDITOR) {
                     echo "selected";
                 }
         ?>>CKEditor</option>
                 <option value="codemirror"
                 <?php
-        if ($row->html_editor == "codemirror") {
+        if ($row->html_editor == HtmlEditor::CODEMIRROR) {
             echo "selected";
         }
         ?>>CodeMirror</option>

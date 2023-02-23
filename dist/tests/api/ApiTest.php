@@ -2,6 +2,7 @@
 
 use App\Models\Content\Language;
 use App\Utils\CacheUtil;
+use App\Constants\HtmlEditor;
 
 class ApiTest extends \PHPUnit\Framework\TestCase
 {
@@ -250,7 +251,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
     {
         if (session_id()) {
         }
-        $this->assertEquals("ckeditor", get_html_editor());
+        $this->assertEquals(HtmlEditor::CKEDITOR, get_html_editor());
     }
 
     public function testGetHtmlEditorReturnsCKEditor()
@@ -260,11 +261,11 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $user->setPassword(rand_string(23));
         $user->setLastname("Beutlin");
         $user->setFirstname("Bilbo");
-        $user->setHTMLEditor("ckeditor");
+        $user->setHTMLEditor(HtmlEditor::CKEDITOR);
         $user->save();
 
         register_session(getUserByName(("testuser-1")), false);
-        $this->assertEquals("ckeditor", get_html_editor());
+        $this->assertEquals(HtmlEditor::CKEDITOR, get_html_editor());
     }
 
     public function testGetHtmlEditorReturnsCodeMirror()
@@ -274,11 +275,11 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $user->setPassword(rand_string(666));
         $user->setLastname("Beutlin");
         $user->setFirstname("Bilbo");
-        $user->setHTMLEditor("codemirror");
+        $user->setHTMLEditor(HtmlEditor::CODEMIRROR);
         $user->save();
 
         register_session(getUserByName(("testuser-2")), false);
-        $this->assertEquals("codemirror", get_html_editor());
+        $this->assertEquals(HtmlEditor::CODEMIRROR, get_html_editor());
     }
 
     public function testGetAllUsedMenus()
@@ -661,7 +662,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $user->setPassword(rand_string(23));
         $user->setLastname("Beutlin");
         $user->setFirstname("Bilbo");
-        $user->setHTMLEditor("ckeditor");
+        $user->setHTMLEditor(HtmlEditor::CKEDITOR);
         $user->setPrimaryGroup($group);
         $user->save();
 

@@ -2,6 +2,7 @@
 
 use App\Models\Content\Language;
 use App\Security\PermissionChecker;
+use App\Constants\HtmlEditor;
 
 class PermissionCheckerTest extends \PHPUnit\Framework\TestCase
 {
@@ -48,7 +49,7 @@ class PermissionCheckerTest extends \PHPUnit\Framework\TestCase
         $user->setEmail("max@muster.de");
         $user->setHomepage("http://www.google.de");
         $user->setDefaultLanguage("fr");
-        $user->setHTMLEditor("ckeditor");
+        $user->setHTMLEditor(HtmlEditor::CKEDITOR);
         $user->setAboutMe("hello world");
         $lastLogin = time();
         $user->setLastLogin($lastLogin);

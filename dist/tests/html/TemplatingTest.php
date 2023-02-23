@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Content\Advertisement\Banner;
+use App\Constants\HtmlEditor;
 
 class TemplatingTest extends \PHPUnit\Framework\TestCase
 {
@@ -541,7 +542,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         $user->setEmail("max@muster.de");
         $user->setHomepage("http://www.google.de");
         $user->setDefaultLanguage("fr");
-        $user->setHTMLEditor("ckeditor");
+        $user->setHTMLEditor(HtmlEditor::CKEDITOR);
         $user->setFailedLogins(0);
 
         $user->setAboutMe("hello world");

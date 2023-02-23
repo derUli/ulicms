@@ -6,6 +6,7 @@ use LasseRafn\InitialAvatarGenerator\InitialAvatar;
 use App\Security\PermissionChecker;
 use App\Security\Hash;
 use App\Models\Users\GroupCollection;
+use App\Constants\HtmlEditor;
 
 /**
  * User model
@@ -662,12 +663,12 @@ class User extends Model
     public function setHTMLEditor(string $editor): void
     {
         $allowedEditors = [
-            'ckeditor',
-            'codemirror'
+            HtmlEditor::CKEDITOR,
+            HtmlEditor::CODEMIRROR,
         ];
 
         if (!in_array($editor, $allowedEditors)) {
-            $editor = 'ckeditor';
+            $editor = HtmlEditor::CKEDITOR;
         }
 
         $this->html_editor = $editor;

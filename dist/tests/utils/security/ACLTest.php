@@ -1,5 +1,7 @@
 <?php
 
+use App\Constants\HtmlEditor;
+
 class ACLTest extends \PHPUnit\Framework\TestCase
 {
     protected function setUp(): void
@@ -91,7 +93,7 @@ class ACLTest extends \PHPUnit\Framework\TestCase
         $user->setPassword(rand_string(23));
         $user->setLastname("Beutlin");
         $user->setFirstname("Bilbo");
-        $user->setHTMLEditor("ckeditor");
+        $user->setHTMLEditor(HtmlEditor::CKEDITOR);
         $user->setPrimaryGroupId($id);
         $user->save();
 

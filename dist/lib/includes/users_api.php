@@ -96,7 +96,7 @@ function get_user_id(): ?int
  */
 function get_group_id(): ?int
 {
-    return $_SESSION['group_id'] ?? null;
+    return isset($_SESSION['group_id']) ? (int)$_SESSION['group_id'] : null;
 }
 
 /**

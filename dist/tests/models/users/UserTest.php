@@ -3,6 +3,7 @@
 use App\Security\Hash;
 use App\Utils\CacheUtil;
 use App\Models\Users\GroupCollection;
+use App\Constants\HtmlEditor;
 
 class UserTest extends \PHPUnit\Framework\TestCase
 {
@@ -71,7 +72,7 @@ class UserTest extends \PHPUnit\Framework\TestCase
         $user->setEmail("max@muster.de");
         $user->setHomepage("http://www.google.de");
         $user->setDefaultLanguage("fr");
-        $user->setHTMLEditor("ckeditor");
+        $user->setHTMLEditor(HtmlEditor::CKEDITOR);
         $user->setFailedLogins(0);
 
         $user->setAboutMe("hello world");
@@ -99,12 +100,12 @@ class UserTest extends \PHPUnit\Framework\TestCase
         );
         $this->assertEquals($lastLogin, $user->getLastLogin());
         $this->assertEquals("http://www.google.de", $user->getHomepage());
-        $this->assertEquals("ckeditor", $user->getHTMLEditor());
+        $this->assertEquals(HtmlEditor::CKEDITOR, $user->getHTMLEditor());
         $this->assertEquals(false, $user->getRequirePasswordChange());
         $this->assertEquals(false, $user->isAdmin());
         $this->assertEquals(false, $user->isLocked());
         $this->assertEquals("hello world", $user->getAboutMe());
-        $user->setHTMLEditor("codemirror");
+        $user->setHTMLEditor(HtmlEditor::CODEMIRROR);
         $user->setRequirePasswordChange(true);
         $user->setLocked(true);
         $user->setAdmin(true);
@@ -118,7 +119,7 @@ class UserTest extends \PHPUnit\Framework\TestCase
 
         $user = new User();
         $user->loadByUsername("max_muster");
-        $this->assertEquals("codemirror", $user->getHTMLEditor());
+        $this->assertEquals(HtmlEditor::CODEMIRROR, $user->getHTMLEditor());
 
         $this->assertEquals(true, $user->isLocked());
         $this->assertEquals(true, $user->isAdmin());
@@ -432,13 +433,13 @@ class UserTest extends \PHPUnit\Framework\TestCase
     {
         $user = new User();
 
-        $user->setHTMLEditor("codemirror");
-        $this->assertEquals("codemirror", $user->getHTMLEditor());
+        $user->setHTMLEditor(HtmlEditor::CODEMIRROR);
+        $this->assertEquals(HtmlEditor::CODEMIRROR, $user->getHTMLEditor());
 
         // there is no "super_editor" so UliCMS sets html_editor
         // to the default value
         $user->setHTMLEditor("super_editor");
-        $this->assertEquals("ckeditor", $user->getHTMLEditor());
+        $this->assertEquals(HtmlEditor::CKEDITOR, $user->getHTMLEditor());
     }
 
     public function testIncreaseAndResetFailedLogins()

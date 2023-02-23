@@ -2,16 +2,22 @@
 
 declare(strict_types=1);
 
+use App\Constants\HtmlEditor;
+
 class HtmlField extends CustomField
 {
     public function render($value = null): string
     {
+        $htmlEditor = get_html_editor();
+
         if (!isset($this->htmlAttributes["class"])) {
-            $this->htmlAttributes["class"] = get_html_editor();
+            $this->htmlAttributes["class"] = $htmlEditor;
         }
-        if (get_html_editor() == "codemirror") {
+
+        if ($htmlEditor == HtmlEditor::CODEMIRROR) {
             $this->htmlAttributes["data-mimetype"] = "text/html";
         }
+
         ViewBag::set("field", $this);
         ViewBag::set("field_value", $value);
         ViewBag::set("field_name", $this->contentType !== null ?

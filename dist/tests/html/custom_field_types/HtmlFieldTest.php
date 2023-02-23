@@ -1,6 +1,7 @@
 <?php
 
 use Spatie\Snapshots\MatchesSnapshots;
+use App\Constants\HtmlEditor;
 
 class HtmlFieldTest extends \PHPUnit\Framework\TestCase
 {
@@ -18,7 +19,7 @@ class HtmlFieldTest extends \PHPUnit\Framework\TestCase
         $user->setFirstname("Nicht");
         $user->setPassword(uniqid());
         $user->setAdmin(false);
-        $user->setHTMLEditor("codemirror");
+        $user->setHTMLEditor(HtmlEditor::CODEMIRROR);
         $user->save();
 
         $this->testUser = $user;
