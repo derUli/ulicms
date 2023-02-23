@@ -275,7 +275,7 @@ class Input
 
         $html = "<select $attribHTML multiple>";
         foreach ($options as $option) {
-            if (is_array($value) and in_array($option->getValue(), $value)) {
+            if (is_array($value) && in_array($option->getValue(), $value)) {
                 $option->setSelected(true);
             }
             $html .= $option;
