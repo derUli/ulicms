@@ -6,7 +6,6 @@ use App\Utils\CacheUtil;
 class ApiTest extends \PHPUnit\Framework\TestCase
 {
     private $initialUser;
-    private $additionalMenus;
     private $initialSettings = [];
 
     protected function setUp(): void
@@ -20,7 +19,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase
                         . "from {prefix}users order by id asc limit 1", true);
 
         $this->initialUser = Database::fetchObject($userQuery);
-        $this->additionalMenus = Settings::get("additional_menus");
 
         CacheUtil::clearCache();
 
@@ -54,7 +52,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         );
         $user->setHtmlEditor($this->initialUser->html_editor);
         $user->save();
-        Settings::set("additional_menus", $this->additionalMenus);
 
         $serverKeys = [
             'SERVER_PROTOCOL',
@@ -723,31 +720,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase
     public function testGetAllMenus()
     {
         $menus = getAllMenus();
-        $this->assertContains("top", $menus);
-        $this->assertContains("not_in_menu", $menus);
-        $this->assertNotContains("foo", $menus);
-        $this->assertNotContains("bar", $menus);
-    }
-
-    public function testGetAllMenusWithAdditional()
-    {
-        Settings::set("additional_menus", "foo;bar");
-
-        $menus = getAllMenus(false, false);
-
-        $this->assertContains("top", $menus);
-        $this->assertContains("not_in_menu", $menus);
-        $this->assertContains("foo", $menus);
-        $this->assertContains("bar", $menus);
-
-        getAllMenus();
-    }
-
-    public function testGetAllMenusWithAdditionalOnlyUsed()
-    {
-        Settings::set("additional_menus", "foo;bar");
-
-        $menus = getAllMenus(true, false);
         $this->assertContains("top", $menus);
         $this->assertContains("not_in_menu", $menus);
         $this->assertNotContains("foo", $menus);

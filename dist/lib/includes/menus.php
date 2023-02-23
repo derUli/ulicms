@@ -18,8 +18,6 @@ function get_all_used_menus(): array
 }
 
 // Gibt die Identifier aller Menüs zurück.
-// Zusätzliche Navigationsmenüs können definiert werden,
-// durch setzen von additional_menus
 function getAllMenus(
     bool $only_used = false,
     bool $read_theme_menus = true
@@ -31,14 +29,7 @@ function getAllMenus(
         "bottom",
         "not_in_menu"
     );
-    $additional_menus = Settings::get("additional_menus");
 
-    if ($additional_menus) {
-        $additional_menus = explode(";", $additional_menus);
-        foreach ($additional_menus as $m) {
-            array_push($menus, $m);
-        }
-    }
     if ($only_used) {
         $used = get_all_used_menus();
         $new_menus = [];

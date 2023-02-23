@@ -280,7 +280,7 @@ add_translation("UPDATE_NOTICE", "<span style=\"color:red\"><strong>Attention!!!
 ");
 
 // Login
-add_translation("PLEASE_AUTHENTICATE", "please authenticate");
+add_translation("PLEASE_AUTHENTICATE", "Please authenticate yourself.");
 add_translation("LOGIN", "Login");
 
 // Paket installieren
@@ -403,9 +403,6 @@ add_translation("IP_ADDRESSES", "IP Addresses");
 add_translation("LOG_IP_ADDRESSES", "Save IP addresses of comment authors.");
 add_translation("LOG_IP_ADDRESSES_NOTICE", "<strong>Warning!</strong><br>This is maybe a problem with the privacy policy law.");
 add_translation("LOG_IP_INFORMATION", "The log will be saved in database table " . tbname("log") . ". You can view it using an database administration tool like phpMyAdmin or sql_console.");
-
-// additional_menus
-add_translation("ADDITIONAL_MENUS", "Additional Menus (semicolon seperated)");
 
 // HTML Editor
 add_translation("HTML_EDITOR", "HTML Editor");

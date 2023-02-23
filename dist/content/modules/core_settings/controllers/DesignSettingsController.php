@@ -33,8 +33,6 @@ class DesignSettingsController extends Controller
             Settings::delete("no_mobile_design_on_tablet");
         }
 
-        Settings::set("additional_menus", $_REQUEST["additional_menus"]);
-
         // Wenn Formular abgesendet wurde, Wert Speichern
         $themes = getAllThemes();
         if (in_array($_REQUEST["theme"], $themes)) {

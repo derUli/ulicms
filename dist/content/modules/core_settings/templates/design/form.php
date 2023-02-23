@@ -14,13 +14,9 @@ $permissionChecker = new ACL();
 if (!$permissionChecker->hasPermission("design")) {
     noPerms();
 } else {
-    $theme = Settings::get('theme');
-    $additional_menus = Settings::get("additional_menus");
-    $mobile_theme = Settings::get("mobile_theme");
     $allThemes = getAllThemes();
     $fonts = $controller->getFontFamilys();
     $theme = Settings::get('theme');
-    $additional_menus = Settings::get("additional_menus");
     $mobile_theme = Settings::get("mobile_theme");
     $default_font = Settings::get("default_font");
     $title_format = Settings::get("title_format");
@@ -256,12 +252,6 @@ if (!$permissionChecker->hasPermission("design")) {
                 </tr>
             <?php }
             ?>
-            <tr>
-                <td><strong><?php translate("ADDITIONAL_MENUS"); ?> </strong>
-
-                <td><input type="text" name="additional_menus"
-                           value="<?php echo _esc($additional_menus); ?>"></td>
-            </tr>
         </table>
     </div>
     <p class="voffset3">

@@ -400,9 +400,6 @@ add_translation("LOG_IP_ADDRESSES_NOTICE", "<strong>Achtung!</strong><br>Dies st
 add_translation("LOG_IP_INFORMATION", "Diese Einstellungen beziehen sich auf"
         . "die Daten von Kommentatoren.");
 
-// additional_menus
-add_translation("ADDITIONAL_MENUS", "Zusätzliche Menüs (Semikolon-getrennt)");
-
 // HTML Editor
 add_translation("HTML_EDITOR", "HTML Editor");
 

@@ -1,8 +1,6 @@
 <?php
 
-use App\HTML\Input;
 use Michelf\MarkdownExtra;
-use zz\Html\HTMLMinify;
 
 class InfoController extends MainClass
 {
