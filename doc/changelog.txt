@@ -10,6 +10,7 @@ Neue Features:
 * Auswahl der Schriftarten erweitert
 
 Fehlerkorrekturen:
+* Fehler im Installer korrigiert
 * Einige UI Fixes
 * Fehler nach Dateiupload korrigiert
 
