@@ -27,7 +27,6 @@ define('ULICMS_CONTENT', ULICMS_ROOT . '/content');
 define('ULICMS_GENERATED', ULICMS_CONTENT . '/generated');
 define('ULICMS_CONFIGURATIONS', ULICMS_CONTENT . '/configurations');
 
-use App\Exceptions\AccessDeniedException;
 use App\Exceptions\ConnectionFailedException;
 use App\Exceptions\SqlException;
 use App\Registries\HelperRegistry;
