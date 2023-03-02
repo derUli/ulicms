@@ -346,6 +346,7 @@ class InstallerController
         if (is_dir($installerDir)) {
             @sureRemoveDir($installerDir, true);
         }
+
         @session_destroy();
         header("Location: ../admin/");
     }

@@ -9,6 +9,7 @@ define("ULICMS_ROOT", dirname(__FILE__) . '/..');
 
 require ULICMS_ROOT . '/vendor/autoload.php';
 require ULICMS_ROOT . '/App/Utils/VersionComparison.php';
+require ULICMS_ROOT . '/App/Utils/File.php';
 
 require "controllers/InstallerController.php";
 
