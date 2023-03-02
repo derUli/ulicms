@@ -8,7 +8,7 @@ date_default_timezone_set("Europe/Berlin");
 define("ULICMS_ROOT", dirname(__FILE__) . '/..');
 
 require ULICMS_ROOT . '/vendor/autoload.php';
-require ULICMS_ROOT . '/app/Utils/VersionComparison.php';
+require ULICMS_ROOT . '/App/Utils/VersionComparison.php';
 
 require "controllers/InstallerController.php";
 
