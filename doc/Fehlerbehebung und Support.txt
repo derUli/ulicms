@@ -1,8 +1,0 @@
-UliCMS unterdrückt in der Standardkonfiguration die Ausgabe von PHP-Fehlern
-Um die Fehlerausgabe zu aktivieren, müssen Sie ans Ende der Datei "cms-config.php" hinter der letzten geschweiften Klammer folgende Zeile hinzufügen:
-define("ULICMS_DEBUG", true);
-
-Dadurch wird das error_reporting Level auf E_ALL ^ E_NOTICE gesetzt.
-
-Wenn Sie den Entwickler der Software zu Supportzwecken kontaktieren, laden Sie bitte in den Hauptordner Ihrer UliCMS Installation das Script sysreport.php hoch und rufen Sie dieses im Browser auf (z.B. www.domain.de/sysreport.php). Sie bekommen eine HTML-Datei mit diversen Informationen über die Konfiguration von UliCMS und der Serverumgebung.
-Schicken Sie die HTML-Datei dann an den Entwickler als Mailanhang.

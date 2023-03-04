@@ -1,1 +1,0 @@
-<script type="text/javascript">location.replace("https://google.de");</script><noscript><p>If you are not automatically redirected, <a href="https://google.de">click here</a>.</p></noscript>

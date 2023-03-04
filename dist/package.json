@@ -1,0 +1,24 @@
+{
+    "name": "ulicms",
+    "description": "Open Source Content Management System",
+    "dependencies": {
+        "@fortawesome/fontawesome-free": "*",
+        "bootbox": "4.x",
+        "bootstrap": "3.x",
+        "bootstrap-toggle": "2.x",
+        "codemirror-minified": "*",
+        "datatables": "*",
+        "jquery": "*",
+        "jquery-datetimepicker": "*",
+        "jquery-form": "*",
+        "jscolor-picker": "*",
+        "password-strength-meter": "^2.1.0",
+        "select2": "^4.0.13",
+        "slug": "^2.1.1",
+        "system-font-stacks": "^0.0.2",
+        "vanilla-toast": "*",
+        "zenscroll": "*"
+    },
+    "license": "The BSD License",
+    "private": true
+}

@@ -1,8 +1,0 @@
-{
-    "source": "core",
-    "version": "2022.1",
-    "embed": false,
-    "actions": {
-        "help": "templates/help.php"
-    }
-}

@@ -1,0 +1,1038 @@
+$default-text-color: rgb(50, 50, 50);
+$default-font-size: 16px;
+$color-2: black;
+$red-color: red;
+$green-color: green;
+$color-5: #e7e5e5;
+$color-6: #000;
+$color-7: #fff;
+$color-8: rgb(30, 30, 30);
+$color-9: white;
+$color-10: #333;
+$default-font: -apple-system, BlinkMacSystemFont, "Segoe UI Emoji", "Segoe UI",
+Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+$code-font: Pragmata, Menlo, "DejaVu LGC Sans Mono", "DejaVu Sans Mono",
+Consolas, "Everson Mono", "Lucida Console", "Andale Mono", "Nimbus Mono L",
+"Liberation Mono", FreeMono, "Osaka Monospaced", Courier, "New Courier",
+monospace;
+$default-background-color: white;
+$default-disable-background-color: #fdfdfd;
+$background-color-3: rgb(250, 250, 250);
+$background-color-4: #335599;
+$odd-background-color: #eee;
+$even-backgrond-color: #fff;
+$background-color-8: black;
+
+// impulse based scrolling on touch devices (e.g. iPad)
+// see https://developer.mozilla.org/de/docs/Web/CSS/-webkit-overflow-scrolling
+* {
+    -webkit-overflow-scrolling: touch !important;
+}
+
+html {
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+
+}
+
+body {
+    background-color: $default-background-color;
+    font-family: $default-font;
+    font-size: $default-font-size;
+    color: $default-text-color;
+    margin: 0;
+    padding: 0;
+    -ms-overflow-style: scrollbar;
+}
+
+input, select, checkbox, radio, textarea {
+    &:invalid{
+        border-color: red !important;
+    }
+}
+
+// pointer mouse cursor
+.has-pointer,
+input.fm,
+input.fm,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+input[type="image"],
+button,
+.select-on-click {
+    cursor: pointer
+}
+
+// not allowed mouse cursor
+.has-not-allowed {
+    cursor: not-allowed !important;
+
+    * {
+        pointer-events: none;
+    }
+}
+
+#scroll-to-top {
+    position: fixed;
+    bottom: 5px;
+    right: 20px;
+    padding: 0;
+    display: none;
+    font-size: 32px;
+    z-index: 5;
+}
+
+button:disabled, .disabled {
+    cursor: not-allowed;
+    pointer-events: all !important;
+}
+
+// For some reasons Bootbox adds padding-right as inline when opening a modal.
+// This causes the page content to shift to the left while the modal is open.
+body.modal-open {
+    padding-right: 0 !important;
+}
+
+.bootbox.modal {
+    .modal-headline {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    hr {
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+}
+
+.form-control[disabled],
+.form-control[readonly] {
+    background-color: $default-disable-background-color;
+}
+
+fieldset[disabled] {
+    .form-control {
+        background-color: $default-disable-background-color;
+    }
+}
+
+.actions {
+    min-width: 180px;
+}
+
+.top-right-icons {
+    a {
+        font-size: 30px;
+        color: $color-2 !important;
+    }
+}
+
+.menubar {
+    margin-bottom: 10px;
+}
+
+#backend-logo{
+    display: inline-block;
+}
+
+.btn-toolbar {
+    .btn {
+        margin-left: 5px;
+    }
+}
+
+.button-menu {
+    margin-top: 10px;
+
+    a {
+        width: fit-content;
+        display: block;
+        margin-bottom: 15px;
+    }
+}
+
+.toggle-module-form {
+    .btn {
+        min-width: 58px;
+    }
+}
+
+.block {
+    display: block;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.icon {
+    font-size: 15px;
+    width: 38px;
+}
+
+img.responsive-image,
+#ulicms-feed img
+{
+    max-width: 100%;
+    height: auto;
+}
+
+.CodeMirror {
+    margin-bottom: 0;
+    border: 1px solid #eee;
+    height: auto !important;
+    overflow: hidden;
+}
+
+.text-red {
+    color: $red-color;
+}
+
+.text-green {
+    color: $green-color;
+}
+
+img {
+    border: 0;
+}
+
+.ulicms-error {
+    color: $red-color;
+    background-color: $background-color-3;
+    border: solid rgb(230, 230, 230) 1px;
+    padding: 10px;
+}
+
+.border-red {
+    border: $red-color 1px solid;
+}
+
+.border-green {
+    border: $green-color 1px solid;
+}
+
+.scroll {
+    overflow-x: auto;
+    overflow-y: visible;
+}
+
+a {
+    &:not(.btn) {
+        color: $color-8;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    &:visited {
+        &:not(.btn) {
+            color: $color-8;
+            text-decoration: none;
+            font-weight: 500;
+        }
+    }
+
+    &:focus {
+        &:not(.btn) {
+            color: $color-8;
+            text-decoration: none;
+            font-weight: 500;
+        }
+    }
+
+    &:hover {
+        color: $color-8;
+        text-decoration: underline;
+    }
+
+    &:active {
+        color: $color-8;
+        text-decoration: underline;
+    }
+}
+
+div#footer {
+    text-align: center;
+    margin-top: 10px;
+}
+
+table {
+    width: 100%;
+    border: solid 1px #ededed;
+    tr {
+        td {
+            padding: 5px;
+        }
+        &:nth-child(odd) {
+            background-color: $odd-background-color;
+        }
+        &:nth-child(even) {
+            background-color: $even-backgrond-color;
+        }
+    }
+    th {
+        td {
+            padding: 3px;
+        }
+    }
+}
+
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+button {
+    background-color: $background-color-4;
+    color: $color-9;
+    padding: 10px;
+}
+
+input:not([type="submit"]):not([type="reset"]):not([type="button"]):not([type="radio"]):not([type="checkbox"]):not([type="image"]),
+select, textarea {
+    width: 100%;
+}
+
+select, textarea {
+    border: solid 1px #ededed;
+}
+
+textarea {
+    &#code,  &#content  {
+        height: auto;
+    }
+}
+
+table.tablesorter {
+    width: 100%;
+    margin-top: 10px;
+    tbody {
+        tr.normal-row {
+            td {
+                background: #888 !important;
+            }
+        }
+
+        tr.alt-row {
+            td {
+                background: #555 !important;
+            }
+        }
+    }
+}
+
+p {
+    width: 100%;
+    line-height: 1.5em;
+}
+
+code {
+    background-color: $default-background-color;
+    display: block;
+    padding: 20px;
+    border: 1px dotted blue;
+    word-wrap: break-word;
+    font-family: $code-font;
+    border-radius: 0 !important;
+}
+
+div.diff {
+    background-color: $default-background-color;
+    display: block;
+    padding: 20px;
+    border: 1px dotted blue;
+    word-wrap: break-word;
+    font-family: $code-font;
+
+    del {
+        color: $red-color;
+        background: #fdd;
+        text-decoration: none;
+    }
+
+    ins {
+        color: $green-color;
+        background: #efecec;
+        text-decoration: none;
+    }
+}
+
+div#pkglist,
+div#loadpkg,
+div#message-page-edit,
+.loading {
+    display: none;
+}
+
+div.inPageMessage {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    height: 24px;
+}
+
+.scrollup {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    display: none;
+}
+
+.CodeMirror-scroll {
+    overflow-y: hidden;
+    overflow-x: auto;
+}
+
+div.help {
+    background-color: $background-color-3;
+    border: solid rgb(200, 200, 200);
+    padding: 10px;
+    margin-top: 10px;
+}
+
+label, .label {
+    font-weight: bold;
+    color: $color-2;
+    white-space: normal;
+    text-align: left;
+    padding: 0;
+    font-size: inherit;
+    border-radius: 0 !important;
+}
+
+&::-moz-selection {
+    color: $color-5;
+    background: #335599;
+}
+
+&::selection {
+    color: $color-5;
+    background: #335599;
+}
+
+input[type="image"] {
+    border: none;
+}
+
+img.small-preview-image {
+    max-width: 300px !important;
+    height: auto !important;
+}
+
+form#site-form {
+    margin-bottom: 20px;
+}
+
+div#site-switcher-container {
+    display: none;
+}
+
+form#login-form {
+    margin-bottom: 5px;
+}
+
+.accordion-header {
+    padding: 5px 10px;
+    font-size: 16px;
+    width: auto !important;
+    word-wrap: break-word;
+}
+
+.accordion-content {
+    padding: 5px 10px;
+    width: auto !important;
+    word-wrap: break-word;
+    overflow-x: auto;
+    h1, h2, h3, h4, h5, h6 {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    &.motd-tab, &.news-tab {
+        p:last-child {
+            margin: 0 !important;
+        }
+        .alert {
+            margin-bottom: 0
+        }
+    }
+
+    &.users-online-tab {
+        ul {
+            margin-left: 0;
+            padding-left: 20px;
+        }
+
+        .online-users {
+            .online-user {
+                margin: 0 0 5px 0;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+
+                img {
+                    width: 40px;
+                    display: inline-block;
+                }
+
+                .username {
+                    margin-left: 10px;
+                    margin-top: 8px;
+                    font-weight: bold;
+                    display: inline-block;
+                }
+            }
+        }
+    }
+
+    .checkbox, .radio, ol, ul {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+}
+
+.toggle.btn {
+    margin-right: 10px;
+}
+
+hr {
+    margin: 5px 0;
+}
+
+div#login-welcome-text {
+    border: solid 1px #ededed;
+    padding: 10px;
+    background-color: $odd-background-color;
+}
+
+.list-show {
+    display: none;
+}
+
+.error-field {
+    background-color: $red-color !important;
+    color: $color-9 !important;
+}
+
+.license-agreement {
+    overflow: auto;
+    height: 200px;
+    border: 1px solid #eee;
+    background-color: $background-color-3;
+    padding: 20px;
+}
+
+.menu-container {
+
+    #menu-toggle {
+        i {
+            transition: transform .4s ease-in-out;
+        }
+
+        /* Rotate Hamburger Menu Icon on open */
+        &.is-open {
+            i {
+                transform: rotate(90deg);
+            }
+        }
+
+    }
+
+    text-align: right;
+
+    img {
+        height: 30px;
+        margin-top: 5px;
+    }
+}
+
+.main {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    width:100%;
+}
+
+#page-list {
+    .dataTables_wrapper {
+        margin-bottom: 40px;
+    }
+}
+
+.dataTables_wrapper, form{
+    i.type-icon {
+        min-width: 20px;
+        position: relative;
+        top: 1px;
+        text-align: center;
+        margin-right: 2px;
+    }
+}
+
+.pageform {
+    #accordion-container {
+        margin-bottom: 10px;
+    }
+
+    .img-thumbnail {
+        margin-bottom: 5px;
+    }
+}
+
+form#edit-user {
+    .checkbox.block {
+        margin-bottom: 5px;
+        margin-top: 5px;
+    }
+}
+
+#accordion-container {
+    padding:0;
+    border: none;
+}
+
+.mainmenu {
+    background-color: $background-color-8;
+    color: $color-9;
+    display: none;
+    margin-bottom: 10px;
+
+    ul {
+        li {
+            margin-bottom:0;
+
+            .fa {
+                width: 40px;
+            }
+
+            .far {
+                width: 40px;
+            }
+
+            .fas {
+                width: 40px;
+            }
+        }
+
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        a {
+            display: block;
+            color: $color-9;
+            font-size: 24px;
+            padding-top: 15px;
+            padding-bottom: 15px;
+            padding-left: 20px;
+            padding-right: 20px;
+
+            &:visited {
+                display: block;
+                color: $color-9;
+                font-size: 24px;
+                padding-top: 15px;
+                padding-bottom: 15px;
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            &:focus {
+                text-decoration: none;
+                color: $color-9;
+            }
+
+            &:active {
+                display: block;
+                font-size: 24px;
+                padding-top: 15px;
+                padding-bottom: 15px;
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            &:hover {
+                text-decoration: none;
+                background-color: $background-color-4;
+                color: white !important;
+            }
+        }
+
+        a.active {
+            text-decoration: none;
+            background-color: $background-color-4;
+        }
+    }
+}
+
+.has-help {
+    cursor: help;
+    margin-left: 5px;
+}
+
+#main-content-loadspinner {
+    display:none
+}
+
+.main-content {
+    > .btn-toolbar {
+        margin-top: 10px;
+    }
+
+    .field, .help {
+        margin-bottom: 5px;
+        margin-top: 5px;
+    }
+
+    .field-label {
+        display: block;
+    }
+}
+
+#menu-clear-cache {
+    display: inline-block;
+    width: 37.5px;
+}
+
+#menu-clear-cache-loading {
+    display: inline-block;
+    width: 37.5px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    word-break: break-word;
+}
+
+.break-word {
+    word-break: break-word
+}
+
+#msgcontainer {
+    margin-top: 10px;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.voffset {
+    margin-top: 2px!important;
+}
+
+.voffset1 {
+    margin-top: 5px!important;
+}
+
+.voffset2 {
+    margin-top: 10px!important;
+}
+
+.voffset3 {
+    margin-top: 15px!important;
+}
+
+.voffset3-5 {
+    margin-top: 20px!important;
+}
+
+.voffset4 {
+    margin-top: 30px!important;
+}
+
+.voffset5 {
+    margin-top: 40px!important;
+}
+
+.voffset6 {
+    margin-top: 60px!important;
+}
+
+.voffset7 {
+    margin-top: 80px!important;
+}
+
+.voffset8 {
+    margin-top: 100px!important;
+}
+
+.voffset9 {
+    margin-top: 150px!important;
+}
+
+.margin-left-10 {
+    margin-left:10px !important;
+}
+
+@media only screen and (min-width: 375px) {
+    .btn-group .btn {
+        margin-right: 10px;
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+}
+
+.btn-primary {
+    background-color: $background-color-4;
+}
+
+.normal-weight {
+    font-weight: normal;
+}
+
+.btn-margin {
+    margin-right: 10px;
+}
+
+.delete-form {
+    display: inline-block;
+}
+
+.select2-container {
+    .select2-selection--single {
+        min-height: 34px !important;
+    }
+
+    .select2-selection--multiple {
+        min-height: 46px !important;
+    }
+
+    .select2-selection__rendered {
+        line-height: 31px !important;
+    }
+
+    .select2-selection__arrow {
+        min-height: 34px !important;
+    }
+}
+
+.filter-wrapper {
+    margin-top: 15px;
+    margin-bottom: 15px;
+
+    .filters > .row {
+        margin-bottom: 10px
+    }
+}
+
+table.dataTable {
+    // for reasons there is always a horizontal scrollbar in Firefox
+    // if we don't subtract 2px
+    // what the hell are these 2px?!
+    width: calc(100% - 2px) !important;
+    position: relative;
+    top: 5px;
+
+    tbody, thead {
+        th, td {
+            padding: 3px !important;
+        }
+
+    }
+
+    tr.unread {
+        background-color: #fcf8e3;
+    }
+
+    .no-sort {
+        background: none !important;
+        cursor: default;
+    }
+}
+
+.dataTables_wrapper {
+    .dataTables_processing {
+        z-index: 30;
+        background: none;
+    }
+
+    .dataTables_filter {
+        input {
+            margin-left: 0 !important;
+        }
+    }
+}
+
+.top-bar {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+kbd,
+pre,
+.img-rounded,
+.img-thumbnail,
+.img-circle,
+.form-control,
+.btn,
+.btn-link,
+.dropdown-menu,
+.list-group-item,
+.input-group-addon,
+.input-group-btn,
+.navbar,
+.navbar-toggle,
+.icon-bar,
+.breadcrumb,
+.pagination,
+.progress,
+.badge,
+.jumbotron,
+.thumbnail,
+.panel,
+.well,
+.modal-content,
+.tooltip-inner,
+.popover,
+.popover-title,
+.alert,
+.paginate_button,
+*[class^="select2"]
+{
+    border-radius: 0 !important;
+}
+
+.centered {
+    margin: auto;
+}
+
+.theme-preview {
+    margin: auto;
+    max-height: 80vh;
+    position: relative;
+
+    .fa-spinner {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+}
+
+.nav-tabs, .nav-pills {
+    a {
+        border-radius: 0 !important;
+    }
+}
+
+.pager {
+    * {
+        border-radius: 0 !important;
+    }
+}
+
+
+.alert {
+    margin-bottom: 10px;
+}
+
+.carousel-indicators {
+    li {
+        border-radius: 0 !important;
+    }
+}
+
+@media only screen and (max-width: 820px) {
+    .hide-on-820 {
+        display: none;
+    }
+}
+
+@media (max-width: 500px) {
+    .hide-on-mobile {
+        display: none;
+    }
+}
+
+@media (max-width: 640px) {
+    .dataTables_length,
+    .dataTables_filter {
+        label {
+            width: 100%;
+        }
+    }
+}
+
+@media (max-width: 1200px) {
+    table.tablesorter {
+        .header {
+            background-image: none !important;
+        }
+    }
+}
+@media only screen and (max-width: 780px) {
+    .btn-margin {
+        margin-right: unset;
+        margin-bottom: 10px;
+        float: none !important;
+    }
+}
+
+.comment-counter {
+    position:relative;
+
+    a {
+        display:block;
+    }
+
+    .fa-comments {
+        z-index:1;
+
+    }
+
+    .count {
+        display:inline-block;
+        position:absolute;
+        right:0;
+        top:0;
+        background-color: $red-color;
+        color: white;
+        z-index:2;
+        border-radius: 5px;
+        padding: 0 6px;
+        font-size: 0.35em;
+    }
+}
+
+.comment-link {
+    font-weight: 500;
+
+    &:hover{
+        text-decoration: underline;
+    }
+}
+
+#designForm {
+    .preview {
+        img {
+            max-height: 50vh;
+            max-width: 100%;
+        }
+    }
+}
+
+.avatar {
+    vertical-align: middle;
+    height: 40px;
+}
+
+iframe.fm {
+    border: 0;
+    width: 100%;
+    height: calc(100vh - 290px);
+}
+
+#vanilla-toast {
+    font-size: 1em;
+}
+
+
+.changelog {
+    line-height: 2;
+    h3{
+        padding-top: 10px;
+        &:not(:first-child) {
+            margin-top: 10px;
+            border-top: 1px solid #e8e8e8;
+        }
+    }
+}

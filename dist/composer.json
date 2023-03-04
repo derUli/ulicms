@@ -1,0 +1,101 @@
+{
+    "license": "BSD",
+    "authors": [
+        {
+            "name": "Ulrich Schmidt",
+            "email": "support@ulicms.de",
+            "homepage": "http://www.ulicms.de",
+            "role": "Lead Developer"
+        }
+    ],
+    "support": {
+        "email": "support@ulicms.de",
+        "issues": "https://github.com/derUli/ulicms/issues",
+        "source": "https://github.com/derUli/ulicms",
+        "docs": "https://www.ulicms.de/handbuecher.html",
+        "rss": "https://en.ulicms.de/blog_rss.php?s=aktuelles&lang=en"
+    },
+    "repositories": [
+        {
+            "url": "https://github.com/derUli/html-minifier",
+            "type": "git"
+        }
+    ],
+    "require": {
+        "php": ">=8.0.2",
+        "ext-mysqli": "*",
+        "ext-gd": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "ext-openssl": "*",
+        "ext-dom": "*",
+        "ext-libxml": "*",
+        "phpfastcache/phpfastcache": "*",
+        "phpgangsta/googleauthenticator": "dev-master",
+        "katzgrau/klogger": "dev-master",
+        "phpmailer/phpmailer": "*",
+        "deruli/html-minifier": "master-dev",
+        "scssphp/scssphp": "*",
+        "chrisjean/php-ico": "*",
+        "willdurand/negotiation": "*",
+        "cocur/slugify": "*",
+        "matthiasmullie/minify": "*",
+        "rakit/validation": "*",
+        "nesbot/carbon": "*",
+        "symfony/polyfill-mbstring": "*",
+        "dereuromark/media-embed": "*",
+        "jimmiw/php-time-ago": "*",
+        "consolidation/robo": "*",
+        "lasserafn/php-initial-avatar-generator": "*",
+        "imagine/imagine": "*",
+        "michelf/php-markdown": "*",
+        "chrisullyott/php-filesize": "^4.2",
+        "intervention/mimesniffer": "^0.4.2",
+        "jaybizzle/laravel-crawler-detect": "^1.3",
+        "mobiledetect/mobiledetectlib": "^3.74",
+        "jfcherng/php-diff": "^6.13",
+        "jessedp/php-timezones": "^0.2.2"
+    },
+    "require-dev": {
+        "spatie/phpunit-snapshot-assertions": "*",
+        "phpunit/phpunit": "*",
+        "friendsofphp/php-cs-fixer": "*",
+        "overtrue/phplint": "*",
+        "phpstan/phpstan": "^1.9",
+        "barryvdh/composer-cleanup-plugin": "0.2.x"
+    },
+    "autoload": {
+        "files": [
+            "App/Utils/Session/Session.php",
+            "App/HTML/functions.php",
+            "lib/includes/debug.php",
+            "lib/includes/Results.php",
+            "lib/includes/comparisons.php",
+            "lib/includes/csrf_token.php",
+            "lib/includes/custom_data.php",
+            "lib/includes/db_functions.php",
+            "lib/includes/designs.php",
+            "lib/includes/encode.php",
+            "lib/includes/environment.php",
+            "lib/includes/file_get_contents_wrapper.php",
+            "lib/includes/files.php",
+            "lib/includes/html5_media.php",
+            "lib/includes/languages.php",
+            "lib/includes/menus.php",
+            "lib/includes/minify.php",
+            "lib/includes/modules.php",
+            "lib/includes/network.php",
+            "lib/includes/output.php",
+            "lib/includes/packages.php",
+            "lib/includes/pages.php",
+            "lib/includes/path.php",
+            "lib/includes/request.php",
+            "lib/includes/string_functions.php",
+            "lib/includes/templating.php",
+            "lib/includes/translation.php",
+            "lib/includes/types.php",
+            "lib/includes/url.php",
+            "lib/includes/users_api.php"
+        ]
+    }
+}

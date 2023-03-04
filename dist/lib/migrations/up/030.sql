@@ -1,0 +1,1 @@
+update `{prefix}settings` set name = 'body_background_color' WHERE name = 'body-background-color';
