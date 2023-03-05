@@ -273,13 +273,6 @@ if (!$permissionChecker->hasPermission("other")) {
                 </div>
             </div>
         </div>
-        <h2 class="accordion-header">
-            <?php translate("expert_settings"); ?>
-        </h2>
-        <div class="accordion-content">
-            <a href="index.php?action=settings" class="btn btn-danger is-not-ajax"><i
-                    class="fas fa-tools"></i> <?php translate("view"); ?></a>
-        </div>
     </div>
     <button type="submit" class="btn btn-primary voffset3">
         <i class="fa fa-save"></i>

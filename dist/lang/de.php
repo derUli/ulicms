@@ -255,7 +255,6 @@ add_translation("REALLY_MAKE_DEFAULT_LANGUAGE", "Möchten Sie %name% zur Standar
 add_translation("SHORTCUTS", "Tastenkombinationen");
 add_translation("DOMAIN2LANGUAGE_MAPPING", "Domain2Language Mapping");
 add_translation("EMAIL_DELIVERY", "E-Mail Versand");
-add_translation("EXPERT_SETTINGS", "Experteneinstellungen");
 add_translation("CACHE_ENABLED", "Cache aktiviert");
 add_translation("CACHE_VALIDATION_DURATION", "Cache Gültigkeitsdauer");
 add_translation("CACHE_ENGINE", "Caching Engine");

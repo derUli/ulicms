@@ -253,7 +253,6 @@ add_translation("REALLY_MAKE_DEFAULT_LANGUAGE", "Really make %name% to the defau
 add_translation("SHORTCUTS", "Shortcuts");
 add_translation("DOMAIN2LANGUAGE_MAPPING", "Domain2Language Mapping");
 add_translation("EMAIL_DELIVERY", "E-Mail Delivery");
-add_translation("EXPERT_SETTINGS", "Expert Settings");
 add_translation("CACHE_ENABLED", "Cache enabled");
 add_translation("CACHE_VALIDATION_DURATION", "Cache validation duration");
 add_translation("CACHE_ENGINE", "Caching Engine");
