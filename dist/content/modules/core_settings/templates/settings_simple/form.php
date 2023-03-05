@@ -99,27 +99,6 @@ if ($permissionChecker->hasPermission("settings_simple")) {
             </td>
         </tr>
         <tr>
-            <td></td>
-            <td>
-                <strong><?php translate("metadata"); ?></strong></strong></td>
-        </tr>
-        <tr>
-            <td><strong><?php translate("description"); ?></strong></td>
-            <td><a href="index.php?action=meta_description"
-                   class="btn btn-default is-not-ajax"><i class="fa fa-edit"></i> <?php translate("edit"); ?></a></td>
-        </tr>
-        <?php
-        if ($permissionChecker->hasPermission("open_graph")) {
-            ?>
-            <tr>
-                <td><strong><?php translate("open_graph"); ?>
-                    </strong></td>
-                <td><a href="index.php?action=open_graph" class="btn btn-default is-not-ajax"><i
-                            class="fa fa-edit"></i> <?php translate("edit"); ?></a></td>
-            </tr>
-        <?php }
-        ?>
-        <tr>
             <td><strong><?php translate("timezone"); ?></strong></td>
             <td><?php echo $controller->getTimezones();?></td>
         </tr>
@@ -142,6 +121,27 @@ if ($permissionChecker->hasPermission("settings_simple")) {
     ?>
                 </select></td>
         </tr>
+         <tr>
+            <td></td>
+            <td>
+                <strong><?php translate("metadata"); ?></strong></strong></td>
+        </tr>
+        <tr>
+            <td><strong><?php translate("description"); ?></strong></td>
+            <td><a href="index.php?action=meta_description"
+                   class="btn btn-default is-not-ajax"><i class="fa fa-edit"></i> <?php translate("edit"); ?></a></td>
+        </tr>
+        <?php
+        if ($permissionChecker->hasPermission("open_graph")) {
+            ?>
+            <tr>
+                <td><strong><?php translate("open_graph"); ?>
+                    </strong></td>
+                <td><a href="index.php?action=open_graph" class="btn btn-default is-not-ajax"><i
+                            class="fa fa-edit"></i> <?php translate("edit"); ?></a></td>
+            </tr>
+        <?php }
+        ?>
         <?php do_event("settings_simple"); ?>
         <tr>
             <td>
