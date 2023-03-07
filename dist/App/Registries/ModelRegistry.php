@@ -2,7 +2,15 @@
 
 declare(strict_types=1);
 
+namespace App\Registries;
+
 use App\Exceptions\FileNotFoundException;
+use Vars;
+
+use function getAllModules;
+use function getModuleMeta;
+use function getModulePath;
+use function str_ends_with;
 
 // loads model files of modules
 class ModelRegistry
