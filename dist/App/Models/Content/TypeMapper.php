@@ -38,8 +38,7 @@ class TypeMapper
 
     public static function getModel($type): ?object
     {
-        if (!(isset(self::$mapping[$type])
-                and class_exists(self::$mapping[$type]))) {
+        if (!(isset(self::$mapping[$type]) && class_exists(self::$mapping[$type]))) {
             return null;
         }
         return new self::$mapping[$type]();
