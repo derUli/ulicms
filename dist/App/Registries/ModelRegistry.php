@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Registries;
 
-use App\Exceptions\FileNotFoundException;
 use Vars;
+use ModuleManager;
 
 use function getAllModules;
 use function getModuleMeta;
@@ -19,12 +19,11 @@ class ModelRegistry
     public static function loadModuleModels(): void
     {
         $modelRegistry = [];
-        $modules = getAllModules();
-        $disabledModules = Vars::get("disabledModules") ?? [];
+
+        $moduleManager = new ModuleManager();
+        $modules = $moduleManager->getEnabledModuleNames();
+
         foreach ($modules as $module) {
-            if (in_array($module, $disabledModules)) {
-                continue;
-            }
             $models = getModuleMeta($module, "models") ?
                     getModuleMeta($module, "models") : getModuleMeta($module, "objects");
             if (!$models) {
@@ -41,12 +40,7 @@ class ModelRegistry
         }
 
         foreach ($modelRegistry as $key => $value) {
-            if (is_file($value)) {
-                require $value;
-            } else {
-                throw new FileNotFoundException("Module {$module}: "
-                                . "File '{$value}' not found.");
-            }
+            require_once $value;
         }
     }
 }

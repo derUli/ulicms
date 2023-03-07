@@ -10,8 +10,15 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
     use MatchesSnapshots;
     protected function setUp(): void
     {
+        $manager = new ModuleManager();
+        $manager->sync();
+
         require_once getLanguageFilePath('en');
         Translation::loadAllModuleLanguageFiles('en');
+
+
+        $manager = new ModuleManager();
+        $manager->sync();
 
         $_SESSION = [];
         $_POST = [];
