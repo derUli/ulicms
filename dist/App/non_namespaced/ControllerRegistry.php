@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-use App\Exceptions\FileNotFoundException;
-
 class ControllerRegistry
 {
     private static $controllers = [];
@@ -43,12 +41,9 @@ class ControllerRegistry
             }
         }
         foreach ($controllerRegistry as $key => $value) {
-            if (is_file($value)) {
-                require_once $value;
-            } else {
-                throw new FileNotFoundException("Module {$module}: "
-                                . "File '{$value}' not found.");
-            }
+            include_once $value;
+
+
             if (class_exists($key)) {
                 $classInstance = new $key();
                 if ($classInstance instanceof Controller) {

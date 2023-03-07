@@ -35,12 +35,13 @@ class ModelRegistry
                 if (!str_ends_with($path, ".php")) {
                     $path .= ".php";
                 }
+
                 $modelRegistry[$key] = $path;
             }
         }
 
         foreach ($modelRegistry as $key => $value) {
-            require_once $value;
+            include_once $value;
         }
     }
 }

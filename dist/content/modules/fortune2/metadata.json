@@ -17,6 +17,9 @@
     "models": {
         "HelloWorldModel": "HelloWorldModel.php"
     },
+    "helpers": {
+        "HelloWorldHelper": "HelloWorldHelper.php"
+    },
     "controller_function_permissions": {
         "Fortune::doSomethingPost": "fortune2_post",
         "Fortune::doSomethingGet": "fortune2_get"

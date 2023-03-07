@@ -4,6 +4,7 @@ use App\Models\Content\Language;
 use App\Models\Content\VCS;
 use App\Exceptions\DatasetNotFoundException;
 use Spatie\Snapshots\MatchesSnapshots;
+use App\Registries\ModelRegistry;
 
 class PageControllerTest extends \PHPUnit\Framework\TestCase
 {
@@ -13,12 +14,10 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         $manager = new ModuleManager();
         $manager->sync();
 
+        ModelRegistry::loadModuleModels();
+
         require_once getLanguageFilePath('en');
         Translation::loadAllModuleLanguageFiles('en');
-
-
-        $manager = new ModuleManager();
-        $manager->sync();
 
         $_SESSION = [];
         $_POST = [];
