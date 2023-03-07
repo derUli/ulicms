@@ -264,7 +264,7 @@ class Database
         $table = self::escapeName($table);
         $column = self::escapeName($column);
         $sql = "select min($column) as val from $table";
-        if (\App\Helpers\StringHelper::isNotNullOrEmpty($where)) {
+        if (!empty($where)) {
             $sql .= " where $where";
         }
 
@@ -288,7 +288,7 @@ class Database
         $table = self::escapeName($table);
         $column = self::escapeName($column);
         $sql = "select max($column) as val from $table";
-        if (\App\Helpers\StringHelper::isNotNullOrEmpty($where)) {
+        if (!empty($where)) {
             $sql .= " where $where";
         }
 
@@ -312,7 +312,7 @@ class Database
         $table = self::escapeName($table);
         $column = self::escapeName($column);
         $sql = "select avg($column) as val from $table";
-        if (\App\Helpers\StringHelper::isNotNullOrEmpty($where)) {
+        if (!empty($where)) {
             $sql .= " where $where";
         }
 
@@ -335,7 +335,7 @@ class Database
 
         $sql = "DELETE FROM $table";
 
-        if (\App\Helpers\StringHelper::isNotNullOrEmpty($where)) {
+        if (!empty($where)) {
             $sql .= " where $where";
         }
         $result = Database::query($sql);
@@ -389,11 +389,11 @@ class Database
 
         $sql = "select $columns_sql from $table";
 
-        if (\App\Helpers\StringHelper::isNotNullOrWhitespace($where)) {
+        if (!empty($where)) {
             $sql .= " where $where ";
         }
 
-        if (\App\Helpers\StringHelper::isNotNullOrWhitespace($order)) {
+        if (!empty($order)) {
             $sql .= " order by $order";
         }
         return self::pQuery($sql, $args, $replacePrefix);

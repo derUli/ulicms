@@ -196,7 +196,7 @@ class Video extends Model
 
     public function setName(?string $val): void
     {
-        $this->name = \App\Helpers\StringHelper::isNotNullOrWhitespace($val) ?
+        $this->name = !empty($val) ?
                 (string) $val : null;
     }
 

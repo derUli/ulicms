@@ -75,7 +75,7 @@ class CoreFormsController extends Controller
 
     public function beforeHttpHeader(): void
     {
-        if (\App\Helpers\StringHelper::isNotNullOrWhitespace(
+        if (!empty(
             Request::getVar("submit-cms-form")
         ) and Request::isPost()) {
             // apply spam filter if enabled

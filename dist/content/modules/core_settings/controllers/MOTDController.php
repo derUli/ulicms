@@ -8,7 +8,7 @@ class MOTDController extends Controller
 {
     public function _savePost(): void
     {
-        if (\App\Helpers\StringHelper::isNullOrEmpty(Request::getVar('language'))) {
+        if (empty(Request::getVar('language'))) {
             Settings::set("motd", $_POST["motd"]);
         } else {
             Settings::set(

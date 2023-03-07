@@ -33,7 +33,7 @@ class Form
         array $htmlAttributes = []
     ): string {
         $html = '';
-        $attribhtml = \App\Helpers\StringHelper::isNotNullOrWhitespace(
+        $attribhtml = !empty(
             ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes)
         ) ?
                 " " .

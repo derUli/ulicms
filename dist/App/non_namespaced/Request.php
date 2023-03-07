@@ -15,7 +15,7 @@ class Request
     {
         $protocol = self::isSSL() ? "https://" : "http://";
 
-        if (\App\Helpers\StringHelper::isNotNullOrWhitespace($suffix)) {
+        if (!empty($suffix)) {
             $protocol .= $suffix;
         }
         return $protocol;

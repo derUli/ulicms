@@ -143,7 +143,7 @@ class Forms
             $email_from = $_POST[$mail_from_field];
 
             // if dns mx check is enabled check the mail domain
-            if (!\App\Helpers\StringHelper::isNullOrEmpty($email_from)
+            if (!empty($email_from)
                     and Settings::get("check_mx_of_mail_address") && !AntiSpamHelper::checkMailDomain($email_from)) {
                 ExceptionResult(
                     get_translation("mail_address_has_invalid_mx_entry"),
@@ -151,7 +151,7 @@ class Forms
                 );
             }
 
-            $mail_from = \App\Helpers\StringHelper::isNotNullOrWhitespace(
+            $mail_from = !empty(
                 $mail_from_field
             ) ?
                     [

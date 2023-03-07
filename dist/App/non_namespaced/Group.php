@@ -312,7 +312,7 @@ class Group
      */
     public function setAllowableTags(?string $val): void
     {
-        $this->allowable_tags = \App\Helpers\StringHelper::isNotNullOrWhitespace($val) ?
+        $this->allowable_tags = !empty($val) ?
                 (string) $val : null;
     }
 

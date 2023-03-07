@@ -18,7 +18,7 @@ class UserController extends Controller
         $firstname = $_POST["firstname"];
         $password = $_POST["password"];
         $email = $_POST["email"];
-        $default_language = \App\Helpers\StringHelper::isNotNullOrWhitespace($_POST["default_language"]) ? $_POST["default_language"] : null;
+        $default_language = !empty($_POST["default_language"]) ? $_POST["default_language"] : null;
         $sendMail = isset($_POST["send_mail"]);
         $admin = boolval(isset($_POST["admin"]));
         $locked = boolval(isset($_POST["locked"]));
@@ -69,7 +69,7 @@ class UserController extends Controller
             $firstname = $_POST["firstname"];
             $password = $_POST["password"];
             $email = $_POST["email"];
-            $default_language = \App\Helpers\StringHelper::isNotNullOrWhitespace($_POST["default_language"]) ? $_POST["default_language"] : null;
+            $default_language = !empty($_POST["default_language"]) ? $_POST["default_language"] : null;
             $admin = boolval(isset($_POST["admin"]));
             $locked = boolval(isset($_POST["locked"]));
 

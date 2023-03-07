@@ -11,7 +11,7 @@ class SessionManager extends Controller
         $user = new User();
         $user->loadByUsername($_POST["user"]);
 
-        if (\App\Helpers\StringHelper::isNotNullOrWhitespace($_POST["system_language"])) {
+        if (!empty($_POST["system_language"])) {
             $_SESSION["system_language"] = basename($_POST["system_language"]);
         } else {
             $_SESSION["system_language"] = $user->getDefaultLanguage() ? $user->getDefaultLanguage() : Settings::get("system_language");

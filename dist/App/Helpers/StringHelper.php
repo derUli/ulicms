@@ -22,30 +22,6 @@ class StringHelper extends Helper
         );
     }
 
-    // returns true if the string is null or empty
-    public static function isNullOrEmpty($variable): bool
-    {
-        return empty($variable);
-    }
-
-    // returns true if the string is not null or empty
-    public static function isNotNullOrEmpty($variable): bool
-    {
-        return !self::isNullOrEmpty($variable);
-    }
-
-    // returns true if the string is null or whitespace
-    public static function isNullOrWhitespace(?string $variable): bool
-    {
-        return $variable ? self::isNullOrEmpty(trim($variable)) : true;
-    }
-
-    // returns true if the string is not null or whitespace
-    public static function isNotNullOrWhitespace($variable): bool
-    {
-        return !self::isNullOrWhitespace($variable);
-    }
-
     // clean a string to use it in urls
     public static function cleanString(
         string $string,

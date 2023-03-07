@@ -48,7 +48,7 @@ if ($permissionChecker->hasPermission("install_packages")) {
                                 <td><?php esc($package->name); ?></td>
                                 <td><?php esc($package->version); ?></td>
                                 <td><?php
-                                    echo \App\Helpers\StringHelper::isNotNullOrWhitespace($package->description) ?
+                                    echo !empty($package->description) ?
                                             nl2br($package->description) :
                                             get_translation("no_description_available");
                             ?>

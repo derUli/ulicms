@@ -56,7 +56,7 @@ class CommentSpamChecker implements ISpamChecker
         );
 
         // check if Antispam Honeypot is not empty
-        if (\App\Helpers\StringHelper::isNotNullOrEmpty(Request::getVar("my_homepage_url"))) {
+        if (!empty(Request::getVar("my_homepage_url"))) {
             $this->errors[] = new SpamDetectionResult(
                 get_translation("honeypot"),
                 get_translation("honeypot_is_not_empty")
@@ -87,7 +87,7 @@ class CommentSpamChecker implements ISpamChecker
         // check the useragent
         $useragent = $this->comment->getUserAgent();
         $rejectRequestsFromBots = $this->spamFilterConfiguration->getRejectRequestsFromBots();
-        if (\App\Helpers\StringHelper::isNotNullOrWhitespace($useragent) and
+        if (!empty($useragent) and
                 $rejectRequestsFromBots) {
             if (AntiSpamHelper::checkForBot($useragent)) {
                 $this->errors[] = new SpamDetectionResult(
@@ -102,7 +102,7 @@ class CommentSpamChecker implements ISpamChecker
         // If the option "Check DNS MX Entry of email addresses" is enabled check the mail domain
         $email = $this->comment->getAuthorEmail();
         $checkMxOfEmailAddress = $this->spamFilterConfiguration->getCheckMxOfMailAddress();
-        if (\App\Helpers\StringHelper::isNotNullOrWhitespace($email) &&
+        if (!empty($email) &&
                 $checkMxOfEmailAddress) {
             if (!AntiSpamHelper::checkMailDomain($email)) {
                 $this->errors[] = new SpamDetectionResult(

@@ -506,7 +506,7 @@ if ($permissionChecker->hasPermission('pages')) {
                                         name="article_date" type="text"
                                         class="datetimepicker"
                                         value="<?php
-                    if (\App\Helpers\StringHelper::isNotNullOrEmpty($row->article_date)) {
+                    if (!empty($row->article_date)) {
                         echo NumberFormatHelper::timestampToSqlDate(
                             strtotime($row->article_date)
                         );

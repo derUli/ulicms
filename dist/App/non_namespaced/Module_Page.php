@@ -63,7 +63,7 @@ class Module_Page extends Page
     public function getEmbeddedModules(): array
     {
         $result = parent::getEmbeddedModules();
-        if (\App\Helpers\StringHelper::isNotNullOrEmpty($this->module) && !in_array($this->module, $result)) {
+        if (!empty($this->module) && !in_array($this->module, $result)) {
             $result[] = $this->module;
         }
         return $result;

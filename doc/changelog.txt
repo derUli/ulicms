@@ -6,6 +6,12 @@ API-Änderungen:
 Entfernte Features:
 * Experteneinstellungen
 
+Entfernte API-Methoden:
+* StringHelper::isNullOrEmpty()
+* StringHelper::isNullOrWhitespace()
+* StringHelper::isNotNullOrEmpty()
+* StringHelper::isNotNullOrWhitespace()
+
 ===== Neues in UliCMS 2023.1 =====
 
 Neue Features:

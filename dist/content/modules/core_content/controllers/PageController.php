@@ -178,7 +178,7 @@ class PageController extends Controller
                 $groupCollection->getAllowableTags() : Constants\DefaultValues::ALLOWED_TAGS;
 
         // remove all html tags except the explicitly allowed tags
-        if (\App\Helpers\StringHelper::isNotNullOrWhitespace($allowedTags)) {
+        if (!empty($allowedTags)) {
             $model->content = XSSProtection::stripTags($model->content, $allowedTags);
         }
 
@@ -629,7 +629,7 @@ class PageController extends Controller
         string $language,
         int $id
     ): bool {
-        if (\App\Helpers\StringHelper::isNullOrWhitespace($slug)) {
+        if (empty($slug)) {
             return true;
         }
         $slug = Database::escapeValue($slug);

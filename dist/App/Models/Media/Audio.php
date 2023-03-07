@@ -163,19 +163,19 @@ class Audio extends Model
 
     public function setName(?string $val): void
     {
-        $this->name = \App\Helpers\StringHelper::isNotNullOrWhitespace($val) ?
+        $this->name = !empty($val) ?
                 (string)$val : null;
     }
 
     public function setMP3File(?string $val): void
     {
-        $this->mp3_file = \App\Helpers\StringHelper::isNotNullOrWhitespace($val) ?
+        $this->mp3_file = !empty($val) ?
                 (string)$val : null;
     }
 
     public function setOGGFile(?string $val): void
     {
-        $this->ogg_file = \App\Helpers\StringHelper::isNotNullOrWhitespace($val) ?
+        $this->ogg_file = !empty($val) ?
                 (string)$val : null;
     }
 

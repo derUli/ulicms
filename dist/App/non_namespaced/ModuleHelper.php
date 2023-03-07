@@ -202,7 +202,7 @@ class ModuleHelper extends Helper
 
         if ($page instanceof Language_Link) {
             $language = new Language($page->link_to_language);
-            if ($language->getID() !== null && \App\Helpers\StringHelper::isNotNullOrWhitespace($language->getLanguageLink())) {
+            if ($language->getID() !== null && !empty($language->getLanguageLink())) {
                 return $language->getLanguageLink();
             }
         }
@@ -273,7 +273,7 @@ class ModuleHelper extends Helper
         ?string $suffix = null
     ): string {
         $result = "sClass=" . urlencode($sClass) . "&sMethod=" . urlencode($sMethod);
-        if (\App\Helpers\StringHelper::isNotNullOrWhitespace($suffix)) {
+        if (!empty($suffix)) {
             $result .= "&" . trim($suffix);
         }
         return $result;

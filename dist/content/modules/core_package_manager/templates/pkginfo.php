@@ -6,7 +6,7 @@ $permissionChecker = new ACL();
 if (!$permissionChecker->hasPermission("install_packages")) {
     noPerms();
 } else {
-    if (\App\Helpers\StringHelper::isNotNullOrEmpty($_REQUEST["file"]) and str_ends_with($_REQUEST["file"], ".sin")) {
+    if (!empty($_REQUEST["file"]) and str_ends_with($_REQUEST["file"], ".sin")) {
         $tempfile = Path::resolve("ULICMS_TMP/" . basename($_REQUEST["file"]));
         if (is_file($tempfile)) {
             $pkg = new SinPackageInstaller($tempfile);

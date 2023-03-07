@@ -1,7 +1,7 @@
 <?php $meta = get_article_meta(); ?>
-<?php if (\App\Helpers\StringHelper::isNotNullOrEmpty($meta->article_author_name)) { ?>
+<?php if (!empty($meta->article_author_name)) { ?>
     <p class="author-info"><?php
-        if (\App\Helpers\StringHelper::isNullOrEmpty($meta->article_author_email)) {
+        if (empty($meta->article_author_email)) {
             translate("ARTICLE_WRITTEN_BY_X", array(
                 "%author%" => Template::getEscape($meta->article_author_name)
             ));

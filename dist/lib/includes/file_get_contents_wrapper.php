@@ -70,7 +70,7 @@ function file_get_contents_wrapper(
 
     if (
         $content &&
-        \App\Helpers\StringHelper::isNotNullOrWhitespace($checksum) &&
+        !empty($checksum) &&
         md5($content) !== strtolower($checksum)
     ) {
         throw new CorruptDownloadException(
