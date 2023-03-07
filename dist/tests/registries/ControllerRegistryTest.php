@@ -6,18 +6,16 @@ class ControllerRegistryTest extends \PHPUnit\Framework\TestCase
 {
     protected function setUp(): void
     {
+        $moduleManager = new ModuleManager();
+        $moduleManager->sync();
+
         ControllerRegistry::loadModuleControllers();
 
-        if (!session_id() && !headers_sent()) {
-        }
         ActionRegistry::loadModuleActionAssignment();
     }
 
     protected function tearDown(): void
     {
-        if (session_id() && !headers_sent()) {
-        }
-
         Database::query("delete from {prefix}users where username like 'testuser-%'", true);
         unset($_REQUEST["sClass"]);
         unset($_REQUEST["sMethod"]);

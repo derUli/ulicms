@@ -13,20 +13,21 @@ class ControllerRegistry
     public static function loadModuleControllers(): void
     {
         $controllerRegistry = [];
-        $modules = getAllModules();
-        $disabledModules = Vars::get("disabledModules") ?? [];
+
+        $moduleManager = new ModuleManager();
+        $modules = $moduleManager->getEnabledModuleNames();
+
         foreach ($modules as $module) {
-            if (in_array($module, $disabledModules)) {
-                continue;
-            }
             $controllers = getModuleMeta($module, "controllers");
             if ($controllers) {
                 foreach ($controllers as $key => $value) {
                     $path = getModulePath($module, true) .
                             trim($value, '/');
+
                     if (!str_ends_with($path, ".php")) {
                         $path .= ".php";
                     }
+
                     $controllerRegistry[$key] = $path;
                 }
             }
@@ -44,7 +45,6 @@ class ControllerRegistry
         }
         foreach ($controllerRegistry as $key => $value) {
             include_once $value;
-
 
             if (class_exists($key)) {
                 $classInstance = new $key();

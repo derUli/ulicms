@@ -11,10 +11,11 @@ class ApiTest extends \PHPUnit\Framework\TestCase
 
     protected function setUp(): void
     {
-        $this->cleanUp();
-
         $moduleManager = new ModuleManager();
         $moduleManager->sync();
+        ControllerRegistry::loadModuleControllers();
+
+        $this->cleanUp();
 
         $userQuery = Database::query("select id, html_editor "
                         . "from {prefix}users order by id asc limit 1", true);
