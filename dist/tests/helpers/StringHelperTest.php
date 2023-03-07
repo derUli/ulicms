@@ -18,7 +18,7 @@ class StringHelperTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals(
             $expected,
-            StringHelper:removeEmptyLinesFromString($input)
+            StringHelper::removeEmptyLinesFromString($input)
         );
     }
 

@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
+use App\Helpers\StringHelper;
+
 function cleanString(string $string, string $separator = '-'): string
 {
-    return \App\Helpers\StringHelper::cleanString($string, $separator);
+    return StringHelper::cleanString($string, $separator);
 }
 
 if (!defined("RESPONSIVE_FM")) {
@@ -88,7 +90,7 @@ function multi_explode(array $delimiters, string $string): array
  */
 function make_links_clickable(string $text): string
 {
-    return \App\Helpers\StringHelper::makeLinksClickable($text);
+    return StringHelper::makeLinksClickable($text);
 }
 
 /**
@@ -107,12 +109,12 @@ function getExcerpt(
     int $startPos = 0,
     int $maxLength = 100
 ): string {
-    return \App\Helpers\StringHelper::getExcerpt($str, $startPos, $maxLength);
+    return StringHelper::getExcerpt($str, $startPos, $maxLength);
 }
 
 function decodeHTMLEntities(string $str): string
 {
-    return \App\Helpers\StringHelper::decodeHTMLEntities($str);
+    return StringHelper::decodeHTMLEntities($str);
 }
 
 // Häufigste Wörter in String ermitteln und als Assoziatives Array zurückgeben.
