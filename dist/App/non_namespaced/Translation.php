@@ -15,8 +15,8 @@ class Translation
 
     public static function set(string $key, ?string $value): void
     {
-        $key = "translation_" . $key;
-        $key = strtoupper($key);
+        $key = strtoupper("translation_" . $key);
+
         if ($value !== null) {
             self::$translations[$key] = $value;
         } else {
@@ -37,15 +37,18 @@ class Translation
     public static function get(string $key): ?string
     {
         $retval = null;
+
         if (isset(self::$translations[$key])) {
             $retval = self::$translations[$key];
         }
+
         return $retval;
     }
 
     public static function includeCustomLangFile(string $lang): void
     {
         $file = ULICMS_ROOT . "/lang/custom/" . basename($lang) . ".php";
+
         if (is_file($file)) {
             require_once $file;
         }
@@ -54,32 +57,38 @@ class Translation
     public static function loadAllModuleLanguageFiles(string $lang): void
     {
         $modules = getAllModules();
+
         foreach ($modules as $module) {
             $currentLanguageFile = getModulePath($module, true) . "/lang/" .
                     $lang . ".php";
             $englishLanguageFile = getModulePath($module, true) .
                     "/lang/en.php";
 
-            if (is_file($currentLanguageFile)) {
-                require_once $currentLanguageFile;
-            } elseif (is_file($englishLanguageFile)) {
-                require_once $englishLanguageFile;
+            $files = [
+                $currentLanguageFile,
+                $englishLanguageFile
+            ];
+
+            foreach ($files as $file) {
+                if (is_file($file)) {
+                    require_once $file;
+                    continue;
+                }
             }
         }
     }
 
     public static function loadCurrentThemeLanguageFiles(string $lang): void
     {
-        $file = getTemplateDirPath(get_theme(), true) . "/lang/" .
-                $lang . ".php";
-        if (is_file($file)) {
-            require_once $file;
-            return;
-        }
-        $file = getTemplateDirPath(get_theme(), true) .
-                "/lang/en.php";
-        if (is_file($file)) {
-            require_once $file;
+        $files = [
+            getTemplateDirPath(get_theme(), true) . "/lang/{$lang}.php",
+            getTemplateDirPath(get_theme(), true) . "/lang/en.php"
+        ];
+
+        foreach ($files as $file) {
+            if (is_file($file)) {
+                require_once $file;
+            }
         }
     }
 }
