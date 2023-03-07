@@ -10,10 +10,10 @@ use Template;
 use Vars;
 use Request;
 use App\Helpers\StringHelper;
-use ActionRegistry;
 use Settings;
 use zz\Html\HTMLMinify;
 use App\Security\PermissionChecker;
+use App\Registries\ActionRegistry;
 
 /**
  * This class renders a backend page

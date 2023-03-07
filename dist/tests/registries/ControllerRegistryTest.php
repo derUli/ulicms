@@ -1,5 +1,7 @@
 <?php
 
+use App\Registries\ActionRegistry;
+
 class ControllerRegistryTest extends \PHPUnit\Framework\TestCase
 {
     protected function setUp(): void

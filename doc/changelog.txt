@@ -3,6 +3,7 @@
 API-Änderungen:
 * StringHelper in Namespace App\Helpers verschoben
 * ModelRegistry in Namespace App\Registries verschoben
+* ActionRegistry in Namespace App\Registries verschoben
 
 Entfernte Features:
 * Experteneinstellungen

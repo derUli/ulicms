@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use App\Registries\ActionRegistry;
+
 class ControllerRegistry
 {
     private static $controllers = [];

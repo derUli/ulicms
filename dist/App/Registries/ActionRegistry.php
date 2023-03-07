@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+namespace App\Registries;
+
+use ModuleManager;
+use ControllerRegistry;
+use Controller;
+
 class ActionRegistry
 {
     private static $actions = [];
