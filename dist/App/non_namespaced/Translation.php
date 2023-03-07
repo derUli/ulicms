@@ -72,7 +72,7 @@ class Translation
             foreach ($files as $file) {
                 if (is_file($file)) {
                     require_once $file;
-                    continue;
+                    break;
                 }
             }
         }
