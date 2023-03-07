@@ -165,16 +165,4 @@ class StringHelper extends Helper
         $str = implode($newline, $str);
         return $str;
     }
-
-    // returns true if this string is all upper case
-    public static function isUpperCase(string $val): bool
-    {
-        return strtoupper($val) === $val;
-    }
-
-    // returns true if this string is all lower case
-    public static function isLowerCase(string $val): bool
-    {
-        return strtolower($val) === $val;
-    }
 }

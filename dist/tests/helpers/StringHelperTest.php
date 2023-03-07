@@ -119,26 +119,6 @@ Noch mehr Text <a href="http://www.ulicms.de" rel="nofollow" target="_blank">htt
         $this->assertEquals("das-ist-die-grossfraesmaschinenoeffnungstuer", StringHelper::cleanString("Das ist die Großfräsmaschinenöffnungstür."));
     }
 
-    public function testIsUpperCaseReturnsTrue()
-    {
-        $this->assertTrue(StringHelper::isUpperCase("SEHR SEHR GROSS"));
-    }
-
-    public function testIsUpperCaseReturnsFalse()
-    {
-        $this->assertFalse(StringHelper::isUpperCase("Gemischter Case"));
-    }
-
-    public function testIsLowerCaseReturnsTrue()
-    {
-        $this->assertTrue(StringHelper::isLowerCase("sehr sehr klein"));
-    }
-
-    public function testIsLowerCaseReturnsFalse()
-    {
-        $this->assertFalse(StringHelper::isLowerCase("Das ist Nicht Lowercase"));
-    }
-
     public function testGetExcerptReturnsShortedString()
     {
         $this->assertEquals(
