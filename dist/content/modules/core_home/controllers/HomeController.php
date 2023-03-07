@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use zz\Html\HTMLMinify;
+use App\Helpers\StringHelper;
 
 class HomeController extends Controller
 {
@@ -47,7 +48,7 @@ class HomeController extends Controller
         );
         $HTMLMinify = new HTMLMinify($html, $options);
         $html = $HTMLMinify->process();
-        $html = \App\Helpers\StringHelper::removeEmptyLinesFromString($html);
+        $html = StringHelper::removeEmptyLinesFromString($html);
         return $html;
     }
 

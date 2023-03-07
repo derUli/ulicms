@@ -31,13 +31,6 @@ class StringHelper extends Helper
         return $slugify->slugify($string, $separator);
     }
 
-    // encode strings to prevent XSS
-    public static function realHtmlSpecialchars(
-        string $string
-    ): string {
-        return _esc($string);
-    }
-
     // replace urls with clickable html links
     public static function makeLinksClickable(string $text): string
     {

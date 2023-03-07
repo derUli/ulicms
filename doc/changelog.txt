@@ -11,6 +11,8 @@ Entfernte API-Methoden:
 * StringHelper::isNullOrWhitespace()
 * StringHelper::isNotNullOrEmpty()
 * StringHelper::isNotNullOrWhitespace()
+* StringHelper::realHtmlSpecialchars()
+* real_htmlspecialchars()
 
 ===== Neues in UliCMS 2023.1 =====
 

@@ -9,7 +9,7 @@ defined('ULICMS_ROOT') or exit('no direct script access allowed');
 use Template;
 use Vars;
 use Request;
-use StringHelper;
+use App\Helpers\StringHelper;
 use ActionRegistry;
 use Settings;
 use zz\Html\HTMLMinify;
@@ -198,7 +198,7 @@ class BackendPageRenderer
         );
         $HTMLMinify = new HTMLMinify($generatedHtml, $options);
         $generatedHtml = $HTMLMinify->process();
-        $generatedHtml = \App\Helpers\StringHelper::removeEmptyLinesFromString(
+        $generatedHtml = StringHelper::removeEmptyLinesFromString(
             $generatedHtml
         );
 

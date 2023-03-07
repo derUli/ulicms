@@ -1,5 +1,7 @@
 <?php
 
+use App\Helpers\StringHelper;
+
 class StringHelperTest extends \PHPUnit\Framework\TestCase
 {
     private function getTestFilePath()
@@ -16,13 +18,13 @@ class StringHelperTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals(
             $expected,
-            \App\Helpers\StringHelper::removeEmptyLinesFromString($input)
+            StringHelper:removeEmptyLinesFromString($input)
         );
     }
 
     public function testlinesFromFile()
     {
-        $lines = \App\Helpers\StringHelper::linesFromFile(
+        $lines = StringHelper::linesFromFile(
             $this->getTestFilePath(),
             false,
             false,
@@ -39,25 +41,25 @@ class StringHelperTest extends \PHPUnit\Framework\TestCase
 
     public function testLinesFromFileRemoveEmpty()
     {
-        $lines = \App\Helpers\StringHelper::linesFromFile($this->getTestFilePath(), false, true, false);
+        $lines = StringHelper::linesFromFile($this->getTestFilePath(), false, true, false);
         $this->assertCount(5, $lines);
     }
 
     public function testLinesFromFileRemoveComments()
     {
-        $lines = \App\Helpers\StringHelper::linesFromFile($this->getTestFilePath(), false, false, true);
+        $lines = StringHelper::linesFromFile($this->getTestFilePath(), false, false, true);
         $this->assertCount(7, $lines);
     }
 
     public function testLinesFromFileRemoveCommentsAndEmpty()
     {
-        $lines = \App\Helpers\StringHelper::linesFromFile($this->getTestFilePath(), false, true, true);
+        $lines = StringHelper::linesFromFile($this->getTestFilePath(), false, true, true);
         $this->assertCount(3, $lines);
     }
 
     public function testLinesFromFileTrim()
     {
-        $lines = \App\Helpers\StringHelper::linesFromFile($this->getTestFilePath(), true, false, false);
+        $lines = StringHelper::linesFromFile($this->getTestFilePath(), true, false, false);
         $this->assertCount(9, $lines);
         $this->assertFalse(str_starts_with($lines[2], " "));
         $this->assertFalse(str_ends_with($lines[2], " "));
@@ -69,7 +71,7 @@ class StringHelperTest extends \PHPUnit\Framework\TestCase
 
     public function testLinesFromFileTrimRemoveCommentsAndEmpty()
     {
-        $lines = \App\Helpers\StringHelper::linesFromFile($this->getTestFilePath(), true, true, true);
+        $lines = StringHelper::linesFromFile($this->getTestFilePath(), true, true, true);
         $this->assertCount(3, $lines);
         $this->assertFalse(str_starts_with($lines[0], " "));
         $this->assertFalse(str_ends_with($lines[0], " "));
@@ -82,7 +84,7 @@ class StringHelperTest extends \PHPUnit\Framework\TestCase
 
     public function testLinesFromFileNotFound()
     {
-        $lines = \App\Helpers\StringHelper::linesFromFile("path/this-is-not-a-file", true, true, true);
+        $lines = StringHelper::linesFromFile("path/this-is-not-a-file", true, true, true);
         $this->assertNull($lines);
     }
 
@@ -93,7 +95,7 @@ class StringHelperTest extends \PHPUnit\Framework\TestCase
 
         $input = normalizeLN(file_get_contents($inputFile));
         $expected = normalizeLN(file_get_contents($inputExpected));
-        $this->assertEquals($expected, \App\Helpers\StringHelper::trimLines($input));
+        $this->assertEquals($expected, StringHelper::trimLines($input));
     }
 
     public function testMakeLinksClickable()
@@ -106,42 +108,42 @@ Noch mehr Text http://www.ulicms.de und so weiter.";
 <a href="http://www.google.de" rel="nofollow" target="_blank">http://www.google.de</a>
 Noch mehr Text <a href="http://www.ulicms.de" rel="nofollow" target="_blank">http://www.ulicms.de</a> und so weiter.';
 
-        $this->assertEquals($expected, \App\Helpers\StringHelper::makeLinksClickable($input));
+        $this->assertEquals($expected, StringHelper::makeLinksClickable($input));
     }
 
     public function testCleanString()
     {
-        $this->assertEquals("hello-world", \App\Helpers\StringHelper::cleanString("Hello World"));
-        $this->assertEquals("hello-world", \App\Helpers\StringHelper::cleanString("Hello World", "-"));
-        $this->assertEquals("hello_world", \App\Helpers\StringHelper::cleanString("Hello World", "_"));
-        $this->assertEquals("das-ist-die-grossfraesmaschinenoeffnungstuer", \App\Helpers\StringHelper::cleanString("Das ist die Großfräsmaschinenöffnungstür."));
+        $this->assertEquals("hello-world", StringHelper::cleanString("Hello World"));
+        $this->assertEquals("hello-world", StringHelper::cleanString("Hello World", "-"));
+        $this->assertEquals("hello_world", StringHelper::cleanString("Hello World", "_"));
+        $this->assertEquals("das-ist-die-grossfraesmaschinenoeffnungstuer", StringHelper::cleanString("Das ist die Großfräsmaschinenöffnungstür."));
     }
 
     public function testIsUpperCaseReturnsTrue()
     {
-        $this->assertTrue(\App\Helpers\StringHelper::isUpperCase("SEHR SEHR GROSS"));
+        $this->assertTrue(StringHelper::isUpperCase("SEHR SEHR GROSS"));
     }
 
     public function testIsUpperCaseReturnsFalse()
     {
-        $this->assertFalse(\App\Helpers\StringHelper::isUpperCase("Gemischter Case"));
+        $this->assertFalse(StringHelper::isUpperCase("Gemischter Case"));
     }
 
     public function testIsLowerCaseReturnsTrue()
     {
-        $this->assertTrue(\App\Helpers\StringHelper::isLowerCase("sehr sehr klein"));
+        $this->assertTrue(StringHelper::isLowerCase("sehr sehr klein"));
     }
 
     public function testIsLowerCaseReturnsFalse()
     {
-        $this->assertFalse(\App\Helpers\StringHelper::isLowerCase("Das ist Nicht Lowercase"));
+        $this->assertFalse(StringHelper::isLowerCase("Das ist Nicht Lowercase"));
     }
 
     public function testGetExcerptReturnsShortedString()
     {
         $this->assertEquals(
             "Lorem Ipsum...",
-            \App\Helpers\StringHelper::getExcerpt(
+            StringHelper::getExcerpt(
                 "Lorem Ipsum sit dor amet usw.",
                 0,
                 16
@@ -153,19 +155,11 @@ Noch mehr Text <a href="http://www.ulicms.de" rel="nofollow" target="_blank">htt
     {
         $this->assertEquals(
             "Lorem Ipsum sit dor amet usw.",
-            \App\Helpers\StringHelper::getExcerpt(
+            StringHelper::getExcerpt(
                 "Lorem Ipsum sit dor amet usw.",
                 0,
                 100
             )
-        );
-    }
-
-    public function testRealHtmlSpecialChars()
-    {
-        $this->assertEquals(
-            "&lt;script&gt;alert(&#039;xss&#039;)&lt;/script&gt;",
-            \App\Helpers\StringHelper::realHtmlSpecialchars("<script>alert('xss')</script>")
         );
     }
 
@@ -175,7 +169,7 @@ Noch mehr Text <a href="http://www.ulicms.de" rel="nofollow" target="_blank">htt
             Path::resolve("ULICMS_ROOT/tests/fixtures/lorem_ipsum.txt")
         );
 
-        $keywords = \App\Helpers\StringHelper::keywordsFromString($input);
+        $keywords = StringHelper::keywordsFromString($input);
         $this->assertCount(74, $keywords);
         $this->assertEquals(7, $keywords["Lorem"]);
         $this->assertEquals(14, $keywords["et"]);

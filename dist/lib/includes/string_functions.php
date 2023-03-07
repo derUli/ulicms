@@ -63,11 +63,6 @@ function normalizeLN(string $txt, string $style = "\r\n"): string
     return $txt;
 }
 
-function real_htmlspecialchars(string $string): string
-{
-    return \App\Helpers\StringHelper::realHtmlSpecialchars($string);
-}
-
 function multi_explode(array $delimiters, string $string): array
 {
     return explode(

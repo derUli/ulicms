@@ -175,14 +175,6 @@ Noch mehr Text <a href="http://www.ulicms.de" rel="nofollow" target="_blank">htt
         );
     }
 
-    public function testRealHtmlSpecialChars()
-    {
-        $this->assertEquals(
-            "&lt;script&gt;alert(&#039;xss&#039;)&lt;/script&gt;",
-            real_htmlspecialchars("<script>alert('xss')</script>")
-        );
-    }
-
     public function testEsc()
     {
         ob_start();
