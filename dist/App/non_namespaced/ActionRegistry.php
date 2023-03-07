@@ -2,16 +2,15 @@
 
 declare(strict_types=1);
 
-use App\Exceptions\FileNotFoundException;
-
 class ActionRegistry
 {
     private static $actions = [];
     private static $assignedControllers = [];
-    private static $defaultCoreActions = array(
+    private static $defaultCoreActions = [
         "module_settings" => "inc/module_settings.php",
         "groups" => "inc/groups.php"
-    );
+    ];
+
     private static $actionPermissions = [];
 
     public static function getDefaultCoreActions(): array
@@ -23,44 +22,25 @@ class ActionRegistry
     public static function loadModuleActions(): void
     {
         self::$actions = [];
-
         $coreActions = self::getDefaultCoreActions();
-        foreach ($coreActions as $action => $file) {
-            $path = $file;
 
-            if (!str_ends_with($path, ".php")) {
-                $path .= ".php";
-            }
-
-            if (is_file($path)) {
-                self::$actions[$action] = $file;
-            }
+        foreach ($coreActions as $key => $value) {
+            self::$actions[$key] = ULICMS_ROOT . "/admin/{$value}";
         }
-        $modules = getAllModules();
-        $disabledModules = Vars::get("disabledModules") ?? [];
+
+        $moduleManager = new ModuleManager();
+        $modules = $moduleManager->getEnabledModuleNames();
+
         foreach ($modules as $module) {
-            if (in_array($module, $disabledModules)) {
-                continue;
-            }
-            $cActions = getModuleMeta($module, "views") ?
-                    getModuleMeta($module, "views") :
-                    getModuleMeta($module, "actions");
+            $cActions = getModuleMeta($module, "views") ?? getModuleMeta($module, "actions");
+
             if ($cActions) {
                 foreach ($cActions as $key => $value) {
                     $path = getModulePath($module, true) .
                             trim($value, '/');
-                    if (!str_ends_with($path, ".php")) {
-                        $path .= ".php";
-                    }
+                    $path = str_ends_with($path, '.php') ? $path : "$path.php";
 
-                    if (is_file($path)) {
-                        self::$actions[$key] = $path;
-                    } else {
-                        throw new FileNotFoundException(
-                            "Module {$module}: "
-                            . "File '{$path}' not found."
-                        );
-                    }
+                    self::$actions[$key] = $path;
                 }
             }
         }
@@ -71,12 +51,10 @@ class ActionRegistry
     // load backend action page permission of modules
     private static function loadActionPermissions(): void
     {
-        $modules = getAllModules();
-        $disabledModules = Vars::get("disabledModules") ?? [];
+        $moduleManager = new ModuleManager();
+        $modules = $moduleManager->getEnabledModuleNames();
+
         foreach ($modules as $module) {
-            if (in_array($module, $disabledModules)) {
-                continue;
-            }
             $action_permissions = getModuleMeta($module, "action_permissions");
             if (!$action_permissions) {
                 continue;
@@ -90,7 +68,7 @@ class ActionRegistry
     public static function getActionPermission(string $action): ?string
     {
         $permission = null;
-        if (isset(self::$actionPermissions[$action]) and
+        if (isset(self::$actionPermissions[$action]) &&
                 is_string(self::$actionPermissions[$action])) {
             $permission = self::$actionPermissions[$action];
         }
@@ -123,7 +101,7 @@ class ActionRegistry
     public static function getController(): ?Controller
     {
         $action = get_action();
-        if ($action and isset(self::$assignedControllers[$action])) {
+        if ($action && isset(self::$assignedControllers[$action])) {
             return ControllerRegistry::get(
                 self::$assignedControllers[$action]
             );
