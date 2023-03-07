@@ -2,7 +2,10 @@
 
 declare(strict_types=1);
 
+namespace App\Helpers;
+
 use Cocur\Slugify\Slugify;
+use Helper;
 
 class StringHelper extends Helper
 {
@@ -189,7 +192,7 @@ class StringHelper extends Helper
         string $str,
         string $newline = PHP_EOL
     ): string {
-        $str = StringHelper::linesFromString($str, true, true, false);
+        $str = \App\Helpers\StringHelper::linesFromString($str, true, true, false);
         $str = implode($newline, $str);
         return $str;
     }

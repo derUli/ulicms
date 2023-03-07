@@ -114,7 +114,7 @@ class CommentsController extends MainClass
             $comment = new Comment($id);
             $comment->setRead(true);
             $comment->save();
-            return StringHelper::makeLinksClickable(
+            return \App\Helpers\StringHelper::makeLinksClickable(
                 HTML\text(trim($comment->getText()))
             );
         } catch (DatasetNotFoundException $e) {

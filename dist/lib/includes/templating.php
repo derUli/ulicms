@@ -57,7 +57,7 @@ function get_og_tags(?string $slug = null): string
         }
         $page = get_page($slug);
         if (empty($og_image) &&
-                !StringHelper::isNullOrWhitespace($page["article_image"])) {
+                !\App\Helpers\StringHelper::isNullOrWhitespace($page["article_image"])) {
             $og_image = ltrim($page["article_image"], '/');
         }
         if (!empty($og_image) && !str_starts_with($og_image, "http")) {

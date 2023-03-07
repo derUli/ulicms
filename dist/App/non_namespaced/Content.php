@@ -33,7 +33,7 @@ abstract class Content extends Model
      */
     public function getHeadline(): ?string
     {
-        return StringHelper::isNullOrEmpty($this->alternate_title) ?
+        return \App\Helpers\StringHelper::isNullOrEmpty($this->alternate_title) ?
                 $this->title : $this->alternate_title;
     }
 

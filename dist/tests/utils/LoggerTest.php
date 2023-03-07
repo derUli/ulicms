@@ -29,7 +29,7 @@ class LoggerTest extends \PHPUnit\Framework\TestCase
     {
         $htaccessFile = Path::resolve("ULICMS_LOG/.htaccess");
         $this->assertTrue(is_file($htaccessFile));
-        $this->assertContains("deny from all", array_map("strtolower", StringHelper::linesFromFile($htaccessFile)));
+        $this->assertContains("deny from all", array_map("strtolower", \App\Helpers\StringHelper::linesFromFile($htaccessFile)));
     }
 
     public function testLogDebug()

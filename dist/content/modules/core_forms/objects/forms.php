@@ -95,7 +95,7 @@ class Forms
         if ($form) {
             $fields = $form["fields"];
             $fields = Settings::mappingStringToArray($fields);
-            $required_fields = StringHelper::linesFromString(
+            $required_fields = \App\Helpers\StringHelper::linesFromString(
                 $form["required_fields"]
             );
             foreach ($required_fields as $field) {
@@ -143,7 +143,7 @@ class Forms
             $email_from = $_POST[$mail_from_field];
 
             // if dns mx check is enabled check the mail domain
-            if (!StringHelper::isNullOrEmpty($email_from)
+            if (!\App\Helpers\StringHelper::isNullOrEmpty($email_from)
                     and Settings::get("check_mx_of_mail_address") && !AntiSpamHelper::checkMailDomain($email_from)) {
                 ExceptionResult(
                     get_translation("mail_address_has_invalid_mx_entry"),
@@ -151,7 +151,7 @@ class Forms
                 );
             }
 
-            $mail_from = StringHelper::isNotNullOrWhitespace(
+            $mail_from = \App\Helpers\StringHelper::isNotNullOrWhitespace(
                 $mail_from_field
             ) ?
                     [

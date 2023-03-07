@@ -148,10 +148,10 @@ class DBMigrator
 
     public function checkVars(): bool
     {
-        if (StringHelper::isNullOrEmpty($this->component)) {
+        if (\App\Helpers\StringHelper::isNullOrEmpty($this->component)) {
             throw new Exception("component is null or empty");
         }
-        if (StringHelper::isNullOrEmpty($this->folder)) {
+        if (\App\Helpers\StringHelper::isNullOrEmpty($this->folder)) {
             throw new Exception("folder is null or empty");
         }
         if (!is_dir($this->folder)) {

@@ -112,7 +112,7 @@ class AntiSpamHelper extends Helper
         $words_blacklist = $words_blacklist ?? Settings::get("spamfilter_words_blacklist");
 
         if (is_string($words_blacklist)) {
-            $words_blacklist = StringHelper::linesFromString(
+            $words_blacklist = \App\Helpers\StringHelper::linesFromString(
                 $words_blacklist,
                 false,
                 true,

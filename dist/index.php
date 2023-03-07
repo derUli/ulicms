@@ -127,7 +127,7 @@ if (get_ID()) {
         $page = ContentFactory::getByID(get_ID());
         if ($page->id !== null && $page instanceof Language_Link) {
             $language = new Language($page->link_to_language);
-            if ($language->getID() !== null && StringHelper::isNotNullOrWhitespace(
+            if ($language->getID() !== null && \App\Helpers\StringHelper::isNotNullOrWhitespace(
                 $language->getLanguageLink()
             )
             ) {

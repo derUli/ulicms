@@ -1,5 +1,8 @@
 ===== Neues in UliCMS 2023.2 =====
 
+API-Änderungen:
+* StringHelper in Namespace App\Helpers verschoben
+
 Entfernte Features:
 * Experteneinstellungen
 

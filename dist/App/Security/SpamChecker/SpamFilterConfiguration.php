@@ -72,7 +72,7 @@ class SpamFilterConfiguration
     public function setBadwords($val): void
     {
         if (is_string($val)) {
-            $this->badwords = StringHelper::linesFromString($val);
+            $this->badwords = \App\Helpers\StringHelper::linesFromString($val);
         } elseif (is_array($val)) {
             $this->badwords = $val;
         } elseif ($val === null) {

@@ -147,7 +147,7 @@ if (!$permissionChecker->hasPermission("performance_settings")) {
                         <?php translate("lazy_loading_help3"); ?>
                         <br/>
                         <?php
-        echo StringHelper::makeLinksClickable(
+        echo \App\Helpers\StringHelper::makeLinksClickable(
         $canIuseLazyLoadingUrl
     );
     ?>

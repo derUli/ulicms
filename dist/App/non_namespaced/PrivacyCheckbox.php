@@ -105,7 +105,7 @@ class PrivacyCheckbox
             "privacy_policy_checkbox_text_{$this->language}"
         );
         if (!$this->isEnabled() or
-                StringHelper::isNullOrWhitespace($fullHtml)
+                \App\Helpers\StringHelper::isNullOrWhitespace($fullHtml)
         ) {
             return "";
         }

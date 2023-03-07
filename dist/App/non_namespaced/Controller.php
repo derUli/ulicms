@@ -26,7 +26,7 @@ abstract class Controller
         // blacklisted methods can not be remote called as action
         $file = Path::resolve("ULICMS_ROOT/lib/ressources/hooks.txt");
         if (is_file($file)) {
-            $lines = StringHelper::linesFromFile($file);
+            $lines = \App\Helpers\StringHelper::linesFromFile($file);
             $lines = array_unique($lines);
             foreach ($lines as $line) {
                 $this->blacklist[] = ModuleHelper::underscoreToCamel($line);
@@ -46,7 +46,7 @@ abstract class Controller
     public function runCommand(): void
     {
         $sClass = $_REQUEST["sClass"];
-        if (isset($_REQUEST["sMethod"]) && StringHelper::isNotNullOrEmpty($_REQUEST["sMethod"]) && !in_array(
+        if (isset($_REQUEST["sMethod"]) && \App\Helpers\StringHelper::isNotNullOrEmpty($_REQUEST["sMethod"]) && !in_array(
             $_REQUEST["sMethod"],
             $this->blacklist
         )

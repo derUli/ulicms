@@ -31,7 +31,7 @@ if (!$permissionChecker->hasPermission("groups")) {
                 }
             }
             $group->setLanguages($languages);
-            $allowed_tags = StringHelper::isNotNullOrWhitespace($_POST["allowable_tags"]) ? strval($_POST["allowable_tags"]) : null;
+            $allowed_tags = \App\Helpers\StringHelper::isNotNullOrWhitespace($_POST["allowable_tags"]) ? strval($_POST["allowable_tags"]) : null;
             $group->setAllowableTags($allowed_tags);
             $group->save();
             $created = true;
@@ -54,7 +54,7 @@ if (!$permissionChecker->hasPermission("groups")) {
 
         $group = new Group();
         $group->loadById($id);
-        $allowed_tags = StringHelper::isNotNullOrWhitespace($_POST["allowable_tags"]) ? strval($_POST["allowable_tags"]) : null;
+        $allowed_tags = \App\Helpers\StringHelper::isNotNullOrWhitespace($_POST["allowable_tags"]) ? strval($_POST["allowable_tags"]) : null;
         $group->setAllowableTags($allowed_tags);
         $languages = [];
         if (isset($_POST["restrict_edit_access_language"]) and count($_POST["restrict_edit_access_language"]) > 0) {

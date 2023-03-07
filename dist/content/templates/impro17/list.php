@@ -40,7 +40,7 @@ if ($id !== null) {
                     $article_date = $entry->article_date ?? $entry->created;
                     $excerpt = strip_tags($meta->excerpt, '<img><iframe><embed><object>');
                     $excerpt = trim($excerpt);
-                    $excerpt = StringHelper::isNotNullOrWhitespace($excerpt) ? $meta->excerpt : $entry->content;
+                    $excerpt = \App\Helpers\StringHelper::isNotNullOrWhitespace($excerpt) ? $meta->excerpt : $entry->content;
                     ?>
                     <div class="article-list-row">
                         <p>

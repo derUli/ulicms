@@ -47,7 +47,7 @@ class HomeController extends Controller
         );
         $HTMLMinify = new HTMLMinify($html, $options);
         $html = $HTMLMinify->process();
-        $html = StringHelper::removeEmptyLinesFromString($html);
+        $html = \App\Helpers\StringHelper::removeEmptyLinesFromString($html);
         return $html;
     }
 

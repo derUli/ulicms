@@ -167,7 +167,7 @@ VALUES      ( ?,
 
     public function setAuthorName(?string $val): void
     {
-        $this->author_name = StringHelper::isNotNullOrWhitespace($val) ?
+        $this->author_name = \App\Helpers\StringHelper::isNotNullOrWhitespace($val) ?
                 (string) $val : null;
     }
 
@@ -178,7 +178,7 @@ VALUES      ( ?,
 
     public function setAuthorEmail(?string $val): void
     {
-        $this->author_email = StringHelper::isNotNullOrWhitespace($val) ?
+        $this->author_email = \App\Helpers\StringHelper::isNotNullOrWhitespace($val) ?
                 (string) $val : null;
     }
 
@@ -223,7 +223,7 @@ VALUES      ( ?,
 
     public function setText(?string $val): void
     {
-        $this->text = StringHelper::isNotNullOrWhitespace($val) ?
+        $this->text = \App\Helpers\StringHelper::isNotNullOrWhitespace($val) ?
                 (string) $val : null;
     }
 
@@ -244,7 +244,7 @@ VALUES      ( ?,
 
     public function setIp(?string $val): void
     {
-        $this->ip = StringHelper::isNotNullOrWhitespace($val) ?
+        $this->ip = \App\Helpers\StringHelper::isNotNullOrWhitespace($val) ?
                 (string) $val : null;
     }
 
@@ -255,7 +255,7 @@ VALUES      ( ?,
 
     public function setUserAgent(?string $val): void
     {
-        $this->useragent = StringHelper::isNotNullOrWhitespace($val) ?
+        $this->useragent = \App\Helpers\StringHelper::isNotNullOrWhitespace($val) ?
                 (string) $val : null;
     }
 

@@ -7,7 +7,7 @@ class PkgInfoController extends Controller
     public function installPost(): void
     {
         // TODO: handle incomplete requests and errors
-        if (StringHelper::isNotNullOrEmpty($_REQUEST["file"])) {
+        if (\App\Helpers\StringHelper::isNotNullOrEmpty($_REQUEST["file"])) {
             $file = basename($_POST["file"]);
             $this->_installPost($file);
             Request::redirect(

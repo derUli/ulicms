@@ -198,7 +198,7 @@ class BackendPageRenderer
         );
         $HTMLMinify = new HTMLMinify($generatedHtml, $options);
         $generatedHtml = $HTMLMinify->process();
-        $generatedHtml = StringHelper::removeEmptyLinesFromString(
+        $generatedHtml = \App\Helpers\StringHelper::removeEmptyLinesFromString(
             $generatedHtml
         );
 

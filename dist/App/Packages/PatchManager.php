@@ -50,7 +50,7 @@ class PatchManager
             return $patches;
         }
 
-        $lines = StringHelper::linesFromString($indexData, true, true);
+        $lines = \App\Helpers\StringHelper::linesFromString($indexData, true, true);
         foreach ($lines as $line) {
             $splittedLine = explode("|", $line);
             $patches[] = new Patch(

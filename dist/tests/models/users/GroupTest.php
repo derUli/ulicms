@@ -76,7 +76,7 @@ class GroupTest extends \PHPUnit\Framework\TestCase
         $group = Group::getCurrentGroup();
         $this->assertInstanceOf(Group::class, $group);
         $this->assertEquals(1, $group->getId());
-        $this->assertFalse(StringHelper::isNullOrWhitespace($group->getName()));
+        $this->assertFalse(\App\Helpers\StringHelper::isNullOrWhitespace($group->getName()));
     }
 
     public function testGetCurrentGroupReturnsNull()
@@ -109,7 +109,7 @@ class GroupTest extends \PHPUnit\Framework\TestCase
         $group = Group::getDefaultPrimaryGroup();
         $this->assertInstanceOf(Group::class, $group);
         $this->assertEquals(1, $group->getId());
-        $this->assertFalse(StringHelper::isNullOrWhitespace($group->getName()));
+        $this->assertFalse(\App\Helpers\StringHelper::isNullOrWhitespace($group->getName()));
     }
 
     public function testSetPermissions()

@@ -58,7 +58,7 @@ class TypeMapper
             }
 
             foreach ($mappings as $key => $value) {
-                if (StringHelper::isNullOrEmpty($value)) {
+                if (\App\Helpers\StringHelper::isNullOrEmpty($value)) {
                     unset(self::$mapping[$key]);
                 } else {
                     self::$mapping[$key] = $value;
