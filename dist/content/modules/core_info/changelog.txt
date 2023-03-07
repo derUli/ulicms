@@ -1,7 +1,22 @@
 ===== Neues in UliCMS 2023.2 =====
 
+API-Änderungen:
+* StringHelper in Namespace App\Helpers verschoben
+* ModelRegistry in Namespace App\Registries verschoben
+* ActionRegistry in Namespace App\Registries verschoben
+
 Entfernte Features:
 * Experteneinstellungen
+
+Entfernte API-Methoden:
+* StringHelper::isNullOrEmpty()
+* StringHelper::isNullOrWhitespace()
+* StringHelper::isNotNullOrEmpty()
+* StringHelper::isNotNullOrWhitespace()
+* StringHelper::realHtmlSpecialchars()
+* StringHelper::isLowerCase()
+* StringHelper::isUpperCase()
+* real_htmlspecialchars()
 
 ===== Neues in UliCMS 2023.1 =====
 
