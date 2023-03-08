@@ -1,6 +1,6 @@
 <?php
 
-use App\Backend\MenuEntry;
+use App\Backend\Menu\MenuEntry;
 
 class MenuEntryTest extends \PHPUnit\Framework\TestCase
 {

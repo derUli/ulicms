@@ -1,7 +1,7 @@
 <?php
 
-use App\Backend\AdminMenu;
-use App\Backend\MenuEntry;
+use App\Backend\Menu\AdminMenu;
+use App\Backend\Menu\MenuEntry;
 
 class AdminMenuTest extends \PHPUnit\Framework\TestCase
 {
