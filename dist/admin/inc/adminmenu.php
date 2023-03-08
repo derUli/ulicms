@@ -1,5 +1,6 @@
 <?php
 use App\Backend\AdminMenu;
+use App\Backend\MenuEntry;
 
 ?>
 <div class="mainmenu">

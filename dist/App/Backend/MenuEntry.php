@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+namespace App\Backend;
+
+use ACL;
+
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
 // this method implements the rendering of a single backend main menu item
 class MenuEntry
 {

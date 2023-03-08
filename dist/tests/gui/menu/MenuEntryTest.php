@@ -1,6 +1,6 @@
 <?php
 
-use App\Exceptions\NotImplementedException;
+use App\Backend\MenuEntry;
 
 class MenuEntryTest extends \PHPUnit\Framework\TestCase
 {
