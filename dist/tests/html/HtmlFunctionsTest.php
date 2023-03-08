@@ -3,6 +3,7 @@
 use App\Constants\LinkTarget;
 use App\Constants\ButtonType;
 use App\Exceptions\FileNotFoundException;
+use Spatie\Snapshots\MatchesSnapshots;
 
 use function App\HTML\link;
 use function App\HTML\text;
@@ -14,6 +15,8 @@ use function App\HTML\stringContainsHtml;
 
 class HtmlFunctionsTest extends \PHPUnit\Framework\TestCase
 {
+    use MatchesSnapshots;
+
     public function testText()
     {
         $this->assertEquals("line1<br />\nline2<br />\n&lt;strong&gt;line3&lt;/strong&gt;", text("line1\nline2\n<strong>line3</strong>"));
@@ -35,10 +38,9 @@ class HtmlFunctionsTest extends \PHPUnit\Framework\TestCase
 
     public function testImageTagInlineWithoutAnything()
     {
-        $expectedUrl = file_get_contents(Path::resolve("ULICMS_ROOT/tests/fixtures/logo-data-url.txt"));
         $imagePath = Path::resolve("ULICMS_ROOT/admin/gfx/logo.png");
 
-        $this->assertEquals('<img src="' . $expectedUrl . '">', imageTagInline($imagePath));
+        $this->assertMatchesHtmlSnapshot(imageTagInline($imagePath));
     }
 
     public function testImageTagInlineThrowsFileNotFoundException()
@@ -49,14 +51,17 @@ class HtmlFunctionsTest extends \PHPUnit\Framework\TestCase
 
     public function testImageTagInlineWithHtmlAttributes()
     {
-        $expectedUrl = file_get_contents(Path::resolve("ULICMS_ROOT/tests/fixtures/logo-data-url.txt"));
         $imagePath = Path::resolve("ULICMS_ROOT/admin/gfx/logo.png");
 
-        $this->assertEquals('<img class="my-awesome-image" title="Very awesome image" src="' . $expectedUrl . '">', imageTagInline(
-            $imagePath,
-            array("class" => "my-awesome-image",
-                "title" => "Very awesome image")
-        ));
+        $this->assertMatchesHtmlSnapshot(
+            imageTagInline(
+                $imagePath,
+                [
+                    "class" => "my-awesome-image",
+                    "title" => "Very awesome image"
+                ]
+            )
+        );
     }
 
     public function testWithoutAdditionalAttributes()
