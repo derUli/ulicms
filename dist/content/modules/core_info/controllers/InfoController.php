@@ -73,6 +73,10 @@ class InfoController extends MainClass
             $parsed
         );
 
+        // Strip new lines from response
+        $parsed = str_replace("\r\n", "", $parsed);
+        $parsed = str_replace("\n", "", $parsed);
+
         file_put_contents($cacheFile, $parsed);
 
         return $parsed;
