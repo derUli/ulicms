@@ -1,5 +1,7 @@
 <?php
 
+use App\Backend\AdminMenu;
+
 class AdminMenuTest extends \PHPUnit\Framework\TestCase
 {
     private $adminUser;

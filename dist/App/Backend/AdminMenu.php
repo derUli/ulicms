@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace App\Backend;
+
 defined('ULICMS_ROOT') or exit('no direct script access allowed');
 
 /**
