@@ -12,7 +12,7 @@ import time
 
 def zipdir(basedir, archivename):
     assert os.path.isdir(basedir)
-    with closing(ZipFile(archivename, "w", ZIP_DEFLATED)) as z:
+    with closing(ZipFile(archivename, mode="w", compression=ZIP_DEFLATED, compresslevel=9)) as z:
         for root, dirs, files in os.walk(basedir):
             # NOTE: ignore empty directories
             for fn in files:
