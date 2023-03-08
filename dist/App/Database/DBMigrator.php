@@ -4,7 +4,14 @@
 // TODO: Write knowledge base article how the DBMigrator works
 declare(strict_types=1);
 
+namespace App\Database;
+
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
 use App\Exceptions\SqlException;
+use Database;
+use CMSConfig;
+use Exception;
 
 class DBMigrator
 {
@@ -66,7 +73,7 @@ class DBMigrator
             );
             $result = Database::tableExists("dbtrack") ?
                     Database::pQuery($sql, $args, true) : false;
-            if (!$result or Database::getNumRows($result) == 0) {
+            if (!$result || Database::getNumRows($result) == 0) {
                 $path = $this->folder . '/' . $file;
                 $sql = file_get_contents($path);
                 $cfg = new CMSConfig();
@@ -151,12 +158,15 @@ class DBMigrator
         if (empty($this->component)) {
             throw new Exception("component is null or empty");
         }
+
         if (empty($this->folder)) {
             throw new Exception("folder is null or empty");
         }
+
         if (!is_dir($this->folder)) {
             throw new Exception("folder not found " . $this->folder);
         }
+
         return true;
     }
 }

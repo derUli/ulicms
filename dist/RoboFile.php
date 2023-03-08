@@ -8,6 +8,7 @@ use App\Utils\CacheUtil;
 use Robo\Tasks;
 use App\Exceptions\SqlException;
 use App\Constants\DefaultValues;
+use App\Database\DBMigrator;
 
 /**
  * This is project's console commands configuration for Robo task runner.

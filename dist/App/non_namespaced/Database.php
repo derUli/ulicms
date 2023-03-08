@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 defined('ULICMS_ROOT') or exit('no direct script access allowed');
 
+use App\Database\DBMigrator;
 use App\Exceptions\SqlException;
 
 // this class provides an abstraction for database access

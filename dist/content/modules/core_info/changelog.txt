@@ -4,6 +4,9 @@ API-Änderungen:
 * StringHelper in Namespace App\Helpers verschoben
 * ModelRegistry in Namespace App\Registries verschoben
 * ActionRegistry in Namespace App\Registries verschoben
+* AdminMenu in Namespace App\Backend\Menu verschoben
+* MenuEntry in Namespace App\Backend\Menu verschoben
+* DBMigrator in Namespace App\Database verschoben
 
 Entfernte Features:
 * Experteneinstellungen
