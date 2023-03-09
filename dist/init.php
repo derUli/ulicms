@@ -265,6 +265,7 @@ if (!is_ssl() && $enforce_https) {
 }
 
 $moduleManager = new ModuleManager();
+$moduleManager->sync();
 Vars::set('disabledModules', $moduleManager->getDisabledModuleNames());
 
 ModelRegistry::loadModuleModels();
