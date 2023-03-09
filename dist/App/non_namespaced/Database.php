@@ -448,8 +448,13 @@ class Database
     // Datenbank auswählen
     public static function select(string $schema): bool
     {
-        $selected = mysqli_select_db(self::$connection, $schema);
-        self::$schema_selected = $selected;
+        try {
+            $selected = mysqli_select_db(self::$connection, $schema);
+            self::$schema_selected = $selected;
+        } catch (Exception $ex) {
+            $selected = false;
+        }
+
         return $selected;
     }
 
