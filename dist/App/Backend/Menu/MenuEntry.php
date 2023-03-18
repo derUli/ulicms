@@ -8,7 +8,9 @@ use ACL;
 
 defined('ULICMS_ROOT') or exit('no direct script access allowed');
 
-// this method implements the rendering of a single backend main menu item
+/**
+ * Backend menu entry
+ */
 class MenuEntry
 {
     private $title;
