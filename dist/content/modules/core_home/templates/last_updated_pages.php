@@ -1,4 +1,7 @@
 <?php
+
+use App\Helpers\DateTimeHelper;
+
 $controller = ControllerRegistry::get("HomeController");
 $model = $controller->getModel();
 ?>
@@ -22,7 +25,7 @@ $model = $controller->getModel();
         ?>
         <tr>
             <td><a href="<?php echo $url; ?>" target="_blank"><?php esc($row->title); ?></a></td>
-            <td><?php echo strftime("%x %X", $row->lastmodified) ?></td>
+            <td><?php echo DateTimeHelper::timestampToFormattedDateTime($row->lastmodified) ?></td>
             <td><?php
                 $autorName = $model->admins[$row->lastchangeby];
         if (!empty($autorName)) {

@@ -6,6 +6,7 @@ require_once dirname(__FILE__) . '/init.php';
 
 use App\Models\Content\Language;
 use App\Utils\CacheUtil;
+use App\Helpers\DateTimeHelper;
 
 global $connection;
 
@@ -60,7 +61,8 @@ if (Request::getVar("run_cron")) {
     do_event("before_cron");
     require 'lib/cron.php';
     do_event("after_cron");
-    TextResult("finished cron at " . strftime("%x %X"), HttpStatusCode::OK);
+
+    TextResult("finished cron at " . DateTimeHelper::timestampToFormattedDateTime(time()), HttpStatusCode::OK);
 }
 
 

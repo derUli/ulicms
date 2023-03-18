@@ -3,6 +3,7 @@
 use App\Constants\RequestMethod;
 use App\Constants\HtmlEditor;
 use App\HTML\Input;
+use App\Helpers\DateTimeHelper;
 
 use function App\HTML\imageTag;
 
@@ -32,8 +33,8 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
             echo imageTag(
             $user->getAvatar(),
             [
-                                                                "alt" => get_translation("avatar_image")
-                                                            ]
+                                                                        "alt" => get_translation("avatar_image")
+                                                                    ]
         );
         ?>
         </div>
@@ -122,7 +123,7 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
             if ($row->last_login === null) {
                 translate("never");
             } else {
-                echo strftime("%x %X", $row->last_login);
+                echo DateTimeHelper::timestampToFormattedDateTime($row->last_login);
             }
         ?>
         </div>

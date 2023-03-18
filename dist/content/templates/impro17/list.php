@@ -1,4 +1,6 @@
 <?php
+use App\Helpers\DateTimeHelper;
+
 $id = get_ID();
 if ($id !== null) {
     $list = new List_Data($id);
@@ -46,7 +48,7 @@ if ($id !== null) {
                         <p>
                             <strong><a
                                     href="<?php Template::escape(buildSEOUrl($entry->slug, $entry->link_url)); ?>"><?php Template::escape($entry->title); ?></a></strong>
-                            <br /> <small><?php translate('date'); ?>: <?php echo strftime('%x %X', $article_date); ?></small>
+                            <br /> <small><?php translate('date'); ?>: <?php echo DateTimeHelper::timestampToFormattedDateTime($article_date); ?></small>
                         </p>
                         <p><?php echo $excerpt; ?></p>
                         <p>

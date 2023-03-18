@@ -2,6 +2,7 @@
 
 use App\Models\Content\Comment;
 use App\Constants\CommentStatus;
+use App\Helpers\DateTimeHelper;
 
 $comments = Comment::getAllByStatus(
     CommentStatus::PUBLISHED,
@@ -19,7 +20,7 @@ reset($comments);
             ?>  
             <div class="comment" id="comment-<?php echo $comment->getId(); ?>">
                 <strong><?php translate("date"); ?>:</strong>
-                <?php echo strftime("%x %X", $comment->getDate()); ?>
+                <?php echo DateTimeHelper::timestampToFormattedDateTime($comment->getDate()); ?>
                 <br /> <strong><?php translate("name"); ?>:</strong>
                 <?php esc($comment->getAuthorName()); ?>
                 <br />

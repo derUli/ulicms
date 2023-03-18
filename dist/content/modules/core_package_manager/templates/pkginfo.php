@@ -1,6 +1,7 @@
 <?php
 
 use App\Helpers\NumberFormatHelper;
+use App\Helpers\DateTimeHelper;
 
 $permissionChecker = new ACL();
 if (!$permissionChecker->hasPermission("install_packages")) {
@@ -58,7 +59,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                     ?>
                     <tr>
                         <td><strong><?php translate("build_date") ?></strong></td>
-                        <td><?php esc(strftime("%x %X", $build_date)); ?></td>
+                        <td><?php esc(DateTimeHelper::timestampToFormattedDateTime($build_date)); ?></td>
                     </tr>
                 <?php }
                 ?>
