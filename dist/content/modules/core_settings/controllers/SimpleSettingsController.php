@@ -47,7 +47,8 @@ class SimpleSettingsController extends Controller
 
     public function getTimezones(): string
     {
-        $html = Timezones::create(
+        // TODO: Fork package and fix deprecation warning
+        @$html = Timezones::create(
             'timezone',
             Settings::get('timezone'),
             [
@@ -59,6 +60,5 @@ class SimpleSettingsController extends Controller
         );
 
         return str_replace(Timezones::WHITESPACE_SEP, ' ', $html);
-        ;
     }
 }
