@@ -30,13 +30,15 @@ def main():
     target = os.path.abspath(args.target)
     source_dir = os.path.dirname(__file__)
 
-    ignore = ('.git', "doc-src", "press", "phpCB-1.0.1-linux", "*.py", "*.pyc",
+    ignore = ['.git', "doc-src", "press", "phpCB-1.0.1-linux", "*.py", "*.pyc",
               "Releases", "cms-config.php", "services", "update.php",
               ".gitignore", "cache", "*~", ".settings", ".project",
               ".buildpath", "tests", "run-tests.sh", "run-tests.bat",
               "run-tests.xampp.mac.sh", ".pydevproject", "CMSConfig.php", "log",
               "configurations", ".phpunit.result.cache", "nbproject", "report",
-              "avatars", ".php_cs.cache", ".php_cs.dist", ".phplint-cache", ".php-cs-fixer.cache")
+              "avatars", ".php_cs.cache", ".php_cs.dist", ".phplint-cache", ".php-cs-fixer.cache",
+              '.phpunit.cache'
+            ]
 
     IGNORE_PATTERNS = shutil.ignore_patterns(*ignore)
     if args.delete and os.path.exists(target):
