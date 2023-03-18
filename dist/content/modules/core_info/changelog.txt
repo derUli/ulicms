@@ -3,6 +3,11 @@
 Entfernte Features:
 * Experteneinstellungen
 
+Neue API-Methoden:
+* DateTimeHelper::getCurrentTimezone()
+* DateTimeHelper::getCurrentLocale()
+* DateTimeHelper::timestampToFormattedDateTime()
+
 API-Änderungen:
 * StringHelper in Namespace App\Helpers verschoben
 * ModelRegistry in Namespace App\Registries verschoben
@@ -20,6 +25,7 @@ Entfernte API-Methoden:
 * StringHelper::isLowerCase()
 * StringHelper::isUpperCase()
 * real_htmlspecialchars()
+* file_extension()
 
 ===== Neues in UliCMS 2023.1 =====
 
