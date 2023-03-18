@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use App\Helpers\DateTimeHelper;
+
 /**
  * Provides information about the UliCMS release version
  */
@@ -14,7 +16,7 @@ class UliCMSVersion
     {
         $this->codename = "Beetle-Eating Nandu";
         $this->releaseYear = 2023;
-        $this->buildDate = 3; // {InsertBuildDate}
+        $this->buildDate = 0; // {InsertBuildDate}
         $this->internalVersion = [
             2023,
             2
@@ -74,12 +76,13 @@ class UliCMSVersion
      */
     public function getBuildDate(): string
     {
-        $currentLocale = setlocale(LC_ALL, 0);
-        $timezone = new DateTimeZone(date_default_timezone_get());
+        $timezone = DateTimeHelper::getCurrentTimezone();
+        $currentLocale = DateTimeHelper::getCurrentLocale();
 
-        $formatter = new IntlDateFormatter("$currentLocale", IntlDateFormatter::MEDIUM, IntlDateFormatter::MEDIUM, $timezone);
+        $formatter = new IntlDateFormatter($currentLocale, IntlDateFormatter::MEDIUM, IntlDateFormatter::MEDIUM, $timezone);
         $pattern = str_replace(',', '', $formatter->getPattern());
         $formatter->setPattern($pattern);
+
         return $formatter->format($this->getBuildTimestamp());
     }
 }
