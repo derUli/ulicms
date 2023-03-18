@@ -71,7 +71,7 @@ class RoboDbMigratorTest extends RoboTestBase
         $output = $this->runRoboCommand(["dbmigrator:up", "robo_test", $dir]);
 
         $this->assertStringContainsString(
-            "robo_test - 002.sql: You have an error in your SQL syntax",
+            "You have an error in your SQL syntax;",
             $output
         );
     }
@@ -81,7 +81,7 @@ class RoboDbMigratorTest extends RoboTestBase
         $output = $this->runRoboCommand(["dbmigrator:down", "robo_test", $dir]);
 
         $this->assertStringContainsString(
-            "robo_test - 001.sql: Unknown table",
+            "Unknown table",
             $output
         );
     }
