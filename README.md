@@ -6,7 +6,6 @@ It runs on an LAMP Stack and includes an MVC inspired development framework.
    * Apache Webserver (other webservers may work but are not officially supported)
    * PHP 8.1 or newer
    * MySQL 5.5.3 or newer / MariaDB
-   * For secure access to UliCMS services (for example package source) you will also need the root certificate of Let's encrypt on your server (in Debian Linux contained in the ca-certificates package).
 
 #### PHP Extension
 UliCMS requires some special extension for PHP.
