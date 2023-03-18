@@ -1166,7 +1166,7 @@ Homepage: Not configured.
 Licenses Used: MIT
 MIT License
 
-Copyright (c) 2018-2022 Jack Cherng <jfcherng@gmail.com>
+Copyright (c) 2018-2023 Jack Cherng <jfcherng@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2417,7 +2417,32 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Eases the creation of beautiful and testable command line interfaces
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2004-2023 Fabien Potencier
+Copyright (c) 2004-present Fabien Potencier
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is furnished
+to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+
+### symfony/deprecation-contracts 
+A generic function and convention to trigger deprecation notices
+Homepage: https://symfony.com
+Licenses Used: MIT
+Copyright (c) 2020-present Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2442,7 +2467,7 @@ THE SOFTWARE.
 Provides tools that allow your application components to communicate with each other by dispatching events and listening to them
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2004-2023 Fabien Potencier
+Copyright (c) 2004-present Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2467,7 +2492,7 @@ THE SOFTWARE.
 Generic abstractions related to dispatching event
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2018-2022 Fabien Potencier
+Copyright (c) 2018-present Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2492,7 +2517,7 @@ THE SOFTWARE.
 Provides basic utilities for the filesystem
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2004-2023 Fabien Potencier
+Copyright (c) 2004-present Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2517,7 +2542,7 @@ THE SOFTWARE.
 Finds files and directories via an intuitive fluent interface
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2004-2023 Fabien Potencier
+Copyright (c) 2004-present Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2692,7 +2717,7 @@ THE SOFTWARE.
 Executes commands in sub-processes
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2004-2023 Fabien Potencier
+Copyright (c) 2004-present Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2717,7 +2742,7 @@ THE SOFTWARE.
 Generic abstractions related to writing services
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2018-2022 Fabien Potencier
+Copyright (c) 2018-present Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2742,7 +2767,7 @@ THE SOFTWARE.
 Provides an object-oriented API to strings and deals with bytes, UTF-8 code points and grapheme clusters in a unified way
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2019-2023 Fabien Potencier
+Copyright (c) 2019-present Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2767,7 +2792,7 @@ THE SOFTWARE.
 Provides tools to internationalize your application
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2004-2023 Fabien Potencier
+Copyright (c) 2004-present Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2792,7 +2817,7 @@ THE SOFTWARE.
 Generic abstractions related to translation
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2018-2022 Fabien Potencier
+Copyright (c) 2018-present Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2817,7 +2842,7 @@ THE SOFTWARE.
 Loads and dumps YAML files
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2004-2023 Fabien Potencier
+Copyright (c) 2004-present Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
