@@ -1,7 +1,7 @@
 <?php
 use App\Utils\VersionComparison;
 
-$minPhpRequired = '8.0.2';
+$minPhpRequired = '8.1.0';
 
 $phpVersion = phpversion();
 

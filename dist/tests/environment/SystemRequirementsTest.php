@@ -6,7 +6,7 @@ class SystemRequirementsTest extends \PHPUnit\Framework\TestCase
 {
     public function testPhpVersion()
     {
-        $this->assertTrue(\App\Utils\VersionComparison::compare(phpversion(), "8.0.2", ">="));
+        $this->assertTrue(\App\Utils\VersionComparison::compare(phpversion(), "8.1.0", ">="));
     }
 
     public function testMySQLVersion()
