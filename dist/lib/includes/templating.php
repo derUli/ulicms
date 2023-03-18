@@ -557,7 +557,7 @@ function get_title(?string $slug = null, bool $headline = false): string
 
     if (db_num_rows($result) > 0) {
         while ($row = db_fetch_object($result)) {
-            if ($headline and isset($row->alternate_title) && !empty($row->alternate_title)) {
+            if ($headline && isset($row->alternate_title) && !empty($row->alternate_title)) {
                 $title = $row->alternate_title;
             } else {
                 $title = $row->title;

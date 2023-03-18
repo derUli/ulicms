@@ -3,6 +3,8 @@ use App\Helpers\DateTimeHelper;
 
 require_once getTemplateDirPath(get_theme()) . "/top.php";
 $meta = get_article_meta();
+$title = get_headline();
+
 $page = get_page();
 $lastmodified = $meta->article_date ?? $page["lastmodified"];
 
@@ -19,5 +21,5 @@ if ($meta && !empty($meta->article_image)) {
 }
 ?><p>
     <img src="<?php Template::escape($article_image); ?>"
-         alt="<?php Template::escape($meta->title); ?>" class="article-image">
+         alt="<?php Template::escape($title); ?>" class="article-image">
 </p>
