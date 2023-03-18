@@ -80,9 +80,13 @@ class DBMigrator
                 $sql = str_ireplace("{prefix}", $cfg->db_prefix, $sql);
 
                 $success = Database::multiQuery($sql, true);
+
+
                 while (mysqli_more_results(Database::getConnection())) {
                     mysqli_next_result(Database::getConnection());
                 }
+
+
                 if ($success) {
                     $sql = "INSERT INTO {prefix}dbtrack (component, name) "
                             . "values (?,?)";
