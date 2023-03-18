@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Helpers;
 
 use DateTimeZone;
+use IntlDateFormatter;
 
 /**
  * This class contains methods to deal with DateTimes
@@ -27,5 +28,23 @@ class DateTimeHelper
     public static function getCurrentLocale(): ?string
     {
         return setlocale(LC_ALL, 0) ?? null;
+    }
+
+    /**
+     * Format integer timestamp user readable
+     * Format integer timestamp
+     * @param int $timestamp
+     * @return string
+     */
+    public static function timestampToFormattedDateTime(int $timestamp): string
+    {
+        $timezone = self::getCurrentTimezone();
+        $currentLocale = self::getCurrentLocale();
+
+        $formatter = new IntlDateFormatter($currentLocale, IntlDateFormatter::MEDIUM, IntlDateFormatter::MEDIUM, $timezone);
+        $pattern = str_replace(',', '', $formatter->getPattern());
+        $formatter->setPattern($pattern);
+
+        return $formatter->format($timestamp);
     }
 }

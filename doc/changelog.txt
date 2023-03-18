@@ -6,6 +6,7 @@ Entfernte Features:
 Neue API-Methoden:
 * DateTimeHelper::getCurrentTimezone()
 * DateTimeHelper::getCurrentLocale()
+* DateTimeHelper::timestampToFormattedDateTime()
 
 API-Änderungen:
 * StringHelper in Namespace App\Helpers verschoben

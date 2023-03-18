@@ -76,13 +76,6 @@ class UliCMSVersion
      */
     public function getBuildDate(): string
     {
-        $timezone = DateTimeHelper::getCurrentTimezone();
-        $currentLocale = DateTimeHelper::getCurrentLocale();
-
-        $formatter = new IntlDateFormatter($currentLocale, IntlDateFormatter::MEDIUM, IntlDateFormatter::MEDIUM, $timezone);
-        $pattern = str_replace(',', '', $formatter->getPattern());
-        $formatter->setPattern($pattern);
-
-        return $formatter->format($this->getBuildTimestamp());
+        return DateTimeHelper::timestampToFormattedDateTime($this->getBuildTimestamp());
     }
 }
