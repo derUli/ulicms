@@ -49,7 +49,7 @@
       <file>lib/CMSConfigSample.php</file>
       <file>CMSConfig.php</file>
       <file>admin/index.php</file>
-      <file>lib/phpunit_init</file>
+      <file>lib/phpunit_init.php</file>
       <file>update.php</file>
       <file>admin.php</file>
       <file>admin/inc/getlinksforeditor.php</file>
