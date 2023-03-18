@@ -9,6 +9,7 @@ use Robo\Tasks;
 use App\Exceptions\SqlException;
 use App\Constants\DefaultValues;
 use App\Database\DBMigrator;
+use App\Helpers\DateTimeHelper;
 
 /**
  * This is project's console commands configuration for Robo task runner.
@@ -660,6 +661,16 @@ class RoboFile extends Tasks
         do_event("before_cron");
         require 'lib/cron.php';
         do_event("after_cron");
-        $this->writeln("finished cron at " . strftime("%x %X"));
+
+        $timezone = DateTimeHelper::getCurrentTimezone();
+        $currentLocale = DateTimeHelper::getCurrentLocale();
+
+        $formatter = new IntlDateFormatter($currentLocale, IntlDateFormatter::MEDIUM, IntlDateFormatter::MEDIUM, $timezone);
+        $pattern = str_replace(',', '', $formatter->getPattern());
+        $formatter->setPattern($pattern);
+
+        $formatedCurrentTime = $formatter->format(time());
+
+        $this->writeln("finished cron at " . $formatedCurrentTime);
     }
 }
