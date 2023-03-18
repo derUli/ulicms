@@ -44,6 +44,10 @@ class Database
         ?string $socket = null,
         bool $db_strict_mode = false
     ): ?mysqli {
+        // Until PHP 8.0 this was the default value
+        // TODO: Make hard exceptions for SQL default
+        mysqli_report(MYSQLI_REPORT_OFF);
+
         // Store old error reporting settings
         $displayErrors = ini_get('display_errors');
         $errorReporting = error_reporting();
@@ -222,7 +226,7 @@ class Database
 
     public static function getClientInfo(): string
     {
-        return mysqli_get_client_info(self::$connection);
+        return mysqli_get_client_info();
     }
 
     public static function getClientVersion(): ?int
