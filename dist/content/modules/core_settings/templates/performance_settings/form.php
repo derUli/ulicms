@@ -123,15 +123,15 @@ if (!$permissionChecker->hasPermission("performance_settings")) {
         "lazy_loading[]",
         $lazy_loading,
         [
-                                                                                                            new ListItem(
-                                                                                                                'img',
-                                                                                                                get_translation('lazy_loading_img')
-                                                                                                            ),
-                                                                                                            new ListItem(
-                                                                                                                'iframe',
-                                                                                                                get_translation('lazy_loading_iframe')
-                                                                                                            ),
-                                                                                                        ],
+                                                                                                                            new ListItem(
+                                                                                                                                'img',
+                                                                                                                                get_translation('lazy_loading_img')
+                                                                                                                            ),
+                                                                                                                            new ListItem(
+                                                                                                                                'iframe',
+                                                                                                                                get_translation('lazy_loading_iframe')
+                                                                                                                            ),
+                                                                                                                        ],
         1
     );
     ?>
