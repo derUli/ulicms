@@ -1,5 +1,7 @@
 <?php
 
+use App\Helpers\DateTimeHelper;
+
 if (!Settings::get("disable_ulicms_newsfeed")) {
     App\Utils\Session\sessionStart();
     $rss = new DOMDocument();
@@ -37,7 +39,7 @@ if (!Settings::get("disable_ulicms_newsfeed")) {
             $description = $feed[$x]['desc'];
             echo '<p><strong><a href="' . $link . '" target="_blank">' . $title . '</a></strong><br />';
             $date = strtotime($feed[$x]['date']);
-            $datestr = strftime("%x, %A", $date);
+            $datestr = DateTimeHelper::timestampToFormattedDateTime($date, IntlDateFormatter::LONG, IntlDateFormatter::NONE);
             $txt = get_translation("posted_on_date");
             $txt = str_replace("%s", $datestr, $txt);
             echo '<small><em>' . $txt . '</em></small></p>';

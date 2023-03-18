@@ -1,4 +1,6 @@
 <?php
+use App\Helpers\DateTimeHelper;
+
 require_once getTemplateDirPath(get_theme()) . "/top.php";
 $meta = get_article_meta();
 $page = get_page();
@@ -8,7 +10,7 @@ $article_image = getTemplateDirPath("impro17") . "images/nopic.jpg";
 ?>
 <strong><?php translate("date"); ?>:</strong>
 <time datetime="<?php echo date(DATE_W3C, $lastmodified); ?>">
-    <?php echo strftime("%x", $lastmodified); ?>
+    <?php echo DateTimeHelper::timestampToFormattedDateTime($lastmodified, IntlDateFormatter::MEDIUM, IntlDateFormatter::NONE); ?>
 </time>
 </p>
 <?php

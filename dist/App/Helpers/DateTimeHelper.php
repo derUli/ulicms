@@ -36,12 +36,12 @@ class DateTimeHelper
      * @param int $timestamp
      * @return string
      */
-    public static function timestampToFormattedDateTime(int $timestamp): string
+    public static function timestampToFormattedDateTime(int $timestamp, int $dateType = IntlDateFormatter::MEDIUM, int $timeType = IntlDateFormatter::MEDIUM): string
     {
         $timezone = self::getCurrentTimezone();
         $currentLocale = self::getCurrentLocale();
 
-        $formatter = new IntlDateFormatter($currentLocale, IntlDateFormatter::MEDIUM, IntlDateFormatter::MEDIUM, $timezone);
+        $formatter = new IntlDateFormatter($currentLocale, $dateType, $timeType, $timezone);
         $pattern = str_replace(',', '', $formatter->getPattern());
         $formatter->setPattern($pattern);
 

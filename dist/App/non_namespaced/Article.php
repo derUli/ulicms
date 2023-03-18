@@ -19,7 +19,7 @@ class Article extends Page
         $this->article_author_email = $result->article_author_email;
         $this->article_author_name = $result->article_author_name;
         $this->article_image = $result->article_image;
-        $this->article_date = strtotime($result->article_date);
+        $this->article_date = $result->article_date ? strtotime($result->article_date) : null;
         $this->excerpt = $result->excerpt;
     }
 
@@ -46,7 +46,7 @@ class Article extends Page
         if (is_numeric($this->article_date)) {
             $article_date = intval($this->article_date);
         } elseif (is_string($this->article_date)) {
-            $article_date = strtotime($this->article_date);
+            $article_date = $this->article_date ? strtotime($this->article_date) : null;
         }
 
         $sql = "update {prefix}content set article_author_email = ?,
