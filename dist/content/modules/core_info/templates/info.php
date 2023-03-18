@@ -8,12 +8,8 @@ if (!$admin_logo) {
 <p>
     <strong>Release <?php echo cms_version(); ?>
         "<?php echo $version->getCodeName(); ?>"</strong>
-    <?php if ($version->getBuildTimestamp() > 0) { ?>
-        <br /> <small><?php translate("build_date"); ?>:
-            <?php echo $version->getBuildDate() ?></small>
-        <?php
-    }
-?>
+    <br /> <small><?php translate("build_date"); ?>:
+        <?php echo $version->getBuildDate() ?></small>
 </p>
 <p>
     <a href="http://www.ulicms.de" target="_blank">UliCMS</a> &copy; 2011 -
