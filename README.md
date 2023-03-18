@@ -10,6 +10,7 @@ It runs on an LAMP Stack and includes an MVC inspired development framework.
 
 #### PHP Extension
 UliCMS requires some special extension for PHP.
+
    * curl
    * dom
    * dom
