@@ -8,13 +8,6 @@ class FilesTest extends \PHPUnit\Framework\TestCase
 {
     use MatchesSnapshots;
 
-    public function testFileExtension()
-    {
-        $this->assertEquals("pdf", file_extension("myfile.pdf"));
-        $this->assertEquals("pdf", file_extension("myfile.PDF"));
-        $this->assertEquals("txt", file_extension("foo.txt"));
-    }
-
     public function testGetMime()
     {
         $this->assertEquals("text/plain", File::getMime(Path::resolve("ULICMS_ROOT/.htaccess")));

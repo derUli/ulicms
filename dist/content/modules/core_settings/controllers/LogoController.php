@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Utils\CacheUtil;
 use App\Helpers\ImageScaleHelper;
+use App\Utils\File;
 
 class LogoController extends Controller
 {
@@ -11,7 +12,7 @@ class LogoController extends Controller
         string $filename,
         string $originalName
     ): string {
-        $extension = file_extension($originalName);
+        $extension = File::getExtension($originalName);
         $hash = md5_file($filename);
         return $hash . '.' . $extension;
     }

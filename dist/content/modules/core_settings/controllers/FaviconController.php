@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Utils\CacheUtil;
+use App\Utils\File;
 
 class FaviconController extends Controller
 {
@@ -51,7 +52,7 @@ class FaviconController extends Controller
             $favicon_upload_file = $_FILES['favicon_upload_file'];
             $type = $favicon_upload_file['type'];
             $filename = $favicon_upload_file['name'];
-            $extension = file_extension($filename);
+            $extension = File::getExtension($filename);
 
             if (str_starts_with($type, "image/")) {
                 $destination1 = $this->_getDestination1();

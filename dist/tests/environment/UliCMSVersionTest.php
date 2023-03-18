@@ -74,4 +74,13 @@ class UliCMSVersionTest extends \PHPUnit\Framework\TestCase
             }
         }
     }
+
+    public function testgetYear()
+    {
+        $version = new UliCMSVersion();
+        $year = $version->getReleaseYear();
+        $this->assertGreaterThanOrEqual(2020, (int)$year);
+        $this->assertLessThanOrEqual(2050, (int)$year);
+        $this->assertEquals(4, strlen($year));
+    }
 }

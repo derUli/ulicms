@@ -25,6 +25,7 @@ Entfernte API-Methoden:
 * StringHelper::isLowerCase()
 * StringHelper::isUpperCase()
 * real_htmlspecialchars()
+* file_extension()
 
 ===== Neues in UliCMS 2023.1 =====
 

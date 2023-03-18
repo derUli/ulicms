@@ -36,14 +36,3 @@ function recurse_copy(string $src, string $dst): void
     }
     closedir($dir);
 }
-
-/**
- * Get file extension
- * @param string $filename
- * @deprecated since version 2023.1
- * @return string
- */
-function file_extension(string $filename): string
-{
-    return File::getExtension($filename);
-}
