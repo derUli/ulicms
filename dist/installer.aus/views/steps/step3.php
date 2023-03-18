@@ -19,7 +19,8 @@ $phpModules = [
     'openssl',
     'dom',
     'xml',
-    'curl'
+    'curl',
+    'intl'
 ];
 
 sort($phpModules);
