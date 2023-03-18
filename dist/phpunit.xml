@@ -64,7 +64,7 @@
     <env name="ULICMS_ENVIRONMENT" value="test" force="true"/>
   </php>
   <logging>
-    <!-- <log type="testdox-html" target="./log/testdox.html" /> -->
+        <log type="testdox-text" target="php://stdout"/>
   </logging>
   <testsuites>
     <testsuite name="Application Test Suite">
