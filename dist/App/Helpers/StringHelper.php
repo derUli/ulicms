@@ -69,11 +69,6 @@ class StringHelper extends Helper
         return $excerpt;
     }
 
-    public static function decodeHTMLEntities(string $str): string
-    {
-        return html_entity_decode($str, ENT_COMPAT, 'UTF-8');
-    }
-
     // converts a string to an array of lines
     public static function linesFromString(
         string $str,

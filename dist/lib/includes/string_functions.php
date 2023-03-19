@@ -112,11 +112,6 @@ function getExcerpt(
     return StringHelper::getExcerpt($str, $startPos, $maxLength);
 }
 
-function decodeHTMLEntities(string $str): string
-{
-    return StringHelper::decodeHTMLEntities($str);
-}
-
 function stringOrNull($val): ?string
 {
     return is_string($val) && !empty($val) ? $val : null;
