@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Utils;
 
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
 use Intervention\MimeSniffer\MimeSniffer;
 
 /**
