@@ -1,6 +1,7 @@
 <?php
 
 use App\Helpers\TestHelper;
+use App\Registries\LoggerRegistry;
 
 class LoggerTest extends \PHPUnit\Framework\TestCase
 {

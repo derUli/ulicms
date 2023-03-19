@@ -1,6 +1,7 @@
 <?php
 
 use App\Exceptions\SqlException;
+use App\Registries\LoggerRegistry;
 
 class DatabaseTest extends \PHPUnit\Framework\TestCase
 {

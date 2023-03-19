@@ -1,5 +1,7 @@
 <?php
 
+use App\Registries\LoggerRegistry;
+
 /**
  * Default exception handler
  * @param AccessDeniedException $exception

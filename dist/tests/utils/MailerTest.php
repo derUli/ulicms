@@ -3,6 +3,7 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use App\Constants\EmailModes;
 use PHPMailer\PHPMailer\SMTP;
+use App\Registries\LoggerRegistry;
 
 class MailerTest extends \PHPUnit\Framework\TestCase
 {

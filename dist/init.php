@@ -31,6 +31,7 @@ use App\Exceptions\ConnectionFailedException;
 use App\Exceptions\SqlException;
 use App\Registries\HelperRegistry;
 use App\Registries\ModelRegistry;
+use App\Registries\LoggerRegistry;
 use App\Models\Content\TypeMapper;
 use App\Models\Content\Types\DefaultContentTypes;
 

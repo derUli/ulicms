@@ -3,6 +3,7 @@
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\PHPMailer;
 use App\Constants\EmailModes;
+use App\Registries\LoggerRegistry;
 
 /**
  * Send Mails

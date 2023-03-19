@@ -2,6 +2,10 @@
 
 declare(strict_types=1);
 
+namespace App\Registries;
+
+use Logger;
+
 class LoggerRegistry
 {
     private static $loggers = [];
