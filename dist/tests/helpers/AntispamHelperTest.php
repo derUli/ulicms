@@ -1,6 +1,7 @@
 <?php
 
 use App\Registries\HelperRegistry;
+use App\Helpers\AntiSpamHelper;
 
 class AntispamHelperTest extends \PHPUnit\Framework\TestCase
 {

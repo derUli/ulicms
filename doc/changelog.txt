@@ -19,6 +19,7 @@ API-Änderungen:
 * AdminMenu in Namespace App\Backend\Menu verschoben
 * MenuEntry in Namespace App\Backend\Menu verschoben
 * DBMigrator in Namespace App\Database verschoben
+* AntispamHelper in Namespace App\Helpers verschoben
 
 Entfernte API-Methoden:
 * StringHelper::isNullOrEmpty()

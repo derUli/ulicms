@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use App\Helpers\AntiSpamHelper;
+
 class CoreFormsController extends Controller
 {
     public function _incSpamCount(): int

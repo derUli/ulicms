@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Security\SpamChecker;
 
-use StringHelper;
-use AntiSpamHelper;
+use App\Helpers\AntiSpamHelper;
+
 use Request;
 use App\Models\Content\Comment;
 

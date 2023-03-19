@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace App\Security\SpamChecker;
 
-use AntiSpamHelper;
-use StringHelper;
+use App\Helpers\AntiSpamHelper;
 use Settings;
 use InvalidArgumentException;
 

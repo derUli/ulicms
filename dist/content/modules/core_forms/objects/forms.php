@@ -1,5 +1,7 @@
 <?php
 
+use App\Helpers\AntiSpamHelper;
+
 class Forms
 {
     public static function getFormByID($id)
@@ -143,8 +145,8 @@ class Forms
             $email_from = $_POST[$mail_from_field];
 
             // if dns mx check is enabled check the mail domain
-            if (!empty($email_from)
-                    and Settings::get("check_mx_of_mail_address") && !AntiSpamHelper::checkMailDomain($email_from)) {
+            if (!empty($email_from) &&
+                    Settings::get("check_mx_of_mail_address") && !AntiSpamHelper::checkMailDomain($email_from)) {
                 ExceptionResult(
                     get_translation("mail_address_has_invalid_mx_entry"),
                     HttpStatusCode::BAD_REQUEST
