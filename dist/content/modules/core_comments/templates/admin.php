@@ -128,7 +128,7 @@ echo ModuleHelper::buildMethodCallForm(
         <tbody>
             <?php foreach ($comments as $comment) { ?>
                 <?php
-                $url = strlen($comment->getAuthorUrl()) > 30 ?
+                $url = $comment->getAuthorUrl() && strlen($comment->getAuthorUrl()) > 30 ?
     substr($comment->getAuthorUrl(), 0, 30) . "..." : $comment->getAuthorUrl();
                 ?>
                 <?php $content = $comment->getContent(); ?>
@@ -143,10 +143,10 @@ echo ModuleHelper::buildMethodCallForm(
                     false,
                     $comment->getId(),
                     [
-                                                                                                        "class" => "checkbox comment-checkbox",
-                                                                                                        "data-select-all-checkbox" => ".select-all",
-                                                                                                        "data-checkbox-group" => ".comment-checkbox"
-                                                                                                    ]
+                                                                                                                "class" => "checkbox comment-checkbox",
+                                                                                                                "data-select-all-checkbox" => ".select-all",
+                                                                                                                "data-checkbox-group" => ".comment-checkbox"
+                                                                                                            ]
                 );
                 ?></td>
                     <td>
