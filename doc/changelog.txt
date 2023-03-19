@@ -33,6 +33,7 @@ Entfernte API-Methoden:
 * keywordsFromString()
 * real_htmlspecialchars()
 * file_extension()
+* multi_explode()
 
 ===== Neues in UliCMS 2023.1 =====
 

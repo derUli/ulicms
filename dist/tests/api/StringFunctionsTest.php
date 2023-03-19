@@ -78,21 +78,6 @@ class StringFunctionsTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("Line1\nLine2\nLine3\n", normalizeLN($input, "\n"));
     }
 
-    public function testMultiExplode()
-    {
-        $input = "FooTrenn1BarTrenn2LoremTrenn1Ipsum";
-        $result = multi_explode(array(
-            "Trenn1",
-            "Trenn2"
-                ), $input);
-
-        $this->assertEquals("Foo", $result[0]);
-        $this->assertEquals("Bar", $result[1]);
-        $this->assertEquals("Lorem", $result[2]);
-        $this->assertEquals("Ipsum", $result[3]);
-    }
-
-
     public function testStrReplaceFirst()
     {
         $input = "Apple Strawberry Apple Strawberry";

@@ -65,24 +65,6 @@ function normalizeLN(string $txt, string $style = "\r\n"): string
     return $txt;
 }
 
-function multi_explode(array $delimiters, string $string): array
-{
-    return explode(
-        $delimiters[0],
-        strtr(
-            $string,
-            array_combine(
-                array_slice($delimiters, 1),
-                array_fill(
-                    0,
-                    count($delimiters) - 1,
-                    array_shift($delimiters)
-                )
-            )
-        )
-    );
-}
-
 /**
  * Convert URLS in a string to HTML links
  * @param string $text
