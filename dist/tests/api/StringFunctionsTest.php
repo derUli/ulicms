@@ -78,14 +78,6 @@ class StringFunctionsTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("Line1\nLine2\nLine3\n", normalizeLN($input, "\n"));
     }
 
-    public function testStrReplaceFirst()
-    {
-        $input = "Apple Strawberry Apple Strawberry";
-        $this->assertEquals("Banana Strawberry Apple Strawberry", str_replace_first("Apple", "Banana", $input));
-        $this->assertEquals("Apple Tomato Apple Strawberry", str_replace_first("Strawberry", "Tomato", $input));
-        $this->assertEquals($input, str_replace_first("Cucumber", "Tomato", $input));
-    }
-
     public function testMbStrSplit()
     {
         $input = "Dieser Hügel ist der höchste.";

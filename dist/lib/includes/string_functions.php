@@ -111,18 +111,6 @@ function convertLineEndingsToLN(string $s): string
     return normalizeLN($s, "\n");
 }
 
-function str_replace_first(
-    string $search,
-    string $replace,
-    string $subject
-): string {
-    $pos = strpos($subject, $search);
-    if ($pos !== false) {
-        return substr_replace($subject, $replace, $pos, strlen($search));
-    }
-    return $subject;
-}
-
 function esc($value): void
 {
     Template::escape($value);
