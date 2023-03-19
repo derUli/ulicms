@@ -21,6 +21,16 @@ class MenuEntry
     private $newWindow = false;
     private $isAjax = false;
 
+    /**
+     * Constructor
+     * @param string $title
+     * @param string $link
+     * @param string $identifier
+     * @param type $permissions
+     * @param array $children
+     * @param bool $newWindow
+     * @param bool $isAjax
+     */
     public function __construct(
         string $title,
         string $link,
