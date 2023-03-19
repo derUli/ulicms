@@ -6,10 +6,8 @@ namespace App\Registries;
 
 defined('ULICMS_ROOT') or exit('no direct script access allowed');
 
-use Vars;
 use ModuleManager;
 
-use function getAllModules;
 use function getModuleMeta;
 use function getModulePath;
 use function str_ends_with;
