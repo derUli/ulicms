@@ -211,6 +211,7 @@ class MenuEntry
         if (is_string($this->permissions) && !empty($this->permissions)) {
             return $acl->hasPermission($this->permissions);
         }
+
         if (is_array($this->permissions) && count($this->permissions) > 0) {
             $isPermitted = false;
             foreach ($this->permissions as $permission) {
@@ -221,6 +222,7 @@ class MenuEntry
             }
             return $isPermitted;
         }
+
         // if there are no permissions required for accessing this menu entry
         return true;
     }
