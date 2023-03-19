@@ -8,7 +8,6 @@ defined('ULICMS_ROOT') or exit('no direct script access allowed');
 
 use Database;
 use ZipArchive;
-use StringHelper;
 use App\Utils\CacheUtil;
 use UliCMSVersion;
 
