@@ -49,87 +49,162 @@ class MenuEntry
         $this->isAjax = $isAjax;
     }
 
+    /**
+     * Get title
+     * @return string
+     */
     public function getTitle(): string
     {
         return $this->title;
     }
 
+    /**
+     * Get link
+     * @return string
+     */
     public function getLink(): string
     {
         return $this->link;
     }
 
+    /**
+     * Get identifier
+     * @return string
+     */
     public function getIdentifier(): string
     {
         return $this->identifier;
     }
 
+    /**
+     * Set title
+     * @param string $value
+     * @return void
+     */
     public function setTitle(string $value): void
     {
         $this->title = $value;
     }
 
+    /**
+     * Set link
+     * @param string $value
+     * @return void
+     */
     public function setLink(string $value): void
     {
         $this->link = $value;
     }
 
+    /**
+     * Set identifier
+     * @param string $value
+     * @return void
+     */
     public function setIdentifier(string $value): void
     {
         $this->identifier = $value;
     }
 
+    /**
+     * Get children
+     * @return array
+     */
     public function getChildren(): array
     {
         return $this->children;
     }
 
+    /**
+     * Set children
+     * @param array $value
+     * @return void
+     */
     public function setChildren(array $value): void
     {
         $this->children = $value;
     }
 
+    /**
+     * Has children
+     * @return bool
+     */
     public function hasChildren(): bool
     {
         return (count($this->children) > 0);
     }
 
+    /**
+     * Add children
+     * @param array $children
+     * @return void
+     */
     public function addChildren(array $children): void
     {
         $this->children[] = $children;
     }
 
+    /**
+     * Get permissions
+     * @return type
+     */
     public function getPermissions()
     {
         return $this->permissions;
     }
 
+    /**
+     * Set permissions
+     * @param type $permissions
+     * @return void
+     */
     public function setPermissions($permissions): void
     {
         $this->permissions = $permissions;
     }
 
+    /**
+     * get new window
+     * @return bool
+     */
     public function getNewWindow(): bool
     {
         return $this->newWindow;
     }
 
+    /**
+     * Set new window
+     * @param bool $val
+     * @return void
+     */
     public function setNewWindow(bool $val): void
     {
         $this->newWindow = $val;
     }
 
+    /**
+     * Get isAjax
+     * @return bool
+     */
     public function getIsAjax(): bool
     {
         return $this->isAjax;
     }
 
+    /**
+     * Set isAjax
+     * @param bool $val
+     * @return void
+     */
     public function setIsAjax(bool $val): void
     {
         $this->isAjax = $val;
     }
 
-    // check if the user has permissions to access this menu entry
+    /**
+     * Check if the current user has permissions to access this menu entry
+     * @return bool
+     */
     public function userHasPermission(): bool
     {
         $acl = new ACL();
@@ -150,7 +225,10 @@ class MenuEntry
         return true;
     }
 
-    // render a single menu item
+    /**
+     * Render this menu entry as HTML
+     * @return string
+     */
     public function render(): string
     {
         $html = "<li>";
