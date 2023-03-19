@@ -1,5 +1,7 @@
 <?php
 
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
 use App\Models\Media\Audio;
 
 // audio pages are pages that are linked to audio files
