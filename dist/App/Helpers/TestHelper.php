@@ -42,7 +42,6 @@ class TestHelper extends Helper
         }
     }
 
-
     /**
      * Check if the application is running on a Windows machine
      * @return bool

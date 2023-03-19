@@ -9,7 +9,6 @@ use App\Models\Content\Category;
 use Database;
 use Model;
 use Path;
-use StringHelper;
 
 use function _esc;
 use function get_translation;
