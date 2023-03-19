@@ -29,6 +29,8 @@ Entfernte API-Methoden:
 * StringHelper::realHtmlSpecialchars()
 * StringHelper::isLowerCase()
 * StringHelper::isUpperCase()
+* StringHelper::keywordsFromString()
+* keywordsFromString()
 * real_htmlspecialchars()
 * file_extension()
 

@@ -142,18 +142,4 @@ Noch mehr Text <a href="http://www.ulicms.de" rel="nofollow" target="_blank">htt
             )
         );
     }
-
-    public function testKeywordsFromString()
-    {
-        $input = file_get_contents(
-            Path::resolve("ULICMS_ROOT/tests/fixtures/lorem_ipsum.txt")
-        );
-
-        $keywords = StringHelper::keywordsFromString($input);
-        $this->assertCount(74, $keywords);
-        $this->assertEquals(7, $keywords["Lorem"]);
-        $this->assertEquals(14, $keywords["et"]);
-        $this->assertEquals(7, $keywords["ipsum"]);
-        $this->assertEquals(5, $keywords["dolore"]);
-    }
 }

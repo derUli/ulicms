@@ -92,18 +92,6 @@ class StringFunctionsTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("Ipsum", $result[3]);
     }
 
-    public function testKeywordsFromString()
-    {
-        $input = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
-
-        $keywords = keywordsFromString($input);
-
-        $this->assertCount(40, $keywords);
-
-        $this->assertEquals(12, $keywords["et"]);
-        $this->assertEquals(6, $keywords["Lorem"]);
-        $this->assertEquals(3, $keywords["dolores"]);
-    }
 
     public function testStrReplaceFirst()
     {

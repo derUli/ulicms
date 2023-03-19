@@ -74,44 +74,6 @@ class StringHelper extends Helper
         return html_entity_decode($str, ENT_COMPAT, 'UTF-8');
     }
 
-    // Häufigste Wörter in String ermitteln und
-    // als Assoziatives Array zurückgeben.
-    // z.B. für automatisches ausfüllen der Meta-Keywords nutzbar
-    public static function keywordsFromString(string $text): array
-    {
-        $text = normalizeLN($text, "\n");
-        $words = [];
-
-        // Punkt, Beistrich, Zeilenumbruch... in Leerzeichen umwandeln
-        $text = str_replace(array(
-            "\n",
-            '.',
-            ","
-                ), " ", $text);
-
-        // text an Leerzeichen zerlegen
-        $textWords = explode(" ", $text);
-        $textWords = array_filter($textWords);
-
-        foreach ($textWords as $word) {
-            if (!array_key_exists($word, $words)) {
-                // wenn das wort zum ersten mal gefunden wurde
-                $words[$word] = 1;
-            } else {
-                // wenn schon vorhanden
-                $words[$word]++;
-            }
-        }
-
-        $words = array_filter($words, "decodeHTMLEntities");
-
-        // nach häufigkeit sortieren
-        arsort($words);
-
-        // array zurückgeben
-        return $words;
-    }
-
     // converts a string to an array of lines
     public static function linesFromString(
         string $str,

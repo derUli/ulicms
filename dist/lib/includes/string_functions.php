@@ -117,50 +117,6 @@ function decodeHTMLEntities(string $str): string
     return StringHelper::decodeHTMLEntities($str);
 }
 
-// Häufigste Wörter in String ermitteln und als Assoziatives Array zurückgeben.
-// z.B. für automatisches ausfüllen der Meta-Keywords nutzbar
-function keywordsFromString(string $text): array
-{
-    $return = [];
-
-    // Punkt, Beistrich, Zeilenumbruch... in Leerzeichen umwandeln
-    $text = str_replace(array(
-        "\n",
-        '.',
-        ",",
-        "!",
-        "?"
-            ), " ", $text);
-
-    // text an Leerzeichen zerlegen
-    $array = explode(" ", $text);
-
-    foreach ($array as $word) {
-        if (strlen($word) == 0) {
-            // wenn kein Wort vorhanden ist nichts machen
-            continue;
-        }
-        if (!isset($return[$word])) {
-            // wenn das wort zum ersten mal gefunden wurde
-
-            $return[$word] = 1;
-        } else {
-            // wenn schon vorhanden
-            $return[$word]++;
-        }
-    }
-
-    $return = array_filter(
-        $return,
-        "decodeHTMLEntities"
-    );
-    // nach häufigkeit sortieren
-    arsort($return);
-
-    // array zurückgeben
-    return $return;
-}
-
 function stringOrNull($val): ?string
 {
     return is_string($val) && !empty($val) ? $val : null;
