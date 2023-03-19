@@ -179,11 +179,10 @@ class Mailer
         $mailer->Subject = $subject;
         $mailer->isHTML(
             isset(
-                $headersLower["content-type"])
-            and str_starts_with(
-                $headersLower["content-type"],
-                "text/html"
-            )
+                $headersLower["content-type"]) && str_starts_with(
+                    $headersLower["content-type"],
+                    "text/html"
+                )
         );
         $mailer->Body = $message;
 
