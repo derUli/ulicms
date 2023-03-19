@@ -36,6 +36,7 @@ Entfernte API-Methoden:
 * multi_explode()
 * str_replace_nth()
 * str_replace_first()
+* br2nlr()
 
 ===== Neues in UliCMS 2023.1 =====
 

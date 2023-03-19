@@ -40,13 +40,6 @@ function unesc(string $string): void
     echo _unesc($string);
 }
 
-function br2nlr(
-    string $html
-): string {
-    return preg_replace('#<br\s*/?>#i', "\r\n", $html);
-}
-
-
 /**
  * Normalize line breaks
  * @param string $txt

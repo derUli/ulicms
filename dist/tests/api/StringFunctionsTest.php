@@ -22,14 +22,6 @@ class StringFunctionsTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expected, convertLineEndingsToLN($input));
     }
 
-    public function testBr2nlr()
-    {
-        $input = "Line1<br>Line2<br />Line3<br/>";
-        $expected = "Line1\r\nLine2\r\nLine3\r\n";
-
-        $this->assertEquals($expected, br2nlr($input));
-    }
-
     public function testSanitize()
     {
         $input = array(
