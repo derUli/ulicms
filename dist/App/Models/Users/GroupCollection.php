@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Models\Users;
 
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
 use User;
 
 /**
