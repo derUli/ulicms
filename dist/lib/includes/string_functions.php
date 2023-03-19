@@ -111,25 +111,6 @@ function convertLineEndingsToLN(string $s): string
     return normalizeLN($s, "\n");
 }
 
-function str_replace_nth(
-    string $search,
-    string $replace,
-    string $subject,
-    int $nth
-): string {
-    $found = preg_match_all('/' .
-            preg_quote($search) . '/', $subject, $matches, PREG_OFFSET_CAPTURE);
-    if (false !== $found && $found > $nth) {
-        return substr_replace(
-            $subject,
-            $replace,
-            $matches[0][$nth][1],
-            strlen($search)
-        );
-    }
-    return $subject;
-}
-
 function str_replace_first(
     string $search,
     string $replace,

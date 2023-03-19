@@ -86,22 +86,6 @@ class StringFunctionsTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($input, str_replace_first("Cucumber", "Tomato", $input));
     }
 
-    public function testStrReplaceNth()
-    {
-        $input = "Apple Strawberry Apple Strawberry";
-        $this->assertEquals("Apple Tomato Apple Strawberry", str_replace_nth("Strawberry", "Tomato", $input, 0));
-        $this->assertEquals("Apple Strawberry Apple Tomato", str_replace_nth("Strawberry", "Tomato", $input, 1));
-    }
-
-    public function testStrReplaceNthSubjectNotFound()
-    {
-        $input = "Hallo Welt";
-        $this->assertEquals(
-            "Hallo Welt",
-            str_replace_nth("Gibts Nicht", "Tomato", $input, 1)
-        );
-    }
-
     public function testMbStrSplit()
     {
         $input = "Dieser Hügel ist der höchste.";
