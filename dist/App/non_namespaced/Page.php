@@ -415,7 +415,7 @@ class Page extends Content
         if (count($match) > 0) {
             $matchesCount = count($match[1]);
             for ($i = 0; $i < $matchesCount; $i++) {
-                $id = unhtmlspecialchars($match[1][$i]);
+                $id = _unesc($match[1][$i]);
                 if (!in_array($id, $result)) {
                     $result[] = $id;
                 }

@@ -39,13 +39,6 @@ class StringFunctionsTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("lorem ipsum ", $input[3]);
     }
 
-    public function testUnHtmlSpecialChars()
-    {
-        $input = '&lt;span style=&quot;color:red&quot;&gt;This is HTML&lt;/span&gt;';
-        $expected = '<span style="color:red">This is HTML</span>';
-        $this->assertEquals($expected, unhtmlspecialchars($input));
-    }
-
     public function testUnEsc()
     {
         $input = '&lt;span style=&quot;color:red&quot;&gt;This is HTML&lt;/span&gt;';

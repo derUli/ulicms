@@ -184,7 +184,7 @@ function replaceOtherShortCodes(string $string): string
         $matchCount = count($match[0]);
         for ($i = 0; $i < $matchCount; $i++) {
             $placeholder = $match[0][$i];
-            $id = unhtmlspecialchars($match[1][$i]);
+            $id = _unesc($match[1][$i]);
             $id = (int)$id;
 
             $page = ContentFactory::getByID($id);
