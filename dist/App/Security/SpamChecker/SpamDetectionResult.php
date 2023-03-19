@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Security\SpamChecker;
 
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
 // This class is used to show a user if his command was
 // detected as spam.
 class SpamDetectionResult
