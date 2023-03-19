@@ -1,5 +1,7 @@
 <?php
 
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
 class Article extends Page
 {
     // FIXME: Variablen alle private machen
