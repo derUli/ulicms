@@ -9,7 +9,9 @@ defined('ULICMS_ROOT') or exit('no direct script access allowed');
 use ModuleHelper;
 use Template;
 
-// this class contains methods to build input fields
+/**
+ * This class contains methods to build input fields
+ */
 class Input
 {
     /**
