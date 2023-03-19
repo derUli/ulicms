@@ -4,8 +4,16 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\PHPMailer;
 use App\Constants\EmailModes;
 
+/**
+ * Send Mails
+ */
 class Mailer
 {
+    /**
+     * Split mail header string to array
+     * @param string $headers
+     * @return array
+     */
     public static function splitHeaders(string $headers): array
     {
         $header_array = [];
@@ -22,12 +30,21 @@ class Mailer
         return $header_array;
     }
 
+    /**
+     * Send email
+     * @param string $to
+     * @param string $subject
+     * @param string $message
+     * @param string $headers
+     * @return bool
+     */
     public static function send(
         string $to,
         string $subject,
         string $message,
         string $headers = ''
     ): bool {
+        // Use PHP Mail or SMTP
         $mode = Settings::get("email_mode") ?
                 Settings::get("email_mode") : EmailModes::INTERNAL;
 
@@ -49,6 +66,10 @@ class Mailer
         );
     }
 
+    /**
+     * Get mail logger
+     * @return Closure
+     */
     public static function getMailLogger(): Closure
     {
         return function ($str, $level) {
@@ -59,11 +80,16 @@ class Mailer
         };
     }
 
+    /**
+     * Apply attributes to PHPMailer
+     * @param PHPMailer $mailer
+     * @return PHPMailer
+     */
     protected static function setPHPMailerAttributes(PHPMailer $mailer): PHPMailer
     {
         $mailer->SMTPSecure = Settings::get("smtp_encryption");
 
-        // disable verification of ssl certificates
+        // Disable verification of ssl certificates
         // this option makes the mail transfer insecure
         // use this only if it's unavoidable
         if (Settings::get("smtp_no_verify_certificate")) {
@@ -91,6 +117,11 @@ class Mailer
         return $mailer;
     }
 
+    /**
+     * Initiate PHPMailer
+     * @param string $mode
+     * @return PHPMailer|null
+     */
     public static function getPHPMailer(
         string $mode = EmailModes::INTERNAL
     ): ?PHPMailer {
@@ -113,6 +144,15 @@ class Mailer
         return $mailer;
     }
 
+    /**
+     * Send EMail with PHPMailer
+     * @param string $to
+     * @param string $subject
+     * @param string $message
+     * @param string $headers
+     * @param string $mode
+     * @return bool
+     */
     public static function sendWithPHPMailer(
         string $to,
         string $subject,
