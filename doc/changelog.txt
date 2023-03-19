@@ -1,5 +1,8 @@
 ===== Neues in UliCMS 2023.2 =====
 
+Neue Features:
+* Kompatiblität mit UliCMS 2023.2
+
 Entfernte Features:
 * Experteneinstellungen
 
