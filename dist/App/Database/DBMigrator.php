@@ -144,6 +144,10 @@ class DBMigrator
         }
     }
 
+    /**
+     * Remove migrations of the component from dbtrack
+     * @return bool
+     */
     public function resetDBTrack(): bool
     {
         return Database::pQuery("DELETE FROM {prefix}dbtrack "
@@ -152,6 +156,10 @@ class DBMigrator
                         ), true);
     }
 
+    /**
+     * Truncate dbtrack table
+     * @return void
+     */
     public function resetDBTrackAll(): void
     {
         Database::truncateTable("dbtrack");
