@@ -98,16 +98,6 @@ Noch mehr Text <a href="http://www.ulicms.de" rel="nofollow" target="_blank">htt
         $this->assertEquals($expected, make_links_clickable($input));
     }
 
-    public function testCleanString()
-    {
-        $this->assertEquals("hello-world", cleanString("Hello World"));
-        $this->assertEquals("hello-world", cleanString("Hello World", "-"));
-        $this->assertEquals("hello_world", cleanString("Hello World", "_"));
-        $this->assertEquals(
-            "das-ist-die-grossfraesmaschinenoeffnungstuer",
-            cleanString("Das ist die Großfräsmaschinenöffnungstür.")
-        );
-    }
 
     public function testEsc()
     {

@@ -4,11 +4,6 @@ declare(strict_types=1);
 
 use App\Helpers\StringHelper;
 
-function cleanString(string $string, string $separator = '-'): string
-{
-    return StringHelper::cleanString($string, $separator);
-}
-
 if (!defined("RESPONSIVE_FM")) {
     function sanitize(array & $array): void
     {
