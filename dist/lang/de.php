@@ -356,16 +356,6 @@ add_translation("POSTED_ON_DATE", "Gepostet am %s");
 add_translation("POWERED_BY_ULICMS", "<p class=\"powered-by-App\">Diese Seite läuft mit " . "<a href=\"http://www.ulicms.de\" target=\"_blank\">UliCMS " . cms_version() . "</a></p>");
 add_translation("UNDER_MAINTENANCE", "<h1>Wegen geplanter Wartungsarbeiten kurzzeitig nicht verfügbar. Schau gleich noch einmal vorbei.</h1>");
 
-// Patches
-add_translation("NO_PATCHES_AVAILABLE", "Keine Patches verfügbar");
-add_translation("INSTALL_SELECTED_PATCHES", "Ausgewählte Patches installieren");
-add_translation("WAS_SUCCESSFULLY_INSTALLED", "wurde erfolgreich installiert");
-add_translation("INSTALLATION_OF", "Installation von");
-add_translation("IS_FAILED", "ist fehlgeschlagen");
-add_translation("AVAILABLE_PATCHES", "Verfügbare Patches");
-add_translation("INSTALL_PATCHES", "Patches installieren");
-add_translation("THERE_ARE_PATCHES_AVAILABLE", "Patches sind verfügbar");
-
 // Hilfetexte
 // Videos
 add_translation("VIDEOS", "Videos");
@@ -447,7 +437,6 @@ add_translation("BACK_TO_LOGIN", "Zurück zur Anmeldung");
 add_translation("SECURITY", "Sicherheit");
 
 add_translation("IS_ADMIN", "Ist Admin");
-add_translation("NO_PATCHES_SELECTED", "Keine Patches zur Installation ausgewählt.");
 
 add_translation("LEFT", "Links");
 add_translation("RIGHT", "Rechts");
@@ -486,12 +475,6 @@ add_translation("IMAGE", "Bild");
 add_translation("OG_HELP", "Open Graph Metadaten werden von sozialen Netzwerken wie Facebook benutzt, wenn dort ein Link geteilt wird. Sofern Felder leer gelassen werden, wird ein Standardwert, der in den Einstellungen festgelegt werden kann verwendet.");
 add_translation("OG_DEFAULTS_HELP", "Open Graph Metadaten werden von sozialen Netzwerken wie Facebook benutzt, wenn dort ein Link geteilt wird. Hier können Sie Standardwerte festlegen, die verwendet werden,
 sofern diese Felder bei einer Seite leer gelassen wurden.");
-
-// Patch Management
-add_translation("INSTALLED_PATCHES", "Installierte Patches");
-add_translation("INSTALLED_PATCHES_HELP", "Patches sind Dateien, die Fehler in UliCMS korrigieren.");
-add_translation("TRUNCATE_INSTALLED_PATCHES_LIST", "Liste zurücksetzen");
-add_translation("TRUNCATE_INSTALLED_PATCHES_LIST_CONFIRM", "Achtung! Sie leeren den Index der bereits installierten Patches.\\nPatches werden nicht deinstalliert, lediglich die Einträge in der Datenbank werden gelöscht.\\nMöchten Sie fortfahren?");
 
 // Favicon Upload
 add_translation("HIGH_RESOLUTION", "Hohe Auflösung");

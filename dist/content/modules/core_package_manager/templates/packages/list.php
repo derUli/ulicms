@@ -2,7 +2,6 @@
 
 use App\Security\PermissionChecker;
 use App\Constants\RequestMethod;
-use App\Packages\PatchManager;
 use App\Packages\Theme;
 
 $permissionChecker = new PermissionChecker(get_user_id());
@@ -268,71 +267,6 @@ if ($permissionChecker->hasPermission("list_packages")) {
             </tbody>
         </table>
     </div>
-    <?php
-    $patchManager = new PatchManager();
-    $patches = $patchManager->getInstalledPatches();
-    ?>
-    <?php if ($permissionChecker->hasPermission("patch_management")) { ?>
-        <h2><?php translate("installed_patches"); ?></h2>
-        <?php
-        echo ModuleHelper::buildMethodCallForm(PackageController::class, "truncateInstalledPatches", array(
-            "name" => $theme
-                ), RequestMethod::POST, array(
-            "id" => "truncate-installed-patches",
-            "data-confirm-message" => get_translation("TRUNCATE_INSTALLED_PATCHES_LIST") . "?"
-        ));
-        ?>
-        <div class="row">
-            <div class="col-xs-6">
-                <p>
-                    <a href="index.php?action=upload_patches"
-                       class="btn btn-warning is-ajax"
-                       ><i
-                            class="fa fa-plus"></i> <?php translate("INSTALL_PATCH_FROM_FILE"); ?></a>
-                </p>
-            </div>
-            <div class="col-xs-6 text-right">
-                <p>
-                    <button type="submit" class="btn btn-danger"
-                    <?php
-                    if (count($patches) == 0) {
-                        echo "disabled";
-                    }
-        ?>><i class="fa fa-trash" aria-hidden="true"></i> <?php translate("TRUNCATE_INSTALLED_PATCHES_LIST"); ?></button>
-                </p>
-            </div>
-        </div>
-        <?php echo ModuleHelper::endForm(); ?>
-        <div class="scroll voffset2">
-            <table class="tablesorter" id="patch-list">
-                <thead>
-                    <tr>
-                        <th><?php
-                translate("name");
-        ?></th>
-                        <th><?php translate("description"); ?></th>
-                        <th><?php translate("date"); ?></th>
-                        <th class="actions no-sort"><?php translate("actions"); ?></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($patches as $name => $data) { ?>
-                        <tr>
-                            <td><?php esc($data->name); ?></td>
-                            <td><?php esc($data->description); ?></td>
-                            <td><?php esc($data->date); ?></td>
-                            <td>
-                                <?php if (!empty($data->url)) { ?>
-                                    <a href="<?php esc($data->url) ?>" target="_blank"
-                                       class="btn btn-info icon" title="<?php translate("download_patch"); ?>"><i class="fa fa-download"></i></a>
-                                    <?php } ?>
-                            </td>
-                        </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
-        </div>
-    <?php } ?>
     <?php
     enqueueScriptFile(ModuleHelper::buildRessourcePath(PackageController::MODULE_NAME, "js/list.js"));
     combinedScriptHtml();

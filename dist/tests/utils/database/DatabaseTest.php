@@ -48,7 +48,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase
         $tables = Database::getAllTables();
         $cfg = new CMSConfig();
         $prefix = $cfg->db_prefix;
-        $this->assertGreaterThanOrEqual(21, count($tables));
+        $this->assertGreaterThanOrEqual(20, count($tables));
 
         $this->assertContains("{$prefix}content", $tables);
         $this->assertContains("{$prefix}settings", $tables);

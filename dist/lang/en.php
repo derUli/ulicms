@@ -359,17 +359,6 @@ add_translation("POSTED_ON_DATE", "Posted on %s");
 add_translation("POWERED_BY_ULICMS", "<p class=\"powered-by-App\">This page is powered by " . "<a href=\"http://www.ulicms.de\" target=\"_blank\">UliCMS " . cms_version() . "</a></p>");
 add_translation("UNDER_MAINTENANCE", "<h1>Briefly unavailable for scheduled maintenance. Check back in a minute.</h1>");
 
-// Patches
-add_translation("NO_PATCHES_AVAILABLE", "No patches available");
-add_translation("INSTALL_SELECTED_PATCHES", "Install selected patches");
-add_translation("WAS_SUCCESSFULLY_INSTALLED", "was successfully installed");
-add_translation("INSTALLATION_OF", "Installation of");
-add_translation("IS_FAILED", "is failed!");
-
-add_translation("AVAILABLE_PATCHES", "Available Patches");
-add_translation("INSTALL_PATCHES", "Install Patches");
-
-add_translation("THERE_ARE_PATCHES_AVAILABLE", "Patches are available");
 
 // Videos
 add_translation("VIDEOS", "Videos");
@@ -450,7 +439,6 @@ add_translation("BACK_TO_LOGIN", "Back to login");
 
 add_translation("SECURITY", "Security");
 add_translation("IS_ADMIN", "Is Admin");
-add_translation("NO_PATCHES_SELECTED", "No patches for installation selected.");
 
 add_translation("LEFT", "Left");
 add_translation("RIGHT", "Right");
@@ -488,12 +476,6 @@ add_translation("IMAGE", "Image");
 
 add_translation("OG_HELP", "Open Graph Metadata are used by social networks like Facebook, when someone shares a link. If you let a field empty a default value that can be configured in settings will be used.");
 add_translation("OG_DEFAULTS_HELP", "Open Graph Metadata are used by social networks like Facebook, when someone shares a link. You can set default values here. These are used as fallback if not specified for a page.");
-
-// Patch Management
-add_translation("INSTALLED_PATCHES", "Installed Patches");
-add_translation("INSTALLED_PATCHES_HELP", "Patches are files that fix errors in UliCMS.");
-add_translation("TRUNCATE_INSTALLED_PATCHES_LIST", "Reset List");
-add_translation("TRUNCATE_INSTALLED_PATCHES_LIST_CONFIRM", "Warning! You are about to truncate the list of installed patches.\\nThis will not uninstall any patches. Only database entries will be deleted.\\nDo you want to continue?");
 
 // Favicon Upload
 add_translation("HIGH_RESOLUTION", "High Resolution");

@@ -25,10 +25,6 @@ Settings::set("db_schema_version", $versionNumber);
 
 Settings::set("maintenance_mode", "0");
 
-// Reset tracking of installed patches
-$patchManager = new PatchManager();
-$patchManager->truncateInstalledPatches();
-
 // Clear Cache
 CacheUtil::clearCache();
 

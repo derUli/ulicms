@@ -54,15 +54,6 @@ class PackageControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertNull($controller->_getPackageDownloadUrl(''));
     }
 
-    public function testTruncateInstalledPatches()
-    {
-        $controller = new PackageController();
-        $controller->_truncateInstalledPatches();
-
-        $datasets = Database::selectAll("installed_patches");
-        $this->assertEquals(0, Database::getNumRows($datasets));
-    }
-
     public function testAvailablePackages()
     {
         $controller = new PackageController();

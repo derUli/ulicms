@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use App\Packages\PatchManager;
 use App\Services\Connectors\AvailablePackageVersionMatcher;
 use App\Utils\CacheUtil;
 use Robo\Tasks;
@@ -489,88 +488,12 @@ class RoboFile extends Tasks
     }
 
     /**
-     * get a list of all available patches
-     */
-    public function patchesAvailable()
-    {
-        $available = $this->patchckAvailable();
-        if (!$available) {
-            $this->writeln("No patches available");
-        }
-        $this->writeln(trim($available));
-    }
-
-    private function patchckAvailable()
-    {
-        $patchManager = new PatchManager();
-        return $patchManager->fetchPackageIndex();
-    }
-
-    /**
-     * Truncate list of installed patches in database
-     */
-    public function patchesTruncate(): void
-    {
-        $patchManager = new PatchManager();
-        $patchManager->truncateInstalledPatches();
-    }
-
-    /**
      * Sync installed modules with database
      */
     public function modulesSync(): void
     {
         $modules = new ModuleManager();
         $modules->sync();
-    }
-
-    /**
-     * List installed patches
-     */
-    public function patchesInstalled()
-    {
-        $patchManager = new PatchManager();
-        $installedPatches = $patchManager->getInstalledPatchNames();
-        if (count($installedPatches) == 0) {
-            $this->writeln("No Patches installed");
-            return;
-        }
-        foreach ($installedPatches as $patch) {
-            $this->writeln($patch);
-        }
-    }
-
-    /**
-     * install patches
-     * @param array $patchesToInstall name of the patches to install or "all"
-     */
-    public function patchesInstall(array $patchesToInstall): void
-    {
-        $patchManager = new PatchManager();
-        $available = $this->patchckAvailable();
-        if (!$available) {
-            $this->writeln("no patches available");
-            return;
-        }
-        $availablePatches = $patchManager->getAvailablePatches();
-
-        $filteredPatches = [];
-        foreach ($availablePatches as $patch) {
-            if (in_array($patch->name, $patchesToInstall) ||
-                    in_array("all", $patchesToInstall)) {
-                $filteredPatches[] = $patch;
-            }
-        }
-        // apply patches
-        foreach ($filteredPatches as $patch) {
-            $this->writeln("Apply patch {$patch->name}...");
-            if ($patch->install()) {
-                $this->writeln("Patch {$patch->name} applied");
-            } else {
-                $this->writeln("Installation of patch {$patch->name} failed.");
-                exit(1);
-            }
-        }
     }
 
     /**

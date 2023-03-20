@@ -5,6 +5,7 @@ Neue Features:
 
 Entfernte Features:
 * Experteneinstellungen
+* Patch Manager
 
 Neue API-Methoden:
 * DateTimeHelper::getCurrentTimezone()

@@ -182,17 +182,6 @@ class PackageController extends MainClass
         ];
     }
 
-    public function truncateInstalledPatches(): void
-    {
-        $this->_truncateInstalledPatches();
-        TextResult("ok", HttpStatusCode::OK);
-    }
-
-    public function _truncateInstalledPatches()
-    {
-        Database::truncateTable("installed_patches");
-    }
-
     public function availablePackages(): void
     {
         $html = $this->_availablePackages();

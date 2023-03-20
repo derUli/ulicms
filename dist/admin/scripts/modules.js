@@ -23,9 +23,3 @@ const uninstallTheme = (url, name) => {
     }
     return false;
 };
-
-$("form#truncate_installed_patches").ajaxForm(
-        {
-            success: () =>
-                $("div#inst_patch_slide_container").slideUp()
-        });

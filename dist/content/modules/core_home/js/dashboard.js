@@ -12,16 +12,6 @@ $(() => {
         }
     });
 
-    if ($("#patch-notification").length) {
-        const url = $("#patch-notification").data("url");
-        $.get(url, (data) => {
-            if (data.length > 0) {
-                $("#patch-notification #patch-message").html(data);
-                $("#patch-notification").slideDown();
-            }
-        });
-    }
-
     $("#show_positions").change((event) => {
         setWaitCursor();
 
