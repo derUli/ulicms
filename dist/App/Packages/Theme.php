@@ -9,6 +9,9 @@ defined('ULICMS_ROOT') or exit('no direct script access allowed');
 use function getThemeMeta;
 use function getTemplateDirPath;
 
+/**
+ * This class represents a installed theme
+ */
 class Theme
 {
     private $name = null;
