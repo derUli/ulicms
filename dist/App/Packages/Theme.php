@@ -16,11 +16,19 @@ class Theme
 {
     private $name = null;
 
+    /**
+     * Constructor
+     * @param type $name
+     */
     public function __construct($name)
     {
         $this->name = $name;
     }
 
+    /**
+     * Get version of the theme
+     * @return string|null
+     */
     public function getVersion(): ?string
     {
         return getThemeMeta($this->name, "version");
