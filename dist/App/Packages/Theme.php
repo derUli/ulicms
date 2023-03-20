@@ -26,7 +26,7 @@ class Theme
     }
 
     /**
-     * Get version of the theme
+     * Get version number
      * @return string|null
      */
     public function getVersion(): ?string
@@ -34,6 +34,10 @@ class Theme
         return getThemeMeta($this->name, "version");
     }
 
+    /**
+     * Get the path of the screenshot file
+     * @return string|null
+     */
     public function getScreenshotFile(): ?string
     {
         $screenshotFile = null;
@@ -51,6 +55,10 @@ class Theme
         return $screenshotFile;
     }
 
+    /**
+     * Check if this theme has a screeenshot
+     * @return bool
+     */
     public function hasScreenshot(): bool
     {
         return $this->getScreenshotFile() !== null;
