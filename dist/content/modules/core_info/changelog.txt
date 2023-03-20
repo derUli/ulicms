@@ -5,6 +5,7 @@ Neue Features:
 
 Entfernte Features:
 * Experteneinstellungen
+* Patch Manager
 
 Neue API-Methoden:
 * DateTimeHelper::getCurrentTimezone()
@@ -38,6 +39,12 @@ Entfernte API-Methoden:
 * str_replace_first()
 * br2nlr()
 * unhtmlspecialchars()
+* db_fetch_row()
+* db_fetch_field()
+* db_fetch_array()
+* db_num_fields()
+* cleanString()
+* ImagineHelper::getLibraryName()
 
 ===== Neues in UliCMS 2023.1 =====
 
