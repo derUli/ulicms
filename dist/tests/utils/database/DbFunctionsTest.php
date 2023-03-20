@@ -19,16 +19,6 @@ class DbFunctionsTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(3, db_num_fields());
     }
 
-    public function testDbFetchRow()
-    {
-        $datasets = Database::selectAll("settings");
-        while ($row = db_fetch_row($datasets)) {
-            $this->assertIsNumeric($row[0]);
-            $this->assertNotEmpty($row[1]);
-            $this->assertIsString($row[2]);
-        }
-    }
-
     public function testDbFetchAssoc()
     {
         $datasets = Database::selectAll("settings");

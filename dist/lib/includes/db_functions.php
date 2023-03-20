@@ -39,11 +39,6 @@ function db_fetch_object(?mysqli_result $result)
     return Database::fetchObject($result);
 }
 
-function db_fetch_row(?mysqli_result $result)
-{
-    return Database::fetchRow($result);
-}
-
 function db_num_rows(mysqli_result $result): ?int
 {
     return Database::getNumRows($result);
