@@ -15,8 +15,15 @@ use function file_get_contents_wrapper;
 use function sureRemoveDir;
 use function recurse_copy;
 
+/**
+ * This class is used for handling patches
+ */
 class PatchManager
 {
+    /**
+     * Get names of all installed patches
+     * @return array
+     */
     public function getInstalledPatchNames(): array
     {
         $retval = [];
@@ -29,11 +36,20 @@ class PatchManager
         return $retval;
     }
 
+    /**
+     * Fetch list of all available patches
+     * @param bool $noCache
+     * @return string|null
+     */
     public function fetchPackageIndex(bool $noCache = true): ?string
     {
         return file_get_contents_wrapper($this->getPatchCheckUrl(), $noCache);
     }
 
+    /**
+     * Get patch check URL
+     * @return string
+     */
     protected function getPatchCheckUrl(): string
     {
         $installed_patches = $this->getInstalledPatchNames();
@@ -43,6 +59,10 @@ class PatchManager
         return "https://patches.ulicms.de/?v=" . urlencode(implode('.', $version->getInternalVersion())) . "&installed_patches=" . urlencode($installed_patches);
     }
 
+    /**
+     * Get available patches for this installation
+     * @return array
+     */
     public function getAvailablePatches(): array
     {
         $patches = [];
@@ -64,11 +84,19 @@ class PatchManager
         return $patches;
     }
 
+    /**
+     * Truncate list of installed patches
+     * @return bool
+     */
     public function truncateInstalledPatches(): bool
     {
         return Database::truncateTable("installed_patches");
     }
 
+    /**
+     * Get list of installed patches
+     * @return array
+     */
     public function getInstalledPatches(): array
     {
         $retval = [];
@@ -81,6 +109,15 @@ class PatchManager
         return $retval;
     }
 
+    /**
+     * Installs a patch
+     * @param string $name
+     * @param string $description
+     * @param string $url
+     * @param bool $clear_cache
+     * @param string|null $checksum
+     * @return bool
+     */
     public function installPatch(
         string $name,
         string $description,
