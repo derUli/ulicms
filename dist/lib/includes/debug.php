@@ -1,21 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Registries\LoggerRegistry;
 
 /**
  * Default exception handler
  * @param AccessDeniedException $exception
  */
-function exception_handler($exception)
+function exception_handler(Exception $exception): void
 {
     defined('EXCEPTION_OCCURRED') or define('EXCEPTION_OCCURRED', true);
 
-    // FIXME: what if there is no config class?
     $cfg = class_exists('CMSConfig') ? new CMSConfig() : null;
+    $debug = isset($cfg->debug) ? (bool) $cfg->debug : true;
 
-    $message = $cfg && $cfg->debug ?
+    $message = $debug ?
             $exception : 'An error occurred! See exception_log for details. 😞';
-
     $logger = LoggerRegistry::get('exception_log');
 
     if ($logger) {

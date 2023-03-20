@@ -44,6 +44,7 @@ Entfernte API-Methoden:
 * db_fetch_array()
 * db_num_fields()
 * cleanString()
+* ImagineHelper::getLibraryName()
 
 ===== Neues in UliCMS 2023.1 =====
 
