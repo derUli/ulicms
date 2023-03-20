@@ -13,25 +13,9 @@ function db_query(string $query)
     return Database::query($query);
 }
 
-// Fetch Row in diversen Datentypen
-function db_fetch_array(?mysqli_result $result)
-{
-    return Database::fetchArray($result);
-}
-
-function db_fetch_field(?mysqli_result $result)
-{
-    return Database::fetchField($result);
-}
-
 function db_fetch_assoc(?mysqli_result $result)
 {
     return Database::fetchAssoc($result);
-}
-
-function db_num_fields(): ?int
-{
-    return Database::getNumFieldCount();
 }
 
 function db_fetch_object(?mysqli_result $result)

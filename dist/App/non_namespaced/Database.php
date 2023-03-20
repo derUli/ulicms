@@ -582,7 +582,7 @@ class Database
         $fields_num = self::getNumFieldCount();
         if ($fields_num > 0) {
             for ($i = 0; $i < $fields_num; $i++) {
-                $field = db_fetch_field($result);
+                $field = self::fetchField($result);
                 $retval[] = $field->name;
             }
             sort($retval);

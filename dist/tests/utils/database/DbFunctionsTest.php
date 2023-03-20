@@ -13,11 +13,6 @@ class DbFunctionsTest extends \PHPUnit\Framework\TestCase
         $this->assertStringStartsNotWith("random_table", $tableName);
     }
 
-    public function testDbNumFields()
-    {
-        Database::selectAll("settings");
-        $this->assertEquals(3, db_num_fields());
-    }
 
     public function testDbFetchAssoc()
     {
@@ -36,33 +31,6 @@ class DbFunctionsTest extends \PHPUnit\Framework\TestCase
             $this->assertIsNumeric($row->id);
             $this->assertNotEmpty($row->name);
             $this->assertIsString($row->value);
-        }
-    }
-
-    public function testDbFetchArray()
-    {
-        $datasets = Database::selectAll("settings");
-        while ($row = db_fetch_array($datasets)) {
-            $this->assertIsNumeric($row['id']);
-            $this->assertNotEmpty($row['name']);
-            $this->assertIsString($row["value"]);
-
-            $this->assertIsNumeric($row[0]);
-            $this->assertNotEmpty($row[1]);
-            $this->assertIsString($row[2]);
-        }
-    }
-
-    public function testDbFetchField()
-    {
-        $cfg = new CMSConfig();
-
-        $datasets = Database::selectAll("settings");
-        while ($row = db_fetch_field($datasets)) {
-            $this->assertNotNull($row->name);
-            $this->assertStringEndsWith("settings", $row->table);
-            $this->assertStringEndsWith("settings", $row->orgtable);
-            $this->assertEquals($cfg->db_database, $row->db);
         }
     }
 

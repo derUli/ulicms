@@ -259,7 +259,7 @@ function get_cache_control(): string
     $result = db_query($sql);
     $dataset = null;
 
-    if ($result and db_num_rows($result) > 0) {
+    if ($result && db_num_rows($result) > 0) {
         $dataset = db_fetch_object($result);
         $cacheControl = $dataset->cache_control ? $dataset->cache_control : $cacheControl;
     }

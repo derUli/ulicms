@@ -40,6 +40,9 @@ Entfernte API-Methoden:
 * br2nlr()
 * unhtmlspecialchars()
 * db_fetch_row()
+* db_fetch_field()
+* db_fetch_array()
+* db_num_fields()
 
 ===== Neues in UliCMS 2023.1 =====
 
