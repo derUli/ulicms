@@ -60,9 +60,9 @@ if (!defined("RESPONSIVE_FM")) {
             $safeHosts = null
         ): string {
             $cfg = new CMSConfig();
-            if (is_array($safeHosts) and count($safeHosts) >= 1) {
+            if (is_array($safeHosts) && count($safeHosts) >= 1) {
                 $safeHosts = $safeHosts;
-            } elseif (isset($cfg->safe_hosts) and is_array($cfg->safe_hosts)) {
+            } elseif (isset($cfg->safe_hosts) && is_array($cfg->safe_hosts)) {
                 $safeHosts = $cfg->safe_hosts;
             } else {
                 $safeHosts = array(
@@ -93,7 +93,7 @@ if (!defined("RESPONSIVE_FM")) {
             $safeHosts = null
         ): void {
             $url = self::getSafeRedirectUrl($url, $safeHosts);
-            Request::redirect($url, $status);
+            Response::redirect($url, $status);
         }
 
         public static function sendStatusHeader(?int $nr): bool
