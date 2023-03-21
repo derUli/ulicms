@@ -48,6 +48,7 @@ Entfernte API-Methoden:
 * db_num_fields()
 * cleanString()
 * ulicms_mail()
+* getStatusCodeByNumber()
 
 ===== Neues in UliCMS 2023.1 =====
 

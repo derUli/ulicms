@@ -118,13 +118,6 @@ class RequestTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("en.ulicms.de", get_domain());
     }
 
-    public function testGetStatusCodeByNumber()
-    {
-        $this->assertEquals("200 OK", getStatusCodeByNumber(200));
-        $this->assertEquals("404 Not Found", getStatusCodeByNumber(404));
-        $this->assertEquals("418 I'm a teapot", getStatusCodeByNumber(418));
-    }
-
     public function testGetReferrer()
     {
         $_SERVER['HTTP_REFERER'] = "https://www.google.de/?q=Hallo%20Welt";

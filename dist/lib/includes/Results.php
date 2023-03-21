@@ -110,7 +110,7 @@ function ExceptionResult(string $message, int $status = 500): void
     $size = getStringLengthInBytes($content);
     if (!TestHelper::isRunningPHPUnit()) {
         send_header($_SERVER['SERVER_PROTOCOL'] . " "
-                . getStatusCodeByNumber((int)$status));
+                . Response::getStatusCodeByNumber((int)$status));
         send_header("Content-Type: text/html; charset=UTF-8");
         send_header("Content-length: $size");
     }

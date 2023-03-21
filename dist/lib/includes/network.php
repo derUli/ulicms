@@ -63,7 +63,7 @@ function get_host(): string
 // Übersetzung HTTP Status Code => Name
 function getStatusCodeByNumber(int $nr)
 {
-    return Request::getStatusCodeByNumber($nr);
+    return Response::getStatusCodeByNumber($nr);
 }
 
 function get_request_uri(): ?string

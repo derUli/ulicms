@@ -62,12 +62,6 @@ class Request
         return (isset($_POST[$name]) or isset($_GET[$name]));
     }
 
-    // Übersetzung HTTP Status Code => Name
-    public static function getStatusCodeByNumber(int $nr): string
-    {
-        return Response::getStatusCodeByNumber($nr);
-    }
-
     // Weiterleitung per Location header;
     public static function redirect(
         string $url = 'http://www.ulicms.de',
