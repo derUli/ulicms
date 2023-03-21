@@ -2,6 +2,7 @@
 
 use App\Helpers\NumberFormatHelper;
 use App\Helpers\DateTimeHelper;
+use App\Packages\SinPackageInstaller;
 
 $permissionChecker = new ACL();
 if (!$permissionChecker->hasPermission("install_packages")) {

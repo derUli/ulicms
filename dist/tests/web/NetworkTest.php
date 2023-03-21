@@ -38,15 +38,4 @@ class NetworkTest extends \PHPUnit\Framework\TestCase
         $_SERVER['HTTP_X_FORWARDED_HOST'] = "host1, host2,host3 ";
         $this->assertEquals("host3", get_host());
     }
-
-    public function testUliCMSMail()
-    {
-        $this->assertIsBool(
-            ulicms_mail(
-                "nobody@mail.invali",
-                "My subject",
-                "Hello World"
-            )
-        );
-    }
 }

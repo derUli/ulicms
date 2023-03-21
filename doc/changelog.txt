@@ -22,6 +22,7 @@ API-Änderungen:
 * DBMigrator in Namespace App\Database verschoben
 * AntispamHelper in Namespace App\Helpers verschoben
 * Mailer nach App\Utils verschoben
+* SinPackageInstaller nach App\Packages verschoben
 
 Entfernte API-Methoden:
 * ImagineHelper::getLibraryName()

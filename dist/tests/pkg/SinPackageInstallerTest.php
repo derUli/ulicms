@@ -1,6 +1,6 @@
 <?php
 
-use App\Exceptions\NotImplementedException;
+use App\Packages\SinPackageInstaller;
 
 class SinPackageInstallerTest extends \PHPUnit\Framework\TestCase
 {

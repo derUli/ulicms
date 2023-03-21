@@ -9,6 +9,7 @@ use App\Exceptions\SqlException;
 use App\Constants\DefaultValues;
 use App\Database\DBMigrator;
 use App\Helpers\DateTimeHelper;
+use App\Packages\SinPackageInstaller;
 
 /**
  * This is project's console commands configuration for Robo task runner.

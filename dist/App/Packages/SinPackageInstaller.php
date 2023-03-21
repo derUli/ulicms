@@ -2,7 +2,14 @@
 
 declare(strict_types=1);
 
+namespace App\Packages;
+
 use App\Utils\File;
+use Path;
+use Database;
+use UliCMSVersion;
+use PackageManager;
+use App\Utils\VersionComparison;
 
 /**
  * Util to install Simple Install packages.
@@ -149,24 +156,25 @@ class SinPackageInstaller
 
         $version_not_supported = false;
 
-        if (isset($data["compatible_from"]) && !empty($data["compatible_from"]) && !\App\Utils\VersionComparison::compare($version, $data["compatible_from"], ">=")) {
+        if (isset($data["compatible_from"]) && !empty($data["compatible_from"]) && !VersionComparison::compare($version, $data["compatible_from"], ">=")) {
             $version_not_supported = true;
         }
 
-        if (isset($data["compatible_to"]) && !empty($data["compatible_to"]) && !\App\Utils\VersionComparison::compare($version, $data["compatible_to"], "<=")) {
+        if (isset($data["compatible_to"]) && !empty($data["compatible_to"]) && !VersionComparison::compare($version, $data["compatible_to"], "<=")) {
             $version_not_supported = true;
         }
 
         $phpVersionSupported = true;
 
         // if package requires a specific php version check it
-        if (isset($data["min_php_version"]) && !empty($data["min_php_version"]) && !\App\Utils\VersionComparison::compare(phpversion(), $data["min_php_version"], ">=")) {
+        if (isset($data["min_php_version"]) && !empty($data["min_php_version"]) && !VersionComparison::compare(phpversion(), $data["min_php_version"], ">=")) {
             $phpVersionSupported = false;
         }
 
-        if (isset($data["max_php_version"]) && !empty($data["max_php_version"]) && !\App\Utils\VersionComparison::compare(phpversion(), $data["max_php_version"], "<=")) {
+        if (isset($data["max_php_version"]) && !empty($data["max_php_version"]) && !VersionComparison::compare(phpversion(), $data["max_php_version"], "<=")) {
             $phpVersionSupported = false;
         }
+
         if (!$phpVersionSupported) {
             $this->errors[] = get_translation("php_version_x_not_supported", array(
                 "%version%" => phpversion()
@@ -181,7 +189,7 @@ class SinPackageInstaller
         if (
             isset($data["min_mysql_version"]) &&
             !empty($data["min_mysql_version"]) &&
-            !\App\Utils\VersionComparison::compare($mysqlVersion, $data["min_mysql_version"], ">=")
+            !VersionComparison::compare($mysqlVersion, $data["min_mysql_version"], ">=")
         ) {
             $mysqlVersionSupported = false;
         }
@@ -189,7 +197,7 @@ class SinPackageInstaller
         if (
             isset($data["max_mysql_version"]) &&
             !empty($data["max_mysql_version"]) &&
-            !\App\Utils\VersionComparison::compare(
+            !VersionComparison::compare(
                 $mysqlVersion,
                 $data["max_mysql_version"],
                 "<="

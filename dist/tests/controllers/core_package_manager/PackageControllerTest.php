@@ -1,5 +1,7 @@
 <?php
 
+use App\Packages\SinPackageInstaller;
+
 class PackageControllerTest extends \PHPUnit\Framework\TestCase
 {
     private $testUser = null;
