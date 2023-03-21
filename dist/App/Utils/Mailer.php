@@ -1,9 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
+namespace App\Utils;
+
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\PHPMailer;
 use App\Constants\EmailModes;
 use App\Registries\LoggerRegistry;
+use Settings;
+use Closure;
 
 /**
  * Send Mails

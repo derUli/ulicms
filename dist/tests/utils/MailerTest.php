@@ -4,6 +4,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use App\Constants\EmailModes;
 use PHPMailer\PHPMailer\SMTP;
 use App\Registries\LoggerRegistry;
+use App\Utils\Mailer;
 
 class MailerTest extends \PHPUnit\Framework\TestCase
 {

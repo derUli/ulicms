@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use App\Utils\Mailer;
+
 /**
  * Reset admin user password
  */

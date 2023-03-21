@@ -1,6 +1,7 @@
 <?php
 
 use App\Helpers\AntiSpamHelper;
+use App\Utils\Mailer;
 
 class Forms
 {

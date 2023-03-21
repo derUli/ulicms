@@ -7,6 +7,7 @@ use App\Security\PermissionChecker;
 use App\Security\Hash;
 use App\Models\Users\GroupCollection;
 use App\Constants\HtmlEditor;
+use App\Utils\Mailer;
 
 /**
  * User model
