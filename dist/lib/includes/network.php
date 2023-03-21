@@ -97,15 +97,6 @@ function is_ssl(): bool
     return Request::isSSL();
 }
 
-function ulicms_mail(
-    string $to,
-    string $subject,
-    string $message,
-    ?string $headers = ''
-): bool {
-    return Mailer::send($to, $subject, $message, $headers);
-}
-
 function send_header(string $header): bool
 {
     $headers = Vars::get("http_headers");

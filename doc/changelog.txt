@@ -24,6 +24,7 @@ API-Änderungen:
 * Mailer nach App\Utils verschoben
 
 Entfernte API-Methoden:
+* ImagineHelper::getLibraryName()
 * StringHelper::isNullOrEmpty()
 * StringHelper::isNullOrWhitespace()
 * StringHelper::isNotNullOrEmpty()
@@ -45,7 +46,7 @@ Entfernte API-Methoden:
 * db_fetch_array()
 * db_num_fields()
 * cleanString()
-* ImagineHelper::getLibraryName()
+* ulicms_mail()
 
 ===== Neues in UliCMS 2023.1 =====
 
