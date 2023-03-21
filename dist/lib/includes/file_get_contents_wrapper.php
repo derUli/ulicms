@@ -85,6 +85,11 @@ function file_get_contents_wrapper(
     return $content;
 }
 
+/**
+ * Check if an URL exists
+ * @param string $url
+ * @return bool
+ */
 function curl_url_exists(string $url): bool
 {
     $timeout = 10;
