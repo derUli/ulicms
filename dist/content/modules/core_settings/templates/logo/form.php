@@ -1,4 +1,5 @@
 <?php
+use App\Helpers\ImagineHelper;
 
 use function App\HTML\imageTag;
 

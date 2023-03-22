@@ -8,6 +8,7 @@ use App\Security\Hash;
 use App\Models\Users\GroupCollection;
 use App\Constants\HtmlEditor;
 use App\Utils\Mailer;
+use App\Helpers\ImagineHelper;
 
 /**
  * User model

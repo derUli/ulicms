@@ -2,7 +2,13 @@
 
 declare(strict_types=1);
 
+namespace App\Helpers;
+
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
+use Helper;
 use Imagine\Image\AbstractImagine;
+use Imagine\Gd\Imagine;
 
 /**
  * Helper methods for Imagine
@@ -18,6 +24,6 @@ class ImagineHelper extends Helper
      */
     public static function getImagine(): ?AbstractImagine
     {
-        return new Imagine\Gd\Imagine();
+        return new Imagine();
     }
 }

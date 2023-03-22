@@ -23,6 +23,7 @@ API-Änderungen:
 * AntispamHelper in Namespace App\Helpers verschoben
 * Mailer nach App\Utils verschoben
 * SinPackageInstaller nach App\Packages verschoben
+* ImagineHelper verschoben nach App\Helpers
 
 Entfernte API-Methoden:
 * ImagineHelper::getLibraryName()

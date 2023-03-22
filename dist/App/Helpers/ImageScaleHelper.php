@@ -8,7 +8,7 @@ defined('ULICMS_ROOT') or exit('no direct script access allowed');
 
 use Helper;
 use Settings;
-use ImagineHelper;
+use App\Helpers\ImagineHelper;
 use Imagine\Image\Box;
 use Imagine\Image\ImageInterface;
 
