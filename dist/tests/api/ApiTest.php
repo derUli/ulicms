@@ -155,7 +155,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(39, getStringLengthInBytes("Das ist die Lösung für die Änderung."));
     }
 
-
     public function testGetJqueryUrl()
     {
         $this->assertEquals("node_modules/jquery/dist/jquery.min.js", get_jquery_url());
