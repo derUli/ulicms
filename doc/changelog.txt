@@ -63,6 +63,7 @@ Entfernte API-Methoden:
 * poweredByUliCMS()
 * Template::getPoweredByUliCMS()
 * Template::poweredByUliCMS()
+* headline()
 
 ===== Neues in UliCMS 2023.1 =====
 

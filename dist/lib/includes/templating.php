@@ -534,11 +534,6 @@ function get_headline(?string $ipage = null): string
     return get_title($ipage, true);
 }
 
-function headline(?string $ipage = null): void
-{
-    echo get_headline($ipage);
-}
-
 function apply_filter($text, string $type)
 {
     $modules = getAllModules();

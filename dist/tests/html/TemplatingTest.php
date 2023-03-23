@@ -469,13 +469,6 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         $this->assertNotEmpty(ob_get_clean());
     }
 
-    public function testHeadline()
-    {
-        ob_start();
-        headline();
-        $this->assertNotEmpty(ob_get_clean());
-    }
-
     public function testOgTags()
     {
         ob_start();
