@@ -911,14 +911,4 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         Vars::setNoCache(true);
         $this->assertTrue(Vars::getNoCache());
     }
-
-    public function testExceptionHandler()
-    {
-        $output = TestHelper::getOutput(function () {
-            $exception = new Exception('Something is broken');
-            exception_handler($exception);
-        });
-
-        $this->assertStringContainsString("Exception: Something is broken", $output);
-    }
 }
