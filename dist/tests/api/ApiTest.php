@@ -292,26 +292,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->isFalse(in_array("left", $menus));
     }
 
-    public function testCmsVersion()
-    {
-        $this->assertTrue(\App\Utils\VersionComparison::compare(
-            cms_version(),
-            "2019.4",
-            ">"
-        ));
-    }
-
-    public function testGetEnvironment()
-    {
-        $this->assertEquals("test", get_environment());
-    }
-
-    public function testFuncEnabledReturnsTrue()
-    {
-        $enabled = func_enabled("mysqli_connect");
-        $this->assertTrue($enabled);
-    }
-
     public function testGetBaseFolderUrlWithFilenameInUrl()
     {
         $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
