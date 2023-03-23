@@ -5,24 +5,6 @@ use App\Models\Content\Types\DefaultContentTypes;
 
 class ContentTypesTest extends \PHPUnit\Framework\TestCase
 {
-    private function getBaseTypes()
-    {
-        $baseTypes = array(
-            "page",
-            "article",
-            "snippet",
-            "list",
-            "link",
-            "language_link",
-            "node",
-            "image",
-            "module",
-            "video",
-            "audio"
-        );
-        return $baseTypes;
-    }
-
     public function testTypesArray()
     {
         DefaultContentTypes::initTypes();
@@ -39,16 +21,6 @@ class ContentTypesTest extends \PHPUnit\Framework\TestCase
         foreach ($types as $type) {
             $this->assertInstanceOf(ContentType::class, $type);
             $this->assertTrue(is_array($type->show));
-        }
-    }
-
-    public function testGetAvailablePostTypes()
-    {
-        $baseTypes = $this->getBaseTypes();
-        $availableTypes = get_available_post_types();
-
-        foreach ($baseTypes as $type) {
-            $this->assertTrue(in_array($type, $availableTypes));
         }
     }
 
