@@ -2,7 +2,15 @@
 
 declare(strict_types=1);
 
-use App\HTML\Input as Input;
+namespace App\Security;
+
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
+use App\HTML\Input;
+use Settings;
+use Request;
+use ViewBag;
+use Template;
 
 /**
  * Handling GDPR / DSGVO privacy checkbox

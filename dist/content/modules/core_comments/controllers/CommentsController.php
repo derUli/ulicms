@@ -9,6 +9,7 @@ use App\Exceptions\NotImplementedException;
 use App\Constants\CommentStatus;
 use App\Utils\CacheUtil;
 use zz\Html\HTMLMinify;
+use App\Security\PrivacyCheckbox;
 
 class CommentsController extends MainClass
 {

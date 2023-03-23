@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Constants\ModuleEventConstants;
+use App\Security\PrivacyCheckbox;
 
 function getModuleMeta($module, $attrib = null)
 {
