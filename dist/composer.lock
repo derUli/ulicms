@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "47465f000693e0ce54b50173c57e973c",
+    "content-hash": "bbd78a77318d74a864cd7cf70c7563c9",
     "packages": [
         {
             "name": "chrisjean/php-ico",
@@ -1719,16 +1719,16 @@
         },
         {
             "name": "jessedp/php-timezones",
-            "version": "v0.2.2",
+            "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jessedp/php-timezones.git",
-                "reference": "d8583ce37a73001471dcda0a0136835369013577"
+                "reference": "410589d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jessedp/php-timezones/zipball/d8583ce37a73001471dcda0a0136835369013577",
-                "reference": "d8583ce37a73001471dcda0a0136835369013577",
+                "url": "https://api.github.com/repos/jessedp/php-timezones/zipball/410589d",
+                "reference": "410589d",
                 "shasum": ""
             },
             "require": {
@@ -1738,6 +1738,7 @@
             "require-dev": {
                 "phpunit/phpunit": "^8.0|^9.0"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -1772,9 +1773,9 @@
             ],
             "support": {
                 "issues": "https://github.com/jessedp/php-timezones/issues",
-                "source": "https://github.com/jessedp/php-timezones/tree/v0.2.2"
+                "source": "https://github.com/jessedp/php-timezones/tree/v0.2.3"
             },
-            "time": "2020-06-14T19:23:22+00:00"
+            "time": "2023-03-23T17:52:12+00:00"
         },
         {
             "name": "jfcherng/php-color-output",
@@ -8233,7 +8234,8 @@
     "stability-flags": {
         "phpgangsta/googleauthenticator": 20,
         "katzgrau/klogger": 20,
-        "deruli/html-minifier": 20
+        "deruli/html-minifier": 20,
+        "jessedp/php-timezones": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
