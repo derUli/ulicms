@@ -66,33 +66,29 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         Database::query("delete from {prefix}content where slug = 'testdisableshortcodes' or title like 'Unit Test%'", true);
     }
 
-    public function testGetRequestedPageNameWithSlugSet()
+    public function testGetSlugWithSlugSet()
     {
         $_GET ["slug"] = "foobar";
         $this->assertEquals("foobar", get_slug());
-        $this->assertEquals("foobar", get_requested_pagename());
         $this->cleanUp();
     }
 
-    public function testGetRequestedPageNameWithoutSlug()
+    public function testGetSlugWithoutSlug()
     {
         $this->cleanUp();
         $this->assertEquals(get_frontpage(), get_slug());
-        $this->assertEquals(get_frontpage(), get_requested_pagename());
     }
 
-    public function testGetRequestedPageNameWithNull()
+    public function testGetSlugWithNull()
     {
         $_GET ["slug"] = null;
         $this->assertEquals(get_frontpage(), get_slug());
-        $this->assertEquals(get_frontpage(), get_requested_pagename());
     }
 
-    public function testGetRequestedPageNameWithEmptyString()
+    public function testGetSlugWithEmptyString()
     {
         $_GET ["slug"] = '';
         $this->assertEquals(get_frontpage(), get_slug());
-        $this->assertEquals(get_frontpage(), get_requested_pagename());
     }
 
     public function testIsHomeTrue()

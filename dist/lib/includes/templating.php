@@ -612,11 +612,6 @@ function get_slug(): string
     return !empty($_GET["slug"]) ? $_GET["slug"] : get_frontpage();
 }
 
-function get_requested_pagename(): string
-{
-    return get_slug();
-}
-
 function set_requested_pagename(
     string $slug,
     ?string $language = null
