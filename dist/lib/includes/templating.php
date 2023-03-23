@@ -382,10 +382,6 @@ function get_category(): string
     ) ?? '';
 }
 
-function category(): void
-{
-    Template::escape(get_category());
-}
 
 function get_body_classes(): string
 {

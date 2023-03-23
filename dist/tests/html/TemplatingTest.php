@@ -493,13 +493,6 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         // TODO: Check if there are links in the returned html
     }
 
-    public function testCategory()
-    {
-        ob_start();
-        category();
-        $this->assertEquals("Allgemein", ob_get_clean());
-    }
-
     public function testHomepageTitle()
     {
         ob_start();
