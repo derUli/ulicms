@@ -382,12 +382,6 @@ function get_category(): string
     ) ?? '';
 }
 
-
-function get_body_classes(): string
-{
-    return Template::getBodyClasses();
-}
-
 function body_classes(): void
 {
     echo Template::getBodyClasses();

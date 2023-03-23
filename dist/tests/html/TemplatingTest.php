@@ -349,27 +349,6 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue(str_contains($baseMetas, '<meta charset="utf-8"/>'));
     }
 
-    public function testGetBodyClassesDesktop()
-    {
-        $_SESSION['language'] = 'de';
-        $_SERVER['HTTP_USER_AGENT'] = "Mozilla/5.0 (Windows NT 6.1;" .
-                " Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)" .
-                " Chrome/63.0.3239.132 Safari/537.36";
-
-        $cssClasses = get_body_classes();
-        $this->assertStringContainsString(
-            "desktop",
-            $cssClasses
-        );
-        $this->assertStringNotContainsString(
-            "mobile",
-            $cssClasses
-        );
-
-        Vars::delete("id");
-        Vars::delete("active");
-    }
-
     public function testBodyClassesDesktop()
     {
         $_SESSION['language'] = 'de';

@@ -59,6 +59,8 @@ Entfernte API-Methoden:
 * get_edit_button()
 * include_jquery()
 * category()
+* get_body_classes()
+
 
 ===== Neues in UliCMS 2023.1 =====
 
