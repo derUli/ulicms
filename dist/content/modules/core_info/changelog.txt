@@ -21,8 +21,12 @@ API-Änderungen:
 * MenuEntry in Namespace App\Backend\Menu verschoben
 * DBMigrator in Namespace App\Database verschoben
 * AntispamHelper in Namespace App\Helpers verschoben
+* Mailer nach App\Utils verschoben
+* SinPackageInstaller nach App\Packages verschoben
+* ImagineHelper verschoben nach App\Helpers
 
 Entfernte API-Methoden:
+* ImagineHelper::getLibraryName()
 * StringHelper::isNullOrEmpty()
 * StringHelper::isNullOrWhitespace()
 * StringHelper::isNotNullOrEmpty()
@@ -44,7 +48,8 @@ Entfernte API-Methoden:
 * db_fetch_array()
 * db_num_fields()
 * cleanString()
-* ImagineHelper::getLibraryName()
+* ulicms_mail()
+* getStatusCodeByNumber()
 
 ===== Neues in UliCMS 2023.1 =====
 
