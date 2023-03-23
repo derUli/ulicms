@@ -3,6 +3,7 @@
 use App\Models\Content\Language;
 use App\Utils\CacheUtil;
 use App\Constants\HtmlEditor;
+use App\Helpers\TestHelper;
 
 class ApiTest extends \PHPUnit\Framework\TestCase
 {
@@ -728,6 +729,15 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertNotContains("bar", $menus);
     }
 
+    public function testGetAllMenusOnlyUsed()
+    {
+        $menus = getAllMenus(true);
+        $this->assertContains("top", $menus);
+        $this->assertContains("not_in_menu", $menus);
+        $this->assertNotContains("foo", $menus);
+        $this->assertNotContains("bar", $menus);
+    }
+
     public function testGetLangConfig()
     {
         Settings::setLanguageSetting("my_setting", "Lampukisch");
@@ -900,5 +910,15 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse(Vars::getNoCache());
         Vars::setNoCache(true);
         $this->assertTrue(Vars::getNoCache());
+    }
+
+    public function testExceptionHandler()
+    {
+        $output = TestHelper::getOutput(function () {
+            $exception = new Exception('Something is broken');
+            exception_handler($exception);
+        });
+
+        $this->assertStringContainsString("Exception: Something is broken", $output);
     }
 }
