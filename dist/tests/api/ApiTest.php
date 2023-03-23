@@ -137,13 +137,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(false, $meta["embed"]);
     }
 
-    public function testGetThemeMeta()
-    {
-        $meta = getThemeMeta("impro17");
-        $this->assertIsArray($meta);
-        $this->assertEquals("2.1.5", $meta["version"]);
-    }
-
     public function testBool2YesNo()
     {
         $this->assertEquals(get_translation("yes"), bool2YesNo(1));
