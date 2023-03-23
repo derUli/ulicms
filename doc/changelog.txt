@@ -64,6 +64,7 @@ Entfernte API-Methoden:
 * Template::getPoweredByUliCMS()
 * Template::poweredByUliCMS()
 * headline()
+* is_frontpage()
 
 ===== Neues in UliCMS 2023.1 =====
 

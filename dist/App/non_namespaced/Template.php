@@ -15,7 +15,7 @@ class Template
     {
         $str = get_ID() ? "page-id-" . get_ID() . " " : "";
 
-        $str .= (is_frontpage() ? "home " : "");
+        $str .= (is_home() ? "home " : "");
         $str .= (is_404() ? "error404 " : "");
         $str .= (is_403() ? "error403 " : "");
         $str .= ((is_404() or is_403()) ? "errorPage " : "page ");

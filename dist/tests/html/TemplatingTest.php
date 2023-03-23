@@ -105,20 +105,6 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         $this->cleanUp();
     }
 
-    public function testIsFrontPageTrue()
-    {
-        $_GET ["slug"] = get_frontpage();
-        $this->assertTrue(is_frontpage());
-        $this->cleanUp();
-    }
-
-    public function testIsFrontPageFalse()
-    {
-        $_GET ["slug"] = "nothome";
-        $this->assertFalse(is_frontpage());
-        $this->cleanUp();
-    }
-
     public function testGetType()
     {
         $content1 = new Module_Page();

@@ -636,11 +636,6 @@ function is_home(): bool
     return get_slug() === get_frontpage();
 }
 
-function is_frontpage(): bool
-{
-    return is_home();
-}
-
 function is_200(): bool
 {
     return check_status() == "200 OK";

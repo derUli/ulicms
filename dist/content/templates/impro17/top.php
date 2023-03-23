@@ -51,7 +51,7 @@ combinedStylesheetHtml();
             <?php }
   ?>
         </div>
-        <?php if (is_frontpage()) { ?>
+        <?php if (is_home()) { ?>
             <div class="jumbotron">
                 <?php
       if (Settings::get('logo_disabled') == 'no') {
