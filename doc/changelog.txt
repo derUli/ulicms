@@ -52,6 +52,7 @@ Entfernte API-Methoden:
 * getStatusCodeByNumber()
 * getPageIDBySlug()
 * getFieldsForCustomType()
+* fcflush()
 
 ===== Neues in UliCMS 2023.1 =====
 

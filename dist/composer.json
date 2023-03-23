@@ -84,7 +84,6 @@
             "lib/includes/minify.php",
             "lib/includes/modules.php",
             "lib/includes/network.php",
-            "lib/includes/output.php",
             "lib/includes/packages.php",
             "lib/includes/pages.php",
             "lib/includes/path.php",
