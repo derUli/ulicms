@@ -837,11 +837,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertStringEndsWith("content/modules/my_module/uninstall.php", getModuleUninstallScriptPath2("my_module"));
     }
 
-    public function testGetFieldsForCustomType()
-    {
-        $this->assertCount(0, getFieldsForCustomType("gibts_nicht"));
-    }
-
     public function testGetShortlink()
     {
         $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
