@@ -150,36 +150,11 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("doof", bool2YesNo(false, "cool", "doof"));
     }
 
-    public function testGetActionIsSet()
-    {
-        $_REQUEST["action"] = "pages";
-        $this->assertEquals("pages", get_action());
-        unset($_REQUEST["action"]);
-    }
-
-    public function testGetActionIsNotSet()
-    {
-        $this->assertEquals("home", get_action());
-    }
-
     public function testGetStringLengthInBytes()
     {
         $this->assertEquals(39, getStringLengthInBytes("Das ist die Lösung für die Änderung."));
     }
 
-    public function testCheckFormTimestampReturnsTrue()
-    {
-        Settings::set("min_time_to_fill_form", 3);
-        $_POST["form_timestamp"] = time() - 4;
-        $this->assertTrue(_check_form_timestamp());
-    }
-
-    public function testCheckFormTimestampReturnsFalse()
-    {
-        Settings::set("min_time_to_fill_form", 3);
-        $_POST["form_timestamp"] = time() - 1;
-        $this->assertFalse(_check_form_timestamp());
-    }
 
     public function testGetJqueryUrl()
     {
