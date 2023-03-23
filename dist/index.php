@@ -257,7 +257,7 @@ do_event("after_content");
 do_event("before_edit_button");
 
 if (!(is_array($disable_functions) && in_array("edit_button", $disable_functions))) {
-    edit_button();
+    Template::editButton();
 }
 
 do_event("after_edit_button");

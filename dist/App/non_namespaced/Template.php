@@ -413,7 +413,7 @@ class Template
             . _esc($description) . '"/>';
         }
 
-        include_jquery();
+        self::jQueryScript();
         do_event("head");
     }
 
@@ -564,7 +564,7 @@ class Template
         if (!is_logged_in()) {
             return $html;
         }
-        
+
         $acl = new PermissionChecker(get_user_id());
         if ($acl->hasPermission('pages') && Vars::getNoCache() && is_200()) {
             $id = get_ID();

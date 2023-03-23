@@ -43,4 +43,22 @@ class ContentTypesTest extends \PHPUnit\Framework\TestCase
             $this->assertFalse($model->isRegular());
         }
     }
+
+       private function getBaseTypes()
+       {
+           $baseTypes = array(
+               "page",
+               "article",
+               "snippet",
+               "list",
+               "link",
+               "language_link",
+               "node",
+               "image",
+               "module",
+               "video",
+               "audio"
+           );
+           return $baseTypes;
+       }
 }

@@ -131,16 +131,6 @@ function get_all_combined_html(): string
     return $html;
 }
 
-function edit_button(): void
-{
-    Template::editButton();
-}
-
-function get_edit_button(): ?string
-{
-    return Template::getEditButton();
-}
-
 function all_combined_html(): void
 {
     echo get_all_combined_html();
@@ -287,28 +277,6 @@ function get_text_position(): string
     return $dataset;
 }
 
-function get_category_id(string $page = null): ?int
-{
-    if (!$page) {
-        $page = get_slug();
-    }
-    $dataset = null;
-    $sql = "SELECT `category_id` FROM " . tbname("content") .
-            " WHERE slug='" . db_escape($page) . "'  AND language='" .
-            db_escape(getCurrentLanguage()) . "'";
-    $result = db_query($sql);
-    if ($result and db_num_rows($result) > 0) {
-        $dataset = db_fetch_object($result);
-        $dataset = intval($dataset->category_id);
-    }
-    return $dataset;
-}
-
-function category_id(?string $page = null): void
-{
-    echo get_category_id($page);
-}
-
 function get_parent(string $page = null): ?int
 {
     if (!$page) {
@@ -324,11 +292,6 @@ function get_parent(string $page = null): ?int
         $parent_id = $dataset->parent_id ? intval($dataset->parent_id) : null;
     }
     return $parent_id;
-}
-
-function include_jquery(): void
-{
-    Template::jQueryScript();
 }
 
 function get_access(?string $page = null): array

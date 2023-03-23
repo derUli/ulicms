@@ -500,13 +500,6 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("Allgemein", ob_get_clean());
     }
 
-    public function testCategoryId()
-    {
-        ob_start();
-        category_id();
-        $this->assertEquals("1", ob_get_clean());
-    }
-
     public function testHomepageTitle()
     {
         ob_start();
@@ -552,42 +545,6 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         $user->save();
 
         return $user;
-    }
-
-    public function testGetEditButtonReturnsHtml()
-    {
-        $user = $this->getTestUser();
-        $user->registerSession(false);
-
-        Vars::setNoCache(true);
-
-        $html = get_edit_button();
-
-        $this->assertStringStartsWith('<div class="ulicms-edit"><a href="admin/?action=pages_edit&amp;page', $html);
-        $this->assertStringEndsWith('class="btn btn-warning btn-edit">Edit</a></div>', $html);
-
-        Vars::setNoCache(false);
-    }
-
-    public function testGetEditButtonReturnsEmptyString()
-    {
-        $this->assertEmpty(get_edit_button());
-    }
-
-    public function testEditButtonOutputsHtml()
-    {
-        $user = $this->getTestUser();
-        $user->registerSession(false);
-
-        Vars::setNoCache(true);
-        ob_start();
-        edit_button();
-        $html = ob_get_clean();
-
-        $this->assertStringStartsWith('<div class="ulicms-edit"><a href="admin/?action=pages_edit&amp;page', $html);
-        $this->assertStringEndsWith('class="btn btn-warning btn-edit">Edit</a></div>', $html);
-
-        Vars::setNoCache(false);
     }
 
     public function testGetCacheControl()
