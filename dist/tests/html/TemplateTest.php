@@ -302,24 +302,6 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         $this->assertStringContainsString("://example.co.uk", $html);
     }
 
-    public function testGetPoweredByUliCMS()
-    {
-        $this->assertStringContainsString(
-            "This page is powered by",
-            Template::getPoweredByUliCMS()
-        );
-    }
-
-    public function testPoweredByUliCMS()
-    {
-        ob_start();
-        Template::poweredByUliCMS();
-        $this->assertStringContainsString(
-            "This page is powered by",
-            ob_get_clean()
-        );
-    }
-
     public function testGetHomepageOwner()
     {
         Settings::set("homepage_owner", "John Doe");

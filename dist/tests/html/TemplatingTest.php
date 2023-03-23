@@ -295,16 +295,6 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("<!doctype html>", get_html5_doctype());
     }
 
-    public function testPoweredByUliCMS()
-    {
-        ob_start();
-        poweredByUliCMS();
-        $this->assertStringContainsString(
-            "This page is powered by",
-            ob_get_clean()
-        );
-    }
-
     public function testYear()
     {
         ob_start();

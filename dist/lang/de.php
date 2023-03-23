@@ -340,6 +340,7 @@ add_translation("DO_UPDATE", "Update durchführen");
 add_translation("NONE", "Keine");
 add_translation("MOBILE_DESIGN", "Design für Mobilgeräte");
 
+
 add_translation("ACTION_NOT_FOUND", "Die aufgerufene Aktion ist nicht vorhanden.");
 
 // Login
@@ -353,7 +354,6 @@ add_translation("FORBIDDEN_COTENT", "Sie verfügen nicht über die erforderliche
 
 add_translation("ULICMS_NEWS", "Neuigkeiten zu UliCMS");
 add_translation("POSTED_ON_DATE", "Gepostet am %s");
-add_translation("POWERED_BY_ULICMS", "<p class=\"powered-by-App\">Diese Seite läuft mit " . "<a href=\"http://www.ulicms.de\" target=\"_blank\">UliCMS " . cms_version() . "</a></p>");
 add_translation("UNDER_MAINTENANCE", "<h1>Wegen geplanter Wartungsarbeiten kurzzeitig nicht verfügbar. Schau gleich noch einmal vorbei.</h1>");
 
 // Hilfetexte

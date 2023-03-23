@@ -387,12 +387,6 @@ function body_classes(): void
     echo Template::getBodyClasses();
 }
 
-// Gibt "Diese Seite läuft mit UliCMS" aus
-function poweredByUliCMS(): void
-{
-    Template::poweredByUliCMS();
-}
-
 // Einen zufälligen Banner aus der Datenbank ausgeben
 function random_banner(): void
 {

@@ -530,17 +530,6 @@ class Template
         return ob_get_clean();
     }
 
-    public static function getPoweredByUliCMS(): string
-    {
-        return get_translation('powered_by_ulicms');
-    }
-
-    // Gibt "Diese Seite läuft mit UliCMS" aus
-    public static function poweredByUliCMS(): void
-    {
-        echo self::getPoweredByUliCMS();
-    }
-
     public static function getComments(): string
     {
         if (!is_200()) {
