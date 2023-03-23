@@ -2,18 +2,6 @@
 
 declare(strict_types=1);
 
-// get page id by slug
-function getPageIDBySlug(string $slug): ?int
-{
-    $result = db_query("SELECT slug, id FROM `" . tbname("content")
-            . "` where slug='" . db_escape($slug) . "'");
-    if (db_num_rows($result) > 0) {
-        $row = db_fetch_object($result);
-        return (int)$row->id;
-    }
-    return null;
-}
-
 function getPageSlugByID(?int $id): ?string
 {
     $result = db_query("SELECT slug, id FROM `" . tbname("content")

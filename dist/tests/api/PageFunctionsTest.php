@@ -12,14 +12,6 @@ class PageFunctionsTest extends \PHPUnit\Framework\TestCase
         $this->assertNull(getPageSlugByID(PHP_INT_MAX));
     }
 
-    public function testGetPageIDBySlug()
-    {
-        $allPages = ContentFactory::getAll();
-        $first = $allPages[0];
-        $this->assertEquals($first->id, getPageIDBySlug($first->slug));
-        $this->assertNull(getPageIDBySlug("ich-existiere-wirklich-nicht"));
-    }
-
     public function testGetPageTitleByID()
     {
         $allPages = ContentFactory::getAll();
