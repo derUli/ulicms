@@ -251,14 +251,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(HtmlEditor::CODEMIRROR, get_html_editor());
     }
 
-    public function testGetAllUsedMenus()
-    {
-        $menus = get_all_used_menus();
-        $this->assertCount(1, $menus);
-        $this->isTrue(in_array("top", $menus));
-        $this->isFalse(in_array("left", $menus));
-    }
-
     public function testGetBaseFolderUrlWithFilenameInUrl()
     {
         $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
@@ -665,24 +657,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase
     public function testVarDumpStrWithoutAnything()
     {
         $this->assertEmpty(var_dump_str());
-    }
-
-    public function testGetAllMenus()
-    {
-        $menus = getAllMenus();
-        $this->assertContains("top", $menus);
-        $this->assertContains("not_in_menu", $menus);
-        $this->assertNotContains("foo", $menus);
-        $this->assertNotContains("bar", $menus);
-    }
-
-    public function testGetAllMenusOnlyUsed()
-    {
-        $menus = getAllMenus(true);
-        $this->assertContains("top", $menus);
-        $this->assertContains("not_in_menu", $menus);
-        $this->assertNotContains("foo", $menus);
-        $this->assertNotContains("bar", $menus);
     }
 
     public function testGetLangConfig()

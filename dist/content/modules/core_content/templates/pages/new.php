@@ -181,7 +181,7 @@ if (
                     <select
                         name="menu" size=1>
                             <?php
-            foreach (getAllMenus() as $menu) {
+            foreach (get_all_menus() as $menu) {
                 ?>
                             <option value="<?php echo $menu ?>"
                             <?php
@@ -507,7 +507,7 @@ if (
                     <select name="list_menu" size="1">
                         <option value="">[<?php translate("every"); ?>]</option>
                         <?php
-    foreach (getAllMenus() as $menu) {
+    foreach (get_all_menus() as $menu) {
         ?>
                             <option value="<?php echo $menu; ?>">
                             <?php translate($menu); ?></option>

@@ -18,7 +18,7 @@ function get_all_used_menus(): array
 }
 
 // Gibt die Identifier aller Menüs zurück.
-function getAllMenus(
+function get_all_menus(
     bool $only_used = false,
     bool $read_theme_menus = true
 ): array {

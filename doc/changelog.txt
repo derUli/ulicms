@@ -11,6 +11,7 @@ Neue API-Methoden:
 * DateTimeHelper::getCurrentTimezone()
 * DateTimeHelper::getCurrentLocale()
 * DateTimeHelper::timestampToFormattedDateTime()
+* get_all_menus()
 
 API-Änderungen:
 * StringHelper in Namespace App\Helpers verschoben
@@ -53,6 +54,7 @@ Entfernte API-Methoden:
 * getPageIDBySlug()
 * getFieldsForCustomType()
 * fcflush()
+* getAllMenus()
 
 ===== Neues in UliCMS 2023.1 =====
 

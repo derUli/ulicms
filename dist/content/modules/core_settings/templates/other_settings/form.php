@@ -11,7 +11,7 @@ if (!$permissionChecker->hasPermission("other")) {
     noPerms();
 } else {
     $email_mode = Settings::get("email_mode");
-    $menus = getAllMenus();
+    $menus = get_all_menus();
 
     $max_failed_logins_items = Settings::get("max_failed_logins_items");
 

@@ -52,7 +52,7 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase
 
     public function testGetAllbyMenu()
     {
-        $menus = getAllMenus();
+        $menus = get_all_menus();
 
         foreach ($menus as $menu) {
             $content = ContentFactory::getAllByMenu($menu);
