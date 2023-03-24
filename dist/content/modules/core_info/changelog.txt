@@ -22,9 +22,12 @@ API-Änderungen:
 * MenuEntry in Namespace App\Backend\Menu verschoben
 * DBMigrator in Namespace App\Database verschoben
 * AntispamHelper in Namespace App\Helpers verschoben
-* Mailer nach App\Utils verschoben
-* SinPackageInstaller nach App\Packages verschoben
-* ImagineHelper verschoben nach App\Helpers
+* Mailer in Namespace App\Utils verschoben
+* SinPackageInstaller in Namespace App\Packages verschoben
+* ImagineHelper verschoben in Namespace App\Helpers verschoben
+* PrivacyCheckbox verschoben in Namespace App\Security verschoben
+* Helper verschoben nach App\Helpers
+* PasswordReset verschoben nach App\Models\Users
 
 Entfernte API-Methoden:
 * ImagineHelper::getLibraryName()
