@@ -1,4 +1,7 @@
 <?php
+
+use App\Models\Users\PasswordReset;
+
 if (Settings::get("disable_password_reset")) {
     translate("function_is_disabled");
 } else {

@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Users\PasswordReset;
+
 class PasswordResetTest extends \PHPUnit\Framework\TestCase
 {
     private $testUserId;

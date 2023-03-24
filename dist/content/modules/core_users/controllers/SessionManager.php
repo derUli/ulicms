@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Utils\CacheUtil;
+use App\Models\Users\PasswordReset;
 
 class SessionManager extends Controller
 {

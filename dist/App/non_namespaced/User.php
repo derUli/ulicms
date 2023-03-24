@@ -9,6 +9,7 @@ use App\Models\Users\GroupCollection;
 use App\Constants\HtmlEditor;
 use App\Utils\Mailer;
 use App\Helpers\ImagineHelper;
+use App\Models\Users\PasswordReset;
 
 /**
  * User model

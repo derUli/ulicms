@@ -2,7 +2,15 @@
 
 declare(strict_types=1);
 
+namespace App\Models\Users;
+
 use App\Utils\Mailer;
+use Database;
+use ViewBag;
+use Template;
+use ModuleHelper;
+use Settings;
+use SessionManager;
 
 /**
  * Reset admin user password

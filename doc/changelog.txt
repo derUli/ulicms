@@ -27,6 +27,7 @@ API-Änderungen:
 * ImagineHelper verschoben in Namespace App\Helpers verschoben
 * PrivacyCheckbox verschoben in Namespace App\Security verschoben
 * Helper verschoben nach App\Helpers
+* PasswordReset verschoben nach App\Models\Users
 
 Entfernte API-Methoden:
 * ImagineHelper::getLibraryName()
