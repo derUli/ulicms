@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Models\Content\Language;
 use App\HTML\Form;
 use App\Constants\RequestMethod;
+use App\Helpers\Helper;
 
 class ModuleHelper extends Helper
 {

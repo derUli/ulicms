@@ -8,7 +8,7 @@ defined('ULICMS_ROOT') or exit('no direct script access allowed');
 
 use Closure;
 use Exception;
-use Helper;
+use App\Helpers\Helper;
 
 /**
  * This class contains tools for running in context of unit tests

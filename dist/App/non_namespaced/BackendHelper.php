@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\HTML\Script;
 use App\Utils\File;
 use App\Constants\HtmlEditor;
+use App\Helpers\Helper;
 
 class BackendHelper extends Helper
 {

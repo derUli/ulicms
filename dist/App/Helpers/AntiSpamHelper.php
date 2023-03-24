@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Helpers;
 
-use Helper;
+use App\Helpers\Helper;
 use Settings;
 use Request;
 

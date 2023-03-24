@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Helpers;
 
 use Cocur\Slugify\Slugify;
-use Helper;
+use App\Helpers\Helper;
 
 class StringHelper extends Helper
 {
