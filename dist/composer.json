@@ -54,7 +54,7 @@
         "jaybizzle/laravel-crawler-detect": "^1.3",
         "mobiledetect/mobiledetectlib": "^3.74",
         "jfcherng/php-diff": "^6.13",
-        "jessedp/php-timezones": "dev-main#410589d"
+        "jessedp/php-timezones": "*"
     },
     "require-dev": {
         "spatie/phpunit-snapshot-assertions": "*",

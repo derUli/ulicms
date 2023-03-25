@@ -18,7 +18,6 @@ class DBMigrator
 {
     private $component = null;
     private $folder = null;
-    private $strictMode = true;
 
     // component is an identifier for the module which executes the migrations
     // $folder is the path to an up or down folder
@@ -28,34 +27,6 @@ class DBMigrator
         $this->component = $component;
         $this->folder = $folder;
     }
-
-    /**
-     * Enable strict mode
-     * @return void
-     */
-    public function enableStrictMode(): void
-    {
-        $this->strictMode = true;
-    }
-
-    /**
-     * Disable strict mode
-     * @return void
-     */
-    public function disableStrictMode(): void
-    {
-        $this->strictMode = false;
-    }
-
-    /**
-     * Check if strict mode is enabled
-     * @return bool
-     */
-    public function isStrictMode(): bool
-    {
-        return $this->strictMode;
-    }
-
 
    /** Run migrations
     *
@@ -110,7 +81,7 @@ class DBMigrator
                     $sql = "INSERT INTO {prefix}dbtrack (component, name) "
                             . "values (?,?)";
                     Database::pQuery($sql, $args, true);
-                } elseif ($this->strictMode) {
+                } else {
                     throw new SqlException("{$this->component} - {$file}: " .
                                     Database::getLastError());
                 }
@@ -148,11 +119,11 @@ class DBMigrator
                     while (mysqli_more_results(Database::getConnection())) {
                         mysqli_next_result(Database::getConnection());
                     }
-                    if ($success || !$this->strictMode) {
+                    if ($success) {
                         $sql = "DELETE FROM {prefix}dbtrack "
                                 . "where component = ? and name = ?";
                         Database::pQuery($sql, $args, true);
-                    } elseif ($this->strictMode) {
+                    } else {
                         throw new SqlException(
                             "{$this->component} - {$file}: "
                             . Database::getLastError()

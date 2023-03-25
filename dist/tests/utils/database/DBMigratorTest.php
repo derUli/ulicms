@@ -88,18 +88,6 @@ class DBMigratorTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testSetStrictMode()
-    {
-        $dbmigrator = new DBMigrator("dbmigrator_test", self::DB_MIGRATOR_UP_DIR);
-        $this->assertTrue($dbmigrator->isStrictMode());
-
-        $dbmigrator->disableStrictMode();
-        $this->assertFalse($dbmigrator->isStrictMode());
-
-        $dbmigrator->enableStrictMode();
-        $this->assertTrue($dbmigrator->isStrictMode());
-    }
-
     public function testMigrateWithStop()
     {
         $dbmigrator = new DBMigrator(
@@ -172,7 +160,6 @@ class DBMigratorTest extends \PHPUnit\Framework\TestCase
             "dbmigrator_test",
             Path::resolve(self::DB_MIGRATOR_FAILED_UP_DIR)
         );
-        $dbmigrator->enableStrictMode();
         $this->expectException(SqlException::class);
         $dbmigrator->migrate();
     }
@@ -183,7 +170,6 @@ class DBMigratorTest extends \PHPUnit\Framework\TestCase
             "dbmigrator_test",
             Path::resolve(self::DB_MIGRATOR_FAILED_UP_DIR)
         );
-        $dbmigrator->enableStrictMode();
         $dbmigrator->migrate("001.sql");
 
         $dbmigrator = new DBMigrator(
@@ -193,5 +179,28 @@ class DBMigratorTest extends \PHPUnit\Framework\TestCase
 
         $this->expectException(SqlException::class);
         $dbmigrator->rollback();
+    }
+
+    public function testResetDbTrackAll()
+    {
+        $this->assertGreaterThanOrEqual(
+            31,
+            Database::getNumRows(
+                Database::selectAll('dbtrack', ['id'])
+            )
+        );
+
+        $dbmigrator = new DBMigrator(
+            "dbmigrator_test",
+            Path::resolve(self::DB_MIGRATOR_FAILED_UP_DIR)
+        );
+
+        $dbmigrator->resetDBTrackAll();
+        $this->assertEquals(
+            0,
+            Database::getNumRows(
+                Database::selectAll('dbtrack', ['id'])
+            )
+        );
     }
 }
