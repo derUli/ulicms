@@ -6,7 +6,6 @@ namespace App\Constants;
 
 defined('ULICMS_ROOT') or exit('no direct script access allowed');
 
-
 /**
  * Use this class to compare HTTP request methods
  */
