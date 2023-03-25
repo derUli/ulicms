@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Utils\CacheUtil;
+use App\Packages\PackageManager;
 
 /**
  * Get list of all installed modules

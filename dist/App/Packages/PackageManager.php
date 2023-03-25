@@ -2,12 +2,19 @@
 
 declare(strict_types=1);
 
+namespace App\Packages;
+
 defined('ULICMS_ROOT') or exit('no direct script access allowed');
 
 use App\Services\Connectors\PackageSourceConnector;
 use App\Constants\PackageTypes;
 use App\Utils\CacheUtil;
 use App\Utils\File;
+use Path;
+use PharData;
+use Module;
+use BadMethodCallException;
+use UnexpectedValueException ;
 
 /**
  * This class is for handling packages
@@ -84,7 +91,7 @@ class PackageManager
             }
 
             $success = true;
-        } catch (Exception $e) {
+        } catch (UnexpectedValueException $e) {
             if ($clear_cache) {
                 CacheUtil::clearCache();
             }

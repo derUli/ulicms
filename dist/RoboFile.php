@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Packages\PackageManager;
 use App\Services\Connectors\AvailablePackageVersionMatcher;
 use App\Utils\CacheUtil;
 use Robo\Tasks;

@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use App\Packages\PackageManager;
+
 class UpdateManager
 {
     public static function getAllUpdateablePackages(): array

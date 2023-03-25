@@ -1,6 +1,7 @@
 <?php
 
 use App\Constants\PackageTypes;
+use App\Packages\PackageManager;
 
 class PackageManagerTest extends \PHPUnit\Framework\TestCase
 {

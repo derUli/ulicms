@@ -1,5 +1,7 @@
 <?php
 
+use App\Packages\PackageManager;
+
 class UpdateManagerDashboard
 {
     public static function anyUpdateAvailable()

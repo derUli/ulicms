@@ -1,4 +1,7 @@
 <?php
+
+use App\Packages\PackageManager;
+
 // TODO: Refactor this
 // Move logic to controller
 // don't use so much nested if-statements

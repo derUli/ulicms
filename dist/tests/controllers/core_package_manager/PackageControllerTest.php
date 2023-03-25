@@ -1,6 +1,7 @@
 <?php
 
 use App\Packages\SinPackageInstaller;
+use App\Packages\PackageManager;
 
 class PackageControllerTest extends \PHPUnit\Framework\TestCase
 {

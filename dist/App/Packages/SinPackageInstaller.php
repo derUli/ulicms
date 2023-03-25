@@ -9,9 +9,9 @@ defined('ULICMS_ROOT') or exit('no direct script access allowed');
 use App\Utils\File;
 use Path;
 use Database;
-use PackageManager;
 use App\Utils\VersionComparison;
 use App\Backend\UliCMSVersion;
+use App\Packages\PackageManager;
 
 /**
  * Util to install Simple Install packages.
