@@ -60,27 +60,23 @@ class PackageManager
         string $file,
         bool $clear_cache = true
     ): bool {
-        $success = false;
-
         @set_time_limit(0);
         try {
             // Paket entpacken
             $phar = new PharData($file);
             $phar->extractTo(ULICMS_ROOT, null, true);
 
-            $post_install_script1 = ULICMS_ROOT .
-                    DIRECTORY_SEPARATOR . "post-install.php";
-            $post_install_script2 = ULICMS_TMP .
-                    DIRECTORY_SEPARATOR . "post-install.php";
 
-            // post_install_script ausführen und anschließend
-            // entfernen, sofern vorhanden;
-            if (is_file($post_install_script1)) {
-                require $post_install_script1;
-                unlink($post_install_script1);
-            } elseif (is_file($post_install_script2)) {
-                require $post_install_script2;
-                unlink($post_install_script2);
+            $postInstallScripts = [
+                Path::Resolve('ULICMS_ROOT/post-install.php'),
+                Path::Resolve('ULICMS_TMP/post-install.php')
+            ];
+
+            foreach ($postInstallScripts as $script) {
+                if (is_file($script)) {
+                    include $script;
+                    unlink($script);
+                }
             }
 
             if ($clear_cache) {
@@ -92,6 +88,8 @@ class PackageManager
             if ($clear_cache) {
                 CacheUtil::clearCache();
             }
+
+            $success = false;
         }
 
         return $success;

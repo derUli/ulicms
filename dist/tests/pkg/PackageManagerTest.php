@@ -84,4 +84,29 @@ class PackageManagerTest extends \PHPUnit\Framework\TestCase
             "invalid_type"
         );
     }
+
+    public function testInstallTheme2017()
+    {
+        $packageFile = Path::resolve(
+            "ULICMS_ROOT/tests/fixtures/packages/theme-2017-1.1.1.tar.gz"
+        );
+
+        $installer = new PackageManager();
+        $success = $installer->installPackage($packageFile);
+
+        $this->assertTrue($success);
+        $this->assertContains("2017", getAllThemes());
+    }
+
+    public function testInstallThemeBroken()
+    {
+        $packageFile = Path::resolve(
+            "ULICMS_ROOT/tests/fixtures/packages/broken.tar.gz"
+        );
+
+        $installer = new PackageManager();
+        $success = $installer->installPackage($packageFile);
+
+        $this->assertFalse($success);
+    }
 }

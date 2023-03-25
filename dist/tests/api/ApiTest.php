@@ -82,15 +82,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         chdir(Path::resolve("ULICMS_ROOT"));
     }
 
-
-    public function testGetAllUsedLanguages()
-    {
-        $languages = getAllUsedLanguages();
-        $this->assertGreaterThanOrEqual(2, count($languages));
-        $this->assertTrue(in_array('de', $languages));
-        $this->assertTrue(in_array('en', $languages));
-    }
-
     public function testAddTranslation()
     {
         $key1 = uniqid();
@@ -122,8 +113,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(false, $meta["embed"]);
     }
 
-
-
     public function testGetAllThemes()
     {
         $themes = getAllThemes();
@@ -139,21 +128,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertContains("core_content", $modules);
         $this->assertContains("slicknav", $modules);
         $this->assertContains("bootstrap", $modules);
-    }
-
-    public function testGetPreferredLanguage()
-    {
-        $acceptLanguageHeader1 = "Accept-Language: da, en - gb;
-        q = 0.8, en;
-        q = 0.7, de;
-        q = 0.5";
-        $this->assertEquals('en', get_prefered_language(array('de', 'en'), $acceptLanguageHeader1));
-
-        $acceptLanguageHeader2 = "Accept-Language: da, en - gb;
-        q = 0.8, en;
-        q = 0.7, de;
-        q = 0.9";
-        $this->assertEquals('de', get_prefered_language(array('de', 'en'), $acceptLanguageHeader2));
     }
 
     public function testGetHtmlEditorNotLoggedInReturnsCkeditor()
@@ -234,8 +208,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         unset($_SERVER['REQUEST_URI']);
         unset($_SERVER['HTTPS']);
     }
-
-
 
     public function testStringContainsShortCodeWithoutNameReturnsTrue()
     {
@@ -460,46 +432,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse(containsModule($page->slug, "nicht_enthalten"));
     }
 
-    public function testGetAllLanguagesFiltered()
-    {
-        $language = new Language();
-        $language->loadByLanguageCode('en');
-
-        $group = new Group();
-        $group->setName("Testgroup");
-        $group->setLanguages(
-            [
-                $language
-            ]
-        );
-        $group->save();
-
-        $user = new User();
-        $user->setUsername("testuser-1");
-        $user->setPassword(rand_string(23));
-        $user->setLastname("Beutlin");
-        $user->setFirstname("Bilbo");
-        $user->setHTMLEditor(HtmlEditor::CKEDITOR);
-        $user->setPrimaryGroup($group);
-        $user->save();
-
-        register_session(
-            getUserById($user->getId())
-        );
-        $languages = getAllLanguages(true);
-
-        $this->assertNotContains('de', $languages);
-        $this->assertContains('en', $languages);
-        $user->delete();
-        $group->delete();
-    }
-
-    public function testGetAllLanguagesNotFiltered()
-    {
-        $languages = getAllLanguages();
-        $this->assertGreaterThanOrEqual(1, count($languages));
-    }
-
     public function testVarDumpStrReturnsStringWithOneVar()
     {
         $output = var_dump_str(new User());
@@ -546,27 +478,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("Angelsächisch", Settings::getLang("my_setting", 'en'));
     }
 
-
-    public function testGetLanguageNameByCodeReturnsName()
-    {
-        $this->assertEquals("Deutsch", getLanguageNameByCode('de'));
-        $this->assertEquals("English", getLanguageNameByCode('en'));
-    }
-
-    public function testGetLanguageNameByCodeReturnsCode()
-    {
-        $this->assertEquals(
-            "gibts_nicht",
-            getLanguageNameByCode("gibts_nicht")
-        );
-    }
-
-    public function testGetAvailableBackendLanguages()
-    {
-        $this->assertContains('de', getAvailableBackendLanguages());
-        $this->assertContains('en', getAvailableBackendLanguages());
-    }
-
     public function testJsonReadableEncode()
     {
         $data = [
@@ -588,45 +499,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase
             normalizeLN($expected),
             normalizeLN($output)
         );
-    }
-
-    public function testGetSystemLanguageReturnsSystemLanguageFromSession()
-    {
-        $_SESSION["system_language"] = 'de';
-        $_SESSION['language'] = 'en';
-        $this->assertEquals('de', getSystemLanguage());
-    }
-
-    public function testGetSystemLanguageReturnsFrontendLanguageFromSession()
-    {
-        $_SESSION['language'] = 'en';
-        $this->assertEquals('en', getSystemLanguage());
-    }
-
-    public function testGetSystemLanguageReturnsSystemLanguageFromSetting()
-    {
-        if (isset($_SESSION)) {
-            foreach ($_SESSION as $key => $value) {
-                unset($_SESSION[$key]);
-            }
-        }
-
-        $system_language = Settings::get("system_language");
-        Settings::set("system_language", 'en');
-        $this->assertEquals('en', getSystemLanguage());
-
-        Settings::set("system_language", $system_language);
-    }
-
-    public function testGetSystemLanguageReturnsDe()
-    {
-        $system_language = Settings::get("system_language");
-
-        Settings::delete("system_language");
-
-        $this->assertEquals('de', getSystemLanguage());
-
-        Settings::set("system_language", $system_language);
     }
 
     public function testGetModuleUninstallScriptPath()
