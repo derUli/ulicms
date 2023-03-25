@@ -5,6 +5,7 @@ use Spatie\Snapshots\MatchesSnapshots;
 class SimpleSettingsControllerTest extends \PHPUnit\Framework\TestCase
 {
     use MatchesSnapshots;
+
     protected function setUp(): void
     {
         $this->defaultSettings = [
@@ -145,6 +146,10 @@ class SimpleSettingsControllerTest extends \PHPUnit\Framework\TestCase
     public function testGetTimezones()
     {
         $controller = new SimpleSettingsController();
-        $this->assertMatchesHtmlSnapshot($controller->getTimezones());
+        $timezones = $controller->getTimezones();
+        $this->assertStringContainsString('<option value="Asia/Tokyo">', $timezones);
+
+        $this->assertEquals(422, substr_count($timezones, "<option"));
+        $this->assertEquals(10, substr_count($timezones, "<optgroup"));
     }
 }

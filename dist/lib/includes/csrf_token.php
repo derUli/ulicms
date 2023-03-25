@@ -33,7 +33,7 @@ function get_csrf_token(): string
 // Siehe http://de.wikipedia.org/wiki/Cross-Site-Request-Forgery
 function check_csrf_token(): bool
 {
-    if (!isset($_REQUEST["csrf_token"])) {
+    if (!isset($_REQUEST['csrf_token'])) {
         return false;
     }
     return $_REQUEST["csrf_token"] == $_SESSION["csrf_token"];

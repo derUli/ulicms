@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Models\Content;
 
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
 use App\Models\Content\Category;
 
 use function get_translation;

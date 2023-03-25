@@ -2,6 +2,8 @@
 
 namespace App\Models\Content;
 
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
 use Model;
 use Database;
 use Request;

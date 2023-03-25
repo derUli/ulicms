@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace App\Models\Media;
 
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
 use App\Utils\File;
 use App\Models\Content\Category;
 use Database;
 use Model;
 use Path;
-use StringHelper;
 
 use function _esc;
 use function get_translation;
