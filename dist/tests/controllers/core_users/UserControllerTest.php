@@ -67,7 +67,7 @@ class UserControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("johndoe@example.org", $user->getEmail());
         $this->assertEquals('en', $user->getDefaultLanguage());
         $this->assertTrue($user->isLocked());
-        $this->assertGreaterThanOrEqual(1, $user->getGroupId());
+        $this->assertGreaterThanOrEqual(1, $user->getPrimaryGroupId());
         $this->assertTrue($user->getRequirePasswordChange());
         $this->assertCount(count($groupIds), $user->getSecondaryGroups());
     }
@@ -95,7 +95,7 @@ class UserControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("johndoe@example.org", $user->getEmail());
         $this->assertEquals('en', $user->getDefaultLanguage());
         $this->assertTrue($user->isLocked());
-        $this->assertGreaterThanOrEqual(1, $user->getGroupId());
+        $this->assertGreaterThanOrEqual(1, $user->getPrimaryGroupId());
         $this->assertTrue($user->getRequirePasswordChange());
         $this->assertCount(count($groupIds), $user->getSecondaryGroups());
     }

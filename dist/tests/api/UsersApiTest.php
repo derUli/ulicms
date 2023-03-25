@@ -22,7 +22,7 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase
         $user->setFirstname("Max");
         $user->setEmail("max@muster.de");
         $user->setPassword("topsecret");
-        $user->setGroup($this->testGroup);
+        $user->setPrimaryGroup($this->testGroup);
         $user->save();
         $this->testUser = $user;
 
@@ -33,7 +33,7 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase
         $user->setEmail("max@muster.de");
         $user->setPassword("topsecret");
         $user->setLocked(true);
-        $user->setGroup($this->testGroup);
+        $user->setPrimaryGroup($this->testGroup);
         $user->save();
 
         $user = new User();

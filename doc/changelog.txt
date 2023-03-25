@@ -71,6 +71,10 @@ Entfernte API-Methoden:
 * Template::poweredByUliCMS()
 * headline()
 * is_frontpage()
+* User->getGroupId()
+* User->setGroupId()
+* User->getGroup()
+* User->setGroup()
 
 ===== Neues in UliCMS 2023.1 =====
 

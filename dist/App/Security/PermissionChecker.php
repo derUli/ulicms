@@ -53,8 +53,8 @@ class PermissionChecker
     {
         // Collect primary group and secondary groups of the user
         $groups = [];
-        if ($user->getGroup()) {
-            $groups[] = $user->getGroup();
+        if ($user->getPrimaryGroup()) {
+            $groups[] = $user->getPrimaryGroup();
         }
 
         $secondaryGroups = $user->getSecondaryGroups();

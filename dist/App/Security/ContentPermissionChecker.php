@@ -39,7 +39,7 @@ class ContentPermissionChecker implements IDatasetPermissionChecker
         $user = new User($this->user_id);
         $permissionChecker = new PermissionChecker($this->user_id);
         $userGroups = [];
-        $primaryGroup = $user->getGroupId();
+        $primaryGroup = $user->getPrimaryGroupId();
 
         if ($primaryGroup) {
             $userGroups[] = new Group($primaryGroup);

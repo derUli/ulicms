@@ -10,7 +10,7 @@ class UserManagerTest extends \PHPUnit\Framework\TestCase
             $user->setUsername("locked_user_" . $i);
             $user->setFirstname("Max");
             $user->setLastname("Muster");
-            $user->setGroupId(1);
+            $user->setPrimaryGroupId(1);
             $user->setPassword("password123");
             $user->setLocked(1);
             $user->save();
@@ -20,7 +20,7 @@ class UserManagerTest extends \PHPUnit\Framework\TestCase
             $user->setUsername("unlocked_user_" . $i);
             $user->setFirstname("Max");
             $user->setLastname("Muster");
-            $user->setGroupId(1);
+            $user->setPrimaryGroupId(1);
             $user->setPassword("password123");
             $user->setLocked(0);
             $user->save();

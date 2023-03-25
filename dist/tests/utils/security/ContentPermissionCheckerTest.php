@@ -47,7 +47,7 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase
         $this->testUser1->setLastname("Doe");
         $this->testUser1->setFirstname("John");
         $this->testUser1->setPassword("foobar");
-        $this->testUser1->setGroup($this->testGroup3);
+        $this->testUser1->setPrimaryGroup($this->testGroup3);
         $this->testUser1->addSecondaryGroup($this->testGroup1);
         $this->testUser1->save();
 
@@ -56,7 +56,7 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase
         $this->testUser2->setLastname("Doe");
         $this->testUser2->setFirstname("Jane");
         $this->testUser2->setPassword("foobar");
-        $this->testUser2->setGroup($this->testGroup1);
+        $this->testUser2->setPrimaryGroup($this->testGroup1);
         $this->testUser2->save();
 
         $this->testUser3 = new User();
@@ -65,7 +65,7 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase
         $this->testUser3->setFirstname("Jane");
         $this->testUser3->setPassword("foobar");
         $this->testUser3->setAdmin(true);
-        $this->testUser3->setGroup($this->testGroup1);
+        $this->testUser3->setPrimaryGroup($this->testGroup1);
         $this->testUser3->save();
     }
 

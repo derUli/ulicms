@@ -35,7 +35,7 @@ class UserController extends Controller
         $user->setDefaultLanguage($default_language);
         $user->setAdmin($admin);
         $user->setLocked($locked);
-        $user->setGroupId($group_id);
+        $user->setPrimaryGroupId($group_id);
         $user->setRequirePasswordChange($require_password_change);
         $secondary_groups = $_POST["secondary_groups"];
 
@@ -102,7 +102,7 @@ class UserController extends Controller
             if ($permissionChecker->hasPermission("users_edit")) {
                 $user->setAdmin($admin);
                 $user->setLocked($locked);
-                $user->setGroupId($group_id);
+                $user->setPrimaryGroupId($group_id);
                 $user->setSecondaryGroups([]);
 
                 $secondary_groups = $_POST["secondary_groups"] ?? [];

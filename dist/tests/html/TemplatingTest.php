@@ -467,7 +467,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         $user->setUsername("testuser_" . uniqid());
         $user->setFirstname("Max");
         $user->setLastname("Muster");
-        $user->setGroupId(1);
+        $user->setPrimaryGroupId(1);
         $user->setPassword("password123");
         $user->setEmail("max@muster.de");
         $user->setHomepage("http://www.google.de");

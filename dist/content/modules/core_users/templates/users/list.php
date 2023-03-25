@@ -86,8 +86,8 @@ if ($permissionChecker->hasPermission("users")) {
                     <?php
                             foreach ($users as $user) {
                                 $group = "[" . get_translation("none") . "]";
-                                if ($user->getGroupId()) {
-                                    $group = $permissionChecker->getPermissionQueryResult($user->getGroupId());
+                                if ($user->getPrimaryGroupId()) {
+                                    $group = $permissionChecker->getPermissionQueryResult($user->getPrimaryGroupId());
                                     $group = $group['name'];
                                 }
                                 ?>
@@ -117,7 +117,7 @@ if ($permissionChecker->hasPermission("users")) {
                                 echo "<td class=\"hide-on-mobile\">" .
                                 _esc($user->getEmail()) . "</td>";
                                 echo "<td class=\"hide-on-mobile\">";
-                                $id = $user->getGroupId();
+                                $id = $user->getPrimaryGroupId();
                                 if ($id and $permissionChecker->hasPermission("groups_edit")) {
                                     $url = ModuleHelper::buildActionURL("groups", "edit=$id");
                                     echo '<a href="' . Template::getEscape($url) . '" class="is-not-ajax">';

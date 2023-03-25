@@ -68,7 +68,7 @@ class UserTest extends \PHPUnit\Framework\TestCase
         $user->setUsername("max_muster");
         $user->setFirstname("Max");
         $user->setLastname("Muster");
-        $user->setGroupId(1);
+        $user->setPrimaryGroupId(1);
         $user->setPassword("password123");
         $user->setEmail("max@muster.de");
         $user->setHomepage("http://www.google.de");
@@ -90,10 +90,10 @@ class UserTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals("fr", $user->getDefaultLanguage());
         $this->assertEquals("max@muster.de", $user->getEmail());
-        $this->assertEquals(1, $user->getGroupId());
-        $this->assertEquals(1, $user->getGroup()
+        $this->assertEquals(1, $user->getPrimaryGroupId());
+        $this->assertEquals(1, $user->getPrimaryGroup()
                         ->getId());
-        $this->assertEquals("Administrator", $user->getGroup()
+        $this->assertEquals("Administrator", $user->getPrimaryGroup()
                         ->getName());
         $this->assertEquals(
             Hash::hashPassword("password123"),
@@ -111,10 +111,10 @@ class UserTest extends \PHPUnit\Framework\TestCase
         $user->setLocked(true);
         $user->setAdmin(true);
         $user->setAboutMe("bye");
-        $user->setGroup($this->otherGroup);
-        $this->assertEquals("Other Group", $user->getGroup()
+        $user->setPrimaryGroup($this->otherGroup);
+        $this->assertEquals("Other Group", $user->getPrimaryGroup()
                         ->getName());
-        $this->assertEquals($user->getGroupId(), $user->getGroup()
+        $this->assertEquals($user->getPrimaryGroupId(), $user->getPrimaryGroup()
                         ->getId());
         $user->save();
 
@@ -202,7 +202,7 @@ class UserTest extends \PHPUnit\Framework\TestCase
         $user->setUsername("john-doe");
         $user->setFirstname("John");
         $user->setLastname("Doe");
-        $user->setGroupId(1);
+        $user->setPrimaryGroupId(1);
         $user->setPassword("password123");
         $user->setEmail("john@doe.com");
         $user->save();

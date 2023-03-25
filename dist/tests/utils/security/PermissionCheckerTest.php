@@ -53,7 +53,7 @@ class PermissionCheckerTest extends \PHPUnit\Framework\TestCase
         $user->setAboutMe("hello world");
         $lastLogin = time();
         $user->setLastLogin($lastLogin);
-        $user->setGroup($this->testGroup1);
+        $user->setPrimaryGroup($this->testGroup1);
         $user->addSecondaryGroup($this->testGroup2);
         $user->addSecondaryGroup($this->testGroup3);
         $user->save();

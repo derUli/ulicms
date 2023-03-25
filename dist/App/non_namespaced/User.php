@@ -572,15 +572,6 @@ class User extends Model
     }
 
     /**
-     * Get group id
-     * @return type
-     */
-    public function getGroupId()
-    {
-        return $this->getPrimaryGroupId();
-    }
-
-    /**
      * Get primary group
      * @return type
      */
@@ -601,31 +592,12 @@ class User extends Model
     }
 
     /**
-     * Set primary group id
-     * @param type $gid
-     * @return void
-     */
-    public function setGroupId($gid): void
-    {
-        $this->setPrimaryGroupId($gid);
-    }
-
-    /**
      * Get primary group
      * @return type
      */
     public function getPrimaryGroup()
     {
         return $this->group;
-    }
-
-    /**
-     * Get group
-     * @return type
-     */
-    public function getGroup()
-    {
-        return $this->getPrimaryGroup();
     }
 
     /**
@@ -637,16 +609,6 @@ class User extends Model
     {
         $this->group = $group;
         $this->group_id = $group ? $group->getId() : null;
-    }
-
-    /**
-     * Set primary group
-     * @param type $group
-     * @return void
-     */
-    public function setGroup($group): void
-    {
-        $this->setPrimaryGroup($group);
     }
 
     /**
