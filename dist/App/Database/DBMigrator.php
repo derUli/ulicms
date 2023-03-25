@@ -1,7 +1,5 @@
 <?php
 
-// Use this class to manipulate the database schema
-// TODO: Write knowledge base article how the DBMigrator works
 declare(strict_types=1);
 
 namespace App\Database;
@@ -13,6 +11,9 @@ use Database;
 use CMSConfig;
 use Exception;
 
+/**
+ * Migrate database
+ */
 class DBMigrator
 {
     private $component = null;
@@ -26,29 +27,41 @@ class DBMigrator
     {
         $this->component = $component;
         $this->folder = $folder;
-        $cfg = new CMSConfig();
-        if (isset($cfg->dbmigrator_strict_mode)) {
-            $this->strictMode = (bool) $cfg->dbmigrator_strict_mode;
-        }
     }
 
-    // in strict mode DBMigrator stops on error
+    /**
+     * Enable strict mode
+     * @return void
+     */
     public function enableStrictMode(): void
     {
         $this->strictMode = true;
     }
 
+    /**
+     * Disable strict mode
+     * @return void
+     */
     public function disableStrictMode(): void
     {
         $this->strictMode = false;
     }
 
+    /**
+     * Check if strict mode is enabled
+     * @return bool
+     */
     public function isStrictMode(): bool
     {
         return $this->strictMode;
     }
 
-    // use this to migrate up migrations
+
+   /** Run migrations
+    *
+    * @param string|null $stop last migration to execute, null means execute all
+    * @return void
+    */
     public function migrate(?string $stop = null): void
     {
         $this->checkVars();
@@ -62,6 +75,12 @@ class DBMigrator
         }
     }
 
+    /**
+     * Execute a Sql file
+     * @param string $file SQL file
+     * @return void
+     * @throws SqlException
+     */
     public function executeSqlScript(string $file): void
     {
         if (str_ends_with($file, ".sql")) {
@@ -99,9 +118,12 @@ class DBMigrator
         }
     }
 
-    // use this to rollback migrations
-    // $stop is the name of the sql file where rollback should stop
-    // if $stop is null, all migrations for this component will rollback
+    /**
+     * Rollback migrations
+     * @param string|null $stop Ston on this migration, null means rollback all
+     * @return void
+     * @throws SqlException
+     */
     public function rollback(?string $stop = null): void
     {
         $this->checkVars();
