@@ -1,4 +1,6 @@
 <?php
+use App\Backend\UliCMSVersion;
+
 $version = new UliCMSVersion();
 $admin_logo = Settings::get("admin_logo");
 if (!$admin_logo) {

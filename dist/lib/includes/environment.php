@@ -1,6 +1,9 @@
 <?php
 
 declare(strict_types=1);
+
+use App\Backend\UliCMSVersion;
+
 /**
  * Returns the version number of UliCMS Core
  * @return string

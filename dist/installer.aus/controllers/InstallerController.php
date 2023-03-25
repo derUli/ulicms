@@ -1,5 +1,6 @@
 <?php
 
+use App\Backend\UliCMSVersion;
 
 class InstallerController
 {

@@ -33,7 +33,7 @@ def main():
     source_dir = os.path.dirname(__file__)
 
     ignore = ['.git', "doc-src", "press", "phpCB-1.0.1-linux", "*.py", "*.pyc",
-                       "Releases", "cms-config.php", "content", "services",
+                       "Releases", "cms-config.php", "content",
                        ".gitignore", ".htaccess", "installer.aus", "installer",
               "modules", "templates", "contents.css",
               "comments", "*~", ".settings", ".project", ".buildpath",
@@ -83,7 +83,7 @@ def main():
     else:
         print("No update.php found")
 
-    version_file = os.path.join(target, "dist", "App", "non_namespaced", "UliCMSVersion.php")
+    version_file = os.path.join(target, "dist", "App", "Backend", "UliCMSVersion.php")
 
     print("set build date...")
     

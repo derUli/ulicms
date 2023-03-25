@@ -1,6 +1,7 @@
 <?php
 
 use App\Services\Connectors\PackageSourceConnector;
+use App\Backend\UliCMSVersion;
 
 class UliCMSVersionTest extends \PHPUnit\Framework\TestCase
 {

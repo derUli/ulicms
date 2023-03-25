@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Backend\UliCMSVersion;
 use App\Exceptions\CorruptDownloadException;
 
 class CoreUpgradeController extends Controller

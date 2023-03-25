@@ -54,7 +54,7 @@ def main():
 
     main_dir = os.path.join(target, "dist")
 
-    version_file = os.path.join(target, "dist", "App", "non_namespaced", "UliCMSVersion.php")
+    version_file = os.path.join(target, "dist", "App", "Backend", "UliCMSVersion.php")
 
     print("set build date...")
     with codecs.open(version_file, 'r+', "utf-8") as f:

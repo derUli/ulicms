@@ -2,6 +2,7 @@
 
 Neue Features:
 * Kompatiblität mit UliCMS 2023.2
+* DBMigrator Strict Mode entfernt
 
 Entfernte Features:
 * Experteneinstellungen
@@ -18,6 +19,7 @@ API-Änderungen:
 * ModelRegistry in Namespace App\Registries verschoben
 * ActionRegistry in Namespace App\Registries verschoben
 * LoggerRegistry in Namespace App\Registries verschoben
+* UliCMSVersion verschoben nach App\Backend
 * AdminMenu in Namespace App\Backend\Menu verschoben
 * MenuEntry in Namespace App\Backend\Menu verschoben
 * DBMigrator in Namespace App\Database verschoben
