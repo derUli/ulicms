@@ -237,8 +237,6 @@ class PageTest extends \PHPUnit\Framework\TestCase
         $_SESSION['language'] = 'de';
         $_GET["slug"] = "testdisableshortcodes";
 
-        time_sleep_until(time() + 1);
-
         $this->assertStringContainsString(get_csrf_token_html(), get_content());
         $this->assertStringNotContainsString("[csrf_token_html]", get_content());
     }
