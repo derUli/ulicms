@@ -121,7 +121,7 @@ do_event("before_http_header");
 $redirection = get_redirection();
 
 if ($redirection && (is_active() or is_logged_in())) {
-    Request::redirect($redirection, 302);
+    Response::redirect($redirection, 302);
 }
 
 if (get_ID()) {
@@ -133,7 +133,7 @@ if (get_ID()) {
                 $language->getLanguageLink()
             )
             ) {
-                Request::redirect($language->getLanguageLink());
+                Response::redirect($language->getLanguageLink());
             }
         }
     } catch (Exception $e) {
@@ -145,10 +145,10 @@ if (isset($_GET["goid"])) {
     $goid = intval($_GET["goid"]);
     $url = ModuleHelper::getFullPageURLByID($goid);
     if ($url) {
-        Request::redirect($url, 301);
+        Response::redirect($url, 301);
     } else {
         $url = getBaseFolderURL();
-        Request::redirect($url, 301);
+        Response::redirect($url, 301);
     }
 }
 

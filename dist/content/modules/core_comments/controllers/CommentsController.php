@@ -206,7 +206,7 @@ class CommentsController extends MainClass
             }
             $referrer .= "jumpto=comments";
         }
-        Request::redirect($referrer);
+        Response::redirect($referrer);
     }
 
     public function _doActions(array $commentIds, string $action): array

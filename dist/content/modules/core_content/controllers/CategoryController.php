@@ -19,7 +19,7 @@ class CategoryController extends Controller
         // TODO: validate required fields
         Categories::addCategory($name, $description);
 
-        Request::redirect(ModuleHelper::buildActionURL("categories"));
+        Response::redirect(ModuleHelper::buildActionURL("categories"));
     }
 
     public function _createPost(string $name, string $description): ?int
@@ -36,7 +36,7 @@ class CategoryController extends Controller
         // TODO: validate required fields
         Categories::updateCategory($id, $name, $description);
 
-        Request::redirect(ModuleHelper::buildActionURL("categories"));
+        Response::redirect(ModuleHelper::buildActionURL("categories"));
     }
 
     public function _updatePost(int $id, string $name, string $description): ?int
@@ -52,7 +52,7 @@ class CategoryController extends Controller
             Categories::deleteCategory($del);
         }
 
-        Request::redirect(ModuleHelper::buildActionURL("categories"));
+        Response::redirect(ModuleHelper::buildActionURL("categories"));
     }
 
     public function _deletePost($id): bool

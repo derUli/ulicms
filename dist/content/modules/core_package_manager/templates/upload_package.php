@@ -37,7 +37,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                     }
                 } elseif (str_ends_with($file_in_tmp, ".sin")) {
                     $url = "?action=pkginfo&file=" . basename($file_in_tmp);
-                    Request::javascriptRedirect($url);
+                    Response::javascriptRedirect($url);
                 } else {
                     echo "<p style='color:red'>" . get_translation("not_supported_format") . "</p>";
                 }

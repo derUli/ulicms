@@ -12,7 +12,7 @@ class FormController extends Controller
     public function createPost(): void
     {
         $this->_createPost();
-        Request::redirect(ModuleHelper::buildActionURL("forms"));
+        Response::redirect(ModuleHelper::buildActionURL("forms"));
     }
 
     public function _createPost(): ?int
@@ -45,7 +45,7 @@ class FormController extends Controller
     public function updatePost(): void
     {
         $this->_updatePost();
-        Request::redirect(ModuleHelper::buildActionURL("forms"));
+        Response::redirect(ModuleHelper::buildActionURL("forms"));
     }
 
     public function _updatePost(): bool
@@ -83,7 +83,7 @@ class FormController extends Controller
     {
         $id = Request::getVar("del", 0, 'int');
         $this->_deletePost($id);
-        Request::redirect(ModuleHelper::buildActionURL("forms"));
+        Response::redirect(ModuleHelper::buildActionURL("forms"));
     }
 
     public function _deletePost(int $id): bool

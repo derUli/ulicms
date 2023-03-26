@@ -12,7 +12,7 @@ class PkgInfoController extends Controller
         if (!empty($_REQUEST["file"])) {
             $file = basename($_POST["file"]);
             $this->_installPost($file);
-            Request::redirect(
+            Response::redirect(
                 ModuleHelper::buildActionURL(
                     "sin_package_install_ok",
                     "file=$file"

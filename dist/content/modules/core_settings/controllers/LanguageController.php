@@ -32,13 +32,13 @@ class LanguageController extends Controller
     public function createPost(): void
     {
         $this->_createPost();
-        Request::redirect(ModuleHelper::buildActionURL("languages"));
+        Response::redirect(ModuleHelper::buildActionURL("languages"));
     }
 
     public function setDefaultLanguage(): void
     {
         $this->_setDefaultLanguage();
-        Request::redirect(ModuleHelper::buildActionURL("languages"));
+        Response::redirect(ModuleHelper::buildActionURL("languages"));
     }
 
     public function _setDefaultLanguage(): void
@@ -80,7 +80,7 @@ class LanguageController extends Controller
             );
         }
 
-        Request::redirect(ModuleHelper::buildActionURL("languages"));
+        Response::redirect(ModuleHelper::buildActionURL("languages"));
     }
 
     protected function validateInput(): void

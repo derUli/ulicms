@@ -68,11 +68,11 @@ class FaviconController extends Controller
 
                 CacheUtil::clearPageCache();
 
-                Request::redirect(ModuleHelper::buildActionURL("favicon"));
+                Response::redirect(ModuleHelper::buildActionURL("favicon"));
             }
 
             // Show error if uploaded file is not an image
-            Request::redirect(
+            Response::redirect(
                 ModuleHelper::buildActionURL(
                     "favicon",
                     "error=UPLOAD_WRONG_FILE_FORMAT"

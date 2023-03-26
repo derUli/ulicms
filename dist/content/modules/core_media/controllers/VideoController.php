@@ -92,7 +92,7 @@ class VideoController extends Controller
                         . "$timestamp);");
             }
         }
-        Request::redirect(ModuleHelper::buildActionURL("videos"));
+        Response::redirect(ModuleHelper::buildActionURL("videos"));
     }
 
     public function _updatePost(): bool
@@ -117,7 +117,7 @@ class VideoController extends Controller
     public function updatePost(): void
     {
         $this->_updatePost();
-        Request::redirect(ModuleHelper::buildActionURL("videos"));
+        Response::redirect(ModuleHelper::buildActionURL("videos"));
     }
 
     public function deletePost(): void
@@ -150,6 +150,6 @@ class VideoController extends Controller
             db_query("DELETE FROM " . tbname("videos") . " where id = " .
                     intval($_REQUEST ["delete"]));
         }
-        Request::redirect(ModuleHelper::buildActionURL("videos"));
+        Response::redirect(ModuleHelper::buildActionURL("videos"));
     }
 }

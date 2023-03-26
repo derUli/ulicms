@@ -55,7 +55,7 @@ class LogoController extends Controller
         }
 
 
-        Request::redirect(ModuleHelper::buildActionURL("logo"));
+        Response::redirect(ModuleHelper::buildActionURL("logo"));
     }
 
     public function _deleteLogo(): bool

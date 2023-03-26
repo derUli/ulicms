@@ -11,7 +11,7 @@ class InstallerController
             $step = intval($_REQUEST["step"]);
         }
         if ($step > 10) {
-            Request::redirect("index.php?step=10");
+            Response::redirect("index.php?step=10");
         }
 
         return $step;

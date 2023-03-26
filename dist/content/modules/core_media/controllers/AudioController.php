@@ -65,7 +65,7 @@ class AudioController extends Controller
                     . "'$mp3_file_value', $timestamp, $category_id, "
                     . "$timestamp);");
         }
-        Request::redirect(ModuleHelper::buildActionURL("audio"));
+        Response::redirect(ModuleHelper::buildActionURL("audio"));
     }
 
     public function _updatePost(): bool
@@ -87,7 +87,7 @@ class AudioController extends Controller
     public function updatePost(): void
     {
         $this->_updatePost();
-        Request::redirect(ModuleHelper::buildActionURL("audio"));
+        Response::redirect(ModuleHelper::buildActionURL("audio"));
     }
 
     public function deletePost(): void
@@ -112,6 +112,6 @@ class AudioController extends Controller
             db_query("DELETE FROM " . tbname("audio") . " where id = " .
                     $_REQUEST ["delete"]);
         }
-        Request::redirect(ModuleHelper::buildActionURL("videos"));
+        Response::redirect(ModuleHelper::buildActionURL("videos"));
     }
 }

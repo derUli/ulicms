@@ -59,21 +59,7 @@ class Request
 
     public static function hasVar(string $name): bool
     {
-        return (isset($_POST[$name]) or isset($_GET[$name]));
-    }
-
-    // Weiterleitung per Location header;
-    public static function redirect(
-        string $url = 'http://www.ulicms.de',
-        int $status = 302
-    ): void {
-        Response::redirect($url, $status);
-    }
-
-    public static function javascriptRedirect(
-        string $url = 'http://www.ulicms.de'
-    ): void {
-        Response::javascriptRedirect($url);
+        return (isset($_POST[$name]) || isset($_GET[$name]));
     }
 
     public static function getMethod(): ?string
@@ -111,9 +97,12 @@ class Request
 
     public static function isSSL(): bool
     {
-        return (!empty($_SERVER['HTTPS']) and
-                $_SERVER['HTTPS'] !== 'off') ||
-                (self::getPort() === 443);
+        return (
+            !empty($_SERVER['HTTPS']) &&
+            $_SERVER['HTTPS'] !== 'off') ||
+                (
+                    self::getPort() === 443
+                );
     }
 
     private static function getProxyHeaders(): array

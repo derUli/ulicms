@@ -168,7 +168,7 @@ class Forms
             $headers .= "Content-Type: text/html; charset=utf-8";
 
             if (Mailer::send($email_to, $subject, $html, $headers)) {
-                Request::redirect($redirect_url);
+                Response::redirect($redirect_url);
                 $retval = true;
             } else {
                 translate("error_send_mail_form_failed");

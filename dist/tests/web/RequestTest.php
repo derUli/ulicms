@@ -236,17 +236,4 @@ class RequestTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertFalse(Request::isHeaderSent("Foobar"));
     }
-
-    public function testJavascriptRedirect()
-    {
-        $expected = file_get_contents(
-            Path::resolve("tests/fixtures/javascriptRedirect.expected.txt")
-        );
-
-        $actual = TestHelper::getOutput(function () {
-            Request::javascriptRedirect("https://google.de");
-        });
-
-        $this->assertEquals($expected, $actual);
-    }
 }

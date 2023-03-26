@@ -35,7 +35,7 @@ class PageController extends Controller
     {
         $this->_recycleBin();
         $url = ModuleHelper::buildActionURL('pages');
-        Request::redirect($url);
+        Response::redirect($url);
     }
 
     public function _recycleBin(): void
@@ -47,7 +47,7 @@ class PageController extends Controller
     {
         $this->_pages();
         $url = ModuleHelper::buildActionURL('pages');
-        Request::redirect($url);
+        Response::redirect($url);
     }
 
     public function _pages(): void
@@ -59,7 +59,7 @@ class PageController extends Controller
     {
         $model = $this->_createPost();
         if ($model && $model->isPersistent()) {
-            Request::redirect(
+            Response::redirect(
                 ModuleHelper::buildActionURL(
                     "pages_edit",
                     "page={$model->getID()}"
@@ -67,7 +67,7 @@ class PageController extends Controller
             );
         }
 
-        Request::redirect(ModuleHelper::buildActionURL('pages'));
+        Response::redirect(ModuleHelper::buildActionURL('pages'));
     }
 
     public function _createPost(): ?Content
@@ -456,7 +456,7 @@ class PageController extends Controller
     public function emptyTrash(): void
     {
         $this->_emptyTrash();
-        Request::redirect(ModuleHelper::buildActionURL('pages'));
+        Response::redirect(ModuleHelper::buildActionURL('pages'));
     }
 
     public function _emptyTrash(): void
