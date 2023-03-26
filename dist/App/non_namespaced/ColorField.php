@@ -18,8 +18,3 @@ class ColorField extends CustomField
         return Template::executeDefaultOrOwnTemplate("fields/textfield.php");
     }
 }
-
-// Alias
-class ColourField extends ColorField
-{
-}
