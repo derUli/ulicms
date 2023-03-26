@@ -1,6 +1,7 @@
 <?php
 
 use App\Exceptions\AccessDeniedException;
+use App\Translations\Translation;
 
 class ControllerTest extends \PHPUnit\Framework\TestCase
 {
@@ -9,7 +10,7 @@ class ControllerTest extends \PHPUnit\Framework\TestCase
         $_SERVER['REQUEST_METHOD'] = "POST";
         $_SESSION = [];
 
-        \App\Translations\Translation::loadAllModuleLanguageFiles('en');
+        Translation::loadAllModuleLanguageFiles('en');
     }
 
     protected function tearDown(): void

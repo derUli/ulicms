@@ -5,6 +5,7 @@ use App\Models\Content\VCS;
 use App\Exceptions\DatasetNotFoundException;
 use Spatie\Snapshots\MatchesSnapshots;
 use App\Registries\ModelRegistry;
+use App\Translations\Translation;
 
 class PageControllerTest extends \PHPUnit\Framework\TestCase
 {
@@ -17,7 +18,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         ModelRegistry::loadModuleModels();
 
         require_once getLanguageFilePath('en');
-        \App\Translations\Translation::loadAllModuleLanguageFiles('en');
+        Translation::loadAllModuleLanguageFiles('en');
 
         $_SESSION = [];
         $_POST = [];

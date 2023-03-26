@@ -1,12 +1,13 @@
 <?php
 
 use App\Utils\CacheUtil;
+use App\Translations\Translation;
 
 class InfoControllerTest extends \PHPUnit\Framework\TestCase
 {
     protected function setUp(): void
     {
-        \App\Translations\Translation::loadAllModuleLanguageFiles('en');
+        Translation::loadAllModuleLanguageFiles('en');
         CacheUtil::clearCache();
     }
 

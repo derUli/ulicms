@@ -1,10 +1,10 @@
 <?php
 
 const CORE_COMPONENT = 'admin';
-// required because my local XAMPP is sometimes in wrong folder, so includes will fail
 require_once "../init.php";
 
 use App\Backend\BackendPageRenderer;
+use App\Translations\Translation;
 
 App\Utils\Session\sessionStart();
 
@@ -23,15 +23,8 @@ if (is_file(getLanguageFilePath($syslang))) {
 } elseif (is_file(getLanguageFilePath('en'))) {
     require getLanguageFilePath('en');
 }
-\App\Translations\Translation::loadAllModuleLanguageFiles($syslang);
 
-do_event("before_include_custom_lang_file");
-
-do_event("after_include_custom_lang_file");
-do_event("before_custom_lang");
-do_event("custom_lang_" . $syslang);
-
-do_event("after_custom_lang");
+Translation::loadAllModuleLanguageFiles($syslang);
 
 // Cross-Site-Request-Forgery Protection
 if (is_logged_in() && Request::isPost() && !check_csrf_token()) {

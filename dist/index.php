@@ -7,6 +7,7 @@ require_once dirname(__FILE__) . '/init.php';
 use App\Models\Content\Language;
 use App\Utils\CacheUtil;
 use App\Helpers\DateTimeHelper;
+use App\Translations\Translation;
 
 global $connection;
 
@@ -40,9 +41,9 @@ if (in_array($_SESSION['language'], $languages) && is_file(getLanguageFilePath($
     require getLanguageFilePath('en');
 }
 
-\App\Translations\Translation::loadAllModuleLanguageFiles($_SESSION['language']);
+Translation::loadAllModuleLanguageFiles($_SESSION['language']);
 
-\App\Translations\Translation::loadCurrentThemeLanguageFiles($_SESSION['language']);
+Translation::loadCurrentThemeLanguageFiles($_SESSION['language']);
 do_event("custom_lang_" . $_SESSION['language']);
 
 if (Request::isPost()) {

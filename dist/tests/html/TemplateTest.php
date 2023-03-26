@@ -3,6 +3,7 @@
 use App\Exceptions\FileNotFoundException;
 use App\Utils\File;
 use App\Helpers\TestHelper;
+use App\Translations\Translation;
 
 use function App\HTML\stringContainsHtml;
 
@@ -12,7 +13,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
 
     protected function setUp(): void
     {
-        \App\Translations\Translation::loadAllModuleLanguageFiles('en');
+        Translation::loadAllModuleLanguageFiles('en');
         Vars::setNoCache(true);
 
         $settings = array(

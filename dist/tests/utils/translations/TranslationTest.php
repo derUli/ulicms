@@ -1,12 +1,14 @@
 <?php
 
+use App\Translations\Translation;
+
 class TranslationTest extends \PHPUnit\Framework\TestCase
 {
     protected function setUp(): void
     {
         require_once getLanguageFilePath('en');
-        \App\Translations\Translation::loadAllModuleLanguageFiles('en');
-        \App\Translations\Translation::loadCurrentThemeLanguageFiles('en');
+        Translation::loadAllModuleLanguageFiles('en');
+        Translation::loadCurrentThemeLanguageFiles('en');
     }
 
     public function testGetTranslation()

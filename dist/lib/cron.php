@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Content\Comment;
+use App\Translations\Translation;
 
 defined('ULICMS_ROOT') or exit('no direct script access allowed');
 
@@ -33,7 +34,7 @@ if (!defined("LOADED_LANGUAGE_FILE")) {
         require getLanguageFilePath('en');
     }
 
-    \App\Translations\Translation::loadAllModuleLanguageFiles($_SESSION['language']);
+    Translation::loadAllModuleLanguageFiles($_SESSION['language']);
 }
 
 if (Settings::get("delete_ips_after_48_hours")) {

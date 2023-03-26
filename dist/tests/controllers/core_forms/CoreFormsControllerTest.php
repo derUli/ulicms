@@ -1,5 +1,7 @@
 <?php
 
+use App\Translations\Translation;
+
 class CoreFormsControllerTest extends \PHPUnit\Framework\TestCase
 {
     private $defaultSettings = [];
@@ -14,7 +16,7 @@ class CoreFormsControllerTest extends \PHPUnit\Framework\TestCase
             "disallow_rtl_chars" => Settings::get("disallow_rtl_chars")
         ];
         require_once getLanguageFilePath('en');
-        \App\Translations\Translation::loadAllModuleLanguageFiles('en');
+        Translation::loadAllModuleLanguageFiles('en');
     }
 
     protected function tearDown(): void
