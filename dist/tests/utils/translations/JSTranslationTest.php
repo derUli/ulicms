@@ -1,5 +1,7 @@
 <?php
 
+use App\Translations\JSTranslation;
+
 class JSTranslationTest extends \PHPUnit\Framework\TestCase
 {
     protected function setUp(): void
@@ -15,7 +17,7 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase
             "pages",
             "gibts_nicht"
         ];
-        $translation = new \App\Translations\JSTranslation($keys);
+        $translation = new JSTranslation($keys);
         $this->assertEquals($keys, $translation->getKeys());
     }
 
@@ -26,7 +28,7 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase
             "TRANSLATION_PAGES",
             "gibts_nicht"
         ];
-        $translation = new \App\Translations\JSTranslation($keys);
+        $translation = new JSTranslation($keys);
 
         $this->assertEquals(
             file_get_contents(
@@ -44,7 +46,7 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase
             "pages",
             "gibts_nicht"
         ];
-        $translation = new \App\Translations\JSTranslation($keys, "ThisIsNotGoogleTranslator");
+        $translation = new JSTranslation($keys, "ThisIsNotGoogleTranslator");
 
         $this->assertEquals(
             file_get_contents(
@@ -62,7 +64,7 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase
             "pages",
             "gibts_nicht"
         ];
-        $translation = new \App\Translations\JSTranslation($keys, "ThisIsNotGoogleTranslator");
+        $translation = new JSTranslation($keys, "ThisIsNotGoogleTranslator");
 
         $this->assertEquals(
             file_get_contents(
@@ -80,7 +82,7 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase
             "pages",
             "gibts_nicht"
         ];
-        $translation = new \App\Translations\JSTranslation($keys);
+        $translation = new JSTranslation($keys);
         ob_start();
         $translation->render();
         $output = ob_get_clean();
@@ -101,7 +103,7 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase
             "pages",
             "gibts_nicht"
         ];
-        $translation = new \App\Translations\JSTranslation($keys);
+        $translation = new JSTranslation($keys);
         ob_start();
         $translation->renderJS();
         $output = ob_get_clean();
@@ -122,7 +124,7 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase
             "pages",
             "gibts_nicht"
         ];
-        $translation = new \App\Translations\JSTranslation($keys, "ThisIsNotGoogleTranslator");
+        $translation = new JSTranslation($keys, "ThisIsNotGoogleTranslator");
         ob_start();
         $translation->renderJS();
         $output = ob_get_clean();
@@ -142,7 +144,7 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase
             "pages",
             "gibts_nicht"
         ];
-        $translation = new \App\Translations\JSTranslation($keys, "ThisIsNotGoogleTranslator");
+        $translation = new JSTranslation($keys, "ThisIsNotGoogleTranslator");
 
         ob_start();
         $translation->renderJS('<script id="my-script">{code}</script>');
@@ -165,7 +167,7 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase
             "gibts_nicht"
         ];
 
-        $translation = new \App\Translations\JSTranslation($keys);
+        $translation = new JSTranslation($keys);
         $translation->addKey("category");
 
         $this->assertEquals(
@@ -187,7 +189,7 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase
             "gibts_nicht"
         ];
 
-        $translation = new \App\Translations\JSTranslation($keys);
+        $translation = new JSTranslation($keys);
         $translation->addKeys(
             ["category",
                 "images"]
@@ -212,7 +214,7 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase
             "pages",
             "gibts_nicht"
         ];
-        $translation = new \App\Translations\JSTranslation($keys, "UniversalTranslator");
+        $translation = new JSTranslation($keys, "UniversalTranslator");
         $this->assertEquals("UniversalTranslator", $translation->getVarName());
     }
 
@@ -223,7 +225,7 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase
             "pages",
             "gibts_nicht"
         ];
-        $translation = new \App\Translations\JSTranslation($keys, "UniversalTranslator");
+        $translation = new JSTranslation($keys, "UniversalTranslator");
         $translation->setVarName("CrapTranslation");
         $this->assertEquals("CrapTranslation", $translation->getVarName());
     }
@@ -235,7 +237,7 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase
             "pages",
             "gibts_nicht"
         ];
-        $translation = new \App\Translations\JSTranslation($keys, "UniversalTranslator");
+        $translation = new JSTranslation($keys, "UniversalTranslator");
         $translation->removeKey("pages_count");
         $this->assertEquals(["pages", "gibts_nicht"], $translation->getKeys());
     }
@@ -249,7 +251,7 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase
             "foo",
             "bar"
         ];
-        $translation = new \App\Translations\JSTranslation($keys, "UniversalTranslator");
+        $translation = new JSTranslation($keys, "UniversalTranslator");
         $translation->removeKeys(["foo", "gibts_nicht"]);
         $this->assertEquals(
             ["pages_count", "pages", "bar"],
