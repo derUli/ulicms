@@ -1,8 +1,10 @@
 <?php
 
-use function App\HTML\icon;
+use App\Translations\JSTranslation;
 
-$menuTranslation = new \App\Translations\JSTranslation(
+use  function App\HTML\icon;
+
+$menuTranslation = new JSTranslation(
     [
     "logout",
     "on",
@@ -12,7 +14,7 @@ $menuTranslation = new \App\Translations\JSTranslation(
 );
 $menuTranslation->render();
 
-$globalTranslation = new \App\Translations\JSTranslation(
+$globalTranslation = new JSTranslation(
     [
     "all",
     "copied_to_clipboard_success",
@@ -22,7 +24,7 @@ $globalTranslation = new \App\Translations\JSTranslation(
 );
 $globalTranslation->render();
 
-$passwordSecurityTranslation = new \App\Translations\JSTranslation(
+$passwordSecurityTranslation = new JSTranslation(
     [
     "short_pass",
     "bad_pass",
