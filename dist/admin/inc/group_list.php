@@ -1,4 +1,6 @@
 <?php
+use App\Translations\JSTranslation;
+
 if (isset($_REQUEST["standard"])) {
     $standard = (int)$_REQUEST["standard"];
     Settings::set('default_acl_group', $standard);
@@ -106,7 +108,9 @@ if (count($groups) > 0) {
     <?php
 }
 
-$translation = new \App\Translations\JSTranslation(array(
+$translation = new JSTranslation(
+    [
     "ask_for_delete"
-        ));
+        ]
+);
 $translation->render();
