@@ -2,6 +2,7 @@
 
 use App\Exceptions\SqlException;
 use App\Registries\LoggerRegistry;
+use App\Utils\Logger;
 
 class DatabaseTest extends \PHPUnit\Framework\TestCase
 {

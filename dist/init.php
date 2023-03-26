@@ -34,6 +34,7 @@ use App\Registries\ModelRegistry;
 use App\Registries\LoggerRegistry;
 use App\Models\Content\TypeMapper;
 use App\Models\Content\Types\DefaultContentTypes;
+use App\Utils\Logger;
 
 // load composer packages
 $composerAutoloadFile = dirname(__FILE__) . '/vendor/autoload.php';

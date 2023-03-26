@@ -2,6 +2,7 @@
 
 use App\Helpers\TestHelper;
 use App\Registries\LoggerRegistry;
+use App\Utils\Logger;
 
 class LoggerTest extends \PHPUnit\Framework\TestCase
 {
@@ -20,7 +21,7 @@ class LoggerTest extends \PHPUnit\Framework\TestCase
         $logger = new Logger(Path::resolve("ULICMS_LOG/test_log"));
         $this->assertTrue(is_dir(Path::resolve("ULICMS_LOG/test_log")));
         LoggerRegistry::register("test_log", $logger);
-        $this->assertInstanceOf("Logger", LoggerRegistry::get("test_log"));
+        $this->assertInstanceOf(Logger::class, LoggerRegistry::get("test_log"));
 
         LoggerRegistry::unregister("test_log");
         $this->assertNull(LoggerRegistry::get("test_log"));

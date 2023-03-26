@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+namespace App\Utils;
+
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
+use CMSConfig;
+
 // Wrapper for KLogger
 class Logger
 {
@@ -18,9 +24,9 @@ class Logger
             @mkdir($path, 0777, true);
         }
         if (is_dir($this->path)) {
-            $this->logger = new Katzgrau\KLogger\Logger(
+            $this->logger = new \Katzgrau\KLogger\Logger(
                 $this->path,
-                Psr\Log\LogLevel::DEBUG,
+                \Psr\Log\LogLevel::DEBUG,
                 [
                 "extension" => "log",
                 "prefix" => "{$environment}_"

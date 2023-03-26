@@ -6,7 +6,7 @@ namespace App\Registries;
 
 defined('ULICMS_ROOT') or exit('no direct script access allowed');
 
-use Logger;
+use App\Utils\Logger;
 
 class LoggerRegistry
 {

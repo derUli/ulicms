@@ -5,6 +5,7 @@ use App\Exceptions\UnknownContentTypeException;
 use App\Models\Content\Comment;
 use App\Models\Content\Category;
 use App\Registries\LoggerRegistry;
+use App\Utils\Logger;
 
 class ContentFactoryTest extends \PHPUnit\Framework\TestCase
 {
