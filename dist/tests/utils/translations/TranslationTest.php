@@ -4,16 +4,16 @@ class TranslationTest extends \PHPUnit\Framework\TestCase
 {
     protected function setUp(): void
     {
-        Translation::init();
+        \App\Translations\Translation::init();
         require_once getLanguageFilePath('en');
-        Translation::loadAllModuleLanguageFiles('en');
-        Translation::loadCurrentThemeLanguageFiles('en');
-        Translation::includeCustomLangFile('en');
+        \App\Translations\Translation::loadAllModuleLanguageFiles('en');
+        \App\Translations\Translation::loadCurrentThemeLanguageFiles('en');
+        \App\Translations\Translation::includeCustomLangFile('en');
     }
 
     public function testGetTranslation()
     {
-        Translation::init();
+        \App\Translations\Translation::init();
         $this->assertEquals(
             "Type your password",
             get_translation("enter_pass")
@@ -148,13 +148,13 @@ Anschließend werden statt die Inhalte immer wieder aus der Datenbank zu laden, 
 
     public function testGetTranslationReturnsCustomTranslation()
     {
-        Translation::set("pages", "Parchments");
+        \App\Translations\Translation::set("pages", "Parchments");
         $this->assertEquals("Parchments", get_translation('pages'));
 
-        Translation::override("pages", "Papers");
+        \App\Translations\Translation::override("pages", "Papers");
         $this->assertEquals("Papers", get_translation('pages'));
 
-        Translation::delete('pages');
+        \App\Translations\Translation::delete('pages');
         $this->assertEquals("Pages", get_translation('pages'));
     }
 

@@ -14,7 +14,7 @@ class CoreFormsControllerTest extends \PHPUnit\Framework\TestCase
             "disallow_rtl_chars" => Settings::get("disallow_rtl_chars")
         ];
         require_once getLanguageFilePath('en');
-        Translation::loadAllModuleLanguageFiles('en');
+        \App\Translations\Translation::loadAllModuleLanguageFiles('en');
     }
 
     protected function tearDown(): void

@@ -17,7 +17,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         ModelRegistry::loadModuleModels();
 
         require_once getLanguageFilePath('en');
-        Translation::loadAllModuleLanguageFiles('en');
+        \App\Translations\Translation::loadAllModuleLanguageFiles('en');
 
         $_SESSION = [];
         $_POST = [];

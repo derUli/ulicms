@@ -12,7 +12,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
 
     protected function setUp(): void
     {
-        Translation::loadAllModuleLanguageFiles('en');
+        \App\Translations\Translation::loadAllModuleLanguageFiles('en');
         Vars::setNoCache(true);
 
         $settings = array(

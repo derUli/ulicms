@@ -23,10 +23,10 @@ if (is_file(getLanguageFilePath($syslang))) {
 } elseif (is_file(getLanguageFilePath('en'))) {
     require getLanguageFilePath('en');
 }
-Translation::loadAllModuleLanguageFiles($syslang);
+\App\Translations\Translation::loadAllModuleLanguageFiles($syslang);
 
 do_event("before_include_custom_lang_file");
-Translation::includeCustomLangFile($syslang);
+\App\Translations\Translation::includeCustomLangFile($syslang);
 
 do_event("after_include_custom_lang_file");
 do_event("before_custom_lang");

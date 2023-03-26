@@ -33,6 +33,7 @@ API-Änderungen:
 * PackageManager in Namespace App\Packages verschoben
 * Logger in Namespace App\Utils verschoben
 * JsTranslation in Namespace App\Translations verschoben
+* Translation in Namespace App\Translations verschoben
 
 Entfernte API-Methoden:
 * ImagineHelper::getLibraryName()

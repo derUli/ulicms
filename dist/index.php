@@ -40,10 +40,10 @@ if (in_array($_SESSION['language'], $languages) && is_file(getLanguageFilePath($
     require getLanguageFilePath('en');
 }
 
-Translation::loadAllModuleLanguageFiles($_SESSION['language']);
-Translation::includeCustomLangFile($_SESSION['language']);
+\App\Translations\Translation::loadAllModuleLanguageFiles($_SESSION['language']);
+\App\Translations\Translation::includeCustomLangFile($_SESSION['language']);
 
-Translation::loadCurrentThemeLanguageFiles($_SESSION['language']);
+\App\Translations\Translation::loadCurrentThemeLanguageFiles($_SESSION['language']);
 do_event("custom_lang_" . $_SESSION['language']);
 
 if (Request::isPost()) {

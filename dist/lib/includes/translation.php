@@ -7,7 +7,7 @@ function get_translation(string $name, array $placeholders = []): string
     $iname = strtoupper($name);
     foreach (get_defined_constants() as $key => $value) {
         if (str_starts_with($key, "TRANSLATION_") && $key == "TRANSLATION_" . $iname) {
-            $custom_translation = Translation::get($key);
+            $custom_translation = \App\Translations\Translation::get($key);
             if ($custom_translation !== null) {
                 $value = $custom_translation;
             }

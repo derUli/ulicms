@@ -2,6 +2,10 @@
 
 declare(strict_types=1);
 
+namespace App\Translations;
+
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
 // This class is a work in progress
 // It's currently only used for overriding of translations
 class Translation
