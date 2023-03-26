@@ -10,7 +10,7 @@
 <?php Template::footer(); ?>
 </div>
 <?php
-$translation = new JSTranslation();
+$translation = new \App\Translations\JSTranslation();
 $translation->addKey('menu');
 $translation->renderJS();
 

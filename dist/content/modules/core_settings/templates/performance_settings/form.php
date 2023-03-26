@@ -165,7 +165,7 @@ if (!$permissionChecker->hasPermission("performance_settings")) {
     <?php
     echo ModuleHelper::endForm();
 
-    $translation = new JSTranslation();
+    $translation = new \App\Translations\JSTranslation();
     $translation->addKey("changes_was_saved");
     $translation->render();
 

@@ -70,7 +70,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
     <?php
     echo ModuleHelper::endForm();
 
-    $translation = new JSTranslation();
+    $translation = new \App\Translations\JSTranslation();
     $translation->addKey("changes_was_saved");
     $translation->render();
 

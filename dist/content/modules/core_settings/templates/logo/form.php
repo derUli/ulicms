@@ -95,7 +95,7 @@ if ($permissionChecker->hasPermission("logo")) {
         </table>
     </form>
     <?php
-    $translation = new JSTranslation();
+    $translation = new \App\Translations\JSTranslation();
     $translation->addKey("delete_logo");
     $translation->addKey("logo_deleted");
     $translation->render();

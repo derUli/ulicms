@@ -118,7 +118,7 @@ if ($permissionChecker->hasPermission("languages")) {
     noPerms();
 }
 
-$translation = new JSTranslation(array(
+$translation = new \App\Translations\JSTranslation(array(
     "ask_for_delete",
     "REALLY_MAKE_DEFAULT_LANGUAGE"
         ));

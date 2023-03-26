@@ -118,7 +118,7 @@ if ($permissionChecker->hasPermission('pages')) {
         )
     );
     combinedScriptHtml();
-    $translation = new JSTranslation();
+    $translation = new \App\Translations\JSTranslation();
     $translation->addKey("ask_for_delete");
     $translation->addKey("wanna_empty_trash");
     $translation->addKey("reset_filters");

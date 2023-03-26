@@ -106,7 +106,7 @@ if (count($groups) > 0) {
     <?php
 }
 
-$translation = new JSTranslation(array(
+$translation = new \App\Translations\JSTranslation(array(
     "ask_for_delete"
         ));
 $translation->render();

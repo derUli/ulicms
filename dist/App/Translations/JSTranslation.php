@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+namespace App\Translations;
+
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
+use ModuleHelper;
+
 // Makes translation strings avaiable for Javascript
 class JSTranslation
 {

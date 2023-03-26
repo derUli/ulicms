@@ -1186,12 +1186,12 @@ if ($permissionChecker->hasPermission('pages')) {
                     </div>
                 </div>
                 <?php
-                $translation = new JSTranslation([], "PageTranslation");
+                $translation = new \App\Translations\JSTranslation([], "PageTranslation");
             $translation->addKey("confirm_exit_without_save");
             $translation->addKey("fill_all_required_fields");
             $translation->render();
 
-            $translation = new JSTranslation();
+            $translation = new \App\Translations\JSTranslation();
             $translation->addKey("ask_for_delete");
             $translation->addKey("page_saved");
             $translation->addKey("fill_all_required_fields");

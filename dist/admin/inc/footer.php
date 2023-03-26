@@ -2,7 +2,7 @@
 
 use function App\HTML\icon;
 
-$menuTranslation = new JSTranslation(
+$menuTranslation = new \App\Translations\JSTranslation(
     [
     "logout",
     "on",
@@ -12,7 +12,7 @@ $menuTranslation = new JSTranslation(
 );
 $menuTranslation->render();
 
-$globalTranslation = new JSTranslation(
+$globalTranslation = new \App\Translations\JSTranslation(
     [
     "all",
     "copied_to_clipboard_success",
@@ -22,7 +22,7 @@ $globalTranslation = new JSTranslation(
 );
 $globalTranslation->render();
 
-$passwordSecurityTranslation = new JSTranslation(
+$passwordSecurityTranslation = new \App\Translations\JSTranslation(
     [
     "short_pass",
     "bad_pass",

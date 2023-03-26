@@ -32,6 +32,7 @@ API-Änderungen:
 * PasswordReset in Namespace App\Models\Users verschoben
 * PackageManager in Namespace App\Packages verschoben
 * Logger in Namespace App\Utils verschoben
+* JsTranslation in Namespace App\Translations verschoben
 
 Entfernte API-Methoden:
 * ImagineHelper::getLibraryName()

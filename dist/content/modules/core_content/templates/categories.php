@@ -236,7 +236,7 @@ if (!$permissionChecker->hasPermission("categories")) {
         }
     }
 }
-$translation = new JSTranslation(array(
+$translation = new \App\Translations\JSTranslation(array(
     "ask_for_delete"
         ));
 $translation->render();

@@ -281,7 +281,7 @@ if (!$permissionChecker->hasPermission("other")) {
     <?php
     echo ModuleHelper::endForm();
 
-    $translation = new JSTranslation();
+    $translation = new \App\Translations\JSTranslation();
     $translation->addKey("changes_was_saved");
     $translation->render();
 

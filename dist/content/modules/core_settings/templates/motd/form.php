@@ -59,7 +59,7 @@ if ($permissionChecker->hasPermission("motd")) {
             <i class="fa fa-save"></i> <?php translate("save_changes"); ?></button>
     </div>
     <?php
-    $translation = new JSTranslation();
+    $translation = new \App\Translations\JSTranslation();
     $translation->addKey("changes_was_saved");
     $translation->render();
 

@@ -260,7 +260,7 @@ if (!$permissionChecker->hasPermission("design")) {
     </p>
     <?php
     echo ModuleHelper::endForm();
-    $translation = new JSTranslation();
+    $translation = new \App\Translations\JSTranslation();
     $translation->addKey("changes_was_saved");
     $translation->render();
     enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/design.js"));

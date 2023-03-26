@@ -777,7 +777,7 @@ if (
         <i class="far fa-save"></i> <?php translate("save"); ?>
     </button>
     <?php
-    $translation = new JSTranslation([], "PageTranslation");
+    $translation = new \App\Translations\JSTranslation([], "PageTranslation");
     $translation->addKey("confirm_exit_without_save");
     $translation->addKey("fill_all_required_fields");
     $translation->render();

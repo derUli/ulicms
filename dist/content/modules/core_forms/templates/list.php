@@ -82,7 +82,7 @@ if (!$permissionChecker->hasPermission("forms")) {
         </table>
     </div>
     <?php
-    $translation = new JSTranslation();
+    $translation = new \App\Translations\JSTranslation();
     $translation->addKey("ask_for_delete");
     $translation->renderJS();
 }

@@ -308,7 +308,7 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
     }
     ?>
     <?php
-    $translation = new JSTranslation([], "UserTranslation");
+    $translation = new \App\Translations\JSTranslation([], "UserTranslation");
     $translation->addKey("passwords_not_equal");
     $translation->render();
 
