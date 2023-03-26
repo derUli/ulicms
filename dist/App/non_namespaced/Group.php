@@ -28,8 +28,7 @@ class Group
     // get the primary group id of the current user
     public static function getCurrentGroupId(): ?int
     {
-        return isset($_SESSION['group_id']) ?
-                intval($_SESSION['group_id']) : null;
+        return $_SESSION['group_id'] ?? null;
     }
 
     // get the primary group of the current user
