@@ -41,7 +41,6 @@ if (in_array($_SESSION['language'], $languages) && is_file(getLanguageFilePath($
 }
 
 \App\Translations\Translation::loadAllModuleLanguageFiles($_SESSION['language']);
-\App\Translations\Translation::includeCustomLangFile($_SESSION['language']);
 
 \App\Translations\Translation::loadCurrentThemeLanguageFiles($_SESSION['language']);
 do_event("custom_lang_" . $_SESSION['language']);

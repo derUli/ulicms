@@ -26,7 +26,6 @@ if (is_file(getLanguageFilePath($syslang))) {
 \App\Translations\Translation::loadAllModuleLanguageFiles($syslang);
 
 do_event("before_include_custom_lang_file");
-\App\Translations\Translation::includeCustomLangFile($syslang);
 
 do_event("after_include_custom_lang_file");
 do_event("before_custom_lang");

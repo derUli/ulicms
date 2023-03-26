@@ -49,15 +49,6 @@ class Translation
         return $retval;
     }
 
-    public static function includeCustomLangFile(string $lang): void
-    {
-        $file = ULICMS_ROOT . "/lang/custom/" . basename($lang) . ".php";
-
-        if (is_file($file)) {
-            require_once $file;
-        }
-    }
-
     public static function loadAllModuleLanguageFiles(string $lang): void
     {
         $modules = getAllModules();

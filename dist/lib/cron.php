@@ -34,7 +34,6 @@ if (!defined("LOADED_LANGUAGE_FILE")) {
     }
 
     \App\Translations\Translation::loadAllModuleLanguageFiles($_SESSION['language']);
-    \App\Translations\Translation::includeCustomLangFile($_SESSION['language']);
 }
 
 if (Settings::get("delete_ips_after_48_hours")) {
