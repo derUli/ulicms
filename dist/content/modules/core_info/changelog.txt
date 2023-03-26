@@ -7,6 +7,7 @@ Neue Features:
 Entfernte Features:
 * Experteneinstellungen
 * Patch Manager
+* Custom Sprachdateien
 
 Neue API-Methoden:
 * DateTimeHelper::getCurrentTimezone()
@@ -19,17 +20,21 @@ API-Änderungen:
 * ModelRegistry in Namespace App\Registries verschoben
 * ActionRegistry in Namespace App\Registries verschoben
 * LoggerRegistry in Namespace App\Registries verschoben
-* UliCMSVersion verschoben nach App\Backend
+* UliCMSVersion in Namespace App\Backend verschoben
 * AdminMenu in Namespace App\Backend\Menu verschoben
 * MenuEntry in Namespace App\Backend\Menu verschoben
 * DBMigrator in Namespace App\Database verschoben
 * AntispamHelper in Namespace App\Helpers verschoben
 * Mailer in Namespace App\Utils verschoben
 * SinPackageInstaller in Namespace App\Packages verschoben
-* ImagineHelper verschoben in Namespace App\Helpers verschoben
-* PrivacyCheckbox verschoben in Namespace App\Security verschoben
-* Helper verschoben nach App\Helpers
-* PasswordReset verschoben nach App\Models\Users
+* ImagineHelper in Namespace App\Helpers verschoben
+* PrivacyCheckbox in Namespace App\Security verschoben
+* Helper in Namespace App\Helpers verschoben
+* PasswordReset in Namespace App\Models\Users verschoben
+* PackageManager in Namespace App\Packages verschoben
+* Logger in Namespace App\Utils verschoben
+* JsTranslation in Namespace App\Translations verschoben
+* Translation in Namespace App\Translations verschoben
 
 Entfernte API-Methoden:
 * ImagineHelper::getLibraryName()
@@ -70,6 +75,10 @@ Entfernte API-Methoden:
 * Template::poweredByUliCMS()
 * headline()
 * is_frontpage()
+* User->getGroupId()
+* User->setGroupId()
+* User->getGroup()
+* User->setGroup()
 
 ===== Neues in UliCMS 2023.1 =====
 
