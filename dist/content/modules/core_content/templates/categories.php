@@ -3,6 +3,7 @@
 // TODO: refactor this file into multiple files
 use App\Models\Content\Categories;
 use App\HTML\Alert;
+use App\Translations\JSTranslation;
 
 $permissionChecker = new ACL();
 if (!$permissionChecker->hasPermission("categories")) {
@@ -236,7 +237,9 @@ if (!$permissionChecker->hasPermission("categories")) {
         }
     }
 }
-$translation = new \App\Translations\JSTranslation(array(
+$translation = new JSTranslation(
+    [
     "ask_for_delete"
-        ));
+    ]
+);
 $translation->render();
