@@ -11,6 +11,11 @@ defined('ULICMS_ROOT') or exit('no direct script access allowed');
  */
 class Translation
 {
+    /**
+     * Load languages files of all modules
+     * @param string $lang
+     * @return void
+     */
     public static function loadAllModuleLanguageFiles(string $lang): void
     {
         $modules = getAllModules();
@@ -35,6 +40,11 @@ class Translation
         }
     }
 
+    /**
+     * Load language files of the current
+     * @param string $lang
+     * @return void
+     */
     public static function loadCurrentThemeLanguageFiles(string $lang): void
     {
         $files = [
