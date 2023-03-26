@@ -9,18 +9,29 @@ use App\Utils\File;
 use App\Constants\HtmlEditor;
 use App\Helpers\Helper;
 
+/**
+ * Backend utilities
+ */
 class BackendHelper extends Helper
 {
-    // returns the current backend action or "home" if not specified
+    /**
+     * Get the current backend action
+     * @return string
+     */
     public static function getAction(): string
     {
-        return isset($_REQUEST["action"]) ? $_REQUEST["action"] : "home";
+        return $_REQUEST["action"] ?? "home";
     }
 
-    // set backend action parameter
+    /**
+     * Set the current backend action
+     * @param string $action
+     * @return void
+     */
     public static function setAction(string $action): void
     {
         $_REQUEST["action"] = $action;
+
         if (Request::isPost()) {
             $_POST["action"] = $action;
         } else {
@@ -28,7 +39,10 @@ class BackendHelper extends Helper
         }
     }
 
-    // add html editor scripts to the script queue
+    /**
+     * Enqueue HTML editor scripts
+     * @return void
+     */
     public static function enqueueEditorScripts(): void
     {
         // ckeditor is huge so embed it only if this is the user'S preferred html editor
@@ -50,12 +64,15 @@ class BackendHelper extends Helper
         enqueueScriptFile(
             "../node_modules/codemirror-minified/mode/xml/xml.js"
         );
+
         enqueueScriptFile(
             "../node_modules/codemirror-minified/mode/javascript/javascript.js"
         );
+
         enqueueScriptFile(
             "../node_modules/codemirror-minified/mode/clike/clike.js"
         );
+
         enqueueScriptFile(
             "../node_modules/codemirror-minified/mode/css/css.js"
         );
@@ -66,6 +83,11 @@ class BackendHelper extends Helper
         ));
     }
 
+
+   /**
+    * Get CKEditor Skin.
+    * @return array
+    */
     public static function getCKEditorSkins(): array
     {
         $skins = [];
