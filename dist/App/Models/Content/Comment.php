@@ -11,7 +11,6 @@ use ContentFactory;
 use App\Constants\CommentStatus;
 use InvalidArgumentException;
 use Model;
-use StringHelper;
 use App\Exceptions\DatasetNotFoundException;
 use App\Security\SpamChecker\SpamFilterConfiguration;
 use App\Security\SpamChecker\CommentSpamChecker;
