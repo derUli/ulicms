@@ -591,7 +591,7 @@ add_translation("COMPATIBLE_TO", "Compatible to");
 add_translation("DEPENDENCIES", "Dependencies");
 add_translation("LICENSE_AGREEMENT", "License Agreeement");
 add_translation("DEPENDENCY_X_IS_NOT_INSTALLED", "Depedency %x% is not installed.");
-add_translation("THIS_ULICMS_VERSION_IS_NOT_SUPPORTED", "The package is not with your UliCMS Version compatible.");
+add_translation("THIS_ULICMS_VERSION_IS_NOT_SUPPORTED", "The package is not compatible with your UliCMS Version.");
 add_translation("SHA1_CHECKSUM_NOT_EQUAL", "SHA1 checksums are not equal.");
 add_translation("ERRORS", "Errors");
 

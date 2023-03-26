@@ -56,7 +56,7 @@ class SinPackageInstallerTest extends \PHPUnit\Framework\TestCase
         $this->assertCount(0, $installer->getErrors());
     }
 
-    public function testGetErrorsReturnsErrors()
+    public function testGetErrorsReturnsErrors1()
     {
         $installer = $this->getSinPackageInstaller("ip_api_com-1.0.sin");
         $installer->isInstallable();
@@ -65,8 +65,33 @@ class SinPackageInstallerTest extends \PHPUnit\Framework\TestCase
         $this->assertCount(2, $errors);
         $phpversion = phpversion();
         $this->assertEquals("The PHP version {$phpversion} is not supported.", $errors[0]);
-        $this->assertEquals("The package is not with your UliCMS Version compatible.", $errors[1]);
+        $this->assertEquals("The package is not compatible with your UliCMS Version.", $errors[1]);
     }
+
+
+    public function testGetErrorsReturnsErrors2()
+    {
+        $installer = $this->getSinPackageInstaller("hello_world-1.0.incompatible.sin");
+
+        $this->assertFalse($installer->isInstallable());
+
+        $errors = $installer->getErrors();
+        $this->assertStringContainsString("Depedency foo is not installed.", $errors[0]);
+        $this->assertStringContainsString("Depedency bar is not installed.", $errors[1]);
+
+        $this->assertStringContainsString("The PHP version", $errors[2]);
+        $this->assertStringContainsString("is not supported.", $errors[2]);
+
+        $this->assertStringContainsString("The MySQL version", $errors[3]);
+        $this->assertStringContainsString("is not supported.", $errors[3]);
+
+        $this->assertStringContainsString("The required php extension foo is not installed.", $errors[4]);
+
+        $this->assertStringContainsString("The package is not compatible with your UliCMS Version.", $errors[5]);
+
+        $this->assertStringContainsString("SHA1 checksums are not equal.", $errors[6]);
+    }
+
 
     public function testLoadPackage()
     {

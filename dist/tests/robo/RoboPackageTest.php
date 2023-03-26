@@ -124,7 +124,7 @@ class RoboPackageTest extends RoboTestBase
             $output
         );
         $this->assertStringContainsString(
-            "The package is not with your UliCMS Version compatible.",
+            "The package is not compatible with your UliCMS Version.",
             $output
         );
     }
