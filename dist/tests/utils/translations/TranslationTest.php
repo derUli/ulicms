@@ -4,7 +4,6 @@ class TranslationTest extends \PHPUnit\Framework\TestCase
 {
     protected function setUp(): void
     {
-        \App\Translations\Translation::init();
         require_once getLanguageFilePath('en');
         \App\Translations\Translation::loadAllModuleLanguageFiles('en');
         \App\Translations\Translation::loadCurrentThemeLanguageFiles('en');
@@ -12,7 +11,6 @@ class TranslationTest extends \PHPUnit\Framework\TestCase
 
     public function testGetTranslation()
     {
-        \App\Translations\Translation::init();
         $this->assertEquals(
             "Type your password",
             get_translation("enter_pass")
@@ -143,18 +141,6 @@ Anschließend werden statt die Inhalte immer wieder aus der Datenbank zu laden, 
     public function testSingularOrPluralWith3ExpectSingular()
     {
         $this->assertEquals("3 Biere", singularOrPlural(3, "%number% Bier", "%number% Biere"));
-    }
-
-    public function testGetTranslationReturnsCustomTranslation()
-    {
-        \App\Translations\Translation::set("pages", "Parchments");
-        $this->assertEquals("Parchments", get_translation('pages'));
-
-        \App\Translations\Translation::override("pages", "Papers");
-        $this->assertEquals("Papers", get_translation('pages'));
-
-        \App\Translations\Translation::delete('pages');
-        $this->assertEquals("Pages", get_translation('pages'));
     }
 
     public function testGetTranslationNotFoundReturnsKey()

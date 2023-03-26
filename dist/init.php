@@ -117,7 +117,6 @@ if (!is_file($htaccessLogFolderTarget)) {
     copy($htaccessForLogFolderSource, $htaccessLogFolderTarget);
 }
 
-\App\Translations\Translation::init();
 
 if (isset($config->exception_logging) && $config->exception_logging) {
     LoggerRegistry::register(
