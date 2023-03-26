@@ -14,7 +14,7 @@ if (!defined("RESPONSIVE_FM")) {
                 HTTPStatusCodeResult($status);
             }
             if ($redirect) {
-                Response::redirect($redirect, $redirectStatus);
+                self::redirect($redirect, $redirectStatus);
             }
         }
 
@@ -23,7 +23,7 @@ if (!defined("RESPONSIVE_FM")) {
             string $url = 'http://www.ulicms.de',
             int $status = HttpStatusCode::MOVED_TEMPORARILY
         ): void {
-            Response::sendStatusHeader($status);
+            self::sendStatusHeader($status);
             send_header("Location: " . $url);
             exit();
         }
@@ -34,9 +34,9 @@ if (!defined("RESPONSIVE_FM")) {
             $status = HttpStatusCode::MOVED_TEMPORARILY
         ): void {
             if ($controller == null) {
-                Response::redirect(ModuleHelper::buildActionURL($action), $status);
+                self::redirect(ModuleHelper::buildActionURL($action), $status);
             }
-            Response::redirect(
+            self::redirect(
                 ModuleHelper::buildMethodCallUrl(
                     $controller,
                     $action
@@ -93,7 +93,7 @@ if (!defined("RESPONSIVE_FM")) {
             $safeHosts = null
         ): void {
             $url = self::getSafeRedirectUrl($url, $safeHosts);
-            Response::redirect($url, $status);
+            self::redirect($url, $status);
         }
 
         public static function sendStatusHeader(?int $nr): bool
