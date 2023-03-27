@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Content\Categories;
+use App\Translations\JSTranslation;
 
 $permissionChecker = new ACL();
 
@@ -118,7 +119,9 @@ if ($permissionChecker->hasPermission("videos")) {
     noPerms();
 }
 
-$translation = new \App\Translations\JSTranslation(array(
+$translation = new JSTranslation(
+    [
     "ask_for_delete"
-        ));
+       ]
+);
 $translation->render();
