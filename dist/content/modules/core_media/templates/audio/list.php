@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Content\Categories;
+use App\Translations\JSTranslation;
 
 $permissionChecker = new ACL();
 $audio_folder = ULICMS_ROOT . "/content/audio";
@@ -131,7 +132,9 @@ if ($permissionChecker->hasPermission("audio")) {
     noPerms();
 }
 
-$translation = new \App\Translations\JSTranslation(array(
+$translation = new JSTranslation(
+    [
     "ask_for_delete"
-        ));
+    ]
+);
 $translation->render();
