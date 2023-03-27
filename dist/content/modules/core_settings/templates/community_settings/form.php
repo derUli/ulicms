@@ -1,6 +1,7 @@
 <?php
 
 use App\Constants\RequestMethod;
+use App\Security\PermissionChecker;
 
 $types = get_available_post_types();
 $typeSelection = [];
@@ -76,7 +77,7 @@ echo App\HTML\Input::checkBox(
 <?php
 echo ModuleHelper::endForm();
 
-$translation = new \App\Translations\JSTranslation();
+$translation = new JSTranslation();
 $translation->addKey("changes_was_saved");
 $translation->render();
 
