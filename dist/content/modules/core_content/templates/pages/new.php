@@ -9,6 +9,7 @@ use App\Models\Content\Types\DefaultContentTypes;
 use App\Helpers\NumberFormatHelper;
 use App\CoreContent\UIUtils;
 use App\HTML\Input;
+use App\Translations\JSTranslation;
 
 use function App\HTML\icon;
 
@@ -777,7 +778,7 @@ if (
         <i class="far fa-save"></i> <?php translate("save"); ?>
     </button>
     <?php
-    $translation = new \App\Translations\JSTranslation([], "PageTranslation");
+    $translation = new JSTranslation([], "PageTranslation");
     $translation->addKey("confirm_exit_without_save");
     $translation->addKey("fill_all_required_fields");
     $translation->render();
