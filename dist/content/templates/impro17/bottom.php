@@ -1,4 +1,10 @@
-<?php Template::comments(); ?>
+<?php
+
+use App\Translations\JSTranslation;
+
+Template::comments();
+
+?>
 <div class="advertisement">
     <?php random_banner(); ?>
 </div>
@@ -10,7 +16,7 @@
 <?php Template::footer(); ?>
 </div>
 <?php
-$translation = new \App\Translations\JSTranslation();
+$translation = new JSTranslation();
 $translation->addKey('menu');
 $translation->renderJS();
 
