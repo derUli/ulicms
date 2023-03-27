@@ -89,7 +89,7 @@ if ($permissionChecker->hasPermission("default_access_restrictions_edit")) {
         <?php
     }
     echo ModuleHelper::endForm();
-    $translation = new \App\Translations\JSTranslation();
+    $translation = new PermissionChecker();
     $translation->addKey("changes_was_saved");
     $translation->render();
     enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/default_edit_restrictions.js"));
