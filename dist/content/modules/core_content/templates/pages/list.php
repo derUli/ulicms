@@ -4,6 +4,7 @@
 // This should be rewritten with MVC pattern and using partial views
 use App\Security\PermissionChecker;
 use App\HTML\Alert;
+use App\Translations\JSTranslation;
 
 use function App\HTML\icon;
 
@@ -118,7 +119,7 @@ if ($permissionChecker->hasPermission('pages')) {
         )
     );
     combinedScriptHtml();
-    $translation = new \App\Translations\JSTranslation();
+    $translation = new JSTranslation();
     $translation->addKey("ask_for_delete");
     $translation->addKey("wanna_empty_trash");
     $translation->addKey("reset_filters");
