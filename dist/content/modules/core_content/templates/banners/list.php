@@ -3,6 +3,7 @@
 use App\Models\Content\Advertisement\Banners;
 use App\Models\Content\Categories;
 use App\HTML\Alert;
+use App\Translations\JSTranslation;
 
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("banners")) {
@@ -129,7 +130,9 @@ if ($permissionChecker->hasPermission("banners")) {
     noPerms();
 }
 
-$translation = new \App\Translations\JSTranslation(array(
+$translation = new JSTranslation(
+    [
     "ask_for_delete"
-        ));
+    ]
+);
 $translation->render();

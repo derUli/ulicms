@@ -79,6 +79,8 @@ Entfernte API-Methoden:
 * User->setGroupId()
 * User->getGroup()
 * User->setGroup()
+* Request::redirect()
+* Request::javascriptRedirect()
 
 ===== Neues in UliCMS 2023.1 =====
 

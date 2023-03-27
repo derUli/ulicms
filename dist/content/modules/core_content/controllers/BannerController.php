@@ -83,7 +83,7 @@ class BannerController extends Controller
 
     public function deletePost(): void
     {
-        $id = Request::getVat("banner", 0, 'int');
+        $id = Request::getVar("banner", 0, 'int');
 
         $this->_deletePost($id);
         // Todo: handle errors
