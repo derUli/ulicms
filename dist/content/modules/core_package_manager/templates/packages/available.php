@@ -1,6 +1,7 @@
 <?php
 
 use App\Security\PermissionChecker;
+use App\Translations\JSTranslation;
 
 $permissionChecker = new PermissionChecker(get_user_id());
 if (!$permissionChecker->hasPermission("install_packages")) {
@@ -17,7 +18,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
     </div>
     <div id="pkglist" data-url="<?php echo ModuleHelper::buildMethodCallUrl(PackageController::class, "availablePackages"); ?>"></div>
     <?php
-    $jsTranslation = new \App\Translations\JSTranslation([], "AvailablePackageTranslation");
+    $jsTranslation = new JSTranslation([], "AvailablePackageTranslation");
     $jsTranslation->addKey("ASK_FOR_INSTALL_PACKAGE");
     $jsTranslation->render();
 
