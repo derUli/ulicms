@@ -1,4 +1,6 @@
 <?php
+use App\Translations\JSTranslation;
+
 $permissionChecker = new ACL();
 if (!$permissionChecker->hasPermission("forms")) {
     noPerms();
@@ -82,7 +84,7 @@ if (!$permissionChecker->hasPermission("forms")) {
         </table>
     </div>
     <?php
-    $translation = new \App\Translations\JSTranslation();
+    $translation = new JSTranslation();
     $translation->addKey("ask_for_delete");
     $translation->renderJS();
 }
