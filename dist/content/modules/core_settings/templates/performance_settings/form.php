@@ -5,6 +5,7 @@ use App\Security\PermissionChecker;
 use App\Constants\RequestMethod;
 use App\HTML\Input;
 use App\HTML\ListItem;
+use App\Translations\JSTranslation;
 
 $lazy_loading = [];
 
@@ -123,15 +124,15 @@ if (!$permissionChecker->hasPermission("performance_settings")) {
         "lazy_loading[]",
         $lazy_loading,
         [
-                                                                                                                            new ListItem(
-                                                                                                                                'img',
-                                                                                                                                get_translation('lazy_loading_img')
-                                                                                                                            ),
-                                                                                                                            new ListItem(
-                                                                                                                                'iframe',
-                                                                                                                                get_translation('lazy_loading_iframe')
-                                                                                                                            ),
-                                                                                                                        ],
+                                                                                                                                            new ListItem(
+                                                                                                                                                'img',
+                                                                                                                                                get_translation('lazy_loading_img')
+                                                                                                                                            ),
+                                                                                                                                            new ListItem(
+                                                                                                                                                'iframe',
+                                                                                                                                                get_translation('lazy_loading_iframe')
+                                                                                                                                            ),
+                                                                                                                                        ],
         1
     );
     ?>
@@ -165,7 +166,7 @@ if (!$permissionChecker->hasPermission("performance_settings")) {
     <?php
     echo ModuleHelper::endForm();
 
-    $translation = new \App\Translations\JSTranslation();
+    $translation = new JSTranslation();
     $translation->addKey("changes_was_saved");
     $translation->render();
 
