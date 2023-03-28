@@ -1,5 +1,6 @@
 <?php
 use App\Helpers\ImagineHelper;
+use App\Translations\JSTranslation;
 
 use function App\HTML\imageTag;
 
@@ -95,7 +96,7 @@ if ($permissionChecker->hasPermission("logo")) {
         </table>
     </form>
     <?php
-    $translation = new \App\Translations\JSTranslation();
+    $translation = new JSTranslation();
     $translation->addKey("delete_logo");
     $translation->addKey("logo_deleted");
     $translation->render();
