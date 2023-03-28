@@ -1,7 +1,7 @@
 <?php
 
 use App\Utils\File;
-
+use App\Translations\JSTranslation;
 use App\Helpers\ImagineHelper;
 
 use function App\HTML\imageTag;
@@ -116,7 +116,7 @@ if ($permissionChecker->hasPermission("favicon")) {
         </table>
     </form>
     <?php
-    $translation = new \App\Translations\JSTranslation();
+    $translation = new JSTranslation();
     $translation->addKey("delete_favicon");
     $translation->addKey("favicon_deleted");
     $translation->render();
