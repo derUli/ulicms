@@ -2,6 +2,7 @@
 
 use App\Constants\RequestMethod;
 use App\HTML\Alert;
+use App\Translations\JSTranslation;
 
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("privacy_settings")) {
@@ -151,7 +152,7 @@ if ($permissionChecker->hasPermission("privacy_settings")) {
             <?php translate("save_changes"); ?></button>
     </div>
     <?php
-    $translation = new \App\Translations\JSTranslation();
+    $translation = new JSTranslation();
     $translation->addKey("changes_was_saved");
     $translation->render();
 
