@@ -1,4 +1,6 @@
 <?php
+use App\Translations\JSTranslation;
+
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermission("users_create")) {
     $languages = getAvailableBackendLanguages();
@@ -152,7 +154,7 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
         </div>
     </form>
     <?php
-    $translation = new \App\Translations\JSTranslation([], "UserTranslation");
+    $translation = new JSTranslation([], "UserTranslation");
     $translation->addKey("passwords_not_equal");
     $translation->render();
     enqueueScriptFile(
