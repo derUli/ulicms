@@ -4,6 +4,7 @@ use App\Constants\RequestMethod;
 use App\Constants\HtmlEditor;
 use App\HTML\Input;
 use App\Helpers\DateTimeHelper;
+use App\Translations\JSTranslation;
 
 use function App\HTML\imageTag;
 
@@ -33,8 +34,8 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
             echo imageTag(
             $user->getAvatar(),
             [
-                                                                        "alt" => get_translation("avatar_image")
-                                                                    ]
+                                                                            "alt" => get_translation("avatar_image")
+                                                                        ]
         );
         ?>
         </div>
@@ -308,7 +309,7 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
     }
     ?>
     <?php
-    $translation = new \App\Translations\JSTranslation([], "UserTranslation");
+    $translation = new JSTranslation([], "UserTranslation");
     $translation->addKey("passwords_not_equal");
     $translation->render();
 
