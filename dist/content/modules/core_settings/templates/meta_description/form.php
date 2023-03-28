@@ -1,4 +1,6 @@
 <?php
+use App\Translations\JSTranslation;
+
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("settings_simple")) {
     $languages = getAllLanguages();
@@ -58,7 +60,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
     <?php
     echo ModuleHelper::endForm();
 
-    $translation = new \App\Translations\JSTranslation();
+    $translation = new JSTranslation();
     $translation->addKey("changes_was_saved");
     $translation->render();
 
