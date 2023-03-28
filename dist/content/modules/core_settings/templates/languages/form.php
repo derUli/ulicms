@@ -1,5 +1,5 @@
 <?php
-
+use App\Translations\JSTranslation;
 use App\Models\Content\Language;
 
 $permissionChecker = new ACL();
@@ -118,8 +118,10 @@ if ($permissionChecker->hasPermission("languages")) {
     noPerms();
 }
 
-$translation = new \App\Translations\JSTranslation(array(
+$translation = new JSTranslation(
+    [
     "ask_for_delete",
     "REALLY_MAKE_DEFAULT_LANGUAGE"
-        ));
+       ]
+);
 $translation->render();
