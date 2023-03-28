@@ -3,6 +3,7 @@
 use App\HTML\Input;
 use App\HTML\ListItem;
 use App\Constants\RequestMethod;
+use App\Translations\JSTranslation;
 
 $languages = getAllLanguages();
 $errorCodes = array(
@@ -82,7 +83,7 @@ echo ModuleHelper::buildMethodCallForm(
 <?php
 echo ModuleHelper::endForm();
 
-$translation = new \App\Translations\JSTranslation();
+$translation = new JSTranslation();
 $translation->addKey("changes_was_saved");
 $translation->render();
 
