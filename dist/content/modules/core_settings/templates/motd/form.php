@@ -1,4 +1,6 @@
 <?php
+use App\Translations\JSTranslation;
+
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("motd")) {
     $editor = get_html_editor();
@@ -59,7 +61,7 @@ if ($permissionChecker->hasPermission("motd")) {
             <i class="fa fa-save"></i> <?php translate("save_changes"); ?></button>
     </div>
     <?php
-    $translation = new \App\Translations\JSTranslation();
+    $translation = new JSTranslation();
     $translation->addKey("changes_was_saved");
     $translation->render();
 
