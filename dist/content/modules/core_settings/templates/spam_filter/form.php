@@ -1,3 +1,7 @@
+<?php
+use App\Translations\JSTranslation;
+
+?>
 <p>
     <a
         href="<?php echo ModuleHelper::buildActionURL("settings_categories"); ?>"
@@ -6,8 +10,8 @@
 <h1><?php translate("spamfilter"); ?></h1>
 <?php
 $permissionChecker = new ACL();
-        if ($permissionChecker->hasPermission("spam_filter")) {
-            ?>
+if ($permissionChecker->hasPermission("spam_filter")) {
+    ?>
     <form id="spamfilter_settings" name="?action=spam_filter" method="post">
         <?php echo ModuleHelper::buildMethodCallForm("SpamFilterController", "save"); ?>
         <div class="checkbox">
@@ -15,10 +19,10 @@ $permissionChecker = new ACL();
                                                     id="spamfilter_enabled" name="spamfilter_enabled"
                                                     class="js-switch"
                                                     <?php
-                                                            if (Settings::get("spamfilter_enabled") == "yes") {
-                                                                echo " checked";
-                                                            }
-            ?>
+                                                    if (Settings::get("spamfilter_enabled") == "yes") {
+                                                        echo " checked";
+                                                    }
+    ?>
                                                     value="yes">
                                                     <?php translate("spamfilter_enabled"); ?>
             </label>
@@ -28,7 +32,7 @@ $permissionChecker = new ACL();
         if (Settings::get("spamfilter_enabled") != "yes") {
             echo " style='display:none;'";
         }
-            ?>>
+    ?>>
             <p>
                 <label for="spamfilter_words_blacklist"><?php translate("blacklist"); ?></label><br />
                 <textarea name="spamfilter_words_blacklist"
@@ -43,10 +47,10 @@ $permissionChecker = new ACL();
                                                             name="disallow_chinese_chars" id="disallow_chinese_chars"
                                                             class="js-switch"
                                                             <?php
-                                                                if (Settings::get("disallow_chinese_chars")) {
-                                                                    echo " checked=\"checked\"";
-                                                                }
-            ?>> <?php translate("disallow_chinese_chars"); ?>
+                                                        if (Settings::get("disallow_chinese_chars")) {
+                                                            echo " checked=\"checked\"";
+                                                        }
+    ?>> <?php translate("disallow_chinese_chars"); ?>
                 </label>
             </div>
             <div class="checkbox">
@@ -55,10 +59,10 @@ $permissionChecker = new ACL();
 
                                                              name="disallow_cyrillic_chars" id="disallow_cyrillic_chars"
                                                              <?php
-             if (Settings::get("disallow_cyrillic_chars")) {
-                 echo " checked=\"checked\"";
-             }
-            ?>> <?php translate("disallow_cyrillic_chars"); ?>
+     if (Settings::get("disallow_cyrillic_chars")) {
+         echo " checked=\"checked\"";
+     }
+    ?>> <?php translate("disallow_cyrillic_chars"); ?>
                 </label>
             </div>
             <div class="checkbox">
@@ -66,10 +70,10 @@ $permissionChecker = new ACL();
                                                         class="js-switch"
                                                         name="disallow_rtl_chars" id="disallow_rtl_chars"
                                                         <?php
-                                                        if (Settings::get("disallow_rtl_chars")) {
-                                                            echo " checked=\"checked\"";
-                                                        }
-            ?>> <?php translate("disallow_rtl_chars"); ?>
+                                                if (Settings::get("disallow_rtl_chars")) {
+                                                    echo " checked=\"checked\"";
+                                                }
+    ?>> <?php translate("disallow_rtl_chars"); ?>
                 </label>
             </div>
             <div class="checkbox">
@@ -83,10 +87,10 @@ $permissionChecker = new ACL();
                                                               class="js-switch"
                                                               name="check_mx_of_mail_address" id="check_mx_of_mail_address"
                                                               <?php
-                  if (Settings::get("check_mx_of_mail_address")) {
-                      echo " checked=\"checked\"";
-                  }
-            ?>> <?php translate("check_mx_of_mail_address"); ?>
+          if (Settings::get("check_mx_of_mail_address")) {
+              echo " checked=\"checked\"";
+          }
+    ?>> <?php translate("check_mx_of_mail_address"); ?>
                 </label>
             </div>
             <p>
@@ -104,11 +108,11 @@ $permissionChecker = new ACL();
     </form>
 
     <?php
-    $jsTranslation = new \App\Translations\JSTranslation([], "SettingsTranslation");
-            $jsTranslation->addKey("changes_was_saved");
-            $jsTranslation->render();
-            enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/spam_filter.js"));
-            combinedScriptHtml();
-        } else {
-            noPerms();
-        }
+    $jsTranslation = new JSTranslation([], "SettingsTranslation");
+    $jsTranslation->addKey("changes_was_saved");
+    $jsTranslation->render();
+    enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/spam_filter.js"));
+    combinedScriptHtml();
+} else {
+    noPerms();
+}
