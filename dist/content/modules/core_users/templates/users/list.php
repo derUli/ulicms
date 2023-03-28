@@ -1,6 +1,7 @@
 <?php
 
 use App\HTML\Alert;
+use App\Translations\JSTranslation;
 
 use function App\HTML\imageTag;
 
@@ -149,9 +150,11 @@ if ($permissionChecker->hasPermission("users")) {
     noPerms();
 }
 
-$translation = new \App\Translations\JSTranslation(array(
+$translation = new JSTranslation(
+    [
     "ask_for_delete"
-        ));
+    ]
+);
 $translation->render();
 
 enqueueScriptFile(
