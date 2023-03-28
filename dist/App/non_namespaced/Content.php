@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
 abstract class Content extends Model
 {
     abstract protected function loadBySlugAndLanguage($name, $language);
