@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
 class NumberField extends CustomField
 {
     public function render($value = null): string
