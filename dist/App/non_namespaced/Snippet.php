@@ -1,5 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
 // A Snippet is a content type which can not be opened directly
 // but can be included into other pages by shortcodes
 class Snippet extends Page
