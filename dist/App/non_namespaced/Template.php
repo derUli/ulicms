@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
 use App\Utils\File;
 use App\Exceptions\FileNotFoundException;
 use App\Exceptions\DatasetNotFoundException;
