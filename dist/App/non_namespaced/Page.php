@@ -107,7 +107,7 @@ class Page extends Content
             preg_match("/only_([a-z]+)_can_edit/", $key, $matches);
             if (count($matches) >= 2) {
                 $object = $matches[1];
-                $this->permissions->setEditRestriction($object, $value);
+                $this->permissions->setEditRestriction($object, (bool)$value);
             }
         }
     }
