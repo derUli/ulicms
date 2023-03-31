@@ -1,5 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
 // nodes are categories for dropdown menus which
 // have no content attached
 class Node extends Link
