@@ -1,5 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
 // Page that has assigned a module
 class Module_Page extends Page
 {
