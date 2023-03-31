@@ -58,7 +58,7 @@ class PackageSourceConnectorTest extends \PHPUnit\Framework\TestCase
         $this->assertInstanceOf(stdClass::class, $metadata);
         $this->assertEquals("theme-2017", $metadata->name);
         $this->assertEquals("theme", $metadata->type);
-        $this->assertEquals("1.0.4", $metadata->version);
+        $this->assertEquals("1.0.5", $metadata->version);
     }
 
     public function testGetPackageDataReturnsObjectTypeModule()
