@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+defined('ULICMS_ROOT') or exit('no direct script access allowed');
+
 class UserManager
 {
     public function getUsersByGroupId(?int $gid, ?string $order = 'id'): array
