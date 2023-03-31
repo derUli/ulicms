@@ -1,6 +1,7 @@
 <?php
 
 use App\Constants\RequestMethod;
+use App\Translations\JSTranslation;
 
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("default_access_restrictions_edit")) {
@@ -89,7 +90,7 @@ if ($permissionChecker->hasPermission("default_access_restrictions_edit")) {
         <?php
     }
     echo ModuleHelper::endForm();
-    $translation = new PermissionChecker();
+    $translation = new JSTranslation();
     $translation->addKey("changes_was_saved");
     $translation->render();
     enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/default_edit_restrictions.js"));
