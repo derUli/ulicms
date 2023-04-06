@@ -478,29 +478,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("Angelsächisch", Settings::getLang("my_setting", 'en'));
     }
 
-    public function testJsonReadableEncode()
-    {
-        $data = [
-            "foo" => "bar",
-            "hello" => "world",
-            "animals" => ["cat", "dog", "pig"],
-            "number" => 123,
-            "boolean" => true,
-            "null" => null
-        ];
-        $expected = file_get_contents(
-            Path::resolve(
-                "ULICMS_ROOT/tests/fixtures/json_readable_encode.txt"
-            )
-        );
-        $output = json_readable_encode($data);
-
-        $this->assertEquals(
-            normalizeLN($expected),
-            normalizeLN($output)
-        );
-    }
-
     public function testGetModuleUninstallScriptPath()
     {
         $this->assertStringEndsWith("content/modules/my_module/my_module_uninstall.php", getModuleUninstallScriptPath("my_module"));
