@@ -85,8 +85,8 @@ if (!$permissionChecker->hasPermission("categories")) {
                             </td>
                             <?php
                             if ($permissionChecker->hasPermission(
-                            "categories_edit"
-                        )) {
+                                "categories_edit"
+                            )) {
                                 ?>
                                 <td class="text-center"><a
                                         href="?action=categories&edit=<?php echo $category->getID(); ?>"
@@ -116,8 +116,8 @@ if (!$permissionChecker->hasPermission("categories")) {
                                         <a href="#"
                                            onclick="alert('<?php
                                            translate(
-                                        "CANT_DELETE_CATEGORY_GENERAL"
-                                    );
+                                               "CANT_DELETE_CATEGORY_GENERAL"
+                                           );
                                     ?>')"><img
                                                 class="mobile-big-image" src="gfx/delete.png"
                                                 alt="<?php translate("delete"); ?>"
@@ -220,10 +220,10 @@ if (!$permissionChecker->hasPermission("categories")) {
                     class="form-control"
                     maxlength="255"><?php
                         esc(
-                Categories::getCategoryDescriptionById(
+                            Categories::getCategoryDescriptionById(
                                 intval($_GET["edit"])
                             )
-            );
+                        );
             ?></textarea>
             </div>
             <div class="voffset2">

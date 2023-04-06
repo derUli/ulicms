@@ -27,8 +27,8 @@ if ($permissionChecker->hasPermission("users")) {
     <?php if ($permissionChecker->hasPermission("users_create")) { ?>
         <?php
         echo Alert::info(
-        get_translation("users_infotext")
-    );
+            get_translation("users_infotext")
+        );
         ?>
         <div class="voffset2">    
             <a href="index.php?action=admin_new&ref=admins"

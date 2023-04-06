@@ -32,11 +32,11 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
         <div class="field voffset2">
             <?php
             echo imageTag(
-            $user->getAvatar(),
-            [
-                                                                            "alt" => get_translation("avatar_image")
-                                                                        ]
-        );
+                $user->getAvatar(),
+                [
+                                                                                "alt" => get_translation("avatar_image")
+                                                                            ]
+            );
         ?>
         </div>
         <?php
@@ -57,10 +57,10 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
             </label>
             <?php
             echo Input::file(
-            "avatar",
-            false,
-            "image/*"
-        );
+                "avatar",
+                false,
+                "image/*"
+            );
         ?>
             <?php if ($user->hasProcessedAvatar()) {
                 ?>
@@ -68,11 +68,11 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
                     <label>
                         <?php
                         echo App\HTML\Input::checkBox(
-                    "delete_avatar",
-                    false,
-                    "1",
-                    array("class" => "js-switch")
-                );
+                            "delete_avatar",
+                            false,
+                            "1",
+                            array("class" => "js-switch")
+                        );
                 ?><?php translate("delete_avatar") ?>
                     </label>
                 </div>

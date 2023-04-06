@@ -62,10 +62,10 @@ if (!$permissionChecker->hasPermission("design")) {
              ?>
                                     data-preview-url="<?php
                      echo ModuleHelper::buildMethodCallUrl(
-                 DesignSettingsController::class,
-                 "themePreview",
-                 "theme={$th}"
-             );
+                         DesignSettingsController::class,
+                         "themePreview",
+                         "theme={$th}"
+                     );
              ?>"
                                     >
                                         <?php echo $th; ?>
@@ -107,10 +107,10 @@ if (!$permissionChecker->hasPermission("design")) {
         ?>
                                         data-preview-url="<?php
                 echo ModuleHelper::buildMethodCallUrl(
-            DesignSettingsController::class,
-            "themePreview",
-            "theme={$th}"
-        );
+                    DesignSettingsController::class,
+                    "themePreview",
+                    "theme={$th}"
+                );
         ?>">
                                             <?php echo $th; ?>
                                 </option>
@@ -139,10 +139,10 @@ if (!$permissionChecker->hasPermission("design")) {
                 <td>
                     <?php
                     echo Input::singleSelect(
-        "ckeditor_skin",
-        $ckeditor_skin,
-        $skinItems
-    );
+                        "ckeditor_skin",
+                        $ckeditor_skin,
+                        $skinItems
+                    );
     ?>
                 </td>
 

@@ -68,13 +68,13 @@ if ($permissionChecker->hasPermission("languages")) {
                                     <a class="btn btn-primary btn-make-default"
                                        href="<?php
                                        echo ModuleHelper::buildMethodCallUrl(
-                                        "LanguageController",
-                                        "setDefaultLanguage",
-                                        ModuleHelper::buildQueryString(
+                                           "LanguageController",
+                                           "setDefaultLanguage",
+                                           ModuleHelper::buildQueryString(
                                                array("default" => $language->getLanguageCode()
-                                               )
+                                                  )
                                            )
-                                    );
+                                       );
                                     ?>"
                                        data-message="<?php
                                     translate(
@@ -94,9 +94,9 @@ if ($permissionChecker->hasPermission("languages")) {
                             <td>
                                 <?php
                                 echo ModuleHelper::deleteButton(
-                                        ModuleHelper::buildMethodCallUrl(LanguageController::class, "delete"),
-                                        ["id" => $language->getID()]
-                                    );
+                                    ModuleHelper::buildMethodCallUrl(LanguageController::class, "delete"),
+                                    ["id" => $language->getID()]
+                                );
                         ?>
                             </td>
                         </tr>
@@ -107,11 +107,11 @@ if ($permissionChecker->hasPermission("languages")) {
         </div>
         <?php
         enqueueScriptFile(
-                        ModuleHelper::buildModuleRessourcePath(
+            ModuleHelper::buildModuleRessourcePath(
                 "core_settings",
                 "js/languages.js"
             )
-                    );
+        );
         combinedScriptHtml();
     }
 } else {

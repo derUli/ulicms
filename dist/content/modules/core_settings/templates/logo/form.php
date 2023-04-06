@@ -57,9 +57,9 @@ if ($permissionChecker->hasPermission("logo")) {
                                         id="delete-logo"
                                         data-url="<?php
                                         echo ModuleHelper::buildMethodCallUrl(
-                                    LogoController::class,
-                                    "deleteLogo"
-                                );
+                                            LogoController::class,
+                                            "deleteLogo"
+                                        );
                                 ?>
                                         "
                                         >

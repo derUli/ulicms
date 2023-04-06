@@ -139,15 +139,15 @@ echo ModuleHelper::buildMethodCallForm(
                 ?>">
                     <td><?php
                         echo Input::checkBox(
-                    "comments[]",
-                    false,
-                    $comment->getId(),
-                    [
-                                                                                                                "class" => "checkbox comment-checkbox",
-                                                                                                                "data-select-all-checkbox" => ".select-all",
-                                                                                                                "data-checkbox-group" => ".comment-checkbox"
-                                                                                                            ]
-                );
+                            "comments[]",
+                            false,
+                            $comment->getId(),
+                            [
+                                                                                                                        "class" => "checkbox comment-checkbox",
+                                                                                                                        "data-select-all-checkbox" => ".select-all",
+                                                                                                                        "data-checkbox-group" => ".comment-checkbox"
+                                                                                                                    ]
+                        );
                 ?></td>
                     <td>
                         <?php esc(date("Y-m-d H:i:s", $comment->getDate())); ?>

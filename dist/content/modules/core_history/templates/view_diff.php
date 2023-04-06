@@ -7,10 +7,10 @@ if ($permissionChecker->hasPermission('pages')) {
         <a
             href="<?php
             echo ModuleHelper::buildActionURL(
-        "restore_version",
-        "content_id=" .
-                                                                        $diff->content_id
-    );
+                "restore_version",
+                "content_id=" .
+                                                                                $diff->content_id
+            );
     ?>"
             class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i>
             <?php translate("back") ?></a>
@@ -18,13 +18,13 @@ if ($permissionChecker->hasPermission('pages')) {
     <h1><?php translate("diff"); ?></h1>
     <p><?php
         translate(
-        "COMPARE_VERSION_FROM_TO",
-        [
-                                            "%current%" =>
-                                            $diff->current_version_date,
-                                            "%old_version%" => $diff->old_version_date
-                                        ]
-    );
+            "COMPARE_VERSION_FROM_TO",
+            [
+                                                "%current%" =>
+                                                $diff->current_version_date,
+                                                "%old_version%" => $diff->old_version_date
+                                            ]
+        );
     ?></p>
 
     <div class="diff">
@@ -34,11 +34,11 @@ if ($permissionChecker->hasPermission('pages')) {
         <a
             href="<?php
         echo ModuleHelper::buildMethodCallUrl(
-        "HistoryController",
-        "doRestore",
-        "version_id=" .
-                                        $diff->history_id
-    )
+            "HistoryController",
+            "doRestore",
+            "version_id=" .
+                                            $diff->history_id
+        )
     ?>"
             class="btn btn-danger voffset3"
             onclick="return confirm(

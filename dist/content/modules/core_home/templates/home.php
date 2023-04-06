@@ -15,9 +15,9 @@ if ($permissionChecker->hasPermission("dashboard")) {
     <p>
         <?php
         secure_translation(
-        "hello_name",
-        ["%name%" => $user->getDisplayName()]
-    );
+            "hello_name",
+            ["%name%" => $user->getDisplayName()]
+        );
     ?> </p>
     <p>
         <a

@@ -192,9 +192,9 @@ if ($permissionChecker->hasPermission('pages')) {
                                            for="type_<?php echo $type; ?>">
                                                <?php
                                     echo icon(
-                                    $model->getIcon(),
-                                    ["class" => "type-icon"]
-                                );
+                                        $model->getIcon(),
+                                        ["class" => "type-icon"]
+                                    );
                                 ?>
                                                <?php translate($type); ?>
                                     </label>
@@ -470,10 +470,10 @@ if ($permissionChecker->hasPermission('pages')) {
                                 </strong>
                                 <?php
                                 echo Input::singleSelect(
-                                                    "robots",
-                                                    $row->robots,
-                                                    UIUtils::getRobotsListItems()
-                                                );
+                                    "robots",
+                                    $row->robots,
+                                    UIUtils::getRobotsListItems()
+                                );
             ?>
                             </div>
                             <div class="typedep" id="article-metadata">

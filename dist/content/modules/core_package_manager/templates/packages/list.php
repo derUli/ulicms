@@ -185,10 +185,10 @@ if ($permissionChecker->hasPermission("list_packages")) {
                                     data-theme="<?php esc($theme); ?>"
                                     data-url="<?php
                         echo ModuleHelper::buildMethodCallUrl(
-                        DesignSettingsController::class,
-                        "setDefaultTheme",
-                        "name={$theme}"
-                    );
+                            DesignSettingsController::class,
+                            "setDefaultTheme",
+                            "name={$theme}"
+                        );
                     ?>"
                                     >
                                     <i class="fa fa-desktop"></i>
@@ -204,10 +204,10 @@ if ($permissionChecker->hasPermission("list_packages")) {
                                     data-theme="<?php esc($theme); ?>"
                                     data-url="<?php
                         echo ModuleHelper::buildMethodCallUrl(
-                        DesignSettingsController::class,
-                        "setDefaultMobileTheme",
-                        "name={$theme}"
-                    );
+                            DesignSettingsController::class,
+                            "setDefaultMobileTheme",
+                            "name={$theme}"
+                        );
                     ?>"
                                     >
                                     <i class="fas fa-mobile-alt"></i>
@@ -216,10 +216,10 @@ if ($permissionChecker->hasPermission("list_packages")) {
                                       title="<?php translate("info"); ?>"
                                       data-url="<?php
                       echo ModuleHelper::buildMethodCallUrl(
-                        "PackageController",
-                        "getThemeInfo",
-                        "name={$theme}"
-                    );
+                          "PackageController",
+                          "getThemeInfo",
+                          "name={$theme}"
+                      );
                     ?>"
                                       >
                                     <i class="fa fa-info-circle" aria-hidden="true"></i>
@@ -230,10 +230,10 @@ if ($permissionChecker->hasPermission("list_packages")) {
                                           title="<?php translate("show_preview"); ?>"
                                           data-url="<?php
                                           echo ModuleHelper::buildMethodCallUrl(
-                                        DesignSettingsController::class,
-                                        "themePreview",
-                                        "theme={$theme}"
-                                    );
+                                              DesignSettingsController::class,
+                                              "themePreview",
+                                              "theme={$theme}"
+                                          );
                                     ?>"
                                           >
                                         <i class="far fa-image"></i>

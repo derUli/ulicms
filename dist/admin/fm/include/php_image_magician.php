@@ -207,7 +207,7 @@ class imageLib
     # Param out:  n/a
     # Reference:
     # Notes:
-        #
+    #
     {
         if (! $this->testGDInstalled()) {
             if ($this->debug) {
@@ -275,39 +275,39 @@ class imageLib
     # Date:       27-02-08
     # Purpose:    Resizes the image
     # Param in:   $newWidth:
-        #             $newHeight:
-        #             $option:     0 / exact = defined size;
-        #                          1 / portrait = keep aspect set height;
-        #                          2 / landscape = keep aspect set width;
-        #                          3 / auto = auto;
-        #                          4 / crop= resize and crop;
-        #
-        #         $option can also be an array containing options for
-        #         cropping. E.G., array('crop', 'r')
-        #
-        #         This array only applies to 'crop' and the 'r' refers to
-        #         "crop right". Other value include; tl, t, tr, l, m (default),
-        #         r, bl, b, br, or you can specify your own co-ords (which
-        #         isn't recommended.
-        #
-        #       $sharpen:    true: sharpen (jpg only);
-        #                false: don't sharpen
+    #             $newHeight:
+    #             $option:     0 / exact = defined size;
+    #                          1 / portrait = keep aspect set height;
+    #                          2 / landscape = keep aspect set width;
+    #                          3 / auto = auto;
+    #                          4 / crop= resize and crop;
+    #
+    #         $option can also be an array containing options for
+    #         cropping. E.G., array('crop', 'r')
+    #
+    #         This array only applies to 'crop' and the 'r' refers to
+    #         "crop right". Other value include; tl, t, tr, l, m (default),
+    #         r, bl, b, br, or you can specify your own co-ords (which
+    #         isn't recommended.
+    #
+    #       $sharpen:    true: sharpen (jpg only);
+    #                false: don't sharpen
     # Param out:  n/a
     # Reference:
     # Notes:      To clarify the $option input:
-        #               0 = The exact height and width dimensions you set.
-        #               1 = Whatever height is passed in will be the height that
-        #                   is set. The width will be calculated and set automatically
-        #                   to a the value that keeps the original aspect ratio.
-        #               2 = The same but based on the width. We try make the image the
-        #                  biggest size we can while stil fitting inside the box size
-        #               3 = Depending whether the image is landscape or portrait, this
-        #                   will automatically determine whether to resize via
-        #                   dimension 1,2 or 0
-        #               4 = Will resize and then crop the image for best fit
-        #
-        #       forceStretch can be applied to options 1,2,3 and 4
-        #
+    #               0 = The exact height and width dimensions you set.
+    #               1 = Whatever height is passed in will be the height that
+    #                   is set. The width will be calculated and set automatically
+    #                   to a the value that keeps the original aspect ratio.
+    #               2 = The same but based on the width. We try make the image the
+    #                  biggest size we can while stil fitting inside the box size
+    #               3 = Depending whether the image is landscape or portrait, this
+    #                   will automatically determine whether to resize via
+    #                   dimension 1,2 or 0
+    #               4 = Will resize and then crop the image for best fit
+    #
+    #       forceStretch can be applied to options 1,2,3 and 4
+    #
     {
         // *** We can pass in an array of options to change the crop position
         $cropPos = 'm';
@@ -384,15 +384,15 @@ class imageLib
     # Date:       08-09-11
     # Purpose:    Crops the image
     # Param in:   $newWidth: crop with
-        #             $newHeight: crop height
-        #       $cropPos: Can be any of the following:
-        #             tl, t, tr, l, m, r, bl, b, br, auto
-        #           Or:
-        #             a custom position such as '30x50'
+    #             $newHeight: crop height
+    #       $cropPos: Can be any of the following:
+    #             tl, t, tr, l, m, r, bl, b, br, auto
+    #           Or:
+    #             a custom position such as '30x50'
     # Param out:  n/a
     # Reference:
     # Notes:
-        #
+    #
     {
         // *** Make sure the file passed in is valid
         if (! $this->image) {
@@ -417,7 +417,7 @@ class imageLib
     # Param out:  n/a
     # Reference:
     # Notes:
-        #
+    #
     {
         // *** If PNG, perform some transparency retention actions (gif untested)
         if (in_array($this->fileExtension, $this->transparentArray) && $this->keepTransparency) {
@@ -438,11 +438,11 @@ class imageLib
     # Date:       15-09-08
     # Purpose:    Crops the image
     # Param in:   $newWidth:
-        #             $newHeight:
+    #             $newHeight:
     # Param out:  n/a
     # Reference:
     # Notes:
-        #
+    #
     {
         // *** Get cropping co-ordinates
         $cropArray = $this->getCropPlacing($optimalWidth, $optimalHeight, $newWidth, $newHeight, $cropPos);
@@ -464,16 +464,16 @@ class imageLib
 ## --------------------------------------------------------
 
     private function getCropPlacing($optimalWidth, $optimalHeight, $newWidth, $newHeight, $pos = 'm')
-        #
+    #
     # Author:   Jarrod Oberto
     # Date:   July 11
     # Purpose:  Set the cropping area.
     # Params in:
     # Params out: (array) the crop x and y co-ordinates.
     # Notes:    When specifying the exact pixel crop position (eg 10x15), be
-        #       very careful as it's easy to crop out of the image leaving
-        #       black borders.
-        #
+    #       very careful as it's easy to crop out of the image leaving
+    #       black borders.
+    #
     {
         $pos = fix_strtolower($pos);
 
@@ -560,22 +560,22 @@ class imageLib
     # Date:       17-11-09
     # Purpose:    Get new image dimensions based on user specificaions
     # Param in:   $newWidth:
-        #             $newHeight:
+    #             $newHeight:
     # Param out:  Array of new width and height values
     # Reference:
     # Notes:    If $option = 3 then this function is call recursivly
-        #
-        #       To clarify the $option input:
-        #               0 = The exact height and width dimensions you set.
-        #               1 = Whatever height is passed in will be the height that
-        #                   is set. The width will be calculated and set automatically
-        #                   to a the value that keeps the original aspect ratio.
-        #               2 = The same but based on the width.
-        #               3 = Depending whether the image is landscape or portrait, this
-        #                   will automatically determine whether to resize via
-        #                   dimension 1,2 or 0.
-        #               4 = Resize the image as much as possible, then crop the
-        #         remainder.
+    #
+    #       To clarify the $option input:
+    #               0 = The exact height and width dimensions you set.
+    #               1 = Whatever height is passed in will be the height that
+    #                   is set. The width will be calculated and set automatically
+    #                   to a the value that keeps the original aspect ratio.
+    #               2 = The same but based on the width.
+    #               3 = Depending whether the image is landscape or portrait, this
+    #                   will automatically determine whether to resize via
+    #                   dimension 1,2 or 0.
+    #               4 = Resize the image as much as possible, then crop the
+    #         remainder.
     {
         switch (strval($option)) {
             case '0':
@@ -660,7 +660,7 @@ class imageLib
     # Purpose:    Depending on the height, choose to resize by 0, 1, or 2
     # Param in:   The new height and new width
     # Notes:
-        #
+    #
     {
         // *** If forcing is off...
         if (! $this->forceStretch) {
@@ -723,28 +723,28 @@ class imageLib
     # Param out:  Array of optimal width and height (fig 2)
     # Reference:
     # Notes:      The optimal width and height return are not the same as the
-        #       same as the width and height passed in. For example:
-        #
-        #
+    #       same as the width and height passed in. For example:
+    #
+    #
     #   |-----------------|     |------------|       |-------|
     #   |             |   =>  |**|      |**|   =>  |       |
     #   |             |     |**|      |**|       |       |
     #   |           |       |------------|       |-------|
     #   |-----------------|
-        #        original                optimal             crop
-        #              size                   size               size
+    #        original                optimal             crop
+    #              size                   size               size
     #  Fig          1                      2                  3
-        #
-        #       300 x 250           150 x 125          150 x 100
-        #
-        #    The optimal size is the smallest size (that is closest to the crop size)
-        #    while retaining proportion/ratio.
-        #
+    #
+    #       300 x 250           150 x 125          150 x 100
+    #
+    #    The optimal size is the smallest size (that is closest to the crop size)
+    #    while retaining proportion/ratio.
+    #
     #  The crop size is the optimal size that has been cropped on one axis to
     #  make the image the exact size specified by the user.
-        #
-        #               * represent cropped area
-        #
+    #
+    #               * represent cropped area
+    #
     {
         // *** If forcing is off...
         if (! $this->forceStretch) {
@@ -830,7 +830,7 @@ class imageLib
     # Param out:  n/a
     # Reference:
     # Notes:
-        #
+    #
     {
         $final = $final * (750.0 / $orig);
         $a = 52;
@@ -851,7 +851,7 @@ class imageLib
     # Param out:  lowercase string
     # Reference:
     # Notes:
-        #
+    #
     {
         if (is_array($option)) {
             if (fix_strtolower($option[0]) == 'crop' && count($option) == 2) {
@@ -911,7 +911,7 @@ class imageLib
     # Param out:
     # Reference:
     # Notes:    This border is added to the INSIDE of the image
-        #
+    #
     {
         if ($this->imageResized) {
             $rgbArray = $this->formatColor($rgbArray);
@@ -947,7 +947,7 @@ class imageLib
     # Param out:
     # Reference:
     # Notes:
-        #
+    #
     {
         if ($this->imageResized) {
             imagefilter($this->imageResized, IMG_FILTER_GRAYSCALE);
@@ -964,7 +964,7 @@ class imageLib
     # Param out:
     # Reference:
     # Notes:
-        #
+    #
     {
         if ($this->imageResized) {
             imagefilter($this->imageResized, IMG_FILTER_GRAYSCALE);
@@ -995,7 +995,7 @@ class imageLib
     # Param out:
     # Reference:
     # Notes:
-        #
+    #
     {
         if ($this->imageResized) {
             imagefilter($this->imageResized, IMG_FILTER_GRAYSCALE);
@@ -1016,7 +1016,7 @@ class imageLib
     # Param out:
     # Reference:
     # Notes:
-        #
+    #
     {
         if ($this->imageResized) {
             imagefilter($this->imageResized, IMG_FILTER_NEGATE);
@@ -1036,7 +1036,7 @@ class imageLib
     # Param out:
     # Reference:
     # Notes:
-        #
+    #
     {
         if ($this->imageResized) {
             imagefilter($this->imageResized, IMG_FILTER_GRAYSCALE);
@@ -1107,14 +1107,14 @@ class imageLib
 
     /** Apply a PNG overlay */
     private function gd_apply_overlay($im, $type, $amount)
-        #
+    #
     # Original Author:    Marc Hibbins
     # License:  Attribution-ShareAlike 3.0
     # Purpose:
     # Params in:
     # Params out:
     # Notes:
-        #
+    #
     {
         $width = imagesx($im);
         $height = imagesy($im);
@@ -1263,13 +1263,13 @@ class imageLib
     # Date:       07-05-2011
     # Purpose:    Rotate image
     # Param in:   (mixed) $degrees: (int) number of degress to rotate image
-        #               (str) param "left": rotate left
-        #               (str) param "right": rotate right
-        #               (str) param "upside": upside-down image
+    #               (str) param "left": rotate left
+    #               (str) param "right": rotate right
+    #               (str) param "upside": upside-down image
     # Param out:
     # Reference:
     # Notes:    The default direction of imageRotate() is counter clockwise.
-        #
+    #
     {
         if ($this->imageResized) {
             if (is_integer($value)) {
@@ -1331,11 +1331,11 @@ class imageLib
     # Date:       19-05-2011
     # Purpose:    Create rounded corners on your image
     # Param in:   (int) radius = the amount of curvature
-        #       (mixed) $bgColor = the corner background color
+    #       (mixed) $bgColor = the corner background color
     # Param out:  n/a
     # Reference:
     # Notes:
-        #
+    #
     {
         // *** Check if the user wants transparency
         $isTransparent = false;
@@ -1418,16 +1418,16 @@ class imageLib
 *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*-*-*-*-*-*-*/
 
     public function addShadow($shadowAngle = 45, $blur = 15, $bgColor = 'transparent')
-        #
+    #
     # Author:   Jarrod Oberto (Adapted from Pascal Naidon)
     # Ref:    http://www.les-stooges.org/pascal/webdesign/vignettes/index.php?la=en
     # Purpose:  Add a drop shadow to your image
     # Params in:  (int) $angle: the angle of the shadow
-        #       (int) $blur: the blur distance
-        #       (mixed) $bgColor: the color of the background
+    #       (int) $blur: the blur distance
+    #       (mixed) $bgColor: the color of the background
     # Params out:
     # Notes:
-        #
+    #
     {
         // *** A higher number results in a smoother shadow
         define('STEPS', $blur * 2);
@@ -1564,18 +1564,18 @@ class imageLib
 *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*-*-*-*-*-*-*/
 
     public function addCaptionBox($side = 'b', $thickness = 50, $padding = 0, $bgColor = '#000', $transaprencyAmount = 30)
-        #
+    #
     # Author:   Jarrod Oberto
     # Date:   26 May 2011
     # Purpose:  Add a caption box
     # Params in:  (str) $side: the side to add the caption box (t, r, b, or l).
-        #       (int) $thickness: how thick you want the caption box to be.
-        #       (mixed) $bgColor: The color of the caption box.
-        #       (int) $transaprencyAmount: The amount of transparency to be
-        #       applied.
+    #       (int) $thickness: how thick you want the caption box to be.
+    #       (mixed) $bgColor: The color of the caption box.
+    #       (int) $transaprencyAmount: The amount of transparency to be
+    #       applied.
     # Params out: n/a
     # Notes:
-        #
+    #
     {
         $side = fix_strtolower($side);
 
@@ -1599,15 +1599,15 @@ class imageLib
     ## --------------------------------------------------------
 
     public function addTextToCaptionBox($text, $fontColor = '#fff', $fontSize = 12, $angle = 0, $font = null)
-        #
+    #
     # Author:   Jarrod Oberto
     # Date:   03 Aug 11
     # Purpose:  Simplify adding text to a caption box by automatically
-        #       locating the center of the caption box
+    #       locating the center of the caption box
     # Params in:  The usually text paams (less a couple)
     # Params out: n/a
     # Notes:
-        #
+    #
     {
         // *** Get the caption box measurements
         if (count($this->captionBoxPositionArray) == 4) {
@@ -1697,7 +1697,7 @@ class imageLib
     # Reference:
     # Notes:
     # 23 May 13 : added orientation flag -jco
-        #
+    #
     {
         if (! $this->debug || ! $debug) {
             $debug = false;
@@ -2068,14 +2068,14 @@ class imageLib
     # Author:   Thies C. Arntzen
     # Purpose:    Function to format the new IPTC text
     # Param in:   $rec: Application record. (We’re working with #2)
-        #       $dat: Index. (120 for caption, 118 for contact. See the IPTC IIM
-        #         specification:
-        #         http://www.iptc.org/std/IIM/4.1/specification/IIMV4.1.pdf
-        #       $val: Value/data/text. Make sure this is within the length
-        #         constraints of the IPTC IIM specification
+    #       $dat: Index. (120 for caption, 118 for contact. See the IPTC IIM
+    #         specification:
+    #         http://www.iptc.org/std/IIM/4.1/specification/IIMV4.1.pdf
+    #       $val: Value/data/text. Make sure this is within the length
+    #         constraints of the IPTC IIM specification
     # Ref:      http://blog.peterhaza.no/working-with-image-meta-data-in-exif-and-iptc-headers-from-php/
-        #       http://php.net/manual/en/function.iptcembed.php
-        #
+    #       http://php.net/manual/en/function.iptcembed.php
+    #
     {
         $len = strlen($val);
         if ($len < 0x8000) {
@@ -2115,7 +2115,7 @@ class imageLib
     # Param out:
     # Reference:  http://php.net/manual/en/function.imagettftext.php
     # Notes:      Make sure you supply the font.
-        #
+    #
     {
         // *** Convert color
         $rgbArray = $this->formatColor($fontColor);
@@ -2198,26 +2198,26 @@ class imageLib
     # Date:       18-11-09
     # Purpose:    Add watermark image
     # Param in:   (str) $watermark: The watermark image
-        #       (str) $pos: Could be a pre-determined position such as:
-        #           tl = top left,
-        #           t  = top (middle),
-        #           tr = top right,
-        #           l  = left,
-        #           m  = middle,
-        #           r  = right,
-        #           bl = bottom left,
-        #           b  = bottom (middle),
-        #           br = bottom right
-        #         Or, it could be a co-ordinate position such as: 50x100
-        #
-        #       (int) $padding: If using a pre-determined position you can
-        #         adjust the padding from the edges by passing an amount
-        #         in pixels. If using co-ordinates, this value is ignored.
+    #       (str) $pos: Could be a pre-determined position such as:
+    #           tl = top left,
+    #           t  = top (middle),
+    #           tr = top right,
+    #           l  = left,
+    #           m  = middle,
+    #           r  = right,
+    #           bl = bottom left,
+    #           b  = bottom (middle),
+    #           br = bottom right
+    #         Or, it could be a co-ordinate position such as: 50x100
+    #
+    #       (int) $padding: If using a pre-determined position you can
+    #         adjust the padding from the edges by passing an amount
+    #         in pixels. If using co-ordinates, this value is ignored.
     # Param out:
     # Reference:  http://www.php.net/manual/en/image.examples-watermark.php
     # Notes:      Based on example in reference.
-        #
-        #
+    #
+    #
     {
         // Load the stamp and the photo to apply the watermark to
         $stamp = $this->openImage($watermarkImage);    # stamp
@@ -2245,25 +2245,25 @@ class imageLib
     ## --------------------------------------------------------
 
     private function calculatePosition($pos, $padding, $assetWidth, $assetHeight, $upperLeft = true)
-        #
+    #
     # Author:   Jarrod Oberto
     # Date:   08-05-11
     # Purpose:  Calculate the x, y pixel cordinates of the asset to place
     # Params in:  (str) $pos: Either something like: "tl", "l", "br" or an
-        #         exact position like: "100x50"
-        #       (int) $padding: The amount of padding from the edge. Only
-        #         used for the predefined $pos.
-        #       (int) $assetWidth: The width of the asset to add to the image
-        #       (int) $assetHeight: The height of the asset to add to the image
-        #       (bol) $upperLeft: if true, the asset will be positioned based
-        #         on the upper left x, y coords. If false, it means you're
-        #         using the lower left as the basepoint and this will
-        #         convert it to the upper left position
+    #         exact position like: "100x50"
+    #       (int) $padding: The amount of padding from the edge. Only
+    #         used for the predefined $pos.
+    #       (int) $assetWidth: The width of the asset to add to the image
+    #       (int) $assetHeight: The height of the asset to add to the image
+    #       (bol) $upperLeft: if true, the asset will be positioned based
+    #         on the upper left x, y coords. If false, it means you're
+    #         using the lower left as the basepoint and this will
+    #         convert it to the upper left position
     # Params out:
     # NOTE: this is done from the UPPER left corner!! But will convert lower
     #   left basepoints to upper left if $upperleft is set to false
-        #
-        #
+    #
+    #
     {
         $pos = fix_strtolower($pos);
 
@@ -2339,17 +2339,17 @@ class imageLib
     ## --------------------------------------------------------
 
     private function filterOpacity(&$img, $opacity = 75)
-        #
+    #
     # Author:     aiden dot mail at freemail dot hu
     # Author date:  29-03-08 08:16
     # Date added:   08-05-11
     # Purpose:    Change opacity of image
     # Params in:    $img: Image resource id
-        #         (int) $opacity: the opacity amount: 0-100, 100 being not opaque.
+    #         (int) $opacity: the opacity amount: 0-100, 100 being not opaque.
     # Params out:   (bool) true on success, else false
     # Ref:      http://www.php.net/manual/en/function.imagefilter.php#82162
     # Notes:      png only
-        #
+    #
     {
         if (! isset($opacity)) {
             return false;
@@ -2413,7 +2413,7 @@ class imageLib
     # Param out:  n/a
     # Reference:
     # Notes:
-        #
+    #
     {
         if (! file_exists($file) && ! $this->checkStringStartsWith('http://', $file) && ! $this->checkStringStartsWith('https://', $file)) {
             if ($this->debug) {
@@ -2464,14 +2464,14 @@ class imageLib
 ## --------------------------------------------------------
 
     public function reset()
-        #
+    #
     # Author:   Jarrod Oberto
     # Date:   30-08-11
     # Purpose:  Reset the resource (allow further editing)
     # Params in:
     # Params out:
     # Notes:
-        #
+    #
     {
         $this->__construct($this->fileName);
     }
@@ -2483,16 +2483,16 @@ class imageLib
     # Date:       27-02-08
     # Purpose:    Saves the image
     # Param in:   $savePath: Where to save the image including filename:
-        #             $imageQuality: image quality you want the image saved at 0-100
+    #             $imageQuality: image quality you want the image saved at 0-100
     # Param out:  n/a
     # Reference:
     # Notes:    * gif doesn't have a quality parameter
-        #       * jpg has a quality setting 0-100 (100 being the best)
-        #       * webp has a quality setting 0-100 (100 being the best)
-        #       * png has a quality setting 0-9 (0 being the best)
-        #
-        #             * bmp files have no native support for bmp files. We use a
-        #       third party class to save as bmp.
+    #       * jpg has a quality setting 0-100 (100 being the best)
+    #       * webp has a quality setting 0-100 (100 being the best)
+    #       * png has a quality setting 0-9 (0 being the best)
+    #
+    #             * bmp files have no native support for bmp files. We use a
+    #       third party class to save as bmp.
     {
         // *** Perform a check or two.
         if (! is_resource($this->imageResized) && ! $this->imageResized instanceof \GdImage) {
@@ -2592,7 +2592,7 @@ class imageLib
     # Param out:
     # Reference:
     # Notes:
-        #
+    #
     {
         if (! is_resource($this->imageResized) && ! $this->imageResized instanceof \GdImage) {
             if ($this->debug) {
@@ -2655,14 +2655,14 @@ class imageLib
     public function setFillColor($value)
     # Sep 2011
     # Param in:   (mixed) $value: (array) Could be an array of RGB
-        #               (str) Could be hex #ffffff or #fff, fff, ffffff
-        #
+    #               (str) Could be hex #ffffff or #fff, fff, ffffff
+    #
     # If the keepTransparency is set to false, then no transparency is to be used.
     # This is ideal when you want to save as jpg.
-        #
+    #
     # this method allows you to set the background color to use instead of
     # transparency.
-        #
+    #
     {
         $colorArray = $this->formatColor($value);
         $this->fillColorArray = $colorArray;
@@ -2686,7 +2686,7 @@ class imageLib
     # Param out:  (bool) True is gd extension loaded otherwise false
     # Reference:
     # Notes:
-        #
+    #
     {
         if (extension_loaded('gd') && function_exists('gd_info')) {
             $gdInstalled = true;
@@ -2707,7 +2707,7 @@ class imageLib
     # Param out:  (bool) True is exif extension loaded otherwise false
     # Reference:
     # Notes:
-        #
+    #
     {
         if (extension_loaded('exif')) {
             $exifInstalled = true;
@@ -2728,7 +2728,7 @@ class imageLib
     # Param out:  n/a
     # Reference:
     # Notes:
-        #
+    #
     {
         if ($image) {
             $fileIsImage = true;
@@ -2749,7 +2749,7 @@ class imageLib
     # Param out:  n/a
     # Reference:
     # Notes:
-        #
+    #
     {
         echo $this->height;
     }
@@ -2764,7 +2764,7 @@ class imageLib
     # Param out:  n/a
     # Reference:
     # Notes:
-        #
+    #
     {
         $this->forceStretch = $value;
     }
@@ -2779,7 +2779,7 @@ class imageLib
     # Param out:  n/a
     # Reference:
     # Notes:
-        #
+    #
     {
         self::__construct($fileName);
     }
@@ -2794,7 +2794,7 @@ class imageLib
     # Param out:  n/a
     # Reference:
     # Notes:
-        #
+    #
     {
         return $this->fileName;
     }
@@ -2837,7 +2837,7 @@ class imageLib
     # Param out:  Array of errors
     # Reference:
     # Notes:
-        #
+    #
     {
         return $this->errorArray;
     }
@@ -2859,11 +2859,11 @@ class imageLib
     # Date:       09-05-11
     # Purpose:    Determine color method passed in and return color as RGB
     # Param in:   (mixed) $value: (array) Could be an array of RGB
-        #               (str) Could be hex #ffffff or #fff, fff, ffffff
+    #               (str) Could be hex #ffffff or #fff, fff, ffffff
     # Param out:
     # Reference:
     # Notes:
-        #
+    #
     {
         $rgbArray = array();
 
@@ -2944,7 +2944,7 @@ class imageLib
 
     private function findUnusedGreen()
     # Purpose:  We find a green color suitable to use like green-screen effect.
-        #     Therefore, the color must not exist in the image.
+    #     Therefore, the color must not exist in the image.
     {
         $green = 255;
 
@@ -2967,7 +2967,7 @@ class imageLib
 
     private function findUnusedBlue()
     # Purpose:  We find a green color suitable to use like green-screen effect.
-        #     Therefore, the color must not exist in the image.
+    #     Therefore, the color must not exist in the image.
     {
         $blue = 255;
 
@@ -2990,9 +2990,9 @@ class imageLib
 
     private function invertTransparency($value, $originalMax, $invert = true)
     # Purpose:  This does two things:
-        #       1) Convert the range from 0-127 to 0-100
-        #       2) Inverts value to 100 is not transparent while 0 is fully
-        #          transparent (like Photoshop)
+    #       1) Convert the range from 0-127 to 0-100
+    #       2) Inverts value to 100 is not transparent while 0 is fully
+    #          transparent (like Photoshop)
     {
         // *** Test max range
         if ($value > $originalMax) {
@@ -3059,9 +3059,9 @@ class imageLib
     # Param out:
     # Reference:
     # Notes:    This code was stripped out of two external files
-        #       (phpthumb.bmp.php,phpthumb.functions.php) and added below to
-        #       avoid dependancies.
-        #
+    #       (phpthumb.bmp.php,phpthumb.functions.php) and added below to
+    #       avoid dependancies.
+    #
     {
         $imageX = ImageSX($gd_image);
         $imageY = ImageSY($gd_image);
@@ -3112,7 +3112,7 @@ class imageLib
     # Param out:
     # Reference:
     # Notes:
-        #
+    #
     {
         if (! is_resource($img) && ! $img instanceof \GdImage) {
             return false;
@@ -3130,7 +3130,7 @@ class imageLib
     # Param out:
     # Reference:
     # Notes:
-        #
+    #
     {
         $intstring = '';
         while ($number > 0) {
@@ -3155,10 +3155,10 @@ class imageLib
     # Param out:  Return a resource like the other ImageCreateFrom functions
     # Reference:  http://us3.php.net/manual/en/function.imagecreate.php#53879
     # Bug fix:    Author:   domelca at terra dot es
-        #       Date:   06 March 2008
-        #       Fix:    Correct 16bit BMP support
+    #       Date:   06 March 2008
+    #       Fix:    Correct 16bit BMP support
     # Notes:
-        #
+    #
     {
         //Ouverture du fichier en mode binaire
         if (! $f1 = fopen($filename, "rb")) {
@@ -3293,7 +3293,7 @@ class imageLib
     # Param out:  Return a resource like the other ImageCreateFrom functions
     # Reference:  http://www.kingsquare.nl/phppsdreader
     # Notes:
-        #
+    #
     {
         if (file_exists($this->psdReaderPath)) {
             include_once($this->psdReaderPath);

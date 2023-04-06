@@ -42,8 +42,8 @@ if ($permissionChecker->hasPermission("videos")
                 <input name="ogg_file" type="text" readonly
                        value="<?php
                        echo _esc(
-            $dataset->ogg_file
-        );
+                           $dataset->ogg_file
+                       );
         ?>">
             </div>
             <div class="field">
@@ -79,8 +79,8 @@ if ($permissionChecker->hasPermission("videos")
                 <strong class="field-label">
                     <?php
                     translate(
-            "insert_this_code_into_a_page"
-        );
+                        "insert_this_code_into_a_page"
+                    );
         ?>
                 </strong>
                 <input type="text" name="code"

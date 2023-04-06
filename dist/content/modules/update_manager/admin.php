@@ -49,10 +49,10 @@ function update_manager_admin()
     </form>
     <?php
     enqueueScriptFile(
-            ModuleHelper::buildRessourcePath(
+        ModuleHelper::buildRessourcePath(
             "update_manager",
             "scripts/update_manager.js"
         )
-        );
+    );
     combinedScriptHtml();
 }

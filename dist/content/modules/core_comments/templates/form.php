@@ -38,14 +38,14 @@ if (Vars::get("comments_enabled")) {
     <div class="comments">
         <?php
         echo ModuleHelper::buildMethodCallForm(
-        CommentsController::class,
-        "postComment",
-        [],
-        "post",
-        [
-                                            "autocomplete" => "off"
-                                        ]
-    );
+            CommentsController::class,
+            "postComment",
+            [],
+            "post",
+            [
+                                                "autocomplete" => "off"
+                                            ]
+        );
     ?>
         <?php
     echo App\HTML\Input::hidden(
@@ -60,14 +60,14 @@ if (Vars::get("comments_enabled")) {
             <div>
                 <?php
             echo App\HTML\Input::textBox(
-        "author_name",
-        "",
-        "text",
-        [
-                                                                            "class" => "form-control",
-                                                                            "required" => "required"
-                                                                        ]
-    );
+                "author_name",
+                "",
+                "text",
+                [
+                                                                                    "class" => "form-control",
+                                                                                    "required" => "required"
+                                                                                ]
+            );
     ?>
             </div>
         </div>
@@ -119,8 +119,8 @@ if (Vars::get("comments_enabled")) {
         <p>
             <button type="submit" class="btn btn-primary"><?php
             translate(
-        "post_comment"
-    )
+                "post_comment"
+            )
     ?></button>
         </p>
     </div>

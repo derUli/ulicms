@@ -132,9 +132,9 @@ if (
                         for="type_<?php echo $type; ?>">
                             <?php
                  echo icon(
-                    $model->getIcon(),
-                    ["class" => "type-icon"]
-                );
+                     $model->getIcon(),
+                     ["class" => "type-icon"]
+                 );
                 ?>
         <?php translate($type); ?>
                     </label>

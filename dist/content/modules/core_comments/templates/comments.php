@@ -30,14 +30,14 @@ reset($comments);
                         rel="nofollow"
                         target="_blank"><?php
                             esc(
-                $comment->getAuthorUrl()
-            );
+                                $comment->getAuthorUrl()
+                            );
                     ?></a> <br />
                 <?php } ?>
                 <?php
                 echo make_links_clickable(
-                        App\HTML\text($comment->getText())
-                    );
+                    App\HTML\text($comment->getText())
+                );
             ?>
             </div>
             <?php if ($comment != $last) { ?>

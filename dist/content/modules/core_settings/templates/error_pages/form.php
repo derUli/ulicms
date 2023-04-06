@@ -61,10 +61,10 @@ echo ModuleHelper::buildMethodCallForm(
                     <td>
                         <?php
                         echo Input::singleSelect(
-                    "error_page[{$code}][{$language}]",
-                    Settings::getLanguageSetting("error_page_{$code}", $language),
-                    $items
-                );
+                            "error_page[{$code}][{$language}]",
+                            Settings::getLanguageSetting("error_page_{$code}", $language),
+                            $items
+                        );
                 ?>
 
                     </td>

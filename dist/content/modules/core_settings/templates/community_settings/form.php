@@ -44,11 +44,11 @@ echo ModuleHelper::buildMethodCallForm(
     <div class="checkbox">
         <label><?php
             echo App\HTML\Input::checkBox(
-    "comments_enabled",
-    boolval(Settings::get("comments_enabled")),
-    "1",
-    array("class" => "js-switch")
-);
+                "comments_enabled",
+                boolval(Settings::get("comments_enabled")),
+                "1",
+                array("class" => "js-switch")
+            );
 ?><?php translate("comments_enabled") ?></label>
     </div>
 </div>

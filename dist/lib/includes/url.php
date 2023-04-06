@@ -91,8 +91,8 @@ function getCurrentURL(): string
 function buildSEOUrl(
     ?string $page = null,
     ?string $redirection = null,
-        // TODO: Obsoleten Parameter $format entfernen
-        ?string $format = null
+    // TODO: Obsoleten Parameter $format entfernen
+    ?string $format = null
 ) {
     if ($redirection) {
         return $redirection;

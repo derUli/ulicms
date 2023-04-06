@@ -48,9 +48,9 @@ if ($permissionChecker->hasPermission('pages')) {
                 <div class="col-xs-6">
                     <a href="<?php
                     echo ModuleHelper::buildMethodCallUrl(
-                PageController::class,
-                "emptyTrash"
-            );
+                        PageController::class,
+                        "emptyTrash"
+                    );
             ?>"
                        id="empty-trash"
                        class="btn btn-primary"><i
@@ -70,9 +70,9 @@ if ($permissionChecker->hasPermission('pages')) {
             style="display: none"
             data-url="<?php
             echo ModuleHelper::buildMethodCallUrl(
-            PageController::class,
-            "getParentPageId"
-        );
+                PageController::class,
+                "getParentPageId"
+            );
     ?>">
                 <?php echo icon("fas fa-arrow-up"); ?>
                 <?php translate("go_up"); ?>
@@ -99,8 +99,8 @@ if ($permissionChecker->hasPermission('pages')) {
                         </td>
                         <td class="no-sort text-center"><?php
                     translate(
-        $controller->_getPagesListView() === "default" ? "delete" : "restore"
-    );
+                        $controller->_getPagesListView() === "default" ? "delete" : "restore"
+                    );
     ?>
                         </td>
                     </tr>

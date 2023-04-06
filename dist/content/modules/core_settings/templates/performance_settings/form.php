@@ -48,8 +48,8 @@ if (!$permissionChecker->hasPermission("performance_settings")) {
     <a
         href="<?php
         echo ModuleHelper::buildActionURL(
-        "settings_categories"
-    );
+            "settings_categories"
+        );
     ?>"
         class="btn btn-default btn-back is-not-ajax">
         <i class="fas fa-arrow-left"></i>
@@ -121,20 +121,20 @@ if (!$permissionChecker->hasPermission("performance_settings")) {
                 <div class="inputWrapper">
                     <?php
                     echo Input::multiSelect(
-        "lazy_loading[]",
-        $lazy_loading,
-        [
-                                                                                                                                            new ListItem(
-                                                                                                                                                'img',
-                                                                                                                                                get_translation('lazy_loading_img')
-                                                                                                                                            ),
-                                                                                                                                            new ListItem(
-                                                                                                                                                'iframe',
-                                                                                                                                                get_translation('lazy_loading_iframe')
-                                                                                                                                            ),
-                                                                                                                                        ],
-        1
-    );
+                        "lazy_loading[]",
+                        $lazy_loading,
+                        [
+                                                                                                                                                            new ListItem(
+                                                                                                                                                                'img',
+                                                                                                                                                                get_translation('lazy_loading_img')
+                                                                                                                                                            ),
+                                                                                                                                                            new ListItem(
+                                                                                                                                                                'iframe',
+                                                                                                                                                                get_translation('lazy_loading_iframe')
+                                                                                                                                                            ),
+                                                                                                                                                        ],
+                        1
+                    );
     ?>
                 </div>
                 <div class="alert alert-info voffset2">
@@ -149,8 +149,8 @@ if (!$permissionChecker->hasPermission("performance_settings")) {
                         <br/>
                         <?php
         echo \App\Helpers\StringHelper::makeLinksClickable(
-        $canIuseLazyLoadingUrl
-    );
+            $canIuseLazyLoadingUrl
+        );
     ?>
                     </p>
                 </div>

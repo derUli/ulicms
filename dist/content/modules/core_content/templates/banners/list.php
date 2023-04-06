@@ -52,8 +52,8 @@ if ($permissionChecker->hasPermission("banners")) {
                     </th>
                     <?php
                     if ($permissionChecker->hasPermission(
-        "banners_edit"
-    )) {
+                        "banners_edit"
+                    )) {
                         ?>
                         <td class="no-sort text-center">
                             <?php translate("edit"); ?>

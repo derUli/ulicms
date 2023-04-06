@@ -51,13 +51,13 @@ $notSelectedButton = "btn btn-default"
                 <span class="hide-on-820">
                     <?php
              (
-            isset($specialLabels[$action]) ?
-                                                       esc(
-                                                           $specialLabels[$action]
-                                                       ) : translate(
-                                                           $action
-                                                       )
-        );
+                 isset($specialLabels[$action]) ?
+                                                            esc(
+                                                                $specialLabels[$action]
+                                                            ) : translate(
+                                                                $action
+                                                            )
+             );
         ?></span>
             </a>
         </div>

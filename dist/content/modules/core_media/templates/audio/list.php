@@ -60,8 +60,8 @@ if ($permissionChecker->hasPermission("audio")) {
 
                     <?php
          if ($permissionChecker->hasPermission(
-            "audio_edit"
-        )) {
+             "audio_edit"
+         )) {
              ?>
                         <td class="no-sort"></td>
                         <td class="no-sort"></td>
@@ -85,8 +85,8 @@ if ($permissionChecker->hasPermission("audio")) {
                         </td>
                         <?php
                         if ($permissionChecker->hasPermission(
-                        "audio_edit"
-                    )
+                            "audio_edit"
+                        )
                         ) {
                             ?>
                             <td>
@@ -120,11 +120,11 @@ if ($permissionChecker->hasPermission("audio")) {
     </div>
     <?php
     enqueueScriptFile(
-                    ModuleHelper::buildModuleRessourcePath(
+        ModuleHelper::buildModuleRessourcePath(
             "core_media",
             "js/audio.js"
         )
-                );
+    );
     combinedScriptHtml();
     ?>
     <?php

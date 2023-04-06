@@ -63,10 +63,10 @@ function oneclick_upgrade_admin()
     </form>
     <?php
     enqueueScriptFile(
-                            ModuleHelper::buildRessourcePath(
+        ModuleHelper::buildRessourcePath(
             "oneclick_upgrade",
             "js/settings.js"
         )
-                        );
+    );
     combinedScriptHtml();
 }
