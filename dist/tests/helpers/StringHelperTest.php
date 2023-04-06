@@ -114,8 +114,6 @@ Noch mehr Text <a href="http://www.ulicms.de" rel="nofollow" target="_blank">htt
     public function testCleanString()
     {
         $this->assertEquals("hello-world", StringHelper::cleanString("Hello World"));
-        $this->assertEquals("hello-world", StringHelper::cleanString("Hello World", "-"));
-        $this->assertEquals("hello_world", StringHelper::cleanString("Hello World", "_"));
         $this->assertEquals("das-ist-die-grossfraesmaschinenoeffnungstuer", StringHelper::cleanString("Das ist die Großfräsmaschinenöffnungstür."));
     }
 

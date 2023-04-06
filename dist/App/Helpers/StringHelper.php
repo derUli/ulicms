@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Helpers;
 
-use Cocur\Slugify\Slugify;
 use App\Helpers\Helper;
+use Nette\Utils\Strings;
 
 class StringHelper extends Helper
 {
@@ -24,11 +24,9 @@ class StringHelper extends Helper
 
     // clean a string to use it in urls
     public static function cleanString(
-        string $string,
-        string $separator = '-'
+        string $string
     ): string {
-        $slugify = new Slugify();
-        return $slugify->slugify($string, $separator);
+        return Strings::webalize($string);
     }
 
     // replace urls with clickable html links
