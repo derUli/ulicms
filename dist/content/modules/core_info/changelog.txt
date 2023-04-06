@@ -1,7 +1,7 @@
 ===== Neues in UliCMS 2023.2 =====
 
 Neue Features:
-* Kompatiblität mit UliCMS 2023.2
+* Kompatiblität mit PHP 8.1
 * DBMigrator Strict Mode entfernt
 
 Entfernte Features:
