@@ -7,7 +7,7 @@ $permissionChecker = new ACL();
 if (!$permissionChecker->hasPermission("groups")) {
     noPerms();
 } else {
-    $id = intval($_REQUEST["edit"]);
+    $id = (int)$_REQUEST["edit"];
     $permissionChecker = new ACL();
     $all_permissions = $permissionChecker->getPermissionQueryResult($id);
     $groupName = _esc($all_permissions['name']);
