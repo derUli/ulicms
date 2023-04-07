@@ -10,7 +10,7 @@ use function App\HTML\imageTag;
 
 $permissionChecker = new ACL();
 if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermission("users_edit")) or ($_GET['id'] == $_SESSION['login_id'])) {
-    $id = intval($_GET['id']);
+    $id = (int)$_GET['id'];
     $languages = getAvailableBackendLanguages();
     $result = db_query("SELECT * FROM " . tbname('users') . " WHERE id='$id'");
     $user = new User($id);
