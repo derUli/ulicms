@@ -218,7 +218,7 @@ if ($locale) {
     @call_user_func_array('setlocale', $locale);
 }
 
-$session_timeout = 60 * intval(Settings::get('session_timeout'));
+$session_timeout = 60 * Settings::get('session_timeout');
 
 // Session abgelaufen
 if (isset($_SESSION['session_begin'])) {
