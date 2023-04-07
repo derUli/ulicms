@@ -182,7 +182,7 @@ class Page extends Content
             $sql .= "'" . Database::escapeValue($this->menu_image) . "',";
         }
 
-        $sql .= intval($this->active) . ",";
+        $sql .= (int)$this->active . ",";
         $sql .= intval($this->approved) . ",";
         $this->created = time();
         $this->lastmodified = $this->created;
