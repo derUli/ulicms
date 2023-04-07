@@ -212,8 +212,8 @@ class List_Data extends Model
         }
 
         $limit = "null";
-        if (intval($this->limit) > 0) {
-            $limit = intval($this->limit);
+        if ((int)$this->limit > 0) {
+            $limit = (int)$this->limit;
         }
 
         if ($this->type === null || $this->type == "null") {
