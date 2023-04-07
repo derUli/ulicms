@@ -77,7 +77,7 @@ class Audio extends Model
             );
             $this->created = $result->created ?
                     (int)$result->created : null;
-            $this->updated = $result->updated ? intval($result->updated) : null;
+            $this->updated = $result->updated ? (int)$result->updated : null;
         } else {
             $this->setID(null);
             $this->setName(null);

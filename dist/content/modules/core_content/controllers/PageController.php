@@ -348,9 +348,9 @@ class PageController extends Controller
         }
         $content = $model->content;
         VCS::createRevision(
-            (int) $content_id,
+            (int)$content_id,
             $content,
-            intval($user_id)
+            (int)$user_id
         );
 
         $type = DefaultContentTypes::get($model->type);
