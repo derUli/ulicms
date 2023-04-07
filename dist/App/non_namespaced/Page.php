@@ -170,7 +170,7 @@ class Page extends Content
         $sql .= "'" . Database::escapeValue($this->alternate_title) . "',";
         $sql .= "'" . Database::escapeValue($this->target) . "',";
 
-        $category_id = $this->category_id ? intval($this->category_id) : 'NULL';
+        $category_id = $this->category_id ? (int)$this->category_id : 'NULL';
 
         $sql .= $category_id . ",";
         $sql .= "'" . Database::escapeValue($this->content) . "',";
@@ -277,7 +277,7 @@ class Page extends Content
             $this->lastchangeby = get_user_id();
         }
 
-        $category_id = $this->category_id ? intval($this->category_id) : "null";
+        $category_id = $this->category_id ? (int)$this->category_id : "null";
 
         $sql = "UPDATE " . tbname("content") . " ";
 

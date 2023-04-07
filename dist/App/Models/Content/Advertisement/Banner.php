@@ -104,7 +104,7 @@ class Banner extends Model
         if ($this->category_id === null) {
             $sql .= "NULL, ";
         } else {
-            $sql .= "'" . intval($this->category_id) . "',";
+            $sql .= "'" . (int)$this->category_id . "',";
         }
 
         $sql .= "'" . Database::escapeValue($this->type) . "',";

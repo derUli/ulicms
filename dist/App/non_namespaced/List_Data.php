@@ -125,7 +125,7 @@ class List_Data extends Model
         if ($this->category_id === null or $this->category_id === 0) {
             $category_id = "null";
         } else {
-            $category_id = intval($this->category_id);
+            $category_id = (int)$this->category_id;
         }
 
         if ($this->menu === null) {
@@ -184,7 +184,7 @@ class List_Data extends Model
         if ($this->category_id === null or $this->category_id === 0) {
             $category_id = "null";
         } else {
-            $category_id = intval($this->category_id);
+            $category_id = (int)$this->category_id;
         }
 
         if ($this->menu === null) {
