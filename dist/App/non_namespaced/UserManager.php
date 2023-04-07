@@ -10,9 +10,9 @@ class UserManager
     {
         $users = [];
         $sql = "select id from {prefix}users where `group_id` = ? order by $order";
-        $args = array(
-            intval($gid)
-        );
+        $args = [
+            $gid
+        ];
         $result = Database::pQuery($sql, $args, true);
         while ($row = Database::fetchObject($result)) {
             $users[] = new User($row->id);
@@ -38,9 +38,9 @@ class UserManager
         $users = [];
         $sql = "select id from {prefix}users where `locked` = ? "
                 . "order by $order";
-        $args = array(
-            intval($locked)
-        );
+        $args = [
+            (int)$locked
+        ];
         $result = Database::pQuery($sql, $args, true);
         while ($row = Database::fetchObject($result)) {
             $users[] = new User($row->id);

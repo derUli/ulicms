@@ -17,7 +17,7 @@ class Video_Page extends Page
     protected function fillVars($result = null)
     {
         parent::fillVars($result);
-        $this->video = $result->video ? intval($result->video) : null;
+        $this->video = $result->video ? (int)$result->video : null;
         $this->text_position = $result->text_position;
     }
 

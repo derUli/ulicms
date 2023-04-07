@@ -32,7 +32,7 @@ class PasswordReset
 
         $args = [
             $token,
-            intval($user_id)
+            (int)$user_id
         ];
 
         Database::pQuery($sql, $args, true);

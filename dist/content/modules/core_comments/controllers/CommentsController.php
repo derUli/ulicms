@@ -173,11 +173,7 @@ class CommentsController extends MainClass
     // get the configured default limit or if is set the default value
     public function _getDefaultLimit(): int
     {
-        $limit = 100;
-        if (Settings::get("comments_default_limit")) {
-            $limit = intval(Settings::get("comments_default_limit"));
-        }
-        return $limit;
+        return (int)(Settings::get("comments_default_limit") ?? 100);
     }
 
     public function doAction(): void

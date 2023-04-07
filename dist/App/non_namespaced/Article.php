@@ -46,7 +46,7 @@ class Article extends Page
 
         $article_date = null;
         if (is_numeric($this->article_date)) {
-            $article_date = intval($this->article_date);
+            $article_date = (int)$this->article_date;
         } elseif (is_string($this->article_date)) {
             $article_date = $this->article_date ? strtotime($this->article_date) : null;
         }

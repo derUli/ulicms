@@ -156,7 +156,7 @@ class Settings
                     $value = false;
                 }
 
-                $value = intval((bool) $value);
+                $value = (int)(bool)$value;
                 break;
         }
         return $value;
