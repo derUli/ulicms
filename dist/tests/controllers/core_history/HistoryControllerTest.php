@@ -22,8 +22,8 @@ class HistoryControllerTest extends \PHPUnit\Framework\TestCase
         $historyController = new HistoryController();
         $restoredRevision = $historyController->_doRestore($revisions[1]->id);
 
-        $this->assertEquals($testPage->id, intval($restoredRevision->content_id));
-        $this->assertEquals($revisions[1]->id, intval($restoredRevision->id));
+        $this->assertEquals($testPage->id, (int)$restoredRevision->content_id);
+        $this->assertEquals($revisions[1]->id, (int)$restoredRevision->id);
         $this->assertGreaterThan(1590795228, strtotime($restoredRevision->date));
         $this->assertEquals("Some Text 2", $restoredRevision->content);
         $this->assertGreaterThanOrEqual(1, $restoredRevision->user_id);
