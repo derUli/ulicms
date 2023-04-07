@@ -10,7 +10,7 @@ class HistoryController extends Controller
     public function doRestore(): void
     {
         if (isset($_GET ["version_id"])) {
-            $version_id = intval($_GET ["version_id"]);
+            $version_id = (int)$_GET ["version_id"];
 
             $revision = $this->_doRestore($version_id);
 
