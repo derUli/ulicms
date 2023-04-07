@@ -24,19 +24,18 @@ class BannerController extends Controller
         do_event("before_create_banner");
 
         $banner = new Banner();
-        $banner->setName(strval($_POST["banner_name"]));
-        $banner->setImageUrl(strval($_POST["image_url"]));
-        $banner->setLinkUrl(strval($_POST["link_url"]));
-        $banner->setCategoryId(intval($_POST["category_id"]));
+        $banner->setName($_POST["banner_name"]);
+        $banner->setImageUrl($_POST["image_url"]);
+        $banner->setLinkUrl($_POST["link_url"]);
+        $banner->setCategoryId((int)$_POST["category_id"]);
         $banner->setType($_POST["type"]);
-        $banner->setHtml(strval($_POST["html"]));
+        $banner->setHtml($_POST["html"]);
 
         $banner->setDateFrom(stringOrNull($_POST["date_from"]));
         $banner->setDateTo(stringOrNull($_POST["date_to"]));
 
         $banner->setEnabled((bool)$_POST["enabled"]);
-        $banner->setLanguage($_POST['language'] != "all" ?
-                        strval($_POST['language']) : null);
+        $banner->setLanguage($_POST['language'] != "all" ? $_POST['language'] : null);
         $banner->save();
 
         do_event("after_create_banner");
@@ -54,24 +53,23 @@ class BannerController extends Controller
 
     public function _updatePost(): Banner
     {
-        $id = intval($_POST['id']);
+        $id = (int)$_POST['id'];
 
         do_event("before_edit_banner");
 
         $banner = new Banner($id);
-        $banner->setName(strval($_POST["banner_name"]));
-        $banner->setImageUrl(strval($_POST["image_url"]));
-        $banner->setLinkUrl(strval($_POST["link_url"]));
-        $banner->setCategoryId(intval($_POST["category_id"]));
+        $banner->setName($_POST["banner_name"]);
+        $banner->setImageUrl($_POST["image_url"]);
+        $banner->setLinkUrl($_POST["link_url"]);
+        $banner->setCategoryId((int)$_POST["category_id"]);
         $banner->setType($_POST["type"]);
-        $banner->setHtml(strval($_POST["html"]));
+        $banner->setHtml($_POST["html"]);
 
         $banner->setDateFrom(stringOrNull($_POST["date_from"]));
         $banner->setDateTo(stringOrNull($_POST["date_to"]));
 
         $banner->setEnabled((bool)$_POST["enabled"]);
-        $banner->setLanguage($_POST['language'] != "all" ?
-                        strval($_POST['language']) : null);
+        $banner->setLanguage($_POST['language'] != "all" ? $_POST['language'] : null);
         $banner->save();
 
         do_event("after_edit_banner");
