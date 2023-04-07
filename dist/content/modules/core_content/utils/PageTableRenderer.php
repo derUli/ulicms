@@ -168,7 +168,7 @@ class PageTableRenderer
         if (isset($filters["category_id"]) &&
                 is_numeric($filters["category_id"]) &&
                 $filters["category_id"] > 0) {
-            $where .= " and category_id =" . intval($filters["category_id"]);
+            $where .= " and category_id =" . (int)$filters["category_id"];
         }
 
         if (isset($filters["parent_id"]) &&
