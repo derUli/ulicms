@@ -20,8 +20,8 @@ class UserController extends Controller
         $email = $_POST["email"];
         $default_language = !empty($_POST["default_language"]) ? $_POST["default_language"] : null;
         $sendMail = isset($_POST["send_mail"]);
-        $admin = boolval(isset($_POST["admin"]));
-        $locked = boolval(isset($_POST["locked"]));
+        $admin = isset($_POST["admin"]);
+        $locked = isset($_POST["locked"]);
         $group_id = intval($_POST["group_id"]) ? intval($_POST["group_id"]) : null;
         $require_password_change = intval(isset($_POST["require_password_change"]));
 
@@ -70,8 +70,8 @@ class UserController extends Controller
             $password = $_POST["password"];
             $email = $_POST["email"];
             $default_language = !empty($_POST["default_language"]) ? $_POST["default_language"] : null;
-            $admin = boolval(isset($_POST["admin"]));
-            $locked = boolval(isset($_POST["locked"]));
+            $admin = isset($_POST["admin"]);
+            $locked = isset($_POST["locked"]);
 
             $homepage = $_POST["homepage"];
             $about_me = $_POST["about_me"];
