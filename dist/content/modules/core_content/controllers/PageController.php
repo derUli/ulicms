@@ -592,7 +592,7 @@ class PageController extends Controller
         $slug = $_REQUEST["slug"];
         $language = $_REQUEST['language'];
         $id = isset($_REQUEST['id']) ?
-                intval($_REQUEST['id']) : 0;
+                (int)$_REQUEST['id'] : 0;
 
         TextResult($this->_nextFreeSlug($slug, $language, $id));
     }
