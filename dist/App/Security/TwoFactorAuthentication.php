@@ -52,7 +52,7 @@ class TwoFactorAuthentication
     // is two factor authentication enabled?
     public static function isEnabled(): bool
     {
-        return boolval(Settings::get("twofactor_authentication"));
+        return (bool) Settings::get("twofactor_authentication");
     }
 
     public static function enable(): void
