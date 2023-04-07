@@ -8,7 +8,7 @@ $permissionChecker = new ACL();
 if (!$permissionChecker->hasPermission("install_packages")) {
     noPerms();
 } else {
-    if (!empty($_REQUEST["file"]) and str_ends_with($_REQUEST["file"], ".sin")) {
+    if (!empty($_REQUEST["file"]) && str_ends_with($_REQUEST["file"], ".sin")) {
         $tempfile = Path::resolve("ULICMS_TMP/" . basename($_REQUEST["file"]));
         if (is_file($tempfile)) {
             $pkg = new SinPackageInstaller($tempfile);
@@ -30,7 +30,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
             $license = $pkg->getProperty("license");
             $build_date = $pkg->getProperty("build_date");
             $screenshot = $pkg->getProperty("screenshot");
-            $size = intval($pkg->getSize());
+            $size = $pkg->getSize();
             ?>
             <p>
                 <a href="<?php echo ModuleHelper::buildActionURL("upload_package"); ?>"
