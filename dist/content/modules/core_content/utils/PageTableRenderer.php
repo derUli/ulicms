@@ -262,7 +262,7 @@ class PageTableRenderer
             $title,
             _esc(get_translation($dataset->menu)),
             _esc($dataset->position),
-            _esc(getPageTitleByID(intval($dataset->parent_id))),
+            _esc(getPageTitleByID((int)$dataset->parent_id)),
             bool2YesNo((bool)$dataset->active),
             $viewButton,
             $editButton,
