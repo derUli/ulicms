@@ -1,8 +1,9 @@
 <?php
+
 use Spatie\Snapshots\MatchesSnapshots;
 
-class EncodeTest extends \PHPUnit\Framework\TestCase {
-
+class EncodeTest extends \PHPUnit\Framework\TestCase
+{
     use MatchesSnapshots;
 
     public function testJsonReadableEncode()
@@ -15,7 +16,7 @@ class EncodeTest extends \PHPUnit\Framework\TestCase {
             "boolean" => true,
             "null" => null
         ];
-        
+
 
         $this->assertMatchesTextSnapshot(
             json_readable_encode($data)

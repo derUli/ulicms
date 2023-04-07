@@ -140,7 +140,7 @@ function bool2YesNo(
  */
 function rand_string(int $length): string
 {
-    return Random::generate($length); 
+    return Random::generate($length);
 }
 
 function getStringLengthInBytes(string $data): int

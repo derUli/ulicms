@@ -182,7 +182,8 @@ class FileTest extends \PHPUnit\Framework\TestCase
         sureRemoveDir($destination, true);
     }
 
-    public function testGetLastChanged(){
+    public function testGetLastChanged()
+    {
         $source = Path::resolve("ULICMS_ROOT/composer.json");
         $lastChanged = File::getLastChanged($source);
         $this->assertGreaterThanOrEqual(1680824251, $lastChanged);
