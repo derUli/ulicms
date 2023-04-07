@@ -24,7 +24,7 @@ function doLoadCheck($url, $maxRepeat = 100)
         system("curl -s -o nul $url");
         $endTime = getTime();
 
-        $newTime = (floatval(substr(strval($endTime - $startTime), 0, 7)));
+        $newTime = (floatval(substr($endTime - $startTime), 0, 7)));
 
         $times[] = $newTime;
 
