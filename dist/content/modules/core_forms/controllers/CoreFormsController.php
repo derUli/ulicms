@@ -8,9 +8,7 @@ class CoreFormsController extends Controller
 {
     public function _incSpamCount(): int
     {
-        $newCount = intval(
-            Settings::get("contact_form_refused_spam_mails")
-        ) + 1;
+        $newCount = Settings::get("contact_form_refused_spam_mails") + 1;
         Settings::set("contact_form_refused_spam_mails", $newCount);
         return $newCount;
     }
