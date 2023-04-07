@@ -4,8 +4,8 @@ use App\Models\Content\Categories;
 
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("audio")
-        and $permissionChecker->hasPermission("audio_edit")) {
-    $id = intval($_REQUEST['id']);
+        && $permissionChecker->hasPermission("audio_edit")) {
+    $id = (int)$_REQUEST['id'];
     $result = db_query("SELECT * FROM " . tbname("audio") . " WHERE id = $id");
     if (db_num_rows($result) > 0) {
         $dataset = db_fetch_object($result);

@@ -20,8 +20,9 @@ use function App\HTML\icon;
 
 $permissionChecker = new PermissionChecker(get_user_id());
 if ($permissionChecker->hasPermission('pages')) {
+    
     // FIXME: Die SQL Statements in einen Controller bzw. Model auslagern.
-    $page = intval($_GET["page"]);
+    $page = (int)$_GET["page"];
     $result = db_query("SELECT * FROM " . tbname("content") . " WHERE id='$page'");
 
     $allThemes = getAllThemes();
