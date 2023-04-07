@@ -58,13 +58,13 @@ class OtherSettingsController extends Controller
         }
 
         if (isset($_POST["smtp_port"])) {
-            Settings::set("smtp_port", intval($_POST["smtp_port"]));
+            Settings::set("smtp_port", (int)$_POST["smtp_port"]);
         }
 
         if (isset($_POST["max_failed_logins_items"])) {
             Settings::set(
                 "max_failed_logins_items",
-                intval($_POST["max_failed_logins_items"])
+                (int)$_POST["max_failed_logins_items"]
             );
         }
 
