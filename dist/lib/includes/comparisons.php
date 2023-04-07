@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 use Jaybizzle\CrawlerDetect\CrawlerDetect;
 use Detection\MobileDetect;
+use Nette\Utils\Json;
+use Nette\Utils\JsonException;
 
 /**
  * Checks if a variable is a decimal number
@@ -22,7 +24,12 @@ function is_decimal($val): bool
  */
 function is_json(?string $str): bool
 {
-    return $str ? json_decode($str) != null : false;
+    try {
+        Json::decode($str);
+        return true;
+    } catch (JsonException) {
+        return false;
+    }
 }
 
 /**
