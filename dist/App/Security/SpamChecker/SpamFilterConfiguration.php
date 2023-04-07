@@ -32,24 +32,21 @@ class SpamFilterConfiguration
         $settings->setBlockedCountries(Settings::get("country_blacklist"));
 
         $settings->setDisallowChineseChars(
-            boolval(Settings::get("disallow_chinese_chars"))
+            (bool)Settings::get("disallow_chinese_chars")
         );
 
-        $disallow_cyrillic_chars = boolval(
-            Settings::get("disallow_cyrillic_chars")
-        );
+        $disallow_cyrillic_chars = (bool) Settings::get("disallow_cyrillic_chars");
         $settings->setDisallowCyrillicChars($disallow_cyrillic_chars);
 
-        $disallow_rtl_chars = boolval(
-            Settings::get("disallow_rtl_chars")
-        );
+        $disallow_rtl_chars = (bool) 
+            Settings::get("disallow_rtl_chars");
 
         $settings->setDisallowRtlChars($disallow_rtl_chars);
         $settings->setRejectRequestsFromBots(
-            boolval(Settings::get("reject_requests_from_bots"))
+            (bool)Settings::get("reject_requests_from_bots")
         );
 
-        $checkMx = boolval(Settings::get("check_mx_of_mail_address"));
+        $checkMx = (bool)Settings::get("check_mx_of_mail_address");
         $settings->setCheckMxOfMailAddress($checkMx);
 
         return $settings;

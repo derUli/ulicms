@@ -70,7 +70,7 @@ function do_event(
 function stringContainsShortCodes(string $content, ?string $module = null): bool
 {
     $quot = '(' . preg_quote('&quot;') . ')?';
-    return boolval(
+    return (bool)(
         $module ?
         preg_match('/\[module=\"?' . $quot . preg_quote($module) . '\"?' .
                 $quot . '\]/m', $content) :

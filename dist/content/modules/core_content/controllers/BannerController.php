@@ -34,7 +34,7 @@ class BannerController extends Controller
         $banner->setDateFrom(stringOrNull($_POST["date_from"]));
         $banner->setDateTo(stringOrNull($_POST["date_to"]));
 
-        $banner->setEnabled(boolval($_POST["enabled"]));
+        $banner->setEnabled((bool)$_POST["enabled"]);
         $banner->setLanguage($_POST['language'] != "all" ?
                         strval($_POST['language']) : null);
         $banner->save();
@@ -69,7 +69,7 @@ class BannerController extends Controller
         $banner->setDateFrom(stringOrNull($_POST["date_from"]));
         $banner->setDateTo(stringOrNull($_POST["date_to"]));
 
-        $banner->setEnabled(boolval($_POST["enabled"]));
+        $banner->setEnabled((bool)$_POST["enabled"]);
         $banner->setLanguage($_POST['language'] != "all" ?
                         strval($_POST['language']) : null);
         $banner->save();

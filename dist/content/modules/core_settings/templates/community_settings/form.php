@@ -45,7 +45,7 @@ echo ModuleHelper::buildMethodCallForm(
         <label><?php
             echo App\HTML\Input::checkBox(
                 "comments_enabled",
-                boolval(Settings::get("comments_enabled")),
+                (bool)Settings::get("comments_enabled"),
                 "1",
                 array("class" => "js-switch")
             );
@@ -57,7 +57,7 @@ echo ModuleHelper::buildMethodCallForm(
         <label><?php
 echo App\HTML\Input::checkBox(
     "comments_must_be_approved",
-    boolval(Settings::get("comments_must_be_approved")),
+    (bool)Settings::get("comments_must_be_approved"),
     "1",
     array("class" => "js-switch")
 );
