@@ -100,7 +100,7 @@ $entries[] = new MenuEntry(
 );
 $logoutUrl = ModuleHelper::buildMethodCallUrl(
     SessionManager::class,
-    "logout"
+    'logout'
 );
 $entries[] = new MenuEntry(
     '<i class="fa fa-sign-out-alt"></i> '
