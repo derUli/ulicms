@@ -273,7 +273,7 @@ class PageController extends Controller
             );
             $model->getPermissions()->setEditRestriction(
                 $object,
-                boolval($permission)
+                (bool)$permission
             );
         }
 
