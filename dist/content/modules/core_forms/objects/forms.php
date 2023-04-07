@@ -28,14 +28,14 @@ class Forms
         $enabled
     ) {
         $name = db_escape($name);
-        $enabled = intval($enabled);
+        $enabled = (int)$enabled;
         $email_to = db_escape($email_to);
         $subject = db_escape($subject);
-        $category_id = intval($category_id);
+        $category_id = (int)$category_id;
         $fields = db_escape($fields);
         $required_fields = db_escape($required_fields);
         $mail_from_field = db_escape($mail_from_field);
-        $target_page_id = intval($target_page_id);
+        $target_page_id = (int)$target_page_id;
         $created = time();
         $updated = time();
         $sql = "INSERT INTO `{prefix}forms`
@@ -54,10 +54,10 @@ class Forms
     public static function editForm($id, $name, $email_to, $subject, $category_id, $fields, $required_fields, $mail_from_field, $target_page_id, $enabled)
     {
         $name = db_escape($name);
-        $enabled = intval($enabled);
+        $enabled = (int)$enabled;
         $email_to = db_escape($email_to);
         $subject = db_escape($subject);
-        $category_id = intval($category_id);
+        $category_id = (int)$category_id;
         $fields = db_escape($fields);
         $required_fields = db_escape($required_fields);
         $mail_from_field = db_escape($mail_from_field);
