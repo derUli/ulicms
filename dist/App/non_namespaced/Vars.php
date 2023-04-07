@@ -41,7 +41,7 @@ class Vars
 
     public static function setNoCache(bool $bool): void
     {
-        self::$noCache = boolval($bool);
+        self::$noCache = $bool;
     }
 
     public static function getNoCache(): bool
