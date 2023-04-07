@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Helpers\StringHelper;
+use Nette\Utils\Random;
 
 if (!defined("RESPONSIVE_FM")) {
     function sanitize(array & $array): void
@@ -139,8 +140,7 @@ function bool2YesNo(
  */
 function rand_string(int $length): string
 {
-    $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    return substr(str_shuffle($chars), 0, $length);
+    return Random::generate($length); 
 }
 
 function getStringLengthInBytes(string $data): int
