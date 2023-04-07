@@ -7,6 +7,7 @@ declare(strict_types=1);
 use zz\Html\HTMLMinify;
 use App\Backend\BackendPageRenderer;
 use App\Helpers\TestHelper;
+use Nette\Utils\Json;
 
 /**
  * Serialize $data as JSON, output it to the client and exit script
@@ -17,9 +18,7 @@ use App\Helpers\TestHelper;
  */
 function JSONResult($data, int $status = 200, $compact = true): void
 {
-    $json = $compact ?
-            json_encode($data, JSON_UNESCAPED_SLASHES) :
-            json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+    $json = Json::encode($data, !$compact);
 
     RawJSONResult($json, $status);
 }
