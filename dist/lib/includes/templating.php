@@ -176,7 +176,7 @@ function is_active(): bool
 
     if (db_num_rows($result) > 0) {
         $dataset = db_fetch_object($result);
-        $dataset = boolval($dataset->active);
+        $dataset = (bool) $dataset->active;
     }
 
     Vars::set("active", $dataset);
