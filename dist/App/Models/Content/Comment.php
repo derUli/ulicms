@@ -47,8 +47,8 @@ class Comment extends Model
     public function fillVars($result = null)
     {
         $data = Database::fetchObject($result);
-        $this->setID(intval($data->id));
-        $this->setContentId(intval($data->content_id));
+        $this->setID((int)$data->id);
+        $this->setContentId((int)$data->content_id);
         $this->setAuthorName($data->author_name);
         $this->setAuthorUrl($data->author_url);
         $this->setAuthorEmail($data->author_email);
@@ -315,7 +315,7 @@ VALUES      ( ?,
             true
         );
         $dataset = Database::fetchObject($result);
-        return intval($dataset->amount);
+        return (int)$dataset->amount;
     }
 
     // returns the count of all read comments
@@ -328,7 +328,7 @@ VALUES      ( ?,
             true
         );
         $dataset = Database::fetchObject($result);
-        return intval($dataset->amount);
+        return (int) $dataset->amount;
     }
 
     // returns the count of all comments
@@ -337,7 +337,7 @@ VALUES      ( ?,
         $result = Database::pQuery("select count(id) as amount from "
                         . "{prefix}comments", [], true);
         $dataset = Database::fetchObject($result);
-        return intval($dataset->amount);
+        return (int)$dataset->amount;
     }
 
     // As enforces by the GDPR of the EU
@@ -377,7 +377,7 @@ VALUES      ( ?,
     // returns true if the comments was read by a backend user
     public function isRead(): bool
     {
-        return boolval($this->read);
+        return (bool) $this->read;
     }
 
     public function setRead(?bool $val): void
