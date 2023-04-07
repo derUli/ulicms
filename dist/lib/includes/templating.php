@@ -290,7 +290,7 @@ function get_parent(string $page = null): ?int
     $result = db_query($sql);
     if (db_num_rows($result) > 0) {
         $dataset = db_fetch_object($result);
-        $parent_id = $dataset->parent_id ? intval($dataset->parent_id) : null;
+        $parent_id = $dataset->parent_id ? (int)$dataset->parent_id : null;
     }
     return $parent_id;
 }
@@ -374,13 +374,11 @@ function language_selection(): void
 function get_category(): string
 {
     $current_page = get_page();
-    if (!(isset($current_page["category_id"]) and
-            $current_page["category_id"])) {
+    if (!(isset($current_page["category_id"]) && $current_page["category_id"])) {
         return '';
     }
-    return Categories::getCategoryById(
-        intval($current_page["category_id"])
-    ) ?? '';
+
+    return Categories::getCategoryById((int)$current_page["category_id"]) ?? '';
 }
 
 function body_classes(): void
