@@ -8,7 +8,7 @@ class InstallerController
     {
         $step = 1;
         if (isset($_REQUEST["step"]) && !empty($_REQUEST["step"])) {
-            $step = intval($_REQUEST["step"]);
+            $step = (int)$_REQUEST["step"];
         }
         if ($step > 10) {
             Response::redirect("index.php?step=10");
@@ -151,7 +151,7 @@ class InstallerController
         }
 
         $allSteps = count($files);
-        $currentStep = intval($_SESSION["install_index"]);
+        $currentStep = (int)$_SESSION["install_index"];
 
         echo($currentStep >= $allSteps - 1 ?
                 '<!--finish-->' : ' <!--ok-->');
