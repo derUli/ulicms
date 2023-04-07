@@ -153,9 +153,7 @@ function validate_login(
         $_REQUEST["error"] = get_translation("USER_OR_PASSWORD_INCORRECT");
 
         // Limit Login Attampts
-        $max_failed_logins_items = intval(
-            Settings::get("max_failed_logins_items")
-        );
+        $max_failed_logins_items = (int)Settings::get("max_failed_logins_items");
         $user->setFailedLogins($user->getFailedLogins() + 1);
         $user->save();
 
