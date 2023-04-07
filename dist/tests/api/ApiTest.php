@@ -50,9 +50,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->cleanUp();
         Database::query("delete from {prefix}users where username like 'testuser-%'", true);
 
-        $user = new User(
-            intval($this->initialUser->id)
-        );
+        $user = new User((int)$this->initialUser->id);
         $user->setHtmlEditor($this->initialUser->html_editor);
         $user->save();
 
