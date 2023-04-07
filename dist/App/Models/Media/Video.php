@@ -77,9 +77,9 @@ class Video extends Model
             $this->setCategoryId($result->category_id ?
                             (int) $result->category_id : null);
             $this->created = (int)$result->created;
-            $this->updated = intval($result->updated);
-            $this->width = intval($result->width);
-            $this->height = intval($result->height);
+            $this->updated = (int)$result->updated;
+            $this->width = (int)$result->width;
+            $this->height = (int)$result->height;
         } else {
             $this->setID(null);
             $this->setName(null);
