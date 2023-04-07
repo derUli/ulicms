@@ -220,9 +220,7 @@ if (!$permissionChecker->hasPermission("categories")) {
                     class="form-control"
                     maxlength="255"><?php
                         esc(
-                            Categories::getCategoryDescriptionById(
-                                intval($_GET["edit"])
-                            )
+                            Categories::getCategoryDescriptionById(intval($_GET["edit"]))
                         );
             ?></textarea>
             </div>
