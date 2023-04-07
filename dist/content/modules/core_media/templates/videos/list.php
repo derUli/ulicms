@@ -15,7 +15,7 @@ if (!isset($_SESSION["filter_category"])) {
 }
 
 if (isset($_GET["filter_category"])) {
-    $_SESSION["filter_category"] = intval($_GET["filter_category"]);
+    $_SESSION["filter_category"] = (int)$_GET["filter_category"];
 }
 
 $sql = "SELECT id, name, mp4_file, webm_file, ogg_file FROM " . tbname("videos") . " ";
