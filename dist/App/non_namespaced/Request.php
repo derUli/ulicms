@@ -10,7 +10,7 @@ class Request
 {
     public static function getPort(): ?int
     {
-        return isset($_SERVER['SERVER_PORT']) ? intval($_SERVER['SERVER_PORT']) : null;
+        return isset($_SERVER['SERVER_PORT']) ? (int)$_SERVER['SERVER_PORT'] : null;
     }
 
     public static function getProtocol(?string $suffix = null): string
@@ -43,7 +43,7 @@ class Request
                     } elseif ($value === 'false') {
                         $value = false;
                     }
-                    $value = intval((bool)$value);
+                    $value = (int)(bool)$value;
                     break;
                 case 'int':
                     $value = (int) $value;

@@ -52,8 +52,8 @@ class AudioController extends Controller
             }
         }
 
-        $name = db_escape($_POST ['name']);
-        $category_id = intval($_POST ["category_id"]);
+        $name = db_escape($_POST['name']);
+        $category_id = intval($_POST["category_id"]);
         $ogg_file_value = db_escape($ogg_file_value);
         $mp3_file_value = db_escape($mp3_file_value);
         $timestamp = time();
@@ -70,12 +70,12 @@ class AudioController extends Controller
 
     public function _updatePost(): bool
     {
-        $name = db_escape($_POST ['name']);
-        $id = intval($_POST ['id']);
-        $ogg_file = db_escape(basename($_POST ["ogg_file"]));
-        $mp3_file = db_escape(basename($_POST ["mp3_file"]));
+        $name = db_escape($_POST['name']);
+        $id = (int)$_POST['id'];
+        $ogg_file = db_escape(basename($_POST["ogg_file"]));
+        $mp3_file = db_escape(basename($_POST["mp3_file"]));
         $updated = time();
-        $category_id = intval($_POST ["category_id"]);
+        $category_id = intval($_POST["category_id"]);
         db_query("UPDATE " . tbname("audio") . " SET name='$name', "
                 . "ogg_file='$ogg_file', mp3_file='$mp3_file', "
                 . "category_id = $category_id, `updated` = $updated "
@@ -94,7 +94,7 @@ class AudioController extends Controller
     {
         $result = db_query("select ogg_file, mp3_file from " .
                 tbname("audio") . " where id = " .
-                intval($_REQUEST ["delete"]));
+                intval($_REQUEST["delete"]));
         if (db_num_rows($result) > 0) {
             $dataset = db_fetch_object($result);
             $filepath = ULICMS_ROOT . "/content/audio/" .
@@ -110,7 +110,7 @@ class AudioController extends Controller
             }
 
             db_query("DELETE FROM " . tbname("audio") . " where id = " .
-                    $_REQUEST ["delete"]);
+                    $_REQUEST["delete"]);
         }
         Response::redirect(ModuleHelper::buildActionURL("videos"));
     }

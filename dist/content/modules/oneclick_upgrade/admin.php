@@ -11,7 +11,7 @@ function oneclick_upgrade_admin()
     if (Request::isPost()) {
         Settings::set("oneclick_upgrade_channel", $_POST["oneclick_upgrade_channel"]);
     }
-    $oneclick_upgrade_channel = strval(Settings::get("oneclick_upgrade_channel"));
+    $oneclick_upgrade_channel = Settings::get("oneclick_upgrade_channel");
     $channels = array(
         "fast",
         "slow",

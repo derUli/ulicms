@@ -1,5 +1,5 @@
 <?php
-$module = basename($_GET ["module"]);
+$module = basename($_GET["module"]);
 
 $admin_file_path = getModuleAdminFilePath($module);
 $admin_file_path2 = getModuleAdminFilePath2($module);

@@ -30,14 +30,14 @@ if (!$permissionChecker->hasPermission("install_packages")) {
         $pkg_src = str_replace("{version}", $internalVersion, $pkg_src);
 
         $packageArchiveFolder = $pkg_src . "archives/";
-        $packagesToInstall = explode(",", $_REQUEST ["packages"]);
+        $packagesToInstall = explode(",", $_REQUEST["packages"]);
 
         $post_install_script = ULICMS_ROOT . "/post-install.php";
         if (is_file($post_install_script)) {
             unlink($post_install_script);
         }
 
-        if (count($packagesToInstall) === 0 or empty($_REQUEST ["packages"])) {
+        if (count($packagesToInstall) === 0 or empty($_REQUEST["packages"])) {
             ?>
             <p>
                 <strong><?php translate("error"); ?></strong> <br />

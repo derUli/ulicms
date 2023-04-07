@@ -31,7 +31,7 @@ class List_Data extends Model
     {
         return count(
             $this->filterPaginated(
-                $offset + intval($this->limit)
+                $offset + $this->limit
             )
         ) > 0;
     }

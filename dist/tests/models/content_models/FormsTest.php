@@ -93,7 +93,7 @@ class FormsTest extends \PHPUnit\Framework\TestCase
             "message=>Message",
             "message",
             "email",
-            intval($page1->id),
+            (int)$page1->id,
             false
         );
         $id = Database::getInsertID();
@@ -143,7 +143,7 @@ class FormsTest extends \PHPUnit\Framework\TestCase
             "message=>Message",
             "message",
             "email",
-            intval($page1->id),
+            (int)$page1->id,
             true
         );
         $id = Database::getInsertID();
@@ -193,9 +193,8 @@ class FormsTest extends \PHPUnit\Framework\TestCase
             "message=>Message",
             "message",
             "email",
-            intval(
-                $page1->id
-            ),
+            (int)$page1->id
+            ,
             false
         );
         $id1 = Database::getInsertID();
@@ -207,7 +206,7 @@ class FormsTest extends \PHPUnit\Framework\TestCase
             "message=>Message",
             "message",
             "email",
-            intval($page1->id),
+            (int)$page1->id,
             false
         );
 

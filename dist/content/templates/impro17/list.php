@@ -16,8 +16,8 @@ if ($id !== null) {
             $start = 0;
 
             if ($limit > 0 and $use_pagination) {
-                if (isset($_GET ["start"])) {
-                    $start = intval($_GET ["start"]);
+                if (isset($_GET["start"])) {
+                    $start = intval($_GET["start"]);
                 }
                 $entries = array_slice($entries, $start, $limit);
                 $entries_count = count($entries);

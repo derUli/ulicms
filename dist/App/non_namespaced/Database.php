@@ -203,11 +203,11 @@ class Database
             } else {
                 $value = $args[$i];
                 if (is_float($value)) {
-                    $value = str_replace(",", '.', strval((float) $value));
+                    $value = str_replace(",", '.', (string)(float)$value);
                 } elseif (is_int($value)) {
-                    $value = strval((int)$value);
+                    $value = (string)(int)$value;
                 } elseif (is_bool($value)) {
-                    $value = strval((int)$value);
+                    $value = (string)(int)$value;
                 } elseif ($value === null) {
                     $value = "NULL";
                 } else {

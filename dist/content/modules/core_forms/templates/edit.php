@@ -8,7 +8,7 @@ if (!$permissionChecker->hasPermission("forms") || !$permissionChecker->hasPermi
 } else {
     $forms = Forms::getAllForms();
     $pages = getAllPages();
-    $id = intval($_GET['id']);
+    $id = (int)$_GET['id'];
     $form = Forms::getFormByID($id);
     if ($form) {
         ?>

@@ -4,7 +4,7 @@ use App\Models\Content\VCS;
 
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission('pages')) {
-    $content_id = intval($_GET ["content_id"]);
+    $content_id = (int)$_GET["content_id"];
     $revisions = VCS::getRevisionsByContentID($content_id);
     ?>
     <p>
@@ -30,7 +30,7 @@ if ($permissionChecker->hasPermission('pages')) {
                     $view_diff_link = "index.php?action=view_diff&content_id=" . $revision->content_id . "&history_id=" . $revision->id;
                     ?>
                     <tr>
-                        <td><?php echo intval($revision->id); ?></td>
+                        <td><?php esc($revision->id); ?></td>
                         <td><a href="<?php echo $view_diff_link; ?>" class="btn btn-info"
                                target="_blank"><i class="fas fa-eye"></i> <?php translate("view_diff"); ?></a></td>
                         <td><?php

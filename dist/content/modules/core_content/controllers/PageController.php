@@ -486,8 +486,8 @@ class PageController extends Controller
         ?int $historyId = null,
         ?int $contentId = null
     ): DiffViewModel {
-        $historyId = $historyId ? $historyId : intval($_GET ["history_id"]);
-        $contentId = $contentId ? $contentId : intval($_GET ["content_id"]);
+        $historyId = $historyId ? $historyId : intval($_GET["history_id"]);
+        $contentId = $contentId ? $contentId : intval($_GET["content_id"]);
 
         $currentVersion = getPageByID($contentId);
         $oldVersion = VCS::getRevisionByID($historyId);

@@ -68,7 +68,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
 
     public function testGetSlugWithSlugSet()
     {
-        $_GET ["slug"] = "foobar";
+        $_GET["slug"] = "foobar";
         $this->assertEquals("foobar", get_slug());
         $this->cleanUp();
     }
@@ -81,26 +81,26 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
 
     public function testGetSlugWithNull()
     {
-        $_GET ["slug"] = null;
+        $_GET["slug"] = null;
         $this->assertEquals(get_frontpage(), get_slug());
     }
 
     public function testGetSlugWithEmptyString()
     {
-        $_GET ["slug"] = '';
+        $_GET["slug"] = '';
         $this->assertEquals(get_frontpage(), get_slug());
     }
 
     public function testIsHomeTrue()
     {
-        $_GET ["slug"] = get_frontpage();
+        $_GET["slug"] = get_frontpage();
         $this->assertTrue(is_home());
         $this->cleanUp();
     }
 
     public function testIsHomeFalse()
     {
-        $_GET ["slug"] = "nothome";
+        $_GET["slug"] = "nothome";
         $this->assertFalse(is_home());
         $this->cleanUp();
     }
