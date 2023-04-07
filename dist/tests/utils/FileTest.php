@@ -4,7 +4,7 @@ use App\Utils\File;
 
 use Spatie\Snapshots\MatchesSnapshots;
 
-class FilesTest extends \PHPUnit\Framework\TestCase
+class FileTest extends \PHPUnit\Framework\TestCase
 {
     use MatchesSnapshots;
 

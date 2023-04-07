@@ -57,17 +57,16 @@ class SystemRequirementsTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertTrue(extension_loaded("xml"));
     }
+
     public function testPhpModuleIntl()
     {
         $this->assertTrue(extension_loaded("intl"));
     }
 
-
     public function testPhpModuleCurl()
     {
         $this->assertTrue(extension_loaded("curl"));
     }
-
 
     public function testConnectToUliCMSServices()
     {
