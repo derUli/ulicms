@@ -581,7 +581,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase
         $db_socket = isset($config->db_socket) ? $config->db_socket : ini_get("mysqli.default_socket");
         $db_port = isset($config->db_port) ? $config->db_port : ini_get("mysqli.default_port");
 
-        $db_strict_mode = isset($config->db_strict_mode) ? boolval($config->db_strict_mode) : false;
+        $db_strict_mode = isset($config->db_strict_mode) && $config->db_strict_mode;
 
         @$connect = Database::connect($config->db_server, $config->db_user, "invalid_password", $db_port, $db_socket, $db_strict_mode);
         $this->assertNull($connect);
@@ -597,7 +597,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase
         $db_port = isset($config->db_port) ? $config->db_port : ini_get("mysqli.default_port");
 
         if ($db_strict_mode === null) {
-            $db_strict_mode = isset($config->db_strict_mode) ? boolval($config->db_strict_mode) : false;
+            $db_strict_mode = isset($config->db_strict_mode) && $config->db_strict_mode;
         }
 
         Database::connect($config->db_server, $config->db_user, $config->db_password, $db_port, $db_socket, $db_strict_mode);
