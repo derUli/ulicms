@@ -14,7 +14,7 @@ class NumberFormatHelperTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(
             "64.05 GB",
             NumberFormatHelper::formatSizeUnits(
-                floatval((64 * 1024 * 1024 * 1024) + (55 * 1024 * 1024))
+                (float)(64 * 1024 * 1024 * 1024) + (55 * 1024 * 1024)
             )
         );
     }
@@ -24,7 +24,7 @@ class NumberFormatHelperTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(
             "64.05 MB",
             NumberFormatHelper::formatSizeUnits(
-                floatval((64 * 1024 * 1024) + (55 * 1024))
+                (float)(64 * 1024 * 1024) + (55 * 1024)
             )
         );
     }
@@ -33,7 +33,7 @@ class NumberFormatHelperTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertEquals(
             "64.05 KB",
-            NumberFormatHelper::formatSizeUnits(floatval((64 * 1024) + 55))
+            NumberFormatHelper::formatSizeUnits((float)(64 * 1024) + 55)
         );
     }
 
@@ -41,11 +41,11 @@ class NumberFormatHelperTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertEquals(
             "64 B",
-            NumberFormatHelper::formatSizeUnits(floatval(64))
+            NumberFormatHelper::formatSizeUnits((float)64)
         );
         $this->assertEquals(
             "0 B",
-            NumberFormatHelper::formatSizeUnits(floatval(0))
+            NumberFormatHelper::formatSizeUnits((float)0)
         );
     }
 
@@ -53,7 +53,7 @@ class NumberFormatHelperTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertEquals(
             "1 B",
-            NumberFormatHelper::formatSizeUnits(floatval(1))
+            NumberFormatHelper::formatSizeUnits((float)1)
         );
     }
 
