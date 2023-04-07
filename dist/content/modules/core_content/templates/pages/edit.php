@@ -1137,7 +1137,7 @@ if ($permissionChecker->hasPermission('pages')) {
             ?>><?php translate("desktop_computers"); ?></option>
                                         <?php
                     while ($row2 = db_fetch_object($groupsSql)) {
-                        if (in_array(strval($row2->id), $access)) {
+                        if (in_array((string)$row2->id, $access)) {
                             echo '<option value="' . $row2->id . '" selected>' . _esc($row2->name) . '</option>';
                         } else {
                             echo '<option value="' . $row2->id . '">' . _esc($row2->name) . '</option>';

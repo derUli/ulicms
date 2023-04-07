@@ -9,7 +9,7 @@ define("MODULE_ADMIN_HEADLINE", get_translation("oneclick_upgrade") . " " . get_
 function oneclick_upgrade_admin()
 {
     if (Request::isPost()) {
-        Settings::set("oneclick_upgrade_channel", strval($_POST["oneclick_upgrade_channel"]));
+        Settings::set("oneclick_upgrade_channel", $_POST["oneclick_upgrade_channel"]);
     }
     $oneclick_upgrade_channel = strval(Settings::get("oneclick_upgrade_channel"));
     $channels = array(

@@ -14,7 +14,7 @@ if (!$permissionChecker->hasPermission("groups")) {
     if (isset($_POST["add_group"])) {
         $permissionChecker = new ACL();
         $all_permissions = $permissionChecker->getDefaultACL(false, true);
-        if (isset($_POST["user_permissons"]) and count($_POST["user_permissons"]) > 0) {
+        if (isset($_POST["user_permissons"]) && count($_POST["user_permissons"]) > 0) {
             foreach ($_POST["user_permissons"] as $permission_name) {
                 $all_permissions[$permission_name] = true;
             }
@@ -25,20 +25,20 @@ if (!$permissionChecker->hasPermission("groups")) {
             $id = $permissionChecker->createGroup($name, $all_permissions);
             $group = new Group($id);
             $languages = [];
-            if (isset($_POST["restrict_edit_access_language"]) and count($_POST["restrict_edit_access_language"]) > 0) {
+            if (isset($_POST["restrict_edit_access_language"]) && count($_POST["restrict_edit_access_language"]) > 0) {
                 foreach ($_POST["restrict_edit_access_language"] as $lang) {
                     $languages[] = new Language($lang);
                 }
             }
             $group->setLanguages($languages);
-            $allowed_tags = !empty($_POST["allowable_tags"]) ? strval($_POST["allowable_tags"]) : null;
+            $allowed_tags = !empty($_POST["allowable_tags"]) ? $_POST["allowable_tags"] : null;
             $group->setAllowableTags($allowed_tags);
             $group->save();
             $created = true;
 
             $name = _esc($name);
         }
-    } elseif (isset($_GET["delete"]) and Request::isPost()) {
+    } elseif (isset($_GET["delete"]) && Request::isPost()) {
         $id = intval($_GET["delete"]);
         $permissionChecker = new ACL();
         $permissionChecker->deleteGroup($id);
@@ -54,10 +54,10 @@ if (!$permissionChecker->hasPermission("groups")) {
 
         $group = new Group();
         $group->loadById($id);
-        $allowed_tags = !empty($_POST["allowable_tags"]) ? strval($_POST["allowable_tags"]) : null;
+        $allowed_tags = !empty($_POST["allowable_tags"]) ? $_POST["allowable_tags"] : null;
         $group->setAllowableTags($allowed_tags);
         $languages = [];
-        if (isset($_POST["restrict_edit_access_language"]) and count($_POST["restrict_edit_access_language"]) > 0) {
+        if (isset($_POST["restrict_edit_access_language"]) && count($_POST["restrict_edit_access_language"]) > 0) {
             foreach ($_POST["restrict_edit_access_language"] as $lang) {
                 $languages[] = new Language($lang);
             }
@@ -65,7 +65,7 @@ if (!$permissionChecker->hasPermission("groups")) {
         $group->setLanguages($languages);
         $group->save();
 
-        if (isset($_POST["user_permissons"]) and count($_POST["user_permissons"]) > 0) {
+        if (isset($_POST["user_permissons"]) && count($_POST["user_permissons"]) > 0) {
             foreach ($_POST["user_permissons"] as $permission_name) {
                 $all_permissions[$permission_name] = true;
             }

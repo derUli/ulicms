@@ -71,7 +71,7 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase
             TwoFactorAuthentication::enable();
         }
 
-        Settings::set("max_failed_logins_items", strval($this->maxFailedLoginItems));
+        Settings::set("max_failed_logins_items", (string)$this->maxFailedLoginItems);
     }
 
     public function testGetUserIdUserIsLoggedIn()
