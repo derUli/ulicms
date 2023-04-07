@@ -30,7 +30,7 @@ class VCS
 
     public static function getRevisionByID(int $history_id): ?object
     {
-        $history_id = intval($history_id);
+        $history_id = $history_id;
         $result = Database::pQuery(
             "SELECT * FROM `{prefix}history` "
                         . "WHERE id = ?",
@@ -49,7 +49,7 @@ class VCS
                 " WHERE id = " . $history_id);
         if (db_num_rows($result) > 0) {
             $row = db_fetch_object($result);
-            $content_id = intval($row->content_id);
+            $content_id = (int)$row->content_id;
             $lastmodified = time();
             $content = db_escape($row->content);
             return db_query("UPDATE " . tbname("content") .
