@@ -184,7 +184,7 @@ class PageTableRenderer
 
         if (isset($filters["approved"]) &&
                 is_numeric($filters["approved"])) {
-            $where .= " and approved =" . intval($filters["approved"]);
+            $where .= " and approved =" . (int)$filters["approved"];
         }
 
         if (isset($filters['language']) &&
@@ -202,7 +202,7 @@ class PageTableRenderer
 
         if (isset($filters["active"]) &&
                 is_numeric($filters["active"])) {
-            $where .= " and active ='" . intval($filters["active"]) . "'";
+            $where .= " and active ='" . (int)$filters["active"] . "'";
         }
 
         return $where;
