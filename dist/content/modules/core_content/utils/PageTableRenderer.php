@@ -75,8 +75,8 @@ class PageTableRenderer
         $sortDirection = "asc";
 
         if ($order) {
-            $sortDirection = (isset($order["dir"]) and $order["dir"] === "desc") ? "desc" : "asc";
-            $columnNumber = isset($order["column"]) ? intval($order["column"]) : 0;
+            $sortDirection = (isset($order["dir"]) && $order["dir"] === "desc") ? "desc" : "asc";
+            $columnNumber = isset($order["column"]) ? (int)$order["column"] : 0;
             if ($columnNumber >= 0 and $columnNumber < count($orderColumns)) {
                 $sortColumn = $orderColumns[$columnNumber];
             }
@@ -165,13 +165,13 @@ class PageTableRenderer
                     "'";
         }
 
-        if (isset($filters["category_id"]) and
-                is_numeric($filters["category_id"]) and
+        if (isset($filters["category_id"]) &&
+                is_numeric($filters["category_id"]) &&
                 $filters["category_id"] > 0) {
             $where .= " and category_id =" . intval($filters["category_id"]);
         }
 
-        if (isset($filters["parent_id"]) and
+        if (isset($filters["parent_id"]) &&
                 is_numeric($filters["parent_id"])) {
             $parent_id = intval($filters["parent_id"]);
 
@@ -182,25 +182,25 @@ class PageTableRenderer
             }
         }
 
-        if (isset($filters["approved"]) and
+        if (isset($filters["approved"]) &&
                 is_numeric($filters["approved"])) {
             $where .= " and approved =" . intval($filters["approved"]);
         }
 
-        if (isset($filters['language']) and
+        if (isset($filters['language']) &&
                 !empty($filters['language'])) {
             $where .= " and language ='" .
                     Database::escapeValue($filters['language']) .
                     "'";
         }
 
-        if (isset($filters["menu"]) and
+        if (isset($filters["menu"]) &&
                 !empty($filters["menu"])) {
             $where .= " and menu ='";
             $where .= Database::escapeValue($filters["menu"]) . "'";
         }
 
-        if (isset($filters["active"]) and
+        if (isset($filters["active"]) &&
                 is_numeric($filters["active"])) {
             $where .= " and active ='" . intval($filters["active"]) . "'";
         }
