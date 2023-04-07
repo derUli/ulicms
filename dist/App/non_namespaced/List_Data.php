@@ -93,7 +93,7 @@ class List_Data extends Model
         $this->order_by = $data->order_by ? $data->order_by : null;
         $this->order_direction = $data->order_direction ? $data->order_direction : null;
         $this->limit = $data->limit ? intval($data->limit) : null;
-        $this->use_pagination = boolval($data->use_pagination);
+        $this->use_pagination = (bool)$data->use_pagination;
         $this->type = $data->type ? $data->type : null;
     }
 
