@@ -46,7 +46,7 @@ class ListItemTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals(
             '<option value="hello_world">Hello World!</option>',
-            strval($item)
+            (string)$item
         );
     }
 
