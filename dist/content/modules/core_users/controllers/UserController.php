@@ -22,7 +22,7 @@ class UserController extends Controller
         $sendMail = isset($_POST["send_mail"]);
         $admin = isset($_POST["admin"]);
         $locked = isset($_POST["locked"]);
-        $group_id = intval($_POST["group_id"]) ? intval($_POST["group_id"]) : null;
+        $group_id = is_numeric($_POST["group_id"]) ? (int)$_POST["group_id"] : null;
         $require_password_change = intval(isset($_POST["require_password_change"]));
 
         // save secondary groups
