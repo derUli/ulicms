@@ -132,7 +132,7 @@ class Banner extends Model
             $sql .= "'" . Database::escapeValue($this->date_to) . "',";
         }
 
-        $sql .= intval($this->enabled);
+        $sql .= (int)$this->enabled;
 
         $sql .= ")";
 
@@ -169,7 +169,7 @@ class Banner extends Model
         if ($this->category_id === null) {
             $sql .= "category_id=NULL, ";
         } else {
-            $sql .= "category_id='" . intval($this->category_id) . "',";
+            $sql .= "category_id='" . (int)$this->category_id . "',";
         }
 
         $sql .= "`type`='" . Database::escapeValue($this->type) . "',";
@@ -199,9 +199,9 @@ class Banner extends Model
                     "', ";
         }
 
-        $sql .= "enabled = " . intval($this->enabled);
+        $sql .= "enabled = " . (int)$this->enabled;
 
-        $sql .= " where id = " . intval($this->id);
+        $sql .= " where id = " . (int)$this->id;
         return Database::query($sql);
     }
 

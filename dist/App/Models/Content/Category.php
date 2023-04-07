@@ -83,9 +83,9 @@ class Category
     {
         if ($this->id) {
             $sql = "delete from {prefix}categories where id = ?";
-            $args = array(
-                intval($this->id)
-            );
+            $args = [
+                (int)$this->id
+            ];
             Database::pQuery($sql, $args, true);
             $this->fillVars(null);
         }
