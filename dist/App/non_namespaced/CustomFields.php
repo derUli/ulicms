@@ -25,9 +25,9 @@ class CustomFields
         if (is_array($value)) {
             $value = join("\0\0", $value);
         } elseif (is_bool($value)) {
-            $value = strval((int) $value);
+            $value = (string)(int)$value;
         } elseif ($value !== null) {
-            $value = (string) $value;
+            $value = (string)$value;
         }
 
         $content_id = (int)$content_id;
