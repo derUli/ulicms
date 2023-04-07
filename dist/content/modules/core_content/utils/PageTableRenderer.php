@@ -173,10 +173,10 @@ class PageTableRenderer
 
         if (isset($filters["parent_id"]) &&
                 is_numeric($filters["parent_id"])) {
-            $parent_id = intval($filters["parent_id"]);
+            $parent_id = (int)$filters["parent_id"];
 
             if ($parent_id > 0) {
-                $where .= " and parent_id =" . intval($filters["parent_id"]);
+                $where .= " and parent_id =" . $parent_id;
             } else {
                 $where .= " and parent_id is null";
             }
