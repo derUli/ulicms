@@ -47,7 +47,7 @@ class Banners
         ?int $category_id,
         string $order = 'id'
     ): array {
-        $category_id = intval($category_id);
+        $category_id = (int)$category_id;
         $datasets = [];
         $sql = "SELECT id FROM " . tbname("banner") .
                 " WHERE `category_id` = $category_id ORDER BY $order";
