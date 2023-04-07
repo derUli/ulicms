@@ -23,7 +23,7 @@ class UserController extends Controller
         $admin = isset($_POST["admin"]);
         $locked = isset($_POST["locked"]);
         $group_id = is_numeric($_POST["group_id"]) ? (int)$_POST["group_id"] : null;
-        $require_password_change = intval(isset($_POST["require_password_change"]));
+        $require_password_change = (int)isset($_POST["require_password_change"]);
 
         // save secondary groups
         $user = new User();
@@ -76,18 +76,19 @@ class UserController extends Controller
             $homepage = $_POST["homepage"];
             $about_me = $_POST["about_me"];
             $html_editor = $_POST["html_editor"];
-            $group_id = is_numeric($_POST["group_id"]) ? intval($_POST["group_id"]) : null;
+            $group_id = is_numeric($_POST["group_id"]) ? (int)$_POST["group_id"] : null;
 
             if ($group_id <= 0) {
                 $group_id = null;
             }
 
-            $require_password_change = intval(isset($_POST["require_password_change"]));
+            $require_password_change = (int)isset($_POST["require_password_change"]);
 
             $user = new User($id);
             if (!$user->getId() == $id) {
                 ExceptionResult(get_translation("not_found"), HttpStatusCode::NOT_FOUND);
             }
+            
             $user->setLastname($lastname);
             $user->setFirstname($firstname);
 
