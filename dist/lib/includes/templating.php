@@ -663,9 +663,7 @@ function buildtree(
             unset($src_arr[$idx]);
             $tree[$row['id']]['children'] = buildtree(
                 $src_arr,
-                intval(
-                    $row['id']
-                )
+                (int)$row['id']
             );
         }
     }
