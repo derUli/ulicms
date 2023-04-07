@@ -70,7 +70,7 @@ class FormControllerTest extends \PHPUnit\Framework\TestCase
         $_POST["fields"] = "foo=>bar";
         $_POST["required_fields"] = "foo";
         $_POST["mail_from_field"] = "foo";
-        $_POST["target_page_id"] = strval($page->getId());
+        $_POST["target_page_id"] = (string)$page->getId();
     }
 
     public function testUpdatePostReturnsTrue()

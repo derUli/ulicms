@@ -106,7 +106,7 @@ class LanguageTest extends \PHPUnit\Framework\TestCase
     {
         $lang = new Language();
         $lang->setLanguageCode("fr");
-        $this->assertEquals("fr", strval($lang));
+        $this->assertEquals("fr", (string)$lang);
     }
 
     public function testGetLanguageLinkReturnsRelative()

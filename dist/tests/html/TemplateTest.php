@@ -453,7 +453,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         $page->content = "Hello World";
         $page->author_id = 1;
         $page->group_id = 1;
-        $page->access = strval(PHP_INT_MAX);
+        $page->access = (string)PHP_INT_MAX;
         $page->active = 1;
         $page->save();
 
