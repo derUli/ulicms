@@ -50,7 +50,7 @@ class SessionManager extends Controller
 
     public function logout(): void
     {
-        $id = intval($_SESSION['login_id']);
+        $id = $_SESSION['login_id'];
 
         // set user state to offline
         db_query("UPDATE " . tbname('users') . " SET last_action = 0 WHERE id = $id");
