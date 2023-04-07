@@ -81,7 +81,7 @@ class ViewButtonRendererTest extends \PHPUnit\Framework\TestCase
         $page->title = "Test Page " . uniqid();
         $page->author_id = $this->user->getId();
         $page->group_id = $allGroups[0]->getId();
-        $page->access = strval(PHP_INT_MAX);
+        $page->access = (string)(PHP_INT_MAX);
         $page->save();
 
         $render = new ViewButtonRenderer();
