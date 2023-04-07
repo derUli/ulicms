@@ -39,7 +39,7 @@ if (!$permissionChecker->hasPermission("groups")) {
             $name = _esc($name);
         }
     } elseif (isset($_GET["delete"]) && Request::isPost()) {
-        $id = intval($_GET["delete"]);
+        $id = (int)$_GET["delete"];
         $permissionChecker = new ACL();
         $permissionChecker->deleteGroup($id);
         $removed = true;
