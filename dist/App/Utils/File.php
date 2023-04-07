@@ -7,6 +7,7 @@ namespace App\Utils;
 defined('ULICMS_ROOT') or exit('no direct script access allowed');
 
 use Intervention\MimeSniffer\MimeSniffer;
+use Nette\Utils\FileSystem;
 
 /**
  * Utils for handling files
@@ -40,13 +41,12 @@ class File
     // Delete a file or a directory if it exist
     public static function deleteIfExists(string $file): bool
     {
-        if (is_file($file)) {
-            return unlink($file);
-        } elseif (is_dir($file)) {
-            sureRemoveDir($file, true);
-            return !is_file($file);
+        if(!file_exists($file)){
+            return false;
         }
-        return false;
+        
+        FileSystem::delete($file);
+        return true;
     }
 
     /**
@@ -92,28 +92,10 @@ class File
         string $dir,
         bool $deleteMe = true
     ): void {
-        if (!is_dir($dir)) {
-            return;
-        }
-
-        $dh = opendir($dir);
-
-        while (false !== ($obj = readdir($dh))) {
-            if ($obj == '.' || $obj == '..') {
-                continue;
-            }
-            $path = "$dir/$obj";
-
-            if (is_dir($path)) {
-                sureRemoveDir($path, true);
-            } elseif (is_file($path)) {
-                unlink($path);
-            }
-        }
-
-        closedir($dh);
-        if ($deleteMe) {
-            @rmdir($dir);
+        FileSystem::delete($dir);
+        
+        if(!$deleteMe){
+            FileSystem::createDir($dir);
         }
     }
 
