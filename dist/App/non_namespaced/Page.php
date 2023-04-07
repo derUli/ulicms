@@ -183,26 +183,26 @@ class Page extends Content
         }
 
         $sql .= (int)$this->active . ",";
-        $sql .= intval($this->approved) . ",";
+        $sql .= (int)$this->approved . ",";
         $this->created = time();
         $this->lastmodified = $this->created;
         $sql .= (int) $this->created . ",";
-        $sql .= intval($this->lastmodified) . ",";
-        $sql .= intval($this->author_id) . ",";
+        $sql .= (int)$this->lastmodified . ",";
+        $sql .= (int)$this->author_id . ",";
 
-        $group_id = $this->group_id ? intval($this->group_id) : "null";
+        $group_id = $this->group_id ? (int)$this->group_id : "null";
         $sql .= $group_id . ",";
-        $sql .= intval($this->lastchangeby) . ",";
+        $sql .= (int)$this->lastchangeby . ",";
 
         // Views
         $sql .= "0,";
 
         $sql .= "'" . Database::escapeValue($this->menu) . "',";
-        $sql .= intval($this->position) . ",";
+        $sql .= (int)$this->position . ",";
         if ($this->parent_id === null) {
             $sql .= " NULL ,";
         } else {
-            $sql .= intval($this->parent_id) . ",";
+            $sql .= (int)$this->parent_id . ",";
         }
 
         $sql .= "'" . Database::escapeValue($this->access) . "',";
@@ -220,7 +220,7 @@ class Page extends Content
         if ($this->deleted_at === null) {
             $sql .= " NULL,";
         } else {
-            $sql .= intval($this->deleted_at) . ",";
+            $sql .= (int)$this->deleted_at . ",";
         }
 
         if ($this->theme === null) {
