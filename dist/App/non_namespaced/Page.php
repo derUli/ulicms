@@ -297,19 +297,19 @@ class Page extends Content
                     Database::escapeValue($this->menu_image) . "',";
         }
 
-        $sql .= "active=" . intval($this->active) . ",";
-        $sql .= "approved=" . intval($this->approved) . ",";
-        $sql .= "lastmodified=" . intval($this->lastmodified) . ",";
-        $sql .= "author_id=" . intval($this->author_id) . ",";
-        $sql .= "`group_id`=" . intval($this->group_id) . ",";
-        $sql .= "lastchangeby=" . intval($this->lastchangeby) . ",";
+        $sql .= "active=" . (int)$this->active . ",";
+        $sql .= "approved=" . (int)$this->approved . ",";
+        $sql .= "lastmodified=" . (int)$this->lastmodified . ",";
+        $sql .= "author_id=" . (int)$this->author_id . ",";
+        $sql .= "`group_id`=" . (int)$this->group_id . ",";
+        $sql .= "lastchangeby=" . (int)$this->lastchangeby . ",";
 
         $sql .= "menu='" . Database::escapeValue($this->menu) . "',";
-        $sql .= "position=" . intval($this->position) . ",";
+        $sql .= "position=" . (int)$this->position . ",";
         if ($this->parent_id === null) {
             $sql .= "parent_id = NULL ,";
         } else {
-            $sql .= "parent_id=" . intval($this->parent_id) . ",";
+            $sql .= "parent_id=" . (int)$this->parent_id . ",";
         }
 
         $sql .= "access='" . Database::escapeValue($this->access) . "',";
@@ -330,7 +330,7 @@ class Page extends Content
         if ($this->deleted_at === null) {
             $sql .= "deleted_at=NULL ,";
         } else {
-            $sql .= "deleted_at=" . intval($this->deleted_at) . ",";
+            $sql .= "deleted_at=" . (int)$this->deleted_at . ",";
         }
 
         if ($this->theme === null) {
@@ -536,24 +536,14 @@ class Page extends Content
     // returns true if this page is configured as the 403 error page
     public function isErrorPage403(): bool
     {
-        $errorPage403 = intval(
-            Settings::getLanguageSetting(
-                "error_page_403",
-                $this->language
-            )
-        );
+        $errorPage403 = (int)Settings::getLanguageSetting("error_page_403", $this->language);
         return $this->getID() && $this->getID() == $errorPage403;
     }
 
     // returns true if this page is configured as the 404 error page
     public function isErrorPage404(): bool
     {
-        $errorPage404 = intval(
-            Settings::getLanguageSetting(
-                "error_page_404",
-                $this->language
-            )
-        );
+        $errorPage404 = (int)Settings::getLanguageSetting("error_page_404", $this->language);
         return $this->getID() && $this->getID() == $errorPage404;
     }
 
