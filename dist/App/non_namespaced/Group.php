@@ -92,7 +92,7 @@ class Group
     public static function getDefaultPrimaryGroupId(): ?int
     {
         return Settings::get('default_acl_group') ?
-                intval(Settings::get('default_acl_group')) : null;
+                (int) Settings::get('default_acl_group') : null;
     }
 
     // get the default group

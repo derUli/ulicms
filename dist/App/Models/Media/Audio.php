@@ -76,7 +76,7 @@ class Audio extends Model
                 $result->category_id ? (int)$result->category_id : null
             );
             $this->created = $result->created ?
-                    intval($result->created) : null;
+                    (int)$result->created : null;
             $this->updated = $result->updated ? intval($result->updated) : null;
         } else {
             $this->setID(null);
