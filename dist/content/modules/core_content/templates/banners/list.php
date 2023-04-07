@@ -10,9 +10,11 @@ if ($permissionChecker->hasPermission("banners")) {
     if (!isset($_SESSION["filter_category"])) {
         $_SESSION["filter_category"] = 0;
     }
+    
     if (isset($_GET["filter_category"])) {
-        $_SESSION["filter_category"] = intval($_GET["filter_category"]);
+        $_SESSION["filter_category"] = (int)$_GET["filter_category"];
     }
+
     if ($_SESSION["filter_category"] == 0) {
         $banners = Banners::getAll();
     } else {
