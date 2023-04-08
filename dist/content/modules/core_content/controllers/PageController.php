@@ -202,7 +202,7 @@ class PageController extends Controller
         $model->cache_control = Request::getVar("cache_control", "auto", "str");
 
         $parent_id = Request::getVar("parent_id", null, "str");
-        $model->parent_id = intval($parent_id) > 0 ? intval($parent_id) : null;
+        $model->parent_id = (int)$parent_id > 0 ? (int)$parent_id : null;
 
         if (Request::hasVar("access")) {
             $model->access = implode(",", Request::getVar("access"));
