@@ -6,7 +6,7 @@ function get_translation(string $name, array $placeholders = []): string
 {
     $iname = strtoupper($name);
     foreach (get_defined_constants() as $key => $value) {
-        if (str_starts_with($key, "TRANSLATION_") && $key == "TRANSLATION_" . $iname) {
+        if (str_starts_with($key, "TRANSLATION_") && $key === "TRANSLATION_" . $iname) {
             // Platzhalter ersetzen, diese können
             // als assoziatives Array als zweiter Parameter
             // dem Funktionsaufruf mitgegeben werden
