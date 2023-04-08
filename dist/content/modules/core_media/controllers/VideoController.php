@@ -73,13 +73,13 @@ class VideoController extends Controller
             }
 
             $name = db_escape($_POST['name']);
-            $category_id = intval($_POST["category_id"]);
+            $category_id = (int)$_POST["category_id"];
             $ogg_file_value = db_escape($ogg_file_value);
             $webm_file_value = db_escape($webm_file_value);
             $mp4_file_value = db_escape($mp4_file_value);
 
-            $width = intval($_POST["width"]);
-            $height = intval($_POST["height"]);
+            $width = (int)$_POST["width"];
+            $height = (int)$_POST["height"];
             $timestamp = time();
 
             if (!empty($ogg_file_value) || !empty($mp4_file_value) || !empty($webm_file_value)) {
@@ -102,10 +102,10 @@ class VideoController extends Controller
         $ogg_file = db_escape(basename($_POST["ogg_file"]));
         $webm_file = db_escape(basename($_POST["webm_file"]));
         $mp4_file = db_escape(basename($_POST["mp4_file"]));
-        $width = intval($_POST["width"]);
-        $height = intval($_POST["height"]);
+        $width = (int)$_POST["width"];
+        $height = (int)$_POST["height"];
         $updated = time();
-        $category_id = intval($_POST["category_id"]);
+        $category_id = (int)$_POST["category_id"];
         db_query("UPDATE " . tbname("videos") . " SET name='$name', "
                 . "ogg_file='$ogg_file', mp4_file='$mp4_file', "
                 . "webm_file='$webm_file', width=$width, height=$height, "
@@ -123,7 +123,7 @@ class VideoController extends Controller
     public function deletePost(): void
     {
         $result = db_query("select ogg_file, webm_file, mp4_file from " .
-                tbname("videos") . " where id = " . intval($_REQUEST["delete"]));
+                tbname("videos") . " where id = " . (int)$_REQUEST["delete"]);
         if (db_num_rows($result) > 0) {
             // OGG
             $dataset = db_fetch_object($result);
@@ -148,7 +148,7 @@ class VideoController extends Controller
             }
 
             db_query("DELETE FROM " . tbname("videos") . " where id = " .
-                    intval($_REQUEST["delete"]));
+                (int)$_REQUEST["delete"]);
         }
         Response::redirect(ModuleHelper::buildActionURL("videos"));
     }
