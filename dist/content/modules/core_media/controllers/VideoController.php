@@ -98,7 +98,7 @@ class VideoController extends Controller
     public function _updatePost(): bool
     {
         $name = db_escape($_POST['name']);
-        $id = intval($_POST['id']);
+        $id = (int)$_POST['id'];
         $ogg_file = db_escape(basename($_POST["ogg_file"]));
         $webm_file = db_escape(basename($_POST["webm_file"]));
         $mp4_file = db_escape(basename($_POST["mp4_file"]));
