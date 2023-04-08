@@ -173,7 +173,7 @@ class List_Data extends Model
 
     protected function update()
     {
-        $content_id = intval($this->content_id);
+        $content_id = (int)$this->content_id;
 
         if ($this->language === null) {
             $language = "null";
