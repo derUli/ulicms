@@ -157,7 +157,7 @@ class BannersTest extends \PHPUnit\Framework\TestCase
         do {
             $banner2 = Banners::getRandom();
             $i++;
-        } while ($banner1->getId() == $banner2->getId() and
+        } while ($banner1->getId() === $banner2->getId() and
         $i < 20);
 
         $this->assertNotEquals($banner2->getId(), $banner1->getId());
