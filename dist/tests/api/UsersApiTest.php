@@ -239,7 +239,7 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase
     {
         $allUsers = getUsers();
         foreach ($allUsers as $user) {
-            if ($user["username"] == "testuser1") {
+            if ($user["username"] === "testuser1") {
                 $this->assertEquals($user['id'], $this->testUser->getID());
                 return;
             }
