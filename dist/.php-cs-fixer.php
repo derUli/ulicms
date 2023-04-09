@@ -3,8 +3,6 @@
 $config = new PhpCsFixer\Config();
 
 $tmpRules = [
-    // Equal sign in declare statement should be surrounded by spaces or not following configuration.
-    'declare_equal_normalize' => ['space'=>'single'],
     // Spaces should be properly placed in a function declaration.
     'function_declaration' => ['closure_function_spacing'=>'none', 'closure_fn_spacing'=>'none'],
     // Add leading `\` before function invocation to speed up resolving.
@@ -275,6 +273,8 @@ $config
     'method_chaining_indentation' => true,
     // Concatenation should be spaced according configuration.
     'concat_space' => ['spacing'=>'one'],
+    // Equal sign in declare statement should be surrounded by spaces or not following configuration.
+    'declare_equal_normalize' => ['space'=>'single'],
     ]);
 
 return $config->setFinder(
