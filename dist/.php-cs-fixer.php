@@ -7,8 +7,6 @@ $tmpRules = [
     'align_multiline_comment' => ['comment_type'=>'all_multiline'],
     // Each element of an array must be indented exactly once.
     'array_indentation' => true,
-    // Binary operators should be surrounded by space as configured.
-    'binary_operator_spaces' => true,
     // There MUST be one blank line after the namespace declaration.
     'blank_line_after_namespace' => true,
     // Ensure there is no code on the same line as the PHP open tag and it is followed by a blank line.
@@ -278,6 +276,8 @@ $config
      'lowercase_static_reference' => true,
     // Converts backtick operators to `shell_exec` calls.
     'backtick_to_shell_exec' => true,
+    // Binary operators should be surrounded by space as configured.
+    'binary_operator_spaces' => true,
     ]);
 
 return $config->setFinder(
