@@ -15,8 +15,6 @@ $tmpRules = [
     'function_declaration' => ['closure_function_spacing'=>'none', 'closure_fn_spacing'=>'none'],
     // Ensure single space between function's argument and its typehint.
     'function_typehint_space' => true,
-    // Include/Require and file path should be divided with a single space. File path should not be placed under brackets.
-    'include' => true,
     // Code MUST use configured indentation type.
     'indentation_type' => true,
     // All PHP files must use same line ending.
@@ -277,6 +275,8 @@ $config
     'explicit_string_variable' => true,
     // Calling `unset` on multiple items should be done in one call.
     'combine_consecutive_unsets' => true,
+    // Include/Require and file path should be divided with a single space. File path should not be placed under brackets.
+    'include' => true,
     ]);
 
 return $config->setFinder(

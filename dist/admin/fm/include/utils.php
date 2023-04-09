@@ -341,9 +341,9 @@ function ftp_con($config)
 {
     if (isset($config['ftp_host']) && $config['ftp_host']) {
         // *** Include the class
-        include('include/FtpClient.php');
-        include('include/FtpException.php');
-        include('include/FtpWrapper.php');
+        include 'include/FtpClient.php';
+        include 'include/FtpException.php';
+        include 'include/FtpWrapper.php';
 
         $ftp = new \FtpClient\FtpClient();
         try {
@@ -395,7 +395,7 @@ function create_img($imgfile, $imgthumb, $newwidth, $newheight = null, $option =
     }
     if (file_exists($imgfile) || strpos($imgfile, 'http') === 0) {
         if (strpos($imgfile, 'http') === 0 || image_check_memory_usage($imgfile, $newwidth, $newheight)) {
-            require_once('php_image_magician.php');
+            require_once 'php_image_magician.php';
             try {
                 $magicianObj = new imageLib($imgfile);
                 $magicianObj->resizeImage($newwidth, $newheight, $option);
@@ -773,7 +773,7 @@ function fix_path($path, $config)
 function config_loading($current_path, $fld)
 {
     if (file_exists($current_path . $fld . '.config')) {
-        require_once($current_path . $fld . '.config');
+        require_once $current_path . $fld . '.config';
 
         return true;
     }

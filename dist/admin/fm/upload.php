@@ -58,7 +58,7 @@ try {
         $path = fix_dirname($path) . '/';
     }
 
-    require('UploadHandler.php');
+    require 'UploadHandler.php';
     $messages = null;
     if (trans('Upload_error_messages') !== 'Upload_error_messages') {
         $messages = trans('Upload_error_messages');

@@ -379,7 +379,7 @@ class UploadHandler
 
         if ($is_img) {
             if (isset($this->options['config']['image_watermark']) && $this->options['config']['image_watermark']) {
-                require_once('include/php_image_magician.php');
+                require_once 'include/php_image_magician.php';
 
                 $magicianObj = new imageLib($targetFile);
                 $magicianObj->addWatermark($this->options['config']['image_watermark'], $this->options['config']['image_watermark_position'], $this->options['config']['image_watermark_padding']);
