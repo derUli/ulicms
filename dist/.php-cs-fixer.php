@@ -76,8 +76,6 @@ $tmpRules = [
     'no_blank_lines_after_phpdoc' => true,
     // There must be a comment when fall-through is intentional in a non-empty case body.
     'no_break_comment' => ['comment_text'=>'Intentionally fall through'],
-    // The closing `? >` tag MUST be omitted from files containing only PHP.
-    'no_closing_tag' => true,
     // There should not be any empty comments.
     'no_empty_comment' => true,
     // There should not be empty PHPDoc blocks.
@@ -278,6 +276,8 @@ $config
     'ternary_to_elvis_operator' => true,
     // Switch case must not be ended with `continue` but with `break`.
     'switch_continue_to_break' => true,
+    // The closing `? >` tag MUST be omitted from files containing only PHP.
+    'no_closing_tag' => true,
     ]);
 
 return $config->setFinder(
