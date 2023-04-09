@@ -55,8 +55,6 @@ $tmpRules = [
     'method_chaining_indentation' => true,
     // Forbid multi-line whitespace before the closing semicolon or move the semicolon to the new line for chained calls.
     'multiline_whitespace_before_semicolons' => true,
-    // Function defined by PHP should be called using the correct casing.
-    'native_function_casing' => true,
     // Add leading `\` before function invocation to speed up resolving.
     'native_function_invocation' => ['include'=>['@all','trans']],
     // Replace control structure alternative syntax to use braces.
@@ -277,6 +275,8 @@ $config
     'semicolon_after_instruction' => true,
     // Native type hints for functions should use the correct case.
     'native_function_type_declaration_casing' => true,
+    // Function defined by PHP should be called using the correct casing.
+    'native_function_casing' => true,
     ]);
 
 return $config->setFinder(
