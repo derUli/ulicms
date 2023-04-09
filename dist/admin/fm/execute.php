@@ -238,7 +238,7 @@ if (isset($_GET['action'])) {
                 if (@file_put_contents($path . $name, $content) === false) {
                     response(trans('File_Save_Error') . AddErrorLocation())->send();
                     exit;
-                }  
+                }
                     if (is_function_callable('chmod') !== false) {
                         chmod($path . $name, 0644);
                     }
@@ -487,7 +487,7 @@ if (isset($_GET['action'])) {
                 if (@file_put_contents($path, $content) === false) {
                     response(trans('File_Save_Error') . AddErrorLocation())->send();
                     exit;
-                }  
+                }
                     response(trans('File_Save_OK'))->send();
                     exit;
 

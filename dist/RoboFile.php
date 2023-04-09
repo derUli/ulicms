@@ -218,7 +218,7 @@ class RoboFile extends Tasks
             $this->writeln('Package ' . basename($file)
                     . ' successfully installed');
             return;
-        }  
+        }
             $this->writeln('Installation of package '
                     . basename($file) . ' failed.');
 

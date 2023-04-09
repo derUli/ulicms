@@ -47,7 +47,7 @@ class CustomFields
                 $sql = 'DELETE FROM {prefix}custom_fields '
                         . 'where id = ?';
                 return Database::pQuery($sql, $args, true);
-            }  
+            }
                 $args = [
                     $value,
                     $name,

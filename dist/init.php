@@ -226,7 +226,7 @@ if (isset($_SESSION['session_begin'])) {
         App\Utils\Session\sessionDestroy();
         send_header('Location: ./');
         exit();
-    }  
+    }
         $_SESSION['session_begin'] = time();
 
 }

@@ -117,10 +117,6 @@ $tmpRules = [
     'no_spaces_inside_parenthesis' => true,
     // Removes `@param`, `@return` and `@var` tags that don't provide any useful information.
     'no_superfluous_phpdoc_tags' => true,
-    // Remove trailing whitespace at the end of non-blank lines.
-    'no_trailing_whitespace' => true,
-    // There MUST be no trailing spaces inside comment or PHPDoc.
-    'no_trailing_whitespace_in_comment' => true,
     // Removes unneeded parentheses around control statements.
     'no_unneeded_control_parentheses' => true,
     // Removes unneeded curly braces that are superfluous and aren't part of a control structure's body.
@@ -279,6 +275,10 @@ $config
     'no_php4_constructor' => true,
     // Short cast `bool` using double exclamation mark should not be used.
     'no_short_bool_cast' => true,
+    // Remove trailing whitespace at the end of non-blank lines.
+    'no_trailing_whitespace' => true,
+    // There MUST be no trailing spaces inside comment or PHPDoc.
+    'no_trailing_whitespace_in_comment' => true,
     ]);
 
 return $config->setFinder(

@@ -548,10 +548,10 @@ class Database
                 return (int)$value;
             } elseif (is_bool($value)) {
                 return (int) $value;
-            }  
+            }
                 return mysqli_real_escape_string(self::$connection, $value);
 
-        }  
+        }
             if ($type === DB_TYPE_INT) {
                 return (int)$value;
             } elseif ($type === DB_TYPE_FLOAT) {
@@ -563,7 +563,7 @@ class Database
                 );
             } elseif ($type === DB_TYPE_BOOL) {
                 return (int)$value;
-            }  
+            }
                 return $value;
 
 

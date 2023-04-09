@@ -177,7 +177,7 @@ function getCurrentLanguage($current = false): string
 
     if (isset($_SESSION['language'])) {
         return basename($_SESSION['language']);
-    }  
+    }
         return basename(Settings::get('default_language'));
 
 }

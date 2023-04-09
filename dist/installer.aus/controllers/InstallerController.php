@@ -61,7 +61,7 @@ class InstallerController
     {
         if (isset($_SESSION['language']) && ! empty($_SESSION['language'])) {
             return basename($_SESSION['language']);
-        }  
+        }
             $_SESSION['language'] = 'en';
             return 'en';
 

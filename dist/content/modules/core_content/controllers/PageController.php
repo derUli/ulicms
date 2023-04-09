@@ -580,7 +580,7 @@ class PageController extends Controller
         if (Settings::get($settingsName)) {
             Settings::delete($settingsName);
             return false;
-        }  
+        }
             Settings::set($settingsName, '1');
             return true;
 
@@ -790,7 +790,7 @@ class PageController extends Controller
         if (Settings::get($settingsName)) {
             Settings::delete($settingsName);
             return false;
-        }  
+        }
             Settings::set($settingsName, '1');
             return true;
 

@@ -212,7 +212,7 @@ class imageLib
         if (! $this->testGDInstalled()) {
             if ($this->debug) {
                 throw new Exception('The GD Library is not installed.');
-            }  
+            }
                 throw new Exception();
 
         };
@@ -328,7 +328,7 @@ class imageLib
         if (! $this->image) {
             if ($this->debug) {
                 throw new Exception('file ' . $this->getFileName() . ' is missing or invalid');
-            }  
+            }
                 throw new Exception();
 
         };
@@ -398,7 +398,7 @@ class imageLib
         if (! $this->image) {
             if ($this->debug) {
                 throw new Exception('file ' . $this->getFileName() . ' is missing or invalid');
-            }  
+            }
                 throw new Exception();
 
         };
@@ -856,7 +856,7 @@ class imageLib
         if (is_array($option)) {
             if (fix_strtolower($option[0]) == 'crop' && count($option) == 2) {
                 return 'crop';
-            }  
+            }
                 throw new Exception('Crop resize option array is badly formatted.');
 
         } else {
@@ -1618,7 +1618,7 @@ class imageLib
         } else {
             if ($this->debug) {
                 throw new Exception('No caption box found.');
-            }  
+            }
                 return false;
 
         }
@@ -1707,21 +1707,21 @@ class imageLib
         if (! $this->testEXIFInstalled()) {
             if ($debug) {
                 throw new Exception('The EXIF Library is not installed.');
-            }  
+            }
                 return [];
 
         };
         if (! file_exists($this->fileName)) {
             if ($debug) {
                 throw new Exception('Image not found.');
-            }  
+            }
                 return [];
 
         };
         if ($this->fileExtension != '.jpg') {
             if ($debug) {
                 throw new Exception('Metadata not supported for this image type.');
-            }  
+            }
                 return [];
 
         };
@@ -2083,7 +2083,7 @@ class imageLib
                 chr($len >> 8) .
                 chr($len & 0xff) .
                 $val;
-        }  
+        }
             return chr(0x1c) . chr($rec) . chr($dat) .
                 chr(0x80) . chr(0x04) .
                 chr(($len >> 24) & 0xff) .
@@ -2163,7 +2163,7 @@ class imageLib
                 // *** If not, return false
                 if ($this->debug) {
                     throw new Exception('Font not found');
-                }  
+                }
                     return false;
 
             }
@@ -2418,7 +2418,7 @@ class imageLib
         if (! file_exists($file) && ! $this->checkStringStartsWith('http://', $file) && ! $this->checkStringStartsWith('https://', $file)) {
             if ($this->debug) {
                 throw new Exception('Image not found.');
-            }  
+            }
                 throw new Exception();
 
         };
@@ -2498,7 +2498,7 @@ class imageLib
         if (! is_resource($this->imageResized) && ! $this->imageResized instanceof \GdImage) {
             if ($this->debug) {
                 throw new Exception('saveImage: This is not a resource.');
-            }  
+            }
                 throw new Exception();
 
         }
@@ -2507,7 +2507,7 @@ class imageLib
         if (! is_writable($fileInfoArray['dirname'])) {
             if ($this->debug) {
                 throw new Exception('The path is not writable. Please check your permissions.');
-            }  
+            }
                 throw new Exception();
 
         }
@@ -2597,7 +2597,7 @@ class imageLib
         if (! is_resource($this->imageResized) && ! $this->imageResized instanceof \GdImage) {
             if ($this->debug) {
                 throw new Exception('saveImage: This is not a resource.');
-            }  
+            }
                 throw new Exception();
 
         }
@@ -2935,7 +2935,7 @@ class imageLib
 
         if (imagecolorexact($this->imageResized, $r, $g, $b) == -1) {
             return false;
-        }  
+        }
             return true;
 
     }
@@ -3006,7 +3006,7 @@ class imageLib
 
         if ($invert) {
             return $originalMax - (($value / 100) * $originalMax);
-        }  
+        }
             return ($value / 100) * $originalMax;
 
     }
@@ -3302,10 +3302,10 @@ class imageLib
 
             if (isset($psdReader->infoArray['error'])) {
                 return '';
-            }  
+            }
                 return $psdReader->getImage();
 
-        }  
+        }
             return false;
 
     }
