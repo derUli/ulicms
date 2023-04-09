@@ -71,8 +71,6 @@ $tmpRules = [
     
     // There must be a comment when fall-through is intentional in a non-empty case body.
     'no_break_comment' => ['comment_text'=>'Intentionally fall through'],
-    // Replace accidental usage of homoglyphs (non ascii characters) in names.
-    'no_homoglyph_names' => true,
     // Either language construct `print` or `echo` should be used.
     'no_mixed_echo_print' => true,
     // Operator `=>` should not be surrounded by multi-line whitespaces.
@@ -279,6 +277,8 @@ $config
      'no_leading_import_slash' => true,
      // The namespace declaration line shouldn't contain leading whitespace.
      'no_leading_namespace_whitespace' => true,
+     // Replace accidental usage of homoglyphs (non ascii characters) in names.
+    'no_homoglyph_names' => true,
     ]);
 
 return $config->setFinder(
