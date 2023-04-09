@@ -90,8 +90,7 @@ $tmpRules = [
     // All instances created with new keyword must be followed by braces.
     'new_with_braces' => true,
     // Master functions shall be used instead of aliases.
-    'no_alias_functions' => true,
-    // Master language constructs shall be used instead of aliases.
+
     'no_alias_language_construct_call' => true,
     // Replace control structure alternative syntax to use braces.
     'no_alternative_syntax' => true,
@@ -278,7 +277,9 @@ $config
     // Binary operators should be surrounded by space as configured.
     'binary_operator_spaces' => true,
     // Using `isset($var) &&` multiple times should be done in one call.
-    'combine_consecutive_issets' => true,
+    'combine_consecutive_issets' => true,    
+    // Master language constructs shall be used instead of aliases.
+    'no_alias_functions' => true,
     ]);
 
 return $config->setFinder(
