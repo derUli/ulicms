@@ -53,12 +53,12 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase
     public function testSpamWithBadwords()
     {
         $configuration = new SpamFilterConfiguration();
-        $configuration->setBadwords(array(
+        $configuration->setBadwords([
             "Shit",
             "Fuck",
             "Cock",
             "Viagra"
-        ));
+        ]);
 
         $comment = new Comment();
         $comment->setAuthorName("Motherfucker");
@@ -194,11 +194,11 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase
     {
         $configuration = new SpamFilterConfiguration();
 
-        $configuration->setBlockedCountries(array(
+        $configuration->setBlockedCountries([
             "vn",
             "cn",
             "ru"
-        ));
+        ]);
 
         $comment = new Comment();
         $comment->setAuthorName("Гомофобный русский диктатор Путин");

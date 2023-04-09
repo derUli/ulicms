@@ -21,13 +21,13 @@ if (!Settings::get("disable_ulicms_newsfeed")) {
     if ($xml && $rss->loadXML($xml)) {
         $feed = [];
         foreach ($rss->getElementsByTagName('item') as $node) {
-            $item = array(
+            $item = [
                 'title' => $node->getElementsByTagName('title')->item(0)->nodeValue,
                 'desc' => $node->getElementsByTagName('description')->item(0)->nodeValue,
                 'link' => $node->getElementsByTagName('link')->item(0)->nodeValue,
                 'date' => $node->getElementsByTagName('pubDate')->item(0)->nodeValue
-            );
-            array_push($feed, $item);
+            ];
+            $feed[] = $item;
         }
 
         $limit = 5;

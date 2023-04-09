@@ -10,10 +10,10 @@ class CoreSecurityController extends MainClass
     {
         $x_frame_options = settings::get("x_frame_options");
 
-        $allowedOptions = array(
+        $allowedOptions = [
             "DENY",
             "SAMEORIGIN"
-        );
+        ];
         if ($x_frame_options && in_array(
             $x_frame_options,
             $allowedOptions

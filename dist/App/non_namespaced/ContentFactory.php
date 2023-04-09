@@ -119,9 +119,9 @@ class ContentFactory
 
         $sql = "SELECT id, type FROM {prefix}content ";
 
-        $args = array(
+        $args = [
             $parent_id !== null ? (int) $parent_id : null
-        );
+        ];
 
         $sql .= $parent_id !== null ? "where `parent_id` = ?" :
                 "where `parent_id` IS ?";
@@ -234,7 +234,7 @@ class ContentFactory
             $sql .= " offset " . $offset;
         }
 
-        $result = Database::query($sql) or die(Database::error());
+        $result = Database::query($sql) || die(Database::error());
 
         while ($row = Database::fetchObject($result)) {
             $datasets[] = self::getContentObjectByID($row);

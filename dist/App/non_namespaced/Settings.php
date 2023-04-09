@@ -266,9 +266,9 @@ class Settings
             return self::$adapter;
         }
 
-        $cacheConfig = array(
+        $cacheConfig = [
             "defaultTtl" => ONE_DAY_IN_SECONDS
-        );
+        ];
 
         // Use a Memstatic adapter, because persistent caching would worse
         // performance instead of improving it

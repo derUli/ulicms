@@ -7,9 +7,9 @@ class PagePermissionsTest extends \PHPUnit\Framework\TestCase
     protected function tearDown(): void
     {
         $sql = "delete from `{prefix}content` where slug = ?";
-        $args = array(
+        $args = [
             "page_permission_test"
-        );
+        ];
         Database::pQuery($sql, $args, true);
     }
 
@@ -24,11 +24,11 @@ class PagePermissionsTest extends \PHPUnit\Framework\TestCase
 
     public function testPagePermissionsConstructorWithArguments()
     {
-        $permissions = new PagePermissions(array(
+        $permissions = new PagePermissions([
             "group" => true,
             "others" => false,
             "owner" => true
-        ));
+        ]);
         $this->assertFalse($permissions->getEditRestriction("admins"));
         $this->assertTrue($permissions->getEditRestriction("group"));
         $this->assertTrue($permissions->getEditRestriction("owner"));
@@ -47,11 +47,11 @@ class PagePermissionsTest extends \PHPUnit\Framework\TestCase
 
     public function testPagePermissionsgetAll()
     {
-        $permissions = new PagePermissions(array(
+        $permissions = new PagePermissions([
             "group" => true,
             "others" => false,
             "owner" => true
-        ));
+        ]);
         $all = $permissions->getAll();
         $this->assertEquals(4, count($all));
         $this->assertTrue($all["group"]);

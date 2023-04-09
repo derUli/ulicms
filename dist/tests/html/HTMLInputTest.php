@@ -7,30 +7,30 @@ class HTMLInputTest extends \PHPUnit\Framework\TestCase
 {
     public function testTextBox()
     {
-        $this->assertEquals('<input type="text" name="my_field" value="Hello World" required="required">', Input::textBox("my_field", "Hello World", "text", array(
+        $this->assertEquals('<input type="text" name="my_field" value="Hello World" required="required">', Input::textBox("my_field", "Hello World", "text", [
                     "required" => "required"
-        )));
+        ]));
     }
 
     public function testTextArea()
     {
-        $this->assertEquals('<textarea name="my_field" rows="25" cols="80" required="required">&lt;h2&gt;Hello World!&lt;/h2&gt;</textarea>', Input::textArea("my_field", "<h2>Hello World!</h2>", 25, 80, array(
+        $this->assertEquals('<textarea name="my_field" rows="25" cols="80" required="required">&lt;h2&gt;Hello World!&lt;/h2&gt;</textarea>', Input::textArea("my_field", "<h2>Hello World!</h2>", 25, 80, [
                     "required" => "required"
-        )));
+        ]));
     }
 
     public function testPassword()
     {
-        $this->assertEquals('<input type="password" name="my_field" value="Hello World" required="required">', Input::password("my_field", "Hello World", array(
+        $this->assertEquals('<input type="password" name="my_field" value="Hello World" required="required">', Input::password("my_field", "Hello World", [
                     "required" => "required"
-        )));
+        ]));
     }
 
     public function testHidden()
     {
-        $this->assertEquals('<input type="hidden" name="my_field" value="Hello World" required="required">', Input::hidden("my_field", "Hello World", array(
+        $this->assertEquals('<input type="hidden" name="my_field" value="Hello World" required="required">', Input::hidden("my_field", "Hello World", [
                     "required" => "required"
-        )));
+        ]));
     }
 
     public function testCheckbox()
@@ -47,11 +47,11 @@ class HTMLInputTest extends \PHPUnit\Framework\TestCase
 
     public function testSingleSelect()
     {
-        $options = array(
+        $options = [
             new ListItem("windows", "Windows"),
             new ListItem("linux", "Linux"),
             new ListItem("mac", "macOS")
-        );
+        ];
         $this->assertEquals(
             '<select name="operating_system" size="1" class="my-class" id="operating_system"><option value="windows">Windows</option><option value="linux">Linux</option><option value="mac">macOS</option></select>',
             Input::singleSelect(
@@ -68,31 +68,31 @@ class HTMLInputTest extends \PHPUnit\Framework\TestCase
 
     public function testSingleSelectWithSelectedItem()
     {
-        $options = array(
+        $options = [
             new ListItem("windows", "Windows"),
             new ListItem("linux", "Linux"),
             new ListItem("mac", "macOS")
-        );
+        ];
         $this->assertEquals('<select name="operating_system" size="5" id="operating_system"><option value="windows">Windows</option><option value="linux" selected>Linux</option><option value="mac">macOS</option></select>', Input::singleSelect("operating_system", "linux", $options, 5));
     }
 
     public function testMultiSelect()
     {
-        $options = array(
+        $options = [
             new ListItem("windows", "Windows"),
             new ListItem("linux", "Linux"),
             new ListItem("mac", "macOS")
-        );
+        ];
         $this->assertEquals('<select name="operating_system" size="5" multiple><option value="windows">Windows</option><option value="linux">Linux</option><option value="mac">macOS</option></select>', Input::multiSelect("operating_system", null, $options));
     }
 
     public function testMultiSelectWithSelected()
     {
-        $options = array(
+        $options = [
             new ListItem("windows", "Windows"),
             new ListItem("linux", "Linux"),
             new ListItem("mac", "macOS")
-        );
+        ];
         $this->assertEquals(
             '<select name="operating_system" size="4" class="foo" multiple><option value="windows" selected>Windows</option><option value="linux">Linux</option><option value="mac" selected>macOS</option></select>',
             Input::multiSelect(
@@ -137,10 +137,10 @@ class HTMLInputTest extends \PHPUnit\Framework\TestCase
 
     public function testFileWithAcceptAsArray()
     {
-        $this->assertEquals('<input type="file" name="my_file" value="" accept="image/jpeg, image/png">', Input::file("my_file", false, array(
+        $this->assertEquals('<input type="file" name="my_file" value="" accept="image/jpeg, image/png">', Input::file("my_file", false, [
                     "image/jpeg",
                     "image/png"
-        )));
+        ]));
     }
 
     public function testFileWithAcceptAsString()

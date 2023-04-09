@@ -35,10 +35,10 @@ class Link extends Page
         }
         parent::update();
         $sql = "update {prefix}content set link_url = ? where id = ?";
-        $args = array(
+        $args = [
             $this->link_url,
             $this->id
-        );
+        ];
 
         $result = Database::pQuery($sql, $args, true);
         return $result;

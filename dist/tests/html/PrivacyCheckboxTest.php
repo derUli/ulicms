@@ -38,10 +38,10 @@ class PrivacyCheckboxTest extends \PHPUnit\Framework\TestCase
 
     public function testIsEnabled()
     {
-        $languages = array(
+        $languages = [
             'de',
             'en'
-        );
+        ];
         foreach ($languages as $language) {
             Settings::set("privacy_policy_checkbox_enable_{$language}", 1);
             $checkbox = new PrivacyCheckbox($language);
@@ -53,14 +53,14 @@ class PrivacyCheckboxTest extends \PHPUnit\Framework\TestCase
 
     public function testRender()
     {
-        $values = array(
+        $values = [
             'de' => '<div class="checkbox"><label>[checkbox] Lorem Ipsum</label></div>',
             'en' => '<div class="checkbox"><label>[checkbox] Sit dor amet</label></div>'
-        );
-        $expectedResults = array(
+        ];
+        $expectedResults = [
             'de' => '<div class="checkbox"><label><input type="checkbox" name="accept_privacy_policy" value="✔" required="required" id="accept_privacy_policy"> Lorem Ipsum</label></div>',
             'en' => '<div class="checkbox"><label><input type="checkbox" name="accept_privacy_policy" value="✔" required="required" id="accept_privacy_policy"> Sit dor amet</label></div>'
-        );
+        ];
         foreach ($values as $language => $html) {
             Settings::delete("privacy_policy_checkbox_text_{$language}");
             $checkbox = new PrivacyCheckbox($language);

@@ -16,10 +16,10 @@ class BannerTest extends \PHPUnit\Framework\TestCase
 
     protected function tearDown(): void
     {
-        Database::pQuery("DELETE FROM `{prefix}banner` where html in (? , ?)", array(
+        Database::pQuery("DELETE FROM `{prefix}banner` where html in (? , ?)", [
             self::HTML_TEXT1,
             self::HTML_TEXT2
-                ), true);
+                ], true);
     }
 
     public function testHTMLBannerWithoutLanguage()

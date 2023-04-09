@@ -34,9 +34,9 @@ class PermissionCheckerTest extends \PHPUnit\Framework\TestCase
         $lang = new Language();
         $lang->loadByLanguageCode('en');
 
-        $group3->setLanguages(array(
+        $group3->setLanguages([
             $lang
-        ));
+        ]);
 
         $group3->save();
         $this->testGroup3 = $group3;

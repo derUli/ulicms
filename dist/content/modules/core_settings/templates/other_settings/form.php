@@ -43,24 +43,24 @@ if (!$permissionChecker->hasPermission("other")) {
     $twofactor_authentication = Settings::get("twofactor_authentication");
 
     $x_frame_options = Settings::get("x_frame_options");
-    $xFrameOptionsItems = array(
+    $xFrameOptionsItems = [
         new App\HTML\ListItem('', get_translation("allow")),
         new App\HTML\ListItem("SAMEORIGIN", get_translation("sameorigin")),
         new App\HTML\ListItem("DENY", get_translation("deny"))
-    );
+    ];
 
     $x_xss_protection = Settings::get("x_xss_protection");
-    $xXssProtectionOptions = array(
+    $xXssProtectionOptions = [
         new App\HTML\ListItem('', get_translation("off")),
         new App\HTML\ListItem("sanitize", get_translation("on")),
         new App\HTML\ListItem("block", get_translation("on_block"))
-    );
+    ];
     ?>
     <?php
-    echo ModuleHelper::buildMethodCallForm("OtherSettingsController", "save", [], "post", array(
+    echo ModuleHelper::buildMethodCallForm("OtherSettingsController", "save", [], "post", [
         "id" => "other_settings",
         "autocomplete" => "off"
-    ));
+    ]);
     ?>
     <a
         href="<?php echo ModuleHelper::buildActionURL("settings_categories"); ?>"

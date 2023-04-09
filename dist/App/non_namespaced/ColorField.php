@@ -6,9 +6,9 @@ defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 class ColorField extends CustomField
 {
-    public $htmlAttributes = array(
+    public $htmlAttributes = [
         "class" => "jscolor {hash:true,caps:true}"
-    );
+    ];
 
     public function render($value = null): string
     {

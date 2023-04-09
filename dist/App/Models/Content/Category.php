@@ -25,9 +25,9 @@ class Category
     public function loadByID(int $id): void
     {
         $sql = "select * from {prefix}categories where id = ?";
-        $args = array(
+        $args = [
             (int)$id
-        );
+        ];
         $result = Database::pQuery($sql, $args, true);
         $this->fillVars($result);
     }
@@ -59,10 +59,10 @@ class Category
     {
         $sql = "INSERT INTO `{prefix}categories` (name, description) "
                 . "values (?, ?)";
-        $args = array(
+        $args = [
             $this->getName(),
             $this->getDescription()
-        );
+        ];
         Database::pQuery($sql, $args, true);
         $this->id = Database::getLastInsertID();
     }
@@ -71,11 +71,11 @@ class Category
     {
         $sql = "update `{prefix}categories` set name = ?, "
                 . "description = ? where id = ?";
-        $args = array(
+        $args = [
             $this->getName(),
             $this->getDescription(),
             $this->id
-        );
+        ];
         Database::pQuery($sql, $args, true);
     }
 

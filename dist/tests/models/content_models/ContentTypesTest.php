@@ -26,9 +26,9 @@ class ContentTypesTest extends \PHPUnit\Framework\TestCase
 
     public function testIsRegularReturnsTrue()
     {
-        $types = array("Page", "Article", "Image_Page",
+        $types = ["Page", "Article", "Image_Page",
             "Video_Page", "Audio_Page", "Snippet",
-            "Module_Page", "Content_List");
+            "Module_Page", "Content_List"];
         foreach ($types as $type) {
             $model = new $type();
             $this->assertTrue($model->isRegular());
@@ -37,7 +37,7 @@ class ContentTypesTest extends \PHPUnit\Framework\TestCase
 
     public function testIsRegularReturnsFalse()
     {
-        $types = array("Link", "Node", "Language_Link");
+        $types = ["Link", "Node", "Language_Link"];
         foreach ($types as $type) {
             $model = new $type();
             $this->assertFalse($model->isRegular());
@@ -46,7 +46,7 @@ class ContentTypesTest extends \PHPUnit\Framework\TestCase
 
        private function getBaseTypes()
        {
-           $baseTypes = array(
+           $baseTypes = [
                "page",
                "article",
                "snippet",
@@ -58,7 +58,7 @@ class ContentTypesTest extends \PHPUnit\Framework\TestCase
                "module",
                "video",
                "audio"
-           );
+           ];
            return $baseTypes;
        }
 }

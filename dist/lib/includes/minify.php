@@ -30,9 +30,9 @@ function optimizeHtml(
     int $level = HTMLMinify::OPTIMIZATION_SIMPLE
 ): string {
     if (Database::isConnected() &&  Settings::get('minify_html')) {
-        $options = array(
+        $options = [
             'optimizationLevel' => $level
-        );
+        ];
         $minifier = new HTMLMinify($html, $options);
         $html = $minifier->process();
     }
@@ -55,9 +55,9 @@ function enqueueScriptFile($path): void
 function setSCSSImportPaths(?array $importPaths = null): void
 {
     if ($importPaths == null) {
-        $importPaths = array(
+        $importPaths = [
             Path::resolve("ULICMS_ROOT")
-        );
+        ];
     }
     Vars::set("css_include_paths", $importPaths);
 }

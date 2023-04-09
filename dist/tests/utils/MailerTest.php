@@ -65,11 +65,11 @@ class MailerTest extends \PHPUnit\Framework\TestCase
     {
         $mailer = Mailer::getPHPMailer();
         $this->assertInstanceOf(PHPMailer::class, $mailer);
-        $this->assertTrue(in_array($mailer->SMTPSecure, array(
+        $this->assertTrue(in_array($mailer->SMTPSecure, [
             "",
             "tls",
             "ssl"
-        )));
+        ]));
         $this->assertEquals(Settings::get("show_meta_generator") ? "UliCMS" : "", $mailer->XMailer);
 
         $this->assertFalse($mailer->SMTPAuth);
@@ -112,11 +112,11 @@ class MailerTest extends \PHPUnit\Framework\TestCase
 
         $mailer = Mailer::getPHPMailer(EmailModes::PHPMAILER);
         $this->assertInstanceOf(PHPMailer::class, $mailer);
-        $this->assertTrue(in_array($mailer->SMTPSecure, array(
+        $this->assertTrue(in_array($mailer->SMTPSecure, [
             "",
             "tls",
             "ssl"
-        )));
+        ]));
 
         $mailer->SMTPDebug = SMTP::DEBUG_LOWLEVEL;
         return $mailer;

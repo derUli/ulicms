@@ -41,11 +41,11 @@ class Audio_Page extends Page
         parent::update();
         $sql = "update {prefix}content set audio = ?, "
                 . "text_position = ? where id = ?";
-        $args = array(
+        $args = [
             $this->audio,
             $this->text_position,
             $this->id
-        );
+        ];
 
         $result = Database::pQuery($sql, $args, true);
         return $result;

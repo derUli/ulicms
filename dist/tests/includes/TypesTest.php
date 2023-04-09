@@ -20,7 +20,7 @@ class TypesTest extends \PHPUnit\Framework\TestCase
 
     private function getBaseTypes()
     {
-        $baseTypes = array(
+        $baseTypes = [
             "page",
             "article",
             "snippet",
@@ -32,7 +32,7 @@ class TypesTest extends \PHPUnit\Framework\TestCase
             "module",
             "video",
             "audio"
-        );
+        ];
         return $baseTypes;
     }
 }

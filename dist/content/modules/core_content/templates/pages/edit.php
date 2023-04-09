@@ -90,25 +90,25 @@ if ($permissionChecker->hasPermission('pages')) {
                     <a href="<?php echo ModuleHelper::buildActionURL('pages'); ?>"
                        class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
                        <?php
-                       echo ModuleHelper::buildMethodCallButton("PageController", "delete", '<i class="fas fa-trash"></i> ' . get_translation("delete"), array(
+                       echo ModuleHelper::buildMethodCallButton("PageController", "delete", '<i class="fas fa-trash"></i> ' . get_translation("delete"), [
                            "class" => "btn btn-danger",
                            "type" => "submit"
-                               ), array(
+                               ], [
                            "page" => $row->id
-                               ), array(
+                               ], [
                            "class" => "pull-right delete-form page-delete-form"
-                       ));
+                       ]);
             ?>
                        <?php echo ModuleHelper::endForm(); ?>
                 </div>
                 <?php
-                echo ModuleHelper::buildMethodCallForm("PageController", "edit", [], "post", array(
+                echo ModuleHelper::buildMethodCallForm("PageController", "edit", [], "post", [
                     "id" => "pageform-edit",
                     "class" => "pageform main-form edit-page-form",
                     "data-get-content-types-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "getContentTypes"),
                     "data-slug-free-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "nextFreeSlug"),
                     "data-parent-pages-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "filterParentPages")
-                ));
+                ]);
             ?>
                 <input type="hidden" name="edit_page" value="edit_page"> <input
                     type="hidden" name="page_id" id="page_id"

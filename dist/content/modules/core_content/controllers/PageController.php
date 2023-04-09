@@ -264,7 +264,7 @@ class PageController extends Controller
         }
 
 
-        $permissionObjects = array("admins", "group", "owner", "others");
+        $permissionObjects = ["admins", "group", "owner", "others"];
         foreach ($permissionObjects as $object) {
             $permission = Request::getVar(
                 "only_{$object}_can_edit",

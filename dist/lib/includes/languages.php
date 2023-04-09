@@ -206,7 +206,7 @@ function getAllLanguages($filtered = false): array
             "` ORDER BY language_code");
 
     while ($row = db_fetch_object($result)) {
-        array_push($languageCodes, $row->language_code);
+        $languageCodes[] = $row->language_code;
     }
     Vars::set("all_languages", $languageCodes);
     return $languageCodes;

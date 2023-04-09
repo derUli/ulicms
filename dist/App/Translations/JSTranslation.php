@@ -68,9 +68,9 @@ class JSTranslation
 
     public function getJS(string $wrap = "<script>{code}</script>"): string
     {
-        $js = array(
+        $js = [
             "{$this->varName}={};"
-        );
+        ];
         foreach ($this->keys as $key) {
             if (str_starts_with($key, "TRANSLATION_")) {
                 $key = substr($key, 12);

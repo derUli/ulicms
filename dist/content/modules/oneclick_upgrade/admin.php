@@ -12,10 +12,10 @@ function oneclick_upgrade_admin()
         Settings::set("oneclick_upgrade_channel", $_POST["oneclick_upgrade_channel"]);
     }
     $oneclick_upgrade_channel = Settings::get("oneclick_upgrade_channel");
-    $channels = array(
+    $channels = [
         "fast",
         "slow",
-    );
+    ];
 
     $channelCount = count($channels);
     ?>

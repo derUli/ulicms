@@ -15,9 +15,9 @@ abstract class Controller
      * List of not callable public methods
      * @var type
      */
-    protected $blacklist = array(
+    protected $blacklist = [
         "runCommand"
-    );
+    ];
 
     /**
      * Constructor

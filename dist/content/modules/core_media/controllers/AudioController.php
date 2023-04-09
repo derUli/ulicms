@@ -12,14 +12,14 @@ class AudioController extends Controller
         if (!empty($_FILES ['mp3_file'] ['name'])) {
             $mp3_file = time() . "-" . basename($_FILES ['mp3_file'] ['name']);
             $mp3_type = $_FILES ['mp3_file'] ["type"];
-            $mp3_allowed_mime_type = array(
+            $mp3_allowed_mime_type = [
                 "audio/mp3",
                 "audio/mpeg3",
                 "audio/x-mpeg-3",
                 "video/mpeg",
                 "video/x-mpeg",
                 "audio/mpeg"
-            );
+            ];
             if (in_array($mp3_type, $mp3_allowed_mime_type)) {
                 $target = $audio_folder . '/' . $mp3_file;
                 if (move_uploaded_file(
@@ -36,11 +36,11 @@ class AudioController extends Controller
         if (!empty($_FILES ['ogg_file'] ['name'])) {
             $ogg_file = time() . "-" . $_FILES ['ogg_file'] ['name'];
             $ogg_type = $_FILES ['ogg_file'] ["type"];
-            $ogg_allowed_mime_type = array(
+            $ogg_allowed_mime_type = [
                 "audio/ogg",
                 "application/ogg",
                 "video/ogg"
-            );
+            ];
             if (in_array($ogg_type, $ogg_allowed_mime_type)) {
                 $target = $audio_folder . '/' . $ogg_file;
                 if (move_uploaded_file(

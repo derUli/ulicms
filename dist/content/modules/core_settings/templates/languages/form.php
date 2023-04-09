@@ -71,16 +71,16 @@ if ($permissionChecker->hasPermission("languages")) {
                                            "LanguageController",
                                            "setDefaultLanguage",
                                            ModuleHelper::buildQueryString(
-                                               array("default" => $language->getLanguageCode()
-                                                  )
+                                               ["default" => $language->getLanguageCode()
+                                                  ]
                                            )
                                        );
                                     ?>"
                                        data-message="<?php
                                     translate(
                                         "REALLY_MAKE_DEFAULT_LANGUAGE",
-                                        array(
-                                            "%name%" => $language->getName())
+                                        [
+                                            "%name%" => $language->getName()]
                                     );
                                     ?>">
                                         <i class="fas fa-language"></i>

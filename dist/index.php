@@ -221,12 +221,12 @@ if ($cacheAdapter && $cacheAdapter->get($uid)) {
 if ($cacheAdapter || Settings::get('minify_html')) {
     ob_start();
 }
-$top_files = array(
+$top_files = [
     "type/" . get_type() . "/oben.php",
     "type/" . get_type() . "/top.php",
     "oben.php",
     "top.php"
-);
+];
 
 foreach ($top_files as $file) {
     $file = getTemplateDirPath($theme, true) . $file;
@@ -262,12 +262,12 @@ if (!(is_array($disable_functions) && in_array("edit_button", $disable_functions
 
 do_event("after_edit_button");
 
-$bottom_files = array(
+$bottom_files = [
     "type/" . get_type() . "/unten.php",
     "type/" . get_type() . "/bottom.php",
     "unten.php",
     "bottom.php"
-);
+];
 foreach ($bottom_files as $file) {
     $file = getTemplateDirPath($theme, true) . $file;
     if (is_file($file)) {

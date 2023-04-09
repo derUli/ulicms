@@ -40,11 +40,11 @@ class Image_Page extends Page
         parent::update();
         $sql = "update {prefix}content set image_url = ?, text_position = ? "
                 . "where id = ?";
-        $args = array(
+        $args = [
             $this->image_url,
             $this->text_position,
             $this->id
-        );
+        ];
 
         $result = Database::pQuery($sql, $args, true);
         return $result;

@@ -56,9 +56,9 @@ class Video extends Model
     public function loadById($id): void
     {
         $result = Database::pQuery("select * from `{prefix}videos` "
-                        . "where id = ?", array(
+                        . "where id = ?", [
                     (int) $id
-                        ), true);
+                        ], true);
         if (!Database::any($result)) {
             $result = null;
         }
@@ -98,7 +98,7 @@ class Video extends Model
     {
         $this->created = time();
         $this->updated = $this->created;
-        $args = array(
+        $args = [
             $this->name,
             $this->mp4_file,
             $this->ogg_file,
@@ -108,7 +108,7 @@ class Video extends Model
             $this->updated,
             $this->width,
             $this->height
-        );
+        ];
         $sql = "insert into `{prefix}videos`
 				(name, mp4_file, ogg_file, webm_file,
                                 category_id, created, updated, width, height)
@@ -120,7 +120,7 @@ class Video extends Model
     protected function update(): void
     {
         $this->updated = time();
-        $args = array(
+        $args = [
             $this->name,
             $this->mp4_file,
             $this->ogg_file,
@@ -130,7 +130,7 @@ class Video extends Model
             $this->width,
             $this->height,
             $this->getID()
-        );
+        ];
         $sql = "update `{prefix}videos` set
 				name = ?, mp4_file = ?, ogg_file = ?,
                                 webm_file = ?, category_id = ?, updated = ?,

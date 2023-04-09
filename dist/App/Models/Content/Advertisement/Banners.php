@@ -97,7 +97,7 @@ class Banners
         or
         (date_from is null and date_to is null)
         )
-        ORDER BY RAND() LIMIT 1", array(getCurrentLanguage()), true);
+        ORDER BY RAND() LIMIT 1", [getCurrentLanguage()], true);
 
         if (Database::getNumRows($result)) {
             $data = Database::fetchObject($result);

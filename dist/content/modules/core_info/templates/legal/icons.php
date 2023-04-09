@@ -1,9 +1,9 @@
 <?php
 $currentAction = BackendHelper::getAction();
-$icons = array(
+$icons = [
     "legal_composer" => "fas fa-file-contract",
     "legal_npm" => "fas fa-file-contract",
-);
+];
 
 $selectedButton = "btn btn-primary";
 $notSelectedButton = "btn btn-default"

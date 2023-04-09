@@ -6,10 +6,10 @@ use App\Constants\RequestMethod;
 use App\Translations\JSTranslation;
 
 $languages = getAllLanguages();
-$errorCodes = array(
+$errorCodes = [
     403 => get_translation("forbidden"),
     404 => get_translation("not_found")
-);
+];
 ?>
 <p>
     <a
@@ -47,7 +47,7 @@ echo ModuleHelper::buildMethodCallForm(
             <?php
             foreach (getAllLanguages() as $language) {
                 $pages = getAllPages($language, "title", true);
-                $items = array(new ListItem("-1", "[" . get_translation("standard") . "]"));
+                $items = [new ListItem("-1", "[" . get_translation("standard") . "]")];
                 foreach ($pages as $page) {
                     $items[] = new ListItem(
                         $page['id'],

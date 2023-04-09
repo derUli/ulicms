@@ -25,9 +25,9 @@ if ($permissionChecker->hasPermission("settings_simple")) {
         <?php translate("site_slogan"); ?>
     </h1>
     <?php
-    echo ModuleHelper::buildMethodCallForm("SiteSloganController", "save", [], "post", array(
+    echo ModuleHelper::buildMethodCallForm("SiteSloganController", "save", [], "post", [
         "id" => "site_slogan_settings"
-    ));
+    ]);
     ?>
     <table>
         <tr>

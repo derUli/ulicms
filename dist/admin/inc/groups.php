@@ -89,7 +89,7 @@ if (!$permissionChecker->hasPermission("groups")) {
     if ($created) {
         ?>
         <div class="alert alert-success">
-            <?php translate("group_x_created", array("%name%" => $name)); ?>
+            <?php translate("group_x_created", ["%name%" => $name]); ?>
         </div>
         <?php
     }

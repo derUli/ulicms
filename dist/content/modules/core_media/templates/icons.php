@@ -3,11 +3,11 @@
 use App\Security\PermissionChecker;
 
 $currentAction = BackendHelper::getAction();
-$icons = array(
+$icons = [
     "files" => "fa fa-file",
     "videos" => "fa fa-file-video",
     "audio" => "fa fa-file-audio"
-);
+];
 $icons = array_filter($icons, function ($cssClass, $action) {
     $permissionChecker = new PermissionChecker(get_user_id());
     return $permissionChecker->hasPermission($action);

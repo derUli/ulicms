@@ -6,9 +6,9 @@ class GroupTest extends \PHPUnit\Framework\TestCase
 
     protected function setUp(): void
     {
-        $settings = array(
+        $settings = [
             'default_acl_group'
-        );
+        ];
         foreach ($settings as $setting) {
             $this->savedSettings[$setting] = Settings::get($setting);
         }

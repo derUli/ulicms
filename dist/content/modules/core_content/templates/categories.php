@@ -9,13 +9,13 @@ $permissionChecker = new ACL();
 if (!$permissionChecker->hasPermission("categories")) {
     noPerms();
 } else {
-    if (isset($_GET["order"]) && in_array($_GET["order"], array(
+    if (isset($_GET["order"]) && in_array($_GET["order"], [
                 "id",
                 "name",
                 "description",
                 "created",
                 "updated"
-            ))) {
+            ])) {
         $order = db_escape($_GET["order"]);
     } else {
         $order = 'id';

@@ -6,11 +6,11 @@ class CustomFieldsTest extends \PHPUnit\Framework\TestCase
     {
         $id = $this->getFirstPage()->id;
         $type = $this->getFirstPage()->type;
-        Database::pQuery("delete from {prefix}custom_fields where name in (?, ?) and content_id = ?", array(
+        Database::pQuery("delete from {prefix}custom_fields where name in (?, ?) and content_id = ?", [
             "{$type}_foo",
             "{$type}_hello",
             (int)$id
-                ), true);
+                ], true);
 
         Vars::delete("id");
 

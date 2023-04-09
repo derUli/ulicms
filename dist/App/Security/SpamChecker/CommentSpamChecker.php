@@ -50,12 +50,12 @@ class CommentSpamChecker implements ISpamChecker
         $badwords = $this->spamFilterConfiguration->getBadwords();
 
         // The fields to check for spam
-        $fields = array(
+        $fields = [
             "author_name" => $this->comment->getAuthorName(),
             "author_url" => $this->comment->getAuthorUrl(),
             "author_email" => $this->comment->getAuthorEmail(),
             "comment_text" => $this->comment->getText()
-        );
+        ];
 
         // check if Antispam Honeypot is not empty
         if (!empty(Request::getVar("my_homepage_url"))) {
@@ -94,9 +94,9 @@ class CommentSpamChecker implements ISpamChecker
             if (AntiSpamHelper::checkForBot($useragent)) {
                 $this->errors[] = new SpamDetectionResult(
                     get_translation("useragent"),
-                    get_translation("bots_are_not_allowed", array(
+                    get_translation("bots_are_not_allowed", [
                             "%useragent%" => $useragent
-                        ))
+                        ])
                 );
             }
         }

@@ -133,9 +133,9 @@ class Model
         $where = ''
     ): array {
         $datasets = [];
-        $result = Database::selectAll($tableName, array(
+        $result = Database::selectAll($tableName, [
                     "id"
-                        ), $where, [], true, $orderBy);
+                        ], $where, [], true, $orderBy);
         while ($row = Database::fetchObject($result)) {
             $datasets[] = new $modelClass($row->id);
         }

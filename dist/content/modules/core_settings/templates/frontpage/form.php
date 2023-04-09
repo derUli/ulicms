@@ -24,9 +24,9 @@ if ($permissionChecker->hasPermission("settings_simple")) {
         <?php translate("frontpage"); ?>
     </h1>
     <?php
-    echo ModuleHelper::buildMethodCallForm("FrontPageSettingsController", "save", [], "post", array(
+    echo ModuleHelper::buildMethodCallForm("FrontPageSettingsController", "save", [], "post", [
         "id" => "frontpage_settings"
-    ));
+    ]);
     ?>
     <table>
         <tr>

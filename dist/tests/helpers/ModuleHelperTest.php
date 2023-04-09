@@ -137,28 +137,28 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase
 
     public function testBuildHTMLAttributesFromArray()
     {
-        $this->assertEquals('class="myclass" id="myid" style="border:0"', ModuleHelper::buildHTMLAttributesFromArray(array(
+        $this->assertEquals('class="myclass" id="myid" style="border:0"', ModuleHelper::buildHTMLAttributesFromArray([
                     "class" => "myclass",
                     "id" => "myid",
                     "style" => "border:0"
-        )));
+        ]));
     }
 
     public function testBuildMethodCallFormWithHtmlAttributes()
     {
-        $html = ModuleHelper::buildMethodCallForm("MyClass", "MyMethod", [], "post", array(
+        $html = ModuleHelper::buildMethodCallForm("MyClass", "MyMethod", [], "post", [
                     "class" => "myclass",
                     "onsubmit" => "return confirm('Do you really want to do that')"
-        ));
+        ]);
         $this->assertEquals('<form action="index.php" method="post" class="myclass" onsubmit="return confirm(&#039;Do you really want to do that&#039;)">' . get_csrf_token_html() . '<input type="hidden" name="sClass" value="MyClass">' . '<input type="hidden" name="sMethod" value="MyMethod">', $html);
     }
 
     public function testBuildMethodCallUploadFormWithHtmlAttributes()
     {
-        $html = ModuleHelper::buildMethodCallUploadForm("MyClass", "MyMethod", [], "post", array(
+        $html = ModuleHelper::buildMethodCallUploadForm("MyClass", "MyMethod", [], "post", [
                     "class" => "myclass",
                     "onsubmit" => "return confirm('Do you really want to do that')"
-        ));
+        ]);
         $this->assertEquals('<form action="index.php" method="post" class="myclass" onsubmit="return confirm(&#039;Do you really want to do that&#039;)" enctype="multipart/form-data">' . get_csrf_token_html() . '<input type="hidden" name="sClass" value="MyClass">' . '<input type="hidden" name="sMethod" value="MyMethod">', $html);
     }
 
@@ -167,19 +167,19 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase
         $expected = optimizeHtml(
             '<form action="index.php?action=contacts" method="post" class="delete-form"><input type="hidden" name="csrf_token" value="' . get_csrf_token() . '"><input type="hidden" name="delete" value="123"><input type="image" src="admin/gfx/delete.png" alt="Delete" title="Delete"></form>'
         );
-        $this->assertEquals($expected, ModuleHelper::deleteButton("index.php?action=contacts", array(
+        $this->assertEquals($expected, ModuleHelper::deleteButton("index.php?action=contacts", [
                     "delete" => "123"
-        )));
+        ]));
     }
 
     public function testBuildQueryString()
     {
-        $data = array(
+        $data = [
             'foo' => 'bar',
             'baz' => 'boom',
             'kuh' => 'milch',
             'php' => 'hypertext processor'
-        );
+        ];
         $this->assertEquals("foo=bar&baz=boom&kuh=milch&php=hypertext+processor", ModuleHelper::buildQueryString($data, false));
         $this->assertEquals("foo=bar&amp;baz=boom&amp;kuh=milch&amp;php=hypertext+processor", ModuleHelper::buildQueryString($data, true));
     }

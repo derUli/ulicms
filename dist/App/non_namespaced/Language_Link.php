@@ -36,10 +36,10 @@ class Language_Link extends Page
         }
         parent::update();
         $sql = "update {prefix}content set link_to_language = ? where id = ?";
-        $args = array(
+        $args = [
             $this->link_to_language,
             $this->id
-        );
+        ];
 
         $result = Database::pQuery($sql, $args, true);
         return $result;

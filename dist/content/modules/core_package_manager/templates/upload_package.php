@@ -27,13 +27,13 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                     $pkg = new PackageManager();
                     if ($pkg->installPackage($file_in_tmp, false)) {
                         @unlink($file_in_tmp);
-                        echo "<p style='color:green'>" . get_translation("PACKAGE_SUCCESSFULLY_UPLOADED", array(
+                        echo "<p style='color:green'>" . get_translation("PACKAGE_SUCCESSFULLY_UPLOADED", [
                             "%file%" => $_FILES['file']['name']
-                        )) . "</p>";
+                        ]) . "</p>";
                     } else {
-                        echo "<p style='color:red'>" . get_translation("installation_failed", array(
+                        echo "<p style='color:red'>" . get_translation("installation_failed", [
                             "%file%" => $_FILES['file']['name']
-                        )) . "</p>";
+                        ]) . "</p>";
                     }
                 } elseif (str_ends_with($file_in_tmp, ".sin")) {
                     $url = "?action=pkginfo&file=" . basename($file_in_tmp);

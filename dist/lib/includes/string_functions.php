@@ -9,12 +9,12 @@ if (!defined("RESPONSIVE_FM")) {
     function sanitize(array & $array): void
     {
         foreach ($array as & $data) {
-            $data = str_ireplace(array(
+            $data = str_ireplace([
                 "\r",
                 "\n",
                 "%0a",
                 "%0d"
-                    ), '', stripslashes($data));
+                    ], '', stripslashes($data));
         }
     }
 }

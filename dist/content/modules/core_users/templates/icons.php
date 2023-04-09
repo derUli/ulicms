@@ -3,24 +3,24 @@
 use App\Security\PermissionChecker;
 
 $currentAction = BackendHelper::getAction();
-$icons = array(
+$icons = [
     "admins" => "fa fa-user",
     "groups" => "fa fa-users"
-);
+];
 
 $icons = array_filter($icons, function ($cssClass, $action) {
-    $permissions = array(
+    $permissions = [
         "admins" => "users",
         "groups" => "groups"
-    );
+    ];
 
     $permissionChecker = new PermissionChecker(get_user_id());
     return $permissionChecker->hasPermission($permissions[$action]);
 }, ARRAY_FILTER_USE_BOTH);
 
-$specialLabels = array(
+$specialLabels = [
     "admins" => get_translation("users")
-);
+];
 
 $selectedButton = "btn btn-primary";
 $notSelectedButton = "btn btn-default"

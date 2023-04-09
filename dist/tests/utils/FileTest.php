@@ -67,10 +67,10 @@ class FileTest extends \PHPUnit\Framework\TestCase
 
         $this->assertTrue(is_dir($dirs));
 
-        $testFiles = array(
+        $testFiles = [
             "$baseDir/1",
             "$baseDir/2",
-            "$baseDir/bar/1");
+            "$baseDir/bar/1"];
 
         foreach ($testFiles as $file) {
             $this->assertFalse(is_file($file));
@@ -101,10 +101,10 @@ class FileTest extends \PHPUnit\Framework\TestCase
 
         $this->assertTrue(is_dir($dirs));
 
-        $testFiles = array(
+        $testFiles = [
             "$baseDir/1",
             "$baseDir/2",
-            "$baseDir/bar/1");
+            "$baseDir/bar/1"];
 
         foreach ($testFiles as $file) {
             $this->assertFalse(is_file($file));
@@ -129,10 +129,10 @@ class FileTest extends \PHPUnit\Framework\TestCase
 
         $this->assertTrue(is_dir($dirs));
 
-        $testFiles = array(
+        $testFiles = [
             "$baseDir/1",
             "$baseDir/2",
-            "$baseDir/bar/1");
+            "$baseDir/bar/1"];
 
         foreach ($testFiles as $file) {
             $this->assertFalse(is_file($file));
@@ -156,11 +156,11 @@ class FileTest extends \PHPUnit\Framework\TestCase
 
     public function testGetNewestMtimeWithFiles()
     {
-        $files = array(
+        $files = [
             Path::resolve("ULICMS_ROOT/init.php"),
             Path::resolve("ULICMS_ROOT/composer.json"),
             Path::resolve("ULICMS_ROOT/lib/css/core.scss")
-        );
+        ];
 
         $minimumResult = mktime(0, 0, 0, 1, 1, 2019);
 

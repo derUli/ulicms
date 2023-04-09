@@ -42,10 +42,10 @@ class CacheUtil
             return self::$adapter;
         }
 
-        $cacheConfig = array(
+        $cacheConfig = [
             "path" => Path::resolve("ULICMS_CACHE_BASE"),
             "defaultTtl" => self::getCachePeriod()
-        );
+        ];
 
         // Auto Detect which caching driver to use
 

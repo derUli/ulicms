@@ -184,9 +184,9 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                 ?>
                 <div class="text-right" style="margin-top: 30px;">
                     <?php
-                    echo ModuleHelper::buildMethodCallForm("PkgInfoController", "install", array(
+                    echo ModuleHelper::buildMethodCallForm("PkgInfoController", "install", [
                         "file" => basename($tempfile)
-                    ));
+                    ]);
                 ?>
                     <button type="submit" class="btn btn-warning"><i class="fas fa-box"></i> <?php translate("install"); ?></button>
                 </form>
@@ -194,9 +194,9 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                 <?php
             }
         } else {
-            translate("file_not_found", array(
+            translate("file_not_found", [
                 "%file%" => $tempfile
-            ));
+            ]);
         }
     }
 }

@@ -43,9 +43,9 @@ class HomeController extends Controller
     public function _newsfeed()
     {
         $html = Template::executeModuleTemplate("core_home", "news.php");
-        $options = array(
+        $options = [
             'optimizationLevel' => HTMLMinify::OPTIMIZATION_ADVANCED
-        );
+        ];
         $HTMLMinify = new HTMLMinify($html, $options);
         $html = $HTMLMinify->process();
         $html = StringHelper::removeEmptyLinesFromString($html);
@@ -61,9 +61,9 @@ class HomeController extends Controller
     public function _statistics(): string
     {
         $html = Template::executeModuleTemplate("core_home", "statistics.php");
-        $options = array(
+        $options = [
             'optimizationLevel' => HTMLMinify::OPTIMIZATION_ADVANCED
-        );
+        ];
 
         $HTMLMinify = new HTMLMinify($html, $options);
         return $HTMLMinify->process();
@@ -78,9 +78,9 @@ class HomeController extends Controller
     public function _topPages(): string
     {
         $html = Template::executeModuleTemplate("core_home", "top_pages.php");
-        $options = array(
+        $options = [
             'optimizationLevel' => HTMLMinify::OPTIMIZATION_ADVANCED
-        );
+        ];
         $HTMLMinify = new HTMLMinify($html, $options);
         return $HTMLMinify->process();
     }
@@ -95,9 +95,9 @@ class HomeController extends Controller
     {
         $html = Template::executeModuleTemplate("core_home", "last_updated_pages.php");
 
-        $options = array(
+        $options = [
             'optimizationLevel' => HTMLMinify::OPTIMIZATION_ADVANCED
-        );
+        ];
         $HTMLMinify = new HTMLMinify($html, $options);
         return $HTMLMinify->process();
     }
@@ -113,9 +113,9 @@ class HomeController extends Controller
         ViewBag::set("users", User::getOnlineUsers());
 
         $html = Template::executeModuleTemplate("core_home", "online_users.php");
-        $options = array(
+        $options = [
             'optimizationLevel' => HTMLMinify::OPTIMIZATION_ADVANCED
-        );
+        ];
 
         $HTMLMinify = new HTMLMinify($html, $options);
         return $HTMLMinify->process();

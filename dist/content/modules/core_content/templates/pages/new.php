@@ -43,7 +43,7 @@ if (
         "create",
         [],
         "post",
-        array(
+        [
             "name" => "newpageform",
             "id" => "pageform",
             "style" => "display:none",
@@ -63,7 +63,7 @@ if (
                 PageController::class,
                 "filterParentPages"
             )
-        )
+        ]
     );
     ?>
     <p>

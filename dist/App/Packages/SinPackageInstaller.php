@@ -178,9 +178,9 @@ class SinPackageInstaller
         }
 
         if (!$phpVersionSupported) {
-            $this->errors[] = get_translation("php_version_x_not_supported", array(
+            $this->errors[] = get_translation("php_version_x_not_supported", [
                 "%version%" => phpversion()
-            ));
+            ]);
         }
 
         $mysqlVersion = preg_replace('/[^0-9.].*/', '', Database::getServerVersion());

@@ -36,9 +36,9 @@ if (!$permissionChecker->hasPermission("design")) {
         <?php translate("design"); ?>
     </h1>
     <?php
-    echo ModuleHelper::buildMethodCallForm("DesignSettingsController", "save", [], "post", array(
+    echo ModuleHelper::buildMethodCallForm("DesignSettingsController", "save", [], "post", [
         "id" => "designForm"
-    ));
+    ]);
     ?>
     <div class="scroll">
         <table style="width: 100%;">

@@ -40,9 +40,9 @@ class Language extends Model
 
     public function loadById($id)
     {
-        $args = array(
+        $args = [
             $id
-        );
+        ];
         $sql = "SELECT * FROM `{prefix}languages` where id = ?";
         $result = Database::pQuery($sql, $args, true);
         $this->fillVars($result);
@@ -50,9 +50,9 @@ class Language extends Model
 
     public function loadByLanguageCode(string $language_code): void
     {
-        $args = array(
+        $args = [
             (string)$language_code
-        );
+        ];
         $sql = "SELECT * FROM `{prefix}languages` where language_code = ?";
         $result = Database::pQuery($sql, $args, true);
         $this->fillVars($result);
@@ -91,10 +91,10 @@ class Language extends Model
     {
         $sql = "INSERT INTO `{prefix}languages` (name, language_code) "
                 . "values (?,?)";
-        $args = array(
+        $args = [
             $this->name,
             $this->language_code
-        );
+        ];
         Database::pQuery($sql, $args, true);
         $this->id = Database::getLastInsertID();
     }
@@ -103,11 +103,11 @@ class Language extends Model
     {
         $sql = "UPDATE `{prefix}languages` set name = ?, language_code = ? "
                 . "where id = ?";
-        $args = array(
+        $args = [
             $this->name,
             $this->language_code,
             $this->id
-        );
+        ];
         Database::pQuery($sql, $args, true);
     }
 
@@ -115,9 +115,9 @@ class Language extends Model
     {
         if ($this->id !== null) {
             $sql = "DELETE FROM `{prefix}languages` where id = ?";
-            $args = array(
+            $args = [
                 $this->id
-            );
+            ];
             Database::pQuery($sql, $args, true);
             $this->id = null;
             $this->name = null;

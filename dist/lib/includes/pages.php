@@ -42,11 +42,11 @@ function getAllPagesWithTitle(): array
             "` WHERE `deleted_at` IS NULL ORDER BY slug");
     $returnvalues = [];
     while ($row = db_fetch_object($result)) {
-        $a = array(
+        $a = [
             $row->title,
             $row->slug
-        );
-        array_push($returnvalues, $a);
+        ];
+        $returnvalues[] = $a;
     }
     return $returnvalues;
 }
@@ -84,7 +84,7 @@ function getAllPages(
         if (!$exclude_hash_links || ($exclude_hash_links
                 && $row["type"] != "link" && $row["type"] != "node"
                 && $row["type"] != "language_link")) {
-            array_push($returnvalues, $row);
+            $returnvalues[] = $row;
         }
     }
 
@@ -107,7 +107,7 @@ function getAllSlugs(string $lang = null): array
                 "' ORDER BY slug");
     }
     while ($row = db_fetch_object($result)) {
-        array_push($slugs, $row->slug);
+        $slugs[] = $row->slug;
     }
 
     return $slugs;

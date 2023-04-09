@@ -30,7 +30,7 @@ $permissionChecker = new App\Security\PermissionChecker(get_user_id());
         $styles = [];
 ?>
         <?php
-$scripts = array(
+$scripts = [
     "../node_modules/vanilla-toast/vanilla-toast.js",
     "../node_modules/jquery/dist/jquery.min.js",
     "../node_modules/jquery-datetimepicker/build/jquery.datetimepicker.full.js",
@@ -51,7 +51,7 @@ $scripts = array(
     "../node_modules/datatables/media/js/jquery.dataTables.min.js",
     "../node_modules/zenscroll/zenscroll-min.js",
     "../lib/js/global.js",
-);
+];
 
 if (is_logged_in()) {
     $scripts[] = "../node_modules/jscolor-picker/jscolor.min.js";

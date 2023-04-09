@@ -26,10 +26,10 @@ class HTMLScriptTest extends \PHPUnit\Framework\TestCase
 
     public function testInlineScriptAsyncAndFoo()
     {
-        $this->assertEquals("<script async=\"async\" foo1=\"hello\" foo2=\"world\">alert(\"Hello world!\");</script>", Script::fromString("alert(\"Hello world!\");", true, false, array(
+        $this->assertEquals("<script async=\"async\" foo1=\"hello\" foo2=\"world\">alert(\"Hello world!\");</script>", Script::fromString("alert(\"Hello world!\");", true, false, [
                     "foo1" => "hello",
                     "foo2" => "world"
-        )));
+        ]));
     }
 
     public function testExternalScript()
@@ -54,9 +54,9 @@ class HTMLScriptTest extends \PHPUnit\Framework\TestCase
 
     public function testExternalScriptAsyncAndFoo()
     {
-        $this->assertEquals("<script src=\"folder/script.js\" async=\"async\" foo1=\"hello\" foo2=\"world\"></script>", Script::fromFile("folder/script.js", true, false, array(
+        $this->assertEquals("<script src=\"folder/script.js\" async=\"async\" foo1=\"hello\" foo2=\"world\"></script>", Script::fromFile("folder/script.js", true, false, [
                     "foo1" => "hello",
                     "foo2" => "world"
-        )));
+        ]));
     }
 }

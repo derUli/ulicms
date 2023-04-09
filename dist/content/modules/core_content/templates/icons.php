@@ -3,30 +3,30 @@
 use App\Security\PermissionChecker;
 
 $currentAction = BackendHelper::getAction();
-$icons = array(
+$icons = [
     "pages" => "fas fa-book",
     "comments_manage" => "fa fa-comment",
     "forms" => "fab fa-wpforms",
     "banner" => "fas fa-bullhorn",
     "categories" => "fa fa-list-alt"
-);
+];
 
 $icons = array_filter($icons, function ($cssClass, $action) {
-    $permissions = array(
+    $permissions = [
         "pages" => "pages",
         "comments_manage" => "comments_manage",
         "forms" => "forms",
         "banner" => "banners",
         "categories" => "categories"
-    );
+    ];
 
     $permissionChecker = new PermissionChecker(get_user_id());
     return $permissionChecker->hasPermission($permissions[$action]);
 }, ARRAY_FILTER_USE_BOTH);
 
-$specialLabels = array(
+$specialLabels = [
     "comments_manage" => get_translation("comments")
-);
+];
 
 $selectedButton = "btn btn-primary";
 $notSelectedButton = "btn btn-default"

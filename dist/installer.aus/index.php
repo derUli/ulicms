@@ -15,10 +15,10 @@ require "controllers/InstallerController.php";
 
 InstallerController::initSessionVars();
 if (isset($_GET['language'])) {
-    $languages = array(
+    $languages = [
         'de',
         'en'
-    );
+    ];
     if (in_array($_GET['language'], $languages)) {
         $_SESSION['language'] = $_GET['language'];
     }

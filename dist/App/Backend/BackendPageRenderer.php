@@ -193,9 +193,9 @@ class BackendPageRenderer
     public function outputMinified(): void
     {
         $generatedHtml = ob_get_clean();
-        $options = array(
+        $options = [
             'optimizationLevel' => HTMLMinify::OPTIMIZATION_ADVANCED
-        );
+        ];
         $HTMLMinify = new HTMLMinify($generatedHtml, $options);
         $generatedHtml = $HTMLMinify->process();
         $generatedHtml = StringHelper::removeEmptyLinesFromString(

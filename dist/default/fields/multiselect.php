@@ -2,9 +2,9 @@
 $field = ViewBag::get("field");
 $value = ViewBag::get("field_value") ? ViewBag::get("field_value") : [];
 if (is_string($value)) {
-    $value = array(
+    $value = [
         $value
-    );
+    ];
 }
 $options = Viewbag::get("field_options") ? Viewbag::get("field_options") : [];
 if ($value === null) {

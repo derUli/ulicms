@@ -89,9 +89,9 @@ if (Vars::get("comments_enabled")) {
         <label for="author_url"><?php translate("your_website") ?></label>
         <div>
             <?php
-            echo App\HTML\Input::textBox("author_url", "", "url", array(
+            echo App\HTML\Input::textBox("author_url", "", "url", [
     "class" => "form-control"
-            ));
+            ]);
     ?>
         </div>
         <div>
@@ -100,10 +100,10 @@ if (Vars::get("comments_enabled")) {
                     <label for="text"><?php translate("text") ?>
                         <span class="text-danger">*</span></label>
                     <?php
-            echo App\HTML\Input::textArea("text", "", 10, 80, array(
+            echo App\HTML\Input::textArea("text", "", 10, 80, [
                 "required" => "required",
                 "class" => "form-control"
-            ))
+            ])
     ?>
                 </p>
             </div>

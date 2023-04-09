@@ -22,13 +22,13 @@ function get_all_menus(
     bool $only_used = false,
     bool $read_theme_menus = true
 ): array {
-    $menus = array(
+    $menus = [
         "left",
         "top",
         "right",
         "bottom",
         "not_in_menu"
-    );
+    ];
 
     if ($only_used) {
         $used = get_all_used_menus();

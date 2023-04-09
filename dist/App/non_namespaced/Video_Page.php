@@ -42,11 +42,11 @@ class Video_Page extends Page
         parent::update();
         $sql = "update {prefix}content set video = ?, text_position = ? "
                 . "where id = ?";
-        $args = array(
+        $args = [
             $this->video,
             $this->text_position,
             $this->id
-        );
+        ];
 
         $result = Database::pQuery($sql, $args, true);
         return $result;

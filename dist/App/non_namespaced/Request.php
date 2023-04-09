@@ -109,7 +109,7 @@ class Request
 
     private static function getProxyHeaders(): array
     {
-        return array(
+        return [
             'CLIENT_IP',
             'FORWARDED',
             'FORWARDED_FOR',
@@ -129,7 +129,7 @@ class Request
             'VIA',
             'X_FORWARDED',
             'X_FORWARDED_FOR'
-        );
+        ];
     }
 
     public static function getIp(): ?string

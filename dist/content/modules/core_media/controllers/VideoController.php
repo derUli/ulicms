@@ -15,9 +15,9 @@ class VideoController extends Controller
                 $mp4_file = time() . "-" .
                         basename($_FILES ['mp4_file'] ['name']);
                 $mp4_type = $_FILES ['mp4_file'] ["type"];
-                $mp4_allowed_mime_type = array(
+                $mp4_allowed_mime_type = [
                     "video/mp4"
-                );
+                ];
                 if (in_array($mp4_type, $mp4_allowed_mime_type)) {
                     $target = $video_folder . '/' . $mp4_file;
                     if (move_uploaded_file(
@@ -34,11 +34,11 @@ class VideoController extends Controller
             if (!empty($_FILES ['ogg_file'] ['name'])) {
                 $ogg_file = time() . "-" . $_FILES ['ogg_file'] ['name'];
                 $ogg_type = $_FILES ['ogg_file'] ["type"];
-                $ogg_allowed_mime_type = array(
+                $ogg_allowed_mime_type = [
                     "video/ogg",
                     "application/ogg",
                     "audio/ogg"
-                );
+                ];
                 if (in_array($ogg_type, $ogg_allowed_mime_type)) {
                     $target = $video_folder . '/' . $ogg_file;
                     if (move_uploaded_file(
@@ -56,11 +56,11 @@ class VideoController extends Controller
             if (!empty($_FILES ['webm_file'] ['name'])) {
                 $webm_file = time() . "-" . $_FILES ['webm_file'] ['name'];
                 $webm_type = $_FILES ['webm_file'] ["type"];
-                $webm_allowed_mime_type = array(
+                $webm_allowed_mime_type = [
                     "video/webm",
                     "audio/webm",
                     "application/webm"
-                );
+                ];
                 if (in_array($webm_type, $webm_allowed_mime_type)) {
                     $target = $video_folder . '/' . $webm_file;
                     if (move_uploaded_file(

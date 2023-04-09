@@ -229,9 +229,9 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase
         $lastInsertId = Database::getLastInsertID();
         $this->assertNotNull($lastInsertId);
 
-        $result = Database::selectAll("settings", array(
+        $result = Database::selectAll("settings", [
                     "id"
-                        ), "name = 'foo2'");
+                        ], "name = 'foo2'");
         $dataset = Database::fetchObject($result);
         $this->assertEquals($dataset->id, $lastInsertId);
 
@@ -247,9 +247,9 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase
         $lastInsertId = Database::getInsertID();
         $this->assertNotNull($lastInsertId);
 
-        $result = Database::selectAll("settings", array(
+        $result = Database::selectAll("settings", [
                     "id"
-                        ), "name = 'foo2'");
+                        ], "name = 'foo2'");
         $dataset = Database::fetchObject($result);
         $this->assertEquals($dataset->id, $lastInsertId);
 

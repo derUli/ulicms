@@ -36,9 +36,9 @@ class ResponseTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals("http://ulicms.de/welcome", Response::getSafeRedirectURL("https://google.de"));
 
-        $this->assertEquals("https://google.de", Response::getSafeRedirectURL("https://google.de", array(
+        $this->assertEquals("https://google.de", Response::getSafeRedirectURL("https://google.de", [
                     "google.de"
-        )));
+        ]));
     }
 
     public function testJavascriptRedirect()

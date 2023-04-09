@@ -55,9 +55,9 @@ class Audio extends Model
     public function loadById($id)
     {
         $result = Database::pQuery("select * from `{prefix}audio` "
-                        . "where id = ?", array(
+                        . "where id = ?", [
                     (int)$id
-                        ), true);
+                        ], true);
         if (!Database::any($result)) {
             $result = null;
         }
@@ -93,14 +93,14 @@ class Audio extends Model
     {
         $this->created = time();
         $this->updated = $this->created;
-        $args = array(
+        $args = [
             $this->name,
             $this->mp3_file,
             $this->ogg_file,
             $this->category_id,
             $this->created,
             $this->updated
-        );
+        ];
         $sql = "insert into `{prefix}audio`
 				(name, mp3_file, ogg_file, category_id,
                                 created, updated)
@@ -112,14 +112,14 @@ class Audio extends Model
     protected function update(): void
     {
         $this->updated = time();
-        $args = array(
+        $args = [
             $this->name,
             $this->mp3_file,
             $this->ogg_file,
             $this->category_id,
             $this->updated,
             $this->getID()
-        );
+        ];
         $sql = "update `{prefix}audio` set
 				name = ?, mp3_file = ?, ogg_file = ?,
                                 category_id = ?, updated = ?
@@ -211,9 +211,9 @@ class Audio extends Model
                     File::deleteIfExists($file);
                 }
             }
-            Database::pQuery("delete from `{prefix}audio` where id = ?", array(
+            Database::pQuery("delete from `{prefix}audio` where id = ?", [
                 $this->getID()
-                    ), true);
+                    ], true);
             $this->fillVars(null);
         }
     }

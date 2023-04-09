@@ -18,7 +18,7 @@ use function getModuleMeta;
 // "content" table to the equally model class names
 class TypeMapper
 {
-    private static $mapping = array(
+    private static $mapping = [
         "page" => "Page",
         "snippet" => "Snippet",
         "list" => "Content_List",
@@ -30,7 +30,7 @@ class TypeMapper
         "image" => "Image_Page",
         "article" => "Article",
         "language_link" => "Language_Link"
-    );
+    ];
 
     public static function getMappings(): array
     {

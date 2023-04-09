@@ -110,11 +110,11 @@ class SpamFilterConfigurationTest extends \PHPUnit\Framework\TestCase
         $configuration = new SpamFilterConfiguration();
         $this->assertCount(0, $configuration->getBlockedCountries());
 
-        $configuration->setBlockedCountries(array(
+        $configuration->setBlockedCountries([
             "cn",
             "ru",
             "vn"
-        ));
+        ]);
         $this->assertCount(3, $configuration->getBlockedCountries());
         $this->assertContains("cn", $configuration->getBlockedCountries());
         $this->assertContains("ru", $configuration->getBlockedCountries());
@@ -139,12 +139,12 @@ class SpamFilterConfigurationTest extends \PHPUnit\Framework\TestCase
         $configuration = new SpamFilterConfiguration();
         $this->assertCount(0, $configuration->getBadwords());
 
-        $configuration->setBadwords(array(
+        $configuration->setBadwords([
             "fuck",
             "shit",
             "nigger",
             "bastard"
-        ));
+        ]);
         $this->assertCount(4, $configuration->getBadwords());
         $this->assertContains("fuck", $configuration->getBadwords());
         $this->assertContains("shit", $configuration->getBadwords());
@@ -155,12 +155,12 @@ class SpamFilterConfigurationTest extends \PHPUnit\Framework\TestCase
     public function testSetBadwordsWithNull()
     {
         $configuration = new SpamFilterConfiguration();
-        $configuration->setBadwords(array(
+        $configuration->setBadwords([
             "fuck",
             "shit",
             "nigger",
             "bastard"
-        ));
+        ]);
         $configuration->setBadwords(null);
 
         $this->assertCount(0, $configuration->getBadwords());

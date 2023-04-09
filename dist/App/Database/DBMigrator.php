@@ -57,10 +57,10 @@ class DBMigrator
         if (str_ends_with($file, ".sql")) {
             $sql = "SELECT id from {prefix}dbtrack where component = ? "
                     . "and name = ?";
-            $args = array(
+            $args = [
                 $this->component,
                 $file
-            );
+            ];
             $result = Database::tableExists("dbtrack") ?
                     Database::pQuery($sql, $args, true) : false;
             if (!$result || Database::getNumRows($result) == 0) {
@@ -105,10 +105,10 @@ class DBMigrator
             if (str_ends_with($file, ".sql")) {
                 $sql = "SELECT id from {prefix}dbtrack where component = ? "
                         . "and name = ?";
-                $args = array(
+                $args = [
                     $this->component,
                     $file
-                );
+                ];
                 $result = Database::pQuery($sql, $args, true);
                 if (Database::getNumRows($result) > 0) {
                     $path = $this->folder . '/' . $file;
@@ -144,9 +144,9 @@ class DBMigrator
     public function resetDBTrack(): bool
     {
         return Database::pQuery("DELETE FROM {prefix}dbtrack "
-                        . "where component = ?", array(
+                        . "where component = ?", [
                     $this->component
-                        ), true);
+                        ], true);
     }
 
     /**

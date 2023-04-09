@@ -91,14 +91,14 @@ if ($permissionChecker->hasPermission("list_packages")) {
                                         class="fas fa-info-circle"></i> </span>
                                     <?php
                                 $canToggleModule = (getModuleMeta($module->getName(), "source") != "core" && $permissionChecker->hasPermission("enable_disable_module"));
-                    echo ModuleHelper::buildMethodCallForm(PackageController::class, "toggleModule", array(
+                    echo ModuleHelper::buildMethodCallForm(PackageController::class, "toggleModule", [
                         "name" => $module->getName()
-                            ), RequestMethod::POST, array(
+                            ], RequestMethod::POST, [
                         "class" => "inline-block toggle-module-form",
-                        "data-confirm-message" => get_translation("uninstall_module_x", array(
+                        "data-confirm-message" => get_translation("uninstall_module_x", [
                             "%name%" => $module->getName()
-                        ))
-                    ));
+                        ])
+                    ]);
                     ?>
                                 <button type="submit" <?php
                                 if (!$canToggleModule) {
@@ -121,14 +121,14 @@ if ($permissionChecker->hasPermission("list_packages")) {
                                         <?php echo ModuleHelper::endForm(); ?>
                                         <?php
                     if ($permissionChecker->hasPermission("remove_packages") && getModuleMeta($module->getName(), "source") != "core") {
-                        echo ModuleHelper::buildMethodCallForm(PackageController::class, "uninstallModule", array(
+                        echo ModuleHelper::buildMethodCallForm(PackageController::class, "uninstallModule", [
                             "name" => $module->getName()
-                                ), RequestMethod::POST, array(
+                                ], RequestMethod::POST, [
                             "class" => "inline-block uninstall-form",
-                            "data-confirm-message" => get_translation("uninstall_module_x", array(
+                            "data-confirm-message" => get_translation("uninstall_module_x", [
                                 "%name%" => $module->getName()
-                            ))
-                        ));
+                            ])
+                        ]);
                         ?>
                                     <button type="submit" class="btn btn-danger bt-sm icon"
                                             title="<?php translate("uninstall"); ?>">
@@ -242,14 +242,14 @@ if ($permissionChecker->hasPermission("list_packages")) {
                                 ?>
                                 <?php
                                 if ($permissionChecker->hasPermission("remove_packages") && getModuleMeta($module->getName(), "source") != "core") {
-                                    echo ModuleHelper::buildMethodCallForm(PackageController::class, "uninstallTheme", array(
+                                    echo ModuleHelper::buildMethodCallForm(PackageController::class, "uninstallTheme", [
                                         "name" => $theme
-                                            ), RequestMethod::POST, array(
+                                            ], RequestMethod::POST, [
                                         "class" => "inline-block uninstall-form",
-                                        "data-confirm-message" => get_translation("uninstall_theme_x", array(
+                                        "data-confirm-message" => get_translation("uninstall_theme_x", [
                                             "%name%" => $theme
-                                        ))
-                                    ));
+                                        ])
+                                    ]);
                                     ?>
                                     <button type="submit" class="btn btn-danger btn-sm icon"
                                             title="<?php translate("uninstall"); ?>">

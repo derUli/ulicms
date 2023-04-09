@@ -30,11 +30,11 @@ class PageTest extends \PHPUnit\Framework\TestCase
         $_SESSION['language'] = 'de';
         $_SERVER['REQUEST_URI'] = '/';
 
-        $settings = array(
+        $settings = [
             "frontpage",
             "frontpage_de",
             "frontpage_en"
-        );
+        ];
 
         foreach ($settings as $setting) {
             $this->savedSettings[$setting] = Settings::get($setting);
@@ -737,7 +737,7 @@ class PageTest extends \PHPUnit\Framework\TestCase
         $page->custom_data = new stdClass();
         $page->save();
 
-        $raw = Database::fetchFirst(Database::selectAll("content", array("custom_data"), "id = {$page->id}"));
+        $raw = Database::fetchFirst(Database::selectAll("content", ["custom_data"], "id = {$page->id}"));
         $this->assertEquals('{}', $raw->custom_data);
     }
 

@@ -22,9 +22,9 @@ if ($permissionChecker->hasPermission("settings_simple")) {
     </p>
     <h1><?php translate("homepage_title"); ?></h1>
     <?php
-    echo ModuleHelper::buildMethodCallForm("HomepageTitleController", "save", [], "post", array(
+    echo ModuleHelper::buildMethodCallForm("HomepageTitleController", "save", [], "post", [
         "id" => "homepage_title_settings"
-    ));
+    ]);
     ?>
     <table>
         <tr>

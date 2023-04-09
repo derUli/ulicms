@@ -50,10 +50,10 @@ class ModuleHelper extends Helper
     ): ?object {
         $language = $language ?? getCurrentLanguage();
 
-        $args = array(
+        $args = [
             1,
             $language
-        );
+        ];
         $sql = "select * from {prefix}content where active = ? and language = ?";
         $result = Database::pQuery($sql, $args, true);
         while ($dataset = Database::fetchObject($result)) {

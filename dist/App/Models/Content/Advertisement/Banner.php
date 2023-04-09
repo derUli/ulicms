@@ -238,10 +238,10 @@ class Banner extends Model
 
     public function setType(string $type): void
     {
-        $allowedTypes = array(
+        $allowedTypes = [
             "gif",
             "html"
-        );
+        ];
         if (in_array($type, $allowedTypes)) {
             $this->type = $type;
         }

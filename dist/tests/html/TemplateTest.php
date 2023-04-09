@@ -16,7 +16,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         Translation::loadAllModuleLanguageFiles('en');
         Vars::setNoCache(true);
 
-        $settings = array(
+        $settings = [
             "site_slogan",
             "site_slogan_de",
             "site_slogan_en",
@@ -25,7 +25,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
             "footer_text",
             "logo_disabled",
             "domain_to_language"
-        );
+        ];
         foreach ($settings as $setting) {
             $this->savedSettings[$setting] = Settings::get($setting);
         }

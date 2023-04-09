@@ -1,10 +1,10 @@
 <?php
 $user = ViewBag::get("user");
 
-translate("hello_x", array("%x%" => $user->getFirstname()));
+translate("hello_x", ["%x%" => $user->getFirstname()]);
 ?>,
 
-<?php translate("admin_created_an_account", array("%url%" => ViewBag::get("url"))); ?>
+<?php translate("admin_created_an_account", ["%url%" => ViewBag::get("url")]); ?>
 
 <?php translate("here_are_your_credentials"); ?>
 

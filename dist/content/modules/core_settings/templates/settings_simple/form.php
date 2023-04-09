@@ -17,9 +17,9 @@ if ($permissionChecker->hasPermission("settings_simple")) {
     </p>
     <h2><?php translate("general_settings"); ?></h2>
     <?php
-    echo ModuleHelper::buildMethodCallForm("SimpleSettingsController", "save", [], "post", array(
+    echo ModuleHelper::buildMethodCallForm("SimpleSettingsController", "save", [], "post", [
         "id" => "settings_simple"
-    ))
+    ])
     ?>
     <table>
         <tr>

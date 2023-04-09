@@ -56,14 +56,14 @@ article_author_name = ?,
 article_image = ?,
 article_date = from_unixtime(?),
 excerpt = ? where id = ?";
-        $args = array(
+        $args = [
             $this->article_author_email,
             $this->article_author_name,
             $this->article_image,
             $article_date,
             $this->excerpt,
             $this->id
-        );
+        ];
         return Database::pQuery($sql, $args, true);
     }
 

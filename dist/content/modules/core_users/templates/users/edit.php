@@ -71,7 +71,7 @@ if (($permissionChecker->hasPermission("users") && $permissionChecker->hasPermis
                             "delete_avatar",
                             false,
                             "1",
-                            array("class" => "js-switch")
+                            ["class" => "js-switch"]
                         );
                 ?><?php translate("delete_avatar") ?>
                     </label>

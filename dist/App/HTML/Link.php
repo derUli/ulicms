@@ -25,9 +25,9 @@ class Link
         string $text,
         array $htmlAttributes = []
     ): string {
-        $attributes = array(
+        $attributes = [
             'href' => $href
-        );
+        ];
 
         foreach ($htmlAttributes as $key => $value) {
             $attributes [$key] = $value;

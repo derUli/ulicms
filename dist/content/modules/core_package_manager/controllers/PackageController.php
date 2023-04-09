@@ -137,9 +137,9 @@ class PackageController extends MainClass
         if ($this->_uninstallTheme($name)) {
             $this->redirectToPackageView();
         } else {
-            $errorMessage = get_secure_translation("removing_package_failed", array(
+            $errorMessage = get_secure_translation("removing_package_failed", [
                 "%name%" => $name
-            ));
+            ]);
             ExceptionResult(
                 $errorMessage,
                 HttpStatusCode::INTERNAL_SERVER_ERROR

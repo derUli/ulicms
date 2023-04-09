@@ -39,11 +39,11 @@ class Module_Page extends Page
         parent::update();
         $sql = "update {prefix}content set module = ?, text_position = ? "
                 . "where id = ?";
-        $args = array(
+        $args = [
             $this->module,
             $this->text_position,
             $this->id
-        );
+        ];
 
         $result = Database::pQuery($sql, $args, true);
         return $result;

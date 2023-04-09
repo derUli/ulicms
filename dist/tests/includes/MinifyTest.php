@@ -17,11 +17,11 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
     public function testScriptQueue()
     {
         $filemtime = 0;
-        $files = array(
+        $files = [
             "node_modules/jquery/dist/jquery.js",
             "admin/scripts/global.js",
             "node_modules/bootbox/bootbox.js"
-        );
+        ];
         foreach ($files as $file) {
             enqueueScriptFile($file);
             if (filemtime($file) > $filemtime) {
@@ -58,11 +58,11 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
 
     public function testCombinedScriptHTMLDeprecated()
     {
-        $files = array(
+        $files = [
             "node_modules/jquery/dist/jquery.js",
             "admin/scripts/global.js",
             "node_modules/bootbox/bootbox.js"
-        );
+        ];
 
         foreach ($files as $file) {
             enqueueScriptFile($file);
@@ -85,12 +85,12 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
     public function testStylesheetQueue()
     {
         $filemtime = 0;
-        $files = array(
+        $files = [
             "lib/css/core.scss",
             "node_modules/bootstrap/dist/css/bootstrap.css",
             "node_modules/bootstrap/dist/css/bootstrap-theme.css",
             "admin/css/modern.scss"
-        );
+        ];
         foreach ($files as $file) {
             enqueueStylesheet($file);
             if (filemtime($file) > $filemtime) {
@@ -125,12 +125,12 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
     public function testCombinedStylesheetHtml()
     {
         $filemtime = 0;
-        $files = array(
+        $files = [
             "lib/css/core.scss",
             "node_modules/bootstrap/dist/css/bootstrap.css",
             "node_modules/bootstrap/dist/css/bootstrap-theme.css",
             "admin/css/modern.scss"
-        );
+        ];
 
         foreach ($files as $file) {
             enqueueStylesheet($file);
@@ -150,11 +150,11 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
     {
         unsetSCSSImportPaths();
         CacheUtil::getAdapter(true)->clear();
-        $styles = array(
+        $styles = [
             "tests/fixtures/scss/style1.scss",
             "tests/fixtures/scss/style2.scss",
             "lib/css/core.scss"
-        );
+        ];
         foreach ($styles as $style) {
             enqueueStylesheet($style);
         }
@@ -191,10 +191,10 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
 
     public function testSetSCSSImportPathsToNull()
     {
-        $paths = array(
+        $paths = [
             "folder1/foo/bar",
             "folder2/another/folder"
-        );
+        ];
         setSCSSImportPaths($paths);
 
         setSCSSImportPaths(null);
@@ -284,21 +284,21 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
 
     private function enqeueStuff()
     {
-        $files = array(
+        $files = [
             "node_modules/jquery/dist/jquery.js",
             "admin/scripts/global.js",
             "node_modules/bootbox/bootbox.js"
-        );
+        ];
         foreach ($files as $file) {
             enqueueScriptFile($file);
         }
 
-        $files = array(
+        $files = [
             "lib/css/core.scss",
             "node_modules/bootstrap/dist/css/bootstrap.css",
             "node_modules/bootstrap/dist/css/bootstrap-theme.css",
             "admin/css/modern.scss"
-        );
+        ];
         foreach ($files as $file) {
             enqueueStylesheet($file);
         }

@@ -16,7 +16,7 @@ $comments = is_array(BackendPageRenderer::getModel()) ?
         BackendPageRenderer::getModel() :
         $controller->_getResults($selectedStatus, $content_id, $limit);
 
-$stati = array(
+$stati = [
     new ListItem(
         CommentStatus::SPAM,
         get_translation(CommentStatus::SPAM)
@@ -29,7 +29,7 @@ $stati = array(
         CommentStatus::PUBLISHED,
         get_translation(CommentStatus::PUBLISHED)
     )
-);
+];
 
 $contents = ContentFactory::getAllWithComments("title");
 
@@ -45,7 +45,7 @@ foreach ($contents as $content) {
     );
 }
 
-$actionSelect = array(
+$actionSelect = [
     new ListItem('', "[" . get_translation("select_action") . "]"),
     new ListItem("mark_as_spam", get_translation("mark_as_spam")),
     new ListItem("mark_as_read", get_translation("mark_as_read")),
@@ -53,7 +53,7 @@ $actionSelect = array(
     new ListItem("publish", get_translation("publish")),
     new ListItem("unpublish", get_translation("unpublish")),
     new ListItem("delete", get_translation("delete"))
-);
+];
 ?>
 
 <?php echo Template::executeModuleTemplate("core_content", "icons.php"); ?>
@@ -83,10 +83,10 @@ echo Input::singleSelect("content_id", $content_id, $contentSelect, 1);
     <div class="col-xs-12 col-lg-4">
         <label for="status"><?php translate("limit_results"); ?></label>
         <?php
-echo Input::textBox("limit", $limit, "number", array(
+echo Input::textBox("limit", $limit, "number", [
     "step" => "10",
     "min" => "0"
-));
+]);
 ?>
     </div>
 </div>
@@ -114,10 +114,10 @@ echo ModuleHelper::buildMethodCallForm(
         <thead>
             <tr>
                 <th class="no-sort"><?php
-                    echo Input::checkBox("select_all", false, "", array(
+                    echo Input::checkBox("select_all", false, "", [
                         "class" => "select-all",
                         "data-target" => ".comment-checkbox"
-                    ));
+                    ]);
 ?></th>
                 <th><?php translate("date"); ?></th>
                 <th><?php translate("status"); ?></th>

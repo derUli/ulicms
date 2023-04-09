@@ -52,9 +52,9 @@ if (!defined("RESPONSIVE_FM")) {
         ): void {
             echo "<script>"
             . "location.replace(\"$url\");</script>";
-            echo "<noscript><p>" . get_translation("jsredirect_noscript", array(
+            echo "<noscript><p>" . get_translation("jsredirect_noscript", [
                 "%url%" => Template::getEscape($url)
-            )) . "</p></noscript>";
+            ]) . "</p></noscript>";
         }
 
         public static function getSafeRedirectURL(
@@ -67,9 +67,9 @@ if (!defined("RESPONSIVE_FM")) {
             } elseif (isset($cfg->safe_hosts) && is_array($cfg->safe_hosts)) {
                 $safeHosts = $cfg->safe_hosts;
             } else {
-                $safeHosts = array(
+                $safeHosts = [
                     get_http_host()
-                );
+                ];
             }
             $host = parse_url($url, PHP_URL_HOST);
             if (!in_array($host, $safeHosts)) {
@@ -111,7 +111,7 @@ if (!defined("RESPONSIVE_FM")) {
         // Übersetzung HTTP Status Code => Name
         public static function getStatusCodeByNumber(int $nr): string
         {
-            $http_codes = array(
+            $http_codes = [
                 100 => 'Continue',
                 101 => 'Switching Protocols',
                 102 => 'Processing',
@@ -167,7 +167,7 @@ if (!defined("RESPONSIVE_FM")) {
                 507 => 'Insufficient Storage',
                 509 => 'Bandwidth Limit Exceeded',
                 510 => 'Not Extended'
-            );
+            ];
             return $nr . " " . $http_codes[$nr];
         }
 

@@ -86,7 +86,7 @@ VALUES      ( ?,
               ?,
               ?,
               ?,
-              ?) ", array(
+              ?) ", [
             $this->getContentId(),
             $this->getAuthorName(),
             $this->getAuthorEmail(),
@@ -97,7 +97,7 @@ VALUES      ( ?,
             $this->getIp(),
             $this->getUseragent(),
             $this->isRead()
-                ), true);
+                ], true);
         $this->setID(Database::getLastInsertID());
     }
 
@@ -114,7 +114,7 @@ VALUES      ( ?,
                          `ip` = ?,
                          `useragent` = ?,
                          `read` = ?
-                          where id = ?", array(
+                          where id = ?", [
             $this->getContentId(),
             $this->getAuthorName(),
             $this->getAuthorEmail(),
@@ -126,7 +126,7 @@ VALUES      ( ?,
             $this->getUseragent(),
             $this->isRead(),
             $this->getID()
-                ), true);
+                ], true);
     }
 
     public function delete()
@@ -363,9 +363,9 @@ VALUES      ( ?,
         string $status = CommentStatus::SPAM
     ): bool {
         $sql = "select ip from {prefix}comments where ip = ?";
-        $args = array(
+        $args = [
             (string) $ip
-        );
+        ];
         if ($status) {
             $sql .= " and status = ?";
             $args[] = (string) $status;

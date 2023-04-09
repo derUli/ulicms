@@ -31,8 +31,8 @@ class HtmlFunctionsTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertEquals('<img class="my-awesome-image" title="Very awesome image" src="/foo/bar.png">', imageTag(
             "/foo/bar.png",
-            array("class" => "my-awesome-image",
-                "title" => "Very awesome image")
+            ["class" => "my-awesome-image",
+                "title" => "Very awesome image"]
         ));
     }
 
@@ -71,10 +71,10 @@ class HtmlFunctionsTest extends \PHPUnit\Framework\TestCase
 
     public function testWithAdditionalAttributes()
     {
-        $this->assertEquals('<i title="Hallo Welt" data-something="hello" class="fas fa-hamburger"></i>', icon("fas fa-hamburger", array(
+        $this->assertEquals('<i title="Hallo Welt" data-something="hello" class="fas fa-hamburger"></i>', icon("fas fa-hamburger", [
             "title" => "Hallo Welt",
             "data-something" => "hello"
-        )));
+        ]));
     }
 
     public function testLinkWithoutAdditionalAttributes()
@@ -105,10 +105,10 @@ class HtmlFunctionsTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertEquals(
             '<a id="mylink" class="btn btn-primary" href="https://www.google.de" target="_self"><strong>Google</strong></a>',
-            link("https://www.google.de", "<strong>Google</strong>", true, LinkTarget::TARGET_SELF, array(
+            link("https://www.google.de", "<strong>Google</strong>", true, LinkTarget::TARGET_SELF, [
             "id" => "mylink",
             "class" => "btn btn-primary"
-            ))
+            ])
         );
     }
 
@@ -130,8 +130,8 @@ class HtmlFunctionsTest extends \PHPUnit\Framework\TestCase
                 ButtonType::TYPE_INFO,
                 true,
                 null,
-                array("data-hello" => "world",
-                    "class" => "awesome-button")
+                ["data-hello" => "world",
+                    "class" => "awesome-button"]
             )
         );
     }

@@ -20,9 +20,9 @@ class Module
     public function loadByName(string $name): bool
     {
         $sql = "select * from {prefix}modules where name = ?";
-        $args = array(
+        $args = [
             $name
-        );
+        ];
         $result = Database::pQuery($sql, $args, true);
         $dataset = Database::fetchSingle($result);
 
@@ -38,9 +38,9 @@ class Module
     public function save(): void
     {
         $sql = "select name from {prefix}modules where name = ?";
-        $args = array(
+        $args = [
             $this->name
-        );
+        ];
         $result = Database::pQuery($sql, $args, true);
 
         if (Database::any($result)) {
@@ -54,11 +54,11 @@ class Module
     {
         $sql = "INSERT INTO {prefix}modules (name, version, enabled) "
                 . "values(?, ?, ?)";
-        $args = array(
+        $args = [
             $this->name,
             $this->version,
             $this->enabled
-        );
+        ];
         return Database::pQuery($sql, $args, true);
     }
 
@@ -66,11 +66,11 @@ class Module
     {
         $sql = "update {prefix}modules set version = ?, enabled = ? "
                 . "where name = ?";
-        $args = array(
+        $args = [
             $this->version,
             $this->enabled,
             $this->name
-        );
+        ];
         return Database::pQuery($sql, $args, true);
     }
 
@@ -212,15 +212,15 @@ class Module
     public function delete(): ?bool
     {
         $sql = "select name from {prefix}modules where name = ?";
-        $args = array(
+        $args = [
             $this->name
-        );
+        ];
         $result = Database::pQuery($sql, $args, true);
         if (Database::any($result)) {
             $sql = "delete from {prefix}modules where name = ?";
-            $args = array(
+            $args = [
                 $this->name
-            );
+            ];
             return Database::pQuery($sql, $args, true);
         }
         return null;

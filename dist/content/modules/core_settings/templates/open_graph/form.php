@@ -22,9 +22,9 @@ if ($permissionChecker->hasPermission("open_graph")) {
     );
     ?>
     <?php
-    echo ModuleHelper::buildMethodCallForm("OpenGraphController", "save", [], "post", array(
+    echo ModuleHelper::buildMethodCallForm("OpenGraphController", "save", [], "post", [
         "id" => "open_graph"
-    ));
+    ]);
     ?>
     <table style="border: 0px;">
         <tr>

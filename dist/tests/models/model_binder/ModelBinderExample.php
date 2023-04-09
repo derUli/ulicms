@@ -46,16 +46,16 @@ class ModelBinderExample extends Model
         return $this->not_mapped;
     }
 
-    private $sampleValuesOK = array(
+    private $sampleValuesOK = [
         "field1" => 123,
         "field2" => "This is string"
-    );
-    private $invalidValues1 = array(
+    ];
+    private $invalidValues1 = [
         "my_field" => "This should be a number"
-    );
-    private $invalidValues2 = array(
+    ];
+    private $invalidValues2 = [
         "not_mapped" => "Not mapped"
-    );
+    ];
 
     public function fillVars($data = null)
     {

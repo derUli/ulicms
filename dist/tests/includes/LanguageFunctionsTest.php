@@ -37,13 +37,13 @@ class LanguageFunctionsTest extends \PHPUnit\Framework\TestCase
         q = 0.8, en;
         q = 0.7, de;
         q = 0.5";
-        $this->assertEquals('en', get_prefered_language(array('de', 'en'), $acceptLanguageHeader1));
+        $this->assertEquals('en', get_prefered_language(['de', 'en'], $acceptLanguageHeader1));
 
         $acceptLanguageHeader2 = "Accept-Language: da, en - gb;
         q = 0.8, en;
         q = 0.7, de;
         q = 0.9";
-        $this->assertEquals('de', get_prefered_language(array('de', 'en'), $acceptLanguageHeader2));
+        $this->assertEquals('de', get_prefered_language(['de', 'en'], $acceptLanguageHeader2));
     }
 
     public function testGetLanguageNameByCodeReturnsName()

@@ -31,38 +31,38 @@ class CustomFields
         }
 
         $content_id = (int)$content_id;
-        $args = array(
+        $args = [
             $content_id,
             $name
-        );
+        ];
         $sql = "Select id from {prefix}custom_fields "
                 . "where content_id = ? and name = ?";
         $result = Database::pQuery($sql, $args, true);
         if (Database::getNumRows($result) > 0) {
             $result = Database::fetchObject($result);
             if ($value === null) {
-                $args = array(
+                $args = [
                     (int) $result->id
-                );
+                ];
                 $sql = "DELETE FROM {prefix}custom_fields "
                         . "where id = ?";
                 return Database::pQuery($sql, $args, true);
             } else {
-                $args = array(
+                $args = [
                     $value,
                     $name,
                     $content_id
-                );
+                ];
                 $sql = "UPDATE {prefix}custom_fields set value = ? "
                         . "where name = ? and content_id = ?";
                 return Database::pQuery($sql, $args, true);
             }
         } elseif ($value !== null) {
-            $args = array(
+            $args = [
                 $content_id,
                 $name,
                 $value
-            );
+            ];
             $sql = "INSERT INTO {prefix}custom_fields "
                     . "(content_id, name, value) VALUES(?, ?, ?)";
             return Database::pQuery($sql, $args, true);
@@ -80,9 +80,9 @@ class CustomFields
         }
 
         $content_id = (int)$content_id;
-        $args = array(
+        $args = [
             $content_id
-        );
+        ];
         $sql = "Select name, value from {prefix}custom_fields "
                 . "where content_id = ?";
         $result = Database::pQuery($sql, $args, true);
@@ -117,10 +117,10 @@ class CustomFields
             $name = "{$page->type}_{$name}";
         }
 
-        $args = array(
+        $args = [
             $content_id,
             $name
-        );
+        ];
         $sql = "Select value from {prefix}custom_fields "
                 . "where content_id = ? and name = ?";
         $result = Database::pQuery($sql, $args, true);

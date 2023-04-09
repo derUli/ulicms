@@ -49,17 +49,17 @@ class CoreMediaController extends MainClass
         }
 
 
-        $newHtml = preg_replace('/^<!DOCTYPE.+?>/', '', str_replace(array(
+        $newHtml = preg_replace('/^<!DOCTYPE.+?>/', '', str_replace([
             '<html>',
             '</html>',
             '<body>',
             '</body>'
-                        ), array(
+                        ], [
             '',
             '',
             '',
             ''
-                        ), $dom->saveHTML()));
+                        ], $dom->saveHTML()));
         return $newHtml;
     }
 
@@ -111,17 +111,17 @@ class CoreMediaController extends MainClass
     // This method extracts the content of the body
     protected function getBodyContent(string $html): string
     {
-        return preg_replace('/^<!DOCTYPE.+?>/', '', str_replace(array(
+        return preg_replace('/^<!DOCTYPE.+?>/', '', str_replace([
             '<html>',
             '</html>',
             '<body>',
             '</body>'
-                        ), array(
+                        ], [
             '',
             '',
             '',
             ''
-                        ), $html));
+                        ], $html));
     }
 
     // This method retrieves the embed code for an URL

@@ -28,11 +28,11 @@ class Input
         string $type = "text",
         array $htmlAttributes = []
     ): string {
-        $attributes = array(
+        $attributes = [
             "type" => $type,
             "name" => $name,
             "value" => $value
-        );
+        ];
         foreach ($htmlAttributes as $key => $val) {
             $attributes[$key] = $val;
         }
@@ -57,11 +57,11 @@ class Input
         int $cols = 80,
         array $htmlAttributes = []
     ): string {
-        $attributes = array(
+        $attributes = [
             "name" => $name,
             "rows" => $rows,
             "cols" => $cols
-        );
+        ];
         foreach ($htmlAttributes as $key => $val) {
             $attributes[$key] = $val;
         }
@@ -134,9 +134,9 @@ class Input
         $accept = null,
         array $htmlAttributes = []
     ): string {
-        $attributes = array(
+        $attributes = [
             "name" => $name
-        );
+        ];
         if (is_string($accept)) {
             $attributes["accept"] = Template::getEscape($accept);
         } elseif (is_array($accept)) {
@@ -225,10 +225,10 @@ class Input
         int $size = 1,
         array $htmlAttributes = []
     ): string {
-        $attributes = array(
+        $attributes = [
             "name" => $name,
             "size" => $size
-        );
+        ];
         foreach ($htmlAttributes as $key => $val) {
             $attributes[$key] = $val;
         }
@@ -266,10 +266,10 @@ class Input
         int $size = 5,
         array $htmlAttributes = []
     ): string {
-        $attributes = array(
+        $attributes = [
             "name" => $name,
             "size" => $size
-        );
+        ];
         foreach ($htmlAttributes as $key => $val) {
             $attributes[$key] = $val;
         }

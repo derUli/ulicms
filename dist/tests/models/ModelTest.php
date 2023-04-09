@@ -7,7 +7,7 @@ class ModelTest extends \PHPUnit\Framework\TestCase
 {
     protected function tearDown(): void
     {
-        Database::pQuery("delete from {prefix}languages where language_code = ?", array("it"), true);
+        Database::pQuery("delete from {prefix}languages where language_code = ?", ["it"], true);
     }
 
     public function testIsPersistent()

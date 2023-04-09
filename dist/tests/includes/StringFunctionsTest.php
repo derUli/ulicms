@@ -24,12 +24,12 @@ class StringFunctionsTest extends \PHPUnit\Framework\TestCase
 
     public function testSanitize()
     {
-        $input = array(
+        $input = [
             "My\r\nWorld\r",
             " entferne%0adas",
             " entferne%0adas",
             "%0dlorem ipsum %0d"
-        );
+        ];
 
         sanitize($input);
         $this->assertCount(4, $input);

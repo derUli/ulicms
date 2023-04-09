@@ -12,10 +12,10 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
     protected function setUp(): void
     {
         Database::pQuery("delete from `{prefix}categories`
-							where name = ? or name = ?", array(
+							where name = ? or name = ?", [
             self::name1,
             self::name2
-                ), true);
+                ], true);
     }
 
     protected function tearDown(): void

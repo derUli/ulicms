@@ -40,9 +40,9 @@ if ($permissionChecker->hasPermission("privacy_settings")) {
         "save",
         [],
         RequestMethod::POST,
-        array(
+        [
             "id" => "privacy-form"
-        )
+        ]
     );
     ?>
     <div id="accordion-container">

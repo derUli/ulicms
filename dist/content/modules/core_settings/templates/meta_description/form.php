@@ -21,9 +21,9 @@ if ($permissionChecker->hasPermission("settings_simple")) {
     </p>
     <h1><?php get_translation("meta_description"); ?></h1>
     <?php
-    echo ModuleHelper::buildMethodCallForm("MetaDescriptionController", "save", [], "post", array(
+    echo ModuleHelper::buildMethodCallForm("MetaDescriptionController", "save", [], "post", [
         "id" => "meta_description_settings"
-    ));
+    ]);
     ?>
     <table style="border: 0">
         <tr>

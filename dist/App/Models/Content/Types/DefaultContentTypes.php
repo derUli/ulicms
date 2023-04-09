@@ -16,7 +16,7 @@ class DefaultContentTypes
     {
         self::$types = [];
         self::$types["page"] = new ContentType();
-        self::$types["page"]->show = array(
+        self::$types["page"]->show = [
             ".hide-on-non-regular",
             ".menu-stuff",
             "#hidden-attrib",
@@ -30,16 +30,16 @@ class DefaultContentTypes
             "#content-editor",
             "#btn-view-page",
             "#tab-comments"
-        );
+        ];
         self::$types["article"] = clone self::$types["page"];
         self::$types["article"]->show[] = "#article-metadata";
         self::$types["article"]->show[] = "#article-image";
 
         self::$types["snippet"] = new ContentType();
-        self::$types["snippet"]->show = array(
+        self::$types["snippet"]->show = [
             ".show-on-snippet",
             "#content-editor"
-        );
+        ];
 
         self::$types["list"] = clone self::$types["page"];
         self::$types["list"]->show[] = ".list-show";

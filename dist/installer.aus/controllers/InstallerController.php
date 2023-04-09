@@ -19,7 +19,7 @@ class InstallerController
 
     public static function initSessionVars()
     {
-        $vars = array(
+        $vars = [
             "mysql_user",
             "mysql_host",
             "mysql_password",
@@ -32,7 +32,7 @@ class InstallerController
             "admin_lastname",
             "admin_firstname",
             "install_demodata"
-        );
+        ];
         foreach ($vars as $var) {
             if (!isset($_SESSION[$var])) {
                 $_SESSION[$var] = '';
@@ -103,7 +103,7 @@ class InstallerController
 
         // Check if database is present else try to create it.
         $query = mysqli_query($connection, "SHOW DATABASES");
-        $databases = array();
+        $databases = [];
         while ($row = mysqli_fetch_array($query)) {
             $databases[] = $row[0];
         }
@@ -140,7 +140,7 @@ class InstallerController
         if (!isset($_SESSION["install_index"])) {
             $_SESSION["install_index"] = 0;
         }
-        $files = array();
+        $files = [];
         foreach (glob(ULICMS_ROOT ."/lib/migrations/up/*.sql") as $file) {
             $files[] = $file;
         }

@@ -164,10 +164,10 @@ class RoboFile extends Tasks
 
     private function showPageKeys($json)
     {
-        $skipAttributes = array(
+        $skipAttributes = [
             "data",
             "screenshot"
-        );
+        ];
 
         foreach ($json as $key => $value) {
             if (in_array($key, $skipAttributes)) {
