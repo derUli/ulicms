@@ -41,8 +41,6 @@ $tmpRules = [
     'function_typehint_space' => true,
     // Renames PHPDoc tags.
     'general_phpdoc_tag_rename' => true,
-    // Function `implode` must be called with 2 arguments in the documented order.
-    'implode_call' => true,
     // Include/Require and file path should be divided with a single space. File path should not be placed under brackets.
     'include' => true,
     // Code MUST use configured indentation type.
@@ -53,6 +51,8 @@ $tmpRules = [
     'method_argument_space' => true,
     // Method chaining MUST be properly indented. Method chaining with different levels of indentation is not supported.
     'method_chaining_indentation' => true,
+    // Forbid multi-line whitespace before the closing semicolon or move the semicolon to the new line for chained calls.
+    'multiline_whitespace_before_semicolons' => true,
     // Add leading `\` before function invocation to speed up resolving.
     'native_function_invocation' => ['include'=>['@all','trans']],
     // Replace control structure alternative syntax to use braces.
@@ -275,8 +275,8 @@ $config
     'no_mixed_echo_print' => true,
     // Operator `=>` should not be surrounded by multi-line whitespaces.
     'no_multiline_whitespace_around_double_arrow' => true,
-    // Forbid multi-line whitespace before the closing semicolon or move the semicolon to the new line for chained calls.
-    'multiline_whitespace_before_semicolons' => true,
+    // Function `implode` must be called with 2 arguments in the documented order.
+    'implode_call' => true,
     ]);
 
 return $config->setFinder(
