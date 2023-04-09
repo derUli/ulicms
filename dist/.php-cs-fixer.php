@@ -194,8 +194,6 @@ $tmpRules = [
     'return_type_declaration' => ['space_before'=>'one'],
     // Instructions must be terminated with a semicolon.
     'semicolon_after_instruction' => true,
-    // Cast shall be used, not `settype`.
-    'set_type_to_cast' => true,
     // Cast `(boolean)` and `(integer)` should be written as `(bool)` and `(int)`, `(double)` and `(real)` as `(float)`, `(binary)` as `(string)`.
     'short_scalar_cast' => true,
     // Converts explicit variables in double-quoted strings and heredoc syntax from simple to complex format (`${` to `{$`).
@@ -276,6 +274,8 @@ $config
     'no_spaces_after_function_name' => true,
     // Logical NOT operators (`!`) should have one trailing whitespace.
     'not_operator_with_successor_space' => true,
+    // Cast shall be used, not `settype`.
+    'set_type_to_cast' => true,
     ]);
 
 return $config->setFinder(
