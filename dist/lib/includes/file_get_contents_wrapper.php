@@ -44,8 +44,8 @@ function is_url(mixed $url): bool
  * @param string $url
  * @param bool $no_cache
  * @param type $checksum
- * @return string|null
  * @throws CorruptDownloadException
+ * @return string|null
  */
 function file_get_contents_wrapper(
     string $url,

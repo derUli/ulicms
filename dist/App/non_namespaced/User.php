@@ -145,8 +145,8 @@ class User extends Model
     /**
      * Register a session from this user
      * @param bool $redirect Redirect after login
-     * @return void
      * @throws BadMethodCallException
+     * @return void
      */
     public function registerSession(bool $redirect = true): void
     {
@@ -428,7 +428,7 @@ class User extends Model
 
     /**
      * Delete user
-     * @return boolean
+     * @return bool
      */
     public function delete()
     {

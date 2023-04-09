@@ -37,8 +37,8 @@ class PackageManager
      * Check if a package is installed
      * @param string $package
      * @param string $type
-     * @return bool
      * @throws BadMethodCallException
+     * @return bool
      */
     public function isInstalled(
         string $package,
@@ -155,8 +155,8 @@ class PackageManager
     /**
      * Get installed packages
      * @param string $type
-     * @return array|null
      * @throws BadMethodCallException
+     * @return array|null
      */
     public function getInstalledPackages(string $type = 'modules'): ?array
     {

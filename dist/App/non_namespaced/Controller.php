@@ -41,9 +41,9 @@ abstract class Controller
      * Controller name and method can be specified as sClass and sMethod
      * Arguments by GET or POST request
      * Example URL: index.php?sClass=MyController&sMethod=helloWorld
-     * @return void
      * @throws AccessDeniedException
      * @throws BadMethodCallException
+     * @return void
      */
     public function runCommand(): void
     {

@@ -120,8 +120,6 @@ $tmpRules = [
     'return_type_declaration' => ['space_before'=>'one'],
     // Instructions must be terminated with a semicolon.
     'semicolon_after_instruction' => true,
-    // Cast `(boolean)` and `(integer)` should be written as `(bool)` and `(int)`, `(double)` and `(real)` as `(float)`, `(binary)` as `(string)`.
-    'short_scalar_cast' => true,
     // Converts explicit variables in double-quoted strings and heredoc syntax from simple to complex format (`${` to `{$`).
     'simple_to_complex_string_variable' => true,
     // Simplify `if` control structures that return the boolean result of their condition.
@@ -264,10 +262,10 @@ $config
     'no_empty_phpdoc' => true,
     // Remove useless (semicolon) statements.
     'no_empty_statement' => true,
-     // A PHP file without end tag must always end with a single empty line feed.
-     'single_blank_line_at_eof' => true,
-     // There should be exactly one blank line before a namespace declaration.
-     'single_blank_line_before_namespace' => true,
+    // A PHP file without end tag must always end with a single empty line feed.
+    'single_blank_line_at_eof' => true,
+    // There should be exactly one blank line before a namespace declaration.
+    'single_blank_line_before_namespace' => true,
     // Classy that does not inherit must not have `@inheritdoc` tags.
     'phpdoc_no_useless_inheritdoc' => true,
     // Annotations in PHPDoc should be ordered so that `@param` annotations come first, then `@throws` annotations, then `@return` annotations.
@@ -278,6 +276,8 @@ $config
     'phpdoc_scalar' => true,
     // Fixes casing of PHPDoc tags.
     'phpdoc_tag_casing' => true,
+    // Cast `(boolean)` and `(integer)` should be written as `(bool)` and `(int)`, `(double)` and `(real)` as `(float)`, `(binary)` as `(string)`.
+    'short_scalar_cast' => true,
     ]);
 
 return $config->setFinder(

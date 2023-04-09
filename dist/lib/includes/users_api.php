@@ -38,7 +38,7 @@ function getUsersOnline(): array
  * Changes the password of a user
  * @param string $password
  * @param int|null $userId
- * @return boolean
+ * @return bool
  */
 function changePassword(string $password, ?int $userId)
 {

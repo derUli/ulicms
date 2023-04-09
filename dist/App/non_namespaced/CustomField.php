@@ -28,8 +28,8 @@ class CustomField
     /**
      * Render custom field as html
      * @param type $value
-     * @return string
      * @throws NotImplementedException
+     * @return string
      */
     public function render($value = null): string
     {
