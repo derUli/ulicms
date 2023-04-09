@@ -23,8 +23,6 @@ $tmpRules = [
     'dir_constant' => false,
     // The keyword `elseif` should be used instead of `else if` so that all control keywords look like single words.
     'elseif' => true,
-    // PHP code MUST use only UTF-8 without BOM (remove BOM).
-    'encoding' => true,
     // Replace deprecated `ereg` regular expression functions with `preg`.
     'ereg_to_preg' => true,
     // Add curly braces to indirect variables to make them clear to understand. Requires PHP >= 7.0.
@@ -278,6 +276,8 @@ $config
     'class_attributes_separation' => true,
     // The PHP constants `true`, `false`, and `null` MUST be written using the correct casing.
     'constant_case' => true,
+    // PHP code MUST use only UTF-8 without BOM (remove BOM).
+    'encoding' => true,
     ]);
 
 return $config->setFinder(
