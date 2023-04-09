@@ -84,7 +84,7 @@ class BackendPageRenderer
             ob_start();
         }
 
-        $onlyContent = (bool) Request::getVar('only_content', false, 'bool');
+        $onlyContent = (bool)Request::getVar('only_content', false, 'bool');
 
         if (! $onlyContent) {
             require 'inc/header.php';

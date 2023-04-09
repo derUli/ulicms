@@ -80,11 +80,11 @@ if ($ftp) {
         [$a, $range] = explode('=', $_SERVER['HTTP_RANGE'], 2);
         [$range] = explode(',', $range, 2);
         [$range, $range_end] = explode('-', $range);
-        $range = (int) $range;
+        $range = (int)$range;
         if (! $range_end) {
             $range_end = $size - 1;
         } else {
-            $range_end = (int) $range_end;
+            $range_end = (int)$range_end;
         }
 
         $new_length = $range_end - $range + 1;

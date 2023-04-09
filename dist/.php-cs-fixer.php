@@ -3,8 +3,6 @@
 $config = new PhpCsFixer\Config();
 
 $tmpRules = [
-    // A single space or none should be between cast and variable.
-    'cast_spaces' => ['space'=>'none'],
     // Concatenation should be spaced according configuration.
     'concat_space' => ['spacing'=>'one'],
     // Equal sign in declare statement should be surrounded by spaces or not following configuration.
@@ -277,6 +275,8 @@ $config
     'line_ending' => true,
     // An empty line feed must precede any configured statement.
     'blank_line_before_statement' => ['statements'=>[]],
+    // A single space or none should be between cast and variable.
+    'cast_spaces' => ['space'=>'none'],
     ]);
 
 return $config->setFinder(

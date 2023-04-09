@@ -476,7 +476,7 @@ echo $sort_by; ?>"/>
 echo $descending ? 1 : 0; ?>"/>
 <input type="hidden" id="current_url" value="<?php
 echo str_replace(
-    ['&filter=' . $filter, '&sort_by=' . $sort_by, '&descending=' . (int) $descending],
+    ['&filter=' . $filter, '&sort_by=' . $sort_by, '&descending=' . (int)$descending],
     [''],
     $config['base_url'] . htmlspecialchars($_SERVER['REQUEST_URI'])
 ); ?>"/>

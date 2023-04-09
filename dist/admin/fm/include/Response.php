@@ -296,7 +296,7 @@ class Response
      */
     public function setStatusCode($code, $text = null)
     {
-        $this->statusCode = $code = (int) $code;
+        $this->statusCode = $code = (int)$code;
         if ($this->isInvalid()) {
             throw new InvalidArgumentException(sprintf('The HTTP status code "%s" is not valid.', $code));
         }

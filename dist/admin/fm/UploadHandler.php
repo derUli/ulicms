@@ -205,7 +205,7 @@ class UploadHandler
     {
         $val = trim($val);
         $last = strtolower($val[strlen($val) - 1]);
-        $val = (int) $val;
+        $val = (int)$val;
         switch ($last) {
             case 'g':
                 $val *= 1024;
@@ -234,7 +234,7 @@ class UploadHandler
                 $files = $content[$this->options['param_name']] ?? null;
                 if ($files && is_array($files) && is_object($files[0]) && $files[0]->size) {
                     $this->header('Range: 0-' . (
-                        $this->fix_integer_overflow((int) $files[0]->size) - 1
+                        $this->fix_integer_overflow((int)$files[0]->size) - 1
                     ));
                 }
             }
@@ -333,7 +333,7 @@ class UploadHandler
         $name = $file_name ?: $upload['name'][0];
         $res = $this->generate_response($response, $print_response);
         if (is_file($this->get_upload_path($name))) {
-            $uploaded_bytes = ! empty($content_range[1]) ? $this->fix_integer_overflow((int) $content_range[1]) : 0;
+            $uploaded_bytes = ! empty($content_range[1]) ? $this->fix_integer_overflow((int)$content_range[1]) : 0;
             $totalSize = $this->get_file_size($this->get_upload_path($name));
             if ($totalSize - $uploaded_bytes - $this->options['readfile_chunk_size'] < 0) {
                 $this->onUploadEnd($res);
@@ -625,7 +625,7 @@ class UploadHandler
     protected function is_valid_file_object($file_name)
     {
         $file_path = $this->get_upload_path($file_name);
-        return (bool) (is_file($file_path) && $file_name[0] !== '.');
+        return (bool)(is_file($file_path) && $file_name[0] !== '.');
     }
 
     protected function get_file_object($file_name)
@@ -682,7 +682,7 @@ class UploadHandler
             return false;
         }
         $content_length = $this->fix_integer_overflow(
-            (int) $this->get_server_var('CONTENT_LENGTH')
+            (int)$this->get_server_var('CONTENT_LENGTH')
         );
         $post_max_size = $this->get_config_bytes(ini_get('post_max_size'));
         if ($post_max_size && ($content_length > $post_max_size)) {
@@ -730,7 +730,7 @@ class UploadHandler
                 @$this->options['image_versions']['']['auto_orient'] &&
                 function_exists('exif_read_data') &&
                 ($exif = @exif_read_data($uploaded_file)) &&
-                (((int) @$exif['Orientation']) >= 5)
+                (((int)@$exif['Orientation']) >= 5)
             ) {
                 $tmp = $img_width;
                 $img_width = $img_height;
@@ -761,7 +761,7 @@ class UploadHandler
 
     protected function upcount_name_callback($matches)
     {
-        $index = isset($matches[1]) ? ((int) $matches[1]) + 1 : 1;
+        $index = isset($matches[1]) ? ((int)$matches[1]) + 1 : 1;
         $ext = $matches[2] ?? '';
         return ' (' . $index . ')' . $ext;
     }
@@ -789,7 +789,7 @@ class UploadHandler
             $name = $this->upcount_name($name);
         }
         // Keep an existing filename if this is part of a chunked upload:
-        $uploaded_bytes = ! empty($content_range[1]) ? $this->fix_integer_overflow((int) $content_range[1]) : 0;
+        $uploaded_bytes = ! empty($content_range[1]) ? $this->fix_integer_overflow((int)$content_range[1]) : 0;
         while (is_file($this->get_upload_path($name))) {
             if (isset($uploaded_bytes)) {
                 if ($uploaded_bytes === $this->get_file_size(
@@ -1002,7 +1002,7 @@ class UploadHandler
         if ($exif === false) {
             return false;
         }
-        $orientation = (int) @$exif['Orientation'];
+        $orientation = (int)@$exif['Orientation'];
         if ($orientation < 2 || $orientation > 8) {
             return false;
         }
@@ -1497,7 +1497,7 @@ class UploadHandler
             $index,
             $content_range
         );
-        $file->size = $this->fix_integer_overflow((int) $size);
+        $file->size = $this->fix_integer_overflow((int)$size);
         $file->type = $type;
         if ($this->validate($uploaded_file, $file, $error, $index)) {
             $this->handle_form_data($file, $index);

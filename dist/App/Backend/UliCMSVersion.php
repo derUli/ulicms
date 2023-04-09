@@ -35,7 +35,7 @@ class UliCMSVersion
      */
     public function getReleaseYear(): string
     {
-        return (string) $this->releaseYear;
+        return (string)$this->releaseYear;
     }
 
     /**

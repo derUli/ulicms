@@ -445,7 +445,7 @@ class FtpClient implements Countable
     public function remove($path, $recursive = false)
     {
         try {
-            return (bool) (@$this->ftp->delete($path)
+            return (bool)(@$this->ftp->delete($path)
             || ($this->isDir($path) && @$this->rmdir($path, $recursive)));
         } catch (\Exception $e) {
             return false;
@@ -517,7 +517,7 @@ class FtpClient implements Countable
         $size = 0;
 
         foreach ($items as $item) {
-            $size += (int) $item['size'];
+            $size += (int)$item['size'];
         }
 
         return $size;
