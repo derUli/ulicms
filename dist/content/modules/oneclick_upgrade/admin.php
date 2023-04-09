@@ -1,6 +1,5 @@
 <?php
 
-use App\HTML\Alert;
 
 use function App\HTML\text;
 

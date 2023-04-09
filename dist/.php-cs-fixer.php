@@ -155,8 +155,6 @@ $tmpRules = [
     // Properties should be set to `null` instead of using `unset`.
     'no_unset_on_property' => true,
     // Unused `use` statements must be removed.
-    'no_unused_imports' => true,
-    // There should not be useless `else` cases.
     'no_useless_else' => true,
     // There should not be an empty `return` statement at the end of a function.
     'no_useless_return' => true,
@@ -274,6 +272,8 @@ $config
     'is_null' => true,
     // Convert double quotes to single quotes for simple strings.
     'single_quote' => true,
+     // Unused `use` statements must be removed.
+     'no_unused_imports' => true,
     ]);
 
 return $config->setFinder(

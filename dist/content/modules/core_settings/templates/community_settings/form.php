@@ -1,7 +1,6 @@
 <?php
 
 use App\Constants\RequestMethod;
-use App\Security\PermissionChecker;
 
 $types = get_available_post_types();
 $typeSelection = [];

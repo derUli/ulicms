@@ -6,9 +6,7 @@ namespace App\Helpers;
 
 defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
-use App\Helpers\Helper;
 use Settings;
-use App\Helpers\ImagineHelper;
 use Imagine\Image\Box;
 use Imagine\Image\ImageInterface;
 

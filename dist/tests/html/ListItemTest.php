@@ -1,6 +1,5 @@
 <?php
 
-use App\HTML\Input as Input;
 use App\HTML\ListItem;
 
 class ListItemTest extends \PHPUnit\Framework\TestCase

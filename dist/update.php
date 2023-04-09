@@ -10,7 +10,6 @@ use App\Backend\UliCMSVersion;
 // Enable maintenance mode
 Settings::set('maintenance_mode', '1');
 
-use App\Packages\PatchManager;
 use App\Utils\CacheUtil;
 
 // no time limit to prevent a timeout while running sql migrations

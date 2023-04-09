@@ -1,6 +1,5 @@
 <?php
 
-use App\Exceptions\NotImplementedException;
 
 class ModuleTest extends \PHPUnit\Framework\TestCase
 {

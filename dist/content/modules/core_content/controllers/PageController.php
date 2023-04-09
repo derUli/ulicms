@@ -17,7 +17,6 @@ use App\Constants;
 use App\HTML\ListItem;
 use Jfcherng\Diff\Differ;
 use Jfcherng\Diff\DiffHelper;
-use Jfcherng\Diff\Factory\RendererFactory;
 use Jfcherng\Diff\Renderer\RendererConstant;
 
 use function App\HTML\stringContainsHtml;

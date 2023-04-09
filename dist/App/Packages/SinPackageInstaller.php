@@ -11,7 +11,6 @@ use Path;
 use Database;
 use App\Utils\VersionComparison;
 use App\Backend\UliCMSVersion;
-use App\Packages\PackageManager;
 
 /**
  * Util to install Simple Install packages.

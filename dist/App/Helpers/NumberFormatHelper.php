@@ -6,7 +6,6 @@ namespace App\Helpers;
 
 defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
-use App\Helpers\Helper;
 use Westsworld\TimeAgo;
 use DateTime;
 use ChrisUllyott\FileSize;

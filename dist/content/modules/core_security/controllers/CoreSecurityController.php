@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use App\Helpers\TestHelper;
 
 class CoreSecurityController extends MainClass
 {

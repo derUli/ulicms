@@ -1,6 +1,5 @@
 <?php
 
-use App\Helpers\TestHelper;
 
 class RequestFunctionsTest extends \PHPUnit\Framework\TestCase
 {

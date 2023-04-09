@@ -1,6 +1,5 @@
 <?php
 
-use function App\HTML\text;
 
 ?>
 

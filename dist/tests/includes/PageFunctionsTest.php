@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Content\Language;
 
 class PageFunctionsTest extends \PHPUnit\Framework\TestCase
 {
