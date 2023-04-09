@@ -54,8 +54,6 @@ $tmpRules = [
     'no_unset_on_property' => true,
     // Converts `protected` variables and methods to `private` where possible.
     'protected_to_private' => true,
-    // Classes must be in a path that matches their namespace, be at least one namespace deep and the class name should match the file name.
-    'psr_autoloading' => false,
     // There should be one or no space before colon, and one space after it in return type declarations, according to configuration.
     'return_type_declaration' => ['space_before'=>'one'],
     // A return statement wishing to return `void` should not return `null`.
@@ -278,6 +276,8 @@ $config
     'comment_to_phpdoc' => true,
     // Renames PHPDoc tags.
     'general_phpdoc_tag_rename' => true,
+    // Classes must be in a path that matches their namespace, be at least one namespace deep and the class name should match the file name.
+    'psr_autoloading' => false,
     ]);
 
 return $config->setFinder(
