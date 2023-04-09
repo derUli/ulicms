@@ -17,8 +17,6 @@ $tmpRules = [
     'function_typehint_space' => true,
     // Code MUST use configured indentation type.
     'indentation_type' => true,
-    // All PHP files must use same line ending.
-    'line_ending' => true,   
     // In method arguments and method call, there MUST NOT be a space before each comma and there MUST be one space after each comma. Argument lists MAY be split across multiple lines, where each subsequent line is indented once. When doing so, the first item in the list MUST be on the next line, and there MUST be only one argument per line.
     'method_argument_space' => true,
     // Method chaining MUST be properly indented. Method chaining with different levels of indentation is not supported.
@@ -277,6 +275,8 @@ $config
     'combine_consecutive_unsets' => true,
     // Include/Require and file path should be divided with a single space. File path should not be placed under brackets.
     'include' => true,
+    // All PHP files must use same line ending.
+    'line_ending' => true,   
     ]);
 
 return $config->setFinder(
