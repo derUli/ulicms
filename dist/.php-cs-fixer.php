@@ -3,8 +3,14 @@
 $config = new PhpCsFixer\Config();
 
 $tmpRules = [
+    // Each line of multi-line DocComments must have an asterisk [PSR-5] and must be aligned with the first one.
+    'align_multiline_comment' => ['comment_type'=>'all_multiline'],
     // Each element of an array must be indented exactly once.
     'array_indentation' => true,
+    // Converts backtick operators to `shell_exec` calls.
+    'backtick_to_shell_exec' => true,
+    // Binary operators should be surrounded by space as configured.
+    'binary_operator_spaces' => true,
     // There MUST be one blank line after the namespace declaration.
     'blank_line_after_namespace' => true,
     // Ensure there is no code on the same line as the PHP open tag and it is followed by a blank line.
@@ -69,9 +75,7 @@ $tmpRules = [
     'line_ending' => true,
     // Ensure there is no code on the same line as the PHP open tag.
     'linebreak_after_opening_tag' => true,
-    'lowercase_cast' => true,
-    // PHP keywords MUST be in lower case.
-    'lowercase_static_reference' => true,
+   
     // Magic constants should be referred to using the correct casing.
     'magic_constant_casing' => true,
     // Magic method definitions and calls must be using the correct casing.
@@ -126,6 +130,8 @@ $tmpRules = [
     'no_spaces_inside_parenthesis' => true,
     // Removes `@param`, `@return` and `@var` tags that don't provide any useful information.
     'no_superfluous_phpdoc_tags' => true,
+    // Remove trailing whitespace at the end of non-blank lines.
+    'no_trailing_whitespace' => true,
     // There MUST be no trailing spaces inside comment or PHPDoc.
     'no_trailing_whitespace_in_comment' => true,
     // Removes unneeded parentheses around control statements.
@@ -265,17 +271,14 @@ $config
     // Logical NOT operators (`!`) should have one trailing whitespace.
     'not_operator_with_successor_space' => true,
     // Cast shall be used, not `settype`.
-    'set_type_to_cast' => true,    
-    // Remove trailing whitespace at the end of non-blank lines.
-    'no_trailing_whitespace' => true,
-    // Each line of multi-line DocComments must have an asterisk [PSR-5] and must be aligned with the first one.
-    'align_multiline_comment' => ['comment_type'=>'all_multiline'],
-    // Converts backtick operators to `shell_exec` calls.
-    'backtick_to_shell_exec' => true,
-    'lowercase_keywords' => true,
-    // Binary operators should be surrounded by space as configured.
-    'binary_operator_spaces' => true,
-    // Class static references `self`, `static` and `parent` MUST be in lower case.
+    'set_type_to_cast' => true,
+     // Cast should be written in lower case.
+     'lowercase_cast' => true,
+     // PHP keywords MUST be in lower case.
+     'lowercase_keywords' => true,
+     // Class static references `self`, `static` and `parent` MUST be in lower case.
+     'lowercase_static_reference' => true,
+     // Magic constants should be referred to using the correct casing.
     ]);
 
 return $config->setFinder(
